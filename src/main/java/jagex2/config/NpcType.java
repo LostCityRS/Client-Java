@@ -126,7 +126,7 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(B)V")
-	public static final void method341(byte arg0) {
+	public static final void unload(byte arg0) {
 		field1019 = null;
 		idx = null;
 		types = null;
@@ -246,7 +246,7 @@ public class NpcType {
 		if (var5 == null) {
 			boolean var8 = false;
 			for (int var9 = 0; var9 < this.field997.length; var9++) {
-				if (!Model.method139(this.field997[var9])) {
+				if (!Model.validate(this.field997[var9])) {
 					var8 = true;
 				}
 			}
@@ -255,7 +255,7 @@ public class NpcType {
 			}
 			Model[] var10 = new Model[this.field997.length];
 			for (int var11 = 0; var11 < this.field997.length; var11++) {
-				var10[var11] = Model.method138(this.field997[var11], -404);
+				var10[var11] = Model.tryGet(this.field997[var11], -404);
 			}
 			if (var10.length == 1) {
 				var5 = var10[0];
@@ -272,7 +272,7 @@ public class NpcType {
 			field1019.put(var5, this.id, 39399);
 		}
 		Model var13 = Model.field538;
-		var13.method140(!this.animHasAlpha, var5, true);
+		var13.set(!this.animHasAlpha, var5, true);
 		if (arg1 != -1 && arg2 != -1) {
 			var13.method147((byte) 74, arg1, arg2, arg3);
 		} else if (arg1 != -1) {
@@ -282,8 +282,8 @@ public class NpcType {
 			var13.scale(this.resizev, this.resizeh, 4, this.resizeh);
 		}
 		var13.method142(true);
-		var13.field575 = null;
-		var13.field574 = null;
+		var13.labelFaces = null;
+		var13.labelVertices = null;
 		if (this.size == 1) {
 			var13.field576 = true;
 		}
@@ -301,7 +301,7 @@ public class NpcType {
 		}
 		boolean var3 = false;
 		for (int var4 = 0; var4 < this.heads.length; var4++) {
-			if (!Model.method139(this.heads[var4])) {
+			if (!Model.validate(this.heads[var4])) {
 				var3 = true;
 			}
 		}
@@ -310,7 +310,7 @@ public class NpcType {
 		}
 		Model[] var5 = new Model[this.heads.length];
 		for (int var6 = 0; var6 < this.heads.length; var6++) {
-			var5[var6] = Model.method138(this.heads[var6], -404);
+			var5[var6] = Model.tryGet(this.heads[var6], -404);
 		}
 		Model var7;
 		if (var5.length == 1) {

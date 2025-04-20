@@ -79,7 +79,7 @@ public class Packet extends DoublyLinkable {
 	public static boolean field730;
 
 	@ObfuscatedName("mb.a(II)Lmb;")
-	public static Packet method225(int arg0, int arg1) {
+	public static Packet alloc(int arg0, int arg1) {
 		LinkList var2 = field728;
 		synchronized (field728) {
 			Packet var3 = null;

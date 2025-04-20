@@ -23,7 +23,7 @@ public class Component {
 	public boolean field72 = true;
 
 	@ObfuscatedName("d.d")
-	public static Component[] field73;
+	public static Component[] types;
 
 	@ObfuscatedName("d.e")
 	public int[] field74;
@@ -217,7 +217,7 @@ public class Component {
 		}
 		int var5 = -1;
 		int var6 = var4.g2();
-		field73 = new Component[var6];
+		types = new Component[var6];
 		while (true) {
 			Component var8;
 			do {
@@ -230,7 +230,7 @@ public class Component {
 					var5 = var4.g2();
 					var7 = var4.g2();
 				}
-				var8 = field73[var7] = new Component();
+				var8 = types[var7] = new Component();
 				var8.field78 = var7;
 				var8.field79 = var5;
 				var8.field80 = var4.g1();
@@ -442,7 +442,7 @@ public class Component {
 		}
 		if (var5 == null) {
 			return null;
-		} else if (arg1 == -1 && arg2 == -1 && var5.field557 == null) {
+		} else if (arg1 == -1 && arg2 == -1 && var5.faceColour == null) {
 			return var5;
 		} else {
 			Model var6 = new Model(var5, true, false, true, -796);
@@ -470,13 +470,13 @@ public class Component {
 			return var3;
 		}
 		if (arg0 == 1) {
-			var3 = Model.method138(arg1, -404);
+			var3 = Model.tryGet(arg1, -404);
 		}
 		if (arg0 == 2) {
 			var3 = NpcType.method342(arg1).method345(this.field72);
 		}
 		if (arg0 == 3) {
-			var3 = client.field1428.method131(445);
+			var3 = client.localPlayer.method131(445);
 		}
 		if (arg0 == 4) {
 			var3 = ObjType.get(arg1).method353(-42857, 50);

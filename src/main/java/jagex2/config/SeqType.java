@@ -91,9 +91,9 @@ public class SeqType {
 			this.field1117 = !this.field1117;
 		}
 		if (var3 == 0) {
-			AnimFrame var4 = AnimFrame.method61(this.frames[arg1], -404);
+			AnimFrame var4 = AnimFrame.get(this.frames[arg1], -404);
 			if (var4 != null) {
-				var3 = this.delay[arg1] = var4.field164;
+				var3 = this.delay[arg1] = var4.id;
 			}
 		}
 		if (var3 == 0) {

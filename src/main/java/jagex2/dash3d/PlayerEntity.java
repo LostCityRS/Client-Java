@@ -187,8 +187,8 @@ public class PlayerEntity extends PathingEntity {
 				var5.translate(-super.field441, 0, 0, false);
 				var5.method145(-591);
 				var5.method146(var3.seq.frames[super.field438], 13056);
-				var5.field575 = null;
-				var5.field574 = null;
+				var5.labelFaces = null;
+				var5.labelVertices = null;
 				if (var3.resizeh != 128 || var3.resizev != 128) {
 					var5.scale(var3.resizev, var3.resizeh, 4, var3.resizeh);
 				}
@@ -332,15 +332,15 @@ public class PlayerEntity extends PathingEntity {
 			return var9;
 		}
 		Model var20 = Model.field538;
-		var20.method140(true, var9, true);
+		var20.set(true, var9, true);
 		if (var4 != -1 && var5 != -1) {
 			var20.method147((byte) 74, var4, var5, SeqType.types[super.field432].walkmerge);
 		} else if (var4 != -1) {
 			var20.method146(var4, 13056);
 		}
 		var20.method142(true);
-		var20.field575 = null;
-		var20.field574 = null;
+		var20.labelFaces = null;
+		var20.labelVertices = null;
 		return var20;
 	}
 

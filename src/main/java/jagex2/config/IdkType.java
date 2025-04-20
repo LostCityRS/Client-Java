@@ -97,7 +97,7 @@ public class IdkType {
 		} else {
 			boolean var2 = true;
 			for (int var3 = 0; var3 < this.models.length; var3++) {
-				if (!Model.method139(this.models[var3])) {
+				if (!Model.validate(this.models[var3])) {
 					var2 = false;
 				}
 			}
@@ -116,7 +116,7 @@ public class IdkType {
 			}
 		}
 		for (int var4 = 0; var4 < this.models.length; var4++) {
-			var2[var4] = Model.method138(this.models[var4], -404);
+			var2[var4] = Model.tryGet(this.models[var4], -404);
 		}
 		Model var5;
 		if (var2.length == 1) {
@@ -137,7 +137,7 @@ public class IdkType {
 			this.field1099 = 223;
 		}
 		for (int var3 = 0; var3 < 5; var3++) {
-			if (this.heads[var3] != -1 && !Model.method139(this.heads[var3])) {
+			if (this.heads[var3] != -1 && !Model.validate(this.heads[var3])) {
 				var2 = false;
 			}
 		}
@@ -150,7 +150,7 @@ public class IdkType {
 		int var3 = 0;
 		for (int var4 = 0; var4 < 5; var4++) {
 			if (this.heads[var4] != -1) {
-				var2[var3++] = Model.method138(this.heads[var4], -404);
+				var2[var3++] = Model.tryGet(this.heads[var4], -404);
 			}
 		}
 		Model var5 = new Model(var3, 652, var2);

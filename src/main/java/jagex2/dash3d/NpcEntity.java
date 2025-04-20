@@ -42,8 +42,8 @@ public class NpcEntity extends PathingEntity {
 				var5.translate(-super.field441, 0, 0, false);
 				var5.method145(-591);
 				var5.method146(var3.seq.frames[super.field438], 13056);
-				var5.field575 = null;
-				var5.field574 = null;
+				var5.labelFaces = null;
+				var5.labelVertices = null;
 				if (var3.resizeh != 128 || var3.resizev != 128) {
 					var5.scale(var3.resizev, var3.resizeh, 4, var3.resizeh);
 				}

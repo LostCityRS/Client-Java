@@ -40,7 +40,7 @@ public class LruCache {
 		if (var3 == null) {
 			this.field358++;
 		} else {
-			this.field364.method262(var3);
+			this.field364.addTail(var3);
 			this.field359++;
 		}
 		return var3;
@@ -62,7 +62,7 @@ public class LruCache {
 		}
 		this.field363.method118(5, arg1, arg0);
 		if (arg2 == 39399) {
-			this.field364.method262(arg0);
+			this.field364.addTail(arg0);
 		}
 	}
 

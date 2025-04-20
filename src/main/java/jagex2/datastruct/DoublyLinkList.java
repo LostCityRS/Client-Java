@@ -26,7 +26,7 @@ public class DoublyLinkList {
 	}
 
 	@ObfuscatedName("qb.a(Lx;)V")
-	public void method262(DoublyLinkable arg0) {
+	public void addTail(DoublyLinkable arg0) {
 		if (arg0.prev2 != null) {
 			arg0.unlink2();
 		}
@@ -75,7 +75,7 @@ public class DoublyLinkList {
 	}
 
 	@ObfuscatedName("qb.c()I")
-	public int method266() {
+	public int size() {
 		int var1 = 0;
 		for (DoublyLinkable var2 = this.field753.next2; var2 != this.field753; var2 = var2.next2) {
 			var1++;

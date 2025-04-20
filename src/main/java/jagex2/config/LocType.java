@@ -166,7 +166,7 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(B)V")
-	public static final void method332(byte arg0) {
+	public static final void unload(byte arg0) {
 		modelCacheStatic = null;
 		if (arg0 != 9) {
 			field936 = !field936;
@@ -360,7 +360,7 @@ public class LocType {
 			return true;
 		} else {
 			int var5 = this.models[var3];
-			return var5 == -1 ? true : Model.method139(var5 & 0xFFFF);
+			return var5 == -1 ? true : Model.validate(var5 & 0xFFFF);
 		}
 	}
 
@@ -376,7 +376,7 @@ public class LocType {
 		for (int var3 = 0; var3 < this.models.length; var3++) {
 			int var4 = this.models[var3];
 			if (var4 != -1) {
-				var2 &= Model.method139(var4 & 0xFFFF);
+				var2 &= Model.validate(var4 & 0xFFFF);
 			}
 		}
 		return var2;
@@ -429,7 +429,7 @@ public class LocType {
 			}
 			Model var22 = (Model) modelCacheStatic.get((long) var20);
 			if (var22 == null) {
-				var22 = Model.method138(var20 & 0xFFFF, -404);
+				var22 = Model.tryGet(var20 & 0xFFFF, -404);
 				if (var22 == null) {
 					return null;
 				}
@@ -454,8 +454,8 @@ public class LocType {
 			if (arg6 != -1) {
 				var25.method145(-591);
 				var25.method146(arg6, 13056);
-				var25.field575 = null;
-				var25.field574 = null;
+				var25.labelFaces = null;
+				var25.labelVertices = null;
 			}
 			while (arg1-- > 0) {
 				var25.method149((byte) 3);

@@ -165,8 +165,8 @@ public class ProjectileEntity extends Entity {
 		if (this.field504.seq != null) {
 			var4.method145(-591);
 			var4.method146(this.field504.seq.frames[this.field526], 13056);
-			var4.field575 = null;
-			var4.field574 = null;
+			var4.labelFaces = null;
+			var4.labelVertices = null;
 		}
 		if (this.field504.resizeh != 128 || this.field504.resizev != 128) {
 			var4.scale(this.field504.resizev, this.field504.resizeh, 4, this.field504.resizeh);

@@ -9,7 +9,7 @@ public class BZip2 {
 	public static BZip2State field763 = new BZip2State();
 
 	@ObfuscatedName("sb.a([BI[BII)I")
-	public static int method270(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
+	public static int decompress(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
 		BZip2State var5 = field763;
 		synchronized (field763) {
 			field763.field773 = arg2;

@@ -6,7 +6,7 @@ import deob.ObfuscatedName;
 public class UnkType {
 
 	@ObfuscatedName("mc.a")
-	public static UnkType[] field1108;
+	public static UnkType[] types;
 
 	@ObfuscatedName("mc.b")
 	public static int field1109 = -1;

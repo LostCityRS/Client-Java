@@ -83,8 +83,8 @@ public class SpotAnimEntity extends Entity {
 			if (!this.field619) {
 				var3.method145(-591);
 				var3.method146(this.field611.seq.frames[this.field617], 13056);
-				var3.field575 = null;
-				var3.field574 = null;
+				var3.labelFaces = null;
+				var3.labelVertices = null;
 			}
 			if (this.field611.resizeh != 128 || this.field611.resizev != 128) {
 				var3.scale(this.field611.resizev, this.field611.resizeh, 4, this.field611.resizeh);

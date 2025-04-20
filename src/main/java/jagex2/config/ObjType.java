@@ -183,7 +183,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(B)V")
-	public static final void method347(byte arg0) {
+	public static final void unload(byte arg0) {
 		if (arg0 != 9) {
 			field1021 = 395;
 		}
@@ -421,7 +421,7 @@ public class ObjType {
 		if (var4 != null) {
 			return var4;
 		}
-		Model var5 = Model.method138(this.model, -404);
+		Model var5 = Model.tryGet(this.model, -404);
 		if (var5 == null) {
 			return null;
 		}
@@ -455,7 +455,7 @@ public class ObjType {
 				return get(var3).method353(-42857, 1);
 			}
 		}
-		Model var5 = Model.method138(this.model, -404);
+		Model var5 = Model.tryGet(this.model, -404);
 		if (var5 == null) {
 			return null;
 		}
@@ -528,8 +528,8 @@ public class ObjType {
 		if (arg0 > 0) {
 			var22 = (int) ((double) var22 * 1.04D);
 		}
-		int var23 = Pix3D.field651[var5.xan2d] * var22 >> 16;
-		int var24 = Pix3D.field652[var5.xan2d] * var22 >> 16;
+		int var23 = Pix3D.sinTable[var5.xan2d] * var22 >> 16;
+		int var24 = Pix3D.cosTable[var5.xan2d] * var22 >> 16;
 		var8.method158(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var8.field400 / 2 + var23 + var5.yof2d, var5.yof2d + var24);
 		for (int var25 = 31; var25 >= 0; var25--) {
 			for (int var32 = 31; var32 >= 0; var32--) {
@@ -616,13 +616,13 @@ public class ObjType {
 			return true;
 		}
 		boolean var6 = true;
-		if (!Model.method139(var3)) {
+		if (!Model.validate(var3)) {
 			var6 = false;
 		}
-		if (var4 != -1 && !Model.method139(var4)) {
+		if (var4 != -1 && !Model.validate(var4)) {
 			var6 = false;
 		}
-		if (var5 != -1 && !Model.method139(var5)) {
+		if (var5 != -1 && !Model.validate(var5)) {
 			var6 = false;
 		}
 		return var6;
@@ -641,18 +641,18 @@ public class ObjType {
 		if (var3 == -1) {
 			return null;
 		}
-		Model var6 = Model.method138(var3, -404);
+		Model var6 = Model.tryGet(var3, -404);
 		if (!arg0) {
 			throw new NullPointerException();
 		}
 		if (var4 != -1) {
 			if (var5 == -1) {
-				Model var10 = Model.method138(var4, -404);
+				Model var10 = Model.tryGet(var4, -404);
 				Model[] var11 = new Model[] { var6, var10 };
 				var6 = new Model(2, 652, var11);
 			} else {
-				Model var7 = Model.method138(var4, -404);
-				Model var8 = Model.method138(var5, -404);
+				Model var7 = Model.tryGet(var4, -404);
+				Model var8 = Model.tryGet(var5, -404);
 				Model[] var9 = new Model[] { var6, var7, var8 };
 				var6 = new Model(3, 652, var9);
 			}
@@ -686,10 +686,10 @@ public class ObjType {
 		if (arg1 != -5652) {
 			throw new NullPointerException();
 		}
-		if (!Model.method139(var3)) {
+		if (!Model.validate(var3)) {
 			var5 = false;
 		}
-		if (var4 != -1 && !Model.method139(var4)) {
+		if (var4 != -1 && !Model.validate(var4)) {
 			var5 = false;
 		}
 		return var5;
@@ -710,9 +710,9 @@ public class ObjType {
 		if (var3 == -1) {
 			return null;
 		}
-		Model var6 = Model.method138(var3, -404);
+		Model var6 = Model.tryGet(var3, -404);
 		if (var4 != -1) {
-			Model var7 = Model.method138(var4, -404);
+			Model var7 = Model.tryGet(var4, -404);
 			Model[] var8 = new Model[] { var6, var7 };
 			var6 = new Model(2, 652, var8);
 		}

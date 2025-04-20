@@ -770,7 +770,7 @@ public class World {
 								}
 								int var88 = 0;
 								if (var80 != -1) {
-									var88 = Pix3D.field663[method27(var81, 96)];
+									var88 = Pix3D.palette[method27(var81, 96)];
 								}
 								if (var71 == 0) {
 									arg0.method68(var5, var58, var67, 0, 0, -1, var72, var73, var74, var75, method27(var80, var76), method27(var80, var77), method27(var80, var78), method27(var80, var79), 0, 0, 0, 0, var88, 0);
@@ -790,7 +790,7 @@ public class World {
 										var92 = -1;
 									} else {
 										var94 = this.method29(var91.hue, var91.saturation, var91.lightness);
-										var93 = Pix3D.field663[this.method28(var91.hsl, 96)];
+										var93 = Pix3D.palette[this.method28(var91.hsl, 96)];
 									}
 									arg0.method68(var5, var58, var67, var89, var90, var92, var72, var73, var74, var75, method27(var80, var76), method27(var80, var77), method27(var80, var78), method27(var80, var79), this.method28(var94, var76), this.method28(var94, var77), this.method28(var94, var78), this.method28(var94, var79), var88, var93);
 								}
@@ -995,7 +995,7 @@ public class World {
 
 	@ObfuscatedName("c.b(IIII)I")
 	public static final int method24(int arg0, int arg1, int arg2, int arg3) {
-		int var4 = 65536 - Pix3D.field652[arg2 * 1024 / arg3] >> 1;
+		int var4 = 65536 - Pix3D.cosTable[arg2 * 1024 / arg3] >> 1;
 		return ((65536 - var4) * arg0 >> 16) + (arg1 * var4 >> 16);
 	}
 

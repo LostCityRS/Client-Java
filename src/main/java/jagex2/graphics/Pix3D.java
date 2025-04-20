@@ -28,16 +28,16 @@ public class Pix3D extends Pix2D {
 	public static boolean field645 = true;
 
 	@ObfuscatedName("ib.L")
-	public static int[] field649 = new int[512];
+	public static int[] divTable = new int[512];
 
 	@ObfuscatedName("ib.M")
-	public static int[] field650 = new int[2048];
+	public static int[] divTable2 = new int[2048];
 
 	@ObfuscatedName("ib.N")
-	public static int[] field651 = new int[2048];
+	public static int[] sinTable = new int[2048];
 
 	@ObfuscatedName("ib.O")
-	public static int[] field652 = new int[2048];
+	public static int[] cosTable = new int[2048];
 
 	@ObfuscatedName("ib.R")
 	public static Pix8[] field655;
@@ -55,7 +55,7 @@ public class Pix3D extends Pix2D {
 	public static int[] field661;
 
 	@ObfuscatedName("ib.Z")
-	public static int[] field663;
+	public static int[] palette;
 
 	@ObfuscatedName("ib.I")
 	public static int field646;
@@ -88,11 +88,11 @@ public class Pix3D extends Pix2D {
 	public static int[][] field659;
 
 	@ObfuscatedName("ib.b(B)V")
-	public static final void method176(byte arg0) {
-		field649 = null;
-		field649 = null;
-		field651 = null;
-		field652 = null;
+	public static final void unload(byte arg0) {
+		divTable = null;
+		divTable = null;
+		sinTable = null;
+		cosTable = null;
 		field653 = null;
 		field655 = null;
 		field656 = null;
@@ -103,7 +103,7 @@ public class Pix3D extends Pix2D {
 		if (arg0 != 9) {
 			field641 = !field641;
 		}
-		field663 = null;
+		palette = null;
 		field664 = null;
 	}
 
@@ -348,7 +348,7 @@ public class Pix3D extends Pix2D {
 				int var36 = (int) (var22 * 256.0D);
 				int var37 = (var34 << 16) + (var35 << 8) + var36;
 				int var38 = method186(var37, var3);
-				field663[var5++] = var38;
+				palette[var5++] = var38;
 			}
 		}
 		if (field640 != arg0) {
@@ -907,7 +907,7 @@ public class Pix3D extends Pix2D {
 				var9 = arg1 + arg4;
 				var10 = arg5 - arg4 >> 2;
 				if (var10 > 0) {
-					var11 = (arg7 - arg6) * field649[var10] >> 15;
+					var11 = (arg7 - arg6) * divTable[var10] >> 15;
 				} else {
 					var11 = 0;
 				}
@@ -920,7 +920,7 @@ public class Pix3D extends Pix2D {
 					if (var10 < 0) {
 						int var12 = arg5 - arg4 & 0x3;
 						if (var12 > 0) {
-							int var13 = field663[arg6 >> 8];
+							int var13 = palette[arg6 >> 8];
 							do {
 								arg0[var9++] = var13;
 								var12--;
@@ -929,7 +929,7 @@ public class Pix3D extends Pix2D {
 						}
 						break;
 					}
-					int var14 = field663[arg6 >> 8];
+					int var14 = palette[arg6 >> 8];
 					arg6 += var11;
 					arg0[var9++] = var14;
 					arg0[var9++] = var14;
@@ -944,7 +944,7 @@ public class Pix3D extends Pix2D {
 					if (var10 < 0) {
 						int var17 = arg5 - arg4 & 0x3;
 						if (var17 > 0) {
-							int var18 = field663[arg6 >> 8];
+							int var18 = palette[arg6 >> 8];
 							int var19 = ((var18 & 0xFF00FF) * var16 >> 8 & 0xFF00FF) + ((var18 & 0xFF00) * var16 >> 8 & 0xFF00);
 							do {
 								arg0[var9++] = ((arg0[var9] & 0xFF00) * var15 >> 8 & 0xFF00) + ((arg0[var9] & 0xFF00FF) * var15 >> 8 & 0xFF00FF) + var19;
@@ -953,7 +953,7 @@ public class Pix3D extends Pix2D {
 						}
 						break;
 					}
-					int var20 = field663[arg6 >> 8];
+					int var20 = palette[arg6 >> 8];
 					arg6 += var11;
 					int var21 = ((var20 & 0xFF00FF) * var16 >> 8 & 0xFF00FF) + ((var20 & 0xFF00) * var16 >> 8 & 0xFF00);
 					arg0[var9++] = ((arg0[var9] & 0xFF00) * var15 >> 8 & 0xFF00) + ((arg0[var9] & 0xFF00FF) * var15 >> 8 & 0xFF00FF) + var21;
@@ -980,7 +980,7 @@ public class Pix3D extends Pix2D {
 			int var24 = arg5 - arg4;
 			if (field646 == 0) {
 				do {
-					arg0[var23++] = field663[arg6 >> 8];
+					arg0[var23++] = palette[arg6 >> 8];
 					arg6 += var22;
 					var24--;
 				} while (var24 > 0);
@@ -988,7 +988,7 @@ public class Pix3D extends Pix2D {
 				int var25 = field646;
 				int var26 = 256 - field646;
 				do {
-					int var27 = field663[arg6 >> 8];
+					int var27 = palette[arg6 >> 8];
 					arg6 += var22;
 					int var28 = ((var27 & 0xFF00FF) * var26 >> 8 & 0xFF00FF) + ((var27 & 0xFF00) * var26 >> 8 & 0xFF00);
 					arg0[var23++] = ((arg0[var23] & 0xFF00) * var25 >> 8 & 0xFF00) + ((arg0[var23] & 0xFF00FF) * var25 >> 8 & 0xFF00FF) + var28;
@@ -2093,7 +2093,7 @@ public class Pix3D extends Pix2D {
 		} else {
 			if (arg6 - arg5 > 7) {
 				var16 = arg6 - arg5 >> 3;
-				var17 = (arg8 - arg7) * field649[var16] >> 6;
+				var17 = (arg8 - arg7) * divTable[var16] >> 6;
 			} else {
 				var16 = 0;
 				var17 = 0;
@@ -2452,21 +2452,21 @@ public class Pix3D extends Pix2D {
 
 	static {
 		for (int var0 = 1; var0 < 512; var0++) {
-			field649[var0] = 32768 / var0;
+			divTable[var0] = 32768 / var0;
 		}
 		for (int var1 = 1; var1 < 2048; var1++) {
-			field650[var1] = 65536 / var1;
+			divTable2[var1] = 65536 / var1;
 		}
 		for (int var2 = 0; var2 < 2048; var2++) {
-			field651[var2] = (int) (Math.sin((double) var2 * 0.0030679615D) * 65536.0D);
-			field652[var2] = (int) (Math.cos((double) var2 * 0.0030679615D) * 65536.0D);
+			sinTable[var2] = (int) (Math.sin((double) var2 * 0.0030679615D) * 65536.0D);
+			cosTable[var2] = (int) (Math.cos((double) var2 * 0.0030679615D) * 65536.0D);
 		}
 		field655 = new Pix8[50];
 		field656 = new boolean[50];
 		field657 = new int[50];
 		field660 = new int[50][];
 		field661 = new int[50];
-		field663 = new int[65536];
+		palette = new int[65536];
 		field664 = new int[50][];
 	}
 }

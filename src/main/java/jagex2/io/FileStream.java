@@ -105,7 +105,7 @@ public class FileStream {
 	}
 
 	@ObfuscatedName("wb.a([BIZI)Z")
-	public synchronized boolean method301(byte[] arg0, int arg1, boolean arg2, int arg3) {
+	public synchronized boolean write(byte[] arg0, int arg1, boolean arg2, int arg3) {
 		boolean var5 = this.method302(arg0, arg1, true, -20133, arg3);
 		if (!arg2) {
 			this.field856 = -335;

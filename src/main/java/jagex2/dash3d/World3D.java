@@ -231,7 +231,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(B)V")
-	public static void method62(byte arg0) {
+	public static void unload(byte arg0) {
 		field321 = null;
 		field332 = null;
 		field333 = null;
@@ -924,7 +924,7 @@ public class World3D {
 		for (int var10 = 0; var10 < arg0.vertexCount; var10++) {
 			VertexNormal var13 = arg0.field399[var10];
 			VertexNormal var14 = arg0.field577[var10];
-			if (var14.field258 != 0) {
+			if (var14.w != 0) {
 				int var15 = arg0.vertexY[var10] - arg3;
 				if (var15 <= arg1.field568) {
 					int var16 = arg0.vertexX[var10] - arg2;
@@ -934,15 +934,15 @@ public class World3D {
 							for (int var18 = 0; var18 < var9; var18++) {
 								VertexNormal var19 = arg1.field399[var18];
 								VertexNormal var20 = arg1.field577[var18];
-								if (var8[var18] == var16 && arg1.vertexZ[var18] == var17 && arg1.vertexY[var18] == var15 && var20.field258 != 0) {
-									var13.field255 += var20.field255;
-									var13.field256 += var20.field256;
-									var13.field257 += var20.field257;
-									var13.field258 += var20.field258;
-									var19.field255 += var14.field255;
-									var19.field256 += var14.field256;
-									var19.field257 += var14.field257;
-									var19.field258 += var14.field258;
+								if (var8[var18] == var16 && arg1.vertexZ[var18] == var17 && arg1.vertexY[var18] == var15 && var20.w != 0) {
+									var13.x += var20.x;
+									var13.y += var20.y;
+									var13.z += var20.z;
+									var13.w += var20.w;
+									var19.x += var14.x;
+									var19.y += var14.y;
+									var19.z += var14.z;
+									var19.w += var14.w;
 									var7++;
 									this.field345[var10] = this.field347;
 									this.field346[var18] = this.field347;
@@ -956,14 +956,14 @@ public class World3D {
 		if (var7 < 3 || !arg5) {
 			return;
 		}
-		for (int var11 = 0; var11 < arg0.field547; var11++) {
-			if (this.field345[arg0.field548[var11]] == this.field347 && this.field345[arg0.field549[var11]] == this.field347 && this.field345[arg0.field550[var11]] == this.field347) {
-				arg0.field554[var11] = -1;
+		for (int var11 = 0; var11 < arg0.faceCount; var11++) {
+			if (this.field345[arg0.faceVertexA[var11]] == this.field347 && this.field345[arg0.faceVertexB[var11]] == this.field347 && this.field345[arg0.faceVertexC[var11]] == this.field347) {
+				arg0.faceInfo[var11] = -1;
 			}
 		}
-		for (int var12 = 0; var12 < arg1.field547; var12++) {
-			if (this.field346[arg1.field548[var12]] == this.field347 && this.field346[arg1.field549[var12]] == this.field347 && this.field346[arg1.field550[var12]] == this.field347) {
-				arg1.field554[var12] = -1;
+		for (int var12 = 0; var12 < arg1.faceCount; var12++) {
+			if (this.field346[arg1.faceVertexA[var12]] == this.field347 && this.field346[arg1.faceVertexB[var12]] == this.field347 && this.field346[arg1.faceVertexC[var12]] == this.field347) {
+				arg1.faceInfo[var12] = -1;
 			}
 		}
 	}
@@ -1040,10 +1040,10 @@ public class World3D {
 		boolean[][][][] var6 = new boolean[9][32][53][53];
 		for (int var7 = 128; var7 <= 384; var7 += 32) {
 			for (int var15 = 0; var15 < 2048; var15 += 64) {
-				field317 = Model.field606[var7];
-				field318 = Model.field607[var7];
-				field319 = Model.field606[var15];
-				field320 = Model.field607[var15];
+				field317 = Model.sinTable[var7];
+				field318 = Model.cosTable[var7];
+				field319 = Model.sinTable[var15];
+				field320 = Model.cosTable[var15];
 				int var16 = (var7 - 128) / 32;
 				int var17 = var15 / 64;
 				for (int var18 = -26; var18 <= 26; var18++) {
@@ -1138,10 +1138,10 @@ public class World3D {
 			arg5 = this.field298 * 128 - 1;
 		}
 		field307++;
-		field317 = Model.field606[arg4];
-		field318 = Model.field607[arg4];
-		field319 = Model.field606[arg3];
-		field320 = Model.field607[arg3];
+		field317 = Model.sinTable[arg4];
+		field318 = Model.cosTable[arg4];
+		field319 = Model.sinTable[arg3];
+		field320 = Model.cosTable[arg3];
 		field351 = field350[(arg4 - 128) / 32][arg3 / 64];
 		field314 = arg0;
 		field315 = arg6;

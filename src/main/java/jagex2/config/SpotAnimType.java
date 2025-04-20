@@ -123,7 +123,7 @@ public class SpotAnimType {
 		if (var1 != null) {
 			return var1;
 		}
-		Model var2 = Model.method138(this.model, -404);
+		Model var2 = Model.tryGet(this.model, -404);
 		if (var2 == null) {
 			return null;
 		}
