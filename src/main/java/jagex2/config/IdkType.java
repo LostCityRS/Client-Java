@@ -9,10 +9,10 @@ import jagex2.io.Packet;
 public class IdkType {
 
 	@ObfuscatedName("lc.a")
-	public static boolean field1098 = true;
+	public static boolean _flowObfuscator1 = true;
 
 	@ObfuscatedName("lc.b")
-	public int field1099 = -949;
+	public int _flowObfuscator2 = -949;
 
 	@ObfuscatedName("lc.c")
 	public static int count;
@@ -41,7 +41,7 @@ public class IdkType {
 	@ObfuscatedName("lc.a(Lyb;B)V")
 	public static void unpack(Jagfile arg0, byte arg1) {
 		if (arg1 != 127) {
-			field1098 = !field1098;
+			_flowObfuscator1 = !_flowObfuscator1;
 		}
 		Packet var2 = new Packet((byte) -109, arg0.read("idk.dat", null));
 		count = var2.g2();
@@ -89,7 +89,7 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.a(I)Z")
-	public boolean method377(int arg0) {
+	public boolean validate(int arg0) {
 		if (arg0 != 6) {
 			throw new NullPointerException();
 		} else if (this.models == null) {
@@ -106,7 +106,7 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.b(I)Lfb;")
-	public Model method378(int arg0) {
+	public Model getModel(int arg0) {
 		if (this.models == null) {
 			return null;
 		}
@@ -131,10 +131,10 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.c(I)Z")
-	public boolean method379(int arg0) {
+	public boolean validateHeadModel(int arg0) {
 		boolean var2 = true;
 		if (arg0 < 8 || arg0 > 8) {
-			this.field1099 = 223;
+			this._flowObfuscator2 = 223;
 		}
 		for (int var3 = 0; var3 < 5; var3++) {
 			if (this.heads[var3] != -1 && !Model.validate(this.heads[var3])) {
@@ -145,7 +145,7 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.d(I)Lfb;")
-	public Model method380(int arg0) {
+	public Model getHeadModel(int arg0) {
 		Model[] var2 = new Model[5];
 		int var3 = 0;
 		for (int var4 = 0; var4 < 5; var4++) {
@@ -155,7 +155,7 @@ public class IdkType {
 		}
 		Model var5 = new Model(var3, 652, var2);
 		if (arg0 >= 0) {
-			this.field1099 = -459;
+			this._flowObfuscator2 = -459;
 		}
 		for (int var6 = 0; var6 < 6 && this.recol_s[var6] != 0; var6++) {
 			var5.recolour(this.recol_s[var6], this.recol_d[var6]);

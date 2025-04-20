@@ -22,6 +22,6 @@ public class ObjStackEntity extends Entity {
 		if (arg0 != 5560) {
 			this.field499 = !this.field499;
 		}
-		return var2.method352(this.field501);
+		return var2.getModel(this.field501);
 	}
 }

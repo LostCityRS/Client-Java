@@ -6,7 +6,7 @@ import deob.ObfuscatedName;
 public class LinkList {
 
 	@ObfuscatedName("pb.a")
-	public boolean field748 = true;
+	public boolean _flowObfuscator1 = true;
 
 	@ObfuscatedName("pb.b")
 	public Linkable sentinel = new Linkable();

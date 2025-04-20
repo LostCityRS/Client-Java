@@ -10,7 +10,7 @@ import jagex2.io.Packet;
 public class SpotAnimType {
 
 	@ObfuscatedName("oc.a")
-	public boolean field1136 = true;
+	public boolean _flowObfuscator1 = true;
 
 	@ObfuscatedName("oc.b")
 	public static int count;
@@ -55,7 +55,7 @@ public class SpotAnimType {
 	public int contrast;
 
 	@ObfuscatedName("oc.p")
-	public static LruCache field1151 = new LruCache(30, 1);
+	public static LruCache modelCache = new LruCache(30, 1);
 
 	@ObfuscatedName("oc.a(Lyb;B)V")
 	public static void unpack(Jagfile arg0, byte arg1) {
@@ -79,7 +79,7 @@ public class SpotAnimType {
 	@ObfuscatedName("oc.a(ILmb;)V")
 	public void decode(int arg0, Packet arg1) {
 		if (arg0 <= 0) {
-			this.field1136 = !this.field1136;
+			this._flowObfuscator1 = !this._flowObfuscator1;
 		}
 		while (true) {
 			while (true) {
@@ -118,8 +118,8 @@ public class SpotAnimType {
 	}
 
 	@ObfuscatedName("oc.a()Lfb;")
-	public Model method386() {
-		Model var1 = (Model) field1151.get((long) this.id);
+	public Model getModel() {
+		Model var1 = (Model) modelCache.get((long) this.id);
 		if (var1 != null) {
 			return var1;
 		}
@@ -132,7 +132,7 @@ public class SpotAnimType {
 				var2.recolour(this.recol_s[var3], this.recol_d[var3]);
 			}
 		}
-		field1151.put(var2, (long) this.id, 39399);
+		modelCache.put(var2, (long) this.id, 39399);
 		return var2;
 	}
 }

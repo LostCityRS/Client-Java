@@ -306,7 +306,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		}
 		DoublyLinkList var3 = this.requests;
 		synchronized (this.requests) {
-			for (OnDemandRequest var4 = (OnDemandRequest) this.requests.method264(); var4 != null; var4 = (OnDemandRequest) this.requests.method265(-976)) {
+			for (OnDemandRequest var4 = (OnDemandRequest) this.requests.head(); var4 != null; var4 = (OnDemandRequest) this.requests.next(-976)) {
 				if (var4.archive == arg0 && var4.file == arg1) {
 					return;
 				}
@@ -401,7 +401,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(III)V")
-	public final void method293(int arg0, int arg1, int arg2) {
+	public final void prefetch(int arg0, int arg1, int arg2) {
 		if (arg2 >= 0 || (this.app.fileStreams[0] == null || (this.versions[arg0][arg1] == 0 || (this.priorities[arg0][arg1] == 0 || this.topPriority == 0)))) {
 			return;
 		}

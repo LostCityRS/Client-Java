@@ -41,7 +41,7 @@ public class Model extends Entity {
 	public static int loaded;
 
 	@ObfuscatedName("fb.v")
-	public static Model field538 = new Model(104);
+	public static Model empty = new Model(104);
 
 	@ObfuscatedName("fb.w")
 	public static int[] tmpVertexX = new int[2000];
@@ -77,7 +77,7 @@ public class Model extends Entity {
 	public int[][] labelFaces;
 
 	@ObfuscatedName("fb.hb")
-	public boolean field576 = false;
+	public boolean picking = false;
 
 	@ObfuscatedName("fb.ib")
 	public VertexNormal[] field577;
@@ -774,7 +774,7 @@ public class Model extends Entity {
 				}
 			}
 		}
-		this.method142(true);
+		this.calculateBoundsCylinder(true);
 	}
 
 	public Model(Model arg0, boolean arg1, boolean arg2, boolean arg3, int arg4) {
@@ -989,7 +989,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(Z)V")
-	public void method142(boolean arg0) {
+	public void calculateBoundsCylinder(boolean arg0) {
 		super.field400 = 0;
 		this.field567 = 0;
 		this.field568 = 0;
@@ -1081,7 +1081,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.d(I)V")
-	public void method145(int arg0) {
+	public void createLabelReferences(int arg0) {
 		label86: while (true) {
 			if (arg0 >= 0) {
 				int var16 = 1;
@@ -1143,7 +1143,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.c(II)V")
-	public void method146(int arg0, int arg1) {
+	public void applyTransform(int arg0, int arg1) {
 		if (this.labelVertices == null || arg0 == -1) {
 			return;
 		}
@@ -1165,12 +1165,12 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(BII[I)V")
-	public void method147(byte arg0, int arg1, int arg2, int[] arg3) {
+	public void applyTransforms(byte arg0, int arg1, int arg2, int[] arg3) {
 		if (arg1 == -1) {
 			return;
 		}
 		if (arg3 == null || arg2 == -1) {
-			this.method146(arg1, 13056);
+			this.applyTransform(arg1, 13056);
 			return;
 		}
 		AnimFrame var5 = AnimFrame.get(arg1, -404);
@@ -1182,7 +1182,7 @@ public class Model extends Entity {
 		}
 		AnimFrame var6 = AnimFrame.get(arg2, -404);
 		if (var6 == null) {
-			this.method146(arg1, 13056);
+			this.applyTransform(arg1, 13056);
 			return;
 		}
 		AnimBase var7 = var5.base;
@@ -1488,7 +1488,7 @@ public class Model extends Entity {
 			}
 		}
 		if (arg5) {
-			this.method142(true);
+			this.calculateBoundsCylinder(true);
 		} else {
 			this.method144(-890);
 		}
@@ -1559,9 +1559,9 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIII)V")
-	public final void method158(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		int var8 = Pix3D.field647;
-		int var9 = Pix3D.field648;
+	public final void drawSimple(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+		int var8 = Pix3D.centerX;
+		int var9 = Pix3D.centerY;
 		int var10 = sinTable[arg0];
 		int var11 = cosTable[arg0];
 		int var12 = sinTable[arg1];
@@ -1621,22 +1621,22 @@ public class Model extends Entity {
 		}
 		int var14 = arg3 * arg7 + arg4 * arg5 >> 16;
 		int var15 = var14 - this.field567 << 9;
-		if (var15 / var13 >= Pix2D.field635) {
+		if (var15 / var13 >= Pix2D.centerX2d) {
 			return;
 		}
 		int var16 = this.field567 + var14 << 9;
-		if (var16 / var13 <= -Pix2D.field635) {
+		if (var16 / var13 <= -Pix2D.centerX2d) {
 			return;
 		}
 		int var17 = arg2 * arg6 - arg1 * var10 >> 16;
 		int var18 = this.field567 * arg1 >> 16;
 		int var19 = var17 + var18 << 9;
-		if (var19 / var13 <= -Pix2D.field636) {
+		if (var19 / var13 <= -Pix2D.centerY2d) {
 			return;
 		}
 		int var20 = (super.field400 * arg2 >> 16) + var18;
 		int var21 = var17 - var20 << 9;
-		if (var21 / var13 >= Pix2D.field636) {
+		if (var21 / var13 >= Pix2D.centerY2d) {
 			return;
 		}
 		int var22 = (super.field400 * arg1 >> 16) + var12;
@@ -1668,18 +1668,18 @@ public class Model extends Entity {
 				var29 = var19 / var13;
 				var28 = var21 / var25;
 			}
-			int var30 = field602 - Pix3D.field647;
-			int var31 = field603 - Pix3D.field648;
+			int var30 = field602 - Pix3D.centerX;
+			int var31 = field603 - Pix3D.centerY;
 			if (var30 > var26 && var30 < var27 && var31 > var28 && var31 < var29) {
-				if (this.field576) {
+				if (this.picking) {
 					pickedBitsets[field604++] = arg8;
 				} else {
 					var24 = true;
 				}
 			}
 		}
-		int var32 = Pix3D.field647;
-		int var33 = Pix3D.field648;
+		int var32 = Pix3D.centerX;
+		int var33 = Pix3D.centerY;
 		int var34 = 0;
 		int var35 = 0;
 		if (arg0 != 0) {
@@ -1746,7 +1746,7 @@ public class Model extends Entity {
 					}
 					if ((vertexScreenY[var32] - vertexScreenY[var31]) * (var33 - var34) - (vertexScreenY[var30] - vertexScreenY[var31]) * (var35 - var34) > 0) {
 						faceNearClipped[var5] = false;
-						if (var33 >= 0 && var34 >= 0 && var35 >= 0 && var33 <= Pix2D.field634 && var34 <= Pix2D.field634 && var35 <= Pix2D.field634) {
+						if (var33 >= 0 && var34 >= 0 && var35 >= 0 && var33 <= Pix2D.boundX && var34 <= Pix2D.boundX && var35 <= Pix2D.boundX) {
 							faceClippedX[var5] = false;
 						} else {
 							faceClippedX[var5] = true;
@@ -1927,8 +1927,8 @@ public class Model extends Entity {
 
 	@ObfuscatedName("fb.g(I)V")
 	public final void method161(int arg0) {
-		int var2 = Pix3D.field647;
-		int var3 = Pix3D.field648;
+		int var2 = Pix3D.centerX;
+		int var3 = Pix3D.centerY;
 		int var4 = 0;
 		int var5 = this.faceVertexA[arg0];
 		int var6 = this.faceVertexB[arg0];
@@ -2010,7 +2010,7 @@ public class Model extends Entity {
 		}
 		Pix3D.field643 = false;
 		if (var4 == 3) {
-			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.field634 || var27 > Pix2D.field634 || var28 > Pix2D.field634) {
+			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.boundX || var27 > Pix2D.boundX || var28 > Pix2D.boundX) {
 				Pix3D.field643 = true;
 			}
 			int var32;
@@ -2040,7 +2040,7 @@ public class Model extends Entity {
 		if (var4 != 4) {
 			return;
 		}
-		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.field634 || var27 > Pix2D.field634 || var28 > Pix2D.field634 || clippedX[3] < 0 || clippedX[3] > Pix2D.field634) {
+		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.boundX || var27 > Pix2D.boundX || var28 > Pix2D.boundX || clippedX[3] < 0 || clippedX[3] > Pix2D.boundX) {
 			Pix3D.field643 = true;
 		}
 		int var41;

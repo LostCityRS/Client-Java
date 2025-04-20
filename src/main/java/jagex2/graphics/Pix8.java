@@ -195,39 +195,39 @@ public class Pix8 extends Pix2D {
 	public void method211(byte arg0, int arg1, int arg2) {
 		int var4 = this.field687 + arg1;
 		int var5 = this.field688 + arg2;
-		int var6 = Pix2D.field628 * var5 + var4;
+		int var6 = Pix2D.width2d * var5 + var4;
 		int var7 = 0;
 		int var8 = this.field686;
 		int var9 = this.field685;
-		int var10 = Pix2D.field628 - var9;
+		int var10 = Pix2D.width2d - var9;
 		int var11 = 0;
-		if (var5 < Pix2D.field630) {
-			int var12 = Pix2D.field630 - var5;
+		if (var5 < Pix2D.top) {
+			int var12 = Pix2D.top - var5;
 			var8 -= var12;
-			var5 = Pix2D.field630;
+			var5 = Pix2D.top;
 			var7 += var9 * var12;
-			var6 += Pix2D.field628 * var12;
+			var6 += Pix2D.width2d * var12;
 		}
-		if (var5 + var8 > Pix2D.field631) {
-			var8 -= var5 + var8 - Pix2D.field631;
+		if (var5 + var8 > Pix2D.bottom) {
+			var8 -= var5 + var8 - Pix2D.bottom;
 		}
-		if (var4 < Pix2D.field632) {
-			int var13 = Pix2D.field632 - var4;
+		if (var4 < Pix2D.left) {
+			int var13 = Pix2D.left - var4;
 			var9 -= var13;
-			var4 = Pix2D.field632;
+			var4 = Pix2D.left;
 			var7 += var13;
 			var6 += var13;
 			var11 += var13;
 			var10 += var13;
 		}
-		if (var4 + var9 > Pix2D.field633) {
-			int var14 = var4 + var9 - Pix2D.field633;
+		if (var4 + var9 > Pix2D.right) {
+			int var14 = var4 + var9 - Pix2D.right;
 			var9 -= var14;
 			var11 += var14;
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			this.method212(-228, var11, var8, var10, Pix2D.field627, var6, this.field683, this.field684, var9, var7);
+			this.method212(-228, var11, var8, var10, Pix2D.data, var6, this.field683, this.field684, var9, var7);
 			if (this.field678 == arg0) {
 				boolean var15 = false;
 			}

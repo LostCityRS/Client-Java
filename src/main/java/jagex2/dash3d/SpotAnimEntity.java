@@ -59,10 +59,10 @@ public class SpotAnimEntity extends Entity {
 		while (true) {
 			do {
 				do {
-					if (this.field618 <= this.field611.seq.method382(0, this.field617)) {
+					if (this.field618 <= this.field611.seq.getFrameDuration(0, this.field617)) {
 						return;
 					}
-					this.field618 -= this.field611.seq.method382(0, this.field617) + 1;
+					this.field618 -= this.field611.seq.getFrameDuration(0, this.field617) + 1;
 					this.field617++;
 				} while (this.field617 < this.field611.seq.frameCount);
 			} while (this.field617 >= 0 && this.field617 < this.field611.seq.frameCount);
@@ -73,7 +73,7 @@ public class SpotAnimEntity extends Entity {
 
 	@ObfuscatedName("gb.a(I)Lfb;")
 	public final Model method122(int arg0) {
-		Model var2 = this.field611.method386();
+		Model var2 = this.field611.getModel();
 		if (arg0 != 5560) {
 			throw new NullPointerException();
 		} else if (var2 == null) {
@@ -81,8 +81,8 @@ public class SpotAnimEntity extends Entity {
 		} else {
 			Model var3 = new Model(var2, true, false, !this.field611.animHasAlpha, -796);
 			if (!this.field619) {
-				var3.method145(-591);
-				var3.method146(this.field611.seq.frames[this.field617], 13056);
+				var3.createLabelReferences(-591);
+				var3.applyTransform(this.field611.seq.frames[this.field617], 13056);
 				var3.labelFaces = null;
 				var3.labelVertices = null;
 			}

@@ -11,19 +11,19 @@ import jagex2.io.Packet;
 public class LocType {
 
 	@ObfuscatedName("ec.a")
-	public int field935 = 2;
+	public int _flowObfuscator1 = 2;
 
 	@ObfuscatedName("ec.b")
-	public static boolean field936;
+	public static boolean _flowObfuscator2;
 
 	@ObfuscatedName("ec.c")
-	public int field937;
+	public int _flowObfuscator3;
 
 	@ObfuscatedName("ec.d")
-	public int field938 = 679;
+	public int _flowObfuscator4 = 679;
 
 	@ObfuscatedName("ec.e")
-	public boolean field939 = true;
+	public boolean _flowObfuscator5 = true;
 
 	@ObfuscatedName("ec.f")
 	public static boolean field940;
@@ -169,7 +169,7 @@ public class LocType {
 	public static final void unload(byte arg0) {
 		modelCacheStatic = null;
 		if (arg0 != 9) {
-			field936 = !field936;
+			_flowObfuscator2 = !_flowObfuscator2;
 		}
 		modelCacheDynamic = null;
 		idx = null;
@@ -178,7 +178,7 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(I)Lec;")
-	public static final LocType method333(int arg0) {
+	public static final LocType get(int arg0) {
 		for (int var1 = 0; var1 < 10; var1++) {
 			if (types[var1].id == arg0) {
 				return types[var1];
@@ -232,7 +232,7 @@ public class LocType {
 	@ObfuscatedName("ec.a(ILmb;)V")
 	public final void decode(int arg0, Packet arg1) {
 		if (arg0 <= 0) {
-			this.field939 = !this.field939;
+			this._flowObfuscator5 = !this._flowObfuscator5;
 		}
 		int var3 = -1;
 		while (true) {
@@ -344,7 +344,7 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(II)Z")
-	public final boolean method336(int arg0, int arg1) {
+	public final boolean validate(int arg0, int arg1) {
 		int var3 = -1;
 		for (int var4 = 0; var4 < this.shapes.length; var4++) {
 			if (this.shapes[var4] == arg1) {
@@ -365,10 +365,10 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.b(I)Z")
-	public final boolean method337(int arg0) {
+	public final boolean validate(int arg0) {
 		boolean var2 = true;
 		if (arg0 != 0) {
-			this.field938 = -413;
+			this._flowObfuscator4 = -413;
 		}
 		if (this.models == null) {
 			return true;
@@ -383,9 +383,9 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(ILvb;)V")
-	public final void method338(int arg0, OnDemand arg1) {
+	public final void prefetch(int arg0, OnDemand arg1) {
 		while (arg0 >= 0) {
-			this.field935 = -234;
+			this._flowObfuscator1 = -234;
 		}
 		if (this.models == null) {
 			return;
@@ -393,13 +393,13 @@ public class LocType {
 		for (int var3 = 0; var3 < this.models.length; var3++) {
 			int var4 = this.models[var3];
 			if (var4 != -1) {
-				arg1.method293(0, var4 & 0xFFFF, -938);
+				arg1.prefetch(0, var4 & 0xFFFF, -938);
 			}
 		}
 	}
 
 	@ObfuscatedName("ec.a(IIIIIII)Lfb;")
-	public final Model method339(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public final Model getModel(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var8 = -1;
 		for (int var9 = 0; var9 < this.shapes.length; var9++) {
 			if (this.shapes[var9] == arg0) {
@@ -452,8 +452,8 @@ public class LocType {
 			}
 			Model var25 = new Model(var22, this.recol_s == null, arg1 == 0 && arg6 == -1 && !var23 && !var24, !this.animHasAlpha, -796);
 			if (arg6 != -1) {
-				var25.method145(-591);
-				var25.method146(arg6, 13056);
+				var25.createLabelReferences(-591);
+				var25.applyTransform(arg6, 13056);
 				var25.labelFaces = null;
 				var25.labelVertices = null;
 			}
@@ -477,7 +477,7 @@ public class LocType {
 			}
 			modelCacheDynamic.put(var25, var10, 39399);
 			if (this.hillskew || this.sharelight) {
-				var25 = new Model(this.field937, this.sharelight, this.hillskew, var25);
+				var25 = new Model(this._flowObfuscator3, this.sharelight, this.hillskew, var25);
 			}
 			if (this.hillskew) {
 				int var27 = (arg2 + arg3 + arg4 + arg5) / 4;
@@ -496,7 +496,7 @@ public class LocType {
 			return var12;
 		} else {
 			if (this.hillskew || this.sharelight) {
-				var12 = new Model(this.field937, this.sharelight, this.hillskew, var12);
+				var12 = new Model(this._flowObfuscator3, this.sharelight, this.hillskew, var12);
 			}
 			if (this.hillskew) {
 				int var13 = (arg2 + arg3 + arg4 + arg5) / 4;

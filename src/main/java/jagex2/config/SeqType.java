@@ -9,10 +9,10 @@ import jagex2.dash3d.AnimFrame;
 public class SeqType {
 
 	@ObfuscatedName("nc.a")
-	public boolean field1117 = false;
+	public boolean _flowObfuscator1 = false;
 
 	@ObfuscatedName("nc.b")
-	public int field1118 = -796;
+	public int _flowObfuscator2 = -796;
 
 	@ObfuscatedName("nc.c")
 	public static int count;
@@ -63,7 +63,7 @@ public class SeqType {
 	public int replacemode;
 
 	@ObfuscatedName("nc.s")
-	public static int field1135;
+	public static int _flowObfuscator3;
 
 	@ObfuscatedName("nc.a(Lyb;B)V")
 	public static void unpack(Jagfile arg0, byte arg1) {
@@ -85,10 +85,10 @@ public class SeqType {
 	}
 
 	@ObfuscatedName("nc.a(II)I")
-	public int method382(int arg0, int arg1) {
+	public int getFrameDuration(int arg0, int arg1) {
 		int var3 = this.delay[arg1];
 		if (arg0 != 0) {
-			this.field1117 = !this.field1117;
+			this._flowObfuscator1 = !this._flowObfuscator1;
 		}
 		if (var3 == 0) {
 			AnimFrame var4 = AnimFrame.get(this.frames[arg1], -404);
@@ -105,7 +105,7 @@ public class SeqType {
 	@ObfuscatedName("nc.a(ILmb;)V")
 	public void decode(int arg0, Packet arg1) {
 		if (arg0 <= 0) {
-			this.field1118 = 71;
+			this._flowObfuscator2 = 71;
 		}
 		while (true) {
 			while (true) {

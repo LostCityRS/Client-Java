@@ -10,7 +10,7 @@ import jagex2.io.Packet;
 public class NpcType {
 
 	@ObfuscatedName("gc.a")
-	public static int field987;
+	public static int _flowObfuscator1;
 
 	@ObfuscatedName("gc.b")
 	public static int count;
@@ -40,7 +40,7 @@ public class NpcType {
 	public byte size = 1;
 
 	@ObfuscatedName("gc.k")
-	public int[] field997;
+	public int[] models;
 
 	@ObfuscatedName("gc.l")
 	public int[] heads;
@@ -100,7 +100,7 @@ public class NpcType {
 	public int headicon = -1;
 
 	@ObfuscatedName("gc.G")
-	public static LruCache field1019 = new LruCache(30, 1);
+	public static LruCache modelCacheStatic = new LruCache(30, 1);
 
 	@ObfuscatedName("gc.D")
 	public int ambient;
@@ -127,19 +127,19 @@ public class NpcType {
 
 	@ObfuscatedName("gc.a(B)V")
 	public static final void unload(byte arg0) {
-		field1019 = null;
+		modelCacheStatic = null;
 		idx = null;
 		types = null;
 		if (arg0 == 9) {
 			boolean var1 = false;
 		} else {
-			field987 = 11;
+			_flowObfuscator1 = 11;
 		}
 		data = null;
 	}
 
 	@ObfuscatedName("gc.a(I)Lgc;")
-	public static final NpcType method342(int arg0) {
+	public static final NpcType get(int arg0) {
 		for (int var1 = 0; var1 < 20; var1++) {
 			if ((long) arg0 == types[var1].id) {
 				return types[var1];
@@ -164,9 +164,9 @@ public class NpcType {
 				}
 				if (var4 == 1) {
 					int var5 = arg1.g1();
-					this.field997 = new int[var5];
+					this.models = new int[var5];
 					for (int var6 = 0; var6 < var5; var6++) {
-						this.field997[var6] = arg1.g2();
+						this.models[var6] = arg1.g2();
 					}
 				} else if (var4 == 2) {
 					this.name = arg1.gjstr();
@@ -235,8 +235,8 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(BII[I)Lfb;")
-	public final Model method344(byte arg0, int arg1, int arg2, int[] arg3) {
-		Model var5 = (Model) field1019.get(this.id);
+	public final Model getModel(byte arg0, int arg1, int arg2, int[] arg3) {
+		Model var5 = (Model) modelCacheStatic.get(this.id);
 		if (arg0 == 0) {
 			boolean var6 = false;
 		} else {
@@ -245,17 +245,17 @@ public class NpcType {
 		}
 		if (var5 == null) {
 			boolean var8 = false;
-			for (int var9 = 0; var9 < this.field997.length; var9++) {
-				if (!Model.validate(this.field997[var9])) {
+			for (int var9 = 0; var9 < this.models.length; var9++) {
+				if (!Model.validate(this.models[var9])) {
 					var8 = true;
 				}
 			}
 			if (var8) {
 				return null;
 			}
-			Model[] var10 = new Model[this.field997.length];
-			for (int var11 = 0; var11 < this.field997.length; var11++) {
-				var10[var11] = Model.tryGet(this.field997[var11], -404);
+			Model[] var10 = new Model[this.models.length];
+			for (int var11 = 0; var11 < this.models.length; var11++) {
+				var10[var11] = Model.tryGet(this.models[var11], -404);
 			}
 			if (var10.length == 1) {
 				var5 = var10[0];
@@ -267,31 +267,31 @@ public class NpcType {
 					var5.recolour(this.recol_s[var12], this.recol_d[var12]);
 				}
 			}
-			var5.method145(-591);
+			var5.createLabelReferences(-591);
 			var5.calculateNormals(this.ambient + 64, this.contrast + 850, -30, -50, -30, true);
-			field1019.put(var5, this.id, 39399);
+			modelCacheStatic.put(var5, this.id, 39399);
 		}
-		Model var13 = Model.field538;
+		Model var13 = Model.empty;
 		var13.set(!this.animHasAlpha, var5, true);
 		if (arg1 != -1 && arg2 != -1) {
-			var13.method147((byte) 74, arg1, arg2, arg3);
+			var13.applyTransforms((byte) 74, arg1, arg2, arg3);
 		} else if (arg1 != -1) {
-			var13.method146(arg1, 13056);
+			var13.applyTransform(arg1, 13056);
 		}
 		if (this.resizeh != 128 || this.resizev != 128) {
 			var13.scale(this.resizev, this.resizeh, 4, this.resizeh);
 		}
-		var13.method142(true);
+		var13.calculateBoundsCylinder(true);
 		var13.labelFaces = null;
 		var13.labelVertices = null;
 		if (this.size == 1) {
-			var13.field576 = true;
+			var13.picking = true;
 		}
 		return var13;
 	}
 
 	@ObfuscatedName("gc.a(Z)Lfb;")
-	public final Model method345(boolean arg0) {
+	public final Model getHeadModel(boolean arg0) {
 		if (!arg0) {
 			for (int var2 = 1; var2 > 0; var2++) {
 			}

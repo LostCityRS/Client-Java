@@ -36,12 +36,12 @@ public class NpcEntity extends PathingEntity {
 		}
 		if (super.field437 != -1 && super.field438 != -1) {
 			SpotAnimType var3 = SpotAnimType.types[super.field437];
-			Model var4 = var3.method386();
+			Model var4 = var3.getModel();
 			if (var4 != null) {
 				Model var5 = new Model(var4, true, false, !var3.animHasAlpha, -796);
 				var5.translate(-super.field441, 0, 0, false);
-				var5.method145(-591);
-				var5.method146(var3.seq.frames[super.field438], 13056);
+				var5.createLabelReferences(-591);
+				var5.applyTransform(var3.seq.frames[super.field438], 13056);
 				var5.labelFaces = null;
 				var5.labelVertices = null;
 				if (var3.resizeh != 128 || var3.resizev != 128) {
@@ -53,7 +53,7 @@ public class NpcEntity extends PathingEntity {
 			}
 		}
 		if (this.field461.size == 1) {
-			var2.field576 = true;
+			var2.picking = true;
 		}
 		return var2;
 	}
@@ -66,14 +66,14 @@ public class NpcEntity extends PathingEntity {
 			if (super.field429 >= 0) {
 				var4 = SeqType.types[super.field429].frames[super.field430];
 			}
-			return this.field461.method344((byte) 0, var4, -1, null);
+			return this.field461.getModel((byte) 0, var4, -1, null);
 		}
 		int var2 = SeqType.types[super.field432].frames[super.field433];
 		int var3 = -1;
 		if (super.field429 >= 0 && super.field429 != super.field409) {
 			var3 = SeqType.types[super.field429].frames[super.field430];
 		}
-		return this.field461.method344((byte) 0, var2, var3, SeqType.types[super.field432].walkmerge);
+		return this.field461.getModel((byte) 0, var2, var3, SeqType.types[super.field432].walkmerge);
 	}
 
 	@ObfuscatedName("ab.a(B)Z")

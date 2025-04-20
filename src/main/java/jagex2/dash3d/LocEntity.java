@@ -61,7 +61,7 @@ public class LocEntity extends Entity {
 		this.field498 = client.loopCycle;
 		if (arg6 && this.field496.replayoff != -1) {
 			this.field497 = (int) (Math.random() * (double) this.field496.frameCount);
-			this.field498 -= (int) (Math.random() * (double) this.field496.method382(0, this.field497));
+			this.field498 -= (int) (Math.random() * (double) this.field496.getFrameDuration(0, this.field497));
 		}
 	}
 
@@ -78,10 +78,10 @@ public class LocEntity extends Entity {
 			label42: {
 				do {
 					do {
-						if (var2 <= this.field496.method382(0, this.field497)) {
+						if (var2 <= this.field496.getFrameDuration(0, this.field497)) {
 							break label42;
 						}
-						var2 -= this.field496.method382(0, this.field497);
+						var2 -= this.field496.getFrameDuration(0, this.field497);
 						this.field497++;
 					} while (this.field497 < this.field496.frameCount);
 					this.field497 -= this.field496.replayoff;
@@ -94,7 +94,7 @@ public class LocEntity extends Entity {
 		if (this.field496 != null) {
 			var3 = this.field496.frames[this.field497];
 		}
-		LocType var4 = LocType.method333(this.field489);
-		return var4.method339(this.field490, this.field491, this.field492, this.field493, this.field494, this.field495, var3);
+		LocType var4 = LocType.get(this.field489);
+		return var4.getModel(this.field490, this.field491, this.field492, this.field493, this.field494, this.field495, var3);
 	}
 }

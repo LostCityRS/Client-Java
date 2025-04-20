@@ -8,7 +8,7 @@ import jagex2.io.Packet;
 public class VarpType {
 
 	@ObfuscatedName("pc.a")
-	public int field1152 = 439;
+	public int _flowObfuscator1 = 439;
 
 	@ObfuscatedName("pc.b")
 	public static int count;

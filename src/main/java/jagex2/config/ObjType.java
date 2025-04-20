@@ -13,13 +13,13 @@ import jagex2.io.Packet;
 public class ObjType {
 
 	@ObfuscatedName("hc.a")
-	public static int field1020 = 4;
+	public static int _flowObfuscator1 = 4;
 
 	@ObfuscatedName("hc.b")
-	public static int field1021 = 2;
+	public static int _flowObfuscator2 = 2;
 
 	@ObfuscatedName("hc.c")
-	public boolean field1022 = true;
+	public boolean _flowObfuscator3 = true;
 
 	@ObfuscatedName("hc.d")
 	public static int count;
@@ -91,10 +91,10 @@ public class ObjType {
 	public boolean members;
 
 	@ObfuscatedName("hc.X")
-	public static LruCache field1069 = new LruCache(50, 1);
+	public static LruCache modelCache = new LruCache(50, 1);
 
 	@ObfuscatedName("hc.Y")
-	public static LruCache field1070 = new LruCache(100, 1);
+	public static LruCache iconCache = new LruCache(100, 1);
 
 	@ObfuscatedName("hc.E")
 	public byte manwearOffsetY;
@@ -185,10 +185,10 @@ public class ObjType {
 	@ObfuscatedName("hc.a(B)V")
 	public static final void unload(byte arg0) {
 		if (arg0 != 9) {
-			field1021 = 395;
+			_flowObfuscator2 = 395;
 		}
-		field1069 = null;
-		field1070 = null;
+		modelCache = null;
+		iconCache = null;
 		idx = null;
 		types = null;
 		data = null;
@@ -384,7 +384,7 @@ public class ObjType {
 		this.xan2d = var2.xan2d;
 		this.yan2d = var2.yan2d;
 		if (arg0 < 6 || arg0 > 6) {
-			this.field1022 = !this.field1022;
+			this._flowObfuscator3 = !this._flowObfuscator3;
 		}
 		this.zan2d = var2.zan2d;
 		this.xof2d = var2.xof2d;
@@ -405,7 +405,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.c(I)Lfb;")
-	public final Model method352(int arg0) {
+	public final Model getModel(int arg0) {
 		if (this.countobj != null && arg0 > 1) {
 			int var2 = -1;
 			for (int var3 = 0; var3 < 10; var3++) {
@@ -414,10 +414,10 @@ public class ObjType {
 				}
 			}
 			if (var2 != -1) {
-				return get(var2).method352(1);
+				return get(var2).getModel(1);
 			}
 		}
-		Model var4 = (Model) field1069.get((long) this.id);
+		Model var4 = (Model) modelCache.get((long) this.id);
 		if (var4 != null) {
 			return var4;
 		}
@@ -434,15 +434,15 @@ public class ObjType {
 			}
 		}
 		var5.calculateNormals(this.ambient + 64, this.contrast + 768, -50, -10, -50, true);
-		var5.field576 = true;
-		field1069.put(var5, (long) this.id, 39399);
+		var5.picking = true;
+		modelCache.put(var5, (long) this.id, 39399);
 		return var5;
 	}
 
 	@ObfuscatedName("hc.a(II)Lfb;")
-	public final Model method353(int arg0, int arg1) {
+	public final Model getInvModel(int arg0, int arg1) {
 		if (arg0 != -42857) {
-			this.field1022 = !this.field1022;
+			this._flowObfuscator3 = !this._flowObfuscator3;
 		}
 		if (this.countobj != null && arg1 > 1) {
 			int var3 = -1;
@@ -452,7 +452,7 @@ public class ObjType {
 				}
 			}
 			if (var3 != -1) {
-				return get(var3).method353(-42857, 1);
+				return get(var3).getInvModel(-42857, 1);
 			}
 		}
 		Model var5 = Model.tryGet(this.model, -404);
@@ -468,10 +468,10 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(IIII)Ljb;")
-	public static final Pix32 method354(int arg0, int arg1, int arg2, int arg3) {
+	public static final Pix32 getIcon(int arg0, int arg1, int arg2, int arg3) {
 		if (arg0 == 0) {
-			Pix32 var4 = (Pix32) field1070.get((long) arg2);
-			if (var4 != null && var4.field676 != arg1 && var4.field676 != -1) {
+			Pix32 var4 = (Pix32) iconCache.get((long) arg2);
+			if (var4 != null && var4.height != arg1 && var4.height != -1) {
 				var4.unlink();
 				var4 = null;
 			}
@@ -494,33 +494,33 @@ public class ObjType {
 				var5 = get(var6);
 			}
 		}
-		Model var8 = var5.method352(1);
+		Model var8 = var5.getModel(1);
 		if (var8 == null) {
 			return null;
 		}
 		Pix32 var9 = null;
 		if (var5.certtemplate != -1) {
-			var9 = method354(-1, 10, var5.certlink, 723);
+			var9 = getIcon(-1, 10, var5.certlink, 723);
 			if (var9 == null) {
 				return null;
 			}
 		}
 		Pix32 var10 = new Pix32(32, 32);
-		int var11 = Pix3D.field647;
-		int var12 = Pix3D.field648;
-		int[] var13 = Pix3D.field653;
-		int[] var14 = Pix2D.field627;
-		int var15 = Pix2D.field628;
-		int var16 = Pix2D.field629;
+		int var11 = Pix3D.centerX;
+		int var12 = Pix3D.centerY;
+		int[] var13 = Pix3D.lineOffset;
+		int[] var14 = Pix2D.data;
+		int var15 = Pix2D.width2d;
+		int var16 = Pix2D.height2d;
 		int var17 = 91 / arg3;
-		int var18 = Pix2D.field632;
-		int var19 = Pix2D.field633;
-		int var20 = Pix2D.field630;
-		int var21 = Pix2D.field631;
-		Pix3D.field645 = false;
-		Pix2D.method164(32, 2, var10.field670, 32);
-		Pix2D.method169(0, 0, 32, 32, 0, 0);
-		Pix3D.method177((byte) 6);
+		int var18 = Pix2D.left;
+		int var19 = Pix2D.right;
+		int var20 = Pix2D.top;
+		int var21 = Pix2D.bottom;
+		Pix3D.jagged = false;
+		Pix2D.bind(32, 2, var10.pixels, 32);
+		Pix2D.fillRect(0, 0, 32, 32, 0, 0);
+		Pix3D.init2D((byte) 6);
 		int var22 = var5.zoom2d;
 		if (arg0 == -1) {
 			var22 = (int) ((double) var22 * 1.5D);
@@ -530,18 +530,18 @@ public class ObjType {
 		}
 		int var23 = Pix3D.sinTable[var5.xan2d] * var22 >> 16;
 		int var24 = Pix3D.cosTable[var5.xan2d] * var22 >> 16;
-		var8.method158(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var8.field400 / 2 + var23 + var5.yof2d, var5.yof2d + var24);
+		var8.drawSimple(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var8.field400 / 2 + var23 + var5.yof2d, var5.yof2d + var24);
 		for (int var25 = 31; var25 >= 0; var25--) {
 			for (int var32 = 31; var32 >= 0; var32--) {
-				if (var10.field670[var32 * 32 + var25] == 0) {
-					if (var25 > 0 && var10.field670[var32 * 32 + (var25 - 1)] > 1) {
-						var10.field670[var32 * 32 + var25] = 1;
-					} else if (var32 > 0 && var10.field670[(var32 - 1) * 32 + var25] > 1) {
-						var10.field670[var32 * 32 + var25] = 1;
-					} else if (var25 < 31 && var10.field670[var32 * 32 + var25 + 1] > 1) {
-						var10.field670[var32 * 32 + var25] = 1;
-					} else if (var32 < 31 && var10.field670[(var32 + 1) * 32 + var25] > 1) {
-						var10.field670[var32 * 32 + var25] = 1;
+				if (var10.pixels[var32 * 32 + var25] == 0) {
+					if (var25 > 0 && var10.pixels[var32 * 32 + (var25 - 1)] > 1) {
+						var10.pixels[var32 * 32 + var25] = 1;
+					} else if (var32 > 0 && var10.pixels[(var32 - 1) * 32 + var25] > 1) {
+						var10.pixels[var32 * 32 + var25] = 1;
+					} else if (var25 < 31 && var10.pixels[var32 * 32 + var25 + 1] > 1) {
+						var10.pixels[var32 * 32 + var25] = 1;
+					} else if (var32 < 31 && var10.pixels[(var32 + 1) * 32 + var25] > 1) {
+						var10.pixels[var32 * 32 + var25] = 1;
 					}
 				}
 			}
@@ -549,15 +549,15 @@ public class ObjType {
 		if (arg0 > 0) {
 			for (int var26 = 31; var26 >= 0; var26--) {
 				for (int var27 = 31; var27 >= 0; var27--) {
-					if (var10.field670[var27 * 32 + var26] == 0) {
-						if (var26 > 0 && var10.field670[var27 * 32 + (var26 - 1)] == 1) {
-							var10.field670[var27 * 32 + var26] = arg0;
-						} else if (var27 > 0 && var10.field670[(var27 - 1) * 32 + var26] == 1) {
-							var10.field670[var27 * 32 + var26] = arg0;
-						} else if (var26 < 31 && var10.field670[var27 * 32 + var26 + 1] == 1) {
-							var10.field670[var27 * 32 + var26] = arg0;
-						} else if (var27 < 31 && var10.field670[(var27 + 1) * 32 + var26] == 1) {
-							var10.field670[var27 * 32 + var26] = arg0;
+					if (var10.pixels[var27 * 32 + var26] == 0) {
+						if (var26 > 0 && var10.pixels[var27 * 32 + (var26 - 1)] == 1) {
+							var10.pixels[var27 * 32 + var26] = arg0;
+						} else if (var27 > 0 && var10.pixels[(var27 - 1) * 32 + var26] == 1) {
+							var10.pixels[var27 * 32 + var26] = arg0;
+						} else if (var26 < 31 && var10.pixels[var27 * 32 + var26 + 1] == 1) {
+							var10.pixels[var27 * 32 + var26] = arg0;
+						} else if (var27 < 31 && var10.pixels[(var27 + 1) * 32 + var26] == 1) {
+							var10.pixels[var27 * 32 + var26] = arg0;
 						}
 					}
 				}
@@ -565,41 +565,41 @@ public class ObjType {
 		} else if (arg0 == 0) {
 			for (int var28 = 31; var28 >= 0; var28--) {
 				for (int var29 = 31; var29 >= 0; var29--) {
-					if (var10.field670[var29 * 32 + var28] == 0 && var28 > 0 && var29 > 0 && var10.field670[(var29 - 1) * 32 + (var28 - 1)] > 0) {
-						var10.field670[var29 * 32 + var28] = 3153952;
+					if (var10.pixels[var29 * 32 + var28] == 0 && var28 > 0 && var29 > 0 && var10.pixels[(var29 - 1) * 32 + (var28 - 1)] > 0) {
+						var10.pixels[var29 * 32 + var28] = 3153952;
 					}
 				}
 			}
 		}
 		if (var5.certtemplate != -1) {
-			int var30 = var9.field675;
-			int var31 = var9.field676;
-			var9.field675 = 32;
-			var9.field676 = 32;
-			var9.method198((byte) 9, 0, 0);
-			var9.field675 = var30;
-			var9.field676 = var31;
+			int var30 = var9.width;
+			int var31 = var9.height;
+			var9.width = 32;
+			var9.height = 32;
+			var9.draw((byte) 9, 0, 0);
+			var9.width = var30;
+			var9.height = var31;
 		}
 		if (arg0 == 0) {
-			field1070.put(var10, (long) arg2, 39399);
+			iconCache.put(var10, (long) arg2, 39399);
 		}
-		Pix2D.method164(var15, 2, var14, var16);
-		Pix2D.method166(var19, var21, field1020, var20, var18);
-		Pix3D.field647 = var11;
-		Pix3D.field648 = var12;
-		Pix3D.field653 = var13;
-		Pix3D.field645 = true;
+		Pix2D.bind(var15, 2, var14, var16);
+		Pix2D.setBounds(var19, var21, _flowObfuscator1, var20, var18);
+		Pix3D.centerX = var11;
+		Pix3D.centerY = var12;
+		Pix3D.lineOffset = var13;
+		Pix3D.jagged = true;
 		if (var5.stackable) {
-			var10.field675 = 33;
+			var10.width = 33;
 		} else {
-			var10.field675 = 32;
+			var10.width = 32;
 		}
-		var10.field676 = arg1;
+		var10.height = arg1;
 		return var10;
 	}
 
 	@ObfuscatedName("hc.b(II)Z")
-	public final boolean method355(int arg0, int arg1) {
+	public final boolean validateWornModel(int arg0, int arg1) {
 		int var3 = this.manwear;
 		int var4 = this.manwear2;
 		int var5 = this.manwear3;
@@ -629,7 +629,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(ZI)Lfb;")
-	public final Model method356(boolean arg0, int arg1) {
+	public final Model getWornModel(boolean arg0, int arg1) {
 		int var3 = this.manwear;
 		int var4 = this.manwear2;
 		int var5 = this.manwear3;
@@ -672,7 +672,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.c(II)Z")
-	public final boolean method357(int arg0, int arg1) {
+	public final boolean validateHeadModel(int arg0, int arg1) {
 		int var3 = this.manhead;
 		int var4 = this.manhead2;
 		if (arg0 == 1) {
@@ -696,7 +696,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.b(ZI)Lfb;")
-	public final Model method358(boolean arg0, int arg1) {
+	public final Model getHeadModel(boolean arg0, int arg1) {
 		int var3 = this.manhead;
 		int var4 = this.manhead2;
 		if (arg0) {

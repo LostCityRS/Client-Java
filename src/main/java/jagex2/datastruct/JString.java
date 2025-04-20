@@ -57,7 +57,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(ZLjava/lang/String;)J")
-	public static long method311(boolean arg0, String arg1) {
+	public static long hashCode(boolean arg0, String arg1) {
 		String var2 = arg1.toUpperCase();
 		if (arg0) {
 			throw new NullPointerException();

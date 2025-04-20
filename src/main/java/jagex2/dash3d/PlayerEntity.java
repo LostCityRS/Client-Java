@@ -175,18 +175,18 @@ public class PlayerEntity extends PathingEntity {
 			return null;
 		}
 		super.field450 = var2.field400;
-		var2.field576 = true;
+		var2.picking = true;
 		if (this.field484) {
 			return var2;
 		}
 		if (super.field437 != -1 && super.field438 != -1) {
 			SpotAnimType var3 = SpotAnimType.types[super.field437];
-			Model var4 = var3.method386();
+			Model var4 = var3.getModel();
 			if (var4 != null) {
 				Model var5 = new Model(var4, true, false, !var3.animHasAlpha, -796);
 				var5.translate(-super.field441, 0, 0, false);
-				var5.method145(-591);
-				var5.method146(var3.seq.frames[super.field438], 13056);
+				var5.createLabelReferences(-591);
+				var5.applyTransform(var3.seq.frames[super.field438], 13056);
 				var5.labelFaces = null;
 				var5.labelVertices = null;
 				if (var3.resizeh != 128 || var3.resizev != 128) {
@@ -229,7 +229,7 @@ public class PlayerEntity extends PathingEntity {
 				var7.translate(this.field473 - this.field477, super.field404 - this.field476, super.field405 - this.field478, false);
 			}
 		}
-		var2.field576 = true;
+		var2.picking = true;
 		if (arg0 != 5560) {
 			throw new NullPointerException();
 		}
@@ -274,10 +274,10 @@ public class PlayerEntity extends PathingEntity {
 				if (var6 >= 0 && var11 == 5) {
 					var12 = var6;
 				}
-				if (var12 >= 256 && var12 < 512 && !IdkType.types[var12 - 256].method377(6)) {
+				if (var12 >= 256 && var12 < 512 && !IdkType.types[var12 - 256].validate(6)) {
 					var10 = true;
 				}
-				if (var12 >= 512 && !ObjType.get(var12 - 512).method355(-526, this.field467)) {
+				if (var12 >= 512 && !ObjType.get(var12 - 512).validateWornModel(-526, this.field467)) {
 					var10 = true;
 				}
 			}
@@ -302,13 +302,13 @@ public class PlayerEntity extends PathingEntity {
 					var17 = var6;
 				}
 				if (var17 >= 256 && var17 < 512) {
-					Model var18 = IdkType.types[var17 - 256].method378(597);
+					Model var18 = IdkType.types[var17 - 256].getModel(597);
 					if (var18 != null) {
 						var13[var14++] = var18;
 					}
 				}
 				if (var17 >= 512) {
-					Model var19 = ObjType.get(var17 - 512).method356(true, this.field467);
+					Model var19 = ObjType.get(var17 - 512).getWornModel(true, this.field467);
 					if (var19 != null) {
 						var13[var14++] = var19;
 					}
@@ -323,7 +323,7 @@ public class PlayerEntity extends PathingEntity {
 					}
 				}
 			}
-			var9.method145(-591);
+			var9.createLabelReferences(-591);
 			var9.calculateNormals(64, 850, -30, -50, -30, true);
 			field486.put(var9, var2, 39399);
 			this.field485 = var2;
@@ -331,31 +331,31 @@ public class PlayerEntity extends PathingEntity {
 		if (this.field484) {
 			return var9;
 		}
-		Model var20 = Model.field538;
+		Model var20 = Model.empty;
 		var20.set(true, var9, true);
 		if (var4 != -1 && var5 != -1) {
-			var20.method147((byte) 74, var4, var5, SeqType.types[super.field432].walkmerge);
+			var20.applyTransforms((byte) 74, var4, var5, SeqType.types[super.field432].walkmerge);
 		} else if (var4 != -1) {
-			var20.method146(var4, 13056);
+			var20.applyTransform(var4, 13056);
 		}
-		var20.method142(true);
+		var20.calculateBoundsCylinder(true);
 		var20.labelFaces = null;
 		var20.labelVertices = null;
 		return var20;
 	}
 
 	@ObfuscatedName("bb.d(I)Lfb;")
-	public final Model method131(int arg0) {
+	public final Model getHeadModel(int arg0) {
 		if (!this.field466) {
 			return null;
 		}
 		boolean var2 = false;
 		for (int var3 = 0; var3 < 12; var3++) {
 			int var13 = this.field469[var3];
-			if (var13 >= 256 && var13 < 512 && !IdkType.types[var13 - 256].method379(8)) {
+			if (var13 >= 256 && var13 < 512 && !IdkType.types[var13 - 256].validateHeadModel(8)) {
 				var2 = true;
 			}
-			if (var13 >= 512 && !ObjType.get(var13 - 512).method357(this.field467, -5652)) {
+			if (var13 >= 512 && !ObjType.get(var13 - 512).validateHeadModel(this.field467, -5652)) {
 				var2 = true;
 			}
 		}
@@ -371,13 +371,13 @@ public class PlayerEntity extends PathingEntity {
 		for (int var7 = 0; var7 < 12; var7++) {
 			int var10 = this.field469[var7];
 			if (var10 >= 256 && var10 < 512) {
-				Model var11 = IdkType.types[var10 - 256].method380(-711);
+				Model var11 = IdkType.types[var10 - 256].getHeadModel(-711);
 				if (var11 != null) {
 					var4[var6++] = var11;
 				}
 			}
 			if (var10 >= 512) {
-				Model var12 = ObjType.get(var10 - 512).method358(false, this.field467);
+				Model var12 = ObjType.get(var10 - 512).getHeadModel(false, this.field467);
 				if (var12 != null) {
 					var4[var6++] = var12;
 				}

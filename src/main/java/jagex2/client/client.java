@@ -1483,14 +1483,14 @@ public class client extends GameShell {
 			this.field1426 = !this.field1426;
 		}
 		Model.field603 = super.mouseY - 4;
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1258.method102(this.field1637, var5, 7, this.field1641, this.field1640, this.field1639, this.field1638);
 		this.field1258.method77((byte) -48);
 		this.method462(47);
 		this.method509(317);
 		this.method555(var12, -131);
 		this.method475((byte) 1);
-		this.field1517.method268(super.graphics, 4, (byte) 55, 4);
+		this.field1517.draw(super.graphics, 4, (byte) 55, 4);
 		this.field1637 = var6;
 		this.field1638 = var7;
 		this.field1639 = var8;
@@ -1536,12 +1536,12 @@ public class client extends GameShell {
 			this.logout(false);
 			return;
 		}
-		this.field1517.method267(212);
-		this.field1442.method213(257, 1, 0, "Connection lost", 144);
-		this.field1442.method213(256, 1, 16777215, "Connection lost", 143);
-		this.field1442.method213(257, 1, 0, "Please wait - attempting to reestablish", 159);
-		this.field1442.method213(256, 1, 16777215, "Please wait - attempting to reestablish", 158);
-		this.field1517.method268(super.graphics, 4, (byte) 55, 4);
+		this.field1517.bind(212);
+		this.field1442.drawStringCenter(257, 1, 0, "Connection lost", 144);
+		this.field1442.drawStringCenter(256, 1, 16777215, "Connection lost", 143);
+		this.field1442.drawStringCenter(257, 1, 0, "Please wait - attempting to reestablish", 159);
+		this.field1442.drawStringCenter(256, 1, 16777215, "Please wait - attempting to reestablish", 158);
+		this.field1517.draw(super.graphics, 4, (byte) 55, 4);
 		this.field1461 = 0;
 		ClientStream var2 = this.field1274;
 		this.ingame = false;
@@ -1707,8 +1707,8 @@ public class client extends GameShell {
 		this.field1345 = "";
 		this.field1451 = false;
 		for (int var3 = 0; var3 < Component.types.length; var3++) {
-			if (Component.types[var3] != null && Component.types[var3].field82 == 600) {
-				this.field1192 = this.field1273 = Component.types[var3].field79;
+			if (Component.types[var3] != null && Component.types[var3].clientCode == 600) {
+				this.field1192 = this.field1273 = Component.types[var3].layer;
 				return;
 			}
 		}
@@ -1720,7 +1720,7 @@ public class client extends GameShell {
 		if (arg1 != 102) {
 			this.field1404.p1(206);
 		}
-		int var3 = arg0.field82;
+		int var3 = arg0.clientCode;
 		if (var3 >= 1 && var3 <= 100 || !(var3 < 701 || var3 > 800)) {
 			if (var3 > 700) {
 				var3 -= 601;
@@ -1728,11 +1728,11 @@ public class client extends GameShell {
 				var3--;
 			}
 			if (var3 >= this.field1418) {
-				arg0.field113 = "";
-				arg0.field81 = 0;
+				arg0.text = "";
+				arg0.buttonType = 0;
 			} else {
-				arg0.field113 = this.field1556[var3];
-				arg0.field81 = 1;
+				arg0.text = this.field1556[var3];
+				arg0.buttonType = 1;
 			}
 		} else if (var3 >= 101 && var3 <= 200 || !(var3 < 801 || var3 > 900)) {
 			if (var3 > 800) {
@@ -1741,44 +1741,44 @@ public class client extends GameShell {
 				var3 -= 101;
 			}
 			if (var3 >= this.field1418) {
-				arg0.field113 = "";
-				arg0.field81 = 0;
+				arg0.text = "";
+				arg0.buttonType = 0;
 			} else {
 				if (this.field1470[var3] == 0) {
-					arg0.field113 = "@red@Offline";
+					arg0.text = "@red@Offline";
 				} else if (this.field1470[var3] == field1398) {
-					arg0.field113 = "@gre@World-" + (this.field1470[var3] - 9);
+					arg0.text = "@gre@World-" + (this.field1470[var3] - 9);
 				} else {
-					arg0.field113 = "@yel@World-" + (this.field1470[var3] - 9);
+					arg0.text = "@yel@World-" + (this.field1470[var3] - 9);
 				}
-				arg0.field81 = 1;
+				arg0.buttonType = 1;
 			}
 		} else if (var3 == 203) {
-			arg0.field92 = this.field1418 * 15 + 20;
-			if (arg0.field92 <= arg0.field84) {
-				arg0.field92 = arg0.field84 + 1;
+			arg0.scroll = this.field1418 * 15 + 20;
+			if (arg0.scroll <= arg0.height) {
+				arg0.scroll = arg0.height + 1;
 			}
 		} else if (var3 >= 401 && var3 <= 500) {
 			var3 -= 401;
 			if (var3 >= this.field1359) {
-				arg0.field113 = "";
-				arg0.field81 = 0;
+				arg0.text = "";
+				arg0.buttonType = 0;
 			} else {
-				arg0.field113 = JString.method313(true, JString.method310((byte) 88, this.field1339[var3]));
-				arg0.field81 = 1;
+				arg0.text = JString.method313(true, JString.method310((byte) 88, this.field1339[var3]));
+				arg0.buttonType = 1;
 			}
 		} else if (var3 == 503) {
-			arg0.field92 = this.field1359 * 15 + 20;
-			if (arg0.field92 <= arg0.field84) {
-				arg0.field92 = arg0.field84 + 1;
+			arg0.scroll = this.field1359 * 15 + 20;
+			if (arg0.scroll <= arg0.height) {
+				arg0.scroll = arg0.height + 1;
 			}
 		} else if (var3 == 327) {
-			arg0.field127 = 150;
-			arg0.field128 = (int) (Math.sin((double) loopCycle / 40.0D) * 256.0D) & 0x7FF;
+			arg0.xan = 150;
+			arg0.yan = (int) (Math.sin((double) loopCycle / 40.0D) * 256.0D) & 0x7FF;
 			if (this.field1196) {
 				for (int var4 = 0; var4 < 7; var4++) {
 					int var11 = this.field1597[var4];
-					if (var11 >= 0 && !IdkType.types[var11].method377(6)) {
+					if (var11 >= 0 && !IdkType.types[var11].validate(6)) {
 						return;
 					}
 				}
@@ -1788,7 +1788,7 @@ public class client extends GameShell {
 				for (int var7 = 0; var7 < 7; var7++) {
 					int var10 = this.field1597[var7];
 					if (var10 >= 0) {
-						var5[var6++] = IdkType.types[var10].method378(597);
+						var5[var6++] = IdkType.types[var10].getModel(597);
 					}
 				}
 				Model var8 = new Model(var6, 652, var5);
@@ -1800,55 +1800,55 @@ public class client extends GameShell {
 						}
 					}
 				}
-				var8.method145(-591);
-				var8.method146(SeqType.types[localPlayer.field409].frames[0], 13056);
+				var8.createLabelReferences(-591);
+				var8.applyTransform(SeqType.types[localPlayer.field409].frames[0], 13056);
 				var8.calculateNormals(64, 850, -30, -50, -30, true);
-				arg0.field120 = 5;
-				arg0.field121 = 0;
-				Component.method36(var8, 675, 0, 5);
+				arg0.modelType = 5;
+				arg0.model = 0;
+				Component.cacheModel(var8, 675, 0, 5);
 			}
 		} else if (var3 == 324) {
 			if (this.field1435 == null) {
-				this.field1435 = arg0.field118;
-				this.field1436 = arg0.field119;
+				this.field1435 = arg0.graphic;
+				this.field1436 = arg0.activeGraphic;
 			}
 			if (this.field1570) {
-				arg0.field118 = this.field1436;
+				arg0.graphic = this.field1436;
 			} else {
-				arg0.field118 = this.field1435;
+				arg0.graphic = this.field1435;
 			}
 		} else if (var3 == 325) {
 			if (this.field1435 == null) {
-				this.field1435 = arg0.field118;
-				this.field1436 = arg0.field119;
+				this.field1435 = arg0.graphic;
+				this.field1436 = arg0.activeGraphic;
 			}
 			if (this.field1570) {
-				arg0.field118 = this.field1435;
+				arg0.graphic = this.field1435;
 			} else {
-				arg0.field118 = this.field1436;
+				arg0.graphic = this.field1436;
 			}
 		} else if (var3 == 600) {
-			arg0.field113 = this.field1345;
+			arg0.text = this.field1345;
 			if (loopCycle % 20 < 10) {
-				arg0.field113 = arg0.field113 + "|";
+				arg0.text = arg0.text + "|";
 			} else {
-				arg0.field113 = arg0.field113 + " ";
+				arg0.text = arg0.text + " ";
 			}
 		} else {
 			if (var3 == 613) {
 				if (this.field1378 < 1) {
-					arg0.field113 = "";
+					arg0.text = "";
 				} else if (this.field1451) {
-					arg0.field115 = 16711680;
-					arg0.field113 = "Moderator option: Mute player for 48 hours: <ON>";
+					arg0.colour = 16711680;
+					arg0.text = "Moderator option: Mute player for 48 hours: <ON>";
 				} else {
-					arg0.field115 = 16777215;
-					arg0.field113 = "Moderator option: Mute player for 48 hours: <OFF>";
+					arg0.colour = 16777215;
+					arg0.text = "Moderator option: Mute player for 48 hours: <OFF>";
 				}
 			}
 			if (var3 == 650 || var3 == 655) {
 				if (this.field1487 == 0) {
-					arg0.field113 = "";
+					arg0.text = "";
 				} else {
 					String var12;
 					if (this.field1529 == 0) {
@@ -1858,32 +1858,32 @@ public class client extends GameShell {
 					} else {
 						var12 = this.field1529 + " days ago";
 					}
-					arg0.field113 = "You last logged in " + var12 + " from: " + signlink.dns;
+					arg0.text = "You last logged in " + var12 + " from: " + signlink.dns;
 				}
 			}
 			if (var3 == 651) {
 				if (this.field1189 == 0) {
-					arg0.field113 = "0 unread messages";
-					arg0.field115 = 16776960;
+					arg0.text = "0 unread messages";
+					arg0.colour = 16776960;
 				}
 				if (this.field1189 == 1) {
-					arg0.field113 = "1 unread message";
-					arg0.field115 = 65280;
+					arg0.text = "1 unread message";
+					arg0.colour = 65280;
 				}
 				if (this.field1189 > 1) {
-					arg0.field113 = this.field1189 + " unread messages";
-					arg0.field115 = 65280;
+					arg0.text = this.field1189 + " unread messages";
+					arg0.colour = 65280;
 				}
 			}
 			if (var3 == 652) {
 				if (this.field1238 == 201) {
 					if (this.field1425 == 1) {
-						arg0.field113 = "@yel@This is a non-members world: @whi@Since you are a member we";
+						arg0.text = "@yel@This is a non-members world: @whi@Since you are a member we";
 					} else {
-						arg0.field113 = "";
+						arg0.text = "";
 					}
 				} else if (this.field1238 == 200) {
-					arg0.field113 = "You have not yet set any password recovery questions.";
+					arg0.text = "You have not yet set any password recovery questions.";
 				} else {
 					String var13;
 					if (this.field1238 == 0) {
@@ -1893,33 +1893,33 @@ public class client extends GameShell {
 					} else {
 						var13 = this.field1238 + " days ago";
 					}
-					arg0.field113 = var13 + " you changed your recovery questions";
+					arg0.text = var13 + " you changed your recovery questions";
 				}
 			}
 			if (var3 == 653) {
 				if (this.field1238 == 201) {
 					if (this.field1425 == 1) {
-						arg0.field113 = "@whi@recommend you use a members world instead. You may use";
+						arg0.text = "@whi@recommend you use a members world instead. You may use";
 					} else {
-						arg0.field113 = "";
+						arg0.text = "";
 					}
 				} else if (this.field1238 == 200) {
-					arg0.field113 = "We strongly recommend you do so now to secure your account.";
+					arg0.text = "We strongly recommend you do so now to secure your account.";
 				} else {
-					arg0.field113 = "If you do not remember making this change then cancel it immediately";
+					arg0.text = "If you do not remember making this change then cancel it immediately";
 				}
 			}
 			if (var3 == 654) {
 				if (this.field1238 == 201) {
 					if (this.field1425 == 1) {
-						arg0.field113 = "@whi@this world but member benefits are unavailabe whilst here.";
+						arg0.text = "@whi@this world but member benefits are unavailabe whilst here.";
 					} else {
-						arg0.field113 = "";
+						arg0.text = "";
 					}
 				} else if (this.field1238 == 200) {
-					arg0.field113 = "Do this from the 'account management' area on our front webpage";
+					arg0.text = "Do this from the 'account management' area on our front webpage";
 				} else {
-					arg0.field113 = "Do this from the 'account management' area on our front webpage";
+					arg0.text = "Do this from the 'account management' area on our front webpage";
 				}
 			}
 		}
@@ -1941,7 +1941,7 @@ public class client extends GameShell {
 					int var14 = this.field1201[this.field1564 - 1];
 					int var15 = this.field1202[this.field1564 - 1];
 					Component var16 = Component.types[var15];
-					if (var16.field100) {
+					if (var16.draggable) {
 						this.field1232 = false;
 						this.field1254 = 0;
 						this.field1259 = var15;
@@ -1949,10 +1949,10 @@ public class client extends GameShell {
 						this.field1261 = 2;
 						this.field1262 = super.mouseClickX;
 						this.field1263 = super.mouseClickY;
-						if (Component.types[var15].field79 == this.field1273) {
+						if (Component.types[var15].layer == this.field1273) {
 							this.field1261 = 1;
 						}
-						if (Component.types[var15].field79 == this.field1396) {
+						if (Component.types[var15].layer == this.field1396) {
 							this.field1261 = 3;
 						}
 						return;
@@ -2040,57 +2040,57 @@ public class client extends GameShell {
 	public final void method435(boolean arg0) {
 		byte[] var2 = this.field1390.read("title.dat", null);
 		Pix32 var3 = new Pix32(var2, this);
-		this.field1367.method267(212);
-		var3.method196(0, 0, 7);
-		this.field1368.method267(212);
-		var3.method196(-637, 0, 7);
-		this.field1364.method267(212);
-		var3.method196(-128, 0, 7);
-		this.field1365.method267(212);
-		var3.method196(-202, -371, 7);
-		this.field1366.method267(212);
-		var3.method196(-202, -171, 7);
-		this.field1369.method267(212);
+		this.field1367.bind(212);
+		var3.blitOpaque(0, 0, 7);
+		this.field1368.bind(212);
+		var3.blitOpaque(-637, 0, 7);
+		this.field1364.bind(212);
+		var3.blitOpaque(-128, 0, 7);
+		this.field1365.bind(212);
+		var3.blitOpaque(-202, -371, 7);
+		this.field1366.bind(212);
+		var3.blitOpaque(-202, -171, 7);
+		this.field1369.bind(212);
 		if (!arg0) {
 			this.ptype = this.in.g1();
 		}
-		var3.method196(0, -265, 7);
-		this.field1370.method267(212);
-		var3.method196(-562, -265, 7);
-		this.field1371.method267(212);
-		var3.method196(-128, -171, 7);
-		this.field1372.method267(212);
-		var3.method196(-562, -171, 7);
-		int[] var4 = new int[var3.field671];
-		for (int var5 = 0; var5 < var3.field672; var5++) {
-			for (int var10 = 0; var10 < var3.field671; var10++) {
-				var4[var10] = var3.field670[var3.field671 * var5 + (var3.field671 - var10 - 1)];
+		var3.blitOpaque(0, -265, 7);
+		this.field1370.bind(212);
+		var3.blitOpaque(-562, -265, 7);
+		this.field1371.bind(212);
+		var3.blitOpaque(-128, -171, 7);
+		this.field1372.bind(212);
+		var3.blitOpaque(-562, -171, 7);
+		int[] var4 = new int[var3.cropRight];
+		for (int var5 = 0; var5 < var3.cropBottom; var5++) {
+			for (int var10 = 0; var10 < var3.cropRight; var10++) {
+				var4[var10] = var3.pixels[var3.cropRight * var5 + (var3.cropRight - var10 - 1)];
 			}
-			for (int var11 = 0; var11 < var3.field671; var11++) {
-				var3.field670[var3.field671 * var5 + var11] = var4[var11];
+			for (int var11 = 0; var11 < var3.cropRight; var11++) {
+				var3.pixels[var3.cropRight * var5 + var11] = var4[var11];
 			}
 		}
-		this.field1367.method267(212);
-		var3.method196(382, 0, 7);
-		this.field1368.method267(212);
-		var3.method196(-255, 0, 7);
-		this.field1364.method267(212);
-		var3.method196(254, 0, 7);
-		this.field1365.method267(212);
-		var3.method196(180, -371, 7);
-		this.field1366.method267(212);
-		var3.method196(180, -171, 7);
-		this.field1369.method267(212);
-		var3.method196(382, -265, 7);
-		this.field1370.method267(212);
-		var3.method196(-180, -265, 7);
-		this.field1371.method267(212);
-		var3.method196(254, -171, 7);
-		this.field1372.method267(212);
-		var3.method196(-180, -171, 7);
+		this.field1367.bind(212);
+		var3.blitOpaque(382, 0, 7);
+		this.field1368.bind(212);
+		var3.blitOpaque(-255, 0, 7);
+		this.field1364.bind(212);
+		var3.blitOpaque(254, 0, 7);
+		this.field1365.bind(212);
+		var3.blitOpaque(180, -371, 7);
+		this.field1366.bind(212);
+		var3.blitOpaque(180, -171, 7);
+		this.field1369.bind(212);
+		var3.blitOpaque(382, -265, 7);
+		this.field1370.bind(212);
+		var3.blitOpaque(-180, -265, 7);
+		this.field1371.bind(212);
+		var3.blitOpaque(254, -171, 7);
+		this.field1372.bind(212);
+		var3.blitOpaque(-180, -171, 7);
 		Pix32 var6 = new Pix32(this.field1390, "logo", 0);
-		this.field1364.method267(212);
-		var6.method198((byte) 9, 382 - var6.field671 / 2 - 128, 18);
+		this.field1364.bind(212);
+		var6.draw((byte) 9, 382 - var6.cropRight / 2 - 128, 18);
 		Object var7 = null;
 		Object var8 = null;
 		Object var9 = null;
@@ -2107,7 +2107,7 @@ public class client extends GameShell {
 		int var8 = var7 & 0x1F;
 		int var9 = var7 >> 6 & 0x3;
 		if (var8 == 10 || var8 == 11 || var8 == 22) {
-			LocType var10 = LocType.method333(var6);
+			LocType var10 = LocType.get(var6);
 			int var11;
 			int var12;
 			if (var9 == 0 || var9 == 2) {
@@ -2209,7 +2209,7 @@ public class client extends GameShell {
 
 	@ObfuscatedName("client.a(Lz;I)V")
 	public final void method440(PathingEntity arg0, int arg1) {
-		if (loopCycle == arg0.field447 || arg0.field432 == -1 || arg0.field435 != 0 || arg0.field434 + 1 > SeqType.types[arg0.field432].method382(0, arg0.field433)) {
+		if (loopCycle == arg0.field447 || arg0.field432 == -1 || arg0.field435 != 0 || arg0.field434 + 1 > SeqType.types[arg0.field432].getFrameDuration(0, arg0.field433)) {
 			int var3 = arg0.field447 - arg0.field446;
 			int var4 = loopCycle - arg0.field446;
 			int var5 = arg0.field442 * 128 + arg0.field408 * 64;
@@ -2427,7 +2427,7 @@ public class client extends GameShell {
 		if (arg0.field429 != -1) {
 			SeqType var3 = SeqType.types[arg0.field429];
 			arg0.field431++;
-			if (arg0.field430 < var3.frameCount && arg0.field431 > var3.method382(0, arg0.field430)) {
+			if (arg0.field430 < var3.frameCount && arg0.field431 > var3.getFrameDuration(0, arg0.field430)) {
 				arg0.field431 = 0;
 				arg0.field430++;
 			}
@@ -2442,8 +2442,8 @@ public class client extends GameShell {
 			}
 			SeqType var4 = SpotAnimType.types[arg0.field437].seq;
 			arg0.field439++;
-			while (arg0.field438 < var4.frameCount && arg0.field439 > var4.method382(0, arg0.field438)) {
-				arg0.field439 -= var4.method382(0, arg0.field438);
+			while (arg0.field438 < var4.frameCount && arg0.field439 > var4.getFrameDuration(0, arg0.field438)) {
+				arg0.field439 -= var4.getFrameDuration(0, arg0.field438);
 				arg0.field438++;
 			}
 			if (arg0.field438 >= var4.frameCount && (arg0.field438 < 0 || arg0.field438 >= var4.frameCount)) {
@@ -2460,8 +2460,8 @@ public class client extends GameShell {
 		if (arg0.field432 != -1 && arg0.field435 == 0) {
 			SeqType var6 = SeqType.types[arg0.field432];
 			arg0.field434++;
-			while (arg0.field433 < var6.frameCount && arg0.field434 > var6.method382(0, arg0.field433)) {
-				arg0.field434 -= var6.method382(0, arg0.field433);
+			while (arg0.field433 < var6.frameCount && arg0.field434 > var6.getFrameDuration(0, arg0.field433)) {
+				arg0.field434 -= var6.getFrameDuration(0, arg0.field433);
 				arg0.field433++;
 			}
 			if (arg0.field433 >= var6.frameCount) {
@@ -2485,22 +2485,22 @@ public class client extends GameShell {
 	public final void drawGame(int arg0) {
 		if (this.field1483) {
 			this.field1483 = false;
-			this.field1313.method268(super.graphics, 4, (byte) 55, 0);
-			this.field1314.method268(super.graphics, 357, (byte) 55, 0);
-			this.field1315.method268(super.graphics, 4, (byte) 55, 722);
-			this.field1316.method268(super.graphics, 205, (byte) 55, 743);
-			this.field1317.method268(super.graphics, 0, (byte) 55, 0);
-			this.field1318.method268(super.graphics, 4, (byte) 55, 516);
-			this.field1319.method268(super.graphics, 205, (byte) 55, 516);
-			this.field1320.method268(super.graphics, 357, (byte) 55, 496);
-			this.field1321.method268(super.graphics, 338, (byte) 55, 0);
+			this.field1313.draw(super.graphics, 4, (byte) 55, 0);
+			this.field1314.draw(super.graphics, 357, (byte) 55, 0);
+			this.field1315.draw(super.graphics, 4, (byte) 55, 722);
+			this.field1316.draw(super.graphics, 205, (byte) 55, 743);
+			this.field1317.draw(super.graphics, 0, (byte) 55, 0);
+			this.field1318.draw(super.graphics, 4, (byte) 55, 516);
+			this.field1319.draw(super.graphics, 205, (byte) 55, 516);
+			this.field1320.draw(super.graphics, 357, (byte) 55, 496);
+			this.field1321.draw(super.graphics, 338, (byte) 55, 0);
 			this.field1221 = true;
 			this.field1236 = true;
 			this.field1384 = true;
 			this.field1616 = true;
 			if (this.field1527 != 2) {
-				this.field1517.method268(super.graphics, 4, (byte) 55, 4);
-				this.field1516.method268(super.graphics, 4, (byte) 55, 550);
+				this.field1517.draw(super.graphics, 4, (byte) 55, 4);
+				this.field1516.draw(super.graphics, 4, (byte) 55, 550);
 			}
 		}
 		if (this.field1527 == 2) {
@@ -2566,7 +2566,7 @@ public class client extends GameShell {
 		}
 		if (this.field1527 == 2) {
 			this.method456(false);
-			this.field1516.method268(super.graphics, 4, (byte) 55, 550);
+			this.field1516.draw(super.graphics, 4, (byte) 55, 550);
 		}
 		if (this.field1253 != -1) {
 			this.field1384 = true;
@@ -2578,7 +2578,7 @@ public class client extends GameShell {
 				this.field1404.p1(this.field1225);
 			}
 			this.field1384 = false;
-			this.field1327.method267(212);
+			this.field1327.bind(212);
 			this.field1424.method211((byte) 9, 0, 0);
 			if (this.field1567 == -1) {
 				if (this.field1324[this.field1225] != -1) {
@@ -2626,8 +2626,8 @@ public class client extends GameShell {
 					this.field1593[6].method211((byte) 9, 208, 13);
 				}
 			}
-			this.field1327.method268(super.graphics, 160, (byte) 55, 516);
-			this.field1326.method267(212);
+			this.field1327.draw(super.graphics, 160, (byte) 55, 516);
+			this.field1326.bind(212);
 			this.field1423.method211((byte) 9, 0, 0);
 			if (this.field1567 == -1) {
 				if (this.field1324[this.field1225] != -1) {
@@ -2672,49 +2672,49 @@ public class client extends GameShell {
 					this.field1593[12].method211((byte) 9, 226, 2);
 				}
 			}
-			this.field1326.method268(super.graphics, 466, (byte) 55, 496);
-			this.field1517.method267(212);
+			this.field1326.draw(super.graphics, 466, (byte) 55, 496);
+			this.field1517.bind(212);
 		}
 		if (this.field1616) {
 			this.field1616 = false;
-			this.field1325.method267(212);
+			this.field1325.bind(212);
 			this.field1422.method211((byte) 9, 0, 0);
-			this.field1442.method214(55, true, "Public chat", true, 28, 16777215);
+			this.field1442.drawStringTaggableCenter(55, true, "Public chat", true, 28, 16777215);
 			if (this.field1408 == 0) {
-				this.field1442.method214(55, true, "On", true, 41, 65280);
+				this.field1442.drawStringTaggableCenter(55, true, "On", true, 41, 65280);
 			}
 			if (this.field1408 == 1) {
-				this.field1442.method214(55, true, "Friends", true, 41, 16776960);
+				this.field1442.drawStringTaggableCenter(55, true, "Friends", true, 41, 16776960);
 			}
 			if (this.field1408 == 2) {
-				this.field1442.method214(55, true, "Off", true, 41, 16711680);
+				this.field1442.drawStringTaggableCenter(55, true, "Off", true, 41, 16711680);
 			}
 			if (this.field1408 == 3) {
-				this.field1442.method214(55, true, "Hide", true, 41, 65535);
+				this.field1442.drawStringTaggableCenter(55, true, "Hide", true, 41, 65535);
 			}
-			this.field1442.method214(184, true, "Private chat", true, 28, 16777215);
+			this.field1442.drawStringTaggableCenter(184, true, "Private chat", true, 28, 16777215);
 			if (this.field1576 == 0) {
-				this.field1442.method214(184, true, "On", true, 41, 65280);
+				this.field1442.drawStringTaggableCenter(184, true, "On", true, 41, 65280);
 			}
 			if (this.field1576 == 1) {
-				this.field1442.method214(184, true, "Friends", true, 41, 16776960);
+				this.field1442.drawStringTaggableCenter(184, true, "Friends", true, 41, 16776960);
 			}
 			if (this.field1576 == 2) {
-				this.field1442.method214(184, true, "Off", true, 41, 16711680);
+				this.field1442.drawStringTaggableCenter(184, true, "Off", true, 41, 16711680);
 			}
-			this.field1442.method214(324, true, "Trade/duel", true, 28, 16777215);
+			this.field1442.drawStringTaggableCenter(324, true, "Trade/duel", true, 28, 16777215);
 			if (this.field1275 == 0) {
-				this.field1442.method214(324, true, "On", true, 41, 65280);
+				this.field1442.drawStringTaggableCenter(324, true, "On", true, 41, 65280);
 			}
 			if (this.field1275 == 1) {
-				this.field1442.method214(324, true, "Friends", true, 41, 16776960);
+				this.field1442.drawStringTaggableCenter(324, true, "Friends", true, 41, 16776960);
 			}
 			if (this.field1275 == 2) {
-				this.field1442.method214(324, true, "Off", true, 41, 16711680);
+				this.field1442.drawStringTaggableCenter(324, true, "Off", true, 41, 16711680);
 			}
-			this.field1442.method214(458, true, "Report abuse", true, 33, 16777215);
-			this.field1325.method268(super.graphics, 453, (byte) 55, 0);
-			this.field1517.method267(212);
+			this.field1442.drawStringTaggableCenter(458, true, "Report abuse", true, 33, 16777215);
+			this.field1325.draw(super.graphics, 453, (byte) 55, 0);
+			this.field1517.bind(212);
 		}
 		this.field1488 = 0;
 		if (arg0 >= 0) {
@@ -2744,7 +2744,7 @@ public class client extends GameShell {
 			if (var2 != var4) {
 				var2 = var4;
 				if (var7 == 2 && this.field1258.method93(this.field1479, var5, var6, var4) >= 0) {
-					LocType var9 = LocType.method333(var8);
+					LocType var9 = LocType.get(var8);
 					if (this.field1497 == 1) {
 						this.field1579[this.field1564] = "Use " + this.field1501 + " with @cya@" + var9.name;
 						this.field1203[this.field1564] = 450;
@@ -2941,7 +2941,7 @@ public class client extends GameShell {
 		double var13 = Math.atan2((double) var11, (double) var12);
 		int var15 = (int) (Math.sin(var13) * 63.0D);
 		int var16 = (int) (Math.cos(var13) * 57.0D);
-		this.field1552.method203(83 - var16 - 20, (byte) 0, var13, 256, 15, 15, 20, 20, var15 + 94 + 4 - 10);
+		this.field1552.drawRotated(83 - var16 - 20, (byte) 0, var13, 256, 15, 15, 20, 20, var15 + 94 + 4 - 10);
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;Ljava/lang/String;Z)V")
@@ -3423,9 +3423,9 @@ public class client extends GameShell {
 				if ((var5 == 3 || var5 == 7) && (var5 == 7 || this.field1576 == 0 || this.field1576 == 1 && this.method502(var6, (byte) 1))) {
 					int var8 = 329 - var3 * 13;
 					byte var9 = 4;
-					var2.method216("From", 0, (byte) 8, var8, var9);
-					var2.method216("From", 65535, (byte) 8, var8 - 1, var9);
-					int var10 = var9 + var2.method215("From ", (byte) 4);
+					var2.drawString("From", 0, (byte) 8, var8, var9);
+					var2.drawString("From", 65535, (byte) 8, var8 - 1, var9);
+					int var10 = var9 + var2.stringWidth("From ", (byte) 4);
 					if (var7 == 1) {
 						this.field1332[0].method211((byte) 9, var10, var8 - 12);
 						var10 += 14;
@@ -3434,8 +3434,8 @@ public class client extends GameShell {
 						this.field1332[1].method211((byte) 9, var10, var8 - 12);
 						var10 += 14;
 					}
-					var2.method216(var6 + ": " + this.field1431[var4], 0, (byte) 8, var8, var10);
-					var2.method216(var6 + ": " + this.field1431[var4], 65535, (byte) 8, var8 - 1, var10);
+					var2.drawString(var6 + ": " + this.field1431[var4], 0, (byte) 8, var8, var10);
+					var2.drawString(var6 + ": " + this.field1431[var4], 65535, (byte) 8, var8 - 1, var10);
 					var3++;
 					if (var3 >= 5) {
 						return;
@@ -3443,8 +3443,8 @@ public class client extends GameShell {
 				}
 				if (var5 == 5 && this.field1576 < 2) {
 					int var11 = 329 - var3 * 13;
-					var2.method216(this.field1431[var4], 0, (byte) 8, var11, 4);
-					var2.method216(this.field1431[var4], 65535, (byte) 8, var11 - 1, 4);
+					var2.drawString(this.field1431[var4], 0, (byte) 8, var11, 4);
+					var2.drawString(this.field1431[var4], 65535, (byte) 8, var11 - 1, 4);
 					var3++;
 					if (var3 >= 5) {
 						return;
@@ -3452,8 +3452,8 @@ public class client extends GameShell {
 				}
 				if (var5 == 6 && this.field1576 < 2) {
 					int var12 = 329 - var3 * 13;
-					var2.method216("To " + var6 + ": " + this.field1431[var4], 0, (byte) 8, var12, 4);
-					var2.method216("To " + var6 + ": " + this.field1431[var4], 65535, (byte) 8, var12 - 1, 4);
+					var2.drawString("To " + var6 + ": " + this.field1431[var4], 0, (byte) 8, var12, 4);
+					var2.drawString("To " + var6 + ": " + this.field1431[var4], 65535, (byte) 8, var12 - 1, 4);
 					var3++;
 					if (var3 >= 5) {
 						return;
@@ -3484,20 +3484,20 @@ public class client extends GameShell {
 		if (this.field1564 > 2) {
 			var3 = var3 + "@whi@ / " + (this.field1564 - 2) + " more options";
 		}
-		this.field1443.method219(true, loopCycle / 1000, 4, 15, 7019, 16777215, var3);
+		this.field1443.drawStringTooltip(true, loopCycle / 1000, 4, 15, 7019, 16777215, var3);
 	}
 
 	@ObfuscatedName("client.f(Z)V")
 	public final void method456(boolean arg0) {
-		this.field1516.method267(212);
+		this.field1516.bind(212);
 		int var2 = this.field1560 + this.field1533 & 0x7FF;
 		int var3 = localPlayer.field404 / 32 + 48;
 		if (arg0) {
 			this.field1404.p1(242);
 		}
 		int var4 = 464 - localPlayer.field405 / 32;
-		this.field1463.method202(25, var4, 146, this.field1330 + 256, 5, var2, this.field1538, this.field1207, this.field1505, var3, 151);
-		this.field1478.method202(0, 25, 33, 256, 0, this.field1560, this.field1538, this.field1607, this.field1427, 25, 33);
+		this.field1463.drawRotatedMasked(25, var4, 146, this.field1330 + 256, 5, var2, this.field1538, this.field1207, this.field1505, var3, 151);
+		this.field1478.drawRotatedMasked(0, 25, 33, 256, 0, this.field1560, this.field1538, this.field1607, this.field1427, 25, 33);
 		for (int var5 = 0; var5 < this.field1210; var5++) {
 			int var33 = this.field1211[var5] * 4 + 2 - localPlayer.field404 / 32;
 			int var34 = this.field1212[var5] * 4 + 2 - localPlayer.field405 / 32;
@@ -3569,8 +3569,8 @@ public class client extends GameShell {
 			int var18 = this.field1462 * 4 + 2 - localPlayer.field405 / 32;
 			this.method553(var17, false, this.field1473, var18);
 		}
-		Pix2D.method169(0, 16777215, 3, 3, 97, 78);
-		this.field1517.method267(212);
+		Pix2D.fillRect(0, 16777215, 3, 3, 97, 78);
+		this.field1517.bind(212);
 	}
 
 	@ObfuscatedName("client.a(ILjava/lang/String;ILjava/lang/String;II)Lyb;")
@@ -3895,7 +3895,7 @@ public class client extends GameShell {
 			}
 			this.field1478 = new Pix32(var11, "compass", 0);
 			this.field1552 = new Pix32(var11, "mapedge", 0);
-			this.field1552.method195(false);
+			this.field1552.crop(false);
 			try {
 				for (int var34 = 0; var34 < 50; var34++) {
 					this.field1574[var34] = new Pix8(var11, "mapscene", var34);
@@ -3954,39 +3954,39 @@ public class client extends GameShell {
 				this.field1332[var39] = new Pix8(var11, "mod_icons", var39);
 			}
 			Pix32 var40 = new Pix32(var11, "backleft1", 0);
-			this.field1313 = new PixMap(this.getBaseComponent(3), var40.field672, var40.field671, 2);
-			var40.method196(0, 0, 7);
+			this.field1313 = new PixMap(this.getBaseComponent(3), var40.cropBottom, var40.cropRight, 2);
+			var40.blitOpaque(0, 0, 7);
 			Pix32 var41 = new Pix32(var11, "backleft2", 0);
-			this.field1314 = new PixMap(this.getBaseComponent(3), var41.field672, var41.field671, 2);
-			var41.method196(0, 0, 7);
+			this.field1314 = new PixMap(this.getBaseComponent(3), var41.cropBottom, var41.cropRight, 2);
+			var41.blitOpaque(0, 0, 7);
 			Pix32 var42 = new Pix32(var11, "backright1", 0);
-			this.field1315 = new PixMap(this.getBaseComponent(3), var42.field672, var42.field671, 2);
-			var42.method196(0, 0, 7);
+			this.field1315 = new PixMap(this.getBaseComponent(3), var42.cropBottom, var42.cropRight, 2);
+			var42.blitOpaque(0, 0, 7);
 			Pix32 var43 = new Pix32(var11, "backright2", 0);
-			this.field1316 = new PixMap(this.getBaseComponent(3), var43.field672, var43.field671, 2);
-			var43.method196(0, 0, 7);
+			this.field1316 = new PixMap(this.getBaseComponent(3), var43.cropBottom, var43.cropRight, 2);
+			var43.blitOpaque(0, 0, 7);
 			Pix32 var44 = new Pix32(var11, "backtop1", 0);
-			this.field1317 = new PixMap(this.getBaseComponent(3), var44.field672, var44.field671, 2);
-			var44.method196(0, 0, 7);
+			this.field1317 = new PixMap(this.getBaseComponent(3), var44.cropBottom, var44.cropRight, 2);
+			var44.blitOpaque(0, 0, 7);
 			Pix32 var45 = new Pix32(var11, "backvmid1", 0);
-			this.field1318 = new PixMap(this.getBaseComponent(3), var45.field672, var45.field671, 2);
-			var45.method196(0, 0, 7);
+			this.field1318 = new PixMap(this.getBaseComponent(3), var45.cropBottom, var45.cropRight, 2);
+			var45.blitOpaque(0, 0, 7);
 			Pix32 var46 = new Pix32(var11, "backvmid2", 0);
-			this.field1319 = new PixMap(this.getBaseComponent(3), var46.field672, var46.field671, 2);
-			var46.method196(0, 0, 7);
+			this.field1319 = new PixMap(this.getBaseComponent(3), var46.cropBottom, var46.cropRight, 2);
+			var46.blitOpaque(0, 0, 7);
 			Pix32 var47 = new Pix32(var11, "backvmid3", 0);
-			this.field1320 = new PixMap(this.getBaseComponent(3), var47.field672, var47.field671, 2);
-			var47.method196(0, 0, 7);
+			this.field1320 = new PixMap(this.getBaseComponent(3), var47.cropBottom, var47.cropRight, 2);
+			var47.blitOpaque(0, 0, 7);
 			Pix32 var48 = new Pix32(var11, "backhmid2", 0);
-			this.field1321 = new PixMap(this.getBaseComponent(3), var48.field672, var48.field671, 2);
-			var48.method196(0, 0, 7);
+			this.field1321 = new PixMap(this.getBaseComponent(3), var48.cropBottom, var48.cropRight, 2);
+			var48.blitOpaque(0, 0, 7);
 			int var49 = (int) (Math.random() * 21.0D) - 10;
 			int var50 = (int) (Math.random() * 21.0D) - 10;
 			int var51 = (int) (Math.random() * 21.0D) - 10;
 			int var52 = (int) (Math.random() * 41.0D) - 20;
 			for (int var53 = 0; var53 < 50; var53++) {
 				if (this.field1566[var53] != null) {
-					this.field1566[var53].method194(var49 + var52, var51 + var52, 8, var50 + var52);
+					this.field1566[var53].translate(var49 + var52, var51 + var52, 8, var50 + var52);
 				}
 				if (this.field1574[var53] != null) {
 					this.field1574[var53].method210(var49 + var52, var51 + var52, 8, var50 + var52);
@@ -4014,7 +4014,7 @@ public class client extends GameShell {
 			}
 			this.drawProgress(7, 95, "Unpacking interfaces");
 			PixFont[] var56 = new PixFont[] { this.field1441, this.field1442, this.field1443, this.field1444 };
-			Component.method32(var10, 0, var11, var56);
+			Component.unpack(var10, 0, var11, var56);
 			this.drawProgress(7, 100, "Preparing game engine");
 			for (int var57 = 0; var57 < 33; var57++) {
 				int var58 = 999;
@@ -4049,11 +4049,11 @@ public class client extends GameShell {
 				this.field1207[var61 - 5] = var63 - var62;
 			}
 			Pix3D.method178(-130, 96, 479);
-			this.field1353 = Pix3D.field653;
+			this.field1353 = Pix3D.lineOffset;
 			Pix3D.method178(-130, 261, 190);
-			this.field1354 = Pix3D.field653;
+			this.field1354 = Pix3D.lineOffset;
 			Pix3D.method178(-130, 334, 512);
-			this.field1355 = Pix3D.field653;
+			this.field1355 = Pix3D.lineOffset;
 			int[] var65 = new int[9];
 			for (int var66 = 0; var66 < 9; var66++) {
 				int var67 = var66 * 32 + 128 + 15;
@@ -4224,13 +4224,13 @@ public class client extends GameShell {
 					if (var21.headicon >= 0 && var21.headicon < this.field1389.length) {
 						this.method479(this.field1433, var17.field450 + 15, var17);
 						if (this.field1294 > -1) {
-							this.field1389[var21.headicon].method198((byte) 9, this.field1294 - 12, this.field1295 - 30);
+							this.field1389[var21.headicon].draw((byte) 9, this.field1294 - 12, this.field1295 - 30);
 						}
 					}
 					if (this.field1581 == 1 && this.field1440[var2 - this.field1286] == this.field1277 && loopCycle % 20 < 10) {
 						this.method479(this.field1433, var17.field450 + 15, var17);
 						if (this.field1294 > -1) {
-							this.field1389[2].method198((byte) 9, this.field1294 - 12, this.field1295 - 28);
+							this.field1389[2].draw((byte) 9, this.field1294 - 12, this.field1295 - 28);
 						}
 					}
 				} else {
@@ -4241,7 +4241,7 @@ public class client extends GameShell {
 						if (this.field1294 > -1) {
 							for (int var20 = 0; var20 < 8; var20++) {
 								if ((var19.field468 & 0x1 << var20) != 0) {
-									this.field1389[var20].method198((byte) 9, this.field1294 - 12, this.field1295 - var18);
+									this.field1389[var20].draw((byte) 9, this.field1294 - 12, this.field1295 - var18);
 									var18 -= 25;
 								}
 							}
@@ -4250,15 +4250,15 @@ public class client extends GameShell {
 					if (var2 >= 0 && this.field1581 == 10 && this.field1287[var2] == this.field1415) {
 						this.method479(this.field1433, var17.field450 + 15, var17);
 						if (this.field1294 > -1) {
-							this.field1389[7].method198((byte) 9, this.field1294 - 12, this.field1295 - var18);
+							this.field1389[7].draw((byte) 9, this.field1294 - 12, this.field1295 - var18);
 						}
 					}
 				}
 				if (var17.field416 != null && (var2 >= this.field1286 || this.field1408 == 0 || this.field1408 == 3 || this.field1408 == 1 && this.method502(((PlayerEntity) var17).field465, (byte) 1))) {
 					this.method479(this.field1433, var17.field450, var17);
 					if (this.field1294 > -1 && this.field1627 < this.field1628) {
-						this.field1632[this.field1627] = this.field1443.method215(var17.field416, (byte) 4) / 2;
-						this.field1631[this.field1627] = this.field1443.field704;
+						this.field1632[this.field1627] = this.field1443.stringWidth(var17.field416, (byte) 4) / 2;
+						this.field1631[this.field1627] = this.field1443.height;
 						this.field1629[this.field1627] = this.field1294;
 						this.field1630[this.field1627] = this.field1295;
 						this.field1633[this.field1627] = var17.field418;
@@ -4281,8 +4281,8 @@ public class client extends GameShell {
 						if (var22 > 30) {
 							var22 = 30;
 						}
-						Pix2D.method169(0, 65280, var22, 5, this.field1294 - 15, this.field1295 - 3);
-						Pix2D.method169(0, 16711680, 30 - var22, 5, this.field1294 - 15 + var22, this.field1295 - 3);
+						Pix2D.fillRect(0, 65280, var22, 5, this.field1294 - 15, this.field1295 - 3);
+						Pix2D.fillRect(0, 16711680, 30 - var22, 5, this.field1294 - 15 + var22, this.field1295 - 3);
 					}
 				}
 				for (int var23 = 0; var23 < 4; var23++) {
@@ -4300,9 +4300,9 @@ public class client extends GameShell {
 								this.field1294 += 15;
 								this.field1295 -= 10;
 							}
-							this.field1514[var17.field421[var23]].method198((byte) 9, this.field1294 - 12, this.field1295 - 12);
-							this.field1441.method213(this.field1294, 1, 0, String.valueOf(var17.field420[var23]), this.field1295 + 4);
-							this.field1441.method213(this.field1294 - 1, 1, 16777215, String.valueOf(var17.field420[var23]), this.field1295 + 3);
+							this.field1514[var17.field421[var23]].draw((byte) 9, this.field1294 - 12, this.field1295 - 12);
+							this.field1441.drawStringCenter(this.field1294, 1, 0, String.valueOf(var17.field420[var23]), this.field1295 + 4);
+							this.field1441.drawStringCenter(this.field1294 - 1, 1, 16777215, String.valueOf(var17.field420[var23]), this.field1295 + 3);
 						}
 					}
 				}
@@ -4371,24 +4371,24 @@ public class client extends GameShell {
 					}
 				}
 				if (this.field1634[var3] == 0) {
-					this.field1443.method213(this.field1294, 1, 0, var9, this.field1295 + 1);
-					this.field1443.method213(this.field1294, 1, var10, var9, this.field1295);
+					this.field1443.drawStringCenter(this.field1294, 1, 0, var9, this.field1295 + 1);
+					this.field1443.drawStringCenter(this.field1294, 1, var10, var9, this.field1295);
 				}
 				if (this.field1634[var3] == 1) {
-					this.field1443.method217(this.field1295 + 1, this.field1580, var9, 29720, this.field1294, 0);
-					this.field1443.method217(this.field1295, this.field1580, var9, 29720, this.field1294, var10);
+					this.field1443.drawStringCenterWave(this.field1295 + 1, this.field1580, var9, 29720, this.field1294, 0);
+					this.field1443.drawStringCenterWave(this.field1295, this.field1580, var9, 29720, this.field1294, var10);
 				}
 				if (this.field1634[var3] == 2) {
-					int var14 = this.field1443.method215(var9, (byte) 4);
+					int var14 = this.field1443.stringWidth(var9, (byte) 4);
 					int var15 = (150 - this.field1635[var3]) * (var14 + 100) / 150;
-					Pix2D.method166(this.field1294 + 50, 334, this.field1611, 0, this.field1294 - 50);
-					this.field1443.method216(var9, 0, (byte) 8, this.field1295 + 1, this.field1294 + 50 - var15);
-					this.field1443.method216(var9, var10, (byte) 8, this.field1295, this.field1294 + 50 - var15);
-					Pix2D.method165((byte) -115);
+					Pix2D.setBounds(this.field1294 + 50, 334, this.field1611, 0, this.field1294 - 50);
+					this.field1443.drawString(var9, 0, (byte) 8, this.field1295 + 1, this.field1294 + 50 - var15);
+					this.field1443.drawString(var9, var10, (byte) 8, this.field1295, this.field1294 + 50 - var15);
+					Pix2D.resetBounds((byte) -115);
 				}
 			} else {
-				this.field1443.method213(this.field1294, 1, 0, var9, this.field1295 + 1);
-				this.field1443.method213(this.field1294, 1, 16776960, var9, this.field1295);
+				this.field1443.drawStringCenter(this.field1294, 1, 0, var9, this.field1295 + 1);
+				this.field1443.drawStringCenter(this.field1294, 1, 16776960, var9, this.field1295);
 			}
 		}
 	}
@@ -4404,11 +4404,11 @@ public class client extends GameShell {
 
 	@ObfuscatedName("client.e(B)V")
 	public final void method464(byte arg0) {
-		this.field1515.method267(212);
+		this.field1515.bind(212);
 		if (arg0 != 5) {
 			field1543 = this.field1537.nextInt();
 		}
-		Pix3D.field653 = this.field1354;
+		Pix3D.lineOffset = this.field1354;
 		this.field1445.method211((byte) 9, 0, 0);
 		if (this.field1567 != -1) {
 			this.method544(0, 0, 0, Component.types[this.field1567], 0);
@@ -4418,9 +4418,9 @@ public class client extends GameShell {
 		if (this.field1356 && this.field1455 == 1) {
 			this.method477((byte) 34);
 		}
-		this.field1515.method268(super.graphics, 205, (byte) 55, 553);
-		this.field1517.method267(212);
-		Pix3D.field653 = this.field1355;
+		this.field1515.draw(super.graphics, 205, (byte) 55, 553);
+		this.field1517.bind(212);
+		Pix3D.lineOffset = this.field1355;
 	}
 
 	@ObfuscatedName("client.o(I)V")
@@ -4467,14 +4467,14 @@ public class client extends GameShell {
 		this.field1372 = null;
 		this.field1518 = new PixMap(this.getBaseComponent(3), 96, 479, 2);
 		this.field1516 = new PixMap(this.getBaseComponent(3), 156, 172, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1446.method211((byte) 9, 0, 0);
 		this.field1515 = new PixMap(this.getBaseComponent(3), 261, 190, 2);
 		this.field1517 = new PixMap(this.getBaseComponent(3), 334, 512, 2);
 		while (arg0 >= 0) {
 			this.ptype = -1;
 		}
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1325 = new PixMap(this.getBaseComponent(3), 50, 496, 2);
 		this.field1326 = new PixMap(this.getBaseComponent(3), 37, 269, 2);
 		this.field1327 = new PixMap(this.getBaseComponent(3), 45, 249, 2);
@@ -4594,7 +4594,7 @@ public class client extends GameShell {
 			int var16 = var13 >> 6;
 			if (arg7 == 0) {
 				this.field1258.method80(arg1, arg4, arg6, -284);
-				LocType var17 = LocType.method333(var14);
+				LocType var17 = LocType.get(var14);
 				if (var17.blockwalk) {
 					this.field1554[arg4].method364(var17.blockrange, arg6, var16, var15, this.field1620, arg1);
 				}
@@ -4604,7 +4604,7 @@ public class client extends GameShell {
 			}
 			if (arg7 == 2) {
 				this.field1258.method82(arg1, arg6, 1, arg4);
-				LocType var18 = LocType.method333(var14);
+				LocType var18 = LocType.get(var14);
 				if (var18.width + arg1 > 103 || var18.width + arg6 > 103 || var18.length + arg1 > 103 || var18.length + arg6 > 103) {
 					return;
 				}
@@ -4614,7 +4614,7 @@ public class client extends GameShell {
 			}
 			if (arg7 == 3) {
 				this.field1258.method83(arg6, arg4, arg1, this.field1272);
-				LocType var19 = LocType.method333(var14);
+				LocType var19 = LocType.get(var14);
 				if (var19.blockwalk && var19.active) {
 					this.field1554[arg4].method367(arg6, -625, arg1);
 				}
@@ -4634,10 +4634,10 @@ public class client extends GameShell {
 	@ObfuscatedName("client.d(II)V")
 	public final void method471(int arg0, int arg1) {
 		Component var3 = Component.types[arg0];
-		for (int var4 = 0; var4 < var3.field95.length && var3.field95[var4] != -1; var4++) {
-			Component var5 = Component.types[var3.field95[var4]];
-			if (var5.field80 == 1) {
-				this.method471(var5.field78, 5);
+		for (int var4 = 0; var4 < var3.children.length && var3.children[var4] != -1; var4++) {
+			Component var5 = Component.types[var3.children[var4]];
+			if (var5.type == 1) {
+				this.method471(var5.id, 5);
 			}
 			var5.field76 = 0;
 			var5.field77 = 0;
@@ -4732,10 +4732,10 @@ public class client extends GameShell {
 	public final void method475(byte arg0) {
 		this.method454((byte) 0);
 		if (this.field1603 == 1) {
-			this.field1599[this.field1602 / 100].method198((byte) 9, this.field1600 - 8 - 4, this.field1601 - 8 - 4);
+			this.field1599[this.field1602 / 100].draw((byte) 9, this.field1600 - 8 - 4, this.field1601 - 8 - 4);
 		}
 		if (this.field1603 == 2) {
-			this.field1599[this.field1602 / 100 + 4].method198((byte) 9, this.field1600 - 8 - 4, this.field1601 - 8 - 4);
+			this.field1599[this.field1602 / 100 + 4].draw((byte) 9, this.field1600 - 8 - 4, this.field1601 - 8 - 4);
 		}
 		if (this.field1229 != -1) {
 			this.method489(this.field1488, 225, this.field1229);
@@ -4745,7 +4745,7 @@ public class client extends GameShell {
 			int var2 = 302 - (int) Math.abs(Math.sin((double) this.field1264 / 10.0D) * 10.0D);
 			for (int var3 = 0; var3 < 30; var3++) {
 				int var4 = (30 - var3) * 16;
-				Pix2D.method173(var2 + var3, var4, 629, 16776960, 256 - var4 / 2, this.field1264);
+				Pix2D.drawHorizontalLine(var2 + var3, var4, 629, 16776960, 256 - var4 / 2, this.field1264);
 			}
 		}
 		if (this.field1273 != -1) {
@@ -4766,18 +4766,18 @@ public class client extends GameShell {
 		}
 		if (this.field1416 == 1) {
 			if (this.field1410 > 0 || this.field1187 == 1) {
-				this.field1389[1].method198((byte) 9, 472, 258);
+				this.field1389[1].draw((byte) 9, 472, 258);
 			} else {
-				this.field1389[1].method198((byte) 9, 472, 296);
+				this.field1389[1].draw((byte) 9, 472, 296);
 			}
 		}
 		if (this.field1410 > 0) {
-			this.field1389[0].method198((byte) 9, 472, 296);
-			this.field1442.method213(484, 1, 16776960, "Level: " + this.field1410, 329);
+			this.field1389[0].draw((byte) 9, 472, 296);
+			this.field1442.drawStringCenter(484, 1, 16776960, "Level: " + this.field1410, 329);
 		}
 		if (this.field1187 == 1) {
-			this.field1389[6].method198((byte) 9, 472, 296);
-			this.field1442.method213(484, 1, 16776960, "Arena", 329);
+			this.field1389[6].draw((byte) 9, 472, 296);
+			this.field1442.drawStringCenter(484, 1, 16776960, "Arena", 329);
 		}
 		if (this.field1592 == 0) {
 			return;
@@ -4786,9 +4786,9 @@ public class client extends GameShell {
 		int var7 = var6 / 60;
 		int var8 = var6 % 60;
 		if (var8 < 10) {
-			this.field1442.method216("System update in: " + var7 + ":0" + var8, 16776960, (byte) 8, 329, 4);
+			this.field1442.drawString("System update in: " + var7 + ":0" + var8, 16776960, (byte) 8, 329, 4);
 		} else {
-			this.field1442.method216("System update in: " + var7 + ":" + var8, 16776960, (byte) 8, 329, 4);
+			this.field1442.drawString("System update in: " + var7 + ":" + var8, 16776960, (byte) 8, 329, 4);
 		}
 	}
 
@@ -4828,10 +4828,10 @@ public class client extends GameShell {
 		int var4 = this.field1458;
 		int var5 = this.field1459;
 		int var6 = 6116423;
-		Pix2D.method169(0, var6, var4, var5, var2, var3);
-		Pix2D.method169(0, 0, var4 - 2, 16, var2 + 1, var3 + 1);
-		Pix2D.method170(var5 - 19, var4 - 2, 0, var2 + 1, 901, var3 + 18);
-		this.field1443.method216("Choose Option", var6, (byte) 8, var3 + 14, var2 + 3);
+		Pix2D.fillRect(0, var6, var4, var5, var2, var3);
+		Pix2D.fillRect(0, 0, var4 - 2, 16, var2 + 1, var3 + 1);
+		Pix2D.drawRect(var5 - 19, var4 - 2, 0, var2 + 1, 901, var3 + 18);
+		this.field1443.drawString("Choose Option", var6, (byte) 8, var3 + 14, var2 + 3);
 		int var7 = super.mouseX;
 		int var8 = super.mouseY;
 		if (this.field1455 == 0) {
@@ -4852,7 +4852,7 @@ public class client extends GameShell {
 			if (var7 > var2 && var7 < var2 + var4 && var8 > var10 - 13 && var8 < var10 + 3) {
 				var11 = 16776960;
 			}
-			this.field1443.method218(var11, var2 + 3, true, false, var10, this.field1579[var9]);
+			this.field1443.drawStringTaggable(var11, var2 + 3, true, false, var10, this.field1579[var9]);
 		}
 		if (arg0 != 34) {
 			this.ptype = -1;
@@ -4908,8 +4908,8 @@ public class client extends GameShell {
 			return;
 		}
 		if (var17 >= 50) {
-			this.field1294 = (var13 << 9) / var17 + Pix3D.field647;
-			this.field1295 = (var16 << 9) / var17 + Pix3D.field648;
+			this.field1294 = (var13 << 9) / var17 + Pix3D.centerX;
+			this.field1295 = (var16 << 9) / var17 + Pix3D.centerY;
 		} else {
 			this.field1294 = -1;
 			this.field1295 = -1;
@@ -4931,13 +4931,13 @@ public class client extends GameShell {
 
 	@ObfuscatedName("client.h(Z)V")
 	public final void method481(boolean arg0) {
-		LocType.modelCacheStatic.method116();
-		LocType.modelCacheDynamic.method116();
-		NpcType.field1019.method116();
-		ObjType.field1069.method116();
-		ObjType.field1070.method116();
-		PlayerEntity.field486.method116();
-		SpotAnimType.field1151.method116();
+		LocType.modelCacheStatic.clear();
+		LocType.modelCacheDynamic.clear();
+		NpcType.modelCacheStatic.clear();
+		ObjType.modelCache.clear();
+		ObjType.iconCache.clear();
+		PlayerEntity.field486.clear();
+		SpotAnimType.modelCache.clear();
 		this.ingame &= arg0;
 	}
 
@@ -5190,12 +5190,12 @@ public class client extends GameShell {
 					var82 = this.field1285[var77];
 				}
 				if (var82 != null) {
-					LocType var83 = LocType.method333(var74);
+					LocType var83 = LocType.get(var74);
 					int var84 = this.field1409[this.field1479][var68][var69];
 					int var85 = this.field1409[this.field1479][var68 + 1][var69];
 					int var86 = this.field1409[this.field1479][var68 + 1][var69 + 1];
 					int var87 = this.field1409[this.field1479][var68][var69 + 1];
-					Model var88 = var83.method339(var71, var72, var84, var85, var86, var87, -1);
+					Model var88 = var83.getModel(var71, var72, var84, var85, var86, var87, -1);
 					if (var88 != null) {
 						this.method500(var68, 0, var76 + 1, 30437, -1, 0, var73, var69, this.field1479, var75 + 1);
 						var82.field474 = loopCycle + var75;
@@ -5385,24 +5385,24 @@ public class client extends GameShell {
 		}
 		boolean var4 = false;
 		Component var5 = Component.types[arg2];
-		for (int var6 = 0; var6 < var5.field95.length && var5.field95[var6] != -1; var6++) {
-			Component var7 = Component.types[var5.field95[var6]];
-			if (var7.field80 == 1) {
-				var4 |= this.method489(arg0, 225, var7.field78);
+		for (int var6 = 0; var6 < var5.children.length && var5.children[var6] != -1; var6++) {
+			Component var7 = Component.types[var5.children[var6]];
+			if (var7.type == 1) {
+				var4 |= this.method489(arg0, 225, var7.id);
 			}
-			if (var7.field80 == 6 && (var7.field124 != -1 || var7.field125 != -1)) {
+			if (var7.type == 6 && (var7.anim != -1 || var7.activeAnim != -1)) {
 				boolean var8 = this.method516(var7, 551);
 				int var9;
 				if (var8) {
-					var9 = var7.field125;
+					var9 = var7.activeAnim;
 				} else {
-					var9 = var7.field124;
+					var9 = var7.anim;
 				}
 				if (var9 != -1) {
 					SeqType var10 = SeqType.types[var9];
 					var7.field77 += arg0;
-					while (var7.field77 > var10.method382(0, var7.field76)) {
-						var7.field77 -= var10.method382(0, var7.field76) + 1;
+					while (var7.field77 > var10.getFrameDuration(0, var7.field76)) {
+						var7.field77 -= var10.getFrameDuration(0, var7.field76) + 1;
 						var7.field76++;
 						if (var7.field76 >= var10.frameCount) {
 							var7.field76 -= var10.replayoff;
@@ -5502,60 +5502,60 @@ public class client extends GameShell {
 			super.drawProgress(7, arg1, arg2);
 			return;
 		}
-		this.field1366.method267(212);
+		this.field1366.bind(212);
 		short var4 = 360;
 		short var5 = 200;
 		byte var6 = 20;
-		this.field1443.method213(var4 / 2, 1, 16777215, "RuneScape is loading - please wait...", var5 / 2 - 26 - var6);
+		this.field1443.drawStringCenter(var4 / 2, 1, 16777215, "RuneScape is loading - please wait...", var5 / 2 - 26 - var6);
 		int var7 = var5 / 2 - 18 - var6;
-		Pix2D.method170(34, 304, 9179409, var4 / 2 - 152, 901, var7);
-		Pix2D.method170(32, 302, 0, var4 / 2 - 151, 901, var7 + 1);
-		Pix2D.method169(0, 9179409, arg1 * 3, 30, var4 / 2 - 150, var7 + 2);
-		Pix2D.method169(0, 0, 300 - arg1 * 3, 30, arg1 * 3 + (var4 / 2 - 150), var7 + 2);
-		this.field1443.method213(var4 / 2, 1, 16777215, arg2, var5 / 2 + 5 - var6);
+		Pix2D.drawRect(34, 304, 9179409, var4 / 2 - 152, 901, var7);
+		Pix2D.drawRect(32, 302, 0, var4 / 2 - 151, 901, var7 + 1);
+		Pix2D.fillRect(0, 9179409, arg1 * 3, 30, var4 / 2 - 150, var7 + 2);
+		Pix2D.fillRect(0, 0, 300 - arg1 * 3, 30, arg1 * 3 + (var4 / 2 - 150), var7 + 2);
+		this.field1443.drawStringCenter(var4 / 2, 1, 16777215, arg2, var5 / 2 + 5 - var6);
 		if (arg0 < 7 || arg0 > 7) {
 			this.load();
 		}
-		this.field1366.method268(super.graphics, 171, (byte) 55, 202);
+		this.field1366.draw(super.graphics, 171, (byte) 55, 202);
 		if (!this.field1483) {
 			return;
 		}
 		this.field1483 = false;
 		if (!this.flameActive) {
-			this.field1367.method268(super.graphics, 0, (byte) 55, 0);
-			this.field1368.method268(super.graphics, 0, (byte) 55, 637);
+			this.field1367.draw(super.graphics, 0, (byte) 55, 0);
+			this.field1368.draw(super.graphics, 0, (byte) 55, 637);
 		}
-		this.field1364.method268(super.graphics, 0, (byte) 55, 128);
-		this.field1365.method268(super.graphics, 371, (byte) 55, 202);
-		this.field1369.method268(super.graphics, 265, (byte) 55, 0);
-		this.field1370.method268(super.graphics, 265, (byte) 55, 562);
-		this.field1371.method268(super.graphics, 171, (byte) 55, 128);
-		this.field1372.method268(super.graphics, 171, (byte) 55, 562);
+		this.field1364.draw(super.graphics, 0, (byte) 55, 128);
+		this.field1365.draw(super.graphics, 371, (byte) 55, 202);
+		this.field1369.draw(super.graphics, 265, (byte) 55, 0);
+		this.field1370.draw(super.graphics, 265, (byte) 55, 562);
+		this.field1371.draw(super.graphics, 171, (byte) 55, 128);
+		this.field1372.draw(super.graphics, 171, (byte) 55, 562);
 	}
 
 	@ObfuscatedName("client.i(B)V")
 	public final void method492(byte arg0) {
-		this.field1518.method267(212);
+		this.field1518.bind(212);
 		if (this.field1595 != arg0) {
 			return;
 		}
-		Pix3D.field653 = this.field1353;
+		Pix3D.lineOffset = this.field1353;
 		this.field1447.method211((byte) 9, 0, 0);
 		if (this.field1626) {
-			this.field1443.method213(239, 1, 0, this.field1213, 40);
-			this.field1443.method213(239, 1, 128, this.field1449 + "*", 60);
+			this.field1443.drawStringCenter(239, 1, 0, this.field1213, 40);
+			this.field1443.drawStringCenter(239, 1, 128, this.field1449 + "*", 60);
 		} else if (this.field1376) {
-			this.field1443.method213(239, 1, 0, "Enter amount:", 40);
-			this.field1443.method213(239, 1, 128, this.field1336 + "*", 60);
+			this.field1443.drawStringCenter(239, 1, 0, "Enter amount:", 40);
+			this.field1443.drawStringCenter(239, 1, 128, this.field1336 + "*", 60);
 		} else if (this.field1199 != null) {
-			this.field1443.method213(239, 1, 0, this.field1199, 40);
-			this.field1443.method213(239, 1, 128, "Click to continue", 60);
+			this.field1443.drawStringCenter(239, 1, 0, this.field1199, 40);
+			this.field1443.drawStringCenter(239, 1, 128, "Click to continue", 60);
 		} else if (this.field1396 != -1) {
 			this.method544(0, 0, 0, Component.types[this.field1396], 0);
 		} else if (this.field1565 == -1) {
 			PixFont var2 = this.field1442;
 			int var3 = 0;
-			Pix2D.method166(463, 77, this.field1611, 0, 0);
+			Pix2D.setBounds(463, 77, this.field1611, 0, 0);
 			for (int var4 = 0; var4 < 100; var4++) {
 				if (this.field1431[var4] != null) {
 					int var6 = this.field1429[var4];
@@ -5572,7 +5572,7 @@ public class client extends GameShell {
 					}
 					if (var6 == 0) {
 						if (var7 > 0 && var7 < 110) {
-							var2.method216(this.field1431[var4], 0, (byte) 8, var7, 4);
+							var2.drawString(this.field1431[var4], 0, (byte) 8, var7, 4);
 						}
 						var3++;
 					}
@@ -5587,17 +5587,17 @@ public class client extends GameShell {
 								this.field1332[1].method211((byte) 9, var10, var7 - 12);
 								var10 += 14;
 							}
-							var2.method216(var8 + ":", 0, (byte) 8, var7, var10);
-							int var11 = var10 + var2.method215(var8, (byte) 4) + 8;
-							var2.method216(this.field1431[var4], 255, (byte) 8, var7, var11);
+							var2.drawString(var8 + ":", 0, (byte) 8, var7, var10);
+							int var11 = var10 + var2.stringWidth(var8, (byte) 4) + 8;
+							var2.drawString(this.field1431[var4], 255, (byte) 8, var7, var11);
 						}
 						var3++;
 					}
 					if ((var6 == 3 || var6 == 7) && this.field1346 == 0 && (var6 == 7 || this.field1576 == 0 || this.field1576 == 1 && this.method502(var8, (byte) 1))) {
 						if (var7 > 0 && var7 < 110) {
 							byte var12 = 4;
-							var2.method216("From", 0, (byte) 8, var7, var12);
-							int var13 = var12 + var2.method215("From ", (byte) 4);
+							var2.drawString("From", 0, (byte) 8, var7, var12);
+							int var13 = var12 + var2.stringWidth("From ", (byte) 4);
 							if (var9 == 1) {
 								this.field1332[0].method211((byte) 9, var13, var7 - 12);
 								var13 += 14;
@@ -5606,40 +5606,40 @@ public class client extends GameShell {
 								this.field1332[1].method211((byte) 9, var13, var7 - 12);
 								var13 += 14;
 							}
-							var2.method216(var8 + ":", 0, (byte) 8, var7, var13);
-							int var14 = var13 + var2.method215(var8, (byte) 4) + 8;
-							var2.method216(this.field1431[var4], 8388608, (byte) 8, var7, var14);
+							var2.drawString(var8 + ":", 0, (byte) 8, var7, var13);
+							int var14 = var13 + var2.stringWidth(var8, (byte) 4) + 8;
+							var2.drawString(this.field1431[var4], 8388608, (byte) 8, var7, var14);
 						}
 						var3++;
 					}
 					if (var6 == 4 && (this.field1275 == 0 || this.field1275 == 1 && this.method502(var8, (byte) 1))) {
 						if (var7 > 0 && var7 < 110) {
-							var2.method216(var8 + " " + this.field1431[var4], 8388736, (byte) 8, var7, 4);
+							var2.drawString(var8 + " " + this.field1431[var4], 8388736, (byte) 8, var7, 4);
 						}
 						var3++;
 					}
 					if (var6 == 5 && this.field1346 == 0 && this.field1576 < 2) {
 						if (var7 > 0 && var7 < 110) {
-							var2.method216(this.field1431[var4], 8388608, (byte) 8, var7, 4);
+							var2.drawString(this.field1431[var4], 8388608, (byte) 8, var7, 4);
 						}
 						var3++;
 					}
 					if (var6 == 6 && this.field1346 == 0 && this.field1576 < 2) {
 						if (var7 > 0 && var7 < 110) {
-							var2.method216("To " + var8 + ":", 0, (byte) 8, var7, 4);
-							var2.method216(this.field1431[var4], 8388608, (byte) 8, var7, var2.method215("To " + var8, (byte) 4) + 12);
+							var2.drawString("To " + var8 + ":", 0, (byte) 8, var7, 4);
+							var2.drawString(this.field1431[var4], 8388608, (byte) 8, var7, var2.stringWidth("To " + var8, (byte) 4) + 12);
 						}
 						var3++;
 					}
 					if (var6 == 8 && (this.field1275 == 0 || this.field1275 == 1 && this.method502(var8, (byte) 1))) {
 						if (var7 > 0 && var7 < 110) {
-							var2.method216(var8 + " " + this.field1431[var4], 8270336, (byte) 8, var7, 4);
+							var2.drawString(var8 + " " + this.field1431[var4], 8270336, (byte) 8, var7, 4);
 						}
 						var3++;
 					}
 				}
 			}
-			Pix2D.method165((byte) -115);
+			Pix2D.resetBounds((byte) -115);
 			this.field1563 = var3 * 14 + 7;
 			if (this.field1563 < 78) {
 				this.field1563 = 78;
@@ -5651,18 +5651,18 @@ public class client extends GameShell {
 			} else {
 				var5 = localPlayer.field465;
 			}
-			var2.method216(var5 + ":", 0, (byte) 8, 90, 4);
-			var2.method216(this.field1596 + "*", 255, (byte) 8, 90, var2.method215(var5 + ": ", (byte) 4) + 6);
-			Pix2D.method172(0, 77, 479, 0, this.field1220);
+			var2.drawString(var5 + ":", 0, (byte) 8, 90, 4);
+			var2.drawString(this.field1596 + "*", 255, (byte) 8, 90, var2.stringWidth(var5 + ": ", (byte) 4) + 6);
+			Pix2D.drawHorizontalLine(0, 77, 479, 0, this.field1220);
 		} else {
 			this.method544(0, 0, 0, Component.types[this.field1565], 0);
 		}
 		if (this.field1356 && this.field1455 == 2) {
 			this.method477((byte) 34);
 		}
-		this.field1518.method268(super.graphics, 357, (byte) 55, 17);
-		this.field1517.method267(212);
-		Pix3D.field653 = this.field1355;
+		this.field1518.draw(super.graphics, 357, (byte) 55, 17);
+		this.field1517.bind(212);
+		Pix3D.lineOffset = this.field1355;
 	}
 
 	@ObfuscatedName("client.j(B)V")
@@ -5743,10 +5743,10 @@ public class client extends GameShell {
 		this.imageFlamesRight = new Pix32(128, 265);
 		this.levelObjStacks = new Pix32(128, 265);
 		for (int var3 = 0; var3 < 33920; var3++) {
-			this.imageFlamesRight.field670[var3] = this.field1367.field757[var3];
+			this.imageFlamesRight.pixels[var3] = this.field1367.data[var3];
 		}
 		for (int var4 = 0; var4 < 33920; var4++) {
-			this.levelObjStacks.field670[var4] = this.field1368.field757[var4];
+			this.levelObjStacks.pixels[var4] = this.field1368.data[var4];
 		}
 		this.flameGradient0 = new int[256];
 		for (int var5 = 0; var5 < 64; var5++) {
@@ -5915,7 +5915,7 @@ public class client extends GameShell {
 				var7.field425 = arg1.g1();
 			}
 			if ((var8 & 0x20) == 32) {
-				var7.field461 = NpcType.method342(arg1.g2());
+				var7.field461 = NpcType.get(arg1.g2());
 				var7.field411 = var7.field461.walkanim;
 				var7.field412 = var7.field461.walkanim_b;
 				var7.field413 = var7.field461.walkanim_r;
@@ -6438,7 +6438,7 @@ public class client extends GameShell {
 		if (this.field1581 == 2) {
 			this.method480(3, (this.field1348 - this.sceneBaseTileZ << 7) + this.field1351, this.field1349 * 2, (this.field1347 - this.sceneBaseTileX << 7) + this.field1350);
 			if (this.field1294 > -1 && loopCycle % 20 < 10) {
-				this.field1389[2].method198((byte) 9, this.field1294 - 12, this.field1295 - 28);
+				this.field1389[2].draw((byte) 9, this.field1294 - 12, this.field1295 - 28);
 			}
 		}
 	}
@@ -6466,7 +6466,7 @@ public class client extends GameShell {
 			if (var4 == 4) {
 				Pix3D.method185(43504, 0.6D);
 			}
-			ObjType.field1070.method116();
+			ObjType.iconCache.clear();
 			this.field1483 = true;
 		}
 		if (var3 == 3) {
@@ -6662,8 +6662,8 @@ public class client extends GameShell {
 				this.field1345 = var7.substring(var8 + 5).trim();
 				this.field1451 = false;
 				for (int var9 = 0; var9 < Component.types.length; var9++) {
-					if (Component.types[var9] != null && Component.types[var9].field82 == 600) {
-						this.field1192 = this.field1273 = Component.types[var9].field79;
+					if (Component.types[var9] != null && Component.types[var9].clientCode == 600) {
+						this.field1192 = this.field1273 = Component.types[var9].layer;
 						break;
 					}
 				}
@@ -6687,7 +6687,7 @@ public class client extends GameShell {
 		if (var5 == 951) {
 			Component var11 = Component.types[var4];
 			boolean var12 = true;
-			if (var11.field82 > 0) {
+			if (var11.clientCode > 0) {
 				var12 = this.method532(var11, (byte) 7);
 			}
 			if (var12) {
@@ -6801,10 +6801,10 @@ public class client extends GameShell {
 			this.field1404.pIsaac(39, this.field1496);
 			this.field1404.p2(var4);
 			Component var24 = Component.types[var4];
-			if (var24.field88 != null && var24.field88[0][0] == 5) {
-				int var25 = var24.field88[0][1];
-				if (this.field1278[var25] != var24.field90[0]) {
-					this.field1278[var25] = var24.field90[0];
+			if (var24.scripts != null && var24.scripts[0][0] == 5) {
+				int var25 = var24.scripts[0][1];
+				if (this.field1278[var25] != var24.scriptOperand[0]) {
+					this.field1278[var25] = var24.scriptOperand[0];
 					this.method510(var25, 7);
 					this.field1221 = true;
 				}
@@ -6812,7 +6812,7 @@ public class client extends GameShell {
 		}
 		if (var5 == 1175) {
 			int var26 = var6 >> 14 & 0x7FFF;
-			LocType var27 = LocType.method333(var26);
+			LocType var27 = LocType.get(var26);
 			String var28;
 			if (var27.desc == null) {
 				var28 = "It's a " + var27.name + ".";
@@ -6833,10 +6833,10 @@ public class client extends GameShell {
 			this.field1298 = var4;
 			this.field1299 = var3;
 			this.field1300 = 2;
-			if (Component.types[var4].field79 == this.field1273) {
+			if (Component.types[var4].layer == this.field1273) {
 				this.field1300 = 1;
 			}
-			if (Component.types[var4].field79 == this.field1396) {
+			if (Component.types[var4].layer == this.field1396) {
 				this.field1300 = 3;
 			}
 		}
@@ -6904,10 +6904,10 @@ public class client extends GameShell {
 			this.field1298 = var4;
 			this.field1299 = var3;
 			this.field1300 = 2;
-			if (Component.types[var4].field79 == this.field1273) {
+			if (Component.types[var4].layer == this.field1273) {
 				this.field1300 = 1;
 			}
-			if (Component.types[var4].field79 == this.field1396) {
+			if (Component.types[var4].layer == this.field1396) {
 				this.field1300 = 3;
 			}
 		}
@@ -6963,10 +6963,10 @@ public class client extends GameShell {
 			this.field1298 = var4;
 			this.field1299 = var3;
 			this.field1300 = 2;
-			if (Component.types[var4].field79 == this.field1273) {
+			if (Component.types[var4].layer == this.field1273) {
 				this.field1300 = 1;
 			}
-			if (Component.types[var4].field79 == this.field1396) {
+			if (Component.types[var4].layer == this.field1396) {
 				this.field1300 = 3;
 			}
 		}
@@ -6974,8 +6974,8 @@ public class client extends GameShell {
 			this.field1404.pIsaac(39, this.field1496);
 			this.field1404.p2(var4);
 			Component var35 = Component.types[var4];
-			if (var35.field88 != null && var35.field88[0][0] == 5) {
-				int var36 = var35.field88[0][1];
+			if (var35.scripts != null && var35.scripts[0][0] == 5) {
+				int var36 = var35.scripts[0][1];
 				this.field1278[var36] = 1 - this.field1278[var36];
 				this.method510(var36, 7);
 				this.field1221 = true;
@@ -7056,10 +7056,10 @@ public class client extends GameShell {
 			this.field1298 = var4;
 			this.field1299 = var3;
 			this.field1300 = 2;
-			if (Component.types[var4].field79 == this.field1273) {
+			if (Component.types[var4].layer == this.field1273) {
 				this.field1300 = 1;
 			}
-			if (Component.types[var4].field79 == this.field1396) {
+			if (Component.types[var4].layer == this.field1396) {
 				this.field1300 = 3;
 			}
 		}
@@ -7067,18 +7067,18 @@ public class client extends GameShell {
 			Component var39 = Component.types[var4];
 			this.field1307 = 1;
 			this.field1308 = var4;
-			this.field1309 = var39.field131;
+			this.field1309 = var39.targetMask;
 			this.field1497 = 0;
 			this.field1221 = true;
-			String var40 = var39.field129;
+			String var40 = var39.targetVerb;
 			if (var40.indexOf(" ") != -1) {
 				var40 = var40.substring(0, var40.indexOf(" "));
 			}
-			String var41 = var39.field129;
+			String var41 = var39.targetVerb;
 			if (var41.indexOf(" ") != -1) {
 				var41 = var41.substring(var41.indexOf(" ") + 1);
 			}
-			this.field1310 = var40 + " " + var39.field130 + " " + var41;
+			this.field1310 = var40 + " " + var39.targetText + " " + var41;
 			if (this.field1309 == 16) {
 				this.field1221 = true;
 				this.field1225 = 3;
@@ -7499,21 +7499,21 @@ public class client extends GameShell {
 	public final boolean method516(Component arg0, int arg1) {
 		if (arg1 <= 0) {
 			throw new NullPointerException();
-		} else if (arg0.field89 == null) {
+		} else if (arg0.scriptComparator == null) {
 			return false;
 		} else {
-			for (int var3 = 0; var3 < arg0.field89.length; var3++) {
+			for (int var3 = 0; var3 < arg0.scriptComparator.length; var3++) {
 				int var4 = this.method526(arg0, 52, var3);
-				int var5 = arg0.field90[var3];
-				if (arg0.field89[var3] == 2) {
+				int var5 = arg0.scriptOperand[var3];
+				if (arg0.scriptComparator[var3] == 2) {
 					if (var4 >= var5) {
 						return false;
 					}
-				} else if (arg0.field89[var3] == 3) {
+				} else if (arg0.scriptComparator[var3] == 3) {
 					if (var4 <= var5) {
 						return false;
 					}
-				} else if (arg0.field89[var3] == 4) {
+				} else if (arg0.scriptComparator[var3] == 4) {
 					if (var4 == var5) {
 						return false;
 					}
@@ -7531,73 +7531,73 @@ public class client extends GameShell {
 		if (this.field1206 != arg0) {
 			this.field1404.p1(143);
 		}
-		this.field1366.method267(212);
+		this.field1366.bind(212);
 		this.imageTitlebox.method211((byte) 9, 0, 0);
 		short var2 = 360;
 		short var3 = 200;
 		if (this.field1414 == 0) {
 			int var4 = var3 / 2 + 80;
-			this.field1441.method214(var2 / 2, true, this.onDemand.message, true, var4, 7711145);
+			this.field1441.drawStringTaggableCenter(var2 / 2, true, this.onDemand.message, true, var4, 7711145);
 			int var5 = var3 / 2 - 20;
-			this.field1443.method214(var2 / 2, true, "Welcome to RuneScape", true, var5, 16776960);
+			this.field1443.drawStringTaggableCenter(var2 / 2, true, "Welcome to RuneScape", true, var5, 16776960);
 			int var16 = var5 + 30;
 			int var6 = var2 / 2 - 80;
 			int var7 = var3 / 2 + 20;
 			this.imageTitlebutton.method211((byte) 9, var6 - 73, var7 - 20);
-			this.field1443.method214(var6, true, "New user", true, var7 + 5, 16777215);
+			this.field1443.drawStringTaggableCenter(var6, true, "New user", true, var7 + 5, 16777215);
 			int var8 = var2 / 2 + 80;
 			this.imageTitlebutton.method211((byte) 9, var8 - 73, var7 - 20);
-			this.field1443.method214(var8, true, "Existing User", true, var7 + 5, 16777215);
+			this.field1443.drawStringTaggableCenter(var8, true, "Existing User", true, var7 + 5, 16777215);
 		}
 		if (this.field1414 == 2) {
 			int var9 = var3 / 2 - 40;
 			if (this.field1508.length() > 0) {
-				this.field1443.method214(var2 / 2, true, this.field1508, true, var9 - 15, 16776960);
-				this.field1443.method214(var2 / 2, true, this.field1509, true, var9, 16776960);
+				this.field1443.drawStringTaggableCenter(var2 / 2, true, this.field1508, true, var9 - 15, 16776960);
+				this.field1443.drawStringTaggableCenter(var2 / 2, true, this.field1509, true, var9, 16776960);
 				var9 += 30;
 			} else {
-				this.field1443.method214(var2 / 2, true, this.field1509, true, var9 - 7, 16776960);
+				this.field1443.drawStringTaggableCenter(var2 / 2, true, this.field1509, true, var9 - 7, 16776960);
 				var9 += 30;
 			}
-			this.field1443.method218(16777215, var2 / 2 - 90, true, false, var9, "Username: " + this.field1577 + (this.field1526 == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+			this.field1443.drawStringTaggable(16777215, var2 / 2 - 90, true, false, var9, "Username: " + this.field1577 + (this.field1526 == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 			var9 += 15;
-			this.field1443.method218(16777215, var2 / 2 - 88, true, false, var9, "Password: " + JString.method315(false, this.field1578) + (this.field1526 == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+			this.field1443.drawStringTaggable(16777215, var2 / 2 - 88, true, false, var9, "Password: " + JString.method315(false, this.field1578) + (this.field1526 == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 			var9 += 15;
 			int var10 = var2 / 2 - 80;
 			int var11 = var3 / 2 + 50;
 			this.imageTitlebutton.method211((byte) 9, var10 - 73, var11 - 20);
-			this.field1443.method214(var10, true, "Login", true, var11 + 5, 16777215);
+			this.field1443.drawStringTaggableCenter(var10, true, "Login", true, var11 + 5, 16777215);
 			int var12 = var2 / 2 + 80;
 			this.imageTitlebutton.method211((byte) 9, var12 - 73, var11 - 20);
-			this.field1443.method214(var12, true, "Cancel", true, var11 + 5, 16777215);
+			this.field1443.drawStringTaggableCenter(var12, true, "Cancel", true, var11 + 5, 16777215);
 		}
 		if (this.field1414 == 3) {
-			this.field1443.method214(var2 / 2, true, "Create a free account", true, var3 / 2 - 60, 16776960);
+			this.field1443.drawStringTaggableCenter(var2 / 2, true, "Create a free account", true, var3 / 2 - 60, 16776960);
 			int var13 = var3 / 2 - 35;
-			this.field1443.method214(var2 / 2, true, "To create a new account you need to", true, var13, 16777215);
+			this.field1443.drawStringTaggableCenter(var2 / 2, true, "To create a new account you need to", true, var13, 16777215);
 			int var17 = var13 + 15;
-			this.field1443.method214(var2 / 2, true, "go back to the main RuneScape webpage", true, var17, 16777215);
+			this.field1443.drawStringTaggableCenter(var2 / 2, true, "go back to the main RuneScape webpage", true, var17, 16777215);
 			int var18 = var17 + 15;
-			this.field1443.method214(var2 / 2, true, "and choose the red 'create account'", true, var18, 16777215);
+			this.field1443.drawStringTaggableCenter(var2 / 2, true, "and choose the red 'create account'", true, var18, 16777215);
 			int var19 = var18 + 15;
-			this.field1443.method214(var2 / 2, true, "button at the top right of that page.", true, var19, 16777215);
+			this.field1443.drawStringTaggableCenter(var2 / 2, true, "button at the top right of that page.", true, var19, 16777215);
 			int var20 = var19 + 15;
 			int var14 = var2 / 2;
 			int var15 = var3 / 2 + 50;
 			this.imageTitlebutton.method211((byte) 9, var14 - 73, var15 - 20);
-			this.field1443.method214(var14, true, "Cancel", true, var15 + 5, 16777215);
+			this.field1443.drawStringTaggableCenter(var14, true, "Cancel", true, var15 + 5, 16777215);
 		}
-		this.field1366.method268(super.graphics, 171, (byte) 55, 202);
+		this.field1366.draw(super.graphics, 171, (byte) 55, 202);
 		if (!this.field1483) {
 			return;
 		}
 		this.field1483 = false;
-		this.field1364.method268(super.graphics, 0, (byte) 55, 128);
-		this.field1365.method268(super.graphics, 371, (byte) 55, 202);
-		this.field1369.method268(super.graphics, 265, (byte) 55, 0);
-		this.field1370.method268(super.graphics, 265, (byte) 55, 562);
-		this.field1371.method268(super.graphics, 171, (byte) 55, 128);
-		this.field1372.method268(super.graphics, 171, (byte) 55, 562);
+		this.field1364.draw(super.graphics, 0, (byte) 55, 128);
+		this.field1365.draw(super.graphics, 371, (byte) 55, 202);
+		this.field1369.draw(super.graphics, 265, (byte) 55, 0);
+		this.field1370.draw(super.graphics, 265, (byte) 55, 562);
+		this.field1371.draw(super.graphics, 171, (byte) 55, 128);
+		this.field1372.draw(super.graphics, 171, (byte) 55, 562);
 	}
 
 	@ObfuscatedName("client.a(IZLmb;)V")
@@ -7616,7 +7616,7 @@ public class client extends GameShell {
 			NpcEntity var5 = this.field1438[var4];
 			this.field1440[this.field1439++] = var4;
 			var5.field449 = loopCycle;
-			var5.field461 = NpcType.method342(arg2.gBit(9, 11));
+			var5.field461 = NpcType.get(arg2.gBit(9, 11));
 			var5.field408 = var5.field461.size;
 			var5.field411 = var5.field461.walkanim;
 			var5.field412 = var5.field461.walkanim_b;
@@ -7889,104 +7889,104 @@ public class client extends GameShell {
 
 	@ObfuscatedName("client.a(IIIIILd;I)V")
 	public final void method523(int arg0, int arg1, int arg2, int arg3, int arg4, Component arg5, int arg6) {
-		if (arg5.field80 != 0 || arg5.field95 == null || arg5.field94 || (arg0 < arg4 || arg2 < arg1 || arg0 > arg5.field83 + arg4 || arg2 > arg5.field84 + arg1)) {
+		if (arg5.type != 0 || arg5.children == null || arg5.hide || (arg0 < arg4 || arg2 < arg1 || arg0 > arg5.width + arg4 || arg2 > arg5.height + arg1)) {
 			return;
 		}
-		int var8 = arg5.field95.length;
+		int var8 = arg5.children.length;
 		if (arg3 != 7) {
 			return;
 		}
 		for (int var9 = 0; var9 < var8; var9++) {
-			int var10 = arg5.field96[var9] + arg4;
-			int var11 = arg5.field97[var9] + arg1 - arg6;
-			Component var12 = Component.types[arg5.field95[var9]];
+			int var10 = arg5.childX[var9] + arg4;
+			int var11 = arg5.childY[var9] + arg1 - arg6;
+			Component var12 = Component.types[arg5.children[var9]];
 			int var13 = var12.field86 + var10;
 			int var14 = var12.field87 + var11;
-			if ((var12.field91 >= 0 || var12.field117 != 0) && arg0 >= var13 && arg2 >= var14 && arg0 < var12.field83 + var13 && arg2 < var12.field84 + var14) {
-				if (var12.field91 >= 0) {
-					this.field1296 = var12.field91;
+			if ((var12.overlayer >= 0 || var12.overColour != 0) && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
+				if (var12.overlayer >= 0) {
+					this.field1296 = var12.overlayer;
 				} else {
-					this.field1296 = var12.field78;
+					this.field1296 = var12.id;
 				}
 			}
-			if (var12.field80 == 0) {
+			if (var12.type == 0) {
 				this.method523(arg0, var14, arg2, 7, var13, var12, var12.field93);
-				if (var12.field92 > var12.field84) {
-					this.method542(var12, var14, true, arg2, var12.field84, var12.field92, arg0, var12.field83 + var13, -960);
+				if (var12.scroll > var12.height) {
+					this.method542(var12, var14, true, arg2, var12.height, var12.scroll, arg0, var12.width + var13, -960);
 				}
 			} else {
-				if (var12.field81 == 1 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.field83 + var13 && arg2 < var12.field84 + var14) {
+				if (var12.buttonType == 1 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
 					boolean var15 = false;
-					if (var12.field82 != 0) {
+					if (var12.clientCode != 0) {
 						var15 = this.method558(this.field1306, var12);
 					}
 					if (!var15) {
-						this.field1579[this.field1564] = var12.field132;
+						this.field1579[this.field1564] = var12.option;
 						this.field1203[this.field1564] = 951;
-						this.field1202[this.field1564] = var12.field78;
+						this.field1202[this.field1564] = var12.id;
 						this.field1564++;
 					}
 				}
-				if (var12.field81 == 2 && this.field1307 == 0 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.field83 + var13 && arg2 < var12.field84 + var14) {
-					String var16 = var12.field129;
+				if (var12.buttonType == 2 && this.field1307 == 0 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
+					String var16 = var12.targetVerb;
 					if (var16.indexOf(" ") != -1) {
 						var16 = var16.substring(0, var16.indexOf(" "));
 					}
-					this.field1579[this.field1564] = var16 + " @gre@" + var12.field130;
+					this.field1579[this.field1564] = var16 + " @gre@" + var12.targetText;
 					this.field1203[this.field1564] = 930;
-					this.field1202[this.field1564] = var12.field78;
+					this.field1202[this.field1564] = var12.id;
 					this.field1564++;
 				}
-				if (var12.field81 == 3 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.field83 + var13 && arg2 < var12.field84 + var14) {
+				if (var12.buttonType == 3 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
 					this.field1579[this.field1564] = "Close";
 					this.field1203[this.field1564] = 947;
-					this.field1202[this.field1564] = var12.field78;
+					this.field1202[this.field1564] = var12.id;
 					this.field1564++;
 				}
-				if (var12.field81 == 4 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.field83 + var13 && arg2 < var12.field84 + var14) {
-					this.field1579[this.field1564] = var12.field132;
+				if (var12.buttonType == 4 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
+					this.field1579[this.field1564] = var12.option;
 					this.field1203[this.field1564] = 465;
-					this.field1202[this.field1564] = var12.field78;
+					this.field1202[this.field1564] = var12.id;
 					this.field1564++;
 				}
-				if (var12.field81 == 5 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.field83 + var13 && arg2 < var12.field84 + var14) {
-					this.field1579[this.field1564] = var12.field132;
+				if (var12.buttonType == 5 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
+					this.field1579[this.field1564] = var12.option;
 					this.field1203[this.field1564] = 960;
-					this.field1202[this.field1564] = var12.field78;
+					this.field1202[this.field1564] = var12.id;
 					this.field1564++;
 				}
-				if (var12.field81 == 6 && !this.field1613 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.field83 + var13 && arg2 < var12.field84 + var14) {
-					this.field1579[this.field1564] = var12.field132;
+				if (var12.buttonType == 6 && !this.field1613 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
+					this.field1579[this.field1564] = var12.option;
 					this.field1203[this.field1564] = 44;
-					this.field1202[this.field1564] = var12.field78;
+					this.field1202[this.field1564] = var12.id;
 					this.field1564++;
 				}
-				if (var12.field80 == 2) {
+				if (var12.type == 2) {
 					int var17 = 0;
-					for (int var18 = 0; var18 < var12.field84; var18++) {
-						for (int var19 = 0; var19 < var12.field83; var19++) {
-							int var20 = (var12.field103 + 32) * var19 + var13;
-							int var21 = (var12.field104 + 32) * var18 + var14;
+					for (int var18 = 0; var18 < var12.height; var18++) {
+						for (int var19 = 0; var19 < var12.width; var19++) {
+							int var20 = (var12.marginX + 32) * var19 + var13;
+							int var21 = (var12.marginY + 32) * var18 + var14;
 							if (var17 < 20) {
-								var20 += var12.field106[var17];
-								var21 += var12.field107[var17];
+								var20 += var12.invSlotOffsetX[var17];
+								var21 += var12.invSlotOffsetY[var17];
 							}
 							if (arg0 >= var20 && arg2 >= var21 && arg0 < var20 + 32 && arg2 < var21 + 32) {
 								this.field1531 = var17;
-								this.field1532 = var12.field78;
-								if (var12.field74[var17] > 0) {
-									ObjType var22 = ObjType.get(var12.field74[var17] - 1);
-									if (this.field1497 == 1 && var12.field101) {
-										if (this.field1499 != var12.field78 || this.field1498 != var17) {
+								this.field1532 = var12.id;
+								if (var12.invSlotObjId[var17] > 0) {
+									ObjType var22 = ObjType.get(var12.invSlotObjId[var17] - 1);
+									if (this.field1497 == 1 && var12.interactable) {
+										if (this.field1499 != var12.id || this.field1498 != var17) {
 											this.field1579[this.field1564] = "Use " + this.field1501 + " with @lre@" + var22.name;
 											this.field1203[this.field1564] = 881;
 											this.field1204[this.field1564] = var22.id;
 											this.field1201[this.field1564] = var17;
-											this.field1202[this.field1564] = var12.field78;
+											this.field1202[this.field1564] = var12.id;
 											this.field1564++;
 										}
-									} else if (this.field1307 != 1 || !var12.field101) {
-										if (var12.field101) {
+									} else if (this.field1307 != 1 || !var12.interactable) {
+										if (var12.interactable) {
 											for (int var23 = 4; var23 >= 3; var23--) {
 												if (var22.iop != null && var22.iop[var23] != null) {
 													this.field1579[this.field1564] = var22.iop[var23] + " @lre@" + var22.name;
@@ -7998,27 +7998,27 @@ public class client extends GameShell {
 													}
 													this.field1204[this.field1564] = var22.id;
 													this.field1201[this.field1564] = var17;
-													this.field1202[this.field1564] = var12.field78;
+													this.field1202[this.field1564] = var12.id;
 													this.field1564++;
 												} else if (var23 == 4) {
 													this.field1579[this.field1564] = "Drop @lre@" + var22.name;
 													this.field1203[this.field1564] = 347;
 													this.field1204[this.field1564] = var22.id;
 													this.field1201[this.field1564] = var17;
-													this.field1202[this.field1564] = var12.field78;
+													this.field1202[this.field1564] = var12.id;
 													this.field1564++;
 												}
 											}
 										}
-										if (var12.field102) {
+										if (var12.usable) {
 											this.field1579[this.field1564] = "Use @lre@" + var22.name;
 											this.field1203[this.field1564] = 188;
 											this.field1204[this.field1564] = var22.id;
 											this.field1201[this.field1564] = var17;
-											this.field1202[this.field1564] = var12.field78;
+											this.field1202[this.field1564] = var12.id;
 											this.field1564++;
 										}
-										if (var12.field101 && var22.iop != null) {
+										if (var12.interactable && var22.iop != null) {
 											for (int var24 = 2; var24 >= 0; var24--) {
 												if (var22.iop[var24] != null) {
 													this.field1579[this.field1564] = var22.iop[var24] + " @lre@" + var22.name;
@@ -8033,15 +8033,15 @@ public class client extends GameShell {
 													}
 													this.field1204[this.field1564] = var22.id;
 													this.field1201[this.field1564] = var17;
-													this.field1202[this.field1564] = var12.field78;
+													this.field1202[this.field1564] = var12.id;
 													this.field1564++;
 												}
 											}
 										}
-										if (var12.field108 != null) {
+										if (var12.iop != null) {
 											for (int var25 = 4; var25 >= 0; var25--) {
-												if (var12.field108[var25] != null) {
-													this.field1579[this.field1564] = var12.field108[var25] + " @lre@" + var22.name;
+												if (var12.iop[var25] != null) {
+													this.field1579[this.field1564] = var12.iop[var25] + " @lre@" + var22.name;
 													if (var25 == 0) {
 														this.field1203[this.field1564] = 602;
 													}
@@ -8059,7 +8059,7 @@ public class client extends GameShell {
 													}
 													this.field1204[this.field1564] = var22.id;
 													this.field1201[this.field1564] = var17;
-													this.field1202[this.field1564] = var12.field78;
+													this.field1202[this.field1564] = var12.id;
 													this.field1564++;
 												}
 											}
@@ -8067,14 +8067,14 @@ public class client extends GameShell {
 										this.field1579[this.field1564] = "Examine @lre@" + var22.name;
 										this.field1203[this.field1564] = 1773;
 										this.field1204[this.field1564] = var22.id;
-										this.field1202[this.field1564] = var12.field75[var17];
+										this.field1202[this.field1564] = var12.invSlotObjCount[var17];
 										this.field1564++;
 									} else if ((this.field1309 & 0x10) == 16) {
 										this.field1579[this.field1564] = this.field1310 + " @lre@" + var22.name;
 										this.field1203[this.field1564] = 391;
 										this.field1204[this.field1564] = var22.id;
 										this.field1201[this.field1564] = var17;
-										this.field1202[this.field1564] = var12.field78;
+										this.field1202[this.field1564] = var12.id;
 										this.field1564++;
 									}
 								}
@@ -8151,8 +8151,8 @@ public class client extends GameShell {
 					this.field1345 = "";
 					this.field1451 = false;
 					for (int var4 = 0; var4 < Component.types.length; var4++) {
-						if (Component.types[var4] != null && Component.types[var4].field82 == var3) {
-							this.field1273 = Component.types[var4].field79;
+						if (Component.types[var4] != null && Component.types[var4].clientCode == var3) {
+							this.field1273 = Component.types[var4].layer;
 							break;
 						}
 					}
@@ -8166,16 +8166,16 @@ public class client extends GameShell {
 				Component var6 = Component.types[var5];
 				int var7 = this.in.g1();
 				for (int var8 = 0; var8 < var7; var8++) {
-					var6.field74[var8] = this.in.g2();
+					var6.invSlotObjId[var8] = this.in.g2();
 					int var9 = this.in.g1();
 					if (var9 == 255) {
 						var9 = this.in.g4();
 					}
-					var6.field75[var8] = var9;
+					var6.invSlotObjCount[var8] = var9;
 				}
-				for (int var10 = var7; var10 < var6.field74.length; var10++) {
-					var6.field74[var10] = 0;
-					var6.field75[var10] = 0;
+				for (int var10 = var7; var10 < var6.invSlotObjId.length; var10++) {
+					var6.invSlotObjId[var10] = 0;
+					var6.invSlotObjCount[var10] = 0;
 				}
 				this.ptype = -1;
 				return true;
@@ -8185,11 +8185,11 @@ public class client extends GameShell {
 				int var12 = this.in.g2();
 				int var13 = this.in.g2();
 				ObjType var14 = ObjType.get(var12);
-				Component.types[var11].field120 = 4;
-				Component.types[var11].field121 = var12;
-				Component.types[var11].field127 = var14.xan2d;
-				Component.types[var11].field128 = var14.yan2d;
-				Component.types[var11].field126 = var14.zoom2d * 100 / var13;
+				Component.types[var11].modelType = 4;
+				Component.types[var11].model = var12;
+				Component.types[var11].xan = var14.xan2d;
+				Component.types[var11].yan = var14.yan2d;
+				Component.types[var11].zoom = var14.zoom2d * 100 / var13;
 				this.ptype = -1;
 				return true;
 			}
@@ -8309,7 +8309,7 @@ public class client extends GameShell {
 				int var34 = var33 >> 10 & 0x1F;
 				int var35 = var33 >> 5 & 0x1F;
 				int var36 = var33 & 0x1F;
-				Component.types[var32].field115 = (var36 << 3) + (var34 << 19) + (var35 << 11);
+				Component.types[var32].colour = (var36 << 3) + (var34 << 19) + (var35 << 11);
 				this.ptype = -1;
 				return true;
 			}
@@ -8420,8 +8420,8 @@ public class client extends GameShell {
 			if (this.ptype == 245) {
 				int var48 = this.in.g2();
 				int var49 = this.in.g2();
-				Component.types[var48].field120 = 1;
-				Component.types[var48].field121 = var49;
+				Component.types[var48].modelType = 1;
+				Component.types[var48].model = var49;
 				this.ptype = -1;
 				return true;
 			}
@@ -8469,10 +8469,10 @@ public class client extends GameShell {
 				}
 				this.field1527 = 1;
 				this.field1489 = System.currentTimeMillis();
-				this.field1517.method267(212);
-				this.field1442.method213(257, 1, 0, "Loading - please wait.", 151);
-				this.field1442.method213(256, 1, 16777215, "Loading - please wait.", 150);
-				this.field1517.method268(super.graphics, 4, (byte) 55, 4);
+				this.field1517.bind(212);
+				this.field1442.drawStringCenter(257, 1, 0, "Loading - please wait.", 151);
+				this.field1442.drawStringCenter(256, 1, 16777215, "Loading - please wait.", 150);
+				this.field1517.draw(super.graphics, 4, (byte) 55, 4);
 				int var56 = 0;
 				for (int var57 = (this.field1589 - 6) / 8; var57 <= (this.field1589 + 6) / 8; var57++) {
 					for (int var58 = (this.field1590 - 6) / 8; var58 <= (this.field1590 + 6) / 8; var58++) {
@@ -8598,7 +8598,7 @@ public class client extends GameShell {
 			if (this.ptype == 219) {
 				int var84 = this.in.g2();
 				int var85 = this.in.g2();
-				Component.types[var84].field124 = var85;
+				Component.types[var84].anim = var85;
 				this.ptype = -1;
 				return true;
 			}
@@ -8679,8 +8679,8 @@ public class client extends GameShell {
 			}
 			if (this.ptype == 108) {
 				int var104 = this.in.g2();
-				Component.types[var104].field120 = 3;
-				Component.types[var104].field121 = (localPlayer.field469[8] << 6) + (localPlayer.field469[0] << 12) + (localPlayer.field470[0] << 24) + (localPlayer.field470[4] << 18) + localPlayer.field469[11];
+				Component.types[var104].modelType = 3;
+				Component.types[var104].model = (localPlayer.field469[8] << 6) + (localPlayer.field469[0] << 12) + (localPlayer.field470[0] << 24) + (localPlayer.field470[4] << 18) + localPlayer.field469[11];
 				this.ptype = -1;
 				return true;
 			}
@@ -8732,8 +8732,8 @@ public class client extends GameShell {
 			if (this.ptype == 154) {
 				int var107 = this.in.g2();
 				String var108 = this.in.gjstr();
-				Component.types[var107].field113 = var108;
-				if (this.field1324[this.field1225] == Component.types[var107].field79) {
+				Component.types[var107].text = var108;
+				if (this.field1324[this.field1225] == Component.types[var107].layer) {
 					this.field1221 = true;
 				}
 				this.ptype = -1;
@@ -8761,8 +8761,8 @@ public class client extends GameShell {
 			if (this.ptype == 129) {
 				int var111 = this.in.g2();
 				int var112 = this.in.g2();
-				Component.types[var111].field120 = 2;
-				Component.types[var111].field121 = var112;
+				Component.types[var111].modelType = 2;
+				Component.types[var111].model = var112;
 				this.ptype = -1;
 				return true;
 			}
@@ -8809,9 +8809,9 @@ public class client extends GameShell {
 			if (this.ptype == 162) {
 				int var120 = this.in.g2();
 				Component var121 = Component.types[var120];
-				for (int var122 = 0; var122 < var121.field74.length; var122++) {
-					var121.field74[var122] = -1;
-					var121.field74[var122] = 0;
+				for (int var122 = 0; var122 < var121.invSlotObjId.length; var122++) {
+					var121.invSlotObjId[var122] = -1;
+					var121.invSlotObjId[var122] = 0;
 				}
 				this.ptype = -1;
 				return true;
@@ -8905,9 +8905,9 @@ public class client extends GameShell {
 					if (var129 == 255) {
 						var129 = this.in.g4();
 					}
-					if (var127 >= 0 && var127 < var126.field74.length) {
-						var126.field74[var127] = var128;
-						var126.field75[var127] = var129;
+					if (var127 >= 0 && var127 < var126.invSlotObjId.length) {
+						var126.invSlotObjId[var127] = var128;
+						var126.invSlotObjCount[var127] = var129;
 					}
 				}
 				this.ptype = -1;
@@ -8999,7 +8999,7 @@ public class client extends GameShell {
 			if (this.ptype == 123) {
 				int var144 = this.in.g2();
 				boolean var145 = this.in.g1() == 1;
-				Component.types[var144].field94 = var145;
+				Component.types[var144].hide = var145;
 				this.ptype = -1;
 				return true;
 			}
@@ -9091,11 +9091,11 @@ public class client extends GameShell {
 	public final int method526(Component arg0, int arg1, int arg2) {
 		if (arg1 <= 0) {
 			return 4;
-		} else if (arg0.field88 == null || arg2 >= arg0.field88.length) {
+		} else if (arg0.scripts == null || arg2 >= arg0.scripts.length) {
 			return -2;
 		} else {
 			try {
-				int[] var4 = arg0.field88[arg2];
+				int[] var4 = arg0.scripts[arg2];
 				int var5 = 0;
 				int var6 = 0;
 				while (true) {
@@ -9115,9 +9115,9 @@ public class client extends GameShell {
 					if (var7 == 4) {
 						Component var8 = Component.types[var4[var6++]];
 						int var9 = var4[var6++] + 1;
-						for (int var10 = 0; var10 < var8.field74.length; var10++) {
-							if (var8.field74[var10] == var9) {
-								var5 += var8.field75[var10];
+						for (int var10 = 0; var10 < var8.invSlotObjId.length; var10++) {
+							if (var8.invSlotObjId[var10] == var9) {
+								var5 += var8.invSlotObjCount[var10];
 							}
 						}
 					}
@@ -9144,8 +9144,8 @@ public class client extends GameShell {
 					if (var7 == 10) {
 						Component var12 = Component.types[var4[var6++]];
 						int var13 = var4[var6++] + 1;
-						for (int var14 = 0; var14 < var12.field74.length; var14++) {
-							if (var12.field74[var14] == var13) {
+						for (int var14 = 0; var14 < var12.invSlotObjId.length; var14++) {
+							if (var12.invSlotObjId[var14] == var13) {
 								var5 += 999999999;
 								break;
 							}
@@ -9233,10 +9233,10 @@ public class client extends GameShell {
 			if (var7 > 0) {
 				var11 = arg3;
 			}
-			int[] var12 = this.field1463.field670;
+			int[] var12 = this.field1463.pixels;
 			int var13 = (103 - arg0) * 512 * 4 + arg5 * 4 + 24624;
 			int var14 = var7 >> 14 & 0x7FFF;
-			LocType var15 = LocType.method333(var14);
+			LocType var15 = LocType.get(var14);
 			if (var15.mapscene == -1) {
 				if (var10 == 0 || var10 == 2) {
 					if (var9 == 0) {
@@ -9310,7 +9310,7 @@ public class client extends GameShell {
 			int var21 = var20 >> 6 & 0x3;
 			int var22 = var20 & 0x1F;
 			int var23 = var19 >> 14 & 0x7FFF;
-			LocType var24 = LocType.method333(var23);
+			LocType var24 = LocType.get(var23);
 			if (var24.mapscene != -1) {
 				Pix8 var25 = this.field1574[var24.mapscene];
 				if (var25 != null) {
@@ -9323,7 +9323,7 @@ public class client extends GameShell {
 				if (var19 > 0) {
 					var28 = 15597568;
 				}
-				int[] var29 = this.field1463.field670;
+				int[] var29 = this.field1463.pixels;
 				int var30 = (103 - arg0) * 512 * 4 + arg5 * 4 + 24624;
 				if (var21 == 0 || var21 == 2) {
 					var29[var30 + 1536] = var28;
@@ -9347,7 +9347,7 @@ public class client extends GameShell {
 			return;
 		}
 		int var33 = var31 >> 14 & 0x7FFF;
-		LocType var34 = LocType.method333(var33);
+		LocType var34 = LocType.get(var33);
 		if (var34.mapscene == -1) {
 			return;
 		}
@@ -9523,7 +9523,7 @@ public class client extends GameShell {
 		UnkType.types = null;
 		SeqType.types = null;
 		SpotAnimType.types = null;
-		SpotAnimType.field1151 = null;
+		SpotAnimType.modelCache = null;
 		VarpType.types = null;
 		super.drawArea = null;
 		PlayerEntity.field486 = null;
@@ -9551,7 +9551,7 @@ public class client extends GameShell {
 		if (arg1 != 7) {
 			this.ptype = -1;
 		}
-		int var3 = arg0.field82;
+		int var3 = arg0.clientCode;
 		if (var3 == 201) {
 			this.field1236 = true;
 			this.field1376 = false;
@@ -9951,7 +9951,7 @@ public class client extends GameShell {
 			}
 			this.field1404.pIsaac(107, this.field1496);
 			var3.method20(this.field1258, this.field1554, false);
-			this.field1517.method267(212);
+			this.field1517.bind(212);
 			this.field1404.pIsaac(107, this.field1496);
 			for (int var20 = 0; var20 < 104; var20++) {
 				for (int var21 = 0; var21 < 104; var21++) {
@@ -9961,7 +9961,7 @@ public class client extends GameShell {
 			this.method513(-592);
 		} catch (Exception var34) {
 		}
-		LocType.modelCacheStatic.method116();
+		LocType.modelCacheStatic.clear();
 		if (arg0 >= 0) {
 			field1282 = !field1282;
 		}
@@ -9992,11 +9992,11 @@ public class client extends GameShell {
 				if (var26 == var30 || var27 == var30 || var28 == var31 || var29 == var31) {
 					int var32 = this.onDemand.getMapFile(var31, var30, 0, field1543);
 					if (var32 != -1) {
-						this.onDemand.method293(3, var32, -938);
+						this.onDemand.prefetch(3, var32, -938);
 					}
 					int var33 = this.onDemand.getMapFile(var31, var30, 1, field1543);
 					if (var33 != -1) {
-						this.onDemand.method293(3, var33, -938);
+						this.onDemand.prefetch(3, var33, -938);
 					}
 				}
 			}
@@ -10032,7 +10032,7 @@ public class client extends GameShell {
 			}
 		}
 		for (int var6 = 0; var6 < 33920; var6++) {
-			this.field1367.field757[var6] = this.imageFlamesRight.field670[var6];
+			this.field1367.data[var6] = this.imageFlamesRight.pixels[var6];
 		}
 		int var7 = 0;
 		int var8 = 1152;
@@ -10050,8 +10050,8 @@ public class client extends GameShell {
 				} else {
 					int var28 = 256 - var26;
 					int var29 = this.flameGradient[var26];
-					int var30 = this.field1367.field757[var8];
-					this.field1367.field757[var8++] = ((var29 & 0xFF00FF) * var26 + (var30 & 0xFF00FF) * var28 & 0xFF00FF00) + ((var29 & 0xFF00) * var26 + (var30 & 0xFF00) * var28 & 0xFF0000) >> 8;
+					int var30 = this.field1367.data[var8];
+					this.field1367.data[var8++] = ((var29 & 0xFF00FF) * var26 + (var30 & 0xFF00FF) * var28 & 0xFF00FF00) + ((var29 & 0xFF00) * var26 + (var30 & 0xFF00) * var28 & 0xFF0000) >> 8;
 				}
 			}
 			var8 += var24;
@@ -10059,9 +10059,9 @@ public class client extends GameShell {
 		if (arg0 != 25630) {
 			return;
 		}
-		this.field1367.method268(super.graphics, 0, (byte) 55, 0);
+		this.field1367.draw(super.graphics, 0, (byte) 55, 0);
 		for (int var10 = 0; var10 < 33920; var10++) {
-			this.field1368.field757[var10] = this.levelObjStacks.field670[var10];
+			this.field1368.data[var10] = this.levelObjStacks.pixels[var10];
 		}
 		int var11 = 0;
 		int var12 = 1176;
@@ -10076,19 +10076,19 @@ public class client extends GameShell {
 				} else {
 					int var20 = 256 - var18;
 					int var21 = this.flameGradient[var18];
-					int var22 = this.field1368.field757[var16];
-					this.field1368.field757[var16++] = ((var21 & 0xFF00FF) * var18 + (var22 & 0xFF00FF) * var20 & 0xFF00FF00) + ((var21 & 0xFF00) * var18 + (var22 & 0xFF00) * var20 & 0xFF0000) >> 8;
+					int var22 = this.field1368.data[var16];
+					this.field1368.data[var16++] = ((var21 & 0xFF00FF) * var18 + (var22 & 0xFF00FF) * var20 & 0xFF00FF00) + ((var21 & 0xFF00) * var18 + (var22 & 0xFF00) * var20 & 0xFF0000) >> 8;
 				}
 			}
 			var11 += 128 - var15;
 			var12 = 128 - var15 - var14 + var16;
 		}
-		this.field1368.method268(super.graphics, 0, (byte) 55, 637);
+		this.field1368.draw(super.graphics, 0, (byte) 55, 637);
 	}
 
 	@ObfuscatedName("client.a(BI)V")
 	public final void method539(byte arg0, int arg1) {
-		int[] var3 = this.field1463.field670;
+		int[] var3 = this.field1463.pixels;
 		int var4 = var3.length;
 		if (arg0 != -24) {
 			this.ptype = -1;
@@ -10110,7 +10110,7 @@ public class client extends GameShell {
 		}
 		int var7 = ((int) (Math.random() * 20.0D) + 238 - 10 << 16) + ((int) (Math.random() * 20.0D) + 238 - 10 << 8) + ((int) (Math.random() * 20.0D) + 238 - 10);
 		int var8 = (int) (Math.random() * 20.0D) + 238 - 10 << 16;
-		this.field1463.method193(212);
+		this.field1463.bind(212);
 		for (int var9 = 1; var9 < 103; var9++) {
 			for (int var22 = 1; var22 < 103; var22++) {
 				if ((this.field1281[arg1][var22][var9] & 0x18) == 0) {
@@ -10121,14 +10121,14 @@ public class client extends GameShell {
 				}
 			}
 		}
-		this.field1517.method267(212);
+		this.field1517.bind(212);
 		this.field1210 = 0;
 		for (int var10 = 0; var10 < 104; var10++) {
 			for (int var11 = 0; var11 < 104; var11++) {
 				int var12 = this.field1258.method92(this.field1479, var10, var11);
 				if (var12 != 0) {
 					int var13 = var12 >> 14 & 0x7FFF;
-					int var14 = LocType.method333(var13).mapfunction;
+					int var14 = LocType.get(var13).mapfunction;
 					if (var14 >= 0) {
 						int var15 = var10;
 						int var16 = var11;
@@ -10176,24 +10176,24 @@ public class client extends GameShell {
 		this.field1326 = null;
 		this.field1327 = null;
 		this.field1367 = new PixMap(this.getBaseComponent(3), 265, 128, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1368 = new PixMap(this.getBaseComponent(3), 265, 128, 2);
 		this.ingame &= arg0;
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1364 = new PixMap(this.getBaseComponent(3), 171, 509, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1365 = new PixMap(this.getBaseComponent(3), 132, 360, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1366 = new PixMap(this.getBaseComponent(3), 200, 360, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1369 = new PixMap(this.getBaseComponent(3), 238, 202, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1370 = new PixMap(this.getBaseComponent(3), 238, 203, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1371 = new PixMap(this.getBaseComponent(3), 94, 74, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		this.field1372 = new PixMap(this.getBaseComponent(3), 94, 75, 2);
-		Pix2D.method167(false);
+		Pix2D.clear(false);
 		if (this.field1390 != null) {
 			this.method435(true);
 			this.method495(field1374);
@@ -10203,12 +10203,12 @@ public class client extends GameShell {
 
 	@ObfuscatedName("client.k(B)V")
 	public final void method541(byte arg0) {
-		int var2 = this.field1443.method215("Choose Option", (byte) 4);
+		int var2 = this.field1443.stringWidth("Choose Option", (byte) 4);
 		if (arg0 != 2) {
 			return;
 		}
 		for (int var3 = 0; var3 < this.field1564; var3++) {
-			int var11 = this.field1443.method215(this.field1579[var3], (byte) 4);
+			int var11 = this.field1443.stringWidth(this.field1579[var3], (byte) 4);
 			if (var11 > var2) {
 				var2 = var11;
 			}
@@ -10359,59 +10359,59 @@ public class client extends GameShell {
 
 	@ObfuscatedName("client.a(IIILd;I)V")
 	public final void method544(int arg0, int arg1, int arg2, Component arg3, int arg4) {
-		if (arg3.field80 != 0 || arg3.field95 == null || arg3.field94 && this.field1541 != arg3.field78 && this.field1618 != arg3.field78 && this.field1490 != arg3.field78) {
+		if (arg3.type != 0 || arg3.children == null || arg3.hide && this.field1541 != arg3.id && this.field1618 != arg3.id && this.field1490 != arg3.id) {
 			return;
 		}
-		int var6 = Pix2D.field632;
-		int var7 = Pix2D.field630;
-		int var8 = Pix2D.field633;
-		int var9 = Pix2D.field631;
+		int var6 = Pix2D.left;
+		int var7 = Pix2D.top;
+		int var8 = Pix2D.right;
+		int var9 = Pix2D.bottom;
 		this.psize += arg1;
-		Pix2D.method166(arg3.field83 + arg4, arg3.field84 + arg2, this.field1611, arg2, arg4);
-		int var10 = arg3.field95.length;
+		Pix2D.setBounds(arg3.width + arg4, arg3.height + arg2, this.field1611, arg2, arg4);
+		int var10 = arg3.children.length;
 		for (int var11 = 0; var11 < var10; var11++) {
-			int var12 = arg3.field96[var11] + arg4;
-			int var13 = arg3.field97[var11] + arg2 - arg0;
-			Component var14 = Component.types[arg3.field95[var11]];
+			int var12 = arg3.childX[var11] + arg4;
+			int var13 = arg3.childY[var11] + arg2 - arg0;
+			Component var14 = Component.types[arg3.children[var11]];
 			int var15 = var14.field86 + var12;
 			int var16 = var14.field87 + var13;
-			if (var14.field82 > 0) {
+			if (var14.clientCode > 0) {
 				this.method433(var14, (byte) 102);
 			}
-			if (var14.field80 == 0) {
-				if (var14.field93 > var14.field92 - var14.field84) {
-					var14.field93 = var14.field92 - var14.field84;
+			if (var14.type == 0) {
+				if (var14.field93 > var14.scroll - var14.height) {
+					var14.field93 = var14.scroll - var14.height;
 				}
 				if (var14.field93 < 0) {
 					var14.field93 = 0;
 				}
 				this.method544(var14.field93, 0, var16, var14, var15);
-				if (var14.field92 > var14.field84) {
-					this.method551(var14.field83 + var15, var14.field92, var16, var14.field93, (byte) 9, var14.field84);
+				if (var14.scroll > var14.height) {
+					this.method551(var14.width + var15, var14.scroll, var16, var14.field93, (byte) 9, var14.height);
 				}
-			} else if (var14.field80 != 1) {
-				if (var14.field80 == 2) {
+			} else if (var14.type != 1) {
+				if (var14.type == 2) {
 					int var17 = 0;
-					for (int var18 = 0; var18 < var14.field84; var18++) {
-						for (int var19 = 0; var19 < var14.field83; var19++) {
-							int var20 = (var14.field103 + 32) * var19 + var15;
-							int var21 = (var14.field104 + 32) * var18 + var16;
+					for (int var18 = 0; var18 < var14.height; var18++) {
+						for (int var19 = 0; var19 < var14.width; var19++) {
+							int var20 = (var14.marginX + 32) * var19 + var15;
+							int var21 = (var14.marginY + 32) * var18 + var16;
 							if (var17 < 20) {
-								var20 += var14.field106[var17];
-								var21 += var14.field107[var17];
+								var20 += var14.invSlotOffsetX[var17];
+								var21 += var14.invSlotOffsetY[var17];
 							}
-							if (var14.field74[var17] > 0) {
+							if (var14.invSlotObjId[var17] > 0) {
 								int var22 = 0;
 								int var23 = 0;
-								int var24 = var14.field74[var17] - 1;
-								if (var20 > Pix2D.field632 - 32 && var20 < Pix2D.field633 && var21 > Pix2D.field630 - 32 && var21 < Pix2D.field631 || this.field1261 != 0 && this.field1260 == var17) {
+								int var24 = var14.invSlotObjId[var17] - 1;
+								if (var20 > Pix2D.left - 32 && var20 < Pix2D.right && var21 > Pix2D.top - 32 && var21 < Pix2D.bottom || this.field1261 != 0 && this.field1260 == var17) {
 									int var25 = 0;
-									if (this.field1497 == 1 && this.field1498 == var17 && this.field1499 == var14.field78) {
+									if (this.field1497 == 1 && this.field1498 == var17 && this.field1499 == var14.id) {
 										var25 = 16777215;
 									}
-									Pix32 var26 = ObjType.method354(var25, var14.field75[var17], var24, 723);
+									Pix32 var26 = ObjType.getIcon(var25, var14.invSlotObjCount[var17], var24, 723);
 									if (var26 != null) {
-										if (this.field1261 != 0 && this.field1260 == var17 && this.field1259 == var14.field78) {
+										if (this.field1261 != 0 && this.field1260 == var17 && this.field1259 == var14.id) {
 											var22 = super.mouseX - this.field1262;
 											var23 = super.mouseY - this.field1263;
 											if (var22 < 5 && var22 > -5) {
@@ -10424,9 +10424,9 @@ public class client extends GameShell {
 												var22 = 0;
 												var23 = 0;
 											}
-											var26.method200(var20 + var22, 128, 953, var21 + var23);
-											if (var21 + var23 < Pix2D.field630 && arg3.field93 > 0) {
-												int var27 = (Pix2D.field630 - var21 - var23) * this.field1488 / 3;
+											var26.drawAlpha(var20 + var22, 128, 953, var21 + var23);
+											if (var21 + var23 < Pix2D.top && arg3.field93 > 0) {
+												int var27 = (Pix2D.top - var21 - var23) * this.field1488 / 3;
 												if (var27 > this.field1488 * 10) {
 													var27 = this.field1488 * 10;
 												}
@@ -10436,68 +10436,68 @@ public class client extends GameShell {
 												arg3.field93 -= var27;
 												this.field1263 += var27;
 											}
-											if (var21 + var23 + 32 > Pix2D.field631 && arg3.field93 < arg3.field92 - arg3.field84) {
-												int var28 = (var21 + var23 + 32 - Pix2D.field631) * this.field1488 / 3;
+											if (var21 + var23 + 32 > Pix2D.bottom && arg3.field93 < arg3.scroll - arg3.height) {
+												int var28 = (var21 + var23 + 32 - Pix2D.bottom) * this.field1488 / 3;
 												if (var28 > this.field1488 * 10) {
 													var28 = this.field1488 * 10;
 												}
-												if (var28 > arg3.field92 - arg3.field84 - arg3.field93) {
-													var28 = arg3.field92 - arg3.field84 - arg3.field93;
+												if (var28 > arg3.scroll - arg3.height - arg3.field93) {
+													var28 = arg3.scroll - arg3.height - arg3.field93;
 												}
 												arg3.field93 += var28;
 												this.field1263 -= var28;
 											}
-										} else if (this.field1300 != 0 && this.field1299 == var17 && this.field1298 == var14.field78) {
-											var26.method200(var20, 128, 953, var21);
+										} else if (this.field1300 != 0 && this.field1299 == var17 && this.field1298 == var14.id) {
+											var26.drawAlpha(var20, 128, 953, var21);
 										} else {
-											var26.method198((byte) 9, var20, var21);
+											var26.draw((byte) 9, var20, var21);
 										}
-										if (var26.field675 == 33 || var14.field75[var17] != 1) {
-											int var29 = var14.field75[var17];
-											this.field1441.method216(method528(1, var29), 0, (byte) 8, var21 + 10 + var23, var20 + 1 + var22);
-											this.field1441.method216(method528(1, var29), 16776960, (byte) 8, var21 + 9 + var23, var20 + var22);
+										if (var26.width == 33 || var14.invSlotObjCount[var17] != 1) {
+											int var29 = var14.invSlotObjCount[var17];
+											this.field1441.drawString(method528(1, var29), 0, (byte) 8, var21 + 10 + var23, var20 + 1 + var22);
+											this.field1441.drawString(method528(1, var29), 16776960, (byte) 8, var21 + 9 + var23, var20 + var22);
 										}
 									}
 								}
-							} else if (var14.field105 != null && var17 < 20) {
-								Pix32 var30 = var14.field105[var17];
+							} else if (var14.invSlotGraphic != null && var17 < 20) {
+								Pix32 var30 = var14.invSlotGraphic[var17];
 								if (var30 != null) {
-									var30.method198((byte) 9, var20, var21);
+									var30.draw((byte) 9, var20, var21);
 								}
 							}
 							var17++;
 						}
 					}
-				} else if (var14.field80 == 3) {
-					if (var14.field85 == 0) {
-						if (var14.field109) {
-							Pix2D.method169(0, var14.field115, var14.field83, var14.field84, var15, var16);
+				} else if (var14.type == 3) {
+					if (var14.alpha == 0) {
+						if (var14.fill) {
+							Pix2D.fillRect(0, var14.colour, var14.width, var14.height, var15, var16);
 						} else {
-							Pix2D.method170(var14.field84, var14.field83, var14.field115, var15, 901, var16);
+							Pix2D.drawRect(var14.height, var14.width, var14.colour, var15, 901, var16);
 						}
-					} else if (var14.field109) {
-						Pix2D.method168(var16, 256 - (var14.field85 & 0xFF), var14.field84, var14.field83, var14.field115, var15, (byte) -30);
+					} else if (var14.fill) {
+						Pix2D.fillRect(var16, 256 - (var14.alpha & 0xFF), var14.height, var14.width, var14.colour, var15, (byte) -30);
 					} else {
-						Pix2D.method171(var14.field84, var14.field115, var15, var16, var14.field83, true, 256 - (var14.field85 & 0xFF));
+						Pix2D.drawRect(var14.height, var14.colour, var15, var16, var14.width, true, 256 - (var14.alpha & 0xFF));
 					}
-				} else if (var14.field80 == 4) {
-					PixFont var31 = var14.field112;
-					int var32 = var14.field115;
-					String var33 = var14.field113;
-					if ((this.field1490 == var14.field78 || this.field1618 == var14.field78 || this.field1541 == var14.field78) && var14.field117 != 0) {
-						var32 = var14.field117;
+				} else if (var14.type == 4) {
+					PixFont var31 = var14.font;
+					int var32 = var14.colour;
+					String var33 = var14.text;
+					if ((this.field1490 == var14.id || this.field1618 == var14.id || this.field1541 == var14.id) && var14.overColour != 0) {
+						var32 = var14.overColour;
 					}
 					if (this.method516(var14, 551)) {
-						var32 = var14.field116;
-						if (var14.field114.length() > 0) {
-							var33 = var14.field114;
+						var32 = var14.activeColour;
+						if (var14.activeText.length() > 0) {
+							var33 = var14.activeText;
 						}
 					}
-					if (var14.field81 == 6 && this.field1613) {
+					if (var14.buttonType == 6 && this.field1613) {
 						var33 = "Please wait...";
-						var32 = var14.field115;
+						var32 = var14.colour;
 					}
-					if (Pix2D.field628 == 479) {
+					if (Pix2D.width2d == 479) {
 						if (var32 == 16776960) {
 							var32 = 255;
 						}
@@ -10505,7 +10505,7 @@ public class client extends GameShell {
 							var32 = 16777215;
 						}
 					}
-					int var34 = var31.field704 + var16;
+					int var34 = var31.height + var16;
 					while (var33.length() > 0) {
 						if (var33.indexOf("%") != -1) {
 							label311: while (true) {
@@ -10549,66 +10549,66 @@ public class client extends GameShell {
 							var41 = var33.substring(0, var40);
 							var33 = var33.substring(var40 + 2);
 						}
-						if (var14.field110) {
-							var31.method214(var14.field83 / 2 + var15, var14.field111, var41, true, var34, var32);
+						if (var14.center) {
+							var31.drawStringTaggableCenter(var14.width / 2 + var15, var14.shadowed, var41, true, var34, var32);
 						} else {
-							var31.method218(var32, var15, var14.field111, false, var34, var41);
+							var31.drawStringTaggable(var32, var15, var14.shadowed, false, var34, var41);
 						}
-						var34 += var31.field704;
+						var34 += var31.height;
 					}
-				} else if (var14.field80 == 5) {
+				} else if (var14.type == 5) {
 					Pix32 var42;
 					if (this.method516(var14, 551)) {
-						var42 = var14.field119;
+						var42 = var14.activeGraphic;
 					} else {
-						var42 = var14.field118;
+						var42 = var14.graphic;
 					}
 					if (var42 != null) {
-						var42.method198((byte) 9, var15, var16);
+						var42.draw((byte) 9, var15, var16);
 					}
-				} else if (var14.field80 == 6) {
-					int var43 = Pix3D.field647;
-					int var44 = Pix3D.field648;
-					Pix3D.field647 = var14.field83 / 2 + var15;
-					Pix3D.field648 = var14.field84 / 2 + var16;
-					int var45 = Pix3D.sinTable[var14.field127] * var14.field126 >> 16;
-					int var46 = Pix3D.cosTable[var14.field127] * var14.field126 >> 16;
+				} else if (var14.type == 6) {
+					int var43 = Pix3D.centerX;
+					int var44 = Pix3D.centerY;
+					Pix3D.centerX = var14.width / 2 + var15;
+					Pix3D.centerY = var14.height / 2 + var16;
+					int var45 = Pix3D.sinTable[var14.xan] * var14.zoom >> 16;
+					int var46 = Pix3D.cosTable[var14.xan] * var14.zoom >> 16;
 					boolean var47 = this.method516(var14, 551);
 					int var48;
 					if (var47) {
-						var48 = var14.field125;
+						var48 = var14.activeAnim;
 					} else {
-						var48 = var14.field124;
+						var48 = var14.anim;
 					}
 					Model var49;
 					if (var48 == -1) {
-						var49 = var14.method34((byte) 0, -1, -1, var47);
+						var49 = var14.getModel((byte) 0, -1, -1, var47);
 					} else {
 						SeqType var50 = SeqType.types[var48];
-						var49 = var14.method34((byte) 0, var50.frames[var14.field76], var50.iframes[var14.field76], var47);
+						var49 = var14.getModel((byte) 0, var50.frames[var14.field76], var50.iframes[var14.field76], var47);
 					}
 					if (var49 != null) {
-						var49.method158(0, var14.field128, 0, var14.field127, 0, var45, var46);
+						var49.drawSimple(0, var14.yan, 0, var14.xan, 0, var45, var46);
 					}
-					Pix3D.field647 = var43;
-					Pix3D.field648 = var44;
-				} else if (var14.field80 == 7) {
-					PixFont var51 = var14.field112;
+					Pix3D.centerX = var43;
+					Pix3D.centerY = var44;
+				} else if (var14.type == 7) {
+					PixFont var51 = var14.font;
 					int var52 = 0;
-					for (int var53 = 0; var53 < var14.field84; var53++) {
-						for (int var54 = 0; var54 < var14.field83; var54++) {
-							if (var14.field74[var52] > 0) {
-								ObjType var55 = ObjType.get(var14.field74[var52] - 1);
+					for (int var53 = 0; var53 < var14.height; var53++) {
+						for (int var54 = 0; var54 < var14.width; var54++) {
+							if (var14.invSlotObjId[var52] > 0) {
+								ObjType var55 = ObjType.get(var14.invSlotObjId[var52] - 1);
 								String var56 = var55.name;
-								if (var55.stackable || var14.field75[var52] != 1) {
-									var56 = var56 + " x" + method459(5, var14.field75[var52]);
+								if (var55.stackable || var14.invSlotObjCount[var52] != 1) {
+									var56 = var56 + " x" + method459(5, var14.invSlotObjCount[var52]);
 								}
-								int var57 = (var14.field103 + 115) * var54 + var15;
-								int var58 = (var14.field104 + 12) * var53 + var16;
-								if (var14.field110) {
-									var51.method214(var14.field83 / 2 + var57, var14.field111, var56, true, var58, var14.field115);
+								int var57 = (var14.marginX + 115) * var54 + var15;
+								int var58 = (var14.marginY + 12) * var53 + var16;
+								if (var14.center) {
+									var51.drawStringTaggableCenter(var14.width / 2 + var57, var14.shadowed, var56, true, var58, var14.colour);
 								} else {
-									var51.method218(var14.field115, var57, var14.field111, false, var58, var56);
+									var51.drawStringTaggable(var14.colour, var57, var14.shadowed, false, var58, var56);
 								}
 							}
 							var52++;
@@ -10617,7 +10617,7 @@ public class client extends GameShell {
 				}
 			}
 		}
-		Pix2D.method166(var8, var9, this.field1611, var7, var6);
+		Pix2D.setBounds(var8, var9, this.field1611, var7, var6);
 	}
 
 	@ObfuscatedName("client.l(B)V")
@@ -10751,10 +10751,10 @@ public class client extends GameShell {
 					if (this.field1532 == this.field1259 && this.field1531 != this.field1260) {
 						Component var4 = Component.types[this.field1259];
 						byte var5 = 0;
-						if (this.field1551 == 1 && var4.field82 == 206) {
+						if (this.field1551 == 1 && var4.clientCode == 206) {
 							var5 = 1;
 						}
-						if (var4.field74[this.field1531] <= 0) {
+						if (var4.invSlotObjId[this.field1531] <= 0) {
 							var5 = 0;
 						}
 						if (var5 == 1) {
@@ -10762,15 +10762,15 @@ public class client extends GameShell {
 							int var7 = this.field1531;
 							while (var6 != var7) {
 								if (var6 > var7) {
-									var4.method33(var6, false, var6 - 1);
+									var4.swapObj(var6, false, var6 - 1);
 									var6--;
 								} else if (var6 < var7) {
-									var4.method33(var6, false, var6 + 1);
+									var4.swapObj(var6, false, var6 + 1);
 									var6++;
 								}
 							}
 						} else {
-							var4.method33(this.field1260, false, this.field1531);
+							var4.swapObj(this.field1260, false, this.field1531);
 						}
 						this.field1404.pIsaac(81, this.field1496);
 						this.field1404.p2(this.field1259);
@@ -10964,10 +10964,10 @@ public class client extends GameShell {
 			this.ptype = -1;
 		}
 		if (field1401 && this.field1527 == 2 && World.field46 != this.field1479) {
-			this.field1517.method267(212);
-			this.field1442.method213(257, 1, 0, "Loading - please wait.", 151);
-			this.field1442.method213(256, 1, 16777215, "Loading - please wait.", 150);
-			this.field1517.method268(super.graphics, 4, (byte) 55, 4);
+			this.field1517.bind(212);
+			this.field1442.drawStringCenter(257, 1, 0, "Loading - please wait.", 151);
+			this.field1442.drawStringCenter(256, 1, 16777215, "Loading - please wait.", 150);
+			this.field1517.draw(super.graphics, 4, (byte) 55, 4);
 			this.field1527 = 1;
 			this.field1489 = System.currentTimeMillis();
 		}
@@ -11078,26 +11078,26 @@ public class client extends GameShell {
 	public final void method551(int arg0, int arg1, int arg2, int arg3, byte arg4, int arg5) {
 		this.field1197.method211((byte) 9, arg0, arg2);
 		this.field1198.method211((byte) 9, arg0, arg2 + arg5 - 16);
-		Pix2D.method169(0, this.field1304, 16, arg5 - 32, arg0, arg2 + 16);
+		Pix2D.fillRect(0, this.field1304, 16, arg5 - 32, arg0, arg2 + 16);
 		int var7 = (arg5 - 32) * arg5 / arg1;
 		if (var7 < 8) {
 			var7 = 8;
 		}
 		int var8 = (arg5 - 32 - var7) * arg3 / (arg1 - arg5);
-		Pix2D.method169(0, this.field1280, 16, var7, arg0, arg2 + 16 + var8);
+		Pix2D.fillRect(0, this.field1280, 16, var7, arg0, arg2 + 16 + var8);
 		if (arg4 == 9) {
 			boolean var9 = false;
 		} else {
 			this.field1523 = this.field1537.nextInt();
 		}
-		Pix2D.method174(arg0, this.field1535, arg2 + 16 + var8, var7, this.field1421);
-		Pix2D.method174(arg0 + 1, this.field1535, arg2 + 16 + var8, var7, this.field1421);
-		Pix2D.method172(this.field1535, arg2 + 16 + var8, 16, arg0, this.field1220);
-		Pix2D.method172(this.field1535, arg2 + 17 + var8, 16, arg0, this.field1220);
-		Pix2D.method174(arg0 + 15, this.field1276, arg2 + 16 + var8, var7, this.field1421);
-		Pix2D.method174(arg0 + 14, this.field1276, arg2 + 17 + var8, var7 - 1, this.field1421);
-		Pix2D.method172(this.field1276, arg2 + 15 + var8 + var7, 16, arg0, this.field1220);
-		Pix2D.method172(this.field1276, arg2 + 14 + var8 + var7, 15, arg0 + 1, this.field1220);
+		Pix2D.drawVerticalLine(arg0, this.field1535, arg2 + 16 + var8, var7, this.field1421);
+		Pix2D.drawVerticalLine(arg0 + 1, this.field1535, arg2 + 16 + var8, var7, this.field1421);
+		Pix2D.drawHorizontalLine(this.field1535, arg2 + 16 + var8, 16, arg0, this.field1220);
+		Pix2D.drawHorizontalLine(this.field1535, arg2 + 17 + var8, 16, arg0, this.field1220);
+		Pix2D.drawVerticalLine(arg0 + 15, this.field1276, arg2 + 16 + var8, var7, this.field1421);
+		Pix2D.drawVerticalLine(arg0 + 14, this.field1276, arg2 + 17 + var8, var7 - 1, this.field1421);
+		Pix2D.drawHorizontalLine(this.field1276, arg2 + 15 + var8 + var7, 16, arg0, this.field1220);
+		Pix2D.drawHorizontalLine(this.field1276, arg2 + 14 + var8 + var7, 15, arg0 + 1, this.field1220);
 	}
 
 	@ObfuscatedName("client.a(B[BI)Z")
@@ -11125,9 +11125,9 @@ public class client extends GameShell {
 		int var11 = arg0 * var10 + arg3 * var9 >> 16;
 		int var12 = arg3 * var10 - arg0 * var9 >> 16;
 		if (var6 > 2500) {
-			arg2.method204(this.field1446, false, var11 + 94 - arg2.field675 / 2 + 4, 83 - var12 - arg2.field676 / 2 - 4);
+			arg2.drawMasked(this.field1446, false, var11 + 94 - arg2.width / 2 + 4, 83 - var12 - arg2.height / 2 - 4);
 		} else {
-			arg2.method198((byte) 9, var11 + 94 - arg2.field675 / 2 + 4, 83 - var12 - arg2.field676 / 2 - 4);
+			arg2.draw((byte) 9, var11 + 94 - arg2.width / 2 + 4, 83 - var12 - arg2.height / 2 - 4);
 		}
 	}
 
@@ -11345,7 +11345,7 @@ public class client extends GameShell {
 
 	@ObfuscatedName("client.a(ILd;)Z")
 	public final boolean method558(int arg0, Component arg1) {
-		int var3 = arg1.field82;
+		int var3 = arg1.clientCode;
 		if (arg0 >= 0) {
 			this.ptype = this.in.g1();
 		}
@@ -11367,7 +11367,7 @@ public class client extends GameShell {
 			this.field1564++;
 			return true;
 		} else if (var3 >= 401 && var3 <= 500) {
-			this.field1579[this.field1564] = "Remove @whi@" + arg1.field113;
+			this.field1579[this.field1564] = "Remove @whi@" + arg1.text;
 			this.field1203[this.field1564] = 556;
 			this.field1564++;
 			return true;

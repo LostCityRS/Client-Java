@@ -142,8 +142,8 @@ public class ProjectileEntity extends Entity {
 			return;
 		}
 		this.field527 += arg1;
-		while (this.field527 > this.field504.seq.method382(0, this.field526)) {
-			this.field527 -= this.field504.seq.method382(0, this.field526) + 1;
+		while (this.field527 > this.field504.seq.getFrameDuration(0, this.field526)) {
+			this.field527 -= this.field504.seq.getFrameDuration(0, this.field526) + 1;
 			this.field526++;
 			if (this.field526 >= this.field504.seq.frameCount) {
 				this.field526 = 0;
@@ -153,7 +153,7 @@ public class ProjectileEntity extends Entity {
 
 	@ObfuscatedName("eb.a(I)Lfb;")
 	public final Model method122(int arg0) {
-		Model var2 = this.field504.method386();
+		Model var2 = this.field504.getModel();
 		if (arg0 != 5560) {
 			for (int var3 = 1; var3 > 0; var3++) {
 			}
@@ -163,8 +163,8 @@ public class ProjectileEntity extends Entity {
 		}
 		Model var4 = new Model(var2, true, false, !this.field504.animHasAlpha, -796);
 		if (this.field504.seq != null) {
-			var4.method145(-591);
-			var4.method146(this.field504.seq.frames[this.field526], 13056);
+			var4.createLabelReferences(-591);
+			var4.applyTransform(this.field504.seq.frames[this.field526], 13056);
 			var4.labelFaces = null;
 			var4.labelVertices = null;
 		}

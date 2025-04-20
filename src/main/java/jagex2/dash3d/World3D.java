@@ -1767,18 +1767,18 @@ public class World3D {
 		if (var43 < 50) {
 			return;
 		}
-		int var45 = (var21 << 9) / var25 + Pix3D.field647;
-		int var46 = (var24 << 9) / var25 + Pix3D.field648;
-		int var47 = (var27 << 9) / var31 + Pix3D.field647;
-		int var48 = (var30 << 9) / var31 + Pix3D.field648;
-		int var49 = (var33 << 9) / var37 + Pix3D.field647;
-		int var50 = (var36 << 9) / var37 + Pix3D.field648;
-		int var51 = (var39 << 9) / var43 + Pix3D.field647;
-		int var52 = (var42 << 9) / var43 + Pix3D.field648;
+		int var45 = (var21 << 9) / var25 + Pix3D.centerX;
+		int var46 = (var24 << 9) / var25 + Pix3D.centerY;
+		int var47 = (var27 << 9) / var31 + Pix3D.centerX;
+		int var48 = (var30 << 9) / var31 + Pix3D.centerY;
+		int var49 = (var33 << 9) / var37 + Pix3D.centerX;
+		int var50 = (var36 << 9) / var37 + Pix3D.centerY;
+		int var51 = (var39 << 9) / var43 + Pix3D.centerX;
+		int var52 = (var42 << 9) / var43 + Pix3D.centerY;
 		Pix3D.field646 = 0;
 		if ((var48 - var52) * (var49 - var51) - (var47 - var51) * (var50 - var52) > 0) {
 			Pix3D.field643 = false;
-			if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.field634 || var51 > Pix2D.field634 || var47 > Pix2D.field634) {
+			if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.boundX || var51 > Pix2D.boundX || var47 > Pix2D.boundX) {
 				Pix3D.field643 = true;
 			}
 			if (field326 && this.method107(field327, field328, var50, var52, var48, var49, var51, var47)) {
@@ -1802,7 +1802,7 @@ public class World3D {
 			return;
 		}
 		Pix3D.field643 = false;
-		if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.field634 || var47 > Pix2D.field634 || var51 > Pix2D.field634) {
+		if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.boundX || var47 > Pix2D.boundX || var51 > Pix2D.boundX) {
 			Pix3D.field643 = true;
 		}
 		if (field326 && this.method107(field327, field328, var46, var48, var52, var45, var47, var51)) {
@@ -1841,8 +1841,8 @@ public class World3D {
 				TileOverlay.field199[var10] = var29;
 				TileOverlay.field200[var10] = var30;
 			}
-			TileOverlay.field196[var10] = (var26 << 9) / var30 + Pix3D.field647;
-			TileOverlay.field197[var10] = (var29 << 9) / var30 + Pix3D.field648;
+			TileOverlay.field196[var10] = (var26 << 9) / var30 + Pix3D.centerX;
+			TileOverlay.field197[var10] = (var29 << 9) / var30 + Pix3D.centerY;
 		}
 		Pix3D.field646 = 0;
 		int var11 = arg4.field187.length;
@@ -1858,7 +1858,7 @@ public class World3D {
 			int var21 = TileOverlay.field197[var15];
 			if ((var16 - var17) * (var21 - var20) - (var18 - var17) * (var19 - var20) > 0) {
 				Pix3D.field643 = false;
-				if (var16 < 0 || var17 < 0 || var18 < 0 || var16 > Pix2D.field634 || var17 > Pix2D.field634 || var18 > Pix2D.field634) {
+				if (var16 < 0 || var17 < 0 || var18 < 0 || var16 > Pix2D.boundX || var17 > Pix2D.boundX || var18 > Pix2D.boundX) {
 					Pix3D.field643 = true;
 				}
 				if (field326 && this.method107(field327, field328, var19, var20, var21, var16, var17, var18)) {

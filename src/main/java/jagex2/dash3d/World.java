@@ -246,9 +246,9 @@ public class World {
 					int var15 = arg0 + var13;
 					int var16 = arg1 + var12;
 					if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
-						LocType var17 = LocType.method333(var6);
+						LocType var17 = LocType.get(var6);
 						if (var14 != 22 || !field45 || var17.active || var17.forcedecor) {
-							var4 &= var17.method337(field43);
+							var4 &= var17.validate(field43);
 							var9 = true;
 						}
 					}
@@ -274,8 +274,8 @@ public class World {
 				return;
 			}
 			var3 += var4;
-			LocType var5 = LocType.method333(var3);
-			var5.method338(field44, arg2);
+			LocType var5 = LocType.get(var3);
+			var5.prefetch(field44, arg2);
 			while (true) {
 				int var6 = arg1.gsmarts();
 				if (var6 == 0) {
@@ -344,7 +344,7 @@ public class World {
 		int var12 = this.field50[arg8][arg6 + 1][arg1 + 1];
 		int var13 = this.field50[arg8][arg6][arg1 + 1];
 		int var14 = var10 + var11 + var12 + var13 >> 2;
-		LocType var15 = LocType.method333(arg0);
+		LocType var15 = LocType.get(arg0);
 		int var16 = (arg0 << 14) + (arg1 << 7) + arg6 + 1073741824;
 		if (!var15.active) {
 			var16 += Integer.MIN_VALUE;
@@ -357,7 +357,7 @@ public class World {
 			if (!field45 || var15.active || var15.forcedecor) {
 				Entity var18;
 				if (var15.anim == -1) {
-					var18 = var15.method339(22, arg2, var10, var11, var12, var13, -1);
+					var18 = var15.getModel(22, arg2, var10, var11, var12, var13, -1);
 				} else {
 					var18 = new LocEntity(var13, var12, var10, true, 22, arg2, true, var11, arg0, var15.anim);
 				}
@@ -369,7 +369,7 @@ public class World {
 		} else if (arg7 == 10 || arg7 == 11) {
 			Entity var34;
 			if (var15.anim == -1) {
-				var34 = var15.method339(10, arg2, var10, var11, var12, var13, -1);
+				var34 = var15.getModel(10, arg2, var10, var11, var12, var13, -1);
 			} else {
 				var34 = new LocEntity(var13, var12, var10, true, 10, arg2, true, var11, arg0, var15.anim);
 			}
@@ -392,7 +392,7 @@ public class World {
 					if (var34 instanceof Model) {
 						var38 = (Model) var34;
 					} else {
-						var38 = var15.method339(10, arg2, var10, var11, var12, var13, -1);
+						var38 = var15.getModel(10, arg2, var10, var11, var12, var13, -1);
 					}
 					if (var38 != null) {
 						for (int var39 = 0; var39 <= var36; var39++) {
@@ -415,7 +415,7 @@ public class World {
 		} else if (arg7 >= 12) {
 			Entity var19;
 			if (var15.anim == -1) {
-				var19 = var15.method339(arg7, arg2, var10, var11, var12, var13, -1);
+				var19 = var15.getModel(arg7, arg2, var10, var11, var12, var13, -1);
 			} else {
 				var19 = new LocEntity(var13, var12, var10, true, arg7, arg2, true, var11, arg0, var15.anim);
 			}
@@ -429,7 +429,7 @@ public class World {
 		} else if (arg7 == 0) {
 			Entity var20;
 			if (var15.anim == -1) {
-				var20 = var15.method339(0, arg2, var10, var11, var12, var13, -1);
+				var20 = var15.getModel(0, arg2, var10, var11, var12, var13, -1);
 			} else {
 				var20 = new LocEntity(var13, var12, var10, true, 0, arg2, true, var11, arg0, var15.anim);
 			}
@@ -476,7 +476,7 @@ public class World {
 		} else if (arg7 == 1) {
 			Entity var21;
 			if (var15.anim == -1) {
-				var21 = var15.method339(1, arg2, var10, var11, var12, var13, -1);
+				var21 = var15.getModel(1, arg2, var10, var11, var12, var13, -1);
 			} else {
 				var21 = new LocEntity(var13, var12, var10, true, 1, arg2, true, var11, arg0, var15.anim);
 			}
@@ -500,8 +500,8 @@ public class World {
 			Entity var23;
 			Entity var24;
 			if (var15.anim == -1) {
-				var23 = var15.method339(2, arg2 + 4, var10, var11, var12, var13, -1);
-				var24 = var15.method339(2, var22, var10, var11, var12, var13, -1);
+				var23 = var15.getModel(2, arg2 + 4, var10, var11, var12, var13, -1);
+				var24 = var15.getModel(2, var22, var10, var11, var12, var13, -1);
 			} else {
 				var23 = new LocEntity(var13, var12, var10, true, 2, arg2 + 4, true, var11, arg0, var15.anim);
 				var24 = new LocEntity(var13, var12, var10, true, 2, var22, true, var11, arg0, var15.anim);
@@ -531,7 +531,7 @@ public class World {
 		} else if (arg7 == 3) {
 			Entity var25;
 			if (var15.anim == -1) {
-				var25 = var15.method339(3, arg2, var10, var11, var12, var13, -1);
+				var25 = var15.getModel(3, arg2, var10, var11, var12, var13, -1);
 			} else {
 				var25 = new LocEntity(var13, var12, var10, true, 3, arg2, true, var11, arg0, var15.anim);
 			}
@@ -553,7 +553,7 @@ public class World {
 		} else if (arg7 == 9) {
 			Entity var26;
 			if (var15.anim == -1) {
-				var26 = var15.method339(arg7, arg2, var10, var11, var12, var13, -1);
+				var26 = var15.getModel(arg7, arg2, var10, var11, var12, var13, -1);
 			} else {
 				var26 = new LocEntity(var13, var12, var10, true, arg7, arg2, true, var11, arg0, var15.anim);
 			}
@@ -564,7 +564,7 @@ public class World {
 		} else if (arg7 == 4) {
 			Entity var27;
 			if (var15.anim == -1) {
-				var27 = var15.method339(4, 0, var10, var11, var12, var13, -1);
+				var27 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
 				var27 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
 			}
@@ -573,11 +573,11 @@ public class World {
 			int var28 = 16;
 			int var29 = arg4.method89(arg8, arg6, arg1);
 			if (var29 > 0) {
-				var28 = LocType.method333(var29 >> 14 & 0x7FFF).wallwidth;
+				var28 = LocType.get(var29 >> 14 & 0x7FFF).wallwidth;
 			}
 			Entity var30;
 			if (var15.anim == -1) {
-				var30 = var15.method339(4, 0, var10, var11, var12, var13, -1);
+				var30 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
 				var30 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
 			}
@@ -585,7 +585,7 @@ public class World {
 		} else if (arg7 == 6) {
 			Entity var31;
 			if (var15.anim == -1) {
-				var31 = var15.method339(4, 0, var10, var11, var12, var13, -1);
+				var31 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
 				var31 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
 			}
@@ -593,7 +593,7 @@ public class World {
 		} else if (arg7 == 7) {
 			Entity var32;
 			if (var15.anim == -1) {
-				var32 = var15.method339(4, 0, var10, var11, var12, var13, -1);
+				var32 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
 				var32 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
 			}
@@ -601,7 +601,7 @@ public class World {
 		} else if (arg7 == 8) {
 			Entity var33;
 			if (var15.anim == -1) {
-				var33 = var15.method339(4, 0, var10, var11, var12, var13, -1);
+				var33 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
 				var33 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
 			}
@@ -1070,7 +1070,7 @@ public class World {
 
 	@ObfuscatedName("c.c(III)Z")
 	public static final boolean method30(int arg0, int arg1, int arg2) {
-		LocType var3 = LocType.method333(arg1);
+		LocType var3 = LocType.get(arg1);
 		if (arg0 <= 0) {
 			throw new NullPointerException();
 		}
@@ -1080,7 +1080,7 @@ public class World {
 		if (arg2 >= 5 && arg2 <= 8) {
 			arg2 = 4;
 		}
-		return var3.method336(0, arg2);
+		return var3.validate(0, arg2);
 	}
 
 	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")
@@ -1090,7 +1090,7 @@ public class World {
 		int var13 = arg7[arg9][arg0 + 1][arg3 + 1];
 		int var14 = arg7[arg9][arg0][arg3 + 1];
 		int var15 = var11 + var12 + var13 + var14 >> 2;
-		LocType var16 = LocType.method333(arg2);
+		LocType var16 = LocType.get(arg2);
 		int var17 = (arg2 << 14) + (arg3 << 7) + arg0 + 1073741824;
 		if (!var16.active) {
 			var17 += Integer.MIN_VALUE;
@@ -1103,7 +1103,7 @@ public class World {
 		if (arg1 == 22) {
 			Entity var20;
 			if (var16.anim == -1) {
-				var20 = var16.method339(22, arg6, var11, var12, var13, var14, -1);
+				var20 = var16.getModel(22, arg6, var11, var12, var13, var14, -1);
 			} else {
 				var20 = new LocEntity(var14, var13, var11, true, 22, arg6, true, var12, arg2, var16.anim);
 			}
@@ -1114,7 +1114,7 @@ public class World {
 		} else if (arg1 == 10 || arg1 == 11) {
 			Entity var36;
 			if (var16.anim == -1) {
-				var36 = var16.method339(10, arg6, var11, var12, var13, var14, -1);
+				var36 = var16.getModel(10, arg6, var11, var12, var13, var14, -1);
 			} else {
 				var36 = new LocEntity(var14, var13, var11, true, 10, arg6, true, var12, arg2, var16.anim);
 			}
@@ -1140,7 +1140,7 @@ public class World {
 		} else if (arg1 >= 12) {
 			Entity var21;
 			if (var16.anim == -1) {
-				var21 = var16.method339(arg1, arg6, var11, var12, var13, var14, -1);
+				var21 = var16.getModel(arg1, arg6, var11, var12, var13, var14, -1);
 			} else {
 				var21 = new LocEntity(var14, var13, var11, true, arg1, arg6, true, var12, arg2, var16.anim);
 			}
@@ -1151,7 +1151,7 @@ public class World {
 		} else if (arg1 == 0) {
 			Entity var22;
 			if (var16.anim == -1) {
-				var22 = var16.method339(0, arg6, var11, var12, var13, var14, -1);
+				var22 = var16.getModel(0, arg6, var11, var12, var13, var14, -1);
 			} else {
 				var22 = new LocEntity(var14, var13, var11, true, 0, arg6, true, var12, arg2, var16.anim);
 			}
@@ -1162,7 +1162,7 @@ public class World {
 		} else if (arg1 == 1) {
 			Entity var23;
 			if (var16.anim == -1) {
-				var23 = var16.method339(1, arg6, var11, var12, var13, var14, -1);
+				var23 = var16.getModel(1, arg6, var11, var12, var13, var14, -1);
 			} else {
 				var23 = new LocEntity(var14, var13, var11, true, 1, arg6, true, var12, arg2, var16.anim);
 			}
@@ -1175,8 +1175,8 @@ public class World {
 			Entity var25;
 			Entity var26;
 			if (var16.anim == -1) {
-				var25 = var16.method339(2, arg6 + 4, var11, var12, var13, var14, -1);
-				var26 = var16.method339(2, var24, var11, var12, var13, var14, -1);
+				var25 = var16.getModel(2, arg6 + 4, var11, var12, var13, var14, -1);
+				var26 = var16.getModel(2, var24, var11, var12, var13, var14, -1);
 			} else {
 				var25 = new LocEntity(var14, var13, var11, true, 2, arg6 + 4, true, var12, arg2, var16.anim);
 				var26 = new LocEntity(var14, var13, var11, true, 2, var24, true, var12, arg2, var16.anim);
@@ -1188,7 +1188,7 @@ public class World {
 		} else if (arg1 == 3) {
 			Entity var27;
 			if (var16.anim == -1) {
-				var27 = var16.method339(3, arg6, var11, var12, var13, var14, -1);
+				var27 = var16.getModel(3, arg6, var11, var12, var13, var14, -1);
 			} else {
 				var27 = new LocEntity(var14, var13, var11, true, 3, arg6, true, var12, arg2, var16.anim);
 			}
@@ -1199,7 +1199,7 @@ public class World {
 		} else if (arg1 == 9) {
 			Entity var28;
 			if (var16.anim == -1) {
-				var28 = var16.method339(arg1, arg6, var11, var12, var13, var14, -1);
+				var28 = var16.getModel(arg1, arg6, var11, var12, var13, var14, -1);
 			} else {
 				var28 = new LocEntity(var14, var13, var11, true, arg1, arg6, true, var12, arg2, var16.anim);
 			}
@@ -1210,7 +1210,7 @@ public class World {
 		} else if (arg1 == 4) {
 			Entity var29;
 			if (var16.anim == -1) {
-				var29 = var16.method339(4, 0, var11, var12, var13, var14, -1);
+				var29 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
 				var29 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
 			}
@@ -1219,11 +1219,11 @@ public class World {
 			int var30 = 16;
 			int var31 = arg4.method89(arg10, arg0, arg3);
 			if (var31 > 0) {
-				var30 = LocType.method333(var31 >> 14 & 0x7FFF).wallwidth;
+				var30 = LocType.get(var31 >> 14 & 0x7FFF).wallwidth;
 			}
 			Entity var32;
 			if (var16.anim == -1) {
-				var32 = var16.method339(4, 0, var11, var12, var13, var14, -1);
+				var32 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
 				var32 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
 			}
@@ -1231,7 +1231,7 @@ public class World {
 		} else if (arg1 == 6) {
 			Entity var33;
 			if (var16.anim == -1) {
-				var33 = var16.method339(4, 0, var11, var12, var13, var14, -1);
+				var33 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
 				var33 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
 			}
@@ -1239,7 +1239,7 @@ public class World {
 		} else if (arg1 == 7) {
 			Entity var34;
 			if (var16.anim == -1) {
-				var34 = var16.method339(4, 0, var11, var12, var13, var14, -1);
+				var34 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
 				var34 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
 			}
@@ -1247,7 +1247,7 @@ public class World {
 		} else if (arg1 == 8) {
 			Entity var35;
 			if (var16.anim == -1) {
-				var35 = var16.method339(4, 0, var11, var12, var13, var14, -1);
+				var35 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
 				var35 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
 			}

@@ -6,30 +6,30 @@ import deob.ObfuscatedName;
 public class HashTable {
 
 	@ObfuscatedName("u.a")
-	public boolean field365 = true;
+	public boolean _flowObfuscator1 = true;
 
 	@ObfuscatedName("u.b")
-	public int field366;
+	public int bucketCount;
 
 	@ObfuscatedName("u.c")
-	public Linkable[] field367;
+	public Linkable[] buckets;
 
 	public HashTable(int arg0, int arg1) {
 		if (arg0 < 3 || arg0 > 3) {
-			this.field365 = !this.field365;
+			this._flowObfuscator1 = !this._flowObfuscator1;
 		}
-		this.field366 = arg1;
-		this.field367 = new Linkable[arg1];
+		this.bucketCount = arg1;
+		this.buckets = new Linkable[arg1];
 		for (int var3 = 0; var3 < arg1; var3++) {
-			Linkable var4 = this.field367[var3] = new Linkable();
+			Linkable var4 = this.buckets[var3] = new Linkable();
 			var4.next = var4;
 			var4.prev = var4;
 		}
 	}
 
 	@ObfuscatedName("u.a(J)Lv;")
-	public Linkable method117(long arg0) {
-		Linkable var3 = this.field367[(int) (arg0 & (long) (this.field366 - 1))];
+	public Linkable get(long arg0) {
+		Linkable var3 = this.buckets[(int) (arg0 & (long) (this.bucketCount - 1))];
 		for (Linkable var4 = var3.next; var4 != var3; var4 = var4.next) {
 			if (var4.key == arg0) {
 				return var4;
@@ -39,11 +39,11 @@ public class HashTable {
 	}
 
 	@ObfuscatedName("u.a(IJLv;)V")
-	public void method118(int arg0, long arg1, Linkable arg2) {
+	public void put(int arg0, long arg1, Linkable arg2) {
 		if (arg2.prev != null) {
 			arg2.unlink();
 		}
-		Linkable var5 = this.field367[(int) (arg1 & (long) (this.field366 - 1))];
+		Linkable var5 = this.buckets[(int) (arg1 & (long) (this.bucketCount - 1))];
 		arg2.prev = var5.prev;
 		arg2.next = var5;
 		arg2.prev.next = arg2;

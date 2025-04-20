@@ -12,7 +12,7 @@ public class DoublyLinkable extends Linkable {
 	public DoublyLinkable prev2;
 
 	@ObfuscatedName("x.h")
-	public static boolean field398;
+	public static boolean _flowObfuscator3;
 
 	@ObfuscatedName("x.b()V")
 	public void unlink2() {
