@@ -33,7 +33,7 @@ public class World {
 	public static boolean lowMemory = true;
 
 	@ObfuscatedName("c.h")
-	public static int field46;
+	public static int levelBuilt;
 
 	@ObfuscatedName("c.i")
 	public static boolean field47;
@@ -127,7 +127,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(IIIZI)V")
-	public final void method14(int arg0, int arg1, int arg2, boolean arg3, int arg4) {
+	public final void stitchHeightmap(int arg0, int arg1, int arg2, boolean arg3, int arg4) {
 		if (!arg3) {
 			field41 = 421;
 		}
@@ -153,7 +153,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(I[BIIII)V")
-	public final void method15(int arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5) {
+	public final void readLand(int arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg0 <= 0) {
 			field41 = -244;
 		}
@@ -218,7 +218,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(II[BZ)Z")
-	public static final boolean method16(int arg0, int arg1, byte[] arg2, boolean arg3) {
+	public static final boolean validateLocs(int arg0, int arg1, byte[] arg2, boolean arg3) {
 		boolean var4 = true;
 		Packet var5 = new Packet((byte) -109, arg2);
 		if (!arg3) {
@@ -287,7 +287,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(ILs;[Ljc;IZ[B)V")
-	public final void method18(int arg0, World3D arg1, CollisionMap[] arg2, int arg3, boolean arg4, byte[] arg5) {
+	public final void readLoc(int arg0, World3D arg1, CollisionMap[] arg2, int arg3, boolean arg4, byte[] arg5) {
 		Packet var7 = new Packet((byte) -109, arg5);
 		if (!arg4) {
 			return;
@@ -335,7 +335,7 @@ public class World {
 			if ((this.field51[arg8][arg6][arg1] & 0x10) != 0) {
 				return;
 			}
-			if (this.method21(arg6, arg8, arg1, this.field42) != field46) {
+			if (this.method21(arg6, arg8, arg1, this.field42) != levelBuilt) {
 				return;
 			}
 		}
@@ -571,7 +571,7 @@ public class World {
 			arg4.method72(var17, var27, 0, arg6, arg1, field64[arg2], 0, 1, arg2 * 512, arg8, var14, var16);
 		} else if (arg7 == 5) {
 			int var28 = 16;
-			int var29 = arg4.method89(arg8, arg6, arg1);
+			int var29 = arg4.getWallTypecode(arg8, arg6, arg1);
 			if (var29 > 0) {
 				var28 = LocType.get(var29 >> 14 & 0x7FFF).wallwidth;
 			}
@@ -610,7 +610,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(Ls;[Ljc;Z)V")
-	public final void method20(World3D arg0, CollisionMap[] arg1, boolean arg2) {
+	public final void build(World3D arg0, CollisionMap[] arg1, boolean arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			for (int var110 = 0; var110 < 104; var110++) {
 				for (int var111 = 0; var111 < 104; var111++) {
@@ -728,7 +728,7 @@ public class World {
 							var65 -= this.field61[var69];
 							var66 -= this.field62[var69];
 						}
-						if (var67 >= 1 && var67 < this.field49 - 1 && (!lowMemory || (this.field51[var5][var58][var67] & 0x10) == 0 && this.method21(var58, var5, var67, this.field42) == field46)) {
+						if (var67 >= 1 && var67 < this.field49 - 1 && (!lowMemory || (this.field51[var5][var58][var67] & 0x10) == 0 && this.method21(var58, var5, var67, this.field42) == levelBuilt)) {
 							int var70 = this.field52[var5][var58][var67] & 0xFF;
 							int var71 = this.field53[var5][var58][var67] & 0xFF;
 							if (var70 > 0 || var71 > 0) {
@@ -1069,7 +1069,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.c(III)Z")
-	public static final boolean method30(int arg0, int arg1, int arg2) {
+	public static final boolean isLocReady(int arg0, int arg1, int arg2) {
 		LocType var3 = LocType.get(arg1);
 		if (arg0 <= 0) {
 			throw new NullPointerException();
@@ -1084,7 +1084,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")
-	public static final void method31(int arg0, int arg1, int arg2, int arg3, World3D arg4, byte arg5, int arg6, int[][][] arg7, CollisionMap arg8, int arg9, int arg10) {
+	public static final void addLoc(int arg0, int arg1, int arg2, int arg3, World3D arg4, byte arg5, int arg6, int[][][] arg7, CollisionMap arg8, int arg9, int arg10) {
 		int var11 = arg7[arg9][arg0][arg3];
 		int var12 = arg7[arg9][arg0 + 1][arg3];
 		int var13 = arg7[arg9][arg0 + 1][arg3 + 1];
@@ -1217,7 +1217,7 @@ public class World {
 			arg4.method72(var18, var29, 0, arg0, arg3, field64[arg6], 0, 1, arg6 * 512, arg10, var15, var17);
 		} else if (arg1 == 5) {
 			int var30 = 16;
-			int var31 = arg4.method89(arg10, arg0, arg3);
+			int var31 = arg4.getWallTypecode(arg10, arg0, arg3);
 			if (var31 > 0) {
 				var30 = LocType.get(var31 >> 14 & 0x7FFF).wallwidth;
 			}

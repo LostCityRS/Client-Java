@@ -155,10 +155,10 @@ public class World3D {
 	public static final int[] field325 = new int[] { 45, 45, -45, -45 };
 
 	@ObfuscatedName("s.O")
-	public static int field329 = -1;
+	public static int clickTileX = -1;
 
 	@ObfuscatedName("s.P")
-	public static int field330 = -1;
+	public static int clickTileZ = -1;
 
 	@ObfuscatedName("s.Q")
 	public static int field331 = 4;
@@ -227,7 +227,7 @@ public class World3D {
 		if (!arg4) {
 			this.field289 = !this.field289;
 		}
-		this.method63(0);
+		this.reset(0);
 	}
 
 	@ObfuscatedName("s.a(B)V")
@@ -244,7 +244,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(I)V")
-	public void method63(int arg0) {
+	public void reset(int arg0) {
 		for (int var2 = 0; var2 < this.field296; var2++) {
 			for (int var8 = 0; var8 < this.field297; var8++) {
 				for (int var9 = 0; var9 < this.field298; var9++) {
@@ -272,7 +272,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(II)V")
-	public void method64(int arg0, int arg1) {
+	public void setMinLevel(int arg0, int arg1) {
 		this.field301 = arg1;
 		for (int var3 = 0; var3 < this.field297; var3++) {
 			for (int var5 = 0; var5 < this.field298; var5++) {
@@ -477,7 +477,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IZIIILy;IZII)Z")
-	public boolean method74(int arg0, boolean arg1, int arg2, int arg3, int arg4, Entity arg5, int arg6, boolean arg7, int arg8, int arg9) {
+	public boolean addTemporary(int arg0, boolean arg1, int arg2, int arg3, int arg4, Entity arg5, int arg6, boolean arg7, int arg8, int arg9) {
 		if (arg5 == null) {
 			return true;
 		}
@@ -510,7 +510,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(ILy;IIIBIIIIIII)Z")
-	public boolean method75(int arg0, Entity arg1, int arg2, int arg3, int arg4, byte arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
+	public boolean addTemporary(int arg0, Entity arg1, int arg2, int arg3, int arg4, byte arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
 		if (arg5 != 7) {
 			for (int var14 = 1; var14 > 0; var14++) {
 			}
@@ -741,13 +741,13 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.b(III)I")
-	public int method89(int arg0, int arg1, int arg2) {
+	public int getWallTypecode(int arg0, int arg1, int arg2) {
 		Ground var4 = this.field300[arg0][arg1][arg2];
 		return var4 == null || var4.field379 == null ? 0 : var4.field379.field287;
 	}
 
 	@ObfuscatedName("s.g(IIII)I")
-	public int method90(int arg0, int arg1, int arg2, int arg3) {
+	public int getDecorTypecode(int arg0, int arg1, int arg2, int arg3) {
 		Ground var5 = this.field300[arg2][arg3][arg0];
 		if (arg1 == 0) {
 			return var5 == null || var5.field380 == null ? 0 : var5.field380.field177;
@@ -757,7 +757,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.c(III)I")
-	public int method91(int arg0, int arg1, int arg2) {
+	public int getLocBitset(int arg0, int arg1, int arg2) {
 		Ground var4 = this.field300[arg0][arg1][arg2];
 		if (var4 == null) {
 			return 0;
@@ -772,13 +772,13 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.d(III)I")
-	public int method92(int arg0, int arg1, int arg2) {
+	public int getGroundDecorTypecode(int arg0, int arg1, int arg2) {
 		Ground var4 = this.field300[arg0][arg1][arg2];
 		return var4 == null || var4.field381 == null ? 0 : var4.field381.field210;
 	}
 
 	@ObfuscatedName("s.h(IIII)I")
-	public int method93(int arg0, int arg1, int arg2, int arg3) {
+	public int getInfo(int arg0, int arg1, int arg2, int arg3) {
 		Ground var5 = this.field300[arg0][arg1][arg2];
 		if (var5 == null) {
 			return -1;
@@ -1117,8 +1117,8 @@ public class World3D {
 		field326 = true;
 		field327 = arg2;
 		field328 = arg1;
-		field329 = -1;
-		field330 = -1;
+		clickTileX = -1;
+		clickTileZ = -1;
 		if (arg0 != 38) {
 			for (int var4 = 1; var4 > 0; var4++) {
 			}
@@ -1782,8 +1782,8 @@ public class World3D {
 				Pix3D.hclip = true;
 			}
 			if (field326 && this.method107(field327, field328, var50, var52, var48, var49, var51, var47)) {
-				field329 = arg6;
-				field330 = arg7;
+				clickTileX = arg6;
+				clickTileZ = arg7;
 			}
 			if (arg0.field263 == -1) {
 				if (arg0.field261 != 12345678) {
@@ -1806,8 +1806,8 @@ public class World3D {
 			Pix3D.hclip = true;
 		}
 		if (field326 && this.method107(field327, field328, var46, var48, var52, var45, var47, var51)) {
-			field329 = arg6;
-			field330 = arg7;
+			clickTileX = arg6;
+			clickTileZ = arg7;
 		}
 		if (arg0.field263 != -1) {
 			if (!lowMemory) {
@@ -1862,8 +1862,8 @@ public class World3D {
 					Pix3D.hclip = true;
 				}
 				if (field326 && this.method107(field327, field328, var19, var20, var21, var16, var17, var18)) {
-					field329 = arg0;
-					field330 = arg7;
+					clickTileX = arg0;
+					clickTileZ = arg7;
 				}
 				if (arg4.field190 == null || arg4.field190[var12] == -1) {
 					if (arg4.field184[var12] != 12345678) {

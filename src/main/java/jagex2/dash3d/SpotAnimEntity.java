@@ -14,10 +14,10 @@ public class SpotAnimEntity extends Entity {
 	public SpotAnimType field611;
 
 	@ObfuscatedName("gb.n")
-	public int field612;
+	public int startCycle;
 
 	@ObfuscatedName("gb.o")
-	public int field613;
+	public int level;
 
 	@ObfuscatedName("gb.p")
 	public int field614;
@@ -35,23 +35,23 @@ public class SpotAnimEntity extends Entity {
 	public int field618;
 
 	@ObfuscatedName("gb.u")
-	public boolean field619 = false;
+	public boolean seqComplete = false;
 
 	public SpotAnimEntity(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		this.field611 = SpotAnimType.types[arg3];
 		if (arg5 >= 0) {
 			this.field610 = -352;
 		}
-		this.field613 = arg2;
+		this.level = arg2;
 		this.field614 = arg1;
 		this.field615 = arg0;
 		this.field616 = arg4;
-		this.field612 = arg6 + arg7;
-		this.field619 = false;
+		this.startCycle = arg6 + arg7;
+		this.seqComplete = false;
 	}
 
 	@ObfuscatedName("gb.a(II)V")
-	public final void method163(int arg0, int arg1) {
+	public final void update(int arg0, int arg1) {
 		this.field618 += arg1;
 		if (arg0 != 0) {
 			return;
@@ -67,7 +67,7 @@ public class SpotAnimEntity extends Entity {
 				} while (this.field617 < this.field611.seq.frameCount);
 			} while (this.field617 >= 0 && this.field617 < this.field611.seq.frameCount);
 			this.field617 = 0;
-			this.field619 = true;
+			this.seqComplete = true;
 		}
 	}
 
@@ -80,7 +80,7 @@ public class SpotAnimEntity extends Entity {
 			return null;
 		} else {
 			Model var3 = new Model(var2, true, false, !this.field611.animHasAlpha, -796);
-			if (!this.field619) {
+			if (!this.seqComplete) {
 				var3.createLabelReferences(-591);
 				var3.applyTransform(this.field611.seq.frames[this.field617], 13056);
 				var3.labelFaces = null;

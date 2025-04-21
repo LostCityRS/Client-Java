@@ -33,7 +33,7 @@ public class PlayerEntity extends PathingEntity {
 	public int field467;
 
 	@ObfuscatedName("bb.vb")
-	public int field468;
+	public int headicon;
 
 	@ObfuscatedName("bb.wb")
 	public int[] field469 = new int[12];
@@ -48,22 +48,22 @@ public class PlayerEntity extends PathingEntity {
 	public long field472;
 
 	@ObfuscatedName("bb.Lb")
-	public boolean field484 = false;
+	public boolean lowMemory = false;
 
 	@ObfuscatedName("bb.Mb")
 	public long field485 = -1L;
 
 	@ObfuscatedName("bb.Nb")
-	public static LruCache field486 = new LruCache(260, 1);
+	public static LruCache modelCache = new LruCache(260, 1);
 
 	@ObfuscatedName("bb.Ab")
-	public int field473;
+	public int y;
 
 	@ObfuscatedName("bb.Bb")
-	public int field474;
+	public int locStartCycle;
 
 	@ObfuscatedName("bb.Cb")
-	public int field475;
+	public int locStopCycle;
 
 	@ObfuscatedName("bb.Db")
 	public int field476;
@@ -87,13 +87,13 @@ public class PlayerEntity extends PathingEntity {
 	public int field483;
 
 	@ObfuscatedName("bb.Gb")
-	public Model field479;
+	public Model locModel;
 
 	@ObfuscatedName("bb.a(Lmb;I)V")
-	public final void method129(Packet arg0, int arg1) {
+	public final void read(Packet arg0, int arg1) {
 		arg0.pos = 0;
 		this.field467 = arg0.g1();
-		this.field468 = arg0.g1();
+		this.headicon = arg0.g1();
 		for (int var3 = 0; var3 < 12; var3++) {
 			int var8 = arg0.g1();
 			if (var8 == 0) {
@@ -114,32 +114,32 @@ public class PlayerEntity extends PathingEntity {
 		if (super.seqStandId == 65535) {
 			super.seqStandId = -1;
 		}
-		super.field410 = arg0.g2();
-		if (super.field410 == 65535) {
-			super.field410 = -1;
+		super.seqTurnId = arg0.g2();
+		if (super.seqTurnId == 65535) {
+			super.seqTurnId = -1;
 		}
-		super.field411 = arg0.g2();
-		if (super.field411 == 65535) {
-			super.field411 = -1;
+		super.seqWalkId = arg0.g2();
+		if (super.seqWalkId == 65535) {
+			super.seqWalkId = -1;
 		}
-		super.field412 = arg0.g2();
-		if (super.field412 == 65535) {
-			super.field412 = -1;
+		super.seqTurnAroundId = arg0.g2();
+		if (super.seqTurnAroundId == 65535) {
+			super.seqTurnAroundId = -1;
 		}
-		super.field413 = arg0.g2();
-		if (super.field413 == 65535) {
-			super.field413 = -1;
+		super.seqTurnLeftId = arg0.g2();
+		if (super.seqTurnLeftId == 65535) {
+			super.seqTurnLeftId = -1;
 		}
-		super.field414 = arg0.g2();
-		if (super.field414 == 65535) {
-			super.field414 = -1;
+		super.seqTurnRightId = arg0.g2();
+		if (super.seqTurnRightId == 65535) {
+			super.seqTurnRightId = -1;
 		}
-		super.field415 = arg0.g2();
+		super.seqRunId = arg0.g2();
 		if (arg1 >= 0) {
 			return;
 		}
-		if (super.field415 == 65535) {
-			super.field415 = -1;
+		if (super.seqRunId == 65535) {
+			super.seqRunId = -1;
 		}
 		this.name = JString.toSentenceCase(true, JString.fromBase37((byte) 88, arg0.g8(this.field462)));
 		this.combatLevel = arg0.g1();
@@ -174,19 +174,19 @@ public class PlayerEntity extends PathingEntity {
 		if (var2 == null) {
 			return null;
 		}
-		super.field450 = var2.field400;
+		super.height = var2.field400;
 		var2.picking = true;
-		if (this.field484) {
+		if (this.lowMemory) {
 			return var2;
 		}
-		if (super.field437 != -1 && super.field438 != -1) {
-			SpotAnimType var3 = SpotAnimType.types[super.field437];
+		if (super.spotanimId != -1 && super.spotanimFrame != -1) {
+			SpotAnimType var3 = SpotAnimType.types[super.spotanimId];
 			Model var4 = var3.getModel();
 			if (var4 != null) {
 				Model var5 = new Model(var4, true, false, !var3.animHasAlpha, -796);
 				var5.translate(-super.field441, 0, 0, false);
 				var5.createLabelReferences(-591);
-				var5.applyTransform(var3.seq.frames[super.field438], 13056);
+				var5.applyTransform(var3.seq.frames[super.spotanimFrame], 13056);
 				var5.labelFaces = null;
 				var5.labelVertices = null;
 				if (var3.resizeh != 128 || var3.resizev != 128) {
@@ -197,36 +197,36 @@ public class PlayerEntity extends PathingEntity {
 				var2 = new Model(this.field463, true, 2, var6);
 			}
 		}
-		if (this.field479 != null) {
-			if (client.loopCycle >= this.field475) {
-				this.field479 = null;
+		if (this.locModel != null) {
+			if (client.loopCycle >= this.locStopCycle) {
+				this.locModel = null;
 			}
-			if (client.loopCycle >= this.field474 && client.loopCycle < this.field475) {
-				Model var7 = this.field479;
-				var7.translate(this.field477 - this.field473, this.field476 - super.field404, this.field478 - super.field405, false);
-				if (super.field451 == 512) {
+			if (client.loopCycle >= this.locStartCycle && client.loopCycle < this.locStopCycle) {
+				Model var7 = this.locModel;
+				var7.translate(this.field477 - this.y, this.field476 - super.x, this.field478 - super.z, false);
+				if (super.dstYaw == 512) {
 					var7.method149((byte) 3);
 					var7.method149((byte) 3);
 					var7.method149((byte) 3);
-				} else if (super.field451 == 1024) {
+				} else if (super.dstYaw == 1024) {
 					var7.method149((byte) 3);
 					var7.method149((byte) 3);
-				} else if (super.field451 == 1536) {
+				} else if (super.dstYaw == 1536) {
 					var7.method149((byte) 3);
 				}
 				Model[] var8 = new Model[] { var2, var7 };
 				var2 = new Model(this.field463, true, 2, var8);
-				if (super.field451 == 512) {
+				if (super.dstYaw == 512) {
 					var7.method149((byte) 3);
-				} else if (super.field451 == 1024) {
+				} else if (super.dstYaw == 1024) {
 					var7.method149((byte) 3);
 					var7.method149((byte) 3);
-				} else if (super.field451 == 1536) {
+				} else if (super.dstYaw == 1536) {
 					var7.method149((byte) 3);
 					var7.method149((byte) 3);
 					var7.method149((byte) 3);
 				}
-				var7.translate(this.field473 - this.field477, super.field404 - this.field476, super.field405 - this.field478, false);
+				var7.translate(this.y - this.field477, super.x - this.field476, super.z - this.field478, false);
 			}
 		}
 		var2.picking = true;
@@ -243,11 +243,11 @@ public class PlayerEntity extends PathingEntity {
 		int var5 = -1;
 		int var6 = -1;
 		int var7 = -1;
-		if (super.field432 >= 0 && super.field435 == 0) {
-			SeqType var8 = SeqType.types[super.field432];
-			var4 = var8.frames[super.field433];
-			if (super.field429 >= 0 && super.field429 != super.seqStandId) {
-				var5 = SeqType.types[super.field429].frames[super.field430];
+		if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
+			SeqType var8 = SeqType.types[super.primarySeqId];
+			var4 = var8.frames[super.primarySeqFrame];
+			if (super.secondarySeqId >= 0 && super.secondarySeqId != super.seqStandId) {
+				var5 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 			}
 			if (var8.righthand >= 0) {
 				var6 = var8.righthand;
@@ -257,10 +257,10 @@ public class PlayerEntity extends PathingEntity {
 				var7 = var8.lefthand;
 				var2 += var7 - this.field469[3] << 48;
 			}
-		} else if (super.field429 >= 0) {
-			var4 = SeqType.types[super.field429].frames[super.field430];
+		} else if (super.secondarySeqId >= 0) {
+			var4 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 		}
-		Model var9 = (Model) field486.get(var2);
+		Model var9 = (Model) modelCache.get(var2);
 		if (arg0 <= 0) {
 			throw new NullPointerException();
 		}
@@ -283,7 +283,7 @@ public class PlayerEntity extends PathingEntity {
 			}
 			if (var10) {
 				if (this.field485 != -1L) {
-					var9 = (Model) field486.get(this.field485);
+					var9 = (Model) modelCache.get(this.field485);
 				}
 				if (var9 == null) {
 					return null;
@@ -325,16 +325,16 @@ public class PlayerEntity extends PathingEntity {
 			}
 			var9.createLabelReferences(-591);
 			var9.calculateNormals(64, 850, -30, -50, -30, true);
-			field486.put(var9, var2, 39399);
+			modelCache.put(var9, var2, 39399);
 			this.field485 = var2;
 		}
-		if (this.field484) {
+		if (this.lowMemory) {
 			return var9;
 		}
 		Model var20 = Model.empty;
 		var20.set(true, var9, true);
 		if (var4 != -1 && var5 != -1) {
-			var20.applyTransforms((byte) 74, var4, var5, SeqType.types[super.field432].walkmerge);
+			var20.applyTransforms((byte) 74, var4, var5, SeqType.types[super.primarySeqId].walkmerge);
 		} else if (var4 != -1) {
 			var20.applyTransform(var4, 13056);
 		}
@@ -396,7 +396,7 @@ public class PlayerEntity extends PathingEntity {
 	}
 
 	@ObfuscatedName("bb.a(B)Z")
-	public final boolean method126(byte arg0) {
+	public final boolean isVisible(byte arg0) {
 		if (arg0 != 8) {
 			throw new NullPointerException();
 		}

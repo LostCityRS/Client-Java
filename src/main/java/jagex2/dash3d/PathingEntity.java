@@ -14,73 +14,73 @@ public class PathingEntity extends Entity {
 	public int field403 = 354;
 
 	@ObfuscatedName("z.n")
-	public int field404;
+	public int x;
 
 	@ObfuscatedName("z.o")
-	public int field405;
+	public int z;
 
 	@ObfuscatedName("z.p")
-	public int field406;
+	public int yaw;
 
 	@ObfuscatedName("z.q")
-	public boolean field407 = false;
+	public boolean needsForwardDrawPadding = false;
 
 	@ObfuscatedName("z.r")
-	public int field408 = 1;
+	public int size = 1;
 
 	@ObfuscatedName("z.s")
 	public int seqStandId = -1;
 
 	@ObfuscatedName("z.t")
-	public int field410 = -1;
+	public int seqTurnId = -1;
 
 	@ObfuscatedName("z.u")
-	public int field411 = -1;
+	public int seqWalkId = -1;
 
 	@ObfuscatedName("z.v")
-	public int field412 = -1;
+	public int seqTurnAroundId = -1;
 
 	@ObfuscatedName("z.w")
-	public int field413 = -1;
+	public int seqTurnLeftId = -1;
 
 	@ObfuscatedName("z.x")
-	public int field414 = -1;
+	public int seqTurnRightId = -1;
 
 	@ObfuscatedName("z.y")
-	public int field415 = -1;
+	public int seqRunId = -1;
 
 	@ObfuscatedName("z.z")
-	public String field416;
+	public String chatMessage;
 
 	@ObfuscatedName("z.ab")
-	public int field443;
+	public int forceMoveEndSceneTileX;
 
 	@ObfuscatedName("z.bb")
-	public int field444;
+	public int forceMoveStartSceneTileZ;
 
 	@ObfuscatedName("z.cb")
-	public int field445;
+	public int forceMoveEndSceneTileZ;
 
 	@ObfuscatedName("z.db")
-	public int field446;
+	public int forceMoveEndCycle;
 
 	@ObfuscatedName("z.eb")
-	public int field447;
+	public int forceMoveStartCycle;
 
 	@ObfuscatedName("z.fb")
-	public int field448;
+	public int forceMoveFaceDirection;
 
 	@ObfuscatedName("z.gb")
-	public int field449;
+	public int cycle;
 
 	@ObfuscatedName("z.hb")
-	public int field450;
+	public int height;
 
 	@ObfuscatedName("z.ib")
-	public int field451;
+	public int dstYaw;
 
 	@ObfuscatedName("z.jb")
-	public int field452;
+	public int pathLength;
 
 	@ObfuscatedName("z.kb")
 	public int[] routeTileX = new int[10];
@@ -89,46 +89,46 @@ public class PathingEntity extends Entity {
 	public int[] routeTileZ = new int[10];
 
 	@ObfuscatedName("z.mb")
-	public boolean[] field455 = new boolean[10];
+	public boolean[] pathRunning = new boolean[10];
 
 	@ObfuscatedName("z.nb")
-	public int field456;
+	public int seqTrigger;
 
 	@ObfuscatedName("z.ob")
-	public int field457;
+	public int seqPathLength;
 
 	@ObfuscatedName("z.A")
-	public int field417 = 100;
+	public int chatTimer = 100;
 
 	@ObfuscatedName("z.D")
-	public int[] field420 = new int[4];
+	public int[] damage = new int[4];
 
 	@ObfuscatedName("z.E")
-	public int[] field421 = new int[4];
+	public int[] damageType = new int[4];
 
 	@ObfuscatedName("z.F")
-	public int[] field422 = new int[4];
+	public int[] damageCycle = new int[4];
 
 	@ObfuscatedName("z.G")
-	public int field423 = -1000;
+	public int combatCycle = -1000;
 
 	@ObfuscatedName("z.J")
-	public int field426 = -1;
+	public int targetId = -1;
 
 	@ObfuscatedName("z.M")
-	public int field429 = -1;
+	public int secondarySeqId = -1;
 
 	@ObfuscatedName("z.P")
-	public int field432 = -1;
+	public int primarySeqId = -1;
 
 	@ObfuscatedName("z.U")
-	public int field437 = -1;
+	public int spotanimId = -1;
 
 	@ObfuscatedName("z.B")
-	public int field418;
+	public int chatColour;
 
 	@ObfuscatedName("z.C")
-	public int field419;
+	public int chatEffect;
 
 	@ObfuscatedName("z.H")
 	public int field424;
@@ -137,80 +137,80 @@ public class PathingEntity extends Entity {
 	public int field425;
 
 	@ObfuscatedName("z.K")
-	public int field427;
+	public int targetTileX;
 
 	@ObfuscatedName("z.L")
-	public int field428;
+	public int targetTileZ;
 
 	@ObfuscatedName("z.N")
-	public int field430;
+	public int secondarySeqFrame;
 
 	@ObfuscatedName("z.O")
-	public int field431;
+	public int secondarySeqCycle;
 
 	@ObfuscatedName("z.Q")
-	public int field433;
+	public int primarySeqFrame;
 
 	@ObfuscatedName("z.R")
-	public int field434;
+	public int primarySeqCycle;
 
 	@ObfuscatedName("z.S")
-	public int field435;
+	public int primarySeqDelay;
 
 	@ObfuscatedName("z.T")
-	public int field436;
+	public int primarySeqLoop;
 
 	@ObfuscatedName("z.V")
-	public int field438;
+	public int spotanimFrame;
 
 	@ObfuscatedName("z.W")
-	public int field439;
+	public int spotanimCycle;
 
 	@ObfuscatedName("z.X")
-	public int field440;
+	public int spotanimLastCycle;
 
 	@ObfuscatedName("z.Y")
 	public int field441;
 
 	@ObfuscatedName("z.Z")
-	public int field442;
+	public int forceMoveStartSceneTileX;
 
 	@ObfuscatedName("z.a(ZIII)V")
-	public final void method123(boolean arg0, int arg1, int arg2, int arg3) {
-		if (this.field432 != -1 && SeqType.types[this.field432].postanim_mode == 1) {
-			this.field432 = -1;
+	public final void move(boolean arg0, int arg1, int arg2, int arg3) {
+		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_mode == 1) {
+			this.primarySeqId = -1;
 		}
 		if (!arg0) {
 			int var5 = arg1 - this.routeTileX[0];
 			int var6 = arg2 - this.routeTileZ[0];
 			if (var5 >= -8 && var5 <= 8 && var6 >= -8 && var6 <= 8) {
-				if (this.field452 < 9) {
-					this.field452++;
+				if (this.pathLength < 9) {
+					this.pathLength++;
 				}
-				for (int var7 = this.field452; var7 > 0; var7--) {
+				for (int var7 = this.pathLength; var7 > 0; var7--) {
 					this.routeTileX[var7] = this.routeTileX[var7 - 1];
 					this.routeTileZ[var7] = this.routeTileZ[var7 - 1];
-					this.field455[var7] = this.field455[var7 - 1];
+					this.pathRunning[var7] = this.pathRunning[var7 - 1];
 				}
 				this.routeTileX[0] = arg1;
 				this.routeTileZ[0] = arg2;
-				this.field455[0] = false;
+				this.pathRunning[0] = false;
 				return;
 			}
 		}
-		this.field452 = 0;
-		this.field457 = 0;
-		this.field456 = 0;
+		this.pathLength = 0;
+		this.seqPathLength = 0;
+		this.seqTrigger = 0;
 		this.routeTileX[0] = arg1;
 		this.routeTileZ[0] = arg2;
-		this.field404 = this.routeTileX[0] * 128 + this.field408 * 64;
+		this.x = this.routeTileX[0] * 128 + this.size * 64;
 		if (arg3 >= 7 && arg3 <= 7) {
-			this.field405 = this.routeTileZ[0] * 128 + this.field408 * 64;
+			this.z = this.routeTileZ[0] * 128 + this.size * 64;
 		}
 	}
 
 	@ObfuscatedName("z.a(IZZ)V")
-	public final void method124(int arg0, boolean arg1, boolean arg2) {
+	public final void move(int arg0, boolean arg1, boolean arg2) {
 		if (!arg2) {
 			this.field402 = !this.field402;
 		}
@@ -244,33 +244,33 @@ public class PathingEntity extends Entity {
 			var4++;
 			var5--;
 		}
-		if (this.field432 != -1 && SeqType.types[this.field432].postanim_mode == 1) {
-			this.field432 = -1;
+		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_mode == 1) {
+			this.primarySeqId = -1;
 		}
-		if (this.field452 < 9) {
-			this.field452++;
+		if (this.pathLength < 9) {
+			this.pathLength++;
 		}
-		for (int var6 = this.field452; var6 > 0; var6--) {
+		for (int var6 = this.pathLength; var6 > 0; var6--) {
 			this.routeTileX[var6] = this.routeTileX[var6 - 1];
 			this.routeTileZ[var6] = this.routeTileZ[var6 - 1];
-			this.field455[var6] = this.field455[var6 - 1];
+			this.pathRunning[var6] = this.pathRunning[var6 - 1];
 		}
 		this.routeTileX[0] = var4;
 		this.routeTileZ[0] = var5;
-		this.field455[0] = arg1;
+		this.pathRunning[0] = arg1;
 	}
 
 	@ObfuscatedName("z.b(I)V")
-	public final void method125(int arg0) {
-		this.field452 = 0;
-		this.field457 = 0;
+	public final void resetPath(int arg0) {
+		this.pathLength = 0;
+		this.seqPathLength = 0;
 		if (arg0 < 2 || arg0 > 2) {
 			this.field403 = 186;
 		}
 	}
 
 	@ObfuscatedName("z.a(B)Z")
-	public boolean method126(byte arg0) {
+	public boolean isVisible(byte arg0) {
 		if (arg0 != 8) {
 			for (int var2 = 1; var2 > 0; var2++) {
 			}
@@ -284,10 +284,10 @@ public class PathingEntity extends Entity {
 			this.field403 = -191;
 		}
 		for (int var4 = 0; var4 < 4; var4++) {
-			if (this.field422[var4] <= client.loopCycle) {
-				this.field420[var4] = arg2;
-				this.field421[var4] = arg0;
-				this.field422[var4] = client.loopCycle + 70;
+			if (this.damageCycle[var4] <= client.loopCycle) {
+				this.damage[var4] = arg2;
+				this.damageType[var4] = arg0;
+				this.damageCycle[var4] = client.loopCycle + 70;
 				return;
 			}
 		}

@@ -32,10 +32,10 @@ public class Component {
 	public int[] invSlotObjCount;
 
 	@ObfuscatedName("d.g")
-	public int field76;
+	public int seqFrame;
 
 	@ObfuscatedName("d.h")
-	public int field77;
+	public int seqCycle;
 
 	@ObfuscatedName("d.i")
 	public int id;
@@ -83,7 +83,7 @@ public class Component {
 	public int scroll;
 
 	@ObfuscatedName("d.x")
-	public int field93;
+	public int scrollPosition;
 
 	@ObfuscatedName("d.y")
 	public boolean hide;

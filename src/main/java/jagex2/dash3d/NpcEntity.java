@@ -19,29 +19,29 @@ public class NpcEntity extends PathingEntity {
 	public int field460;
 
 	@ObfuscatedName("ab.sb")
-	public NpcType field461;
+	public NpcType type;
 
 	@ObfuscatedName("ab.a(I)Lfb;")
 	public final Model method122(int arg0) {
-		if (this.field461 == null) {
+		if (this.type == null) {
 			return null;
 		}
 		Model var2 = this.method128(357);
 		if (var2 == null) {
 			return null;
 		}
-		super.field450 = var2.field400;
+		super.height = var2.field400;
 		if (arg0 != 5560) {
 			this.field459 = -451;
 		}
-		if (super.field437 != -1 && super.field438 != -1) {
-			SpotAnimType var3 = SpotAnimType.types[super.field437];
+		if (super.spotanimId != -1 && super.spotanimFrame != -1) {
+			SpotAnimType var3 = SpotAnimType.types[super.spotanimId];
 			Model var4 = var3.getModel();
 			if (var4 != null) {
 				Model var5 = new Model(var4, true, false, !var3.animHasAlpha, -796);
 				var5.translate(-super.field441, 0, 0, false);
 				var5.createLabelReferences(-591);
-				var5.applyTransform(var3.seq.frames[super.field438], 13056);
+				var5.applyTransform(var3.seq.frames[super.spotanimFrame], 13056);
 				var5.labelFaces = null;
 				var5.labelVertices = null;
 				if (var3.resizeh != 128 || var3.resizev != 128) {
@@ -52,7 +52,7 @@ public class NpcEntity extends PathingEntity {
 				var2 = new Model(this.field460, true, 2, var6);
 			}
 		}
-		if (this.field461.size == 1) {
+		if (this.type.size == 1) {
 			var2.picking = true;
 		}
 		return var2;
@@ -60,27 +60,27 @@ public class NpcEntity extends PathingEntity {
 
 	@ObfuscatedName("ab.c(I)Lfb;")
 	public final Model method128(int arg0) {
-		if (super.field432 < 0 || super.field435 != 0) {
+		if (super.primarySeqId < 0 || super.primarySeqDelay != 0) {
 			int var4 = -1;
 			int var5 = 59 / arg0;
-			if (super.field429 >= 0) {
-				var4 = SeqType.types[super.field429].frames[super.field430];
+			if (super.secondarySeqId >= 0) {
+				var4 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 			}
-			return this.field461.getModel((byte) 0, var4, -1, null);
+			return this.type.getModel((byte) 0, var4, -1, null);
 		}
-		int var2 = SeqType.types[super.field432].frames[super.field433];
+		int var2 = SeqType.types[super.primarySeqId].frames[super.primarySeqFrame];
 		int var3 = -1;
-		if (super.field429 >= 0 && super.field429 != super.seqStandId) {
-			var3 = SeqType.types[super.field429].frames[super.field430];
+		if (super.secondarySeqId >= 0 && super.secondarySeqId != super.seqStandId) {
+			var3 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 		}
-		return this.field461.getModel((byte) 0, var2, var3, SeqType.types[super.field432].walkmerge);
+		return this.type.getModel((byte) 0, var2, var3, SeqType.types[super.primarySeqId].walkmerge);
 	}
 
 	@ObfuscatedName("ab.a(B)Z")
-	public final boolean method126(byte arg0) {
+	public final boolean isVisible(byte arg0) {
 		if (arg0 != 8) {
 			this.field458 = !this.field458;
 		}
-		return this.field461 != null;
+		return this.type != null;
 	}
 }

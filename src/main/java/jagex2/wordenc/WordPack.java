@@ -59,7 +59,7 @@ public class WordPack {
 	}
 
 	@ObfuscatedName("ac.a(Ljava/lang/String;ILmb;)V")
-	public static void method317(String arg0, int arg1, Packet arg2) {
+	public static void pack(String arg0, int arg1, Packet arg2) {
 		if (arg0.length() > 80) {
 			arg0 = arg0.substring(0, 80);
 		}

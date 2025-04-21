@@ -116,7 +116,7 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.a(I)V")
-	public void method226(int arg0) {
+	public void release(int arg0) {
 		if (this._flowObfuscator5 != arg0) {
 			this._flowObfuscator12 = -414;
 		}

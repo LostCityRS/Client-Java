@@ -17,7 +17,7 @@ public class ProjectileEntity extends Entity {
 	public SpotAnimType field504;
 
 	@ObfuscatedName("eb.o")
-	public int field505;
+	public int level;
 
 	@ObfuscatedName("eb.p")
 	public int field506;
@@ -29,13 +29,13 @@ public class ProjectileEntity extends Entity {
 	public int field508;
 
 	@ObfuscatedName("eb.s")
-	public int field509;
+	public int offsetY;
 
 	@ObfuscatedName("eb.t")
-	public int field510;
+	public int startCycle;
 
 	@ObfuscatedName("eb.u")
-	public int field511;
+	public int endCycle;
 
 	@ObfuscatedName("eb.v")
 	public int field512;
@@ -44,7 +44,7 @@ public class ProjectileEntity extends Entity {
 	public int field513;
 
 	@ObfuscatedName("eb.x")
-	public int field514;
+	public int target;
 
 	@ObfuscatedName("eb.y")
 	public boolean field515 = false;
@@ -87,16 +87,16 @@ public class ProjectileEntity extends Entity {
 
 	public ProjectileEntity(int arg0, int arg1, int arg2, int arg3, byte arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 		this.field504 = SpotAnimType.types[arg1];
-		this.field505 = arg5;
+		this.level = arg5;
 		this.field506 = arg0;
 		this.field507 = arg6;
 		this.field508 = arg7;
-		this.field510 = arg9;
-		this.field511 = arg11;
+		this.startCycle = arg9;
+		this.endCycle = arg11;
 		this.field512 = arg2;
 		this.field513 = arg8;
-		this.field514 = arg10;
-		this.field509 = arg3;
+		this.target = arg10;
+		this.offsetY = arg3;
 		if (this.field503 != arg4) {
 			this.field502 = !this.field502;
 		}
@@ -104,7 +104,7 @@ public class ProjectileEntity extends Entity {
 	}
 
 	@ObfuscatedName("eb.a(IBIII)V")
-	public final void method132(int arg0, byte arg1, int arg2, int arg3, int arg4) {
+	public final void updateVelocity(int arg0, byte arg1, int arg2, int arg3, int arg4) {
 		if (!this.field515) {
 			double var6 = (double) (arg3 - this.field506);
 			double var8 = (double) (arg0 - this.field507);
@@ -113,7 +113,7 @@ public class ProjectileEntity extends Entity {
 			this.field517 = (double) this.field513 * var8 / var10 + (double) this.field507;
 			this.field518 = this.field508;
 		}
-		double var12 = (double) (this.field511 + 1 - arg4);
+		double var12 = (double) (this.endCycle + 1 - arg4);
 		this.field519 = ((double) arg3 - this.field516) / var12;
 		this.field520 = ((double) arg0 - this.field517) / var12;
 		this.field521 = Math.sqrt(this.field520 * this.field520 + this.field519 * this.field519);
@@ -127,7 +127,7 @@ public class ProjectileEntity extends Entity {
 	}
 
 	@ObfuscatedName("eb.a(II)V")
-	public final void method133(int arg0, int arg1) {
+	public final void update(int arg0, int arg1) {
 		this.field515 = true;
 		this.field516 += (double) arg1 * this.field519;
 		this.field517 += (double) arg1 * this.field520;

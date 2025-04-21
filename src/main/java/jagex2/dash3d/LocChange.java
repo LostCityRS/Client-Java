@@ -4,41 +4,41 @@ import deob.ObfuscatedName;
 import jagex2.datastruct.Linkable;
 
 @ObfuscatedName("ob")
-public class LocSpawned extends Linkable {
+public class LocChange extends Linkable {
 
 	@ObfuscatedName("ob.f")
-	public int field736;
+	public int level;
 
 	@ObfuscatedName("ob.g")
-	public int field737;
+	public int layer;
 
 	@ObfuscatedName("ob.h")
-	public int field738;
+	public int localX;
 
 	@ObfuscatedName("ob.i")
-	public int field739;
+	public int localZ;
 
 	@ObfuscatedName("ob.j")
-	public int field740;
+	public int previousType;
 
 	@ObfuscatedName("ob.k")
-	public int field741;
+	public int previousAngle;
 
 	@ObfuscatedName("ob.l")
-	public int field742;
+	public int previousShape;
 
 	@ObfuscatedName("ob.m")
-	public int field743;
+	public int type;
 
 	@ObfuscatedName("ob.n")
-	public int field744;
+	public int angle;
 
 	@ObfuscatedName("ob.o")
-	public int field745;
+	public int shape;
 
 	@ObfuscatedName("ob.p")
-	public int field746;
+	public int delay;
 
 	@ObfuscatedName("ob.q")
-	public int field747 = -1;
+	public int duration = -1;
 }

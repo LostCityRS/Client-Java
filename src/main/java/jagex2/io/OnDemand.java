@@ -390,7 +390,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.b(I)V")
-	public final void method292(int arg0) {
+	public final void clearPrefetches(int arg0) {
 		if (arg0 != 0) {
 			this._flowObfuscator1 = 461;
 		}

@@ -56,7 +56,7 @@ public class Wave {
 	}
 
 	@ObfuscatedName("cc.a(III)Lmb;")
-	public static final Packet method322(int arg0, int arg1, int arg2) {
+	public static final Packet generate(int arg0, int arg1, int arg2) {
 		if (arg2 <= 0) {
 			for (int var3 = 1; var3 > 0; var3++) {
 			}
