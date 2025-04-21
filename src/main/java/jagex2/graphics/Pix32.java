@@ -497,7 +497,7 @@ public class Pix32 extends Pix2D {
 			var11 += var15;
 		}
 		if (var10 > 0 && var9 > 0) {
-			this.copyPixelsMasked(var7, 0, this.pixels, var10, var12, var8, var11, var9, Pix2D.data, (byte) 18, arg0.field683);
+			this.copyPixelsMasked(var7, 0, this.pixels, var10, var12, var8, var11, var9, Pix2D.data, (byte) 18, arg0.pixels);
 		}
 	}
 

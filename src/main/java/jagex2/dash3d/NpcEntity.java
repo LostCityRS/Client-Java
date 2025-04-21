@@ -70,7 +70,7 @@ public class NpcEntity extends PathingEntity {
 		}
 		int var2 = SeqType.types[super.field432].frames[super.field433];
 		int var3 = -1;
-		if (super.field429 >= 0 && super.field429 != super.field409) {
+		if (super.field429 >= 0 && super.field429 != super.seqStandId) {
 			var3 = SeqType.types[super.field429].frames[super.field430];
 		}
 		return this.field461.getModel((byte) 0, var2, var3, SeqType.types[super.field432].walkmerge);

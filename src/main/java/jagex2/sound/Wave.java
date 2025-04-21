@@ -37,7 +37,7 @@ public class Wave {
 	public int field908;
 
 	@ObfuscatedName("cc.a(Lmb;B)V")
-	public static final void method321(Packet arg0, byte arg1) {
+	public static final void unpack(Packet arg0, byte arg1) {
 		field904 = new byte[441000];
 		if (arg1 != 127) {
 			return;

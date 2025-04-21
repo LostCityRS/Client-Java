@@ -65,7 +65,7 @@ public class WordFilter {
 	public static boolean field1185;
 
 	@ObfuscatedName("qc.a(Lyb;)V")
-	public static final void method389(Jagfile arg0) {
+	public static final void unpack(Jagfile arg0) {
 		Packet var1 = new Packet((byte) -109, arg0.read("fragmentsenc.txt", null));
 		Packet var2 = new Packet((byte) -109, arg0.read("badenc.txt", null));
 		Packet var3 = new Packet((byte) -109, arg0.read("domainenc.txt", null));

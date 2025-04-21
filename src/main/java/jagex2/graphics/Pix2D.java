@@ -49,7 +49,7 @@ public class Pix2D extends DoublyLinkable {
 	public static int right;
 
 	@ObfuscatedName("hb.w")
-	public static int boundX;
+	public static int safeWidth;
 
 	@ObfuscatedName("hb.x")
 	public static int centerX2d;
@@ -80,7 +80,7 @@ public class Pix2D extends DoublyLinkable {
 		top = 0;
 		right = width2d;
 		bottom = height2d;
-		boundX = right - 1;
+		safeWidth = right - 1;
 		centerX2d = right / 2;
 	}
 
@@ -105,7 +105,7 @@ public class Pix2D extends DoublyLinkable {
 		if (arg2 < 4 || arg2 > 4) {
 			_flowObfuscator7 = 461;
 		}
-		boundX = right - 1;
+		safeWidth = right - 1;
 		centerX2d = right / 2;
 		centerY2d = bottom / 2;
 	}

@@ -14,10 +14,10 @@ import java.awt.image.ImageProducer;
 public class PixMap implements ImageProducer, ImageObserver {
 
 	@ObfuscatedName("rb.a")
-	public int field755;
+	public int _flowObfuscator1;
 
 	@ObfuscatedName("rb.b")
-	public boolean field756 = true;
+	public boolean _flowObfuscator2 = true;
 
 	@ObfuscatedName("rb.c")
 	public int[] data;
@@ -41,7 +41,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 		this.width = arg2;
 		this.height = arg1;
 		if (arg3 != 2) {
-			this.field756 = !this.field756;
+			this._flowObfuscator2 = !this._flowObfuscator2;
 		}
 		this.data = new int[arg1 * arg2];
 		this.colorModel = new DirectColorModel(32, 16711680, 65280, 255);
@@ -65,7 +65,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	public void draw(Graphics arg0, int arg1, byte arg2, int arg3) {
 		this.setPixels();
 		if (arg2 != 55) {
-			this.field755 = 41;
+			this._flowObfuscator1 = 41;
 		}
 		arg0.drawImage(this.image, arg3, arg1, this);
 	}

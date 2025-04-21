@@ -6,27 +6,27 @@ import deob.ObfuscatedName;
 public class BZip2 {
 
 	@ObfuscatedName("sb.a")
-	public static BZip2State field763 = new BZip2State();
+	public static BZip2State state = new BZip2State();
 
 	@ObfuscatedName("sb.a([BI[BII)I")
 	public static int decompress(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
-		BZip2State var5 = field763;
-		synchronized (field763) {
-			field763.field773 = arg2;
-			field763.field774 = arg4;
-			field763.field778 = arg0;
-			field763.field779 = 0;
-			field763.field775 = arg3;
-			field763.field780 = arg1;
-			field763.field787 = 0;
-			field763.field786 = 0;
-			field763.field776 = 0;
-			field763.field777 = 0;
-			field763.field781 = 0;
-			field763.field782 = 0;
-			field763.field789 = 0;
-			method272(field763);
-			return arg1 - field763.field780;
+		BZip2State var5 = state;
+		synchronized (state) {
+			state.field773 = arg2;
+			state.field774 = arg4;
+			state.field778 = arg0;
+			state.field779 = 0;
+			state.field775 = arg3;
+			state.field780 = arg1;
+			state.field787 = 0;
+			state.field786 = 0;
+			state.field776 = 0;
+			state.field777 = 0;
+			state.field781 = 0;
+			state.field782 = 0;
+			state.field789 = 0;
+			method272(state);
+			return arg1 - state.field780;
 		}
 	}
 

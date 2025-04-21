@@ -30,7 +30,7 @@ public class World {
 	public static int field44 = -509;
 
 	@ObfuscatedName("c.g")
-	public static boolean field45 = true;
+	public static boolean lowMemory = true;
 
 	@ObfuscatedName("c.h")
 	public static int field46;
@@ -247,7 +247,7 @@ public class World {
 					int var16 = arg1 + var12;
 					if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
 						LocType var17 = LocType.get(var6);
-						if (var14 != 22 || !field45 || var17.active || var17.forcedecor) {
+						if (var14 != 22 || !lowMemory || var17.active || var17.forcedecor) {
 							var4 &= var17.validate(field43);
 							var9 = true;
 						}
@@ -263,7 +263,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(ILmb;Lvb;)V")
-	public static final void method17(int arg0, Packet arg1, OnDemand arg2) {
+	public static final void prefetchLocs(int arg0, Packet arg1, OnDemand arg2) {
 		int var3 = -1;
 		if (arg0 != 31048) {
 			field41 = 8;
@@ -331,7 +331,7 @@ public class World {
 
 	@ObfuscatedName("c.a(IIIZLs;Ljc;III)V")
 	public final void method19(int arg0, int arg1, int arg2, boolean arg3, World3D arg4, CollisionMap arg5, int arg6, int arg7, int arg8) {
-		if (field45) {
+		if (lowMemory) {
 			if ((this.field51[arg8][arg6][arg1] & 0x10) != 0) {
 				return;
 			}
@@ -354,7 +354,7 @@ public class World {
 			this.field40 = !this.field40;
 		}
 		if (arg7 == 22) {
-			if (!field45 || var15.active || var15.forcedecor) {
+			if (!lowMemory || var15.active || var15.forcedecor) {
 				Entity var18;
 				if (var15.anim == -1) {
 					var18 = var15.getModel(22, arg2, var10, var11, var12, var13, -1);
@@ -728,7 +728,7 @@ public class World {
 							var65 -= this.field61[var69];
 							var66 -= this.field62[var69];
 						}
-						if (var67 >= 1 && var67 < this.field49 - 1 && (!field45 || (this.field51[var5][var58][var67] & 0x10) == 0 && this.method21(var58, var5, var67, this.field42) == field46)) {
+						if (var67 >= 1 && var67 < this.field49 - 1 && (!lowMemory || (this.field51[var5][var58][var67] & 0x10) == 0 && this.method21(var58, var5, var67, this.field42) == field46)) {
 							int var70 = this.field52[var5][var58][var67] & 0xFF;
 							int var71 = this.field53[var5][var58][var67] & 0xFF;
 							if (var70 > 0 || var71 > 0) {
@@ -782,7 +782,7 @@ public class World {
 									int var93;
 									int var94;
 									if (var92 >= 0) {
-										var93 = Pix3D.method182(var92, 3);
+										var93 = Pix3D.getAverageTextureRgb(var92, 3);
 										var94 = -1;
 									} else if (var91.rgb == 16711935) {
 										var93 = 0;

@@ -29,7 +29,7 @@ public class PathingEntity extends Entity {
 	public int field408 = 1;
 
 	@ObfuscatedName("z.s")
-	public int field409 = -1;
+	public int seqStandId = -1;
 
 	@ObfuscatedName("z.t")
 	public int field410 = -1;

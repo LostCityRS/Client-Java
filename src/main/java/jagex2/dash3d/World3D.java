@@ -29,7 +29,7 @@ public class World3D {
 	public int field294 = 7;
 
 	@ObfuscatedName("s.g")
-	public static boolean field295 = true;
+	public static boolean lowMemory = true;
 
 	@ObfuscatedName("s.h")
 	public int field296;
@@ -1027,7 +1027,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIBII[I)V")
-	public static void method99(int arg0, int arg1, byte arg2, int arg3, int arg4, int[] arg5) {
+	public static void init(int arg0, int arg1, byte arg2, int arg3, int arg4, int[] arg5) {
 		field354 = 0;
 		if (arg2 != 1) {
 			return;
@@ -1775,11 +1775,11 @@ public class World3D {
 		int var50 = (var36 << 9) / var37 + Pix3D.centerY;
 		int var51 = (var39 << 9) / var43 + Pix3D.centerX;
 		int var52 = (var42 << 9) / var43 + Pix3D.centerY;
-		Pix3D.field646 = 0;
+		Pix3D.trans = 0;
 		if ((var48 - var52) * (var49 - var51) - (var47 - var51) * (var50 - var52) > 0) {
-			Pix3D.field643 = false;
-			if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.boundX || var51 > Pix2D.boundX || var47 > Pix2D.boundX) {
-				Pix3D.field643 = true;
+			Pix3D.hclip = false;
+			if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.safeWidth || var51 > Pix2D.safeWidth || var47 > Pix2D.safeWidth) {
+				Pix3D.hclip = true;
 			}
 			if (field326 && this.method107(field327, field328, var50, var52, var48, var49, var51, var47)) {
 				field329 = arg6;
@@ -1787,37 +1787,37 @@ public class World3D {
 			}
 			if (arg0.field263 == -1) {
 				if (arg0.field261 != 12345678) {
-					Pix3D.method187(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260);
+					Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260);
 				}
-			} else if (field295) {
+			} else if (lowMemory) {
 				int var53 = field344[arg0.field263];
-				Pix3D.method187(var50, var52, var48, var49, var51, var47, this.method106(arg0.field261, 705, var53), this.method106(arg0.field262, 705, var53), this.method106(arg0.field260, 705, var53));
+				Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, this.method106(arg0.field261, 705, var53), this.method106(arg0.field262, 705, var53), this.method106(arg0.field260, 705, var53));
 			} else if (arg0.field264) {
-				Pix3D.method191(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
+				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
 			} else {
-				Pix3D.method191(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.field263);
+				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.field263);
 			}
 		}
 		if ((var45 - var47) * (var52 - var48) - (var46 - var48) * (var51 - var47) <= 0) {
 			return;
 		}
-		Pix3D.field643 = false;
-		if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.boundX || var47 > Pix2D.boundX || var51 > Pix2D.boundX) {
-			Pix3D.field643 = true;
+		Pix3D.hclip = false;
+		if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.safeWidth || var47 > Pix2D.safeWidth || var51 > Pix2D.safeWidth) {
+			Pix3D.hclip = true;
 		}
 		if (field326 && this.method107(field327, field328, var46, var48, var52, var45, var47, var51)) {
 			field329 = arg6;
 			field330 = arg7;
 		}
 		if (arg0.field263 != -1) {
-			if (!field295) {
-				Pix3D.method191(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
+			if (!lowMemory) {
+				Pix3D.textureTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
 				return;
 			}
 			int var54 = field344[arg0.field263];
-			Pix3D.method187(var46, var48, var52, var45, var47, var51, this.method106(arg0.field259, 705, var54), this.method106(arg0.field260, 705, var54), this.method106(arg0.field262, 705, var54));
+			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, this.method106(arg0.field259, 705, var54), this.method106(arg0.field260, 705, var54), this.method106(arg0.field262, 705, var54));
 		} else if (arg0.field259 != 12345678) {
-			Pix3D.method187(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262);
+			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262);
 			return;
 		}
 	}
@@ -1844,7 +1844,7 @@ public class World3D {
 			TileOverlay.field196[var10] = (var26 << 9) / var30 + Pix3D.centerX;
 			TileOverlay.field197[var10] = (var29 << 9) / var30 + Pix3D.centerY;
 		}
-		Pix3D.field646 = 0;
+		Pix3D.trans = 0;
 		int var11 = arg4.field187.length;
 		for (int var12 = 0; var12 < var11; var12++) {
 			int var13 = arg4.field187[var12];
@@ -1857,9 +1857,9 @@ public class World3D {
 			int var20 = TileOverlay.field197[var14];
 			int var21 = TileOverlay.field197[var15];
 			if ((var16 - var17) * (var21 - var20) - (var18 - var17) * (var19 - var20) > 0) {
-				Pix3D.field643 = false;
-				if (var16 < 0 || var17 < 0 || var18 < 0 || var16 > Pix2D.boundX || var17 > Pix2D.boundX || var18 > Pix2D.boundX) {
-					Pix3D.field643 = true;
+				Pix3D.hclip = false;
+				if (var16 < 0 || var17 < 0 || var18 < 0 || var16 > Pix2D.safeWidth || var17 > Pix2D.safeWidth || var18 > Pix2D.safeWidth) {
+					Pix3D.hclip = true;
 				}
 				if (field326 && this.method107(field327, field328, var19, var20, var21, var16, var17, var18)) {
 					field329 = arg0;
@@ -1867,15 +1867,15 @@ public class World3D {
 				}
 				if (arg4.field190 == null || arg4.field190[var12] == -1) {
 					if (arg4.field184[var12] != 12345678) {
-						Pix3D.method187(var19, var20, var21, var16, var17, var18, arg4.field184[var12], arg4.field185[var12], arg4.field186[var12]);
+						Pix3D.gouraudTriangle(var19, var20, var21, var16, var17, var18, arg4.field184[var12], arg4.field185[var12], arg4.field186[var12]);
 					}
-				} else if (field295) {
+				} else if (lowMemory) {
 					int var22 = field344[arg4.field190[var12]];
-					Pix3D.method187(var19, var20, var21, var16, var17, var18, this.method106(arg4.field184[var12], 705, var22), this.method106(arg4.field185[var12], 705, var22), this.method106(arg4.field186[var12], 705, var22));
+					Pix3D.gouraudTriangle(var19, var20, var21, var16, var17, var18, this.method106(arg4.field184[var12], 705, var22), this.method106(arg4.field185[var12], 705, var22), this.method106(arg4.field186[var12], 705, var22));
 				} else if (arg4.field191) {
-					Pix3D.method191(var19, var20, var21, var16, var17, var18, arg4.field184[var12], arg4.field185[var12], arg4.field186[var12], TileOverlay.field198[0], TileOverlay.field198[1], TileOverlay.field198[3], TileOverlay.field199[0], TileOverlay.field199[1], TileOverlay.field199[3], TileOverlay.field200[0], TileOverlay.field200[1], TileOverlay.field200[3], arg4.field190[var12]);
+					Pix3D.textureTriangle(var19, var20, var21, var16, var17, var18, arg4.field184[var12], arg4.field185[var12], arg4.field186[var12], TileOverlay.field198[0], TileOverlay.field198[1], TileOverlay.field198[3], TileOverlay.field199[0], TileOverlay.field199[1], TileOverlay.field199[3], TileOverlay.field200[0], TileOverlay.field200[1], TileOverlay.field200[3], arg4.field190[var12]);
 				} else {
-					Pix3D.method191(var19, var20, var21, var16, var17, var18, arg4.field184[var12], arg4.field185[var12], arg4.field186[var12], TileOverlay.field198[var13], TileOverlay.field198[var14], TileOverlay.field198[var15], TileOverlay.field199[var13], TileOverlay.field199[var14], TileOverlay.field199[var15], TileOverlay.field200[var13], TileOverlay.field200[var14], TileOverlay.field200[var15], arg4.field190[var12]);
+					Pix3D.textureTriangle(var19, var20, var21, var16, var17, var18, arg4.field184[var12], arg4.field185[var12], arg4.field186[var12], TileOverlay.field198[var13], TileOverlay.field198[var14], TileOverlay.field198[var15], TileOverlay.field199[var13], TileOverlay.field199[var14], TileOverlay.field199[var15], TileOverlay.field200[var13], TileOverlay.field200[var14], TileOverlay.field200[var15], arg4.field190[var12]);
 				}
 			}
 		}

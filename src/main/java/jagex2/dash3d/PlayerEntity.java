@@ -24,7 +24,7 @@ public class PlayerEntity extends PathingEntity {
 	public int field464 = -323;
 
 	@ObfuscatedName("bb.sb")
-	public String field465;
+	public String name;
 
 	@ObfuscatedName("bb.tb")
 	public boolean field466 = false;
@@ -42,7 +42,7 @@ public class PlayerEntity extends PathingEntity {
 	public int[] field470 = new int[5];
 
 	@ObfuscatedName("bb.yb")
-	public int field471;
+	public int combatLevel;
 
 	@ObfuscatedName("bb.zb")
 	public long field472;
@@ -105,14 +105,14 @@ public class PlayerEntity extends PathingEntity {
 		}
 		for (int var4 = 0; var4 < 5; var4++) {
 			int var7 = arg0.g1();
-			if (var7 < 0 || var7 >= client.field1379[var4].length) {
+			if (var7 < 0 || var7 >= client.DESIGN_BODY_COLOUR[var4].length) {
 				var7 = 0;
 			}
 			this.field470[var4] = var7;
 		}
-		super.field409 = arg0.g2();
-		if (super.field409 == 65535) {
-			super.field409 = -1;
+		super.seqStandId = arg0.g2();
+		if (super.seqStandId == 65535) {
+			super.seqStandId = -1;
 		}
 		super.field410 = arg0.g2();
 		if (super.field410 == 65535) {
@@ -141,8 +141,8 @@ public class PlayerEntity extends PathingEntity {
 		if (super.field415 == 65535) {
 			super.field415 = -1;
 		}
-		this.field465 = JString.method313(true, JString.method310((byte) 88, arg0.g8(this.field462)));
-		this.field471 = arg0.g1();
+		this.name = JString.toSentenceCase(true, JString.fromBase37((byte) 88, arg0.g8(this.field462)));
+		this.combatLevel = arg0.g1();
 		this.field466 = true;
 		this.field472 = 0L;
 		for (int var5 = 0; var5 < 12; var5++) {
@@ -246,7 +246,7 @@ public class PlayerEntity extends PathingEntity {
 		if (super.field432 >= 0 && super.field435 == 0) {
 			SeqType var8 = SeqType.types[super.field432];
 			var4 = var8.frames[super.field433];
-			if (super.field429 >= 0 && super.field429 != super.field409) {
+			if (super.field429 >= 0 && super.field429 != super.seqStandId) {
 				var5 = SeqType.types[super.field429].frames[super.field430];
 			}
 			if (var8.righthand >= 0) {
@@ -317,9 +317,9 @@ public class PlayerEntity extends PathingEntity {
 			var9 = new Model(var14, 652, var13);
 			for (int var16 = 0; var16 < 5; var16++) {
 				if (this.field470[var16] != 0) {
-					var9.recolour(client.field1379[var16][0], client.field1379[var16][this.field470[var16]]);
+					var9.recolour(client.DESIGN_BODY_COLOUR[var16][0], client.DESIGN_BODY_COLOUR[var16][this.field470[var16]]);
 					if (var16 == 1) {
-						var9.recolour(client.field1528[0], client.field1528[this.field470[var16]]);
+						var9.recolour(client.DESIGN_HAIR_COLOUR[0], client.DESIGN_HAIR_COLOUR[this.field470[var16]]);
 					}
 				}
 			}
@@ -386,9 +386,9 @@ public class PlayerEntity extends PathingEntity {
 		Model var8 = new Model(var6, 652, var4);
 		for (int var9 = 0; var9 < 5; var9++) {
 			if (this.field470[var9] != 0) {
-				var8.recolour(client.field1379[var9][0], client.field1379[var9][this.field470[var9]]);
+				var8.recolour(client.DESIGN_BODY_COLOUR[var9][0], client.DESIGN_BODY_COLOUR[var9][this.field470[var9]]);
 				if (var9 == 1) {
-					var8.recolour(client.field1528[0], client.field1528[this.field470[var9]]);
+					var8.recolour(client.DESIGN_HAIR_COLOUR[0], client.DESIGN_HAIR_COLOUR[this.field470[var9]]);
 				}
 			}
 		}

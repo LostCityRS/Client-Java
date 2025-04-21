@@ -18,7 +18,7 @@ public class JString {
 	public static char[] field882 = new char[] { '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 	@ObfuscatedName("zb.a(Ljava/lang/String;)J")
-	public static long method309(String arg0) {
+	public static long toBase37(String arg0) {
 		long var1 = 0L;
 		for (int var3 = 0; var3 < arg0.length() && var3 < 12; var3++) {
 			char var4 = arg0.charAt(var3);
@@ -38,7 +38,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(BJ)Ljava/lang/String;")
-	public static String method310(byte arg0, long arg1) {
+	public static String fromBase37(byte arg0, long arg1) {
 		if (arg0 != 88) {
 			throw new NullPointerException();
 		} else if (arg1 <= 0L || arg1 >= 6582952005840035281L) {
@@ -71,7 +71,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(IB)Ljava/lang/String;")
-	public static String method312(int arg0, byte arg1) {
+	public static String formatName(int arg0, byte arg1) {
 		if (arg1 != -35) {
 			throw new NullPointerException();
 		}
@@ -79,7 +79,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.b(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String method313(boolean arg0, String arg1) {
+	public static String toSentenceCase(boolean arg0, String arg1) {
 		if (!arg0) {
 			throw new NullPointerException();
 		} else if (arg1.length() > 0) {
