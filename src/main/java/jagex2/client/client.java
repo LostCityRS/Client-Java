@@ -414,7 +414,7 @@ public class client extends GameShell {
 	public boolean midiActive = true;
 
 	@ObfuscatedName("client.eg")
-	public int[] field1464 = new int[] { 16776960, 16711680, 65280, 65535, 16711935, 16777215 };
+	public int[] CHAT_COLOURS = new int[] { 16776960, 16711680, 65280, 65535, 16711935, 16777215 };
 
 	@ObfuscatedName("client.kg")
 	public int[] friendWorld = new int[200];
@@ -1476,13 +1476,13 @@ public class client extends GameShell {
 			}
 		}
 		int var12 = Pix3D.cycle;
-		Model.field601 = true;
+		Model.checkHover = true;
 		Model.field604 = 0;
-		Model.field602 = super.mouseX - 4;
+		Model.mouseX = super.mouseX - 4;
 		if (!arg0) {
 			this.field1426 = !this.field1426;
 		}
-		Model.field603 = super.mouseY - 4;
+		Model.mouseY = super.mouseY - 4;
 		Pix2D.clear(false);
 		this.scene.draw(this.cameraX, var5, 7, this.cameraYaw, this.cameraPitch, this.cameraZ, this.cameraY);
 		this.scene.clearLocChanges((byte) -48);
@@ -1764,7 +1764,7 @@ public class client extends GameShell {
 				arg0.text = "";
 				arg0.buttonType = 0;
 			} else {
-				arg0.text = JString.toSentenceCase(true, JString.fromBase37((byte) 88, this.ignoreName37[var3]));
+				arg0.text = JString.formatName(true, JString.fromBase37((byte) 88, this.ignoreName37[var3]));
 				arg0.buttonType = 1;
 			}
 		} else if (var3 == 503) {
@@ -2898,7 +2898,7 @@ public class client extends GameShell {
 			this.addMessage("Your ignore list is full. Max of 100 hit", "", 0, false);
 			return;
 		}
-		String var4 = JString.toSentenceCase(true, JString.fromBase37((byte) 88, arg1));
+		String var4 = JString.formatName(true, JString.fromBase37((byte) 88, arg1));
 		for (int var5 = 0; var5 < this.ignoreCount; var5++) {
 			if (this.ignoreName37[var5] == arg1) {
 				this.addMessage(var4 + " is already on your ignore list", "", 0, false);
@@ -4277,7 +4277,7 @@ public class client extends GameShell {
 				if (var17.combatCycle > loopCycle) {
 					this.projectFromGround(this.field1433, var17.height + 15, var17);
 					if (this.projectX > -1) {
-						int var22 = var17.field424 * 30 / var17.field425;
+						int var22 = var17.health * 30 / var17.totalHealth;
 						if (var22 > 30) {
 							var22 = 30;
 						}
@@ -4329,7 +4329,7 @@ public class client extends GameShell {
 			if (this.chatEffects == 0) {
 				int var10 = 16776960;
 				if (this.chatColour[var3] < 6) {
-					var10 = this.field1464[this.chatColour[var3]];
+					var10 = this.CHAT_COLOURS[this.chatColour[var3]];
 				}
 				if (this.chatColour[var3] == 6) {
 					var10 = this.sceneCycle % 20 < 10 ? 16711680 : 16776960;
@@ -4657,7 +4657,7 @@ public class client extends GameShell {
 		} else if (this.friendCount >= 200) {
 			this.addMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", "", 0, false);
 		} else {
-			String var4 = JString.toSentenceCase(true, JString.fromBase37((byte) 88, arg1));
+			String var4 = JString.formatName(true, JString.fromBase37((byte) 88, arg1));
 			for (int var5 = 0; var5 < this.friendCount; var5++) {
 				if (this.friendName37[var5] == arg1) {
 					this.addMessage(var4 + " is already on your friend list", "", 0, false);
@@ -5647,7 +5647,7 @@ public class client extends GameShell {
 			this.drawScrollbar(463, this.chatScrollHeight, 0, this.chatScrollHeight - this.chatScrollOffset - 77, (byte) 9, 77);
 			String var5;
 			if (localPlayer == null || localPlayer.name == null) {
-				var5 = JString.toSentenceCase(true, this.username);
+				var5 = JString.formatName(true, this.username);
 			} else {
 				var5 = localPlayer.name;
 			}
@@ -5862,10 +5862,10 @@ public class client extends GameShell {
 			if ((var8 & 0x1) == 1) {
 				int var9 = arg1.g1();
 				int var10 = arg1.g1();
-				var7.method127(var10, 0, var9);
+				var7.hit(var10, 0, var9);
 				var7.combatCycle = loopCycle + 300;
-				var7.field424 = arg1.g1();
-				var7.field425 = arg1.g1();
+				var7.health = arg1.g1();
+				var7.totalHealth = arg1.g1();
 			}
 			if ((var8 & 0x2) == 2) {
 				int var11 = arg1.g2();
@@ -5909,10 +5909,10 @@ public class client extends GameShell {
 			if ((var8 & 0x10) == 16) {
 				int var14 = arg1.g1();
 				int var15 = arg1.g1();
-				var7.method127(var15, 0, var14);
+				var7.hit(var15, 0, var14);
 				var7.combatCycle = loopCycle + 300;
-				var7.field424 = arg1.g1();
-				var7.field425 = arg1.g1();
+				var7.health = arg1.g1();
+				var7.totalHealth = arg1.g1();
 			}
 			if ((var8 & 0x20) == 32) {
 				var7.type = NpcType.get(arg1.g2());
@@ -5925,7 +5925,7 @@ public class client extends GameShell {
 			if ((var8 & 0x40) == 64) {
 				var7.spotanimId = arg1.g2();
 				int var16 = arg1.g4();
-				var7.field441 = var16 >> 16;
+				var7.spotanimHeight = var16 >> 16;
 				var7.spotanimLastCycle = (var16 & 0xFFFF) + loopCycle;
 				var7.spotanimFrame = 0;
 				var7.spotanimCycle = 0;
@@ -6262,9 +6262,9 @@ public class client extends GameShell {
 								this.out.p8(this.socialName37, this.field1377);
 								WordPack.pack(this.socialInput, -786, this.out);
 								this.out.psize1(41372, this.out.pos - var7);
-								this.socialInput = JString.method314(true, this.socialInput);
-								this.socialInput = WordFilter.method399(this.socialInput, (byte) 5);
-								this.addMessage(this.socialInput, JString.toSentenceCase(true, JString.fromBase37((byte) 88, this.socialName37)), 6, false);
+								this.socialInput = JString.toSentenceCase(true, this.socialInput);
+								this.socialInput = WordFilter.filter(this.socialInput, (byte) 5);
+								this.addMessage(this.socialInput, JString.formatName(true, JString.fromBase37((byte) 88, this.socialName37)), 6, false);
 								if (this.chatPrivateMode == 2) {
 									this.chatPrivateMode = 1;
 									this.redrawPrivacySettings = true;
@@ -6398,8 +6398,8 @@ public class client extends GameShell {
 								this.out.p1(var15);
 								WordPack.pack(this.chatTyped, -786, this.out);
 								this.out.psize1(41372, this.out.pos - var16);
-								this.chatTyped = JString.method314(true, this.chatTyped);
-								this.chatTyped = WordFilter.method399(this.chatTyped, (byte) 5);
+								this.chatTyped = JString.toSentenceCase(true, this.chatTyped);
+								this.chatTyped = WordFilter.filter(this.chatTyped, (byte) 5);
 								localPlayer.chatMessage = this.chatTyped;
 								localPlayer.chatColour = var14;
 								localPlayer.chatEffect = var15;
@@ -7098,7 +7098,7 @@ public class client extends GameShell {
 			int var43 = var42.indexOf("@whi@");
 			if (var43 != -1) {
 				String var44 = var42.substring(var43 + 5).trim();
-				String var45 = JString.toSentenceCase(true, JString.fromBase37((byte) 88, JString.toBase37(var44)));
+				String var45 = JString.formatName(true, JString.fromBase37((byte) 88, JString.toBase37(var44)));
 				boolean var46 = false;
 				for (int var47 = 0; var47 < this.playerCount; var47++) {
 					PlayerEntity var48 = this.players[this.playerIds[var47]];
@@ -7561,7 +7561,7 @@ public class client extends GameShell {
 			}
 			this.fontBold12.drawStringTaggable(16777215, var2 / 2 - 90, true, false, var9, "Username: " + this.username + (this.titleLoginField == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 			var9 += 15;
-			this.fontBold12.drawStringTaggable(16777215, var2 / 2 - 88, true, false, var9, "Password: " + JString.method315(false, this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+			this.fontBold12.drawStringTaggable(16777215, var2 / 2 - 88, true, false, var9, "Password: " + JString.censor(false, this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 			var9 += 15;
 			int var10 = var2 / 2 - 80;
 			int var11 = var3 / 2 + 50;
@@ -7805,10 +7805,10 @@ public class client extends GameShell {
 		if ((arg0 & 0x10) == 16) {
 			int var12 = arg1.g1();
 			int var13 = arg1.g1();
-			arg4.method127(var13, 0, var12);
+			arg4.hit(var13, 0, var12);
 			arg4.combatCycle = loopCycle + 300;
-			arg4.field424 = arg1.g1();
-			arg4.field425 = arg1.g1();
+			arg4.health = arg1.g1();
+			arg4.totalHealth = arg1.g1();
 		}
 		if ((arg0 & 0x20) == 32) {
 			arg4.targetTileX = arg1.g2();
@@ -7832,8 +7832,8 @@ public class client extends GameShell {
 				}
 				if (!var20 && this.overrideChat == 0) {
 					try {
-						String var22 = WordPack.method316(var16, 355, arg1);
-						String var23 = WordFilter.method399(var22, (byte) 5);
+						String var22 = WordPack.unpack(var16, 355, arg1);
+						String var23 = WordFilter.filter(var22, (byte) 5);
 						arg4.chatMessage = var23;
 						arg4.chatColour = var14 >> 8;
 						arg4.chatEffect = var14 & 0xFF;
@@ -7855,7 +7855,7 @@ public class client extends GameShell {
 		if ((arg0 & 0x100) == 256) {
 			arg4.spotanimId = arg1.g2();
 			int var25 = arg1.g4();
-			arg4.field441 = var25 >> 16;
+			arg4.spotanimHeight = var25 >> 16;
 			arg4.spotanimLastCycle = (var25 & 0xFFFF) + loopCycle;
 			arg4.spotanimFrame = 0;
 			arg4.spotanimCycle = 0;
@@ -7881,10 +7881,10 @@ public class client extends GameShell {
 		}
 		int var26 = arg1.g1();
 		int var27 = arg1.g1();
-		arg4.method127(var27, 0, var26);
+		arg4.hit(var27, 0, var26);
 		arg4.combatCycle = loopCycle + 300;
-		arg4.field424 = arg1.g1();
-		arg4.field425 = arg1.g1();
+		arg4.health = arg1.g1();
+		arg4.totalHealth = arg1.g1();
 	}
 
 	@ObfuscatedName("client.a(IIIIILd;I)V")
@@ -7900,8 +7900,8 @@ public class client extends GameShell {
 			int var10 = arg5.childX[var9] + arg4;
 			int var11 = arg5.childY[var9] + arg1 - arg6;
 			Component var12 = Component.types[arg5.children[var9]];
-			int var13 = var12.field86 + var10;
-			int var14 = var12.field87 + var11;
+			int var13 = var12.x + var10;
+			int var14 = var12.y + var11;
 			if ((var12.overlayer >= 0 || var12.overColour != 0) && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
 				if (var12.overlayer >= 0) {
 					this.lastHoveredInterfaceId = var12.overlayer;
@@ -8142,7 +8142,7 @@ public class client extends GameShell {
 				this.unreadMessageCount = this.in.g2();
 				this.warnMembersInNonMembers = this.in.g1();
 				if (this.lastAddress != 0 && this.viewportInterfaceId == -1) {
-					signlink.dnslookup(JString.formatName(this.lastAddress, (byte) -35));
+					signlink.dnslookup(JString.formatIPv4(this.lastAddress, (byte) -35));
 					this.closeInterfaces(true);
 					short var3 = 650;
 					if (this.daysSinceRecoveriesChanged != 201 || this.warnMembersInNonMembers == 1) {
@@ -8220,7 +8220,7 @@ public class client extends GameShell {
 			if (this.ptype == 70) {
 				long var17 = this.in.g8(this.field1191);
 				int var19 = this.in.g1();
-				String var20 = JString.toSentenceCase(true, JString.fromBase37((byte) 88, var17));
+				String var20 = JString.formatName(true, JString.fromBase37((byte) 88, var17));
 				for (int var21 = 0; var21 < this.friendCount; var21++) {
 					if (this.friendName37[var21] == var17) {
 						if (this.friendWorld[var21] != var19) {
@@ -8381,8 +8381,8 @@ public class client extends GameShell {
 				int var43 = this.in.g2b();
 				int var44 = this.in.g2b();
 				Component var45 = Component.types[var42];
-				var45.field86 = var43;
-				var45.field87 = var44;
+				var45.x = var43;
+				var45.y = var44;
 				this.ptype = -1;
 				return true;
 			}
@@ -8432,7 +8432,7 @@ public class client extends GameShell {
 				if (this.waveEnabled && !lowMemory && this.waveCount < 50) {
 					this.waveIds[this.waveCount] = var50;
 					this.waveLoops[this.waveCount] = var51;
-					this.waveDelay[this.waveCount] = Wave.field903[var50] + var52;
+					this.waveDelay[this.waveCount] = Wave.delays[var50] + var52;
 					this.waveCount++;
 				}
 				this.ptype = -1;
@@ -8980,14 +8980,14 @@ public class client extends GameShell {
 					try {
 						this.field1241[this.field1411] = var136;
 						this.field1411 = (this.field1411 + 1) % 100;
-						String var141 = WordPack.method316(this.psize - 13, 355, this.in);
-						String var142 = WordFilter.method399(var141, (byte) 5);
+						String var141 = WordPack.unpack(this.psize - 13, 355, this.in);
+						String var142 = WordFilter.filter(var141, (byte) 5);
 						if (var137 == 2 || var137 == 3) {
-							this.addMessage(var142, "@cr2@" + JString.toSentenceCase(true, JString.fromBase37((byte) 88, var134)), 7, false);
+							this.addMessage(var142, "@cr2@" + JString.formatName(true, JString.fromBase37((byte) 88, var134)), 7, false);
 						} else if (var137 == 1) {
-							this.addMessage(var142, "@cr1@" + JString.toSentenceCase(true, JString.fromBase37((byte) 88, var134)), 7, false);
+							this.addMessage(var142, "@cr1@" + JString.formatName(true, JString.fromBase37((byte) 88, var134)), 7, false);
 						} else {
-							this.addMessage(var142, JString.toSentenceCase(true, JString.fromBase37((byte) 88, var134)), 3, false);
+							this.addMessage(var142, JString.formatName(true, JString.fromBase37((byte) 88, var134)), 3, false);
 						}
 					} catch (Exception var152) {
 						signlink.reporterror("cde1");
@@ -10373,8 +10373,8 @@ public class client extends GameShell {
 			int var12 = arg3.childX[var11] + arg4;
 			int var13 = arg3.childY[var11] + arg2 - arg0;
 			Component var14 = Component.types[arg3.children[var11]];
-			int var15 = var14.field86 + var12;
-			int var16 = var14.field87 + var13;
+			int var15 = var14.x + var12;
+			int var16 = var14.y + var13;
 			if (var14.clientCode > 0) {
 				this.updateInterfaceContent(var14, (byte) 102);
 			}

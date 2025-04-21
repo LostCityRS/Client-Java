@@ -91,16 +91,16 @@ public class SpotAnimEntity extends Entity {
 			}
 			if (this.field611.angle != 0) {
 				if (this.field611.angle == 90) {
-					var3.method149((byte) 3);
+					var3.rotateY90((byte) 3);
 				}
 				if (this.field611.angle == 180) {
-					var3.method149((byte) 3);
-					var3.method149((byte) 3);
+					var3.rotateY90((byte) 3);
+					var3.rotateY90((byte) 3);
 				}
 				if (this.field611.angle == 270) {
-					var3.method149((byte) 3);
-					var3.method149((byte) 3);
-					var3.method149((byte) 3);
+					var3.rotateY90((byte) 3);
+					var3.rotateY90((byte) 3);
+					var3.rotateY90((byte) 3);
 				}
 			}
 			var3.calculateNormals(this.field611.ambient + 64, this.field611.contrast + 850, -30, -50, -30, true);

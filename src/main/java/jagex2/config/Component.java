@@ -62,10 +62,10 @@ public class Component {
 	public byte alpha;
 
 	@ObfuscatedName("d.q")
-	public int field86;
+	public int x;
 
 	@ObfuscatedName("d.r")
-	public int field87;
+	public int y;
 
 	@ObfuscatedName("d.s")
 	public int[][] scripts;

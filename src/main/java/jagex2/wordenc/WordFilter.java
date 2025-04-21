@@ -195,7 +195,7 @@ public class WordFilter {
 	}
 
 	@ObfuscatedName("qc.a(Ljava/lang/String;B)Ljava/lang/String;")
-	public static final String method399(String arg0, byte arg1) {
+	public static final String filter(String arg0, byte arg1) {
 		long var2 = System.currentTimeMillis();
 		char[] var4 = arg0.toCharArray();
 		if (arg1 != 5) {

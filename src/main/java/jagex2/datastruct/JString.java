@@ -12,10 +12,10 @@ public class JString {
 	public static int field880 = 354;
 
 	@ObfuscatedName("zb.c")
-	public static char[] field881 = new char[12];
+	public static char[] builder = new char[12];
 
 	@ObfuscatedName("zb.d")
-	public static char[] field882 = new char[] { '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	public static char[] BASE37_LOOKUP = new char[] { '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 	@ObfuscatedName("zb.a(Ljava/lang/String;)J")
 	public static long toBase37(String arg0) {
@@ -50,9 +50,9 @@ public class JString {
 			while (arg1 != 0L) {
 				long var4 = arg1;
 				arg1 /= 37L;
-				field881[11 - var3++] = field882[(int) (var4 - arg1 * 37L)];
+				builder[11 - var3++] = BASE37_LOOKUP[(int) (var4 - arg1 * 37L)];
 			}
-			return new String(field881, 12 - var3, var3);
+			return new String(builder, 12 - var3, var3);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(IB)Ljava/lang/String;")
-	public static String formatName(int arg0, byte arg1) {
+	public static String formatIPv4(int arg0, byte arg1) {
 		if (arg1 != -35) {
 			throw new NullPointerException();
 		}
@@ -79,7 +79,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.b(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String toSentenceCase(boolean arg0, String arg1) {
+	public static String formatName(boolean arg0, String arg1) {
 		if (!arg0) {
 			throw new NullPointerException();
 		} else if (arg1.length() > 0) {
@@ -102,7 +102,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.c(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String method314(boolean arg0, String arg1) {
+	public static String toSentenceCase(boolean arg0, String arg1) {
 		String var2 = arg1.toLowerCase();
 		char[] var3 = var2.toCharArray();
 		if (!arg0) {
@@ -125,7 +125,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.d(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String method315(boolean arg0, String arg1) {
+	public static String censor(boolean arg0, String arg1) {
 		String var2 = "";
 		if (arg0) {
 			throw new NullPointerException();

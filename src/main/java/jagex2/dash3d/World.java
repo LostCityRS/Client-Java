@@ -397,7 +397,7 @@ public class World {
 					if (var38 != null) {
 						for (int var39 = 0; var39 <= var36; var39++) {
 							for (int var40 = 0; var40 <= var37; var40++) {
-								int var41 = var38.field567 / 4;
+								int var41 = var38.radius / 4;
 								if (var41 > 30) {
 									var41 = 30;
 								}

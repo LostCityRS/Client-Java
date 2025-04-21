@@ -131,10 +131,10 @@ public class PathingEntity extends Entity {
 	public int chatEffect;
 
 	@ObfuscatedName("z.H")
-	public int field424;
+	public int health;
 
 	@ObfuscatedName("z.I")
-	public int field425;
+	public int totalHealth;
 
 	@ObfuscatedName("z.K")
 	public int targetTileX;
@@ -170,7 +170,7 @@ public class PathingEntity extends Entity {
 	public int spotanimLastCycle;
 
 	@ObfuscatedName("z.Y")
-	public int field441;
+	public int spotanimHeight;
 
 	@ObfuscatedName("z.Z")
 	public int forceMoveStartSceneTileX;
@@ -279,7 +279,7 @@ public class PathingEntity extends Entity {
 	}
 
 	@ObfuscatedName("z.a(III)V")
-	public final void method127(int arg0, int arg1, int arg2) {
+	public final void hit(int arg0, int arg1, int arg2) {
 		if (arg1 != 0) {
 			this.field403 = -191;
 		}

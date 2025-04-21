@@ -171,7 +171,7 @@ public class ProjectileEntity extends Entity {
 		if (this.field504.resizeh != 128 || this.field504.resizev != 128) {
 			var4.scale(this.field504.resizev, this.field504.resizeh, 4, this.field504.resizeh);
 		}
-		var4.method150(2, this.field525);
+		var4.rotateX(2, this.field525);
 		var4.calculateNormals(this.field504.ambient + 64, this.field504.contrast + 850, -30, -50, -30, true);
 		return var4;
 	}

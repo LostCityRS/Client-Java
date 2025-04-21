@@ -141,7 +141,7 @@ public class PlayerEntity extends PathingEntity {
 		if (super.seqRunId == 65535) {
 			super.seqRunId = -1;
 		}
-		this.name = JString.toSentenceCase(true, JString.fromBase37((byte) 88, arg0.g8(this.field462)));
+		this.name = JString.formatName(true, JString.fromBase37((byte) 88, arg0.g8(this.field462)));
 		this.combatLevel = arg0.g1();
 		this.field466 = true;
 		this.field472 = 0L;
@@ -184,7 +184,7 @@ public class PlayerEntity extends PathingEntity {
 			Model var4 = var3.getModel();
 			if (var4 != null) {
 				Model var5 = new Model(var4, true, false, !var3.animHasAlpha, -796);
-				var5.translate(-super.field441, 0, 0, false);
+				var5.translate(-super.spotanimHeight, 0, 0, false);
 				var5.createLabelReferences(-591);
 				var5.applyTransform(var3.seq.frames[super.spotanimFrame], 13056);
 				var5.labelFaces = null;
@@ -205,26 +205,26 @@ public class PlayerEntity extends PathingEntity {
 				Model var7 = this.locModel;
 				var7.translate(this.field477 - this.y, this.field476 - super.x, this.field478 - super.z, false);
 				if (super.dstYaw == 512) {
-					var7.method149((byte) 3);
-					var7.method149((byte) 3);
-					var7.method149((byte) 3);
+					var7.rotateY90((byte) 3);
+					var7.rotateY90((byte) 3);
+					var7.rotateY90((byte) 3);
 				} else if (super.dstYaw == 1024) {
-					var7.method149((byte) 3);
-					var7.method149((byte) 3);
+					var7.rotateY90((byte) 3);
+					var7.rotateY90((byte) 3);
 				} else if (super.dstYaw == 1536) {
-					var7.method149((byte) 3);
+					var7.rotateY90((byte) 3);
 				}
 				Model[] var8 = new Model[] { var2, var7 };
 				var2 = new Model(this.field463, true, 2, var8);
 				if (super.dstYaw == 512) {
-					var7.method149((byte) 3);
+					var7.rotateY90((byte) 3);
 				} else if (super.dstYaw == 1024) {
-					var7.method149((byte) 3);
-					var7.method149((byte) 3);
+					var7.rotateY90((byte) 3);
+					var7.rotateY90((byte) 3);
 				} else if (super.dstYaw == 1536) {
-					var7.method149((byte) 3);
-					var7.method149((byte) 3);
-					var7.method149((byte) 3);
+					var7.rotateY90((byte) 3);
+					var7.rotateY90((byte) 3);
+					var7.rotateY90((byte) 3);
 				}
 				var7.translate(this.y - this.field477, super.x - this.field476, super.z - this.field478, false);
 			}

@@ -39,7 +39,7 @@ public class NpcEntity extends PathingEntity {
 			Model var4 = var3.getModel();
 			if (var4 != null) {
 				Model var5 = new Model(var4, true, false, !var3.animHasAlpha, -796);
-				var5.translate(-super.field441, 0, 0, false);
+				var5.translate(-super.spotanimHeight, 0, 0, false);
 				var5.createLabelReferences(-591);
 				var5.applyTransform(var3.seq.frames[super.spotanimFrame], 13056);
 				var5.labelFaces = null;

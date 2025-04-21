@@ -434,7 +434,7 @@ public class LocType {
 					return null;
 				}
 				if (var21) {
-					var22.method153(4);
+					var22.rotateY180(4);
 				}
 				modelCacheStatic.put(var22, (long) var20, 39399);
 			}
@@ -458,7 +458,7 @@ public class LocType {
 				var25.labelVertices = null;
 			}
 			while (arg1-- > 0) {
-				var25.method149((byte) 3);
+				var25.rotateY90((byte) 3);
 			}
 			if (this.recol_s != null) {
 				for (int var26 = 0; var26 < this.recol_s.length; var26++) {
