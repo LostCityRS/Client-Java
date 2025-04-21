@@ -12,64 +12,64 @@ public class TileOverlay {
 	public boolean field180 = false;
 
 	@ObfuscatedName("j.c")
-	public int[] field181;
+	public int[] vertexX;
 
 	@ObfuscatedName("j.d")
-	public int[] field182;
+	public int[] vertexY;
 
 	@ObfuscatedName("j.e")
-	public int[] field183;
+	public int[] vertexZ;
 
 	@ObfuscatedName("j.f")
-	public int[] field184;
+	public int[] triangleColourA;
 
 	@ObfuscatedName("j.g")
-	public int[] field185;
+	public int[] triangleColourB;
 
 	@ObfuscatedName("j.h")
-	public int[] field186;
+	public int[] triangleColourC;
 
 	@ObfuscatedName("j.i")
-	public int[] field187;
+	public int[] triangleVertexA;
 
 	@ObfuscatedName("j.j")
-	public int[] field188;
+	public int[] triangleVertexB;
 
 	@ObfuscatedName("j.k")
-	public int[] field189;
+	public int[] triangleVertexC;
 
 	@ObfuscatedName("j.l")
-	public int[] field190;
+	public int[] triangleTextureIds;
 
 	@ObfuscatedName("j.m")
-	public boolean field191 = true;
+	public boolean flat = true;
 
 	@ObfuscatedName("j.n")
-	public int field192;
+	public int shape;
 
 	@ObfuscatedName("j.o")
-	public int field193;
+	public int angle;
 
 	@ObfuscatedName("j.p")
-	public int field194;
+	public int backgroundRgb;
 
 	@ObfuscatedName("j.q")
-	public int field195;
+	public int foregroundRgb;
 
 	@ObfuscatedName("j.r")
-	public static int[] field196 = new int[6];
+	public static int[] tmpScreenX = new int[6];
 
 	@ObfuscatedName("j.s")
-	public static int[] field197 = new int[6];
+	public static int[] tmpScreenY = new int[6];
 
 	@ObfuscatedName("j.t")
-	public static int[] field198 = new int[6];
+	public static int[] tmpViewspaceX = new int[6];
 
 	@ObfuscatedName("j.u")
-	public static int[] field199 = new int[6];
+	public static int[] tmpViewspaceY = new int[6];
 
 	@ObfuscatedName("j.v")
-	public static int[] field200 = new int[6];
+	public static int[] tmpViewspaceZ = new int[6];
 
 	@ObfuscatedName("j.w")
 	public static int[] field201 = new int[] { 1, 0 };
@@ -88,21 +88,21 @@ public class TileOverlay {
 
 	public TileOverlay(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, boolean arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
 		if (arg5 != arg19 || arg1 != arg5 || arg5 != arg13) {
-			this.field191 = false;
+			this.flat = false;
 		}
-		this.field192 = arg4;
-		this.field193 = arg8;
-		this.field194 = arg3;
-		this.field195 = arg2;
+		this.shape = arg4;
+		this.angle = arg8;
+		this.backgroundRgb = arg3;
+		this.foregroundRgb = arg2;
 		short var21 = 128;
 		int var22 = var21 / 2;
 		int var23 = var21 / 4;
 		int var24 = var21 * 3 / 4;
 		int[] var25 = field204[arg4];
 		int var26 = var25.length;
-		this.field181 = new int[var26];
-		this.field182 = new int[var26];
-		this.field183 = new int[var26];
+		this.vertexX = new int[var26];
+		this.vertexY = new int[var26];
+		this.vertexZ = new int[var26];
 		int[] var27 = new int[var26];
 		int[] var28 = new int[var26];
 		int var29 = arg11 * var21;
@@ -223,22 +223,22 @@ public class TileOverlay {
 				var48 = arg0;
 				var49 = arg14;
 			}
-			this.field181[var31] = var45;
-			this.field182[var31] = var47;
-			this.field183[var31] = var46;
+			this.vertexX[var31] = var45;
+			this.vertexY[var31] = var47;
+			this.vertexZ[var31] = var46;
 			var27[var31] = var48;
 			var28[var31] = var49;
 		}
 		int[] var32 = field205[arg4];
 		int var33 = var32.length / 4;
-		this.field187 = new int[var33];
-		this.field188 = new int[var33];
-		this.field189 = new int[var33];
-		this.field184 = new int[var33];
-		this.field185 = new int[var33];
-		this.field186 = new int[var33];
+		this.triangleVertexA = new int[var33];
+		this.triangleVertexB = new int[var33];
+		this.triangleVertexC = new int[var33];
+		this.triangleColourA = new int[var33];
+		this.triangleColourB = new int[var33];
+		this.triangleColourC = new int[var33];
 		if (arg6 != -1) {
-			this.field190 = new int[var33];
+			this.triangleTextureIds = new int[var33];
 		}
 		int var34 = 0;
 		for (int var35 = 0; var35 < var33; var35++) {
@@ -256,22 +256,22 @@ public class TileOverlay {
 			if (var43 < 4) {
 				var43 = var43 - arg8 & 0x3;
 			}
-			this.field187[var35] = var41;
-			this.field188[var35] = var42;
-			this.field189[var35] = var43;
+			this.triangleVertexA[var35] = var41;
+			this.triangleVertexB[var35] = var42;
+			this.triangleVertexC[var35] = var43;
 			if (var40 == 0) {
-				this.field184[var35] = var27[var41];
-				this.field185[var35] = var27[var42];
-				this.field186[var35] = var27[var43];
-				if (this.field190 != null) {
-					this.field190[var35] = -1;
+				this.triangleColourA[var35] = var27[var41];
+				this.triangleColourB[var35] = var27[var42];
+				this.triangleColourC[var35] = var27[var43];
+				if (this.triangleTextureIds != null) {
+					this.triangleTextureIds[var35] = -1;
 				}
 			} else {
-				this.field184[var35] = var28[var41];
-				this.field185[var35] = var28[var42];
-				this.field186[var35] = var28[var43];
-				if (this.field190 != null) {
-					this.field190[var35] = arg6;
+				this.triangleColourA[var35] = var28[var41];
+				this.triangleColourB[var35] = var28[var42];
+				this.triangleColourC[var35] = var28[var43];
+				if (this.triangleTextureIds != null) {
+					this.triangleTextureIds[var35] = arg6;
 				}
 			}
 		}

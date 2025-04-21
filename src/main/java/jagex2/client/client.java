@@ -1484,8 +1484,8 @@ public class client extends GameShell {
 		}
 		Model.field603 = super.mouseY - 4;
 		Pix2D.clear(false);
-		this.scene.method102(this.cameraX, var5, 7, this.cameraYaw, this.cameraPitch, this.cameraZ, this.cameraY);
-		this.scene.method77((byte) -48);
+		this.scene.draw(this.cameraX, var5, 7, this.cameraYaw, this.cameraPitch, this.cameraZ, this.cameraY);
+		this.scene.clearLocChanges((byte) -48);
 		this.draw2DEntityElements(47);
 		this.drawTileHint(317);
 		this.updateTextures(var12, -131);
@@ -3313,7 +3313,7 @@ public class client extends GameShell {
 			var3 = this.scene.getDecorTypecode(arg1.localZ, 0, arg1.level, arg1.localX);
 		}
 		if (arg1.layer == 2) {
-			var3 = this.scene.getLocBitset(arg1.level, arg1.localX, arg1.localZ);
+			var3 = this.scene.getLocTypecode(arg1.level, arg1.localX, arg1.localZ);
 		}
 		if (arg1.layer == 3) {
 			var3 = this.scene.getGroundDecorTypecode(arg1.level, arg1.localX, arg1.localZ);
@@ -4582,7 +4582,7 @@ public class client extends GameShell {
 			var9 = this.scene.getDecorTypecode(arg6, 0, arg4, arg1);
 		}
 		if (arg7 == 2) {
-			var9 = this.scene.getLocBitset(arg4, arg1, arg6);
+			var9 = this.scene.getLocTypecode(arg4, arg1, arg6);
 		}
 		if (arg7 == 3) {
 			var9 = this.scene.getGroundDecorTypecode(arg4, arg1, arg6);
@@ -4593,30 +4593,30 @@ public class client extends GameShell {
 			int var15 = var13 & 0x1F;
 			int var16 = var13 >> 6;
 			if (arg7 == 0) {
-				this.scene.method80(arg1, arg4, arg6, -284);
+				this.scene.removeWall(arg1, arg4, arg6, -284);
 				LocType var17 = LocType.get(var14);
 				if (var17.blockwalk) {
-					this.levelCollisionMap[arg4].method364(var17.blockrange, arg6, var16, var15, this.field1620, arg1);
+					this.levelCollisionMap[arg4].delWall(var17.blockrange, arg6, var16, var15, this.field1620, arg1);
 				}
 			}
 			if (arg7 == 1) {
-				this.scene.method81(arg6, (byte) 98, arg1, arg4);
+				this.scene.removeDecor(arg6, (byte) 98, arg1, arg4);
 			}
 			if (arg7 == 2) {
-				this.scene.method82(arg1, arg6, 1, arg4);
+				this.scene.removeLoc(arg1, arg6, 1, arg4);
 				LocType var18 = LocType.get(var14);
 				if (var18.width + arg1 > 103 || var18.width + arg6 > 103 || var18.length + arg1 > 103 || var18.length + arg6 > 103) {
 					return;
 				}
 				if (var18.blockwalk) {
-					this.levelCollisionMap[arg4].method365(var18.width, arg6, arg1, var18.blockrange, var18.length, true, var16);
+					this.levelCollisionMap[arg4].delLoc(var18.width, arg6, arg1, var18.blockrange, var18.length, true, var16);
 				}
 			}
 			if (arg7 == 3) {
-				this.scene.method83(arg6, arg4, arg1, this.field1272);
+				this.scene.removeGroundDecor(arg6, arg4, arg1, this.field1272);
 				LocType var19 = LocType.get(var14);
 				if (var19.blockwalk && var19.active) {
-					this.levelCollisionMap[arg4].method367(arg6, -625, arg1);
+					this.levelCollisionMap[arg4].removeBlocked(arg6, -625, arg1);
 				}
 			}
 		}
@@ -5044,36 +5044,36 @@ public class client extends GameShell {
 				int var14 = this.levelHeightmap[this.currentLevel][var5 + 1][var6 + 1];
 				int var15 = this.levelHeightmap[this.currentLevel][var5][var6 + 1];
 				if (var10 == 0) {
-					Wall var16 = this.scene.method85(var5, var6, this.currentLevel, true);
+					Wall var16 = this.scene.getWall(var5, var6, this.currentLevel, true);
 					if (var16 != null) {
-						int var17 = var16.field287 >> 14 & 0x7FFF;
+						int var17 = var16.typecode >> 14 & 0x7FFF;
 						if (var8 == 2) {
-							var16.field285 = new LocEntity(var15, var14, var12, true, 2, var9 + 4, false, var13, var17, var11);
-							var16.field286 = new LocEntity(var15, var14, var12, true, 2, var9 + 1 & 0x3, false, var13, var17, var11);
+							var16.modelA = new LocEntity(var15, var14, var12, true, 2, var9 + 4, false, var13, var17, var11);
+							var16.modelB = new LocEntity(var15, var14, var12, true, 2, var9 + 1 & 0x3, false, var13, var17, var11);
 						} else {
-							var16.field285 = new LocEntity(var15, var14, var12, true, var8, var9, false, var13, var17, var11);
+							var16.modelA = new LocEntity(var15, var14, var12, true, var8, var9, false, var13, var17, var11);
 						}
 					}
 				}
 				if (var10 == 1) {
-					Decor var18 = this.scene.method86(var5, this.currentLevel, -98, var6);
+					Decor var18 = this.scene.getDecor(var5, this.currentLevel, -98, var6);
 					if (var18 != null) {
-						var18.field176 = new LocEntity(var15, var14, var12, true, 4, 0, false, var13, var18.field177 >> 14 & 0x7FFF, var11);
+						var18.model = new LocEntity(var15, var14, var12, true, 4, 0, false, var13, var18.typecode >> 14 & 0x7FFF, var11);
 					}
 				}
 				if (var10 == 2) {
-					Location var19 = this.scene.method87(this.currentLevel, var6, 0, var5);
+					Location var19 = this.scene.getLoc(this.currentLevel, var6, 0, var5);
 					if (var8 == 11) {
 						var8 = 10;
 					}
 					if (var19 != null) {
-						var19.field270 = new LocEntity(var15, var14, var12, true, var8, var9, false, var13, var19.field278 >> 14 & 0x7FFF, var11);
+						var19.model = new LocEntity(var15, var14, var12, true, var8, var9, false, var13, var19.typecode >> 14 & 0x7FFF, var11);
 					}
 				}
 				if (var10 == 3) {
-					GroundDecor var20 = this.scene.method88(false, var5, var6, this.currentLevel);
+					GroundDecor var20 = this.scene.getGroundDecor(false, var5, var6, this.currentLevel);
 					if (var20 != null) {
-						var20.field209 = new LocEntity(var15, var14, var12, true, 22, var9, false, var13, var20.field210 >> 14 & 0x7FFF, var11);
+						var20.model = new LocEntity(var15, var14, var12, true, 22, var9, false, var13, var20.typecode >> 14 & 0x7FFF, var11);
 					}
 				}
 			}
@@ -7088,9 +7088,9 @@ public class client extends GameShell {
 		}
 		if (var5 == 660) {
 			if (this.menuVisible) {
-				this.scene.method101((byte) 38, var4 - 4, var3 - 4);
+				this.scene.click((byte) 38, var4 - 4, var3 - 4);
 			} else {
-				this.scene.method101((byte) 38, super.mouseClickY - 4, super.mouseClickX - 4);
+				this.scene.click((byte) 38, super.mouseClickY - 4, super.mouseClickX - 4);
 			}
 		}
 		if (var5 == 903 || var5 == 363) {
@@ -7333,16 +7333,16 @@ public class client extends GameShell {
 				break;
 			}
 			if (arg8 != 0) {
-				if ((arg8 < 5 || arg8 == 10) && this.levelCollisionMap[this.currentLevel].method368(arg7, false, arg8 - 1, arg9, var17, var16, arg6)) {
+				if ((arg8 < 5 || arg8 == 10) && this.levelCollisionMap[this.currentLevel].testWall(arg7, false, arg8 - 1, arg9, var17, var16, arg6)) {
 					var20 = true;
 					break;
 				}
-				if (arg8 < 10 && this.levelCollisionMap[this.currentLevel].method369(var17, var16, arg7, true, arg8 - 1, arg6, arg9)) {
+				if (arg8 < 10 && this.levelCollisionMap[this.currentLevel].testWDecor(var17, var16, arg7, true, arg8 - 1, arg6, arg9)) {
 					var20 = true;
 					break;
 				}
 			}
-			if (arg1 != 0 && arg10 != 0 && this.levelCollisionMap[this.currentLevel].method370(arg1, var16, arg7, arg9, arg3, var17, (byte) 6, arg10)) {
+			if (arg1 != 0 && arg10 != 0 && this.levelCollisionMap[this.currentLevel].testLoc(arg1, var16, arg7, arg9, arg3, var17, (byte) 6, arg10)) {
 				var20 = true;
 				break;
 			}
@@ -9304,7 +9304,7 @@ public class client extends GameShell {
 				}
 			}
 		}
-		int var19 = this.scene.getLocBitset(arg1, arg5, arg0);
+		int var19 = this.scene.getLocTypecode(arg1, arg5, arg0);
 		if (var19 != 0) {
 			int var20 = this.scene.getInfo(arg1, arg5, arg0, var19);
 			int var21 = var20 >> 6 & 0x3;
@@ -9864,7 +9864,7 @@ public class client extends GameShell {
 	public final void sortObjStacks(int arg0, int arg1) {
 		LinkList var3 = this.field1432[this.currentLevel][arg0][arg1];
 		if (var3 == null) {
-			this.scene.method84(this.currentLevel, arg0, arg1);
+			this.scene.removeGroundObj(this.currentLevel, arg0, arg1);
 			return;
 		}
 		int var4 = -99999999;
@@ -9892,7 +9892,7 @@ public class client extends GameShell {
 			}
 		}
 		int var10 = (arg1 << 7) + arg0 + 1610612736;
-		this.scene.method70(var10, false, this.getHeightmapY(false, arg1 * 128 + 64, this.currentLevel, arg0 * 128 + 64), arg0, arg1, var8, var5, this.currentLevel, var7);
+		this.scene.addGroundObject(var10, false, this.getHeightmapY(false, arg1 * 128 + 64, this.currentLevel, arg0 * 128 + 64), arg0, arg1, var8, var5, this.currentLevel, var7);
 	}
 
 	@ObfuscatedName("client.N(I)V")
@@ -9929,7 +9929,7 @@ public class client extends GameShell {
 				int var10 = (this.sceneMapIndex[var8] & 0xFF) * 64 - this.sceneBaseTileZ;
 				byte[] var11 = this.sceneMapLandData[var8];
 				if (var11 != null) {
-					var3.readLand(this.field1357, var11, var9, var10, (this.sceneCenterZoneX - 6) * 8, (this.sceneCenterZoneZ - 6) * 8);
+					var3.loadGround(this.field1357, var11, var9, var10, (this.sceneCenterZoneX - 6) * 8, (this.sceneCenterZoneZ - 6) * 8);
 				}
 			}
 			for (int var12 = 0; var12 < var4; var12++) {
@@ -9946,7 +9946,7 @@ public class client extends GameShell {
 				if (var17 != null) {
 					int var18 = (this.sceneMapIndex[var16] >> 8) * 64 - this.sceneBaseTileX;
 					int var19 = (this.sceneMapIndex[var16] & 0xFF) * 64 - this.sceneBaseTileZ;
-					var3.readLoc(var19, this.scene, this.levelCollisionMap, var18, true, var17);
+					var3.loadLocations(var19, this.scene, this.levelCollisionMap, var18, true, var17);
 				}
 			}
 			this.out.pIsaac(107, this.field1496);
@@ -10100,10 +10100,10 @@ public class client extends GameShell {
 			int var23 = (103 - var6) * 512 * 4 + 24628;
 			for (int var24 = 1; var24 < 103; var24++) {
 				if ((this.levelTileFlags[arg1][var24][var6] & 0x18) == 0) {
-					this.scene.method98(var3, var23, 512, arg1, var24, var6);
+					this.scene.drawMinimapTile(var3, var23, 512, arg1, var24, var6);
 				}
 				if (arg1 < 3 && (this.levelTileFlags[arg1 + 1][var24][var6] & 0x8) != 0) {
-					this.scene.method98(var3, var23, 512, arg1 + 1, var24, var6);
+					this.scene.drawMinimapTile(var3, var23, 512, arg1 + 1, var24, var6);
 				}
 				var23 += 4;
 			}

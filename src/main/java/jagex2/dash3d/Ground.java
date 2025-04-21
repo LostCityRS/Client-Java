@@ -7,77 +7,77 @@ import jagex2.datastruct.Linkable;
 public class Ground extends Linkable {
 
 	@ObfuscatedName("w.f")
-	public int field373;
+	public int level;
 
 	@ObfuscatedName("w.g")
-	public int field374;
+	public int x;
 
 	@ObfuscatedName("w.h")
-	public int field375;
+	public int z;
 
 	@ObfuscatedName("w.i")
-	public int field376;
+	public int occludeLevel;
 
 	@ObfuscatedName("w.j")
-	public TileUnderlay field377;
+	public TileUnderlay underlay;
 
 	@ObfuscatedName("w.k")
-	public TileOverlay field378;
+	public TileOverlay overlay;
 
 	@ObfuscatedName("w.l")
-	public Wall field379;
+	public Wall wall;
 
 	@ObfuscatedName("w.m")
-	public Decor field380;
+	public Decor decor;
 
 	@ObfuscatedName("w.n")
-	public GroundDecor field381;
+	public GroundDecor groundDecor;
 
 	@ObfuscatedName("w.o")
-	public GroundObject field382;
+	public GroundObject groundObj;
 
 	@ObfuscatedName("w.p")
-	public int field383;
+	public int locCount;
 
 	@ObfuscatedName("w.q")
-	public Location[] field384 = new Location[5];
+	public Location[] locs = new Location[5];
 
 	@ObfuscatedName("w.r")
-	public int[] field385 = new int[5];
+	public int[] locSpan = new int[5];
 
 	@ObfuscatedName("w.s")
-	public int field386;
+	public int locSpans;
 
 	@ObfuscatedName("w.t")
-	public int field387;
+	public int drawLevel;
 
 	@ObfuscatedName("w.u")
-	public boolean field388;
+	public boolean visible;
 
 	@ObfuscatedName("w.v")
-	public boolean field389;
+	public boolean update;
 
 	@ObfuscatedName("w.w")
-	public boolean field390;
+	public boolean containsLocs;
 
 	@ObfuscatedName("w.x")
-	public int field391;
+	public int checkLocSpans;
 
 	@ObfuscatedName("w.y")
-	public int field392;
+	public int blockLocSpans;
 
 	@ObfuscatedName("w.z")
-	public int field393;
+	public int inverseBlockLocSpans;
 
 	@ObfuscatedName("w.A")
-	public int field394;
+	public int backWallTypes;
 
 	@ObfuscatedName("w.B")
-	public Ground field395;
+	public Ground bridge;
 
 	public Ground(int arg0, int arg1, int arg2) {
-		this.field376 = this.field373 = arg0;
-		this.field374 = arg1;
-		this.field375 = arg2;
+		this.occludeLevel = this.level = arg0;
+		this.x = arg1;
+		this.z = arg2;
 	}
 }

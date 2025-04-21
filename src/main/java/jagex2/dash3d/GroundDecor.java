@@ -6,20 +6,20 @@ import deob.ObfuscatedName;
 public class GroundDecor {
 
 	@ObfuscatedName("k.a")
-	public int field206;
+	public int y;
 
 	@ObfuscatedName("k.b")
-	public int field207;
+	public int x;
 
 	@ObfuscatedName("k.c")
-	public int field208;
+	public int z;
 
 	@ObfuscatedName("k.d")
-	public Entity field209;
+	public Entity model;
 
 	@ObfuscatedName("k.e")
-	public int field210;
+	public int typecode;
 
 	@ObfuscatedName("k.f")
-	public byte field211;
+	public byte info;
 }

@@ -62,7 +62,7 @@ public class Model extends Entity {
 	public int field570;
 
 	@ObfuscatedName("fb.cb")
-	public int field571;
+	public int objRaise;
 
 	@ObfuscatedName("fb.db")
 	public int[] vertexLabel;
@@ -80,7 +80,7 @@ public class Model extends Entity {
 	public boolean picking = false;
 
 	@ObfuscatedName("fb.ib")
-	public VertexNormal[] field577;
+	public VertexNormal[] vertexNormalOriginal;
 
 	@ObfuscatedName("fb.jb")
 	public static Metadata[] meta;
@@ -194,22 +194,22 @@ public class Model extends Entity {
 	public int[] faceColourC;
 
 	@ObfuscatedName("fb.Z")
-	public int field568;
+	public int maxY;
 
 	@ObfuscatedName("fb.Y")
 	public int field567;
 
 	@ObfuscatedName("fb.U")
-	public int field563;
+	public int minX;
 
 	@ObfuscatedName("fb.W")
-	public int field565;
+	public int maxZ;
 
 	@ObfuscatedName("fb.X")
-	public int field566;
+	public int minZ;
 
 	@ObfuscatedName("fb.V")
-	public int field564;
+	public int maxX;
 
 	@ObfuscatedName("fb.Ab")
 	public static int[] clippedX = new int[10];
@@ -870,16 +870,16 @@ public class Model extends Entity {
 					this.faceInfo[var8] = arg3.faceInfo[var8];
 				}
 			}
-			super.field399 = new VertexNormal[this.vertexCount];
+			super.vertexNormal = new VertexNormal[this.vertexCount];
 			for (int var9 = 0; var9 < this.vertexCount; var9++) {
-				VertexNormal var10 = super.field399[var9] = new VertexNormal();
-				VertexNormal var11 = arg3.field399[var9];
+				VertexNormal var10 = super.vertexNormal[var9] = new VertexNormal();
+				VertexNormal var11 = arg3.vertexNormal[var9];
 				var10.x = var11.x;
 				var10.y = var11.y;
 				var10.z = var11.z;
 				var10.w = var11.w;
 			}
-			this.field577 = arg3.field577;
+			this.vertexNormalOriginal = arg3.vertexNormalOriginal;
 		} else {
 			this.faceColourA = arg3.faceColourA;
 			this.faceColourB = arg3.faceColourB;
@@ -898,15 +898,15 @@ public class Model extends Entity {
 		this.texturedVertexA = arg3.texturedVertexA;
 		this.texturedVertexB = arg3.texturedVertexB;
 		this.texturedVertexC = arg3.texturedVertexC;
-		super.field400 = arg3.field400;
-		this.field568 = arg3.field568;
+		super.minY = arg3.minY;
+		this.maxY = arg3.maxY;
 		this.field567 = arg3.field567;
 		this.field570 = arg3.field570;
 		this.field569 = arg3.field569;
-		this.field563 = arg3.field563;
-		this.field565 = arg3.field565;
-		this.field566 = arg3.field566;
-		this.field564 = arg3.field564;
+		this.minX = arg3.minX;
+		this.maxZ = arg3.maxZ;
+		this.minZ = arg3.minZ;
+		this.maxX = arg3.maxX;
 	}
 
 	@ObfuscatedName("fb.a(ZLfb;Z)V")
@@ -990,18 +990,18 @@ public class Model extends Entity {
 
 	@ObfuscatedName("fb.a(Z)V")
 	public void calculateBoundsCylinder(boolean arg0) {
-		super.field400 = 0;
+		super.minY = 0;
 		this.field567 = 0;
-		this.field568 = 0;
+		this.maxY = 0;
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
 			int var3 = this.vertexX[var2];
 			int var4 = this.vertexY[var2];
 			int var5 = this.vertexZ[var2];
-			if (-var4 > super.field400) {
-				super.field400 = -var4;
+			if (-var4 > super.minY) {
+				super.minY = -var4;
 			}
-			if (var4 > this.field568) {
-				this.field568 = var4;
+			if (var4 > this.maxY) {
+				this.maxY = var4;
 			}
 			int var6 = var3 * var3 + var5 * var5;
 			if (var6 > this.field567) {
@@ -1010,62 +1010,62 @@ public class Model extends Entity {
 		}
 		this.field567 = (int) (Math.sqrt((double) this.field567) + 0.99D);
 		if (arg0) {
-			this.field570 = (int) (Math.sqrt((double) (this.field567 * this.field567 + super.field400 * super.field400)) + 0.99D);
-			this.field569 = this.field570 + (int) (Math.sqrt((double) (this.field568 * this.field568 + this.field567 * this.field567)) + 0.99D);
+			this.field570 = (int) (Math.sqrt((double) (this.field567 * this.field567 + super.minY * super.minY)) + 0.99D);
+			this.field569 = this.field570 + (int) (Math.sqrt((double) (this.maxY * this.maxY + this.field567 * this.field567)) + 0.99D);
 		}
 	}
 
 	@ObfuscatedName("fb.b(B)V")
 	public void calculateBoundsY(byte arg0) {
-		super.field400 = 0;
-		this.field568 = 0;
+		super.minY = 0;
+		this.maxY = 0;
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
 			int var4 = this.vertexY[var2];
-			if (-var4 > super.field400) {
-				super.field400 = -var4;
+			if (-var4 > super.minY) {
+				super.minY = -var4;
 			}
-			if (var4 > this.field568) {
-				this.field568 = var4;
+			if (var4 > this.maxY) {
+				this.maxY = var4;
 			}
 		}
 		if (arg0 != 6) {
 			for (int var3 = 1; var3 > 0; var3++) {
 			}
 		}
-		this.field570 = (int) (Math.sqrt((double) (this.field567 * this.field567 + super.field400 * super.field400)) + 0.99D);
-		this.field569 = this.field570 + (int) (Math.sqrt((double) (this.field568 * this.field568 + this.field567 * this.field567)) + 0.99D);
+		this.field570 = (int) (Math.sqrt((double) (this.field567 * this.field567 + super.minY * super.minY)) + 0.99D);
+		this.field569 = this.field570 + (int) (Math.sqrt((double) (this.maxY * this.maxY + this.field567 * this.field567)) + 0.99D);
 	}
 
 	@ObfuscatedName("fb.c(I)V")
 	public void method144(int arg0) {
-		super.field400 = 0;
+		super.minY = 0;
 		this.field567 = 0;
-		this.field568 = 0;
-		this.field563 = 999999;
-		this.field564 = -999999;
-		this.field565 = -99999;
-		this.field566 = 99999;
+		this.maxY = 0;
+		this.minX = 999999;
+		this.maxX = -999999;
+		this.maxZ = -99999;
+		this.minZ = 99999;
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
 			int var3 = this.vertexX[var2];
 			int var4 = this.vertexY[var2];
 			int var5 = this.vertexZ[var2];
-			if (var3 < this.field563) {
-				this.field563 = var3;
+			if (var3 < this.minX) {
+				this.minX = var3;
 			}
-			if (var3 > this.field564) {
-				this.field564 = var3;
+			if (var3 > this.maxX) {
+				this.maxX = var3;
 			}
-			if (var5 < this.field566) {
-				this.field566 = var5;
+			if (var5 < this.minZ) {
+				this.minZ = var5;
 			}
-			if (var5 > this.field565) {
-				this.field565 = var5;
+			if (var5 > this.maxZ) {
+				this.maxZ = var5;
 			}
-			if (-var4 > super.field400) {
-				super.field400 = -var4;
+			if (-var4 > super.minY) {
+				super.minY = -var4;
 			}
-			if (var4 > this.field568) {
-				this.field568 = var4;
+			if (var4 > this.maxY) {
+				this.maxY = var4;
 			}
 			int var6 = var3 * var3 + var5 * var5;
 			if (var6 > this.field567) {
@@ -1076,8 +1076,8 @@ public class Model extends Entity {
 		while (arg0 >= 0) {
 			this.field535 = !this.field535;
 		}
-		this.field570 = (int) Math.sqrt((double) (this.field567 * this.field567 + super.field400 * super.field400));
-		this.field569 = this.field570 + (int) Math.sqrt((double) (this.field568 * this.field568 + this.field567 * this.field567));
+		this.field570 = (int) Math.sqrt((double) (this.field567 * this.field567 + super.minY * super.minY));
+		this.field569 = this.field570 + (int) Math.sqrt((double) (this.maxY * this.maxY + this.field567 * this.field567));
 	}
 
 	@ObfuscatedName("fb.d(I)V")
@@ -1423,10 +1423,10 @@ public class Model extends Entity {
 			this.faceColourB = new int[this.faceCount];
 			this.faceColourC = new int[this.faceCount];
 		}
-		if (super.field399 == null) {
-			super.field399 = new VertexNormal[this.vertexCount];
+		if (super.vertexNormal == null) {
+			super.vertexNormal = new VertexNormal[this.vertexCount];
 			for (int var9 = 0; var9 < this.vertexCount; var9++) {
-				super.field399[var9] = new VertexNormal();
+				super.vertexNormal[var9] = new VertexNormal();
 			}
 		}
 		for (int var10 = 0; var10 < this.faceCount; var10++) {
@@ -1454,17 +1454,17 @@ public class Model extends Entity {
 			int var28 = var24 * 256 / var26;
 			int var29 = var25 * 256 / var26;
 			if (this.faceInfo == null || (this.faceInfo[var10] & 0x1) == 0) {
-				VertexNormal var31 = super.field399[var14];
+				VertexNormal var31 = super.vertexNormal[var14];
 				var31.x += var27;
 				var31.y += var28;
 				var31.z += var29;
 				var31.w++;
-				VertexNormal var32 = super.field399[var15];
+				VertexNormal var32 = super.vertexNormal[var15];
 				var32.x += var27;
 				var32.y += var28;
 				var32.z += var29;
 				var32.w++;
-				VertexNormal var33 = super.field399[var16];
+				VertexNormal var33 = super.vertexNormal[var16];
 				var33.x += var27;
 				var33.y += var28;
 				var33.z += var29;
@@ -1475,12 +1475,12 @@ public class Model extends Entity {
 			}
 		}
 		if (arg5) {
-			this.method156(arg0, var8, arg2, arg3, arg4);
+			this.applyLighting(arg0, var8, arg2, arg3, arg4);
 		} else {
-			this.field577 = new VertexNormal[this.vertexCount];
+			this.vertexNormalOriginal = new VertexNormal[this.vertexCount];
 			for (int var11 = 0; var11 < this.vertexCount; var11++) {
-				VertexNormal var12 = super.field399[var11];
-				VertexNormal var13 = this.field577[var11] = new VertexNormal();
+				VertexNormal var12 = super.vertexNormal[var11];
+				VertexNormal var13 = this.vertexNormalOriginal[var11] = new VertexNormal();
 				var13.x = var12.x;
 				var13.y = var12.y;
 				var13.z = var12.z;
@@ -1495,38 +1495,38 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(IIIII)V")
-	public final void method156(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public final void applyLighting(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		for (int var6 = 0; var6 < this.faceCount; var6++) {
 			int var8 = this.faceVertexA[var6];
 			int var9 = this.faceVertexB[var6];
 			int var10 = this.faceVertexC[var6];
 			if (this.faceInfo == null) {
 				int var11 = this.faceColour[var6];
-				VertexNormal var12 = super.field399[var8];
+				VertexNormal var12 = super.vertexNormal[var8];
 				int var13 = (var12.z * arg4 + var12.y * arg3 + var12.x * arg2) / (var12.w * arg1) + arg0;
 				this.faceColourA[var6] = method157(var11, var13, 0);
-				VertexNormal var14 = super.field399[var9];
+				VertexNormal var14 = super.vertexNormal[var9];
 				int var15 = (var14.z * arg4 + var14.y * arg3 + var14.x * arg2) / (var14.w * arg1) + arg0;
 				this.faceColourB[var6] = method157(var11, var15, 0);
-				VertexNormal var16 = super.field399[var10];
+				VertexNormal var16 = super.vertexNormal[var10];
 				int var17 = (var16.z * arg4 + var16.y * arg3 + var16.x * arg2) / (var16.w * arg1) + arg0;
 				this.faceColourC[var6] = method157(var11, var17, 0);
 			} else if ((this.faceInfo[var6] & 0x1) == 0) {
 				int var18 = this.faceColour[var6];
 				int var19 = this.faceInfo[var6];
-				VertexNormal var20 = super.field399[var8];
+				VertexNormal var20 = super.vertexNormal[var8];
 				int var21 = (var20.z * arg4 + var20.y * arg3 + var20.x * arg2) / (var20.w * arg1) + arg0;
 				this.faceColourA[var6] = method157(var18, var21, var19);
-				VertexNormal var22 = super.field399[var9];
+				VertexNormal var22 = super.vertexNormal[var9];
 				int var23 = (var22.z * arg4 + var22.y * arg3 + var22.x * arg2) / (var22.w * arg1) + arg0;
 				this.faceColourB[var6] = method157(var18, var23, var19);
-				VertexNormal var24 = super.field399[var10];
+				VertexNormal var24 = super.vertexNormal[var10];
 				int var25 = (var24.z * arg4 + var24.y * arg3 + var24.x * arg2) / (var24.w * arg1) + arg0;
 				this.faceColourC[var6] = method157(var18, var25, var19);
 			}
 		}
-		super.field399 = null;
-		this.field577 = null;
+		super.vertexNormal = null;
+		this.vertexNormalOriginal = null;
 		this.vertexLabel = null;
 		this.faceLabel = null;
 		if (this.faceInfo != null) {
@@ -1611,7 +1611,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIIIII)V")
-	public final void method121(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public final void draw(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = arg4 * arg7 - arg3 * arg5 >> 16;
 		int var11 = arg1 * arg6 + arg2 * var10 >> 16;
 		int var12 = this.field567 * arg2 >> 16;
@@ -1634,12 +1634,12 @@ public class Model extends Entity {
 		if (var19 / var13 <= -Pix2D.centerY2d) {
 			return;
 		}
-		int var20 = (super.field400 * arg2 >> 16) + var18;
+		int var20 = (super.minY * arg2 >> 16) + var18;
 		int var21 = var17 - var20 << 9;
 		if (var21 / var13 >= Pix2D.centerY2d) {
 			return;
 		}
-		int var22 = (super.field400 * arg1 >> 16) + var12;
+		int var22 = (super.minY * arg1 >> 16) + var12;
 		boolean var23 = false;
 		if (var11 - var22 <= 50) {
 			var23 = true;

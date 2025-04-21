@@ -530,7 +530,7 @@ public class ObjType {
 		}
 		int var23 = Pix3D.sinTable[var5.xan2d] * var22 >> 16;
 		int var24 = Pix3D.cosTable[var5.xan2d] * var22 >> 16;
-		var8.drawSimple(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var8.field400 / 2 + var23 + var5.yof2d, var5.yof2d + var24);
+		var8.drawSimple(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var8.minY / 2 + var23 + var5.yof2d, var5.yof2d + var24);
 		for (int var25 = 31; var25 >= 0; var25--) {
 			for (int var32 = 31; var32 >= 0; var32--) {
 				if (var10.pixels[var32 * 32 + var25] == 0) {

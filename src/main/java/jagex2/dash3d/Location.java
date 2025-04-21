@@ -6,44 +6,44 @@ import deob.ObfuscatedName;
 public class Location {
 
 	@ObfuscatedName("q.a")
-	public int field266;
+	public int level;
 
 	@ObfuscatedName("q.b")
-	public int field267;
+	public int y;
 
 	@ObfuscatedName("q.c")
-	public int field268;
+	public int x;
 
 	@ObfuscatedName("q.d")
-	public int field269;
+	public int z;
 
 	@ObfuscatedName("q.e")
-	public Entity field270;
+	public Entity model;
 
 	@ObfuscatedName("q.f")
-	public int field271;
+	public int yaw;
 
 	@ObfuscatedName("q.g")
-	public int field272;
+	public int minSceneTileX;
 
 	@ObfuscatedName("q.h")
-	public int field273;
+	public int maxSceneTileX;
 
 	@ObfuscatedName("q.i")
-	public int field274;
+	public int minSceneTileZ;
 
 	@ObfuscatedName("q.j")
-	public int field275;
+	public int maxSceneTileZ;
 
 	@ObfuscatedName("q.k")
-	public int field276;
+	public int distance;
 
 	@ObfuscatedName("q.l")
-	public int field277;
+	public int cycle;
 
 	@ObfuscatedName("q.m")
-	public int field278;
+	public int typecode;
 
 	@ObfuscatedName("q.n")
-	public byte field279;
+	public byte info;
 }

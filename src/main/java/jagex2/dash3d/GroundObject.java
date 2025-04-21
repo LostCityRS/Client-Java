@@ -6,26 +6,26 @@ import deob.ObfuscatedName;
 public class GroundObject {
 
 	@ObfuscatedName("l.a")
-	public int field212;
+	public int y;
 
 	@ObfuscatedName("l.b")
-	public int field213;
+	public int x;
 
 	@ObfuscatedName("l.c")
-	public int field214;
+	public int z;
 
 	@ObfuscatedName("l.d")
-	public Entity field215;
+	public Entity topObj;
 
 	@ObfuscatedName("l.e")
-	public Entity field216;
+	public Entity bottomObj;
 
 	@ObfuscatedName("l.f")
-	public Entity field217;
+	public Entity middleObj;
 
 	@ObfuscatedName("l.g")
-	public int field218;
+	public int typecode;
 
 	@ObfuscatedName("l.h")
-	public int field219;
+	public int offset;
 }

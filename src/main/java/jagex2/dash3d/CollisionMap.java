@@ -68,7 +68,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IIIZII)V")
-	public void method360(int arg0, int arg1, int arg2, boolean arg3, int arg4, int arg5) {
+	public void addWall(int arg0, int arg1, int arg2, boolean arg3, int arg4, int arg5) {
 		if (arg4 >= 0) {
 			return;
 		}
@@ -76,60 +76,60 @@ public class CollisionMap {
 		int var8 = arg0 - this.offsetZ;
 		if (arg1 == 0) {
 			if (arg5 == 0) {
-				this.method363(var7, var8, 128);
-				this.method363(var7 - 1, var8, 8);
+				this.addCMap(var7, var8, 128);
+				this.addCMap(var7 - 1, var8, 8);
 			}
 			if (arg5 == 1) {
-				this.method363(var7, var8, 2);
-				this.method363(var7, var8 + 1, 32);
+				this.addCMap(var7, var8, 2);
+				this.addCMap(var7, var8 + 1, 32);
 			}
 			if (arg5 == 2) {
-				this.method363(var7, var8, 8);
-				this.method363(var7 + 1, var8, 128);
+				this.addCMap(var7, var8, 8);
+				this.addCMap(var7 + 1, var8, 128);
 			}
 			if (arg5 == 3) {
-				this.method363(var7, var8, 32);
-				this.method363(var7, var8 - 1, 2);
+				this.addCMap(var7, var8, 32);
+				this.addCMap(var7, var8 - 1, 2);
 			}
 		}
 		if (arg1 == 1 || arg1 == 3) {
 			if (arg5 == 0) {
-				this.method363(var7, var8, 1);
-				this.method363(var7 - 1, var8 + 1, 16);
+				this.addCMap(var7, var8, 1);
+				this.addCMap(var7 - 1, var8 + 1, 16);
 			}
 			if (arg5 == 1) {
-				this.method363(var7, var8, 4);
-				this.method363(var7 + 1, var8 + 1, 64);
+				this.addCMap(var7, var8, 4);
+				this.addCMap(var7 + 1, var8 + 1, 64);
 			}
 			if (arg5 == 2) {
-				this.method363(var7, var8, 16);
-				this.method363(var7 + 1, var8 - 1, 1);
+				this.addCMap(var7, var8, 16);
+				this.addCMap(var7 + 1, var8 - 1, 1);
 			}
 			if (arg5 == 3) {
-				this.method363(var7, var8, 64);
-				this.method363(var7 - 1, var8 - 1, 4);
+				this.addCMap(var7, var8, 64);
+				this.addCMap(var7 - 1, var8 - 1, 4);
 			}
 		}
 		if (arg1 == 2) {
 			if (arg5 == 0) {
-				this.method363(var7, var8, 130);
-				this.method363(var7 - 1, var8, 8);
-				this.method363(var7, var8 + 1, 32);
+				this.addCMap(var7, var8, 130);
+				this.addCMap(var7 - 1, var8, 8);
+				this.addCMap(var7, var8 + 1, 32);
 			}
 			if (arg5 == 1) {
-				this.method363(var7, var8, 10);
-				this.method363(var7, var8 + 1, 32);
-				this.method363(var7 + 1, var8, 128);
+				this.addCMap(var7, var8, 10);
+				this.addCMap(var7, var8 + 1, 32);
+				this.addCMap(var7 + 1, var8, 128);
 			}
 			if (arg5 == 2) {
-				this.method363(var7, var8, 40);
-				this.method363(var7 + 1, var8, 128);
-				this.method363(var7, var8 - 1, 2);
+				this.addCMap(var7, var8, 40);
+				this.addCMap(var7 + 1, var8, 128);
+				this.addCMap(var7, var8 - 1, 2);
 			}
 			if (arg5 == 3) {
-				this.method363(var7, var8, 160);
-				this.method363(var7, var8 - 1, 2);
-				this.method363(var7 - 1, var8, 8);
+				this.addCMap(var7, var8, 160);
+				this.addCMap(var7, var8 - 1, 2);
+				this.addCMap(var7 - 1, var8, 8);
 			}
 		}
 		if (!arg3) {
@@ -137,68 +137,68 @@ public class CollisionMap {
 		}
 		if (arg1 == 0) {
 			if (arg5 == 0) {
-				this.method363(var7, var8, 65536);
-				this.method363(var7 - 1, var8, 4096);
+				this.addCMap(var7, var8, 65536);
+				this.addCMap(var7 - 1, var8, 4096);
 			}
 			if (arg5 == 1) {
-				this.method363(var7, var8, 1024);
-				this.method363(var7, var8 + 1, 16384);
+				this.addCMap(var7, var8, 1024);
+				this.addCMap(var7, var8 + 1, 16384);
 			}
 			if (arg5 == 2) {
-				this.method363(var7, var8, 4096);
-				this.method363(var7 + 1, var8, 65536);
+				this.addCMap(var7, var8, 4096);
+				this.addCMap(var7 + 1, var8, 65536);
 			}
 			if (arg5 == 3) {
-				this.method363(var7, var8, 16384);
-				this.method363(var7, var8 - 1, 1024);
+				this.addCMap(var7, var8, 16384);
+				this.addCMap(var7, var8 - 1, 1024);
 			}
 		}
 		if (arg1 == 1 || arg1 == 3) {
 			if (arg5 == 0) {
-				this.method363(var7, var8, 512);
-				this.method363(var7 - 1, var8 + 1, 8192);
+				this.addCMap(var7, var8, 512);
+				this.addCMap(var7 - 1, var8 + 1, 8192);
 			}
 			if (arg5 == 1) {
-				this.method363(var7, var8, 2048);
-				this.method363(var7 + 1, var8 + 1, 32768);
+				this.addCMap(var7, var8, 2048);
+				this.addCMap(var7 + 1, var8 + 1, 32768);
 			}
 			if (arg5 == 2) {
-				this.method363(var7, var8, 8192);
-				this.method363(var7 + 1, var8 - 1, 512);
+				this.addCMap(var7, var8, 8192);
+				this.addCMap(var7 + 1, var8 - 1, 512);
 			}
 			if (arg5 == 3) {
-				this.method363(var7, var8, 32768);
-				this.method363(var7 - 1, var8 - 1, 2048);
+				this.addCMap(var7, var8, 32768);
+				this.addCMap(var7 - 1, var8 - 1, 2048);
 			}
 		}
 		if (arg1 != 2) {
 			return;
 		}
 		if (arg5 == 0) {
-			this.method363(var7, var8, 66560);
-			this.method363(var7 - 1, var8, 4096);
-			this.method363(var7, var8 + 1, 16384);
+			this.addCMap(var7, var8, 66560);
+			this.addCMap(var7 - 1, var8, 4096);
+			this.addCMap(var7, var8 + 1, 16384);
 		}
 		if (arg5 == 1) {
-			this.method363(var7, var8, 5120);
-			this.method363(var7, var8 + 1, 16384);
-			this.method363(var7 + 1, var8, 65536);
+			this.addCMap(var7, var8, 5120);
+			this.addCMap(var7, var8 + 1, 16384);
+			this.addCMap(var7 + 1, var8, 65536);
 		}
 		if (arg5 == 2) {
-			this.method363(var7, var8, 20480);
-			this.method363(var7 + 1, var8, 65536);
-			this.method363(var7, var8 - 1, 1024);
+			this.addCMap(var7, var8, 20480);
+			this.addCMap(var7 + 1, var8, 65536);
+			this.addCMap(var7, var8 - 1, 1024);
 		}
 		if (arg5 == 3) {
-			this.method363(var7, var8, 81920);
-			this.method363(var7, var8 - 1, 1024);
-			this.method363(var7 - 1, var8, 4096);
+			this.addCMap(var7, var8, 81920);
+			this.addCMap(var7, var8 - 1, 1024);
+			this.addCMap(var7 - 1, var8, 4096);
 			return;
 		}
 	}
 
 	@ObfuscatedName("jc.a(ZIIIZII)V")
-	public void method361(boolean arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6) {
+	public void addLoc(boolean arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6) {
 		if (!arg4) {
 			return;
 		}
@@ -217,7 +217,7 @@ public class CollisionMap {
 			if (var12 >= 0 && var12 < this.sizeX) {
 				for (int var13 = var10; var13 < arg3 + var10; var13++) {
 					if (var13 >= 0 && var13 < this.sizeZ) {
-						this.method363(var12, var13, var8);
+						this.addCMap(var12, var13, var8);
 					}
 				}
 			}
@@ -225,7 +225,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(III)V")
-	public void method362(int arg0, int arg1, int arg2) {
+	public void setBlocked(int arg0, int arg1, int arg2) {
 		int var4 = arg2 - this.offsetX;
 		int var5 = arg0 - this.offsetZ;
 		if (arg1 < 8 || arg1 > 8) {
@@ -236,71 +236,71 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.b(III)V")
-	public void method363(int arg0, int arg1, int arg2) {
+	public void addCMap(int arg0, int arg1, int arg2) {
 		this.flags[arg0][arg1] |= arg2;
 	}
 
 	@ObfuscatedName("jc.a(ZIIIII)V")
-	public void method364(boolean arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void delWall(boolean arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var7 = arg5 - this.offsetX;
 		int var8 = arg1 - this.offsetZ;
 		int var9 = 4 / arg4;
 		if (arg3 == 0) {
 			if (arg2 == 0) {
-				this.method366(var8, (byte) 3, var7, 128);
-				this.method366(var8, (byte) 3, var7 - 1, 8);
+				this.remCMap(var8, (byte) 3, var7, 128);
+				this.remCMap(var8, (byte) 3, var7 - 1, 8);
 			}
 			if (arg2 == 1) {
-				this.method366(var8, (byte) 3, var7, 2);
-				this.method366(var8 + 1, (byte) 3, var7, 32);
+				this.remCMap(var8, (byte) 3, var7, 2);
+				this.remCMap(var8 + 1, (byte) 3, var7, 32);
 			}
 			if (arg2 == 2) {
-				this.method366(var8, (byte) 3, var7, 8);
-				this.method366(var8, (byte) 3, var7 + 1, 128);
+				this.remCMap(var8, (byte) 3, var7, 8);
+				this.remCMap(var8, (byte) 3, var7 + 1, 128);
 			}
 			if (arg2 == 3) {
-				this.method366(var8, (byte) 3, var7, 32);
-				this.method366(var8 - 1, (byte) 3, var7, 2);
+				this.remCMap(var8, (byte) 3, var7, 32);
+				this.remCMap(var8 - 1, (byte) 3, var7, 2);
 			}
 		}
 		if (arg3 == 1 || arg3 == 3) {
 			if (arg2 == 0) {
-				this.method366(var8, (byte) 3, var7, 1);
-				this.method366(var8 + 1, (byte) 3, var7 - 1, 16);
+				this.remCMap(var8, (byte) 3, var7, 1);
+				this.remCMap(var8 + 1, (byte) 3, var7 - 1, 16);
 			}
 			if (arg2 == 1) {
-				this.method366(var8, (byte) 3, var7, 4);
-				this.method366(var8 + 1, (byte) 3, var7 + 1, 64);
+				this.remCMap(var8, (byte) 3, var7, 4);
+				this.remCMap(var8 + 1, (byte) 3, var7 + 1, 64);
 			}
 			if (arg2 == 2) {
-				this.method366(var8, (byte) 3, var7, 16);
-				this.method366(var8 - 1, (byte) 3, var7 + 1, 1);
+				this.remCMap(var8, (byte) 3, var7, 16);
+				this.remCMap(var8 - 1, (byte) 3, var7 + 1, 1);
 			}
 			if (arg2 == 3) {
-				this.method366(var8, (byte) 3, var7, 64);
-				this.method366(var8 - 1, (byte) 3, var7 - 1, 4);
+				this.remCMap(var8, (byte) 3, var7, 64);
+				this.remCMap(var8 - 1, (byte) 3, var7 - 1, 4);
 			}
 		}
 		if (arg3 == 2) {
 			if (arg2 == 0) {
-				this.method366(var8, (byte) 3, var7, 130);
-				this.method366(var8, (byte) 3, var7 - 1, 8);
-				this.method366(var8 + 1, (byte) 3, var7, 32);
+				this.remCMap(var8, (byte) 3, var7, 130);
+				this.remCMap(var8, (byte) 3, var7 - 1, 8);
+				this.remCMap(var8 + 1, (byte) 3, var7, 32);
 			}
 			if (arg2 == 1) {
-				this.method366(var8, (byte) 3, var7, 10);
-				this.method366(var8 + 1, (byte) 3, var7, 32);
-				this.method366(var8, (byte) 3, var7 + 1, 128);
+				this.remCMap(var8, (byte) 3, var7, 10);
+				this.remCMap(var8 + 1, (byte) 3, var7, 32);
+				this.remCMap(var8, (byte) 3, var7 + 1, 128);
 			}
 			if (arg2 == 2) {
-				this.method366(var8, (byte) 3, var7, 40);
-				this.method366(var8, (byte) 3, var7 + 1, 128);
-				this.method366(var8 - 1, (byte) 3, var7, 2);
+				this.remCMap(var8, (byte) 3, var7, 40);
+				this.remCMap(var8, (byte) 3, var7 + 1, 128);
+				this.remCMap(var8 - 1, (byte) 3, var7, 2);
 			}
 			if (arg2 == 3) {
-				this.method366(var8, (byte) 3, var7, 160);
-				this.method366(var8 - 1, (byte) 3, var7, 2);
-				this.method366(var8, (byte) 3, var7 - 1, 8);
+				this.remCMap(var8, (byte) 3, var7, 160);
+				this.remCMap(var8 - 1, (byte) 3, var7, 2);
+				this.remCMap(var8, (byte) 3, var7 - 1, 8);
 			}
 		}
 		if (!arg0) {
@@ -308,68 +308,68 @@ public class CollisionMap {
 		}
 		if (arg3 == 0) {
 			if (arg2 == 0) {
-				this.method366(var8, (byte) 3, var7, 65536);
-				this.method366(var8, (byte) 3, var7 - 1, 4096);
+				this.remCMap(var8, (byte) 3, var7, 65536);
+				this.remCMap(var8, (byte) 3, var7 - 1, 4096);
 			}
 			if (arg2 == 1) {
-				this.method366(var8, (byte) 3, var7, 1024);
-				this.method366(var8 + 1, (byte) 3, var7, 16384);
+				this.remCMap(var8, (byte) 3, var7, 1024);
+				this.remCMap(var8 + 1, (byte) 3, var7, 16384);
 			}
 			if (arg2 == 2) {
-				this.method366(var8, (byte) 3, var7, 4096);
-				this.method366(var8, (byte) 3, var7 + 1, 65536);
+				this.remCMap(var8, (byte) 3, var7, 4096);
+				this.remCMap(var8, (byte) 3, var7 + 1, 65536);
 			}
 			if (arg2 == 3) {
-				this.method366(var8, (byte) 3, var7, 16384);
-				this.method366(var8 - 1, (byte) 3, var7, 1024);
+				this.remCMap(var8, (byte) 3, var7, 16384);
+				this.remCMap(var8 - 1, (byte) 3, var7, 1024);
 			}
 		}
 		if (arg3 == 1 || arg3 == 3) {
 			if (arg2 == 0) {
-				this.method366(var8, (byte) 3, var7, 512);
-				this.method366(var8 + 1, (byte) 3, var7 - 1, 8192);
+				this.remCMap(var8, (byte) 3, var7, 512);
+				this.remCMap(var8 + 1, (byte) 3, var7 - 1, 8192);
 			}
 			if (arg2 == 1) {
-				this.method366(var8, (byte) 3, var7, 2048);
-				this.method366(var8 + 1, (byte) 3, var7 + 1, 32768);
+				this.remCMap(var8, (byte) 3, var7, 2048);
+				this.remCMap(var8 + 1, (byte) 3, var7 + 1, 32768);
 			}
 			if (arg2 == 2) {
-				this.method366(var8, (byte) 3, var7, 8192);
-				this.method366(var8 - 1, (byte) 3, var7 + 1, 512);
+				this.remCMap(var8, (byte) 3, var7, 8192);
+				this.remCMap(var8 - 1, (byte) 3, var7 + 1, 512);
 			}
 			if (arg2 == 3) {
-				this.method366(var8, (byte) 3, var7, 32768);
-				this.method366(var8 - 1, (byte) 3, var7 - 1, 2048);
+				this.remCMap(var8, (byte) 3, var7, 32768);
+				this.remCMap(var8 - 1, (byte) 3, var7 - 1, 2048);
 			}
 		}
 		if (arg3 != 2) {
 			return;
 		}
 		if (arg2 == 0) {
-			this.method366(var8, (byte) 3, var7, 66560);
-			this.method366(var8, (byte) 3, var7 - 1, 4096);
-			this.method366(var8 + 1, (byte) 3, var7, 16384);
+			this.remCMap(var8, (byte) 3, var7, 66560);
+			this.remCMap(var8, (byte) 3, var7 - 1, 4096);
+			this.remCMap(var8 + 1, (byte) 3, var7, 16384);
 		}
 		if (arg2 == 1) {
-			this.method366(var8, (byte) 3, var7, 5120);
-			this.method366(var8 + 1, (byte) 3, var7, 16384);
-			this.method366(var8, (byte) 3, var7 + 1, 65536);
+			this.remCMap(var8, (byte) 3, var7, 5120);
+			this.remCMap(var8 + 1, (byte) 3, var7, 16384);
+			this.remCMap(var8, (byte) 3, var7 + 1, 65536);
 		}
 		if (arg2 == 2) {
-			this.method366(var8, (byte) 3, var7, 20480);
-			this.method366(var8, (byte) 3, var7 + 1, 65536);
-			this.method366(var8 - 1, (byte) 3, var7, 1024);
+			this.remCMap(var8, (byte) 3, var7, 20480);
+			this.remCMap(var8, (byte) 3, var7 + 1, 65536);
+			this.remCMap(var8 - 1, (byte) 3, var7, 1024);
 		}
 		if (arg2 == 3) {
-			this.method366(var8, (byte) 3, var7, 81920);
-			this.method366(var8 - 1, (byte) 3, var7, 1024);
-			this.method366(var8, (byte) 3, var7 - 1, 4096);
+			this.remCMap(var8, (byte) 3, var7, 81920);
+			this.remCMap(var8 - 1, (byte) 3, var7, 1024);
+			this.remCMap(var8, (byte) 3, var7 - 1, 4096);
 			return;
 		}
 	}
 
 	@ObfuscatedName("jc.a(IIIZIZI)V")
-	public void method365(int arg0, int arg1, int arg2, boolean arg3, int arg4, boolean arg5, int arg6) {
+	public void delLoc(int arg0, int arg1, int arg2, boolean arg3, int arg4, boolean arg5, int arg6) {
 		if (!arg5) {
 			for (int var8 = 1; var8 > 0; var8++) {
 			}
@@ -389,7 +389,7 @@ public class CollisionMap {
 			if (var13 >= 0 && var13 < this.sizeX) {
 				for (int var14 = var11; var14 < arg4 + var11; var14++) {
 					if (var14 >= 0 && var14 < this.sizeZ) {
-						this.method366(var14, (byte) 3, var13, var9);
+						this.remCMap(var14, (byte) 3, var13, var9);
 					}
 				}
 			}
@@ -397,7 +397,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IBII)V")
-	public void method366(int arg0, byte arg1, int arg2, int arg3) {
+	public void remCMap(int arg0, byte arg1, int arg2, int arg3) {
 		this.flags[arg2][arg0] &= 16777215 - arg3;
 		if (arg1 == 3) {
 			;
@@ -405,7 +405,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.c(III)V")
-	public void method367(int arg0, int arg1, int arg2) {
+	public void removeBlocked(int arg0, int arg1, int arg2) {
 		int var4 = arg2 - this.offsetX;
 		if (arg1 < 0) {
 			int var5 = arg0 - this.offsetZ;
@@ -414,7 +414,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IZIIIII)Z")
-	public boolean method368(int arg0, boolean arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public boolean testWall(int arg0, boolean arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (arg0 == arg5 && arg3 == arg4) {
 			return true;
 		}
@@ -541,7 +541,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IIIZIII)Z")
-	public boolean method369(int arg0, int arg1, int arg2, boolean arg3, int arg4, int arg5, int arg6) {
+	public boolean testWDecor(int arg0, int arg1, int arg2, boolean arg3, int arg4, int arg5, int arg6) {
 		if (!arg3) {
 			throw new NullPointerException();
 		} else if (arg1 == arg2 && arg0 == arg6) {
@@ -604,7 +604,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IIIIIIBI)Z")
-	public boolean method370(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, byte arg6, int arg7) {
+	public boolean testLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, byte arg6, int arg7) {
 		if (this._flowObfuscator1 != arg6) {
 			this._flowObfuscator6 = !this._flowObfuscator6;
 		}

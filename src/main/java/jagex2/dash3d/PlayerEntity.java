@@ -174,7 +174,7 @@ public class PlayerEntity extends PathingEntity {
 		if (var2 == null) {
 			return null;
 		}
-		super.height = var2.field400;
+		super.height = var2.minY;
 		var2.picking = true;
 		if (this.lowMemory) {
 			return var2;

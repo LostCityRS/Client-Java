@@ -30,7 +30,7 @@ public class NpcEntity extends PathingEntity {
 		if (var2 == null) {
 			return null;
 		}
-		super.height = var2.field400;
+		super.height = var2.minY;
 		if (arg0 != 5560) {
 			this.field459 = -451;
 		}

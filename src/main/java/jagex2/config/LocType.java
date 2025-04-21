@@ -473,7 +473,7 @@ public class LocType {
 			}
 			var25.calculateNormals(this.ambient + 64, this.contrast * 5 + 768, -50, -10, -50, !this.sharelight);
 			if (this.blockwalk) {
-				var25.field571 = var25.field400;
+				var25.objRaise = var25.minY;
 			}
 			modelCacheDynamic.put(var25, var10, 39399);
 			if (this.hillskew || this.sharelight) {
