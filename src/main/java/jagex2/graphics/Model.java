@@ -1888,7 +1888,7 @@ public class Model extends Entity {
 	@ObfuscatedName("fb.f(I)V")
 	public final void drawFace(int arg0) {
 		if (faceNearClipped[arg0]) {
-			this.method161(arg0);
+			this.drawFaceNearClipped(arg0);
 			return;
 		}
 		int var2 = this.faceVertexA[arg0];
@@ -1926,7 +1926,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.g(I)V")
-	public final void method161(int arg0) {
+	public final void drawFaceNearClipped(int arg0) {
 		int var2 = Pix3D.centerX;
 		int var3 = Pix3D.centerY;
 		int var4 = 0;

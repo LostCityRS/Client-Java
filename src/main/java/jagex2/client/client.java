@@ -4436,7 +4436,7 @@ public class client extends GameShell {
 				if (var2.seqComplete) {
 					var2.unlink();
 				} else {
-					this.scene.addTemporary(60, false, var2.field616, 0, var2.field615, var2, var2.field614, false, -1, var2.level);
+					this.scene.addTemporary(60, false, var2.y, 0, var2.z, var2, var2.x, false, -1, var2.level);
 				}
 			}
 		}
@@ -5207,9 +5207,9 @@ public class client extends GameShell {
 							var89 = var83.length;
 							var90 = var83.width;
 						}
-						var82.field476 = var68 * 128 + var89 * 64;
-						var82.field478 = var69 * 128 + var90 * 64;
-						var82.field477 = this.getHeightmapY(false, var82.field478, this.currentLevel, var82.field476);
+						var82.locOffsetX = var68 * 128 + var89 * 64;
+						var82.locOffsetZ = var69 * 128 + var90 * 64;
+						var82.locOffsetY = this.getHeightmapY(false, var82.locOffsetZ, this.currentLevel, var82.locOffsetX);
 						if (var78 > var80) {
 							byte var91 = var78;
 							var78 = var80;
@@ -5220,10 +5220,10 @@ public class client extends GameShell {
 							var79 = var81;
 							var81 = var92;
 						}
-						var82.field480 = var68 + var78;
-						var82.field482 = var68 + var80;
-						var82.field481 = var69 + var79;
-						var82.field483 = var69 + var81;
+						var82.minTileX = var68 + var78;
+						var82.maxTileX = var68 + var80;
+						var82.minTileZ = var69 + var79;
+						var82.maxTileZ = var69 + var81;
 					}
 				}
 			}
@@ -5345,7 +5345,7 @@ public class client extends GameShell {
 					} else {
 						var3.lowMemory = false;
 						var3.y = this.getHeightmapY(false, var3.z, this.currentLevel, var3.x);
-						this.scene.addTemporary(this.currentLevel, var3, var3.z, var3.field482, var3.field483, (byte) 7, var3.y, var3.yaw, var3.x, var3.field480, 60, var4, var3.field481);
+						this.scene.addTemporary(this.currentLevel, var3, var3.z, var3.maxTileX, var3.maxTileZ, (byte) 7, var3.y, var3.yaw, var3.x, var3.minTileX, 60, var4, var3.minTileZ);
 					}
 				}
 			}
@@ -7819,7 +7819,7 @@ public class client extends GameShell {
 			int var15 = arg1.g1();
 			int var16 = arg1.g1();
 			int var17 = arg1.pos;
-			if (arg4.name != null && arg4.field466) {
+			if (arg4.name != null && arg4.visible) {
 				long var18 = JString.toBase37(arg4.name);
 				boolean var20 = false;
 				if (var15 <= 1) {
@@ -8680,7 +8680,7 @@ public class client extends GameShell {
 			if (this.ptype == 108) {
 				int var104 = this.in.g2();
 				Component.types[var104].modelType = 3;
-				Component.types[var104].model = (localPlayer.field469[8] << 6) + (localPlayer.field469[0] << 12) + (localPlayer.field470[0] << 24) + (localPlayer.field470[4] << 18) + localPlayer.field469[11];
+				Component.types[var104].model = (localPlayer.appearances[8] << 6) + (localPlayer.appearances[0] << 12) + (localPlayer.colours[0] << 24) + (localPlayer.colours[4] << 18) + localPlayer.appearances[11];
 				this.ptype = -1;
 				return true;
 			}

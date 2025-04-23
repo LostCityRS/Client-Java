@@ -15,11 +15,11 @@ public class Entity extends DoublyLinkable {
 	public int minY = 1000;
 
 	@ObfuscatedName("y.k")
-	public static boolean field401;
+	public static boolean _flowObfusctator4;
 
 	@ObfuscatedName("y.a(IIIIIIIII)V")
 	public void draw(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
-		Model var10 = this.method122(5560);
+		Model var10 = this.getModel(5560);
 		if (var10 != null) {
 			this.minY = var10.minY;
 			var10.draw(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
@@ -27,7 +27,7 @@ public class Entity extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("y.a(I)Lfb;")
-	public Model method122(int arg0) {
+	public Model getModel(int arg0) {
 		if (arg0 != 5560) {
 			for (int var2 = 1; var2 > 0; var2++) {
 			}

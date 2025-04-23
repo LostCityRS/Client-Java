@@ -7,10 +7,10 @@ import jagex2.io.Packet;
 public class WordPack {
 
 	@ObfuscatedName("ac.a")
-	public static int field883 = 355;
+	public static int _flowObfuscator1 = 355;
 
 	@ObfuscatedName("ac.b")
-	public static boolean field884 = true;
+	public static boolean _flowObfuscator2 = true;
 
 	@ObfuscatedName("ac.c")
 	public static char[] charBuffer = new char[100];
@@ -92,7 +92,7 @@ public class WordPack {
 			}
 		}
 		while (arg1 >= 0) {
-			field884 = !field884;
+			_flowObfuscator2 = !_flowObfuscator2;
 		}
 		if (var4 != -1) {
 			arg2.p1(var4 << 4);

@@ -15,43 +15,43 @@ import jagex2.io.Packet;
 public class PlayerEntity extends PathingEntity {
 
 	@ObfuscatedName("bb.pb")
-	public int field462 = 855;
+	public int _flowObfuscator5 = 855;
 
 	@ObfuscatedName("bb.qb")
-	public int field463;
+	public int _flowObfuscator6;
 
 	@ObfuscatedName("bb.rb")
-	public int field464 = -323;
+	public int _flowObfuscator7 = -323;
 
 	@ObfuscatedName("bb.sb")
 	public String name;
 
 	@ObfuscatedName("bb.tb")
-	public boolean field466 = false;
+	public boolean visible = false;
 
 	@ObfuscatedName("bb.ub")
-	public int field467;
+	public int gender;
 
 	@ObfuscatedName("bb.vb")
 	public int headicon;
 
 	@ObfuscatedName("bb.wb")
-	public int[] field469 = new int[12];
+	public int[] appearances = new int[12];
 
 	@ObfuscatedName("bb.xb")
-	public int[] field470 = new int[5];
+	public int[] colours = new int[5];
 
 	@ObfuscatedName("bb.yb")
 	public int combatLevel;
 
 	@ObfuscatedName("bb.zb")
-	public long field472;
+	public long appearanceHashcode;
 
 	@ObfuscatedName("bb.Lb")
 	public boolean lowMemory = false;
 
 	@ObfuscatedName("bb.Mb")
-	public long field485 = -1L;
+	public long modelUid = -1L;
 
 	@ObfuscatedName("bb.Nb")
 	public static LruCache modelCache = new LruCache(260, 1);
@@ -66,25 +66,25 @@ public class PlayerEntity extends PathingEntity {
 	public int locStopCycle;
 
 	@ObfuscatedName("bb.Db")
-	public int field476;
+	public int locOffsetX;
 
 	@ObfuscatedName("bb.Eb")
-	public int field477;
+	public int locOffsetY;
 
 	@ObfuscatedName("bb.Fb")
-	public int field478;
+	public int locOffsetZ;
 
 	@ObfuscatedName("bb.Hb")
-	public int field480;
+	public int minTileX;
 
 	@ObfuscatedName("bb.Ib")
-	public int field481;
+	public int minTileZ;
 
 	@ObfuscatedName("bb.Jb")
-	public int field482;
+	public int maxTileX;
 
 	@ObfuscatedName("bb.Kb")
-	public int field483;
+	public int maxTileZ;
 
 	@ObfuscatedName("bb.Gb")
 	public Model locModel;
@@ -92,15 +92,15 @@ public class PlayerEntity extends PathingEntity {
 	@ObfuscatedName("bb.a(Lmb;I)V")
 	public final void read(Packet arg0, int arg1) {
 		arg0.pos = 0;
-		this.field467 = arg0.g1();
+		this.gender = arg0.g1();
 		this.headicon = arg0.g1();
 		for (int var3 = 0; var3 < 12; var3++) {
 			int var8 = arg0.g1();
 			if (var8 == 0) {
-				this.field469[var3] = 0;
+				this.appearances[var3] = 0;
 			} else {
 				int var9 = arg0.g1();
-				this.field469[var3] = (var8 << 8) + var9;
+				this.appearances[var3] = (var8 << 8) + var9;
 			}
 		}
 		for (int var4 = 0; var4 < 5; var4++) {
@@ -108,7 +108,7 @@ public class PlayerEntity extends PathingEntity {
 			if (var7 < 0 || var7 >= client.DESIGN_BODY_COLOUR[var4].length) {
 				var7 = 0;
 			}
-			this.field470[var4] = var7;
+			this.colours[var4] = var7;
 		}
 		super.seqStandId = arg0.g2();
 		if (super.seqStandId == 65535) {
@@ -141,36 +141,36 @@ public class PlayerEntity extends PathingEntity {
 		if (super.seqRunId == 65535) {
 			super.seqRunId = -1;
 		}
-		this.name = JString.formatName(true, JString.fromBase37((byte) 88, arg0.g8(this.field462)));
+		this.name = JString.formatName(true, JString.fromBase37((byte) 88, arg0.g8(this._flowObfuscator5)));
 		this.combatLevel = arg0.g1();
-		this.field466 = true;
-		this.field472 = 0L;
+		this.visible = true;
+		this.appearanceHashcode = 0L;
 		for (int var5 = 0; var5 < 12; var5++) {
-			this.field472 <<= 0x4;
-			if (this.field469[var5] >= 256) {
-				this.field472 += this.field469[var5] - 256;
+			this.appearanceHashcode <<= 0x4;
+			if (this.appearances[var5] >= 256) {
+				this.appearanceHashcode += this.appearances[var5] - 256;
 			}
 		}
-		if (this.field469[0] >= 256) {
-			this.field472 += this.field469[0] - 256 >> 4;
+		if (this.appearances[0] >= 256) {
+			this.appearanceHashcode += this.appearances[0] - 256 >> 4;
 		}
-		if (this.field469[1] >= 256) {
-			this.field472 += this.field469[1] - 256 >> 8;
+		if (this.appearances[1] >= 256) {
+			this.appearanceHashcode += this.appearances[1] - 256 >> 8;
 		}
 		for (int var6 = 0; var6 < 5; var6++) {
-			this.field472 <<= 0x3;
-			this.field472 += this.field470[var6];
+			this.appearanceHashcode <<= 0x3;
+			this.appearanceHashcode += this.colours[var6];
 		}
-		this.field472 <<= 0x1;
-		this.field472 += this.field467;
+		this.appearanceHashcode <<= 0x1;
+		this.appearanceHashcode += this.gender;
 	}
 
 	@ObfuscatedName("bb.a(I)Lfb;")
-	public final Model method122(int arg0) {
-		if (!this.field466) {
+	public final Model getModel(int arg0) {
+		if (!this.visible) {
 			return null;
 		}
-		Model var2 = this.method130(357);
+		Model var2 = this.getAnimatedModel(357);
 		if (var2 == null) {
 			return null;
 		}
@@ -194,7 +194,7 @@ public class PlayerEntity extends PathingEntity {
 				}
 				var5.calculateNormals(var3.ambient + 64, var3.contrast + 850, -30, -50, -30, true);
 				Model[] var6 = new Model[] { var2, var5 };
-				var2 = new Model(this.field463, true, 2, var6);
+				var2 = new Model(this._flowObfuscator6, true, 2, var6);
 			}
 		}
 		if (this.locModel != null) {
@@ -203,7 +203,7 @@ public class PlayerEntity extends PathingEntity {
 			}
 			if (client.loopCycle >= this.locStartCycle && client.loopCycle < this.locStopCycle) {
 				Model var7 = this.locModel;
-				var7.translate(this.field477 - this.y, this.field476 - super.x, this.field478 - super.z, false);
+				var7.translate(this.locOffsetY - this.y, this.locOffsetX - super.x, this.locOffsetZ - super.z, false);
 				if (super.dstYaw == 512) {
 					var7.rotateY90((byte) 3);
 					var7.rotateY90((byte) 3);
@@ -215,7 +215,7 @@ public class PlayerEntity extends PathingEntity {
 					var7.rotateY90((byte) 3);
 				}
 				Model[] var8 = new Model[] { var2, var7 };
-				var2 = new Model(this.field463, true, 2, var8);
+				var2 = new Model(this._flowObfuscator6, true, 2, var8);
 				if (super.dstYaw == 512) {
 					var7.rotateY90((byte) 3);
 				} else if (super.dstYaw == 1024) {
@@ -226,7 +226,7 @@ public class PlayerEntity extends PathingEntity {
 					var7.rotateY90((byte) 3);
 					var7.rotateY90((byte) 3);
 				}
-				var7.translate(this.y - this.field477, super.x - this.field476, super.z - this.field478, false);
+				var7.translate(this.y - this.locOffsetY, super.x - this.locOffsetX, super.z - this.locOffsetZ, false);
 			}
 		}
 		var2.picking = true;
@@ -237,8 +237,8 @@ public class PlayerEntity extends PathingEntity {
 	}
 
 	@ObfuscatedName("bb.c(I)Lfb;")
-	public final Model method130(int arg0) {
-		long var2 = this.field472;
+	public final Model getAnimatedModel(int arg0) {
+		long var2 = this.appearanceHashcode;
 		int var4 = -1;
 		int var5 = -1;
 		int var6 = -1;
@@ -251,11 +251,11 @@ public class PlayerEntity extends PathingEntity {
 			}
 			if (var8.righthand >= 0) {
 				var6 = var8.righthand;
-				var2 += var6 - this.field469[5] << 40;
+				var2 += var6 - this.appearances[5] << 40;
 			}
 			if (var8.lefthand >= 0) {
 				var7 = var8.lefthand;
-				var2 += var7 - this.field469[3] << 48;
+				var2 += var7 - this.appearances[3] << 48;
 			}
 		} else if (super.secondarySeqId >= 0) {
 			var4 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
@@ -267,7 +267,7 @@ public class PlayerEntity extends PathingEntity {
 		if (var9 == null) {
 			boolean var10 = false;
 			for (int var11 = 0; var11 < 12; var11++) {
-				int var12 = this.field469[var11];
+				int var12 = this.appearances[var11];
 				if (var7 >= 0 && var11 == 3) {
 					var12 = var7;
 				}
@@ -277,13 +277,13 @@ public class PlayerEntity extends PathingEntity {
 				if (var12 >= 256 && var12 < 512 && !IdkType.types[var12 - 256].validate(6)) {
 					var10 = true;
 				}
-				if (var12 >= 512 && !ObjType.get(var12 - 512).validateWornModel(-526, this.field467)) {
+				if (var12 >= 512 && !ObjType.get(var12 - 512).validateWornModel(-526, this.gender)) {
 					var10 = true;
 				}
 			}
 			if (var10) {
-				if (this.field485 != -1L) {
-					var9 = (Model) modelCache.get(this.field485);
+				if (this.modelUid != -1L) {
+					var9 = (Model) modelCache.get(this.modelUid);
 				}
 				if (var9 == null) {
 					return null;
@@ -294,7 +294,7 @@ public class PlayerEntity extends PathingEntity {
 			Model[] var13 = new Model[12];
 			int var14 = 0;
 			for (int var15 = 0; var15 < 12; var15++) {
-				int var17 = this.field469[var15];
+				int var17 = this.appearances[var15];
 				if (var7 >= 0 && var15 == 3) {
 					var17 = var7;
 				}
@@ -308,7 +308,7 @@ public class PlayerEntity extends PathingEntity {
 					}
 				}
 				if (var17 >= 512) {
-					Model var19 = ObjType.get(var17 - 512).getWornModel(true, this.field467);
+					Model var19 = ObjType.get(var17 - 512).getWornModel(true, this.gender);
 					if (var19 != null) {
 						var13[var14++] = var19;
 					}
@@ -316,17 +316,17 @@ public class PlayerEntity extends PathingEntity {
 			}
 			var9 = new Model(var14, 652, var13);
 			for (int var16 = 0; var16 < 5; var16++) {
-				if (this.field470[var16] != 0) {
-					var9.recolour(client.DESIGN_BODY_COLOUR[var16][0], client.DESIGN_BODY_COLOUR[var16][this.field470[var16]]);
+				if (this.colours[var16] != 0) {
+					var9.recolour(client.DESIGN_BODY_COLOUR[var16][0], client.DESIGN_BODY_COLOUR[var16][this.colours[var16]]);
 					if (var16 == 1) {
-						var9.recolour(client.DESIGN_HAIR_COLOUR[0], client.DESIGN_HAIR_COLOUR[this.field470[var16]]);
+						var9.recolour(client.DESIGN_HAIR_COLOUR[0], client.DESIGN_HAIR_COLOUR[this.colours[var16]]);
 					}
 				}
 			}
 			var9.createLabelReferences(-591);
 			var9.calculateNormals(64, 850, -30, -50, -30, true);
 			modelCache.put(var9, var2, 39399);
-			this.field485 = var2;
+			this.modelUid = var2;
 		}
 		if (this.lowMemory) {
 			return var9;
@@ -346,16 +346,16 @@ public class PlayerEntity extends PathingEntity {
 
 	@ObfuscatedName("bb.d(I)Lfb;")
 	public final Model getHeadModel(int arg0) {
-		if (!this.field466) {
+		if (!this.visible) {
 			return null;
 		}
 		boolean var2 = false;
 		for (int var3 = 0; var3 < 12; var3++) {
-			int var13 = this.field469[var3];
+			int var13 = this.appearances[var3];
 			if (var13 >= 256 && var13 < 512 && !IdkType.types[var13 - 256].validateHeadModel(8)) {
 				var2 = true;
 			}
-			if (var13 >= 512 && !ObjType.get(var13 - 512).validateHeadModel(this.field467, -5652)) {
+			if (var13 >= 512 && !ObjType.get(var13 - 512).validateHeadModel(this.gender, -5652)) {
 				var2 = true;
 			}
 		}
@@ -369,7 +369,7 @@ public class PlayerEntity extends PathingEntity {
 		}
 		int var6 = 0;
 		for (int var7 = 0; var7 < 12; var7++) {
-			int var10 = this.field469[var7];
+			int var10 = this.appearances[var7];
 			if (var10 >= 256 && var10 < 512) {
 				Model var11 = IdkType.types[var10 - 256].getHeadModel(-711);
 				if (var11 != null) {
@@ -377,7 +377,7 @@ public class PlayerEntity extends PathingEntity {
 				}
 			}
 			if (var10 >= 512) {
-				Model var12 = ObjType.get(var10 - 512).getHeadModel(false, this.field467);
+				Model var12 = ObjType.get(var10 - 512).getHeadModel(false, this.gender);
 				if (var12 != null) {
 					var4[var6++] = var12;
 				}
@@ -385,10 +385,10 @@ public class PlayerEntity extends PathingEntity {
 		}
 		Model var8 = new Model(var6, 652, var4);
 		for (int var9 = 0; var9 < 5; var9++) {
-			if (this.field470[var9] != 0) {
-				var8.recolour(client.DESIGN_BODY_COLOUR[var9][0], client.DESIGN_BODY_COLOUR[var9][this.field470[var9]]);
+			if (this.colours[var9] != 0) {
+				var8.recolour(client.DESIGN_BODY_COLOUR[var9][0], client.DESIGN_BODY_COLOUR[var9][this.colours[var9]]);
 				if (var9 == 1) {
-					var8.recolour(client.DESIGN_HAIR_COLOUR[0], client.DESIGN_HAIR_COLOUR[this.field470[var9]]);
+					var8.recolour(client.DESIGN_HAIR_COLOUR[0], client.DESIGN_HAIR_COLOUR[this.colours[var9]]);
 				}
 			}
 		}
@@ -400,6 +400,6 @@ public class PlayerEntity extends PathingEntity {
 		if (arg0 != 8) {
 			throw new NullPointerException();
 		}
-		return this.field466;
+		return this.visible;
 	}
 }

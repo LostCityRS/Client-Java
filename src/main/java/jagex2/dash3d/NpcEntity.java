@@ -10,29 +10,29 @@ import jagex2.graphics.Model;
 public class NpcEntity extends PathingEntity {
 
 	@ObfuscatedName("ab.pb")
-	public boolean field458 = false;
+	public boolean _flowObfuscator5 = false;
 
 	@ObfuscatedName("ab.qb")
-	public int field459 = -949;
+	public int _flowObfuscator6 = -949;
 
 	@ObfuscatedName("ab.rb")
-	public int field460;
+	public int _flowObfuscator7;
 
 	@ObfuscatedName("ab.sb")
 	public NpcType type;
 
 	@ObfuscatedName("ab.a(I)Lfb;")
-	public final Model method122(int arg0) {
+	public final Model getModel(int arg0) {
 		if (this.type == null) {
 			return null;
 		}
-		Model var2 = this.method128(357);
+		Model var2 = this.getAnimatedModel(357);
 		if (var2 == null) {
 			return null;
 		}
 		super.height = var2.minY;
 		if (arg0 != 5560) {
-			this.field459 = -451;
+			this._flowObfuscator6 = -451;
 		}
 		if (super.spotanimId != -1 && super.spotanimFrame != -1) {
 			SpotAnimType var3 = SpotAnimType.types[super.spotanimId];
@@ -49,7 +49,7 @@ public class NpcEntity extends PathingEntity {
 				}
 				var5.calculateNormals(var3.ambient + 64, var3.contrast + 850, -30, -50, -30, true);
 				Model[] var6 = new Model[] { var2, var5 };
-				var2 = new Model(this.field460, true, 2, var6);
+				var2 = new Model(this._flowObfuscator7, true, 2, var6);
 			}
 		}
 		if (this.type.size == 1) {
@@ -59,7 +59,7 @@ public class NpcEntity extends PathingEntity {
 	}
 
 	@ObfuscatedName("ab.c(I)Lfb;")
-	public final Model method128(int arg0) {
+	public final Model getAnimatedModel(int arg0) {
 		if (super.primarySeqId < 0 || super.primarySeqDelay != 0) {
 			int var4 = -1;
 			int var5 = 59 / arg0;
@@ -79,7 +79,7 @@ public class NpcEntity extends PathingEntity {
 	@ObfuscatedName("ab.a(B)Z")
 	public final boolean isVisible(byte arg0) {
 		if (arg0 != 8) {
-			this.field458 = !this.field458;
+			this._flowObfuscator5 = !this._flowObfuscator5;
 		}
 		return this.type != null;
 	}

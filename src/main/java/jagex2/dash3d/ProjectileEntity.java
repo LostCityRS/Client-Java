@@ -152,7 +152,7 @@ public class ProjectileEntity extends Entity {
 	}
 
 	@ObfuscatedName("eb.a(I)Lfb;")
-	public final Model method122(int arg0) {
+	public final Model getModel(int arg0) {
 		Model var2 = this.field504.getModel();
 		if (arg0 != 5560) {
 			for (int var3 = 1; var3 > 0; var3++) {

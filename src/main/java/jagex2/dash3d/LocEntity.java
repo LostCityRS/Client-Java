@@ -66,7 +66,7 @@ public class LocEntity extends Entity {
 	}
 
 	@ObfuscatedName("cb.a(I)Lfb;")
-	public final Model method122(int arg0) {
+	public final Model getModel(int arg0) {
 		if (arg0 != 5560) {
 			this.field488 = !this.field488;
 		}
