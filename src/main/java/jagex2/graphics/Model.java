@@ -224,7 +224,7 @@ public class Model extends Entity {
 	public static int mouseY;
 
 	@ObfuscatedName("fb.Jb")
-	public static int field604;
+	public static int pickedCount;
 
 	@ObfuscatedName("fb.Gb")
 	public static boolean checkHover;
@@ -1569,7 +1569,7 @@ public class Model extends Entity {
 			int var31 = mouseY - Pix3D.centerY;
 			if (var30 > var26 && var30 < var27 && var31 > var28 && var31 < var29) {
 				if (this.picking) {
-					pickedBitsets[field604++] = arg8;
+					pickedBitsets[pickedCount++] = arg8;
 				} else {
 					var24 = true;
 				}
@@ -1638,7 +1638,7 @@ public class Model extends Entity {
 					tmpDepthFaces[var36][tmpDepthFaceCount[var36]++] = var5;
 				} else {
 					if (arg1 && this.pointsWithinTriangle(mouseX, mouseY, vertexScreenY[var30], vertexScreenY[var31], vertexScreenY[var32], var33, var34, var35)) {
-						pickedBitsets[field604++] = arg2;
+						pickedBitsets[pickedCount++] = arg2;
 						arg1 = false;
 					}
 					if ((vertexScreenY[var32] - vertexScreenY[var31]) * (var33 - var34) - (vertexScreenY[var30] - vertexScreenY[var31]) * (var35 - var34) > 0) {
