@@ -432,7 +432,7 @@ public class Component {
 		} else {
 			Model var6 = new Model(var5, true, false, true);
 			if (arg1 != -1 || arg2 != -1) {
-				var6.createLabelReferences(-591);
+				var6.createLabelReferences();
 			}
 			if (arg1 != -1) {
 				var6.applyTransform(arg1);

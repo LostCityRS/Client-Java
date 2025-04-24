@@ -150,7 +150,7 @@ public class ProjectileEntity extends Entity {
 		}
 		Model var4 = new Model(var2, true, false, !this.field504.animHasAlpha);
 		if (this.field504.seq != null) {
-			var4.createLabelReferences(-591);
+			var4.createLabelReferences();
 			var4.applyTransform(this.field504.seq.frames[this.field526]);
 			var4.labelFaces = null;
 			var4.labelVertices = null;

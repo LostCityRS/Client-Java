@@ -173,7 +173,7 @@ public class PlayerEntity extends PathingEntity {
 			if (var4 != null) {
 				Model var5 = new Model(var4, true, false, !var3.animHasAlpha);
 				var5.translate(-super.spotanimHeight, 0, 0);
-				var5.createLabelReferences(-591);
+				var5.createLabelReferences();
 				var5.applyTransform(var3.seq.frames[super.spotanimFrame]);
 				var5.labelFaces = null;
 				var5.labelVertices = null;
@@ -305,7 +305,7 @@ public class PlayerEntity extends PathingEntity {
 					}
 				}
 			}
-			var9.createLabelReferences(-591);
+			var9.createLabelReferences();
 			var9.calculateNormals(64, 850, -30, -50, -30, true);
 			modelCache.put(var9, var2);
 			this.modelUid = var2;

@@ -421,7 +421,7 @@ public class LocType {
 			}
 			Model var25 = new Model(var22, this.recol_s == null, arg1 == 0 && arg6 == -1 && !var23 && !var24, !this.animHasAlpha);
 			if (arg6 != -1) {
-				var25.createLabelReferences(-591);
+				var25.createLabelReferences();
 				var25.applyTransform(arg6);
 				var25.labelFaces = null;
 				var25.labelVertices = null;

@@ -1011,65 +1011,53 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.d(I)V")
-	public void createLabelReferences(int arg0) {
-		label86: while (true) {
-			if (arg0 >= 0) {
-				int var16 = 1;
-				while (true) {
-					if (var16 <= 0) {
-						continue label86;
-					}
-					var16++;
+	public void createLabelReferences() {
+		int var10002;
+		if (this.vertexLabel != null) {
+			int[] var2 = new int[256];
+			int var3 = 0;
+			for (int var4 = 0; var4 < this.vertexCount; var4++) {
+				int var8 = this.vertexLabel[var4];
+				var10002 = var2[var8]++;
+				if (var8 > var3) {
+					var3 = var8;
 				}
 			}
-			int var10002;
-			if (this.vertexLabel != null) {
-				int[] var2 = new int[256];
-				int var3 = 0;
-				for (int var4 = 0; var4 < this.vertexCount; var4++) {
-					int var8 = this.vertexLabel[var4];
-					var10002 = var2[var8]++;
-					if (var8 > var3) {
-						var3 = var8;
-					}
-				}
-				this.labelVertices = new int[var3 + 1][];
-				for (int var5 = 0; var5 <= var3; var5++) {
-					this.labelVertices[var5] = new int[var2[var5]];
-					var2[var5] = 0;
-				}
-				int var6 = 0;
-				while (var6 < this.vertexCount) {
-					int var7 = this.vertexLabel[var6];
-					this.labelVertices[var7][var2[var7]++] = var6++;
-				}
-				this.vertexLabel = null;
+			this.labelVertices = new int[var3 + 1][];
+			for (int var5 = 0; var5 <= var3; var5++) {
+				this.labelVertices[var5] = new int[var2[var5]];
+				var2[var5] = 0;
 			}
-			if (this.faceLabel == null) {
-				return;
+			int var6 = 0;
+			while (var6 < this.vertexCount) {
+				int var7 = this.vertexLabel[var6];
+				this.labelVertices[var7][var2[var7]++] = var6++;
 			}
-			int[] var9 = new int[256];
-			int var10 = 0;
-			for (int var11 = 0; var11 < this.faceCount; var11++) {
-				int var15 = this.faceLabel[var11];
-				var10002 = var9[var15]++;
-				if (var15 > var10) {
-					var10 = var15;
-				}
-			}
-			this.labelFaces = new int[var10 + 1][];
-			for (int var12 = 0; var12 <= var10; var12++) {
-				this.labelFaces[var12] = new int[var9[var12]];
-				var9[var12] = 0;
-			}
-			int var13 = 0;
-			while (var13 < this.faceCount) {
-				int var14 = this.faceLabel[var13];
-				this.labelFaces[var14][var9[var14]++] = var13++;
-			}
-			this.faceLabel = null;
+			this.vertexLabel = null;
+		}
+		if (this.faceLabel == null) {
 			return;
 		}
+		int[] var9 = new int[256];
+		int var10 = 0;
+		for (int var11 = 0; var11 < this.faceCount; var11++) {
+			int var15 = this.faceLabel[var11];
+			var10002 = var9[var15]++;
+			if (var15 > var10) {
+				var10 = var15;
+			}
+		}
+		this.labelFaces = new int[var10 + 1][];
+		for (int var12 = 0; var12 <= var10; var12++) {
+			this.labelFaces[var12] = new int[var9[var12]];
+			var9[var12] = 0;
+		}
+		int var13 = 0;
+		while (var13 < this.faceCount) {
+			int var14 = this.faceLabel[var13];
+			this.labelFaces[var14][var9[var14]++] = var13++;
+		}
+		this.faceLabel = null;
 	}
 
 	@ObfuscatedName("fb.c(II)V")

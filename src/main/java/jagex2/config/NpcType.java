@@ -250,7 +250,7 @@ public class NpcType {
 					var5.recolour(this.recol_s[var12], this.recol_d[var12]);
 				}
 			}
-			var5.createLabelReferences(-591);
+			var5.createLabelReferences();
 			var5.calculateNormals(this.ambient + 64, this.contrast + 850, -30, -50, -30, true);
 			modelCacheStatic.put(var5, this.id);
 		}

@@ -70,7 +70,7 @@ public class SpotAnimEntity extends Entity {
 		} else {
 			Model var3 = new Model(var2, true, false, !this.type.animHasAlpha);
 			if (!this.seqComplete) {
-				var3.createLabelReferences(-591);
+				var3.createLabelReferences();
 				var3.applyTransform(this.type.seq.frames[this.seqFrame]);
 				var3.labelFaces = null;
 				var3.labelVertices = null;
