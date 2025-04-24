@@ -5,12 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("zb")
 public class JString {
 
-	@ObfuscatedName("zb.a")
-	public static int field879 = 98;
-
-	@ObfuscatedName("zb.b")
-	public static int field880 = 354;
-
 	@ObfuscatedName("zb.c")
 	public static char[] builder = new char[12];
 
@@ -38,10 +32,8 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(BJ)Ljava/lang/String;")
-	public static String fromBase37(byte arg0, long arg1) {
-		if (arg0 != 88) {
-			throw new NullPointerException();
-		} else if (arg1 <= 0L || arg1 >= 6582952005840035281L) {
+	public static String fromBase37(long arg1) {
+		if (arg1 <= 0L || arg1 >= 6582952005840035281L) {
 			return "invalid_name";
 		} else if (arg1 % 37L == 0L) {
 			return "invalid_name";
@@ -57,11 +49,8 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(ZLjava/lang/String;)J")
-	public static long hashCode(boolean arg0, String arg1) {
+	public static long hashCode(String arg1) {
 		String var2 = arg1.toUpperCase();
-		if (arg0) {
-			throw new NullPointerException();
-		}
 		long var3 = 0L;
 		for (int var5 = 0; var5 < var2.length(); var5++) {
 			long var6 = var3 * 61L + (long) var2.charAt(var5) - 32L;
@@ -71,18 +60,13 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(IB)Ljava/lang/String;")
-	public static String formatIPv4(int arg0, byte arg1) {
-		if (arg1 != -35) {
-			throw new NullPointerException();
-		}
+	public static String formatIPv4(int arg0) {
 		return (arg0 >> 24 & 0xFF) + "." + (arg0 >> 16 & 0xFF) + "." + (arg0 >> 8 & 0xFF) + "." + (arg0 & 0xFF);
 	}
 
 	@ObfuscatedName("zb.b(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String formatName(boolean arg0, String arg1) {
-		if (!arg0) {
-			throw new NullPointerException();
-		} else if (arg1.length() > 0) {
+	public static String formatName(String arg1) {
+		if (arg1.length() > 0) {
 			char[] var2 = arg1.toCharArray();
 			for (int var3 = 0; var3 < var2.length; var3++) {
 				if (var2[var3] == '_') {
@@ -102,13 +86,9 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.c(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String toSentenceCase(boolean arg0, String arg1) {
+	public static String toSentenceCase(String arg1) {
 		String var2 = arg1.toLowerCase();
 		char[] var3 = var2.toCharArray();
-		if (!arg0) {
-			for (int var4 = 1; var4 > 0; var4++) {
-			}
-		}
 		int var5 = var3.length;
 		boolean var6 = true;
 		for (int var7 = 0; var7 < var5; var7++) {
@@ -125,11 +105,8 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.d(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String censor(boolean arg0, String arg1) {
+	public static String censor(String arg1) {
 		String var2 = "";
-		if (arg0) {
-			throw new NullPointerException();
-		}
 		for (int var3 = 0; var3 < arg1.length(); var3++) {
 			var2 = var2 + "*";
 		}

@@ -5,22 +5,13 @@ import deob.ObfuscatedName;
 @ObfuscatedName("qb")
 public class DoublyLinkList {
 
-	@ObfuscatedName("qb.a")
-	public boolean _flowObfuscator1 = false;
-
-	@ObfuscatedName("qb.b")
-	public int _flowObfuscator2 = 826;
-
 	@ObfuscatedName("qb.c")
 	public DoublyLinkable sentinel = new DoublyLinkable();
 
 	@ObfuscatedName("qb.d")
 	public DoublyLinkable cursor;
 
-	public DoublyLinkList(int arg0) {
-		if (arg0 <= 0) {
-			throw new NullPointerException();
-		}
+	public DoublyLinkList() {
 		this.sentinel.next2 = this.sentinel;
 		this.sentinel.prev2 = this.sentinel;
 	}
@@ -60,11 +51,8 @@ public class DoublyLinkList {
 	}
 
 	@ObfuscatedName("qb.a(I)Lx;")
-	public DoublyLinkable next(int arg0) {
+	public DoublyLinkable next() {
 		DoublyLinkable var2 = this.cursor;
-		while (arg0 >= 0) {
-			this._flowObfuscator1 = !this._flowObfuscator1;
-		}
 		if (this.sentinel == var2) {
 			this.cursor = null;
 			return null;

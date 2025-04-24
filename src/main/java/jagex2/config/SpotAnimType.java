@@ -9,9 +9,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("oc")
 public class SpotAnimType {
 
-	@ObfuscatedName("oc.a")
-	public boolean _flowObfuscator1 = true;
-
 	@ObfuscatedName("oc.b")
 	public static int count;
 
@@ -55,14 +52,11 @@ public class SpotAnimType {
 	public int contrast;
 
 	@ObfuscatedName("oc.p")
-	public static LruCache modelCache = new LruCache(30, 1);
+	public static LruCache modelCache = new LruCache(30);
 
 	@ObfuscatedName("oc.a(Lyb;B)V")
-	public static void unpack(Jagfile arg0, byte arg1) {
-		if (arg1 != 127) {
-			return;
-		}
-		Packet var2 = new Packet((byte) -109, arg0.read("spotanim.dat", null));
+	public static void unpack(Jagfile arg0) {
+		Packet var2 = new Packet(arg0.read("spotanim.dat", null));
 		count = var2.g2();
 		if (types == null) {
 			types = new SpotAnimType[count];
@@ -72,47 +66,42 @@ public class SpotAnimType {
 				types[var3] = new SpotAnimType();
 			}
 			types[var3].id = var3;
-			types[var3].decode(168, var2);
+			types[var3].decode(var2);
 		}
 	}
 
 	@ObfuscatedName("oc.a(ILmb;)V")
-	public void decode(int arg0, Packet arg1) {
-		if (arg0 <= 0) {
-			this._flowObfuscator1 = !this._flowObfuscator1;
-		}
+	public void decode(Packet arg1) {
 		while (true) {
-			while (true) {
-				int var3 = arg1.g1();
-				if (var3 == 0) {
-					return;
+			int var3 = arg1.g1();
+			if (var3 == 0) {
+				return;
+			}
+			if (var3 == 1) {
+				this.model = arg1.g2();
+			} else if (var3 == 2) {
+				this.anim = arg1.g2();
+				if (SeqType.types != null) {
+					this.seq = SeqType.types[this.anim];
 				}
-				if (var3 == 1) {
-					this.model = arg1.g2();
-				} else if (var3 == 2) {
-					this.anim = arg1.g2();
-					if (SeqType.types != null) {
-						this.seq = SeqType.types[this.anim];
-					}
-				} else if (var3 == 3) {
-					this.animHasAlpha = true;
-				} else if (var3 == 4) {
-					this.resizeh = arg1.g2();
-				} else if (var3 == 5) {
-					this.resizev = arg1.g2();
-				} else if (var3 == 6) {
-					this.angle = arg1.g2();
-				} else if (var3 == 7) {
-					this.ambient = arg1.g1();
-				} else if (var3 == 8) {
-					this.contrast = arg1.g1();
-				} else if (var3 >= 40 && var3 < 50) {
-					this.recol_s[var3 - 40] = arg1.g2();
-				} else if (var3 >= 50 && var3 < 60) {
-					this.recol_d[var3 - 50] = arg1.g2();
-				} else {
-					System.out.println("Error unrecognised spotanim config code: " + var3);
-				}
+			} else if (var3 == 3) {
+				this.animHasAlpha = true;
+			} else if (var3 == 4) {
+				this.resizeh = arg1.g2();
+			} else if (var3 == 5) {
+				this.resizev = arg1.g2();
+			} else if (var3 == 6) {
+				this.angle = arg1.g2();
+			} else if (var3 == 7) {
+				this.ambient = arg1.g1();
+			} else if (var3 == 8) {
+				this.contrast = arg1.g1();
+			} else if (var3 >= 40 && var3 < 50) {
+				this.recol_s[var3 - 40] = arg1.g2();
+			} else if (var3 >= 50 && var3 < 60) {
+				this.recol_d[var3 - 50] = arg1.g2();
+			} else {
+				System.out.println("Error unrecognised spotanim config code: " + var3);
 			}
 		}
 	}
@@ -123,7 +112,7 @@ public class SpotAnimType {
 		if (var1 != null) {
 			return var1;
 		}
-		Model var2 = Model.tryGet(this.model, -404);
+		Model var2 = Model.tryGet(this.model);
 		if (var2 == null) {
 			return null;
 		}
@@ -132,7 +121,7 @@ public class SpotAnimType {
 				var2.recolour(this.recol_s[var3], this.recol_d[var3]);
 			}
 		}
-		modelCache.put(var2, (long) this.id, 39399);
+		modelCache.put(var2, (long) this.id);
 		return var2;
 	}
 }

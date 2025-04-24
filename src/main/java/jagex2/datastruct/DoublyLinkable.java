@@ -11,9 +11,6 @@ public class DoublyLinkable extends Linkable {
 	@ObfuscatedName("x.g")
 	public DoublyLinkable prev2;
 
-	@ObfuscatedName("x.h")
-	public static boolean _flowObfuscator3;
-
 	@ObfuscatedName("x.b()V")
 	public void unlink2() {
 		if (this.prev2 != null) {

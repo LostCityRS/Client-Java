@@ -5,9 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("v")
 public class Linkable {
 
-	@ObfuscatedName("v.a")
-	public int _flowObfuscator1 = 3;
-
 	@ObfuscatedName("v.b")
 	public long key;
 
@@ -16,9 +13,6 @@ public class Linkable {
 
 	@ObfuscatedName("v.d")
 	public Linkable prev;
-
-	@ObfuscatedName("v.e")
-	public static int _flowObfuscator2;
 
 	@ObfuscatedName("v.a()V")
 	public void unlink() {

@@ -7,24 +7,6 @@ import jagex2.io.Jagfile;
 @ObfuscatedName("kb")
 public class Pix8 extends Pix2D {
 
-	@ObfuscatedName("kb.A")
-	public int _flowObfuscator12 = 2;
-
-	@ObfuscatedName("kb.B")
-	public byte _flowObfuscator13 = 9;
-
-	@ObfuscatedName("kb.C")
-	public boolean _flowObfuscator14 = false;
-
-	@ObfuscatedName("kb.D")
-	public int _flowObfuscator15 = 35546;
-
-	@ObfuscatedName("kb.E")
-	public boolean _flowObfuscator16 = true;
-
-	@ObfuscatedName("kb.F")
-	public boolean _flowObfuscator17 = true;
-
 	@ObfuscatedName("kb.M")
 	public int width;
 
@@ -50,8 +32,8 @@ public class Pix8 extends Pix2D {
 	public byte[] pixels;
 
 	public Pix8(Jagfile arg0, String arg1, int arg2) {
-		Packet var4 = new Packet((byte) -109, arg0.read(arg1 + ".dat", null));
-		Packet var5 = new Packet((byte) -109, arg0.read("index.dat", null));
+		Packet var4 = new Packet(arg0.read(arg1 + ".dat", null));
+		Packet var5 = new Packet(arg0.read("index.dat", null));
 		var5.pos = var4.g2();
 		this.width = var5.g2();
 		this.height = var5.g2();
@@ -86,7 +68,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("kb.a(I)V")
-	public void shrink(int arg0) {
+	public void shrink() {
 		this.width /= 2;
 		this.height /= 2;
 		byte[] var2 = new byte[this.height * this.width];
@@ -98,16 +80,13 @@ public class Pix8 extends Pix2D {
 		}
 		this.pixels = var2;
 		this.cropRight = this.width;
-		if (arg0 != 3206) {
-			this._flowObfuscator16 = !this._flowObfuscator16;
-		}
 		this.cropBottom = this.height;
 		this.cropLeft = 0;
 		this.cropTop = 0;
 	}
 
 	@ObfuscatedName("kb.b(Z)V")
-	public void crop(boolean arg0) {
+	public void crop() {
 		if (this.width == this.cropRight && this.height == this.cropBottom) {
 			return;
 		}
@@ -118,10 +97,6 @@ public class Pix8 extends Pix2D {
 				var2[(this.cropTop + var4) * this.width + this.cropLeft + var6] = this.pixels[var3++];
 			}
 		}
-		if (arg0) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
 		this.pixels = var2;
 		this.cropRight = this.width;
 		this.cropBottom = this.height;
@@ -130,7 +105,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("kb.b(I)V")
-	public void flipHorizontally(int arg0) {
+	public void flipHorizontally() {
 		byte[] var2 = new byte[this.cropBottom * this.cropRight];
 		int var3 = 0;
 		for (int var4 = 0; var4 < this.cropBottom; var4++) {
@@ -138,18 +113,13 @@ public class Pix8 extends Pix2D {
 				var2[var3++] = this.pixels[this.cropRight * var4 + var5];
 			}
 		}
-		if (arg0 >= 4 && arg0 <= 4) {
-			this.pixels = var2;
-			this.cropLeft = this.width - this.cropRight - this.cropLeft;
-		}
+		this.pixels = var2;
+		this.cropLeft = this.width - this.cropRight - this.cropLeft;
 	}
 
 	@ObfuscatedName("kb.c(I)V")
-	public void flipVertically(int arg0) {
+	public void flipVertically() {
 		byte[] var2 = new byte[this.cropBottom * this.cropRight];
-		if (this._flowObfuscator15 != arg0) {
-			this._flowObfuscator12 = 314;
-		}
 		int var3 = 0;
 		for (int var4 = this.cropBottom - 1; var4 >= 0; var4--) {
 			for (int var5 = 0; var5 < this.cropRight; var5++) {
@@ -161,7 +131,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("kb.a(IIII)V")
-	public void translate(int arg0, int arg1, int arg2, int arg3) {
+	public void translate(int arg0, int arg1, int arg3) {
 		for (int var5 = 0; var5 < this.palette.length; var5++) {
 			int var6 = this.palette[var5] >> 16 & 0xFF;
 			int var7 = arg0 + var6;
@@ -186,13 +156,10 @@ public class Pix8 extends Pix2D {
 			}
 			this.palette[var5] = (var7 << 16) + (var9 << 8) + var11;
 		}
-		if (arg2 == 8) {
-			;
-		}
 	}
 
 	@ObfuscatedName("kb.a(BII)V")
-	public void draw(byte arg0, int arg1, int arg2) {
+	public void draw(int arg1, int arg2) {
 		int var4 = this.cropLeft + arg1;
 		int var5 = this.cropTop + arg2;
 		int var6 = Pix2D.width2d * var5 + var4;
@@ -227,19 +194,13 @@ public class Pix8 extends Pix2D {
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			this.copyPixels(-228, var11, var8, var10, Pix2D.data, var6, this.pixels, this.palette, var9, var7);
-			if (this._flowObfuscator13 == arg0) {
-				boolean var15 = false;
-			}
+			this.copyPixels(var11, var8, var10, Pix2D.data, var6, this.pixels, this.palette, var9, var7);
 		}
 	}
 
 	@ObfuscatedName("kb.a(IIII[II[B[III)V")
-	public void copyPixels(int arg0, int arg1, int arg2, int arg3, int[] arg4, int arg5, byte[] arg6, int[] arg7, int arg8, int arg9) {
+	public void copyPixels(int arg1, int arg2, int arg3, int[] arg4, int arg5, byte[] arg6, int[] arg7, int arg8, int arg9) {
 		int var11 = -(arg8 >> 2);
-		while (arg0 >= 0) {
-			this._flowObfuscator17 = !this._flowObfuscator17;
-		}
 		int var12 = -(arg8 & 0x3);
 		for (int var13 = -arg2; var13 < 0; var13++) {
 			for (int var14 = var11; var14 < 0; var14++) {

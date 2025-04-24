@@ -6,12 +6,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("h")
 public class AnimFrame {
 
-	@ObfuscatedName("h.a")
-	public static int _flowObfuscator1 = 9;
-
-	@ObfuscatedName("h.b")
-	public static boolean _flowObfuscator2 = true;
-
 	@ObfuscatedName("h.c")
 	public static AnimFrame[] instances;
 
@@ -43,29 +37,29 @@ public class AnimFrame {
 
 	@ObfuscatedName("h.a(I[B)V")
 	public static void unpack(int arg0, byte[] arg1) {
-		Packet var2 = new Packet((byte) -109, arg1);
+		Packet var2 = new Packet(arg1);
 		var2.pos = arg1.length - 8;
 		int var3 = var2.g2();
 		int var4 = var2.g2();
 		int var5 = var2.g2();
 		int var6 = var2.g2();
 		byte var7 = 0;
-		Packet var8 = new Packet((byte) -109, arg1);
+		Packet var8 = new Packet(arg1);
 		int var9 = 88 / arg0;
 		var8.pos = var7;
 		int var10 = var3 + 2 + var7;
-		Packet var11 = new Packet((byte) -109, arg1);
+		Packet var11 = new Packet(arg1);
 		var11.pos = var10;
 		int var12 = var4 + var10;
-		Packet var13 = new Packet((byte) -109, arg1);
+		Packet var13 = new Packet(arg1);
 		var13.pos = var12;
 		int var14 = var5 + var12;
-		Packet var15 = new Packet((byte) -109, arg1);
+		Packet var15 = new Packet(arg1);
 		var15.pos = var14;
 		int var16 = var6 + var14;
-		Packet var17 = new Packet((byte) -109, arg1);
+		Packet var17 = new Packet(arg1);
 		var17.pos = var16;
-		AnimBase var18 = new AnimBase(var17, _flowObfuscator1);
+		AnimBase var18 = new AnimBase(var17);
 		int var19 = var8.g2();
 		int[] var20 = new int[500];
 		int[] var21 = new int[500];
@@ -133,16 +127,12 @@ public class AnimFrame {
 	}
 
 	@ObfuscatedName("h.a(B)V")
-	public static void unload(byte arg0) {
-		if (arg0 == 9) {
-			instances = null;
-		}
+	public static void unload() {
+		instances = null;
 	}
 
 	@ObfuscatedName("h.a(II)Lh;")
-	public static AnimFrame get(int arg0, int arg1) {
-		while (arg1 >= 0) {
-		}
+	public static AnimFrame get(int arg0) {
 		if (instances == null) {
 			return null;
 		} else {

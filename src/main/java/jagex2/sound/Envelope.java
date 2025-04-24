@@ -6,9 +6,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("bc")
 public class Envelope {
 
-	@ObfuscatedName("bc.a")
-	public boolean field887 = true;
-
 	@ObfuscatedName("bc.b")
 	public int length;
 
@@ -43,11 +40,7 @@ public class Envelope {
 	public int ticks;
 
 	@ObfuscatedName("bc.a(ILmb;)V")
-	public final void unpack(int arg0, Packet arg1) {
-		if (arg0 <= 0) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
+	public final void unpack(Packet arg1) {
 		this.form = arg1.g1();
 		this.start = arg1.g4();
 		this.end = arg1.g4();
@@ -61,19 +54,16 @@ public class Envelope {
 	}
 
 	@ObfuscatedName("bc.a(B)V")
-	public final void reset(byte arg0) {
+	public final void reset() {
 		this.threshold = 0;
 		this.position = 0;
 		this.delta = 0;
-		if (arg0 != 3) {
-			this.field887 = !this.field887;
-		}
 		this.amplitude = 0;
 		this.ticks = 0;
 	}
 
 	@ObfuscatedName("bc.a(II)I")
-	public final int evaluate(int arg0, int arg1) {
+	public final int evaluate(int arg0) {
 		if (this.ticks >= this.threshold) {
 			this.amplitude = this.shapePeak[this.position++] << 15;
 			if (this.position >= this.length) {
@@ -85,11 +75,7 @@ public class Envelope {
 			}
 		}
 		this.amplitude += this.delta;
-		if (arg1 == 6) {
-			this.ticks++;
-			return this.amplitude - this.delta >> 15;
-		} else {
-			return 2;
-		}
+		this.ticks++;
+		return this.amplitude - this.delta >> 15;
 	}
 }

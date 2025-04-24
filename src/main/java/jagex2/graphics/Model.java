@@ -10,38 +10,11 @@ import jagex2.io.Packet;
 @ObfuscatedName("fb")
 public class Model extends Entity {
 
-	@ObfuscatedName("fb.l")
-	public boolean field528 = true;
-
-	@ObfuscatedName("fb.m")
-	public int field529 = 855;
-
-	@ObfuscatedName("fb.n")
-	public int field530;
-
-	@ObfuscatedName("fb.o")
-	public byte field531 = 3;
-
-	@ObfuscatedName("fb.p")
-	public int field532 = -796;
-
-	@ObfuscatedName("fb.q")
-	public boolean field533 = true;
-
-	@ObfuscatedName("fb.r")
-	public byte field534 = 4;
-
-	@ObfuscatedName("fb.s")
-	public boolean field535 = false;
-
-	@ObfuscatedName("fb.t")
-	public static boolean field536 = true;
-
 	@ObfuscatedName("fb.u")
 	public static int loaded;
 
 	@ObfuscatedName("fb.v")
-	public static Model empty = new Model(104);
+	public static Model empty = new Model();
 
 	@ObfuscatedName("fb.w")
 	public static int[] tmpVertexX = new int[2000];
@@ -257,7 +230,7 @@ public class Model extends Entity {
 	public static boolean checkHover;
 
 	@ObfuscatedName("fb.a(B)V")
-	public static void unload(byte arg0) {
+	public static void unload() {
 		meta = null;
 		faceClippedX = null;
 		faceNearClipped = null;
@@ -273,9 +246,6 @@ public class Model extends Entity {
 		tmpPriorityFaces = null;
 		tmpPriority10FaceDepth = null;
 		tmpPriority11FaceDepth = null;
-		if (arg0 == 9) {
-			boolean var1 = false;
-		}
 		tmpPriorityDepthSum = null;
 		sinTable = null;
 		cosTable = null;
@@ -290,7 +260,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(IZ[B)V")
-	public static void unpack(int arg0, boolean arg1, byte[] arg2) {
+	public static void unpack(int arg0, byte[] arg2) {
 		if (arg2 == null) {
 			Metadata var3 = meta[arg0] = new Metadata();
 			var3.vertexCount = 0;
@@ -298,7 +268,7 @@ public class Model extends Entity {
 			var3.texturedFaceCount = 0;
 			return;
 		}
-		Packet var4 = new Packet((byte) -109, arg2);
+		Packet var4 = new Packet(arg2);
 		var4.pos = arg2.length - 18;
 		Metadata var5 = meta[arg0] = new Metadata();
 		var5.data = arg2;
@@ -309,9 +279,6 @@ public class Model extends Entity {
 		int var7 = var4.g1();
 		int var8 = var4.g1();
 		int var9 = var4.g1();
-		if (arg1) {
-			field536 = true;
-		}
 		int var10 = var4.g1();
 		int var11 = var4.g2();
 		int var12 = var4.g2();
@@ -367,27 +334,21 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(II)V")
-	public static void unload(int arg0, int arg1) {
+	public static void unload(int arg1) {
 		meta[arg1] = null;
-		while (arg0 >= 0) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
 	}
 
 	@ObfuscatedName("fb.b(II)Lfb;")
-	public static Model tryGet(int arg0, int arg1) {
+	public static Model tryGet(int arg0) {
 		if (meta == null) {
 			return null;
 		}
 		Metadata var2 = meta[arg0];
-		while (arg1 >= 0) {
-		}
 		if (var2 == null) {
 			ondemand.requestModel(arg0);
 			return null;
 		} else {
-			return new Model(arg0, (byte) 3);
+			return new Model(arg0);
 		}
 	}
 
@@ -405,13 +366,10 @@ public class Model extends Entity {
 		}
 	}
 
-	public Model(int arg0) {
-		if (arg0 <= 0) {
-			throw new NullPointerException();
-		}
+	public Model() {
 	}
 
-	public Model(int arg0, byte arg1) {
+	public Model(int arg0) {
 		loaded++;
 		Metadata var3 = meta[arg0];
 		this.vertexCount = var3.vertexCount;
@@ -444,15 +402,15 @@ public class Model extends Entity {
 			this.faceLabel = new int[this.faceCount];
 		}
 		this.faceColour = new int[this.faceCount];
-		Packet var4 = new Packet((byte) -109, var3.data);
+		Packet var4 = new Packet(var3.data);
 		var4.pos = var3.vertexFlagsOffset;
-		Packet var5 = new Packet((byte) -109, var3.data);
+		Packet var5 = new Packet(var3.data);
 		var5.pos = var3.vertexXOffset;
-		Packet var6 = new Packet((byte) -109, var3.data);
+		Packet var6 = new Packet(var3.data);
 		var6.pos = var3.vertexYOffset;
-		Packet var7 = new Packet((byte) -109, var3.data);
+		Packet var7 = new Packet(var3.data);
 		var7.pos = var3.vertexZOffset;
-		Packet var8 = new Packet((byte) -109, var3.data);
+		Packet var8 = new Packet(var3.data);
 		var8.pos = var3.vertexLabelsOffset;
 		int var9 = 0;
 		int var10 = 0;
@@ -548,9 +506,6 @@ public class Model extends Entity {
 			}
 		}
 		var4.pos = var3.faceTextureAxisOffset;
-		if (this.field531 != arg1) {
-			throw new NullPointerException();
-		}
 		for (int var19 = 0; var19 < this.texturedFaceCount; var19++) {
 			this.texturedVertexA[var19] = var4.g2();
 			this.texturedVertexB[var19] = var4.g2();
@@ -558,7 +513,7 @@ public class Model extends Entity {
 		}
 	}
 
-	public Model(int arg0, int arg1, Model[] arg2) {
+	public Model(int arg0, Model[] arg2) {
 		loaded++;
 		boolean var4 = false;
 		boolean var5 = false;
@@ -612,9 +567,6 @@ public class Model extends Entity {
 			this.faceLabel = new int[this.faceCount];
 		}
 		this.faceColour = new int[this.faceCount];
-		if (arg1 <= 0) {
-			this.field529 = 84;
-		}
 		this.vertexCount = 0;
 		this.faceCount = 0;
 		this.texturedFaceCount = 0;
@@ -662,7 +614,7 @@ public class Model extends Entity {
 		}
 	}
 
-	public Model(int arg0, boolean arg1, int arg2, Model[] arg3) {
+	public Model(boolean arg1, int arg2, Model[] arg3) {
 		loaded++;
 		boolean var5 = false;
 		boolean var6 = false;
@@ -696,9 +648,6 @@ public class Model extends Entity {
 		this.vertexX = new int[this.vertexCount];
 		this.vertexY = new int[this.vertexCount];
 		this.vertexZ = new int[this.vertexCount];
-		if (arg0 < this.field530 || arg0 > this.field530) {
-			field536 = true;
-		}
 		this.faceVertexA = new int[this.faceCount];
 		this.faceVertexB = new int[this.faceCount];
 		this.faceVertexC = new int[this.faceCount];
@@ -774,10 +723,10 @@ public class Model extends Entity {
 				}
 			}
 		}
-		this.calculateBoundsCylinder(true);
+		this.calculateBoundsCylinder();
 	}
 
-	public Model(Model arg0, boolean arg1, boolean arg2, boolean arg3, int arg4) {
+	public Model(Model arg0, boolean arg1, boolean arg2, boolean arg3) {
 		loaded++;
 		this.vertexCount = arg0.vertexCount;
 		this.faceCount = arg0.faceCount;
@@ -821,10 +770,6 @@ public class Model extends Entity {
 		this.vertexLabel = arg0.vertexLabel;
 		this.faceLabel = arg0.faceLabel;
 		this.faceInfo = arg0.faceInfo;
-		while (arg4 >= 0) {
-			for (int var10 = 1; var10 > 0; var10++) {
-			}
-		}
 		this.faceVertexA = arg0.faceVertexA;
 		this.faceVertexB = arg0.faceVertexB;
 		this.faceVertexC = arg0.faceVertexC;
@@ -835,10 +780,7 @@ public class Model extends Entity {
 		this.texturedVertexC = arg0.texturedVertexC;
 	}
 
-	public Model(int arg0, boolean arg1, boolean arg2, Model arg3) {
-		if (arg0 < this.field530 || arg0 > this.field530) {
-			this.field529 = 466;
-		}
+	public Model(boolean arg1, boolean arg2, Model arg3) {
 		loaded++;
 		this.vertexCount = arg3.vertexCount;
 		this.faceCount = arg3.faceCount;
@@ -910,7 +852,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(ZLfb;Z)V")
-	public void set(boolean arg0, Model arg1, boolean arg2) {
+	public void set(boolean arg0, Model arg1) {
 		this.vertexCount = arg1.vertexCount;
 		this.faceCount = arg1.faceCount;
 		this.texturedFaceCount = arg1.texturedFaceCount;
@@ -951,9 +893,6 @@ public class Model extends Entity {
 		this.labelFaces = arg1.labelFaces;
 		this.labelVertices = arg1.labelVertices;
 		this.faceVertexA = arg1.faceVertexA;
-		if (!arg2) {
-			this.field529 = -254;
-		}
 		this.faceVertexB = arg1.faceVertexB;
 		this.faceVertexC = arg1.faceVertexC;
 		this.faceColourA = arg1.faceColourA;
@@ -989,7 +928,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(Z)V")
-	public void calculateBoundsCylinder(boolean arg0) {
+	public void calculateBoundsCylinder() {
 		super.minY = 0;
 		this.radius = 0;
 		this.maxY = 0;
@@ -1009,14 +948,12 @@ public class Model extends Entity {
 			}
 		}
 		this.radius = (int) (Math.sqrt((double) this.radius) + 0.99D);
-		if (arg0) {
-			this.minDepth = (int) (Math.sqrt((double) (this.radius * this.radius + super.minY * super.minY)) + 0.99D);
-			this.maxDepth = this.minDepth + (int) (Math.sqrt((double) (this.maxY * this.maxY + this.radius * this.radius)) + 0.99D);
-		}
+		this.minDepth = (int) (Math.sqrt((double) (this.radius * this.radius + super.minY * super.minY)) + 0.99D);
+		this.maxDepth = this.minDepth + (int) (Math.sqrt((double) (this.maxY * this.maxY + this.radius * this.radius)) + 0.99D);
 	}
 
 	@ObfuscatedName("fb.b(B)V")
-	public void calculateBoundsY(byte arg0) {
+	public void calculateBoundsY() {
 		super.minY = 0;
 		this.maxY = 0;
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
@@ -1028,16 +965,12 @@ public class Model extends Entity {
 				this.maxY = var4;
 			}
 		}
-		if (arg0 != 6) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
 		this.minDepth = (int) (Math.sqrt((double) (this.radius * this.radius + super.minY * super.minY)) + 0.99D);
 		this.maxDepth = this.minDepth + (int) (Math.sqrt((double) (this.maxY * this.maxY + this.radius * this.radius)) + 0.99D);
 	}
 
 	@ObfuscatedName("fb.c(I)V")
-	public void calculateBoundsAABB(int arg0) {
+	public void calculateBoundsAABB() {
 		super.minY = 0;
 		this.radius = 0;
 		this.maxY = 0;
@@ -1073,9 +1006,6 @@ public class Model extends Entity {
 			}
 		}
 		this.radius = (int) Math.sqrt((double) this.radius);
-		while (arg0 >= 0) {
-			this.field535 = !this.field535;
-		}
 		this.minDepth = (int) Math.sqrt((double) (this.radius * this.radius + super.minY * super.minY));
 		this.maxDepth = this.minDepth + (int) Math.sqrt((double) (this.maxY * this.maxY + this.radius * this.radius));
 	}
@@ -1143,19 +1073,16 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.c(II)V")
-	public void applyTransform(int arg0, int arg1) {
+	public void applyTransform(int arg0) {
 		if (this.labelVertices == null || arg0 == -1) {
 			return;
 		}
-		AnimFrame var3 = AnimFrame.get(arg0, -404);
+		AnimFrame var3 = AnimFrame.get(arg0);
 		if (var3 == null) {
 			return;
 		}
 		AnimBase var4 = var3.base;
 		baseX = 0;
-		if (arg1 != 13056) {
-			field536 = true;
-		}
 		baseY = 0;
 		baseZ = 0;
 		for (int var5 = 0; var5 < var3.length; var5++) {
@@ -1165,24 +1092,21 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(BII[I)V")
-	public void applyTransforms(byte arg0, int arg1, int arg2, int[] arg3) {
+	public void applyTransforms(int arg1, int arg2, int[] arg3) {
 		if (arg1 == -1) {
 			return;
 		}
 		if (arg3 == null || arg2 == -1) {
-			this.applyTransform(arg1, 13056);
+			this.applyTransform(arg1);
 			return;
 		}
-		AnimFrame var5 = AnimFrame.get(arg1, -404);
-		if (arg0 != 74) {
-			this.field529 = -174;
-		}
+		AnimFrame var5 = AnimFrame.get(arg1);
 		if (var5 == null) {
 			return;
 		}
-		AnimFrame var6 = AnimFrame.get(arg2, -404);
+		AnimFrame var6 = AnimFrame.get(arg2);
 		if (var6 == null) {
-			this.applyTransform(arg1, 13056);
+			this.applyTransform(arg1);
 			return;
 		}
 		AnimBase var7 = var5.base;
@@ -1341,22 +1265,16 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.c(B)V")
-	public void rotateY90(byte arg0) {
+	public void rotateY90() {
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
 			int var3 = this.vertexX[var2];
 			this.vertexX[var2] = this.vertexZ[var2];
 			this.vertexZ[var2] = -var3;
 		}
-		if (arg0 == 3) {
-			;
-		}
 	}
 
 	@ObfuscatedName("fb.d(II)V")
-	public void rotateX(int arg0, int arg1) {
-		if (arg0 != 2) {
-			return;
-		}
+	public void rotateX(int arg1) {
 		int var3 = sinTable[arg1];
 		int var4 = cosTable[arg1];
 		for (int var5 = 0; var5 < this.vertexCount; var5++) {
@@ -1367,10 +1285,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(IIIZ)V")
-	public void translate(int arg0, int arg1, int arg2, boolean arg3) {
-		if (arg3) {
-			this.field535 = !this.field535;
-		}
+	public void translate(int arg0, int arg1, int arg2) {
 		for (int var5 = 0; var5 < this.vertexCount; var5++) {
 			this.vertexX[var5] += arg1;
 			this.vertexY[var5] += arg0;
@@ -1388,10 +1303,7 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.e(I)V")
-	public void rotateY180(int arg0) {
-		if (arg0 < 4 || arg0 > 4) {
-			this.field528 = !this.field528;
-		}
+	public void rotateY180() {
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
 			this.vertexZ[var2] = -this.vertexZ[var2];
 		}
@@ -1403,14 +1315,11 @@ public class Model extends Entity {
 	}
 
 	@ObfuscatedName("fb.a(IIII)V")
-	public void scale(int arg0, int arg1, int arg2, int arg3) {
+	public void scale(int arg0, int arg1, int arg3) {
 		for (int var5 = 0; var5 < this.vertexCount; var5++) {
 			this.vertexX[var5] = this.vertexX[var5] * arg3 / 128;
 			this.vertexY[var5] = this.vertexY[var5] * arg0 / 128;
 			this.vertexZ[var5] = this.vertexZ[var5] * arg1 / 128;
-		}
-		if (arg2 < 4 || arg2 > 4) {
-			this.field532 = 60;
 		}
 	}
 
@@ -1488,9 +1397,9 @@ public class Model extends Entity {
 			}
 		}
 		if (arg5) {
-			this.calculateBoundsCylinder(true);
+			this.calculateBoundsCylinder();
 		} else {
-			this.calculateBoundsAABB(-890);
+			this.calculateBoundsAABB();
 		}
 	}
 

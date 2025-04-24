@@ -6,12 +6,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("dc")
 public class Tone {
 
-	@ObfuscatedName("dc.a")
-	public boolean field909 = true;
-
-	@ObfuscatedName("dc.b")
-	public static int field910 = 6;
-
 	@ObfuscatedName("dc.c")
 	public Envelope frequencyBase;
 
@@ -81,9 +75,6 @@ public class Tone {
 	@ObfuscatedName("dc.y")
 	public static int[] tmpStarts = new int[5];
 
-	@ObfuscatedName("dc.z")
-	public static int field934;
-
 	@ObfuscatedName("dc.a()V")
 	public static final void init() {
 		noise = new int[32768];
@@ -110,14 +101,14 @@ public class Tone {
 			return buffer;
 		}
 		double var4 = (double) arg0 / ((double) arg1 + 0.0D);
-		this.frequencyBase.reset((byte) 3);
-		this.amplitudeBase.reset((byte) 3);
+		this.frequencyBase.reset();
+		this.amplitudeBase.reset();
 		int var6 = 0;
 		int var7 = 0;
 		int var8 = 0;
 		if (this.frequencyModRate != null) {
-			this.frequencyModRate.reset((byte) 3);
-			this.frequencyModRange.reset((byte) 3);
+			this.frequencyModRate.reset();
+			this.frequencyModRange.reset();
 			var6 = (int) ((double) (this.frequencyModRate.end - this.frequencyModRate.start) * 32.768D / var4);
 			var7 = (int) ((double) this.frequencyModRate.start * 32.768D / var4);
 		}
@@ -125,8 +116,8 @@ public class Tone {
 		int var10 = 0;
 		int var11 = 0;
 		if (this.amplitudeModRate != null) {
-			this.amplitudeModRate.reset((byte) 3);
-			this.amplitudeModRange.reset((byte) 3);
+			this.amplitudeModRate.reset();
+			this.amplitudeModRange.reset();
 			var9 = (int) ((double) (this.amplitudeModRate.end - this.amplitudeModRate.start) * 32.768D / var4);
 			var10 = (int) ((double) this.amplitudeModRate.start * 32.768D / var4);
 		}
@@ -140,39 +131,39 @@ public class Tone {
 			}
 		}
 		for (int var13 = 0; var13 < arg0; var13++) {
-			int var24 = this.frequencyBase.evaluate(arg0, field910);
-			int var25 = this.amplitudeBase.evaluate(arg0, field910);
+			int var24 = this.frequencyBase.evaluate(arg0);
+			int var25 = this.amplitudeBase.evaluate(arg0);
 			if (this.frequencyModRate != null) {
-				int var26 = this.frequencyModRate.evaluate(arg0, field910);
-				int var27 = this.frequencyModRange.evaluate(arg0, field910);
-				var24 += this.generate(this.frequencyModRate.form, var27, var8, 2) >> 1;
+				int var26 = this.frequencyModRate.evaluate(arg0);
+				int var27 = this.frequencyModRange.evaluate(arg0);
+				var24 += this.generate(this.frequencyModRate.form, var27, var8) >> 1;
 				var8 += (var6 * var26 >> 16) + var7;
 			}
 			if (this.amplitudeModRate != null) {
-				int var28 = this.amplitudeModRate.evaluate(arg0, field910);
-				int var29 = this.amplitudeModRange.evaluate(arg0, field910);
-				var25 = var25 * ((this.generate(this.amplitudeModRate.form, var29, var11, 2) >> 1) + 32768) >> 15;
+				int var28 = this.amplitudeModRate.evaluate(arg0);
+				int var29 = this.amplitudeModRange.evaluate(arg0);
+				var25 = var25 * ((this.generate(this.amplitudeModRate.form, var29, var11) >> 1) + 32768) >> 15;
 				var11 += (var9 * var28 >> 16) + var10;
 			}
 			for (int var30 = 0; var30 < 5; var30++) {
 				if (this.harmonicVolume[var30] != 0) {
 					int var31 = tmpDelays[var30] + var13;
 					if (var31 < arg0) {
-						buffer[var31] += this.generate(this.frequencyBase.form, tmpVolumes[var30] * var25 >> 15, tmpPhases[var30], 2);
+						buffer[var31] += this.generate(this.frequencyBase.form, tmpVolumes[var30] * var25 >> 15, tmpPhases[var30]);
 						tmpPhases[var30] += (tmpSemitones[var30] * var24 >> 16) + tmpStarts[var30];
 					}
 				}
 			}
 		}
 		if (this.release != null) {
-			this.release.reset((byte) 3);
-			this.attack.reset((byte) 3);
+			this.release.reset();
+			this.attack.reset();
 			int var14 = 0;
 			boolean var15 = false;
 			boolean var16 = true;
 			for (int var17 = 0; var17 < arg0; var17++) {
-				int var18 = this.release.evaluate(arg0, field910);
-				int var19 = this.attack.evaluate(arg0, field910);
+				int var18 = this.release.evaluate(arg0);
+				int var19 = this.attack.evaluate(arg0);
 				int var20;
 				if (var16) {
 					var20 = ((this.release.end - this.release.start) * var18 >> 8) + this.release.start;
@@ -207,10 +198,7 @@ public class Tone {
 	}
 
 	@ObfuscatedName("dc.a(IIII)I")
-	public final int generate(int arg0, int arg1, int arg2, int arg3) {
-		if (arg3 != 2) {
-			this.field909 = !this.field909;
-		}
+	public final int generate(int arg0, int arg1, int arg2) {
 		if (arg0 == 1) {
 			return (arg2 & 0x7FFF) < 16384 ? arg1 : -arg1;
 		} else if (arg0 == 2) {
@@ -225,35 +213,34 @@ public class Tone {
 	}
 
 	@ObfuscatedName("dc.a(ILmb;)V")
-	public final void unpack(int arg0, Packet arg1) {
+	public final void unpack(Packet arg1) {
 		this.frequencyBase = new Envelope();
-		this.frequencyBase.unpack(168, arg1);
+		this.frequencyBase.unpack(arg1);
 		this.amplitudeBase = new Envelope();
-		this.amplitudeBase.unpack(168, arg1);
+		this.amplitudeBase.unpack(arg1);
 		int var3 = arg1.g1();
 		if (var3 != 0) {
 			arg1.pos--;
 			this.frequencyModRate = new Envelope();
-			this.frequencyModRate.unpack(168, arg1);
+			this.frequencyModRate.unpack(arg1);
 			this.frequencyModRange = new Envelope();
-			this.frequencyModRange.unpack(168, arg1);
+			this.frequencyModRange.unpack(arg1);
 		}
 		int var4 = arg1.g1();
-		int var5 = 82 / arg0;
 		if (var4 != 0) {
 			arg1.pos--;
 			this.amplitudeModRate = new Envelope();
-			this.amplitudeModRate.unpack(168, arg1);
+			this.amplitudeModRate.unpack(arg1);
 			this.amplitudeModRange = new Envelope();
-			this.amplitudeModRange.unpack(168, arg1);
+			this.amplitudeModRange.unpack(arg1);
 		}
 		int var6 = arg1.g1();
 		if (var6 != 0) {
 			arg1.pos--;
 			this.release = new Envelope();
-			this.release.unpack(168, arg1);
+			this.release.unpack(arg1);
 			this.attack = new Envelope();
-			this.attack.unpack(168, arg1);
+			this.attack.unpack(arg1);
 		}
 		for (int var7 = 0; var7 < 10; var7++) {
 			int var8 = arg1.gsmarts();

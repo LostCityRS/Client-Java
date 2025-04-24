@@ -13,15 +13,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("d")
 public class Component {
 
-	@ObfuscatedName("d.a")
-	public boolean _flowObfuscator1 = false;
-
-	@ObfuscatedName("d.b")
-	public static int _flowObfuscator2;
-
-	@ObfuscatedName("d.c")
-	public boolean _flowObfuscator3 = true;
-
 	@ObfuscatedName("d.d")
 	public static Component[] types;
 
@@ -125,7 +116,7 @@ public class Component {
 	public String option;
 
 	@ObfuscatedName("d.lb")
-	public static LruCache modelCache = new LruCache(30, 1);
+	public static LruCache modelCache = new LruCache(30);
 
 	@ObfuscatedName("d.mb")
 	public static LruCache imageCache;
@@ -209,12 +200,9 @@ public class Component {
 	public String[] iop;
 
 	@ObfuscatedName("d.a(Lyb;ILyb;[Llb;)V")
-	public static void unpack(Jagfile arg0, int arg1, Jagfile arg2, PixFont[] arg3) {
-		imageCache = new LruCache(50000, 1);
-		Packet var4 = new Packet((byte) -109, arg0.read("data", null));
-		if (arg1 != 0) {
-			return;
-		}
+	public static void unpack(Jagfile arg0, Jagfile arg2, PixFont[] arg3) {
+		imageCache = new LruCache(50000);
+		Packet var4 = new Packet(arg0.read("data", null));
 		int var5 = -1;
 		int var6 = var4.g2();
 		types = new Component[var6];
@@ -301,7 +289,7 @@ public class Component {
 							String var20 = var4.gjstr();
 							if (arg2 != null && var20.length() > 0) {
 								int var21 = var20.lastIndexOf(",");
-								var8.invSlotGraphic[var17] = getImage(Integer.parseInt(var20.substring(var21 + 1)), arg2, -18993, var20.substring(0, var21));
+								var8.invSlotGraphic[var17] = getImage(Integer.parseInt(var20.substring(var21 + 1)), arg2, var20.substring(0, var21));
 							}
 						}
 					}
@@ -339,12 +327,12 @@ public class Component {
 					String var23 = var4.gjstr();
 					if (arg2 != null && var23.length() > 0) {
 						int var24 = var23.lastIndexOf(",");
-						var8.graphic = getImage(Integer.parseInt(var23.substring(var24 + 1)), arg2, -18993, var23.substring(0, var24));
+						var8.graphic = getImage(Integer.parseInt(var23.substring(var24 + 1)), arg2, var23.substring(0, var24));
 					}
 					String var25 = var4.gjstr();
 					if (arg2 != null && var25.length() > 0) {
 						int var26 = var25.lastIndexOf(",");
-						var8.activeGraphic = getImage(Integer.parseInt(var25.substring(var26 + 1)), arg2, -18993, var25.substring(0, var26));
+						var8.activeGraphic = getImage(Integer.parseInt(var25.substring(var26 + 1)), arg2, var25.substring(0, var26));
 					}
 				}
 				if (var8.type == 6) {
@@ -420,20 +408,17 @@ public class Component {
 	}
 
 	@ObfuscatedName("d.a(IZI)V")
-	public void swapObj(int arg0, boolean arg1, int arg2) {
+	public void swapObj(int arg0, int arg2) {
 		int var4 = this.invSlotObjId[arg0];
 		this.invSlotObjId[arg0] = this.invSlotObjId[arg2];
 		this.invSlotObjId[arg2] = var4;
 		int var5 = this.invSlotObjCount[arg0];
 		this.invSlotObjCount[arg0] = this.invSlotObjCount[arg2];
-		if (arg1) {
-			this._flowObfuscator1 = !this._flowObfuscator1;
-		}
 		this.invSlotObjCount[arg2] = var5;
 	}
 
 	@ObfuscatedName("d.a(BIIZ)Lfb;")
-	public Model getModel(byte arg0, int arg1, int arg2, boolean arg3) {
+	public Model getModel(int arg1, int arg2, boolean arg3) {
 		Model var5;
 		if (arg3) {
 			var5 = this.getModel(this.activeModelType, this.activeModel);
@@ -445,20 +430,17 @@ public class Component {
 		} else if (arg1 == -1 && arg2 == -1 && var5.faceColour == null) {
 			return var5;
 		} else {
-			Model var6 = new Model(var5, true, false, true, -796);
+			Model var6 = new Model(var5, true, false, true);
 			if (arg1 != -1 || arg2 != -1) {
 				var6.createLabelReferences(-591);
 			}
 			if (arg1 != -1) {
-				var6.applyTransform(arg1, 13056);
+				var6.applyTransform(arg1);
 			}
 			if (arg2 != -1) {
-				var6.applyTransform(arg2, 13056);
+				var6.applyTransform(arg2);
 			}
 			var6.calculateNormals(64, 768, -50, -10, -50, true);
-			if (arg0 != 0) {
-				throw new NullPointerException();
-			}
 			return var6;
 		}
 	}
@@ -470,47 +452,44 @@ public class Component {
 			return var3;
 		}
 		if (arg0 == 1) {
-			var3 = Model.tryGet(arg1, -404);
+			var3 = Model.tryGet(arg1);
 		}
 		if (arg0 == 2) {
-			var3 = NpcType.get(arg1).getHeadModel(this._flowObfuscator3);
+			var3 = NpcType.get(arg1).getHeadModel();
 		}
 		if (arg0 == 3) {
-			var3 = client.localPlayer.getHeadModel(445);
+			var3 = client.localPlayer.getHeadModel();
 		}
 		if (arg0 == 4) {
-			var3 = ObjType.get(arg1).getInvModel(-42857, 50);
+			var3 = ObjType.get(arg1).getInvModel(50);
 		}
 		if (arg0 == 5) {
 			var3 = null;
 		}
 		if (var3 != null) {
-			modelCache.put(var3, (long) ((arg0 << 16) + arg1), 39399);
+			modelCache.put(var3, (long) ((arg0 << 16) + arg1));
 		}
 		return var3;
 	}
 
 	@ObfuscatedName("d.a(Lfb;III)V")
-	public static void cacheModel(Model arg0, int arg1, int arg2, int arg3) {
+	public static void cacheModel(Model arg0, int arg2, int arg3) {
 		modelCache.clear();
-		if (arg1 > 0 && (arg0 != null && arg3 != 4)) {
-			modelCache.put(arg0, (long) ((arg3 << 16) + arg2), 39399);
+		if (arg0 != null && arg3 != 4) {
+			modelCache.put(arg0, (long) ((arg3 << 16) + arg2));
 		}
 	}
 
 	@ObfuscatedName("d.a(ILyb;ILjava/lang/String;)Ljb;")
-	public static Pix32 getImage(int arg0, Jagfile arg1, int arg2, String arg3) {
-		long var4 = (JString.hashCode(false, arg3) << 8) + (long) arg0;
+	public static Pix32 getImage(int arg0, Jagfile arg1, String arg3) {
+		long var4 = (JString.hashCode(arg3) << 8) + (long) arg0;
 		Pix32 var6 = (Pix32) imageCache.get(var4);
-		if (arg2 != -18993) {
-			_flowObfuscator2 = 299;
-		}
 		if (var6 != null) {
 			return var6;
 		}
 		try {
 			Pix32 var7 = new Pix32(arg1, arg3, arg0);
-			imageCache.put(var7, var4, 39399);
+			imageCache.put(var7, var4);
 			return var7;
 		} catch (Exception var8) {
 			return null;

@@ -41,10 +41,7 @@ public class ClientStream implements Runnable {
 	@ObfuscatedName("e.j")
 	public boolean ioerror = false;
 
-	public ClientStream(Socket arg0, GameShell arg1, byte arg2) throws IOException {
-		if (arg2 != 11) {
-			throw new NullPointerException();
-		}
+	public ClientStream(Socket arg0, GameShell arg1) throws IOException {
 		this.shell = arg1;
 		this.socket = arg0;
 		this.socket.setSoTimeout(30000);
@@ -102,7 +99,7 @@ public class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("e.a(IZI[B)V")
-	public void write(int arg0, boolean arg1, int arg2, byte[] arg3) throws IOException {
+	public void write(int arg0, int arg2, byte[] arg3) throws IOException {
 		if (this.dummy) {
 			return;
 		}
@@ -126,10 +123,6 @@ public class ClientStream implements Runnable {
 				this.shell.startThread(this, 3);
 			}
 			this.notify();
-		}
-		if (!arg1) {
-			for (int var7 = 1; var7 > 0; var7++) {
-			}
 		}
 	}
 
@@ -176,16 +169,12 @@ public class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("e.a(B)V")
-	public void debug(byte arg0) {
+	public void debug() {
 		System.out.println("dummy:" + this.dummy);
 		System.out.println("tcycl:" + this.tcycl);
 		System.out.println("tnum:" + this.tnum);
 		System.out.println("writer:" + this.writer);
 		System.out.println("ioerror:" + this.ioerror);
-		if (arg0 != 40) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
 		try {
 			System.out.println("available:" + this.available());
 		} catch (IOException var3) {

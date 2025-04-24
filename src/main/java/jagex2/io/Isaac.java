@@ -23,14 +23,11 @@ public class Isaac {
 	@ObfuscatedName("xb.f")
 	public int c;
 
-	public Isaac(int[] arg0, int arg1) {
+	public Isaac(int[] arg0) {
 		for (int var3 = 0; var3 < arg0.length; var3++) {
 			this.rsl[var3] = arg0[var3];
 		}
 		this.init();
-		if (arg1 < 0 || arg1 > 0) {
-			throw new NullPointerException();
-		}
 	}
 
 	@ObfuscatedName("xb.a()I")

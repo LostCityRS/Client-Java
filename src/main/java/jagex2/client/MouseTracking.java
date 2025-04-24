@@ -23,10 +23,7 @@ public class MouseTracking implements Runnable {
 	@ObfuscatedName("fc.f")
 	public int[] y = new int[500];
 
-	public MouseTracking(client arg0, int arg1) {
-		if (arg1 >= 0) {
-			throw new NullPointerException();
-		}
+	public MouseTracking(client arg0) {
 		this.app = arg0;
 	}
 

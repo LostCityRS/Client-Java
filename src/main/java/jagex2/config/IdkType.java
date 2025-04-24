@@ -8,12 +8,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("lc")
 public class IdkType {
 
-	@ObfuscatedName("lc.a")
-	public static boolean _flowObfuscator1 = true;
-
-	@ObfuscatedName("lc.b")
-	public int _flowObfuscator2 = -949;
-
 	@ObfuscatedName("lc.c")
 	public static int count;
 
@@ -39,11 +33,8 @@ public class IdkType {
 	public boolean disable = false;
 
 	@ObfuscatedName("lc.a(Lyb;B)V")
-	public static void unpack(Jagfile arg0, byte arg1) {
-		if (arg1 != 127) {
-			_flowObfuscator1 = !_flowObfuscator1;
-		}
-		Packet var2 = new Packet((byte) -109, arg0.read("idk.dat", null));
+	public static void unpack(Jagfile arg0) {
+		Packet var2 = new Packet(arg0.read("idk.dat", null));
 		count = var2.g2();
 		if (types == null) {
 			types = new IdkType[count];
@@ -52,47 +43,42 @@ public class IdkType {
 			if (types[var3] == null) {
 				types[var3] = new IdkType();
 			}
-			types[var3].decode(168, var2);
+			types[var3].decode(var2);
 		}
 	}
 
 	@ObfuscatedName("lc.a(ILmb;)V")
-	public void decode(int arg0, Packet arg1) {
-		int var3 = 22 / arg0;
+	public void decode(Packet arg1) {
 		while (true) {
-			while (true) {
-				int var4 = arg1.g1();
-				if (var4 == 0) {
-					return;
+			int var4 = arg1.g1();
+			if (var4 == 0) {
+				return;
+			}
+			if (var4 == 1) {
+				this.type = arg1.g1();
+			} else if (var4 == 2) {
+				int var5 = arg1.g1();
+				this.models = new int[var5];
+				for (int var6 = 0; var6 < var5; var6++) {
+					this.models[var6] = arg1.g2();
 				}
-				if (var4 == 1) {
-					this.type = arg1.g1();
-				} else if (var4 == 2) {
-					int var5 = arg1.g1();
-					this.models = new int[var5];
-					for (int var6 = 0; var6 < var5; var6++) {
-						this.models[var6] = arg1.g2();
-					}
-				} else if (var4 == 3) {
-					this.disable = true;
-				} else if (var4 >= 40 && var4 < 50) {
-					this.recol_s[var4 - 40] = arg1.g2();
-				} else if (var4 >= 50 && var4 < 60) {
-					this.recol_d[var4 - 50] = arg1.g2();
-				} else if (var4 >= 60 && var4 < 70) {
-					this.heads[var4 - 60] = arg1.g2();
-				} else {
-					System.out.println("Error unrecognised config code: " + var4);
-				}
+			} else if (var4 == 3) {
+				this.disable = true;
+			} else if (var4 >= 40 && var4 < 50) {
+				this.recol_s[var4 - 40] = arg1.g2();
+			} else if (var4 >= 50 && var4 < 60) {
+				this.recol_d[var4 - 50] = arg1.g2();
+			} else if (var4 >= 60 && var4 < 70) {
+				this.heads[var4 - 60] = arg1.g2();
+			} else {
+				System.out.println("Error unrecognised config code: " + var4);
 			}
 		}
 	}
 
 	@ObfuscatedName("lc.a(I)Z")
-	public boolean validate(int arg0) {
-		if (arg0 != 6) {
-			throw new NullPointerException();
-		} else if (this.models == null) {
+	public boolean validate() {
+		if (this.models == null) {
 			return true;
 		} else {
 			boolean var2 = true;
@@ -106,23 +92,19 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.b(I)Lfb;")
-	public Model getModel(int arg0) {
+	public Model getModel() {
 		if (this.models == null) {
 			return null;
 		}
 		Model[] var2 = new Model[this.models.length];
-		if (arg0 <= 0) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
 		for (int var4 = 0; var4 < this.models.length; var4++) {
-			var2[var4] = Model.tryGet(this.models[var4], -404);
+			var2[var4] = Model.tryGet(this.models[var4]);
 		}
 		Model var5;
 		if (var2.length == 1) {
 			var5 = var2[0];
 		} else {
-			var5 = new Model(var2.length, 652, var2);
+			var5 = new Model(var2.length, var2);
 		}
 		for (int var6 = 0; var6 < 6 && this.recol_s[var6] != 0; var6++) {
 			var5.recolour(this.recol_s[var6], this.recol_d[var6]);
@@ -131,11 +113,8 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.c(I)Z")
-	public boolean validateHeadModel(int arg0) {
+	public boolean validateHeadModel() {
 		boolean var2 = true;
-		if (arg0 < 8 || arg0 > 8) {
-			this._flowObfuscator2 = 223;
-		}
 		for (int var3 = 0; var3 < 5; var3++) {
 			if (this.heads[var3] != -1 && !Model.validate(this.heads[var3])) {
 				var2 = false;
@@ -145,18 +124,15 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.d(I)Lfb;")
-	public Model getHeadModel(int arg0) {
+	public Model getHeadModel() {
 		Model[] var2 = new Model[5];
 		int var3 = 0;
 		for (int var4 = 0; var4 < 5; var4++) {
 			if (this.heads[var4] != -1) {
-				var2[var3++] = Model.tryGet(this.heads[var4], -404);
+				var2[var3++] = Model.tryGet(this.heads[var4]);
 			}
 		}
-		Model var5 = new Model(var3, 652, var2);
-		if (arg0 >= 0) {
-			this._flowObfuscator2 = -459;
-		}
+		Model var5 = new Model(var3, var2);
 		for (int var6 = 0; var6 < 6 && this.recol_s[var6] != 0; var6++) {
 			var5.recolour(this.recol_s[var6], this.recol_d[var6]);
 		}

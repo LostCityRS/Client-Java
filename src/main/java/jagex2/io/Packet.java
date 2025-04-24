@@ -9,36 +9,6 @@ import java.math.BigInteger;
 @ObfuscatedName("mb")
 public class Packet extends DoublyLinkable {
 
-	@ObfuscatedName("mb.i")
-	public boolean _flowObfuscator4 = true;
-
-	@ObfuscatedName("mb.j")
-	public int _flowObfuscator5 = 7290;
-
-	@ObfuscatedName("mb.k")
-	public int _flowObfuscator6 = -637;
-
-	@ObfuscatedName("mb.l")
-	public int _flowObfuscator7 = -1948;
-
-	@ObfuscatedName("mb.m")
-	public int _flowObfuscator8 = -7326;
-
-	@ObfuscatedName("mb.n")
-	public byte _flowObfuscator9 = -49;
-
-	@ObfuscatedName("mb.o")
-	public boolean _flowObfuscator10 = false;
-
-	@ObfuscatedName("mb.p")
-	public byte _flowObfuscator11 = 76;
-
-	@ObfuscatedName("mb.q")
-	public int _flowObfuscator12 = 25800;
-
-	@ObfuscatedName("mb.r")
-	public boolean _flowObfuscator13 = false;
-
 	@ObfuscatedName("mb.s")
 	public byte[] data;
 
@@ -75,9 +45,6 @@ public class Packet extends DoublyLinkable {
 	@ObfuscatedName("mb.A")
 	public static int cacheMaxCount;
 
-	@ObfuscatedName("mb.E")
-	public static boolean field730;
-
 	@ObfuscatedName("mb.a(II)Lmb;")
 	public static Packet alloc(int arg0, int arg1) {
 		LinkList var2 = cacheMid;
@@ -103,7 +70,7 @@ public class Packet extends DoublyLinkable {
 			for (int var6 = 1; var6 > 0; var6++) {
 			}
 		}
-		Packet var7 = new Packet(false);
+		Packet var7 = new Packet();
 		var7.pos = 0;
 		if (arg1 == 0) {
 			var7.data = new byte[100];
@@ -116,10 +83,7 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.a(I)V")
-	public void release(int arg0) {
-		if (this._flowObfuscator5 != arg0) {
-			this._flowObfuscator12 = -414;
-		}
+	public void release() {
 		LinkList var2 = cacheMid;
 		synchronized (cacheMid) {
 			this.pos = 0;
@@ -141,28 +105,17 @@ public class Packet extends DoublyLinkable {
 		}
 	}
 
-	public Packet(boolean arg0) {
-		if (arg0) {
-			this._flowObfuscator4 = !this._flowObfuscator4;
-		}
+	public Packet() {
 	}
 
-	public Packet(byte arg0, byte[] arg1) {
+	public Packet(byte[] arg1) {
 		this.data = arg1;
-		if (arg0 != -109) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
 		this.pos = 0;
 	}
 
 	@ObfuscatedName("mb.a(IB)V")
-	public void pIsaac(int arg0, byte arg1) {
+	public void pIsaac(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 + this.random.nextInt());
-		if (arg1 != 0) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
 	}
 
 	@ObfuscatedName("mb.b(I)V")
@@ -177,11 +130,9 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.a(IZ)V")
-	public void ip2(int arg0, boolean arg1) {
-		if (arg1) {
-			this.data[this.pos++] = (byte) arg0;
-			this.data[this.pos++] = (byte) (arg0 >> 8);
-		}
+	public void ip2(int arg0) {
+		this.data[this.pos++] = (byte) arg0;
+		this.data[this.pos++] = (byte) (arg0 >> 8);
 	}
 
 	@ObfuscatedName("mb.d(I)V")
@@ -200,21 +151,17 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.b(II)V")
-	public void ip4(int arg0, int arg1) {
+	public void ip4(int arg1) {
 		this.data[this.pos++] = (byte) arg1;
-		int var3 = 86 / arg0;
 		this.data[this.pos++] = (byte) (arg1 >> 8);
 		this.data[this.pos++] = (byte) (arg1 >> 16);
 		this.data[this.pos++] = (byte) (arg1 >> 24);
 	}
 
 	@ObfuscatedName("mb.a(JZ)V")
-	public void p8(long arg0, boolean arg1) {
+	public void p8(long arg0) {
 		this.data[this.pos++] = (byte) (arg0 >> 56);
 		this.data[this.pos++] = (byte) (arg0 >> 48);
-		if (arg1) {
-			return;
-		}
 		this.data[this.pos++] = (byte) (arg0 >> 40);
 		this.data[this.pos++] = (byte) (arg0 >> 32);
 		this.data[this.pos++] = (byte) (arg0 >> 24);
@@ -231,22 +178,15 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.a(III[B)V")
-	public void pdata(int arg0, int arg1, int arg2, byte[] arg3) {
-		if (arg1 != 0) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
+	public void pdata(int arg0, int arg2, byte[] arg3) {
 		for (int var6 = arg2; var6 < arg0 + arg2; var6++) {
 			this.data[this.pos++] = arg3[var6];
 		}
 	}
 
 	@ObfuscatedName("mb.c(II)V")
-	public void psize1(int arg0, int arg1) {
+	public void psize1(int arg1) {
 		this.data[this.pos - arg1 - 1] = (byte) arg1;
-		if (arg0 == 41372) {
-			;
-		}
 	}
 
 	@ObfuscatedName("mb.c()I")
@@ -288,12 +228,9 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.f(I)J")
-	public long g8(int arg0) {
+	public long g8() {
 		long var2 = (long) this.g4() & 0xFFFFFFFFL;
 		long var4 = (long) this.g4() & 0xFFFFFFFFL;
-		if (arg0 <= 0) {
-			throw new NullPointerException();
-		}
 		return (var2 << 32) + var4;
 	}
 
@@ -306,11 +243,8 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.g(I)[B")
-	public byte[] gjstrraw(int arg0) {
+	public byte[] gjstrraw() {
 		int var2 = this.pos;
-		if (arg0 != 1) {
-			this._flowObfuscator4 = !this._flowObfuscator4;
-		}
 		while (this.data[this.pos++] != 10) {
 		}
 		byte[] var3 = new byte[this.pos - var2 - 1];
@@ -321,28 +255,19 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.a([BIII)V")
-	public void gdata(byte[] arg0, int arg1, int arg2, int arg3) {
-		if (arg2 <= 0) {
-			this._flowObfuscator6 = -182;
-		}
+	public void gdata(byte[] arg0, int arg1, int arg3) {
 		for (int var5 = arg1; var5 < arg1 + arg3; var5++) {
 			arg0[var5] = this.data[this.pos++];
 		}
 	}
 
 	@ObfuscatedName("mb.h(I)V")
-	public void bits(int arg0) {
-		if (arg0 != 30730) {
-			this._flowObfuscator12 = 99;
-		}
+	public void bits() {
 		this.bitPos = this.pos * 8;
 	}
 
 	@ObfuscatedName("mb.d(II)I")
-	public int gBit(int arg0, int arg1) {
-		if (arg0 != 9) {
-			this._flowObfuscator13 = !this._flowObfuscator13;
-		}
+	public int gBit(int arg1) {
 		int var3 = this.bitPos >> 3;
 		int var4 = 8 - (this.bitPos & 0x7);
 		int var5 = 0;
@@ -362,11 +287,8 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.i(I)V")
-	public void bytes(int arg0) {
+	public void bytes() {
 		this.pos = (this.bitPos + 7) / 8;
-		if (arg0 < 0 || arg0 > 0) {
-			this._flowObfuscator7 = -30;
-		}
 	}
 
 	@ObfuscatedName("mb.j()I")
@@ -382,19 +304,17 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.a(ILjava/math/BigInteger;Ljava/math/BigInteger;)V")
-	public void rsaenc(int arg0, BigInteger arg1, BigInteger arg2) {
+	public void rsaenc(BigInteger arg1, BigInteger arg2) {
 		int var4 = this.pos;
 		this.pos = 0;
 		byte[] var5 = new byte[var4];
-		this.gdata(var5, 0, 188, var4);
+		this.gdata(var5, 0, var4);
 		BigInteger var6 = new BigInteger(var5);
 		BigInteger var7 = var6.modPow(arg1, arg2);
 		byte[] var8 = var7.toByteArray();
-		if (arg0 == 41466) {
-			this.pos = 0;
-			this.p1(var8.length);
-			this.pdata(var8.length, 0, 0, var8);
-		}
+		this.pos = 0;
+		this.p1(var8.length);
+		this.pdata(var8.length, 0, var8);
 	}
 
 	static {
@@ -410,8 +330,8 @@ public class Packet extends DoublyLinkable {
 			crctable[var0] = var1;
 		}
 		bitmask = new int[] { 0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, Integer.MAX_VALUE, -1 };
-		cacheMin = new LinkList((byte) 7);
-		cacheMid = new LinkList((byte) 7);
-		cacheMax = new LinkList((byte) 7);
+		cacheMin = new LinkList();
+		cacheMid = new LinkList();
+		cacheMax = new LinkList();
 	}
 }

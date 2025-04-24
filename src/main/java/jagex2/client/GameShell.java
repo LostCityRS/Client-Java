@@ -22,24 +22,6 @@ import java.awt.event.WindowListener;
 @ObfuscatedName("a")
 public class GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
 
-	@ObfuscatedName("a.a")
-	public byte _flowObfuscator1 = 4;
-
-	@ObfuscatedName("a.b")
-	public int _flowObfuscator2 = 370;
-
-	@ObfuscatedName("a.c")
-	public int _flowObfuscator3 = 398;
-
-	@ObfuscatedName("a.d")
-	public int _flowObfuscator4 = 11089;
-
-	@ObfuscatedName("a.e")
-	public int _flowObfuscator5 = 11089;
-
-	@ObfuscatedName("a.f")
-	public boolean _flowObfuscator6 = true;
-
 	@ObfuscatedName("a.g")
 	public int state;
 
@@ -130,43 +112,34 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	@ObfuscatedName("a.F")
 	public long mouseClickTime;
 
-	@ObfuscatedName("a.K")
-	public static boolean field37;
-
 	@ObfuscatedName("a.a(III)V")
-	public final void initApplication(int arg0, int arg1, int arg2) {
+	public final void initApplication(int arg1, int arg2) {
 		this.screenWidth = arg2;
-		if (arg0 <= 0) {
-			this._flowObfuscator2 = 381;
-		}
 		this.screenHeight = arg1;
-		this.frame = new ViewBox(this.screenWidth, 992, this.screenHeight, this);
-		this.graphics = this.getBaseComponent(3).getGraphics();
-		this.drawArea = new PixMap(this.getBaseComponent(3), this.screenHeight, this.screenWidth, 2);
+		this.frame = new ViewBox(this.screenWidth, this.screenHeight, this);
+		this.graphics = this.getBaseComponent().getGraphics();
+		this.drawArea = new PixMap(this.getBaseComponent(), this.screenHeight, this.screenWidth);
 		this.startThread(this, 1);
 	}
 
 	@ObfuscatedName("a.a(BII)V")
-	public final void initApplet(byte arg0, int arg1, int arg2) {
+	public final void initApplet(int arg1, int arg2) {
 		this.screenWidth = arg2;
 		this.screenHeight = arg1;
-		this.graphics = this.getBaseComponent(3).getGraphics();
-		this.drawArea = new PixMap(this.getBaseComponent(3), this.screenHeight, this.screenWidth, 2);
-		if (arg0 != 57) {
-			this._flowObfuscator2 = -103;
-		}
+		this.graphics = this.getBaseComponent().getGraphics();
+		this.drawArea = new PixMap(this.getBaseComponent(), this.screenHeight, this.screenWidth);
 		this.startThread(this, 1);
 	}
 
 	public void run() {
-		this.getBaseComponent(3).addMouseListener(this);
-		this.getBaseComponent(3).addMouseMotionListener(this);
-		this.getBaseComponent(3).addKeyListener(this);
-		this.getBaseComponent(3).addFocusListener(this);
+		this.getBaseComponent().addMouseListener(this);
+		this.getBaseComponent().addMouseMotionListener(this);
+		this.getBaseComponent().addKeyListener(this);
+		this.getBaseComponent().addFocusListener(this);
 		if (this.frame != null) {
 			this.frame.addWindowListener(this);
 		}
-		this.drawProgress(7, 0, "Loading...");
+		this.drawProgress(0, "Loading...");
 		this.load();
 		int var1 = 0;
 		int var2 = 256;
@@ -182,14 +155,14 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			do {
 				if (this.state < 0) {
 					if (this.state == -1) {
-						this.shutdown(398);
+						this.shutdown();
 					}
 					return;
 				}
 				if (this.state > 0) {
 					this.state--;
 					if (this.state == 0) {
-						this.shutdown(398);
+						this.shutdown();
 						return;
 					}
 				}
@@ -237,7 +210,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 					this.mouseClickY = this.lastMouseClickY;
 					this.mouseClickTime = this.lastMouseClickTime;
 					this.lastMouseClickButton = 0;
-					this.update(0);
+					this.update();
 					this.keyQueueReadPos = this.keyQueueWritePos;
 					var4 += var2;
 				}
@@ -245,7 +218,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 				if (this.deltime > 0) {
 					this.fps = var2 * 1000 / (this.deltime * 256);
 				}
-				this.draw(false);
+				this.draw();
 			} while (!this.debug);
 			System.out.println("ntime:" + var11);
 			for (int var14 = 0; var14 < 10; var14++) {
@@ -261,10 +234,9 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.a(I)V")
-	public final void shutdown(int arg0) {
+	public final void shutdown() {
 		this.state = -2;
-		int var2 = 12 / arg0;
-		this.unload(this._flowObfuscator4);
+		this.unload();
 		try {
 			Thread.sleep(1000L);
 		} catch (Exception var4) {
@@ -276,8 +248,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.a(II)V")
-	public final void setFramerate(int arg0, int arg1) {
-		int var3 = 30 / arg1;
+	public final void setFramerate(int arg0) {
 		this.deltime = 1000 / arg0;
 	}
 
@@ -300,7 +271,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		} catch (Exception var1) {
 		}
 		if (this.state == -1) {
-			this.shutdown(398);
+			this.shutdown();
 		}
 	}
 
@@ -309,7 +280,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.graphics = arg0;
 		}
 		this.refresh = true;
-		this.refresh(922);
+		this.refresh();
 	}
 
 	public final void paint(Graphics arg0) {
@@ -317,7 +288,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.graphics = arg0;
 		}
 		this.refresh = true;
-		this.refresh(922);
+		this.refresh();
 	}
 
 	public final void mousePressed(MouseEvent arg0) {
@@ -339,7 +310,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.mouseButton = 1;
 		}
 		if (InputTracking.enabled) {
-			InputTracking.mousePressed(var2, true, var3, arg0.isMetaDown() ? 1 : 0);
+			InputTracking.mousePressed(var2, var3, arg0.isMetaDown() ? 1 : 0);
 		}
 	}
 
@@ -347,7 +318,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.idleCycles = 0;
 		this.mouseButton = 0;
 		if (InputTracking.enabled) {
-			InputTracking.mouseReleased(51, arg0.isMetaDown() ? 1 : 0);
+			InputTracking.mouseReleased(arg0.isMetaDown() ? 1 : 0);
 		}
 	}
 
@@ -356,7 +327,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	public final void mouseEntered(MouseEvent arg0) {
 		if (InputTracking.enabled) {
-			InputTracking.mouseEntered(19919);
+			InputTracking.mouseEntered();
 		}
 	}
 
@@ -365,7 +336,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.mouseX = -1;
 		this.mouseY = -1;
 		if (InputTracking.enabled) {
-			InputTracking.mouseExited((byte) 6);
+			InputTracking.mouseExited();
 		}
 	}
 
@@ -380,7 +351,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.mouseX = var2;
 		this.mouseY = var3;
 		if (InputTracking.enabled) {
-			InputTracking.mouseMoved(var2, -7388, var3);
+			InputTracking.mouseMoved(var2, var3);
 		}
 	}
 
@@ -395,7 +366,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.mouseX = var2;
 		this.mouseY = var3;
 		if (InputTracking.enabled) {
-			InputTracking.mouseMoved(var2, -7388, var3);
+			InputTracking.mouseMoved(var2, var3);
 		}
 	}
 
@@ -456,7 +427,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.keyQueueWritePos = this.keyQueueWritePos + 1 & 0x7F;
 		}
 		if (InputTracking.enabled) {
-			InputTracking.keyPressed(var3, (byte) 6);
+			InputTracking.keyPressed(var3);
 		}
 	}
 
@@ -498,7 +469,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.actionKey[var3] = 0;
 		}
 		if (InputTracking.enabled) {
-			InputTracking.keyReleased(var3, true);
+			InputTracking.keyReleased(var3);
 		}
 	}
 
@@ -506,11 +477,8 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.b(I)I")
-	public final int pollKey(int arg0) {
+	public final int pollKey() {
 		int var2 = -1;
-		if (arg0 != 9) {
-			return this._flowObfuscator4;
-		}
 		if (this.keyQueueWritePos != this.keyQueueReadPos) {
 			var2 = this.keyQueue[this.keyQueueReadPos];
 			this.keyQueueReadPos = this.keyQueueReadPos + 1 & 0x7F;
@@ -521,16 +489,16 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void focusGained(FocusEvent arg0) {
 		this.hasFocus = true;
 		this.refresh = true;
-		this.refresh(922);
+		this.refresh();
 		if (InputTracking.enabled) {
-			InputTracking.focusGained(this._flowObfuscator1);
+			InputTracking.focusGained();
 		}
 	}
 
 	public final void focusLost(FocusEvent arg0) {
 		this.hasFocus = false;
 		if (InputTracking.enabled) {
-			InputTracking.focusLost(true);
+			InputTracking.focusLost();
 		}
 	}
 
@@ -561,39 +529,23 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.c(I)V")
-	public void update(int arg0) {
-		if (arg0 != 0) {
-			this._flowObfuscator3 = -142;
-		}
+	public void update() {
 	}
 
 	@ObfuscatedName("a.d(I)V")
-	public void unload(int arg0) {
-		if (this._flowObfuscator5 != arg0) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public void unload() {
 	}
 
 	@ObfuscatedName("a.a(Z)V")
-	public void draw(boolean arg0) {
-		if (arg0) {
-			this._flowObfuscator5 = 499;
-		}
+	public void draw() {
 	}
 
 	@ObfuscatedName("a.e(I)V")
-	public void refresh(int arg0) {
-		if (arg0 <= 0) {
-			this._flowObfuscator2 = -243;
-		}
+	public void refresh() {
 	}
 
 	@ObfuscatedName("a.f(I)Ljava/awt/Component;")
-	public java.awt.Component getBaseComponent(int arg0) {
-		if (arg0 < 3 || arg0 > 3) {
-			this._flowObfuscator6 = !this._flowObfuscator6;
-		}
+	public java.awt.Component getBaseComponent() {
 		return this.frame == null ? this : this.frame;
 	}
 
@@ -605,11 +557,11 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.a(IILjava/lang/String;)V")
-	public void drawProgress(int arg0, int arg1, String arg2) {
+	public void drawProgress(int arg1, String arg2) {
 		while (this.graphics == null) {
-			this.graphics = this.getBaseComponent(3).getGraphics();
+			this.graphics = this.getBaseComponent().getGraphics();
 			try {
-				this.getBaseComponent(3).repaint();
+				this.getBaseComponent().repaint();
 			} catch (Exception var10) {
 			}
 			try {
@@ -618,9 +570,9 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			}
 		}
 		Font var4 = new Font("Helvetica", 1, 13);
-		FontMetrics var5 = this.getBaseComponent(3).getFontMetrics(var4);
+		FontMetrics var5 = this.getBaseComponent().getFontMetrics(var4);
 		Font var6 = new Font("Helvetica", 0, 13);
-		this.getBaseComponent(3).getFontMetrics(var6);
+		this.getBaseComponent().getFontMetrics(var6);
 		if (this.refresh) {
 			this.graphics.setColor(Color.black);
 			this.graphics.fillRect(0, 0, this.screenWidth, this.screenHeight);
@@ -636,8 +588,5 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.graphics.setFont(var4);
 		this.graphics.setColor(Color.white);
 		this.graphics.drawString(arg2, (this.screenWidth - var5.stringWidth(arg2)) / 2, var8 + 22);
-		if (arg0 == 7) {
-			;
-		}
 	}
 }

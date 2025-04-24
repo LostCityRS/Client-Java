@@ -11,24 +11,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("c")
 public class World {
 
-	@ObfuscatedName("c.a")
-	public static int field39 = 3;
-
-	@ObfuscatedName("c.b")
-	public boolean field40 = false;
-
-	@ObfuscatedName("c.c")
-	public static int field41;
-
-	@ObfuscatedName("c.d")
-	public int field42;
-
-	@ObfuscatedName("c.e")
-	public static int field43;
-
-	@ObfuscatedName("c.f")
-	public static int field44 = -509;
-
 	@ObfuscatedName("c.g")
 	public static boolean lowMemory = true;
 
@@ -104,13 +86,10 @@ public class World {
 	@ObfuscatedName("c.E")
 	public static int field69 = (int) (Math.random() * 33.0D) - 16;
 
-	public World(boolean arg0, int[][][] arg1, byte[][][] arg2, int arg3, int arg4) {
+	public World(int[][][] arg1, byte[][][] arg2, int arg3, int arg4) {
 		this.maxTileX = arg3;
 		this.maxTileZ = arg4;
 		this.levelHeightmap = arg1;
-		if (!arg0) {
-			throw new NullPointerException();
-		}
 		this.levelTileFlags = arg2;
 		this.levelTileUnderlayIds = new byte[4][this.maxTileX][this.maxTileZ];
 		this.levelTileOverlayIds = new byte[4][this.maxTileX][this.maxTileZ];
@@ -127,10 +106,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(IIIZI)V")
-	public final void stitchHeightmap(int arg0, int arg1, int arg2, boolean arg3, int arg4) {
-		if (!arg3) {
-			field41 = 421;
-		}
+	public final void stitchHeightmap(int arg0, int arg1, int arg2, int arg4) {
 		for (int var6 = arg1; var6 <= arg1 + arg4; var6++) {
 			for (int var7 = arg0; var7 <= arg0 + arg2; var7++) {
 				if (var7 >= 0 && var7 < this.maxTileX && var6 >= 0 && var6 < this.maxTileZ) {
@@ -153,11 +129,8 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(I[BIIII)V")
-	public final void loadGround(int arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg0 <= 0) {
-			field41 = -244;
-		}
-		Packet var7 = new Packet((byte) -109, arg1);
+	public final void loadGround(byte[] arg1, int arg2, int arg3, int arg4, int arg5) {
+		Packet var7 = new Packet(arg1);
 		for (int var8 = 0; var8 < 4; var8++) {
 			for (int var9 = 0; var9 < 64; var9++) {
 				for (int var10 = 0; var10 < 64; var10++) {
@@ -218,12 +191,9 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(II[BZ)Z")
-	public static final boolean validateLocs(int arg0, int arg1, byte[] arg2, boolean arg3) {
+	public static final boolean validateLocs(int arg0, int arg1, byte[] arg2) {
 		boolean var4 = true;
-		Packet var5 = new Packet((byte) -109, arg2);
-		if (!arg3) {
-			field39 = 159;
-		}
+		Packet var5 = new Packet(arg2);
 		int var6 = -1;
 		label54: while (true) {
 			int var7 = var5.gsmarts();
@@ -248,7 +218,7 @@ public class World {
 					if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
 						LocType var17 = LocType.get(var6);
 						if (var14 != 22 || !lowMemory || var17.active || var17.forcedecor) {
-							var4 &= var17.validate(field43);
+							var4 &= var17.validate();
 							var9 = true;
 						}
 					}
@@ -263,11 +233,8 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(ILmb;Lvb;)V")
-	public static final void prefetchLocs(int arg0, Packet arg1, OnDemand arg2) {
+	public static final void prefetchLocs(Packet arg1, OnDemand arg2) {
 		int var3 = -1;
-		if (arg0 != 31048) {
-			field41 = 8;
-		}
 		while (true) {
 			int var4 = arg1.gsmarts();
 			if (var4 == 0) {
@@ -275,7 +242,7 @@ public class World {
 			}
 			var3 += var4;
 			LocType var5 = LocType.get(var3);
-			var5.prefetch(field44, arg2);
+			var5.prefetch(arg2);
 			while (true) {
 				int var6 = arg1.gsmarts();
 				if (var6 == 0) {
@@ -287,11 +254,8 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(ILs;[Ljc;IZ[B)V")
-	public final void loadLocations(int arg0, World3D arg1, CollisionMap[] arg2, int arg3, boolean arg4, byte[] arg5) {
-		Packet var7 = new Packet((byte) -109, arg5);
-		if (!arg4) {
-			return;
-		}
+	public final void loadLocations(int arg0, World3D arg1, CollisionMap[] arg2, int arg3, byte[] arg5) {
+		Packet var7 = new Packet(arg5);
 		int var8 = -1;
 		while (true) {
 			int var9 = var7.gsmarts();
@@ -323,19 +287,19 @@ public class World {
 					if (var20 >= 0) {
 						var21 = arg2[var20];
 					}
-					this.addLoc(var8, var19, var17, false, arg1, var21, var18, var16, var14);
+					this.addLoc(var8, var19, var17, arg1, var21, var18, var16, var14);
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("c.a(IIIZLs;Ljc;III)V")
-	public final void addLoc(int arg0, int arg1, int arg2, boolean arg3, World3D arg4, CollisionMap arg5, int arg6, int arg7, int arg8) {
+	public final void addLoc(int arg0, int arg1, int arg2, World3D arg4, CollisionMap arg5, int arg6, int arg7, int arg8) {
 		if (lowMemory) {
 			if ((this.levelTileFlags[arg8][arg6][arg1] & 0x10) != 0) {
 				return;
 			}
-			if (this.getDrawLevel(arg6, arg8, arg1, this.field42) != levelBuilt) {
+			if (this.getDrawLevel(arg6, arg8, arg1) != levelBuilt) {
 				return;
 			}
 		}
@@ -350,20 +314,17 @@ public class World {
 			var16 += Integer.MIN_VALUE;
 		}
 		byte var17 = (byte) ((arg2 << 6) + arg7);
-		if (arg3) {
-			this.field40 = !this.field40;
-		}
 		if (arg7 == 22) {
 			if (!lowMemory || var15.active || var15.forcedecor) {
 				Entity var18;
 				if (var15.anim == -1) {
 					var18 = var15.getModel(22, arg2, var10, var11, var12, var13, -1);
 				} else {
-					var18 = new LocEntity(var13, var12, var10, true, 22, arg2, true, var11, arg0, var15.anim);
+					var18 = new LocEntity(var13, var12, var10, 22, arg2, true, var11, arg0, var15.anim);
 				}
-				arg4.addGroundDecor(arg1, arg8, arg6, 0, var16, var14, var18, var17);
+				arg4.addGroundDecor(arg1, arg8, arg6, var16, var14, var18, var17);
 				if (var15.blockwalk && var15.active && arg5 != null) {
-					arg5.setBlocked(arg1, 8, arg6);
+					arg5.setBlocked(arg1, arg6);
 				}
 			}
 		} else if (arg7 == 10 || arg7 == 11) {
@@ -371,7 +332,7 @@ public class World {
 			if (var15.anim == -1) {
 				var34 = var15.getModel(10, arg2, var10, var11, var12, var13, -1);
 			} else {
-				var34 = new LocEntity(var13, var12, var10, true, 10, arg2, true, var11, arg0, var15.anim);
+				var34 = new LocEntity(var13, var12, var10, 10, arg2, true, var11, arg0, var15.anim);
 			}
 			if (var34 != null) {
 				int var35 = 0;
@@ -387,7 +348,7 @@ public class World {
 					var36 = var15.width;
 					var37 = var15.length;
 				}
-				if (arg4.addLoc(var17, var16, -21680, arg6, arg8, var14, var36, var35, var34, var37, arg1) && var15.shadow) {
+				if (arg4.addLoc(var17, var16, arg6, arg8, var14, var36, var35, var34, var37, arg1) && var15.shadow) {
 					Model var38;
 					if (var34 instanceof Model) {
 						var38 = (Model) var34;
@@ -410,30 +371,30 @@ public class World {
 				}
 			}
 			if (var15.blockwalk && arg5 != null) {
-				arg5.addLoc(var15.blockrange, arg2, arg6, var15.length, true, var15.width, arg1);
+				arg5.addLoc(var15.blockrange, arg2, arg6, var15.length, var15.width, arg1);
 			}
 		} else if (arg7 >= 12) {
 			Entity var19;
 			if (var15.anim == -1) {
 				var19 = var15.getModel(arg7, arg2, var10, var11, var12, var13, -1);
 			} else {
-				var19 = new LocEntity(var13, var12, var10, true, arg7, arg2, true, var11, arg0, var15.anim);
+				var19 = new LocEntity(var13, var12, var10, arg7, arg2, true, var11, arg0, var15.anim);
 			}
-			arg4.addLoc(var17, var16, -21680, arg6, arg8, var14, 1, 0, var19, 1, arg1);
+			arg4.addLoc(var17, var16, arg6, arg8, var14, 1, 0, var19, 1, arg1);
 			if (arg7 >= 12 && arg7 <= 17 && arg7 != 13 && arg8 > 0) {
 				this.levelOccludeMap[arg8][arg6][arg1] |= 0x924;
 			}
 			if (var15.blockwalk && arg5 != null) {
-				arg5.addLoc(var15.blockrange, arg2, arg6, var15.length, true, var15.width, arg1);
+				arg5.addLoc(var15.blockrange, arg2, arg6, var15.length, var15.width, arg1);
 			}
 		} else if (arg7 == 0) {
 			Entity var20;
 			if (var15.anim == -1) {
 				var20 = var15.getModel(0, arg2, var10, var11, var12, var13, -1);
 			} else {
-				var20 = new LocEntity(var13, var12, var10, true, 0, arg2, true, var11, arg0, var15.anim);
+				var20 = new LocEntity(var13, var12, var10, 0, arg2, true, var11, arg0, var15.anim);
 			}
-			arg4.addWall(arg6, var16, arg8, 0, true, field64[arg2], var14, null, var20, var17, arg1);
+			arg4.addWall(arg6, var16, arg8, 0, field64[arg2], var14, null, var20, var17, arg1);
 			if (arg2 == 0) {
 				if (var15.shadow) {
 					this.levelShadeMap[arg8][arg6][arg1] = 50;
@@ -468,19 +429,19 @@ public class World {
 				}
 			}
 			if (var15.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, arg7, arg6, var15.blockrange, -371, arg2);
+				arg5.addWall(arg1, arg7, arg6, var15.blockrange, arg2);
 			}
 			if (var15.wallwidth != 16) {
-				arg4.setDecorOffset(var15.wallwidth, arg6, arg1, arg8, 2);
+				arg4.setDecorOffset(var15.wallwidth, arg6, arg1, arg8);
 			}
 		} else if (arg7 == 1) {
 			Entity var21;
 			if (var15.anim == -1) {
 				var21 = var15.getModel(1, arg2, var10, var11, var12, var13, -1);
 			} else {
-				var21 = new LocEntity(var13, var12, var10, true, 1, arg2, true, var11, arg0, var15.anim);
+				var21 = new LocEntity(var13, var12, var10, 1, arg2, true, var11, arg0, var15.anim);
 			}
-			arg4.addWall(arg6, var16, arg8, 0, true, field65[arg2], var14, null, var21, var17, arg1);
+			arg4.addWall(arg6, var16, arg8, 0, field65[arg2], var14, null, var21, var17, arg1);
 			if (var15.shadow) {
 				if (arg2 == 0) {
 					this.levelShadeMap[arg8][arg6][arg1 + 1] = 50;
@@ -493,7 +454,7 @@ public class World {
 				}
 			}
 			if (var15.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, arg7, arg6, var15.blockrange, -371, arg2);
+				arg5.addWall(arg1, arg7, arg6, var15.blockrange, arg2);
 			}
 		} else if (arg7 == 2) {
 			int var22 = arg2 + 1 & 0x3;
@@ -503,10 +464,10 @@ public class World {
 				var23 = var15.getModel(2, arg2 + 4, var10, var11, var12, var13, -1);
 				var24 = var15.getModel(2, var22, var10, var11, var12, var13, -1);
 			} else {
-				var23 = new LocEntity(var13, var12, var10, true, 2, arg2 + 4, true, var11, arg0, var15.anim);
-				var24 = new LocEntity(var13, var12, var10, true, 2, var22, true, var11, arg0, var15.anim);
+				var23 = new LocEntity(var13, var12, var10, 2, arg2 + 4, true, var11, arg0, var15.anim);
+				var24 = new LocEntity(var13, var12, var10, 2, var22, true, var11, arg0, var15.anim);
 			}
-			arg4.addWall(arg6, var16, arg8, field64[var22], true, field64[arg2], var14, var24, var23, var17, arg1);
+			arg4.addWall(arg6, var16, arg8, field64[var22], field64[arg2], var14, var24, var23, var17, arg1);
 			if (var15.occlude) {
 				if (arg2 == 0) {
 					this.levelOccludeMap[arg8][arg6][arg1] |= 0x249;
@@ -523,19 +484,19 @@ public class World {
 				}
 			}
 			if (var15.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, arg7, arg6, var15.blockrange, -371, arg2);
+				arg5.addWall(arg1, arg7, arg6, var15.blockrange, arg2);
 			}
 			if (var15.wallwidth != 16) {
-				arg4.setDecorOffset(var15.wallwidth, arg6, arg1, arg8, 2);
+				arg4.setDecorOffset(var15.wallwidth, arg6, arg1, arg8);
 			}
 		} else if (arg7 == 3) {
 			Entity var25;
 			if (var15.anim == -1) {
 				var25 = var15.getModel(3, arg2, var10, var11, var12, var13, -1);
 			} else {
-				var25 = new LocEntity(var13, var12, var10, true, 3, arg2, true, var11, arg0, var15.anim);
+				var25 = new LocEntity(var13, var12, var10, 3, arg2, true, var11, arg0, var15.anim);
 			}
-			arg4.addWall(arg6, var16, arg8, 0, true, field65[arg2], var14, null, var25, var17, arg1);
+			arg4.addWall(arg6, var16, arg8, 0, field65[arg2], var14, null, var25, var17, arg1);
 			if (var15.shadow) {
 				if (arg2 == 0) {
 					this.levelShadeMap[arg8][arg6][arg1 + 1] = 50;
@@ -548,27 +509,27 @@ public class World {
 				}
 			}
 			if (var15.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, arg7, arg6, var15.blockrange, -371, arg2);
+				arg5.addWall(arg1, arg7, arg6, var15.blockrange, arg2);
 			}
 		} else if (arg7 == 9) {
 			Entity var26;
 			if (var15.anim == -1) {
 				var26 = var15.getModel(arg7, arg2, var10, var11, var12, var13, -1);
 			} else {
-				var26 = new LocEntity(var13, var12, var10, true, arg7, arg2, true, var11, arg0, var15.anim);
+				var26 = new LocEntity(var13, var12, var10, arg7, arg2, true, var11, arg0, var15.anim);
 			}
-			arg4.addLoc(var17, var16, -21680, arg6, arg8, var14, 1, 0, var26, 1, arg1);
+			arg4.addLoc(var17, var16, arg6, arg8, var14, 1, 0, var26, 1, arg1);
 			if (var15.blockwalk && arg5 != null) {
-				arg5.addLoc(var15.blockrange, arg2, arg6, var15.length, true, var15.width, arg1);
+				arg5.addLoc(var15.blockrange, arg2, arg6, var15.length, var15.width, arg1);
 			}
 		} else if (arg7 == 4) {
 			Entity var27;
 			if (var15.anim == -1) {
 				var27 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var27 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
+				var27 = new LocEntity(var13, var12, var10, 4, 0, true, var11, arg0, var15.anim);
 			}
-			arg4.addDecor(var17, var27, 0, arg6, arg1, field64[arg2], 0, 1, arg2 * 512, arg8, var14, var16);
+			arg4.addDecor(var17, var27, 0, arg6, arg1, field64[arg2], 0, arg2 * 512, arg8, var14, var16);
 		} else if (arg7 == 5) {
 			int var28 = 16;
 			int var29 = arg4.getWallTypecode(arg8, arg6, arg1);
@@ -579,38 +540,38 @@ public class World {
 			if (var15.anim == -1) {
 				var30 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var30 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
+				var30 = new LocEntity(var13, var12, var10, 4, 0, true, var11, arg0, var15.anim);
 			}
-			arg4.addDecor(var17, var30, field66[arg2] * var28, arg6, arg1, field64[arg2], field67[arg2] * var28, 1, arg2 * 512, arg8, var14, var16);
+			arg4.addDecor(var17, var30, field66[arg2] * var28, arg6, arg1, field64[arg2], field67[arg2] * var28, arg2 * 512, arg8, var14, var16);
 		} else if (arg7 == 6) {
 			Entity var31;
 			if (var15.anim == -1) {
 				var31 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var31 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
+				var31 = new LocEntity(var13, var12, var10, 4, 0, true, var11, arg0, var15.anim);
 			}
-			arg4.addDecor(var17, var31, 0, arg6, arg1, 256, 0, 1, arg2, arg8, var14, var16);
+			arg4.addDecor(var17, var31, 0, arg6, arg1, 256, 0, arg2, arg8, var14, var16);
 		} else if (arg7 == 7) {
 			Entity var32;
 			if (var15.anim == -1) {
 				var32 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var32 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
+				var32 = new LocEntity(var13, var12, var10, 4, 0, true, var11, arg0, var15.anim);
 			}
-			arg4.addDecor(var17, var32, 0, arg6, arg1, 512, 0, 1, arg2, arg8, var14, var16);
+			arg4.addDecor(var17, var32, 0, arg6, arg1, 512, 0, arg2, arg8, var14, var16);
 		} else if (arg7 == 8) {
 			Entity var33;
 			if (var15.anim == -1) {
 				var33 = var15.getModel(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var33 = new LocEntity(var13, var12, var10, true, 4, 0, true, var11, arg0, var15.anim);
+				var33 = new LocEntity(var13, var12, var10, 4, 0, true, var11, arg0, var15.anim);
 			}
-			arg4.addDecor(var17, var33, 0, arg6, arg1, 768, 0, 1, arg2, arg8, var14, var16);
+			arg4.addDecor(var17, var33, 0, arg6, arg1, 768, 0, arg2, arg8, var14, var16);
 		}
 	}
 
 	@ObfuscatedName("c.a(Ls;[Ljc;Z)V")
-	public final void build(World3D arg0, CollisionMap[] arg1, boolean arg2) {
+	public final void build(World3D arg0, CollisionMap[] arg1) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			for (int var110 = 0; var110 < 104; var110++) {
 				for (int var111 = 0; var111 < 104; var111++) {
@@ -620,14 +581,11 @@ public class World {
 							var112 = var4 - 1;
 						}
 						if (var112 >= 0) {
-							arg1[var112].setBlocked(var111, 8, var110);
+							arg1[var112].setBlocked(var111, var110);
 						}
 					}
 				}
 			}
-		}
-		if (arg2) {
-			return;
 		}
 		if (field47) {
 			field68 = 0;
@@ -728,7 +686,7 @@ public class World {
 							var65 -= this.blendLuminance[var69];
 							var66 -= this.blendMagnitude[var69];
 						}
-						if (var67 >= 1 && var67 < this.maxTileZ - 1 && (!lowMemory || (this.levelTileFlags[var5][var58][var67] & 0x10) == 0 && this.getDrawLevel(var58, var5, var67, this.field42) == levelBuilt)) {
+						if (var67 >= 1 && var67 < this.maxTileZ - 1 && (!lowMemory || (this.levelTileFlags[var5][var58][var67] & 0x10) == 0 && this.getDrawLevel(var58, var5, var67) == levelBuilt)) {
 							int var70 = this.levelTileUnderlayIds[var5][var58][var67] & 0xFF;
 							int var71 = this.levelTileOverlayIds[var5][var58][var67] & 0xFF;
 							if (var70 > 0 || var71 > 0) {
@@ -782,7 +740,7 @@ public class World {
 									int var93;
 									int var94;
 									if (var92 >= 0) {
-										var93 = Pix3D.getAverageTextureRgb(var92, 3);
+										var93 = Pix3D.getAverageTextureRgb(var92);
 										var94 = -1;
 									} else if (var91.rgb == 16711935) {
 										var93 = 0;
@@ -801,17 +759,17 @@ public class World {
 			}
 			for (int var59 = 1; var59 < this.maxTileZ - 1; var59++) {
 				for (int var60 = 1; var60 < this.maxTileX - 1; var60++) {
-					arg0.setDrawLevel(var5, var60, var59, this.getDrawLevel(var60, var5, var59, this.field42));
+					arg0.setDrawLevel(var5, var60, var59, this.getDrawLevel(var60, var5, var59));
 				}
 			}
 		}
 		if (!field47) {
-			arg0.buildModels(-10, -50, -350, -50, 64, 768);
+			arg0.buildModels(-10, -50, -50, 64, 768);
 		}
 		for (int var6 = 0; var6 < this.maxTileX; var6++) {
 			for (int var47 = 0; var47 < this.maxTileZ; var47++) {
 				if ((this.levelTileFlags[1][var6][var47] & 0x2) == 2) {
-					arg0.setBridge(false, var47, var6);
+					arg0.setBridge(var47, var6);
 				}
 			}
 		}
@@ -862,7 +820,7 @@ public class World {
 								short var21 = 240;
 								int var22 = this.levelHeightmap[var17][var13][var14] - var21;
 								int var23 = this.levelHeightmap[var16][var13][var14];
-								World3D.addOccluder(var13 * 128, 1, var23, var15 * 128 + 128, var10, var13 * 128, (byte) 6, var22, var14 * 128);
+								World3D.addOccluder(var13 * 128, 1, var23, var15 * 128 + 128, var10, var13 * 128, var22, var14 * 128);
 								for (int var24 = var16; var24 <= var17; var24++) {
 									for (int var25 = var14; var25 <= var15; var25++) {
 										this.levelOccludeMap[var24][var13][var25] &= ~var7;
@@ -902,7 +860,7 @@ public class World {
 								short var33 = 240;
 								int var34 = this.levelHeightmap[var29][var26][var12] - var33;
 								int var35 = this.levelHeightmap[var28][var26][var12];
-								World3D.addOccluder(var26 * 128, 2, var35, var12 * 128, var10, var27 * 128 + 128, (byte) 6, var34, var12 * 128);
+								World3D.addOccluder(var26 * 128, 2, var35, var12 * 128, var10, var27 * 128 + 128, var34, var12 * 128);
 								for (int var36 = var28; var36 <= var29; var36++) {
 									for (int var37 = var26; var37 <= var27; var37++) {
 										this.levelOccludeMap[var36][var37][var12] &= ~var8;
@@ -939,7 +897,7 @@ public class World {
 							}
 							if ((var39 - var38 + 1) * (var41 - var40 + 1) >= 4) {
 								int var44 = this.levelHeightmap[var11][var38][var40];
-								World3D.addOccluder(var38 * 128, 4, var44, var41 * 128 + 128, var10, var39 * 128 + 128, (byte) 6, var44, var40 * 128);
+								World3D.addOccluder(var38 * 128, 4, var44, var41 * 128 + 128, var10, var39 * 128 + 128, var44, var40 * 128);
 								for (int var45 = var38; var45 <= var39; var45++) {
 									for (int var46 = var40; var46 <= var41; var46++) {
 										this.levelOccludeMap[var11][var45][var46] &= ~var9;
@@ -954,11 +912,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(IIII)I")
-	public int getDrawLevel(int arg0, int arg1, int arg2, int arg3) {
-		if (arg3 != 0) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
+	public int getDrawLevel(int arg0, int arg1, int arg2) {
 		if ((this.levelTileFlags[arg1][arg0][arg2] & 0x8) == 0) {
 			return arg1 <= 0 || (this.levelTileFlags[1][arg0][arg2] & 0x2) == 0 ? arg1 : arg1 - 1;
 		} else {
@@ -1069,22 +1023,19 @@ public class World {
 	}
 
 	@ObfuscatedName("c.c(III)Z")
-	public static final boolean isLocReady(int arg0, int arg1, int arg2) {
+	public static final boolean isLocReady(int arg1, int arg2) {
 		LocType var3 = LocType.get(arg1);
-		if (arg0 <= 0) {
-			throw new NullPointerException();
-		}
 		if (arg2 == 11) {
 			arg2 = 10;
 		}
 		if (arg2 >= 5 && arg2 <= 8) {
 			arg2 = 4;
 		}
-		return var3.validate(0, arg2);
+		return var3.validate(arg2);
 	}
 
 	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")
-	public static final void addLoc(int arg0, int arg1, int arg2, int arg3, World3D arg4, byte arg5, int arg6, int[][][] arg7, CollisionMap arg8, int arg9, int arg10) {
+	public static final void addLoc(int arg0, int arg1, int arg2, int arg3, World3D arg4, int arg6, int[][][] arg7, CollisionMap arg8, int arg9, int arg10) {
 		int var11 = arg7[arg9][arg0][arg3];
 		int var12 = arg7[arg9][arg0 + 1][arg3];
 		int var13 = arg7[arg9][arg0 + 1][arg3 + 1];
@@ -1096,27 +1047,24 @@ public class World {
 			var17 += Integer.MIN_VALUE;
 		}
 		byte var18 = (byte) ((arg6 << 6) + arg1);
-		if (arg5 != 5) {
-			return;
-		}
 		boolean var19 = false;
 		if (arg1 == 22) {
 			Entity var20;
 			if (var16.anim == -1) {
 				var20 = var16.getModel(22, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var20 = new LocEntity(var14, var13, var11, true, 22, arg6, true, var12, arg2, var16.anim);
+				var20 = new LocEntity(var14, var13, var11, 22, arg6, true, var12, arg2, var16.anim);
 			}
-			arg4.addGroundDecor(arg3, arg10, arg0, 0, var17, var15, var20, var18);
+			arg4.addGroundDecor(arg3, arg10, arg0, var17, var15, var20, var18);
 			if (var16.blockwalk && var16.active) {
-				arg8.setBlocked(arg3, 8, arg0);
+				arg8.setBlocked(arg3, arg0);
 			}
 		} else if (arg1 == 10 || arg1 == 11) {
 			Entity var36;
 			if (var16.anim == -1) {
 				var36 = var16.getModel(10, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var36 = new LocEntity(var14, var13, var11, true, 10, arg6, true, var12, arg2, var16.anim);
+				var36 = new LocEntity(var14, var13, var11, 10, arg6, true, var12, arg2, var16.anim);
 			}
 			if (var36 != null) {
 				int var37 = 0;
@@ -1132,43 +1080,43 @@ public class World {
 					var38 = var16.width;
 					var39 = var16.length;
 				}
-				arg4.addLoc(var18, var17, -21680, arg0, arg10, var15, var38, var37, var36, var39, arg3);
+				arg4.addLoc(var18, var17, arg0, arg10, var15, var38, var37, var36, var39, arg3);
 			}
 			if (var16.blockwalk) {
-				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, true, var16.width, arg3);
+				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
 			}
 		} else if (arg1 >= 12) {
 			Entity var21;
 			if (var16.anim == -1) {
 				var21 = var16.getModel(arg1, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var21 = new LocEntity(var14, var13, var11, true, arg1, arg6, true, var12, arg2, var16.anim);
+				var21 = new LocEntity(var14, var13, var11, arg1, arg6, true, var12, arg2, var16.anim);
 			}
-			arg4.addLoc(var18, var17, -21680, arg0, arg10, var15, 1, 0, var21, 1, arg3);
+			arg4.addLoc(var18, var17, arg0, arg10, var15, 1, 0, var21, 1, arg3);
 			if (var16.blockwalk) {
-				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, true, var16.width, arg3);
+				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
 			}
 		} else if (arg1 == 0) {
 			Entity var22;
 			if (var16.anim == -1) {
 				var22 = var16.getModel(0, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var22 = new LocEntity(var14, var13, var11, true, 0, arg6, true, var12, arg2, var16.anim);
+				var22 = new LocEntity(var14, var13, var11, 0, arg6, true, var12, arg2, var16.anim);
 			}
-			arg4.addWall(arg0, var17, arg10, 0, true, field64[arg6], var15, null, var22, var18, arg3);
+			arg4.addWall(arg0, var17, arg10, 0, field64[arg6], var15, null, var22, var18, arg3);
 			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, -371, arg6);
+				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
 			}
 		} else if (arg1 == 1) {
 			Entity var23;
 			if (var16.anim == -1) {
 				var23 = var16.getModel(1, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var23 = new LocEntity(var14, var13, var11, true, 1, arg6, true, var12, arg2, var16.anim);
+				var23 = new LocEntity(var14, var13, var11, 1, arg6, true, var12, arg2, var16.anim);
 			}
-			arg4.addWall(arg0, var17, arg10, 0, true, field65[arg6], var15, null, var23, var18, arg3);
+			arg4.addWall(arg0, var17, arg10, 0, field65[arg6], var15, null, var23, var18, arg3);
 			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, -371, arg6);
+				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
 			}
 		} else if (arg1 == 2) {
 			int var24 = arg6 + 1 & 0x3;
@@ -1178,43 +1126,43 @@ public class World {
 				var25 = var16.getModel(2, arg6 + 4, var11, var12, var13, var14, -1);
 				var26 = var16.getModel(2, var24, var11, var12, var13, var14, -1);
 			} else {
-				var25 = new LocEntity(var14, var13, var11, true, 2, arg6 + 4, true, var12, arg2, var16.anim);
-				var26 = new LocEntity(var14, var13, var11, true, 2, var24, true, var12, arg2, var16.anim);
+				var25 = new LocEntity(var14, var13, var11, 2, arg6 + 4, true, var12, arg2, var16.anim);
+				var26 = new LocEntity(var14, var13, var11, 2, var24, true, var12, arg2, var16.anim);
 			}
-			arg4.addWall(arg0, var17, arg10, field64[var24], true, field64[arg6], var15, var26, var25, var18, arg3);
+			arg4.addWall(arg0, var17, arg10, field64[var24], field64[arg6], var15, var26, var25, var18, arg3);
 			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, -371, arg6);
+				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
 			}
 		} else if (arg1 == 3) {
 			Entity var27;
 			if (var16.anim == -1) {
 				var27 = var16.getModel(3, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var27 = new LocEntity(var14, var13, var11, true, 3, arg6, true, var12, arg2, var16.anim);
+				var27 = new LocEntity(var14, var13, var11, 3, arg6, true, var12, arg2, var16.anim);
 			}
-			arg4.addWall(arg0, var17, arg10, 0, true, field65[arg6], var15, null, var27, var18, arg3);
+			arg4.addWall(arg0, var17, arg10, 0, field65[arg6], var15, null, var27, var18, arg3);
 			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, -371, arg6);
+				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
 			}
 		} else if (arg1 == 9) {
 			Entity var28;
 			if (var16.anim == -1) {
 				var28 = var16.getModel(arg1, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var28 = new LocEntity(var14, var13, var11, true, arg1, arg6, true, var12, arg2, var16.anim);
+				var28 = new LocEntity(var14, var13, var11, arg1, arg6, true, var12, arg2, var16.anim);
 			}
-			arg4.addLoc(var18, var17, -21680, arg0, arg10, var15, 1, 0, var28, 1, arg3);
+			arg4.addLoc(var18, var17, arg0, arg10, var15, 1, 0, var28, 1, arg3);
 			if (var16.blockwalk) {
-				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, true, var16.width, arg3);
+				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
 			}
 		} else if (arg1 == 4) {
 			Entity var29;
 			if (var16.anim == -1) {
 				var29 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var29 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
+				var29 = new LocEntity(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
-			arg4.addDecor(var18, var29, 0, arg0, arg3, field64[arg6], 0, 1, arg6 * 512, arg10, var15, var17);
+			arg4.addDecor(var18, var29, 0, arg0, arg3, field64[arg6], 0, arg6 * 512, arg10, var15, var17);
 		} else if (arg1 == 5) {
 			int var30 = 16;
 			int var31 = arg4.getWallTypecode(arg10, arg0, arg3);
@@ -1225,33 +1173,33 @@ public class World {
 			if (var16.anim == -1) {
 				var32 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var32 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
+				var32 = new LocEntity(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
-			arg4.addDecor(var18, var32, field66[arg6] * var30, arg0, arg3, field64[arg6], field67[arg6] * var30, 1, arg6 * 512, arg10, var15, var17);
+			arg4.addDecor(var18, var32, field66[arg6] * var30, arg0, arg3, field64[arg6], field67[arg6] * var30, arg6 * 512, arg10, var15, var17);
 		} else if (arg1 == 6) {
 			Entity var33;
 			if (var16.anim == -1) {
 				var33 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var33 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
+				var33 = new LocEntity(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
-			arg4.addDecor(var18, var33, 0, arg0, arg3, 256, 0, 1, arg6, arg10, var15, var17);
+			arg4.addDecor(var18, var33, 0, arg0, arg3, 256, 0, arg6, arg10, var15, var17);
 		} else if (arg1 == 7) {
 			Entity var34;
 			if (var16.anim == -1) {
 				var34 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var34 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
+				var34 = new LocEntity(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
-			arg4.addDecor(var18, var34, 0, arg0, arg3, 512, 0, 1, arg6, arg10, var15, var17);
+			arg4.addDecor(var18, var34, 0, arg0, arg3, 512, 0, arg6, arg10, var15, var17);
 		} else if (arg1 == 8) {
 			Entity var35;
 			if (var16.anim == -1) {
 				var35 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var35 = new LocEntity(var14, var13, var11, true, 4, 0, true, var12, arg2, var16.anim);
+				var35 = new LocEntity(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
-			arg4.addDecor(var18, var35, 0, arg0, arg3, 768, 0, 1, arg6, arg10, var15, var17);
+			arg4.addDecor(var18, var35, 0, arg0, arg3, 768, 0, arg6, arg10, var15, var17);
 		}
 	}
 }

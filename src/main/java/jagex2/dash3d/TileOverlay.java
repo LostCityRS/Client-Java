@@ -5,12 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("j")
 public class TileOverlay {
 
-	@ObfuscatedName("j.a")
-	public boolean field179 = true;
-
-	@ObfuscatedName("j.b")
-	public boolean field180 = false;
-
 	@ObfuscatedName("j.c")
 	public int[] vertexX;
 
@@ -86,7 +80,7 @@ public class TileOverlay {
 	@ObfuscatedName("j.A")
 	public static final int[][] field205 = new int[][] { { 0, 1, 2, 3, 0, 0, 1, 3 }, { 1, 1, 2, 3, 1, 0, 1, 3 }, { 0, 1, 2, 3, 1, 0, 1, 3 }, { 0, 0, 1, 2, 0, 0, 2, 4, 1, 0, 4, 3 }, { 0, 0, 1, 4, 0, 0, 4, 3, 1, 1, 2, 4 }, { 0, 0, 4, 3, 1, 0, 1, 2, 1, 0, 2, 4 }, { 0, 1, 2, 4, 1, 0, 1, 4, 1, 0, 4, 3 }, { 0, 4, 1, 2, 0, 4, 2, 5, 1, 0, 4, 5, 1, 0, 5, 3 }, { 0, 4, 1, 2, 0, 4, 2, 3, 0, 4, 3, 5, 1, 0, 4, 5 }, { 0, 0, 4, 5, 1, 4, 1, 2, 1, 4, 2, 3, 1, 4, 3, 5 }, { 0, 0, 1, 5, 0, 1, 4, 5, 0, 1, 2, 4, 1, 0, 5, 3, 1, 5, 4, 3, 1, 4, 2, 3 }, { 1, 0, 1, 5, 1, 1, 4, 5, 1, 1, 2, 4, 0, 0, 5, 3, 0, 5, 4, 3, 0, 4, 2, 3 }, { 1, 0, 5, 4, 1, 0, 1, 5, 0, 0, 4, 3, 0, 4, 5, 3, 0, 5, 2, 3, 0, 1, 2, 5 } };
 
-	public TileOverlay(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, boolean arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
+	public TileOverlay(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
 		if (arg5 != arg19 || arg1 != arg5 || arg5 != arg13) {
 			this.flat = false;
 		}
@@ -107,9 +101,6 @@ public class TileOverlay {
 		int[] var28 = new int[var26];
 		int var29 = arg11 * var21;
 		int var30 = arg15 * var21;
-		if (arg12) {
-			this.field179 = !this.field179;
-		}
 		for (int var31 = 0; var31 < var26; var31++) {
 			int var44 = var25[var31];
 			if ((var44 & 0x1) == 0 && var44 <= 8) {

@@ -6,27 +6,6 @@ import jagex2.datastruct.DoublyLinkable;
 @ObfuscatedName("hb")
 public class Pix2D extends DoublyLinkable {
 
-	@ObfuscatedName("hb.i")
-	public static boolean _flowObfuscator4 = true;
-
-	@ObfuscatedName("hb.j")
-	public static boolean _flowObfuscator5;
-
-	@ObfuscatedName("hb.k")
-	public static int _flowObfuscator6 = 35546;
-
-	@ObfuscatedName("hb.l")
-	public static int _flowObfuscator7 = 4;
-
-	@ObfuscatedName("hb.m")
-	public static boolean _flowObfuscator8;
-
-	@ObfuscatedName("hb.n")
-	public static int _flowObfuscator9;
-
-	@ObfuscatedName("hb.o")
-	public static boolean _flowObfuscator10 = true;
-
 	@ObfuscatedName("hb.p")
 	public static int[] data;
 
@@ -57,26 +36,17 @@ public class Pix2D extends DoublyLinkable {
 	@ObfuscatedName("hb.y")
 	public static int centerY2d;
 
-	@ObfuscatedName("hb.z")
-	public static boolean _flowObfuscator11;
-
 	@ObfuscatedName("hb.a(II[II)V")
-	public static void bind(int arg0, int arg1, int[] arg2, int arg3) {
+	public static void bind(int arg0, int[] arg2, int arg3) {
 		data = arg2;
 		width2d = arg0;
 		height2d = arg3;
-		setBounds(arg0, arg3, _flowObfuscator7, 0, 0);
-		if (arg1 != 2) {
-			_flowObfuscator7 = -9;
-		}
+		setBounds(arg0, arg3, 0, 0);
 	}
 
 	@ObfuscatedName("hb.a(B)V")
-	public static void resetBounds(byte arg0) {
+	public static void resetBounds() {
 		left = 0;
-		if (arg0 != -115) {
-			_flowObfuscator4 = !_flowObfuscator4;
-		}
 		top = 0;
 		right = width2d;
 		bottom = height2d;
@@ -85,7 +55,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIII)V")
-	public static void setBounds(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public static void setBounds(int arg0, int arg1, int arg3, int arg4) {
 		if (arg4 < 0) {
 			arg4 = 0;
 		}
@@ -102,27 +72,21 @@ public class Pix2D extends DoublyLinkable {
 		top = arg3;
 		right = arg0;
 		bottom = arg1;
-		if (arg2 < 4 || arg2 > 4) {
-			_flowObfuscator7 = 461;
-		}
 		safeWidth = right - 1;
 		centerX2d = right / 2;
 		centerY2d = bottom / 2;
 	}
 
 	@ObfuscatedName("hb.a(Z)V")
-	public static void clear(boolean arg0) {
+	public static void clear() {
 		int var1 = height2d * width2d;
-		if (arg0) {
-			_flowObfuscator5 = !_flowObfuscator5;
-		}
 		for (int var2 = 0; var2 < var1; var2++) {
 			data[var2] = 0;
 		}
 	}
 
 	@ObfuscatedName("hb.a(IIIIIIB)V")
-	public static void fillRect(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, byte arg6) {
+	public static void fillRect(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg5 < left) {
 			arg3 -= left - arg5;
 			arg5 = left;
@@ -141,9 +105,6 @@ public class Pix2D extends DoublyLinkable {
 		int var8 = (arg4 >> 16 & 0xFF) * arg1;
 		int var9 = (arg4 >> 8 & 0xFF) * arg1;
 		int var10 = (arg4 & 0xFF) * arg1;
-		if (arg6 != -30) {
-			_flowObfuscator8 = !_flowObfuscator8;
-		}
 		int var11 = width2d - arg3;
 		int var12 = width2d * arg0 + arg5;
 		for (int var13 = 0; var13 < arg2; var13++) {
@@ -159,7 +120,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIIII)V")
-	public static void fillRect(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public static void fillRect(int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg4 < left) {
 			arg2 -= left - arg4;
 			arg4 = left;
@@ -176,9 +137,6 @@ public class Pix2D extends DoublyLinkable {
 		}
 		int var6 = width2d - arg2;
 		int var7 = width2d * arg5 + arg4;
-		if (arg0 < 0 || arg0 > 0) {
-			_flowObfuscator8 = !_flowObfuscator8;
-		}
 		for (int var8 = -arg3; var8 < 0; var8++) {
 			for (int var9 = -arg2; var9 < 0; var9++) {
 				data[var7++] = arg1;
@@ -188,29 +146,25 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.b(IIIIII)V")
-	public static void drawRect(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		drawHorizontalLine(arg2, arg5, arg1, arg3, _flowObfuscator9);
-		drawHorizontalLine(arg2, arg0 + arg5 - 1, arg1, arg3, _flowObfuscator9);
-		drawVerticalLine(arg3, arg2, arg5, arg0, _flowObfuscator10);
-		drawVerticalLine(arg1 + arg3 - 1, arg2, arg5, arg0, _flowObfuscator10);
-		int var6 = 28 / arg4;
+	public static void drawRect(int arg0, int arg1, int arg2, int arg3, int arg5) {
+		drawHorizontalLine(arg2, arg5, arg1, arg3);
+		drawHorizontalLine(arg2, arg0 + arg5 - 1, arg1, arg3);
+		drawVerticalLine(arg3, arg2, arg5, arg0);
+		drawVerticalLine(arg1 + arg3 - 1, arg2, arg5, arg0);
 	}
 
 	@ObfuscatedName("hb.a(IIIIIZI)V")
 	public static void drawRect(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5, int arg6) {
-		drawHorizontalLine(arg3, arg4, 629, arg1, arg2, arg6);
-		drawHorizontalLine(arg0 + arg3 - 1, arg4, 629, arg1, arg2, arg6);
-		if (!arg5) {
-			_flowObfuscator6 = 412;
-		}
+		drawHorizontalLine(arg3, arg4, arg1, arg2, arg6);
+		drawHorizontalLine(arg0 + arg3 - 1, arg4, arg1, arg2, arg6);
 		if (arg0 >= 3) {
-			drawVerticalLine(arg2, arg3 + 1, arg6, arg0 - 2, arg1, (byte) 6);
-			drawVerticalLine(arg2 + arg4 - 1, arg3 + 1, arg6, arg0 - 2, arg1, (byte) 6);
+			drawVerticalLine(arg2, arg3 + 1, arg6, arg0 - 2, arg1);
+			drawVerticalLine(arg2 + arg4 - 1, arg3 + 1, arg6, arg0 - 2, arg1);
 		}
 	}
 
 	@ObfuscatedName("hb.b(IIIII)V")
-	public static void drawHorizontalLine(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public static void drawHorizontalLine(int arg0, int arg1, int arg2, int arg3) {
 		if (arg1 < top || arg1 >= bottom) {
 			return;
 		}
@@ -222,15 +176,13 @@ public class Pix2D extends DoublyLinkable {
 			arg2 = right - arg3;
 		}
 		int var5 = width2d * arg1 + arg3;
-		if (arg4 == 0) {
-			for (int var6 = 0; var6 < arg2; var6++) {
-				data[var5 + var6] = arg0;
-			}
+		for (int var6 = 0; var6 < arg2; var6++) {
+			data[var5 + var6] = arg0;
 		}
 	}
 
 	@ObfuscatedName("hb.c(IIIIII)V")
-	public static void drawHorizontalLine(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public static void drawHorizontalLine(int arg0, int arg1, int arg3, int arg4, int arg5) {
 		if (arg0 < top || arg0 >= bottom) {
 			return;
 		}
@@ -242,9 +194,6 @@ public class Pix2D extends DoublyLinkable {
 			arg1 = right - arg4;
 		}
 		int var6 = 256 - arg5;
-		if (arg2 <= 0) {
-			_flowObfuscator5 = !_flowObfuscator5;
-		}
 		int var7 = (arg3 >> 16 & 0xFF) * arg5;
 		int var8 = (arg3 >> 8 & 0xFF) * arg5;
 		int var9 = (arg3 & 0xFF) * arg5;
@@ -259,10 +208,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIIZ)V")
-	public static void drawVerticalLine(int arg0, int arg1, int arg2, int arg3, boolean arg4) {
-		if (!arg4) {
-			_flowObfuscator5 = !_flowObfuscator5;
-		}
+	public static void drawVerticalLine(int arg0, int arg1, int arg2, int arg3) {
 		if (arg0 < left || arg0 >= right) {
 			return;
 		}
@@ -280,12 +226,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIIIB)V")
-	public static void drawVerticalLine(int arg0, int arg1, int arg2, int arg3, int arg4, byte arg5) {
-		if (arg5 == 6) {
-			boolean var6 = false;
-		} else {
-			_flowObfuscator8 = !_flowObfuscator8;
-		}
+	public static void drawVerticalLine(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg0 < left || arg0 >= right) {
 			return;
 		}

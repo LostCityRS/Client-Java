@@ -21,15 +21,12 @@ public class LruCache {
 	public int available;
 
 	@ObfuscatedName("t.f")
-	public HashTable table = new HashTable(3, 1024);
+	public HashTable table = new HashTable(1024);
 
 	@ObfuscatedName("t.g")
-	public DoublyLinkList history = new DoublyLinkList(526);
+	public DoublyLinkList history = new DoublyLinkList();
 
-	public LruCache(int arg0, int arg1) {
-		if (arg1 != 1) {
-			throw new NullPointerException();
-		}
+	public LruCache(int arg0) {
 		this.capacity = arg0;
 		this.available = arg0;
 	}
@@ -47,7 +44,7 @@ public class LruCache {
 	}
 
 	@ObfuscatedName("t.a(Lx;JI)V")
-	public void put(DoublyLinkable arg0, long arg1, int arg2) {
+	public void put(DoublyLinkable arg0, long arg1) {
 		if (this.available == 0) {
 			DoublyLinkable var5 = this.history.removeHead();
 			var5.unlink();
@@ -60,10 +57,8 @@ public class LruCache {
 		} else {
 			this.available--;
 		}
-		this.table.put(5, arg1, arg0);
-		if (arg2 == 39399) {
-			this.history.addTail(arg0);
-		}
+		this.table.put(arg1, arg0);
+		this.history.addTail(arg0);
 	}
 
 	@ObfuscatedName("t.a()V")

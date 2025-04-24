@@ -7,9 +7,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("pc")
 public class VarpType {
 
-	@ObfuscatedName("pc.a")
-	public int _flowObfuscator1 = 439;
-
 	@ObfuscatedName("pc.b")
 	public static int count;
 
@@ -53,12 +50,8 @@ public class VarpType {
 	public boolean field1166 = false;
 
 	@ObfuscatedName("pc.a(Lyb;B)V")
-	public static void unpack(Jagfile arg0, byte arg1) {
-		if (arg1 != 127) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
-		Packet var3 = new Packet((byte) -109, arg0.read("varp.dat", null));
+	public static void unpack(Jagfile arg0) {
+		Packet var3 = new Packet(arg0.read("varp.dat", null));
 		field1155 = 0;
 		count = var3.g2();
 		if (types == null) {
@@ -71,7 +64,7 @@ public class VarpType {
 			if (types[var4] == null) {
 				types[var4] = new VarpType();
 			}
-			types[var4].decode(var3, var4, 439);
+			types[var4].decode(var3, var4);
 		}
 		if (var3.data.length != var3.pos) {
 			System.out.println("varptype load mismatch");
@@ -79,10 +72,7 @@ public class VarpType {
 	}
 
 	@ObfuscatedName("pc.a(Lmb;II)V")
-	public void decode(Packet arg0, int arg1, int arg2) {
-		if (arg2 <= 0) {
-			return;
-		}
+	public void decode(Packet arg0, int arg1) {
 		while (true) {
 			int var4 = arg0.g1();
 			if (var4 == 0) {

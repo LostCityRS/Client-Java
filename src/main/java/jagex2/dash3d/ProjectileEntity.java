@@ -85,7 +85,7 @@ public class ProjectileEntity extends Entity {
 	@ObfuscatedName("eb.K")
 	public int field527;
 
-	public ProjectileEntity(int arg0, int arg1, int arg2, int arg3, byte arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
+	public ProjectileEntity(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 		this.field504 = SpotAnimType.types[arg1];
 		this.level = arg5;
 		this.field506 = arg0;
@@ -97,14 +97,11 @@ public class ProjectileEntity extends Entity {
 		this.field513 = arg8;
 		this.target = arg10;
 		this.offsetY = arg3;
-		if (this.field503 != arg4) {
-			this.field502 = !this.field502;
-		}
 		this.field515 = false;
 	}
 
 	@ObfuscatedName("eb.a(IBIII)V")
-	public final void updateVelocity(int arg0, byte arg1, int arg2, int arg3, int arg4) {
+	public final void updateVelocity(int arg0, int arg2, int arg3, int arg4) {
 		if (!this.field515) {
 			double var6 = (double) (arg3 - this.field506);
 			double var8 = (double) (arg0 - this.field507);
@@ -121,29 +118,23 @@ public class ProjectileEntity extends Entity {
 			this.field522 = -this.field521 * Math.tan((double) this.field512 * 0.02454369D);
 		}
 		this.field523 = ((double) arg2 - this.field518 - this.field522 * var12) * 2.0D / (var12 * var12);
-		if (arg1 != -12) {
-			this.field502 = !this.field502;
-		}
 	}
 
 	@ObfuscatedName("eb.a(II)V")
-	public final void update(int arg0, int arg1) {
+	public final void update(int arg1) {
 		this.field515 = true;
 		this.field516 += (double) arg1 * this.field519;
 		this.field517 += (double) arg1 * this.field520;
 		this.field518 += this.field523 * 0.5D * (double) arg1 * (double) arg1 + (double) arg1 * this.field522;
 		this.field522 += (double) arg1 * this.field523;
-		if (arg0 >= 0) {
-			return;
-		}
 		this.field524 = (int) (Math.atan2(this.field519, this.field520) * 325.949D) + 1024 & 0x7FF;
 		this.field525 = (int) (Math.atan2(this.field522, this.field521) * 325.949D) & 0x7FF;
 		if (this.field504.seq == null) {
 			return;
 		}
 		this.field527 += arg1;
-		while (this.field527 > this.field504.seq.getFrameDuration(0, this.field526)) {
-			this.field527 -= this.field504.seq.getFrameDuration(0, this.field526) + 1;
+		while (this.field527 > this.field504.seq.getFrameDuration(this.field526)) {
+			this.field527 -= this.field504.seq.getFrameDuration(this.field526) + 1;
 			this.field526++;
 			if (this.field526 >= this.field504.seq.frameCount) {
 				this.field526 = 0;
@@ -152,26 +143,22 @@ public class ProjectileEntity extends Entity {
 	}
 
 	@ObfuscatedName("eb.a(I)Lfb;")
-	public final Model getModel(int arg0) {
+	public final Model getModel() {
 		Model var2 = this.field504.getModel();
-		if (arg0 != 5560) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
 		if (var2 == null) {
 			return null;
 		}
-		Model var4 = new Model(var2, true, false, !this.field504.animHasAlpha, -796);
+		Model var4 = new Model(var2, true, false, !this.field504.animHasAlpha);
 		if (this.field504.seq != null) {
 			var4.createLabelReferences(-591);
-			var4.applyTransform(this.field504.seq.frames[this.field526], 13056);
+			var4.applyTransform(this.field504.seq.frames[this.field526]);
 			var4.labelFaces = null;
 			var4.labelVertices = null;
 		}
 		if (this.field504.resizeh != 128 || this.field504.resizev != 128) {
-			var4.scale(this.field504.resizev, this.field504.resizeh, 4, this.field504.resizeh);
+			var4.scale(this.field504.resizev, this.field504.resizeh, this.field504.resizeh);
 		}
-		var4.rotateX(2, this.field525);
+		var4.rotateX(this.field525);
 		var4.calculateNormals(this.field504.ambient + 64, this.field504.contrast + 850, -30, -50, -30, true);
 		return var4;
 	}

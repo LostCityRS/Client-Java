@@ -9,18 +9,6 @@ public class Pix3D extends Pix2D {
 	@ObfuscatedName("ib.ab")
 	public static int[][] texturePalette;
 
-	@ObfuscatedName("ib.A")
-	public static int _flowObfuscator12 = -130;
-
-	@ObfuscatedName("ib.B")
-	public static int _flowObfuscator13 = 3;
-
-	@ObfuscatedName("ib.C")
-	public static int _flowObfuscator14 = 43504;
-
-	@ObfuscatedName("ib.D")
-	public static boolean _flowObfuscator15 = true;
-
 	@ObfuscatedName("ib.E")
 	public static boolean lowMemory = true;
 
@@ -88,7 +76,7 @@ public class Pix3D extends Pix2D {
 	public static int[][] texelPool;
 
 	@ObfuscatedName("ib.b(B)V")
-	public static final void unload(byte arg0) {
+	public static final void unload() {
 		divTable = null;
 		divTable = null;
 		sinTable = null;
@@ -100,18 +88,12 @@ public class Pix3D extends Pix2D {
 		texelPool = null;
 		activeTexels = null;
 		textureCycle = null;
-		if (arg0 != 9) {
-			_flowObfuscator15 = !_flowObfuscator15;
-		}
 		palette = null;
 		texturePalette = null;
 	}
 
 	@ObfuscatedName("ib.c(B)V")
-	public static final void init2D(byte arg0) {
-		if (arg0 != 6) {
-			return;
-		}
+	public static final void init2D() {
 		lineOffset = new int[Pix2D.height2d];
 		for (int var1 = 0; var1 < Pix2D.height2d; var1++) {
 			lineOffset[var1] = Pix2D.width2d * var1;
@@ -121,11 +103,8 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(III)V")
-	public static final void init3D(int arg0, int arg1, int arg2) {
+	public static final void init3D(int arg1, int arg2) {
 		lineOffset = new int[arg1];
-		if (arg0 >= 0) {
-			return;
-		}
 		for (int var3 = 0; var3 < arg1; var3++) {
 			lineOffset[var3] = arg2 * var3;
 		}
@@ -134,11 +113,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(I)V")
-	public static final void clearTexels(int arg0) {
-		if (arg0 < 7 || arg0 > 7) {
-			for (int var1 = 1; var1 > 0; var1++) {
-			}
-		}
+	public static final void clearTexels() {
 		texelPool = null;
 		for (int var2 = 0; var2 < 50; var2++) {
 			activeTexels[var2] = null;
@@ -146,11 +121,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(II)V")
-	public static final void initPool(int arg0, int arg1) {
-		if (arg0 != -12734) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public static final void initPool(int arg1) {
 		if (texelPool != null) {
 			return;
 		}
@@ -166,19 +137,15 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(ZLyb;)V")
-	public static final void unpackTextures(boolean arg0, Jagfile arg1) {
-		if (arg0) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public static final void unpackTextures(Jagfile arg1) {
 		textureOffset = 0;
 		for (int var3 = 0; var3 < 50; var3++) {
 			try {
 				textures[var3] = new Pix8(arg1, String.valueOf(var3), 0);
 				if (lowMemory && textures[var3].width == 128) {
-					textures[var3].shrink(3206);
+					textures[var3].shrink();
 				} else {
-					textures[var3].crop(false);
+					textures[var3].crop();
 				}
 				textureOffset++;
 			} catch (Exception var4) {
@@ -187,7 +154,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.b(II)I")
-	public static final int getAverageTextureRgb(int arg0, int arg1) {
+	public static final int getAverageTextureRgb(int arg0) {
 		if (averageTextureRgb[arg0] != 0) {
 			return averageTextureRgb[arg0];
 		}
@@ -200,9 +167,6 @@ public class Pix3D extends Pix2D {
 			var3 += texturePalette[arg0][var6] >> 8 & 0xFF;
 			var4 += texturePalette[arg0][var6] & 0xFF;
 		}
-		if (arg1 < _flowObfuscator13 || arg1 > _flowObfuscator13) {
-			return _flowObfuscator12;
-		}
 		int var7 = var4 / var5 + (var2 / var5 << 16) + (var3 / var5 << 8);
 		int var8 = setGamma(var7, 1.4D);
 		if (var8 == 0) {
@@ -213,11 +177,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(IB)V")
-	public static final void pushTexture(int arg0, byte arg1) {
-		if (arg1 != 4) {
-			return;
-		}
-		boolean var2 = false;
+	public static final void pushTexture(int arg0) {
 		if (activeTexels[arg0] != null) {
 			texelPool[poolSize++] = activeTexels[arg0];
 			activeTexels[arg0] = null;
@@ -288,7 +248,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(ID)V")
-	public static final void setBrightness(int arg0, double arg1) {
+	public static final void setBrightness(double arg1) {
 		double var3 = arg1 + (Math.random() * 0.03D - 0.015D);
 		int var5 = 0;
 		for (int var6 = 0; var6 < 512; var6++) {
@@ -351,9 +311,6 @@ public class Pix3D extends Pix2D {
 				palette[var5++] = var38;
 			}
 		}
-		if (_flowObfuscator14 != arg0) {
-			_flowObfuscator14 = -403;
-		}
 		for (int var7 = 0; var7 < 50; var7++) {
 			if (textures[var7] != null) {
 				int[] var9 = textures[var7].palette;
@@ -364,7 +321,7 @@ public class Pix3D extends Pix2D {
 			}
 		}
 		for (int var8 = 0; var8 < 50; var8++) {
-			pushTexture(var8, (byte) 4);
+			pushTexture(var8);
 		}
 	}
 

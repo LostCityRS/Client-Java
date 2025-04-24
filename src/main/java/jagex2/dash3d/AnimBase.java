@@ -6,9 +6,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("g")
 public class AnimBase {
 
-	@ObfuscatedName("g.a")
-	public int _flowObfuscator1;
-
 	@ObfuscatedName("g.b")
 	public int length;
 
@@ -18,7 +15,7 @@ public class AnimBase {
 	@ObfuscatedName("g.d")
 	public int[][] labels;
 
-	public AnimBase(Packet arg0, int arg1) {
+	public AnimBase(Packet arg0) {
 		this.length = arg0.g1();
 		this.types = new int[this.length];
 		this.labels = new int[this.length][];
@@ -31,9 +28,6 @@ public class AnimBase {
 			for (int var6 = 0; var6 < var5; var6++) {
 				this.labels[var4][var6] = arg0.g1();
 			}
-		}
-		if (arg1 < 9 || arg1 > 9) {
-			this._flowObfuscator1 = -74;
 		}
 	}
 }

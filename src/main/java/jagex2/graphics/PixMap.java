@@ -2,8 +2,7 @@ package jagex2.graphics;
 
 import deob.ObfuscatedName;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.ColorModel;
 import java.awt.image.DirectColorModel;
 import java.awt.image.ImageConsumer;
@@ -12,12 +11,6 @@ import java.awt.image.ImageProducer;
 
 @ObfuscatedName("rb")
 public class PixMap implements ImageProducer, ImageObserver {
-
-	@ObfuscatedName("rb.a")
-	public int _flowObfuscator1;
-
-	@ObfuscatedName("rb.b")
-	public boolean _flowObfuscator2 = true;
 
 	@ObfuscatedName("rb.c")
 	public int[] data;
@@ -37,12 +30,9 @@ public class PixMap implements ImageProducer, ImageObserver {
 	@ObfuscatedName("rb.h")
 	public Image image;
 
-	public PixMap(java.awt.Component arg0, int arg1, int arg2, int arg3) {
+	public PixMap(Component arg0, int arg1, int arg2) {
 		this.width = arg2;
 		this.height = arg1;
-		if (arg3 != 2) {
-			this._flowObfuscator2 = !this._flowObfuscator2;
-		}
 		this.data = new int[arg1 * arg2];
 		this.colorModel = new DirectColorModel(32, 16711680, 65280, 255);
 		this.image = arg0.createImage(this);
@@ -52,21 +42,17 @@ public class PixMap implements ImageProducer, ImageObserver {
 		arg0.prepareImage(this.image, this);
 		this.setPixels();
 		arg0.prepareImage(this.image, this);
-		this.bind(212);
+		this.bind();
 	}
 
 	@ObfuscatedName("rb.a(I)V")
-	public void bind(int arg0) {
-		Pix2D.bind(this.width, 2, this.data, this.height);
-		int var2 = 64 / arg0;
+	public void bind() {
+		Pix2D.bind(this.width, this.data, this.height);
 	}
 
 	@ObfuscatedName("rb.a(Ljava/awt/Graphics;IBI)V")
-	public void draw(Graphics arg0, int arg1, byte arg2, int arg3) {
+	public void draw(Graphics arg0, int arg1, int arg3) {
 		this.setPixels();
-		if (arg2 != 55) {
-			this._flowObfuscator1 = 41;
-		}
 		arg0.drawImage(this.image, arg3, arg1, this);
 	}
 

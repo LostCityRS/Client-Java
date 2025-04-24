@@ -5,19 +5,13 @@ import deob.ObfuscatedName;
 @ObfuscatedName("u")
 public class HashTable {
 
-	@ObfuscatedName("u.a")
-	public boolean _flowObfuscator1 = true;
-
 	@ObfuscatedName("u.b")
 	public int bucketCount;
 
 	@ObfuscatedName("u.c")
 	public Linkable[] buckets;
 
-	public HashTable(int arg0, int arg1) {
-		if (arg0 < 3 || arg0 > 3) {
-			this._flowObfuscator1 = !this._flowObfuscator1;
-		}
+	public HashTable(int arg1) {
 		this.bucketCount = arg1;
 		this.buckets = new Linkable[arg1];
 		for (int var3 = 0; var3 < arg1; var3++) {
@@ -39,7 +33,7 @@ public class HashTable {
 	}
 
 	@ObfuscatedName("u.a(IJLv;)V")
-	public void put(int arg0, long arg1, Linkable arg2) {
+	public void put(long arg1, Linkable arg2) {
 		if (arg2.prev != null) {
 			arg2.unlink();
 		}
@@ -47,10 +41,6 @@ public class HashTable {
 		arg2.prev = var5.prev;
 		arg2.next = var5;
 		arg2.prev.next = arg2;
-		if (arg0 < 5 || arg0 > 5) {
-			for (int var6 = 1; var6 > 0; var6++) {
-			}
-		}
 		arg2.next.prev = arg2;
 		arg2.key = arg1;
 	}

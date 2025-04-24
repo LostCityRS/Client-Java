@@ -9,12 +9,6 @@ import jagex2.graphics.Model;
 @ObfuscatedName("cb")
 public class LocEntity extends Entity {
 
-	@ObfuscatedName("cb.l")
-	public boolean field487 = false;
-
-	@ObfuscatedName("cb.m")
-	public boolean field488 = false;
-
 	@ObfuscatedName("cb.n")
 	public int field489;
 
@@ -45,12 +39,9 @@ public class LocEntity extends Entity {
 	@ObfuscatedName("cb.w")
 	public int field498;
 
-	public LocEntity(int arg0, int arg1, int arg2, boolean arg3, int arg4, int arg5, boolean arg6, int arg7, int arg8, int arg9) {
+	public LocEntity(int arg0, int arg1, int arg2, int arg4, int arg5, boolean arg6, int arg7, int arg8, int arg9) {
 		this.field489 = arg8;
 		this.field490 = arg4;
-		if (!arg3) {
-			this.field487 = !this.field487;
-		}
 		this.field491 = arg5;
 		this.field492 = arg2;
 		this.field493 = arg7;
@@ -61,15 +52,12 @@ public class LocEntity extends Entity {
 		this.field498 = client.loopCycle;
 		if (arg6 && this.field496.replayoff != -1) {
 			this.field497 = (int) (Math.random() * (double) this.field496.frameCount);
-			this.field498 -= (int) (Math.random() * (double) this.field496.getFrameDuration(0, this.field497));
+			this.field498 -= (int) (Math.random() * (double) this.field496.getFrameDuration(this.field497));
 		}
 	}
 
 	@ObfuscatedName("cb.a(I)Lfb;")
-	public final Model getModel(int arg0) {
-		if (arg0 != 5560) {
-			this.field488 = !this.field488;
-		}
+	public final Model getModel() {
 		if (this.field496 != null) {
 			int var2 = client.loopCycle - this.field498;
 			if (var2 > 100 && this.field496.replayoff > 0) {
@@ -78,10 +66,10 @@ public class LocEntity extends Entity {
 			label42: {
 				do {
 					do {
-						if (var2 <= this.field496.getFrameDuration(0, this.field497)) {
+						if (var2 <= this.field496.getFrameDuration(this.field497)) {
 							break label42;
 						}
-						var2 -= this.field496.getFrameDuration(0, this.field497);
+						var2 -= this.field496.getFrameDuration(this.field497);
 						this.field497++;
 					} while (this.field497 < this.field496.frameCount);
 					this.field497 -= this.field496.replayoff;

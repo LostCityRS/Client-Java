@@ -10,21 +10,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("ec")
 public class LocType {
 
-	@ObfuscatedName("ec.a")
-	public int _flowObfuscator1 = 2;
-
-	@ObfuscatedName("ec.b")
-	public static boolean _flowObfuscator2;
-
-	@ObfuscatedName("ec.c")
-	public int _flowObfuscator3;
-
-	@ObfuscatedName("ec.d")
-	public int _flowObfuscator4 = 679;
-
-	@ObfuscatedName("ec.e")
-	public boolean _flowObfuscator5 = true;
-
 	@ObfuscatedName("ec.f")
 	public static boolean field940;
 
@@ -89,10 +74,10 @@ public class LocType {
 	public boolean occlude;
 
 	@ObfuscatedName("ec.S")
-	public static LruCache modelCacheStatic = new LruCache(500, 1);
+	public static LruCache modelCacheStatic = new LruCache(500);
 
 	@ObfuscatedName("ec.T")
-	public static LruCache modelCacheDynamic = new LruCache(30, 1);
+	public static LruCache modelCacheDynamic = new LruCache(30);
 
 	@ObfuscatedName("ec.C")
 	public byte ambient;
@@ -150,8 +135,8 @@ public class LocType {
 
 	@ObfuscatedName("ec.a(Lyb;)V")
 	public static final void unpack(Jagfile arg0) {
-		data = new Packet((byte) -109, arg0.read("loc.dat", null));
-		Packet var1 = new Packet((byte) -109, arg0.read("loc.idx", null));
+		data = new Packet(arg0.read("loc.dat", null));
+		Packet var1 = new Packet(arg0.read("loc.idx", null));
 		count = var1.g2();
 		idx = new int[count];
 		int var2 = 2;
@@ -166,11 +151,8 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(B)V")
-	public static final void unload(byte arg0) {
+	public static final void unload() {
 		modelCacheStatic = null;
-		if (arg0 != 9) {
-			_flowObfuscator2 = !_flowObfuscator2;
-		}
 		modelCacheDynamic = null;
 		idx = null;
 		types = null;
@@ -189,7 +171,7 @@ public class LocType {
 		data.pos = idx[arg0];
 		var2.id = arg0;
 		var2.reset();
-		var2.decode(168, data);
+		var2.decode(data);
 		return var2;
 	}
 
@@ -230,121 +212,116 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(ILmb;)V")
-	public final void decode(int arg0, Packet arg1) {
-		if (arg0 <= 0) {
-			this._flowObfuscator5 = !this._flowObfuscator5;
-		}
+	public final void decode(Packet arg1) {
 		int var3 = -1;
 		while (true) {
-			while (true) {
-				int var4 = arg1.g1();
-				if (var4 == 0) {
-					if (this.shapes == null) {
-						this.shapes = new int[0];
-					}
-					if (var3 == -1) {
-						this.active = false;
-						if (this.shapes.length > 0 && this.shapes[0] == 10) {
-							this.active = true;
-						}
-						if (this.op != null) {
-							this.active = true;
-							return;
-						}
-					}
-					return;
+			int var4 = arg1.g1();
+			if (var4 == 0) {
+				if (this.shapes == null) {
+					this.shapes = new int[0];
 				}
-				if (var4 == 1) {
-					int var5 = arg1.g1();
-					this.shapes = new int[var5];
-					this.models = new int[var5];
-					for (int var6 = 0; var6 < var5; var6++) {
-						this.models[var6] = arg1.g2();
-						this.shapes[var6] = arg1.g1();
-					}
-				} else if (var4 == 2) {
-					this.name = arg1.gjstr();
-				} else if (var4 == 3) {
-					this.desc = arg1.gjstrraw(1);
-				} else if (var4 == 14) {
-					this.width = arg1.g1();
-				} else if (var4 == 15) {
-					this.length = arg1.g1();
-				} else if (var4 == 17) {
-					this.blockwalk = false;
-				} else if (var4 == 18) {
-					this.blockrange = false;
-				} else if (var4 == 19) {
-					var3 = arg1.g1();
-					if (var3 == 1) {
+				if (var3 == -1) {
+					this.active = false;
+					if (this.shapes.length > 0 && this.shapes[0] == 10) {
 						this.active = true;
 					}
-				} else if (var4 == 21) {
-					this.hillskew = true;
-				} else if (var4 == 22) {
-					this.sharelight = true;
-				} else if (var4 == 23) {
-					this.occlude = true;
-				} else if (var4 == 24) {
-					this.anim = arg1.g2();
-					if (this.anim == 65535) {
-						this.anim = -1;
+					if (this.op != null) {
+						this.active = true;
+						return;
 					}
-				} else if (var4 == 25) {
-					this.animHasAlpha = true;
-				} else if (var4 == 28) {
-					this.wallwidth = arg1.g1();
-				} else if (var4 == 29) {
-					this.ambient = arg1.g1b();
-				} else if (var4 == 39) {
-					this.contrast = arg1.g1b();
-				} else if (var4 >= 30 && var4 < 39) {
-					if (this.op == null) {
-						this.op = new String[5];
-					}
-					this.op[var4 - 30] = arg1.gjstr();
-					if (this.op[var4 - 30].equalsIgnoreCase("hidden")) {
-						this.op[var4 - 30] = null;
-					}
-				} else if (var4 == 40) {
-					int var7 = arg1.g1();
-					this.recol_s = new int[var7];
-					this.recol_d = new int[var7];
-					for (int var8 = 0; var8 < var7; var8++) {
-						this.recol_s[var8] = arg1.g2();
-						this.recol_d[var8] = arg1.g2();
-					}
-				} else if (var4 == 60) {
-					this.mapfunction = arg1.g2();
-				} else if (var4 == 62) {
-					this.mirror = true;
-				} else if (var4 == 64) {
-					this.shadow = false;
-				} else if (var4 == 65) {
-					this.resizex = arg1.g2();
-				} else if (var4 == 66) {
-					this.resizey = arg1.g2();
-				} else if (var4 == 67) {
-					this.resizez = arg1.g2();
-				} else if (var4 == 68) {
-					this.mapscene = arg1.g2();
-				} else if (var4 == 69) {
-					this.forceapproach = arg1.g1();
-				} else if (var4 == 70) {
-					this.offsetx = arg1.g2b();
-				} else if (var4 == 71) {
-					this.offsety = arg1.g2b();
-				} else if (var4 == 72) {
-					this.offsetz = arg1.g2b();
-				} else if (var4 == 73) {
-					this.forcedecor = true;
 				}
+				return;
+			}
+			if (var4 == 1) {
+				int var5 = arg1.g1();
+				this.shapes = new int[var5];
+				this.models = new int[var5];
+				for (int var6 = 0; var6 < var5; var6++) {
+					this.models[var6] = arg1.g2();
+					this.shapes[var6] = arg1.g1();
+				}
+			} else if (var4 == 2) {
+				this.name = arg1.gjstr();
+			} else if (var4 == 3) {
+				this.desc = arg1.gjstrraw();
+			} else if (var4 == 14) {
+				this.width = arg1.g1();
+			} else if (var4 == 15) {
+				this.length = arg1.g1();
+			} else if (var4 == 17) {
+				this.blockwalk = false;
+			} else if (var4 == 18) {
+				this.blockrange = false;
+			} else if (var4 == 19) {
+				var3 = arg1.g1();
+				if (var3 == 1) {
+					this.active = true;
+				}
+			} else if (var4 == 21) {
+				this.hillskew = true;
+			} else if (var4 == 22) {
+				this.sharelight = true;
+			} else if (var4 == 23) {
+				this.occlude = true;
+			} else if (var4 == 24) {
+				this.anim = arg1.g2();
+				if (this.anim == 65535) {
+					this.anim = -1;
+				}
+			} else if (var4 == 25) {
+				this.animHasAlpha = true;
+			} else if (var4 == 28) {
+				this.wallwidth = arg1.g1();
+			} else if (var4 == 29) {
+				this.ambient = arg1.g1b();
+			} else if (var4 == 39) {
+				this.contrast = arg1.g1b();
+			} else if (var4 >= 30 && var4 < 39) {
+				if (this.op == null) {
+					this.op = new String[5];
+				}
+				this.op[var4 - 30] = arg1.gjstr();
+				if (this.op[var4 - 30].equalsIgnoreCase("hidden")) {
+					this.op[var4 - 30] = null;
+				}
+			} else if (var4 == 40) {
+				int var7 = arg1.g1();
+				this.recol_s = new int[var7];
+				this.recol_d = new int[var7];
+				for (int var8 = 0; var8 < var7; var8++) {
+					this.recol_s[var8] = arg1.g2();
+					this.recol_d[var8] = arg1.g2();
+				}
+			} else if (var4 == 60) {
+				this.mapfunction = arg1.g2();
+			} else if (var4 == 62) {
+				this.mirror = true;
+			} else if (var4 == 64) {
+				this.shadow = false;
+			} else if (var4 == 65) {
+				this.resizex = arg1.g2();
+			} else if (var4 == 66) {
+				this.resizey = arg1.g2();
+			} else if (var4 == 67) {
+				this.resizez = arg1.g2();
+			} else if (var4 == 68) {
+				this.mapscene = arg1.g2();
+			} else if (var4 == 69) {
+				this.forceapproach = arg1.g1();
+			} else if (var4 == 70) {
+				this.offsetx = arg1.g2b();
+			} else if (var4 == 71) {
+				this.offsety = arg1.g2b();
+			} else if (var4 == 72) {
+				this.offsetz = arg1.g2b();
+			} else if (var4 == 73) {
+				this.forcedecor = true;
 			}
 		}
 	}
 
 	@ObfuscatedName("ec.a(II)Z")
-	public final boolean validate(int arg0, int arg1) {
+	public final boolean validate(int arg1) {
 		int var3 = -1;
 		for (int var4 = 0; var4 < this.shapes.length; var4++) {
 			if (this.shapes[var4] == arg1) {
@@ -352,9 +329,7 @@ public class LocType {
 				break;
 			}
 		}
-		if (arg0 != 0) {
-			throw new NullPointerException();
-		} else if (var3 == -1) {
+		if (var3 == -1) {
 			return true;
 		} else if (this.models == null) {
 			return true;
@@ -365,11 +340,8 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.b(I)Z")
-	public final boolean validate(int arg0) {
+	public final boolean validate() {
 		boolean var2 = true;
-		if (arg0 != 0) {
-			this._flowObfuscator4 = -413;
-		}
 		if (this.models == null) {
 			return true;
 		}
@@ -383,17 +355,14 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(ILvb;)V")
-	public final void prefetch(int arg0, OnDemand arg1) {
-		while (arg0 >= 0) {
-			this._flowObfuscator1 = -234;
-		}
+	public final void prefetch(OnDemand arg1) {
 		if (this.models == null) {
 			return;
 		}
 		for (int var3 = 0; var3 < this.models.length; var3++) {
 			int var4 = this.models[var3];
 			if (var4 != -1) {
-				arg1.prefetch(0, var4 & 0xFFFF, -938);
+				arg1.prefetch(0, var4 & 0xFFFF);
 			}
 		}
 	}
@@ -429,14 +398,14 @@ public class LocType {
 			}
 			Model var22 = (Model) modelCacheStatic.get((long) var20);
 			if (var22 == null) {
-				var22 = Model.tryGet(var20 & 0xFFFF, -404);
+				var22 = Model.tryGet(var20 & 0xFFFF);
 				if (var22 == null) {
 					return null;
 				}
 				if (var21) {
-					var22.rotateY180(4);
+					var22.rotateY180();
 				}
-				modelCacheStatic.put(var22, (long) var20, 39399);
+				modelCacheStatic.put(var22, (long) var20);
 			}
 			boolean var23;
 			if (this.resizex == 128 && this.resizey == 128 && this.resizez == 128) {
@@ -450,15 +419,15 @@ public class LocType {
 			} else {
 				var24 = true;
 			}
-			Model var25 = new Model(var22, this.recol_s == null, arg1 == 0 && arg6 == -1 && !var23 && !var24, !this.animHasAlpha, -796);
+			Model var25 = new Model(var22, this.recol_s == null, arg1 == 0 && arg6 == -1 && !var23 && !var24, !this.animHasAlpha);
 			if (arg6 != -1) {
 				var25.createLabelReferences(-591);
-				var25.applyTransform(arg6, 13056);
+				var25.applyTransform(arg6);
 				var25.labelFaces = null;
 				var25.labelVertices = null;
 			}
 			while (arg1-- > 0) {
-				var25.rotateY90((byte) 3);
+				var25.rotateY90();
 			}
 			if (this.recol_s != null) {
 				for (int var26 = 0; var26 < this.recol_s.length; var26++) {
@@ -466,18 +435,18 @@ public class LocType {
 				}
 			}
 			if (var23) {
-				var25.scale(this.resizey, this.resizez, 4, this.resizex);
+				var25.scale(this.resizey, this.resizez, this.resizex);
 			}
 			if (var24) {
-				var25.translate(this.offsety, this.offsetx, this.offsetz, false);
+				var25.translate(this.offsety, this.offsetx, this.offsetz);
 			}
 			var25.calculateNormals(this.ambient + 64, this.contrast * 5 + 768, -50, -10, -50, !this.sharelight);
 			if (this.blockwalk) {
 				var25.objRaise = var25.minY;
 			}
-			modelCacheDynamic.put(var25, var10, 39399);
+			modelCacheDynamic.put(var25, var10);
 			if (this.hillskew || this.sharelight) {
-				var25 = new Model(this._flowObfuscator3, this.sharelight, this.hillskew, var25);
+				var25 = new Model(this.sharelight, this.hillskew, var25);
 			}
 			if (this.hillskew) {
 				int var27 = (arg2 + arg3 + arg4 + arg5) / 4;
@@ -489,14 +458,14 @@ public class LocType {
 					int var33 = (var32 - var31) * (var30 + 64) / 128 + var31;
 					var25.vertexY[var28] += var33 - var27;
 				}
-				var25.calculateBoundsY((byte) 6);
+				var25.calculateBoundsY();
 			}
 			return var25;
 		} else if (field940) {
 			return var12;
 		} else {
 			if (this.hillskew || this.sharelight) {
-				var12 = new Model(this._flowObfuscator3, this.sharelight, this.hillskew, var12);
+				var12 = new Model(this.sharelight, this.hillskew, var12);
 			}
 			if (this.hillskew) {
 				int var13 = (arg2 + arg3 + arg4 + arg5) / 4;
@@ -508,7 +477,7 @@ public class LocType {
 					int var19 = (var18 - var17) * (var16 + 64) / 128 + var17;
 					var12.vertexY[var14] += var19 - var13;
 				}
-				var12.calculateBoundsY((byte) 6);
+				var12.calculateBoundsY();
 			}
 			return var12;
 		}

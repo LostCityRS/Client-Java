@@ -5,24 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("jc")
 public class CollisionMap {
 
-	@ObfuscatedName("jc.a")
-	public byte _flowObfuscator1 = 6;
-
-	@ObfuscatedName("jc.b")
-	public byte _flowObfuscator2 = 65;
-
-	@ObfuscatedName("jc.c")
-	public int _flowObfuscator3 = 2;
-
-	@ObfuscatedName("jc.d")
-	public byte _flowObfuscator4 = 58;
-
-	@ObfuscatedName("jc.e")
-	public int _flowObfuscator5 = -162;
-
-	@ObfuscatedName("jc.f")
-	public boolean _flowObfuscator6 = true;
-
 	@ObfuscatedName("jc.g")
 	public int offsetX = 0;
 
@@ -38,24 +20,15 @@ public class CollisionMap {
 	@ObfuscatedName("jc.k")
 	public int[][] flags;
 
-	public CollisionMap(int arg0, boolean arg1, int arg2) {
-		if (arg1) {
-			throw new NullPointerException();
-		}
+	public CollisionMap(int arg0, int arg2) {
 		this.sizeX = arg2;
 		this.sizeZ = arg0;
 		this.flags = new int[this.sizeX][this.sizeZ];
-		this.reset((byte) 0);
+		this.reset();
 	}
 
 	@ObfuscatedName("jc.a(B)V")
-	public void reset(byte arg0) {
-		if (arg0 == 0) {
-			boolean var2 = false;
-		} else {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
+	public void reset() {
 		for (int var4 = 0; var4 < this.sizeX; var4++) {
 			for (int var5 = 0; var5 < this.sizeZ; var5++) {
 				if (var4 == 0 || var5 == 0 || this.sizeX - 1 == var4 || this.sizeZ - 1 == var5) {
@@ -68,10 +41,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IIIZII)V")
-	public void addWall(int arg0, int arg1, int arg2, boolean arg3, int arg4, int arg5) {
-		if (arg4 >= 0) {
-			return;
-		}
+	public void addWall(int arg0, int arg1, int arg2, boolean arg3, int arg5) {
 		int var7 = arg2 - this.offsetX;
 		int var8 = arg0 - this.offsetZ;
 		if (arg1 == 0) {
@@ -198,10 +168,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(ZIIIZII)V")
-	public void addLoc(boolean arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6) {
-		if (!arg4) {
-			return;
-		}
+	public void addLoc(boolean arg0, int arg1, int arg2, int arg3, int arg5, int arg6) {
 		int var8 = 256;
 		if (arg0) {
 			var8 += 131072;
@@ -225,13 +192,9 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(III)V")
-	public void setBlocked(int arg0, int arg1, int arg2) {
+	public void setBlocked(int arg0, int arg2) {
 		int var4 = arg2 - this.offsetX;
 		int var5 = arg0 - this.offsetZ;
-		if (arg1 < 8 || arg1 > 8) {
-			for (int var6 = 1; var6 > 0; var6++) {
-			}
-		}
 		this.flags[var4][var5] |= 0x200000;
 	}
 
@@ -241,66 +204,65 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(ZIIIII)V")
-	public void delWall(boolean arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void delWall(boolean arg0, int arg1, int arg2, int arg3, int arg5) {
 		int var7 = arg5 - this.offsetX;
 		int var8 = arg1 - this.offsetZ;
-		int var9 = 4 / arg4;
 		if (arg3 == 0) {
 			if (arg2 == 0) {
-				this.remCMap(var8, (byte) 3, var7, 128);
-				this.remCMap(var8, (byte) 3, var7 - 1, 8);
+				this.remCMap(var8, var7, 128);
+				this.remCMap(var8, var7 - 1, 8);
 			}
 			if (arg2 == 1) {
-				this.remCMap(var8, (byte) 3, var7, 2);
-				this.remCMap(var8 + 1, (byte) 3, var7, 32);
+				this.remCMap(var8, var7, 2);
+				this.remCMap(var8 + 1, var7, 32);
 			}
 			if (arg2 == 2) {
-				this.remCMap(var8, (byte) 3, var7, 8);
-				this.remCMap(var8, (byte) 3, var7 + 1, 128);
+				this.remCMap(var8, var7, 8);
+				this.remCMap(var8, var7 + 1, 128);
 			}
 			if (arg2 == 3) {
-				this.remCMap(var8, (byte) 3, var7, 32);
-				this.remCMap(var8 - 1, (byte) 3, var7, 2);
+				this.remCMap(var8, var7, 32);
+				this.remCMap(var8 - 1, var7, 2);
 			}
 		}
 		if (arg3 == 1 || arg3 == 3) {
 			if (arg2 == 0) {
-				this.remCMap(var8, (byte) 3, var7, 1);
-				this.remCMap(var8 + 1, (byte) 3, var7 - 1, 16);
+				this.remCMap(var8, var7, 1);
+				this.remCMap(var8 + 1, var7 - 1, 16);
 			}
 			if (arg2 == 1) {
-				this.remCMap(var8, (byte) 3, var7, 4);
-				this.remCMap(var8 + 1, (byte) 3, var7 + 1, 64);
+				this.remCMap(var8, var7, 4);
+				this.remCMap(var8 + 1, var7 + 1, 64);
 			}
 			if (arg2 == 2) {
-				this.remCMap(var8, (byte) 3, var7, 16);
-				this.remCMap(var8 - 1, (byte) 3, var7 + 1, 1);
+				this.remCMap(var8, var7, 16);
+				this.remCMap(var8 - 1, var7 + 1, 1);
 			}
 			if (arg2 == 3) {
-				this.remCMap(var8, (byte) 3, var7, 64);
-				this.remCMap(var8 - 1, (byte) 3, var7 - 1, 4);
+				this.remCMap(var8, var7, 64);
+				this.remCMap(var8 - 1, var7 - 1, 4);
 			}
 		}
 		if (arg3 == 2) {
 			if (arg2 == 0) {
-				this.remCMap(var8, (byte) 3, var7, 130);
-				this.remCMap(var8, (byte) 3, var7 - 1, 8);
-				this.remCMap(var8 + 1, (byte) 3, var7, 32);
+				this.remCMap(var8, var7, 130);
+				this.remCMap(var8, var7 - 1, 8);
+				this.remCMap(var8 + 1, var7, 32);
 			}
 			if (arg2 == 1) {
-				this.remCMap(var8, (byte) 3, var7, 10);
-				this.remCMap(var8 + 1, (byte) 3, var7, 32);
-				this.remCMap(var8, (byte) 3, var7 + 1, 128);
+				this.remCMap(var8, var7, 10);
+				this.remCMap(var8 + 1, var7, 32);
+				this.remCMap(var8, var7 + 1, 128);
 			}
 			if (arg2 == 2) {
-				this.remCMap(var8, (byte) 3, var7, 40);
-				this.remCMap(var8, (byte) 3, var7 + 1, 128);
-				this.remCMap(var8 - 1, (byte) 3, var7, 2);
+				this.remCMap(var8, var7, 40);
+				this.remCMap(var8, var7 + 1, 128);
+				this.remCMap(var8 - 1, var7, 2);
 			}
 			if (arg2 == 3) {
-				this.remCMap(var8, (byte) 3, var7, 160);
-				this.remCMap(var8 - 1, (byte) 3, var7, 2);
-				this.remCMap(var8, (byte) 3, var7 - 1, 8);
+				this.remCMap(var8, var7, 160);
+				this.remCMap(var8 - 1, var7, 2);
+				this.remCMap(var8, var7 - 1, 8);
 			}
 		}
 		if (!arg0) {
@@ -308,72 +270,68 @@ public class CollisionMap {
 		}
 		if (arg3 == 0) {
 			if (arg2 == 0) {
-				this.remCMap(var8, (byte) 3, var7, 65536);
-				this.remCMap(var8, (byte) 3, var7 - 1, 4096);
+				this.remCMap(var8, var7, 65536);
+				this.remCMap(var8, var7 - 1, 4096);
 			}
 			if (arg2 == 1) {
-				this.remCMap(var8, (byte) 3, var7, 1024);
-				this.remCMap(var8 + 1, (byte) 3, var7, 16384);
+				this.remCMap(var8, var7, 1024);
+				this.remCMap(var8 + 1, var7, 16384);
 			}
 			if (arg2 == 2) {
-				this.remCMap(var8, (byte) 3, var7, 4096);
-				this.remCMap(var8, (byte) 3, var7 + 1, 65536);
+				this.remCMap(var8, var7, 4096);
+				this.remCMap(var8, var7 + 1, 65536);
 			}
 			if (arg2 == 3) {
-				this.remCMap(var8, (byte) 3, var7, 16384);
-				this.remCMap(var8 - 1, (byte) 3, var7, 1024);
+				this.remCMap(var8, var7, 16384);
+				this.remCMap(var8 - 1, var7, 1024);
 			}
 		}
 		if (arg3 == 1 || arg3 == 3) {
 			if (arg2 == 0) {
-				this.remCMap(var8, (byte) 3, var7, 512);
-				this.remCMap(var8 + 1, (byte) 3, var7 - 1, 8192);
+				this.remCMap(var8, var7, 512);
+				this.remCMap(var8 + 1, var7 - 1, 8192);
 			}
 			if (arg2 == 1) {
-				this.remCMap(var8, (byte) 3, var7, 2048);
-				this.remCMap(var8 + 1, (byte) 3, var7 + 1, 32768);
+				this.remCMap(var8, var7, 2048);
+				this.remCMap(var8 + 1, var7 + 1, 32768);
 			}
 			if (arg2 == 2) {
-				this.remCMap(var8, (byte) 3, var7, 8192);
-				this.remCMap(var8 - 1, (byte) 3, var7 + 1, 512);
+				this.remCMap(var8, var7, 8192);
+				this.remCMap(var8 - 1, var7 + 1, 512);
 			}
 			if (arg2 == 3) {
-				this.remCMap(var8, (byte) 3, var7, 32768);
-				this.remCMap(var8 - 1, (byte) 3, var7 - 1, 2048);
+				this.remCMap(var8, var7, 32768);
+				this.remCMap(var8 - 1, var7 - 1, 2048);
 			}
 		}
 		if (arg3 != 2) {
 			return;
 		}
 		if (arg2 == 0) {
-			this.remCMap(var8, (byte) 3, var7, 66560);
-			this.remCMap(var8, (byte) 3, var7 - 1, 4096);
-			this.remCMap(var8 + 1, (byte) 3, var7, 16384);
+			this.remCMap(var8, var7, 66560);
+			this.remCMap(var8, var7 - 1, 4096);
+			this.remCMap(var8 + 1, var7, 16384);
 		}
 		if (arg2 == 1) {
-			this.remCMap(var8, (byte) 3, var7, 5120);
-			this.remCMap(var8 + 1, (byte) 3, var7, 16384);
-			this.remCMap(var8, (byte) 3, var7 + 1, 65536);
+			this.remCMap(var8, var7, 5120);
+			this.remCMap(var8 + 1, var7, 16384);
+			this.remCMap(var8, var7 + 1, 65536);
 		}
 		if (arg2 == 2) {
-			this.remCMap(var8, (byte) 3, var7, 20480);
-			this.remCMap(var8, (byte) 3, var7 + 1, 65536);
-			this.remCMap(var8 - 1, (byte) 3, var7, 1024);
+			this.remCMap(var8, var7, 20480);
+			this.remCMap(var8, var7 + 1, 65536);
+			this.remCMap(var8 - 1, var7, 1024);
 		}
 		if (arg2 == 3) {
-			this.remCMap(var8, (byte) 3, var7, 81920);
-			this.remCMap(var8 - 1, (byte) 3, var7, 1024);
-			this.remCMap(var8, (byte) 3, var7 - 1, 4096);
+			this.remCMap(var8, var7, 81920);
+			this.remCMap(var8 - 1, var7, 1024);
+			this.remCMap(var8, var7 - 1, 4096);
 			return;
 		}
 	}
 
 	@ObfuscatedName("jc.a(IIIZIZI)V")
-	public void delLoc(int arg0, int arg1, int arg2, boolean arg3, int arg4, boolean arg5, int arg6) {
-		if (!arg5) {
-			for (int var8 = 1; var8 > 0; var8++) {
-			}
-		}
+	public void delLoc(int arg0, int arg1, int arg2, boolean arg3, int arg4, int arg6) {
 		int var9 = 256;
 		if (arg3) {
 			var9 += 131072;
@@ -389,7 +347,7 @@ public class CollisionMap {
 			if (var13 >= 0 && var13 < this.sizeX) {
 				for (int var14 = var11; var14 < arg4 + var11; var14++) {
 					if (var14 >= 0 && var14 < this.sizeZ) {
-						this.remCMap(var14, (byte) 3, var13, var9);
+						this.remCMap(var14, var13, var9);
 					}
 				}
 			}
@@ -397,31 +355,23 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IBII)V")
-	public void remCMap(int arg0, byte arg1, int arg2, int arg3) {
+	public void remCMap(int arg0, int arg2, int arg3) {
 		this.flags[arg2][arg0] &= 16777215 - arg3;
-		if (arg1 == 3) {
-			;
-		}
 	}
 
 	@ObfuscatedName("jc.c(III)V")
-	public void removeBlocked(int arg0, int arg1, int arg2) {
+	public void removeBlocked(int arg0, int arg2) {
 		int var4 = arg2 - this.offsetX;
-		if (arg1 < 0) {
-			int var5 = arg0 - this.offsetZ;
-			this.flags[var4][var5] &= 0xDFFFFF;
-		}
+		int var5 = arg0 - this.offsetZ;
+		this.flags[var4][var5] &= 0xDFFFFF;
 	}
 
 	@ObfuscatedName("jc.a(IZIIIII)Z")
-	public boolean testWall(int arg0, boolean arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public boolean testWall(int arg0, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (arg0 == arg5 && arg3 == arg4) {
 			return true;
 		}
 		int var8 = arg5 - this.offsetX;
-		if (arg1) {
-			this._flowObfuscator5 = 421;
-		}
 		int var9 = arg4 - this.offsetZ;
 		int var10 = arg0 - this.offsetX;
 		int var11 = arg3 - this.offsetZ;
@@ -604,10 +554,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IIIIIIBI)Z")
-	public boolean testLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, byte arg6, int arg7) {
-		if (this._flowObfuscator1 != arg6) {
-			this._flowObfuscator6 = !this._flowObfuscator6;
-		}
+	public boolean testLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg7) {
 		int var9 = arg0 + arg2 - 1;
 		int var10 = arg3 + arg7 - 1;
 		if (arg1 >= arg2 && arg1 <= var9 && arg5 >= arg3 && arg5 <= var10) {

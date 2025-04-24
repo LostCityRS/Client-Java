@@ -10,24 +10,6 @@ import jagex2.graphics.VertexNormal;
 @ObfuscatedName("s")
 public class World3D {
 
-	@ObfuscatedName("s.a")
-	public boolean field289 = true;
-
-	@ObfuscatedName("s.b")
-	public int field290 = 98;
-
-	@ObfuscatedName("s.c")
-	public static int field291 = 679;
-
-	@ObfuscatedName("s.d")
-	public boolean field292 = true;
-
-	@ObfuscatedName("s.e")
-	public static boolean field293;
-
-	@ObfuscatedName("s.f")
-	public int field294 = 7;
-
 	@ObfuscatedName("s.g")
 	public static boolean lowMemory = true;
 
@@ -173,7 +155,7 @@ public class World3D {
 	public static Occlude[] activeOccluders = new Occlude[500];
 
 	@ObfuscatedName("s.V")
-	public static LinkList drawTileQueue = new LinkList((byte) 7);
+	public static LinkList drawTileQueue = new LinkList();
 
 	@ObfuscatedName("s.W")
 	public static final int[] FRONT_WALL_TYPES = new int[] { 19, 55, 38, 155, 255, 110, 137, 205, 76 };
@@ -217,34 +199,28 @@ public class World3D {
 	@ObfuscatedName("s.L")
 	public static boolean takingInput;
 
-	public World3D(int arg0, int[][][] arg1, int arg2, int arg3, boolean arg4) {
+	public World3D(int arg0, int[][][] arg1, int arg2, int arg3) {
 		this.maxLevel = arg3;
 		this.maxTileX = arg2;
 		this.maxTileZ = arg0;
 		this.levelTiles = new Ground[arg3][arg2][arg0];
 		this.levelTileOcclusionCycles = new int[arg3][arg2 + 1][arg0 + 1];
 		this.levelHeightmaps = arg1;
-		if (!arg4) {
-			this.field289 = !this.field289;
-		}
-		this.reset(0);
+		this.reset();
 	}
 
 	@ObfuscatedName("s.a(B)V")
-	public static void unload(byte arg0) {
+	public static void unload() {
 		locBuffer = null;
 		levelOccluderCunt = null;
 		levelOccluders = null;
 		drawTileQueue = null;
-		if (arg0 != 9) {
-			field293 = !field293;
-		}
 		visibilityMatrix = null;
 		visibilityMap = null;
 	}
 
 	@ObfuscatedName("s.a(I)V")
-	public void reset(int arg0) {
+	public void reset() {
 		for (int var2 = 0; var2 < this.maxLevel; var2++) {
 			for (int var8 = 0; var8 < this.maxTileX; var8++) {
 				for (int var9 = 0; var9 < this.maxTileZ; var9++) {
@@ -262,31 +238,23 @@ public class World3D {
 			this.changedLocs[var4] = null;
 		}
 		this.changedLocCount = 0;
-		if (arg0 != 0) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
 		for (int var6 = 0; var6 < locBuffer.length; var6++) {
 			locBuffer[var6] = null;
 		}
 	}
 
 	@ObfuscatedName("s.a(II)V")
-	public void setMinLevel(int arg0, int arg1) {
+	public void setMinLevel(int arg1) {
 		this.minLevel = arg1;
 		for (int var3 = 0; var3 < this.maxTileX; var3++) {
 			for (int var5 = 0; var5 < this.maxTileZ; var5++) {
 				this.levelTiles[arg1][var3][var5] = new Ground(arg1, var3, var5);
 			}
 		}
-		while (arg0 >= 0) {
-			for (int var4 = 1; var4 > 0; var4++) {
-			}
-		}
 	}
 
 	@ObfuscatedName("s.a(ZII)V")
-	public void setBridge(boolean arg0, int arg1, int arg2) {
+	public void setBridge(int arg1, int arg2) {
 		Ground var4 = this.levelTiles[0][arg2][arg1];
 		for (int var5 = 0; var5 < 3; var5++) {
 			this.levelTiles[var5][arg2][arg1] = this.levelTiles[var5 + 1][arg2][arg1];
@@ -299,14 +267,10 @@ public class World3D {
 		}
 		this.levelTiles[0][arg2][arg1].bridge = var4;
 		this.levelTiles[3][arg2][arg1] = null;
-		if (arg0) {
-			for (int var6 = 1; var6 > 0; var6++) {
-			}
-		}
 	}
 
 	@ObfuscatedName("s.a(IIIIIIBII)V")
-	public static void addOccluder(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, byte arg6, int arg7, int arg8) {
+	public static void addOccluder(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg7, int arg8) {
 		Occlude var9 = new Occlude();
 		var9.minTileX = arg0 / 128;
 		var9.maxTileX = arg5 / 128;
@@ -318,10 +282,8 @@ public class World3D {
 		var9.minZ = arg8;
 		var9.maxZ = arg3;
 		var9.minY = arg7;
-		if (arg6 == 6) {
-			var9.maxY = arg2;
-			levelOccluders[arg4][levelOccluderCunt[arg4]++] = var9;
-		}
+		var9.maxY = arg2;
+		levelOccluders[arg4][levelOccluderCunt[arg4]++] = var9;
 	}
 
 	@ObfuscatedName("s.a(IIII)V")
@@ -351,7 +313,7 @@ public class World3D {
 			}
 			this.levelTiles[arg0][arg1][arg2].underlay = var23;
 		} else {
-			TileOverlay var25 = new TileOverlay(arg13, arg8, arg19, arg18, arg3, arg6, arg5, arg11, arg4, arg14, arg16, arg1, false, arg9, arg17, arg2, arg12, arg15, arg10, arg7);
+			TileOverlay var25 = new TileOverlay(arg13, arg8, arg19, arg18, arg3, arg6, arg5, arg11, arg4, arg14, arg16, arg1, arg9, arg17, arg2, arg12, arg15, arg10, arg7);
 			for (int var26 = arg0; var26 >= 0; var26--) {
 				if (this.levelTiles[var26][arg1][arg2] == null) {
 					this.levelTiles[var26][arg1][arg2] = new Ground(var26, arg1, arg2);
@@ -362,10 +324,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIIIILy;B)V")
-	public void addGroundDecor(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, Entity arg6, byte arg7) {
-		if (arg3 != 0) {
-			this.field294 = 236;
-		}
+	public void addGroundDecor(int arg0, int arg1, int arg2, int arg4, int arg5, Entity arg6, byte arg7) {
 		if (arg6 == null) {
 			return;
 		}
@@ -383,7 +342,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IZIIILy;Ly;ILy;)V")
-	public void addGroundObject(int arg0, boolean arg1, int arg2, int arg3, int arg4, Entity arg5, Entity arg6, int arg7, Entity arg8) {
+	public void addGroundObject(int arg0, int arg2, int arg3, int arg4, Entity arg5, Entity arg6, int arg7, Entity arg8) {
 		GroundObject var10 = new GroundObject();
 		var10.topObj = arg6;
 		var10.x = arg3 * 128 + 64;
@@ -394,10 +353,6 @@ public class World3D {
 		var10.middleObj = arg5;
 		int var11 = 0;
 		Ground var12 = this.levelTiles[arg7][arg3][arg4];
-		if (arg1) {
-			for (int var13 = 1; var13 > 0; var13++) {
-			}
-		}
 		if (var12 != null) {
 			for (int var14 = 0; var14 < var12.locCount; var14++) {
 				if (var12.locs[var14].model instanceof Model) {
@@ -416,7 +371,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIIZIILy;Ly;BI)V")
-	public void addWall(int arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6, Entity arg7, Entity arg8, byte arg9, int arg10) {
+	public void addWall(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6, Entity arg7, Entity arg8, byte arg9, int arg10) {
 		if (arg8 == null && arg7 == null) {
 			return;
 		}
@@ -428,9 +383,6 @@ public class World3D {
 		var12.y = arg6;
 		var12.modelA = arg8;
 		var12.modelB = arg7;
-		if (!arg4) {
-			return;
-		}
 		var12.typeA = arg5;
 		var12.typeB = arg3;
 		for (int var13 = arg2; var13 >= 0; var13--) {
@@ -442,8 +394,8 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(BLy;IIIIIIIIII)V")
-	public void addDecor(byte arg0, Entity arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
-		if (arg7 != 1 || arg1 == null) {
+	public void addDecor(byte arg0, Entity arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg8, int arg9, int arg10, int arg11) {
+		if (arg1 == null) {
 			return;
 		}
 		Decor var13 = new Decor();
@@ -464,10 +416,8 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(BIIIIIIILy;II)Z")
-	public boolean addLoc(byte arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, Entity arg8, int arg9, int arg10) {
-		if (arg2 != -21680) {
-			throw new NullPointerException();
-		} else if (arg8 == null) {
+	public boolean addLoc(byte arg0, int arg1, int arg3, int arg4, int arg5, int arg6, int arg7, Entity arg8, int arg9, int arg10) {
+		if (arg8 == null) {
 			return true;
 		} else {
 			int var12 = arg3 * 128 + arg6 * 64;
@@ -477,7 +427,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IZIIILy;IZII)Z")
-	public boolean addTemporary(int arg0, boolean arg1, int arg2, int arg3, int arg4, Entity arg5, int arg6, boolean arg7, int arg8, int arg9) {
+	public boolean addTemporary(int arg0, boolean arg1, int arg2, int arg3, int arg4, Entity arg5, int arg6, int arg8, int arg9) {
 		if (arg5 == null) {
 			return true;
 		}
@@ -501,20 +451,13 @@ public class World3D {
 		}
 		int var15 = var11 / 128;
 		int var16 = var12 / 128;
-		if (arg7) {
-			throw new NullPointerException();
-		}
 		int var17 = var13 / 128;
 		int var18 = var14 / 128;
 		return this.addLoc(arg9, var15, var16, var17 - var15 + 1, var18 - var16 + 1, arg6, arg4, arg2, arg5, arg3, true, arg8, (byte) 0);
 	}
 
 	@ObfuscatedName("s.a(ILy;IIIBIIIIIII)Z")
-	public boolean addTemporary(int arg0, Entity arg1, int arg2, int arg3, int arg4, byte arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
-		if (arg5 != 7) {
-			for (int var14 = 1; var14 > 0; var14++) {
-			}
-		}
+	public boolean addTemporary(int arg0, Entity arg1, int arg2, int arg3, int arg4, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
 		return arg1 == null ? true : this.addLoc(arg0, arg9, arg12, arg3 - arg9 + 1, arg4 - arg12 + 1, arg8, arg2, arg6, arg1, arg7, true, arg11, (byte) 0);
 	}
 
@@ -578,20 +521,16 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.b(B)V")
-	public void clearLocChanges(byte arg0) {
+	public void clearLocChanges() {
 		for (int var2 = 0; var2 < this.changedLocCount; var2++) {
 			Location var3 = this.changedLocs[var2];
-			this.removeLoc(3, var3);
+			this.removeLoc(var3);
 			this.changedLocs[var2] = null;
-		}
-		if (arg0 == -48) {
-			this.changedLocCount = 0;
 		}
 	}
 
 	@ObfuscatedName("s.a(ILq;)V")
-	public void removeLoc(int arg0, Location arg1) {
-		int var3 = 98 / arg0;
+	public void removeLoc(Location arg1) {
 		for (int var4 = arg1.minSceneTileX; var4 <= arg1.maxSceneTileX; var4++) {
 			for (int var5 = arg1.minSceneTileZ; var5 <= arg1.maxSceneTileZ; var5++) {
 				Ground var6 = this.levelTiles[arg1.level][var4][var5];
@@ -617,7 +556,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIII)V")
-	public void setDecorOffset(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void setDecorOffset(int arg0, int arg1, int arg2, int arg3) {
 		Ground var6 = this.levelTiles[arg3][arg1][arg2];
 		if (var6 == null) {
 			return;
@@ -629,38 +568,27 @@ public class World3D {
 		int var8 = arg1 * 128 + 64;
 		int var9 = arg2 * 128 + 64;
 		var7.x = (var7.x - var8) * arg0 / 16 + var8;
-		if (arg4 < 2 || arg4 > 2) {
-			for (int var10 = 1; var10 > 0; var10++) {
-			}
-		}
 		var7.z = (var7.z - var9) * arg0 / 16 + var9;
 	}
 
 	@ObfuscatedName("s.b(IIII)V")
-	public void removeWall(int arg0, int arg1, int arg2, int arg3) {
+	public void removeWall(int arg0, int arg1, int arg2) {
 		Ground var5 = this.levelTiles[arg1][arg0][arg2];
-		if (arg3 >= 0) {
-			for (int var6 = 1; var6 > 0; var6++) {
-			}
-		}
 		if (var5 != null) {
 			var5.wall = null;
 		}
 	}
 
 	@ObfuscatedName("s.a(IBII)V")
-	public void removeDecor(int arg0, byte arg1, int arg2, int arg3) {
+	public void removeDecor(int arg0, int arg2, int arg3) {
 		Ground var5 = this.levelTiles[arg3][arg2][arg0];
 		if (var5 != null) {
 			var5.decor = null;
-			if (arg1 == 98) {
-				;
-			}
 		}
 	}
 
 	@ObfuscatedName("s.c(IIII)V")
-	public void removeLoc(int arg0, int arg1, int arg2, int arg3) {
+	public void removeLoc(int arg0, int arg1, int arg3) {
 		Ground var5 = this.levelTiles[arg3][arg0][arg1];
 		if (var5 == null) {
 			return;
@@ -668,19 +596,15 @@ public class World3D {
 		for (int var6 = 0; var6 < var5.locCount; var6++) {
 			Location var7 = var5.locs[var6];
 			if ((var7.typecode >> 29 & 0x3) == 2 && var7.minSceneTileX == arg0 && var7.minSceneTileZ == arg1) {
-				this.removeLoc(3, var7);
+				this.removeLoc(var7);
 				return;
 			}
-		}
-		if (arg2 < 1 || arg2 > 1) {
-			;
 		}
 	}
 
 	@ObfuscatedName("s.d(IIII)V")
-	public void removeGroundDecor(int arg0, int arg1, int arg2, int arg3) {
+	public void removeGroundDecor(int arg0, int arg1, int arg2) {
 		Ground var5 = this.levelTiles[arg1][arg2][arg0];
-		int var6 = 99 / arg3;
 		if (var5 != null) {
 			var5.groundDecor = null;
 		}
@@ -695,30 +619,21 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIZ)Lr;")
-	public Wall getWall(int arg0, int arg1, int arg2, boolean arg3) {
-		if (!arg3) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
+	public Wall getWall(int arg0, int arg1, int arg2) {
 		Ground var6 = this.levelTiles[arg2][arg0][arg1];
 		return var6 == null ? null : var6.wall;
 	}
 
 	@ObfuscatedName("s.e(IIII)Li;")
-	public Decor getDecor(int arg0, int arg1, int arg2, int arg3) {
+	public Decor getDecor(int arg0, int arg1, int arg3) {
 		Ground var5 = this.levelTiles[arg1][arg0][arg3];
-		if (arg2 >= 0) {
-			this.field294 = -412;
-		}
 		return var5 == null ? null : var5.decor;
 	}
 
 	@ObfuscatedName("s.f(IIII)Lq;")
-	public Location getLoc(int arg0, int arg1, int arg2, int arg3) {
+	public Location getLoc(int arg0, int arg1, int arg3) {
 		Ground var5 = this.levelTiles[arg0][arg3][arg1];
-		if (arg2 != 0) {
-			throw new NullPointerException();
-		} else if (var5 == null) {
+		if (var5 == null) {
 			return null;
 		} else {
 			for (int var6 = 0; var6 < var5.locCount; var6++) {
@@ -732,10 +647,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(ZIII)Lk;")
-	public GroundDecor getGroundDecor(boolean arg0, int arg1, int arg2, int arg3) {
-		if (arg0) {
-			throw new NullPointerException();
-		}
+	public GroundDecor getGroundDecor(int arg1, int arg2, int arg3) {
 		Ground var5 = this.levelTiles[arg3][arg1][arg2];
 		return var5 == null || var5.groundDecor == null ? null : var5.groundDecor;
 	}
@@ -747,13 +659,9 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.g(IIII)I")
-	public int getDecorTypecode(int arg0, int arg1, int arg2, int arg3) {
+	public int getDecorTypecode(int arg0, int arg2, int arg3) {
 		Ground var5 = this.levelTiles[arg2][arg3][arg0];
-		if (arg1 == 0) {
-			return var5 == null || var5.decor == null ? 0 : var5.decor.typecode;
-		} else {
-			return this.field290;
-		}
+		return var5 == null || var5.decor == null ? 0 : var5.decor.typecode;
 	}
 
 	@ObfuscatedName("s.c(III)I")
@@ -799,10 +707,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIIII)V")
-	public void buildModels(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg2 >= 0) {
-			return;
-		}
+	public void buildModels(int arg0, int arg1, int arg3, int arg4, int arg5) {
 		int var7 = (int) Math.sqrt((double) (arg1 * arg1 + arg0 * arg0 + arg3 * arg3));
 		int var8 = arg5 * var7 >> 8;
 		for (int var9 = 0; var9 < this.maxLevel; var9++) {
@@ -812,9 +717,9 @@ public class World3D {
 					if (var12 != null) {
 						Wall var13 = var12.wall;
 						if (var13 != null && var13.modelA != null && var13.modelA.vertexNormal != null) {
-							this.mergeLocNormals(679, var11, (Model) var13.modelA, var10, var9, 1, 1);
+							this.mergeLocNormals(var11, (Model) var13.modelA, var10, var9, 1, 1);
 							if (var13.modelB != null && var13.modelB.vertexNormal != null) {
-								this.mergeLocNormals(679, var11, (Model) var13.modelB, var10, var9, 1, 1);
+								this.mergeLocNormals(var11, (Model) var13.modelB, var10, var9, 1, 1);
 								this.mergeNormals((Model) var13.modelA, (Model) var13.modelB, 0, 0, 0, false);
 								((Model) var13.modelB).applyLighting(arg4, var8, arg3, arg0, arg1);
 							}
@@ -823,13 +728,13 @@ public class World3D {
 						for (int var14 = 0; var14 < var12.locCount; var14++) {
 							Location var16 = var12.locs[var14];
 							if (var16 != null && var16.model != null && var16.model.vertexNormal != null) {
-								this.mergeLocNormals(679, var11, (Model) var16.model, var10, var9, var16.maxSceneTileX - var16.minSceneTileX + 1, var16.maxSceneTileZ - var16.minSceneTileZ + 1);
+								this.mergeLocNormals(var11, (Model) var16.model, var10, var9, var16.maxSceneTileX - var16.minSceneTileX + 1, var16.maxSceneTileZ - var16.minSceneTileZ + 1);
 								((Model) var16.model).applyLighting(arg4, var8, arg3, arg0, arg1);
 							}
 						}
 						GroundDecor var15 = var12.groundDecor;
 						if (var15 != null && var15.model.vertexNormal != null) {
-							this.mergeGroundDecroNormals(var11, -21889, var9, var10, (Model) var15.model);
+							this.mergeGroundDecorNormals(var11, var9, var10, (Model) var15.model);
 							((Model) var15.model).applyLighting(arg4, var8, arg3, arg0, arg1);
 						}
 					}
@@ -839,11 +744,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIILfb;)V")
-	public void mergeGroundDecroNormals(int arg0, int arg1, int arg2, int arg3, Model arg4) {
-		if (arg1 != -21889) {
-			for (int var6 = 1; var6 > 0; var6++) {
-			}
-		}
+	public void mergeGroundDecorNormals(int arg0, int arg2, int arg3, Model arg4) {
 		if (arg3 < this.maxTileX) {
 			Ground var7 = this.levelTiles[arg2][arg3 + 1][arg0];
 			if (var7 != null && var7.groundDecor != null && var7.groundDecor.model.vertexNormal != null) {
@@ -862,18 +763,16 @@ public class World3D {
 				this.mergeNormals(arg4, (Model) var9.groundDecor.model, 128, 0, 128, true);
 			}
 		}
-		if (arg3 >= this.maxTileX || arg0 <= 0) {
-			return;
-		}
-		Ground var10 = this.levelTiles[arg2][arg3 + 1][arg0 - 1];
-		if (var10 != null && var10.groundDecor != null && var10.groundDecor.model.vertexNormal != null) {
-			this.mergeNormals(arg4, (Model) var10.groundDecor.model, 128, 0, -128, true);
-			return;
+		if (arg3 < this.maxTileX && arg0 > 0) {
+			Ground var10 = this.levelTiles[arg2][arg3 + 1][arg0 - 1];
+			if (var10 != null && var10.groundDecor != null && var10.groundDecor.model.vertexNormal != null) {
+				this.mergeNormals(arg4, (Model) var10.groundDecor.model, 128, 0, -128, true);
+			}
 		}
 	}
 
 	@ObfuscatedName("s.a(IILfb;IIII)V")
-	public void mergeLocNormals(int arg0, int arg1, Model arg2, int arg3, int arg4, int arg5, int arg6) {
+	public void mergeLocNormals(int arg1, Model arg2, int arg3, int arg4, int arg5, int arg6) {
 		boolean var8 = true;
 		int var9 = arg3;
 		int var10 = arg3 + arg5;
@@ -912,7 +811,6 @@ public class World3D {
 				var8 = false;
 			}
 		}
-		int var14 = 42 / arg0;
 	}
 
 	@ObfuscatedName("s.a(Lfb;Lfb;IIIZ)V")
@@ -1027,11 +925,8 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIBII[I)V")
-	public static void init(int arg0, int arg1, byte arg2, int arg3, int arg4, int[] arg5) {
+	public static void init(int arg0, int arg1, int arg3, int arg4, int[] arg5) {
 		viewportLeft = 0;
-		if (arg2 != 1) {
-			return;
-		}
 		viewportTop = 0;
 		viewportRight = arg4;
 		viewportBottom = arg1;
@@ -1052,7 +947,7 @@ public class World3D {
 						int var21 = var19 * 128;
 						boolean var22 = false;
 						for (int var23 = -arg3; var23 <= arg0; var23 += 128) {
-							if (testPoint(var21, arg5[var16] + var23, 6, var20)) {
+							if (testPoint(var21, arg5[var16] + var23, var20)) {
 								var22 = true;
 								break;
 							}
@@ -1095,14 +990,11 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.i(IIII)Z")
-	public static boolean testPoint(int arg0, int arg1, int arg2, int arg3) {
+	public static boolean testPoint(int arg0, int arg1, int arg3) {
 		int var4 = cosEyeYaw * arg3 + sinEyeYaw * arg0 >> 16;
 		int var5 = cosEyeYaw * arg0 - sinEyeYaw * arg3 >> 16;
 		int var6 = cosEyePitch * var5 + sinEyePitch * arg1 >> 16;
 		int var7 = cosEyePitch * arg1 - sinEyePitch * var5 >> 16;
-		if (arg2 != 6) {
-			field291 = -152;
-		}
 		if (var6 >= 50 && var6 <= 3500) {
 			int var8 = (var4 << 9) / var6 + viewportCenterX;
 			int var9 = (var7 << 9) / var6 + viewportCenterY;
@@ -1113,20 +1005,16 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(BII)V")
-	public void click(byte arg0, int arg1, int arg2) {
+	public void click(int arg1, int arg2) {
 		takingInput = true;
 		mouseX = arg2;
 		mouseY = arg1;
 		clickTileX = -1;
 		clickTileZ = -1;
-		if (arg0 != 38) {
-			for (int var4 = 1; var4 > 0; var4++) {
-			}
-		}
 	}
 
 	@ObfuscatedName("s.a(IIIIIII)V")
-	public void draw(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public void draw(int arg0, int arg1, int arg3, int arg4, int arg5, int arg6) {
 		if (arg0 < 0) {
 			arg0 = 0;
 		} else if (arg0 >= this.maxTileX * 128) {
@@ -1165,10 +1053,7 @@ public class World3D {
 		if (maxDrawTileZ > this.maxTileZ) {
 			maxDrawTileZ = this.maxTileZ;
 		}
-		this.updateActiveOccluders(41);
-		if (arg2 < 7 || arg2 > 7) {
-			return;
-		}
+		this.updateActiveOccluders();
 		tilesRemaining = 0;
 		for (int var8 = this.minLevel; var8 < this.maxLevel; var8++) {
 			Ground[][] var33 = this.levelTiles[var8];
@@ -1361,7 +1246,7 @@ public class World3D {
 												Ground var14 = var3.bridge;
 												if (var14.underlay == null) {
 													if (var14.overlay != null && !this.tileVisible(0, var4, var5)) {
-														this.drawTileOverlay(var4, sinEyePitch, sinEyeYaw, cosEyeYaw, var14.overlay, cosEyePitch, 656, var5);
+														this.drawTileOverlay(var4, sinEyePitch, sinEyeYaw, cosEyeYaw, var14.overlay, cosEyePitch, var5);
 													}
 												} else if (!this.tileVisible(0, var4, var5)) {
 													this.drawTileUnderlay(var14.underlay, 0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var4, var5);
@@ -1381,7 +1266,7 @@ public class World3D {
 											if (var3.underlay == null) {
 												if (var3.overlay != null && !this.tileVisible(var7, var4, var5)) {
 													var18 = true;
-													this.drawTileOverlay(var4, sinEyePitch, sinEyeYaw, cosEyeYaw, var3.overlay, cosEyePitch, 656, var5);
+													this.drawTileOverlay(var4, sinEyePitch, sinEyeYaw, cosEyeYaw, var3.overlay, cosEyePitch, var5);
 												}
 											} else if (!this.tileVisible(var7, var4, var5)) {
 												var18 = true;
@@ -1791,7 +1676,7 @@ public class World3D {
 				}
 			} else if (lowMemory) {
 				int var53 = TEXTURE_HSL[arg0.textureId];
-				Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, this.mulLightness(arg0.neColour, 705, var53), this.mulLightness(arg0.field262, 705, var53), this.mulLightness(arg0.field260, 705, var53));
+				Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, this.mulLightness(arg0.neColour, var53), this.mulLightness(arg0.field262, var53), this.mulLightness(arg0.field260, var53));
 			} else if (arg0.field264) {
 				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.neColour, arg0.field262, arg0.field260, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.textureId);
 			} else {
@@ -1815,7 +1700,7 @@ public class World3D {
 				return;
 			}
 			int var54 = TEXTURE_HSL[arg0.textureId];
-			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, this.mulLightness(arg0.field259, 705, var54), this.mulLightness(arg0.field260, 705, var54), this.mulLightness(arg0.field262, 705, var54));
+			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, this.mulLightness(arg0.field259, var54), this.mulLightness(arg0.field260, var54), this.mulLightness(arg0.field262, var54));
 		} else if (arg0.field259 != 12345678) {
 			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262);
 			return;
@@ -1823,7 +1708,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIILj;III)V")
-	public void drawTileOverlay(int arg0, int arg1, int arg2, int arg3, TileOverlay arg4, int arg5, int arg6, int arg7) {
+	public void drawTileOverlay(int arg0, int arg1, int arg2, int arg3, TileOverlay arg4, int arg5, int arg7) {
 		int var9 = arg4.vertexX.length;
 		for (int var10 = 0; var10 < var9; var10++) {
 			int var23 = arg4.vertexX[var10] - eyeX;
@@ -1871,7 +1756,7 @@ public class World3D {
 					}
 				} else if (lowMemory) {
 					int var22 = TEXTURE_HSL[arg4.triangleTextureIds[var12]];
-					Pix3D.gouraudTriangle(var19, var20, var21, var16, var17, var18, this.mulLightness(arg4.triangleColourA[var12], 705, var22), this.mulLightness(arg4.triangleColourB[var12], 705, var22), this.mulLightness(arg4.triangleColourC[var12], 705, var22));
+					Pix3D.gouraudTriangle(var19, var20, var21, var16, var17, var18, this.mulLightness(arg4.triangleColourA[var12], var22), this.mulLightness(arg4.triangleColourB[var12], var22), this.mulLightness(arg4.triangleColourC[var12], var22));
 				} else if (arg4.flat) {
 					Pix3D.textureTriangle(var19, var20, var21, var16, var17, var18, arg4.triangleColourA[var12], arg4.triangleColourB[var12], arg4.triangleColourC[var12], TileOverlay.tmpViewspaceX[0], TileOverlay.tmpViewspaceX[1], TileOverlay.tmpViewspaceX[3], TileOverlay.tmpViewspaceY[0], TileOverlay.tmpViewspaceY[1], TileOverlay.tmpViewspaceY[3], TileOverlay.tmpViewspaceZ[0], TileOverlay.tmpViewspaceZ[1], TileOverlay.tmpViewspaceZ[3], arg4.triangleTextureIds[var12]);
 				} else {
@@ -1879,16 +1764,10 @@ public class World3D {
 				}
 			}
 		}
-		if (arg6 <= 0) {
-			this.field289 = !this.field289;
-		}
 	}
 
 	@ObfuscatedName("s.e(III)I")
-	public int mulLightness(int arg0, int arg1, int arg2) {
-		if (arg1 <= 0) {
-			this.field289 = !this.field289;
-		}
+	public int mulLightness(int arg0, int arg2) {
 		int var4 = 127 - arg0;
 		int var5 = (arg2 & 0x7F) * var4 / 160;
 		if (var5 < 2) {
@@ -1918,9 +1797,8 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.b(I)V")
-	public void updateActiveOccluders(int arg0) {
+	public void updateActiveOccluders() {
 		int var2 = levelOccluderCunt[topLevel];
-		int var3 = 52 / arg0;
 		Occlude[] var4 = levelOccluders[topLevel];
 		activeOccluderCount = 0;
 		for (int var5 = 0; var5 < var2; var5++) {

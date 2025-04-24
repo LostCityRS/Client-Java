@@ -5,23 +5,14 @@ import deob.ObfuscatedName;
 @ObfuscatedName("pb")
 public class LinkList {
 
-	@ObfuscatedName("pb.a")
-	public boolean _flowObfuscator1 = true;
-
 	@ObfuscatedName("pb.b")
 	public Linkable sentinel = new Linkable();
 
 	@ObfuscatedName("pb.c")
 	public Linkable cursor;
 
-	public LinkList(byte arg0) {
+	public LinkList() {
 		this.sentinel.next = this.sentinel;
-		if (arg0 == 7) {
-			boolean var2 = false;
-		} else {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
 		this.sentinel.prev = this.sentinel;
 	}
 
@@ -37,16 +28,14 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(Lv;B)V")
-	public void addHead(Linkable arg0, byte arg1) {
+	public void addHead(Linkable arg0) {
 		if (arg0.prev != null) {
 			arg0.unlink();
 		}
 		arg0.prev = this.sentinel;
 		arg0.next = this.sentinel.next;
-		if (arg1 == 80) {
-			arg0.prev.next = arg0;
-			arg0.next.prev = arg0;
-		}
+		arg0.prev.next = arg0;
+		arg0.next.prev = arg0;
 	}
 
 	@ObfuscatedName("pb.a()Lv;")
@@ -73,12 +62,8 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(B)Lv;")
-	public Linkable tail(byte arg0) {
+	public Linkable tail() {
 		Linkable var2 = this.sentinel.prev;
-		if (arg0 != 6) {
-			throw new NullPointerException();
-		}
-		boolean var3 = false;
 		if (this.sentinel == var2) {
 			this.cursor = null;
 			return null;
@@ -89,11 +74,9 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(I)Lv;")
-	public Linkable next(int arg0) {
+	public Linkable next() {
 		Linkable var2 = this.cursor;
-		if (arg0 >= 0) {
-			throw new NullPointerException();
-		} else if (this.sentinel == var2) {
+		if (this.sentinel == var2) {
 			this.cursor = null;
 			return null;
 		} else {
@@ -103,16 +86,13 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(Z)Lv;")
-	public Linkable prev(boolean arg0) {
+	public Linkable prev() {
 		Linkable var2 = this.cursor;
 		if (this.sentinel == var2) {
 			this.cursor = null;
 			return null;
 		}
 		this.cursor = var2.prev;
-		if (arg0) {
-			throw new NullPointerException();
-		}
 		return var2;
 	}
 

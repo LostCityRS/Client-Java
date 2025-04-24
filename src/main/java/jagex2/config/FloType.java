@@ -7,9 +7,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("kc")
 public class FloType {
 
-	@ObfuscatedName("kc.a")
-	public static int _flowObfuscator1 = 78;
-
 	@ObfuscatedName("kc.b")
 	public static int count;
 
@@ -50,11 +47,8 @@ public class FloType {
 	public int hsl;
 
 	@ObfuscatedName("kc.a(Lyb;B)V")
-	public static void unpack(Jagfile arg0, byte arg1) {
-		Packet var2 = new Packet((byte) -109, arg0.read("flo.dat", null));
-		if (arg1 != 127) {
-			_flowObfuscator1 = 231;
-		}
+	public static void unpack(Jagfile arg0) {
+		Packet var2 = new Packet(arg0.read("flo.dat", null));
 		count = var2.g2();
 		if (types == null) {
 			types = new FloType[count];
@@ -63,13 +57,12 @@ public class FloType {
 			if (types[var3] == null) {
 				types[var3] = new FloType();
 			}
-			types[var3].decode(168, var2);
+			types[var3].decode(var2);
 		}
 	}
 
 	@ObfuscatedName("kc.a(ILmb;)V")
-	public void decode(int arg0, Packet arg1) {
-		int var3 = 90 / arg0;
+	public void decode(Packet arg1) {
 		while (true) {
 			int var4 = arg1.g1();
 			if (var4 == 0) {
@@ -77,7 +70,7 @@ public class FloType {
 			}
 			if (var4 == 1) {
 				this.rgb = arg1.g3();
-				this.setColour(this.rgb, 48735);
+				this.setColour(this.rgb);
 			} else if (var4 == 2) {
 				this.texture = arg1.g1();
 			} else if (var4 == 3) {
@@ -93,7 +86,7 @@ public class FloType {
 	}
 
 	@ObfuscatedName("kc.a(II)V")
-	public void setColour(int arg0, int arg1) {
+	public void setColour(int arg0) {
 		double var3 = (double) (arg0 >> 16 & 0xFF) / 256.0D;
 		double var5 = (double) (arg0 >> 8 & 0xFF) / 256.0D;
 		double var7 = (double) (arg0 & 0xFF) / 256.0D;
@@ -171,9 +164,6 @@ public class FloType {
 			var23 = 255;
 		}
 		this.hsl = this.hsl24to16(var21, var22, var23);
-		if (arg1 == 48735) {
-			;
-		}
 	}
 
 	@ObfuscatedName("kc.a(III)I")

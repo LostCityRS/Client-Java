@@ -9,15 +9,6 @@ import java.util.Random;
 @ObfuscatedName("lb")
 public class PixFont extends Pix2D {
 
-	@ObfuscatedName("lb.B")
-	public int _flowObfuscator12 = 11089;
-
-	@ObfuscatedName("lb.D")
-	public byte _flowObfuscator13 = 8;
-
-	@ObfuscatedName("lb.E")
-	public boolean _flowObfuscator14 = false;
-
 	@ObfuscatedName("lb.G")
 	public byte[][] charMask = new byte[94][];
 
@@ -45,28 +36,15 @@ public class PixFont extends Pix2D {
 	@ObfuscatedName("lb.P")
 	public boolean strikethrough = false;
 
-	@ObfuscatedName("lb.F")
-	public int _flowObfuscator15;
-
 	@ObfuscatedName("lb.N")
 	public int height;
 
 	@ObfuscatedName("lb.Q")
 	public static int[] CHAR_LOOKUP = new int[256];
 
-	@ObfuscatedName("lb.A")
-	public int _flowObfuscator16;
-
-	@ObfuscatedName("lb.C")
-	public int _flowObfuscator17;
-
-	public PixFont(Jagfile arg0, String arg1, int arg2) {
-		Packet var4 = new Packet((byte) -109, arg0.read(arg1 + ".dat", null));
-		Packet var5 = new Packet((byte) -109, arg0.read("index.dat", null));
-		boolean var6 = true;
-		if (arg2 != 0) {
-			this._flowObfuscator15 = 169;
-		}
+	public PixFont(Jagfile arg0, String arg1) {
+		Packet var4 = new Packet(arg0.read(arg1 + ".dat", null));
+		Packet var5 = new Packet(arg0.read("index.dat", null));
 		var5.pos = var4.g2() + 4;
 		int var7 = var5.g1();
 		if (var7 > 0) {
@@ -120,27 +98,17 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(IIILjava/lang/String;I)V")
-	public void drawStringCenter(int arg0, int arg1, int arg2, String arg3, int arg4) {
-		if (arg1 >= 1 && arg1 <= 1) {
-			this.drawString(arg3, arg2, (byte) 8, arg4, arg0 - this.stringWidth(arg3, (byte) 4) / 2);
-		}
+	public void drawStringCenter(int arg0, int arg2, String arg3, int arg4) {
+		this.drawString(arg3, arg2, arg4, arg0 - this.stringWidth(arg3) / 2);
 	}
 
 	@ObfuscatedName("lb.a(IZLjava/lang/String;ZII)V")
-	public void drawStringTaggableCenter(int arg0, boolean arg1, String arg2, boolean arg3, int arg4, int arg5) {
-		if (arg3) {
-			this.drawStringTaggable(arg5, arg0 - this.stringWidth(arg2, (byte) 4) / 2, arg1, false, arg4, arg2);
-		}
+	public void drawStringTaggableCenter(int arg0, boolean arg1, String arg2, int arg4, int arg5) {
+		this.drawStringTaggable(arg5, arg0 - this.stringWidth(arg2) / 2, arg1, arg4, arg2);
 	}
 
 	@ObfuscatedName("lb.a(Ljava/lang/String;B)I")
-	public int stringWidth(String arg0, byte arg1) {
-		if (arg1 == 4) {
-			boolean var3 = false;
-		} else {
-			for (int var4 = 1; var4 > 0; var4++) {
-			}
-		}
+	public int stringWidth(String arg0) {
 		if (arg0 == null) {
 			return 0;
 		}
@@ -156,13 +124,7 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(Ljava/lang/String;IBII)V")
-	public void drawString(String arg0, int arg1, byte arg2, int arg3, int arg4) {
-		if (this._flowObfuscator13 == arg2) {
-			boolean var6 = false;
-		} else {
-			for (int var7 = 1; var7 > 0; var7++) {
-			}
-		}
+	public void drawString(String arg0, int arg1, int arg3, int arg4) {
 		if (arg0 == null) {
 			return;
 		}
@@ -177,15 +139,12 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(IILjava/lang/String;III)V")
-	public void drawStringCenterWave(int arg0, int arg1, String arg2, int arg3, int arg4, int arg5) {
+	public void drawStringCenterWave(int arg0, int arg1, String arg2, int arg4, int arg5) {
 		if (arg2 == null) {
 			return;
 		}
-		int var7 = arg4 - this.stringWidth(arg2, (byte) 4) / 2;
+		int var7 = arg4 - this.stringWidth(arg2) / 2;
 		int var8 = arg0 - this.height;
-		if (arg3 != 29720) {
-			return;
-		}
 		for (int var9 = 0; var9 < arg2.length(); var9++) {
 			int var10 = CHAR_LOOKUP[arg2.charAt(var9)];
 			if (var10 != 94) {
@@ -196,19 +155,16 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(IIZZILjava/lang/String;)V")
-	public void drawStringTaggable(int arg0, int arg1, boolean arg2, boolean arg3, int arg4, String arg5) {
+	public void drawStringTaggable(int arg0, int arg1, boolean arg2, int arg4, String arg5) {
 		this.strikethrough = false;
 		int var7 = arg1;
-		if (arg3) {
-			this._flowObfuscator12 = 183;
-		}
 		if (arg5 == null) {
 			return;
 		}
 		int var8 = arg4 - this.height;
 		for (int var9 = 0; var9 < arg5.length(); var9++) {
 			if (arg5.charAt(var9) == '@' && var9 + 4 < arg5.length() && arg5.charAt(var9 + 4) == '@') {
-				int var10 = this.evaluateTag(-856, arg5.substring(var9 + 1, var9 + 4));
+				int var10 = this.evaluateTag(arg5.substring(var9 + 1, var9 + 4));
 				if (var10 != -1) {
 					arg0 = var10;
 				}
@@ -225,24 +181,21 @@ public class PixFont extends Pix2D {
 			}
 		}
 		if (this.strikethrough) {
-			Pix2D.drawHorizontalLine(8388608, (int) ((double) this.height * 0.7D) + var8, arg1 - var7, var7, this._flowObfuscator17);
+			Pix2D.drawHorizontalLine(8388608, (int) ((double) this.height * 0.7D) + var8, arg1 - var7, var7);
 		}
 	}
 
 	@ObfuscatedName("lb.a(ZIIIIILjava/lang/String;)V")
-	public void drawStringTooltip(boolean arg0, int arg1, int arg2, int arg3, int arg4, int arg5, String arg6) {
+	public void drawStringTooltip(boolean arg0, int arg1, int arg2, int arg3, int arg5, String arg6) {
 		if (arg6 == null) {
 			return;
 		}
 		this.random.setSeed((long) arg1);
 		int var8 = (this.random.nextInt() & 0x1F) + 192;
 		int var9 = arg3 - this.height;
-		if (arg4 != 7019) {
-			return;
-		}
 		for (int var10 = 0; var10 < arg6.length(); var10++) {
 			if (arg6.charAt(var10) == '@' && var10 + 4 < arg6.length() && arg6.charAt(var10 + 4) == '@') {
-				int var11 = this.evaluateTag(-856, arg6.substring(var10 + 1, var10 + 4));
+				int var11 = this.evaluateTag(arg6.substring(var10 + 1, var10 + 4));
 				if (var11 != -1) {
 					arg5 = var11;
 				}
@@ -251,9 +204,9 @@ public class PixFont extends Pix2D {
 				int var12 = CHAR_LOOKUP[arg6.charAt(var10)];
 				if (var12 != 94) {
 					if (arg0) {
-						this.drawCharAlpha(0, this.charMaskHeight[var12], this.charMask[var12], this.charOffsetY[var12] + var9 + 1, 1, this.charOffsetX[var12] + arg2 + 1, this.charMaskWidth[var12], 192);
+						this.drawCharAlpha(0, this.charMaskHeight[var12], this.charMask[var12], this.charOffsetY[var12] + var9 + 1, this.charOffsetX[var12] + arg2 + 1, this.charMaskWidth[var12], 192);
 					}
-					this.drawCharAlpha(arg5, this.charMaskHeight[var12], this.charMask[var12], this.charOffsetY[var12] + var9, 1, this.charOffsetX[var12] + arg2, this.charMaskWidth[var12], var8);
+					this.drawCharAlpha(arg5, this.charMaskHeight[var12], this.charMask[var12], this.charOffsetY[var12] + var9, this.charOffsetX[var12] + arg2, this.charMaskWidth[var12], var8);
 				}
 				arg2 += this.charAdvance[var12];
 				if ((this.random.nextInt() & 0x3) == 0) {
@@ -264,10 +217,7 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(ILjava/lang/String;)I")
-	public int evaluateTag(int arg0, String arg1) {
-		while (arg0 >= 0) {
-			this._flowObfuscator16 = -315;
-		}
+	public int evaluateTag(String arg1) {
 		if (arg1.equals("red")) {
 			return 16711680;
 		} else if (arg1.equals("gre")) {
@@ -386,11 +336,7 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(II[BIIIII)V")
-	public void drawCharAlpha(int arg0, int arg1, byte[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
-		if (arg4 != 1) {
-			for (int var9 = 1; var9 > 0; var9++) {
-			}
-		}
+	public void drawCharAlpha(int arg0, int arg1, byte[] arg2, int arg3, int arg5, int arg6, int arg7) {
 		int var10 = Pix2D.width2d * arg3 + arg5;
 		int var11 = Pix2D.width2d - arg6;
 		int var12 = 0;
@@ -421,17 +367,14 @@ public class PixFont extends Pix2D {
 			var11 += var16;
 		}
 		if (arg6 > 0 && arg1 > 0) {
-			this.copyPixelsAlpha(var12, arg0, var10, Pix2D.data, 4, var13, var11, arg7, arg1, arg2, arg6);
+			this.copyPixelsAlpha(var12, arg0, var10, Pix2D.data, var13, var11, arg7, arg1, arg2, arg6);
 		}
 	}
 
 	@ObfuscatedName("lb.a(III[IIIIII[BI)V")
-	public void copyPixelsAlpha(int arg0, int arg1, int arg2, int[] arg3, int arg4, int arg5, int arg6, int arg7, int arg8, byte[] arg9, int arg10) {
+	public void copyPixelsAlpha(int arg0, int arg1, int arg2, int[] arg3, int arg5, int arg6, int arg7, int arg8, byte[] arg9, int arg10) {
 		int var12 = ((arg1 & 0xFF00FF) * arg7 & 0xFF00FF00) + ((arg1 & 0xFF00) * arg7 & 0xFF0000) >> 8;
 		int var13 = 256 - arg7;
-		if (arg4 != 4) {
-			this._flowObfuscator14 = !this._flowObfuscator14;
-		}
 		for (int var14 = -arg8; var14 < 0; var14++) {
 			for (int var15 = -arg10; var15 < 0; var15++) {
 				if (arg9[arg5++] == 0) {

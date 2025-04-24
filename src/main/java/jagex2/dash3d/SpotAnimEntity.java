@@ -7,9 +7,6 @@ import jagex2.graphics.Model;
 @ObfuscatedName("gb")
 public class SpotAnimEntity extends Entity {
 
-	@ObfuscatedName("gb.l")
-	public int _flowObfuscator5 = 826;
-
 	@ObfuscatedName("gb.m")
 	public SpotAnimType type;
 
@@ -37,11 +34,8 @@ public class SpotAnimEntity extends Entity {
 	@ObfuscatedName("gb.u")
 	public boolean seqComplete = false;
 
-	public SpotAnimEntity(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public SpotAnimEntity(int arg0, int arg1, int arg2, int arg3, int arg4, int arg6, int arg7) {
 		this.type = SpotAnimType.types[arg3];
-		if (arg5 >= 0) {
-			this._flowObfuscator5 = -352;
-		}
 		this.level = arg2;
 		this.x = arg1;
 		this.z = arg0;
@@ -51,18 +45,15 @@ public class SpotAnimEntity extends Entity {
 	}
 
 	@ObfuscatedName("gb.a(II)V")
-	public final void update(int arg0, int arg1) {
+	public final void update(int arg1) {
 		this.seqCycle += arg1;
-		if (arg0 != 0) {
-			return;
-		}
 		while (true) {
 			do {
 				do {
-					if (this.seqCycle <= this.type.seq.getFrameDuration(0, this.seqFrame)) {
+					if (this.seqCycle <= this.type.seq.getFrameDuration(this.seqFrame)) {
 						return;
 					}
-					this.seqCycle -= this.type.seq.getFrameDuration(0, this.seqFrame) + 1;
+					this.seqCycle -= this.type.seq.getFrameDuration(this.seqFrame) + 1;
 					this.seqFrame++;
 				} while (this.seqFrame < this.type.seq.frameCount);
 			} while (this.seqFrame >= 0 && this.seqFrame < this.type.seq.frameCount);
@@ -72,35 +63,33 @@ public class SpotAnimEntity extends Entity {
 	}
 
 	@ObfuscatedName("gb.a(I)Lfb;")
-	public final Model getModel(int arg0) {
+	public final Model getModel() {
 		Model var2 = this.type.getModel();
-		if (arg0 != 5560) {
-			throw new NullPointerException();
-		} else if (var2 == null) {
+		if (var2 == null) {
 			return null;
 		} else {
-			Model var3 = new Model(var2, true, false, !this.type.animHasAlpha, -796);
+			Model var3 = new Model(var2, true, false, !this.type.animHasAlpha);
 			if (!this.seqComplete) {
 				var3.createLabelReferences(-591);
-				var3.applyTransform(this.type.seq.frames[this.seqFrame], 13056);
+				var3.applyTransform(this.type.seq.frames[this.seqFrame]);
 				var3.labelFaces = null;
 				var3.labelVertices = null;
 			}
 			if (this.type.resizeh != 128 || this.type.resizev != 128) {
-				var3.scale(this.type.resizev, this.type.resizeh, 4, this.type.resizeh);
+				var3.scale(this.type.resizev, this.type.resizeh, this.type.resizeh);
 			}
 			if (this.type.angle != 0) {
 				if (this.type.angle == 90) {
-					var3.rotateY90((byte) 3);
+					var3.rotateY90();
 				}
 				if (this.type.angle == 180) {
-					var3.rotateY90((byte) 3);
-					var3.rotateY90((byte) 3);
+					var3.rotateY90();
+					var3.rotateY90();
 				}
 				if (this.type.angle == 270) {
-					var3.rotateY90((byte) 3);
-					var3.rotateY90((byte) 3);
-					var3.rotateY90((byte) 3);
+					var3.rotateY90();
+					var3.rotateY90();
+					var3.rotateY90();
 				}
 			}
 			var3.calculateNormals(this.type.ambient + 64, this.type.contrast + 850, -30, -50, -30, true);

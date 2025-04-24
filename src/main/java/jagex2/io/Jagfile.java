@@ -5,15 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("yb")
 public class Jagfile {
 
-	@ObfuscatedName("yb.a")
-	public boolean _flowObfuscator1 = false;
-
-	@ObfuscatedName("yb.b")
-	public int _flowObfuscator2 = -119;
-
-	@ObfuscatedName("yb.c")
-	public boolean _flowObfuscator3 = true;
-
 	@ObfuscatedName("yb.d")
 	public byte[] data;
 
@@ -35,19 +26,13 @@ public class Jagfile {
 	@ObfuscatedName("yb.j")
 	public boolean unpacked;
 
-	public Jagfile(byte arg0, byte[] arg1) {
-		if (arg0 != 5) {
-			this._flowObfuscator1 = !this._flowObfuscator1;
-		}
-		this.unpack(arg1, 0);
+	public Jagfile(byte[] arg1) {
+		this.unpack(arg1);
 	}
 
 	@ObfuscatedName("yb.a([BI)V")
-	public void unpack(byte[] arg0, int arg1) {
-		if (arg1 != 0) {
-			this._flowObfuscator3 = !this._flowObfuscator3;
-		}
-		Packet var3 = new Packet((byte) -109, arg0);
+	public void unpack(byte[] arg0) {
+		Packet var3 = new Packet(arg0);
 		int var4 = var3.g3();
 		int var5 = var3.g3();
 		if (var4 == var5) {
@@ -57,7 +42,7 @@ public class Jagfile {
 			byte[] var6 = new byte[var4];
 			BZip2.decompress(var6, var4, arg0, var5, 6);
 			this.data = var6;
-			var3 = new Packet((byte) -109, this.data);
+			var3 = new Packet(this.data);
 			this.unpacked = true;
 		}
 		this.fileCount = var3.g2();

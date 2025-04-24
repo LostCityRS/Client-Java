@@ -6,15 +6,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("cc")
 public class Wave {
 
-	@ObfuscatedName("cc.a")
-	public boolean field899 = true;
-
-	@ObfuscatedName("cc.b")
-	public int field900 = 826;
-
-	@ObfuscatedName("cc.c")
-	public boolean field901 = false;
-
 	@ObfuscatedName("cc.d")
 	public static Wave[] tracks = new Wave[1000];
 
@@ -37,12 +28,9 @@ public class Wave {
 	public int loopEnd;
 
 	@ObfuscatedName("cc.a(Lmb;B)V")
-	public static final void unpack(Packet arg0, byte arg1) {
+	public static final void unpack(Packet arg0) {
 		waveBytes = new byte[441000];
-		if (arg1 != 127) {
-			return;
-		}
-		waveBuffer = new Packet((byte) -109, waveBytes);
+		waveBuffer = new Packet(waveBytes);
 		Tone.init();
 		while (true) {
 			int var2 = arg0.g2();
@@ -50,49 +38,38 @@ public class Wave {
 				return;
 			}
 			tracks[var2] = new Wave();
-			tracks[var2].unpack(168, arg0);
-			delays[var2] = tracks[var2].trim(0);
+			tracks[var2].readWave(arg0);
+			delays[var2] = tracks[var2].trim();
 		}
 	}
 
 	@ObfuscatedName("cc.a(III)Lmb;")
-	public static final Packet generate(int arg0, int arg1, int arg2) {
-		if (arg2 <= 0) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
+	public static final Packet generate(int arg0, int arg1) {
 		if (tracks[arg1] == null) {
 			return null;
 		} else {
 			Wave var4 = tracks[arg1];
-			return var4.getWave(arg0, (byte) -1);
+			return var4.getWave(arg0);
 		}
 	}
 
 	@ObfuscatedName("cc.a(ILmb;)V")
-	public final void unpack(int arg0, Packet arg1) {
+	public final void readWave(Packet arg1) {
 		for (int var3 = 0; var3 < 10; var3++) {
 			int var5 = arg1.g1();
 			if (var5 != 0) {
 				arg1.pos--;
 				this.tones[var3] = new Tone();
-				this.tones[var3].unpack(168, arg1);
+				this.tones[var3].unpack(arg1);
 			}
 		}
 		this.loopBegin = arg1.g2();
-		if (arg0 <= 0) {
-			for (int var4 = 1; var4 > 0; var4++) {
-			}
-		}
 		this.loopEnd = arg1.g2();
 	}
 
 	@ObfuscatedName("cc.a(I)I")
-	public final int trim(int arg0) {
+	public final int trim() {
 		int var2 = 9999999;
-		if (arg0 != 0) {
-			this.field901 = !this.field901;
-		}
 		for (int var3 = 0; var3 < 10; var3++) {
 			if (this.tones[var3] != null && this.tones[var3].start / 20 < var2) {
 				var2 = this.tones[var3].start / 20;
@@ -117,25 +94,22 @@ public class Wave {
 	}
 
 	@ObfuscatedName("cc.a(IB)Lmb;")
-	public final Packet getWave(int arg0, byte arg1) {
+	public final Packet getWave(int arg0) {
 		int var3 = this.generate(arg0);
 		waveBuffer.pos = 0;
 		waveBuffer.p4(1380533830);
-		waveBuffer.ip4(this.field900, var3 + 36);
+		waveBuffer.ip4(var3 + 36);
 		waveBuffer.p4(1463899717);
 		waveBuffer.p4(1718449184);
-		waveBuffer.ip4(this.field900, 16);
-		waveBuffer.ip2(1, this.field899);
-		waveBuffer.ip2(1, this.field899);
-		waveBuffer.ip4(this.field900, 22050);
-		if (arg1 != -1) {
-			this.field900 = 456;
-		}
-		waveBuffer.ip4(this.field900, 22050);
-		waveBuffer.ip2(1, this.field899);
-		waveBuffer.ip2(8, this.field899);
+		waveBuffer.ip4(16);
+		waveBuffer.ip2(1);
+		waveBuffer.ip2(1);
+		waveBuffer.ip4(22050);
+		waveBuffer.ip4(22050);
+		waveBuffer.ip2(1);
+		waveBuffer.ip2(8);
 		waveBuffer.p4(1684108385);
-		waveBuffer.ip4(this.field900, var3);
+		waveBuffer.ip4(var3);
 		waveBuffer.pos += var3;
 		return waveBuffer;
 	}

@@ -7,12 +7,6 @@ import jagex2.config.SeqType;
 @ObfuscatedName("z")
 public class PathingEntity extends Entity {
 
-	@ObfuscatedName("z.l")
-	public boolean field402 = true;
-
-	@ObfuscatedName("z.m")
-	public int field403 = 354;
-
 	@ObfuscatedName("z.n")
 	public int x;
 
@@ -176,7 +170,7 @@ public class PathingEntity extends Entity {
 	public int forceMoveStartSceneTileX;
 
 	@ObfuscatedName("z.a(ZIII)V")
-	public final void move(boolean arg0, int arg1, int arg2, int arg3) {
+	public final void move(boolean arg0, int arg1, int arg2) {
 		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_mode == 1) {
 			this.primarySeqId = -1;
 		}
@@ -204,16 +198,11 @@ public class PathingEntity extends Entity {
 		this.routeTileX[0] = arg1;
 		this.routeTileZ[0] = arg2;
 		this.x = this.routeTileX[0] * 128 + this.size * 64;
-		if (arg3 >= 7 && arg3 <= 7) {
-			this.z = this.routeTileZ[0] * 128 + this.size * 64;
-		}
+		this.z = this.routeTileZ[0] * 128 + this.size * 64;
 	}
 
 	@ObfuscatedName("z.a(IZZ)V")
-	public final void move(int arg0, boolean arg1, boolean arg2) {
-		if (!arg2) {
-			this.field402 = !this.field402;
-		}
+	public final void move(int arg0, boolean arg1) {
 		int var4 = this.routeTileX[0];
 		int var5 = this.routeTileZ[0];
 		if (arg0 == 0) {
@@ -261,28 +250,18 @@ public class PathingEntity extends Entity {
 	}
 
 	@ObfuscatedName("z.b(I)V")
-	public final void resetPath(int arg0) {
+	public final void resetPath() {
 		this.pathLength = 0;
 		this.seqPathLength = 0;
-		if (arg0 < 2 || arg0 > 2) {
-			this.field403 = 186;
-		}
 	}
 
 	@ObfuscatedName("z.a(B)Z")
-	public boolean isVisible(byte arg0) {
-		if (arg0 != 8) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public boolean isVisible() {
 		return false;
 	}
 
 	@ObfuscatedName("z.a(III)V")
-	public final void hit(int arg0, int arg1, int arg2) {
-		if (arg1 != 0) {
-			this.field403 = -191;
-		}
+	public final void hit(int arg0, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			if (this.damageCycle[var4] <= client.loopCycle) {
 				this.damage[var4] = arg2;
