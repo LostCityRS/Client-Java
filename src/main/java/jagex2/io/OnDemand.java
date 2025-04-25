@@ -267,7 +267,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			return;
 		}
 		DoublyLinkList var3 = this.requests;
-		synchronized (this.requests) {
+		synchronized (var3) {
 			for (OnDemandRequest var4 = (OnDemandRequest) this.requests.head(); var4 != null; var4 = (OnDemandRequest) this.requests.next()) {
 				if (var4.archive == arg0 && var4.file == arg1) {
 					return;
@@ -278,7 +278,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			var5.file = arg1;
 			var5.urgent = true;
 			LinkList var6 = this.queue;
-			synchronized (this.queue) {
+			synchronized (var6) {
 				this.queue.addTail(var5);
 			}
 			this.requests.addTail(var5);
@@ -288,7 +288,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	@ObfuscatedName("vb.b()I")
 	public final int remaining() {
 		DoublyLinkList var1 = this.requests;
-		synchronized (this.requests) {
+		synchronized (var1) {
 			return this.requests.size();
 		}
 	}
@@ -297,14 +297,14 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public final OnDemandRequest cycle() {
 		LinkList var1 = this.completed;
 		OnDemandRequest var2;
-		synchronized (this.completed) {
+		synchronized (var1) {
 			var2 = (OnDemandRequest) this.completed.removeHead();
 		}
 		if (var2 == null) {
 			return null;
 		}
 		DoublyLinkList var3 = this.requests;
-		synchronized (this.requests) {
+		synchronized (var3) {
 			var2.unlink2();
 		}
 		if (var2.data == null) {
@@ -334,25 +334,28 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(IZIB)V")
-	public final void prefetch(int arg0, int arg2, byte arg3) {
-		if (this.app.fileStreams[0] == null || this.versions[arg0][arg2] == 0) {
+	public final void prefetch(int archive, int group, byte priority) {
+		if (this.app.fileStreams[0] == null || this.versions[archive][group] == 0) {
 			return;
 		}
-		byte[] var5 = this.app.fileStreams[arg0 + 1].read(arg2);
-		if (this.validate(var5, this.checksums[arg0][arg2], this.versions[arg0][arg2])) {
+
+		byte[] var5 = this.app.fileStreams[archive + 1].read(group);
+		if (this.validate(var5, this.checksums[archive][group], this.versions[archive][group])) {
 			return;
 		}
-		this.priorities[arg0][arg2] = arg3;
-		if (arg3 > this.topPriority) {
-			this.topPriority = arg3;
+
+		this.priorities[archive][group] = priority;
+		if (priority > this.topPriority) {
+			this.topPriority = priority;
 		}
+
 		this.totalPrefetchFiles++;
 	}
 
 	@ObfuscatedName("vb.b(I)V")
 	public final void clearPrefetches() {
 		LinkList var2 = this.prefetches;
-		synchronized (this.prefetches) {
+		synchronized (var2) {
 			this.prefetches.clear();
 		}
 	}
@@ -367,7 +370,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		var4.file = arg1;
 		var4.urgent = false;
 		LinkList var5 = this.prefetches;
-		synchronized (this.prefetches) {
+		synchronized (var5) {
 			this.prefetches.addTail(var4);
 		}
 	}
@@ -459,7 +462,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public final void handleQueue() {
 		LinkList var2 = this.queue;
 		OnDemandRequest var3;
-		synchronized (this.queue) {
+		synchronized (var2) {
 			var3 = (OnDemandRequest) this.queue.removeHead();
 		}
 		while (var3 != null) {
@@ -472,13 +475,13 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				var4 = null;
 			}
 			LinkList var5 = this.queue;
-			synchronized (this.queue) {
+			synchronized (var5) {
 				if (var4 == null) {
 					this.missing.addTail(var3);
 				} else {
 					var3.data = var4;
 					LinkList var6 = this.completed;
-					synchronized (this.completed) {
+					synchronized (var6) {
 						this.completed.addTail(var3);
 					}
 				}
@@ -522,7 +525,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			}
 			LinkList var2 = this.prefetches;
 			OnDemandRequest var3;
-			synchronized (this.prefetches) {
+			synchronized (var2) {
 				var3 = (OnDemandRequest) this.prefetches.removeHead();
 			}
 			while (var3 != null) {
@@ -541,7 +544,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					}
 				}
 				LinkList var4 = this.prefetches;
-				synchronized (this.prefetches) {
+				synchronized (var4) {
 					var3 = (OnDemandRequest) this.prefetches.removeHead();
 				}
 			}
@@ -601,7 +604,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 						this.current.data = null;
 						if (this.current.urgent) {
 							LinkList var9 = this.completed;
-							synchronized (this.completed) {
+							synchronized (var9) {
 								this.completed.addTail(this.current);
 							}
 						} else {
@@ -643,7 +646,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					}
 					if (this.current.urgent) {
 						LinkList var13 = this.completed;
-						synchronized (this.completed) {
+						synchronized (var13) {
 							this.completed.addTail(this.current);
 						}
 					} else {

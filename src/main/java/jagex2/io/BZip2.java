@@ -11,7 +11,7 @@ public class BZip2 {
 	@ObfuscatedName("sb.a([BI[BII)I")
 	public static int decompress(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
 		BZip2State var5 = state;
-		synchronized (state) {
+		synchronized (var5) {
 			state.field773 = arg2;
 			state.field774 = arg4;
 			state.field778 = arg0;

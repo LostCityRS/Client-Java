@@ -32,7 +32,7 @@ public class InputTracking {
 
 	@ObfuscatedName("f.a(I)V")
 	public static final synchronized void setEnabled() {
-		oldBuffer = Packet.alloc(5, 1);
+		oldBuffer = Packet.alloc(1);
 		outBuffer = null;
 		lastTime = System.currentTimeMillis();
 		enabled = true;
@@ -69,7 +69,7 @@ public class InputTracking {
 	public static final synchronized void ensureCapacity(int arg1) {
 		if (oldBuffer.pos + arg1 >= 500) {
 			Packet var3 = oldBuffer;
-			oldBuffer = Packet.alloc(5, 1);
+			oldBuffer = Packet.alloc(1);
 			outBuffer = var3;
 		}
 	}

@@ -46,9 +46,9 @@ public class Packet extends DoublyLinkable {
 	public static int cacheMaxCount;
 
 	@ObfuscatedName("mb.a(II)Lmb;")
-	public static Packet alloc(int arg0, int arg1) {
+	public static Packet alloc(int arg1) {
 		LinkList var2 = cacheMid;
-		synchronized (cacheMid) {
+		synchronized (var2) {
 			Packet var3 = null;
 			if (arg1 == 0 && cacheMinCount > 0) {
 				cacheMinCount--;
@@ -66,10 +66,6 @@ public class Packet extends DoublyLinkable {
 				return var4;
 			}
 		}
-		if (arg0 != 5) {
-			for (int var6 = 1; var6 > 0; var6++) {
-			}
-		}
 		Packet var7 = new Packet();
 		var7.pos = 0;
 		if (arg1 == 0) {
@@ -85,7 +81,7 @@ public class Packet extends DoublyLinkable {
 	@ObfuscatedName("mb.a(I)V")
 	public void release() {
 		LinkList var2 = cacheMid;
-		synchronized (cacheMid) {
+		synchronized (var2) {
 			this.pos = 0;
 			if (this.data.length == 100 && cacheMinCount < 1000) {
 				cacheMin.addTail(this);

@@ -30,7 +30,7 @@ public class MouseTracking implements Runnable {
 	public void run() {
 		while (this.active) {
 			Object var1 = this.lock;
-			synchronized (this.lock) {
+			synchronized (var1) {
 				if (this.length < 500) {
 					this.x[this.length] = this.app.mouseX;
 					this.y[this.length] = this.app.mouseY;
