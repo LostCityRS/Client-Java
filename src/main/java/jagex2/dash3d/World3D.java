@@ -522,11 +522,13 @@ public class World3D {
 
 	@ObfuscatedName("s.b(B)V")
 	public void clearLocChanges() {
-		for (int var2 = 0; var2 < this.changedLocCount; var2++) {
-			Location var3 = this.changedLocs[var2];
-			this.removeLoc(var3);
-			this.changedLocs[var2] = null;
+		for (int i = 0; i < this.changedLocCount; i++) {
+			Location loc = this.changedLocs[i];
+			this.removeLoc(loc);
+			this.changedLocs[i] = null;
 		}
+
+		this.changedLocCount = 0;
 	}
 
 	@ObfuscatedName("s.a(ILq;)V")

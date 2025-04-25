@@ -26,6 +26,8 @@ import jagex2.wordenc.WordPack;
 
 public class Client extends GameShell {
 
+	public static boolean JAG_CHECKSUMS = false;
+
 	@ObfuscatedName("client.Pe")
 	public static int nodeId = 10;
 
@@ -347,6 +349,12 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.de")
 	public int overrideChat;
 
+	@ObfuscatedName("client.Ec")
+	public int MAX_PLAYER_COUNT = 2048;
+
+	@ObfuscatedName("client.Fc")
+	public int LOCAL_PLAYER_INDEX = 2047;
+
 	@ObfuscatedName("client.Gc")
 	public PlayerEntity[] players = new PlayerEntity[this.MAX_PLAYER_COUNT];
 
@@ -606,12 +614,6 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.zc")
 	public int[] varps = new int[2000];
-
-	@ObfuscatedName("client.Ec")
-	public int MAX_PLAYER_COUNT = 2048;
-
-	@ObfuscatedName("client.Fc")
-	public int LOCAL_PLAYER_INDEX = 2047;
 
 	@ObfuscatedName("client.Mc")
 	public int[] jagChecksum = new int[9];
@@ -2292,7 +2294,7 @@ public class Client extends GameShell {
 			}
 		} catch (Exception var28) {
 		}
-		if (var7 != null) {
+		if (JAG_CHECKSUMS && var7 != null) {
 			this.field1329.reset();
 			this.field1329.update(var7);
 			int var9 = (int) this.field1329.getValue();
