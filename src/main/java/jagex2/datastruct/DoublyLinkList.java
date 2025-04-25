@@ -17,57 +17,58 @@ public class DoublyLinkList {
 	}
 
 	@ObfuscatedName("qb.a(Lx;)V")
-	public void addTail(DoublyLinkable arg0) {
-		if (arg0.prev2 != null) {
-			arg0.unlink2();
+	public void addTail(DoublyLinkable node) {
+		if (node.prev2 != null) {
+			node.unlink2();
 		}
-		arg0.prev2 = this.sentinel.prev2;
-		arg0.next2 = this.sentinel;
-		arg0.prev2.next2 = arg0;
-		arg0.next2.prev2 = arg0;
+
+		node.prev2 = this.sentinel.prev2;
+		node.next2 = this.sentinel;
+		node.prev2.next2 = node;
+		node.next2.prev2 = node;
 	}
 
 	@ObfuscatedName("qb.a()Lx;")
 	public DoublyLinkable removeHead() {
-		DoublyLinkable var1 = this.sentinel.next2;
-		if (this.sentinel == var1) {
+		DoublyLinkable node = this.sentinel.next2;
+		if (this.sentinel == node) {
 			return null;
 		} else {
-			var1.unlink2();
-			return var1;
+			node.unlink2();
+			return node;
 		}
 	}
 
 	@ObfuscatedName("qb.b()Lx;")
 	public DoublyLinkable head() {
-		DoublyLinkable var1 = this.sentinel.next2;
-		if (this.sentinel == var1) {
+		DoublyLinkable node = this.sentinel.next2;
+		if (this.sentinel == node) {
 			this.cursor = null;
 			return null;
 		} else {
-			this.cursor = var1.next2;
-			return var1;
+			this.cursor = node.next2;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("qb.a(I)Lx;")
 	public DoublyLinkable next() {
-		DoublyLinkable var2 = this.cursor;
-		if (this.sentinel == var2) {
+		DoublyLinkable node = this.cursor;
+		if (this.sentinel == node) {
 			this.cursor = null;
 			return null;
 		} else {
-			this.cursor = var2.next2;
-			return var2;
+			this.cursor = node.next2;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("qb.c()I")
 	public int size() {
-		int var1 = 0;
-		for (DoublyLinkable var2 = this.sentinel.next2; var2 != this.sentinel; var2 = var2.next2) {
-			var1++;
+		int count = 0;
+		for (DoublyLinkable node = this.sentinel.next2; node != this.sentinel; node = node.next2) {
+			count++;
 		}
-		return var1;
+		return count;
 	}
 }

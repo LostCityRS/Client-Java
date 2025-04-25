@@ -26,51 +26,55 @@ public class LruCache {
 	@ObfuscatedName("t.g")
 	public DoublyLinkList history = new DoublyLinkList();
 
-	public LruCache(int arg0) {
-		this.capacity = arg0;
-		this.available = arg0;
+	public LruCache(int size) {
+		this.capacity = size;
+		this.available = size;
 	}
 
 	@ObfuscatedName("t.a(J)Lx;")
-	public DoublyLinkable get(long arg0) {
-		DoublyLinkable var3 = (DoublyLinkable) this.table.get(arg0);
-		if (var3 == null) {
+	public DoublyLinkable get(long key) {
+		DoublyLinkable node = (DoublyLinkable) this.table.get(key);
+		if (node == null) {
 			this.notFound++;
 		} else {
-			this.history.addTail(var3);
+			this.history.addTail(node);
 			this.found++;
 		}
-		return var3;
+
+		return node;
 	}
 
 	@ObfuscatedName("t.a(Lx;JI)V")
-	public void put(DoublyLinkable arg0, long arg1) {
+	public void put(DoublyLinkable node, long key) {
 		if (this.available == 0) {
-			DoublyLinkable var5 = this.history.removeHead();
-			var5.unlink();
-			var5.unlink2();
-			if (this.search == var5) {
-				DoublyLinkable var6 = this.history.removeHead();
-				var6.unlink();
-				var6.unlink2();
+			DoublyLinkable sentinel = this.history.removeHead();
+			sentinel.unlink();
+			sentinel.unlink2();
+
+			if (this.search == sentinel) {
+				DoublyLinkable next = this.history.removeHead();
+				next.unlink();
+				next.unlink2();
 			}
 		} else {
 			this.available--;
 		}
-		this.table.put(arg1, arg0);
-		this.history.addTail(arg0);
+
+		this.table.put(key, node);
+		this.history.addTail(node);
 	}
 
 	@ObfuscatedName("t.a()V")
 	public void clear() {
 		while (true) {
-			DoublyLinkable var1 = this.history.removeHead();
-			if (var1 == null) {
+			DoublyLinkable node = this.history.removeHead();
+			if (node == null) {
 				this.available = this.capacity;
 				return;
 			}
-			var1.unlink();
-			var1.unlink2();
+
+			node.unlink();
+			node.unlink2();
 		}
 	}
 }

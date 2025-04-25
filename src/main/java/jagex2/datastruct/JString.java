@@ -9,107 +9,130 @@ public class JString {
 	public static char[] builder = new char[12];
 
 	@ObfuscatedName("zb.d")
-	public static char[] BASE37_LOOKUP = new char[] { '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	public static char[] BASE37_LOOKUP = new char[] {
+		'_',
+		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+		'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+		'u', 'v', 'w', 'x', 'y', 'z',
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+	};
 
 	@ObfuscatedName("zb.a(Ljava/lang/String;)J")
-	public static long toBase37(String arg0) {
-		long var1 = 0L;
-		for (int var3 = 0; var3 < arg0.length() && var3 < 12; var3++) {
-			char var4 = arg0.charAt(var3);
-			var1 *= 37L;
-			if (var4 >= 'A' && var4 <= 'Z') {
-				var1 += var4 + 1 - 65;
-			} else if (var4 >= 'a' && var4 <= 'z') {
-				var1 += var4 + 1 - 97;
-			} else if (var4 >= '0' && var4 <= '9') {
-				var1 += var4 + 27 - 48;
+	public static long toBase37(String s) {
+		long hash = 0L;
+
+		for (int i = 0; i < s.length() && i < 12; i++) {
+			char c = s.charAt(i);
+			hash *= 37L;
+
+			if (c >= 'A' && c <= 'Z') {
+				hash += c + 1 - 65;
+			} else if (c >= 'a' && c <= 'z') {
+				hash += c + 1 - 97;
+			} else if (c >= '0' && c <= '9') {
+				hash += c + 27 - 48;
 			}
 		}
-		while (var1 % 37L == 0L && var1 != 0L) {
-			var1 /= 37L;
+
+		while (hash % 37L == 0L && hash != 0L) {
+			hash /= 37L;
 		}
-		return var1;
+
+		return hash;
 	}
 
 	@ObfuscatedName("zb.a(BJ)Ljava/lang/String;")
-	public static String fromBase37(long arg1) {
-		if (arg1 <= 0L || arg1 >= 6582952005840035281L) {
+	public static String fromBase37(long username) {
+		if (username <= 0L || username >= 6582952005840035281L) {
 			return "invalid_name";
-		} else if (arg1 % 37L == 0L) {
+		} else if (username % 37L == 0L) {
 			return "invalid_name";
 		} else {
-			int var3 = 0;
-			while (arg1 != 0L) {
-				long var4 = arg1;
-				arg1 /= 37L;
-				builder[11 - var3++] = BASE37_LOOKUP[(int) (var4 - arg1 * 37L)];
+			int len = 0;
+
+			while (username != 0L) {
+				long last = username;
+				username /= 37L;
+				builder[11 - len++] = BASE37_LOOKUP[(int) (last - username * 37L)];
 			}
-			return new String(builder, 12 - var3, var3);
+
+			return new String(builder, 12 - len, len);
 		}
 	}
 
 	@ObfuscatedName("zb.a(ZLjava/lang/String;)J")
-	public static long hashCode(String arg1) {
-		String var2 = arg1.toUpperCase();
-		long var3 = 0L;
-		for (int var5 = 0; var5 < var2.length(); var5++) {
-			long var6 = var3 * 61L + (long) var2.charAt(var5) - 32L;
-			var3 = var6 + (var6 >> 56) & 0xFFFFFFFFFFFFFFL;
+	public static long hashCode(String s) {
+		String upper = s.toUpperCase();
+
+		long hash = 0L;
+		for (int i = 0; i < upper.length(); i++) {
+			hash = hash * 61L + (long) upper.charAt(i) - 32L;
+			hash = hash + (hash >> 56) & 0xFFFFFFFFFFFFFFL;
 		}
-		return var3;
+
+		return hash;
 	}
 
 	@ObfuscatedName("zb.a(IB)Ljava/lang/String;")
-	public static String formatIPv4(int arg0) {
-		return (arg0 >> 24 & 0xFF) + "." + (arg0 >> 16 & 0xFF) + "." + (arg0 >> 8 & 0xFF) + "." + (arg0 & 0xFF);
+	public static String formatIPv4(int ip) {
+		return (ip >> 24 & 0xFF) + "." + (ip >> 16 & 0xFF) + "." + (ip >> 8 & 0xFF) + "." + (ip & 0xFF);
 	}
 
 	@ObfuscatedName("zb.b(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String formatName(String arg1) {
-		if (arg1.length() > 0) {
-			char[] var2 = arg1.toCharArray();
-			for (int var3 = 0; var3 < var2.length; var3++) {
-				if (var2[var3] == '_') {
-					var2[var3] = ' ';
-					if (var3 + 1 < var2.length && var2[var3 + 1] >= 'a' && var2[var3 + 1] <= 'z') {
-						var2[var3 + 1] = (char) (var2[var3 + 1] + 'A' - 97);
-					}
+	public static String formatDisplayName(String username) {
+		if (username.length() <= 0) {
+			return username;
+		}
+
+		char[] chars = username.toCharArray();
+		for (int i = 0; i < chars.length; i++) {
+			if (chars[i] == '_') {
+				chars[i] = ' ';
+
+				if (i + 1 < chars.length && chars[i + 1] >= 'a' && chars[i + 1] <= 'z') {
+					chars[i + 1] = (char) (chars[i + 1] + 'A' - 97);
 				}
 			}
-			if (var2[0] >= 'a' && var2[0] <= 'z') {
-				var2[0] = (char) (var2[0] + 'A' - 97);
-			}
-			return new String(var2);
-		} else {
-			return arg1;
 		}
+
+		if (chars[0] >= 'a' && chars[0] <= 'z') {
+			chars[0] = (char) (chars[0] + 'A' - 97);
+		}
+
+		return new String(chars);
 	}
 
 	@ObfuscatedName("zb.c(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String toSentenceCase(String arg1) {
-		String var2 = arg1.toLowerCase();
-		char[] var3 = var2.toCharArray();
-		int var5 = var3.length;
-		boolean var6 = true;
-		for (int var7 = 0; var7 < var5; var7++) {
-			char var8 = var3[var7];
-			if (var6 && var8 >= 'a' && var8 <= 'z') {
-				var3[var7] = (char) (var3[var7] + -32);
-				var6 = false;
+	public static String toSentenceCase(String s) {
+		String lower = s.toLowerCase();
+		char[] chars = lower.toCharArray();
+		int length = chars.length;
+
+		boolean capital = true;
+		for (int i = 0; i < length; i++) {
+			char c = chars[i];
+
+			if (capital && c >= 'a' && c <= 'z') {
+				chars[i] = (char) (chars[i] + -32);
+				capital = false;
 			}
-			if (var8 == '.' || var8 == '!') {
-				var6 = true;
+
+			if (c == '.' || c == '!') {
+				capital = true;
 			}
 		}
-		return new String(var3);
+
+		return new String(chars);
 	}
 
 	@ObfuscatedName("zb.d(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String censor(String arg1) {
-		String var2 = "";
-		for (int var3 = 0; var3 < arg1.length(); var3++) {
-			var2 = var2 + "*";
+	public static String censor(String s) {
+		String temp = "";
+
+		for (int i = 0; i < s.length(); i++) {
+			temp = temp + "*";
 		}
-		return var2;
+
+		return temp;
 	}
 }

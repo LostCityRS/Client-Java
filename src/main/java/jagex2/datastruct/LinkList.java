@@ -17,93 +17,97 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(Lv;)V")
-	public void addTail(Linkable arg0) {
-		if (arg0.prev != null) {
-			arg0.unlink();
+	public void addTail(Linkable node) {
+		if (node.prev != null) {
+			node.unlink();
 		}
-		arg0.prev = this.sentinel.prev;
-		arg0.next = this.sentinel;
-		arg0.prev.next = arg0;
-		arg0.next.prev = arg0;
+
+		node.prev = this.sentinel.prev;
+		node.next = this.sentinel;
+		node.prev.next = node;
+		node.next.prev = node;
 	}
 
 	@ObfuscatedName("pb.a(Lv;B)V")
-	public void addHead(Linkable arg0) {
-		if (arg0.prev != null) {
-			arg0.unlink();
+	public void addHead(Linkable node) {
+		if (node.prev != null) {
+			node.unlink();
 		}
-		arg0.prev = this.sentinel;
-		arg0.next = this.sentinel.next;
-		arg0.prev.next = arg0;
-		arg0.next.prev = arg0;
+
+		node.prev = this.sentinel;
+		node.next = this.sentinel.next;
+		node.prev.next = node;
+		node.next.prev = node;
 	}
 
 	@ObfuscatedName("pb.a()Lv;")
 	public Linkable removeHead() {
-		Linkable var1 = this.sentinel.next;
-		if (this.sentinel == var1) {
+		Linkable node = this.sentinel.next;
+		if (this.sentinel == node) {
 			return null;
 		} else {
-			var1.unlink();
-			return var1;
+			node.unlink();
+			return node;
 		}
 	}
 
 	@ObfuscatedName("pb.b()Lv;")
 	public Linkable head() {
-		Linkable var1 = this.sentinel.next;
-		if (this.sentinel == var1) {
+		Linkable node = this.sentinel.next;
+		if (this.sentinel == node) {
 			this.cursor = null;
 			return null;
 		} else {
-			this.cursor = var1.next;
-			return var1;
+			this.cursor = node.next;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("pb.a(B)Lv;")
 	public Linkable tail() {
-		Linkable var2 = this.sentinel.prev;
-		if (this.sentinel == var2) {
+		Linkable node = this.sentinel.prev;
+		if (this.sentinel == node) {
 			this.cursor = null;
 			return null;
 		} else {
-			this.cursor = var2.prev;
-			return var2;
+			this.cursor = node.prev;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("pb.a(I)Lv;")
 	public Linkable next() {
-		Linkable var2 = this.cursor;
-		if (this.sentinel == var2) {
+		Linkable node = this.cursor;
+		if (this.sentinel == node) {
 			this.cursor = null;
 			return null;
 		} else {
-			this.cursor = var2.next;
-			return var2;
+			this.cursor = node.next;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("pb.a(Z)Lv;")
 	public Linkable prev() {
-		Linkable var2 = this.cursor;
-		if (this.sentinel == var2) {
+		Linkable node = this.cursor;
+		if (this.sentinel == node) {
 			this.cursor = null;
 			return null;
+		} else {
+			this.cursor = node.prev;
+			return node;
 		}
-		this.cursor = var2.prev;
-		return var2;
 	}
 
 	@ObfuscatedName("pb.c()V")
 	public void clear() {
 		while (true) {
-			Linkable var1 = this.sentinel.next;
-			if (this.sentinel == var1) {
+			Linkable node = this.sentinel.next;
+			if (this.sentinel == node) {
 				return;
 			}
-			var1.unlink();
+
+			node.unlink();
 		}
 	}
 }

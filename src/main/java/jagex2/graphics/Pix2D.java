@@ -37,11 +37,11 @@ public class Pix2D extends DoublyLinkable {
 	public static int centerY2d;
 
 	@ObfuscatedName("hb.a(II[II)V")
-	public static void bind(int arg0, int[] arg2, int arg3) {
-		data = arg2;
-		width2d = arg0;
-		height2d = arg3;
-		setBounds(arg0, arg3, 0, 0);
+	public static void bind(int width, int[] data, int height) {
+		Pix2D.data = data;
+		width2d = width;
+		height2d = height;
+		setBounds(width, height, 0, 0);
 	}
 
 	@ObfuscatedName("hb.a(B)V")
@@ -55,200 +55,236 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIII)V")
-	public static void setBounds(int arg0, int arg1, int arg3, int arg4) {
-		if (arg4 < 0) {
-			arg4 = 0;
+	public static void setBounds(int right, int bottom, int top, int left) {
+		if (left < 0) {
+			left = 0;
 		}
-		if (arg3 < 0) {
-			arg3 = 0;
+
+		if (top < 0) {
+			top = 0;
 		}
-		if (arg0 > width2d) {
-			arg0 = width2d;
+
+		if (right > width2d) {
+			right = width2d;
 		}
-		if (arg1 > height2d) {
-			arg1 = height2d;
+
+		if (bottom > height2d) {
+			bottom = height2d;
 		}
-		left = arg4;
-		top = arg3;
-		right = arg0;
-		bottom = arg1;
-		safeWidth = right - 1;
-		centerX2d = right / 2;
-		centerY2d = bottom / 2;
+
+		Pix2D.left = left;
+		Pix2D.top = top;
+		Pix2D.right = right;
+		Pix2D.bottom = bottom;
+		safeWidth = Pix2D.right - 1;
+		centerX2d = Pix2D.right / 2;
+		centerY2d = Pix2D.bottom / 2;
 	}
 
 	@ObfuscatedName("hb.a(Z)V")
 	public static void clear() {
-		int var1 = height2d * width2d;
-		for (int var2 = 0; var2 < var1; var2++) {
-			data[var2] = 0;
+		int length = height2d * width2d;
+		for (int i = 0; i < length; i++) {
+			data[i] = 0;
 		}
 	}
 
 	@ObfuscatedName("hb.a(IIIIIIB)V")
-	public static void fillRect(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg5 < left) {
-			arg3 -= left - arg5;
-			arg5 = left;
+	public static void fillRectTrans(int y, int alpha, int height, int width, int colour, int x) {
+		if (x < left) {
+			width -= left - x;
+			x = left;
 		}
-		if (arg0 < top) {
-			arg2 -= top - arg0;
-			arg0 = top;
+
+		if (y < top) {
+			height -= top - y;
+			y = top;
 		}
-		if (arg3 + arg5 > right) {
-			arg3 = right - arg5;
+
+		if (width + x > right) {
+			width = right - x;
 		}
-		if (arg0 + arg2 > bottom) {
-			arg2 = bottom - arg0;
+
+		if (y + height > bottom) {
+			height = bottom - y;
 		}
-		int var7 = 256 - arg1;
-		int var8 = (arg4 >> 16 & 0xFF) * arg1;
-		int var9 = (arg4 >> 8 & 0xFF) * arg1;
-		int var10 = (arg4 & 0xFF) * arg1;
-		int var11 = width2d - arg3;
-		int var12 = width2d * arg0 + arg5;
-		for (int var13 = 0; var13 < arg2; var13++) {
-			for (int var14 = -arg3; var14 < 0; var14++) {
-				int var15 = (data[var12] >> 16 & 0xFF) * var7;
-				int var16 = (data[var12] >> 8 & 0xFF) * var7;
-				int var17 = (data[var12] & 0xFF) * var7;
-				int var18 = (var10 + var17 >> 8) + (var8 + var15 >> 8 << 16) + (var9 + var16 >> 8 << 8);
-				data[var12++] = var18;
+
+		int invAlpha = 256 - alpha;
+		int r0 = (colour >> 16 & 0xFF) * alpha;
+		int g0 = (colour >> 8 & 0xFF) * alpha;
+		int b0 = (colour & 0xFF) * alpha;
+		int step = width2d - width;
+		int offset = width2d * y + x;
+
+		for (int i = 0; i < height; i++) {
+			for (int j = -width; j < 0; j++) {
+				int r1 = (data[offset] >> 16 & 0xFF) * invAlpha;
+				int g1 = (data[offset] >> 8 & 0xFF) * invAlpha;
+				int b1 = (data[offset] & 0xFF) * invAlpha;
+
+				int rgb = (b0 + b1 >> 8) + (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8);
+				data[offset++] = rgb;
 			}
-			var12 += var11;
+
+			offset += step;
 		}
 	}
 
 	@ObfuscatedName("hb.a(IIIIII)V")
-	public static void fillRect(int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg4 < left) {
-			arg2 -= left - arg4;
-			arg4 = left;
+	public static void fillRect(int colour, int width, int height, int x, int y) {
+		if (x < left) {
+			width -= left - x;
+			x = left;
 		}
-		if (arg5 < top) {
-			arg3 -= top - arg5;
-			arg5 = top;
+
+		if (y < top) {
+			height -= top - y;
+			y = top;
 		}
-		if (arg2 + arg4 > right) {
-			arg2 = right - arg4;
+
+		if (width + x > right) {
+			width = right - x;
 		}
-		if (arg3 + arg5 > bottom) {
-			arg3 = bottom - arg5;
+
+		if (height + y > bottom) {
+			height = bottom - y;
 		}
-		int var6 = width2d - arg2;
-		int var7 = width2d * arg5 + arg4;
-		for (int var8 = -arg3; var8 < 0; var8++) {
-			for (int var9 = -arg2; var9 < 0; var9++) {
-				data[var7++] = arg1;
+
+		int step = width2d - width;
+		int offset = width2d * y + x;
+
+		for (int i = -height; i < 0; i++) {
+			for (int j = -width; j < 0; j++) {
+				data[offset++] = colour;
 			}
-			var7 += var6;
+
+			offset += step;
 		}
 	}
 
 	@ObfuscatedName("hb.b(IIIIII)V")
-	public static void drawRect(int arg0, int arg1, int arg2, int arg3, int arg5) {
-		drawHorizontalLine(arg2, arg5, arg1, arg3);
-		drawHorizontalLine(arg2, arg0 + arg5 - 1, arg1, arg3);
-		drawVerticalLine(arg3, arg2, arg5, arg0);
-		drawVerticalLine(arg1 + arg3 - 1, arg2, arg5, arg0);
+	public static void drawRect(int height, int width, int colour, int x, int y) {
+		drawHorizontalLine(colour, y, width, x);
+		drawHorizontalLine(colour, height + y - 1, width, x);
+		drawVerticalLine(x, colour, y, height);
+		drawVerticalLine(width + x - 1, colour, y, height);
 	}
 
 	@ObfuscatedName("hb.a(IIIIIZI)V")
-	public static void drawRect(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5, int arg6) {
-		drawHorizontalLine(arg3, arg4, arg1, arg2, arg6);
-		drawHorizontalLine(arg0 + arg3 - 1, arg4, arg1, arg2, arg6);
-		if (arg0 >= 3) {
-			drawVerticalLine(arg2, arg3 + 1, arg6, arg0 - 2, arg1);
-			drawVerticalLine(arg2 + arg4 - 1, arg3 + 1, arg6, arg0 - 2, arg1);
+	public static void drawRectTrans(int height, int colour, int x, int y, int width, int alpha) {
+		drawHorizontalLineTrans(y, width, colour, x, alpha);
+		drawHorizontalLineTrans(height + y - 1, width, colour, x, alpha);
+		if (height >= 3) {
+			drawVerticalLineTrans(x, y + 1, alpha, height - 2, colour);
+			drawVerticalLineTrans(x + width - 1, y + 1, alpha, height - 2, colour);
 		}
 	}
 
 	@ObfuscatedName("hb.b(IIIII)V")
-	public static void drawHorizontalLine(int arg0, int arg1, int arg2, int arg3) {
-		if (arg1 < top || arg1 >= bottom) {
+	public static void drawHorizontalLine(int colour, int y, int width, int x) {
+		if (y < top || y >= bottom) {
 			return;
 		}
-		if (arg3 < left) {
-			arg2 -= left - arg3;
-			arg3 = left;
+
+		if (x < left) {
+			width -= left - x;
+			x = left;
 		}
-		if (arg2 + arg3 > right) {
-			arg2 = right - arg3;
+
+		if (width + x > right) {
+			width = right - x;
 		}
-		int var5 = width2d * arg1 + arg3;
-		for (int var6 = 0; var6 < arg2; var6++) {
-			data[var5 + var6] = arg0;
+
+		int offset = width2d * y + x;
+
+		for (int i = 0; i < width; i++) {
+			data[offset + i] = colour;
 		}
 	}
 
 	@ObfuscatedName("hb.c(IIIIII)V")
-	public static void drawHorizontalLine(int arg0, int arg1, int arg3, int arg4, int arg5) {
-		if (arg0 < top || arg0 >= bottom) {
+	public static void drawHorizontalLineTrans(int y, int width, int colour, int x, int alpha) {
+		if (y < top || y >= bottom) {
 			return;
 		}
-		if (arg4 < left) {
-			arg1 -= left - arg4;
-			arg4 = left;
+
+		if (x < left) {
+			width -= left - x;
+			x = left;
 		}
-		if (arg1 + arg4 > right) {
-			arg1 = right - arg4;
+
+		if (width + x > right) {
+			width = right - x;
 		}
-		int var6 = 256 - arg5;
-		int var7 = (arg3 >> 16 & 0xFF) * arg5;
-		int var8 = (arg3 >> 8 & 0xFF) * arg5;
-		int var9 = (arg3 & 0xFF) * arg5;
-		int var10 = width2d * arg0 + arg4;
-		for (int var11 = 0; var11 < arg1; var11++) {
-			int var12 = (data[var10] >> 16 & 0xFF) * var6;
-			int var13 = (data[var10] >> 8 & 0xFF) * var6;
-			int var14 = (data[var10] & 0xFF) * var6;
-			int var15 = (var9 + var14 >> 8) + (var7 + var12 >> 8 << 16) + (var8 + var13 >> 8 << 8);
-			data[var10++] = var15;
+
+		int invAlpha = 256 - alpha;
+		int r0 = (colour >> 16 & 0xFF) * alpha;
+		int g0 = (colour >> 8 & 0xFF) * alpha;
+		int b0 = (colour & 0xFF) * alpha;
+		int offset = width2d * y + x;
+
+		for (int i = 0; i < width; i++) {
+			int r1 = (data[offset] >> 16 & 0xFF) * invAlpha;
+			int g1 = (data[offset] >> 8 & 0xFF) * invAlpha;
+			int b1 = (data[offset] & 0xFF) * invAlpha;
+
+			int rgb = (b0 + b1 >> 8) + (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8);
+			data[offset++] = rgb;
 		}
 	}
 
 	@ObfuscatedName("hb.a(IIIIZ)V")
-	public static void drawVerticalLine(int arg0, int arg1, int arg2, int arg3) {
-		if (arg0 < left || arg0 >= right) {
+	public static void drawVerticalLine(int x, int colour, int y, int height) {
+		if (x < left || x >= right) {
 			return;
 		}
-		if (arg2 < top) {
-			arg3 -= top - arg2;
-			arg2 = top;
+
+		if (y < top) {
+			height -= top - y;
+			y = top;
 		}
-		if (arg2 + arg3 > bottom) {
-			arg3 = bottom - arg2;
+
+		if (y + height > bottom) {
+			height = bottom - y;
 		}
-		int var5 = width2d * arg2 + arg0;
-		for (int var6 = 0; var6 < arg3; var6++) {
-			data[width2d * var6 + var5] = arg1;
+
+		int offset = width2d * y + x;
+
+		for (int i = 0; i < height; i++) {
+			data[width2d * i + offset] = colour;
 		}
 	}
 
 	@ObfuscatedName("hb.a(IIIIIB)V")
-	public static void drawVerticalLine(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (arg0 < left || arg0 >= right) {
+	public static void drawVerticalLineTrans(int x, int y, int alpha, int height, int colour) {
+		if (x < left || x >= right) {
 			return;
 		}
-		if (arg1 < top) {
-			arg3 -= top - arg1;
-			arg1 = top;
+
+		if (y < top) {
+			height -= top - y;
+			y = top;
 		}
-		if (arg1 + arg3 > bottom) {
-			arg3 = bottom - arg1;
+
+		if (y + height > bottom) {
+			height = bottom - y;
 		}
-		int var7 = 256 - arg2;
-		int var8 = (arg4 >> 16 & 0xFF) * arg2;
-		int var9 = (arg4 >> 8 & 0xFF) * arg2;
-		int var10 = (arg4 & 0xFF) * arg2;
-		int var11 = width2d * arg1 + arg0;
-		for (int var12 = 0; var12 < arg3; var12++) {
-			int var13 = (data[var11] >> 16 & 0xFF) * var7;
-			int var14 = (data[var11] >> 8 & 0xFF) * var7;
-			int var15 = (data[var11] & 0xFF) * var7;
-			int var16 = (var10 + var15 >> 8) + (var8 + var13 >> 8 << 16) + (var9 + var14 >> 8 << 8);
-			data[var11] = var16;
-			var11 += width2d;
+
+		int invAlpha = 256 - alpha;
+		int r0 = (colour >> 16 & 0xFF) * alpha;
+		int g0 = (colour >> 8 & 0xFF) * alpha;
+		int b0 = (colour & 0xFF) * alpha;
+		int offset = width2d * y + x;
+
+		for (int i = 0; i < height; i++) {
+			int r1 = (data[offset] >> 16 & 0xFF) * invAlpha;
+			int g1 = (data[offset] >> 8 & 0xFF) * invAlpha;
+			int b1 = (data[offset] & 0xFF) * invAlpha;
+
+			int rgb = (b0 + b1 >> 8) + (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8);
+			data[offset] = rgb;
+
+			offset += width2d;
 		}
 	}
 }

@@ -11,37 +11,41 @@ public class HashTable {
 	@ObfuscatedName("u.c")
 	public Linkable[] buckets;
 
-	public HashTable(int arg1) {
-		this.bucketCount = arg1;
-		this.buckets = new Linkable[arg1];
-		for (int var3 = 0; var3 < arg1; var3++) {
-			Linkable var4 = this.buckets[var3] = new Linkable();
-			var4.next = var4;
-			var4.prev = var4;
+	public HashTable(int size) {
+		this.bucketCount = size;
+		this.buckets = new Linkable[size];
+
+		for (int i = 0; i < size; i++) {
+			Linkable node = this.buckets[i] = new Linkable();
+			node.next = node;
+			node.prev = node;
 		}
 	}
 
 	@ObfuscatedName("u.a(J)Lv;")
-	public Linkable get(long arg0) {
-		Linkable var3 = this.buckets[(int) (arg0 & (long) (this.bucketCount - 1))];
-		for (Linkable var4 = var3.next; var4 != var3; var4 = var4.next) {
-			if (var4.key == arg0) {
-				return var4;
+	public Linkable get(long key) {
+		Linkable sentinel = this.buckets[(int) (key & (long) (this.bucketCount - 1))];
+
+		for (Linkable node = sentinel.next; node != sentinel; node = node.next) {
+			if (node.key == key) {
+				return node;
 			}
 		}
+
 		return null;
 	}
 
 	@ObfuscatedName("u.a(IJLv;)V")
-	public void put(long arg1, Linkable arg2) {
-		if (arg2.prev != null) {
-			arg2.unlink();
+	public void put(long key, Linkable node) {
+		if (node.prev != null) {
+			node.unlink();
 		}
-		Linkable var5 = this.buckets[(int) (arg1 & (long) (this.bucketCount - 1))];
-		arg2.prev = var5.prev;
-		arg2.next = var5;
-		arg2.prev.next = arg2;
-		arg2.next.prev = arg2;
-		arg2.key = arg1;
+
+		Linkable sentinel = this.buckets[(int) (key & (long) (this.bucketCount - 1))];
+		node.prev = sentinel.prev;
+		node.next = sentinel;
+		node.prev.next = node;
+		node.next.prev = node;
+		node.key = key;
 	}
 }

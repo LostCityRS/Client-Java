@@ -129,7 +129,7 @@ public class PlayerEntity extends PathingEntity {
 		if (super.seqRunId == 65535) {
 			super.seqRunId = -1;
 		}
-		this.name = JString.formatName(JString.fromBase37(arg0.g8()));
+		this.name = JString.formatDisplayName(JString.fromBase37(arg0.g8()));
 		this.combatLevel = arg0.g1();
 		this.visible = true;
 		this.appearanceHashcode = 0L;

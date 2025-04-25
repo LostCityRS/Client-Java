@@ -4442,7 +4442,7 @@ public class Client extends GameShell {
 
 								this.socialInput = JString.toSentenceCase(this.socialInput);
 								this.socialInput = WordFilter.filter(this.socialInput);
-								this.addMessage(this.socialInput, JString.formatName(JString.fromBase37(this.socialName37)), 6);
+								this.addMessage(this.socialInput, JString.formatDisplayName(JString.fromBase37(this.socialName37)), 6);
 								if (this.chatPrivateMode == 2) {
 									this.chatPrivateMode = 1;
 									this.redrawPrivacySettings = true;
@@ -6127,7 +6127,7 @@ public class Client extends GameShell {
 			int var2 = 302 - (int) Math.abs(Math.sin((double) this.field1264 / 10.0D) * 10.0D);
 			for (int var3 = 0; var3 < 30; var3++) {
 				int var4 = (30 - var3) * 16;
-				Pix2D.drawHorizontalLine(var2 + var3, var4, 16776960, 256 - var4 / 2, this.field1264);
+				Pix2D.drawHorizontalLineTrans(var2 + var3, var4, 16776960, 256 - var4 / 2, this.field1264);
 			}
 		}
 
@@ -6890,7 +6890,7 @@ public class Client extends GameShell {
 				long username = this.in.g8();
 				int world = this.in.g1();
 
-				String displayName = JString.formatName(JString.fromBase37(username));
+				String displayName = JString.formatDisplayName(JString.fromBase37(username));
 				for (int i = 0; i < this.friendCount; i++) {
 					if (this.friendName37[i] == username) {
 						if (this.friendWorld[i] != world) {
@@ -7887,11 +7887,11 @@ public class Client extends GameShell {
 						String filtered = WordFilter.filter(uncompressed);
 
 						if (staffModLevel == 2 || staffModLevel == 3) {
-							this.addMessage(filtered, "@cr2@" + JString.formatName(JString.fromBase37(from)), 7);
+							this.addMessage(filtered, "@cr2@" + JString.formatDisplayName(JString.fromBase37(from)), 7);
 						} else if (staffModLevel == 1) {
-							this.addMessage(filtered, "@cr1@" + JString.formatName(JString.fromBase37(from)), 7);
+							this.addMessage(filtered, "@cr1@" + JString.formatDisplayName(JString.fromBase37(from)), 7);
 						} else {
-							this.addMessage(filtered, JString.formatName(JString.fromBase37(from)), 3);
+							this.addMessage(filtered, JString.formatDisplayName(JString.fromBase37(from)), 3);
 						}
 					} catch (Exception ignore) {
 						SignLink.reporterror("cde1");
@@ -9605,7 +9605,7 @@ public class Client extends GameShell {
 			int var43 = var42.indexOf("@whi@");
 			if (var43 != -1) {
 				String var44 = var42.substring(var43 + 5).trim();
-				String var45 = JString.formatName(JString.fromBase37(JString.toBase37(var44)));
+				String var45 = JString.formatDisplayName(JString.fromBase37(JString.toBase37(var44)));
 				boolean var46 = false;
 				for (int var47 = 0; var47 < this.playerCount; var47++) {
 					PlayerEntity var48 = this.players[this.playerIds[var47]];
@@ -10029,9 +10029,9 @@ public class Client extends GameShell {
 							Pix2D.drawRect(var14.height, var14.width, var14.colour, var15, var16);
 						}
 					} else if (var14.fill) {
-						Pix2D.fillRect(var16, 256 - (var14.alpha & 0xFF), var14.height, var14.width, var14.colour, var15);
+						Pix2D.fillRectTrans(var16, 256 - (var14.alpha & 0xFF), var14.height, var14.width, var14.colour, var15);
 					} else {
-						Pix2D.drawRect(var14.height, var14.colour, var15, var16, var14.width, true, 256 - (var14.alpha & 0xFF));
+						Pix2D.drawRectTrans(var14.height, var14.colour, var15, var16, var14.width, 256 - (var14.alpha & 0xFF));
 					}
 				} else if (var14.type == 4) {
 					PixFont var31 = var14.font;
@@ -10830,7 +10830,7 @@ public class Client extends GameShell {
 				com.text = "";
 				com.buttonType = 0;
 			} else {
-				com.text = JString.formatName(JString.fromBase37(this.ignoreName37[clientCode]));
+				com.text = JString.formatDisplayName(JString.fromBase37(this.ignoreName37[clientCode]));
 				com.buttonType = 1;
 			}
 		} else if (clientCode == 503) {
@@ -11279,7 +11279,7 @@ public class Client extends GameShell {
 
 			String username;
 			if (localPlayer == null || localPlayer.name == null) {
-				username = JString.formatName(this.username);
+				username = JString.formatDisplayName(this.username);
 			} else {
 				username = localPlayer.name;
 			}
@@ -11504,7 +11504,7 @@ public class Client extends GameShell {
 		} else if (this.friendCount >= 200) {
 			this.addMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", "", 0);
 		} else {
-			String username = JString.formatName(JString.fromBase37(username37));
+			String username = JString.formatDisplayName(JString.fromBase37(username37));
 			for (int i = 0; i < this.friendCount; i++) {
 				if (this.friendName37[i] == username37) {
 					this.addMessage(username + " is already on your friend list", "", 0);
@@ -11571,7 +11571,7 @@ public class Client extends GameShell {
 			return;
 		}
 
-		String name = JString.formatName(JString.fromBase37(username37));
+		String name = JString.formatDisplayName(JString.fromBase37(username37));
 		for (int i = 0; i < this.ignoreCount; i++) {
 			if (this.ignoreName37[i] == username37) {
 				this.addMessage(name + " is already on your ignore list", "", 0);
