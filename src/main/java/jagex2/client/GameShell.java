@@ -295,8 +295,8 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
 		if (this.frame != null) {
-			var2 -= 4;
-			var3 -= 22;
+			var2 -= this.frame.insets.left;
+			var3 -= this.frame.insets.top;
 		}
 		this.idleCycles = 0;
 		this.lastMouseClickX = var2;
@@ -344,8 +344,8 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
 		if (this.frame != null) {
-			var2 -= 4;
-			var3 -= 22;
+			var2 -= this.frame.insets.left;
+			var3 -= this.frame.insets.top;
 		}
 		this.idleCycles = 0;
 		this.mouseX = var2;
@@ -359,8 +359,8 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
 		if (this.frame != null) {
-			var2 -= 4;
-			var3 -= 22;
+			var2 -= this.frame.insets.left;
+			var3 -= this.frame.insets.top;
 		}
 		this.idleCycles = 0;
 		this.mouseX = var2;
