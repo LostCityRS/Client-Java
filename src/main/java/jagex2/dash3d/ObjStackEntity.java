@@ -8,14 +8,14 @@ import jagex2.graphics.Model;
 public class ObjStackEntity extends Entity {
 
 	@ObfuscatedName("db.m")
-	public int field500;
+	public int index;
 
 	@ObfuscatedName("db.n")
-	public int field501;
+	public int count;
 
 	@ObfuscatedName("db.a(I)Lfb;")
 	public final Model getModel() {
-		ObjType var2 = ObjType.get(this.field500);
-		return var2.getModel(this.field501);
+		ObjType var2 = ObjType.get(this.index);
+		return var2.getModel(this.count);
 	}
 }
