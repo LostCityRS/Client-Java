@@ -509,7 +509,7 @@ public class Client extends GameShell {
 	public long[] friendName37 = new long[200];
 
 	@ObfuscatedName("client.ib")
-	public static int field1209;
+	public static int cyclelogic2;
 
 	@ObfuscatedName("client.mb")
 	public String socialMessage = "";
@@ -800,7 +800,7 @@ public class Client extends GameShell {
 	public int unreadMessageCount;
 
 	@ObfuscatedName("client.T")
-	public static int cyclelogic1;
+	public static int cyclelogic4;
 
 	@ObfuscatedName("client.Lb")
 	public int daysSinceRecoveriesChanged;
@@ -821,10 +821,10 @@ public class Client extends GameShell {
 	public int selectedCycle;
 
 	@ObfuscatedName("client.Tc")
-	public int field1298;
+	public int selectedInterface;
 
 	@ObfuscatedName("client.Uc")
-	public int field1299;
+	public int selectedItem;
 
 	@ObfuscatedName("client.Vc")
 	public int selectedArea;
@@ -833,7 +833,7 @@ public class Client extends GameShell {
 	public int spellSelected;
 
 	@ObfuscatedName("client.dd")
-	public int field1308;
+	public int activeSpellId;
 
 	@ObfuscatedName("client.ed")
 	public int activeSpellFlags;
@@ -881,7 +881,7 @@ public class Client extends GameShell {
 	public int warnMembersInNonMembers;
 
 	@ObfuscatedName("client.Tf")
-	public static int field1453;
+	public static int cyclelogic5;
 
 	@ObfuscatedName("client.Vf")
 	public int menuArea;
@@ -935,7 +935,7 @@ public class Client extends GameShell {
 	public int objInterface;
 
 	@ObfuscatedName("client.bh")
-	public static int field1513;
+	public static int cyclelogic1;
 
 	@ObfuscatedName("client.oh")
 	public int titleLoginField;
@@ -980,10 +980,10 @@ public class Client extends GameShell {
 	public int scrollInputPadding;
 
 	@ObfuscatedName("client.Ii")
-	public static int field1598;
+	public static int cyclelogic3;
 
 	@ObfuscatedName("client.Ui")
-	public static int field1610;
+	public static int cyclelogic6;
 
 	@ObfuscatedName("client.bj")
 	public int lastProgressPercent;
@@ -2870,6 +2870,7 @@ public class Client extends GameShell {
 
 			Packet input = InputTracking.flush();
 			if (input != null) {
+				// EVENT_TRACKING
 				this.out.pIsaac(217);
 				this.out.p2(input.pos);
 				this.out.pdata(input.pos, 0, input.data);
@@ -2955,6 +2956,7 @@ public class Client extends GameShell {
 								var4.swapObj(this.objDragSlot, this.hoveredSlot);
 							}
 
+							// INV_BUTTOND
 							this.out.pIsaac(81);
 							this.out.p2(this.objDragInterfaceId);
 							this.out.p2(this.objDragSlot);
@@ -2972,9 +2974,11 @@ public class Client extends GameShell {
 				}
 			}
 
-			field1598++;
-			if (field1598 > 127) {
-				field1598 = 0;
+			cyclelogic3++;
+			if (cyclelogic3 > 127) {
+				cyclelogic3 = 0;
+
+				// ANTICHEAT_CYCLELOGIC3
 				this.out.pIsaac(144);
 				this.out.p3(4991788);
 			}
@@ -3025,6 +3029,8 @@ public class Client extends GameShell {
 			if (super.idleCycles > 4500) {
 				this.idleTimeout = 250;
 				super.idleCycles -= 500;
+
+				// IDLE_TIMER
 				this.out.pIsaac(146);
 			}
 
@@ -3087,15 +3093,18 @@ public class Client extends GameShell {
 				this.minimapZoomModifier = -1;
 			}
 
-			cyclelogic1++;
-			if (cyclelogic1 > 110) {
-				cyclelogic1 = 0;
+			cyclelogic4++;
+			if (cyclelogic4 > 110) {
+				cyclelogic4 = 0;
+
+				// ANTICHEAT_CYCLELOGIC4
 				this.out.pIsaac(41);
 				this.out.p4(0);
 			}
 
 			this.noTimeoutCycle++;
 			if (this.noTimeoutCycle > 50) {
+				// NO_TIMEOUT
 				this.out.pIsaac(107);
 			}
 
@@ -3230,7 +3239,10 @@ public class Client extends GameShell {
 			} else {
 				this.scene.setMinLevel(0);
 			}
+
+			// NO_TIMEOUT
 			this.out.pIsaac(107);
+
 			for (int var8 = 0; var8 < var4; var8++) {
 				int var9 = (this.sceneMapIndex[var8] >> 8) * 64 - this.sceneBaseTileX;
 				int var10 = (this.sceneMapIndex[var8] & 0xFF) * 64 - this.sceneBaseTileZ;
@@ -3247,7 +3259,10 @@ public class Client extends GameShell {
 					var3.stitchHeightmap(var13, var14, 64, 64);
 				}
 			}
+
+			// NO_TIMEOUT
 			this.out.pIsaac(107);
+
 			for (int var16 = 0; var16 < var4; var16++) {
 				byte[] var17 = this.sceneMapLocData[var16];
 				if (var17 != null) {
@@ -3256,10 +3271,16 @@ public class Client extends GameShell {
 					var3.loadLocations(var19, this.scene, this.levelCollisionMap, var18, var17);
 				}
 			}
+
+			// NO_TIMEOUT
 			this.out.pIsaac(107);
+
 			var3.build(this.scene, this.levelCollisionMap);
 			this.areaViewport.bind();
+
+			// NO_TIMEOUT
 			this.out.pIsaac(107);
+
 			for (int var20 = 0; var20 < 104; var20++) {
 				for (int var21 = 0; var21 < 104; var21++) {
 					this.sortObjStacks(var20, var21);
@@ -3422,9 +3443,11 @@ public class Client extends GameShell {
 			}
 		}
 
-		field1453++;
-		if (field1453 > 85) {
-			field1453 = 0;
+		cyclelogic5++;
+		if (cyclelogic5 > 85) {
+			cyclelogic5 = 0;
+
+			// ANTICHEAT_CYCLELOGIC5
 			this.out.pIsaac(232);
 		}
 	}
@@ -4078,9 +4101,11 @@ public class Client extends GameShell {
 			this.redrawSideicons = true;
 		}
 
-		field1513++;
-		if (field1513 > 150) {
-			field1513 = 0;
+		cyclelogic1++;
+		if (cyclelogic1 > 150) {
+			cyclelogic1 = 0;
+
+			// ANTICHEAT_CYCLELOGIC1
 			this.out.pIsaac(46);
 			this.out.p1(43);
 		}
@@ -4097,6 +4122,7 @@ public class Client extends GameShell {
 			this.redrawPrivacySettings = true;
 			this.redrawChatback = true;
 
+			// CHAT_SETMODE
 			this.out.pIsaac(98);
 			this.out.p1(this.chatPublicMode);
 			this.out.p1(this.chatPrivateMode);
@@ -4106,6 +4132,7 @@ public class Client extends GameShell {
 			this.redrawPrivacySettings = true;
 			this.redrawChatback = true;
 
+			// CHAT_SETMODE
 			this.out.pIsaac(98);
 			this.out.p1(this.chatPublicMode);
 			this.out.p1(this.chatPrivateMode);
@@ -4115,6 +4142,7 @@ public class Client extends GameShell {
 			this.redrawPrivacySettings = true;
 			this.redrawChatback = true;
 
+			// CHAT_SETMODE
 			this.out.pIsaac(98);
 			this.out.p1(this.chatPublicMode);
 			this.out.p1(this.chatPrivateMode);
@@ -4135,6 +4163,7 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.e(Z)V")
 	public final void closeInterfaces() {
+		// CLOSE_MODAL
 		this.out.pIsaac(187);
 
 		if (this.sidebarInterfaceId != -1) {
@@ -4401,18 +4430,22 @@ public class Client extends GameShell {
 								this.removeFriend(var5);
 							}
 							if (this.socialAction == 3 && this.socialInput.length() > 0) {
+								// MESSAGE_PRIVATE
 								this.out.pIsaac(170);
 								this.out.p1(0);
 								int var7 = this.out.pos;
 								this.out.p8(this.socialName37);
 								WordPack.pack(this.socialInput, this.out);
 								this.out.psize1(this.out.pos - var7);
+
 								this.socialInput = JString.toSentenceCase(this.socialInput);
 								this.socialInput = WordFilter.filter(this.socialInput);
 								this.addMessage(this.socialInput, JString.formatName(JString.fromBase37(this.socialName37)), 6);
 								if (this.chatPrivateMode == 2) {
 									this.chatPrivateMode = 1;
 									this.redrawPrivacySettings = true;
+
+									// CHAT_SETMODE
 									this.out.pIsaac(98);
 									this.out.p1(this.chatPublicMode);
 									this.out.p1(this.chatPrivateMode);
@@ -4444,6 +4477,8 @@ public class Client extends GameShell {
 									var12 = Integer.parseInt(this.chatbackInput);
 								} catch (Exception var17) {
 								}
+
+								// RESUME_P_COUNTDIALOG
 								this.out.pIsaac(190);
 								this.out.p4(var12);
 							}
@@ -4474,6 +4509,7 @@ public class Client extends GameShell {
 								}
 							}
 							if (this.chatTyped.startsWith("::")) {
+								// CLIENT_CHEAT
 								this.out.pIsaac(76);
 								this.out.p1(this.chatTyped.length() - 1);
 								this.out.pjstr(this.chatTyped.substring(2));
@@ -4536,6 +4572,8 @@ public class Client extends GameShell {
 									var15 = 2;
 									this.chatTyped = this.chatTyped.substring(7);
 								}
+
+								// MESSAGE_PUBLIC
 								this.out.pIsaac(171);
 								this.out.p1(0);
 								int var16 = this.out.pos;
@@ -4543,6 +4581,7 @@ public class Client extends GameShell {
 								this.out.p1(var15);
 								WordPack.pack(this.chatTyped, this.out);
 								this.out.psize1(this.out.pos - var16);
+
 								this.chatTyped = JString.toSentenceCase(this.chatTyped);
 								this.chatTyped = WordFilter.filter(this.chatTyped);
 								localPlayer.chatMessage = this.chatTyped;
@@ -4559,6 +4598,8 @@ public class Client extends GameShell {
 								if (this.chatPublicMode == 2) {
 									this.chatPublicMode = 3;
 									this.redrawPrivacySettings = true;
+
+									// CHAT_SETMODE
 									this.out.pIsaac(98);
 									this.out.p1(this.chatPublicMode);
 									this.out.p1(this.chatPrivateMode);
@@ -4609,31 +4650,33 @@ public class Client extends GameShell {
 				this.updateEntity(var5, 1);
 			}
 		}
-		field1610++;
-		if (field1610 <= 1406) {
-			return;
+
+		cyclelogic6++;
+		if (cyclelogic6 > 1406) {
+			cyclelogic6 = 0;
+
+			// ANTICHEAT_CYCLELOGIC6
+			this.out.pIsaac(215);
+			this.out.p1(0);
+			int var3 = this.out.pos;
+			this.out.p1(162);
+			this.out.p1(22);
+			if ((int) (Math.random() * 2.0D) == 0) {
+				this.out.p1(84);
+			}
+			this.out.p2(31824);
+			this.out.p2(13490);
+			if ((int) (Math.random() * 2.0D) == 0) {
+				this.out.p1(123);
+			}
+			if ((int) (Math.random() * 2.0D) == 0) {
+				this.out.p1(134);
+			}
+			this.out.p1(100);
+			this.out.p1(94);
+			this.out.p2(35521);
+			this.out.psize1(this.out.pos - var3);
 		}
-		field1610 = 0;
-		this.out.pIsaac(215);
-		this.out.p1(0);
-		int var3 = this.out.pos;
-		this.out.p1(162);
-		this.out.p1(22);
-		if ((int) (Math.random() * 2.0D) == 0) {
-			this.out.p1(84);
-		}
-		this.out.p2(31824);
-		this.out.p2(13490);
-		if ((int) (Math.random() * 2.0D) == 0) {
-			this.out.p1(123);
-		}
-		if ((int) (Math.random() * 2.0D) == 0) {
-			this.out.p1(134);
-		}
-		this.out.p1(100);
-		this.out.p1(94);
-		this.out.p2(35521);
-		this.out.psize1(this.out.pos - var3);
 	}
 
 	// note: placement confirmed by referencing OS1
@@ -5299,6 +5342,7 @@ public class Client extends GameShell {
 		if (this.redrawSideicons) {
 			if (this.flashingTab != -1 && this.flashingTab == this.selectedTab) {
 				this.flashingTab = -1;
+				// TUTORIAL_CLICKSIDE
 				this.out.pIsaac(233);
 				this.out.p1(this.selectedTab);
 			}
@@ -5462,9 +5506,12 @@ public class Client extends GameShell {
 			}
 			int var3 = this.orbitCameraYaw + this.macroCameraAngle & 0x7FF;
 			this.orbitCamera(var3, this.getHeightmapY(localPlayer.z, this.currentLevel, localPlayer.x) - 50, var2, this.orbitCameraZ, var2 * 3 + 600, this.orbitCameraX);
-			field1209++;
-			if (field1209 > 1802) {
-				field1209 = 0;
+
+			cyclelogic2++;
+			if (cyclelogic2 > 1802) {
+				cyclelogic2 = 0;
+
+				// ANTICHEAT_CYCLELOGIC2
 				this.out.pIsaac(148);
 				this.out.p1(0);
 				int var4 = this.out.pos;
@@ -6638,14 +6685,17 @@ public class Client extends GameShell {
 			int var31 = this.bfsStepX[var37];
 			int var32 = this.bfsStepZ[var37];
 			if (arg4 == 0) {
+				// MOVE_GAMECLICK
 				this.out.pIsaac(63);
 				this.out.p1(var30 + var30 + 3);
 			}
 			if (arg4 == 1) {
+				// MOVE_MINIMAPCLICK
 				this.out.pIsaac(56);
 				this.out.p1(var30 + var30 + 3 + 14);
 			}
 			if (arg4 == 2) {
+				// MOVE_OPCLICK
 				this.out.pIsaac(167);
 				this.out.p1(var30 + var30 + 3);
 			}
@@ -7408,6 +7458,7 @@ public class Client extends GameShell {
 				// FINISH_TRACKING
 				Packet buf = InputTracking.stop();
 				if (buf != null) {
+					// EVENT_TRACKING
 					this.out.pIsaac(217);
 					this.out.p2(buf.pos);
 					this.out.pdata(buf.pos, 0, buf.data);
@@ -9047,9 +9098,12 @@ public class Client extends GameShell {
 		if (var5 == 1501) {
 			oplogic6 += this.sceneBaseTileZ;
 			if (oplogic6 >= 92) {
+				// ANTICHEAT_OPLOGIC6
 				this.out.pIsaac(177);
 				this.out.p4(0);
 			}
+
+			// OPLOC5
 			this.interactWithLoc(243, var3, var6, var4);
 		}
 		if (var5 == 34) {
@@ -9075,6 +9129,8 @@ public class Client extends GameShell {
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
 				this.crossCycle = 0;
+
+				// OPPLAYERU
 				this.out.pIsaac(48);
 				this.out.p2(var6);
 				this.out.p2(this.objInterface);
@@ -9089,6 +9145,7 @@ public class Client extends GameShell {
 				var12 = this.handleInterfaceAction(var11);
 			}
 			if (var12) {
+				// IF_BUTTON
 				this.out.pIsaac(39);
 				this.out.p2(var4);
 			}
@@ -9102,6 +9159,8 @@ public class Client extends GameShell {
 			this.crossY = super.mouseClickY;
 			this.crossMode = 2;
 			this.crossCycle = 0;
+
+			// OPOBJU
 			this.out.pIsaac(111);
 			this.out.p2(this.sceneBaseTileX + var3);
 			this.out.p2(this.sceneBaseTileZ + var4);
@@ -9111,6 +9170,7 @@ public class Client extends GameShell {
 			this.out.p2(this.objSelectedInterface);
 		}
 		if (var5 == 450 && this.interactWithLoc(106, var3, var6, var4)) {
+			// OPLOCU
 			this.out.p2(this.objInterface);
 			this.out.p2(this.objSelectedSlot);
 			this.out.p2(this.objSelectedInterface);
@@ -9123,16 +9183,20 @@ public class Client extends GameShell {
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
 				this.crossCycle = 0;
+
+				// OPNPCT
 				this.out.pIsaac(101);
 				this.out.p2(var6);
-				this.out.p2(this.field1308);
+				this.out.p2(this.activeSpellId);
 			}
 		}
 		if (var5 == 364) {
+			// OPLOC3
 			this.interactWithLoc(19, var3, var6, var4);
 		}
 		if (var5 == 55 && this.interactWithLoc(182, var3, var6, var4)) {
-			this.out.p2(this.field1308);
+			// OPLOCT
+			this.out.p2(this.activeSpellId);
 		}
 		if (var5 == 224 || var5 == 993 || var5 == 99 || var5 == 746 || var5 == 877) {
 			boolean var16 = this.tryMove(0, localPlayer.routeTileZ[0], 0, 2, false, 0, var3, 0, var4, 0, localPlayer.routeTileX[0]);
@@ -9144,18 +9208,19 @@ public class Client extends GameShell {
 			this.crossMode = 2;
 			this.crossCycle = 0;
 			if (var5 == 99) {
+				// OPOBJ3
 				this.out.pIsaac(27);
-			}
-			if (var5 == 993) {
+			} else if (var5 == 993) {
+				// OPOBJ2
 				this.out.pIsaac(110);
-			}
-			if (var5 == 224) {
+			} else if (var5 == 224) {
+				// OPOBJ1
 				this.out.pIsaac(231);
-			}
-			if (var5 == 877) {
+			} else if (var5 == 877) {
+				// OPOBJ5
 				this.out.pIsaac(225);
-			}
-			if (var5 == 746) {
+			} else if (var5 == 746) {
+				// OPOBJ4
 				this.out.pIsaac(17);
 			}
 			this.out.p2(this.sceneBaseTileX + var3);
@@ -9167,9 +9232,12 @@ public class Client extends GameShell {
 				oplogic1++;
 			}
 			if (oplogic1 >= 99) {
+				// ANTICHEAT_OPLOGIC1
 				this.out.pIsaac(47);
 				this.out.p4(0);
 			}
+
+			// OPLOC4
 			this.interactWithLoc(55, var3, var6, var4);
 		}
 		if (var5 == 679) {
@@ -9196,6 +9264,7 @@ public class Client extends GameShell {
 			}
 		}
 		if (var5 == 960) {
+			// IF_BUTTON
 			this.out.pIsaac(39);
 			this.out.p2(var4);
 			Component var24 = Component.types[var4];
@@ -9220,6 +9289,7 @@ public class Client extends GameShell {
 			this.addMessage(var28, "", 0);
 		}
 		if (var5 == 881) {
+			// OPHELDU
 			this.out.pIsaac(58);
 			this.out.p2(var6);
 			this.out.p2(var3);
@@ -9228,8 +9298,8 @@ public class Client extends GameShell {
 			this.out.p2(this.objSelectedSlot);
 			this.out.p2(this.objSelectedInterface);
 			this.selectedCycle = 0;
-			this.field1298 = var4;
-			this.field1299 = var3;
+			this.selectedInterface = var4;
+			this.selectedItem = var3;
 			this.selectedArea = 2;
 			if (Component.types[var4].layer == this.viewportInterfaceId) {
 				this.selectedArea = 1;
@@ -9239,11 +9309,13 @@ public class Client extends GameShell {
 			}
 		}
 		if (var5 == 44 && !this.pressedContinueOption) {
+			// RESUME_PAUSEBUTTON
 			this.out.pIsaac(11);
 			this.out.p2(var4);
 			this.pressedContinueOption = true;
 		}
 		if (var5 == 285) {
+			// OPLOC1
 			this.interactWithLoc(238, var3, var6, var4);
 		}
 		if (var5 == 406 || var5 == 436 || var5 == 557 || var5 == 556) {
@@ -9270,37 +9342,48 @@ public class Client extends GameShell {
 		}
 		if (var5 == 405 || var5 == 38 || var5 == 422 || var5 == 478 || var5 == 347) {
 			if (var5 == 347) {
+				// OPHELD5
 				this.out.pIsaac(133);
 			}
 			if (var5 == 422) {
+				// OPHELD3
 				this.out.pIsaac(221);
 			}
 			if (var5 == 478) {
 				if ((var3 & 0x3) == 0) {
 					oplogic5++;
 				}
+
 				if (oplogic5 >= 90) {
+					// ANTICHEAT_OPLOGIC5
 					this.out.pIsaac(7);
 				}
+
+				// OPHELD4
 				this.out.pIsaac(6);
 			}
 			if (var5 == 405) {
 				oplogic3 += var6;
 				if (oplogic3 >= 97) {
+					// ANTICHEAT_OPLOGIC3
 					this.out.pIsaac(37);
 					this.out.p3(14953816);
 				}
+
+				// OPHELD1
 				this.out.pIsaac(228);
 			}
 			if (var5 == 38) {
+				// OPHELD2
 				this.out.pIsaac(166);
 			}
+
 			this.out.p2(var6);
 			this.out.p2(var3);
 			this.out.p2(var4);
 			this.selectedCycle = 0;
-			this.field1298 = var4;
-			this.field1299 = var3;
+			this.selectedInterface = var4;
+			this.selectedItem = var3;
 			this.selectedArea = 2;
 			if (Component.types[var4].layer == this.viewportInterfaceId) {
 				this.selectedArea = 1;
@@ -9318,11 +9401,13 @@ public class Client extends GameShell {
 			this.crossY = super.mouseClickY;
 			this.crossMode = 2;
 			this.crossCycle = 0;
+
+			// OPOBJT
 			this.out.pIsaac(25);
 			this.out.p2(this.sceneBaseTileX + var3);
 			this.out.p2(this.sceneBaseTileZ + var4);
 			this.out.p2(var6);
-			this.out.p2(this.field1308);
+			this.out.p2(this.activeSpellId);
 		}
 		if (var5 == 602 || var5 == 596 || var5 == 22 || var5 == 892 || var5 == 415) {
 			if (var5 == 415) {
@@ -9330,15 +9415,20 @@ public class Client extends GameShell {
 					oplogic7++;
 				}
 				if (oplogic7 >= 55) {
+					// ANTICHEAT_OPLOGIC7
 					this.out.pIsaac(50);
 					this.out.p4(0);
 				}
+
+				// INV_BUTTON5
 				this.out.pIsaac(212);
 			}
 			if (var5 == 22) {
+				// INV_BUTTON3
 				this.out.pIsaac(158);
 			}
 			if (var5 == 596) {
+				// INV_BUTTON2
 				this.out.pIsaac(193);
 			}
 			if (var5 == 892) {
@@ -9346,20 +9436,24 @@ public class Client extends GameShell {
 					oplogic9++;
 				}
 				if (oplogic9 >= 130) {
+					// ANTICHEAT_OPLOGIC9
 					this.out.pIsaac(169);
 					this.out.p1(177);
 				}
+
+				// INV_BUTTON4
 				this.out.pIsaac(204);
 			}
 			if (var5 == 602) {
+				// INV_BUTTON1
 				this.out.pIsaac(153);
 			}
 			this.out.p2(var6);
 			this.out.p2(var3);
 			this.out.p2(var4);
 			this.selectedCycle = 0;
-			this.field1298 = var4;
-			this.field1299 = var3;
+			this.selectedInterface = var4;
+			this.selectedItem = var3;
 			this.selectedArea = 2;
 			if (Component.types[var4].layer == this.viewportInterfaceId) {
 				this.selectedArea = 1;
@@ -9369,6 +9463,7 @@ public class Client extends GameShell {
 			}
 		}
 		if (var5 == 465) {
+			// IF_BUTTON
 			this.out.pIsaac(39);
 			this.out.p2(var4);
 			Component var35 = Component.types[var4];
@@ -9387,6 +9482,8 @@ public class Client extends GameShell {
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
 				this.crossCycle = 0;
+
+				// OPNPCU
 				this.out.pIsaac(52);
 				this.out.p2(var6);
 				this.out.p2(this.objInterface);
@@ -9413,6 +9510,7 @@ public class Client extends GameShell {
 				this.crossMode = 2;
 				this.crossCycle = 0;
 				if (var5 == 963) {
+					// OPNPC4
 					this.out.pIsaac(229);
 				}
 				if (var5 == 6) {
@@ -9420,9 +9518,12 @@ public class Client extends GameShell {
 						oplogic2++;
 					}
 					if (oplogic2 >= 124) {
+						// ANTICHEAT_OPLOGIC2
 						this.out.pIsaac(218);
 						this.out.p4(0);
 					}
+
+					// OPNPC3
 					this.out.pIsaac(132);
 				}
 				if (var5 == 245) {
@@ -9430,29 +9531,35 @@ public class Client extends GameShell {
 						oplogic4++;
 					}
 					if (oplogic4 >= 85) {
+						// ANTICHEAT_OPLOGIC4
 						this.out.pIsaac(34);
 						this.out.p2(39596);
 					}
+
+					// OPNPC5
 					this.out.pIsaac(102);
 				}
 				if (var5 == 728) {
+					// OPNPC1
 					this.out.pIsaac(222);
 				}
 				if (var5 == 542) {
+					// OPNPC2
 					this.out.pIsaac(84);
 				}
 				this.out.p2(var6);
 			}
 		}
 		if (var5 == 391) {
+			// OPHELDT
 			this.out.pIsaac(143);
 			this.out.p2(var6);
 			this.out.p2(var3);
 			this.out.p2(var4);
-			this.out.p2(this.field1308);
+			this.out.p2(this.activeSpellId);
 			this.selectedCycle = 0;
-			this.field1298 = var4;
-			this.field1299 = var3;
+			this.selectedInterface = var4;
+			this.selectedItem = var3;
 			this.selectedArea = 2;
 			if (Component.types[var4].layer == this.viewportInterfaceId) {
 				this.selectedArea = 1;
@@ -9464,7 +9571,7 @@ public class Client extends GameShell {
 		if (var5 == 930) {
 			Component var39 = Component.types[var4];
 			this.spellSelected = 1;
-			this.field1308 = var4;
+			this.activeSpellId = var4;
 			this.activeSpellFlags = var39.targetMask;
 			this.objSelected = 0;
 			this.redrawSidebar = true;
@@ -9503,9 +9610,11 @@ public class Client extends GameShell {
 					if (var48 != null && var48.name != null && var48.name.equalsIgnoreCase(var45)) {
 						this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, var48.routeTileX[0], 0, var48.routeTileZ[0], 1, localPlayer.routeTileX[0]);
 						if (var5 == 903) {
+							// OPPLAYER4
 							this.out.pIsaac(43);
 						}
 						if (var5 == 363) {
+							// OPPLAYER1
 							this.out.pIsaac(211);
 						}
 						this.out.p2(this.playerIds[var47]);
@@ -9538,9 +9647,11 @@ public class Client extends GameShell {
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
 				this.crossCycle = 0;
+
+				// OPPLAYERT
 				this.out.pIsaac(73);
 				this.out.p2(var6);
-				this.out.p2(this.field1308);
+				this.out.p2(this.activeSpellId);
 			}
 		}
 		if (var5 == 1102) {
@@ -9562,26 +9673,33 @@ public class Client extends GameShell {
 				this.crossMode = 2;
 				this.crossCycle = 0;
 				if (var5 == 1544) {
+					// OPPLAYER3
 					this.out.pIsaac(64);
 				}
 				if (var5 == 1373) {
+					// OPPLAYER4
 					this.out.pIsaac(43);
 				}
 				if (var5 == 151) {
 					oplogic8++;
 					if (oplogic8 >= 90) {
+						// ANTICHEAT_OPLOGIC8
 						this.out.pIsaac(100);
 						this.out.p2(31114);
 					}
+
+					// OPPLAYER2
 					this.out.pIsaac(219);
 				}
 				if (var5 == 1101) {
+					// OPPLAYER1
 					this.out.pIsaac(211);
 				}
 				this.out.p2(var6);
 			}
 		}
 		if (var5 == 504) {
+			// OPLOC2
 			this.interactWithLoc(38, var3, var6, var4);
 		}
 		if (var5 == 1773) {
@@ -9880,7 +9998,7 @@ public class Client extends GameShell {
 												arg3.scrollPosition += var28;
 												this.objGrabY -= var28;
 											}
-										} else if (this.selectedArea != 0 && this.field1299 == var17 && this.field1298 == var14.id) {
+										} else if (this.selectedArea != 0 && this.selectedItem == var17 && this.selectedInterface == var14.id) {
 											var26.drawAlpha(var20, 128, var21);
 										} else {
 											var26.draw(var20, var21);
@@ -10967,6 +11085,7 @@ public class Client extends GameShell {
 			this.designGender = false;
 			this.validateCharacterDesign();
 		} else if (clientCode == 326) {
+			// IF_PLAYERDESIGN
 			this.out.pIsaac(8);
 			this.out.p1(this.designGender ? 0 : 1);
 
@@ -10985,6 +11104,7 @@ public class Client extends GameShell {
 			this.closeInterfaces();
 
 			if (this.reportAbuseInput.length() > 0) {
+				// REPORT_ABUSE
 				this.out.pIsaac(251);
 				this.out.p8(JString.toBase37(this.reportAbuseInput));
 				this.out.p1(clientCode - 601);
@@ -11405,6 +11525,7 @@ public class Client extends GameShell {
 
 				this.redrawSidebar = true;
 
+				// FRIENDLIST_ADD
 				this.out.pIsaac(9);
 				this.out.p8(username37);
 			}
@@ -11428,6 +11549,7 @@ public class Client extends GameShell {
 					this.friendName37[j] = this.friendName37[j + 1];
 				}
 
+				// FRIENDLIST_DEL
 				this.out.pIsaac(69);
 				this.out.p8(username37);
 				return;
@@ -11465,6 +11587,7 @@ public class Client extends GameShell {
 		this.ignoreName37[this.ignoreCount++] = username37;
 		this.redrawSidebar = true;
 
+		// IGNORELIST_ADD
 		this.out.pIsaac(203);
 		this.out.p8(username37);
 	}
@@ -11484,6 +11607,7 @@ public class Client extends GameShell {
 					this.ignoreName37[j] = this.ignoreName37[j + 1];
 				}
 
+				// IGNORELIST_DEL
 				this.out.pIsaac(207);
 				this.out.p8(username37);
 				break;
@@ -11733,11 +11857,12 @@ public class Client extends GameShell {
 				if (value == 0) {
 					dstOffset++;
 				} else {
+					int alpha = value;
 					int invAlpha = 256 - value;
 					value = this.flameGradient[value];
 					int background = this.imageTitle0.data[dstOffset];
 
-					this.imageTitle0.data[dstOffset++] = ((value & 0xFF00FF) * value + (background & 0xFF00FF) * invAlpha & 0xFF00FF00) + ((value & 0xFF00) * value + (background & 0xFF00) * invAlpha & 0xFF0000) >> 8;
+					this.imageTitle0.data[dstOffset++] = ((value & 0xFF00FF) * alpha + (background & 0xFF00FF) * invAlpha & 0xFF00FF00) + ((value & 0xFF00) * alpha + (background & 0xFF00) * invAlpha & 0xFF0000) >> 8;
 				}
 			}
 
@@ -11765,11 +11890,12 @@ public class Client extends GameShell {
 				if (value == 0) {
 					dstOffset++;
 				} else {
+					int alpha = value;
 					int invAlpha = 256 - value;
 					value = this.flameGradient[value];
 					int background = this.imageTitle1.data[dstOffset];
 
-					this.imageTitle1.data[dstOffset++] = ((value & 0xFF00FF) * value + (background & 0xFF00FF) * invAlpha & 0xFF00FF00) + ((value & 0xFF00) * value + (background & 0xFF00) * invAlpha & 0xFF0000) >> 8;
+					this.imageTitle1.data[dstOffset++] = ((value & 0xFF00FF) * alpha + (background & 0xFF00FF) * invAlpha & 0xFF00FF00) + ((value & 0xFF00) * alpha + (background & 0xFF00) * invAlpha & 0xFF0000) >> 8;
 				}
 			}
 
