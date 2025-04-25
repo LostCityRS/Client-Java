@@ -30,18 +30,23 @@ public class PixMap implements ImageProducer, ImageObserver {
 	@ObfuscatedName("rb.h")
 	public Image image;
 
-	public PixMap(Component arg0, int arg1, int arg2) {
-		this.width = arg2;
-		this.height = arg1;
-		this.data = new int[arg1 * arg2];
-		this.colorModel = new DirectColorModel(32, 16711680, 65280, 255);
-		this.image = arg0.createImage(this);
+	public PixMap(int width, int height, Component c) {
+		this.width = width;
+		this.height = height;
+		this.data = new int[height * width];
+		this.colorModel = new DirectColorModel(32, 0xff0000, 0x00ff00, 0x0000ff);
+
+		this.image = c.createImage(this);
+
 		this.setPixels();
-		arg0.prepareImage(this.image, this);
+		c.prepareImage(this.image, this);
+
 		this.setPixels();
-		arg0.prepareImage(this.image, this);
+		c.prepareImage(this.image, this);
+
 		this.setPixels();
-		arg0.prepareImage(this.image, this);
+		c.prepareImage(this.image, this);
+
 		this.bind();
 	}
 
@@ -51,34 +56,34 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@ObfuscatedName("rb.a(Ljava/awt/Graphics;IBI)V")
-	public void draw(Graphics arg0, int arg1, int arg3) {
+	public void draw(Graphics g, int x, int y) {
 		this.setPixels();
-		arg0.drawImage(this.image, arg3, arg1, this);
+		g.drawImage(this.image, x, y, this);
 	}
 
-	public synchronized void addConsumer(ImageConsumer arg0) {
-		this.consumer = arg0;
-		arg0.setDimensions(this.width, this.height);
-		arg0.setProperties(null);
-		arg0.setColorModel(this.colorModel);
-		arg0.setHints(14);
+	public synchronized void addConsumer(ImageConsumer c) {
+		this.consumer = c;
+		c.setDimensions(this.width, this.height);
+		c.setProperties(null);
+		c.setColorModel(this.colorModel);
+		c.setHints(14);
 	}
 
-	public synchronized boolean isConsumer(ImageConsumer arg0) {
-		return this.consumer == arg0;
+	public synchronized boolean isConsumer(ImageConsumer c) {
+		return this.consumer == c;
 	}
 
-	public synchronized void removeConsumer(ImageConsumer arg0) {
-		if (this.consumer == arg0) {
+	public synchronized void removeConsumer(ImageConsumer c) {
+		if (this.consumer == c) {
 			this.consumer = null;
 		}
 	}
 
-	public void startProduction(ImageConsumer arg0) {
-		this.addConsumer(arg0);
+	public void startProduction(ImageConsumer c) {
+		this.addConsumer(c);
 	}
 
-	public void requestTopDownLeftRightResend(ImageConsumer arg0) {
+	public void requestTopDownLeftRightResend(ImageConsumer c) {
 		System.out.println("TDLR");
 	}
 

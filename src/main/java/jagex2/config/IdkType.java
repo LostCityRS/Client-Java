@@ -33,45 +33,50 @@ public class IdkType {
 	public boolean disable = false;
 
 	@ObfuscatedName("lc.a(Lyb;B)V")
-	public static void unpack(Jagfile arg0) {
-		Packet var2 = new Packet(arg0.read("idk.dat", null));
-		count = var2.g2();
+	public static void unpack(Jagfile config) {
+		Packet dat = new Packet(config.read("idk.dat", null));
+		count = dat.g2();
+
 		if (types == null) {
 			types = new IdkType[count];
 		}
-		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new IdkType();
+
+		for (int i = 0; i < count; i++) {
+			if (types[i] == null) {
+				types[i] = new IdkType();
 			}
-			types[var3].decode(var2);
+
+			types[i].decode(dat);
 		}
 	}
 
 	@ObfuscatedName("lc.a(ILmb;)V")
-	public void decode(Packet arg1) {
+	public void decode(Packet buf) {
 		while (true) {
-			int var4 = arg1.g1();
-			if (var4 == 0) {
+			int code = buf.g1();
+			if (code == 0) {
 				return;
 			}
-			if (var4 == 1) {
-				this.type = arg1.g1();
-			} else if (var4 == 2) {
-				int var5 = arg1.g1();
-				this.models = new int[var5];
-				for (int var6 = 0; var6 < var5; var6++) {
-					this.models[var6] = arg1.g2();
+
+			if (code == 1) {
+				this.type = buf.g1();
+			} else if (code == 2) {
+				int count = buf.g1();
+
+				this.models = new int[count];
+				for (int i = 0; i < count; i++) {
+					this.models[i] = buf.g2();
 				}
-			} else if (var4 == 3) {
+			} else if (code == 3) {
 				this.disable = true;
-			} else if (var4 >= 40 && var4 < 50) {
-				this.recol_s[var4 - 40] = arg1.g2();
-			} else if (var4 >= 50 && var4 < 60) {
-				this.recol_d[var4 - 50] = arg1.g2();
-			} else if (var4 >= 60 && var4 < 70) {
-				this.heads[var4 - 60] = arg1.g2();
+			} else if (code >= 40 && code < 50) {
+				this.recol_s[code - 40] = buf.g2();
+			} else if (code >= 50 && code < 60) {
+				this.recol_d[code - 50] = buf.g2();
+			} else if (code >= 60 && code < 70) {
+				this.heads[code - 60] = buf.g2();
 			} else {
-				System.out.println("Error unrecognised config code: " + var4);
+				System.out.println("Error unrecognised config code: " + code);
 			}
 		}
 	}
@@ -80,15 +85,17 @@ public class IdkType {
 	public boolean validate() {
 		if (this.models == null) {
 			return true;
-		} else {
-			boolean var2 = true;
-			for (int var3 = 0; var3 < this.models.length; var3++) {
-				if (!Model.validate(this.models[var3])) {
-					var2 = false;
-				}
-			}
-			return var2;
 		}
+
+		boolean downloaded = true;
+
+		for (int i = 0; i < this.models.length; i++) {
+			if (!Model.validate(this.models[i])) {
+				downloaded = false;
+			}
+		}
+
+		return downloaded;
 	}
 
 	@ObfuscatedName("lc.b(I)Lfb;")
@@ -96,46 +103,55 @@ public class IdkType {
 		if (this.models == null) {
 			return null;
 		}
-		Model[] var2 = new Model[this.models.length];
-		for (int var4 = 0; var4 < this.models.length; var4++) {
-			var2[var4] = Model.tryGet(this.models[var4]);
+
+		Model[] models = new Model[this.models.length];
+		for (int i = 0; i < this.models.length; i++) {
+			models[i] = Model.tryGet(this.models[i]);
 		}
-		Model var5;
-		if (var2.length == 1) {
-			var5 = var2[0];
+
+		Model model;
+		if (models.length == 1) {
+			model = models[0];
 		} else {
-			var5 = new Model(var2.length, var2);
+			model = new Model(models.length, models);
 		}
-		for (int var6 = 0; var6 < 6 && this.recol_s[var6] != 0; var6++) {
-			var5.recolour(this.recol_s[var6], this.recol_d[var6]);
+
+		for (int i = 0; i < 6 && this.recol_s[i] != 0; i++) {
+			model.recolour(this.recol_s[i], this.recol_d[i]);
 		}
-		return var5;
+
+		return model;
 	}
 
 	@ObfuscatedName("lc.c(I)Z")
 	public boolean validateHeadModel() {
-		boolean var2 = true;
-		for (int var3 = 0; var3 < 5; var3++) {
-			if (this.heads[var3] != -1 && !Model.validate(this.heads[var3])) {
-				var2 = false;
+		boolean downloaded = true;
+
+		for (int i = 0; i < 5; i++) {
+			if (this.heads[i] != -1 && !Model.validate(this.heads[i])) {
+				downloaded = false;
 			}
 		}
-		return var2;
+
+		return downloaded;
 	}
 
 	@ObfuscatedName("lc.d(I)Lfb;")
 	public Model getHeadModel() {
-		Model[] var2 = new Model[5];
-		int var3 = 0;
-		for (int var4 = 0; var4 < 5; var4++) {
-			if (this.heads[var4] != -1) {
-				var2[var3++] = Model.tryGet(this.heads[var4]);
+		Model[] models = new Model[5];
+
+		int count = 0;
+		for (int i = 0; i < 5; i++) {
+			if (this.heads[i] != -1) {
+				models[count++] = Model.tryGet(this.heads[i]);
 			}
 		}
-		Model var5 = new Model(var3, var2);
-		for (int var6 = 0; var6 < 6 && this.recol_s[var6] != 0; var6++) {
-			var5.recolour(this.recol_s[var6], this.recol_d[var6]);
+
+		Model model = new Model(count, models);
+		for (int i = 0; i < 6 && this.recol_s[i] != 0; i++) {
+			model.recolour(this.recol_s[i], this.recol_d[i]);
 		}
-		return var5;
+
+		return model;
 	}
 }

@@ -47,177 +47,200 @@ public class InputTracking {
 
 	@ObfuscatedName("f.b(I)Lmb;")
 	public static final synchronized Packet flush() {
-		Packet var1 = null;
+		Packet buf = null;
+
 		if (outBuffer != null && enabled) {
-			var1 = outBuffer;
+			buf = outBuffer;
 		}
+
 		outBuffer = null;
-		return var1;
+		return buf;
 	}
 
 	@ObfuscatedName("f.c(I)Lmb;")
 	public static final synchronized Packet stop() {
-		Packet var1 = null;
+		Packet buf = null;
+
 		if (oldBuffer != null && oldBuffer.pos > 0 && enabled) {
-			var1 = oldBuffer;
+			buf = oldBuffer;
 		}
+
 		setDisabled();
-		return var1;
+		return buf;
 	}
 
 	@ObfuscatedName("f.a(ZI)V")
-	public static final synchronized void ensureCapacity(int arg1) {
-		if (oldBuffer.pos + arg1 >= 500) {
-			Packet var3 = oldBuffer;
+	public static final synchronized void ensureCapacity(int n) {
+		if (oldBuffer.pos + n >= 500) {
+			Packet buf = oldBuffer;
 			oldBuffer = Packet.alloc(1);
-			outBuffer = var3;
+			outBuffer = buf;
 		}
 	}
 
 	@ObfuscatedName("f.a(IZII)V")
-	public static final synchronized void mousePressed(int arg0, int arg2, int arg3) {
-		if (!enabled || (arg0 < 0 || arg0 >= 789 || arg2 < 0 || arg2 >= 532)) {
+	public static final synchronized void mousePressed(int x, int y, int button) {
+		if (!enabled || (x < 0 || x >= 789 || y < 0 || y >= 532)) {
 			return;
 		}
+
 		trackedCount++;
-		long var4 = System.currentTimeMillis();
-		long var6 = (var4 - lastTime) / 10L;
-		if (var6 > 250L) {
-			var6 = 250L;
+
+		long now = System.currentTimeMillis();
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var4;
+
+		lastTime = now;
 		ensureCapacity(5);
-		if (arg3 == 1) {
+
+		if (button == 1) {
 			oldBuffer.p1(1);
 		} else {
 			oldBuffer.p1(2);
 		}
-		oldBuffer.p1((int) var6);
-		oldBuffer.p3((arg2 << 10) + arg0);
+
+		oldBuffer.p1((int) delta);
+		oldBuffer.p3((y << 10) + x);
 	}
 
 	@ObfuscatedName("f.a(II)V")
-	public static final synchronized void mouseReleased(int arg1) {
+	public static final synchronized void mouseReleased(int button) {
 		if (!enabled) {
 			return;
 		}
+
 		trackedCount++;
-		long var3 = System.currentTimeMillis();
-		long var5 = (var3 - lastTime) / 10L;
-		if (var5 > 250L) {
-			var5 = 250L;
+
+		long now = System.currentTimeMillis();
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var3;
+
+		lastTime = now;
+
 		ensureCapacity(2);
-		if (arg1 == 1) {
+
+		if (button == 1) {
 			oldBuffer.p1(3);
 		} else {
 			oldBuffer.p1(4);
 		}
-		oldBuffer.p1((int) var5);
+
+		oldBuffer.p1((int) delta);
 	}
 
 	@ObfuscatedName("f.a(III)V")
-	public static final synchronized void mouseMoved(int arg0, int arg2) {
-		if (!enabled || (arg0 < 0 || arg0 >= 789 || arg2 < 0 || arg2 >= 532)) {
+	public static final synchronized void mouseMoved(int x, int y) {
+		if (!enabled || (x < 0 || x >= 789 || y < 0 || y >= 532)) {
 			return;
 		}
-		long var4 = System.currentTimeMillis();
-		if (var4 - lastMoveTime < 50L) {
+
+		long now = System.currentTimeMillis();
+		if (now - lastMoveTime < 50L) {
 			return;
 		}
-		lastMoveTime = var4;
+
+		lastMoveTime = now;
 		trackedCount++;
-		long var6 = (var4 - lastTime) / 10L;
-		if (var6 > 250L) {
-			var6 = 250L;
+
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var4;
-		if (arg0 - lastX < 8 && arg0 - lastX >= -8 && arg2 - lastY < 8 && arg2 - lastY >= -8) {
+
+		lastTime = now;
+
+		if (x - lastX < 8 && x - lastX >= -8 && y - lastY < 8 && y - lastY >= -8) {
 			ensureCapacity(3);
 			oldBuffer.p1(5);
-			oldBuffer.p1((int) var6);
-			oldBuffer.p1((arg2 - lastY + 8 << 4) + arg0 - lastX + 8);
-		} else if (arg0 - lastX < 128 && arg0 - lastX >= -128 && arg2 - lastY < 128 && arg2 - lastY >= -128) {
+			oldBuffer.p1((int) delta);
+			oldBuffer.p1((y - lastY + 8 << 4) + x - lastX + 8);
+		} else if (x - lastX < 128 && x - lastX >= -128 && y - lastY < 128 && y - lastY >= -128) {
 			ensureCapacity(4);
 			oldBuffer.p1(6);
-			oldBuffer.p1((int) var6);
-			oldBuffer.p1(arg0 - lastX + 128);
-			oldBuffer.p1(arg2 - lastY + 128);
+			oldBuffer.p1((int) delta);
+			oldBuffer.p1(x - lastX + 128);
+			oldBuffer.p1(y - lastY + 128);
 		} else {
 			ensureCapacity(5);
 			oldBuffer.p1(7);
-			oldBuffer.p1((int) var6);
-			oldBuffer.p3((arg2 << 10) + arg0);
+			oldBuffer.p1((int) delta);
+			oldBuffer.p3((y << 10) + x);
 		}
-		lastX = arg0;
-		lastY = arg2;
+
+		lastX = x;
+		lastY = y;
 	}
 
 	@ObfuscatedName("f.a(IB)V")
-	public static final synchronized void keyPressed(int arg0) {
+	public static final synchronized void keyPressed(int key) {
 		if (!enabled) {
 			return;
 		}
+
 		trackedCount++;
-		long var2 = System.currentTimeMillis();
-		long var4 = (var2 - lastTime) / 10L;
-		if (var4 > 250L) {
-			var4 = 250L;
+
+		long now = System.currentTimeMillis();
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var2;
-		if (arg0 == 1000) {
-			arg0 = 11;
+
+		lastTime = now;
+
+		if (key == 1000) {
+			key = 11;
+		} else if (key == 1001) {
+			key = 12;
+		} else if (key == 1002) {
+			key = 14;
+		} else if (key == 1003) {
+			key = 15;
+		} else if (key >= 1008) {
+			key -= 992;
 		}
-		if (arg0 == 1001) {
-			arg0 = 12;
-		}
-		if (arg0 == 1002) {
-			arg0 = 14;
-		}
-		if (arg0 == 1003) {
-			arg0 = 15;
-		}
-		if (arg0 >= 1008) {
-			arg0 -= 992;
-		}
+
 		ensureCapacity(3);
 		oldBuffer.p1(8);
-		oldBuffer.p1((int) var4);
-		oldBuffer.p1(arg0);
+		oldBuffer.p1((int) delta);
+		oldBuffer.p1(key);
 	}
 
 	@ObfuscatedName("f.a(IZ)V")
-	public static final synchronized void keyReleased(int arg0) {
+	public static final synchronized void keyReleased(int key) {
 		if (!enabled) {
 			return;
 		}
+
 		trackedCount++;
-		long var2 = System.currentTimeMillis();
-		long var4 = (var2 - lastTime) / 10L;
-		if (var4 > 250L) {
-			var4 = 250L;
+
+		long now = System.currentTimeMillis();
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var2;
-		if (arg0 == 1000) {
-			arg0 = 11;
+
+		lastTime = now;
+
+		if (key == 1000) {
+			key = 11;
+		} else if (key == 1001) {
+			key = 12;
+		} else if (key == 1002) {
+			key = 14;
+		} else if (key == 1003) {
+			key = 15;
+		} else if (key >= 1008) {
+			key -= 992;
 		}
-		if (arg0 == 1001) {
-			arg0 = 12;
-		}
-		if (arg0 == 1002) {
-			arg0 = 14;
-		}
-		if (arg0 == 1003) {
-			arg0 = 15;
-		}
-		if (arg0 >= 1008) {
-			arg0 -= 992;
-		}
+
 		ensureCapacity(3);
 		oldBuffer.p1(9);
-		oldBuffer.p1((int) var4);
-		oldBuffer.p1(arg0);
+		oldBuffer.p1((int) delta);
+		oldBuffer.p1(key);
 	}
 
 	@ObfuscatedName("f.b(B)V")
@@ -225,16 +248,20 @@ public class InputTracking {
 		if (!enabled) {
 			return;
 		}
+
 		trackedCount++;
-		long var1 = System.currentTimeMillis();
-		long var3 = (var1 - lastTime) / 10L;
-		if (var3 > 250L) {
-			var3 = 250L;
+
+		long now = System.currentTimeMillis();
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var1;
+
+		lastTime = now;
+
 		ensureCapacity(2);
 		oldBuffer.p1(10);
-		oldBuffer.p1((int) var3);
+		oldBuffer.p1((int) delta);
 	}
 
 	@ObfuscatedName("f.a(Z)V")
@@ -242,16 +269,20 @@ public class InputTracking {
 		if (!enabled) {
 			return;
 		}
+
 		trackedCount++;
-		long var1 = System.currentTimeMillis();
-		long var3 = (var1 - lastTime) / 10L;
-		if (var3 > 250L) {
-			var3 = 250L;
+
+		long now = System.currentTimeMillis();
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var1;
+
+		lastTime = now;
+
 		ensureCapacity(2);
 		oldBuffer.p1(11);
-		oldBuffer.p1((int) var3);
+		oldBuffer.p1((int) delta);
 	}
 
 	@ObfuscatedName("f.d(I)V")
@@ -259,16 +290,20 @@ public class InputTracking {
 		if (!enabled) {
 			return;
 		}
+
 		trackedCount++;
-		long var1 = System.currentTimeMillis();
-		long var3 = (var1 - lastTime) / 10L;
-		if (var3 > 250L) {
-			var3 = 250L;
+
+		long now = System.currentTimeMillis();
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var1;
+
+		lastTime = now;
+
 		ensureCapacity(2);
 		oldBuffer.p1(12);
-		oldBuffer.p1((int) var3);
+		oldBuffer.p1((int) delta);
 	}
 
 	@ObfuscatedName("f.c(B)V")
@@ -276,15 +311,19 @@ public class InputTracking {
 		if (!enabled) {
 			return;
 		}
+
 		trackedCount++;
-		long var1 = System.currentTimeMillis();
-		long var3 = (var1 - lastTime) / 10L;
-		if (var3 > 250L) {
-			var3 = 250L;
+
+		long now = System.currentTimeMillis();
+		long delta = (now - lastTime) / 10L;
+		if (delta > 250L) {
+			delta = 250L;
 		}
-		lastTime = var1;
+
+		lastTime = now;
+
 		ensureCapacity(2);
 		oldBuffer.p1(13);
-		oldBuffer.p1((int) var3);
+		oldBuffer.p1((int) delta);
 	}
 }

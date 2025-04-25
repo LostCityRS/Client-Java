@@ -1832,39 +1832,39 @@ public class Client extends GameShell {
 			}
 
 			Pix32 backleft1 = new Pix32(jagMedia, "backleft1", 0);
-			this.areaBackleft1 = new PixMap(this.getBaseComponent(), backleft1.cropBottom, backleft1.cropRight);
+			this.areaBackleft1 = new PixMap(backleft1.cropRight, backleft1.cropBottom, this.getBaseComponent());
 			backleft1.blitOpaque(0, 0);
 
 			Pix32 backleft2 = new Pix32(jagMedia, "backleft2", 0);
-			this.areaBackleft2 = new PixMap(this.getBaseComponent(), backleft2.cropBottom, backleft2.cropRight);
+			this.areaBackleft2 = new PixMap(backleft2.cropRight, backleft2.cropBottom, this.getBaseComponent());
 			backleft2.blitOpaque(0, 0);
 
 			Pix32 backright1 = new Pix32(jagMedia, "backright1", 0);
-			this.areaBackright1 = new PixMap(this.getBaseComponent(), backright1.cropBottom, backright1.cropRight);
+			this.areaBackright1 = new PixMap(backright1.cropRight, backright1.cropBottom, this.getBaseComponent());
 			backright1.blitOpaque(0, 0);
 
 			Pix32 backright2 = new Pix32(jagMedia, "backright2", 0);
-			this.areaBackright2 = new PixMap(this.getBaseComponent(), backright2.cropBottom, backright2.cropRight);
+			this.areaBackright2 = new PixMap(backright2.cropRight, backright2.cropBottom, this.getBaseComponent());
 			backright2.blitOpaque(0, 0);
 
 			Pix32 backtop1 = new Pix32(jagMedia, "backtop1", 0);
-			this.areaBacktop1 = new PixMap(this.getBaseComponent(), backtop1.cropBottom, backtop1.cropRight);
+			this.areaBacktop1 = new PixMap(backtop1.cropRight, backtop1.cropBottom, this.getBaseComponent());
 			backtop1.blitOpaque(0, 0);
 
 			Pix32 backvmid1 = new Pix32(jagMedia, "backvmid1", 0);
-			this.areaBackvmid1 = new PixMap(this.getBaseComponent(), backvmid1.cropBottom, backvmid1.cropRight);
+			this.areaBackvmid1 = new PixMap(backvmid1.cropRight, backvmid1.cropBottom, this.getBaseComponent());
 			backvmid1.blitOpaque(0, 0);
 
 			Pix32 backvmid2 = new Pix32(jagMedia, "backvmid2", 0);
-			this.areaBackvmid2 = new PixMap(this.getBaseComponent(), backvmid2.cropBottom, backvmid2.cropRight);
+			this.areaBackvmid2 = new PixMap(backvmid2.cropRight, backvmid2.cropBottom, this.getBaseComponent());
 			backvmid2.blitOpaque(0, 0);
 
 			Pix32 backvmid3 = new Pix32(jagMedia, "backvmid3", 0);
-			this.areaBackvmid3 = new PixMap(this.getBaseComponent(), backvmid3.cropBottom, backvmid3.cropRight);
+			this.areaBackvmid3 = new PixMap(backvmid3.cropRight, backvmid3.cropBottom, this.getBaseComponent());
 			backvmid3.blitOpaque(0, 0);
 
 			Pix32 backhmid2 = new Pix32(jagMedia, "backhmid2", 0);
-			this.areaBackhmid2 = new PixMap(this.getBaseComponent(), backhmid2.cropBottom, backhmid2.cropRight);
+			this.areaBackhmid2 = new PixMap(backhmid2.cropRight, backhmid2.cropBottom, this.getBaseComponent());
 			backhmid2.blitOpaque(0, 0);
 
 			int var49 = (int) (Math.random() * 21.0D) - 10;
@@ -2208,22 +2208,22 @@ public class Client extends GameShell {
 		Pix2D.fillRect(9179409, percent * 3, 30, var4 / 2 - 150, var7 + 2);
 		Pix2D.fillRect(0, 300 - percent * 3, 30, percent * 3 + (var4 / 2 - 150), var7 + 2);
 		this.fontBold12.drawStringCenter(var4 / 2, 16777215, message, var5 / 2 + 5 - var6);
-		this.imageTitle4.draw(super.graphics, 171, 202);
+		this.imageTitle4.draw(super.graphics, 202, 171);
 
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
 
 			if (!this.flameActive) {
 				this.imageTitle0.draw(super.graphics, 0, 0);
-				this.imageTitle1.draw(super.graphics, 0, 637);
+				this.imageTitle1.draw(super.graphics, 637, 0);
 			}
 
-			this.imageTitle2.draw(super.graphics, 0, 128);
-			this.imageTitle3.draw(super.graphics, 371, 202);
-			this.imageTitle5.draw(super.graphics, 265, 0);
-			this.imageTitle6.draw(super.graphics, 265, 562);
-			this.imageTitle7.draw(super.graphics, 171, 128);
-			this.imageTitle8.draw(super.graphics, 171, 562);
+			this.imageTitle2.draw(super.graphics, 128, 0);
+			this.imageTitle3.draw(super.graphics, 202, 371);
+			this.imageTitle5.draw(super.graphics, 0, 265);
+			this.imageTitle6.draw(super.graphics, 562, 265);
+			this.imageTitle7.draw(super.graphics, 128, 171);
+			this.imageTitle8.draw(super.graphics, 562, 171);
 		}
 	}
 
@@ -2830,20 +2830,20 @@ public class Client extends GameShell {
 		this.imageTitle7 = null;
 		this.imageTitle8 = null;
 
-		this.areaChatback = new PixMap(this.getBaseComponent(), 96, 479);
+		this.areaChatback = new PixMap(479, 96, this.getBaseComponent());
 
-		this.areaMapback = new PixMap(this.getBaseComponent(), 156, 172);
+		this.areaMapback = new PixMap(172, 156, this.getBaseComponent());
 		Pix2D.clear();
 		this.imageMapback.draw(0, 0);
 
-		this.areaSidebar = new PixMap(this.getBaseComponent(), 261, 190);
+		this.areaSidebar = new PixMap(190, 261, this.getBaseComponent());
 
-		this.areaViewport = new PixMap(this.getBaseComponent(), 334, 512);
+		this.areaViewport = new PixMap(512, 334, this.getBaseComponent());
 		Pix2D.clear();
 
-		this.areaBackbase1 = new PixMap(this.getBaseComponent(), 50, 496);
-		this.areaBackbase2 = new PixMap(this.getBaseComponent(), 37, 269);
-		this.areaBackhmid1 = new PixMap(this.getBaseComponent(), 45, 249);
+		this.areaBackbase1 = new PixMap(496, 50, this.getBaseComponent());
+		this.areaBackbase2 = new PixMap(269, 37, this.getBaseComponent());
+		this.areaBackhmid1 = new PixMap(249, 45, this.getBaseComponent());
 
 		this.redrawFrame = true;
 	}
@@ -5027,23 +5027,23 @@ public class Client extends GameShell {
 		this.areaBackbase1 = null;
 		this.areaBackbase2 = null;
 		this.areaBackhmid1 = null;
-		this.imageTitle0 = new PixMap(this.getBaseComponent(), 265, 128);
+		this.imageTitle0 = new PixMap(128, 265, this.getBaseComponent());
 		Pix2D.clear();
-		this.imageTitle1 = new PixMap(this.getBaseComponent(), 265, 128);
+		this.imageTitle1 = new PixMap(128, 265, this.getBaseComponent());
 		Pix2D.clear();
-		this.imageTitle2 = new PixMap(this.getBaseComponent(), 171, 509);
+		this.imageTitle2 = new PixMap(509, 171, this.getBaseComponent());
 		Pix2D.clear();
-		this.imageTitle3 = new PixMap(this.getBaseComponent(), 132, 360);
+		this.imageTitle3 = new PixMap(360, 132, this.getBaseComponent());
 		Pix2D.clear();
-		this.imageTitle4 = new PixMap(this.getBaseComponent(), 200, 360);
+		this.imageTitle4 = new PixMap(360, 200, this.getBaseComponent());
 		Pix2D.clear();
-		this.imageTitle5 = new PixMap(this.getBaseComponent(), 238, 202);
+		this.imageTitle5 = new PixMap(202, 238, this.getBaseComponent());
 		Pix2D.clear();
-		this.imageTitle6 = new PixMap(this.getBaseComponent(), 238, 203);
+		this.imageTitle6 = new PixMap(203, 238, this.getBaseComponent());
 		Pix2D.clear();
-		this.imageTitle7 = new PixMap(this.getBaseComponent(), 94, 74);
+		this.imageTitle7 = new PixMap(74, 94, this.getBaseComponent());
 		Pix2D.clear();
-		this.imageTitle8 = new PixMap(this.getBaseComponent(), 94, 75);
+		this.imageTitle8 = new PixMap(75, 94, this.getBaseComponent());
 		Pix2D.clear();
 		if (this.jagTitle != null) {
 			this.loadTitleBackground();
@@ -5238,16 +5238,16 @@ public class Client extends GameShell {
 			this.imageTitlebutton.draw(var14 - 73, var15 - 20);
 			this.fontBold12.drawStringTaggableCenter(var14, true, "Cancel", var15 + 5, 16777215);
 		}
-		this.imageTitle4.draw(super.graphics, 171, 202);
+		this.imageTitle4.draw(super.graphics, 202, 171);
 
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
-			this.imageTitle2.draw(super.graphics, 0, 128);
-			this.imageTitle3.draw(super.graphics, 371, 202);
-			this.imageTitle5.draw(super.graphics, 265, 0);
-			this.imageTitle6.draw(super.graphics, 265, 562);
-			this.imageTitle7.draw(super.graphics, 171, 128);
-			this.imageTitle8.draw(super.graphics, 171, 562);
+			this.imageTitle2.draw(super.graphics, 128, 0);
+			this.imageTitle3.draw(super.graphics, 202, 371);
+			this.imageTitle5.draw(super.graphics, 0, 265);
+			this.imageTitle6.draw(super.graphics, 562, 265);
+			this.imageTitle7.draw(super.graphics, 128, 171);
+			this.imageTitle8.draw(super.graphics, 562, 171);
 		}
 	}
 
@@ -5255,22 +5255,22 @@ public class Client extends GameShell {
 	public final void drawGame() {
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
-			this.areaBackleft1.draw(super.graphics, 4, 0);
-			this.areaBackleft2.draw(super.graphics, 357, 0);
-			this.areaBackright1.draw(super.graphics, 4, 722);
-			this.areaBackright2.draw(super.graphics, 205, 743);
+			this.areaBackleft1.draw(super.graphics, 0, 4);
+			this.areaBackleft2.draw(super.graphics, 0, 357);
+			this.areaBackright1.draw(super.graphics, 722, 4);
+			this.areaBackright2.draw(super.graphics, 743, 205);
 			this.areaBacktop1.draw(super.graphics, 0, 0);
-			this.areaBackvmid1.draw(super.graphics, 4, 516);
-			this.areaBackvmid2.draw(super.graphics, 205, 516);
-			this.areaBackvmid3.draw(super.graphics, 357, 496);
-			this.areaBackhmid2.draw(super.graphics, 338, 0);
+			this.areaBackvmid1.draw(super.graphics, 516, 4);
+			this.areaBackvmid2.draw(super.graphics, 516, 205);
+			this.areaBackvmid3.draw(super.graphics, 496, 357);
+			this.areaBackhmid2.draw(super.graphics, 0, 338);
 			this.redrawSidebar = true;
 			this.redrawChatback = true;
 			this.redrawSideicons = true;
 			this.redrawPrivacySettings = true;
 			if (this.sceneState != 2) {
 				this.areaViewport.draw(super.graphics, 4, 4);
-				this.areaMapback.draw(super.graphics, 4, 550);
+				this.areaMapback.draw(super.graphics, 550, 4);
 			}
 		}
 		if (this.sceneState == 2) {
@@ -5336,7 +5336,7 @@ public class Client extends GameShell {
 		}
 		if (this.sceneState == 2) {
 			this.drawMinimap();
-			this.areaMapback.draw(super.graphics, 4, 550);
+			this.areaMapback.draw(super.graphics, 550, 4);
 		}
 		if (this.flashingTab != -1) {
 			this.redrawSideicons = true;
@@ -5397,7 +5397,7 @@ public class Client extends GameShell {
 					this.imageSideicons[6].draw(208, 13);
 				}
 			}
-			this.areaBackhmid1.draw(super.graphics, 160, 516);
+			this.areaBackhmid1.draw(super.graphics, 516, 160);
 			this.areaBackbase2.bind();
 			this.imageBackbase2.draw(0, 0);
 			if (this.sidebarInterfaceId == -1) {
@@ -5443,7 +5443,7 @@ public class Client extends GameShell {
 					this.imageSideicons[12].draw(226, 2);
 				}
 			}
-			this.areaBackbase2.draw(super.graphics, 466, 496);
+			this.areaBackbase2.draw(super.graphics, 496, 466);
 			this.areaViewport.bind();
 		}
 		if (this.redrawPrivacySettings) {
@@ -5484,7 +5484,7 @@ public class Client extends GameShell {
 				this.fontPlain12.drawStringTaggableCenter(324, true, "Off", 41, 16711680);
 			}
 			this.fontPlain12.drawStringTaggableCenter(458, true, "Report abuse", 33, 16777215);
-			this.areaBackbase1.draw(super.graphics, 453, 0);
+			this.areaBackbase1.draw(super.graphics, 0, 453);
 			this.areaViewport.bind();
 		}
 		this.sceneDelta = 0;
@@ -11150,7 +11150,7 @@ public class Client extends GameShell {
 			this.drawMenu();
 		}
 
-		this.areaSidebar.draw(super.graphics, 205, 553);
+		this.areaSidebar.draw(super.graphics, 553, 205);
 
 		this.areaViewport.bind();
 		Pix3D.lineOffset = this.areaViewportOffset;
@@ -11295,7 +11295,7 @@ public class Client extends GameShell {
 			this.drawMenu();
 		}
 
-		this.areaChatback.draw(super.graphics, 357, 17);
+		this.areaChatback.draw(super.graphics, 17, 357);
 
 		this.areaViewport.bind();
 		Pix3D.lineOffset = this.areaViewportOffset;
@@ -11905,7 +11905,7 @@ public class Client extends GameShell {
 			dstOffset = 128 - step - offset + dstOffset;
 		}
 
-		this.imageTitle1.draw(super.graphics, 0, 637);
+		this.imageTitle1.draw(super.graphics, 637, 0);
 	}
 
 	@ObfuscatedName("client.a(BIII)I")

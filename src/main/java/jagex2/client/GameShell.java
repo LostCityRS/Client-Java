@@ -113,21 +113,21 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public long mouseClickTime;
 
 	@ObfuscatedName("a.a(III)V")
-	public final void initApplication(int arg1, int arg2) {
-		this.screenWidth = arg2;
-		this.screenHeight = arg1;
+	public final void initApplication(int height, int width) {
+		this.screenWidth = width;
+		this.screenHeight = height;
 		this.frame = new ViewBox(this.screenWidth, this.screenHeight, this);
 		this.graphics = this.getBaseComponent().getGraphics();
-		this.drawArea = new PixMap(this.getBaseComponent(), this.screenHeight, this.screenWidth);
+		this.drawArea = new PixMap(this.screenWidth, this.screenHeight, this.getBaseComponent());
 		this.startThread(this, 1);
 	}
 
 	@ObfuscatedName("a.a(BII)V")
-	public final void initApplet(int arg1, int arg2) {
-		this.screenWidth = arg2;
-		this.screenHeight = arg1;
+	public final void initApplet(int height, int width) {
+		this.screenWidth = width;
+		this.screenHeight = height;
 		this.graphics = this.getBaseComponent().getGraphics();
-		this.drawArea = new PixMap(this.getBaseComponent(), this.screenHeight, this.screenWidth);
+		this.drawArea = new PixMap(this.screenWidth, this.screenHeight, this.getBaseComponent());
 		this.startThread(this, 1);
 	}
 
@@ -136,100 +136,115 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.getBaseComponent().addMouseMotionListener(this);
 		this.getBaseComponent().addKeyListener(this);
 		this.getBaseComponent().addFocusListener(this);
+
 		if (this.frame != null) {
 			this.frame.addWindowListener(this);
 		}
+
 		this.drawProgress(0, "Loading...");
 		this.load();
-		int var1 = 0;
-		int var2 = 256;
-		int var3 = 1;
-		int var4 = 0;
-		int var5 = 0;
-		for (int var6 = 0; var6 < 10; var6++) {
-			this.otim[var6] = System.currentTimeMillis();
+
+		int opos = 0;
+		int ratio = 256;
+		int delta = 1;
+		int count = 0;
+		int intex = 0;
+
+		for (int i = 0; i < 10; i++) {
+			this.otim[i] = System.currentTimeMillis();
 		}
-		long var7 = System.currentTimeMillis();
-		while (true) {
-			long var11;
-			do {
-				if (this.state < 0) {
-					if (this.state == -1) {
-						this.shutdown();
-					}
+
+		while (this.state >= 0) {
+			if (this.state > 0) {
+				this.state--;
+
+				if (this.state == 0) {
+					this.shutdown();
 					return;
 				}
-				if (this.state > 0) {
-					this.state--;
-					if (this.state == 0) {
-						this.shutdown();
-						return;
-					}
-				}
-				int var9 = var2;
-				int var10 = var3;
-				var2 = 300;
-				var3 = 1;
-				var11 = System.currentTimeMillis();
-				if (this.otim[var1] == 0L) {
-					var2 = var9;
-					var3 = var10;
-				} else if (var11 > this.otim[var1]) {
-					var2 = (int) ((long) (this.deltime * 2560) / (var11 - this.otim[var1]));
-				}
-				if (var2 < 25) {
-					var2 = 25;
-				}
-				if (var2 > 256) {
-					var2 = 256;
-					var3 = (int) ((long) this.deltime - (var11 - this.otim[var1]) / 10L);
-				}
-				if (var3 > this.deltime) {
-					var3 = this.deltime;
-				}
-				this.otim[var1] = var11;
-				var1 = (var1 + 1) % 10;
-				if (var3 > 1) {
-					for (int var13 = 0; var13 < 10; var13++) {
-						if (this.otim[var13] != 0L) {
-							this.otim[var13] += var3;
-						}
-					}
-				}
-				if (var3 < this.mindel) {
-					var3 = this.mindel;
-				}
-				try {
-					Thread.sleep((long) var3);
-				} catch (InterruptedException var16) {
-					var5++;
-				}
-				while (var4 < 256) {
-					this.mouseClickButton = this.lastMouseClickButton;
-					this.mouseClickX = this.lastMouseClickX;
-					this.mouseClickY = this.lastMouseClickY;
-					this.mouseClickTime = this.lastMouseClickTime;
-					this.lastMouseClickButton = 0;
-					this.update();
-					this.keyQueueReadPos = this.keyQueueWritePos;
-					var4 += var2;
-				}
-				var4 &= 0xFF;
-				if (this.deltime > 0) {
-					this.fps = var2 * 1000 / (this.deltime * 256);
-				}
-				this.draw();
-			} while (!this.debug);
-			System.out.println("ntime:" + var11);
-			for (int var14 = 0; var14 < 10; var14++) {
-				int var15 = (var1 - var14 - 1 + 20) % 10;
-				System.out.println("otim" + var15 + ":" + this.otim[var15]);
 			}
-			System.out.println("fps:" + this.fps + " ratio:" + var2 + " count:" + var4);
-			System.out.println("del:" + var3 + " deltime:" + this.deltime + " mindel:" + this.mindel);
-			System.out.println("intex:" + var5 + " opos:" + var1);
-			this.debug = false;
-			var5 = 0;
+
+			int lastRatio = ratio;
+			int lastDelta = delta;
+
+			ratio = 300;
+			delta = 1;
+
+			long ntime = System.currentTimeMillis();
+
+			if (this.otim[opos] == 0L) {
+				ratio = lastRatio;
+				delta = lastDelta;
+			} else if (ntime > this.otim[opos]) {
+				ratio = (int) ((this.deltime * 2560L) / (ntime - this.otim[opos]));
+			}
+
+			if (ratio < 25) {
+				ratio = 25;
+			} else if (ratio > 256) {
+				ratio = 256;
+				delta = (int) ((long) this.deltime - (ntime - this.otim[opos]) / 10L);
+			}
+
+			if (delta > this.deltime) {
+				delta = this.deltime;
+			}
+
+			this.otim[opos] = ntime;
+			opos = (opos + 1) % 10;
+
+			if (delta > 1) {
+				for (int i = 0; i < 10; i++) {
+					if (this.otim[i] != 0L) {
+						this.otim[i] += delta;
+					}
+				}
+			}
+
+			if (delta < this.mindel) {
+				delta = this.mindel;
+			}
+
+			try {
+				Thread.sleep(delta);
+			} catch (InterruptedException ignore) {
+				intex++;
+			}
+
+			while (count < 256) {
+				this.mouseClickButton = this.lastMouseClickButton;
+				this.mouseClickX = this.lastMouseClickX;
+				this.mouseClickY = this.lastMouseClickY;
+				this.mouseClickTime = this.lastMouseClickTime;
+				this.lastMouseClickButton = 0;
+				this.update();
+				this.keyQueueReadPos = this.keyQueueWritePos;
+				count += ratio;
+			}
+			count &= 0xFF;
+
+			if (this.deltime > 0) {
+				this.fps = ratio * 1000 / (this.deltime * 256);
+			}
+
+			this.draw();
+
+			if (this.debug) {
+				System.out.println("ntime:" + ntime);
+				for (int i = 0; i < 10; i++) {
+					int o = (opos - i - 1 + 20) % 10;
+					System.out.println("otim" + o + ":" + this.otim[o]);
+				}
+				System.out.println("fps:" + this.fps + " ratio:" + ratio + " count:" + count);
+				System.out.println("del:" + delta + " deltime:" + this.deltime + " mindel:" + this.mindel);
+				System.out.println("intex:" + intex + " opos:" + opos);
+				this.debug = false;
+				intex = 0;
+			}
+		}
+
+		if (this.state == -1) {
+			this.shutdown();
 		}
 	}
 
@@ -237,19 +252,21 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void shutdown() {
 		this.state = -2;
 		this.unload();
+
 		try {
 			Thread.sleep(1000L);
-		} catch (Exception var4) {
+		} catch (Exception ignore) {
 		}
+
 		try {
 			System.exit(0);
-		} catch (Throwable var3) {
+		} catch (Throwable ignore) {
 		}
 	}
 
 	@ObfuscatedName("a.a(II)V")
-	public final void setFramerate(int arg0) {
-		this.deltime = 1000 / arg0;
+	public final void setFramerate(int fps) {
+		this.deltime = 1000 / fps;
 	}
 
 	public final void start() {
@@ -266,262 +283,270 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	public final void destroy() {
 		this.state = -1;
+
 		try {
 			Thread.sleep(5000L);
-		} catch (Exception var1) {
+		} catch (Exception ignore) {
 		}
+
 		if (this.state == -1) {
 			this.shutdown();
 		}
 	}
 
-	public final void update(Graphics arg0) {
+	public final void update(Graphics g) {
 		if (this.graphics == null) {
-			this.graphics = arg0;
+			this.graphics = g;
 		}
+
 		this.refresh = true;
 		this.refresh();
 	}
 
-	public final void paint(Graphics arg0) {
+	public final void paint(Graphics g) {
 		if (this.graphics == null) {
-			this.graphics = arg0;
+			this.graphics = g;
 		}
+
 		this.refresh = true;
 		this.refresh();
 	}
 
-	public final void mousePressed(MouseEvent arg0) {
-		int var2 = arg0.getX();
-		int var3 = arg0.getY();
+	public final void mousePressed(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+
 		if (this.frame != null) {
-			var2 -= this.frame.insets.left;
-			var3 -= this.frame.insets.top;
+			x -= this.frame.insets.left;
+			y -= this.frame.insets.top;
 		}
+
 		this.idleCycles = 0;
-		this.lastMouseClickX = var2;
-		this.lastMouseClickY = var3;
+		this.lastMouseClickX = x;
+		this.lastMouseClickY = y;
 		this.lastMouseClickTime = System.currentTimeMillis();
-		if (arg0.isMetaDown()) {
+
+		if (e.isMetaDown()) {
 			this.lastMouseClickButton = 2;
 			this.mouseButton = 2;
 		} else {
 			this.lastMouseClickButton = 1;
 			this.mouseButton = 1;
 		}
+
 		if (InputTracking.enabled) {
-			InputTracking.mousePressed(var2, var3, arg0.isMetaDown() ? 1 : 0);
+			InputTracking.mousePressed(x, y, e.isMetaDown() ? 1 : 0);
 		}
 	}
 
-	public final void mouseReleased(MouseEvent arg0) {
+	public final void mouseReleased(MouseEvent e) {
 		this.idleCycles = 0;
 		this.mouseButton = 0;
+
 		if (InputTracking.enabled) {
-			InputTracking.mouseReleased(arg0.isMetaDown() ? 1 : 0);
+			InputTracking.mouseReleased(e.isMetaDown() ? 1 : 0);
 		}
 	}
 
-	public final void mouseClicked(MouseEvent arg0) {
+	public final void mouseClicked(MouseEvent e) {
 	}
 
-	public final void mouseEntered(MouseEvent arg0) {
+	public final void mouseEntered(MouseEvent e) {
 		if (InputTracking.enabled) {
 			InputTracking.mouseEntered();
 		}
 	}
 
-	public final void mouseExited(MouseEvent arg0) {
+	public final void mouseExited(MouseEvent e) {
 		this.idleCycles = 0;
 		this.mouseX = -1;
 		this.mouseY = -1;
+
 		if (InputTracking.enabled) {
 			InputTracking.mouseExited();
 		}
 	}
 
-	public final void mouseDragged(MouseEvent arg0) {
-		int var2 = arg0.getX();
-		int var3 = arg0.getY();
+	public final void mouseDragged(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+
 		if (this.frame != null) {
-			var2 -= this.frame.insets.left;
-			var3 -= this.frame.insets.top;
+			x -= this.frame.insets.left;
+			y -= this.frame.insets.top;
 		}
+
 		this.idleCycles = 0;
-		this.mouseX = var2;
-		this.mouseY = var3;
+		this.mouseX = x;
+		this.mouseY = y;
+
 		if (InputTracking.enabled) {
-			InputTracking.mouseMoved(var2, var3);
+			InputTracking.mouseMoved(x, y);
 		}
 	}
 
-	public final void mouseMoved(MouseEvent arg0) {
-		int var2 = arg0.getX();
-		int var3 = arg0.getY();
+	public final void mouseMoved(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+
 		if (this.frame != null) {
-			var2 -= this.frame.insets.left;
-			var3 -= this.frame.insets.top;
+			x -= this.frame.insets.left;
+			y -= this.frame.insets.top;
 		}
+
 		this.idleCycles = 0;
-		this.mouseX = var2;
-		this.mouseY = var3;
+		this.mouseX = x;
+		this.mouseY = y;
+
 		if (InputTracking.enabled) {
-			InputTracking.mouseMoved(var2, var3);
+			InputTracking.mouseMoved(x, y);
 		}
 	}
 
-	public final void keyPressed(KeyEvent arg0) {
+	public final void keyPressed(KeyEvent e) {
 		this.idleCycles = 0;
-		int var2 = arg0.getKeyCode();
-		int var3 = arg0.getKeyChar();
-		if (var3 < 30) {
-			var3 = 0;
+
+		int code = e.getKeyCode();
+		int ch = e.getKeyChar();
+
+		if (ch < 30) {
+			ch = 0;
 		}
-		if (var2 == 37) {
-			var3 = 1;
+
+		if (code == 37) {
+			ch = 1;
+		} else if (code == 39) {
+			ch = 2;
+		} else if (code == 38) {
+			ch = 3;
+		} else if (code == 40) {
+			ch = 4;
+		} else if (code == 17) {
+			ch = 5;
+		} else if (code == 8) {
+			ch = '\b';
+		} else if (code == 127) {
+			ch = '\b';
+		} else if (code == 9) {
+			ch = '\t';
+		} else if (code == 10) {
+			ch = '\n';
+		} else if (code >= 112 && code <= 123) {
+			ch = code + 1008 - 112;
+		} else if (code == 36) {
+			ch = 1000;
+		} else if (code == 35) {
+			ch = 1001;
+		} else if (code == 33) {
+			ch = 1002;
+		} else if (code == 34) {
+			ch = 1003;
 		}
-		if (var2 == 39) {
-			var3 = 2;
+
+		if (ch > 0 && ch < 128) {
+			this.actionKey[ch] = 1;
 		}
-		if (var2 == 38) {
-			var3 = 3;
-		}
-		if (var2 == 40) {
-			var3 = 4;
-		}
-		if (var2 == 17) {
-			var3 = 5;
-		}
-		if (var2 == 8) {
-			var3 = 8;
-		}
-		if (var2 == 127) {
-			var3 = 8;
-		}
-		if (var2 == 9) {
-			var3 = 9;
-		}
-		if (var2 == 10) {
-			var3 = 10;
-		}
-		if (var2 >= 112 && var2 <= 123) {
-			var3 = var2 + 1008 - 112;
-		}
-		if (var2 == 36) {
-			var3 = 1000;
-		}
-		if (var2 == 35) {
-			var3 = 1001;
-		}
-		if (var2 == 33) {
-			var3 = 1002;
-		}
-		if (var2 == 34) {
-			var3 = 1003;
-		}
-		if (var3 > 0 && var3 < 128) {
-			this.actionKey[var3] = 1;
-		}
-		if (var3 > 4) {
-			this.keyQueue[this.keyQueueWritePos] = var3;
+
+		if (ch > 4) {
+			this.keyQueue[this.keyQueueWritePos] = ch;
 			this.keyQueueWritePos = this.keyQueueWritePos + 1 & 0x7F;
 		}
+
 		if (InputTracking.enabled) {
-			InputTracking.keyPressed(var3);
+			InputTracking.keyPressed(ch);
 		}
 	}
 
-	public final void keyReleased(KeyEvent arg0) {
+	public final void keyReleased(KeyEvent e) {
 		this.idleCycles = 0;
-		int var2 = arg0.getKeyCode();
-		char var3 = arg0.getKeyChar();
-		if (var3 < 30) {
-			var3 = 0;
+
+		int code = e.getKeyCode();
+		char ch = e.getKeyChar();
+
+		if (ch < 30) {
+			ch = 0;
 		}
-		if (var2 == 37) {
-			var3 = 1;
+
+		if (code == 37) {
+			ch = 1;
+		} else if (code == 39) {
+			ch = 2;
+		} else if (code == 38) {
+			ch = 3;
+		} else if (code == 40) {
+			ch = 4;
+		} else if (code == 17) {
+			ch = 5;
+		} else if (code == 8) {
+			ch = '\b';
+		} else if (code == 127) {
+			ch = '\b';
+		} else if (code == 9) {
+			ch = '\t';
+		} else if (code == 10) {
+			ch = '\n';
 		}
-		if (var2 == 39) {
-			var3 = 2;
+
+		if (ch > 0 && ch < 128) {
+			this.actionKey[ch] = 0;
 		}
-		if (var2 == 38) {
-			var3 = 3;
-		}
-		if (var2 == 40) {
-			var3 = 4;
-		}
-		if (var2 == 17) {
-			var3 = 5;
-		}
-		if (var2 == 8) {
-			var3 = '\b';
-		}
-		if (var2 == 127) {
-			var3 = '\b';
-		}
-		if (var2 == 9) {
-			var3 = '\t';
-		}
-		if (var2 == 10) {
-			var3 = '\n';
-		}
-		if (var3 > 0 && var3 < 128) {
-			this.actionKey[var3] = 0;
-		}
+
 		if (InputTracking.enabled) {
-			InputTracking.keyReleased(var3);
+			InputTracking.keyReleased(ch);
 		}
 	}
 
-	public final void keyTyped(KeyEvent arg0) {
+	public final void keyTyped(KeyEvent e) {
 	}
 
 	@ObfuscatedName("a.b(I)I")
 	public final int pollKey() {
-		int var2 = -1;
+		int key = -1;
 		if (this.keyQueueWritePos != this.keyQueueReadPos) {
-			var2 = this.keyQueue[this.keyQueueReadPos];
+			key = this.keyQueue[this.keyQueueReadPos];
 			this.keyQueueReadPos = this.keyQueueReadPos + 1 & 0x7F;
 		}
-		return var2;
+		return key;
 	}
 
-	public final void focusGained(FocusEvent arg0) {
+	public final void focusGained(FocusEvent e) {
 		this.hasFocus = true;
 		this.refresh = true;
 		this.refresh();
+
 		if (InputTracking.enabled) {
 			InputTracking.focusGained();
 		}
 	}
 
-	public final void focusLost(FocusEvent arg0) {
+	public final void focusLost(FocusEvent e) {
 		this.hasFocus = false;
+
 		if (InputTracking.enabled) {
 			InputTracking.focusLost();
 		}
 	}
 
-	public final void windowActivated(WindowEvent arg0) {
+	public final void windowActivated(WindowEvent e) {
 	}
 
-	public final void windowClosed(WindowEvent arg0) {
+	public final void windowClosed(WindowEvent e) {
 	}
 
-	public final void windowClosing(WindowEvent arg0) {
+	public final void windowClosing(WindowEvent e) {
 		this.destroy();
 	}
 
-	public final void windowDeactivated(WindowEvent arg0) {
+	public final void windowDeactivated(WindowEvent e) {
 	}
 
-	public final void windowDeiconified(WindowEvent arg0) {
+	public final void windowDeiconified(WindowEvent e) {
 	}
 
-	public final void windowIconified(WindowEvent arg0) {
+	public final void windowIconified(WindowEvent e) {
 	}
 
-	public final void windowOpened(WindowEvent arg0) {
+	public final void windowOpened(WindowEvent e) {
 	}
 
 	@ObfuscatedName("a.a()V")
@@ -546,47 +571,60 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	@ObfuscatedName("a.f(I)Ljava/awt/Component;")
 	public java.awt.Component getBaseComponent() {
-		return this.frame == null ? this : this.frame;
+		if (this.frame != null) {
+			return this.frame;
+		}
+
+		return this;
 	}
 
 	@ObfuscatedName("a.a(Ljava/lang/Runnable;I)V")
-	public void startThread(Runnable arg0, int arg1) {
-		Thread var3 = new Thread(arg0);
-		var3.start();
-		var3.setPriority(arg1);
+	public void startThread(Runnable thread, int priority) {
+		Thread t = new Thread(thread);
+		t.start();
+		t.setPriority(priority);
 	}
 
 	@ObfuscatedName("a.a(IILjava/lang/String;)V")
-	public void drawProgress(int arg1, String arg2) {
+	public void drawProgress(int percent, String message) {
 		while (this.graphics == null) {
 			this.graphics = this.getBaseComponent().getGraphics();
+
 			try {
 				this.getBaseComponent().repaint();
-			} catch (Exception var10) {
+			} catch (Exception ignore) {
 			}
+
 			try {
 				Thread.sleep(1000L);
-			} catch (Exception var9) {
+			} catch (Exception ignore) {
 			}
 		}
-		Font var4 = new Font("Helvetica", 1, 13);
-		FontMetrics var5 = this.getBaseComponent().getFontMetrics(var4);
-		Font var6 = new Font("Helvetica", 0, 13);
-		this.getBaseComponent().getFontMetrics(var6);
+
+		Font bold = new Font("Helvetica", Font.BOLD, 13);
+		FontMetrics boldMetrics = this.getBaseComponent().getFontMetrics(bold);
+
+		Font plain = new Font("Helvetica", Font.PLAIN, 13);
+		FontMetrics plainMetrics = this.getBaseComponent().getFontMetrics(plain);
+
 		if (this.refresh) {
 			this.graphics.setColor(Color.black);
 			this.graphics.fillRect(0, 0, this.screenWidth, this.screenHeight);
 			this.refresh = false;
 		}
-		Color var7 = new Color(140, 17, 17);
-		int var8 = this.screenHeight / 2 - 18;
-		this.graphics.setColor(var7);
-		this.graphics.drawRect(this.screenWidth / 2 - 152, var8, 304, 34);
-		this.graphics.fillRect(this.screenWidth / 2 - 150, var8 + 2, arg1 * 3, 30);
+
+		Color background = new Color(140, 17, 17);
+
+		int y = this.screenHeight / 2 - 18;
+		this.graphics.setColor(background);
+		this.graphics.drawRect(this.screenWidth / 2 - 152, y, 304, 34);
+		this.graphics.fillRect(this.screenWidth / 2 - 150, y + 2, percent * 3, 30);
+
 		this.graphics.setColor(Color.black);
-		this.graphics.fillRect(arg1 * 3 + (this.screenWidth / 2 - 150), var8 + 2, 300 - arg1 * 3, 30);
-		this.graphics.setFont(var4);
+		this.graphics.fillRect(percent * 3 + (this.screenWidth / 2 - 150), y + 2, 300 - percent * 3, 30);
+		this.graphics.setFont(bold);
+
 		this.graphics.setColor(Color.white);
-		this.graphics.drawString(arg2, (this.screenWidth - var5.stringWidth(arg2)) / 2, var8 + 22);
+		this.graphics.drawString(message, (this.screenWidth - boldMetrics.stringWidth(message)) / 2, y + 22);
 	}
 }

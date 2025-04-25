@@ -23,20 +23,21 @@ public class MouseTracking implements Runnable {
 	@ObfuscatedName("fc.f")
 	public int[] y = new int[500];
 
-	public MouseTracking(Client arg0) {
-		this.app = arg0;
+	public MouseTracking(Client app) {
+		this.app = app;
 	}
 
 	public void run() {
 		while (this.active) {
-			Object var1 = this.lock;
-			synchronized (var1) {
+			Object sync = this.lock;
+			synchronized (sync) {
 				if (this.length < 500) {
 					this.x[this.length] = this.app.mouseX;
 					this.y[this.length] = this.app.mouseY;
 					this.length++;
 				}
 			}
+
 			try {
 				Thread.sleep(50L);
 			} catch (Exception var2) {

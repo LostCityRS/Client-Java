@@ -31,37 +31,40 @@ public class Pix8 extends Pix2D {
 	@ObfuscatedName("kb.G")
 	public byte[] pixels;
 
-	public Pix8(Jagfile arg0, String arg1, int arg2) {
-		Packet var4 = new Packet(arg0.read(arg1 + ".dat", null));
-		Packet var5 = new Packet(arg0.read("index.dat", null));
-		var5.pos = var4.g2();
-		this.width = var5.g2();
-		this.height = var5.g2();
-		int var6 = var5.g1();
+	public Pix8(Jagfile jag, String name, int sprite) {
+		Packet dat = new Packet(jag.read(name + ".dat", null));
+		Packet idx = new Packet(jag.read("index.dat", null));
+
+		idx.pos = dat.g2();
+		this.width = idx.g2();
+		this.height = idx.g2();
+
+		int var6 = idx.g1();
 		this.palette = new int[var6];
 		for (int var7 = 0; var7 < var6 - 1; var7++) {
-			this.palette[var7 + 1] = var5.g3();
+			this.palette[var7 + 1] = idx.g3();
 		}
-		for (int var8 = 0; var8 < arg2; var8++) {
-			var5.pos += 2;
-			var4.pos += var5.g2() * var5.g2();
-			var5.pos++;
+
+		for (int var8 = 0; var8 < sprite; var8++) {
+			idx.pos += 2;
+			dat.pos += idx.g2() * idx.g2();
+			idx.pos++;
 		}
-		this.cropLeft = var5.g1();
-		this.cropTop = var5.g1();
-		this.cropRight = var5.g2();
-		this.cropBottom = var5.g2();
-		int var9 = var5.g1();
+		this.cropLeft = idx.g1();
+		this.cropTop = idx.g1();
+		this.cropRight = idx.g2();
+		this.cropBottom = idx.g2();
+		int var9 = idx.g1();
 		int var10 = this.cropBottom * this.cropRight;
 		this.pixels = new byte[var10];
 		if (var9 == 0) {
 			for (int var11 = 0; var11 < var10; var11++) {
-				this.pixels[var11] = var4.g1b();
+				this.pixels[var11] = dat.g1b();
 			}
 		} else if (var9 == 1) {
 			for (int var12 = 0; var12 < this.cropRight; var12++) {
 				for (int var13 = 0; var13 < this.cropBottom; var13++) {
-					this.pixels[this.cropRight * var13 + var12] = var4.g1b();
+					this.pixels[this.cropRight * var13 + var12] = dat.g1b();
 				}
 			}
 		}
