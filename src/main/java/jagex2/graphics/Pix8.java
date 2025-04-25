@@ -159,9 +159,9 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("kb.a(BII)V")
-	public void draw(int arg1, int arg2) {
-		int var4 = this.cropLeft + arg1;
-		int var5 = this.cropTop + arg2;
+	public void draw(int x, int y) {
+		int var4 = this.cropLeft + x;
+		int var5 = this.cropTop + y;
 		int var6 = Pix2D.width2d * var5 + var4;
 		int var7 = 0;
 		int var8 = this.cropBottom;

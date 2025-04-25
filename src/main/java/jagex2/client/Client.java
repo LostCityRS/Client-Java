@@ -2023,7 +2023,7 @@ public class Client extends GameShell {
 			if (this.stream != null) {
 				this.stream.close();
 			}
-		} catch (Exception var2) {
+		} catch (Exception ignore) {
 		}
 
 		this.stream = null;
@@ -7965,26 +7965,30 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.c(IILmb;)V")
-	public final void getPlayerPos(int arg1, Packet arg2) {
+	public final void getPlayerPos(int size, Packet buf) {
 		this.entityRemovalCount = 0;
 		this.entityUpdateCount = 0;
-		this.getPlayerLocal(arg1, arg2);
-		this.getPlayerOldVis(arg1, arg2);
-		this.getPlayerNewVis(arg2, arg1);
-		this.getPlayerExtended(arg2, arg1);
-		for (int var4 = 0; var4 < this.entityRemovalCount; var4++) {
-			int var6 = this.entityRemovalIds[var4];
-			if (loopCycle != this.players[var6].cycle) {
-				this.players[var6] = null;
+
+		this.getPlayerLocal(size, buf);
+		this.getPlayerOldVis(size, buf);
+		this.getPlayerNewVis(buf, size);
+		this.getPlayerExtended(buf, size);
+
+		for (int i = 0; i < this.entityRemovalCount; i++) {
+			int index = this.entityRemovalIds[i];
+			if (loopCycle != this.players[index].cycle) {
+				this.players[index] = null;
 			}
 		}
-		if (arg2.pos != arg1) {
-			SignLink.reporterror("Error packet size mismatch in getplayer pos:" + arg2.pos + " psize:" + arg1);
+
+		if (buf.pos != size) {
+			SignLink.reporterror("Error packet size mismatch in getplayer pos:" + buf.pos + " psize:" + size);
 			throw new RuntimeException("eek");
 		}
-		for (int var5 = 0; var5 < this.playerCount; var5++) {
-			if (this.players[this.playerIds[var5]] == null) {
-				SignLink.reporterror(this.username + " null entry in pl list - pos:" + var5 + " size:" + this.playerCount);
+
+		for (int i = 0; i < this.playerCount; i++) {
+			if (this.players[this.playerIds[i]] == null) {
+				SignLink.reporterror(this.username + " null entry in pl list - pos:" + i + " size:" + this.playerCount);
 				throw new RuntimeException("eek");
 			}
 		}
@@ -7992,39 +7996,46 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(ILmb;I)V")
-	public final void getPlayerLocal(int arg0, Packet arg1) {
-		arg1.bits();
-		int var4 = arg1.gBit(1);
-		if (var4 == 0) {
+	public final void getPlayerLocal(int size, Packet buf) {
+		buf.bits();
+
+		int info = buf.gBit(1);
+		if (info == 0) {
 			return;
 		}
-		int var5 = arg1.gBit(2);
-		if (var5 == 0) {
+
+		int op = buf.gBit(2);
+		if (op == 0) {
 			this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
-		} else if (var5 == 1) {
-			int var7 = arg1.gBit(3);
-			localPlayer.move(var7, false);
-			int var8 = arg1.gBit(1);
-			if (var8 == 1) {
+		} else if (op == 1) {
+			int walkDir = buf.gBit(3);
+			localPlayer.move(walkDir, false);
+
+			int extendedInfo = buf.gBit(1);
+			if (extendedInfo == 1) {
 				this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
 			}
-		} else if (var5 == 2) {
-			int var9 = arg1.gBit(3);
-			localPlayer.move(var9, true);
-			int var10 = arg1.gBit(3);
-			localPlayer.move(var10, true);
-			int var11 = arg1.gBit(1);
-			if (var11 == 1) {
+		} else if (op == 2) {
+			int walkDir = buf.gBit(3);
+			localPlayer.move(walkDir, true);
+
+			int runDir = buf.gBit(3);
+			localPlayer.move(runDir, true);
+
+			int extendedInfo = buf.gBit(1);
+			if (extendedInfo == 1) {
 				this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
 			}
-		} else if (var5 == 3) {
-			this.currentLevel = arg1.gBit(2);
-			int var12 = arg1.gBit(7);
-			int var13 = arg1.gBit(7);
-			int var14 = arg1.gBit(1);
-			localPlayer.move(var14 == 1, var12, var13);
-			int var15 = arg1.gBit(1);
-			if (var15 == 1) {
+		} else if (op == 3) {
+			this.currentLevel = buf.gBit(2);
+
+			int localX = buf.gBit(7);
+			int localZ = buf.gBit(7);
+			int jump = buf.gBit(1);
+			localPlayer.move(jump == 1, localX, localZ);
+
+			int extendedInfo = buf.gBit(1);
+			if (extendedInfo == 1) {
 				this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
 			}
 		}
@@ -8032,53 +8043,64 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.b(ILmb;I)V")
-	public final void getPlayerOldVis(int arg0, Packet arg1) {
-		int var4 = arg1.gBit(8);
-		if (var4 < this.playerCount) {
-			for (int var5 = var4; var5 < this.playerCount; var5++) {
-				this.entityRemovalIds[this.entityRemovalCount++] = this.playerIds[var5];
+	public final void getPlayerOldVis(int size, Packet buf) {
+		int count = buf.gBit(8);
+
+		if (count < this.playerCount) {
+			for (int i = count; i < this.playerCount; i++) {
+				this.entityRemovalIds[this.entityRemovalCount++] = this.playerIds[i];
 			}
 		}
-		if (var4 > this.playerCount) {
+
+		if (count > this.playerCount) {
 			SignLink.reporterror(this.username + " Too many players");
 			throw new RuntimeException("eek");
 		}
+
 		this.playerCount = 0;
-		for (int var6 = 0; var6 < var4; var6++) {
-			int var7 = this.playerIds[var6];
-			PlayerEntity var8 = this.players[var7];
-			int var9 = arg1.gBit(1);
-			if (var9 == 0) {
-				this.playerIds[this.playerCount++] = var7;
-				var8.cycle = loopCycle;
+
+		for (int i = 0; i < count; i++) {
+			int index = this.playerIds[i];
+			PlayerEntity player = this.players[index];
+
+			int info = buf.gBit(1);
+			if (info == 0) {
+				this.playerIds[this.playerCount++] = index;
+				player.cycle = loopCycle;
 			} else {
-				int var10 = arg1.gBit(2);
-				if (var10 == 0) {
-					this.playerIds[this.playerCount++] = var7;
-					var8.cycle = loopCycle;
-					this.entityUpdateIds[this.entityUpdateCount++] = var7;
-				} else if (var10 == 1) {
-					this.playerIds[this.playerCount++] = var7;
-					var8.cycle = loopCycle;
-					int var11 = arg1.gBit(3);
-					var8.move(var11, false);
-					int var12 = arg1.gBit(1);
-					if (var12 == 1) {
-						this.entityUpdateIds[this.entityUpdateCount++] = var7;
+				int op = buf.gBit(2);
+				if (op == 0) {
+					this.playerIds[this.playerCount++] = index;
+					player.cycle = loopCycle;
+
+					this.entityUpdateIds[this.entityUpdateCount++] = index;
+				} else if (op == 1) {
+					this.playerIds[this.playerCount++] = index;
+					player.cycle = loopCycle;
+
+					int walkDir = buf.gBit(3);
+					player.move(walkDir, false);
+
+					int extendedInfo = buf.gBit(1);
+					if (extendedInfo == 1) {
+						this.entityUpdateIds[this.entityUpdateCount++] = index;
 					}
-				} else if (var10 == 2) {
-					this.playerIds[this.playerCount++] = var7;
-					var8.cycle = loopCycle;
-					int var13 = arg1.gBit(3);
-					var8.move(var13, true);
-					int var14 = arg1.gBit(3);
-					var8.move(var14, true);
-					int var15 = arg1.gBit(1);
+				} else if (op == 2) {
+					this.playerIds[this.playerCount++] = index;
+					player.cycle = loopCycle;
+
+					int walkDir = buf.gBit(3);
+					player.move(walkDir, true);
+
+					int runDir = buf.gBit(3);
+					player.move(runDir, true);
+
+					int var15 = buf.gBit(1);
 					if (var15 == 1) {
-						this.entityUpdateIds[this.entityUpdateCount++] = var7;
+						this.entityUpdateIds[this.entityUpdateCount++] = index;
 					}
-				} else if (var10 == 3) {
-					this.entityRemovalIds[this.entityRemovalCount++] = var7;
+				} else if (op == 3) {
+					this.entityRemovalIds[this.entityRemovalCount++] = index;
 				}
 			}
 		}
@@ -8086,187 +8108,223 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(Lmb;II)V")
-	public final void getPlayerNewVis(Packet arg0, int arg1) {
-		while (arg0.bitPos + 10 < arg1 * 8) {
-			int var4 = arg0.gBit(11);
-			if (var4 == 2047) {
+	public final void getPlayerNewVis(Packet buf, int size) {
+		while (buf.bitPos + 10 < size * 8) {
+			int index = buf.gBit(11);
+			if (index == 2047) {
 				break;
 			}
-			if (this.players[var4] == null) {
-				this.players[var4] = new PlayerEntity();
-				if (this.playerAppearanceBuffer[var4] != null) {
-					this.players[var4].read(this.playerAppearanceBuffer[var4]);
+
+			if (this.players[index] == null) {
+				this.players[index] = new PlayerEntity();
+
+				if (this.playerAppearanceBuffer[index] != null) {
+					this.players[index].read(this.playerAppearanceBuffer[index]);
 				}
 			}
-			this.playerIds[this.playerCount++] = var4;
-			PlayerEntity var5 = this.players[var4];
-			var5.cycle = loopCycle;
-			int var6 = arg0.gBit(5);
-			if (var6 > 15) {
-				var6 -= 32;
+
+			this.playerIds[this.playerCount++] = index;
+			PlayerEntity player = this.players[index];
+
+			player.cycle = loopCycle;
+
+			int dx = buf.gBit(5);
+			if (dx > 15) {
+				dx -= 32;
 			}
-			int var7 = arg0.gBit(5);
-			if (var7 > 15) {
-				var7 -= 32;
+
+			int dz = buf.gBit(5);
+			if (dz > 15) {
+				dz -= 32;
 			}
-			int var8 = arg0.gBit(1);
-			var5.move(var8 == 1, localPlayer.routeTileX[0] + var6, localPlayer.routeTileZ[0] + var7);
-			int var9 = arg0.gBit(1);
-			if (var9 == 1) {
-				this.entityUpdateIds[this.entityUpdateCount++] = var4;
+
+			int jump = buf.gBit(1);
+			player.move(jump == 1, localPlayer.routeTileX[0] + dx, localPlayer.routeTileZ[0] + dz);
+
+			int extendedInfo = buf.gBit(1);
+			if (extendedInfo == 1) {
+				this.entityUpdateIds[this.entityUpdateCount++] = index;
 			}
 		}
-		arg0.bytes();
+
+		buf.bytes();
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(Lmb;IB)V")
-	public final void getPlayerExtended(Packet arg0, int arg1) {
-		for (int var5 = 0; var5 < this.entityUpdateCount; var5++) {
-			int var6 = this.entityUpdateIds[var5];
-			PlayerEntity var7 = this.players[var6];
-			int var8 = arg0.g1();
-			if ((var8 & 0x80) == 128) {
-				var8 += arg0.g1() << 8;
+	public final void getPlayerExtended(Packet buf, int size) {
+		for (int i = 0; i < this.entityUpdateCount; i++) {
+			int index = this.entityUpdateIds[i];
+			PlayerEntity player = this.players[index];
+
+			int mask = buf.g1();
+			if ((mask & 0x80) == 128) {
+				mask += buf.g1() << 8;
 			}
-			this.getPlayerExtended(var8, arg0, var6, var7);
+
+			this.getPlayerExtended(mask, buf, index, player);
 		}
 	}
 
 	@ObfuscatedName("client.a(ILmb;IILbb;)V")
-	public final void getPlayerExtended(int mask, Packet arg1, int arg3, PlayerEntity arg4) {
+	public final void getPlayerExtended(int mask, Packet buf, int index, PlayerEntity player) {
 		if ((mask & 0x1) == 1) {
-			int var6 = arg1.g1();
-			byte[] var7 = new byte[var6];
-			Packet var8 = new Packet(var7);
-			arg1.gdata(var7, 0, var6);
-			this.playerAppearanceBuffer[arg3] = var8;
-			arg4.read(var8);
+			// APPEARANCE
+			int length = buf.g1();
+			byte[] data = new byte[length];
+			Packet appearance = new Packet(data);
+			buf.gdata(data, 0, length);
+			this.playerAppearanceBuffer[index] = appearance;
+			player.read(appearance);
 		}
+
 		if ((mask & 0x2) == 2) {
-			int var9 = arg1.g2();
-			if (var9 == 65535) {
-				var9 = -1;
+			// ANIM
+			int seqId = buf.g2();
+			if (seqId == 65535) {
+				seqId = -1;
 			}
-			if (arg4.primarySeqId == var9) {
-				arg4.primarySeqLoop = 0;
+
+			if (player.primarySeqId == seqId) {
+				player.primarySeqLoop = 0;
 			}
-			int var10 = arg1.g1();
-			if (arg4.primarySeqId == var9 && var9 != -1) {
-				int var11 = SeqType.types[var9].replacemode;
-				if (var11 == 1) {
-					arg4.primarySeqFrame = 0;
-					arg4.primarySeqCycle = 0;
-					arg4.primarySeqDelay = var10;
-					arg4.primarySeqLoop = 0;
+
+			int delay = buf.g1();
+			if (player.primarySeqId == seqId && seqId != -1) {
+				int replaceMode = SeqType.types[seqId].replacemode;
+
+				if (replaceMode == 1) {
+					player.primarySeqFrame = 0;
+					player.primarySeqCycle = 0;
+					player.primarySeqDelay = delay;
+					player.primarySeqLoop = 0;
+				} else if (replaceMode == 2) {
+					player.primarySeqLoop = 0;
 				}
-				if (var11 == 2) {
-					arg4.primarySeqLoop = 0;
-				}
-			} else if (var9 == -1 || arg4.primarySeqId == -1 || SeqType.types[var9].priority >= SeqType.types[arg4.primarySeqId].priority) {
-				arg4.primarySeqId = var9;
-				arg4.primarySeqFrame = 0;
-				arg4.primarySeqCycle = 0;
-				arg4.primarySeqDelay = var10;
-				arg4.primarySeqLoop = 0;
-				arg4.seqPathLength = arg4.pathLength;
+			} else if (seqId == -1 || player.primarySeqId == -1 || SeqType.types[seqId].priority >= SeqType.types[player.primarySeqId].priority) {
+				player.primarySeqId = seqId;
+				player.primarySeqFrame = 0;
+				player.primarySeqCycle = 0;
+				player.primarySeqDelay = delay;
+				player.primarySeqLoop = 0;
+				player.seqPathLength = player.pathLength;
 			}
 		}
+
 		if ((mask & 0x4) == 4) {
-			arg4.targetId = arg1.g2();
-			if (arg4.targetId == 65535) {
-				arg4.targetId = -1;
+			// FACE_ENTITY
+			player.targetId = buf.g2();
+			if (player.targetId == 65535) {
+				player.targetId = -1;
 			}
 		}
+
 		if ((mask & 0x8) == 8) {
-			arg4.chatMessage = arg1.gjstr();
-			arg4.chatColour = 0;
-			arg4.chatEffect = 0;
-			arg4.chatTimer = 150;
-			this.addMessage(arg4.chatMessage, arg4.name, 2);
+			// SAY
+			player.chatMessage = buf.gjstr();
+			player.chatColour = 0;
+			player.chatEffect = 0;
+			player.chatTimer = 150;
+			this.addMessage(player.chatMessage, player.name, 2);
 		}
+
 		if ((mask & 0x10) == 16) {
-			int var12 = arg1.g1();
-			int var13 = arg1.g1();
-			arg4.hit(var13, var12);
-			arg4.combatCycle = loopCycle + 300;
-			arg4.health = arg1.g1();
-			arg4.totalHealth = arg1.g1();
+			// DAMAGE
+			int damage = buf.g1();
+			int damageType = buf.g1();
+			player.hit(damageType, damage);
+			player.combatCycle = loopCycle + 300;
+			player.health = buf.g1();
+			player.totalHealth = buf.g1();
 		}
+
 		if ((mask & 0x20) == 32) {
-			arg4.targetTileX = arg1.g2();
-			arg4.targetTileZ = arg1.g2();
+			// FACE_COORD
+			player.targetTileX = buf.g2();
+			player.targetTileZ = buf.g2();
 		}
+
 		if ((mask & 0x40) == 64) {
-			int var14 = arg1.g2();
-			int var15 = arg1.g1();
-			int var16 = arg1.g1();
-			int var17 = arg1.pos;
-			if (arg4.name != null && arg4.visible) {
-				long var18 = JString.toBase37(arg4.name);
-				boolean var20 = false;
-				if (var15 <= 1) {
-					for (int var21 = 0; var21 < this.ignoreCount; var21++) {
-						if (this.ignoreName37[var21] == var18) {
-							var20 = true;
+			// CHAT
+			int colourEffect = buf.g2();
+			int type = buf.g1();
+			int length = buf.g1();
+			int start = buf.pos;
+
+			if (player.name != null && player.visible) {
+				long username37 = JString.toBase37(player.name);
+				boolean ignored = false;
+
+				if (type <= 1) {
+					for (int i = 0; i < this.ignoreCount; i++) {
+						if (this.ignoreName37[i] == username37) {
+							ignored = true;
 							break;
 						}
 					}
 				}
-				if (!var20 && this.overrideChat == 0) {
+
+				if (!ignored && this.overrideChat == 0) {
 					try {
-						String var22 = WordPack.unpack(var16, arg1);
-						String var23 = WordFilter.filter(var22);
-						arg4.chatMessage = var23;
-						arg4.chatColour = var14 >> 8;
-						arg4.chatEffect = var14 & 0xFF;
-						arg4.chatTimer = 150;
-						if (var15 == 2 || var15 == 3) {
-							this.addMessage(var23, "@cr2@" + arg4.name, 1);
-						} else if (var15 == 1) {
-							this.addMessage(var23, "@cr1@" + arg4.name, 1);
+						String uncompressed = WordPack.unpack(length, buf);
+						String filtered = WordFilter.filter(uncompressed);
+						player.chatMessage = filtered;
+						player.chatColour = colourEffect >> 8;
+						player.chatEffect = colourEffect & 0xFF;
+						player.chatTimer = 150;
+
+						if (type == 2 || type == 3) {
+							this.addMessage(filtered, "@cr2@" + player.name, 1);
+						} else if (type == 1) {
+							this.addMessage(filtered, "@cr1@" + player.name, 1);
 						} else {
-							this.addMessage(var23, arg4.name, 2);
+							this.addMessage(filtered, player.name, 2);
 						}
-					} catch (Exception var28) {
+					} catch (Exception ignore) {
 						SignLink.reporterror("cde2");
 					}
 				}
 			}
-			arg1.pos = var16 + var17;
+
+			buf.pos = length + start;
 		}
+
 		if ((mask & 0x100) == 256) {
-			arg4.spotanimId = arg1.g2();
-			int var25 = arg1.g4();
-			arg4.spotanimHeight = var25 >> 16;
-			arg4.spotanimLastCycle = (var25 & 0xFFFF) + loopCycle;
-			arg4.spotanimFrame = 0;
-			arg4.spotanimCycle = 0;
-			if (arg4.spotanimLastCycle > loopCycle) {
-				arg4.spotanimFrame = -1;
+			// SPOTANIM
+			player.spotanimId = buf.g2();
+			int heightDelay = buf.g4();
+			player.spotanimHeight = heightDelay >> 16;
+			player.spotanimLastCycle = (heightDelay & 0xFFFF) + loopCycle;
+			player.spotanimFrame = 0;
+			player.spotanimCycle = 0;
+			if (player.spotanimLastCycle > loopCycle) {
+				player.spotanimFrame = -1;
 			}
-			if (arg4.spotanimId == 65535) {
-				arg4.spotanimId = -1;
+			if (player.spotanimId == 65535) {
+				player.spotanimId = -1;
 			}
 		}
+
 		if ((mask & 0x200) == 512) {
-			arg4.forceMoveStartSceneTileX = arg1.g1();
-			arg4.forceMoveStartSceneTileZ = arg1.g1();
-			arg4.forceMoveEndSceneTileX = arg1.g1();
-			arg4.forceMoveEndSceneTileZ = arg1.g1();
-			arg4.forceMoveEndCycle = arg1.g2() + loopCycle;
-			arg4.forceMoveStartCycle = arg1.g2() + loopCycle;
-			arg4.forceMoveFaceDirection = arg1.g1();
-			arg4.resetPath();
+			// EXACTMOVE
+			player.forceMoveStartSceneTileX = buf.g1();
+			player.forceMoveStartSceneTileZ = buf.g1();
+			player.forceMoveEndSceneTileX = buf.g1();
+			player.forceMoveEndSceneTileZ = buf.g1();
+			player.forceMoveEndCycle = buf.g2() + loopCycle;
+			player.forceMoveStartCycle = buf.g2() + loopCycle;
+			player.forceMoveFaceDirection = buf.g1();
+			player.resetPath();
 		}
 
 		if ((mask & 0x400) == 1024) {
-			int var26 = arg1.g1();
-			int var27 = arg1.g1();
-			arg4.hit(var27, var26);
-			arg4.combatCycle = loopCycle + 300;
-			arg4.health = arg1.g1();
-			arg4.totalHealth = arg1.g1();
+			// DAMAGE_STACK
+			int damage = buf.g1();
+			int damageType = buf.g1();
+			player.hit(damageType, damage);
+			player.combatCycle = loopCycle + 300;
+			player.health = buf.g1();
+			player.totalHealth = buf.g1();
 		}
 	}
 
@@ -8303,54 +8361,66 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(Lmb;BI)V")
-	public final void getNpcPosOldVis(Packet arg0, int arg2) {
-		arg0.bits();
-		int var4 = arg0.gBit(8);
-		if (var4 < this.npcCount) {
-			for (int var5 = var4; var5 < this.npcCount; var5++) {
+	public final void getNpcPosOldVis(Packet buf, int size) {
+		buf.bits();
+
+		int count = buf.gBit(8);
+		if (count < this.npcCount) {
+			for (int var5 = count; var5 < this.npcCount; var5++) {
 				this.entityRemovalIds[this.entityRemovalCount++] = this.npcIds[var5];
 			}
 		}
-		if (var4 > this.npcCount) {
+
+		if (count > this.npcCount) {
 			SignLink.reporterror(this.username + " Too many npcs");
 			throw new RuntimeException("eek");
 		}
+
 		this.npcCount = 0;
-		for (int var6 = 0; var6 < var4; var6++) {
-			int var7 = this.npcIds[var6];
-			NpcEntity var8 = this.npcs[var7];
-			int var9 = arg0.gBit(1);
-			if (var9 == 0) {
-				this.npcIds[this.npcCount++] = var7;
-				var8.cycle = loopCycle;
+
+		for (int i = 0; i < count; i++) {
+			int index = this.npcIds[i];
+			NpcEntity npc = this.npcs[index];
+
+			int info = buf.gBit(1);
+			if (info == 0) {
+				this.npcIds[this.npcCount++] = index;
+				npc.cycle = loopCycle;
 			} else {
-				int var10 = arg0.gBit(2);
-				if (var10 == 0) {
-					this.npcIds[this.npcCount++] = var7;
-					var8.cycle = loopCycle;
-					this.entityUpdateIds[this.entityUpdateCount++] = var7;
-				} else if (var10 == 1) {
-					this.npcIds[this.npcCount++] = var7;
-					var8.cycle = loopCycle;
-					int var11 = arg0.gBit(3);
-					var8.move(var11, false);
-					int var12 = arg0.gBit(1);
-					if (var12 == 1) {
-						this.entityUpdateIds[this.entityUpdateCount++] = var7;
+				int op = buf.gBit(2);
+
+				if (op == 0) {
+					this.npcIds[this.npcCount++] = index;
+					npc.cycle = loopCycle;
+
+					this.entityUpdateIds[this.entityUpdateCount++] = index;
+				} else if (op == 1) {
+					this.npcIds[this.npcCount++] = index;
+					npc.cycle = loopCycle;
+
+					int walkDir = buf.gBit(3);
+					npc.move(walkDir, false);
+
+					int extendedInfo = buf.gBit(1);
+					if (extendedInfo == 1) {
+						this.entityUpdateIds[this.entityUpdateCount++] = index;
 					}
-				} else if (var10 == 2) {
-					this.npcIds[this.npcCount++] = var7;
-					var8.cycle = loopCycle;
-					int var13 = arg0.gBit(3);
-					var8.move(var13, true);
-					int var14 = arg0.gBit(3);
-					var8.move(var14, true);
-					int var15 = arg0.gBit(1);
-					if (var15 == 1) {
-						this.entityUpdateIds[this.entityUpdateCount++] = var7;
+				} else if (op == 2) {
+					this.npcIds[this.npcCount++] = index;
+					npc.cycle = loopCycle;
+
+					int walkDir = buf.gBit(3);
+					npc.move(walkDir, true);
+
+					int runDir = buf.gBit(3);
+					npc.move(runDir, true);
+
+					int extendedInfo = buf.gBit(1);
+					if (extendedInfo == 1) {
+						this.entityUpdateIds[this.entityUpdateCount++] = index;
 					}
-				} else if (var10 == 3) {
-					this.entityRemovalIds[this.entityRemovalCount++] = var7;
+				} else if (op == 3) {
+					this.entityRemovalIds[this.entityRemovalCount++] = index;
 				}
 			}
 		}
@@ -8358,129 +8428,157 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(IZLmb;)V")
-	public final void getNpcPosNewVis(int arg0, Packet arg2) {
-		while (arg2.bitPos + 21 < arg0 * 8) {
-			int var4 = arg2.gBit(13);
-			if (var4 == 8191) {
+	public final void getNpcPosNewVis(int size, Packet buf) {
+		while (buf.bitPos + 21 < size * 8) {
+			int index = buf.gBit(13);
+			if (index == 8191) {
 				break;
 			}
-			if (this.npcs[var4] == null) {
-				this.npcs[var4] = new NpcEntity();
+
+			if (this.npcs[index] == null) {
+				this.npcs[index] = new NpcEntity();
 			}
-			NpcEntity var5 = this.npcs[var4];
-			this.npcIds[this.npcCount++] = var4;
-			var5.cycle = loopCycle;
-			var5.type = NpcType.get(arg2.gBit(11));
-			var5.size = var5.type.size;
-			var5.seqWalkId = var5.type.walkanim;
-			var5.seqTurnAroundId = var5.type.walkanim_b;
-			var5.seqTurnLeftId = var5.type.walkanim_r;
-			var5.seqTurnRightId = var5.type.walkanim_l;
-			var5.seqStandId = var5.type.readyanim;
-			int var6 = arg2.gBit(5);
-			if (var6 > 15) {
-				var6 -= 32;
+
+			NpcEntity npc = this.npcs[index];
+			this.npcIds[this.npcCount++] = index;
+
+			npc.cycle = loopCycle;
+			npc.type = NpcType.get(buf.gBit(11));
+			npc.size = npc.type.size;
+			npc.seqWalkId = npc.type.walkanim;
+			npc.seqTurnAroundId = npc.type.walkanim_b;
+			npc.seqTurnLeftId = npc.type.walkanim_r;
+			npc.seqTurnRightId = npc.type.walkanim_l;
+			npc.seqStandId = npc.type.readyanim;
+
+			int dx = buf.gBit(5);
+			if (dx > 15) {
+				dx -= 32;
 			}
-			int var7 = arg2.gBit(5);
-			if (var7 > 15) {
-				var7 -= 32;
+
+			int dz = buf.gBit(5);
+			if (dz > 15) {
+				dz -= 32;
 			}
-			var5.move(false, localPlayer.routeTileX[0] + var6, localPlayer.routeTileZ[0] + var7);
-			int var8 = arg2.gBit(1);
-			if (var8 == 1) {
-				this.entityUpdateIds[this.entityUpdateCount++] = var4;
+
+			npc.move(false, localPlayer.routeTileX[0] + dx, localPlayer.routeTileZ[0] + dz);
+
+			int extendedInfo = buf.gBit(1);
+			if (extendedInfo == 1) {
+				this.entityUpdateIds[this.entityUpdateCount++] = index;
 			}
 		}
-		arg2.bytes();
+
+		buf.bytes();
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(ZLmb;I)V")
-	public final void getNpcPosExtended(Packet arg1, int arg2) {
-		for (int var5 = 0; var5 < this.entityUpdateCount; var5++) {
-			int var6 = this.entityUpdateIds[var5];
-			NpcEntity var7 = this.npcs[var6];
-			int var8 = arg1.g1();
-			if ((var8 & 0x1) == 1) {
-				int var9 = arg1.g1();
-				int var10 = arg1.g1();
-				var7.hit(var10, var9);
-				var7.combatCycle = loopCycle + 300;
-				var7.health = arg1.g1();
-				var7.totalHealth = arg1.g1();
+	public final void getNpcPosExtended(Packet buf, int size) {
+		for (int i = 0; i < this.entityUpdateCount; i++) {
+			int id = this.entityUpdateIds[i];
+			NpcEntity npc = this.npcs[id];
+
+			int mask = buf.g1();
+
+			if ((mask & 0x1) == 1) {
+				// DAMAGE_STACK
+				int damage = buf.g1();
+				int damageType = buf.g1();
+				npc.hit(damageType, damage);
+				npc.combatCycle = loopCycle + 300;
+				npc.health = buf.g1();
+				npc.totalHealth = buf.g1();
 			}
-			if ((var8 & 0x2) == 2) {
-				int var11 = arg1.g2();
-				if (var11 == 65535) {
-					var11 = -1;
+
+			if ((mask & 0x2) == 2) {
+				// ANIM
+				int seqId = buf.g2();
+				if (seqId == 65535) {
+					seqId = -1;
 				}
-				if (var7.primarySeqId == var11) {
-					var7.primarySeqLoop = 0;
+				if (npc.primarySeqId == seqId) {
+					npc.primarySeqLoop = 0;
 				}
-				int var12 = arg1.g1();
-				if (var7.primarySeqId == var11 && var11 != -1) {
-					int var13 = SeqType.types[var11].replacemode;
+
+				int delay = buf.g1();
+
+				if (npc.primarySeqId == seqId && seqId != -1) {
+					int var13 = SeqType.types[seqId].replacemode;
+
 					if (var13 == 1) {
-						var7.primarySeqFrame = 0;
-						var7.primarySeqCycle = 0;
-						var7.primarySeqDelay = var12;
-						var7.primarySeqLoop = 0;
+						npc.primarySeqFrame = 0;
+						npc.primarySeqCycle = 0;
+						npc.primarySeqDelay = delay;
+						npc.primarySeqLoop = 0;
 					}
 					if (var13 == 2) {
-						var7.primarySeqLoop = 0;
+						npc.primarySeqLoop = 0;
 					}
-				} else if (var11 == -1 || var7.primarySeqId == -1 || SeqType.types[var11].priority >= SeqType.types[var7.primarySeqId].priority) {
-					var7.primarySeqId = var11;
-					var7.primarySeqFrame = 0;
-					var7.primarySeqCycle = 0;
-					var7.primarySeqDelay = var12;
-					var7.primarySeqLoop = 0;
-					var7.seqPathLength = var7.pathLength;
+				} else if (seqId == -1 || npc.primarySeqId == -1 || SeqType.types[seqId].priority >= SeqType.types[npc.primarySeqId].priority) {
+					npc.primarySeqId = seqId;
+					npc.primarySeqFrame = 0;
+					npc.primarySeqCycle = 0;
+					npc.primarySeqDelay = delay;
+					npc.primarySeqLoop = 0;
+					npc.seqPathLength = npc.pathLength;
 				}
 			}
-			if ((var8 & 0x4) == 4) {
-				var7.targetId = arg1.g2();
-				if (var7.targetId == 65535) {
-					var7.targetId = -1;
+
+			if ((mask & 0x4) == 4) {
+				// FACE_ENTITY
+				npc.targetId = buf.g2();
+				if (npc.targetId == 65535) {
+					npc.targetId = -1;
 				}
 			}
-			if ((var8 & 0x8) == 8) {
-				var7.chatMessage = arg1.gjstr();
-				var7.chatTimer = 100;
+
+			if ((mask & 0x8) == 8) {
+				// SAY
+				npc.chatMessage = buf.gjstr();
+				npc.chatTimer = 100;
 			}
-			if ((var8 & 0x10) == 16) {
-				int var14 = arg1.g1();
-				int var15 = arg1.g1();
-				var7.hit(var15, var14);
-				var7.combatCycle = loopCycle + 300;
-				var7.health = arg1.g1();
-				var7.totalHealth = arg1.g1();
+
+			if ((mask & 0x10) == 16) {
+				// DAMAGE
+				int damage = buf.g1();
+				int damageType = buf.g1();
+				npc.hit(damageType, damage);
+				npc.combatCycle = loopCycle + 300;
+				npc.health = buf.g1();
+				npc.totalHealth = buf.g1();
 			}
-			if ((var8 & 0x20) == 32) {
-				var7.type = NpcType.get(arg1.g2());
-				var7.seqWalkId = var7.type.walkanim;
-				var7.seqTurnAroundId = var7.type.walkanim_b;
-				var7.seqTurnLeftId = var7.type.walkanim_r;
-				var7.seqTurnRightId = var7.type.walkanim_l;
-				var7.seqStandId = var7.type.readyanim;
+
+			if ((mask & 0x20) == 32) {
+				// CHANGETYPE
+				npc.type = NpcType.get(buf.g2());
+				npc.seqWalkId = npc.type.walkanim;
+				npc.seqTurnAroundId = npc.type.walkanim_b;
+				npc.seqTurnLeftId = npc.type.walkanim_r;
+				npc.seqTurnRightId = npc.type.walkanim_l;
+				npc.seqStandId = npc.type.readyanim;
 			}
-			if ((var8 & 0x40) == 64) {
-				var7.spotanimId = arg1.g2();
-				int var16 = arg1.g4();
-				var7.spotanimHeight = var16 >> 16;
-				var7.spotanimLastCycle = (var16 & 0xFFFF) + loopCycle;
-				var7.spotanimFrame = 0;
-				var7.spotanimCycle = 0;
-				if (var7.spotanimLastCycle > loopCycle) {
-					var7.spotanimFrame = -1;
+
+			if ((mask & 0x40) == 64) {
+				// SPOTANIM
+				npc.spotanimId = buf.g2();
+				int var16 = buf.g4();
+				npc.spotanimHeight = var16 >> 16;
+				npc.spotanimLastCycle = (var16 & 0xFFFF) + loopCycle;
+				npc.spotanimFrame = 0;
+				npc.spotanimCycle = 0;
+				if (npc.spotanimLastCycle > loopCycle) {
+					npc.spotanimFrame = -1;
 				}
-				if (var7.spotanimId == 65535) {
-					var7.spotanimId = -1;
+				if (npc.spotanimId == 65535) {
+					npc.spotanimId = -1;
 				}
 			}
-			if ((var8 & 0x80) == 128) {
-				var7.targetTileX = arg1.g2();
-				var7.targetTileZ = arg1.g2();
+
+			if ((mask & 0x80) == 128) {
+				// FACE_COORD
+				npc.targetTileX = buf.g2();
+				npc.targetTileZ = buf.g2();
 			}
 		}
 	}
@@ -8488,93 +8586,101 @@ public class Client extends GameShell {
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.k(B)V")
 	public final void showContextMenu() {
-		int var2 = this.fontBold12.stringWidth("Choose Option");
-		for (int var3 = 0; var3 < this.menuSize; var3++) {
-			int var11 = this.fontBold12.stringWidth(this.menuOption[var3]);
-			if (var11 > var2) {
-				var2 = var11;
+		int width = this.fontBold12.stringWidth("Choose Option");
+
+		for (int i = 0; i < this.menuSize; i++) {
+			int maxWidth = this.fontBold12.stringWidth(this.menuOption[i]);
+			if (maxWidth > width) {
+				width = maxWidth;
 			}
 		}
-		var2 += 8;
-		int var4 = this.menuSize * 15 + 21;
+
+		width += 8;
+		int height = this.menuSize * 15 + 21;
+
 		if (super.mouseClickX > 4 && super.mouseClickY > 4 && super.mouseClickX < 516 && super.mouseClickY < 338) {
-			int var5 = super.mouseClickX - 4 - var2 / 2;
-			if (var2 + var5 > 512) {
-				var5 = 512 - var2;
+			int x = super.mouseClickX - 4 - width / 2;
+			if (width + x > 512) {
+				x = 512 - width;
+			} else if (x < 0) {
+				x = 0;
 			}
-			if (var5 < 0) {
-				var5 = 0;
+
+			int y = super.mouseClickY - 4;
+			if (height + y > 334) {
+				y = 334 - height;
+			} else if (y < 0) {
+				y = 0;
 			}
-			int var6 = super.mouseClickY - 4;
-			if (var4 + var6 > 334) {
-				var6 = 334 - var4;
-			}
-			if (var6 < 0) {
-				var6 = 0;
-			}
+
 			this.menuVisible = true;
 			this.menuArea = 0;
-			this.menuX = var5;
-			this.menuY = var6;
-			this.menuWidth = var2;
+			this.menuX = x;
+			this.menuY = y;
+			this.menuWidth = width;
 			this.menuHeight = this.menuSize * 15 + 22;
 		}
+
 		if (super.mouseClickX > 553 && super.mouseClickY > 205 && super.mouseClickX < 743 && super.mouseClickY < 466) {
-			int var7 = super.mouseClickX - 553 - var2 / 2;
-			if (var7 < 0) {
-				var7 = 0;
-			} else if (var2 + var7 > 190) {
-				var7 = 190 - var2;
+			int x = super.mouseClickX - 553 - width / 2;
+			if (x < 0) {
+				x = 0;
+			} else if (width + x > 190) {
+				x = 190 - width;
 			}
-			int var8 = super.mouseClickY - 205;
-			if (var8 < 0) {
-				var8 = 0;
-			} else if (var4 + var8 > 261) {
-				var8 = 261 - var4;
+
+			int y = super.mouseClickY - 205;
+			if (y < 0) {
+				y = 0;
+			} else if (height + y > 261) {
+				y = 261 - height;
 			}
+
 			this.menuVisible = true;
 			this.menuArea = 1;
-			this.menuX = var7;
-			this.menuY = var8;
-			this.menuWidth = var2;
+			this.menuX = x;
+			this.menuY = y;
+			this.menuWidth = width;
 			this.menuHeight = this.menuSize * 15 + 22;
 		}
 
 		if (super.mouseClickX > 17 && super.mouseClickY > 357 && super.mouseClickX < 496 && super.mouseClickY < 453) {
-			int var9 = super.mouseClickX - 17 - var2 / 2;
-			if (var9 < 0) {
-				var9 = 0;
-			} else if (var2 + var9 > 479) {
-				var9 = 479 - var2;
+			int x = super.mouseClickX - 17 - width / 2;
+			if (x < 0) {
+				x = 0;
+			} else if (width + x > 479) {
+				x = 479 - width;
 			}
 
-			int var10 = super.mouseClickY - 357;
-			if (var10 < 0) {
-				var10 = 0;
-			} else if (var4 + var10 > 96) {
-				var10 = 96 - var4;
+			int y = super.mouseClickY - 357;
+			if (y < 0) {
+				y = 0;
+			} else if (height + y > 96) {
+				y = 96 - height;
 			}
 
 			this.menuVisible = true;
 			this.menuArea = 2;
-			this.menuX = var9;
-			this.menuY = var10;
-			this.menuWidth = var2;
+			this.menuX = x;
+			this.menuY = y;
+			this.menuWidth = width;
 			this.menuHeight = this.menuSize * 15 + 22;
 		}
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.b(IZ)Z")
-	public final boolean isAddFriendOption(int arg0) {
-		if (arg0 < 0) {
+	public final boolean isAddFriendOption(int option) {
+		if (option < 0) {
 			return false;
 		}
-		int var3 = this.menuAction[arg0];
-		if (var3 >= 2000) {
-			var3 -= 2000;
+
+		int action = this.menuAction[option];
+		if (action >= 2000) {
+			action -= 2000;
 		}
-		return var3 == 406;
+
+		return action == 406;
 	}
 
 	// note: placement confirmed by referencing OS1
@@ -9604,55 +9710,64 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIBI)V")
-	public final void drawScrollbar(int arg0, int arg1, int arg2, int arg3, int arg5) {
-		this.imageScrollbar0.draw(arg0, arg2);
-		this.imageScrollbar1.draw(arg0, arg2 + arg5 - 16);
-		Pix2D.fillRect(this.SCROLLBAR_TRACK, 16, arg5 - 32, arg0, arg2 + 16);
-		int var7 = (arg5 - 32) * arg5 / arg1;
-		if (var7 < 8) {
-			var7 = 8;
+	public final void drawScrollbar(int x, int scrollHeight, int y, int scrollY, int height) {
+		this.imageScrollbar0.draw(x, y);
+		this.imageScrollbar1.draw(x, y + height - 16);
+		Pix2D.fillRect(this.SCROLLBAR_TRACK, 16, height - 32, x, y + 16);
+
+		int gripSize = (height - 32) * height / scrollHeight;
+		if (gripSize < 8) {
+			gripSize = 8;
 		}
-		int var8 = (arg5 - 32 - var7) * arg3 / (arg1 - arg5);
-		Pix2D.fillRect(this.SCROLLBAR_GRIP_FOREGROUND, 16, var7, arg0, arg2 + 16 + var8);
-		Pix2D.drawVerticalLine(arg0, this.SCROLLBAR_GRIP_HIGHLIGHT, arg2 + 16 + var8, var7);
-		Pix2D.drawVerticalLine(arg0 + 1, this.SCROLLBAR_GRIP_HIGHLIGHT, arg2 + 16 + var8, var7);
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_HIGHLIGHT, arg2 + 16 + var8, 16, arg0);
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_HIGHLIGHT, arg2 + 17 + var8, 16, arg0);
-		Pix2D.drawVerticalLine(arg0 + 15, this.SCROLLBAR_GRIP_LOWLIGHT, arg2 + 16 + var8, var7);
-		Pix2D.drawVerticalLine(arg0 + 14, this.SCROLLBAR_GRIP_LOWLIGHT, arg2 + 17 + var8, var7 - 1);
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_LOWLIGHT, arg2 + 15 + var8 + var7, 16, arg0);
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_LOWLIGHT, arg2 + 14 + var8 + var7, 15, arg0 + 1);
+
+		int gripY = (height - 32 - gripSize) * scrollY / (scrollHeight - height);
+
+		Pix2D.fillRect(this.SCROLLBAR_GRIP_FOREGROUND, 16, gripSize, x, y + 16 + gripY);
+
+		Pix2D.drawVerticalLine(x, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
+		Pix2D.drawVerticalLine(x + 1, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
+
+		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, 16, x);
+		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 17 + gripY, 16, x);
+
+		Pix2D.drawVerticalLine(x + 15, this.SCROLLBAR_GRIP_LOWLIGHT, y + 16 + gripY, gripSize);
+		Pix2D.drawVerticalLine(x + 14, this.SCROLLBAR_GRIP_LOWLIGHT, y + 17 + gripY, gripSize - 1);
+
+		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_LOWLIGHT, y + 15 + gripY + gripSize, 16, x);
+		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_LOWLIGHT, y + 14 + gripY + gripSize, 15, x + 1);
 	}
 
 	@ObfuscatedName("client.h(II)Ljava/lang/String;")
-	public static final String formatObjCount(int arg1) {
-		if (arg1 < 100000) {
-			return String.valueOf(arg1);
-		} else if (arg1 < 10000000) {
-			return arg1 / 1000 + "K";
+	public static final String formatObjCount(int amount) {
+		if (amount < 100000) {
+			return String.valueOf(amount);
+		} else if (amount < 10000000) {
+			return amount / 1000 + "K";
 		} else {
-			return arg1 / 1000000 + "M";
+			return amount / 1000000 + "M";
 		}
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.b(II)Ljava/lang/String;")
-	public static final String formatObjCountTagged(int arg1) {
-		String var2 = String.valueOf(arg1);
-		for (int var3 = var2.length() - 3; var3 > 0; var3 -= 3) {
-			var2 = var2.substring(0, var3) + "," + var2.substring(var3);
+	public static final String formatObjCountTagged(int amount) {
+		String s = String.valueOf(amount);
+		for (int var3 = s.length() - 3; var3 > 0; var3 -= 3) {
+			s = s.substring(0, var3) + "," + s.substring(var3);
 		}
-		if (var2.length() > 8) {
-			var2 = "@gre@" + var2.substring(0, var2.length() - 8) + " million @whi@(" + var2 + ")";
-		} else if (var2.length() > 4) {
-			var2 = "@cya@" + var2.substring(0, var2.length() - 4) + "K @whi@(" + var2 + ")";
+
+		if (s.length() > 8) {
+			s = "@gre@" + s.substring(0, s.length() - 8) + " million @whi@(" + s + ")";
+		} else if (s.length() > 4) {
+			s = "@cya@" + s.substring(0, s.length() - 4) + "K @whi@(" + s + ")";
 		}
-		return " " + var2;
+
+		return " " + s;
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(Ld;IZIIIIII)V")
-	public final void handleScrollInput(Component arg0, int arg1, boolean arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public final void handleScrollInput(Component com, int top, boolean redraw, int mouseY, int height, int scrollHeight, int mouseX, int left) {
 		if (this.scrollGrabbed) {
 			this.scrollInputPadding = 32;
 		} else {
@@ -9661,30 +9776,30 @@ public class Client extends GameShell {
 
 		this.scrollGrabbed = false;
 
-		if (arg6 >= arg7 && arg6 < arg7 + 16 && arg3 >= arg1 && arg3 < arg1 + 16) {
-			arg0.scrollPosition -= this.dragCycles * 4;
+		if (mouseX >= left && mouseX < left + 16 && mouseY >= top && mouseY < top + 16) {
+			com.scrollPosition -= this.dragCycles * 4;
 
-			if (arg2) {
+			if (redraw) {
 				this.redrawSidebar = true;
 			}
-		} else if (arg6 >= arg7 && arg6 < arg7 + 16 && arg3 >= arg1 + arg4 - 16 && arg3 < arg1 + arg4) {
-			arg0.scrollPosition += this.dragCycles * 4;
+		} else if (mouseX >= left && mouseX < left + 16 && mouseY >= top + height - 16 && mouseY < top + height) {
+			com.scrollPosition += this.dragCycles * 4;
 
-			if (arg2) {
+			if (redraw) {
 				this.redrawSidebar = true;
 			}
-		} else if (arg6 >= arg7 - this.scrollInputPadding && arg6 < arg7 + 16 + this.scrollInputPadding && arg3 >= arg1 + 16 && arg3 < arg1 + arg4 - 16 && this.dragCycles > 0) {
-			int var10 = (arg4 - 32) * arg4 / arg5;
-			if (var10 < 8) {
-				var10 = 8;
+		} else if (mouseX >= left - this.scrollInputPadding && mouseX < left + 16 + this.scrollInputPadding && mouseY >= top + 16 && mouseY < top + height - 16 && this.dragCycles > 0) {
+			int gripSize = (height - 32) * height / scrollHeight;
+			if (gripSize < 8) {
+				gripSize = 8;
 			}
 
-			int var11 = arg3 - arg1 - 16 - var10 / 2;
-			int var12 = arg4 - 32 - var10;
+			int gripY = mouseY - top - 16 - gripSize / 2;
+			int maxY = height - 32 - gripSize;
 
-			arg0.scrollPosition = (arg5 - arg4) * var11 / var12;
+			com.scrollPosition = (scrollHeight - height) * gripY / maxY;
 
-			if (arg2) {
+			if (redraw) {
 				this.redrawSidebar = true;
 			}
 
@@ -9694,9 +9809,9 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.g(II)Ljava/lang/String;")
-	public final String getIntString(int arg0) {
-		if (arg0 < 999999999) {
-			return String.valueOf(arg0);
+	public final String getIntString(int amount) {
+		if (amount < 999999999) {
+			return String.valueOf(amount);
 		} else {
 			return "*";
 		}
@@ -9704,306 +9819,316 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(Ld;I)Z")
-	public final boolean executeInterfaceScript(Component arg0) {
-		if (arg0.scriptComparator == null) {
+	public final boolean executeInterfaceScript(Component com) {
+		if (com.scriptComparator == null) {
 			return false;
-		} else {
-			for (int var3 = 0; var3 < arg0.scriptComparator.length; var3++) {
-				int var4 = this.executeClientScript(arg0, var3);
-				int var5 = arg0.scriptOperand[var3];
-				if (arg0.scriptComparator[var3] == 2) {
-					if (var4 >= var5) {
-						return false;
-					}
-				} else if (arg0.scriptComparator[var3] == 3) {
-					if (var4 <= var5) {
-						return false;
-					}
-				} else if (arg0.scriptComparator[var3] == 4) {
-					if (var4 == var5) {
-						return false;
-					}
-				} else if (var4 != var5) {
+		}
+
+		for (int i = 0; i < com.scriptComparator.length; i++) {
+			int value = this.executeClientScript(com, i);
+			int operand = com.scriptOperand[i];
+
+			if (com.scriptComparator[i] == 2) {
+				if (value >= operand) {
 					return false;
 				}
+			} else if (com.scriptComparator[i] == 3) {
+				if (value <= operand) {
+					return false;
+				}
+			} else if (com.scriptComparator[i] == 4) {
+				if (value == operand) {
+					return false;
+				}
+			} else if (value != operand) {
+				return false;
 			}
-			return true;
 		}
+
+		return true;
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(Ld;II)I")
-	public final int executeClientScript(Component arg0, int arg2) {
-		if (arg0.scripts == null || arg2 >= arg0.scripts.length) {
+	public final int executeClientScript(Component com, int scriptId) {
+		if (com.scripts == null || scriptId >= com.scripts.length) {
 			return -2;
-		} else {
-			try {
-				int[] var4 = arg0.scripts[arg2];
-				int var5 = 0;
-				int var6 = 0;
-				while (true) {
-					int var7 = var4[var6++];
-					if (var7 == 0) {
-						return var5;
-					}
-					if (var7 == 1) {
-						var5 += this.skillLevel[var4[var6++]];
-					}
-					if (var7 == 2) {
-						var5 += this.skillBaseLevel[var4[var6++]];
-					}
-					if (var7 == 3) {
-						var5 += this.skillExperience[var4[var6++]];
-					}
-					if (var7 == 4) {
-						Component var8 = Component.types[var4[var6++]];
-						int var9 = var4[var6++] + 1;
-						for (int var10 = 0; var10 < var8.invSlotObjId.length; var10++) {
-							if (var8.invSlotObjId[var10] == var9) {
-								var5 += var8.invSlotObjCount[var10];
-							}
-						}
-					}
-					if (var7 == 5) {
-						var5 += this.varps[var4[var6++]];
-					}
-					if (var7 == 6) {
-						var5 += levelExperience[this.skillBaseLevel[var4[var6++]] - 1];
-					}
-					if (var7 == 7) {
-						var5 += this.varps[var4[var6++]] * 100 / 46875;
-					}
-					if (var7 == 8) {
-						var5 += localPlayer.combatLevel;
-					}
-					if (var7 == 9) {
-						for (int var11 = 0; var11 < 19; var11++) {
-							if (var11 == 18) {
-								var11 = 20;
-							}
-							var5 += this.skillBaseLevel[var11];
-						}
-					}
-					if (var7 == 10) {
-						Component var12 = Component.types[var4[var6++]];
-						int var13 = var4[var6++] + 1;
-						for (int var14 = 0; var14 < var12.invSlotObjId.length; var14++) {
-							if (var12.invSlotObjId[var14] == var13) {
-								var5 += 999999999;
-								break;
-							}
-						}
-					}
-					if (var7 == 11) {
-						var5 += this.runenergy;
-					}
-					if (var7 == 12) {
-						var5 += this.runweight;
-					}
-					if (var7 == 13) {
-						int var15 = this.varps[var4[var6++]];
-						int var16 = var4[var6++];
-						var5 += (var15 & 0x1 << var16) == 0 ? 0 : 1;
-					}
+		}
+
+		try {
+			int[] script = com.scripts[scriptId];
+			int register = 0;
+			int pc = 0;
+
+			while (true) {
+				int opcode = script[pc++];
+				if (opcode == 0) {
+					return register;
 				}
-			} catch (Exception var17) {
-				return -1;
+
+				if (opcode == 1) {
+					register += this.skillLevel[script[pc++]];
+				} else if (opcode == 2) {
+					register += this.skillBaseLevel[script[pc++]];
+				} else if (opcode == 3) {
+					register += this.skillExperience[script[pc++]];
+				} else if (opcode == 4) {
+					Component inv = Component.types[script[pc++]];
+					int obj = script[pc++] + 1;
+
+					for (int i = 0; i < inv.invSlotObjId.length; i++) {
+						if (inv.invSlotObjId[i] == obj) {
+							register += inv.invSlotObjCount[i];
+						}
+					}
+				} else if (opcode == 5) {
+					register += this.varps[script[pc++]];
+				} else if (opcode == 6) {
+					register += levelExperience[this.skillBaseLevel[script[pc++]] - 1];
+				} else if (opcode == 7) {
+					register += this.varps[script[pc++]] * 100 / 46875;
+				} else if (opcode == 8) {
+					register += localPlayer.combatLevel;
+				} else if (opcode == 9) {
+					for (int i = 0; i < 19; i++) {
+						if (i == 18) {
+							i = 20;
+						}
+
+						register += this.skillBaseLevel[i];
+					}
+				} else if (opcode == 10) {
+					Component inv = Component.types[script[pc++]];
+					int obj = script[pc++] + 1;
+
+					for (int i = 0; i < inv.invSlotObjId.length; i++) {
+						if (inv.invSlotObjId[i] == obj) {
+							register += 999999999;
+							break;
+						}
+					}
+				} else if (opcode == 11) {
+					register += this.runenergy;
+				} else if (opcode == 12) {
+					register += this.runweight;
+				} else if (opcode == 13) {
+					int varp = this.varps[script[pc++]];
+					int lsb = script[pc++];
+
+					register += (varp & 0x1 << lsb) == 0 ? 0 : 1;
+				}
 			}
+		} catch (Exception ignore) {
+			return -1;
 		}
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(IIIIILd;I)V")
-	public final void handleInterfaceInput(int arg0, int arg1, int arg2, int arg4, Component arg5, int arg6) {
-		if (arg5.type != 0 || arg5.children == null || arg5.hide || (arg0 < arg4 || arg2 < arg1 || arg0 > arg5.width + arg4 || arg2 > arg5.height + arg1)) {
+	public final void handleInterfaceInput(int mouseX, int y, int mouseY, int x, Component com, int scrollY) {
+		if (com.type != 0 || com.children == null || com.hide || (mouseX < x || mouseY < y || mouseX > com.width + x || mouseY > com.height + y)) {
 			return;
 		}
-		int var8 = arg5.children.length;
-		for (int var9 = 0; var9 < var8; var9++) {
-			int var10 = arg5.childX[var9] + arg4;
-			int var11 = arg5.childY[var9] + arg1 - arg6;
-			Component var12 = Component.types[arg5.children[var9]];
-			int var13 = var12.x + var10;
-			int var14 = var12.y + var11;
-			if ((var12.overlayer >= 0 || var12.overColour != 0) && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
-				if (var12.overlayer >= 0) {
-					this.lastHoveredInterfaceId = var12.overlayer;
+
+		int children = com.children.length;
+		for (int i = 0; i < children; i++) {
+			int childX = com.childX[i] + x;
+			int childY = com.childY[i] + y - scrollY;
+			Component child = Component.types[com.children[i]];
+
+			childX += child.x;
+			childY += child.y;
+
+			if ((child.overlayer >= 0 || child.overColour != 0) && mouseX >= childX && mouseY >= childY && mouseX < child.width + childX && mouseY < child.height + childY) {
+				if (child.overlayer >= 0) {
+					this.lastHoveredInterfaceId = child.overlayer;
 				} else {
-					this.lastHoveredInterfaceId = var12.id;
+					this.lastHoveredInterfaceId = child.id;
 				}
 			}
-			if (var12.type == 0) {
-				this.handleInterfaceInput(arg0, var14, arg2, var13, var12, var12.scrollPosition);
-				if (var12.scroll > var12.height) {
-					this.handleScrollInput(var12, var14, true, arg2, var12.height, var12.scroll, arg0, var12.width + var13);
+
+			if (child.type == 0) {
+				this.handleInterfaceInput(mouseX, childY, mouseY, childX, child, child.scrollPosition);
+
+				if (child.scroll > child.height) {
+					this.handleScrollInput(child, childY, true, mouseY, child.height, child.scroll, mouseX, child.width + childX);
 				}
-			} else {
-				if (var12.buttonType == 1 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
-					boolean var15 = false;
-					if (var12.clientCode != 0) {
-						var15 = this.handleSocialMenuOption(var12);
-					}
-					if (!var15) {
-						this.menuOption[this.menuSize] = var12.option;
-						this.menuAction[this.menuSize] = 951;
-						this.menuParamC[this.menuSize] = var12.id;
-						this.menuSize++;
-					}
+			} else if (child.buttonType == 1 && mouseX >= childX && mouseY >= childY && mouseX < child.width + childX && mouseY < child.height + childY) {
+				boolean override = false;
+				if (child.clientCode != 0) {
+					override = this.handleSocialMenuOption(child);
 				}
-				if (var12.buttonType == 2 && this.spellSelected == 0 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
-					String var16 = var12.targetVerb;
-					if (var16.indexOf(" ") != -1) {
-						var16 = var16.substring(0, var16.indexOf(" "));
-					}
-					this.menuOption[this.menuSize] = var16 + " @gre@" + var12.targetText;
-					this.menuAction[this.menuSize] = 930;
-					this.menuParamC[this.menuSize] = var12.id;
+
+				if (!override) {
+					this.menuOption[this.menuSize] = child.option;
+					this.menuAction[this.menuSize] = 951;
+					this.menuParamC[this.menuSize] = child.id;
 					this.menuSize++;
 				}
-				if (var12.buttonType == 3 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
-					this.menuOption[this.menuSize] = "Close";
-					this.menuAction[this.menuSize] = 947;
-					this.menuParamC[this.menuSize] = var12.id;
-					this.menuSize++;
+			} else if (child.buttonType == 2 && this.spellSelected == 0 && mouseX >= childX && mouseY >= childY && mouseX < child.width + childX && mouseY < child.height + childY) {
+				String prefix = child.targetVerb;
+				if (prefix.indexOf(" ") != -1) {
+					prefix = prefix.substring(0, prefix.indexOf(" "));
 				}
-				if (var12.buttonType == 4 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
-					this.menuOption[this.menuSize] = var12.option;
-					this.menuAction[this.menuSize] = 465;
-					this.menuParamC[this.menuSize] = var12.id;
-					this.menuSize++;
-				}
-				if (var12.buttonType == 5 && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
-					this.menuOption[this.menuSize] = var12.option;
-					this.menuAction[this.menuSize] = 960;
-					this.menuParamC[this.menuSize] = var12.id;
-					this.menuSize++;
-				}
-				if (var12.buttonType == 6 && !this.pressedContinueOption && arg0 >= var13 && arg2 >= var14 && arg0 < var12.width + var13 && arg2 < var12.height + var14) {
-					this.menuOption[this.menuSize] = var12.option;
-					this.menuAction[this.menuSize] = 44;
-					this.menuParamC[this.menuSize] = var12.id;
-					this.menuSize++;
-				}
-				if (var12.type == 2) {
-					int var17 = 0;
-					for (int var18 = 0; var18 < var12.height; var18++) {
-						for (int var19 = 0; var19 < var12.width; var19++) {
-							int var20 = (var12.marginX + 32) * var19 + var13;
-							int var21 = (var12.marginY + 32) * var18 + var14;
-							if (var17 < 20) {
-								var20 += var12.invSlotOffsetX[var17];
-								var21 += var12.invSlotOffsetY[var17];
+
+				this.menuOption[this.menuSize] = prefix + " @gre@" + child.targetText;
+				this.menuAction[this.menuSize] = 930;
+				this.menuParamC[this.menuSize] = child.id;
+				this.menuSize++;
+			} else if (child.buttonType == 3 && mouseX >= childX && mouseY >= childY && mouseX < child.width + childX && mouseY < child.height + childY) {
+				this.menuOption[this.menuSize] = "Close";
+				this.menuAction[this.menuSize] = 947;
+				this.menuParamC[this.menuSize] = child.id;
+				this.menuSize++;
+			} else if (child.buttonType == 4 && mouseX >= childX && mouseY >= childY && mouseX < child.width + childX && mouseY < child.height + childY) {
+				this.menuOption[this.menuSize] = child.option;
+				this.menuAction[this.menuSize] = 465;
+				this.menuParamC[this.menuSize] = child.id;
+				this.menuSize++;
+			} else if (child.buttonType == 5 && mouseX >= childX && mouseY >= childY && mouseX < child.width + childX && mouseY < child.height + childY) {
+				this.menuOption[this.menuSize] = child.option;
+				this.menuAction[this.menuSize] = 960;
+				this.menuParamC[this.menuSize] = child.id;
+				this.menuSize++;
+			} else if (child.buttonType == 6 && !this.pressedContinueOption && mouseX >= childX && mouseY >= childY && mouseX < child.width + childX && mouseY < child.height + childY) {
+				this.menuOption[this.menuSize] = child.option;
+				this.menuAction[this.menuSize] = 44;
+				this.menuParamC[this.menuSize] = child.id;
+				this.menuSize++;
+			} else if (child.type == 2) {
+				int slot = 0;
+
+				for (int row = 0; row < child.height; row++) {
+					for (int col = 0; col < child.width; col++) {
+						int slotX = (child.marginX + 32) * col + childX;
+						int slotY = (child.marginY + 32) * row + childY;
+
+						if (slot < 20) {
+							slotX += child.invSlotOffsetX[slot];
+							slotY += child.invSlotOffsetY[slot];
+						}
+
+						if (mouseX < slotX || mouseY < slotY || mouseX >= slotX + 32 || mouseY >= slotY + 32) {
+							slot++;
+							continue;
+						}
+
+						this.hoveredSlot = slot;
+						this.hoveredSlotInterfaceId = child.id;
+
+						if (child.invSlotObjId[slot] <= 0) {
+							slot++;
+							continue;
+						}
+
+						ObjType obj = ObjType.get(child.invSlotObjId[slot] - 1);
+
+						if (this.objSelected == 1 && child.interactable) {
+							if (this.objSelectedInterface != child.id || this.objSelectedSlot != slot) {
+								this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + obj.name;
+								this.menuAction[this.menuSize] = 881;
+								this.menuParamA[this.menuSize] = obj.id;
+								this.menuParamB[this.menuSize] = slot;
+								this.menuParamC[this.menuSize] = child.id;
+								this.menuSize++;
 							}
-							if (arg0 >= var20 && arg2 >= var21 && arg0 < var20 + 32 && arg2 < var21 + 32) {
-								this.hoveredSlot = var17;
-								this.hoveredSlotInterfaceId = var12.id;
-								if (var12.invSlotObjId[var17] > 0) {
-									ObjType var22 = ObjType.get(var12.invSlotObjId[var17] - 1);
-									if (this.objSelected == 1 && var12.interactable) {
-										if (this.objSelectedInterface != var12.id || this.objSelectedSlot != var17) {
-											this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + var22.name;
-											this.menuAction[this.menuSize] = 881;
-											this.menuParamA[this.menuSize] = var22.id;
-											this.menuParamB[this.menuSize] = var17;
-											this.menuParamC[this.menuSize] = var12.id;
-											this.menuSize++;
+						} else if (this.spellSelected != 1 || !child.interactable) {
+							if (child.interactable) {
+								for (int op = 4; op >= 3; op--) {
+									if (obj.iop != null && obj.iop[op] != null) {
+										this.menuOption[this.menuSize] = obj.iop[op] + " @lre@" + obj.name;
+
+										if (op == 3) {
+											this.menuAction[this.menuSize] = 478;
+										} else if (op == 4) {
+											this.menuAction[this.menuSize] = 347;
 										}
-									} else if (this.spellSelected != 1 || !var12.interactable) {
-										if (var12.interactable) {
-											for (int var23 = 4; var23 >= 3; var23--) {
-												if (var22.iop != null && var22.iop[var23] != null) {
-													this.menuOption[this.menuSize] = var22.iop[var23] + " @lre@" + var22.name;
-													if (var23 == 3) {
-														this.menuAction[this.menuSize] = 478;
-													}
-													if (var23 == 4) {
-														this.menuAction[this.menuSize] = 347;
-													}
-													this.menuParamA[this.menuSize] = var22.id;
-													this.menuParamB[this.menuSize] = var17;
-													this.menuParamC[this.menuSize] = var12.id;
-													this.menuSize++;
-												} else if (var23 == 4) {
-													this.menuOption[this.menuSize] = "Drop @lre@" + var22.name;
-													this.menuAction[this.menuSize] = 347;
-													this.menuParamA[this.menuSize] = var22.id;
-													this.menuParamB[this.menuSize] = var17;
-													this.menuParamC[this.menuSize] = var12.id;
-													this.menuSize++;
-												}
-											}
-										}
-										if (var12.usable) {
-											this.menuOption[this.menuSize] = "Use @lre@" + var22.name;
-											this.menuAction[this.menuSize] = 188;
-											this.menuParamA[this.menuSize] = var22.id;
-											this.menuParamB[this.menuSize] = var17;
-											this.menuParamC[this.menuSize] = var12.id;
-											this.menuSize++;
-										}
-										if (var12.interactable && var22.iop != null) {
-											for (int var24 = 2; var24 >= 0; var24--) {
-												if (var22.iop[var24] != null) {
-													this.menuOption[this.menuSize] = var22.iop[var24] + " @lre@" + var22.name;
-													if (var24 == 0) {
-														this.menuAction[this.menuSize] = 405;
-													}
-													if (var24 == 1) {
-														this.menuAction[this.menuSize] = 38;
-													}
-													if (var24 == 2) {
-														this.menuAction[this.menuSize] = 422;
-													}
-													this.menuParamA[this.menuSize] = var22.id;
-													this.menuParamB[this.menuSize] = var17;
-													this.menuParamC[this.menuSize] = var12.id;
-													this.menuSize++;
-												}
-											}
-										}
-										if (var12.iop != null) {
-											for (int var25 = 4; var25 >= 0; var25--) {
-												if (var12.iop[var25] != null) {
-													this.menuOption[this.menuSize] = var12.iop[var25] + " @lre@" + var22.name;
-													if (var25 == 0) {
-														this.menuAction[this.menuSize] = 602;
-													}
-													if (var25 == 1) {
-														this.menuAction[this.menuSize] = 596;
-													}
-													if (var25 == 2) {
-														this.menuAction[this.menuSize] = 22;
-													}
-													if (var25 == 3) {
-														this.menuAction[this.menuSize] = 892;
-													}
-													if (var25 == 4) {
-														this.menuAction[this.menuSize] = 415;
-													}
-													this.menuParamA[this.menuSize] = var22.id;
-													this.menuParamB[this.menuSize] = var17;
-													this.menuParamC[this.menuSize] = var12.id;
-													this.menuSize++;
-												}
-											}
-										}
-										this.menuOption[this.menuSize] = "Examine @lre@" + var22.name;
-										this.menuAction[this.menuSize] = 1773;
-										this.menuParamA[this.menuSize] = var22.id;
-										this.menuParamC[this.menuSize] = var12.invSlotObjCount[var17];
+
+										this.menuParamA[this.menuSize] = obj.id;
+										this.menuParamB[this.menuSize] = slot;
+										this.menuParamC[this.menuSize] = child.id;
 										this.menuSize++;
-									} else if ((this.activeSpellFlags & 0x10) == 16) {
-										this.menuOption[this.menuSize] = this.spellCaption + " @lre@" + var22.name;
-										this.menuAction[this.menuSize] = 391;
-										this.menuParamA[this.menuSize] = var22.id;
-										this.menuParamB[this.menuSize] = var17;
-										this.menuParamC[this.menuSize] = var12.id;
+									} else if (op == 4) {
+										this.menuOption[this.menuSize] = "Drop @lre@" + obj.name;
+										this.menuAction[this.menuSize] = 347;
+										this.menuParamA[this.menuSize] = obj.id;
+										this.menuParamB[this.menuSize] = slot;
+										this.menuParamC[this.menuSize] = child.id;
 										this.menuSize++;
 									}
 								}
 							}
-							var17++;
+
+							if (child.usable) {
+								this.menuOption[this.menuSize] = "Use @lre@" + obj.name;
+								this.menuAction[this.menuSize] = 188;
+								this.menuParamA[this.menuSize] = obj.id;
+								this.menuParamB[this.menuSize] = slot;
+								this.menuParamC[this.menuSize] = child.id;
+								this.menuSize++;
+							}
+
+							if (child.interactable && obj.iop != null) {
+								for (int op = 2; op >= 0; op--) {
+									if (obj.iop[op] != null) {
+										this.menuOption[this.menuSize] = obj.iop[op] + " @lre@" + obj.name;
+
+										if (op == 0) {
+											this.menuAction[this.menuSize] = 405;
+										} else if (op == 1) {
+											this.menuAction[this.menuSize] = 38;
+										} else if (op == 2) {
+											this.menuAction[this.menuSize] = 422;
+										}
+
+										this.menuParamA[this.menuSize] = obj.id;
+										this.menuParamB[this.menuSize] = slot;
+										this.menuParamC[this.menuSize] = child.id;
+										this.menuSize++;
+									}
+								}
+							}
+
+							if (child.iop != null) {
+								for (int op = 4; op >= 0; op--) {
+									if (child.iop[op] != null) {
+										this.menuOption[this.menuSize] = child.iop[op] + " @lre@" + obj.name;
+
+										if (op == 0) {
+											this.menuAction[this.menuSize] = 602;
+										} else if (op == 1) {
+											this.menuAction[this.menuSize] = 596;
+										} else if (op == 2) {
+											this.menuAction[this.menuSize] = 22;
+										} else if (op == 3) {
+											this.menuAction[this.menuSize] = 892;
+										} else if (op == 4) {
+											this.menuAction[this.menuSize] = 415;
+										}
+
+										this.menuParamA[this.menuSize] = obj.id;
+										this.menuParamB[this.menuSize] = slot;
+										this.menuParamC[this.menuSize] = child.id;
+										this.menuSize++;
+									}
+								}
+							}
+
+							this.menuOption[this.menuSize] = "Examine @lre@" + obj.name;
+							this.menuAction[this.menuSize] = 1773;
+							this.menuParamA[this.menuSize] = obj.id;
+							this.menuParamC[this.menuSize] = child.invSlotObjCount[slot];
+							this.menuSize++;
+						} else if ((this.activeSpellFlags & 0x10) == 16) {
+							this.menuOption[this.menuSize] = this.spellCaption + " @lre@" + obj.name;
+							this.menuAction[this.menuSize] = 391;
+							this.menuParamA[this.menuSize] = obj.id;
+							this.menuParamB[this.menuSize] = slot;
+							this.menuParamC[this.menuSize] = child.id;
+							this.menuSize++;
 						}
+
+						slot++;
 					}
 				}
 			}
@@ -10011,27 +10136,30 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILd;)Z")
-	public final boolean handleSocialMenuOption(Component arg1) {
-		int var3 = arg1.clientCode;
-		if (var3 >= 1 && var3 <= 200 || !(var3 < 701 || var3 > 900)) {
-			if (var3 >= 801) {
-				var3 -= 701;
-			} else if (var3 >= 701) {
-				var3 -= 601;
-			} else if (var3 >= 101) {
-				var3 -= 101;
+	public final boolean handleSocialMenuOption(Component com) {
+		int clientCode = com.clientCode;
+
+		if (clientCode >= 1 && clientCode <= 200 || !(clientCode < 701 || clientCode > 900)) {
+			if (clientCode >= 801) {
+				clientCode -= 701;
+			} else if (clientCode >= 701) {
+				clientCode -= 601;
+			} else if (clientCode >= 101) {
+				clientCode -= 101;
 			} else {
-				var3--;
+				clientCode--;
 			}
-			this.menuOption[this.menuSize] = "Remove @whi@" + this.friendName[var3];
+
+			this.menuOption[this.menuSize] = "Remove @whi@" + this.friendName[clientCode];
 			this.menuAction[this.menuSize] = 557;
 			this.menuSize++;
-			this.menuOption[this.menuSize] = "Message @whi@" + this.friendName[var3];
+
+			this.menuOption[this.menuSize] = "Message @whi@" + this.friendName[clientCode];
 			this.menuAction[this.menuSize] = 679;
 			this.menuSize++;
 			return true;
-		} else if (var3 >= 401 && var3 <= 500) {
-			this.menuOption[this.menuSize] = "Remove @whi@" + arg1.text;
+		} else if (clientCode >= 401 && clientCode <= 500) {
+			this.menuOption[this.menuSize] = "Remove @whi@" + com.text;
 			this.menuAction[this.menuSize] = 556;
 			this.menuSize++;
 			return true;
@@ -10042,54 +10170,67 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.d(II)V")
-	public final void resetInterfaceAnimation(int arg0) {
-		Component var3 = Component.types[arg0];
-		for (int var4 = 0; var4 < var3.children.length && var3.children[var4] != -1; var4++) {
-			Component var5 = Component.types[var3.children[var4]];
-			if (var5.type == 1) {
-				this.resetInterfaceAnimation(var5.id);
+	public final void resetInterfaceAnimation(int id) {
+		Component com = Component.types[id];
+
+		for (int i = 0; i < com.children.length && com.children[i] != -1; i++) {
+			Component child = Component.types[com.children[i]];
+
+			if (child.type == 1) {
+				this.resetInterfaceAnimation(child.id);
 			}
-			var5.seqFrame = 0;
-			var5.seqCycle = 0;
+
+			child.seqFrame = 0;
+			child.seqCycle = 0;
 		}
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.c(III)Z")
-	public final boolean updateInterfaceAnimation(int arg0, int arg2) {
-		boolean var4 = false;
-		Component var5 = Component.types[arg2];
-		for (int var6 = 0; var6 < var5.children.length && var5.children[var6] != -1; var6++) {
-			Component var7 = Component.types[var5.children[var6]];
-			if (var7.type == 1) {
-				var4 |= this.updateInterfaceAnimation(arg0, var7.id);
+	public final boolean updateInterfaceAnimation(int delta, int arg2) {
+		boolean updated = false;
+		Component com = Component.types[arg2];
+
+		for (int i = 0; i < com.children.length && com.children[i] != -1; i++) {
+			Component child = Component.types[com.children[i]];
+
+			if (child.type == 1) {
+				updated |= this.updateInterfaceAnimation(delta, child.id);
 			}
-			if (var7.type == 6 && (var7.anim != -1 || var7.activeAnim != -1)) {
-				boolean var8 = this.executeInterfaceScript(var7);
-				int var9;
-				if (var8) {
-					var9 = var7.activeAnim;
+
+			if (child.type == 6 && (child.anim != -1 || child.activeAnim != -1)) {
+				boolean active = this.executeInterfaceScript(child);
+
+				int seqId;
+				if (active) {
+					seqId = child.activeAnim;
 				} else {
-					var9 = var7.anim;
+					seqId = child.anim;
 				}
-				if (var9 != -1) {
-					SeqType var10 = SeqType.types[var9];
-					var7.seqCycle += arg0;
-					while (var7.seqCycle > var10.getFrameDuration(var7.seqFrame)) {
-						var7.seqCycle -= var10.getFrameDuration(var7.seqFrame) + 1;
-						var7.seqFrame++;
-						if (var7.seqFrame >= var10.frameCount) {
-							var7.seqFrame -= var10.replayoff;
-							if (var7.seqFrame < 0 || var7.seqFrame >= var10.frameCount) {
-								var7.seqFrame = 0;
+
+				if (seqId != -1) {
+					SeqType seq = SeqType.types[seqId];
+					child.seqCycle += delta;
+
+					while (child.seqCycle > seq.getFrameDuration(child.seqFrame)) {
+						child.seqCycle -= seq.getFrameDuration(child.seqFrame) + 1;
+						child.seqFrame++;
+
+						if (child.seqFrame >= seq.frameCount) {
+							child.seqFrame -= seq.replayoff;
+
+							if (child.seqFrame < 0 || child.seqFrame >= seq.frameCount) {
+								child.seqFrame = 0;
 							}
 						}
-						var4 = true;
+
+						updated = true;
 					}
 				}
 			}
 		}
-		return var4;
+
+		return updated;
 	}
 
 	// note: placement confirmed by referencing OS1
@@ -10176,6 +10317,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.a(Ld;B)V")
 	public final void updateInterfaceContent(Component com) {
 		int clientCode = com.clientCode;
+
 		if (clientCode >= 1 && clientCode <= 100 || !(clientCode < 701 || clientCode > 800)) {
 			if (clientCode > 700) {
 				clientCode -= 601;
@@ -10213,6 +10355,7 @@ public class Client extends GameShell {
 			}
 		} else if (clientCode == 203) {
 			com.scroll = this.friendCount * 15 + 20;
+
 			if (com.scroll <= com.height) {
 				com.scroll = com.height + 1;
 			}
@@ -10228,6 +10371,7 @@ public class Client extends GameShell {
 			}
 		} else if (clientCode == 503) {
 			com.scroll = this.ignoreCount * 15 + 20;
+
 			if (com.scroll <= com.height) {
 				com.scroll = com.height + 1;
 			}
@@ -10236,40 +10380,42 @@ public class Client extends GameShell {
 			com.yan = (int) (Math.sin((double) loopCycle / 40.0D) * 256.0D) & 0x7FF;
 
 			if (this.updateDesignModel) {
-				for (int var4 = 0; var4 < 7; var4++) {
-					int var11 = this.designKits[var4];
-					if (var11 >= 0 && !IdkType.types[var11].validate()) {
+				for (int i = 0; i < 7; i++) {
+					int kit = this.designKits[i];
+					if (kit >= 0 && !IdkType.types[kit].validate()) {
 						return;
 					}
 				}
 
 				this.updateDesignModel = false;
 
-				Model[] var5 = new Model[7];
-				int var6 = 0;
-				for (int var7 = 0; var7 < 7; var7++) {
-					int var10 = this.designKits[var7];
-					if (var10 >= 0) {
-						var5[var6++] = IdkType.types[var10].getModel();
+				Model[] models = new Model[7];
+				int modelCount = 0;
+				for (int i = 0; i < 7; i++) {
+					int kit = this.designKits[i];
+					if (kit >= 0) {
+						models[modelCount++] = IdkType.types[kit].getModel();
 					}
 				}
 
-				Model var8 = new Model(var6, var5);
-				for (int var9 = 0; var9 < 5; var9++) {
-					if (this.designColours[var9] != 0) {
-						var8.recolour(DESIGN_BODY_COLOUR[var9][0], DESIGN_BODY_COLOUR[var9][this.designColours[var9]]);
-						if (var9 == 1) {
-							var8.recolour(DESIGN_HAIR_COLOUR[0], DESIGN_HAIR_COLOUR[this.designColours[var9]]);
+				Model model = new Model(modelCount, models);
+				for (int i = 0; i < 5; i++) {
+					if (this.designColours[i] != 0) {
+						model.recolour(DESIGN_BODY_COLOUR[i][0], DESIGN_BODY_COLOUR[i][this.designColours[i]]);
+
+						if (i == 1) {
+							model.recolour(DESIGN_HAIR_COLOUR[0], DESIGN_HAIR_COLOUR[this.designColours[i]]);
 						}
 					}
 				}
 
-				var8.createLabelReferences();
-				var8.applyTransform(SeqType.types[localPlayer.seqStandId].frames[0]);
-				var8.calculateNormals(64, 850, -30, -50, -30, true);
+				model.createLabelReferences();
+				model.applyTransform(SeqType.types[localPlayer.seqStandId].frames[0]);
+				model.calculateNormals(64, 850, -30, -50, -30, true);
+
 				com.modelType = 5;
 				com.model = 0;
-				Component.cacheModel(var8, 0, 5);
+				Component.cacheModel(model, 0, 5);
 			}
 		} else if (clientCode == 324) {
 			if (this.genderButtonImage0 == null) {
@@ -10295,6 +10441,7 @@ public class Client extends GameShell {
 			}
 		} else if (clientCode == 600) {
 			com.text = this.reportAbuseInput;
+
 			if (loopCycle % 20 < 10) {
 				com.text = com.text + "|";
 			} else {
@@ -10314,15 +10461,16 @@ public class Client extends GameShell {
 			if (this.lastAddress == 0) {
 				com.text = "";
 			} else {
-				String var12;
+				String text;
 				if (this.daysSinceLogin == 0) {
-					var12 = "earlier today";
+					text = "earlier today";
 				} else if (this.daysSinceLogin == 1) {
-					var12 = "yesterday";
+					text = "yesterday";
 				} else {
-					var12 = this.daysSinceLogin + " days ago";
+					text = this.daysSinceLogin + " days ago";
 				}
-				com.text = "You last logged in " + var12 + " from: " + SignLink.dns;
+
+				com.text = "You last logged in " + text + " from: " + SignLink.dns;
 			}
 		} else if (clientCode == 651) {
 			if (this.unreadMessageCount == 0) {
@@ -10345,15 +10493,16 @@ public class Client extends GameShell {
 			} else if (this.daysSinceRecoveriesChanged == 200) {
 				com.text = "You have not yet set any password recovery questions.";
 			} else {
-				String var13;
+				String text;
 				if (this.daysSinceRecoveriesChanged == 0) {
-					var13 = "Earlier today";
+					text = "Earlier today";
 				} else if (this.daysSinceRecoveriesChanged == 1) {
-					var13 = "Yesterday";
+					text = "Yesterday";
 				} else {
-					var13 = this.daysSinceRecoveriesChanged + " days ago";
+					text = this.daysSinceRecoveriesChanged + " days ago";
 				}
-				com.text = var13 + " you changed your recovery questions";
+
+				com.text = text + " you changed your recovery questions";
 			}
 		} else if (clientCode == 653) {
 			if (this.daysSinceRecoveriesChanged == 201) {
@@ -10386,6 +10535,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.b(Ld;B)Z")
 	public final boolean handleInterfaceAction(Component arg0) {
 		int clientCode = arg0.clientCode;
+
 		if (clientCode == 201) {
 			this.redrawChatback = true;
 			this.chatbackInputOpen = false;
@@ -10418,51 +10568,53 @@ public class Client extends GameShell {
 			this.socialAction = 5;
 			this.socialMessage = "Enter name of player to delete from list";
 		} else if (clientCode >= 300 && clientCode <= 313) {
-			int var4 = (clientCode - 300) / 2;
-			int var5 = clientCode & 0x1;
-			int var6 = this.designKits[var4];
-			if (var6 != -1) {
+			int part = (clientCode - 300) / 2;
+			int direction = clientCode & 0x1;
+			int kit = this.designKits[part];
+
+			if (kit != -1) {
 				while (true) {
-					if (var5 == 0) {
-						var6--;
-						if (var6 < 0) {
-							var6 = IdkType.count - 1;
+					if (direction == 0) {
+						kit--;
+						if (kit < 0) {
+							kit = IdkType.count - 1;
 						}
 					}
 
-					if (var5 == 1) {
-						var6++;
-						if (var6 >= IdkType.count) {
-							var6 = 0;
+					if (direction == 1) {
+						kit++;
+						if (kit >= IdkType.count) {
+							kit = 0;
 						}
 					}
 
-					if (!IdkType.types[var6].disable && IdkType.types[var6].type == var4 + (this.designGender ? 0 : 7)) {
-						this.designKits[var4] = var6;
+					if (!IdkType.types[kit].disable && IdkType.types[kit].type == part + (this.designGender ? 0 : 7)) {
+						this.designKits[part] = kit;
 						this.updateDesignModel = true;
 						break;
 					}
 				}
 			}
 		} else if (clientCode >= 314 && clientCode <= 323) {
-			int var7 = (clientCode - 314) / 2;
-			int var8 = clientCode & 0x1;
-			int var9 = this.designColours[var7];
-			if (var8 == 0) {
-				var9--;
-				if (var9 < 0) {
-					var9 = DESIGN_BODY_COLOUR[var7].length - 1;
+			int part = (clientCode - 314) / 2;
+			int direction = clientCode & 0x1;
+			int colour = this.designColours[part];
+
+			if (direction == 0) {
+				colour--;
+
+				if (colour < 0) {
+					colour = DESIGN_BODY_COLOUR[part].length - 1;
+				}
+			} else if (direction == 1) {
+				colour++;
+
+				if (colour >= DESIGN_BODY_COLOUR[part].length) {
+					colour = 0;
 				}
 			}
 
-			if (var8 == 1) {
-				var9++;
-				if (var9 >= DESIGN_BODY_COLOUR[var7].length) {
-					var9 = 0;
-				}
-			}
-
-			this.designColours[var7] = var9;
+			this.designColours[part] = colour;
 			this.updateDesignModel = true;
 		} else if (clientCode == 324 && !this.designGender) {
 			this.designGender = true;
@@ -10473,12 +10625,15 @@ public class Client extends GameShell {
 		} else if (clientCode == 326) {
 			this.out.pIsaac(8);
 			this.out.p1(this.designGender ? 0 : 1);
-			for (int var10 = 0; var10 < 7; var10++) {
-				this.out.p1(this.designKits[var10]);
+
+			for (int i = 0; i < 7; i++) {
+				this.out.p1(this.designKits[i]);
 			}
-			for (int var11 = 0; var11 < 5; var11++) {
-				this.out.p1(this.designColours[var11]);
+
+			for (int i = 0; i < 5; i++) {
+				this.out.p1(this.designColours[i]);
 			}
+
 			return true;
 		} else if (clientCode == 613) {
 			this.reportAbuseMuteOption = !this.reportAbuseMuteOption;
@@ -10555,98 +10710,105 @@ public class Client extends GameShell {
 			this.drawInterface(0, 0, Component.types[this.chatInterfaceId], 0);
 		} else if (this.stickyChatInterfaceId == -1) {
 			PixFont font = this.fontPlain12;
-			int var3 = 0;
+			int line = 0;
 
 			Pix2D.setBounds(463, 77, 0, 0);
-			for (int var4 = 0; var4 < 100; var4++) {
-				if (this.messageText[var4] != null) {
-					int var6 = this.messageType[var4];
-					int var7 = 70 - var3 * 14 + this.chatScrollOffset;
-					String var8 = this.messageSender[var4];
-					byte var9 = 0;
-					if (var8 != null && var8.startsWith("@cr1@")) {
-						var8 = var8.substring(5);
-						var9 = 1;
+
+			for (int i = 0; i < 100; i++) {
+				if (this.messageText[i] != null) {
+					int type = this.messageType[i];
+					int y = 70 - line * 14 + this.chatScrollOffset;
+
+					String sender = this.messageSender[i];
+					byte modicon = 0;
+
+					if (sender != null && sender.startsWith("@cr1@")) {
+						sender = sender.substring(5);
+						modicon = 1;
+					} else if (sender != null && sender.startsWith("@cr2@")) {
+						sender = sender.substring(5);
+						modicon = 2;
 					}
-					if (var8 != null && var8.startsWith("@cr2@")) {
-						var8 = var8.substring(5);
-						var9 = 2;
-					}
-					if (var6 == 0) {
-						if (var7 > 0 && var7 < 110) {
-							font.drawString(this.messageText[var4], 0, var7, 4);
+
+					if (type == 0) {
+						if (y > 0 && y < 110) {
+							font.drawString(this.messageText[i], 0, y, 4);
 						}
-						var3++;
-					}
-					if ((var6 == 1 || var6 == 2) && (var6 == 1 || this.chatPublicMode == 0 || this.chatPublicMode == 1 && this.isFriend(var8))) {
-						if (var7 > 0 && var7 < 110) {
-							int var10 = 4;
-							if (var9 == 1) {
-								this.imageModIcons[0].draw(var10, var7 - 12);
-								var10 += 14;
+
+						line++;
+					} else if ((type == 1 || type == 2) && (type == 1 || this.chatPublicMode == 0 || this.chatPublicMode == 1 && this.isFriend(sender))) {
+						if (y > 0 && y < 110) {
+							int x = 4;
+							if (modicon == 1) {
+								this.imageModIcons[0].draw(x, y - 12);
+								x += 14;
+							} else if (modicon == 2) {
+								this.imageModIcons[1].draw(x, y - 12);
+								x += 14;
 							}
-							if (var9 == 2) {
-								this.imageModIcons[1].draw(var10, var7 - 12);
-								var10 += 14;
+							font.drawString(sender + ":", 0, y, x);
+
+							x += font.stringWidth(sender) + 8;
+							font.drawString(this.messageText[i], 255, y, x);
+						}
+
+						line++;
+					} else if ((type == 3 || type == 7) && this.splitPrivateChat == 0 && (type == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(sender))) {
+						if (y > 0 && y < 110) {
+							int x = 4;
+							font.drawString("From", 0, y, x);
+
+							x += font.stringWidth("From ");
+							if (modicon == 1) {
+								this.imageModIcons[0].draw(x, y - 12);
+								x += 14;
+							} else if (modicon == 2) {
+								this.imageModIcons[1].draw(x, y - 12);
+								x += 14;
 							}
-							font.drawString(var8 + ":", 0, var7, var10);
-							int var11 = var10 + font.stringWidth(var8) + 8;
-							font.drawString(this.messageText[var4], 255, var7, var11);
+							font.drawString(sender + ":", 0, y, x);
+
+							x += font.stringWidth(sender) + 8;
+							font.drawString(this.messageText[i], 8388608, y, x);
 						}
-						var3++;
-					}
-					if ((var6 == 3 || var6 == 7) && this.splitPrivateChat == 0 && (var6 == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(var8))) {
-						if (var7 > 0 && var7 < 110) {
-							byte var12 = 4;
-							font.drawString("From", 0, var7, var12);
-							int var13 = var12 + font.stringWidth("From ");
-							if (var9 == 1) {
-								this.imageModIcons[0].draw(var13, var7 - 12);
-								var13 += 14;
-							}
-							if (var9 == 2) {
-								this.imageModIcons[1].draw(var13, var7 - 12);
-								var13 += 14;
-							}
-							font.drawString(var8 + ":", 0, var7, var13);
-							int var14 = var13 + font.stringWidth(var8) + 8;
-							font.drawString(this.messageText[var4], 8388608, var7, var14);
+
+						line++;
+					} else if (type == 4 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(sender))) {
+						if (y > 0 && y < 110) {
+							font.drawString(sender + " " + this.messageText[i], 8388736, y, 4);
 						}
-						var3++;
-					}
-					if (var6 == 4 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(var8))) {
-						if (var7 > 0 && var7 < 110) {
-							font.drawString(var8 + " " + this.messageText[var4], 8388736, var7, 4);
+
+						line++;
+					} else if (type == 5 && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
+						if (y > 0 && y < 110) {
+							font.drawString(this.messageText[i], 8388608, y, 4);
 						}
-						var3++;
-					}
-					if (var6 == 5 && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
-						if (var7 > 0 && var7 < 110) {
-							font.drawString(this.messageText[var4], 8388608, var7, 4);
+
+						line++;
+					} else if (type == 6 && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
+						if (y > 0 && y < 110) {
+							font.drawString("To " + sender + ":", 0, y, 4);
+							font.drawString(this.messageText[i], 8388608, y, font.stringWidth("To " + sender) + 12);
 						}
-						var3++;
-					}
-					if (var6 == 6 && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
-						if (var7 > 0 && var7 < 110) {
-							font.drawString("To " + var8 + ":", 0, var7, 4);
-							font.drawString(this.messageText[var4], 8388608, var7, font.stringWidth("To " + var8) + 12);
+
+						line++;
+					} else if (type == 8 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(sender))) {
+						if (y > 0 && y < 110) {
+							font.drawString(sender + " " + this.messageText[i], 8270336, y, 4);
 						}
-						var3++;
-					}
-					if (var6 == 8 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(var8))) {
-						if (var7 > 0 && var7 < 110) {
-							font.drawString(var8 + " " + this.messageText[var4], 8270336, var7, 4);
-						}
-						var3++;
+
+						line++;
 					}
 				}
 			}
+
 			Pix2D.resetBounds();
 
-			this.chatScrollHeight = var3 * 14 + 7;
+			this.chatScrollHeight = line * 14 + 7;
 			if (this.chatScrollHeight < 78) {
 				this.chatScrollHeight = 78;
 			}
+
 			this.drawScrollbar(463, this.chatScrollHeight, 0, this.chatScrollHeight - this.chatScrollOffset - 77, 77);
 
 			String username;
@@ -10678,146 +10840,158 @@ public class Client extends GameShell {
 	public final void drawMinimap() {
 		this.areaMapback.bind();
 
-		int var2 = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
-		int var3 = localPlayer.x / 32 + 48;
-		int var4 = 464 - localPlayer.z / 32;
+		int angle = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
+		int anchorX = localPlayer.x / 32 + 48;
+		int anchorY = 464 - localPlayer.z / 32;
 
-		this.imageMinimap.drawRotatedMasked(25, var4, 146, this.macroMinimapZoom + 256, 5, var2, this.field1538, this.minimapMaskLineLengths, this.minimapMaskLineOffsets, var3, 151);
+		this.imageMinimap.drawRotatedMasked(25, anchorY, 146, this.macroMinimapZoom + 256, 5, angle, this.field1538, this.minimapMaskLineLengths, this.minimapMaskLineOffsets, anchorX, 151);
 		this.imageCompass.drawRotatedMasked(0, 25, 33, 256, 0, this.orbitCameraYaw, this.field1538, this.compassMaskLineLengths, this.comapssMaskLineOffsets, 25, 33);
 
-		for (int var5 = 0; var5 < this.activeMapFunctionCount; var5++) {
-			int var33 = this.activeMapFunctionX[var5] * 4 + 2 - localPlayer.x / 32;
-			int var34 = this.activeMapFunctionZ[var5] * 4 + 2 - localPlayer.z / 32;
-			this.drawOnMinimap(var33, this.activeMapFunctions[var5], var34);
+		for (int i = 0; i < this.activeMapFunctionCount; i++) {
+			int x = this.activeMapFunctionX[i] * 4 + 2 - localPlayer.x / 32;
+			int y = this.activeMapFunctionZ[i] * 4 + 2 - localPlayer.z / 32;
+			this.drawOnMinimap(x, this.activeMapFunctions[i], y);
 		}
 
-		for (int var6 = 0; var6 < 104; var6++) {
-			for (int var29 = 0; var29 < 104; var29++) {
-				LinkList var30 = this.levelObjStacks[this.currentLevel][var6][var29];
-				if (var30 != null) {
-					int var31 = var6 * 4 + 2 - localPlayer.x / 32;
-					int var32 = var29 * 4 + 2 - localPlayer.z / 32;
-					this.drawOnMinimap(var31, this.imageMapdot0, var32);
+		for (int ltx = 0; ltx < 104; ltx++) {
+			for (int ltz = 0; ltz < 104; ltz++) {
+				LinkList objs = this.levelObjStacks[this.currentLevel][ltx][ltz];
+
+				if (objs != null) {
+					int x = ltx * 4 + 2 - localPlayer.x / 32;
+					int y = ltz * 4 + 2 - localPlayer.z / 32;
+					this.drawOnMinimap(x, this.imageMapdot0, y);
 				}
 			}
 		}
 
-		for (int var7 = 0; var7 < this.npcCount; var7++) {
-			NpcEntity var26 = this.npcs[this.npcIds[var7]];
-			if (var26 != null && var26.isVisible() && var26.type.minimap) {
-				int var27 = var26.x / 32 - localPlayer.x / 32;
-				int var28 = var26.z / 32 - localPlayer.z / 32;
-				this.drawOnMinimap(var27, this.imageMapdot1, var28);
+		for (int i = 0; i < this.npcCount; i++) {
+			NpcEntity npc = this.npcs[this.npcIds[i]];
+
+			if (npc != null && npc.isVisible() && npc.type.minimap) {
+				int x = npc.x / 32 - localPlayer.x / 32;
+				int y = npc.z / 32 - localPlayer.z / 32;
+				this.drawOnMinimap(x, this.imageMapdot1, y);
 			}
 		}
 
-		for (int var8 = 0; var8 < this.playerCount; var8++) {
-			PlayerEntity var19 = this.players[this.playerIds[var8]];
-			if (var19 != null && var19.isVisible()) {
-				int var20 = var19.x / 32 - localPlayer.x / 32;
-				int var21 = var19.z / 32 - localPlayer.z / 32;
-				boolean var22 = false;
-				long var23 = JString.toBase37(var19.name);
-				for (int var25 = 0; var25 < this.friendCount; var25++) {
-					if (this.friendName37[var25] == var23 && this.friendWorld[var25] != 0) {
-						var22 = true;
+		for (int i = 0; i < this.playerCount; i++) {
+			PlayerEntity player = this.players[this.playerIds[i]];
+
+			if (player != null && player.isVisible()) {
+				int x = player.x / 32 - localPlayer.x / 32;
+				int y = player.z / 32 - localPlayer.z / 32;
+
+				boolean friend = false;
+				long name37 = JString.toBase37(player.name);
+				for (int j = 0; j < this.friendCount; j++) {
+					if (this.friendName37[j] == name37 && this.friendWorld[j] != 0) {
+						friend = true;
 						break;
 					}
 				}
 
-				if (var22) {
-					this.drawOnMinimap(var20, this.imageMapdot3, var21);
+				if (friend) {
+					this.drawOnMinimap(x, this.imageMapdot3, y);
 				} else {
-					this.drawOnMinimap(var20, this.imageMapdot2, var21);
+					this.drawOnMinimap(x, this.imageMapdot2, y);
 				}
 			}
 		}
 
 		if (this.hintType != 0 && loopCycle % 20 < 10) {
 			if (this.hintType == 1 && this.hintNpc >= 0 && this.hintNpc < this.npcs.length) {
-				NpcEntity var9 = this.npcs[this.hintNpc];
-				if (var9 != null) {
-					int var10 = var9.x / 32 - localPlayer.x / 32;
-					int var11 = var9.z / 32 - localPlayer.z / 32;
-					this.drawMinimapHint(var10, var11, this.imageMapmarker1);
+				NpcEntity npc = this.npcs[this.hintNpc];
+
+				if (npc != null) {
+					int x = npc.x / 32 - localPlayer.x / 32;
+					int y = npc.z / 32 - localPlayer.z / 32;
+					this.drawMinimapHint(x, y, this.imageMapmarker1);
 				}
-			}
+			} else if (this.hintType == 2) {
+				int x = (this.hintTileX - this.sceneBaseTileX) * 4 + 2 - localPlayer.x / 32;
+				int y = (this.hintTileZ - this.sceneBaseTileZ) * 4 + 2 - localPlayer.z / 32;
+				this.drawMinimapHint(x, y, this.imageMapmarker1);
+			} else if (this.hintType == 10 && this.hintPlayer >= 0 && this.hintPlayer < this.players.length) {
+				PlayerEntity player = this.players[this.hintPlayer];
 
-			if (this.hintType == 2) {
-				int var12 = (this.hintTileX - this.sceneBaseTileX) * 4 + 2 - localPlayer.x / 32;
-				int var13 = (this.hintTileZ - this.sceneBaseTileZ) * 4 + 2 - localPlayer.z / 32;
-				this.drawMinimapHint(var12, var13, this.imageMapmarker1);
-			}
-
-			if (this.hintType == 10 && this.hintPlayer >= 0 && this.hintPlayer < this.players.length) {
-				PlayerEntity var14 = this.players[this.hintPlayer];
-				if (var14 != null) {
-					int var15 = var14.x / 32 - localPlayer.x / 32;
-					int var16 = var14.z / 32 - localPlayer.z / 32;
-					this.drawMinimapHint(var15, var16, this.imageMapmarker1);
+				if (player != null) {
+					int x = player.x / 32 - localPlayer.x / 32;
+					int y = player.z / 32 - localPlayer.z / 32;
+					this.drawMinimapHint(x, y, this.imageMapmarker1);
 				}
 			}
 		}
 
 		if (this.flagSceneTileX != 0) {
-			int var17 = this.flagSceneTileX * 4 + 2 - localPlayer.x / 32;
-			int var18 = this.flagSceneTileZ * 4 + 2 - localPlayer.z / 32;
-			this.drawOnMinimap(var17, this.imageMapmarker0, var18);
+			int x = this.flagSceneTileX * 4 + 2 - localPlayer.x / 32;
+			int y = this.flagSceneTileZ * 4 + 2 - localPlayer.z / 32;
+			this.drawOnMinimap(x, this.imageMapmarker0, y);
 		}
 
 		Pix2D.fillRect(16777215, 3, 3, 97, 78);
+
 		this.areaViewport.bind();
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(IBILjb;)V")
-	public final void drawMinimapHint(int arg0, int arg2, Pix32 arg3) {
-		int var5 = arg0 * arg0 + arg2 * arg2;
-		if (var5 <= 4225 || var5 >= 90000) {
-			this.drawOnMinimap(arg0, arg3, arg2);
+	public final void drawMinimapHint(int dx, int dy, Pix32 image) {
+		int distance = dx * dx + dy * dy;
+		if (distance <= 4225 || distance >= 90000) {
+			this.drawOnMinimap(dx, image, dy);
 			return;
 		}
 
-		int var6 = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
-		int var7 = Model.sinTable[var6];
-		int var8 = Model.cosTable[var6];
-		int var9 = var7 * 256 / (this.macroMinimapZoom + 256);
-		int var10 = var8 * 256 / (this.macroMinimapZoom + 256);
-		int var11 = arg0 * var10 + arg2 * var9 >> 16;
-		int var12 = arg2 * var10 - arg0 * var9 >> 16;
+		int angle = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
+
+		int sinAngle = Model.sinTable[angle];
+		int cosAngle = Model.cosTable[angle];
+
+		sinAngle = sinAngle * 256 / (this.macroMinimapZoom + 256);
+		cosAngle = cosAngle * 256 / (this.macroMinimapZoom + 256);
+
+		int var11 = dx * cosAngle + dy * sinAngle >> 16;
+		int var12 = dy * cosAngle - dx * sinAngle >> 16;
+
 		double var13 = Math.atan2((double) var11, (double) var12);
 		int var15 = (int) (Math.sin(var13) * 63.0D);
 		int var16 = (int) (Math.cos(var13) * 57.0D);
+
 		this.imageMapedge.drawRotated(83 - var16 - 20, var13, 256, 15, 15, 20, 20, var15 + 94 + 4 - 10);
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(IZLjb;I)V")
-	public final void drawOnMinimap(int arg0, Pix32 arg2, int arg3) {
-		int var5 = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
-		int var6 = arg0 * arg0 + arg3 * arg3;
-		if (var6 > 6400) {
+	public final void drawOnMinimap(int dx, Pix32 image, int dy) {
+		int angle = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
+
+		int distance = dx * dx + dy * dy;
+		if (distance > 6400) {
 			return;
 		}
 
-		int var7 = Model.sinTable[var5];
-		int var8 = Model.cosTable[var5];
-		int var9 = var7 * 256 / (this.macroMinimapZoom + 256);
-		int var10 = var8 * 256 / (this.macroMinimapZoom + 256);
-		int var11 = arg0 * var10 + arg3 * var9 >> 16;
-		int var12 = arg3 * var10 - arg0 * var9 >> 16;
-		if (var6 > 2500) {
-			arg2.drawMasked(this.imageMapback, false, var11 + 94 - arg2.width / 2 + 4, 83 - var12 - arg2.height / 2 - 4);
+		int sinAngle = Model.sinTable[angle];
+		int cosAngle = Model.cosTable[angle];
+
+		sinAngle = sinAngle * 256 / (this.macroMinimapZoom + 256);
+		cosAngle = cosAngle * 256 / (this.macroMinimapZoom + 256);
+
+		int x = dx * cosAngle + dy * sinAngle >> 16;
+		int y = dy * cosAngle - dx * sinAngle >> 16;
+
+		if (distance > 2500) {
+			image.drawMasked(this.imageMapback, x + 94 - image.width / 2 + 4, 83 - y - image.height / 2 - 4);
 		} else {
-			arg2.draw(var11 + 94 - arg2.width / 2 + 4, 83 - var12 - arg2.height / 2 - 4);
+			image.draw(x + 94 - image.width / 2 + 4, 83 - y - image.height / 2 - 4);
 		}
 	}
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(Ljava/lang/String;Ljava/lang/String;IZ)V")
-	public final void addMessage(String arg0, String arg1, int arg2) {
-		if (arg2 == 0 && this.stickyChatInterfaceId != -1) {
-			this.modalMessage = arg0;
+	public final void addMessage(String text, String sender, int type) {
+		if (type == 0 && this.stickyChatInterfaceId != -1) {
+			this.modalMessage = text;
 			super.mouseClickButton = 0;
 		}
 
@@ -10825,15 +10999,15 @@ public class Client extends GameShell {
 			this.redrawChatback = true;
 		}
 
-		for (int var5 = 99; var5 > 0; var5--) {
-			this.messageType[var5] = this.messageType[var5 - 1];
-			this.messageSender[var5] = this.messageSender[var5 - 1];
-			this.messageText[var5] = this.messageText[var5 - 1];
+		for (int i = 99; i > 0; i--) {
+			this.messageType[i] = this.messageType[i - 1];
+			this.messageSender[i] = this.messageSender[i - 1];
+			this.messageText[i] = this.messageText[i - 1];
 		}
 
-		this.messageType[0] = arg2;
-		this.messageSender[0] = arg1;
-		this.messageText[0] = arg0;
+		this.messageType[0] = type;
+		this.messageSender[0] = sender;
+		this.messageText[0] = text;
 	}
 
 	// note: placement confirmed by referencing OS1
@@ -11011,32 +11185,37 @@ public class Client extends GameShell {
 		this.flameThread = true;
 
 		try {
-			long var2 = System.currentTimeMillis();
-			int var4 = 0;
-			int var5 = 20;
+			long last = System.currentTimeMillis();
+			int cycle = 0;
+			int interval = 20;
+
 			while (this.flameActive) {
 				this.flameCycle++;
+
 				this.updateFlames();
 				this.updateFlames();
 				this.drawFlames();
-				var4++;
-				if (var4 > 10) {
-					long var6 = System.currentTimeMillis();
-					int var8 = (int) (var6 - var2) / 10 - var5;
-					var5 = 40 - var8;
-					if (var5 < 5) {
-						var5 = 5;
+
+				cycle++;
+				if (cycle > 10) {
+					long now = System.currentTimeMillis();
+					int delay = (int) (now - last) / 10 - interval;
+
+					interval = 40 - delay;
+					if (interval < 5) {
+						interval = 5;
 					}
-					var4 = 0;
-					var2 = var6;
+
+					cycle = 0;
+					last = now;
 				}
 
 				try {
-					Thread.sleep((long) var5);
-				} catch (Exception var9) {
+					Thread.sleep(interval);
+				} catch (Exception ignore) {
 				}
 			}
-		} catch (Exception var10) {
+		} catch (Exception ignore) {
 		}
 
 		this.flameThread = false;
@@ -11044,93 +11223,113 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.m(Z)V")
 	public final void updateFlames() {
-		short var2 = 256;
-		for (int var3 = 10; var3 < 117; var3++) {
-			int var18 = (int) (Math.random() * 100.0D);
-			if (var18 < 50) {
-				this.flameBuffer3[(var2 - 2 << 7) + var3] = 255;
+		short height = 256;
+
+		for (int x = 10; x < 117; x++) {
+			int rand = (int) (Math.random() * 100.0D);
+			if (rand < 50) {
+				this.flameBuffer3[(height - 2 << 7) + x] = 255;
 			}
 		}
-		for (int var4 = 0; var4 < 100; var4++) {
-			int var15 = (int) (Math.random() * 124.0D) + 2;
-			int var16 = (int) (Math.random() * 128.0D) + 128;
-			int var17 = (var16 << 7) + var15;
-			this.flameBuffer3[var17] = 192;
+
+		for (int i = 0; i < 100; i++) {
+			int x = (int) (Math.random() * 124.0D) + 2;
+			int y = (int) (Math.random() * 128.0D) + 128;
+			int index = (y << 7) + x;
+
+			this.flameBuffer3[index] = 192;
 		}
-		for (int var5 = 1; var5 < var2 - 1; var5++) {
-			for (int var13 = 1; var13 < 127; var13++) {
-				int var14 = (var5 << 7) + var13;
-				this.flameBuffer2[var14] = (this.flameBuffer3[var14 - 1] + this.flameBuffer3[var14 + 1] + this.flameBuffer3[var14 - 128] + this.flameBuffer3[var14 + 128]) / 4;
+
+		for (int y = 1; y < height - 1; y++) {
+			for (int x = 1; x < 127; x++) {
+				int index = (y << 7) + x;
+				this.flameBuffer2[index] = (this.flameBuffer3[index - 1] + this.flameBuffer3[index + 1] + this.flameBuffer3[index - 128] + this.flameBuffer3[index + 128]) / 4;
 			}
 		}
+
 		this.flameCycle0 += 128;
+
 		if (this.flameCycle0 > this.flameBuffer0.length) {
 			this.flameCycle0 -= this.flameBuffer0.length;
-			int var6 = (int) (Math.random() * 12.0D);
-			this.updateFlameBuffer(this.imageRunes[var6]);
+
+			int rand = (int) (Math.random() * 12.0D);
+			this.updateFlameBuffer(this.imageRunes[rand]);
 		}
-		for (int var7 = 1; var7 < var2 - 1; var7++) {
-			for (int var10 = 1; var10 < 127; var10++) {
-				int var11 = (var7 << 7) + var10;
-				int var12 = this.flameBuffer2[var11 + 128] - this.flameBuffer0[this.flameCycle0 + var11 & this.flameBuffer0.length - 1] / 5;
-				if (var12 < 0) {
-					var12 = 0;
+
+		for (int y = 1; y < height - 1; y++) {
+			for (int x = 1; x < 127; x++) {
+				int index = (y << 7) + x;
+				int intensity = this.flameBuffer2[index + 128] - this.flameBuffer0[this.flameCycle0 + index & this.flameBuffer0.length - 1] / 5;
+				if (intensity < 0) {
+					intensity = 0;
 				}
-				this.flameBuffer3[var11] = var12;
+
+				this.flameBuffer3[index] = intensity;
 			}
 		}
-		for (int var8 = 0; var8 < var2 - 1; var8++) {
-			this.flameLineOffset[var8] = this.flameLineOffset[var8 + 1];
+
+		for (int y = 0; y < height - 1; y++) {
+			this.flameLineOffset[y] = this.flameLineOffset[y + 1];
 		}
-		this.flameLineOffset[var2 - 1] = (int) (Math.sin((double) loopCycle / 14.0D) * 16.0D + Math.sin((double) loopCycle / 15.0D) * 14.0D + Math.sin((double) loopCycle / 16.0D) * 12.0D);
+
+		this.flameLineOffset[height - 1] = (int) (Math.sin((double) loopCycle / 14.0D) * 16.0D + Math.sin((double) loopCycle / 15.0D) * 14.0D + Math.sin((double) loopCycle / 16.0D) * 12.0D);
+
 		if (this.flameGradientCycle0 > 0) {
 			this.flameGradientCycle0 -= 4;
 		}
+
 		if (this.flameGradientCycle1 > 0) {
 			this.flameGradientCycle1 -= 4;
 		}
 
 		if (this.flameGradientCycle0 == 0 && this.flameGradientCycle1 == 0) {
-			int var9 = (int) (Math.random() * 2000.0D);
-			if (var9 == 0) {
+			int rand = (int) (Math.random() * 2000.0D);
+
+			if (rand == 0) {
 				this.flameGradientCycle0 = 1024;
-			} else if (var9 == 1) {
+			} else if (rand == 1) {
 				this.flameGradientCycle1 = 1024;
 			}
 		}
 	}
 
 	@ObfuscatedName("client.a(Lkb;B)V")
-	public final void updateFlameBuffer(Pix8 arg0) {
-		short var3 = 256;
-		for (int var4 = 0; var4 < this.flameBuffer0.length; var4++) {
-			this.flameBuffer0[var4] = 0;
-		}
-		for (int var5 = 0; var5 < 5000; var5++) {
-			int var17 = (int) (Math.random() * 128.0D * (double) var3);
-			this.flameBuffer0[var17] = (int) (Math.random() * 256.0D);
-		}
-		for (int var6 = 0; var6 < 20; var6++) {
-			for (int var13 = 1; var13 < var3 - 1; var13++) {
-				for (int var15 = 1; var15 < 127; var15++) {
-					int var16 = (var13 << 7) + var15;
-					this.flameBuffer1[var16] = (this.flameBuffer0[var16 - 1] + this.flameBuffer0[var16 + 1] + this.flameBuffer0[var16 - 128] + this.flameBuffer0[var16 + 128]) / 4;
-				}
-			}
-			int[] var14 = this.flameBuffer0;
-			this.flameBuffer0 = this.flameBuffer1;
-			this.flameBuffer1 = var14;
+	public final void updateFlameBuffer(Pix8 image) {
+		short height = 256;
+
+		for (int i = 0; i < this.flameBuffer0.length; i++) {
+			this.flameBuffer0[i] = 0;
 		}
 
-		if (arg0 != null) {
-			int var7 = 0;
-			for (int var8 = 0; var8 < arg0.cropBottom; var8++) {
-				for (int var9 = 0; var9 < arg0.cropRight; var9++) {
-					if (arg0.pixels[var7++] != 0) {
-						int var10 = var9 + 16 + arg0.cropLeft;
-						int var11 = var8 + 16 + arg0.cropTop;
-						int var12 = (var11 << 7) + var10;
-						this.flameBuffer0[var12] = 0;
+		for (int i = 0; i < 5000; i++) {
+			int rand = (int) (Math.random() * 128.0D * (double) height);
+			this.flameBuffer0[rand] = (int) (Math.random() * 256.0D);
+		}
+
+		for (int i = 0; i < 20; i++) {
+			for (int y = 1; y < height - 1; y++) {
+				for (int x = 1; x < 127; x++) {
+					int index = (y << 7) + x;
+					this.flameBuffer1[index] = (this.flameBuffer0[index - 1] + this.flameBuffer0[index + 1] + this.flameBuffer0[index - 128] + this.flameBuffer0[index + 128]) / 4;
+				}
+			}
+
+			int[] last = this.flameBuffer0;
+			this.flameBuffer0 = this.flameBuffer1;
+			this.flameBuffer1 = last;
+		}
+
+		if (image != null) {
+			int off = 0;
+
+			for (int y = 0; y < image.cropBottom; y++) {
+				for (int x = 0; x < image.cropRight; x++) {
+					if (image.pixels[off++] != 0) {
+						int x0 = x + 16 + image.cropLeft;
+						int y0 = y + 16 + image.cropTop;
+						int index = (y0 << 7) + x0;
+
+						this.flameBuffer0[index] = 0;
 					}
 				}
 			}
@@ -11139,87 +11338,107 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.O(I)V")
 	public final void drawFlames() {
-		short var2 = 256;
+		short height = 256;
+
 		if (this.flameGradientCycle0 > 0) {
-			for (int var3 = 0; var3 < 256; var3++) {
+			for (int i = 0; i < 256; i++) {
 				if (this.flameGradientCycle0 > 768) {
-					this.flameGradient[var3] = this.mix(1024 - this.flameGradientCycle0, this.flameGradient0[var3], this.flameGradient1[var3]);
+					this.flameGradient[i] = this.mix(1024 - this.flameGradientCycle0, this.flameGradient0[i], this.flameGradient1[i]);
 				} else if (this.flameGradientCycle0 > 256) {
-					this.flameGradient[var3] = this.flameGradient1[var3];
+					this.flameGradient[i] = this.flameGradient1[i];
 				} else {
-					this.flameGradient[var3] = this.mix(256 - this.flameGradientCycle0, this.flameGradient1[var3], this.flameGradient0[var3]);
+					this.flameGradient[i] = this.mix(256 - this.flameGradientCycle0, this.flameGradient1[i], this.flameGradient0[i]);
 				}
 			}
 		} else if (this.flameGradientCycle1 > 0) {
-			for (int var4 = 0; var4 < 256; var4++) {
+			for (int i = 0; i < 256; i++) {
 				if (this.flameGradientCycle1 > 768) {
-					this.flameGradient[var4] = this.mix(1024 - this.flameGradientCycle1, this.flameGradient0[var4], this.flameGradient2[var4]);
+					this.flameGradient[i] = this.mix(1024 - this.flameGradientCycle1, this.flameGradient0[i], this.flameGradient2[i]);
 				} else if (this.flameGradientCycle1 > 256) {
-					this.flameGradient[var4] = this.flameGradient2[var4];
+					this.flameGradient[i] = this.flameGradient2[i];
 				} else {
-					this.flameGradient[var4] = this.mix(256 - this.flameGradientCycle1, this.flameGradient2[var4], this.flameGradient0[var4]);
+					this.flameGradient[i] = this.mix(256 - this.flameGradientCycle1, this.flameGradient2[i], this.flameGradient0[i]);
 				}
 			}
 		} else {
-			for (int var5 = 0; var5 < 256; var5++) {
-				this.flameGradient[var5] = this.flameGradient0[var5];
+			for (int i = 0; i < 256; i++) {
+				this.flameGradient[i] = this.flameGradient0[i];
 			}
 		}
-		for (int var6 = 0; var6 < 33920; var6++) {
-			this.imageTitle0.data[var6] = this.imageFlamesLeft.pixels[var6];
+
+		for (int i = 0; i < 33920; i++) {
+			this.imageTitle0.data[i] = this.imageFlamesLeft.pixels[i];
 		}
-		int var7 = 0;
-		int var8 = 1152;
-		for (int var9 = 1; var9 < var2 - 1; var9++) {
-			int var23 = (var2 - var9) * this.flameLineOffset[var9] / var2;
-			int var24 = var23 + 22;
-			if (var24 < 0) {
-				var24 = 0;
+
+		int srcOffset = 0;
+		int dstOffset = 1152;
+
+		for (int y = 1; y < height - 1; y++) {
+			int offset = (height - y) * this.flameLineOffset[y] / height;
+
+			int step = offset + 22;
+			if (step < 0) {
+				step = 0;
 			}
-			var7 += var24;
-			for (int var25 = var24; var25 < 128; var25++) {
-				int var26 = this.flameBuffer3[var7++];
-				if (var26 == 0) {
-					var8++;
+
+			srcOffset += step;
+
+			for (int x = step; x < 128; x++) {
+				int value = this.flameBuffer3[srcOffset++];
+
+				if (value == 0) {
+					dstOffset++;
 				} else {
-					int var28 = 256 - var26;
-					int var29 = this.flameGradient[var26];
-					int var30 = this.imageTitle0.data[var8];
-					this.imageTitle0.data[var8++] = ((var29 & 0xFF00FF) * var26 + (var30 & 0xFF00FF) * var28 & 0xFF00FF00) + ((var29 & 0xFF00) * var26 + (var30 & 0xFF00) * var28 & 0xFF0000) >> 8;
+					int invAlpha = 256 - value;
+					value = this.flameGradient[value];
+					int background = this.imageTitle0.data[dstOffset];
+
+					this.imageTitle0.data[dstOffset++] = ((value & 0xFF00FF) * value + (background & 0xFF00FF) * invAlpha & 0xFF00FF00) + ((value & 0xFF00) * value + (background & 0xFF00) * invAlpha & 0xFF0000) >> 8;
 				}
 			}
-			var8 += var24;
+
+			dstOffset += step;
 		}
+
 		this.imageTitle0.draw(super.graphics, 0, 0);
-		for (int var10 = 0; var10 < 33920; var10++) {
-			this.imageTitle1.data[var10] = this.imageFlamesRight.pixels[var10];
+
+		for (int i = 0; i < 33920; i++) {
+			this.imageTitle1.data[i] = this.imageFlamesRight.pixels[i];
 		}
-		int var11 = 0;
-		int var12 = 1176;
-		for (int var13 = 1; var13 < var2 - 1; var13++) {
-			int var14 = (var2 - var13) * this.flameLineOffset[var13] / var2;
-			int var15 = 103 - var14;
-			int var16 = var12 + var14;
-			for (int var17 = 0; var17 < var15; var17++) {
-				int var18 = this.flameBuffer3[var11++];
-				if (var18 == 0) {
-					var16++;
+
+		srcOffset = 0;
+		dstOffset = 1176;
+
+		for (int y = 1; y < height - 1; y++) {
+			int offset = (height - y) * this.flameLineOffset[y] / height;
+
+			int step = 103 - offset;
+			dstOffset += offset;
+
+			for (int x = 0; x < step; x++) {
+				int value = this.flameBuffer3[srcOffset++];
+
+				if (value == 0) {
+					dstOffset++;
 				} else {
-					int var20 = 256 - var18;
-					int var21 = this.flameGradient[var18];
-					int var22 = this.imageTitle1.data[var16];
-					this.imageTitle1.data[var16++] = ((var21 & 0xFF00FF) * var18 + (var22 & 0xFF00FF) * var20 & 0xFF00FF00) + ((var21 & 0xFF00) * var18 + (var22 & 0xFF00) * var20 & 0xFF0000) >> 8;
+					int invAlpha = 256 - value;
+					value = this.flameGradient[value];
+					int background = this.imageTitle1.data[dstOffset];
+
+					this.imageTitle1.data[dstOffset++] = ((value & 0xFF00FF) * value + (background & 0xFF00FF) * invAlpha & 0xFF00FF00) + ((value & 0xFF00) * value + (background & 0xFF00) * invAlpha & 0xFF0000) >> 8;
 				}
 			}
-			var11 += 128 - var15;
-			var12 = 128 - var15 - var14 + var16;
+
+			srcOffset += 128 - step;
+			dstOffset = 128 - step - offset + dstOffset;
 		}
+
 		this.imageTitle1.draw(super.graphics, 0, 637);
 	}
 
 	@ObfuscatedName("client.a(BIII)I")
-	public final int mix(int arg1, int arg2, int arg3) {
-		int var5 = 256 - arg1;
-		return ((arg2 & 0xFF00FF) * var5 + (arg3 & 0xFF00FF) * arg1 & 0xFF00FF00) + ((arg2 & 0xFF00) * var5 + (arg3 & 0xFF00) * arg1 & 0xFF0000) >> 8;
+	public final int mix(int alpha, int src, int dst) {
+		int invAlpha = 256 - alpha;
+		return ((src & 0xFF00FF) * invAlpha + (dst & 0xFF00FF) * alpha & 0xFF00FF00) + ((src & 0xFF00) * invAlpha + (dst & 0xFF00) * alpha & 0xFF0000) >> 8;
 	}
 }

@@ -419,7 +419,7 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(Lkb;ZII)V")
-	public void drawMasked(Pix8 arg0, boolean arg1, int arg2, int arg3) {
+	public void drawMasked(Pix8 arg0, int arg2, int arg3) {
 		int var5 = this.cropLeft + arg2;
 		int var6 = this.cropTop + arg3;
 		int var7 = Pix2D.width2d * var6 + var5;
@@ -428,9 +428,6 @@ public class Pix32 extends Pix2D {
 		int var10 = this.cropRight;
 		int var11 = Pix2D.width2d - var10;
 		int var12 = 0;
-		if (arg1) {
-			return;
-		}
 		if (var6 < Pix2D.top) {
 			int var13 = Pix2D.top - var6;
 			var9 -= var13;
