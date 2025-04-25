@@ -22,13 +22,13 @@ java {
 }
 
 application {
-    mainClass = "deob.client"
+    mainClass = "jagex2.client.Client"
 }
 
 jar {
     manifest {
         attributes(
-            'Main-Class': 'deob.client'
+            'Main-Class': 'jagex2.client.Client'
         )
     }
 

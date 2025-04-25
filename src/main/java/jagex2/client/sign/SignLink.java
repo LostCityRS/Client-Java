@@ -12,7 +12,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 
-public class signlink implements Runnable {
+public class SignLink implements Runnable {
 
 	public static int storeid = 32;
 
@@ -93,7 +93,7 @@ public class signlink implements Runnable {
 		savereq = null;
 		urlreq = null;
 		socketip = arg0;
-		Thread var1 = new Thread(new signlink());
+		Thread var1 = new Thread(new SignLink());
 		var1.setDaemon(true);
 		var1.start();
 		while (!active) {

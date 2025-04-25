@@ -1,7 +1,7 @@
 package jagex2.dash3d;
 
 import deob.ObfuscatedName;
-import jagex2.client.client;
+import jagex2.client.Client;
 import jagex2.config.IdkType;
 import jagex2.config.ObjType;
 import jagex2.config.SeqType;
@@ -96,7 +96,7 @@ public class PlayerEntity extends PathingEntity {
 		}
 		for (int var4 = 0; var4 < 5; var4++) {
 			int var7 = arg0.g1();
-			if (var7 < 0 || var7 >= client.DESIGN_BODY_COLOUR[var4].length) {
+			if (var7 < 0 || var7 >= Client.DESIGN_BODY_COLOUR[var4].length) {
 				var7 = 0;
 			}
 			this.colours[var4] = var7;
@@ -186,10 +186,10 @@ public class PlayerEntity extends PathingEntity {
 			}
 		}
 		if (this.locModel != null) {
-			if (client.loopCycle >= this.locStopCycle) {
+			if (Client.loopCycle >= this.locStopCycle) {
 				this.locModel = null;
 			}
-			if (client.loopCycle >= this.locStartCycle && client.loopCycle < this.locStopCycle) {
+			if (Client.loopCycle >= this.locStartCycle && Client.loopCycle < this.locStopCycle) {
 				Model var7 = this.locModel;
 				var7.translate(this.locOffsetY - this.y, this.locOffsetX - super.x, this.locOffsetZ - super.z);
 				if (super.dstYaw == 512) {
@@ -299,9 +299,9 @@ public class PlayerEntity extends PathingEntity {
 			var9 = new Model(var14, var13);
 			for (int var16 = 0; var16 < 5; var16++) {
 				if (this.colours[var16] != 0) {
-					var9.recolour(client.DESIGN_BODY_COLOUR[var16][0], client.DESIGN_BODY_COLOUR[var16][this.colours[var16]]);
+					var9.recolour(Client.DESIGN_BODY_COLOUR[var16][0], Client.DESIGN_BODY_COLOUR[var16][this.colours[var16]]);
 					if (var16 == 1) {
-						var9.recolour(client.DESIGN_HAIR_COLOUR[0], client.DESIGN_HAIR_COLOUR[this.colours[var16]]);
+						var9.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.colours[var16]]);
 					}
 				}
 			}
@@ -364,9 +364,9 @@ public class PlayerEntity extends PathingEntity {
 		Model var8 = new Model(var6, var4);
 		for (int var9 = 0; var9 < 5; var9++) {
 			if (this.colours[var9] != 0) {
-				var8.recolour(client.DESIGN_BODY_COLOUR[var9][0], client.DESIGN_BODY_COLOUR[var9][this.colours[var9]]);
+				var8.recolour(Client.DESIGN_BODY_COLOUR[var9][0], Client.DESIGN_BODY_COLOUR[var9][this.colours[var9]]);
 				if (var9 == 1) {
-					var8.recolour(client.DESIGN_HAIR_COLOUR[0], client.DESIGN_HAIR_COLOUR[this.colours[var9]]);
+					var8.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.colours[var9]]);
 				}
 			}
 		}

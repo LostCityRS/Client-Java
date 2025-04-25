@@ -9,8 +9,8 @@ import java.util.zip.CRC32;
 import java.util.zip.GZIPInputStream;
 
 import deob.ObfuscatedName;
-import jagex2.client.client;
-import jagex2.client.sign.signlink;
+import jagex2.client.Client;
+import jagex2.client.sign.SignLink;
 import jagex2.datastruct.DoublyLinkList;
 import jagex2.datastruct.LinkList;
 
@@ -54,7 +54,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public boolean running = true;
 
 	@ObfuscatedName("vb.s")
-	public client app;
+	public Client app;
 
 	@ObfuscatedName("vb.t")
 	public CRC32 crc32 = new CRC32();
@@ -132,7 +132,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public Socket socket;
 
 	@ObfuscatedName("vb.a(Lyb;Lclient;)V")
-	public final void unpack(Jagfile arg0, client arg1) {
+	public final void unpack(Jagfile arg0, Client arg1) {
 		String[] var3 = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
 		for (int var4 = 0; var4 < 4; var4++) {
 			byte[] var26 = arg0.read(var3[var4], null);
@@ -451,7 +451,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				}
 			}
 		} catch (Exception var10) {
-			signlink.reporterror("od_ex " + var10.getMessage());
+			SignLink.reporterror("od_ex " + var10.getMessage());
 		}
 	}
 
@@ -597,7 +597,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				if (this.current != null) {
 					this.waitCycles = 0;
 					if (var6 == 0) {
-						signlink.reporterror("Rej: " + var4 + "," + var5);
+						SignLink.reporterror("Rej: " + var4 + "," + var5);
 						this.current.data = null;
 						if (this.current.urgent) {
 							LinkList var9 = this.completed;
@@ -690,7 +690,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					return;
 				}
 				this.socketOpenTime = var3;
-				this.socket = this.app.openSocket(client.portOffset + 43594);
+				this.socket = this.app.openSocket(Client.portOffset + 43594);
 				this.in = this.socket.getInputStream();
 				this.out = this.socket.getOutputStream();
 				this.out.write(15);

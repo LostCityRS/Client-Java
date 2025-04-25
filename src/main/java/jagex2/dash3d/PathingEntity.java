@@ -1,7 +1,7 @@
 package jagex2.dash3d;
 
 import deob.ObfuscatedName;
-import jagex2.client.client;
+import jagex2.client.Client;
 import jagex2.config.SeqType;
 
 @ObfuscatedName("z")
@@ -263,10 +263,10 @@ public class PathingEntity extends Entity {
 	@ObfuscatedName("z.a(III)V")
 	public final void hit(int arg0, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
-			if (this.damageCycle[var4] <= client.loopCycle) {
+			if (this.damageCycle[var4] <= Client.loopCycle) {
 				this.damage[var4] = arg2;
 				this.damageType[var4] = arg0;
-				this.damageCycle[var4] = client.loopCycle + 70;
+				this.damageCycle[var4] = Client.loopCycle + 70;
 				return;
 			}
 		}

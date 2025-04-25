@@ -6,7 +6,7 @@ import deob.ObfuscatedName;
 public class MouseTracking implements Runnable {
 
 	@ObfuscatedName("fc.a")
-	public client app;
+	public Client app;
 
 	@ObfuscatedName("fc.b")
 	public boolean active = true;
@@ -23,7 +23,7 @@ public class MouseTracking implements Runnable {
 	@ObfuscatedName("fc.f")
 	public int[] y = new int[500];
 
-	public MouseTracking(client arg0) {
+	public MouseTracking(Client arg0) {
 		this.app = arg0;
 	}
 

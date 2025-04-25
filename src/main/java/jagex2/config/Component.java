@@ -1,7 +1,7 @@
 package jagex2.config;
 
 import deob.ObfuscatedName;
-import jagex2.client.client;
+import jagex2.client.Client;
 import jagex2.datastruct.JString;
 import jagex2.datastruct.LruCache;
 import jagex2.graphics.Model;
@@ -458,7 +458,7 @@ public class Component {
 			var3 = NpcType.get(arg1).getHeadModel();
 		}
 		if (arg0 == 3) {
-			var3 = client.localPlayer.getHeadModel();
+			var3 = Client.localPlayer.getHeadModel();
 		}
 		if (arg0 == 4) {
 			var3 = ObjType.get(arg1).getInvModel(50);

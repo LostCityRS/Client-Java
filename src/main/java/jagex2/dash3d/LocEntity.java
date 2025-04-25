@@ -1,7 +1,7 @@
 package jagex2.dash3d;
 
 import deob.ObfuscatedName;
-import jagex2.client.client;
+import jagex2.client.Client;
 import jagex2.config.LocType;
 import jagex2.config.SeqType;
 import jagex2.graphics.Model;
@@ -49,7 +49,7 @@ public class LocEntity extends Entity {
 		this.field495 = arg0;
 		this.field496 = SeqType.types[arg9];
 		this.field497 = 0;
-		this.field498 = client.loopCycle;
+		this.field498 = Client.loopCycle;
 		if (arg6 && this.field496.replayoff != -1) {
 			this.field497 = (int) (Math.random() * (double) this.field496.frameCount);
 			this.field498 -= (int) (Math.random() * (double) this.field496.getFrameDuration(this.field497));
@@ -59,7 +59,7 @@ public class LocEntity extends Entity {
 	@ObfuscatedName("cb.a(I)Lfb;")
 	public final Model getModel() {
 		if (this.field496 != null) {
-			int var2 = client.loopCycle - this.field498;
+			int var2 = Client.loopCycle - this.field498;
 			if (var2 > 100 && this.field496.replayoff > 0) {
 				var2 = 100;
 			}
@@ -76,7 +76,7 @@ public class LocEntity extends Entity {
 				} while (this.field497 >= 0 && this.field497 < this.field496.frameCount);
 				this.field496 = null;
 			}
-			this.field498 = client.loopCycle - var2;
+			this.field498 = Client.loopCycle - var2;
 		}
 		int var3 = -1;
 		if (this.field496 != null) {
