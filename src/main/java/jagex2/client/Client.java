@@ -545,7 +545,7 @@ public class Client extends GameShell {
 	public int objDragCycles;
 
 	@ObfuscatedName("client.cc")
-	public int field1255;
+	public int membersAccount;
 
 	@ObfuscatedName("client.dc")
 	public int socialAction;
@@ -587,7 +587,7 @@ public class Client extends GameShell {
 	public int[][] bfsCost = new int[104][104];
 
 	@ObfuscatedName("client.Ob")
-	public int[] field1241 = new int[100];
+	public int[] messageIds = new int[100];
 
 	@ObfuscatedName("client.Wb")
 	public boolean scrollGrabbed = false;
@@ -647,7 +647,7 @@ public class Client extends GameShell {
 	public int chatInterfaceId = -1;
 
 	@ObfuscatedName("client.Oe")
-	public int field1397 = -1;
+	public int localPid = -1;
 
 	@ObfuscatedName("client.Df")
 	public boolean errorLoading = false;
@@ -689,7 +689,7 @@ public class Client extends GameShell {
 	public String loginMessage1 = "";
 
 	@ObfuscatedName("client.Yg")
-	public int[] field1510 = new int[2000];
+	public int[] varCache = new int[2000];
 
 	@ObfuscatedName("client.Zg")
 	public int[] bfsStepX = new int[4000];
@@ -845,10 +845,10 @@ public class Client extends GameShell {
 	public int flameCycle0;
 
 	@ObfuscatedName("client.Ld")
-	public int field1342;
+	public int mapLastBaseX;
 
 	@ObfuscatedName("client.Md")
-	public int field1343;
+	public int mapLastBaseZ;
 
 	@ObfuscatedName("client.Nd")
 	public static int drawCycle;
@@ -869,7 +869,7 @@ public class Client extends GameShell {
 	public int wildernessLevel;
 
 	@ObfuscatedName("client.cf")
-	public int field1411;
+	public int privateMessageCount;
 
 	@ObfuscatedName("client.hf")
 	public int inMultizone;
@@ -4819,7 +4819,7 @@ public class Client extends GameShell {
 		}
 		if (arg0.targetId >= 32768) {
 			int var6 = arg0.targetId - 32768;
-			if (this.field1397 == var6) {
+			if (this.localPid == var6) {
 				var6 = this.LOCAL_PLAYER_INDEX;
 			}
 			PlayerEntity var7 = this.players[var6];
@@ -5579,7 +5579,7 @@ public class Client extends GameShell {
 				if (var2.target < 0) {
 					int var4 = -var2.target - 1;
 					PlayerEntity var5;
-					if (this.field1397 == var4) {
+					if (this.localPid == var4) {
 						var5 = localPlayer;
 					} else {
 						var5 = this.players[var4];
@@ -6624,11 +6624,13 @@ public class Client extends GameShell {
 		if (this.stream == null) {
 			return false;
 		}
+
 		try {
-			int var2 = this.stream.available();
-			if (var2 == 0) {
+			int available = this.stream.available();
+			if (available == 0) {
 				return false;
 			}
+
 			if (this.ptype == -1) {
 				this.stream.read(this.in.data, 0, 1);
 				this.ptype = this.in.data[0] & 0xFF;
@@ -6636,935 +6638,1217 @@ public class Client extends GameShell {
 					this.ptype = this.ptype - this.randomIn.nextInt() & 0xFF;
 				}
 				this.psize = Protocol.CLIENTPROT_LENGTH[this.ptype];
-				var2--;
+				available--;
 			}
+
 			if (this.psize == -1) {
-				if (var2 <= 0) {
+				if (available <= 0) {
 					return false;
 				}
 				this.stream.read(this.in.data, 0, 1);
 				this.psize = this.in.data[0] & 0xFF;
-				var2--;
+				available--;
 			}
+
 			if (this.psize == -2) {
-				if (var2 <= 1) {
+				if (available <= 1) {
 					return false;
 				}
 				this.stream.read(this.in.data, 0, 2);
 				this.in.pos = 0;
 				this.psize = this.in.g2();
-				var2 -= 2;
+				available -= 2;
 			}
-			if (var2 < this.psize) {
+
+			if (available < this.psize) {
 				return false;
 			}
+
 			this.in.pos = 0;
 			this.stream.read(this.in.data, 0, this.psize);
+
 			this.idleNetCycles = 0;
 			this.ptype2 = this.ptype1;
 			this.ptype1 = this.ptype0;
 			this.ptype0 = this.ptype;
+
 			if (this.ptype == 44) {
+				// LAST_LOGIN_INFO
 				this.lastAddress = this.in.g4();
 				this.daysSinceLogin = this.in.g2();
 				this.daysSinceRecoveriesChanged = this.in.g1();
 				this.unreadMessageCount = this.in.g2();
 				this.warnMembersInNonMembers = this.in.g1();
+
 				if (this.lastAddress != 0 && this.viewportInterfaceId == -1) {
 					SignLink.dnslookup(JString.formatIPv4(this.lastAddress));
 					this.closeInterfaces();
-					short var3 = 650;
+
+					short clientCode = 650;
 					if (this.daysSinceRecoveriesChanged != 201 || this.warnMembersInNonMembers == 1) {
-						var3 = 655;
+						clientCode = 655;
 					}
+
 					this.reportAbuseInput = "";
 					this.reportAbuseMuteOption = false;
-					for (int var4 = 0; var4 < Component.types.length; var4++) {
-						if (Component.types[var4] != null && Component.types[var4].clientCode == var3) {
-							this.viewportInterfaceId = Component.types[var4].layer;
+
+					for (int i = 0; i < Component.types.length; i++) {
+						if (Component.types[i] != null && Component.types[i].clientCode == clientCode) {
+							this.viewportInterfaceId = Component.types[i].layer;
 							break;
 						}
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 72) {
+				// UPDATE_INV_FULL
 				this.redrawSidebar = true;
-				int var5 = this.in.g2();
-				Component var6 = Component.types[var5];
-				int var7 = this.in.g1();
-				for (int var8 = 0; var8 < var7; var8++) {
-					var6.invSlotObjId[var8] = this.in.g2();
-					int var9 = this.in.g1();
-					if (var9 == 255) {
-						var9 = this.in.g4();
+
+				int comId = this.in.g2();
+				Component inv = Component.types[comId];
+				int size = this.in.g1();
+
+				for (int i = 0; i < size; i++) {
+					inv.invSlotObjId[i] = this.in.g2();
+
+					int count = this.in.g1();
+					if (count == 255) {
+						count = this.in.g4();
 					}
-					var6.invSlotObjCount[var8] = var9;
+
+					inv.invSlotObjCount[i] = count;
 				}
-				for (int var10 = var7; var10 < var6.invSlotObjId.length; var10++) {
-					var6.invSlotObjId[var10] = 0;
-					var6.invSlotObjCount[var10] = 0;
+
+				for (int i = size; i < inv.invSlotObjId.length; i++) {
+					inv.invSlotObjId[i] = 0;
+					inv.invSlotObjCount[i] = 0;
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 164) {
-				int var11 = this.in.g2();
-				int var12 = this.in.g2();
-				int var13 = this.in.g2();
-				ObjType var14 = ObjType.get(var12);
-				Component.types[var11].modelType = 4;
-				Component.types[var11].model = var12;
-				Component.types[var11].xan = var14.xan2d;
-				Component.types[var11].yan = var14.yan2d;
-				Component.types[var11].zoom = var14.zoom2d * 100 / var13;
+				// IF_SETOBJECT
+				int com = this.in.g2();
+				int objId = this.in.g2();
+				int zoom = this.in.g2();
+
+				ObjType obj = ObjType.get(objId);
+				Component.types[com].modelType = 4;
+				Component.types[com].model = objId;
+				Component.types[com].xan = obj.xan2d;
+				Component.types[com].yan = obj.yan2d;
+				Component.types[com].zoom = obj.zoom2d * 100 / zoom;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 207) {
-				int var15 = this.in.g2();
-				int var16 = this.in.g2();
+				// IF_OPENMAINSIDEMODAL
+				int main = this.in.g2();
+				int side = this.in.g2();
+
 				if (this.chatInterfaceId != -1) {
 					this.chatInterfaceId = -1;
 					this.redrawChatback = true;
 				}
+
 				if (this.chatbackInputOpen) {
 					this.chatbackInputOpen = false;
 					this.redrawChatback = true;
 				}
-				this.viewportInterfaceId = var15;
-				this.sidebarInterfaceId = var16;
+
+				this.viewportInterfaceId = main;
+				this.sidebarInterfaceId = side;
 				this.redrawSidebar = true;
 				this.redrawSideicons = true;
 				this.pressedContinueOption = false;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 192) {
 				this.field1264 = 255;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 70) {
-				long var17 = this.in.g8();
-				int var19 = this.in.g1();
-				String var20 = JString.formatName(JString.fromBase37(var17));
-				for (int var21 = 0; var21 < this.friendCount; var21++) {
-					if (this.friendName37[var21] == var17) {
-						if (this.friendWorld[var21] != var19) {
-							this.friendWorld[var21] = var19;
+				// UPDATE_FRIENDLIST
+				long username = this.in.g8();
+				int world = this.in.g1();
+
+				String displayName = JString.formatName(JString.fromBase37(username));
+				for (int i = 0; i < this.friendCount; i++) {
+					if (this.friendName37[i] == username) {
+						if (this.friendWorld[i] != world) {
+							this.friendWorld[i] = world;
 							this.redrawSidebar = true;
-							if (var19 > 0) {
-								this.addMessage(var20 + " has logged in.", "", 5);
-							}
-							if (var19 == 0) {
-								this.addMessage(var20 + " has logged out.", "", 5);
+
+							if (world > 0) {
+								this.addMessage(displayName + " has logged in.", "", 5);
+							} else if (world == 0) {
+								this.addMessage(displayName + " has logged out.", "", 5);
 							}
 						}
-						var20 = null;
+						displayName = null;
 						break;
 					}
 				}
-				if (var20 != null && this.friendCount < 200) {
-					this.friendName37[this.friendCount] = var17;
-					this.friendName[this.friendCount] = var20;
-					this.friendWorld[this.friendCount] = var19;
+
+				if (displayName != null && this.friendCount < 200) {
+					this.friendName37[this.friendCount] = username;
+					this.friendName[this.friendCount] = displayName;
+					this.friendWorld[this.friendCount] = world;
 					this.friendCount++;
 					this.redrawSidebar = true;
 				}
-				boolean var22 = false;
-				while (!var22) {
-					var22 = true;
-					for (int var23 = 0; var23 < this.friendCount - 1; var23++) {
-						if (this.friendWorld[var23] != nodeId && this.friendWorld[var23 + 1] == nodeId || this.friendWorld[var23] == 0 && this.friendWorld[var23 + 1] != 0) {
-							int var24 = this.friendWorld[var23];
-							this.friendWorld[var23] = this.friendWorld[var23 + 1];
-							this.friendWorld[var23 + 1] = var24;
-							String var25 = this.friendName[var23];
-							this.friendName[var23] = this.friendName[var23 + 1];
-							this.friendName[var23 + 1] = var25;
-							long var26 = this.friendName37[var23];
-							this.friendName37[var23] = this.friendName37[var23 + 1];
-							this.friendName37[var23 + 1] = var26;
+
+				boolean sorted = false;
+				while (!sorted) {
+					sorted = true;
+
+					for (int i = 0; i < this.friendCount - 1; i++) {
+						if (this.friendWorld[i] != nodeId && this.friendWorld[i + 1] == nodeId || this.friendWorld[i] == 0 && this.friendWorld[i + 1] != 0) {
+							int oldWorld = this.friendWorld[i];
+							this.friendWorld[i] = this.friendWorld[i + 1];
+							this.friendWorld[i + 1] = oldWorld;
+
+							String oldName = this.friendName[i];
+							this.friendName[i] = this.friendName[i + 1];
+							this.friendName[i + 1] = oldName;
+
+							long oldName37 = this.friendName37[i];
+							this.friendName37[i] = this.friendName37[i + 1];
+							this.friendName37[i + 1] = oldName37;
+
 							this.redrawSidebar = true;
-							var22 = false;
+							sorted = false;
 						}
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 17) {
+				// LOGOUT
 				this.logout();
 				this.ptype = -1;
 				return false;
 			}
+
 			if (this.ptype == 50) {
-				int var28 = this.in.g1();
-				int var29 = this.in.g1();
-				int var30 = this.in.g1();
-				int var31 = this.in.g1();
-				this.cameraModifierEnabled[var28] = true;
-				this.cameraModifierJitter[var28] = var29;
-				this.cameraModifierWobbleScale[var28] = var30;
-				this.cameraModifierWobbleSpeed[var28] = var31;
-				this.cameraModifierCycle[var28] = 0;
+				// CAM_SHAKE
+				int type = this.in.g1();
+				int jitter = this.in.g1();
+				int wobbleScale = this.in.g1();
+				int wobbleSpeed = this.in.g1();
+
+				this.cameraModifierEnabled[type] = true;
+				this.cameraModifierJitter[type] = jitter;
+				this.cameraModifierWobbleScale[type] = wobbleScale;
+				this.cameraModifierWobbleSpeed[type] = wobbleSpeed;
+				this.cameraModifierCycle[type] = 0;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 22) {
+				// ENABLE_TRACKING
 				InputTracking.setEnabled();
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 160) {
+				// UPDATE_RUNWEIGHT
 				if (this.selectedTab == 12) {
 					this.redrawSidebar = true;
 				}
+
 				this.runweight = this.in.g2b();
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 94) {
+				// UPDATE_ZONE_PARTIAL_FOLLOWS
 				this.baseX = this.in.g1();
 				this.baseZ = this.in.g1();
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 78) {
-				int var32 = this.in.g2();
-				int var33 = this.in.g2();
-				int var34 = var33 >> 10 & 0x1F;
-				int var35 = var33 >> 5 & 0x1F;
-				int var36 = var33 & 0x1F;
-				Component.types[var32].colour = (var36 << 3) + (var34 << 19) + (var35 << 11);
+				// IF_SETCOLOUR
+				int com = this.in.g2();
+				int colour = this.in.g2();
+
+				int r = colour >> 10 & 0x1F;
+				int g = colour >> 5 & 0x1F;
+				int b = colour & 0x1F;
+				Component.types[com].colour = (b << 3) + (r << 19) + (g << 11);
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 152) {
+				// P_COUNTDIALOG
 				this.showSocialInput = false;
 				this.chatbackInputOpen = true;
 				this.chatbackInput = "";
 				this.redrawChatback = true;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 53) {
+				// CAM_RESET
 				this.cutscene = false;
-				for (int var37 = 0; var37 < 5; var37++) {
-					this.cameraModifierEnabled[var37] = false;
+				for (int i = 0; i < 5; i++) {
+					this.cameraModifierEnabled[i] = false;
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 240) {
-				int var38 = this.in.g2();
-				if (var38 == 65535) {
-					var38 = -1;
+				// MIDI_SONG
+				int id = this.in.g2();
+				if (id == 65535) {
+					id = -1;
 				}
-				if (this.nextMidiSong != var38 && this.midiActive && !lowMemory) {
-					this.midiSong = var38;
+
+				if (this.nextMidiSong != id && this.midiActive && !lowMemory) {
+					this.midiSong = id;
 					this.midiFading = true;
 					this.onDemand.request(2, this.midiSong);
 				}
-				this.nextMidiSong = var38;
+
+				this.nextMidiSong = id;
 				this.nextMusicDelay = 0;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 173) {
-				int var39 = this.in.g2();
-				int var40 = this.in.g2();
+				int id = this.in.g2();
+				int delay = this.in.g2();
+
 				if (this.midiActive && !lowMemory) {
-					this.midiSong = var39;
+					this.midiSong = id;
 					this.midiFading = false;
 					this.onDemand.request(2, this.midiSong);
-					this.nextMusicDelay = var40;
+					this.nextMusicDelay = delay;
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 158) {
-				int var41 = this.in.g2b();
-				this.viewportOverlayInterfaceId = var41;
+				// IF_OPENMAINOVERLAY
+				int com = this.in.g2b();
+				this.viewportOverlayInterfaceId = com;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 9) {
+				// CHAT_FILTER_SETTINGS
 				this.chatPublicMode = this.in.g1();
 				this.chatPrivateMode = this.in.g1();
 				this.chatTradeMode = this.in.g1();
+
 				this.redrawPrivacySettings = true;
 				this.redrawChatback = true;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 209 || this.ptype == 29 || this.ptype == 69 || this.ptype == 198 || this.ptype == 137 || this.ptype == 39 || this.ptype == 234 || this.ptype == 155 || this.ptype == 125 || this.ptype == 232) {
 				this.readZonePacket(this.ptype, this.in);
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 241) {
-				int var42 = this.in.g2();
-				int var43 = this.in.g2b();
-				int var44 = this.in.g2b();
-				Component var45 = Component.types[var42];
-				var45.x = var43;
-				var45.y = var44;
+				// IF_SETPOSITION
+				int comId = this.in.g2();
+				int x = this.in.g2b();
+				int y = this.in.g2b();
+
+				Component com = Component.types[comId];
+				com.x = x;
+				com.y = y;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 226) {
-				int var46 = this.in.g2();
-				int var47 = this.in.g4();
-				this.field1510[var46] = var47;
-				if (this.varps[var46] != var47) {
-					this.varps[var46] = var47;
-					this.updateVarp(var46);
+				// VARP_LARGE
+				int varp = this.in.g2();
+				int value = this.in.g4();
+
+				this.varCache[varp] = value;
+
+				if (this.varps[varp] != value) {
+					this.varps[varp] = value;
+					this.updateVarp(varp);
+
 					this.redrawSidebar = true;
+
 					if (this.stickyChatInterfaceId != -1) {
 						this.redrawChatback = true;
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 210) {
-				this.field1397 = this.in.g2();
-				this.field1255 = this.in.g1();
+				// UPDATE_UID192
+				this.localPid = this.in.g2();
+				this.membersAccount = this.in.g1();
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 97) {
+				// SET_MULTIWAY
 				this.inMultizone = this.in.g1();
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 85) {
+				// UPDATE_REBOOT_TIMER
 				this.systemUpdateTimer = this.in.g2() * 30;
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 245) {
-				int var48 = this.in.g2();
-				int var49 = this.in.g2();
-				Component.types[var48].modelType = 1;
-				Component.types[var48].model = var49;
+				// IF_SETMODEL
+				int comId = this.in.g2();
+				int model = this.in.g2();
+
+				Component.types[comId].modelType = 1;
+				Component.types[comId].model = model;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 151) {
-				int var50 = this.in.g2();
-				int var51 = this.in.g1();
-				int var52 = this.in.g2();
+				int id = this.in.g2();
+				int loop = this.in.g1();
+				int delay = this.in.g2();
+
 				if (this.waveEnabled && !lowMemory && this.waveCount < 50) {
-					this.waveIds[this.waveCount] = var50;
-					this.waveLoops[this.waveCount] = var51;
-					this.waveDelay[this.waveCount] = Wave.delays[var50] + var52;
+					this.waveIds[this.waveCount] = id;
+					this.waveLoops[this.waveCount] = loop;
+					this.waveDelay[this.waveCount] = Wave.delays[id] + delay;
 					this.waveCount++;
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 87) {
-				for (int var53 = 0; var53 < this.varps.length; var53++) {
-					if (this.field1510[var53] != this.varps[var53]) {
-						this.varps[var53] = this.field1510[var53];
-						this.updateVarp(var53);
+				// RESET_CLIENT_VARCACHE
+				for (int i = 0; i < this.varps.length; i++) {
+					if (this.varCache[i] != this.varps[i]) {
+						this.varps[i] = this.varCache[i];
+						this.updateVarp(i);
+
 						this.redrawSidebar = true;
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 165) {
-				int var54 = this.in.g2();
-				int var55 = this.in.g2();
-				if (this.sceneCenterZoneX == var54 && this.sceneCenterZoneZ == var55 && this.sceneState == 2) {
+				// REBUILD_NORMAL
+				int zoneX = this.in.g2();
+				int zoneZ = this.in.g2();
+
+				if (this.sceneCenterZoneX == zoneX && this.sceneCenterZoneZ == zoneZ && this.sceneState == 2) {
 					this.ptype = -1;
 					return true;
 				}
-				this.sceneCenterZoneX = var54;
-				this.sceneCenterZoneZ = var55;
+
+				this.sceneCenterZoneX = zoneX;
+				this.sceneCenterZoneZ = zoneZ;
 				this.sceneBaseTileX = (this.sceneCenterZoneX - 6) * 8;
 				this.sceneBaseTileZ = (this.sceneCenterZoneZ - 6) * 8;
+
 				this.withinTutorialIsland = false;
 				if ((this.sceneCenterZoneX / 8 == 48 || this.sceneCenterZoneX / 8 == 49) && this.sceneCenterZoneZ / 8 == 48) {
 					this.withinTutorialIsland = true;
-				}
-				if (this.sceneCenterZoneX / 8 == 48 && this.sceneCenterZoneZ / 8 == 148) {
+				} else if (this.sceneCenterZoneX / 8 == 48 && this.sceneCenterZoneZ / 8 == 148) {
 					this.withinTutorialIsland = true;
 				}
+
 				this.sceneState = 1;
 				this.sceneLoadStartTime = System.currentTimeMillis();
+
 				this.areaViewport.bind();
 				this.fontPlain12.drawStringCenter(257, 0, "Loading - please wait.", 151);
 				this.fontPlain12.drawStringCenter(256, 16777215, "Loading - please wait.", 150);
 				this.areaViewport.draw(super.graphics, 4, 4);
-				int var56 = 0;
-				for (int var57 = (this.sceneCenterZoneX - 6) / 8; var57 <= (this.sceneCenterZoneX + 6) / 8; var57++) {
-					for (int var58 = (this.sceneCenterZoneZ - 6) / 8; var58 <= (this.sceneCenterZoneZ + 6) / 8; var58++) {
-						var56++;
+
+				int regions = 0;
+				for (int x = (this.sceneCenterZoneX - 6) / 8; x <= (this.sceneCenterZoneX + 6) / 8; x++) {
+					for (int z = (this.sceneCenterZoneZ - 6) / 8; z <= (this.sceneCenterZoneZ + 6) / 8; z++) {
+						regions++;
 					}
 				}
-				this.sceneMapLandData = new byte[var56][];
-				this.sceneMapLocData = new byte[var56][];
-				this.sceneMapIndex = new int[var56];
-				this.sceneMapLandFile = new int[var56];
-				this.sceneMapLocFile = new int[var56];
-				int var59 = 0;
-				for (int var60 = (this.sceneCenterZoneX - 6) / 8; var60 <= (this.sceneCenterZoneX + 6) / 8; var60++) {
-					for (int var61 = (this.sceneCenterZoneZ - 6) / 8; var61 <= (this.sceneCenterZoneZ + 6) / 8; var61++) {
-						this.sceneMapIndex[var59] = (var60 << 8) + var61;
-						if (this.withinTutorialIsland && (var61 == 49 || var61 == 149 || var61 == 147 || var60 == 50 || var60 == 49 && var61 == 47)) {
-							this.sceneMapLandFile[var59] = -1;
-							this.sceneMapLocFile[var59] = -1;
-							var59++;
+
+				this.sceneMapLandData = new byte[regions][];
+				this.sceneMapLocData = new byte[regions][];
+				this.sceneMapIndex = new int[regions];
+				this.sceneMapLandFile = new int[regions];
+				this.sceneMapLocFile = new int[regions];
+
+				int mapCount = 0;
+				for (int x = (this.sceneCenterZoneX - 6) / 8; x <= (this.sceneCenterZoneX + 6) / 8; x++) {
+					for (int z = (this.sceneCenterZoneZ - 6) / 8; z <= (this.sceneCenterZoneZ + 6) / 8; z++) {
+						this.sceneMapIndex[mapCount] = (x << 8) + z;
+
+						if (this.withinTutorialIsland && (z == 49 || z == 149 || z == 147 || x == 50 || x == 49 && z == 47)) {
+							this.sceneMapLandFile[mapCount] = -1;
+							this.sceneMapLocFile[mapCount] = -1;
+							mapCount++;
 						} else {
-							int var62 = this.sceneMapLandFile[var59] = this.onDemand.getMapFile(var61, var60, 0);
-							if (var62 != -1) {
-								this.onDemand.request(3, var62);
+							int landFile = this.sceneMapLandFile[mapCount] = this.onDemand.getMapFile(z, x, 0);
+							if (landFile != -1) {
+								this.onDemand.request(3, landFile);
 							}
-							int var63 = this.sceneMapLocFile[var59] = this.onDemand.getMapFile(var61, var60, 1);
-							if (var63 != -1) {
-								this.onDemand.request(3, var63);
+
+							int locFile = this.sceneMapLocFile[mapCount] = this.onDemand.getMapFile(z, x, 1);
+							if (locFile != -1) {
+								this.onDemand.request(3, locFile);
 							}
-							var59++;
+
+							mapCount++;
 						}
 					}
 				}
-				int var64 = this.sceneBaseTileX - this.field1342;
-				int var65 = this.sceneBaseTileZ - this.field1343;
-				this.field1342 = this.sceneBaseTileX;
-				this.field1343 = this.sceneBaseTileZ;
-				for (int var66 = 0; var66 < 8192; var66++) {
-					NpcEntity var67 = this.npcs[var66];
-					if (var67 != null) {
-						for (int var68 = 0; var68 < 10; var68++) {
-							var67.routeTileX[var68] -= var64;
-							var67.routeTileZ[var68] -= var65;
+
+				int dx = this.sceneBaseTileX - this.mapLastBaseX;
+				int dz = this.sceneBaseTileZ - this.mapLastBaseZ;
+				this.mapLastBaseX = this.sceneBaseTileX;
+				this.mapLastBaseZ = this.sceneBaseTileZ;
+
+				for (int i = 0; i < 8192; i++) {
+					NpcEntity npc = this.npcs[i];
+
+					if (npc != null) {
+						for (int j = 0; j < 10; j++) {
+							npc.routeTileX[j] -= dx;
+							npc.routeTileZ[j] -= dz;
 						}
-						var67.x -= var64 * 128;
-						var67.z -= var65 * 128;
+
+						npc.x -= dx * 128;
+						npc.z -= dz * 128;
 					}
 				}
-				for (int var69 = 0; var69 < this.MAX_PLAYER_COUNT; var69++) {
-					PlayerEntity var70 = this.players[var69];
-					if (var70 != null) {
-						for (int var71 = 0; var71 < 10; var71++) {
-							var70.routeTileX[var71] -= var64;
-							var70.routeTileZ[var71] -= var65;
+
+				for (int i = 0; i < this.MAX_PLAYER_COUNT; i++) {
+					PlayerEntity player = this.players[i];
+
+					if (player != null) {
+						for (int j = 0; j < 10; j++) {
+							player.routeTileX[j] -= dx;
+							player.routeTileZ[j] -= dz;
 						}
-						var70.x -= var64 * 128;
-						var70.z -= var65 * 128;
+
+						player.x -= dx * 128;
+						player.z -= dz * 128;
 					}
 				}
+
 				this.awaitingSync = true;
-				byte var72 = 0;
-				byte var73 = 104;
-				byte var74 = 1;
-				if (var64 < 0) {
-					var72 = 103;
-					var73 = -1;
-					var74 = -1;
+
+				byte startTileX = 0;
+				byte endTileX = 104;
+				byte dirX = 1;
+				if (dx < 0) {
+					startTileX = 103;
+					endTileX = -1;
+					dirX = -1;
 				}
-				byte var75 = 0;
-				byte var76 = 104;
-				byte var77 = 1;
-				if (var65 < 0) {
-					var75 = 103;
-					var76 = -1;
-					var77 = -1;
+
+				byte startTileZ = 0;
+				byte endTileZ = 104;
+				byte dirZ = 1;
+				if (dz < 0) {
+					startTileZ = 103;
+					endTileZ = -1;
+					dirZ = -1;
 				}
-				for (int var78 = var72; var78 != var73; var78 += var74) {
-					for (int var79 = var75; var79 != var76; var79 += var77) {
-						int var80 = var64 + var78;
-						int var81 = var65 + var79;
-						for (int var82 = 0; var82 < 4; var82++) {
-							if (var80 >= 0 && var81 >= 0 && var80 < 104 && var81 < 104) {
-								this.levelObjStacks[var82][var78][var79] = this.levelObjStacks[var82][var80][var81];
+
+				for (int x = startTileX; x != endTileX; x += dirX) {
+					for (int z = startTileZ; z != endTileZ; z += dirZ) {
+						int lastX = dx + x;
+						int lastZ = dz + z;
+
+						for (int level = 0; level < 4; level++) {
+							if (lastX >= 0 && lastZ >= 0 && lastX < 104 && lastZ < 104) {
+								this.levelObjStacks[level][x][z] = this.levelObjStacks[level][lastX][lastZ];
 							} else {
-								this.levelObjStacks[var82][var78][var79] = null;
+								this.levelObjStacks[level][x][z] = null;
 							}
 						}
 					}
 				}
-				for (LocChange var83 = (LocChange) this.locChanges.head(); var83 != null; var83 = (LocChange) this.locChanges.next()) {
-					var83.localX -= var64;
-					var83.localZ -= var65;
-					if (var83.localX < 0 || var83.localZ < 0 || var83.localX >= 104 || var83.localZ >= 104) {
-						var83.unlink();
+
+				for (LocChange loc = (LocChange) this.locChanges.head(); loc != null; loc = (LocChange) this.locChanges.next()) {
+					loc.localX -= dx;
+					loc.localZ -= dz;
+
+					if (loc.localX < 0 || loc.localZ < 0 || loc.localX >= 104 || loc.localZ >= 104) {
+						loc.unlink();
 					}
 				}
+
 				if (this.flagSceneTileX != 0) {
-					this.flagSceneTileX -= var64;
-					this.flagSceneTileZ -= var65;
+					this.flagSceneTileX -= dx;
+					this.flagSceneTileZ -= dz;
 				}
+
 				this.cutscene = false;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 214) {
+				// IF_CLOSE
 				if (this.sidebarInterfaceId != -1) {
 					this.sidebarInterfaceId = -1;
 					this.redrawSidebar = true;
 					this.redrawSideicons = true;
 				}
+
 				if (this.chatInterfaceId != -1) {
 					this.chatInterfaceId = -1;
 					this.redrawChatback = true;
 				}
+
 				if (this.chatbackInputOpen) {
 					this.chatbackInputOpen = false;
 					this.redrawChatback = true;
 				}
+
 				this.viewportInterfaceId = -1;
 				this.pressedContinueOption = false;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 219) {
-				int var84 = this.in.g2();
-				int var85 = this.in.g2();
-				Component.types[var84].anim = var85;
+				// IF_SETANIM
+				int comId = this.in.g2();
+				int seqId = this.in.g2();
+				Component.types[comId].anim = seqId;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 95) {
-				String var86 = this.in.gjstr();
-				if (var86.endsWith(":tradereq:")) {
-					String var87 = var86.substring(0, var86.indexOf(":"));
-					long var88 = JString.toBase37(var87);
-					boolean var90 = false;
-					for (int var91 = 0; var91 < this.ignoreCount; var91++) {
-						if (this.ignoreName37[var91] == var88) {
-							var90 = true;
+				// MESSAGE_GAME
+				String message = this.in.gjstr();
+
+				if (message.endsWith(":tradereq:")) {
+					String player = message.substring(0, message.indexOf(":"));
+					long username37 = JString.toBase37(player);
+
+					boolean ignored = false;
+					for (int i = 0; i < this.ignoreCount; i++) {
+						if (this.ignoreName37[i] == username37) {
+							ignored = true;
 							break;
 						}
 					}
-					if (!var90 && this.overrideChat == 0) {
-						this.addMessage("wishes to trade with you.", var87, 4);
+
+					if (!ignored && this.overrideChat == 0) {
+						this.addMessage("wishes to trade with you.", player, 4);
 					}
-				} else if (var86.endsWith(":duelreq:")) {
-					String var92 = var86.substring(0, var86.indexOf(":"));
-					long var93 = JString.toBase37(var92);
-					boolean var95 = false;
-					for (int var96 = 0; var96 < this.ignoreCount; var96++) {
-						if (this.ignoreName37[var96] == var93) {
-							var95 = true;
+				} else if (message.endsWith(":duelreq:")) {
+					String player = message.substring(0, message.indexOf(":"));
+					long username37 = JString.toBase37(player);
+
+					boolean ignored = false;
+					for (int i = 0; i < this.ignoreCount; i++) {
+						if (this.ignoreName37[i] == username37) {
+							ignored = true;
 							break;
 						}
 					}
-					if (!var95 && this.overrideChat == 0) {
-						this.addMessage("wishes to duel with you.", var92, 8);
+
+					if (!ignored && this.overrideChat == 0) {
+						this.addMessage("wishes to duel with you.", player, 8);
 					}
 				} else {
-					this.addMessage(var86, "", 0);
+					this.addMessage(message, "", 0);
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 24) {
+				// UPDATE_STAT
 				this.redrawSidebar = true;
-				int var97 = this.in.g1();
-				int var98 = this.in.g4();
-				int var99 = this.in.g1();
-				this.skillExperience[var97] = var98;
-				this.skillLevel[var97] = var99;
-				this.skillBaseLevel[var97] = 1;
-				for (int var100 = 0; var100 < 98; var100++) {
-					if (var98 >= levelExperience[var100]) {
-						this.skillBaseLevel[var97] = var100 + 2;
+
+				int stat = this.in.g1();
+				int xp = this.in.g4();
+				int level = this.in.g1();
+
+				this.skillExperience[stat] = xp;
+				this.skillLevel[stat] = level;
+				this.skillBaseLevel[stat] = 1;
+
+				for (int i = 0; i < 98; i++) {
+					if (xp >= levelExperience[i]) {
+						this.skillBaseLevel[stat] = i + 2;
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 60) {
-				Packet var101 = InputTracking.stop();
-				if (var101 != null) {
+				// FINISH_TRACKING
+				Packet buf = InputTracking.stop();
+				if (buf != null) {
 					this.out.pIsaac(217);
-					this.out.p2(var101.pos);
-					this.out.pdata(var101.pos, 0, var101.data);
-					var101.release();
+					this.out.p2(buf.pos);
+					this.out.pdata(buf.pos, 0, buf.data);
+					buf.release();
 				}
+
 				this.ptype = -1;
 				return true;
 			}
 			if (this.ptype == 242) {
-				for (int var102 = 0; var102 < this.players.length; var102++) {
-					if (this.players[var102] != null) {
-						this.players[var102].primarySeqId = -1;
+				// RESET_ANIMS
+				for (int i = 0; i < this.players.length; i++) {
+					if (this.players[i] != null) {
+						this.players[i].primarySeqId = -1;
 					}
 				}
-				for (int var103 = 0; var103 < this.npcs.length; var103++) {
-					if (this.npcs[var103] != null) {
-						this.npcs[var103].primarySeqId = -1;
+
+				for (int i = 0; i < this.npcs.length; i++) {
+					if (this.npcs[i] != null) {
+						this.npcs[i].primarySeqId = -1;
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
 			if (this.ptype == 108) {
-				int var104 = this.in.g2();
-				Component.types[var104].modelType = 3;
-				Component.types[var104].model = (localPlayer.appearances[8] << 6) + (localPlayer.appearances[0] << 12) + (localPlayer.colours[0] << 24) + (localPlayer.colours[4] << 18) + localPlayer.appearances[11];
+				// IF_SETPLAYERHEAD
+				int comId = this.in.g2();
+				Component.types[comId].modelType = 3;
+				Component.types[comId].model = (localPlayer.appearances[8] << 6) + (localPlayer.appearances[0] << 12) + (localPlayer.colours[0] << 24) + (localPlayer.colours[4] << 18) + localPlayer.appearances[11];
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 86) {
+				// PLAYER_INFO
 				this.getPlayerPos(this.psize, this.in);
 				this.awaitingSync = false;
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 176) {
-				int var105 = this.in.g2();
-				this.resetInterfaceAnimation(var105);
+				// IF_OPENSIDEMODAL
+				int comId = this.in.g2();
+
+				this.resetInterfaceAnimation(comId);
+
 				if (this.chatInterfaceId != -1) {
 					this.chatInterfaceId = -1;
 					this.redrawChatback = true;
 				}
+
 				if (this.chatbackInputOpen) {
 					this.chatbackInputOpen = false;
 					this.redrawChatback = true;
 				}
-				this.sidebarInterfaceId = var105;
+
+				this.sidebarInterfaceId = comId;
 				this.redrawSidebar = true;
 				this.redrawSideicons = true;
 				this.viewportInterfaceId = -1;
 				this.pressedContinueOption = false;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 168) {
+				// TUTORIAL_FLASHSIDE
 				this.flashingTab = this.in.g1();
+
 				if (this.flashingTab == this.selectedTab) {
 					if (this.flashingTab == 3) {
 						this.selectedTab = 1;
 					} else {
 						this.selectedTab = 3;
 					}
+
 					this.redrawSidebar = true;
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 174) {
-				int var106 = this.in.g2b();
-				this.stickyChatInterfaceId = var106;
+				// TUTORIAL_OPENCHAT
+				int comId = this.in.g2b();
+				this.stickyChatInterfaceId = comId;
 				this.redrawChatback = true;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 154) {
-				int var107 = this.in.g2();
-				String var108 = this.in.gjstr();
-				Component.types[var107].text = var108;
-				if (this.tabInterfaceId[this.selectedTab] == Component.types[var107].layer) {
+				// IF_SETTEXT
+				int comId = this.in.g2();
+				String text = this.in.gjstr();
+
+				Component.types[comId].text = text;
+
+				if (this.tabInterfaceId[this.selectedTab] == Component.types[comId].layer) {
 					this.redrawSidebar = true;
 				}
+
 				this.ptype = -1;
 				return true;
 			}
 			if (this.ptype == 200) {
-				int var109 = this.in.g2();
-				int var110 = this.in.g1();
-				if (var109 == 65535) {
-					var109 = -1;
+				// IF_OPENSIDEOVERLAY
+				int comId = this.in.g2();
+				int tab = this.in.g1();
+				if (comId == 65535) {
+					comId = -1;
 				}
-				this.tabInterfaceId[var110] = var109;
+
+				this.tabInterfaceId[tab] = comId;
 				this.redrawSidebar = true;
 				this.redrawSideicons = true;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 56) {
+				// IF_SHOWSIDE
 				this.selectedTab = this.in.g1();
 				this.redrawSidebar = true;
 				this.redrawSideicons = true;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 129) {
-				int var111 = this.in.g2();
-				int var112 = this.in.g2();
-				Component.types[var111].modelType = 2;
-				Component.types[var111].model = var112;
+				// IF_SETNPCHEAD
+				int comId = this.in.g2();
+				int npcId = this.in.g2();
+
+				Component.types[comId].modelType = 2;
+				Component.types[comId].model = npcId;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 222) {
+				// CAM_LOOKAT
 				this.cutscene = true;
 				this.cutsceneDstLocalTileX = this.in.g1();
 				this.cutsceneDstLocalTileZ = this.in.g1();
 				this.cutsceneDstHeight = this.in.g2();
 				this.cutsceneRotateSpeed = this.in.g1();
 				this.cutsceneRotateAcceleration = this.in.g1();
+
 				if (this.cutsceneRotateAcceleration >= 100) {
-					int var113 = this.cutsceneDstLocalTileX * 128 + 64;
-					int var114 = this.cutsceneDstLocalTileZ * 128 + 64;
-					int var115 = this.getHeightmapY(var114, this.currentLevel, var113) - this.cutsceneDstHeight;
-					int var116 = var113 - this.cameraX;
-					int var117 = var115 - this.cameraY;
-					int var118 = var114 - this.cameraZ;
-					int var119 = (int) Math.sqrt((double) (var116 * var116 + var118 * var118));
-					this.cameraPitch = (int) (Math.atan2((double) var117, (double) var119) * 325.949D) & 0x7FF;
-					this.cameraYaw = (int) (Math.atan2((double) var116, (double) var118) * -325.949D) & 0x7FF;
+					int sceneX = this.cutsceneDstLocalTileX * 128 + 64;
+					int sceneZ = this.cutsceneDstLocalTileZ * 128 + 64;
+					int sceneY = this.getHeightmapY(sceneZ, this.currentLevel, sceneX) - this.cutsceneDstHeight;
+
+					int dx = sceneX - this.cameraX;
+					int dy = sceneY - this.cameraY;
+					int dz = sceneZ - this.cameraZ;
+
+					int distance = (int) Math.sqrt((double) (dx * dx + dz * dz));
+
+					this.cameraPitch = (int) (Math.atan2((double) dy, (double) distance) * 325.949D) & 0x7FF;
+					this.cameraYaw = (int) (Math.atan2((double) dx, (double) dz) * -325.949D) & 0x7FF;
+
 					if (this.cameraPitch < 128) {
 						this.cameraPitch = 128;
 					}
+
 					if (this.cameraPitch > 383) {
 						this.cameraPitch = 383;
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 177) {
+				// UPDATE_RUNENERGY
 				if (this.selectedTab == 12) {
 					this.redrawSidebar = true;
 				}
+
 				this.runenergy = this.in.g1();
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 62) {
+				// UNSET_MAP_FLAG
 				this.flagSceneTileX = 0;
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 162) {
-				int var120 = this.in.g2();
-				Component var121 = Component.types[var120];
-				for (int var122 = 0; var122 < var121.invSlotObjId.length; var122++) {
-					var121.invSlotObjId[var122] = -1;
-					var121.invSlotObjId[var122] = 0;
+				// UPDATE_INV_STOP_TRANSMIT
+				int comId = this.in.g2();
+				Component inv = Component.types[comId];
+
+				for (int i = 0; i < inv.invSlotObjId.length; i++) {
+					inv.invSlotObjId[i] = -1;
+					inv.invSlotObjId[i] = 0;
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 49) {
+				// HINT_ARROW
 				this.hintType = this.in.g1();
+
 				if (this.hintType == 1) {
 					this.hintNpc = this.in.g2();
-				}
-				if (this.hintType >= 2 && this.hintType <= 6) {
+				} else if (this.hintType >= 2 && this.hintType <= 6) {
 					if (this.hintType == 2) {
 						this.hintOffsetX = 64;
 						this.hintOffsetZ = 64;
-					}
-					if (this.hintType == 3) {
+					} else if (this.hintType == 3) {
 						this.hintOffsetX = 0;
 						this.hintOffsetZ = 64;
-					}
-					if (this.hintType == 4) {
+					} else if (this.hintType == 4) {
 						this.hintOffsetX = 128;
 						this.hintOffsetZ = 64;
-					}
-					if (this.hintType == 5) {
+					} else if (this.hintType == 5) {
 						this.hintOffsetX = 64;
 						this.hintOffsetZ = 0;
-					}
-					if (this.hintType == 6) {
+					} else if (this.hintType == 6) {
 						this.hintOffsetX = 64;
 						this.hintOffsetZ = 128;
 					}
+
 					this.hintType = 2;
 					this.hintTileX = this.in.g2();
 					this.hintTileZ = this.in.g2();
 					this.hintHeight = this.in.g1();
-				}
-				if (this.hintType == 10) {
+				} else if (this.hintType == 10) {
 					this.hintPlayer = this.in.g2();
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 10) {
-				int var123 = this.in.g2();
-				this.resetInterfaceAnimation(var123);
+				// IF_OPENMAINMODAL
+				int comId = this.in.g2();
+				this.resetInterfaceAnimation(comId);
+
 				if (this.sidebarInterfaceId != -1) {
 					this.sidebarInterfaceId = -1;
 					this.redrawSidebar = true;
 					this.redrawSideicons = true;
 				}
+
 				if (this.chatInterfaceId != -1) {
 					this.chatInterfaceId = -1;
 					this.redrawChatback = true;
 				}
+
 				if (this.chatbackInputOpen) {
 					this.chatbackInputOpen = false;
 					this.redrawChatback = true;
 				}
-				this.viewportInterfaceId = var123;
+
+				this.viewportInterfaceId = comId;
 				this.pressedContinueOption = false;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 189) {
-				int var124 = this.in.g2();
-				this.resetInterfaceAnimation(var124);
+				// IF_OPENCHATMODAL
+				int comId = this.in.g2();
+				this.resetInterfaceAnimation(comId);
+
 				if (this.sidebarInterfaceId != -1) {
 					this.sidebarInterfaceId = -1;
 					this.redrawSidebar = true;
 					this.redrawSideicons = true;
 				}
-				this.chatInterfaceId = var124;
+
+				this.chatInterfaceId = comId;
 				this.redrawChatback = true;
 				this.viewportInterfaceId = -1;
 				this.pressedContinueOption = false;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 244) {
+				// NPC_INFO
 				this.getNpcPos(this.psize, this.in);
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 132) {
+				// UPDATE_INV_PARTIAL
 				this.redrawSidebar = true;
-				int var125 = this.in.g2();
-				Component var126 = Component.types[var125];
+
+				int comId = this.in.g2();
+				Component inv = Component.types[comId];
+
 				while (this.in.pos < this.psize) {
-					int var127 = this.in.g1();
-					int var128 = this.in.g2();
-					int var129 = this.in.g1();
-					if (var129 == 255) {
-						var129 = this.in.g4();
+					int slot = this.in.g1();
+					int id = this.in.g2();
+
+					int count = this.in.g1();
+					if (count == 255) {
+						count = this.in.g4();
 					}
-					if (var127 >= 0 && var127 < var126.invSlotObjId.length) {
-						var126.invSlotObjId[var127] = var128;
-						var126.invSlotObjCount[var127] = var129;
+
+					if (slot >= 0 && slot < inv.invSlotObjId.length) {
+						inv.invSlotObjId[slot] = id;
+						inv.invSlotObjCount[slot] = count;
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 12) {
+				// CAM_MOVETO
 				this.cutscene = true;
 				this.cutsceneSrcLocalTileX = this.in.g1();
 				this.cutsceneSrcLocalTileZ = this.in.g1();
 				this.cutsceneSrcHeight = this.in.g2();
 				this.cutsceneMoveSpeed = this.in.g1();
 				this.cutsceneMoveAcceleration = this.in.g1();
+
 				if (this.cutsceneMoveAcceleration >= 100) {
 					this.cameraX = this.cutsceneSrcLocalTileX * 128 + 64;
 					this.cameraZ = this.cutsceneSrcLocalTileZ * 128 + 64;
 					this.cameraY = this.getHeightmapY(this.cameraZ, this.currentLevel, this.cameraX) - this.cutsceneSrcHeight;
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 233) {
+				// UPDATE_ZONE_PARTIAL_ENCLOSED
 				this.baseX = this.in.g1();
 				this.baseZ = this.in.g1();
+
 				while (this.in.pos < this.psize) {
-					int var130 = this.in.g1();
-					this.readZonePacket(var130, this.in);
+					int ptype = this.in.g1();
+					this.readZonePacket(ptype, this.in);
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 131) {
+				// UPDATE_ZONE_FULL_FOLLOWS
 				this.baseX = this.in.g1();
 				this.baseZ = this.in.g1();
-				for (int var131 = this.baseX; var131 < this.baseX + 8; var131++) {
-					for (int var132 = this.baseZ; var132 < this.baseZ + 8; var132++) {
-						if (this.levelObjStacks[this.currentLevel][var131][var132] != null) {
-							this.levelObjStacks[this.currentLevel][var131][var132] = null;
-							this.sortObjStacks(var131, var132);
+
+				for (int x = this.baseX; x < this.baseX + 8; x++) {
+					for (int z = this.baseZ; z < this.baseZ + 8; z++) {
+						if (this.levelObjStacks[this.currentLevel][x][z] != null) {
+							this.levelObjStacks[this.currentLevel][x][z] = null;
+							this.sortObjStacks(x, z);
 						}
 					}
 				}
-				for (LocChange var133 = (LocChange) this.locChanges.head(); var133 != null; var133 = (LocChange) this.locChanges.next()) {
-					if (var133.localX >= this.baseX && var133.localX < this.baseX + 8 && var133.localZ >= this.baseZ && var133.localZ < this.baseZ + 8 && this.currentLevel == var133.level) {
-						var133.duration = 0;
+
+				for (LocChange loc = (LocChange) this.locChanges.head(); loc != null; loc = (LocChange) this.locChanges.next()) {
+					if (loc.localX >= this.baseX && loc.localX < this.baseX + 8 && loc.localZ >= this.baseZ && loc.localZ < this.baseZ + 8 && this.currentLevel == loc.level) {
+						loc.duration = 0;
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 30) {
-				long var134 = this.in.g8();
-				int var136 = this.in.g4();
-				int var137 = this.in.g1();
-				boolean var138 = false;
-				for (int var139 = 0; var139 < 100; var139++) {
-					if (this.field1241[var139] == var136) {
-						var138 = true;
+				// MESSAGE_PRIVATE
+				long from = this.in.g8();
+				int messageId = this.in.g4();
+				int staffModLevel = this.in.g1();
+
+				boolean ignored = false;
+				for (int i = 0; i < 100; i++) {
+					if (this.messageIds[i] == messageId) {
+						ignored = true;
 						break;
 					}
 				}
-				if (var137 <= 1) {
-					for (int var140 = 0; var140 < this.ignoreCount; var140++) {
-						if (this.ignoreName37[var140] == var134) {
-							var138 = true;
+
+				if (staffModLevel <= 1) {
+					for (int i = 0; i < this.ignoreCount; i++) {
+						if (this.ignoreName37[i] == from) {
+							ignored = true;
 							break;
 						}
 					}
 				}
-				if (!var138 && this.overrideChat == 0) {
+
+				if (!ignored && this.overrideChat == 0) {
 					try {
-						this.field1241[this.field1411] = var136;
-						this.field1411 = (this.field1411 + 1) % 100;
-						String var141 = WordPack.unpack(this.psize - 13, this.in);
-						String var142 = WordFilter.filter(var141);
-						if (var137 == 2 || var137 == 3) {
-							this.addMessage(var142, "@cr2@" + JString.formatName(JString.fromBase37(var134)), 7);
-						} else if (var137 == 1) {
-							this.addMessage(var142, "@cr1@" + JString.formatName(JString.fromBase37(var134)), 7);
+						this.messageIds[this.privateMessageCount] = messageId;
+						this.privateMessageCount = (this.privateMessageCount + 1) % 100;
+
+						String uncompressed = WordPack.unpack(this.psize - 13, this.in);
+						String filtered = WordFilter.filter(uncompressed);
+
+						if (staffModLevel == 2 || staffModLevel == 3) {
+							this.addMessage(filtered, "@cr2@" + JString.formatName(JString.fromBase37(from)), 7);
+						} else if (staffModLevel == 1) {
+							this.addMessage(filtered, "@cr1@" + JString.formatName(JString.fromBase37(from)), 7);
 						} else {
-							this.addMessage(var142, JString.formatName(JString.fromBase37(var134)), 3);
+							this.addMessage(filtered, JString.formatName(JString.fromBase37(from)), 3);
 						}
-					} catch (Exception var152) {
+					} catch (Exception ignore) {
 						SignLink.reporterror("cde1");
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 123) {
-				int var144 = this.in.g2();
-				boolean var145 = this.in.g1() == 1;
-				Component.types[var144].hide = var145;
+				// IF_SETHIDE
+				int com = this.in.g2();
+				boolean hide = this.in.g1() == 1;
+				Component.types[com].hide = hide;
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 236) {
-				int var146 = this.in.g2();
-				byte var147 = this.in.g1b();
-				this.field1510[var146] = var147;
-				if (this.varps[var146] != var147) {
-					this.varps[var146] = var147;
-					this.updateVarp(var146);
+				// VARP_SMALL
+				int varp = this.in.g2();
+				byte value = this.in.g1b();
+
+				this.varCache[varp] = value;
+
+				if (this.varps[varp] != value) {
+					this.varps[varp] = value;
+					this.updateVarp(varp);
+
 					this.redrawSidebar = true;
+
 					if (this.stickyChatInterfaceId != -1) {
 						this.redrawChatback = true;
 					}
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 7) {
+				// UPDATE_IGNORELIST
 				this.ignoreCount = this.psize / 8;
-				for (int var148 = 0; var148 < this.ignoreCount; var148++) {
-					this.ignoreName37[var148] = this.in.g8();
+				for (int i = 0; i < this.ignoreCount; i++) {
+					this.ignoreName37[i] = this.in.g8();
 				}
+
 				this.ptype = -1;
 				return true;
 			}
+
 			SignLink.reporterror("T1 - " + this.ptype + "," + this.psize + " - " + this.ptype1 + "," + this.ptype2);
 			this.logout();
-		} catch (IOException var153) {
+		} catch (IOException ignore) {
 			this.tryReconnect();
-		} catch (Exception var154) {
-			String var150 = "T2 - " + this.ptype + "," + this.ptype1 + "," + this.ptype2 + " - " + this.psize + "," + (localPlayer.routeTileX[0] + this.sceneBaseTileX) + "," + (localPlayer.routeTileZ[0] + this.sceneBaseTileZ) + " - ";
-			for (int var151 = 0; var151 < this.psize && var151 < 50; var151++) {
-				var150 = var150 + this.in.data[var151] + ",";
+		} catch (Exception ignore) {
+			String str = "T2 - " + this.ptype + "," + this.ptype1 + "," + this.ptype2 + " - " + this.psize + "," + (localPlayer.routeTileX[0] + this.sceneBaseTileX) + "," + (localPlayer.routeTileZ[0] + this.sceneBaseTileZ) + " - ";
+			for (int i = 0; i < this.psize && i < 50; i++) {
+				str = str + this.in.data[i] + ",";
 			}
-			SignLink.reporterror(var150);
+			SignLink.reporterror(str);
+
 			this.logout();
 		}
 		return true;
@@ -7717,7 +8001,7 @@ public class Client extends GameShell {
 			int var63 = arg2.g2();
 			int var64 = arg2.g2();
 			int var65 = arg2.g2();
-			if (var61 >= 0 && var62 >= 0 && var61 < 104 && var62 < 104 && this.field1397 != var65) {
+			if (var61 >= 0 && var62 >= 0 && var61 < 104 && var62 < 104 && this.localPid != var65) {
 				ObjStackEntity var66 = new ObjStackEntity();
 				var66.field500 = var63;
 				var66.field501 = var64;
@@ -7745,7 +8029,7 @@ public class Client extends GameShell {
 				byte var80 = arg2.g1b();
 				byte var81 = arg2.g1b();
 				PlayerEntity var82;
-				if (this.field1397 == var77) {
+				if (this.localPid == var77) {
 					var82 = localPlayer;
 				} else {
 					var82 = this.players[var77];
@@ -11033,7 +11317,7 @@ public class Client extends GameShell {
 			return;
 
 		}
-		if (this.friendCount >= 100 && this.field1255 != 1) {
+		if (this.friendCount >= 100 && this.membersAccount != 1) {
 			this.addMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", "", 0);
 		} else if (this.friendCount >= 200) {
 			this.addMessage("Your friendlist is full. Max of 100 for free users, and 200 for members", "", 0);
