@@ -8999,14 +8999,16 @@ public class Client extends GameShell {
 			int x = super.mouseClickX - 4 - width / 2;
 			if (width + x > 512) {
 				x = 512 - width;
-			} else if (x < 0) {
+			}
+			if (x < 0) {
 				x = 0;
 			}
 
 			int y = super.mouseClickY - 4;
 			if (height + y > 334) {
 				y = 334 - height;
-			} else if (y < 0) {
+			}
+			if (y < 0) {
 				y = 0;
 			}
 
