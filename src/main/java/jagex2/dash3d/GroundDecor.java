@@ -15,11 +15,11 @@ public class GroundDecor {
 	public int z;
 
 	@ObfuscatedName("k.d")
-	public Entity model;
+	public ModelSource model;
 
 	@ObfuscatedName("k.e")
 	public int typecode;
 
 	@ObfuscatedName("k.f")
-	public byte info;
+	public byte typecode2;
 }

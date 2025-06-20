@@ -15,17 +15,17 @@ public class Decor {
 	public int z;
 
 	@ObfuscatedName("i.d")
-	public int type;
+	public int angle1;
 
 	@ObfuscatedName("i.e")
-	public int angle;
+	public int angle2;
 
 	@ObfuscatedName("i.f")
-	public Entity model;
+	public ModelSource model;
 
 	@ObfuscatedName("i.g")
 	public int typecode;
 
 	@ObfuscatedName("i.h")
-	public byte info;
+	public byte typecode2;
 }

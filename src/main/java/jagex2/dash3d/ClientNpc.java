@@ -7,13 +7,13 @@ import jagex2.config.SpotAnimType;
 import jagex2.graphics.Model;
 
 @ObfuscatedName("ab")
-public class NpcEntity extends PathingEntity {
+public class ClientNpc extends ClientEntity {
 
 	@ObfuscatedName("ab.sb")
 	public NpcType type;
 
 	@ObfuscatedName("ab.a(I)Lfb;")
-	public final Model getModel() {
+	public final Model getTempModel() {
 		if (this.type == null) {
 			return null;
 		}

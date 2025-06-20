@@ -12,7 +12,7 @@ import jagex2.graphics.Model;
 import jagex2.io.Packet;
 
 @ObfuscatedName("bb")
-public class PlayerEntity extends PathingEntity {
+public class ClientPlayer extends ClientEntity {
 
 	@ObfuscatedName("bb.sb")
 	public String name;
@@ -154,7 +154,7 @@ public class PlayerEntity extends PathingEntity {
 	}
 
 	@ObfuscatedName("bb.a(I)Lfb;")
-	public final Model getModel() {
+	public final Model getTempModel() {
 		if (!this.visible) {
 			return null;
 		}

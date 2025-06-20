@@ -15,17 +15,17 @@ public class GroundObject {
 	public int z;
 
 	@ObfuscatedName("l.d")
-	public Entity topObj;
+	public ModelSource top;
 
 	@ObfuscatedName("l.e")
-	public Entity bottomObj;
+	public ModelSource bottom;
 
 	@ObfuscatedName("l.f")
-	public Entity middleObj;
+	public ModelSource middle;
 
 	@ObfuscatedName("l.g")
 	public int typecode;
 
 	@ObfuscatedName("l.h")
-	public int offset;
+	public int height;
 }

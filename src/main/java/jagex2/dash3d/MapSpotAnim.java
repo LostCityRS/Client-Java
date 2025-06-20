@@ -5,7 +5,7 @@ import jagex2.config.SpotAnimType;
 import jagex2.graphics.Model;
 
 @ObfuscatedName("gb")
-public class SpotAnimEntity extends Entity {
+public class MapSpotAnim extends ModelSource {
 
 	@ObfuscatedName("gb.m")
 	public SpotAnimType type;
@@ -34,7 +34,7 @@ public class SpotAnimEntity extends Entity {
 	@ObfuscatedName("gb.u")
 	public boolean seqComplete = false;
 
-	public SpotAnimEntity(int arg0, int arg1, int arg2, int arg3, int arg4, int arg6, int arg7) {
+	public MapSpotAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg6, int arg7) {
 		this.type = SpotAnimType.types[arg3];
 		this.level = arg2;
 		this.x = arg1;
@@ -63,7 +63,7 @@ public class SpotAnimEntity extends Entity {
 	}
 
 	@ObfuscatedName("gb.a(I)Lfb;")
-	public final Model getModel() {
+	public final Model getTempModel() {
 		Model var2 = this.type.getModel();
 		if (var2 == null) {
 			return null;

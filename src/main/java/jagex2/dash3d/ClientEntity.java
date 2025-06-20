@@ -5,7 +5,7 @@ import jagex2.client.Client;
 import jagex2.config.SeqType;
 
 @ObfuscatedName("z")
-public class PathingEntity extends Entity {
+public class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("z.n")
 	public int x;

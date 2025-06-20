@@ -13,32 +13,32 @@ public class LocChange extends Linkable {
 	public int layer;
 
 	@ObfuscatedName("ob.h")
-	public int localX;
+	public int x;
 
 	@ObfuscatedName("ob.i")
-	public int localZ;
+	public int z;
 
 	@ObfuscatedName("ob.j")
-	public int previousType;
+	public int oldType;
 
 	@ObfuscatedName("ob.k")
-	public int previousAngle;
+	public int oldAngle;
 
 	@ObfuscatedName("ob.l")
-	public int previousShape;
+	public int oldShape;
 
 	@ObfuscatedName("ob.m")
-	public int type;
+	public int newType;
 
 	@ObfuscatedName("ob.n")
-	public int angle;
+	public int newAngle;
 
 	@ObfuscatedName("ob.o")
-	public int shape;
+	public int newShape;
 
 	@ObfuscatedName("ob.p")
-	public int delay;
+	public int startTime;
 
 	@ObfuscatedName("ob.q")
-	public int duration = -1;
+	public int endTime = -1;
 }

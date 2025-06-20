@@ -15,20 +15,20 @@ public class Wall {
 	public int z;
 
 	@ObfuscatedName("r.d")
-	public int typeA;
+	public int angle1;
 
 	@ObfuscatedName("r.e")
-	public int typeB;
+	public int angle2;
 
 	@ObfuscatedName("r.f")
-	public Entity modelA;
+	public ModelSource model1;
 
 	@ObfuscatedName("r.g")
-	public Entity modelB;
+	public ModelSource model2;
 
 	@ObfuscatedName("r.h")
 	public int typecode;
 
 	@ObfuscatedName("r.i")
-	public byte info;
+	public byte typecode2;
 }

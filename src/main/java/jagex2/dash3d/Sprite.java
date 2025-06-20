@@ -2,8 +2,9 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 
+// i hate this name but OSRS (native) calls it this...
 @ObfuscatedName("q")
-public class Location {
+public class Sprite {
 
 	@ObfuscatedName("q.a")
 	public int level;
@@ -18,22 +19,22 @@ public class Location {
 	public int z;
 
 	@ObfuscatedName("q.e")
-	public Entity model;
+	public ModelSource model;
 
 	@ObfuscatedName("q.f")
-	public int yaw;
+	public int angle;
 
 	@ObfuscatedName("q.g")
-	public int minSceneTileX;
+	public int minGridX;
 
 	@ObfuscatedName("q.h")
-	public int maxSceneTileX;
+	public int maxGridX;
 
 	@ObfuscatedName("q.i")
-	public int minSceneTileZ;
+	public int minGridZ;
 
 	@ObfuscatedName("q.j")
-	public int maxSceneTileZ;
+	public int maxGridZ;
 
 	@ObfuscatedName("q.k")
 	public int distance;
@@ -45,5 +46,5 @@ public class Location {
 	public int typecode;
 
 	@ObfuscatedName("q.n")
-	public byte info;
+	public byte typecode2;
 }

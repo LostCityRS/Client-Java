@@ -3,12 +3,12 @@ package jagex2.graphics;
 import deob.*;
 import jagex2.dash3d.AnimBase;
 import jagex2.dash3d.AnimFrame;
-import jagex2.dash3d.Entity;
+import jagex2.dash3d.ModelSource;
 import jagex2.io.OnDemandProvider;
 import jagex2.io.Packet;
 
 @ObfuscatedName("fb")
-public class Model extends Entity {
+public class Model extends ModelSource {
 
 	@ObfuscatedName("fb.u")
 	public static int loaded;

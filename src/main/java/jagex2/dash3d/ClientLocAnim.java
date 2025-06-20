@@ -7,7 +7,7 @@ import jagex2.config.SeqType;
 import jagex2.graphics.Model;
 
 @ObfuscatedName("cb")
-public class LocEntity extends Entity {
+public class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("cb.n")
 	public int field489;
@@ -39,7 +39,7 @@ public class LocEntity extends Entity {
 	@ObfuscatedName("cb.w")
 	public int field498;
 
-	public LocEntity(int arg0, int arg1, int arg2, int arg4, int arg5, boolean arg6, int arg7, int arg8, int arg9) {
+	public ClientLocAnim(int arg0, int arg1, int arg2, int arg4, int arg5, boolean arg6, int arg7, int arg8, int arg9) {
 		this.field489 = arg8;
 		this.field490 = arg4;
 		this.field491 = arg5;
@@ -57,7 +57,7 @@ public class LocEntity extends Entity {
 	}
 
 	@ObfuscatedName("cb.a(I)Lfb;")
-	public final Model getModel() {
+	public final Model getTempModel() {
 		if (this.field496 != null) {
 			int var2 = Client.loopCycle - this.field498;
 			if (var2 > 100 && this.field496.replayoff > 0) {

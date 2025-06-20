@@ -5,7 +5,7 @@ import jagex2.config.SpotAnimType;
 import jagex2.graphics.Model;
 
 @ObfuscatedName("eb")
-public class ProjectileEntity extends Entity {
+public class ClientProj extends ModelSource {
 
 	@ObfuscatedName("eb.l")
 	public boolean field502 = true;
@@ -85,7 +85,7 @@ public class ProjectileEntity extends Entity {
 	@ObfuscatedName("eb.K")
 	public int field527;
 
-	public ProjectileEntity(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
+	public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 		this.field504 = SpotAnimType.types[arg1];
 		this.level = arg5;
 		this.field506 = arg0;
@@ -143,7 +143,7 @@ public class ProjectileEntity extends Entity {
 	}
 
 	@ObfuscatedName("eb.a(I)Lfb;")
-	public final Model getModel() {
+	public final Model getTempModel() {
 		Model var2 = this.field504.getModel();
 		if (var2 == null) {
 			return null;
