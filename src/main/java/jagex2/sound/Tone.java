@@ -78,182 +78,213 @@ public class Tone {
 	@ObfuscatedName("dc.a()V")
 	public static final void init() {
 		noise = new int[32768];
-		for (int var0 = 0; var0 < 32768; var0++) {
+		for (int i = 0; i < 32768; i++) {
 			if (Math.random() > 0.5D) {
-				noise[var0] = 1;
+				noise[i] = 1;
 			} else {
-				noise[var0] = -1;
+				noise[i] = -1;
 			}
 		}
+
 		sin = new int[32768];
-		for (int var1 = 0; var1 < 32768; var1++) {
-			sin[var1] = (int) (Math.sin((double) var1 / 5215.1903D) * 16384.0D);
+		for (int i = 0; i < 32768; i++) {
+			sin[i] = (int) (Math.sin((double) i / 5215.1903D) * 16384.0D);
 		}
-		buffer = new int[220500];
+
+		buffer = new int[22050 * 10];
 	}
 
 	@ObfuscatedName("dc.a(II)[I")
-	public final int[] generate(int arg0, int arg1) {
-		for (int var3 = 0; var3 < arg0; var3++) {
-			buffer[var3] = 0;
+	public final int[] generate(int samples, int length) {
+		for (int i = 0; i < samples; i++) {
+			buffer[i] = 0;
 		}
-		if (arg1 < 10) {
+
+		if (length < 10) {
 			return buffer;
 		}
-		double var4 = (double) arg0 / ((double) arg1 + 0.0D);
+
+		double samplesPerStep = (double) samples / ((double) length + 0.0D);
+
 		this.frequencyBase.reset();
 		this.amplitudeBase.reset();
-		int var6 = 0;
-		int var7 = 0;
-		int var8 = 0;
+
+		int frequencyStart = 0;
+		int frequencyDuration = 0;
+		int frequencyPhase = 0;
+
 		if (this.frequencyModRate != null) {
 			this.frequencyModRate.reset();
 			this.frequencyModRange.reset();
-			var6 = (int) ((double) (this.frequencyModRate.end - this.frequencyModRate.start) * 32.768D / var4);
-			var7 = (int) ((double) this.frequencyModRate.start * 32.768D / var4);
+			frequencyStart = (int) ((double) (this.frequencyModRate.end - this.frequencyModRate.start) * 32.768D / samplesPerStep);
+			frequencyDuration = (int) ((double) this.frequencyModRate.start * 32.768D / samplesPerStep);
 		}
-		int var9 = 0;
-		int var10 = 0;
-		int var11 = 0;
+
+		int amplitudeStart = 0;
+		int amplitudeDuration = 0;
+		int amplitudePhase = 0;
+
 		if (this.amplitudeModRate != null) {
 			this.amplitudeModRate.reset();
 			this.amplitudeModRange.reset();
-			var9 = (int) ((double) (this.amplitudeModRate.end - this.amplitudeModRate.start) * 32.768D / var4);
-			var10 = (int) ((double) this.amplitudeModRate.start * 32.768D / var4);
+			amplitudeStart = (int) ((double) (this.amplitudeModRate.end - this.amplitudeModRate.start) * 32.768D / samplesPerStep);
+			amplitudeDuration = (int) ((double) this.amplitudeModRate.start * 32.768D / samplesPerStep);
 		}
-		for (int var12 = 0; var12 < 5; var12++) {
-			if (this.harmonicVolume[var12] != 0) {
-				tmpPhases[var12] = 0;
-				tmpDelays[var12] = (int) ((double) this.harmonicDelay[var12] * var4);
-				tmpVolumes[var12] = (this.harmonicVolume[var12] << 14) / 100;
-				tmpSemitones[var12] = (int) ((double) (this.frequencyBase.end - this.frequencyBase.start) * 32.768D * Math.pow(1.0057929410678534D, (double) this.harmonicSemitone[var12]) / var4);
-				tmpStarts[var12] = (int) ((double) this.frequencyBase.start * 32.768D / var4);
+
+		for (int i = 0; i < 5; i++) {
+			if (this.harmonicVolume[i] != 0) {
+				tmpPhases[i] = 0;
+				tmpDelays[i] = (int) ((double) this.harmonicDelay[i] * samplesPerStep);
+				tmpVolumes[i] = (this.harmonicVolume[i] << 14) / 100;
+				tmpSemitones[i] = (int) ((double) (this.frequencyBase.end - this.frequencyBase.start) * 32.768D * Math.pow(1.0057929410678534D, (double) this.harmonicSemitone[i]) / samplesPerStep);
+				tmpStarts[i] = (int) ((double) this.frequencyBase.start * 32.768D / samplesPerStep);
 			}
 		}
-		for (int var13 = 0; var13 < arg0; var13++) {
-			int var24 = this.frequencyBase.evaluate(arg0);
-			int var25 = this.amplitudeBase.evaluate(arg0);
+
+		for (int sample = 0; sample < samples; sample++) {
+			int frequency = this.frequencyBase.evaluate(samples);
+			int amplitude = this.amplitudeBase.evaluate(samples);
+
 			if (this.frequencyModRate != null) {
-				int var26 = this.frequencyModRate.evaluate(arg0);
-				int var27 = this.frequencyModRange.evaluate(arg0);
-				var24 += this.generate(this.frequencyModRate.form, var27, var8) >> 1;
-				var8 += (var6 * var26 >> 16) + var7;
+				int rate = this.frequencyModRate.evaluate(samples);
+				int range = this.frequencyModRange.evaluate(samples);
+				frequency += this.generate(this.frequencyModRate.form, range, frequencyPhase) >> 1;
+				frequencyPhase += (frequencyStart * rate >> 16) + frequencyDuration;
 			}
+
 			if (this.amplitudeModRate != null) {
-				int var28 = this.amplitudeModRate.evaluate(arg0);
-				int var29 = this.amplitudeModRange.evaluate(arg0);
-				var25 = var25 * ((this.generate(this.amplitudeModRate.form, var29, var11) >> 1) + 32768) >> 15;
-				var11 += (var9 * var28 >> 16) + var10;
+				int rate = this.amplitudeModRate.evaluate(samples);
+				int range = this.amplitudeModRange.evaluate(samples);
+				amplitude = amplitude * ((this.generate(this.amplitudeModRate.form, range, amplitudePhase) >> 1) + 32768) >> 15;
+				amplitudePhase += (amplitudeStart * rate >> 16) + amplitudeDuration;
 			}
-			for (int var30 = 0; var30 < 5; var30++) {
-				if (this.harmonicVolume[var30] != 0) {
-					int var31 = tmpDelays[var30] + var13;
-					if (var31 < arg0) {
-						buffer[var31] += this.generate(this.frequencyBase.form, tmpVolumes[var30] * var25 >> 15, tmpPhases[var30]);
-						tmpPhases[var30] += (tmpSemitones[var30] * var24 >> 16) + tmpStarts[var30];
+
+			for (int harmonic = 0; harmonic < 5; harmonic++) {
+				if (this.harmonicVolume[harmonic] != 0) {
+					int pos = tmpDelays[harmonic] + sample;
+					if (pos < samples) {
+						buffer[pos] += this.generate(this.frequencyBase.form, tmpVolumes[harmonic] * amplitude >> 15, tmpPhases[harmonic]);
+						tmpPhases[harmonic] += (tmpSemitones[harmonic] * frequency >> 16) + tmpStarts[harmonic];
 					}
 				}
 			}
 		}
+
 		if (this.release != null) {
 			this.release.reset();
 			this.attack.reset();
-			int var14 = 0;
+
+			int counter = 0;
 			boolean var15 = false;
-			boolean var16 = true;
-			for (int var17 = 0; var17 < arg0; var17++) {
-				int var18 = this.release.evaluate(arg0);
-				int var19 = this.attack.evaluate(arg0);
-				int var20;
-				if (var16) {
-					var20 = ((this.release.end - this.release.start) * var18 >> 8) + this.release.start;
+			boolean muted = true;
+
+			for (int sample = 0; sample < samples; sample++) {
+				int releaseValue = this.release.evaluate(samples);
+				int attackValue = this.attack.evaluate(samples);
+
+				int threshold;
+				if (muted) {
+					threshold = ((this.release.end - this.release.start) * releaseValue >> 8) + this.release.start;
 				} else {
-					var20 = ((this.release.end - this.release.start) * var19 >> 8) + this.release.start;
+					threshold = ((this.release.end - this.release.start) * attackValue >> 8) + this.release.start;
 				}
-				var14 += 256;
-				if (var14 >= var20) {
-					var14 = 0;
-					var16 = !var16;
+
+				counter += 256;
+				if (counter >= threshold) {
+					counter = 0;
+					muted = !muted;
 				}
-				if (var16) {
-					buffer[var17] = 0;
+
+				if (muted) {
+					buffer[sample] = 0;
 				}
 			}
 		}
+
 		if (this.reverbDelay > 0 && this.reverbVolume > 0) {
-			int var21 = (int) ((double) this.reverbDelay * var4);
-			for (int var22 = var21; var22 < arg0; var22++) {
-				buffer[var22] += buffer[var22 - var21] * this.reverbVolume / 100;
+			int start = (int) ((double) this.reverbDelay * samplesPerStep);
+			for (int sample = start; sample < samples; sample++) {
+				buffer[sample] += buffer[sample - start] * this.reverbVolume / 100;
 			}
 		}
-		for (int var23 = 0; var23 < arg0; var23++) {
-			if (buffer[var23] < -32768) {
-				buffer[var23] = -32768;
+
+		for (int sample = 0; sample < samples; sample++) {
+			if (buffer[sample] < -32768) {
+				buffer[sample] = -32768;
 			}
-			if (buffer[var23] > 32767) {
-				buffer[var23] = 32767;
+
+			if (buffer[sample] > 32767) {
+				buffer[sample] = 32767;
 			}
 		}
+
 		return buffer;
 	}
 
 	@ObfuscatedName("dc.a(IIII)I")
-	public final int generate(int arg0, int arg1, int arg2) {
-		if (arg0 == 1) {
-			return (arg2 & 0x7FFF) < 16384 ? arg1 : -arg1;
-		} else if (arg0 == 2) {
-			return sin[arg2 & 0x7FFF] * arg1 >> 14;
-		} else if (arg0 == 3) {
-			return ((arg2 & 0x7FFF) * arg1 >> 14) - arg1;
-		} else if (arg0 == 4) {
-			return noise[arg2 / 2607 & 0x7FFF] * arg1;
+	public final int generate(int form, int amplitude, int phase) {
+		if (form == 1) {
+			return (phase & 0x7FFF) < 16384 ? amplitude : -amplitude;
+		} else if (form == 2) {
+			return sin[phase & 0x7FFF] * amplitude >> 14;
+		} else if (form == 3) {
+			return ((phase & 0x7FFF) * amplitude >> 14) - amplitude;
+		} else if (form == 4) {
+			return noise[phase / 2607 & 0x7FFF] * amplitude;
 		} else {
 			return 0;
 		}
 	}
 
 	@ObfuscatedName("dc.a(ILmb;)V")
-	public final void unpack(Packet arg1) {
+	public final void unpack(Packet buf) {
 		this.frequencyBase = new Envelope();
-		this.frequencyBase.unpack(arg1);
+		this.frequencyBase.unpack(buf);
+
 		this.amplitudeBase = new Envelope();
-		this.amplitudeBase.unpack(arg1);
-		int var3 = arg1.g1();
-		if (var3 != 0) {
-			arg1.pos--;
+		this.amplitudeBase.unpack(buf);
+
+		int hasFrequencyMod = buf.g1();
+		if (hasFrequencyMod != 0) {
+			buf.pos--;
 			this.frequencyModRate = new Envelope();
-			this.frequencyModRate.unpack(arg1);
+			this.frequencyModRate.unpack(buf);
 			this.frequencyModRange = new Envelope();
-			this.frequencyModRange.unpack(arg1);
+			this.frequencyModRange.unpack(buf);
 		}
-		int var4 = arg1.g1();
-		if (var4 != 0) {
-			arg1.pos--;
+
+		int hasAmplitudeMod = buf.g1();
+		if (hasAmplitudeMod != 0) {
+			buf.pos--;
 			this.amplitudeModRate = new Envelope();
-			this.amplitudeModRate.unpack(arg1);
+			this.amplitudeModRate.unpack(buf);
 			this.amplitudeModRange = new Envelope();
-			this.amplitudeModRange.unpack(arg1);
+			this.amplitudeModRange.unpack(buf);
 		}
-		int var6 = arg1.g1();
-		if (var6 != 0) {
-			arg1.pos--;
+
+		int hasReleaseAttack = buf.g1();
+		if (hasReleaseAttack != 0) {
+			buf.pos--;
 			this.release = new Envelope();
-			this.release.unpack(arg1);
+			this.release.unpack(buf);
 			this.attack = new Envelope();
-			this.attack.unpack(arg1);
+			this.attack.unpack(buf);
 		}
-		for (int var7 = 0; var7 < 10; var7++) {
-			int var8 = arg1.gsmarts();
-			if (var8 == 0) {
+
+		for (int i = 0; i < 10; i++) {
+			int volume = buf.gsmarts();
+			if (volume == 0) {
 				break;
 			}
-			this.harmonicVolume[var7] = var8;
-			this.harmonicSemitone[var7] = arg1.gsmart();
-			this.harmonicDelay[var7] = arg1.gsmarts();
+
+			this.harmonicVolume[i] = volume;
+			this.harmonicSemitone[i] = buf.gsmart();
+			this.harmonicDelay[i] = buf.gsmarts();
 		}
-		this.reverbDelay = arg1.gsmarts();
-		this.reverbVolume = arg1.gsmarts();
-		this.length = arg1.g2();
-		this.start = arg1.g2();
+
+		this.reverbDelay = buf.gsmarts();
+		this.reverbVolume = buf.gsmarts();
+		this.length = buf.g2();
+		this.start = buf.g2();
 	}
 }
