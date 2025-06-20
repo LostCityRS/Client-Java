@@ -29,243 +29,275 @@ public class WordFilter {
 	public static final String[] ALLOWLIST = new String[] { "cook", "cook's", "cooks", "seeks", "sheet", "woop", "woops" };
 
 	@ObfuscatedName("qc.a(Lyb;)V")
-	public static final void unpack(Jagfile arg0) {
-		Packet var1 = new Packet(arg0.read("fragmentsenc.txt", null));
-		Packet var2 = new Packet(arg0.read("badenc.txt", null));
-		Packet var3 = new Packet(arg0.read("domainenc.txt", null));
-		Packet var4 = new Packet(arg0.read("tldlist.txt", null));
-		decodeAll(var1, var2, var3, var4);
+	public static void unpack(Jagfile wordenc) {
+		Packet fragments = new Packet(wordenc.read("fragmentsenc.txt", null));
+		Packet bad = new Packet(wordenc.read("badenc.txt", null));
+		Packet domain = new Packet(wordenc.read("domainenc.txt", null));
+		Packet tld = new Packet(wordenc.read("tldlist.txt", null));
+		decodeAll(fragments, bad, domain, tld);
 	}
 
 	@ObfuscatedName("qc.a(Lmb;Lmb;Lmb;Lmb;)V")
-	public static final void decodeAll(Packet arg0, Packet arg1, Packet arg2, Packet arg3) {
-		decodeBadWordsTxt(arg1);
-		decodeDomainsTxt(arg2);
-		decodeFragmentsTxt(arg0);
-		decodeTldsTxt(arg3);
+	public static void decodeAll(Packet fragments, Packet bad, Packet domain, Packet tld) {
+		decodeBadWordsTxt(bad);
+		decodeDomainsTxt(domain);
+		decodeFragmentsTxt(fragments);
+		decodeTldsTxt(tld);
 	}
 
 	@ObfuscatedName("qc.a(Lmb;I)V")
-	public static final void decodeTldsTxt(Packet arg0) {
-		int var2 = arg0.g4();
-		tlds = new char[var2][];
-		tldstype = new int[var2];
-		for (int var3 = 0; var3 < var2; var3++) {
-			tldstype[var3] = arg0.g1();
-			char[] var4 = new char[arg0.g1()];
-			for (int var5 = 0; var5 < var4.length; var5++) {
-				var4[var5] = (char) arg0.g1();
+	public static void decodeTldsTxt(Packet buf) {
+		int count = buf.g4();
+		tlds = new char[count][];
+		tldstype = new int[count];
+
+		for (int i = 0; i < count; i++) {
+			tldstype[i] = buf.g1();
+
+			char[] tld = new char[buf.g1()];
+			for (int j = 0; j < tld.length; j++) {
+				tld[j] = (char) buf.g1();
 			}
-			tlds[var3] = var4;
+
+			tlds[i] = tld;
 		}
 	}
 
 	@ObfuscatedName("qc.b(Lmb;I)V")
-	public static final void decodeBadWordsTxt(Packet arg0) {
-		int var2 = arg0.g4();
-		badWords = new char[var2][];
-		badCombinations = new byte[var2][][];
-		decodeBadCombinations(badWords, badCombinations, arg0);
+	public static void decodeBadWordsTxt(Packet buf) {
+		int count = buf.g4();
+		badWords = new char[count][];
+		badCombinations = new byte[count][][];
+
+		decodeBadCombinations(badWords, badCombinations, buf);
 	}
 
 	@ObfuscatedName("qc.a(ILmb;)V")
-	public static final void decodeDomainsTxt(Packet arg1) {
-		int var2 = arg1.g4();
-		domains = new char[var2][];
-		decodeDomains(arg1, domains);
+	public static void decodeDomainsTxt(Packet buf) {
+		int count = buf.g4();
+		domains = new char[count][];
+
+		decodeDomains(buf, domains);
 	}
 
 	@ObfuscatedName("qc.a(Lmb;Z)V")
-	public static final void decodeFragmentsTxt(Packet arg0) {
-		fragments = new int[arg0.g4()];
-		for (int var2 = 0; var2 < fragments.length; var2++) {
-			fragments[var2] = arg0.g2();
+	public static void decodeFragmentsTxt(Packet buf) {
+		fragments = new int[buf.g4()];
+		for (int i = 0; i < fragments.length; i++) {
+			fragments[i] = buf.g2();
 		}
 	}
 
 	@ObfuscatedName("qc.a([[CI[[[BLmb;)V")
-	public static final void decodeBadCombinations(char[][] arg0, byte[][][] arg2, Packet arg3) {
-		for (int var5 = 0; var5 < arg0.length; var5++) {
-			char[] var6 = new char[arg3.g1()];
-			for (int var7 = 0; var7 < var6.length; var7++) {
-				var6[var7] = (char) arg3.g1();
+	public static void decodeBadCombinations(char[][] badwords, byte[][][] badCombinations, Packet buf) {
+		for (int i = 0; i < badwords.length; i++) {
+			char[] badword = new char[buf.g1()];
+			for (int j = 0; j < badword.length; j++) {
+				badword[j] = (char) buf.g1();
 			}
-			arg0[var5] = var6;
-			byte[][] var8 = new byte[arg3.g1()][2];
-			for (int var9 = 0; var9 < var8.length; var9++) {
-				var8[var9][0] = (byte) arg3.g1();
-				var8[var9][1] = (byte) arg3.g1();
+
+			badwords[i] = badword;
+
+			byte[][] combination = new byte[buf.g1()][2];
+			for (int j = 0; j < combination.length; j++) {
+				combination[j][0] = (byte) buf.g1();
+				combination[j][1] = (byte) buf.g1();
 			}
-			if (var8.length > 0) {
-				arg2[var5] = var8;
+
+			if (combination.length > 0) {
+				badCombinations[i] = combination;
 			}
 		}
 	}
 
 	@ObfuscatedName("qc.a(ILmb;[[C)V")
-	public static final void decodeDomains(Packet arg1, char[][] arg2) {
-		for (int var3 = 0; var3 < arg2.length; var3++) {
-			char[] var5 = new char[arg1.g1()];
-			for (int var6 = 0; var6 < var5.length; var6++) {
-				var5[var6] = (char) arg1.g1();
+	public static void decodeDomains(Packet arg1, char[][] domains) {
+		for (int i = 0; i < domains.length; i++) {
+			char[] domain = new char[arg1.g1()];
+			for (int j = 0; j < domain.length; j++) {
+				domain[j] = (char) arg1.g1();
 			}
-			arg2[var3] = var5;
+
+			domains[i] = domain;
 		}
 	}
 
 	@ObfuscatedName("qc.a([CI)V")
-	public static final void filterCharacters(char[] arg0) {
-		int var2 = 0;
-		for (int var3 = 0; var3 < arg0.length; var3++) {
-			if (allowCharacter(arg0[var3])) {
-				arg0[var2] = arg0[var3];
+	public static void filterCharacters(char[] in) {
+		int pos = 0;
+		for (int i = 0; i < in.length; i++) {
+			if (allowCharacter(in[i])) {
+				in[pos] = in[i];
 			} else {
-				arg0[var2] = ' ';
+				in[pos] = ' ';
 			}
-			if (var2 == 0 || arg0[var2] != ' ' || arg0[var2 - 1] != ' ') {
-				var2++;
+
+			if (pos == 0 || in[pos] != ' ' || in[pos - 1] != ' ') {
+				pos++;
 			}
 		}
-		for (int var4 = var2; var4 < arg0.length; var4++) {
-			arg0[var4] = ' ';
+
+		for (int i = pos; i < in.length; i++) {
+			in[i] = ' ';
 		}
 	}
 
 	@ObfuscatedName("qc.a(IC)Z")
-	public static final boolean allowCharacter(char arg1) {
-		return arg1 >= ' ' && arg1 <= 127 || arg1 == ' ' || arg1 == '\n' || arg1 == '\t' || arg1 == 163 || arg1 == 8364;
+	public static boolean allowCharacter(char c) {
+		return c >= ' ' && c <= 127 || c == ' ' || c == '\n' || c == '\t' || c == 163 || c == 8364;
 	}
 
 	@ObfuscatedName("qc.a(Ljava/lang/String;B)Ljava/lang/String;")
-	public static final String filter(String arg0) {
-		long var2 = System.currentTimeMillis();
-		char[] var4 = arg0.toCharArray();
-		filterCharacters(var4);
-		String var5 = (new String(var4)).trim();
-		char[] var6 = var5.toLowerCase().toCharArray();
-		String var7 = var5.toLowerCase();
-		filterTld(var6);
-		filterBad(var6);
-		filterDomains(var6);
-		filterFragments(var6);
-		for (int var8 = 0; var8 < ALLOWLIST.length; var8++) {
-			int var11 = -1;
-			while ((var11 = var7.indexOf(ALLOWLIST[var8], var11 + 1)) != -1) {
-				char[] var12 = ALLOWLIST[var8].toCharArray();
-				for (int var13 = 0; var13 < var12.length; var13++) {
-					var6[var11 + var13] = var12[var13];
+	public static String filter(String input) {
+		long start = System.currentTimeMillis();
+
+		char[] outputPre = input.toCharArray();
+		filterCharacters(outputPre);
+
+		String trimmed = (new String(outputPre)).trim();
+		char[] output = trimmed.toLowerCase().toCharArray();
+		String lowercase = trimmed.toLowerCase();
+
+		filterTld(output);
+		filterBad(output);
+		filterDomains(output);
+		filterFragments(output);
+
+		for (int i = 0; i < ALLOWLIST.length; i++) {
+			int j = -1;
+			while ((j = lowercase.indexOf(ALLOWLIST[i], j + 1)) != -1) {
+				char[] var12 = ALLOWLIST[i].toCharArray();
+				for (int k = 0; k < var12.length; k++) {
+					output[j + k] = var12[k];
 				}
 			}
 		}
-		replaceUppercase(var5.toCharArray(), var6);
-		formatUppercase(var6);
-		long var9 = System.currentTimeMillis();
-		return (new String(var6)).trim();
+
+		replaceUppercase(trimmed.toCharArray(), output);
+		formatUppercase(output);
+
+		long end = System.currentTimeMillis();
+		return (new String(output)).trim();
 	}
 
 	@ObfuscatedName("qc.a([C[CI)V")
-	public static final void replaceUppercase(char[] arg0, char[] arg1) {
-		for (int var3 = 0; var3 < arg0.length; var3++) {
-			if (arg1[var3] != '*' && isUpperCase(arg0[var3])) {
-				arg1[var3] = arg0[var3];
+	public static void replaceUppercase(char[] unfiltered, char[] in) {
+		for (int i = 0; i < unfiltered.length; i++) {
+			if (in[i] != '*' && isUpperCase(unfiltered[i])) {
+				in[i] = unfiltered[i];
 			}
 		}
 	}
 
 	@ObfuscatedName("qc.a([CZ)V")
-	public static final void formatUppercase(char[] arg0) {
-		boolean var2 = true;
-		for (int var3 = 0; var3 < arg0.length; var3++) {
-			char var4 = arg0[var3];
-			if (!isAlpha(var4)) {
-				var2 = true;
-			} else if (var2) {
-				if (isLowercase(var4)) {
-					var2 = false;
+	public static void formatUppercase(char[] in) {
+		boolean upper = true;
+
+		for (int i = 0; i < in.length; i++) {
+			char c = in[i];
+
+			if (!isAlpha(c)) {
+				upper = true;
+			} else if (upper) {
+				if (isLowercase(c)) {
+					upper = false;
 				}
-			} else if (isUpperCase(var4)) {
-				arg0[var3] = (char) (var4 + 'a' - 65);
+			} else if (isUpperCase(c)) {
+				in[i] = (char) (c + 'a' - 65);
 			}
 		}
 	}
 
 	@ObfuscatedName("qc.a(Z[C)V")
-	public static final void filterBad(char[] arg1) {
-		for (int var3 = 0; var3 < 2; var3++) {
-			for (int var4 = badWords.length - 1; var4 >= 0; var4--) {
-				filter(arg1, badWords[var4], badCombinations[var4]);
+	public static void filterBad(char[] in) {
+		for (int passes = 0; passes < 2; passes++) {
+			for (int i = badWords.length - 1; i >= 0; i--) {
+				filter(in, badWords[i], badCombinations[i]);
 			}
 		}
 	}
 
 	@ObfuscatedName("qc.a(I[C)V")
-	public static final void filterDomains(char[] arg1) {
-		char[] var2 = (char[]) arg1.clone();
-		char[] var3 = new char[] { '(', 'a', ')' };
-		filter(var2, var3, null);
-		char[] var4 = (char[]) arg1.clone();
-		char[] var5 = new char[] { 'd', 'o', 't' };
-		filter(var4, var5, null);
-		for (int var6 = domains.length - 1; var6 >= 0; var6--) {
-			filterDomain(var4, arg1, domains[var6], var2);
+	public static void filterDomains(char[] in) {
+		char[] filteredAt = in.clone();
+		char[] at = new char[] { '(', 'a', ')' };
+		filter(filteredAt, at, null);
+
+		char[] filteredDot = in.clone();
+		char[] dot = new char[] { 'd', 'o', 't' };
+		filter(filteredDot, dot, null);
+
+		for (int i = domains.length - 1; i >= 0; i--) {
+			filterDomain(filteredDot, in, domains[i], filteredAt);
 		}
 	}
 
 	@ObfuscatedName("qc.a([CI[C[C[C)V")
-	public static final void filterDomain(char[] arg0, char[] arg2, char[] arg3, char[] arg4) {
-		if (arg3.length > arg2.length) {
+	public static void filterDomain(char[] arg0, char[] in, char[] domain, char[] arg4) {
+		if (domain.length > in.length) {
 			return;
 		}
-		boolean var5 = true;
-		int var9;
-		for (int var6 = 0; var6 <= arg2.length - arg3.length; var6 += var9) {
-			int var7 = var6;
-			int var8 = 0;
-			var9 = 1;
-			label61: while (true) {
+
+		boolean compare = true;
+		int stride;
+
+		for (int start = 0; start <= in.length - domain.length; start += stride) {
+			int end = start;
+			int offset = 0;
+			stride = 1;
+
+			filter_pass: while (true) {
 				while (true) {
-					if (var7 >= arg2.length) {
-						break label61;
+					if (end >= in.length) {
+						break filter_pass;
 					}
-					boolean var10 = false;
-					char var11 = arg2[var7];
-					char var12 = 0;
-					if (var7 + 1 < arg2.length) {
-						var12 = arg2[var7 + 1];
+
+					boolean match = false;
+					char b = in[end];
+					char c = 0;
+					if (end + 1 < in.length) {
+						c = in[end + 1];
 					}
-					int var13;
-					if (var8 < arg3.length && (var13 = getEmulatedDomainCharSize(var12, var11, arg3[var8])) > 0) {
-						var7 += var13;
-						var8++;
+
+					int charSize;
+					if (offset < domain.length && (charSize = getEmulatedDomainCharSize(c, b, domain[offset])) > 0) {
+						end += charSize;
+						offset++;
 					} else {
-						if (var8 == 0) {
-							break label61;
+						if (offset == 0) {
+							break filter_pass;
 						}
-						int var14;
-						if ((var14 = getEmulatedDomainCharSize(var12, var11, arg3[var8 - 1])) > 0) {
-							var7 += var14;
-							if (var8 == 1) {
-								var9++;
+
+						int charSize2;
+						if ((charSize2 = getEmulatedDomainCharSize(c, b, domain[offset - 1])) > 0) {
+							end += charSize2;
+
+							if (offset == 1) {
+								stride++;
 							}
 						} else {
-							if (var8 >= arg3.length || !isSymbol(var11)) {
-								break label61;
+							if (offset >= domain.length || !isSymbol(b)) {
+								break filter_pass;
 							}
-							var7++;
+
+							end++;
 						}
 					}
 				}
 			}
-			if (var8 >= arg3.length) {
-				boolean var15 = false;
-				int var16 = getDomainAtFilterStatus(arg4, var6, arg2);
-				int var17 = getDomainDotFilterStatus(arg0, arg2, false, var7 - 1);
-				if (var16 > 2 || var17 > 2) {
-					var15 = true;
+
+			if (offset >= domain.length) {
+				boolean match = false;
+				int atFilter = getDomainAtFilterStatus(arg4, start, in);
+				int dotFilter = getDomainDotFilterStatus(arg0, in, end - 1);
+
+				if (atFilter > 2 || dotFilter > 2) {
+					match = true;
 				}
-				if (var15) {
-					for (int var18 = var6; var18 < var7; var18++) {
-						arg2[var18] = '*';
+
+				if (match) {
+					for (int i = start; i < end; i++) {
+						in[i] = '*';
 					}
 				}
 			}
@@ -273,24 +305,27 @@ public class WordFilter {
 	}
 
 	@ObfuscatedName("qc.a(B[CI[C)I")
-	public static final int getDomainAtFilterStatus(char[] arg1, int arg2, char[] arg3) {
-		if (arg2 == 0) {
+	public static int getDomainAtFilterStatus(char[] b, int end, char[] a) {
+		if (end == 0) {
 			return 2;
 		}
-		for (int var4 = arg2 - 1; var4 >= 0 && isSymbol(arg3[var4]); var4--) {
-			if (arg3[var4] == '@') {
+
+		for (int i = end - 1; i >= 0 && isSymbol(a[i]); i--) {
+			if (a[i] == '@') {
 				return 3;
 			}
 		}
-		int var5 = 0;
-		for (int var6 = arg2 - 1; var6 >= 0 && isSymbol(arg1[var6]); var6--) {
-			if (arg1[var6] == '*') {
-				var5++;
+
+		int asteriskCount = 0;
+		for (int i = end - 1; i >= 0 && isSymbol(b[i]); i--) {
+			if (b[i] == '*') {
+				asteriskCount++;
 			}
 		}
-		if (var5 >= 3) {
+
+		if (asteriskCount >= 3) {
 			return 4;
-		} else if (isSymbol(arg3[arg2 - 1])) {
+		} else if (isSymbol(a[end - 1])) {
 			return 1;
 		} else {
 			return 0;
@@ -298,176 +333,203 @@ public class WordFilter {
 	}
 
 	@ObfuscatedName("qc.a([C[CZI)I")
-	public static final int getDomainDotFilterStatus(char[] arg0, char[] arg1, boolean arg2, int arg3) {
-		if (arg3 + 1 == arg1.length) {
+	public static int getDomainDotFilterStatus(char[] b, char[] a, int start) {
+		if (start + 1 == a.length) {
 			return 2;
 		}
-		int var4 = arg3 + 1;
+
+		int i = start + 1;
 		while (true) {
-			if (var4 < arg1.length && isSymbol(arg1[var4])) {
-				if (arg1[var4] != '.' && arg1[var4] != ',') {
-					var4++;
+			if (i < a.length && isSymbol(a[i])) {
+				if (a[i] != '.' && a[i] != ',') {
+					i++;
 					continue;
 				}
+
 				return 3;
 			}
-			int var5 = 0;
-			for (int var6 = arg3 + 1; var6 < arg1.length && isSymbol(arg0[var6]); var6++) {
-				if (arg0[var6] == '*') {
-					var5++;
+
+			int asteriskCount = 0;
+			for (int j = start + 1; j < a.length && isSymbol(b[j]); j++) {
+				if (b[j] == '*') {
+					asteriskCount++;
 				}
 			}
-			if (arg2) {
-				return 1;
-			}
-			if (var5 >= 3) {
+
+			if (asteriskCount >= 3) {
 				return 4;
-			}
-			if (isSymbol(arg1[arg3 + 1])) {
+			} else if (isSymbol(a[start + 1])) {
 				return 1;
+			} else {
+				return 0;
 			}
-			return 0;
 		}
 	}
 
 	@ObfuscatedName("qc.b(I[C)V")
-	public static final void filterTld(char[] arg1) {
-		char[] var2 = (char[]) arg1.clone();
-		char[] var3 = new char[] { 'd', 'o', 't' };
-		filter(var2, var3, null);
-		char[] var4 = (char[]) arg1.clone();
-		char[] var5 = new char[] { 's', 'l', 'a', 's', 'h' };
-		filter(var4, var5, null);
-		for (int var6 = 0; var6 < tlds.length; var6++) {
-			filterTld(tlds[var6], var4, var2, tldstype[var6], arg1);
+	public static void filterTld(char[] in) {
+		char[] filteredDot = in.clone();
+		char[] dot = new char[] { 'd', 'o', 't' };
+		filter(filteredDot, dot, null);
+
+		char[] filteredSlash = in.clone();
+		char[] slash = new char[] { 's', 'l', 'a', 's', 'h' };
+		filter(filteredSlash, slash, null);
+
+		for (int i = 0; i < tlds.length; i++) {
+			filterTld(tlds[i], filteredSlash, filteredDot, tldstype[i], in);
 		}
 	}
 
 	@ObfuscatedName("qc.a([C[C[CII[C)V")
-	public static final void filterTld(char[] arg0, char[] arg1, char[] arg2, int arg3, char[] arg5) {
-		if (arg0.length > arg5.length) {
+	public static void filterTld(char[] tld, char[] filteredSlash, char[] filteredDot, int type, char[] chars) {
+		if (tld.length > chars.length) {
 			return;
 		}
-		boolean var6 = true;
-		int var10;
-		for (int var7 = 0; var7 <= arg5.length - arg0.length; var7 += var10) {
-			int var8 = var7;
-			int var9 = 0;
-			var10 = 1;
-			label128: while (true) {
+
+		boolean compare = true;
+		int stride;
+		for (int start = 0; start <= chars.length - tld.length; start += stride) {
+			int end = start;
+			int offset = 0;
+			stride = 1;
+
+			filter_pass: while (true) {
 				while (true) {
-					if (var8 >= arg5.length) {
-						break label128;
+					if (end >= chars.length) {
+						break filter_pass;
 					}
-					boolean var11 = false;
-					char var12 = arg5[var8];
-					char var13 = 0;
-					if (var8 + 1 < arg5.length) {
-						var13 = arg5[var8 + 1];
+
+					boolean match = false;
+					char b = chars[end];
+					char c = 0;
+
+					if (end + 1 < chars.length) {
+						c = chars[end + 1];
 					}
-					int var14;
-					if (var9 < arg0.length && (var14 = getEmulatedDomainCharSize(var13, var12, arg0[var9])) > 0) {
-						var8 += var14;
-						var9++;
+
+					int charLen;
+					if (offset < tld.length && (charLen = getEmulatedDomainCharSize(c, b, tld[offset])) > 0) {
+						end += charLen;
+						offset++;
 					} else {
-						if (var9 == 0) {
-							break label128;
+						if (offset == 0) {
+							break filter_pass;
 						}
-						int var15;
-						if ((var15 = getEmulatedDomainCharSize(var13, var12, arg0[var9 - 1])) > 0) {
-							var8 += var15;
-							if (var9 == 1) {
-								var10++;
+
+						int charLen2;
+						if ((charLen2 = getEmulatedDomainCharSize(c, b, tld[offset - 1])) > 0) {
+							end += charLen2;
+
+							if (offset == 1) {
+								stride++;
 							}
 						} else {
-							if (var9 >= arg0.length || !isSymbol(var12)) {
-								break label128;
+							if (offset >= tld.length || !isSymbol(b)) {
+								break filter_pass;
 							}
-							var8++;
+
+							end++;
 						}
 					}
 				}
 			}
-			if (var9 >= arg0.length) {
-				boolean var16 = false;
-				int var17 = getTldDotFilterStatus(arg5, var7, arg2);
-				int var18 = getTldSlashFilterStatus(arg1, var8 - 1, arg5);
-				if (arg3 == 1 && var17 > 0 && var18 > 0) {
-					var16 = true;
+
+			if (offset >= tld.length) {
+				boolean match = false;
+
+				int status0 = getTldDotFilterStatus(chars, start, filteredDot);
+				int status1 = getTldSlashFilterStatus(filteredSlash, end - 1, chars);
+
+				if (type == 1 && status0 > 0 && status1 > 0) {
+					match = true;
 				}
-				if (arg3 == 2 && (var17 > 2 && var18 > 0 || var17 > 0 && var18 > 2)) {
-					var16 = true;
+
+				if (type == 2 && (status0 > 2 && status1 > 0 || status0 > 0 && status1 > 2)) {
+					match = true;
 				}
-				if (arg3 == 3 && var17 > 0 && var18 > 2) {
-					var16 = true;
+
+				if (type == 3 && status0 > 0 && status1 > 2) {
+					match = true;
 				}
-				boolean var10000;
-				if (arg3 == 3 && var17 > 2 && var18 > 0) {
-					var10000 = true;
+
+				boolean match2;
+				if (type == 3 && status0 > 2 && status1 > 0) {
+					match2 = true;
 				} else {
-					var10000 = false;
+					match2 = false;
 				}
-				if (var16) {
-					int var19 = var7;
-					int var20 = var8 - 1;
-					if (var17 > 2) {
-						if (var17 == 4) {
-							boolean var21 = false;
-							for (int var22 = var7 - 1; var22 >= 0; var22--) {
-								if (var21) {
-									if (arg2[var22] != '*') {
+
+				if (match) {
+					int first = start;
+					int last = end - 1;
+
+					if (status0 > 2) {
+						if (status0 == 4) {
+							boolean findStart = false;
+							for (int i = start - 1; i >= 0; i--) {
+								if (findStart) {
+									if (filteredDot[i] != '*') {
 										break;
 									}
-									var19 = var22;
-								} else if (arg2[var22] == '*') {
-									var19 = var22;
-									var21 = true;
+
+									first = i;
+								} else if (filteredDot[i] == '*') {
+									first = i;
+									findStart = true;
 								}
 							}
 						}
-						boolean var23 = false;
-						for (int var24 = var19 - 1; var24 >= 0; var24--) {
-							if (var23) {
-								if (isSymbol(arg5[var24])) {
+
+						boolean findStart = false;
+						for (int i = first - 1; i >= 0; i--) {
+							if (findStart) {
+								if (isSymbol(chars[i])) {
 									break;
 								}
-								var19 = var24;
-							} else if (!isSymbol(arg5[var24])) {
-								var23 = true;
-								var19 = var24;
+
+								first = i;
+							} else if (!isSymbol(chars[i])) {
+								findStart = true;
+								first = i;
 							}
 						}
 					}
-					if (var18 > 2) {
-						if (var18 == 4) {
-							boolean var25 = false;
-							for (int var26 = var20 + 1; var26 < arg5.length; var26++) {
-								if (var25) {
-									if (arg1[var26] != '*') {
+
+					if (status1 > 2) {
+						if (status1 == 4) {
+							boolean findStart = false;
+							for (int i = last + 1; i < chars.length; i++) {
+								if (findStart) {
+									if (filteredSlash[i] != '*') {
 										break;
 									}
-									var20 = var26;
-								} else if (arg1[var26] == '*') {
-									var20 = var26;
-									var25 = true;
+
+									last = i;
+								} else if (filteredSlash[i] == '*') {
+									last = i;
+									findStart = true;
 								}
 							}
 						}
-						boolean var27 = false;
-						for (int var28 = var20 + 1; var28 < arg5.length; var28++) {
-							if (var27) {
-								if (isSymbol(arg5[var28])) {
+
+						boolean findStart = false;
+						for (int i = last + 1; i < chars.length; i++) {
+							if (findStart) {
+								if (isSymbol(chars[i])) {
 									break;
 								}
-								var20 = var28;
-							} else if (!isSymbol(arg5[var28])) {
-								var27 = true;
-								var20 = var28;
+
+								last = i;
+							} else if (!isSymbol(chars[i])) {
+								findStart = true;
+								last = i;
 							}
 						}
 					}
-					for (int var29 = var19; var29 <= var20; var29++) {
-						arg5[var29] = '*';
+
+					for (int i = first; i <= last; i++) {
+						chars[i] = '*';
 					}
 				}
 			}
@@ -475,204 +537,242 @@ public class WordFilter {
 	}
 
 	@ObfuscatedName("qc.a([CII[C)I")
-	public static final int getTldDotFilterStatus(char[] arg0, int arg2, char[] arg3) {
-		if (arg2 == 0) {
+	public static int getTldDotFilterStatus(char[] a, int start, char[] b) {
+		if (start == 0) {
 			return 2;
 		}
-		int var4 = arg2 - 1;
+
+		int i = start - 1;
 		while (true) {
-			if (var4 >= 0 && isSymbol(arg0[var4])) {
-				if (arg0[var4] != ',' && arg0[var4] != '.') {
-					var4--;
+			if (i >= 0 && isSymbol(a[i])) {
+				if (a[i] != ',' && a[i] != '.') {
+					i--;
 					continue;
 				}
+
 				return 3;
 			}
-			int var5 = 0;
-			for (int var6 = arg2 - 1; var6 >= 0 && isSymbol(arg3[var6]); var6--) {
-				if (arg3[var6] == '*') {
-					var5++;
+
+			int asteriskCount = 0;
+			for (int j = start - 1; j >= 0 && isSymbol(b[j]); j--) {
+				if (b[j] == '*') {
+					asteriskCount++;
 				}
 			}
-			if (var5 >= 3) {
+
+			if (asteriskCount >= 3) {
 				return 4;
-			}
-			if (isSymbol(arg0[arg2 - 1])) {
+			} else if (isSymbol(a[start - 1])) {
 				return 1;
+			} else {
+				return 0;
 			}
-			return 0;
 		}
 	}
 
 	@ObfuscatedName("qc.a(I[CI[C)I")
-	public static final int getTldSlashFilterStatus(char[] arg1, int arg2, char[] arg3) {
-		if (arg2 + 1 == arg3.length) {
+	public static int getTldSlashFilterStatus(char[] b, int start, char[] a) {
+		if (start + 1 == a.length) {
 			return 2;
 		}
-		int var4 = arg2 + 1;
+
+		int i = start + 1;
 		while (true) {
-			if (var4 < arg3.length && isSymbol(arg3[var4])) {
-				if (arg3[var4] != '\\' && arg3[var4] != '/') {
-					var4++;
+			if (i < a.length && isSymbol(a[i])) {
+				if (a[i] != '\\' && a[i] != '/') {
+					i++;
 					continue;
 				}
 				return 3;
 			}
-			int var5 = 0;
-			for (int var6 = arg2 + 1; var6 < arg3.length && isSymbol(arg1[var6]); var6++) {
-				if (arg1[var6] == '*') {
-					var5++;
+
+			int asteriskCount = 0;
+			for (int j = start + 1; j < a.length && isSymbol(b[j]); j++) {
+				if (b[j] == '*') {
+					asteriskCount++;
 				}
 			}
-			if (var5 >= 5) {
+
+			if (asteriskCount >= 5) {
 				return 4;
-			}
-			if (isSymbol(arg3[arg2 + 1])) {
+			} else if (isSymbol(a[start + 1])) {
 				return 1;
+			} else {
+				return 0;
 			}
-			return 0;
 		}
 	}
 
 	@ObfuscatedName("qc.a(I[C[C[[B)V")
-	public static final void filter(char[] arg1, char[] arg2, byte[][] arg3) {
-		if (arg2.length > arg1.length) {
+	public static void filter(char[] chars, char[] fragment, byte[][] badCombinations) {
+		if (fragment.length > chars.length) {
 			return;
 		}
-		boolean var4 = true;
-		int var9;
-		for (int var5 = 0; var5 <= arg1.length - arg2.length; var5 += var9) {
-			int var6 = var5;
-			int var7 = 0;
-			int var8 = 0;
-			var9 = 1;
-			boolean var10 = false;
-			boolean var11 = false;
-			boolean var12 = false;
-			label166: while (true) {
+
+		boolean compare = true;
+		int stride;
+		for (int start = 0; start <= chars.length - fragment.length; start += stride) {
+			int end = start;
+			int fragOff = 0;
+			int iterations = 0;
+			stride = 1;
+
+			boolean isSymbol = false;
+			boolean isEmulated = false;
+			boolean isNumeral = false;
+
+			filter_pass: while (true) {
 				while (true) {
-					if (var6 >= arg1.length || var11 && var12) {
-						break label166;
+					if (end >= chars.length || isEmulated && isNumeral) {
+						break filter_pass;
 					}
-					boolean var13 = false;
-					char var14 = arg1[var6];
-					char var15 = 0;
-					if (var6 + 1 < arg1.length) {
-						var15 = arg1[var6 + 1];
+
+					boolean bad = false;
+					char b = chars[end];
+					char c = 0;
+
+					if (end + 1 < chars.length) {
+						c = chars[end + 1];
 					}
-					int var16;
-					if (var7 < arg2.length && (var16 = getEmulatedSize(arg2[var7], var15, var14)) > 0) {
-						if (var16 == 1 && isNumber(var14)) {
-							var11 = true;
+
+					int charLen;
+					if (fragOff < fragment.length && (charLen = getEmulatedSize(fragment[fragOff], c, b)) > 0) {
+						if (charLen == 1 && isNumber(b)) {
+							isEmulated = true;
 						}
-						if (var16 == 2 && (isNumber(var14) || isNumber(var15))) {
-							var11 = true;
+
+						if (charLen == 2 && (isNumber(b) || isNumber(c))) {
+							isEmulated = true;
 						}
-						var6 += var16;
-						var7++;
+
+						end += charLen;
+						fragOff++;
 					} else {
-						if (var7 == 0) {
-							break label166;
+						if (fragOff == 0) {
+							break filter_pass;
 						}
-						int var17;
-						if ((var17 = getEmulatedSize(arg2[var7 - 1], var15, var14)) > 0) {
-							var6 += var17;
-							if (var7 == 1) {
-								var9++;
+
+						int charLen2;
+						if ((charLen2 = getEmulatedSize(fragment[fragOff - 1], c, b)) > 0) {
+							end += charLen2;
+
+							if (fragOff == 1) {
+								stride++;
 							}
 						} else {
-							if (var7 >= arg2.length || !isLowercaseAlpha(var14)) {
-								break label166;
+							if (fragOff >= fragment.length || !isLowercaseAlpha(b)) {
+								break filter_pass;
 							}
-							if (isSymbol(var14) && var14 != '\'') {
-								var10 = true;
+
+							if (isSymbol(b) && b != '\'') {
+								isSymbol = true;
 							}
-							if (isNumber(var14)) {
-								var12 = true;
+
+							if (isNumber(b)) {
+								isNumeral = true;
 							}
-							var6++;
-							var8++;
-							if (var8 * 100 / (var6 - var5) > 90) {
-								break label166;
+
+							end++;
+							iterations++;
+
+							if (iterations * 100 / (end - start) > 90) {
+								break filter_pass;
 							}
 						}
 					}
 				}
 			}
-			if (var7 >= arg2.length && (!var11 || !var12)) {
-				boolean var18 = true;
-				if (var10) {
-					boolean var23 = false;
-					boolean var24 = false;
-					if (var5 - 1 < 0 || isSymbol(arg1[var5 - 1]) && arg1[var5 - 1] != '\'') {
-						var23 = true;
+
+			if (fragOff >= fragment.length && (!isEmulated || !isNumeral)) {
+				boolean bad = true;
+
+				if (isSymbol) {
+					boolean badCurrent = false;
+					boolean badNext = false;
+
+					if (start - 1 < 0 || isSymbol(chars[start - 1]) && chars[start - 1] != '\'') {
+						badCurrent = true;
 					}
-					if (var6 >= arg1.length || isSymbol(arg1[var6]) && arg1[var6] != '\'') {
-						var24 = true;
+
+					if (end >= chars.length || isSymbol(chars[end]) && chars[end] != '\'') {
+						badNext = true;
 					}
-					if (!var23 || !var24) {
-						boolean var25 = false;
-						int var26 = var5 - 2;
-						if (var23) {
-							var26 = var5;
+
+					if (!badCurrent || !badNext) {
+						boolean good = false;
+						int cur = start - 2;
+						if (badCurrent) {
+							cur = start;
 						}
-						while (!var25 && var26 < var6) {
-							if (var26 >= 0 && (!isSymbol(arg1[var26]) || arg1[var26] == '\'')) {
-								char[] var27 = new char[3];
-								int var28;
-								for (var28 = 0; var28 < 3 && var26 + var28 < arg1.length && (!isSymbol(arg1[var26 + var28]) || arg1[var26 + var28] == '\''); var28++) {
-									var27[var28] = arg1[var26 + var28];
+
+						while (!good && cur < end) {
+							if (cur >= 0 && (!isSymbol(chars[cur]) || chars[cur] == '\'')) {
+								char[] frag = new char[3];
+
+								int off;
+								for (off = 0; off < 3 && cur + off < chars.length && (!isSymbol(chars[cur + off]) || chars[cur + off] == '\''); off++) {
+									frag[off] = chars[cur + off];
 								}
-								boolean var29 = true;
-								if (var28 == 0) {
-									var29 = false;
+
+								boolean valid = true;
+								if (off == 0) {
+									valid = false;
 								}
-								if (var28 < 3 && var26 - 1 >= 0 && (!isSymbol(arg1[var26 - 1]) || arg1[var26 - 1] == '\'')) {
-									var29 = false;
+								if (off < 3 && cur - 1 >= 0 && (!isSymbol(chars[cur - 1]) || chars[cur - 1] == '\'')) {
+									valid = false;
 								}
-								if (var29 && !isBadFragment(var27)) {
-									var25 = true;
+								if (valid && !isBadFragment(frag)) {
+									good = true;
 								}
 							}
-							var26++;
+
+							cur++;
 						}
-						if (!var25) {
-							var18 = false;
+
+						if (!good) {
+							bad = false;
 						}
 					}
 				} else {
-					char var19 = ' ';
-					if (var5 - 1 >= 0) {
-						var19 = arg1[var5 - 1];
+					char b = ' ';
+					if (start - 1 >= 0) {
+						b = chars[start - 1];
 					}
-					char var20 = ' ';
-					if (var6 < arg1.length) {
-						var20 = arg1[var6];
+
+					char c = ' ';
+					if (end < chars.length) {
+						c = chars[end];
 					}
-					byte var21 = getIndex(var19);
-					byte var22 = getIndex(var20);
-					if (arg3 != null && comboMatches(arg3, var21, var22)) {
-						var18 = false;
+
+					byte bIndex = getIndex(b);
+					byte cIndex = getIndex(c);
+
+					if (badCombinations != null && comboMatches(badCombinations, bIndex, cIndex)) {
+						bad = false;
 					}
 				}
-				if (var18) {
-					int var30 = 0;
-					int var31 = 0;
-					int var32 = -1;
-					for (int var33 = var5; var33 < var6; var33++) {
-						if (isNumber(arg1[var33])) {
-							var30++;
-						} else if (isAlpha(arg1[var33])) {
-							var31++;
-							var32 = var33;
+
+				if (bad) {
+					int numeralCount = 0;
+					int alphaCount = 0;
+					int alphaIndex = -1;
+
+					for (int i = start; i < end; i++) {
+						if (isNumber(chars[i])) {
+							numeralCount++;
+						} else if (isAlpha(chars[i])) {
+							alphaCount++;
+							alphaIndex = i;
 						}
 					}
-					if (var32 > -1) {
-						var30 -= var6 - var32 + 1;
+
+					if (alphaIndex > -1) {
+						numeralCount -= end - alphaIndex + 1;
 					}
-					if (var30 <= var31) {
-						for (int var34 = var5; var34 < var6; var34++) {
-							arg1[var34] = '*';
+
+					if (numeralCount <= alphaCount) {
+						for (int i = start; i < end; i++) {
+							chars[i] = '*';
 						}
 					}
 				}
@@ -681,45 +781,48 @@ public class WordFilter {
 	}
 
 	@ObfuscatedName("qc.a([[BIBB)Z")
-	public static final boolean comboMatches(byte[][] arg0, byte arg2, byte arg3) {
-		int var4 = 0;
-		if (arg0[var4][0] == arg2 && arg0[var4][1] == arg3) {
+	public static boolean comboMatches(byte[][] combos, byte a, byte b) {
+		int first = 0;
+		if (combos[first][0] == a && combos[first][1] == b) {
 			return true;
 		}
-		int var5 = arg0.length - 1;
-		if (arg0[var5][0] == arg2 && arg0[var5][1] == arg3) {
+
+		int last = combos.length - 1;
+		if (combos[last][0] == a && combos[last][1] == b) {
 			return true;
-		} else {
-			do {
-				int var6 = (var4 + var5) / 2;
-				if (arg0[var6][0] == arg2 && arg0[var6][1] == arg3) {
-					return true;
-				}
-				if (arg2 < arg0[var6][0] || arg0[var6][0] == arg2 && arg3 < arg0[var6][1]) {
-					var5 = var6;
-				} else {
-					var4 = var6;
-				}
-			} while (var4 != var5 && var4 + 1 != var5);
-			return false;
 		}
+
+		do {
+			int middle = (first + last) / 2;
+			if (combos[middle][0] == a && combos[middle][1] == b) {
+				return true;
+			}
+
+			if (a < combos[middle][0] || combos[middle][0] == a && b < combos[middle][1]) {
+				last = middle;
+			} else {
+				first = middle;
+			}
+		} while (first != last && first + 1 != last);
+
+		return false;
 	}
 
 	@ObfuscatedName("qc.a(CCCB)I")
-	public static final int getEmulatedDomainCharSize(char arg0, char arg1, char arg2) {
-		if (arg1 == arg2) {
+	public static int getEmulatedDomainCharSize(char c, char a, char b) {
+		if (a == b) {
 			return 1;
-		} else if (arg2 == 'o' && arg1 == '0') {
+		} else if (b == 'o' && a == '0') {
 			return 1;
-		} else if (arg2 == 'o' && arg1 == '(' && arg0 == ')') {
+		} else if (b == 'o' && a == '(' && c == ')') {
 			return 2;
-		} else if (arg2 == 'c' && (arg1 == '(' || arg1 == '<' || arg1 == '[')) {
+		} else if (b == 'c' && (a == '(' || a == '<' || a == '[')) {
 			return 1;
-		} else if (arg2 == 'e' && arg1 == 8364) {
+		} else if (b == 'e' && a == 8364) {
 			return 1;
-		} else if (arg2 == 's' && arg1 == '$') {
+		} else if (b == 's' && a == '$') {
 			return 1;
-		} else if (arg2 == 'l' && arg1 == 'i') {
+		} else if (b == 'l' && a == 'i') {
 			return 1;
 		} else {
 			return 0;
@@ -727,346 +830,414 @@ public class WordFilter {
 	}
 
 	@ObfuscatedName("qc.a(CBCC)I")
-	public static final int getEmulatedSize(char arg0, char arg2, char arg3) {
-		if (arg0 == arg3) {
+	public static int getEmulatedSize(char a, char c, char b) {
+		if (a == b) {
 			return 1;
 		}
-		if (arg0 >= 'a' && arg0 <= 'm') {
-			if (arg0 == 'a') {
-				if (arg3 != '4' && arg3 != '@' && arg3 != '^') {
-					if (arg3 == '/' && arg2 == '\\') {
+
+		if (a >= 'a' && a <= 'm') {
+			if (a == 'a') {
+				if (b != '4' && b != '@' && b != '^') {
+					if (b == '/' && c == '\\') {
 						return 2;
 					}
+
 					return 0;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'b') {
-				if (arg3 != '6' && arg3 != '8') {
-					if ((arg3 != '1' || arg2 != '3') && (arg3 != 'i' || arg2 != '3')) {
+
+			if (a == 'b') {
+				if (b != '6' && b != '8') {
+					if ((b != '1' || c != '3') && (b != 'i' || c != '3')) {
 						return 0;
 					}
+
 					return 2;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'c') {
-				if (arg3 != '(' && arg3 != '<' && arg3 != '{' && arg3 != '[') {
+
+			if (a == 'c') {
+				if (b != '(' && b != '<' && b != '{' && b != '[') {
 					return 0;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'd') {
-				if ((arg3 != '[' || arg2 != ')') && (arg3 != 'i' || arg2 != ')')) {
+
+			if (a == 'd') {
+				if ((b != '[' || c != ')') && (b != 'i' || c != ')')) {
 					return 0;
 				}
+
 				return 2;
 			}
-			if (arg0 == 'e') {
-				if (arg3 != '3' && arg3 != 8364) {
+
+			if (a == 'e') {
+				if (b != '3' && b != 8364) {
 					return 0;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'f') {
-				if (arg3 == 'p' && arg2 == 'h') {
+
+			if (a == 'f') {
+				if (b == 'p' && c == 'h') {
 					return 2;
 				}
-				if (arg3 == 163) {
+
+				if (b == 163) {
 					return 1;
 				}
+
 				return 0;
 			}
-			if (arg0 == 'g') {
-				if (arg3 != '9' && arg3 != '6' && arg3 != 'q') {
+
+			if (a == 'g') {
+				if (b != '9' && b != '6' && b != 'q') {
 					return 0;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'h') {
-				if (arg3 == '#') {
+
+			if (a == 'h') {
+				if (b == '#') {
 					return 1;
 				}
+
 				return 0;
 			}
-			if (arg0 == 'i') {
-				if (arg3 != 'y' && arg3 != 'l' && arg3 != 'j' && arg3 != '1' && arg3 != '!' && arg3 != ':' && arg3 != ';' && arg3 != '|') {
+
+			if (a == 'i') {
+				if (b != 'y' && b != 'l' && b != 'j' && b != '1' && b != '!' && b != ':' && b != ';' && b != '|') {
 					return 0;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'j') {
+
+			if (a == 'j') {
 				return 0;
 			}
-			if (arg0 == 'k') {
+
+			if (a == 'k') {
 				return 0;
 			}
-			if (arg0 == 'l') {
-				if (arg3 != '1' && arg3 != '|' && arg3 != 'i') {
+
+			if (a == 'l') {
+				if (b != '1' && b != '|' && b != 'i') {
 					return 0;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'm') {
+
+			if (a == 'm') {
 				return 0;
 			}
 		}
-		if (arg0 >= 'n' && arg0 <= 'z') {
-			if (arg0 == 'n') {
+
+		if (a >= 'n' && a <= 'z') {
+			if (a == 'n') {
 				return 0;
 			}
-			if (arg0 == 'o') {
-				if (arg3 != '0' && arg3 != '*') {
-					if ((arg3 != '(' || arg2 != ')') && (arg3 != '[' || arg2 != ']') && (arg3 != '{' || arg2 != '}') && (arg3 != '<' || arg2 != '>')) {
+
+			if (a == 'o') {
+				if (b != '0' && b != '*') {
+					if ((b != '(' || c != ')') && (b != '[' || c != ']') && (b != '{' || c != '}') && (b != '<' || c != '>')) {
 						return 0;
 					}
+
 					return 2;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'p') {
+
+			if (a == 'p') {
 				return 0;
 			}
-			if (arg0 == 'q') {
+
+			if (a == 'q') {
 				return 0;
 			}
-			if (arg0 == 'r') {
+
+			if (a == 'r') {
 				return 0;
 			}
-			if (arg0 == 's') {
-				if (arg3 != '5' && arg3 != 'z' && arg3 != '$' && arg3 != '2') {
+
+			if (a == 's') {
+				if (b != '5' && b != 'z' && b != '$' && b != '2') {
 					return 0;
 				}
+
 				return 1;
 			}
-			if (arg0 == 't') {
-				if (arg3 != '7' && arg3 != '+') {
+
+			if (a == 't') {
+				if (b != '7' && b != '+') {
 					return 0;
 				}
+
 				return 1;
 			}
-			if (arg0 == 'u') {
-				if (arg3 == 'v') {
+
+			if (a == 'u') {
+				if (b == 'v') {
 					return 1;
 				}
-				if ((arg3 != '\\' || arg2 != '/') && (arg3 != '\\' || arg2 != '|') && (arg3 != '|' || arg2 != '/')) {
+
+				if ((b != '\\' || c != '/') && (b != '\\' || c != '|') && (b != '|' || c != '/')) {
 					return 0;
 				}
+
 				return 2;
 			}
-			if (arg0 == 'v') {
-				if ((arg3 != '\\' || arg2 != '/') && (arg3 != '\\' || arg2 != '|') && (arg3 != '|' || arg2 != '/')) {
+
+			if (a == 'v') {
+				if ((b != '\\' || c != '/') && (b != '\\' || c != '|') && (b != '|' || c != '/')) {
 					return 0;
 				}
+
 				return 2;
 			}
-			if (arg0 == 'w') {
-				if (arg3 == 'v' && arg2 == 'v') {
+
+			if (a == 'w') {
+				if (b == 'v' && c == 'v') {
 					return 2;
 				}
+
 				return 0;
 			}
-			if (arg0 == 'x') {
-				if ((arg3 != ')' || arg2 != '(') && (arg3 != '}' || arg2 != '{') && (arg3 != ']' || arg2 != '[') && (arg3 != '>' || arg2 != '<')) {
+
+			if (a == 'x') {
+				if ((b != ')' || c != '(') && (b != '}' || c != '{') && (b != ']' || c != '[') && (b != '>' || c != '<')) {
 					return 0;
 				}
+
 				return 2;
 			}
-			if (arg0 == 'y') {
+
+			if (a == 'y') {
 				return 0;
 			}
-			if (arg0 == 'z') {
+
+			if (a == 'z') {
 				return 0;
 			}
 		}
-		if (arg0 >= '0' && arg0 <= '9') {
-			if (arg0 == '0') {
-				if (arg3 == 'o' || arg3 == 'O') {
+
+		if (a >= '0' && a <= '9') {
+			if (a == '0') {
+				if (b == 'o' || b == 'O') {
 					return 1;
-				} else if ((arg3 != '(' || arg2 != ')') && (arg3 != '{' || arg2 != '}') && (arg3 != '[' || arg2 != ']')) {
+				} else if ((b != '(' || c != ')') && (b != '{' || c != '}') && (b != '[' || c != ']')) {
 					return 0;
 				} else {
 					return 2;
 				}
-			} else if (arg0 == '1') {
-				return arg3 == 'l' ? 1 : 0;
+			} else if (a == '1') {
+				return b == 'l' ? 1 : 0;
 			} else {
 				return 0;
 			}
-		} else if (arg0 == ',') {
-			return arg3 == '.' ? 1 : 0;
-		} else if (arg0 == '.') {
-			return arg3 == ',' ? 1 : 0;
-		} else if (arg0 == '!') {
-			return arg3 == 'i' ? 1 : 0;
+		} else if (a == ',') {
+			return b == '.' ? 1 : 0;
+		} else if (a == '.') {
+			return b == ',' ? 1 : 0;
+		} else if (a == '!') {
+			return b == 'i' ? 1 : 0;
 		} else {
 			return 0;
 		}
 	}
 
 	@ObfuscatedName("qc.a(CI)B")
-	public static final byte getIndex(char arg0) {
-		if (arg0 >= 'a' && arg0 <= 'z') {
-			return (byte) (arg0 - 'a' + 1);
-		} else if (arg0 == '\'') {
+	public static byte getIndex(char c) {
+		if (c >= 'a' && c <= 'z') {
+			return (byte) (c - 'a' + 1);
+		} else if (c == '\'') {
 			return 28;
-		} else if (arg0 >= '0' && arg0 <= '9') {
-			return (byte) (arg0 - '0' + 29);
+		} else if (c >= '0' && c <= '9') {
+			return (byte) (c - '0' + 29);
 		} else {
 			return 27;
 		}
 	}
 
 	@ObfuscatedName("qc.c(I[C)V")
-	public static final void filterFragments(char[] arg1) {
-		boolean var2 = false;
-		int var3 = 0;
-		int var4 = 0;
-		int var5 = 0;
+	public static void filterFragments(char[] chars) {
+		boolean compare = false;
+		int end = 0;
+		int count = 0;
+		int start = 0;
+
 		while (true) {
 			do {
-				int var6;
-				if ((var6 = indexOfNumber(arg1, var3)) == -1) {
+				int index;
+				if ((index = indexOfNumber(chars, end)) == -1) {
 					return;
 				}
-				boolean var7 = false;
-				for (int var8 = var3; var8 >= 0 && var8 < var6 && !var7; var8++) {
-					if (!isSymbol(arg1[var8]) && !isLowercaseAlpha(arg1[var8])) {
-						var7 = true;
+
+				boolean foundLowercase = false;
+				for (int i = end; i >= 0 && i < index && !foundLowercase; i++) {
+					if (!isSymbol(chars[i]) && !isLowercaseAlpha(chars[i])) {
+						foundLowercase = true;
 					}
 				}
-				if (var7) {
-					var4 = 0;
+
+				if (foundLowercase) {
+					count = 0;
 				}
-				if (var4 == 0) {
-					var5 = var6;
+
+				if (count == 0) {
+					start = index;
 				}
-				var3 = indexOfNonNumber(var6, arg1);
-				int var9 = 0;
-				for (int var10 = var6; var10 < var3; var10++) {
-					var9 = var9 * 10 + arg1[var10] - 48;
+
+				end = indexOfNonNumber(index, chars);
+
+				int value = 0;
+				for (int i = index; i < end; i++) {
+					value = value * 10 + chars[i] - 48;
 				}
-				if (var9 <= 255 && var3 - var6 <= 8) {
-					var4++;
+
+				if (value <= 255 && end - index <= 8) {
+					count++;
 				} else {
-					var4 = 0;
+					count = 0;
 				}
-			} while (var4 != 4);
-			for (int var11 = var5; var11 < var3; var11++) {
-				arg1[var11] = '*';
+			} while (count != 4);
+
+			for (int i = start; i < end; i++) {
+				chars[i] = '*';
 			}
-			var4 = 0;
+
+			count = 0;
 		}
 	}
 
 	@ObfuscatedName("qc.a(I[CI)I")
-	public static final int indexOfNumber(char[] arg1, int arg2) {
-		for (int var3 = arg2; var3 < arg1.length && var3 >= 0; var3++) {
-			if (arg1[var3] >= '0' && arg1[var3] <= '9') {
-				return var3;
+	public static int indexOfNumber(char[] in, int off) {
+		for (int i = off; i < in.length && i >= 0; i++) {
+			if (in[i] >= '0' && in[i] <= '9') {
+				return i;
 			}
 		}
 		return -1;
 	}
 
 	@ObfuscatedName("qc.a(ZI[C)I")
-	public static final int indexOfNonNumber(int arg1, char[] arg2) {
-		int var3 = arg1;
+	public static int indexOfNonNumber(int off, char[] in) {
+		int i = off;
 		while (true) {
-			if (var3 < arg2.length && var3 >= 0) {
-				if (arg2[var3] >= '0' && arg2[var3] <= '9') {
-					var3++;
+			if (i < in.length && i >= 0) {
+				if (in[i] >= '0' && in[i] <= '9') {
+					i++;
 					continue;
 				}
-				return var3;
+
+				return i;
 			}
-			return arg2.length;
+
+			return in.length;
 		}
 	}
 
 	@ObfuscatedName("qc.a(BC)Z")
-	public static final boolean isSymbol(char arg1) {
-		return !isAlpha(arg1) && !isNumber(arg1);
+	public static boolean isSymbol(char c) {
+		return !isAlpha(c) && !isNumber(c);
 	}
 
 	@ObfuscatedName("qc.b(IC)Z")
-	public static final boolean isLowercaseAlpha(char arg1) {
-		if (arg1 >= 'a' && arg1 <= 'z') {
-			return arg1 == 'v' || arg1 == 'x' || arg1 == 'j' || arg1 == 'q' || arg1 == 'z';
+	public static boolean isLowercaseAlpha(char c) {
+		if (c >= 'a' && c <= 'z') {
+			return c == 'v' || c == 'x' || c == 'j' || c == 'q' || c == 'z';
 		} else {
 			return true;
 		}
 	}
 
 	@ObfuscatedName("qc.c(IC)Z")
-	public static final boolean isAlpha(char arg1) {
-		return arg1 >= 'a' && arg1 <= 'z' || arg1 >= 'A' && arg1 <= 'Z';
+	public static boolean isAlpha(char c) {
+		return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z';
 	}
 
 	@ObfuscatedName("qc.d(IC)Z")
-	public static final boolean isNumber(char arg1) {
-		return arg1 >= '0' && arg1 <= '9';
+	public static boolean isNumber(char c) {
+		return c >= '0' && c <= '9';
 	}
 
 	@ObfuscatedName("qc.b(CI)Z")
-	public static final boolean isLowercase(char arg0) {
-		return arg0 >= 'a' && arg0 <= 'z';
+	public static boolean isLowercase(char c) {
+		return c >= 'a' && c <= 'z';
 	}
 
 	@ObfuscatedName("qc.a(CZ)Z")
-	public static final boolean isUpperCase(char arg0) {
-		return arg0 >= 'A' && arg0 <= 'Z';
+	public static boolean isUpperCase(char c) {
+		return c >= 'A' && c <= 'Z';
 	}
 
 	@ObfuscatedName("qc.a([CB)Z")
-	public static final boolean isBadFragment(char[] arg0) {
-		boolean var2 = true;
-		for (int var3 = 0; var3 < arg0.length; var3++) {
-			if (!isNumber(arg0[var3]) && arg0[var3] != 0) {
-				var2 = false;
+	public static boolean isBadFragment(char[] in) {
+		boolean skip = true;
+		for (int i = 0; i < in.length; i++) {
+			if (!isNumber(in[i]) && in[i] != 0) {
+				skip = false;
 			}
 		}
-		if (var2) {
+
+		if (skip) {
 			return true;
 		}
-		int var4 = firstFragmentId(arg0);
-		int var5 = 0;
-		int var6 = fragments.length - 1;
-		if (fragments[var5] == var4 || fragments[var6] == var4) {
+
+		int i = firstFragmentId(in);
+		int start = 0;
+		int end = fragments.length - 1;
+
+		if (fragments[start] == i || fragments[end] == i) {
 			return true;
 		}
+
 		do {
-			int var7 = (var5 + var6) / 2;
-			if (fragments[var7] == var4) {
+			int middle = (start + end) / 2;
+			if (fragments[middle] == i) {
 				return true;
 			}
-			if (var4 < fragments[var7]) {
-				var6 = var7;
+
+			if (i < fragments[middle]) {
+				end = middle;
 			} else {
-				var5 = var7;
+				start = middle;
 			}
-		} while (var5 != var6 && var5 + 1 != var6);
+		} while (start != end && start + 1 != end);
+
 		return false;
 	}
 
 	@ObfuscatedName("qc.b([CI)I")
-	public static final int firstFragmentId(char[] arg0) {
-		if (arg0.length > 6) {
+	public static int firstFragmentId(char[] chars) {
+		if (chars.length > 6) {
 			return 0;
 		}
-		int var2 = 0;
-		for (int var4 = 0; var4 < arg0.length; var4++) {
-			char var5 = arg0[arg0.length - var4 - 1];
-			if (var5 >= 'a' && var5 <= 'z') {
-				var2 = var2 * 38 + var5 - 'a' + 1;
-			} else if (var5 == '\'') {
-				var2 = var2 * 38 + 27;
-			} else if (var5 >= '0' && var5 <= '9') {
-				var2 = var2 * 38 + var5 - '0' + 28;
-			} else if (var5 != 0) {
+
+		int value = 0;
+		for (int i = 0; i < chars.length; i++) {
+			char c = chars[chars.length - i - 1];
+			if (c >= 'a' && c <= 'z') {
+				value = value * 38 + c - 'a' + 1;
+			} else if (c == '\'') {
+				value = value * 38 + 27;
+			} else if (c >= '0' && c <= '9') {
+				value = value * 38 + c - '0' + 28;
+			} else if (c != 0) {
 				return 0;
 			}
 		}
-		return var2;
+
+		return value;
 	}
 }
