@@ -6741,7 +6741,7 @@ public class Client extends GameShell {
 				if (this.randomIn != null) {
 					this.ptype = this.ptype - this.randomIn.nextInt() & 0xFF;
 				}
-				this.psize = Protocol.CLIENTPROT_LENGTH[this.ptype];
+				this.psize = Protocol.SERVERPROT_LENGTH[this.ptype];
 				available--;
 			}
 

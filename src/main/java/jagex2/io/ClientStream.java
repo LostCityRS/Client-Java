@@ -41,9 +41,9 @@ public class ClientStream implements Runnable {
 	@ObfuscatedName("e.j")
 	public boolean ioerror = false;
 
-	public ClientStream(Socket arg0, GameShell arg1) throws IOException {
-		this.shell = arg1;
-		this.socket = arg0;
+	public ClientStream(Socket socket, GameShell shell) throws IOException {
+		this.shell = shell;
+		this.socket = socket;
 		this.socket.setSoTimeout(30000);
 		this.socket.setTcpNoDelay(true);
 		this.in = this.socket.getInputStream();
@@ -53,23 +53,29 @@ public class ClientStream implements Runnable {
 	@ObfuscatedName("e.a()V")
 	public void close() {
 		this.dummy = true;
+
 		try {
 			if (this.in != null) {
 				this.in.close();
 			}
+
 			if (this.out != null) {
 				this.out.close();
 			}
+
 			if (this.socket != null) {
 				this.socket.close();
 			}
-		} catch (IOException var3) {
+		} catch (IOException ignore) {
 			System.out.println("Error closing stream");
 		}
+
 		this.writer = false;
+
 		synchronized (this) {
 			this.notify();
 		}
+
 		this.data = null;
 	}
 
@@ -84,84 +90,97 @@ public class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("e.a([BII)V")
-	public void read(byte[] arg0, int arg1, int arg2) throws IOException {
+	public void read(byte[] dst, int off, int len) throws IOException {
 		if (this.dummy) {
 			return;
 		}
-		while (arg2 > 0) {
-			int var4 = this.in.read(arg0, arg1, arg2);
-			if (var4 <= 0) {
+
+		while (len > 0) {
+			int n = this.in.read(dst, off, len);
+			if (n <= 0) {
 				throw new IOException("EOF");
 			}
-			arg1 += var4;
-			arg2 -= var4;
+
+			off += n;
+			len -= n;
 		}
 	}
 
 	@ObfuscatedName("e.a(IZI[B)V")
-	public void write(int arg0, int arg2, byte[] arg3) throws IOException {
+	public void write(int len, int off, byte[] src) throws IOException {
 		if (this.dummy) {
 			return;
 		}
+
 		if (this.ioerror) {
 			this.ioerror = false;
 			throw new IOException("Error in writer thread");
 		}
+
 		if (this.data == null) {
 			this.data = new byte[5000];
 		}
+
 		synchronized (this) {
-			for (int var6 = 0; var6 < arg0; var6++) {
-				this.data[this.tnum] = arg3[arg2 + var6];
+			for (int i = 0; i < len; i++) {
+				this.data[this.tnum] = src[off + i];
 				this.tnum = (this.tnum + 1) % 5000;
+
 				if ((this.tcycl + 4900) % 5000 == this.tnum) {
 					throw new IOException("buffer overflow");
 				}
 			}
+
 			if (!this.writer) {
 				this.writer = true;
 				this.shell.startThread(this, 3);
 			}
+
 			this.notify();
 		}
 	}
 
 	public void run() {
 		while (this.writer) {
-			int var2;
-			int var3;
+			int off;
+			int len;
+
 			label54: {
 				synchronized (this) {
 					if (this.tnum == this.tcycl) {
 						try {
 							this.wait();
-						} catch (InterruptedException var7) {
+						} catch (InterruptedException ignore) {
 						}
 					}
+
 					if (this.writer) {
-						var2 = this.tcycl;
+						off = this.tcycl;
 						if (this.tnum >= this.tcycl) {
-							var3 = this.tnum - this.tcycl;
+							len = this.tnum - this.tcycl;
 						} else {
-							var3 = 5000 - this.tcycl;
+							len = 5000 - this.tcycl;
 						}
 						break label54;
 					}
 				}
 				return;
 			}
-			if (var3 > 0) {
+
+			if (len > 0) {
 				try {
-					this.out.write(this.data, var2, var3);
-				} catch (IOException var6) {
+					this.out.write(this.data, off, len);
+				} catch (IOException ignore) {
 					this.ioerror = true;
 				}
-				this.tcycl = (this.tcycl + var3) % 5000;
+
+				this.tcycl = (this.tcycl + len) % 5000;
+
 				try {
 					if (this.tnum == this.tcycl) {
 						this.out.flush();
 					}
-				} catch (IOException var5) {
+				} catch (IOException ignore) {
 					this.ioerror = true;
 				}
 			}
@@ -177,7 +196,7 @@ public class ClientStream implements Runnable {
 		System.out.println("ioerror:" + this.ioerror);
 		try {
 			System.out.println("available:" + this.available());
-		} catch (IOException var3) {
+		} catch (IOException ignore) {
 		}
 	}
 }
