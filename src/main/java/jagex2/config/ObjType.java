@@ -22,7 +22,7 @@ public class ObjType {
 	public static Packet data;
 
 	@ObfuscatedName("hc.g")
-	public static ObjType[] types;
+	public static ObjType[] cache;
 
 	@ObfuscatedName("hc.h")
 	public static int cachePos;
@@ -157,19 +157,23 @@ public class ObjType {
 	public String[] iop;
 
 	@ObfuscatedName("hc.a(Lyb;)V")
-	public static final void unpack(Jagfile arg0) {
-		data = new Packet(arg0.read("obj.dat", null));
-		Packet var1 = new Packet(arg0.read("obj.idx", null));
-		count = var1.g2();
+	public static final void unpack(Jagfile config) {
+		data = new Packet(config.read("obj.dat", null));
+
+		Packet temp = new Packet(config.read("obj.idx", null));
+		count = temp.g2();
+
 		idx = new int[count];
-		int var2 = 2;
-		for (int var3 = 0; var3 < count; var3++) {
-			idx[var3] = var2;
-			var2 += var1.g2();
+
+		int pos = 2;
+		for (int i = 0; i < count; i++) {
+			idx[i] = pos;
+			pos += temp.g2();
 		}
-		types = new ObjType[10];
-		for (int var4 = 0; var4 < 10; var4++) {
-			types[var4] = new ObjType();
+
+		cache = new ObjType[10];
+		for (int i = 0; i < 10; i++) {
+			cache[i] = new ObjType();
 		}
 	}
 
@@ -178,33 +182,38 @@ public class ObjType {
 		modelCache = null;
 		iconCache = null;
 		idx = null;
-		types = null;
+		cache = null;
 		data = null;
 	}
 
 	@ObfuscatedName("hc.a(I)Lhc;")
-	public static final ObjType get(int arg0) {
-		for (int var1 = 0; var1 < 10; var1++) {
-			if (types[var1].id == arg0) {
-				return types[var1];
+	public static final ObjType get(int id) {
+		for (int i = 0; i < 10; i++) {
+			if (cache[i].id == id) {
+				return cache[i];
 			}
 		}
+
 		cachePos = (cachePos + 1) % 10;
-		ObjType var2 = types[cachePos];
-		data.pos = idx[arg0];
-		var2.id = arg0;
-		var2.reset();
-		var2.decode(data);
-		if (var2.certtemplate != -1) {
-			var2.toCertificate();
+
+		ObjType obj = cache[cachePos];
+		data.pos = idx[id];
+		obj.id = id;
+		obj.reset();
+		obj.decode(data);
+
+		if (obj.certtemplate != -1) {
+			obj.toCertificate();
 		}
-		if (!membersWorld && var2.members) {
-			var2.name = "Members Object";
-			var2.desc = "Login to a members' server to use this object.".getBytes();
-			var2.op = null;
-			var2.iop = null;
+
+		if (!membersWorld && obj.members) {
+			obj.name = "Members Object";
+			obj.desc = "Login to a members' server to use this object.".getBytes();
+			obj.op = null;
+			obj.iop = null;
 		}
-		return var2;
+
+		return obj;
 	}
 
 	@ObfuscatedName("hc.a()V")
@@ -251,438 +260,486 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(ILmb;)V")
-	public final void decode(Packet arg1) {
+	public final void decode(Packet buf) {
 		while (true) {
-			int var3 = arg1.g1();
-			if (var3 == 0) {
+			int code = buf.g1();
+			if (code == 0) {
 				return;
 			}
-			if (var3 == 1) {
-				this.model = arg1.g2();
-			} else if (var3 == 2) {
-				this.name = arg1.gjstr();
-			} else if (var3 == 3) {
-				this.desc = arg1.gjstrraw();
-			} else if (var3 == 4) {
-				this.zoom2d = arg1.g2();
-			} else if (var3 == 5) {
-				this.xan2d = arg1.g2();
-			} else if (var3 == 6) {
-				this.yan2d = arg1.g2();
-			} else if (var3 == 7) {
-				this.xof2d = arg1.g2();
+
+			if (code == 1) {
+				this.model = buf.g2();
+			} else if (code == 2) {
+				this.name = buf.gjstr();
+			} else if (code == 3) {
+				this.desc = buf.gjstrraw();
+			} else if (code == 4) {
+				this.zoom2d = buf.g2();
+			} else if (code == 5) {
+				this.xan2d = buf.g2();
+			} else if (code == 6) {
+				this.yan2d = buf.g2();
+			} else if (code == 7) {
+				this.xof2d = buf.g2();
 				if (this.xof2d > 32767) {
 					this.xof2d -= 65536;
 				}
-			} else if (var3 == 8) {
-				this.yof2d = arg1.g2();
+			} else if (code == 8) {
+				this.yof2d = buf.g2();
 				if (this.yof2d > 32767) {
 					this.yof2d -= 65536;
 				}
-			} else if (var3 == 9) {
+			} else if (code == 9) {
 				this.field1041 = true;
-			} else if (var3 == 10) {
-				this.field1042 = arg1.g2();
-			} else if (var3 == 11) {
+			} else if (code == 10) {
+				this.field1042 = buf.g2();
+			} else if (code == 11) {
 				this.stackable = true;
-			} else if (var3 == 12) {
-				this.cost = arg1.g4();
-			} else if (var3 == 16) {
+			} else if (code == 12) {
+				this.cost = buf.g4();
+			} else if (code == 16) {
 				this.members = true;
-			} else if (var3 == 23) {
-				this.manwear = arg1.g2();
-				this.manwearOffsetY = arg1.g1b();
-			} else if (var3 == 24) {
-				this.manwear2 = arg1.g2();
-			} else if (var3 == 25) {
-				this.womanwear = arg1.g2();
-				this.womanwearOffsetY = arg1.g1b();
-			} else if (var3 == 26) {
-				this.womanwear2 = arg1.g2();
-			} else if (var3 >= 30 && var3 < 35) {
+			} else if (code == 23) {
+				this.manwear = buf.g2();
+				this.manwearOffsetY = buf.g1b();
+			} else if (code == 24) {
+				this.manwear2 = buf.g2();
+			} else if (code == 25) {
+				this.womanwear = buf.g2();
+				this.womanwearOffsetY = buf.g1b();
+			} else if (code == 26) {
+				this.womanwear2 = buf.g2();
+			} else if (code >= 30 && code < 35) {
 				if (this.op == null) {
 					this.op = new String[5];
 				}
-				this.op[var3 - 30] = arg1.gjstr();
-				if (this.op[var3 - 30].equalsIgnoreCase("hidden")) {
-					this.op[var3 - 30] = null;
+
+				this.op[code - 30] = buf.gjstr();
+				if (this.op[code - 30].equalsIgnoreCase("hidden")) {
+					this.op[code - 30] = null;
 				}
-			} else if (var3 >= 35 && var3 < 40) {
+			} else if (code >= 35 && code < 40) {
 				if (this.iop == null) {
 					this.iop = new String[5];
 				}
-				this.iop[var3 - 35] = arg1.gjstr();
-			} else if (var3 == 40) {
-				int var4 = arg1.g1();
-				this.recol_s = new int[var4];
-				this.recol_d = new int[var4];
-				for (int var5 = 0; var5 < var4; var5++) {
-					this.recol_s[var5] = arg1.g2();
-					this.recol_d[var5] = arg1.g2();
+
+				this.iop[code - 35] = buf.gjstr();
+			} else if (code == 40) {
+				int count = buf.g1();
+				this.recol_s = new int[count];
+				this.recol_d = new int[count];
+
+				for (int var5 = 0; var5 < count; var5++) {
+					this.recol_s[var5] = buf.g2();
+					this.recol_d[var5] = buf.g2();
 				}
-			} else if (var3 == 78) {
-				this.manwear3 = arg1.g2();
-			} else if (var3 == 79) {
-				this.womanwear3 = arg1.g2();
-			} else if (var3 == 90) {
-				this.manhead = arg1.g2();
-			} else if (var3 == 91) {
-				this.womanhead = arg1.g2();
-			} else if (var3 == 92) {
-				this.manhead2 = arg1.g2();
-			} else if (var3 == 93) {
-				this.womanhead2 = arg1.g2();
-			} else if (var3 == 95) {
-				this.zan2d = arg1.g2();
-			} else if (var3 == 97) {
-				this.certlink = arg1.g2();
-			} else if (var3 == 98) {
-				this.certtemplate = arg1.g2();
-			} else if (var3 >= 100 && var3 < 110) {
+			} else if (code == 78) {
+				this.manwear3 = buf.g2();
+			} else if (code == 79) {
+				this.womanwear3 = buf.g2();
+			} else if (code == 90) {
+				this.manhead = buf.g2();
+			} else if (code == 91) {
+				this.womanhead = buf.g2();
+			} else if (code == 92) {
+				this.manhead2 = buf.g2();
+			} else if (code == 93) {
+				this.womanhead2 = buf.g2();
+			} else if (code == 95) {
+				this.zan2d = buf.g2();
+			} else if (code == 97) {
+				this.certlink = buf.g2();
+			} else if (code == 98) {
+				this.certtemplate = buf.g2();
+			} else if (code >= 100 && code < 110) {
 				if (this.countobj == null) {
 					this.countobj = new int[10];
 					this.countco = new int[10];
 				}
-				this.countobj[var3 - 100] = arg1.g2();
-				this.countco[var3 - 100] = arg1.g2();
-			} else if (var3 == 110) {
-				this.resizex = arg1.g2();
-			} else if (var3 == 111) {
-				this.resizey = arg1.g2();
-			} else if (var3 == 112) {
-				this.resizez = arg1.g2();
-			} else if (var3 == 113) {
-				this.ambient = arg1.g1b();
-			} else if (var3 == 114) {
-				this.contrast = arg1.g1b() * 5;
+
+				this.countobj[code - 100] = buf.g2();
+				this.countco[code - 100] = buf.g2();
+			} else if (code == 110) {
+				this.resizex = buf.g2();
+			} else if (code == 111) {
+				this.resizey = buf.g2();
+			} else if (code == 112) {
+				this.resizez = buf.g2();
+			} else if (code == 113) {
+				this.ambient = buf.g1b();
+			} else if (code == 114) {
+				this.contrast = buf.g1b() * 5;
 			}
 		}
 	}
 
 	@ObfuscatedName("hc.b(I)V")
 	public void toCertificate() {
-		ObjType var2 = get(this.certtemplate);
-		this.model = var2.model;
-		this.zoom2d = var2.zoom2d;
-		this.xan2d = var2.xan2d;
-		this.yan2d = var2.yan2d;
-		this.zan2d = var2.zan2d;
-		this.xof2d = var2.xof2d;
-		this.yof2d = var2.yof2d;
-		this.recol_s = var2.recol_s;
-		this.recol_d = var2.recol_d;
-		ObjType var3 = get(this.certlink);
-		this.name = var3.name;
-		this.members = var3.members;
-		this.cost = var3.cost;
-		String var4 = "a";
-		char var5 = var3.name.charAt(0);
-		if (var5 == 'A' || var5 == 'E' || var5 == 'I' || var5 == 'O' || var5 == 'U') {
-			var4 = "an";
+		ObjType template = get(this.certtemplate);
+		this.model = template.model;
+		this.zoom2d = template.zoom2d;
+		this.xan2d = template.xan2d;
+		this.yan2d = template.yan2d;
+		this.zan2d = template.zan2d;
+		this.xof2d = template.xof2d;
+		this.yof2d = template.yof2d;
+		this.recol_s = template.recol_s;
+		this.recol_d = template.recol_d;
+
+		ObjType link = get(this.certlink);
+		this.name = link.name;
+		this.members = link.members;
+		this.cost = link.cost;
+
+		String article = "a";
+		char c = link.name.charAt(0);
+		if (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+			article = "an";
 		}
-		this.desc = ("Swap this note at any bank for " + var4 + " " + var3.name + ".").getBytes();
+		this.desc = ("Swap this note at any bank for " + article + " " + link.name + ".").getBytes();
+
 		this.stackable = true;
 	}
 
 	@ObfuscatedName("hc.c(I)Lfb;")
-	public final Model getModel(int arg0) {
-		if (this.countobj != null && arg0 > 1) {
-			int var2 = -1;
-			for (int var3 = 0; var3 < 10; var3++) {
-				if (arg0 >= this.countco[var3] && this.countco[var3] != 0) {
-					var2 = this.countobj[var3];
+	public final Model getModel(int count) {
+		if (this.countobj != null && count > 1) {
+			int index = -1;
+			for (int i = 0; i < 10; i++) {
+				if (count >= this.countco[i] && this.countco[i] != 0) {
+					index = this.countobj[i];
 				}
 			}
-			if (var2 != -1) {
-				return get(var2).getModel(1);
+			if (index != -1) {
+				return get(index).getModel(1);
 			}
 		}
-		Model var4 = (Model) modelCache.get((long) this.id);
-		if (var4 != null) {
-			return var4;
+
+		Model model = (Model) modelCache.get(this.id);
+		if (model != null) {
+			return model;
 		}
-		Model var5 = Model.tryGet(this.model);
-		if (var5 == null) {
+
+		model = Model.tryGet(this.model);
+		if (model == null) {
 			return null;
 		}
+
 		if (this.resizex != 128 || this.resizey != 128 || this.resizez != 128) {
-			var5.scale(this.resizey, this.resizez, this.resizex);
+			model.scale(this.resizey, this.resizez, this.resizex);
 		}
+
 		if (this.recol_s != null) {
-			for (int var6 = 0; var6 < this.recol_s.length; var6++) {
-				var5.recolour(this.recol_s[var6], this.recol_d[var6]);
+			for (int i = 0; i < this.recol_s.length; i++) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
 			}
 		}
-		var5.calculateNormals(this.ambient + 64, this.contrast + 768, -50, -10, -50, true);
-		var5.picking = true;
-		modelCache.put(var5, (long) this.id);
-		return var5;
+
+		model.calculateNormals(this.ambient + 64, this.contrast + 768, -50, -10, -50, true);
+		model.picking = true;
+		modelCache.put(model, this.id);
+		return model;
 	}
 
 	@ObfuscatedName("hc.a(II)Lfb;")
-	public final Model getInvModel(int arg1) {
-		if (this.countobj != null && arg1 > 1) {
-			int var3 = -1;
-			for (int var4 = 0; var4 < 10; var4++) {
-				if (arg1 >= this.countco[var4] && this.countco[var4] != 0) {
-					var3 = this.countobj[var4];
+	public final Model getInvModel(int count) {
+		if (this.countobj != null && count > 1) {
+			int index = -1;
+			for (int i = 0; i < 10; i++) {
+				if (count >= this.countco[i] && this.countco[i] != 0) {
+					index = this.countobj[i];
 				}
 			}
-			if (var3 != -1) {
-				return get(var3).getInvModel(1);
+			if (index != -1) {
+				return get(index).getInvModel(1);
 			}
 		}
-		Model var5 = Model.tryGet(this.model);
-		if (var5 == null) {
+
+		Model model = Model.tryGet(this.model);
+		if (model == null) {
 			return null;
 		}
+
 		if (this.recol_s != null) {
-			for (int var6 = 0; var6 < this.recol_s.length; var6++) {
-				var5.recolour(this.recol_s[var6], this.recol_d[var6]);
+			for (int i = 0; i < this.recol_s.length; i++) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
 			}
 		}
-		return var5;
+
+		return model;
 	}
 
 	@ObfuscatedName("hc.a(IIII)Ljb;")
-	public static final Pix32 getIcon(int arg0, int arg1, int arg2) {
-		if (arg0 == 0) {
-			Pix32 var4 = (Pix32) iconCache.get((long) arg2);
-			if (var4 != null && var4.height != arg1 && var4.height != -1) {
-				var4.unlink();
-				var4 = null;
+	public static final Pix32 getIcon(int outlineRgb, int count, int id) {
+		if (outlineRgb == 0) {
+			Pix32 icon = (Pix32) iconCache.get(id);
+
+			if (icon != null && icon.height != count && icon.height != -1) {
+				icon.unlink();
+				icon = null;
 			}
-			if (var4 != null) {
-				return var4;
+
+			if (icon != null) {
+				return icon;
 			}
 		}
-		ObjType var5 = get(arg2);
-		if (var5.countobj == null) {
-			arg1 = -1;
+
+		ObjType obj = get(id);
+
+		if (obj.countobj == null) {
+			count = -1;
 		}
-		if (arg1 > 1) {
-			int var6 = -1;
-			for (int var7 = 0; var7 < 10; var7++) {
-				if (arg1 >= var5.countco[var7] && var5.countco[var7] != 0) {
-					var6 = var5.countobj[var7];
+
+		if (count > 1) {
+			int countObj = -1;
+			for (int i = 0; i < 10; i++) {
+				if (count >= obj.countco[i] && obj.countco[i] != 0) {
+					countObj = obj.countobj[i];
 				}
 			}
-			if (var6 != -1) {
-				var5 = get(var6);
+			if (countObj != -1) {
+				obj = get(countObj);
 			}
 		}
-		Model var8 = var5.getModel(1);
-		if (var8 == null) {
+
+		Model model = obj.getModel(1);
+		if (model == null) {
 			return null;
 		}
-		Pix32 var9 = null;
-		if (var5.certtemplate != -1) {
-			var9 = getIcon(-1, 10, var5.certlink);
-			if (var9 == null) {
+
+		Pix32 linkedIcon = null;
+		if (obj.certtemplate != -1) {
+			linkedIcon = getIcon(-1, 10, obj.certlink);
+
+			if (linkedIcon == null) {
 				return null;
 			}
 		}
-		Pix32 var10 = new Pix32(32, 32);
-		int var11 = Pix3D.centerX;
-		int var12 = Pix3D.centerY;
-		int[] var13 = Pix3D.lineOffset;
-		int[] var14 = Pix2D.data;
-		int var15 = Pix2D.width2d;
-		int var16 = Pix2D.height2d;
-		int var18 = Pix2D.left;
-		int var19 = Pix2D.right;
-		int var20 = Pix2D.top;
-		int var21 = Pix2D.bottom;
+
+		Pix32 icon = new Pix32(32, 32);
+
+		int _cx = Pix3D.centerX;
+		int _cy = Pix3D.centerY;
+		int[] _loff = Pix3D.lineOffset;
+		int[] _data = Pix2D.data;
+		int _w = Pix2D.width2d;
+		int _h = Pix2D.height2d;
+		int _l = Pix2D.left;
+		int _r = Pix2D.right;
+		int _t = Pix2D.top;
+		int _b = Pix2D.bottom;
+
 		Pix3D.jagged = false;
-		Pix2D.bind(32, var10.pixels, 32);
+		Pix2D.bind(32, icon.pixels, 32);
 		Pix2D.fillRect(0, 32, 32, 0, 0);
 		Pix3D.init2D();
-		int var22 = var5.zoom2d;
-		if (arg0 == -1) {
-			var22 = (int) ((double) var22 * 1.5D);
+
+		int zoom = obj.zoom2d;
+		if (outlineRgb == -1) {
+			zoom = (int) ((double) zoom * 1.5D);
 		}
-		if (arg0 > 0) {
-			var22 = (int) ((double) var22 * 1.04D);
+		if (outlineRgb > 0) {
+			zoom = (int) ((double) zoom * 1.04D);
 		}
-		int var23 = Pix3D.sinTable[var5.xan2d] * var22 >> 16;
-		int var24 = Pix3D.cosTable[var5.xan2d] * var22 >> 16;
-		var8.drawSimple(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var8.minY / 2 + var23 + var5.yof2d, var5.yof2d + var24);
-		for (int var25 = 31; var25 >= 0; var25--) {
-			for (int var32 = 31; var32 >= 0; var32--) {
-				if (var10.pixels[var32 * 32 + var25] == 0) {
-					if (var25 > 0 && var10.pixels[var32 * 32 + (var25 - 1)] > 1) {
-						var10.pixels[var32 * 32 + var25] = 1;
-					} else if (var32 > 0 && var10.pixels[(var32 - 1) * 32 + var25] > 1) {
-						var10.pixels[var32 * 32 + var25] = 1;
-					} else if (var25 < 31 && var10.pixels[var32 * 32 + var25 + 1] > 1) {
-						var10.pixels[var32 * 32 + var25] = 1;
-					} else if (var32 < 31 && var10.pixels[(var32 + 1) * 32 + var25] > 1) {
-						var10.pixels[var32 * 32 + var25] = 1;
+
+		int sinPitch = Pix3D.sinTable[obj.xan2d] * zoom >> 16;
+		int cosPitch = Pix3D.cosTable[obj.xan2d] * zoom >> 16;
+
+		model.drawSimple(0, obj.yan2d, obj.zan2d, obj.xan2d, obj.xof2d, model.minY / 2 + sinPitch + obj.yof2d, obj.yof2d + cosPitch);
+
+		for (int x = 31; x >= 0; x--) {
+			for (int y = 31; y >= 0; y--) {
+				if (icon.pixels[y * 32 + x] == 0) {
+					if (x > 0 && icon.pixels[y * 32 + (x - 1)] > 1) {
+						icon.pixels[y * 32 + x] = 1;
+					} else if (y > 0 && icon.pixels[(y - 1) * 32 + x] > 1) {
+						icon.pixels[y * 32 + x] = 1;
+					} else if (x < 31 && icon.pixels[y * 32 + x + 1] > 1) {
+						icon.pixels[y * 32 + x] = 1;
+					} else if (y < 31 && icon.pixels[(y + 1) * 32 + x] > 1) {
+						icon.pixels[y * 32 + x] = 1;
 					}
 				}
 			}
 		}
-		if (arg0 > 0) {
-			for (int var26 = 31; var26 >= 0; var26--) {
-				for (int var27 = 31; var27 >= 0; var27--) {
-					if (var10.pixels[var27 * 32 + var26] == 0) {
-						if (var26 > 0 && var10.pixels[var27 * 32 + (var26 - 1)] == 1) {
-							var10.pixels[var27 * 32 + var26] = arg0;
-						} else if (var27 > 0 && var10.pixels[(var27 - 1) * 32 + var26] == 1) {
-							var10.pixels[var27 * 32 + var26] = arg0;
-						} else if (var26 < 31 && var10.pixels[var27 * 32 + var26 + 1] == 1) {
-							var10.pixels[var27 * 32 + var26] = arg0;
-						} else if (var27 < 31 && var10.pixels[(var27 + 1) * 32 + var26] == 1) {
-							var10.pixels[var27 * 32 + var26] = arg0;
+
+		if (outlineRgb > 0) {
+			for (int x = 31; x >= 0; x--) {
+				for (int y = 31; y >= 0; y--) {
+					if (icon.pixels[y * 32 + x] == 0) {
+						if (x > 0 && icon.pixels[y * 32 + (x - 1)] == 1) {
+							icon.pixels[y * 32 + x] = outlineRgb;
+						} else if (y > 0 && icon.pixels[(y - 1) * 32 + x] == 1) {
+							icon.pixels[y * 32 + x] = outlineRgb;
+						} else if (x < 31 && icon.pixels[y * 32 + x + 1] == 1) {
+							icon.pixels[y * 32 + x] = outlineRgb;
+						} else if (y < 31 && icon.pixels[(y + 1) * 32 + x] == 1) {
+							icon.pixels[y * 32 + x] = outlineRgb;
 						}
 					}
 				}
 			}
-		} else if (arg0 == 0) {
-			for (int var28 = 31; var28 >= 0; var28--) {
-				for (int var29 = 31; var29 >= 0; var29--) {
-					if (var10.pixels[var29 * 32 + var28] == 0 && var28 > 0 && var29 > 0 && var10.pixels[(var29 - 1) * 32 + (var28 - 1)] > 0) {
-						var10.pixels[var29 * 32 + var28] = 3153952;
+		} else if (outlineRgb == 0) {
+			for (int x = 31; x >= 0; x--) {
+				for (int y = 31; y >= 0; y--) {
+					if (icon.pixels[y * 32 + x] == 0 && x > 0 && y > 0 && icon.pixels[(y - 1) * 32 + (x - 1)] > 0) {
+						icon.pixels[y * 32 + x] = 0x302020;
 					}
 				}
 			}
 		}
-		if (var5.certtemplate != -1) {
-			int var30 = var9.width;
-			int var31 = var9.height;
-			var9.width = 32;
-			var9.height = 32;
-			var9.draw(0, 0);
-			var9.width = var30;
-			var9.height = var31;
+
+		if (obj.certtemplate != -1) {
+			int w = linkedIcon.width;
+			int h = linkedIcon.height;
+			linkedIcon.width = 32;
+			linkedIcon.height = 32;
+			linkedIcon.draw(0, 0);
+			linkedIcon.width = w;
+			linkedIcon.height = h;
 		}
-		if (arg0 == 0) {
-			iconCache.put(var10, (long) arg2);
+
+		if (outlineRgb == 0) {
+			iconCache.put(icon, id);
 		}
-		Pix2D.bind(var15, var14, var16);
-		Pix2D.setBounds(var19, var21, var20, var18);
-		Pix3D.centerX = var11;
-		Pix3D.centerY = var12;
-		Pix3D.lineOffset = var13;
+
+		Pix2D.bind(_w, _data, _h);
+		Pix2D.setBounds(_r, _b, _t, _l);
+		Pix3D.centerX = _cx;
+		Pix3D.centerY = _cy;
+		Pix3D.lineOffset = _loff;
 		Pix3D.jagged = true;
-		if (var5.stackable) {
-			var10.width = 33;
+
+		if (obj.stackable) {
+			icon.width = 33;
 		} else {
-			var10.width = 32;
+			icon.width = 32;
 		}
-		var10.height = arg1;
-		return var10;
+
+		icon.height = count;
+		return icon;
 	}
 
 	@ObfuscatedName("hc.b(II)Z")
-	public final boolean validateWornModel(int arg1) {
-		int var3 = this.manwear;
-		int var4 = this.manwear2;
-		int var5 = this.manwear3;
-		if (arg1 == 1) {
-			var3 = this.womanwear;
-			var4 = this.womanwear2;
-			var5 = this.womanwear3;
+	public final boolean validateWornModel(int gender) {
+		int wear = this.manwear;
+		int wear2 = this.manwear2;
+		int wear3 = this.manwear3;
+		if (gender == 1) {
+			wear = this.womanwear;
+			wear2 = this.womanwear2;
+			wear3 = this.womanwear3;
 		}
-		if (var3 == -1) {
+
+		if (wear == -1) {
 			return true;
 		}
-		boolean var6 = true;
-		if (!Model.validate(var3)) {
-			var6 = false;
+
+		boolean exists = true;
+		if (!Model.validate(wear)) {
+			exists = false;
 		}
-		if (var4 != -1 && !Model.validate(var4)) {
-			var6 = false;
+		if (wear2 != -1 && !Model.validate(wear2)) {
+			exists = false;
 		}
-		if (var5 != -1 && !Model.validate(var5)) {
-			var6 = false;
+		if (wear3 != -1 && !Model.validate(wear3)) {
+			exists = false;
 		}
-		return var6;
+		return exists;
 	}
 
 	@ObfuscatedName("hc.a(ZI)Lfb;")
-	public final Model getWornModel(int arg1) {
-		int var3 = this.manwear;
-		int var4 = this.manwear2;
-		int var5 = this.manwear3;
-		if (arg1 == 1) {
-			var3 = this.womanwear;
-			var4 = this.womanwear2;
-			var5 = this.womanwear3;
+	public final Model getWornModel(int gender) {
+		int wear = this.manwear;
+		int wear2 = this.manwear2;
+		int wear3 = this.manwear3;
+		if (gender == 1) {
+			wear = this.womanwear;
+			wear2 = this.womanwear2;
+			wear3 = this.womanwear3;
 		}
-		if (var3 == -1) {
+
+		if (wear == -1) {
 			return null;
 		}
-		Model var6 = Model.tryGet(var3);
-		if (var4 != -1) {
-			if (var5 == -1) {
-				Model var10 = Model.tryGet(var4);
-				Model[] var11 = new Model[] { var6, var10 };
-				var6 = new Model(2, var11);
+
+		Model model = Model.tryGet(wear);
+		if (wear2 != -1) {
+			if (wear3 == -1) {
+				Model model2 = Model.tryGet(wear2);
+				Model[] models = new Model[] { model, model2 };
+				model = new Model(2, models);
 			} else {
-				Model var7 = Model.tryGet(var4);
-				Model var8 = Model.tryGet(var5);
-				Model[] var9 = new Model[] { var6, var7, var8 };
-				var6 = new Model(3, var9);
+				Model model2 = Model.tryGet(wear2);
+				Model model3 = Model.tryGet(wear3);
+				Model[] models = new Model[] { model, model2, model3 };
+				model = new Model(3, models);
 			}
 		}
-		if (arg1 == 0 && this.manwearOffsetY != 0) {
-			var6.translate(this.manwearOffsetY, 0, 0);
+
+		if (gender == 0 && this.manwearOffsetY != 0) {
+			model.translate(this.manwearOffsetY, 0, 0);
+		} else if (gender == 1 && this.womanwearOffsetY != 0) {
+			model.translate(this.womanwearOffsetY, 0, 0);
 		}
-		if (arg1 == 1 && this.womanwearOffsetY != 0) {
-			var6.translate(this.womanwearOffsetY, 0, 0);
-		}
+
 		if (this.recol_s != null) {
-			for (int var12 = 0; var12 < this.recol_s.length; var12++) {
-				var6.recolour(this.recol_s[var12], this.recol_d[var12]);
+			for (int i = 0; i < this.recol_s.length; i++) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
 			}
 		}
-		return var6;
+		return model;
 	}
 
 	@ObfuscatedName("hc.c(II)Z")
-	public final boolean validateHeadModel(int arg0) {
-		int var3 = this.manhead;
-		int var4 = this.manhead2;
-		if (arg0 == 1) {
-			var3 = this.womanhead;
-			var4 = this.womanhead2;
+	public final boolean validateHeadModel(int gender) {
+		int head = this.manhead;
+		int head2 = this.manhead2;
+		if (gender == 1) {
+			head = this.womanhead;
+			head2 = this.womanhead2;
 		}
-		if (var3 == -1) {
+
+		if (head == -1) {
 			return true;
 		}
-		boolean var5 = true;
-		if (!Model.validate(var3)) {
-			var5 = false;
+
+		boolean exists = true;
+		if (!Model.validate(head)) {
+			exists = false;
 		}
-		if (var4 != -1 && !Model.validate(var4)) {
-			var5 = false;
+		if (head2 != -1 && !Model.validate(head2)) {
+			exists = false;
 		}
-		return var5;
+		return exists;
 	}
 
 	@ObfuscatedName("hc.b(ZI)Lfb;")
-	public final Model getHeadModel(int arg1) {
-		int var3 = this.manhead;
-		int var4 = this.manhead2;
-		if (arg1 == 1) {
-			var3 = this.womanhead;
-			var4 = this.womanhead2;
+	public final Model getHeadModel(int gender) {
+		int head = this.manhead;
+		int head2 = this.manhead2;
+		if (gender == 1) {
+			head = this.womanhead;
+			head2 = this.womanhead2;
 		}
-		if (var3 == -1) {
+
+		if (head == -1) {
 			return null;
 		}
-		Model var6 = Model.tryGet(var3);
-		if (var4 != -1) {
-			Model var7 = Model.tryGet(var4);
-			Model[] var8 = new Model[] { var6, var7 };
-			var6 = new Model(2, var8);
+
+		Model model = Model.tryGet(head);
+		if (head2 != -1) {
+			Model model2 = Model.tryGet(head2);
+			Model[] models = new Model[] { model, model2 };
+			model = new Model(2, models);
 		}
+
 		if (this.recol_s != null) {
-			for (int var9 = 0; var9 < this.recol_s.length; var9++) {
-				var6.recolour(this.recol_s[var9], this.recol_d[var9]);
+			for (int i = 0; i < this.recol_s.length; i++) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
 			}
 		}
-		return var6;
+
+		return model;
 	}
 }

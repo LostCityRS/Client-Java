@@ -200,298 +200,342 @@ public class Component {
 	public String[] iop;
 
 	@ObfuscatedName("d.a(Lyb;ILyb;[Llb;)V")
-	public static void unpack(Jagfile arg0, Jagfile arg2, PixFont[] arg3) {
+	public static void unpack(Jagfile interfaces, Jagfile media, PixFont[] fonts) {
 		imageCache = new LruCache(50000);
-		Packet var4 = new Packet(arg0.read("data", null));
-		int var5 = -1;
-		int var6 = var4.g2();
-		types = new Component[var6];
-		while (true) {
-			Component var8;
-			do {
-				if (var4.pos >= var4.data.length) {
-					imageCache = null;
-					return;
+
+		Packet data = new Packet(interfaces.read("data", null));
+		int layer = -1;
+
+		int total = data.g2();
+		types = new Component[total];
+
+		while (data.pos < data.data.length) {
+			int id = data.g2();
+			if (id == 65535) {
+				layer = data.g2();
+				id = data.g2();
+			}
+
+			Component com = types[id] = new Component();
+			com.id = id;
+			com.layer = layer;
+			com.type = data.g1();
+			com.buttonType = data.g1();
+			com.clientCode = data.g2();
+			com.width = data.g2();
+			com.height = data.g2();
+			com.alpha = (byte) data.g1();
+			com.overlayer = data.g1();
+
+			if (com.overlayer == 0) {
+				com.overlayer = -1;
+			} else {
+				com.overlayer = (com.overlayer - 1 << 8) + data.g1();
+			}
+
+			int comparatorCount = data.g1();
+			if (comparatorCount > 0) {
+				com.scriptComparator = new int[comparatorCount];
+				com.scriptOperand = new int[comparatorCount];
+
+				for (int i = 0; i < comparatorCount; i++) {
+					com.scriptComparator[i] = data.g1();
+					com.scriptOperand[i] = data.g2();
 				}
-				int var7 = var4.g2();
-				if (var7 == 65535) {
-					var5 = var4.g2();
-					var7 = var4.g2();
+			}
+
+			int scriptCount = data.g1();
+			if (scriptCount > 0) {
+				com.scripts = new int[scriptCount][];
+
+				for (int i = 0; i < scriptCount; i++) {
+					int opcodeCount = data.g2();
+					com.scripts[i] = new int[opcodeCount];
+
+					for (int j = 0; j < opcodeCount; j++) {
+						com.scripts[i][j] = data.g2();
+					}
 				}
-				var8 = types[var7] = new Component();
-				var8.id = var7;
-				var8.layer = var5;
-				var8.type = var4.g1();
-				var8.buttonType = var4.g1();
-				var8.clientCode = var4.g2();
-				var8.width = var4.g2();
-				var8.height = var4.g2();
-				var8.alpha = (byte) var4.g1();
-				var8.overlayer = var4.g1();
-				if (var8.overlayer == 0) {
-					var8.overlayer = -1;
+			}
+
+			if (com.type == 0) {
+				com.scroll = data.g2();
+				com.hide = data.g1() == 1;
+
+				int childCount = data.g2();
+				com.children = new int[childCount];
+				com.childX = new int[childCount];
+				com.childY = new int[childCount];
+
+				for (int i = 0; i < childCount; i++) {
+					com.children[i] = data.g2();
+					com.childX[i] = data.g2b();
+					com.childY[i] = data.g2b();
+				}
+			}
+
+			if (com.type == 1) {
+				com.field98 = data.g2();
+				com.field99 = data.g1() == 1;
+			}
+
+			if (com.type == 2) {
+				com.invSlotObjId = new int[com.height * com.width];
+				com.invSlotObjCount = new int[com.height * com.width];
+
+				com.draggable = data.g1() == 1;
+				com.interactable = data.g1() == 1;
+				com.usable = data.g1() == 1;
+				com.marginX = data.g1();
+				com.marginY = data.g1();
+
+				com.invSlotOffsetX = new int[20];
+				com.invSlotOffsetY = new int[20];
+				com.invSlotGraphic = new Pix32[20];
+
+				for (int i = 0; i < 20; i++) {
+					int hasGraphic = data.g1();
+					if (hasGraphic == 1) {
+						com.invSlotOffsetX[i] = data.g2b();
+						com.invSlotOffsetY[i] = data.g2b();
+
+						String graphic = data.gjstr();
+						if (media != null && graphic.length() > 0) {
+							int spriteIndex = graphic.lastIndexOf(",");
+							com.invSlotGraphic[i] = getImage(Integer.parseInt(graphic.substring(spriteIndex + 1)), media, graphic.substring(0, spriteIndex));
+						}
+					}
+				}
+
+				com.iop = new String[5];
+				for (int i = 0; i < 5; i++) {
+					com.iop[i] = data.gjstr();
+					if (com.iop[i].length() == 0) {
+						com.iop[i] = null;
+					}
+				}
+			}
+
+			if (com.type == 3) {
+				com.fill = data.g1() == 1;
+			}
+
+			if (com.type == 4 || com.type == 1) {
+				com.center = data.g1() == 1;
+				int font = data.g1();
+				if (fonts != null) {
+					com.font = fonts[font];
+				}
+				com.shadowed = data.g1() == 1;
+			}
+
+			if (com.type == 4) {
+				com.text = data.gjstr();
+				com.activeText = data.gjstr();
+			}
+
+			if (com.type == 1 || com.type == 3 || com.type == 4) {
+				com.colour = data.g4();
+			}
+
+			if (com.type == 3 || com.type == 4) {
+				com.activeColour = data.g4();
+				com.overColour = data.g4();
+			}
+
+			if (com.type == 5) {
+				String graphic = data.gjstr();
+				if (media != null && graphic.length() > 0) {
+					int spriteIndex = graphic.lastIndexOf(",");
+					com.graphic = getImage(Integer.parseInt(graphic.substring(spriteIndex + 1)), media, graphic.substring(0, spriteIndex));
+				}
+
+				String activeGraphic = data.gjstr();
+				if (media != null && activeGraphic.length() > 0) {
+					int spriteIndex = activeGraphic.lastIndexOf(",");
+					com.activeGraphic = getImage(Integer.parseInt(activeGraphic.substring(spriteIndex + 1)), media, activeGraphic.substring(0, spriteIndex));
+				}
+			}
+
+			if (com.type == 6) {
+				int model = data.g1();
+				if (model != 0) {
+					com.modelType = 1;
+					com.model = (model - 1 << 8) + data.g1();
+				}
+
+				int activeModel = data.g1();
+				if (activeModel != 0) {
+					com.activeModelType = 1;
+					com.activeModel = (activeModel - 1 << 8) + data.g1();
+				}
+
+				int anim = data.g1();
+				if (anim == 0) {
+					com.anim = -1;
 				} else {
-					var8.overlayer = (var8.overlayer - 1 << 8) + var4.g1();
+					com.anim = (anim - 1 << 8) + data.g1();
 				}
-				int var9 = var4.g1();
-				if (var9 > 0) {
-					var8.scriptComparator = new int[var9];
-					var8.scriptOperand = new int[var9];
-					for (int var10 = 0; var10 < var9; var10++) {
-						var8.scriptComparator[var10] = var4.g1();
-						var8.scriptOperand[var10] = var4.g2();
+
+				int activeAnim = data.g1();
+				if (activeAnim == 0) {
+					com.activeAnim = -1;
+				} else {
+					com.activeAnim = (activeAnim - 1 << 8) + data.g1();
+				}
+
+				com.zoom = data.g2();
+				com.xan = data.g2();
+				com.yan = data.g2();
+			}
+
+			if (com.type == 7) {
+				com.invSlotObjId = new int[com.height * com.width];
+				com.invSlotObjCount = new int[com.height * com.width];
+
+				com.center = data.g1() == 1;
+				int font = data.g1();
+				if (fonts != null) {
+					com.font = fonts[font];
+				}
+				com.shadowed = data.g1() == 1;
+				com.colour = data.g4();
+				com.marginX = data.g2b();
+				com.marginY = data.g2b();
+				com.interactable = data.g1() == 1;
+
+				com.iop = new String[5];
+				for (int i = 0; i < 5; i++) {
+					com.iop[i] = data.gjstr();
+					if (com.iop[i].length() == 0) {
+						com.iop[i] = null;
 					}
 				}
-				int var11 = var4.g1();
-				if (var11 > 0) {
-					var8.scripts = new int[var11][];
-					for (int var12 = 0; var12 < var11; var12++) {
-						int var13 = var4.g2();
-						var8.scripts[var12] = new int[var13];
-						for (int var14 = 0; var14 < var13; var14++) {
-							var8.scripts[var12][var14] = var4.g2();
-						}
+			}
+
+			if (com.buttonType == 2 || com.type == 2) {
+				com.targetVerb = data.gjstr();
+				com.targetText = data.gjstr();
+				com.targetMask = data.g2();
+			}
+
+			if (com.buttonType == 1 || com.buttonType == 4 || com.buttonType == 5 || com.buttonType == 6) {
+				com.option = data.gjstr();
+
+				if (com.option.length() == 0) {
+					if (com.buttonType == 1) {
+						com.option = "Ok";
 					}
-				}
-				if (var8.type == 0) {
-					var8.scroll = var4.g2();
-					var8.hide = var4.g1() == 1;
-					int var15 = var4.g2();
-					var8.children = new int[var15];
-					var8.childX = new int[var15];
-					var8.childY = new int[var15];
-					for (int var16 = 0; var16 < var15; var16++) {
-						var8.children[var16] = var4.g2();
-						var8.childX[var16] = var4.g2b();
-						var8.childY[var16] = var4.g2b();
+					if (com.buttonType == 4) {
+						com.option = "Select";
 					}
-				}
-				if (var8.type == 1) {
-					var8.field98 = var4.g2();
-					var8.field99 = var4.g1() == 1;
-				}
-				if (var8.type == 2) {
-					var8.invSlotObjId = new int[var8.height * var8.width];
-					var8.invSlotObjCount = new int[var8.height * var8.width];
-					var8.draggable = var4.g1() == 1;
-					var8.interactable = var4.g1() == 1;
-					var8.usable = var4.g1() == 1;
-					var8.marginX = var4.g1();
-					var8.marginY = var4.g1();
-					var8.invSlotOffsetX = new int[20];
-					var8.invSlotOffsetY = new int[20];
-					var8.invSlotGraphic = new Pix32[20];
-					for (int var17 = 0; var17 < 20; var17++) {
-						int var19 = var4.g1();
-						if (var19 == 1) {
-							var8.invSlotOffsetX[var17] = var4.g2b();
-							var8.invSlotOffsetY[var17] = var4.g2b();
-							String var20 = var4.gjstr();
-							if (arg2 != null && var20.length() > 0) {
-								int var21 = var20.lastIndexOf(",");
-								var8.invSlotGraphic[var17] = getImage(Integer.parseInt(var20.substring(var21 + 1)), arg2, var20.substring(0, var21));
-							}
-						}
+					if (com.buttonType == 5) {
+						com.option = "Select";
 					}
-					var8.iop = new String[5];
-					for (int var18 = 0; var18 < 5; var18++) {
-						var8.iop[var18] = var4.gjstr();
-						if (var8.iop[var18].length() == 0) {
-							var8.iop[var18] = null;
-						}
+					if (com.buttonType == 6) {
+						com.option = "Continue";
 					}
-				}
-				if (var8.type == 3) {
-					var8.fill = var4.g1() == 1;
-				}
-				if (var8.type == 4 || var8.type == 1) {
-					var8.center = var4.g1() == 1;
-					int var22 = var4.g1();
-					if (arg3 != null) {
-						var8.font = arg3[var22];
-					}
-					var8.shadowed = var4.g1() == 1;
-				}
-				if (var8.type == 4) {
-					var8.text = var4.gjstr();
-					var8.activeText = var4.gjstr();
-				}
-				if (var8.type == 1 || var8.type == 3 || var8.type == 4) {
-					var8.colour = var4.g4();
-				}
-				if (var8.type == 3 || var8.type == 4) {
-					var8.activeColour = var4.g4();
-					var8.overColour = var4.g4();
-				}
-				if (var8.type == 5) {
-					String var23 = var4.gjstr();
-					if (arg2 != null && var23.length() > 0) {
-						int var24 = var23.lastIndexOf(",");
-						var8.graphic = getImage(Integer.parseInt(var23.substring(var24 + 1)), arg2, var23.substring(0, var24));
-					}
-					String var25 = var4.gjstr();
-					if (arg2 != null && var25.length() > 0) {
-						int var26 = var25.lastIndexOf(",");
-						var8.activeGraphic = getImage(Integer.parseInt(var25.substring(var26 + 1)), arg2, var25.substring(0, var26));
-					}
-				}
-				if (var8.type == 6) {
-					int var27 = var4.g1();
-					if (var27 != 0) {
-						var8.modelType = 1;
-						var8.model = (var27 - 1 << 8) + var4.g1();
-					}
-					int var28 = var4.g1();
-					if (var28 != 0) {
-						var8.activeModelType = 1;
-						var8.activeModel = (var28 - 1 << 8) + var4.g1();
-					}
-					int var29 = var4.g1();
-					if (var29 == 0) {
-						var8.anim = -1;
-					} else {
-						var8.anim = (var29 - 1 << 8) + var4.g1();
-					}
-					int var30 = var4.g1();
-					if (var30 == 0) {
-						var8.activeAnim = -1;
-					} else {
-						var8.activeAnim = (var30 - 1 << 8) + var4.g1();
-					}
-					var8.zoom = var4.g2();
-					var8.xan = var4.g2();
-					var8.yan = var4.g2();
-				}
-				if (var8.type == 7) {
-					var8.invSlotObjId = new int[var8.height * var8.width];
-					var8.invSlotObjCount = new int[var8.height * var8.width];
-					var8.center = var4.g1() == 1;
-					int var31 = var4.g1();
-					if (arg3 != null) {
-						var8.font = arg3[var31];
-					}
-					var8.shadowed = var4.g1() == 1;
-					var8.colour = var4.g4();
-					var8.marginX = var4.g2b();
-					var8.marginY = var4.g2b();
-					var8.interactable = var4.g1() == 1;
-					var8.iop = new String[5];
-					for (int var32 = 0; var32 < 5; var32++) {
-						var8.iop[var32] = var4.gjstr();
-						if (var8.iop[var32].length() == 0) {
-							var8.iop[var32] = null;
-						}
-					}
-				}
-				if (var8.buttonType == 2 || var8.type == 2) {
-					var8.targetVerb = var4.gjstr();
-					var8.targetText = var4.gjstr();
-					var8.targetMask = var4.g2();
-				}
-			} while (var8.buttonType != 1 && var8.buttonType != 4 && var8.buttonType != 5 && var8.buttonType != 6);
-			var8.option = var4.gjstr();
-			if (var8.option.length() == 0) {
-				if (var8.buttonType == 1) {
-					var8.option = "Ok";
-				}
-				if (var8.buttonType == 4) {
-					var8.option = "Select";
-				}
-				if (var8.buttonType == 5) {
-					var8.option = "Select";
-				}
-				if (var8.buttonType == 6) {
-					var8.option = "Continue";
 				}
 			}
 		}
+
+		imageCache = null;
 	}
 
 	@ObfuscatedName("d.a(IZI)V")
-	public void swapObj(int arg0, int arg2) {
-		int var4 = this.invSlotObjId[arg0];
-		this.invSlotObjId[arg0] = this.invSlotObjId[arg2];
-		this.invSlotObjId[arg2] = var4;
-		int var5 = this.invSlotObjCount[arg0];
-		this.invSlotObjCount[arg0] = this.invSlotObjCount[arg2];
-		this.invSlotObjCount[arg2] = var5;
+	public void swapObj(int src, int dst) {
+		int tmp = this.invSlotObjId[src];
+		this.invSlotObjId[src] = this.invSlotObjId[dst];
+		this.invSlotObjId[dst] = tmp;
+
+		tmp = this.invSlotObjCount[src];
+		this.invSlotObjCount[src] = this.invSlotObjCount[dst];
+		this.invSlotObjCount[dst] = tmp;
 	}
 
 	@ObfuscatedName("d.a(BIIZ)Lfb;")
-	public Model getModel(int arg1, int arg2, boolean arg3) {
-		Model var5;
-		if (arg3) {
-			var5 = this.getModel(this.activeModelType, this.activeModel);
+	public Model getModel(int primaryTransformId, int secondaryTransformId, boolean active) {
+		Model model;
+		if (active) {
+			model = this.getModel(this.activeModelType, this.activeModel);
 		} else {
-			var5 = this.getModel(this.modelType, this.model);
+			model = this.getModel(this.modelType, this.model);
 		}
-		if (var5 == null) {
+
+		if (model == null) {
 			return null;
-		} else if (arg1 == -1 && arg2 == -1 && var5.faceColour == null) {
-			return var5;
-		} else {
-			Model var6 = new Model(var5, true, false, true);
-			if (arg1 != -1 || arg2 != -1) {
-				var6.createLabelReferences();
-			}
-			if (arg1 != -1) {
-				var6.applyTransform(arg1);
-			}
-			if (arg2 != -1) {
-				var6.applyTransform(arg2);
-			}
-			var6.calculateNormals(64, 768, -50, -10, -50, true);
-			return var6;
 		}
+
+		if (primaryTransformId == -1 && secondaryTransformId == -1 && model.faceColour == null) {
+			return model;
+		}
+
+		model = new Model(model, true, false, true);
+		if (primaryTransformId != -1 || secondaryTransformId != -1) {
+			model.createLabelReferences();
+		}
+
+		if (primaryTransformId != -1) {
+			model.applyTransform(primaryTransformId);
+		}
+
+		if (secondaryTransformId != -1) {
+			model.applyTransform(secondaryTransformId);
+		}
+
+		model.calculateNormals(64, 768, -50, -10, -50, true);
+		return model;
 	}
 
 	@ObfuscatedName("d.a(II)Lfb;")
-	public Model getModel(int arg0, int arg1) {
-		Model var3 = (Model) modelCache.get((long) ((arg0 << 16) + arg1));
-		if (var3 != null) {
-			return var3;
+	public Model getModel(int type, int id) {
+		Model model = (Model) modelCache.get(((long) type << 16) + id);
+		if (model != null) {
+			return model;
 		}
-		if (arg0 == 1) {
-			var3 = Model.tryGet(arg1);
+
+		if (type == 1) {
+			model = Model.tryGet(id);
+		} else if (type == 2) {
+			model = NpcType.get(id).getHeadModel();
+		} else if (type == 3) {
+			model = Client.localPlayer.getHeadModel();
+		} else if (type == 4) {
+			model = ObjType.get(id).getInvModel(50);
+		} else if (type == 5) {
+			model = null;
 		}
-		if (arg0 == 2) {
-			var3 = NpcType.get(arg1).getHeadModel();
+
+		if (model != null) {
+			modelCache.put(model, (type << 16) + id);
 		}
-		if (arg0 == 3) {
-			var3 = Client.localPlayer.getHeadModel();
-		}
-		if (arg0 == 4) {
-			var3 = ObjType.get(arg1).getInvModel(50);
-		}
-		if (arg0 == 5) {
-			var3 = null;
-		}
-		if (var3 != null) {
-			modelCache.put(var3, (long) ((arg0 << 16) + arg1));
-		}
-		return var3;
+
+		return model;
 	}
 
 	@ObfuscatedName("d.a(Lfb;III)V")
-	public static void cacheModel(Model arg0, int arg2, int arg3) {
+	public static void cacheModel(Model model, int id, int type) {
 		modelCache.clear();
-		if (arg0 != null && arg3 != 4) {
-			modelCache.put(arg0, (long) ((arg3 << 16) + arg2));
+
+		if (model != null && type != 4) {
+			modelCache.put(model, ((long) type << 16) + id);
 		}
 	}
 
 	@ObfuscatedName("d.a(ILyb;ILjava/lang/String;)Ljb;")
-	public static Pix32 getImage(int arg0, Jagfile arg1, String arg3) {
-		long var4 = (JString.hashCode(arg3) << 8) + (long) arg0;
-		Pix32 var6 = (Pix32) imageCache.get(var4);
-		if (var6 != null) {
-			return var6;
+	public static Pix32 getImage(int spriteIndex, Jagfile media, String name) {
+		long uid = (JString.hashCode(name) << 8) + (long) spriteIndex;
+		Pix32 image = (Pix32) imageCache.get(uid);
+
+		if (image != null) {
+			return image;
 		}
+
 		try {
-			Pix32 var7 = new Pix32(arg1, arg3, arg0);
-			imageCache.put(var7, var4);
-			return var7;
-		} catch (Exception var8) {
+			image = new Pix32(media, name, spriteIndex);
+			imageCache.put(image, uid);
+			return image;
+		} catch (Exception ignore) {
 			return null;
 		}
 	}

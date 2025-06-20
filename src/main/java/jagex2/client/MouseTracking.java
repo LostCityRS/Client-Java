@@ -40,7 +40,7 @@ public class MouseTracking implements Runnable {
 
 			try {
 				Thread.sleep(50L);
-			} catch (Exception var2) {
+			} catch (Exception ignore) {
 			}
 		}
 	}

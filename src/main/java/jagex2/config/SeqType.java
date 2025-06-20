@@ -57,49 +57,60 @@ public class SeqType {
 	public int replacemode;
 
 	@ObfuscatedName("nc.a(Lyb;B)V")
-	public static void unpack(Jagfile arg0) {
-		Packet var3 = new Packet(arg0.read("seq.dat", null));
-		count = var3.g2();
+	public static void unpack(Jagfile config) {
+		Packet dat = new Packet(config.read("seq.dat", null));
+		count = dat.g2();
+
 		if (types == null) {
 			types = new SeqType[count];
 		}
-		for (int var4 = 0; var4 < count; var4++) {
-			if (types[var4] == null) {
-				types[var4] = new SeqType();
+
+		for (int i = 0; i < count; i++) {
+			if (types[i] == null) {
+				types[i] = new SeqType();
 			}
-			types[var4].decode(var3);
+
+			types[i].decode(dat);
 		}
 	}
 
 	@ObfuscatedName("nc.a(II)I")
-	public int getFrameDuration(int arg1) {
-		int var3 = this.delay[arg1];
-		if (var3 == 0) {
-			AnimFrame var4 = AnimFrame.get(this.frames[arg1]);
-			if (var4 != null) {
-				var3 = this.delay[arg1] = var4.id;
+	public int getFrameDuration(int frame) {
+		int duration = this.delay[frame];
+
+		if (duration == 0) {
+			AnimFrame transform = AnimFrame.get(this.frames[frame]);
+			if (transform != null) {
+				duration = this.delay[frame] = transform.id;
 			}
 		}
-		if (var3 == 0) {
-			var3 = 1;
+
+		if (duration == 0) {
+			duration = 1;
 		}
-		return var3;
+
+		return duration;
 	}
 
 	@ObfuscatedName("nc.a(ILmb;)V")
-	public void decode(Packet arg1) {
+	public void decode(Packet buf) {
 		while (true) {
-			int var3 = arg1.g1();
-			if (var3 == 0) {
+			int code = buf.g1();
+
+			if (code == 0) {
 				if (this.frameCount == 0) {
 					this.frameCount = 1;
+
 					this.frames = new int[1];
 					this.frames[0] = -1;
+
 					this.iframes = new int[1];
 					this.iframes[0] = -1;
+
 					this.delay = new int[1];
 					this.delay[0] = -1;
 				}
+
 				if (this.preanim_move == -1) {
 					if (this.walkmerge == null) {
 						this.preanim_move = 0;
@@ -107,56 +118,66 @@ public class SeqType {
 						this.preanim_move = 2;
 					}
 				}
+
 				if (this.postanim_mode == -1) {
 					if (this.walkmerge != null) {
 						this.postanim_mode = 2;
 						return;
 					}
+
 					this.postanim_mode = 0;
 					return;
 				}
+
 				return;
 			}
-			if (var3 == 1) {
-				this.frameCount = arg1.g1();
+
+			if (code == 1) {
+				this.frameCount = buf.g1();
+
 				this.frames = new int[this.frameCount];
 				this.iframes = new int[this.frameCount];
 				this.delay = new int[this.frameCount];
-				for (int var4 = 0; var4 < this.frameCount; var4++) {
-					this.frames[var4] = arg1.g2();
-					this.iframes[var4] = arg1.g2();
-					if (this.iframes[var4] == 65535) {
-						this.iframes[var4] = -1;
+
+				for (int i = 0; i < this.frameCount; i++) {
+					this.frames[i] = buf.g2();
+
+					this.iframes[i] = buf.g2();
+					if (this.iframes[i] == 65535) {
+						this.iframes[i] = -1;
 					}
-					this.delay[var4] = arg1.g2();
+
+					this.delay[i] = buf.g2();
 				}
-			} else if (var3 == 2) {
-				this.replayoff = arg1.g2();
-			} else if (var3 == 3) {
-				int var5 = arg1.g1();
-				this.walkmerge = new int[var5 + 1];
-				for (int var6 = 0; var6 < var5; var6++) {
-					this.walkmerge[var6] = arg1.g1();
+			} else if (code == 2) {
+				this.replayoff = buf.g2();
+			} else if (code == 3) {
+				int count = buf.g1();
+				this.walkmerge = new int[count + 1];
+
+				for (int i = 0; i < count; i++) {
+					this.walkmerge[i] = buf.g1();
 				}
-				this.walkmerge[var5] = 9999999;
-			} else if (var3 == 4) {
+
+				this.walkmerge[count] = 9999999;
+			} else if (code == 4) {
 				this.stretches = true;
-			} else if (var3 == 5) {
-				this.priority = arg1.g1();
-			} else if (var3 == 6) {
-				this.righthand = arg1.g2();
-			} else if (var3 == 7) {
-				this.lefthand = arg1.g2();
-			} else if (var3 == 8) {
-				this.replaycount = arg1.g1();
-			} else if (var3 == 9) {
-				this.preanim_move = arg1.g1();
-			} else if (var3 == 10) {
-				this.postanim_mode = arg1.g1();
-			} else if (var3 == 11) {
-				this.replacemode = arg1.g1();
+			} else if (code == 5) {
+				this.priority = buf.g1();
+			} else if (code == 6) {
+				this.righthand = buf.g2();
+			} else if (code == 7) {
+				this.lefthand = buf.g2();
+			} else if (code == 8) {
+				this.replaycount = buf.g1();
+			} else if (code == 9) {
+				this.preanim_move = buf.g1();
+			} else if (code == 10) {
+				this.postanim_mode = buf.g1();
+			} else if (code == 11) {
+				this.replacemode = buf.g1();
 			} else {
-				System.out.println("Error unrecognised seq config code: " + var3);
+				System.out.println("Error unrecognised seq config code: " + code);
 			}
 		}
 	}
