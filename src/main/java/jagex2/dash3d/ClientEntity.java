@@ -23,25 +23,25 @@ public class ClientEntity extends ModelSource {
 	public int size = 1;
 
 	@ObfuscatedName("z.s")
-	public int seqStandId = -1;
+	public int readyanim = -1;
 
 	@ObfuscatedName("z.t")
-	public int seqTurnId = -1;
+	public int turnanim = -1;
 
 	@ObfuscatedName("z.u")
-	public int seqWalkId = -1;
+	public int walkanim = -1;
 
 	@ObfuscatedName("z.v")
-	public int seqTurnAroundId = -1;
+	public int walkanim_b = -1;
 
 	@ObfuscatedName("z.w")
-	public int seqTurnLeftId = -1;
+	public int walkanim_l = -1;
 
 	@ObfuscatedName("z.x")
-	public int seqTurnRightId = -1;
+	public int walkanim_r = -1;
 
 	@ObfuscatedName("z.y")
-	public int seqRunId = -1;
+	public int runanim = -1;
 
 	@ObfuscatedName("z.z")
 	public String chatMessage;

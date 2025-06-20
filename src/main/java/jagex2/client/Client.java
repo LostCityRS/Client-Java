@@ -4780,7 +4780,7 @@ public class Client extends GameShell {
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.b(Lz;I)V")
 	public final void updateMovement(ClientEntity arg0) {
-		arg0.secondarySeqId = arg0.seqStandId;
+		arg0.secondarySeqId = arg0.readyanim;
 		if (arg0.pathLength == 0) {
 			arg0.seqTrigger = 0;
 			return;
@@ -4830,16 +4830,16 @@ public class Client extends GameShell {
 		if (var8 > 1024) {
 			var8 -= 2048;
 		}
-		int var9 = arg0.seqTurnAroundId;
+		int var9 = arg0.walkanim_b;
 		if (var8 >= -256 && var8 <= 256) {
-			var9 = arg0.seqWalkId;
+			var9 = arg0.walkanim;
 		} else if (var8 >= 256 && var8 < 768) {
-			var9 = arg0.seqTurnRightId;
+			var9 = arg0.walkanim_r;
 		} else if (var8 >= -768 && var8 <= -256) {
-			var9 = arg0.seqTurnLeftId;
+			var9 = arg0.walkanim_l;
 		}
 		if (var9 == -1) {
-			var9 = arg0.seqWalkId;
+			var9 = arg0.walkanim;
 		}
 		arg0.secondarySeqId = var9;
 		int var10 = 4;
@@ -4859,8 +4859,8 @@ public class Client extends GameShell {
 		if (arg0.pathRunning[arg0.pathLength - 1]) {
 			var10 <<= 0x1;
 		}
-		if (var10 >= 8 && arg0.secondarySeqId == arg0.seqWalkId && arg0.seqRunId != -1) {
-			arg0.secondarySeqId = arg0.seqRunId;
+		if (var10 >= 8 && arg0.secondarySeqId == arg0.walkanim && arg0.runanim != -1) {
+			arg0.secondarySeqId = arg0.runanim;
 		}
 		if (var4 < var6) {
 			arg0.x += var10;
@@ -4943,11 +4943,11 @@ public class Client extends GameShell {
 
 			arg0.yaw &= 0x7FF;
 
-			if (arg0.secondarySeqId == arg0.seqStandId && arg0.dstYaw != arg0.yaw) {
-				if (arg0.seqTurnId != -1) {
-					arg0.secondarySeqId = arg0.seqTurnId;
+			if (arg0.secondarySeqId == arg0.readyanim && arg0.dstYaw != arg0.yaw) {
+				if (arg0.turnanim != -1) {
+					arg0.secondarySeqId = arg0.turnanim;
 				} else {
-					arg0.secondarySeqId = arg0.seqWalkId;
+					arg0.secondarySeqId = arg0.walkanim;
 				}
 			}
 		}
@@ -5609,7 +5609,7 @@ public class Client extends GameShell {
 			}
 			if (var3 != null && var3.isVisible()) {
 				var3.lowMemory = false;
-				if ((lowMemory && this.playerCount > 50 || this.playerCount > 200) && var2 != -1 && var3.secondarySeqId == var3.seqStandId) {
+				if ((lowMemory && this.playerCount > 50 || this.playerCount > 200) && var2 != -1 && var3.secondarySeqId == var3.readyanim) {
 					var3.lowMemory = true;
 				}
 				int var5 = var3.x >> 7;
@@ -7491,7 +7491,7 @@ public class Client extends GameShell {
 				// IF_SETPLAYERHEAD
 				int comId = this.in.g2();
 				Component.types[comId].modelType = 3;
-				Component.types[comId].model = (localPlayer.appearances[8] << 6) + (localPlayer.appearances[0] << 12) + (localPlayer.colours[0] << 24) + (localPlayer.colours[4] << 18) + localPlayer.appearances[11];
+				Component.types[comId].model = (localPlayer.appearance[8] << 6) + (localPlayer.appearance[0] << 12) + (localPlayer.colour[0] << 24) + (localPlayer.colour[4] << 18) + localPlayer.appearance[11];
 
 				this.ptype = -1;
 				return true;
@@ -8842,11 +8842,11 @@ public class Client extends GameShell {
 			npc.cycle = loopCycle;
 			npc.type = NpcType.get(buf.gBit(11));
 			npc.size = npc.type.size;
-			npc.seqWalkId = npc.type.walkanim;
-			npc.seqTurnAroundId = npc.type.walkanim_b;
-			npc.seqTurnLeftId = npc.type.walkanim_r;
-			npc.seqTurnRightId = npc.type.walkanim_l;
-			npc.seqStandId = npc.type.readyanim;
+			npc.walkanim = npc.type.walkanim;
+			npc.walkanim_b = npc.type.walkanim_b;
+			npc.walkanim_l = npc.type.walkanim_r;
+			npc.walkanim_r = npc.type.walkanim_l;
+			npc.readyanim = npc.type.readyanim;
 
 			int dx = buf.gBit(5);
 			if (dx > 15) {
@@ -8949,11 +8949,11 @@ public class Client extends GameShell {
 			if ((mask & 0x20) == 32) {
 				// CHANGETYPE
 				npc.type = NpcType.get(buf.g2());
-				npc.seqWalkId = npc.type.walkanim;
-				npc.seqTurnAroundId = npc.type.walkanim_b;
-				npc.seqTurnLeftId = npc.type.walkanim_r;
-				npc.seqTurnRightId = npc.type.walkanim_l;
-				npc.seqStandId = npc.type.readyanim;
+				npc.walkanim = npc.type.walkanim;
+				npc.walkanim_b = npc.type.walkanim_b;
+				npc.walkanim_l = npc.type.walkanim_r;
+				npc.walkanim_r = npc.type.walkanim_l;
+				npc.readyanim = npc.type.readyanim;
 			}
 
 			if ((mask & 0x40) == 64) {
@@ -9733,7 +9733,7 @@ public class Client extends GameShell {
 		}
 		String var6 = arg4.name;
 		if (arg4.vislevel != 0) {
-			var6 = var6 + getCombatLevelTag(arg4.vislevel, localPlayer.combatLevel) + " (level-" + arg4.vislevel + ")";
+			var6 = var6 + getCombatLevelTag(arg4.vislevel, localPlayer.vislevel) + " (level-" + arg4.vislevel + ")";
 		}
 		if (this.objSelected == 1) {
 			this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @yel@" + var6;
@@ -9773,7 +9773,7 @@ public class Client extends GameShell {
 				for (int var8 = 4; var8 >= 0; var8--) {
 					if (arg4.op[var8] != null && arg4.op[var8].equalsIgnoreCase("attack")) {
 						short var9 = 0;
-						if (arg4.vislevel > localPlayer.combatLevel) {
+						if (arg4.vislevel > localPlayer.vislevel) {
 							var9 = 2000;
 						}
 						this.menuOption[this.menuSize] = arg4.op[var8] + " @yel@" + var6;
@@ -9821,7 +9821,7 @@ public class Client extends GameShell {
 		if (localPlayer == arg4 || this.menuSize >= 400) {
 			return;
 		}
-		String var6 = arg4.name + getCombatLevelTag(arg4.combatLevel, localPlayer.combatLevel) + " (level-" + arg4.combatLevel + ")";
+		String var6 = arg4.name + getCombatLevelTag(arg4.vislevel, localPlayer.vislevel) + " (level-" + arg4.vislevel + ")";
 		if (this.objSelected == 1) {
 			this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @whi@" + var6;
 			this.menuAction[this.menuSize] = 367;
@@ -9846,7 +9846,7 @@ public class Client extends GameShell {
 			}
 			if (this.wildernessLevel > 0) {
 				this.menuOption[this.menuSize] = "Attack @whi@" + var6;
-				if (localPlayer.combatLevel >= arg4.combatLevel) {
+				if (localPlayer.vislevel >= arg4.vislevel) {
 					this.menuAction[this.menuSize] = 151;
 				} else {
 					this.menuAction[this.menuSize] = 2151;
@@ -10354,7 +10354,7 @@ public class Client extends GameShell {
 				} else if (opcode == 7) {
 					register += this.varps[script[pc++]] * 100 / 46875;
 				} else if (opcode == 8) {
-					register += localPlayer.combatLevel;
+					register += localPlayer.vislevel;
 				} else if (opcode == 9) {
 					for (int i = 0; i < 19; i++) {
 						if (i == 18) {
@@ -10876,7 +10876,7 @@ public class Client extends GameShell {
 				}
 
 				model.createLabelReferences();
-				model.applyTransform(SeqType.types[localPlayer.seqStandId].frames[0]);
+				model.applyTransform(SeqType.types[localPlayer.readyanim].frames[0]);
 				model.calculateNormals(64, 850, -30, -50, -30, true);
 
 				com.modelType = 5;
