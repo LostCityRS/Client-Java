@@ -6,146 +6,149 @@ import deob.ObfuscatedName;
 public class BZip2State {
 
 	@ObfuscatedName("tb.a")
-	public final int field764 = 4096;
+	public static final int MTFA_SIZE = 4096;
 
 	@ObfuscatedName("tb.b")
-	public final int field765 = 16;
+	public static final int MTFL_SIZE = 16;
 
 	@ObfuscatedName("tb.c")
-	public final int field766 = 258;
+	public static final int BZ_MAX_ALPHA_SIZE = 258;
 
 	@ObfuscatedName("tb.d")
-	public final int field767 = 23;
+	public static final int BZ_MAX_CODE_LEN = 23;
 
 	@ObfuscatedName("tb.e")
-	public final int field768 = 1;
+	public static final int field768 = 1;
 
 	@ObfuscatedName("tb.f")
-	public final int field769 = 6;
+	public static final int BZ_N_GROUPS = 6;
 
 	@ObfuscatedName("tb.g")
-	public final int field770 = 50;
+	public static final int BZ_G_SIZE = 50;
 
 	@ObfuscatedName("tb.h")
-	public final int field771 = 4;
+	public static final int field771 = 4;
 
 	@ObfuscatedName("tb.i")
-	public final int field772 = 18002;
+	public static final int BZ_MAX_SELECTORS = (2 + (900000 / BZ_G_SIZE)); // 18002
+
+	public static final int BZ_RUNA = 0;
+	public static final int BZ_RUNB = 1;
 
 	@ObfuscatedName("tb.j")
-	public byte[] field773;
+	public byte[] stream;
 
 	@ObfuscatedName("tb.k")
-	public int field774;
+	public int next_in;
 
 	@ObfuscatedName("tb.l")
-	public int field775;
+	public int avail_in;
 
 	@ObfuscatedName("tb.m")
-	public int field776;
+	public int total_in_lo32;
 
 	@ObfuscatedName("tb.n")
-	public int field777;
+	public int total_in_hi32;
 
 	@ObfuscatedName("tb.o")
-	public byte[] field778;
+	public byte[] decompressed;
 
 	@ObfuscatedName("tb.p")
-	public int field779;
+	public int next_out;
 
 	@ObfuscatedName("tb.q")
-	public int field780;
+	public int avail_out;
 
 	@ObfuscatedName("tb.r")
-	public int field781;
+	public int total_out_lo32;
 
 	@ObfuscatedName("tb.s")
-	public int field782;
+	public int total_out_hi32;
 
 	@ObfuscatedName("tb.t")
-	public byte field783;
+	public byte state_out_ch;
 
 	@ObfuscatedName("tb.u")
-	public int field784;
+	public int state_out_len;
 
 	@ObfuscatedName("tb.v")
-	public boolean field785;
+	public boolean blockRandomized;
 
 	@ObfuscatedName("tb.w")
-	public int field786;
+	public int bsBuff;
 
 	@ObfuscatedName("tb.x")
-	public int field787;
+	public int bsLive;
 
 	@ObfuscatedName("tb.y")
-	public int field788;
+	public int blockSize100k;
 
 	@ObfuscatedName("tb.z")
-	public int field789;
+	public int currBlockNo;
 
 	@ObfuscatedName("tb.D")
-	public int[] field793 = new int[256];
+	public int[] unzftab = new int[256];
 
 	@ObfuscatedName("tb.F")
-	public int[] field795 = new int[257];
+	public int[] cftab = new int[257];
 
 	@ObfuscatedName("tb.G")
-	public int[] field796 = new int[257];
+	public int[] cftabCopy = new int[257];
 
 	@ObfuscatedName("tb.J")
-	public boolean[] field799 = new boolean[256];
+	public boolean[] inUse = new boolean[256];
 
 	@ObfuscatedName("tb.K")
-	public boolean[] field800 = new boolean[16];
+	public boolean[] inUse16 = new boolean[16];
 
 	@ObfuscatedName("tb.L")
-	public byte[] field801 = new byte[256];
+	public byte[] seqToUnseq = new byte[256];
 
 	@ObfuscatedName("tb.M")
-	public byte[] field802 = new byte[4096];
+	public byte[] mtfa = new byte[MTFA_SIZE];
 
 	@ObfuscatedName("tb.N")
-	public int[] field803 = new int[16];
+	public int[] mtfbase = new int[256 / MTFL_SIZE];
 
 	@ObfuscatedName("tb.O")
-	public byte[] field804 = new byte[18002];
+	public byte[] selector = new byte[BZ_MAX_SELECTORS];
 
 	@ObfuscatedName("tb.P")
-	public byte[] field805 = new byte[18002];
+	public byte[] selectorMtf = new byte[BZ_MAX_SELECTORS];
 
 	@ObfuscatedName("tb.Q")
-	public byte[][] field806 = new byte[6][258];
+	public byte[][] len = new byte[BZ_N_GROUPS][BZ_MAX_ALPHA_SIZE];
 
 	@ObfuscatedName("tb.R")
-	public int[][] field807 = new int[6][258];
+	public int[][] limit = new int[BZ_N_GROUPS][BZ_MAX_ALPHA_SIZE];
 
 	@ObfuscatedName("tb.S")
-	public int[][] field808 = new int[6][258];
+	public int[][] base = new int[BZ_N_GROUPS][BZ_MAX_ALPHA_SIZE];
 
 	@ObfuscatedName("tb.T")
-	public int[][] field809 = new int[6][258];
+	public final int[][] perm = new int[BZ_N_GROUPS][BZ_MAX_ALPHA_SIZE];
 
 	@ObfuscatedName("tb.U")
-	public int[] field810 = new int[6];
+	public int[] minLens = new int[BZ_N_GROUPS];
 
 	@ObfuscatedName("tb.A")
-	public int field790;
+	public int origPtr;
 
 	@ObfuscatedName("tb.B")
-	public int field791;
+	public int tPos;
 
 	@ObfuscatedName("tb.C")
-	public int field792;
+	public int k0;
 
 	@ObfuscatedName("tb.E")
-	public int field794;
+	public int c_nblock_used;
 
 	@ObfuscatedName("tb.I")
-	public int field798;
+	public int nInUse;
 
 	@ObfuscatedName("tb.V")
-	public int field811;
+	public int save_nblock;
 
 	@ObfuscatedName("tb.H")
-	public static int[] field797;
+	public static int[] tt;
 }
