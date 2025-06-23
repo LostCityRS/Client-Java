@@ -26,7 +26,7 @@ import jagex2.wordenc.WordPack;
 
 public class Client extends GameShell {
 
-	public static boolean JAG_CHECKSUMS = false;
+	public static boolean JAG_CHECKSUMS = true;
 
 	@ObfuscatedName("client.Pe")
 	public static int nodeId = 10;
