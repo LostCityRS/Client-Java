@@ -8588,7 +8588,7 @@ public class Client extends GameShell {
 
 			int delay = buf.g1();
 			if (player.primarySeqId == seqId && seqId != -1) {
-				int replaceMode = SeqType.types[seqId].replacemode;
+				int replaceMode = SeqType.types[seqId].restart_mode;
 
 				if (replaceMode == 1) {
 					player.primarySeqFrame = 0;
@@ -8901,7 +8901,7 @@ public class Client extends GameShell {
 				int delay = buf.g1();
 
 				if (npc.primarySeqId == seqId && seqId != -1) {
-					int var13 = SeqType.types[seqId].replacemode;
+					int var13 = SeqType.types[seqId].restart_mode;
 
 					if (var13 == 1) {
 						npc.primarySeqFrame = 0;
@@ -10725,16 +10725,16 @@ public class Client extends GameShell {
 			boolean lastMidiActive = this.midiActive;
 
 			if (value == 0) {
-				this.setMidiVolume(0, this.midiActive);
+				this.setMidiVolume(128, this.midiActive);
 				this.midiActive = true;
 			} else if (value == 1) {
-				this.setMidiVolume(-400, this.midiActive);
+				this.setMidiVolume(96, this.midiActive);
 				this.midiActive = true;
 			} else if (value == 2) {
-				this.setMidiVolume(-800, this.midiActive);
+				this.setMidiVolume(64, this.midiActive);
 				this.midiActive = true;
 			} else if (value == 3) {
-				this.setMidiVolume(-1200, this.midiActive);
+				this.setMidiVolume(32, this.midiActive);
 				this.midiActive = true;
 			} else if (value == 4) {
 				this.midiActive = false;
@@ -10754,16 +10754,16 @@ public class Client extends GameShell {
 		} else if (clientCode == 4) {
 			if (value == 0) {
 				this.waveEnabled = true;
-				this.setWaveVolume(0);
+				this.setWaveVolume(128);
 			} else if (value == 1) {
 				this.waveEnabled = true;
-				this.setWaveVolume(-400);
+				this.setWaveVolume(96);
 			} else if (value == 2) {
 				this.waveEnabled = true;
-				this.setWaveVolume(-800);
+				this.setWaveVolume(64);
 			} else if (value == 3) {
 				this.waveEnabled = true;
-				this.setWaveVolume(-1200);
+				this.setWaveVolume(32);
 			} else if (value == 4) {
 				this.waveEnabled = false;
 			}

@@ -54,7 +54,7 @@ public class SeqType {
 	public int postanim_mode = -1;
 
 	@ObfuscatedName("nc.r")
-	public int replacemode;
+	public int restart_mode;
 
 	@ObfuscatedName("nc.a(Lyb;B)V")
 	public static void unpack(Jagfile config) {
@@ -175,7 +175,7 @@ public class SeqType {
 			} else if (code == 10) {
 				this.postanim_mode = buf.g1();
 			} else if (code == 11) {
-				this.replacemode = buf.g1();
+				this.restart_mode = buf.g1();
 			} else {
 				System.out.println("Error unrecognised seq config code: " + code);
 			}
