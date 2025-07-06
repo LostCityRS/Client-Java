@@ -1,4 +1,4 @@
-package jagex2.graphics;
+package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 
@@ -39,7 +39,7 @@ public class Metadata {
 	public int faceOrientationsOffset;
 
 	@ObfuscatedName("m.l")
-	public int faceColorsOffset;
+	public int faceColoursOffset;
 
 	@ObfuscatedName("m.m")
 	public int faceInfosOffset;

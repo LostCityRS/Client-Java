@@ -210,42 +210,50 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(BII)V")
-	public void draw(int arg1, int arg2) {
-		int var4 = this.cropLeft + arg1;
-		int var5 = this.cropTop + arg2;
-		int var6 = Pix2D.width2d * var5 + var4;
-		int var7 = 0;
-		int var8 = this.cropBottom;
-		int var9 = this.cropRight;
-		int var10 = Pix2D.width2d - var9;
-		int var11 = 0;
-		if (var5 < Pix2D.top) {
-			int var12 = Pix2D.top - var5;
-			var8 -= var12;
-			var5 = Pix2D.top;
-			var7 += var9 * var12;
-			var6 += Pix2D.width2d * var12;
+	public void draw(int x, int y) {
+		x += this.cropLeft;
+		y += this.cropTop;
+
+		int dstOff = Pix2D.width2d * y + x;
+		int srcOff = 0;
+
+		int h = this.cropBottom;
+		int w = this.cropRight;
+
+		int dstStep = Pix2D.width2d - w;
+		int srcStep = 0;
+
+		if (y < Pix2D.top) {
+			int cutoff = Pix2D.top - y;
+			h -= cutoff;
+			y = Pix2D.top;
+			srcOff += w * cutoff;
+			dstOff += Pix2D.width2d * cutoff;
 		}
-		if (var5 + var8 > Pix2D.bottom) {
-			var8 -= var5 + var8 - Pix2D.bottom;
+
+		if (y + h > Pix2D.bottom) {
+			h -= y + h - Pix2D.bottom;
 		}
-		if (var4 < Pix2D.left) {
-			int var13 = Pix2D.left - var4;
-			var9 -= var13;
-			var4 = Pix2D.left;
-			var7 += var13;
-			var6 += var13;
-			var11 += var13;
-			var10 += var13;
+
+		if (x < Pix2D.left) {
+			int cutoff = Pix2D.left - x;
+			w -= cutoff;
+			x = Pix2D.left;
+			srcOff += cutoff;
+			dstOff += cutoff;
+			srcStep += cutoff;
+			dstStep += cutoff;
 		}
-		if (var4 + var9 > Pix2D.right) {
-			int var14 = var4 + var9 - Pix2D.right;
-			var9 -= var14;
-			var11 += var14;
-			var10 += var14;
+
+		if (x + w > Pix2D.right) {
+			int cutoff = x + w - Pix2D.right;
+			w -= cutoff;
+			srcStep += cutoff;
+			dstStep += cutoff;
 		}
-		if (var9 > 0 && var8 > 0) {
-			this.copyPixels(Pix2D.data, this.pixels, 0, var7, var6, var9, var8, var10, var11);
+
+		if (w > 0 && h > 0) {
+			this.copyPixels(Pix2D.data, this.pixels, 0, srcOff, dstOff, w, h, dstStep, srcStep);
 		}
 	}
 

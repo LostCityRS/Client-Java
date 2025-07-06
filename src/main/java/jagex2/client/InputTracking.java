@@ -10,10 +10,10 @@ public class InputTracking {
 	public static boolean enabled;
 
 	@ObfuscatedName("f.f")
-	public static Packet oldBuffer = null;
+	public static Packet outBuffer = null;
 
 	@ObfuscatedName("f.g")
-	public static Packet outBuffer = null;
+	public static Packet oldBuffer = null;
 
 	@ObfuscatedName("f.h")
 	public static long lastTime;
@@ -32,8 +32,8 @@ public class InputTracking {
 
 	@ObfuscatedName("f.a(I)V")
 	public static final synchronized void setEnabled() {
-		oldBuffer = Packet.alloc(1);
-		outBuffer = null;
+		outBuffer = Packet.alloc(1);
+		oldBuffer = null;
 		lastTime = System.currentTimeMillis();
 		enabled = true;
 	}
@@ -41,19 +41,19 @@ public class InputTracking {
 	@ObfuscatedName("f.a(B)V")
 	public static final synchronized void setDisabled() {
 		enabled = false;
-		oldBuffer = null;
 		outBuffer = null;
+		oldBuffer = null;
 	}
 
 	@ObfuscatedName("f.b(I)Lmb;")
 	public static final synchronized Packet flush() {
 		Packet buf = null;
 
-		if (outBuffer != null && enabled) {
-			buf = outBuffer;
+		if (oldBuffer != null && enabled) {
+			buf = oldBuffer;
 		}
 
-		outBuffer = null;
+		oldBuffer = null;
 		return buf;
 	}
 
@@ -61,8 +61,8 @@ public class InputTracking {
 	public static final synchronized Packet stop() {
 		Packet buf = null;
 
-		if (oldBuffer != null && oldBuffer.pos > 0 && enabled) {
-			buf = oldBuffer;
+		if (outBuffer != null && outBuffer.pos > 0 && enabled) {
+			buf = outBuffer;
 		}
 
 		setDisabled();
@@ -71,10 +71,10 @@ public class InputTracking {
 
 	@ObfuscatedName("f.a(ZI)V")
 	public static final synchronized void ensureCapacity(int n) {
-		if (oldBuffer.pos + n >= 500) {
-			Packet buf = oldBuffer;
-			oldBuffer = Packet.alloc(1);
-			outBuffer = buf;
+		if (outBuffer.pos + n >= 500) {
+			Packet buf = outBuffer;
+			outBuffer = Packet.alloc(1);
+			oldBuffer = buf;
 		}
 	}
 
@@ -96,13 +96,13 @@ public class InputTracking {
 		ensureCapacity(5);
 
 		if (button == 1) {
-			oldBuffer.p1(1);
+			outBuffer.p1(1);
 		} else {
-			oldBuffer.p1(2);
+			outBuffer.p1(2);
 		}
 
-		oldBuffer.p1((int) delta);
-		oldBuffer.p3((y << 10) + x);
+		outBuffer.p1((int) delta);
+		outBuffer.p3((y << 10) + x);
 	}
 
 	@ObfuscatedName("f.a(II)V")
@@ -124,12 +124,12 @@ public class InputTracking {
 		ensureCapacity(2);
 
 		if (button == 1) {
-			oldBuffer.p1(3);
+			outBuffer.p1(3);
 		} else {
-			oldBuffer.p1(4);
+			outBuffer.p1(4);
 		}
 
-		oldBuffer.p1((int) delta);
+		outBuffer.p1((int) delta);
 	}
 
 	@ObfuscatedName("f.a(III)V")
@@ -155,20 +155,20 @@ public class InputTracking {
 
 		if (x - lastX < 8 && x - lastX >= -8 && y - lastY < 8 && y - lastY >= -8) {
 			ensureCapacity(3);
-			oldBuffer.p1(5);
-			oldBuffer.p1((int) delta);
-			oldBuffer.p1((y - lastY + 8 << 4) + x - lastX + 8);
+			outBuffer.p1(5);
+			outBuffer.p1((int) delta);
+			outBuffer.p1((y - lastY + 8 << 4) + x - lastX + 8);
 		} else if (x - lastX < 128 && x - lastX >= -128 && y - lastY < 128 && y - lastY >= -128) {
 			ensureCapacity(4);
-			oldBuffer.p1(6);
-			oldBuffer.p1((int) delta);
-			oldBuffer.p1(x - lastX + 128);
-			oldBuffer.p1(y - lastY + 128);
+			outBuffer.p1(6);
+			outBuffer.p1((int) delta);
+			outBuffer.p1(x - lastX + 128);
+			outBuffer.p1(y - lastY + 128);
 		} else {
 			ensureCapacity(5);
-			oldBuffer.p1(7);
-			oldBuffer.p1((int) delta);
-			oldBuffer.p3((y << 10) + x);
+			outBuffer.p1(7);
+			outBuffer.p1((int) delta);
+			outBuffer.p3((y << 10) + x);
 		}
 
 		lastX = x;
@@ -204,9 +204,9 @@ public class InputTracking {
 		}
 
 		ensureCapacity(3);
-		oldBuffer.p1(8);
-		oldBuffer.p1((int) delta);
-		oldBuffer.p1(key);
+		outBuffer.p1(8);
+		outBuffer.p1((int) delta);
+		outBuffer.p1(key);
 	}
 
 	@ObfuscatedName("f.a(IZ)V")
@@ -238,9 +238,9 @@ public class InputTracking {
 		}
 
 		ensureCapacity(3);
-		oldBuffer.p1(9);
-		oldBuffer.p1((int) delta);
-		oldBuffer.p1(key);
+		outBuffer.p1(9);
+		outBuffer.p1((int) delta);
+		outBuffer.p1(key);
 	}
 
 	@ObfuscatedName("f.b(B)V")
@@ -260,8 +260,8 @@ public class InputTracking {
 		lastTime = now;
 
 		ensureCapacity(2);
-		oldBuffer.p1(10);
-		oldBuffer.p1((int) delta);
+		outBuffer.p1(10);
+		outBuffer.p1((int) delta);
 	}
 
 	@ObfuscatedName("f.a(Z)V")
@@ -281,8 +281,8 @@ public class InputTracking {
 		lastTime = now;
 
 		ensureCapacity(2);
-		oldBuffer.p1(11);
-		oldBuffer.p1((int) delta);
+		outBuffer.p1(11);
+		outBuffer.p1((int) delta);
 	}
 
 	@ObfuscatedName("f.d(I)V")
@@ -302,8 +302,8 @@ public class InputTracking {
 		lastTime = now;
 
 		ensureCapacity(2);
-		oldBuffer.p1(12);
-		oldBuffer.p1((int) delta);
+		outBuffer.p1(12);
+		outBuffer.p1((int) delta);
 	}
 
 	@ObfuscatedName("f.c(B)V")
@@ -323,7 +323,7 @@ public class InputTracking {
 		lastTime = now;
 
 		ensureCapacity(2);
-		oldBuffer.p1(13);
-		oldBuffer.p1((int) delta);
+		outBuffer.p1(13);
+		outBuffer.p1((int) delta);
 	}
 }

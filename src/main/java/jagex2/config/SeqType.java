@@ -81,7 +81,7 @@ public class SeqType {
 		if (duration == 0) {
 			AnimFrame transform = AnimFrame.get(this.frames[frame]);
 			if (transform != null) {
-				duration = this.delay[frame] = transform.id;
+				duration = this.delay[frame] = transform.delay;
 			}
 		}
 

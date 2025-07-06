@@ -8,7 +8,6 @@ import jagex2.config.SeqType;
 import jagex2.config.SpotAnimType;
 import jagex2.datastruct.JString;
 import jagex2.datastruct.LruCache;
-import jagex2.graphics.Model;
 import jagex2.io.Packet;
 
 @ObfuscatedName("bb")
@@ -294,7 +293,7 @@ public class ClientPlayer extends ClientEntity {
 					part = rightHandValue;
 				}
 
-				if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].validate()) {
+				if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].validateModel()) {
 					hasModel = true;
 				}
 

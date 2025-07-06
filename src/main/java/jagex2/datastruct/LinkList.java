@@ -17,7 +17,7 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(Lv;)V")
-	public void addTail(Linkable node) {
+	public void push(Linkable node) {
 		if (node.prev != null) {
 			node.unlink();
 		}
@@ -41,7 +41,7 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a()Lv;")
-	public Linkable removeHead() {
+	public Linkable pop() {
 		Linkable node = this.sentinel.next;
 		if (this.sentinel == node) {
 			return null;

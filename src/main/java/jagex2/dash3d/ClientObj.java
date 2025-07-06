@@ -2,7 +2,6 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 import jagex2.config.ObjType;
-import jagex2.graphics.Model;
 
 @ObfuscatedName("db")
 public class ClientObj extends ModelSource {

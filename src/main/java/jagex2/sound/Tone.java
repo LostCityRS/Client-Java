@@ -247,6 +247,7 @@ public class Tone {
 		int hasFrequencyMod = buf.g1();
 		if (hasFrequencyMod != 0) {
 			buf.pos--;
+
 			this.frequencyModRate = new Envelope();
 			this.frequencyModRate.unpack(buf);
 			this.frequencyModRange = new Envelope();
@@ -256,6 +257,7 @@ public class Tone {
 		int hasAmplitudeMod = buf.g1();
 		if (hasAmplitudeMod != 0) {
 			buf.pos--;
+
 			this.amplitudeModRate = new Envelope();
 			this.amplitudeModRate.unpack(buf);
 			this.amplitudeModRange = new Envelope();
@@ -265,6 +267,7 @@ public class Tone {
 		int hasReleaseAttack = buf.g1();
 		if (hasReleaseAttack != 0) {
 			buf.pos--;
+
 			this.release = new Envelope();
 			this.release.unpack(buf);
 			this.attack = new Envelope();

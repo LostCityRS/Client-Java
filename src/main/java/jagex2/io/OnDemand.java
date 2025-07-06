@@ -134,7 +134,6 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	@ObfuscatedName("vb.a(Lyb;Lclient;)V")
 	public final void unpack(Jagfile versionlist, Client c) {
 		String[] version = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
-
 		for (int i = 0; i < 4; i++) {
 			byte[] data = versionlist.read(version[i], null);
 			int count = data.length / 2;
@@ -252,8 +251,8 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		int count = this.mapIndex.length;
 		for (int i = 0; i < count; i++) {
 			if (members || this.mapMembers[i] != 0) {
-				this.prefetch(3, this.mapLoc[i], (byte) 2);
-				this.prefetch(3, this.mapLand[i], (byte) 2);
+				this.prefetchPriority(3, this.mapLoc[i], (byte) 2);
+				this.prefetchPriority(3, this.mapLand[i], (byte) 2);
 			}
 		}
 	}
@@ -285,30 +284,30 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.e(II)V")
-	public final void request(int index, int file) {
-		if (index < 0 || index > this.versions.length || file < 0 || file > this.versions[index].length || this.versions[index][file] == 0) {
+	public final void request(int archive, int file) {
+		if (archive < 0 || archive > this.versions.length || file < 0 || file > this.versions[archive].length || this.versions[archive][file] == 0) {
 			return;
 		}
 
 		DoublyLinkList lock = this.requests;
 		synchronized (lock) {
 			for (OnDemandRequest req = (OnDemandRequest) this.requests.head(); req != null; req = (OnDemandRequest) this.requests.next()) {
-				if (req.archive == index && req.file == file) {
+				if (req.archive == archive && req.file == file) {
 					return;
 				}
 			}
 
 			OnDemandRequest req = new OnDemandRequest();
-			req.archive = index;
+			req.archive = archive;
 			req.file = file;
 			req.urgent = true;
 
 			LinkList lock2 = this.queue;
 			synchronized (lock2) {
-				this.queue.addTail(req);
+				this.queue.push(req);
 			}
 
-			this.requests.addTail(req);
+			this.requests.push(req);
 		}
 	}
 
@@ -326,7 +325,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 		OnDemandRequest req;
 		synchronized (lock) {
-			req = (OnDemandRequest) this.completed.removeHead();
+			req = (OnDemandRequest) this.completed.pop();
 		}
 
 		if (req == null) {
@@ -369,7 +368,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(IZIB)V")
-	public final void prefetch(int archive, int file, byte priority) {
+	public final void prefetchPriority(int archive, int file, byte priority) {
 		if (this.app.fileStreams[0] == null || this.versions[archive][file] == 0) {
 			return;
 		}
@@ -408,7 +407,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 		LinkList lock = this.prefetches;
 		synchronized (lock) {
-			this.prefetches.addTail(req);
+			this.prefetches.push(req);
 		}
 	}
 
@@ -521,7 +520,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 		OnDemandRequest req;
 		synchronized (lock) {
-			req = (OnDemandRequest) this.queue.removeHead();
+			req = (OnDemandRequest) this.queue.pop();
 		}
 
 		while (req != null) {
@@ -539,17 +538,17 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			LinkList lock2 = this.queue;
 			synchronized (lock2) {
 				if (data == null) {
-					this.missing.addTail(req);
+					this.missing.push(req);
 				} else {
 					req.data = data;
 
 					LinkList lock3 = this.completed;
 					synchronized (lock3) {
-						this.completed.addTail(req);
+						this.completed.push(req);
 					}
 				}
 
-				req = (OnDemandRequest) this.queue.removeHead();
+				req = (OnDemandRequest) this.queue.pop();
 			}
 		}
 	}
@@ -568,7 +567,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		}
 
 		while (this.importantCount < 10) {
-			OnDemandRequest req = (OnDemandRequest) this.missing.removeHead();
+			OnDemandRequest req = (OnDemandRequest) this.missing.pop();
 			if (req == null) {
 				break;
 			}
@@ -578,7 +577,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			}
 
 			this.priorities[req.archive][req.file] = 0;
-			this.pending.addTail(req);
+			this.pending.push(req);
 			this.importantCount++;
 			this.send(req);
 			this.active = true;
@@ -596,13 +595,13 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 			OnDemandRequest extra;
 			synchronized (lock) {
-				extra = (OnDemandRequest) this.prefetches.removeHead();
+				extra = (OnDemandRequest) this.prefetches.pop();
 			}
 
 			while (extra != null) {
 				if (this.priorities[extra.archive][extra.file] != 0) {
 					this.priorities[extra.archive][extra.file] = 0;
-					this.pending.addTail(extra);
+					this.pending.push(extra);
 					this.send(extra);
 					this.active = true;
 
@@ -620,7 +619,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 				LinkList lock2 = this.prefetches;
 				synchronized (lock2) {
-					extra = (OnDemandRequest) this.prefetches.removeHead();
+					extra = (OnDemandRequest) this.prefetches.pop();
 				}
 			}
 
@@ -636,7 +635,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 						req.archive = archive;
 						req.file = i;
 						req.urgent = false;
-						this.pending.addTail(req);
+						this.pending.push(req);
 						this.send(req);
 						this.active = true;
 
@@ -697,7 +696,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 						if (this.current.urgent) {
 							LinkList lock = this.completed;
 							synchronized (lock) {
-								this.completed.addTail(this.current);
+								this.completed.push(this.current);
 							}
 						} else {
 							this.current.unlink();
@@ -750,7 +749,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					if (this.current.urgent) {
 						LinkList lock = this.completed;
 						synchronized (lock) {
-							this.completed.addTail(this.current);
+							this.completed.push(this.current);
 						}
 					} else {
 						this.current.unlink();

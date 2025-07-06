@@ -3,7 +3,6 @@ package jagex2.dash3d;
 import deob.*;
 import jagex2.config.FloType;
 import jagex2.config.LocType;
-import jagex2.graphics.Model;
 import jagex2.graphics.Pix3D;
 import jagex2.io.OnDemand;
 import jagex2.io.Packet;
@@ -106,22 +105,26 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(IIIZI)V")
-	public final void spreadHeight(int arg0, int arg1, int arg2, int arg4) {
-		for (int var6 = arg1; var6 <= arg1 + arg4; var6++) {
-			for (int var7 = arg0; var7 <= arg0 + arg2; var7++) {
-				if (var7 >= 0 && var7 < this.maxTileX && var6 >= 0 && var6 < this.maxTileZ) {
-					this.shadow[0][var7][var6] = 127;
-					if (arg0 == var7 && var7 > 0) {
-						this.heightmap[0][var7][var6] = this.heightmap[0][var7 - 1][var6];
+	public final void spreadHeight(int startX, int startZ, int endX, int endZ) {
+		for (int z = startZ; z <= startZ + endZ; z++) {
+			for (int x = startX; x <= startX + endX; x++) {
+				if (x >= 0 && x < this.maxTileX && z >= 0 && z < this.maxTileZ) {
+					this.shadow[0][x][z] = 127;
+
+					if (startX == x && x > 0) {
+						this.heightmap[0][x][z] = this.heightmap[0][x - 1][z];
 					}
-					if (arg0 + arg2 == var7 && var7 < this.maxTileX - 1) {
-						this.heightmap[0][var7][var6] = this.heightmap[0][var7 + 1][var6];
+
+					if (startX + endX == x && x < this.maxTileX - 1) {
+						this.heightmap[0][x][z] = this.heightmap[0][x + 1][z];
 					}
-					if (arg1 == var6 && var6 > 0) {
-						this.heightmap[0][var7][var6] = this.heightmap[0][var7][var6 - 1];
+
+					if (startZ == z && z > 0) {
+						this.heightmap[0][x][z] = this.heightmap[0][x][z - 1];
 					}
-					if (arg1 + arg4 == var6 && var6 < this.maxTileZ - 1) {
-						this.heightmap[0][var7][var6] = this.heightmap[0][var7][var6 + 1];
+
+					if (startZ + endZ == z && z < this.maxTileZ - 1) {
+						this.heightmap[0][x][z] = this.heightmap[0][x][z + 1];
 					}
 				}
 			}
@@ -218,7 +221,7 @@ public class World {
 					if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
 						LocType var17 = LocType.get(var6);
 						if (var14 != 22 || !lowMemory || var17.active || var17.forcedecor) {
-							var4 &= var17.validate();
+							var4 &= var17.validateModels();
 							var9 = true;
 						}
 					}
@@ -294,279 +297,324 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(IIIZLs;Ljc;III)V")
-	public final void addLoc(int arg0, int arg1, int angle, World3D arg4, CollisionMap arg5, int arg6, int shape, int arg8) {
+	public final void addLoc(int locId, int z, int angle, World3D scene, CollisionMap collision, int x, int shape, int level) {
 		if (lowMemory) {
-			if ((this.flags[arg8][arg6][arg1] & 0x10) != 0) {
+			if ((this.flags[level][x][z] & 0x10) != 0) {
 				return;
 			}
-			if (this.getDrawLevel(arg6, arg8, arg1) != levelBuilt) {
+
+			if (this.getDrawLevel(x, level, z) != levelBuilt) {
 				return;
 			}
 		}
-		int var10 = this.heightmap[arg8][arg6][arg1];
-		int var11 = this.heightmap[arg8][arg6 + 1][arg1];
-		int var12 = this.heightmap[arg8][arg6 + 1][arg1 + 1];
-		int var13 = this.heightmap[arg8][arg6][arg1 + 1];
-		int var14 = var10 + var11 + var12 + var13 >> 2;
-		LocType loc = LocType.get(arg0);
-		int var16 = (arg0 << 14) + (arg1 << 7) + arg6 + 1073741824;
+
+		int heightSW = this.heightmap[level][x][z];
+		int heightSE = this.heightmap[level][x + 1][z];
+		int heightNW = this.heightmap[level][x + 1][z + 1];
+		int heightNE = this.heightmap[level][x][z + 1];
+		int y = heightSW + heightSE + heightNW + heightNE >> 2;
+
+		LocType loc = LocType.get(locId);
+
+		int typecode = (locId << 14) + (z << 7) + x + 0x40000000;
 		if (!loc.active) {
-			var16 += Integer.MIN_VALUE;
+			typecode += Integer.MIN_VALUE;
 		}
-		byte var17 = (byte) ((angle << 6) + shape);
+
+		byte info = (byte) ((angle << 6) + shape);
+
 		if (shape == 22) {
 			if (!lowMemory || loc.active || loc.forcedecor) {
-				ModelSource var18;
+				ModelSource model;
 				if (loc.anim == -1) {
-					var18 = loc.getModel(22, angle, var10, var11, var12, var13, -1);
+					model = loc.getModel(22, angle, heightSW, heightSE, heightNW, heightNE, -1);
 				} else {
-					var18 = new ClientLocAnim(var13, var12, var10, 22, angle, true, var11, arg0, loc.anim);
+					model = new ClientLocAnim(heightNE, heightNW, heightSW, 22, angle, true, heightSE, locId, loc.anim);
 				}
-				arg4.addGroundDecor(arg1, arg8, arg6, var16, var14, var18, var17);
-				if (loc.blockwalk && loc.active && arg5 != null) {
-					arg5.setBlocked(arg1, arg6);
+
+				scene.addGroundDecor(z, level, x, typecode, y, model, info);
+
+				if (loc.blockwalk && loc.active && collision != null) {
+					collision.setBlocked(z, x);
 				}
 			}
 		} else if (shape == 10 || shape == 11) {
-			ModelSource var34;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var34 = loc.getModel(10, angle, var10, var11, var12, var13, -1);
+				model = loc.getModel(10, angle, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var34 = new ClientLocAnim(var13, var12, var10, 10, angle, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 10, angle, true, heightSE, locId, loc.anim);
 			}
-			if (var34 != null) {
-				int var35 = 0;
+
+			if (model != null) {
+				int yaw = 0;
 				if (shape == 11) {
-					var35 += 256;
+					yaw += 256;
 				}
-				int var36;
-				int var37;
+
+				int width;
+				int length;
 				if (angle == 1 || angle == 3) {
-					var36 = loc.length;
-					var37 = loc.width;
+					width = loc.length;
+					length = loc.width;
 				} else {
-					var36 = loc.width;
-					var37 = loc.length;
+					width = loc.width;
+					length = loc.length;
 				}
-				if (arg4.addLoc(var17, var16, arg6, arg8, var14, var36, var35, var34, var37, arg1) && loc.shadow) {
-					Model var38;
-					if (var34 instanceof Model) {
-						var38 = (Model) var34;
+
+				if (scene.addLoc(info, typecode, x, level, y, width, yaw, model, length, z) && loc.shadow) {
+					Model model2;
+					if (model instanceof Model) {
+						model2 = (Model) model;
 					} else {
-						var38 = loc.getModel(10, angle, var10, var11, var12, var13, -1);
+						model2 = loc.getModel(10, angle, heightSW, heightSE, heightNW, heightNE, -1);
 					}
-					if (var38 != null) {
-						for (int var39 = 0; var39 <= var36; var39++) {
-							for (int var40 = 0; var40 <= var37; var40++) {
-								int var41 = var38.radius / 4;
-								if (var41 > 30) {
-									var41 = 30;
+
+					if (model2 != null) {
+						for (int dx = 0; dx <= width; dx++) {
+							for (int dz = 0; dz <= length; dz++) {
+								int shade = model2.radius / 4;
+								if (shade > 30) {
+									shade = 30;
 								}
-								if (var41 > this.shadow[arg8][arg6 + var39][arg1 + var40]) {
-									this.shadow[arg8][arg6 + var39][arg1 + var40] = (byte) var41;
+
+								if (shade > this.shadow[level][x + dx][z + dz]) {
+									this.shadow[level][x + dx][z + dz] = (byte) shade;
 								}
 							}
 						}
 					}
 				}
 			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addLoc(loc.blockrange, angle, arg6, loc.length, loc.width, arg1);
+
+			if (loc.blockwalk && collision != null) {
+				collision.addLoc(loc.blockrange, angle, x, loc.length, loc.width, z);
 			}
 		} else if (shape >= 12) {
-			ModelSource var19;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var19 = loc.getModel(shape, angle, var10, var11, var12, var13, -1);
+				model = loc.getModel(shape, angle, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var19 = new ClientLocAnim(var13, var12, var10, shape, angle, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, shape, angle, true, heightSE, locId, loc.anim);
 			}
-			arg4.addLoc(var17, var16, arg6, arg8, var14, 1, 0, var19, 1, arg1);
-			if (shape >= 12 && shape <= 17 && shape != 13 && arg8 > 0) {
-				this.occlusion[arg8][arg6][arg1] |= 0x924;
+
+			scene.addLoc(info, typecode, x, level, y, 1, 0, model, 1, z);
+
+			if (shape >= 12 && shape <= 17 && shape != 13 && level > 0) {
+				this.occlusion[level][x][z] |= 0x924;
 			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addLoc(loc.blockrange, angle, arg6, loc.length, loc.width, arg1);
+
+			if (loc.blockwalk && collision != null) {
+				collision.addLoc(loc.blockrange, angle, x, loc.length, loc.width, z);
 			}
 		} else if (shape == 0) {
-			ModelSource var20;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var20 = loc.getModel(0, angle, var10, var11, var12, var13, -1);
+				model = loc.getModel(0, angle, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var20 = new ClientLocAnim(var13, var12, var10, 0, angle, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 0, angle, true, heightSE, locId, loc.anim);
 			}
-			arg4.addWall(arg6, var16, arg8, 0, ROTATION_WALL_TYPE[angle], var14, null, var20, var17, arg1);
+
+			scene.addWall(x, typecode, level, 0, ROTATION_WALL_TYPE[angle], y, null, model, info, z);
+
 			if (angle == 0) {
 				if (loc.shadow) {
-					this.shadow[arg8][arg6][arg1] = 50;
-					this.shadow[arg8][arg6][arg1 + 1] = 50;
+					this.shadow[level][x][z] = 50;
+					this.shadow[level][x][z + 1] = 50;
 				}
+
 				if (loc.occlude) {
-					this.occlusion[arg8][arg6][arg1] |= 0x249;
+					this.occlusion[level][x][z] |= 0x249;
 				}
 			} else if (angle == 1) {
 				if (loc.shadow) {
-					this.shadow[arg8][arg6][arg1 + 1] = 50;
-					this.shadow[arg8][arg6 + 1][arg1 + 1] = 50;
+					this.shadow[level][x][z + 1] = 50;
+					this.shadow[level][x + 1][z + 1] = 50;
 				}
+
 				if (loc.occlude) {
-					this.occlusion[arg8][arg6][arg1 + 1] |= 0x492;
+					this.occlusion[level][x][z + 1] |= 0x492;
 				}
 			} else if (angle == 2) {
 				if (loc.shadow) {
-					this.shadow[arg8][arg6 + 1][arg1] = 50;
-					this.shadow[arg8][arg6 + 1][arg1 + 1] = 50;
+					this.shadow[level][x + 1][z] = 50;
+					this.shadow[level][x + 1][z + 1] = 50;
 				}
+
 				if (loc.occlude) {
-					this.occlusion[arg8][arg6 + 1][arg1] |= 0x249;
+					this.occlusion[level][x + 1][z] |= 0x249;
 				}
 			} else if (angle == 3) {
 				if (loc.shadow) {
-					this.shadow[arg8][arg6][arg1] = 50;
-					this.shadow[arg8][arg6 + 1][arg1] = 50;
+					this.shadow[level][x][z] = 50;
+					this.shadow[level][x + 1][z] = 50;
 				}
+
 				if (loc.occlude) {
-					this.occlusion[arg8][arg6][arg1] |= 0x492;
+					this.occlusion[level][x][z] |= 0x492;
 				}
 			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, shape, arg6, loc.blockrange, angle);
+
+			if (loc.blockwalk && collision != null) {
+				collision.addWall(z, shape, x, loc.blockrange, angle);
 			}
+
 			if (loc.wallwidth != 16) {
-				arg4.setDecorOffset(loc.wallwidth, arg6, arg1, arg8);
+				scene.setDecorOffset(loc.wallwidth, x, z, level);
 			}
 		} else if (shape == 1) {
-			ModelSource var21;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var21 = loc.getModel(1, angle, var10, var11, var12, var13, -1);
+				model = loc.getModel(1, angle, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var21 = new ClientLocAnim(var13, var12, var10, 1, angle, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 1, angle, true, heightSE, locId, loc.anim);
 			}
-			arg4.addWall(arg6, var16, arg8, 0, ROTATION_WALL_CORNER_TYPE[angle], var14, null, var21, var17, arg1);
+
+			scene.addWall(x, typecode, level, 0, ROTATION_WALL_CORNER_TYPE[angle], y, null, model, info, z);
+
 			if (loc.shadow) {
 				if (angle == 0) {
-					this.shadow[arg8][arg6][arg1 + 1] = 50;
+					this.shadow[level][x][z + 1] = 50;
 				} else if (angle == 1) {
-					this.shadow[arg8][arg6 + 1][arg1 + 1] = 50;
+					this.shadow[level][x + 1][z + 1] = 50;
 				} else if (angle == 2) {
-					this.shadow[arg8][arg6 + 1][arg1] = 50;
+					this.shadow[level][x + 1][z] = 50;
 				} else if (angle == 3) {
-					this.shadow[arg8][arg6][arg1] = 50;
+					this.shadow[level][x][z] = 50;
 				}
 			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, shape, arg6, loc.blockrange, angle);
+
+			if (loc.blockwalk && collision != null) {
+				collision.addWall(z, shape, x, loc.blockrange, angle);
 			}
 		} else if (shape == 2) {
-			int var22 = angle + 1 & 0x3;
-			ModelSource var23;
-			ModelSource var24;
+			int offset = (angle + 1) & 0x3;
+
+			ModelSource model1;
+			ModelSource model2;
 			if (loc.anim == -1) {
-				var23 = loc.getModel(2, angle + 4, var10, var11, var12, var13, -1);
-				var24 = loc.getModel(2, var22, var10, var11, var12, var13, -1);
+				model1 = loc.getModel(2, angle + 4, heightSW, heightSE, heightNW, heightNE, -1);
+				model2 = loc.getModel(2, offset, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var23 = new ClientLocAnim(var13, var12, var10, 2, angle + 4, true, var11, arg0, loc.anim);
-				var24 = new ClientLocAnim(var13, var12, var10, 2, var22, true, var11, arg0, loc.anim);
+				model1 = new ClientLocAnim(heightNE, heightNW, heightSW, 2, angle + 4, true, heightSE, locId, loc.anim);
+				model2 = new ClientLocAnim(heightNE, heightNW, heightSW, 2, offset, true, heightSE, locId, loc.anim);
 			}
-			arg4.addWall(arg6, var16, arg8, ROTATION_WALL_TYPE[var22], ROTATION_WALL_TYPE[angle], var14, var24, var23, var17, arg1);
+
+			scene.addWall(x, typecode, level, ROTATION_WALL_TYPE[offset], ROTATION_WALL_TYPE[angle], y, model2, model1, info, z);
+
 			if (loc.occlude) {
 				if (angle == 0) {
-					this.occlusion[arg8][arg6][arg1] |= 0x249;
-					this.occlusion[arg8][arg6][arg1 + 1] |= 0x492;
+					this.occlusion[level][x][z] |= 0x249;
+					this.occlusion[level][x][z + 1] |= 0x492;
 				} else if (angle == 1) {
-					this.occlusion[arg8][arg6][arg1 + 1] |= 0x492;
-					this.occlusion[arg8][arg6 + 1][arg1] |= 0x249;
+					this.occlusion[level][x][z + 1] |= 0x492;
+					this.occlusion[level][x + 1][z] |= 0x249;
 				} else if (angle == 2) {
-					this.occlusion[arg8][arg6 + 1][arg1] |= 0x249;
-					this.occlusion[arg8][arg6][arg1] |= 0x492;
+					this.occlusion[level][x + 1][z] |= 0x249;
+					this.occlusion[level][x][z] |= 0x492;
 				} else if (angle == 3) {
-					this.occlusion[arg8][arg6][arg1] |= 0x492;
-					this.occlusion[arg8][arg6][arg1] |= 0x249;
+					this.occlusion[level][x][z] |= 0x492;
+					this.occlusion[level][x][z] |= 0x249;
 				}
 			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, shape, arg6, loc.blockrange, angle);
+
+			if (loc.blockwalk && collision != null) {
+				collision.addWall(z, shape, x, loc.blockrange, angle);
 			}
+
 			if (loc.wallwidth != 16) {
-				arg4.setDecorOffset(loc.wallwidth, arg6, arg1, arg8);
+				scene.setDecorOffset(loc.wallwidth, x, z, level);
 			}
 		} else if (shape == 3) {
-			ModelSource var25;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var25 = loc.getModel(3, angle, var10, var11, var12, var13, -1);
+				model = loc.getModel(3, angle, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var25 = new ClientLocAnim(var13, var12, var10, 3, angle, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 3, angle, true, heightSE, locId, loc.anim);
 			}
-			arg4.addWall(arg6, var16, arg8, 0, ROTATION_WALL_CORNER_TYPE[angle], var14, null, var25, var17, arg1);
+
+			scene.addWall(x, typecode, level, 0, ROTATION_WALL_CORNER_TYPE[angle], y, null, model, info, z);
+
 			if (loc.shadow) {
 				if (angle == 0) {
-					this.shadow[arg8][arg6][arg1 + 1] = 50;
+					this.shadow[level][x][z + 1] = 50;
 				} else if (angle == 1) {
-					this.shadow[arg8][arg6 + 1][arg1 + 1] = 50;
+					this.shadow[level][x + 1][z + 1] = 50;
 				} else if (angle == 2) {
-					this.shadow[arg8][arg6 + 1][arg1] = 50;
+					this.shadow[level][x + 1][z] = 50;
 				} else if (angle == 3) {
-					this.shadow[arg8][arg6][arg1] = 50;
+					this.shadow[level][x][z] = 50;
 				}
 			}
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addWall(arg1, shape, arg6, loc.blockrange, angle);
+
+			if (loc.blockwalk && collision != null) {
+				collision.addWall(z, shape, x, loc.blockrange, angle);
 			}
 		} else if (shape == 9) {
-			ModelSource var26;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var26 = loc.getModel(shape, angle, var10, var11, var12, var13, -1);
+				model = loc.getModel(shape, angle, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var26 = new ClientLocAnim(var13, var12, var10, shape, angle, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, shape, angle, true, heightSE, locId, loc.anim);
 			}
-			arg4.addLoc(var17, var16, arg6, arg8, var14, 1, 0, var26, 1, arg1);
-			if (loc.blockwalk && arg5 != null) {
-				arg5.addLoc(loc.blockrange, angle, arg6, loc.length, loc.width, arg1);
+
+			scene.addLoc(info, typecode, x, level, y, 1, 0, model, 1, z);
+
+			if (loc.blockwalk && collision != null) {
+				collision.addLoc(loc.blockrange, angle, x, loc.length, loc.width, z);
 			}
 		} else if (shape == 4) {
 			ModelSource model;
 			if (loc.anim == -1) {
-				model = loc.getModel(4, 0, var10, var11, var12, var13, -1);
+				model = loc.getModel(4, 0, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				model = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 4, 0, true, heightSE, locId, loc.anim);
 			}
-			arg4.addDecor(var17, model, 0, arg6, arg1, ROTATION_WALL_TYPE[angle], 0, angle * 512, arg8, var14, var16);
+
+			scene.addDecor(info, model, 0, x, z, ROTATION_WALL_TYPE[angle], 0, angle * 512, level, y, typecode);
 		} else if (shape == 5) {
-			int var28 = 16;
-			int var29 = arg4.getWallTypecode(arg8, arg6, arg1);
-			if (var29 > 0) {
-				var28 = LocType.get(var29 >> 14 & 0x7FFF).wallwidth;
+			int wallwidth = 16;
+
+			int wallType = scene.getWallTypecode(level, x, z);
+			if (wallType > 0) {
+				wallwidth = LocType.get(wallType >> 14 & 0x7FFF).wallwidth;
 			}
-			ModelSource var30;
+
+			ModelSource model;
 			if (loc.anim == -1) {
-				var30 = loc.getModel(4, 0, var10, var11, var12, var13, -1);
+				model = loc.getModel(4, 0, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var30 = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 4, 0, true, heightSE, locId, loc.anim);
 			}
-			arg4.addDecor(var17, var30, WALL_DECORATION_ROTATION_FORWARD_X[angle] * var28, arg6, arg1, ROTATION_WALL_TYPE[angle], WALL_DECORATION_ROTATION_FORWARD_Z[angle] * var28, angle * 512, arg8, var14, var16);
+
+			scene.addDecor(info, model, WALL_DECORATION_ROTATION_FORWARD_X[angle] * wallwidth, x, z, ROTATION_WALL_TYPE[angle], WALL_DECORATION_ROTATION_FORWARD_Z[angle] * wallwidth, angle * 512, level, y, typecode);
 		} else if (shape == 6) {
-			ModelSource var31;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var31 = loc.getModel(4, 0, var10, var11, var12, var13, -1);
+				model = loc.getModel(4, 0, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var31 = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 4, 0, true, heightSE, locId, loc.anim);
 			}
-			arg4.addDecor(var17, var31, 0, arg6, arg1, 256, 0, angle, arg8, var14, var16);
+
+			scene.addDecor(info, model, 0, x, z, 256, 0, angle, level, y, typecode);
 		} else if (shape == 7) {
-			ModelSource var32;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var32 = loc.getModel(4, 0, var10, var11, var12, var13, -1);
+				model = loc.getModel(4, 0, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var32 = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 4, 0, true, heightSE, locId, loc.anim);
 			}
-			arg4.addDecor(var17, var32, 0, arg6, arg1, 512, 0, angle, arg8, var14, var16);
+
+			scene.addDecor(info, model, 0, x, z, 512, 0, angle, level, y, typecode);
 		} else if (shape == 8) {
-			ModelSource var33;
+			ModelSource model;
 			if (loc.anim == -1) {
-				var33 = loc.getModel(4, 0, var10, var11, var12, var13, -1);
+				model = loc.getModel(4, 0, heightSW, heightSE, heightNW, heightNE, -1);
 			} else {
-				var33 = new ClientLocAnim(var13, var12, var10, 4, 0, true, var11, arg0, loc.anim);
+				model = new ClientLocAnim(heightNE, heightNW, heightSW, 4, 0, true, heightSE, locId, loc.anim);
 			}
-			arg4.addDecor(var17, var33, 0, arg6, arg1, 768, 0, angle, arg8, var14, var16);
+
+			scene.addDecor(info, model, 0, x, z, 768, 0, angle, level, y, typecode);
 		}
 	}
 
@@ -1031,7 +1079,7 @@ public class World {
 		if (arg2 >= 5 && arg2 <= 8) {
 			arg2 = 4;
 		}
-		return var3.validate(arg2);
+		return var3.validateShape(arg2);
 	}
 
 	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")

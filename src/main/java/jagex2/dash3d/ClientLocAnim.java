@@ -4,7 +4,6 @@ import deob.ObfuscatedName;
 import jagex2.client.Client;
 import jagex2.config.LocType;
 import jagex2.config.SeqType;
-import jagex2.graphics.Model;
 
 @ObfuscatedName("cb")
 public class ClientLocAnim extends ModelSource {

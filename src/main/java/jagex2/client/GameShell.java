@@ -59,7 +59,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public ViewBox frame;
 
 	@ObfuscatedName("a.s")
-	public boolean refresh = true;
+	public boolean redrawScreen = true;
 
 	@ObfuscatedName("a.t")
 	public boolean hasFocus = true;
@@ -217,7 +217,9 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 				this.mouseClickY = this.lastMouseClickY;
 				this.mouseClickTime = this.lastMouseClickTime;
 				this.lastMouseClickButton = 0;
+
 				this.update();
+
 				this.keyQueueReadPos = this.keyQueueWritePos;
 				count += ratio;
 			}
@@ -299,7 +301,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.graphics = g;
 		}
 
-		this.refresh = true;
+		this.redrawScreen = true;
 		this.refresh();
 	}
 
@@ -308,7 +310,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.graphics = g;
 		}
 
-		this.refresh = true;
+		this.redrawScreen = true;
 		this.refresh();
 	}
 
@@ -531,7 +533,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	public final void focusGained(FocusEvent e) {
 		this.hasFocus = true;
-		this.refresh = true;
+		this.redrawScreen = true;
 		this.refresh();
 
 		if (InputTracking.enabled) {
@@ -627,10 +629,10 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		Font plain = new Font("Helvetica", Font.PLAIN, 13);
 		FontMetrics plainMetrics = this.getBaseComponent().getFontMetrics(plain);
 
-		if (this.refresh) {
+		if (this.redrawScreen) {
 			this.graphics.setColor(Color.black);
 			this.graphics.fillRect(0, 0, this.screenWidth, this.screenHeight);
-			this.refresh = false;
+			this.redrawScreen = false;
 		}
 
 		Color background = new Color(140, 17, 17);

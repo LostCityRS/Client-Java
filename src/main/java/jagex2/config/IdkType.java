@@ -1,7 +1,7 @@
 package jagex2.config;
 
 import jagex2.io.Jagfile;
-import jagex2.graphics.Model;
+import jagex2.dash3d.Model;
 import deob.ObfuscatedName;
 import jagex2.io.Packet;
 
@@ -82,7 +82,7 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.a(I)Z")
-	public boolean validate() {
+	public boolean validateModel() {
 		if (this.models == null) {
 			return true;
 		}

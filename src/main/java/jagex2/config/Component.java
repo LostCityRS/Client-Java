@@ -4,7 +4,7 @@ import deob.ObfuscatedName;
 import jagex2.client.Client;
 import jagex2.datastruct.JString;
 import jagex2.datastruct.LruCache;
-import jagex2.graphics.Model;
+import jagex2.dash3d.Model;
 import jagex2.graphics.Pix32;
 import jagex2.graphics.PixFont;
 import jagex2.io.Jagfile;
@@ -225,8 +225,8 @@ public class Component {
 			com.width = data.g2();
 			com.height = data.g2();
 			com.alpha = (byte) data.g1();
-			com.overlayer = data.g1();
 
+			com.overlayer = data.g1();
 			if (com.overlayer == 0) {
 				com.overlayer = -1;
 			} else {
@@ -310,6 +310,7 @@ public class Component {
 				com.iop = new String[5];
 				for (int i = 0; i < 5; i++) {
 					com.iop[i] = data.gjstr();
+
 					if (com.iop[i].length() == 0) {
 						com.iop[i] = null;
 					}

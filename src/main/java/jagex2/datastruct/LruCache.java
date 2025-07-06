@@ -37,7 +37,7 @@ public class LruCache {
 		if (node == null) {
 			this.notFound++;
 		} else {
-			this.history.addTail(node);
+			this.history.push(node);
 			this.found++;
 		}
 
@@ -47,12 +47,12 @@ public class LruCache {
 	@ObfuscatedName("t.a(Lx;JI)V")
 	public void put(DoublyLinkable node, long key) {
 		if (this.available == 0) {
-			DoublyLinkable sentinel = this.history.removeHead();
+			DoublyLinkable sentinel = this.history.pop();
 			sentinel.unlink();
 			sentinel.unlink2();
 
 			if (this.search == sentinel) {
-				DoublyLinkable next = this.history.removeHead();
+				DoublyLinkable next = this.history.pop();
 				next.unlink();
 				next.unlink2();
 			}
@@ -61,13 +61,13 @@ public class LruCache {
 		}
 
 		this.table.put(key, node);
-		this.history.addTail(node);
+		this.history.push(node);
 	}
 
 	@ObfuscatedName("t.a()V")
 	public void clear() {
 		while (true) {
-			DoublyLinkable node = this.history.removeHead();
+			DoublyLinkable node = this.history.pop();
 			if (node == null) {
 				this.available = this.capacity;
 				return;

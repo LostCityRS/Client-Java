@@ -69,13 +69,13 @@ public class Packet extends DoublyLinkable {
 
 			if (size == 0 && cacheMinCount > 0) {
 				cacheMinCount--;
-				buf = (Packet) cacheMin.removeHead();
+				buf = (Packet) cacheMin.pop();
 			} else if (size == 1 && cacheMidCount > 0) {
 				cacheMidCount--;
-				buf = (Packet) cacheMid.removeHead();
+				buf = (Packet) cacheMid.pop();
 			} else if (size == 2 && cacheMaxCount > 0) {
 				cacheMaxCount--;
-				buf = (Packet) cacheMax.removeHead();
+				buf = (Packet) cacheMax.pop();
 			}
 
 			if (buf != null) {
@@ -105,13 +105,13 @@ public class Packet extends DoublyLinkable {
 			this.pos = 0;
 
 			if (this.data.length == 100 && cacheMinCount < 1000) {
-				cacheMin.addTail(this);
+				cacheMin.push(this);
 				cacheMinCount++;
 			} else if (this.data.length == 5000 && cacheMidCount < 250) {
-				cacheMid.addTail(this);
+				cacheMid.push(this);
 				cacheMidCount++;
 			} else if (this.data.length == 30000 && cacheMaxCount < 50) {
-				cacheMax.addTail(this);
+				cacheMax.push(this);
 				cacheMaxCount++;
 			}
 		}

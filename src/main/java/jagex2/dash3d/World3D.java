@@ -2,10 +2,8 @@ package jagex2.dash3d;
 
 import deob.*;
 import jagex2.datastruct.LinkList;
-import jagex2.graphics.Model;
 import jagex2.graphics.Pix2D;
 import jagex2.graphics.Pix3D;
-import jagex2.graphics.VertexNormal;
 
 @ObfuscatedName("s")
 public class World3D {
@@ -709,36 +707,41 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIIII)V")
-	public void buildModels(int arg0, int arg1, int arg3, int arg4, int arg5) {
-		int var7 = (int) Math.sqrt((double) (arg1 * arg1 + arg0 * arg0 + arg3 * arg3));
-		int var8 = arg5 * var7 >> 8;
-		for (int var9 = 0; var9 < this.maxLevel; var9++) {
-			for (int var10 = 0; var10 < this.maxTileX; var10++) {
-				for (int var11 = 0; var11 < this.maxTileZ; var11++) {
-					Square var12 = this.levelTiles[var9][var10][var11];
-					if (var12 != null) {
-						Wall var13 = var12.wall;
-						if (var13 != null && var13.model1 != null && var13.model1.vertexNormal != null) {
-							this.mergeLocNormals(var11, (Model) var13.model1, var10, var9, 1, 1);
-							if (var13.model2 != null && var13.model2.vertexNormal != null) {
-								this.mergeLocNormals(var11, (Model) var13.model2, var10, var9, 1, 1);
-								this.mergeNormals((Model) var13.model1, (Model) var13.model2, 0, 0, 0, false);
-								((Model) var13.model2).applyLighting(arg4, var8, arg3, arg0, arg1);
-							}
-							((Model) var13.model1).applyLighting(arg4, var8, arg3, arg0, arg1);
+	public void buildModels(int lightSrcY, int lightSrcX, int lgihtSrcZ, int arg4, int lightAttenuation) {
+		int lightMagnitude = (int) Math.sqrt(lightSrcX * lightSrcX + lightSrcY * lightSrcY + lgihtSrcZ * lgihtSrcZ);
+		int attenuation = (lightAttenuation * lightMagnitude) >> 8;
+
+		for (int level = 0; level < this.maxLevel; level++) {
+			for (int tileX = 0; tileX < this.maxTileX; tileX++) {
+				for (int tileZ = 0; tileZ < this.maxTileZ; tileZ++) {
+					Square tile = this.levelTiles[level][tileX][tileZ];
+					if (tile == null) {
+						continue;
+					}
+
+					Wall var13 = tile.wall;
+					if (var13 != null && var13.model1 != null && var13.model1.vertexNormal != null) {
+						this.mergeLocNormals(tileZ, (Model) var13.model1, tileX, level, 1, 1);
+						if (var13.model2 != null && var13.model2.vertexNormal != null) {
+							this.mergeLocNormals(tileZ, (Model) var13.model2, tileX, level, 1, 1);
+							this.mergeNormals((Model) var13.model1, (Model) var13.model2, 0, 0, 0, false);
+							((Model) var13.model2).applyLighting(arg4, attenuation, lgihtSrcZ, lightSrcY, lightSrcX);
 						}
-						for (int var14 = 0; var14 < var12.primaryCount; var14++) {
-							Sprite var16 = var12.sprite[var14];
-							if (var16 != null && var16.model != null && var16.model.vertexNormal != null) {
-								this.mergeLocNormals(var11, (Model) var16.model, var10, var9, var16.maxGridX - var16.minGridX + 1, var16.maxGridZ - var16.minGridZ + 1);
-								((Model) var16.model).applyLighting(arg4, var8, arg3, arg0, arg1);
-							}
+						((Model) var13.model1).applyLighting(arg4, attenuation, lgihtSrcZ, lightSrcY, lightSrcX);
+					}
+
+					for (int var14 = 0; var14 < tile.primaryCount; var14++) {
+						Sprite loc = tile.sprite[var14];
+						if (loc != null && loc.model != null && loc.model.vertexNormal != null) {
+							this.mergeLocNormals(tileZ, (Model) loc.model, tileX, level, loc.maxGridX - loc.minGridX + 1, loc.maxGridZ - loc.minGridZ + 1);
+							((Model) loc.model).applyLighting(arg4, attenuation, lgihtSrcZ, lightSrcY, lightSrcX);
 						}
-						GroundDecor var15 = var12.groundDecor;
-						if (var15 != null && var15.model.vertexNormal != null) {
-							this.mergeGroundDecorNormals(var11, var9, var10, (Model) var15.model);
-							((Model) var15.model).applyLighting(arg4, var8, arg3, arg0, arg1);
-						}
+					}
+
+					GroundDecor decor = tile.groundDecor;
+					if (decor != null && decor.model.vertexNormal != null) {
+						this.mergeGroundDecorNormals(tileZ, level, tileX, (Model) decor.model);
+						((Model) decor.model).applyLighting(arg4, attenuation, lgihtSrcZ, lightSrcY, lightSrcX);
 					}
 				}
 			}
@@ -816,54 +819,63 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(Lfb;Lfb;IIIZ)V")
-	public void mergeNormals(Model arg0, Model arg1, int arg2, int arg3, int arg4, boolean arg5) {
+	public void mergeNormals(Model modelA, Model modelB, int arg2, int offsetY, int arg4, boolean arg5) {
 		this.tmpMergeIndex++;
-		int var7 = 0;
-		int[] var8 = arg1.vertexX;
-		int var9 = arg1.vertexCount;
-		for (int var10 = 0; var10 < arg0.vertexCount; var10++) {
-			VertexNormal var13 = arg0.vertexNormal[var10];
-			VertexNormal var14 = arg0.vertexNormalOriginal[var10];
-			if (var14.w != 0) {
-				int var15 = arg0.vertexY[var10] - arg3;
-				if (var15 <= arg1.maxY) {
-					int var16 = arg0.vertexX[var10] - arg2;
-					if (var16 >= arg1.minX && var16 <= arg1.maxX) {
-						int var17 = arg0.vertexZ[var10] - arg4;
-						if (var17 >= arg1.minZ && var17 <= arg1.maxZ) {
-							for (int var18 = 0; var18 < var9; var18++) {
-								VertexNormal var19 = arg1.vertexNormal[var18];
-								VertexNormal var20 = arg1.vertexNormalOriginal[var18];
-								if (var8[var18] == var16 && arg1.vertexZ[var18] == var17 && arg1.vertexY[var18] == var15 && var20.w != 0) {
-									var13.x += var20.x;
-									var13.y += var20.y;
-									var13.z += var20.z;
-									var13.w += var20.w;
-									var19.x += var14.x;
-									var19.y += var14.y;
-									var19.z += var14.z;
-									var19.w += var14.w;
-									var7++;
-									this.mergeIndexA[var10] = this.tmpMergeIndex;
-									this.mergeIndexB[var18] = this.tmpMergeIndex;
-								}
-							}
-						}
+
+		int merged = 0;
+		int[] vertexX = modelB.vertexX;
+		int vertexCountB = modelB.vertexCount;
+
+		for (int vertexA = 0; vertexA < modelA.vertexCount; vertexA++) {
+			VertexNormal normalA = modelA.vertexNormal[vertexA];
+			VertexNormal originalNormalA = modelA.vertexNormalOriginal[vertexA];
+
+			if (originalNormalA.w != 0) {
+				int y = modelA.vertexY[vertexA] - offsetY;
+				if (y > modelB.maxY) {
+					continue;
+				}
+
+				int x = modelA.vertexX[vertexA] - arg2;
+				if (x < modelB.minX || x > modelB.maxX) {
+					continue;
+				}
+
+				int z = modelA.vertexZ[vertexA] - arg4;
+				if (z < modelB.minZ || z > modelB.maxZ) {
+					continue;
+				}
+
+				for (int var18 = 0; var18 < vertexCountB; var18++) {
+					VertexNormal var19 = modelB.vertexNormal[var18];
+					VertexNormal var20 = modelB.vertexNormalOriginal[var18];
+					if (vertexX[var18] == x && modelB.vertexZ[var18] == z && modelB.vertexY[var18] == y && var20.w != 0) {
+						normalA.x += var20.x;
+						normalA.y += var20.y;
+						normalA.z += var20.z;
+						normalA.w += var20.w;
+						var19.x += originalNormalA.x;
+						var19.y += originalNormalA.y;
+						var19.z += originalNormalA.z;
+						var19.w += originalNormalA.w;
+						merged++;
+						this.mergeIndexA[vertexA] = this.tmpMergeIndex;
+						this.mergeIndexB[var18] = this.tmpMergeIndex;
 					}
 				}
 			}
 		}
-		if (var7 < 3 || !arg5) {
+		if (merged < 3 || !arg5) {
 			return;
 		}
-		for (int var11 = 0; var11 < arg0.faceCount; var11++) {
-			if (this.mergeIndexA[arg0.faceVertexA[var11]] == this.tmpMergeIndex && this.mergeIndexA[arg0.faceVertexB[var11]] == this.tmpMergeIndex && this.mergeIndexA[arg0.faceVertexC[var11]] == this.tmpMergeIndex) {
-				arg0.faceInfo[var11] = -1;
+		for (int var11 = 0; var11 < modelA.faceCount; var11++) {
+			if (this.mergeIndexA[modelA.faceVertexA[var11]] == this.tmpMergeIndex && this.mergeIndexA[modelA.faceVertexB[var11]] == this.tmpMergeIndex && this.mergeIndexA[modelA.faceVertexC[var11]] == this.tmpMergeIndex) {
+				modelA.faceInfo[var11] = -1;
 			}
 		}
-		for (int var12 = 0; var12 < arg1.faceCount; var12++) {
-			if (this.mergeIndexB[arg1.faceVertexA[var12]] == this.tmpMergeIndex && this.mergeIndexB[arg1.faceVertexB[var12]] == this.tmpMergeIndex && this.mergeIndexB[arg1.faceVertexC[var12]] == this.tmpMergeIndex) {
-				arg1.faceInfo[var12] = -1;
+		for (int var12 = 0; var12 < modelB.faceCount; var12++) {
+			if (this.mergeIndexB[modelB.faceVertexA[var12]] == this.tmpMergeIndex && this.mergeIndexB[modelB.faceVertexB[var12]] == this.tmpMergeIndex && this.mergeIndexB[modelB.faceVertexC[var12]] == this.tmpMergeIndex) {
+				modelB.faceInfo[var12] = -1;
 			}
 		}
 	}
@@ -1175,7 +1187,7 @@ public class World3D {
 
 	@ObfuscatedName("s.a(Lw;Z)V")
 	public void drawTile(Square arg0, boolean arg1) {
-		drawTileQueue.addTail(arg0);
+		drawTileQueue.push(arg0);
 		while (true) {
 			Square var3;
 			int var4;
@@ -1196,7 +1208,7 @@ public class World3D {
 									while (true) {
 										while (true) {
 											do {
-												var3 = (Square) drawTileQueue.removeHead();
+												var3 = (Square) drawTileQueue.pop();
 												if (var3 == null) {
 													return;
 												}
@@ -1374,25 +1386,25 @@ public class World3D {
 												if (var4 < eyeTileX && (var35 & 0x4) != 0) {
 													Square var36 = var8[var4 + 1][var5];
 													if (var36 != null && var36.drawBack) {
-														drawTileQueue.addTail(var36);
+														drawTileQueue.push(var36);
 													}
 												}
 												if (var5 < eyeTileZ && (var35 & 0x2) != 0) {
 													Square var37 = var8[var4][var5 + 1];
 													if (var37 != null && var37.drawBack) {
-														drawTileQueue.addTail(var37);
+														drawTileQueue.push(var37);
 													}
 												}
 												if (var4 > eyeTileX && (var35 & 0x1) != 0) {
 													Square var38 = var8[var4 - 1][var5];
 													if (var38 != null && var38.drawBack) {
-														drawTileQueue.addTail(var38);
+														drawTileQueue.push(var38);
 													}
 												}
 												if (var5 > eyeTileZ && (var35 & 0x8) != 0) {
 													Square var39 = var8[var4][var5 - 1];
 													if (var39 != null && var39.drawBack) {
-														drawTileQueue.addTail(var39);
+														drawTileQueue.push(var39);
 													}
 												}
 											}
@@ -1488,9 +1500,9 @@ public class World3D {
 												for (int var51 = var49.minGridZ; var51 <= var49.maxGridZ; var51++) {
 													Square var52 = var8[var50][var51];
 													if (var52.cornerSides != 0) {
-														drawTileQueue.addTail(var52);
+														drawTileQueue.push(var52);
 													} else if ((var4 != var50 || var5 != var51) && var52.drawBack) {
-														drawTileQueue.addTail(var52);
+														drawTileQueue.push(var52);
 													}
 												}
 											}
@@ -1582,31 +1594,31 @@ public class World3D {
 			if (var6 < this.maxLevel - 1) {
 				Square var80 = this.levelTiles[var6 + 1][var4][var5];
 				if (var80 != null && var80.drawBack) {
-					drawTileQueue.addTail(var80);
+					drawTileQueue.push(var80);
 				}
 			}
 			if (var4 < eyeTileX) {
 				Square var81 = var8[var4 + 1][var5];
 				if (var81 != null && var81.drawBack) {
-					drawTileQueue.addTail(var81);
+					drawTileQueue.push(var81);
 				}
 			}
 			if (var5 < eyeTileZ) {
 				Square var82 = var8[var4][var5 + 1];
 				if (var82 != null && var82.drawBack) {
-					drawTileQueue.addTail(var82);
+					drawTileQueue.push(var82);
 				}
 			}
 			if (var4 > eyeTileX) {
 				Square var83 = var8[var4 - 1][var5];
 				if (var83 != null && var83.drawBack) {
-					drawTileQueue.addTail(var83);
+					drawTileQueue.push(var83);
 				}
 			}
 			if (var5 > eyeTileZ) {
 				Square var84 = var8[var4][var5 - 1];
 				if (var84 != null && var84.drawBack) {
-					drawTileQueue.addTail(var84);
+					drawTileQueue.push(var84);
 				}
 			}
 		}

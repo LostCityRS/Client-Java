@@ -17,7 +17,7 @@ public class DoublyLinkList {
 	}
 
 	@ObfuscatedName("qb.a(Lx;)V")
-	public void addTail(DoublyLinkable node) {
+	public void push(DoublyLinkable node) {
 		if (node.prev2 != null) {
 			node.unlink2();
 		}
@@ -29,7 +29,7 @@ public class DoublyLinkList {
 	}
 
 	@ObfuscatedName("qb.a()Lx;")
-	public DoublyLinkable removeHead() {
+	public DoublyLinkable pop() {
 		DoublyLinkable node = this.sentinel.next2;
 		if (this.sentinel == node) {
 			return null;

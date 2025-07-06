@@ -2,8 +2,6 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 import jagex2.datastruct.DoublyLinkable;
-import jagex2.graphics.Model;
-import jagex2.graphics.VertexNormal;
 
 @ObfuscatedName("y")
 public class ModelSource extends DoublyLinkable {

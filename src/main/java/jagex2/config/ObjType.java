@@ -2,7 +2,7 @@ package jagex2.config;
 
 import deob.*;
 import jagex2.datastruct.LruCache;
-import jagex2.graphics.Model;
+import jagex2.dash3d.Model;
 import jagex2.graphics.Pix2D;
 import jagex2.graphics.Pix32;
 import jagex2.graphics.Pix3D;
@@ -67,10 +67,10 @@ public class ObjType {
 	public int yof2d;
 
 	@ObfuscatedName("hc.v")
-	public boolean field1041;
+	public boolean code9;
 
 	@ObfuscatedName("hc.w")
-	public int field1042;
+	public int code10;
 
 	@ObfuscatedName("hc.x")
 	public boolean stackable;
@@ -159,10 +159,9 @@ public class ObjType {
 	@ObfuscatedName("hc.a(Lyb;)V")
 	public static final void unpack(Jagfile config) {
 		data = new Packet(config.read("obj.dat", null));
-
 		Packet temp = new Packet(config.read("obj.idx", null));
-		count = temp.g2();
 
+		count = temp.g2();
 		idx = new int[count];
 
 		int pos = 2;
@@ -229,8 +228,8 @@ public class ObjType {
 		this.zan2d = 0;
 		this.xof2d = 0;
 		this.yof2d = 0;
-		this.field1041 = false;
-		this.field1042 = -1;
+		this.code9 = false;
+		this.code10 = -1;
 		this.stackable = false;
 		this.cost = 1;
 		this.members = false;
@@ -290,9 +289,9 @@ public class ObjType {
 					this.yof2d -= 65536;
 				}
 			} else if (code == 9) {
-				this.field1041 = true;
+				this.code9 = true;
 			} else if (code == 10) {
-				this.field1042 = buf.g2();
+				this.code10 = buf.g2();
 			} else if (code == 11) {
 				this.stackable = true;
 			} else if (code == 12) {
@@ -410,6 +409,7 @@ public class ObjType {
 					index = this.countobj[i];
 				}
 			}
+
 			if (index != -1) {
 				return get(index).getModel(1);
 			}
@@ -450,6 +450,7 @@ public class ObjType {
 					index = this.countobj[i];
 				}
 			}
+
 			if (index != -1) {
 				return get(index).getInvModel(1);
 			}
@@ -497,6 +498,7 @@ public class ObjType {
 					countObj = obj.countobj[i];
 				}
 			}
+
 			if (countObj != -1) {
 				obj = get(countObj);
 			}
@@ -537,8 +539,7 @@ public class ObjType {
 		int zoom = obj.zoom2d;
 		if (outlineRgb == -1) {
 			zoom = (int) ((double) zoom * 1.5D);
-		}
-		if (outlineRgb > 0) {
+		} else if (outlineRgb > 0) {
 			zoom = (int) ((double) zoom * 1.04D);
 		}
 
@@ -688,6 +689,7 @@ public class ObjType {
 				model.recolour(this.recol_s[i], this.recol_d[i]);
 			}
 		}
+
 		return model;
 	}
 

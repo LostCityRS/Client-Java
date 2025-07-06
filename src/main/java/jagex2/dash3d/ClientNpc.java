@@ -4,7 +4,6 @@ import deob.ObfuscatedName;
 import jagex2.config.NpcType;
 import jagex2.config.SeqType;
 import jagex2.config.SpotAnimType;
-import jagex2.graphics.Model;
 
 @ObfuscatedName("ab")
 public class ClientNpc extends ClientEntity {

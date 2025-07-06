@@ -2,7 +2,7 @@ package jagex2.config;
 
 import deob.ObfuscatedName;
 import jagex2.datastruct.LruCache;
-import jagex2.graphics.Model;
+import jagex2.dash3d.Model;
 import jagex2.io.Jagfile;
 import jagex2.io.Packet;
 
@@ -97,7 +97,7 @@ public class NpcType {
 	public int headicon = -1;
 
 	@ObfuscatedName("gc.G")
-	public static LruCache modelCacheStatic = new LruCache(30);
+	public static LruCache modelCache = new LruCache(30);
 
 	@ObfuscatedName("gc.D")
 	public int ambient;
@@ -108,10 +108,9 @@ public class NpcType {
 	@ObfuscatedName("gc.a(Lyb;)V")
 	public static final void unpack(Jagfile config) {
 		data = new Packet(config.read("npc.dat", null));
-
 		Packet temp = new Packet(config.read("npc.idx", null));
-		count = temp.g2();
 
+		count = temp.g2();
 		idx = new int[count];
 
 		int pos = 2;
@@ -128,7 +127,7 @@ public class NpcType {
 
 	@ObfuscatedName("gc.a(B)V")
 	public static final void unload() {
-		modelCacheStatic = null;
+		modelCache = null;
 		idx = null;
 		cache = null;
 		data = null;
@@ -236,7 +235,7 @@ public class NpcType {
 
 	@ObfuscatedName("gc.a(BII[I)Lfb;")
 	public final Model getModel(int primaryTransformId, int secondaryTransformId, int[] seqMask) {
-		Model model = (Model) modelCacheStatic.get(this.id);
+		Model model = (Model) modelCache.get(this.id);
 		if (model == null) {
 			boolean exists = false;
 			for (int i = 0; i < this.models.length; i++) {
@@ -267,7 +266,7 @@ public class NpcType {
 
 			model.createLabelReferences();
 			model.calculateNormals(this.ambient + 64, this.contrast + 850, -30, -50, -30, true);
-			modelCacheStatic.put(model, this.id);
+			modelCache.put(model, this.id);
 		}
 
 		Model tmp = Model.empty;

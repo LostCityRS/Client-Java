@@ -2,7 +2,7 @@ package jagex2.config;
 
 import deob.*;
 import jagex2.datastruct.LruCache;
-import jagex2.graphics.Model;
+import jagex2.dash3d.Model;
 import jagex2.io.Jagfile;
 import jagex2.io.OnDemand;
 import jagex2.io.Packet;
@@ -136,10 +136,9 @@ public class LocType {
 	@ObfuscatedName("ec.a(Lyb;)V")
 	public static final void unpack(Jagfile config) {
 		data = new Packet(config.read("loc.dat", null));
-
 		Packet temp = new Packet(config.read("loc.idx", null));
-		count = temp.g2();
 
+		count = temp.g2();
 		idx = new int[count];
 
 		int pos = 2;
@@ -334,7 +333,7 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(II)Z")
-	public final boolean validate(int shape) {
+	public final boolean validateShape(int shape) {
 		int index = -1;
 		for (int i = 0; i < this.shapes.length; i++) {
 			if (this.shapes[i] == shape) {
@@ -355,7 +354,7 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.b(I)Z")
-	public final boolean validate() {
+	public final boolean validateModels() {
 		boolean exists = true;
 		if (this.models == null) {
 			return true;
@@ -404,106 +403,11 @@ public class LocType {
 		}
 
 		Model model = (Model) modelCacheDynamic.get(key);
-		if (model == null) {
-			if (this.models == null || index >= this.models.length) {
-				return null;
+		if (model != null) {
+			if (ignoreCache) {
+				return model;
 			}
 
-			int modelId = this.models[index];
-			if (modelId == -1) {
-				return null;
-			}
-
-			boolean flip = this.mirror ^ angle > 3;
-			if (flip) {
-				modelId += 65536;
-			}
-
-			model = (Model) modelCacheStatic.get(modelId);
-			if (model == null) {
-				model = Model.tryGet(modelId & 0xFFFF);
-				if (model == null) {
-					return null;
-				}
-
-				if (flip) {
-					model.rotateY180();
-				}
-
-				modelCacheStatic.put(model, modelId);
-			}
-
-			boolean scaled;
-			if (this.resizex == 128 && this.resizey == 128 && this.resizez == 128) {
-				scaled = false;
-			} else {
-				scaled = true;
-			}
-
-			boolean translated;
-			if (this.offsetx == 0 && this.offsety == 0 && this.offsetz == 0) {
-				translated = false;
-			} else {
-				translated = true;
-			}
-
-			Model modified = new Model(model, this.recol_s == null, angle == 0 && transformId == -1 && !scaled && !translated, !this.animHasAlpha);
-			if (transformId != -1) {
-				modified.createLabelReferences();
-				modified.applyTransform(transformId);
-				modified.labelFaces = null;
-				modified.labelVertices = null;
-			}
-
-			while (angle-- > 0) {
-				modified.rotateY90();
-			}
-
-			if (this.recol_s != null) {
-				for (int i = 0; i < this.recol_s.length; i++) {
-					modified.recolour(this.recol_s[i], this.recol_d[i]);
-				}
-			}
-
-			if (scaled) {
-				modified.scale(this.resizey, this.resizez, this.resizex);
-			}
-
-			if (translated) {
-				modified.translate(this.offsety, this.offsetx, this.offsetz);
-			}
-
-			modified.calculateNormals(this.ambient + 64, this.contrast * 5 + 768, -50, -10, -50, !this.sharelight);
-
-			if (this.blockwalk) {
-				modified.objRaise = modified.minY;
-			}
-
-			modelCacheDynamic.put(modified, key);
-
-			if (this.hillskew || this.sharelight) {
-				modified = new Model(this.sharelight, this.hillskew, modified);
-			}
-
-			if (this.hillskew) {
-				int groundY = (heightmapSW + heightmapSE + heightmapNE + heightmapNW) / 4;
-
-				for (int i = 0; i < modified.vertexCount; i++) {
-					int x = modified.vertexX[i];
-					int z = modified.vertexZ[i];
-					int heightS = (heightmapSE - heightmapSW) * (x + 64) / 128 + heightmapSW;
-					int heightN = (heightmapNE - heightmapNW) * (x + 64) / 128 + heightmapNW;
-					int y = (heightN - heightS) * (z + 64) / 128 + heightS;
-					modified.vertexY[i] += y - groundY;
-				}
-
-				modified.calculateBoundsY();
-			}
-
-			return modified;
-		} else if (ignoreCache) {
-			return model;
-		} else {
 			if (this.hillskew || this.sharelight) {
 				model = new Model(this.sharelight, this.hillskew, model);
 			}
@@ -514,9 +418,11 @@ public class LocType {
 				for (int i = 0; i < model.vertexCount; i++) {
 					int x = model.vertexX[i];
 					int z = model.vertexZ[i];
+
 					int heightS = (heightmapSE - heightmapSW) * (x + 64) / 128 + heightmapSW;
 					int heightN = (heightmapNE - heightmapNW) * (x + 64) / 128 + heightmapNW;
 					int y = (heightN - heightS) * (z + 64) / 128 + heightS;
+
 					model.vertexY[i] += y - groundY;
 				}
 
@@ -525,5 +431,104 @@ public class LocType {
 
 			return model;
 		}
+
+		if (this.models == null || index >= this.models.length) {
+			return null;
+		}
+
+		int modelId = this.models[index];
+		if (modelId == -1) {
+			return null;
+		}
+
+		boolean flip = this.mirror ^ angle > 3;
+		if (flip) {
+			modelId += 65536;
+		}
+
+		model = (Model) modelCacheStatic.get(modelId);
+		if (model == null) {
+			model = Model.tryGet(modelId & 0xFFFF);
+			if (model == null) {
+				return null;
+			}
+
+			if (flip) {
+				model.rotateY180();
+			}
+
+			modelCacheStatic.put(model, modelId);
+		}
+
+		boolean scaled;
+		if (this.resizex == 128 && this.resizey == 128 && this.resizez == 128) {
+			scaled = false;
+		} else {
+			scaled = true;
+		}
+
+		boolean translated;
+		if (this.offsetx == 0 && this.offsety == 0 && this.offsetz == 0) {
+			translated = false;
+		} else {
+			translated = true;
+		}
+
+		Model modified = new Model(model, this.recol_s == null, angle == 0 && transformId == -1 && !scaled && !translated, !this.animHasAlpha);
+		if (transformId != -1) {
+			modified.createLabelReferences();
+			modified.applyTransform(transformId);
+			modified.labelFaces = null;
+			modified.labelVertices = null;
+		}
+
+		while (angle-- > 0) {
+			modified.rotateY90();
+		}
+
+		if (this.recol_s != null) {
+			for (int i = 0; i < this.recol_s.length; i++) {
+				modified.recolour(this.recol_s[i], this.recol_d[i]);
+			}
+		}
+
+		if (scaled) {
+			modified.scale(this.resizey, this.resizez, this.resizex);
+		}
+
+		if (translated) {
+			modified.translate(this.offsety, this.offsetx, this.offsetz);
+		}
+
+		modified.calculateNormals(this.ambient + 64, this.contrast * 5 + 768, -50, -10, -50, !this.sharelight);
+
+		if (this.blockwalk) {
+			modified.objRaise = modified.minY;
+		}
+
+		modelCacheDynamic.put(modified, key);
+
+		if (this.hillskew || this.sharelight) {
+			modified = new Model(this.sharelight, this.hillskew, modified);
+		}
+
+		if (this.hillskew) {
+			int groundY = (heightmapSW + heightmapSE + heightmapNE + heightmapNW) / 4;
+
+			for (int i = 0; i < modified.vertexCount; i++) {
+				int x = modified.vertexX[i];
+				int z = modified.vertexZ[i];
+
+				int heightS = (heightmapSE - heightmapSW) * (x + 64) / 128 + heightmapSW;
+				int heightN = (heightmapNE - heightmapNW) * (x + 64) / 128 + heightmapNW;
+				int y = (heightN - heightS) * (z + 64) / 128 + heightS;
+
+				modified.vertexY[i] += y - groundY;
+			}
+
+			modified.calculateBoundsY();
+		}
+
+		return modified;
 	}
 }

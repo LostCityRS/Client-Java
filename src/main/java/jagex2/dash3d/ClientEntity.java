@@ -86,7 +86,7 @@ public class ClientEntity extends ModelSource {
 	public boolean[] pathRunning = new boolean[10];
 
 	@ObfuscatedName("z.nb")
-	public int seqTrigger;
+	public int seqDelayMove;
 
 	@ObfuscatedName("z.ob")
 	public int seqPathLength;
@@ -194,7 +194,7 @@ public class ClientEntity extends ModelSource {
 		}
 		this.pathLength = 0;
 		this.seqPathLength = 0;
-		this.seqTrigger = 0;
+		this.seqDelayMove = 0;
 		this.routeTileX[0] = arg1;
 		this.routeTileZ[0] = arg2;
 		this.x = this.routeTileX[0] * 128 + this.size * 64;

@@ -2,7 +2,6 @@ package jagex2.dash3d;
 
 import deob.ObfuscatedName;
 import jagex2.config.SpotAnimType;
-import jagex2.graphics.Model;
 
 @ObfuscatedName("eb")
 public class ClientProj extends ModelSource {

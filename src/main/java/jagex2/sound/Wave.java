@@ -13,7 +13,7 @@ public class Wave {
 	public static int[] delays = new int[1000];
 
 	@ObfuscatedName("cc.f")
-	public static byte[] waveBytes = new byte[441000];
+	public static byte[] waveBytes = new byte[44100 * 10];
 
 	@ObfuscatedName("cc.g")
 	public static Packet waveBuffer = new Packet(waveBytes);
@@ -38,7 +38,7 @@ public class Wave {
 			}
 
 			tracks[id] = new Wave();
-			tracks[id].readWave(buf);
+			tracks[id].read(buf);
 			delays[id] = tracks[id].trim();
 		}
 	}
@@ -47,18 +47,19 @@ public class Wave {
 	public static final Packet generate(int loopCount, int id) {
 		if (tracks[id] == null) {
 			return null;
-		} else {
-			Wave wave = tracks[id];
-			return wave.getWave(loopCount);
 		}
+
+		Wave wave = tracks[id];
+		return wave.getWave(loopCount);
 	}
 
 	@ObfuscatedName("cc.a(ILmb;)V")
-	public final void readWave(Packet buf) {
+	public final void read(Packet buf) {
 		for (int tone = 0; tone < 10; tone++) {
 			int hasTone = buf.g1();
 			if (hasTone != 0) {
 				buf.pos--;
+
 				this.tones[tone] = new Tone();
 				this.tones[tone].unpack(buf);
 			}
