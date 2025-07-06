@@ -82,20 +82,20 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.a(I)Z")
-	public boolean validateModel() {
+	public boolean modelIsReady() {
 		if (this.models == null) {
 			return true;
 		}
 
-		boolean downloaded = true;
+		boolean ready = true;
 
 		for (int i = 0; i < this.models.length; i++) {
-			if (!Model.validate(this.models[i])) {
-				downloaded = false;
+			if (!Model.isReady(this.models[i])) {
+				ready = false;
 			}
 		}
 
-		return downloaded;
+		return ready;
 	}
 
 	@ObfuscatedName("lc.b(I)Lfb;")
@@ -128,7 +128,7 @@ public class IdkType {
 		boolean downloaded = true;
 
 		for (int i = 0; i < 5; i++) {
-			if (this.heads[i] != -1 && !Model.validate(this.heads[i])) {
+			if (this.heads[i] != -1 && !Model.isReady(this.heads[i])) {
 				downloaded = false;
 			}
 		}

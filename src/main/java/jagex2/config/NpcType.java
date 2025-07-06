@@ -236,14 +236,15 @@ public class NpcType {
 	@ObfuscatedName("gc.a(BII[I)Lfb;")
 	public final Model getModel(int primaryTransformId, int secondaryTransformId, int[] seqMask) {
 		Model model = (Model) modelCache.get(this.id);
+
 		if (model == null) {
-			boolean exists = false;
+			boolean ready = false;
 			for (int i = 0; i < this.models.length; i++) {
-				if (!Model.validate(this.models[i])) {
-					exists = true;
+				if (!Model.isReady(this.models[i])) {
+					ready = true;
 				}
 			}
-			if (exists) {
+			if (ready) {
 				return null;
 			}
 
@@ -301,7 +302,7 @@ public class NpcType {
 
 		boolean exists = false;
 		for (int i = 0; i < this.heads.length; i++) {
-			if (!Model.validate(this.heads[i])) {
+			if (!Model.isReady(this.heads[i])) {
 				exists = true;
 			}
 		}

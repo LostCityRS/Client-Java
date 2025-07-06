@@ -62,7 +62,7 @@ public class MapSpotAnim extends ModelSource {
 	}
 
 	@ObfuscatedName("gb.a(I)Lfb;")
-	public final Model getTempModel() {
+	public final Model getModel() {
 		Model var2 = this.type.getModel();
 		if (var2 == null) {
 			return null;

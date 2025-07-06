@@ -622,7 +622,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.b(II)Z")
-	public final boolean validateWornModel(int gender) {
+	public final boolean wornModelIsReady(int gender) {
 		int wear = this.manwear;
 		int wear2 = this.manwear2;
 		int wear3 = this.manwear3;
@@ -636,17 +636,17 @@ public class ObjType {
 			return true;
 		}
 
-		boolean exists = true;
-		if (!Model.validate(wear)) {
-			exists = false;
+		boolean ready = true;
+		if (!Model.isReady(wear)) {
+			ready = false;
 		}
-		if (wear2 != -1 && !Model.validate(wear2)) {
-			exists = false;
+		if (wear2 != -1 && !Model.isReady(wear2)) {
+			ready = false;
 		}
-		if (wear3 != -1 && !Model.validate(wear3)) {
-			exists = false;
+		if (wear3 != -1 && !Model.isReady(wear3)) {
+			ready = false;
 		}
-		return exists;
+		return ready;
 	}
 
 	@ObfuscatedName("hc.a(ZI)Lfb;")
@@ -694,7 +694,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.c(II)Z")
-	public final boolean validateHeadModel(int gender) {
+	public final boolean headModelIsReady(int gender) {
 		int head = this.manhead;
 		int head2 = this.manhead2;
 		if (gender == 1) {
@@ -706,14 +706,14 @@ public class ObjType {
 			return true;
 		}
 
-		boolean exists = true;
-		if (!Model.validate(head)) {
-			exists = false;
+		boolean ready = true;
+		if (!Model.isReady(head)) {
+			ready = false;
 		}
-		if (head2 != -1 && !Model.validate(head2)) {
-			exists = false;
+		if (head2 != -1 && !Model.isReady(head2)) {
+			ready = false;
 		}
-		return exists;
+		return ready;
 	}
 
 	@ObfuscatedName("hc.b(ZI)Lfb;")

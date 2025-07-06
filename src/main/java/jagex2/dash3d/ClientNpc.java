@@ -12,7 +12,7 @@ public class ClientNpc extends ClientEntity {
 	public NpcType type;
 
 	@ObfuscatedName("ab.a(I)Lfb;")
-	public final Model getTempModel() {
+	public final Model getModel() {
 		if (this.type == null) {
 			return null;
 		}
@@ -33,11 +33,14 @@ public class ClientNpc extends ClientEntity {
 				temp.translate(-super.spotanimHeight, 0, 0);
 				temp.createLabelReferences();
 				temp.applyTransform(spot.seq.frames[super.spotanimFrame]);
+
 				temp.labelFaces = null;
 				temp.labelVertices = null;
+
 				if (spot.resizeh != 128 || spot.resizev != 128) {
 					temp.scale(spot.resizev, spot.resizeh, spot.resizeh);
 				}
+
 				temp.calculateNormals(spot.ambient + 64, spot.contrast + 850, -30, -50, -30, true);
 
 				Model[] models = new Model[] { model, temp };

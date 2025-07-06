@@ -194,103 +194,125 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(II[BZ)Z")
-	public static final boolean validateLocs(int arg0, int arg1, byte[] arg2) {
-		boolean var4 = true;
-		Packet var5 = new Packet(arg2);
-		int var6 = -1;
+	public static final boolean locsAreReady(int xOffset, int zOffset, byte[] src) {
+		boolean ready = true;
+		Packet buf = new Packet(src);
+		int locId = -1;
+
 		label54: while (true) {
-			int var7 = var5.gsmarts();
-			if (var7 == 0) {
-				return var4;
+			int deltaId = buf.gsmarts();
+			if (deltaId == 0) {
+				return ready;
 			}
-			var6 += var7;
-			int var8 = 0;
-			boolean var9 = false;
+
+			locId += deltaId;
+
+			int locPos = 0;
+			boolean skip = false;
 			while (true) {
-				while (!var9) {
-					int var11 = var5.gsmarts();
-					if (var11 == 0) {
+				while (!skip) {
+					int deltaPos = buf.gsmarts();
+					if (deltaPos == 0) {
 						continue label54;
 					}
-					var8 += var11 - 1;
-					int var12 = var8 & 0x3F;
-					int var13 = var8 >> 6 & 0x3F;
-					int var14 = var5.g1() >> 2;
-					int var15 = arg0 + var13;
-					int var16 = arg1 + var12;
-					if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
-						LocType var17 = LocType.get(var6);
-						if (var14 != 22 || !lowMemory || var17.active || var17.forcedecor) {
-							var4 &= var17.validateModels();
-							var9 = true;
+
+					locPos += deltaPos - 1;
+
+					int z = locPos & 0x3F;
+					int x = locPos >> 6 & 0x3F;
+
+					int shape = buf.g1() >> 2;
+					int stx = xOffset + x;
+					int stz = zOffset + z;
+
+					if (stx > 0 && stz > 0 && stx < 103 && stz < 103) {
+						LocType loc = LocType.get(locId);
+						if (shape != 22 || !lowMemory || loc.active || loc.forcedecor) {
+							ready &= loc.modelsAreReady();
+							skip = true;
 						}
 					}
 				}
-				int var10 = var5.gsmarts();
-				if (var10 == 0) {
+
+				int deltaPos = buf.gsmarts();
+				if (deltaPos == 0) {
 					break;
 				}
-				var5.g1();
+
+				buf.g1();
 			}
 		}
 	}
 
 	@ObfuscatedName("c.a(ILmb;Lvb;)V")
-	public static final void prefetchLocs(Packet arg1, OnDemand arg2) {
-		int var3 = -1;
+	public static final void prefetchLocs(Packet buf, OnDemand od) {
+		int locId = -1;
 		while (true) {
-			int var4 = arg1.gsmarts();
-			if (var4 == 0) {
+			int deltaId = buf.gsmarts();
+			if (deltaId == 0) {
 				return;
 			}
-			var3 += var4;
-			LocType var5 = LocType.get(var3);
-			var5.prefetch(arg2);
+
+			locId += deltaId;
+
+			LocType loc = LocType.get(locId);
+			loc.prefetch(od);
+
 			while (true) {
-				int var6 = arg1.gsmarts();
-				if (var6 == 0) {
+				int deltaPos = buf.gsmarts();
+				if (deltaPos == 0) {
 					break;
 				}
-				arg1.g1();
+
+				buf.g1();
 			}
 		}
 	}
 
 	@ObfuscatedName("c.a(ILs;[Ljc;IZ[B)V")
-	public final void loadLocations(int arg0, World3D arg1, CollisionMap[] arg2, int arg3, byte[] arg5) {
-		Packet var7 = new Packet(arg5);
-		int var8 = -1;
+	public final void loadLocations(int zOffset, World3D scene, CollisionMap[] collision, int xOffset, byte[] src) {
+		Packet buf = new Packet(src);
+		int locId = -1;
+
 		while (true) {
-			int var9 = var7.gsmarts();
-			if (var9 == 0) {
+			int deltaId = buf.gsmarts();
+			if (deltaId == 0) {
 				return;
 			}
-			var8 += var9;
-			int var10 = 0;
+
+			locId += deltaId;
+
+			int locPos = 0;
 			while (true) {
-				int var11 = var7.gsmarts();
-				if (var11 == 0) {
+				int deltaPos = buf.gsmarts();
+				if (deltaPos == 0) {
 					break;
 				}
-				var10 += var11 - 1;
-				int var12 = var10 & 0x3F;
-				int var13 = var10 >> 6 & 0x3F;
-				int var14 = var10 >> 12;
-				int var15 = var7.g1();
-				int var16 = var15 >> 2;
-				int var17 = var15 & 0x3;
-				int var18 = arg3 + var13;
-				int var19 = arg0 + var12;
-				if (var18 > 0 && var19 > 0 && var18 < 103 && var19 < 103) {
-					int var20 = var14;
-					if ((this.flags[1][var18][var19] & 0x2) == 2) {
-						var20 = var14 - 1;
+
+				locPos += deltaPos - 1;
+
+				int z = locPos & 0x3F;
+				int x = locPos >> 6 & 0x3F;
+				int level = locPos >> 12;
+
+				int info = buf.g1();
+				int shape = info >> 2;
+				int angle = info & 0x3;
+				int stx = xOffset + x;
+				int stz = zOffset + z;
+
+				if (stx > 0 && stz > 0 && stx < 103 && stz < 103) {
+					int currentLevel = level;
+					if ((this.flags[1][stx][stz] & 0x2) == 2) {
+						currentLevel = level - 1;
 					}
-					CollisionMap var21 = null;
-					if (var20 >= 0) {
-						var21 = arg2[var20];
+
+					CollisionMap collisionMap = null;
+					if (currentLevel >= 0) {
+						collisionMap = collision[currentLevel];
 					}
-					this.addLoc(var8, var19, var17, arg1, var21, var18, var16, var14);
+
+					this.addLoc(locId, stz, angle, scene, collisionMap, stx, shape, level);
 				}
 			}
 		}
@@ -1079,11 +1101,11 @@ public class World {
 		if (arg2 >= 5 && arg2 <= 8) {
 			arg2 = 4;
 		}
-		return var3.validateShape(arg2);
+		return var3.shapeModelsAreReady(arg2);
 	}
 
 	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")
-	public static final void addLoc(int arg0, int arg1, int arg2, int arg3, World3D arg4, int arg6, int[][][] arg7, CollisionMap arg8, int arg9, int arg10) {
+	public static final void addLoc(int arg0, int shape, int arg2, int arg3, World3D arg4, int arg6, int[][][] arg7, CollisionMap arg8, int arg9, int arg10) {
 		int var11 = arg7[arg9][arg0][arg3];
 		int var12 = arg7[arg9][arg0 + 1][arg3];
 		int var13 = arg7[arg9][arg0 + 1][arg3 + 1];
@@ -1094,20 +1116,23 @@ public class World {
 		if (!var16.active) {
 			var17 += Integer.MIN_VALUE;
 		}
-		byte var18 = (byte) ((arg6 << 6) + arg1);
+		byte var18 = (byte) ((arg6 << 6) + shape);
 		boolean var19 = false;
-		if (arg1 == 22) {
-			ModelSource var20;
+
+		if (shape == 22) {
+			ModelSource model;
 			if (var16.anim == -1) {
-				var20 = var16.getModel(22, arg6, var11, var12, var13, var14, -1);
+				model = var16.getModel(22, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var20 = new ClientLocAnim(var14, var13, var11, 22, arg6, true, var12, arg2, var16.anim);
+				model = new ClientLocAnim(var14, var13, var11, 22, arg6, true, var12, arg2, var16.anim);
 			}
-			arg4.addGroundDecor(arg3, arg10, arg0, var17, var15, var20, var18);
+
+			arg4.addGroundDecor(arg3, arg10, arg0, var17, var15, model, var18);
+
 			if (var16.blockwalk && var16.active) {
 				arg8.setBlocked(arg3, arg0);
 			}
-		} else if (arg1 == 10 || arg1 == 11) {
+		} else if (shape == 10 || shape == 11) {
 			ModelSource var36;
 			if (var16.anim == -1) {
 				var36 = var16.getModel(10, arg6, var11, var12, var13, var14, -1);
@@ -1116,7 +1141,7 @@ public class World {
 			}
 			if (var36 != null) {
 				int var37 = 0;
-				if (arg1 == 11) {
+				if (shape == 11) {
 					var37 += 256;
 				}
 				int var38;
@@ -1133,18 +1158,18 @@ public class World {
 			if (var16.blockwalk) {
 				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
 			}
-		} else if (arg1 >= 12) {
+		} else if (shape >= 12) {
 			ModelSource var21;
 			if (var16.anim == -1) {
-				var21 = var16.getModel(arg1, arg6, var11, var12, var13, var14, -1);
+				var21 = var16.getModel(shape, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var21 = new ClientLocAnim(var14, var13, var11, arg1, arg6, true, var12, arg2, var16.anim);
+				var21 = new ClientLocAnim(var14, var13, var11, shape, arg6, true, var12, arg2, var16.anim);
 			}
 			arg4.addLoc(var18, var17, arg0, arg10, var15, 1, 0, var21, 1, arg3);
 			if (var16.blockwalk) {
 				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
 			}
-		} else if (arg1 == 0) {
+		} else if (shape == 0) {
 			ModelSource var22;
 			if (var16.anim == -1) {
 				var22 = var16.getModel(0, arg6, var11, var12, var13, var14, -1);
@@ -1153,9 +1178,9 @@ public class World {
 			}
 			arg4.addWall(arg0, var17, arg10, 0, ROTATION_WALL_TYPE[arg6], var15, null, var22, var18, arg3);
 			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
+				arg8.addWall(arg3, shape, arg0, var16.blockrange, arg6);
 			}
-		} else if (arg1 == 1) {
+		} else if (shape == 1) {
 			ModelSource var23;
 			if (var16.anim == -1) {
 				var23 = var16.getModel(1, arg6, var11, var12, var13, var14, -1);
@@ -1164,9 +1189,9 @@ public class World {
 			}
 			arg4.addWall(arg0, var17, arg10, 0, ROTATION_WALL_CORNER_TYPE[arg6], var15, null, var23, var18, arg3);
 			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
+				arg8.addWall(arg3, shape, arg0, var16.blockrange, arg6);
 			}
-		} else if (arg1 == 2) {
+		} else if (shape == 2) {
 			int var24 = arg6 + 1 & 0x3;
 			ModelSource var25;
 			ModelSource var26;
@@ -1179,9 +1204,9 @@ public class World {
 			}
 			arg4.addWall(arg0, var17, arg10, ROTATION_WALL_TYPE[var24], ROTATION_WALL_TYPE[arg6], var15, var26, var25, var18, arg3);
 			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
+				arg8.addWall(arg3, shape, arg0, var16.blockrange, arg6);
 			}
-		} else if (arg1 == 3) {
+		} else if (shape == 3) {
 			ModelSource var27;
 			if (var16.anim == -1) {
 				var27 = var16.getModel(3, arg6, var11, var12, var13, var14, -1);
@@ -1190,20 +1215,20 @@ public class World {
 			}
 			arg4.addWall(arg0, var17, arg10, 0, ROTATION_WALL_CORNER_TYPE[arg6], var15, null, var27, var18, arg3);
 			if (var16.blockwalk) {
-				arg8.addWall(arg3, arg1, arg0, var16.blockrange, arg6);
+				arg8.addWall(arg3, shape, arg0, var16.blockrange, arg6);
 			}
-		} else if (arg1 == 9) {
+		} else if (shape == 9) {
 			ModelSource var28;
 			if (var16.anim == -1) {
-				var28 = var16.getModel(arg1, arg6, var11, var12, var13, var14, -1);
+				var28 = var16.getModel(shape, arg6, var11, var12, var13, var14, -1);
 			} else {
-				var28 = new ClientLocAnim(var14, var13, var11, arg1, arg6, true, var12, arg2, var16.anim);
+				var28 = new ClientLocAnim(var14, var13, var11, shape, arg6, true, var12, arg2, var16.anim);
 			}
 			arg4.addLoc(var18, var17, arg0, arg10, var15, 1, 0, var28, 1, arg3);
 			if (var16.blockwalk) {
 				arg8.addLoc(var16.blockrange, arg6, arg0, var16.length, var16.width, arg3);
 			}
-		} else if (arg1 == 4) {
+		} else if (shape == 4) {
 			ModelSource var29;
 			if (var16.anim == -1) {
 				var29 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
@@ -1211,7 +1236,7 @@ public class World {
 				var29 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
 			arg4.addDecor(var18, var29, 0, arg0, arg3, ROTATION_WALL_TYPE[arg6], 0, arg6 * 512, arg10, var15, var17);
-		} else if (arg1 == 5) {
+		} else if (shape == 5) {
 			int var30 = 16;
 			int var31 = arg4.getWallTypecode(arg10, arg0, arg3);
 			if (var31 > 0) {
@@ -1224,7 +1249,7 @@ public class World {
 				var32 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
 			arg4.addDecor(var18, var32, WALL_DECORATION_ROTATION_FORWARD_X[arg6] * var30, arg0, arg3, ROTATION_WALL_TYPE[arg6], WALL_DECORATION_ROTATION_FORWARD_Z[arg6] * var30, arg6 * 512, arg10, var15, var17);
-		} else if (arg1 == 6) {
+		} else if (shape == 6) {
 			ModelSource var33;
 			if (var16.anim == -1) {
 				var33 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
@@ -1232,7 +1257,7 @@ public class World {
 				var33 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
 			arg4.addDecor(var18, var33, 0, arg0, arg3, 256, 0, arg6, arg10, var15, var17);
-		} else if (arg1 == 7) {
+		} else if (shape == 7) {
 			ModelSource var34;
 			if (var16.anim == -1) {
 				var34 = var16.getModel(4, 0, var11, var12, var13, var14, -1);
@@ -1240,7 +1265,7 @@ public class World {
 				var34 = new ClientLocAnim(var14, var13, var11, 4, 0, true, var12, arg2, var16.anim);
 			}
 			arg4.addDecor(var18, var34, 0, arg0, arg3, 512, 0, arg6, arg10, var15, var17);
-		} else if (arg1 == 8) {
+		} else if (shape == 8) {
 			ModelSource var35;
 			if (var16.anim == -1) {
 				var35 = var16.getModel(4, 0, var11, var12, var13, var14, -1);

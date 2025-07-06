@@ -9,25 +9,25 @@ import jagex2.config.SeqType;
 public class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("cb.n")
-	public int field489;
+	public int index;
 
 	@ObfuscatedName("cb.o")
-	public int field490;
+	public int shape;
 
 	@ObfuscatedName("cb.p")
-	public int field491;
+	public int angle;
 
 	@ObfuscatedName("cb.q")
-	public int field492;
+	public int heightmapSW;
 
 	@ObfuscatedName("cb.r")
-	public int field493;
+	public int heightmapSE;
 
 	@ObfuscatedName("cb.s")
-	public int field494;
+	public int heightmapNE;
 
 	@ObfuscatedName("cb.t")
-	public int field495;
+	public int heightmapNW;
 
 	@ObfuscatedName("cb.u")
 	public SeqType seq;
@@ -38,14 +38,14 @@ public class ClientLocAnim extends ModelSource {
 	@ObfuscatedName("cb.w")
 	public int seqCycle;
 
-	public ClientLocAnim(int arg0, int arg1, int arg2, int arg4, int arg5, boolean randomFrame, int arg7, int arg8, int seq) {
-		this.field489 = arg8;
-		this.field490 = arg4;
-		this.field491 = arg5;
-		this.field492 = arg2;
-		this.field493 = arg7;
-		this.field494 = arg1;
-		this.field495 = arg0;
+	public ClientLocAnim(int heightmapNW, int heightmapNE, int heightmapSW, int shape, int angle, boolean randomFrame, int heightmapSE, int index, int seq) {
+		this.index = index;
+		this.shape = shape;
+		this.angle = angle;
+		this.heightmapSW = heightmapSW;
+		this.heightmapSE = heightmapSE;
+		this.heightmapNE = heightmapNE;
+		this.heightmapNW = heightmapNW;
 
 		this.seq = SeqType.types[seq];
 		this.seqFrame = 0;
@@ -58,32 +58,38 @@ public class ClientLocAnim extends ModelSource {
 	}
 
 	@ObfuscatedName("cb.a(I)Lfb;")
-	public final Model getTempModel() {
+	public final Model getModel() {
 		if (this.seq != null) {
-			int var2 = Client.loopCycle - this.seqCycle;
-			if (var2 > 100 && this.seq.replayoff > 0) {
-				var2 = 100;
+			int delta = Client.loopCycle - this.seqCycle;
+			if (delta > 100 && this.seq.replayoff > 0) {
+				delta = 100;
 			}
-			label42: {
-				do {
-					do {
-						if (var2 <= this.seq.getFrameDuration(this.seqFrame)) {
-							break label42;
-						}
-						var2 -= this.seq.getFrameDuration(this.seqFrame);
-						this.seqFrame++;
-					} while (this.seqFrame < this.seq.frameCount);
+
+			while (delta > this.seq.getFrameDuration(this.seqFrame)) {
+				delta -= this.seq.getFrameDuration((this.seqFrame));
+				this.seqFrame++;
+
+				if (this.seqFrame < this.seq.frameCount) {
 					this.seqFrame -= this.seq.replayoff;
-				} while (this.seqFrame >= 0 && this.seqFrame < this.seq.frameCount);
+				}
+
+				if (this.seqFrame >= 0 && this.seqFrame < this.seq.frameCount) {
+					continue;
+				}
+
 				this.seq = null;
+				break;
 			}
-			this.seqCycle = Client.loopCycle - var2;
+
+			this.seqCycle = Client.loopCycle - delta;
 		}
-		int var3 = -1;
+
+		int transformId = -1;
 		if (this.seq != null) {
-			var3 = this.seq.frames[this.seqFrame];
+			transformId = this.seq.frames[this.seqFrame];
 		}
-		LocType var4 = LocType.get(this.field489);
-		return var4.getModel(this.field490, this.field491, this.field492, this.field493, this.field494, this.field495, var3);
+
+		LocType loc = LocType.get(this.index);
+		return loc.getModel(this.shape, this.angle, this.heightmapSW, this.heightmapSE, this.heightmapNE, this.heightmapNW, transformId);
 	}
 }

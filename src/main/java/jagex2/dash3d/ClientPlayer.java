@@ -170,7 +170,7 @@ public class ClientPlayer extends ClientEntity {
 	}
 
 	@ObfuscatedName("bb.a(I)Lfb;")
-	public final Model getTempModel() {
+	public final Model getModel() {
 		if (!this.visible) {
 			return null;
 		}
@@ -284,20 +284,22 @@ public class ClientPlayer extends ClientEntity {
 		if (model == null) {
 			boolean hasModel = false;
 
-			for (int i = 0; i < 12; i++) {
-				int part = this.appearance[i];
-				if (leftHandValue >= 0 && i == 3) {
-					part = leftHandValue;
-				}
-				if (rightHandValue >= 0 && i == 5) {
-					part = rightHandValue;
+			for (int part = 0; part < 12; part++) {
+				int value = this.appearance[part];
+
+				if (leftHandValue >= 0 && part == 3) {
+					value = leftHandValue;
 				}
 
-				if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].validateModel()) {
+				if (rightHandValue >= 0 && part == 5) {
+					value = rightHandValue;
+				}
+
+				if (value >= 0x100 && value < 0x200 && !IdkType.types[value - 0x100].modelIsReady()) {
 					hasModel = true;
 				}
 
-				if (part >= 0x200 && !ObjType.get(part - 0x200).validateWornModel(this.gender)) {
+				if (value >= 0x200 && !ObjType.get(value - 0x200).wornModelIsReady(this.gender)) {
 					hasModel = true;
 				}
 			}
@@ -387,7 +389,7 @@ public class ClientPlayer extends ClientEntity {
 			if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].validateHeadModel()) {
 				hasModel = true;
 			}
-			if (part >= 0x200 && !ObjType.get(part - 0x200).validateHeadModel(this.gender)) {
+			if (part >= 0x200 && !ObjType.get(part - 0x200).headModelIsReady(this.gender)) {
 				hasModel = true;
 			}
 		}

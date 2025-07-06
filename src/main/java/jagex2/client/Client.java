@@ -2398,8 +2398,10 @@ public class Client extends GameShell {
 
 			if (req.archive == 0) {
 				Model.unpack(req.file, req.data);
+
 				if ((this.onDemand.getModelFlags(req.file) & 0x62) != 0) {
 					this.redrawSidebar = true;
+
 					if (this.chatInterfaceId != -1) {
 						this.redrawChatback = true;
 					}
@@ -3216,7 +3218,7 @@ public class Client extends GameShell {
 			if (data != null) {
 				int x = (this.sceneMapIndex[i] >> 8) * 64 - this.sceneBaseTileX;
 				int z = (this.sceneMapIndex[i] & 0xFF) * 64 - this.sceneBaseTileZ;
-				ready &= World.validateLocs(x, z, data);
+				ready &= World.locsAreReady(x, z, data);
 			}
 		}
 
@@ -3543,11 +3545,14 @@ public class Client extends GameShell {
 		if (this.objDragArea != 0) {
 			return;
 		}
+
 		this.menuOption[0] = "Cancel";
 		this.menuAction[0] = 1252;
 		this.menuSize = 1;
+
 		this.handlePrivateChatInput();
 		this.lastHoveredInterfaceId = 0;
+
 		if (super.mouseX > 4 && super.mouseY > 4 && super.mouseX < 516 && super.mouseY < 338) {
 			if (this.viewportInterfaceId == -1) {
 				this.handleViewportOptions();
@@ -3555,10 +3560,13 @@ public class Client extends GameShell {
 				this.handleInterfaceInput(super.mouseX, 4, super.mouseY, 4, Component.types[this.viewportInterfaceId], 0);
 			}
 		}
+
 		if (this.viewportHoveredInterfaceId != this.lastHoveredInterfaceId) {
 			this.viewportHoveredInterfaceId = this.lastHoveredInterfaceId;
 		}
+
 		this.lastHoveredInterfaceId = 0;
+
 		if (super.mouseX > 553 && super.mouseY > 205 && super.mouseX < 743 && super.mouseY < 466) {
 			if (this.sidebarInterfaceId != -1) {
 				this.handleInterfaceInput(super.mouseX, 205, super.mouseY, 553, Component.types[this.sidebarInterfaceId], 0);
@@ -3566,43 +3574,53 @@ public class Client extends GameShell {
 				this.handleInterfaceInput(super.mouseX, 205, super.mouseY, 553, Component.types[this.tabInterfaceId[this.selectedTab]], 0);
 			}
 		}
+
 		if (this.sidebarHoveredInterfaceId != this.lastHoveredInterfaceId) {
 			this.redrawSidebar = true;
 			this.sidebarHoveredInterfaceId = this.lastHoveredInterfaceId;
 		}
+
 		this.lastHoveredInterfaceId = 0;
+
 		if (super.mouseX > 17 && super.mouseY > 357 && super.mouseX < 426 && super.mouseY < 453) {
 			if (this.chatInterfaceId != -1) {
 				this.handleInterfaceInput(super.mouseX, 357, super.mouseY, 17, Component.types[this.chatInterfaceId], 0);
 			} else if (super.mouseY < 434) {
-				this.handlePrivateChatInput(super.mouseX - 17, super.mouseY - 357);
+				this.handleChatMouseInput(super.mouseX - 17, super.mouseY - 357);
 			}
 		}
+
 		if (this.chatInterfaceId != -1 && this.chatHoveredInterfaceId != this.lastHoveredInterfaceId) {
 			this.redrawChatback = true;
 			this.chatHoveredInterfaceId = this.lastHoveredInterfaceId;
 		}
-		boolean var2 = false;
-		while (!var2) {
-			var2 = true;
-			for (int var3 = 0; var3 < this.menuSize - 1; var3++) {
-				if (this.menuAction[var3] < 1000 && this.menuAction[var3 + 1] > 1000) {
-					String var4 = this.menuOption[var3];
-					this.menuOption[var3] = this.menuOption[var3 + 1];
-					this.menuOption[var3 + 1] = var4;
-					int var5 = this.menuAction[var3];
-					this.menuAction[var3] = this.menuAction[var3 + 1];
-					this.menuAction[var3 + 1] = var5;
-					int var6 = this.menuParamB[var3];
-					this.menuParamB[var3] = this.menuParamB[var3 + 1];
-					this.menuParamB[var3 + 1] = var6;
-					int var7 = this.menuParamC[var3];
-					this.menuParamC[var3] = this.menuParamC[var3 + 1];
-					this.menuParamC[var3 + 1] = var7;
-					int var8 = this.menuParamA[var3];
-					this.menuParamA[var3] = this.menuParamA[var3 + 1];
-					this.menuParamA[var3 + 1] = var8;
-					var2 = false;
+
+		boolean done = false;
+		while (!done) {
+			done = true;
+			for (int i = 0; i < this.menuSize - 1; i++) {
+				if (this.menuAction[i] < 1000 && this.menuAction[i + 1] > 1000) {
+					String tmp0 = this.menuOption[i];
+					this.menuOption[i] = this.menuOption[i + 1];
+					this.menuOption[i + 1] = tmp0;
+
+					int tmp1 = this.menuAction[i];
+					this.menuAction[i] = this.menuAction[i + 1];
+					this.menuAction[i + 1] = tmp1;
+
+					int tmp2 = this.menuParamB[i];
+					this.menuParamB[i] = this.menuParamB[i + 1];
+					this.menuParamB[i + 1] = tmp2;
+
+					int tmp3 = this.menuParamC[i];
+					this.menuParamC[i] = this.menuParamC[i + 1];
+					this.menuParamC[i + 1] = tmp3;
+
+					int tmp4 = this.menuParamA[i];
+					this.menuParamA[i] = this.menuParamA[i + 1];
+					this.menuParamA[i + 1] = tmp4;
+
+					done = false;
 				}
 			}
 		}
@@ -3613,46 +3631,53 @@ public class Client extends GameShell {
 		if (this.splitPrivateChat == 0) {
 			return;
 		}
-		int var2 = 0;
+
+		int line = 0;
 		if (this.systemUpdateTimer != 0) {
-			var2 = 1;
+			line = 1;
 		}
-		for (int var3 = 0; var3 < 100; var3++) {
-			if (this.messageText[var3] != null) {
-				int var4 = this.messageType[var3];
-				String var5 = this.messageSender[var3];
-				boolean var6 = false;
-				if (var5 != null && var5.startsWith("@cr1@")) {
-					var5 = var5.substring(5);
-					boolean var7 = true;
+
+		for (int i = 0; i < 100; i++) {
+			if (this.messageText[i] != null) {
+				int type = this.messageType[i];
+
+				String sender = this.messageSender[i];
+				boolean mod = false;
+				if (sender != null && sender.startsWith("@cr1@")) {
+					sender = sender.substring(5);
+					mod = true;
 				}
-				if (var5 != null && var5.startsWith("@cr2@")) {
-					var5 = var5.substring(5);
-					boolean var8 = true;
+				if (sender != null && sender.startsWith("@cr2@")) {
+					sender = sender.substring(5);
+					mod = true;
 				}
-				if ((var4 == 3 || var4 == 7) && (var4 == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(var5))) {
-					int var9 = 329 - var2 * 13;
-					if (super.mouseX > 4 && super.mouseX < 516 && super.mouseY - 4 > var9 - 10 && super.mouseY - 4 <= var9 + 3) {
+
+				if ((type == 3 || type == 7) && (type == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(sender))) {
+					int y = 329 - line * 13;
+
+					if (super.mouseX > 4 && super.mouseX < 516 && super.mouseY - 4 > y - 10 && super.mouseY - 4 <= y + 3) {
 						if (this.staffmodlevel >= 1) {
-							this.menuOption[this.menuSize] = "Report abuse @whi@" + var5;
+							this.menuOption[this.menuSize] = "Report abuse @whi@" + sender;
 							this.menuAction[this.menuSize] = 2034;
 							this.menuSize++;
 						}
-						this.menuOption[this.menuSize] = "Add ignore @whi@" + var5;
+
+						this.menuOption[this.menuSize] = "Add ignore @whi@" + sender;
 						this.menuAction[this.menuSize] = 2436;
 						this.menuSize++;
-						this.menuOption[this.menuSize] = "Add friend @whi@" + var5;
+
+						this.menuOption[this.menuSize] = "Add friend @whi@" + sender;
 						this.menuAction[this.menuSize] = 2406;
 						this.menuSize++;
 					}
-					var2++;
-					if (var2 >= 5) {
+
+					line++;
+					if (line >= 5) {
 						return;
 					}
-				}
-				if ((var4 == 5 || var4 == 6) && this.chatPrivateMode < 2) {
-					var2++;
-					if (var2 >= 5) {
+				} else if ((type == 5 || type == 6) && this.chatPrivateMode < 2) {
+					line++;
+					if (line >= 5) {
 						return;
 					}
 				}
@@ -3661,78 +3686,84 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ZII)V")
-	public final void handlePrivateChatInput(int arg1, int arg2) {
-		int var4 = 0;
-		for (int var5 = 0; var5 < 100; var5++) {
-			if (this.messageText[var5] != null) {
-				int var6 = this.messageType[var5];
-				int var7 = 70 - var4 * 14 + this.chatScrollOffset + 4;
-				if (var7 < -20) {
+	public final void handleChatMouseInput(int mouseX, int mouseY) {
+		int line = 0;
+		for (int i = 0; i < 100; i++) {
+			if (this.messageText[i] != null) {
+				int type = this.messageType[i];
+				int y = 70 - line * 14 + this.chatScrollOffset + 4;
+				if (y < -20) {
 					break;
 				}
-				String var8 = this.messageSender[var5];
-				boolean var9 = false;
-				if (var8 != null && var8.startsWith("@cr1@")) {
-					var8 = var8.substring(5);
-					boolean var10 = true;
+
+				String sender = this.messageSender[i];
+				boolean mod = false;
+				if (sender != null && sender.startsWith("@cr1@")) {
+					sender = sender.substring(5);
+					mod = true;
 				}
-				if (var8 != null && var8.startsWith("@cr2@")) {
-					var8 = var8.substring(5);
-					boolean var11 = true;
+
+				if (sender != null && sender.startsWith("@cr2@")) {
+					sender = sender.substring(5);
+					mod = true;
 				}
-				if (var6 == 0) {
-					var4++;
-				}
-				if ((var6 == 1 || var6 == 2) && (var6 == 1 || this.chatPublicMode == 0 || this.chatPublicMode == 1 && this.isFriend(var8))) {
-					if (arg2 > var7 - 14 && arg2 <= var7 && !var8.equals(localPlayer.name)) {
+
+				if (type == 0) {
+					line++;
+				} else if ((type == 1 || type == 2) && (type == 1 || this.chatPublicMode == 0 || this.chatPublicMode == 1 && this.isFriend(sender))) {
+					if (mouseY > y - 14 && mouseY <= y && !sender.equals(localPlayer.name)) {
 						if (this.staffmodlevel >= 1) {
-							this.menuOption[this.menuSize] = "Report abuse @whi@" + var8;
+							this.menuOption[this.menuSize] = "Report abuse @whi@" + sender;
 							this.menuAction[this.menuSize] = 34;
 							this.menuSize++;
 						}
-						this.menuOption[this.menuSize] = "Add ignore @whi@" + var8;
+
+						this.menuOption[this.menuSize] = "Add ignore @whi@" + sender;
 						this.menuAction[this.menuSize] = 436;
 						this.menuSize++;
-						this.menuOption[this.menuSize] = "Add friend @whi@" + var8;
+
+						this.menuOption[this.menuSize] = "Add friend @whi@" + sender;
 						this.menuAction[this.menuSize] = 406;
 						this.menuSize++;
 					}
-					var4++;
-				}
-				if ((var6 == 3 || var6 == 7) && this.splitPrivateChat == 0 && (var6 == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(var8))) {
-					if (arg2 > var7 - 14 && arg2 <= var7) {
+
+					line++;
+				} else if ((type == 3 || type == 7) && this.splitPrivateChat == 0 && (type == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(sender))) {
+					if (mouseY > y - 14 && mouseY <= y) {
 						if (this.staffmodlevel >= 1) {
-							this.menuOption[this.menuSize] = "Report abuse @whi@" + var8;
+							this.menuOption[this.menuSize] = "Report abuse @whi@" + sender;
 							this.menuAction[this.menuSize] = 34;
 							this.menuSize++;
 						}
-						this.menuOption[this.menuSize] = "Add ignore @whi@" + var8;
+
+						this.menuOption[this.menuSize] = "Add ignore @whi@" + sender;
 						this.menuAction[this.menuSize] = 436;
 						this.menuSize++;
-						this.menuOption[this.menuSize] = "Add friend @whi@" + var8;
+
+						this.menuOption[this.menuSize] = "Add friend @whi@" + sender;
 						this.menuAction[this.menuSize] = 406;
 						this.menuSize++;
 					}
-					var4++;
-				}
-				if (var6 == 4 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(var8))) {
-					if (arg2 > var7 - 14 && arg2 <= var7) {
-						this.menuOption[this.menuSize] = "Accept trade @whi@" + var8;
+
+					line++;
+				} else if (type == 4 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(sender))) {
+					if (mouseY > y - 14 && mouseY <= y) {
+						this.menuOption[this.menuSize] = "Accept trade @whi@" + sender;
 						this.menuAction[this.menuSize] = 903;
 						this.menuSize++;
 					}
-					var4++;
-				}
-				if ((var6 == 5 || var6 == 6) && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
-					var4++;
-				}
-				if (var6 == 8 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(var8))) {
-					if (arg2 > var7 - 14 && arg2 <= var7) {
-						this.menuOption[this.menuSize] = "Accept duel @whi@" + var8;
+
+					line++;
+				} else if ((type == 5 || type == 6) && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
+					line++;
+				} else if (type == 8 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(sender))) {
+					if (mouseY > y - 14 && mouseY <= y) {
+						this.menuOption[this.menuSize] = "Accept duel @whi@" + sender;
 						this.menuAction[this.menuSize] = 363;
 						this.menuSize++;
 					}
-					var4++;
+
+					line++;
 				}
 			}
 		}
@@ -3908,46 +3939,51 @@ public class Client extends GameShell {
 			return;
 		}
 
-		int var2 = super.mouseClickButton;
+		int button = super.mouseClickButton;
 		if (this.spellSelected == 1 && super.mouseClickX >= 516 && super.mouseClickY >= 160 && super.mouseClickX <= 765 && super.mouseClickY <= 205) {
-			var2 = 0;
+			button = 0;
 		}
 
 		if (!this.menuVisible) {
-			if (var2 == 1 && this.menuSize > 0) {
-				int var13 = this.menuAction[this.menuSize - 1];
-				if (var13 == 602 || var13 == 596 || var13 == 22 || var13 == 892 || var13 == 415 || var13 == 405 || var13 == 38 || var13 == 422 || var13 == 478 || var13 == 347 || var13 == 188) {
-					int var14 = this.menuParamB[this.menuSize - 1];
-					int var15 = this.menuParamC[this.menuSize - 1];
-					Component var16 = Component.types[var15];
-					if (var16.draggable) {
+			if (button == 1 && this.menuSize > 0) {
+				int action = this.menuAction[this.menuSize - 1];
+
+				if (action == 602 || action == 596 || action == 22 || action == 892 || action == 415 || action == 405 || action == 38 || action == 422 || action == 478 || action == 347 || action == 188) {
+					int slot = this.menuParamB[this.menuSize - 1];
+					int comId = this.menuParamC[this.menuSize - 1];
+					Component com = Component.types[comId];
+
+					if (com.draggable) {
 						this.objGrabThreshold = false;
 						this.objDragCycles = 0;
-						this.objDragInterfaceId = var15;
-						this.objDragSlot = var14;
+						this.objDragInterfaceId = comId;
+						this.objDragSlot = slot;
 						this.objDragArea = 2;
 						this.objGrabX = super.mouseClickX;
 						this.objGrabY = super.mouseClickY;
-						if (Component.types[var15].layer == this.viewportInterfaceId) {
+
+						if (Component.types[comId].layer == this.viewportInterfaceId) {
 							this.objDragArea = 1;
 						}
-						if (Component.types[var15].layer == this.chatInterfaceId) {
+
+						if (Component.types[comId].layer == this.chatInterfaceId) {
 							this.objDragArea = 3;
 						}
+
 						return;
 					}
 				}
 			}
 
-			if (var2 == 1 && (this.oneMouseButton == 1 || this.isAddFriendOption(this.menuSize - 1)) && this.menuSize > 2) {
-				var2 = 2;
+			if (button == 1 && (this.oneMouseButton == 1 || this.isAddFriendOption(this.menuSize - 1)) && this.menuSize > 2) {
+				button = 2;
 			}
 
-			if (var2 == 1 && this.menuSize > 0) {
+			if (button == 1 && this.menuSize > 0) {
 				this.useMenuOption(this.menuSize - 1);
 			}
 
-			if (var2 != 2 || this.menuSize <= 0) {
+			if (button != 2 || this.menuSize <= 0) {
 				return;
 			}
 
@@ -3955,22 +3991,60 @@ public class Client extends GameShell {
 			return;
 		}
 
-		if (var2 != 1) {
-			int var3 = super.mouseX;
-			int var4 = super.mouseY;
+		if (button == 1) {
+			int menuX = this.menuX;
+			int menuY = this.menuY;
+			int menuWidth = this.menuWidth;
+
+			int clickX = super.mouseClickX;
+			int clickY = super.mouseClickY;
 
 			if (this.menuArea == 0) {
-				var3 -= 4;
-				var4 -= 4;
+				clickX -= 4;
+				clickY -= 4;
 			} else if (this.menuArea == 1) {
-				var3 -= 553;
-				var4 -= 205;
+				clickX -= 553;
+				clickY -= 205;
 			} else if (this.menuArea == 2) {
-				var3 -= 17;
-				var4 -= 357;
+				clickX -= 17;
+				clickY -= 357;
 			}
 
-			if (var3 < this.menuX - 10 || var3 > this.menuWidth + this.menuX + 10 || var4 < this.menuY - 10 || var4 > this.menuHeight + this.menuY + 10) {
+			int option = -1;
+			for (int i = 0; i < this.menuSize; i++) {
+				int optionY = (this.menuSize - 1 - i) * 15 + menuY + 31;
+				if (clickX > menuX && clickX < menuX + menuWidth && clickY > optionY - 13 && clickY < optionY + 3) {
+					option = i;
+				}
+			}
+
+			if (option != -1) {
+				this.useMenuOption(option);
+			}
+
+			this.menuVisible = false;
+
+			if (this.menuArea == 1) {
+				this.redrawSidebar = true;
+			} else if (this.menuArea == 2) {
+				this.redrawChatback = true;
+			}
+		} else {
+			int x = super.mouseX;
+			int y = super.mouseY;
+
+			if (this.menuArea == 0) {
+				x -= 4;
+				y -= 4;
+			} else if (this.menuArea == 1) {
+				x -= 553;
+				y -= 205;
+			} else if (this.menuArea == 2) {
+				x -= 17;
+				y -= 357;
+			}
+
+			if (x < this.menuX - 10 || x > this.menuWidth + this.menuX + 10 || y < this.menuY - 10 || y > this.menuHeight + this.menuY + 10) {
 				this.menuVisible = false;
 
 				if (this.menuArea == 1) {
@@ -3980,45 +4054,6 @@ public class Client extends GameShell {
 				if (this.menuArea == 2) {
 					this.redrawChatback = true;
 				}
-			}
-		}
-
-		if (var2 == 1) {
-			int var5 = this.menuX;
-			int var6 = this.menuY;
-			int var7 = this.menuWidth;
-			int var8 = super.mouseClickX;
-			int var9 = super.mouseClickY;
-
-			if (this.menuArea == 0) {
-				var8 -= 4;
-				var9 -= 4;
-			} else if (this.menuArea == 1) {
-				var8 -= 553;
-				var9 -= 205;
-			} else if (this.menuArea == 2) {
-				var8 -= 17;
-				var9 -= 357;
-			}
-
-			int var10 = -1;
-			for (int var11 = 0; var11 < this.menuSize; var11++) {
-				int var12 = (this.menuSize - 1 - var11) * 15 + var6 + 31;
-				if (var8 > var5 && var8 < var5 + var7 && var9 > var12 - 13 && var9 < var12 + 3) {
-					var10 = var11;
-				}
-			}
-
-			if (var10 != -1) {
-				this.useMenuOption(var10);
-			}
-
-			this.menuVisible = false;
-
-			if (this.menuArea == 1) {
-				this.redrawSidebar = true;
-			} else if (this.menuArea == 2) {
-				this.redrawChatback = true;
 			}
 		}
 	}
@@ -4037,7 +4072,7 @@ public class Client extends GameShell {
 			return;
 		}
 
-		x-= 73;
+		x -= 73;
 		y -= 75;
 
 		int yaw = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
@@ -4181,6 +4216,7 @@ public class Client extends GameShell {
 			this.out.p1(this.chatTradeMode);
 		} else if (super.mouseClickX >= 412 && super.mouseClickX <= 512 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
 			this.closeInterfaces();
+
 			this.reportAbuseInput = "";
 			this.reportAbuseMuteOption = false;
 
@@ -4428,51 +4464,60 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.i(Z)V")
 	public final void handleInputKey() {
 		while (true) {
-			int var2;
+			int key;
 			do {
 				while (true) {
-					var2 = this.pollKey();
-					if (var2 == -1) {
+					key = this.pollKey();
+					if (key == -1) {
 						return;
 					}
+
 					if (this.viewportInterfaceId != -1 && this.viewportInterfaceId == this.reportAbuseInterfaceId) {
-						if (var2 == 8 && this.reportAbuseInput.length() > 0) {
+						if (key == 8 && this.reportAbuseInput.length() > 0) {
 							this.reportAbuseInput = this.reportAbuseInput.substring(0, this.reportAbuseInput.length() - 1);
 						}
 						break;
 					}
+
 					if (this.showSocialInput) {
-						if (var2 >= 32 && var2 <= 122 && this.socialInput.length() < 80) {
-							this.socialInput = this.socialInput + (char) var2;
+						if (key >= 32 && key <= 122 && this.socialInput.length() < 80) {
+							this.socialInput = this.socialInput + (char) key;
 							this.redrawChatback = true;
 						}
-						if (var2 == 8 && this.socialInput.length() > 0) {
+
+						if (key == 8 && this.socialInput.length() > 0) {
 							this.socialInput = this.socialInput.substring(0, this.socialInput.length() - 1);
 							this.redrawChatback = true;
 						}
-						if (var2 == 13 || var2 == 10) {
+
+						if (key == 13 || key == 10) {
 							this.showSocialInput = false;
 							this.redrawChatback = true;
+
 							if (this.socialAction == 1) {
-								long var3 = JString.toBase37(this.socialInput);
-								this.addFriend(var3);
+								long username = JString.toBase37(this.socialInput);
+								this.addFriend(username);
 							}
+
 							if (this.socialAction == 2 && this.friendCount > 0) {
-								long var5 = JString.toBase37(this.socialInput);
-								this.removeFriend(var5);
+								long username = JString.toBase37(this.socialInput);
+								this.removeFriend(username);
 							}
+
 							if (this.socialAction == 3 && this.socialInput.length() > 0) {
 								// MESSAGE_PRIVATE
 								this.out.pIsaac(170);
 								this.out.p1(0);
-								int var7 = this.out.pos;
+								int start = this.out.pos;
+
 								this.out.p8(this.socialName37);
 								WordPack.pack(this.socialInput, this.out);
-								this.out.psize1(this.out.pos - var7);
+								this.out.psize1(this.out.pos - start);
 
 								this.socialInput = JString.toSentenceCase(this.socialInput);
 								this.socialInput = WordFilter.filter(this.socialInput);
 								this.addMessage(this.socialInput, JString.formatDisplayName(JString.fromBase37(this.socialName37)), 6);
+
 								if (this.chatPrivateMode == 2) {
 									this.chatPrivateMode = 1;
 									this.redrawPrivacySettings = true;
@@ -4484,25 +4529,27 @@ public class Client extends GameShell {
 									this.out.p1(this.chatTradeMode);
 								}
 							}
+
 							if (this.socialAction == 4 && this.ignoreCount < 100) {
-								long var8 = JString.toBase37(this.socialInput);
-								this.addIgnore(var8);
+								long username = JString.toBase37(this.socialInput);
+								this.addIgnore(username);
 							}
+
 							if (this.socialAction == 5 && this.ignoreCount > 0) {
-								long var10 = JString.toBase37(this.socialInput);
-								this.removeIgnore(var10);
+								long username = JString.toBase37(this.socialInput);
+								this.removeIgnore(username);
 							}
 						}
 					} else if (this.chatbackInputOpen) {
-						if (var2 >= 48 && var2 <= 57 && this.chatbackInput.length() < 10) {
-							this.chatbackInput = this.chatbackInput + (char) var2;
+						if (key >= 48 && key <= 57 && this.chatbackInput.length() < 10) {
+							this.chatbackInput = this.chatbackInput + (char) key;
 							this.redrawChatback = true;
 						}
-						if (var2 == 8 && this.chatbackInput.length() > 0) {
+						if (key == 8 && this.chatbackInput.length() > 0) {
 							this.chatbackInput = this.chatbackInput.substring(0, this.chatbackInput.length() - 1);
 							this.redrawChatback = true;
 						}
-						if (var2 == 13 || var2 == 10) {
+						if (key == 13 || key == 10) {
 							if (this.chatbackInput.length() > 0) {
 								int var12 = 0;
 								try {
@@ -4518,15 +4565,15 @@ public class Client extends GameShell {
 							this.redrawChatback = true;
 						}
 					} else if (this.chatInterfaceId == -1) {
-						if (var2 >= 32 && (var2 <= 122 || this.chatTyped.startsWith("::") && var2 <= 126) && this.chatTyped.length() < 80) {
-							this.chatTyped = this.chatTyped + (char) var2;
+						if (key >= 32 && (key <= 122 || this.chatTyped.startsWith("::") && key <= 126) && this.chatTyped.length() < 80) {
+							this.chatTyped = this.chatTyped + (char) key;
 							this.redrawChatback = true;
 						}
-						if (var2 == 8 && this.chatTyped.length() > 0) {
+						if (key == 8 && this.chatTyped.length() > 0) {
 							this.chatTyped = this.chatTyped.substring(0, this.chatTyped.length() - 1);
 							this.redrawChatback = true;
 						}
-						if ((var2 == 13 || var2 == 10) && this.chatTyped.length() > 0) {
+						if ((key == 13 || key == 10) && this.chatTyped.length() > 0) {
 							if (this.staffmodlevel == 2) {
 								if (this.chatTyped.equals("::clientdrop")) {
 									this.tryReconnect();
@@ -4535,8 +4582,8 @@ public class Client extends GameShell {
 									this.lag();
 								}
 								if (this.chatTyped.equals("::prefetchmusic")) {
-									for (int var13 = 0; var13 < this.onDemand.getFileCount(2); var13++) {
-										this.onDemand.prefetchPriority(2, var13, (byte) 1);
+									for (int i = 0; i < this.onDemand.getFileCount(2); i++) {
+										this.onDemand.prefetchPriority(2, i, (byte) 1);
 									}
 								}
 							}
@@ -4620,6 +4667,7 @@ public class Client extends GameShell {
 								localPlayer.chatColour = var14;
 								localPlayer.chatEffect = var15;
 								localPlayer.chatTimer = 150;
+
 								if (this.staffmodlevel == 2) {
 									this.addMessage(localPlayer.chatMessage, "@cr2@" + localPlayer.name, 2);
 								} else if (this.staffmodlevel == 1) {
@@ -4627,6 +4675,7 @@ public class Client extends GameShell {
 								} else {
 									this.addMessage(localPlayer.chatMessage, localPlayer.name, 2);
 								}
+
 								if (this.chatPublicMode == 2) {
 									this.chatPublicMode = 3;
 									this.redrawPrivacySettings = true;
@@ -4638,14 +4687,15 @@ public class Client extends GameShell {
 									this.out.p1(this.chatTradeMode);
 								}
 							}
+
 							this.chatTyped = "";
 							this.redrawChatback = true;
 						}
 					}
 				}
-			} while ((var2 < 97 || var2 > 122) && (var2 < 65 || var2 > 90) && (var2 < 48 || var2 > 57) && var2 != 32);
+			} while ((key < 97 || key > 122) && (key < 65 || key > 90) && (key < 48 || key > 57) && key != 32);
 			if (this.reportAbuseInput.length() < 12) {
-				this.reportAbuseInput = this.reportAbuseInput + (char) var2;
+				this.reportAbuseInput = this.reportAbuseInput + (char) key;
 			}
 		}
 	}
@@ -5340,6 +5390,7 @@ public class Client extends GameShell {
 	public final void drawGame() {
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
+
 			this.areaBackleft1.draw(super.graphics, 0, 4);
 			this.areaBackleft2.draw(super.graphics, 0, 357);
 			this.areaBackright1.draw(super.graphics, 722, 4);
@@ -5349,10 +5400,12 @@ public class Client extends GameShell {
 			this.areaBackvmid2.draw(super.graphics, 516, 205);
 			this.areaBackvmid3.draw(super.graphics, 496, 357);
 			this.areaBackhmid2.draw(super.graphics, 0, 338);
+
 			this.redrawSidebar = true;
 			this.redrawChatback = true;
 			this.redrawSideicons = true;
 			this.redrawPrivacySettings = true;
+
 			if (this.sceneState != 2) {
 				this.areaViewport.draw(super.graphics, 4, 4);
 				this.areaMapback.draw(super.graphics, 550, 4);
@@ -5380,52 +5433,66 @@ public class Client extends GameShell {
 			this.drawSidebar();
 			this.redrawSidebar = false;
 		}
+
 		if (this.chatInterfaceId == -1) {
 			this.chatInterface.scrollPosition = this.chatScrollHeight - this.chatScrollOffset - 77;
+
 			if (super.mouseX > 448 && super.mouseX < 560 && super.mouseY > 332) {
 				this.handleScrollInput(this.chatInterface, 0, false, super.mouseY - 357, 77, this.chatScrollHeight, super.mouseX - 17, 463);
 			}
-			int var3 = this.chatScrollHeight - 77 - this.chatInterface.scrollPosition;
-			if (var3 < 0) {
-				var3 = 0;
+
+			int offset = this.chatScrollHeight - 77 - this.chatInterface.scrollPosition;
+			if (offset < 0) {
+				offset = 0;
 			}
-			if (var3 > this.chatScrollHeight - 77) {
-				var3 = this.chatScrollHeight - 77;
+
+			if (offset > this.chatScrollHeight - 77) {
+				offset = this.chatScrollHeight - 77;
 			}
-			if (this.chatScrollOffset != var3) {
-				this.chatScrollOffset = var3;
+
+			if (this.chatScrollOffset != offset) {
+				this.chatScrollOffset = offset;
 				this.redrawChatback = true;
 			}
 		}
+
 		if (this.chatInterfaceId != -1) {
-			boolean var4 = this.updateInterfaceAnimation(this.sceneDelta, this.chatInterfaceId);
-			if (var4) {
+			boolean redraw = this.updateInterfaceAnimation(this.sceneDelta, this.chatInterfaceId);
+			if (redraw) {
 				this.redrawChatback = true;
 			}
 		}
+
 		if (this.selectedArea == 3) {
 			this.redrawChatback = true;
 		}
+
 		if (this.objDragArea == 3) {
 			this.redrawChatback = true;
 		}
+
 		if (this.modalMessage != null) {
 			this.redrawChatback = true;
 		}
+
 		if (this.menuVisible && this.menuArea == 2) {
 			this.redrawChatback = true;
 		}
+
 		if (this.redrawChatback) {
 			this.drawChat();
 			this.redrawChatback = false;
 		}
+
 		if (this.sceneState == 2) {
 			this.drawMinimap();
 			this.areaMapback.draw(super.graphics, 550, 4);
 		}
+
 		if (this.flashingTab != -1) {
 			this.redrawSideicons = true;
 		}
+
 		if (this.redrawSideicons) {
 			if (this.flashingTab != -1 && this.flashingTab == this.selectedTab) {
 				this.flashingTab = -1;
@@ -5433,108 +5500,118 @@ public class Client extends GameShell {
 				this.out.pIsaac(233);
 				this.out.p1(this.selectedTab);
 			}
+
 			this.redrawSideicons = false;
 			this.areaBackhmid1.bind();
 			this.imageBackhmid1.draw(0, 0);
+
 			if (this.sidebarInterfaceId == -1) {
 				if (this.tabInterfaceId[this.selectedTab] != -1) {
 					if (this.selectedTab == 0) {
 						this.imageRedstone1.draw(22, 10);
-					}
-					if (this.selectedTab == 1) {
+					} else if (this.selectedTab == 1) {
 						this.imageRedstone2.draw(54, 8);
-					}
-					if (this.selectedTab == 2) {
+					} else if (this.selectedTab == 2) {
 						this.imageRedstone2.draw(82, 8);
-					}
-					if (this.selectedTab == 3) {
+					} else if (this.selectedTab == 3) {
 						this.imageRedstone3.draw(110, 8);
-					}
-					if (this.selectedTab == 4) {
+					} else if (this.selectedTab == 4) {
 						this.imageRedstone2h.draw(153, 8);
-					}
-					if (this.selectedTab == 5) {
+					} else if (this.selectedTab == 5) {
 						this.imageRedstone2h.draw(181, 8);
-					}
-					if (this.selectedTab == 6) {
+					} else if (this.selectedTab == 6) {
 						this.imageRedstone1h.draw(209, 9);
 					}
 				}
+
 				if (this.tabInterfaceId[0] != -1 && (this.flashingTab != 0 || loopCycle % 20 < 10)) {
 					this.imageSideicons[0].draw(29, 13);
 				}
+
 				if (this.tabInterfaceId[1] != -1 && (this.flashingTab != 1 || loopCycle % 20 < 10)) {
 					this.imageSideicons[1].draw(53, 11);
 				}
+
 				if (this.tabInterfaceId[2] != -1 && (this.flashingTab != 2 || loopCycle % 20 < 10)) {
 					this.imageSideicons[2].draw(82, 11);
 				}
+
 				if (this.tabInterfaceId[3] != -1 && (this.flashingTab != 3 || loopCycle % 20 < 10)) {
 					this.imageSideicons[3].draw(115, 12);
 				}
+
 				if (this.tabInterfaceId[4] != -1 && (this.flashingTab != 4 || loopCycle % 20 < 10)) {
 					this.imageSideicons[4].draw(153, 13);
 				}
+
 				if (this.tabInterfaceId[5] != -1 && (this.flashingTab != 5 || loopCycle % 20 < 10)) {
 					this.imageSideicons[5].draw(180, 11);
 				}
+
 				if (this.tabInterfaceId[6] != -1 && (this.flashingTab != 6 || loopCycle % 20 < 10)) {
 					this.imageSideicons[6].draw(208, 13);
 				}
 			}
+
 			this.areaBackhmid1.draw(super.graphics, 516, 160);
+
 			this.areaBackbase2.bind();
 			this.imageBackbase2.draw(0, 0);
+
 			if (this.sidebarInterfaceId == -1) {
 				if (this.tabInterfaceId[this.selectedTab] != -1) {
 					if (this.selectedTab == 7) {
 						this.imageRedstone1v.draw(42, 0);
-					}
-					if (this.selectedTab == 8) {
+					} else if (this.selectedTab == 8) {
 						this.imageRedstone2v.draw(74, 0);
-					}
-					if (this.selectedTab == 9) {
+					} else if (this.selectedTab == 9) {
 						this.imageRedstone2v.draw(102, 0);
-					}
-					if (this.selectedTab == 10) {
+					} else if (this.selectedTab == 10) {
 						this.imageRedstone3v.draw(130, 1);
-					}
-					if (this.selectedTab == 11) {
+					} else if (this.selectedTab == 11) {
 						this.imageRedstone2hv.draw(173, 0);
-					}
-					if (this.selectedTab == 12) {
+					} else if (this.selectedTab == 12) {
 						this.imageRedstone2hv.draw(201, 0);
-					}
-					if (this.selectedTab == 13) {
+					} else if (this.selectedTab == 13) {
 						this.imageRedstone1hv.draw(229, 0);
 					}
 				}
+
 				if (this.tabInterfaceId[8] != -1 && (this.flashingTab != 8 || loopCycle % 20 < 10)) {
 					this.imageSideicons[7].draw(74, 2);
 				}
+
 				if (this.tabInterfaceId[9] != -1 && (this.flashingTab != 9 || loopCycle % 20 < 10)) {
 					this.imageSideicons[8].draw(102, 3);
 				}
+
 				if (this.tabInterfaceId[10] != -1 && (this.flashingTab != 10 || loopCycle % 20 < 10)) {
 					this.imageSideicons[9].draw(137, 4);
 				}
+
 				if (this.tabInterfaceId[11] != -1 && (this.flashingTab != 11 || loopCycle % 20 < 10)) {
 					this.imageSideicons[10].draw(174, 2);
 				}
+
 				if (this.tabInterfaceId[12] != -1 && (this.flashingTab != 12 || loopCycle % 20 < 10)) {
 					this.imageSideicons[11].draw(201, 2);
 				}
+
 				if (this.tabInterfaceId[13] != -1 && (this.flashingTab != 13 || loopCycle % 20 < 10)) {
 					this.imageSideicons[12].draw(226, 2);
 				}
 			}
+
 			this.areaBackbase2.draw(super.graphics, 496, 466);
 			this.areaViewport.bind();
 		}
+
 		if (this.redrawPrivacySettings) {
 			this.redrawPrivacySettings = false;
+
 			this.areaBackbase1.bind();
 			this.imageBackbase1.draw(0, 0);
+
 			this.fontPlain12.drawStringTaggableCenter(55, true, "Public chat", 28, 16777215);
 			if (this.chatPublicMode == 0) {
 				this.fontPlain12.drawStringTaggableCenter(55, true, "On", 41, 65280);
@@ -5548,6 +5625,7 @@ public class Client extends GameShell {
 			if (this.chatPublicMode == 3) {
 				this.fontPlain12.drawStringTaggableCenter(55, true, "Hide", 41, 65535);
 			}
+
 			this.fontPlain12.drawStringTaggableCenter(184, true, "Private chat", 28, 16777215);
 			if (this.chatPrivateMode == 0) {
 				this.fontPlain12.drawStringTaggableCenter(184, true, "On", 41, 65280);
@@ -5558,6 +5636,7 @@ public class Client extends GameShell {
 			if (this.chatPrivateMode == 2) {
 				this.fontPlain12.drawStringTaggableCenter(184, true, "Off", 41, 16711680);
 			}
+
 			this.fontPlain12.drawStringTaggableCenter(324, true, "Trade/duel", 28, 16777215);
 			if (this.chatTradeMode == 0) {
 				this.fontPlain12.drawStringTaggableCenter(324, true, "On", 41, 65280);
@@ -5568,10 +5647,14 @@ public class Client extends GameShell {
 			if (this.chatTradeMode == 2) {
 				this.fontPlain12.drawStringTaggableCenter(324, true, "Off", 41, 16711680);
 			}
+
 			this.fontPlain12.drawStringTaggableCenter(458, true, "Report abuse", 33, 16777215);
+
 			this.areaBackbase1.draw(super.graphics, 0, 453);
+
 			this.areaViewport.bind();
 		}
+
 		this.sceneDelta = 0;
 	}
 
@@ -8084,50 +8167,52 @@ public class Client extends GameShell {
 			}
 		} else if (ptype == 155) {
 			// LOC_ANIM
-			int var4 = buf.g1();
-			int var5 = (var4 >> 4 & 0x7) + this.baseX;
-			int var6 = (var4 & 0x7) + this.baseZ;
-			int var7 = buf.g1();
-			int var8 = var7 >> 2;
-			int var9 = var7 & 0x3;
-			int var10 = this.LOC_SHAPE_TO_LAYER[var8];
-			int var11 = buf.g2();
-			if (var5 >= 0 && var6 >= 0 && var5 < 103 && var6 < 103) {
-				int var12 = this.levelHeightmap[this.currentLevel][var5][var6];
-				int var13 = this.levelHeightmap[this.currentLevel][var5 + 1][var6];
-				int var14 = this.levelHeightmap[this.currentLevel][var5 + 1][var6 + 1];
-				int var15 = this.levelHeightmap[this.currentLevel][var5][var6 + 1];
-				if (var10 == 0) {
-					Wall var16 = this.scene.getWall(var5, var6, this.currentLevel);
-					if (var16 != null) {
-						int var17 = var16.typecode >> 14 & 0x7FFF;
-						if (var8 == 2) {
-							var16.model1 = new ClientLocAnim(var15, var14, var12, 2, var9 + 4, false, var13, var17, var11);
-							var16.model2 = new ClientLocAnim(var15, var14, var12, 2, var9 + 1 & 0x3, false, var13, var17, var11);
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int info = buf.g1();
+			int shape = info >> 2;
+			int angle = info & 0x3;
+			int layer = this.LOC_SHAPE_TO_LAYER[shape];
+
+			int id = buf.g2();
+
+			if (x >= 0 && z >= 0 && x < 103 && z < 103) {
+				int heightSW = this.levelHeightmap[this.currentLevel][x][z];
+				int heightSE = this.levelHeightmap[this.currentLevel][x + 1][z];
+				int heightNE = this.levelHeightmap[this.currentLevel][x + 1][z + 1];
+				int heightNW = this.levelHeightmap[this.currentLevel][x][z + 1];
+
+				if (layer == 0) {
+					Wall wall = this.scene.getWall(x, z, this.currentLevel);
+					if (wall != null) {
+						int locId = wall.typecode >> 14 & 0x7FFF;
+						if (shape == 2) {
+							wall.model1 = new ClientLocAnim(heightNW, heightNE, heightSW, 2, angle + 4, false, heightSE, locId, id);
+							wall.model2 = new ClientLocAnim(heightNW, heightNE, heightSW, 2, angle + 1 & 0x3, false, heightSE, locId, id);
 						} else {
-							var16.model1 = new ClientLocAnim(var15, var14, var12, var8, var9, false, var13, var17, var11);
+							wall.model1 = new ClientLocAnim(heightNW, heightNE, heightSW, shape, angle, false, heightSE, locId, id);
 						}
 					}
-				}
-				if (var10 == 1) {
-					Decor var18 = this.scene.getDecor(var5, this.currentLevel, var6);
-					if (var18 != null) {
-						var18.model = new ClientLocAnim(var15, var14, var12, 4, 0, false, var13, var18.typecode >> 14 & 0x7FFF, var11);
+				} else if (layer == 1) {
+					Decor decor = this.scene.getDecor(x, this.currentLevel, z);
+					if (decor != null) {
+						decor.model = new ClientLocAnim(heightNW, heightNE, heightSW, 4, 0, false, heightSE, decor.typecode >> 14 & 0x7FFF, id);
 					}
-				}
-				if (var10 == 2) {
-					Sprite var19 = this.scene.getLoc(this.currentLevel, var6, var5);
-					if (var8 == 11) {
-						var8 = 10;
+				} else if (layer == 2) {
+					Sprite sprite = this.scene.getSprite(this.currentLevel, z, x);
+					if (shape == 11) {
+						shape = 10;
 					}
-					if (var19 != null) {
-						var19.model = new ClientLocAnim(var15, var14, var12, var8, var9, false, var13, var19.typecode >> 14 & 0x7FFF, var11);
+
+					if (sprite != null) {
+						sprite.model = new ClientLocAnim(heightNW, heightNE, heightSW, shape, angle, false, heightSE, sprite.typecode >> 14 & 0x7FFF, id);
 					}
-				}
-				if (var10 == 3) {
-					GroundDecor var20 = this.scene.getGroundDecor(var5, var6, this.currentLevel);
-					if (var20 != null) {
-						var20.model = new ClientLocAnim(var15, var14, var12, 22, var9, false, var13, var20.typecode >> 14 & 0x7FFF, var11);
+				} else if (layer == 3) {
+					GroundDecor decor = this.scene.getGroundDecor(x, z, this.currentLevel);
+					if (decor != null) {
+						decor.model = new ClientLocAnim(heightNW, heightNE, heightSW, 22, angle, false, heightSE, decor.typecode >> 14 & 0x7FFF, id);
 					}
 				}
 			}
@@ -10959,7 +11044,7 @@ public class Client extends GameShell {
 			if (this.updateDesignModel) {
 				for (int i = 0; i < 7; i++) {
 					int kit = this.designKits[i];
-					if (kit >= 0 && !IdkType.types[kit].validateModel()) {
+					if (kit >= 0 && !IdkType.types[kit].modelIsReady()) {
 						return;
 					}
 				}
@@ -11287,7 +11372,9 @@ public class Client extends GameShell {
 			this.fontBold12.drawStringCenter(239, 128, "Click to continue", 60);
 		} else if (this.chatInterfaceId != -1) {
 			this.drawInterface(0, 0, Component.types[this.chatInterfaceId], 0);
-		} else if (this.stickyChatInterfaceId == -1) {
+		} else if (this.stickyChatInterfaceId != -1) {
+			this.drawInterface(0, 0, Component.types[this.stickyChatInterfaceId], 0);
+		} else {
 			PixFont font = this.fontPlain12;
 			int line = 0;
 
@@ -11335,9 +11422,10 @@ public class Client extends GameShell {
 					} else if ((type == 3 || type == 7) && this.splitPrivateChat == 0 && (type == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(sender))) {
 						if (y > 0 && y < 110) {
 							int x = 4;
-							font.drawString("From", 0, y, x);
 
+							font.drawString("From", 0, y, x);
 							x += font.stringWidth("From ");
+
 							if (modicon == 1) {
 								this.imageModIcons[0].draw(x, y - 12);
 								x += 14;
@@ -11345,10 +11433,11 @@ public class Client extends GameShell {
 								this.imageModIcons[1].draw(x, y - 12);
 								x += 14;
 							}
-							font.drawString(sender + ":", 0, y, x);
 
+							font.drawString(sender + ":", 0, y, x);
 							x += font.stringWidth(sender) + 8;
-							font.drawString(this.messageText[i], 8388608, y, x);
+
+							font.drawString(this.messageText[i], 0x800000, y, x);
 						}
 
 						line++;
@@ -11400,8 +11489,6 @@ public class Client extends GameShell {
 			font.drawString(this.chatTyped + "*", 255, 90, font.stringWidth(username + ": ") + 6);
 
 			Pix2D.drawHorizontalLine(0, 77, 479, 0);
-		} else {
-			this.drawInterface(0, 0, Component.types[this.stickyChatInterfaceId], 0);
 		}
 
 		if (this.menuVisible && this.menuArea == 2) {

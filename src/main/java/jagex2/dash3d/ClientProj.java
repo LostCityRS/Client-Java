@@ -142,7 +142,7 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(I)Lfb;")
-	public final Model getTempModel() {
+	public final Model getModel() {
 		Model var2 = this.field504.getModel();
 		if (var2 == null) {
 			return null;

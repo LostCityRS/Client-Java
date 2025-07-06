@@ -354,31 +354,33 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(II)Lfb;")
-	public static Model tryGet(int arg0) {
+	public static Model tryGet(int id) {
 		if (meta == null) {
 			return null;
 		}
-		Metadata var2 = meta[arg0];
-		if (var2 == null) {
-			provider.requestModel(arg0);
+
+		Metadata info = meta[id];
+		if (info == null) {
+			provider.requestModel(id);
 			return null;
-		} else {
-			return new Model(arg0);
 		}
+
+		return new Model(id);
 	}
 
 	@ObfuscatedName("fb.b(I)Z")
-	public static boolean validate(int arg0) {
+	public static boolean isReady(int id) {
 		if (meta == null) {
 			return false;
 		}
-		Metadata var1 = meta[arg0];
-		if (var1 == null) {
-			provider.requestModel(arg0);
+
+		Metadata info = meta[id];
+		if (info == null) {
+			provider.requestModel(id);
 			return false;
-		} else {
-			return true;
 		}
+
+		return true;
 	}
 
 	public Model() {
