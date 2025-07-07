@@ -458,9 +458,9 @@ public class Component {
 	public Model getModel(int primaryTransformId, int secondaryTransformId, boolean active) {
 		Model model;
 		if (active) {
-			model = this.getModel(this.activeModelType, this.activeModel);
+			model = this.loadModel(this.activeModelType, this.activeModel);
 		} else {
-			model = this.getModel(this.modelType, this.model);
+			model = this.loadModel(this.modelType, this.model);
 		}
 
 		if (model == null) {
@@ -489,7 +489,7 @@ public class Component {
 	}
 
 	@ObfuscatedName("d.a(II)Lfb;")
-	public Model getModel(int type, int id) {
+	public Model loadModel(int type, int id) {
 		Model model = (Model) modelCache.get(((long) type << 16) + id);
 		if (model != null) {
 			return model;

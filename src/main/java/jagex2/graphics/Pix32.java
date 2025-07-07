@@ -137,13 +137,14 @@ public class Pix32 extends Pix2D {
 
 	@ObfuscatedName("jb.b(Z)V")
 	public void crop() {
-		int[] var2 = new int[this.height * this.width];
-		for (int var3 = 0; var3 < this.cropBottom; var3++) {
-			for (int var4 = 0; var4 < this.cropRight; var4++) {
-				var2[(this.cropTop + var3) * this.width + this.cropLeft + var4] = this.pixels[this.cropRight * var3 + var4];
+		int[] pixels = new int[this.height * this.width];
+		for (int y = 0; y < this.cropBottom; y++) {
+			for (int x = 0; x < this.cropRight; x++) {
+				pixels[(this.cropTop + y) * this.width + this.cropLeft + x] = this.pixels[this.cropRight * y + x];
 			}
 		}
-		this.pixels = var2;
+
+		this.pixels = pixels;
 		this.cropRight = this.width;
 		this.cropBottom = this.height;
 		this.cropLeft = 0;
@@ -360,69 +361,78 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(IIIIIIZ[I[III)V")
-	public void drawRotatedMasked(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6, int[] arg7, int[] arg8, int arg9, int arg10) {
-		if (arg6) {
-			return;
-		}
+	public void drawRotatedMasked(int x, int anchorY, int w, int zoom, int y, int theta, int[] lineWidth, int[] lineStart, int anchorX, int h) {
 		try {
-			int var12 = -arg2 / 2;
-			int var13 = -arg10 / 2;
-			int var14 = (int) (Math.sin((double) arg5 / 326.11D) * 65536.0D);
-			int var15 = (int) (Math.cos((double) arg5 / 326.11D) * 65536.0D);
-			int var16 = arg3 * var14 >> 8;
-			int var17 = arg3 * var15 >> 8;
-			int var18 = (arg9 << 16) + var12 * var17 + var13 * var16;
-			int var19 = (arg1 << 16) + (var13 * var17 - var12 * var16);
-			int var20 = Pix2D.width2d * arg4 + arg0;
-			for (int var21 = 0; var21 < arg10; var21++) {
-				int var22 = arg8[var21];
-				int var23 = var20 + var22;
-				int var24 = var17 * var22 + var18;
-				int var25 = var19 - var16 * var22;
-				for (int var26 = -arg7[var21]; var26 < 0; var26++) {
-					Pix2D.data[var23++] = this.pixels[(var24 >> 16) + (var25 >> 16) * this.cropRight];
-					var24 += var17;
-					var25 -= var16;
+			int centerX = -w / 2;
+			int centerY = -h / 2;
+
+			int sin = (int) (Math.sin((double) theta / 326.11D) * 65536.0D);
+			int cos = (int) (Math.cos((double) theta / 326.11D) * 65536.0D);
+			int sinZoom = zoom * sin >> 8;
+			int cosZoom = zoom * cos >> 8;
+
+			int leftX = (anchorX << 16) + centerX * cosZoom + centerY * sinZoom;
+			int leftY = (anchorY << 16) + (centerY * cosZoom - centerX * sinZoom);
+			int leftOff = Pix2D.width2d * y + x;
+
+			for (int i = 0; i < h; i++) {
+				int dstOff = lineStart[i];
+				int dstX = leftOff + dstOff;
+
+				int srcX = cosZoom * dstOff + leftX;
+				int srcY = leftY - sinZoom * dstOff;
+
+				for (int j = -lineWidth[i]; j < 0; j++) {
+					Pix2D.data[dstX++] = this.pixels[(srcX >> 16) + (srcY >> 16) * this.cropRight];
+					srcX += cosZoom;
+					srcY -= sinZoom;
 				}
-				var18 += var16;
-				var19 += var17;
-				var20 += Pix2D.width2d;
+
+				leftX += sinZoom;
+				leftY += cosZoom;
+				leftOff += Pix2D.width2d;
 			}
-		} catch (Exception var27) {
+		} catch (Exception ignore) {
 		}
 	}
 
 	@ObfuscatedName("jb.a(IBDIIIIII)V")
-	public void drawRotated(int arg0, double arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void drawRotated(int y, double theta, int zoom, int anchorX, int anchorY, int w, int h, int x) {
 		try {
-			int var12 = -arg6 / 2;
-			int var13 = -arg7 / 2;
-			int var14 = (int) (Math.sin(arg2) * 65536.0D);
-			int var15 = (int) (Math.cos(arg2) * 65536.0D);
-			int var16 = arg3 * var14 >> 8;
-			int var17 = arg3 * var15 >> 8;
-			int var18 = (arg4 << 16) + var12 * var17 + var13 * var16;
-			int var19 = (arg5 << 16) + (var13 * var17 - var12 * var16);
-			int var20 = Pix2D.width2d * arg0 + arg8;
-			for (int var21 = 0; var21 < arg7; var21++) {
-				int var22 = var20;
-				int var23 = var18;
-				int var24 = var19;
-				for (int var25 = -arg6; var25 < 0; var25++) {
-					int var26 = this.pixels[(var23 >> 16) + (var24 >> 16) * this.cropRight];
-					if (var26 == 0) {
-						var22++;
+			int centerX = -w / 2;
+			int centerY = -h / 2;
+
+			int sin = (int) (Math.sin(theta) * 65536.0D);
+			int cos = (int) (Math.cos(theta) * 65536.0D);
+			int sinZoom = zoom * sin >> 8;
+			int cosZoom = zoom * cos >> 8;
+
+			int leftX = (anchorX << 16) + (centerX * cosZoom + centerY * sinZoom);
+			int leftY = (anchorY << 16) + (centerY * cosZoom - centerX * sinZoom);
+			int leftOff = Pix2D.width2d * y + x;
+
+			for (int i = 0; i < h; i++) {
+				int dstX = leftOff;
+				int srcX = leftX;
+				int srcY = leftY;
+
+				for (int j = -w; j < 0; j++) {
+					int rgb = this.pixels[(srcX >> 16) + (srcY >> 16) * this.cropRight];
+					if (rgb == 0) {
+						dstX++;
 					} else {
-						Pix2D.data[var22++] = var26;
+						Pix2D.data[dstX++] = rgb;
 					}
-					var23 += var17;
-					var24 -= var16;
+
+					srcX += cosZoom;
+					srcY -= sinZoom;
 				}
-				var18 += var16;
-				var19 += var17;
-				var20 += Pix2D.width2d;
+
+				leftX += sinZoom;
+				leftY += cosZoom;
+				leftOff += Pix2D.width2d;
 			}
-		} catch (Exception var27) {
+		} catch (Exception ignore) {
 		}
 	}
 

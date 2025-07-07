@@ -3374,74 +3374,94 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(BI)V")
-	public final void createMinimap(int arg1) {
-		int[] var3 = this.imageMinimap.pixels;
-		int var4 = var3.length;
-		for (int var5 = 0; var5 < var4; var5++) {
-			var3[var5] = 0;
+	public final void createMinimap(int level) {
+		int[] pixels = this.imageMinimap.pixels;
+		int length = pixels.length;
+		for (int i = 0; i < length; i++) {
+			pixels[i] = 0;
 		}
-		for (int var6 = 1; var6 < 103; var6++) {
-			int var23 = (103 - var6) * 512 * 4 + 24628;
-			for (int var24 = 1; var24 < 103; var24++) {
-				if ((this.levelTileFlags[arg1][var24][var6] & 0x18) == 0) {
-					this.scene.drawMinimapTile(var3, var23, 512, arg1, var24, var6);
+
+		for (int z = 1; z < 103; z++) {
+			int offset = (103 - z) * 512 * 4 + 24628;
+
+			for (int x = 1; x < 103; x++) {
+				if ((this.levelTileFlags[level][x][z] & 0x18) == 0) {
+					this.scene.drawMinimapTile(pixels, offset, 512, level, x, z);
 				}
-				if (arg1 < 3 && (this.levelTileFlags[arg1 + 1][var24][var6] & 0x8) != 0) {
-					this.scene.drawMinimapTile(var3, var23, 512, arg1 + 1, var24, var6);
+
+				if (level < 3 && (this.levelTileFlags[level + 1][x][z] & 0x8) != 0) {
+					this.scene.drawMinimapTile(pixels, offset, 512, level + 1, x, z);
 				}
-				var23 += 4;
+
+				offset += 4;
 			}
 		}
-		int var7 = ((int) (Math.random() * 20.0D) + 238 - 10 << 16) + ((int) (Math.random() * 20.0D) + 238 - 10 << 8) + ((int) (Math.random() * 20.0D) + 238 - 10);
-		int var8 = (int) (Math.random() * 20.0D) + 238 - 10 << 16;
+
+		int wallRgb = ((int) (Math.random() * 20.0D) + 238 - 10 << 16) + ((int) (Math.random() * 20.0D) + 238 - 10 << 8) + ((int) (Math.random() * 20.0D) + 238 - 10);
+		int doorRgb = (int) (Math.random() * 20.0D) + 238 - 10 << 16;
+
 		this.imageMinimap.bind();
-		for (int var9 = 1; var9 < 103; var9++) {
-			for (int var22 = 1; var22 < 103; var22++) {
-				if ((this.levelTileFlags[arg1][var22][var9] & 0x18) == 0) {
-					this.drawMinimapLoc(var9, arg1, var8, var7, var22);
+
+		for (int z = 1; z < 103; z++) {
+			for (int x = 1; x < 103; x++) {
+				if ((this.levelTileFlags[level][x][z] & 0x18) == 0) {
+					this.drawMinimapLoc(z, level, doorRgb, wallRgb, x);
 				}
-				if (arg1 < 3 && (this.levelTileFlags[arg1 + 1][var22][var9] & 0x8) != 0) {
-					this.drawMinimapLoc(var9, arg1 + 1, var8, var7, var22);
+
+				if (level < 3 && (this.levelTileFlags[level + 1][x][z] & 0x8) != 0) {
+					this.drawMinimapLoc(z, level + 1, doorRgb, wallRgb, x);
 				}
 			}
 		}
+
 		this.areaViewport.bind();
+
 		this.activeMapFunctionCount = 0;
-		for (int var10 = 0; var10 < 104; var10++) {
-			for (int var11 = 0; var11 < 104; var11++) {
-				int var12 = this.scene.getGroundDecorTypecode(this.currentLevel, var10, var11);
-				if (var12 != 0) {
-					int var13 = var12 >> 14 & 0x7FFF;
-					int var14 = LocType.get(var13).mapfunction;
-					if (var14 >= 0) {
-						int var15 = var10;
-						int var16 = var11;
-						if (var14 != 22 && var14 != 29 && var14 != 34 && var14 != 36 && var14 != 46 && var14 != 47 && var14 != 48) {
-							byte var17 = 104;
-							byte var18 = 104;
-							int[][] var19 = this.levelCollisionMap[this.currentLevel].flags;
-							for (int var20 = 0; var20 < 10; var20++) {
-								int var21 = (int) (Math.random() * 4.0D);
-								if (var21 == 0 && var15 > 0 && var15 > var10 - 3 && (var19[var15 - 1][var16] & 0x280108) == 0) {
-									var15--;
-								}
-								if (var21 == 1 && var15 < var17 - 1 && var15 < var10 + 3 && (var19[var15 + 1][var16] & 0x280180) == 0) {
-									var15++;
-								}
-								if (var21 == 2 && var16 > 0 && var16 > var11 - 3 && (var19[var15][var16 - 1] & 0x280102) == 0) {
-									var16--;
-								}
-								if (var21 == 3 && var16 < var18 - 1 && var16 < var11 + 3 && (var19[var15][var16 + 1] & 0x280120) == 0) {
-									var16++;
-								}
-							}
+
+		for (int x = 0; x < 104; x++) {
+			for (int z = 0; z < 104; z++) {
+				int typecode = this.scene.getGroundDecorTypecode(this.currentLevel, x, z);
+				if (typecode == 0) {
+					continue;
+				}
+
+				int locId = typecode >> 14 & 0x7FFF;
+				int func = LocType.get(locId).mapfunction;
+				if (func < 0) {
+					continue;
+				}
+
+				int stx = x;
+				int stz = z;
+				if (func != 22 && func != 29 && func != 34 && func != 36 && func != 46 && func != 47 && func != 48) {
+					byte mapX = 104;
+					byte mapZ = 104;
+					int[][] flags = this.levelCollisionMap[this.currentLevel].flags;
+
+					for (int i = 0; i < 10; i++) {
+						int rand = (int) (Math.random() * 4.0D);
+						if (rand == 0 && stx > 0 && stx > x - 3 && (flags[stx - 1][stz] & 0x280108) == 0) {
+							stx--;
 						}
-						this.activeMapFunctions[this.activeMapFunctionCount] = this.imageMapfunction[var14];
-						this.activeMapFunctionX[this.activeMapFunctionCount] = var15;
-						this.activeMapFunctionZ[this.activeMapFunctionCount] = var16;
-						this.activeMapFunctionCount++;
+
+						if (rand == 1 && stx < mapX - 1 && stx < x + 3 && (flags[stx + 1][stz] & 0x280180) == 0) {
+							stx++;
+						}
+
+						if (rand == 2 && stz > 0 && stz > z - 3 && (flags[stx][stz - 1] & 0x280102) == 0) {
+							stz--;
+						}
+
+						if (rand == 3 && stz < mapZ - 1 && stz < z + 3 && (flags[stx][stz + 1] & 0x280120) == 0) {
+							stz++;
+						}
 					}
 				}
+
+				this.activeMapFunctions[this.activeMapFunctionCount] = this.imageMapfunction[func];
+				this.activeMapFunctionX[this.activeMapFunctionCount] = stx;
+				this.activeMapFunctionZ[this.activeMapFunctionCount] = stz;
+				this.activeMapFunctionCount++;
 			}
 		}
 	}
@@ -4783,7 +4803,7 @@ public class Client extends GameShell {
 			arg0.forceMoveStartCycle = 0;
 			arg0.x = arg0.routeTileX[0] * 128 + arg0.size * 64;
 			arg0.z = arg0.routeTileZ[0] * 128 + arg0.size * 64;
-			arg0.resetPath();
+			arg0.clearRoute();
 		}
 		if (localPlayer == arg0 && (arg0.x < 1536 || arg0.z < 1536 || arg0.x >= 11776 || arg0.z >= 11776)) {
 			arg0.primarySeqId = -1;
@@ -4792,7 +4812,7 @@ public class Client extends GameShell {
 			arg0.forceMoveStartCycle = 0;
 			arg0.x = arg0.routeTileX[0] * 128 + arg0.size * 64;
 			arg0.z = arg0.routeTileZ[0] * 128 + arg0.size * 64;
-			arg0.resetPath();
+			arg0.clearRoute();
 		}
 		if (arg0.forceMoveEndCycle > loopCycle) {
 			this.updateForceMovement(arg0);
@@ -4861,25 +4881,25 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.b(Lz;I)V")
 	public final void updateMovement(ClientEntity arg0) {
 		arg0.secondarySeqId = arg0.readyanim;
-		if (arg0.pathLength == 0) {
+		if (arg0.routeLength == 0) {
 			arg0.seqDelayMove = 0;
 			return;
 		}
 		if (arg0.primarySeqId != -1 && arg0.primarySeqDelay == 0) {
 			SeqType var3 = SeqType.types[arg0.primarySeqId];
-			if (arg0.seqPathLength > 0 && var3.preanim_move == 0) {
+			if (arg0.preanimRouteLength > 0 && var3.preanim_move == 0) {
 				arg0.seqDelayMove++;
 				return;
 			}
-			if (arg0.seqPathLength <= 0 && var3.postanim_mode == 0) {
+			if (arg0.preanimRouteLength <= 0 && var3.postanim_mode == 0) {
 				arg0.seqDelayMove++;
 				return;
 			}
 		}
 		int var4 = arg0.x;
 		int var5 = arg0.z;
-		int var6 = arg0.routeTileX[arg0.pathLength - 1] * 128 + arg0.size * 64;
-		int var7 = arg0.routeTileZ[arg0.pathLength - 1] * 128 + arg0.size * 64;
+		int var6 = arg0.routeTileX[arg0.routeLength - 1] * 128 + arg0.size * 64;
+		int var7 = arg0.routeTileZ[arg0.routeLength - 1] * 128 + arg0.size * 64;
 		if (var6 - var4 > 256 || var6 - var4 < -256 || var7 - var5 > 256 || var7 - var5 < -256) {
 			arg0.x = var6;
 			arg0.z = var7;
@@ -4926,17 +4946,17 @@ public class Client extends GameShell {
 		if (arg0.dstYaw != arg0.yaw && arg0.targetId == -1) {
 			var10 = 2;
 		}
-		if (arg0.pathLength > 2) {
+		if (arg0.routeLength > 2) {
 			var10 = 6;
 		}
-		if (arg0.pathLength > 3) {
+		if (arg0.routeLength > 3) {
 			var10 = 8;
 		}
-		if (arg0.seqDelayMove > 0 && arg0.pathLength > 1) {
+		if (arg0.seqDelayMove > 0 && arg0.routeLength > 1) {
 			var10 = 8;
 			arg0.seqDelayMove--;
 		}
-		if (arg0.pathRunning[arg0.pathLength - 1]) {
+		if (arg0.routeRun[arg0.routeLength - 1]) {
 			var10 <<= 0x1;
 		}
 		if (var10 >= 8 && arg0.secondarySeqId == arg0.walkanim && arg0.runanim != -1) {
@@ -4967,9 +4987,9 @@ public class Client extends GameShell {
 		if (arg0.x != var6 || arg0.z != var7) {
 			return;
 		}
-		arg0.pathLength--;
-		if (arg0.seqPathLength > 0) {
-			arg0.seqPathLength--;
+		arg0.routeLength--;
+		if (arg0.preanimRouteLength > 0) {
+			arg0.preanimRouteLength--;
 			return;
 		}
 	}
@@ -5001,7 +5021,7 @@ public class Client extends GameShell {
 				}
 			}
 		}
-		if ((arg0.targetTileX != 0 || arg0.targetTileZ != 0) && (arg0.pathLength == 0 || arg0.seqDelayMove > 0)) {
+		if ((arg0.targetTileX != 0 || arg0.targetTileZ != 0) && (arg0.routeLength == 0 || arg0.seqDelayMove > 0)) {
 			int var10 = arg0.x - (arg0.targetTileX - this.sceneBaseTileX - this.sceneBaseTileX) * 64;
 			int var11 = arg0.z - (arg0.targetTileZ - this.sceneBaseTileZ - this.sceneBaseTileZ) * 64;
 			if (var10 != 0 || var11 != 0) {
@@ -5035,62 +5055,77 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.d(Lz;I)V")
-	public final void updateSequences(ClientEntity arg0) {
-		arg0.needsForwardDrawPadding = false;
-		if (arg0.secondarySeqId != -1) {
-			SeqType var3 = SeqType.types[arg0.secondarySeqId];
-			arg0.secondarySeqCycle++;
-			if (arg0.secondarySeqFrame < var3.frameCount && arg0.secondarySeqCycle > var3.getFrameDuration(arg0.secondarySeqFrame)) {
-				arg0.secondarySeqCycle = 0;
-				arg0.secondarySeqFrame++;
+	public final void updateSequences(ClientEntity e) {
+		e.needsForwardDrawPadding = false;
+
+		if (e.secondarySeqId != -1) {
+			SeqType seq = SeqType.types[e.secondarySeqId];
+			e.secondarySeqCycle++;
+
+			if (e.secondarySeqFrame < seq.frameCount && e.secondarySeqCycle > seq.getFrameDuration(e.secondarySeqFrame)) {
+				e.secondarySeqCycle = 0;
+				e.secondarySeqFrame++;
 			}
-			if (arg0.secondarySeqFrame >= var3.frameCount) {
-				arg0.secondarySeqCycle = 0;
-				arg0.secondarySeqFrame = 0;
-			}
-		}
-		if (arg0.spotanimId != -1 && loopCycle >= arg0.spotanimLastCycle) {
-			if (arg0.spotanimFrame < 0) {
-				arg0.spotanimFrame = 0;
-			}
-			SeqType var4 = SpotAnimType.types[arg0.spotanimId].seq;
-			arg0.spotanimCycle++;
-			while (arg0.spotanimFrame < var4.frameCount && arg0.spotanimCycle > var4.getFrameDuration(arg0.spotanimFrame)) {
-				arg0.spotanimCycle -= var4.getFrameDuration(arg0.spotanimFrame);
-				arg0.spotanimFrame++;
-			}
-			if (arg0.spotanimFrame >= var4.frameCount && (arg0.spotanimFrame < 0 || arg0.spotanimFrame >= var4.frameCount)) {
-				arg0.spotanimId = -1;
+
+			if (e.secondarySeqFrame >= seq.frameCount) {
+				e.secondarySeqCycle = 0;
+				e.secondarySeqFrame = 0;
 			}
 		}
-		if (arg0.primarySeqId != -1 && arg0.primarySeqDelay <= 1) {
-			SeqType var5 = SeqType.types[arg0.primarySeqId];
-			if (var5.preanim_move == 1 && arg0.seqPathLength > 0 && arg0.forceMoveEndCycle <= loopCycle && arg0.forceMoveStartCycle < loopCycle) {
-				arg0.primarySeqDelay = 1;
+
+		if (e.spotanimId != -1 && loopCycle >= e.spotanimLastCycle) {
+			if (e.spotanimFrame < 0) {
+				e.spotanimFrame = 0;
+			}
+
+			SeqType seq = SpotAnimType.types[e.spotanimId].seq;
+			e.spotanimCycle++;
+
+			while (e.spotanimFrame < seq.frameCount && e.spotanimCycle > seq.getFrameDuration(e.spotanimFrame)) {
+				e.spotanimCycle -= seq.getFrameDuration(e.spotanimFrame);
+				e.spotanimFrame++;
+			}
+
+			if (e.spotanimFrame >= seq.frameCount && (e.spotanimFrame < 0 || e.spotanimFrame >= seq.frameCount)) {
+				e.spotanimId = -1;
+			}
+		}
+
+		if (e.primarySeqId != -1 && e.primarySeqDelay <= 1) {
+			SeqType seq = SeqType.types[e.primarySeqId];
+			if (seq.preanim_move == 1 && e.preanimRouteLength > 0 && e.forceMoveEndCycle <= loopCycle && e.forceMoveStartCycle < loopCycle) {
+				e.primarySeqDelay = 1;
 				return;
 			}
 		}
-		if (arg0.primarySeqId != -1 && arg0.primarySeqDelay == 0) {
-			SeqType var6 = SeqType.types[arg0.primarySeqId];
-			arg0.primarySeqCycle++;
-			while (arg0.primarySeqFrame < var6.frameCount && arg0.primarySeqCycle > var6.getFrameDuration(arg0.primarySeqFrame)) {
-				arg0.primarySeqCycle -= var6.getFrameDuration(arg0.primarySeqFrame);
-				arg0.primarySeqFrame++;
+
+		if (e.primarySeqId != -1 && e.primarySeqDelay == 0) {
+			SeqType seq = SeqType.types[e.primarySeqId];
+			e.primarySeqCycle++;
+
+			while (e.primarySeqFrame < seq.frameCount && e.primarySeqCycle > seq.getFrameDuration(e.primarySeqFrame)) {
+				e.primarySeqCycle -= seq.getFrameDuration(e.primarySeqFrame);
+				e.primarySeqFrame++;
 			}
-			if (arg0.primarySeqFrame >= var6.frameCount) {
-				arg0.primarySeqFrame -= var6.replayoff;
-				arg0.primarySeqLoop++;
-				if (arg0.primarySeqLoop >= var6.replaycount) {
-					arg0.primarySeqId = -1;
+
+			if (e.primarySeqFrame >= seq.frameCount) {
+				e.primarySeqFrame -= seq.replayoff;
+				e.primarySeqLoop++;
+
+				if (e.primarySeqLoop >= seq.replaycount) {
+					e.primarySeqId = -1;
 				}
-				if (arg0.primarySeqFrame < 0 || arg0.primarySeqFrame >= var6.frameCount) {
-					arg0.primarySeqId = -1;
+
+				if (e.primarySeqFrame < 0 || e.primarySeqFrame >= seq.frameCount) {
+					e.primarySeqId = -1;
 				}
 			}
-			arg0.needsForwardDrawPadding = var6.stretches;
+
+			e.needsForwardDrawPadding = seq.stretches;
 		}
-		if (arg0.primarySeqDelay > 0) {
-			arg0.primarySeqDelay--;
+
+		if (e.primarySeqDelay > 0) {
+			e.primarySeqDelay--;
 		}
 	}
 
@@ -5418,8 +5453,8 @@ public class Client extends GameShell {
 			this.redrawSidebar = true;
 		}
 		if (this.sidebarInterfaceId != -1) {
-			boolean var2 = this.updateInterfaceAnimation(this.sceneDelta, this.sidebarInterfaceId);
-			if (var2) {
+			boolean redraw = this.updateInterfaceAnimation(this.sceneDelta, this.sidebarInterfaceId);
+			if (redraw) {
 				this.redrawSidebar = true;
 			}
 		}
@@ -5814,7 +5849,7 @@ public class Client extends GameShell {
 	public final void pushNpcs(boolean alwaysontop) {
 		for (int i = 0; i < this.npcCount; i++) {
 			ClientNpc npc = this.npcs[this.npcIds[i]];
-			int typecode = (this.npcIds[i] << 14) + 536870912;
+			int typecode = (this.npcIds[i] << 14) + 0x20000000;
 
 			if (npc == null || !npc.isVisible() || npc.type.alwaysontop != alwaysontop) {
 				continue;
@@ -8149,21 +8184,24 @@ public class Client extends GameShell {
 	public final void readZonePacket(int ptype, Packet buf) {
 		if (ptype == 232 || ptype == 125) {
 			// LOC_ADD_CHANGE || LOC_DEL
-			int var101 = buf.g1();
-			int var102 = (var101 >> 4 & 0x7) + this.baseX;
-			int var103 = (var101 & 0x7) + this.baseZ;
-			int var104 = buf.g1();
-			int var105 = var104 >> 2;
-			int var106 = var104 & 0x3;
-			int var107 = this.LOC_SHAPE_TO_LAYER[var105];
-			int var108;
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int info = buf.g1();
+			int shape = info >> 2;
+			int angle = info & 0x3;
+			int layer = this.LOC_SHAPE_TO_LAYER[shape];
+
+			int id;
 			if (ptype == 125) {
-				var108 = -1;
+				id = -1;
 			} else {
-				var108 = buf.g2();
+				id = buf.g2();
 			}
-			if (var102 >= 0 && var103 >= 0 && var102 < 104 && var103 < 104) {
-				this.appendLoc(var102, var105, -1, var108, var106, var107, var103, this.currentLevel, 0);
+
+			if (x >= 0 && z >= 0 && x < 104 && z < 104) {
+				this.appendLoc(x, shape, -1, id, angle, layer, z, this.currentLevel, 0);
 			}
 		} else if (ptype == 155) {
 			// LOC_ANIM
@@ -8187,7 +8225,7 @@ public class Client extends GameShell {
 				if (layer == 0) {
 					Wall wall = this.scene.getWall(x, z, this.currentLevel);
 					if (wall != null) {
-						int locId = wall.typecode >> 14 & 0x7FFF;
+						int locId = wall.typecode1 >> 14 & 0x7FFF;
 						if (shape == 2) {
 							wall.model1 = new ClientLocAnim(heightNW, heightNE, heightSW, 2, angle + 4, false, heightSE, locId, id);
 							wall.model2 = new ClientLocAnim(heightNW, heightNE, heightSW, 2, angle + 1 & 0x3, false, heightSE, locId, id);
@@ -8218,176 +8256,209 @@ public class Client extends GameShell {
 			}
 		} else if (ptype == 234) {
 			// OBJ_ADD
-			int var21 = buf.g1();
-			int var22 = (var21 >> 4 & 0x7) + this.baseX;
-			int var23 = (var21 & 0x7) + this.baseZ;
-			int var24 = buf.g2();
-			int var25 = buf.g2();
-			if (var22 >= 0 && var23 >= 0 && var22 < 104 && var23 < 104) {
-				ClientObj var26 = new ClientObj();
-				var26.index = var24;
-				var26.count = var25;
-				if (this.objStacks[this.currentLevel][var22][var23] == null) {
-					this.objStacks[this.currentLevel][var22][var23] = new LinkList();
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int id = buf.g2();
+			int count = buf.g2();
+
+			if (x >= 0 && z >= 0 && x < 104 && z < 104) {
+				ClientObj obj = new ClientObj();
+				obj.index = id;
+				obj.count = count;
+
+				if (this.objStacks[this.currentLevel][x][z] == null) {
+					this.objStacks[this.currentLevel][x][z] = new LinkList();
 				}
-				this.objStacks[this.currentLevel][var22][var23].push(var26);
-				this.sortObjStacks(var22, var23);
+
+				this.objStacks[this.currentLevel][x][z].push(obj);
+				this.sortObjStacks(x, z);
 			}
 		} else if (ptype == 39) {
 			// OBJ_DEL
-			int var27 = buf.g1();
-			int var28 = (var27 >> 4 & 0x7) + this.baseX;
-			int var29 = (var27 & 0x7) + this.baseZ;
-			int var30 = buf.g2();
-			if (var28 >= 0 && var29 >= 0 && var28 < 104 && var29 < 104) {
-				LinkList var31 = this.objStacks[this.currentLevel][var28][var29];
-				if (var31 != null) {
-					for (ClientObj var32 = (ClientObj) var31.head(); var32 != null; var32 = (ClientObj) var31.next()) {
-						if ((var30 & 0x7FFF) == var32.index) {
-							var32.unlink();
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int id = buf.g2();
+
+			if (x >= 0 && z >= 0 && x < 104 && z < 104) {
+				LinkList list = this.objStacks[this.currentLevel][x][z];
+				if (list != null) {
+					for (ClientObj obj = (ClientObj) list.head(); obj != null; obj = (ClientObj) list.next()) {
+						if ((id & 0x7FFF) == obj.index) {
+							obj.unlink();
 							break;
 						}
 					}
-					if (var31.head() == null) {
-						this.objStacks[this.currentLevel][var28][var29] = null;
+
+					if (list.head() == null) {
+						this.objStacks[this.currentLevel][x][z] = null;
 					}
-					this.sortObjStacks(var28, var29);
+
+					this.sortObjStacks(x, z);
 				}
 			}
 		} else if (ptype == 137) {
 			// MAP_PROJANIM
-			int var33 = buf.g1();
-			int var34 = (var33 >> 4 & 0x7) + this.baseX;
-			int var35 = (var33 & 0x7) + this.baseZ;
-			int var36 = var34 + buf.g1b();
-			int var37 = var35 + buf.g1b();
-			int var38 = buf.g2b();
-			int var39 = buf.g2();
-			int var40 = buf.g1();
-			int var41 = buf.g1();
-			int var42 = buf.g2();
-			int var43 = buf.g2();
-			int var44 = buf.g1();
-			int var45 = buf.g1();
-			if (var34 >= 0 && var35 >= 0 && var34 < 104 && var35 < 104 && var36 >= 0 && var37 >= 0 && var36 < 104 && var37 < 104) {
-				int var46 = var34 * 128 + 64;
-				int var47 = var35 * 128 + 64;
-				int var48 = var36 * 128 + 64;
-				int var49 = var37 * 128 + 64;
-				ClientProj var50 = new ClientProj(var46, var39, var44, var41, this.currentLevel, var47, this.getHeightmapY(var47, this.currentLevel, var46) - var40, var45, loopCycle + var42, var38, loopCycle + var43);
-				var50.updateVelocity(var49, this.getHeightmapY(var49, this.currentLevel, var48) - var41, var48, loopCycle + var42);
-				this.projectiles.push(var50);
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int dx = x + buf.g1b();
+			int dz = z + buf.g1b();
+			int target = buf.g2b();
+			int spotanim = buf.g2();
+			int srcHeight = buf.g1();
+			int dstHeight = buf.g1();
+			int startDelay = buf.g2();
+			int endDelay = buf.g2();
+			int peak = buf.g1();
+			int arc = buf.g1();
+
+			if (x >= 0 && z >= 0 && x < 104 && z < 104 && dx >= 0 && dz >= 0 && dx < 104 && dz < 104) {
+				x = x * 128 + 64;
+				z = z * 128 + 64;
+				dx = dx * 128 + 64;
+				dz = dz * 128 + 64;
+
+				ClientProj proj = new ClientProj(x, spotanim, peak, dstHeight, this.currentLevel, z, this.getHeightmapY(z, this.currentLevel, x) - srcHeight, arc, loopCycle + startDelay, target, loopCycle + endDelay);
+				proj.updateVelocity(dz, this.getHeightmapY(dz, this.currentLevel, dx) - dstHeight, dx, loopCycle + startDelay);
+				this.projectiles.push(proj);
 			}
 		} else if (ptype == 198) {
 			// MAP_ANIM
-			int var51 = buf.g1();
-			int var52 = (var51 >> 4 & 0x7) + this.baseX;
-			int var53 = (var51 & 0x7) + this.baseZ;
-			int var54 = buf.g2();
-			int var55 = buf.g1();
-			int var56 = buf.g2();
-			if (var52 >= 0 && var53 >= 0 && var52 < 104 && var53 < 104) {
-				int var57 = var52 * 128 + 64;
-				int var58 = var53 * 128 + 64;
-				MapSpotAnim var59 = new MapSpotAnim(var58, var57, this.currentLevel, var54, this.getHeightmapY(var58, this.currentLevel, var57) - var55, loopCycle, var56);
-				this.spotanims.push(var59);
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int id = buf.g2();
+			int height = buf.g1();
+			int delay = buf.g2();
+
+			if (x >= 0 && z >= 0 && x < 104 && z < 104) {
+				x = x * 128 + 64;
+				z = z * 128 + 64;
+
+				MapSpotAnim spot = new MapSpotAnim(z, x, this.currentLevel, id, this.getHeightmapY(z, this.currentLevel, x) - height, loopCycle, delay);
+				this.spotanims.push(spot);
 			}
 		} else if (ptype == 69) {
 			// OBJ_REVEAL
-			int var60 = buf.g1();
-			int var61 = (var60 >> 4 & 0x7) + this.baseX;
-			int var62 = (var60 & 0x7) + this.baseZ;
-			int var63 = buf.g2();
-			int var64 = buf.g2();
-			int var65 = buf.g2();
-			if (var61 >= 0 && var62 >= 0 && var61 < 104 && var62 < 104 && this.localPid != var65) {
-				ClientObj var66 = new ClientObj();
-				var66.index = var63;
-				var66.count = var64;
-				if (this.objStacks[this.currentLevel][var61][var62] == null) {
-					this.objStacks[this.currentLevel][var61][var62] = new LinkList();
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int id = buf.g2();
+			int count = buf.g2();
+			int receiver = buf.g2();
+
+			if (x >= 0 && z >= 0 && x < 104 && z < 104 && this.localPid != receiver) {
+				ClientObj obj = new ClientObj();
+				obj.index = id;
+				obj.count = count;
+
+				if (this.objStacks[this.currentLevel][x][z] == null) {
+					this.objStacks[this.currentLevel][x][z] = new LinkList();
 				}
-				this.objStacks[this.currentLevel][var61][var62].push(var66);
-				this.sortObjStacks(var61, var62);
+
+				this.objStacks[this.currentLevel][x][z].push(obj);
+				this.sortObjStacks(x, z);
 			}
 		} else if (ptype == 29) {
 			// LOC_MERGE
-			int var67 = buf.g1();
-			int var68 = (var67 >> 4 & 0x7) + this.baseX;
-			int var69 = (var67 & 0x7) + this.baseZ;
-			int var70 = buf.g1();
-			int var71 = var70 >> 2;
-			int var72 = var70 & 0x3;
-			int var73 = this.LOC_SHAPE_TO_LAYER[var71];
-			int var74 = buf.g2();
-			int var75 = buf.g2();
-			int var76 = buf.g2();
-			int var77 = buf.g2();
-			byte var78 = buf.g1b();
-			byte var79 = buf.g1b();
-			byte var80 = buf.g1b();
-			byte var81 = buf.g1b();
-			ClientPlayer var82;
-			if (this.localPid == var77) {
-				var82 = localPlayer;
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int info = buf.g1();
+			int shape = info >> 2;
+			int angle = info & 0x3;
+			int layer = this.LOC_SHAPE_TO_LAYER[shape];
+
+			int id = buf.g2();
+			int start = buf.g2();
+			int end = buf.g2();
+			int pid = buf.g2();
+			byte east = buf.g1b();
+			byte south = buf.g1b();
+			byte west = buf.g1b();
+			byte north = buf.g1b();
+
+			ClientPlayer player;
+			if (this.localPid == pid) {
+				player = localPlayer;
 			} else {
-				var82 = this.players[var77];
+				player = this.players[pid];
 			}
-			if (var82 != null) {
-				LocType var83 = LocType.get(var74);
-				int var84 = this.levelHeightmap[this.currentLevel][var68][var69];
-				int var85 = this.levelHeightmap[this.currentLevel][var68 + 1][var69];
-				int var86 = this.levelHeightmap[this.currentLevel][var68 + 1][var69 + 1];
-				int var87 = this.levelHeightmap[this.currentLevel][var68][var69 + 1];
-				Model var88 = var83.getModel(var71, var72, var84, var85, var86, var87, -1);
-				if (var88 != null) {
-					this.appendLoc(var68, 0, var76 + 1, -1, 0, var73, var69, this.currentLevel, var75 + 1);
-					var82.locStartCycle = loopCycle + var75;
-					var82.locStopCycle = loopCycle + var76;
-					var82.locModel = var88;
-					int var89 = var83.width;
-					int var90 = var83.length;
-					if (var72 == 1 || var72 == 3) {
-						var89 = var83.length;
-						var90 = var83.width;
+
+			if (player != null) {
+				LocType loc = LocType.get(id);
+
+				int heightSW = this.levelHeightmap[this.currentLevel][x][z];
+				int heightSE = this.levelHeightmap[this.currentLevel][x + 1][z];
+				int heightNE = this.levelHeightmap[this.currentLevel][x + 1][z + 1];
+				int heightNW = this.levelHeightmap[this.currentLevel][x][z + 1];
+
+				Model model = loc.getModel(shape, angle, heightSW, heightSE, heightNE, heightNW, -1);
+				if (model != null) {
+					this.appendLoc(x, 0, end + 1, -1, 0, layer, z, this.currentLevel, start + 1);
+
+					player.locStartCycle = loopCycle + start;
+					player.locStopCycle = loopCycle + end;
+					player.locModel = model;
+
+					int width = loc.width;
+					int length = loc.length;
+					if (angle == 1 || angle == 3) {
+						width = loc.length;
+						length = loc.width;
 					}
-					var82.locOffsetX = var68 * 128 + var89 * 64;
-					var82.locOffsetZ = var69 * 128 + var90 * 64;
-					var82.locOffsetY = this.getHeightmapY(var82.locOffsetZ, this.currentLevel, var82.locOffsetX);
-					if (var78 > var80) {
-						byte var91 = var78;
-						var78 = var80;
-						var80 = var91;
+
+					player.locOffsetX = x * 128 + width * 64;
+					player.locOffsetZ = z * 128 + length * 64;
+					player.locOffsetY = this.getHeightmapY(player.locOffsetZ, this.currentLevel, player.locOffsetX);
+
+					if (east > west) {
+						byte temp = east;
+						east = west;
+						west = temp;
 					}
-					if (var79 > var81) {
-						byte var92 = var79;
-						var79 = var81;
-						var81 = var92;
+
+					if (south > north) {
+						byte temp = south;
+						south = north;
+						north = temp;
 					}
-					var82.minTileX = var68 + var78;
-					var82.maxTileX = var68 + var80;
-					var82.minTileZ = var69 + var79;
-					var82.maxTileZ = var69 + var81;
+
+					player.minTileX = x + east;
+					player.maxTileX = x + west;
+					player.minTileZ = z + south;
+					player.maxTileZ = z + north;
 				}
 			}
 		} else if (ptype == 209) {
 			// OBJ_COUNT
-			int var93 = buf.g1();
-			int var94 = (var93 >> 4 & 0x7) + this.baseX;
-			int var95 = (var93 & 0x7) + this.baseZ;
-			int var96 = buf.g2();
-			int var97 = buf.g2();
-			int var98 = buf.g2();
-			if (var94 >= 0 && var95 >= 0 && var94 < 104 && var95 < 104) {
-				LinkList var99 = this.objStacks[this.currentLevel][var94][var95];
-				if (var99 != null) {
-					for (ClientObj var100 = (ClientObj) var99.head(); var100 != null; var100 = (ClientObj) var99.next()) {
-						if ((var96 & 0x7FFF) == var100.index && var100.count == var97) {
-							var100.count = var98;
+			int pos = buf.g1();
+			int x = (pos >> 4 & 0x7) + this.baseX;
+			int z = (pos & 0x7) + this.baseZ;
+
+			int id = buf.g2();
+			int oldCount = buf.g2();
+			int newCount = buf.g2();
+
+			if (x >= 0 && z >= 0 && x < 104 && z < 104) {
+				LinkList list = this.objStacks[this.currentLevel][x][z];
+				if (list != null) {
+					for (ClientObj obj = (ClientObj) list.head(); obj != null; obj = (ClientObj) list.next()) {
+						if ((id & 0x7FFF) == obj.index && obj.count == oldCount) {
+							obj.count = newCount;
 							break;
 						}
 					}
-					this.sortObjStacks(var94, var95);
+
+					this.sortObjStacks(x, z);
 				}
 			}
 		}
@@ -8395,28 +8466,30 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(IIIIIIIIII)V")
-	public final void appendLoc(int arg0, int arg1, int arg2, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
-		LocChange var11 = null;
-		for (LocChange var12 = (LocChange) this.locChanges.head(); var12 != null; var12 = (LocChange) this.locChanges.next()) {
-			if (var12.level == arg8 && var12.x == arg0 && var12.z == arg7 && var12.layer == arg6) {
-				var11 = var12;
+	public final void appendLoc(int x, int shape, int endTime, int type, int angle, int layer, int z, int currentLevel, int startTime) {
+		LocChange loc = null;
+		for (LocChange next = (LocChange) this.locChanges.head(); next != null; next = (LocChange) this.locChanges.next()) {
+			if (next.level == currentLevel && next.x == x && next.z == z && next.layer == layer) {
+				loc = next;
 				break;
 			}
 		}
-		if (var11 == null) {
-			var11 = new LocChange();
-			var11.level = arg8;
-			var11.layer = arg6;
-			var11.x = arg0;
-			var11.z = arg7;
-			this.storeLoc(var11);
-			this.locChanges.push(var11);
+
+		if (loc == null) {
+			loc = new LocChange();
+			loc.level = currentLevel;
+			loc.layer = layer;
+			loc.x = x;
+			loc.z = z;
+			this.storeLoc(loc);
+			this.locChanges.push(loc);
 		}
-		var11.newType = arg4;
-		var11.newShape = arg1;
-		var11.newAngle = arg5;
-		var11.startTime = arg9;
-		var11.endTime = arg2;
+
+		loc.newType = type;
+		loc.newShape = shape;
+		loc.newAngle = angle;
+		loc.startTime = startTime;
+		loc.endTime = endTime;
 	}
 
 	// note: placement confirmed by referencing OS1
@@ -8511,38 +8584,46 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.i(II)V")
-	public final void sortObjStacks(int arg0, int arg1) {
-		LinkList var3 = this.objStacks[this.currentLevel][arg0][arg1];
-		if (var3 == null) {
-			this.scene.removeGroundObj(this.currentLevel, arg0, arg1);
+	public final void sortObjStacks(int x, int z) {
+		LinkList objStacks = this.objStacks[this.currentLevel][x][z];
+		if (objStacks == null) {
+			this.scene.removeGroundObj(this.currentLevel, x, z);
 			return;
 		}
-		int var4 = -99999999;
-		ClientObj var5 = null;
-		for (ClientObj var6 = (ClientObj) var3.head(); var6 != null; var6 = (ClientObj) var3.next()) {
-			ObjType var11 = ObjType.get(var6.index);
-			int var12 = var11.cost;
-			if (var11.stackable) {
-				var12 = (var6.count + 1) * var12;
+
+		int topCost = -99999999;
+		ClientObj topObj = null;
+		for (ClientObj obj = (ClientObj) objStacks.head(); obj != null; obj = (ClientObj) objStacks.next()) {
+			ObjType type = ObjType.get(obj.index);
+
+			int cost = type.cost;
+			if (type.stackable) {
+				cost = (obj.count + 1) * cost;
 			}
-			if (var12 > var4) {
-				var4 = var12;
-				var5 = var6;
-			}
-		}
-		var3.addHead(var5);
-		ClientObj var7 = null;
-		ClientObj var8 = null;
-		for (ClientObj var9 = (ClientObj) var3.head(); var9 != null; var9 = (ClientObj) var3.next()) {
-			if (var5.index != var9.index && var7 == null) {
-				var7 = var9;
-			}
-			if (var5.index != var9.index && var7.index != var9.index && var8 == null) {
-				var8 = var9;
+
+			if (cost > topCost) {
+				topCost = cost;
+				topObj = obj;
 			}
 		}
-		int var10 = (arg1 << 7) + arg0 + 1610612736;
-		this.scene.addGroundObject(var10, this.getHeightmapY(arg1 * 128 + 64, this.currentLevel, arg0 * 128 + 64), arg0, arg1, var8, var5, this.currentLevel, var7);
+
+		objStacks.addHead(topObj);
+
+		ClientObj bottomObj = null;
+		ClientObj middleObj = null;
+
+		for (ClientObj obj = (ClientObj) objStacks.head(); obj != null; obj = (ClientObj) objStacks.next()) {
+			if (topObj.index != obj.index && bottomObj == null) {
+				bottomObj = obj;
+			}
+
+			if (topObj.index != obj.index && bottomObj.index != obj.index && middleObj == null) {
+				middleObj = obj;
+			}
+		}
+
+		int typecode = (z << 7) + x + 0x60000000;
+		this.scene.addGroundObject(typecode, this.getHeightmapY(z * 128 + 64, this.currentLevel, x * 128 + 64), x, z, middleObj, topObj, this.currentLevel, bottomObj);
 	}
 
 	// note: placement confirmed by referencing OS1
@@ -8591,7 +8672,7 @@ public class Client extends GameShell {
 			this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
 		} else if (op == 1) {
 			int walkDir = buf.gBit(3);
-			localPlayer.move(walkDir, false);
+			localPlayer.step(walkDir, false);
 
 			int extendedInfo = buf.gBit(1);
 			if (extendedInfo == 1) {
@@ -8599,10 +8680,10 @@ public class Client extends GameShell {
 			}
 		} else if (op == 2) {
 			int walkDir = buf.gBit(3);
-			localPlayer.move(walkDir, true);
+			localPlayer.step(walkDir, true);
 
 			int runDir = buf.gBit(3);
-			localPlayer.move(runDir, true);
+			localPlayer.step(runDir, true);
 
 			int extendedInfo = buf.gBit(1);
 			if (extendedInfo == 1) {
@@ -8661,7 +8742,7 @@ public class Client extends GameShell {
 					player.cycle = loopCycle;
 
 					int walkDir = buf.gBit(3);
-					player.move(walkDir, false);
+					player.step(walkDir, false);
 
 					int extendedInfo = buf.gBit(1);
 					if (extendedInfo == 1) {
@@ -8672,10 +8753,10 @@ public class Client extends GameShell {
 					player.cycle = loopCycle;
 
 					int walkDir = buf.gBit(3);
-					player.move(walkDir, true);
+					player.step(walkDir, true);
 
 					int runDir = buf.gBit(3);
-					player.move(runDir, true);
+					player.step(runDir, true);
 
 					int var15 = buf.gBit(1);
 					if (var15 == 1) {
@@ -8789,7 +8870,7 @@ public class Client extends GameShell {
 				player.primarySeqCycle = 0;
 				player.primarySeqDelay = delay;
 				player.primarySeqLoop = 0;
-				player.seqPathLength = player.pathLength;
+				player.preanimRouteLength = player.routeLength;
 			}
 		}
 
@@ -8896,7 +8977,7 @@ public class Client extends GameShell {
 			player.forceMoveEndCycle = buf.g2() + loopCycle;
 			player.forceMoveStartCycle = buf.g2() + loopCycle;
 			player.forceMoveFaceDirection = buf.g1();
-			player.resetPath();
+			player.clearRoute();
 		}
 
 		if ((mask & 0x400) == 1024) {
@@ -8981,7 +9062,7 @@ public class Client extends GameShell {
 					npc.cycle = loopCycle;
 
 					int walkDir = buf.gBit(3);
-					npc.move(walkDir, false);
+					npc.step(walkDir, false);
 
 					int extendedInfo = buf.gBit(1);
 					if (extendedInfo == 1) {
@@ -8992,10 +9073,10 @@ public class Client extends GameShell {
 					npc.cycle = loopCycle;
 
 					int walkDir = buf.gBit(3);
-					npc.move(walkDir, true);
+					npc.step(walkDir, true);
 
 					int runDir = buf.gBit(3);
-					npc.move(runDir, true);
+					npc.step(runDir, true);
 
 					int extendedInfo = buf.gBit(1);
 					if (extendedInfo == 1) {
@@ -9103,7 +9184,7 @@ public class Client extends GameShell {
 					npc.primarySeqCycle = 0;
 					npc.primarySeqDelay = delay;
 					npc.primarySeqLoop = 0;
-					npc.seqPathLength = npc.pathLength;
+					npc.preanimRouteLength = npc.routeLength;
 				}
 			}
 
@@ -10849,9 +10930,9 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.c(III)Z")
-	public final boolean updateInterfaceAnimation(int delta, int arg2) {
+	public final boolean updateInterfaceAnimation(int delta, int id) {
 		boolean updated = false;
-		Component com = Component.types[arg2];
+		Component com = Component.types[id];
 
 		for (int i = 0; i < com.children.length && com.children[i] != -1; i++) {
 			Component child = Component.types[com.children[i]];
@@ -11506,12 +11587,12 @@ public class Client extends GameShell {
 	public final void drawMinimap() {
 		this.areaMapback.bind();
 
-		int angle = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
-		int anchorX = localPlayer.x / 32 + 48;
-		int anchorY = 464 - localPlayer.z / 32;
+		int angle = (this.orbitCameraYaw + this.macroMinimapAngle) & 0x7FF;
+		int anchorX = (localPlayer.x / 32) + 48;
+		int anchorY = 464 - (localPlayer.z / 32);
 
-		this.imageMinimap.drawRotatedMasked(25, anchorY, 146, this.macroMinimapZoom + 256, 5, angle, this.field1538, this.minimapMaskLineLengths, this.minimapMaskLineOffsets, anchorX, 151);
-		this.imageCompass.drawRotatedMasked(0, 25, 33, 256, 0, this.orbitCameraYaw, this.field1538, this.compassMaskLineLengths, this.compassMaskLineOffsets, 25, 33);
+		this.imageMinimap.drawRotatedMasked(25, anchorY, 146, this.macroMinimapZoom + 256, 5, angle, this.minimapMaskLineLengths, this.minimapMaskLineOffsets, anchorX, 151);
+		this.imageCompass.drawRotatedMasked(0, 25, 33, 256, 0, this.orbitCameraYaw, this.compassMaskLineLengths, this.compassMaskLineOffsets, 25, 33);
 
 		for (int i = 0; i < this.activeMapFunctionCount; i++) {
 			int x = this.activeMapFunctionX[i] * 4 + 2 - localPlayer.x / 32;
@@ -11524,8 +11605,8 @@ public class Client extends GameShell {
 				LinkList objs = this.objStacks[this.currentLevel][ltx][ltz];
 
 				if (objs != null) {
-					int x = ltx * 4 + 2 - localPlayer.x / 32;
-					int y = ltz * 4 + 2 - localPlayer.z / 32;
+					int x = ((ltx * 4) + 2) - (localPlayer.x / 32);
+					int y = ((ltz * 4) + 2) - (localPlayer.z / 32);
 					this.drawOnMinimap(x, this.imageMapdot0, y);
 				}
 			}
@@ -11535,8 +11616,8 @@ public class Client extends GameShell {
 			ClientNpc npc = this.npcs[this.npcIds[i]];
 
 			if (npc != null && npc.isVisible() && npc.type.minimap) {
-				int x = npc.x / 32 - localPlayer.x / 32;
-				int y = npc.z / 32 - localPlayer.z / 32;
+				int x = (npc.x / 32) - (localPlayer.x / 32);
+				int y = (npc.z / 32) - (localPlayer.z / 32);
 				this.drawOnMinimap(x, this.imageMapdot1, y);
 			}
 		}
@@ -11545,8 +11626,8 @@ public class Client extends GameShell {
 			ClientPlayer player = this.players[this.playerIds[i]];
 
 			if (player != null && player.isVisible()) {
-				int x = player.x / 32 - localPlayer.x / 32;
-				int y = player.z / 32 - localPlayer.z / 32;
+				int x = (player.x / 32) - (localPlayer.x / 32);
+				int y = (player.z / 32) - (localPlayer.z / 32);
 
 				boolean friend = false;
 				long name37 = JString.toBase37(player.name);
@@ -11590,8 +11671,8 @@ public class Client extends GameShell {
 		}
 
 		if (this.flagSceneTileX != 0) {
-			int x = this.flagSceneTileX * 4 + 2 - localPlayer.x / 32;
-			int y = this.flagSceneTileZ * 4 + 2 - localPlayer.z / 32;
+			int x = ((this.flagSceneTileX * 4) + 2) - (localPlayer.x / 32);
+			int y = ((this.flagSceneTileZ * 4) + 2) - (localPlayer.z / 32);
 			this.drawOnMinimap(x, this.imageMapmarker0, y);
 		}
 
@@ -11617,10 +11698,10 @@ public class Client extends GameShell {
 		sinAngle = sinAngle * 256 / (this.macroMinimapZoom + 256);
 		cosAngle = cosAngle * 256 / (this.macroMinimapZoom + 256);
 
-		int var11 = dx * cosAngle + dy * sinAngle >> 16;
-		int var12 = dy * cosAngle - dx * sinAngle >> 16;
+		int var11 = (dx * cosAngle + dy * sinAngle) >> 16;
+		int var12 = (dy * cosAngle - dx * sinAngle) >> 16;
 
-		double var13 = Math.atan2((double) var11, (double) var12);
+		double var13 = Math.atan2(var11, var12);
 		int var15 = (int) (Math.sin(var13) * 63.0D);
 		int var16 = (int) (Math.cos(var13) * 57.0D);
 
@@ -11640,14 +11721,14 @@ public class Client extends GameShell {
 		int sinAngle = Model.sinTable[angle];
 		int cosAngle = Model.cosTable[angle];
 
-		sinAngle = sinAngle * 256 / (this.macroMinimapZoom + 256);
-		cosAngle = cosAngle * 256 / (this.macroMinimapZoom + 256);
+		sinAngle = (sinAngle * 256) / (this.macroMinimapZoom + 256);
+		cosAngle = (cosAngle * 256) / (this.macroMinimapZoom + 256);
 
-		int x = dx * cosAngle + dy * sinAngle >> 16;
-		int y = dy * cosAngle - dx * sinAngle >> 16;
+		int x = (dx * cosAngle + dy * sinAngle) >> 16;
+		int y = (dy * cosAngle - dx * sinAngle) >> 16;
 
 		if (distance > 2500) {
-			image.drawMasked(this.imageMapback, x + 94 - image.width / 2 + 4, 83 - y - image.height / 2 - 4);
+			image.drawMasked(this.imageMapback, x + 94 - (image.width / 2) + 4, 83 - y - (image.height / 2) - 4);
 		} else {
 			image.draw(x + 94 - image.width / 2 + 4, 83 - y - image.height / 2 - 4);
 		}

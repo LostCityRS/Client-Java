@@ -63,36 +63,42 @@ public class MapSpotAnim extends ModelSource {
 
 	@ObfuscatedName("gb.a(I)Lfb;")
 	public final Model getModel() {
-		Model var2 = this.type.getModel();
-		if (var2 == null) {
+		Model model = this.type.getModel();
+		if (model == null) {
 			return null;
-		} else {
-			Model var3 = new Model(var2, true, false, !this.type.animHasAlpha);
-			if (!this.seqComplete) {
-				var3.createLabelReferences();
-				var3.applyTransform(this.type.seq.frames[this.seqFrame]);
-				var3.labelFaces = null;
-				var3.labelVertices = null;
-			}
-			if (this.type.resizeh != 128 || this.type.resizev != 128) {
-				var3.scale(this.type.resizev, this.type.resizeh, this.type.resizeh);
-			}
-			if (this.type.angle != 0) {
-				if (this.type.angle == 90) {
-					var3.rotateY90();
-				}
-				if (this.type.angle == 180) {
-					var3.rotateY90();
-					var3.rotateY90();
-				}
-				if (this.type.angle == 270) {
-					var3.rotateY90();
-					var3.rotateY90();
-					var3.rotateY90();
-				}
-			}
-			var3.calculateNormals(this.type.ambient + 64, this.type.contrast + 850, -30, -50, -30, true);
-			return var3;
 		}
+
+		Model spot = new Model(model, true, false, !this.type.animHasAlpha);
+
+		if (!this.seqComplete) {
+			spot.createLabelReferences();
+			spot.applyTransform(this.type.seq.frames[this.seqFrame]);
+			spot.labelFaces = null;
+			spot.labelVertices = null;
+		}
+
+		if (this.type.resizeh != 128 || this.type.resizev != 128) {
+			spot.scale(this.type.resizev, this.type.resizeh, this.type.resizeh);
+		}
+
+		if (this.type.angle != 0) {
+			if (this.type.angle == 90) {
+				spot.rotateY90();
+			}
+
+			if (this.type.angle == 180) {
+				spot.rotateY90();
+				spot.rotateY90();
+			}
+
+			if (this.type.angle == 270) {
+				spot.rotateY90();
+				spot.rotateY90();
+				spot.rotateY90();
+			}
+		}
+
+		spot.calculateNormals(this.type.ambient + 64, this.type.contrast + 850, -30, -50, -30, true);
+		return spot;
 	}
 }

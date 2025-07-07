@@ -124,16 +124,16 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.c(I)Z")
-	public boolean validateHeadModel() {
-		boolean downloaded = true;
+	public boolean headModelIsReady() {
+		boolean ready = true;
 
 		for (int i = 0; i < 5; i++) {
 			if (this.heads[i] != -1 && !Model.isReady(this.heads[i])) {
-				downloaded = false;
+				ready = false;
 			}
 		}
 
-		return downloaded;
+		return ready;
 	}
 
 	@ObfuscatedName("lc.d(I)Lfb;")

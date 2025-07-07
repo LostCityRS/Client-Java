@@ -27,7 +27,7 @@ public class Wall {
 	public ModelSource model2;
 
 	@ObfuscatedName("r.h")
-	public int typecode;
+	public int typecode1;
 
 	@ObfuscatedName("r.i")
 	public byte typecode2;

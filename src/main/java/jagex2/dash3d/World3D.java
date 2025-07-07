@@ -369,26 +369,29 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIIZIILy;Ly;BI)V")
-	public void addWall(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6, ModelSource arg7, ModelSource arg8, byte arg9, int arg10) {
-		if (arg8 == null && arg7 == null) {
+	public void addWall(int tileX, int typecode1, int arg2, int angle2, int angle1, int y, ModelSource model2, ModelSource model1, byte typecode2, int tileZ) {
+		if (model1 == null && model2 == null) {
 			return;
 		}
-		Wall var12 = new Wall();
-		var12.typecode = arg1;
-		var12.typecode2 = arg9;
-		var12.x = arg0 * 128 + 64;
-		var12.z = arg10 * 128 + 64;
-		var12.y = arg6;
-		var12.model1 = arg8;
-		var12.model2 = arg7;
-		var12.angle1 = arg5;
-		var12.angle2 = arg3;
-		for (int var13 = arg2; var13 >= 0; var13--) {
-			if (this.levelTiles[var13][arg0][arg10] == null) {
-				this.levelTiles[var13][arg0][arg10] = new Square(var13, arg0, arg10);
+
+		Wall wall = new Wall();
+		wall.typecode1 = typecode1;
+		wall.typecode2 = typecode2;
+		wall.x = tileX * 128 + 64;
+		wall.z = tileZ * 128 + 64;
+		wall.y = y;
+		wall.model1 = model1;
+		wall.model2 = model2;
+		wall.angle1 = angle1;
+		wall.angle2 = angle2;
+
+		for (int i = arg2; i >= 0; i--) {
+			if (this.levelTiles[i][tileX][tileZ] == null) {
+				this.levelTiles[i][tileX][tileZ] = new Square(i, tileX, tileZ);
 			}
 		}
-		this.levelTiles[arg2][arg0][arg10].wall = var12;
+
+		this.levelTiles[arg2][tileX][tileZ].wall = wall;
 	}
 
 	@ObfuscatedName("s.a(BLy;IIIIIIIIII)V")
@@ -662,7 +665,7 @@ public class World3D {
 	@ObfuscatedName("s.b(III)I")
 	public int getWallTypecode(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
-		return var4 == null || var4.wall == null ? 0 : var4.wall.typecode;
+		return var4 == null || var4.wall == null ? 0 : var4.wall.typecode1;
 	}
 
 	@ObfuscatedName("s.g(IIII)I")
@@ -697,7 +700,7 @@ public class World3D {
 		Square var5 = this.levelTiles[arg0][arg1][arg2];
 		if (var5 == null) {
 			return -1;
-		} else if (var5.wall != null && var5.wall.typecode == arg3) {
+		} else if (var5.wall != null && var5.wall.typecode1 == arg3) {
 			return var5.wall.typecode2 & 0xFF;
 		} else if (var5.decor != null && var5.decor.typecode == arg3) {
 			return var5.decor.typecode2 & 0xFF;
@@ -1285,7 +1288,7 @@ public class World3D {
 
 												Wall wall = linkedSquare.wall;
 												if (wall != null) {
-													wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode);
+													wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
 												}
 
 												for (int i = 0; i < linkedSquare.primaryCount; i++) {
@@ -1352,10 +1355,10 @@ public class World3D {
 													tile.sidesAfterCorner = 9 - tile.sidesBeforeCorner;
 												}
 												if ((wall.angle1 & frontWallTypes) != 0 && !this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle1)) {
-													wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode);
+													wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
 												}
 												if ((wall.angle2 & frontWallTypes) != 0 && !this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle2)) {
-													wall.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode);
+													wall.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
 												}
 											}
 
@@ -1462,7 +1465,7 @@ public class World3D {
 												Wall wall = tile.wall;
 
 												if (!this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle1)) {
-													wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode);
+													wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
 												}
 
 												tile.cornerSides = 0;
@@ -1665,11 +1668,11 @@ public class World3D {
 				Wall wall = tile.wall;
 				if (wall != null) {
 					if ((wall.angle2 & tile.backWallTypes) != 0 && !this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle2)) {
-						wall.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode);
+						wall.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
 					}
 
 					if ((wall.angle1 & tile.backWallTypes) != 0 && !this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle1)) {
-						wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode);
+						wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
 					}
 				}
 			}

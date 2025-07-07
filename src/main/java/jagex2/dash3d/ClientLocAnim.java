@@ -70,15 +70,15 @@ public class ClientLocAnim extends ModelSource {
 				this.seqFrame++;
 
 				if (this.seqFrame < this.seq.frameCount) {
-					this.seqFrame -= this.seq.replayoff;
-				}
-
-				if (this.seqFrame >= 0 && this.seqFrame < this.seq.frameCount) {
 					continue;
 				}
 
-				this.seq = null;
-				break;
+				this.seqFrame -= this.seq.replayoff;
+
+				if (this.seqFrame < 0 || this.seqFrame >= this.seq.frameCount) {
+					this.seq = null;
+					break;
+				}
 			}
 
 			this.seqCycle = Client.loopCycle - delta;

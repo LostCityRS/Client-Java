@@ -263,6 +263,7 @@ public class ClientPlayer extends ClientEntity {
 			SeqType seq = SeqType.types[super.primarySeqId];
 
 			primaryTransformId = seq.frames[super.primarySeqFrame];
+
 			if (super.secondarySeqId >= 0 && super.secondarySeqId != super.readyanim) {
 				secondaryTransformId = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 			}
@@ -282,7 +283,7 @@ public class ClientPlayer extends ClientEntity {
 
 		Model model = (Model) modelCache.get(hash);
 		if (model == null) {
-			boolean hasModel = false;
+			boolean needsModel = false;
 
 			for (int part = 0; part < 12; part++) {
 				int value = this.appearance[part];
@@ -296,15 +297,15 @@ public class ClientPlayer extends ClientEntity {
 				}
 
 				if (value >= 0x100 && value < 0x200 && !IdkType.types[value - 0x100].modelIsReady()) {
-					hasModel = true;
+					needsModel = true;
 				}
 
 				if (value >= 0x200 && !ObjType.get(value - 0x200).wornModelIsReady(this.gender)) {
-					hasModel = true;
+					needsModel = true;
 				}
 			}
 
-			if (hasModel) {
+			if (needsModel) {
 				if (this.modelCacheKey != -1L) {
 					model = (Model) modelCache.get(this.modelCacheKey);
 				}
@@ -383,18 +384,21 @@ public class ClientPlayer extends ClientEntity {
 			return null;
 		}
 
-		boolean hasModel = false;
+		boolean needsModel = false;
+
 		for (int i = 0; i < 12; i++) {
 			int part = this.appearance[i];
-			if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].validateHeadModel()) {
-				hasModel = true;
+
+			if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].headModelIsReady()) {
+				needsModel = true;
 			}
+
 			if (part >= 0x200 && !ObjType.get(part - 0x200).headModelIsReady(this.gender)) {
-				hasModel = true;
+				needsModel = true;
 			}
 		}
 
-		if (hasModel) {
+		if (needsModel) {
 			return null;
 		}
 
