@@ -7443,6 +7443,7 @@ public class Client extends GameShell {
 			if (this.ptype == 17) {
 				// LOGOUT
 				this.logout();
+
 				this.ptype = -1;
 				return false;
 			}
@@ -7521,6 +7522,7 @@ public class Client extends GameShell {
 			if (this.ptype == 53) {
 				// CAM_RESET
 				this.cutscene = false;
+
 				for (int i = 0; i < 5; i++) {
 					this.cameraModifierEnabled[i] = false;
 				}
@@ -7589,6 +7591,7 @@ public class Client extends GameShell {
 
 			if (this.ptype == 209 || this.ptype == 29 || this.ptype == 69 || this.ptype == 198 || this.ptype == 137 || this.ptype == 39 || this.ptype == 234 || this.ptype == 155 || this.ptype == 125 || this.ptype == 232) {
 				this.readZonePacket(this.ptype, this.in);
+
 				this.ptype = -1;
 				return true;
 			}
@@ -7649,6 +7652,7 @@ public class Client extends GameShell {
 			if (this.ptype == 85) {
 				// UPDATE_REBOOT_TIMER
 				this.systemUpdateTimer = this.in.g2() * 30;
+
 				this.ptype = -1;
 				return true;
 			}
@@ -7966,6 +7970,7 @@ public class Client extends GameShell {
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 242) {
 				// RESET_ANIMS
 				for (int i = 0; i < this.players.length; i++) {
@@ -7983,6 +7988,7 @@ public class Client extends GameShell {
 				this.ptype = -1;
 				return true;
 			}
+
 			if (this.ptype == 108) {
 				// IF_SETPLAYERHEAD
 				int comId = this.in.g2();
@@ -7997,6 +8003,7 @@ public class Client extends GameShell {
 				// PLAYER_INFO
 				this.getPlayerPos(this.psize, this.in);
 				this.awaitingSync = false;
+
 				this.ptype = -1;
 				return true;
 			}
@@ -8004,6 +8011,7 @@ public class Client extends GameShell {
 			if (this.ptype == 176) {
 				// IF_OPENSIDE
 				int comId = this.in.g2();
+
 				this.resetInterfaceAnimation(comId);
 
 				if (this.chatInterfaceId != -1) {
@@ -8073,6 +8081,7 @@ public class Client extends GameShell {
 				// IF_SETTAB
 				int comId = this.in.g2();
 				int tab = this.in.g1();
+
 				if (comId == 65535) {
 					comId = -1;
 				}
@@ -8088,6 +8097,7 @@ public class Client extends GameShell {
 			if (this.ptype == 56) {
 				// IF_SETTAB_ACTIVE
 				this.selectedTab = this.in.g1();
+
 				this.redrawSidebar = true;
 				this.redrawSideicons = true;
 
@@ -8125,16 +8135,14 @@ public class Client extends GameShell {
 					int dy = sceneY - this.cameraY;
 					int dz = sceneZ - this.cameraZ;
 
-					int distance = (int) Math.sqrt((double) (dx * dx + dz * dz));
+					int distance = (int) Math.sqrt((dx * dx + dz * dz));
 
-					this.cameraPitch = (int) (Math.atan2((double) dy, (double) distance) * 325.949D) & 0x7FF;
-					this.cameraYaw = (int) (Math.atan2((double) dx, (double) dz) * -325.949D) & 0x7FF;
+					this.cameraPitch = (int) (Math.atan2(dy, distance) * 325.949D) & 0x7FF;
+					this.cameraYaw = (int) (Math.atan2(dx, dz) * -325.949D) & 0x7FF;
 
 					if (this.cameraPitch < 128) {
 						this.cameraPitch = 128;
-					}
-
-					if (this.cameraPitch > 383) {
+					} else if (this.cameraPitch > 383) {
 						this.cameraPitch = 383;
 					}
 				}
@@ -8158,6 +8166,7 @@ public class Client extends GameShell {
 			if (this.ptype == 62) {
 				// UNSET_MAP_FLAG
 				this.flagSceneTileX = 0;
+
 				this.ptype = -1;
 				return true;
 			}
@@ -8215,6 +8224,7 @@ public class Client extends GameShell {
 			if (this.ptype == 10) {
 				// IF_OPENMAIN
 				int comId = this.in.g2();
+
 				this.resetInterfaceAnimation(comId);
 
 				if (this.sidebarInterfaceId != -1) {
@@ -8243,6 +8253,7 @@ public class Client extends GameShell {
 			if (this.ptype == 189) {
 				// IF_OPENCHAT
 				int comId = this.in.g2();
+
 				this.resetInterfaceAnimation(comId);
 
 				if (this.sidebarInterfaceId != -1) {
@@ -8297,6 +8308,7 @@ public class Client extends GameShell {
 			if (this.ptype == 12) {
 				// CAM_MOVETO
 				this.cutscene = true;
+
 				this.cutsceneSrcLocalTileX = this.in.g1();
 				this.cutsceneSrcLocalTileZ = this.in.g1();
 				this.cutsceneSrcHeight = this.in.g2();
@@ -8400,9 +8412,9 @@ public class Client extends GameShell {
 
 			if (this.ptype == 123) {
 				// IF_SETHIDE
-				int com = this.in.g2();
+				int comId = this.in.g2();
 				boolean hide = this.in.g1() == 1;
-				Component.types[com].hide = hide;
+				Component.types[comId].hide = hide;
 
 				this.ptype = -1;
 				return true;
@@ -8454,6 +8466,7 @@ public class Client extends GameShell {
 
 			this.logout();
 		}
+
 		return true;
 	}
 
@@ -9663,10 +9676,10 @@ public class Client extends GameShell {
 			this.redrawChatback = true;
 		}
 
-		int b = this.menuParamB[optionId];
-		int c = this.menuParamC[optionId];
 		int action = this.menuAction[optionId];
 		int a = this.menuParamA[optionId];
+		int b = this.menuParamB[optionId];
+		int c = this.menuParamC[optionId];
 
 		if (action >= 2000) {
 			action -= 2000;
@@ -9682,26 +9695,28 @@ public class Client extends GameShell {
 
 			// OPLOC5
 			this.interactWithLoc(243, b, a, c);
-		}
-		if (action == 34) {
-			String var7 = this.menuOption[optionId];
-			int var8 = var7.indexOf("@whi@");
-			if (var8 != -1) {
+		} else if (action == 34) {
+			String option = this.menuOption[optionId];
+			int tag = option.indexOf("@whi@");
+
+			if (tag != -1) {
 				this.closeInterfaces();
-				this.reportAbuseInput = var7.substring(var8 + 5).trim();
+
+				this.reportAbuseInput = option.substring(tag + 5).trim();
 				this.reportAbuseMuteOption = false;
-				for (int var9 = 0; var9 < Component.types.length; var9++) {
-					if (Component.types[var9] != null && Component.types[var9].clientCode == 600) {
-						this.reportAbuseInterfaceId = this.viewportInterfaceId = Component.types[var9].layer;
+
+				for (int i = 0; i < Component.types.length; i++) {
+					if (Component.types[i] != null && Component.types[i].clientCode == 600) {
+						this.reportAbuseInterfaceId = this.viewportInterfaceId = Component.types[i].layer;
 						break;
 					}
 				}
 			}
-		}
-		if (action == 367) {
-			ClientPlayer var10 = this.players[a];
-			if (var10 != null) {
-				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, var10.routeTileX[0], 0, var10.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+		} else if (action == 367) {
+			ClientPlayer player = this.players[a];
+			if (player != null) {
+				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, player.routeTileX[0], 0, player.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+
 				this.crossX = super.mouseClickX;
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
@@ -9714,24 +9729,25 @@ public class Client extends GameShell {
 				this.out.p2(this.objSelectedSlot);
 				this.out.p2(this.objSelectedInterface);
 			}
-		}
-		if (action == 951) {
-			Component var11 = Component.types[c];
-			boolean var12 = true;
-			if (var11.clientCode > 0) {
-				var12 = this.handleInterfaceAction(var11);
+		} else if (action == 951) {
+			Component com = Component.types[c];
+			boolean notify = true;
+
+			if (com.clientCode > 0) {
+				notify = this.handleInterfaceAction(com);
 			}
-			if (var12) {
+
+			if (notify) {
 				// IF_BUTTON
 				this.out.pIsaac(39);
 				this.out.p2(c);
 			}
-		}
-		if (action == 217) {
-			boolean var13 = this.tryMove(0, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 0, localPlayer.routeTileX[0]);
-			if (!var13) {
+		} else if (action == 217) {
+			boolean success = this.tryMove(0, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 0, localPlayer.routeTileX[0]);
+			if (!success) {
 				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 1, localPlayer.routeTileX[0]);
 			}
+
 			this.crossX = super.mouseClickX;
 			this.crossY = super.mouseClickY;
 			this.crossMode = 2;
@@ -9745,17 +9761,16 @@ public class Client extends GameShell {
 			this.out.p2(this.objInterface);
 			this.out.p2(this.objSelectedSlot);
 			this.out.p2(this.objSelectedInterface);
-		}
-		if (action == 450 && this.interactWithLoc(106, b, a, c)) {
+		} else if (action == 450 && this.interactWithLoc(106, b, a, c)) {
 			// OPLOCU
 			this.out.p2(this.objInterface);
 			this.out.p2(this.objSelectedSlot);
 			this.out.p2(this.objSelectedInterface);
-		}
-		if (action == 265) {
-			ClientNpc var15 = this.npcs[a];
-			if (var15 != null) {
-				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, var15.routeTileX[0], 0, var15.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+		} else if (action == 265) {
+			ClientNpc npc = this.npcs[a];
+			if (npc != null) {
+				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, npc.routeTileX[0], 0, npc.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+
 				this.crossX = super.mouseClickX;
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
@@ -9766,24 +9781,23 @@ public class Client extends GameShell {
 				this.out.p2(a);
 				this.out.p2(this.activeSpellId);
 			}
-		}
-		if (action == 364) {
+		} else if (action == 364) {
 			// OPLOC3
 			this.interactWithLoc(19, b, a, c);
-		}
-		if (action == 55 && this.interactWithLoc(182, b, a, c)) {
+		} else if (action == 55 && this.interactWithLoc(182, b, a, c)) {
 			// OPLOCT
 			this.out.p2(this.activeSpellId);
-		}
-		if (action == 224 || action == 993 || action == 99 || action == 746 || action == 877) {
-			boolean var16 = this.tryMove(0, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 0, localPlayer.routeTileX[0]);
-			if (!var16) {
+		} else if (action == 224 || action == 993 || action == 99 || action == 746 || action == 877) {
+			boolean success = this.tryMove(0, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 0, localPlayer.routeTileX[0]);
+			if (!success) {
 				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 1, localPlayer.routeTileX[0]);
 			}
+
 			this.crossX = super.mouseClickX;
 			this.crossY = super.mouseClickY;
 			this.crossMode = 2;
 			this.crossCycle = 0;
+
 			if (action == 99) {
 				// OPOBJ3
 				this.out.pIsaac(27);
@@ -9800,14 +9814,15 @@ public class Client extends GameShell {
 				// OPOBJ4
 				this.out.pIsaac(17);
 			}
+
 			this.out.p2(this.sceneBaseTileX + b);
 			this.out.p2(this.sceneBaseTileZ + c);
 			this.out.p2(a);
-		}
-		if (action == 581) {
+		} else if (action == 581) {
 			if ((a & 0x3) == 0) {
 				oplogic1++;
 			}
+
 			if (oplogic1 >= 99) {
 				// ANTICHEAT_OPLOGIC1
 				this.out.pIsaac(47);
@@ -9816,56 +9831,58 @@ public class Client extends GameShell {
 
 			// OPLOC4
 			this.interactWithLoc(55, b, a, c);
-		}
-		if (action == 679) {
-			String var18 = this.menuOption[optionId];
-			int var19 = var18.indexOf("@whi@");
-			if (var19 != -1) {
-				long var20 = JString.toBase37(var18.substring(var19 + 5).trim());
-				int var22 = -1;
-				for (int var23 = 0; var23 < this.friendCount; var23++) {
-					if (this.friendName37[var23] == var20) {
-						var22 = var23;
+		} else if (action == 679) {
+			String option = this.menuOption[optionId];
+			int tag = option.indexOf("@whi@");
+
+			if (tag != -1) {
+				long name37 = JString.toBase37(option.substring(tag + 5).trim());
+				int friend = -1;
+
+				for (int i = 0; i < this.friendCount; i++) {
+					if (this.friendName37[i] == name37) {
+						friend = i;
 						break;
 					}
 				}
-				if (var22 != -1 && this.friendWorld[var22] > 0) {
+
+				if (friend != -1 && this.friendWorld[friend] > 0) {
 					this.redrawChatback = true;
 					this.chatbackInputOpen = false;
 					this.showSocialInput = true;
 					this.socialInput = "";
 					this.socialInputType = 3;
-					this.socialName37 = this.friendName37[var22];
-					this.socialMessage = "Enter message to send to " + this.friendName[var22];
+					this.socialName37 = this.friendName37[friend];
+					this.socialMessage = "Enter message to send to " + this.friendName[friend];
 				}
 			}
-		}
-		if (action == 960) {
+		} else if (action == 960) {
 			// IF_BUTTON
 			this.out.pIsaac(39);
 			this.out.p2(c);
-			Component var24 = Component.types[c];
-			if (var24.scripts != null && var24.scripts[0][0] == 5) {
-				int var25 = var24.scripts[0][1];
-				if (this.varps[var25] != var24.scriptOperand[0]) {
-					this.varps[var25] = var24.scriptOperand[0];
-					this.updateVarp(var25);
+
+			Component com = Component.types[c];
+			if (com.scripts != null && com.scripts[0][0] == 5) {
+				int varp = com.scripts[0][1];
+				if (this.varps[varp] != com.scriptOperand[0]) {
+					this.varps[varp] = com.scriptOperand[0];
+					this.updateVarp(varp);
 					this.redrawSidebar = true;
 				}
 			}
-		}
-		if (action == 1175) {
-			int var26 = a >> 14 & 0x7FFF;
-			LocType var27 = LocType.get(var26);
-			String var28;
-			if (var27.desc == null) {
-				var28 = "It's a " + var27.name + ".";
+		} else if (action == 1175) {
+			int locId = a >> 14 & 0x7FFF;
+			LocType loc = LocType.get(locId);
+
+			String desc;
+			if (loc.desc == null) {
+				desc = "It's a " + loc.name + ".";
 			} else {
-				var28 = new String(var27.desc);
+				desc = new String(loc.desc);
 			}
-			this.addMessage(var28, "", 0);
-		}
-		if (action == 881) {
+
+			this.addMessage(desc, "", 0);
+		} else if (action == 881) {
 			// OPHELDU
 			this.out.pIsaac(58);
 			this.out.p2(a);
@@ -9874,18 +9891,20 @@ public class Client extends GameShell {
 			this.out.p2(this.objInterface);
 			this.out.p2(this.objSelectedSlot);
 			this.out.p2(this.objSelectedInterface);
+
 			this.selectedCycle = 0;
 			this.selectedInterface = c;
 			this.selectedItem = b;
 			this.selectedArea = 2;
+
 			if (Component.types[c].layer == this.viewportInterfaceId) {
 				this.selectedArea = 1;
 			}
+
 			if (Component.types[c].layer == this.chatInterfaceId) {
 				this.selectedArea = 3;
 			}
-		}
-		if (action == 44 && !this.pressedContinueOption) {
+		} else if (action == 44 && !this.pressedContinueOption) {
 			// RESUME_PAUSEBUTTON
 			this.out.pIsaac(11);
 			this.out.p2(c);
@@ -9894,39 +9913,33 @@ public class Client extends GameShell {
 		if (action == 285) {
 			// OPLOC1
 			this.interactWithLoc(238, b, a, c);
-		}
-		if (action == 406 || action == 436 || action == 557 || action == 556) {
-			String var29 = this.menuOption[optionId];
-			int var30 = var29.indexOf("@whi@");
-			if (var30 != -1) {
-				long var31 = JString.toBase37(var29.substring(var30 + 5).trim());
+		} else if (action == 406 || action == 436 || action == 557 || action == 556) {
+			String option = this.menuOption[optionId];
+			int tag = option.indexOf("@whi@");
+
+			if (tag != -1) {
+				long name37 = JString.toBase37(option.substring(tag + 5).trim());
+
 				if (action == 406) {
-					this.addFriend(var31);
-				}
-				if (action == 436) {
-					this.addIgnore(var31);
-				}
-				if (action == 557) {
-					this.removeFriend(var31);
-				}
-				if (action == 556) {
-					this.removeIgnore(var31);
+					this.addFriend(name37);
+				} else if (action == 436) {
+					this.addIgnore(name37);
+				} else if (action == 557) {
+					this.removeFriend(name37);
+				} else if (action == 556) {
+					this.removeIgnore(name37);
 				}
 			}
-		}
-		if (action == 947) {
+		} else if (action == 947) {
 			this.closeInterfaces();
-		}
-		if (action == 405 || action == 38 || action == 422 || action == 478 || action == 347) {
+		} else if (action == 405 || action == 38 || action == 422 || action == 478 || action == 347) {
 			if (action == 347) {
 				// OPHELD5
 				this.out.pIsaac(133);
-			}
-			if (action == 422) {
+			} else if (action == 422) {
 				// OPHELD3
 				this.out.pIsaac(221);
-			}
-			if (action == 478) {
+			} else if (action == 478) {
 				if ((b & 0x3) == 0) {
 					oplogic5++;
 				}
@@ -9938,8 +9951,7 @@ public class Client extends GameShell {
 
 				// OPHELD4
 				this.out.pIsaac(6);
-			}
-			if (action == 405) {
+			} else if (action == 405) {
 				oplogic3 += a;
 				if (oplogic3 >= 97) {
 					// ANTICHEAT_OPLOGIC3
@@ -9949,8 +9961,7 @@ public class Client extends GameShell {
 
 				// OPHELD1
 				this.out.pIsaac(228);
-			}
-			if (action == 38) {
+			} else if (action == 38) {
 				// OPHELD2
 				this.out.pIsaac(166);
 			}
@@ -9958,22 +9969,25 @@ public class Client extends GameShell {
 			this.out.p2(a);
 			this.out.p2(b);
 			this.out.p2(c);
+
 			this.selectedCycle = 0;
 			this.selectedInterface = c;
 			this.selectedItem = b;
 			this.selectedArea = 2;
+
 			if (Component.types[c].layer == this.viewportInterfaceId) {
 				this.selectedArea = 1;
 			}
+
 			if (Component.types[c].layer == this.chatInterfaceId) {
 				this.selectedArea = 3;
 			}
-		}
-		if (action == 965) {
-			boolean var33 = this.tryMove(0, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 0, localPlayer.routeTileX[0]);
-			if (!var33) {
+		} else if (action == 965) {
+			boolean success = this.tryMove(0, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 0, localPlayer.routeTileX[0]);
+			if (!success) {
 				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 1, localPlayer.routeTileX[0]);
 			}
+
 			this.crossX = super.mouseClickX;
 			this.crossY = super.mouseClickY;
 			this.crossMode = 2;
@@ -9999,16 +10013,13 @@ public class Client extends GameShell {
 
 				// INV_BUTTON5
 				this.out.pIsaac(212);
-			}
-			if (action == 22) {
+			} else if (action == 22) {
 				// INV_BUTTON3
 				this.out.pIsaac(158);
-			}
-			if (action == 596) {
+			} else if (action == 596) {
 				// INV_BUTTON2
 				this.out.pIsaac(193);
-			}
-			if (action == 892) {
+			} else if (action == 892) {
 				if ((b & 0x3) == 0) {
 					oplogic9++;
 				}
@@ -10020,41 +10031,44 @@ public class Client extends GameShell {
 
 				// INV_BUTTON4
 				this.out.pIsaac(204);
-			}
-			if (action == 602) {
+			} else if (action == 602) {
 				// INV_BUTTON1
 				this.out.pIsaac(153);
 			}
+
 			this.out.p2(a);
 			this.out.p2(b);
 			this.out.p2(c);
+
 			this.selectedCycle = 0;
 			this.selectedInterface = c;
 			this.selectedItem = b;
 			this.selectedArea = 2;
+
 			if (Component.types[c].layer == this.viewportInterfaceId) {
 				this.selectedArea = 1;
 			}
+
 			if (Component.types[c].layer == this.chatInterfaceId) {
 				this.selectedArea = 3;
 			}
-		}
-		if (action == 465) {
+		} else if (action == 465) {
 			// IF_BUTTON
 			this.out.pIsaac(39);
 			this.out.p2(c);
-			Component var35 = Component.types[c];
-			if (var35.scripts != null && var35.scripts[0][0] == 5) {
-				int var36 = var35.scripts[0][1];
-				this.varps[var36] = 1 - this.varps[var36];
-				this.updateVarp(var36);
+
+			Component com = Component.types[c];
+			if (com.scripts != null && com.scripts[0][0] == 5) {
+				int varp = com.scripts[0][1];
+				this.varps[varp] = 1 - this.varps[varp];
+				this.updateVarp(varp);
 				this.redrawSidebar = true;
 			}
-		}
-		if (action == 900) {
-			ClientNpc var37 = this.npcs[a];
-			if (var37 != null) {
-				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, var37.routeTileX[0], 0, var37.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+		} else if (action == 900) {
+			ClientNpc npc = this.npcs[a];
+			if (npc != null) {
+				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, npc.routeTileX[0], 0, npc.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+
 				this.crossX = super.mouseClickX;
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
@@ -10067,8 +10081,7 @@ public class Client extends GameShell {
 				this.out.p2(this.objSelectedSlot);
 				this.out.p2(this.objSelectedInterface);
 			}
-		}
-		if (action == 188) {
+		} else if (action == 188) {
 			this.objSelected = 1;
 			this.objSelectedSlot = b;
 			this.objSelectedInterface = c;
@@ -10077,23 +10090,24 @@ public class Client extends GameShell {
 			this.spellSelected = 0;
 			this.redrawSidebar = true;
 			return;
-		}
-		if (action == 728 || action == 542 || action == 6 || action == 963 || action == 245) {
-			ClientNpc var38 = this.npcs[a];
-			if (var38 != null) {
-				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, var38.routeTileX[0], 0, var38.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+		} else if (action == 728 || action == 542 || action == 6 || action == 963 || action == 245) {
+			ClientNpc npc = this.npcs[a];
+			if (npc != null) {
+				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, npc.routeTileX[0], 0, npc.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+
 				this.crossX = super.mouseClickX;
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
 				this.crossCycle = 0;
+
 				if (action == 963) {
 					// OPNPC4
 					this.out.pIsaac(229);
-				}
-				if (action == 6) {
+				} else if (action == 6) {
 					if ((a & 0x3) == 0) {
 						oplogic2++;
 					}
+
 					if (oplogic2 >= 124) {
 						// ANTICHEAT_OPLOGIC2
 						this.out.pIsaac(218);
@@ -10102,8 +10116,7 @@ public class Client extends GameShell {
 
 					// OPNPC3
 					this.out.pIsaac(132);
-				}
-				if (action == 245) {
+				} else if (action == 245) {
 					if ((a & 0x3) == 0) {
 						oplogic4++;
 					}
@@ -10115,111 +10128,119 @@ public class Client extends GameShell {
 
 					// OPNPC5
 					this.out.pIsaac(102);
-				}
-				if (action == 728) {
+				} else if (action == 728) {
 					// OPNPC1
 					this.out.pIsaac(222);
-				}
-				if (action == 542) {
+				} else if (action == 542) {
 					// OPNPC2
 					this.out.pIsaac(84);
 				}
+
 				this.out.p2(a);
 			}
-		}
-		if (action == 391) {
+		} else if (action == 391) {
 			// OPHELDT
 			this.out.pIsaac(143);
 			this.out.p2(a);
 			this.out.p2(b);
 			this.out.p2(c);
 			this.out.p2(this.activeSpellId);
+
 			this.selectedCycle = 0;
 			this.selectedInterface = c;
 			this.selectedItem = b;
 			this.selectedArea = 2;
+
 			if (Component.types[c].layer == this.viewportInterfaceId) {
 				this.selectedArea = 1;
 			}
+
 			if (Component.types[c].layer == this.chatInterfaceId) {
 				this.selectedArea = 3;
 			}
-		}
-		if (action == 930) {
-			Component var39 = Component.types[c];
+		} else if (action == 930) {
+			Component com = Component.types[c];
 			this.spellSelected = 1;
 			this.activeSpellId = c;
-			this.activeSpellFlags = var39.targetMask;
+			this.activeSpellFlags = com.targetMask;
 			this.objSelected = 0;
 			this.redrawSidebar = true;
-			String var40 = var39.targetVerb;
-			if (var40.indexOf(" ") != -1) {
-				var40 = var40.substring(0, var40.indexOf(" "));
+
+			String prefix = com.targetVerb;
+			if (prefix.indexOf(" ") != -1) {
+				prefix = prefix.substring(0, prefix.indexOf(" "));
 			}
-			String var41 = var39.targetVerb;
-			if (var41.indexOf(" ") != -1) {
-				var41 = var41.substring(var41.indexOf(" ") + 1);
+
+			String suffix = com.targetVerb;
+			if (suffix.indexOf(" ") != -1) {
+				suffix = suffix.substring(suffix.indexOf(" ") + 1);
 			}
-			this.spellCaption = var40 + " " + var39.targetText + " " + var41;
+
+			this.spellCaption = prefix + " " + com.targetText + " " + suffix;
+
 			if (this.activeSpellFlags == 16) {
 				this.redrawSidebar = true;
 				this.selectedTab = 3;
 				this.redrawSideicons = true;
 			}
+
 			return;
-		}
-		if (action == 660) {
+		} else if (action == 660) {
 			if (this.menuVisible) {
 				this.scene.click(c - 4, b - 4);
 			} else {
 				this.scene.click(super.mouseClickY - 4, super.mouseClickX - 4);
 			}
-		}
-		if (action == 903 || action == 363) {
-			String var42 = this.menuOption[optionId];
-			int var43 = var42.indexOf("@whi@");
-			if (var43 != -1) {
-				String var44 = var42.substring(var43 + 5).trim();
-				String var45 = JString.formatDisplayName(JString.fromBase37(JString.toBase37(var44)));
-				boolean var46 = false;
-				for (int var47 = 0; var47 < this.playerCount; var47++) {
-					ClientPlayer var48 = this.players[this.playerIds[var47]];
-					if (var48 != null && var48.name != null && var48.name.equalsIgnoreCase(var45)) {
-						this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, var48.routeTileX[0], 0, var48.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+		} else if (action == 903 || action == 363) {
+			String option = this.menuOption[optionId];
+			int tag = option.indexOf("@whi@");
+
+			if (tag != -1) {
+				option = option.substring(tag + 5).trim();
+				String name = JString.formatDisplayName(JString.fromBase37(JString.toBase37(option)));
+				boolean found = false;
+
+				for (int i = 0; i < this.playerCount; i++) {
+					ClientPlayer player = this.players[this.playerIds[i]];
+
+					if (player != null && player.name != null && player.name.equalsIgnoreCase(name)) {
+						this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, player.routeTileX[0], 0, player.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+
 						if (action == 903) {
 							// OPPLAYER4
 							this.out.pIsaac(43);
-						}
-						if (action == 363) {
+						} else if (action == 363) {
 							// OPPLAYER1
 							this.out.pIsaac(211);
 						}
-						this.out.p2(this.playerIds[var47]);
-						var46 = true;
+
+						this.out.p2(this.playerIds[i]);
+						found = true;
 						break;
 					}
 				}
-				if (!var46) {
-					this.addMessage("Unable to find " + var45, "", 0);
+
+				if (!found) {
+					this.addMessage("Unable to find " + name, "", 0);
 				}
 			}
-		}
-		if (action == 1607) {
-			ClientNpc var49 = this.npcs[a];
-			if (var49 != null) {
-				String var50;
-				if (var49.type.desc == null) {
-					var50 = "It's a " + var49.type.name + ".";
+		} else if (action == 1607) {
+			ClientNpc npc = this.npcs[a];
+			if (npc != null) {
+				String desc;
+				if (npc.type.desc == null) {
+					desc = "It's a " + npc.type.name + ".";
 				} else {
-					var50 = new String(var49.type.desc);
+					desc = new String(npc.type.desc);
 				}
-				this.addMessage(var50, "", 0);
+
+				this.addMessage(desc, "", 0);
 			}
-		}
-		if (action == 651) {
-			ClientPlayer var51 = this.players[a];
-			if (var51 != null) {
-				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, var51.routeTileX[0], 0, var51.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+		} else if (action == 651) {
+			ClientPlayer player = this.players[a];
+			if (player != null) {
+				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, player.routeTileX[0], 0, player.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+
 				this.crossX = super.mouseClickX;
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
@@ -10230,34 +10251,34 @@ public class Client extends GameShell {
 				this.out.p2(a);
 				this.out.p2(this.activeSpellId);
 			}
-		}
-		if (action == 1102) {
-			ObjType var52 = ObjType.get(a);
-			String var53;
-			if (var52.desc == null) {
-				var53 = "It's a " + var52.name + ".";
+		} else if (action == 1102) {
+			ObjType obj = ObjType.get(a);
+			String desc;
+
+			if (obj.desc == null) {
+				desc = "It's a " + obj.name + ".";
 			} else {
-				var53 = new String(var52.desc);
+				desc = new String(obj.desc);
 			}
-			this.addMessage(var53, "", 0);
-		}
-		if (action == 1373 || action == 1544 || action == 151 || action == 1101) {
-			ClientPlayer var54 = this.players[a];
-			if (var54 != null) {
-				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, var54.routeTileX[0], 0, var54.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+
+			this.addMessage(desc, "", 0);
+		} else if (action == 1373 || action == 1544 || action == 151 || action == 1101) {
+			ClientPlayer player = this.players[a];
+			if (player != null) {
+				this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, player.routeTileX[0], 0, player.routeTileZ[0], 1, localPlayer.routeTileX[0]);
+
 				this.crossX = super.mouseClickX;
 				this.crossY = super.mouseClickY;
 				this.crossMode = 2;
 				this.crossCycle = 0;
+
 				if (action == 1544) {
 					// OPPLAYER3
 					this.out.pIsaac(64);
-				}
-				if (action == 1373) {
+				} else if (action == 1373) {
 					// OPPLAYER4
 					this.out.pIsaac(43);
-				}
-				if (action == 151) {
+				} else if (action == 151) {
 					oplogic8++;
 					if (oplogic8 >= 90) {
 						// ANTICHEAT_OPLOGIC8
@@ -10267,30 +10288,31 @@ public class Client extends GameShell {
 
 					// OPPLAYER2
 					this.out.pIsaac(219);
-				}
-				if (action == 1101) {
+				} else if (action == 1101) {
 					// OPPLAYER1
 					this.out.pIsaac(211);
 				}
+
 				this.out.p2(a);
 			}
-		}
-		if (action == 504) {
+		} else if (action == 504) {
 			// OPLOC2
 			this.interactWithLoc(38, b, a, c);
-		}
-		if (action == 1773) {
-			ObjType var55 = ObjType.get(a);
-			String var56;
+		} else if (action == 1773) {
+			ObjType obj = ObjType.get(a);
+			String desc;
+
 			if (c >= 100000) {
-				var56 = c + " x " + var55.name;
-			} else if (var55.desc == null) {
-				var56 = "It's a " + var55.name + ".";
+				desc = c + " x " + obj.name;
+			} else if (obj.desc == null) {
+				desc = "It's a " + obj.name + ".";
 			} else {
-				var56 = new String(var55.desc);
+				desc = new String(obj.desc);
 			}
-			this.addMessage(var56, "", 0);
+
+			this.addMessage(desc, "", 0);
 		}
+
 		this.objSelected = 0;
 		this.spellSelected = 0;
 		this.redrawSidebar = true;
