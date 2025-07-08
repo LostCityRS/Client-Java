@@ -1093,15 +1093,15 @@ public class World {
 	}
 
 	@ObfuscatedName("c.c(III)Z")
-	public static final boolean isLocReady(int arg1, int arg2) {
-		LocType var3 = LocType.get(arg1);
-		if (arg2 == 11) {
-			arg2 = 10;
+	public static final boolean isLocReady(int id, int shape) {
+		LocType loc = LocType.get(id);
+		if (shape == 11) {
+			shape = 10;
 		}
-		if (arg2 >= 5 && arg2 <= 8) {
-			arg2 = 4;
+		if (shape >= 5 && shape <= 8) {
+			shape = 4;
 		}
-		return var3.shapeModelsAreReady(arg2);
+		return loc.shapeModelsAreReady(shape);
 	}
 
 	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")
