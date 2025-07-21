@@ -1,0 +1,14 @@
+{
+    "java.jdt.ls.java.home": "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.452.9-hotspot",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-8.0.452.9-hotspot"
+        },
+        {
+            "name": "JavaSE-21",
+            "path": "C:\\Program Files\\Java\\jdk-21"
+        }
+    ],
+    "java.compile.nullAnalysis.mode": "disabled"
+}
