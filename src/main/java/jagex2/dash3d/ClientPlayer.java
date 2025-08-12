@@ -296,11 +296,11 @@ public class ClientPlayer extends ClientEntity {
 					value = leftHandValue;
 				}
 
-				if (value >= 0x100 && value < 0x200 && !IdkType.types[value - 0x100].modelIsReady()) {
+				if (value >= 0x100 && value < 0x200 && !IdkType.types[value - 0x100].checkModel()) {
 					needsModel = true;
 				}
 
-				if (value >= 0x200 && !ObjType.get(value - 0x200).wornModelIsReady(this.gender)) {
+				if (value >= 0x200 && !ObjType.get(value - 0x200).checkWearModel(this.gender)) {
 					needsModel = true;
 				}
 			}
@@ -337,7 +337,7 @@ public class ClientPlayer extends ClientEntity {
 				}
 
 				if (part >= 0x200) {
-					Model objModel = ObjType.get(part - 0x200).getWornModel(this.gender);
+					Model objModel = ObjType.get(part - 0x200).getWearModel(this.gender);
 					if (objModel != null) {
 						models[modelCount++] = objModel;
 					}
@@ -389,11 +389,11 @@ public class ClientPlayer extends ClientEntity {
 		for (int i = 0; i < 12; i++) {
 			int part = this.appearance[i];
 
-			if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].headModelIsReady()) {
+			if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].checkHead()) {
 				needsModel = true;
 			}
 
-			if (part >= 0x200 && !ObjType.get(part - 0x200).headModelIsReady(this.gender)) {
+			if (part >= 0x200 && !ObjType.get(part - 0x200).checkHeadModel(this.gender)) {
 				needsModel = true;
 			}
 		}

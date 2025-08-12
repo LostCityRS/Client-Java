@@ -369,7 +369,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(I)Z")
-	public static boolean isReady(int id) {
+	public static boolean request(int id) {
 		if (meta == null) {
 			return false;
 		}

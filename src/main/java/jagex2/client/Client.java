@@ -2466,7 +2466,7 @@ public class Client extends GameShell {
 					}
 				}
 			} else if (req.archive == 93 && this.onDemand.hasMapLocFile(req.file)) {
-				World.prefetchLocs(new Packet(req.data), this.onDemand);
+				World.prefetchLocations(new Packet(req.data), this.onDemand);
 			}
 		}
 	}
@@ -3274,7 +3274,7 @@ public class Client extends GameShell {
 			if (data != null) {
 				int x = (this.sceneMapIndex[i] >> 8) * 64 - this.sceneBaseTileX;
 				int z = (this.sceneMapIndex[i] & 0xFF) * 64 - this.sceneBaseTileZ;
-				ready &= World.locsAreReady(x, z, data);
+				ready &= World.checkLocations(x, z, data);
 			}
 		}
 
@@ -3551,7 +3551,7 @@ public class Client extends GameShell {
 					loc.startTime--;
 				}
 
-				if (loc.startTime == 0 && (loc.newType < 0 || World.isLocReady(loc.newType, loc.newShape))) {
+				if (loc.startTime == 0 && (loc.newType < 0 || World.changeLocAvailable(loc.newType, loc.newShape))) {
 					this.addLoc(loc.newType, loc.x, loc.newAngle, loc.newShape, loc.level, loc.z, loc.layer);
 					loc.startTime = -1;
 
@@ -3561,7 +3561,7 @@ public class Client extends GameShell {
 						loc.unlink();
 					}
 				}
-			} else if (loc.oldType < 0 || World.isLocReady(loc.oldType, loc.oldShape)) {
+			} else if (loc.oldType < 0 || World.changeLocAvailable(loc.oldType, loc.oldShape)) {
 				this.addLoc(loc.oldType, loc.x, loc.oldAngle, loc.oldShape, loc.level, loc.z, loc.layer);
 				loc.unlink();
 			}
@@ -5247,7 +5247,7 @@ public class Client extends GameShell {
 				e.primarySeqFrame -= seq.loops;
 				e.primarySeqLoop++;
 
-				if (e.primarySeqLoop >= seq.replaycount) {
+				if (e.primarySeqLoop >= seq.maxloops) {
 					e.primarySeqId = -1;
 				}
 
@@ -11495,7 +11495,7 @@ public class Client extends GameShell {
 			if (this.updateDesignModel) {
 				for (int i = 0; i < 7; i++) {
 					int kit = this.designKits[i];
-					if (kit >= 0 && !IdkType.types[kit].modelIsReady()) {
+					if (kit >= 0 && !IdkType.types[kit].checkModel()) {
 						return;
 					}
 				}

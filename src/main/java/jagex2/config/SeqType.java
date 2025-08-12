@@ -45,7 +45,7 @@ public class SeqType {
 	public int replaceheldright = -1;
 
 	@ObfuscatedName("nc.o")
-	public int replaycount = 99;
+	public int maxloops = 99;
 
 	@ObfuscatedName("nc.p")
 	public int preanim_move = -1;
@@ -169,7 +169,7 @@ public class SeqType {
 			} else if (code == 7) {
 				this.replaceheldright = buf.g2();
 			} else if (code == 8) {
-				this.replaycount = buf.g1();
+				this.maxloops = buf.g1();
 			} else if (code == 9) {
 				this.preanim_move = buf.g1();
 			} else if (code == 10) {
