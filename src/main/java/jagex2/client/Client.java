@@ -5244,7 +5244,7 @@ public class Client extends GameShell {
 			}
 
 			if (e.primarySeqFrame >= seq.frameCount) {
-				e.primarySeqFrame -= seq.replayoff;
+				e.primarySeqFrame -= seq.loops;
 				e.primarySeqLoop++;
 
 				if (e.primarySeqLoop >= seq.replaycount) {
@@ -9158,7 +9158,7 @@ public class Client extends GameShell {
 
 			int delay = buf.g1();
 			if (player.primarySeqId == seqId && seqId != -1) {
-				int replaceMode = SeqType.types[seqId].restart_mode;
+				int replaceMode = SeqType.types[seqId].duplicatebehavior;
 
 				if (replaceMode == 1) {
 					player.primarySeqFrame = 0;
@@ -9479,7 +9479,7 @@ public class Client extends GameShell {
 				int delay = buf.g1();
 
 				if (npc.primarySeqId == seqId && seqId != -1) {
-					int restartMode = SeqType.types[seqId].restart_mode;
+					int restartMode = SeqType.types[seqId].duplicatebehavior;
 
 					if (restartMode == 1) {
 						npc.primarySeqFrame = 0;
@@ -11330,7 +11330,7 @@ public class Client extends GameShell {
 						child.seqFrame++;
 
 						if (child.seqFrame >= seq.frameCount) {
-							child.seqFrame -= seq.replayoff;
+							child.seqFrame -= seq.loops;
 
 							if (child.seqFrame < 0 || child.seqFrame >= seq.frameCount) {
 								child.seqFrame = 0;
