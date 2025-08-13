@@ -2202,14 +2202,14 @@ public class Client extends GameShell {
 		int y = 200;
 
 		int offsetY = 20;
-		this.fontBold12.drawStringCenter(x / 2, 0xffffff, "RuneScape is loading - please wait...", y / 2 - 26 - offsetY);
+		this.fontBold12.centreString(x / 2, 0xffffff, "RuneScape is loading - please wait...", y / 2 - 26 - offsetY);
 
 		int midY = y / 2 - 18 - offsetY;
 		Pix2D.drawRect(34, 304, 0x8c1111, x / 2 - 152, midY);
 		Pix2D.drawRect(32, 302, 0, x / 2 - 151, midY + 1);
 		Pix2D.fillRect(0x8c1111, percent * 3, 30, x / 2 - 150, midY + 2);
 		Pix2D.fillRect(0, 300 - percent * 3, 30, percent * 3 + (x / 2 - 150), midY + 2);
-		this.fontBold12.drawStringCenter(x / 2, 0xffffff, message, y / 2 + 5 - offsetY);
+		this.fontBold12.centreString(x / 2, 0xffffff, message, y / 2 + 5 - offsetY);
 
 		this.imageTitle4.draw(super.graphics, 202, 171);
 
@@ -3209,10 +3209,10 @@ public class Client extends GameShell {
 		}
 
 		this.areaViewport.bind();
-		this.fontPlain12.drawStringCenter(257, 0, "Connection lost", 144);
-		this.fontPlain12.drawStringCenter(256, 16777215, "Connection lost", 143);
-		this.fontPlain12.drawStringCenter(257, 0, "Please wait - attempting to reestablish", 159);
-		this.fontPlain12.drawStringCenter(256, 16777215, "Please wait - attempting to reestablish", 158);
+		this.fontPlain12.centreString(257, 0, "Connection lost", 144);
+		this.fontPlain12.centreString(256, 16777215, "Connection lost", 143);
+		this.fontPlain12.centreString(257, 0, "Please wait - attempting to reestablish", 159);
+		this.fontPlain12.centreString(256, 16777215, "Please wait - attempting to reestablish", 158);
 		this.areaViewport.draw(super.graphics, 4, 4);
 
 		this.flagSceneTileX = 0;
@@ -3235,8 +3235,8 @@ public class Client extends GameShell {
 	public final void updateSceneState() {
 		if (lowMemory && this.sceneState == 2 && World.levelBuilt != this.currentLevel) {
 			this.areaViewport.bind();
-			this.fontPlain12.drawStringCenter(257, 0, "Loading - please wait.", 151);
-			this.fontPlain12.drawStringCenter(256, 16777215, "Loading - please wait.", 150);
+			this.fontPlain12.centreString(257, 0, "Loading - please wait.", 151);
+			this.fontPlain12.centreString(256, 16777215, "Loading - please wait.", 150);
 			this.areaViewport.draw(super.graphics, 4, 4);
 			this.sceneState = 1;
 			this.sceneLoadStartTime = System.currentTimeMillis();
@@ -5482,66 +5482,66 @@ public class Client extends GameShell {
 		if (this.titleScreenState == 0) {
 			int x = h / 2 + 80;
 			int y = h / 2 - 20;
-			this.fontPlain11.drawStringTaggableCenter(w / 2, true, this.onDemand.message, x, 0x75a9a9);
-			this.fontBold12.drawStringTaggableCenter(w / 2, true, "Welcome to RuneScape", y, 16776960);
+			this.fontPlain11.centreStringTag(w / 2, true, this.onDemand.message, x, 0x75a9a9);
+			this.fontBold12.centreStringTag(w / 2, true, "Welcome to RuneScape", y, 16776960);
 			y += 30;
 
 			x = w / 2 - 80;
 			y = h / 2 + 20;
 			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "New user", y + 5, 16777215);
+			this.fontBold12.centreStringTag(x, true, "New user", y + 5, 16777215);
 
 			x = w / 2 + 80;
 			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "Existing User", y + 5, 16777215);
+			this.fontBold12.centreStringTag(x, true, "Existing User", y + 5, 16777215);
 		} else if (this.titleScreenState == 2) {
 			int x = (w / 2) - 80;
 			int y = (h / 2) - 40;
 			if (this.loginMessage0.length() > 0) {
-				this.fontBold12.drawStringTaggableCenter(w / 2, true, this.loginMessage0, y - 15, 16776960);
-				this.fontBold12.drawStringTaggableCenter(w / 2, true, this.loginMessage1, y, 16776960);
+				this.fontBold12.centreStringTag(w / 2, true, this.loginMessage0, y - 15, 16776960);
+				this.fontBold12.centreStringTag(w / 2, true, this.loginMessage1, y, 16776960);
 				y += 30;
 			} else {
-				this.fontBold12.drawStringTaggableCenter(w / 2, true, this.loginMessage1, y - 7, 16776960);
+				this.fontBold12.centreStringTag(w / 2, true, this.loginMessage1, y - 7, 16776960);
 				y += 30;
 			}
 
-			this.fontBold12.drawStringTaggable(16777215, w / 2 - 90, true, y, "Username: " + this.username + (this.titleLoginField == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+			this.fontBold12.drawStringTag(16777215, w / 2 - 90, true, y, "Username: " + this.username + (this.titleLoginField == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 			y += 15;
 
-			this.fontBold12.drawStringTaggable(16777215, w / 2 - 88, true, y, "Password: " + JString.censor(this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+			this.fontBold12.drawStringTag(16777215, w / 2 - 88, true, y, "Password: " + JString.censor(this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 			y += 15;
 
 			x = w / 2 - 80;
 			y = h / 2 + 50;
 			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "Login", y + 5, 16777215);
+			this.fontBold12.centreStringTag(x, true, "Login", y + 5, 16777215);
 
 			x = w / 2 + 80;
 			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "Cancel", y + 5, 16777215);
+			this.fontBold12.centreStringTag(x, true, "Cancel", y + 5, 16777215);
 		} else if (this.titleScreenState == 3) {
 			int x = w / 2;
 			int y = h / 2 - 60;
-			this.fontBold12.drawStringTaggableCenter(x, true, "Create a free account", y, 16776960);
+			this.fontBold12.centreStringTag(x, true, "Create a free account", y, 16776960);
 
 			y = h / 2 - 35;
-			this.fontBold12.drawStringTaggableCenter(x, true, "To create a new account you need to", y, 16777215);
+			this.fontBold12.centreStringTag(x, true, "To create a new account you need to", y, 16777215);
 			y += 15;
 
-			this.fontBold12.drawStringTaggableCenter(x, true, "go back to the main RuneScape webpage", y, 16777215);
+			this.fontBold12.centreStringTag(x, true, "go back to the main RuneScape webpage", y, 16777215);
 			y += 15;
 
-			this.fontBold12.drawStringTaggableCenter(x, true, "and choose the red 'create account'", y, 16777215);
+			this.fontBold12.centreStringTag(x, true, "and choose the red 'create account'", y, 16777215);
 			y += 15;
 
-			this.fontBold12.drawStringTaggableCenter(x, true, "button at the top right of that page.", y, 16777215);
+			this.fontBold12.centreStringTag(x, true, "button at the top right of that page.", y, 16777215);
 			y += 15;
 
 			x = w / 2;
 			y = h / 2 + 50;
 			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "Cancel", y + 5, 16777215);
+			this.fontBold12.centreStringTag(x, true, "Cancel", y + 5, 16777215);
 		}
 
 		this.imageTitle4.draw(super.graphics, 202, 171);
@@ -5789,43 +5789,43 @@ public class Client extends GameShell {
 			this.areaBackbase1.bind();
 			this.imageBackbase1.draw(0, 0);
 
-			this.fontPlain12.drawStringTaggableCenter(55, true, "Public chat", 28, 16777215);
+			this.fontPlain12.centreStringTag(55, true, "Public chat", 28, 16777215);
 			if (this.chatPublicMode == 0) {
-				this.fontPlain12.drawStringTaggableCenter(55, true, "On", 41, 65280);
+				this.fontPlain12.centreStringTag(55, true, "On", 41, 65280);
 			}
 			if (this.chatPublicMode == 1) {
-				this.fontPlain12.drawStringTaggableCenter(55, true, "Friends", 41, 16776960);
+				this.fontPlain12.centreStringTag(55, true, "Friends", 41, 16776960);
 			}
 			if (this.chatPublicMode == 2) {
-				this.fontPlain12.drawStringTaggableCenter(55, true, "Off", 41, 16711680);
+				this.fontPlain12.centreStringTag(55, true, "Off", 41, 16711680);
 			}
 			if (this.chatPublicMode == 3) {
-				this.fontPlain12.drawStringTaggableCenter(55, true, "Hide", 41, 65535);
+				this.fontPlain12.centreStringTag(55, true, "Hide", 41, 65535);
 			}
 
-			this.fontPlain12.drawStringTaggableCenter(184, true, "Private chat", 28, 16777215);
+			this.fontPlain12.centreStringTag(184, true, "Private chat", 28, 16777215);
 			if (this.chatPrivateMode == 0) {
-				this.fontPlain12.drawStringTaggableCenter(184, true, "On", 41, 65280);
+				this.fontPlain12.centreStringTag(184, true, "On", 41, 65280);
 			}
 			if (this.chatPrivateMode == 1) {
-				this.fontPlain12.drawStringTaggableCenter(184, true, "Friends", 41, 16776960);
+				this.fontPlain12.centreStringTag(184, true, "Friends", 41, 16776960);
 			}
 			if (this.chatPrivateMode == 2) {
-				this.fontPlain12.drawStringTaggableCenter(184, true, "Off", 41, 16711680);
+				this.fontPlain12.centreStringTag(184, true, "Off", 41, 16711680);
 			}
 
-			this.fontPlain12.drawStringTaggableCenter(324, true, "Trade/duel", 28, 16777215);
+			this.fontPlain12.centreStringTag(324, true, "Trade/duel", 28, 16777215);
 			if (this.chatTradeMode == 0) {
-				this.fontPlain12.drawStringTaggableCenter(324, true, "On", 41, 65280);
+				this.fontPlain12.centreStringTag(324, true, "On", 41, 65280);
 			}
 			if (this.chatTradeMode == 1) {
-				this.fontPlain12.drawStringTaggableCenter(324, true, "Friends", 41, 16776960);
+				this.fontPlain12.centreStringTag(324, true, "Friends", 41, 16776960);
 			}
 			if (this.chatTradeMode == 2) {
-				this.fontPlain12.drawStringTaggableCenter(324, true, "Off", 41, 16711680);
+				this.fontPlain12.centreStringTag(324, true, "Off", 41, 16711680);
 			}
 
-			this.fontPlain12.drawStringTaggableCenter(458, true, "Report abuse", 33, 16777215);
+			this.fontPlain12.centreStringTag(458, true, "Report abuse", 33, 16777215);
 
 			this.areaBackbase1.draw(super.graphics, 0, 453);
 
@@ -6284,7 +6284,7 @@ public class Client extends GameShell {
 				this.projectFromEntity(entity.height, entity);
 
 				if (this.projectX > -1 && this.chatCount < this.MAX_CHATS) {
-					this.chatWidth[this.chatCount] = this.fontBold12.stringWidth(entity.chatMessage) / 2;
+					this.chatWidth[this.chatCount] = this.fontBold12.stringWid(entity.chatMessage) / 2;
 					this.chatHeight[this.chatCount] = this.fontBold12.height;
 					this.chatX[this.chatCount] = this.projectX;
 					this.chatY[this.chatCount] = this.projectY;
@@ -6336,8 +6336,8 @@ public class Client extends GameShell {
 					}
 
 					this.imageHitmark[entity.damageType[i]].draw(this.projectX - 12, this.projectY - 12);
-					this.fontPlain11.drawStringCenter(this.projectX, 0, String.valueOf(entity.damage[i]), this.projectY + 4);
-					this.fontPlain11.drawStringCenter(this.projectX - 1, 16777215, String.valueOf(entity.damage[i]), this.projectY + 3);
+					this.fontPlain11.centreString(this.projectX, 0, String.valueOf(entity.damage[i]), this.projectY + 4);
+					this.fontPlain11.centreString(this.projectX - 1, 16777215, String.valueOf(entity.damage[i]), this.projectY + 3);
 				}
 			}
 		}
@@ -6404,13 +6404,13 @@ public class Client extends GameShell {
 				}
 
 				if (this.chatEffect[i] == 0) {
-					this.fontBold12.drawStringCenter(this.projectX, 0, message, this.projectY + 1);
-					this.fontBold12.drawStringCenter(this.projectX, color, message, this.projectY);
+					this.fontBold12.centreString(this.projectX, 0, message, this.projectY + 1);
+					this.fontBold12.centreString(this.projectX, color, message, this.projectY);
 				} else if (this.chatEffect[i] == 1) {
-					this.fontBold12.drawStringCenterWave(this.projectY + 1, this.sceneCycle, message, this.projectX, 0);
-					this.fontBold12.drawStringCenterWave(this.projectY, this.sceneCycle, message, this.projectX, color);
+					this.fontBold12.centreStringWave(this.projectY + 1, this.sceneCycle, message, this.projectX, 0);
+					this.fontBold12.centreStringWave(this.projectY, this.sceneCycle, message, this.projectX, color);
 				} else if (this.chatEffect[i] == 2) {
-					int w = this.fontBold12.stringWidth(message);
+					int w = this.fontBold12.stringWid(message);
 					int offsetX = (150 - this.chatTimer[i]) * (w + 100) / 150;
 					Pix2D.setBounds(this.projectX + 50, 334, 0, this.projectX - 50);
 					this.fontBold12.drawString(message, 0, this.projectY + 1, this.projectX + 50 - offsetX);
@@ -6418,8 +6418,8 @@ public class Client extends GameShell {
 					Pix2D.resetBounds();
 				}
 			} else {
-				this.fontBold12.drawStringCenter(this.projectX, 0, message, this.projectY + 1);
-				this.fontBold12.drawStringCenter(this.projectX, 16776960, message, this.projectY);
+				this.fontBold12.centreString(this.projectX, 0, message, this.projectY + 1);
+				this.fontBold12.centreString(this.projectX, 16776960, message, this.projectY);
 			}
 		}
 	}
@@ -6590,12 +6590,12 @@ public class Client extends GameShell {
 
 		if (this.wildernessLevel > 0) {
 			this.imageHeadicon[0].draw(472, 296);
-			this.fontPlain12.drawStringCenter(484, 16776960, "Level: " + this.wildernessLevel, 329);
+			this.fontPlain12.centreString(484, 16776960, "Level: " + this.wildernessLevel, 329);
 		}
 
 		if (this.worldLocationState == 1) {
 			this.imageHeadicon[6].draw(472, 296);
-			this.fontPlain12.drawStringCenter(484, 16776960, "Arena", 329);
+			this.fontPlain12.centreString(484, 16776960, "Arena", 329);
 		}
 
 		if (this.systemUpdateTimer != 0) {
@@ -6647,7 +6647,7 @@ public class Client extends GameShell {
 
 				font.drawString("From", 0, y, x);
 				font.drawString("From", 65535, y - 1, x);
-				x += font.stringWidth("From ");
+				x += font.stringWid("From ");
 
 				if (modlevel == 1) {
 					this.imageModIcons[0].draw(x, y - 12);
@@ -6757,7 +6757,7 @@ public class Client extends GameShell {
 			tooltip = tooltip + "@whi@ / " + (this.menuSize - 2) + " more options";
 		}
 
-		this.fontBold12.drawStringTooltip(true, loopCycle / 1000, 4, 15, 16777215, tooltip);
+		this.fontBold12.drawStringAntiMacro(true, loopCycle / 1000, 4, 15, 16777215, tooltip);
 	}
 
 	@ObfuscatedName("client.g(B)V")
@@ -6795,7 +6795,7 @@ public class Client extends GameShell {
 				rgb = 16776960;
 			}
 
-			this.fontBold12.drawStringTaggable(rgb, x + 3, true, optionY, this.menuOption[i]);
+			this.fontBold12.drawStringTag(rgb, x + 3, true, optionY, this.menuOption[i]);
 		}
 	}
 
@@ -7727,8 +7727,8 @@ public class Client extends GameShell {
 				this.sceneLoadStartTime = System.currentTimeMillis();
 
 				this.areaViewport.bind();
-				this.fontPlain12.drawStringCenter(257, 0, "Loading - please wait.", 151);
-				this.fontPlain12.drawStringCenter(256, 16777215, "Loading - please wait.", 150);
+				this.fontPlain12.centreString(257, 0, "Loading - please wait.", 151);
+				this.fontPlain12.centreString(256, 16777215, "Loading - please wait.", 150);
 				this.areaViewport.draw(super.graphics, 4, 4);
 
 				int regions = 0;
@@ -9565,10 +9565,10 @@ public class Client extends GameShell {
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.k(B)V")
 	public final void showContextMenu() {
-		int width = this.fontBold12.stringWidth("Choose Option");
+		int width = this.fontBold12.stringWid("Choose Option");
 
 		for (int i = 0; i < this.menuSize; i++) {
-			int maxWidth = this.fontBold12.stringWidth(this.menuOption[i]);
+			int maxWidth = this.fontBold12.stringWid(this.menuOption[i]);
 			if (maxWidth > width) {
 				width = maxWidth;
 			}
@@ -10739,9 +10739,9 @@ public class Client extends GameShell {
 						}
 
 						if (child.center) {
-							font.drawStringTaggableCenter(child.width / 2 + childX, child.shadowed, split, lineY, colour);
+							font.centreStringTag(child.width / 2 + childX, child.shadowed, split, lineY, colour);
 						} else {
-							font.drawStringTaggable(colour, childX, child.shadowed, lineY, split);
+							font.drawStringTag(colour, childX, child.shadowed, lineY, split);
 						}
 
 						lineY += font.height;
@@ -10807,9 +10807,9 @@ public class Client extends GameShell {
 								int textY = (child.marginY + 12) * row + childY;
 
 								if (child.center) {
-									font.drawStringTaggableCenter(child.width / 2 + textX, child.shadowed, text, textY, child.colour);
+									font.centreStringTag(child.width / 2 + textX, child.shadowed, text, textY, child.colour);
 								} else {
-									font.drawStringTaggable(child.colour, textX, child.shadowed, textY, text);
+									font.drawStringTag(child.colour, textX, child.shadowed, textY, text);
 								}
 							}
 
@@ -11813,14 +11813,14 @@ public class Client extends GameShell {
 		this.imageChatback.draw(0, 0);
 
 		if (this.showSocialInput) {
-			this.fontBold12.drawStringCenter(239, 0, this.socialMessage, 40);
-			this.fontBold12.drawStringCenter(239, 128, this.socialInput + "*", 60);
+			this.fontBold12.centreString(239, 0, this.socialMessage, 40);
+			this.fontBold12.centreString(239, 128, this.socialInput + "*", 60);
 		} else if (this.chatbackInputOpen) {
-			this.fontBold12.drawStringCenter(239, 0, "Enter amount:", 40);
-			this.fontBold12.drawStringCenter(239, 128, this.chatbackInput + "*", 60);
+			this.fontBold12.centreString(239, 0, "Enter amount:", 40);
+			this.fontBold12.centreString(239, 128, this.chatbackInput + "*", 60);
 		} else if (this.modalMessage != null) {
-			this.fontBold12.drawStringCenter(239, 0, this.modalMessage, 40);
-			this.fontBold12.drawStringCenter(239, 128, "Click to continue", 60);
+			this.fontBold12.centreString(239, 0, this.modalMessage, 40);
+			this.fontBold12.centreString(239, 128, "Click to continue", 60);
 		} else if (this.chatInterfaceId != -1) {
 			this.drawInterface(0, 0, Component.types[this.chatInterfaceId], 0);
 		} else if (this.stickyChatInterfaceId != -1) {
@@ -11865,7 +11865,7 @@ public class Client extends GameShell {
 							}
 							font.drawString(sender + ":", 0, y, x);
 
-							x += font.stringWidth(sender) + 8;
+							x += font.stringWid(sender) + 8;
 							font.drawString(this.messageText[i], 255, y, x);
 						}
 
@@ -11875,7 +11875,7 @@ public class Client extends GameShell {
 							int x = 4;
 
 							font.drawString("From", 0, y, x);
-							x += font.stringWidth("From ");
+							x += font.stringWid("From ");
 
 							if (modicon == 1) {
 								this.imageModIcons[0].draw(x, y - 12);
@@ -11886,7 +11886,7 @@ public class Client extends GameShell {
 							}
 
 							font.drawString(sender + ":", 0, y, x);
-							x += font.stringWidth(sender) + 8;
+							x += font.stringWid(sender) + 8;
 
 							font.drawString(this.messageText[i], 0x800000, y, x);
 						}
@@ -11907,7 +11907,7 @@ public class Client extends GameShell {
 					} else if (type == 6 && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
 						if (y > 0 && y < 110) {
 							font.drawString("To " + sender + ":", 0, y, 4);
-							font.drawString(this.messageText[i], 0x800000, y, font.stringWidth("To " + sender) + 12);
+							font.drawString(this.messageText[i], 0x800000, y, font.stringWid("To " + sender) + 12);
 						}
 
 						line++;
@@ -11938,7 +11938,7 @@ public class Client extends GameShell {
 			}
 
 			font.drawString(username + ":", 0, 90, 4);
-			font.drawString(this.chatTyped + "*", 255, 90, font.stringWidth(username + ": ") + 6);
+			font.drawString(this.chatTyped + "*", 255, 90, font.stringWid(username + ": ") + 6);
 
 			Pix2D.drawHorizontalLine(0, 77, 479, 0);
 		}
