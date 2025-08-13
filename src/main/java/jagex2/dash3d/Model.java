@@ -202,7 +202,7 @@ public class Model extends ModelSource {
 	public static int[] cosTable = Pix3D.cosTable;
 
 	@ObfuscatedName("fb.Nb")
-	public static int[] palette = Pix3D.palette;
+	public static int[] colourTable = Pix3D.colourTable;
 
 	@ObfuscatedName("fb.Ob")
 	public static int[] divTable2 = Pix3D.divTable2;
@@ -248,7 +248,7 @@ public class Model extends ModelSource {
 		tmpPriorityDepthSum = null;
 		sinTable = null;
 		cosTable = null;
-		palette = null;
+		colourTable = null;
 		divTable2 = null;
 	}
 
@@ -1922,7 +1922,7 @@ public class Model extends ModelSource {
 		if (var5 == 0) {
 			Pix3D.gouraudTriangle(vertexScreenY[var2], vertexScreenY[var3], vertexScreenY[var4], vertexScreenX[var2], vertexScreenX[var3], vertexScreenX[var4], this.faceColourA[arg0], this.faceColourB[arg0], this.faceColourC[arg0]);
 		} else if (var5 == 1) {
-			Pix3D.flatTriangle(vertexScreenY[var2], vertexScreenY[var3], vertexScreenY[var4], vertexScreenX[var2], vertexScreenX[var3], vertexScreenX[var4], palette[this.faceColourA[arg0]]);
+			Pix3D.flatTriangle(vertexScreenY[var2], vertexScreenY[var3], vertexScreenY[var4], vertexScreenX[var2], vertexScreenX[var3], vertexScreenX[var4], colourTable[this.faceColourA[arg0]]);
 		} else if (var5 == 2) {
 			int var6 = this.faceInfo[arg0] >> 2;
 			int var7 = this.texturedVertexA[var6];
@@ -2035,7 +2035,7 @@ public class Model extends ModelSource {
 			if (var32 == 0) {
 				Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, clippedColour[0], clippedColour[1], clippedColour[2]);
 			} else if (var32 == 1) {
-				Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, palette[this.faceColourA[arg0]]);
+				Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, colourTable[this.faceColourA[arg0]]);
 			} else if (var32 == 2) {
 				int var33 = this.faceInfo[arg0] >> 2;
 				int var34 = this.texturedVertexA[var33];
@@ -2068,7 +2068,7 @@ public class Model extends ModelSource {
 			return;
 		}
 		if (var41 == 1) {
-			int var42 = palette[this.faceColourA[arg0]];
+			int var42 = colourTable[this.faceColourA[arg0]];
 			Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, var42);
 			Pix3D.flatTriangle(var29, var31, clippedY[3], var26, var28, clippedX[3], var42);
 			return;

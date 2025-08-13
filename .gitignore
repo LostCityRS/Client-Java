@@ -1,7 +1,8 @@
 /.gradle/
 /.idea/
 
-build/
+/bin/
+/build/
 *.class
 *.*~
 

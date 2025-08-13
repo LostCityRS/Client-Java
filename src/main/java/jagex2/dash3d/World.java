@@ -798,7 +798,7 @@ public class World {
 								}
 								int var88 = 0;
 								if (var80 != -1) {
-									var88 = Pix3D.palette[mulHsl(var81, 96)];
+									var88 = Pix3D.colourTable[mulHsl(var81, 96)];
 								}
 								if (var71 == 0) {
 									arg0.setTile(var5, var58, var67, 0, 0, -1, var72, var73, var74, var75, mulHsl(var80, var76), mulHsl(var80, var77), mulHsl(var80, var78), mulHsl(var80, var79), 0, 0, 0, 0, var88, 0);
@@ -818,7 +818,7 @@ public class World {
 										var92 = -1;
 									} else {
 										var94 = this.hsl24to16(var91.hue, var91.saturation, var91.lightness);
-										var93 = Pix3D.palette[this.adjustLightness(var91.hsl, 96)];
+										var93 = Pix3D.colourTable[this.adjustLightness(var91.hsl, 96)];
 									}
 									arg0.setTile(var5, var58, var67, var89, var90, var92, var72, var73, var74, var75, mulHsl(var80, var76), mulHsl(var80, var77), mulHsl(var80, var78), mulHsl(var80, var79), this.adjustLightness(var94, var76), this.adjustLightness(var94, var77), this.adjustLightness(var94, var78), this.adjustLightness(var94, var79), var88, var93);
 								}

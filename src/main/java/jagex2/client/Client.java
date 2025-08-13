@@ -1883,7 +1883,7 @@ public class Client extends GameShell {
 			this.drawProgress(83, "Unpacking textures");
 
 			Pix3D.unpackTextures(jagTextures);
-			Pix3D.setBrightness(0.8D);
+			Pix3D.initColourTable(0.8D);
 			Pix3D.initPool(20);
 
 			this.drawProgress(86, "Unpacking config");
@@ -11357,13 +11357,13 @@ public class Client extends GameShell {
 		int value = this.varps[id];
 		if (clientCode == 1) {
 			if (value == 1) {
-				Pix3D.setBrightness(0.9D);
+				Pix3D.initColourTable(0.9D);
 			} else if (value == 2) {
-				Pix3D.setBrightness(0.8D);
+				Pix3D.initColourTable(0.8D);
 			} else if (value == 3) {
-				Pix3D.setBrightness(0.7D);
+				Pix3D.initColourTable(0.7D);
 			} else if (value == 4) {
-				Pix3D.setBrightness(0.6D);
+				Pix3D.initColourTable(0.6D);
 			}
 
 			ObjType.iconCache.clear();
