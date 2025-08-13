@@ -16,23 +16,23 @@ public class AnimFrame {
 	public AnimBase base;
 
 	@ObfuscatedName("h.f")
-	public int length;
+	public int size;
 
 	@ObfuscatedName("h.g")
-	public int[] groups;
+	public int[] ti; // transform indices (groups affected by this frame)
 
 	@ObfuscatedName("h.h")
-	public int[] x;
+	public int[] tx; // transform x
 
 	@ObfuscatedName("h.i")
-	public int[] y;
+	public int[] ty; // transform y
 
 	@ObfuscatedName("h.j")
-	public int[] z;
+	public int[] tz; // transform z
 
 	@ObfuscatedName("h.a(I)V")
-	public static void init(int arg0) {
-		instances = new AnimFrame[arg0 + 1];
+	public static void init(int capacity) {
+		instances = new AnimFrame[capacity + 1];
 	}
 
 	@ObfuscatedName("h.a(I[B)V")
@@ -67,10 +67,10 @@ public class AnimFrame {
 		AnimBase base = new AnimBase(baseBuf);
 
 		int total = head.g2();
-		int[] labels = new int[500];
-		int[] x = new int[500];
-		int[] y = new int[500];
-		int[] z = new int[500];
+		int[] tempTi = new int[500];
+		int[] tempTx = new int[500];
+		int[] tempTy = new int[500];
+		int[] tempTz = new int[500];
 
 		for (int i = 0; i < total; i++) {
 			int id = head.g2();
@@ -89,39 +89,39 @@ public class AnimFrame {
 					if (base.types[j] != 0) {
 						for (int group = j - 1; group > lastGroup; group--) {
 							if (base.types[group] == 0) {
-								labels[current] = group;
-								x[current] = 0;
-								y[current] = 0;
-								z[current] = 0;
+								tempTi[current] = group;
+								tempTx[current] = 0;
+								tempTy[current] = 0;
+								tempTz[current] = 0;
 								current++;
 								break;
 							}
 						}
 					}
 
-					labels[current] = j;
+					tempTi[current] = j;
 
 					short defaultValue = 0;
-					if (base.types[labels[current]] == 3) {
+					if (base.types[tempTi[current]] == 3) {
 						defaultValue = 128;
 					}
 
 					if ((flags & 0x1) == 0) {
-						x[current] = defaultValue;
+						tempTx[current] = defaultValue;
 					} else {
-						x[current] = tran2.gsmart();
+						tempTx[current] = tran2.gsmart();
 					}
 
 					if ((flags & 0x2) == 0) {
-						y[current] = defaultValue;
+						tempTy[current] = defaultValue;
 					} else {
-						y[current] = tran2.gsmart();
+						tempTy[current] = tran2.gsmart();
 					}
 
 					if ((flags & 0x4) == 0) {
-						z[current] = defaultValue;
+						tempTz[current] = defaultValue;
 					} else {
-						z[current] = tran2.gsmart();
+						tempTz[current] = tran2.gsmart();
 					}
 
 					lastGroup = j;
@@ -129,17 +129,17 @@ public class AnimFrame {
 				}
 			}
 
-			frame.length = current;
-			frame.groups = new int[current];
-			frame.x = new int[current];
-			frame.y = new int[current];
-			frame.z = new int[current];
+			frame.size = current;
+			frame.ti = new int[current];
+			frame.tx = new int[current];
+			frame.ty = new int[current];
+			frame.tz = new int[current];
 
 			for (int j = 0; j < current; j++) {
-				frame.groups[j] = labels[j];
-				frame.x[j] = x[j];
-				frame.y[j] = y[j];
-				frame.z[j] = z[j];
+				frame.ti[j] = tempTi[j];
+				frame.tx[j] = tempTx[j];
+				frame.ty[j] = tempTy[j];
+				frame.tz[j] = tempTz[j];
 			}
 		}
 	}
@@ -150,11 +150,11 @@ public class AnimFrame {
 	}
 
 	@ObfuscatedName("h.a(II)Lh;")
-	public static AnimFrame get(int arg0) {
+	public static AnimFrame get(int id) {
 		if (instances == null) {
 			return null;
 		} else {
-			return instances[arg0];
+			return instances[id];
 		}
 	}
 }

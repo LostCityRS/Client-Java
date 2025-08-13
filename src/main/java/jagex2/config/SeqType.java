@@ -15,7 +15,7 @@ public class SeqType {
 	public static SeqType[] types;
 
 	@ObfuscatedName("nc.e")
-	public int frameCount;
+	public int numFrames;
 
 	@ObfuscatedName("nc.f")
 	public int[] frames;
@@ -96,50 +96,18 @@ public class SeqType {
 	public void decode(Packet buf) {
 		while (true) {
 			int code = buf.g1();
-
 			if (code == 0) {
-				if (this.frameCount == 0) {
-					this.frameCount = 1;
-
-					this.frames = new int[1];
-					this.frames[0] = -1;
-
-					this.iframes = new int[1];
-					this.iframes[0] = -1;
-
-					this.delay = new int[1];
-					this.delay[0] = -1;
-				}
-
-				if (this.preanim_move == -1) {
-					if (this.walkmerge == null) {
-						this.preanim_move = 0;
-					} else {
-						this.preanim_move = 2;
-					}
-				}
-
-				if (this.postanim_mode == -1) {
-					if (this.walkmerge != null) {
-						this.postanim_mode = 2;
-						return;
-					}
-
-					this.postanim_mode = 0;
-					return;
-				}
-
-				return;
+				break;
 			}
 
 			if (code == 1) {
-				this.frameCount = buf.g1();
+				this.numFrames = buf.g1();
 
-				this.frames = new int[this.frameCount];
-				this.iframes = new int[this.frameCount];
-				this.delay = new int[this.frameCount];
+				this.frames = new int[this.numFrames];
+				this.iframes = new int[this.numFrames];
+				this.delay = new int[this.numFrames];
 
-				for (int i = 0; i < this.frameCount; i++) {
+				for (int i = 0; i < this.numFrames; i++) {
 					this.frames[i] = buf.g2();
 
 					this.iframes[i] = buf.g2();
@@ -178,6 +146,35 @@ public class SeqType {
 				this.duplicatebehavior = buf.g1();
 			} else {
 				System.out.println("Error unrecognised seq config code: " + code);
+			}
+		}
+
+		if (this.numFrames == 0) {
+			this.numFrames = 1;
+
+			this.frames = new int[1];
+			this.frames[0] = -1;
+
+			this.iframes = new int[1];
+			this.iframes[0] = -1;
+
+			this.delay = new int[1];
+			this.delay[0] = -1;
+		}
+
+		if (this.preanim_move == -1) {
+			if (this.walkmerge == null) {
+				this.preanim_move = 0;
+			} else {
+				this.preanim_move = 2;
+			}
+		}
+
+		if (this.postanim_mode == -1) {
+			if (this.walkmerge == null) {
+				this.postanim_mode = 0;
+			} else {
+				this.postanim_mode = 2;
 			}
 		}
 	}

@@ -1162,9 +1162,9 @@ public class Model extends ModelSource {
 		baseY = 0;
 		baseZ = 0;
 
-		for (int i = 0; i < frame.length; i++) {
-			int group = frame.groups[i];
-			this.applyTransform(base.types[group], base.labels[group], frame.x[i], frame.y[i], frame.z[i]);
+		for (int i = 0; i < frame.size; i++) {
+			int group = frame.ti[i];
+			this.applyTransform(base.types[group], base.labels[group], frame.tx[i], frame.ty[i], frame.tz[i]);
 		}
 	}
 
@@ -1193,13 +1193,13 @@ public class Model extends ModelSource {
 		byte var8 = 0;
 		int var16 = var8 + 1;
 		int var9 = arg3[var8];
-		for (int var10 = 0; var10 < var5.length; var10++) {
-			int var15 = var5.groups[var10];
+		for (int var10 = 0; var10 < var5.size; var10++) {
+			int var15 = var5.ti[var10];
 			while (var15 > var9) {
 				var9 = arg3[var16++];
 			}
 			if (var9 != var15 || var7.types[var15] == 0) {
-				this.applyTransform(var7.types[var15], var7.labels[var15], var5.x[var10], var5.y[var10], var5.z[var10]);
+				this.applyTransform(var7.types[var15], var7.labels[var15], var5.tx[var10], var5.ty[var10], var5.tz[var10]);
 			}
 		}
 		baseX = 0;
@@ -1208,13 +1208,13 @@ public class Model extends ModelSource {
 		byte var11 = 0;
 		int var17 = var11 + 1;
 		int var12 = arg3[var11];
-		for (int var13 = 0; var13 < var6.length; var13++) {
-			int var14 = var6.groups[var13];
+		for (int var13 = 0; var13 < var6.size; var13++) {
+			int var14 = var6.ti[var13];
 			while (var14 > var12) {
 				var12 = arg3[var17++];
 			}
 			if (var12 == var14 || var7.types[var14] == 0) {
-				this.applyTransform(var7.types[var14], var7.labels[var14], var6.x[var13], var6.y[var13], var6.z[var13]);
+				this.applyTransform(var7.types[var14], var7.labels[var14], var6.tx[var13], var6.ty[var13], var6.tz[var13]);
 			}
 		}
 	}

@@ -11,7 +11,7 @@ import jagex2.io.Packet;
 public class World {
 
 	@ObfuscatedName("c.g")
-	public static boolean lowMemory = true;
+	public static boolean lowMem = true;
 
 	@ObfuscatedName("c.h")
 	public static int levelBuilt;
@@ -227,7 +227,7 @@ public class World {
 
 					if (stx > 0 && stz > 0 && stx < 103 && stz < 103) {
 						LocType loc = LocType.get(locId);
-						if (shape != 22 || !lowMemory || loc.active || loc.forcedecor) {
+						if (shape != 22 || !lowMem || loc.active || loc.forcedecor) {
 							ready &= loc.checkModelAll();
 							skip = true;
 						}
@@ -320,7 +320,7 @@ public class World {
 
 	@ObfuscatedName("c.a(IIIZLs;Ljc;III)V")
 	public final void addLoc(int locId, int z, int angle, World3D scene, CollisionMap collision, int x, int shape, int level) {
-		if (lowMemory) {
+		if (lowMem) {
 			if ((this.flags[level][x][z] & 0x10) != 0) {
 				return;
 			}
@@ -346,7 +346,7 @@ public class World {
 		byte info = (byte) ((angle << 6) + shape);
 
 		if (shape == 22) {
-			if (!lowMemory || loc.active || loc.forcedecor) {
+			if (!lowMem || loc.active || loc.forcedecor) {
 				ModelSource model;
 				if (loc.anim == -1) {
 					model = loc.getModel(22, angle, heightSW, heightSE, heightNW, heightNE, -1);
@@ -756,7 +756,7 @@ public class World {
 							var65 -= this.blendLuminance[var69];
 							var66 -= this.blendMagnitude[var69];
 						}
-						if (var67 >= 1 && var67 < this.maxTileZ - 1 && (!lowMemory || (this.flags[var5][var58][var67] & 0x10) == 0 && this.getDrawLevel(var58, var5, var67) == levelBuilt)) {
+						if (var67 >= 1 && var67 < this.maxTileZ - 1 && (!lowMem || (this.flags[var5][var58][var67] & 0x10) == 0 && this.getDrawLevel(var58, var5, var67) == levelBuilt)) {
 							int var70 = this.underlayType[var5][var58][var67] & 0xFF;
 							int var71 = this.overlayType[var5][var58][var67] & 0xFF;
 							if (var70 > 0 || var71 > 0) {

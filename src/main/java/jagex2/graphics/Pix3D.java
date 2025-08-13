@@ -10,7 +10,7 @@ public class Pix3D extends Pix2D {
 	public static int[][] texturePalette = new int[50][];
 
 	@ObfuscatedName("ib.E")
-	public static boolean lowMemory = true;
+	public static boolean lowMem = true;
 
 	@ObfuscatedName("ib.H")
 	public static boolean jagged = true;
@@ -131,7 +131,7 @@ public class Pix3D extends Pix2D {
 
 		poolSize = size;
 
-		if (lowMemory) {
+		if (lowMem) {
 			texelPool = new int[poolSize][16384];
 		} else {
 			texelPool = new int[poolSize][65536];
@@ -150,7 +150,7 @@ public class Pix3D extends Pix2D {
 			try {
 				textures[i] = new Pix8(jag, String.valueOf(i), 0);
 
-				if (lowMemory && textures[i].owi == 128) {
+				if (lowMem && textures[i].owi == 128) {
 					textures[i].halveSize();
 				} else {
 					textures[i].trim();
@@ -218,7 +218,7 @@ public class Pix3D extends Pix2D {
 		activeTexels[arg0] = var1;
 		Pix8 var5 = textures[arg0];
 		int[] var6 = texturePalette[arg0];
-		if (lowMemory) {
+		if (lowMem) {
 			textureTranslucent[arg0] = false;
 			for (int var7 = 0; var7 < 4096; var7++) {
 				int var8 = var1[var7] = var6[var5.pixels[var7]] & 0xF8F8FF;
@@ -2081,7 +2081,7 @@ public class Pix3D extends Pix2D {
 			var18 = arg7 << 9;
 		}
 		int var19 = arg4 + arg5;
-		if (!lowMemory) {
+		if (!lowMem) {
 			int var78 = 0;
 			int var79 = 0;
 			int var80 = arg5 - centerX;

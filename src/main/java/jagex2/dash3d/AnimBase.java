@@ -7,7 +7,7 @@ import jagex2.io.Packet;
 public class AnimBase {
 
 	@ObfuscatedName("g.b")
-	public int length;
+	public int size;
 
 	@ObfuscatedName("g.c")
 	public int[] types;
@@ -16,16 +16,16 @@ public class AnimBase {
 	public int[][] labels;
 
 	public AnimBase(Packet buf) {
-		this.length = buf.g1();
+		this.size = buf.g1();
 
-		this.types = new int[this.length];
-		this.labels = new int[this.length][];
+		this.types = new int[this.size];
+		this.labels = new int[this.size][];
 
-		for (int i = 0; i < this.length; i++) {
+		for (int i = 0; i < this.size; i++) {
 			this.types[i] = buf.g1();
 		}
 
-		for (int i = 0; i < this.length; i++) {
+		for (int i = 0; i < this.size; i++) {
 			int count = buf.g1();
 			this.labels[i] = new int[count];
 

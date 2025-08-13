@@ -36,7 +36,7 @@ public class Client extends GameShell {
 	public static boolean membersWorld = true;
 
 	@ObfuscatedName("client.Se")
-	public static boolean lowMemory;
+	public static boolean lowMem;
 
 	@ObfuscatedName("client.Ti")
 	public static boolean alreadyStarted;
@@ -1285,9 +1285,9 @@ public class Client extends GameShell {
 				portOffset = Integer.parseInt(args[1]);
 
 				if (args[2].equals("lowmem")) {
-					setLowMemory();
+					setLowMem();
 				} else if (args[2].equals("highmem")) {
-					setHighMemory();
+					setHighMem();
 				} else {
 					System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 					return;
@@ -1310,7 +1310,7 @@ public class Client extends GameShell {
 			} else {
 				System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 			}
-		} catch (Exception var3) {
+		} catch (Exception ignore) {
 		}
 	}
 
@@ -1320,9 +1320,9 @@ public class Client extends GameShell {
 
 		String lowmem = this.getParameter("lowmem");
 		if (lowmem != null && lowmem.equals("1")) {
-			setLowMemory();
+			setLowMem();
 		} else {
-			setHighMemory();
+			setHighMem();
 		}
 
 		String free = this.getParameter("free");
@@ -1344,19 +1344,19 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.s(I)V")
-	public static final void setLowMemory() {
-		World3D.lowMemory = true;
-		Pix3D.lowMemory = true;
-		lowMemory = true;
-		World.lowMemory = true;
+	public static final void setLowMem() {
+		World3D.lowMem = true;
+		Pix3D.lowMem = true;
+		lowMem = true;
+		World.lowMem = true;
 	}
 
 	@ObfuscatedName("client.h(B)V")
-	public static final void setHighMemory() {
-		World3D.lowMemory = false;
-		Pix3D.lowMemory = false;
-		lowMemory = false;
-		World.lowMemory = false;
+	public static final void setHighMem() {
+		World3D.lowMem = false;
+		Pix3D.lowMem = false;
+		lowMem = false;
+		World.lowMem = false;
 	}
 
 	// ----
@@ -1371,7 +1371,7 @@ public class Client extends GameShell {
 			if (super.frame != null) {
 				return new URL("http://127.0.0.1:" + (portOffset + 80));
 			}
-		} catch (Exception var1) {
+		} catch (Exception ignore) {
 		}
 
 		return super.getCodeBase();
@@ -1553,7 +1553,7 @@ public class Client extends GameShell {
 
 						try {
 							Thread.sleep(1000L);
-						} catch (Exception var75) {
+						} catch (Exception ignore2) {
 						}
 					}
 
@@ -1597,7 +1597,7 @@ public class Client extends GameShell {
 			AnimFrame.init(this.onDemand.getAnimCount());
 			Model.init(this.onDemand.getFileCount(0), this.onDemand);
 
-			if (!lowMemory) {
+			if (!lowMem) {
 				this.midiSong = 0;
 				this.midiFading = false;
 				this.onDemand.request(2, this.midiSong);
@@ -1607,7 +1607,7 @@ public class Client extends GameShell {
 
 					try {
 						Thread.sleep(100L);
-					} catch (Exception var74) {
+					} catch (Exception ignore) {
 					}
 				}
 			}
@@ -1629,7 +1629,7 @@ public class Client extends GameShell {
 
 				try {
 					Thread.sleep(100L);
-				} catch (Exception var73) {
+				} catch (Exception ignore) {
 				}
 			}
 
@@ -1654,7 +1654,7 @@ public class Client extends GameShell {
 
 				try {
 					Thread.sleep(100L);
-				} catch (Exception var72) {
+				} catch (Exception ignore) {
 				}
 			}
 
@@ -1690,7 +1690,7 @@ public class Client extends GameShell {
 
 					try {
 						Thread.sleep(100L);
-					} catch (Exception var71) {
+					} catch (Exception ignore) {
 					}
 				}
 			}
@@ -1727,7 +1727,7 @@ public class Client extends GameShell {
 
 			this.onDemand.prefetchMaps(membersWorld);
 
-			if (!lowMemory) {
+			if (!lowMem) {
 				int midiCount = this.onDemand.getFileCount(2);
 				for (int i = 1; i < midiCount; i++) {
 					if (this.onDemand.shouldPrefetchMidi(i)) {
@@ -1898,7 +1898,7 @@ public class Client extends GameShell {
 			VarpType.unpack(jagConfig);
 			ObjType.membersWorld = membersWorld;
 
-			if (!lowMemory) {
+			if (!lowMem) {
 				this.drawProgress(90, "Unpacking sounds");
 
 				byte[] dat = jagSounds.read("sounds.dat", null);
@@ -2639,7 +2639,7 @@ public class Client extends GameShell {
 
 				this.login.p1(this.out.pos + 36 + 1 + 1);
 				this.login.p1(244);
-				this.login.p1(lowMemory ? 1 : 0);
+				this.login.p1(lowMem ? 1 : 0);
 
 				for (int i = 0; i < 9; i++) {
 					this.login.p4(this.jagChecksum[i]);
@@ -3233,7 +3233,7 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.m(B)V")
 	public final void updateSceneState() {
-		if (lowMemory && this.sceneState == 2 && World.levelBuilt != this.currentLevel) {
+		if (lowMem && this.sceneState == 2 && World.levelBuilt != this.currentLevel) {
 			this.areaViewport.bind();
 			this.fontPlain12.centreString(257, 0, "Loading - please wait.", 151);
 			this.fontPlain12.centreString(256, 16777215, "Loading - please wait.", 150);
@@ -3245,7 +3245,7 @@ public class Client extends GameShell {
 		if (this.sceneState == 1) {
 			int status = this.checkScene();
 			if (status != 0 && System.currentTimeMillis() - this.sceneLoadStartTime > 360000L) {
-				SignLink.reporterror(this.username + " glcfb " + this.serverSeed + "," + status + "," + lowMemory + "," + this.fileStreams[0] + "," + this.onDemand.remaining() + "," + this.currentLevel + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ);
+				SignLink.reporterror(this.username + " glcfb " + this.serverSeed + "," + status + "," + lowMem + "," + this.fileStreams[0] + "," + this.onDemand.remaining() + "," + this.currentLevel + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ);
 				this.sceneLoadStartTime = System.currentTimeMillis();
 			}
 		}
@@ -3307,7 +3307,7 @@ public class Client extends GameShell {
 			System.gc();
 
 			World world = new World(this.levelHeightmap, this.levelTileFlags, 104, 104);
-			World.lowMemory = World3D.lowMemory;
+			World.lowMem = World3D.lowMem;
 
 			int maps = this.sceneMapLandData.length;
 			for (int i = 0; i < maps; i++) {
@@ -3315,11 +3315,11 @@ public class Client extends GameShell {
 				int z = this.sceneMapIndex[i] & 0xFF;
 
 				if (x == 33 && z >= 71 && z <= 73) {
-					World.lowMemory = false;
+					World.lowMem = false;
 				}
 			}
 
-			if (World.lowMemory) {
+			if (World.lowMem) {
 				this.scene.setMinLevel(this.currentLevel);
 			} else {
 				this.scene.setMinLevel(0);
@@ -3382,7 +3382,7 @@ public class Client extends GameShell {
 
 		LocType.modelCacheStatic.clear();
 
-		if (lowMemory && SignLink.cache_dat != null) {
+		if (lowMem && SignLink.cache_dat != null) {
 			int modelCount = this.onDemand.getFileCount(0);
 
 			for (int i = 0; i < modelCount; i++) {
@@ -3625,7 +3625,7 @@ public class Client extends GameShell {
 				this.nextMusicDelay = 0;
 			}
 
-			if (this.nextMusicDelay == 0 && this.midiActive && !lowMemory) {
+			if (this.nextMusicDelay == 0 && this.midiActive && !lowMem) {
 				this.midiSong = this.nextMidiSong;
 				this.midiFading = false;
 				this.onDemand.request(2, this.midiSong);
@@ -5197,12 +5197,12 @@ public class Client extends GameShell {
 			SeqType seq = SeqType.types[e.secondarySeqId];
 			e.secondarySeqCycle++;
 
-			if (e.secondarySeqFrame < seq.frameCount && e.secondarySeqCycle > seq.getFrameDuration(e.secondarySeqFrame)) {
+			if (e.secondarySeqFrame < seq.numFrames && e.secondarySeqCycle > seq.getFrameDuration(e.secondarySeqFrame)) {
 				e.secondarySeqCycle = 0;
 				e.secondarySeqFrame++;
 			}
 
-			if (e.secondarySeqFrame >= seq.frameCount) {
+			if (e.secondarySeqFrame >= seq.numFrames) {
 				e.secondarySeqCycle = 0;
 				e.secondarySeqFrame = 0;
 			}
@@ -5216,12 +5216,12 @@ public class Client extends GameShell {
 			SeqType seq = SpotAnimType.types[e.spotanimId].seq;
 			e.spotanimCycle++;
 
-			while (e.spotanimFrame < seq.frameCount && e.spotanimCycle > seq.getFrameDuration(e.spotanimFrame)) {
+			while (e.spotanimFrame < seq.numFrames && e.spotanimCycle > seq.getFrameDuration(e.spotanimFrame)) {
 				e.spotanimCycle -= seq.getFrameDuration(e.spotanimFrame);
 				e.spotanimFrame++;
 			}
 
-			if (e.spotanimFrame >= seq.frameCount && (e.spotanimFrame < 0 || e.spotanimFrame >= seq.frameCount)) {
+			if (e.spotanimFrame >= seq.numFrames && (e.spotanimFrame < 0 || e.spotanimFrame >= seq.numFrames)) {
 				e.spotanimId = -1;
 			}
 		}
@@ -5238,12 +5238,12 @@ public class Client extends GameShell {
 			SeqType seq = SeqType.types[e.primarySeqId];
 			e.primarySeqCycle++;
 
-			while (e.primarySeqFrame < seq.frameCount && e.primarySeqCycle > seq.getFrameDuration(e.primarySeqFrame)) {
+			while (e.primarySeqFrame < seq.numFrames && e.primarySeqCycle > seq.getFrameDuration(e.primarySeqFrame)) {
 				e.primarySeqCycle -= seq.getFrameDuration(e.primarySeqFrame);
 				e.primarySeqFrame++;
 			}
 
-			if (e.primarySeqFrame >= seq.frameCount) {
+			if (e.primarySeqFrame >= seq.numFrames) {
 				e.primarySeqFrame -= seq.loops;
 				e.primarySeqLoop++;
 
@@ -5251,7 +5251,7 @@ public class Client extends GameShell {
 					e.primarySeqId = -1;
 				}
 
-				if (e.primarySeqFrame < 0 || e.primarySeqFrame >= seq.frameCount) {
+				if (e.primarySeqFrame < 0 || e.primarySeqFrame >= seq.numFrames) {
 					e.primarySeqId = -1;
 				}
 			}
@@ -5968,7 +5968,7 @@ public class Client extends GameShell {
 			}
 
 			player.lowMemory = false;
-			if ((lowMemory && this.playerCount > 50 || this.playerCount > 200) && i != -1 && player.secondarySeqId == player.readyanim) {
+			if ((lowMem && this.playerCount > 50 || this.playerCount > 200) && i != -1 && player.secondarySeqId == player.readyanim) {
 				player.lowMemory = true;
 			}
 
@@ -6505,7 +6505,7 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.j(II)V")
 	public final void updateTextures(int cycle) {
-		if (lowMemory) {
+		if (lowMem) {
 			return;
 		}
 
@@ -7538,7 +7538,7 @@ public class Client extends GameShell {
 					id = -1;
 				}
 
-				if (this.nextMidiSong != id && this.midiActive && !lowMemory) {
+				if (this.nextMidiSong != id && this.midiActive && !lowMem) {
 					this.midiSong = id;
 					this.midiFading = true;
 					this.onDemand.request(2, this.midiSong);
@@ -7556,7 +7556,7 @@ public class Client extends GameShell {
 				int id = this.in.g2();
 				int delay = this.in.g2();
 
-				if (this.midiActive && !lowMemory) {
+				if (this.midiActive && !lowMem) {
 					this.midiSong = id;
 					this.midiFading = false;
 					this.onDemand.request(2, this.midiSong);
@@ -7675,7 +7675,7 @@ public class Client extends GameShell {
 				int loop = this.in.g1();
 				int delay = this.in.g2();
 
-				if (this.waveEnabled && !lowMemory && this.waveCount < 50) {
+				if (this.waveEnabled && !lowMem && this.waveCount < 50) {
 					this.waveIds[this.waveCount] = id;
 					this.waveLoops[this.waveCount] = loop;
 					this.waveDelay[this.waveCount] = Wave.delays[id] + delay;
@@ -8820,7 +8820,7 @@ public class Client extends GameShell {
 			return;
 		}
 
-		if (lowMemory && this.currentLevel != level) {
+		if (lowMem && this.currentLevel != level) {
 			return;
 		}
 
@@ -11329,10 +11329,10 @@ public class Client extends GameShell {
 						child.seqCycle -= seq.getFrameDuration(child.seqFrame) + 1;
 						child.seqFrame++;
 
-						if (child.seqFrame >= seq.frameCount) {
+						if (child.seqFrame >= seq.numFrames) {
 							child.seqFrame -= seq.loops;
 
-							if (child.seqFrame < 0 || child.seqFrame >= seq.frameCount) {
+							if (child.seqFrame < 0 || child.seqFrame >= seq.numFrames) {
 								child.seqFrame = 0;
 							}
 						}
@@ -11387,7 +11387,7 @@ public class Client extends GameShell {
 				this.midiActive = false;
 			}
 
-			if (this.midiActive != lastMidiActive && !lowMemory) {
+			if (this.midiActive != lastMidiActive && !lowMem) {
 				if (this.midiActive) {
 					this.midiSong = this.nextMidiSong;
 					this.midiFading = false;
@@ -12280,7 +12280,7 @@ public class Client extends GameShell {
 
 			try {
 				Thread.sleep(50L);
-			} catch (Exception var2) {
+			} catch (Exception ignore) {
 			}
 		}
 
