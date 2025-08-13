@@ -197,7 +197,7 @@ public class PixFont extends Pix2D {
 			}
 		}
 		if (this.strikeout) {
-			Pix2D.drawHorizontalLine(8388608, (int) ((double) this.height * 0.7D) + var8, arg1 - var7, var7);
+			Pix2D.hline(8388608, (int) ((double) this.height * 0.7D) + var8, arg1 - var7, var7);
 		}
 	}
 

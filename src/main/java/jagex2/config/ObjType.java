@@ -605,7 +605,7 @@ public class ObjType {
 		}
 
 		Pix2D.bind(_w, _data, _h);
-		Pix2D.setBounds(_r, _b, _t, _l);
+		Pix2D.setClipping(_r, _b, _t, _l);
 		Pix3D.centerX = _cx;
 		Pix3D.centerY = _cy;
 		Pix3D.lineOffset = _loff;

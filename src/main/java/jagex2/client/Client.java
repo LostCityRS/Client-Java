@@ -2907,13 +2907,13 @@ public class Client extends GameShell {
 		this.areaChatback = new PixMap(479, 96, this.getBaseComponent());
 
 		this.areaMapback = new PixMap(172, 156, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 		this.imageMapback.plotSprite(0, 0);
 
 		this.areaSidebar = new PixMap(190, 261, this.getBaseComponent());
 
 		this.areaViewport = new PixMap(512, 334, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.areaBackbase1 = new PixMap(496, 50, this.getBaseComponent());
 		this.areaBackbase2 = new PixMap(269, 37, this.getBaseComponent());
@@ -5280,31 +5280,31 @@ public class Client extends GameShell {
 		this.areaBackhmid1 = null;
 
 		this.imageTitle0 = new PixMap(128, 265, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle1 = new PixMap(128, 265, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle2 = new PixMap(509, 171, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle3 = new PixMap(360, 132, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle4 = new PixMap(360, 200, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle5 = new PixMap(202, 238, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle6 = new PixMap(203, 238, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle7 = new PixMap(74, 94, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle8 = new PixMap(75, 94, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		if (this.jagTitle != null) {
 			this.loadTitleBackground();
@@ -5928,7 +5928,7 @@ public class Client extends GameShell {
 		Model.mouseX = super.mouseX - 4;
 		Model.mouseY = super.mouseY - 4;
 
-		Pix2D.clear();
+		Pix2D.cls();
 		this.scene.draw(this.cameraX, level, this.cameraYaw, this.cameraPitch, this.cameraZ, this.cameraY);
 		this.scene.clearLocChanges();
 		this.draw2DEntityElements();
@@ -6412,10 +6412,10 @@ public class Client extends GameShell {
 				} else if (this.chatEffect[i] == 2) {
 					int w = this.fontBold12.stringWid(message);
 					int offsetX = (150 - this.chatTimer[i]) * (w + 100) / 150;
-					Pix2D.setBounds(this.projectX + 50, 334, 0, this.projectX - 50);
+					Pix2D.setClipping(this.projectX + 50, 334, 0, this.projectX - 50);
 					this.fontBold12.drawString(message, 0, this.projectY + 1, this.projectX + 50 - offsetX);
 					this.fontBold12.drawString(message, color, this.projectY, this.projectX + 50 - offsetX);
-					Pix2D.resetBounds();
+					Pix2D.resetClipping();
 				}
 			} else {
 				this.fontBold12.centreString(this.projectX, 0, message, this.projectY + 1);
@@ -6562,7 +6562,7 @@ public class Client extends GameShell {
 
 			for (int i = 0; i < 30; i++) {
 				int w = (30 - i) * 16;
-				Pix2D.drawHorizontalLineTrans(offset + i, w, 16776960, 256 - w / 2, this.field1264);
+				Pix2D.hlineTrans(offset + i, w, 16776960, 256 - w / 2, this.field1264);
 			}
 		}
 
@@ -10524,7 +10524,7 @@ public class Client extends GameShell {
 		int top = Pix2D.top;
 		int right = Pix2D.right;
 		int bottom = Pix2D.bottom;
-		Pix2D.setBounds(com.width + x, com.height + y, y, x);
+		Pix2D.setClipping(com.width + x, com.height + y, y, x);
 
 		int children = com.children.length;
 		for (int i = 0; i < children; i++) {
@@ -10820,7 +10820,7 @@ public class Client extends GameShell {
 			}
 		}
 
-		Pix2D.setBounds(right, bottom, top, left);
+		Pix2D.setClipping(right, bottom, top, left);
 	}
 
 	@ObfuscatedName("client.a(IIIIBI)V")
@@ -10837,17 +10837,17 @@ public class Client extends GameShell {
 		int gripY = (height - 32 - gripSize) * scrollY / (scrollHeight - height);
 		Pix2D.fillRect(this.SCROLLBAR_GRIP_FOREGROUND, 16, gripSize, x, y + 16 + gripY);
 
-		Pix2D.drawVerticalLine(x, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
-		Pix2D.drawVerticalLine(x + 1, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
+		Pix2D.vline(x, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
+		Pix2D.vline(x + 1, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
 
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, 16, x);
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 17 + gripY, 16, x);
+		Pix2D.hline(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, 16, x);
+		Pix2D.hline(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 17 + gripY, 16, x);
 
-		Pix2D.drawVerticalLine(x + 15, this.SCROLLBAR_GRIP_LOWLIGHT, y + 16 + gripY, gripSize);
-		Pix2D.drawVerticalLine(x + 14, this.SCROLLBAR_GRIP_LOWLIGHT, y + 17 + gripY, gripSize - 1);
+		Pix2D.vline(x + 15, this.SCROLLBAR_GRIP_LOWLIGHT, y + 16 + gripY, gripSize);
+		Pix2D.vline(x + 14, this.SCROLLBAR_GRIP_LOWLIGHT, y + 17 + gripY, gripSize - 1);
 
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_LOWLIGHT, y + 15 + gripY + gripSize, 16, x);
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_LOWLIGHT, y + 14 + gripY + gripSize, 15, x + 1);
+		Pix2D.hline(this.SCROLLBAR_GRIP_LOWLIGHT, y + 15 + gripY + gripSize, 16, x);
+		Pix2D.hline(this.SCROLLBAR_GRIP_LOWLIGHT, y + 14 + gripY + gripSize, 15, x + 1);
 	}
 
 	@ObfuscatedName("client.h(II)Ljava/lang/String;")
@@ -11829,7 +11829,7 @@ public class Client extends GameShell {
 			PixFont font = this.fontPlain12;
 			int line = 0;
 
-			Pix2D.setBounds(463, 77, 0, 0);
+			Pix2D.setClipping(463, 77, 0, 0);
 
 			for (int i = 0; i < 100; i++) {
 				if (this.messageText[i] != null) {
@@ -11921,7 +11921,7 @@ public class Client extends GameShell {
 				}
 			}
 
-			Pix2D.resetBounds();
+			Pix2D.resetClipping();
 
 			this.chatScrollHeight = line * 14 + 7;
 			if (this.chatScrollHeight < 78) {
@@ -11940,7 +11940,7 @@ public class Client extends GameShell {
 			font.drawString(username + ":", 0, 90, 4);
 			font.drawString(this.chatTyped + "*", 255, 90, font.stringWid(username + ": ") + 6);
 
-			Pix2D.drawHorizontalLine(0, 77, 479, 0);
+			Pix2D.hline(0, 77, 479, 0);
 		}
 
 		if (this.menuVisible && this.menuArea == 2) {

@@ -41,11 +41,11 @@ public class Pix2D extends DoublyLinkable {
 		Pix2D.data = data;
 		width2d = width;
 		height2d = height;
-		setBounds(width, height, 0, 0);
+		setClipping(width, height, 0, 0);
 	}
 
 	@ObfuscatedName("hb.a(B)V")
-	public static void resetBounds() {
+	public static void resetClipping() {
 		left = 0;
 		top = 0;
 		right = width2d;
@@ -55,7 +55,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIII)V")
-	public static void setBounds(int right, int bottom, int top, int left) {
+	public static void setClipping(int right, int bottom, int top, int left) {
 		if (left < 0) {
 			left = 0;
 		}
@@ -81,8 +81,9 @@ public class Pix2D extends DoublyLinkable {
 		centerY2d = Pix2D.bottom / 2;
 	}
 
+	// i guess they had some windows lovers :)
 	@ObfuscatedName("hb.a(Z)V")
-	public static void clear() {
+	public static void cls() {
 		int length = height2d * width2d;
 		for (int i = 0; i < length; i++) {
 			data[i] = 0;
@@ -164,24 +165,25 @@ public class Pix2D extends DoublyLinkable {
 
 	@ObfuscatedName("hb.b(IIIIII)V")
 	public static void drawRect(int height, int width, int colour, int x, int y) {
-		drawHorizontalLine(colour, y, width, x);
-		drawHorizontalLine(colour, height + y - 1, width, x);
-		drawVerticalLine(x, colour, y, height);
-		drawVerticalLine(width + x - 1, colour, y, height);
+		hline(colour, y, width, x);
+		hline(colour, height + y - 1, width, x);
+		vline(x, colour, y, height);
+		vline(width + x - 1, colour, y, height);
 	}
 
 	@ObfuscatedName("hb.a(IIIIIZI)V")
 	public static void drawRectTrans(int height, int colour, int x, int y, int width, int alpha) {
-		drawHorizontalLineTrans(y, width, colour, x, alpha);
-		drawHorizontalLineTrans(height + y - 1, width, colour, x, alpha);
+		hlineTrans(y, width, colour, x, alpha);
+		hlineTrans(height + y - 1, width, colour, x, alpha);
+
 		if (height >= 3) {
-			drawVerticalLineTrans(x, y + 1, alpha, height - 2, colour);
-			drawVerticalLineTrans(x + width - 1, y + 1, alpha, height - 2, colour);
+			vlineTrans(x, y + 1, alpha, height - 2, colour);
+			vlineTrans(x + width - 1, y + 1, alpha, height - 2, colour);
 		}
 	}
 
 	@ObfuscatedName("hb.b(IIIII)V")
-	public static void drawHorizontalLine(int colour, int y, int width, int x) {
+	public static void hline(int colour, int y, int width, int x) {
 		if (y < top || y >= bottom) {
 			return;
 		}
@@ -203,7 +205,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.c(IIIIII)V")
-	public static void drawHorizontalLineTrans(int y, int width, int colour, int x, int alpha) {
+	public static void hlineTrans(int y, int width, int colour, int x, int alpha) {
 		if (y < top || y >= bottom) {
 			return;
 		}
@@ -234,7 +236,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIIZ)V")
-	public static void drawVerticalLine(int x, int colour, int y, int height) {
+	public static void vline(int x, int colour, int y, int height) {
 		if (x < left || x >= right) {
 			return;
 		}
@@ -256,7 +258,7 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIIIB)V")
-	public static void drawVerticalLineTrans(int x, int y, int alpha, int height, int colour) {
+	public static void vlineTrans(int x, int y, int alpha, int height, int colour) {
 		if (x < left || x >= right) {
 			return;
 		}
