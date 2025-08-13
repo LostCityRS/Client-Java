@@ -7,26 +7,28 @@ import jagex2.io.Jagfile;
 @ObfuscatedName("kb")
 public class Pix8 extends Pix2D {
 
+	// these short field names are authentic to native
+
 	@ObfuscatedName("kb.M")
-	public int width;
+	public int owi; // original width
 
 	@ObfuscatedName("kb.N")
-	public int height;
+	public int ohi; // original height
 
 	@ObfuscatedName("kb.H")
-	public int[] palette;
+	public int[] bpal; // base palette
 
 	@ObfuscatedName("kb.K")
-	public int cropLeft;
+	public int xof; // x offset
 
 	@ObfuscatedName("kb.L")
-	public int cropTop;
+	public int yof; // y offset
 
 	@ObfuscatedName("kb.I")
-	public int cropRight;
+	public int wi; // width
 
 	@ObfuscatedName("kb.J")
-	public int cropBottom;
+	public int hi; // height
 
 	@ObfuscatedName("kb.G")
 	public byte[] pixels;
@@ -36,139 +38,151 @@ public class Pix8 extends Pix2D {
 		Packet idx = new Packet(jag.read("index.dat", null));
 
 		idx.pos = dat.g2();
-		this.width = idx.g2();
-		this.height = idx.g2();
+		this.owi = idx.g2();
+		this.ohi = idx.g2();
 
-		int var6 = idx.g1();
-		this.palette = new int[var6];
-		for (int var7 = 0; var7 < var6 - 1; var7++) {
-			this.palette[var7 + 1] = idx.g3();
+		int palCount = idx.g1();
+		this.bpal = new int[palCount];
+		for (int i = 0; i < palCount - 1; i++) {
+			this.bpal[i + 1] = idx.g3();
 		}
 
-		for (int var8 = 0; var8 < sprite; var8++) {
+		for (int i = 0; i < sprite; i++) {
 			idx.pos += 2;
 			dat.pos += idx.g2() * idx.g2();
 			idx.pos++;
 		}
-		this.cropLeft = idx.g1();
-		this.cropTop = idx.g1();
-		this.cropRight = idx.g2();
-		this.cropBottom = idx.g2();
-		int var9 = idx.g1();
-		int var10 = this.cropBottom * this.cropRight;
-		this.pixels = new byte[var10];
-		if (var9 == 0) {
-			for (int var11 = 0; var11 < var10; var11++) {
-				this.pixels[var11] = dat.g1b();
+
+		this.xof = idx.g1();
+		this.yof = idx.g1();
+		this.wi = idx.g2();
+		this.hi = idx.g2();
+		int pixelOrder = idx.g1();
+
+		int len = this.hi * this.wi;
+		this.pixels = new byte[len];
+
+		if (pixelOrder == 0) {
+			for (int i = 0; i < len; i++) {
+				this.pixels[i] = dat.g1b();
 			}
-		} else if (var9 == 1) {
-			for (int var12 = 0; var12 < this.cropRight; var12++) {
-				for (int var13 = 0; var13 < this.cropBottom; var13++) {
-					this.pixels[this.cropRight * var13 + var12] = dat.g1b();
+		} else if (pixelOrder == 1) {
+			for (int x = 0; x < this.wi; x++) {
+				for (int y = 0; y < this.hi; y++) {
+					this.pixels[this.wi * y + x] = dat.g1b();
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("kb.a(I)V")
-	public void shrink() {
-		this.width /= 2;
-		this.height /= 2;
-		byte[] var2 = new byte[this.height * this.width];
-		int var3 = 0;
-		for (int var4 = 0; var4 < this.cropBottom; var4++) {
-			for (int var5 = 0; var5 < this.cropRight; var5++) {
-				var2[(this.cropLeft + var5 >> 1) + (this.cropTop + var4 >> 1) * this.width] = this.pixels[var3++];
+	public void halveSize() {
+		this.owi /= 2;
+		this.ohi /= 2;
+
+		byte[] temp = new byte[this.ohi * this.owi];
+		int i = 0;
+		for (int y = 0; y < this.hi; y++) {
+			for (int x = 0; x < this.wi; x++) {
+				temp[(this.xof + x >> 1) + (this.yof + y >> 1) * this.owi] = this.pixels[i++];
 			}
 		}
-		this.pixels = var2;
-		this.cropRight = this.width;
-		this.cropBottom = this.height;
-		this.cropLeft = 0;
-		this.cropTop = 0;
+		this.pixels = temp;
+
+		this.wi = this.owi;
+		this.hi = this.ohi;
+		this.xof = 0;
+		this.yof = 0;
 	}
 
 	@ObfuscatedName("kb.b(Z)V")
-	public void crop() {
-		if (this.width == this.cropRight && this.height == this.cropBottom) {
+	public void trim() {
+		if (this.owi == this.wi && this.ohi == this.hi) {
 			return;
 		}
-		byte[] var2 = new byte[this.height * this.width];
-		int var3 = 0;
-		for (int var4 = 0; var4 < this.cropBottom; var4++) {
-			for (int var6 = 0; var6 < this.cropRight; var6++) {
-				var2[(this.cropTop + var4) * this.width + this.cropLeft + var6] = this.pixels[var3++];
+
+		byte[] temp = new byte[this.ohi * this.owi];
+		int i = 0;
+		for (int y = 0; y < this.hi; y++) {
+			for (int x = 0; x < this.wi; x++) {
+				temp[(this.yof + y) * this.owi + this.xof + x] = this.pixels[i++];
 			}
 		}
-		this.pixels = var2;
-		this.cropRight = this.width;
-		this.cropBottom = this.height;
-		this.cropLeft = 0;
-		this.cropTop = 0;
+		this.pixels = temp;
+
+		this.wi = this.owi;
+		this.hi = this.ohi;
+		this.xof = 0;
+		this.yof = 0;
 	}
 
 	@ObfuscatedName("kb.b(I)V")
-	public void flipHorizontally() {
-		byte[] var2 = new byte[this.cropBottom * this.cropRight];
-		int var3 = 0;
-		for (int var4 = 0; var4 < this.cropBottom; var4++) {
-			for (int var5 = this.cropRight - 1; var5 >= 0; var5--) {
-				var2[var3++] = this.pixels[this.cropRight * var4 + var5];
+	public void hflip() {
+		byte[] temp = new byte[this.hi * this.wi];
+		int i = 0;
+		for (int y = 0; y < this.hi; y++) {
+			for (int x = this.wi - 1; x >= 0; x--) {
+				temp[i++] = this.pixels[this.wi * y + x];
 			}
 		}
-		this.pixels = var2;
-		this.cropLeft = this.width - this.cropRight - this.cropLeft;
+		this.pixels = temp;
+
+		this.xof = this.owi - this.wi - this.xof;
 	}
 
 	@ObfuscatedName("kb.c(I)V")
-	public void flipVertically() {
-		byte[] var2 = new byte[this.cropBottom * this.cropRight];
-		int var3 = 0;
-		for (int var4 = this.cropBottom - 1; var4 >= 0; var4--) {
-			for (int var5 = 0; var5 < this.cropRight; var5++) {
-				var2[var3++] = this.pixels[this.cropRight * var4 + var5];
+	public void vflip() {
+		byte[] temp = new byte[this.hi * this.wi];
+		int i = 0;
+		for (int y = this.hi - 1; y >= 0; y--) {
+			for (int x = 0; x < this.wi; x++) {
+				temp[i++] = this.pixels[this.wi * y + x];
 			}
 		}
-		this.pixels = var2;
-		this.cropTop = this.height - this.cropBottom - this.cropTop;
+		this.pixels = temp;
+
+		this.yof = this.ohi - this.hi - this.yof;
 	}
 
 	@ObfuscatedName("kb.a(IIII)V")
-	public void translate(int arg0, int arg1, int arg3) {
-		for (int var5 = 0; var5 < this.palette.length; var5++) {
-			int var6 = this.palette[var5] >> 16 & 0xFF;
+	public void rgbAdjust(int arg0, int arg1, int arg3) {
+		for (int var5 = 0; var5 < this.bpal.length; var5++) {
+			int var6 = this.bpal[var5] >> 16 & 0xFF;
 			int var7 = arg0 + var6;
 			if (var7 < 0) {
 				var7 = 0;
 			} else if (var7 > 255) {
 				var7 = 255;
 			}
-			int var8 = this.palette[var5] >> 8 & 0xFF;
+
+			int var8 = this.bpal[var5] >> 8 & 0xFF;
 			int var9 = arg3 + var8;
 			if (var9 < 0) {
 				var9 = 0;
 			} else if (var9 > 255) {
 				var9 = 255;
 			}
-			int var10 = this.palette[var5] & 0xFF;
+
+			int var10 = this.bpal[var5] & 0xFF;
 			int var11 = arg1 + var10;
 			if (var11 < 0) {
 				var11 = 0;
 			} else if (var11 > 255) {
 				var11 = 255;
 			}
-			this.palette[var5] = (var7 << 16) + (var9 << 8) + var11;
+
+			this.bpal[var5] = (var7 << 16) + (var9 << 8) + var11;
 		}
 	}
 
 	@ObfuscatedName("kb.a(BII)V")
-	public void draw(int x, int y) {
-		int var4 = this.cropLeft + x;
-		int var5 = this.cropTop + y;
+	public void plotSprite(int x, int y) {
+		int var4 = this.xof + x;
+		int var5 = this.yof + y;
 		int var6 = Pix2D.width2d * var5 + var4;
 		int var7 = 0;
-		int var8 = this.cropBottom;
-		int var9 = this.cropRight;
+		int var8 = this.hi;
+		int var9 = this.wi;
 		int var10 = Pix2D.width2d - var9;
 		int var11 = 0;
 		if (var5 < Pix2D.top) {
@@ -197,12 +211,12 @@ public class Pix8 extends Pix2D {
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			this.copyPixels(var11, var8, var10, Pix2D.data, var6, this.pixels, this.palette, var9, var7);
+			this.plot(var11, var8, var10, Pix2D.data, var6, this.pixels, this.bpal, var9, var7);
 		}
 	}
 
 	@ObfuscatedName("kb.a(IIII[II[B[III)V")
-	public void copyPixels(int arg1, int arg2, int arg3, int[] arg4, int arg5, byte[] arg6, int[] arg7, int arg8, int arg9) {
+	public void plot(int arg1, int arg2, int arg3, int[] arg4, int arg5, byte[] arg6, int[] arg7, int arg8, int arg9) {
 		int var11 = -(arg8 >> 2);
 		int var12 = -(arg8 & 0x3);
 		for (int var13 = -arg2; var13 < 0; var13++) {

@@ -475,7 +475,7 @@ public class ObjType {
 		if (outlineRgb == 0) {
 			Pix32 icon = (Pix32) iconCache.get(id);
 
-			if (icon != null && icon.height != count && icon.height != -1) {
+			if (icon != null && icon.ohi != count && icon.ohi != -1) {
 				icon.unlink();
 				icon = null;
 			}
@@ -591,13 +591,13 @@ public class ObjType {
 		}
 
 		if (obj.certtemplate != -1) {
-			int w = linkedIcon.width;
-			int h = linkedIcon.height;
-			linkedIcon.width = 32;
-			linkedIcon.height = 32;
-			linkedIcon.draw(0, 0);
-			linkedIcon.width = w;
-			linkedIcon.height = h;
+			int w = linkedIcon.owi;
+			int h = linkedIcon.ohi;
+			linkedIcon.owi = 32;
+			linkedIcon.ohi = 32;
+			linkedIcon.plotSprite(0, 0);
+			linkedIcon.owi = w;
+			linkedIcon.ohi = h;
 		}
 
 		if (outlineRgb == 0) {
@@ -612,12 +612,12 @@ public class ObjType {
 		Pix3D.jagged = true;
 
 		if (obj.stackable) {
-			icon.width = 33;
+			icon.owi = 33;
 		} else {
-			icon.width = 32;
+			icon.owi = 32;
 		}
 
-		icon.height = count;
+		icon.ohi = count;
 		return icon;
 	}
 

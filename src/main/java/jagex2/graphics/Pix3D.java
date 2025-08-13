@@ -150,10 +150,10 @@ public class Pix3D extends Pix2D {
 			try {
 				textures[i] = new Pix8(jag, String.valueOf(i), 0);
 
-				if (lowMemory && textures[i].width == 128) {
-					textures[i].shrink();
+				if (lowMemory && textures[i].owi == 128) {
+					textures[i].halveSize();
 				} else {
-					textures[i].crop();
+					textures[i].trim();
 				}
 
 				loadedTextures++;
@@ -230,7 +230,7 @@ public class Pix3D extends Pix2D {
 				var1[var7 + 12288] = var8 - (var8 >>> 2) - (var8 >>> 3) & 0xF8F8FF;
 			}
 		} else {
-			if (var5.cropRight == 64) {
+			if (var5.wi == 64) {
 				for (int var9 = 0; var9 < 128; var9++) {
 					for (int var10 = 0; var10 < 128; var10++) {
 						var1[(var9 << 7) + var10] = var6[var5.pixels[(var9 >> 1 << 6) + (var10 >> 1)]];
@@ -332,7 +332,7 @@ public class Pix3D extends Pix2D {
 
 		for (int var7 = 0; var7 < 50; var7++) {
 			if (textures[var7] != null) {
-				int[] var9 = textures[var7].palette;
+				int[] var9 = textures[var7].bpal;
 				texturePalette[var7] = new int[var9.length];
 				for (int var10 = 0; var10 < var9.length; var10++) {
 					texturePalette[var7][var10] = gammaCorrect(var9[var10], var3);
