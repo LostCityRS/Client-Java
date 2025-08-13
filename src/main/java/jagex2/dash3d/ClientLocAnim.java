@@ -51,7 +51,7 @@ public class ClientLocAnim extends ModelSource {
 		this.seqFrame = 0;
 		this.seqCycle = Client.loopCycle;
 
-		if (randomFrame && this.seq.replayoff != -1) {
+		if (randomFrame && this.seq.loops != -1) {
 			this.seqFrame = (int) (Math.random() * (double) this.seq.frameCount);
 			this.seqCycle -= (int) (Math.random() * (double) this.seq.getFrameDuration(this.seqFrame));
 		}
@@ -61,7 +61,7 @@ public class ClientLocAnim extends ModelSource {
 	public final Model getModel() {
 		if (this.seq != null) {
 			int delta = Client.loopCycle - this.seqCycle;
-			if (delta > 100 && this.seq.replayoff > 0) {
+			if (delta > 100 && this.seq.loops > 0) {
 				delta = 100;
 			}
 
@@ -73,7 +73,7 @@ public class ClientLocAnim extends ModelSource {
 					continue;
 				}
 
-				this.seqFrame -= this.seq.replayoff;
+				this.seqFrame -= this.seq.loops;
 
 				if (this.seqFrame < 0 || this.seqFrame >= this.seq.frameCount) {
 					this.seq = null;

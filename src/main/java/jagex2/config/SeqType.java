@@ -27,7 +27,7 @@ public class SeqType {
 	public int[] delay;
 
 	@ObfuscatedName("nc.i")
-	public int replayoff = -1;
+	public int loops = -1;
 
 	@ObfuscatedName("nc.j")
 	public int[] walkmerge;
@@ -39,13 +39,13 @@ public class SeqType {
 	public int priority = 5;
 
 	@ObfuscatedName("nc.m")
-	public int righthand = -1;
+	public int replaceheldleft = -1;
 
 	@ObfuscatedName("nc.n")
-	public int lefthand = -1;
+	public int replaceheldright = -1;
 
 	@ObfuscatedName("nc.o")
-	public int replaycount = 99;
+	public int maxloops = 99;
 
 	@ObfuscatedName("nc.p")
 	public int preanim_move = -1;
@@ -54,7 +54,7 @@ public class SeqType {
 	public int postanim_mode = -1;
 
 	@ObfuscatedName("nc.r")
-	public int restart_mode;
+	public int duplicatebehavior;
 
 	@ObfuscatedName("nc.a(Lyb;B)V")
 	public static void unpack(Jagfile config) {
@@ -150,7 +150,7 @@ public class SeqType {
 					this.delay[i] = buf.g2();
 				}
 			} else if (code == 2) {
-				this.replayoff = buf.g2();
+				this.loops = buf.g2();
 			} else if (code == 3) {
 				int count = buf.g1();
 				this.walkmerge = new int[count + 1];
@@ -165,17 +165,17 @@ public class SeqType {
 			} else if (code == 5) {
 				this.priority = buf.g1();
 			} else if (code == 6) {
-				this.righthand = buf.g2();
+				this.replaceheldleft = buf.g2();
 			} else if (code == 7) {
-				this.lefthand = buf.g2();
+				this.replaceheldright = buf.g2();
 			} else if (code == 8) {
-				this.replaycount = buf.g1();
+				this.maxloops = buf.g1();
 			} else if (code == 9) {
 				this.preanim_move = buf.g1();
 			} else if (code == 10) {
 				this.postanim_mode = buf.g1();
 			} else if (code == 11) {
-				this.restart_mode = buf.g1();
+				this.duplicatebehavior = buf.g1();
 			} else {
 				System.out.println("Error unrecognised seq config code: " + code);
 			}

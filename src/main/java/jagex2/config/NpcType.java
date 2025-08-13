@@ -240,7 +240,7 @@ public class NpcType {
 		if (model == null) {
 			boolean ready = false;
 			for (int i = 0; i < this.models.length; i++) {
-				if (!Model.isReady(this.models[i])) {
+				if (!Model.request(this.models[i])) {
 					ready = true;
 				}
 			}
@@ -302,7 +302,7 @@ public class NpcType {
 
 		boolean exists = false;
 		for (int i = 0; i < this.heads.length; i++) {
-			if (!Model.isReady(this.heads[i])) {
+			if (!Model.request(this.heads[i])) {
 				exists = true;
 			}
 		}

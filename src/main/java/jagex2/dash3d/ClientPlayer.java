@@ -256,8 +256,8 @@ public class ClientPlayer extends ClientEntity {
 		long hash = this.hash;
 		int primaryTransformId = -1;
 		int secondaryTransformId = -1;
-		int rightHandValue = -1;
 		int leftHandValue = -1;
+		int rightHandValue = -1;
 
 		if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
 			SeqType seq = SeqType.types[super.primarySeqId];
@@ -268,14 +268,14 @@ public class ClientPlayer extends ClientEntity {
 				secondaryTransformId = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 			}
 
-			if (seq.righthand >= 0) {
-				rightHandValue = seq.righthand;
-				hash += rightHandValue - this.appearance[5] << 40;
+			if (seq.replaceheldleft >= 0) {
+				leftHandValue = seq.replaceheldleft;
+				hash += leftHandValue - this.appearance[5] << 40;
 			}
 
-			if (seq.lefthand >= 0) {
-				leftHandValue = seq.lefthand;
-				hash += leftHandValue - this.appearance[3] << 48;
+			if (seq.replaceheldright >= 0) {
+				rightHandValue = seq.replaceheldright;
+				hash += rightHandValue - this.appearance[3] << 48;
 			}
 		} else if (super.secondarySeqId >= 0) {
 			primaryTransformId = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
@@ -285,22 +285,22 @@ public class ClientPlayer extends ClientEntity {
 		if (model == null) {
 			boolean needsModel = false;
 
-			for (int part = 0; part < 12; part++) {
-				int value = this.appearance[part];
+			for (int slot = 0; slot < 12; slot++) {
+				int value = this.appearance[slot];
 
-				if (leftHandValue >= 0 && part == 3) {
-					value = leftHandValue;
-				}
-
-				if (rightHandValue >= 0 && part == 5) {
+				if (rightHandValue >= 0 && slot == 3) {
 					value = rightHandValue;
 				}
 
-				if (value >= 0x100 && value < 0x200 && !IdkType.types[value - 0x100].modelIsReady()) {
+				if (leftHandValue >= 0 && slot == 5) {
+					value = leftHandValue;
+				}
+
+				if (value >= 0x100 && value < 0x200 && !IdkType.types[value - 0x100].checkModel()) {
 					needsModel = true;
 				}
 
-				if (value >= 0x200 && !ObjType.get(value - 0x200).wornModelIsReady(this.gender)) {
+				if (value >= 0x200 && !ObjType.get(value - 0x200).checkWearModel(this.gender)) {
 					needsModel = true;
 				}
 			}
@@ -322,11 +322,11 @@ public class ClientPlayer extends ClientEntity {
 
 			for (int i = 0; i < 12; i++) {
 				int part = this.appearance[i];
-				if (leftHandValue >= 0 && i == 3) {
-					part = leftHandValue;
-				}
-				if (rightHandValue >= 0 && i == 5) {
+				if (rightHandValue >= 0 && i == 3) {
 					part = rightHandValue;
+				}
+				if (leftHandValue >= 0 && i == 5) {
+					part = leftHandValue;
 				}
 
 				if (part >= 0x100 && part < 0x200) {
@@ -337,7 +337,7 @@ public class ClientPlayer extends ClientEntity {
 				}
 
 				if (part >= 0x200) {
-					Model objModel = ObjType.get(part - 0x200).getWornModel(this.gender);
+					Model objModel = ObjType.get(part - 0x200).getWearModel(this.gender);
 					if (objModel != null) {
 						models[modelCount++] = objModel;
 					}
@@ -389,11 +389,11 @@ public class ClientPlayer extends ClientEntity {
 		for (int i = 0; i < 12; i++) {
 			int part = this.appearance[i];
 
-			if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].headModelIsReady()) {
+			if (part >= 0x100 && part < 0x200 && !IdkType.types[part - 0x100].checkHead()) {
 				needsModel = true;
 			}
 
-			if (part >= 0x200 && !ObjType.get(part - 0x200).headModelIsReady(this.gender)) {
+			if (part >= 0x200 && !ObjType.get(part - 0x200).checkHeadModel(this.gender)) {
 				needsModel = true;
 			}
 		}

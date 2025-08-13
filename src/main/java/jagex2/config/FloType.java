@@ -74,7 +74,7 @@ public class FloType {
 
 			if (code == 1) {
 				this.rgb = buf.g3();
-				this.setColour(this.rgb);
+				this.getHsl(this.rgb);
 			} else if (code == 2) {
 				this.texture = buf.g1();
 			} else if (code == 3) {
@@ -90,7 +90,7 @@ public class FloType {
 	}
 
 	@ObfuscatedName("kc.a(II)V")
-	public void setColour(int rgb) {
+	public void getHsl(int rgb) {
 		double red = (double) (rgb >> 16 & 0xFF) / 256.0D;
 		double green = (double) (rgb >> 8 & 0xFF) / 256.0D;
 		double blue = (double) (rgb & 0xFF) / 256.0D;

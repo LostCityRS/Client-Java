@@ -194,7 +194,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(II[BZ)Z")
-	public static final boolean locsAreReady(int xOffset, int zOffset, byte[] src) {
+	public static final boolean checkLocations(int xOffset, int zOffset, byte[] src) {
 		boolean ready = true;
 		Packet buf = new Packet(src);
 		int locId = -1;
@@ -228,7 +228,7 @@ public class World {
 					if (stx > 0 && stz > 0 && stx < 103 && stz < 103) {
 						LocType loc = LocType.get(locId);
 						if (shape != 22 || !lowMemory || loc.active || loc.forcedecor) {
-							ready &= loc.modelsAreReady();
+							ready &= loc.checkModelAll();
 							skip = true;
 						}
 					}
@@ -245,7 +245,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(ILmb;Lvb;)V")
-	public static final void prefetchLocs(Packet buf, OnDemand od) {
+	public static final void prefetchLocations(Packet buf, OnDemand od) {
 		int locId = -1;
 		while (true) {
 			int deltaId = buf.gsmarts();
@@ -1093,7 +1093,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.c(III)Z")
-	public static final boolean isLocReady(int id, int shape) {
+	public static final boolean changeLocAvailable(int id, int shape) {
 		LocType loc = LocType.get(id);
 		if (shape == 11) {
 			shape = 10;
@@ -1101,7 +1101,7 @@ public class World {
 		if (shape >= 5 && shape <= 8) {
 			shape = 4;
 		}
-		return loc.shapeModelsAreReady(shape);
+		return loc.checkModel(shape);
 	}
 
 	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")
