@@ -11,7 +11,7 @@ import jagex2.io.Packet;
 public class World {
 
 	@ObfuscatedName("c.g")
-	public static boolean lowMemory = true;
+	public static boolean lowMem = true;
 
 	@ObfuscatedName("c.h")
 	public static int levelBuilt;
@@ -194,7 +194,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(II[BZ)Z")
-	public static final boolean locsAreReady(int xOffset, int zOffset, byte[] src) {
+	public static final boolean checkLocations(int xOffset, int zOffset, byte[] src) {
 		boolean ready = true;
 		Packet buf = new Packet(src);
 		int locId = -1;
@@ -227,8 +227,8 @@ public class World {
 
 					if (stx > 0 && stz > 0 && stx < 103 && stz < 103) {
 						LocType loc = LocType.get(locId);
-						if (shape != 22 || !lowMemory || loc.active || loc.forcedecor) {
-							ready &= loc.modelsAreReady();
+						if (shape != 22 || !lowMem || loc.active || loc.forcedecor) {
+							ready &= loc.checkModelAll();
 							skip = true;
 						}
 					}
@@ -245,7 +245,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(ILmb;Lvb;)V")
-	public static final void prefetchLocs(Packet buf, OnDemand od) {
+	public static final void prefetchLocations(Packet buf, OnDemand od) {
 		int locId = -1;
 		while (true) {
 			int deltaId = buf.gsmarts();
@@ -320,7 +320,7 @@ public class World {
 
 	@ObfuscatedName("c.a(IIIZLs;Ljc;III)V")
 	public final void addLoc(int locId, int z, int angle, World3D scene, CollisionMap collision, int x, int shape, int level) {
-		if (lowMemory) {
+		if (lowMem) {
 			if ((this.flags[level][x][z] & 0x10) != 0) {
 				return;
 			}
@@ -346,7 +346,7 @@ public class World {
 		byte info = (byte) ((angle << 6) + shape);
 
 		if (shape == 22) {
-			if (!lowMemory || loc.active || loc.forcedecor) {
+			if (!lowMem || loc.active || loc.forcedecor) {
 				ModelSource model;
 				if (loc.anim == -1) {
 					model = loc.getModel(22, angle, heightSW, heightSE, heightNW, heightNE, -1);
@@ -756,7 +756,7 @@ public class World {
 							var65 -= this.blendLuminance[var69];
 							var66 -= this.blendMagnitude[var69];
 						}
-						if (var67 >= 1 && var67 < this.maxTileZ - 1 && (!lowMemory || (this.flags[var5][var58][var67] & 0x10) == 0 && this.getDrawLevel(var58, var5, var67) == levelBuilt)) {
+						if (var67 >= 1 && var67 < this.maxTileZ - 1 && (!lowMem || (this.flags[var5][var58][var67] & 0x10) == 0 && this.getDrawLevel(var58, var5, var67) == levelBuilt)) {
 							int var70 = this.underlayType[var5][var58][var67] & 0xFF;
 							int var71 = this.overlayType[var5][var58][var67] & 0xFF;
 							if (var70 > 0 || var71 > 0) {
@@ -798,7 +798,7 @@ public class World {
 								}
 								int var88 = 0;
 								if (var80 != -1) {
-									var88 = Pix3D.palette[mulHsl(var81, 96)];
+									var88 = Pix3D.colourTable[mulHsl(var81, 96)];
 								}
 								if (var71 == 0) {
 									arg0.setTile(var5, var58, var67, 0, 0, -1, var72, var73, var74, var75, mulHsl(var80, var76), mulHsl(var80, var77), mulHsl(var80, var78), mulHsl(var80, var79), 0, 0, 0, 0, var88, 0);
@@ -818,7 +818,7 @@ public class World {
 										var92 = -1;
 									} else {
 										var94 = this.hsl24to16(var91.hue, var91.saturation, var91.lightness);
-										var93 = Pix3D.palette[this.adjustLightness(var91.hsl, 96)];
+										var93 = Pix3D.colourTable[this.adjustLightness(var91.hsl, 96)];
 									}
 									arg0.setTile(var5, var58, var67, var89, var90, var92, var72, var73, var74, var75, mulHsl(var80, var76), mulHsl(var80, var77), mulHsl(var80, var78), mulHsl(var80, var79), this.adjustLightness(var94, var76), this.adjustLightness(var94, var77), this.adjustLightness(var94, var78), this.adjustLightness(var94, var79), var88, var93);
 								}
@@ -1093,7 +1093,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.c(III)Z")
-	public static final boolean isLocReady(int id, int shape) {
+	public static final boolean changeLocAvailable(int id, int shape) {
 		LocType loc = LocType.get(id);
 		if (shape == 11) {
 			shape = 10;
@@ -1101,7 +1101,7 @@ public class World {
 		if (shape >= 5 && shape <= 8) {
 			shape = 4;
 		}
-		return loc.shapeModelsAreReady(shape);
+		return loc.checkModel(shape);
 	}
 
 	@ObfuscatedName("c.a(IIIILs;BI[[[ILjc;II)V")

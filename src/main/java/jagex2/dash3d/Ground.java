@@ -66,19 +66,21 @@ public class Ground {
 	public static int[] drawTextureVertexZ = new int[6];
 
 	@ObfuscatedName("j.w")
-	public static int[] field201 = new int[] { 1, 0 };
+	public static int[] shape0P1 = new int[] { 1, 0 };
 
 	@ObfuscatedName("j.x")
-	public static int[] field202 = new int[] { 2, 1 };
+	public static int[] shape0P2 = new int[] { 2, 1 };
 
 	@ObfuscatedName("j.y")
-	public static int[] field203 = new int[] { 3, 3 };
+	public static int[] shape0P3 = new int[] { 3, 3 };
 
+	// defined shape points
 	@ObfuscatedName("j.z")
-	public static final int[][] SHAPE_VERTICES = new int[][] { { 1, 3, 5, 7 }, { 1, 3, 5, 7 }, { 1, 3, 5, 7 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 2, 6 }, { 1, 3, 5, 7, 2, 8 }, { 1, 3, 5, 7, 2, 8 }, { 1, 3, 5, 7, 11, 12 }, { 1, 3, 5, 7, 11, 12 }, { 1, 3, 5, 7, 13, 14 } };
+	public static final int[][] defShapeP = new int[][] { { 1, 3, 5, 7 }, { 1, 3, 5, 7 }, { 1, 3, 5, 7 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 2, 6 }, { 1, 3, 5, 7, 2, 8 }, { 1, 3, 5, 7, 2, 8 }, { 1, 3, 5, 7, 11, 12 }, { 1, 3, 5, 7, 11, 12 }, { 1, 3, 5, 7, 13, 14 } };
 
+	// defined shape faces
 	@ObfuscatedName("j.A")
-	public static final int[][] SHAPE_TRIANGLES = new int[][] { { 0, 1, 2, 3, 0, 0, 1, 3 }, { 1, 1, 2, 3, 1, 0, 1, 3 }, { 0, 1, 2, 3, 1, 0, 1, 3 }, { 0, 0, 1, 2, 0, 0, 2, 4, 1, 0, 4, 3 }, { 0, 0, 1, 4, 0, 0, 4, 3, 1, 1, 2, 4 }, { 0, 0, 4, 3, 1, 0, 1, 2, 1, 0, 2, 4 }, { 0, 1, 2, 4, 1, 0, 1, 4, 1, 0, 4, 3 }, { 0, 4, 1, 2, 0, 4, 2, 5, 1, 0, 4, 5, 1, 0, 5, 3 }, { 0, 4, 1, 2, 0, 4, 2, 3, 0, 4, 3, 5, 1, 0, 4, 5 }, { 0, 0, 4, 5, 1, 4, 1, 2, 1, 4, 2, 3, 1, 4, 3, 5 }, { 0, 0, 1, 5, 0, 1, 4, 5, 0, 1, 2, 4, 1, 0, 5, 3, 1, 5, 4, 3, 1, 4, 2, 3 }, { 1, 0, 1, 5, 1, 1, 4, 5, 1, 1, 2, 4, 0, 0, 5, 3, 0, 5, 4, 3, 0, 4, 2, 3 }, { 1, 0, 5, 4, 1, 0, 1, 5, 0, 0, 4, 3, 0, 4, 5, 3, 0, 5, 2, 3, 0, 1, 2, 5 } };
+	public static final int[][] defShapeF = new int[][] { { 0, 1, 2, 3, 0, 0, 1, 3 }, { 1, 1, 2, 3, 1, 0, 1, 3 }, { 0, 1, 2, 3, 1, 0, 1, 3 }, { 0, 0, 1, 2, 0, 0, 2, 4, 1, 0, 4, 3 }, { 0, 0, 1, 4, 0, 0, 4, 3, 1, 1, 2, 4 }, { 0, 0, 4, 3, 1, 0, 1, 2, 1, 0, 2, 4 }, { 0, 1, 2, 4, 1, 0, 1, 4, 1, 0, 4, 3 }, { 0, 4, 1, 2, 0, 4, 2, 5, 1, 0, 4, 5, 1, 0, 5, 3 }, { 0, 4, 1, 2, 0, 4, 2, 3, 0, 4, 3, 5, 1, 0, 4, 5 }, { 0, 0, 4, 5, 1, 4, 1, 2, 1, 4, 2, 3, 1, 4, 3, 5 }, { 0, 0, 1, 5, 0, 1, 4, 5, 0, 1, 2, 4, 1, 0, 5, 3, 1, 5, 4, 3, 1, 4, 2, 3 }, { 1, 0, 1, 5, 1, 1, 4, 5, 1, 1, 2, 4, 0, 0, 5, 3, 0, 5, 4, 3, 0, 4, 2, 3 }, { 1, 0, 5, 4, 1, 0, 1, 5, 0, 0, 4, 3, 0, 4, 5, 3, 0, 5, 2, 3, 0, 1, 2, 5 } };
 
 	public Ground(int arg0, int arg1, int overlayColour, int underlayColour, int shape, int arg5, int arg6, int arg7, int angle, int arg9, int arg10, int arg11, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
 		if (arg5 != arg19 || arg1 != arg5 || arg5 != arg13) {
@@ -94,7 +96,7 @@ public class Ground {
 		int var22 = var21 / 2;
 		int var23 = var21 / 4;
 		int var24 = var21 * 3 / 4;
-		int[] var25 = SHAPE_VERTICES[shape];
+		int[] var25 = defShapeP[shape];
 		int var26 = var25.length;
 		this.vertexX = new int[var26];
 		this.vertexY = new int[var26];
@@ -228,7 +230,7 @@ public class Ground {
 			var28[var31] = var49;
 		}
 
-		int[] var32 = SHAPE_TRIANGLES[shape];
+		int[] var32 = defShapeF[shape];
 		int var33 = var32.length / 4;
 		this.triangleVertexA = new int[var33];
 		this.triangleVertexB = new int[var33];

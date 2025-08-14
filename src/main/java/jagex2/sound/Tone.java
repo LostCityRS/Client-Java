@@ -52,28 +52,28 @@ public class Tone {
 	public int start;
 
 	@ObfuscatedName("dc.r")
-	public static int[] buffer;
+	public static int[] buf;
 
 	@ObfuscatedName("dc.s")
 	public static int[] noise;
 
 	@ObfuscatedName("dc.t")
-	public static int[] sin;
+	public static int[] sine;
 
 	@ObfuscatedName("dc.u")
-	public static int[] tmpPhases = new int[5];
+	public static int[] fPos = new int[5];
 
 	@ObfuscatedName("dc.v")
-	public static int[] tmpDelays = new int[5];
+	public static int[] fDel = new int[5];
 
 	@ObfuscatedName("dc.w")
-	public static int[] tmpVolumes = new int[5];
+	public static int[] fAmp = new int[5];
 
 	@ObfuscatedName("dc.x")
-	public static int[] tmpSemitones = new int[5];
+	public static int[] fMulti = new int[5];
 
 	@ObfuscatedName("dc.y")
-	public static int[] tmpStarts = new int[5];
+	public static int[] fOffset = new int[5];
 
 	@ObfuscatedName("dc.a()V")
 	public static final void init() {
@@ -86,36 +86,36 @@ public class Tone {
 			}
 		}
 
-		sin = new int[32768];
+		sine = new int[32768];
 		for (int i = 0; i < 32768; i++) {
-			sin[i] = (int) (Math.sin((double) i / 5215.1903D) * 16384.0D);
+			sine[i] = (int) (Math.sin((double) i / 5215.1903D) * 16384.0D);
 		}
 
-		buffer = new int[22050 * 10];
+		buf = new int[22050 * 10];
 	}
 
 	@ObfuscatedName("dc.a(II)[I")
 	public final int[] generate(int samples, int length) {
 		for (int i = 0; i < samples; i++) {
-			buffer[i] = 0;
+			buf[i] = 0;
 		}
 
 		if (length < 10) {
-			return buffer;
+			return buf;
 		}
 
 		double samplesPerStep = (double) samples / ((double) length + 0.0D);
 
-		this.frequencyBase.reset();
-		this.amplitudeBase.reset();
+		this.frequencyBase.genInit();
+		this.amplitudeBase.genInit();
 
 		int frequencyStart = 0;
 		int frequencyDuration = 0;
 		int frequencyPhase = 0;
 
 		if (this.frequencyModRate != null) {
-			this.frequencyModRate.reset();
-			this.frequencyModRange.reset();
+			this.frequencyModRate.genInit();
+			this.frequencyModRange.genInit();
 			frequencyStart = (int) ((double) (this.frequencyModRate.end - this.frequencyModRate.start) * 32.768D / samplesPerStep);
 			frequencyDuration = (int) ((double) this.frequencyModRate.start * 32.768D / samplesPerStep);
 		}
@@ -125,62 +125,62 @@ public class Tone {
 		int amplitudePhase = 0;
 
 		if (this.amplitudeModRate != null) {
-			this.amplitudeModRate.reset();
-			this.amplitudeModRange.reset();
+			this.amplitudeModRate.genInit();
+			this.amplitudeModRange.genInit();
 			amplitudeStart = (int) ((double) (this.amplitudeModRate.end - this.amplitudeModRate.start) * 32.768D / samplesPerStep);
 			amplitudeDuration = (int) ((double) this.amplitudeModRate.start * 32.768D / samplesPerStep);
 		}
 
 		for (int i = 0; i < 5; i++) {
 			if (this.harmonicVolume[i] != 0) {
-				tmpPhases[i] = 0;
-				tmpDelays[i] = (int) ((double) this.harmonicDelay[i] * samplesPerStep);
-				tmpVolumes[i] = (this.harmonicVolume[i] << 14) / 100;
-				tmpSemitones[i] = (int) ((double) (this.frequencyBase.end - this.frequencyBase.start) * 32.768D * Math.pow(1.0057929410678534D, (double) this.harmonicSemitone[i]) / samplesPerStep);
-				tmpStarts[i] = (int) ((double) this.frequencyBase.start * 32.768D / samplesPerStep);
+				fPos[i] = 0;
+				fDel[i] = (int) ((double) this.harmonicDelay[i] * samplesPerStep);
+				fAmp[i] = (this.harmonicVolume[i] << 14) / 100;
+				fMulti[i] = (int) ((double) (this.frequencyBase.end - this.frequencyBase.start) * 32.768D * Math.pow(1.0057929410678534D, (double) this.harmonicSemitone[i]) / samplesPerStep);
+				fOffset[i] = (int) ((double) this.frequencyBase.start * 32.768D / samplesPerStep);
 			}
 		}
 
 		for (int sample = 0; sample < samples; sample++) {
-			int frequency = this.frequencyBase.evaluate(samples);
-			int amplitude = this.amplitudeBase.evaluate(samples);
+			int frequency = this.frequencyBase.genNext(samples);
+			int amplitude = this.amplitudeBase.genNext(samples);
 
 			if (this.frequencyModRate != null) {
-				int rate = this.frequencyModRate.evaluate(samples);
-				int range = this.frequencyModRange.evaluate(samples);
-				frequency += this.generate(this.frequencyModRate.form, range, frequencyPhase) >> 1;
+				int rate = this.frequencyModRate.genNext(samples);
+				int range = this.frequencyModRange.genNext(samples);
+				frequency += this.waveFunc(this.frequencyModRate.form, range, frequencyPhase) >> 1;
 				frequencyPhase += (frequencyStart * rate >> 16) + frequencyDuration;
 			}
 
 			if (this.amplitudeModRate != null) {
-				int rate = this.amplitudeModRate.evaluate(samples);
-				int range = this.amplitudeModRange.evaluate(samples);
-				amplitude = amplitude * ((this.generate(this.amplitudeModRate.form, range, amplitudePhase) >> 1) + 32768) >> 15;
+				int rate = this.amplitudeModRate.genNext(samples);
+				int range = this.amplitudeModRange.genNext(samples);
+				amplitude = amplitude * ((this.waveFunc(this.amplitudeModRate.form, range, amplitudePhase) >> 1) + 32768) >> 15;
 				amplitudePhase += (amplitudeStart * rate >> 16) + amplitudeDuration;
 			}
 
 			for (int harmonic = 0; harmonic < 5; harmonic++) {
 				if (this.harmonicVolume[harmonic] != 0) {
-					int pos = tmpDelays[harmonic] + sample;
+					int pos = fDel[harmonic] + sample;
 					if (pos < samples) {
-						buffer[pos] += this.generate(this.frequencyBase.form, tmpVolumes[harmonic] * amplitude >> 15, tmpPhases[harmonic]);
-						tmpPhases[harmonic] += (tmpSemitones[harmonic] * frequency >> 16) + tmpStarts[harmonic];
+						buf[pos] += this.waveFunc(this.frequencyBase.form, fAmp[harmonic] * amplitude >> 15, fPos[harmonic]);
+						fPos[harmonic] += (fMulti[harmonic] * frequency >> 16) + fOffset[harmonic];
 					}
 				}
 			}
 		}
 
 		if (this.release != null) {
-			this.release.reset();
-			this.attack.reset();
+			this.release.genInit();
+			this.attack.genInit();
 
 			int counter = 0;
 			boolean var15 = false;
 			boolean muted = true;
 
 			for (int sample = 0; sample < samples; sample++) {
-				int releaseValue = this.release.evaluate(samples);
-				int attackValue = this.attack.evaluate(samples);
+				int releaseValue = this.release.genNext(samples);
+				int attackValue = this.attack.genNext(samples);
 
 				int threshold;
 				if (muted) {
@@ -196,7 +196,7 @@ public class Tone {
 				}
 
 				if (muted) {
-					buffer[sample] = 0;
+					buf[sample] = 0;
 				}
 			}
 		}
@@ -204,29 +204,29 @@ public class Tone {
 		if (this.reverbDelay > 0 && this.reverbVolume > 0) {
 			int start = (int) ((double) this.reverbDelay * samplesPerStep);
 			for (int sample = start; sample < samples; sample++) {
-				buffer[sample] += buffer[sample - start] * this.reverbVolume / 100;
+				buf[sample] += buf[sample - start] * this.reverbVolume / 100;
 			}
 		}
 
 		for (int sample = 0; sample < samples; sample++) {
-			if (buffer[sample] < -32768) {
-				buffer[sample] = -32768;
+			if (buf[sample] < -32768) {
+				buf[sample] = -32768;
 			}
 
-			if (buffer[sample] > 32767) {
-				buffer[sample] = 32767;
+			if (buf[sample] > 32767) {
+				buf[sample] = 32767;
 			}
 		}
 
-		return buffer;
+		return buf;
 	}
 
 	@ObfuscatedName("dc.a(IIII)I")
-	public final int generate(int form, int amplitude, int phase) {
+	public final int waveFunc(int form, int amplitude, int phase) {
 		if (form == 1) {
 			return (phase & 0x7FFF) < 16384 ? amplitude : -amplitude;
 		} else if (form == 2) {
-			return sin[phase & 0x7FFF] * amplitude >> 14;
+			return sine[phase & 0x7FFF] * amplitude >> 14;
 		} else if (form == 3) {
 			return ((phase & 0x7FFF) * amplitude >> 14) - amplitude;
 		} else if (form == 4) {

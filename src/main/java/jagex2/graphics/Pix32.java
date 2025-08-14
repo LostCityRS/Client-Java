@@ -16,84 +16,93 @@ public class Pix32 extends Pix2D {
 	public int[] pixels;
 
 	@ObfuscatedName("jb.K")
-	public int width;
+	public int owi; // original width
 
 	@ObfuscatedName("jb.G")
-	public int cropRight;
+	public int wi; // width
 
 	@ObfuscatedName("jb.L")
-	public int height;
+	public int ohi; // original height
 
 	@ObfuscatedName("jb.H")
-	public int cropBottom;
+	public int hi; // height
 
 	@ObfuscatedName("jb.J")
-	public int cropTop;
+	public int yof; // y offset
 
 	@ObfuscatedName("jb.I")
-	public int cropLeft;
+	public int xof; // x offset
 
-	public Pix32(int arg0, int arg1) {
-		this.pixels = new int[arg0 * arg1];
-		this.cropRight = this.width = arg0;
-		this.cropBottom = this.height = arg1;
-		this.cropLeft = this.cropTop = 0;
+	public Pix32(int width, int height) {
+		this.pixels = new int[width * height];
+		this.wi = this.owi = width;
+		this.hi = this.ohi = height;
+		this.xof = this.yof = 0;
 	}
 
-	public Pix32(byte[] arg0, java.awt.Component arg1) {
+	public Pix32(byte[] src, java.awt.Component c) {
 		try {
-			Image var3 = Toolkit.getDefaultToolkit().createImage(arg0);
-			MediaTracker var4 = new MediaTracker(arg1);
-			var4.addImage(var3, 0);
-			var4.waitForAll();
-			this.cropRight = var3.getWidth(arg1);
-			this.cropBottom = var3.getHeight(arg1);
-			this.width = this.cropRight;
-			this.height = this.cropBottom;
-			this.cropLeft = 0;
-			this.cropTop = 0;
-			this.pixels = new int[this.cropBottom * this.cropRight];
-			PixelGrabber var5 = new PixelGrabber(var3, 0, 0, this.cropRight, this.cropBottom, this.pixels, 0, this.cropRight);
-			var5.grabPixels();
+			Image image = Toolkit.getDefaultToolkit().createImage(src);
+			MediaTracker tracker = new MediaTracker(c);
+			tracker.addImage(image, 0);
+			tracker.waitForAll();
+
+			this.wi = image.getWidth(c);
+			this.hi = image.getHeight(c);
+			this.owi = this.wi;
+			this.ohi = this.hi;
+			this.xof = 0;
+			this.yof = 0;
+			this.pixels = new int[this.hi * this.wi];
+
+			PixelGrabber grabber = new PixelGrabber(image, 0, 0, this.wi, this.hi, this.pixels, 0, this.wi);
+			grabber.grabPixels();
 		} catch (Exception var6) {
 			System.out.println("Error converting jpg");
 		}
 	}
 
-	public Pix32(Jagfile arg0, String arg1, int arg2) {
-		Packet var4 = new Packet(arg0.read(arg1 + ".dat", null));
-		Packet var5 = new Packet(arg0.read("index.dat", null));
-		var5.pos = var4.g2();
-		this.width = var5.g2();
-		this.height = var5.g2();
-		int var6 = var5.g1();
-		int[] var7 = new int[var6];
-		for (int var8 = 0; var8 < var6 - 1; var8++) {
-			var7[var8 + 1] = var5.g3();
-			if (var7[var8 + 1] == 0) {
-				var7[var8 + 1] = 1;
+	public Pix32(Jagfile jag, String name, int sprite) {
+		Packet dat = new Packet(jag.read(name + ".dat", null));
+		Packet idx = new Packet(jag.read("index.dat", null));
+
+		idx.pos = dat.g2();
+		this.owi = idx.g2();
+		this.ohi = idx.g2();
+
+		int palCount = idx.g1();
+		int[] bpal = new int[palCount]; // base palette
+		for (int i = 0; i < palCount - 1; i++) {
+			bpal[i + 1] = idx.g3();
+
+			if (bpal[i + 1] == 0) {
+				bpal[i + 1] = 1;
 			}
 		}
-		for (int var9 = 0; var9 < arg2; var9++) {
-			var5.pos += 2;
-			var4.pos += var5.g2() * var5.g2();
-			var5.pos++;
+
+		for (int i = 0; i < sprite; i++) {
+			idx.pos += 2;
+			dat.pos += idx.g2() * idx.g2();
+			idx.pos++;
 		}
-		this.cropLeft = var5.g1();
-		this.cropTop = var5.g1();
-		this.cropRight = var5.g2();
-		this.cropBottom = var5.g2();
-		int var10 = var5.g1();
-		int var11 = this.cropBottom * this.cropRight;
-		this.pixels = new int[var11];
-		if (var10 == 0) {
-			for (int var12 = 0; var12 < var11; var12++) {
-				this.pixels[var12] = var7[var4.g1()];
+
+		this.xof = idx.g1();
+		this.yof = idx.g1();
+		this.wi = idx.g2();
+		this.hi = idx.g2();
+		int pixelOrder = idx.g1();
+
+		int len = this.hi * this.wi;
+		this.pixels = new int[len];
+
+		if (pixelOrder == 0) {
+			for (int i = 0; i < len; i++) {
+				this.pixels[i] = bpal[dat.g1()];
 			}
-		} else if (var10 == 1) {
-			for (int var13 = 0; var13 < this.cropRight; var13++) {
-				for (int var14 = 0; var14 < this.cropBottom; var14++) {
-					this.pixels[this.cropRight * var14 + var13] = var7[var4.g1()];
+		} else if (pixelOrder == 1) {
+			for (int x = 0; x < this.wi; x++) {
+				for (int y = 0; y < this.hi; y++) {
+					this.pixels[this.wi * y + x] = bpal[dat.g1()];
 				}
 			}
 		}
@@ -101,11 +110,11 @@ public class Pix32 extends Pix2D {
 
 	@ObfuscatedName("jb.a(I)V")
 	public void bind() {
-		Pix2D.bind(this.cropRight, this.pixels, this.cropBottom);
+		Pix2D.bind(this.wi, this.pixels, this.hi);
 	}
 
 	@ObfuscatedName("jb.a(IIII)V")
-	public void translate(int arg0, int arg1, int arg3) {
+	public void rgbAdjust(int arg0, int arg1, int arg3) {
 		for (int var5 = 0; var5 < this.pixels.length; var5++) {
 			int var6 = this.pixels[var5];
 			if (var6 != 0) {
@@ -116,6 +125,7 @@ public class Pix32 extends Pix2D {
 				} else if (var8 > 255) {
 					var8 = 255;
 				}
+
 				int var9 = var6 >> 8 & 0xFF;
 				int var10 = arg3 + var9;
 				if (var10 < 1) {
@@ -123,6 +133,7 @@ public class Pix32 extends Pix2D {
 				} else if (var10 > 255) {
 					var10 = 255;
 				}
+
 				int var11 = var6 & 0xFF;
 				int var12 = arg1 + var11;
 				if (var12 < 1) {
@@ -130,35 +141,36 @@ public class Pix32 extends Pix2D {
 				} else if (var12 > 255) {
 					var12 = 255;
 				}
+
 				this.pixels[var5] = (var8 << 16) + (var10 << 8) + var12;
 			}
 		}
 	}
 
 	@ObfuscatedName("jb.b(Z)V")
-	public void crop() {
-		int[] pixels = new int[this.height * this.width];
-		for (int y = 0; y < this.cropBottom; y++) {
-			for (int x = 0; x < this.cropRight; x++) {
-				pixels[(this.cropTop + y) * this.width + this.cropLeft + x] = this.pixels[this.cropRight * y + x];
+	public void trim() {
+		int[] pixels = new int[this.ohi * this.owi];
+		for (int y = 0; y < this.hi; y++) {
+			for (int x = 0; x < this.wi; x++) {
+				pixels[(this.yof + y) * this.owi + this.xof + x] = this.pixels[this.wi * y + x];
 			}
 		}
 
 		this.pixels = pixels;
-		this.cropRight = this.width;
-		this.cropBottom = this.height;
-		this.cropLeft = 0;
-		this.cropTop = 0;
+		this.wi = this.owi;
+		this.hi = this.ohi;
+		this.xof = 0;
+		this.yof = 0;
 	}
 
 	@ObfuscatedName("jb.a(III)V")
-	public void blitOpaque(int arg0, int arg1) {
-		int var4 = this.cropLeft + arg0;
-		int var5 = this.cropTop + arg1;
+	public void quickPlotSprite(int arg0, int arg1) {
+		int var4 = this.xof + arg0;
+		int var5 = this.yof + arg1;
 		int var6 = Pix2D.width2d * var5 + var4;
 		int var7 = 0;
-		int var8 = this.cropBottom;
-		int var9 = this.cropRight;
+		int var8 = this.hi;
+		int var9 = this.wi;
 		int var10 = Pix2D.width2d - var9;
 		int var11 = 0;
 		if (var5 < Pix2D.top) {
@@ -187,12 +199,12 @@ public class Pix32 extends Pix2D {
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			this.copyPixels(var7, this.pixels, var11, var10, var6, var9, var8, Pix2D.data);
+			this.quickPlot(var7, this.pixels, var11, var10, var6, var9, var8, Pix2D.data);
 		}
 	}
 
 	@ObfuscatedName("jb.a(I[IIIIIII[I)V")
-	public void copyPixels(int arg0, int[] arg1, int arg2, int arg4, int arg5, int arg6, int arg7, int[] arg8) {
+	public void quickPlot(int arg0, int[] arg1, int arg2, int arg4, int arg5, int arg6, int arg7, int[] arg8) {
 		int var10 = -(arg6 >> 2);
 		int var11 = -(arg6 & 0x3);
 		for (int var12 = -arg7; var12 < 0; var12++) {
@@ -211,15 +223,15 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(BII)V")
-	public void draw(int x, int y) {
-		x += this.cropLeft;
-		y += this.cropTop;
+	public void plotSprite(int x, int y) {
+		x += this.xof;
+		y += this.yof;
 
 		int dstOff = Pix2D.width2d * y + x;
 		int srcOff = 0;
 
-		int h = this.cropBottom;
-		int w = this.cropRight;
+		int h = this.hi;
+		int w = this.wi;
 
 		int dstStep = Pix2D.width2d - w;
 		int srcStep = 0;
@@ -254,12 +266,12 @@ public class Pix32 extends Pix2D {
 		}
 
 		if (w > 0 && h > 0) {
-			this.copyPixels(Pix2D.data, this.pixels, 0, srcOff, dstOff, w, h, dstStep, srcStep);
+			this.plot(Pix2D.data, this.pixels, 0, srcOff, dstOff, w, h, dstStep, srcStep);
 		}
 	}
 
 	@ObfuscatedName("jb.a([I[IIIIIIII)V")
-	public void copyPixels(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void plot(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = -(arg5 >> 2);
 		int var11 = -(arg5 & 0x3);
 		for (int var12 = -arg6; var12 < 0; var12++) {
@@ -303,13 +315,13 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.b(IIII)V")
-	public void drawAlpha(int arg0, int arg1, int arg3) {
-		int var5 = this.cropLeft + arg0;
-		int var6 = this.cropTop + arg3;
+	public void transPlotSprite(int arg0, int arg1, int arg3) {
+		int var5 = this.xof + arg0;
+		int var6 = this.yof + arg3;
 		int var7 = Pix2D.width2d * var6 + var5;
 		int var8 = 0;
-		int var9 = this.cropBottom;
-		int var10 = this.cropRight;
+		int var9 = this.hi;
+		int var10 = this.wi;
 		int var11 = Pix2D.width2d - var10;
 		int var12 = 0;
 		if (var6 < Pix2D.top) {
@@ -338,12 +350,12 @@ public class Pix32 extends Pix2D {
 			var11 += var15;
 		}
 		if (var10 > 0 && var9 > 0) {
-			this.copyPixelsAlpha(0, var12, this.pixels, var11, var9, arg1, var7, var10, var8, Pix2D.data);
+			this.transPlot(0, var12, this.pixels, var11, var9, arg1, var7, var10, var8, Pix2D.data);
 		}
 	}
 
 	@ObfuscatedName("jb.a(III[IIIIIII[I)V")
-	public void copyPixelsAlpha(int arg0, int arg1, int[] arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int[] arg10) {
+	public void transPlot(int arg0, int arg1, int[] arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int[] arg10) {
 		int var12 = 256 - arg6;
 		for (int var13 = -arg5; var13 < 0; var13++) {
 			for (int var14 = -arg8; var14 < 0; var14++) {
@@ -360,6 +372,7 @@ public class Pix32 extends Pix2D {
 		}
 	}
 
+	// todo: plotSprite variant
 	@ObfuscatedName("jb.a(IIIIIIZ[I[III)V")
 	public void drawRotatedMasked(int x, int anchorY, int w, int zoom, int y, int theta, int[] lineWidth, int[] lineStart, int anchorX, int h) {
 		try {
@@ -383,7 +396,7 @@ public class Pix32 extends Pix2D {
 				int srcY = leftY - sinZoom * dstOff;
 
 				for (int j = -lineWidth[i]; j < 0; j++) {
-					Pix2D.data[dstX++] = this.pixels[(srcX >> 16) + (srcY >> 16) * this.cropRight];
+					Pix2D.data[dstX++] = this.pixels[(srcX >> 16) + (srcY >> 16) * this.wi];
 					srcX += cosZoom;
 					srcY -= sinZoom;
 				}
@@ -396,6 +409,7 @@ public class Pix32 extends Pix2D {
 		}
 	}
 
+	// todo: plotSprite variant
 	@ObfuscatedName("jb.a(IBDIIIIII)V")
 	public void drawRotated(int y, double theta, int zoom, int anchorX, int anchorY, int w, int h, int x) {
 		try {
@@ -417,7 +431,7 @@ public class Pix32 extends Pix2D {
 				int srcY = leftY;
 
 				for (int j = -w; j < 0; j++) {
-					int rgb = this.pixels[(srcX >> 16) + (srcY >> 16) * this.cropRight];
+					int rgb = this.pixels[(srcX >> 16) + (srcY >> 16) * this.wi];
 					if (rgb == 0) {
 						dstX++;
 					} else {
@@ -436,14 +450,15 @@ public class Pix32 extends Pix2D {
 		}
 	}
 
+	// todo: plotSprite variant
 	@ObfuscatedName("jb.a(Lkb;ZII)V")
 	public void drawMasked(Pix8 arg0, int arg2, int arg3) {
-		int var5 = this.cropLeft + arg2;
-		int var6 = this.cropTop + arg3;
+		int var5 = this.xof + arg2;
+		int var6 = this.yof + arg3;
 		int var7 = Pix2D.width2d * var6 + var5;
 		int var8 = 0;
-		int var9 = this.cropBottom;
-		int var10 = this.cropRight;
+		int var9 = this.hi;
+		int var10 = this.wi;
 		int var11 = Pix2D.width2d - var10;
 		int var12 = 0;
 		if (var6 < Pix2D.top) {
@@ -476,6 +491,7 @@ public class Pix32 extends Pix2D {
 		}
 	}
 
+	// todo: plot variant
 	@ObfuscatedName("jb.a(II[IIIIII[IB[B)V")
 	public void copyPixelsMasked(int arg0, int arg1, int[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int[] arg8, byte[] arg10) {
 		int var12 = -(arg3 >> 2);

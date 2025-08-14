@@ -333,7 +333,7 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(II)Z")
-	public final boolean shapeModelsAreReady(int shape) {
+	public final boolean checkModel(int shape) {
 		int index = -1;
 		for (int i = 0; i < this.shapes.length; i++) {
 			if (this.shapes[i] == shape) {
@@ -350,11 +350,11 @@ public class LocType {
 		}
 
 		int model = this.models[index];
-		return model == -1 ? true : Model.isReady(model & 0xFFFF);
+		return model == -1 ? true : Model.request(model & 0xFFFF);
 	}
 
 	@ObfuscatedName("ec.b(I)Z")
-	public final boolean modelsAreReady() {
+	public final boolean checkModelAll() {
 		boolean ready = true;
 		if (this.models == null) {
 			return true;
@@ -363,7 +363,7 @@ public class LocType {
 		for (int i = 0; i < this.models.length; i++) {
 			int model = this.models[i];
 			if (model != -1) {
-				ready &= Model.isReady(model & 0xFFFF);
+				ready &= Model.request(model & 0xFFFF);
 			}
 		}
 

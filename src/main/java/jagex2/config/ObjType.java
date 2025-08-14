@@ -202,7 +202,7 @@ public class ObjType {
 		obj.decode(data);
 
 		if (obj.certtemplate != -1) {
-			obj.toCertificate();
+			obj.genCert();
 		}
 
 		if (!membersWorld && obj.members) {
@@ -373,7 +373,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.b(I)V")
-	public void toCertificate() {
+	public void genCert() {
 		ObjType template = get(this.certtemplate);
 		this.model = template.model;
 		this.zoom2d = template.zoom2d;
@@ -475,7 +475,7 @@ public class ObjType {
 		if (outlineRgb == 0) {
 			Pix32 icon = (Pix32) iconCache.get(id);
 
-			if (icon != null && icon.height != count && icon.height != -1) {
+			if (icon != null && icon.ohi != count && icon.ohi != -1) {
 				icon.unlink();
 				icon = null;
 			}
@@ -591,13 +591,13 @@ public class ObjType {
 		}
 
 		if (obj.certtemplate != -1) {
-			int w = linkedIcon.width;
-			int h = linkedIcon.height;
-			linkedIcon.width = 32;
-			linkedIcon.height = 32;
-			linkedIcon.draw(0, 0);
-			linkedIcon.width = w;
-			linkedIcon.height = h;
+			int w = linkedIcon.owi;
+			int h = linkedIcon.ohi;
+			linkedIcon.owi = 32;
+			linkedIcon.ohi = 32;
+			linkedIcon.plotSprite(0, 0);
+			linkedIcon.owi = w;
+			linkedIcon.ohi = h;
 		}
 
 		if (outlineRgb == 0) {
@@ -605,24 +605,24 @@ public class ObjType {
 		}
 
 		Pix2D.bind(_w, _data, _h);
-		Pix2D.setBounds(_r, _b, _t, _l);
+		Pix2D.setClipping(_r, _b, _t, _l);
 		Pix3D.centerX = _cx;
 		Pix3D.centerY = _cy;
 		Pix3D.lineOffset = _loff;
 		Pix3D.jagged = true;
 
 		if (obj.stackable) {
-			icon.width = 33;
+			icon.owi = 33;
 		} else {
-			icon.width = 32;
+			icon.owi = 32;
 		}
 
-		icon.height = count;
+		icon.ohi = count;
 		return icon;
 	}
 
 	@ObfuscatedName("hc.b(II)Z")
-	public final boolean wornModelIsReady(int gender) {
+	public final boolean checkWearModel(int gender) {
 		int wear = this.manwear;
 		int wear2 = this.manwear2;
 		int wear3 = this.manwear3;
@@ -637,20 +637,20 @@ public class ObjType {
 		}
 
 		boolean ready = true;
-		if (!Model.isReady(wear)) {
+		if (!Model.request(wear)) {
 			ready = false;
 		}
-		if (wear2 != -1 && !Model.isReady(wear2)) {
+		if (wear2 != -1 && !Model.request(wear2)) {
 			ready = false;
 		}
-		if (wear3 != -1 && !Model.isReady(wear3)) {
+		if (wear3 != -1 && !Model.request(wear3)) {
 			ready = false;
 		}
 		return ready;
 	}
 
 	@ObfuscatedName("hc.a(ZI)Lfb;")
-	public final Model getWornModel(int gender) {
+	public final Model getWearModel(int gender) {
 		int wear = this.manwear;
 		int wear2 = this.manwear2;
 		int wear3 = this.manwear3;
@@ -694,7 +694,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.c(II)Z")
-	public final boolean headModelIsReady(int gender) {
+	public final boolean checkHeadModel(int gender) {
 		int head = this.manhead;
 		int head2 = this.manhead2;
 		if (gender == 1) {
@@ -707,10 +707,10 @@ public class ObjType {
 		}
 
 		boolean ready = true;
-		if (!Model.isReady(head)) {
+		if (!Model.request(head)) {
 			ready = false;
 		}
-		if (head2 != -1 && !Model.isReady(head2)) {
+		if (head2 != -1 && !Model.request(head2)) {
 			ready = false;
 		}
 		return ready;

@@ -44,11 +44,11 @@ public class Envelope {
 		this.form = buf.g1();
 		this.start = buf.g4();
 		this.end = buf.g4();
-		this.length = buf.g1();
 
+		// load points
+		this.length = buf.g1();
 		this.shapeDelta = new int[this.length];
 		this.shapePeak = new int[this.length];
-
 		for (int i = 0; i < this.length; i++) {
 			this.shapeDelta[i] = buf.g2();
 			this.shapePeak[i] = buf.g2();
@@ -56,7 +56,7 @@ public class Envelope {
 	}
 
 	@ObfuscatedName("bc.a(B)V")
-	public final void reset() {
+	public final void genInit() {
 		this.threshold = 0;
 		this.position = 0;
 		this.delta = 0;
@@ -65,7 +65,7 @@ public class Envelope {
 	}
 
 	@ObfuscatedName("bc.a(II)I")
-	public final int evaluate(int delta) {
+	public final int genNext(int delta) {
 		if (this.ticks >= this.threshold) {
 			this.amplitude = this.shapePeak[this.position++] << 15;
 			if (this.position >= this.length) {

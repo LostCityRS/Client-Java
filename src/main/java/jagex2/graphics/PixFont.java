@@ -31,10 +31,10 @@ public class PixFont extends Pix2D {
 	public int[] drawWidth = new int[256];
 
 	@ObfuscatedName("lb.O")
-	public Random random = new Random();
+	public Random rand = new Random();
 
 	@ObfuscatedName("lb.P")
-	public boolean strikethrough = false;
+	public boolean strikeout = false;
 
 	@ObfuscatedName("lb.N")
 	public int height;
@@ -45,19 +45,27 @@ public class PixFont extends Pix2D {
 	public PixFont(Jagfile arg0, String arg1) {
 		Packet var4 = new Packet(arg0.read(arg1 + ".dat", null));
 		Packet var5 = new Packet(arg0.read("index.dat", null));
-		var5.pos = var4.g2() + 4;
+
+		var5.pos = var4.g2() + 4; // skip height and width
+
+		// skip palette
 		int var7 = var5.g1();
 		if (var7 > 0) {
 			var5.pos += (var7 - 1) * 3;
 		}
+
 		for (int var8 = 0; var8 < 94; var8++) {
 			this.charOffsetX[var8] = var5.g1();
 			this.charOffsetY[var8] = var5.g1();
+
 			int var11 = this.charMaskWidth[var8] = var5.g2();
 			int var12 = this.charMaskHeight[var8] = var5.g2();
-			int var13 = var5.g1();
+
+			int var13 = var5.g1(); // pixel order
+
 			int var14 = var11 * var12;
 			this.charMask[var8] = new byte[var14];
+
 			if (var13 == 0) {
 				for (int var15 = 0; var15 < var14; var15++) {
 					this.charMask[var8][var15] = var4.g1b();
@@ -69,46 +77,54 @@ public class PixFont extends Pix2D {
 					}
 				}
 			}
+
 			if (var12 > this.height) {
 				this.height = var12;
 			}
+
 			this.charOffsetX[var8] = 1;
 			this.charAdvance[var8] = var11 + 2;
+
 			int var18 = 0;
 			for (int var19 = var12 / 7; var19 < var12; var19++) {
 				var18 += this.charMask[var8][var11 * var19];
 			}
+
 			int var10002;
 			if (var18 <= var12 / 7) {
 				var10002 = this.charAdvance[var8]--;
 				this.charOffsetX[var8] = 0;
 			}
+
 			int var20 = 0;
 			for (int var21 = var12 / 7; var21 < var12; var21++) {
 				var20 += this.charMask[var8][var11 * var21 + (var11 - 1)];
 			}
+
 			if (var20 <= var12 / 7) {
 				var10002 = this.charAdvance[var8]--;
 			}
 		}
+
 		this.charAdvance[94] = this.charAdvance[8];
+
 		for (int var9 = 0; var9 < 256; var9++) {
 			this.drawWidth[var9] = this.charAdvance[CHAR_LOOKUP[var9]];
 		}
 	}
 
 	@ObfuscatedName("lb.a(IIILjava/lang/String;I)V")
-	public void drawStringCenter(int arg0, int arg2, String arg3, int arg4) {
-		this.drawString(arg3, arg2, arg4, arg0 - this.stringWidth(arg3) / 2);
+	public void centreString(int arg0, int arg2, String arg3, int arg4) {
+		this.drawString(arg3, arg2, arg4, arg0 - this.stringWid(arg3) / 2);
 	}
 
 	@ObfuscatedName("lb.a(IZLjava/lang/String;ZII)V")
-	public void drawStringTaggableCenter(int arg0, boolean arg1, String arg2, int arg4, int arg5) {
-		this.drawStringTaggable(arg5, arg0 - this.stringWidth(arg2) / 2, arg1, arg4, arg2);
+	public void centreStringTag(int arg0, boolean arg1, String arg2, int arg4, int arg5) {
+		this.drawStringTag(arg5, arg0 - this.stringWid(arg2) / 2, arg1, arg4, arg2);
 	}
 
 	@ObfuscatedName("lb.a(Ljava/lang/String;B)I")
-	public int stringWidth(String arg0) {
+	public int stringWid(String arg0) {
 		if (arg0 == null) {
 			return 0;
 		}
@@ -132,31 +148,31 @@ public class PixFont extends Pix2D {
 		for (int var9 = 0; var9 < arg0.length(); var9++) {
 			int var10 = CHAR_LOOKUP[arg0.charAt(var9)];
 			if (var10 != 94) {
-				this.drawChar(this.charMask[var10], this.charOffsetX[var10] + arg4, this.charOffsetY[var10] + var8, this.charMaskWidth[var10], this.charMaskHeight[var10], arg1);
+				this.plotLetter(this.charMask[var10], this.charOffsetX[var10] + arg4, this.charOffsetY[var10] + var8, this.charMaskWidth[var10], this.charMaskHeight[var10], arg1);
 			}
 			arg4 += this.charAdvance[var10];
 		}
 	}
 
 	@ObfuscatedName("lb.a(IILjava/lang/String;III)V")
-	public void drawStringCenterWave(int arg0, int arg1, String arg2, int arg4, int arg5) {
+	public void centreStringWave(int arg0, int arg1, String arg2, int arg4, int arg5) {
 		if (arg2 == null) {
 			return;
 		}
-		int var7 = arg4 - this.stringWidth(arg2) / 2;
+		int var7 = arg4 - this.stringWid(arg2) / 2;
 		int var8 = arg0 - this.height;
 		for (int var9 = 0; var9 < arg2.length(); var9++) {
 			int var10 = CHAR_LOOKUP[arg2.charAt(var9)];
 			if (var10 != 94) {
-				this.drawChar(this.charMask[var10], this.charOffsetX[var10] + var7, this.charOffsetY[var10] + var8 + (int) (Math.sin((double) arg1 / 5.0D + (double) var9 / 2.0D) * 5.0D), this.charMaskWidth[var10], this.charMaskHeight[var10], arg5);
+				this.plotLetter(this.charMask[var10], this.charOffsetX[var10] + var7, this.charOffsetY[var10] + var8 + (int) (Math.sin((double) arg1 / 5.0D + (double) var9 / 2.0D) * 5.0D), this.charMaskWidth[var10], this.charMaskHeight[var10], arg5);
 			}
 			var7 += this.charAdvance[var10];
 		}
 	}
 
 	@ObfuscatedName("lb.a(IIZZILjava/lang/String;)V")
-	public void drawStringTaggable(int arg0, int arg1, boolean arg2, int arg4, String arg5) {
-		this.strikethrough = false;
+	public void drawStringTag(int arg0, int arg1, boolean arg2, int arg4, String arg5) {
+		this.strikeout = false;
 		int var7 = arg1;
 		if (arg5 == null) {
 			return;
@@ -173,25 +189,25 @@ public class PixFont extends Pix2D {
 				int var11 = CHAR_LOOKUP[arg5.charAt(var9)];
 				if (var11 != 94) {
 					if (arg2) {
-						this.drawChar(this.charMask[var11], this.charOffsetX[var11] + arg1 + 1, this.charOffsetY[var11] + var8 + 1, this.charMaskWidth[var11], this.charMaskHeight[var11], 0);
+						this.plotLetter(this.charMask[var11], this.charOffsetX[var11] + arg1 + 1, this.charOffsetY[var11] + var8 + 1, this.charMaskWidth[var11], this.charMaskHeight[var11], 0);
 					}
-					this.drawChar(this.charMask[var11], this.charOffsetX[var11] + arg1, this.charOffsetY[var11] + var8, this.charMaskWidth[var11], this.charMaskHeight[var11], arg0);
+					this.plotLetter(this.charMask[var11], this.charOffsetX[var11] + arg1, this.charOffsetY[var11] + var8, this.charMaskWidth[var11], this.charMaskHeight[var11], arg0);
 				}
 				arg1 += this.charAdvance[var11];
 			}
 		}
-		if (this.strikethrough) {
-			Pix2D.drawHorizontalLine(8388608, (int) ((double) this.height * 0.7D) + var8, arg1 - var7, var7);
+		if (this.strikeout) {
+			Pix2D.hline(8388608, (int) ((double) this.height * 0.7D) + var8, arg1 - var7, var7);
 		}
 	}
 
 	@ObfuscatedName("lb.a(ZIIIIILjava/lang/String;)V")
-	public void drawStringTooltip(boolean arg0, int arg1, int arg2, int arg3, int arg5, String arg6) {
+	public void drawStringAntiMacro(boolean arg0, int arg1, int arg2, int arg3, int arg5, String arg6) {
 		if (arg6 == null) {
 			return;
 		}
-		this.random.setSeed((long) arg1);
-		int var8 = (this.random.nextInt() & 0x1F) + 192;
+		this.rand.setSeed((long) arg1);
+		int var8 = (this.rand.nextInt() & 0x1F) + 192;
 		int var9 = arg3 - this.height;
 		for (int var10 = 0; var10 < arg6.length(); var10++) {
 			if (arg6.charAt(var10) == '@' && var10 + 4 < arg6.length() && arg6.charAt(var10 + 4) == '@') {
@@ -204,12 +220,12 @@ public class PixFont extends Pix2D {
 				int var12 = CHAR_LOOKUP[arg6.charAt(var10)];
 				if (var12 != 94) {
 					if (arg0) {
-						this.drawCharAlpha(0, this.charMaskHeight[var12], this.charMask[var12], this.charOffsetY[var12] + var9 + 1, this.charOffsetX[var12] + arg2 + 1, this.charMaskWidth[var12], 192);
+						this.plotLetterTrans(0, this.charMaskHeight[var12], this.charMask[var12], this.charOffsetY[var12] + var9 + 1, this.charOffsetX[var12] + arg2 + 1, this.charMaskWidth[var12], 192);
 					}
-					this.drawCharAlpha(arg5, this.charMaskHeight[var12], this.charMask[var12], this.charOffsetY[var12] + var9, this.charOffsetX[var12] + arg2, this.charMaskWidth[var12], var8);
+					this.plotLetterTrans(arg5, this.charMaskHeight[var12], this.charMask[var12], this.charOffsetY[var12] + var9, this.charOffsetX[var12] + arg2, this.charMaskWidth[var12], var8);
 				}
 				arg2 += this.charAdvance[var12];
-				if ((this.random.nextInt() & 0x3) == 0) {
+				if ((this.rand.nextInt() & 0x3) == 0) {
 					arg2++;
 				}
 			}
@@ -254,14 +270,14 @@ public class PixFont extends Pix2D {
 			return 4259584;
 		} else {
 			if (arg1.equals("str")) {
-				this.strikethrough = true;
+				this.strikeout = true;
 			}
 			return -1;
 		}
 	}
 
 	@ObfuscatedName("lb.a([BIIIII)V")
-	public void drawChar(byte[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void plotLetter(byte[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var7 = Pix2D.width2d * arg2 + arg1;
 		int var8 = Pix2D.width2d - arg3;
 		int var9 = 0;
@@ -292,12 +308,12 @@ public class PixFont extends Pix2D {
 			var8 += var13;
 		}
 		if (arg3 > 0 && arg4 > 0) {
-			this.copyPixels(Pix2D.data, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
+			this.plotLetterInner(Pix2D.data, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
 		}
 	}
 
 	@ObfuscatedName("lb.a([I[BIIIIIII)V")
-	public void copyPixels(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void plotLetterInner(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = -(arg5 >> 2);
 		int var11 = -(arg5 & 0x3);
 		for (int var12 = -arg6; var12 < 0; var12++) {
@@ -336,7 +352,7 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(II[BIIIII)V")
-	public void drawCharAlpha(int arg0, int arg1, byte[] arg2, int arg3, int arg5, int arg6, int arg7) {
+	public void plotLetterTrans(int arg0, int arg1, byte[] arg2, int arg3, int arg5, int arg6, int arg7) {
 		int var10 = Pix2D.width2d * arg3 + arg5;
 		int var11 = Pix2D.width2d - arg6;
 		int var12 = 0;
@@ -367,12 +383,12 @@ public class PixFont extends Pix2D {
 			var11 += var16;
 		}
 		if (arg6 > 0 && arg1 > 0) {
-			this.copyPixelsAlpha(var12, arg0, var10, Pix2D.data, var13, var11, arg7, arg1, arg2, arg6);
+			this.plotLetterTransInner(var12, arg0, var10, Pix2D.data, var13, var11, arg7, arg1, arg2, arg6);
 		}
 	}
 
 	@ObfuscatedName("lb.a(III[IIIIII[BI)V")
-	public void copyPixelsAlpha(int arg0, int arg1, int arg2, int[] arg3, int arg5, int arg6, int arg7, int arg8, byte[] arg9, int arg10) {
+	public void plotLetterTransInner(int arg0, int arg1, int arg2, int[] arg3, int arg5, int arg6, int arg7, int arg8, byte[] arg9, int arg10) {
 		int var12 = ((arg1 & 0xFF00FF) * arg7 & 0xFF00FF00) + ((arg1 & 0xFF00) * arg7 & 0xFF0000) >> 8;
 		int var13 = 256 - arg7;
 		for (int var14 = -arg8; var14 < 0; var14++) {

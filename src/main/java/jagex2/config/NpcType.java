@@ -40,31 +40,31 @@ public class NpcType {
 	public int[] models;
 
 	@ObfuscatedName("gc.l")
-	public int[] heads;
+	public int[] head;
 
 	@ObfuscatedName("gc.m")
-	public int readyanim = -1;
+	public int readyanim = -1; // ready anim (idle)
 
 	@ObfuscatedName("gc.n")
-	public int walkanim = -1;
+	public int walkanim = -1; // walk anim (moving forward)
 
 	@ObfuscatedName("gc.o")
-	public int walkanim_b = -1;
+	public int walkanim_b = -1; // walk anim (moving backward)
 
 	@ObfuscatedName("gc.p")
-	public int walkanim_r = -1;
+	public int walkanim_r = -1; // walk anim (moving right)
 
 	@ObfuscatedName("gc.q")
-	public int walkanim_l = -1;
+	public int walkanim_l = -1; // walk anim (moving left)
 
 	@ObfuscatedName("gc.r")
 	public boolean animHasAlpha = false;
 
 	@ObfuscatedName("gc.s")
-	public int[] recol_s;
+	public int[] recol_s; // recolour source
 
 	@ObfuscatedName("gc.t")
-	public int[] recol_d;
+	public int[] recol_d; // recolour dest
 
 	@ObfuscatedName("gc.u")
 	public String[] op;
@@ -82,7 +82,7 @@ public class NpcType {
 	public boolean minimap = true;
 
 	@ObfuscatedName("gc.z")
-	public int vislevel = -1;
+	public int vislevel = -1; // visible combat level
 
 	@ObfuscatedName("gc.A")
 	public int resizeh = 128;
@@ -94,7 +94,7 @@ public class NpcType {
 	public boolean alwaysontop = false;
 
 	@ObfuscatedName("gc.F")
-	public int headicon = -1;
+	public int headicon = -1; // head icon graphic
 
 	@ObfuscatedName("gc.G")
 	public static LruCache modelCache = new LruCache(30);
@@ -106,7 +106,7 @@ public class NpcType {
 	public int contrast;
 
 	@ObfuscatedName("gc.a(Lyb;)V")
-	public static final void unpack(Jagfile config) {
+	public static void unpack(Jagfile config) {
 		data = new Packet(config.read("npc.dat", null));
 		Packet temp = new Packet(config.read("npc.idx", null));
 
@@ -126,7 +126,7 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(B)V")
-	public static final void unload() {
+	public static void unload() {
 		modelCache = null;
 		idx = null;
 		cache = null;
@@ -134,7 +134,7 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(I)Lgc;")
-	public static final NpcType get(int id) {
+	public static NpcType get(int id) {
 		for (int i = 0; i < 20; i++) {
 			if ((long) id == cache[i].id) {
 				return cache[i];
@@ -196,16 +196,16 @@ public class NpcType {
 				this.recol_s = new int[count];
 				this.recol_d = new int[count];
 
-				for (int var8 = 0; var8 < count; var8++) {
-					this.recol_s[var8] = buf.g2();
-					this.recol_d[var8] = buf.g2();
+				for (int i = 0; i < count; i++) {
+					this.recol_s[i] = buf.g2();
+					this.recol_d[i] = buf.g2();
 				}
 			} else if (code == 60) {
 				int count = buf.g1();
-				this.heads = new int[count];
+				this.head = new int[count];
 
-				for (int var10 = 0; var10 < count; var10++) {
-					this.heads[var10] = buf.g2();
+				for (int i = 0; i < count; i++) {
+					this.head[i] = buf.g2();
 				}
 			} else if (code == 90) {
 				this.field1008 = buf.g2();
@@ -240,7 +240,7 @@ public class NpcType {
 		if (model == null) {
 			boolean ready = false;
 			for (int i = 0; i < this.models.length; i++) {
-				if (!Model.isReady(this.models[i])) {
+				if (!Model.request(this.models[i])) {
 					ready = true;
 				}
 			}
@@ -296,13 +296,13 @@ public class NpcType {
 
 	@ObfuscatedName("gc.a(Z)Lfb;")
 	public final Model getHeadModel() {
-		if (this.heads == null) {
+		if (this.head == null) {
 			return null;
 		}
 
 		boolean exists = false;
-		for (int i = 0; i < this.heads.length; i++) {
-			if (!Model.isReady(this.heads[i])) {
+		for (int i = 0; i < this.head.length; i++) {
+			if (!Model.request(this.head[i])) {
 				exists = true;
 			}
 		}
@@ -310,9 +310,9 @@ public class NpcType {
 			return null;
 		}
 
-		Model[] models = new Model[this.heads.length];
-		for (int i = 0; i < this.heads.length; i++) {
-			models[i] = Model.tryGet(this.heads[i]);
+		Model[] models = new Model[this.head.length];
+		for (int i = 0; i < this.head.length; i++) {
+			models[i] = Model.tryGet(this.head[i]);
 		}
 
 		Model model;

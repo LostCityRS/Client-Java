@@ -15,7 +15,7 @@ public class SeqType {
 	public static SeqType[] types;
 
 	@ObfuscatedName("nc.e")
-	public int frameCount;
+	public int numFrames;
 
 	@ObfuscatedName("nc.f")
 	public int[] frames;
@@ -27,7 +27,7 @@ public class SeqType {
 	public int[] delay;
 
 	@ObfuscatedName("nc.i")
-	public int replayoff = -1;
+	public int loops = -1;
 
 	@ObfuscatedName("nc.j")
 	public int[] walkmerge;
@@ -39,13 +39,13 @@ public class SeqType {
 	public int priority = 5;
 
 	@ObfuscatedName("nc.m")
-	public int righthand = -1;
+	public int replaceheldleft = -1;
 
 	@ObfuscatedName("nc.n")
-	public int lefthand = -1;
+	public int replaceheldright = -1;
 
 	@ObfuscatedName("nc.o")
-	public int replaycount = 99;
+	public int maxloops = 99;
 
 	@ObfuscatedName("nc.p")
 	public int preanim_move = -1;
@@ -54,7 +54,7 @@ public class SeqType {
 	public int postanim_mode = -1;
 
 	@ObfuscatedName("nc.r")
-	public int restart_mode;
+	public int duplicatebehavior;
 
 	@ObfuscatedName("nc.a(Lyb;B)V")
 	public static void unpack(Jagfile config) {
@@ -96,50 +96,18 @@ public class SeqType {
 	public void decode(Packet buf) {
 		while (true) {
 			int code = buf.g1();
-
 			if (code == 0) {
-				if (this.frameCount == 0) {
-					this.frameCount = 1;
-
-					this.frames = new int[1];
-					this.frames[0] = -1;
-
-					this.iframes = new int[1];
-					this.iframes[0] = -1;
-
-					this.delay = new int[1];
-					this.delay[0] = -1;
-				}
-
-				if (this.preanim_move == -1) {
-					if (this.walkmerge == null) {
-						this.preanim_move = 0;
-					} else {
-						this.preanim_move = 2;
-					}
-				}
-
-				if (this.postanim_mode == -1) {
-					if (this.walkmerge != null) {
-						this.postanim_mode = 2;
-						return;
-					}
-
-					this.postanim_mode = 0;
-					return;
-				}
-
-				return;
+				break;
 			}
 
 			if (code == 1) {
-				this.frameCount = buf.g1();
+				this.numFrames = buf.g1();
 
-				this.frames = new int[this.frameCount];
-				this.iframes = new int[this.frameCount];
-				this.delay = new int[this.frameCount];
+				this.frames = new int[this.numFrames];
+				this.iframes = new int[this.numFrames];
+				this.delay = new int[this.numFrames];
 
-				for (int i = 0; i < this.frameCount; i++) {
+				for (int i = 0; i < this.numFrames; i++) {
 					this.frames[i] = buf.g2();
 
 					this.iframes[i] = buf.g2();
@@ -150,7 +118,7 @@ public class SeqType {
 					this.delay[i] = buf.g2();
 				}
 			} else if (code == 2) {
-				this.replayoff = buf.g2();
+				this.loops = buf.g2();
 			} else if (code == 3) {
 				int count = buf.g1();
 				this.walkmerge = new int[count + 1];
@@ -165,19 +133,48 @@ public class SeqType {
 			} else if (code == 5) {
 				this.priority = buf.g1();
 			} else if (code == 6) {
-				this.righthand = buf.g2();
+				this.replaceheldleft = buf.g2();
 			} else if (code == 7) {
-				this.lefthand = buf.g2();
+				this.replaceheldright = buf.g2();
 			} else if (code == 8) {
-				this.replaycount = buf.g1();
+				this.maxloops = buf.g1();
 			} else if (code == 9) {
 				this.preanim_move = buf.g1();
 			} else if (code == 10) {
 				this.postanim_mode = buf.g1();
 			} else if (code == 11) {
-				this.restart_mode = buf.g1();
+				this.duplicatebehavior = buf.g1();
 			} else {
 				System.out.println("Error unrecognised seq config code: " + code);
+			}
+		}
+
+		if (this.numFrames == 0) {
+			this.numFrames = 1;
+
+			this.frames = new int[1];
+			this.frames[0] = -1;
+
+			this.iframes = new int[1];
+			this.iframes[0] = -1;
+
+			this.delay = new int[1];
+			this.delay[0] = -1;
+		}
+
+		if (this.preanim_move == -1) {
+			if (this.walkmerge == null) {
+				this.preanim_move = 0;
+			} else {
+				this.preanim_move = 2;
+			}
+		}
+
+		if (this.postanim_mode == -1) {
+			if (this.walkmerge == null) {
+				this.postanim_mode = 0;
+			} else {
+				this.postanim_mode = 2;
 			}
 		}
 	}

@@ -54,8 +54,8 @@ public class MapSpotAnim extends ModelSource {
 					}
 					this.seqCycle -= this.type.seq.getFrameDuration(this.seqFrame) + 1;
 					this.seqFrame++;
-				} while (this.seqFrame < this.type.seq.frameCount);
-			} while (this.seqFrame >= 0 && this.seqFrame < this.type.seq.frameCount);
+				} while (this.seqFrame < this.type.seq.numFrames);
+			} while (this.seqFrame >= 0 && this.seqFrame < this.type.seq.numFrames);
 			this.seqFrame = 0;
 			this.seqComplete = true;
 		}

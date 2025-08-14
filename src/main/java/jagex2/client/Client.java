@@ -36,7 +36,7 @@ public class Client extends GameShell {
 	public static boolean membersWorld = true;
 
 	@ObfuscatedName("client.Se")
-	public static boolean lowMemory;
+	public static boolean lowMem;
 
 	@ObfuscatedName("client.Ti")
 	public static boolean alreadyStarted;
@@ -1285,9 +1285,9 @@ public class Client extends GameShell {
 				portOffset = Integer.parseInt(args[1]);
 
 				if (args[2].equals("lowmem")) {
-					setLowMemory();
+					setLowMem();
 				} else if (args[2].equals("highmem")) {
-					setHighMemory();
+					setHighMem();
 				} else {
 					System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 					return;
@@ -1310,7 +1310,7 @@ public class Client extends GameShell {
 			} else {
 				System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 			}
-		} catch (Exception var3) {
+		} catch (Exception ignore) {
 		}
 	}
 
@@ -1320,9 +1320,9 @@ public class Client extends GameShell {
 
 		String lowmem = this.getParameter("lowmem");
 		if (lowmem != null && lowmem.equals("1")) {
-			setLowMemory();
+			setLowMem();
 		} else {
-			setHighMemory();
+			setHighMem();
 		}
 
 		String free = this.getParameter("free");
@@ -1344,19 +1344,19 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.s(I)V")
-	public static final void setLowMemory() {
-		World3D.lowMemory = true;
-		Pix3D.lowMemory = true;
-		lowMemory = true;
-		World.lowMemory = true;
+	public static final void setLowMem() {
+		World3D.lowMem = true;
+		Pix3D.lowMem = true;
+		lowMem = true;
+		World.lowMem = true;
 	}
 
 	@ObfuscatedName("client.h(B)V")
-	public static final void setHighMemory() {
-		World3D.lowMemory = false;
-		Pix3D.lowMemory = false;
-		lowMemory = false;
-		World.lowMemory = false;
+	public static final void setHighMem() {
+		World3D.lowMem = false;
+		Pix3D.lowMem = false;
+		lowMem = false;
+		World.lowMem = false;
 	}
 
 	// ----
@@ -1371,7 +1371,7 @@ public class Client extends GameShell {
 			if (super.frame != null) {
 				return new URL("http://127.0.0.1:" + (portOffset + 80));
 			}
-		} catch (Exception var1) {
+		} catch (Exception ignore) {
 		}
 
 		return super.getCodeBase();
@@ -1553,7 +1553,7 @@ public class Client extends GameShell {
 
 						try {
 							Thread.sleep(1000L);
-						} catch (Exception var75) {
+						} catch (Exception ignore2) {
 						}
 					}
 
@@ -1597,7 +1597,7 @@ public class Client extends GameShell {
 			AnimFrame.init(this.onDemand.getAnimCount());
 			Model.init(this.onDemand.getFileCount(0), this.onDemand);
 
-			if (!lowMemory) {
+			if (!lowMem) {
 				this.midiSong = 0;
 				this.midiFading = false;
 				this.onDemand.request(2, this.midiSong);
@@ -1607,7 +1607,7 @@ public class Client extends GameShell {
 
 					try {
 						Thread.sleep(100L);
-					} catch (Exception var74) {
+					} catch (Exception ignore) {
 					}
 				}
 			}
@@ -1629,7 +1629,7 @@ public class Client extends GameShell {
 
 				try {
 					Thread.sleep(100L);
-				} catch (Exception var73) {
+				} catch (Exception ignore) {
 				}
 			}
 
@@ -1654,7 +1654,7 @@ public class Client extends GameShell {
 
 				try {
 					Thread.sleep(100L);
-				} catch (Exception var72) {
+				} catch (Exception ignore) {
 				}
 			}
 
@@ -1690,7 +1690,7 @@ public class Client extends GameShell {
 
 					try {
 						Thread.sleep(100L);
-					} catch (Exception var71) {
+					} catch (Exception ignore) {
 					}
 				}
 			}
@@ -1727,7 +1727,7 @@ public class Client extends GameShell {
 
 			this.onDemand.prefetchMaps(membersWorld);
 
-			if (!lowMemory) {
+			if (!lowMem) {
 				int midiCount = this.onDemand.getFileCount(2);
 				for (int i = 1; i < midiCount; i++) {
 					if (this.onDemand.shouldPrefetchMidi(i)) {
@@ -1753,7 +1753,7 @@ public class Client extends GameShell {
 			this.imageCompass = new Pix32(jagMedia, "compass", 0);
 
 			this.imageMapedge = new Pix32(jagMedia, "mapedge", 0);
-			this.imageMapedge.crop();
+			this.imageMapedge.trim();
 
 			try {
 				for (int i = 0; i < 50; i++) {
@@ -1803,67 +1803,67 @@ public class Client extends GameShell {
 			this.imageRedstone3 = new Pix8(jagMedia, "redstone3", 0);
 
 			this.imageRedstone1h = new Pix8(jagMedia, "redstone1", 0);
-			this.imageRedstone1h.flipHorizontally();
+			this.imageRedstone1h.hflip();
 
 			this.imageRedstone2h = new Pix8(jagMedia, "redstone2", 0);
-			this.imageRedstone2h.flipHorizontally();
+			this.imageRedstone2h.hflip();
 
 			this.imageRedstone1v = new Pix8(jagMedia, "redstone1", 0);
-			this.imageRedstone1v.flipVertically();
+			this.imageRedstone1v.vflip();
 
 			this.imageRedstone2v = new Pix8(jagMedia, "redstone2", 0);
-			this.imageRedstone2v.flipVertically();
+			this.imageRedstone2v.vflip();
 
 			this.imageRedstone3v = new Pix8(jagMedia, "redstone3", 0);
-			this.imageRedstone3v.flipVertically();
+			this.imageRedstone3v.vflip();
 
 			this.imageRedstone1hv = new Pix8(jagMedia, "redstone1", 0);
-			this.imageRedstone1hv.flipHorizontally();
-			this.imageRedstone1hv.flipVertically();
+			this.imageRedstone1hv.hflip();
+			this.imageRedstone1hv.vflip();
 
 			this.imageRedstone2hv = new Pix8(jagMedia, "redstone2", 0);
-			this.imageRedstone2hv.flipHorizontally();
-			this.imageRedstone2hv.flipVertically();
+			this.imageRedstone2hv.hflip();
+			this.imageRedstone2hv.vflip();
 
 			for (int i = 0; i < 2; i++) {
 				this.imageModIcons[i] = new Pix8(jagMedia, "mod_icons", i);
 			}
 
 			Pix32 backleft1 = new Pix32(jagMedia, "backleft1", 0);
-			this.areaBackleft1 = new PixMap(backleft1.cropRight, backleft1.cropBottom, this.getBaseComponent());
-			backleft1.blitOpaque(0, 0);
+			this.areaBackleft1 = new PixMap(backleft1.wi, backleft1.hi, this.getBaseComponent());
+			backleft1.quickPlotSprite(0, 0);
 
 			Pix32 backleft2 = new Pix32(jagMedia, "backleft2", 0);
-			this.areaBackleft2 = new PixMap(backleft2.cropRight, backleft2.cropBottom, this.getBaseComponent());
-			backleft2.blitOpaque(0, 0);
+			this.areaBackleft2 = new PixMap(backleft2.wi, backleft2.hi, this.getBaseComponent());
+			backleft2.quickPlotSprite(0, 0);
 
 			Pix32 backright1 = new Pix32(jagMedia, "backright1", 0);
-			this.areaBackright1 = new PixMap(backright1.cropRight, backright1.cropBottom, this.getBaseComponent());
-			backright1.blitOpaque(0, 0);
+			this.areaBackright1 = new PixMap(backright1.wi, backright1.hi, this.getBaseComponent());
+			backright1.quickPlotSprite(0, 0);
 
 			Pix32 backright2 = new Pix32(jagMedia, "backright2", 0);
-			this.areaBackright2 = new PixMap(backright2.cropRight, backright2.cropBottom, this.getBaseComponent());
-			backright2.blitOpaque(0, 0);
+			this.areaBackright2 = new PixMap(backright2.wi, backright2.hi, this.getBaseComponent());
+			backright2.quickPlotSprite(0, 0);
 
 			Pix32 backtop1 = new Pix32(jagMedia, "backtop1", 0);
-			this.areaBacktop1 = new PixMap(backtop1.cropRight, backtop1.cropBottom, this.getBaseComponent());
-			backtop1.blitOpaque(0, 0);
+			this.areaBacktop1 = new PixMap(backtop1.wi, backtop1.hi, this.getBaseComponent());
+			backtop1.quickPlotSprite(0, 0);
 
 			Pix32 backvmid1 = new Pix32(jagMedia, "backvmid1", 0);
-			this.areaBackvmid1 = new PixMap(backvmid1.cropRight, backvmid1.cropBottom, this.getBaseComponent());
-			backvmid1.blitOpaque(0, 0);
+			this.areaBackvmid1 = new PixMap(backvmid1.wi, backvmid1.hi, this.getBaseComponent());
+			backvmid1.quickPlotSprite(0, 0);
 
 			Pix32 backvmid2 = new Pix32(jagMedia, "backvmid2", 0);
-			this.areaBackvmid2 = new PixMap(backvmid2.cropRight, backvmid2.cropBottom, this.getBaseComponent());
-			backvmid2.blitOpaque(0, 0);
+			this.areaBackvmid2 = new PixMap(backvmid2.wi, backvmid2.hi, this.getBaseComponent());
+			backvmid2.quickPlotSprite(0, 0);
 
 			Pix32 backvmid3 = new Pix32(jagMedia, "backvmid3", 0);
-			this.areaBackvmid3 = new PixMap(backvmid3.cropRight, backvmid3.cropBottom, this.getBaseComponent());
-			backvmid3.blitOpaque(0, 0);
+			this.areaBackvmid3 = new PixMap(backvmid3.wi, backvmid3.hi, this.getBaseComponent());
+			backvmid3.quickPlotSprite(0, 0);
 
 			Pix32 backhmid2 = new Pix32(jagMedia, "backhmid2", 0);
-			this.areaBackhmid2 = new PixMap(backhmid2.cropRight, backhmid2.cropBottom, this.getBaseComponent());
-			backhmid2.blitOpaque(0, 0);
+			this.areaBackhmid2 = new PixMap(backhmid2.wi, backhmid2.hi, this.getBaseComponent());
+			backhmid2.quickPlotSprite(0, 0);
 
 			int randR = (int) (Math.random() * 21.0D) - 10;
 			int randG = (int) (Math.random() * 21.0D) - 10;
@@ -1872,18 +1872,18 @@ public class Client extends GameShell {
 
 			for (int i = 0; i < 50; i++) {
 				if (this.imageMapfunction[i] != null) {
-					this.imageMapfunction[i].translate(randR + rand, randB + rand, randG + rand);
+					this.imageMapfunction[i].rgbAdjust(randR + rand, randB + rand, randG + rand);
 				}
 
 				if (this.imageMapscene[i] != null) {
-					this.imageMapscene[i].translate(randR + rand, randB + rand, randG + rand);
+					this.imageMapscene[i].rgbAdjust(randR + rand, randB + rand, randG + rand);
 				}
 			}
 
 			this.drawProgress(83, "Unpacking textures");
 
 			Pix3D.unpackTextures(jagTextures);
-			Pix3D.setBrightness(0.8D);
+			Pix3D.initColourTable(0.8D);
 			Pix3D.initPool(20);
 
 			this.drawProgress(86, "Unpacking config");
@@ -1898,7 +1898,7 @@ public class Client extends GameShell {
 			VarpType.unpack(jagConfig);
 			ObjType.membersWorld = membersWorld;
 
-			if (!lowMemory) {
+			if (!lowMem) {
 				this.drawProgress(90, "Unpacking sounds");
 
 				byte[] dat = jagSounds.read("sounds.dat", null);
@@ -1918,7 +1918,7 @@ public class Client extends GameShell {
 				int right = 0;
 
 				for (int x = 0; x < 34; x++) {
-					if (this.imageMapback.pixels[this.imageMapback.cropRight * y + x] == 0) {
+					if (this.imageMapback.pixels[this.imageMapback.wi * y + x] == 0) {
 						if (left == 999) {
 							left = x;
 						}
@@ -1937,7 +1937,7 @@ public class Client extends GameShell {
 				int right = 0;
 
 				for (int x = 25; x < 172; x++) {
-					if (this.imageMapback.pixels[this.imageMapback.cropRight * y + x] == 0 && (x > 34 || y > 34)) {
+					if (this.imageMapback.pixels[this.imageMapback.wi * y + x] == 0 && (x > 34 || y > 34)) {
 						if (left == 999) {
 							left = x;
 						}
@@ -2202,14 +2202,14 @@ public class Client extends GameShell {
 		int y = 200;
 
 		int offsetY = 20;
-		this.fontBold12.drawStringCenter(x / 2, 0xffffff, "RuneScape is loading - please wait...", y / 2 - 26 - offsetY);
+		this.fontBold12.centreString(x / 2, 0xffffff, "RuneScape is loading - please wait...", y / 2 - 26 - offsetY);
 
 		int midY = y / 2 - 18 - offsetY;
 		Pix2D.drawRect(34, 304, 0x8c1111, x / 2 - 152, midY);
 		Pix2D.drawRect(32, 302, 0, x / 2 - 151, midY + 1);
 		Pix2D.fillRect(0x8c1111, percent * 3, 30, x / 2 - 150, midY + 2);
 		Pix2D.fillRect(0, 300 - percent * 3, 30, percent * 3 + (x / 2 - 150), midY + 2);
-		this.fontBold12.drawStringCenter(x / 2, 0xffffff, message, y / 2 + 5 - offsetY);
+		this.fontBold12.centreString(x / 2, 0xffffff, message, y / 2 + 5 - offsetY);
 
 		this.imageTitle4.draw(super.graphics, 202, 171);
 
@@ -2466,7 +2466,7 @@ public class Client extends GameShell {
 					}
 				}
 			} else if (req.archive == 93 && this.onDemand.hasMapLocFile(req.file)) {
-				World.prefetchLocs(new Packet(req.data), this.onDemand);
+				World.prefetchLocations(new Packet(req.data), this.onDemand);
 			}
 		}
 	}
@@ -2639,7 +2639,7 @@ public class Client extends GameShell {
 
 				this.login.p1(this.out.pos + 36 + 1 + 1);
 				this.login.p1(244);
-				this.login.p1(lowMemory ? 1 : 0);
+				this.login.p1(lowMem ? 1 : 0);
 
 				for (int i = 0; i < 9; i++) {
 					this.login.p4(this.jagChecksum[i]);
@@ -2907,13 +2907,13 @@ public class Client extends GameShell {
 		this.areaChatback = new PixMap(479, 96, this.getBaseComponent());
 
 		this.areaMapback = new PixMap(172, 156, this.getBaseComponent());
-		Pix2D.clear();
-		this.imageMapback.draw(0, 0);
+		Pix2D.cls();
+		this.imageMapback.plotSprite(0, 0);
 
 		this.areaSidebar = new PixMap(190, 261, this.getBaseComponent());
 
 		this.areaViewport = new PixMap(512, 334, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.areaBackbase1 = new PixMap(496, 50, this.getBaseComponent());
 		this.areaBackbase2 = new PixMap(269, 37, this.getBaseComponent());
@@ -3209,10 +3209,10 @@ public class Client extends GameShell {
 		}
 
 		this.areaViewport.bind();
-		this.fontPlain12.drawStringCenter(257, 0, "Connection lost", 144);
-		this.fontPlain12.drawStringCenter(256, 16777215, "Connection lost", 143);
-		this.fontPlain12.drawStringCenter(257, 0, "Please wait - attempting to reestablish", 159);
-		this.fontPlain12.drawStringCenter(256, 16777215, "Please wait - attempting to reestablish", 158);
+		this.fontPlain12.centreString(257, 0, "Connection lost", 144);
+		this.fontPlain12.centreString(256, 16777215, "Connection lost", 143);
+		this.fontPlain12.centreString(257, 0, "Please wait - attempting to reestablish", 159);
+		this.fontPlain12.centreString(256, 16777215, "Please wait - attempting to reestablish", 158);
 		this.areaViewport.draw(super.graphics, 4, 4);
 
 		this.flagSceneTileX = 0;
@@ -3233,10 +3233,10 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.m(B)V")
 	public final void updateSceneState() {
-		if (lowMemory && this.sceneState == 2 && World.levelBuilt != this.currentLevel) {
+		if (lowMem && this.sceneState == 2 && World.levelBuilt != this.currentLevel) {
 			this.areaViewport.bind();
-			this.fontPlain12.drawStringCenter(257, 0, "Loading - please wait.", 151);
-			this.fontPlain12.drawStringCenter(256, 16777215, "Loading - please wait.", 150);
+			this.fontPlain12.centreString(257, 0, "Loading - please wait.", 151);
+			this.fontPlain12.centreString(256, 16777215, "Loading - please wait.", 150);
 			this.areaViewport.draw(super.graphics, 4, 4);
 			this.sceneState = 1;
 			this.sceneLoadStartTime = System.currentTimeMillis();
@@ -3245,7 +3245,7 @@ public class Client extends GameShell {
 		if (this.sceneState == 1) {
 			int status = this.checkScene();
 			if (status != 0 && System.currentTimeMillis() - this.sceneLoadStartTime > 360000L) {
-				SignLink.reporterror(this.username + " glcfb " + this.serverSeed + "," + status + "," + lowMemory + "," + this.fileStreams[0] + "," + this.onDemand.remaining() + "," + this.currentLevel + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ);
+				SignLink.reporterror(this.username + " glcfb " + this.serverSeed + "," + status + "," + lowMem + "," + this.fileStreams[0] + "," + this.onDemand.remaining() + "," + this.currentLevel + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ);
 				this.sceneLoadStartTime = System.currentTimeMillis();
 			}
 		}
@@ -3274,7 +3274,7 @@ public class Client extends GameShell {
 			if (data != null) {
 				int x = (this.sceneMapIndex[i] >> 8) * 64 - this.sceneBaseTileX;
 				int z = (this.sceneMapIndex[i] & 0xFF) * 64 - this.sceneBaseTileZ;
-				ready &= World.locsAreReady(x, z, data);
+				ready &= World.checkLocations(x, z, data);
 			}
 		}
 
@@ -3307,7 +3307,7 @@ public class Client extends GameShell {
 			System.gc();
 
 			World world = new World(this.levelHeightmap, this.levelTileFlags, 104, 104);
-			World.lowMemory = World3D.lowMemory;
+			World.lowMem = World3D.lowMem;
 
 			int maps = this.sceneMapLandData.length;
 			for (int i = 0; i < maps; i++) {
@@ -3315,11 +3315,11 @@ public class Client extends GameShell {
 				int z = this.sceneMapIndex[i] & 0xFF;
 
 				if (x == 33 && z >= 71 && z <= 73) {
-					World.lowMemory = false;
+					World.lowMem = false;
 				}
 			}
 
-			if (World.lowMemory) {
+			if (World.lowMem) {
 				this.scene.setMinLevel(this.currentLevel);
 			} else {
 				this.scene.setMinLevel(0);
@@ -3382,7 +3382,7 @@ public class Client extends GameShell {
 
 		LocType.modelCacheStatic.clear();
 
-		if (lowMemory && SignLink.cache_dat != null) {
+		if (lowMem && SignLink.cache_dat != null) {
 			int modelCount = this.onDemand.getFileCount(0);
 
 			for (int i = 0; i < modelCount; i++) {
@@ -3551,7 +3551,7 @@ public class Client extends GameShell {
 					loc.startTime--;
 				}
 
-				if (loc.startTime == 0 && (loc.newType < 0 || World.isLocReady(loc.newType, loc.newShape))) {
+				if (loc.startTime == 0 && (loc.newType < 0 || World.changeLocAvailable(loc.newType, loc.newShape))) {
 					this.addLoc(loc.newType, loc.x, loc.newAngle, loc.newShape, loc.level, loc.z, loc.layer);
 					loc.startTime = -1;
 
@@ -3561,7 +3561,7 @@ public class Client extends GameShell {
 						loc.unlink();
 					}
 				}
-			} else if (loc.oldType < 0 || World.isLocReady(loc.oldType, loc.oldShape)) {
+			} else if (loc.oldType < 0 || World.changeLocAvailable(loc.oldType, loc.oldShape)) {
 				this.addLoc(loc.oldType, loc.x, loc.oldAngle, loc.oldShape, loc.level, loc.z, loc.layer);
 				loc.unlink();
 			}
@@ -3625,7 +3625,7 @@ public class Client extends GameShell {
 				this.nextMusicDelay = 0;
 			}
 
-			if (this.nextMusicDelay == 0 && this.midiActive && !lowMemory) {
+			if (this.nextMusicDelay == 0 && this.midiActive && !lowMem) {
 				this.midiSong = this.nextMidiSong;
 				this.midiFading = false;
 				this.onDemand.request(2, this.midiSong);
@@ -5197,12 +5197,12 @@ public class Client extends GameShell {
 			SeqType seq = SeqType.types[e.secondarySeqId];
 			e.secondarySeqCycle++;
 
-			if (e.secondarySeqFrame < seq.frameCount && e.secondarySeqCycle > seq.getFrameDuration(e.secondarySeqFrame)) {
+			if (e.secondarySeqFrame < seq.numFrames && e.secondarySeqCycle > seq.getFrameDuration(e.secondarySeqFrame)) {
 				e.secondarySeqCycle = 0;
 				e.secondarySeqFrame++;
 			}
 
-			if (e.secondarySeqFrame >= seq.frameCount) {
+			if (e.secondarySeqFrame >= seq.numFrames) {
 				e.secondarySeqCycle = 0;
 				e.secondarySeqFrame = 0;
 			}
@@ -5216,12 +5216,12 @@ public class Client extends GameShell {
 			SeqType seq = SpotAnimType.types[e.spotanimId].seq;
 			e.spotanimCycle++;
 
-			while (e.spotanimFrame < seq.frameCount && e.spotanimCycle > seq.getFrameDuration(e.spotanimFrame)) {
+			while (e.spotanimFrame < seq.numFrames && e.spotanimCycle > seq.getFrameDuration(e.spotanimFrame)) {
 				e.spotanimCycle -= seq.getFrameDuration(e.spotanimFrame);
 				e.spotanimFrame++;
 			}
 
-			if (e.spotanimFrame >= seq.frameCount && (e.spotanimFrame < 0 || e.spotanimFrame >= seq.frameCount)) {
+			if (e.spotanimFrame >= seq.numFrames && (e.spotanimFrame < 0 || e.spotanimFrame >= seq.numFrames)) {
 				e.spotanimId = -1;
 			}
 		}
@@ -5238,20 +5238,20 @@ public class Client extends GameShell {
 			SeqType seq = SeqType.types[e.primarySeqId];
 			e.primarySeqCycle++;
 
-			while (e.primarySeqFrame < seq.frameCount && e.primarySeqCycle > seq.getFrameDuration(e.primarySeqFrame)) {
+			while (e.primarySeqFrame < seq.numFrames && e.primarySeqCycle > seq.getFrameDuration(e.primarySeqFrame)) {
 				e.primarySeqCycle -= seq.getFrameDuration(e.primarySeqFrame);
 				e.primarySeqFrame++;
 			}
 
-			if (e.primarySeqFrame >= seq.frameCount) {
-				e.primarySeqFrame -= seq.replayoff;
+			if (e.primarySeqFrame >= seq.numFrames) {
+				e.primarySeqFrame -= seq.loops;
 				e.primarySeqLoop++;
 
-				if (e.primarySeqLoop >= seq.replaycount) {
+				if (e.primarySeqLoop >= seq.maxloops) {
 					e.primarySeqId = -1;
 				}
 
-				if (e.primarySeqFrame < 0 || e.primarySeqFrame >= seq.frameCount) {
+				if (e.primarySeqFrame < 0 || e.primarySeqFrame >= seq.numFrames) {
 					e.primarySeqId = -1;
 				}
 			}
@@ -5280,31 +5280,31 @@ public class Client extends GameShell {
 		this.areaBackhmid1 = null;
 
 		this.imageTitle0 = new PixMap(128, 265, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle1 = new PixMap(128, 265, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle2 = new PixMap(509, 171, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle3 = new PixMap(360, 132, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle4 = new PixMap(360, 200, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle5 = new PixMap(202, 238, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle6 = new PixMap(203, 238, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle7 = new PixMap(74, 94, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		this.imageTitle8 = new PixMap(75, 94, this.getBaseComponent());
-		Pix2D.clear();
+		Pix2D.cls();
 
 		if (this.jagTitle != null) {
 			this.loadTitleBackground();
@@ -5320,74 +5320,74 @@ public class Client extends GameShell {
 		Pix32 background = new Pix32(src, this);
 
 		this.imageTitle0.bind();
-		background.blitOpaque(0, 0);
+		background.quickPlotSprite(0, 0);
 
 		this.imageTitle1.bind();
-		background.blitOpaque(-637, 0);
+		background.quickPlotSprite(-637, 0);
 
 		this.imageTitle2.bind();
-		background.blitOpaque(-128, 0);
+		background.quickPlotSprite(-128, 0);
 
 		this.imageTitle3.bind();
-		background.blitOpaque(-202, -371);
+		background.quickPlotSprite(-202, -371);
 
 		this.imageTitle4.bind();
-		background.blitOpaque(-202, -171);
+		background.quickPlotSprite(-202, -171);
 
 		this.imageTitle5.bind();
-		background.blitOpaque(0, -265);
+		background.quickPlotSprite(0, -265);
 
 		this.imageTitle6.bind();
-		background.blitOpaque(-562, -265);
+		background.quickPlotSprite(-562, -265);
 
 		this.imageTitle7.bind();
-		background.blitOpaque(-128, -171);
+		background.quickPlotSprite(-128, -171);
 
 		this.imageTitle8.bind();
-		background.blitOpaque(-562, -171);
+		background.quickPlotSprite(-562, -171);
 
 		// draw right side (mirror image)
-		int[] pixels = new int[background.cropRight];
-		for (int y = 0; y < background.cropBottom; y++) {
-			for (int x = 0; x < background.cropRight; x++) {
-				pixels[x] = background.pixels[background.cropRight * y + (background.cropRight - x - 1)];
+		int[] pixels = new int[background.wi];
+		for (int y = 0; y < background.hi; y++) {
+			for (int x = 0; x < background.wi; x++) {
+				pixels[x] = background.pixels[background.wi * y + (background.wi - x - 1)];
 			}
 
-			for (int x = 0; x < background.cropRight; x++) {
-				background.pixels[background.cropRight * y + x] = pixels[x];
+			for (int x = 0; x < background.wi; x++) {
+				background.pixels[background.wi * y + x] = pixels[x];
 			}
 		}
 
 		this.imageTitle0.bind();
-		background.blitOpaque(382, 0);
+		background.quickPlotSprite(382, 0);
 
 		this.imageTitle1.bind();
-		background.blitOpaque(-255, 0);
+		background.quickPlotSprite(-255, 0);
 
 		this.imageTitle2.bind();
-		background.blitOpaque(254, 0);
+		background.quickPlotSprite(254, 0);
 
 		this.imageTitle3.bind();
-		background.blitOpaque(180, -371);
+		background.quickPlotSprite(180, -371);
 
 		this.imageTitle4.bind();
-		background.blitOpaque(180, -171);
+		background.quickPlotSprite(180, -171);
 
 		this.imageTitle5.bind();
-		background.blitOpaque(382, -265);
+		background.quickPlotSprite(382, -265);
 
 		this.imageTitle6.bind();
-		background.blitOpaque(-180, -265);
+		background.quickPlotSprite(-180, -265);
 
 		this.imageTitle7.bind();
-		background.blitOpaque(254, -171);
+		background.quickPlotSprite(254, -171);
 
 		this.imageTitle8.bind();
-		background.blitOpaque(-180, -171);
+		background.quickPlotSprite(-180, -171);
 
 		Pix32 var6 = new Pix32(this.jagTitle, "logo", 0);
 		this.imageTitle2.bind();
-		var6.draw(382 - var6.cropRight / 2 - 128, 18);
+		var6.plotSprite(382 - var6.wi / 2 - 128, 18);
 
 		Object var7 = null;
 		Object var8 = null;
@@ -5474,7 +5474,7 @@ public class Client extends GameShell {
 	public final void drawTitle() {
 		this.loadTitle();
 		this.imageTitle4.bind();
-		this.imageTitlebox.draw(0, 0);
+		this.imageTitlebox.plotSprite(0, 0);
 
 		short w = 360;
 		short h = 200;
@@ -5482,66 +5482,66 @@ public class Client extends GameShell {
 		if (this.titleScreenState == 0) {
 			int x = h / 2 + 80;
 			int y = h / 2 - 20;
-			this.fontPlain11.drawStringTaggableCenter(w / 2, true, this.onDemand.message, x, 0x75a9a9);
-			this.fontBold12.drawStringTaggableCenter(w / 2, true, "Welcome to RuneScape", y, 16776960);
+			this.fontPlain11.centreStringTag(w / 2, true, this.onDemand.message, x, 0x75a9a9);
+			this.fontBold12.centreStringTag(w / 2, true, "Welcome to RuneScape", y, 16776960);
 			y += 30;
 
 			x = w / 2 - 80;
 			y = h / 2 + 20;
-			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "New user", y + 5, 16777215);
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(x, true, "New user", y + 5, 16777215);
 
 			x = w / 2 + 80;
-			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "Existing User", y + 5, 16777215);
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(x, true, "Existing User", y + 5, 16777215);
 		} else if (this.titleScreenState == 2) {
 			int x = (w / 2) - 80;
 			int y = (h / 2) - 40;
 			if (this.loginMessage0.length() > 0) {
-				this.fontBold12.drawStringTaggableCenter(w / 2, true, this.loginMessage0, y - 15, 16776960);
-				this.fontBold12.drawStringTaggableCenter(w / 2, true, this.loginMessage1, y, 16776960);
+				this.fontBold12.centreStringTag(w / 2, true, this.loginMessage0, y - 15, 16776960);
+				this.fontBold12.centreStringTag(w / 2, true, this.loginMessage1, y, 16776960);
 				y += 30;
 			} else {
-				this.fontBold12.drawStringTaggableCenter(w / 2, true, this.loginMessage1, y - 7, 16776960);
+				this.fontBold12.centreStringTag(w / 2, true, this.loginMessage1, y - 7, 16776960);
 				y += 30;
 			}
 
-			this.fontBold12.drawStringTaggable(16777215, w / 2 - 90, true, y, "Username: " + this.username + (this.titleLoginField == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+			this.fontBold12.drawStringTag(16777215, w / 2 - 90, true, y, "Username: " + this.username + (this.titleLoginField == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 			y += 15;
 
-			this.fontBold12.drawStringTaggable(16777215, w / 2 - 88, true, y, "Password: " + JString.censor(this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+			this.fontBold12.drawStringTag(16777215, w / 2 - 88, true, y, "Password: " + JString.censor(this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 			y += 15;
 
 			x = w / 2 - 80;
 			y = h / 2 + 50;
-			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "Login", y + 5, 16777215);
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(x, true, "Login", y + 5, 16777215);
 
 			x = w / 2 + 80;
-			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "Cancel", y + 5, 16777215);
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(x, true, "Cancel", y + 5, 16777215);
 		} else if (this.titleScreenState == 3) {
 			int x = w / 2;
 			int y = h / 2 - 60;
-			this.fontBold12.drawStringTaggableCenter(x, true, "Create a free account", y, 16776960);
+			this.fontBold12.centreStringTag(x, true, "Create a free account", y, 16776960);
 
 			y = h / 2 - 35;
-			this.fontBold12.drawStringTaggableCenter(x, true, "To create a new account you need to", y, 16777215);
+			this.fontBold12.centreStringTag(x, true, "To create a new account you need to", y, 16777215);
 			y += 15;
 
-			this.fontBold12.drawStringTaggableCenter(x, true, "go back to the main RuneScape webpage", y, 16777215);
+			this.fontBold12.centreStringTag(x, true, "go back to the main RuneScape webpage", y, 16777215);
 			y += 15;
 
-			this.fontBold12.drawStringTaggableCenter(x, true, "and choose the red 'create account'", y, 16777215);
+			this.fontBold12.centreStringTag(x, true, "and choose the red 'create account'", y, 16777215);
 			y += 15;
 
-			this.fontBold12.drawStringTaggableCenter(x, true, "button at the top right of that page.", y, 16777215);
+			this.fontBold12.centreStringTag(x, true, "button at the top right of that page.", y, 16777215);
 			y += 15;
 
 			x = w / 2;
 			y = h / 2 + 50;
-			this.imageTitlebutton.draw(x - 73, y - 20);
-			this.fontBold12.drawStringTaggableCenter(x, true, "Cancel", y + 5, 16777215);
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(x, true, "Cancel", y + 5, 16777215);
 		}
 
 		this.imageTitle4.draw(super.graphics, 202, 171);
@@ -5680,102 +5680,102 @@ public class Client extends GameShell {
 
 			this.redrawSideicons = false;
 			this.areaBackhmid1.bind();
-			this.imageBackhmid1.draw(0, 0);
+			this.imageBackhmid1.plotSprite(0, 0);
 
 			if (this.sidebarInterfaceId == -1) {
 				if (this.tabInterfaceId[this.selectedTab] != -1) {
 					if (this.selectedTab == 0) {
-						this.imageRedstone1.draw(22, 10);
+						this.imageRedstone1.plotSprite(22, 10);
 					} else if (this.selectedTab == 1) {
-						this.imageRedstone2.draw(54, 8);
+						this.imageRedstone2.plotSprite(54, 8);
 					} else if (this.selectedTab == 2) {
-						this.imageRedstone2.draw(82, 8);
+						this.imageRedstone2.plotSprite(82, 8);
 					} else if (this.selectedTab == 3) {
-						this.imageRedstone3.draw(110, 8);
+						this.imageRedstone3.plotSprite(110, 8);
 					} else if (this.selectedTab == 4) {
-						this.imageRedstone2h.draw(153, 8);
+						this.imageRedstone2h.plotSprite(153, 8);
 					} else if (this.selectedTab == 5) {
-						this.imageRedstone2h.draw(181, 8);
+						this.imageRedstone2h.plotSprite(181, 8);
 					} else if (this.selectedTab == 6) {
-						this.imageRedstone1h.draw(209, 9);
+						this.imageRedstone1h.plotSprite(209, 9);
 					}
 				}
 
 				if (this.tabInterfaceId[0] != -1 && (this.flashingTab != 0 || loopCycle % 20 < 10)) {
-					this.imageSideicons[0].draw(29, 13);
+					this.imageSideicons[0].plotSprite(29, 13);
 				}
 
 				if (this.tabInterfaceId[1] != -1 && (this.flashingTab != 1 || loopCycle % 20 < 10)) {
-					this.imageSideicons[1].draw(53, 11);
+					this.imageSideicons[1].plotSprite(53, 11);
 				}
 
 				if (this.tabInterfaceId[2] != -1 && (this.flashingTab != 2 || loopCycle % 20 < 10)) {
-					this.imageSideicons[2].draw(82, 11);
+					this.imageSideicons[2].plotSprite(82, 11);
 				}
 
 				if (this.tabInterfaceId[3] != -1 && (this.flashingTab != 3 || loopCycle % 20 < 10)) {
-					this.imageSideicons[3].draw(115, 12);
+					this.imageSideicons[3].plotSprite(115, 12);
 				}
 
 				if (this.tabInterfaceId[4] != -1 && (this.flashingTab != 4 || loopCycle % 20 < 10)) {
-					this.imageSideicons[4].draw(153, 13);
+					this.imageSideicons[4].plotSprite(153, 13);
 				}
 
 				if (this.tabInterfaceId[5] != -1 && (this.flashingTab != 5 || loopCycle % 20 < 10)) {
-					this.imageSideicons[5].draw(180, 11);
+					this.imageSideicons[5].plotSprite(180, 11);
 				}
 
 				if (this.tabInterfaceId[6] != -1 && (this.flashingTab != 6 || loopCycle % 20 < 10)) {
-					this.imageSideicons[6].draw(208, 13);
+					this.imageSideicons[6].plotSprite(208, 13);
 				}
 			}
 
 			this.areaBackhmid1.draw(super.graphics, 516, 160);
 
 			this.areaBackbase2.bind();
-			this.imageBackbase2.draw(0, 0);
+			this.imageBackbase2.plotSprite(0, 0);
 
 			if (this.sidebarInterfaceId == -1) {
 				if (this.tabInterfaceId[this.selectedTab] != -1) {
 					if (this.selectedTab == 7) {
-						this.imageRedstone1v.draw(42, 0);
+						this.imageRedstone1v.plotSprite(42, 0);
 					} else if (this.selectedTab == 8) {
-						this.imageRedstone2v.draw(74, 0);
+						this.imageRedstone2v.plotSprite(74, 0);
 					} else if (this.selectedTab == 9) {
-						this.imageRedstone2v.draw(102, 0);
+						this.imageRedstone2v.plotSprite(102, 0);
 					} else if (this.selectedTab == 10) {
-						this.imageRedstone3v.draw(130, 1);
+						this.imageRedstone3v.plotSprite(130, 1);
 					} else if (this.selectedTab == 11) {
-						this.imageRedstone2hv.draw(173, 0);
+						this.imageRedstone2hv.plotSprite(173, 0);
 					} else if (this.selectedTab == 12) {
-						this.imageRedstone2hv.draw(201, 0);
+						this.imageRedstone2hv.plotSprite(201, 0);
 					} else if (this.selectedTab == 13) {
-						this.imageRedstone1hv.draw(229, 0);
+						this.imageRedstone1hv.plotSprite(229, 0);
 					}
 				}
 
 				if (this.tabInterfaceId[8] != -1 && (this.flashingTab != 8 || loopCycle % 20 < 10)) {
-					this.imageSideicons[7].draw(74, 2);
+					this.imageSideicons[7].plotSprite(74, 2);
 				}
 
 				if (this.tabInterfaceId[9] != -1 && (this.flashingTab != 9 || loopCycle % 20 < 10)) {
-					this.imageSideicons[8].draw(102, 3);
+					this.imageSideicons[8].plotSprite(102, 3);
 				}
 
 				if (this.tabInterfaceId[10] != -1 && (this.flashingTab != 10 || loopCycle % 20 < 10)) {
-					this.imageSideicons[9].draw(137, 4);
+					this.imageSideicons[9].plotSprite(137, 4);
 				}
 
 				if (this.tabInterfaceId[11] != -1 && (this.flashingTab != 11 || loopCycle % 20 < 10)) {
-					this.imageSideicons[10].draw(174, 2);
+					this.imageSideicons[10].plotSprite(174, 2);
 				}
 
 				if (this.tabInterfaceId[12] != -1 && (this.flashingTab != 12 || loopCycle % 20 < 10)) {
-					this.imageSideicons[11].draw(201, 2);
+					this.imageSideicons[11].plotSprite(201, 2);
 				}
 
 				if (this.tabInterfaceId[13] != -1 && (this.flashingTab != 13 || loopCycle % 20 < 10)) {
-					this.imageSideicons[12].draw(226, 2);
+					this.imageSideicons[12].plotSprite(226, 2);
 				}
 			}
 
@@ -5787,45 +5787,45 @@ public class Client extends GameShell {
 			this.redrawPrivacySettings = false;
 
 			this.areaBackbase1.bind();
-			this.imageBackbase1.draw(0, 0);
+			this.imageBackbase1.plotSprite(0, 0);
 
-			this.fontPlain12.drawStringTaggableCenter(55, true, "Public chat", 28, 16777215);
+			this.fontPlain12.centreStringTag(55, true, "Public chat", 28, 16777215);
 			if (this.chatPublicMode == 0) {
-				this.fontPlain12.drawStringTaggableCenter(55, true, "On", 41, 65280);
+				this.fontPlain12.centreStringTag(55, true, "On", 41, 65280);
 			}
 			if (this.chatPublicMode == 1) {
-				this.fontPlain12.drawStringTaggableCenter(55, true, "Friends", 41, 16776960);
+				this.fontPlain12.centreStringTag(55, true, "Friends", 41, 16776960);
 			}
 			if (this.chatPublicMode == 2) {
-				this.fontPlain12.drawStringTaggableCenter(55, true, "Off", 41, 16711680);
+				this.fontPlain12.centreStringTag(55, true, "Off", 41, 16711680);
 			}
 			if (this.chatPublicMode == 3) {
-				this.fontPlain12.drawStringTaggableCenter(55, true, "Hide", 41, 65535);
+				this.fontPlain12.centreStringTag(55, true, "Hide", 41, 65535);
 			}
 
-			this.fontPlain12.drawStringTaggableCenter(184, true, "Private chat", 28, 16777215);
+			this.fontPlain12.centreStringTag(184, true, "Private chat", 28, 16777215);
 			if (this.chatPrivateMode == 0) {
-				this.fontPlain12.drawStringTaggableCenter(184, true, "On", 41, 65280);
+				this.fontPlain12.centreStringTag(184, true, "On", 41, 65280);
 			}
 			if (this.chatPrivateMode == 1) {
-				this.fontPlain12.drawStringTaggableCenter(184, true, "Friends", 41, 16776960);
+				this.fontPlain12.centreStringTag(184, true, "Friends", 41, 16776960);
 			}
 			if (this.chatPrivateMode == 2) {
-				this.fontPlain12.drawStringTaggableCenter(184, true, "Off", 41, 16711680);
+				this.fontPlain12.centreStringTag(184, true, "Off", 41, 16711680);
 			}
 
-			this.fontPlain12.drawStringTaggableCenter(324, true, "Trade/duel", 28, 16777215);
+			this.fontPlain12.centreStringTag(324, true, "Trade/duel", 28, 16777215);
 			if (this.chatTradeMode == 0) {
-				this.fontPlain12.drawStringTaggableCenter(324, true, "On", 41, 65280);
+				this.fontPlain12.centreStringTag(324, true, "On", 41, 65280);
 			}
 			if (this.chatTradeMode == 1) {
-				this.fontPlain12.drawStringTaggableCenter(324, true, "Friends", 41, 16776960);
+				this.fontPlain12.centreStringTag(324, true, "Friends", 41, 16776960);
 			}
 			if (this.chatTradeMode == 2) {
-				this.fontPlain12.drawStringTaggableCenter(324, true, "Off", 41, 16711680);
+				this.fontPlain12.centreStringTag(324, true, "Off", 41, 16711680);
 			}
 
-			this.fontPlain12.drawStringTaggableCenter(458, true, "Report abuse", 33, 16777215);
+			this.fontPlain12.centreStringTag(458, true, "Report abuse", 33, 16777215);
 
 			this.areaBackbase1.draw(super.graphics, 0, 453);
 
@@ -5928,7 +5928,7 @@ public class Client extends GameShell {
 		Model.mouseX = super.mouseX - 4;
 		Model.mouseY = super.mouseY - 4;
 
-		Pix2D.clear();
+		Pix2D.cls();
 		this.scene.draw(this.cameraX, level, this.cameraYaw, this.cameraPitch, this.cameraZ, this.cameraY);
 		this.scene.clearLocChanges();
 		this.draw2DEntityElements();
@@ -5968,7 +5968,7 @@ public class Client extends GameShell {
 			}
 
 			player.lowMemory = false;
-			if ((lowMemory && this.playerCount > 50 || this.playerCount > 200) && i != -1 && player.secondarySeqId == player.readyanim) {
+			if ((lowMem && this.playerCount > 50 || this.playerCount > 200) && i != -1 && player.secondarySeqId == player.readyanim) {
 				player.lowMemory = true;
 			}
 
@@ -6243,7 +6243,7 @@ public class Client extends GameShell {
 					this.projectFromEntity(entity.height + 15, entity);
 
 					if (this.projectX > -1) {
-						this.imageHeadicon[npc.headicon].draw(this.projectX - 12, this.projectY - 30);
+						this.imageHeadicon[npc.headicon].plotSprite(this.projectX - 12, this.projectY - 30);
 					}
 				}
 
@@ -6251,7 +6251,7 @@ public class Client extends GameShell {
 					this.projectFromEntity(entity.height + 15, entity);
 
 					if (this.projectX > -1) {
-						this.imageHeadicon[2].draw(this.projectX - 12, this.projectY - 28);
+						this.imageHeadicon[2].plotSprite(this.projectX - 12, this.projectY - 28);
 					}
 				}
 			} else {
@@ -6264,7 +6264,7 @@ public class Client extends GameShell {
 					if (this.projectX > -1) {
 						for (int icon = 0; icon < 8; icon++) {
 							if ((player.headicon & 0x1 << icon) != 0) {
-								this.imageHeadicon[icon].draw(this.projectX - 12, this.projectY - y);
+								this.imageHeadicon[icon].plotSprite(this.projectX - 12, this.projectY - y);
 								y -= 25;
 							}
 						}
@@ -6275,7 +6275,7 @@ public class Client extends GameShell {
 					this.projectFromEntity(entity.height + 15, entity);
 
 					if (this.projectX > -1) {
-						this.imageHeadicon[7].draw(this.projectX - 12, this.projectY - y);
+						this.imageHeadicon[7].plotSprite(this.projectX - 12, this.projectY - y);
 					}
 				}
 			}
@@ -6284,7 +6284,7 @@ public class Client extends GameShell {
 				this.projectFromEntity(entity.height, entity);
 
 				if (this.projectX > -1 && this.chatCount < this.MAX_CHATS) {
-					this.chatWidth[this.chatCount] = this.fontBold12.stringWidth(entity.chatMessage) / 2;
+					this.chatWidth[this.chatCount] = this.fontBold12.stringWid(entity.chatMessage) / 2;
 					this.chatHeight[this.chatCount] = this.fontBold12.height;
 					this.chatX[this.chatCount] = this.projectX;
 					this.chatY[this.chatCount] = this.projectY;
@@ -6335,9 +6335,9 @@ public class Client extends GameShell {
 						this.projectY -= 10;
 					}
 
-					this.imageHitmark[entity.damageType[i]].draw(this.projectX - 12, this.projectY - 12);
-					this.fontPlain11.drawStringCenter(this.projectX, 0, String.valueOf(entity.damage[i]), this.projectY + 4);
-					this.fontPlain11.drawStringCenter(this.projectX - 1, 16777215, String.valueOf(entity.damage[i]), this.projectY + 3);
+					this.imageHitmark[entity.damageType[i]].plotSprite(this.projectX - 12, this.projectY - 12);
+					this.fontPlain11.centreString(this.projectX, 0, String.valueOf(entity.damage[i]), this.projectY + 4);
+					this.fontPlain11.centreString(this.projectX - 1, 16777215, String.valueOf(entity.damage[i]), this.projectY + 3);
 				}
 			}
 		}
@@ -6404,22 +6404,22 @@ public class Client extends GameShell {
 				}
 
 				if (this.chatEffect[i] == 0) {
-					this.fontBold12.drawStringCenter(this.projectX, 0, message, this.projectY + 1);
-					this.fontBold12.drawStringCenter(this.projectX, color, message, this.projectY);
+					this.fontBold12.centreString(this.projectX, 0, message, this.projectY + 1);
+					this.fontBold12.centreString(this.projectX, color, message, this.projectY);
 				} else if (this.chatEffect[i] == 1) {
-					this.fontBold12.drawStringCenterWave(this.projectY + 1, this.sceneCycle, message, this.projectX, 0);
-					this.fontBold12.drawStringCenterWave(this.projectY, this.sceneCycle, message, this.projectX, color);
+					this.fontBold12.centreStringWave(this.projectY + 1, this.sceneCycle, message, this.projectX, 0);
+					this.fontBold12.centreStringWave(this.projectY, this.sceneCycle, message, this.projectX, color);
 				} else if (this.chatEffect[i] == 2) {
-					int w = this.fontBold12.stringWidth(message);
+					int w = this.fontBold12.stringWid(message);
 					int offsetX = (150 - this.chatTimer[i]) * (w + 100) / 150;
-					Pix2D.setBounds(this.projectX + 50, 334, 0, this.projectX - 50);
+					Pix2D.setClipping(this.projectX + 50, 334, 0, this.projectX - 50);
 					this.fontBold12.drawString(message, 0, this.projectY + 1, this.projectX + 50 - offsetX);
 					this.fontBold12.drawString(message, color, this.projectY, this.projectX + 50 - offsetX);
-					Pix2D.resetBounds();
+					Pix2D.resetClipping();
 				}
 			} else {
-				this.fontBold12.drawStringCenter(this.projectX, 0, message, this.projectY + 1);
-				this.fontBold12.drawStringCenter(this.projectX, 16776960, message, this.projectY);
+				this.fontBold12.centreString(this.projectX, 0, message, this.projectY + 1);
+				this.fontBold12.centreString(this.projectX, 16776960, message, this.projectY);
 			}
 		}
 	}
@@ -6434,7 +6434,7 @@ public class Client extends GameShell {
 		this.projectFromGround((this.hintTileZ - this.sceneBaseTileZ << 7) + this.hintOffsetZ, this.hintHeight * 2, (this.hintTileX - this.sceneBaseTileX << 7) + this.hintOffsetX);
 
 		if (this.projectX > -1 && loopCycle % 20 < 10) {
-			this.imageHeadicon[2].draw(this.projectX - 12, this.projectY - 28);
+			this.imageHeadicon[2].plotSprite(this.projectX - 12, this.projectY - 28);
 		}
 	}
 
@@ -6505,14 +6505,14 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.j(II)V")
 	public final void updateTextures(int cycle) {
-		if (lowMemory) {
+		if (lowMem) {
 			return;
 		}
 
 		if (Pix3D.textureCycle[17] >= cycle) {
 			Pix8 texture = Pix3D.textures[17];
-			int bottom = texture.cropBottom * texture.cropRight - 1;
-			int adjustment = this.sceneDelta * texture.cropRight * 2;
+			int bottom = texture.hi * texture.wi - 1;
+			int adjustment = this.sceneDelta * texture.wi * 2;
 
 			byte[] src = texture.pixels;
 			byte[] dst = this.textureBuffer;
@@ -6527,8 +6527,8 @@ public class Client extends GameShell {
 
 		if (Pix3D.textureCycle[24] >= cycle) {
 			Pix8 texture = Pix3D.textures[24];
-			int bottom = texture.cropBottom * texture.cropRight - 1;
-			int adjustment = this.sceneDelta * texture.cropRight * 2;
+			int bottom = texture.hi * texture.wi - 1;
+			int adjustment = this.sceneDelta * texture.wi * 2;
 
 			byte[] src = texture.pixels;
 			byte[] dst = this.textureBuffer;
@@ -6547,9 +6547,9 @@ public class Client extends GameShell {
 		this.drawPrivateMessages();
 
 		if (this.crossMode == 1) {
-			this.imageCross[this.crossCycle / 100].draw(this.crossX - 8 - 4, this.crossY - 8 - 4);
+			this.imageCross[this.crossCycle / 100].plotSprite(this.crossX - 8 - 4, this.crossY - 8 - 4);
 		} else if (this.crossMode == 2) {
-			this.imageCross[this.crossCycle / 100 + 4].draw(this.crossX - 8 - 4, this.crossY - 8 - 4);
+			this.imageCross[this.crossCycle / 100 + 4].plotSprite(this.crossX - 8 - 4, this.crossY - 8 - 4);
 		}
 
 		if (this.viewportOverlayInterfaceId != -1) {
@@ -6562,7 +6562,7 @@ public class Client extends GameShell {
 
 			for (int i = 0; i < 30; i++) {
 				int w = (30 - i) * 16;
-				Pix2D.drawHorizontalLineTrans(offset + i, w, 16776960, 256 - w / 2, this.field1264);
+				Pix2D.hlineTrans(offset + i, w, 16776960, 256 - w / 2, this.field1264);
 			}
 		}
 
@@ -6582,20 +6582,20 @@ public class Client extends GameShell {
 
 		if (this.inMultizone == 1) {
 			if (this.wildernessLevel > 0 || this.worldLocationState == 1) {
-				this.imageHeadicon[1].draw(472, 258);
+				this.imageHeadicon[1].plotSprite(472, 258);
 			} else {
-				this.imageHeadicon[1].draw(472, 296);
+				this.imageHeadicon[1].plotSprite(472, 296);
 			}
 		}
 
 		if (this.wildernessLevel > 0) {
-			this.imageHeadicon[0].draw(472, 296);
-			this.fontPlain12.drawStringCenter(484, 16776960, "Level: " + this.wildernessLevel, 329);
+			this.imageHeadicon[0].plotSprite(472, 296);
+			this.fontPlain12.centreString(484, 16776960, "Level: " + this.wildernessLevel, 329);
 		}
 
 		if (this.worldLocationState == 1) {
-			this.imageHeadicon[6].draw(472, 296);
-			this.fontPlain12.drawStringCenter(484, 16776960, "Arena", 329);
+			this.imageHeadicon[6].plotSprite(472, 296);
+			this.fontPlain12.centreString(484, 16776960, "Arena", 329);
 		}
 
 		if (this.systemUpdateTimer != 0) {
@@ -6647,13 +6647,13 @@ public class Client extends GameShell {
 
 				font.drawString("From", 0, y, x);
 				font.drawString("From", 65535, y - 1, x);
-				x += font.stringWidth("From ");
+				x += font.stringWid("From ");
 
 				if (modlevel == 1) {
-					this.imageModIcons[0].draw(x, y - 12);
+					this.imageModIcons[0].plotSprite(x, y - 12);
 					x += 14;
 				} else if (modlevel == 2) {
-					this.imageModIcons[1].draw(x, y - 12);
+					this.imageModIcons[1].plotSprite(x, y - 12);
 					x += 14;
 				}
 
@@ -6757,7 +6757,7 @@ public class Client extends GameShell {
 			tooltip = tooltip + "@whi@ / " + (this.menuSize - 2) + " more options";
 		}
 
-		this.fontBold12.drawStringTooltip(true, loopCycle / 1000, 4, 15, 16777215, tooltip);
+		this.fontBold12.drawStringAntiMacro(true, loopCycle / 1000, 4, 15, 16777215, tooltip);
 	}
 
 	@ObfuscatedName("client.g(B)V")
@@ -6795,7 +6795,7 @@ public class Client extends GameShell {
 				rgb = 16776960;
 			}
 
-			this.fontBold12.drawStringTaggable(rgb, x + 3, true, optionY, this.menuOption[i]);
+			this.fontBold12.drawStringTag(rgb, x + 3, true, optionY, this.menuOption[i]);
 		}
 	}
 
@@ -6881,9 +6881,9 @@ public class Client extends GameShell {
 			} else {
 				Pix8 scene = this.imageMapscene[loc.mapscene];
 				if (scene != null) {
-					int offsetX = (loc.width * 4 - scene.cropRight) / 2;
-					int offsetY = (loc.length * 4 - scene.cropBottom) / 2;
-					scene.draw(tileX * 4 + 48 + offsetX, (104 - tileZ - loc.length) * 4 + 48 + offsetY);
+					int offsetX = (loc.width * 4 - scene.wi) / 2;
+					int offsetY = (loc.length * 4 - scene.hi) / 2;
+					scene.plotSprite(tileX * 4 + 48 + offsetX, (104 - tileZ - loc.length) * 4 + 48 + offsetY);
 				}
 			}
 		}
@@ -6921,9 +6921,9 @@ public class Client extends GameShell {
 			} else {
 				Pix8 scene = this.imageMapscene[loc.mapscene];
 				if (scene != null) {
-					int offsetX = (loc.width * 4 - scene.cropRight) / 2;
-					int offsetY = (loc.length * 4 - scene.cropBottom) / 2;
-					scene.draw(tileX * 4 + 48 + offsetX, (104 - tileZ - loc.length) * 4 + 48 + offsetY);
+					int offsetX = (loc.width * 4 - scene.wi) / 2;
+					int offsetY = (loc.length * 4 - scene.hi) / 2;
+					scene.plotSprite(tileX * 4 + 48 + offsetX, (104 - tileZ - loc.length) * 4 + 48 + offsetY);
 				}
 			}
 		}
@@ -6936,9 +6936,9 @@ public class Client extends GameShell {
 			if (loc.mapscene != -1) {
 				Pix8 scene = this.imageMapscene[loc.mapscene];
 				if (scene != null) {
-					int offsetX = (loc.width * 4 - scene.cropRight) / 2;
-					int offsetY = (loc.length * 4 - scene.cropBottom) / 2;
-					scene.draw(tileX * 4 + 48 + offsetX, (104 - tileZ - loc.length) * 4 + 48 + offsetY);
+					int offsetX = (loc.width * 4 - scene.wi) / 2;
+					int offsetY = (loc.length * 4 - scene.hi) / 2;
+					scene.plotSprite(tileX * 4 + 48 + offsetX, (104 - tileZ - loc.length) * 4 + 48 + offsetY);
 				}
 			}
 		}
@@ -7538,7 +7538,7 @@ public class Client extends GameShell {
 					id = -1;
 				}
 
-				if (this.nextMidiSong != id && this.midiActive && !lowMemory) {
+				if (this.nextMidiSong != id && this.midiActive && !lowMem) {
 					this.midiSong = id;
 					this.midiFading = true;
 					this.onDemand.request(2, this.midiSong);
@@ -7556,7 +7556,7 @@ public class Client extends GameShell {
 				int id = this.in.g2();
 				int delay = this.in.g2();
 
-				if (this.midiActive && !lowMemory) {
+				if (this.midiActive && !lowMem) {
 					this.midiSong = id;
 					this.midiFading = false;
 					this.onDemand.request(2, this.midiSong);
@@ -7675,7 +7675,7 @@ public class Client extends GameShell {
 				int loop = this.in.g1();
 				int delay = this.in.g2();
 
-				if (this.waveEnabled && !lowMemory && this.waveCount < 50) {
+				if (this.waveEnabled && !lowMem && this.waveCount < 50) {
 					this.waveIds[this.waveCount] = id;
 					this.waveLoops[this.waveCount] = loop;
 					this.waveDelay[this.waveCount] = Wave.delays[id] + delay;
@@ -7727,8 +7727,8 @@ public class Client extends GameShell {
 				this.sceneLoadStartTime = System.currentTimeMillis();
 
 				this.areaViewport.bind();
-				this.fontPlain12.drawStringCenter(257, 0, "Loading - please wait.", 151);
-				this.fontPlain12.drawStringCenter(256, 16777215, "Loading - please wait.", 150);
+				this.fontPlain12.centreString(257, 0, "Loading - please wait.", 151);
+				this.fontPlain12.centreString(256, 16777215, "Loading - please wait.", 150);
 				this.areaViewport.draw(super.graphics, 4, 4);
 
 				int regions = 0;
@@ -8820,7 +8820,7 @@ public class Client extends GameShell {
 			return;
 		}
 
-		if (lowMemory && this.currentLevel != level) {
+		if (lowMem && this.currentLevel != level) {
 			return;
 		}
 
@@ -9158,7 +9158,7 @@ public class Client extends GameShell {
 
 			int delay = buf.g1();
 			if (player.primarySeqId == seqId && seqId != -1) {
-				int replaceMode = SeqType.types[seqId].restart_mode;
+				int replaceMode = SeqType.types[seqId].duplicatebehavior;
 
 				if (replaceMode == 1) {
 					player.primarySeqFrame = 0;
@@ -9479,7 +9479,7 @@ public class Client extends GameShell {
 				int delay = buf.g1();
 
 				if (npc.primarySeqId == seqId && seqId != -1) {
-					int restartMode = SeqType.types[seqId].restart_mode;
+					int restartMode = SeqType.types[seqId].duplicatebehavior;
 
 					if (restartMode == 1) {
 						npc.primarySeqFrame = 0;
@@ -9565,10 +9565,10 @@ public class Client extends GameShell {
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.k(B)V")
 	public final void showContextMenu() {
-		int width = this.fontBold12.stringWidth("Choose Option");
+		int width = this.fontBold12.stringWid("Choose Option");
 
 		for (int i = 0; i < this.menuSize; i++) {
-			int maxWidth = this.fontBold12.stringWidth(this.menuOption[i]);
+			int maxWidth = this.fontBold12.stringWid(this.menuOption[i]);
 			if (maxWidth > width) {
 				width = maxWidth;
 			}
@@ -10524,7 +10524,7 @@ public class Client extends GameShell {
 		int top = Pix2D.top;
 		int right = Pix2D.right;
 		int bottom = Pix2D.bottom;
-		Pix2D.setBounds(com.width + x, com.height + y, y, x);
+		Pix2D.setClipping(com.width + x, com.height + y, y, x);
 
 		int children = com.children.length;
 		for (int i = 0; i < children; i++) {
@@ -10597,7 +10597,7 @@ public class Client extends GameShell {
 												dy = 0;
 											}
 
-											icon.drawAlpha(slotX + dx, 128, slotY + dy);
+											icon.transPlotSprite(slotX + dx, 128, slotY + dy);
 
 											if (slotY + dy < Pix2D.top && com.scrollPosition > 0) {
 												int autoscroll = (Pix2D.top - slotY - dy) * this.sceneDelta / 3;
@@ -10627,12 +10627,12 @@ public class Client extends GameShell {
 												this.objGrabY -= autoscroll;
 											}
 										} else if (this.selectedArea != 0 && this.selectedItem == slot && this.selectedInterface == child.id) {
-											icon.drawAlpha(slotX, 128, slotY);
+											icon.transPlotSprite(slotX, 128, slotY);
 										} else {
-											icon.draw(slotX, slotY);
+											icon.plotSprite(slotX, slotY);
 										}
 
-										if (icon.width == 33 || child.invSlotObjCount[slot] != 1) {
+										if (icon.owi == 33 || child.invSlotObjCount[slot] != 1) {
 											int count = child.invSlotObjCount[slot];
 											this.fontPlain11.drawString(formatObjCount(count), 0, slotY + 10 + dy, slotX + 1 + dx);
 											this.fontPlain11.drawString(formatObjCount(count), 16776960, slotY + 9 + dy, slotX + dx);
@@ -10642,7 +10642,7 @@ public class Client extends GameShell {
 							} else if (child.invSlotGraphic != null && slot < 20) {
 								Pix32 image = child.invSlotGraphic[slot];
 								if (image != null) {
-									image.draw(slotX, slotY);
+									image.plotSprite(slotX, slotY);
 								}
 							}
 							slot++;
@@ -10739,9 +10739,9 @@ public class Client extends GameShell {
 						}
 
 						if (child.center) {
-							font.drawStringTaggableCenter(child.width / 2 + childX, child.shadowed, split, lineY, colour);
+							font.centreStringTag(child.width / 2 + childX, child.shadowed, split, lineY, colour);
 						} else {
-							font.drawStringTaggable(colour, childX, child.shadowed, lineY, split);
+							font.drawStringTag(colour, childX, child.shadowed, lineY, split);
 						}
 
 						lineY += font.height;
@@ -10755,7 +10755,7 @@ public class Client extends GameShell {
 					}
 
 					if (image != null) {
-						image.draw(childX, childY);
+						image.plotSprite(childX, childY);
 					}
 				} else if (child.type == 6) {
 					int tmpX = Pix3D.centerX;
@@ -10807,9 +10807,9 @@ public class Client extends GameShell {
 								int textY = (child.marginY + 12) * row + childY;
 
 								if (child.center) {
-									font.drawStringTaggableCenter(child.width / 2 + textX, child.shadowed, text, textY, child.colour);
+									font.centreStringTag(child.width / 2 + textX, child.shadowed, text, textY, child.colour);
 								} else {
-									font.drawStringTaggable(child.colour, textX, child.shadowed, textY, text);
+									font.drawStringTag(child.colour, textX, child.shadowed, textY, text);
 								}
 							}
 
@@ -10820,13 +10820,13 @@ public class Client extends GameShell {
 			}
 		}
 
-		Pix2D.setBounds(right, bottom, top, left);
+		Pix2D.setClipping(right, bottom, top, left);
 	}
 
 	@ObfuscatedName("client.a(IIIIBI)V")
 	public final void drawScrollbar(int x, int scrollHeight, int y, int scrollY, int height) {
-		this.imageScrollbar0.draw(x, y);
-		this.imageScrollbar1.draw(x, y + height - 16);
+		this.imageScrollbar0.plotSprite(x, y);
+		this.imageScrollbar1.plotSprite(x, y + height - 16);
 		Pix2D.fillRect(this.SCROLLBAR_TRACK, 16, height - 32, x, y + 16);
 
 		int gripSize = (height - 32) * height / scrollHeight;
@@ -10837,17 +10837,17 @@ public class Client extends GameShell {
 		int gripY = (height - 32 - gripSize) * scrollY / (scrollHeight - height);
 		Pix2D.fillRect(this.SCROLLBAR_GRIP_FOREGROUND, 16, gripSize, x, y + 16 + gripY);
 
-		Pix2D.drawVerticalLine(x, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
-		Pix2D.drawVerticalLine(x + 1, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
+		Pix2D.vline(x, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
+		Pix2D.vline(x + 1, this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, gripSize);
 
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, 16, x);
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 17 + gripY, 16, x);
+		Pix2D.hline(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 16 + gripY, 16, x);
+		Pix2D.hline(this.SCROLLBAR_GRIP_HIGHLIGHT, y + 17 + gripY, 16, x);
 
-		Pix2D.drawVerticalLine(x + 15, this.SCROLLBAR_GRIP_LOWLIGHT, y + 16 + gripY, gripSize);
-		Pix2D.drawVerticalLine(x + 14, this.SCROLLBAR_GRIP_LOWLIGHT, y + 17 + gripY, gripSize - 1);
+		Pix2D.vline(x + 15, this.SCROLLBAR_GRIP_LOWLIGHT, y + 16 + gripY, gripSize);
+		Pix2D.vline(x + 14, this.SCROLLBAR_GRIP_LOWLIGHT, y + 17 + gripY, gripSize - 1);
 
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_LOWLIGHT, y + 15 + gripY + gripSize, 16, x);
-		Pix2D.drawHorizontalLine(this.SCROLLBAR_GRIP_LOWLIGHT, y + 14 + gripY + gripSize, 15, x + 1);
+		Pix2D.hline(this.SCROLLBAR_GRIP_LOWLIGHT, y + 15 + gripY + gripSize, 16, x);
+		Pix2D.hline(this.SCROLLBAR_GRIP_LOWLIGHT, y + 14 + gripY + gripSize, 15, x + 1);
 	}
 
 	@ObfuscatedName("client.h(II)Ljava/lang/String;")
@@ -11329,10 +11329,10 @@ public class Client extends GameShell {
 						child.seqCycle -= seq.getFrameDuration(child.seqFrame) + 1;
 						child.seqFrame++;
 
-						if (child.seqFrame >= seq.frameCount) {
-							child.seqFrame -= seq.replayoff;
+						if (child.seqFrame >= seq.numFrames) {
+							child.seqFrame -= seq.loops;
 
-							if (child.seqFrame < 0 || child.seqFrame >= seq.frameCount) {
+							if (child.seqFrame < 0 || child.seqFrame >= seq.numFrames) {
 								child.seqFrame = 0;
 							}
 						}
@@ -11357,13 +11357,13 @@ public class Client extends GameShell {
 		int value = this.varps[id];
 		if (clientCode == 1) {
 			if (value == 1) {
-				Pix3D.setBrightness(0.9D);
+				Pix3D.initColourTable(0.9D);
 			} else if (value == 2) {
-				Pix3D.setBrightness(0.8D);
+				Pix3D.initColourTable(0.8D);
 			} else if (value == 3) {
-				Pix3D.setBrightness(0.7D);
+				Pix3D.initColourTable(0.7D);
 			} else if (value == 4) {
-				Pix3D.setBrightness(0.6D);
+				Pix3D.initColourTable(0.6D);
 			}
 
 			ObjType.iconCache.clear();
@@ -11387,7 +11387,7 @@ public class Client extends GameShell {
 				this.midiActive = false;
 			}
 
-			if (this.midiActive != lastMidiActive && !lowMemory) {
+			if (this.midiActive != lastMidiActive && !lowMem) {
 				if (this.midiActive) {
 					this.midiSong = this.nextMidiSong;
 					this.midiFading = false;
@@ -11495,7 +11495,7 @@ public class Client extends GameShell {
 			if (this.updateDesignModel) {
 				for (int i = 0; i < 7; i++) {
 					int kit = this.designKits[i];
-					if (kit >= 0 && !IdkType.types[kit].modelIsReady()) {
+					if (kit >= 0 && !IdkType.types[kit].checkModel()) {
 						return;
 					}
 				}
@@ -11787,7 +11787,7 @@ public class Client extends GameShell {
 		this.areaSidebar.bind();
 		Pix3D.lineOffset = this.areaSidebarOffset;
 
-		this.imageInvback.draw(0, 0);
+		this.imageInvback.plotSprite(0, 0);
 
 		if (this.sidebarInterfaceId != -1) {
 			this.drawInterface(0, 0, Component.types[this.sidebarInterfaceId], 0);
@@ -11810,17 +11810,17 @@ public class Client extends GameShell {
 		this.areaChatback.bind();
 		Pix3D.lineOffset = this.areaChatbackOffset;
 
-		this.imageChatback.draw(0, 0);
+		this.imageChatback.plotSprite(0, 0);
 
 		if (this.showSocialInput) {
-			this.fontBold12.drawStringCenter(239, 0, this.socialMessage, 40);
-			this.fontBold12.drawStringCenter(239, 128, this.socialInput + "*", 60);
+			this.fontBold12.centreString(239, 0, this.socialMessage, 40);
+			this.fontBold12.centreString(239, 128, this.socialInput + "*", 60);
 		} else if (this.chatbackInputOpen) {
-			this.fontBold12.drawStringCenter(239, 0, "Enter amount:", 40);
-			this.fontBold12.drawStringCenter(239, 128, this.chatbackInput + "*", 60);
+			this.fontBold12.centreString(239, 0, "Enter amount:", 40);
+			this.fontBold12.centreString(239, 128, this.chatbackInput + "*", 60);
 		} else if (this.modalMessage != null) {
-			this.fontBold12.drawStringCenter(239, 0, this.modalMessage, 40);
-			this.fontBold12.drawStringCenter(239, 128, "Click to continue", 60);
+			this.fontBold12.centreString(239, 0, this.modalMessage, 40);
+			this.fontBold12.centreString(239, 128, "Click to continue", 60);
 		} else if (this.chatInterfaceId != -1) {
 			this.drawInterface(0, 0, Component.types[this.chatInterfaceId], 0);
 		} else if (this.stickyChatInterfaceId != -1) {
@@ -11829,7 +11829,7 @@ public class Client extends GameShell {
 			PixFont font = this.fontPlain12;
 			int line = 0;
 
-			Pix2D.setBounds(463, 77, 0, 0);
+			Pix2D.setClipping(463, 77, 0, 0);
 
 			for (int i = 0; i < 100; i++) {
 				if (this.messageText[i] != null) {
@@ -11857,15 +11857,15 @@ public class Client extends GameShell {
 						if (y > 0 && y < 110) {
 							int x = 4;
 							if (modicon == 1) {
-								this.imageModIcons[0].draw(x, y - 12);
+								this.imageModIcons[0].plotSprite(x, y - 12);
 								x += 14;
 							} else if (modicon == 2) {
-								this.imageModIcons[1].draw(x, y - 12);
+								this.imageModIcons[1].plotSprite(x, y - 12);
 								x += 14;
 							}
 							font.drawString(sender + ":", 0, y, x);
 
-							x += font.stringWidth(sender) + 8;
+							x += font.stringWid(sender) + 8;
 							font.drawString(this.messageText[i], 255, y, x);
 						}
 
@@ -11875,18 +11875,18 @@ public class Client extends GameShell {
 							int x = 4;
 
 							font.drawString("From", 0, y, x);
-							x += font.stringWidth("From ");
+							x += font.stringWid("From ");
 
 							if (modicon == 1) {
-								this.imageModIcons[0].draw(x, y - 12);
+								this.imageModIcons[0].plotSprite(x, y - 12);
 								x += 14;
 							} else if (modicon == 2) {
-								this.imageModIcons[1].draw(x, y - 12);
+								this.imageModIcons[1].plotSprite(x, y - 12);
 								x += 14;
 							}
 
 							font.drawString(sender + ":", 0, y, x);
-							x += font.stringWidth(sender) + 8;
+							x += font.stringWid(sender) + 8;
 
 							font.drawString(this.messageText[i], 0x800000, y, x);
 						}
@@ -11907,7 +11907,7 @@ public class Client extends GameShell {
 					} else if (type == 6 && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
 						if (y > 0 && y < 110) {
 							font.drawString("To " + sender + ":", 0, y, 4);
-							font.drawString(this.messageText[i], 0x800000, y, font.stringWidth("To " + sender) + 12);
+							font.drawString(this.messageText[i], 0x800000, y, font.stringWid("To " + sender) + 12);
 						}
 
 						line++;
@@ -11921,7 +11921,7 @@ public class Client extends GameShell {
 				}
 			}
 
-			Pix2D.resetBounds();
+			Pix2D.resetClipping();
 
 			this.chatScrollHeight = line * 14 + 7;
 			if (this.chatScrollHeight < 78) {
@@ -11938,9 +11938,9 @@ public class Client extends GameShell {
 			}
 
 			font.drawString(username + ":", 0, 90, 4);
-			font.drawString(this.chatTyped + "*", 255, 90, font.stringWidth(username + ": ") + 6);
+			font.drawString(this.chatTyped + "*", 255, 90, font.stringWid(username + ": ") + 6);
 
-			Pix2D.drawHorizontalLine(0, 77, 479, 0);
+			Pix2D.hline(0, 77, 479, 0);
 		}
 
 		if (this.menuVisible && this.menuArea == 2) {
@@ -12024,19 +12024,19 @@ public class Client extends GameShell {
 				if (npc != null) {
 					int x = npc.x / 32 - localPlayer.x / 32;
 					int y = npc.z / 32 - localPlayer.z / 32;
-					this.drawMinimapHint(x, y, this.imageMapmarker1);
+					this.drawMinimapArrow(x, y, this.imageMapmarker1);
 				}
 			} else if (this.hintType == 2) {
 				int x = (this.hintTileX - this.sceneBaseTileX) * 4 + 2 - localPlayer.x / 32;
 				int y = (this.hintTileZ - this.sceneBaseTileZ) * 4 + 2 - localPlayer.z / 32;
-				this.drawMinimapHint(x, y, this.imageMapmarker1);
+				this.drawMinimapArrow(x, y, this.imageMapmarker1);
 			} else if (this.hintType == 10 && this.hintPlayer >= 0 && this.hintPlayer < this.players.length) {
 				ClientPlayer player = this.players[this.hintPlayer];
 
 				if (player != null) {
 					int x = player.x / 32 - localPlayer.x / 32;
 					int y = player.z / 32 - localPlayer.z / 32;
-					this.drawMinimapHint(x, y, this.imageMapmarker1);
+					this.drawMinimapArrow(x, y, this.imageMapmarker1);
 				}
 			}
 		}
@@ -12054,7 +12054,7 @@ public class Client extends GameShell {
 
 	// note: placement confirmed by referencing OS1
 	@ObfuscatedName("client.a(IBILjb;)V")
-	public final void drawMinimapHint(int dx, int dy, Pix32 image) {
+	public final void drawMinimapArrow(int dx, int dy, Pix32 image) {
 		int distance = dx * dx + dy * dy;
 		if (distance <= 4225 || distance >= 90000) {
 			this.drawOnMinimap(dx, image, dy);
@@ -12099,9 +12099,9 @@ public class Client extends GameShell {
 		int y = (dy * cosAngle - dx * sinAngle) >> 16;
 
 		if (distance > 2500) {
-			image.drawMasked(this.imageMapback, x + 94 - (image.width / 2) + 4, 83 - y - (image.height / 2) - 4);
+			image.drawMasked(this.imageMapback, x + 94 - (image.owi / 2) + 4, 83 - y - (image.ohi / 2) - 4);
 		} else {
-			image.draw(x + 94 - image.width / 2 + 4, 83 - y - image.height / 2 - 4);
+			image.plotSprite(x + 94 - image.owi / 2 + 4, 83 - y - image.ohi / 2 - 4);
 		}
 	}
 
@@ -12280,7 +12280,7 @@ public class Client extends GameShell {
 
 			try {
 				Thread.sleep(50L);
-			} catch (Exception var2) {
+			} catch (Exception ignore) {
 			}
 		}
 
@@ -12446,11 +12446,11 @@ public class Client extends GameShell {
 		if (image != null) {
 			int off = 0;
 
-			for (int y = 0; y < image.cropBottom; y++) {
-				for (int x = 0; x < image.cropRight; x++) {
+			for (int y = 0; y < image.hi; y++) {
+				for (int x = 0; x < image.wi; x++) {
 					if (image.pixels[off++] != 0) {
-						int x0 = x + 16 + image.cropLeft;
-						int y0 = y + 16 + image.cropTop;
+						int x0 = x + 16 + image.xof;
+						int y0 = y + 16 + image.yof;
 						int index = (y0 << 7) + x0;
 
 						this.flameBuffer0[index] = 0;

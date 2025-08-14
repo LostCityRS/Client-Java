@@ -202,7 +202,7 @@ public class Model extends ModelSource {
 	public static int[] cosTable = Pix3D.cosTable;
 
 	@ObfuscatedName("fb.Nb")
-	public static int[] palette = Pix3D.palette;
+	public static int[] colourTable = Pix3D.colourTable;
 
 	@ObfuscatedName("fb.Ob")
 	public static int[] divTable2 = Pix3D.divTable2;
@@ -248,7 +248,7 @@ public class Model extends ModelSource {
 		tmpPriorityDepthSum = null;
 		sinTable = null;
 		cosTable = null;
-		palette = null;
+		colourTable = null;
 		divTable2 = null;
 	}
 
@@ -369,7 +369,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(I)Z")
-	public static boolean isReady(int id) {
+	public static boolean request(int id) {
 		if (meta == null) {
 			return false;
 		}
@@ -1162,9 +1162,9 @@ public class Model extends ModelSource {
 		baseY = 0;
 		baseZ = 0;
 
-		for (int i = 0; i < frame.length; i++) {
-			int group = frame.groups[i];
-			this.applyTransform(base.types[group], base.labels[group], frame.x[i], frame.y[i], frame.z[i]);
+		for (int i = 0; i < frame.size; i++) {
+			int group = frame.ti[i];
+			this.applyTransform(base.types[group], base.labels[group], frame.tx[i], frame.ty[i], frame.tz[i]);
 		}
 	}
 
@@ -1193,13 +1193,13 @@ public class Model extends ModelSource {
 		byte var8 = 0;
 		int var16 = var8 + 1;
 		int var9 = arg3[var8];
-		for (int var10 = 0; var10 < var5.length; var10++) {
-			int var15 = var5.groups[var10];
+		for (int var10 = 0; var10 < var5.size; var10++) {
+			int var15 = var5.ti[var10];
 			while (var15 > var9) {
 				var9 = arg3[var16++];
 			}
 			if (var9 != var15 || var7.types[var15] == 0) {
-				this.applyTransform(var7.types[var15], var7.labels[var15], var5.x[var10], var5.y[var10], var5.z[var10]);
+				this.applyTransform(var7.types[var15], var7.labels[var15], var5.tx[var10], var5.ty[var10], var5.tz[var10]);
 			}
 		}
 		baseX = 0;
@@ -1208,13 +1208,13 @@ public class Model extends ModelSource {
 		byte var11 = 0;
 		int var17 = var11 + 1;
 		int var12 = arg3[var11];
-		for (int var13 = 0; var13 < var6.length; var13++) {
-			int var14 = var6.groups[var13];
+		for (int var13 = 0; var13 < var6.size; var13++) {
+			int var14 = var6.ti[var13];
 			while (var14 > var12) {
 				var12 = arg3[var17++];
 			}
 			if (var12 == var14 || var7.types[var14] == 0) {
-				this.applyTransform(var7.types[var14], var7.labels[var14], var6.x[var13], var6.y[var13], var6.z[var13]);
+				this.applyTransform(var7.types[var14], var7.labels[var14], var6.tx[var13], var6.ty[var13], var6.tz[var13]);
 			}
 		}
 	}
@@ -1922,7 +1922,7 @@ public class Model extends ModelSource {
 		if (var5 == 0) {
 			Pix3D.gouraudTriangle(vertexScreenY[var2], vertexScreenY[var3], vertexScreenY[var4], vertexScreenX[var2], vertexScreenX[var3], vertexScreenX[var4], this.faceColourA[arg0], this.faceColourB[arg0], this.faceColourC[arg0]);
 		} else if (var5 == 1) {
-			Pix3D.flatTriangle(vertexScreenY[var2], vertexScreenY[var3], vertexScreenY[var4], vertexScreenX[var2], vertexScreenX[var3], vertexScreenX[var4], palette[this.faceColourA[arg0]]);
+			Pix3D.flatTriangle(vertexScreenY[var2], vertexScreenY[var3], vertexScreenY[var4], vertexScreenX[var2], vertexScreenX[var3], vertexScreenX[var4], colourTable[this.faceColourA[arg0]]);
 		} else if (var5 == 2) {
 			int var6 = this.faceInfo[arg0] >> 2;
 			int var7 = this.texturedVertexA[var6];
@@ -2035,7 +2035,7 @@ public class Model extends ModelSource {
 			if (var32 == 0) {
 				Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, clippedColour[0], clippedColour[1], clippedColour[2]);
 			} else if (var32 == 1) {
-				Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, palette[this.faceColourA[arg0]]);
+				Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, colourTable[this.faceColourA[arg0]]);
 			} else if (var32 == 2) {
 				int var33 = this.faceInfo[arg0] >> 2;
 				int var34 = this.texturedVertexA[var33];
@@ -2068,7 +2068,7 @@ public class Model extends ModelSource {
 			return;
 		}
 		if (var41 == 1) {
-			int var42 = palette[this.faceColourA[arg0]];
+			int var42 = colourTable[this.faceColourA[arg0]];
 			Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, var42);
 			Pix3D.flatTriangle(var29, var31, clippedY[3], var26, var28, clippedX[3], var42);
 			return;

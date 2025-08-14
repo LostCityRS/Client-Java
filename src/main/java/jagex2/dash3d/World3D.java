@@ -9,7 +9,7 @@ import jagex2.graphics.Pix3D;
 public class World3D {
 
 	@ObfuscatedName("s.g")
-	public static boolean lowMemory = true;
+	public static boolean lowMem = true;
 
 	@ObfuscatedName("s.h")
 	public int maxLevel;
@@ -1778,7 +1778,7 @@ public class World3D {
 				if (arg0.neColour != 12345678) {
 					Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, arg0.neColour, arg0.field262, arg0.field260);
 				}
-			} else if (lowMemory) {
+			} else if (lowMem) {
 				int var53 = TEXTURE_HSL[arg0.textureId];
 				Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, this.mulLightness(arg0.neColour, var53), this.mulLightness(arg0.field262, var53), this.mulLightness(arg0.field260, var53));
 			} else if (arg0.field264) {
@@ -1799,7 +1799,7 @@ public class World3D {
 			clickTileZ = arg7;
 		}
 		if (arg0.textureId != -1) {
-			if (!lowMemory) {
+			if (!lowMem) {
 				Pix3D.textureTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.textureId);
 				return;
 			}
@@ -1858,7 +1858,7 @@ public class World3D {
 					if (arg4.triangleColourA[var12] != 12345678) {
 						Pix3D.gouraudTriangle(var19, var20, var21, var16, var17, var18, arg4.triangleColourA[var12], arg4.triangleColourB[var12], arg4.triangleColourC[var12]);
 					}
-				} else if (lowMemory) {
+				} else if (lowMem) {
 					int var22 = TEXTURE_HSL[arg4.triangleTexture[var12]];
 					Pix3D.gouraudTriangle(var19, var20, var21, var16, var17, var18, this.mulLightness(arg4.triangleColourA[var12], var22), this.mulLightness(arg4.triangleColourB[var12], var22), this.mulLightness(arg4.triangleColourC[var12], var22));
 				} else if (arg4.flat) {

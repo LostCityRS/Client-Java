@@ -27,7 +27,7 @@ public class IdkType {
 	public int[] recol_d = new int[6];
 
 	@ObfuscatedName("lc.i")
-	public int[] heads = new int[] { -1, -1, -1, -1, -1 };
+	public int[] head = new int[] { -1, -1, -1, -1, -1 };
 
 	@ObfuscatedName("lc.j")
 	public boolean disable = false;
@@ -74,7 +74,7 @@ public class IdkType {
 			} else if (code >= 50 && code < 60) {
 				this.recol_d[code - 50] = buf.g2();
 			} else if (code >= 60 && code < 70) {
-				this.heads[code - 60] = buf.g2();
+				this.head[code - 60] = buf.g2();
 			} else {
 				System.out.println("Error unrecognised config code: " + code);
 			}
@@ -82,19 +82,17 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.a(I)Z")
-	public boolean modelIsReady() {
+	public boolean checkModel() {
 		if (this.models == null) {
 			return true;
 		}
 
 		boolean ready = true;
-
 		for (int i = 0; i < this.models.length; i++) {
-			if (!Model.isReady(this.models[i])) {
+			if (!Model.request(this.models[i])) {
 				ready = false;
 			}
 		}
-
 		return ready;
 	}
 
@@ -124,15 +122,13 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.c(I)Z")
-	public boolean headModelIsReady() {
+	public boolean checkHead() {
 		boolean ready = true;
-
 		for (int i = 0; i < 5; i++) {
-			if (this.heads[i] != -1 && !Model.isReady(this.heads[i])) {
+			if (this.head[i] != -1 && !Model.request(this.head[i])) {
 				ready = false;
 			}
 		}
-
 		return ready;
 	}
 
@@ -142,8 +138,8 @@ public class IdkType {
 
 		int count = 0;
 		for (int i = 0; i < 5; i++) {
-			if (this.heads[i] != -1) {
-				models[count++] = Model.tryGet(this.heads[i]);
+			if (this.head[i] != -1) {
+				models[count++] = Model.tryGet(this.head[i]);
 			}
 		}
 

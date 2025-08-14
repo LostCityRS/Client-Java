@@ -20,21 +20,21 @@ public class CollisionMap {
 	@ObfuscatedName("jc.k")
 	public int[][] flags;
 
-	public CollisionMap(int arg0, int arg2) {
-		this.sizeX = arg2;
-		this.sizeZ = arg0;
+	public CollisionMap(int z, int x) {
+		this.sizeX = x;
+		this.sizeZ = z;
 		this.flags = new int[this.sizeX][this.sizeZ];
 		this.reset();
 	}
 
 	@ObfuscatedName("jc.a(B)V")
 	public void reset() {
-		for (int var4 = 0; var4 < this.sizeX; var4++) {
-			for (int var5 = 0; var5 < this.sizeZ; var5++) {
-				if (var4 == 0 || var5 == 0 || this.sizeX - 1 == var4 || this.sizeZ - 1 == var5) {
-					this.flags[var4][var5] = 0xffffff;
+		for (int x = 0; x < this.sizeX; x++) {
+			for (int z = 0; z < this.sizeZ; z++) {
+				if (x == 0 || z == 0 || this.sizeX - 1 == x || this.sizeZ - 1 == z) {
+					this.flags[x][z] = 0xFFFFFF;
 				} else {
-					this.flags[var4][var5] = 0;
+					this.flags[x][z] = 0;
 				}
 			}
 		}
@@ -199,8 +199,8 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.b(III)V")
-	public void addCMap(int arg0, int arg1, int arg2) {
-		this.flags[arg0][arg1] |= arg2;
+	public void addCMap(int x, int z, int flag) {
+		this.flags[x][z] |= flag;
 	}
 
 	@ObfuscatedName("jc.a(ZIIIII)V")
@@ -355,15 +355,15 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(IBII)V")
-	public void remCMap(int arg0, int arg2, int arg3) {
-		this.flags[arg2][arg0] &= 16777215 - arg3;
+	public void remCMap(int z, int x, int flag) {
+		this.flags[x][z] &= 0xFFFFFF - flag;
 	}
 
 	@ObfuscatedName("jc.c(III)V")
 	public void removeBlocked(int arg0, int arg2) {
 		int var4 = arg2 - this.baseX;
 		int var5 = arg0 - this.baseZ;
-		this.flags[var4][var5] &= 0xDFFFFF;
+		this.flags[var4][var5] &= 0xFFFFFF - 0x200000;
 	}
 
 	@ObfuscatedName("jc.a(IZIIIII)Z")

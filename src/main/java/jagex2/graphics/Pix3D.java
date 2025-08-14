@@ -7,10 +7,10 @@ import jagex2.io.Jagfile;
 public class Pix3D extends Pix2D {
 
 	@ObfuscatedName("ib.ab")
-	public static int[][] texturePalette;
+	public static int[][] texturePalette = new int[50][];
 
 	@ObfuscatedName("ib.E")
-	public static boolean lowMemory = true;
+	public static boolean lowMem = true;
 
 	@ObfuscatedName("ib.H")
 	public static boolean jagged = true;
@@ -28,22 +28,22 @@ public class Pix3D extends Pix2D {
 	public static int[] cosTable = new int[2048];
 
 	@ObfuscatedName("ib.R")
-	public static Pix8[] textures;
+	public static Pix8[] textures = new Pix8[50];
 
 	@ObfuscatedName("ib.S")
-	public static boolean[] textureTranslucent;
+	public static boolean[] textureTranslucent = new boolean[50];
 
 	@ObfuscatedName("ib.T")
-	public static int[] averageTextureRgb;
+	public static int[] averageTextureRgb = new int[50];
 
 	@ObfuscatedName("ib.W")
-	public static int[][] activeTexels;
+	public static int[][] activeTexels = new int[50][];
 
 	@ObfuscatedName("ib.X")
-	public static int[] textureCycle;
+	public static int[] textureCycle = new int[50];
 
 	@ObfuscatedName("ib.Z")
-	public static int[] palette;
+	public static int[] colourTable = new int[65536];
 
 	@ObfuscatedName("ib.I")
 	public static int trans;
@@ -55,7 +55,7 @@ public class Pix3D extends Pix2D {
 	public static int centerY;
 
 	@ObfuscatedName("ib.Q")
-	public static int textureOffset;
+	public static int loadedTextures;
 
 	@ObfuscatedName("ib.U")
 	public static int poolSize;
@@ -88,7 +88,7 @@ public class Pix3D extends Pix2D {
 		texelPool = null;
 		activeTexels = null;
 		textureCycle = null;
-		palette = null;
+		colourTable = null;
 		texturePalette = null;
 	}
 
@@ -98,6 +98,7 @@ public class Pix3D extends Pix2D {
 		for (int var1 = 0; var1 < Pix2D.height2d; var1++) {
 			lineOffset[var1] = Pix2D.width2d * var1;
 		}
+
 		centerX = Pix2D.width2d / 2;
 		centerY = Pix2D.height2d / 2;
 	}
@@ -108,6 +109,7 @@ public class Pix3D extends Pix2D {
 		for (int var3 = 0; var3 < arg1; var3++) {
 			lineOffset[var3] = arg2 * var3;
 		}
+
 		centerX = arg2 / 2;
 		centerY = arg1 / 2;
 	}
@@ -115,40 +117,47 @@ public class Pix3D extends Pix2D {
 	@ObfuscatedName("ib.a(I)V")
 	public static final void clearTexels() {
 		texelPool = null;
-		for (int var2 = 0; var2 < 50; var2++) {
-			activeTexels[var2] = null;
+
+		for (int i = 0; i < 50; i++) {
+			activeTexels[i] = null;
 		}
 	}
 
 	@ObfuscatedName("ib.a(II)V")
-	public static final void initPool(int arg1) {
+	public static final void initPool(int size) {
 		if (texelPool != null) {
 			return;
 		}
-		poolSize = arg1;
-		if (lowMemory) {
+
+		poolSize = size;
+
+		if (lowMem) {
 			texelPool = new int[poolSize][16384];
 		} else {
 			texelPool = new int[poolSize][65536];
 		}
-		for (int var3 = 0; var3 < 50; var3++) {
-			activeTexels[var3] = null;
+
+		for (int i = 0; i < 50; i++) {
+			activeTexels[i] = null;
 		}
 	}
 
 	@ObfuscatedName("ib.a(ZLyb;)V")
-	public static final void unpackTextures(Jagfile arg1) {
-		textureOffset = 0;
-		for (int var3 = 0; var3 < 50; var3++) {
+	public static final void unpackTextures(Jagfile jag) {
+		loadedTextures = 0;
+
+		for (int i = 0; i < 50; i++) {
 			try {
-				textures[var3] = new Pix8(arg1, String.valueOf(var3), 0);
-				if (lowMemory && textures[var3].width == 128) {
-					textures[var3].shrink();
+				textures[i] = new Pix8(jag, String.valueOf(i), 0);
+
+				if (lowMem && textures[i].owi == 128) {
+					textures[i].halveSize();
 				} else {
-					textures[var3].crop();
+					textures[i].trim();
 				}
-				textureOffset++;
-			} catch (Exception var4) {
+
+				loadedTextures++;
+			} catch (Exception ignore) {
 			}
 		}
 	}
@@ -168,7 +177,7 @@ public class Pix3D extends Pix2D {
 			var4 += texturePalette[arg0][var6] & 0xFF;
 		}
 		int var7 = var4 / var5 + (var2 / var5 << 16) + (var3 / var5 << 8);
-		int var8 = setGamma(var7, 1.4D);
+		int var8 = gammaCorrect(var7, 1.4D);
 		if (var8 == 0) {
 			var8 = 1;
 		}
@@ -197,7 +206,7 @@ public class Pix3D extends Pix2D {
 		} else {
 			int var2 = 0;
 			int var3 = -1;
-			for (int var4 = 0; var4 < textureOffset; var4++) {
+			for (int var4 = 0; var4 < loadedTextures; var4++) {
 				if (activeTexels[var4] != null && (textureCycle[var4] < var2 || var3 == -1)) {
 					var2 = textureCycle[var4];
 					var3 = var4;
@@ -209,7 +218,7 @@ public class Pix3D extends Pix2D {
 		activeTexels[arg0] = var1;
 		Pix8 var5 = textures[arg0];
 		int[] var6 = texturePalette[arg0];
-		if (lowMemory) {
+		if (lowMem) {
 			textureTranslucent[arg0] = false;
 			for (int var7 = 0; var7 < 4096; var7++) {
 				int var8 = var1[var7] = var6[var5.pixels[var7]] & 0xF8F8FF;
@@ -221,7 +230,7 @@ public class Pix3D extends Pix2D {
 				var1[var7 + 12288] = var8 - (var8 >>> 2) - (var8 >>> 3) & 0xF8F8FF;
 			}
 		} else {
-			if (var5.cropRight == 64) {
+			if (var5.wi == 64) {
 				for (int var9 = 0; var9 < 128; var9++) {
 					for (int var10 = 0; var10 < 128; var10++) {
 						var1[(var9 << 7) + var10] = var6[var5.pixels[(var9 >> 1 << 6) + (var10 >> 1)]];
@@ -248,17 +257,20 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(ID)V")
-	public static final void setBrightness(double arg1) {
+	public static final void initColourTable(double arg1) {
 		double var3 = arg1 + (Math.random() * 0.03D - 0.015D);
 		int var5 = 0;
+
 		for (int var6 = 0; var6 < 512; var6++) {
 			double var11 = (double) (var6 / 8) / 64.0D + 0.0078125D;
 			double var13 = (double) (var6 & 0x7) / 8.0D + 0.0625D;
+
 			for (int var15 = 0; var15 < 128; var15++) {
 				double var16 = (double) var15 / 128.0D;
 				double var18 = var16;
 				double var20 = var16;
 				double var22 = var16;
+
 				if (var13 != 0.0D) {
 					double var24;
 					if (var16 < 0.5D) {
@@ -266,15 +278,18 @@ public class Pix3D extends Pix2D {
 					} else {
 						var24 = var13 + var16 - var13 * var16;
 					}
+
 					double var26 = var16 * 2.0D - var24;
 					double var28 = var11 + 0.3333333333333333D;
 					if (var28 > 1.0D) {
 						var28--;
 					}
+
 					double var32 = var11 - 0.3333333333333333D;
 					if (var32 < 0.0D) {
 						var32++;
 					}
+
 					if (var28 * 6.0D < 1.0D) {
 						var18 = (var24 - var26) * 6.0D * var28 + var26;
 					} else if (var28 * 2.0D < 1.0D) {
@@ -284,6 +299,7 @@ public class Pix3D extends Pix2D {
 					} else {
 						var18 = var26;
 					}
+
 					if (var11 * 6.0D < 1.0D) {
 						var20 = (var24 - var26) * 6.0D * var11 + var26;
 					} else if (var11 * 2.0D < 1.0D) {
@@ -293,6 +309,7 @@ public class Pix3D extends Pix2D {
 					} else {
 						var20 = var26;
 					}
+
 					if (var32 * 6.0D < 1.0D) {
 						var22 = (var24 - var26) * 6.0D * var32 + var26;
 					} else if (var32 * 2.0D < 1.0D) {
@@ -303,36 +320,41 @@ public class Pix3D extends Pix2D {
 						var22 = var26;
 					}
 				}
+
 				int var34 = (int) (var18 * 256.0D);
 				int var35 = (int) (var20 * 256.0D);
 				int var36 = (int) (var22 * 256.0D);
 				int var37 = (var34 << 16) + (var35 << 8) + var36;
-				int var38 = setGamma(var37, var3);
-				palette[var5++] = var38;
+				int var38 = gammaCorrect(var37, var3);
+				colourTable[var5++] = var38;
 			}
 		}
+
 		for (int var7 = 0; var7 < 50; var7++) {
 			if (textures[var7] != null) {
-				int[] var9 = textures[var7].palette;
+				int[] var9 = textures[var7].bpal;
 				texturePalette[var7] = new int[var9.length];
 				for (int var10 = 0; var10 < var9.length; var10++) {
-					texturePalette[var7][var10] = setGamma(var9[var10], var3);
+					texturePalette[var7][var10] = gammaCorrect(var9[var10], var3);
 				}
 			}
 		}
+
 		for (int var8 = 0; var8 < 50; var8++) {
 			pushTexture(var8);
 		}
 	}
 
 	@ObfuscatedName("ib.b(ID)I")
-	public static int setGamma(int arg0, double arg1) {
+	public static int gammaCorrect(int arg0, double arg1) {
 		double var3 = (double) (arg0 >> 16) / 256.0D;
 		double var5 = (double) (arg0 >> 8 & 0xFF) / 256.0D;
 		double var7 = (double) (arg0 & 0xFF) / 256.0D;
+
 		double var9 = Math.pow(var3, arg1);
 		double var11 = Math.pow(var5, arg1);
 		double var13 = Math.pow(var7, arg1);
+
 		int var15 = (int) (var9 * 256.0D);
 		int var16 = (int) (var11 * 256.0D);
 		int var17 = (int) (var13 * 256.0D);
@@ -877,7 +899,7 @@ public class Pix3D extends Pix2D {
 					if (var10 < 0) {
 						int var12 = arg5 - arg4 & 0x3;
 						if (var12 > 0) {
-							int var13 = palette[arg6 >> 8];
+							int var13 = colourTable[arg6 >> 8];
 							do {
 								arg0[var9++] = var13;
 								var12--;
@@ -886,7 +908,7 @@ public class Pix3D extends Pix2D {
 						}
 						break;
 					}
-					int var14 = palette[arg6 >> 8];
+					int var14 = colourTable[arg6 >> 8];
 					arg6 += var11;
 					arg0[var9++] = var14;
 					arg0[var9++] = var14;
@@ -901,7 +923,7 @@ public class Pix3D extends Pix2D {
 					if (var10 < 0) {
 						int var17 = arg5 - arg4 & 0x3;
 						if (var17 > 0) {
-							int var18 = palette[arg6 >> 8];
+							int var18 = colourTable[arg6 >> 8];
 							int var19 = ((var18 & 0xFF00FF) * var16 >> 8 & 0xFF00FF) + ((var18 & 0xFF00) * var16 >> 8 & 0xFF00);
 							do {
 								arg0[var9++] = ((arg0[var9] & 0xFF00) * var15 >> 8 & 0xFF00) + ((arg0[var9] & 0xFF00FF) * var15 >> 8 & 0xFF00FF) + var19;
@@ -910,7 +932,7 @@ public class Pix3D extends Pix2D {
 						}
 						break;
 					}
-					int var20 = palette[arg6 >> 8];
+					int var20 = colourTable[arg6 >> 8];
 					arg6 += var11;
 					int var21 = ((var20 & 0xFF00FF) * var16 >> 8 & 0xFF00FF) + ((var20 & 0xFF00) * var16 >> 8 & 0xFF00);
 					arg0[var9++] = ((arg0[var9] & 0xFF00) * var15 >> 8 & 0xFF00) + ((arg0[var9] & 0xFF00FF) * var15 >> 8 & 0xFF00FF) + var21;
@@ -937,7 +959,7 @@ public class Pix3D extends Pix2D {
 			int var24 = arg5 - arg4;
 			if (trans == 0) {
 				do {
-					arg0[var23++] = palette[arg6 >> 8];
+					arg0[var23++] = colourTable[arg6 >> 8];
 					arg6 += var22;
 					var24--;
 				} while (var24 > 0);
@@ -945,7 +967,7 @@ public class Pix3D extends Pix2D {
 				int var25 = trans;
 				int var26 = 256 - trans;
 				do {
-					int var27 = palette[arg6 >> 8];
+					int var27 = colourTable[arg6 >> 8];
 					arg6 += var22;
 					int var28 = ((var27 & 0xFF00FF) * var26 >> 8 & 0xFF00FF) + ((var27 & 0xFF00) * var26 >> 8 & 0xFF00);
 					arg0[var23++] = ((arg0[var23] & 0xFF00) * var25 >> 8 & 0xFF00) + ((arg0[var23] & 0xFF00FF) * var25 >> 8 & 0xFF00FF) + var28;
@@ -1420,6 +1442,7 @@ public class Pix3D extends Pix2D {
 	public static final void textureTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
 		int[] var19 = getTexels(arg18);
 		opaque = !textureTranslucent[arg18];
+
 		int var20 = arg9 - arg10;
 		int var21 = arg12 - arg13;
 		int var22 = arg15 - arg16;
@@ -2058,7 +2081,7 @@ public class Pix3D extends Pix2D {
 			var18 = arg7 << 9;
 		}
 		int var19 = arg4 + arg5;
-		if (!lowMemory) {
+		if (!lowMem) {
 			int var78 = 0;
 			int var79 = 0;
 			int var80 = arg5 - centerX;
@@ -2408,22 +2431,17 @@ public class Pix3D extends Pix2D {
 	}
 
 	static {
-		for (int var0 = 1; var0 < 512; var0++) {
-			divTable[var0] = 32768 / var0;
+		for (int i = 1; i < 512; i++) {
+			divTable[i] = 32768 / i;
 		}
-		for (int var1 = 1; var1 < 2048; var1++) {
-			divTable2[var1] = 65536 / var1;
+
+		for (int i = 1; i < 2048; i++) {
+			divTable2[i] = 65536 / i;
 		}
-		for (int var2 = 0; var2 < 2048; var2++) {
-			sinTable[var2] = (int) (Math.sin((double) var2 * 0.0030679615D) * 65536.0D);
-			cosTable[var2] = (int) (Math.cos((double) var2 * 0.0030679615D) * 65536.0D);
+
+		for (int i = 0; i < 2048; i++) {
+			sinTable[i] = (int) (Math.sin((double) i * 0.0030679615D) * 65536.0D);
+			cosTable[i] = (int) (Math.cos((double) i * 0.0030679615D) * 65536.0D);
 		}
-		textures = new Pix8[50];
-		textureTranslucent = new boolean[50];
-		averageTextureRgb = new int[50];
-		activeTexels = new int[50][];
-		textureCycle = new int[50];
-		palette = new int[65536];
-		texturePalette = new int[50][];
 	}
 }

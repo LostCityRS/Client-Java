@@ -135,7 +135,7 @@ public class ClientProj extends ModelSource {
 		while (this.field527 > this.field504.seq.getFrameDuration(this.field526)) {
 			this.field527 -= this.field504.seq.getFrameDuration(this.field526) + 1;
 			this.field526++;
-			if (this.field526 >= this.field504.seq.frameCount) {
+			if (this.field526 >= this.field504.seq.numFrames) {
 				this.field526 = 0;
 			}
 		}
