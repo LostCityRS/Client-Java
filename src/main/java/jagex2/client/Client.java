@@ -9304,19 +9304,19 @@ public class Client extends GameShell {
 		if (var3 == 3) {
 			boolean var5 = this.field562;
 			if (var4 == 0) {
-				this.setMidiVolume(this.field562, 0);
+				this.setMidiVolume(this.field562, 128);
 				this.field562 = true;
 			}
 			if (var4 == 1) {
-				this.setMidiVolume(this.field562, -400);
+				this.setMidiVolume(this.field562, 96);
 				this.field562 = true;
 			}
 			if (var4 == 2) {
-				this.setMidiVolume(this.field562, -800);
+				this.setMidiVolume(this.field562, 64);
 				this.field562 = true;
 			}
 			if (var4 == 3) {
-				this.setMidiVolume(this.field562, -1200);
+				this.setMidiVolume(this.field562, 32);
 				this.field562 = true;
 			}
 			if (var4 == 4) {
@@ -9336,19 +9336,19 @@ public class Client extends GameShell {
 		if (var3 == 4) {
 			if (var4 == 0) {
 				this.field597 = true;
-				this.setWaveVolume(0);
+				this.setWaveVolume(128);
 			}
 			if (var4 == 1) {
 				this.field597 = true;
-				this.setWaveVolume(-400);
+				this.setWaveVolume(96);
 			}
 			if (var4 == 2) {
 				this.field597 = true;
-				this.setWaveVolume(-800);
+				this.setWaveVolume(64);
 			}
 			if (var4 == 3) {
 				this.field597 = true;
-				this.setWaveVolume(-1200);
+				this.setWaveVolume(32);
 			}
 			if (var4 == 4) {
 				this.field597 = false;

@@ -1,5 +1,7 @@
 package sign;
 
+import javax.sound.midi.MidiSystem;
+import javax.sound.sampled.*;
 import java.applet.Applet;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -40,9 +42,9 @@ public class signlink implements Runnable {
 
 	public static byte[] savebuf = null;
 
-	public static String midi = null;
+	public static String midi = "none";
 
-	public static String wave = null;
+	public static String wave = "none";
 
 	public static boolean reporterror = true;
 
@@ -54,7 +56,7 @@ public class signlink implements Runnable {
 
 	public static int midipos;
 
-	public static int midivol;
+	public static int midivol = 96;
 
 	public static int savelen;
 
@@ -66,7 +68,7 @@ public class signlink implements Runnable {
 
 	public static int wavepos;
 
-	public static int wavevol;
+	public static int wavevol = 50;
 
 	public static InetAddress socketip;
 
@@ -108,6 +110,10 @@ public class signlink implements Runnable {
 		active = true;
 		String var1 = findcachedir();
 		uid = getuid(var1);
+		try {
+			midiPlayer = new MidiPlayer();
+		} catch (Exception ex) {
+		}
 		try {
 			File var2 = new File(var1 + "main_file_cache.dat");
 			if (var2.exists() && var2.length() > 52428800L) {
@@ -168,6 +174,7 @@ public class signlink implements Runnable {
 				}
 				urlreq = null;
 			}
+			audioLoop();
 			try {
 				Thread.sleep(50L);
 			} catch (Exception var9) {
@@ -309,6 +316,125 @@ public class signlink implements Runnable {
 			var5.readLine();
 			var5.close();
 		} catch (IOException var6) {
+		}
+	}
+
+	private MidiPlayer midiPlayer;
+	public boolean midiFadingIn = false;
+	public boolean midiFadingOut = false;
+	public int midiFadeVol = 0;
+	private final Position curPosition = Position.NORMAL;
+
+	enum Position {
+		LEFT, RIGHT, NORMAL
+	}
+
+	public void playMidi(String music) {
+		if (midiFadingOut) {
+			return;
+		} else if (!midiFadingIn && midifade != 0 && midiPlayer.running()) {
+			midiFadingOut = true;
+			midiFadeVol = midivol;
+			return;
+		}
+
+		try {
+			if (midifade != 0 && midiFadingIn) {
+				midiFadingOut = false;
+				midiFadeVol = 0;
+				midiPlayer.play(MidiSystem.getSequence(new File(music)), midifade, midiFadeVol);
+			} else {
+				midiPlayer.play(MidiSystem.getSequence(new File(music)), midifade, midivol);
+			}
+		} catch (Exception ignore) {
+		}
+	}
+
+	// adapted from play_members.html's JS loop
+	private void audioLoop() {
+		if (midiFadingIn) {
+			midiFadeVol += 8;
+			if (midiFadeVol > midivol) {
+				midiFadeVol = midivol;
+			}
+			midiPlayer.setVolume(0, midiFadeVol);
+			if (midiFadeVol == midivol) {
+				midiFadingIn = false;
+			}
+		} else if (midiFadingOut) {
+			midiFadeVol -= 8;
+			if (midiFadeVol < 0) {
+				midiFadeVol = 0;
+			}
+			midiPlayer.setVolume(0, midiFadeVol);
+			if (midiFadeVol == 0) {
+				midiFadingOut = false;
+				midiFadingIn = true;
+			}
+		}
+
+		if (!midi.equals("none")) {
+			if (midi.equals("stop")) {
+				midiPlayer.stop();
+			} else if (midi.equals("voladjust")) {
+				midiPlayer.setVolume(0, midivol);
+			} else {
+				playMidi(midi);
+			}
+
+			if (!midiFadingOut) {
+				midi = "none";
+			}
+		}
+
+		if (!wave.equals("none")) {
+			AudioInputStream audioInputStream;
+
+			try {
+				audioInputStream = AudioSystem.getAudioInputStream(new File(wave));
+			} catch (Exception ignore) {
+				return;
+			}
+
+			AudioFormat format = audioInputStream.getFormat();
+			SourceDataLine auline;
+			DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
+
+			try {
+				auline = (SourceDataLine) AudioSystem.getLine(info);
+				auline.open(format);
+			} catch (Exception ignore) {
+				return;
+			}
+
+			if (auline.isControlSupported(FloatControl.Type.PAN)) {
+				FloatControl pan = (FloatControl) auline.getControl(FloatControl.Type.PAN);
+				if (curPosition == Position.RIGHT) {
+					pan.setValue(1.0f);
+				} else if (curPosition == Position.LEFT) {
+					pan.setValue(-1.0f);
+				}
+			}
+
+			auline.start();
+			int nBytesRead = 0;
+			int EXTERNAL_BUFFER_SIZE = 524288;
+			byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
+
+			try {
+				while (nBytesRead != -1) {
+					nBytesRead = audioInputStream.read(abData, 0, abData.length);
+					if (nBytesRead >= 0) {
+						auline.write(abData, 0, nBytesRead);
+					}
+				}
+			} catch (IOException ignore) {
+			} finally {
+				auline.drain();
+				auline.close();
+			}
+
+			wave = "none";
 		}
 	}
 }
