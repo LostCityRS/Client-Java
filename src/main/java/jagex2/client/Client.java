@@ -10,6 +10,8 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.zip.CRC32;
 import java.util.concurrent.locks.LockSupport;
 
@@ -1290,23 +1292,23 @@ public class Client extends GameShell {
 				nodeId = Integer.parseInt(args[0]);
 				portOffset = Integer.parseInt(args[1]);
 
-				if (args[2].equals("lowmem")) {
-					setLowMem();
-				} else if (args[2].equals("highmem")) {
-					setHighMem();
-				} else {
-					System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
-					return;
-				}
+                    switch (args[2]) {
+                        case "lowmem" -> setLowMem();
+                        case "highmem" -> setHighMem();
+                        default -> {
+                            System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
+                            return;
+                        }
+                    }
 
-				if (args[3].equals("free")) {
-					membersWorld = false;
-				} else if (args[3].equals("members")) {
-					membersWorld = true;
-				} else {
-					System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
-					return;
-				}
+                    switch (args[3]) {
+                        case "free" -> membersWorld = false;
+                        case "members" -> membersWorld = true;
+                        default -> {
+                            System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
+                            return;
+                        }
+                    }
 
 				SignLink.storeid = Integer.parseInt(args[4]);
 				SignLink.startpriv(InetAddress.getLocalHost());
@@ -1320,10 +1322,9 @@ public class Client extends GameShell {
 		}
 	}
 
-	@Override
-	public final void init() {
-		nodeId = Integer.parseInt(this.getParameter("nodeid"));
-		portOffset = Integer.parseInt(this.getParameter("portoff"));
+    public final void init() {
+        nodeId = Integer.parseInt(this.getParameter("nodeid"));
+        portOffset = Integer.parseInt(this.getParameter("portoff"));
 
 		String lowmem = this.getParameter("lowmem");
 		if (lowmem != null && lowmem.equals("1")) {
@@ -1365,91 +1366,66 @@ public class Client extends GameShell {
 
 	// ----
 
-	// note: placement confirmed by referencing OS1
-	@Override
-	public final URL getCodeBase() {
-		if (SignLink.mainapp != null) {
-			return SignLink.mainapp.getCodeBase();
-		}
+    // note: placement confirmed by referencing OS1
+    public final URL getCodeBase() {
+        try {
+            return URI.create("http://127.0.0.1:" + (portOffset + 80)).toURL();
+        } catch (MalformedURLException ignore) {
+            // Should not happen with a well-formed URI; return null if it does
+            return null;
+        }
+    }
 
-		try {
-			if (super.frame != null) {
-				return new URL("http://127.0.0.1:" + (portOffset + 80));
-			}
-		} catch (MalformedURLException ignore) {
-		}
+    // note: placement confirmed by referencing OS1
+    public final String getParameter(String name) {
+        // No Applet environment; fetch from system properties or return null
+        return System.getProperty(name);
+    }
 
-		return super.getCodeBase();
-	}
+    @ObfuscatedName("client.j(Z)Ljava/lang/String;")
+    public final String getHost() {
+        if (super.frame != null) {
+            return "runescape.com";
+        }
 
-	// note: placement confirmed by referencing OS1
-	@Override
-	public final String getParameter(String name) {
-		if (SignLink.mainapp != null) {
-			return SignLink.mainapp.getParameter(name);
-		}
-
-		return super.getParameter(name);
-	}
-
-	@ObfuscatedName("client.j(Z)Ljava/lang/String;")
-	public final String getHost() {
-		if (SignLink.mainapp != null) {
-			return SignLink.mainapp.getDocumentBase().getHost().toLowerCase();
-		}
-
-		if (super.frame != null) {
-			return "runescape.com";
-		}
-
-		return super.getDocumentBase().getHost().toLowerCase();
-	}
+        return "127.0.0.1";
+    }
 
 	@ObfuscatedName("client.f(I)Ljava/awt/Component;")
-	@Override
-	public final java.awt.Component getBaseComponent() {
-		if (SignLink.mainapp != null) {
-			return SignLink.mainapp;
-		}
+    @Override
+    public final java.awt.Component getBaseComponent() {
+        if (super.frame != null) {
+            return super.frame;
+        }
 
-		if (super.frame != null) {
-			return super.frame;
-		}
-
-		return this;
-	}
+        return this;
+    }
 
 	@ObfuscatedName("client.a(Ljava/lang/String;)Ljava/io/DataInputStream;")
-	public final DataInputStream openUrl(String url) throws IOException {
-		if (SignLink.mainapp != null) {
-			return SignLink.openurl(url);
-		}
-
-		return new DataInputStream((new URL(this.getCodeBase(), url)).openStream());
-	}
+    public final DataInputStream openUrl(String url) throws IOException {
+        // Avoid deprecated URL(URL, String) constructor (Java 20+): use URI resolve
+        try {
+            URI resolved = this.getCodeBase().toURI().resolve(url);
+            return new DataInputStream(resolved.toURL().openStream());
+        } catch (URISyntaxException e) {
+            throw new IOException(e);
+        }
+    }
 
 	@ObfuscatedName("client.C(I)Ljava/net/Socket;")
-	public final Socket openSocket(int port) throws IOException {
-		if (SignLink.mainapp != null) {
-			return SignLink.opensocket(port);
-		}
-
-		return new Socket(InetAddress.getByName(this.getCodeBase().getHost()), port);
-	}
+    public final Socket openSocket(int port) throws IOException {
+        return new Socket(InetAddress.getByName(this.getCodeBase().getHost()), port);
+    }
 
 	@ObfuscatedName("client.a(Ljava/lang/Runnable;I)V")
-	@Override
-	public final void startThread(Runnable thread, int priority) {
-		if (priority > 10) {
-			priority = 10;
-		}
+    @Override
+    public final void startThread(Runnable thread, int priority) {
+        if (priority > 10) {
+            priority = 10;
+        }
 
-		if (SignLink.mainapp == null) {
-			super.startThread(thread, priority);
-		} else {
-			SignLink.startthread(thread, priority);
-		}
-	}
+        super.startThread(thread, priority);
+    }
 
 	@ObfuscatedName("client.a(Z[BZ)V")
 	public final void saveMidi(boolean fade, byte[] src) {
@@ -1545,8 +1521,7 @@ public class Client extends GameShell {
 			while (this.jagChecksum[8] == 0) {
 				this.drawProgress(20, "Connecting to web server");
 
-				try {
-					DataInputStream req = this.openUrl("crc" + (int) (Math.random() * 9.9999999E7D));
+				try (DataInputStream req = this.openUrl("crc" + (int) (Math.random() * 9.9999999E7D))) {
 
 					Packet crc = new Packet(new byte[36]);
 					req.readFully(crc.data, 0, 36);
@@ -1555,7 +1530,6 @@ public class Client extends GameShell {
 						this.jagChecksum[i] = crc.g4();
 					}
 
-					req.close();
 				} catch (IOException ignore) {
 					for (int i = retry; i > 0; i--) {
 						this.drawProgress(10, "Error loading - Will retry in " + i + " secs.");
@@ -2328,28 +2302,28 @@ public class Client extends GameShell {
 			try {
 				int lastDownloaded = 0;
 
-                    DataInputStream dataStream = this.openUrl(name + crc);
-                    byte[] header = new byte[6];
-                    dataStream.readFully(header, 0, 6);
+                    try (DataInputStream dataStream = this.openUrl(name + crc)) {
+                        byte[] header = new byte[6];
+                        dataStream.readFully(header, 0, 6);
 
 				Packet buf = new Packet(header);
 				buf.pos = 3;
 				int packedSize = buf.g3() + 6;
 				int pos = 6;
 
-                    data = new byte[packedSize];
-                    System.arraycopy(header, 0, data, 0, 6);
+                        data = new byte[packedSize];
+                        System.arraycopy(header, 0, data, 0, 6);
 
-                    while (pos < packedSize) {
-                        int chunkSize = packedSize - pos;
-                        if (chunkSize > 1000) {
-                            chunkSize = 1000;
-                        }
+                        while (pos < packedSize) {
+                            int chunkSize = packedSize - pos;
+                            if (chunkSize > 1000) {
+                                chunkSize = 1000;
+                            }
 
-                        int n = dataStream.read(data, pos, chunkSize);
-                        if (n < 0) {
-                            throw new IOException("EOF");
-                        }
+                            int n = dataStream.read(data, pos, chunkSize);
+                            if (n < 0) {
+                                throw new IOException("EOF");
+                            }
 
 					pos += n;
 
@@ -2358,10 +2332,9 @@ public class Client extends GameShell {
 						this.drawProgress(progress, "Loading " + displayName + " - " + downloaded + "%");
 					}
 
-					lastDownloaded = downloaded;
-				}
-
-                    dataStream.close();
+                            lastDownloaded = downloaded;
+                        }
+                    }
 
 				try {
 					if (this.fileStreams[0] != null) {
@@ -2656,19 +2629,16 @@ public class Client extends GameShell {
 			}
 
                 switch (reply) {
-                    case 1:
+                    case 1 -> {
                         parkMillis(2000);
                         this.login(username, password, reconnect);
-                        break;
-                    case 2:
-                    case 18:
-                    case 19:
-                        this.staffmodlevel = 0;
-                        if (reply == 18) {
-                            this.staffmodlevel = 1;
-                        } else if (reply == 19) {
-                            this.staffmodlevel = 2;
-                        }
+                    }
+                    case 2, 18, 19 -> {
+                        this.staffmodlevel = switch (reply) {
+                            case 18 -> 1;
+                            case 19 -> 2;
+                            default -> 0;
+                        };
 
                         InputTracking.setDisabled();
                         this.field1402 = 0L;
@@ -2772,56 +2742,56 @@ public class Client extends GameShell {
                         oplogic10 = 0;
 
                         this.prepareGame();
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         this.loginMessage0 = "";
                         this.loginMessage1 = "Invalid username or password.";
-                        break;
-                    case 4:
+                    }
+                    case 4 -> {
                         this.loginMessage0 = "Your account has been disabled.";
                         this.loginMessage1 = "Please check your message-centre for details.";
-                        break;
-                    case 5:
+                    }
+                    case 5 -> {
                         this.loginMessage0 = "Your account is already logged in.";
                         this.loginMessage1 = "Try again in 60 secs...";
-                        break;
-                    case 6:
+                    }
+                    case 6 -> {
                         this.loginMessage0 = "RuneScape has been updated!";
                         this.loginMessage1 = "Please reload this page.";
-                        break;
-                    case 7:
+                    }
+                    case 7 -> {
                         this.loginMessage0 = "This world is full.";
                         this.loginMessage1 = "Please use a different world.";
-                        break;
-                    case 8:
+                    }
+                    case 8 -> {
                         this.loginMessage0 = "Unable to connect.";
                         this.loginMessage1 = "Login server offline.";
-                        break;
-                    case 9:
+                    }
+                    case 9 -> {
                         this.loginMessage0 = "Login limit exceeded.";
                         this.loginMessage1 = "Too many connections from your address.";
-                        break;
-                    case 10:
+                    }
+                    case 10 -> {
                         this.loginMessage0 = "Unable to connect.";
                         this.loginMessage1 = "Bad session id.";
-                        break;
-                    case 11:
+                    }
+                    case 11 -> {
                         this.loginMessage1 = "Login server rejected session.";
                         this.loginMessage1 = "Please try again.";
-                        break;
-                    case 12:
+                    }
+                    case 12 -> {
                         this.loginMessage0 = "You need a members account to login to this world.";
                         this.loginMessage1 = "Please subscribe, or use a different world.";
-                        break;
-                    case 13:
+                    }
+                    case 13 -> {
                         this.loginMessage0 = "Could not complete login.";
                         this.loginMessage1 = "Please try using a different world.";
-                        break;
-                    case 14:
+                    }
+                    case 14 -> {
                         this.loginMessage0 = "The server is being updated.";
                         this.loginMessage1 = "Please wait 1 minute and try again.";
-                        break;
-                    case 15:
+                    }
+                    case 15 -> {
                         this.ingame = true;
                         this.out.pos = 0;
                         this.in.pos = 0;
@@ -2835,23 +2805,23 @@ public class Client extends GameShell {
                         this.menuSize = 0;
                         this.menuVisible = false;
                         this.sceneLoadStartTime = System.currentTimeMillis();
-                        break;
-                    case 16:
+                    }
+                    case 16 -> {
                         this.loginMessage0 = "Login attempts exceeded.";
                         this.loginMessage1 = "Please wait 1 minute and try again.";
-                        break;
-                    case 17:
+                    }
+                    case 17 -> {
                         this.loginMessage0 = "You are standing in a members-only area.";
                         this.loginMessage1 = "To play on this world move to a free area first";
-                        break;
-                    case 20:
+                    }
+                    case 20 -> {
                         this.loginMessage0 = "Invalid loginserver requested";
                         this.loginMessage1 = "Please try using a different world.";
-                        break;
-                    default:
+                    }
+                    default -> {
                         this.loginMessage0 = "Unexpected server response";
                         this.loginMessage1 = "Please try using a different world.";
-                        break;
+                    }
                 }
 		} catch (IOException ignore) {
 			this.loginMessage0 = "";
@@ -4127,20 +4097,20 @@ public class Client extends GameShell {
 			int clickY = super.mouseClickY;
 
 			switch (this.menuArea) {
-				case 0:
+				case 0 -> {
 					clickX -= 4;
 					clickY -= 4;
-					break;
-				case 1:
+				}
+				case 1 -> {
 					clickX -= 553;
 					clickY -= 205;
-					break;
-				case 2:
+				}
+				case 2 -> {
 					clickX -= 17;
 					clickY -= 357;
-					break;
-				default:
-					break;
+				}
+				default -> {
+				}
 			}
 
 			int option = -1;
@@ -4158,48 +4128,40 @@ public class Client extends GameShell {
 			this.menuVisible = false;
 
 			switch (this.menuArea) {
-				case 1:
-					this.redrawSidebar = true;
-					break;
-				case 2:
-					this.redrawChatback = true;
-					break;
-				default:
-					break;
+				case 1 -> this.redrawSidebar = true;
+				case 2 -> this.redrawChatback = true;
+				default -> {
+				}
 			}
 		} else {
 			int x = super.mouseX;
 			int y = super.mouseY;
 
 			switch (this.menuArea) {
-				case 0:
+				case 0 -> {
 					x -= 4;
 					y -= 4;
-					break;
-				case 1:
+				}
+				case 1 -> {
 					x -= 553;
 					y -= 205;
-					break;
-				case 2:
+				}
+				case 2 -> {
 					x -= 17;
 					y -= 357;
-					break;
-				default:
-					break;
+				}
+				default -> {
+				}
 			}
 
 			if (x < this.menuX - 10 || x > this.menuWidth + this.menuX + 10 || y < this.menuY - 10 || y > this.menuHeight + this.menuY + 10) {
 				this.menuVisible = false;
 
 				switch (this.menuArea) {
-					case 1:
-						this.redrawSidebar = true;
-						break;
-					case 2:
-						this.redrawChatback = true;
-						break;
-					default:
-						break;
+					case 1 -> this.redrawSidebar = true;
+					case 2 -> this.redrawChatback = true;
+					default -> {
+					}
 				}
 			}
 		}
@@ -4743,17 +4705,19 @@ public class Client extends GameShell {
 						}
 
 						if ((key == 13 || key == 10) && this.chatTyped.length() > 0) {
-							if (this.staffmodlevel == 2) {
-								if (this.chatTyped.equals("::clientdrop")) {
-									this.tryReconnect();
-								} else if (this.chatTyped.equals("::lag")) {
-									this.lag();
-								} else if (this.chatTyped.equals("::prefetchmusic")) {
-									for (int i = 0; i < this.onDemand.getFileCount(2); i++) {
-										this.onDemand.prefetchPriority(2, i, (byte) 1);
-									}
-								}
-							}
+                            if (this.staffmodlevel == 2) {
+                                switch (this.chatTyped) {
+                                    case "::clientdrop" -> this.tryReconnect();
+                                    case "::lag" -> this.lag();
+                                    case "::prefetchmusic" -> {
+                                        for (int i = 0; i < this.onDemand.getFileCount(2); i++) {
+                                            this.onDemand.prefetchPriority(2, i, (byte) 1);
+                                        }
+                                    }
+                                    default -> {
+                                    }
+                                }
+                            }
 
 							if (this.chatTyped.startsWith("::")) {
 								// CLIENT_CHEAT
@@ -4840,15 +4804,9 @@ public class Client extends GameShell {
 								localPlayer.chatTimer = 150;
 
                                 switch (this.staffmodlevel) {
-                                    case 2:
-                                        this.addMessage(localPlayer.chatMessage, "@cr2@" + localPlayer.name, 2);
-                                        break;
-                                    case 1:
-                                        this.addMessage(localPlayer.chatMessage, "@cr1@" + localPlayer.name, 2);
-                                        break;
-                                    default:
-                                        this.addMessage(localPlayer.chatMessage, localPlayer.name, 2);
-                                        break;
+                                    case 2 -> this.addMessage(localPlayer.chatMessage, "@cr2@" + localPlayer.name, 2);
+                                    case 1 -> this.addMessage(localPlayer.chatMessage, "@cr1@" + localPlayer.name, 2);
+                                    default -> this.addMessage(localPlayer.chatMessage, localPlayer.name, 2);
                                 }
 
 								if (this.chatPublicMode == 2) {
@@ -5534,7 +5492,7 @@ public class Client extends GameShell {
         short h = 200;
 
         switch (this.titleScreenState) {
-            case 0: {
+            case 0 -> {
                 int x = h / 2 + 80;
                 int y = h / 2 - 20;
                 this.fontPlain11.centreStringTag(w / 2, true, this.onDemand.message, x, 0x75a9a9);
@@ -5548,9 +5506,8 @@ public class Client extends GameShell {
                 x = w / 2 + 80;
                 this.imageTitlebutton.plotSprite(x - 73, y - 20);
                 this.fontBold12.centreStringTag(x, true, "Existing User", y + 5, 16777215);
-                break;
             }
-            case 2: {
+            case 2 -> {
                 int x; // defer init until used
                 int y = (h / 2) - 40;
                 if (this.loginMessage0.length() > 0) {
@@ -5572,9 +5529,8 @@ public class Client extends GameShell {
                 x = w / 2 + 80;
                 this.imageTitlebutton.plotSprite(x - 73, y - 20);
                 this.fontBold12.centreStringTag(x, true, "Cancel", y + 5, 16777215);
-                break;
             }
-            case 3: {
+            case 3 -> {
                 int x = w / 2;
                 int y = h / 2 - 60;
                 this.fontBold12.centreStringTag(x, true, "Create a free account", y, 16776960);
@@ -5595,10 +5551,9 @@ public class Client extends GameShell {
                 y = h / 2 + 50;
                 this.imageTitlebutton.plotSprite(x - 73, y - 20);
                 this.fontBold12.centreStringTag(x, true, "Cancel", y + 5, 16777215);
-                break;
             }
-            default:
-                break;
+            default -> {
+            }
         }
 
 		this.imageTitle4.draw(super.graphics, 202, 171);
@@ -5742,29 +5697,15 @@ public class Client extends GameShell {
 			if (this.sidebarInterfaceId == -1) {
 				if (this.tabInterfaceId[this.selectedTab] != -1) {
                     switch (this.selectedTab) {
-                        case 0:
-                            this.imageRedstone1.plotSprite(22, 10);
-                            break;
-                        case 1:
-                            this.imageRedstone2.plotSprite(54, 8);
-                            break;
-                        case 2:
-                            this.imageRedstone2.plotSprite(82, 8);
-                            break;
-                        case 3:
-                            this.imageRedstone3.plotSprite(110, 8);
-                            break;
-                        case 4:
-                            this.imageRedstone2h.plotSprite(153, 8);
-                            break;
-                        case 5:
-                            this.imageRedstone2h.plotSprite(181, 8);
-                            break;
-                        case 6:
-                            this.imageRedstone1h.plotSprite(209, 9);
-                            break;
-                        default:
-                            break;
+                        case 0 -> this.imageRedstone1.plotSprite(22, 10);
+                        case 1 -> this.imageRedstone2.plotSprite(54, 8);
+                        case 2 -> this.imageRedstone2.plotSprite(82, 8);
+                        case 3 -> this.imageRedstone3.plotSprite(110, 8);
+                        case 4 -> this.imageRedstone2h.plotSprite(153, 8);
+                        case 5 -> this.imageRedstone2h.plotSprite(181, 8);
+                        case 6 -> this.imageRedstone1h.plotSprite(209, 9);
+                        default -> {
+                        }
                     }
 				}
 
@@ -5805,29 +5746,15 @@ public class Client extends GameShell {
 			if (this.sidebarInterfaceId == -1) {
 				if (this.tabInterfaceId[this.selectedTab] != -1) {
                     switch (this.selectedTab) {
-                        case 7:
-                            this.imageRedstone1v.plotSprite(42, 0);
-                            break;
-                        case 8:
-                            this.imageRedstone2v.plotSprite(74, 0);
-                            break;
-                        case 9:
-                            this.imageRedstone2v.plotSprite(102, 0);
-                            break;
-                        case 10:
-                            this.imageRedstone3v.plotSprite(130, 1);
-                            break;
-                        case 11:
-                            this.imageRedstone2hv.plotSprite(173, 0);
-                            break;
-                        case 12:
-                            this.imageRedstone2hv.plotSprite(201, 0);
-                            break;
-                        case 13:
-                            this.imageRedstone1hv.plotSprite(229, 0);
-                            break;
-                        default:
-                            break;
+                        case 7 -> this.imageRedstone1v.plotSprite(42, 0);
+                        case 8 -> this.imageRedstone2v.plotSprite(74, 0);
+                        case 9 -> this.imageRedstone2v.plotSprite(102, 0);
+                        case 10 -> this.imageRedstone3v.plotSprite(130, 1);
+                        case 11 -> this.imageRedstone2hv.plotSprite(173, 0);
+                        case 12 -> this.imageRedstone2hv.plotSprite(201, 0);
+                        case 13 -> this.imageRedstone1hv.plotSprite(229, 0);
+                        default -> {
+                        }
                     }
 				}
 
@@ -5968,41 +5895,33 @@ public class Client extends GameShell {
 		}
 
             // save local copies of camera fields for temporary jitter
-            int cameraX = this.cameraX;
-            int cameraY = this.cameraY;
-            int cameraZ = this.cameraZ;
-            int cameraPitch = this.cameraPitch;
-            int cameraYaw = this.cameraYaw;
+            int savedCameraX = this.cameraX;
+            int savedCameraY = this.cameraY;
+            int savedCameraZ = this.cameraZ;
+            int savedCameraPitch = this.cameraPitch;
+            int savedCameraYaw = this.cameraYaw;
 
 		for (int type = 0; type < 5; type++) {
 			if (this.cameraModifierEnabled[type]) {
-				int jitter = (int) (Math.random() * (double) (this.cameraModifierJitter[type] * 2 + 1) - (double) this.cameraModifierJitter[type] + Math.sin((double) this.cameraModifierWobbleSpeed[type] / 100.0D * (double) this.cameraModifierCycle[type]) * (double) this.cameraModifierWobbleScale[type]);
+					int jitter = (int) (Math.random() * (double) (this.cameraModifierJitter[type] * 2 + 1) - (double) this.cameraModifierJitter[type] + Math.sin((double) this.cameraModifierWobbleSpeed[type] / 100.0D * (double) this.cameraModifierCycle[type]) * (double) this.cameraModifierWobbleScale[type]);
 
-                    switch (type) {
-                        case 0:
-                            this.cameraX += jitter;
-                            break;
-                        case 1:
-                            this.cameraY += jitter;
-                            break;
-                        case 2:
-                            this.cameraZ += jitter;
-                            break;
-                        case 3:
-                            this.cameraYaw = this.cameraYaw + jitter & 0x7FF;
-                            break;
-                        case 4:
-                            this.cameraPitch += jitter;
-                            if (this.cameraPitch < 128) {
-                                this.cameraPitch = 128;
-                            }
-                            if (this.cameraPitch > 383) {
-                                this.cameraPitch = 383;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+	                    switch (type) {
+	                        case 0 -> this.cameraX += jitter;
+	                        case 1 -> this.cameraY += jitter;
+	                        case 2 -> this.cameraZ += jitter;
+	                        case 3 -> this.cameraYaw = this.cameraYaw + jitter & 0x7FF;
+	                        case 4 -> {
+	                            this.cameraPitch += jitter;
+	                            if (this.cameraPitch < 128) {
+	                                this.cameraPitch = 128;
+	                            }
+	                            if (this.cameraPitch > 383) {
+	                                this.cameraPitch = 383;
+	                            }
+	                        }
+	                        default -> {
+	                        }
+	                    }
 			}
 		}
 
@@ -6021,11 +5940,11 @@ public class Client extends GameShell {
 		this.draw3DEntityElements();
 		this.areaViewport.draw(super.graphics, 4, 4);
 
-		this.cameraX = cameraX;
-		this.cameraY = cameraY;
-		this.cameraZ = cameraZ;
-		this.cameraPitch = cameraPitch;
-		this.cameraYaw = cameraYaw;
+		this.cameraX = savedCameraX;
+		this.cameraY = savedCameraY;
+		this.cameraZ = savedCameraZ;
+		this.cameraPitch = savedCameraPitch;
+		this.cameraYaw = savedCameraYaw;
 	}
 
 	// note: placement confirmed by referencing OS1
@@ -6409,21 +6328,19 @@ public class Client extends GameShell {
 						continue;
 					}
 
-                    switch (i) {
-                        case 1:
-                            this.projectY -= 20;
-                            break;
-                        case 2:
-                            this.projectX -= 15;
-                            this.projectY -= 10;
-                            break;
-                        case 3:
-                            this.projectX += 15;
-                            this.projectY -= 10;
-                            break;
-                        default:
-                            break;
-                    }
+	                    switch (i) {
+	                        case 1 -> this.projectY -= 20;
+	                        case 2 -> {
+	                            this.projectX -= 15;
+	                            this.projectY -= 10;
+	                        }
+	                        case 3 -> {
+	                            this.projectX += 15;
+	                            this.projectY -= 10;
+	                        }
+	                        default -> {
+	                        }
+	                    }
 
 					this.imageHitmark[entity.damageType[i]].plotSprite(this.projectX - 12, this.projectY - 12);
 					this.fontPlain11.centreString(this.projectX, 0, String.valueOf(entity.damage[i]), this.projectY + 4);
@@ -6493,26 +6410,26 @@ public class Client extends GameShell {
 					}
 				}
 
-                    switch (this.chatEffect[i]) {
-                        case 0:
-                            this.fontBold12.centreString(this.projectX, 0, message, this.projectY + 1);
-                            this.fontBold12.centreString(this.projectX, color, message, this.projectY);
-                            break;
-                        case 1:
-                            this.fontBold12.centreStringWave(this.projectY + 1, this.sceneCycle, message, this.projectX, 0);
-                            this.fontBold12.centreStringWave(this.projectY, this.sceneCycle, message, this.projectX, color);
-                            break;
-                        case 2:
-                            int w = this.fontBold12.stringWid(message);
-                            int offsetX = (150 - this.chatTimer[i]) * (w + 100) / 150;
-                            Pix2D.setClipping(this.projectX + 50, 334, 0, this.projectX - 50);
-                            this.fontBold12.drawString(message, 0, this.projectY + 1, this.projectX + 50 - offsetX);
-                            this.fontBold12.drawString(message, color, this.projectY, this.projectX + 50 - offsetX);
-                            Pix2D.resetClipping();
-                            break;
-                        default:
-                            break;
-                    }
+	                    switch (this.chatEffect[i]) {
+	                        case 0 -> {
+	                            this.fontBold12.centreString(this.projectX, 0, message, this.projectY + 1);
+	                            this.fontBold12.centreString(this.projectX, color, message, this.projectY);
+	                        }
+	                        case 1 -> {
+	                            this.fontBold12.centreStringWave(this.projectY + 1, this.sceneCycle, message, this.projectX, 0);
+	                            this.fontBold12.centreStringWave(this.projectY, this.sceneCycle, message, this.projectX, color);
+	                        }
+	                        case 2 -> {
+	                            int w = this.fontBold12.stringWid(message);
+	                            int offsetX = (150 - this.chatTimer[i]) * (w + 100) / 150;
+	                            Pix2D.setClipping(this.projectX + 50, 334, 0, this.projectX - 50);
+	                            this.fontBold12.drawString(message, 0, this.projectY + 1, this.projectX + 50 - offsetX);
+	                            this.fontBold12.drawString(message, color, this.projectY, this.projectX + 50 - offsetX);
+	                            Pix2D.resetClipping();
+	                        }
+	                        default -> {
+	                        }
+	                    }
 			} else {
 				this.fontBold12.centreString(this.projectX, 0, message, this.projectY + 1);
 				this.fontBold12.centreString(this.projectX, 16776960, message, this.projectY);
@@ -6873,20 +6790,20 @@ public class Client extends GameShell {
             int mx = super.mouseX;
             int my = super.mouseY;
             switch (this.menuArea) {
-                case 0:
+                case 0 -> {
                     mx -= 4;
                     my -= 4;
-                    break;
-                case 1:
+                }
+                case 1 -> {
                     mx -= 553;
                     my -= 205;
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     mx -= 17;
                     my -= 357;
-                    break;
-                default:
-                    break;
+                }
+                default -> {
+                }
             }
 
         for (int i = 0; i < this.menuSize; i++) {
@@ -6922,84 +6839,76 @@ public class Client extends GameShell {
 			LocType loc = LocType.get(locId);
 				if (loc.mapscene == -1) {
 					if (shape == 0 || shape == 2) {
-						switch (angle) {
-							case 0:
-								this.imageMinimap.pixels[offset] = rgb;
-								this.imageMinimap.pixels[offset + 512] = rgb;
-								this.imageMinimap.pixels[offset + 1024] = rgb;
-								this.imageMinimap.pixels[offset + 1536] = rgb;
-								break;
-							case 1:
-								this.imageMinimap.pixels[offset] = rgb;
-								this.imageMinimap.pixels[offset + 1] = rgb;
-								this.imageMinimap.pixels[offset + 2] = rgb;
-								this.imageMinimap.pixels[offset + 3] = rgb;
-								break;
-							case 2:
-								this.imageMinimap.pixels[offset + 3] = rgb;
-								this.imageMinimap.pixels[offset + 3 + 512] = rgb;
-								this.imageMinimap.pixels[offset + 3 + 1024] = rgb;
-								this.imageMinimap.pixels[offset + 3 + 1536] = rgb;
-								break;
-							case 3:
-								this.imageMinimap.pixels[offset + 1536] = rgb;
-								this.imageMinimap.pixels[offset + 1536 + 1] = rgb;
-								this.imageMinimap.pixels[offset + 1536 + 2] = rgb;
-								this.imageMinimap.pixels[offset + 1536 + 3] = rgb;
-								break;
-							default:
-								break;
-						}
+								switch (angle) {
+									case 0 -> {
+										this.imageMinimap.pixels[offset] = rgb;
+										this.imageMinimap.pixels[offset + 512] = rgb;
+										this.imageMinimap.pixels[offset + 1024] = rgb;
+										this.imageMinimap.pixels[offset + 1536] = rgb;
+									}
+									case 1 -> {
+										this.imageMinimap.pixels[offset] = rgb;
+										this.imageMinimap.pixels[offset + 1] = rgb;
+										this.imageMinimap.pixels[offset + 2] = rgb;
+										this.imageMinimap.pixels[offset + 3] = rgb;
+									}
+									case 2 -> {
+										this.imageMinimap.pixels[offset + 3] = rgb;
+										this.imageMinimap.pixels[offset + 3 + 512] = rgb;
+										this.imageMinimap.pixels[offset + 3 + 1024] = rgb;
+										this.imageMinimap.pixels[offset + 3 + 1536] = rgb;
+									}
+									case 3 -> {
+										this.imageMinimap.pixels[offset + 1536] = rgb;
+										this.imageMinimap.pixels[offset + 1536 + 1] = rgb;
+										this.imageMinimap.pixels[offset + 1536 + 2] = rgb;
+										this.imageMinimap.pixels[offset + 1536 + 3] = rgb;
+									}
+									default -> {
+									}
+								}
 					}
 
 					if (shape == 3) {
-						switch (angle) {
-							case 0:
-								this.imageMinimap.pixels[offset] = rgb;
-								break;
-							case 1:
-								this.imageMinimap.pixels[offset + 3] = rgb;
-								break;
-							case 2:
-								this.imageMinimap.pixels[offset + 3 + 1536] = rgb;
-								break;
-							case 3:
-								this.imageMinimap.pixels[offset + 1536] = rgb;
-								break;
-							default:
-								break;
-						}
+							switch (angle) {
+								case 0 -> this.imageMinimap.pixels[offset] = rgb;
+								case 1 -> this.imageMinimap.pixels[offset + 3] = rgb;
+								case 2 -> this.imageMinimap.pixels[offset + 3 + 1536] = rgb;
+								case 3 -> this.imageMinimap.pixels[offset + 1536] = rgb;
+								default -> {
+								}
+							}
 				}
 
 					if (shape == 2) {
-						switch (angle) {
-							case 3:
-								this.imageMinimap.pixels[offset] = rgb;
-								this.imageMinimap.pixels[offset + 512] = rgb;
-								this.imageMinimap.pixels[offset + 1024] = rgb;
-								this.imageMinimap.pixels[offset + 1536] = rgb;
-								break;
-							case 0:
-								this.imageMinimap.pixels[offset] = rgb;
-								this.imageMinimap.pixels[offset + 1] = rgb;
-								this.imageMinimap.pixels[offset + 2] = rgb;
-								this.imageMinimap.pixels[offset + 3] = rgb;
-								break;
-							case 1:
-								this.imageMinimap.pixels[offset + 3] = rgb;
-								this.imageMinimap.pixels[offset + 3 + 512] = rgb;
-								this.imageMinimap.pixels[offset + 3 + 1024] = rgb;
-								this.imageMinimap.pixels[offset + 3 + 1536] = rgb;
-								break;
-							case 2:
-								this.imageMinimap.pixels[offset + 1536] = rgb;
-								this.imageMinimap.pixels[offset + 1536 + 1] = rgb;
-								this.imageMinimap.pixels[offset + 1536 + 2] = rgb;
-								this.imageMinimap.pixels[offset + 1536 + 3] = rgb;
-								break;
-							default:
-								break;
-						}
+							switch (angle) {
+								case 3 -> {
+									this.imageMinimap.pixels[offset] = rgb;
+									this.imageMinimap.pixels[offset + 512] = rgb;
+									this.imageMinimap.pixels[offset + 1024] = rgb;
+									this.imageMinimap.pixels[offset + 1536] = rgb;
+								}
+								case 0 -> {
+									this.imageMinimap.pixels[offset] = rgb;
+									this.imageMinimap.pixels[offset + 1] = rgb;
+									this.imageMinimap.pixels[offset + 2] = rgb;
+									this.imageMinimap.pixels[offset + 3] = rgb;
+								}
+								case 1 -> {
+									this.imageMinimap.pixels[offset + 3] = rgb;
+									this.imageMinimap.pixels[offset + 3 + 512] = rgb;
+									this.imageMinimap.pixels[offset + 3 + 1024] = rgb;
+									this.imageMinimap.pixels[offset + 3 + 1536] = rgb;
+								}
+								case 2 -> {
+									this.imageMinimap.pixels[offset + 1536] = rgb;
+									this.imageMinimap.pixels[offset + 1536 + 1] = rgb;
+									this.imageMinimap.pixels[offset + 1536 + 2] = rgb;
+									this.imageMinimap.pixels[offset + 1536 + 3] = rgb;
+								}
+								default -> {
+								}
+							}
 				}
 				} else {
 					Pix8 mapScene = this.imageMapscene[loc.mapscene];
@@ -7301,22 +7210,22 @@ public class Client extends GameShell {
 			int startX = this.bfsStepX[length];
 			int startZ = this.bfsStepZ[length];
 
-				switch (type) {
-					case 0: // MOVE_GAMECLICK
-						this.out.pIsaac(63);
-						this.out.p1(bufferSize + bufferSize + 3);
-						break;
-					case 1: // MOVE_MINIMAPCLICK
-						this.out.pIsaac(56);
-						this.out.p1(bufferSize + bufferSize + 3 + 14);
-						break;
-					case 2: // MOVE_OPCLICK
-						this.out.pIsaac(167);
-						this.out.p1(bufferSize + bufferSize + 3);
-						break;
-					default:
-						break;
-				}
+					switch (type) {
+						case 0 -> { // MOVE_GAMECLICK
+							this.out.pIsaac(63);
+							this.out.p1(bufferSize + bufferSize + 3);
+						}
+						case 1 -> { // MOVE_MINIMAPCLICK
+							this.out.pIsaac(56);
+							this.out.p1(bufferSize + bufferSize + 3 + 14);
+						}
+						case 2 -> { // MOVE_OPCLICK
+							this.out.pIsaac(167);
+							this.out.p1(bufferSize + bufferSize + 3);
+						}
+						default -> {
+						}
+					}
 
 			if (super.actionKey[5] == 1) {
 				this.out.p1(1);
@@ -8315,30 +8224,30 @@ public class Client extends GameShell {
 				if (this.hintType == 1) {
 					this.hintNpc = this.in.g2();
 					} else if (this.hintType >= 2 && this.hintType <= 6) {
-						switch (this.hintType) {
-							case 2:
-								this.hintOffsetX = 64;
-								this.hintOffsetZ = 64;
-								break;
-							case 3:
-								this.hintOffsetX = 0;
-								this.hintOffsetZ = 64;
-								break;
-							case 4:
-								this.hintOffsetX = 128;
-								this.hintOffsetZ = 64;
-								break;
-							case 5:
-								this.hintOffsetX = 64;
-								this.hintOffsetZ = 0;
-								break;
-							case 6:
-								this.hintOffsetX = 64;
-								this.hintOffsetZ = 128;
-								break;
-							default:
-								break;
-						}
+							switch (this.hintType) {
+								case 2 -> {
+									this.hintOffsetX = 64;
+									this.hintOffsetZ = 64;
+								}
+								case 3 -> {
+									this.hintOffsetX = 0;
+									this.hintOffsetZ = 64;
+								}
+								case 4 -> {
+									this.hintOffsetX = 128;
+									this.hintOffsetZ = 64;
+								}
+								case 5 -> {
+									this.hintOffsetX = 64;
+									this.hintOffsetZ = 0;
+								}
+								case 6 -> {
+									this.hintOffsetX = 64;
+									this.hintOffsetZ = 128;
+								}
+								default -> {
+								}
+							}
 
 					this.hintType = 2;
 					this.hintTileX = this.in.g2();
@@ -8525,18 +8434,11 @@ public class Client extends GameShell {
 						String uncompressed = WordPack.unpack(this.psize - 13, this.in);
 						String filtered = WordFilter.filter(uncompressed);
 
-							switch (staffModLevel) {
-								case 2:
-								case 3:
-									this.addMessage(filtered, "@cr2@" + JString.formatDisplayName(JString.fromBase37(from)), 7);
-									break;
-								case 1:
-									this.addMessage(filtered, "@cr1@" + JString.formatDisplayName(JString.fromBase37(from)), 7);
-									break;
-								default:
-									this.addMessage(filtered, JString.formatDisplayName(JString.fromBase37(from)), 3);
-									break;
-							}
+								switch (staffModLevel) {
+									case 2, 3 -> this.addMessage(filtered, "@cr2@" + JString.formatDisplayName(JString.fromBase37(from)), 7);
+									case 1 -> this.addMessage(filtered, "@cr1@" + JString.formatDisplayName(JString.fromBase37(from)), 7);
+									default -> this.addMessage(filtered, JString.formatDisplayName(JString.fromBase37(from)), 3);
+								}
 					} catch (Exception ignore) {
 						SignLink.reporterror("cde1");
 					}
@@ -8610,8 +8512,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.b(IILmb;)V")
     public final void readZonePacket(int ptype, Packet buf) {
         switch (ptype) {
-            case 232:
-            case 125: {
+            case 232, 125 -> {
                 // LOC_ADD_CHANGE || LOC_DEL
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8627,9 +8528,8 @@ public class Client extends GameShell {
                 if (x >= 0 && z >= 0 && x < 104 && z < 104) {
                     this.appendLoc(x, shape, -1, id, angle, layer, z, this.currentLevel, 0);
                 }
-                break;
             }
-            case 155: {
+            case 155 -> {
                 // LOC_ANIM
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8649,7 +8549,7 @@ public class Client extends GameShell {
                     int heightNW = this.levelHeightmap[this.currentLevel][x][z + 1];
 
                     switch (layer) {
-                        case 0: {
+                        case 0 -> {
                             Wall wall = this.scene.getWall(x, z, this.currentLevel);
                             if (wall != null) {
                                 int locId = wall.typecode1 >> 14 & 0x7FFF;
@@ -8660,16 +8560,14 @@ public class Client extends GameShell {
                                     wall.model1 = new ClientLocAnim(heightNW, heightNE, heightSW, shape, angle, false, heightSE, locId, id);
                                 }
                             }
-                            break;
                         }
-                        case 1: {
+                        case 1 -> {
                             Decor decor = this.scene.getDecor(x, this.currentLevel, z);
                             if (decor != null) {
                                 decor.model = new ClientLocAnim(heightNW, heightNE, heightSW, 4, 0, false, heightSE, decor.typecode >> 14 & 0x7FFF, id);
                             }
-                            break;
                         }
-                        case 2: {
+                        case 2 -> {
                             Sprite sprite = this.scene.getSprite(this.currentLevel, z, x);
                             if (shape == 11) {
                                 shape = 10;
@@ -8678,22 +8576,19 @@ public class Client extends GameShell {
                             if (sprite != null) {
                                 sprite.model = new ClientLocAnim(heightNW, heightNE, heightSW, shape, angle, false, heightSE, sprite.typecode >> 14 & 0x7FFF, id);
                             }
-                            break;
                         }
-                        case 3: {
+                        case 3 -> {
                             GroundDecor decor = this.scene.getGroundDecor(x, z, this.currentLevel);
                             if (decor != null) {
                                 decor.model = new ClientLocAnim(heightNW, heightNE, heightSW, 22, angle, false, heightSE, decor.typecode >> 14 & 0x7FFF, id);
                             }
-                            break;
                         }
-                        default:
-                            break;
+                        default -> {
+                        }
                     }
                 }
-                break;
             }
-            case 234: {
+            case 234 -> {
                 // OBJ_ADD
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8714,9 +8609,8 @@ public class Client extends GameShell {
                     this.objStacks[this.currentLevel][x][z].push(obj);
                     this.sortObjStacks(x, z);
                 }
-                break;
             }
-            case 39: {
+            case 39 -> {
                 // OBJ_DEL
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8741,9 +8635,8 @@ public class Client extends GameShell {
                         this.sortObjStacks(x, z);
                     }
                 }
-                break;
             }
-            case 137: {
+            case 137 -> {
                 // MAP_PROJANIM
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8770,9 +8663,8 @@ public class Client extends GameShell {
                     proj.updateVelocity(dz, this.getHeightmapY(dz, this.currentLevel, dx) - dstHeight, dx, loopCycle + startDelay);
                     this.projectiles.push(proj);
                 }
-                break;
             }
-            case 198: {
+            case 198 -> {
                 // MAP_ANIM
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8789,9 +8681,8 @@ public class Client extends GameShell {
                     MapSpotAnim spot = new MapSpotAnim(z, x, this.currentLevel, id, this.getHeightmapY(z, this.currentLevel, x) - height, loopCycle, delay);
                     this.spotanims.push(spot);
                 }
-                break;
             }
-            case 69: {
+            case 69 -> {
                 // OBJ_REVEAL
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8813,9 +8704,8 @@ public class Client extends GameShell {
                     this.objStacks[this.currentLevel][x][z].push(obj);
                     this.sortObjStacks(x, z);
                 }
-                break;
             }
-            case 29: {
+            case 29 -> {
                 // LOC_MERGE
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8882,9 +8772,8 @@ public class Client extends GameShell {
                         player.maxTileZ = z + north;
                     }
                 }
-                break;
             }
-            case 209: {
+            case 209 -> {
                 // OBJ_COUNT
                 int pos = buf.g1();
                 int x = (pos >> 4 & 0x7) + this.baseX;
@@ -8907,10 +8796,9 @@ public class Client extends GameShell {
                         this.sortObjStacks(x, z);
                     }
                 }
-                break;
             }
-            default:
-                break;
+            default -> {
+            }
         }
     }
 
@@ -8951,20 +8839,12 @@ public class Client extends GameShell {
         int otherAngle = 0;
 
         switch (loc.layer) {
-            case 0:
-                typecode = this.scene.getWallTypecode(loc.level, loc.x, loc.z);
-                break;
-            case 1:
-                typecode = this.scene.getDecorTypecode(loc.z, loc.level, loc.x);
-                break;
-            case 2:
-                typecode = this.scene.getLocTypecode(loc.level, loc.x, loc.z);
-                break;
-            case 3:
-                typecode = this.scene.getGroundDecorTypecode(loc.level, loc.x, loc.z);
-                break;
-            default:
-                break;
+            case 0 -> typecode = this.scene.getWallTypecode(loc.level, loc.x, loc.z);
+            case 1 -> typecode = this.scene.getDecorTypecode(loc.z, loc.level, loc.x);
+            case 2 -> typecode = this.scene.getLocTypecode(loc.level, loc.x, loc.z);
+            case 3 -> typecode = this.scene.getGroundDecorTypecode(loc.level, loc.x, loc.z);
+            default -> {
+            }
         }
 
         if (typecode != 0) {
@@ -8992,20 +8872,12 @@ public class Client extends GameShell {
 
         int typecode = 0;
         switch (layer) {
-            case 0:
-                typecode = this.scene.getWallTypecode(level, x, z);
-                break;
-            case 1:
-                typecode = this.scene.getDecorTypecode(z, level, x);
-                break;
-            case 2:
-                typecode = this.scene.getLocTypecode(level, x, z);
-                break;
-            case 3:
-                typecode = this.scene.getGroundDecorTypecode(level, x, z);
-                break;
-            default:
-                break;
+            case 0 -> typecode = this.scene.getWallTypecode(level, x, z);
+            case 1 -> typecode = this.scene.getDecorTypecode(z, level, x);
+            case 2 -> typecode = this.scene.getLocTypecode(level, x, z);
+            case 3 -> typecode = this.scene.getGroundDecorTypecode(level, x, z);
+            default -> {
+            }
         }
 
 		if (typecode != 0) {
@@ -9015,20 +8887,18 @@ public class Client extends GameShell {
 			int otherAngle = otherInfo >> 6;
 
             switch (layer) {
-                case 0: {
+                case 0 -> {
                     this.scene.removeWall(x, level, z);
 
                     LocType loc = LocType.get(otherId);
                     if (loc.blockwalk) {
                         this.levelCollisionMap[level].delWall(loc.blockrange, z, otherAngle, otherShape, x);
                     }
-                    break;
                 }
-                case 1: {
+                case 1 -> {
                     this.scene.removeDecor(z, x, level);
-                    break;
                 }
-                case 2: {
+                case 2 -> {
                     this.scene.removeLoc(x, z, level);
 
                     LocType loc = LocType.get(otherId);
@@ -9039,19 +8909,17 @@ public class Client extends GameShell {
                     if (loc.blockwalk) {
                         this.levelCollisionMap[level].delLoc(loc.width, z, x, loc.blockrange, loc.length, otherAngle);
                     }
-                    break;
                 }
-                case 3: {
+                case 3 -> {
                     this.scene.removeGroundDecor(z, level, x);
 
                     LocType loc = LocType.get(otherId);
                     if (loc.blockwalk && loc.active) {
                         this.levelCollisionMap[level].removeBlocked(z, x);
                     }
-                    break;
                 }
-                default:
-                    break;
+                default -> {
+                }
             }
 		}
 
@@ -9160,50 +9028,44 @@ public class Client extends GameShell {
 
 		int op = buf.gBit(2);
 		switch (op) {
-			case 0: {
-				this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
-				break;
-			}
-			case 1: {
-				int walkDir = buf.gBit(3);
-				localPlayer.step(walkDir, false);
+				case 0 -> this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
+				case 1 -> {
+					int walkDir = buf.gBit(3);
+					localPlayer.step(walkDir, false);
 
-				int extendedInfo = buf.gBit(1);
-				if (extendedInfo == 1) {
-					this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
+					int extendedInfo = buf.gBit(1);
+					if (extendedInfo == 1) {
+						this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
+					}
 				}
-				break;
-			}
-			case 2: {
-				int walkDir = buf.gBit(3);
-				localPlayer.step(walkDir, true);
+				case 2 -> {
+					int walkDir = buf.gBit(3);
+					localPlayer.step(walkDir, true);
 
-				int runDir = buf.gBit(3);
-				localPlayer.step(runDir, true);
+					int runDir = buf.gBit(3);
+					localPlayer.step(runDir, true);
 
-				int extendedInfo = buf.gBit(1);
-				if (extendedInfo == 1) {
-					this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
+					int extendedInfo = buf.gBit(1);
+					if (extendedInfo == 1) {
+						this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
+					}
 				}
-				break;
-			}
-			case 3: {
-				this.currentLevel = buf.gBit(2);
-				int localX = buf.gBit(7);
-				int localZ = buf.gBit(7);
-				int jump = buf.gBit(1);
+				case 3 -> {
+					this.currentLevel = buf.gBit(2);
+					int localX = buf.gBit(7);
+					int localZ = buf.gBit(7);
+					int jump = buf.gBit(1);
 
-				localPlayer.move(jump == 1, localX, localZ);
+					localPlayer.move(jump == 1, localX, localZ);
 
-				int extendedInfo = buf.gBit(1);
-				if (extendedInfo == 1) {
-					this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
+					int extendedInfo = buf.gBit(1);
+					if (extendedInfo == 1) {
+						this.entityUpdateIds[this.entityUpdateCount++] = this.LOCAL_PLAYER_INDEX;
+					}
 				}
-				break;
+				default -> {
+				}
 			}
-			default:
-				break;
-		}
 	}
 
 	// note: placement confirmed by referencing OS1
@@ -9235,13 +9097,12 @@ public class Client extends GameShell {
 			} else {
 				int op = buf.gBit(2);
 				switch (op) {
-					case 0: {
+					case 0 -> {
 						this.playerIds[this.playerCount++] = index;
 						player.cycle = loopCycle;
 						this.entityUpdateIds[this.entityUpdateCount++] = index;
-						break;
 					}
-					case 1: {
+					case 1 -> {
 						this.playerIds[this.playerCount++] = index;
 						player.cycle = loopCycle;
 
@@ -9252,9 +9113,8 @@ public class Client extends GameShell {
 						if (extendedInfo == 1) {
 							this.entityUpdateIds[this.entityUpdateCount++] = index;
 						}
-						break;
 					}
-					case 2: {
+					case 2 -> {
 						this.playerIds[this.playerCount++] = index;
 						player.cycle = loopCycle;
 
@@ -9268,14 +9128,10 @@ public class Client extends GameShell {
 						if (var15 == 1) {
 							this.entityUpdateIds[this.entityUpdateCount++] = index;
 						}
-						break;
 					}
-					case 3: {
-						this.entityRemovalIds[this.entityRemovalCount++] = index;
-						break;
+					case 3 -> this.entityRemovalIds[this.entityRemovalCount++] = index;
+					default -> {
 					}
-					default:
-						break;
 				}
 			}
 		}
@@ -9453,15 +9309,9 @@ public class Client extends GameShell {
 						player.chatTimer = 150;
 
 						switch (type) {
-							case 2:
-							case 3:
-								this.addMessage(filtered, "@cr2@" + player.name, 1);
-								break;
-							case 1:
-								this.addMessage(filtered, "@cr1@" + player.name, 1);
-								break;
-							default:
-								this.addMessage(filtered, player.name, 2);
+							case 2, 3 -> this.addMessage(filtered, "@cr2@" + player.name, 1);
+							case 1 -> this.addMessage(filtered, "@cr1@" + player.name, 1);
+							default -> this.addMessage(filtered, player.name, 2);
 						}
 					} catch (Exception ignore) {
 						SignLink.reporterror("cde2");
@@ -9578,13 +9428,12 @@ public class Client extends GameShell {
 				int op = buf.gBit(2);
 
 				switch (op) {
-					case 0: {
+					case 0 -> {
 						this.npcIds[this.npcCount++] = index;
 						npc.cycle = loopCycle;
 						this.entityUpdateIds[this.entityUpdateCount++] = index;
-						break;
 					}
-					case 1: {
+					case 1 -> {
 						this.npcIds[this.npcCount++] = index;
 						npc.cycle = loopCycle;
 
@@ -9595,9 +9444,8 @@ public class Client extends GameShell {
 						if (extendedInfo == 1) {
 							this.entityUpdateIds[this.entityUpdateCount++] = index;
 						}
-						break;
 					}
-					case 2: {
+					case 2 -> {
 						this.npcIds[this.npcCount++] = index;
 						npc.cycle = loopCycle;
 
@@ -9611,14 +9459,10 @@ public class Client extends GameShell {
 						if (extendedInfo == 1) {
 							this.entityUpdateIds[this.entityUpdateCount++] = index;
 						}
-						break;
 					}
-					case 3: {
-						this.entityRemovalIds[this.entityRemovalCount++] = index;
-						break;
+					case 3 -> this.entityRemovalIds[this.entityRemovalCount++] = index;
+					default -> {
 					}
-					default:
-						break;
 				}
 			}
 		}
@@ -10023,23 +9867,13 @@ public class Client extends GameShell {
 			this.crossCycle = 0;
 
 			switch (action) {
-				case 99: // OPOBJ3
-					this.out.pIsaac(27);
-					break;
-				case 993: // OPOBJ2
-					this.out.pIsaac(110);
-					break;
-				case 224: // OPOBJ1
-					this.out.pIsaac(231);
-					break;
-				case 877: // OPOBJ5
-					this.out.pIsaac(225);
-					break;
-				case 746: // OPOBJ4
-					this.out.pIsaac(17);
-					break;
-				default:
-					break;
+				case 99 -> this.out.pIsaac(27); // OPOBJ3
+				case 993 -> this.out.pIsaac(110); // OPOBJ2
+				case 224 -> this.out.pIsaac(231); // OPOBJ1
+				case 877 -> this.out.pIsaac(225); // OPOBJ5
+				case 746 -> this.out.pIsaac(17);  // OPOBJ4
+				default -> {
+				}
 			}
 
 			this.out.p2(this.sceneBaseTileX + b);
@@ -10138,15 +9972,11 @@ public class Client extends GameShell {
 			this.pressedContinueOption = true;
 		}
 		switch (action) {
-			case 285: {
+			case 285 -> {
 				// OPLOC1
 				this.interactWithLoc(238, b, a, c);
-				break;
 			}
-			case 406:
-			case 436:
-			case 557:
-			case 556: {
+			case 406, 436, 557, 556 -> {
 				String option = this.menuOption[optionId];
 				int tag = option.indexOf("@whi@");
 
@@ -10154,41 +9984,23 @@ public class Client extends GameShell {
 					long name37 = JString.toBase37(option.substring(tag + 5).trim());
 
 					switch (action) {
-						case 406:
-							this.addFriend(name37);
-							break;
-						case 436:
-							this.addIgnore(name37);
-							break;
-						case 557:
-							this.removeFriend(name37);
-							break;
-						case 556:
-							this.removeIgnore(name37);
-							break;
-						default:
-							break;
+						case 406 -> this.addFriend(name37);
+						case 436 -> this.addIgnore(name37);
+						case 557 -> this.removeFriend(name37);
+						case 556 -> this.removeIgnore(name37);
+						default -> {
+						}
 					}
 				}
-				break;
 			}
-			case 947: {
+			case 947 -> {
 				this.closeInterfaces();
-				break;
 			}
-			case 405:
-			case 38:
-			case 422:
-			case 478:
-			case 347: {
+			case 405, 38, 422, 478, 347 -> {
 				switch (action) {
-					case 347: // OPHELD5
-						this.out.pIsaac(133);
-						break;
-					case 422: // OPHELD3
-						this.out.pIsaac(221);
-						break;
-					case 478: {
+					case 347 -> this.out.pIsaac(133); // OPHELD5
+					case 422 -> this.out.pIsaac(221); // OPHELD3
+					case 478 -> {
 						if ((b & 0x3) == 0) {
 							oplogic5++;
 						}
@@ -10198,9 +10010,8 @@ public class Client extends GameShell {
 						}
 						// OPHELD4
 						this.out.pIsaac(6);
-						break;
 					}
-					case 405: {
+					case 405 -> {
 						oplogic3 += a;
 						if (oplogic3 >= 97) {
 							// ANTICHEAT_OPLOGIC3
@@ -10209,13 +10020,10 @@ public class Client extends GameShell {
 						}
 						// OPHELD1
 						this.out.pIsaac(228);
-						break;
 					}
-					case 38: // OPHELD2
-						this.out.pIsaac(166);
-						break;
-					default:
-						break;
+					case 38 -> this.out.pIsaac(166); // OPHELD2
+					default -> {
+					}
 				}
 
 				this.out.p2(a);
@@ -10236,7 +10044,7 @@ public class Client extends GameShell {
 				}
 				break;
 			}
-			case 965: {
+			case 965 -> {
 				boolean success = this.tryMove(0, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 0, localPlayer.routeTileX[0]);
 				if (!success) {
 					this.tryMove(1, localPlayer.routeTileZ[0], 0, 2, false, 0, b, 0, c, 1, localPlayer.routeTileX[0]);
@@ -10253,14 +10061,13 @@ public class Client extends GameShell {
 				this.out.p2(this.sceneBaseTileZ + c);
 				this.out.p2(a);
 				this.out.p2(this.activeSpellId);
-				break;
 			}
-			default:
-				break;
+			default -> {
+			}
 		}
 		boolean handledInvButton = true;
 		switch (action) {
-			case 415: {
+			case 415 -> {
 				if ((c & 0x3) == 0) {
 					oplogic7++;
 				}
@@ -10271,15 +10078,10 @@ public class Client extends GameShell {
 				}
 				// INV_BUTTON5
 				this.out.pIsaac(212);
-				break;
 			}
-			case 22: // INV_BUTTON3
-				this.out.pIsaac(158);
-				break;
-			case 596: // INV_BUTTON2
-				this.out.pIsaac(193);
-				break;
-			case 892: {
+			case 22 -> this.out.pIsaac(158); // INV_BUTTON3
+			case 596 -> this.out.pIsaac(193); // INV_BUTTON2
+			case 892 -> {
 				if ((b & 0x3) == 0) {
 					oplogic9++;
 				}
@@ -10290,14 +10092,9 @@ public class Client extends GameShell {
 				}
 				// INV_BUTTON4
 				this.out.pIsaac(204);
-				break;
 			}
-			case 602: // INV_BUTTON1
-				this.out.pIsaac(153);
-				break;
-			default:
-				handledInvButton = false;
-				break;
+			case 602 -> this.out.pIsaac(153); // INV_BUTTON1
+			default -> handledInvButton = false;
 		}
 
 		if (handledInvButton) {
@@ -10366,10 +10163,8 @@ public class Client extends GameShell {
 				this.crossCycle = 0;
 
 				switch (action) {
-					case 963: // OPNPC4
-						this.out.pIsaac(229);
-						break;
-					case 6: {
+					case 963 -> this.out.pIsaac(229); // OPNPC4
+					case 6 -> {
 						if ((a & 0x3) == 0) {
 							oplogic2++;
 						}
@@ -10380,9 +10175,8 @@ public class Client extends GameShell {
 						}
 						// OPNPC3
 						this.out.pIsaac(132);
-						break;
 					}
-					case 245: {
+					case 245 -> {
 						if ((a & 0x3) == 0) {
 							oplogic4++;
 						}
@@ -10393,16 +10187,11 @@ public class Client extends GameShell {
 						}
 						// OPNPC5
 						this.out.pIsaac(102);
-						break;
 					}
-					case 728: // OPNPC1
-						this.out.pIsaac(222);
-						break;
-					case 542: // OPNPC2
-						this.out.pIsaac(84);
-						break;
-					default:
-						break;
+					case 728 -> this.out.pIsaac(222); // OPNPC1
+					case 542 -> this.out.pIsaac(84);  // OPNPC2
+					default -> {
+					}
 				}
 
 				this.out.p2(a);
@@ -10542,13 +10331,9 @@ public class Client extends GameShell {
 				this.crossCycle = 0;
 
 				switch (action) {
-					case 1544: // OPPLAYER3
-						this.out.pIsaac(64);
-						break;
-					case 1373: // OPPLAYER4
-						this.out.pIsaac(43);
-						break;
-					case 151: {
+					case 1544 -> this.out.pIsaac(64); // OPPLAYER3
+					case 1373 -> this.out.pIsaac(43); // OPPLAYER4
+					case 151 -> {
 						oplogic8++;
 						if (oplogic8 >= 90) {
 							// ANTICHEAT_OPLOGIC8
@@ -10557,13 +10342,10 @@ public class Client extends GameShell {
 						}
 						// OPPLAYER2
 						this.out.pIsaac(219);
-						break;
 					}
-					case 1101: // OPPLAYER1
-						this.out.pIsaac(211);
-						break;
-					default:
-						break;
+					case 1101 -> this.out.pIsaac(211); // OPPLAYER1
+					default -> {
+					}
 				}
 
 				this.out.p2(a);
@@ -10844,7 +10626,7 @@ public class Client extends GameShell {
 				}
 			} else if (child.type != 1) {
 				switch (child.type) {
-					case 2: {
+					case 2 -> {
 					int slot = 0;
 
 					for (int row = 0; row < child.height; row++) {
@@ -10938,9 +10720,8 @@ public class Client extends GameShell {
 							slot++;
 						}
 					}
-					break;
 					}
-					case 3: {
+					case 3 -> {
 					if (child.alpha == 0) {
 						if (child.fill) {
 							Pix2D.fillRect(child.colour, child.width, child.height, childX, childY);
@@ -10952,9 +10733,8 @@ public class Client extends GameShell {
 					} else {
 						Pix2D.drawRectTrans(child.height, child.colour, childX, childY, child.width, 256 - (child.alpha & 0xFF));
 					}
-					break;
 					}
-					case 4: {
+					case 4 -> {
 					PixFont font = child.font;
 					int colour = child.colour;
 					String text = child.text;
@@ -11040,9 +10820,8 @@ public class Client extends GameShell {
 
 						lineY += font.height;
 					}
-					break;
 					}
-					case 5: {
+					case 5 -> {
 					Pix32 image;
 					if (this.executeInterfaceScript(child)) {
 						image = child.activeGraphic;
@@ -11053,9 +10832,8 @@ public class Client extends GameShell {
 					if (image != null) {
 						image.plotSprite(childX, childY);
 					}
-					break;
 					}
-					case 6: {
+					case 6 -> {
 					int tmpX = Pix3D.centerX;
 					int tmpY = Pix3D.centerY;
 
@@ -11088,9 +10866,8 @@ public class Client extends GameShell {
 
 					Pix3D.centerX = tmpX;
 					Pix3D.centerY = tmpY;
-					break;
 					}
-					case 7: {
+					case 7 -> {
 					PixFont font = child.font;
 					int slot = 0;
 					for (int row = 0; row < child.height; row++) {
@@ -11116,10 +10893,9 @@ public class Client extends GameShell {
 							slot++;
 						}
 					}
-					break;
 					}
-					default:
-						break;
+					default -> {
+					}
 				}
 			}
 		}
@@ -11284,16 +11060,10 @@ public class Client extends GameShell {
 				}
 
 				switch (opcode) {
-					case 1:
-						register += this.skillLevel[script[pc++]];
-						break;
-					case 2:
-						register += this.skillBaseLevel[script[pc++]];
-						break;
-					case 3:
-						register += this.skillExperience[script[pc++]];
-						break;
-					case 4: {
+					case 1 -> register += this.skillLevel[script[pc++]];
+					case 2 -> register += this.skillBaseLevel[script[pc++]];
+					case 3 -> register += this.skillExperience[script[pc++]];
+					case 4 -> {
 						Component inv = Component.types[script[pc++]];
 						int obj = script[pc++] + 1;
 						for (int i = 0; i < inv.invSlotObjId.length; i++) {
@@ -11301,30 +11071,20 @@ public class Client extends GameShell {
 								register += inv.invSlotObjCount[i];
 							}
 						}
-						break;
 					}
-					case 5:
-						register += this.varps[script[pc++]];
-						break;
-					case 6:
-						register += levelExperience[this.skillBaseLevel[script[pc++]] - 1];
-						break;
-					case 7:
-						register += this.varps[script[pc++]] * 100 / 46875;
-						break;
-					case 8:
-						register += localPlayer.vislevel;
-						break;
-					case 9: {
+					case 5 -> register += this.varps[script[pc++]];
+					case 6 -> register += levelExperience[this.skillBaseLevel[script[pc++]] - 1];
+					case 7 -> register += this.varps[script[pc++]] * 100 / 46875;
+					case 8 -> register += localPlayer.vislevel;
+					case 9 -> {
 						for (int i = 0; i < 19; i++) {
 							if (i == 18) {
 								i = 20;
 							}
 							register += this.skillBaseLevel[i];
 						}
-						break;
 					}
-					case 10: {
+					case 10 -> {
 						Component inv = Component.types[script[pc++]];
 						int obj = script[pc++] + 1;
 						for (int i = 0; i < inv.invSlotObjId.length; i++) {
@@ -11333,22 +11093,16 @@ public class Client extends GameShell {
 								break;
 							}
 						}
-						break;
 					}
-					case 11:
-						register += this.runenergy;
-						break;
-					case 12:
-						register += this.runweight;
-						break;
-					case 13: {
+					case 11 -> register += this.runenergy;
+					case 12 -> register += this.runweight;
+					case 13 -> {
 						int varp = this.varps[script[pc++]];
 						int lsb = script[pc++];
 						register += (varp & 0x1 << lsb) == 0 ? 0 : 1;
-						break;
 					}
-					default:
-						break;
+					default -> {
+					}
 				}
 			}
 		} catch (Exception ignore) {
@@ -11695,51 +11449,40 @@ public class Client extends GameShell {
 
 		int value = this.varps[id];
 		switch (clientCode) {
-			case 1: {
+			case 1 -> {
 				switch (value) {
-					case 1:
-						Pix3D.initColourTable(0.9D);
-						break;
-					case 2:
-						Pix3D.initColourTable(0.8D);
-						break;
-					case 3:
-						Pix3D.initColourTable(0.7D);
-						break;
-					case 4:
-						Pix3D.initColourTable(0.6D);
-						break;
-					default:
-						break;
+					case 1 -> Pix3D.initColourTable(0.9D);
+					case 2 -> Pix3D.initColourTable(0.8D);
+					case 3 -> Pix3D.initColourTable(0.7D);
+					case 4 -> Pix3D.initColourTable(0.6D);
+					default -> {
+					}
 				}
 				ObjType.iconCache.clear();
 				this.redrawFrame = true;
-				break;
 			}
-			case 3: {
+			case 3 -> {
 				boolean lastMidiActive = this.midiActive;
 				switch (value) {
-					case 0:
+					case 0 -> {
 						this.setMidiVolume(128, this.midiActive);
 						this.midiActive = true;
-						break;
-					case 1:
+					}
+					case 1 -> {
 						this.setMidiVolume(96, this.midiActive);
 						this.midiActive = true;
-						break;
-					case 2:
+					}
+					case 2 -> {
 						this.setMidiVolume(64, this.midiActive);
 						this.midiActive = true;
-						break;
-					case 3:
+					}
+					case 3 -> {
 						this.setMidiVolume(32, this.midiActive);
 						this.midiActive = true;
-						break;
-					case 4:
-						this.midiActive = false;
-						break;
-					default:
-						break;
+					}
+					case 4 -> this.midiActive = false;
+					default -> {
+					}
 				}
 				if (this.midiActive != lastMidiActive && !lowMem) {
 					if (this.midiActive) {
@@ -11751,49 +11494,39 @@ public class Client extends GameShell {
 					}
 					this.nextMusicDelay = 0;
 				}
-				break;
 			}
-			case 4: {
+			case 4 -> {
 				switch (value) {
-					case 0:
+					case 0 -> {
 						this.waveEnabled = true;
 						this.setWaveVolume(128);
-						break;
-					case 1:
+					}
+					case 1 -> {
 						this.waveEnabled = true;
 						this.setWaveVolume(96);
-						break;
-					case 2:
+					}
+					case 2 -> {
 						this.waveEnabled = true;
 						this.setWaveVolume(64);
-						break;
-					case 3:
+					}
+					case 3 -> {
 						this.waveEnabled = true;
 						this.setWaveVolume(32);
-						break;
-					case 4:
-						this.waveEnabled = false;
-						break;
-					default:
-						break;
+					}
+					case 4 -> this.waveEnabled = false;
+					default -> {
+					}
 				}
-				break;
 			}
-			case 5:
-				this.oneMouseButton = value;
-				break;
-			case 6:
-				this.chatEffects = value;
-				break;
-			case 8:
+			case 5 -> this.oneMouseButton = value;
+			case 6 -> this.chatEffects = value;
+			case 8 -> {
 				this.splitPrivateChat = value;
 				this.redrawChatback = true;
-				break;
-			case 9:
-				this.bankArrangeMode = value;
-				break;
-			default:
-				break;
+			}
+			case 9 -> this.bankArrangeMode = value;
+			default -> {
+			}
 		}
 	}
 
@@ -11945,17 +11678,11 @@ public class Client extends GameShell {
 			if (this.lastAddress == 0) {
 				com.text = "";
 			} else {
-				String text;
-				switch (this.daysSinceLogin) {
-					case 0:
-						text = "earlier today";
-						break;
-					case 1:
-						text = "yesterday";
-						break;
-					default:
-						text = this.daysSinceLogin + " days ago";
-				}
+				String text = switch (this.daysSinceLogin) {
+					case 0 -> "earlier today";
+					case 1 -> "yesterday";
+					default -> this.daysSinceLogin + " days ago";
+				};
 
 				com.text = "You last logged in " + text + " from: " + SignLink.dns;
 			}
@@ -11972,63 +11699,47 @@ public class Client extends GameShell {
 			}
 		} else if (clientCode == 652) {
 			switch (this.daysSinceRecoveriesChanged) {
-				case 201:
+				case 201 -> {
 					if (this.warnMembersInNonMembers == 1) {
 						com.text = "@yel@This is a non-members world: @whi@Since you are a member we";
 					} else {
 						com.text = "";
 					}
-					break;
-				case 200:
-					com.text = "You have not yet set any password recovery questions.";
-					break;
-				default: {
+				}
+				case 200 -> com.text = "You have not yet set any password recovery questions.";
+				default -> {
 					String text;
-					switch (this.daysSinceRecoveriesChanged) {
-						case 0:
-							text = "Earlier today";
-							break;
-						case 1:
-							text = "Yesterday";
-							break;
-						default:
-							text = this.daysSinceRecoveriesChanged + " days ago";
-					}
+					text = switch (this.daysSinceRecoveriesChanged) {
+						case 0 -> "Earlier today";
+						case 1 -> "Yesterday";
+						default -> this.daysSinceRecoveriesChanged + " days ago";
+					};
 					com.text = text + " you changed your recovery questions";
-					break;
 				}
 			}
 		} else if (clientCode == 653) {
 			switch (this.daysSinceRecoveriesChanged) {
-				case 201:
+				case 201 -> {
 					if (this.warnMembersInNonMembers == 1) {
 						com.text = "@whi@recommend you use a members world instead. You may use";
 					} else {
 						com.text = "";
 					}
-					break;
-				case 200:
-					com.text = "We strongly recommend you do so now to secure your account.";
-					break;
-				default:
-					com.text = "If you do not remember making this change then cancel it immediately";
-					break;
+				}
+				case 200 -> com.text = "We strongly recommend you do so now to secure your account.";
+				default -> com.text = "If you do not remember making this change then cancel it immediately";
 			}
 		} else if (clientCode == 654) {
 			switch (this.daysSinceRecoveriesChanged) {
-				case 201:
+				case 201 -> {
 					if (this.warnMembersInNonMembers == 1) {
 						com.text = "@whi@this world but member benefits are unavailabe whilst here."; // [sic]
 					} else {
 						com.text = "";
 					}
-					break;
-				case 200:
-					com.text = "Do this from the 'account management' area on our front webpage";
-					break;
-				default:
-					com.text = "Do this from the 'account management' area on our front webpage";
-					break;
+				}
+				case 200 -> com.text = "Do this from the 'account management' area on our front webpage";
+				default -> com.text = "Do this from the 'account management' area on our front webpage";
 			}
 		}
 	}

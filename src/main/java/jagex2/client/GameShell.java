@@ -4,7 +4,7 @@ import deob.ObfuscatedName;
 import jagex2.graphics.Pix32;
 import jagex2.graphics.PixMap;
 
-import java.applet.Applet;
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -20,7 +20,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 @ObfuscatedName("a")
-public class GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
+public class GameShell extends Canvas implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
 
 	@ObfuscatedName("a.g")
 	public int state;
@@ -274,23 +274,21 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.deltime = 1000 / fps;
 	}
 
-	@Override
-	public final void start() {
-		if (this.state >= 0) {
-			this.state = 0;
-		}
-	}
+    // Lifecycle methods retained for compatibility (no longer Applet overrides)
+    public final void start() {
+        if (this.state >= 0) {
+            this.state = 0;
+        }
+    }
 
-	@Override
-	public final void stop() {
-		if (this.state >= 0) {
-			this.state = 4000 / this.deltime;
-		}
-	}
+    public final void stop() {
+        if (this.state >= 0) {
+            this.state = 4000 / this.deltime;
+        }
+    }
 
-	@Override
-	public final void destroy() {
-		this.state = -1;
+    public final void destroy() {
+        this.state = -1;
 
 		try {
 			Thread.sleep(5000L);
@@ -303,21 +301,21 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
-	@Override
-	public final void update(Graphics g) {
-		if (this.graphics == null) {
-			this.graphics = g;
-		}
+    @Override
+    public final void update(Graphics g) {
+        if (this.graphics == null) {
+            this.graphics = g;
+        }
 
 		this.redrawScreen = true;
 		this.refresh();
 	}
 
-	@Override
-	public final void paint(Graphics g) {
-		if (this.graphics == null) {
-			this.graphics = g;
-		}
+    @Override
+    public final void paint(Graphics g) {
+        if (this.graphics == null) {
+            this.graphics = g;
+        }
 
 		this.redrawScreen = true;
 		this.refresh();
@@ -452,41 +450,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			ch = 0;
 		}
 
-		switch (code) {
-			case 37: ch = 1; break;
-			case 39: ch = 2; break;
-			case 38: ch = 3; break;
-			case 40: ch = 4; break;
-			case 17: ch = 5; break;
-			case 8:
-			case 127:
-				ch = '\b';
-				break;
-			case 9:
-				ch = '\t';
-				break;
-			case 10:
-				ch = '\n';
-				break;
-			case 112: ch = 1008; break;
-			case 113: ch = 1009; break;
-			case 114: ch = 1010; break;
-			case 115: ch = 1011; break;
-			case 116: ch = 1012; break;
-			case 117: ch = 1013; break;
-			case 118: ch = 1014; break;
-			case 119: ch = 1015; break;
-			case 120: ch = 1016; break;
-			case 121: ch = 1017; break;
-			case 122: ch = 1018; break;
-			case 123: ch = 1019; break;
-			case 36: ch = 1000; break;
-			case 35: ch = 1001; break;
-			case 33: ch = 1002; break;
-			case 34: ch = 1003; break;
-			default:
-				// leave ch unchanged
-		}
+		ch = mapKeyCodeToChPressed(code, ch);
 
 		if (ch > 0 && ch < 128) {
 			this.actionKey[ch] = 1;
@@ -513,25 +477,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			ch = 0;
 		}
 
-		switch (code) {
-			case 37: ch = 1; break;
-			case 39: ch = 2; break;
-			case 38: ch = 3; break;
-			case 40: ch = 4; break;
-			case 17: ch = 5; break;
-			case 8:
-			case 127:
-				ch = '\b';
-				break;
-			case 9:
-				ch = '\t';
-				break;
-			case 10:
-				ch = '\n';
-				break;
-			default:
-				// leave ch unchanged
-		}
+		ch = (char) mapKeyCodeToChReleased(code, ch);
 
 		if (ch > 0 && ch < 128) {
 			this.actionKey[ch] = 0;
@@ -632,6 +578,50 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 
 		return this;
+	}
+
+	private static int mapKeyCodeToChPressed(int code, int defaultCh) {
+		return switch (code) {
+			case 37 -> 1;
+			case 39 -> 2;
+			case 38 -> 3;
+			case 40 -> 4;
+			case 17 -> 5;
+			case 8, 127 -> '\b';
+			case 9 -> '\t';
+			case 10 -> '\n';
+			case 112 -> 1008;
+			case 113 -> 1009;
+			case 114 -> 1010;
+			case 115 -> 1011;
+			case 116 -> 1012;
+			case 117 -> 1013;
+			case 118 -> 1014;
+			case 119 -> 1015;
+			case 120 -> 1016;
+			case 121 -> 1017;
+			case 122 -> 1018;
+			case 123 -> 1019;
+			case 36 -> 1000;
+			case 35 -> 1001;
+			case 33 -> 1002;
+			case 34 -> 1003;
+			default -> defaultCh;
+		};
+	}
+
+	private static int mapKeyCodeToChReleased(int code, int defaultCh) {
+		return switch (code) {
+			case 37 -> 1;
+			case 39 -> 2;
+			case 38 -> 3;
+			case 40 -> 4;
+			case 17 -> 5;
+			case 8, 127 -> '\b';
+			case 9 -> '\t';
+			case 10 -> '\n';
+			default -> defaultCh;
+		};
 	}
 
 	@ObfuscatedName("a.a(Ljava/lang/Runnable;I)V")

@@ -1,6 +1,7 @@
 package jagex2.client;
 
 import deob.ObfuscatedName;
+import java.util.concurrent.locks.LockSupport;
 
 @ObfuscatedName("fc")
 public class MouseTracking implements Runnable {
@@ -9,10 +10,10 @@ public class MouseTracking implements Runnable {
 	public Client app;
 
 	@ObfuscatedName("fc.b")
-	public boolean active = true;
+	public volatile boolean active = true;
 
 	@ObfuscatedName("fc.c")
-	public Object lock = new Object();
+	public final Object lock = new Object();
 
 	@ObfuscatedName("fc.d")
 	public int length;
@@ -27,6 +28,7 @@ public class MouseTracking implements Runnable {
 		this.app = app;
 	}
 
+	@Override
 	public void run() {
 		while (this.active) {
 			Object sync = this.lock;
@@ -38,9 +40,10 @@ public class MouseTracking implements Runnable {
 				}
 			}
 
-			try {
-				Thread.sleep(50L);
-			} catch (Exception ignore) {
+			// Park for ~50ms instead of Thread.sleep in a loop
+			LockSupport.parkNanos(50L * 1_000_000L);
+			if (Thread.currentThread().isInterrupted()) {
+				break;
 			}
 		}
 	}

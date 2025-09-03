@@ -2,18 +2,22 @@ package jagex2.client.sign;
 
 import javax.sound.midi.MidiSystem;
 import javax.sound.sampled.*;
-import java.applet.Applet;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.locks.LockSupport;
 
 public class SignLink implements Runnable {
@@ -24,7 +28,7 @@ public class SignLink implements Runnable {
 
 	public static RandomAccessFile[] cache_idx = new RandomAccessFile[5];
 
-	public static Applet mainapp = null;
+    // Applet support removed for modern JDKs; keep a placeholder for compatibility
 
 	public static Socket socket = null;
 
@@ -179,10 +183,8 @@ public class SignLink implements Runnable {
 				dnsreq = null;
 			} else if (savereq != null) {
 				if (savebuf != null) {
-					try {
-						FileOutputStream out = new FileOutputStream(cachedir + savereq);
+					try (FileOutputStream out = new FileOutputStream(cachedir + savereq)) {
 						out.write(savebuf, 0, savelen);
-						out.close();
 					} catch (IOException ignore) {
 					}
 				}
@@ -200,10 +202,29 @@ public class SignLink implements Runnable {
 				savereq = null;
 			} else if (urlreq != null) {
 					try {
-						urlstream = new DataInputStream((new URL(mainapp.getCodeBase(), urlreq)).openStream());
-					} catch (IOException ignore) {
-						urlstream = null;
-					}
+                        URL base = getAppletCodeBaseSafe();
+                        URL resolved = null;
+                        if (base != null) {
+                            try {
+                                resolved = base.toURI().resolve(urlreq).toURL();
+                            } catch (URISyntaxException use) {
+                                // fall through to null resolved
+                            }
+                        } else {
+                            // Only use direct URL when absolute; avoid deprecated URL(URL, String)
+                            try {
+                                URI candidate = URI.create(urlreq);
+                                if (candidate.isAbsolute()) {
+                                    resolved = candidate.toURL();
+                                }
+                            } catch (IllegalArgumentException ignoreIAE) {
+                                // leave resolved null
+                            }
+                        }
+                        urlstream = (resolved != null) ? new DataInputStream(resolved.openStream()) : null;
+                    } catch (IOException ignore) {
+                        urlstream = null;
+                    }
 
 					synchronized (SignLink.class) {
 						urlreq = null;
@@ -250,17 +271,15 @@ public class SignLink implements Runnable {
 		try {
 			File uidFile = new File(cachedir + "uid.dat");
 			if (!uidFile.exists() || uidFile.length() < 4L) {
-				DataOutputStream out = new DataOutputStream(new FileOutputStream(cachedir + "uid.dat"));
-				out.writeInt((int) (Math.random() * 9.9999999E7D));
-				out.close();
+				try (DataOutputStream out = new DataOutputStream(new FileOutputStream(cachedir + "uid.dat"))) {
+					out.writeInt((int) (Math.random() * 9.9999999E7D));
+				}
 			}
 		} catch (IOException ignore) {
 		}
 
-		try {
-			DataInputStream in = new DataInputStream(new FileInputStream(cachedir + "uid.dat"));
+		try (DataInputStream in = new DataInputStream(new FileInputStream(cachedir + "uid.dat"))) {
 			int readUid = in.readInt();
-			in.close();
 
 			return readUid + 1;
 		} catch (IOException ignore) {
@@ -369,9 +388,10 @@ public class SignLink implements Runnable {
 			safe = safe.replace('&', '_');
 			safe = safe.replace('#', '_');
 
-			DataInputStream stream = openurl("reporterror" + CLIENT_VERSION + ".cgi?error=" + errorname + " " + safe);
-			stream.readLine();
-			stream.close();
+			try (DataInputStream stream = openurl("reporterror" + CLIENT_VERSION + ".cgi?error=" + errorname + " " + safe);
+			     BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.ISO_8859_1))) {
+				reader.readLine();
+			}
 		} catch (IOException ignore) {
 		}
 	}
@@ -431,67 +451,63 @@ public class SignLink implements Runnable {
 		}
 
 		if (!midi.equals("none")) {
-			if (midi.equals("stop")) {
-				midiPlayer.stop();
-			} else if (midi.equals("voladjust")) {
-				midiPlayer.setVolume(0, midivol);
-			} else {
-				playMidi(midi);
-			}
+                switch (midi) {
+                    case "stop" -> midiPlayer.stop();
+                    case "voladjust" -> midiPlayer.setVolume(0, midivol);
+                    default -> playMidi(midi);
+                }
 
-			if (!midiFadingOut) {
-				midi = "none";
-			}
-		}
+                if (!midiFadingOut) {
+                    midi = "none";
+                }
+            }
 
 		if (!wave.equals("none")) {
-			AudioInputStream audioInputStream;
+			try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(wave))) {
+                    AudioFormat format = audioInputStream.getFormat();
+                    DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
 
-			try {
-				audioInputStream = AudioSystem.getAudioInputStream(new File(wave));
-			} catch (UnsupportedAudioFileException | IOException ignore) {
-				return;
-			}
+                    try (SourceDataLine auline = (SourceDataLine) AudioSystem.getLine(info)) {
+                        auline.open(format);
 
-			AudioFormat format = audioInputStream.getFormat();
-			SourceDataLine auline;
-			DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
+                        if (auline.isControlSupported(FloatControl.Type.PAN)) {
+                            FloatControl pan = (FloatControl) auline.getControl(FloatControl.Type.PAN);
+                            if (curPosition == Position.RIGHT) {
+                                pan.setValue(1.0f);
+                            } else if (curPosition == Position.LEFT) {
+                                pan.setValue(-1.0f);
+                            }
+                        }
 
-			try {
-				auline = (SourceDataLine) AudioSystem.getLine(info);
-				auline.open(format);
-			} catch (LineUnavailableException ignore) {
-				return;
-			}
+                        auline.start();
+                        int nBytesRead = 0;
+                        int EXTERNAL_BUFFER_SIZE = 524288;
+                        byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
 
-			if (auline.isControlSupported(FloatControl.Type.PAN)) {
-				FloatControl pan = (FloatControl) auline.getControl(FloatControl.Type.PAN);
-				if (curPosition == Position.RIGHT) {
-					pan.setValue(1.0f);
-				} else if (curPosition == Position.LEFT) {
-					pan.setValue(-1.0f);
-				}
-			}
-
-			auline.start();
-			int nBytesRead = 0;
-			int EXTERNAL_BUFFER_SIZE = 524288;
-			byte[] abData = new byte[EXTERNAL_BUFFER_SIZE];
-
-			try {
-				while (nBytesRead != -1) {
-					nBytesRead = audioInputStream.read(abData, 0, abData.length);
-					if (nBytesRead >= 0) {
-						auline.write(abData, 0, nBytesRead);
-					}
-				}
-			} catch (IOException ignore) {
-			} finally {
-				auline.drain();
-				auline.close();
-			}
+                        try {
+                            while (nBytesRead != -1) {
+                                nBytesRead = audioInputStream.read(abData, 0, abData.length);
+                                if (nBytesRead >= 0) {
+                                    auline.write(abData, 0, nBytesRead);
+                                }
+                            }
+                        } catch (IOException ignore) {
+                        } finally {
+                            auline.drain();
+                        }
+                    } catch (LineUnavailableException ignore) {
+                        return;
+                    }
+                } catch (UnsupportedAudioFileException | IOException ignore) {
+                    return;
+                }
 
 			wave = "none";
 		}
 	}
+
+    private static URL getAppletCodeBaseSafe() {
+        // Applet environment is not supported; no base URL
+        return null;
+    }
 }
