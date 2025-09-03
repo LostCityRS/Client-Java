@@ -131,6 +131,8 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.startThread(this, 1);
 	}
 
+	@Override
+	@SuppressWarnings("BusyWait")
 	public void run() {
 		this.getBaseComponent().addMouseListener(this);
 		this.getBaseComponent().addMouseMotionListener(this);
@@ -257,12 +259,13 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 		try {
 			Thread.sleep(1000L);
-		} catch (Exception ignore) {
+		} catch (InterruptedException ignore) {
+			Thread.currentThread().interrupt();
 		}
 
 		try {
 			System.exit(0);
-		} catch (Throwable ignore) {
+		} catch (SecurityException ignore) {
 		}
 	}
 
@@ -271,24 +274,28 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.deltime = 1000 / fps;
 	}
 
+	@Override
 	public final void start() {
 		if (this.state >= 0) {
 			this.state = 0;
 		}
 	}
 
+	@Override
 	public final void stop() {
 		if (this.state >= 0) {
 			this.state = 4000 / this.deltime;
 		}
 	}
 
+	@Override
 	public final void destroy() {
 		this.state = -1;
 
 		try {
 			Thread.sleep(5000L);
-		} catch (Exception ignore) {
+		} catch (InterruptedException ignore) {
+			Thread.currentThread().interrupt();
 		}
 
 		if (this.state == -1) {
@@ -296,6 +303,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void update(Graphics g) {
 		if (this.graphics == null) {
 			this.graphics = g;
@@ -305,6 +313,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.refresh();
 	}
 
+	@Override
 	public final void paint(Graphics g) {
 		if (this.graphics == null) {
 			this.graphics = g;
@@ -314,6 +323,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.refresh();
 	}
 
+	@Override
 	public final void mousePressed(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
@@ -355,6 +365,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void mouseReleased(MouseEvent e) {
 		this.idleCycles = 0;
 		this.mouseButton = 0;
@@ -370,15 +381,18 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void mouseClicked(MouseEvent e) {
 	}
 
+	@Override
 	public final void mouseEntered(MouseEvent e) {
 		if (InputTracking.enabled) {
 			InputTracking.mouseEntered();
 		}
 	}
 
+	@Override
 	public final void mouseExited(MouseEvent e) {
 		this.idleCycles = 0;
 		this.mouseX = -1;
@@ -389,6 +403,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void mouseDragged(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
@@ -407,6 +422,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void mouseMoved(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
@@ -425,6 +441,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void keyPressed(KeyEvent e) {
 		this.idleCycles = 0;
 
@@ -435,34 +452,40 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			ch = 0;
 		}
 
-		if (code == 37) {
-			ch = 1;
-		} else if (code == 39) {
-			ch = 2;
-		} else if (code == 38) {
-			ch = 3;
-		} else if (code == 40) {
-			ch = 4;
-		} else if (code == 17) {
-			ch = 5;
-		} else if (code == 8) {
-			ch = '\b';
-		} else if (code == 127) {
-			ch = '\b';
-		} else if (code == 9) {
-			ch = '\t';
-		} else if (code == 10) {
-			ch = '\n';
-		} else if (code >= 112 && code <= 123) {
-			ch = code + 1008 - 112;
-		} else if (code == 36) {
-			ch = 1000;
-		} else if (code == 35) {
-			ch = 1001;
-		} else if (code == 33) {
-			ch = 1002;
-		} else if (code == 34) {
-			ch = 1003;
+		switch (code) {
+			case 37: ch = 1; break;
+			case 39: ch = 2; break;
+			case 38: ch = 3; break;
+			case 40: ch = 4; break;
+			case 17: ch = 5; break;
+			case 8:
+			case 127:
+				ch = '\b';
+				break;
+			case 9:
+				ch = '\t';
+				break;
+			case 10:
+				ch = '\n';
+				break;
+			case 112: ch = 1008; break;
+			case 113: ch = 1009; break;
+			case 114: ch = 1010; break;
+			case 115: ch = 1011; break;
+			case 116: ch = 1012; break;
+			case 117: ch = 1013; break;
+			case 118: ch = 1014; break;
+			case 119: ch = 1015; break;
+			case 120: ch = 1016; break;
+			case 121: ch = 1017; break;
+			case 122: ch = 1018; break;
+			case 123: ch = 1019; break;
+			case 36: ch = 1000; break;
+			case 35: ch = 1001; break;
+			case 33: ch = 1002; break;
+			case 34: ch = 1003; break;
+			default:
+				// leave ch unchanged
 		}
 
 		if (ch > 0 && ch < 128) {
@@ -479,6 +502,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void keyReleased(KeyEvent e) {
 		this.idleCycles = 0;
 
@@ -489,24 +513,24 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			ch = 0;
 		}
 
-		if (code == 37) {
-			ch = 1;
-		} else if (code == 39) {
-			ch = 2;
-		} else if (code == 38) {
-			ch = 3;
-		} else if (code == 40) {
-			ch = 4;
-		} else if (code == 17) {
-			ch = 5;
-		} else if (code == 8) {
-			ch = '\b';
-		} else if (code == 127) {
-			ch = '\b';
-		} else if (code == 9) {
-			ch = '\t';
-		} else if (code == 10) {
-			ch = '\n';
+		switch (code) {
+			case 37: ch = 1; break;
+			case 39: ch = 2; break;
+			case 38: ch = 3; break;
+			case 40: ch = 4; break;
+			case 17: ch = 5; break;
+			case 8:
+			case 127:
+				ch = '\b';
+				break;
+			case 9:
+				ch = '\t';
+				break;
+			case 10:
+				ch = '\n';
+				break;
+			default:
+				// leave ch unchanged
 		}
 
 		if (ch > 0 && ch < 128) {
@@ -518,6 +542,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void keyTyped(KeyEvent e) {
 	}
 
@@ -531,6 +556,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		return key;
 	}
 
+	@Override
 	public final void focusGained(FocusEvent e) {
 		this.hasFocus = true;
 		this.redrawScreen = true;
@@ -541,6 +567,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void focusLost(FocusEvent e) {
 		this.hasFocus = false;
 
@@ -549,25 +576,32 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
+	@Override
 	public final void windowActivated(WindowEvent e) {
 	}
 
+	@Override
 	public final void windowClosed(WindowEvent e) {
 	}
 
+	@Override
 	public final void windowClosing(WindowEvent e) {
 		this.destroy();
 	}
 
+	@Override
 	public final void windowDeactivated(WindowEvent e) {
 	}
 
+	@Override
 	public final void windowDeiconified(WindowEvent e) {
 	}
 
+	@Override
 	public final void windowIconified(WindowEvent e) {
 	}
 
+	@Override
 	public final void windowOpened(WindowEvent e) {
 	}
 
@@ -608,26 +642,25 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.a(IILjava/lang/String;)V")
+	@SuppressWarnings("BusyWait")
 	public void drawProgress(int percent, String message) {
 		while (this.graphics == null) {
 			this.graphics = this.getBaseComponent().getGraphics();
 
-			try {
-				this.getBaseComponent().repaint();
-			} catch (Exception ignore) {
-			}
+			this.getBaseComponent().repaint();
 
 			try {
 				Thread.sleep(1000L);
-			} catch (Exception ignore) {
+			} catch (InterruptedException ignore) {
+				Thread.currentThread().interrupt();
+				break;
 			}
 		}
 
 		Font bold = new Font("Helvetica", Font.BOLD, 13);
 		FontMetrics boldMetrics = this.getBaseComponent().getFontMetrics(bold);
 
-		Font plain = new Font("Helvetica", Font.PLAIN, 13);
-		FontMetrics plainMetrics = this.getBaseComponent().getFontMetrics(plain);
+		// Removed unused plain font metrics
 
 		if (this.redrawScreen) {
 			this.graphics.setColor(Color.black);

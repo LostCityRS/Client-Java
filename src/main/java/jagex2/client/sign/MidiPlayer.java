@@ -2,12 +2,15 @@ package jagex2.client.sign;
 
 import javax.sound.midi.*;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public final class MidiPlayer implements Receiver {
 	private final int[] channels = new int[16];
 	private final Receiver receiver;
 	private final Sequencer sequencer;
 	private final Synthesizer synth;
+	// Receiver used by the Sequencer's Transmitter to avoid leaking `this` from constructor
+	private final Receiver proxyReceiver;
 	private int volume;
 
 	public MidiPlayer() throws Exception {
@@ -16,16 +19,33 @@ public final class MidiPlayer implements Receiver {
 		synth.open();
 		receiver = synth.getReceiver();
 		sequencer = MidiSystem.getSequencer(false);
-		sequencer.getTransmitter().setReceiver(this);
+		// Create a proxy receiver to forward messages through our processing without exposing `this`
+		proxyReceiver = new Receiver() {
+			@Override
+			public void send(MidiMessage msg, long tick) {
+				byte[] data = msg.getMessage();
+				if (data.length < 3 || !check(data[0], data[1], data[2], tick)) {
+					receiver.send(msg, tick);
+				}
+			}
+
+			@Override
+			public void close() {
+				// no-op for proxy
+			}
+		};
+		sequencer.getTransmitter().setReceiver(proxyReceiver);
 		sequencer.open();
 		setTick(-1L);
 	}
 
 	public void setSoundfont(byte[] soundfont) {
 		try {
-			synth.unloadAllInstruments(synth.getDefaultSoundbank());
+			if (synth.getDefaultSoundbank() != null) {
+				synth.unloadAllInstruments(synth.getDefaultSoundbank());
+			}
 			synth.loadAllInstruments(MidiSystem.getSoundbank(new ByteArrayInputStream(soundfont)));
-		} catch (Exception ignore) {
+		} catch (InvalidMidiDataException | IOException ignore) {
 		}
 	}
 
@@ -104,9 +124,9 @@ public final class MidiPlayer implements Receiver {
 
 	private void setVolume(long tick) {
 		for (int i = 0; i != 16; ++i) {
-			int volume = getVolume(i);
-			sendMessage(i + 176, 7, volume >>> 7, tick);
-			sendMessage(i + 176, 39, volume & 0x7f, tick);
+			int vol = getVolume(i);
+			sendMessage(i + 176, 7, vol >>> 7, tick);
+			sendMessage(i + 176, 39, vol & 0x7f, tick);
 		}
 	}
 
@@ -121,8 +141,9 @@ public final class MidiPlayer implements Receiver {
 	}
 
 	private int getVolume(int channel) {
-		channel = channels[channel];
-		return (int) (Math.sqrt(channel = ((channel * volume) >>> 8) * channel) + 0.5D);
+		int ch = channels[channel];
+		int scaled = ((ch * volume) >>> 8) * ch;
+		return (int) (Math.sqrt(scaled) + 0.5D);
 	}
 
 	private void resetChannels() {
@@ -137,9 +158,9 @@ public final class MidiPlayer implements Receiver {
 				sendMessage(status, data1, data2, tick);
 				int channel = status & 0xf;
 				channels[channel] = 12800;
-				int volume = getVolume(channel);
-				sendMessage(status, 7, volume >>> 7, tick);
-				sendMessage(status, 39, volume & 0x7f, tick);
+					int newVol = getVolume(channel);
+					sendMessage(status, 7, newVol >>> 7, tick);
+					sendMessage(status, 39, newVol & 0x7f, tick);
 				return true;
 			}
 			if (data1 == 7 || data1 == 39) {
@@ -150,9 +171,9 @@ public final class MidiPlayer implements Receiver {
 					channels[channel] = (channels[channel] & 0x3f80) | data2;
 				}
 
-				int volume = getVolume(channel);
-				sendMessage(status, 7, volume >>> 7, tick);
-				sendMessage(status, 39, volume & 0x7f, tick);
+					int newVol = getVolume(channel);
+					sendMessage(status, 7, newVol >>> 7, tick);
+					sendMessage(status, 39, newVol & 0x7f, tick);
 				return true;
 			}
 		}
@@ -169,13 +190,6 @@ public final class MidiPlayer implements Receiver {
 
 	@Override
 	public void close() {
-	}
-
-	protected void finalize() throws Throwable {
-		try {
-			closeImpl();
-		} finally {
-			super.finalize();
-		}
+		closeImpl();
 	}
 }

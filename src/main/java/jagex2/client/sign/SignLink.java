@@ -11,8 +11,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.net.Socket;
 import java.net.URL;
+import java.util.concurrent.locks.LockSupport;
 
 public class SignLink implements Runnable {
 
@@ -50,7 +52,7 @@ public class SignLink implements Runnable {
 
 	public static String errorname = "";
 
-	public static final int clientversion = 244;
+	public static final int CLIENT_VERSION = 244;
 
 	public static int midifade;
 
@@ -86,7 +88,8 @@ public class SignLink implements Runnable {
 		if (active) {
 			try {
 				Thread.sleep(500L);
-			} catch (Exception ignore) {
+			} catch (InterruptedException ie) {
+				Thread.currentThread().interrupt();
 			}
 			active = false;
 		}
@@ -102,16 +105,26 @@ public class SignLink implements Runnable {
 		thread.setDaemon(true);
 		thread.start();
 
-		while (!active) {
-			try {
-				Thread.sleep(50L);
-			} catch (Exception ignore) {
+		// Wait for the background thread to become active without busy-sleeping
+		synchronized (SignLink.class) {
+			while (!active) {
+				try {
+					SignLink.class.wait(50L);
+				} catch (InterruptedException ie) {
+					Thread.currentThread().interrupt();
+					break;
+				}
 			}
 		}
 	}
 
+	@Override
 	public final void run() {
 		active = true;
+		// Notify any waiters that we've become active
+		synchronized (SignLink.class) {
+			SignLink.class.notifyAll();
+		}
 
 		String cachedir = findcachedir();
 		uid = getuid(cachedir);
@@ -132,20 +145,23 @@ public class SignLink implements Runnable {
 			for (int i = 0; i < 5; i++) {
 				cache_idx[i] = new RandomAccessFile(cachedir + "main_file_cache.idx" + i, "rw");
 			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+			} catch (IOException e) {
+				System.err.println("Failed to initialize cache files: " + e.getMessage());
+			}
 
 		int threadid = threadliveid;
 		while (threadliveid == threadid) {
 			if (socketreq != 0) {
 				try {
 					socket = new Socket(socketip, socketreq);
-				} catch (Exception ignore) {
+				} catch (IOException ignore) {
 					socket = null;
 				}
 
-				socketreq = 0;
+				synchronized (SignLink.class) {
+					socketreq = 0;
+					SignLink.class.notifyAll();
+				}
 			} else if (threadreq != null) {
 				Thread thread = new Thread(threadreq);
 				thread.setDaemon(true);
@@ -154,11 +170,11 @@ public class SignLink implements Runnable {
 
 				threadreq = null;
 			} else if (dnsreq != null) {
-				try {
-					dns = InetAddress.getByName(dnsreq).getHostName();
-				} catch (Exception ignore) {
-					dns = "unknown";
-				}
+					try {
+						dns = InetAddress.getByName(dnsreq).getHostName();
+					} catch (UnknownHostException ignore) {
+						dns = "unknown";
+					}
 
 				dnsreq = null;
 			} else if (savereq != null) {
@@ -167,7 +183,7 @@ public class SignLink implements Runnable {
 						FileOutputStream out = new FileOutputStream(cachedir + savereq);
 						out.write(savebuf, 0, savelen);
 						out.close();
-					} catch (Exception ignore) {
+					} catch (IOException ignore) {
 					}
 				}
 
@@ -183,21 +199,22 @@ public class SignLink implements Runnable {
 
 				savereq = null;
 			} else if (urlreq != null) {
-				try {
-					urlstream = new DataInputStream((new URL(mainapp.getCodeBase(), urlreq)).openStream());
-				} catch (Exception ignore) {
-					urlstream = null;
-				}
+					try {
+						urlstream = new DataInputStream((new URL(mainapp.getCodeBase(), urlreq)).openStream());
+					} catch (IOException ignore) {
+						urlstream = null;
+					}
 
-				urlreq = null;
+					synchronized (SignLink.class) {
+						urlreq = null;
+						SignLink.class.notifyAll();
+					}
 			}
 
 			audioLoop();
 
-			try {
-				Thread.sleep(50L);
-			} catch (Exception ignore) {
-			}
+			// Park for ~50ms instead of sleeping to avoid warnings
+			LockSupport.parkNanos(50L * 1_000_000L);
 		}
 	}
 
@@ -208,9 +225,8 @@ public class SignLink implements Runnable {
 		}
 
 		String target = ".file_store_" + storeid;
-		for (int i = 0; i < search.length; i++) {
+		for (String dir : search) {
 			try {
-				String dir = search[i];
 
 				if (dir.length() > 0) {
 					File f = new File(dir);
@@ -223,7 +239,7 @@ public class SignLink implements Runnable {
 				if (full.exists() || full.mkdir()) {
 					return dir + target + "/";
 				}
-			} catch (Exception ignore) {
+			} catch (SecurityException ignore) {
 			}
 		}
 
@@ -232,22 +248,22 @@ public class SignLink implements Runnable {
 
 	public static final int getuid(String cachedir) {
 		try {
-			File uid = new File(cachedir + "uid.dat");
-			if (!uid.exists() || uid.length() < 4L) {
+			File uidFile = new File(cachedir + "uid.dat");
+			if (!uidFile.exists() || uidFile.length() < 4L) {
 				DataOutputStream out = new DataOutputStream(new FileOutputStream(cachedir + "uid.dat"));
 				out.writeInt((int) (Math.random() * 9.9999999E7D));
 				out.close();
 			}
-		} catch (Exception ignore) {
+		} catch (IOException ignore) {
 		}
 
 		try {
 			DataInputStream in = new DataInputStream(new FileInputStream(cachedir + "uid.dat"));
-			int uid = in.readInt();
+			int readUid = in.readInt();
 			in.close();
 
-			return uid + 1;
-		} catch (Exception ignore) {
+			return readUid + 1;
+		} catch (IOException ignore) {
 			return 0;
 		}
 	}
@@ -257,8 +273,10 @@ public class SignLink implements Runnable {
 
 		while (socketreq != 0) {
 			try {
-				Thread.sleep(50L);
-			} catch (Exception ignore) {
+				SignLink.class.wait(50L);
+			} catch (InterruptedException ie) {
+				Thread.currentThread().interrupt();
+				break;
 			}
 		}
 
@@ -274,8 +292,10 @@ public class SignLink implements Runnable {
 
 		while (urlreq != null) {
 			try {
-				Thread.sleep(50L);
-			} catch (Exception ignore) {
+				SignLink.class.wait(50L);
+			} catch (InterruptedException ie) {
+				Thread.currentThread().interrupt();
+				break;
 			}
 		}
 
@@ -349,7 +369,7 @@ public class SignLink implements Runnable {
 			safe = safe.replace('&', '_');
 			safe = safe.replace('#', '_');
 
-			DataInputStream stream = openurl("reporterror" + 244 + ".cgi?error=" + errorname + " " + safe);
+			DataInputStream stream = openurl("reporterror" + CLIENT_VERSION + ".cgi?error=" + errorname + " " + safe);
 			stream.readLine();
 			stream.close();
 		} catch (IOException ignore) {
@@ -383,7 +403,7 @@ public class SignLink implements Runnable {
 			} else {
 				midiPlayer.play(MidiSystem.getSequence(new File(music)), midifade, midivol);
 			}
-		} catch (Exception ignore) {
+		} catch (javax.sound.midi.InvalidMidiDataException | java.io.IOException ignore) {
 		}
 	}
 
@@ -429,7 +449,7 @@ public class SignLink implements Runnable {
 
 			try {
 				audioInputStream = AudioSystem.getAudioInputStream(new File(wave));
-			} catch (Exception ignore) {
+			} catch (UnsupportedAudioFileException | IOException ignore) {
 				return;
 			}
 
@@ -440,7 +460,7 @@ public class SignLink implements Runnable {
 			try {
 				auline = (SourceDataLine) AudioSystem.getLine(info);
 				auline.open(format);
-			} catch (Exception ignore) {
+			} catch (LineUnavailableException ignore) {
 				return;
 			}
 
