@@ -20,25 +20,29 @@ public class CollisionMap {
 	@ObfuscatedName("jc.k")
 	public int[][] flags;
 
-	public CollisionMap(int z, int x) {
-		this.sizeX = x;
-		this.sizeZ = z;
-		this.flags = new int[this.sizeX][this.sizeZ];
-		this.reset();
-	}
+    public CollisionMap(int z, int x) {
+        this.sizeX = x;
+        this.sizeZ = z;
+        this.flags = new int[this.sizeX][this.sizeZ];
+        this.doReset();
+    }
 
-	@ObfuscatedName("jc.a(B)V")
-	public void reset() {
-		for (int x = 0; x < this.sizeX; x++) {
-			for (int z = 0; z < this.sizeZ; z++) {
-				if (x == 0 || z == 0 || this.sizeX - 1 == x || this.sizeZ - 1 == z) {
-					this.flags[x][z] = 0xFFFFFF;
-				} else {
-					this.flags[x][z] = 0;
-				}
-			}
-		}
-	}
+    @ObfuscatedName("jc.a(B)V")
+    public void reset() {
+        this.doReset();
+    }
+
+    private void doReset() {
+        for (int x = 0; x < this.sizeX; x++) {
+            for (int z = 0; z < this.sizeZ; z++) {
+                if (x == 0 || z == 0 || this.sizeX - 1 == x || this.sizeZ - 1 == z) {
+                    this.flags[x][z] = 0xFFFFFF;
+                } else {
+                    this.flags[x][z] = 0;
+                }
+            }
+        }
+    }
 
 	@ObfuscatedName("jc.a(IIIZII)V")
 	public void addWall(int arg0, int arg1, int arg2, boolean arg3, int arg5) {
@@ -161,10 +165,9 @@ public class CollisionMap {
 		}
 		if (arg5 == 3) {
 			this.addCMap(var7, var8, 81920);
-			this.addCMap(var7, var8 - 1, 1024);
-			this.addCMap(var7 - 1, var8, 4096);
-			return;
-		}
+            this.addCMap(var7, var8 - 1, 1024);
+            this.addCMap(var7 - 1, var8, 4096);
+        }
 	}
 
 	@ObfuscatedName("jc.a(ZIIIZII)V")
@@ -323,11 +326,10 @@ public class CollisionMap {
 			this.remCMap(var8 - 1, var7, 1024);
 		}
 		if (arg2 == 3) {
-			this.remCMap(var8, var7, 81920);
-			this.remCMap(var8 - 1, var7, 1024);
-			this.remCMap(var8, var7 - 1, 4096);
-			return;
-		}
+            this.remCMap(var8, var7, 81920);
+            this.remCMap(var8 - 1, var7, 1024);
+            this.remCMap(var8, var7 - 1, 4096);
+        }
 	}
 
 	@ObfuscatedName("jc.a(IIIZIZI)V")
@@ -375,104 +377,118 @@ public class CollisionMap {
 		int var9 = arg4 - this.baseZ;
 		int var10 = arg0 - this.baseX;
 		int var11 = arg3 - this.baseZ;
-		if (arg2 == 0) {
-			if (arg6 == 0) {
-				if (var10 - 1 == var8 && var9 == var11) {
-					return true;
-				}
-				if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x280120) == 0) {
-					return true;
-				}
-				if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x280102) == 0) {
-					return true;
-				}
-			} else if (arg6 == 1) {
-				if (var8 == var10 && var11 + 1 == var9) {
-					return true;
-				}
-				if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280108) == 0) {
-					return true;
-				}
-				if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280180) == 0) {
-					return true;
-				}
-			} else if (arg6 == 2) {
-				if (var10 + 1 == var8 && var9 == var11) {
-					return true;
-				}
-				if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x280120) == 0) {
-					return true;
-				}
-				if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x280102) == 0) {
-					return true;
-				}
-			} else if (arg6 == 3) {
-				if (var8 == var10 && var11 - 1 == var9) {
-					return true;
-				}
-				if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280108) == 0) {
-					return true;
-				}
-				if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280180) == 0) {
-					return true;
-				}
-			}
-		}
-		if (arg2 == 2) {
-			if (arg6 == 0) {
-				if (var10 - 1 == var8 && var9 == var11) {
-					return true;
-				}
-				if (var8 == var10 && var11 + 1 == var9) {
-					return true;
-				}
-				if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280180) == 0) {
-					return true;
-				}
-				if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x280102) == 0) {
-					return true;
-				}
-			} else if (arg6 == 1) {
-				if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280108) == 0) {
-					return true;
-				}
-				if (var8 == var10 && var11 + 1 == var9) {
-					return true;
-				}
-				if (var10 + 1 == var8 && var9 == var11) {
-					return true;
-				}
-				if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x280102) == 0) {
-					return true;
-				}
-			} else if (arg6 == 2) {
-				if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280108) == 0) {
-					return true;
-				}
-				if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x280120) == 0) {
-					return true;
-				}
-				if (var10 + 1 == var8 && var9 == var11) {
-					return true;
-				}
-				if (var8 == var10 && var11 - 1 == var9) {
-					return true;
-				}
-			} else if (arg6 == 3) {
-				if (var10 - 1 == var8 && var9 == var11) {
-					return true;
-				}
-				if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x280120) == 0) {
-					return true;
-				}
-				if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280180) == 0) {
-					return true;
-				}
-				if (var8 == var10 && var11 - 1 == var9) {
-					return true;
-				}
-			}
-		}
+        if (arg2 == 0) {
+            switch (arg6) {
+                case 0 -> {
+                    if (var10 - 1 == var8 && var9 == var11) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x280120) == 0) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x280102) == 0) {
+                        return true;
+                    }
+                }
+                case 1 -> {
+                    if (var8 == var10 && var11 + 1 == var9) {
+                        return true;
+                    }
+                    if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280108) == 0) {
+                        return true;
+                    }
+                    if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280180) == 0) {
+                        return true;
+                    }
+                }
+                case 2 -> {
+                    if (var10 + 1 == var8 && var9 == var11) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x280120) == 0) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x280102) == 0) {
+                        return true;
+                    }
+                }
+                case 3 -> {
+                    if (var8 == var10 && var11 - 1 == var9) {
+                        return true;
+                    }
+                    if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280108) == 0) {
+                        return true;
+                    }
+                    if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280180) == 0) {
+                        return true;
+                    }
+                }
+                default -> {
+                }
+            }
+        }
+        if (arg2 == 2) {
+            switch (arg6) {
+                case 0 -> {
+                    if (var10 - 1 == var8 && var9 == var11) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 + 1 == var9) {
+                        return true;
+                    }
+                    if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280180) == 0) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x280102) == 0) {
+                        return true;
+                    }
+                }
+                case 1 -> {
+                    if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280108) == 0) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 + 1 == var9) {
+                        return true;
+                    }
+                    if (var10 + 1 == var8 && var9 == var11) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x280102) == 0) {
+                        return true;
+                    }
+                }
+                case 2 -> {
+                    if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280108) == 0) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x280120) == 0) {
+                        return true;
+                    }
+                    if (var10 + 1 == var8 && var9 == var11) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 - 1 == var9) {
+                        return true;
+                    }
+                }
+                case 3 -> {
+                    if (var10 - 1 == var8 && var9 == var11) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x280120) == 0) {
+                        return true;
+                    }
+                    if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x280180) == 0) {
+                        return true;
+                    }
+                    if (var8 == var10 && var11 - 1 == var9) {
+                        return true;
+                    }
+                }
+                default -> {
+                }
+            }
+        }
 		if (arg2 == 9) {
 			if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x20) == 0) {
 				return true;
@@ -501,40 +517,47 @@ public class CollisionMap {
 			int var9 = arg0 - this.baseZ;
 			int var10 = arg2 - this.baseX;
 			int var11 = arg6 - this.baseZ;
-			if (arg4 == 6 || arg4 == 7) {
-				if (arg4 == 7) {
-					arg5 = arg5 + 2 & 0x3;
-				}
-				if (arg5 == 0) {
-					if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x80) == 0) {
-						return true;
-					}
-					if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x2) == 0) {
-						return true;
-					}
-				} else if (arg5 == 1) {
-					if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x8) == 0) {
-						return true;
-					}
-					if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x2) == 0) {
-						return true;
-					}
-				} else if (arg5 == 2) {
-					if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x8) == 0) {
-						return true;
-					}
-					if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x20) == 0) {
-						return true;
-					}
-				} else if (arg5 == 3) {
-					if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x80) == 0) {
-						return true;
-					}
-					if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x20) == 0) {
-						return true;
-					}
-				}
-			}
+            if (arg4 == 6 || arg4 == 7) {
+                if (arg4 == 7) {
+                    arg5 = arg5 + 2 & 0x3;
+                }
+                switch (arg5) {
+                    case 0 -> {
+                        if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x80) == 0) {
+                            return true;
+                        }
+                        if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x2) == 0) {
+                            return true;
+                        }
+                    }
+                    case 1 -> {
+                        if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x8) == 0) {
+                            return true;
+                        }
+                        if (var8 == var10 && var11 - 1 == var9 && (this.flags[var8][var9] & 0x2) == 0) {
+                            return true;
+                        }
+                    }
+                    case 2 -> {
+                        if (var10 - 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x8) == 0) {
+                            return true;
+                        }
+                        if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x20) == 0) {
+                            return true;
+                        }
+                    }
+                    case 3 -> {
+                        if (var10 + 1 == var8 && var9 == var11 && (this.flags[var8][var9] & 0x80) == 0) {
+                            return true;
+                        }
+                        if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x20) == 0) {
+                            return true;
+                        }
+                    }
+                    default -> {
+                    }
+                }
+            }
 			if (arg4 == 8) {
 				if (var8 == var10 && var11 + 1 == var9 && (this.flags[var8][var9] & 0x20) == 0) {
 					return true;

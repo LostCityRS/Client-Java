@@ -12,8 +12,9 @@ public class ClientObj extends ModelSource {
 	@ObfuscatedName("db.n")
 	public int count;
 
-	@ObfuscatedName("db.a(I)Lfb;")
-	public final Model getModel() {
+    @Override
+    @ObfuscatedName("db.a(I)Lfb;")
+    public final Model getModel() {
 		ObjType obj = ObjType.get(this.index);
 		return obj.getModel(this.count);
 	}

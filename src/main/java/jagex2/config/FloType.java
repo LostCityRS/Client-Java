@@ -72,19 +72,16 @@ public class FloType {
 				return;
 			}
 
-			if (code == 1) {
-				this.rgb = buf.g3();
-				this.getHsl(this.rgb);
-			} else if (code == 2) {
-				this.texture = buf.g1();
-			} else if (code == 3) {
-				this.overlay = true;
-			} else if (code == 5) {
-				this.occlude = false;
-			} else if (code == 6) {
-				this.debugname = buf.gjstr();
-			} else {
-				System.out.println("Error unrecognised config code: " + code);
+			switch (code) {
+				case 1 -> {
+					this.rgb = buf.g3();
+					this.getHsl(this.rgb);
+				}
+				case 2 -> this.texture = buf.g1();
+				case 3 -> this.overlay = true;
+				case 5 -> this.occlude = false;
+				case 6 -> this.debugname = buf.gjstr();
+				default -> System.out.println("Error unrecognised config code: " + code);
 			}
 		}
 	}
@@ -161,48 +158,48 @@ public class FloType {
 
 		this.chroma = (int) ((double) this.luminance * h);
 
-		int hue = this.hue + (int) (Math.random() * 16.0D) - 8;
-		if (hue < 0) {
-			hue = 0;
-		} else if (hue > 255) {
-			hue = 255;
+		int hueVar = this.hue + (int) (Math.random() * 16.0D) - 8;
+		if (hueVar < 0) {
+			hueVar = 0;
+		} else if (hueVar > 255) {
+			hueVar = 255;
 		}
 
-		int saturation = this.saturation + (int) (Math.random() * 48.0D) - 24;
-		if (saturation < 0) {
-			saturation = 0;
-		} else if (saturation > 255) {
-			saturation = 255;
+		int saturationVar = this.saturation + (int) (Math.random() * 48.0D) - 24;
+		if (saturationVar < 0) {
+			saturationVar = 0;
+		} else if (saturationVar > 255) {
+			saturationVar = 255;
 		}
 
-		int lightness = this.lightness + (int) (Math.random() * 48.0D) - 24;
-		if (lightness < 0) {
-			lightness = 0;
-		} else if (lightness > 255) {
-			lightness = 255;
+		int lightnessVar = this.lightness + (int) (Math.random() * 48.0D) - 24;
+		if (lightnessVar < 0) {
+			lightnessVar = 0;
+		} else if (lightnessVar > 255) {
+			lightnessVar = 255;
 		}
 
-		this.hsl = this.hsl24to16(hue, saturation, lightness);
+		this.hsl = this.hsl24to16(hueVar, saturationVar, lightnessVar);
 	}
 
 	@ObfuscatedName("kc.a(III)I")
-	public final int hsl24to16(int hue, int saturation, int lightness) {
-		if (lightness > 179) {
-			saturation /= 2;
+	public final int hsl24to16(int hue8, int saturation8, int lightness8) {
+		if (lightness8 > 179) {
+			saturation8 /= 2;
 		}
 
-		if (lightness > 192) {
-			saturation /= 2;
+		if (lightness8 > 192) {
+			saturation8 /= 2;
 		}
 
-		if (lightness > 217) {
-			saturation /= 2;
+		if (lightness8 > 217) {
+			saturation8 /= 2;
 		}
 
-		if (lightness > 243) {
-			saturation /= 2;
+		if (lightness8 > 243) {
+			saturation8 /= 2;
 		}
 
-		return lightness / 2 + (hue / 4 << 10) + (saturation / 32 << 7);
+		return lightness8 / 2 + (hue8 / 4 << 10) + (saturation8 / 32 << 7);
 	}
 }

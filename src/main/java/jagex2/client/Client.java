@@ -16,7 +16,7 @@ import java.util.zip.CRC32;
 import java.util.concurrent.locks.LockSupport;
 
 import deob.*;
-import jagex2.client.sign.SignLink;
+// SignLink lives in the same package now
 import jagex2.config.*;
 import jagex2.dash3d.*;
 import jagex2.datastruct.JString;
@@ -5519,7 +5519,8 @@ public class Client extends GameShell {
 
                 this.fontBold12.drawStringTag(16777215, w / 2 - 90, true, y, "Username: " + this.username + (this.titleLoginField == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 
-                this.fontBold12.drawStringTag(16777215, w / 2 - 88, true, y, "Password: " + JString.censor(this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+                // Place password one line below username for proper layout
+                this.fontBold12.drawStringTag(16777215, w / 2 - 88, true, y + 15, "Password: " + JString.censor(this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
 
                 x = w / 2 - 80;
                 y = h / 2 + 50;

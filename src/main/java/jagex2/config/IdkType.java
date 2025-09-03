@@ -61,10 +61,10 @@ public class IdkType {
 			if (code == 1) {
 				this.type = buf.g1();
 			} else if (code == 2) {
-				int count = buf.g1();
+				int modelCount = buf.g1();
 
-				this.models = new int[count];
-				for (int i = 0; i < count; i++) {
+				this.models = new int[modelCount];
+				for (int i = 0; i < modelCount; i++) {
 					this.models[i] = buf.g2();
 				}
 			} else if (code == 3) {
@@ -102,16 +102,16 @@ public class IdkType {
 			return null;
 		}
 
-		Model[] models = new Model[this.models.length];
+		Model[] modelArray = new Model[this.models.length];
 		for (int i = 0; i < this.models.length; i++) {
-			models[i] = Model.tryGet(this.models[i]);
+			modelArray[i] = Model.tryGet(this.models[i]);
 		}
 
 		Model model;
-		if (models.length == 1) {
-			model = models[0];
+		if (modelArray.length == 1) {
+			model = modelArray[0];
 		} else {
-			model = new Model(models.length, models);
+			model = new Model(modelArray.length, modelArray);
 		}
 
 		for (int i = 0; i < 6 && this.recol_s[i] != 0; i++) {
@@ -134,16 +134,16 @@ public class IdkType {
 
 	@ObfuscatedName("lc.d(I)Lfb;")
 	public Model getHeadModel() {
-		Model[] models = new Model[5];
+		Model[] headModels = new Model[5];
 
-		int count = 0;
+		int headCount = 0;
 		for (int i = 0; i < 5; i++) {
 			if (this.head[i] != -1) {
-				models[count++] = Model.tryGet(this.head[i]);
+				headModels[headCount++] = Model.tryGet(this.head[i]);
 			}
 		}
 
-		Model model = new Model(count, models);
+		Model model = new Model(headCount, headModels);
 		for (int i = 0; i < 6 && this.recol_s[i] != 0; i++) {
 			model.recolour(this.recol_s[i], this.recol_d[i]);
 		}

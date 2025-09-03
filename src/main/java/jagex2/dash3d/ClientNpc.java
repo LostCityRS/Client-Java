@@ -11,8 +11,9 @@ public class ClientNpc extends ClientEntity {
 	@ObfuscatedName("ab.sb")
 	public NpcType type;
 
-	@ObfuscatedName("ab.a(I)Lfb;")
-	public final Model getModel() {
+    @Override
+    @ObfuscatedName("ab.a(I)Lfb;")
+    public final Model getModel() {
 		if (this.type == null) {
 			return null;
 		}
@@ -76,6 +77,7 @@ public class ClientNpc extends ClientEntity {
 	}
 
 	@ObfuscatedName("ab.a(B)Z")
+	@Override
 	public final boolean isVisible() {
 		return this.type != null;
 	}

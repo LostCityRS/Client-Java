@@ -101,14 +101,13 @@ public class Pix8 extends Pix2D {
 			return;
 		}
 
-		byte[] temp = new byte[this.ohi * this.owi];
-		int i = 0;
+		byte[] tmp = new byte[this.ohi * this.owi];
 		for (int y = 0; y < this.hi; y++) {
-			for (int x = 0; x < this.wi; x++) {
-				temp[(this.yof + y) * this.owi + this.xof + x] = this.pixels[i++];
-			}
+			int srcPos = this.wi * y;
+			int dstPos = (this.yof + y) * this.owi + this.xof;
+			System.arraycopy(this.pixels, srcPos, tmp, dstPos, this.wi);
 		}
-		this.pixels = temp;
+		this.pixels = tmp;
 
 		this.wi = this.owi;
 		this.hi = this.ohi;

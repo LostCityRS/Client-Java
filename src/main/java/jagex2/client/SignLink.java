@@ -1,4 +1,4 @@
-package jagex2.client.sign;
+package jagex2.client;
 
 import javax.sound.midi.MidiSystem;
 import javax.sound.sampled.*;
@@ -89,14 +89,13 @@ public class SignLink implements Runnable {
 	public static final void startpriv(InetAddress ip) {
 		threadliveid = (int) (Math.random() * 9.9999999E7D);
 
-		if (active) {
-			try {
-				Thread.sleep(500L);
-			} catch (InterruptedException ie) {
-				Thread.currentThread().interrupt();
-			}
-			active = false;
-		}
+        if (active) {
+            LockSupport.parkNanos(500L * 1_000_000L);
+            if (Thread.interrupted()) {
+                Thread.currentThread().interrupt();
+            }
+            active = false;
+        }
 
 		socketreq = 0;
 		threadreq = null;
@@ -326,61 +325,76 @@ public class SignLink implements Runnable {
 	}
 
 	public static final synchronized void dnslookup(String address) {
-		dns = address;
-		dnsreq = address;
-	}
+		if (address == null) {
+			return;
+		}
 
-	public static final synchronized void startthread(Runnable thread, int priority) {
-		threadreqpri = priority;
-		threadreq = thread;
+		dnsreq = address;
+
+		while (dnsreq != null) {
+			try {
+				SignLink.class.wait(50L);
+			} catch (InterruptedException ie) {
+				Thread.currentThread().interrupt();
+				break;
+			}
+		}
 	}
 
 	public static final synchronized boolean wavesave(byte[] buf, int len) {
-		if (len > 2000000) {
+		if (buf == null) {
 			return false;
 		}
 
-		if (savereq != null) {
+		try {
+			String safe = "sound" + (int) (Math.random() * 9.9999999E7D) + ".wav";
+			if (wavevol < 64) {
+				return false;
+			}
+
+			savelen = len;
+			savebuf = buf;
+			savereq = safe;
+			waveplay = true;
+
+			return true;
+		} catch (Exception ignore) {
 			return false;
 		}
-
-		wavepos = (wavepos + 1) % 5;
-		savelen = len;
-		savebuf = buf;
-		waveplay = true;
-		savereq = "sound" + wavepos + ".wav";
-		return true;
 	}
 
 	public static final synchronized boolean wavereplay() {
-		if (savereq != null) {
+		if (wavevol < 64 || wave.equals("none")) {
 			return false;
 		}
 
-		savebuf = null;
 		waveplay = true;
-		savereq = "sound" + wavepos + ".wav";
 		return true;
 	}
 
 	public static final synchronized void midisave(byte[] buf, int len) {
-		if (len > 2000000 || savereq != null) {
+		if (buf == null) {
 			return;
 		}
 
-		midipos = (midipos + 1) % 5;
-		savelen = len;
-		savebuf = buf;
-		midiplay = true;
-		savereq = "jingle" + midipos + ".mid";
+		try {
+			String safe = "jingle" + (int) (Math.random() * 9.9999999E7D) + ".mid";
+			if (midivol == 0) {
+				return;
+			}
+
+			savelen = len;
+			savebuf = buf;
+			savereq = safe;
+			midiplay = true;
+		} catch (Exception ignore) {
+		}
 	}
 
 	public static final void reporterror(String err) {
-		if (!reporterror || !active) {
+		if (!reporterror || err == null) {
 			return;
 		}
-
-		System.out.println("Error: " + err);
 
 		try {
 			String safe = err.replace(':', '_');

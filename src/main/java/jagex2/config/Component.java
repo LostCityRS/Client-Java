@@ -456,62 +456,60 @@ public class Component {
 
 	@ObfuscatedName("d.a(BIIZ)Lfb;")
 	public Model getModel(int primaryTransformId, int secondaryTransformId, boolean active) {
-		Model model;
+		Model resultModel;
 		if (active) {
-			model = this.loadModel(this.activeModelType, this.activeModel);
+			resultModel = this.loadModel(this.activeModelType, this.activeModel);
 		} else {
-			model = this.loadModel(this.modelType, this.model);
+			resultModel = this.loadModel(this.modelType, this.model);
 		}
 
-		if (model == null) {
+		if (resultModel == null) {
 			return null;
 		}
 
-		if (primaryTransformId == -1 && secondaryTransformId == -1 && model.faceColour == null) {
-			return model;
+		if (primaryTransformId == -1 && secondaryTransformId == -1 && resultModel.faceColour == null) {
+			return resultModel;
 		}
 
-		model = new Model(model, true, false, true);
+		resultModel = new Model(resultModel, true, false, true);
 		if (primaryTransformId != -1 || secondaryTransformId != -1) {
-			model.createLabelReferences();
+			resultModel.createLabelReferences();
 		}
 
 		if (primaryTransformId != -1) {
-			model.applyTransform(primaryTransformId);
+			resultModel.applyTransform(primaryTransformId);
 		}
 
 		if (secondaryTransformId != -1) {
-			model.applyTransform(secondaryTransformId);
+			resultModel.applyTransform(secondaryTransformId);
 		}
 
-		model.calculateNormals(64, 768, -50, -10, -50, true);
-		return model;
+		resultModel.calculateNormals(64, 768, -50, -10, -50, true);
+		return resultModel;
 	}
 
 	@ObfuscatedName("d.a(II)Lfb;")
 	public Model loadModel(int type, int id) {
-		Model model = (Model) modelCache.get(((long) type << 16) + id);
-		if (model != null) {
-			return model;
+		Model resultModel = (Model) modelCache.get(((long) type << 16) + id);
+		if (resultModel != null) {
+			return resultModel;
 		}
 
-		if (type == 1) {
-			model = Model.tryGet(id);
-		} else if (type == 2) {
-			model = NpcType.get(id).getHeadModel();
-		} else if (type == 3) {
-			model = Client.localPlayer.getHeadModel();
-		} else if (type == 4) {
-			model = ObjType.get(id).getInvModel(50);
-		} else if (type == 5) {
-			model = null;
+
+		resultModel = switch (type) {
+			case 1 -> Model.tryGet(id);
+			case 2 -> NpcType.get(id).getHeadModel();
+			case 3 -> Client.localPlayer.getHeadModel();
+			case 4 -> ObjType.get(id).getInvModel(50);
+			case 5 -> null;
+			default -> null;
+		};
+
+		if (resultModel != null) {
+			modelCache.put(resultModel, (type << 16) + id);
 		}
 
-		if (model != null) {
-			modelCache.put(model, (type << 16) + id);
-		}
-
-		return model;
+		return resultModel;
 	}
 
 	@ObfuscatedName("d.a(Lfb;III)V")

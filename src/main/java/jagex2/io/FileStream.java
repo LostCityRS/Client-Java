@@ -4,6 +4,7 @@ import deob.ObfuscatedName;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.concurrent.locks.LockSupport;
 
 @ObfuscatedName("wb")
 public class FileStream {
@@ -241,10 +242,8 @@ public class FileStream {
 			System.out.println("Badseek - pos:" + pos + " len:" + file.length());
 			pos = 0x3c00000;
 
-			try {
-				Thread.sleep(1000L);
-			} catch (Exception ignore) {
-			}
+			// Pause briefly without throwing InterruptedException
+			LockSupport.parkNanos(1_000_000_000L);
 		}
 
 		file.seek(pos);

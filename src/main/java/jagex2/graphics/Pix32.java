@@ -57,7 +57,8 @@ public class Pix32 extends Pix2D {
 
 			PixelGrabber grabber = new PixelGrabber(image, 0, 0, this.wi, this.hi, this.pixels, 0, this.wi);
 			grabber.grabPixels();
-		} catch (Exception var6) {
+		} catch (InterruptedException var6) {
+			Thread.currentThread().interrupt();
 			System.out.println("Error converting jpg");
 		}
 	}
@@ -149,14 +150,15 @@ public class Pix32 extends Pix2D {
 
 	@ObfuscatedName("jb.b(Z)V")
 	public void trim() {
-		int[] pixels = new int[this.ohi * this.owi];
+		int[] newPixels = new int[this.ohi * this.owi];
+		// Copy row-wise to avoid manual element loop and shadowing
 		for (int y = 0; y < this.hi; y++) {
-			for (int x = 0; x < this.wi; x++) {
-				pixels[(this.yof + y) * this.owi + this.xof + x] = this.pixels[this.wi * y + x];
-			}
+			int srcPos = this.wi * y;
+			int dstPos = (this.yof + y) * this.owi + this.xof;
+			System.arraycopy(this.pixels, srcPos, newPixels, dstPos, this.wi);
 		}
 
-		this.pixels = pixels;
+		this.pixels = newPixels;
 		this.wi = this.owi;
 		this.hi = this.ohi;
 		this.xof = 0;

@@ -1,10 +1,10 @@
 package jagex2.graphics;
 
-import deob.ObfuscatedName;
-import jagex2.io.Packet;
-import jagex2.io.Jagfile;
-
 import java.util.Random;
+
+import deob.ObfuscatedName;
+import jagex2.io.Jagfile;
+import jagex2.io.Packet;
 
 @ObfuscatedName("lb")
 public class PixFont extends Pix2D {
@@ -90,9 +90,9 @@ public class PixFont extends Pix2D {
 				var18 += this.charMask[var8][var11 * var19];
 			}
 
-			int var10002;
 			if (var18 <= var12 / 7) {
-				var10002 = this.charAdvance[var8]--;
+				// reduce advance if the leftmost column is mostly empty
+				this.charAdvance[var8]--;
 				this.charOffsetX[var8] = 0;
 			}
 
@@ -102,7 +102,8 @@ public class PixFont extends Pix2D {
 			}
 
 			if (var20 <= var12 / 7) {
-				var10002 = this.charAdvance[var8]--;
+				// reduce advance if the rightmost column is mostly empty
+				this.charAdvance[var8]--;
 			}
 		}
 
@@ -234,45 +235,29 @@ public class PixFont extends Pix2D {
 
 	@ObfuscatedName("lb.a(ILjava/lang/String;)I")
 	public int evaluateTag(String arg1) {
-		if (arg1.equals("red")) {
-			return 16711680;
-		} else if (arg1.equals("gre")) {
-			return 65280;
-		} else if (arg1.equals("blu")) {
-			return 255;
-		} else if (arg1.equals("yel")) {
-			return 16776960;
-		} else if (arg1.equals("cya")) {
-			return 65535;
-		} else if (arg1.equals("mag")) {
-			return 16711935;
-		} else if (arg1.equals("whi")) {
-			return 16777215;
-		} else if (arg1.equals("bla")) {
-			return 0;
-		} else if (arg1.equals("lre")) {
-			return 16748608;
-		} else if (arg1.equals("dre")) {
-			return 8388608;
-		} else if (arg1.equals("dbl")) {
-			return 128;
-		} else if (arg1.equals("or1")) {
-			return 16756736;
-		} else if (arg1.equals("or2")) {
-			return 16740352;
-		} else if (arg1.equals("or3")) {
-			return 16723968;
-		} else if (arg1.equals("gr1")) {
-			return 12648192;
-		} else if (arg1.equals("gr2")) {
-			return 8453888;
-		} else if (arg1.equals("gr3")) {
-			return 4259584;
-		} else {
-			if (arg1.equals("str")) {
+		switch (arg1) {
+			case "red": return 16711680;
+			case "gre": return 65280;
+			case "blu": return 255;
+			case "yel": return 16776960;
+			case "cya": return 65535;
+			case "mag": return 16711935;
+			case "whi": return 16777215;
+			case "bla": return 0;
+			case "lre": return 16748608;
+			case "dre": return 8388608;
+			case "dbl": return 128;
+			case "or1": return 16756736;
+			case "or2": return 16740352;
+			case "or3": return 16723968;
+			case "gr1": return 12648192;
+			case "gr2": return 8453888;
+			case "gr3": return 4259584;
+			case "str":
 				this.strikeout = true;
-			}
-			return -1;
+				return -1;
+			default:
+				return -1;
 		}
 	}
 

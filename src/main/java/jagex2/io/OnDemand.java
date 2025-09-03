@@ -7,10 +7,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.zip.CRC32;
 import java.util.zip.GZIPInputStream;
+import java.util.concurrent.locks.LockSupport;
 
 import deob.ObfuscatedName;
 import jagex2.client.Client;
-import jagex2.client.sign.SignLink;
+import jagex2.client.SignLink;
 import jagex2.datastruct.DoublyLinkList;
 import jagex2.datastruct.LinkList;
 
@@ -132,82 +133,82 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public Socket socket;
 
 	@ObfuscatedName("vb.a(Lyb;Lclient;)V")
-	public final void unpack(Jagfile versionlist, Client c) {
-		String[] version = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
-		for (int i = 0; i < 4; i++) {
-			byte[] data = versionlist.read(version[i], null);
-			int count = data.length / 2;
-			Packet buf = new Packet(data);
+    public final void unpack(Jagfile versionlist, Client c) {
+        String[] version = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
+        for (int i = 0; i < 4; i++) {
+            byte[] bytes = versionlist.read(version[i], null);
+            int count = bytes.length / 2;
+            Packet pkt = new Packet(bytes);
 
 			this.versions[i] = new int[count];
 			this.priorities[i] = new byte[count];
 
-			for (int j = 0; j < count; j++) {
-				this.versions[i][j] = buf.g2();
-			}
-		}
+            for (int j = 0; j < count; j++) {
+                this.versions[i][j] = pkt.g2();
+            }
+        }
 
-		String[] crc = new String[] { "model_crc", "anim_crc", "midi_crc", "map_crc" };
-		for (int i = 0; i < 4; i++) {
-			byte[] data = versionlist.read(crc[i], null);
-			int count = data.length / 4;
-			Packet buf = new Packet(data);
+        String[] crc = new String[] { "model_crc", "anim_crc", "midi_crc", "map_crc" };
+        for (int i = 0; i < 4; i++) {
+            byte[] bytes = versionlist.read(crc[i], null);
+            int count = bytes.length / 4;
+            Packet pkt = new Packet(bytes);
 
 			this.crcs[i] = new int[count];
 
-			for (int j = 0; j < count; j++) {
-				this.crcs[i][j] = buf.g4();
-			}
-		}
+            for (int j = 0; j < count; j++) {
+                this.crcs[i][j] = pkt.g4();
+            }
+        }
 
-		byte[] data = versionlist.read("model_index", null);
-		int count = this.versions[0].length;
+        byte[] bytes = versionlist.read("model_index", null);
+        int count = this.versions[0].length;
 
 		this.models = new byte[count];
 
-		for (int i = 0; i < count; i++) {
-			if (i < data.length) {
-				this.models[i] = data[i];
-			} else {
-				this.models[i] = 0;
-			}
-		}
+        for (int i = 0; i < count; i++) {
+            if (i < bytes.length) {
+                this.models[i] = bytes[i];
+            } else {
+                this.models[i] = 0;
+            }
+        }
 
-		data = versionlist.read("map_index", null);
-		Packet buf = new Packet(data);
-		count = data.length / 7;
+        bytes = versionlist.read("map_index", null);
+        Packet pkt = new Packet(bytes);
+        count = bytes.length / 7;
 
 		this.mapIndex = new int[count];
 		this.mapLand = new int[count];
 		this.mapLoc = new int[count];
 		this.mapMembers = new int[count];
 
-		for (int i = 0; i < count; i++) {
-			this.mapIndex[i] = buf.g2();
-			this.mapLand[i] = buf.g2();
-			this.mapLoc[i] = buf.g2();
-			this.mapMembers[i] = buf.g1();
-		}
+        for (int i = 0; i < count; i++) {
+            this.mapIndex[i] = pkt.g2();
+            this.mapLand[i] = pkt.g2();
+            this.mapLoc[i] = pkt.g2();
+            this.mapMembers[i] = pkt.g1();
+        }
 
-		data = versionlist.read("anim_index", null);
-		buf = new Packet(data);
-		count = data.length / 2;
+        bytes = versionlist.read("anim_index", null);
+        pkt = new Packet(bytes);
+        count = bytes.length / 2;
 
 		this.animIndex = new int[count];
 
-		for (int i = 0; i < count; i++) {
-			this.animIndex[i] = buf.g2();
-		}
+        for (int i = 0; i < count; i++) {
+            this.animIndex[i] = pkt.g2();
+        }
 
-		data = versionlist.read("midi_index", null);
-		buf = new Packet(data);
-		count = data.length;
+        bytes = versionlist.read("midi_index", null);
+        pkt = new Packet(bytes);
+        count = bytes.length;
 
 		this.midiIndex = new int[count];
 
-		for (int i = 0; i < count; i++) {
-			this.midiIndex[i] = buf.g1();
-		}
+        for (int i = 0; i < count; i++) {
+            this.midiIndex[i] = pkt.g1();
+        }
 
 		this.app = c;
 		this.running = true;
@@ -279,6 +280,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(I)V")
+	@Override
 	public final void requestModel(int id) {
 		this.request(0, id);
 	}
@@ -360,12 +362,10 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			throw new RuntimeException("error unzipping");
 		}
 
-		req.data = new byte[pos];
-		for (int i = 0; i < pos; i++) {
-			req.data[i] = this.data[i];
-		}
-		return req;
-	}
+        req.data = new byte[pos];
+        System.arraycopy(this.data, 0, req.data, 0, pos);
+        return req;
+    }
 
 	@ObfuscatedName("vb.a(IZIB)V")
 	public final void prefetchPriority(int archive, int file, byte priority) {
@@ -373,10 +373,10 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			return;
 		}
 
-		byte[] data = this.app.fileStreams[archive + 1].read(file);
-		if (this.validate(data, this.crcs[archive][file], this.versions[archive][file])) {
-			return;
-		}
+        byte[] entryData = this.app.fileStreams[archive + 1].read(file);
+        if (this.validate(entryData, this.crcs[archive][file], this.versions[archive][file])) {
+            return;
+        }
 
 		this.priorities[archive][file] = priority;
 		if (priority > this.topPriority) {
@@ -411,7 +411,8 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		}
 	}
 
-	public final void run() {
+@Override
+public final void run() {
 		try {
 			while (this.running) {
 				this.cycle++;
@@ -421,10 +422,9 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					del = 50;
 				}
 
-				try {
-					Thread.sleep(del);
-				} catch (Exception ignore) {
-				}
+
+				// Use parking instead of sleep to avoid InterruptedException churn in loop
+				LockSupport.parkNanos((long) del * 1_000_000L);
 
 				this.active = true;
 
@@ -477,7 +477,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					if (this.waitCycles > 750) {
 						try {
 							this.socket.close();
-						} catch (Exception ignore) {
+						} catch (IOException ignore) {
 						}
 
 						this.socket = null;
@@ -523,24 +523,24 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			req = (OnDemandRequest) this.queue.pop();
 		}
 
-		while (req != null) {
-			this.active = true;
-			byte[] data = null;
+        while (req != null) {
+            this.active = true;
+            byte[] fileData = null;
 
-			if (this.app.fileStreams[0] != null) {
-				data = this.app.fileStreams[req.archive + 1].read(req.file);
-			}
+            if (this.app.fileStreams[0] != null) {
+                fileData = this.app.fileStreams[req.archive + 1].read(req.file);
+            }
 
-			if (!this.validate(data, this.crcs[req.archive][req.file], this.versions[req.archive][req.file])) {
-				data = null;
-			}
+            if (!this.validate(fileData, this.crcs[req.archive][req.file], this.versions[req.archive][req.file])) {
+                fileData = null;
+            }
 
 			LinkList lock2 = this.queue;
 			synchronized (lock2) {
-				if (data == null) {
-					this.missing.push(req);
-				} else {
-					req.data = data;
+                if (fileData == null) {
+                    this.missing.push(req);
+                } else {
+                    req.data = fileData;
 
 					LinkList lock3 = this.completed;
 					synchronized (lock3) {
@@ -623,13 +623,13 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				}
 			}
 
-			for (int archive = 0; archive < 4; archive++) {
-				byte[] priorities = this.priorities[archive];
-				int count = priorities.length;
+				for (int archive = 0; archive < 4; archive++) {
+					byte[] prioRow = this.priorities[archive];
+					int count = prioRow.length;
 
 				for (int i = 0; i < count; i++) {
-					if (priorities[i] == this.topPriority) {
-						priorities[i] = 0;
+						if (prioRow[i] == this.topPriority) {
+							prioRow[i] = 0;
 
 						OnDemandRequest req = new OnDemandRequest();
 						req.archive = archive;
@@ -758,11 +758,11 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 				this.partAvailable = 0;
 			}
-		} catch (IOException ignore) {
-			try {
-				this.socket.close();
-			} catch (Exception ignored) {
-			}
+        } catch (IOException ignore) {
+            try {
+                this.socket.close();
+            } catch (IOException ignored) {
+            }
 
 			this.socket = null;
 			this.in = null;
@@ -824,11 +824,11 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 			this.out.write(this.buf, 0, 4);
 			this.heartbeatCycle = 0;
-		} catch (IOException ignore) {
-			try {
-				this.socket.close();
-			} catch (Exception ignored) {
-			}
+        } catch (IOException ignore) {
+            try {
+                this.socket.close();
+            } catch (IOException ignored) {
+            }
 
 			this.socket = null;
 			this.in = null;

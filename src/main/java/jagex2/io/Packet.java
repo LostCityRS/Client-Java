@@ -5,6 +5,7 @@ import jagex2.datastruct.DoublyLinkable;
 import jagex2.datastruct.LinkList;
 
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 
 @ObfuscatedName("mb")
 public class Packet extends DoublyLinkable {
@@ -87,13 +88,11 @@ public class Packet extends DoublyLinkable {
 		Packet buf = new Packet();
 		buf.pos = 0;
 
-		if (size == 0) {
-			buf.data = new byte[100];
-		} else if (size == 1) {
-			buf.data = new byte[5000];
-		} else {
-			buf.data = new byte[30000];
-		}
+        switch (size) {
+            case 0 -> buf.data = new byte[100];
+            case 1 -> buf.data = new byte[5000];
+            default -> buf.data = new byte[30000];
+        }
 
 		return buf;
 	}
@@ -183,11 +182,12 @@ public class Packet extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("mb.a(Ljava/lang/String;)V")
-	public void pjstr(String s) {
-		s.getBytes(0, s.length(), this.data, this.pos);
-		this.pos += s.length();
-		this.data[this.pos++] = 10;
-	}
+    public void pjstr(String s) {
+        byte[] bytes = s.getBytes(StandardCharsets.ISO_8859_1);
+        System.arraycopy(bytes, 0, this.data, this.pos, bytes.length);
+        this.pos += bytes.length;
+        this.data[this.pos++] = 10;
+    }
 
 	@ObfuscatedName("mb.a(III[B)V")
 	public void pdata(int len, int off, byte[] src) {
@@ -259,11 +259,9 @@ public class Packet extends DoublyLinkable {
 		int start = this.pos;
 		while (this.data[this.pos++] != 10) {
 		}
-		byte[] data = new byte[this.pos - start - 1];
-		for (int i = start; i < this.pos - 1; i++) {
-			data[i - start] = this.data[i];
-		}
-		return data;
+		byte[] out = new byte[this.pos - start - 1];
+		System.arraycopy(this.data, start, out, 0, this.pos - start - 1);
+		return out;
 	}
 
 	@ObfuscatedName("mb.a([BIII)V")

@@ -18,6 +18,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.concurrent.locks.LockSupport;
 
 @ObfuscatedName("a")
 public class GameShell extends Canvas implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
@@ -207,9 +208,9 @@ public class GameShell extends Canvas implements Runnable, MouseListener, MouseM
 				delta = this.mindel;
 			}
 
-			try {
-				Thread.sleep(delta);
-			} catch (InterruptedException ignore) {
+			// Park instead of sleep to avoid InterruptedException overhead
+			LockSupport.parkNanos((long) delta * 1_000_000L);
+			if (Thread.interrupted()) {
 				intex++;
 			}
 
@@ -257,9 +258,9 @@ public class GameShell extends Canvas implements Runnable, MouseListener, MouseM
 		this.state = -2;
 		this.unload();
 
-		try {
-			Thread.sleep(1000L);
-		} catch (InterruptedException ignore) {
+		// Brief pause before exit without busy-waiting
+		LockSupport.parkNanos(1_000_000_000L);
+		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
 		}
 
@@ -290,9 +291,8 @@ public class GameShell extends Canvas implements Runnable, MouseListener, MouseM
     public final void destroy() {
         this.state = -1;
 
-		try {
-			Thread.sleep(5000L);
-		} catch (InterruptedException ignore) {
+		LockSupport.parkNanos(5_000_000_000L);
+		if (Thread.interrupted()) {
 			Thread.currentThread().interrupt();
 		}
 
@@ -639,9 +639,9 @@ public class GameShell extends Canvas implements Runnable, MouseListener, MouseM
 
 			this.getBaseComponent().repaint();
 
-			try {
-				Thread.sleep(1000L);
-			} catch (InterruptedException ignore) {
+			// Wait for graphics to be ready without throwing InterruptedException
+			LockSupport.parkNanos(1_000_000_000L);
+			if (Thread.interrupted()) {
 				Thread.currentThread().interrupt();
 				break;
 			}

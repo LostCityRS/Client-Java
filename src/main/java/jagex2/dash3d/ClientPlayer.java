@@ -96,12 +96,12 @@ public class ClientPlayer extends ClientEntity {
 		}
 
 		for (int i = 0; i < 5; i++) {
-			int colour = buf.g1();
-			if (colour < 0 || colour >= Client.DESIGN_BODY_COLOUR[i].length) {
-				colour = 0;
+			int colourIndex = buf.g1();
+			if (colourIndex < 0 || colourIndex >= Client.DESIGN_BODY_COLOUR[i].length) {
+				colourIndex = 0;
 			}
 
-			this.colour[i] = colour;
+			this.colour[i] = colourIndex;
 		}
 
 		super.readyanim = buf.g2();
@@ -169,8 +169,9 @@ public class ClientPlayer extends ClientEntity {
 		this.hash += this.gender;
 	}
 
-	@ObfuscatedName("bb.a(I)Lfb;")
-	public final Model getModel() {
+    @Override
+    @ObfuscatedName("bb.a(I)Lfb;")
+    public final Model getModel() {
 		if (!this.visible) {
 			return null;
 		}
@@ -214,36 +215,44 @@ public class ClientPlayer extends ClientEntity {
 			}
 
 			if (Client.loopCycle >= this.locStartCycle && Client.loopCycle < this.locStopCycle) {
-				Model locModel = this.locModel;
+				Model tmpLocModel = this.locModel;
 
-				locModel.translate(this.locOffsetY - this.y, this.locOffsetX - super.x, this.locOffsetZ - super.z);
+				tmpLocModel.translate(this.locOffsetY - this.y, this.locOffsetX - super.x, this.locOffsetZ - super.z);
 
-				if (super.dstYaw == 512) {
-					locModel.rotateY90();
-					locModel.rotateY90();
-					locModel.rotateY90();
-				} else if (super.dstYaw == 1024) {
-					locModel.rotateY90();
-					locModel.rotateY90();
-				} else if (super.dstYaw == 1536) {
-					locModel.rotateY90();
-				}
+                switch (super.dstYaw) {
+                    case 512 -> {
+                        tmpLocModel.rotateY90();
+                        tmpLocModel.rotateY90();
+                        tmpLocModel.rotateY90();
+                    }
+                    case 1024 -> {
+                        tmpLocModel.rotateY90();
+                        tmpLocModel.rotateY90();
+                    }
+                    case 1536 -> tmpLocModel.rotateY90();
+                    default -> {
+                    }
+                }
 
-				Model[] models = new Model[] { model, locModel };
+				Model[] models = new Model[] { model, tmpLocModel };
 				model = new Model(true, 2, models);
-
-				if (super.dstYaw == 512) {
-					locModel.rotateY90();
-				} else if (super.dstYaw == 1024) {
-					locModel.rotateY90();
-					locModel.rotateY90();
-				} else if (super.dstYaw == 1536) {
-					locModel.rotateY90();
-					locModel.rotateY90();
-					locModel.rotateY90();
-				}
-
-				locModel.translate(this.y - this.locOffsetY, super.x - this.locOffsetX, super.z - this.locOffsetZ);
+				
+                switch (super.dstYaw) {
+                    case 512 -> tmpLocModel.rotateY90();
+                    case 1024 -> {
+                        tmpLocModel.rotateY90();
+                        tmpLocModel.rotateY90();
+                    }
+                    case 1536 -> {
+                        tmpLocModel.rotateY90();
+                        tmpLocModel.rotateY90();
+                        tmpLocModel.rotateY90();
+                    }
+                    default -> {
+                    }
+                }
+				
+				tmpLocModel.translate(this.y - this.locOffsetY, super.x - this.locOffsetX, super.z - this.locOffsetZ);
 			}
 		}
 
@@ -253,7 +262,7 @@ public class ClientPlayer extends ClientEntity {
 
 	@ObfuscatedName("bb.c(I)Lfb;")
 	public final Model getAnimatedModel() {
-		long hash = this.hash;
+		long localHash = this.hash;
 		int primaryTransformId = -1;
 		int secondaryTransformId = -1;
 		int leftHandValue = -1;
@@ -270,18 +279,18 @@ public class ClientPlayer extends ClientEntity {
 
 			if (seq.replaceheldleft >= 0) {
 				leftHandValue = seq.replaceheldleft;
-				hash += leftHandValue - this.appearance[5] << 40;
+				localHash += ((long) leftHandValue - (long) this.appearance[5]) << 40;
 			}
 
 			if (seq.replaceheldright >= 0) {
 				rightHandValue = seq.replaceheldright;
-				hash += rightHandValue - this.appearance[3] << 48;
+				localHash += ((long) rightHandValue - (long) this.appearance[3]) << 48;
 			}
 		} else if (super.secondarySeqId >= 0) {
 			primaryTransformId = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 		}
 
-		Model model = (Model) modelCache.get(hash);
+		Model model = (Model) modelCache.get(localHash);
 		if (model == null) {
 			boolean needsModel = false;
 
@@ -357,8 +366,8 @@ public class ClientPlayer extends ClientEntity {
 
 			model.createLabelReferences();
 			model.calculateNormals(64, 850, -30, -50, -30, true);
-			modelCache.put(model, hash);
-			this.modelCacheKey = hash;
+			modelCache.put(model, localHash);
+			this.modelCacheKey = localHash;
 		}
 
 		if (this.lowMemory) {
@@ -436,8 +445,9 @@ public class ClientPlayer extends ClientEntity {
 		return tmp;
 	}
 
-	@ObfuscatedName("bb.a(B)Z")
-	public final boolean isVisible() {
-		return this.visible;
-	}
+    @ObfuscatedName("bb.a(B)Z")
+    @Override
+    public final boolean isVisible() {
+        return this.visible;
+    }
 }
