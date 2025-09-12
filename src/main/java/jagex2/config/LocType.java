@@ -217,118 +217,121 @@ public class LocType {
 
 	@ObfuscatedName("ec.a(ZLmb;)V")
 	public final void decode(Packet arg1) {
-		int var3 = -1;
+		int active = -1;
+
 		while (true) {
-			while (true) {
-				int var4 = arg1.g1();
-				if (var4 == 0) {
-					if (this.shapes == null) {
-						this.shapes = new int[0];
-					}
-					if (var3 == -1) {
-						this.active = false;
-						if (this.shapes.length > 0 && this.shapes[0] == 10) {
-							this.active = true;
-						}
-						if (this.op != null) {
-							this.active = true;
-						}
-					}
-					if (this.breakroutefinding) {
-						this.blockwalk = false;
-						this.blockrange = false;
-						return;
-					}
-					return;
-				}
-				if (var4 == 1) {
-					int var5 = arg1.g1();
-					this.shapes = new int[var5];
-					this.models = new int[var5];
-					for (int var6 = 0; var6 < var5; var6++) {
-						this.models[var6] = arg1.g2();
-						this.shapes[var6] = arg1.g1();
-					}
-				} else if (var4 == 2) {
-					this.name = arg1.gjstr();
-				} else if (var4 == 3) {
-					this.desc = arg1.gjstrraw();
-				} else if (var4 == 14) {
-					this.width = arg1.g1();
-				} else if (var4 == 15) {
-					this.length = arg1.g1();
-				} else if (var4 == 17) {
-					this.blockwalk = false;
-				} else if (var4 == 18) {
-					this.blockrange = false;
-				} else if (var4 == 19) {
-					var3 = arg1.g1();
-					if (var3 == 1) {
-						this.active = true;
-					}
-				} else if (var4 == 21) {
-					this.hillskew = true;
-				} else if (var4 == 22) {
-					this.sharelight = true;
-				} else if (var4 == 23) {
-					this.occlude = true;
-				} else if (var4 == 24) {
-					this.anim = arg1.g2();
-					if (this.anim == 65535) {
-						this.anim = -1;
-					}
-				} else if (var4 == 25) {
-					this.animHasAlpha = true;
-				} else if (var4 == 28) {
-					this.wallwidth = arg1.g1();
-				} else if (var4 == 29) {
-					this.ambient = arg1.g1b();
-				} else if (var4 == 39) {
-					this.contrast = arg1.g1b();
-				} else if (var4 >= 30 && var4 < 39) {
-					if (this.op == null) {
-						this.op = new String[5];
-					}
-					this.op[var4 - 30] = arg1.gjstr();
-					if (this.op[var4 - 30].equalsIgnoreCase("hidden")) {
-						this.op[var4 - 30] = null;
-					}
-				} else if (var4 == 40) {
-					int var7 = arg1.g1();
-					this.recol_s = new int[var7];
-					this.recol_d = new int[var7];
-					for (int var8 = 0; var8 < var7; var8++) {
-						this.recol_s[var8] = arg1.g2();
-						this.recol_d[var8] = arg1.g2();
-					}
-				} else if (var4 == 60) {
-					this.mapfunction = arg1.g2();
-				} else if (var4 == 62) {
-					this.mirror = true;
-				} else if (var4 == 64) {
-					this.shadow = false;
-				} else if (var4 == 65) {
-					this.resizex = arg1.g2();
-				} else if (var4 == 66) {
-					this.resizey = arg1.g2();
-				} else if (var4 == 67) {
-					this.resizez = arg1.g2();
-				} else if (var4 == 68) {
-					this.mapscene = arg1.g2();
-				} else if (var4 == 69) {
-					this.forceapproach = arg1.g1();
-				} else if (var4 == 70) {
-					this.offsetx = arg1.g2b();
-				} else if (var4 == 71) {
-					this.offsety = arg1.g2b();
-				} else if (var4 == 72) {
-					this.offsetz = arg1.g2b();
-				} else if (var4 == 73) {
-					this.forcedecor = true;
-				} else if (var4 == 74) {
-					this.breakroutefinding = true;
-				}
+			int var4 = arg1.g1();
+			if (var4 == 0) {
+				break;
 			}
+			if (var4 == 1) {
+				int var5 = arg1.g1();
+				this.shapes = new int[var5];
+				this.models = new int[var5];
+				for (int var6 = 0; var6 < var5; var6++) {
+					this.models[var6] = arg1.g2();
+					this.shapes[var6] = arg1.g1();
+				}
+			} else if (var4 == 2) {
+				this.name = arg1.gjstr();
+			} else if (var4 == 3) {
+				this.desc = arg1.gjstrraw();
+			} else if (var4 == 14) {
+				this.width = arg1.g1();
+			} else if (var4 == 15) {
+				this.length = arg1.g1();
+			} else if (var4 == 17) {
+				this.blockwalk = false;
+			} else if (var4 == 18) {
+				this.blockrange = false;
+			} else if (var4 == 19) {
+				active = arg1.g1();
+				if (active == 1) {
+					this.active = true;
+				}
+			} else if (var4 == 21) {
+				this.hillskew = true;
+			} else if (var4 == 22) {
+				this.sharelight = true;
+			} else if (var4 == 23) {
+				this.occlude = true;
+			} else if (var4 == 24) {
+				this.anim = arg1.g2();
+				if (this.anim == 65535) {
+					this.anim = -1;
+				}
+			} else if (var4 == 25) {
+				this.animHasAlpha = true;
+			} else if (var4 == 28) {
+				this.wallwidth = arg1.g1();
+			} else if (var4 == 29) {
+				this.ambient = arg1.g1b();
+			} else if (var4 == 39) {
+				this.contrast = arg1.g1b();
+			} else if (var4 >= 30 && var4 < 39) {
+				if (this.op == null) {
+					this.op = new String[5];
+				}
+				this.op[var4 - 30] = arg1.gjstr();
+				if (this.op[var4 - 30].equalsIgnoreCase("hidden")) {
+					this.op[var4 - 30] = null;
+				}
+			} else if (var4 == 40) {
+				int var7 = arg1.g1();
+				this.recol_s = new int[var7];
+				this.recol_d = new int[var7];
+				for (int var8 = 0; var8 < var7; var8++) {
+					this.recol_s[var8] = arg1.g2();
+					this.recol_d[var8] = arg1.g2();
+				}
+			} else if (var4 == 60) {
+				this.mapfunction = arg1.g2();
+			} else if (var4 == 62) {
+				this.mirror = true;
+			} else if (var4 == 64) {
+				this.shadow = false;
+			} else if (var4 == 65) {
+				this.resizex = arg1.g2();
+			} else if (var4 == 66) {
+				this.resizey = arg1.g2();
+			} else if (var4 == 67) {
+				this.resizez = arg1.g2();
+			} else if (var4 == 68) {
+				this.mapscene = arg1.g2();
+			} else if (var4 == 69) {
+				this.forceapproach = arg1.g1();
+			} else if (var4 == 70) {
+				this.offsetx = arg1.g2b();
+			} else if (var4 == 71) {
+				this.offsety = arg1.g2b();
+			} else if (var4 == 72) {
+				this.offsetz = arg1.g2b();
+			} else if (var4 == 73) {
+				this.forcedecor = true;
+			} else if (var4 == 74) {
+				this.breakroutefinding = true;
+			}
+		}
+
+		if (this.shapes == null) {
+			this.shapes = new int[0];
+		}
+
+		if (active == -1) {
+			this.active = false;
+
+			if (this.shapes.length > 0 && this.shapes[0] == 10) {
+				this.active = true;
+			}
+
+			if (this.op != null) {
+				this.active = true;
+			}
+		}
+
+		if (this.breakroutefinding) {
+			this.blockwalk = false;
+			this.blockrange = false;
 		}
 	}
 

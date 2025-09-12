@@ -2110,23 +2110,22 @@ public class Client extends GameShell {
 			var2.drawString("To play RuneScape make sure you play from", 50, 100);
 			var2.drawString("http://www.runescape.com", 50, 150);
 		}
-		if (!this.errorStarted) {
-			return;
+		if (this.errorStarted) {
+			this.flameActive = false;
+			var2.setColor(Color.yellow);
+			byte var4 = 35;
+			var2.drawString("Error a copy of RuneScape already appears to be loaded", 30, var4);
+			int var9 = var4 + 50;
+			var2.setColor(Color.white);
+			var2.drawString("To fix this try the following (in order):", 30, var9);
+			int var11 = var9 + 50;
+			var2.setColor(Color.white);
+			var2.setFont(new Font("Helvetica", 1, 12));
+			var2.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, var11);
+			int var13 = var11 + 30;
+			var2.drawString("2: Try rebooting your computer, and reloading", 30, var13);
+			int var14 = var13 + 30;
 		}
-		this.flameActive = false;
-		var2.setColor(Color.yellow);
-		byte var4 = 35;
-		var2.drawString("Error a copy of RuneScape already appears to be loaded", 30, var4);
-		int var9 = var4 + 50;
-		var2.setColor(Color.white);
-		var2.drawString("To fix this try the following (in order):", 30, var9);
-		int var11 = var9 + 50;
-		var2.setColor(Color.white);
-		var2.setFont(new Font("Helvetica", 1, 12));
-		var2.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, var11);
-		int var13 = var11 + 30;
-		var2.drawString("2: Try rebooting your computer, and reloading", 30, var13);
-		int var14 = var13 + 30;
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;IIILjava/lang/String;I)Lyb;")
@@ -2340,44 +2339,42 @@ public class Client extends GameShell {
 				this.password = "";
 			}
 			while (true) {
-				while (true) {
-					int var9 = this.pollKey();
-					if (var9 == -1) {
-						return;
+				int var9 = this.pollKey();
+				if (var9 == -1) {
+					return;
+				}
+				boolean var10 = false;
+				for (int var11 = 0; var11 < CHARSET.length(); var11++) {
+					if (var9 == CHARSET.charAt(var11)) {
+						var10 = true;
+						break;
 					}
-					boolean var10 = false;
-					for (int var11 = 0; var11 < CHARSET.length(); var11++) {
-						if (var9 == CHARSET.charAt(var11)) {
-							var10 = true;
-							break;
-						}
+				}
+				if (this.titleLoginField == 0) {
+					if (var9 == 8 && this.username.length() > 0) {
+						this.username = this.username.substring(0, this.username.length() - 1);
 					}
-					if (this.titleLoginField == 0) {
-						if (var9 == 8 && this.username.length() > 0) {
-							this.username = this.username.substring(0, this.username.length() - 1);
-						}
-						if (var9 == 9 || var9 == 10 || var9 == 13) {
-							this.titleLoginField = 1;
-						}
-						if (var10) {
-							this.username = this.username + (char) var9;
-						}
-						if (this.username.length() > 12) {
-							this.username = this.username.substring(0, 12);
-						}
-					} else if (this.titleLoginField == 1) {
-						if (var9 == 8 && this.password.length() > 0) {
-							this.password = this.password.substring(0, this.password.length() - 1);
-						}
-						if (var9 == 9 || var9 == 10 || var9 == 13) {
-							this.titleLoginField = 0;
-						}
-						if (var10) {
-							this.password = this.password + (char) var9;
-						}
-						if (this.password.length() > 20) {
-							this.password = this.password.substring(0, 20);
-						}
+					if (var9 == 9 || var9 == 10 || var9 == 13) {
+						this.titleLoginField = 1;
+					}
+					if (var10) {
+						this.username = this.username + (char) var9;
+					}
+					if (this.username.length() > 12) {
+						this.username = this.username.substring(0, 12);
+					}
+				} else if (this.titleLoginField == 1) {
+					if (var9 == 8 && this.password.length() > 0) {
+						this.password = this.password.substring(0, this.password.length() - 1);
+					}
+					if (var9 == 9 || var9 == 10 || var9 == 13) {
+						this.titleLoginField = 0;
+					}
+					if (var10) {
+						this.password = this.password + (char) var9;
+					}
+					if (this.password.length() > 20) {
+						this.password = this.password.substring(0, 20);
 					}
 				}
 			}
@@ -2387,7 +2384,6 @@ public class Client extends GameShell {
 			int var18 = var13 + 20;
 			if (super.mouseClickButton == 1 && super.mouseClickX >= var12 - 75 && super.mouseClickX <= var12 + 75 && super.mouseClickY >= var18 - 20 && super.mouseClickY <= var18 + 20) {
 				this.titleScreenState = 0;
-				return;
 			}
 		}
 	}
@@ -2834,7 +2830,7 @@ public class Client extends GameShell {
 				this.applyCutscene();
 			}
 			for (int var13 = 0; var13 < 5; var13++) {
-				int var10002 = this.cameraModifierCycle[var13]++;
+				this.cameraModifierCycle[var13]++;
 			}
 			this.handleInputKey();
 			super.idleCycles++;
@@ -3224,7 +3220,6 @@ public class Client extends GameShell {
 		if (cyclelogic5 > 85) {
 			cyclelogic5 = 0;
 			this.out.pIsaac(63);
-			return;
 		}
 	}
 
@@ -3263,21 +3258,19 @@ public class Client extends GameShell {
 					var2--;
 				}
 			} else {
-				int var10002 = this.waveDelay[var2]--;
+				this.waveDelay[var2]--;
 			}
 		}
-		if (this.nextMusicDelay <= 0) {
-			return;
-		}
-		this.nextMusicDelay -= 20;
-		if (this.nextMusicDelay < 0) {
-			this.nextMusicDelay = 0;
-		}
-		if (this.nextMusicDelay == 0 && this.midiActive && !lowMem) {
-			this.midiSong = this.nextMidiSong;
-			this.midiFading = false;
-			this.onDemand.request(2, this.midiSong);
-			return;
+		if (this.nextMusicDelay > 0) {
+			this.nextMusicDelay -= 20;
+			if (this.nextMusicDelay < 0) {
+				this.nextMusicDelay = 0;
+			}
+			if (this.nextMusicDelay == 0 && this.midiActive && !lowMem) {
+				this.midiSong = this.nextMidiSong;
+				this.midiFading = false;
+				this.onDemand.request(2, this.midiSong);
+			}
 		}
 	}
 
@@ -3367,11 +3360,11 @@ public class Client extends GameShell {
 				boolean var6 = false;
 				if (var5 != null && var5.startsWith("@cr1@")) {
 					var5 = var5.substring(5);
-					boolean var7 = true;
+					var6 = true;
 				}
 				if (var5 != null && var5.startsWith("@cr2@")) {
 					var5 = var5.substring(5);
-					boolean var8 = true;
+					var6 = true;
 				}
 				if ((var4 == 3 || var4 == 7) && (var4 == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(var5))) {
 					int var9 = 329 - var2 * 13;
@@ -3722,43 +3715,41 @@ public class Client extends GameShell {
 				}
 			}
 		}
-		if (var2 != 1) {
-			return;
-		}
-		int var5 = this.menuX;
-		int var6 = this.menuY;
-		int var7 = this.menuWidth;
-		int var8 = super.mouseClickX;
-		int var9 = super.mouseClickY;
-		if (this.menuArea == 0) {
-			var8 -= 4;
-			var9 -= 4;
-		}
-		if (this.menuArea == 1) {
-			var8 -= 553;
-			var9 -= 205;
-		}
-		if (this.menuArea == 2) {
-			var8 -= 17;
-			var9 -= 357;
-		}
-		int var10 = -1;
-		for (int var11 = 0; var11 < this.menuSize; var11++) {
-			int var12 = var6 + 31 + (this.menuSize - 1 - var11) * 15;
-			if (var8 > var5 && var8 < var5 + var7 && var9 > var12 - 13 && var9 < var12 + 3) {
-				var10 = var11;
+		if (var2 == 1) {
+			int var5 = this.menuX;
+			int var6 = this.menuY;
+			int var7 = this.menuWidth;
+			int var8 = super.mouseClickX;
+			int var9 = super.mouseClickY;
+			if (this.menuArea == 0) {
+				var8 -= 4;
+				var9 -= 4;
 			}
-		}
-		if (var10 != -1) {
-			this.useMenuOption(var10);
-		}
-		this.menuVisible = false;
-		if (this.menuArea == 1) {
-			this.redrawSidebar = true;
-		}
-		if (this.menuArea == 2) {
-			this.redrawChatback = true;
-			return;
+			if (this.menuArea == 1) {
+				var8 -= 553;
+				var9 -= 205;
+			}
+			if (this.menuArea == 2) {
+				var8 -= 17;
+				var9 -= 357;
+			}
+			int var10 = -1;
+			for (int var11 = 0; var11 < this.menuSize; var11++) {
+				int var12 = var6 + 31 + (this.menuSize - 1 - var11) * 15;
+				if (var8 > var5 && var8 < var5 + var7 && var9 > var12 - 13 && var9 < var12 + 3) {
+					var10 = var11;
+				}
+			}
+			if (var10 != -1) {
+				this.useMenuOption(var10);
+			}
+			this.menuVisible = false;
+			if (this.menuArea == 1) {
+				this.redrawSidebar = true;
+			}
+			if (this.menuArea == 2) {
+				this.redrawChatback = true;
+			}
 		}
 	}
 
@@ -3879,7 +3870,6 @@ public class Client extends GameShell {
 			cyclelogic1 = 0;
 			this.out.pIsaac(136);
 			this.out.p1(43);
-			return;
 		}
 	}
 
@@ -3915,19 +3905,17 @@ public class Client extends GameShell {
 			this.out.p1(this.chatPrivateMode);
 			this.out.p1(this.chatTradeMode);
 		}
-		if (super.mouseClickX < 412 || super.mouseClickX > 512 || super.mouseClickY < 467 || super.mouseClickY > 499) {
-			return;
-		}
-		this.closeInterfaces();
-		this.reportAbuseInput = "";
-		this.reportAbuseMuteOption = false;
-		for (int var2 = 0; var2 < Component.types.length; var2++) {
-			if (Component.types[var2] != null && Component.types[var2].clientCode == 600) {
-				this.reportAbuseInterfaceId = this.viewportInterfaceId = Component.types[var2].layer;
-				return;
+		if (super.mouseClickX >= 412 && super.mouseClickX <= 512 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
+			this.closeInterfaces();
+			this.reportAbuseInput = "";
+			this.reportAbuseMuteOption = false;
+			for (int var2 = 0; var2 < Component.types.length; var2++) {
+				if (Component.types[var2] != null && Component.types[var2].clientCode == 600) {
+					this.reportAbuseInterfaceId = this.viewportInterfaceId = Component.types[var2].layer;
+					return;
+				}
 			}
 		}
-		return;
 	}
 
 	@ObfuscatedName("client.K(I)V")
@@ -4612,13 +4600,11 @@ public class Client extends GameShell {
 				arg1.z = var7;
 			}
 		}
-		if (arg1.x != var6 || arg1.z != var7) {
-			return;
-		}
-		arg1.routeLength--;
-		if (arg1.preanimRouteLength > 0) {
-			arg1.preanimRouteLength--;
-			return;
+		if (arg1.x == var6 && arg1.z == var7) {
+			arg1.routeLength--;
+			if (arg1.preanimRouteLength > 0) {
+				arg1.preanimRouteLength--;
+			}
 		}
 	}
 
@@ -4658,26 +4644,23 @@ public class Client extends GameShell {
 			arg0.targetTileZ = 0;
 		}
 		int var13 = arg0.dstYaw - arg0.yaw & 0x7FF;
-		if (var13 == 0) {
-			return;
+		if (var13 != 0) {
+			if (var13 < 32 || var13 > 2016) {
+				arg0.yaw = arg0.dstYaw;
+			} else if (var13 > 1024) {
+				arg0.yaw -= 32;
+			} else {
+				arg0.yaw += 32;
+			}
+			arg0.yaw &= 0x7FF;
+			if (arg0.secondarySeqId == arg0.readyanim && arg0.yaw != arg0.dstYaw) {
+				if (arg0.turnanim != -1) {
+					arg0.secondarySeqId = arg0.turnanim;
+				} else {
+					arg0.secondarySeqId = arg0.walkanim;
+				}
+			}
 		}
-		if (var13 < 32 || var13 > 2016) {
-			arg0.yaw = arg0.dstYaw;
-		} else if (var13 > 1024) {
-			arg0.yaw -= 32;
-		} else {
-			arg0.yaw += 32;
-		}
-		arg0.yaw &= 0x7FF;
-		if (arg0.secondarySeqId != arg0.readyanim || arg0.yaw == arg0.dstYaw) {
-			return;
-		}
-		if (arg0.turnanim != -1) {
-			arg0.secondarySeqId = arg0.turnanim;
-			return;
-		}
-		arg0.secondarySeqId = arg0.walkanim;
-		return;
 	}
 
 	@ObfuscatedName("client.a(Lz;I)V")
@@ -4965,16 +4948,15 @@ public class Client extends GameShell {
 			this.fontBold12.centreStringTag(true, var17 + 5, 16777215, var16, "Cancel");
 		}
 		this.imageTitle4.draw(202, super.graphics, 171);
-		if (!this.redrawFrame) {
-			return;
+		if (this.redrawFrame) {
+			this.redrawFrame = false;
+			this.imageTitle2.draw(128, super.graphics, 0);
+			this.imageTitle3.draw(202, super.graphics, 371);
+			this.imageTitle5.draw(0, super.graphics, 265);
+			this.imageTitle6.draw(562, super.graphics, 265);
+			this.imageTitle7.draw(128, super.graphics, 171);
+			this.imageTitle8.draw(562, super.graphics, 171);
 		}
-		this.redrawFrame = false;
-		this.imageTitle2.draw(128, super.graphics, 0);
-		this.imageTitle3.draw(202, super.graphics, 371);
-		this.imageTitle5.draw(0, super.graphics, 265);
-		this.imageTitle6.draw(562, super.graphics, 265);
-		this.imageTitle7.draw(128, super.graphics, 171);
-		this.imageTitle8.draw(562, super.graphics, 171);
 	}
 
 	@ObfuscatedName("client.k(I)V")
@@ -5865,16 +5847,15 @@ public class Client extends GameShell {
 			this.imageHeadicon[6].plotSprite(472, 296);
 			this.fontPlain12.centreString(16776960, 484, 329, "Arena");
 		}
-		if (this.systemUpdateTimer == 0) {
-			return;
-		}
-		int var5 = this.systemUpdateTimer / 50;
-		int var6 = var5 / 60;
-		int var7 = var5 % 60;
-		if (var7 < 10) {
-			this.fontPlain12.drawString("System update in: " + var6 + ":0" + var7, 16776960, 4, 329);
-		} else {
-			this.fontPlain12.drawString("System update in: " + var6 + ":" + var7, 16776960, 4, 329);
+		if (this.systemUpdateTimer != 0) {
+			int var5 = this.systemUpdateTimer / 50;
+			int var6 = var5 / 60;
+			int var7 = var5 % 60;
+			if (var7 < 10) {
+				this.fontPlain12.drawString("System update in: " + var6 + ":0" + var7, 16776960, 4, 329);
+			} else {
+				this.fontPlain12.drawString("System update in: " + var6 + ":" + var7, 16776960, 4, 329);
+			}
 		}
 	}
 
@@ -6164,20 +6145,17 @@ public class Client extends GameShell {
 			}
 		}
 		int var32 = this.scene.getGroundDecorTypecode(arg3, arg0, arg1);
-		if (var32 == 0) {
-			return;
-		}
-		int var33 = var32 >> 14 & 0x7FFF;
-		LocType var34 = LocType.get(var33);
-		if (var34.mapscene == -1) {
-			return;
-		}
-		Pix8 var35 = this.imageMapscene[var34.mapscene];
-		if (var35 != null) {
-			int var36 = (var34.width * 4 - var35.wi) / 2;
-			int var37 = (var34.length * 4 - var35.hi) / 2;
-			var35.plotSprite(arg0 * 4 + 48 + var36, (104 - arg1 - var34.length) * 4 + 48 + var37);
-			return;
+		if (var32 != 0) {
+			int var33 = var32 >> 14 & 0x7FFF;
+			LocType var34 = LocType.get(var33);
+			if (var34.mapscene != -1) {
+				Pix8 var35 = this.imageMapscene[var34.mapscene];
+				if (var35 != null) {
+					int var36 = (var34.width * 4 - var35.wi) / 2;
+					int var37 = (var34.length * 4 - var35.hi) / 2;
+					var35.plotSprite(arg0 * 4 + 48 + var36, (104 - arg1 - var34.length) * 4 + 48 + var37);
+				}
+			}
 		}
 	}
 
@@ -7536,85 +7514,82 @@ public class Client extends GameShell {
 				this.objStacks[this.currentLevel][var69][var70].push(var74);
 				this.sortObjStacks(var69, var70);
 			}
-		} else {
-			if (arg2 == 188) {
-				int var75 = arg0.g1();
-				int var76 = this.baseX + (var75 >> 4 & 0x7);
-				int var77 = this.baseZ + (var75 & 0x7);
-				int var78 = arg0.g1();
-				int var79 = var78 >> 2;
-				int var80 = var78 & 0x3;
-				int var81 = this.LOC_SHAPE_TO_LAYER[var79];
-				int var82 = arg0.g2();
-				int var83 = arg0.g2();
-				int var84 = arg0.g2();
-				int var85 = arg0.g2();
-				byte var86 = arg0.g1b();
-				byte var87 = arg0.g1b();
-				byte var88 = arg0.g1b();
-				byte var89 = arg0.g1b();
-				ClientPlayer var90;
-				if (var85 == this.localPid) {
-					var90 = localPlayer;
-				} else {
-					var90 = this.players[var85];
-				}
-				if (var90 != null) {
-					LocType var91 = LocType.get(var82);
-					int var92 = this.levelHeightmap[this.currentLevel][var76][var77];
-					int var93 = this.levelHeightmap[this.currentLevel][var76 + 1][var77];
-					int var94 = this.levelHeightmap[this.currentLevel][var76 + 1][var77 + 1];
-					int var95 = this.levelHeightmap[this.currentLevel][var76][var77 + 1];
-					Model var96 = var91.getModel(var79, var80, var92, var93, var94, var95, -1);
-					if (var96 != null) {
-						this.appendLoc(-1, var81, this.currentLevel, 0, var77, var83 + 1, var84 + 1, var76, 0);
-						var90.locStartCycle = var83 + loopCycle;
-						var90.locStopCycle = var84 + loopCycle;
-						var90.locModel = var96;
-						int var97 = var91.width;
-						int var98 = var91.length;
-						if (var80 == 1 || var80 == 3) {
-							var97 = var91.length;
-							var98 = var91.width;
-						}
-						var90.locOffsetX = var76 * 128 + var97 * 64;
-						var90.locOffsetZ = var77 * 128 + var98 * 64;
-						var90.locOffsetY = this.getHeightmapY(var90.locOffsetZ, this.currentLevel, var90.locOffsetX);
-						if (var86 > var88) {
-							byte var99 = var86;
-							var86 = var88;
-							var88 = var99;
-						}
-						if (var87 > var89) {
-							byte var100 = var87;
-							var87 = var89;
-							var89 = var100;
-						}
-						var90.minTileX = var76 + var86;
-						var90.maxTileX = var76 + var88;
-						var90.minTileZ = var77 + var87;
-						var90.maxTileZ = var77 + var89;
+		} else if (arg2 == 188) {
+			int var75 = arg0.g1();
+			int var76 = this.baseX + (var75 >> 4 & 0x7);
+			int var77 = this.baseZ + (var75 & 0x7);
+			int var78 = arg0.g1();
+			int var79 = var78 >> 2;
+			int var80 = var78 & 0x3;
+			int var81 = this.LOC_SHAPE_TO_LAYER[var79];
+			int var82 = arg0.g2();
+			int var83 = arg0.g2();
+			int var84 = arg0.g2();
+			int var85 = arg0.g2();
+			byte var86 = arg0.g1b();
+			byte var87 = arg0.g1b();
+			byte var88 = arg0.g1b();
+			byte var89 = arg0.g1b();
+			ClientPlayer var90;
+			if (var85 == this.localPid) {
+				var90 = localPlayer;
+			} else {
+				var90 = this.players[var85];
+			}
+			if (var90 != null) {
+				LocType var91 = LocType.get(var82);
+				int var92 = this.levelHeightmap[this.currentLevel][var76][var77];
+				int var93 = this.levelHeightmap[this.currentLevel][var76 + 1][var77];
+				int var94 = this.levelHeightmap[this.currentLevel][var76 + 1][var77 + 1];
+				int var95 = this.levelHeightmap[this.currentLevel][var76][var77 + 1];
+				Model var96 = var91.getModel(var79, var80, var92, var93, var94, var95, -1);
+				if (var96 != null) {
+					this.appendLoc(-1, var81, this.currentLevel, 0, var77, var83 + 1, var84 + 1, var76, 0);
+					var90.locStartCycle = var83 + loopCycle;
+					var90.locStopCycle = var84 + loopCycle;
+					var90.locModel = var96;
+					int var97 = var91.width;
+					int var98 = var91.length;
+					if (var80 == 1 || var80 == 3) {
+						var97 = var91.length;
+						var98 = var91.width;
 					}
+					var90.locOffsetX = var76 * 128 + var97 * 64;
+					var90.locOffsetZ = var77 * 128 + var98 * 64;
+					var90.locOffsetY = this.getHeightmapY(var90.locOffsetZ, this.currentLevel, var90.locOffsetX);
+					if (var86 > var88) {
+						byte var99 = var86;
+						var86 = var88;
+						var88 = var99;
+					}
+					if (var87 > var89) {
+						byte var100 = var87;
+						var87 = var89;
+						var89 = var100;
+					}
+					var90.minTileX = var76 + var86;
+					var90.maxTileX = var76 + var88;
+					var90.minTileZ = var77 + var87;
+					var90.maxTileZ = var77 + var89;
 				}
 			}
-			if (arg2 == 151) {
-				int var101 = arg0.g1();
-				int var102 = this.baseX + (var101 >> 4 & 0x7);
-				int var103 = this.baseZ + (var101 & 0x7);
-				int var104 = arg0.g2();
-				int var105 = arg0.g2();
-				int var106 = arg0.g2();
-				if (var102 >= 0 && var103 >= 0 && var102 < 104 && var103 < 104) {
-					LinkList var107 = this.objStacks[this.currentLevel][var102][var103];
-					if (var107 != null) {
-						for (ClientObj var108 = (ClientObj) var107.head(); var108 != null; var108 = (ClientObj) var107.next()) {
-							if (var108.index == (var104 & 0x7FFF) && var108.count == var105) {
-								var108.count = var106;
-								break;
-							}
+		} else if (arg2 == 151) {
+			int var101 = arg0.g1();
+			int var102 = this.baseX + (var101 >> 4 & 0x7);
+			int var103 = this.baseZ + (var101 & 0x7);
+			int var104 = arg0.g2();
+			int var105 = arg0.g2();
+			int var106 = arg0.g2();
+			if (var102 >= 0 && var103 >= 0 && var102 < 104 && var103 < 104) {
+				LinkList var107 = this.objStacks[this.currentLevel][var102][var103];
+				if (var107 != null) {
+					for (ClientObj var108 = (ClientObj) var107.head(); var108 != null; var108 = (ClientObj) var107.next()) {
+						if (var108.index == (var104 & 0x7FFF) && var108.count == var105) {
+							var108.count = var106;
+							break;
 						}
-						this.sortObjStacks(var102, var103);
 					}
+					this.sortObjStacks(var102, var103);
 				}
 			}
 		}
@@ -7683,9 +7658,6 @@ public class Client extends GameShell {
 			return;
 		}
 		int var10 = 0;
-		boolean var11 = true;
-		boolean var12 = false;
-		boolean var13 = false;
 		if (arg4 == 0) {
 			var10 = this.scene.getWallTypecode(arg7, arg6, arg1);
 		}
@@ -7731,15 +7703,13 @@ public class Client extends GameShell {
 				}
 			}
 		}
-		if (arg5 < 0) {
-			return;
+		if (arg5 >= 0) {
+			int var21 = arg7;
+			if (arg7 < 3 && (this.levelTileFlags[1][arg6][arg1] & 0x2) == 2) {
+				var21 = arg7 + 1;
+			}
+			World.addLoc(this.levelHeightmap, this.scene, arg7, arg1, arg6, arg5, var21, arg0, this.levelCollisionMap[arg7], arg2);
 		}
-		int var21 = arg7;
-		if (arg7 < 3 && (this.levelTileFlags[1][arg6][arg1] & 0x2) == 2) {
-			var21 = arg7 + 1;
-		}
-		World.addLoc(this.levelHeightmap, this.scene, arg7, arg1, arg6, arg5, var21, arg0, this.levelCollisionMap[arg7], arg2);
-		return;
 	}
 
 	@ObfuscatedName("client.a(II)V")
@@ -8337,27 +8307,26 @@ public class Client extends GameShell {
 			this.menuWidth = var2;
 			this.menuHeight = this.menuSize * 15 + 22;
 		}
-		if (super.mouseClickX <= 17 || super.mouseClickY <= 357 || super.mouseClickX >= 496 || super.mouseClickY >= 453) {
-			return;
+		if (super.mouseClickX > 17 && super.mouseClickY > 357 && super.mouseClickX < 496 && super.mouseClickY < 453) {
+			int var10 = super.mouseClickX - 17 - var2 / 2;
+			if (var10 < 0) {
+				var10 = 0;
+			} else if (var10 + var2 > 479) {
+				var10 = 479 - var2;
+			}
+			int var11 = super.mouseClickY - 357;
+			if (var11 < 0) {
+				var11 = 0;
+			} else if (var11 + var5 > 96) {
+				var11 = 96 - var5;
+			}
+			this.menuVisible = true;
+			this.menuArea = 2;
+			this.menuX = var10;
+			this.menuY = var11;
+			this.menuWidth = var2;
+			this.menuHeight = this.menuSize * 15 + 22;
 		}
-		int var10 = super.mouseClickX - 17 - var2 / 2;
-		if (var10 < 0) {
-			var10 = 0;
-		} else if (var10 + var2 > 479) {
-			var10 = 479 - var2;
-		}
-		int var11 = super.mouseClickY - 357;
-		if (var11 < 0) {
-			var11 = 0;
-		} else if (var11 + var5 > 96) {
-			var11 = 96 - var5;
-		}
-		this.menuVisible = true;
-		this.menuArea = 2;
-		this.menuX = var10;
-		this.menuY = var11;
-		this.menuWidth = var2;
-		this.menuHeight = this.menuSize * 15 + 22;
 	}
 
 	@ObfuscatedName("client.d(II)Z")
@@ -9031,7 +9000,6 @@ public class Client extends GameShell {
 			this.menuParamB[this.menuSize] = arg0;
 			this.menuParamC[this.menuSize] = arg4;
 			this.menuSize++;
-			return;
 		}
 	}
 
@@ -9136,6 +9104,7 @@ public class Client extends GameShell {
 		if (arg0.type != 0 || arg0.children == null || arg0.hide && this.viewportHoveredInterfaceId != arg0.id && this.sidebarHoveredInterfaceId != arg0.id && this.chatHoveredInterfaceId != arg0.id) {
 			return;
 		}
+
 		int var6 = Pix2D.left;
 		int var7 = Pix2D.top;
 		int var8 = Pix2D.right;
@@ -9151,6 +9120,7 @@ public class Client extends GameShell {
 			if (var14.clientCode > 0) {
 				this.updateInterfaceContent(var14);
 			}
+
 			if (var14.type == 0) {
 				if (var14.scrollPosition > var14.scroll - var14.height) {
 					var14.scrollPosition = var14.scroll - var14.height;
@@ -9162,255 +9132,267 @@ public class Client extends GameShell {
 				if (var14.scroll > var14.height) {
 					this.drawScrollbar(var16, var15 + var14.width, var14.scrollPosition, var14.scroll, var14.height);
 				}
-			} else if (var14.type != 1) {
-				if (var14.type == 2) {
-					int var17 = 0;
-					for (int var18 = 0; var18 < var14.height; var18++) {
-						for (int var19 = 0; var19 < var14.width; var19++) {
-							int var20 = var15 + var19 * (var14.marginX + 32);
-							int var21 = var16 + var18 * (var14.marginY + 32);
-							if (var17 < 20) {
-								var20 += var14.invSlotOffsetX[var17];
-								var21 += var14.invSlotOffsetY[var17];
-							}
-							if (var14.invSlotObjId[var17] > 0) {
-								int var22 = 0;
-								int var23 = 0;
-								int var24 = var14.invSlotObjId[var17] - 1;
-								if (var20 > Pix2D.left - 32 && var20 < Pix2D.right && var21 > Pix2D.top - 32 && var21 < Pix2D.bottom || this.objDragArea != 0 && this.objDragSlot == var17) {
-									int var25 = 0;
-									if (this.objSelected == 1 && this.objSelectedSlot == var17 && this.objSelectedInterface == var14.id) {
-										var25 = 16777215;
-									}
-									Pix32 var26 = ObjType.getIcon(var25, var14.invSlotObjCount[var17], var24);
-									if (var26 != null) {
-										if (this.objDragArea != 0 && this.objDragSlot == var17 && this.objDragInterfaceId == var14.id) {
-											var22 = super.mouseX - this.objGrabX;
-											var23 = super.mouseY - this.objGrabY;
-											if (var22 < 5 && var22 > -5) {
-												var22 = 0;
-											}
-											if (var23 < 5 && var23 > -5) {
-												var23 = 0;
-											}
-											if (this.objDragCycles < 5) {
-												var22 = 0;
-												var23 = 0;
-											}
-											var26.transPlotSprite(128, var21 + var23, var20 + var22);
-											if (var21 + var23 < Pix2D.top && arg0.scrollPosition > 0) {
-												int var27 = this.sceneDelta * (Pix2D.top - var21 - var23) / 3;
-												if (var27 > this.sceneDelta * 10) {
-													var27 = this.sceneDelta * 10;
-												}
-												if (var27 > arg0.scrollPosition) {
-													var27 = arg0.scrollPosition;
-												}
-												arg0.scrollPosition -= var27;
-												this.objGrabY += var27;
-											}
-											if (var21 + var23 + 32 > Pix2D.bottom && arg0.scrollPosition < arg0.scroll - arg0.height) {
-												int var28 = this.sceneDelta * (var21 + var23 + 32 - Pix2D.bottom) / 3;
-												if (var28 > this.sceneDelta * 10) {
-													var28 = this.sceneDelta * 10;
-												}
-												if (var28 > arg0.scroll - arg0.height - arg0.scrollPosition) {
-													var28 = arg0.scroll - arg0.height - arg0.scrollPosition;
-												}
-												arg0.scrollPosition += var28;
-												this.objGrabY -= var28;
-											}
-										} else if (this.selectedArea != 0 && this.selectedItem == var17 && this.selectedInterface == var14.id) {
-											var26.transPlotSprite(128, var21, var20);
-										} else {
-											var26.plotSprite(var20, var21);
-										}
-										if (var26.owi == 33 || var14.invSlotObjCount[var17] != 1) {
-											int var29 = var14.invSlotObjCount[var17];
-											this.fontPlain11.drawString(formatObjCount(var29), 0, var20 + 1 + var22, var21 + 10 + var23);
-											this.fontPlain11.drawString(formatObjCount(var29), 16776960, var20 + var22, var21 + 9 + var23);
-										}
-									}
+			} else if (var14.type == 1) {
+			} else if (var14.type == 2) {
+				int var17 = 0;
+				for (int var18 = 0; var18 < var14.height; var18++) {
+					for (int var19 = 0; var19 < var14.width; var19++) {
+						int var20 = var15 + var19 * (var14.marginX + 32);
+						int var21 = var16 + var18 * (var14.marginY + 32);
+						if (var17 < 20) {
+							var20 += var14.invSlotOffsetX[var17];
+							var21 += var14.invSlotOffsetY[var17];
+						}
+						if (var14.invSlotObjId[var17] > 0) {
+							int var22 = 0;
+							int var23 = 0;
+							int var24 = var14.invSlotObjId[var17] - 1;
+							if (var20 > Pix2D.left - 32 && var20 < Pix2D.right && var21 > Pix2D.top - 32 && var21 < Pix2D.bottom || this.objDragArea != 0 && this.objDragSlot == var17) {
+								int var25 = 0;
+								if (this.objSelected == 1 && this.objSelectedSlot == var17 && this.objSelectedInterface == var14.id) {
+									var25 = 16777215;
 								}
-							} else if (var14.invSlotGraphic != null && var17 < 20) {
-								Pix32 var30 = var14.invSlotGraphic[var17];
-								if (var30 != null) {
-									var30.plotSprite(var20, var21);
-								}
-							}
-							var17++;
-						}
-					}
-				} else if (var14.type == 3) {
-					boolean var31 = false;
-					if (this.chatHoveredInterfaceId == var14.id || this.sidebarHoveredInterfaceId == var14.id || this.viewportHoveredInterfaceId == var14.id) {
-						var31 = true;
-					}
-					int var32;
-					if (this.executeInterfaceScript(var14)) {
-						var32 = var14.overColour;
-						if (var31 && var14.activeOverColour != 0) {
-							var32 = var14.activeOverColour;
-						}
-					} else {
-						var32 = var14.colour;
-						if (var31 && var14.activeColour != 0) {
-							var32 = var14.activeColour;
-						}
-					}
-					if (var14.trans == 0) {
-						if (var14.fill) {
-							Pix2D.fillRect(var16, var14.height, var15, var14.width, var32);
-						} else {
-							Pix2D.drawRect(var15, var14.height, var16, var14.width, var32);
-						}
-					} else if (var14.fill) {
-						Pix2D.fillRectTrans(var15, var14.height, var16, var32, 256 - (var14.trans & 0xFF), var14.width);
-					} else {
-						Pix2D.drawRectTrans(var14.width, var15, var16, 256 - (var14.trans & 0xFF), var32, var14.height);
-					}
-				} else if (var14.type == 4) {
-					PixFont var33 = var14.font;
-					String var34 = var14.text;
-					boolean var35 = false;
-					if (this.chatHoveredInterfaceId == var14.id || this.sidebarHoveredInterfaceId == var14.id || this.viewportHoveredInterfaceId == var14.id) {
-						var35 = true;
-					}
-					int var36;
-					if (this.executeInterfaceScript(var14)) {
-						var36 = var14.overColour;
-						if (var35 && var14.activeOverColour != 0) {
-							var36 = var14.activeOverColour;
-						}
-						if (var14.activeText.length() > 0) {
-							var34 = var14.activeText;
-						}
-					} else {
-						var36 = var14.colour;
-						if (var35 && var14.activeColour != 0) {
-							var36 = var14.activeColour;
-						}
-					}
-					if (var14.buttonType == 6 && this.pressedContinueOption) {
-						var34 = "Please wait...";
-						var36 = var14.colour;
-					}
-					if (Pix2D.width2d == 479) {
-						if (var36 == 16776960) {
-							var36 = 255;
-						}
-						if (var36 == 49152) {
-							var36 = 16777215;
-						}
-					}
-					int var37 = var16 + var33.height;
-					while (var34.length() > 0) {
-						if (var34.indexOf("%") != -1) {
-							label344: while (true) {
-								int var38 = var34.indexOf("%1");
-								if (var38 == -1) {
-									while (true) {
-										int var39 = var34.indexOf("%2");
-										if (var39 == -1) {
-											while (true) {
-												int var40 = var34.indexOf("%3");
-												if (var40 == -1) {
-													while (true) {
-														int var41 = var34.indexOf("%4");
-														if (var41 == -1) {
-															while (true) {
-																int var42 = var34.indexOf("%5");
-																if (var42 == -1) {
-																	break label344;
-																}
-																var34 = var34.substring(0, var42) + this.getIntString(this.executeClientScript(var14, 4)) + var34.substring(var42 + 2);
-															}
-														}
-														var34 = var34.substring(0, var41) + this.getIntString(this.executeClientScript(var14, 3)) + var34.substring(var41 + 2);
-													}
-												}
-												var34 = var34.substring(0, var40) + this.getIntString(this.executeClientScript(var14, 2)) + var34.substring(var40 + 2);
-											}
+								Pix32 var26 = ObjType.getIcon(var25, var14.invSlotObjCount[var17], var24);
+								if (var26 != null) {
+									if (this.objDragArea != 0 && this.objDragSlot == var17 && this.objDragInterfaceId == var14.id) {
+										var22 = super.mouseX - this.objGrabX;
+										var23 = super.mouseY - this.objGrabY;
+										if (var22 < 5 && var22 > -5) {
+											var22 = 0;
 										}
-										var34 = var34.substring(0, var39) + this.getIntString(this.executeClientScript(var14, 1)) + var34.substring(var39 + 2);
+										if (var23 < 5 && var23 > -5) {
+											var23 = 0;
+										}
+										if (this.objDragCycles < 5) {
+											var22 = 0;
+											var23 = 0;
+										}
+										var26.transPlotSprite(128, var21 + var23, var20 + var22);
+										if (var21 + var23 < Pix2D.top && arg0.scrollPosition > 0) {
+											int var27 = this.sceneDelta * (Pix2D.top - var21 - var23) / 3;
+											if (var27 > this.sceneDelta * 10) {
+												var27 = this.sceneDelta * 10;
+											}
+											if (var27 > arg0.scrollPosition) {
+												var27 = arg0.scrollPosition;
+											}
+											arg0.scrollPosition -= var27;
+											this.objGrabY += var27;
+										}
+										if (var21 + var23 + 32 > Pix2D.bottom && arg0.scrollPosition < arg0.scroll - arg0.height) {
+											int var28 = this.sceneDelta * (var21 + var23 + 32 - Pix2D.bottom) / 3;
+											if (var28 > this.sceneDelta * 10) {
+												var28 = this.sceneDelta * 10;
+											}
+											if (var28 > arg0.scroll - arg0.height - arg0.scrollPosition) {
+												var28 = arg0.scroll - arg0.height - arg0.scrollPosition;
+											}
+											arg0.scrollPosition += var28;
+											this.objGrabY -= var28;
+										}
+									} else if (this.selectedArea != 0 && this.selectedItem == var17 && this.selectedInterface == var14.id) {
+										var26.transPlotSprite(128, var21, var20);
+									} else {
+										var26.plotSprite(var20, var21);
+									}
+									if (var26.owi == 33 || var14.invSlotObjCount[var17] != 1) {
+										int var29 = var14.invSlotObjCount[var17];
+										this.fontPlain11.drawString(formatObjCount(var29), 0, var20 + 1 + var22, var21 + 10 + var23);
+										this.fontPlain11.drawString(formatObjCount(var29), 16776960, var20 + var22, var21 + 9 + var23);
 									}
 								}
-								var34 = var34.substring(0, var38) + this.getIntString(this.executeClientScript(var14, 0)) + var34.substring(var38 + 2);
+							}
+						} else if (var14.invSlotGraphic != null && var17 < 20) {
+							Pix32 var30 = var14.invSlotGraphic[var17];
+							if (var30 != null) {
+								var30.plotSprite(var20, var21);
 							}
 						}
-						int var43 = var34.indexOf("\\n");
-						String var44;
-						if (var43 == -1) {
-							var44 = var34;
-							var34 = "";
-						} else {
-							var44 = var34.substring(0, var43);
-							var34 = var34.substring(var43 + 2);
-						}
-						if (var14.center) {
-							var33.centreStringTag(var14.shadowed, var37, var36, var15 + var14.width / 2, var44);
-						} else {
-							var33.drawStringTag(var36, var15, var37, var14.shadowed, var44);
-						}
-						var37 += var33.height;
+						var17++;
 					}
-				} else if (var14.type == 5) {
-					Pix32 var45;
-					if (this.executeInterfaceScript(var14)) {
-						var45 = var14.activeGraphic;
+				}
+			} else if (var14.type == 3) {
+				boolean var31 = false;
+				if (this.chatHoveredInterfaceId == var14.id || this.sidebarHoveredInterfaceId == var14.id || this.viewportHoveredInterfaceId == var14.id) {
+					var31 = true;
+				}
+				int var32;
+				if (this.executeInterfaceScript(var14)) {
+					var32 = var14.overColour;
+					if (var31 && var14.activeOverColour != 0) {
+						var32 = var14.activeOverColour;
+					}
+				} else {
+					var32 = var14.colour;
+					if (var31 && var14.activeColour != 0) {
+						var32 = var14.activeColour;
+					}
+				}
+				if (var14.trans == 0) {
+					if (var14.fill) {
+						Pix2D.fillRect(var16, var14.height, var15, var14.width, var32);
 					} else {
-						var45 = var14.graphic;
+						Pix2D.drawRect(var15, var14.height, var16, var14.width, var32);
 					}
-					if (var45 != null) {
-						var45.plotSprite(var15, var16);
+				} else if (var14.fill) {
+					Pix2D.fillRectTrans(var15, var14.height, var16, var32, 256 - (var14.trans & 0xFF), var14.width);
+				} else {
+					Pix2D.drawRectTrans(var14.width, var15, var16, 256 - (var14.trans & 0xFF), var32, var14.height);
+				}
+			} else if (var14.type == 4) {
+				PixFont var33 = var14.font;
+				String var34 = var14.text;
+				boolean var35 = false;
+				if (this.chatHoveredInterfaceId == var14.id || this.sidebarHoveredInterfaceId == var14.id || this.viewportHoveredInterfaceId == var14.id) {
+					var35 = true;
+				}
+				int var36;
+				if (this.executeInterfaceScript(var14)) {
+					var36 = var14.overColour;
+					if (var35 && var14.activeOverColour != 0) {
+						var36 = var14.activeOverColour;
 					}
-				} else if (var14.type == 6) {
-					int var46 = Pix3D.centerX;
-					int var47 = Pix3D.centerY;
-					Pix3D.centerX = var15 + var14.width / 2;
-					Pix3D.centerY = var16 + var14.height / 2;
-					int var48 = Pix3D.sinTable[var14.xan] * var14.zoom >> 16;
-					int var49 = Pix3D.cosTable[var14.xan] * var14.zoom >> 16;
-					boolean var50 = this.executeInterfaceScript(var14);
-					int var51;
-					if (var50) {
-						var51 = var14.activeAnim;
-					} else {
-						var51 = var14.anim;
+					if (var14.activeText.length() > 0) {
+						var34 = var14.activeText;
 					}
-					Model var52;
-					if (var51 == -1) {
-						var52 = var14.getModel(-1, var50, -1);
-					} else {
-						SeqType var53 = SeqType.types[var51];
-						var52 = var14.getModel(var53.frames[var14.seqFrame], var50, var53.iframes[var14.seqFrame]);
+				} else {
+					var36 = var14.colour;
+					if (var35 && var14.activeColour != 0) {
+						var36 = var14.activeColour;
 					}
-					if (var52 != null) {
-						var52.drawSimple(0, var14.yan, 0, var14.xan, 0, var48, var49);
+				}
+				if (var14.buttonType == 6 && this.pressedContinueOption) {
+					var34 = "Please wait...";
+					var36 = var14.colour;
+				}
+				if (Pix2D.width2d == 479) {
+					if (var36 == 16776960) {
+						var36 = 255;
 					}
-					Pix3D.centerX = var46;
-					Pix3D.centerY = var47;
-				} else if (var14.type == 7) {
-					PixFont var54 = var14.font;
-					int var55 = 0;
-					for (int var56 = 0; var56 < var14.height; var56++) {
-						for (int var57 = 0; var57 < var14.width; var57++) {
-							if (var14.invSlotObjId[var55] > 0) {
-								ObjType var58 = ObjType.get(var14.invSlotObjId[var55] - 1);
-								String var59 = var58.name;
-								if (var58.stackable || var14.invSlotObjCount[var55] != 1) {
-									var59 = var59 + " x" + formatObjCountTagged(var14.invSlotObjCount[var55]);
-								}
-								int var60 = var15 + var57 * (var14.marginX + 115);
-								int var61 = var16 + var56 * (var14.marginY + 12);
-								if (var14.center) {
-									var54.centreStringTag(var14.shadowed, var61, var14.colour, var60 + var14.width / 2, var59);
-								} else {
-									var54.drawStringTag(var14.colour, var60, var61, var14.shadowed, var59);
-								}
+					if (var36 == 49152) {
+						var36 = 16777215;
+					}
+				}
+
+				for (int var37 = var16 + var33.height; var34.length() > 0; var37 += var33.height) {
+					if (var34.indexOf("%") != -1) {
+						do {
+							int var38 = var34.indexOf("%1");
+							if (var38 == -1) {
+								break;
 							}
-							var55++;
+
+							var34 = var34.substring(0, var38) + this.getIntString(this.executeClientScript(var14, 0)) + var34.substring(var38 + 2);
+						} while (true);
+
+						do {
+							int var39 = var34.indexOf("%2");
+							if (var39 == -1) {
+								break;
+							}
+
+							var34 = var34.substring(0, var39) + this.getIntString(this.executeClientScript(var14, 1)) + var34.substring(var39 + 2);
+						} while (true);
+
+						do {
+							int var40 = var34.indexOf("%3");
+							if (var40 == -1) {
+								break;
+							}
+
+							var34 = var34.substring(0, var40) + this.getIntString(this.executeClientScript(var14, 2)) + var34.substring(var40 + 2);
+						} while (true);
+
+						do {
+							int var41 = var34.indexOf("%4");
+							if (var41 == -1) {
+								break;
+							}
+
+							var34 = var34.substring(0, var41) + this.getIntString(this.executeClientScript(var14, 3)) + var34.substring(var41 + 2);
+						} while (true);
+
+						do {
+							int var42 = var34.indexOf("%5");
+							if (var42 == -1) {
+								break;
+							}
+
+							var34 = var34.substring(0, var42) + this.getIntString(this.executeClientScript(var14, 4)) + var34.substring(var42 + 2);
+						} while (true);
+					}
+
+					int var43 = var34.indexOf("\\n");
+					String var44;
+					if (var43 == -1) {
+						var44 = var34;
+						var34 = "";
+					} else {
+						var44 = var34.substring(0, var43);
+						var34 = var34.substring(var43 + 2);
+					}
+					if (var14.center) {
+						var33.centreStringTag(var14.shadowed, var37, var36, var15 + var14.width / 2, var44);
+					} else {
+						var33.drawStringTag(var36, var15, var37, var14.shadowed, var44);
+					}
+				}
+			} else if (var14.type == 5) {
+				Pix32 var45;
+				if (this.executeInterfaceScript(var14)) {
+					var45 = var14.activeGraphic;
+				} else {
+					var45 = var14.graphic;
+				}
+				if (var45 != null) {
+					var45.plotSprite(var15, var16);
+				}
+			} else if (var14.type == 6) {
+				int var46 = Pix3D.centerX;
+				int var47 = Pix3D.centerY;
+				Pix3D.centerX = var15 + var14.width / 2;
+				Pix3D.centerY = var16 + var14.height / 2;
+				int var48 = Pix3D.sinTable[var14.xan] * var14.zoom >> 16;
+				int var49 = Pix3D.cosTable[var14.xan] * var14.zoom >> 16;
+				boolean var50 = this.executeInterfaceScript(var14);
+				int var51;
+				if (var50) {
+					var51 = var14.activeAnim;
+				} else {
+					var51 = var14.anim;
+				}
+				Model var52;
+				if (var51 == -1) {
+					var52 = var14.getModel(-1, var50, -1);
+				} else {
+					SeqType var53 = SeqType.types[var51];
+					var52 = var14.getModel(var53.frames[var14.seqFrame], var50, var53.iframes[var14.seqFrame]);
+				}
+				if (var52 != null) {
+					var52.drawSimple(0, var14.yan, 0, var14.xan, 0, var48, var49);
+				}
+				Pix3D.centerX = var46;
+				Pix3D.centerY = var47;
+			} else if (var14.type == 7) {
+				PixFont var54 = var14.font;
+				int var55 = 0;
+				for (int var56 = 0; var56 < var14.height; var56++) {
+					for (int var57 = 0; var57 < var14.width; var57++) {
+						if (var14.invSlotObjId[var55] > 0) {
+							ObjType var58 = ObjType.get(var14.invSlotObjId[var55] - 1);
+							String var59 = var58.name;
+							if (var58.stackable || var14.invSlotObjCount[var55] != 1) {
+								var59 = var59 + " x" + formatObjCountTagged(var14.invSlotObjCount[var55]);
+							}
+							int var60 = var15 + var57 * (var14.marginX + 115);
+							int var61 = var16 + var56 * (var14.marginY + 12);
+							if (var14.center) {
+								var54.centreStringTag(var14.shadowed, var61, var14.colour, var60 + var14.width / 2, var59);
+							} else {
+								var54.drawStringTag(var14.colour, var60, var61, var14.shadowed, var59);
+							}
 						}
+						var55++;
 					}
 				}
 			}
@@ -9476,13 +9458,11 @@ public class Client extends GameShell {
 			arg5.scrollPosition -= this.dragCycles * 4;
 			if (arg4) {
 				this.redrawSidebar = true;
-				return;
 			}
 		} else if (arg7 >= arg1 && arg7 < arg1 + 16 && arg6 >= arg0 + arg3 - 16 && arg6 < arg0 + arg3) {
 			arg5.scrollPosition += this.dragCycles * 4;
 			if (arg4) {
 				this.redrawSidebar = true;
-				return;
 			}
 		} else if (arg7 >= arg1 - this.scrollInputPadding && arg7 < arg1 + 16 + this.scrollInputPadding && arg6 >= arg0 + 16 && arg6 < arg0 + arg3 - 16 && this.dragCycles > 0) {
 			int var10 = (arg3 - 32) * arg3 / arg2;
@@ -9496,8 +9476,6 @@ public class Client extends GameShell {
 				this.redrawSidebar = true;
 			}
 			this.scrollGrabbed = true;
-		} else {
-			return;
 		}
 	}
 
@@ -10831,16 +10809,14 @@ public class Client extends GameShell {
 		if (this.flameGradientCycle1 > 0) {
 			this.flameGradientCycle1 -= 4;
 		}
-		if (this.flameGradientCycle0 != 0 || this.flameGradientCycle1 != 0) {
-			return;
-		}
-		int var18 = (int) (Math.random() * 2000.0D);
-		if (var18 == 0) {
-			this.flameGradientCycle0 = 1024;
-		}
-		if (var18 == 1) {
-			this.flameGradientCycle1 = 1024;
-			return;
+		if (this.flameGradientCycle0 == 0 && this.flameGradientCycle1 == 0) {
+			int var18 = (int) (Math.random() * 2000.0D);
+			if (var18 == 0) {
+				this.flameGradientCycle0 = 1024;
+			}
+			if (var18 == 1) {
+				this.flameGradientCycle1 = 1024;
+			}
 		}
 	}
 
@@ -10865,17 +10841,16 @@ public class Client extends GameShell {
 			this.flameBuffer0 = this.flameBuffer1;
 			this.flameBuffer1 = var12;
 		}
-		if (arg1 == null) {
-			return;
-		}
-		int var13 = 0;
-		for (int var14 = 0; var14 < arg1.hi; var14++) {
-			for (int var15 = 0; var15 < arg1.wi; var15++) {
-				if (arg1.pixels[var13++] != 0) {
-					int var16 = var15 + 16 + arg1.xof;
-					int var17 = var14 + 16 + arg1.yof;
-					int var18 = var16 + (var17 << 7);
-					this.flameBuffer0[var18] = 0;
+		if (arg1 != null) {
+			int var13 = 0;
+			for (int var14 = 0; var14 < arg1.hi; var14++) {
+				for (int var15 = 0; var15 < arg1.wi; var15++) {
+					if (arg1.pixels[var13++] != 0) {
+						int var16 = var15 + 16 + arg1.xof;
+						int var17 = var14 + 16 + arg1.yof;
+						int var18 = var16 + (var17 << 7);
+						this.flameBuffer0[var18] = 0;
+					}
 				}
 			}
 		}

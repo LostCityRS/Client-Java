@@ -136,100 +136,118 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.getBaseComponent().addMouseMotionListener(this);
 		this.getBaseComponent().addKeyListener(this);
 		this.getBaseComponent().addFocusListener(this);
+
 		if (this.frame != null) {
 			this.frame.addWindowListener(this);
 		}
+
 		this.drawProgress("Loading...", 0);
 		this.load();
+
 		int var1 = 0;
 		int var2 = 256;
 		int var3 = 1;
 		int var4 = 0;
 		int var5 = 0;
+
 		for (int var6 = 0; var6 < 10; var6++) {
 			this.otim[var6] = System.currentTimeMillis();
 		}
+
 		long var7 = System.currentTimeMillis();
-		while (true) {
-			long var11;
-			do {
-				if (this.state < 0) {
-					if (this.state == -1) {
-						this.shutdown();
-					}
+		while (this.state >= 0) {
+			if (this.state > 0) {
+				this.state--;
+
+				if (this.state == 0) {
+					this.shutdown();
 					return;
 				}
-				if (this.state > 0) {
-					this.state--;
-					if (this.state == 0) {
-						this.shutdown();
-						return;
-					}
-				}
-				int var9 = var2;
-				int var10 = var3;
-				var2 = 300;
-				var3 = 1;
-				var11 = System.currentTimeMillis();
-				if (this.otim[var1] == 0L) {
-					var2 = var9;
-					var3 = var10;
-				} else if (var11 > this.otim[var1]) {
-					var2 = (int) ((long) (this.deltime * 2560) / (var11 - this.otim[var1]));
-				}
-				if (var2 < 25) {
-					var2 = 25;
-				}
-				if (var2 > 256) {
-					var2 = 256;
-					var3 = (int) ((long) this.deltime - (var11 - this.otim[var1]) / 10L);
-				}
-				if (var3 > this.deltime) {
-					var3 = this.deltime;
-				}
-				this.otim[var1] = var11;
-				var1 = (var1 + 1) % 10;
-				if (var3 > 1) {
-					for (int var13 = 0; var13 < 10; var13++) {
-						if (this.otim[var13] != 0L) {
-							this.otim[var13] += var3;
-						}
-					}
-				}
-				if (var3 < this.mindel) {
-					var3 = this.mindel;
-				}
-				try {
-					Thread.sleep((long) var3);
-				} catch (InterruptedException var16) {
-					var5++;
-				}
-				while (var4 < 256) {
-					this.mouseClickButton = this.nextMouseClickButton;
-					this.mouseClickX = this.nextMouseClickX;
-					this.mouseClickY = this.nextMouseClickY;
-					this.mouseClickTime = this.nextMouseClickTime;
-					this.nextMouseClickButton = 0;
-					this.update();
-					this.keyQueueReadPos = this.keyQueueWritePos;
-					var4 += var2;
-				}
-				var4 &= 0xFF;
-				if (this.deltime > 0) {
-					this.fps = var2 * 1000 / (this.deltime * 256);
-				}
-				this.draw();
-			} while (!this.debug);
-			System.out.println("ntime:" + var11);
-			for (int var14 = 0; var14 < 10; var14++) {
-				int var15 = (var1 - var14 - 1 + 20) % 10;
-				System.out.println("otim" + var15 + ":" + this.otim[var15]);
 			}
-			System.out.println("fps:" + this.fps + " ratio:" + var2 + " count:" + var4);
-			System.out.println("del:" + var3 + " deltime:" + this.deltime + " mindel:" + this.mindel);
-			System.out.println("intex:" + var5 + " opos:" + var1);
-			this.debug = false;
-			var5 = 0;
+
+			int var9 = var2;
+			int var10 = var3;
+			var2 = 300;
+			var3 = 1;
+			var7 = System.currentTimeMillis();
+
+			if (this.otim[var1] == 0L) {
+				var2 = var9;
+				var3 = var10;
+			} else if (var7 > this.otim[var1]) {
+				var2 = (int) ((long) (this.deltime * 2560) / (var7 - this.otim[var1]));
+			}
+
+			if (var2 < 25) {
+				var2 = 25;
+			}
+
+			if (var2 > 256) {
+				var2 = 256;
+				var3 = (int) ((long) this.deltime - (var7 - this.otim[var1]) / 10L);
+			}
+
+			if (var3 > this.deltime) {
+				var3 = this.deltime;
+			}
+
+			this.otim[var1] = var7;
+			var1 = (var1 + 1) % 10;
+
+			if (var3 > 1) {
+				for (int var13 = 0; var13 < 10; var13++) {
+					if (this.otim[var13] != 0L) {
+						this.otim[var13] += var3;
+					}
+				}
+			}
+
+			if (var3 < this.mindel) {
+				var3 = this.mindel;
+			}
+
+			try {
+				Thread.sleep((long) var3);
+			} catch (InterruptedException var16) {
+				var5++;
+			}
+
+			while (var4 < 256) {
+				this.mouseClickButton = this.nextMouseClickButton;
+				this.mouseClickX = this.nextMouseClickX;
+				this.mouseClickY = this.nextMouseClickY;
+				this.mouseClickTime = this.nextMouseClickTime;
+				this.nextMouseClickButton = 0;
+
+				this.update();
+
+				this.keyQueueReadPos = this.keyQueueWritePos;
+				var4 += var2;
+			}
+			var4 &= 0xFF;
+
+			if (this.deltime > 0) {
+				this.fps = var2 * 1000 / (this.deltime * 256);
+			}
+
+			this.draw();
+
+			if (this.debug) {
+				System.out.println("ntime:" + var7);
+				for (int var14 = 0; var14 < 10; var14++) {
+					int var15 = (var1 - var14 - 1 + 20) % 10;
+					System.out.println("otim" + var15 + ":" + this.otim[var15]);
+				}
+				System.out.println("fps:" + this.fps + " ratio:" + var2 + " count:" + var4);
+				System.out.println("del:" + var3 + " deltime:" + this.deltime + " mindel:" + this.mindel);
+				System.out.println("intex:" + var5 + " opos:" + var1);
+				this.debug = false;
+				var5 = 0;
+			}
+		}
+
+		if (this.state == -1) {
+			this.shutdown();
 		}
 	}
 

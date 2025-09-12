@@ -91,32 +91,9 @@ public class SeqType {
 		while (true) {
 			int var3 = arg1.g1();
 			if (var3 == 0) {
-				if (this.frameCount == 0) {
-					this.frameCount = 1;
-					this.frames = new int[1];
-					this.frames[0] = -1;
-					this.iframes = new int[1];
-					this.iframes[0] = -1;
-					this.delay = new int[1];
-					this.delay[0] = -1;
-				}
-				if (this.preanim_move == -1) {
-					if (this.walkmerge == null) {
-						this.preanim_move = 0;
-					} else {
-						this.preanim_move = 2;
-					}
-				}
-				if (this.postanim_move == -1) {
-					if (this.walkmerge != null) {
-						this.postanim_move = 2;
-						return;
-					}
-					this.postanim_move = 0;
-					return;
-				}
-				return;
+				break;
 			}
+
 			if (var3 == 1) {
 				this.frameCount = arg1.g1();
 				this.frames = new int[this.frameCount];
@@ -159,5 +136,31 @@ public class SeqType {
 				System.out.println("Error unrecognised seq config code: " + var3);
 			}
 		}
+
+		if (this.frameCount == 0) {
+			this.frameCount = 1;
+			this.frames = new int[1];
+			this.frames[0] = -1;
+			this.iframes = new int[1];
+			this.iframes[0] = -1;
+			this.delay = new int[1];
+			this.delay[0] = -1;
+		}
+
+		if (this.preanim_move == -1) {
+			if (this.walkmerge == null) {
+				this.preanim_move = 0;
+			} else {
+				this.preanim_move = 2;
+			}
+		}
+
+		if (this.postanim_move == -1) {
+            if (this.walkmerge == null) {
+                this.postanim_move = 0;
+            } else {
+                this.postanim_move = 2;
+            }
+        }
 	}
 }
