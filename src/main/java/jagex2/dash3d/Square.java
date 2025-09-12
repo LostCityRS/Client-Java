@@ -73,7 +73,7 @@ public class Square extends Linkable {
 	public int backWallTypes;
 
 	@ObfuscatedName("w.A")
-	public Square linkedSquare;
+	public Square linkBelow;
 
 	public Square(int arg0, int arg1, int arg2) {
 		this.originalLevel = this.level = arg0;

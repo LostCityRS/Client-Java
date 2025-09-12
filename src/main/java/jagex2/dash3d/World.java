@@ -768,7 +768,7 @@ public class World {
 		for (int var72 = 0; var72 < this.maxTileX; var72++) {
 			for (int var73 = 0; var73 < this.maxTileZ; var73++) {
 				if ((this.flags[1][var72][var73] & 0x2) == 2) {
-					arg2.setBridge(var72, var73);
+					arg2.setLinkBelow(var72, var73);
 				}
 			}
 		}

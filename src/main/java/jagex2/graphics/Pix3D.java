@@ -6,15 +6,6 @@ import jagex2.io.Jagfile;
 @ObfuscatedName("ib")
 public class Pix3D extends Pix2D {
 
-	@ObfuscatedName("ib.v")
-	public static int field641 = -856;
-
-	@ObfuscatedName("ib.w")
-	public static boolean field642;
-
-	@ObfuscatedName("ib.x")
-	public static boolean field643 = true;
-
 	@ObfuscatedName("ib.y")
 	public static boolean lowMem = true;
 
