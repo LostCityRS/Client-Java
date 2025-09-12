@@ -1410,7 +1410,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.f(I)Ljava/awt/Component;")
 	public final java.awt.Component getBaseComponent() {
 		if (signlink.mainapp == null) {
-			return super.frame == null ? this : super.frame;
+			return this;
 		} else {
 			return signlink.mainapp;
 		}
@@ -2297,14 +2297,14 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.H(I)V")
 	public final void updateTitle() {
 		if (this.titleScreenState == 0) {
-			int var2 = super.screenWidth / 2 - 80;
-			int var3 = super.screenHeight / 2 + 20;
+			int var2 = super.canvasWidth / 2 - 80;
+			int var3 = super.canvasHeight / 2 + 20;
 			int var14 = var3 + 20;
 			if (super.mouseClickButton == 1 && super.mouseClickX >= var2 - 75 && super.mouseClickX <= var2 + 75 && super.mouseClickY >= var14 - 20 && super.mouseClickY <= var14 + 20) {
 				this.titleScreenState = 3;
 				this.titleLoginField = 0;
 			}
-			int var4 = super.screenWidth / 2 + 80;
+			int var4 = super.canvasWidth / 2 + 80;
 			if (super.mouseClickButton == 1 && super.mouseClickX >= var4 - 75 && super.mouseClickX <= var4 + 75 && super.mouseClickY >= var14 - 20 && super.mouseClickY <= var14 + 20) {
 				this.loginMessage0 = "";
 				this.loginMessage1 = "Enter your username & password.";
@@ -2312,7 +2312,7 @@ public class Client extends GameShell {
 				this.titleLoginField = 0;
 			}
 		} else if (this.titleScreenState == 2) {
-			int var5 = super.screenHeight / 2 - 40;
+			int var5 = super.canvasHeight / 2 - 40;
 			int var15 = var5 + 30;
 			int var16 = var15 + 25;
 			if (super.mouseClickButton == 1 && super.mouseClickY >= var16 - 15 && super.mouseClickY < var16) {
@@ -2323,8 +2323,8 @@ public class Client extends GameShell {
 				this.titleLoginField = 1;
 			}
 			var5 += 15;
-			int var6 = super.screenWidth / 2 - 80;
-			int var7 = super.screenHeight / 2 + 50;
+			int var6 = super.canvasWidth / 2 - 80;
+			int var7 = super.canvasHeight / 2 + 50;
 			int var17 = var7 + 20;
 			if (super.mouseClickButton == 1 && super.mouseClickX >= var6 - 75 && super.mouseClickX <= var6 + 75 && super.mouseClickY >= var17 - 20 && super.mouseClickY <= var17 + 20) {
 				this.login(this.username, this.password, false);
@@ -2332,7 +2332,7 @@ public class Client extends GameShell {
 					return;
 				}
 			}
-			int var8 = super.screenWidth / 2 + 80;
+			int var8 = super.canvasWidth / 2 + 80;
 			if (super.mouseClickButton == 1 && super.mouseClickX >= var8 - 75 && super.mouseClickX <= var8 + 75 && super.mouseClickY >= var17 - 20 && super.mouseClickY <= var17 + 20) {
 				this.titleScreenState = 0;
 				this.username = "";
@@ -2379,8 +2379,8 @@ public class Client extends GameShell {
 				}
 			}
 		} else if (this.titleScreenState == 3) {
-			int var12 = super.screenWidth / 2;
-			int var13 = super.screenHeight / 2 + 50;
+			int var12 = super.canvasWidth / 2;
+			int var13 = super.canvasHeight / 2 + 50;
 			int var18 = var13 + 20;
 			if (super.mouseClickButton == 1 && super.mouseClickX >= var12 - 75 && super.mouseClickX <= var12 + 75 && super.mouseClickY >= var18 - 20 && super.mouseClickY <= var18 + 20) {
 				this.titleScreenState = 0;

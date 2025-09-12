@@ -3,21 +3,10 @@ package jagex2.client;
 import deob.ObfuscatedName;
 import jagex2.graphics.Pix32;
 import jagex2.graphics.PixMap;
+
 import java.applet.Applet;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.*;
+import java.awt.event.*;
 
 @ObfuscatedName("a")
 public class GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
@@ -41,10 +30,10 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public boolean debug = false;
 
 	@ObfuscatedName("a.k")
-	public int screenWidth;
+	public int canvasWidth;
 
 	@ObfuscatedName("a.l")
-	public int screenHeight;
+	public int canvasHeight;
 
 	@ObfuscatedName("a.m")
 	public Graphics graphics;
@@ -113,21 +102,25 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public long mouseClickTime;
 
 	@ObfuscatedName("a.a(III)V")
-	public final void initApplication(int arg1, int arg2) {
-		this.screenWidth = arg2;
-		this.screenHeight = arg1;
-		this.frame = new ViewBox(this.screenHeight, this, this.screenWidth);
+	public final void initApplication(int height, int width) {
+		this.setPreferredSize(new Dimension(width, height));
+
+		this.canvasWidth = width;
+		this.canvasHeight = height;
+		this.frame = new ViewBox(this.canvasHeight, this, this.canvasWidth);
 		this.graphics = this.getBaseComponent().getGraphics();
-		this.drawArea = new PixMap(this.screenHeight, this.getBaseComponent(), this.screenWidth);
+		this.drawArea = new PixMap(this.canvasHeight, this.getBaseComponent(), this.canvasWidth);
+
 		this.startThread(this, 1);
 	}
 
 	@ObfuscatedName("a.a(IIZ)V")
-	public final void initApplet(int arg0, int arg1) {
-		this.screenWidth = arg0;
-		this.screenHeight = arg1;
+	public final void initApplet(int width, int height) {
+		this.canvasWidth = width;
+		this.canvasHeight = height;
 		this.graphics = this.getBaseComponent().getGraphics();
-		this.drawArea = new PixMap(this.screenHeight, this.getBaseComponent(), this.screenWidth);
+		this.drawArea = new PixMap(this.canvasHeight, this.getBaseComponent(), this.canvasWidth);
+
 		this.startThread(this, 1);
 	}
 
@@ -144,17 +137,17 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.drawProgress("Loading...", 0);
 		this.load();
 
-		int var1 = 0;
-		int var2 = 256;
-		int var3 = 1;
-		int var4 = 0;
-		int var5 = 0;
+		int opos = 0;
+		int ratio = 256;
+		int del = 1;
+		int count = 0;
+		int intex = 0;
 
-		for (int var6 = 0; var6 < 10; var6++) {
-			this.otim[var6] = System.currentTimeMillis();
+		for (int i = 0; i < 10; i++) {
+			this.otim[i] = System.currentTimeMillis();
 		}
 
-		long var7 = System.currentTimeMillis();
+		long ntime = System.currentTimeMillis();
 		while (this.state >= 0) {
 			if (this.state > 0) {
 				this.state--;
@@ -165,54 +158,54 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 				}
 			}
 
-			int var9 = var2;
-			int var10 = var3;
-			var2 = 300;
-			var3 = 1;
-			var7 = System.currentTimeMillis();
+			int lastRatio = ratio;
+			int lastDel = del;
+			ratio = 300;
+			del = 1;
+			ntime = System.currentTimeMillis();
 
-			if (this.otim[var1] == 0L) {
-				var2 = var9;
-				var3 = var10;
-			} else if (var7 > this.otim[var1]) {
-				var2 = (int) ((long) (this.deltime * 2560) / (var7 - this.otim[var1]));
+			if (this.otim[opos] == 0L) {
+				ratio = lastRatio;
+				del = lastDel;
+			} else if (ntime > this.otim[opos]) {
+				ratio = (int) ((long) (this.deltime * 2560) / (ntime - this.otim[opos]));
 			}
 
-			if (var2 < 25) {
-				var2 = 25;
+			if (ratio < 25) {
+				ratio = 25;
 			}
 
-			if (var2 > 256) {
-				var2 = 256;
-				var3 = (int) ((long) this.deltime - (var7 - this.otim[var1]) / 10L);
+			if (ratio > 256) {
+				ratio = 256;
+				del = (int) ((long) this.deltime - (ntime - this.otim[opos]) / 10L);
 			}
 
-			if (var3 > this.deltime) {
-				var3 = this.deltime;
+			if (del > this.deltime) {
+				del = this.deltime;
 			}
 
-			this.otim[var1] = var7;
-			var1 = (var1 + 1) % 10;
+			this.otim[opos] = ntime;
+			opos = (opos + 1) % 10;
 
-			if (var3 > 1) {
+			if (del > 1) {
 				for (int var13 = 0; var13 < 10; var13++) {
 					if (this.otim[var13] != 0L) {
-						this.otim[var13] += var3;
+						this.otim[var13] += del;
 					}
 				}
 			}
 
-			if (var3 < this.mindel) {
-				var3 = this.mindel;
+			if (del < this.mindel) {
+				del = this.mindel;
 			}
 
 			try {
-				Thread.sleep((long) var3);
-			} catch (InterruptedException var16) {
-				var5++;
+				Thread.sleep(del);
+			} catch (InterruptedException ignore) {
+				intex++;
 			}
 
-			while (var4 < 256) {
+			while (count < 256) {
 				this.mouseClickButton = this.nextMouseClickButton;
 				this.mouseClickX = this.nextMouseClickX;
 				this.mouseClickY = this.nextMouseClickY;
@@ -222,27 +215,27 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 				this.update();
 
 				this.keyQueueReadPos = this.keyQueueWritePos;
-				var4 += var2;
+				count += ratio;
 			}
-			var4 &= 0xFF;
+			count &= 0xFF;
 
 			if (this.deltime > 0) {
-				this.fps = var2 * 1000 / (this.deltime * 256);
+				this.fps = ratio * 1000 / (this.deltime * 256);
 			}
 
 			this.draw();
 
 			if (this.debug) {
-				System.out.println("ntime:" + var7);
-				for (int var14 = 0; var14 < 10; var14++) {
-					int var15 = (var1 - var14 - 1 + 20) % 10;
-					System.out.println("otim" + var15 + ":" + this.otim[var15]);
+				System.out.println("ntime:" + ntime);
+				for (int i = 0; i < 10; i++) {
+					int o = (opos - i - 1 + 20) % 10;
+					System.out.println("otim" + o + ":" + this.otim[o]);
 				}
-				System.out.println("fps:" + this.fps + " ratio:" + var2 + " count:" + var4);
-				System.out.println("del:" + var3 + " deltime:" + this.deltime + " mindel:" + this.mindel);
-				System.out.println("intex:" + var5 + " opos:" + var1);
+				System.out.println("fps:" + this.fps + " ratio:" + ratio + " count:" + count);
+				System.out.println("del:" + del + " deltime:" + this.deltime + " mindel:" + this.mindel);
+				System.out.println("intex:" + intex + " opos:" + opos);
 				this.debug = false;
-				var5 = 0;
+				intex = 0;
 			}
 		}
 
@@ -312,10 +305,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void mousePressed(MouseEvent arg0) {
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
-		if (this.frame != null) {
-			var2 -= 4;
-			var3 -= 22;
-		}
 		this.idleCycles = 0;
 		this.nextMouseClickX = var2;
 		this.nextMouseClickY = var3;
@@ -361,10 +350,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void mouseDragged(MouseEvent arg0) {
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
-		if (this.frame != null) {
-			var2 -= 4;
-			var3 -= 22;
-		}
 		this.idleCycles = 0;
 		this.mouseX = var2;
 		this.mouseY = var3;
@@ -376,10 +361,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void mouseMoved(MouseEvent arg0) {
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
-		if (this.frame != null) {
-			var2 -= 4;
-			var3 -= 22;
-		}
 		this.idleCycles = 0;
 		this.mouseX = var2;
 		this.mouseY = var3;
@@ -564,7 +545,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	@ObfuscatedName("a.f(I)Ljava/awt/Component;")
 	public Component getBaseComponent() {
-		return this.frame == null ? this : this.frame;
+		return this;
 	}
 
 	@ObfuscatedName("a.a(Ljava/lang/Runnable;I)V")
@@ -593,18 +574,18 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.getBaseComponent().getFontMetrics(var6);
 		if (this.redrawScreen) {
 			this.graphics.setColor(Color.black);
-			this.graphics.fillRect(0, 0, this.screenWidth, this.screenHeight);
+			this.graphics.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
 			this.redrawScreen = false;
 		}
 		Color var7 = new Color(140, 17, 17);
-		int var8 = this.screenHeight / 2 - 18;
+		int var8 = this.canvasHeight / 2 - 18;
 		this.graphics.setColor(var7);
-		this.graphics.drawRect(this.screenWidth / 2 - 152, var8, 304, 34);
-		this.graphics.fillRect(this.screenWidth / 2 - 150, var8 + 2, arg2 * 3, 30);
+		this.graphics.drawRect(this.canvasWidth / 2 - 152, var8, 304, 34);
+		this.graphics.fillRect(this.canvasWidth / 2 - 150, var8 + 2, arg2 * 3, 30);
 		this.graphics.setColor(Color.black);
-		this.graphics.fillRect(this.screenWidth / 2 - 150 + arg2 * 3, var8 + 2, 300 - arg2 * 3, 30);
+		this.graphics.fillRect(this.canvasWidth / 2 - 150 + arg2 * 3, var8 + 2, 300 - arg2 * 3, 30);
 		this.graphics.setFont(var4);
 		this.graphics.setColor(Color.white);
-		this.graphics.drawString(arg1, (this.screenWidth - var5.stringWidth(arg1)) / 2, var8 + 22);
+		this.graphics.drawString(arg1, (this.canvasWidth - var5.stringWidth(arg1)) / 2, var8 + 22);
 	}
 }
