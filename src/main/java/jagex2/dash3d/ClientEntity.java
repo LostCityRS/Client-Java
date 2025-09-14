@@ -170,87 +170,90 @@ public class ClientEntity extends ModelSource {
 	public int forceMoveStartSceneTileX;
 
 	@ObfuscatedName("z.a(IIIZ)V")
-	public final void move(int arg0, int arg1, boolean arg3) {
+	public void move(int x, int z, boolean jump) {
 		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_move == 1) {
 			this.primarySeqId = -1;
 		}
-		if (!arg3) {
-			int var5 = arg0 - this.routeTileX[0];
-			int var6 = arg1 - this.routeTileZ[0];
-			if (var5 >= -8 && var5 <= 8 && var6 >= -8 && var6 <= 8) {
-				if (this.routeLength < 9) {
-					this.routeLength++;
-				}
-				for (int var7 = this.routeLength; var7 > 0; var7--) {
-					this.routeTileX[var7] = this.routeTileX[var7 - 1];
-					this.routeTileZ[var7] = this.routeTileZ[var7 - 1];
-					this.routeRun[var7] = this.routeRun[var7 - 1];
-				}
-				this.routeTileX[0] = arg0;
-				this.routeTileZ[0] = arg1;
-				this.routeRun[0] = false;
+
+		if (jump) {
+			this.routeLength = 0;
+			this.preanimRouteLength = 0;
+			this.seqDelayMove = 0;
+			this.routeTileX[0] = x;
+			this.routeTileZ[0] = z;
+			this.x = this.routeTileX[0] * 128 + this.size * 64;
+			this.z = this.routeTileZ[0] * 128 + this.size * 64;
+		} else {
+			int dx = x - this.routeTileX[0];
+			int dz = z - this.routeTileZ[0];
+			if (dx < -8 || dx > 8 || dz < -8 || dz > 8) {
 				return;
 			}
+
+			if (this.routeLength < 9) {
+				this.routeLength++;
+			}
+
+			for (int i = this.routeLength; i > 0; i--) {
+				this.routeTileX[i] = this.routeTileX[i - 1];
+				this.routeTileZ[i] = this.routeTileZ[i - 1];
+				this.routeRun[i] = this.routeRun[i - 1];
+			}
+
+			this.routeTileX[0] = x;
+			this.routeTileZ[0] = z;
+			this.routeRun[0] = false;
 		}
-		this.routeLength = 0;
-		this.preanimRouteLength = 0;
-		this.seqDelayMove = 0;
-		this.routeTileX[0] = arg0;
-		this.routeTileZ[0] = arg1;
-		this.x = this.routeTileX[0] * 128 + this.size * 64;
-		this.z = this.routeTileZ[0] * 128 + this.size * 64;
 	}
 
 	@ObfuscatedName("z.a(ZII)V")
-	public final void step(boolean arg0, int arg1) {
-		int var4 = this.routeTileX[0];
-		int var5 = this.routeTileZ[0];
-		if (arg1 == 0) {
-			var4--;
-			var5++;
+	public void step(boolean run, int dir) {
+		int x = this.routeTileX[0];
+		int z = this.routeTileZ[0];
+
+		if (dir == 0) {
+			x--;
+			z++;
+		} else if (dir == 1) {
+			z++;
+		} else if (dir == 2) {
+			x++;
+			z++;
+		} else if (dir == 3) {
+			x--;
+		} else if (dir == 4) {
+			x++;
+		} else if (dir == 5) {
+			x--;
+			z--;
+		} else if (dir == 6) {
+			z--;
+		} else if (dir == 7) {
+			x++;
+			z--;
 		}
-		if (arg1 == 1) {
-			var5++;
-		}
-		if (arg1 == 2) {
-			var4++;
-			var5++;
-		}
-		if (arg1 == 3) {
-			var4--;
-		}
-		if (arg1 == 4) {
-			var4++;
-		}
-		if (arg1 == 5) {
-			var4--;
-			var5--;
-		}
-		if (arg1 == 6) {
-			var5--;
-		}
-		if (arg1 == 7) {
-			var4++;
-			var5--;
-		}
+
 		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_move == 1) {
 			this.primarySeqId = -1;
 		}
+
 		if (this.routeLength < 9) {
 			this.routeLength++;
 		}
-		for (int var6 = this.routeLength; var6 > 0; var6--) {
-			this.routeTileX[var6] = this.routeTileX[var6 - 1];
-			this.routeTileZ[var6] = this.routeTileZ[var6 - 1];
-			this.routeRun[var6] = this.routeRun[var6 - 1];
+
+		for (int i = this.routeLength; i > 0; i--) {
+			this.routeTileX[i] = this.routeTileX[i - 1];
+			this.routeTileZ[i] = this.routeTileZ[i - 1];
+			this.routeRun[i] = this.routeRun[i - 1];
 		}
-		this.routeTileX[0] = var4;
-		this.routeTileZ[0] = var5;
-		this.routeRun[0] = arg0;
+
+		this.routeTileX[0] = x;
+		this.routeTileZ[0] = z;
+		this.routeRun[0] = run;
 	}
 
 	@ObfuscatedName("z.a(B)V")
-	public final void clearRoute() {
+	public void clearRoute() {
 		this.routeLength = 0;
 		this.preanimRouteLength = 0;
 	}
@@ -261,12 +264,12 @@ public class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("z.a(III)V")
-	public final void hit(int arg0, int arg1) {
-		for (int var4 = 0; var4 < 4; var4++) {
-			if (this.damageCycle[var4] <= Client.loopCycle) {
-				this.damage[var4] = arg1;
-				this.damageType[var4] = arg0;
-				this.damageCycle[var4] = Client.loopCycle + 70;
+	public void hit(int type, int value) {
+		for (int i = 0; i < 4; i++) {
+			if (this.damageCycle[i] <= Client.loopCycle) {
+				this.damage[i] = value;
+				this.damageType[i] = type;
+				this.damageCycle[i] = Client.loopCycle + 70;
 				return;
 			}
 		}

@@ -333,85 +333,97 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(II)V")
-	public static void unload(int arg0) {
-		meta[arg0] = null;
+	public static void unload(int id) {
+		meta[id] = null;
 	}
 
 	@ObfuscatedName("fb.b(II)Lfb;")
-	public static Model tryGet(int arg0) {
+	public static Model tryGet(int id) {
 		if (meta == null) {
 			return null;
-		} else {
-			Metadata var2 = meta[arg0];
-			if (var2 == null) {
-				provider.requestModel(arg0);
-				return null;
-			} else {
-				return new Model(arg0);
-			}
 		}
+
+		Metadata info = meta[id];
+		if (info == null) {
+			provider.requestModel(id);
+			return null;
+		}
+
+		return new Model(id);
 	}
 
 	@ObfuscatedName("fb.b(I)Z")
-	public static boolean request(int arg0) {
+	public static boolean request(int id) {
 		if (meta == null) {
 			return false;
 		}
-		Metadata var1 = meta[arg0];
-		if (var1 == null) {
-			provider.requestModel(arg0);
+
+		Metadata info = meta[id];
+		if (info == null) {
+			provider.requestModel(id);
 			return false;
-		} else {
-			return true;
 		}
+
+		return true;
 	}
 
 	public Model() {
 	}
 
-	public Model(int arg1) {
+	public Model(int id) {
 		loaded++;
-		Metadata var3 = meta[arg1];
-		this.vertexCount = var3.vertexCount;
-		this.faceCount = var3.faceCount;
-		this.texturedFaceCount = var3.texturedFaceCount;
+
+		Metadata info = meta[id];
+		this.vertexCount = info.vertexCount;
+		this.faceCount = info.faceCount;
+		this.texturedFaceCount = info.texturedFaceCount;
+
 		this.vertexX = new int[this.vertexCount];
 		this.vertexY = new int[this.vertexCount];
 		this.vertexZ = new int[this.vertexCount];
+
 		this.faceVertexA = new int[this.faceCount];
 		this.faceVertexB = new int[this.faceCount];
 		this.faceVertexC = new int[this.faceCount];
+
 		this.texturedVertexA = new int[this.texturedFaceCount];
 		this.texturedVertexB = new int[this.texturedFaceCount];
 		this.texturedVertexC = new int[this.texturedFaceCount];
-		if (var3.vertexLabelsOffset >= 0) {
+
+		if (info.vertexLabelsOffset >= 0) {
 			this.vertexLabel = new int[this.vertexCount];
 		}
-		if (var3.faceInfosOffset >= 0) {
+
+		if (info.faceInfosOffset >= 0) {
 			this.faceInfo = new int[this.faceCount];
 		}
-		if (var3.facePrioritiesOffset >= 0) {
+
+		if (info.facePrioritiesOffset >= 0) {
 			this.facePriority = new int[this.faceCount];
 		} else {
-			this.priority = -var3.facePrioritiesOffset - 1;
+			this.priority = -info.facePrioritiesOffset - 1;
 		}
-		if (var3.faceAlphasOffset >= 0) {
+
+		if (info.faceAlphasOffset >= 0) {
 			this.faceAlpha = new int[this.faceCount];
 		}
-		if (var3.faceLabelsOffset >= 0) {
+
+		if (info.faceLabelsOffset >= 0) {
 			this.faceLabel = new int[this.faceCount];
 		}
+
 		this.faceColour = new int[this.faceCount];
-		Packet var4 = new Packet(var3.data);
-		var4.pos = var3.vertexFlagsOffset;
-		Packet var5 = new Packet(var3.data);
-		var5.pos = var3.vertexXOffset;
-		Packet var6 = new Packet(var3.data);
-		var6.pos = var3.vertexYOffset;
-		Packet var7 = new Packet(var3.data);
-		var7.pos = var3.vertexZOffset;
-		Packet var8 = new Packet(var3.data);
-		var8.pos = var3.vertexLabelsOffset;
+
+		Packet var4 = new Packet(info.data);
+		var4.pos = info.vertexFlagsOffset;
+		Packet var5 = new Packet(info.data);
+		var5.pos = info.vertexXOffset;
+		Packet var6 = new Packet(info.data);
+		var6.pos = info.vertexYOffset;
+		Packet var7 = new Packet(info.data);
+		var7.pos = info.vertexZOffset;
+		Packet var8 = new Packet(info.data);
+		var8.pos = info.vertexLabelsOffset;
 		int var9 = 0;
 		int var10 = 0;
 		int var11 = 0;
@@ -439,11 +451,11 @@ public class Model extends ModelSource {
 				this.vertexLabel[var12] = var8.g1();
 			}
 		}
-		var4.pos = var3.faceColoursOffset;
-		var5.pos = var3.faceInfosOffset;
-		var6.pos = var3.facePrioritiesOffset;
-		var7.pos = var3.faceAlphasOffset;
-		var8.pos = var3.faceLabelsOffset;
+		var4.pos = info.faceColoursOffset;
+		var5.pos = info.faceInfosOffset;
+		var6.pos = info.facePrioritiesOffset;
+		var7.pos = info.faceAlphasOffset;
+		var8.pos = info.faceLabelsOffset;
 		for (int var17 = 0; var17 < this.faceCount; var17++) {
 			this.faceColour[var17] = var4.g2();
 			if (this.faceInfo != null) {
@@ -459,8 +471,8 @@ public class Model extends ModelSource {
 				this.faceLabel[var17] = var8.g1();
 			}
 		}
-		var4.pos = var3.faceVerticesOffset;
-		var5.pos = var3.faceOrientationsOffset;
+		var4.pos = info.faceVerticesOffset;
+		var5.pos = info.faceOrientationsOffset;
 		int var18 = 0;
 		int var19 = 0;
 		int var20 = 0;
@@ -505,7 +517,7 @@ public class Model extends ModelSource {
 				this.faceVertexC[var22] = var20;
 			}
 		}
-		var4.pos = var3.faceTextureAxisOffset;
+		var4.pos = info.faceTextureAxisOffset;
 		for (int var27 = 0; var27 < this.texturedFaceCount; var27++) {
 			this.texturedVertexA[var27] = var4.g2();
 			this.texturedVertexB[var27] = var4.g2();
@@ -904,7 +916,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(Lfb;I)I")
-	public final int addVertex(Model arg0, int arg1) {
+	public int addVertex(Model arg0, int arg1) {
 		int var3 = -1;
 		int var4 = arg0.vertexX[arg1];
 		int var5 = arg0.vertexY[arg1];
@@ -1061,7 +1073,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(ZI)V")
-	public void applyTransform(int arg1) {
+	public void applyFrame(int arg1) {
 		if (this.labelVertices == null || arg1 == -1) {
 			return;
 		}
@@ -1080,12 +1092,12 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a([IIIB)V")
-	public void applyTransforms(int[] arg0, int arg1, int arg2) {
+	public void applyFrames(int[] arg0, int arg1, int arg2) {
 		if (arg2 == -1) {
 			return;
 		}
 		if (arg0 == null || arg1 == -1) {
-			this.applyTransform(arg2);
+			this.applyFrame(arg2);
 			return;
 		}
 		AnimFrame var5 = AnimFrame.get(arg2);
@@ -1094,7 +1106,7 @@ public class Model extends ModelSource {
 		}
 		AnimFrame var6 = AnimFrame.get(arg1);
 		if (var6 == null) {
-			this.applyTransform(arg2);
+			this.applyFrame(arg2);
 			return;
 		}
 		AnimBase var7 = var5.base;
@@ -1273,7 +1285,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IBII)V")
-	public void translate(int arg0, int arg2, int arg3) {
+	public void offset(int arg0, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.vertexCount; var5++) {
 			this.vertexX[var5] += arg0;
 			this.vertexY[var5] += arg3;
@@ -1303,7 +1315,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIII)V")
-	public void scale(int arg0, int arg1, int arg2) {
+	public void resize(int arg0, int arg1, int arg2) {
 		for (int var5 = 0; var5 < this.vertexCount; var5++) {
 			this.vertexX[var5] = this.vertexX[var5] * arg0 / 128;
 			this.vertexY[var5] = this.vertexY[var5] * arg2 / 128;
@@ -1312,7 +1324,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIZ)V")
-	public final void calculateNormals(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5) {
+	public void calculateNormals(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5) {
 		int var7 = (int) Math.sqrt((double) (arg2 * arg2 + arg3 * arg3 + arg4 * arg4));
 		int var8 = arg1 * var7 >> 8;
 		if (this.faceColourA == null) {
@@ -1392,7 +1404,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIIII)V")
-	public final void applyLighting(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void applyLighting(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		for (int var6 = 0; var6 < this.faceCount; var6++) {
 			int var7 = this.faceVertexA[var6];
 			int var8 = this.faceVertexB[var6];
@@ -1437,7 +1449,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(III)I")
-	public static final int mulColourLightness(int arg0, int arg1, int arg2) {
+	public static int mulColourLightness(int arg0, int arg1, int arg2) {
 		if ((arg2 & 0x2) == 2) {
 			if (arg1 < 0) {
 				arg1 = 0;
@@ -1456,7 +1468,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIII)V")
-	public final void drawSimple(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public void drawSimple(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var8 = Pix3D.centerX;
 		int var9 = Pix3D.centerY;
 		int var10 = sinTable[arg0];
@@ -1508,7 +1520,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIIIII)V")
-	public final void draw(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void draw(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = arg7 * arg4 - arg5 * arg3 >> 16;
 		int var11 = arg6 * arg1 + var10 * arg2 >> 16;
 		int var12 = this.radius * arg2 >> 16;
@@ -1620,7 +1632,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(ZZI)V")
-	public final void draw(boolean arg0, boolean arg1, int arg2) {
+	public void draw(boolean arg0, boolean arg1, int arg2) {
 		for (int var4 = 0; var4 < this.maxDepth; var4++) {
 			tmpDepthFaceCount[var4] = 0;
 		}
@@ -1783,7 +1795,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.d(I)V")
-	public final void drawFace(int arg0) {
+	public void drawFace(int arg0) {
 		if (faceNearClipped[arg0]) {
 			this.drawFaceNearClipped(arg0);
 			return;
@@ -1823,7 +1835,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.e(I)V")
-	public final void drawFaceNearClipped(int arg0) {
+	public void drawFaceNearClipped(int arg0) {
 		int var2 = Pix3D.centerX;
 		int var3 = Pix3D.centerY;
 		int var4 = 0;
@@ -1970,7 +1982,7 @@ public class Model extends ModelSource {
     }
 
 	@ObfuscatedName("fb.a(IIIIIIII)Z")
-	public final boolean pointsWithinTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public boolean pointsWithinTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		if (arg1 < arg2 && arg1 < arg3 && arg1 < arg4) {
 			return false;
 		} else if (arg1 > arg2 && arg1 > arg3 && arg1 > arg4) {

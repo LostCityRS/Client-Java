@@ -13,7 +13,7 @@ public class Pix3D extends Pix2D {
 	public static boolean hclip;
 
 	@ObfuscatedName("ib.B")
-	public static boolean field647 = true;
+	public static boolean jagged = true;
 
 	@ObfuscatedName("ib.F")
 	public static int[] divTable = new int[512];
@@ -76,7 +76,7 @@ public class Pix3D extends Pix2D {
 	public static int[][] texelPool;
 
 	@ObfuscatedName("ib.a(B)V")
-	public static final void unload() {
+	public static void unload() {
 		divTable = null;
 		divTable = null;
 		sinTable = null;
@@ -93,7 +93,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.c(Z)V")
-	public static final void init2D() {
+	public static void init2D() {
 		lineOffset = new int[Pix2D.height2d];
 		for (int var1 = 0; var1 < Pix2D.height2d; var1++) {
 			lineOffset[var1] = Pix2D.width2d * var1;
@@ -103,7 +103,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(III)V")
-	public static final void init3D(int arg0, int arg1) {
+	public static void init3D(int arg0, int arg1) {
 		lineOffset = new int[arg1];
 		for (int var3 = 0; var3 < arg1; var3++) {
 			lineOffset[var3] = arg0 * var3;
@@ -113,7 +113,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(I)V")
-	public static final void clearTexels() {
+	public static void clearTexels() {
 		texelPool = null;
 		for (int var1 = 0; var1 < 50; var1++) {
 			activeTexels[var1] = null;
@@ -121,7 +121,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(IZ)V")
-	public static final void initPool(int arg0) {
+	public static void initPool(int arg0) {
 		if (texelPool != null) {
 			return;
 		}
@@ -137,7 +137,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(ILyb;)V")
-	public static final void unpackTextures(Jagfile arg1) {
+	public static void unpackTextures(Jagfile arg1) {
 		loadedTextures = 0;
 		for (int var2 = 0; var2 < 50; var2++) {
 			try {
@@ -154,7 +154,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.b(IZ)I")
-	public static final int getAverageTextureRgb(int arg0) {
+	public static int getAverageTextureRgb(int arg0) {
 		if (averageTextureRgb[arg0] != 0) {
 			return averageTextureRgb[arg0];
 		}
@@ -177,7 +177,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.c(IZ)V")
-	public static final void pushTexture(int arg0) {
+	public static void pushTexture(int arg0) {
 		if (activeTexels[arg0] == null) {
 			return;
 		}
@@ -186,7 +186,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.b(I)[I")
-	public static final int[] getTexels(int arg0) {
+	public static int[] getTexels(int arg0) {
 		textureCycle[arg0] = cycle++;
 		if (activeTexels[arg0] != null) {
 			return activeTexels[arg0];
@@ -249,7 +249,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(ID)V")
-	public static final void initColourTable(double arg1) {
+	public static void initColourTable(double arg1) {
 		double var3 = arg1 + (Math.random() * 0.03D - 0.015D);
 		int var5 = 0;
 		for (int var6 = 0; var6 < 512; var6++) {
@@ -341,7 +341,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(IIIIIIIII)V")
-	public static final void gouraudTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public static void gouraudTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var9 = 0;
 		int var10 = 0;
 		if (arg1 != arg0) {
@@ -836,8 +836,8 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a([IIIIIIII)V")
-	public static final void gouraudRaster(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
-		if (field647) {
+	public static void gouraudRaster(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+		if (jagged) {
 			int var9;
 			int var10;
 			int var11;
@@ -957,7 +957,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.b(IIIIIII)V")
-	public static final void flatTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public static void flatTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var7 = 0;
 		if (arg1 != arg0) {
 			var7 = (arg4 - arg3 << 16) / (arg1 - arg0);
@@ -1362,7 +1362,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a([IIIIII)V")
-	public static final void flatRaster(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public static void flatRaster(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (hclip) {
 			if (arg5 > Pix2D.safeWidth) {
 				arg5 = Pix2D.safeWidth;
@@ -1418,7 +1418,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(IIIIIIIIIIIIIIIIIII)V")
-	public static final void textureTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
+	public static void textureTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
 		int[] var19 = getTexels(arg18);
 		opaque = !textureTranslucent[arg18];
 		int var20 = arg9 - arg10;
@@ -2026,7 +2026,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a([I[IIIIIIIIIIIIII)V")
-	public static final void textureRaster(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14) {
+	public static void textureRaster(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14) {
 		if (arg5 >= arg6) {
 			return;
 		}

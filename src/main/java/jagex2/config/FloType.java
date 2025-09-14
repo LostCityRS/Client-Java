@@ -47,139 +47,165 @@ public class FloType {
 	public int hsl;
 
 	@ObfuscatedName("kc.a(ILyb;)V")
-	public static void unpack(Jagfile arg1) {
-		Packet var2 = new Packet(arg1.read("flo.dat", null));
-		count = var2.g2();
+	public static void unpack(Jagfile jag) {
+		Packet data = new Packet(jag.read("flo.dat", null));
+
+		count = data.g2();
+
 		if (types == null) {
 			types = new FloType[count];
 		}
-		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new FloType();
+
+		for (int id = 0; id < count; id++) {
+			if (types[id] == null) {
+				types[id] = new FloType();
 			}
-			types[var3].decode(var2);
+
+			types[id].decode(data);
 		}
 	}
 
 	@ObfuscatedName("kc.a(ZLmb;)V")
-	public void decode(Packet arg1) {
+	public void decode(Packet buf) {
 		while (true) {
-			int var3 = arg1.g1();
-			if (var3 == 0) {
-				return;
+			int code = buf.g1();
+			if (code == 0) {
+				break;
 			}
-			if (var3 == 1) {
-				this.rgb = arg1.g3();
+
+			if (code == 1) {
+				this.rgb = buf.g3();
 				this.getHsl(this.rgb);
-			} else if (var3 == 2) {
-				this.texture = arg1.g1();
-			} else if (var3 == 3) {
+			} else if (code == 2) {
+				this.texture = buf.g1();
+			} else if (code == 3) {
 				this.overlay = true;
-			} else if (var3 == 5) {
+			} else if (code == 5) {
 				this.occlude = false;
-			} else if (var3 == 6) {
-				this.debugname = arg1.gjstr();
+			} else if (code == 6) {
+				this.debugname = buf.gjstr();
 			} else {
-				System.out.println("Error unrecognised config code: " + var3);
+				System.out.println("Error unrecognised config code: " + code);
 			}
 		}
 	}
 
 	@ObfuscatedName("kc.a(II)V")
-	public void getHsl(int arg1) {
-		double var3 = (double) (arg1 >> 16 & 0xFF) / 256.0D;
-		double var5 = (double) (arg1 >> 8 & 0xFF) / 256.0D;
-		double var7 = (double) (arg1 & 0xFF) / 256.0D;
-		double var9 = var3;
-		if (var5 < var3) {
-			var9 = var5;
+	public void getHsl(int rgb) {
+		double red = (double) (rgb >> 16 & 0xFF) / 256.0D;
+		double green = (double) (rgb >> 8 & 0xFF) / 256.0D;
+		double blue = (double) (rgb & 0xFF) / 256.0D;
+
+		double min = red;
+		if (green < red) {
+			min = green;
 		}
-		if (var7 < var9) {
-			var9 = var7;
+		if (blue < min) {
+			min = blue;
 		}
-		double var11 = var3;
-		if (var5 > var3) {
-			var11 = var5;
+
+		double max = red;
+		if (green > red) {
+			max = green;
 		}
-		if (var7 > var11) {
-			var11 = var7;
+		if (blue > max) {
+			max = blue;
 		}
-		double var13 = 0.0D;
-		double var15 = 0.0D;
-		double var17 = (var9 + var11) / 2.0D;
-		if (var9 != var11) {
-			if (var17 < 0.5D) {
-				var15 = (var11 - var9) / (var11 + var9);
+
+		double h = 0.0D;
+		double s = 0.0D;
+		double l = (min + max) / 2.0D;
+
+		if (min != max) {
+			if (l < 0.5D) {
+				s = (max - min) / (max + min);
 			}
-			if (var17 >= 0.5D) {
-				var15 = (var11 - var9) / (2.0D - var11 - var9);
+
+			if (l >= 0.5D) {
+				s = (max - min) / (2.0D - max - min);
 			}
-			if (var3 == var11) {
-				var13 = (var5 - var7) / (var11 - var9);
-			} else if (var5 == var11) {
-				var13 = (var7 - var3) / (var11 - var9) + 2.0D;
-			} else if (var7 == var11) {
-				var13 = (var3 - var5) / (var11 - var9) + 4.0D;
+
+			if (red == max) {
+				h = (green - blue) / (max - min);
+			} else if (green == max) {
+				h = (blue - red) / (max - min) + 2.0D;
+			} else if (blue == max) {
+				h = (red - green) / (max - min) + 4.0D;
 			}
 		}
-		double var19 = var13 / 6.0D;
-		this.hue = (int) (var19 * 256.0D);
-		this.saturation = (int) (var15 * 256.0D);
-		this.lightness = (int) (var17 * 256.0D);
+
+		h = h / 6.0D;
+
+		this.hue = (int) (h * 256.0D);
+		this.saturation = (int) (s * 256.0D);
+		this.lightness = (int) (l * 256.0D);
+
 		if (this.saturation < 0) {
 			this.saturation = 0;
 		} else if (this.saturation > 255) {
 			this.saturation = 255;
 		}
+
 		if (this.lightness < 0) {
 			this.lightness = 0;
 		} else if (this.lightness > 255) {
 			this.lightness = 255;
 		}
-		if (var17 > 0.5D) {
-			this.luminance = (int) ((1.0D - var17) * var15 * 512.0D);
+
+		if (l > 0.5D) {
+			this.luminance = (int) ((1.0D - l) * s * 512.0D);
 		} else {
-			this.luminance = (int) (var17 * var15 * 512.0D);
+			this.luminance = (int) (l * s * 512.0D);
 		}
+
 		if (this.luminance < 1) {
 			this.luminance = 1;
 		}
-		this.chroma = (int) (var19 * (double) this.luminance);
-		int var21 = this.hue + (int) (Math.random() * 16.0D) - 8;
-		if (var21 < 0) {
-			var21 = 0;
-		} else if (var21 > 255) {
-			var21 = 255;
+
+		this.chroma = (int) (h * (double) this.luminance);
+
+		int hue = this.hue + (int) (Math.random() * 16.0D) - 8;
+		if (hue < 0) {
+			hue = 0;
+		} else if (hue > 255) {
+			hue = 255;
 		}
-		int var22 = this.saturation + (int) (Math.random() * 48.0D) - 24;
-		if (var22 < 0) {
-			var22 = 0;
-		} else if (var22 > 255) {
-			var22 = 255;
+
+		int saturation = this.saturation + (int) (Math.random() * 48.0D) - 24;
+		if (saturation < 0) {
+			saturation = 0;
+		} else if (saturation > 255) {
+			saturation = 255;
 		}
-		int var23 = this.lightness + (int) (Math.random() * 48.0D) - 24;
-		if (var23 < 0) {
-			var23 = 0;
-		} else if (var23 > 255) {
-			var23 = 255;
+
+		int lightness = this.lightness + (int) (Math.random() * 48.0D) - 24;
+		if (lightness < 0) {
+			lightness = 0;
+		} else if (lightness > 255) {
+			lightness = 255;
 		}
-		this.hsl = this.hsl24to16(var21, var22, var23);
+
+		this.hsl = this.hsl24to16(hue, saturation, lightness);
 	}
 
 	@ObfuscatedName("kc.a(III)I")
-	public final int hsl24to16(int arg0, int arg1, int arg2) {
-		if (arg2 > 179) {
-			arg1 /= 2;
+	public int hsl24to16(int hue, int saturation, int lightness) {
+		if (lightness > 179) {
+			saturation /= 2;
 		}
-		if (arg2 > 192) {
-			arg1 /= 2;
+
+		if (lightness > 192) {
+			saturation /= 2;
 		}
-		if (arg2 > 217) {
-			arg1 /= 2;
+
+		if (lightness > 217) {
+			saturation /= 2;
 		}
-		if (arg2 > 243) {
-			arg1 /= 2;
+
+		if (lightness > 243) {
+			saturation /= 2;
 		}
-		return (arg0 / 4 << 10) + (arg1 / 32 << 7) + arg2 / 2;
+
+		return (hue / 4 << 10) + (saturation / 32 << 7) + lightness / 2;
 	}
 }

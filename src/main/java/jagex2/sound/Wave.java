@@ -28,140 +28,162 @@ public class Wave {
 	public int loopEnd;
 
 	@ObfuscatedName("cc.a(ILmb;)V")
-	public static final void unpack(Packet arg1) {
-		waveBytes = new byte[441000];
+	public static void unpack(Packet buf) {
+		waveBytes = new byte[44100 * 10];
 		waveBuffer = new Packet(waveBytes);
+
 		Tone.init();
+
 		while (true) {
-			int var2 = arg1.g2();
-			if (var2 == 65535) {
+			int id = buf.g2();
+			if (id == 65535) {
 				return;
 			}
-			tracks[var2] = new Wave();
-			tracks[var2].read(arg1);
-			delay[var2] = tracks[var2].trim();
+
+			tracks[id] = new Wave();
+			tracks[id].read(buf);
+
+			delay[id] = tracks[id].trim();
 		}
 	}
 
 	@ObfuscatedName("cc.a(IIZ)Lmb;")
-	public static final Packet generate(int arg0, int arg1) {
-		if (tracks[arg0] == null) {
+	public static Packet generate(int id, int loops) {
+		if (tracks[id] == null) {
 			return null;
 		} else {
-			Wave var3 = tracks[arg0];
-			return var3.getWave(arg1);
+			Wave sound = tracks[id];
+			return sound.getWave(loops);
 		}
 	}
 
 	@ObfuscatedName("cc.a(ZLmb;)V")
-	public final void read(Packet arg1) {
-		for (int var3 = 0; var3 < 10; var3++) {
-			int var4 = arg1.g1();
-			if (var4 != 0) {
-				arg1.pos--;
-				this.tones[var3] = new Tone();
-				this.tones[var3].unpack(arg1);
+	public void read(Packet buf) {
+		for (int i = 0; i < 10; i++) {
+			int hasTone = buf.g1();
+			if (hasTone != 0) {
+				buf.pos--;
+
+				this.tones[i] = new Tone();
+				this.tones[i].unpack(buf);
 			}
 		}
-		this.loopBegin = arg1.g2();
-		this.loopEnd = arg1.g2();
+
+		this.loopBegin = buf.g2();
+		this.loopEnd = buf.g2();
 	}
 
 	@ObfuscatedName("cc.a(Z)I")
-	public final int trim() {
-		int var2 = 9999999;
-		for (int var3 = 0; var3 < 10; var3++) {
-			if (this.tones[var3] != null && this.tones[var3].start / 20 < var2) {
-				var2 = this.tones[var3].start / 20;
+	public int trim() {
+		int start = 9999999;
+		for (int i = 0; i < 10; i++) {
+			if (this.tones[i] != null && this.tones[i].start / 20 < start) {
+				start = this.tones[i].start / 20;
 			}
 		}
-		if (this.loopBegin < this.loopEnd && this.loopBegin / 20 < var2) {
-			var2 = this.loopBegin / 20;
+
+		if (this.loopBegin < this.loopEnd && this.loopBegin / 20 < start) {
+			start = this.loopBegin / 20;
 		}
-		if (var2 == 9999999 || var2 == 0) {
+
+		if (start == 9999999 || start == 0) {
 			return 0;
 		}
-		for (int var4 = 0; var4 < 10; var4++) {
-			if (this.tones[var4] != null) {
-				this.tones[var4].start -= var2 * 20;
+
+		for (int i = 0; i < 10; i++) {
+			if (this.tones[i] != null) {
+				this.tones[i].start -= start * 20;
 			}
 		}
+
 		if (this.loopBegin < this.loopEnd) {
-			this.loopBegin -= var2 * 20;
-			this.loopEnd -= var2 * 20;
+			this.loopBegin -= start * 20;
+			this.loopEnd -= start * 20;
 		}
-		return var2;
+
+		return start;
 	}
 
 	@ObfuscatedName("cc.a(II)Lmb;")
-	public final Packet getWave(int arg1) {
-		int var3 = this.generate(arg1);
+	public Packet getWave(int buf) {
+		int length = this.generate(buf);
 		waveBuffer.pos = 0;
-		waveBuffer.p4(1380533830);
-		waveBuffer.ip4(var3 + 36);
-		waveBuffer.p4(1463899717);
-		waveBuffer.p4(1718449184);
-		waveBuffer.ip4(16);
-		waveBuffer.ip2(1);
-		waveBuffer.ip2(1);
-		waveBuffer.ip4(22050);
-		waveBuffer.ip4(22050);
-		waveBuffer.ip2(1);
-		waveBuffer.ip2(8);
-		waveBuffer.p4(1684108385);
-		waveBuffer.ip4(var3);
-		waveBuffer.pos += var3;
+		waveBuffer.p4(0x52494646); // "RIFF" ChunkID
+		waveBuffer.ip4(length + 36); // ChunkSize
+		waveBuffer.p4(0x57415645); // "WAVE" format
+		waveBuffer.p4(0x666d7420); // "fmt " chunk id
+		waveBuffer.ip4(16); // chunk size
+		waveBuffer.ip2(1); // audio format
+		waveBuffer.ip2(1); // num channels
+		waveBuffer.ip4(22050); // sample rate
+		waveBuffer.ip4(22050); // byte rate
+		waveBuffer.ip2(1); // block align
+		waveBuffer.ip2(8); // bits per sample
+		waveBuffer.p4(0x64617461); // "data"
+		waveBuffer.ip4(length);
+		waveBuffer.pos += length;
 		return waveBuffer;
 	}
 
 	@ObfuscatedName("cc.a(I)I")
-	public final int generate(int arg0) {
-		int var2 = 0;
-		for (int var3 = 0; var3 < 10; var3++) {
-			if (this.tones[var3] != null && this.tones[var3].length + this.tones[var3].start > var2) {
-				var2 = this.tones[var3].length + this.tones[var3].start;
+	public int generate(int loops) {
+		int duration = 0;
+		for (int i = 0; i < 10; i++) {
+			if (this.tones[i] != null && this.tones[i].length + this.tones[i].start > duration) {
+				duration = this.tones[i].length + this.tones[i].start;
 			}
 		}
-		if (var2 == 0) {
+
+		if (duration == 0) {
 			return 0;
 		}
-		int var4 = var2 * 22050 / 1000;
-		int var5 = this.loopBegin * 22050 / 1000;
-		int var6 = this.loopEnd * 22050 / 1000;
-		if (var5 < 0 || var5 > var4 || var6 < 0 || var6 > var4 || var5 >= var6) {
-			arg0 = 0;
+
+		int sampleCount = duration * 22050 / 1000;
+		int loopStart = this.loopBegin * 22050 / 1000;
+		int loopEnd = this.loopEnd * 22050 / 1000;
+
+		if (loopStart < 0 || loopStart > sampleCount || loopEnd < 0 || loopEnd > sampleCount || loopStart >= loopEnd) {
+			loops = 0;
 		}
-		int var7 = var4 + (var6 - var5) * (arg0 - 1);
-		for (int var8 = 44; var8 < var7 + 44; var8++) {
-			waveBytes[var8] = -128;
+
+		int totalSampleCount = sampleCount + (loopEnd - loopStart) * (loops - 1);
+		for (int i = 44; i < totalSampleCount + 44; i++) {
+			waveBytes[i] = -128;
 		}
-		for (int var9 = 0; var9 < 10; var9++) {
-			if (this.tones[var9] != null) {
-				int var10 = this.tones[var9].length * 22050 / 1000;
-				int var11 = this.tones[var9].start * 22050 / 1000;
-				int[] var12 = this.tones[var9].generate(var10, this.tones[var9].length);
-				for (int var13 = 0; var13 < var10; var13++) {
-					waveBytes[var13 + var11 + 44] += (byte) (var12[var13] >> 8);
+
+		for (int i = 0; i < 10; i++) {
+			if (this.tones[i] != null) {
+				int toneSampleCount = this.tones[i].length * 22050 / 1000;
+				int start = this.tones[i].start * 22050 / 1000;
+				int[] samples = this.tones[i].generate(toneSampleCount, this.tones[i].length);
+
+				for (int j = 0; j < toneSampleCount; j++) {
+					waveBytes[j + start + 44] += (byte) (samples[j] >> 8);
 				}
 			}
 		}
-		if (arg0 > 1) {
-			var5 += 44;
-			var6 += 44;
-			var4 += 44;
-			var7 += 44;
-			int var14 = var7 - var4;
-			for (int var15 = var4 - 1; var15 >= var6; var15--) {
-				waveBytes[var15 + var14] = waveBytes[var15];
+
+		if (loops > 1) {
+			loopStart += 44;
+			loopEnd += 44;
+			sampleCount += 44;
+			totalSampleCount += 44;
+
+			int endOffset = totalSampleCount - sampleCount;
+			for (int i = sampleCount - 1; i >= loopEnd; i--) {
+				waveBytes[i + endOffset] = waveBytes[i];
 			}
-			for (int var16 = 1; var16 < arg0; var16++) {
-				int var17 = (var6 - var5) * var16;
-				for (int var18 = var5; var18 < var6; var18++) {
-					waveBytes[var18 + var17] = waveBytes[var18];
+
+			for (int i = 1; i < loops; i++) {
+				int off = (loopEnd - loopStart) * i;
+				for (int j = loopStart; j < loopEnd; j++) {
+					waveBytes[j + off] = waveBytes[j];
 				}
 			}
-			var7 -= 44;
+
+			totalSampleCount -= 44;
 		}
-		return var7;
+
+		return totalSampleCount;
 	}
 }

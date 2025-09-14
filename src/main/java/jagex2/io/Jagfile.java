@@ -26,62 +26,70 @@ public class Jagfile {
 	@ObfuscatedName("yb.k")
 	public boolean unpacked;
 
-	public Jagfile(byte[] arg1) {
-		this.unpack(arg1);
+	public Jagfile(byte[] src) {
+		this.unpack(src);
 	}
 
 	@ObfuscatedName("yb.a([BB)V")
-	public void unpack(byte[] arg0) {
-		Packet var3 = new Packet(arg0);
-		int var4 = var3.g3();
-		int var6 = var3.g3();
-		if (var6 == var4) {
-			this.data = arg0;
+	public void unpack(byte[] src) {
+		Packet buf = new Packet(src);
+		int packedSize = buf.g3();
+		int unpackedSize = buf.g3();
+
+		if (unpackedSize == packedSize) {
+			this.data = src;
 			this.unpacked = false;
 		} else {
-			byte[] var7 = new byte[var4];
-			BZip2.decompress(var7, var4, arg0, var6, 6);
-			this.data = var7;
-			var3 = new Packet(this.data);
+			byte[] temp = new byte[packedSize];
+			BZip2.decompress(temp, packedSize, src, unpackedSize, 6);
+			this.data = temp;
+
+			buf = new Packet(this.data);
 			this.unpacked = true;
 		}
-		this.fileCount = var3.g2();
+
+		this.fileCount = buf.g2();
 		this.fileHash = new int[this.fileCount];
 		this.fileUnpackedSize = new int[this.fileCount];
 		this.filePackedSize = new int[this.fileCount];
 		this.fileOffset = new int[this.fileCount];
-		int var8 = var3.pos + this.fileCount * 10;
-		for (int var9 = 0; var9 < this.fileCount; var9++) {
-			this.fileHash[var9] = var3.g4();
-			this.fileUnpackedSize[var9] = var3.g3();
-			this.filePackedSize[var9] = var3.g3();
-			this.fileOffset[var9] = var8;
-			var8 += this.filePackedSize[var9];
+
+		int pos = buf.pos + this.fileCount * 10;
+		for (int i = 0; i < this.fileCount; i++) {
+			this.fileHash[i] = buf.g4();
+			this.fileUnpackedSize[i] = buf.g3();
+			this.filePackedSize[i] = buf.g3();
+			this.fileOffset[i] = pos;
+			pos += this.filePackedSize[i];
 		}
 	}
 
 	@ObfuscatedName("yb.a(Ljava/lang/String;[B)[B")
-	public byte[] read(String arg0, byte[] arg1) {
-		int var3 = 0;
-		String var4 = arg0.toUpperCase();
-		for (int var5 = 0; var5 < var4.length(); var5++) {
-			var3 = var3 * 61 + var4.charAt(var5) - 32;
+	public byte[] read(String name, byte[] dst) {
+		int hash = 0;
+		String upper = name.toUpperCase();
+		for (int i = 0; i < upper.length(); i++) {
+			hash = hash * 61 + upper.charAt(i) - 32;
 		}
-		for (int var6 = 0; var6 < this.fileCount; var6++) {
-			if (this.fileHash[var6] == var3) {
-				if (arg1 == null) {
-					arg1 = new byte[this.fileUnpackedSize[var6]];
+
+		for (int i = 0; i < this.fileCount; i++) {
+			if (this.fileHash[i] == hash) {
+				if (dst == null) {
+					dst = new byte[this.fileUnpackedSize[i]];
 				}
+
 				if (this.unpacked) {
-					for (int var7 = 0; var7 < this.fileUnpackedSize[var6]; var7++) {
-						arg1[var7] = this.data[this.fileOffset[var6] + var7];
+					for (int j = 0; j < this.fileUnpackedSize[i]; j++) {
+						dst[j] = this.data[this.fileOffset[i] + j];
 					}
 				} else {
-					BZip2.decompress(arg1, this.fileUnpackedSize[var6], this.data, this.filePackedSize[var6], this.fileOffset[var6]);
+					BZip2.decompress(dst, this.fileUnpackedSize[i], this.data, this.filePackedSize[i], this.fileOffset[i]);
 				}
-				return arg1;
+
+				return dst;
 			}
 		}
+
 		return null;
 	}
 }

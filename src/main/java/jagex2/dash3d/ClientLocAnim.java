@@ -18,16 +18,16 @@ public class ClientLocAnim extends ModelSource {
 	public int angle;
 
 	@ObfuscatedName("cb.p")
-	public int heightmapSW;
+	public int heightSW;
 
 	@ObfuscatedName("cb.q")
-	public int heightmapSE;
+	public int heightSE;
 
 	@ObfuscatedName("cb.r")
-	public int heightmapNE;
+	public int heightNE;
 
 	@ObfuscatedName("cb.s")
-	public int heightmapNW;
+	public int heightNW;
 
 	@ObfuscatedName("cb.t")
 	public SeqType seq;
@@ -38,50 +38,58 @@ public class ClientLocAnim extends ModelSource {
 	@ObfuscatedName("cb.v")
 	public int seqCycle;
 
-	public ClientLocAnim(int arg0, int arg1, boolean arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
-		this.index = arg1;
-		this.shape = arg6;
-		this.angle = arg7;
-		this.heightmapSW = arg4;
-		this.heightmapSE = arg8;
-		this.heightmapNE = arg0;
-		this.heightmapNW = arg5;
-		this.seq = SeqType.types[arg9];
+	public ClientLocAnim(int heightNE, int index, boolean randomFrame, int heightSW, int heightNW, int shape, int angle, int heightSE, int anim) {
+		this.index = index;
+		this.shape = shape;
+		this.angle = angle;
+		this.heightSW = heightSW;
+		this.heightSE = heightSE;
+		this.heightNE = heightNE;
+		this.heightNW = heightNW;
+
+		this.seq = SeqType.types[anim];
 		this.seqFrame = 0;
 		this.seqCycle = Client.loopCycle;
-		if (arg3 && this.seq.loops != -1) {
+
+		if (randomFrame && this.seq.loops != -1) {
 			this.seqFrame = (int) (Math.random() * (double) this.seq.frameCount);
-			this.seqCycle -= (int) (Math.random() * (double) this.seq.getFrameDuration(this.seqFrame));
+			this.seqCycle -= (int) (Math.random() * (double) this.seq.getFrameLength(this.seqFrame));
 		}
 	}
 
 	@ObfuscatedName("cb.a(I)Lfb;")
-	public final Model getModel() {
+	public Model getModel() {
 		if (this.seq != null) {
-			int var2 = Client.loopCycle - this.seqCycle;
-			if (var2 > 100 && this.seq.loops > 0) {
-				var2 = 100;
+			int delta = Client.loopCycle - this.seqCycle;
+			if (delta > 100 && this.seq.loops > 0) {
+				delta = 100;
 			}
-			label41: {
-				do {
-					do {
-						if (var2 <= this.seq.getFrameDuration(this.seqFrame)) {
-							break label41;
-						}
-						var2 -= this.seq.getFrameDuration(this.seqFrame);
-						this.seqFrame++;
-					} while (this.seqFrame < this.seq.frameCount);
-					this.seqFrame -= this.seq.loops;
-				} while (this.seqFrame >= 0 && this.seqFrame < this.seq.frameCount);
-				this.seq = null;
+
+			while (delta > this.seq.getFrameLength(this.seqFrame)) {
+				delta -= this.seq.getFrameLength(this.seqFrame);
+				this.seqFrame++;
+
+				if (this.seqFrame < this.seq.frameCount) {
+					continue;
+				}
+
+				this.seqFrame -= this.seq.loops;
+
+				if (this.seqFrame < 0 || this.seqFrame >= this.seq.frameCount) {
+					this.seq = null;
+					break;
+				}
 			}
-			this.seqCycle = Client.loopCycle - var2;
+
+			this.seqCycle = Client.loopCycle - delta;
 		}
-		int var3 = -1;
+
+		int frame = -1;
 		if (this.seq != null) {
-			var3 = this.seq.frames[this.seqFrame];
+			frame = this.seq.frames[this.seqFrame];
 		}
-		LocType var4 = LocType.get(this.index);
-		return var4.getModel(this.shape, this.angle, this.heightmapSW, this.heightmapSE, this.heightmapNE, this.heightmapNW, var3);
+
+		LocType loc = LocType.get(this.index);
+		return loc.getModel(this.shape, this.angle, this.heightSW, this.heightSE, this.heightNE, this.heightNW, frame);
 	}
 }

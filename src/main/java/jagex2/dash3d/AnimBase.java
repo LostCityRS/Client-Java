@@ -15,18 +15,22 @@ public class AnimBase {
 	@ObfuscatedName("g.d")
 	public int[][] labels;
 
-	public AnimBase(Packet arg1) {
-		this.size = arg1.g1();
+	public AnimBase(Packet buf) {
+		this.size = buf.g1();
+
 		this.types = new int[this.size];
 		this.labels = new int[this.size][];
-		for (int var3 = 0; var3 < this.size; var3++) {
-			this.types[var3] = arg1.g1();
+
+		for (int i = 0; i < this.size; i++) {
+			this.types[i] = buf.g1();
 		}
-		for (int var4 = 0; var4 < this.size; var4++) {
-			int var5 = arg1.g1();
-			this.labels[var4] = new int[var5];
-			for (int var6 = 0; var6 < var5; var6++) {
-				this.labels[var4][var6] = arg1.g1();
+
+		for (int i = 0; i < this.size; i++) {
+			int count = buf.g1();
+
+			this.labels[i] = new int[count];
+			for (int j = 0; j < count; j++) {
+				this.labels[i][j] = buf.g1();
 			}
 		}
 	}

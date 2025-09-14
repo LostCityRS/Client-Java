@@ -3,6 +3,7 @@ package jagex2.graphics;
 import deob.ObfuscatedName;
 import jagex2.io.Jagfile;
 import jagex2.io.Packet;
+
 import java.util.Random;
 
 @ObfuscatedName("lb")

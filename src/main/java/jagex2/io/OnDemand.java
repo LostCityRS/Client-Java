@@ -4,6 +4,8 @@ import deob.ObfuscatedName;
 import jagex2.client.Client;
 import jagex2.datastruct.DoublyLinkList;
 import jagex2.datastruct.LinkList;
+import sign.signlink;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +13,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.zip.CRC32;
 import java.util.zip.GZIPInputStream;
-import sign.signlink;
 
 @ObfuscatedName("vb")
 public class OnDemand extends OnDemandProvider implements Runnable {
@@ -62,28 +63,28 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public boolean active = false;
 
 	@ObfuscatedName("vb.w")
-	public int importantCount;
+	public int urgentCount;
 
 	@ObfuscatedName("vb.x")
 	public int requestCount;
 
 	@ObfuscatedName("vb.y")
-	public DoublyLinkList requests = new DoublyLinkList();
+	public final DoublyLinkList requests = new DoublyLinkList();
 
 	@ObfuscatedName("vb.z")
-	public LinkList queue = new LinkList();
+	public final LinkList queue = new LinkList();
 
 	@ObfuscatedName("vb.A")
-	public LinkList missing = new LinkList();
+	public final LinkList missing = new LinkList();
 
 	@ObfuscatedName("vb.B")
-	public LinkList pending = new LinkList();
+	public final LinkList pending = new LinkList();
 
 	@ObfuscatedName("vb.C")
-	public LinkList completed = new LinkList();
+	public final LinkList completed = new LinkList();
 
 	@ObfuscatedName("vb.D")
-	public LinkList prefetches = new LinkList();
+	public final LinkList prefetches = new LinkList();
 
 	@ObfuscatedName("vb.E")
 	public String message = "";
@@ -131,299 +132,346 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public Socket socket;
 
 	@ObfuscatedName("vb.a(Lyb;Lclient;)V")
-	public final void unpack(Jagfile arg0, Client arg1) {
-		String[] var3 = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
-		for (int var4 = 0; var4 < 4; var4++) {
-			byte[] var5 = arg0.read(var3[var4], null);
-			int var6 = var5.length / 2;
-			Packet var7 = new Packet(var5);
-			this.versions[var4] = new int[var6];
-			this.priorities[var4] = new byte[var6];
-			for (int var8 = 0; var8 < var6; var8++) {
-				this.versions[var4][var8] = var7.g2();
+	public void unpack(Jagfile jag, Client app) {
+		String[] version = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
+		for (int archive = 0; archive < 4; archive++) {
+			byte[] data = jag.read(version[archive], null);
+			int count = data.length / 2;
+			Packet buf = new Packet(data);
+
+			this.versions[archive] = new int[count];
+			this.priorities[archive] = new byte[count];
+
+			for (int file = 0; file < count; file++) {
+				this.versions[archive][file] = buf.g2();
 			}
 		}
-		String[] var9 = new String[] { "model_crc", "anim_crc", "midi_crc", "map_crc" };
-		for (int var10 = 0; var10 < 4; var10++) {
-			byte[] var11 = arg0.read(var9[var10], null);
-			int var12 = var11.length / 4;
-			Packet var13 = new Packet(var11);
-			this.crcs[var10] = new int[var12];
-			for (int var14 = 0; var14 < var12; var14++) {
-				this.crcs[var10][var14] = var13.g4();
+
+		String[] crc = new String[] { "model_crc", "anim_crc", "midi_crc", "map_crc" };
+		for (int archive = 0; archive < 4; archive++) {
+			byte[] data = jag.read(crc[archive], null);
+			int count = data.length / 4;
+			Packet buf = new Packet(data);
+
+			this.crcs[archive] = new int[count];
+
+			for (int file = 0; file < count; file++) {
+				this.crcs[archive][file] = buf.g4();
 			}
 		}
-		byte[] var15 = arg0.read("model_index", null);
-		int var16 = this.versions[0].length;
-		this.models = new byte[var16];
-		for (int var17 = 0; var17 < var16; var17++) {
-			if (var17 < var15.length) {
-				this.models[var17] = var15[var17];
+
+		byte[] data = jag.read("model_index", null);
+		int count = this.versions[0].length;
+
+		this.models = new byte[count];
+
+		for (int file = 0; file < count; file++) {
+			if (file < data.length) {
+				this.models[file] = data[file];
 			} else {
-				this.models[var17] = 0;
+				this.models[file] = 0;
 			}
 		}
-		byte[] var18 = arg0.read("map_index", null);
-		Packet var19 = new Packet(var18);
-		int var20 = var18.length / 7;
-		this.mapIndex = new int[var20];
-		this.mapLand = new int[var20];
-		this.mapLoc = new int[var20];
-		this.mapMembers = new int[var20];
-		for (int var21 = 0; var21 < var20; var21++) {
-			this.mapIndex[var21] = var19.g2();
-			this.mapLand[var21] = var19.g2();
-			this.mapLoc[var21] = var19.g2();
-			this.mapMembers[var21] = var19.g1();
+
+		data = jag.read("map_index", null);
+		Packet buf = new Packet(data);
+		count = data.length / 7;
+
+		this.mapIndex = new int[count];
+		this.mapLand = new int[count];
+		this.mapLoc = new int[count];
+		this.mapMembers = new int[count];
+
+		for (int i = 0; i < count; i++) {
+			this.mapIndex[i] = buf.g2();
+			this.mapLand[i] = buf.g2();
+			this.mapLoc[i] = buf.g2();
+			this.mapMembers[i] = buf.g1();
 		}
-		byte[] var22 = arg0.read("anim_index", null);
-		Packet var23 = new Packet(var22);
-		int var24 = var22.length / 2;
-		this.animIndex = new int[var24];
-		for (int var25 = 0; var25 < var24; var25++) {
-			this.animIndex[var25] = var23.g2();
+
+		data = jag.read("anim_index", null);
+		buf = new Packet(data);
+		count = data.length / 2;
+
+		this.animIndex = new int[count];
+
+		for (int frame = 0; frame < count; frame++) {
+			this.animIndex[frame] = buf.g2();
 		}
-		byte[] var26 = arg0.read("midi_index", null);
-		Packet var27 = new Packet(var26);
-		int var28 = var26.length;
-		this.midiIndex = new int[var28];
-		for (int var29 = 0; var29 < var28; var29++) {
-			this.midiIndex[var29] = var27.g1();
+
+		data = jag.read("midi_index", null);
+		buf = new Packet(data);
+		count = data.length;
+
+		this.midiIndex = new int[count];
+
+		for (int file = 0; file < count; file++) {
+			this.midiIndex[file] = buf.g1();
 		}
-		this.app = arg1;
+
+		this.app = app;
 		this.running = true;
 		this.app.startThread(this, 2);
 	}
 
 	@ObfuscatedName("vb.a()V")
-	public final void stop() {
+	public void stop() {
 		this.running = false;
 	}
 
 	@ObfuscatedName("vb.a(II)I")
-	public final int getFileCount(int arg0) {
-		return this.versions[arg0].length;
+	public int getFileCount(int archive) {
+		return this.versions[archive].length;
 	}
 
 	@ObfuscatedName("vb.b(I)I")
-	public final int getAnimCount() {
+	public int getAnimCount() {
 		return this.animIndex.length;
 	}
 
 	@ObfuscatedName("vb.a(IIII)I")
-	public final int getMapFile(int arg0, int arg1, int arg2) {
-		int var5 = (arg1 << 8) + arg2;
-		for (int var7 = 0; var7 < this.mapIndex.length; var7++) {
-			if (this.mapIndex[var7] == var5) {
-				if (arg0 == 0) {
-					return this.mapLand[var7];
+	public int getMapFile(int type, int x, int z) {
+		int index = (x << 8) + z;
+
+		for (int i = 0; i < this.mapIndex.length; i++) {
+			if (this.mapIndex[i] == index) {
+				if (type == 0) {
+					return this.mapLand[i];
+				} else {
+					return this.mapLoc[i];
 				}
-				return this.mapLoc[var7];
 			}
 		}
+
 		return -1;
 	}
 
 	@ObfuscatedName("vb.a(IZ)V")
-	public final void prefetchMaps(boolean arg1) {
-		int var3 = this.mapIndex.length;
-		for (int var4 = 0; var4 < var3; var4++) {
-			if (arg1 || this.mapMembers[var4] != 0) {
-				this.prefetchPriority(this.mapLoc[var4], 3, (byte) 2);
-				this.prefetchPriority(this.mapLand[var4], 3, (byte) 2);
+	public void prefetchMaps(boolean members) {
+		int count = this.mapIndex.length;
+		for (int i = 0; i < count; i++) {
+			if (members || this.mapMembers[i] != 0) {
+				this.prefetchPriority(this.mapLoc[i], 3, (byte) 2);
+				this.prefetchPriority(this.mapLand[i], 3, (byte) 2);
 			}
 		}
 	}
 
 	@ObfuscatedName("vb.b(II)Z")
-	public final boolean hasMapLocFile(int arg1) {
-		for (int var3 = 0; var3 < this.mapIndex.length; var3++) {
-			if (this.mapLoc[var3] == arg1) {
+	public boolean hasMapLocFile(int id) {
+		for (int i = 0; i < this.mapIndex.length; i++) {
+			if (this.mapLoc[i] == id) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
 	@ObfuscatedName("vb.c(II)I")
-	public final int getModelFlags(int arg0) {
-		return this.models[arg0] & 0xFF;
+	public int getModelFlags(int id) {
+		return this.models[id] & 0xFF;
 	}
 
 	@ObfuscatedName("vb.d(II)Z")
-	public final boolean shouldPrefetchMidi(int arg1) {
-		return this.midiIndex[arg1] == 1;
+	public boolean shouldPrefetchMidi(int id) {
+		return this.midiIndex[id] == 1;
 	}
 
 	@ObfuscatedName("vb.a(I)V")
-	public final void requestModel(int arg0) {
-		this.request(0, arg0);
+	public void requestModel(int id) {
+		this.request(0, id);
 	}
 
 	@ObfuscatedName("vb.e(II)V")
-	public final void request(int arg0, int arg1) {
-		if (arg0 < 0 || arg0 > this.versions.length || arg1 < 0 || arg1 > this.versions[arg0].length || this.versions[arg0][arg1] == 0) {
+	public void request(int archive, int file) {
+		if (archive < 0 || archive > this.versions.length || file < 0 || file > this.versions[archive].length || this.versions[archive][file] == 0) {
 			return;
 		}
-		DoublyLinkList var3 = this.requests;
+
 		synchronized (this.requests) {
-			for (OnDemandRequest var4 = (OnDemandRequest) this.requests.head(); var4 != null; var4 = (OnDemandRequest) this.requests.next()) {
-				if (var4.archive == arg0 && var4.file == arg1) {
+			for (OnDemandRequest req = (OnDemandRequest) this.requests.head(); req != null; req = (OnDemandRequest) this.requests.next()) {
+				if (req.archive == archive && req.file == file) {
 					return;
 				}
 			}
-			OnDemandRequest var5 = new OnDemandRequest();
-			var5.archive = arg0;
-			var5.file = arg1;
-			var5.urgent = true;
-			LinkList var6 = this.queue;
+
+			OnDemandRequest req = new OnDemandRequest();
+			req.archive = archive;
+			req.file = file;
+			req.urgent = true;
+
 			synchronized (this.queue) {
-				this.queue.push(var5);
+				this.queue.push(req);
 			}
-			this.requests.push(var5);
+
+			this.requests.push(req);
 		}
 	}
 
 	@ObfuscatedName("vb.b()I")
-	public final int remaining() {
-		DoublyLinkList var1 = this.requests;
+	public int remaining() {
 		synchronized (this.requests) {
 			return this.requests.size();
 		}
 	}
 
 	@ObfuscatedName("vb.c()Lnb;")
-	public final OnDemandRequest cycle() {
-		LinkList var1 = this.completed;
-		OnDemandRequest var2;
+	public OnDemandRequest cycle() {
+		OnDemandRequest req;
 		synchronized (this.completed) {
-			var2 = (OnDemandRequest) this.completed.pop();
+			req = (OnDemandRequest) this.completed.pop();
 		}
-		if (var2 == null) {
+
+		if (req == null) {
 			return null;
 		}
-		DoublyLinkList var3 = this.requests;
+
 		synchronized (this.requests) {
-			var2.unlink2();
+			req.unlink2();
 		}
-		if (var2.data == null) {
-			return var2;
+
+		if (req.data == null) {
+			return req;
 		}
-		int var4 = 0;
+
+		int pos = 0;
 		try {
-			GZIPInputStream var5 = new GZIPInputStream(new ByteArrayInputStream(var2.data));
+			GZIPInputStream input = new GZIPInputStream(new ByteArrayInputStream(req.data));
 			while (true) {
-				if (var4 == this.data.length) {
+				if (pos == this.data.length) {
 					throw new RuntimeException("buffer overflow!");
 				}
-				int var6 = var5.read(this.data, var4, this.data.length - var4);
-				if (var6 == -1) {
+
+				int n = input.read(this.data, pos, this.data.length - pos);
+				if (n == -1) {
 					break;
 				}
-				var4 += var6;
+
+				pos += n;
 			}
-		} catch (IOException var10) {
+		} catch (IOException ignore) {
 			throw new RuntimeException("error unzipping");
 		}
-		var2.data = new byte[var4];
-		for (int var7 = 0; var7 < var4; var7++) {
-			var2.data[var7] = this.data[var7];
+
+		req.data = new byte[pos];
+		for (int i = 0; i < pos; i++) {
+			req.data[i] = this.data[i];
 		}
-		return var2;
+		return req;
 	}
 
 	@ObfuscatedName("vb.a(IIBI)V")
-	public final void prefetchPriority(int arg0, int arg1, byte arg2) {
-		if (this.app.fileStreams[0] == null || this.versions[arg1][arg0] == 0) {
+	public void prefetchPriority(int file, int archive, byte priority) {
+		if (this.app.fileStreams[0] == null || this.versions[archive][file] == 0) {
 			return;
 		}
-		byte[] var5 = this.app.fileStreams[arg1 + 1].read(arg0);
-		if (this.validate(var5, this.crcs[arg1][arg0], this.versions[arg1][arg0])) {
+
+		byte[] data = this.app.fileStreams[archive + 1].read(file);
+		if (this.validate(data, this.crcs[archive][file], this.versions[archive][file])) {
 			return;
 		}
-		this.priorities[arg1][arg0] = arg2;
-		if (arg2 > this.topPriority) {
-			this.topPriority = arg2;
+
+		this.priorities[archive][file] = priority;
+		if (priority > this.topPriority) {
+			this.topPriority = priority;
 		}
+
 		this.totalPrefetchFiles++;
 	}
 
 	@ObfuscatedName("vb.a(Z)V")
-	public final void clearPrefetches() {
-		LinkList var2 = this.prefetches;
+	public void clearPrefetches() {
 		synchronized (this.prefetches) {
 			this.prefetches.clear();
 		}
 	}
 
 	@ObfuscatedName("vb.a(III)V")
-	public final void prefetch(int arg1, int arg2) {
-		if (this.app.fileStreams[0] == null || (this.versions[arg2][arg1] == 0 || (this.priorities[arg2][arg1] == 0 || this.topPriority == 0))) {
+	public void prefetch(int file, int archive) {
+		if (this.app.fileStreams[0] == null || (this.versions[archive][file] == 0 || (this.priorities[archive][file] == 0 || this.topPriority == 0))) {
 			return;
 		}
-		OnDemandRequest var4 = new OnDemandRequest();
-		var4.archive = arg2;
-		var4.file = arg1;
-		var4.urgent = false;
-		LinkList var6 = this.prefetches;
+
+		OnDemandRequest req = new OnDemandRequest();
+		req.archive = archive;
+		req.file = file;
+		req.urgent = false;
+
 		synchronized (this.prefetches) {
-			this.prefetches.push(var4);
+			this.prefetches.push(req);
 		}
 	}
 
-	public final void run() {
+	public void run() {
 		try {
 			while (this.running) {
 				this.cycle++;
-				byte var1 = 20;
+
+				byte del = 20;
 				if (this.topPriority == 0 && this.app.fileStreams[0] != null) {
-					var1 = 50;
+					del = 50;
 				}
+
 				try {
-					Thread.sleep((long) var1);
-				} catch (Exception var9) {
+					Thread.sleep((long) del);
+				} catch (Exception ignore) {
 				}
+
 				this.active = true;
-				for (int var2 = 0; var2 < 100 && this.active; var2++) {
+
+				for (int i = 0; i < 100 && this.active; i++) {
 					this.active = false;
+
 					this.handleQueue();
 					this.handlePending();
-					if (this.importantCount == 0 && var2 >= 5) {
+
+					if (this.urgentCount == 0 && i >= 5) {
 						break;
 					}
+
 					this.handleExtras();
+
 					if (this.in != null) {
 						this.read();
 					}
 				}
-				boolean var3 = false;
-				for (OnDemandRequest var4 = (OnDemandRequest) this.pending.head(); var4 != null; var4 = (OnDemandRequest) this.pending.next()) {
-					if (var4.urgent) {
-						var3 = true;
-						var4.cycle++;
-						if (var4.cycle > 50) {
-							var4.cycle = 0;
-							this.send(var4);
+
+				boolean loading = false;
+				for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
+					if (req.urgent) {
+						loading = true;
+
+						req.cycle++;
+						if (req.cycle > 50) {
+							req.cycle = 0;
+
+							this.send(req);
 						}
 					}
 				}
-				if (!var3) {
-					for (OnDemandRequest var5 = (OnDemandRequest) this.pending.head(); var5 != null; var5 = (OnDemandRequest) this.pending.next()) {
-						var3 = true;
-						var5.cycle++;
-						if (var5.cycle > 50) {
-							var5.cycle = 0;
-							this.send(var5);
+
+				if (!loading) {
+					for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
+						loading = true;
+
+						req.cycle++;
+						if (req.cycle > 50) {
+							req.cycle = 0;
+
+							this.send(req);
 						}
 					}
 				}
-				if (var3) {
+
+				if (loading) {
 					this.waitCycles++;
 					if (this.waitCycles > 750) {
 						try {
 							this.socket.close();
-						} catch (Exception var8) {
+						} catch (Exception ignore) {
 						}
+
 						this.socket = null;
 						this.in = null;
 						this.out = null;
@@ -433,134 +481,156 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					this.waitCycles = 0;
 					this.message = "";
 				}
+
 				if (this.app.ingame && this.socket != null && this.out != null && (this.topPriority > 0 || this.app.fileStreams[0] == null)) {
 					this.heartbeatCycle++;
 					if (this.heartbeatCycle > 500) {
 						this.heartbeatCycle = 0;
+
 						this.buf[0] = 0;
 						this.buf[1] = 0;
 						this.buf[2] = 0;
 						this.buf[3] = 10;
+
 						try {
 							this.out.write(this.buf, 0, 4);
-						} catch (IOException var7) {
+						} catch (IOException ignore) {
 							this.waitCycles = 5000;
 						}
 					}
 				}
 			}
-		} catch (Exception var10) {
-			signlink.reporterror("od_ex " + var10.getMessage());
+		} catch (Exception ex) {
+			signlink.reporterror("od_ex " + ex.getMessage());
 		}
 	}
 
 	@ObfuscatedName("vb.b(Z)V")
-	public final void handleQueue() {
-		LinkList var2 = this.queue;
-		OnDemandRequest var3;
+	public void handleQueue() {
+		OnDemandRequest req;
 		synchronized (this.queue) {
-			var3 = (OnDemandRequest) this.queue.pop();
+			req = (OnDemandRequest) this.queue.pop();
 		}
-		while (var3 != null) {
+		while (req != null) {
 			this.active = true;
-			byte[] var4 = null;
+			byte[] data = null;
+
 			if (this.app.fileStreams[0] != null) {
-				var4 = this.app.fileStreams[var3.archive + 1].read(var3.file);
+				data = this.app.fileStreams[req.archive + 1].read(req.file);
 			}
-			if (!this.validate(var4, this.crcs[var3.archive][var3.file], this.versions[var3.archive][var3.file])) {
-				var4 = null;
+
+			if (!this.validate(data, this.crcs[req.archive][req.file], this.versions[req.archive][req.file])) {
+				data = null;
 			}
-			LinkList var5 = this.queue;
+
 			synchronized (this.queue) {
-				if (var4 == null) {
-					this.missing.push(var3);
+				if (data == null) {
+					this.missing.push(req);
 				} else {
-					var3.data = var4;
-					LinkList var6 = this.completed;
+					req.data = data;
+
 					synchronized (this.completed) {
-						this.completed.push(var3);
+						this.completed.push(req);
 					}
 				}
-				var3 = (OnDemandRequest) this.queue.pop();
+
+				req = (OnDemandRequest) this.queue.pop();
 			}
 		}
 	}
 
 	@ObfuscatedName("vb.c(I)V")
-	public final void handlePending() {
-		this.importantCount = 0;
+	public void handlePending() {
+		this.urgentCount = 0;
 		this.requestCount = 0;
-		for (OnDemandRequest var2 = (OnDemandRequest) this.pending.head(); var2 != null; var2 = (OnDemandRequest) this.pending.next()) {
-			if (var2.urgent) {
-				this.importantCount++;
+
+		for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
+			if (req.urgent) {
+				this.urgentCount++;
 			} else {
 				this.requestCount++;
 			}
 		}
-		while (this.importantCount < 10) {
-			OnDemandRequest var3 = (OnDemandRequest) this.missing.pop();
-			if (var3 == null) {
+
+		while (this.urgentCount < 10) {
+			OnDemandRequest req = (OnDemandRequest) this.missing.pop();
+			if (req == null) {
 				break;
 			}
-			if (this.priorities[var3.archive][var3.file] != 0) {
+
+			if (this.priorities[req.archive][req.file] != 0) {
 				this.loadedPrefetchFiles++;
 			}
-			this.priorities[var3.archive][var3.file] = 0;
-			this.pending.push(var3);
-			this.importantCount++;
-			this.send(var3);
+
+			this.priorities[req.archive][req.file] = 0;
+			this.pending.push(req);
+			this.urgentCount++;
+
+			this.send(req);
 			this.active = true;
 		}
 	}
 
 	@ObfuscatedName("vb.c(Z)V")
-	public final void handleExtras() {
-		while (this.importantCount == 0) {
+	public void handleExtras() {
+		while (this.urgentCount == 0) {
 			if (this.requestCount >= 10 || this.topPriority == 0) {
 				return;
 			}
-			LinkList var3 = this.prefetches;
-			OnDemandRequest var4;
+
+			OnDemandRequest extra;
 			synchronized (this.prefetches) {
-				var4 = (OnDemandRequest) this.prefetches.pop();
+				extra = (OnDemandRequest) this.prefetches.pop();
 			}
-			while (var4 != null) {
-				if (this.priorities[var4.archive][var4.file] != 0) {
-					this.priorities[var4.archive][var4.file] = 0;
-					this.pending.push(var4);
-					this.send(var4);
+
+			while (extra != null) {
+				if (this.priorities[extra.archive][extra.file] != 0) {
+					this.priorities[extra.archive][extra.file] = 0;
+					this.pending.push(extra);
+
+					this.send(extra);
 					this.active = true;
+
 					if (this.loadedPrefetchFiles < this.totalPrefetchFiles) {
 						this.loadedPrefetchFiles++;
 					}
+
 					this.message = "Loading extra files - " + this.loadedPrefetchFiles * 100 / this.totalPrefetchFiles + "%";
 					this.requestCount++;
+
 					if (this.requestCount == 10) {
 						return;
 					}
 				}
-				LinkList var5 = this.prefetches;
+
 				synchronized (this.prefetches) {
-					var4 = (OnDemandRequest) this.prefetches.pop();
+					extra = (OnDemandRequest) this.prefetches.pop();
 				}
 			}
-			for (int var6 = 0; var6 < 4; var6++) {
-				byte[] var7 = this.priorities[var6];
-				int var8 = var7.length;
-				for (int var9 = 0; var9 < var8; var9++) {
-					if (var7[var9] == this.topPriority) {
-						var7[var9] = 0;
-						OnDemandRequest var10 = new OnDemandRequest();
-						var10.archive = var6;
-						var10.file = var9;
-						var10.urgent = false;
-						this.pending.push(var10);
-						this.send(var10);
+
+			for (int archive = 0; archive < 4; archive++) {
+				byte[] priorities = this.priorities[archive];
+				int count = priorities.length;
+
+				for (int i = 0; i < count; i++) {
+					if (priorities[i] == this.topPriority) {
+						priorities[i] = 0;
+
+						OnDemandRequest req = new OnDemandRequest();
+						req.archive = archive;
+						req.file = i;
+						req.urgent = false;
+						this.pending.push(req);
+
+						this.send(req);
 						this.active = true;
+
 						if (this.loadedPrefetchFiles < this.totalPrefetchFiles) {
 							this.loadedPrefetchFiles++;
 						}
+
 						this.message = "Loading extra files - " + this.loadedPrefetchFiles * 100 / this.totalPrefetchFiles + "%";
+
 						this.requestCount++;
 						if (this.requestCount == 10) {
 							return;
@@ -568,80 +638,99 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					}
 				}
 			}
+
 			this.topPriority--;
 		}
 	}
 
 	@ObfuscatedName("vb.d(I)V")
-	public final void read() {
+	public void read() {
 		try {
-			int var2 = this.in.available();
-			if (this.partAvailable == 0 && var2 >= 6) {
+			int available = this.in.available();
+
+			if (this.partAvailable == 0 && available >= 6) {
 				this.active = true;
-				for (int var3 = 0; var3 < 6; var3 += this.in.read(this.buf, var3, 6 - var3)) {
+
+				for (int off = 0; off < 6; off += this.in.read(this.buf, off, 6 - off)) {
 				}
-				int var4 = this.buf[0] & 0xFF;
-				int var5 = ((this.buf[1] & 0xFF) << 8) + (this.buf[2] & 0xFF);
-				int var6 = ((this.buf[3] & 0xFF) << 8) + (this.buf[4] & 0xFF);
-				int var7 = this.buf[5] & 0xFF;
+
+				int archive = this.buf[0] & 0xFF;
+				int file = ((this.buf[1] & 0xFF) << 8) + (this.buf[2] & 0xFF);
+				int size = ((this.buf[3] & 0xFF) << 8) + (this.buf[4] & 0xFF);
+				int part = this.buf[5] & 0xFF;
+
 				this.current = null;
-				for (OnDemandRequest var8 = (OnDemandRequest) this.pending.head(); var8 != null; var8 = (OnDemandRequest) this.pending.next()) {
-					if (var8.archive == var4 && var8.file == var5) {
-						this.current = var8;
+
+				for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
+					if (req.archive == archive && req.file == file) {
+						this.current = req;
 					}
+
 					if (this.current != null) {
-						var8.cycle = 0;
+						req.cycle = 0;
 					}
 				}
+
 				if (this.current != null) {
 					this.waitCycles = 0;
-					if (var6 == 0) {
-						signlink.reporterror("Rej: " + var4 + "," + var5);
+
+					if (size == 0) {
+						signlink.reporterror("Rej: " + archive + "," + file);
+
 						this.current.data = null;
+
 						if (this.current.urgent) {
-							LinkList var9 = this.completed;
 							synchronized (this.completed) {
 								this.completed.push(this.current);
 							}
 						} else {
 							this.current.unlink();
 						}
+
 						this.current = null;
 					} else {
-						if (this.current.data == null && var7 == 0) {
-							this.current.data = new byte[var6];
+						if (this.current.data == null && part == 0) {
+							this.current.data = new byte[size];
 						}
-						if (this.current.data == null && var7 != 0) {
+
+						if (this.current.data == null && part != 0) {
 							throw new IOException("missing start of file");
 						}
 					}
 				}
-				this.partOffset = var7 * 500;
+
+				this.partOffset = part * 500;
 				this.partAvailable = 500;
-				if (this.partAvailable > var6 - var7 * 500) {
-					this.partAvailable = var6 - var7 * 500;
+				if (this.partAvailable > size - part * 500) {
+					this.partAvailable = size - part * 500;
 				}
 			}
-			if (this.partAvailable > 0 && var2 >= this.partAvailable) {
+
+			if (this.partAvailable > 0 && available >= this.partAvailable) {
 				this.active = true;
-				byte[] var10 = this.buf;
-				int var11 = 0;
+
+				byte[] dst = this.buf;
+				int off = 0;
+
 				if (this.current != null) {
-					var10 = this.current.data;
-					var11 = this.partOffset;
+					dst = this.current.data;
+					off = this.partOffset;
 				}
-				for (int var12 = 0; var12 < this.partAvailable; var12 += this.in.read(var10, var12 + var11, this.partAvailable - var12)) {
+
+				for (int n = 0; n < this.partAvailable; n += this.in.read(dst, n + off, this.partAvailable - n)) {
 				}
-				if (this.partAvailable + this.partOffset >= var10.length && this.current != null) {
+
+				if (this.partAvailable + this.partOffset >= dst.length && this.current != null) {
 					if (this.app.fileStreams[0] != null) {
-						this.app.fileStreams[this.current.archive + 1].write(var10, this.current.file, var10.length);
+						this.app.fileStreams[this.current.archive + 1].write(dst, this.current.file, dst.length);
 					}
+
 					if (!this.current.urgent && this.current.archive == 3) {
 						this.current.urgent = true;
 						this.current.archive = 93;
 					}
+
 					if (this.current.urgent) {
-						LinkList var13 = this.completed;
 						synchronized (this.completed) {
 							this.completed.push(this.current);
 						}
@@ -649,13 +738,15 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 						this.current.unlink();
 					}
 				}
+
 				this.partAvailable = 0;
 			}
-		} catch (IOException var18) {
+		} catch (IOException ignore) {
 			try {
 				this.socket.close();
-			} catch (Exception var15) {
+			} catch (Exception ignore2) {
 			}
+
 			this.socket = null;
 			this.in = null;
 			this.out = null;
@@ -664,57 +755,69 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a([BIII)Z")
-	public final boolean validate(byte[] arg0, int arg2, int arg3) {
-		if (arg0 == null || arg0.length < 2) {
+	public boolean validate(byte[] src, int expectedCrc, int expectedVersion) {
+		if (src == null || src.length < 2) {
 			return false;
 		}
-		int var5 = arg0.length - 2;
-		int var6 = ((arg0[var5] & 0xFF) << 8) + (arg0[var5 + 1] & 0xFF);
+
+		int versionPos = src.length - 2;
+		int version = ((src[versionPos] & 0xFF) << 8) + (src[versionPos + 1] & 0xFF);
+
 		this.crc32.reset();
-		this.crc32.update(arg0, 0, var5);
-		int var7 = (int) this.crc32.getValue();
-		if (var6 == arg3) {
-			return var7 == arg2;
+		this.crc32.update(src, 0, versionPos);
+
+		int crc = (int) this.crc32.getValue();
+		if (version == expectedVersion) {
+			return crc == expectedCrc;
 		} else {
 			return false;
 		}
 	}
 
 	@ObfuscatedName("vb.a(Lnb;B)V")
-	public final void send(OnDemandRequest arg0) {
+	public void send(OnDemandRequest req) {
 		try {
 			if (this.socket == null) {
-				long var3 = System.currentTimeMillis();
-				if (var3 - this.socketOpenTime < 5000L) {
+				long now = System.currentTimeMillis();
+				if (now - this.socketOpenTime < 5000L) {
 					return;
 				}
-				this.socketOpenTime = var3;
+
+				this.socketOpenTime = now;
 				this.socket = this.app.openSocket(Client.portOffset + 43594);
 				this.in = this.socket.getInputStream();
 				this.out = this.socket.getOutputStream();
+
 				this.out.write(15);
-				for (int var5 = 0; var5 < 8; var5++) {
+
+				for (int i = 0; i < 8; i++) {
 					this.in.read();
 				}
+
 				this.waitCycles = 0;
 			}
-			this.buf[0] = (byte) arg0.archive;
-			this.buf[1] = (byte) (arg0.file >> 8);
-			this.buf[2] = (byte) arg0.file;
-			if (arg0.urgent) {
+
+			this.buf[0] = (byte) req.archive;
+
+			this.buf[1] = (byte) (req.file >> 8);
+			this.buf[2] = (byte) req.file;
+
+			if (req.urgent) {
 				this.buf[3] = 2;
 			} else if (this.app.ingame) {
 				this.buf[3] = 0;
 			} else {
 				this.buf[3] = 1;
 			}
+
 			this.out.write(this.buf, 0, 4);
 			this.heartbeatCycle = 0;
-		} catch (IOException var8) {
+		} catch (IOException ignore) {
 			try {
 				this.socket.close();
-			} catch (Exception var7) {
+			} catch (Exception ignore2) {
 			}
+
 			this.socket = null;
 			this.in = null;
 			this.out = null;

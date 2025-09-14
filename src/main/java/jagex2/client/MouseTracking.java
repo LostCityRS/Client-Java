@@ -12,7 +12,7 @@ public class MouseTracking implements Runnable {
 	public boolean tracking = true;
 
 	@ObfuscatedName("fc.c")
-	public Object lock = new Object();
+	public final Object lock = new Object();
 
 	@ObfuscatedName("fc.d")
 	public int length;
@@ -23,13 +23,12 @@ public class MouseTracking implements Runnable {
 	@ObfuscatedName("fc.f")
 	public int[] z = new int[500];
 
-	public MouseTracking(Client arg1) {
-		this.app = arg1;
+	public MouseTracking(Client app) {
+		this.app = app;
 	}
 
 	public void run() {
 		while (this.tracking) {
-			Object var1 = this.lock;
 			synchronized (this.lock) {
 				if (this.length < 500) {
 					this.x[this.length] = this.app.mouseX;
@@ -37,9 +36,10 @@ public class MouseTracking implements Runnable {
 					this.length++;
 				}
 			}
+
 			try {
 				Thread.sleep(50L);
-			} catch (Exception var2) {
+			} catch (Exception ignore) {
 			}
 		}
 	}

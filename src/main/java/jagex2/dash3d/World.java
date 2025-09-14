@@ -105,7 +105,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(IIIII)V")
-	public final void spreadHeight(int arg1, int arg2, int arg3, int arg4) {
+	public void spreadHeight(int arg1, int arg2, int arg3, int arg4) {
 		for (int var6 = arg2; var6 <= arg2 + arg4; var6++) {
 			for (int var7 = arg3; var7 <= arg3 + arg1; var7++) {
 				if (var7 >= 0 && var7 < this.maxTileX && var6 >= 0 && var6 < this.maxTileZ) {
@@ -128,7 +128,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(Z[BIIII)V")
-	public final void loadGround(byte[] arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void loadGround(byte[] arg1, int arg2, int arg3, int arg4, int arg5) {
 		Packet var7 = new Packet(arg1);
 		for (int var8 = 0; var8 < 4; var8++) {
 			for (int var9 = 0; var9 < 64; var9++) {
@@ -190,7 +190,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a([BIBI)Z")
-	public static final boolean checkLocations(byte[] arg0, int arg1, int arg3) {
+	public static boolean checkLocations(byte[] arg0, int arg1, int arg3) {
 		boolean var4 = true;
 		Packet var5 = new Packet(arg0);
 		int var6 = -1;
@@ -232,7 +232,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(ILmb;Lvb;)V")
-	public static final void prefetchLocations(Packet arg1, OnDemand arg2) {
+	public static void prefetchLocations(Packet arg1, OnDemand arg2) {
 		int var3 = -1;
 		while (true) {
 			int var4 = arg1.gsmarts();
@@ -253,7 +253,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a([Ljc;I[BIBLs;)V")
-	public final void loadLocations(CollisionMap[] arg0, int arg1, byte[] arg2, int arg3, World3D arg5) {
+	public void loadLocations(CollisionMap[] arg0, int arg1, byte[] arg2, int arg3, World3D arg5) {
 		Packet var7 = new Packet(arg2);
 		int var8 = -1;
 		while (true) {
@@ -293,7 +293,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(IIIIIIILjc;Ls;)V")
-	public final void addLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg6, CollisionMap arg7, World3D arg8) {
+	public void addLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg6, CollisionMap arg7, World3D arg8) {
 		if (lowMem) {
 			if ((this.flags[arg6][arg1][arg2] & 0x10) != 0) {
 				return;
@@ -570,7 +570,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a([Ljc;ZLs;)V")
-	public final void build(CollisionMap[] arg0, World3D arg2) {
+	public void build(CollisionMap[] arg0, World3D arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			for (int var5 = 0; var5 < 104; var5++) {
 				for (int var6 = 0; var6 < 104; var6++) {
@@ -920,7 +920,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(II)I")
-	public static final int perlinNoise(int arg0, int arg1) {
+	public static int perlinNoise(int arg0, int arg1) {
 		int var2 = interpolatedNoise(arg0 + 45365, arg1 + 91923, 4) - 128 + (interpolatedNoise(arg0 + 10294, arg1 + 37821, 2) - 128 >> 1) + (interpolatedNoise(arg0, arg1, 1) - 128 >> 2);
 		int var3 = (int) ((double) var2 * 0.3D) + 35;
 		if (var3 < 10) {
@@ -932,7 +932,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(III)I")
-	public static final int interpolatedNoise(int arg0, int arg1, int arg2) {
+	public static int interpolatedNoise(int arg0, int arg1, int arg2) {
 		int var3 = arg0 / arg2;
 		int var4 = arg0 & arg2 - 1;
 		int var5 = arg1 / arg2;
@@ -947,13 +947,13 @@ public class World {
 	}
 
 	@ObfuscatedName("c.b(IIII)I")
-	public static final int interpolate(int arg0, int arg1, int arg2, int arg3) {
+	public static int interpolate(int arg0, int arg1, int arg2, int arg3) {
 		int var4 = 65536 - Pix3D.cosTable[arg2 * 1024 / arg3] >> 1;
 		return (arg0 * (65536 - var4) >> 16) + (arg1 * var4 >> 16);
 	}
 
 	@ObfuscatedName("c.b(II)I")
-	public static final int smoothNoise(int arg0, int arg1) {
+	public static int smoothNoise(int arg0, int arg1) {
 		int var2 = noise(arg0 - 1, arg1 - 1) + noise(arg0 + 1, arg1 - 1) + noise(arg0 - 1, arg1 + 1) + noise(arg0 + 1, arg1 + 1);
 		int var3 = noise(arg0 - 1, arg1) + noise(arg0 + 1, arg1) + noise(arg0, arg1 - 1) + noise(arg0, arg1 + 1);
 		int var4 = noise(arg0, arg1);
@@ -961,7 +961,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.c(II)I")
-	public static final int noise(int arg0, int arg1) {
+	public static int noise(int arg0, int arg1) {
 		int var2 = arg0 + arg1 * 57;
 		int var3 = var2 << 13 ^ var2;
 		int var4 = var3 * (var3 * var3 * 15731 + 789221) + 1376312589 & Integer.MAX_VALUE;
@@ -969,7 +969,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.d(II)I")
-	public static final int mulHsl(int arg0, int arg1) {
+	public static int mulHsl(int arg0, int arg1) {
 		if (arg0 == -1) {
 			return 12345678;
 		}
@@ -983,7 +983,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.e(II)I")
-	public final int adjustLightness(int arg0, int arg1) {
+	public int adjustLightness(int arg0, int arg1) {
 		if (arg0 == -2) {
 			return 12345678;
 		} else if (arg0 == -1) {
@@ -1005,7 +1005,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.b(III)I")
-	public final int hsl24to16(int arg0, int arg1, int arg2) {
+	public int hsl24to16(int arg0, int arg1, int arg2) {
 		if (arg2 > 179) {
 			arg1 /= 2;
 		}
@@ -1022,7 +1022,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.c(III)Z")
-	public static final boolean changeLocAvailable(int arg1, int arg2) {
+	public static boolean changeLocAvailable(int arg1, int arg2) {
 		LocType var3 = LocType.get(arg2);
 		if (arg1 == 11) {
 			arg1 = 10;
@@ -1034,7 +1034,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a([[[ILs;BIIIIIILjc;I)V")
-	public static final void addLoc(int[][][] arg0, World3D arg1, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, CollisionMap arg9, int arg10) {
+	public static void addLoc(int[][][] arg0, World3D arg1, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, CollisionMap arg9, int arg10) {
 		int var11 = arg0[arg7][arg5][arg4];
 		int var12 = arg0[arg7][arg5 + 1][arg4];
 		int var13 = arg0[arg7][arg5 + 1][arg4 + 1];

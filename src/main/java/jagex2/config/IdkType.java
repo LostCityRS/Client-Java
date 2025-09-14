@@ -33,45 +33,51 @@ public class IdkType {
 	public boolean disable = false;
 
 	@ObfuscatedName("lc.a(ILyb;)V")
-	public static void unpack(Jagfile arg1) {
-		Packet var2 = new Packet(arg1.read("idk.dat", null));
-		count = var2.g2();
+	public static void unpack(Jagfile jag) {
+		Packet data = new Packet(jag.read("idk.dat", null));
+
+		count = data.g2();
+
 		if (types == null) {
 			types = new IdkType[count];
 		}
-		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new IdkType();
+
+		for (int id = 0; id < count; id++) {
+			if (types[id] == null) {
+				types[id] = new IdkType();
 			}
-			types[var3].decode(var2);
+
+			types[id].decode(data);
 		}
 	}
 
 	@ObfuscatedName("lc.a(ZLmb;)V")
-	public void decode(Packet arg1) {
+	public void decode(Packet buf) {
 		while (true) {
-			int var3 = arg1.g1();
-			if (var3 == 0) {
-				return;
+			int code = buf.g1();
+			if (code == 0) {
+				break;
 			}
-			if (var3 == 1) {
-				this.type = arg1.g1();
-			} else if (var3 == 2) {
-				int var4 = arg1.g1();
-				this.models = new int[var4];
-				for (int var5 = 0; var5 < var4; var5++) {
-					this.models[var5] = arg1.g2();
+
+			if (code == 1) {
+				this.type = buf.g1();
+			} else if (code == 2) {
+				int count = buf.g1();
+
+				this.models = new int[count];
+				for (int i = 0; i < count; i++) {
+					this.models[i] = buf.g2();
 				}
-			} else if (var3 == 3) {
+			} else if (code == 3) {
 				this.disable = true;
-			} else if (var3 >= 40 && var3 < 50) {
-				this.recol_s[var3 - 40] = arg1.g2();
-			} else if (var3 >= 50 && var3 < 60) {
-				this.recol_d[var3 - 50] = arg1.g2();
-			} else if (var3 >= 60 && var3 < 70) {
-				this.head[var3 - 60] = arg1.g2();
+			} else if (code >= 40 && code < 50) {
+				this.recol_s[code - 40] = buf.g2();
+			} else if (code >= 50 && code < 60) {
+				this.recol_d[code - 50] = buf.g2();
+			} else if (code >= 60 && code < 70) {
+				this.head[code - 60] = buf.g2();
 			} else {
-				System.out.println("Error unrecognised config code: " + var3);
+				System.out.println("Error unrecognised config code: " + code);
 			}
 		}
 	}
@@ -81,13 +87,14 @@ public class IdkType {
 		if (this.models == null) {
 			return true;
 		}
-		boolean var2 = true;
-		for (int var3 = 0; var3 < this.models.length; var3++) {
-			if (!Model.request(this.models[var3])) {
-				var2 = false;
+
+		boolean ready = true;
+		for (int i = 0; i < this.models.length; i++) {
+			if (!Model.request(this.models[i])) {
+				ready = false;
 			}
 		}
-		return var2;
+		return ready;
 	}
 
 	@ObfuscatedName("lc.a(Z)Lfb;")
@@ -95,46 +102,52 @@ public class IdkType {
 		if (this.models == null) {
 			return null;
 		}
-		Model[] var2 = new Model[this.models.length];
-		for (int var3 = 0; var3 < this.models.length; var3++) {
-			var2[var3] = Model.tryGet(this.models[var3]);
+
+		Model[] models = new Model[this.models.length];
+		for (int i = 0; i < this.models.length; i++) {
+			models[i] = Model.tryGet(this.models[i]);
 		}
-		Model var4;
-		if (var2.length == 1) {
-			var4 = var2[0];
+
+		Model model;
+		if (models.length == 1) {
+			model = models[0];
 		} else {
-			var4 = new Model(var2, var2.length);
+			model = new Model(models, models.length);
 		}
-		for (int var5 = 0; var5 < 6 && this.recol_s[var5] != 0; var5++) {
-			var4.recolour(this.recol_s[var5], this.recol_d[var5]);
+
+		for (int i = 0; i < 6 && this.recol_s[i] != 0; i++) {
+			model.recolour(this.recol_s[i], this.recol_d[i]);
 		}
-		return var4;
+
+		return model;
 	}
 
 	@ObfuscatedName("lc.b(I)Z")
 	public boolean checkHead() {
-		boolean var2 = true;
-		for (int var3 = 0; var3 < 5; var3++) {
-			if (this.head[var3] != -1 && !Model.request(this.head[var3])) {
-				var2 = false;
+		boolean ready = true;
+		for (int i = 0; i < 5; i++) {
+			if (this.head[i] != -1 && !Model.request(this.head[i])) {
+				ready = false;
 			}
 		}
-		return var2;
+		return ready;
 	}
 
 	@ObfuscatedName("lc.a(B)Lfb;")
 	public Model getHeadModel() {
-		Model[] var2 = new Model[5];
-		int var3 = 0;
-		for (int var4 = 0; var4 < 5; var4++) {
-			if (this.head[var4] != -1) {
-				var2[var3++] = Model.tryGet(this.head[var4]);
+		Model[] models = new Model[5];
+
+		int count = 0;
+		for (int i = 0; i < 5; i++) {
+			if (this.head[i] != -1) {
+				models[count++] = Model.tryGet(this.head[i]);
 			}
 		}
-		Model var5 = new Model(var2, var3);
-		for (int var6 = 0; var6 < 6 && this.recol_s[var6] != 0; var6++) {
-			var5.recolour(this.recol_s[var6], this.recol_d[var6]);
+
+		Model model = new Model(models, count);
+		for (int i = 0; i < 6 && this.recol_s[i] != 0; i++) {
+			model.recolour(this.recol_s[i], this.recol_d[i]);
 		}
-		return var5;
+		return model;
 	}
 }

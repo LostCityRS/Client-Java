@@ -50,58 +50,65 @@ public class VarpType {
 	public boolean field1169 = false;
 
 	@ObfuscatedName("pc.a(ILyb;)V")
-	public static void unpack(Jagfile arg1) {
-		Packet var3 = new Packet(arg1.read("varp.dat", null));
+	public static void unpack(Jagfile jag) {
+		Packet data = new Packet(jag.read("varp.dat", null));
+
 		field1158 = 0;
-		count = var3.g2();
+		count = data.g2();
+
 		if (types == null) {
 			types = new VarpType[count];
 		}
+
 		if (field1159 == null) {
 			field1159 = new int[count];
 		}
-		for (int var4 = 0; var4 < count; var4++) {
-			if (types[var4] == null) {
-				types[var4] = new VarpType();
+
+		for (int id = 0; id < count; id++) {
+			if (types[id] == null) {
+				types[id] = new VarpType();
 			}
-			types[var4].decode(var3, var4);
+
+			types[id].decode(data, id);
 		}
-		if (var3.pos != var3.data.length) {
+
+		if (data.pos != data.data.length) {
 			System.out.println("varptype load mismatch");
 		}
 	}
 
 	@ObfuscatedName("pc.a(BLmb;I)V")
-	public void decode(Packet arg1, int arg2) {
+	public void decode(Packet buf, int id) {
 		while (true) {
-			int var5 = arg1.g1();
-			if (var5 == 0) {
+			int code = buf.g1();
+			if (code == 0) {
 				return;
 			}
-			if (var5 == 1) {
-				this.field1161 = arg1.g1();
-			} else if (var5 == 2) {
-				this.field1162 = arg1.g1();
-			} else if (var5 == 3) {
+
+			if (code == 1) {
+				this.field1161 = buf.g1();
+			} else if (code == 2) {
+				this.field1162 = buf.g1();
+			} else if (code == 3) {
 				this.field1163 = true;
-				field1159[field1158++] = arg2;
-			} else if (var5 == 4) {
+				field1159[field1158++] = id;
+			} else if (code == 4) {
 				this.field1164 = false;
-			} else if (var5 == 5) {
-				this.clientcode = arg1.g2();
-			} else if (var5 == 6) {
+			} else if (code == 5) {
+				this.clientcode = buf.g2();
+			} else if (code == 6) {
 				this.field1166 = true;
-			} else if (var5 == 7) {
-				this.field1167 = arg1.g4();
-			} else if (var5 == 8) {
+			} else if (code == 7) {
+				this.field1167 = buf.g4();
+			} else if (code == 8) {
 				this.field1168 = true;
 				this.field1169 = true;
-			} else if (var5 == 10) {
-				this.field1160 = arg1.gjstr();
-			} else if (var5 == 11) {
+			} else if (code == 10) {
+				this.field1160 = buf.gjstr();
+			} else if (code == 11) {
 				this.field1169 = true;
 			} else {
-				System.out.println("Error unrecognised config code: " + var5);
+				System.out.println("Error unrecognised config code: " + code);
 			}
 		}
 	}

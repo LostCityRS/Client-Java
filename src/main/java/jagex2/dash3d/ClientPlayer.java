@@ -80,300 +80,362 @@ public class ClientPlayer extends ClientEntity {
 	public Model locModel;
 
 	@ObfuscatedName("bb.a(Lmb;I)V")
-	public final void read(Packet arg0) {
-		arg0.pos = 0;
-		this.gender = arg0.g1();
-		this.headicon = arg0.g1();
-		for (int var3 = 0; var3 < 12; var3++) {
-			int var4 = arg0.g1();
+	public void read(Packet buf) {
+		buf.pos = 0;
+
+		this.gender = buf.g1();
+		this.headicon = buf.g1();
+
+		for (int i = 0; i < 12; i++) {
+			int var4 = buf.g1();
 			if (var4 == 0) {
-				this.appearance[var3] = 0;
+				this.appearance[i] = 0;
 			} else {
-				int var5 = arg0.g1();
-				this.appearance[var3] = (var4 << 8) + var5;
+				int var5 = buf.g1();
+				this.appearance[i] = (var4 << 8) + var5;
 			}
 		}
-		for (int var6 = 0; var6 < 5; var6++) {
-			int var7 = arg0.g1();
-			if (var7 < 0 || var7 >= Client.DESIGN_BODY_COLOUR[var6].length) {
+
+		for (int i = 0; i < 5; i++) {
+			int var7 = buf.g1();
+			if (var7 < 0 || var7 >= Client.DESIGN_BODY_COLOUR[i].length) {
 				var7 = 0;
 			}
-			this.colour[var6] = var7;
+
+			this.colour[i] = var7;
 		}
-		super.readyanim = arg0.g2();
+
+		super.readyanim = buf.g2();
 		if (super.readyanim == 65535) {
 			super.readyanim = -1;
 		}
-		super.turnanim = arg0.g2();
+
+		super.turnanim = buf.g2();
 		if (super.turnanim == 65535) {
 			super.turnanim = -1;
 		}
-		super.walkanim = arg0.g2();
+
+		super.walkanim = buf.g2();
 		if (super.walkanim == 65535) {
 			super.walkanim = -1;
 		}
-		super.walkanim_b = arg0.g2();
+
+		super.walkanim_b = buf.g2();
 		if (super.walkanim_b == 65535) {
 			super.walkanim_b = -1;
 		}
-		super.walkanim_l = arg0.g2();
+
+		super.walkanim_l = buf.g2();
 		if (super.walkanim_l == 65535) {
 			super.walkanim_l = -1;
 		}
-		super.walkanim_r = arg0.g2();
+
+		super.walkanim_r = buf.g2();
 		if (super.walkanim_r == 65535) {
 			super.walkanim_r = -1;
 		}
-		super.runanim = arg0.g2();
+
+		super.runanim = buf.g2();
 		if (super.runanim == 65535) {
 			super.runanim = -1;
 		}
-		this.name = JString.formatDisplayName(JString.fromBase37(arg0.g8()));
-		this.vislevel = arg0.g1();
+
+		this.name = JString.formatDisplayName(JString.fromBase37(buf.g8()));
+		this.vislevel = buf.g1();
+
 		this.visible = true;
 		this.hash = 0L;
-		for (int var8 = 0; var8 < 12; var8++) {
+
+		for (int i = 0; i < 12; i++) {
 			this.hash <<= 0x4;
-			if (this.appearance[var8] >= 256) {
-				this.hash += this.appearance[var8] - 256;
+
+			if (this.appearance[i] >= 256) {
+				this.hash += this.appearance[i] - 256;
 			}
 		}
+
 		if (this.appearance[0] >= 256) {
 			this.hash += this.appearance[0] - 256 >> 4;
 		}
+
 		if (this.appearance[1] >= 256) {
 			this.hash += this.appearance[1] - 256 >> 8;
 		}
-		for (int var9 = 0; var9 < 5; var9++) {
+
+		for (int i = 0; i < 5; i++) {
 			this.hash <<= 0x3;
-			this.hash += this.colour[var9];
+			this.hash += this.colour[i];
 		}
+
 		this.hash <<= 0x1;
 		this.hash += this.gender;
 	}
 
 	@ObfuscatedName("bb.a(I)Lfb;")
-	public final Model getModel() {
+	public Model getModel() {
 		if (!this.visible) {
 			return null;
 		}
-		Model var2 = this.getAnimatedModel();
-		if (var2 == null) {
+
+		Model model = this.getAnimatedModel();
+		if (model == null) {
 			return null;
 		}
-		super.height = var2.minY;
-		var2.picking = true;
+
+		super.height = model.minY;
+		model.picking = true;
+
 		if (this.lowMemory) {
-			return var2;
+			return model;
 		}
+
 		if (super.spotanimId != -1 && super.spotanimFrame != -1) {
-			SpotAnimType var3 = SpotAnimType.types[super.spotanimId];
-			Model var4 = var3.getModel();
-			if (var4 != null) {
-				Model var5 = new Model(true, var4, false, !var3.animHasAlpha);
-				var5.translate(0, 0, -super.spotanimHeight);
-				var5.createLabelReferences();
-				var5.applyTransform(var3.seq.frames[super.spotanimFrame]);
-				var5.labelFaces = null;
-				var5.labelVertices = null;
-				if (var3.resizeh != 128 || var3.resizev != 128) {
-					var5.scale(var3.resizeh, var3.resizeh, var3.resizev);
+			SpotAnimType graphic = SpotAnimType.types[super.spotanimId];
+			Model graphicModel = graphic.getModel();
+
+			if (graphicModel != null) {
+				Model temp = new Model(true, graphicModel, false, !graphic.animHasAlpha);
+				temp.offset(0, 0, -super.spotanimHeight);
+				temp.createLabelReferences();
+				temp.applyFrame(graphic.seq.frames[super.spotanimFrame]);
+				temp.labelFaces = null;
+				temp.labelVertices = null;
+
+				if (graphic.resizeh != 128 || graphic.resizev != 128) {
+					temp.resize(graphic.resizeh, graphic.resizeh, graphic.resizev);
 				}
-				var5.calculateNormals(var3.ambient + 64, var3.contrast + 850, -30, -50, -30, true);
-				Model[] var6 = new Model[] { var2, var5 };
-				var2 = new Model(2, true, var6);
+
+				temp.calculateNormals(graphic.ambient + 64, graphic.contrast + 850, -30, -50, -30, true);
+
+				Model[] models = new Model[] { model, temp };
+				model = new Model(2, true, models);
 			}
 		}
+
 		if (this.locModel != null) {
 			if (Client.loopCycle >= this.locStopCycle) {
 				this.locModel = null;
 			}
+
 			if (Client.loopCycle >= this.locStartCycle && Client.loopCycle < this.locStopCycle) {
-				Model var7 = this.locModel;
-				var7.translate(this.locOffsetX - super.x, this.locOffsetZ - super.z, this.locOffsetY - this.y);
+				Model locModel = this.locModel;
+
+				locModel.offset(this.locOffsetX - super.x, this.locOffsetZ - super.z, this.locOffsetY - this.y);
+
 				if (super.dstYaw == 512) {
-					var7.rotateY90();
-					var7.rotateY90();
-					var7.rotateY90();
+					locModel.rotateY90();
+					locModel.rotateY90();
+					locModel.rotateY90();
 				} else if (super.dstYaw == 1024) {
-					var7.rotateY90();
-					var7.rotateY90();
+					locModel.rotateY90();
+					locModel.rotateY90();
 				} else if (super.dstYaw == 1536) {
-					var7.rotateY90();
+					locModel.rotateY90();
 				}
-				Model[] var8 = new Model[] { var2, var7 };
-				var2 = new Model(2, true, var8);
+
+				Model[] models = new Model[] { model, locModel };
+				model = new Model(2, true, models);
+
 				if (super.dstYaw == 512) {
-					var7.rotateY90();
+					locModel.rotateY90();
 				} else if (super.dstYaw == 1024) {
-					var7.rotateY90();
-					var7.rotateY90();
+					locModel.rotateY90();
+					locModel.rotateY90();
 				} else if (super.dstYaw == 1536) {
-					var7.rotateY90();
-					var7.rotateY90();
-					var7.rotateY90();
+					locModel.rotateY90();
+					locModel.rotateY90();
+					locModel.rotateY90();
 				}
-				var7.translate(super.x - this.locOffsetX, super.z - this.locOffsetZ, this.y - this.locOffsetY);
+
+				locModel.offset(super.x - this.locOffsetX, super.z - this.locOffsetZ, this.y - this.locOffsetY);
 			}
 		}
-		var2.picking = true;
-		return var2;
+
+		model.picking = true;
+		return model;
 	}
 
 	@ObfuscatedName("bb.a(Z)Lfb;")
-	public final Model getAnimatedModel() {
-		long var2 = this.hash;
-		int var4 = -1;
-		int var5 = -1;
-		int var6 = -1;
-		int var7 = -1;
+	public Model getAnimatedModel() {
+		long hash = this.hash;
+
+		int primaryFrame = -1;
+		int secondaryFrame = -1;
+		int replaceHeldLeft = -1;
+		int replaceHeldRight = -1;
+
 		if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
-			SeqType var8 = SeqType.types[super.primarySeqId];
-			var4 = var8.frames[super.primarySeqFrame];
+			SeqType primarySeq = SeqType.types[super.primarySeqId];
+			primaryFrame = primarySeq.frames[super.primarySeqFrame];
+
 			if (super.secondarySeqId >= 0 && super.secondarySeqId != super.readyanim) {
-				var5 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
+				secondaryFrame = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 			}
-			if (var8.replaceheldleft >= 0) {
-				var6 = var8.replaceheldleft;
-				var2 += var6 - this.appearance[5] << 8;
+
+			if (primarySeq.replaceheldleft >= 0) {
+				replaceHeldLeft = primarySeq.replaceheldleft;
+				hash += replaceHeldLeft - this.appearance[5] << 8;
 			}
-			if (var8.replaceheldright >= 0) {
-				var7 = var8.replaceheldright;
-				var2 += var7 - this.appearance[3] << 16;
+
+			if (primarySeq.replaceheldright >= 0) {
+				replaceHeldRight = primarySeq.replaceheldright;
+				hash += replaceHeldRight - this.appearance[3] << 16;
 			}
 		} else if (super.secondarySeqId >= 0) {
-			var4 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
+			primaryFrame = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
 		}
-		Model var9 = (Model) modelCache.get(var2);
-		if (var9 == null) {
-			boolean var10 = false;
-			for (int var11 = 0; var11 < 12; var11++) {
-				int var12 = this.appearance[var11];
-				if (var7 >= 0 && var11 == 3) {
-					var12 = var7;
+
+		Model model = (Model) modelCache.get(hash);
+		if (model == null) {
+			boolean notReady = false;
+
+			for (int slot = 0; slot < 12; slot++) {
+				int part = this.appearance[slot];
+
+				if (replaceHeldRight >= 0 && slot == 3) {
+					part = replaceHeldRight;
+				} else if (replaceHeldLeft >= 0 && slot == 5) {
+					part = replaceHeldLeft;
 				}
-				if (var6 >= 0 && var11 == 5) {
-					var12 = var6;
-				}
-				if (var12 >= 256 && var12 < 512 && !IdkType.types[var12 - 256].checkModel()) {
-					var10 = true;
-				}
-				if (var12 >= 512 && !ObjType.get(var12 - 512).checkWearModel(this.gender)) {
-					var10 = true;
+
+				if (part >= 256 && part < 512 && !IdkType.types[part - 256].checkModel()) {
+					notReady = true;
+				} else if (part >= 512 && !ObjType.get(part - 512).checkWearModel(this.gender)) {
+					notReady = true;
 				}
 			}
-			if (var10) {
+
+			if (notReady) {
 				if (this.modelCacheKey != -1L) {
-					var9 = (Model) modelCache.get(this.modelCacheKey);
+					model = (Model) modelCache.get(this.modelCacheKey);
 				}
-				if (var9 == null) {
+
+				if (model == null) {
 					return null;
 				}
 			}
 		}
-		if (var9 == null) {
-			Model[] var13 = new Model[12];
-			int var14 = 0;
-			for (int var15 = 0; var15 < 12; var15++) {
-				int var16 = this.appearance[var15];
-				if (var7 >= 0 && var15 == 3) {
-					var16 = var7;
+
+		if (model == null) {
+			Model[] models = new Model[12];
+			int modelCount = 0;
+
+			for (int slot = 0; slot < 12; slot++) {
+				int part = this.appearance[slot];
+
+				if (replaceHeldRight >= 0 && slot == 3) {
+					part = replaceHeldRight;
+				} else if (replaceHeldLeft >= 0 && slot == 5) {
+					part = replaceHeldLeft;
 				}
-				if (var6 >= 0 && var15 == 5) {
-					var16 = var6;
-				}
-				if (var16 >= 256 && var16 < 512) {
-					Model var17 = IdkType.types[var16 - 256].getModel();
-					if (var17 != null) {
-						var13[var14++] = var17;
+
+				if (part >= 256 && part < 512) {
+					Model idkModel = IdkType.types[part - 256].getModel();
+					if (idkModel != null) {
+						models[modelCount++] = idkModel;
 					}
-				}
-				if (var16 >= 512) {
-					Model var18 = ObjType.get(var16 - 512).getWearModel(this.gender);
-					if (var18 != null) {
-						var13[var14++] = var18;
-					}
-				}
-			}
-			var9 = new Model(var13, var14);
-			for (int var19 = 0; var19 < 5; var19++) {
-				if (this.colour[var19] != 0) {
-					var9.recolour(Client.DESIGN_BODY_COLOUR[var19][0], Client.DESIGN_BODY_COLOUR[var19][this.colour[var19]]);
-					if (var19 == 1) {
-						var9.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.colour[var19]]);
+				} else if (part >= 512) {
+					Model objModel = ObjType.get(part - 512).getWearModel(this.gender);
+					if (objModel != null) {
+						models[modelCount++] = objModel;
 					}
 				}
 			}
-			var9.createLabelReferences();
-			var9.calculateNormals(64, 850, -30, -50, -30, true);
-			modelCache.put(var9, var2);
-			this.modelCacheKey = var2;
+
+			model = new Model(models, modelCount);
+
+			for (int i = 0; i < 5; i++) {
+				if (this.colour[i] != 0) {
+					model.recolour(Client.DESIGN_BODY_COLOUR[i][0], Client.DESIGN_BODY_COLOUR[i][this.colour[i]]);
+
+					if (i == 1) {
+						model.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.colour[i]]);
+					}
+				}
+			}
+
+			model.createLabelReferences();
+			model.calculateNormals(64, 850, -30, -50, -30, true);
+			modelCache.put(model, hash);
+			this.modelCacheKey = hash;
 		}
+
 		if (this.lowMemory) {
-			return var9;
+			return model;
 		}
-		Model var20 = Model.empty;
-		var20.set(var9, true);
-		if (var4 != -1 && var5 != -1) {
-			var20.applyTransforms(SeqType.types[super.primarySeqId].walkmerge, var5, var4);
-		} else if (var4 != -1) {
-			var20.applyTransform(var4);
+
+		Model temp = Model.empty;
+		temp.set(model, true);
+
+		if (primaryFrame != -1 && secondaryFrame != -1) {
+			temp.applyFrames(SeqType.types[super.primarySeqId].walkmerge, secondaryFrame, primaryFrame);
+		} else if (primaryFrame != -1) {
+			temp.applyFrame(primaryFrame);
 		}
-		var20.calculateBoundsCylinder();
-		var20.labelFaces = null;
-		var20.labelVertices = null;
-		return var20;
+
+		temp.calculateBoundsCylinder();
+		temp.labelFaces = null;
+		temp.labelVertices = null;
+		return temp;
 	}
 
 	@ObfuscatedName("bb.b(I)Lfb;")
-	public final Model getHeadModel() {
+	public Model getHeadModel() {
 		if (!this.visible) {
 			return null;
 		}
-		boolean var2 = false;
-		for (int var3 = 0; var3 < 12; var3++) {
-			int var4 = this.appearance[var3];
-			if (var4 >= 256 && var4 < 512 && !IdkType.types[var4 - 256].checkHead()) {
-				var2 = true;
-			}
-			if (var4 >= 512 && !ObjType.get(var4 - 512).checkHeadModel(this.gender)) {
-				var2 = true;
+
+		boolean notReady = false;
+		for (int slot = 0; slot < 12; slot++) {
+			int part = this.appearance[slot];
+
+			if (part >= 256 && part < 512 && !IdkType.types[part - 256].checkHead()) {
+				notReady = true;
+			} else if (part >= 512 && !ObjType.get(part - 512).checkHeadModel(this.gender)) {
+				notReady = true;
 			}
 		}
-		if (var2) {
+
+		if (notReady) {
 			return null;
 		}
-		Model[] var5 = new Model[12];
-		int var7 = 0;
-		for (int var8 = 0; var8 < 12; var8++) {
-			int var9 = this.appearance[var8];
-			if (var9 >= 256 && var9 < 512) {
-				Model var10 = IdkType.types[var9 - 256].getHeadModel();
-				if (var10 != null) {
-					var5[var7++] = var10;
+
+		Model[] models = new Model[12];
+		int modelCount = 0;
+
+		for (int slot = 0; slot < 12; slot++) {
+			int part = this.appearance[slot];
+
+			if (part >= 256 && part < 512) {
+				Model idkModel = IdkType.types[part - 256].getHeadModel();
+				if (idkModel != null) {
+					models[modelCount++] = idkModel;
 				}
-			}
-			if (var9 >= 512) {
-				Model var11 = ObjType.get(var9 - 512).getHeadModel(this.gender);
-				if (var11 != null) {
-					var5[var7++] = var11;
-				}
-			}
-		}
-		Model var12 = new Model(var5, var7);
-		for (int var13 = 0; var13 < 5; var13++) {
-			if (this.colour[var13] != 0) {
-				var12.recolour(Client.DESIGN_BODY_COLOUR[var13][0], Client.DESIGN_BODY_COLOUR[var13][this.colour[var13]]);
-				if (var13 == 1) {
-					var12.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.colour[var13]]);
+			} else if (part >= 512) {
+				Model objModel = ObjType.get(part - 512).getHeadModel(this.gender);
+				if (objModel != null) {
+					models[modelCount++] = objModel;
 				}
 			}
 		}
-		return var12;
+
+		Model temp = new Model(models, modelCount);
+
+		for (int i = 0; i < 5; i++) {
+			if (this.colour[i] != 0) {
+				temp.recolour(Client.DESIGN_BODY_COLOUR[i][0], Client.DESIGN_BODY_COLOUR[i][this.colour[i]]);
+
+				if (i == 1) {
+					temp.recolour(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.colour[i]]);
+				}
+			}
+		}
+
+		return temp;
 	}
 
 	@ObfuscatedName("bb.b(B)Z")
-	public final boolean isVisible() {
+	public boolean isVisible() {
 		return this.visible;
 	}
 }

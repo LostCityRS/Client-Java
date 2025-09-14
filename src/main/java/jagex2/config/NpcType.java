@@ -106,24 +106,27 @@ public class NpcType {
 	public int contrast;
 
 	@ObfuscatedName("gc.a(Lyb;)V")
-	public static final void unpack(Jagfile arg0) {
-		data = new Packet(arg0.read("npc.dat", null));
-		Packet var1 = new Packet(arg0.read("npc.idx", null));
-		count = var1.g2();
+	public static void unpack(Jagfile jag) {
+		data = new Packet(jag.read("npc.dat", null));
+		Packet index = new Packet(jag.read("npc.idx", null));
+
+		count = index.g2();
 		idx = new int[count];
-		int var2 = 2;
-		for (int var3 = 0; var3 < count; var3++) {
-			idx[var3] = var2;
-			var2 += var1.g2();
+
+		int pos = 2;
+		for (int id = 0; id < count; id++) {
+			idx[id] = pos;
+			pos += index.g2();
 		}
+
 		cache = new NpcType[20];
-		for (int var4 = 0; var4 < 20; var4++) {
-			cache[var4] = new NpcType();
+		for (int i = 0; i < 20; i++) {
+			cache[i] = new NpcType();
 		}
 	}
 
 	@ObfuscatedName("gc.a(B)V")
-	public static final void unload() {
+	public static void unload() {
 		modelCache = null;
 		idx = null;
 		cache = null;
@@ -131,178 +134,201 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(I)Lgc;")
-	public static final NpcType get(int arg0) {
-		for (int var1 = 0; var1 < 20; var1++) {
-			if (cache[var1].id == (long) arg0) {
-				return cache[var1];
+	public static NpcType get(int id) {
+		for (int i = 0; i < 20; i++) {
+			if (cache[i].id == (long) id) {
+				return cache[i];
 			}
 		}
+
 		cachePos = (cachePos + 1) % 20;
-		NpcType var2 = cache[cachePos] = new NpcType();
-		data.pos = idx[arg0];
-		var2.id = arg0;
-		var2.decode(data);
-		return var2;
+
+		NpcType npc = cache[cachePos] = new NpcType();
+		data.pos = idx[id];
+		npc.id = id;
+		npc.decode(data);
+		return npc;
 	}
 
 	@ObfuscatedName("gc.a(ZLmb;)V")
-	public final void decode(Packet arg1) {
+	public void decode(Packet buf) {
 		while (true) {
-			int var3 = arg1.g1();
-			if (var3 == 0) {
-				return;
+			int code = buf.g1();
+			if (code == 0) {
+				break;
 			}
-			if (var3 == 1) {
-				int var4 = arg1.g1();
-				this.models = new int[var4];
-				for (int var5 = 0; var5 < var4; var5++) {
-					this.models[var5] = arg1.g2();
+
+			if (code == 1) {
+				int count = buf.g1();
+
+				this.models = new int[count];
+				for (int i = 0; i < count; i++) {
+					this.models[i] = buf.g2();
 				}
-			} else if (var3 == 2) {
-				this.name = arg1.gjstr();
-			} else if (var3 == 3) {
-				this.desc = arg1.gjstrraw();
-			} else if (var3 == 12) {
-				this.size = arg1.g1b();
-			} else if (var3 == 13) {
-				this.runanim = arg1.g2();
-			} else if (var3 == 14) {
-				this.walkanim = arg1.g2();
-			} else if (var3 == 16) {
+			} else if (code == 2) {
+				this.name = buf.gjstr();
+			} else if (code == 3) {
+				this.desc = buf.gjstrraw();
+			} else if (code == 12) {
+				this.size = buf.g1b();
+			} else if (code == 13) {
+				this.runanim = buf.g2();
+			} else if (code == 14) {
+				this.walkanim = buf.g2();
+			} else if (code == 16) {
 				this.animHasAlpha = true;
-			} else if (var3 == 17) {
-				this.walkanim = arg1.g2();
-				this.walkanim_b = arg1.g2();
-				this.walkanim_l = arg1.g2();
-				this.walkanim_r = arg1.g2();
-			} else if (var3 >= 30 && var3 < 40) {
+			} else if (code == 17) {
+				this.walkanim = buf.g2();
+				this.walkanim_b = buf.g2();
+				this.walkanim_l = buf.g2();
+				this.walkanim_r = buf.g2();
+			} else if (code >= 30 && code < 40) {
 				if (this.op == null) {
 					this.op = new String[5];
 				}
-				this.op[var3 - 30] = arg1.gjstr();
-				if (this.op[var3 - 30].equalsIgnoreCase("hidden")) {
-					this.op[var3 - 30] = null;
+
+				this.op[code - 30] = buf.gjstr();
+				if (this.op[code - 30].equalsIgnoreCase("hidden")) {
+					this.op[code - 30] = null;
 				}
-			} else if (var3 == 40) {
-				int var6 = arg1.g1();
-				this.recol_s = new int[var6];
-				this.recol_d = new int[var6];
-				for (int var7 = 0; var7 < var6; var7++) {
-					this.recol_s[var7] = arg1.g2();
-					this.recol_d[var7] = arg1.g2();
+			} else if (code == 40) {
+				int count = buf.g1();
+
+				this.recol_s = new int[count];
+				this.recol_d = new int[count];
+				for (int i = 0; i < count; i++) {
+					this.recol_s[i] = buf.g2();
+					this.recol_d[i] = buf.g2();
 				}
-			} else if (var3 == 60) {
-				int var8 = arg1.g1();
-				this.head = new int[var8];
-				for (int var9 = 0; var9 < var8; var9++) {
-					this.head[var9] = arg1.g2();
+			} else if (code == 60) {
+				int count = buf.g1();
+
+				this.head = new int[count];
+				for (int var9 = 0; var9 < count; var9++) {
+					this.head[var9] = buf.g2();
 				}
-			} else if (var3 == 90) {
-				this.field1010 = arg1.g2();
-			} else if (var3 == 91) {
-				this.field1011 = arg1.g2();
-			} else if (var3 == 92) {
-				this.field1012 = arg1.g2();
-			} else if (var3 == 93) {
+			} else if (code == 90) {
+				this.field1010 = buf.g2();
+			} else if (code == 91) {
+				this.field1011 = buf.g2();
+			} else if (code == 92) {
+				this.field1012 = buf.g2();
+			} else if (code == 93) {
 				this.minimap = false;
-			} else if (var3 == 95) {
-				this.vislevel = arg1.g2();
-			} else if (var3 == 97) {
-				this.resizeh = arg1.g2();
-			} else if (var3 == 98) {
-				this.resizev = arg1.g2();
-			} else if (var3 == 99) {
+			} else if (code == 95) {
+				this.vislevel = buf.g2();
+			} else if (code == 97) {
+				this.resizeh = buf.g2();
+			} else if (code == 98) {
+				this.resizev = buf.g2();
+			} else if (code == 99) {
 				this.alwaysontop = true;
-			} else if (var3 == 100) {
-				this.ambient = arg1.g1b();
-			} else if (var3 == 101) {
-				this.contrast = arg1.g1b() * 5;
-			} else if (var3 == 102) {
-				this.headicon = arg1.g2();
+			} else if (code == 100) {
+				this.ambient = buf.g1b();
+			} else if (code == 101) {
+				this.contrast = buf.g1b() * 5;
+			} else if (code == 102) {
+				this.headicon = buf.g2();
 			}
 		}
 	}
 
 	@ObfuscatedName("gc.a(IB[II)Lfb;")
-	public final Model getModel(int arg0, int[] arg2, int arg3) {
-		Model var5 = (Model) modelCache.get(this.id);
-		boolean var6 = false;
-		if (var5 == null) {
-			boolean var7 = false;
-			for (int var8 = 0; var8 < this.models.length; var8++) {
-				if (!Model.request(this.models[var8])) {
-					var7 = true;
+	public Model getModel(int primaryFrame, int[] walkmerge, int secondaryFrame) {
+		Model model = (Model) modelCache.get(this.id);
+
+		if (model == null) {
+			boolean notReady = false;
+			for (int i = 0; i < this.models.length; i++) {
+				if (!Model.request(this.models[i])) {
+					notReady = true;
 				}
 			}
-			if (var7) {
+			if (notReady) {
 				return null;
 			}
-			Model[] var9 = new Model[this.models.length];
-			for (int var10 = 0; var10 < this.models.length; var10++) {
-				var9[var10] = Model.tryGet(this.models[var10]);
+
+			Model[] models = new Model[this.models.length];
+			for (int i = 0; i < this.models.length; i++) {
+				models[i] = Model.tryGet(this.models[i]);
 			}
-			if (var9.length == 1) {
-				var5 = var9[0];
+
+			if (models.length == 1) {
+				model = models[0];
 			} else {
-				var5 = new Model(var9, var9.length);
+				model = new Model(models, models.length);
 			}
+
 			if (this.recol_s != null) {
-				for (int var11 = 0; var11 < this.recol_s.length; var11++) {
-					var5.recolour(this.recol_s[var11], this.recol_d[var11]);
+				for (int i = 0; i < this.recol_s.length; i++) {
+					model.recolour(this.recol_s[i], this.recol_d[i]);
 				}
 			}
-			var5.createLabelReferences();
-			var5.calculateNormals(this.ambient + 64, this.contrast + 850, -30, -50, -30, true);
-			modelCache.put(var5, this.id);
+
+			model.createLabelReferences();
+			model.calculateNormals(this.ambient + 64, this.contrast + 850, -30, -50, -30, true);
+			modelCache.put(model, this.id);
 		}
-		Model var12 = Model.empty;
-		var12.set(var5, !this.animHasAlpha);
-		if (arg0 != -1 && arg3 != -1) {
-			var12.applyTransforms(arg2, arg3, arg0);
-		} else if (arg0 != -1) {
-			var12.applyTransform(arg0);
+
+		Model tmp = Model.empty;
+		tmp.set(model, !this.animHasAlpha);
+
+		if (primaryFrame != -1 && secondaryFrame != -1) {
+			tmp.applyFrames(walkmerge, secondaryFrame, primaryFrame);
+		} else if (primaryFrame != -1) {
+			tmp.applyFrame(primaryFrame);
 		}
+
 		if (this.resizeh != 128 || this.resizev != 128) {
-			var12.scale(this.resizeh, this.resizeh, this.resizev);
+			tmp.resize(this.resizeh, this.resizeh, this.resizev);
 		}
-		var12.calculateBoundsCylinder();
-		var12.labelFaces = null;
-		var12.labelVertices = null;
+
+		tmp.calculateBoundsCylinder();
+
+		tmp.labelFaces = null;
+		tmp.labelVertices = null;
+
 		if (this.size == 1) {
-			var12.picking = true;
+			tmp.picking = true;
 		}
-		return var12;
+
+		return tmp;
 	}
 
 	@ObfuscatedName("gc.a(Z)Lfb;")
-	public final Model getHeadModel() {
+	public Model getHeadModel() {
 		if (this.head == null) {
 			return null;
 		}
-		boolean var2 = false;
-		for (int var3 = 0; var3 < this.head.length; var3++) {
-			if (!Model.request(this.head[var3])) {
-				var2 = true;
+
+		boolean notReady = false;
+		for (int i = 0; i < this.head.length; i++) {
+			if (!Model.request(this.head[i])) {
+				notReady = true;
 			}
 		}
-		if (var2) {
+		if (notReady) {
 			return null;
 		}
-		Model[] var4 = new Model[this.head.length];
-		for (int var5 = 0; var5 < this.head.length; var5++) {
-			var4[var5] = Model.tryGet(this.head[var5]);
+
+		Model[] models = new Model[this.head.length];
+		for (int i = 0; i < this.head.length; i++) {
+			models[i] = Model.tryGet(this.head[i]);
 		}
-		Model var6;
-		if (var4.length == 1) {
-			var6 = var4[0];
+
+		Model model;
+		if (models.length == 1) {
+			model = models[0];
 		} else {
-			var6 = new Model(var4, var4.length);
+			model = new Model(models, models.length);
 		}
+
 		if (this.recol_s != null) {
-			for (int var7 = 0; var7 < this.recol_s.length; var7++) {
-				var6.recolour(this.recol_s[var7], this.recol_d[var7]);
+			for (int i = 0; i < this.recol_s.length; i++) {
+				model.recolour(this.recol_s[i], this.recol_d[i]);
 			}
 		}
-		return var6;
+
+		return model;
 	}
 }

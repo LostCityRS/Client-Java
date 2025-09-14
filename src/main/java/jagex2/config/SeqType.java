@@ -57,83 +57,92 @@ public class SeqType {
 	public int duplicatebehavior;
 
 	@ObfuscatedName("nc.a(ILyb;)V")
-	public static void unpack(Jagfile arg1) {
-		Packet var2 = new Packet(arg1.read("seq.dat", null));
-		count = var2.g2();
+	public static void unpack(Jagfile jag) {
+		Packet data = new Packet(jag.read("seq.dat", null));
+
+		count = data.g2();
+
 		if (types == null) {
 			types = new SeqType[count];
 		}
-		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new SeqType();
+
+		for (int id = 0; id < count; id++) {
+			if (types[id] == null) {
+				types[id] = new SeqType();
 			}
-			types[var3].decode(var2);
+
+			types[id].decode(data);
 		}
 	}
 
 	@ObfuscatedName("nc.a(II)I")
-	public int getFrameDuration(int arg0) {
-		int var3 = this.delay[arg0];
-		if (var3 == 0) {
-			AnimFrame var4 = AnimFrame.get(this.frames[arg0]);
-			if (var4 != null) {
-				var3 = this.delay[arg0] = var4.delay;
+	public int getFrameLength(int i) {
+		int delay = this.delay[i];
+
+		if (delay == 0) {
+			AnimFrame frame = AnimFrame.get(this.frames[i]);
+			if (frame != null) {
+				delay = this.delay[i] = frame.delay;
 			}
 		}
-		if (var3 == 0) {
-			var3 = 1;
+
+		if (delay == 0) {
+			delay = 1;
 		}
-		return var3;
+
+		return delay;
 	}
 
 	@ObfuscatedName("nc.a(ZLmb;)V")
-	public void decode(Packet arg1) {
+	public void decode(Packet buf) {
 		while (true) {
-			int var3 = arg1.g1();
-			if (var3 == 0) {
+			int code = buf.g1();
+			if (code == 0) {
 				break;
 			}
 
-			if (var3 == 1) {
-				this.frameCount = arg1.g1();
+			if (code == 1) {
+				this.frameCount = buf.g1();
+
 				this.frames = new int[this.frameCount];
 				this.iframes = new int[this.frameCount];
 				this.delay = new int[this.frameCount];
-				for (int var4 = 0; var4 < this.frameCount; var4++) {
-					this.frames[var4] = arg1.g2();
-					this.iframes[var4] = arg1.g2();
-					if (this.iframes[var4] == 65535) {
-						this.iframes[var4] = -1;
+				for (int i = 0; i < this.frameCount; i++) {
+					this.frames[i] = buf.g2();
+					this.iframes[i] = buf.g2();
+					if (this.iframes[i] == 65535) {
+						this.iframes[i] = -1;
 					}
-					this.delay[var4] = arg1.g2();
+					this.delay[i] = buf.g2();
 				}
-			} else if (var3 == 2) {
-				this.loops = arg1.g2();
-			} else if (var3 == 3) {
-				int var5 = arg1.g1();
-				this.walkmerge = new int[var5 + 1];
-				for (int var6 = 0; var6 < var5; var6++) {
-					this.walkmerge[var6] = arg1.g1();
+			} else if (code == 2) {
+				this.loops = buf.g2();
+			} else if (code == 3) {
+				int count = buf.g1();
+
+				this.walkmerge = new int[count + 1];
+				for (int i = 0; i < count; i++) {
+					this.walkmerge[i] = buf.g1();
 				}
-				this.walkmerge[var5] = 9999999;
-			} else if (var3 == 4) {
+				this.walkmerge[count] = 9999999;
+			} else if (code == 4) {
 				this.stretches = true;
-			} else if (var3 == 5) {
-				this.priority = arg1.g1();
-			} else if (var3 == 6) {
-				this.replaceheldleft = arg1.g2();
-			} else if (var3 == 7) {
-				this.replaceheldright = arg1.g2();
-			} else if (var3 == 8) {
-				this.maxloops = arg1.g1();
-			} else if (var3 == 9) {
-				this.preanim_move = arg1.g1();
-			} else if (var3 == 10) {
-				this.postanim_move = arg1.g1();
-			} else if (var3 == 11) {
-				this.duplicatebehavior = arg1.g1();
+			} else if (code == 5) {
+				this.priority = buf.g1();
+			} else if (code == 6) {
+				this.replaceheldleft = buf.g2();
+			} else if (code == 7) {
+				this.replaceheldright = buf.g2();
+			} else if (code == 8) {
+				this.maxloops = buf.g1();
+			} else if (code == 9) {
+				this.preanim_move = buf.g1();
+			} else if (code == 10) {
+				this.postanim_move = buf.g1();
+			} else if (code == 11) {
+				this.duplicatebehavior = buf.g1();
 			} else {
-				System.out.println("Error unrecognised seq config code: " + var3);
+				System.out.println("Error unrecognised seq config code: " + code);
 			}
 		}
 

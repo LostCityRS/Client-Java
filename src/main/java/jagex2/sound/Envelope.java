@@ -40,21 +40,23 @@ public class Envelope {
 	public int ticks;
 
 	@ObfuscatedName("bc.a(ZLmb;)V")
-	public final void unpack(Packet arg1) {
-		this.form = arg1.g1();
-		this.start = arg1.g4();
-		this.end = arg1.g4();
-		this.length = arg1.g1();
+	public void unpack(Packet buf) {
+		this.form = buf.g1();
+		this.start = buf.g4();
+		this.end = buf.g4();
+
+		this.length = buf.g1();
 		this.shapeDelta = new int[this.length];
 		this.shapePeak = new int[this.length];
-		for (int var3 = 0; var3 < this.length; var3++) {
-			this.shapeDelta[var3] = arg1.g2();
-			this.shapePeak[var3] = arg1.g2();
+
+		for (int i = 0; i < this.length; i++) {
+			this.shapeDelta[i] = buf.g2();
+			this.shapePeak[i] = buf.g2();
 		}
 	}
 
 	@ObfuscatedName("bc.a(B)V")
-	public final void genInit() {
+	public void genInit() {
 		this.threshold = 0;
 		this.position = 0;
 		this.delta = 0;
@@ -63,17 +65,19 @@ public class Envelope {
 	}
 
 	@ObfuscatedName("bc.a(II)I")
-	public final int genNext(int arg1) {
+	public int genNext(int delta) {
 		if (this.ticks >= this.threshold) {
 			this.amplitude = this.shapePeak[this.position++] << 15;
 			if (this.position >= this.length) {
 				this.position = this.length - 1;
 			}
-			this.threshold = (int) ((double) this.shapeDelta[this.position] / 65536.0D * (double) arg1);
+
+			this.threshold = (int) ((double) this.shapeDelta[this.position] / 65536.0D * (double) delta);
 			if (this.threshold > this.ticks) {
 				this.delta = ((this.shapePeak[this.position] << 15) - this.amplitude) / (this.threshold - this.ticks);
 			}
 		}
+
 		this.amplitude += this.delta;
 		this.ticks++;
 		return this.amplitude - this.delta >> 15;

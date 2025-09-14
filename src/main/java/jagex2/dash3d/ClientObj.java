@@ -13,8 +13,8 @@ public class ClientObj extends ModelSource {
 	public int count;
 
 	@ObfuscatedName("db.a(I)Lfb;")
-	public final Model getModel() {
-		ObjType var2 = ObjType.get(this.index);
-		return var2.getModel(this.count);
+	public Model getModel() {
+		ObjType obj = ObjType.get(this.index);
+		return obj.getModel(this.count);
 	}
 }

@@ -1,55 +1,19 @@
 package jagex2.client;
 
 import deob.ObfuscatedName;
+import jagex2.config.*;
 import jagex2.config.Component;
-import jagex2.config.FloType;
-import jagex2.config.IdkType;
-import jagex2.config.LocType;
-import jagex2.config.NpcType;
-import jagex2.config.ObjType;
-import jagex2.config.SeqType;
-import jagex2.config.SpotAnimType;
-import jagex2.config.UnkType;
-import jagex2.config.VarpType;
-import jagex2.dash3d.AnimFrame;
-import jagex2.dash3d.ClientEntity;
-import jagex2.dash3d.ClientLocAnim;
-import jagex2.dash3d.ClientNpc;
-import jagex2.dash3d.ClientObj;
-import jagex2.dash3d.ClientPlayer;
-import jagex2.dash3d.ClientProj;
-import jagex2.dash3d.CollisionMap;
-import jagex2.dash3d.Decor;
-import jagex2.dash3d.GroundDecor;
-import jagex2.dash3d.LocChange;
-import jagex2.dash3d.MapSpotAnim;
-import jagex2.dash3d.Model;
-import jagex2.dash3d.Sprite;
-import jagex2.dash3d.Wall;
-import jagex2.dash3d.World;
-import jagex2.dash3d.World3D;
+import jagex2.dash3d.*;
 import jagex2.datastruct.JString;
 import jagex2.datastruct.LinkList;
-import jagex2.graphics.Pix2D;
-import jagex2.graphics.Pix32;
-import jagex2.graphics.Pix3D;
-import jagex2.graphics.Pix8;
-import jagex2.graphics.PixFont;
-import jagex2.graphics.PixMap;
-import jagex2.io.ClientStream;
-import jagex2.io.FileStream;
-import jagex2.io.Isaac;
-import jagex2.io.Jagfile;
-import jagex2.io.OnDemand;
-import jagex2.io.OnDemandRequest;
-import jagex2.io.Packet;
-import jagex2.io.Protocol;
+import jagex2.graphics.*;
+import jagex2.io.*;
 import jagex2.sound.Wave;
 import jagex2.wordenc.WordFilter;
 import jagex2.wordenc.WordPack;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+import sign.signlink;
+
+import java.awt.*;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -57,7 +21,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.util.zip.CRC32;
-import sign.signlink;
 
 @ObfuscatedName("client")
 public class Client extends GameShell {
@@ -1304,7 +1267,7 @@ public class Client extends GameShell {
 
 	// ----
 
-	public static final void main(String[] arg0) {
+	public static void main(String[] arg0) {
 		try {
 			System.out.println("RS2 user client - release #" + 245);
 			if (arg0.length == 5) {
@@ -1337,7 +1300,7 @@ public class Client extends GameShell {
 		}
 	}
 
-	public final void init() {
+	public void init() {
 		nodeId = Integer.parseInt(this.getParameter("nodeid"));
 		portOffset = Integer.parseInt(this.getParameter("portoff"));
 		String var1 = this.getParameter("lowmem");
@@ -1355,7 +1318,7 @@ public class Client extends GameShell {
 		this.initApplet(765, 503);
 	}
 
-	public final void run() {
+	public void run() {
 		if (this.flamesThread) {
 			this.runFlames();
 		} else {
@@ -1364,7 +1327,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.y(I)V")
-	public static final void setLowMem() {
+	public static void setLowMem() {
 		World3D.lowMem = true;
 		Pix3D.lowMem = true;
 		lowMem = true;
@@ -1372,7 +1335,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.q(I)V")
-	public static final void setHighMem() {
+	public static void setHighMem() {
 		World3D.lowMem = false;
 		Pix3D.lowMem = false;
 		lowMem = false;
@@ -1381,7 +1344,7 @@ public class Client extends GameShell {
 
 	// ----
 
-	public final URL getCodeBase() {
+	public URL getCodeBase() {
 		if (signlink.mainapp != null) {
 			return signlink.mainapp.getCodeBase();
 		}
@@ -1394,12 +1357,12 @@ public class Client extends GameShell {
 		return super.getCodeBase();
 	}
 
-	public final String getParameter(String arg0) {
+	public String getParameter(String arg0) {
 		return signlink.mainapp == null ? super.getParameter(arg0) : signlink.mainapp.getParameter(arg0);
 	}
 
 	@ObfuscatedName("client.g(I)Ljava/lang/String;")
-	public final String getHost() {
+	public String getHost() {
 		if (signlink.mainapp == null) {
 			return super.frame == null ? super.getDocumentBase().getHost().toLowerCase() : "runescape.com";
 		} else {
@@ -1408,7 +1371,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.f(I)Ljava/awt/Component;")
-	public final java.awt.Component getBaseComponent() {
+	public java.awt.Component getBaseComponent() {
 		if (signlink.mainapp == null) {
 			return this;
 		} else {
@@ -1417,41 +1380,42 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;)Ljava/io/DataInputStream;")
-	public final DataInputStream openUrl(String arg0) throws IOException {
+	public DataInputStream openUrl(String arg0) throws IOException {
 		return signlink.mainapp == null ? new DataInputStream((new URL(this.getCodeBase(), arg0)).openStream()) : signlink.openurl(arg0);
 	}
 
 	@ObfuscatedName("client.Y(I)Ljava/net/Socket;")
-	public final Socket openSocket(int arg0) throws IOException {
+	public Socket openSocket(int arg0) throws IOException {
 		return signlink.mainapp == null ? new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg0) : signlink.opensocket(arg0);
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/Runnable;I)V")
-	public final void startThread(Runnable arg0, int arg1) {
-		if (arg1 > 10) {
-			arg1 = 10;
+	public void startThread(Runnable thread, int priority) {
+		if (priority > 10) {
+			priority = 10;
 		}
+
 		if (signlink.mainapp == null) {
-			super.startThread(arg0, arg1);
+			super.startThread(thread, priority);
 		} else {
-			signlink.startthread(arg0, arg1);
+			signlink.startthread(thread, priority);
 		}
 	}
 
 	@ObfuscatedName("client.a(Z[BZ)V")
-	public final void saveMidi(boolean arg0, byte[] arg1) {
+	public void saveMidi(boolean arg0, byte[] arg1) {
 		signlink.midifade = arg0 ? 1 : 0;
 		signlink.midisave(arg1, arg1.length);
 	}
 
 	@ObfuscatedName("client.J(I)V")
-	public final void stopMidi() {
+	public void stopMidi() {
 		signlink.midifade = 0;
 		signlink.midi = "stop";
 	}
 
 	@ObfuscatedName("client.a(ZII)V")
-	public final void setMidiVolume(boolean arg0, int arg2) {
+	public void setMidiVolume(boolean arg0, int arg2) {
 		signlink.midivol = arg2;
 		if (arg0) {
 			signlink.midi = "voladjust";
@@ -1459,24 +1423,24 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IB[B)Z")
-	public final boolean saveWave(int arg0, byte[] arg2) {
+	public boolean saveWave(int arg0, byte[] arg2) {
 		return arg2 == null ? true : signlink.wavesave(arg2, arg0);
 	}
 
 	@ObfuscatedName("client.i(B)Z")
-	public final boolean replayWave() {
+	public boolean replayWave() {
 		return signlink.wavereplay();
 	}
 
 	@ObfuscatedName("client.c(II)V")
-	public final void setWaveVolume(int arg0) {
+	public void setWaveVolume(int arg0) {
 		signlink.wavevol = arg0;
 	}
 
 	// ----
 
 	@ObfuscatedName("client.a()V")
-	public final void load() {
+	public void load() {
 		if (signlink.sunjava) {
 			super.mindel = 5;
 		}
@@ -1871,7 +1835,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(I)V")
-	public final void update() {
+	public void update() {
 		if (this.errorStarted || this.errorLoading || this.errorHost) {
 			return;
 		}
@@ -1885,7 +1849,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.d(I)V")
-	public final void draw() {
+	public void draw() {
 		if (this.errorStarted || this.errorLoading || this.errorHost) {
 			this.drawError();
 			return;
@@ -1900,7 +1864,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.c(I)V")
-	public final void unload() {
+	public void unload() {
 		signlink.reporterror = false;
 		try {
 			if (this.stream != null) {
@@ -2032,19 +1996,19 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.e(I)V")
-	public final void refresh() {
+	public void refresh() {
 		this.redrawFrame = true;
 	}
 
 	// ----
 
 	@ObfuscatedName("client.a(BLjava/lang/String;I)V")
-	public final void drawProgress(String arg1, int arg2) {
-		this.lastProgressPercent = arg2;
-		this.lastProgressMessage = arg1;
+	public void drawProgress(String message, int percent) {
+		this.lastProgressPercent = percent;
+		this.lastProgressMessage = message;
 		this.loadTitle();
 		if (this.jagTitle == null) {
-			super.drawProgress(arg1, arg2);
+			super.drawProgress(message, percent);
 			return;
 		}
 		this.imageTitle4.bind();
@@ -2055,9 +2019,9 @@ public class Client extends GameShell {
 		int var7 = var5 / 2 - 18 - var6;
 		Pix2D.drawRect(var4 / 2 - 152, 34, var7, 304, 9179409);
 		Pix2D.drawRect(var4 / 2 - 151, 32, var7 + 1, 302, 0);
-		Pix2D.fillRect(var7 + 2, 30, var4 / 2 - 150, arg2 * 3, 9179409);
-		Pix2D.fillRect(var7 + 2, 30, var4 / 2 - 150 + arg2 * 3, 300 - arg2 * 3, 0);
-		this.fontBold12.centreString(16777215, var4 / 2, var5 / 2 + 5 - var6, arg1);
+		Pix2D.fillRect(var7 + 2, 30, var4 / 2 - 150, percent * 3, 9179409);
+		Pix2D.fillRect(var7 + 2, 30, var4 / 2 - 150 + percent * 3, 300 - percent * 3, 0);
+		this.fontBold12.centreString(16777215, var4 / 2, var5 / 2 + 5 - var6, message);
 		this.imageTitle4.draw(202, super.graphics, 171);
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
@@ -2075,7 +2039,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(Z)V")
-	public final void drawError() {
+	public void drawError() {
 		Graphics var2 = this.getBaseComponent().getGraphics();
 		var2.setColor(Color.black);
 		var2.fillRect(0, 0, 765, 503);
@@ -2129,7 +2093,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;IIILjava/lang/String;I)Lyb;")
-	public final Jagfile getJagFile(String arg0, int arg2, int arg3, String arg4, int arg5) {
+	public Jagfile getJagFile(String arg0, int arg2, int arg3, String arg4, int arg5) {
 		byte[] var8 = null;
 		int var9 = 5;
 		try {
@@ -2249,7 +2213,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.r(I)V")
-	public final void updateOnDemand() {
+	public void updateOnDemand() {
 		while (true) {
 			OnDemandRequest var2 = this.onDemand.cycle();
 			if (var2 == null) {
@@ -2295,7 +2259,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.H(I)V")
-	public final void updateTitle() {
+	public void updateTitle() {
 		if (this.titleScreenState == 0) {
 			int var2 = super.canvasWidth / 2 - 80;
 			int var3 = super.canvasHeight / 2 + 20;
@@ -2389,7 +2353,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;Ljava/lang/String;Z)V")
-	public final void login(String arg0, String arg1, boolean arg2) {
+	public void login(String arg0, String arg1, boolean arg2) {
 		signlink.errorname = arg0;
 		try {
 			if (!arg2) {
@@ -2616,7 +2580,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.X(I)V")
-	public final void logout() {
+	public void logout() {
 		try {
 			if (this.stream != null) {
 				this.stream.close();
@@ -2642,7 +2606,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.c(B)V")
-	public final void clearCache() {
+	public void clearCache() {
 		LocType.modelCacheStatic.clear();
 		LocType.modelCacheDynamic.clear();
 		NpcType.modelCache.clear();
@@ -2653,7 +2617,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.m(I)V")
-	public final void prepareGame() {
+	public void prepareGame() {
 		if (this.areaChatback != null) {
 			return;
 		}
@@ -2682,7 +2646,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.U(I)V")
-	public final void updateGame() {
+	public void updateGame() {
 		if (this.systemUpdateTimer > 1) {
 			this.systemUpdateTimer--;
 		}
@@ -2919,7 +2883,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.D(I)V")
-	public final void tryReconnect() {
+	public void tryReconnect() {
 		if (this.idleTimeout > 0) {
 			this.logout();
 			return;
@@ -2944,7 +2908,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.s(I)V")
-	public final void updateSceneState() {
+	public void updateSceneState() {
 		if (lowMem && this.sceneState == 2 && World.levelBuilt != this.currentLevel) {
 			this.areaViewport.bind();
 			this.fontPlain12.centreString(0, 257, 151, "Loading - please wait.");
@@ -2967,7 +2931,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.t(I)I")
-	public final int checkScene() {
+	public int checkScene() {
 		for (int var2 = 0; var2 < this.sceneMapLandData.length; var2++) {
 			if (this.sceneMapLandData[var2] == null && this.sceneMapLandFile[var2] != -1) {
 				return -1;
@@ -2998,7 +2962,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.g(Z)V")
-	public final void buildScene() {
+	public void buildScene() {
 		try {
 			this.minimapLevel = -1;
 			this.spotanims.clear();
@@ -3103,7 +3067,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.B(I)V")
-	public final void clearLocChanges() {
+	public void clearLocChanges() {
 		LocChange var2 = (LocChange) this.locChanges.head();
 		while (var2 != null) {
 			if (var2.endTime == -1) {
@@ -3117,7 +3081,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.g(II)V")
-	public final void createMinimap(int arg0) {
+	public void createMinimap(int arg0) {
 		int[] var3 = this.imageMinimap.pixels;
 		int var4 = var3.length;
 		for (int var5 = 0; var5 < var4; var5++) {
@@ -3190,7 +3154,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.f(B)V")
-	public final void updateLocChanges() {
+	public void updateLocChanges() {
 		if (this.sceneState != 2) {
 			return;
 		}
@@ -3224,7 +3188,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.E(I)V")
-	public final void updateAudio() {
+	public void updateAudio() {
 		for (int var2 = 0; var2 < this.waveCount; var2++) {
 			if (this.waveDelay[var2] <= 0) {
 				boolean var3 = false;
@@ -3275,7 +3239,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.p(I)V")
-	public final void handleInput() {
+	public void handleInput() {
 		if (this.objDragArea != 0) {
 			return;
 		}
@@ -3345,7 +3309,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.j(B)V")
-	public final void handlePrivateChatInput() {
+	public void handlePrivateChatInput() {
 		if (this.splitPrivateChat == 0) {
 			return;
 		}
@@ -3403,7 +3367,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(IIZ)V")
-	public final void handleChatMouseInput(int arg0, int arg1) {
+	public void handleChatMouseInput(int arg0, int arg1) {
 		int var4 = 0;
 		for (int var5 = 0; var5 < 100; var5++) {
 			if (this.messageText[var5] != null) {
@@ -3481,7 +3445,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.P(I)V")
-	public final void handleViewportOptions() {
+	public void handleViewportOptions() {
 		if (this.objSelected == 0 && this.spellSelected == 0) {
 			this.menuOption[this.menuSize] = "Walk here";
 			this.menuAction[this.menuSize] = 660;
@@ -3645,7 +3609,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.e(B)V")
-	public final void handleMouseInput() {
+	public void handleMouseInput() {
 		if (this.objDragArea != 0) {
 			return;
 		}
@@ -3754,7 +3718,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.M(I)V")
-	public final void handleMinimapInput() {
+	public void handleMinimapInput() {
 		if (super.mouseClickButton != 1) {
 			return;
 		}
@@ -3791,7 +3755,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.d(Z)V")
-	public final void handleTabInput() {
+	public void handleTabInput() {
 		if (super.mouseClickButton != 1) {
 			return;
 		}
@@ -3874,7 +3838,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.g(B)V")
-	public final void handleChatModeInput() {
+	public void handleChatModeInput() {
 		if (super.mouseClickButton != 1) {
 			return;
 		}
@@ -3919,7 +3883,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.K(I)V")
-	public final void closeInterfaces() {
+	public void closeInterfaces() {
 		this.out.pIsaac(245);
 		if (this.sidebarInterfaceId != -1) {
 			this.sidebarInterfaceId = -1;
@@ -3936,7 +3900,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.T(I)V")
-	public final void updateEntityChats() {
+	public void updateEntityChats() {
 		for (int var2 = -1; var2 < this.playerCount; var2++) {
 			int var3;
 			if (var2 == -1) {
@@ -3965,7 +3929,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.R(I)V")
-	public final void updateOrbitCamera() {
+	public void updateOrbitCamera() {
 		try {
 			int var2 = localPlayer.x + this.macroCameraX;
 			int var3 = localPlayer.z + this.macroCameraZ;
@@ -4038,7 +4002,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.l(I)V")
-	public final void applyCutscene() {
+	public void applyCutscene() {
 		int var2 = this.cutsceneSrcLocalTileX * 128 + 64;
 		int var3 = this.cutsceneSrcLocalTileZ * 128 + 64;
 		int var4 = this.getHeightmapY(var3, this.currentLevel, var2) - this.cutsceneSrcHeight;
@@ -4133,7 +4097,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.Z(I)V")
-	public final void handleInputKey() {
+	public void handleInputKey() {
 		while (true) {
 			int var3;
 			do {
@@ -4176,7 +4140,7 @@ public class Client extends GameShell {
 								WordPack.pack(this.out, this.socialInput);
 								this.out.psize1(this.out.pos - var8);
 								this.socialInput = JString.toSentenceCase(this.socialInput);
-								this.socialInput = WordFilter.filter(this.socialInput, 0);
+								this.socialInput = WordFilter.filter(this.socialInput);
 								this.addMessage(JString.formatDisplayName(JString.fromBase37(this.socialName37)), 6, this.socialInput);
 								if (this.chatPrivateMode == 2) {
 									this.chatPrivateMode = 1;
@@ -4312,7 +4276,7 @@ public class Client extends GameShell {
 								WordPack.pack(this.out, this.chatTyped);
 								this.out.psize1(this.out.pos - var17);
 								this.chatTyped = JString.toSentenceCase(this.chatTyped);
-								this.chatTyped = WordFilter.filter(this.chatTyped, 0);
+								this.chatTyped = WordFilter.filter(this.chatTyped);
 								localPlayer.chatMessage = this.chatTyped;
 								localPlayer.chatColour = var15;
 								localPlayer.chatEffect = var16;
@@ -4363,7 +4327,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.N(I)V")
-	public final void updatePlayers() {
+	public void updatePlayers() {
 		for (int var2 = -1; var2 < this.playerCount; var2++) {
 			int var3;
 			if (var2 == -1) {
@@ -4403,7 +4367,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.j(I)V")
-	public final void updateNpcs() {
+	public void updateNpcs() {
 		for (int var2 = 0; var2 < this.npcCount; var2++) {
 			int var3 = this.npcIds[var2];
 			ClientNpc var4 = this.npcs[var3];
@@ -4414,7 +4378,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(BILz;)V")
-	public final void updateEntity(int arg1, ClientEntity arg2) {
+	public void updateEntity(int arg1, ClientEntity arg2) {
 		if (arg2.x < 128 || arg2.z < 128 || arg2.x >= 13184 || arg2.z >= 13184) {
 			arg2.primarySeqId = -1;
 			arg2.spotanimId = -1;
@@ -4445,7 +4409,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILz;)V")
-	public final void updateForceMovement(ClientEntity arg1) {
+	public void updateForceMovement(ClientEntity arg1) {
 		int var3 = arg1.forceMoveEndCycle - loopCycle;
 		int var4 = arg1.forceMoveStartSceneTileX * 128 + arg1.size * 64;
 		int var5 = arg1.forceMoveStartSceneTileZ * 128 + arg1.size * 64;
@@ -4467,8 +4431,8 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(BLz;)V")
-	public final void startForceMovement(ClientEntity arg1) {
-		if (arg1.forceMoveStartCycle == loopCycle || arg1.primarySeqId == -1 || arg1.primarySeqDelay != 0 || arg1.primarySeqCycle + 1 > SeqType.types[arg1.primarySeqId].getFrameDuration(arg1.primarySeqFrame)) {
+	public void startForceMovement(ClientEntity arg1) {
+		if (arg1.forceMoveStartCycle == loopCycle || arg1.primarySeqId == -1 || arg1.primarySeqDelay != 0 || arg1.primarySeqCycle + 1 > SeqType.types[arg1.primarySeqId].getFrameLength(arg1.primarySeqFrame)) {
 			int var3 = arg1.forceMoveStartCycle - arg1.forceMoveEndCycle;
 			int var4 = loopCycle - arg1.forceMoveEndCycle;
 			int var5 = arg1.forceMoveStartSceneTileX * 128 + arg1.size * 64;
@@ -4495,7 +4459,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(ILz;)V")
-	public final void updateMovement(ClientEntity arg1) {
+	public void updateMovement(ClientEntity arg1) {
 		arg1.secondarySeqId = arg1.readyanim;
 		if (arg1.routeLength == 0) {
 			arg1.seqDelayMove = 0;
@@ -4609,7 +4573,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Lz;B)V")
-	public final void updateFacingDirection(ClientEntity arg0) {
+	public void updateFacingDirection(ClientEntity arg0) {
 		if (arg0.targetId != -1 && arg0.targetId < 32768) {
 			ClientNpc var4 = this.npcs[arg0.targetId];
 			if (var4 != null) {
@@ -4664,12 +4628,12 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Lz;I)V")
-	public final void updateSequences(ClientEntity arg0) {
+	public void updateSequences(ClientEntity arg0) {
 		arg0.needsForwardDrawPadding = false;
 		if (arg0.secondarySeqId != -1) {
 			SeqType var3 = SeqType.types[arg0.secondarySeqId];
 			arg0.secondarySeqCycle++;
-			if (arg0.secondarySeqFrame < var3.frameCount && arg0.secondarySeqCycle > var3.getFrameDuration(arg0.secondarySeqFrame)) {
+			if (arg0.secondarySeqFrame < var3.frameCount && arg0.secondarySeqCycle > var3.getFrameLength(arg0.secondarySeqFrame)) {
 				arg0.secondarySeqCycle = 0;
 				arg0.secondarySeqFrame++;
 			}
@@ -4684,8 +4648,8 @@ public class Client extends GameShell {
 			}
 			SeqType var4 = SpotAnimType.types[arg0.spotanimId].seq;
 			arg0.spotanimCycle++;
-			while (arg0.spotanimFrame < var4.frameCount && arg0.spotanimCycle > var4.getFrameDuration(arg0.spotanimFrame)) {
-				arg0.spotanimCycle -= var4.getFrameDuration(arg0.spotanimFrame);
+			while (arg0.spotanimFrame < var4.frameCount && arg0.spotanimCycle > var4.getFrameLength(arg0.spotanimFrame)) {
+				arg0.spotanimCycle -= var4.getFrameLength(arg0.spotanimFrame);
 				arg0.spotanimFrame++;
 			}
 			if (arg0.spotanimFrame >= var4.frameCount && (arg0.spotanimFrame < 0 || arg0.spotanimFrame >= var4.frameCount)) {
@@ -4702,8 +4666,8 @@ public class Client extends GameShell {
 		if (arg0.primarySeqId != -1 && arg0.primarySeqDelay == 0) {
 			SeqType var6 = SeqType.types[arg0.primarySeqId];
 			arg0.primarySeqCycle++;
-			while (arg0.primarySeqFrame < var6.frameCount && arg0.primarySeqCycle > var6.getFrameDuration(arg0.primarySeqFrame)) {
-				arg0.primarySeqCycle -= var6.getFrameDuration(arg0.primarySeqFrame);
+			while (arg0.primarySeqFrame < var6.frameCount && arg0.primarySeqCycle > var6.getFrameLength(arg0.primarySeqFrame)) {
+				arg0.primarySeqCycle -= var6.getFrameLength(arg0.primarySeqFrame);
 				arg0.primarySeqFrame++;
 			}
 			if (arg0.primarySeqFrame >= var6.frameCount) {
@@ -4724,7 +4688,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.u(I)V")
-	public final void loadTitle() {
+	public void loadTitle() {
 		if (this.imageTitle2 != null) {
 			return;
 		}
@@ -4762,7 +4726,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.h(B)V")
-	public final void loadTitleBackground() {
+	public void loadTitleBackground() {
 		byte[] var2 = this.jagTitle.read("title.dat", null);
 		Pix32 var3 = new Pix32(var2, this);
 		this.imageTitle0.bind();
@@ -4820,7 +4784,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.n(I)V")
-	public final void loadTitleImages() {
+	public void loadTitleImages() {
 		this.imageTitlebox = new Pix8(this.jagTitle, "titlebox", 0);
 		this.imageTitlebutton = new Pix8(this.jagTitle, "titlebutton", 0);
 		this.imageRunes = new Pix8[12];
@@ -4889,7 +4853,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.d(B)V")
-	public final void drawTitle() {
+	public void drawTitle() {
 		this.loadTitle();
 		this.imageTitle4.bind();
 		this.imageTitlebox.plotSprite(0, 0);
@@ -4960,7 +4924,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.k(I)V")
-	public final void drawGame() {
+	public void drawGame() {
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
 			this.areaBackleft1.draw(0, super.graphics, 4);
@@ -5198,7 +5162,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.F(I)V")
-	public final void drawScene() {
+	public void drawScene() {
 		this.sceneCycle++;
 		this.pushNpcs(true);
 		this.pushPlayers();
@@ -5296,7 +5260,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.O(I)V")
-	public final void pushPlayers() {
+	public void pushPlayers() {
 		if (localPlayer.x >> 7 == this.flagSceneTileX && localPlayer.z >> 7 == this.flagSceneTileZ) {
 			this.flagSceneTileX = 0;
 		}
@@ -5338,7 +5302,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ZB)V")
-	public final void pushNpcs(boolean arg0) {
+	public void pushNpcs(boolean arg0) {
 		for (int var3 = 0; var3 < this.npcCount; var3++) {
 			ClientNpc var4 = this.npcs[this.npcIds[var3]];
 			int var5 = (this.npcIds[var3] << 14) + 536870912;
@@ -5359,7 +5323,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.V(I)V")
-	public final void pushProjectiles() {
+	public void pushProjectiles() {
 		for (ClientProj var2 = (ClientProj) this.projectiles.head(); var2 != null; var2 = (ClientProj) this.projectiles.next()) {
 			if (var2.level != this.currentLevel || loopCycle > var2.endCycle) {
 				var2.unlink();
@@ -5367,7 +5331,7 @@ public class Client extends GameShell {
 				if (var2.target > 0) {
 					ClientNpc var3 = this.npcs[var2.target - 1];
 					if (var3 != null && var3.x >= 0 && var3.x < 13312 && var3.z >= 0 && var3.z < 13312) {
-						var2.updateVelocity(var3.x, var3.z, loopCycle, this.getHeightmapY(var3.z, var2.level, var3.x) - var2.offsetY);
+						var2.updateVelocity(var3.x, var3.z, loopCycle, this.getHeightmapY(var3.z, var2.level, var3.x) - var2.dstHeight);
 					}
 				}
 				if (var2.target < 0) {
@@ -5379,17 +5343,17 @@ public class Client extends GameShell {
 						var5 = this.players[var4];
 					}
 					if (var5 != null && var5.x >= 0 && var5.x < 13312 && var5.z >= 0 && var5.z < 13312) {
-						var2.updateVelocity(var5.x, var5.z, loopCycle, this.getHeightmapY(var5.z, var2.level, var5.x) - var2.offsetY);
+						var2.updateVelocity(var5.x, var5.z, loopCycle, this.getHeightmapY(var5.z, var2.level, var5.x) - var2.dstHeight);
 					}
 				}
 				var2.update(this.sceneDelta);
-				this.scene.addTemporary(60, (int) var2.field527, var2.field534, (int) var2.field526, -1, this.currentLevel, false, (int) var2.field528, var2);
+				this.scene.addTemporary(60, (int) var2.z, var2.yaw, (int) var2.x, -1, this.currentLevel, false, (int) var2.y, var2);
 			}
 		}
 	}
 
 	@ObfuscatedName("client.W(I)V")
-	public final void pushSpotanims() {
+	public void pushSpotanims() {
 		for (MapSpotAnim var2 = (MapSpotAnim) this.spotanims.head(); var2 != null; var2 = (MapSpotAnim) this.spotanims.next()) {
 			if (var2.level != this.currentLevel || var2.seqComplete) {
 				var2.unlink();
@@ -5405,7 +5369,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIIII)V")
-	public final void orbitCamera(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void orbitCamera(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var8 = 2048 - arg0 & 0x7FF;
 		int var9 = 2048 - arg4 & 0x7FF;
 		int var10 = 0;
@@ -5433,13 +5397,13 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.f(Z)I")
-	public final int getTopLevelCutscene() {
+	public int getTopLevelCutscene() {
 		int var2 = this.getHeightmapY(this.cameraZ, this.currentLevel, this.cameraX);
 		return var2 - this.cameraY >= 800 || (this.levelTileFlags[this.currentLevel][this.cameraX >> 7][this.cameraZ >> 7] & 0x4) == 0 ? 3 : this.currentLevel;
 	}
 
 	@ObfuscatedName("client.L(I)I")
-	public final int getTopLevel() {
+	public int getTopLevel() {
 		int var2 = 3;
 		if (this.cameraPitch < 310) {
 			int var3 = this.cameraX >> 7;
@@ -5520,7 +5484,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.v(I)V")
-	public final void draw2DEntityElements() {
+	public void draw2DEntityElements() {
 		this.chatCount = 0;
 		for (int var2 = -1; var2 < this.playerCount + this.npcCount; var2++) {
 			ClientEntity var3;
@@ -5707,7 +5671,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.c(Z)V")
-	public final void drawTileHint() {
+	public void drawTileHint() {
 		if (this.hintType != 2) {
 			return;
 		}
@@ -5718,12 +5682,12 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ZLz;I)V")
-	public final void projectFromEntity(ClientEntity arg1, int arg2) {
+	public void projectFromEntity(ClientEntity arg1, int arg2) {
 		this.projectFromGround(arg1.z, arg2, arg1.x);
 	}
 
 	@ObfuscatedName("client.b(IIII)V")
-	public final void projectFromGround(int arg0, int arg1, int arg2) {
+	public void projectFromGround(int arg0, int arg1, int arg2) {
 		if (arg2 < 128 || arg0 < 128 || arg2 > 13056 || arg0 > 13056) {
 			this.projectX = -1;
 			this.projectY = -1;
@@ -5751,7 +5715,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIB)I")
-	public final int getHeightmapY(int arg0, int arg1, int arg2) {
+	public int getHeightmapY(int arg0, int arg1, int arg2) {
 		int var5 = arg2 >> 7;
 		int var6 = arg0 >> 7;
 		if (var5 < 0 || var6 < 0 || var5 > 103 || var6 > 103) {
@@ -5769,7 +5733,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.e(II)V")
-	public final void updateTextures(int arg0) {
+	public void updateTextures(int arg0) {
 		if (lowMem) {
 			return;
 		}
@@ -5802,7 +5766,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.h(I)V")
-	public final void draw3DEntityElements() {
+	public void draw3DEntityElements() {
 		this.drawPrivateMessages();
 		if (this.crossMode == 1) {
 			this.imageCross[this.crossCycle / 100].plotSprite(this.crossX - 8 - 4, this.crossY - 8 - 4);
@@ -5860,7 +5824,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.x(I)V")
-	public final void drawPrivateMessages() {
+	public void drawPrivateMessages() {
 		if (this.splitPrivateChat == 0) {
 			return;
 		}
@@ -5926,7 +5890,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.w(I)V")
-	public final void updateWorldLocation() {
+	public void updateWorldLocation() {
 		int var2 = (localPlayer.x >> 7) + this.sceneBaseTileX;
 		int var3 = (localPlayer.z >> 7) + this.sceneBaseTileZ;
 		if (var2 >= 2944 && var2 < 3392 && var3 >= 3520 && var3 < 6400) {
@@ -5975,7 +5939,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.C(I)V")
-	public final void drawTooltip() {
+	public void drawTooltip() {
 		if (this.menuSize < 2 && this.objSelected == 0 && this.spellSelected == 0) {
 			return;
 		}
@@ -5994,7 +5958,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.i(I)V")
-	public final void drawMenu() {
+	public void drawMenu() {
 		int var2 = this.menuX;
 		int var3 = this.menuY;
 		int var4 = this.menuWidth;
@@ -6029,7 +5993,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIIB)V")
-	public final void drawMinimapLoc(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void drawMinimapLoc(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		int var7 = this.scene.getWallTypecode(arg3, arg0, arg1);
 		if (var7 != 0) {
 			int var8 = this.scene.getInfo(arg3, arg0, arg1, var7);
@@ -6160,7 +6124,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(BIIII)Z")
-	public final boolean interactWithLoc(int arg1, int arg2, int arg3, int arg4) {
+	public boolean interactWithLoc(int arg1, int arg2, int arg3, int arg4) {
 		int var6 = arg1 >> 14 & 0x7FFF;
 		int var7 = this.scene.getInfo(this.currentLevel, arg3, arg4, arg1);
 		if (var7 == -1) {
@@ -6199,7 +6163,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIIIIIIZII)Z")
-	public final boolean tryMove(int arg0, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, boolean arg9, int arg10, int arg11) {
+	public boolean tryMove(int arg0, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, boolean arg9, int arg10, int arg11) {
 		byte var13 = 104;
 		byte var14 = 104;
 		for (int var15 = 0; var15 < var13; var15++) {
@@ -6392,7 +6356,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(B)Z")
-	public final boolean readPacket() {
+	public boolean readPacket() {
 		if (this.stream == null) {
 			return false;
 		}
@@ -6561,7 +6525,7 @@ public class Client extends GameShell {
 						this.messageIds[this.privateMessageCount] = var14;
 						this.privateMessageCount = (this.privateMessageCount + 1) % 100;
 						String var19 = WordPack.unpack(this.psize - 13, this.in);
-						String var20 = WordFilter.filter(var19, 0);
+						String var20 = WordFilter.filter(var19);
 						if (var15 == 2 || var15 == 3) {
 							this.addMessage("@cr2@" + JString.formatDisplayName(JString.fromBase37(var12)), 7, var20);
 						} else if (var15 == 1) {
@@ -7359,12 +7323,12 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Lmb;BI)V")
-	public final void readZonePacket(Packet arg0, int arg2) {
+	public void readZonePacket(Packet buf, int arg2) {
 		if (arg2 == 119 || arg2 == 198) {
-			int var4 = arg0.g1();
+			int var4 = buf.g1();
 			int var5 = this.baseX + (var4 >> 4 & 0x7);
 			int var6 = this.baseZ + (var4 & 0x7);
-			int var7 = arg0.g1();
+			int var7 = buf.g1();
 			int var8 = var7 >> 2;
 			int var9 = var7 & 0x3;
 			int var10 = this.LOC_SHAPE_TO_LAYER[var8];
@@ -7372,20 +7336,20 @@ public class Client extends GameShell {
 			if (arg2 == 198) {
 				var11 = -1;
 			} else {
-				var11 = arg0.g2();
+				var11 = buf.g2();
 			}
 			if (var5 >= 0 && var6 >= 0 && var5 < 104 && var6 < 104) {
 				this.appendLoc(var11, var10, this.currentLevel, var9, var6, 0, -1, var5, var8);
 			}
 		} else if (arg2 == 71) {
-			int var12 = arg0.g1();
+			int var12 = buf.g1();
 			int var13 = this.baseX + (var12 >> 4 & 0x7);
 			int var14 = this.baseZ + (var12 & 0x7);
-			int var15 = arg0.g1();
+			int var15 = buf.g1();
 			int var16 = var15 >> 2;
 			int var17 = var15 & 0x3;
 			int var18 = this.LOC_SHAPE_TO_LAYER[var16];
-			int var19 = arg0.g2();
+			int var19 = buf.g2();
 			if (var13 >= 0 && var14 >= 0 && var13 < 103 && var14 < 103) {
 				int var20 = this.levelHeightmap[this.currentLevel][var13][var14];
 				int var21 = this.levelHeightmap[this.currentLevel][var13 + 1][var14];
@@ -7426,11 +7390,11 @@ public class Client extends GameShell {
 				}
 			}
 		} else if (arg2 == 94) {
-			int var29 = arg0.g1();
+			int var29 = buf.g1();
 			int var30 = this.baseX + (var29 >> 4 & 0x7);
 			int var31 = this.baseZ + (var29 & 0x7);
-			int var32 = arg0.g2();
-			int var33 = arg0.g2();
+			int var32 = buf.g2();
+			int var33 = buf.g2();
 			if (var30 >= 0 && var31 >= 0 && var30 < 104 && var31 < 104) {
 				ClientObj var34 = new ClientObj();
 				var34.index = var32;
@@ -7442,10 +7406,10 @@ public class Client extends GameShell {
 				this.sortObjStacks(var30, var31);
 			}
 		} else if (arg2 == 13) {
-			int var35 = arg0.g1();
+			int var35 = buf.g1();
 			int var36 = this.baseX + (var35 >> 4 & 0x7);
 			int var37 = this.baseZ + (var35 & 0x7);
-			int var38 = arg0.g2();
+			int var38 = buf.g2();
 			if (var36 >= 0 && var37 >= 0 && var36 < 104 && var37 < 104) {
 				LinkList var39 = this.objStacks[this.currentLevel][var36][var37];
 				if (var39 != null) {
@@ -7462,35 +7426,37 @@ public class Client extends GameShell {
 				}
 			}
 		} else if (arg2 == 187) {
-			int var41 = arg0.g1();
-			int var42 = this.baseX + (var41 >> 4 & 0x7);
-			int var43 = this.baseZ + (var41 & 0x7);
-			int var44 = var42 + arg0.g1b();
-			int var45 = var43 + arg0.g1b();
-			int var46 = arg0.g2b();
-			int var47 = arg0.g2();
-			int var48 = arg0.g1();
-			int var49 = arg0.g1();
-			int var50 = arg0.g2();
-			int var51 = arg0.g2();
-			int var52 = arg0.g1();
-			int var53 = arg0.g1();
-			if (var42 >= 0 && var43 >= 0 && var42 < 104 && var43 < 104 && var44 >= 0 && var45 >= 0 && var44 < 104 && var45 < 104) {
-				int var54 = var42 * 128 + 64;
-				int var55 = var43 * 128 + 64;
-				int var56 = var44 * 128 + 64;
-				int var57 = var45 * 128 + 64;
-				ClientProj var58 = new ClientProj(this.getHeightmapY(var55, this.currentLevel, var54) - var48, var53, this.currentLevel, var55, var51 + loopCycle, var49, var47, var52, var46, var54, var50 + loopCycle);
-				var58.updateVelocity(var56, var57, var50 + loopCycle, this.getHeightmapY(var57, this.currentLevel, var56) - var49);
-				this.projectiles.push(var58);
+			int coord = buf.g1();
+			int srcX = this.baseX + (coord >> 4 & 0x7);
+			int srcZ = this.baseZ + (coord & 0x7);
+			int dstX = srcX + buf.g1b();
+			int dstZ = srcZ + buf.g1b();
+			int target = buf.g2b();
+			int graphic = buf.g2();
+			int srcHeight = buf.g1();
+			int dstHeight = buf.g1();
+			int startCycle = buf.g2();
+			int endCycle = buf.g2();
+			int peak = buf.g1();
+			int arc = buf.g1();
+
+			if (srcX >= 0 && srcZ >= 0 && srcX < 104 && srcZ < 104 && dstX >= 0 && dstZ >= 0 && dstX < 104 && dstZ < 104) {
+				int var54 = srcX * 128 + 64;
+				int var55 = srcZ * 128 + 64;
+				int var56 = dstX * 128 + 64;
+				int var57 = dstZ * 128 + 64;
+
+				ClientProj proj = new ClientProj(this.getHeightmapY(var55, this.currentLevel, var54) - srcHeight, arc, this.currentLevel, var55, endCycle + loopCycle, dstHeight, graphic, peak, target, var54, startCycle + loopCycle);
+				proj.updateVelocity(var56, var57, startCycle + loopCycle, this.getHeightmapY(var57, this.currentLevel, var56) - dstHeight);
+				this.projectiles.push(proj);
 			}
 		} else if (arg2 == 141) {
-			int var59 = arg0.g1();
+			int var59 = buf.g1();
 			int var60 = this.baseX + (var59 >> 4 & 0x7);
 			int var61 = this.baseZ + (var59 & 0x7);
-			int var62 = arg0.g2();
-			int var63 = arg0.g1();
-			int var64 = arg0.g2();
+			int var62 = buf.g2();
+			int var63 = buf.g1();
+			int var64 = buf.g2();
 			if (var60 >= 0 && var61 >= 0 && var60 < 104 && var61 < 104) {
 				int var65 = var60 * 128 + 64;
 				int var66 = var61 * 128 + 64;
@@ -7498,12 +7464,12 @@ public class Client extends GameShell {
 				this.spotanims.push(var67);
 			}
 		} else if (arg2 == 190) {
-			int var68 = arg0.g1();
+			int var68 = buf.g1();
 			int var69 = this.baseX + (var68 >> 4 & 0x7);
 			int var70 = this.baseZ + (var68 & 0x7);
-			int var71 = arg0.g2();
-			int var72 = arg0.g2();
-			int var73 = arg0.g2();
+			int var71 = buf.g2();
+			int var72 = buf.g2();
+			int var73 = buf.g2();
 			if (var69 >= 0 && var70 >= 0 && var69 < 104 && var70 < 104 && var73 != this.localPid) {
 				ClientObj var74 = new ClientObj();
 				var74.index = var71;
@@ -7515,21 +7481,21 @@ public class Client extends GameShell {
 				this.sortObjStacks(var69, var70);
 			}
 		} else if (arg2 == 188) {
-			int var75 = arg0.g1();
+			int var75 = buf.g1();
 			int var76 = this.baseX + (var75 >> 4 & 0x7);
 			int var77 = this.baseZ + (var75 & 0x7);
-			int var78 = arg0.g1();
+			int var78 = buf.g1();
 			int var79 = var78 >> 2;
 			int var80 = var78 & 0x3;
 			int var81 = this.LOC_SHAPE_TO_LAYER[var79];
-			int var82 = arg0.g2();
-			int var83 = arg0.g2();
-			int var84 = arg0.g2();
-			int var85 = arg0.g2();
-			byte var86 = arg0.g1b();
-			byte var87 = arg0.g1b();
-			byte var88 = arg0.g1b();
-			byte var89 = arg0.g1b();
+			int var82 = buf.g2();
+			int var83 = buf.g2();
+			int var84 = buf.g2();
+			int var85 = buf.g2();
+			byte var86 = buf.g1b();
+			byte var87 = buf.g1b();
+			byte var88 = buf.g1b();
+			byte var89 = buf.g1b();
 			ClientPlayer var90;
 			if (var85 == this.localPid) {
 				var90 = localPlayer;
@@ -7574,12 +7540,12 @@ public class Client extends GameShell {
 				}
 			}
 		} else if (arg2 == 151) {
-			int var101 = arg0.g1();
+			int var101 = buf.g1();
 			int var102 = this.baseX + (var101 >> 4 & 0x7);
 			int var103 = this.baseZ + (var101 & 0x7);
-			int var104 = arg0.g2();
-			int var105 = arg0.g2();
-			int var106 = arg0.g2();
+			int var104 = buf.g2();
+			int var105 = buf.g2();
+			int var106 = buf.g2();
 			if (var102 >= 0 && var103 >= 0 && var102 < 104 && var103 < 104) {
 				LinkList var107 = this.objStacks[this.currentLevel][var102][var103];
 				if (var107 != null) {
@@ -7596,7 +7562,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIIIIIII)V")
-	public final void appendLoc(int arg0, int arg1, int arg2, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+	public void appendLoc(int arg0, int arg1, int arg2, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
 		LocChange var11 = null;
 		for (LocChange var12 = (LocChange) this.locChanges.head(); var12 != null; var12 = (LocChange) this.locChanges.next()) {
 			if (var12.level == arg2 && var12.x == arg8 && var12.z == arg5 && var12.layer == arg1) {
@@ -7621,7 +7587,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(BLob;)V")
-	public final void storeLoc(LocChange arg1) {
+	public void storeLoc(LocChange arg1) {
 		int var3 = 0;
 		int var4 = -1;
 		int var5 = 0;
@@ -7650,7 +7616,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIIIII)V")
-	public final void addLoc(int arg0, int arg1, int arg2, int arg4, int arg5, int arg6, int arg7) {
+	public void addLoc(int arg0, int arg1, int arg2, int arg4, int arg5, int arg6, int arg7) {
 		if (arg6 < 1 || arg1 < 1 || arg6 > 102 || arg1 > 102) {
 			return;
 		}
@@ -7713,7 +7679,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(II)V")
-	public final void sortObjStacks(int arg0, int arg1) {
+	public void sortObjStacks(int arg0, int arg1) {
 		LinkList var3 = this.objStacks[this.currentLevel][arg0][arg1];
 		if (var3 == null) {
 			this.scene.removeGroundObj(this.currentLevel, arg0, arg1);
@@ -7748,7 +7714,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILmb;I)V")
-	public final void getPlayerPos(int arg0, Packet arg1) {
+	public void getPlayerPos(int arg0, Packet arg1) {
 		this.entityRemovalCount = 0;
 		this.entityUpdateCount = 0;
 		this.getPlayerLocal(arg0, arg1);
@@ -7774,7 +7740,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.c(IILmb;)V")
-	public final void getPlayerLocal(int arg0, Packet arg2) {
+	public void getPlayerLocal(int arg0, Packet arg2) {
 		arg2.bits();
 		int var4 = arg2.gBit(1);
 		if (var4 != 0) {
@@ -7812,7 +7778,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ZLmb;I)V")
-	public final void getPlayerOldVis(Packet arg1, int arg2) {
+	public void getPlayerOldVis(Packet arg1, int arg2) {
 		int var4 = arg1.gBit(8);
 		if (var4 < this.playerCount) {
 			for (int var5 = var4; var5 < this.playerCount; var5++) {
@@ -7865,7 +7831,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.c(ILmb;I)V")
-	public final void getPlayerNewVis(Packet arg1, int arg2) {
+	public void getPlayerNewVis(Packet arg1, int arg2) {
 		while (arg1.bitPos + 10 < arg2 * 8) {
 			int var4 = arg1.gBit(11);
 			if (var4 == 2047) {
@@ -7899,7 +7865,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Lmb;IB)V")
-	public final void getPlayerExtended(Packet arg0, int arg1) {
+	public void getPlayerExtended(Packet arg0, int arg1) {
 		for (int var4 = 0; var4 < this.entityUpdateCount; var4++) {
 			int var5 = this.entityUpdateIds[var4];
 			ClientPlayer var6 = this.players[var5];
@@ -7912,7 +7878,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(BIILbb;Lmb;)V")
-	public final void getPlayerExtendedInfo(int arg1, int arg2, ClientPlayer arg3, Packet arg4) {
+	public void getPlayerExtendedInfo(int arg1, int arg2, ClientPlayer arg3, Packet arg4) {
 		if ((arg1 & 0x1) == 1) {
 			int var7 = arg4.g1();
 			byte[] var8 = new byte[var7];
@@ -7994,7 +7960,7 @@ public class Client extends GameShell {
 				if (!var21 && this.overrideChat == 0) {
 					try {
 						String var23 = WordPack.unpack(var17, arg4);
-						String var24 = WordFilter.filter(var23, 0);
+						String var24 = WordFilter.filter(var23);
 						arg3.chatMessage = var24;
 						arg3.chatColour = var15 >> 8;
 						arg3.chatEffect = var15 & 0xFF;
@@ -8048,7 +8014,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IILmb;)V")
-	public final void getNpcPos(int arg0, Packet arg2) {
+	public void getNpcPos(int arg0, Packet arg2) {
 		this.entityRemovalCount = 0;
 		this.entityUpdateCount = 0;
 		this.getNpcPosOldVis(arg2, arg0);
@@ -8074,7 +8040,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Lmb;IZ)V")
-	public final void getNpcPosOldVis(Packet arg0, int arg1) {
+	public void getNpcPosOldVis(Packet arg0, int arg1) {
 		arg0.bits();
 		int var4 = arg0.gBit(8);
 		if (var4 < this.npcCount) {
@@ -8128,7 +8094,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(IILmb;)V")
-	public final void getNpcPosNewVis(int arg0, Packet arg2) {
+	public void getNpcPosNewVis(int arg0, Packet arg2) {
 		while (arg2.bitPos + 21 < arg0 * 8) {
 			int var4 = arg2.gBit(13);
 			if (var4 == 8191) {
@@ -8165,7 +8131,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(ILmb;I)V")
-	public final void getNpcPosExtended(Packet arg1, int arg2) {
+	public void getNpcPosExtended(Packet arg1, int arg2) {
 		for (int var4 = 0; var4 < this.entityUpdateCount; var4++) {
 			int var5 = this.entityUpdateIds[var4];
 			ClientNpc var6 = this.npcs[var5];
@@ -8255,7 +8221,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.Q(I)V")
-	public final void showContextMenu() {
+	public void showContextMenu() {
 		int var2 = this.fontBold12.stringWid("Choose Option");
 		for (int var3 = 0; var3 < this.menuSize; var3++) {
 			int var4 = this.fontBold12.stringWid(this.menuOption[var3]);
@@ -8330,7 +8296,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.d(II)Z")
-	public final boolean isAddFriendOption(int arg1) {
+	public boolean isAddFriendOption(int arg1) {
 		if (arg1 < 0) {
 			return false;
 		}
@@ -8342,7 +8308,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(BI)V")
-	public final void useMenuOption(int arg1) {
+	public void useMenuOption(int arg1) {
 		if (arg1 < 0) {
 			return;
 		}
@@ -8915,7 +8881,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIILgc;I)V")
-	public final void addNpcOptions(int arg0, int arg2, NpcType arg3, int arg4) {
+	public void addNpcOptions(int arg0, int arg2, NpcType arg3, int arg4) {
 		if (this.menuSize >= 400) {
 			return;
 		}
@@ -9004,7 +8970,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILbb;III)V")
-	public final void addPlayerOptions(ClientPlayer arg1, int arg2, int arg3, int arg4) {
+	public void addPlayerOptions(ClientPlayer arg1, int arg2, int arg3, int arg4) {
 		if (arg1 == localPlayer || this.menuSize >= 400) {
 			return;
 		}
@@ -9076,7 +9042,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(III)Ljava/lang/String;")
-	public static final String getCombatLevelTag(int arg1, int arg2) {
+	public static String getCombatLevelTag(int arg1, int arg2) {
 		int var3 = arg1 - arg2;
 		if (var3 < -9) {
 			return "@red@";
@@ -9100,7 +9066,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Ld;IZII)V")
-	public final void drawInterface(Component arg0, int arg1, int arg3, int arg4) {
+	public void drawInterface(Component arg0, int arg1, int arg3, int arg4) {
 		if (arg0.type != 0 || arg0.children == null || arg0.hide && this.viewportHoveredInterfaceId != arg0.id && this.sidebarHoveredInterfaceId != arg0.id && this.chatHoveredInterfaceId != arg0.id) {
 			return;
 		}
@@ -9401,7 +9367,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIIZ)V")
-	public final void drawScrollbar(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void drawScrollbar(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		this.imageScrollbar0.plotSprite(arg1, arg0);
 		this.imageScrollbar1.plotSprite(arg1, arg0 + arg4 - 16);
 		Pix2D.fillRect(arg0 + 16, arg4 - 32, arg1, 16, this.SCROLLBAR_TRACK);
@@ -9422,7 +9388,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(ZI)Ljava/lang/String;")
-	public static final String formatObjCount(int arg1) {
+	public static String formatObjCount(int arg1) {
 		if (arg1 < 100000) {
 			return String.valueOf(arg1);
 		} else if (arg1 < 10000000) {
@@ -9433,7 +9399,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ZI)Ljava/lang/String;")
-	public static final String formatObjCountTagged(int arg1) {
+	public static String formatObjCountTagged(int arg1) {
 		String var2 = String.valueOf(arg1);
 		for (int var3 = var2.length() - 3; var3 > 0; var3 -= 3) {
 			var2 = var2.substring(0, var3) + "," + var2.substring(var3);
@@ -9447,7 +9413,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIIZLd;IIB)V")
-	public final void handleScrollInput(int arg0, int arg1, int arg2, int arg3, boolean arg4, Component arg5, int arg6, int arg7) {
+	public void handleScrollInput(int arg0, int arg1, int arg2, int arg3, boolean arg4, Component arg5, int arg6, int arg7) {
 		if (this.scrollGrabbed) {
 			this.scrollInputPadding = 32;
 		} else {
@@ -9480,12 +9446,12 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.f(II)Ljava/lang/String;")
-	public final String getIntString(int arg1) {
+	public String getIntString(int arg1) {
 		return arg1 < 999999999 ? String.valueOf(arg1) : "*";
 	}
 
 	@ObfuscatedName("client.a(Ld;B)Z")
-	public final boolean executeInterfaceScript(Component arg0) {
+	public boolean executeInterfaceScript(Component arg0) {
 		if (arg0.scriptComparator == null) {
 			return false;
 		}
@@ -9512,7 +9478,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILd;I)I")
-	public final int executeClientScript(Component arg1, int arg2) {
+	public int executeClientScript(Component arg1, int arg2) {
 		if (arg1.scripts == null || arg2 >= arg1.scripts.length) {
 			return -2;
 		}
@@ -9591,7 +9557,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IZIILd;II)V")
-	public final void handleInterfaceInput(int arg0, int arg2, int arg3, Component arg4, int arg5, int arg6) {
+	public void handleInterfaceInput(int arg0, int arg2, int arg3, Component arg4, int arg5, int arg6) {
 		if (arg4.type != 0 || arg4.children == null || arg4.hide || (arg5 < arg0 || arg2 < arg6 || arg5 > arg0 + arg4.width || arg2 > arg6 + arg4.height)) {
 			return;
 		}
@@ -9788,7 +9754,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Ld;I)Z")
-	public final boolean handleSocialMenuOption(Component arg0) {
+	public boolean handleSocialMenuOption(Component arg0) {
 		int var3 = arg0.clientCode;
 		if (var3 >= 1 && var3 <= 200 || !(var3 < 701 || var3 > 900)) {
 			if (var3 >= 801) {
@@ -9818,7 +9784,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.c(ZI)V")
-	public final void resetInterfaceAnimation(int arg1) {
+	public void resetInterfaceAnimation(int arg1) {
 		Component var3 = Component.types[arg1];
 		for (int var4 = 0; var4 < var3.children.length && var3.children[var4] != -1; var4++) {
 			Component var5 = Component.types[var3.children[var4]];
@@ -9831,7 +9797,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.c(III)Z")
-	public final boolean updateInterfaceAnimation(int arg0, int arg1) {
+	public boolean updateInterfaceAnimation(int arg0, int arg1) {
 		boolean var4 = false;
 		Component var5 = Component.types[arg0];
 		for (int var6 = 0; var6 < var5.children.length && var5.children[var6] != -1; var6++) {
@@ -9850,8 +9816,8 @@ public class Client extends GameShell {
 				if (var9 != -1) {
 					SeqType var10 = SeqType.types[var9];
 					var7.seqCycle += arg1;
-					while (var7.seqCycle > var10.getFrameDuration(var7.seqFrame)) {
-						var7.seqCycle -= var10.getFrameDuration(var7.seqFrame) + 1;
+					while (var7.seqCycle > var10.getFrameLength(var7.seqFrame)) {
+						var7.seqCycle -= var10.getFrameLength(var7.seqFrame) + 1;
 						var7.seqFrame++;
 						if (var7.seqFrame >= var10.frameCount) {
 							var7.seqFrame -= var10.loops;
@@ -9868,7 +9834,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(II)V")
-	public final void updateVarp(int arg1) {
+	public void updateVarp(int arg1) {
 		int var4 = VarpType.types[arg1].clientcode;
 		if (var4 == 0) {
 			return;
@@ -9959,7 +9925,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILd;)V")
-	public final void updateInterfaceContent(Component arg1) {
+	public void updateInterfaceContent(Component arg1) {
 		int var3 = arg1.clientCode;
 		if (var3 >= 1 && var3 <= 100 || var3 >= 701 && var3 <= 800) {
 			if (var3 > 700) {
@@ -10041,7 +10007,7 @@ public class Client extends GameShell {
 					}
 				}
 				var10.createLabelReferences();
-				var10.applyTransform(SeqType.types[localPlayer.readyanim].frames[0]);
+				var10.applyFrame(SeqType.types[localPlayer.readyanim].frames[0]);
 				var10.calculateNormals(64, 850, -30, -50, -30, true);
 				arg1.modelType = 5;
 				arg1.model = 0;
@@ -10166,7 +10132,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(BLd;)Z")
-	public final boolean handleInterfaceAction(Component arg1) {
+	public boolean handleInterfaceAction(Component arg1) {
 		int var3 = arg1.clientCode;
 		if (var3 == 201) {
 			this.redrawChatback = true;
@@ -10284,7 +10250,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.A(I)V")
-	public final void validateCharacterDesign() {
+	public void validateCharacterDesign() {
 		this.updateDesignModel = true;
 		for (int var2 = 0; var2 < 7; var2++) {
 			this.designKits[var2] = -1;
@@ -10298,7 +10264,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.ab(I)V")
-	public final void drawSidebar() {
+	public void drawSidebar() {
 		this.areaSidebar.bind();
 		Pix3D.lineOffset = this.areaSidebarOffset;
 		this.imageInvback.plotSprite(0, 0);
@@ -10316,7 +10282,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.S(I)V")
-	public final void drawChat() {
+	public void drawChat() {
 		this.areaChatback.bind();
 		Pix3D.lineOffset = this.areaChatbackOffset;
 		this.imageChatback.plotSprite(0, 0);
@@ -10445,7 +10411,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.I(I)V")
-	public final void drawMinimap() {
+	public void drawMinimap() {
 		this.areaMapback.bind();
 		int var2 = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
 		int var3 = localPlayer.x / 32 + 48;
@@ -10528,7 +10494,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILjb;II)V")
-	public final void drawMinimapArrow(int arg0, Pix32 arg1, int arg2) {
+	public void drawMinimapArrow(int arg0, Pix32 arg1, int arg2) {
 		int var5 = arg2 * arg2 + arg0 * arg0;
 		if (var5 <= 4225 || var5 >= 90000) {
 			this.drawOnMinimap(arg2, arg1, arg0);
@@ -10548,7 +10514,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(ILjb;II)V")
-	public final void drawOnMinimap(int arg0, Pix32 arg1, int arg2) {
+	public void drawOnMinimap(int arg0, Pix32 arg1, int arg2) {
 		int var5 = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
 		int var6 = arg0 * arg0 + arg2 * arg2;
 		if (var6 > 6400) {
@@ -10568,7 +10534,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ZLjava/lang/String;ILjava/lang/String;)V")
-	public final void addMessage(String arg1, int arg2, String arg3) {
+	public void addMessage(String arg1, int arg2, String arg3) {
 		if (arg2 == 0 && this.stickyChatInterfaceId != -1) {
 			this.modalMessage = arg3;
 			super.mouseClickButton = 0;
@@ -10587,7 +10553,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILjava/lang/String;)Z")
-	public final boolean isFriend(String arg1) {
+	public boolean isFriend(String arg1) {
 		if (arg1 == null) {
 			return false;
 		}
@@ -10600,7 +10566,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IJ)V")
-	public final void addFriend(long arg1) {
+	public void addFriend(long arg1) {
 		if (arg1 == 0L) {
 			return;
 		}
@@ -10635,7 +10601,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(JZ)V")
-	public final void removeFriend(long arg0) {
+	public void removeFriend(long arg0) {
 		if (arg0 == 0L) {
 			return;
 		}
@@ -10656,7 +10622,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(JI)V")
-	public final void addIgnore(long arg0) {
+	public void addIgnore(long arg0) {
 		if (arg0 == 0L) {
 			return;
 		}
@@ -10684,7 +10650,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ZJ)V")
-	public final void removeIgnore(long arg1) {
+	public void removeIgnore(long arg1) {
 		if (arg1 == 0L) {
 			return;
 		}
@@ -10703,7 +10669,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.e(Z)V")
-	public final void unloadTitle() {
+	public void unloadTitle() {
 		this.flameActive = false;
 		while (this.flameThread) {
 			this.flameActive = false;
@@ -10730,7 +10696,7 @@ public class Client extends GameShell {
 	// ----
 
 	@ObfuscatedName("client.o(I)V")
-	public final void runFlames() {
+	public void runFlames() {
 		this.flameThread = true;
 		try {
 			long var2 = System.currentTimeMillis();
@@ -10763,7 +10729,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.z(I)V")
-	public final void updateFlames() {
+	public void updateFlames() {
 		short var2 = 256;
 		for (int var3 = 10; var3 < 117; var3++) {
 			int var4 = (int) (Math.random() * 100.0D);
@@ -10821,7 +10787,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ILkb;)V")
-	public final void updateFlameBuffer(Pix8 arg1) {
+	public void updateFlameBuffer(Pix8 arg1) {
 		short var3 = 256;
 		for (int var5 = 0; var5 < this.flameBuffer0.length; var5++) {
 			this.flameBuffer0[var5] = 0;
@@ -10857,7 +10823,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.G(I)V")
-	public final void drawFlames() {
+	public void drawFlames() {
 		short var2 = 256;
 		if (this.flameGradientCycle0 > 0) {
 			for (int var3 = 0; var3 < 256; var3++) {
@@ -10937,7 +10903,7 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIII)I")
-	public final int mix(int arg0, int arg2, int arg3) {
+	public int mix(int arg0, int arg2, int arg3) {
 		int var5 = 256 - arg0;
 		return ((arg2 & 0xFF00FF) * var5 + (arg3 & 0xFF00FF) * arg0 & 0xFF00FF00) + ((arg2 & 0xFF00) * var5 + (arg3 & 0xFF00) * arg0 & 0xFF0000) >> 8;
 	}

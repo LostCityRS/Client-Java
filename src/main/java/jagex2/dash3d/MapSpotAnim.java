@@ -44,15 +44,15 @@ public class MapSpotAnim extends ModelSource {
 	}
 
 	@ObfuscatedName("gb.a(IZ)V")
-	public final void update(int arg0) {
+	public void update(int arg0) {
 		this.seqCycle += arg0;
 		while (true) {
 			do {
 				do {
-					if (this.seqCycle <= this.type.seq.getFrameDuration(this.seqFrame)) {
+					if (this.seqCycle <= this.type.seq.getFrameLength(this.seqFrame)) {
 						return;
 					}
-					this.seqCycle -= this.type.seq.getFrameDuration(this.seqFrame) + 1;
+					this.seqCycle -= this.type.seq.getFrameLength(this.seqFrame) + 1;
 					this.seqFrame++;
 				} while (this.seqFrame < this.type.seq.frameCount);
 			} while (this.seqFrame >= 0 && this.seqFrame < this.type.seq.frameCount);
@@ -62,7 +62,7 @@ public class MapSpotAnim extends ModelSource {
 	}
 
 	@ObfuscatedName("gb.a(I)Lfb;")
-	public final Model getModel() {
+	public Model getModel() {
 		Model var3 = this.type.getModel();
 		if (var3 == null) {
 			return null;
@@ -70,12 +70,12 @@ public class MapSpotAnim extends ModelSource {
 		Model var4 = new Model(true, var3, false, !this.type.animHasAlpha);
 		if (!this.seqComplete) {
 			var4.createLabelReferences();
-			var4.applyTransform(this.type.seq.frames[this.seqFrame]);
+			var4.applyFrame(this.type.seq.frames[this.seqFrame]);
 			var4.labelFaces = null;
 			var4.labelVertices = null;
 		}
 		if (this.type.resizeh != 128 || this.type.resizev != 128) {
-			var4.scale(this.type.resizeh, this.type.resizeh, this.type.resizev);
+			var4.resize(this.type.resizeh, this.type.resizeh, this.type.resizev);
 		}
 		if (this.type.angle != 0) {
 			if (this.type.angle == 90) {

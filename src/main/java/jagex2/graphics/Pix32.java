@@ -3,10 +3,8 @@ package jagex2.graphics;
 import deob.ObfuscatedName;
 import jagex2.io.Jagfile;
 import jagex2.io.Packet;
-import java.awt.Component;
-import java.awt.Image;
-import java.awt.MediaTracker;
-import java.awt.Toolkit;
+
+import java.awt.*;
 import java.awt.image.PixelGrabber;
 
 @ObfuscatedName("jb")

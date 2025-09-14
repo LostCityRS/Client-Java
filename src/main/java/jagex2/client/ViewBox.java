@@ -12,26 +12,26 @@ public class ViewBox extends JFrame {
 	@ObfuscatedName("b.a")
 	public GameShell shell;
 
-	public ViewBox(int arg0, GameShell arg1, int arg2) {
-		this.shell = arg1;
+	public ViewBox(int height, GameShell shell, int width) {
+		this.shell = shell;
 		this.setTitle("RS2 user client - release #" + signlink.clientversion);
 		this.setResizable(false);
 
 		BorderLayout manager = new BorderLayout();
 		this.setLayout(manager);
 
-		this.add(shell, BorderLayout.CENTER);
+		this.add(this.shell, BorderLayout.CENTER);
 		this.pack();
 
 		this.setVisible(true);
 		this.toFront();
 	}
 
-	public final void update(Graphics g) {
+	public void update(Graphics g) {
 		this.shell.update(g);
 	}
 
-	public final void paint(Graphics g) {
+	public void paint(Graphics g) {
 		this.shell.paint(g);
 	}
 }

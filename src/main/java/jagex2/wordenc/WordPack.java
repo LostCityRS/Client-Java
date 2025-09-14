@@ -13,79 +13,91 @@ public class WordPack {
 	public static char[] TABLE = new char[] { ' ', 'e', 't', 'a', 'o', 'i', 'h', 'n', 's', 'r', 'd', 'l', 'u', 'm', 'w', 'c', 'y', 'f', 'g', 'p', 'b', 'v', 'k', 'x', 'j', 'q', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', '!', '?', '.', ',', ':', ';', '(', ')', '-', '&', '*', '\\', '\'', '@', '#', '+', '=', '£', '$', '%', '"', '[', ']' };
 
 	@ObfuscatedName("ac.a(IILmb;)Ljava/lang/String;")
-	public static String unpack(int arg1, Packet arg2) {
-		int var3 = 0;
-		int var4 = -1;
-		for (int var5 = 0; var5 < arg1; var5++) {
-			int var6 = arg2.g1();
-			int var7 = var6 >> 4 & 0xF;
-			if (var4 != -1) {
-				charBuffer[var3++] = TABLE[(var4 << 4) + var7 - 195];
-				var4 = -1;
-			} else if (var7 < 13) {
-				charBuffer[var3++] = TABLE[var7];
+	public static String unpack(int len, Packet buf) {
+		int pos = 0;
+		int carry = -1;
+		for (int i = 0; i < len; i++) {
+			int value = buf.g1();
+
+			int nibble = value >> 4 & 0xF;
+			if (carry != -1) {
+				charBuffer[pos++] = TABLE[(carry << 4) + nibble - 195];
+				carry = -1;
+			} else if (nibble < 13) {
+				charBuffer[pos++] = TABLE[nibble];
 			} else {
-				var4 = var7;
+				carry = nibble;
 			}
-			int var8 = var6 & 0xF;
-			if (var4 != -1) {
-				charBuffer[var3++] = TABLE[(var4 << 4) + var8 - 195];
-				var4 = -1;
-			} else if (var8 < 13) {
-				charBuffer[var3++] = TABLE[var8];
+
+			nibble = value & 0xF;
+			if (carry != -1) {
+				charBuffer[pos++] = TABLE[(carry << 4) + nibble - 195];
+				carry = -1;
+			} else if (nibble < 13) {
+				charBuffer[pos++] = TABLE[nibble];
 			} else {
-				var4 = var8;
+				carry = nibble;
 			}
 		}
-		boolean var9 = true;
-		for (int var10 = 0; var10 < var3; var10++) {
-			char var11 = charBuffer[var10];
-			if (var9 && var11 >= 'a' && var11 <= 'z') {
-				charBuffer[var10] = (char) (charBuffer[var10] + -32);
-				var9 = false;
+
+		boolean boundary = true;
+		for (int i = 0; i < pos; i++) {
+			char c = charBuffer[i];
+
+			if (boundary && c >= 'a' && c <= 'z') {
+				charBuffer[i] = (char) (charBuffer[i] + -32);
+				boundary = false;
 			}
-			if (var11 == '.' || var11 == '!') {
-				var9 = true;
+
+			if (c == '.' || c == '!') {
+				boundary = true;
 			}
 		}
-		return new String(charBuffer, 0, var3);
+
+		return new String(charBuffer, 0, pos);
 	}
 
 	@ObfuscatedName("ac.a(ILmb;Ljava/lang/String;)V")
-	public static void pack(Packet arg1, String arg2) {
-		if (arg2.length() > 80) {
-			arg2 = arg2.substring(0, 80);
+	public static void pack(Packet buf, String s) {
+		if (s.length() > 80) {
+			s = s.substring(0, 80);
 		}
-		String var3 = arg2.toLowerCase();
-		int var4 = -1;
-		for (int var5 = 0; var5 < var3.length(); var5++) {
-			char var6 = var3.charAt(var5);
-			int var7 = 0;
-			for (int var8 = 0; var8 < TABLE.length; var8++) {
-				if (var6 == TABLE[var8]) {
-					var7 = var8;
+
+		String lower = s.toLowerCase();
+
+		int carry = -1;
+		for (int i = 0; i < lower.length(); i++) {
+			char c = lower.charAt(i);
+
+			int index = 0;
+			for (int j = 0; j < TABLE.length; j++) {
+				if (c == TABLE[j]) {
+					index = j;
 					break;
 				}
 			}
-			if (var7 > 12) {
-				var7 += 195;
+
+			if (index > 12) {
+				index += 195;
 			}
-			if (var4 == -1) {
-				if (var7 < 13) {
-					var4 = var7;
+
+			if (carry == -1) {
+				if (index < 13) {
+					carry = index;
 				} else {
-					arg1.p1(var7);
+					buf.p1(index);
 				}
-			} else if (var7 < 13) {
-				arg1.p1((var4 << 4) + var7);
-				var4 = -1;
+			} else if (index < 13) {
+				buf.p1((carry << 4) + index);
+				carry = -1;
 			} else {
-				arg1.p1((var4 << 4) + (var7 >> 4));
-				var4 = var7 & 0xF;
+				buf.p1((carry << 4) + (index >> 4));
+				carry = index & 0xF;
 			}
 		}
-		if (var4 != -1) {
-			arg1.p1(var4 << 4);
+
+		if (carry != -1) {
+			buf.p1(carry << 4);
 		}
 	}
 }
