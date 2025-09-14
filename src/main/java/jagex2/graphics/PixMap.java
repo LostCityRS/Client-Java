@@ -18,26 +18,31 @@ public class PixMap implements ImageProducer, ImageObserver {
 	public int height;
 
 	@ObfuscatedName("rb.g")
-	public ColorModel colorModel;
+	public ColorModel model;
 
 	@ObfuscatedName("rb.h")
-	public ImageConsumer consumer;
+	public ImageConsumer ic;
 
 	@ObfuscatedName("rb.i")
-	public Image image;
+	public Image img;
 
-	public PixMap(int arg0, Component arg1, int arg3) {
-		this.width = arg3;
-		this.height = arg0;
-		this.data = new int[arg3 * arg0];
-		this.colorModel = new DirectColorModel(32, 16711680, 65280, 255);
-		this.image = arg1.createImage(this);
+	public PixMap(int height, Component c, int width) {
+		this.width = width;
+		this.height = height;
+		this.data = new int[width * height];
+		this.model = new DirectColorModel(32, 16711680, 65280, 255);
+
+		this.img = c.createImage(this);
+
 		this.setPixels();
-		arg1.prepareImage(this.image, this);
+		c.prepareImage(this.img, this);
+
 		this.setPixels();
-		arg1.prepareImage(this.image, this);
+		c.prepareImage(this.img, this);
+
 		this.setPixels();
-		arg1.prepareImage(this.image, this);
+		c.prepareImage(this.img, this);
+
 		this.bind();
 	}
 
@@ -47,46 +52,47 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@ObfuscatedName("rb.a(IBLjava/awt/Graphics;I)V")
-	public void draw(int arg0, Graphics arg2, int arg3) {
+	public void draw(int x, Graphics g, int y) {
 		this.setPixels();
-		arg2.drawImage(this.image, arg0, arg3, this);
+		g.drawImage(this.img, x, y, this);
 	}
 
-	public synchronized void addConsumer(ImageConsumer arg0) {
-		this.consumer = arg0;
-		arg0.setDimensions(this.width, this.height);
-		arg0.setProperties(null);
-		arg0.setColorModel(this.colorModel);
-		arg0.setHints(14);
+	public synchronized void addConsumer(ImageConsumer ic) {
+		this.ic = ic;
+
+		ic.setDimensions(this.width, this.height);
+		ic.setProperties(null);
+		ic.setColorModel(this.model);
+		ic.setHints(14);
 	}
 
-	public synchronized boolean isConsumer(ImageConsumer arg0) {
-		return this.consumer == arg0;
+	public synchronized boolean isConsumer(ImageConsumer ic) {
+		return this.ic == ic;
 	}
 
-	public synchronized void removeConsumer(ImageConsumer arg0) {
-		if (this.consumer == arg0) {
-			this.consumer = null;
+	public synchronized void removeConsumer(ImageConsumer ic) {
+		if (this.ic == ic) {
+			this.ic = null;
 		}
 	}
 
-	public void startProduction(ImageConsumer arg0) {
-		this.addConsumer(arg0);
+	public void startProduction(ImageConsumer ic) {
+		this.addConsumer(ic);
 	}
 
-	public void requestTopDownLeftRightResend(ImageConsumer arg0) {
+	public void requestTopDownLeftRightResend(ImageConsumer ic) {
 		System.out.println("TDLR");
 	}
 
 	@ObfuscatedName("rb.a()V")
 	public synchronized void setPixels() {
-		if (this.consumer != null) {
-			this.consumer.setPixels(0, 0, this.width, this.height, this.colorModel, this.data, 0, this.width);
-			this.consumer.imageComplete(2);
+		if (this.ic != null) {
+			this.ic.setPixels(0, 0, this.width, this.height, this.model, this.data, 0, this.width);
+			this.ic.imageComplete(2);
 		}
 	}
 
-	public boolean imageUpdate(Image arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
 		return true;
 	}
 }

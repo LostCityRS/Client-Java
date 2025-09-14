@@ -7,61 +7,69 @@ import jagex2.io.Packet;
 @ObfuscatedName("kb")
 public class Pix8 extends Pix2D {
 
+	// these short field names are authentic to native
+
 	@ObfuscatedName("kb.G")
-	public int owi;
+	public int owi; // original width
 
 	@ObfuscatedName("kb.H")
-	public int ohi;
+	public int ohi; // original height
 
 	@ObfuscatedName("kb.B")
-	public int[] bpal;
+	public int[] bpal; // base palette
 
 	@ObfuscatedName("kb.E")
-	public int xof;
+	public int xof; // x offset
 
 	@ObfuscatedName("kb.F")
-	public int yof;
+	public int yof; // y offset
 
 	@ObfuscatedName("kb.C")
-	public int wi;
+	public int wi; // width
 
 	@ObfuscatedName("kb.D")
-	public int hi;
+	public int hi; // height
 
 	@ObfuscatedName("kb.A")
 	public byte[] pixels;
 
-	public Pix8(Jagfile arg0, String arg1, int arg2) {
-		Packet var4 = new Packet(arg0.read(arg1 + ".dat", null));
-		Packet var5 = new Packet(arg0.read("index.dat", null));
-		var5.pos = var4.g2();
-		this.owi = var5.g2();
-		this.ohi = var5.g2();
-		int var6 = var5.g1();
-		this.bpal = new int[var6];
-		for (int var7 = 0; var7 < var6 - 1; var7++) {
-			this.bpal[var7 + 1] = var5.g3();
+	public Pix8(Jagfile jag, String name, int sprite) {
+		Packet data = new Packet(jag.read(name + ".dat", null));
+		Packet index = new Packet(jag.read("index.dat", null));
+
+		index.pos = data.g2();
+		this.owi = index.g2();
+		this.ohi = index.g2();
+
+		int palCount = index.g1();
+		this.bpal = new int[palCount];
+		for (int i = 0; i < palCount - 1; i++) {
+			this.bpal[i + 1] = index.g3();
 		}
-		for (int var8 = 0; var8 < arg2; var8++) {
-			var5.pos += 2;
-			var4.pos += var5.g2() * var5.g2();
-			var5.pos++;
+
+		for (int i = 0; i < sprite; i++) {
+			index.pos += 2;
+			data.pos += index.g2() * index.g2();
+			index.pos++;
 		}
-		this.xof = var5.g1();
-		this.yof = var5.g1();
-		this.wi = var5.g2();
-		this.hi = var5.g2();
-		int var9 = var5.g1();
-		int var10 = this.wi * this.hi;
-		this.pixels = new byte[var10];
-		if (var9 == 0) {
-			for (int var11 = 0; var11 < var10; var11++) {
-				this.pixels[var11] = var4.g1b();
+
+		this.xof = index.g1();
+		this.yof = index.g1();
+		this.wi = index.g2();
+		this.hi = index.g2();
+
+		int pixelOrder = index.g1();
+		int len = this.wi * this.hi;
+		this.pixels = new byte[len];
+
+		if (pixelOrder == 0) {
+			for (int i = 0; i < len; i++) {
+				this.pixels[i] = data.g1b();
 			}
-		} else if (var9 == 1) {
-			for (int var12 = 0; var12 < this.wi; var12++) {
-				for (int var13 = 0; var13 < this.hi; var13++) {
-					this.pixels[var12 + var13 * this.wi] = var4.g1b();
+		} else if (pixelOrder == 1) {
+			for (int x = 0; x < this.wi; x++) {
+				for (int y = 0; y < this.hi; y++) {
+					this.pixels[x + y * this.wi] = data.g1b();
 				}
 			}
 		}
@@ -71,14 +79,16 @@ public class Pix8 extends Pix2D {
 	public void halveSize() {
 		this.owi /= 2;
 		this.ohi /= 2;
-		byte[] var2 = new byte[this.owi * this.ohi];
-		int var3 = 0;
-		for (int var4 = 0; var4 < this.hi; var4++) {
-			for (int var5 = 0; var5 < this.wi; var5++) {
-				var2[(var5 + this.xof >> 1) + (var4 + this.yof >> 1) * this.owi] = this.pixels[var3++];
+
+		byte[] temp = new byte[this.owi * this.ohi];
+		int i = 0;
+		for (int y = 0; y < this.hi; y++) {
+			for (int x = 0; x < this.wi; x++) {
+				temp[(x + this.xof >> 1) + (y + this.yof >> 1) * this.owi] = this.pixels[i++];
 			}
 		}
-		this.pixels = var2;
+		this.pixels = temp;
+
 		this.wi = this.owi;
 		this.hi = this.ohi;
 		this.xof = 0;
@@ -90,14 +100,16 @@ public class Pix8 extends Pix2D {
 		if (this.wi == this.owi && this.hi == this.ohi) {
 			return;
 		}
-		byte[] var2 = new byte[this.owi * this.ohi];
-		int var3 = 0;
-		for (int var4 = 0; var4 < this.hi; var4++) {
-			for (int var5 = 0; var5 < this.wi; var5++) {
-				var2[var5 + this.xof + (var4 + this.yof) * this.owi] = this.pixels[var3++];
+
+		byte[] temp = new byte[this.owi * this.ohi];
+		int i = 0;
+		for (int y = 0; y < this.hi; y++) {
+			for (int x = 0; x < this.wi; x++) {
+				temp[x + this.xof + (y + this.yof) * this.owi] = this.pixels[i++];
 			}
 		}
-		this.pixels = var2;
+		this.pixels = temp;
+
 		this.wi = this.owi;
 		this.hi = this.ohi;
 		this.xof = 0;
@@ -106,139 +118,156 @@ public class Pix8 extends Pix2D {
 
 	@ObfuscatedName("kb.b(I)V")
 	public void hflip() {
-		byte[] var2 = new byte[this.wi * this.hi];
-		int var3 = 0;
-		for (int var4 = 0; var4 < this.hi; var4++) {
-			for (int var5 = this.wi - 1; var5 >= 0; var5--) {
-				var2[var3++] = this.pixels[var5 + var4 * this.wi];
+		byte[] temp = new byte[this.wi * this.hi];
+		int i = 0;
+		for (int y = 0; y < this.hi; y++) {
+			for (int x = this.wi - 1; x >= 0; x--) {
+				temp[i++] = this.pixels[x + y * this.wi];
 			}
 		}
-		this.pixels = var2;
+		this.pixels = temp;
+
 		this.xof = this.owi - this.wi - this.xof;
 	}
 
 	@ObfuscatedName("kb.c(I)V")
 	public void vflip() {
-		byte[] var2 = new byte[this.wi * this.hi];
-		int var3 = 0;
-		for (int var4 = this.hi - 1; var4 >= 0; var4--) {
-			for (int var5 = 0; var5 < this.wi; var5++) {
-				var2[var3++] = this.pixels[var5 + var4 * this.wi];
+		byte[] temp = new byte[this.wi * this.hi];
+		int i = 0;
+		for (int y = this.hi - 1; y >= 0; y--) {
+			for (int x = 0; x < this.wi; x++) {
+				temp[i++] = this.pixels[x + y * this.wi];
 			}
 		}
-		this.pixels = var2;
+		this.pixels = temp;
+
 		this.yof = this.ohi - this.hi - this.yof;
 	}
 
 	@ObfuscatedName("kb.a(IZII)V")
-	public void rgbAdjust(int arg0, int arg2, int arg3) {
-		for (int var5 = 0; var5 < this.bpal.length; var5++) {
-			int var6 = this.bpal[var5] >> 16 & 0xFF;
-			int var7 = var6 + arg0;
-			if (var7 < 0) {
-				var7 = 0;
-			} else if (var7 > 255) {
-				var7 = 255;
+	public void rgbAdjust(int r, int g, int b) {
+		for (int i = 0; i < this.bpal.length; i++) {
+			int red = this.bpal[i] >> 16 & 0xFF;
+			red = red + r;
+			if (red < 0) {
+				red = 0;
+			} else if (red > 255) {
+				red = 255;
 			}
-			int var8 = this.bpal[var5] >> 8 & 0xFF;
-			int var9 = var8 + arg2;
-			if (var9 < 0) {
-				var9 = 0;
-			} else if (var9 > 255) {
-				var9 = 255;
+
+			int green = this.bpal[i] >> 8 & 0xFF;
+			green = green + g;
+			if (green < 0) {
+				green = 0;
+			} else if (green > 255) {
+				green = 255;
 			}
-			int var10 = this.bpal[var5] & 0xFF;
-			int var11 = var10 + arg3;
-			if (var11 < 0) {
-				var11 = 0;
-			} else if (var11 > 255) {
-				var11 = 255;
+
+			int blue = this.bpal[i] & 0xFF;
+			blue = blue + b;
+			if (blue < 0) {
+				blue = 0;
+			} else if (blue > 255) {
+				blue = 255;
 			}
-			this.bpal[var5] = (var7 << 16) + (var9 << 8) + var11;
+
+			this.bpal[i] = (red << 16) + (green << 8) + blue;
 		}
 	}
 
 	@ObfuscatedName("kb.a(III)V")
-	public void plotSprite(int arg0, int arg2) {
-		int var4 = arg0 + this.xof;
-		int var5 = arg2 + this.yof;
-		int var6 = var4 + var5 * Pix2D.width2d;
-		int var7 = 0;
-		int var9 = this.hi;
-		int var10 = this.wi;
-		int var11 = Pix2D.width2d - var10;
-		int var12 = 0;
-		if (var5 < Pix2D.top) {
-			int var13 = Pix2D.top - var5;
-			var9 -= var13;
-			var5 = Pix2D.top;
-			var7 += var13 * var10;
-			var6 += var13 * Pix2D.width2d;
+	public void plotSprite(int x, int y) {
+		x = x + this.xof;
+		y = y + this.yof;
+
+		int dstOff = x + y * Pix2D.width2d;
+		int srcOff = 0;
+		int h = this.hi;
+		int w = this.wi;
+		int dstStep = Pix2D.width2d - w;
+		int srcStep = 0;
+
+		if (y < Pix2D.top) {
+			int trim = Pix2D.top - y;
+			h -= trim;
+			y = Pix2D.top;
+			srcOff += trim * w;
+			dstOff += trim * Pix2D.width2d;
 		}
-		if (var5 + var9 > Pix2D.bottom) {
-			var9 -= var5 + var9 - Pix2D.bottom;
+
+		if (y + h > Pix2D.bottom) {
+			h -= y + h - Pix2D.bottom;
 		}
-		if (var4 < Pix2D.left) {
-			int var14 = Pix2D.left - var4;
-			var10 -= var14;
-			var4 = Pix2D.left;
-			var7 += var14;
-			var6 += var14;
-			var12 += var14;
-			var11 += var14;
+
+		if (x < Pix2D.left) {
+			int trim = Pix2D.left - x;
+			w -= trim;
+			x = Pix2D.left;
+			srcOff += trim;
+			dstOff += trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var4 + var10 > Pix2D.right) {
-			int var15 = var4 + var10 - Pix2D.right;
-			var10 -= var15;
-			var12 += var15;
-			var11 += var15;
+
+		if (x + w > Pix2D.right) {
+			int trim = x + w - Pix2D.right;
+			w -= trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var10 > 0 && var9 > 0) {
-			this.plot(this.bpal, var9, this.pixels, Pix2D.data, var12, var6, var7, var10, var11);
+
+		if (w > 0 && h > 0) {
+			this.plot(this.bpal, h, this.pixels, Pix2D.data, srcStep, dstOff, srcOff, w, dstStep);
 		}
 	}
 
 	@ObfuscatedName("kb.a([II[B[IIIIIII)V")
-	public void plot(int[] arg0, int arg1, byte[] arg2, int[] arg3, int arg5, int arg6, int arg7, int arg8, int arg9) {
-		int var11 = -(arg8 >> 2);
-		int var12 = -(arg8 & 0x3);
-		for (int var13 = -arg1; var13 < 0; var13++) {
-			for (int var14 = var11; var14 < 0; var14++) {
-				byte var15 = arg2[arg7++];
-				if (var15 == 0) {
-					arg6++;
+	public void plot(int[] pal, int h, byte[] src, int[] dst, int srcStep, int dstOff, int srcOff, int w, int dstStep) {
+		int qw = -(w >> 2);
+		w = -(w & 0x3);
+
+		for (int y = -h; y < 0; y++) {
+			for (int x = qw; x < 0; x++) {
+				byte palIndex = src[srcOff++];
+				if (palIndex == 0) {
+					dstOff++;
 				} else {
-					arg3[arg6++] = arg0[var15 & 0xFF];
+					dst[dstOff++] = pal[palIndex & 0xFF];
 				}
-				byte var16 = arg2[arg7++];
-				if (var16 == 0) {
-					arg6++;
+
+				palIndex = src[srcOff++];
+				if (palIndex == 0) {
+					dstOff++;
 				} else {
-					arg3[arg6++] = arg0[var16 & 0xFF];
+					dst[dstOff++] = pal[palIndex & 0xFF];
 				}
-				byte var17 = arg2[arg7++];
-				if (var17 == 0) {
-					arg6++;
+
+				palIndex = src[srcOff++];
+				if (palIndex == 0) {
+					dstOff++;
 				} else {
-					arg3[arg6++] = arg0[var17 & 0xFF];
+					dst[dstOff++] = pal[palIndex & 0xFF];
 				}
-				byte var18 = arg2[arg7++];
-				if (var18 == 0) {
-					arg6++;
+
+				palIndex = src[srcOff++];
+				if (palIndex == 0) {
+					dstOff++;
 				} else {
-					arg3[arg6++] = arg0[var18 & 0xFF];
-				}
-			}
-			for (int var19 = var12; var19 < 0; var19++) {
-				byte var20 = arg2[arg7++];
-				if (var20 == 0) {
-					arg6++;
-				} else {
-					arg3[arg6++] = arg0[var20 & 0xFF];
+					dst[dstOff++] = pal[palIndex & 0xFF];
 				}
 			}
-			arg6 += arg9;
-			arg7 += arg5;
+
+			for (int x = w; x < 0; x++) {
+				byte palIndex = src[srcOff++];
+				if (palIndex == 0) {
+					dstOff++;
+				} else {
+					dst[dstOff++] = pal[palIndex & 0xFF];
+				}
+			}
+
+			dstOff += dstStep;
+			srcOff += srcStep;
 		}
 	}
 }

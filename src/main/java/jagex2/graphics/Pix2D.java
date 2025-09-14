@@ -55,200 +55,237 @@ public class Pix2D extends DoublyLinkable {
 	}
 
 	@ObfuscatedName("hb.a(IIIII)V")
-	public static void setClipping(int arg1, int arg2, int arg3, int arg4) {
-		if (arg4 < 0) {
-			arg4 = 0;
+	public static void setClipping(int top, int right, int bottom, int left) {
+		if (left < 0) {
+			left = 0;
 		}
-		if (arg1 < 0) {
-			arg1 = 0;
+
+		if (top < 0) {
+			top = 0;
 		}
-		if (arg2 > width2d) {
-			arg2 = width2d;
+
+		if (right > width2d) {
+			right = width2d;
 		}
-		if (arg3 > height2d) {
-			arg3 = height2d;
+
+		if (bottom > height2d) {
+			bottom = height2d;
 		}
-		left = arg4;
-		top = arg1;
-		right = arg2;
-		bottom = arg3;
-		safeWidth = right - 1;
-		centerX2d = right / 2;
-		centerY2d = bottom / 2;
+
+		Pix2D.left = left;
+		Pix2D.top = top;
+		Pix2D.right = right;
+		Pix2D.bottom = bottom;
+
+		safeWidth = Pix2D.right - 1;
+		centerX2d = Pix2D.right / 2;
+		centerY2d = Pix2D.bottom / 2;
 	}
 
 	@ObfuscatedName("hb.b(Z)V")
 	public static void cls() {
-		int var1 = width2d * height2d;
-		for (int var2 = 0; var2 < var1; var2++) {
-			data[var2] = 0;
+		int len = width2d * height2d;
+		for (int i = 0; i < len; i++) {
+			data[i] = 0;
 		}
 	}
 
 	@ObfuscatedName("hb.a(IIIIIII)V")
-	public static void fillRectTrans(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6) {
-		if (arg0 < left) {
-			arg6 -= left - arg0;
-			arg0 = left;
+	public static void fillRectTrans(int x, int height, int y, int colour, int alpha, int width) {
+		if (x < left) {
+			width -= left - x;
+			x = left;
 		}
-		if (arg2 < top) {
-			arg1 -= top - arg2;
-			arg2 = top;
+
+		if (y < top) {
+			height -= top - y;
+			y = top;
 		}
-		if (arg0 + arg6 > right) {
-			arg6 = right - arg0;
+
+		if (x + width > right) {
+			width = right - x;
 		}
-		if (arg2 + arg1 > bottom) {
-			arg1 = bottom - arg2;
+
+		if (y + height > bottom) {
+			height = bottom - y;
 		}
-		int var7 = 256 - arg5;
-		int var8 = (arg3 >> 16 & 0xFF) * arg5;
-		int var9 = (arg3 >> 8 & 0xFF) * arg5;
-		int var10 = (arg3 & 0xFF) * arg5;
-		int var11 = width2d - arg6;
-		int var12 = arg0 + arg2 * width2d;
-		for (int var13 = 0; var13 < arg1; var13++) {
-			for (int var14 = -arg6; var14 < 0; var14++) {
-				int var15 = (data[var12] >> 16 & 0xFF) * var7;
-				int var16 = (data[var12] >> 8 & 0xFF) * var7;
-				int var17 = (data[var12] & 0xFF) * var7;
-				int var18 = (var8 + var15 >> 8 << 16) + (var9 + var16 >> 8 << 8) + (var10 + var17 >> 8);
-				data[var12++] = var18;
+
+		int invAlpha = 256 - alpha;
+		int r0 = (colour >> 16 & 0xFF) * alpha;
+		int g0 = (colour >> 8 & 0xFF) * alpha;
+		int b0 = (colour & 0xFF) * alpha;
+
+		int step = width2d - width;
+		int offset = x + y * width2d;
+
+		for (int i = 0; i < height; i++) {
+			for (int j = -width; j < 0; j++) {
+				int r1 = (data[offset] >> 16 & 0xFF) * invAlpha;
+				int g1 = (data[offset] >> 8 & 0xFF) * invAlpha;
+				int b1 = (data[offset] & 0xFF) * invAlpha;
+				int rgb = (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8) + (b0 + b1 >> 8);
+				data[offset++] = rgb;
 			}
-			var12 += var11;
+
+			offset += step;
 		}
 	}
 
 	@ObfuscatedName("hb.a(IIIIII)V")
-	public static void fillRect(int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg3 < left) {
-			arg4 -= left - arg3;
-			arg3 = left;
+	public static void fillRect(int y, int height, int x, int width, int colour) {
+		if (x < left) {
+			width -= left - x;
+			x = left;
 		}
-		if (arg1 < top) {
-			arg2 -= top - arg1;
-			arg1 = top;
+
+		if (y < top) {
+			height -= top - y;
+			y = top;
 		}
-		if (arg3 + arg4 > right) {
-			arg4 = right - arg3;
+
+		if (x + width > right) {
+			width = right - x;
 		}
-		if (arg1 + arg2 > bottom) {
-			arg2 = bottom - arg1;
+
+		if (y + height > bottom) {
+			height = bottom - y;
 		}
-		int var6 = width2d - arg4;
-		int var8 = arg3 + arg1 * width2d;
-		for (int var9 = -arg2; var9 < 0; var9++) {
-			for (int var10 = -arg4; var10 < 0; var10++) {
-				data[var8++] = arg5;
+
+		int step = width2d - width;
+		int offset = x + y * width2d;
+
+		for (int i = -height; i < 0; i++) {
+			for (int j = -width; j < 0; j++) {
+				data[offset++] = colour;
 			}
-			var8 += var6;
+
+			offset += step;
 		}
 	}
 
 	@ObfuscatedName("hb.a(IIIIIZ)V")
-	public static void drawRect(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		hline(arg2, arg3, arg0, arg4);
-		hline(arg2 + arg1 - 1, arg3, arg0, arg4);
-		vline(arg4, arg0, arg1, arg2);
-		vline(arg4, arg0 + arg3 - 1, arg1, arg2);
+	public static void drawRect(int x, int height, int y, int width, int colour) {
+		hline(y, width, x, colour);
+		hline(y + height - 1, width, x, colour);
+		vline(colour, x, height, y);
+		vline(colour, x + width - 1, height, y);
 	}
 
 	@ObfuscatedName("hb.a(IIIIIZI)V")
-	public static void drawRectTrans(int arg0, int arg1, int arg2, int arg3, int arg4, int arg6) {
-		hlineTrans(arg4, arg2, arg3, arg0, arg1);
-		hlineTrans(arg4, arg2 + arg6 - 1, arg3, arg0, arg1);
-		if (arg6 >= 3) {
-			vlineTrans(arg1, arg4, arg6 - 2, arg3, arg2 + 1);
-			vlineTrans(arg1 + arg0 - 1, arg4, arg6 - 2, arg3, arg2 + 1);
+	public static void drawRectTrans(int width, int x, int y, int alpha, int colour, int height) {
+		hlineTrans(colour, y, alpha, width, x);
+		hlineTrans(colour, y + height - 1, alpha, width, x);
+		if (height >= 3) {
+			vlineTrans(x, colour, height - 2, alpha, y + 1);
+			vlineTrans(x + width - 1, colour, height - 2, alpha, y + 1);
 		}
 	}
 
 	@ObfuscatedName("hb.b(IIIII)V")
-	public static void hline(int arg0, int arg1, int arg2, int arg4) {
-		if (arg0 < top || arg0 >= bottom) {
+	public static void hline(int y, int width, int x, int colour) {
+		if (y < top || y >= bottom) {
 			return;
 		}
-		if (arg2 < left) {
-			arg1 -= left - arg2;
-			arg2 = left;
+
+		if (x < left) {
+			width -= left - x;
+			x = left;
 		}
-		if (arg2 + arg1 > right) {
-			arg1 = right - arg2;
+
+		if (x + width > right) {
+			width = right - x;
 		}
-		int var5 = arg2 + arg0 * width2d;
-		for (int var6 = 0; var6 < arg1; var6++) {
-			data[var5 + var6] = arg4;
+
+		int offset = x + y * width2d;
+
+		for (int i = 0; i < width; i++) {
+			data[offset + i] = colour;
 		}
 	}
 
 	@ObfuscatedName("hb.b(IIIIIZ)V")
-	public static void hlineTrans(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (arg1 < top || arg1 >= bottom) {
+	public static void hlineTrans(int colour, int y, int alpha, int width, int x) {
+		if (y < top || y >= bottom) {
 			return;
 		}
-		if (arg4 < left) {
-			arg3 -= left - arg4;
-			arg4 = left;
+
+		if (x < left) {
+			width -= left - x;
+			x = left;
 		}
-		if (arg4 + arg3 > right) {
-			arg3 = right - arg4;
+
+		if (x + width > right) {
+			width = right - x;
 		}
-		int var6 = 256 - arg2;
-		int var8 = (arg0 >> 16 & 0xFF) * arg2;
-		int var9 = (arg0 >> 8 & 0xFF) * arg2;
-		int var10 = (arg0 & 0xFF) * arg2;
-		int var11 = arg4 + arg1 * width2d;
-		for (int var12 = 0; var12 < arg3; var12++) {
-			int var13 = (data[var11] >> 16 & 0xFF) * var6;
-			int var14 = (data[var11] >> 8 & 0xFF) * var6;
-			int var15 = (data[var11] & 0xFF) * var6;
-			int var16 = (var8 + var13 >> 8 << 16) + (var9 + var14 >> 8 << 8) + (var10 + var15 >> 8);
-			data[var11++] = var16;
+
+		int invAlpha = 256 - alpha;
+		int r0 = (colour >> 16 & 0xFF) * alpha;
+		int g0 = (colour >> 8 & 0xFF) * alpha;
+		int b0 = (colour & 0xFF) * alpha;
+
+		int offset = x + y * width2d;
+
+		for (int i = 0; i < width; i++) {
+			int r1 = (data[offset] >> 16 & 0xFF) * invAlpha;
+			int g1 = (data[offset] >> 8 & 0xFF) * invAlpha;
+			int b1 = (data[offset] & 0xFF) * invAlpha;
+			int rgb = (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8) + (b0 + b1 >> 8);
+			data[offset++] = rgb;
 		}
 	}
 
 	@ObfuscatedName("hb.c(IIIII)V")
-	public static void vline(int arg0, int arg1, int arg2, int arg3) {
-		if (arg1 < left || arg1 >= right) {
+	public static void vline(int colour, int x, int height, int y) {
+		if (x < left || x >= right) {
 			return;
 		}
-		if (arg3 < top) {
-			arg2 -= top - arg3;
-			arg3 = top;
+
+		if (y < top) {
+			height -= top - y;
+			y = top;
 		}
-		if (arg3 + arg2 > bottom) {
-			arg2 = bottom - arg3;
+
+		if (y + height > bottom) {
+			height = bottom - y;
 		}
-		int var5 = arg1 + arg3 * width2d;
-		for (int var6 = 0; var6 < arg2; var6++) {
-			data[var5 + var6 * width2d] = arg0;
+
+		int offset = x + y * width2d;
+
+		for (int i = 0; i < height; i++) {
+			data[offset + i * width2d] = colour;
 		}
 	}
 
 	@ObfuscatedName("hb.b(IIIIII)V")
-	public static void vlineTrans(int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg1 < left || arg1 >= right) {
+	public static void vlineTrans(int x, int colour, int height, int alpha, int y) {
+		if (x < left || x >= right) {
 			return;
 		}
-		if (arg5 < top) {
-			arg3 -= top - arg5;
-			arg5 = top;
+
+		if (y < top) {
+			height -= top - y;
+			y = top;
 		}
-		if (arg5 + arg3 > bottom) {
-			arg3 = bottom - arg5;
+
+		if (y + height > bottom) {
+			height = bottom - y;
 		}
-		int var6 = 256 - arg4;
-		int var7 = (arg2 >> 16 & 0xFF) * arg4;
-		int var8 = (arg2 >> 8 & 0xFF) * arg4;
-		int var9 = (arg2 & 0xFF) * arg4;
-		int var10 = arg1 + arg5 * width2d;
-		for (int var11 = 0; var11 < arg3; var11++) {
-			int var12 = (data[var10] >> 16 & 0xFF) * var6;
-			int var13 = (data[var10] >> 8 & 0xFF) * var6;
-			int var14 = (data[var10] & 0xFF) * var6;
-			int var15 = (var7 + var12 >> 8 << 16) + (var8 + var13 >> 8 << 8) + (var9 + var14 >> 8);
-			data[var10] = var15;
-			var10 += width2d;
+
+		int invAlpha = 256 - alpha;
+		int r0 = (colour >> 16 & 0xFF) * alpha;
+		int g0 = (colour >> 8 & 0xFF) * alpha;
+		int b0 = (colour & 0xFF) * alpha;
+
+		int offset = x + y * width2d;
+
+		for (int i = 0; i < height; i++) {
+			int r1 = (data[offset] >> 16 & 0xFF) * invAlpha;
+			int g1 = (data[offset] >> 8 & 0xFF) * invAlpha;
+			int b1 = (data[offset] & 0xFF) * invAlpha;
+			int rgb = (r0 + r1 >> 8 << 16) + (g0 + g1 >> 8 << 8) + (b0 + b1 >> 8);
+			data[offset] = rgb;
+
+			offset += width2d;
 		}
 	}
 }

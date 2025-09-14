@@ -14,84 +14,92 @@ public class Pix32 extends Pix2D {
 	public int[] pixels;
 
 	@ObfuscatedName("jb.z")
-	public int wi;
+	public int wi; // width
 
 	@ObfuscatedName("jb.D")
-	public int owi;
+	public int owi; // original width
 
 	@ObfuscatedName("jb.E")
-	public int ohi;
+	public int ohi; // original height
 
 	@ObfuscatedName("jb.A")
-	public int hi;
+	public int hi; // height
 
 	@ObfuscatedName("jb.C")
-	public int yof;
+	public int yof; // y offset
 
 	@ObfuscatedName("jb.B")
-	public int xof;
+	public int xof; // x offset
 
-	public Pix32(int arg0, int arg1) {
-		this.pixels = new int[arg0 * arg1];
-		this.wi = this.owi = arg0;
-		this.hi = this.ohi = arg1;
+	public Pix32(int width, int height) {
+		this.pixels = new int[width * height];
+		this.wi = this.owi = width;
+		this.hi = this.ohi = height;
 		this.xof = this.yof = 0;
 	}
 
-	public Pix32(byte[] arg0, Component arg1) {
+	public Pix32(byte[] src, Component c) {
 		try {
-			Image var3 = Toolkit.getDefaultToolkit().createImage(arg0);
-			MediaTracker var4 = new MediaTracker(arg1);
-			var4.addImage(var3, 0);
-			var4.waitForAll();
-			this.wi = var3.getWidth(arg1);
-			this.hi = var3.getHeight(arg1);
+			Image image = Toolkit.getDefaultToolkit().createImage(src);
+			MediaTracker tracker = new MediaTracker(c);
+			tracker.addImage(image, 0);
+			tracker.waitForAll();
+
+			this.wi = image.getWidth(c);
+			this.hi = image.getHeight(c);
 			this.owi = this.wi;
 			this.ohi = this.hi;
 			this.xof = 0;
 			this.yof = 0;
 			this.pixels = new int[this.wi * this.hi];
-			PixelGrabber var5 = new PixelGrabber(var3, 0, 0, this.wi, this.hi, this.pixels, 0, this.wi);
-			var5.grabPixels();
-		} catch (Exception var6) {
+
+			PixelGrabber grabber = new PixelGrabber(image, 0, 0, this.wi, this.hi, this.pixels, 0, this.wi);
+			grabber.grabPixels();
+		} catch (Exception ignore) {
 			System.out.println("Error converting jpg");
 		}
 	}
 
-	public Pix32(Jagfile arg0, String arg1, int arg2) {
-		Packet var4 = new Packet(arg0.read(arg1 + ".dat", null));
-		Packet var5 = new Packet(arg0.read("index.dat", null));
-		var5.pos = var4.g2();
-		this.owi = var5.g2();
-		this.ohi = var5.g2();
-		int var6 = var5.g1();
-		int[] var7 = new int[var6];
-		for (int var8 = 0; var8 < var6 - 1; var8++) {
-			var7[var8 + 1] = var5.g3();
-			if (var7[var8 + 1] == 0) {
-				var7[var8 + 1] = 1;
+	public Pix32(Jagfile jag, String name, int sprite) {
+		Packet data = new Packet(jag.read(name + ".dat", null));
+		Packet index = new Packet(jag.read("index.dat", null));
+
+		index.pos = data.g2();
+		this.owi = index.g2();
+		this.ohi = index.g2();
+
+		int palCount = index.g1();
+		int[] bpal = new int[palCount];
+		for (int i = 0; i < palCount - 1; i++) {
+			bpal[i + 1] = index.g3();
+			if (bpal[i + 1] == 0) {
+				bpal[i + 1] = 1;
 			}
 		}
-		for (int var9 = 0; var9 < arg2; var9++) {
-			var5.pos += 2;
-			var4.pos += var5.g2() * var5.g2();
-			var5.pos++;
+
+		for (int i = 0; i < sprite; i++) {
+			index.pos += 2;
+			data.pos += index.g2() * index.g2();
+			index.pos++;
 		}
-		this.xof = var5.g1();
-		this.yof = var5.g1();
-		this.wi = var5.g2();
-		this.hi = var5.g2();
-		int var10 = var5.g1();
-		int var11 = this.wi * this.hi;
-		this.pixels = new int[var11];
-		if (var10 == 0) {
-			for (int var12 = 0; var12 < var11; var12++) {
-				this.pixels[var12] = var7[var4.g1()];
+
+		this.xof = index.g1();
+		this.yof = index.g1();
+		this.wi = index.g2();
+		this.hi = index.g2();
+
+		int pixelOrder = index.g1();
+		int len = this.wi * this.hi;
+		this.pixels = new int[len];
+
+		if (pixelOrder == 0) {
+			for (int i = 0; i < len; i++) {
+				this.pixels[i] = bpal[data.g1()];
 			}
-		} else if (var10 == 1) {
-			for (int var13 = 0; var13 < this.wi; var13++) {
-				for (int var14 = 0; var14 < this.hi; var14++) {
-					this.pixels[var13 + var14 * this.wi] = var7[var4.g1()];
+		} else if (pixelOrder == 1) {
+			for (int x = 0; x < this.wi; x++) {
+				for (int y = 0; y < this.hi; y++) {
+					this.pixels[x + y * this.wi] = bpal[data.g1()];
 				}
 			}
 		}
@@ -103,45 +111,49 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(IZII)V")
-	public void rgbAdjust(int arg0, int arg2, int arg3) {
-		for (int var5 = 0; var5 < this.pixels.length; var5++) {
-			int var6 = this.pixels[var5];
-			if (var6 != 0) {
-				int var7 = var6 >> 16 & 0xFF;
-				int var8 = var7 + arg0;
-				if (var8 < 1) {
-					var8 = 1;
-				} else if (var8 > 255) {
-					var8 = 255;
+	public void rgbAdjust(int r, int g, int b) {
+		for (int i = 0; i < this.pixels.length; i++) {
+			int colour = this.pixels[i];
+			if (colour != 0) {
+				int red = colour >> 16 & 0xFF;
+				red = red + r;
+				if (red < 1) {
+					red = 1;
+				} else if (red > 255) {
+					red = 255;
 				}
-				int var9 = var6 >> 8 & 0xFF;
-				int var10 = var9 + arg2;
-				if (var10 < 1) {
-					var10 = 1;
-				} else if (var10 > 255) {
-					var10 = 255;
+
+				int green = colour >> 8 & 0xFF;
+				green = green + g;
+				if (green < 1) {
+					green = 1;
+				} else if (green > 255) {
+					green = 255;
 				}
-				int var11 = var6 & 0xFF;
-				int var12 = var11 + arg3;
-				if (var12 < 1) {
-					var12 = 1;
-				} else if (var12 > 255) {
-					var12 = 255;
+
+				int blue = colour & 0xFF;
+				blue = blue + b;
+				if (blue < 1) {
+					blue = 1;
+				} else if (blue > 255) {
+					blue = 255;
 				}
-				this.pixels[var5] = (var8 << 16) + (var10 << 8) + var12;
+
+				this.pixels[i] = (red << 16) + (green << 8) + blue;
 			}
 		}
 	}
 
 	@ObfuscatedName("jb.a(I)V")
 	public void trim() {
-		int[] var2 = new int[this.owi * this.ohi];
-		for (int var3 = 0; var3 < this.hi; var3++) {
-			for (int var4 = 0; var4 < this.wi; var4++) {
-				var2[(var3 + this.yof) * this.owi + var4 + this.xof] = this.pixels[var3 * this.wi + var4];
+		int[] temp = new int[this.owi * this.ohi];
+		for (int y = 0; y < this.hi; y++) {
+			for (int x = 0; x < this.wi; x++) {
+				temp[(y + this.yof) * this.owi + x + this.xof] = this.pixels[y * this.wi + x];
 			}
 		}
-		this.pixels = var2;
+		this.pixels = temp;
+
 		this.wi = this.owi;
 		this.hi = this.ohi;
 		this.xof = 0;
@@ -149,351 +161,404 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(III)V")
-	public void quickPlotSprite(int arg0, int arg2) {
-		int var4 = arg0 + this.xof;
-		int var5 = arg2 + this.yof;
-		int var6 = var4 + var5 * Pix2D.width2d;
-		int var7 = 0;
-		int var8 = this.hi;
-		int var9 = this.wi;
-		int var10 = Pix2D.width2d - var9;
-		int var11 = 0;
-		if (var5 < Pix2D.top) {
-			int var12 = Pix2D.top - var5;
-			var8 -= var12;
-			var5 = Pix2D.top;
-			var7 += var12 * var9;
-			var6 += var12 * Pix2D.width2d;
+	public void quickPlotSprite(int x, int y) {
+		x = x + this.xof;
+		y = y + this.yof;
+
+		int dstOff = x + y * Pix2D.width2d;
+		int srcOff = 0;
+		int h = this.hi;
+		int w = this.wi;
+		int dstStep = Pix2D.width2d - w;
+		int srcStep = 0;
+
+		if (y < Pix2D.top) {
+			int trim = Pix2D.top - y;
+			h -= trim;
+			y = Pix2D.top;
+			srcOff += trim * w;
+			dstOff += trim * Pix2D.width2d;
 		}
-		if (var5 + var8 > Pix2D.bottom) {
-			var8 -= var5 + var8 - Pix2D.bottom;
+
+		if (y + h > Pix2D.bottom) {
+			h -= y + h - Pix2D.bottom;
 		}
-		if (var4 < Pix2D.left) {
-			int var13 = Pix2D.left - var4;
-			var9 -= var13;
-			var4 = Pix2D.left;
-			var7 += var13;
-			var6 += var13;
-			var11 += var13;
-			var10 += var13;
+
+		if (x < Pix2D.left) {
+			int trim = Pix2D.left - x;
+			w -= trim;
+			x = Pix2D.left;
+			srcOff += trim;
+			dstOff += trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var4 + var9 > Pix2D.right) {
-			int var14 = var4 + var9 - Pix2D.right;
-			var9 -= var14;
-			var11 += var14;
-			var10 += var14;
+
+		if (x + w > Pix2D.right) {
+			int trim = x + w - Pix2D.right;
+			w -= trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var9 > 0 && var8 > 0) {
-			this.quickPlot(var10, var9, var7, Pix2D.data, var11, this.pixels, var6, var8);
+
+		if (w > 0 && h > 0) {
+			this.quickPlot(dstStep, w, srcOff, Pix2D.data, srcStep, this.pixels, dstOff, h);
 		}
 	}
 
 	@ObfuscatedName("jb.a(III[II[IIZI)V")
-	public void quickPlot(int arg0, int arg1, int arg2, int[] arg3, int arg4, int[] arg5, int arg6, int arg8) {
-		int var10 = -(arg1 >> 2);
-		int var11 = -(arg1 & 0x3);
-		for (int var12 = -arg8; var12 < 0; var12++) {
-			for (int var13 = var10; var13 < 0; var13++) {
-				arg3[arg6++] = arg5[arg2++];
-				arg3[arg6++] = arg5[arg2++];
-				arg3[arg6++] = arg5[arg2++];
-				arg3[arg6++] = arg5[arg2++];
+	public void quickPlot(int dstStep, int w, int srcOff, int[] dst, int srcStep, int[] src, int dstOff, int h) {
+		int qw = -(w >> 2);
+		w = -(w & 0x3);
+
+		for (int y = -h; y < 0; y++) {
+			for (int x = qw; x < 0; x++) {
+				dst[dstOff++] = src[srcOff++];
+				dst[dstOff++] = src[srcOff++];
+				dst[dstOff++] = src[srcOff++];
+				dst[dstOff++] = src[srcOff++];
 			}
-			for (int var14 = var11; var14 < 0; var14++) {
-				arg3[arg6++] = arg5[arg2++];
+
+			for (int x = w; x < 0; x++) {
+				dst[dstOff++] = src[srcOff++];
 			}
-			arg6 += arg0;
-			arg2 += arg4;
+
+			dstOff += dstStep;
+			srcOff += srcStep;
 		}
 	}
 
 	@ObfuscatedName("jb.b(III)V")
-	public void plotSprite(int arg0, int arg2) {
-		int var4 = arg0 + this.xof;
-		int var5 = arg2 + this.yof;
-		int var6 = var4 + var5 * Pix2D.width2d;
-		int var7 = 0;
-		int var8 = this.hi;
-		int var9 = this.wi;
-		int var10 = Pix2D.width2d - var9;
-		int var11 = 0;
-		if (var5 < Pix2D.top) {
-			int var12 = Pix2D.top - var5;
-			var8 -= var12;
-			var5 = Pix2D.top;
-			var7 += var12 * var9;
-			var6 += var12 * Pix2D.width2d;
+	public void plotSprite(int x, int y) {
+		x = x + this.xof;
+		y = y + this.yof;
+
+		int dstOff = x + y * Pix2D.width2d;
+		int srcOff = 0;
+		int h = this.hi;
+		int w = this.wi;
+		int dstStep = Pix2D.width2d - w;
+		int srcStep = 0;
+
+		if (y < Pix2D.top) {
+			int trim = Pix2D.top - y;
+			h -= trim;
+			y = Pix2D.top;
+			srcOff += trim * w;
+			dstOff += trim * Pix2D.width2d;
 		}
-		if (var5 + var8 > Pix2D.bottom) {
-			var8 -= var5 + var8 - Pix2D.bottom;
+
+		if (y + h > Pix2D.bottom) {
+			h -= y + h - Pix2D.bottom;
 		}
-		if (var4 < Pix2D.left) {
-			int var13 = Pix2D.left - var4;
-			var9 -= var13;
-			var4 = Pix2D.left;
-			var7 += var13;
-			var6 += var13;
-			var11 += var13;
-			var10 += var13;
+
+		if (x < Pix2D.left) {
+			int trim = Pix2D.left - x;
+			w -= trim;
+			x = Pix2D.left;
+			srcOff += trim;
+			dstOff += trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var4 + var9 > Pix2D.right) {
-			int var14 = var4 + var9 - Pix2D.right;
-			var9 -= var14;
-			var11 += var14;
-			var10 += var14;
+
+		if (x + w > Pix2D.right) {
+			int trim = x + w - Pix2D.right;
+			w -= trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var9 > 0 && var8 > 0) {
-			this.plot(Pix2D.data, this.pixels, 0, var7, var6, var9, var8, var10, var11);
+
+		if (w > 0 && h > 0) {
+			this.plot(Pix2D.data, this.pixels, srcOff, dstOff, w, h, dstStep, srcStep);
 		}
 	}
 
 	@ObfuscatedName("jb.a([I[IIIIIIII)V")
-	public void plot(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
-		int var10 = -(arg5 >> 2);
-		int var11 = -(arg5 & 0x3);
-		for (int var12 = -arg6; var12 < 0; var12++) {
-			for (int var13 = var10; var13 < 0; var13++) {
-				int var14 = arg1[arg3++];
-				if (var14 == 0) {
-					arg4++;
+	public void plot(int[] dst, int[] src, int srcOff, int dstOff, int w, int h, int dstStep, int srcStep) {
+		int qw = -(w >> 2);
+		w = -(w & 0x3);
+
+		for (int y = -h; y < 0; y++) {
+			for (int x = qw; x < 0; x++) {
+				int rgb = src[srcOff++];
+				if (rgb == 0) {
+					dstOff++;
 				} else {
-					arg0[arg4++] = var14;
+					dst[dstOff++] = rgb;
 				}
-				int var15 = arg1[arg3++];
-				if (var15 == 0) {
-					arg4++;
+
+				rgb = src[srcOff++];
+				if (rgb == 0) {
+					dstOff++;
 				} else {
-					arg0[arg4++] = var15;
+					dst[dstOff++] = rgb;
 				}
-				int var16 = arg1[arg3++];
-				if (var16 == 0) {
-					arg4++;
+
+				rgb = src[srcOff++];
+				if (rgb == 0) {
+					dstOff++;
 				} else {
-					arg0[arg4++] = var16;
+					dst[dstOff++] = rgb;
 				}
-				int var17 = arg1[arg3++];
-				if (var17 == 0) {
-					arg4++;
+
+				rgb = src[srcOff++];
+				if (rgb == 0) {
+					dstOff++;
 				} else {
-					arg0[arg4++] = var17;
-				}
-			}
-			for (int var18 = var11; var18 < 0; var18++) {
-				int var19 = arg1[arg3++];
-				if (var19 == 0) {
-					arg4++;
-				} else {
-					arg0[arg4++] = var19;
+					dst[dstOff++] = rgb;
 				}
 			}
-			arg4 += arg7;
-			arg3 += arg8;
+
+			for (int x = w; x < 0; x++) {
+				int rgb = src[srcOff++];
+				if (rgb == 0) {
+					dstOff++;
+				} else {
+					dst[dstOff++] = rgb;
+				}
+			}
+
+			dstOff += dstStep;
+			srcOff += srcStep;
 		}
 	}
 
 	@ObfuscatedName("jb.a(IIII)V")
-	public void transPlotSprite(int arg1, int arg2, int arg3) {
-		int var5 = arg3 + this.xof;
-		int var6 = arg2 + this.yof;
-		int var8 = var5 + var6 * Pix2D.width2d;
-		int var9 = 0;
-		int var10 = this.hi;
-		int var11 = this.wi;
-		int var12 = Pix2D.width2d - var11;
-		int var13 = 0;
-		if (var6 < Pix2D.top) {
-			int var14 = Pix2D.top - var6;
-			var10 -= var14;
-			var6 = Pix2D.top;
-			var9 += var14 * var11;
-			var8 += var14 * Pix2D.width2d;
+	public void transPlotSprite(int alpha, int y, int x) {
+		x = x + this.xof;
+		y = y + this.yof;
+
+		int dstOff = x + y * Pix2D.width2d;
+		int srcOff = 0;
+		int h = this.hi;
+		int w = this.wi;
+		int dstStep = Pix2D.width2d - w;
+		int srcStep = 0;
+
+		if (y < Pix2D.top) {
+			int trim = Pix2D.top - y;
+			h -= trim;
+			y = Pix2D.top;
+			srcOff += trim * w;
+			dstOff += trim * Pix2D.width2d;
 		}
-		if (var6 + var10 > Pix2D.bottom) {
-			var10 -= var6 + var10 - Pix2D.bottom;
+
+		if (y + h > Pix2D.bottom) {
+			h -= y + h - Pix2D.bottom;
 		}
-		if (var5 < Pix2D.left) {
-			int var15 = Pix2D.left - var5;
-			var11 -= var15;
-			var5 = Pix2D.left;
-			var9 += var15;
-			var8 += var15;
-			var13 += var15;
-			var12 += var15;
+
+		if (x < Pix2D.left) {
+			int trim = Pix2D.left - x;
+			w -= trim;
+			x = Pix2D.left;
+			srcOff += trim;
+			dstOff += trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var5 + var11 > Pix2D.right) {
-			int var16 = var5 + var11 - Pix2D.right;
-			var11 -= var16;
-			var13 += var16;
-			var12 += var16;
+
+		if (x + w > Pix2D.right) {
+			int trim = x + w - Pix2D.right;
+			w -= trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var11 > 0 && var10 > 0) {
-			this.transPlot(var8, var13, var12, var10, this.pixels, 0, var9, arg1, Pix2D.data, var11);
+
+		if (w > 0 && h > 0) {
+			this.transPlot(dstOff, srcStep, dstStep, h, this.pixels, srcOff, alpha, Pix2D.data, w);
 		}
 	}
 
 	@ObfuscatedName("jb.a(IIIIB[IIII[II)V")
-	public void transPlot(int arg0, int arg1, int arg2, int arg3, int[] arg5, int arg6, int arg7, int arg8, int[] arg9, int arg10) {
-		int var12 = 256 - arg8;
-		for (int var13 = -arg3; var13 < 0; var13++) {
-			for (int var14 = -arg10; var14 < 0; var14++) {
-				int var15 = arg5[arg7++];
-				if (var15 == 0) {
-					arg0++;
+	public void transPlot(int dstOff, int srcStep, int dstStep, int h, int[] src, int srcOff, int alpha, int[] dst, int w) {
+		int invAlpha = 256 - alpha;
+
+		for (int y = -h; y < 0; y++) {
+			for (int x = -w; x < 0; x++) {
+				int rgb = src[srcOff++];
+				if (rgb == 0) {
+					dstOff++;
 				} else {
-					int var16 = arg9[arg0];
-					arg9[arg0++] = ((var15 & 0xFF00FF) * arg8 + (var16 & 0xFF00FF) * var12 & 0xFF00FF00) + ((var15 & 0xFF00) * arg8 + (var16 & 0xFF00) * var12 & 0xFF0000) >> 8;
+					int dstRgb = dst[dstOff];
+					dst[dstOff++] = ((rgb & 0xFF00FF) * alpha + (dstRgb & 0xFF00FF) * invAlpha & 0xFF00FF00) + ((rgb & 0xFF00) * alpha + (dstRgb & 0xFF00) * invAlpha & 0xFF0000) >> 8;
 				}
 			}
-			arg0 += arg2;
-			arg7 += arg1;
+
+			dstOff += dstStep;
+			srcOff += srcStep;
 		}
 	}
 
 	@ObfuscatedName("jb.a([IZ[IIIIIIIII)V")
-	public void drawRotatedMasked(int[] arg0, int[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public void drawRotatedMasked(int[] lineStart, int[] lineLengths, int zoom, int y, int anchorX, int h, int anchorY, int w, int angle, int x) {
 		try {
-			int var12 = -arg8 / 2;
-			int var13 = -arg6 / 2;
-			int var14 = (int) (Math.sin((double) arg9 / 326.11D) * 65536.0D);
-			int var15 = (int) (Math.cos((double) arg9 / 326.11D) * 65536.0D);
-			int var16 = var14 * arg3 >> 8;
-			int var17 = var15 * arg3 >> 8;
-			int var18 = (arg5 << 16) + var13 * var16 + var12 * var17;
-			int var19 = (arg7 << 16) + (var13 * var17 - var12 * var16);
-			int var20 = arg10 + arg4 * Pix2D.width2d;
-			for (int var21 = 0; var21 < arg6; var21++) {
-				int var22 = arg0[var21];
-				int var23 = var20 + var22;
-				int var24 = var18 + var17 * var22;
-				int var25 = var19 - var16 * var22;
-				for (int var26 = -arg2[var21]; var26 < 0; var26++) {
-					Pix2D.data[var23++] = this.pixels[(var24 >> 16) + (var25 >> 16) * this.wi];
-					var24 += var17;
-					var25 -= var16;
+			int centerX = -w / 2;
+			int centerY = -h / 2;
+
+			int sin = (int) (Math.sin((double) angle / 326.11D) * 65536.0D);
+			int cos = (int) (Math.cos((double) angle / 326.11D) * 65536.0D);
+			int sinZoom = sin * zoom >> 8;
+			int cosZoom = cos * zoom >> 8;
+
+			int leftX = (anchorX << 16) + centerY * sinZoom + centerX * cosZoom;
+			int leftY = (anchorY << 16) + (centerY * cosZoom - centerX * sinZoom);
+			int letfOff = x + y * Pix2D.width2d;
+
+			for (int i = 0; i < h; i++) {
+				int dstOff = lineStart[i];
+				int dstX = letfOff + dstOff;
+
+				int srcX = leftX + cosZoom * dstOff;
+				int srcY = leftY - sinZoom * dstOff;
+
+				for (int j = -lineLengths[i]; j < 0; j++) {
+					Pix2D.data[dstX++] = this.pixels[(srcX >> 16) + (srcY >> 16) * this.wi];
+					srcX += cosZoom;
+					srcY -= sinZoom;
 				}
-				var18 += var16;
-				var19 += var17;
-				var20 += Pix2D.width2d;
+
+				leftX += sinZoom;
+				leftY += cosZoom;
+				letfOff += Pix2D.width2d;
 			}
-		} catch (Exception var27) {
+		} catch (Exception ignore) {
 		}
 	}
 
 	@ObfuscatedName("jb.a(IIIIIIZDI)V")
-	public void drawRotated(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, double arg7, int arg8) {
+	public void drawRotated(int anchorX, int zoom, int anchorY, int x, int h, int y, double radians, int w) {
 		try {
-			int var11 = -arg8 / 2;
-			int var12 = -arg4 / 2;
-			int var13 = (int) (Math.sin(arg7) * 65536.0D);
-			int var14 = (int) (Math.cos(arg7) * 65536.0D);
-			int var15 = var13 * arg1 >> 8;
-			int var16 = var14 * arg1 >> 8;
-			int var17 = (arg0 << 16) + var12 * var15 + var11 * var16;
-			int var18 = (arg2 << 16) + (var12 * var16 - var11 * var15);
-			int var19 = arg3 + arg5 * Pix2D.width2d;
-			for (int var20 = 0; var20 < arg4; var20++) {
-				int var21 = var19;
-				int var22 = var17;
-				int var23 = var18;
-				for (int var24 = -arg8; var24 < 0; var24++) {
-					int var25 = this.pixels[(var22 >> 16) + (var23 >> 16) * this.wi];
-					if (var25 == 0) {
-						var21++;
+			int centerX = -w / 2;
+			int centerY = -h / 2;
+
+			int sin = (int) (Math.sin(radians) * 65536.0D);
+			int cos = (int) (Math.cos(radians) * 65536.0D);
+			int sinZoom = sin * zoom >> 8;
+			int cosZoom = cos * zoom >> 8;
+
+			int leftX = (anchorX << 16) + centerY * sinZoom + centerX * cosZoom;
+			int leftY = (anchorY << 16) + (centerY * cosZoom - centerX * sinZoom);
+			int leftOff = x + y * Pix2D.width2d;
+
+			for (int i = 0; i < h; i++) {
+				int dstOff = leftOff;
+				int srcX = leftX;
+				int srcY = leftY;
+
+				for (int j = -w; j < 0; j++) {
+					int rgb = this.pixels[(srcX >> 16) + (srcY >> 16) * this.wi];
+					if (rgb == 0) {
+						dstOff++;
 					} else {
-						Pix2D.data[var21++] = var25;
+						Pix2D.data[dstOff++] = rgb;
 					}
-					var22 += var16;
-					var23 -= var15;
+
+					srcX += cosZoom;
+					srcY -= sinZoom;
 				}
-				var17 += var15;
-				var18 += var16;
-				var19 += Pix2D.width2d;
+
+				leftX += sinZoom;
+				leftY += cosZoom;
+				leftOff += Pix2D.width2d;
 			}
-		} catch (Exception var26) {
+		} catch (Exception ignore) {
 		}
 	}
 
 	@ObfuscatedName("jb.a(ILkb;IB)V")
-	public void drawMasked(int arg0, Pix8 arg1, int arg2) {
-		int var5 = arg0 + this.xof;
-		int var6 = arg2 + this.yof;
-		int var7 = var5 + var6 * Pix2D.width2d;
-		int var8 = 0;
-		int var9 = this.hi;
-		int var10 = this.wi;
-		int var11 = Pix2D.width2d - var10;
-		int var12 = 0;
-		if (var6 < Pix2D.top) {
-			int var13 = Pix2D.top - var6;
-			var9 -= var13;
-			var6 = Pix2D.top;
-			var8 += var13 * var10;
-			var7 += var13 * Pix2D.width2d;
+	public void drawMasked(int x, Pix8 mask, int y) {
+		x = x + this.xof;
+		y = y + this.yof;
+
+		int dstOff = x + y * Pix2D.width2d;
+		int srcOff = 0;
+		int h = this.hi;
+		int w = this.wi;
+		int dstStep = Pix2D.width2d - w;
+		int srcStep = 0;
+
+		if (y < Pix2D.top) {
+			int trim = Pix2D.top - y;
+			h -= trim;
+			y = Pix2D.top;
+			srcOff += trim * w;
+			dstOff += trim * Pix2D.width2d;
 		}
-		if (var6 + var9 > Pix2D.bottom) {
-			var9 -= var6 + var9 - Pix2D.bottom;
+
+		if (y + h > Pix2D.bottom) {
+			h -= y + h - Pix2D.bottom;
 		}
-		if (var5 < Pix2D.left) {
-			int var14 = Pix2D.left - var5;
-			var10 -= var14;
-			var5 = Pix2D.left;
-			var8 += var14;
-			var7 += var14;
-			var12 += var14;
-			var11 += var14;
+
+		if (x < Pix2D.left) {
+			int trim = Pix2D.left - x;
+			w -= trim;
+			x = Pix2D.left;
+			srcOff += trim;
+			dstOff += trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var5 + var10 > Pix2D.right) {
-			int var15 = var5 + var10 - Pix2D.right;
-			var10 -= var15;
-			var12 += var15;
-			var11 += var15;
+
+		if (x + w > Pix2D.right) {
+			int trim = x + w - Pix2D.right;
+			w -= trim;
+			srcStep += trim;
+			dstStep += trim;
 		}
-		if (var10 > 0 && var9 > 0) {
-			this.copyPixelsMasked(var8, var9, arg1.pixels, var10, Pix2D.data, 0, this.pixels, var12, var11, var7);
+
+		if (w > 0 && h > 0) {
+			this.copyPixelsMasked(srcOff, h, mask.pixels, w, Pix2D.data, this.pixels, srcStep, dstStep, dstOff);
 		}
 	}
 
 	@ObfuscatedName("jb.a(II[BI[II[IIIIB)V")
-	public void copyPixelsMasked(int arg0, int arg1, byte[] arg2, int arg3, int[] arg4, int arg5, int[] arg6, int arg7, int arg8, int arg9) {
-		int var12 = -(arg3 >> 2);
-		int var13 = -(arg3 & 0x3);
-		for (int var14 = -arg1; var14 < 0; var14++) {
-			for (int var15 = var12; var15 < 0; var15++) {
-				int var16 = arg6[arg0++];
-				if (var16 != 0 && arg2[arg9] == 0) {
-					arg4[arg9++] = var16;
+	public void copyPixelsMasked(int srcOff, int h, byte[] mask, int w, int[] dst, int[] src, int srcStep, int dstStep, int dstOff) {
+		int qw = -(w >> 2);
+		w = -(w & 0x3);
+
+		for (int y = -h; y < 0; y++) {
+			for (int x = qw; x < 0; x++) {
+				int rgb = src[srcOff++];
+				if (rgb != 0 && mask[dstOff] == 0) {
+					dst[dstOff++] = rgb;
 				} else {
-					arg9++;
+					dstOff++;
 				}
-				int var17 = arg6[arg0++];
-				if (var17 != 0 && arg2[arg9] == 0) {
-					arg4[arg9++] = var17;
+
+				rgb = src[srcOff++];
+				if (rgb != 0 && mask[dstOff] == 0) {
+					dst[dstOff++] = rgb;
 				} else {
-					arg9++;
+					dstOff++;
 				}
-				int var18 = arg6[arg0++];
-				if (var18 != 0 && arg2[arg9] == 0) {
-					arg4[arg9++] = var18;
+
+				rgb = src[srcOff++];
+				if (rgb != 0 && mask[dstOff] == 0) {
+					dst[dstOff++] = rgb;
 				} else {
-					arg9++;
+					dstOff++;
 				}
-				int var19 = arg6[arg0++];
-				if (var19 != 0 && arg2[arg9] == 0) {
-					arg4[arg9++] = var19;
+
+				rgb = src[srcOff++];
+				if (rgb != 0 && mask[dstOff] == 0) {
+					dst[dstOff++] = rgb;
 				} else {
-					arg9++;
-				}
-			}
-			for (int var20 = var13; var20 < 0; var20++) {
-				int var21 = arg6[arg0++];
-				if (var21 != 0 && arg2[arg9] == 0) {
-					arg4[arg9++] = var21;
-				} else {
-					arg9++;
+					dstOff++;
 				}
 			}
-			arg9 += arg8;
-			arg0 += arg7;
+
+			for (int x = w; x < 0; x++) {
+				int rgb = src[srcOff++];
+				if (rgb != 0 && mask[dstOff] == 0) {
+					dst[dstOff++] = rgb;
+				} else {
+					dstOff++;
+				}
+			}
+
+			dstOff += dstStep;
+			srcOff += srcStep;
 		}
 	}
 }
