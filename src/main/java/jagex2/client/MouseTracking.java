@@ -9,7 +9,7 @@ public class MouseTracking implements Runnable {
 	public Client app;
 
 	@ObfuscatedName("fc.b")
-	public boolean tracking = true;
+	public boolean active = true;
 
 	@ObfuscatedName("fc.c")
 	public final Object lock = new Object();
@@ -28,7 +28,7 @@ public class MouseTracking implements Runnable {
 	}
 
 	public void run() {
-		while (this.tracking) {
+		while (this.active) {
 			synchronized (this.lock) {
 				if (this.length < 500) {
 					this.x[this.length] = this.app.mouseX;

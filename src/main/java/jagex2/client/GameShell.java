@@ -168,7 +168,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 				ratio = lastRatio;
 				del = lastDel;
 			} else if (ntime > this.otim[opos]) {
-				ratio = (int) ((long) (this.deltime * 2560) / (ntime - this.otim[opos]));
+				ratio = (int) ((this.deltime * 2560L) / (ntime - this.otim[opos]));
 			}
 
 			if (ratio < 25) {

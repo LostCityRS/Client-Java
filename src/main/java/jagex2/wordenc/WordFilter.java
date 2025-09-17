@@ -28,9 +28,6 @@ public class WordFilter {
 	@ObfuscatedName("qc.s")
 	public static final String[] ALLOWLIST = new String[] { "cook", "cook's", "cooks", "seeks", "sheet", "woop", "woops" };
 
-	@ObfuscatedName("qc.t")
-	public static boolean field1189;
-
 	@ObfuscatedName("qc.a(Lyb;)V")
 	public static void unpack(Jagfile arg0) {
 		Packet var1 = new Packet(arg0.read("fragmentsenc.txt", null));

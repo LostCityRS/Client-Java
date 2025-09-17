@@ -1267,54 +1267,62 @@ public class Client extends GameShell {
 
 	// ----
 
-	public static void main(String[] arg0) {
+	public static void main(String[] args) {
 		try {
-			System.out.println("RS2 user client - release #" + 245);
-			if (arg0.length == 5) {
-				nodeId = Integer.parseInt(arg0[0]);
-				portOffset = Integer.parseInt(arg0[1]);
-				if (arg0[2].equals("lowmem")) {
+			System.out.println("RS2 user client - release #" + signlink.clientversion);
+
+			if (args.length == 5) {
+				nodeId = Integer.parseInt(args[0]);
+				portOffset = Integer.parseInt(args[1]);
+
+				if (args[2].equals("lowmem")) {
 					setLowMem();
-				} else if (arg0[2].equals("highmem")) {
+				} else if (args[2].equals("highmem")) {
 					setHighMem();
 				} else {
 					System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 					return;
 				}
-				if (arg0[3].equals("free")) {
+
+				if (args[3].equals("free")) {
 					membersWorld = false;
-				} else if (arg0[3].equals("members")) {
+				} else if (args[3].equals("members")) {
 					membersWorld = true;
 				} else {
 					System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 					return;
 				}
-				signlink.storeid = Integer.parseInt(arg0[4]);
+
+				signlink.storeid = Integer.parseInt(args[4]);
 				signlink.startpriv(InetAddress.getLocalHost());
-				Client var1 = new Client();
-				var1.initApplication(503, 765);
+
+				Client app = new Client();
+				app.initApplication(503, 765);
 			} else {
 				System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 			}
-		} catch (Exception var3) {
+		} catch (Exception ignore) {
 		}
 	}
 
 	public void init() {
 		nodeId = Integer.parseInt(this.getParameter("nodeid"));
 		portOffset = Integer.parseInt(this.getParameter("portoff"));
-		String var1 = this.getParameter("lowmem");
-		if (var1 != null && var1.equals("1")) {
+
+		String lowmem = this.getParameter("lowmem");
+		if (lowmem != null && lowmem.equals("1")) {
 			setLowMem();
 		} else {
 			setHighMem();
 		}
-		String var2 = this.getParameter("free");
-		if (var2 != null && var2.equals("1")) {
+
+		String free = this.getParameter("free");
+		if (free != null && free.equals("1")) {
 			membersWorld = false;
 		} else {
 			membersWorld = true;
 		}
+
 		this.initApplet(765, 503);
 	}
 
@@ -1348,45 +1356,64 @@ public class Client extends GameShell {
 		if (signlink.mainapp != null) {
 			return signlink.mainapp.getCodeBase();
 		}
+
 		try {
 			if (super.frame != null) {
 				return new URL("http://127.0.0.1:" + (portOffset + 80));
 			}
-		} catch (Exception var1) {
+		} catch (Exception ignore) {
 		}
+
 		return super.getCodeBase();
 	}
 
-	public String getParameter(String arg0) {
-		return signlink.mainapp == null ? super.getParameter(arg0) : signlink.mainapp.getParameter(arg0);
+	public String getParameter(String name) {
+		if (signlink.mainapp != null) {
+			return signlink.mainapp.getParameter(name);
+		}
+
+		return super.getParameter(name);
+
 	}
 
 	@ObfuscatedName("client.g(I)Ljava/lang/String;")
 	public String getHost() {
-		if (signlink.mainapp == null) {
-			return super.frame == null ? super.getDocumentBase().getHost().toLowerCase() : "runescape.com";
-		} else {
+		if (signlink.mainapp != null) {
 			return signlink.mainapp.getDocumentBase().getHost().toLowerCase();
 		}
+
+		if (super.frame != null) {
+			return "runescape.com";
+		}
+
+		return super.getDocumentBase().getHost().toLowerCase();
 	}
 
 	@ObfuscatedName("client.f(I)Ljava/awt/Component;")
 	public java.awt.Component getBaseComponent() {
-		if (signlink.mainapp == null) {
-			return this;
-		} else {
+		if (signlink.mainapp != null) {
 			return signlink.mainapp;
 		}
+
+		return this;
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;)Ljava/io/DataInputStream;")
-	public DataInputStream openUrl(String arg0) throws IOException {
-		return signlink.mainapp == null ? new DataInputStream((new URL(this.getCodeBase(), arg0)).openStream()) : signlink.openurl(arg0);
+	public DataInputStream openUrl(String url) throws IOException {
+		if (signlink.mainapp != null) {
+			return signlink.openurl(url);
+		}
+
+		return new DataInputStream((new URL(this.getCodeBase(), url)).openStream());
 	}
 
 	@ObfuscatedName("client.Y(I)Ljava/net/Socket;")
-	public Socket openSocket(int arg0) throws IOException {
-		return signlink.mainapp == null ? new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg0) : signlink.opensocket(arg0);
+	public Socket openSocket(int port) throws IOException {
+		if (signlink.mainapp != null) {
+			return signlink.opensocket(port);
+		}
+
+		return new Socket(InetAddress.getByName(this.getCodeBase().getHost()), port);
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/Runnable;I)V")
@@ -1403,9 +1430,9 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(Z[BZ)V")
-	public void saveMidi(boolean arg0, byte[] arg1) {
-		signlink.midifade = arg0 ? 1 : 0;
-		signlink.midisave(arg1, arg1.length);
+	public void saveMidi(boolean fade, byte[] src) {
+		signlink.midifade = fade ? 1 : 0;
+		signlink.midisave(src, src.length);
 	}
 
 	@ObfuscatedName("client.J(I)V")
@@ -1415,16 +1442,20 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(ZII)V")
-	public void setMidiVolume(boolean arg0, int arg2) {
-		signlink.midivol = arg2;
-		if (arg0) {
+	public void setMidiVolume(boolean active, int volume) {
+		signlink.midivol = volume;
+		if (active) {
 			signlink.midi = "voladjust";
 		}
 	}
 
 	@ObfuscatedName("client.a(IB[B)Z")
-	public boolean saveWave(int arg0, byte[] arg2) {
-		return arg2 == null ? true : signlink.wavesave(arg2, arg0);
+	public boolean saveWave(int length, byte[] src) {
+		if (src == null) {
+			return true;
+		}
+
+		return signlink.wavesave(src, length);
 	}
 
 	@ObfuscatedName("client.i(B)Z")
@@ -1433,8 +1464,8 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.c(II)V")
-	public void setWaveVolume(int arg0) {
-		signlink.wavevol = arg0;
+	public void setWaveVolume(int volume) {
+		signlink.wavevol = volume;
 	}
 
 	// ----
@@ -1444,391 +1475,488 @@ public class Client extends GameShell {
 		if (signlink.sunjava) {
 			super.mindel = 5;
 		}
+
 		if (alreadyStarted) {
 			this.errorStarted = true;
 			return;
 		}
+
 		alreadyStarted = true;
-		boolean var1 = false;
-		String var2 = this.getHost();
-		if (var2.endsWith("jagex.com")) {
-			var1 = true;
+
+		boolean validHost = false;
+		String host = this.getHost();
+		if (host.endsWith("jagex.com")) {
+			validHost = true;
+		} else if (host.endsWith("runescape.com")) {
+			validHost = true;
+		} else if (host.endsWith("192.168.1.2")) {
+			validHost = true;
+		} else if (host.endsWith("192.168.1.247")) {
+			validHost = true;
+		} else if (host.endsWith("192.168.1.249")) {
+			validHost = true;
+		} else if (host.endsWith("192.168.1.253")) {
+			validHost = true;
+		} else if (host.endsWith("192.168.1.254")) {
+			validHost = true;
+		} else if (host.endsWith("127.0.0.1")) {
+			validHost = true;
 		}
-		if (var2.endsWith("runescape.com")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.2")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.247")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.249")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.253")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.254")) {
-			var1 = true;
-		}
-		if (var2.endsWith("127.0.0.1")) {
-			var1 = true;
-		}
-		if (!var1) {
+
+		if (!validHost) {
 			this.errorHost = true;
 			return;
 		}
+
 		if (signlink.cache_dat != null) {
-			for (int var3 = 0; var3 < 5; var3++) {
-				this.fileStreams[var3] = new FileStream(signlink.cache_dat, var3 + 1, 500000, signlink.cache_idx[var3]);
+			for (int i = 0; i < 5; i++) {
+				this.fileStreams[i] = new FileStream(signlink.cache_dat, i + 1, 500000, signlink.cache_idx[i]);
 			}
 		}
+
 		try {
-			int var4 = 5;
+			int retry = 5;
+
 			this.jagChecksum[8] = 0;
 			while (this.jagChecksum[8] == 0) {
 				this.drawProgress("Connecting to web server", 20);
+
 				try {
-					DataInputStream var5 = this.openUrl("crc" + (int) (Math.random() * 9.9999999E7D));
-					Packet var6 = new Packet(new byte[36]);
-					var5.readFully(var6.data, 0, 36);
-					for (int var7 = 0; var7 < 9; var7++) {
-						this.jagChecksum[var7] = var6.g4();
+					DataInputStream req = this.openUrl("crc" + (int) (Math.random() * 9.9999999E7D));
+
+					Packet crc = new Packet(new byte[36]);
+					req.readFully(crc.data, 0, 36);
+
+					for (int i = 0; i < 9; i++) {
+						this.jagChecksum[i] = crc.g4();
 					}
-					var5.close();
-				} catch (IOException var80) {
-					for (int var8 = var4; var8 > 0; var8--) {
-						this.drawProgress("Error loading - Will retry in " + var8 + " secs.", 10);
+
+					req.close();
+				} catch (IOException ignore) {
+					for (int i = retry; i > 0; i--) {
+						this.drawProgress("Error loading - Will retry in " + i + " secs.", 10);
+
 						try {
 							Thread.sleep(1000L);
-						} catch (Exception var75) {
+						} catch (Exception ignore2) {
 						}
 					}
-					var4 *= 2;
-					if (var4 > 60) {
-						var4 = 60;
+
+					retry *= 2;
+					if (retry > 60) {
+						retry = 60;
 					}
 				}
 			}
+
 			this.jagTitle = this.getJagFile("title screen", 1, this.jagChecksum[1], "title", 25);
 			this.fontPlain11 = new PixFont("p11", this.jagTitle);
 			this.fontPlain12 = new PixFont("p12", this.jagTitle);
 			this.fontBold12 = new PixFont("b12", this.jagTitle);
 			this.fontQuill8 = new PixFont("q8", this.jagTitle);
+
 			this.loadTitleBackground();
 			this.loadTitleImages();
-			Jagfile var9 = this.getJagFile("config", 2, this.jagChecksum[2], "config", 30);
-			Jagfile var10 = this.getJagFile("interface", 3, this.jagChecksum[3], "interface", 35);
-			Jagfile var11 = this.getJagFile("2d graphics", 4, this.jagChecksum[4], "media", 40);
-			Jagfile var12 = this.getJagFile("textures", 6, this.jagChecksum[6], "textures", 45);
-			Jagfile var13 = this.getJagFile("chat system", 7, this.jagChecksum[7], "wordenc", 50);
-			Jagfile var14 = this.getJagFile("sound effects", 8, this.jagChecksum[8], "sounds", 55);
+
+			Jagfile jagConfig = this.getJagFile("config", 2, this.jagChecksum[2], "config", 30);
+			Jagfile jagInterface = this.getJagFile("interface", 3, this.jagChecksum[3], "interface", 35);
+			Jagfile jagMedia = this.getJagFile("2d graphics", 4, this.jagChecksum[4], "media", 40);
+			Jagfile jagTextures = this.getJagFile("textures", 6, this.jagChecksum[6], "textures", 45);
+			Jagfile jagWordenc = this.getJagFile("chat system", 7, this.jagChecksum[7], "wordenc", 50);
+			Jagfile jagSounds = this.getJagFile("sound effects", 8, this.jagChecksum[8], "sounds", 55);
+
 			this.levelTileFlags = new byte[4][104][104];
 			this.levelHeightmap = new int[4][105][105];
 			this.scene = new World3D(this.levelHeightmap, 104, 104, 4);
-			for (int var15 = 0; var15 < 4; var15++) {
-				this.levelCollisionMap[var15] = new CollisionMap(104, 104);
+			for (int i = 0; i < 4; i++) {
+				this.levelCollisionMap[i] = new CollisionMap(104, 104);
 			}
 			this.imageMinimap = new Pix32(512, 512);
-			Jagfile var16 = this.getJagFile("update list", 5, this.jagChecksum[5], "versionlist", 60);
+
+			Jagfile jagVersionList = this.getJagFile("update list", 5, this.jagChecksum[5], "versionlist", 60);
+
 			this.drawProgress("Connecting to update server", 60);
+
 			this.onDemand = new OnDemand();
-			this.onDemand.unpack(var16, this);
+			this.onDemand.unpack(jagVersionList, this);
 			AnimFrame.init(this.onDemand.getAnimCount());
 			Model.init(this.onDemand.getFileCount(0), this.onDemand);
+
 			if (!lowMem) {
 				this.midiSong = 0;
 				this.midiFading = false;
 				this.onDemand.request(2, this.midiSong);
+
 				while (this.onDemand.remaining() > 0) {
 					this.updateOnDemand();
+
 					try {
 						Thread.sleep(100L);
-					} catch (Exception var74) {
+					} catch (Exception ignore) {
 					}
 				}
 			}
+
 			this.drawProgress("Requesting animations", 65);
-			int var17 = this.onDemand.getFileCount(1);
-			for (int var18 = 0; var18 < var17; var18++) {
-				this.onDemand.request(1, var18);
+
+			int animCount = this.onDemand.getFileCount(1);
+			for (int i = 0; i < animCount; i++) {
+				this.onDemand.request(1, i);
 			}
+
 			while (this.onDemand.remaining() > 0) {
-				int var19 = var17 - this.onDemand.remaining();
-				if (var19 > 0) {
-					this.drawProgress("Loading animations - " + var19 * 100 / var17 + "%", 65);
+				int progress = animCount - this.onDemand.remaining();
+				if (progress > 0) {
+					this.drawProgress("Loading animations - " + progress * 100 / animCount + "%", 65);
 				}
+
 				this.updateOnDemand();
+
 				try {
 					Thread.sleep(100L);
-				} catch (Exception var73) {
+				} catch (Exception ignore) {
 				}
 			}
+
 			this.drawProgress("Requesting models", 70);
-			int var20 = this.onDemand.getFileCount(0);
-			for (int var21 = 0; var21 < var20; var21++) {
-				int var22 = this.onDemand.getModelFlags(var21);
-				if ((var22 & 0x1) != 0) {
-					this.onDemand.request(0, var21);
+
+			int modelCount = this.onDemand.getFileCount(0);
+			for (int i = 0; i < modelCount; i++) {
+				int flags = this.onDemand.getModelFlags(i);
+				if ((flags & 0x1) != 0) {
+					this.onDemand.request(0, i);
 				}
 			}
-			int var23 = this.onDemand.remaining();
+
+			int modelPrefetch = this.onDemand.remaining();
 			while (this.onDemand.remaining() > 0) {
-				int var24 = var23 - this.onDemand.remaining();
-				if (var24 > 0) {
-					this.drawProgress("Loading models - " + var24 * 100 / var23 + "%", 70);
+				int progress = modelPrefetch - this.onDemand.remaining();
+				if (progress > 0) {
+					this.drawProgress("Loading models - " + progress * 100 / modelPrefetch + "%", 70);
 				}
+
 				this.updateOnDemand();
+
 				try {
 					Thread.sleep(100L);
-				} catch (Exception var72) {
+				} catch (Exception ignore) {
 				}
 			}
+
 			if (this.fileStreams[0] != null) {
 				this.drawProgress("Requesting maps", 75);
+
 				this.onDemand.request(3, this.onDemand.getMapFile(0, 47, 48));
 				this.onDemand.request(3, this.onDemand.getMapFile(1, 47, 48));
+
 				this.onDemand.request(3, this.onDemand.getMapFile(0, 48, 48));
 				this.onDemand.request(3, this.onDemand.getMapFile(1, 48, 48));
+
 				this.onDemand.request(3, this.onDemand.getMapFile(0, 49, 48));
 				this.onDemand.request(3, this.onDemand.getMapFile(1, 49, 48));
+
 				this.onDemand.request(3, this.onDemand.getMapFile(0, 47, 47));
 				this.onDemand.request(3, this.onDemand.getMapFile(1, 47, 47));
+
 				this.onDemand.request(3, this.onDemand.getMapFile(0, 48, 47));
 				this.onDemand.request(3, this.onDemand.getMapFile(1, 48, 47));
+
 				this.onDemand.request(3, this.onDemand.getMapFile(0, 48, 148));
 				this.onDemand.request(3, this.onDemand.getMapFile(1, 48, 148));
-				int var25 = this.onDemand.remaining();
+
+				int mapPrefetch = this.onDemand.remaining();
 				while (this.onDemand.remaining() > 0) {
-					int var26 = var25 - this.onDemand.remaining();
-					if (var26 > 0) {
-						this.drawProgress("Loading maps - " + var26 * 100 / var25 + "%", 75);
+					int progress = mapPrefetch - this.onDemand.remaining();
+					if (progress > 0) {
+						this.drawProgress("Loading maps - " + progress * 100 / mapPrefetch + "%", 75);
 					}
+
 					this.updateOnDemand();
+
 					try {
 						Thread.sleep(100L);
-					} catch (Exception var71) {
+					} catch (Exception ignore) {
 					}
 				}
 			}
-			int var27 = this.onDemand.getFileCount(0);
-			for (int var28 = 0; var28 < var27; var28++) {
-				int var29 = this.onDemand.getModelFlags(var28);
-				byte var30 = 0;
-				if ((var29 & 0x8) != 0) {
-					var30 = 10;
-				} else if ((var29 & 0x20) != 0) {
-					var30 = 9;
-				} else if ((var29 & 0x10) != 0) {
-					var30 = 8;
-				} else if ((var29 & 0x40) != 0) {
-					var30 = 7;
-				} else if ((var29 & 0x80) != 0) {
-					var30 = 6;
-				} else if ((var29 & 0x2) != 0) {
-					var30 = 5;
-				} else if ((var29 & 0x4) != 0) {
-					var30 = 4;
+
+			int modelCount2 = this.onDemand.getFileCount(0);
+			for (int i = 0; i < modelCount2; i++) {
+				int flags = this.onDemand.getModelFlags(i);
+
+				byte priority = 0;
+				if ((flags & 0x8) != 0) {
+					priority = 10;
+				} else if ((flags & 0x20) != 0) {
+					priority = 9;
+				} else if ((flags & 0x10) != 0) {
+					priority = 8;
+				} else if ((flags & 0x40) != 0) {
+					priority = 7;
+				} else if ((flags & 0x80) != 0) {
+					priority = 6;
+				} else if ((flags & 0x2) != 0) {
+					priority = 5;
+				} else if ((flags & 0x4) != 0) {
+					priority = 4;
 				}
-				if ((var29 & 0x1) != 0) {
-					var30 = 3;
+
+				if ((flags & 0x1) != 0) {
+					priority = 3;
 				}
-				if (var30 != 0) {
-					this.onDemand.prefetchPriority(var28, 0, var30);
+
+				if (priority != 0) {
+					this.onDemand.prefetchPriority(i, 0, priority);
 				}
 			}
+
 			this.onDemand.prefetchMaps(membersWorld);
+
 			if (!lowMem) {
-				int var31 = this.onDemand.getFileCount(2);
-				for (int var32 = 1; var32 < var31; var32++) {
-					if (this.onDemand.shouldPrefetchMidi(var32)) {
-						this.onDemand.prefetchPriority(var32, 2, (byte) 1);
+				int midiCount = this.onDemand.getFileCount(2);
+				for (int i = 1; i < midiCount; i++) {
+					if (this.onDemand.shouldPrefetchMidi(i)) {
+						this.onDemand.prefetchPriority(i, 2, (byte) 1);
 					}
 				}
 			}
+
 			this.drawProgress("Unpacking media", 80);
-			this.imageInvback = new Pix8(var11, "invback", 0);
-			this.imageChatback = new Pix8(var11, "chatback", 0);
-			this.imageMapback = new Pix8(var11, "mapback", 0);
-			this.imageBackbase1 = new Pix8(var11, "backbase1", 0);
-			this.imageBackbase2 = new Pix8(var11, "backbase2", 0);
-			this.imageBackhmid1 = new Pix8(var11, "backhmid1", 0);
-			for (int var33 = 0; var33 < 13; var33++) {
-				this.imageSideicons[var33] = new Pix8(var11, "sideicons", var33);
+
+			this.imageInvback = new Pix8(jagMedia, "invback", 0);
+			this.imageChatback = new Pix8(jagMedia, "chatback", 0);
+			this.imageMapback = new Pix8(jagMedia, "mapback", 0);
+
+			this.imageBackbase1 = new Pix8(jagMedia, "backbase1", 0);
+			this.imageBackbase2 = new Pix8(jagMedia, "backbase2", 0);
+			this.imageBackhmid1 = new Pix8(jagMedia, "backhmid1", 0);
+
+			for (int i = 0; i < 13; i++) {
+				this.imageSideicons[i] = new Pix8(jagMedia, "sideicons", i);
 			}
-			this.imageCompass = new Pix32(var11, "compass", 0);
-			this.imageMapedge = new Pix32(var11, "mapedge", 0);
+
+			this.imageCompass = new Pix32(jagMedia, "compass", 0);
+
+			this.imageMapedge = new Pix32(jagMedia, "mapedge", 0);
 			this.imageMapedge.trim();
+
 			try {
-				for (int var34 = 0; var34 < 50; var34++) {
-					this.imageMapscene[var34] = new Pix8(var11, "mapscene", var34);
+				for (int i = 0; i < 50; i++) {
+					this.imageMapscene[i] = new Pix8(jagMedia, "mapscene", i);
 				}
-			} catch (Exception var79) {
+			} catch (Exception ignore) {
+			}
+
+			try {
+				for (int i = 0; i < 50; i++) {
+					this.imageMapfunction[i] = new Pix32(jagMedia, "mapfunction", i);
+				}
+			} catch (Exception ignore) {
+			}
+
+			try {
+				for (int i = 0; i < 20; i++) {
+					this.imageHitmark[i] = new Pix32(jagMedia, "hitmarks", i);
+				}
+			} catch (Exception ignore) {
 			}
 			try {
-				for (int var35 = 0; var35 < 50; var35++) {
-					this.imageMapfunction[var35] = new Pix32(var11, "mapfunction", var35);
+				for (int i = 0; i < 20; i++) {
+					this.imageHeadicon[i] = new Pix32(jagMedia, "headicons", i);
 				}
-			} catch (Exception var78) {
+			} catch (Exception ignore) {
 			}
-			try {
-				for (int var36 = 0; var36 < 20; var36++) {
-					this.imageHitmark[var36] = new Pix32(var11, "hitmarks", var36);
-				}
-			} catch (Exception var77) {
+
+			this.imageMapmarker0 = new Pix32(jagMedia, "mapmarker", 0);
+			this.imageMapmarker1 = new Pix32(jagMedia, "mapmarker", 1);
+
+			for (int i = 0; i < 8; i++) {
+				this.imageCross[i] = new Pix32(jagMedia, "cross", i);
 			}
-			try {
-				for (int var37 = 0; var37 < 20; var37++) {
-					this.imageHeadicon[var37] = new Pix32(var11, "headicons", var37);
-				}
-			} catch (Exception var76) {
-			}
-			this.imageMapmarker0 = new Pix32(var11, "mapmarker", 0);
-			this.imageMapmarker1 = new Pix32(var11, "mapmarker", 1);
-			for (int var38 = 0; var38 < 8; var38++) {
-				this.imageCross[var38] = new Pix32(var11, "cross", var38);
-			}
-			this.imageMapdot0 = new Pix32(var11, "mapdots", 0);
-			this.imageMapdot1 = new Pix32(var11, "mapdots", 1);
-			this.imageMapdot2 = new Pix32(var11, "mapdots", 2);
-			this.imageMapdot3 = new Pix32(var11, "mapdots", 3);
-			this.imageScrollbar0 = new Pix8(var11, "scrollbar", 0);
-			this.imageScrollbar1 = new Pix8(var11, "scrollbar", 1);
-			this.imageRedstone1 = new Pix8(var11, "redstone1", 0);
-			this.imageRedstone2 = new Pix8(var11, "redstone2", 0);
-			this.imageRedstone3 = new Pix8(var11, "redstone3", 0);
-			this.imageRedstone1h = new Pix8(var11, "redstone1", 0);
+
+			this.imageMapdot0 = new Pix32(jagMedia, "mapdots", 0);
+			this.imageMapdot1 = new Pix32(jagMedia, "mapdots", 1);
+			this.imageMapdot2 = new Pix32(jagMedia, "mapdots", 2);
+			this.imageMapdot3 = new Pix32(jagMedia, "mapdots", 3);
+
+			this.imageScrollbar0 = new Pix8(jagMedia, "scrollbar", 0);
+			this.imageScrollbar1 = new Pix8(jagMedia, "scrollbar", 1);
+
+			this.imageRedstone1 = new Pix8(jagMedia, "redstone1", 0);
+			this.imageRedstone2 = new Pix8(jagMedia, "redstone2", 0);
+			this.imageRedstone3 = new Pix8(jagMedia, "redstone3", 0);
+
+			this.imageRedstone1h = new Pix8(jagMedia, "redstone1", 0);
 			this.imageRedstone1h.hflip();
-			this.imageRedstone2h = new Pix8(var11, "redstone2", 0);
+
+			this.imageRedstone2h = new Pix8(jagMedia, "redstone2", 0);
 			this.imageRedstone2h.hflip();
-			this.imageRedstone1v = new Pix8(var11, "redstone1", 0);
+
+			this.imageRedstone1v = new Pix8(jagMedia, "redstone1", 0);
 			this.imageRedstone1v.vflip();
-			this.imageRedstone2v = new Pix8(var11, "redstone2", 0);
+
+			this.imageRedstone2v = new Pix8(jagMedia, "redstone2", 0);
 			this.imageRedstone2v.vflip();
-			this.imageRedstone3v = new Pix8(var11, "redstone3", 0);
+
+			this.imageRedstone3v = new Pix8(jagMedia, "redstone3", 0);
 			this.imageRedstone3v.vflip();
-			this.imageRedstone1hv = new Pix8(var11, "redstone1", 0);
+
+			this.imageRedstone1hv = new Pix8(jagMedia, "redstone1", 0);
 			this.imageRedstone1hv.hflip();
 			this.imageRedstone1hv.vflip();
-			this.imageRedstone2hv = new Pix8(var11, "redstone2", 0);
+
+			this.imageRedstone2hv = new Pix8(jagMedia, "redstone2", 0);
 			this.imageRedstone2hv.hflip();
 			this.imageRedstone2hv.vflip();
-			for (int var39 = 0; var39 < 2; var39++) {
-				this.imageModIcons[var39] = new Pix8(var11, "mod_icons", var39);
+
+			for (int i = 0; i < 2; i++) {
+				this.imageModIcons[i] = new Pix8(jagMedia, "mod_icons", i);
 			}
-			Pix32 var40 = new Pix32(var11, "backleft1", 0);
-			this.areaBackleft1 = new PixMap(var40.hi, this.getBaseComponent(), var40.wi);
-			var40.quickPlotSprite(0, 0);
-			Pix32 var41 = new Pix32(var11, "backleft2", 0);
-			this.areaBackleft2 = new PixMap(var41.hi, this.getBaseComponent(), var41.wi);
-			var41.quickPlotSprite(0, 0);
-			Pix32 var42 = new Pix32(var11, "backright1", 0);
-			this.areaBackright1 = new PixMap(var42.hi, this.getBaseComponent(), var42.wi);
-			var42.quickPlotSprite(0, 0);
-			Pix32 var43 = new Pix32(var11, "backright2", 0);
-			this.areaBackright2 = new PixMap(var43.hi, this.getBaseComponent(), var43.wi);
-			var43.quickPlotSprite(0, 0);
-			Pix32 var44 = new Pix32(var11, "backtop1", 0);
-			this.areaBacktop1 = new PixMap(var44.hi, this.getBaseComponent(), var44.wi);
-			var44.quickPlotSprite(0, 0);
-			Pix32 var45 = new Pix32(var11, "backvmid1", 0);
-			this.areaBackvmid1 = new PixMap(var45.hi, this.getBaseComponent(), var45.wi);
-			var45.quickPlotSprite(0, 0);
-			Pix32 var46 = new Pix32(var11, "backvmid2", 0);
-			this.areaBackvmid2 = new PixMap(var46.hi, this.getBaseComponent(), var46.wi);
-			var46.quickPlotSprite(0, 0);
-			Pix32 var47 = new Pix32(var11, "backvmid3", 0);
-			this.areaBackvmid3 = new PixMap(var47.hi, this.getBaseComponent(), var47.wi);
-			var47.quickPlotSprite(0, 0);
-			Pix32 var48 = new Pix32(var11, "backhmid2", 0);
-			this.areaBackhmid2 = new PixMap(var48.hi, this.getBaseComponent(), var48.wi);
-			var48.quickPlotSprite(0, 0);
-			int var49 = (int) (Math.random() * 21.0D) - 10;
-			int var50 = (int) (Math.random() * 21.0D) - 10;
-			int var51 = (int) (Math.random() * 21.0D) - 10;
-			int var52 = (int) (Math.random() * 41.0D) - 20;
-			for (int var53 = 0; var53 < 50; var53++) {
-				if (this.imageMapfunction[var53] != null) {
-					this.imageMapfunction[var53].rgbAdjust(var49 + var52, var50 + var52, var51 + var52);
+
+			Pix32 backleft1 = new Pix32(jagMedia, "backleft1", 0);
+			this.areaBackleft1 = new PixMap(backleft1.hi, this.getBaseComponent(), backleft1.wi);
+			backleft1.quickPlotSprite(0, 0);
+
+			Pix32 backleft2 = new Pix32(jagMedia, "backleft2", 0);
+			this.areaBackleft2 = new PixMap(backleft2.hi, this.getBaseComponent(), backleft2.wi);
+			backleft2.quickPlotSprite(0, 0);
+
+			Pix32 backright1 = new Pix32(jagMedia, "backright1", 0);
+			this.areaBackright1 = new PixMap(backright1.hi, this.getBaseComponent(), backright1.wi);
+			backright1.quickPlotSprite(0, 0);
+
+			Pix32 backright2 = new Pix32(jagMedia, "backright2", 0);
+			this.areaBackright2 = new PixMap(backright2.hi, this.getBaseComponent(), backright2.wi);
+			backright2.quickPlotSprite(0, 0);
+
+			Pix32 backtop1 = new Pix32(jagMedia, "backtop1", 0);
+			this.areaBacktop1 = new PixMap(backtop1.hi, this.getBaseComponent(), backtop1.wi);
+			backtop1.quickPlotSprite(0, 0);
+
+			Pix32 backvmid1 = new Pix32(jagMedia, "backvmid1", 0);
+			this.areaBackvmid1 = new PixMap(backvmid1.hi, this.getBaseComponent(), backvmid1.wi);
+			backvmid1.quickPlotSprite(0, 0);
+
+			Pix32 backvmid2 = new Pix32(jagMedia, "backvmid2", 0);
+			this.areaBackvmid2 = new PixMap(backvmid2.hi, this.getBaseComponent(), backvmid2.wi);
+			backvmid2.quickPlotSprite(0, 0);
+
+			Pix32 backvmid3 = new Pix32(jagMedia, "backvmid3", 0);
+			this.areaBackvmid3 = new PixMap(backvmid3.hi, this.getBaseComponent(), backvmid3.wi);
+			backvmid3.quickPlotSprite(0, 0);
+
+			Pix32 backhmid2 = new Pix32(jagMedia, "backhmid2", 0);
+			this.areaBackhmid2 = new PixMap(backhmid2.hi, this.getBaseComponent(), backhmid2.wi);
+			backhmid2.quickPlotSprite(0, 0);
+
+			int randR = (int) (Math.random() * 21.0D) - 10;
+			int randG = (int) (Math.random() * 21.0D) - 10;
+			int randB = (int) (Math.random() * 21.0D) - 10;
+			int rand = (int) (Math.random() * 41.0D) - 20;
+
+			for (int i = 0; i < 50; i++) {
+				if (this.imageMapfunction[i] != null) {
+					this.imageMapfunction[i].rgbAdjust(randR + rand, randG + rand, randB + rand);
 				}
-				if (this.imageMapscene[var53] != null) {
-					this.imageMapscene[var53].rgbAdjust(var49 + var52, var50 + var52, var51 + var52);
+
+				if (this.imageMapscene[i] != null) {
+					this.imageMapscene[i].rgbAdjust(randR + rand, randG + rand, randB + rand);
 				}
 			}
+
 			this.drawProgress("Unpacking textures", 83);
-			Pix3D.unpackTextures(var12);
+
+			Pix3D.unpackTextures(jagTextures);
 			Pix3D.initColourTable(0.8D);
 			Pix3D.initPool(20);
+
 			this.drawProgress("Unpacking config", 86);
-			SeqType.unpack(var9);
-			LocType.unpack(var9);
-			FloType.unpack(var9);
-			ObjType.unpack(var9);
-			NpcType.unpack(var9);
-			IdkType.unpack(var9);
-			SpotAnimType.unpack(var9);
-			VarpType.unpack(var9);
+
+			SeqType.unpack(jagConfig);
+			LocType.unpack(jagConfig);
+			FloType.unpack(jagConfig);
+			ObjType.unpack(jagConfig);
+			NpcType.unpack(jagConfig);
+			IdkType.unpack(jagConfig);
+			SpotAnimType.unpack(jagConfig);
+			VarpType.unpack(jagConfig);
 			ObjType.membersWorld = membersWorld;
+
 			if (!lowMem) {
 				this.drawProgress("Unpacking sounds", 90);
-				byte[] var54 = var14.read("sounds.dat", null);
-				Packet var55 = new Packet(var54);
-				Wave.unpack(var55);
+
+				byte[] dat = jagSounds.read("sounds.dat", null);
+				Packet sounds = new Packet(dat);
+				Wave.unpack(sounds);
 			}
+
 			this.drawProgress("Unpacking interfaces", 95);
-			PixFont[] var56 = new PixFont[] { this.fontPlain11, this.fontPlain12, this.fontBold12, this.fontQuill8 };
-			Component.unpack(var56, var11, var10);
+
+			PixFont[] fonts = new PixFont[] { this.fontPlain11, this.fontPlain12, this.fontBold12, this.fontQuill8 };
+			Component.unpack(fonts, jagMedia, jagInterface);
+
 			this.drawProgress("Preparing game engine", 100);
-			for (int var57 = 0; var57 < 33; var57++) {
-				int var58 = 999;
-				int var59 = 0;
-				for (int var60 = 0; var60 < 34; var60++) {
-					if (this.imageMapback.pixels[var60 + var57 * this.imageMapback.wi] == 0) {
-						if (var58 == 999) {
-							var58 = var60;
+
+			for (int y = 0; y < 33; y++) {
+				int left = 999;
+				int right = 0;
+
+				for (int x = 0; x < 34; x++) {
+					if (this.imageMapback.pixels[x + y * this.imageMapback.wi] == 0) {
+						if (left == 999) {
+							left = x;
 						}
-					} else if (var58 != 999) {
-						var59 = var60;
+					} else if (left != 999) {
+						right = x;
 						break;
 					}
 				}
-				this.compassMaskLineOffsets[var57] = var58;
-				this.compassMaskLineLengths[var57] = var59 - var58;
+
+				this.compassMaskLineOffsets[y] = left;
+				this.compassMaskLineLengths[y] = right - left;
 			}
-			for (int var61 = 5; var61 < 156; var61++) {
-				int var62 = 999;
-				int var63 = 0;
-				for (int var64 = 25; var64 < 172; var64++) {
-					if (this.imageMapback.pixels[var64 + var61 * this.imageMapback.wi] == 0 && (var64 > 34 || var61 > 34)) {
-						if (var62 == 999) {
-							var62 = var64;
+
+			for (int y = 5; y < 156; y++) {
+				int left = 999;
+				int right = 0;
+
+				for (int x = 25; x < 172; x++) {
+					if (this.imageMapback.pixels[x + y * this.imageMapback.wi] == 0 && (x > 34 || y > 34)) {
+						if (left == 999) {
+							left = x;
 						}
-					} else if (var62 != 999) {
-						var63 = var64;
+					} else if (left != 999) {
+						right = x;
 						break;
 					}
 				}
-				this.minimapMaskLineOffsets[var61 - 5] = var62 - 25;
-				this.minimapMaskLineLengths[var61 - 5] = var63 - var62;
+
+				this.minimapMaskLineOffsets[y - 5] = left - 25;
+				this.minimapMaskLineLengths[y - 5] = right - left;
 			}
+
 			Pix3D.init3D(479, 96);
 			this.areaChatbackOffset = Pix3D.lineOffset;
+
 			Pix3D.init3D(190, 261);
 			this.areaSidebarOffset = Pix3D.lineOffset;
+
 			Pix3D.init3D(512, 334);
 			this.areaViewportOffset = Pix3D.lineOffset;
-			int[] var65 = new int[9];
-			for (int var66 = 0; var66 < 9; var66++) {
-				int var67 = var66 * 32 + 128 + 15;
-				int var68 = var67 * 3 + 600;
-				int var69 = Pix3D.sinTable[var67];
-				var65[var66] = var68 * var69 >> 16;
+
+			int[] distance = new int[9];
+			for (int x = 0; x < 9; x++) {
+				int angle = x * 32 + 128 + 15;
+				int offset = angle * 3 + 600;
+				int sin = Pix3D.sinTable[angle];
+				distance[x] = offset * sin >> 16;
 			}
-			World3D.init(800, 512, var65, 334, 500);
-			WordFilter.unpack(var13);
+
+			World3D.init(800, 512, distance, 334, 500);
+			WordFilter.unpack(jagWordenc);
+
 			this.mouseTracking = new MouseTracking(this);
-		} catch (Exception var81) {
+		} catch (Exception ex) {
 			signlink.reporterror("loaderror " + this.lastProgressMessage + " " + this.lastProgressPercent);
 			this.errorLoading = true;
 		}
@@ -1839,12 +1967,15 @@ public class Client extends GameShell {
 		if (this.errorStarted || this.errorLoading || this.errorHost) {
 			return;
 		}
+
 		loopCycle++;
+
 		if (this.ingame) {
 			this.updateGame();
 		} else {
 			this.updateTitle();
 		}
+
 		this.updateOnDemand();
 	}
 
@@ -1854,49 +1985,65 @@ public class Client extends GameShell {
 			this.drawError();
 			return;
 		}
+
 		drawCycle++;
+
 		if (this.ingame) {
 			this.drawGame();
 		} else {
 			this.drawTitle();
 		}
+
 		this.dragCycles = 0;
 	}
 
 	@ObfuscatedName("client.c(I)V")
 	public void unload() {
 		signlink.reporterror = false;
+
 		try {
 			if (this.stream != null) {
 				this.stream.close();
 			}
-		} catch (Exception var3) {
+		} catch (Exception ignore) {
 		}
+
 		this.stream = null;
+
 		this.stopMidi();
+
 		if (this.mouseTracking != null) {
-			this.mouseTracking.tracking = false;
+			this.mouseTracking.active = false;
 		}
 		this.mouseTracking = null;
+
 		this.onDemand.stop();
 		this.onDemand = null;
+
 		this.out = null;
 		this.login = null;
 		this.in = null;
+
 		this.sceneMapIndex = null;
 		this.sceneMapLandData = null;
 		this.sceneMapLocData = null;
 		this.sceneMapLandFile = null;
 		this.sceneMapLocFile = null;
+
 		this.levelHeightmap = null;
 		this.levelTileFlags = null;
+
 		this.scene = null;
+
 		this.levelCollisionMap = null;
+
 		this.bfsDirection = null;
 		this.bfsCost = null;
 		this.bfsStepX = null;
 		this.bfsStepZ = null;
+
 		this.textureBuffer = null;
+
 		this.areaSidebar = null;
 		this.areaMapback = null;
 		this.areaViewport = null;
@@ -1913,6 +2060,7 @@ public class Client extends GameShell {
 		this.areaBackvmid2 = null;
 		this.areaBackvmid3 = null;
 		this.areaBackhmid2 = null;
+
 		this.imageInvback = null;
 		this.imageMapback = null;
 		this.imageChatback = null;
@@ -1940,7 +2088,9 @@ public class Client extends GameShell {
 		this.imageMapdot3 = null;
 		this.imageMapscene = null;
 		this.imageMapfunction = null;
+
 		this.tileLastOccupiedCycle = null;
+
 		this.players = null;
 		this.playerIds = null;
 		this.entityUpdateIds = null;
@@ -1948,23 +2098,30 @@ public class Client extends GameShell {
 		this.entityRemovalIds = null;
 		this.npcs = null;
 		this.npcIds = null;
+
 		this.objStacks = null;
 		this.locChanges = null;
 		this.projectiles = null;
 		this.spotanims = null;
+
 		this.menuParamB = null;
 		this.menuParamC = null;
 		this.menuAction = null;
 		this.menuParamA = null;
 		this.menuOption = null;
+
 		this.varps = null;
+
 		this.activeMapFunctionX = null;
 		this.activeMapFunctionZ = null;
 		this.activeMapFunctions = null;
+
 		this.imageMinimap = null;
+
 		this.friendName = null;
 		this.friendName37 = null;
 		this.friendWorld = null;
+
 		this.imageTitle0 = null;
 		this.imageTitle1 = null;
 		this.imageTitle2 = null;
@@ -1974,7 +2131,9 @@ public class Client extends GameShell {
 		this.imageTitle6 = null;
 		this.imageTitle7 = null;
 		this.imageTitle8 = null;
+
 		this.unloadTitle();
+
 		LocType.unload();
 		NpcType.unload();
 		ObjType.unload();
@@ -1988,10 +2147,12 @@ public class Client extends GameShell {
 		VarpType.types = null;
 		super.drawArea = null;
 		ClientPlayer.modelCache = null;
+
 		Pix3D.unload();
 		World3D.unload();
 		Model.unload();
 		AnimFrame.unload();
+
 		System.gc();
 	}
 
@@ -2006,29 +2167,39 @@ public class Client extends GameShell {
 	public void drawProgress(String message, int percent) {
 		this.lastProgressPercent = percent;
 		this.lastProgressMessage = message;
+
 		this.loadTitle();
+
 		if (this.jagTitle == null) {
 			super.drawProgress(message, percent);
 			return;
 		}
+
 		this.imageTitle4.bind();
-		short var4 = 360;
-		short var5 = 200;
-		byte var6 = 20;
-		this.fontBold12.centreString(16777215, var4 / 2, var5 / 2 - 26 - var6, "RuneScape is loading - please wait...");
-		int var7 = var5 / 2 - 18 - var6;
-		Pix2D.drawRect(var4 / 2 - 152, 34, var7, 304, 9179409);
-		Pix2D.drawRect(var4 / 2 - 151, 32, var7 + 1, 302, 0);
-		Pix2D.fillRect(var7 + 2, 30, var4 / 2 - 150, percent * 3, 9179409);
-		Pix2D.fillRect(var7 + 2, 30, var4 / 2 - 150 + percent * 3, 300 - percent * 3, 0);
-		this.fontBold12.centreString(16777215, var4 / 2, var5 / 2 + 5 - var6, message);
+
+		short x = 360;
+		short y = 200;
+
+		int offsetY = 20;
+		this.fontBold12.centreString(16777215, x / 2, y / 2 - 26 - offsetY, "RuneScape is loading - please wait...");
+
+		int midY = y / 2 - 18 - offsetY;
+		Pix2D.drawRect(x / 2 - 152, 34, midY, 304, 9179409);
+		Pix2D.drawRect(x / 2 - 151, 32, midY + 1, 302, 0);
+		Pix2D.fillRect(midY + 2, 30, x / 2 - 150, percent * 3, 9179409);
+		Pix2D.fillRect(midY + 2, 30, x / 2 - 150 + percent * 3, 300 - percent * 3, 0);
+		this.fontBold12.centreString(16777215, x / 2, y / 2 + 5 - offsetY, message);
+
 		this.imageTitle4.draw(202, super.graphics, 171);
+
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
+
 			if (!this.flameActive) {
 				this.imageTitle0.draw(0, super.graphics, 0);
 				this.imageTitle1.draw(637, super.graphics, 0);
 			}
+
 			this.imageTitle2.draw(128, super.graphics, 0);
 			this.imageTitle3.draw(202, super.graphics, 371);
 			this.imageTitle5.draw(0, super.graphics, 265);
@@ -2040,220 +2211,266 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.b(Z)V")
 	public void drawError() {
-		Graphics var2 = this.getBaseComponent().getGraphics();
-		var2.setColor(Color.black);
-		var2.fillRect(0, 0, 765, 503);
+		Graphics g = this.getBaseComponent().getGraphics();
+
+		g.setColor(Color.black);
+		g.fillRect(0, 0, 765, 503);
+
 		this.setFramerate(1);
+
 		if (this.errorLoading) {
 			this.flameActive = false;
-			var2.setFont(new Font("Helvetica", 1, 16));
-			var2.setColor(Color.yellow);
-			byte var3 = 35;
-			var2.drawString("Sorry, an error has occured whilst loading RuneScape", 30, var3);
-			int var5 = var3 + 50;
-			var2.setColor(Color.white);
-			var2.drawString("To fix this try the following (in order):", 30, var5);
-			int var6 = var5 + 50;
-			var2.setColor(Color.white);
-			var2.setFont(new Font("Helvetica", 1, 12));
-			var2.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, var6);
-			int var7 = var6 + 30;
-			var2.drawString("2: Try clearing your web-browsers cache from tools->internet options", 30, var7);
-			int var8 = var7 + 30;
-			var2.drawString("3: Try using a different game-world", 30, var8);
-			int var10 = var8 + 30;
-			var2.drawString("4: Try rebooting your computer", 30, var10);
-			int var12 = var10 + 30;
-			var2.drawString("5: Try selecting a different version of Java from the play-game menu", 30, var12);
-		}
-		if (this.errorHost) {
+
+			g.setFont(new Font("Helvetica", 1, 16));
+			g.setColor(Color.yellow);
+
+			int y = 35;
+			g.drawString("Sorry, an error has occured whilst loading RuneScape", 30, y);
+
+			y = y + 50;
+			g.setColor(Color.white);
+			g.drawString("To fix this try the following (in order):", 30, y);
+
+			y = y + 50;
+			g.setColor(Color.white);
+			g.setFont(new Font("Helvetica", 1, 12));
+			g.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, y);
+
+			y = y + 30;
+			g.drawString("2: Try clearing your web-browsers cache from tools->internet options", 30, y);
+
+			y = y + 30;
+			g.drawString("3: Try using a different game-world", 30, y);
+
+			y = y + 30;
+			g.drawString("4: Try rebooting your computer", 30, y);
+
+			y = y + 30;
+			g.drawString("5: Try selecting a different version of Java from the play-game menu", 30, y);
+		} else if (this.errorHost) {
 			this.flameActive = false;
-			var2.setFont(new Font("Helvetica", 1, 20));
-			var2.setColor(Color.white);
-			var2.drawString("Error - unable to load game!", 50, 50);
-			var2.drawString("To play RuneScape make sure you play from", 50, 100);
-			var2.drawString("http://www.runescape.com", 50, 150);
-		}
-		if (this.errorStarted) {
+
+			g.setFont(new Font("Helvetica", 1, 20));
+			g.setColor(Color.white);
+			g.drawString("Error - unable to load game!", 50, 50);
+			g.drawString("To play RuneScape make sure you play from", 50, 100);
+			g.drawString("http://www.runescape.com", 50, 150);
+		} else if (this.errorStarted) {
 			this.flameActive = false;
-			var2.setColor(Color.yellow);
-			byte var4 = 35;
-			var2.drawString("Error a copy of RuneScape already appears to be loaded", 30, var4);
-			int var9 = var4 + 50;
-			var2.setColor(Color.white);
-			var2.drawString("To fix this try the following (in order):", 30, var9);
-			int var11 = var9 + 50;
-			var2.setColor(Color.white);
-			var2.setFont(new Font("Helvetica", 1, 12));
-			var2.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, var11);
-			int var13 = var11 + 30;
-			var2.drawString("2: Try rebooting your computer, and reloading", 30, var13);
-			int var14 = var13 + 30;
+
+			g.setColor(Color.yellow);
+
+			int y = 35;
+			g.drawString("Error a copy of RuneScape already appears to be loaded", 30, y);
+
+			y = y + 50;
+			g.setColor(Color.white);
+			g.drawString("To fix this try the following (in order):", 30, y);
+
+			y = y + 50;
+			g.setColor(Color.white);
+			g.setFont(new Font("Helvetica", 1, 12));
+			g.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, y);
+
+			y = y + 30;
+			g.drawString("2: Try rebooting your computer, and reloading", 30, y);
+
+			y = y + 30;
 		}
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;IIILjava/lang/String;I)Lyb;")
-	public Jagfile getJagFile(String arg0, int arg2, int arg3, String arg4, int arg5) {
-		byte[] var8 = null;
-		int var9 = 5;
+	public Jagfile getJagFile(String displayName, int arg2, int crc, String name, int progress) {
+		byte[] data = null;
+		int retry = 5;
+
 		try {
 			if (this.fileStreams[0] != null) {
-				var8 = this.fileStreams[0].read(arg2);
+				data = this.fileStreams[0].read(arg2);
 			}
-		} catch (Exception var30) {
+		} catch (Exception ignore) {
 		}
-		if (var8 != null) {
+
+		if (data != null) {
 			this.crc32.reset();
-			this.crc32.update(var8);
-			int var10 = (int) this.crc32.getValue();
-			if (var10 != arg3) {
-				var8 = null;
+			this.crc32.update(data);
+
+			int checksum = (int) this.crc32.getValue();
+			if (checksum != crc) {
+				data = null;
 			}
 		}
-		if (var8 != null) {
-			return new Jagfile(var8);
+
+		if (data != null) {
+			return new Jagfile(data);
 		}
-		int var12 = 0;
-		while (var8 == null) {
-			String var13 = "Unknown error";
-			this.drawProgress("Requesting " + arg0, arg5);
-			Object var14 = null;
+
+		int loops = 0;
+		while (data == null) {
+			String errorMessage = "Unknown error";
+
+			this.drawProgress("Requesting " + displayName, progress);
+
 			try {
-				int var15 = 0;
-				DataInputStream var16 = this.openUrl(arg4 + arg3);
-				byte[] var17 = new byte[6];
-				var16.readFully(var17, 0, 6);
-				Packet var18 = new Packet(var17);
-				var18.pos = 3;
-				int var19 = var18.g3() + 6;
-				int var20 = 6;
-				var8 = new byte[var19];
-				for (int var21 = 0; var21 < 6; var21++) {
-					var8[var21] = var17[var21];
+				int lastDownloaded = 0;
+
+				DataInputStream stream = this.openUrl(name + crc);
+				byte[] header = new byte[6];
+				stream.readFully(header, 0, 6);
+
+				Packet buf = new Packet(header);
+				buf.pos = 3;
+				int packedSize = buf.g3() + 6;
+				int pos = 6;
+
+				data = new byte[packedSize];
+				for (int i = 0; i < 6; i++) {
+					data[i] = header[i];
 				}
-				while (var20 < var19) {
-					int var22 = var19 - var20;
-					if (var22 > 1000) {
-						var22 = 1000;
+
+				while (pos < packedSize) {
+					int chunkSize = packedSize - pos;
+					if (chunkSize > 1000) {
+						chunkSize = 1000;
 					}
-					int var23 = var16.read(var8, var20, var22);
-					if (var23 < 0) {
-						(new StringBuffer("Length error: ")).append(var20).append("/").append(var19).toString();
+
+					int n = stream.read(data, pos, chunkSize);
+					if (n < 0) {
+						(new StringBuffer("Length error: ")).append(pos).append("/").append(packedSize).toString();
 						throw new IOException("EOF");
 					}
-					var20 += var23;
-					int var24 = var20 * 100 / var19;
-					if (var24 != var15) {
-						this.drawProgress("Loading " + arg0 + " - " + var24 + "%", arg5);
+
+					pos += n;
+
+					int downloaded = pos * 100 / packedSize;
+					if (downloaded != lastDownloaded) {
+						this.drawProgress("Loading " + displayName + " - " + downloaded + "%", progress);
 					}
-					var15 = var24;
+
+					lastDownloaded = downloaded;
 				}
-				var16.close();
+
+				stream.close();
+
 				try {
 					if (this.fileStreams[0] != null) {
-						this.fileStreams[0].write(var8, arg2, var8.length);
+						this.fileStreams[0].write(data, arg2, data.length);
 					}
-				} catch (Exception var29) {
+				} catch (Exception ex) {
 					this.fileStreams[0] = null;
 				}
-				if (var8 != null) {
+
+				if (data != null) {
 					this.crc32.reset();
-					this.crc32.update(var8);
-					int var25 = (int) this.crc32.getValue();
-					if (var25 != arg3) {
-						var8 = null;
-						var12++;
-						var13 = "Checksum error: " + var25;
+					this.crc32.update(data);
+
+					int checksum = (int) this.crc32.getValue();
+					if (checksum != crc) {
+						data = null;
+						loops++;
+						errorMessage = "Checksum error: " + checksum;
 					}
 				}
-			} catch (IOException var31) {
-				if (var13.equals("Unknown error")) {
-					var13 = "Connection error";
+			} catch (IOException ex) {
+				if (errorMessage.equals("Unknown error")) {
+					errorMessage = "Connection error";
 				}
-				var8 = null;
-			} catch (NullPointerException var32) {
-				var13 = "Null error";
-				var8 = null;
+
+				data = null;
+			} catch (NullPointerException ex) {
+				errorMessage = "Null error";
+				data = null;
+
 				if (!signlink.reporterror) {
 					return null;
 				}
-			} catch (ArrayIndexOutOfBoundsException var33) {
-				var13 = "Bounds error";
-				var8 = null;
+			} catch (ArrayIndexOutOfBoundsException ex) {
+				errorMessage = "Bounds error";
+				data = null;
+
 				if (!signlink.reporterror) {
 					return null;
 				}
-			} catch (Exception var34) {
-				var13 = "Unexpected error";
-				var8 = null;
+			} catch (Exception ex) {
+				errorMessage = "Unexpected error";
+				data = null;
+
 				if (!signlink.reporterror) {
 					return null;
 				}
 			}
-			if (var8 == null) {
-				for (int var26 = var9; var26 > 0; var26--) {
-					if (var12 >= 3) {
-						this.drawProgress("Game updated - please reload page", arg5);
-						var26 = 10;
+
+			if (data == null) {
+				for (int i = retry; i > 0; i--) {
+					if (loops >= 3) {
+						this.drawProgress("Game updated - please reload page", progress);
+						i = 10;
 					} else {
-						this.drawProgress(var13 + " - Retrying in " + var26, arg5);
+						this.drawProgress(errorMessage + " - Retrying in " + i, progress);
 					}
+
 					try {
 						Thread.sleep(1000L);
-					} catch (Exception var28) {
+					} catch (Exception ignore) {
 					}
 				}
-				var9 *= 2;
-				if (var9 > 60) {
-					var9 = 60;
+
+				retry *= 2;
+				if (retry > 60) {
+					retry = 60;
 				}
 			}
 		}
-		return new Jagfile(var8);
+
+		return new Jagfile(data);
 	}
 
 	@ObfuscatedName("client.r(I)V")
 	public void updateOnDemand() {
 		while (true) {
-			OnDemandRequest var2 = this.onDemand.cycle();
-			if (var2 == null) {
+			OnDemandRequest req = this.onDemand.cycle();
+			if (req == null) {
 				return;
 			}
-			if (var2.archive == 0) {
-				Model.unpack(var2.file, var2.data);
-				if ((this.onDemand.getModelFlags(var2.file) & 0x62) != 0) {
+
+			if (req.archive == 0) {
+				Model.unpack(req.file, req.data);
+
+				if ((this.onDemand.getModelFlags(req.file) & 0x62) != 0) {
 					this.redrawSidebar = true;
+
 					if (this.chatInterfaceId != -1) {
 						this.redrawChatback = true;
 					}
 				}
-			}
-			if (var2.archive == 1 && var2.data != null) {
-				AnimFrame.unpack(var2.data);
-			}
-			if (var2.archive == 2 && var2.file == this.midiSong && var2.data != null) {
-				this.saveMidi(this.midiFading, var2.data);
-			}
-			if (var2.archive == 3 && this.sceneState == 1) {
-				for (int var3 = 0; var3 < this.sceneMapLandData.length; var3++) {
-					if (this.sceneMapLandFile[var3] == var2.file) {
-						this.sceneMapLandData[var3] = var2.data;
-						if (var2.data == null) {
-							this.sceneMapLandFile[var3] = -1;
+			} else if (req.archive == 1 && req.data != null) {
+				AnimFrame.unpack(req.data);
+			} else if (req.archive == 2 && req.file == this.midiSong && req.data != null) {
+				this.saveMidi(this.midiFading, req.data);
+			} else if (req.archive == 3 && this.sceneState == 1) {
+				for (int i = 0; i < this.sceneMapLandData.length; i++) {
+					if (this.sceneMapLandFile[i] == req.file) {
+						this.sceneMapLandData[i] = req.data;
+
+						if (req.data == null) {
+							this.sceneMapLandFile[i] = -1;
 						}
+
 						break;
 					}
-					if (this.sceneMapLocFile[var3] == var2.file) {
-						this.sceneMapLocData[var3] = var2.data;
-						if (var2.data == null) {
-							this.sceneMapLocFile[var3] = -1;
+
+					if (this.sceneMapLocFile[i] == req.file) {
+						this.sceneMapLocData[i] = req.data;
+
+						if (req.data == null) {
+							this.sceneMapLocFile[i] = -1;
 						}
+
 						break;
 					}
 				}
-			}
-			if (var2.archive == 93 && this.onDemand.hasMapLocFile(var2.file)) {
-				World.prefetchLocations(new Packet(var2.data), this.onDemand);
+			} else if (req.archive == 93 && this.onDemand.hasMapLocFile(req.file)) {
+				World.prefetchLocations(new Packet(req.data), this.onDemand);
 			}
 		}
 	}
@@ -2261,167 +2478,203 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.H(I)V")
 	public void updateTitle() {
 		if (this.titleScreenState == 0) {
-			int var2 = super.canvasWidth / 2 - 80;
-			int var3 = super.canvasHeight / 2 + 20;
-			int var14 = var3 + 20;
-			if (super.mouseClickButton == 1 && super.mouseClickX >= var2 - 75 && super.mouseClickX <= var2 + 75 && super.mouseClickY >= var14 - 20 && super.mouseClickY <= var14 + 20) {
+			int x = super.canvasWidth / 2 - 80;
+			int y = super.canvasHeight / 2 + 20;
+
+			y = y + 20;
+			if (super.mouseClickButton == 1 && super.mouseClickX >= x - 75 && super.mouseClickX <= x + 75 && super.mouseClickY >= y - 20 && super.mouseClickY <= y + 20) {
 				this.titleScreenState = 3;
 				this.titleLoginField = 0;
 			}
-			int var4 = super.canvasWidth / 2 + 80;
-			if (super.mouseClickButton == 1 && super.mouseClickX >= var4 - 75 && super.mouseClickX <= var4 + 75 && super.mouseClickY >= var14 - 20 && super.mouseClickY <= var14 + 20) {
+
+			x = super.canvasWidth / 2 + 80;
+			if (super.mouseClickButton == 1 && super.mouseClickX >= x - 75 && super.mouseClickX <= x + 75 && super.mouseClickY >= y - 20 && super.mouseClickY <= y + 20) {
 				this.loginMessage0 = "";
 				this.loginMessage1 = "Enter your username & password.";
 				this.titleScreenState = 2;
 				this.titleLoginField = 0;
 			}
 		} else if (this.titleScreenState == 2) {
-			int var5 = super.canvasHeight / 2 - 40;
-			int var15 = var5 + 30;
-			int var16 = var15 + 25;
-			if (super.mouseClickButton == 1 && super.mouseClickY >= var16 - 15 && super.mouseClickY < var16) {
+			int y = super.canvasHeight / 2 - 40;
+			y = y + 30;
+
+			y = y + 25;
+			if (super.mouseClickButton == 1 && super.mouseClickY >= y - 15 && super.mouseClickY < y) {
 				this.titleLoginField = 0;
 			}
-			var5 = var16 + 15;
-			if (super.mouseClickButton == 1 && super.mouseClickY >= var5 - 15 && super.mouseClickY < var5) {
+
+			y = y + 15;
+			if (super.mouseClickButton == 1 && super.mouseClickY >= y - 15 && super.mouseClickY < y) {
 				this.titleLoginField = 1;
 			}
-			var5 += 15;
-			int var6 = super.canvasWidth / 2 - 80;
-			int var7 = super.canvasHeight / 2 + 50;
-			int var17 = var7 + 20;
-			if (super.mouseClickButton == 1 && super.mouseClickX >= var6 - 75 && super.mouseClickX <= var6 + 75 && super.mouseClickY >= var17 - 20 && super.mouseClickY <= var17 + 20) {
+
+			y += 15;
+
+			int x = super.canvasWidth / 2 - 80;
+			y = super.canvasHeight / 2 + 50;
+
+			y = y + 20;
+			if (super.mouseClickButton == 1 && super.mouseClickX >= x - 75 && super.mouseClickX <= x + 75 && super.mouseClickY >= y - 20 && super.mouseClickY <= y + 20) {
 				this.login(this.username, this.password, false);
 				if (this.ingame) {
 					return;
 				}
 			}
-			int var8 = super.canvasWidth / 2 + 80;
-			if (super.mouseClickButton == 1 && super.mouseClickX >= var8 - 75 && super.mouseClickX <= var8 + 75 && super.mouseClickY >= var17 - 20 && super.mouseClickY <= var17 + 20) {
+
+			x = super.canvasWidth / 2 + 80;
+			if (super.mouseClickButton == 1 && super.mouseClickX >= x - 75 && super.mouseClickX <= x + 75 && super.mouseClickY >= y - 20 && super.mouseClickY <= y + 20) {
 				this.titleScreenState = 0;
 				this.username = "";
 				this.password = "";
 			}
+
 			while (true) {
-				int var9 = this.pollKey();
-				if (var9 == -1) {
+				int key = this.pollKey();
+				if (key == -1) {
 					return;
 				}
-				boolean var10 = false;
-				for (int var11 = 0; var11 < CHARSET.length(); var11++) {
-					if (var9 == CHARSET.charAt(var11)) {
-						var10 = true;
+
+				boolean valid = false;
+				for (int i = 0; i < CHARSET.length(); i++) {
+					if (key == CHARSET.charAt(i)) {
+						valid = true;
 						break;
 					}
 				}
+
 				if (this.titleLoginField == 0) {
-					if (var9 == 8 && this.username.length() > 0) {
+					if (key == 8 && this.username.length() > 0) {
 						this.username = this.username.substring(0, this.username.length() - 1);
 					}
-					if (var9 == 9 || var9 == 10 || var9 == 13) {
+
+					if (key == 9 || key == 10 || key == 13) {
 						this.titleLoginField = 1;
 					}
-					if (var10) {
-						this.username = this.username + (char) var9;
+
+					if (valid) {
+						this.username = this.username + (char) key;
 					}
+
 					if (this.username.length() > 12) {
 						this.username = this.username.substring(0, 12);
 					}
 				} else if (this.titleLoginField == 1) {
-					if (var9 == 8 && this.password.length() > 0) {
+					if (key == 8 && this.password.length() > 0) {
 						this.password = this.password.substring(0, this.password.length() - 1);
 					}
-					if (var9 == 9 || var9 == 10 || var9 == 13) {
+
+					if (key == 9 || key == 10 || key == 13) {
 						this.titleLoginField = 0;
 					}
-					if (var10) {
-						this.password = this.password + (char) var9;
+
+					if (valid) {
+						this.password = this.password + (char) key;
 					}
+
 					if (this.password.length() > 20) {
 						this.password = this.password.substring(0, 20);
 					}
 				}
 			}
 		} else if (this.titleScreenState == 3) {
-			int var12 = super.canvasWidth / 2;
-			int var13 = super.canvasHeight / 2 + 50;
-			int var18 = var13 + 20;
-			if (super.mouseClickButton == 1 && super.mouseClickX >= var12 - 75 && super.mouseClickX <= var12 + 75 && super.mouseClickY >= var18 - 20 && super.mouseClickY <= var18 + 20) {
+			int x = super.canvasWidth / 2;
+			int y = super.canvasHeight / 2 + 50;
+
+			y = y + 20;
+			if (super.mouseClickButton == 1 && super.mouseClickX >= x - 75 && super.mouseClickX <= x + 75 && super.mouseClickY >= y - 20 && super.mouseClickY <= y + 20) {
 				this.titleScreenState = 0;
 			}
 		}
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;Ljava/lang/String;Z)V")
-	public void login(String arg0, String arg1, boolean arg2) {
-		signlink.errorname = arg0;
+	public void login(String username, String password, boolean reconnect) {
+		signlink.errorname = username;
+
 		try {
-			if (!arg2) {
+			if (!reconnect) {
 				this.loginMessage0 = "";
 				this.loginMessage1 = "Connecting to server...";
 				this.drawTitle();
 			}
+
 			this.stream = new ClientStream(this, this.openSocket(portOffset + 43594));
-			long var4 = JString.toBase37(arg0);
-			int var6 = (int) (var4 >> 16 & 0x1FL);
+
+			long username37 = JString.toBase37(username);
+			int loginServer = (int) (username37 >> 16 & 0x1FL);
 			this.out.pos = 0;
 			this.out.p1(14);
-			this.out.p1(var6);
+			this.out.p1(loginServer);
+
 			this.stream.write(0, 2, this.out.data);
-			for (int var7 = 0; var7 < 8; var7++) {
+
+			for (int i = 0; i < 8; i++) {
 				this.stream.read();
 			}
-			int var8 = this.stream.read();
-			if (var8 == 0) {
+
+			int reply = this.stream.read();
+			if (reply == 0) {
 				this.stream.read(this.in.data, 0, 8);
 				this.in.pos = 0;
+
 				this.serverSeed = this.in.g8();
-				int[] var9 = new int[] { (int) (Math.random() * 9.9999999E7D), (int) (Math.random() * 9.9999999E7D), (int) (this.serverSeed >> 32), (int) this.serverSeed };
+				int[] seed = new int[] { (int) (Math.random() * 9.9999999E7D), (int) (Math.random() * 9.9999999E7D), (int) (this.serverSeed >> 32), (int) this.serverSeed };
+
 				this.out.pos = 0;
 				this.out.p1(10);
-				this.out.p4(var9[0]);
-				this.out.p4(var9[1]);
-				this.out.p4(var9[2]);
-				this.out.p4(var9[3]);
+				this.out.p4(seed[0]);
+				this.out.p4(seed[1]);
+				this.out.p4(seed[2]);
+				this.out.p4(seed[3]);
 				this.out.p4(signlink.uid);
-				this.out.pjstr(arg0);
-				this.out.pjstr(arg1);
+				this.out.pjstr(username);
+				this.out.pjstr(password);
 				this.out.rsaenc(LOGIN_RSAE, LOGIN_RSAN);
+
 				this.login.pos = 0;
-				if (arg2) {
+				if (reconnect) {
 					this.login.p1(18);
 				} else {
 					this.login.p1(16);
 				}
+
 				this.login.p1(this.out.pos + 36 + 1 + 1);
 				this.login.p1(245);
 				this.login.p1(lowMem ? 1 : 0);
-				for (int var10 = 0; var10 < 9; var10++) {
-					this.login.p4(this.jagChecksum[var10]);
+
+				for (int i = 0; i < 9; i++) {
+					this.login.p4(this.jagChecksum[i]);
 				}
+
 				this.login.pdata(this.out.data, this.out.pos, 0);
-				this.out.random = new Isaac(var9);
-				for (int var11 = 0; var11 < 4; var11++) {
-					var9[var11] += 50;
+
+				this.out.random = new Isaac(seed);
+				for (int i = 0; i < 4; i++) {
+					seed[i] += 50;
 				}
-				this.randomIn = new Isaac(var9);
+				this.randomIn = new Isaac(seed);
+
 				this.stream.write(0, this.login.pos, this.login.data);
-				var8 = this.stream.read();
+
+				reply = this.stream.read();
 			}
-			if (var8 == 1) {
+
+			if (reply == 1) {
 				try {
 					Thread.sleep(2000L);
-				} catch (Exception var19) {
+				} catch (Exception ignore) {
 				}
-				this.login(arg0, arg1, arg2);
-			} else if (var8 == 2 || var8 == 18 || var8 == 19) {
+
+				this.login(username, password, reconnect);
+			} else if (reply == 2 || reply == 18 || reply == 19) {
 				this.staffmodlevel = 0;
-				if (var8 == 18) {
+
+				if (reply == 18) {
 					this.staffmodlevel = 1;
-				}
-				if (var8 == 19) {
+				} else if (reply == 19) {
 					this.staffmodlevel = 2;
 				}
+
 				InputTracking.setDisabled();
 				this.field1528 = 0L;
 				this.field1215 = 0;
@@ -2444,41 +2697,52 @@ public class Client extends GameShell {
 				this.menuSize = 0;
 				this.menuVisible = false;
 				super.idleCycles = 0;
-				for (int var12 = 0; var12 < 100; var12++) {
-					this.messageText[var12] = null;
+
+				for (int i = 0; i < 100; i++) {
+					this.messageText[i] = null;
 				}
+
 				this.objSelected = 0;
 				this.spellSelected = 0;
 				this.sceneState = 0;
 				this.waveCount = 0;
+
 				this.macroCameraX = (int) (Math.random() * 100.0D) - 50;
 				this.macroCameraZ = (int) (Math.random() * 110.0D) - 55;
 				this.macroCameraAngle = (int) (Math.random() * 80.0D) - 40;
 				this.macroMinimapAngle = (int) (Math.random() * 120.0D) - 60;
 				this.macroMinimapZoom = (int) (Math.random() * 30.0D) - 20;
 				this.orbitCameraYaw = (int) (Math.random() * 20.0D) - 10 & 0x7FF;
+
 				this.minimapLevel = -1;
 				this.flagSceneTileX = 0;
 				this.flagSceneTileZ = 0;
+
 				this.playerCount = 0;
 				this.npcCount = 0;
-				for (int var13 = 0; var13 < this.MAX_PLAYER_COUNT; var13++) {
-					this.players[var13] = null;
-					this.playerAppearanceBuffer[var13] = null;
+
+				for (int i = 0; i < this.MAX_PLAYER_COUNT; i++) {
+					this.players[i] = null;
+					this.playerAppearanceBuffer[i] = null;
 				}
-				for (int var14 = 0; var14 < 8192; var14++) {
-					this.npcs[var14] = null;
+
+				for (int i = 0; i < 8192; i++) {
+					this.npcs[i] = null;
 				}
+
 				localPlayer = this.players[this.LOCAL_PLAYER_INDEX] = new ClientPlayer();
+
 				this.projectiles.clear();
 				this.spotanims.clear();
-				for (int var15 = 0; var15 < 4; var15++) {
-					for (int var16 = 0; var16 < 104; var16++) {
-						for (int var17 = 0; var17 < 104; var17++) {
-							this.objStacks[var15][var16][var17] = null;
+
+				for (int level = 0; level < 4; level++) {
+					for (int x = 0; x < 104; x++) {
+						for (int z = 0; z < 104; z++) {
+							this.objStacks[level][x][z] = null;
 						}
 					}
 				}
+
 				this.locChanges = new LinkList();
 				this.friendCount = 0;
 				this.stickyChatInterfaceId = -1;
@@ -2494,11 +2758,13 @@ public class Client extends GameShell {
 				this.modalMessage = null;
 				this.inMultizone = 0;
 				this.flashingTab = -1;
+
 				this.designGender = true;
 				this.validateCharacterDesign();
-				for (int var18 = 0; var18 < 5; var18++) {
-					this.designColours[var18] = 0;
+				for (int i = 0; i < 5; i++) {
+					this.designColours[i] = 0;
 				}
+
 				oplogic1 = 0;
 				oplogic2 = 0;
 				oplogic3 = 0;
@@ -2509,44 +2775,45 @@ public class Client extends GameShell {
 				oplogic8 = 0;
 				oplogic9 = 0;
 				oplogic10 = 0;
+
 				this.prepareGame();
-			} else if (var8 == 3) {
+			} else if (reply == 3) {
 				this.loginMessage0 = "";
 				this.loginMessage1 = "Invalid username or password.";
-			} else if (var8 == 4) {
+			} else if (reply == 4) {
 				this.loginMessage0 = "Your account has been disabled.";
 				this.loginMessage1 = "Please check your message-centre for details.";
-			} else if (var8 == 5) {
+			} else if (reply == 5) {
 				this.loginMessage0 = "Your account is already logged in.";
 				this.loginMessage1 = "Try again in 60 secs...";
-			} else if (var8 == 6) {
+			} else if (reply == 6) {
 				this.loginMessage0 = "RuneScape has been updated!";
 				this.loginMessage1 = "Please reload this page.";
-			} else if (var8 == 7) {
+			} else if (reply == 7) {
 				this.loginMessage0 = "This world is full.";
 				this.loginMessage1 = "Please use a different world.";
-			} else if (var8 == 8) {
+			} else if (reply == 8) {
 				this.loginMessage0 = "Unable to connect.";
 				this.loginMessage1 = "Login server offline.";
-			} else if (var8 == 9) {
+			} else if (reply == 9) {
 				this.loginMessage0 = "Login limit exceeded.";
 				this.loginMessage1 = "Too many connections from your address.";
-			} else if (var8 == 10) {
+			} else if (reply == 10) {
 				this.loginMessage0 = "Unable to connect.";
 				this.loginMessage1 = "Bad session id.";
-			} else if (var8 == 11) {
+			} else if (reply == 11) {
 				this.loginMessage1 = "Login server rejected session.";
 				this.loginMessage1 = "Please try again.";
-			} else if (var8 == 12) {
+			} else if (reply == 12) {
 				this.loginMessage0 = "You need a members account to login to this world.";
 				this.loginMessage1 = "Please subscribe, or use a different world.";
-			} else if (var8 == 13) {
+			} else if (reply == 13) {
 				this.loginMessage0 = "Could not complete login.";
 				this.loginMessage1 = "Please try using a different world.";
-			} else if (var8 == 14) {
+			} else if (reply == 14) {
 				this.loginMessage0 = "The server is being updated.";
 				this.loginMessage1 = "Please wait 1 minute and try again.";
-			} else if (var8 == 15) {
+			} else if (reply == 15) {
 				this.ingame = true;
 				this.out.pos = 0;
 				this.in.pos = 0;
@@ -2560,20 +2827,20 @@ public class Client extends GameShell {
 				this.menuSize = 0;
 				this.menuVisible = false;
 				this.sceneLoadStartTime = System.currentTimeMillis();
-			} else if (var8 == 16) {
+			} else if (reply == 16) {
 				this.loginMessage0 = "Login attempts exceeded.";
 				this.loginMessage1 = "Please wait 1 minute and try again.";
-			} else if (var8 == 17) {
+			} else if (reply == 17) {
 				this.loginMessage0 = "You are standing in a members-only area.";
 				this.loginMessage1 = "To play on this world move to a free area first";
-			} else if (var8 == 20) {
+			} else if (reply == 20) {
 				this.loginMessage0 = "Invalid loginserver requested";
 				this.loginMessage1 = "Please try using a different world.";
 			} else {
 				this.loginMessage0 = "Unexpected server response";
 				this.loginMessage1 = "Please try using a different world.";
 			}
-		} catch (IOException var20) {
+		} catch (IOException ex) {
 			this.loginMessage0 = "";
 			this.loginMessage1 = "Error connecting to server.";
 		}
@@ -2585,20 +2852,25 @@ public class Client extends GameShell {
 			if (this.stream != null) {
 				this.stream.close();
 			}
-		} catch (Exception var3) {
+		} catch (Exception ignore) {
 		}
+
 		this.stream = null;
 		this.ingame = false;
 		this.titleScreenState = 0;
 		this.username = "";
 		this.password = "";
+
 		InputTracking.setDisabled();
 		this.clearCache();
 		this.scene.reset();
-		for (int var2 = 0; var2 < 4; var2++) {
-			this.levelCollisionMap[var2].reset();
+
+		for (int level = 0; level < 4; level++) {
+			this.levelCollisionMap[level].reset();
 		}
+
 		System.gc();
+
 		this.stopMidi();
 		this.nextMidiSong = -1;
 		this.midiSong = -1;
@@ -2621,7 +2893,9 @@ public class Client extends GameShell {
 		if (this.areaChatback != null) {
 			return;
 		}
+
 		this.unloadTitle();
+
 		super.drawArea = null;
 		this.imageTitle2 = null;
 		this.imageTitle3 = null;
@@ -2632,16 +2906,22 @@ public class Client extends GameShell {
 		this.imageTitle6 = null;
 		this.imageTitle7 = null;
 		this.imageTitle8 = null;
+
 		this.areaChatback = new PixMap(96, this.getBaseComponent(), 479);
+
 		this.areaMapback = new PixMap(156, this.getBaseComponent(), 172);
 		Pix2D.cls();
 		this.imageMapback.plotSprite(0, 0);
+
 		this.areaSidebar = new PixMap(261, this.getBaseComponent(), 190);
+
 		this.areaViewport = new PixMap(334, this.getBaseComponent(), 512);
 		Pix2D.cls();
+
 		this.areaBackbase1 = new PixMap(50, this.getBaseComponent(), 496);
 		this.areaBackbase2 = new PixMap(37, this.getBaseComponent(), 269);
 		this.areaBackhmid1 = new PixMap(45, this.getBaseComponent(), 249);
+
 		this.redrawFrame = true;
 	}
 
@@ -2650,233 +2930,281 @@ public class Client extends GameShell {
 		if (this.systemUpdateTimer > 1) {
 			this.systemUpdateTimer--;
 		}
+
 		if (this.idleTimeout > 0) {
 			this.idleTimeout--;
 		}
+
 		if (this.field1504 > 0) {
 			this.field1504 -= 2;
 		}
-		for (int var2 = 0; var2 < 5 && this.readPacket(); var2++) {
+
+		for (int i = 0; i < 5 && this.readPacket(); i++) {
 		}
+
 		if (this.ingame) {
 			this.updateSceneState();
 			this.updateLocChanges();
 			this.updateAudio();
-			Packet var3 = InputTracking.flush();
-			if (var3 != null) {
+
+			Packet input = InputTracking.flush();
+			if (input != null) {
+				// EVENT_TRACKING
 				this.out.pIsaac(19);
-				this.out.p2(var3.pos);
-				this.out.pdata(var3.data, var3.pos, 0);
-				var3.release();
+				this.out.p2(input.pos);
+				this.out.pdata(input.data, input.pos, 0);
+				input.release();
 			}
+
 			this.idleNetCycles++;
 			if (this.idleNetCycles > 750) {
 				this.tryReconnect();
 			}
+
 			this.updatePlayers();
 			this.updateNpcs();
 			this.updateEntityChats();
+
 			this.sceneDelta++;
+
 			if (this.crossMode != 0) {
 				this.crossCycle += 20;
+
 				if (this.crossCycle >= 400) {
 					this.crossMode = 0;
 				}
 			}
+
 			if (this.selectedArea != 0) {
 				this.selectedCycle++;
+
 				if (this.selectedCycle >= 15) {
 					if (this.selectedArea == 2) {
 						this.redrawSidebar = true;
-					}
-					if (this.selectedArea == 3) {
+					} else if (this.selectedArea == 3) {
 						this.redrawChatback = true;
 					}
+
 					this.selectedArea = 0;
 				}
 			}
+
 			if (this.objDragArea != 0) {
 				this.objDragCycles++;
+
 				if (super.mouseX > this.objGrabX + 5 || super.mouseX < this.objGrabX - 5 || super.mouseY > this.objGrabY + 5 || super.mouseY < this.objGrabY - 5) {
 					this.objGrabThreshold = true;
 				}
+
 				if (super.mouseButton == 0) {
 					if (this.objDragArea == 2) {
 						this.redrawSidebar = true;
-					}
-					if (this.objDragArea == 3) {
+					} else if (this.objDragArea == 3) {
 						this.redrawChatback = true;
 					}
+
 					this.objDragArea = 0;
+
 					if (this.objGrabThreshold && this.objDragCycles >= 5) {
 						this.hoveredSlotInterfaceId = -1;
 						this.handleInput();
+
 						if (this.hoveredSlotInterfaceId == this.objDragInterfaceId && this.hoveredSlot != this.objDragSlot) {
-							Component var4 = Component.types[this.objDragInterfaceId];
-							byte var5 = 0;
-							if (this.bankArrangeMode == 1 && var4.clientCode == 206) {
-								var5 = 1;
+							Component com = Component.types[this.objDragInterfaceId];
+
+							byte mode = 0;
+							if (this.bankArrangeMode == 1 && com.clientCode == 206) {
+								mode = 1;
 							}
-							if (var4.invSlotObjId[this.hoveredSlot] <= 0) {
-								var5 = 0;
+							if (com.invSlotObjId[this.hoveredSlot] <= 0) {
+								mode = 0;
 							}
-							if (var4.swappable) {
+
+							if (com.swappable) {
 								int var6 = this.objDragSlot;
 								int var7 = this.hoveredSlot;
-								var4.invSlotObjId[var7] = var4.invSlotObjId[var6];
-								var4.invSlotObjCount[var7] = var4.invSlotObjCount[var6];
-								var4.invSlotObjId[var6] = -1;
-								var4.invSlotObjCount[var6] = 0;
-							} else if (var5 == 1) {
-								int var8 = this.objDragSlot;
-								int var9 = this.hoveredSlot;
-								while (var8 != var9) {
-									if (var8 > var9) {
-										var4.swapObj(var8, var8 - 1);
-										var8--;
-									} else if (var8 < var9) {
-										var4.swapObj(var8, var8 + 1);
-										var8++;
+								com.invSlotObjId[var7] = com.invSlotObjId[var6];
+								com.invSlotObjCount[var7] = com.invSlotObjCount[var6];
+								com.invSlotObjId[var6] = -1;
+								com.invSlotObjCount[var6] = 0;
+							} else if (mode == 1) {
+								int src = this.objDragSlot;
+								int dst = this.hoveredSlot;
+
+								while (src != dst) {
+									if (src > dst) {
+										com.swapObj(src, src - 1);
+										src--;
+									} else if (src < dst) {
+										com.swapObj(src, src + 1);
+										src++;
 									}
 								}
 							} else {
-								var4.swapObj(this.objDragSlot, this.hoveredSlot);
+								com.swapObj(this.objDragSlot, this.hoveredSlot);
 							}
+
+							// INV_BUTTOND
 							this.out.pIsaac(7);
 							this.out.p2(this.objDragInterfaceId);
 							this.out.p2(this.objDragSlot);
 							this.out.p2(this.hoveredSlot);
-							this.out.p1(var5);
+							this.out.p1(mode);
 						}
 					} else if ((this.oneMouseButton == 1 || this.isAddFriendOption(this.menuSize - 1)) && this.menuSize > 2) {
 						this.showContextMenu();
 					} else if (this.menuSize > 0) {
 						this.useMenuOption(this.menuSize - 1);
 					}
+
 					this.selectedCycle = 10;
 					super.mouseClickButton = 0;
 				}
 			}
+
 			cyclelogic3++;
 			if (cyclelogic3 > 127) {
 				cyclelogic3 = 0;
+
+				// ANTICHEAT_CYCLELOGIC3
 				this.out.pIsaac(181);
 				this.out.p3(4991788);
 			}
+
 			if (World3D.clickTileX != -1) {
-				int var10 = World3D.clickTileX;
-				int var11 = World3D.clickTileZ;
-				boolean var12 = this.tryMove(0, 0, 0, 0, localPlayer.routeTileZ[0], 0, 0, var10, true, var11, localPlayer.routeTileX[0]);
+				int x = World3D.clickTileX;
+				int z = World3D.clickTileZ;
+				boolean success = this.tryMove(0, 0, 0, 0, localPlayer.routeTileZ[0], 0, 0, x, true, z, localPlayer.routeTileX[0]);
 				World3D.clickTileX = -1;
-				if (var12) {
+
+				if (success) {
 					this.crossX = super.mouseClickX;
 					this.crossY = super.mouseClickY;
 					this.crossMode = 1;
 					this.crossCycle = 0;
 				}
 			}
+
 			if (super.mouseClickButton == 1 && this.modalMessage != null) {
 				this.modalMessage = null;
 				this.redrawChatback = true;
 				super.mouseClickButton = 0;
 			}
+
 			this.handleMouseInput();
 			this.handleMinimapInput();
 			this.handleTabInput();
 			this.handleChatModeInput();
+
 			if (super.mouseButton == 1 || super.mouseClickButton == 1) {
 				this.dragCycles++;
 			}
+
 			if (this.sceneState == 2) {
 				this.updateOrbitCamera();
 			}
+
 			if (this.sceneState == 2 && this.cutscene) {
 				this.applyCutscene();
 			}
-			for (int var13 = 0; var13 < 5; var13++) {
-				this.cameraModifierCycle[var13]++;
+
+			for (int i = 0; i < 5; i++) {
+				this.cameraModifierCycle[i]++;
 			}
+
 			this.handleInputKey();
+
 			super.idleCycles++;
 			if (super.idleCycles > 4500) {
 				this.idleTimeout = 250;
 				super.idleCycles -= 500;
+				// IDLE_TIMER
 				this.out.pIsaac(102);
 			}
+
 			this.macroCameraCycle++;
 			if (this.macroCameraCycle > 500) {
 				this.macroCameraCycle = 0;
-				int var14 = (int) (Math.random() * 8.0D);
-				if ((var14 & 0x1) == 1) {
+
+				int rand = (int) (Math.random() * 8.0D);
+				if ((rand & 0x1) == 1) {
 					this.macroCameraX += this.macroCameraXModifier;
 				}
-				if ((var14 & 0x2) == 2) {
+				if ((rand & 0x2) == 2) {
 					this.macroCameraZ += this.macroCameraZModifier;
 				}
-				if ((var14 & 0x4) == 4) {
+				if ((rand & 0x4) == 4) {
 					this.macroCameraAngle += this.macroCameraAngleModifier;
 				}
 			}
+
 			if (this.macroCameraX < -50) {
 				this.macroCameraXModifier = 2;
-			}
-			if (this.macroCameraX > 50) {
+			} else if (this.macroCameraX > 50) {
 				this.macroCameraXModifier = -2;
 			}
+
 			if (this.macroCameraZ < -55) {
 				this.macroCameraZModifier = 2;
-			}
-			if (this.macroCameraZ > 55) {
+			} else if (this.macroCameraZ > 55) {
 				this.macroCameraZModifier = -2;
 			}
+
 			if (this.macroCameraAngle < -40) {
 				this.macroCameraAngleModifier = 1;
-			}
-			if (this.macroCameraAngle > 40) {
+			} else if (this.macroCameraAngle > 40) {
 				this.macroCameraAngleModifier = -1;
 			}
+
 			this.macroMinimapCycle++;
 			if (this.macroMinimapCycle > 500) {
 				this.macroMinimapCycle = 0;
-				int var15 = (int) (Math.random() * 8.0D);
-				if ((var15 & 0x1) == 1) {
+
+				int rand = (int) (Math.random() * 8.0D);
+				if ((rand & 0x1) == 1) {
 					this.macroMinimapAngle += this.macroMinimapAngleModifier;
 				}
-				if ((var15 & 0x2) == 2) {
+				if ((rand & 0x2) == 2) {
 					this.macroMinimapZoom += this.macroMinimapZoomModifier;
 				}
 			}
+
 			if (this.macroMinimapAngle < -60) {
 				this.macroMinimapAngleModifier = 2;
-			}
-			if (this.macroMinimapAngle > 60) {
+			} else if (this.macroMinimapAngle > 60) {
 				this.macroMinimapAngleModifier = -2;
 			}
+
 			if (this.macroMinimapZoom < -20) {
 				this.macroMinimapZoomModifier = 1;
-			}
-			if (this.macroMinimapZoom > 10) {
+			} else if (this.macroMinimapZoom > 10) {
 				this.macroMinimapZoomModifier = -1;
 			}
+
 			cyclelogic4++;
 			if (cyclelogic4 > 110) {
 				cyclelogic4 = 0;
+
+				// ANTICHEAT_CYCLELOGIC4
 				this.out.pIsaac(94);
 				this.out.p4(0);
 			}
+
 			this.noTimeoutCycle++;
 			if (this.noTimeoutCycle > 50) {
+				// NO_TIMEOUT
 				this.out.pIsaac(206);
 			}
+
 			try {
 				if (this.stream != null && this.out.pos > 0) {
 					this.stream.write(0, this.out.pos, this.out.data);
 					this.out.pos = 0;
 					this.noTimeoutCycle = 0;
 				}
-			} catch (IOException var17) {
+			} catch (IOException ex) {
 				this.tryReconnect();
-			} catch (Exception var18) {
+			} catch (Exception ex) {
 				this.logout();
 			}
 		}
@@ -2888,22 +3216,27 @@ public class Client extends GameShell {
 			this.logout();
 			return;
 		}
+
 		this.areaViewport.bind();
 		this.fontPlain12.centreString(0, 257, 144, "Connection lost");
 		this.fontPlain12.centreString(16777215, 256, 143, "Connection lost");
 		this.fontPlain12.centreString(0, 257, 159, "Please wait - attempting to reestablish");
 		this.fontPlain12.centreString(16777215, 256, 158, "Please wait - attempting to reestablish");
 		this.areaViewport.draw(4, super.graphics, 4);
+
 		this.flagSceneTileX = 0;
-		ClientStream var2 = this.stream;
+
+		ClientStream stream = this.stream;
+
 		this.ingame = false;
 		this.login(this.username, this.password, true);
 		if (!this.ingame) {
 			this.logout();
 		}
+
 		try {
-			var2.close();
-		} catch (Exception var3) {
+			stream.close();
+		} catch (Exception ignore) {
 		}
 	}
 
@@ -2917,13 +3250,15 @@ public class Client extends GameShell {
 			this.sceneState = 1;
 			this.sceneLoadStartTime = System.currentTimeMillis();
 		}
+
 		if (this.sceneState == 1) {
-			int var2 = this.checkScene();
-			if (var2 != 0 && System.currentTimeMillis() - this.sceneLoadStartTime > 360000L) {
-				signlink.reporterror(this.username + " glcfb " + this.serverSeed + "," + var2 + "," + lowMem + "," + this.fileStreams[0] + "," + this.onDemand.remaining() + "," + this.currentLevel + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ);
+			int status = this.checkScene();
+			if (status != 0 && System.currentTimeMillis() - this.sceneLoadStartTime > 360000L) {
+				signlink.reporterror(this.username + " glcfb " + this.serverSeed + "," + status + "," + lowMem + "," + this.fileStreams[0] + "," + this.onDemand.remaining() + "," + this.currentLevel + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ);
 				this.sceneLoadStartTime = System.currentTimeMillis();
 			}
 		}
+
 		if (this.sceneState == 2 && this.currentLevel != this.minimapLevel) {
 			this.minimapLevel = this.currentLevel;
 			this.createMinimap(this.currentLevel);
@@ -2932,33 +3267,36 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.t(I)I")
 	public int checkScene() {
-		for (int var2 = 0; var2 < this.sceneMapLandData.length; var2++) {
-			if (this.sceneMapLandData[var2] == null && this.sceneMapLandFile[var2] != -1) {
+		for (int i = 0; i < this.sceneMapLandData.length; i++) {
+			if (this.sceneMapLandData[i] == null && this.sceneMapLandFile[i] != -1) {
 				return -1;
 			}
-			if (this.sceneMapLocData[var2] == null && this.sceneMapLocFile[var2] != -1) {
+
+			if (this.sceneMapLocData[i] == null && this.sceneMapLocFile[i] != -1) {
 				return -2;
 			}
 		}
-		boolean var3 = true;
-		for (int var4 = 0; var4 < this.sceneMapLandData.length; var4++) {
-			byte[] var5 = this.sceneMapLocData[var4];
-			if (var5 != null) {
-				int var6 = (this.sceneMapIndex[var4] >> 8) * 64 - this.sceneBaseTileX;
-				int var7 = (this.sceneMapIndex[var4] & 0xFF) * 64 - this.sceneBaseTileZ;
-				var3 &= World.checkLocations(var5, var7, var6);
+
+		boolean ready = true;
+		for (int i = 0; i < this.sceneMapLandData.length; i++) {
+			byte[] data = this.sceneMapLocData[i];
+			if (data != null) {
+				int x = (this.sceneMapIndex[i] >> 8) * 64 - this.sceneBaseTileX;
+				int z = (this.sceneMapIndex[i] & 0xFF) * 64 - this.sceneBaseTileZ;
+				ready &= World.checkLocations(data, z, x);
 			}
 		}
-		if (!var3) {
+
+		if (!ready) {
 			return -3;
 		} else if (this.awaitingSync) {
 			return -4;
-		} else {
-			this.sceneState = 2;
-			World.levelBuilt = this.currentLevel;
-			this.buildScene();
-			return 0;
 		}
+
+		this.sceneState = 2;
+		World.levelBuilt = this.currentLevel;
+		this.buildScene();
+		return 0;
 	}
 
 	@ObfuscatedName("client.g(Z)V")
@@ -2970,96 +3308,130 @@ public class Client extends GameShell {
 			Pix3D.clearTexels();
 			this.clearCache();
 			this.scene.reset();
-			for (int var2 = 0; var2 < 4; var2++) {
-				this.levelCollisionMap[var2].reset();
+
+			for (int i = 0; i < 4; i++) {
+				this.levelCollisionMap[i].reset();
 			}
+
 			System.gc();
-			World var3 = new World(this.levelTileFlags, this.levelHeightmap, 104, 104);
-			int var4 = this.sceneMapLandData.length;
+
+			World world = new World(this.levelTileFlags, this.levelHeightmap, 104, 104);
+			int maps = this.sceneMapLandData.length;
 			World.lowMem = World3D.lowMem;
-			for (int var5 = 0; var5 < var4; var5++) {
-				int var6 = this.sceneMapIndex[var5] >> 8;
-				int var7 = this.sceneMapIndex[var5] & 0xFF;
-				if (var6 == 33 && var7 >= 71 && var7 <= 73) {
+
+			for (int i = 0; i < maps; i++) {
+				int x = this.sceneMapIndex[i] >> 8;
+				int z = this.sceneMapIndex[i] & 0xFF;
+
+				if (x == 33 && z >= 71 && z <= 73) {
 					World.lowMem = false;
 				}
 			}
+
 			if (World.lowMem) {
 				this.scene.setMinLevel(this.currentLevel);
 			} else {
 				this.scene.setMinLevel(0);
 			}
+
+			// NO_TIMEOUT
 			this.out.pIsaac(206);
-			for (int var8 = 0; var8 < var4; var8++) {
-				int var9 = (this.sceneMapIndex[var8] >> 8) * 64 - this.sceneBaseTileX;
-				int var10 = (this.sceneMapIndex[var8] & 0xFF) * 64 - this.sceneBaseTileZ;
-				byte[] var11 = this.sceneMapLandData[var8];
-				if (var11 != null) {
-					var3.loadGround(var11, (this.sceneCenterZoneX - 6) * 8, var10, var9, (this.sceneCenterZoneZ - 6) * 8);
+
+			for (int i = 0; i < maps; i++) {
+				int x = (this.sceneMapIndex[i] >> 8) * 64 - this.sceneBaseTileX;
+				int z = (this.sceneMapIndex[i] & 0xFF) * 64 - this.sceneBaseTileZ;
+				byte[] data = this.sceneMapLandData[i];
+
+				if (data != null) {
+					world.loadGround(data, (this.sceneCenterZoneX - 6) * 8, z, x, (this.sceneCenterZoneZ - 6) * 8);
 				}
 			}
-			for (int var12 = 0; var12 < var4; var12++) {
-				int var13 = (this.sceneMapIndex[var12] >> 8) * 64 - this.sceneBaseTileX;
-				int var14 = (this.sceneMapIndex[var12] & 0xFF) * 64 - this.sceneBaseTileZ;
-				byte[] var15 = this.sceneMapLandData[var12];
-				if (var15 == null && this.sceneCenterZoneZ < 800) {
-					var3.spreadHeight(64, var14, var13, 64);
+
+			for (int i = 0; i < maps; i++) {
+				int x = (this.sceneMapIndex[i] >> 8) * 64 - this.sceneBaseTileX;
+				int z = (this.sceneMapIndex[i] & 0xFF) * 64 - this.sceneBaseTileZ;
+				byte[] data = this.sceneMapLandData[i];
+
+				if (data == null && this.sceneCenterZoneZ < 800) {
+					world.spreadHeight(64, z, x, 64);
 				}
 			}
+
+			// NO_TIMEOUT
 			this.out.pIsaac(206);
-			for (int var16 = 0; var16 < var4; var16++) {
-				byte[] var17 = this.sceneMapLocData[var16];
-				if (var17 != null) {
-					int var18 = (this.sceneMapIndex[var16] >> 8) * 64 - this.sceneBaseTileX;
-					int var19 = (this.sceneMapIndex[var16] & 0xFF) * 64 - this.sceneBaseTileZ;
-					var3.loadLocations(this.levelCollisionMap, var19, var17, var18, this.scene);
+
+			for (int i = 0; i < maps; i++) {
+				byte[] data = this.sceneMapLocData[i];
+
+				if (data != null) {
+					int x = (this.sceneMapIndex[i] >> 8) * 64 - this.sceneBaseTileX;
+					int z = (this.sceneMapIndex[i] & 0xFF) * 64 - this.sceneBaseTileZ;
+					world.loadLocations(this.levelCollisionMap, z, data, x, this.scene);
 				}
 			}
+
+			// NO_TIMEOUT
 			this.out.pIsaac(206);
-			var3.build(this.levelCollisionMap, this.scene);
+
+			world.build(this.levelCollisionMap, this.scene);
 			this.areaViewport.bind();
+
+			// NO_TIMEOUT
 			this.out.pIsaac(206);
-			for (int var20 = 0; var20 < 104; var20++) {
-				for (int var21 = 0; var21 < 104; var21++) {
-					this.sortObjStacks(var20, var21);
+
+			for (int x = 0; x < 104; x++) {
+				for (int z = 0; z < 104; z++) {
+					this.sortObjStacks(x, z);
 				}
 			}
+
 			this.clearLocChanges();
-		} catch (Exception var34) {
+		} catch (Exception ignore) {
 		}
+
 		LocType.modelCacheStatic.clear();
+
 		if (lowMem && signlink.cache_dat != null) {
-			int var23 = this.onDemand.getFileCount(0);
-			for (int var24 = 0; var24 < var23; var24++) {
-				int var25 = this.onDemand.getModelFlags(var24);
-				if ((var25 & 0x79) == 0) {
-					Model.unload(var24);
+			int modelCount = this.onDemand.getFileCount(0);
+
+			for (int i = 0; i < modelCount; i++) {
+				int flags = this.onDemand.getModelFlags(i);
+
+				if ((flags & 0x79) == 0) {
+					Model.unload(i);
 				}
 			}
 		}
+
 		System.gc();
+
 		Pix3D.initPool(20);
+
 		this.onDemand.clearPrefetches();
-		int var26 = (this.sceneCenterZoneX - 6) / 8 - 1;
-		int var27 = (this.sceneCenterZoneX + 6) / 8 + 1;
-		int var28 = (this.sceneCenterZoneZ - 6) / 8 - 1;
-		int var29 = (this.sceneCenterZoneZ + 6) / 8 + 1;
+
+		int left = (this.sceneCenterZoneX - 6) / 8 - 1;
+		int right = (this.sceneCenterZoneX + 6) / 8 + 1;
+		int bottom = (this.sceneCenterZoneZ - 6) / 8 - 1;
+		int top = (this.sceneCenterZoneZ + 6) / 8 + 1;
+
 		if (this.withinTutorialIsland) {
-			var26 = 49;
-			var27 = 50;
-			var28 = 49;
-			var29 = 50;
+			left = 49;
+			right = 50;
+			bottom = 49;
+			top = 50;
 		}
-		for (int var30 = var26; var30 <= var27; var30++) {
-			for (int var31 = var28; var31 <= var29; var31++) {
-				if (var30 == var26 || var30 == var27 || var31 == var28 || var31 == var29) {
-					int var32 = this.onDemand.getMapFile(0, var30, var31);
-					if (var32 != -1) {
-						this.onDemand.prefetch(var32, 3);
+
+		for (int x = left; x <= right; x++) {
+			for (int z = bottom; z <= top; z++) {
+				if (x == left || x == right || z == bottom || z == top) {
+					int land = this.onDemand.getMapFile(0, x, z);
+					if (land != -1) {
+						this.onDemand.prefetch(land, 3);
 					}
-					int var33 = this.onDemand.getMapFile(1, var30, var31);
-					if (var33 != -1) {
-						this.onDemand.prefetch(var33, 3);
+
+					int loc = this.onDemand.getMapFile(1, x, z);
+					if (loc != -1) {
+						this.onDemand.prefetch(loc, 3);
 					}
 				}
 			}
@@ -3068,87 +3440,111 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.B(I)V")
 	public void clearLocChanges() {
-		LocChange var2 = (LocChange) this.locChanges.head();
-		while (var2 != null) {
-			if (var2.endTime == -1) {
-				var2.startTime = 0;
-				this.storeLoc(var2);
+		LocChange loc = (LocChange) this.locChanges.head();
+		while (loc != null) {
+			if (loc.endTime == -1) {
+				loc.startTime = 0;
+				this.storeLoc(loc);
 			} else {
-				var2.unlink();
+				loc.unlink();
 			}
-			var2 = (LocChange) this.locChanges.next();
+
+			loc = (LocChange) this.locChanges.next();
 		}
 	}
 
 	@ObfuscatedName("client.g(II)V")
-	public void createMinimap(int arg0) {
-		int[] var3 = this.imageMinimap.pixels;
-		int var4 = var3.length;
-		for (int var5 = 0; var5 < var4; var5++) {
-			var3[var5] = 0;
+	public void createMinimap(int level) {
+		int[] pixels = this.imageMinimap.pixels;
+
+		int length = pixels.length;
+		for (int i = 0; i < length; i++) {
+			pixels[i] = 0;
 		}
-		for (int var6 = 1; var6 < 103; var6++) {
-			int var7 = (103 - var6) * 512 * 4 + 24628;
-			for (int var8 = 1; var8 < 103; var8++) {
-				if ((this.levelTileFlags[arg0][var8][var6] & 0x18) == 0) {
-					this.scene.drawMinimapTile(var3, var7, 512, arg0, var8, var6);
+
+		for (int z = 1; z < 103; z++) {
+			int offset = (103 - z) * 512 * 4 + 24628;
+
+			for (int x = 1; x < 103; x++) {
+				if ((this.levelTileFlags[level][x][z] & 0x18) == 0) {
+					this.scene.drawMinimapTile(pixels, offset, 512, level, x, z);
 				}
-				if (arg0 < 3 && (this.levelTileFlags[arg0 + 1][var8][var6] & 0x8) != 0) {
-					this.scene.drawMinimapTile(var3, var7, 512, arg0 + 1, var8, var6);
+
+				if (level < 3 && (this.levelTileFlags[level + 1][x][z] & 0x8) != 0) {
+					this.scene.drawMinimapTile(pixels, offset, 512, level + 1, x, z);
 				}
-				var7 += 4;
+
+				offset += 4;
 			}
 		}
-		int var9 = ((int) (Math.random() * 20.0D) + 238 - 10 << 16) + ((int) (Math.random() * 20.0D) + 238 - 10 << 8) + ((int) (Math.random() * 20.0D) + 238 - 10);
-		int var10 = (int) (Math.random() * 20.0D) + 238 - 10 << 16;
+
+		int inactiveRgb = ((int) (Math.random() * 20.0D) + 238 - 10 << 16) + ((int) (Math.random() * 20.0D) + 238 - 10 << 8) + ((int) (Math.random() * 20.0D) + 238 - 10);
+		int activeRgb = (int) (Math.random() * 20.0D) + 238 - 10 << 16;
+
 		this.imageMinimap.bind();
-		for (int var11 = 1; var11 < 103; var11++) {
-			for (int var12 = 1; var12 < 103; var12++) {
-				if ((this.levelTileFlags[arg0][var12][var11] & 0x18) == 0) {
-					this.drawMinimapLoc(var12, var11, var10, arg0, var9);
+
+		for (int z = 1; z < 103; z++) {
+			for (int x = 1; x < 103; x++) {
+				if ((this.levelTileFlags[level][x][z] & 0x18) == 0) {
+					this.drawMinimapLoc(x, z, activeRgb, level, inactiveRgb);
 				}
-				if (arg0 < 3 && (this.levelTileFlags[arg0 + 1][var12][var11] & 0x8) != 0) {
-					this.drawMinimapLoc(var12, var11, var10, arg0 + 1, var9);
+
+				if (level < 3 && (this.levelTileFlags[level + 1][x][z] & 0x8) != 0) {
+					this.drawMinimapLoc(x, z, activeRgb, level + 1, inactiveRgb);
 				}
 			}
 		}
+
 		this.areaViewport.bind();
+
 		this.activeMapFunctionCount = 0;
-		for (int var13 = 0; var13 < 104; var13++) {
-			for (int var14 = 0; var14 < 104; var14++) {
-				int var15 = this.scene.getGroundDecorTypecode(this.currentLevel, var13, var14);
-				if (var15 != 0) {
-					int var16 = var15 >> 14 & 0x7FFF;
-					int var17 = LocType.get(var16).mapfunction;
-					if (var17 >= 0) {
-						int var18 = var13;
-						int var19 = var14;
-						if (var17 != 22 && var17 != 29 && var17 != 34 && var17 != 36 && var17 != 46 && var17 != 47 && var17 != 48) {
-							byte var20 = 104;
-							byte var21 = 104;
-							int[][] var22 = this.levelCollisionMap[this.currentLevel].flags;
-							for (int var23 = 0; var23 < 10; var23++) {
-								int var24 = (int) (Math.random() * 4.0D);
-								if (var24 == 0 && var18 > 0 && var18 > var13 - 3 && (var22[var18 - 1][var19] & 0x280108) == 0) {
-									var18--;
-								}
-								if (var24 == 1 && var18 < var20 - 1 && var18 < var13 + 3 && (var22[var18 + 1][var19] & 0x280180) == 0) {
-									var18++;
-								}
-								if (var24 == 2 && var19 > 0 && var19 > var14 - 3 && (var22[var18][var19 - 1] & 0x280102) == 0) {
-									var19--;
-								}
-								if (var24 == 3 && var19 < var21 - 1 && var19 < var14 + 3 && (var22[var18][var19 + 1] & 0x280120) == 0) {
-									var19++;
-								}
-							}
+
+		for (int x = 0; x < 104; x++) {
+			for (int z = 0; z < 104; z++) {
+				int typecode = this.scene.getGroundDecorTypecode(this.currentLevel, x, z);
+				if (typecode == 0) {
+					continue;
+				}
+
+				int locId = typecode >> 14 & 0x7FFF;
+				int func = LocType.get(locId).mapfunction;
+				if (func < 0) {
+					continue;
+				}
+
+				int stx = x;
+				int stz = z;
+
+				if (func != 22 && func != 29 && func != 34 && func != 36 && func != 46 && func != 47 && func != 48) {
+					byte maxX = 104;
+					byte maxZ = 104;
+					int[][] flags = this.levelCollisionMap[this.currentLevel].flags;
+
+					for (int i = 0; i < 10; i++) {
+						int rand = (int) (Math.random() * 4.0D);
+
+						if (rand == 0 && stx > 0 && stx > x - 3 && (flags[stx - 1][stz] & 0x280108) == 0) {
+							stx--;
 						}
-						this.activeMapFunctions[this.activeMapFunctionCount] = this.imageMapfunction[var17];
-						this.activeMapFunctionX[this.activeMapFunctionCount] = var18;
-						this.activeMapFunctionZ[this.activeMapFunctionCount] = var19;
-						this.activeMapFunctionCount++;
+
+						if (rand == 1 && stx < maxX - 1 && stx < x + 3 && (flags[stx + 1][stz] & 0x280180) == 0) {
+							stx++;
+						}
+
+						if (rand == 2 && stz > 0 && stz > z - 3 && (flags[stx][stz - 1] & 0x280102) == 0) {
+							stz--;
+						}
+
+						if (rand == 3 && stz < maxZ - 1 && stz < z + 3 && (flags[stx][stz + 1] & 0x280120) == 0) {
+							stz++;
+						}
 					}
 				}
+
+				this.activeMapFunctions[this.activeMapFunctionCount] = this.imageMapfunction[func];
+				this.activeMapFunctionX[this.activeMapFunctionCount] = stx;
+				this.activeMapFunctionZ[this.activeMapFunctionCount] = stz;
+				this.activeMapFunctionCount++;
 			}
 		}
 	}
@@ -3158,78 +3554,92 @@ public class Client extends GameShell {
 		if (this.sceneState != 2) {
 			return;
 		}
-		for (LocChange var3 = (LocChange) this.locChanges.head(); var3 != null; var3 = (LocChange) this.locChanges.next()) {
-			if (var3.endTime > 0) {
-				var3.endTime--;
+
+		for (LocChange loc = (LocChange) this.locChanges.head(); loc != null; loc = (LocChange) this.locChanges.next()) {
+			if (loc.endTime > 0) {
+				loc.endTime--;
 			}
-			if (var3.endTime != 0) {
-				if (var3.startTime > 0) {
-					var3.startTime--;
+
+			if (loc.endTime != 0) {
+				if (loc.startTime > 0) {
+					loc.startTime--;
 				}
-				if (var3.startTime == 0 && var3.x >= 1 && var3.z >= 1 && var3.x <= 102 && var3.z <= 102 && (var3.newType < 0 || World.changeLocAvailable(var3.newShape, var3.newType))) {
-					this.addLoc(var3.newShape, var3.z, var3.newAngle, var3.layer, var3.newType, var3.x, var3.level);
-					var3.startTime = -1;
-					if (var3.newType == var3.oldType && var3.oldType == -1) {
-						var3.unlink();
-					} else if (var3.newType == var3.oldType && var3.newAngle == var3.oldAngle && var3.newShape == var3.oldShape) {
-						var3.unlink();
+
+				if (loc.startTime == 0 && loc.x >= 1 && loc.z >= 1 && loc.x <= 102 && loc.z <= 102 && (loc.newType < 0 || World.changeLocAvailable(loc.newShape, loc.newType))) {
+					this.addLoc(loc.newShape, loc.z, loc.newAngle, loc.layer, loc.newType, loc.x, loc.level);
+					loc.startTime = -1;
+
+					if (loc.newType == loc.oldType && loc.oldType == -1) {
+						loc.unlink();
+					} else if (loc.newType == loc.oldType && loc.newAngle == loc.oldAngle && loc.newShape == loc.oldShape) {
+						loc.unlink();
 					}
 				}
-			} else if (var3.oldType < 0 || World.changeLocAvailable(var3.oldShape, var3.oldType)) {
-				this.addLoc(var3.oldShape, var3.z, var3.oldAngle, var3.layer, var3.oldType, var3.x, var3.level);
-				var3.unlink();
+			} else if (loc.oldType < 0 || World.changeLocAvailable(loc.oldShape, loc.oldType)) {
+				this.addLoc(loc.oldShape, loc.z, loc.oldAngle, loc.layer, loc.oldType, loc.x, loc.level);
+				loc.unlink();
 			}
 		}
+
 		cyclelogic5++;
 		if (cyclelogic5 > 85) {
 			cyclelogic5 = 0;
+
+			// ANTICHEAT_CYCLELOGIC5
 			this.out.pIsaac(63);
 		}
 	}
 
 	@ObfuscatedName("client.E(I)V")
 	public void updateAudio() {
-		for (int var2 = 0; var2 < this.waveCount; var2++) {
-			if (this.waveDelay[var2] <= 0) {
-				boolean var3 = false;
+		for (int wave = 0; wave < this.waveCount; wave++) {
+			if (this.waveDelay[wave] <= 0) {
+				boolean replay = false;
+
 				try {
-					if (this.waveIds[var2] != this.lastWaveId || this.waveLoops[var2] != this.lastWaveLoops) {
-						Packet var4 = Wave.generate(this.waveIds[var2], this.waveLoops[var2]);
-						if (System.currentTimeMillis() + (long) (var4.pos / 22) > this.lastWaveStartTime + (long) (this.lastWaveLength / 22)) {
-							this.lastWaveLength = var4.pos;
+					if (this.waveIds[wave] != this.lastWaveId || this.waveLoops[wave] != this.lastWaveLoops) {
+						Packet buf = Wave.generate(this.waveIds[wave], this.waveLoops[wave]);
+
+						if (System.currentTimeMillis() + (long) (buf.pos / 22) > this.lastWaveStartTime + (long) (this.lastWaveLength / 22)) {
+							this.lastWaveLength = buf.pos;
 							this.lastWaveStartTime = System.currentTimeMillis();
-							if (this.saveWave(var4.pos, var4.data)) {
-								this.lastWaveId = this.waveIds[var2];
-								this.lastWaveLoops = this.waveLoops[var2];
+
+							if (this.saveWave(buf.pos, buf.data)) {
+								this.lastWaveId = this.waveIds[wave];
+								this.lastWaveLoops = this.waveLoops[wave];
 							} else {
-								var3 = true;
+								replay = true;
 							}
 						}
 					} else if (!this.replayWave()) {
-						var3 = true;
+						replay = true;
 					}
-				} catch (Exception var7) {
+				} catch (Exception ignore) {
 				}
-				if (var3 && this.waveDelay[var2] != -5) {
-					this.waveDelay[var2] = -5;
+
+				if (replay && this.waveDelay[wave] != -5) {
+					this.waveDelay[wave] = -5;
 				} else {
 					this.waveCount--;
-					for (int var6 = var2; var6 < this.waveCount; var6++) {
-						this.waveIds[var6] = this.waveIds[var6 + 1];
-						this.waveLoops[var6] = this.waveLoops[var6 + 1];
-						this.waveDelay[var6] = this.waveDelay[var6 + 1];
+					for (int i = wave; i < this.waveCount; i++) {
+						this.waveIds[i] = this.waveIds[i + 1];
+						this.waveLoops[i] = this.waveLoops[i + 1];
+						this.waveDelay[i] = this.waveDelay[i + 1];
 					}
-					var2--;
+					wave--;
 				}
 			} else {
-				this.waveDelay[var2]--;
+				this.waveDelay[wave]--;
 			}
 		}
+
 		if (this.nextMusicDelay > 0) {
 			this.nextMusicDelay -= 20;
+
 			if (this.nextMusicDelay < 0) {
 				this.nextMusicDelay = 0;
 			}
+
 			if (this.nextMusicDelay == 0 && this.midiActive && !lowMem) {
 				this.midiSong = this.nextMidiSong;
 				this.midiFading = false;
@@ -3243,10 +3653,13 @@ public class Client extends GameShell {
 		if (this.objDragArea != 0) {
 			return;
 		}
+
 		this.menuOption[0] = "Cancel";
 		this.menuAction[0] = 1252;
 		this.menuSize = 1;
+
 		this.handlePrivateChatInput();
+
 		this.lastHoveredInterfaceId = 0;
 		if (super.mouseX > 4 && super.mouseY > 4 && super.mouseX < 516 && super.mouseY < 338) {
 			if (this.viewportInterfaceId == -1) {
@@ -3255,9 +3668,11 @@ public class Client extends GameShell {
 				this.handleInterfaceInput(4, super.mouseY, 0, Component.types[this.viewportInterfaceId], super.mouseX, 4);
 			}
 		}
+
 		if (this.lastHoveredInterfaceId != this.viewportHoveredInterfaceId) {
 			this.viewportHoveredInterfaceId = this.lastHoveredInterfaceId;
 		}
+
 		this.lastHoveredInterfaceId = 0;
 		if (super.mouseX > 553 && super.mouseY > 205 && super.mouseX < 743 && super.mouseY < 466) {
 			if (this.sidebarInterfaceId != -1) {
@@ -3266,10 +3681,12 @@ public class Client extends GameShell {
 				this.handleInterfaceInput(553, super.mouseY, 0, Component.types[this.tabInterfaceId[this.selectedTab]], super.mouseX, 205);
 			}
 		}
+
 		if (this.lastHoveredInterfaceId != this.sidebarHoveredInterfaceId) {
 			this.redrawSidebar = true;
 			this.sidebarHoveredInterfaceId = this.lastHoveredInterfaceId;
 		}
+
 		this.lastHoveredInterfaceId = 0;
 		if (super.mouseX > 17 && super.mouseY > 357 && super.mouseX < 496 && super.mouseY < 453) {
 			if (this.chatInterfaceId != -1) {
@@ -3278,31 +3695,39 @@ public class Client extends GameShell {
 				this.handleChatMouseInput(super.mouseX - 17, super.mouseY - 357);
 			}
 		}
+
 		if (this.chatInterfaceId != -1 && this.lastHoveredInterfaceId != this.chatHoveredInterfaceId) {
 			this.redrawChatback = true;
 			this.chatHoveredInterfaceId = this.lastHoveredInterfaceId;
 		}
-		boolean var2 = false;
-		while (!var2) {
-			var2 = true;
-			for (int var3 = 0; var3 < this.menuSize - 1; var3++) {
-				if (this.menuAction[var3] < 1000 && this.menuAction[var3 + 1] > 1000) {
-					String var4 = this.menuOption[var3];
-					this.menuOption[var3] = this.menuOption[var3 + 1];
-					this.menuOption[var3 + 1] = var4;
-					int var5 = this.menuAction[var3];
-					this.menuAction[var3] = this.menuAction[var3 + 1];
-					this.menuAction[var3 + 1] = var5;
-					int var6 = this.menuParamB[var3];
-					this.menuParamB[var3] = this.menuParamB[var3 + 1];
-					this.menuParamB[var3 + 1] = var6;
-					int var7 = this.menuParamC[var3];
-					this.menuParamC[var3] = this.menuParamC[var3 + 1];
-					this.menuParamC[var3 + 1] = var7;
-					int var8 = this.menuParamA[var3];
-					this.menuParamA[var3] = this.menuParamA[var3 + 1];
-					this.menuParamA[var3 + 1] = var8;
-					var2 = false;
+
+		boolean done = false;
+		while (!done) {
+			done = true;
+
+			for (int i = 0; i < this.menuSize - 1; i++) {
+				if (this.menuAction[i] < 1000 && this.menuAction[i + 1] > 1000) {
+					String tmp0 = this.menuOption[i];
+					this.menuOption[i] = this.menuOption[i + 1];
+					this.menuOption[i + 1] = tmp0;
+
+					int tmp1 = this.menuAction[i];
+					this.menuAction[i] = this.menuAction[i + 1];
+					this.menuAction[i + 1] = tmp1;
+
+					int tmp2 = this.menuParamB[i];
+					this.menuParamB[i] = this.menuParamB[i + 1];
+					this.menuParamB[i + 1] = tmp2;
+
+					int tmp3 = this.menuParamC[i];
+					this.menuParamC[i] = this.menuParamC[i + 1];
+					this.menuParamC[i + 1] = tmp3;
+
+					int tmp4 = this.menuParamA[i];
+					this.menuParamA[i] = this.menuParamA[i + 1];
+					this.menuParamA[i + 1] = tmp4;
+
+					done = false;
 				}
 			}
 		}
@@ -3313,52 +3738,59 @@ public class Client extends GameShell {
 		if (this.splitPrivateChat == 0) {
 			return;
 		}
-		int var2 = 0;
+
+		int line = 0;
 		if (this.systemUpdateTimer != 0) {
-			var2 = 1;
+			line = 1;
 		}
-		for (int var3 = 0; var3 < 100; var3++) {
-			if (this.messageText[var3] != null) {
-				int var4 = this.messageType[var3];
-				String var5 = this.messageSender[var3];
-				boolean var6 = false;
-				if (var5 != null && var5.startsWith("@cr1@")) {
-					var5 = var5.substring(5);
-					var6 = true;
+
+		for (int i = 0; i < 100; i++) {
+			if (this.messageText[i] != null) {
+				int type = this.messageType[i];
+				String sender = this.messageSender[i];
+
+				boolean mod = false;
+				if (sender != null && sender.startsWith("@cr1@")) {
+					sender = sender.substring(5);
+					mod = true;
+				} else if (sender != null && sender.startsWith("@cr2@")) {
+					sender = sender.substring(5);
+					mod = true;
 				}
-				if (var5 != null && var5.startsWith("@cr2@")) {
-					var5 = var5.substring(5);
-					var6 = true;
-				}
-				if ((var4 == 3 || var4 == 7) && (var4 == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(var5))) {
-					int var9 = 329 - var2 * 13;
-					if (super.mouseX > 4 && super.mouseY - 4 > var9 - 10 && super.mouseY - 4 <= var9 + 3) {
-						int var10 = this.fontPlain12.stringWid("From:  " + var5 + this.messageText[var3]) + 25;
-						if (var10 > 450) {
-							var10 = 450;
+
+				if ((type == 3 || type == 7) && (type == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(sender))) {
+					int y = 329 - line * 13;
+
+					if (super.mouseX > 4 && super.mouseY - 4 > y - 10 && super.mouseY - 4 <= y + 3) {
+						int width = this.fontPlain12.stringWid("From:  " + sender + this.messageText[i]) + 25;
+						if (width > 450) {
+							width = 450;
 						}
-						if (super.mouseX < var10 + 4) {
+
+						if (super.mouseX < width + 4) {
 							if (this.staffmodlevel >= 1) {
-								this.menuOption[this.menuSize] = "Report abuse @whi@" + var5;
+								this.menuOption[this.menuSize] = "Report abuse @whi@" + sender;
 								this.menuAction[this.menuSize] = 2034;
 								this.menuSize++;
 							}
-							this.menuOption[this.menuSize] = "Add ignore @whi@" + var5;
+
+							this.menuOption[this.menuSize] = "Add ignore @whi@" + sender;
 							this.menuAction[this.menuSize] = 2436;
 							this.menuSize++;
-							this.menuOption[this.menuSize] = "Add friend @whi@" + var5;
+
+							this.menuOption[this.menuSize] = "Add friend @whi@" + sender;
 							this.menuAction[this.menuSize] = 2406;
 							this.menuSize++;
 						}
 					}
-					var2++;
-					if (var2 >= 5) {
+
+					line++;
+					if (line >= 5) {
 						return;
 					}
-				}
-				if ((var4 == 5 || var4 == 6) && this.chatPrivateMode < 2) {
-					var2++;
-					if (var2 >= 5) {
+				} else if ((type == 5 || type == 6) && this.chatPrivateMode < 2) {
+					line++;
+					if (line >= 5) {
 						return;
 					}
 				}
@@ -3367,78 +3799,83 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.b(IIZ)V")
-	public void handleChatMouseInput(int arg0, int arg1) {
-		int var4 = 0;
-		for (int var5 = 0; var5 < 100; var5++) {
-			if (this.messageText[var5] != null) {
-				int var6 = this.messageType[var5];
-				int var7 = 70 - var4 * 14 + this.chatScrollOffset + 4;
-				if (var7 < -20) {
+	public void handleChatMouseInput(int mouseX, int mouseY) {
+		int line = 0;
+
+		for (int i = 0; i < 100; i++) {
+			if (this.messageText[i] != null) {
+				int type = this.messageType[i];
+				int y = 70 - line * 14 + this.chatScrollOffset + 4;
+				if (y < -20) {
 					break;
 				}
-				String var8 = this.messageSender[var5];
-				boolean var9 = false;
-				if (var8 != null && var8.startsWith("@cr1@")) {
-					var8 = var8.substring(5);
-					boolean var10 = true;
+
+				String sender = this.messageSender[i];
+				boolean mod = false;
+				if (sender != null && sender.startsWith("@cr1@")) {
+					sender = sender.substring(5);
+					mod = true;
+				} else if (sender != null && sender.startsWith("@cr2@")) {
+					sender = sender.substring(5);
+					mod = true;
 				}
-				if (var8 != null && var8.startsWith("@cr2@")) {
-					var8 = var8.substring(5);
-					boolean var11 = true;
-				}
-				if (var6 == 0) {
-					var4++;
-				}
-				if ((var6 == 1 || var6 == 2) && (var6 == 1 || this.chatPublicMode == 0 || this.chatPublicMode == 1 && this.isFriend(var8))) {
-					if (arg1 > var7 - 14 && arg1 <= var7 && !var8.equals(localPlayer.name)) {
+
+				if (type == 0) {
+					line++;
+				} else if ((type == 1 || type == 2) && (type == 1 || this.chatPublicMode == 0 || this.chatPublicMode == 1 && this.isFriend(sender))) {
+					if (mouseY > y - 14 && mouseY <= y && !sender.equals(localPlayer.name)) {
 						if (this.staffmodlevel >= 1) {
-							this.menuOption[this.menuSize] = "Report abuse @whi@" + var8;
+							this.menuOption[this.menuSize] = "Report abuse @whi@" + sender;
 							this.menuAction[this.menuSize] = 34;
 							this.menuSize++;
 						}
-						this.menuOption[this.menuSize] = "Add ignore @whi@" + var8;
+
+						this.menuOption[this.menuSize] = "Add ignore @whi@" + sender;
 						this.menuAction[this.menuSize] = 436;
 						this.menuSize++;
-						this.menuOption[this.menuSize] = "Add friend @whi@" + var8;
+
+						this.menuOption[this.menuSize] = "Add friend @whi@" + sender;
 						this.menuAction[this.menuSize] = 406;
 						this.menuSize++;
 					}
-					var4++;
-				}
-				if ((var6 == 3 || var6 == 7) && this.splitPrivateChat == 0 && (var6 == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(var8))) {
-					if (arg1 > var7 - 14 && arg1 <= var7) {
+
+					line++;
+				} else if ((type == 3 || type == 7) && this.splitPrivateChat == 0 && (type == 7 || this.chatPrivateMode == 0 || this.chatPrivateMode == 1 && this.isFriend(sender))) {
+					if (mouseY > y - 14 && mouseY <= y) {
 						if (this.staffmodlevel >= 1) {
-							this.menuOption[this.menuSize] = "Report abuse @whi@" + var8;
+							this.menuOption[this.menuSize] = "Report abuse @whi@" + sender;
 							this.menuAction[this.menuSize] = 34;
 							this.menuSize++;
 						}
-						this.menuOption[this.menuSize] = "Add ignore @whi@" + var8;
+
+						this.menuOption[this.menuSize] = "Add ignore @whi@" + sender;
 						this.menuAction[this.menuSize] = 436;
 						this.menuSize++;
-						this.menuOption[this.menuSize] = "Add friend @whi@" + var8;
+
+						this.menuOption[this.menuSize] = "Add friend @whi@" + sender;
 						this.menuAction[this.menuSize] = 406;
 						this.menuSize++;
 					}
-					var4++;
-				}
-				if (var6 == 4 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(var8))) {
-					if (arg1 > var7 - 14 && arg1 <= var7) {
-						this.menuOption[this.menuSize] = "Accept trade @whi@" + var8;
+
+					line++;
+				} else if (type == 4 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(sender))) {
+					if (mouseY > y - 14 && mouseY <= y) {
+						this.menuOption[this.menuSize] = "Accept trade @whi@" + sender;
 						this.menuAction[this.menuSize] = 903;
 						this.menuSize++;
 					}
-					var4++;
-				}
-				if ((var6 == 5 || var6 == 6) && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
-					var4++;
-				}
-				if (var6 == 8 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(var8))) {
-					if (arg1 > var7 - 14 && arg1 <= var7) {
-						this.menuOption[this.menuSize] = "Accept duel @whi@" + var8;
+
+					line++;
+				} else if ((type == 5 || type == 6) && this.splitPrivateChat == 0 && this.chatPrivateMode < 2) {
+					line++;
+				} else if (type == 8 && (this.chatTradeMode == 0 || this.chatTradeMode == 1 && this.isFriend(sender))) {
+					if (mouseY > y - 14 && mouseY <= y) {
+						this.menuOption[this.menuSize] = "Accept duel @whi@" + sender;
 						this.menuAction[this.menuSize] = 363;
 						this.menuSize++;
 					}
-					var4++;
+
+					line++;
 				}
 			}
 		}
@@ -3453,155 +3890,165 @@ public class Client extends GameShell {
 			this.menuParamC[this.menuSize] = super.mouseY;
 			this.menuSize++;
 		}
-		int var2 = -1;
-		for (int var3 = 0; var3 < Model.pickedCount; var3++) {
-			int var4 = Model.pickedBitsets[var3];
-			int var5 = var4 & 0x7F;
-			int var6 = var4 >> 7 & 0x7F;
-			int var7 = var4 >> 29 & 0x3;
-			int var8 = var4 >> 14 & 0x7FFF;
-			if (var4 != var2) {
-				var2 = var4;
-				if (var7 == 2 && this.scene.getInfo(this.currentLevel, var5, var6, var4) >= 0) {
-					LocType var9 = LocType.get(var8);
+
+		int lastTypecode = -1;
+		for (int picked = 0; picked < Model.pickedCount; picked++) {
+			int typecode = Model.pickedBitsets[picked];
+			int x = typecode & 0x7F;
+			int z = typecode >> 7 & 0x7F;
+			int entityType = typecode >> 29 & 0x3;
+			int typeId = typecode >> 14 & 0x7FFF;
+
+			if (typecode == lastTypecode) {
+				continue;
+			}
+
+			lastTypecode = typecode;
+
+			if (entityType == 2 && this.scene.getInfo(this.currentLevel, x, z, typecode) >= 0) {
+				LocType loc = LocType.get(typeId);
+
+				if (this.objSelected == 1) {
+					this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @cya@" + loc.name;
+					this.menuAction[this.menuSize] = 450;
+					this.menuParamA[this.menuSize] = typecode;
+					this.menuParamB[this.menuSize] = x;
+					this.menuParamC[this.menuSize] = z;
+					this.menuSize++;
+				} else if (this.spellSelected != 1) {
+					if (loc.op != null) {
+						for (int i = 4; i >= 0; i--) {
+							if (loc.op[i] != null) {
+								this.menuOption[this.menuSize] = loc.op[i] + " @cya@" + loc.name;
+								if (i == 0) {
+									this.menuAction[this.menuSize] = 285;
+								} else if (i == 1) {
+									this.menuAction[this.menuSize] = 504;
+								} else if (i == 2) {
+									this.menuAction[this.menuSize] = 364;
+								} else if (i == 3) {
+									this.menuAction[this.menuSize] = 581;
+								} else if (i == 4) {
+									this.menuAction[this.menuSize] = 1501;
+								}
+
+								this.menuParamA[this.menuSize] = typecode;
+								this.menuParamB[this.menuSize] = x;
+								this.menuParamC[this.menuSize] = z;
+								this.menuSize++;
+							}
+						}
+					}
+
+					this.menuOption[this.menuSize] = "Examine @cya@" + loc.name;
+					this.menuAction[this.menuSize] = 1175;
+					this.menuParamA[this.menuSize] = typecode;
+					this.menuParamB[this.menuSize] = x;
+					this.menuParamC[this.menuSize] = z;
+					this.menuSize++;
+				} else if ((this.activeSpellFlags & 0x4) == 4) {
+					this.menuOption[this.menuSize] = this.spellCaption + " @cya@" + loc.name;
+					this.menuAction[this.menuSize] = 55;
+					this.menuParamA[this.menuSize] = typecode;
+					this.menuParamB[this.menuSize] = x;
+					this.menuParamC[this.menuSize] = z;
+					this.menuSize++;
+				}
+			}
+
+			if (entityType == 1) {
+				ClientNpc npc = this.npcs[typeId];
+
+				if (npc.type.size == 1 && (npc.x & 0x7F) == 64 && (npc.z & 0x7F) == 64) {
+					for (int i = 0; i < this.npcCount; i++) {
+						ClientNpc other = this.npcs[this.npcIds[i]];
+						if (other != null && other != npc && other.type.size == 1 && other.x == npc.x && other.z == npc.z) {
+							this.addNpcOptions(x, this.npcIds[i], other.type, z);
+						}
+					}
+				}
+
+				this.addNpcOptions(x, typeId, npc.type, z);
+			} else if (entityType == 0) {
+				ClientPlayer player = this.players[typeId];
+
+				if ((player.x & 0x7F) == 64 && (player.z & 0x7F) == 64) {
+					for (int i = 0; i < this.npcCount; i++) {
+						ClientNpc other = this.npcs[this.npcIds[i]];
+						if (other != null && other.type.size == 1 && other.x == player.x && other.z == player.z) {
+							this.addNpcOptions(x, this.npcIds[i], other.type, z);
+						}
+					}
+
+					for (int i = 0; i < this.playerCount; i++) {
+						ClientPlayer other = this.players[this.playerIds[i]];
+						if (other != null && other != player && other.x == player.x && other.z == player.z) {
+							this.addPlayerOptions(other, x, this.playerIds[i], z);
+						}
+					}
+				}
+
+				this.addPlayerOptions(player, x, typeId, z);
+			} else if (entityType == 3) {
+				LinkList objs = this.objStacks[this.currentLevel][x][z];
+				if (objs == null) {
+					continue;
+				}
+
+				for (ClientObj obj = (ClientObj) objs.tail(); obj != null; obj = (ClientObj) objs.prev()) {
+					ObjType type = ObjType.get(obj.index);
+
 					if (this.objSelected == 1) {
-						this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @cya@" + var9.name;
-						this.menuAction[this.menuSize] = 450;
-						this.menuParamA[this.menuSize] = var4;
-						this.menuParamB[this.menuSize] = var5;
-						this.menuParamC[this.menuSize] = var6;
+						this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + type.name;
+						this.menuAction[this.menuSize] = 217;
+						this.menuParamA[this.menuSize] = obj.index;
+						this.menuParamB[this.menuSize] = x;
+						this.menuParamC[this.menuSize] = z;
 						this.menuSize++;
 					} else if (this.spellSelected != 1) {
-						if (var9.op != null) {
-							for (int var10 = 4; var10 >= 0; var10--) {
-								if (var9.op[var10] != null) {
-									this.menuOption[this.menuSize] = var9.op[var10] + " @cya@" + var9.name;
-									if (var10 == 0) {
-										this.menuAction[this.menuSize] = 285;
-									}
-									if (var10 == 1) {
-										this.menuAction[this.menuSize] = 504;
-									}
-									if (var10 == 2) {
-										this.menuAction[this.menuSize] = 364;
-									}
-									if (var10 == 3) {
-										this.menuAction[this.menuSize] = 581;
-									}
-									if (var10 == 4) {
-										this.menuAction[this.menuSize] = 1501;
-									}
-									this.menuParamA[this.menuSize] = var4;
-									this.menuParamB[this.menuSize] = var5;
-									this.menuParamC[this.menuSize] = var6;
-									this.menuSize++;
+						for (int i = 4; i >= 0; i--) {
+							if (type.op != null && type.op[i] != null) {
+								this.menuOption[this.menuSize] = type.op[i] + " @lre@" + type.name;
+
+								if (i == 0) {
+									this.menuAction[this.menuSize] = 224;
+								} else if (i == 1) {
+									this.menuAction[this.menuSize] = 993;
+								} else if (i == 2) {
+									this.menuAction[this.menuSize] = 99;
+								} else if (i == 3) {
+									this.menuAction[this.menuSize] = 746;
+								} else if (i == 4) {
+									this.menuAction[this.menuSize] = 877;
 								}
+
+								this.menuParamA[this.menuSize] = obj.index;
+								this.menuParamB[this.menuSize] = x;
+								this.menuParamC[this.menuSize] = z;
+								this.menuSize++;
+							} else if (i == 2) {
+								this.menuOption[this.menuSize] = "Take @lre@" + type.name;
+								this.menuAction[this.menuSize] = 99;
+								this.menuParamA[this.menuSize] = obj.index;
+								this.menuParamB[this.menuSize] = x;
+								this.menuParamC[this.menuSize] = z;
+								this.menuSize++;
 							}
 						}
-						this.menuOption[this.menuSize] = "Examine @cya@" + var9.name;
-						this.menuAction[this.menuSize] = 1175;
-						this.menuParamA[this.menuSize] = var4;
-						this.menuParamB[this.menuSize] = var5;
-						this.menuParamC[this.menuSize] = var6;
+
+						this.menuOption[this.menuSize] = "Examine @lre@" + type.name;
+						this.menuAction[this.menuSize] = 1102;
+						this.menuParamA[this.menuSize] = obj.index;
+						this.menuParamB[this.menuSize] = x;
+						this.menuParamC[this.menuSize] = z;
 						this.menuSize++;
-					} else if ((this.activeSpellFlags & 0x4) == 4) {
-						this.menuOption[this.menuSize] = this.spellCaption + " @cya@" + var9.name;
-						this.menuAction[this.menuSize] = 55;
-						this.menuParamA[this.menuSize] = var4;
-						this.menuParamB[this.menuSize] = var5;
-						this.menuParamC[this.menuSize] = var6;
+					} else if ((this.activeSpellFlags & 0x1) == 1) {
+						this.menuOption[this.menuSize] = this.spellCaption + " @lre@" + type.name;
+						this.menuAction[this.menuSize] = 965;
+						this.menuParamA[this.menuSize] = obj.index;
+						this.menuParamB[this.menuSize] = x;
+						this.menuParamC[this.menuSize] = z;
 						this.menuSize++;
-					}
-				}
-				if (var7 == 1) {
-					ClientNpc var11 = this.npcs[var8];
-					if (var11.type.size == 1 && (var11.x & 0x7F) == 64 && (var11.z & 0x7F) == 64) {
-						for (int var12 = 0; var12 < this.npcCount; var12++) {
-							ClientNpc var13 = this.npcs[this.npcIds[var12]];
-							if (var13 != null && var13 != var11 && var13.type.size == 1 && var13.x == var11.x && var13.z == var11.z) {
-								this.addNpcOptions(var5, this.npcIds[var12], var13.type, var6);
-							}
-						}
-					}
-					this.addNpcOptions(var5, var8, var11.type, var6);
-				}
-				if (var7 == 0) {
-					ClientPlayer var14 = this.players[var8];
-					if ((var14.x & 0x7F) == 64 && (var14.z & 0x7F) == 64) {
-						for (int var15 = 0; var15 < this.npcCount; var15++) {
-							ClientNpc var16 = this.npcs[this.npcIds[var15]];
-							if (var16 != null && var16.type.size == 1 && var16.x == var14.x && var16.z == var14.z) {
-								this.addNpcOptions(var5, this.npcIds[var15], var16.type, var6);
-							}
-						}
-						for (int var17 = 0; var17 < this.playerCount; var17++) {
-							ClientPlayer var18 = this.players[this.playerIds[var17]];
-							if (var18 != null && var18 != var14 && var18.x == var14.x && var18.z == var14.z) {
-								this.addPlayerOptions(var18, var5, this.playerIds[var17], var6);
-							}
-						}
-					}
-					this.addPlayerOptions(var14, var5, var8, var6);
-				}
-				if (var7 == 3) {
-					LinkList var19 = this.objStacks[this.currentLevel][var5][var6];
-					if (var19 != null) {
-						for (ClientObj var20 = (ClientObj) var19.tail(); var20 != null; var20 = (ClientObj) var19.prev()) {
-							ObjType var21 = ObjType.get(var20.index);
-							if (this.objSelected == 1) {
-								this.menuOption[this.menuSize] = "Use " + this.objSelectedName + " with @lre@" + var21.name;
-								this.menuAction[this.menuSize] = 217;
-								this.menuParamA[this.menuSize] = var20.index;
-								this.menuParamB[this.menuSize] = var5;
-								this.menuParamC[this.menuSize] = var6;
-								this.menuSize++;
-							} else if (this.spellSelected != 1) {
-								for (int var22 = 4; var22 >= 0; var22--) {
-									if (var21.op != null && var21.op[var22] != null) {
-										this.menuOption[this.menuSize] = var21.op[var22] + " @lre@" + var21.name;
-										if (var22 == 0) {
-											this.menuAction[this.menuSize] = 224;
-										}
-										if (var22 == 1) {
-											this.menuAction[this.menuSize] = 993;
-										}
-										if (var22 == 2) {
-											this.menuAction[this.menuSize] = 99;
-										}
-										if (var22 == 3) {
-											this.menuAction[this.menuSize] = 746;
-										}
-										if (var22 == 4) {
-											this.menuAction[this.menuSize] = 877;
-										}
-										this.menuParamA[this.menuSize] = var20.index;
-										this.menuParamB[this.menuSize] = var5;
-										this.menuParamC[this.menuSize] = var6;
-										this.menuSize++;
-									} else if (var22 == 2) {
-										this.menuOption[this.menuSize] = "Take @lre@" + var21.name;
-										this.menuAction[this.menuSize] = 99;
-										this.menuParamA[this.menuSize] = var20.index;
-										this.menuParamB[this.menuSize] = var5;
-										this.menuParamC[this.menuSize] = var6;
-										this.menuSize++;
-									}
-								}
-								this.menuOption[this.menuSize] = "Examine @lre@" + var21.name;
-								this.menuAction[this.menuSize] = 1102;
-								this.menuParamA[this.menuSize] = var20.index;
-								this.menuParamB[this.menuSize] = var5;
-								this.menuParamC[this.menuSize] = var6;
-								this.menuSize++;
-							} else if ((this.activeSpellFlags & 0x1) == 1) {
-								this.menuOption[this.menuSize] = this.spellCaption + " @lre@" + var21.name;
-								this.menuAction[this.menuSize] = 965;
-								this.menuParamA[this.menuSize] = var20.index;
-								this.menuParamB[this.menuSize] = var5;
-								this.menuParamC[this.menuSize] = var6;
-								this.menuSize++;
-							}
-						}
 					}
 				}
 			}
@@ -3613,106 +4060,116 @@ public class Client extends GameShell {
 		if (this.objDragArea != 0) {
 			return;
 		}
-		int var2 = super.mouseClickButton;
+
+		int button = super.mouseClickButton;
 		if (this.spellSelected == 1 && super.mouseClickX >= 516 && super.mouseClickY >= 160 && super.mouseClickX <= 765 && super.mouseClickY <= 205) {
-			var2 = 0;
+			button = 0;
 		}
+
 		if (!this.menuVisible) {
-			if (var2 == 1 && this.menuSize > 0) {
-				int var13 = this.menuAction[this.menuSize - 1];
-				if (var13 == 602 || var13 == 596 || var13 == 22 || var13 == 892 || var13 == 415 || var13 == 405 || var13 == 38 || var13 == 422 || var13 == 478 || var13 == 347 || var13 == 188) {
-					int var14 = this.menuParamB[this.menuSize - 1];
-					int var15 = this.menuParamC[this.menuSize - 1];
-					Component var16 = Component.types[var15];
-					if (var16.draggable || var16.swappable) {
+			if (button == 1 && this.menuSize > 0) {
+				int action = this.menuAction[this.menuSize - 1];
+
+				if (
+					action == 602 || action == 596 || action == 22 || action == 892 || action == 415 || action == 405 ||
+					action == 38 || action == 422 || action == 478 || action == 347 || action == 188
+				) {
+					int slot = this.menuParamB[this.menuSize - 1];
+					int comId = this.menuParamC[this.menuSize - 1];
+					Component com = Component.types[comId];
+
+					if (com.draggable || com.swappable) {
 						this.objGrabThreshold = false;
 						this.objDragCycles = 0;
-						this.objDragInterfaceId = var15;
-						this.objDragSlot = var14;
+						this.objDragInterfaceId = comId;
+						this.objDragSlot = slot;
 						this.objDragArea = 2;
 						this.objGrabX = super.mouseClickX;
 						this.objGrabY = super.mouseClickY;
-						if (Component.types[var15].layer == this.viewportInterfaceId) {
+
+						if (Component.types[comId].layer == this.viewportInterfaceId) {
 							this.objDragArea = 1;
-						}
-						if (Component.types[var15].layer == this.chatInterfaceId) {
+						} else if (Component.types[comId].layer == this.chatInterfaceId) {
 							this.objDragArea = 3;
 						}
+
 						return;
 					}
 				}
 			}
-			if (var2 == 1 && (this.oneMouseButton == 1 || this.isAddFriendOption(this.menuSize - 1)) && this.menuSize > 2) {
-				var2 = 2;
+
+			if (button == 1 && (this.oneMouseButton == 1 || this.isAddFriendOption(this.menuSize - 1)) && this.menuSize > 2) {
+				button = 2;
 			}
-			if (var2 == 1 && this.menuSize > 0) {
+
+			if (button == 1 && this.menuSize > 0) {
 				this.useMenuOption(this.menuSize - 1);
+			} else if (button == 2 && this.menuSize > 0) {
+				this.showContextMenu();
 			}
-			if (var2 != 2 || this.menuSize <= 0) {
-				return;
-			}
-			this.showContextMenu();
-			return;
-		}
-		if (var2 != 1) {
-			int var3 = super.mouseX;
-			int var4 = super.mouseY;
-			if (this.menuArea == 0) {
-				var3 -= 4;
-				var4 -= 4;
-			}
-			if (this.menuArea == 1) {
-				var3 -= 553;
-				var4 -= 205;
-			}
-			if (this.menuArea == 2) {
-				var3 -= 17;
-				var4 -= 357;
-			}
-			if (var3 < this.menuX - 10 || var3 > this.menuX + this.menuWidth + 10 || var4 < this.menuY - 10 || var4 > this.menuY + this.menuHeight + 10) {
+		} else {
+			if (button != 1) {
+				int x = super.mouseX;
+				int y = super.mouseY;
+
+				if (this.menuArea == 0) {
+					x -= 4;
+					y -= 4;
+				} else if (this.menuArea == 1) {
+					x -= 553;
+					y -= 205;
+				} else if (this.menuArea == 2) {
+					x -= 17;
+					y -= 357;
+				}
+
+				if (x < this.menuX - 10 || x > this.menuX + this.menuWidth + 10 || y < this.menuY - 10 || y > this.menuY + this.menuHeight + 10) {
+					this.menuVisible = false;
+
+					if (this.menuArea == 1) {
+						this.redrawSidebar = true;
+					} else if (this.menuArea == 2) {
+						this.redrawChatback = true;
+					}
+				}
+			} else {
+				int menuX = this.menuX;
+				int menuY = this.menuY;
+				int menuWidth = this.menuWidth;
+
+				int x = super.mouseClickX;
+				int y = super.mouseClickY;
+
+				if (this.menuArea == 0) {
+					x -= 4;
+					y -= 4;
+				} else if (this.menuArea == 1) {
+					x -= 553;
+					y -= 205;
+				} else if (this.menuArea == 2) {
+					x -= 17;
+					y -= 357;
+				}
+
+				int option = -1;
+				for (int i = 0; i < this.menuSize; i++) {
+					int optionY = menuY + 31 + (this.menuSize - 1 - i) * 15;
+					if (x > menuX && x < menuX + menuWidth && y > optionY - 13 && y < optionY + 3) {
+						option = i;
+					}
+				}
+
+				if (option != -1) {
+					this.useMenuOption(option);
+				}
+
 				this.menuVisible = false;
+
 				if (this.menuArea == 1) {
 					this.redrawSidebar = true;
-				}
-				if (this.menuArea == 2) {
+				} else if (this.menuArea == 2) {
 					this.redrawChatback = true;
 				}
-			}
-		}
-		if (var2 == 1) {
-			int var5 = this.menuX;
-			int var6 = this.menuY;
-			int var7 = this.menuWidth;
-			int var8 = super.mouseClickX;
-			int var9 = super.mouseClickY;
-			if (this.menuArea == 0) {
-				var8 -= 4;
-				var9 -= 4;
-			}
-			if (this.menuArea == 1) {
-				var8 -= 553;
-				var9 -= 205;
-			}
-			if (this.menuArea == 2) {
-				var8 -= 17;
-				var9 -= 357;
-			}
-			int var10 = -1;
-			for (int var11 = 0; var11 < this.menuSize; var11++) {
-				int var12 = var6 + 31 + (this.menuSize - 1 - var11) * 15;
-				if (var8 > var5 && var8 < var5 + var7 && var9 > var12 - 13 && var9 < var12 + 3) {
-					var10 = var11;
-				}
-			}
-			if (var10 != -1) {
-				this.useMenuOption(var10);
-			}
-			this.menuVisible = false;
-			if (this.menuArea == 1) {
-				this.redrawSidebar = true;
-			}
-			if (this.menuArea == 2) {
-				this.redrawChatback = true;
 			}
 		}
 	}
@@ -3722,26 +4179,34 @@ public class Client extends GameShell {
 		if (super.mouseClickButton != 1) {
 			return;
 		}
-		int var2 = super.mouseClickX - 25 - 550;
-		int var3 = super.mouseClickY - 5 - 4;
-		if (var2 < 0 || var3 < 0 || var2 >= 146 || var3 >= 151) {
+
+		int x = super.mouseClickX - 25 - 550;
+		int y = super.mouseClickY - 5 - 4;
+
+		if (x < 0 || y < 0 || x >= 146 || y >= 151) {
 			return;
 		}
-		var2 -= 73;
-		var3 -= 75;
-		int var4 = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
-		int var5 = Pix3D.sinTable[var4];
-		int var6 = Pix3D.cosTable[var4];
-		int var7 = var5 * (this.macroMinimapZoom + 256) >> 8;
-		int var8 = var6 * (this.macroMinimapZoom + 256) >> 8;
-		int var9 = var3 * var7 + var2 * var8 >> 11;
-		int var10 = var3 * var8 - var2 * var7 >> 11;
-		int var11 = localPlayer.x + var9 >> 7;
-		int var12 = localPlayer.z - var10 >> 7;
-		boolean var13 = this.tryMove(0, 0, 1, 0, localPlayer.routeTileZ[0], 0, 0, var11, true, var12, localPlayer.routeTileX[0]);
-		if (var13) {
-			this.out.p1(var2);
-			this.out.p1(var3);
+
+		x -= 73;
+		y -= 75;
+
+		int yaw = this.orbitCameraYaw + this.macroMinimapAngle & 0x7FF;
+		int sinYaw = Pix3D.sinTable[yaw];
+		int cosYaw = Pix3D.cosTable[yaw];
+
+		sinYaw = sinYaw * (this.macroMinimapZoom + 256) >> 8;
+		cosYaw = cosYaw * (this.macroMinimapZoom + 256) >> 8;
+
+		int relX = y * sinYaw + x * cosYaw >> 11;
+		int relY = y * cosYaw - x * sinYaw >> 11;
+
+		int tileX = localPlayer.x + relX >> 7;
+		int tileZ = localPlayer.z - relY >> 7;
+
+		boolean success = this.tryMove(0, 0, 1, 0, localPlayer.routeTileZ[0], 0, 0, tileX, true, tileZ, localPlayer.routeTileX[0]);
+		if (success) {
+			this.out.p1(x);
+			this.out.p1(y);
 			this.out.p2(this.orbitCameraYaw);
 			this.out.p1(57);
 			this.out.p1(this.macroMinimapAngle);
@@ -3759,79 +4224,70 @@ public class Client extends GameShell {
 		if (super.mouseClickButton != 1) {
 			return;
 		}
+
 		if (super.mouseClickX >= 539 && super.mouseClickX <= 573 && super.mouseClickY >= 169 && super.mouseClickY < 205 && this.tabInterfaceId[0] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 0;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 569 && super.mouseClickX <= 599 && super.mouseClickY >= 168 && super.mouseClickY < 205 && this.tabInterfaceId[1] != -1) {
+		} else if (super.mouseClickX >= 569 && super.mouseClickX <= 599 && super.mouseClickY >= 168 && super.mouseClickY < 205 && this.tabInterfaceId[1] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 1;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 597 && super.mouseClickX <= 627 && super.mouseClickY >= 168 && super.mouseClickY < 205 && this.tabInterfaceId[2] != -1) {
+		} else if (super.mouseClickX >= 597 && super.mouseClickX <= 627 && super.mouseClickY >= 168 && super.mouseClickY < 205 && this.tabInterfaceId[2] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 2;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 625 && super.mouseClickX <= 669 && super.mouseClickY >= 168 && super.mouseClickY < 203 && this.tabInterfaceId[3] != -1) {
+		} else if (super.mouseClickX >= 625 && super.mouseClickX <= 669 && super.mouseClickY >= 168 && super.mouseClickY < 203 && this.tabInterfaceId[3] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 3;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 666 && super.mouseClickX <= 696 && super.mouseClickY >= 168 && super.mouseClickY < 205 && this.tabInterfaceId[4] != -1) {
+		} else if (super.mouseClickX >= 666 && super.mouseClickX <= 696 && super.mouseClickY >= 168 && super.mouseClickY < 205 && this.tabInterfaceId[4] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 4;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 694 && super.mouseClickX <= 724 && super.mouseClickY >= 168 && super.mouseClickY < 205 && this.tabInterfaceId[5] != -1) {
+		} else if (super.mouseClickX >= 694 && super.mouseClickX <= 724 && super.mouseClickY >= 168 && super.mouseClickY < 205 && this.tabInterfaceId[5] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 5;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 722 && super.mouseClickX <= 756 && super.mouseClickY >= 169 && super.mouseClickY < 205 && this.tabInterfaceId[6] != -1) {
+		} else if (super.mouseClickX >= 722 && super.mouseClickX <= 756 && super.mouseClickY >= 169 && super.mouseClickY < 205 && this.tabInterfaceId[6] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 6;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 540 && super.mouseClickX <= 574 && super.mouseClickY >= 466 && super.mouseClickY < 502 && this.tabInterfaceId[7] != -1) {
+		} else if (super.mouseClickX >= 540 && super.mouseClickX <= 574 && super.mouseClickY >= 466 && super.mouseClickY < 502 && this.tabInterfaceId[7] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 7;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 572 && super.mouseClickX <= 602 && super.mouseClickY >= 466 && super.mouseClickY < 503 && this.tabInterfaceId[8] != -1) {
+		} else if (super.mouseClickX >= 572 && super.mouseClickX <= 602 && super.mouseClickY >= 466 && super.mouseClickY < 503 && this.tabInterfaceId[8] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 8;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 599 && super.mouseClickX <= 629 && super.mouseClickY >= 466 && super.mouseClickY < 503 && this.tabInterfaceId[9] != -1) {
+		} else if (super.mouseClickX >= 599 && super.mouseClickX <= 629 && super.mouseClickY >= 466 && super.mouseClickY < 503 && this.tabInterfaceId[9] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 9;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 627 && super.mouseClickX <= 671 && super.mouseClickY >= 467 && super.mouseClickY < 502 && this.tabInterfaceId[10] != -1) {
+		} else if (super.mouseClickX >= 627 && super.mouseClickX <= 671 && super.mouseClickY >= 467 && super.mouseClickY < 502 && this.tabInterfaceId[10] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 10;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 669 && super.mouseClickX <= 699 && super.mouseClickY >= 466 && super.mouseClickY < 503 && this.tabInterfaceId[11] != -1) {
+		} else if (super.mouseClickX >= 669 && super.mouseClickX <= 699 && super.mouseClickY >= 466 && super.mouseClickY < 503 && this.tabInterfaceId[11] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 11;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 696 && super.mouseClickX <= 726 && super.mouseClickY >= 466 && super.mouseClickY < 503 && this.tabInterfaceId[12] != -1) {
+		} else if (super.mouseClickX >= 696 && super.mouseClickX <= 726 && super.mouseClickY >= 466 && super.mouseClickY < 503 && this.tabInterfaceId[12] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 12;
 			this.redrawSideicons = true;
-		}
-		if (super.mouseClickX >= 724 && super.mouseClickX <= 758 && super.mouseClickY >= 466 && super.mouseClickY < 502 && this.tabInterfaceId[13] != -1) {
+		} else if (super.mouseClickX >= 724 && super.mouseClickX <= 758 && super.mouseClickY >= 466 && super.mouseClickY < 502 && this.tabInterfaceId[13] != -1) {
 			this.redrawSidebar = true;
 			this.selectedTab = 13;
 			this.redrawSideicons = true;
 		}
+
 		cyclelogic1++;
 		if (cyclelogic1 > 150) {
 			cyclelogic1 = 0;
+
+			// ANTICHEAT_CYCLELOGIC1
 			this.out.pIsaac(136);
 			this.out.p1(43);
 		}
@@ -3842,40 +4298,46 @@ public class Client extends GameShell {
 		if (super.mouseClickButton != 1) {
 			return;
 		}
+
 		if (super.mouseClickX >= 6 && super.mouseClickX <= 106 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
 			this.chatPublicMode = (this.chatPublicMode + 1) % 4;
 			this.redrawPrivacySettings = true;
 			this.redrawChatback = true;
+
+			// CHAT_SETMODE
 			this.out.pIsaac(8);
 			this.out.p1(this.chatPublicMode);
 			this.out.p1(this.chatPrivateMode);
 			this.out.p1(this.chatTradeMode);
-		}
-		if (super.mouseClickX >= 135 && super.mouseClickX <= 235 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
+		} else if (super.mouseClickX >= 135 && super.mouseClickX <= 235 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
 			this.chatPrivateMode = (this.chatPrivateMode + 1) % 3;
 			this.redrawPrivacySettings = true;
 			this.redrawChatback = true;
+
+			// CHAT_SETMODE
 			this.out.pIsaac(8);
 			this.out.p1(this.chatPublicMode);
 			this.out.p1(this.chatPrivateMode);
 			this.out.p1(this.chatTradeMode);
-		}
-		if (super.mouseClickX >= 273 && super.mouseClickX <= 373 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
+		} else if (super.mouseClickX >= 273 && super.mouseClickX <= 373 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
 			this.chatTradeMode = (this.chatTradeMode + 1) % 3;
 			this.redrawPrivacySettings = true;
 			this.redrawChatback = true;
+
+			// CHAT_SETMODE
 			this.out.pIsaac(8);
 			this.out.p1(this.chatPublicMode);
 			this.out.p1(this.chatPrivateMode);
 			this.out.p1(this.chatTradeMode);
-		}
-		if (super.mouseClickX >= 412 && super.mouseClickX <= 512 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
+		} else if (super.mouseClickX >= 412 && super.mouseClickX <= 512 && super.mouseClickY >= 467 && super.mouseClickY <= 499) {
 			this.closeInterfaces();
+
 			this.reportAbuseInput = "";
 			this.reportAbuseMuteOption = false;
-			for (int var2 = 0; var2 < Component.types.length; var2++) {
-				if (Component.types[var2] != null && Component.types[var2].clientCode == 600) {
-					this.reportAbuseInterfaceId = this.viewportInterfaceId = Component.types[var2].layer;
+
+			for (int i = 0; i < Component.types.length; i++) {
+				if (Component.types[i] != null && Component.types[i].clientCode == 600) {
+					this.reportAbuseInterfaceId = this.viewportInterfaceId = Component.types[i].layer;
 					return;
 				}
 			}
@@ -3884,45 +4346,54 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.K(I)V")
 	public void closeInterfaces() {
+		// CLOSE_MODAL
 		this.out.pIsaac(245);
+
 		if (this.sidebarInterfaceId != -1) {
 			this.sidebarInterfaceId = -1;
 			this.redrawSidebar = true;
 			this.pressedContinueOption = false;
 			this.redrawSideicons = true;
 		}
+
 		if (this.chatInterfaceId != -1) {
 			this.chatInterfaceId = -1;
 			this.redrawChatback = true;
 			this.pressedContinueOption = false;
 		}
+
 		this.viewportInterfaceId = -1;
 	}
 
 	@ObfuscatedName("client.T(I)V")
 	public void updateEntityChats() {
-		for (int var2 = -1; var2 < this.playerCount; var2++) {
-			int var3;
-			if (var2 == -1) {
-				var3 = this.LOCAL_PLAYER_INDEX;
+		for (int i = -1; i < this.playerCount; i++) {
+			int index;
+			if (i == -1) {
+				index = this.LOCAL_PLAYER_INDEX;
 			} else {
-				var3 = this.playerIds[var2];
+				index = this.playerIds[i];
 			}
-			ClientPlayer var4 = this.players[var3];
-			if (var4 != null && var4.chatTimer > 0) {
-				var4.chatTimer--;
-				if (var4.chatTimer == 0) {
-					var4.chatMessage = null;
+
+			ClientPlayer player = this.players[index];
+			if (player != null && player.chatTimer > 0) {
+				player.chatTimer--;
+
+				if (player.chatTimer == 0) {
+					player.chatMessage = null;
 				}
 			}
 		}
-		for (int var5 = 0; var5 < this.npcCount; var5++) {
-			int var6 = this.npcIds[var5];
-			ClientNpc var7 = this.npcs[var6];
-			if (var7 != null && var7.chatTimer > 0) {
-				var7.chatTimer--;
-				if (var7.chatTimer == 0) {
-					var7.chatMessage = null;
+
+		for (int i = 0; i < this.npcCount; i++) {
+			int index = this.npcIds[i];
+
+			ClientNpc npc = this.npcs[index];
+			if (npc != null && npc.chatTimer > 0) {
+				npc.chatTimer--;
+
+				if (npc.chatTimer == 0) {
+					npc.chatMessage = null;
 				}
 			}
 		}
@@ -3931,18 +4402,22 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.R(I)V")
 	public void updateOrbitCamera() {
 		try {
-			int var2 = localPlayer.x + this.macroCameraX;
-			int var3 = localPlayer.z + this.macroCameraZ;
-			if (this.orbitCameraX - var2 < -500 || this.orbitCameraX - var2 > 500 || this.orbitCameraZ - var3 < -500 || this.orbitCameraZ - var3 > 500) {
-				this.orbitCameraX = var2;
-				this.orbitCameraZ = var3;
+			int orbitX = localPlayer.x + this.macroCameraX;
+			int orbitZ = localPlayer.z + this.macroCameraZ;
+
+			if (this.orbitCameraX - orbitX < -500 || this.orbitCameraX - orbitX > 500 || this.orbitCameraZ - orbitZ < -500 || this.orbitCameraZ - orbitZ > 500) {
+				this.orbitCameraX = orbitX;
+				this.orbitCameraZ = orbitZ;
 			}
-			if (this.orbitCameraX != var2) {
-				this.orbitCameraX += (var2 - this.orbitCameraX) / 16;
+
+			if (this.orbitCameraX != orbitX) {
+				this.orbitCameraX += (orbitX - this.orbitCameraX) / 16;
 			}
-			if (this.orbitCameraZ != var3) {
-				this.orbitCameraZ += (var3 - this.orbitCameraZ) / 16;
+
+			if (this.orbitCameraZ != orbitZ) {
+				this.orbitCameraZ += (orbitZ - this.orbitCameraZ) / 16;
 			}
+
 			if (super.actionKey[1] == 1) {
 				this.orbitCameraYawVelocity += (-24 - this.orbitCameraYawVelocity) / 2;
 			} else if (super.actionKey[2] == 1) {
@@ -3950,6 +4425,7 @@ public class Client extends GameShell {
 			} else {
 				this.orbitCameraYawVelocity /= 2;
 			}
+
 			if (super.actionKey[3] == 1) {
 				this.orbitCameraPitchVelocity += (12 - this.orbitCameraPitchVelocity) / 2;
 			} else if (super.actionKey[4] == 1) {
@@ -3957,45 +4433,50 @@ public class Client extends GameShell {
 			} else {
 				this.orbitCameraPitchVelocity /= 2;
 			}
+
 			this.orbitCameraYaw = this.orbitCameraYaw + this.orbitCameraYawVelocity / 2 & 0x7FF;
+
 			this.orbitCameraPitch += this.orbitCameraPitchVelocity / 2;
 			if (this.orbitCameraPitch < 128) {
 				this.orbitCameraPitch = 128;
-			}
-			if (this.orbitCameraPitch > 383) {
+			} else if (this.orbitCameraPitch > 383) {
 				this.orbitCameraPitch = 383;
 			}
-			int var4 = this.orbitCameraX >> 7;
-			int var5 = this.orbitCameraZ >> 7;
-			int var6 = this.getHeightmapY(this.orbitCameraZ, this.currentLevel, this.orbitCameraX);
-			int var7 = 0;
-			if (var4 > 3 && var5 > 3 && var4 < 100 && var5 < 100) {
-				for (int var8 = var4 - 4; var8 <= var4 + 4; var8++) {
-					for (int var9 = var5 - 4; var9 <= var5 + 4; var9++) {
-						int var10 = this.currentLevel;
-						if (var10 < 3 && (this.levelTileFlags[1][var8][var9] & 0x2) == 2) {
-							var10++;
+
+			int orbitTileX = this.orbitCameraX >> 7;
+			int orbitTileZ = this.orbitCameraZ >> 7;
+			int orbitY = this.getHeightmapY(this.orbitCameraZ, this.currentLevel, this.orbitCameraX);
+			int maxY = 0;
+
+			if (orbitTileX > 3 && orbitTileZ > 3 && orbitTileX < 100 && orbitTileZ < 100) {
+				for (int x = orbitTileX - 4; x <= orbitTileX + 4; x++) {
+					for (int z = orbitTileZ - 4; z <= orbitTileZ + 4; z++) {
+						int level = this.currentLevel;
+						if (level < 3 && (this.levelTileFlags[1][x][z] & 0x2) == 2) {
+							level++;
 						}
-						int var11 = var6 - this.levelHeightmap[var10][var8][var9];
-						if (var11 > var7) {
-							var7 = var11;
+
+						int y = orbitY - this.levelHeightmap[level][x][z];
+						if (y > maxY) {
+							maxY = y;
 						}
 					}
 				}
 			}
-			int var12 = var7 * 192;
-			if (var12 > 98048) {
-				var12 = 98048;
+
+			int clamp = maxY * 192;
+			if (clamp > 98048) {
+				clamp = 98048;
+			} else if (clamp < 32768) {
+				clamp = 32768;
 			}
-			if (var12 < 32768) {
-				var12 = 32768;
+
+			if (clamp > this.cameraPitchClamp) {
+				this.cameraPitchClamp += (clamp - this.cameraPitchClamp) / 24;
+			} else if (clamp < this.cameraPitchClamp) {
+				this.cameraPitchClamp += (clamp - this.cameraPitchClamp) / 80;
 			}
-			if (var12 > this.cameraPitchClamp) {
-				this.cameraPitchClamp += (var12 - this.cameraPitchClamp) / 24;
-			} else if (var12 < this.cameraPitchClamp) {
-				this.cameraPitchClamp += (var12 - this.cameraPitchClamp) / 80;
-			}
-		} catch (Exception var13) {
+		} catch (Exception ex) {
 			signlink.reporterror("glfc_ex " + localPlayer.x + "," + localPlayer.z + "," + this.orbitCameraX + "," + this.orbitCameraZ + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ + "," + this.sceneBaseTileX + "," + this.sceneBaseTileZ);
 			throw new RuntimeException("eek");
 		}
@@ -4003,284 +4484,298 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.l(I)V")
 	public void applyCutscene() {
-		int var2 = this.cutsceneSrcLocalTileX * 128 + 64;
-		int var3 = this.cutsceneSrcLocalTileZ * 128 + 64;
-		int var4 = this.getHeightmapY(var3, this.currentLevel, var2) - this.cutsceneSrcHeight;
-		if (this.cameraX < var2) {
-			this.cameraX += this.cutsceneMoveSpeed + (var2 - this.cameraX) * this.cutsceneMoveAcceleration / 1000;
-			if (this.cameraX > var2) {
-				this.cameraX = var2;
+		int x = this.cutsceneSrcLocalTileX * 128 + 64;
+		int z = this.cutsceneSrcLocalTileZ * 128 + 64;
+		int y = this.getHeightmapY(z, this.currentLevel, x) - this.cutsceneSrcHeight;
+
+		if (this.cameraX < x) {
+			this.cameraX += this.cutsceneMoveSpeed + (x - this.cameraX) * this.cutsceneMoveAcceleration / 1000;
+			if (this.cameraX > x) {
+				this.cameraX = x;
+			}
+		} else if (this.cameraX > x) {
+			this.cameraX -= this.cutsceneMoveSpeed + (this.cameraX - x) * this.cutsceneMoveAcceleration / 1000;
+			if (this.cameraX < x) {
+				this.cameraX = x;
 			}
 		}
-		if (this.cameraX > var2) {
-			this.cameraX -= this.cutsceneMoveSpeed + (this.cameraX - var2) * this.cutsceneMoveAcceleration / 1000;
-			if (this.cameraX < var2) {
-				this.cameraX = var2;
+
+		if (this.cameraY < y) {
+			this.cameraY += this.cutsceneMoveSpeed + (y - this.cameraY) * this.cutsceneMoveAcceleration / 1000;
+			if (this.cameraY > y) {
+				this.cameraY = y;
+			}
+		} else if (this.cameraY > y) {
+			this.cameraY -= this.cutsceneMoveSpeed + (this.cameraY - y) * this.cutsceneMoveAcceleration / 1000;
+			if (this.cameraY < y) {
+				this.cameraY = y;
 			}
 		}
-		if (this.cameraY < var4) {
-			this.cameraY += this.cutsceneMoveSpeed + (var4 - this.cameraY) * this.cutsceneMoveAcceleration / 1000;
-			if (this.cameraY > var4) {
-				this.cameraY = var4;
+
+		if (this.cameraZ < z) {
+			this.cameraZ += this.cutsceneMoveSpeed + (z - this.cameraZ) * this.cutsceneMoveAcceleration / 1000;
+			if (this.cameraZ > z) {
+				this.cameraZ = z;
+			}
+		} else if (this.cameraZ > z) {
+			this.cameraZ -= this.cutsceneMoveSpeed + (this.cameraZ - z) * this.cutsceneMoveAcceleration / 1000;
+			if (this.cameraZ < z) {
+				this.cameraZ = z;
 			}
 		}
-		if (this.cameraY > var4) {
-			this.cameraY -= this.cutsceneMoveSpeed + (this.cameraY - var4) * this.cutsceneMoveAcceleration / 1000;
-			if (this.cameraY < var4) {
-				this.cameraY = var4;
+
+		x = this.cutsceneDstLocalTileX * 128 + 64;
+		z = this.cutsceneDstLocalTileZ * 128 + 64;
+		y = this.getHeightmapY(z, this.currentLevel, x) - this.cutsceneDstHeight;
+
+		int dx = x - this.cameraX;
+		int dy = y - this.cameraY;
+		int dz = z - this.cameraZ;
+
+		int distance = (int) Math.sqrt(dx * dx + dz * dz);
+		int pitch = (int) (Math.atan2(dy, distance) * 325.949D) & 0x7FF;
+		int yaw = (int) (Math.atan2(dx, dz) * -325.949D) & 0x7FF;
+
+		if (pitch < 128) {
+			pitch = 128;
+		} else if (pitch > 383) {
+			pitch = 383;
+		}
+
+		if (this.cameraPitch < pitch) {
+			this.cameraPitch += this.cutsceneRotateSpeed + (pitch - this.cameraPitch) * this.cutsceneRotateAcceleration / 1000;
+			if (this.cameraPitch > pitch) {
+				this.cameraPitch = pitch;
+			}
+		} else if (this.cameraPitch > pitch) {
+			this.cameraPitch -= this.cutsceneRotateSpeed + (this.cameraPitch - pitch) * this.cutsceneRotateAcceleration / 1000;
+			if (this.cameraPitch < pitch) {
+				this.cameraPitch = pitch;
 			}
 		}
-		if (this.cameraZ < var3) {
-			this.cameraZ += this.cutsceneMoveSpeed + (var3 - this.cameraZ) * this.cutsceneMoveAcceleration / 1000;
-			if (this.cameraZ > var3) {
-				this.cameraZ = var3;
-			}
+
+		int deltaYaw = yaw - this.cameraYaw;
+		if (deltaYaw > 1024) {
+			deltaYaw -= 2048;
+		} else if (deltaYaw < -1024) {
+			deltaYaw += 2048;
 		}
-		if (this.cameraZ > var3) {
-			this.cameraZ -= this.cutsceneMoveSpeed + (this.cameraZ - var3) * this.cutsceneMoveAcceleration / 1000;
-			if (this.cameraZ < var3) {
-				this.cameraZ = var3;
-			}
-		}
-		int var5 = this.cutsceneDstLocalTileX * 128 + 64;
-		int var6 = this.cutsceneDstLocalTileZ * 128 + 64;
-		int var7 = this.getHeightmapY(var6, this.currentLevel, var5) - this.cutsceneDstHeight;
-		int var8 = var5 - this.cameraX;
-		int var9 = var7 - this.cameraY;
-		int var10 = var6 - this.cameraZ;
-		int var11 = (int) Math.sqrt((double) (var8 * var8 + var10 * var10));
-		int var12 = (int) (Math.atan2((double) var9, (double) var11) * 325.949D) & 0x7FF;
-		int var13 = (int) (Math.atan2((double) var8, (double) var10) * -325.949D) & 0x7FF;
-		if (var12 < 128) {
-			var12 = 128;
-		}
-		if (var12 > 383) {
-			var12 = 383;
-		}
-		if (this.cameraPitch < var12) {
-			this.cameraPitch += this.cutsceneRotateSpeed + (var12 - this.cameraPitch) * this.cutsceneRotateAcceleration / 1000;
-			if (this.cameraPitch > var12) {
-				this.cameraPitch = var12;
-			}
-		}
-		if (this.cameraPitch > var12) {
-			this.cameraPitch -= this.cutsceneRotateSpeed + (this.cameraPitch - var12) * this.cutsceneRotateAcceleration / 1000;
-			if (this.cameraPitch < var12) {
-				this.cameraPitch = var12;
-			}
-		}
-		int var14 = var13 - this.cameraYaw;
-		if (var14 > 1024) {
-			var14 -= 2048;
-		}
-		if (var14 < -1024) {
-			var14 += 2048;
-		}
-		if (var14 > 0) {
-			this.cameraYaw += this.cutsceneRotateSpeed + var14 * this.cutsceneRotateAcceleration / 1000;
+
+		if (deltaYaw > 0) {
+			this.cameraYaw += this.cutsceneRotateSpeed + deltaYaw * this.cutsceneRotateAcceleration / 1000;
+			this.cameraYaw &= 0x7FF;
+		} else if (deltaYaw < 0) {
+			this.cameraYaw -= this.cutsceneRotateSpeed + -deltaYaw * this.cutsceneRotateAcceleration / 1000;
 			this.cameraYaw &= 0x7FF;
 		}
-		if (var14 < 0) {
-			this.cameraYaw -= this.cutsceneRotateSpeed + -var14 * this.cutsceneRotateAcceleration / 1000;
-			this.cameraYaw &= 0x7FF;
+
+		int tmp = yaw - this.cameraYaw;
+		if (tmp > 1024) {
+			tmp -= 2048;
+		} else if (tmp < -1024) {
+			tmp += 2048;
 		}
-		int var15 = var13 - this.cameraYaw;
-		if (var15 > 1024) {
-			var15 -= 2048;
-		}
-		if (var15 < -1024) {
-			var15 += 2048;
-		}
-		if (var15 < 0 && var14 > 0 || var15 > 0 && var14 < 0) {
-			this.cameraYaw = var13;
+
+		if (tmp < 0 && deltaYaw > 0 || tmp > 0 && deltaYaw < 0) {
+			this.cameraYaw = yaw;
 		}
 	}
 
 	@ObfuscatedName("client.Z(I)V")
 	public void handleInputKey() {
 		while (true) {
-			int var3;
+			int key;
 			do {
 				while (true) {
-					var3 = this.pollKey();
-					if (var3 == -1) {
+					key = this.pollKey();
+					if (key == -1) {
 						return;
 					}
+
 					if (this.viewportInterfaceId != -1 && this.viewportInterfaceId == this.reportAbuseInterfaceId) {
-						if (var3 == 8 && this.reportAbuseInput.length() > 0) {
+						if (key == 8 && this.reportAbuseInput.length() > 0) {
 							this.reportAbuseInput = this.reportAbuseInput.substring(0, this.reportAbuseInput.length() - 1);
 						}
+
 						break;
 					}
+
 					if (this.showSocialInput) {
-						if (var3 >= 32 && var3 <= 122 && this.socialInput.length() < 80) {
-							this.socialInput = this.socialInput + (char) var3;
+						if (key >= 32 && key <= 122 && this.socialInput.length() < 80) {
+							this.socialInput = this.socialInput + (char) key;
 							this.redrawChatback = true;
 						}
-						if (var3 == 8 && this.socialInput.length() > 0) {
+
+						if (key == 8 && this.socialInput.length() > 0) {
 							this.socialInput = this.socialInput.substring(0, this.socialInput.length() - 1);
 							this.redrawChatback = true;
 						}
-						if (var3 == 13 || var3 == 10) {
+
+						if (key == 13 || key == 10) {
 							this.showSocialInput = false;
 							this.redrawChatback = true;
+
 							if (this.socialInputType == 1) {
-								long var4 = JString.toBase37(this.socialInput);
-								this.addFriend(var4);
-							}
-							if (this.socialInputType == 2 && this.friendCount > 0) {
-								long var6 = JString.toBase37(this.socialInput);
-								this.removeFriend(var6);
-							}
-							if (this.socialInputType == 3 && this.socialInput.length() > 0) {
+								long username = JString.toBase37(this.socialInput);
+								this.addFriend(username);
+							} else if (this.socialInputType == 2 && this.friendCount > 0) {
+								long username = JString.toBase37(this.socialInput);
+								this.removeFriend(username);
+							} else if (this.socialInputType == 3 && this.socialInput.length() > 0) {
+								// MESSAGE_PRIVATE
 								this.out.pIsaac(99);
 								this.out.p1(0);
-								int var8 = this.out.pos;
+								int start = this.out.pos;
+
 								this.out.p8(this.socialName37);
 								WordPack.pack(this.out, this.socialInput);
-								this.out.psize1(this.out.pos - var8);
+								this.out.psize1(this.out.pos - start);
+
 								this.socialInput = JString.toSentenceCase(this.socialInput);
 								this.socialInput = WordFilter.filter(this.socialInput);
 								this.addMessage(JString.formatDisplayName(JString.fromBase37(this.socialName37)), 6, this.socialInput);
+
 								if (this.chatPrivateMode == 2) {
 									this.chatPrivateMode = 1;
 									this.redrawPrivacySettings = true;
+
+									// CHAT_SETMODE
 									this.out.pIsaac(8);
 									this.out.p1(this.chatPublicMode);
 									this.out.p1(this.chatPrivateMode);
 									this.out.p1(this.chatTradeMode);
 								}
-							}
-							if (this.socialInputType == 4 && this.ignoreCount < 100) {
-								long var9 = JString.toBase37(this.socialInput);
-								this.addIgnore(var9);
-							}
-							if (this.socialInputType == 5 && this.ignoreCount > 0) {
-								long var11 = JString.toBase37(this.socialInput);
-								this.removeIgnore(var11);
+							} else if (this.socialInputType == 4 && this.ignoreCount < 100) {
+								long username = JString.toBase37(this.socialInput);
+								this.addIgnore(username);
+							} else if (this.socialInputType == 5 && this.ignoreCount > 0) {
+								long username = JString.toBase37(this.socialInput);
+								this.removeIgnore(username);
 							}
 						}
 					} else if (this.chatbackInputOpen) {
-						if (var3 >= 48 && var3 <= 57 && this.chatbackInput.length() < 10) {
-							this.chatbackInput = this.chatbackInput + (char) var3;
+						if (key >= 48 && key <= 57 && this.chatbackInput.length() < 10) {
+							this.chatbackInput = this.chatbackInput + (char) key;
 							this.redrawChatback = true;
 						}
-						if (var3 == 8 && this.chatbackInput.length() > 0) {
+
+						if (key == 8 && this.chatbackInput.length() > 0) {
 							this.chatbackInput = this.chatbackInput.substring(0, this.chatbackInput.length() - 1);
 							this.redrawChatback = true;
 						}
-						if (var3 == 13 || var3 == 10) {
+
+						if (key == 13 || key == 10) {
 							if (this.chatbackInput.length() > 0) {
-								int var13 = 0;
+								int value = 0;
 								try {
-									var13 = Integer.parseInt(this.chatbackInput);
-								} catch (Exception var18) {
+									value = Integer.parseInt(this.chatbackInput);
+								} catch (Exception ignore) {
 								}
+
+								// RESUME_P_COUNTDIALOG
 								this.out.pIsaac(241);
-								this.out.p4(var13);
+								this.out.p4(value);
 							}
+
 							this.chatbackInputOpen = false;
 							this.redrawChatback = true;
 						}
 					} else if (this.chatInterfaceId == -1) {
-						if (var3 >= 32 && var3 <= 122 && this.chatTyped.length() < 80) {
-							this.chatTyped = this.chatTyped + (char) var3;
+						if (key >= 32 && key <= 122 && this.chatTyped.length() < 80) {
+							this.chatTyped = this.chatTyped + (char) key;
 							this.redrawChatback = true;
 						}
-						if (var3 == 8 && this.chatTyped.length() > 0) {
+
+						if (key == 8 && this.chatTyped.length() > 0) {
 							this.chatTyped = this.chatTyped.substring(0, this.chatTyped.length() - 1);
 							this.redrawChatback = true;
 						}
-						if ((var3 == 13 || var3 == 10) && this.chatTyped.length() > 0) {
+
+						if ((key == 13 || key == 10) && this.chatTyped.length() > 0) {
 							if (this.staffmodlevel == 2) {
 								if (this.chatTyped.equals("::clientdrop")) {
 									this.tryReconnect();
-								}
-								if (this.chatTyped.equals("::lag")) {
+								} else if (this.chatTyped.equals("::lag")) {
 									this.lag();
-								}
-								if (this.chatTyped.equals("::prefetchmusic")) {
-									for (int var14 = 0; var14 < this.onDemand.getFileCount(2); var14++) {
-										this.onDemand.prefetchPriority(var14, 2, (byte) 1);
+								} else if (this.chatTyped.equals("::prefetchmusic")) {
+									for (int i = 0; i < this.onDemand.getFileCount(2); i++) {
+										this.onDemand.prefetchPriority(i, 2, (byte) 1);
 									}
 								}
 							}
+
 							if (this.chatTyped.startsWith("::")) {
+								// CLIENT_CHEAT
 								this.out.pIsaac(11);
 								this.out.p1(this.chatTyped.length() - 1);
 								this.out.pjstr(this.chatTyped.substring(2));
 							} else {
-								byte var15 = 0;
+								byte colour = 0;
 								if (this.chatTyped.startsWith("yellow:")) {
-									var15 = 0;
+									colour = 0;
 									this.chatTyped = this.chatTyped.substring(7);
-								}
-								if (this.chatTyped.startsWith("red:")) {
-									var15 = 1;
+								} else if (this.chatTyped.startsWith("red:")) {
+									colour = 1;
 									this.chatTyped = this.chatTyped.substring(4);
-								}
-								if (this.chatTyped.startsWith("green:")) {
-									var15 = 2;
+								} else if (this.chatTyped.startsWith("green:")) {
+									colour = 2;
 									this.chatTyped = this.chatTyped.substring(6);
-								}
-								if (this.chatTyped.startsWith("cyan:")) {
-									var15 = 3;
+								} else if (this.chatTyped.startsWith("cyan:")) {
+									colour = 3;
 									this.chatTyped = this.chatTyped.substring(5);
-								}
-								if (this.chatTyped.startsWith("purple:")) {
-									var15 = 4;
+								} else if (this.chatTyped.startsWith("purple:")) {
+									colour = 4;
 									this.chatTyped = this.chatTyped.substring(7);
-								}
-								if (this.chatTyped.startsWith("white:")) {
-									var15 = 5;
+								} else if (this.chatTyped.startsWith("white:")) {
+									colour = 5;
+									this.chatTyped = this.chatTyped.substring(6);
+								} else if (this.chatTyped.startsWith("flash1:")) {
+									colour = 6;
+									this.chatTyped = this.chatTyped.substring(7);
+								} else if (this.chatTyped.startsWith("flash2:")) {
+									colour = 7;
+									this.chatTyped = this.chatTyped.substring(7);
+								} else if (this.chatTyped.startsWith("flash3:")) {
+									colour = 8;
+									this.chatTyped = this.chatTyped.substring(7);
+								} else if (this.chatTyped.startsWith("glow1:")) {
+									colour = 9;
+									this.chatTyped = this.chatTyped.substring(6);
+								} else if (this.chatTyped.startsWith("glow2:")) {
+									colour = 10;
+									this.chatTyped = this.chatTyped.substring(6);
+								} else if (this.chatTyped.startsWith("glow3:")) {
+									colour = 11;
 									this.chatTyped = this.chatTyped.substring(6);
 								}
-								if (this.chatTyped.startsWith("flash1:")) {
-									var15 = 6;
-									this.chatTyped = this.chatTyped.substring(7);
-								}
-								if (this.chatTyped.startsWith("flash2:")) {
-									var15 = 7;
-									this.chatTyped = this.chatTyped.substring(7);
-								}
-								if (this.chatTyped.startsWith("flash3:")) {
-									var15 = 8;
-									this.chatTyped = this.chatTyped.substring(7);
-								}
-								if (this.chatTyped.startsWith("glow1:")) {
-									var15 = 9;
-									this.chatTyped = this.chatTyped.substring(6);
-								}
-								if (this.chatTyped.startsWith("glow2:")) {
-									var15 = 10;
-									this.chatTyped = this.chatTyped.substring(6);
-								}
-								if (this.chatTyped.startsWith("glow3:")) {
-									var15 = 11;
-									this.chatTyped = this.chatTyped.substring(6);
-								}
-								byte var16 = 0;
+
+								byte effect = 0;
 								if (this.chatTyped.startsWith("wave:")) {
-									var16 = 1;
+									effect = 1;
 									this.chatTyped = this.chatTyped.substring(5);
-								}
-								if (this.chatTyped.startsWith("scroll:")) {
-									var16 = 2;
+								} else if (this.chatTyped.startsWith("scroll:")) {
+									effect = 2;
 									this.chatTyped = this.chatTyped.substring(7);
 								}
+
+								// MESSAGE_PUBLIC
 								this.out.pIsaac(78);
 								this.out.p1(0);
-								int var17 = this.out.pos;
-								this.out.p1(var15);
-								this.out.p1(var16);
+								int start = this.out.pos;
+
+								this.out.p1(colour);
+								this.out.p1(effect);
 								WordPack.pack(this.out, this.chatTyped);
-								this.out.psize1(this.out.pos - var17);
+								this.out.psize1(this.out.pos - start);
+
 								this.chatTyped = JString.toSentenceCase(this.chatTyped);
 								this.chatTyped = WordFilter.filter(this.chatTyped);
+
 								localPlayer.chatMessage = this.chatTyped;
-								localPlayer.chatColour = var15;
-								localPlayer.chatEffect = var16;
+								localPlayer.chatColour = colour;
+								localPlayer.chatEffect = effect;
 								localPlayer.chatTimer = 150;
+
 								if (this.staffmodlevel == 2) {
 									this.addMessage("@cr2@" + localPlayer.name, 2, localPlayer.chatMessage);
 								} else if (this.staffmodlevel == 1) {
@@ -4288,9 +4783,12 @@ public class Client extends GameShell {
 								} else {
 									this.addMessage(localPlayer.name, 2, localPlayer.chatMessage);
 								}
+
 								if (this.chatPublicMode == 2) {
 									this.chatPublicMode = 3;
 									this.redrawPrivacySettings = true;
+
+									// CHAT_SETMODE
 									this.out.pIsaac(8);
 									this.out.p1(this.chatPublicMode);
 									this.out.p1(this.chatPrivateMode);
@@ -4302,9 +4800,10 @@ public class Client extends GameShell {
 						}
 					}
 				}
-			} while ((var3 < 97 || var3 > 122) && (var3 < 65 || var3 > 90) && (var3 < 48 || var3 > 57) && var3 != 32);
+			} while ((key < 97 || key > 122) && (key < 65 || key > 90) && (key < 48 || key > 57) && key != 32);
+
 			if (this.reportAbuseInput.length() < 12) {
-				this.reportAbuseInput = this.reportAbuseInput + (char) var3;
+				this.reportAbuseInput = this.reportAbuseInput + (char) key;
 			}
 		}
 	}
@@ -4328,21 +4827,25 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.N(I)V")
 	public void updatePlayers() {
-		for (int var2 = -1; var2 < this.playerCount; var2++) {
-			int var3;
-			if (var2 == -1) {
-				var3 = this.LOCAL_PLAYER_INDEX;
+		for (int i = -1; i < this.playerCount; i++) {
+			int index;
+			if (i == -1) {
+				index = this.LOCAL_PLAYER_INDEX;
 			} else {
-				var3 = this.playerIds[var2];
+				index = this.playerIds[i];
 			}
-			ClientPlayer var4 = this.players[var3];
-			if (var4 != null) {
-				this.updateEntity(1, var4);
+
+			ClientPlayer player = this.players[index];
+			if (player != null) {
+				this.updateEntity(1, player);
 			}
 		}
+
 		cyclelogic6++;
 		if (cyclelogic6 > 1406) {
 			cyclelogic6 = 0;
+
+			// ANTICHEAT_CYCLELOGIC6
 			this.out.pIsaac(112);
 			this.out.p1(0);
 			int var5 = this.out.pos;
@@ -4368,322 +4871,365 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.j(I)V")
 	public void updateNpcs() {
-		for (int var2 = 0; var2 < this.npcCount; var2++) {
-			int var3 = this.npcIds[var2];
-			ClientNpc var4 = this.npcs[var3];
-			if (var4 != null) {
-				this.updateEntity(var4.type.size, var4);
+		for (int i = 0; i < this.npcCount; i++) {
+			int index = this.npcIds[i];
+			ClientNpc npc = this.npcs[index];
+
+			if (npc != null) {
+				this.updateEntity(npc.type.size, npc);
 			}
 		}
 	}
 
 	@ObfuscatedName("client.a(BILz;)V")
-	public void updateEntity(int arg1, ClientEntity arg2) {
-		if (arg2.x < 128 || arg2.z < 128 || arg2.x >= 13184 || arg2.z >= 13184) {
-			arg2.primarySeqId = -1;
-			arg2.spotanimId = -1;
-			arg2.forceMoveEndCycle = 0;
-			arg2.forceMoveStartCycle = 0;
-			arg2.x = arg2.routeTileX[0] * 128 + arg2.size * 64;
-			arg2.z = arg2.routeTileZ[0] * 128 + arg2.size * 64;
-			arg2.clearRoute();
+	public void updateEntity(int size, ClientEntity e) {
+		if (e.x < 128 || e.z < 128 || e.x >= 13184 || e.z >= 13184) {
+			e.primarySeqId = -1;
+			e.spotanimId = -1;
+			e.forceMoveEndCycle = 0;
+			e.forceMoveStartCycle = 0;
+			e.x = e.routeTileX[0] * 128 + e.size * 64;
+			e.z = e.routeTileZ[0] * 128 + e.size * 64;
+			e.clearRoute();
 		}
-		if (arg2 == localPlayer && (arg2.x < 1536 || arg2.z < 1536 || arg2.x >= 11776 || arg2.z >= 11776)) {
-			arg2.primarySeqId = -1;
-			arg2.spotanimId = -1;
-			arg2.forceMoveEndCycle = 0;
-			arg2.forceMoveStartCycle = 0;
-			arg2.x = arg2.routeTileX[0] * 128 + arg2.size * 64;
-			arg2.z = arg2.routeTileZ[0] * 128 + arg2.size * 64;
-			arg2.clearRoute();
+
+		if (e == localPlayer && (e.x < 1536 || e.z < 1536 || e.x >= 11776 || e.z >= 11776)) {
+			e.primarySeqId = -1;
+			e.spotanimId = -1;
+			e.forceMoveEndCycle = 0;
+			e.forceMoveStartCycle = 0;
+			e.x = e.routeTileX[0] * 128 + e.size * 64;
+			e.z = e.routeTileZ[0] * 128 + e.size * 64;
+			e.clearRoute();
 		}
-		if (arg2.forceMoveEndCycle > loopCycle) {
-			this.updateForceMovement(arg2);
-		} else if (arg2.forceMoveStartCycle >= loopCycle) {
-			this.startForceMovement(arg2);
+
+		if (e.forceMoveEndCycle > loopCycle) {
+			this.updateForceMovement(e);
+		} else if (e.forceMoveStartCycle >= loopCycle) {
+			this.startForceMovement(e);
 		} else {
-			this.updateMovement(arg2);
+			this.updateMovement(e);
 		}
-		this.updateFacingDirection(arg2);
-		this.updateSequences(arg2);
+
+		this.updateFacingDirection(e);
+		this.updateSequences(e);
 	}
 
 	@ObfuscatedName("client.a(ILz;)V")
-	public void updateForceMovement(ClientEntity arg1) {
-		int var3 = arg1.forceMoveEndCycle - loopCycle;
-		int var4 = arg1.forceMoveStartSceneTileX * 128 + arg1.size * 64;
-		int var5 = arg1.forceMoveStartSceneTileZ * 128 + arg1.size * 64;
-		arg1.x += (var4 - arg1.x) / var3;
-		arg1.z += (var5 - arg1.z) / var3;
-		arg1.seqDelayMove = 0;
-		if (arg1.forceMoveFaceDirection == 0) {
-			arg1.dstYaw = 1024;
-		}
-		if (arg1.forceMoveFaceDirection == 1) {
-			arg1.dstYaw = 1536;
-		}
-		if (arg1.forceMoveFaceDirection == 2) {
-			arg1.dstYaw = 0;
-		}
-		if (arg1.forceMoveFaceDirection == 3) {
-			arg1.dstYaw = 512;
+	public void updateForceMovement(ClientEntity e) {
+		int delta = e.forceMoveEndCycle - loopCycle;
+		int dstX = e.forceMoveStartSceneTileX * 128 + e.size * 64;
+		int dstZ = e.forceMoveStartSceneTileZ * 128 + e.size * 64;
+
+		e.x += (dstX - e.x) / delta;
+		e.z += (dstZ - e.z) / delta;
+
+		e.seqDelayMove = 0;
+
+		if (e.forceMoveFaceDirection == 0) {
+			e.dstYaw = 1024;
+		} else if (e.forceMoveFaceDirection == 1) {
+			e.dstYaw = 1536;
+		} else if (e.forceMoveFaceDirection == 2) {
+			e.dstYaw = 0;
+		} else if (e.forceMoveFaceDirection == 3) {
+			e.dstYaw = 512;
 		}
 	}
 
 	@ObfuscatedName("client.a(BLz;)V")
-	public void startForceMovement(ClientEntity arg1) {
-		if (arg1.forceMoveStartCycle == loopCycle || arg1.primarySeqId == -1 || arg1.primarySeqDelay != 0 || arg1.primarySeqCycle + 1 > SeqType.types[arg1.primarySeqId].getFrameLength(arg1.primarySeqFrame)) {
-			int var3 = arg1.forceMoveStartCycle - arg1.forceMoveEndCycle;
-			int var4 = loopCycle - arg1.forceMoveEndCycle;
-			int var5 = arg1.forceMoveStartSceneTileX * 128 + arg1.size * 64;
-			int var6 = arg1.forceMoveStartSceneTileZ * 128 + arg1.size * 64;
-			int var7 = arg1.forceMoveEndSceneTileX * 128 + arg1.size * 64;
-			int var8 = arg1.forceMoveEndSceneTileZ * 128 + arg1.size * 64;
-			arg1.x = (var5 * (var3 - var4) + var7 * var4) / var3;
-			arg1.z = (var6 * (var3 - var4) + var8 * var4) / var3;
+	public void startForceMovement(ClientEntity e) {
+		if (e.forceMoveStartCycle == loopCycle || e.primarySeqId == -1 || e.primarySeqDelay != 0 || e.primarySeqCycle + 1 > SeqType.types[e.primarySeqId].getFrameLength(e.primarySeqFrame)) {
+			int duration = e.forceMoveStartCycle - e.forceMoveEndCycle;
+			int delta = loopCycle - e.forceMoveEndCycle;
+			int dx0 = e.forceMoveStartSceneTileX * 128 + e.size * 64;
+			int dz0 = e.forceMoveStartSceneTileZ * 128 + e.size * 64;
+			int dx1 = e.forceMoveEndSceneTileX * 128 + e.size * 64;
+			int dz1 = e.forceMoveEndSceneTileZ * 128 + e.size * 64;
+			e.x = (dx0 * (duration - delta) + dx1 * delta) / duration;
+			e.z = (dz0 * (duration - delta) + dz1 * delta) / duration;
 		}
-		arg1.seqDelayMove = 0;
-		if (arg1.forceMoveFaceDirection == 0) {
-			arg1.dstYaw = 1024;
+
+		e.seqDelayMove = 0;
+
+		if (e.forceMoveFaceDirection == 0) {
+			e.dstYaw = 1024;
+		} else if (e.forceMoveFaceDirection == 1) {
+			e.dstYaw = 1536;
+		} else if (e.forceMoveFaceDirection == 2) {
+			e.dstYaw = 0;
+		} else if (e.forceMoveFaceDirection == 3) {
+			e.dstYaw = 512;
 		}
-		if (arg1.forceMoveFaceDirection == 1) {
-			arg1.dstYaw = 1536;
-		}
-		if (arg1.forceMoveFaceDirection == 2) {
-			arg1.dstYaw = 0;
-		}
-		if (arg1.forceMoveFaceDirection == 3) {
-			arg1.dstYaw = 512;
-		}
-		arg1.yaw = arg1.dstYaw;
+
+		e.yaw = e.dstYaw;
 	}
 
 	@ObfuscatedName("client.b(ILz;)V")
-	public void updateMovement(ClientEntity arg1) {
-		arg1.secondarySeqId = arg1.readyanim;
-		if (arg1.routeLength == 0) {
-			arg1.seqDelayMove = 0;
+	public void updateMovement(ClientEntity e) {
+		e.secondarySeqId = e.readyanim;
+
+		if (e.routeLength == 0) {
+			e.seqDelayMove = 0;
 			return;
 		}
-		if (arg1.primarySeqId != -1 && arg1.primarySeqDelay == 0) {
-			SeqType var3 = SeqType.types[arg1.primarySeqId];
-			if (arg1.preanimRouteLength > 0 && var3.preanim_move == 0) {
-				arg1.seqDelayMove++;
+
+		if (e.primarySeqId != -1 && e.primarySeqDelay == 0) {
+			SeqType seq = SeqType.types[e.primarySeqId];
+
+			if (e.preanimRouteLength > 0 && seq.preanim_move == 0) {
+				e.seqDelayMove++;
 				return;
 			}
-			if (arg1.preanimRouteLength <= 0 && var3.postanim_move == 0) {
-				arg1.seqDelayMove++;
+
+			if (e.preanimRouteLength <= 0 && seq.postanim_move == 0) {
+				e.seqDelayMove++;
 				return;
 			}
 		}
-		int var4 = arg1.x;
-		int var5 = arg1.z;
-		int var6 = arg1.routeTileX[arg1.routeLength - 1] * 128 + arg1.size * 64;
-		int var7 = arg1.routeTileZ[arg1.routeLength - 1] * 128 + arg1.size * 64;
-		if (var6 - var4 > 256 || var6 - var4 < -256 || var7 - var5 > 256 || var7 - var5 < -256) {
-			arg1.x = var6;
-			arg1.z = var7;
+
+		int x = e.x;
+		int z = e.z;
+		int dstX = e.routeTileX[e.routeLength - 1] * 128 + e.size * 64;
+		int dstZ = e.routeTileZ[e.routeLength - 1] * 128 + e.size * 64;
+
+		if (dstX - x > 256 || dstX - x < -256 || dstZ - z > 256 || dstZ - z < -256) {
+			e.x = dstX;
+			e.z = dstZ;
 			return;
 		}
-		if (var4 < var6) {
-			if (var5 < var7) {
-				arg1.dstYaw = 1280;
-			} else if (var5 > var7) {
-				arg1.dstYaw = 1792;
+
+		if (x < dstX) {
+			if (z < dstZ) {
+				e.dstYaw = 1280;
+			} else if (z > dstZ) {
+				e.dstYaw = 1792;
 			} else {
-				arg1.dstYaw = 1536;
+				e.dstYaw = 1536;
 			}
-		} else if (var4 > var6) {
-			if (var5 < var7) {
-				arg1.dstYaw = 768;
-			} else if (var5 > var7) {
-				arg1.dstYaw = 256;
+		} else if (x > dstX) {
+			if (z < dstZ) {
+				e.dstYaw = 768;
+			} else if (z > dstZ) {
+				e.dstYaw = 256;
 			} else {
-				arg1.dstYaw = 512;
+				e.dstYaw = 512;
 			}
-		} else if (var5 < var7) {
-			arg1.dstYaw = 1024;
+		} else if (z < dstZ) {
+			e.dstYaw = 1024;
 		} else {
-			arg1.dstYaw = 0;
+			e.dstYaw = 0;
 		}
-		int var9 = arg1.dstYaw - arg1.yaw & 0x7FF;
-		if (var9 > 1024) {
-			var9 -= 2048;
+
+		int deltaYaw = e.dstYaw - e.yaw & 0x7FF;
+		if (deltaYaw > 1024) {
+			deltaYaw -= 2048;
 		}
-		int var10 = arg1.walkanim_b;
-		if (var9 >= -256 && var9 <= 256) {
-			var10 = arg1.walkanim;
-		} else if (var9 >= 256 && var9 < 768) {
-			var10 = arg1.walkanim_r;
-		} else if (var9 >= -768 && var9 <= -256) {
-			var10 = arg1.walkanim_l;
+
+		int seqId = e.walkanim_b;
+		if (deltaYaw >= -256 && deltaYaw <= 256) {
+			seqId = e.walkanim;
+		} else if (deltaYaw >= 256 && deltaYaw < 768) {
+			seqId = e.walkanim_r;
+		} else if (deltaYaw >= -768 && deltaYaw <= -256) {
+			seqId = e.walkanim_l;
 		}
-		if (var10 == -1) {
-			var10 = arg1.walkanim;
+
+		if (seqId == -1) {
+			seqId = e.walkanim;
 		}
-		arg1.secondarySeqId = var10;
-		int var11 = 4;
-		if (arg1.yaw != arg1.dstYaw && arg1.targetId == -1) {
-			var11 = 2;
+
+		e.secondarySeqId = seqId;
+
+		int moveSpeed = 4;
+		if (e.yaw != e.dstYaw && e.targetId == -1) {
+			moveSpeed = 2;
 		}
-		if (arg1.routeLength > 2) {
-			var11 = 6;
+		if (e.routeLength > 2) {
+			moveSpeed = 6;
 		}
-		if (arg1.routeLength > 3) {
-			var11 = 8;
+		if (e.routeLength > 3) {
+			moveSpeed = 8;
 		}
-		if (arg1.seqDelayMove > 0 && arg1.routeLength > 1) {
-			var11 = 8;
-			arg1.seqDelayMove--;
+		if (e.seqDelayMove > 0 && e.routeLength > 1) {
+			moveSpeed = 8;
+			e.seqDelayMove--;
 		}
-		if (arg1.routeRun[arg1.routeLength - 1]) {
-			var11 <<= 0x1;
+		if (e.routeRun[e.routeLength - 1]) {
+			moveSpeed <<= 0x1;
 		}
-		if (var11 >= 8 && arg1.secondarySeqId == arg1.walkanim && arg1.runanim != -1) {
-			arg1.secondarySeqId = arg1.runanim;
+
+		if (moveSpeed >= 8 && e.secondarySeqId == e.walkanim && e.runanim != -1) {
+			e.secondarySeqId = e.runanim;
 		}
-		if (var4 < var6) {
-			arg1.x += var11;
-			if (arg1.x > var6) {
-				arg1.x = var6;
+
+		if (x < dstX) {
+			e.x += moveSpeed;
+			if (e.x > dstX) {
+				e.x = dstX;
 			}
-		} else if (var4 > var6) {
-			arg1.x -= var11;
-			if (arg1.x < var6) {
-				arg1.x = var6;
-			}
-		}
-		if (var5 < var7) {
-			arg1.z += var11;
-			if (arg1.z > var7) {
-				arg1.z = var7;
-			}
-		} else if (var5 > var7) {
-			arg1.z -= var11;
-			if (arg1.z < var7) {
-				arg1.z = var7;
+		} else if (x > dstX) {
+			e.x -= moveSpeed;
+			if (e.x < dstX) {
+				e.x = dstX;
 			}
 		}
-		if (arg1.x == var6 && arg1.z == var7) {
-			arg1.routeLength--;
-			if (arg1.preanimRouteLength > 0) {
-				arg1.preanimRouteLength--;
+		if (z < dstZ) {
+			e.z += moveSpeed;
+			if (e.z > dstZ) {
+				e.z = dstZ;
+			}
+		} else if (z > dstZ) {
+			e.z -= moveSpeed;
+			if (e.z < dstZ) {
+				e.z = dstZ;
+			}
+		}
+
+		if (e.x == dstX && e.z == dstZ) {
+			e.routeLength--;
+
+			if (e.preanimRouteLength > 0) {
+				e.preanimRouteLength--;
 			}
 		}
 	}
 
 	@ObfuscatedName("client.a(Lz;B)V")
-	public void updateFacingDirection(ClientEntity arg0) {
-		if (arg0.targetId != -1 && arg0.targetId < 32768) {
-			ClientNpc var4 = this.npcs[arg0.targetId];
-			if (var4 != null) {
-				int var5 = arg0.x - var4.x;
-				int var6 = arg0.z - var4.z;
-				if (var5 != 0 || var6 != 0) {
-					arg0.dstYaw = (int) (Math.atan2((double) var5, (double) var6) * 325.949D) & 0x7FF;
+	public void updateFacingDirection(ClientEntity e) {
+		if (e.targetId != -1 && e.targetId < 32768) {
+			ClientNpc npc = this.npcs[e.targetId];
+			if (npc != null) {
+				int dstX = e.x - npc.x;
+				int dstZ = e.z - npc.z;
+
+				if (dstX != 0 || dstZ != 0) {
+					e.dstYaw = (int) (Math.atan2(dstX, dstZ) * 325.949D) & 0x7FF;
 				}
 			}
 		}
-		if (arg0.targetId >= 32768) {
-			int var7 = arg0.targetId - 32768;
-			if (var7 == this.localPid) {
-				var7 = this.LOCAL_PLAYER_INDEX;
+		if (e.targetId >= 32768) {
+			int index = e.targetId - 32768;
+			if (index == this.localPid) {
+				index = this.LOCAL_PLAYER_INDEX;
 			}
-			ClientPlayer var8 = this.players[var7];
-			if (var8 != null) {
-				int var9 = arg0.x - var8.x;
-				int var10 = arg0.z - var8.z;
-				if (var9 != 0 || var10 != 0) {
-					arg0.dstYaw = (int) (Math.atan2((double) var9, (double) var10) * 325.949D) & 0x7FF;
+
+			ClientPlayer player = this.players[index];
+			if (player != null) {
+				int dstX = e.x - player.x;
+				int dstZ = e.z - player.z;
+
+				if (dstX != 0 || dstZ != 0) {
+					e.dstYaw = (int) (Math.atan2(dstX, dstZ) * 325.949D) & 0x7FF;
 				}
 			}
 		}
-		if ((arg0.targetTileX != 0 || arg0.targetTileZ != 0) && (arg0.routeLength == 0 || arg0.seqDelayMove > 0)) {
-			int var11 = arg0.x - (arg0.targetTileX - this.sceneBaseTileX - this.sceneBaseTileX) * 64;
-			int var12 = arg0.z - (arg0.targetTileZ - this.sceneBaseTileZ - this.sceneBaseTileZ) * 64;
-			if (var11 != 0 || var12 != 0) {
-				arg0.dstYaw = (int) (Math.atan2((double) var11, (double) var12) * 325.949D) & 0x7FF;
+
+		if ((e.targetTileX != 0 || e.targetTileZ != 0) && (e.routeLength == 0 || e.seqDelayMove > 0)) {
+			int dstX = e.x - (e.targetTileX - this.sceneBaseTileX - this.sceneBaseTileX) * 64;
+			int dstZ = e.z - (e.targetTileZ - this.sceneBaseTileZ - this.sceneBaseTileZ) * 64;
+
+			if (dstX != 0 || dstZ != 0) {
+				e.dstYaw = (int) (Math.atan2(dstX, dstZ) * 325.949D) & 0x7FF;
 			}
-			arg0.targetTileX = 0;
-			arg0.targetTileZ = 0;
+
+			e.targetTileX = 0;
+			e.targetTileZ = 0;
 		}
-		int var13 = arg0.dstYaw - arg0.yaw & 0x7FF;
-		if (var13 != 0) {
-			if (var13 < 32 || var13 > 2016) {
-				arg0.yaw = arg0.dstYaw;
-			} else if (var13 > 1024) {
-				arg0.yaw -= 32;
+
+		int remainingYaw = e.dstYaw - e.yaw & 0x7FF;
+		if (remainingYaw != 0) {
+			if (remainingYaw < 32 || remainingYaw > 2016) {
+				e.yaw = e.dstYaw;
+			} else if (remainingYaw > 1024) {
+				e.yaw -= 32;
 			} else {
-				arg0.yaw += 32;
+				e.yaw += 32;
 			}
-			arg0.yaw &= 0x7FF;
-			if (arg0.secondarySeqId == arg0.readyanim && arg0.yaw != arg0.dstYaw) {
-				if (arg0.turnanim != -1) {
-					arg0.secondarySeqId = arg0.turnanim;
+			e.yaw &= 0x7FF;
+
+			if (e.secondarySeqId == e.readyanim && e.yaw != e.dstYaw) {
+				if (e.turnanim != -1) {
+					e.secondarySeqId = e.turnanim;
 				} else {
-					arg0.secondarySeqId = arg0.walkanim;
+					e.secondarySeqId = e.walkanim;
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("client.a(Lz;I)V")
-	public void updateSequences(ClientEntity arg0) {
-		arg0.needsForwardDrawPadding = false;
-		if (arg0.secondarySeqId != -1) {
-			SeqType var3 = SeqType.types[arg0.secondarySeqId];
-			arg0.secondarySeqCycle++;
-			if (arg0.secondarySeqFrame < var3.frameCount && arg0.secondarySeqCycle > var3.getFrameLength(arg0.secondarySeqFrame)) {
-				arg0.secondarySeqCycle = 0;
-				arg0.secondarySeqFrame++;
+	public void updateSequences(ClientEntity e) {
+		e.needsForwardDrawPadding = false;
+
+		if (e.secondarySeqId != -1) {
+			SeqType seq = SeqType.types[e.secondarySeqId];
+			e.secondarySeqCycle++;
+
+			if (e.secondarySeqFrame < seq.frameCount && e.secondarySeqCycle > seq.getFrameLength(e.secondarySeqFrame)) {
+				e.secondarySeqCycle = 0;
+				e.secondarySeqFrame++;
 			}
-			if (arg0.secondarySeqFrame >= var3.frameCount) {
-				arg0.secondarySeqCycle = 0;
-				arg0.secondarySeqFrame = 0;
-			}
-		}
-		if (arg0.spotanimId != -1 && loopCycle >= arg0.spotanimLastCycle) {
-			if (arg0.spotanimFrame < 0) {
-				arg0.spotanimFrame = 0;
-			}
-			SeqType var4 = SpotAnimType.types[arg0.spotanimId].seq;
-			arg0.spotanimCycle++;
-			while (arg0.spotanimFrame < var4.frameCount && arg0.spotanimCycle > var4.getFrameLength(arg0.spotanimFrame)) {
-				arg0.spotanimCycle -= var4.getFrameLength(arg0.spotanimFrame);
-				arg0.spotanimFrame++;
-			}
-			if (arg0.spotanimFrame >= var4.frameCount && (arg0.spotanimFrame < 0 || arg0.spotanimFrame >= var4.frameCount)) {
-				arg0.spotanimId = -1;
+
+			if (e.secondarySeqFrame >= seq.frameCount) {
+				e.secondarySeqCycle = 0;
+				e.secondarySeqFrame = 0;
 			}
 		}
-		if (arg0.primarySeqId != -1 && arg0.primarySeqDelay <= 1) {
-			SeqType var5 = SeqType.types[arg0.primarySeqId];
-			if (var5.preanim_move == 1 && arg0.preanimRouteLength > 0 && arg0.forceMoveEndCycle <= loopCycle && arg0.forceMoveStartCycle < loopCycle) {
-				arg0.primarySeqDelay = 1;
+
+		if (e.spotanimId != -1 && loopCycle >= e.spotanimLastCycle) {
+			if (e.spotanimFrame < 0) {
+				e.spotanimFrame = 0;
+			}
+
+			SeqType seq = SpotAnimType.types[e.spotanimId].seq;
+			e.spotanimCycle++;
+
+			while (e.spotanimFrame < seq.frameCount && e.spotanimCycle > seq.getFrameLength(e.spotanimFrame)) {
+				e.spotanimCycle -= seq.getFrameLength(e.spotanimFrame);
+				e.spotanimFrame++;
+			}
+
+			if (e.spotanimFrame >= seq.frameCount && (e.spotanimFrame < 0 || e.spotanimFrame >= seq.frameCount)) {
+				e.spotanimId = -1;
+			}
+		}
+
+		if (e.primarySeqId != -1 && e.primarySeqDelay <= 1) {
+			SeqType seq = SeqType.types[e.primarySeqId];
+			if (seq.preanim_move == 1 && e.preanimRouteLength > 0 && e.forceMoveEndCycle <= loopCycle && e.forceMoveStartCycle < loopCycle) {
+				e.primarySeqDelay = 1;
 				return;
 			}
 		}
-		if (arg0.primarySeqId != -1 && arg0.primarySeqDelay == 0) {
-			SeqType var6 = SeqType.types[arg0.primarySeqId];
-			arg0.primarySeqCycle++;
-			while (arg0.primarySeqFrame < var6.frameCount && arg0.primarySeqCycle > var6.getFrameLength(arg0.primarySeqFrame)) {
-				arg0.primarySeqCycle -= var6.getFrameLength(arg0.primarySeqFrame);
-				arg0.primarySeqFrame++;
+
+		if (e.primarySeqId != -1 && e.primarySeqDelay == 0) {
+			SeqType seq = SeqType.types[e.primarySeqId];
+			e.primarySeqCycle++;
+
+			while (e.primarySeqFrame < seq.frameCount && e.primarySeqCycle > seq.getFrameLength(e.primarySeqFrame)) {
+				e.primarySeqCycle -= seq.getFrameLength(e.primarySeqFrame);
+				e.primarySeqFrame++;
 			}
-			if (arg0.primarySeqFrame >= var6.frameCount) {
-				arg0.primarySeqFrame -= var6.loops;
-				arg0.primarySeqLoop++;
-				if (arg0.primarySeqLoop >= var6.maxloops) {
-					arg0.primarySeqId = -1;
+
+			if (e.primarySeqFrame >= seq.frameCount) {
+				e.primarySeqFrame -= seq.loops;
+				e.primarySeqLoop++;
+
+				if (e.primarySeqLoop >= seq.maxloops) {
+					e.primarySeqId = -1;
 				}
-				if (arg0.primarySeqFrame < 0 || arg0.primarySeqFrame >= var6.frameCount) {
-					arg0.primarySeqId = -1;
+
+				if (e.primarySeqFrame < 0 || e.primarySeqFrame >= seq.frameCount) {
+					e.primarySeqId = -1;
 				}
 			}
-			arg0.needsForwardDrawPadding = var6.stretches;
+
+			e.needsForwardDrawPadding = seq.stretches;
 		}
-		if (arg0.primarySeqDelay > 0) {
-			arg0.primarySeqDelay--;
+
+		if (e.primarySeqDelay > 0) {
+			e.primarySeqDelay--;
 		}
 	}
 
@@ -4692,6 +5238,7 @@ public class Client extends GameShell {
 		if (this.imageTitle2 != null) {
 			return;
 		}
+
 		super.drawArea = null;
 		this.areaChatback = null;
 		this.areaMapback = null;
@@ -4700,83 +5247,116 @@ public class Client extends GameShell {
 		this.areaBackbase1 = null;
 		this.areaBackbase2 = null;
 		this.areaBackhmid1 = null;
+
 		this.imageTitle0 = new PixMap(265, this.getBaseComponent(), 128);
 		Pix2D.cls();
+
 		this.imageTitle1 = new PixMap(265, this.getBaseComponent(), 128);
 		Pix2D.cls();
+
 		this.imageTitle2 = new PixMap(171, this.getBaseComponent(), 509);
 		Pix2D.cls();
+
 		this.imageTitle3 = new PixMap(132, this.getBaseComponent(), 360);
 		Pix2D.cls();
+
 		this.imageTitle4 = new PixMap(200, this.getBaseComponent(), 360);
 		Pix2D.cls();
+
 		this.imageTitle5 = new PixMap(238, this.getBaseComponent(), 202);
 		Pix2D.cls();
+
 		this.imageTitle6 = new PixMap(238, this.getBaseComponent(), 203);
 		Pix2D.cls();
+
 		this.imageTitle7 = new PixMap(94, this.getBaseComponent(), 74);
 		Pix2D.cls();
+
 		this.imageTitle8 = new PixMap(94, this.getBaseComponent(), 75);
 		Pix2D.cls();
+
 		if (this.jagTitle != null) {
 			this.loadTitleBackground();
 			this.loadTitleImages();
 		}
+
 		this.redrawFrame = true;
 	}
 
 	@ObfuscatedName("client.h(B)V")
 	public void loadTitleBackground() {
-		byte[] var2 = this.jagTitle.read("title.dat", null);
-		Pix32 var3 = new Pix32(var2, this);
+		byte[] src = this.jagTitle.read("title.dat", null);
+		Pix32 background = new Pix32(src, this);
+
 		this.imageTitle0.bind();
-		var3.quickPlotSprite(0, 0);
+		background.quickPlotSprite(0, 0);
+
 		this.imageTitle1.bind();
-		var3.quickPlotSprite(-637, 0);
+		background.quickPlotSprite(-637, 0);
+
 		this.imageTitle2.bind();
-		var3.quickPlotSprite(-128, 0);
+		background.quickPlotSprite(-128, 0);
+
 		this.imageTitle3.bind();
-		var3.quickPlotSprite(-202, -371);
+		background.quickPlotSprite(-202, -371);
+
 		this.imageTitle4.bind();
-		var3.quickPlotSprite(-202, -171);
+		background.quickPlotSprite(-202, -171);
+
 		this.imageTitle5.bind();
-		var3.quickPlotSprite(0, -265);
+		background.quickPlotSprite(0, -265);
+
 		this.imageTitle6.bind();
-		var3.quickPlotSprite(-562, -265);
+		background.quickPlotSprite(-562, -265);
+
 		this.imageTitle7.bind();
-		var3.quickPlotSprite(-128, -171);
+		background.quickPlotSprite(-128, -171);
+
 		this.imageTitle8.bind();
-		var3.quickPlotSprite(-562, -171);
-		int[] var4 = new int[var3.wi];
-		for (int var5 = 0; var5 < var3.hi; var5++) {
-			for (int var6 = 0; var6 < var3.wi; var6++) {
-				var4[var6] = var3.pixels[var3.wi - var6 - 1 + var3.wi * var5];
+		background.quickPlotSprite(-562, -171);
+
+		int[] pixels = new int[background.wi];
+		for (int y = 0; y < background.hi; y++) {
+			for (int x = 0; x < background.wi; x++) {
+				pixels[x] = background.pixels[background.wi - x - 1 + background.wi * y];
 			}
-			for (int var7 = 0; var7 < var3.wi; var7++) {
-				var3.pixels[var7 + var3.wi * var5] = var4[var7];
+
+			for (int x = 0; x < background.wi; x++) {
+				background.pixels[x + background.wi * y] = pixels[x];
 			}
 		}
+
 		this.imageTitle0.bind();
-		var3.quickPlotSprite(382, 0);
+		background.quickPlotSprite(382, 0);
+
 		this.imageTitle1.bind();
-		var3.quickPlotSprite(-255, 0);
+		background.quickPlotSprite(-255, 0);
+
 		this.imageTitle2.bind();
-		var3.quickPlotSprite(254, 0);
+		background.quickPlotSprite(254, 0);
+
 		this.imageTitle3.bind();
-		var3.quickPlotSprite(180, -371);
+		background.quickPlotSprite(180, -371);
+
 		this.imageTitle4.bind();
-		var3.quickPlotSprite(180, -171);
+		background.quickPlotSprite(180, -171);
+
 		this.imageTitle5.bind();
-		var3.quickPlotSprite(382, -265);
+		background.quickPlotSprite(382, -265);
+
 		this.imageTitle6.bind();
-		var3.quickPlotSprite(-180, -265);
+		background.quickPlotSprite(-180, -265);
+
 		this.imageTitle7.bind();
-		var3.quickPlotSprite(254, -171);
+		background.quickPlotSprite(254, -171);
+
 		this.imageTitle8.bind();
-		var3.quickPlotSprite(-180, -171);
-		Pix32 var8 = new Pix32(this.jagTitle, "logo", 0);
+		background.quickPlotSprite(-180, -171);
+
+		Pix32 logo = new Pix32(this.jagTitle, "logo", 0);
 		this.imageTitle2.bind();
-		var8.plotSprite(382 - var8.wi / 2 - 128, 18);
+		logo.plotSprite(382 - logo.wi / 2 - 128, 18);
+
 		Object var9 = null;
 		Object var10 = null;
 		Object var11 = null;
@@ -4787,64 +5367,72 @@ public class Client extends GameShell {
 	public void loadTitleImages() {
 		this.imageTitlebox = new Pix8(this.jagTitle, "titlebox", 0);
 		this.imageTitlebutton = new Pix8(this.jagTitle, "titlebutton", 0);
+
 		this.imageRunes = new Pix8[12];
-		for (int var2 = 0; var2 < 12; var2++) {
-			this.imageRunes[var2] = new Pix8(this.jagTitle, "runes", var2);
+		for (int i = 0; i < 12; i++) {
+			this.imageRunes[i] = new Pix8(this.jagTitle, "runes", i);
 		}
+
 		this.imageFlamesLeft = new Pix32(128, 265);
 		this.imageFlamesRight = new Pix32(128, 265);
-		for (int var3 = 0; var3 < 33920; var3++) {
-			this.imageFlamesLeft.pixels[var3] = this.imageTitle0.data[var3];
+		for (int i = 0; i < 33920; i++) {
+			this.imageFlamesLeft.pixels[i] = this.imageTitle0.data[i];
 		}
-		for (int var4 = 0; var4 < 33920; var4++) {
-			this.imageFlamesRight.pixels[var4] = this.imageTitle1.data[var4];
+		for (int i = 0; i < 33920; i++) {
+			this.imageFlamesRight.pixels[i] = this.imageTitle1.data[i];
 		}
+
 		this.flameGradient0 = new int[256];
-		for (int var5 = 0; var5 < 64; var5++) {
-			this.flameGradient0[var5] = var5 * 262144;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient0[i] = i * 262144;
 		}
-		for (int var6 = 0; var6 < 64; var6++) {
-			this.flameGradient0[var6 + 64] = var6 * 1024 + 16711680;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient0[i + 64] = i * 1024 + 16711680;
 		}
-		for (int var7 = 0; var7 < 64; var7++) {
-			this.flameGradient0[var7 + 128] = var7 * 4 + 16776960;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient0[i + 128] = i * 4 + 16776960;
 		}
-		for (int var8 = 0; var8 < 64; var8++) {
-			this.flameGradient0[var8 + 192] = 16777215;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient0[i + 192] = 16777215;
 		}
+
 		this.flameGradient1 = new int[256];
-		for (int var9 = 0; var9 < 64; var9++) {
-			this.flameGradient1[var9] = var9 * 1024;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient1[i] = i * 1024;
 		}
-		for (int var10 = 0; var10 < 64; var10++) {
-			this.flameGradient1[var10 + 64] = var10 * 4 + 65280;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient1[i + 64] = i * 4 + 65280;
 		}
-		for (int var11 = 0; var11 < 64; var11++) {
-			this.flameGradient1[var11 + 128] = var11 * 262144 + 65535;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient1[i + 128] = i * 262144 + 65535;
 		}
-		for (int var12 = 0; var12 < 64; var12++) {
-			this.flameGradient1[var12 + 192] = 16777215;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient1[i + 192] = 16777215;
 		}
+
 		this.flameGradient2 = new int[256];
-		for (int var13 = 0; var13 < 64; var13++) {
-			this.flameGradient2[var13] = var13 * 4;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient2[i] = i * 4;
 		}
-		for (int var14 = 0; var14 < 64; var14++) {
-			this.flameGradient2[var14 + 64] = var14 * 262144 + 255;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient2[i + 64] = i * 262144 + 255;
 		}
-		for (int var15 = 0; var15 < 64; var15++) {
-			this.flameGradient2[var15 + 128] = var15 * 1024 + 16711935;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient2[i + 128] = i * 1024 + 16711935;
 		}
-		for (int var16 = 0; var16 < 64; var16++) {
-			this.flameGradient2[var16 + 192] = 16777215;
+		for (int i = 0; i < 64; i++) {
+			this.flameGradient2[i + 192] = 16777215;
 		}
+
 		this.flameGradient = new int[256];
 		this.flameBuffer0 = new int[32768];
 		this.flameBuffer1 = new int[32768];
 		this.updateFlameBuffer(null);
 		this.flameBuffer2 = new int[32768];
 		this.flameBuffer3 = new int[32768];
+
 		this.drawProgress("Connecting to fileserver", 10);
+
 		if (!this.flameActive) {
 			this.flamesThread = true;
 			this.flameActive = true;
@@ -4855,63 +5443,82 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.d(B)V")
 	public void drawTitle() {
 		this.loadTitle();
+
 		this.imageTitle4.bind();
 		this.imageTitlebox.plotSprite(0, 0);
-		short var4 = 360;
-		short var5 = 200;
+
+		short w = 360;
+		short h = 200;
+
 		if (this.titleScreenState == 0) {
-			int var6 = var5 / 2 + 80;
-			this.fontPlain11.centreStringTag(true, var6, 7711145, var4 / 2, this.onDemand.message);
-			int var7 = var5 / 2 - 20;
-			this.fontBold12.centreStringTag(true, var7, 16776960, var4 / 2, "Welcome to RuneScape");
-			int var18 = var7 + 30;
-			int var8 = var4 / 2 - 80;
-			int var9 = var5 / 2 + 20;
-			this.imageTitlebutton.plotSprite(var8 - 73, var9 - 20);
-			this.fontBold12.centreStringTag(true, var9 + 5, 16777215, var8, "New user");
-			int var10 = var4 / 2 + 80;
-			this.imageTitlebutton.plotSprite(var10 - 73, var9 - 20);
-			this.fontBold12.centreStringTag(true, var9 + 5, 16777215, var10, "Existing User");
-		}
-		if (this.titleScreenState == 2) {
-			int var11 = var5 / 2 - 40;
+			int y = h / 2 + 80;
+			this.fontPlain11.centreStringTag(true, y, 7711145, w / 2, this.onDemand.message);
+
+			y = h / 2 - 20;
+			this.fontBold12.centreStringTag(true, y, 16776960, w / 2, "Welcome to RuneScape");
+
+			y = y + 30;
+
+			int x = w / 2 - 80;
+			y = h / 2 + 20;
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(true, y + 5, 16777215, x, "New user");
+
+			x = w / 2 + 80;
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(true, y + 5, 16777215, x, "Existing User");
+		} else if (this.titleScreenState == 2) {
+			int y = h / 2 - 40;
 			if (this.loginMessage0.length() > 0) {
-				this.fontBold12.centreStringTag(true, var11 - 15, 16776960, var4 / 2, this.loginMessage0);
-				this.fontBold12.centreStringTag(true, var11, 16776960, var4 / 2, this.loginMessage1);
-				var11 += 30;
+				this.fontBold12.centreStringTag(true, y - 15, 16776960, w / 2, this.loginMessage0);
+				this.fontBold12.centreStringTag(true, y, 16776960, w / 2, this.loginMessage1);
+				y += 30;
 			} else {
-				this.fontBold12.centreStringTag(true, var11 - 7, 16776960, var4 / 2, this.loginMessage1);
-				var11 += 30;
+				this.fontBold12.centreStringTag(true, y - 7, 16776960, w / 2, this.loginMessage1);
+				y += 30;
 			}
-			this.fontBold12.drawStringTag(16777215, var4 / 2 - 90, var11, true, "Username: " + this.username + (this.titleLoginField == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
-			var11 += 15;
-			this.fontBold12.drawStringTag(16777215, var4 / 2 - 88, var11, true, "Password: " + JString.censor(this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
-			var11 += 15;
-			int var12 = var4 / 2 - 80;
-			int var13 = var5 / 2 + 50;
-			this.imageTitlebutton.plotSprite(var12 - 73, var13 - 20);
-			this.fontBold12.centreStringTag(true, var13 + 5, 16777215, var12, "Login");
-			int var14 = var4 / 2 + 80;
-			this.imageTitlebutton.plotSprite(var14 - 73, var13 - 20);
-			this.fontBold12.centreStringTag(true, var13 + 5, 16777215, var14, "Cancel");
+
+			this.fontBold12.drawStringTag(16777215, w / 2 - 90, y, true, "Username: " + this.username + (this.titleLoginField == 0 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+
+			y += 15;
+			this.fontBold12.drawStringTag(16777215, w / 2 - 88, y, true, "Password: " + JString.censor(this.password) + (this.titleLoginField == 1 & loopCycle % 40 < 20 ? "@yel@|" : ""));
+
+			y += 15;
+
+			int x = w / 2 - 80;
+			y = h / 2 + 50;
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(true, y + 5, 16777215, x, "Login");
+
+			x = w / 2 + 80;
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(true, y + 5, 16777215, x, "Cancel");
 		}
 		if (this.titleScreenState == 3) {
-			this.fontBold12.centreStringTag(true, var5 / 2 - 60, 16776960, var4 / 2, "Create a free account");
-			int var15 = var5 / 2 - 35;
-			this.fontBold12.centreStringTag(true, var15, 16777215, var4 / 2, "To create a new account you need to");
-			int var19 = var15 + 15;
-			this.fontBold12.centreStringTag(true, var19, 16777215, var4 / 2, "go back to the main RuneScape webpage");
-			int var20 = var19 + 15;
-			this.fontBold12.centreStringTag(true, var20, 16777215, var4 / 2, "and choose the red 'create account'");
-			int var21 = var20 + 15;
-			this.fontBold12.centreStringTag(true, var21, 16777215, var4 / 2, "button at the top right of that page.");
-			int var22 = var21 + 15;
-			int var16 = var4 / 2;
-			int var17 = var5 / 2 + 50;
-			this.imageTitlebutton.plotSprite(var16 - 73, var17 - 20);
-			this.fontBold12.centreStringTag(true, var17 + 5, 16777215, var16, "Cancel");
+			this.fontBold12.centreStringTag(true, h / 2 - 60, 16776960, w / 2, "Create a free account");
+
+			int y = h / 2 - 35;
+			this.fontBold12.centreStringTag(true, y, 16777215, w / 2, "To create a new account you need to");
+
+			y = y + 15;
+			this.fontBold12.centreStringTag(true, y, 16777215, w / 2, "go back to the main RuneScape webpage");
+
+			y = y + 15;
+			this.fontBold12.centreStringTag(true, y, 16777215, w / 2, "and choose the red 'create account'");
+
+			y = y + 15;
+			this.fontBold12.centreStringTag(true, y, 16777215, w / 2, "button at the top right of that page.");
+
+			y = y + 15;
+
+			int x = w / 2;
+			y = h / 2 + 50;
+			this.imageTitlebutton.plotSprite(x - 73, y - 20);
+			this.fontBold12.centreStringTag(true, y + 5, 16777215, x, "Cancel");
 		}
+
 		this.imageTitle4.draw(202, super.graphics, 171);
+
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
 			this.imageTitle2.draw(128, super.graphics, 0);
@@ -4927,6 +5534,7 @@ public class Client extends GameShell {
 	public void drawGame() {
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
+
 			this.areaBackleft1.draw(0, super.graphics, 4);
 			this.areaBackleft2.draw(0, super.graphics, 357);
 			this.areaBackright1.draw(722, super.graphics, 4);
@@ -4936,252 +5544,290 @@ public class Client extends GameShell {
 			this.areaBackvmid2.draw(516, super.graphics, 205);
 			this.areaBackvmid3.draw(496, super.graphics, 357);
 			this.areaBackhmid2.draw(0, super.graphics, 338);
+
 			this.redrawSidebar = true;
 			this.redrawChatback = true;
 			this.redrawSideicons = true;
 			this.redrawPrivacySettings = true;
+
 			if (this.sceneState != 2) {
 				this.areaViewport.draw(4, super.graphics, 4);
 				this.areaMapback.draw(550, super.graphics, 4);
 			}
 		}
+
 		if (this.sceneState == 2) {
 			this.drawScene();
 		}
+
 		if (this.menuVisible && this.menuArea == 1) {
 			this.redrawSidebar = true;
 		}
+
 		if (this.sidebarInterfaceId != -1) {
-			boolean var2 = this.updateInterfaceAnimation(this.sidebarInterfaceId, this.sceneDelta);
-			if (var2) {
+			boolean redraw = this.updateInterfaceAnimation(this.sidebarInterfaceId, this.sceneDelta);
+			if (redraw) {
 				this.redrawSidebar = true;
 			}
 		}
+
 		if (this.selectedArea == 2) {
 			this.redrawSidebar = true;
 		}
+
 		if (this.objDragArea == 2) {
 			this.redrawSidebar = true;
 		}
+
 		if (this.redrawSidebar) {
 			this.drawSidebar();
 			this.redrawSidebar = false;
 		}
+
 		if (this.chatInterfaceId == -1) {
 			this.chatInterface.scrollPosition = this.chatScrollHeight - this.chatScrollOffset - 77;
+
 			if (super.mouseX > 448 && super.mouseX < 560 && super.mouseY > 332) {
 				this.handleScrollInput(0, 463, this.chatScrollHeight, 77, false, this.chatInterface, super.mouseY - 357, super.mouseX - 17);
 			}
-			int var3 = this.chatScrollHeight - 77 - this.chatInterface.scrollPosition;
-			if (var3 < 0) {
-				var3 = 0;
+
+			int offset = this.chatScrollHeight - 77 - this.chatInterface.scrollPosition;
+			if (offset < 0) {
+				offset = 0;
 			}
-			if (var3 > this.chatScrollHeight - 77) {
-				var3 = this.chatScrollHeight - 77;
+
+			if (offset > this.chatScrollHeight - 77) {
+				offset = this.chatScrollHeight - 77;
 			}
-			if (this.chatScrollOffset != var3) {
-				this.chatScrollOffset = var3;
+
+			if (this.chatScrollOffset != offset) {
+				this.chatScrollOffset = offset;
 				this.redrawChatback = true;
 			}
 		}
+
 		if (this.chatInterfaceId != -1) {
-			boolean var4 = this.updateInterfaceAnimation(this.chatInterfaceId, this.sceneDelta);
-			if (var4) {
+			boolean redraw = this.updateInterfaceAnimation(this.chatInterfaceId, this.sceneDelta);
+			if (redraw) {
 				this.redrawChatback = true;
 			}
 		}
+
 		if (this.selectedArea == 3) {
 			this.redrawChatback = true;
 		}
+
 		if (this.objDragArea == 3) {
 			this.redrawChatback = true;
 		}
+
 		if (this.modalMessage != null) {
 			this.redrawChatback = true;
 		}
+
 		if (this.menuVisible && this.menuArea == 2) {
 			this.redrawChatback = true;
 		}
+
 		if (this.redrawChatback) {
 			this.drawChat();
 			this.redrawChatback = false;
 		}
+
 		if (this.sceneState == 2) {
 			this.drawMinimap();
 			this.areaMapback.draw(550, super.graphics, 4);
 		}
+
 		if (this.flashingTab != -1) {
 			this.redrawSideicons = true;
 		}
+
 		if (this.redrawSideicons) {
 			if (this.flashingTab != -1 && this.flashingTab == this.selectedTab) {
 				this.flashingTab = -1;
+				// TUTORIAL_CLICKSIDE
 				this.out.pIsaac(243);
 				this.out.p1(this.selectedTab);
 			}
+
 			this.redrawSideicons = false;
 			this.areaBackhmid1.bind();
 			this.imageBackhmid1.plotSprite(0, 0);
+
 			if (this.sidebarInterfaceId == -1) {
 				if (this.tabInterfaceId[this.selectedTab] != -1) {
 					if (this.selectedTab == 0) {
 						this.imageRedstone1.plotSprite(22, 10);
-					}
-					if (this.selectedTab == 1) {
+					} else if (this.selectedTab == 1) {
 						this.imageRedstone2.plotSprite(54, 8);
-					}
-					if (this.selectedTab == 2) {
+					} else if (this.selectedTab == 2) {
 						this.imageRedstone2.plotSprite(82, 8);
-					}
-					if (this.selectedTab == 3) {
+					} else if (this.selectedTab == 3) {
 						this.imageRedstone3.plotSprite(110, 8);
-					}
-					if (this.selectedTab == 4) {
+					} else if (this.selectedTab == 4) {
 						this.imageRedstone2h.plotSprite(153, 8);
-					}
-					if (this.selectedTab == 5) {
+					} else if (this.selectedTab == 5) {
 						this.imageRedstone2h.plotSprite(181, 8);
-					}
-					if (this.selectedTab == 6) {
+					} else if (this.selectedTab == 6) {
 						this.imageRedstone1h.plotSprite(209, 9);
 					}
 				}
+
 				if (this.tabInterfaceId[0] != -1 && (this.flashingTab != 0 || loopCycle % 20 < 10)) {
 					this.imageSideicons[0].plotSprite(29, 13);
 				}
+
 				if (this.tabInterfaceId[1] != -1 && (this.flashingTab != 1 || loopCycle % 20 < 10)) {
 					this.imageSideicons[1].plotSprite(53, 11);
 				}
+
 				if (this.tabInterfaceId[2] != -1 && (this.flashingTab != 2 || loopCycle % 20 < 10)) {
 					this.imageSideicons[2].plotSprite(82, 11);
 				}
+
 				if (this.tabInterfaceId[3] != -1 && (this.flashingTab != 3 || loopCycle % 20 < 10)) {
 					this.imageSideicons[3].plotSprite(115, 12);
 				}
+
 				if (this.tabInterfaceId[4] != -1 && (this.flashingTab != 4 || loopCycle % 20 < 10)) {
 					this.imageSideicons[4].plotSprite(153, 13);
 				}
+
 				if (this.tabInterfaceId[5] != -1 && (this.flashingTab != 5 || loopCycle % 20 < 10)) {
 					this.imageSideicons[5].plotSprite(180, 11);
 				}
+
 				if (this.tabInterfaceId[6] != -1 && (this.flashingTab != 6 || loopCycle % 20 < 10)) {
 					this.imageSideicons[6].plotSprite(208, 13);
 				}
 			}
+
 			this.areaBackhmid1.draw(516, super.graphics, 160);
+
 			this.areaBackbase2.bind();
 			this.imageBackbase2.plotSprite(0, 0);
+
 			if (this.sidebarInterfaceId == -1) {
 				if (this.tabInterfaceId[this.selectedTab] != -1) {
 					if (this.selectedTab == 7) {
 						this.imageRedstone1v.plotSprite(42, 0);
-					}
-					if (this.selectedTab == 8) {
+					} else if (this.selectedTab == 8) {
 						this.imageRedstone2v.plotSprite(74, 0);
-					}
-					if (this.selectedTab == 9) {
+					} else if (this.selectedTab == 9) {
 						this.imageRedstone2v.plotSprite(102, 0);
-					}
-					if (this.selectedTab == 10) {
+					} else if (this.selectedTab == 10) {
 						this.imageRedstone3v.plotSprite(130, 1);
-					}
-					if (this.selectedTab == 11) {
+					} else if (this.selectedTab == 11) {
 						this.imageRedstone2hv.plotSprite(173, 0);
-					}
-					if (this.selectedTab == 12) {
+					} else if (this.selectedTab == 12) {
 						this.imageRedstone2hv.plotSprite(201, 0);
-					}
-					if (this.selectedTab == 13) {
+					} else if (this.selectedTab == 13) {
 						this.imageRedstone1hv.plotSprite(229, 0);
 					}
 				}
+
 				if (this.tabInterfaceId[8] != -1 && (this.flashingTab != 8 || loopCycle % 20 < 10)) {
 					this.imageSideicons[7].plotSprite(74, 2);
 				}
+
 				if (this.tabInterfaceId[9] != -1 && (this.flashingTab != 9 || loopCycle % 20 < 10)) {
 					this.imageSideicons[8].plotSprite(102, 3);
 				}
+
 				if (this.tabInterfaceId[10] != -1 && (this.flashingTab != 10 || loopCycle % 20 < 10)) {
 					this.imageSideicons[9].plotSprite(137, 4);
 				}
+
 				if (this.tabInterfaceId[11] != -1 && (this.flashingTab != 11 || loopCycle % 20 < 10)) {
 					this.imageSideicons[10].plotSprite(174, 2);
 				}
+
 				if (this.tabInterfaceId[12] != -1 && (this.flashingTab != 12 || loopCycle % 20 < 10)) {
 					this.imageSideicons[11].plotSprite(201, 2);
 				}
+
 				if (this.tabInterfaceId[13] != -1 && (this.flashingTab != 13 || loopCycle % 20 < 10)) {
 					this.imageSideicons[12].plotSprite(226, 2);
 				}
 			}
+
 			this.areaBackbase2.draw(496, super.graphics, 466);
 			this.areaViewport.bind();
 		}
+
 		if (this.redrawPrivacySettings) {
 			this.redrawPrivacySettings = false;
+
 			this.areaBackbase1.bind();
 			this.imageBackbase1.plotSprite(0, 0);
+
 			this.fontPlain12.centreStringTag(true, 28, 16777215, 55, "Public chat");
 			if (this.chatPublicMode == 0) {
 				this.fontPlain12.centreStringTag(true, 41, 65280, 55, "On");
-			}
-			if (this.chatPublicMode == 1) {
+			} else if (this.chatPublicMode == 1) {
 				this.fontPlain12.centreStringTag(true, 41, 16776960, 55, "Friends");
-			}
-			if (this.chatPublicMode == 2) {
+			} else if (this.chatPublicMode == 2) {
 				this.fontPlain12.centreStringTag(true, 41, 16711680, 55, "Off");
-			}
-			if (this.chatPublicMode == 3) {
+			} else if (this.chatPublicMode == 3) {
 				this.fontPlain12.centreStringTag(true, 41, 65535, 55, "Hide");
 			}
+
 			this.fontPlain12.centreStringTag(true, 28, 16777215, 184, "Private chat");
 			if (this.chatPrivateMode == 0) {
 				this.fontPlain12.centreStringTag(true, 41, 65280, 184, "On");
-			}
-			if (this.chatPrivateMode == 1) {
+			} else if (this.chatPrivateMode == 1) {
 				this.fontPlain12.centreStringTag(true, 41, 16776960, 184, "Friends");
-			}
-			if (this.chatPrivateMode == 2) {
+			} else if (this.chatPrivateMode == 2) {
 				this.fontPlain12.centreStringTag(true, 41, 16711680, 184, "Off");
 			}
+
 			this.fontPlain12.centreStringTag(true, 28, 16777215, 324, "Trade/duel");
 			if (this.chatTradeMode == 0) {
 				this.fontPlain12.centreStringTag(true, 41, 65280, 324, "On");
-			}
-			if (this.chatTradeMode == 1) {
+			} else if (this.chatTradeMode == 1) {
 				this.fontPlain12.centreStringTag(true, 41, 16776960, 324, "Friends");
-			}
-			if (this.chatTradeMode == 2) {
+			} else if (this.chatTradeMode == 2) {
 				this.fontPlain12.centreStringTag(true, 41, 16711680, 324, "Off");
 			}
+
 			this.fontPlain12.centreStringTag(true, 33, 16777215, 458, "Report abuse");
+
 			this.areaBackbase1.draw(0, super.graphics, 453);
+
 			this.areaViewport.bind();
 		}
+
 		this.sceneDelta = 0;
 	}
 
 	@ObfuscatedName("client.F(I)V")
 	public void drawScene() {
 		this.sceneCycle++;
+
 		this.pushNpcs(true);
 		this.pushPlayers();
 		this.pushNpcs(false);
 		this.pushProjectiles();
 		this.pushSpotanims();
+
 		if (!this.cutscene) {
-			int var2 = this.orbitCameraPitch;
-			if (this.cameraPitchClamp / 256 > var2) {
-				var2 = this.cameraPitchClamp / 256;
+			int pitch = this.orbitCameraPitch;
+			if (this.cameraPitchClamp / 256 > pitch) {
+				pitch = this.cameraPitchClamp / 256;
 			}
-			if (this.cameraModifierEnabled[4] && this.cameraModifierWobbleScale[4] + 128 > var2) {
-				var2 = this.cameraModifierWobbleScale[4] + 128;
+			if (this.cameraModifierEnabled[4] && this.cameraModifierWobbleScale[4] + 128 > pitch) {
+				pitch = this.cameraModifierWobbleScale[4] + 128;
 			}
-			int var3 = this.orbitCameraYaw + this.macroCameraAngle & 0x7FF;
-			this.orbitCamera(var2, this.getHeightmapY(localPlayer.z, this.currentLevel, localPlayer.x) - 50, this.orbitCameraZ, this.orbitCameraX, var3, var2 * 3 + 600);
+
+			int yaw = this.orbitCameraYaw + this.macroCameraAngle & 0x7FF;
+			this.orbitCamera(pitch, this.getHeightmapY(localPlayer.z, this.currentLevel, localPlayer.x) - 50, this.orbitCameraZ, this.orbitCameraX, yaw, pitch * 3 + 600);
+
 			cyclelogic2++;
 			if (cyclelogic2 > 1802) {
 				cyclelogic2 = 0;
+
+				// ANTICHEAT_CYCLELOGIC2
 				this.out.pIsaac(223);
 				this.out.p1(0);
 				int var4 = this.out.pos;
@@ -5202,61 +5848,64 @@ public class Client extends GameShell {
 				this.out.psize1(this.out.pos - var4);
 			}
 		}
-		int var5;
+
+		int level;
 		if (this.cutscene) {
-			var5 = this.getTopLevelCutscene();
+			level = this.getTopLevelCutscene();
 		} else {
-			var5 = this.getTopLevel();
+			level = this.getTopLevel();
 		}
-		int var6 = this.cameraX;
-		int var7 = this.cameraY;
-		int var8 = this.cameraZ;
-		int var9 = this.cameraPitch;
-		int var10 = this.cameraYaw;
-		for (int var11 = 0; var11 < 5; var11++) {
-			if (this.cameraModifierEnabled[var11]) {
-				int var12 = (int) (Math.random() * (double) (this.cameraModifierJitter[var11] * 2 + 1) - (double) this.cameraModifierJitter[var11] + Math.sin((double) this.cameraModifierCycle[var11] * ((double) this.cameraModifierWobbleSpeed[var11] / 100.0D)) * (double) this.cameraModifierWobbleScale[var11]);
-				if (var11 == 0) {
-					this.cameraX += var12;
-				}
-				if (var11 == 1) {
-					this.cameraY += var12;
-				}
-				if (var11 == 2) {
-					this.cameraZ += var12;
-				}
-				if (var11 == 3) {
-					this.cameraYaw = this.cameraYaw + var12 & 0x7FF;
-				}
-				if (var11 == 4) {
-					this.cameraPitch += var12;
+
+		int cameraX = this.cameraX;
+		int cameraY = this.cameraY;
+		int cameraZ = this.cameraZ;
+		int cameraPitch = this.cameraPitch;
+		int cameraYaw = this.cameraYaw;
+
+		for (int type = 0; type < 5; type++) {
+			if (this.cameraModifierEnabled[type]) {
+				int jitter = (int) (Math.random() * (double) (this.cameraModifierJitter[type] * 2 + 1) - (double) this.cameraModifierJitter[type] + Math.sin((double) this.cameraModifierCycle[type] * ((double) this.cameraModifierWobbleSpeed[type] / 100.0D)) * (double) this.cameraModifierWobbleScale[type]);
+
+				if (type == 0) {
+					this.cameraX += jitter;
+				} else if (type == 1) {
+					this.cameraY += jitter;
+				} else if (type == 2) {
+					this.cameraZ += jitter;
+				} else if (type == 3) {
+					this.cameraYaw = this.cameraYaw + jitter & 0x7FF;
+				} else if (type == 4) {
+					this.cameraPitch += jitter;
+
 					if (this.cameraPitch < 128) {
 						this.cameraPitch = 128;
-					}
-					if (this.cameraPitch > 383) {
+					} else if (this.cameraPitch > 383) {
 						this.cameraPitch = 383;
 					}
 				}
 			}
 		}
-		int var13 = Pix3D.cycle;
+
+		int cycle = Pix3D.cycle;
 		Model.checkHover = true;
 		Model.pickedCount = 0;
 		Model.mouseX = super.mouseX - 4;
 		Model.mouseY = super.mouseY - 4;
+
 		Pix2D.cls();
-		this.scene.draw(this.cameraPitch, this.cameraX, this.cameraY, this.cameraYaw, this.cameraZ, var5);
+		this.scene.draw(this.cameraPitch, this.cameraX, this.cameraY, this.cameraYaw, this.cameraZ, level);
 		this.scene.clearLocChanges();
 		this.draw2DEntityElements();
 		this.drawTileHint();
-		this.updateTextures(var13);
+		this.updateTextures(cycle);
 		this.draw3DEntityElements();
 		this.areaViewport.draw(4, super.graphics, 4);
-		this.cameraX = var6;
-		this.cameraY = var7;
-		this.cameraZ = var8;
-		this.cameraPitch = var9;
-		this.cameraYaw = var10;
+
+		this.cameraX = cameraX;
+		this.cameraY = cameraY;
+		this.cameraZ = cameraZ;
+		this.cameraPitch = cameraPitch;
+		this.cameraYaw = cameraYaw;
 	}
 
 	@ObfuscatedName("client.O(I)V")
@@ -5264,408 +5913,472 @@ public class Client extends GameShell {
 		if (localPlayer.x >> 7 == this.flagSceneTileX && localPlayer.z >> 7 == this.flagSceneTileZ) {
 			this.flagSceneTileX = 0;
 		}
-		for (int var2 = -1; var2 < this.playerCount; var2++) {
-			ClientPlayer var3;
-			int var4;
-			if (var2 == -1) {
-				var3 = localPlayer;
-				var4 = this.LOCAL_PLAYER_INDEX << 14;
+		for (int i = -1; i < this.playerCount; i++) {
+			ClientPlayer player;
+
+			int index;
+			if (i == -1) {
+				player = localPlayer;
+				index = this.LOCAL_PLAYER_INDEX << 14;
 			} else {
-				var3 = this.players[this.playerIds[var2]];
-				var4 = this.playerIds[var2] << 14;
+				player = this.players[this.playerIds[i]];
+				index = this.playerIds[i] << 14;
 			}
-			if (var3 != null && var3.isVisible()) {
-				var3.lowMemory = false;
-				if ((lowMem && this.playerCount > 50 || this.playerCount > 200) && var2 != -1 && var3.secondarySeqId == var3.readyanim) {
-					var3.lowMemory = true;
-				}
-				int var5 = var3.x >> 7;
-				int var6 = var3.z >> 7;
-				if (var5 >= 0 && var5 < 104 && var6 >= 0 && var6 < 104) {
-					if (var3.locModel == null || loopCycle < var3.locStartCycle || loopCycle >= var3.locStopCycle) {
-						if ((var3.x & 0x7F) == 64 && (var3.z & 0x7F) == 64) {
-							if (this.tileLastOccupiedCycle[var5][var6] == this.sceneCycle && var2 != -1) {
-								continue;
-							}
-							this.tileLastOccupiedCycle[var5][var6] = this.sceneCycle;
-						}
-						var3.y = this.getHeightmapY(var3.z, this.currentLevel, var3.x);
-						this.scene.addTemporary(60, var3.z, var3.yaw, var3.x, var4, this.currentLevel, var3.needsForwardDrawPadding, var3.y, var3);
-					} else {
-						var3.lowMemory = false;
-						var3.y = this.getHeightmapY(var3.z, this.currentLevel, var3.x);
-						this.scene.addTemporary(var3.x, var3.minTileX, var3.maxTileZ, var3.minTileZ, var3.yaw, var3.maxTileX, var3, this.currentLevel, var3.y, var4, var3.z, 60);
+
+			if (player == null || !player.isVisible()) {
+				continue;
+			}
+
+			player.lowMemory = false;
+			if ((lowMem && this.playerCount > 50 || this.playerCount > 200) && i != -1 && player.secondarySeqId == player.readyanim) {
+				player.lowMemory = true;
+			}
+
+			int stx = player.x >> 7;
+			int stz = player.z >> 7;
+			if (stx < 0 || stx >= 104 || stz < 0 || stz >= 104) {
+				continue;
+			}
+
+			if (player.locModel == null || loopCycle < player.locStartCycle || loopCycle >= player.locStopCycle) {
+				if ((player.x & 0x7F) == 64 && (player.z & 0x7F) == 64) {
+					if (this.tileLastOccupiedCycle[stx][stz] == this.sceneCycle && i != -1) {
+						continue;
 					}
+
+					this.tileLastOccupiedCycle[stx][stz] = this.sceneCycle;
 				}
+
+				player.y = this.getHeightmapY(player.z, this.currentLevel, player.x);
+				this.scene.addTemporary(60, player.z, player.yaw, player.x, index, this.currentLevel, player.needsForwardDrawPadding, player.y, player);
+			} else {
+				player.lowMemory = false;
+				player.y = this.getHeightmapY(player.z, this.currentLevel, player.x);
+				this.scene.addTemporary(player.x, player.minTileX, player.maxTileZ, player.minTileZ, player.yaw, player.maxTileX, player, this.currentLevel, player.y, index, player.z, 60);
 			}
 		}
 	}
 
 	@ObfuscatedName("client.a(ZB)V")
-	public void pushNpcs(boolean arg0) {
-		for (int var3 = 0; var3 < this.npcCount; var3++) {
-			ClientNpc var4 = this.npcs[this.npcIds[var3]];
-			int var5 = (this.npcIds[var3] << 14) + 536870912;
-			if (var4 != null && var4.isVisible() && var4.type.alwaysontop == arg0) {
-				int var6 = var4.x >> 7;
-				int var7 = var4.z >> 7;
-				if (var6 >= 0 && var6 < 104 && var7 >= 0 && var7 < 104) {
-					if (var4.size == 1 && (var4.x & 0x7F) == 64 && (var4.z & 0x7F) == 64) {
-						if (this.tileLastOccupiedCycle[var6][var7] == this.sceneCycle) {
-							continue;
-						}
-						this.tileLastOccupiedCycle[var6][var7] = this.sceneCycle;
-					}
-					this.scene.addTemporary((var4.size - 1) * 64 + 60, var4.z, var4.yaw, var4.x, var5, this.currentLevel, var4.needsForwardDrawPadding, this.getHeightmapY(var4.z, this.currentLevel, var4.x), var4);
-				}
+	public void pushNpcs(boolean alwaysontop) {
+		for (int i = 0; i < this.npcCount; i++) {
+			ClientNpc npc = this.npcs[this.npcIds[i]];
+			int typecode = (this.npcIds[i] << 14) + 536870912;
+
+			if (npc == null || !npc.isVisible() || npc.type.alwaysontop != alwaysontop) {
+				continue;
 			}
+
+			int x = npc.x >> 7;
+			int z = npc.z >> 7;
+
+			if (x < 0 || x >= 104 || z < 0 || z >= 104) {
+				continue;
+			}
+
+			if (npc.size == 1 && (npc.x & 0x7F) == 64 && (npc.z & 0x7F) == 64) {
+				if (this.tileLastOccupiedCycle[x][z] == this.sceneCycle) {
+					continue;
+				}
+
+				this.tileLastOccupiedCycle[x][z] = this.sceneCycle;
+			}
+
+			this.scene.addTemporary((npc.size - 1) * 64 + 60, npc.z, npc.yaw, npc.x, typecode, this.currentLevel, npc.needsForwardDrawPadding, this.getHeightmapY(npc.z, this.currentLevel, npc.x), npc);
 		}
 	}
 
 	@ObfuscatedName("client.V(I)V")
 	public void pushProjectiles() {
-		for (ClientProj var2 = (ClientProj) this.projectiles.head(); var2 != null; var2 = (ClientProj) this.projectiles.next()) {
-			if (var2.level != this.currentLevel || loopCycle > var2.endCycle) {
-				var2.unlink();
-			} else if (loopCycle >= var2.startCycle) {
-				if (var2.target > 0) {
-					ClientNpc var3 = this.npcs[var2.target - 1];
-					if (var3 != null && var3.x >= 0 && var3.x < 13312 && var3.z >= 0 && var3.z < 13312) {
-						var2.updateVelocity(var3.x, var3.z, loopCycle, this.getHeightmapY(var3.z, var2.level, var3.x) - var2.dstHeight);
+		for (ClientProj proj = (ClientProj) this.projectiles.head(); proj != null; proj = (ClientProj) this.projectiles.next()) {
+			if (proj.level != this.currentLevel || loopCycle > proj.endCycle) {
+				proj.unlink();
+			} else if (loopCycle >= proj.startCycle) {
+				if (proj.target > 0) {
+					ClientNpc npc = this.npcs[proj.target - 1];
+					if (npc != null && npc.x >= 0 && npc.x < 13312 && npc.z >= 0 && npc.z < 13312) {
+						proj.updateVelocity(npc.x, npc.z, loopCycle, this.getHeightmapY(npc.z, proj.level, npc.x) - proj.dstHeight);
 					}
 				}
-				if (var2.target < 0) {
-					int var4 = -var2.target - 1;
-					ClientPlayer var5;
-					if (var4 == this.localPid) {
-						var5 = localPlayer;
+
+				if (proj.target < 0) {
+					int index = -proj.target - 1;
+
+					ClientPlayer player;
+					if (index == this.localPid) {
+						player = localPlayer;
 					} else {
-						var5 = this.players[var4];
+						player = this.players[index];
 					}
-					if (var5 != null && var5.x >= 0 && var5.x < 13312 && var5.z >= 0 && var5.z < 13312) {
-						var2.updateVelocity(var5.x, var5.z, loopCycle, this.getHeightmapY(var5.z, var2.level, var5.x) - var2.dstHeight);
+
+					if (player != null && player.x >= 0 && player.x < 13312 && player.z >= 0 && player.z < 13312) {
+						proj.updateVelocity(player.x, player.z, loopCycle, this.getHeightmapY(player.z, proj.level, player.x) - proj.dstHeight);
 					}
 				}
-				var2.update(this.sceneDelta);
-				this.scene.addTemporary(60, (int) var2.z, var2.yaw, (int) var2.x, -1, this.currentLevel, false, (int) var2.y, var2);
+
+				proj.update(this.sceneDelta);
+				this.scene.addTemporary(60, (int) proj.z, proj.yaw, (int) proj.x, -1, this.currentLevel, false, (int) proj.y, proj);
 			}
 		}
 	}
 
 	@ObfuscatedName("client.W(I)V")
 	public void pushSpotanims() {
-		for (MapSpotAnim var2 = (MapSpotAnim) this.spotanims.head(); var2 != null; var2 = (MapSpotAnim) this.spotanims.next()) {
-			if (var2.level != this.currentLevel || var2.seqComplete) {
-				var2.unlink();
-			} else if (loopCycle >= var2.startCycle) {
-				var2.update(this.sceneDelta);
-				if (var2.seqComplete) {
-					var2.unlink();
+		for (MapSpotAnim spot = (MapSpotAnim) this.spotanims.head(); spot != null; spot = (MapSpotAnim) this.spotanims.next()) {
+			if (spot.level != this.currentLevel || spot.seqComplete) {
+				spot.unlink();
+			} else if (loopCycle >= spot.startCycle) {
+				spot.update(this.sceneDelta);
+
+				if (spot.seqComplete) {
+					spot.unlink();
 				} else {
-					this.scene.addTemporary(60, var2.z, 0, var2.x, -1, var2.level, false, var2.y, var2);
+					this.scene.addTemporary(60, spot.z, 0, spot.x, -1, spot.level, false, spot.y, spot);
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("client.a(IIIIIII)V")
-	public void orbitCamera(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		int var8 = 2048 - arg0 & 0x7FF;
-		int var9 = 2048 - arg4 & 0x7FF;
-		int var10 = 0;
-		int var11 = 0;
-		int var12 = arg5;
-		if (var8 != 0) {
-			int var13 = Model.sinTable[var8];
-			int var14 = Model.cosTable[var8];
-			int var15 = var11 * var14 - arg5 * var13 >> 16;
-			var12 = var11 * var13 + arg5 * var14 >> 16;
-			var11 = var15;
+	public void orbitCamera(int pitch, int targetY, int targetZ, int targetX, int yaw, int distance) {
+		int invPitch = 2048 - pitch & 0x7FF;
+		int invYaw = 2048 - yaw & 0x7FF;
+
+		int x = 0;
+		int y = 0;
+		int z = distance;
+
+		if (invPitch != 0) {
+			int sin = Model.sinTable[invPitch];
+			int cos = Model.cosTable[invPitch];
+			int tmp = y * cos - distance * sin >> 16;
+			z = y * sin + distance * cos >> 16;
+			y = tmp;
 		}
-		if (var9 != 0) {
-			int var16 = Model.sinTable[var9];
-			int var17 = Model.cosTable[var9];
-			int var18 = var12 * var16 + var10 * var17 >> 16;
-			var12 = var12 * var17 - var10 * var16 >> 16;
-			var10 = var18;
+
+		if (invYaw != 0) {
+			int sin = Model.sinTable[invYaw];
+			int cos = Model.cosTable[invYaw];
+			int tmp = z * sin + x * cos >> 16;
+			z = z * cos - x * sin >> 16;
+			x = tmp;
 		}
-		this.cameraX = arg3 - var10;
-		this.cameraY = arg1 - var11;
-		this.cameraZ = arg2 - var12;
-		this.cameraPitch = arg0;
-		this.cameraYaw = arg4;
+
+		this.cameraX = targetX - x;
+		this.cameraY = targetY - y;
+		this.cameraZ = targetZ - z;
+		this.cameraPitch = pitch;
+		this.cameraYaw = yaw;
 	}
 
 	@ObfuscatedName("client.f(Z)I")
 	public int getTopLevelCutscene() {
-		int var2 = this.getHeightmapY(this.cameraZ, this.currentLevel, this.cameraX);
-		return var2 - this.cameraY >= 800 || (this.levelTileFlags[this.currentLevel][this.cameraX >> 7][this.cameraZ >> 7] & 0x4) == 0 ? 3 : this.currentLevel;
+		int y = this.getHeightmapY(this.cameraZ, this.currentLevel, this.cameraX);
+		return y - this.cameraY >= 800 || (this.levelTileFlags[this.currentLevel][this.cameraX >> 7][this.cameraZ >> 7] & 0x4) == 0 ? 3 : this.currentLevel;
 	}
 
 	@ObfuscatedName("client.L(I)I")
 	public int getTopLevel() {
-		int var2 = 3;
+		int top = 3;
+
 		if (this.cameraPitch < 310) {
-			int var3 = this.cameraX >> 7;
-			int var4 = this.cameraZ >> 7;
-			int var5 = localPlayer.x >> 7;
-			int var6 = localPlayer.z >> 7;
-			if ((this.levelTileFlags[this.currentLevel][var3][var4] & 0x4) != 0) {
-				var2 = this.currentLevel;
+			int cameraLocalTileX = this.cameraX >> 7;
+			int cameraLocalTileZ = this.cameraZ >> 7;
+			int playerLocalTileX = localPlayer.x >> 7;
+			int playerLocalTileZ = localPlayer.z >> 7;
+
+			if ((this.levelTileFlags[this.currentLevel][cameraLocalTileX][cameraLocalTileZ] & 0x4) != 0) {
+				top = this.currentLevel;
 			}
-			int var7;
-			if (var5 > var3) {
-				var7 = var5 - var3;
+
+			int tileDeltaX;
+			if (playerLocalTileX > cameraLocalTileX) {
+				tileDeltaX = playerLocalTileX - cameraLocalTileX;
 			} else {
-				var7 = var3 - var5;
+				tileDeltaX = cameraLocalTileX - playerLocalTileX;
 			}
-			int var8;
-			if (var6 > var4) {
-				var8 = var6 - var4;
+
+			int tileDeltaZ;
+			if (playerLocalTileZ > cameraLocalTileZ) {
+				tileDeltaZ = playerLocalTileZ - cameraLocalTileZ;
 			} else {
-				var8 = var4 - var6;
+				tileDeltaZ = cameraLocalTileZ - playerLocalTileZ;
 			}
-			if (var7 > var8) {
-				int var9 = var8 * 65536 / var7;
-				int var10 = 32768;
-				while (var3 != var5) {
-					if (var3 < var5) {
-						var3++;
-					} else if (var3 > var5) {
-						var3--;
+
+			if (tileDeltaX > tileDeltaZ) {
+				int delta = tileDeltaZ * 65536 / tileDeltaX;
+				int accumulator = 32768;
+
+				while (cameraLocalTileX != playerLocalTileX) {
+					if (cameraLocalTileX < playerLocalTileX) {
+						cameraLocalTileX++;
+					} else if (cameraLocalTileX > playerLocalTileX) {
+						cameraLocalTileX--;
 					}
-					if ((this.levelTileFlags[this.currentLevel][var3][var4] & 0x4) != 0) {
-						var2 = this.currentLevel;
+
+					if ((this.levelTileFlags[this.currentLevel][cameraLocalTileX][cameraLocalTileZ] & 0x4) != 0) {
+						top = this.currentLevel;
 					}
-					var10 += var9;
-					if (var10 >= 65536) {
-						var10 -= 65536;
-						if (var4 < var6) {
-							var4++;
-						} else if (var4 > var6) {
-							var4--;
+
+					accumulator += delta;
+					if (accumulator >= 65536) {
+						accumulator -= 65536;
+
+						if (cameraLocalTileZ < playerLocalTileZ) {
+							cameraLocalTileZ++;
+						} else if (cameraLocalTileZ > playerLocalTileZ) {
+							cameraLocalTileZ--;
 						}
-						if ((this.levelTileFlags[this.currentLevel][var3][var4] & 0x4) != 0) {
-							var2 = this.currentLevel;
+
+						if ((this.levelTileFlags[this.currentLevel][cameraLocalTileX][cameraLocalTileZ] & 0x4) != 0) {
+							top = this.currentLevel;
 						}
 					}
 				}
 			} else {
-				int var11 = var7 * 65536 / var8;
-				int var12 = 32768;
-				while (var4 != var6) {
-					if (var4 < var6) {
-						var4++;
-					} else if (var4 > var6) {
-						var4--;
+				int delta = tileDeltaX * 65536 / tileDeltaZ;
+				int accumulator = 32768;
+
+				while (cameraLocalTileZ != playerLocalTileZ) {
+					if (cameraLocalTileZ < playerLocalTileZ) {
+						cameraLocalTileZ++;
+					} else if (cameraLocalTileZ > playerLocalTileZ) {
+						cameraLocalTileZ--;
 					}
-					if ((this.levelTileFlags[this.currentLevel][var3][var4] & 0x4) != 0) {
-						var2 = this.currentLevel;
+
+					if ((this.levelTileFlags[this.currentLevel][cameraLocalTileX][cameraLocalTileZ] & 0x4) != 0) {
+						top = this.currentLevel;
 					}
-					var12 += var11;
-					if (var12 >= 65536) {
-						var12 -= 65536;
-						if (var3 < var5) {
-							var3++;
-						} else if (var3 > var5) {
-							var3--;
+
+					accumulator += delta;
+					if (accumulator >= 65536) {
+						accumulator -= 65536;
+
+						if (cameraLocalTileX < playerLocalTileX) {
+							cameraLocalTileX++;
+						} else if (cameraLocalTileX > playerLocalTileX) {
+							cameraLocalTileX--;
 						}
-						if ((this.levelTileFlags[this.currentLevel][var3][var4] & 0x4) != 0) {
-							var2 = this.currentLevel;
+
+						if ((this.levelTileFlags[this.currentLevel][cameraLocalTileX][cameraLocalTileZ] & 0x4) != 0) {
+							top = this.currentLevel;
 						}
 					}
 				}
 			}
 		}
+
 		if ((this.levelTileFlags[this.currentLevel][localPlayer.x >> 7][localPlayer.z >> 7] & 0x4) != 0) {
-			var2 = this.currentLevel;
+			top = this.currentLevel;
 		}
-		return var2;
+
+		return top;
 	}
 
 	@ObfuscatedName("client.v(I)V")
 	public void draw2DEntityElements() {
 		this.chatCount = 0;
-		for (int var2 = -1; var2 < this.playerCount + this.npcCount; var2++) {
-			ClientEntity var3;
-			if (var2 == -1) {
-				var3 = localPlayer;
-			} else if (var2 < this.playerCount) {
-				var3 = this.players[this.playerIds[var2]];
+
+		for (int index = -1; index < this.playerCount + this.npcCount; index++) {
+			ClientEntity e;
+			if (index == -1) {
+				e = localPlayer;
+			} else if (index < this.playerCount) {
+				e = this.players[this.playerIds[index]];
 			} else {
-				var3 = this.npcs[this.npcIds[var2 - this.playerCount]];
+				e = this.npcs[this.npcIds[index - this.playerCount]];
 			}
-			if (var3 != null && var3.isVisible()) {
-				if (var2 >= this.playerCount) {
-					NpcType var7 = ((ClientNpc) var3).type;
-					if (var7.headicon >= 0 && var7.headicon < this.imageHeadicon.length) {
-						this.projectFromEntity(var3, var3.height + 15);
-						if (this.projectX > -1) {
-							this.imageHeadicon[var7.headicon].plotSprite(this.projectX - 12, this.projectY - 30);
-						}
-					}
-					if (this.hintType == 1 && this.hintNpc == this.npcIds[var2 - this.playerCount] && loopCycle % 20 < 10) {
-						this.projectFromEntity(var3, var3.height + 15);
-						if (this.projectX > -1) {
-							this.imageHeadicon[2].plotSprite(this.projectX - 12, this.projectY - 28);
-						}
-					}
-				} else {
-					int var4 = 30;
-					ClientPlayer var5 = (ClientPlayer) var3;
-					if (var5.headicon != 0) {
-						this.projectFromEntity(var3, var3.height + 15);
-						if (this.projectX > -1) {
-							for (int var6 = 0; var6 < 8; var6++) {
-								if ((var5.headicon & 0x1 << var6) != 0) {
-									this.imageHeadicon[var6].plotSprite(this.projectX - 12, this.projectY - var4);
-									var4 -= 25;
-								}
-							}
-						}
-					}
-					if (var2 >= 0 && this.hintType == 10 && this.hintPlayer == this.playerIds[var2]) {
-						this.projectFromEntity(var3, var3.height + 15);
-						if (this.projectX > -1) {
-							this.imageHeadicon[7].plotSprite(this.projectX - 12, this.projectY - var4);
-						}
-					}
-				}
-				if (var3.chatMessage != null && (var2 >= this.playerCount || this.chatPublicMode == 0 || this.chatPublicMode == 3 || this.chatPublicMode == 1 && this.isFriend(((ClientPlayer) var3).name))) {
-					this.projectFromEntity(var3, var3.height);
-					if (this.projectX > -1 && this.chatCount < this.MAX_CHATS) {
-						this.chatWidth[this.chatCount] = this.fontBold12.stringWid(var3.chatMessage) / 2;
-						this.chatHeight[this.chatCount] = this.fontBold12.height;
-						this.chatX[this.chatCount] = this.projectX;
-						this.chatY[this.chatCount] = this.projectY;
-						this.chatColour[this.chatCount] = var3.chatColour;
-						this.chatEffect[this.chatCount] = var3.chatEffect;
-						this.chatTimer[this.chatCount] = var3.chatTimer;
-						this.chatMessage[this.chatCount++] = var3.chatMessage;
-						if (this.chatEffects == 0 && var3.chatEffect == 1) {
-							this.chatHeight[this.chatCount] += 10;
-							this.chatY[this.chatCount] += 5;
-						}
-						if (this.chatEffects == 0 && var3.chatEffect == 2) {
-							this.chatWidth[this.chatCount] = 60;
-						}
-					}
-				}
-				if (var3.combatCycle > loopCycle) {
-					this.projectFromEntity(var3, var3.height + 15);
+
+			if (e == null || !e.isVisible()) {
+				continue;
+			}
+
+			if (index >= this.playerCount) {
+				NpcType npc = ((ClientNpc) e).type;
+
+				if (npc.headicon >= 0 && npc.headicon < this.imageHeadicon.length) {
+					this.projectFromEntity(e, e.height + 15);
+
 					if (this.projectX > -1) {
-						int var8 = var3.health * 30 / var3.totalHealth;
-						if (var8 > 30) {
-							var8 = 30;
-						}
-						Pix2D.fillRect(this.projectY - 3, 5, this.projectX - 15, var8, 65280);
-						Pix2D.fillRect(this.projectY - 3, 5, this.projectX - 15 + var8, 30 - var8, 16711680);
+						this.imageHeadicon[npc.headicon].plotSprite(this.projectX - 12, this.projectY - 30);
 					}
 				}
-				for (int var9 = 0; var9 < 4; var9++) {
-					if (var3.damageCycle[var9] > loopCycle) {
-						this.projectFromEntity(var3, var3.height / 2);
-						if (this.projectX > -1) {
-							if (var9 == 1) {
-								this.projectY -= 20;
+
+				if (this.hintType == 1 && this.hintNpc == this.npcIds[index - this.playerCount] && loopCycle % 20 < 10) {
+					this.projectFromEntity(e, e.height + 15);
+
+					if (this.projectX > -1) {
+						this.imageHeadicon[2].plotSprite(this.projectX - 12, this.projectY - 28);
+					}
+				}
+			} else {
+				int y = 30;
+
+				ClientPlayer player = (ClientPlayer) e;
+
+				if (player.headicon != 0) {
+					this.projectFromEntity(e, e.height + 15);
+
+					if (this.projectX > -1) {
+						for (int icon = 0; icon < 8; icon++) {
+							if ((player.headicon & 0x1 << icon) != 0) {
+								this.imageHeadicon[icon].plotSprite(this.projectX - 12, this.projectY - y);
+								y -= 25;
 							}
-							if (var9 == 2) {
-								this.projectX -= 15;
-								this.projectY -= 10;
-							}
-							if (var9 == 3) {
-								this.projectX += 15;
-								this.projectY -= 10;
-							}
-							this.imageHitmark[var3.damageType[var9]].plotSprite(this.projectX - 12, this.projectY - 12);
-							this.fontPlain11.centreString(0, this.projectX, this.projectY + 4, String.valueOf(var3.damage[var9]));
-							this.fontPlain11.centreString(16777215, this.projectX - 1, this.projectY + 3, String.valueOf(var3.damage[var9]));
 						}
+					}
+				}
+
+				if (index >= 0 && this.hintType == 10 && this.hintPlayer == this.playerIds[index]) {
+					this.projectFromEntity(e, e.height + 15);
+
+					if (this.projectX > -1) {
+						this.imageHeadicon[7].plotSprite(this.projectX - 12, this.projectY - y);
+					}
+				}
+			}
+
+			if (e.chatMessage != null && (index >= this.playerCount || this.chatPublicMode == 0 || this.chatPublicMode == 3 || this.chatPublicMode == 1 && this.isFriend(((ClientPlayer) e).name))) {
+				this.projectFromEntity(e, e.height);
+
+				if (this.projectX > -1 && this.chatCount < this.MAX_CHATS) {
+					this.chatWidth[this.chatCount] = this.fontBold12.stringWid(e.chatMessage) / 2;
+					this.chatHeight[this.chatCount] = this.fontBold12.height;
+					this.chatX[this.chatCount] = this.projectX;
+					this.chatY[this.chatCount] = this.projectY;
+
+					this.chatColour[this.chatCount] = e.chatColour;
+					this.chatEffect[this.chatCount] = e.chatEffect;
+					this.chatTimer[this.chatCount] = e.chatTimer;
+					this.chatMessage[this.chatCount++] = e.chatMessage;
+
+					if (this.chatEffects == 0 && e.chatEffect == 1) {
+						this.chatHeight[this.chatCount] += 10;
+						this.chatY[this.chatCount] += 5;
+					}
+
+					if (this.chatEffects == 0 && e.chatEffect == 2) {
+						this.chatWidth[this.chatCount] = 60;
+					}
+				}
+			}
+
+			if (e.combatCycle > loopCycle) {
+				this.projectFromEntity(e, e.height + 15);
+
+				if (this.projectX > -1) {
+					int w = e.health * 30 / e.totalHealth;
+					if (w > 30) {
+						w = 30;
+					}
+
+					Pix2D.fillRect(this.projectY - 3, 5, this.projectX - 15, w, 65280);
+					Pix2D.fillRect(this.projectY - 3, 5, this.projectX - 15 + w, 30 - w, 16711680);
+				}
+			}
+
+			for (int i = 0; i < 4; i++) {
+				if (e.damageCycle[i] > loopCycle) {
+					this.projectFromEntity(e, e.height / 2);
+
+					if (this.projectX > -1) {
+						if (i == 1) {
+							this.projectY -= 20;
+						} else if (i == 2) {
+							this.projectX -= 15;
+							this.projectY -= 10;
+						} else if (i == 3) {
+							this.projectX += 15;
+							this.projectY -= 10;
+						}
+
+						this.imageHitmark[e.damageType[i]].plotSprite(this.projectX - 12, this.projectY - 12);
+						this.fontPlain11.centreString(0, this.projectX, this.projectY + 4, String.valueOf(e.damage[i]));
+						this.fontPlain11.centreString(16777215, this.projectX - 1, this.projectY + 3, String.valueOf(e.damage[i]));
 					}
 				}
 			}
 		}
-		for (int var10 = 0; var10 < this.chatCount; var10++) {
-			int var11 = this.chatX[var10];
-			int var12 = this.chatY[var10];
-			int var13 = this.chatWidth[var10];
-			int var14 = this.chatHeight[var10];
-			boolean var15 = true;
-			while (var15) {
-				var15 = false;
-				for (int var16 = 0; var16 < var10; var16++) {
-					if (var12 + 2 > this.chatY[var16] - this.chatHeight[var16] && var12 - var14 < this.chatY[var16] + 2 && var11 - var13 < this.chatX[var16] + this.chatWidth[var16] && var11 + var13 > this.chatX[var16] - this.chatWidth[var16] && this.chatY[var16] - this.chatHeight[var16] < var12) {
-						var12 = this.chatY[var16] - this.chatHeight[var16];
-						var15 = true;
+
+		for (int i = 0; i < this.chatCount; i++) {
+			int x = this.chatX[i];
+			int y = this.chatY[i];
+			int width = this.chatWidth[i];
+			int height = this.chatHeight[i];
+
+			boolean sorting = true;
+			while (sorting) {
+				sorting = false;
+
+				for (int j = 0; j < i; j++) {
+					if (y + 2 > this.chatY[j] - this.chatHeight[j] && y - height < this.chatY[j] + 2 && x - width < this.chatX[j] + this.chatWidth[j] && x + width > this.chatX[j] - this.chatWidth[j] && this.chatY[j] - this.chatHeight[j] < y) {
+						y = this.chatY[j] - this.chatHeight[j];
+						sorting = true;
 					}
 				}
 			}
-			this.projectX = this.chatX[var10];
-			this.projectY = this.chatY[var10] = var12;
-			String var17 = this.chatMessage[var10];
+
+			this.projectX = this.chatX[i];
+			this.projectY = this.chatY[i] = y;
+
+			String message = this.chatMessage[i];
 			if (this.chatEffects == 0) {
-				int var18 = 16776960;
-				if (this.chatColour[var10] < 6) {
-					var18 = this.CHAT_COLOURS[this.chatColour[var10]];
-				}
-				if (this.chatColour[var10] == 6) {
-					var18 = this.sceneCycle % 20 < 10 ? 16711680 : 16776960;
-				}
-				if (this.chatColour[var10] == 7) {
-					var18 = this.sceneCycle % 20 < 10 ? 255 : 65535;
-				}
-				if (this.chatColour[var10] == 8) {
-					var18 = this.sceneCycle % 20 < 10 ? 45056 : 8454016;
-				}
-				if (this.chatColour[var10] == 9) {
-					int var19 = 150 - this.chatTimer[var10];
-					if (var19 < 50) {
-						var18 = var19 * 1280 + 16711680;
-					} else if (var19 < 100) {
-						var18 = 16776960 - (var19 - 50) * 327680;
-					} else if (var19 < 150) {
-						var18 = (var19 - 100) * 5 + 65280;
+				int colour = 16776960;
+
+				if (this.chatColour[i] < 6) {
+					colour = this.CHAT_COLOURS[this.chatColour[i]];
+				} else if (this.chatColour[i] == 6) {
+					colour = this.sceneCycle % 20 < 10 ? 16711680 : 16776960;
+				} else if (this.chatColour[i] == 7) {
+					colour = this.sceneCycle % 20 < 10 ? 255 : 65535;
+				} else if (this.chatColour[i] == 8) {
+					colour = this.sceneCycle % 20 < 10 ? 45056 : 8454016;
+				} else if (this.chatColour[i] == 9) {
+					int delta = 150 - this.chatTimer[i];
+					if (delta < 50) {
+						colour = delta * 1280 + 16711680;
+					} else if (delta < 100) {
+						colour = 16776960 - (delta - 50) * 327680;
+					} else if (delta < 150) {
+						colour = (delta - 100) * 5 + 65280;
+					}
+				} else if (this.chatColour[i] == 10) {
+					int delta = 150 - this.chatTimer[i];
+					if (delta < 50) {
+						colour = delta * 5 + 16711680;
+					} else if (delta < 100) {
+						colour = 16711935 - (delta - 50) * 327680;
+					} else if (delta < 150) {
+						colour = (delta - 100) * 327680 + 255 - (delta - 100) * 5;
+					}
+				} else if (this.chatColour[i] == 11) {
+					int delta = 150 - this.chatTimer[i];
+					if (delta < 50) {
+						colour = 16777215 - delta * 327685;
+					} else if (delta < 100) {
+						colour = (delta - 50) * 327685 + 65280;
+					} else if (delta < 150) {
+						colour = 16777215 - (delta - 100) * 327680;
 					}
 				}
-				if (this.chatColour[var10] == 10) {
-					int var20 = 150 - this.chatTimer[var10];
-					if (var20 < 50) {
-						var18 = var20 * 5 + 16711680;
-					} else if (var20 < 100) {
-						var18 = 16711935 - (var20 - 50) * 327680;
-					} else if (var20 < 150) {
-						var18 = (var20 - 100) * 327680 + 255 - (var20 - 100) * 5;
-					}
-				}
-				if (this.chatColour[var10] == 11) {
-					int var21 = 150 - this.chatTimer[var10];
-					if (var21 < 50) {
-						var18 = 16777215 - var21 * 327685;
-					} else if (var21 < 100) {
-						var18 = (var21 - 50) * 327685 + 65280;
-					} else if (var21 < 150) {
-						var18 = 16777215 - (var21 - 100) * 327680;
-					}
-				}
-				if (this.chatEffect[var10] == 0) {
-					this.fontBold12.centreString(0, this.projectX, this.projectY + 1, var17);
-					this.fontBold12.centreString(var18, this.projectX, this.projectY, var17);
-				}
-				if (this.chatEffect[var10] == 1) {
-					this.fontBold12.centreStringWave(this.projectX, 0, this.projectY + 1, var17, this.sceneCycle);
-					this.fontBold12.centreStringWave(this.projectX, var18, this.projectY, var17, this.sceneCycle);
-				}
-				if (this.chatEffect[var10] == 2) {
-					int var22 = this.fontBold12.stringWid(var17);
-					int var23 = (150 - this.chatTimer[var10]) * (var22 + 100) / 150;
+
+				if (this.chatEffect[i] == 0) {
+					this.fontBold12.centreString(0, this.projectX, this.projectY + 1, message);
+					this.fontBold12.centreString(colour, this.projectX, this.projectY, message);
+				} else if (this.chatEffect[i] == 1) {
+					this.fontBold12.centreStringWave(this.projectX, 0, this.projectY + 1, message, this.sceneCycle);
+					this.fontBold12.centreStringWave(this.projectX, colour, this.projectY, message, this.sceneCycle);
+				} else if (this.chatEffect[i] == 2) {
+					int w = this.fontBold12.stringWid(message);
+					int offsetX = (150 - this.chatTimer[i]) * (w + 100) / 150;
 					Pix2D.setClipping(0, this.projectX + 50, 334, this.projectX - 50);
-					this.fontBold12.drawString(var17, 0, this.projectX + 50 - var23, this.projectY + 1);
-					this.fontBold12.drawString(var17, var18, this.projectX + 50 - var23, this.projectY);
+					this.fontBold12.drawString(message, 0, this.projectX + 50 - offsetX, this.projectY + 1);
+					this.fontBold12.drawString(message, colour, this.projectX + 50 - offsetX, this.projectY);
 					Pix2D.resetClipping();
 				}
 			} else {
-				this.fontBold12.centreString(0, this.projectX, this.projectY + 1, var17);
-				this.fontBold12.centreString(16776960, this.projectX, this.projectY, var17);
+				this.fontBold12.centreString(0, this.projectX, this.projectY + 1, message);
+				this.fontBold12.centreString(16776960, this.projectX, this.projectY, message);
 			}
 		}
 	}
@@ -5675,39 +6388,50 @@ public class Client extends GameShell {
 		if (this.hintType != 2) {
 			return;
 		}
+
 		this.projectFromGround((this.hintTileZ - this.sceneBaseTileZ << 7) + this.hintOffsetZ, this.hintHeight * 2, (this.hintTileX - this.sceneBaseTileX << 7) + this.hintOffsetX);
+
 		if (this.projectX > -1 && loopCycle % 20 < 10) {
 			this.imageHeadicon[2].plotSprite(this.projectX - 12, this.projectY - 28);
 		}
 	}
 
 	@ObfuscatedName("client.a(ZLz;I)V")
-	public void projectFromEntity(ClientEntity arg1, int arg2) {
-		this.projectFromGround(arg1.z, arg2, arg1.x);
+	public void projectFromEntity(ClientEntity e, int height) {
+		this.projectFromGround(e.z, height, e.x);
 	}
 
 	@ObfuscatedName("client.b(IIII)V")
-	public void projectFromGround(int arg0, int arg1, int arg2) {
-		if (arg2 < 128 || arg0 < 128 || arg2 > 13056 || arg0 > 13056) {
+	public void projectFromGround(int z, int height, int x) {
+		if (x < 128 || z < 128 || x > 13056 || z > 13056) {
 			this.projectX = -1;
 			this.projectY = -1;
 			return;
 		}
-		int var5 = this.getHeightmapY(arg0, this.currentLevel, arg2) - arg1;
-		int var6 = arg2 - this.cameraX;
-		int var7 = var5 - this.cameraY;
-		int var8 = arg0 - this.cameraZ;
-		int var9 = Model.sinTable[this.cameraPitch];
-		int var10 = Model.cosTable[this.cameraPitch];
-		int var11 = Model.sinTable[this.cameraYaw];
-		int var12 = Model.cosTable[this.cameraYaw];
-		int var13 = var8 * var11 + var6 * var12 >> 16;
-		int var14 = var8 * var12 - var6 * var11 >> 16;
-		int var16 = var7 * var10 - var14 * var9 >> 16;
-		int var17 = var7 * var9 + var14 * var10 >> 16;
-		if (var17 >= 50) {
-			this.projectX = Pix3D.centerX + (var13 << 9) / var17;
-			this.projectY = Pix3D.centerY + (var16 << 9) / var17;
+
+		int y = this.getHeightmapY(z, this.currentLevel, x) - height;
+
+		int dx = x - this.cameraX;
+		int dy = y - this.cameraY;
+		int dz = z - this.cameraZ;
+
+		int sinPitch = Model.sinTable[this.cameraPitch];
+		int cosPitch = Model.cosTable[this.cameraPitch];
+
+		int sinYaw = Model.sinTable[this.cameraYaw];
+		int cosYaw = Model.cosTable[this.cameraYaw];
+
+		int tmp = (dz * sinYaw + dx * cosYaw) >> 16;
+		dz = (dz * cosYaw - dx * sinYaw) >> 16;
+		dx = tmp;
+
+		tmp = (dy * cosPitch - dz * sinPitch) >> 16;
+		dz = (dy * sinPitch + dz * cosPitch) >> 16;
+		dy = tmp;
+
+		if (dz >= 50) {
+			this.projectX = (dx << 9) / dz + Pix3D.centerX;
+			this.projectY = (dy << 9) / dz + Pix3D.centerY;
 		} else {
 			this.projectX = -1;
 			this.projectY = -1;
@@ -5715,52 +6439,57 @@ public class Client extends GameShell {
 	}
 
 	@ObfuscatedName("client.a(IIIB)I")
-	public int getHeightmapY(int arg0, int arg1, int arg2) {
-		int var5 = arg2 >> 7;
-		int var6 = arg0 >> 7;
-		if (var5 < 0 || var6 < 0 || var5 > 103 || var6 > 103) {
+	public int getHeightmapY(int sceneZ, int level, int sceneX) {
+		int tileX = sceneX >> 7;
+		int tileZ = sceneZ >> 7;
+
+		if (tileX < 0 || tileZ < 0 || tileX > 103 || tileZ > 103) {
 			return 0;
 		}
-		int var7 = arg1;
-		if (arg1 < 3 && (this.levelTileFlags[1][var5][var6] & 0x2) == 2) {
-			var7 = arg1 + 1;
+
+		int realLevel = level;
+		if (level < 3 && (this.levelTileFlags[1][tileX][tileZ] & 0x2) == 2) {
+			realLevel = level + 1;
 		}
-		int var8 = arg2 & 0x7F;
-		int var9 = arg0 & 0x7F;
-		int var10 = this.levelHeightmap[var7][var5][var6] * (128 - var8) + this.levelHeightmap[var7][var5 + 1][var6] * var8 >> 7;
-		int var11 = this.levelHeightmap[var7][var5][var6 + 1] * (128 - var8) + this.levelHeightmap[var7][var5 + 1][var6 + 1] * var8 >> 7;
-		return var10 * (128 - var9) + var11 * var9 >> 7;
+
+		int tileLocalX = sceneX & 0x7F;
+		int tileLocalZ = sceneZ & 0x7F;
+		int y00 = this.levelHeightmap[realLevel][tileX][tileZ] * (128 - tileLocalX) + this.levelHeightmap[realLevel][tileX + 1][tileZ] * tileLocalX >> 7;
+		int y11 = this.levelHeightmap[realLevel][tileX][tileZ + 1] * (128 - tileLocalX) + this.levelHeightmap[realLevel][tileX + 1][tileZ + 1] * tileLocalX >> 7;
+		return y00 * (128 - tileLocalZ) + y11 * tileLocalZ >> 7;
 	}
 
 	@ObfuscatedName("client.e(II)V")
-	public void updateTextures(int arg0) {
+	public void updateTextures(int cycle) {
 		if (lowMem) {
 			return;
 		}
-		if (Pix3D.textureCycle[17] >= arg0) {
-			Pix8 var3 = Pix3D.textures[17];
-			int var4 = var3.wi * var3.hi - 1;
-			int var5 = var3.wi * this.sceneDelta * 2;
-			byte[] var6 = var3.pixels;
-			byte[] var7 = this.textureBuffer;
-			for (int var8 = 0; var8 <= var4; var8++) {
-				var7[var8] = var6[var8 - var5 & var4];
+
+		if (Pix3D.textureCycle[17] >= cycle) {
+			Pix8 texture = Pix3D.textures[17];
+			int bottom = texture.wi * texture.hi - 1;
+			int adjustment = texture.wi * this.sceneDelta * 2;
+			byte[] src = texture.pixels;
+			byte[] dst = this.textureBuffer;
+			for (int i = 0; i <= bottom; i++) {
+				dst[i] = src[i - adjustment & bottom];
 			}
-			var3.pixels = var7;
-			this.textureBuffer = var6;
+			texture.pixels = dst;
+			this.textureBuffer = src;
 			Pix3D.pushTexture(17);
 		}
-		if (Pix3D.textureCycle[24] >= arg0) {
-			Pix8 var9 = Pix3D.textures[24];
-			int var10 = var9.wi * var9.hi - 1;
-			int var11 = var9.wi * this.sceneDelta * 2;
-			byte[] var12 = var9.pixels;
-			byte[] var13 = this.textureBuffer;
-			for (int var14 = 0; var14 <= var10; var14++) {
-				var13[var14] = var12[var14 - var11 & var10];
+
+		if (Pix3D.textureCycle[24] >= cycle) {
+			Pix8 texture = Pix3D.textures[24];
+			int bottom = texture.wi * texture.hi - 1;
+			int adjustment = texture.wi * this.sceneDelta * 2;
+			byte[] src = texture.pixels;
+			byte[] dst = this.textureBuffer;
+			for (int i = 0; i <= bottom; i++) {
+				dst[i] = src[i - adjustment & bottom];
 			}
-			var9.pixels = var13;
-			this.textureBuffer = var12;
+			texture.pixels = dst;
+			this.textureBuffer = src;
 			Pix3D.pushTexture(24);
 		}
 	}
@@ -5768,16 +6497,18 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.h(I)V")
 	public void draw3DEntityElements() {
 		this.drawPrivateMessages();
+
 		if (this.crossMode == 1) {
 			this.imageCross[this.crossCycle / 100].plotSprite(this.crossX - 8 - 4, this.crossY - 8 - 4);
-		}
-		if (this.crossMode == 2) {
+		} else if (this.crossMode == 2) {
 			this.imageCross[this.crossCycle / 100 + 4].plotSprite(this.crossX - 8 - 4, this.crossY - 8 - 4);
 		}
+
 		if (this.viewportOverlayInterfaceId != -1) {
 			this.updateInterfaceAnimation(this.viewportOverlayInterfaceId, this.sceneDelta);
 			this.drawInterface(Component.types[this.viewportOverlayInterfaceId], 0, 0, 0);
 		}
+
 		if (this.field1504 > 0) {
 			int var2 = 302 - (int) Math.abs(Math.sin((double) this.field1504 / 10.0D) * 10.0D);
 			for (int var3 = 0; var3 < 30; var3++) {
@@ -5785,17 +6516,21 @@ public class Client extends GameShell {
 				Pix2D.hlineTrans(16776960, var3 + var2, this.field1504, var4, 256 - var4 / 2);
 			}
 		}
+
 		if (this.viewportInterfaceId != -1) {
 			this.updateInterfaceAnimation(this.viewportInterfaceId, this.sceneDelta);
 			this.drawInterface(Component.types[this.viewportInterfaceId], 0, 0, 0);
 		}
+
 		this.updateWorldLocation();
+
 		if (!this.menuVisible) {
 			this.handleInput();
 			this.drawTooltip();
 		} else if (this.menuArea == 0) {
 			this.drawMenu();
 		}
+
 		if (this.inMultizone == 1) {
 			if (this.wildernessLevel > 0 || this.worldLocationState == 1) {
 				this.imageHeadicon[1].plotSprite(472, 258);
@@ -5803,22 +6538,26 @@ public class Client extends GameShell {
 				this.imageHeadicon[1].plotSprite(472, 296);
 			}
 		}
+
 		if (this.wildernessLevel > 0) {
 			this.imageHeadicon[0].plotSprite(472, 296);
 			this.fontPlain12.centreString(16776960, 484, 329, "Level: " + this.wildernessLevel);
 		}
+
 		if (this.worldLocationState == 1) {
 			this.imageHeadicon[6].plotSprite(472, 296);
 			this.fontPlain12.centreString(16776960, 484, 329, "Arena");
 		}
+
 		if (this.systemUpdateTimer != 0) {
-			int var5 = this.systemUpdateTimer / 50;
-			int var6 = var5 / 60;
-			int var7 = var5 % 60;
-			if (var7 < 10) {
-				this.fontPlain12.drawString("System update in: " + var6 + ":0" + var7, 16776960, 4, 329);
+			int seconds = this.systemUpdateTimer / 50;
+			int minutes = seconds / 60;
+			seconds = seconds % 60;
+
+			if (seconds < 10) {
+				this.fontPlain12.drawString("System update in: " + minutes + ":0" + seconds, 16776960, 4, 329);
 			} else {
-				this.fontPlain12.drawString("System update in: " + var6 + ":" + var7, 16776960, 4, 329);
+				this.fontPlain12.drawString("System update in: " + minutes + ":" + seconds, 16776960, 4, 329);
 			}
 		}
 	}
