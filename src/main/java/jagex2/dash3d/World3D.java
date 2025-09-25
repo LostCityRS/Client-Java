@@ -1180,506 +1180,439 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(Lw;Z)V")
-	public void drawTile(Square next, boolean checkAdjacent) {
-		drawTileQueue.push(next);
-
+	public void drawTile(Square arg0, boolean arg1) {
+		drawTileQueue.push(arg0);
 		while (true) {
-			Square tile;
+			Square var3;
+			int var4;
+			int var5;
+			int var6;
+			int var7;
+			Square[][] var8;
+			Square var66;
 			do {
-				tile = (Square) drawTileQueue.pop();
-				if (tile == null) {
-					return;
-				}
-			} while (!tile.drawBack);
-
-			int tileX = tile.x;
-			int tileZ = tile.z;
-			int level = tile.level;
-			int originalLevel = tile.originalLevel;
-			Square[][] tiles = this.levelTiles[level];
-
-			if (tile.drawFront) {
-				if (checkAdjacent) {
-					if (level > 0) {
-						Square above = this.levelTiles[level - 1][tileX][tileZ];
-						if (above != null && above.drawBack) {
-							continue;
+				Square var65;
+				do {
+					Square var64;
+					do {
+						Square var63;
+						do {
+							do {
+								do {
+									while (true) {
+										while (true) {
+											do {
+												var3 = (Square) drawTileQueue.pop();
+												if (var3 == null) {
+													return;
+												}
+											} while (!var3.drawBack);
+											var4 = var3.x;
+											var5 = var3.z;
+											var6 = var3.level;
+											var7 = var3.originalLevel;
+											var8 = this.levelTiles[var6];
+											if (!var3.drawFront) {
+												break;
+											}
+											if (arg1) {
+												if (var6 > 0) {
+													Square var9 = this.levelTiles[var6 - 1][var4][var5];
+													if (var9 != null && var9.drawBack) {
+														continue;
+													}
+												}
+												if (var4 <= eyeTileX && var4 > minDrawTileX) {
+													Square var10 = var8[var4 - 1][var5];
+													if (var10 != null && var10.drawBack && (var10.drawFront || (var3.combinedPrimaryExtendDirections & 0x1) == 0)) {
+														continue;
+													}
+												}
+												if (var4 >= eyeTileX && var4 < maxDrawTileX - 1) {
+													Square var11 = var8[var4 + 1][var5];
+													if (var11 != null && var11.drawBack && (var11.drawFront || (var3.combinedPrimaryExtendDirections & 0x4) == 0)) {
+														continue;
+													}
+												}
+												if (var5 <= eyeTileZ && var5 > minDrawTileZ) {
+													Square var12 = var8[var4][var5 - 1];
+													if (var12 != null && var12.drawBack && (var12.drawFront || (var3.combinedPrimaryExtendDirections & 0x8) == 0)) {
+														continue;
+													}
+												}
+												if (var5 >= eyeTileZ && var5 < maxDrawTileZ - 1) {
+													Square var13 = var8[var4][var5 + 1];
+													if (var13 != null && var13.drawBack && (var13.drawFront || (var3.combinedPrimaryExtendDirections & 0x2) == 0)) {
+														continue;
+													}
+												}
+											} else {
+												arg1 = true;
+											}
+											var3.drawFront = false;
+											if (var3.linkBelow != null) {
+												Square var14 = var3.linkBelow;
+												if (var14.quickGround == null) {
+													if (var14.ground != null && !this.tileVisible(0, var4, var5)) {
+														this.drawGround(var14.ground, cosEyeYaw, var4, cosEyePitch, sinEyePitch, sinEyeYaw, var5);
+													}
+												} else if (!this.tileVisible(0, var4, var5)) {
+													this.drawQuickGround(var14.quickGround, 0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var4, var5);
+												}
+												Wall var15 = var14.wall;
+												if (var15 != null) {
+													var15.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var15.x - eyeX, var15.y - eyeY, var15.z - eyeZ, var15.typecode1);
+												}
+												for (int var16 = 0; var16 < var14.primaryCount; var16++) {
+													Sprite var17 = var14.sprite[var16];
+													if (var17 != null) {
+														var17.model.draw(var17.angle, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var17.x - eyeX, var17.y - eyeY, var17.z - eyeZ, var17.typecode);
+													}
+												}
+											}
+											boolean var18 = false;
+											if (var3.quickGround == null) {
+												if (var3.ground != null && !this.tileVisible(var7, var4, var5)) {
+													var18 = true;
+													this.drawGround(var3.ground, cosEyeYaw, var4, cosEyePitch, sinEyePitch, sinEyeYaw, var5);
+												}
+											} else if (!this.tileVisible(var7, var4, var5)) {
+												var18 = true;
+												this.drawQuickGround(var3.quickGround, var7, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var4, var5);
+											}
+											int var19 = 0;
+											int var20 = 0;
+											Wall var21 = var3.wall;
+											Decor var22 = var3.decor;
+											if (var21 != null || var22 != null) {
+												if (eyeTileX == var4) {
+													var19++;
+												} else if (eyeTileX < var4) {
+													var19 += 2;
+												}
+												if (eyeTileZ == var5) {
+													var19 += 3;
+												} else if (eyeTileZ > var5) {
+													var19 += 6;
+												}
+												var20 = FRONT_WALL_TYPES[var19];
+												var3.backWallTypes = BACK_WALL_TYPES[var19];
+											}
+											if (var21 != null) {
+												if ((var21.angle1 & DIRECTION_ALLOW_WALL_CORNER_TYPE[var19]) == 0) {
+													var3.cornerSides = 0;
+												} else if (var21.angle1 == 16) {
+													var3.cornerSides = 3;
+													var3.sidesBeforeCorner = MIDDEP_16[var19];
+													var3.sidesAfterCorner = 3 - var3.sidesBeforeCorner;
+												} else if (var21.angle1 == 32) {
+													var3.cornerSides = 6;
+													var3.sidesBeforeCorner = MIDDEP_32[var19];
+													var3.sidesAfterCorner = 6 - var3.sidesBeforeCorner;
+												} else if (var21.angle1 == 64) {
+													var3.cornerSides = 12;
+													var3.sidesBeforeCorner = MIDDEP_64[var19];
+													var3.sidesAfterCorner = 12 - var3.sidesBeforeCorner;
+												} else {
+													var3.cornerSides = 9;
+													var3.sidesBeforeCorner = MIDDEP_128[var19];
+													var3.sidesAfterCorner = 9 - var3.sidesBeforeCorner;
+												}
+												if ((var21.angle1 & var20) != 0 && !this.isTileSideOccluded(var7, var4, var5, var21.angle1)) {
+													var21.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var21.x - eyeX, var21.y - eyeY, var21.z - eyeZ, var21.typecode1);
+												}
+												if ((var21.angle2 & var20) != 0 && !this.isTileSideOccluded(var7, var4, var5, var21.angle2)) {
+													var21.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var21.x - eyeX, var21.y - eyeY, var21.z - eyeZ, var21.typecode1);
+												}
+											}
+											if (var22 != null && !this.isTileColumnOccluded(var7, var4, var5, var22.model.minY)) {
+												if ((var22.angle1 & var20) != 0) {
+													var22.model.draw(var22.angle2, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var22.x - eyeX, var22.y - eyeY, var22.z - eyeZ, var22.typecode);
+												} else if ((var22.angle1 & 0x300) != 0) {
+													int var23 = var22.x - eyeX;
+													int var24 = var22.y - eyeY;
+													int var25 = var22.z - eyeZ;
+													int var26 = var22.angle2;
+													int var27;
+													if (var26 == 1 || var26 == 2) {
+														var27 = -var23;
+													} else {
+														var27 = var23;
+													}
+													int var28;
+													if (var26 == 2 || var26 == 3) {
+														var28 = -var25;
+													} else {
+														var28 = var25;
+													}
+													if ((var22.angle1 & 0x100) != 0 && var28 < var27) {
+														int var29 = var23 + WALL_DECORATION_INSET_X[var26];
+														int var30 = var25 + WALL_DECORATION_INSET_Z[var26];
+														var22.model.draw(var26 * 512 + 256, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var29, var24, var30, var22.typecode);
+													}
+													if ((var22.angle1 & 0x200) != 0 && var28 > var27) {
+														int var31 = var23 + WALL_DECORATION_OUTSET_X[var26];
+														int var32 = var25 + WALL_DECORATION_OUTSET_Z[var26];
+														var22.model.draw(var26 * 512 + 1280 & 0x7FF, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var31, var24, var32, var22.typecode);
+													}
+												}
+											}
+											if (var18) {
+												GroundDecor var33 = var3.groundDecor;
+												if (var33 != null) {
+													var33.model.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var33.x - eyeX, var33.y - eyeY, var33.z - eyeZ, var33.typecode);
+												}
+												GroundObject var34 = var3.groundObject;
+												if (var34 != null && var34.height == 0) {
+													if (var34.bottom != null) {
+														var34.bottom.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
+													}
+													if (var34.middle != null) {
+														var34.middle.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
+													}
+													if (var34.top != null) {
+														var34.top.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
+													}
+												}
+											}
+											int var35 = var3.combinedPrimaryExtendDirections;
+											if (var35 != 0) {
+												if (var4 < eyeTileX && (var35 & 0x4) != 0) {
+													Square var36 = var8[var4 + 1][var5];
+													if (var36 != null && var36.drawBack) {
+														drawTileQueue.push(var36);
+													}
+												}
+												if (var5 < eyeTileZ && (var35 & 0x2) != 0) {
+													Square var37 = var8[var4][var5 + 1];
+													if (var37 != null && var37.drawBack) {
+														drawTileQueue.push(var37);
+													}
+												}
+												if (var4 > eyeTileX && (var35 & 0x1) != 0) {
+													Square var38 = var8[var4 - 1][var5];
+													if (var38 != null && var38.drawBack) {
+														drawTileQueue.push(var38);
+													}
+												}
+												if (var5 > eyeTileZ && (var35 & 0x8) != 0) {
+													Square var39 = var8[var4][var5 - 1];
+													if (var39 != null && var39.drawBack) {
+														drawTileQueue.push(var39);
+													}
+												}
+											}
+											break;
+										}
+										if (var3.cornerSides != 0) {
+											boolean var40 = true;
+											for (int var41 = 0; var41 < var3.primaryCount; var41++) {
+												if (var3.sprite[var41].cycle != cycle && (var3.primaryExtendDirections[var41] & var3.cornerSides) == var3.sidesBeforeCorner) {
+													var40 = false;
+													break;
+												}
+											}
+											if (var40) {
+												Wall var42 = var3.wall;
+												if (!this.isTileSideOccluded(var7, var4, var5, var42.angle1)) {
+													var42.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var42.x - eyeX, var42.y - eyeY, var42.z - eyeZ, var42.typecode1);
+												}
+												var3.cornerSides = 0;
+											}
+										}
+										if (!var3.drawPrimaries) {
+											break;
+										}
+										int var43 = var3.primaryCount;
+										var3.drawPrimaries = false;
+										int var44 = 0;
+										label551: for (int var45 = 0; var45 < var43; var45++) {
+											Sprite var46 = var3.sprite[var45];
+											if (var46.cycle != cycle) {
+												for (int var47 = var46.minGridX; var47 <= var46.maxGridX; var47++) {
+													for (int var48 = var46.minGridZ; var48 <= var46.maxGridZ; var48++) {
+														Square var49 = var8[var47][var48];
+														if (var49.drawFront) {
+															var3.drawPrimaries = true;
+															continue label551;
+														}
+														if (var49.cornerSides != 0) {
+															int var50 = 0;
+															if (var47 > var46.minGridX) {
+																var50++;
+															}
+															if (var47 < var46.maxGridX) {
+																var50 += 4;
+															}
+															if (var48 > var46.minGridZ) {
+																var50 += 8;
+															}
+															if (var48 < var46.maxGridZ) {
+																var50 += 2;
+															}
+															if ((var50 & var49.cornerSides) == var3.sidesAfterCorner) {
+																var3.drawPrimaries = true;
+																continue label551;
+															}
+														}
+													}
+												}
+												locBuffer[var44++] = var46;
+												int var51 = eyeTileX - var46.minGridX;
+												int var52 = var46.maxGridX - eyeTileX;
+												if (var52 > var51) {
+													var51 = var52;
+												}
+												int var53 = eyeTileZ - var46.minGridZ;
+												int var54 = var46.maxGridZ - eyeTileZ;
+												if (var54 > var53) {
+													var46.distance = var51 + var54;
+												} else {
+													var46.distance = var51 + var53;
+												}
+											}
+										}
+										while (var44 > 0) {
+											int var55 = -50;
+											int var56 = -1;
+											for (int var57 = 0; var57 < var44; var57++) {
+												Sprite var58 = locBuffer[var57];
+												if (var58.distance > var55 && var58.cycle != cycle) {
+													var55 = var58.distance;
+													var56 = var57;
+												}
+											}
+											if (var56 == -1) {
+												break;
+											}
+											Sprite var59 = locBuffer[var56];
+											var59.cycle = cycle;
+											if (!this.locVisible(var7, var59.minGridX, var59.maxGridX, var59.minGridZ, var59.maxGridZ, var59.model.minY)) {
+												var59.model.draw(var59.angle, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var59.x - eyeX, var59.y - eyeY, var59.z - eyeZ, var59.typecode);
+											}
+											for (int var60 = var59.minGridX; var60 <= var59.maxGridX; var60++) {
+												for (int var61 = var59.minGridZ; var61 <= var59.maxGridZ; var61++) {
+													Square var62 = var8[var60][var61];
+													if (var62.cornerSides != 0) {
+														drawTileQueue.push(var62);
+													} else if ((var60 != var4 || var61 != var5) && var62.drawBack) {
+														drawTileQueue.push(var62);
+													}
+												}
+											}
+										}
+										if (!var3.drawPrimaries) {
+											break;
+										}
+									}
+								} while (!var3.drawBack);
+							} while (var3.cornerSides != 0);
+							if (var4 > eyeTileX || var4 <= minDrawTileX) {
+								break;
+							}
+							var63 = var8[var4 - 1][var5];
+						} while (var63 != null && var63.drawBack);
+						if (var4 < eyeTileX || var4 >= maxDrawTileX - 1) {
+							break;
 						}
-					}
-
-					if (tileX <= eyeTileX && tileX > minDrawTileX) {
-						Square adjacent = tiles[tileX - 1][tileZ];
-						if (adjacent != null && adjacent.drawBack && (adjacent.drawFront || (tile.combinedPrimaryExtendDirections & 0x1) == 0)) {
-							continue;
-						}
-					}
-
-					if (tileX >= eyeTileX && tileX < maxDrawTileX - 1) {
-						Square adjacent = tiles[tileX + 1][tileZ];
-						if (adjacent != null && adjacent.drawBack && (adjacent.drawFront || (tile.combinedPrimaryExtendDirections & 0x4) == 0)) {
-							continue;
-						}
-					}
-
-					if (tileZ <= eyeTileZ && tileZ > minDrawTileZ) {
-						Square adjacent = tiles[tileX][tileZ - 1];
-						if (adjacent != null && adjacent.drawBack && (adjacent.drawFront || (tile.combinedPrimaryExtendDirections & 0x8) == 0)) {
-							continue;
-						}
-					}
-
-					if (tileZ >= eyeTileZ && tileZ < maxDrawTileZ - 1) {
-						Square adjacent = tiles[tileX][tileZ + 1];
-						if (adjacent != null && adjacent.drawBack && (adjacent.drawFront || (tile.combinedPrimaryExtendDirections & 0x2) == 0)) {
-							continue;
-						}
-					}
-				} else {
-					checkAdjacent = true;
-				}
-
-				tile.drawFront = false;
-
-				if (tile.linkBelow != null) {
-					Square linkBelow = tile.linkBelow;
-					if (linkBelow.quickGround == null) {
-						if (linkBelow.ground != null && !this.tileVisible(0, tileX, tileZ)) {
-							this.drawGround(linkBelow.ground, cosEyeYaw, tileX, cosEyePitch, sinEyePitch, sinEyeYaw, tileZ);
-						}
-					} else if (!this.tileVisible(0, tileX, tileZ)) {
-						this.drawQuickGround(linkBelow.quickGround, 0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, tileX, tileZ);
-					}
-
-					Wall wall = linkBelow.wall;
-					if (wall != null) {
-						wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
-					}
-
-					for (int i = 0; i < linkBelow.primaryCount; i++) {
-						Sprite loc = linkBelow.sprite[i];
-						if (loc != null) {
-							loc.model.draw(loc.angle, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, loc.x - eyeX, loc.y - eyeY, loc.z - eyeZ, loc.typecode);
-						}
-					}
-				}
-
-				boolean tileDrawn = false;
-				if (tile.quickGround == null) {
-					if (tile.ground != null && !this.tileVisible(originalLevel, tileX, tileZ)) {
-						tileDrawn = true;
-						this.drawGround(tile.ground, cosEyeYaw, tileX, cosEyePitch, sinEyePitch, sinEyeYaw, tileZ);
-					}
-				} else if (!this.tileVisible(originalLevel, tileX, tileZ)) {
-					tileDrawn = true;
-					this.drawQuickGround(tile.quickGround, originalLevel, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, tileX, tileZ);
-				}
-
-				int direction = 0;
-				int frontWallTypes = 0;
-
-				Wall wall = tile.wall;
-				Decor decor = tile.decor;
-				if (wall != null || decor != null) {
-					if (eyeTileX == tileX) {
-						direction++;
-					} else if (eyeTileX < tileX) {
-						direction += 2;
-					}
-
-					if (eyeTileZ == tileZ) {
-						direction += 3;
-					} else if (eyeTileZ > tileZ) {
-						direction += 6;
-					}
-
-					frontWallTypes = FRONT_WALL_TYPES[direction];
-					tile.backWallTypes = BACK_WALL_TYPES[direction];
-				}
-
-				if (wall != null) {
-					if ((wall.angle1 & DIRECTION_ALLOW_WALL_CORNER_TYPE[direction]) == 0) {
-						tile.cornerSides = 0;
-					} else if (wall.angle1 == 16) {
-						tile.cornerSides = 3;
-						tile.sidesBeforeCorner = MIDDEP_16[direction];
-						tile.sidesAfterCorner = 3 - tile.sidesBeforeCorner;
-					} else if (wall.angle1 == 32) {
-						tile.cornerSides = 6;
-						tile.sidesBeforeCorner = MIDDEP_32[direction];
-						tile.sidesAfterCorner = 6 - tile.sidesBeforeCorner;
-					} else if (wall.angle1 == 64) {
-						tile.cornerSides = 12;
-						tile.sidesBeforeCorner = MIDDEP_64[direction];
-						tile.sidesAfterCorner = 12 - tile.sidesBeforeCorner;
-					} else {
-						tile.cornerSides = 9;
-						tile.sidesBeforeCorner = MIDDEP_128[direction];
-						tile.sidesAfterCorner = 9 - tile.sidesBeforeCorner;
-					}
-
-					if ((wall.angle1 & frontWallTypes) != 0 && !this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle1)) {
-						wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
-					}
-
-					if ((wall.angle2 & frontWallTypes) != 0 && !this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle2)) {
-						wall.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
-					}
-				}
-
-				if (decor != null && !this.isTileColumnOccluded(originalLevel, tileX, tileZ, decor.model.minY)) {
-					if ((decor.angle1 & frontWallTypes) != 0) {
-						decor.model.draw(decor.angle2, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, decor.x - eyeX, decor.y - eyeY, decor.z - eyeZ, decor.typecode);
-					} else if ((decor.angle1 & 0x300) != 0) {
-						int x = decor.x - eyeX;
-						int y = decor.y - eyeY;
-						int z = decor.z - eyeZ;
-						int angle = decor.angle2;
-
-						int nearestX;
-						if (angle == 1 || angle == 2) {
-							nearestX = -x;
-						} else {
-							nearestX = x;
-						}
-
-						int nearestZ;
-						if (angle == 2 || angle == 3) {
-							nearestZ = -z;
-						} else {
-							nearestZ = z;
-						}
-
-						if ((decor.angle1 & 0x100) != 0 && nearestZ < nearestX) {
-							int drawX = x + WALL_DECORATION_INSET_X[angle];
-							int drawZ = z + WALL_DECORATION_INSET_Z[angle];
-							decor.model.draw(angle * 512 + 256, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, drawX, y, drawZ, decor.typecode);
-						}
-
-						if ((decor.angle1 & 0x200) != 0 && nearestZ > nearestX) {
-							int drawX = x + WALL_DECORATION_OUTSET_X[angle];
-							int drawZ = z + WALL_DECORATION_OUTSET_Z[angle];
-							decor.model.draw(angle * 512 + 1280 & 0x7FF, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, drawX, y, drawZ, decor.typecode);
-						}
-					}
-				}
-
-				if (tileDrawn) {
-					GroundDecor groundDecor = tile.groundDecor;
-					if (groundDecor != null) {
-						groundDecor.model.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, groundDecor.x - eyeX, groundDecor.y - eyeY, groundDecor.z - eyeZ, groundDecor.typecode);
-					}
-
-					GroundObject objs = tile.groundObject;
-					if (objs != null && objs.height == 0) {
-						if (objs.bottom != null) {
-							objs.bottom.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, objs.x - eyeX, objs.y - eyeY, objs.z - eyeZ, objs.typecode);
-						}
-
-						if (objs.middle != null) {
-							objs.middle.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, objs.x - eyeX, objs.y - eyeY, objs.z - eyeZ, objs.typecode);
-						}
-
-						if (objs.top != null) {
-							objs.top.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, objs.x - eyeX, objs.y - eyeY, objs.z - eyeZ, objs.typecode);
-						}
-					}
-				}
-
-				int spans = tile.combinedPrimaryExtendDirections;
-
-				if (spans != 0) {
-					if (tileX < eyeTileX && (spans & 0x4) != 0) {
-						Square adjacent = tiles[tileX + 1][tileZ];
-						if (adjacent != null && adjacent.drawBack) {
-							drawTileQueue.push(adjacent);
-						}
-					}
-
-					if (tileZ < eyeTileZ && (spans & 0x2) != 0) {
-						Square adjacent = tiles[tileX][tileZ + 1];
-						if (adjacent != null && adjacent.drawBack) {
-							drawTileQueue.push(adjacent);
-						}
-					}
-
-					if (tileX > eyeTileX && (spans & 0x1) != 0) {
-						Square adjacent = tiles[tileX - 1][tileZ];
-						if (adjacent != null && adjacent.drawBack) {
-							drawTileQueue.push(adjacent);
-						}
-					}
-
-					if (tileZ > eyeTileZ && (spans & 0x8) != 0) {
-						Square adjacent = tiles[tileX][tileZ - 1];
-						if (adjacent != null && adjacent.drawBack) {
-							drawTileQueue.push(adjacent);
-						}
-					}
-				}
-			}
-
-			if (tile.cornerSides != 0) {
-				boolean draw = true;
-				for (int i = 0; i < tile.primaryCount; i++) {
-					if (tile.sprite[i].cycle != cycle && (tile.primaryExtendDirections[i] & tile.cornerSides) == tile.sidesBeforeCorner) {
-						draw = false;
+						var64 = var8[var4 + 1][var5];
+					} while (var64 != null && var64.drawBack);
+					if (var5 > eyeTileZ || var5 <= minDrawTileZ) {
 						break;
 					}
+					var65 = var8[var4][var5 - 1];
+				} while (var65 != null && var65.drawBack);
+				if (var5 < eyeTileZ || var5 >= maxDrawTileZ - 1) {
+					break;
 				}
-
-				if (draw) {
-					Wall wall = tile.wall;
-
-					if (!this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle1)) {
-						wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
-					}
-
-					tile.cornerSides = 0;
-				}
-			}
-
-			if (tile.drawPrimaries) {
-				int count = tile.primaryCount;
-				tile.drawPrimaries = false;
-				int locBufferSize = 0;
-
-				iterate_locs:
-				for (int i = 0; i < count; i++) {
-					Sprite loc = tile.sprite[i];
-					if (loc.cycle != cycle) {
-						for (int x = loc.minGridX; x <= loc.maxGridX; x++) {
-							for (int z = loc.minGridZ; z <= loc.maxGridZ; z++) {
-								Square other = tiles[x][z];
-								if (other.drawFront) {
-									tile.drawPrimaries = true;
-									continue iterate_locs;
-								}
-
-								if (other.cornerSides != 0) {
-									int spans = 0;
-
-									if (x > loc.minGridX) {
-										spans++;
-									}
-									if (x < loc.maxGridX) {
-										spans += 4;
-									}
-
-									if (z > loc.minGridZ) {
-										spans += 8;
-									}
-									if (z < loc.maxGridZ) {
-										spans += 2;
-									}
-
-									if ((spans & other.cornerSides) == tile.sidesAfterCorner) {
-										tile.drawPrimaries = true;
-										continue iterate_locs;
-									}
-								}
-							}
-						}
-
-						locBuffer[locBufferSize++] = loc;
-
-						int minTileDistanceX = eyeTileX - loc.minGridX;
-						int maxTileDistanceX = loc.maxGridX - eyeTileX;
-						if (maxTileDistanceX > minTileDistanceX) {
-							minTileDistanceX = maxTileDistanceX;
-						}
-
-						int minTileDistanceZ = eyeTileZ - loc.minGridZ;
-						int maxTileDistanceZ = loc.maxGridZ - eyeTileZ;
-						if (maxTileDistanceZ > minTileDistanceZ) {
-							loc.distance = minTileDistanceX + maxTileDistanceZ;
-						} else {
-							loc.distance = minTileDistanceX + minTileDistanceZ;
-						}
-					}
-				}
-
-				while (locBufferSize > 0) {
-					int farthestDistance = -50;
-					int farthestIndex = -1;
-
-					for (int i = 0; i < locBufferSize; i++) {
-						Sprite loc = locBuffer[i];
-						if (loc.distance > farthestDistance && loc.cycle != cycle) {
-							farthestDistance = loc.distance;
-							farthestIndex = i;
-						}
-					}
-
-					if (farthestIndex == -1) {
-						break;
-					}
-
-					Sprite farthest = locBuffer[farthestIndex];
-					farthest.cycle = cycle;
-
-					if (!this.locVisible(originalLevel, farthest.minGridX, farthest.maxGridX, farthest.minGridZ, farthest.maxGridZ, farthest.model.minY)) {
-						farthest.model.draw(farthest.angle, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, farthest.x - eyeX, farthest.y - eyeY, farthest.z - eyeZ, farthest.typecode);
-					}
-
-					for (int x = farthest.minGridX; x <= farthest.maxGridX; x++) {
-						for (int z = farthest.minGridZ; z <= farthest.maxGridZ; z++) {
-							Square occupied = tiles[x][z];
-
-							if (occupied.cornerSides != 0) {
-								drawTileQueue.push(occupied);
-							} else if ((x != tileX || z != tileZ) && occupied.drawBack) {
-								drawTileQueue.push(occupied);
-							}
-						}
-					}
-				}
-
-				if (!tile.drawPrimaries) {
-					continue;
-				}
-			}
-
-			if (!tile.drawBack) {
-				continue;
-			}
-
-			if (tile.cornerSides != 0) {
-				continue;
-			}
-
-			if (tileX <= eyeTileX && tileX > minDrawTileX) {
-				Square var63 = tiles[tileX - 1][tileZ];
-
-				if (var63 != null && var63.drawBack) {
-					continue;
-				}
-			}
-
-			if (tileX >= eyeTileX || tileX < maxDrawTileX - 1) {
-				Square var64 = tiles[tileX + 1][tileZ];
-
-				if (var64 != null && var64.drawBack) {
-					continue;
-				}
-			}
-
-			if (tileZ <= eyeTileZ || tileZ > minDrawTileZ) {
-				Square var65 = tiles[tileX][tileZ - 1];
-
-				if (var65 != null && var65.drawBack) {
-					continue;
-				}
-			}
-
-			if (tileZ >= eyeTileZ || tileZ < maxDrawTileZ - 1) {
-				Square var66 = tiles[tileX][tileZ + 1];
-
-				if (var66 != null && var66.drawBack) {
-					continue;
-				}
-			}
-
-			tile.drawBack = false;
+				var66 = var8[var4][var5 + 1];
+			} while (var66 != null && var66.drawBack);
+			var3.drawBack = false;
 			tilesRemaining--;
-
-			GroundObject objs = tile.groundObject;
-			if (objs != null && objs.height != 0) {
-				if (objs.bottom != null) {
-					objs.bottom.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, objs.x - eyeX, objs.y - eyeY - objs.height, objs.z - eyeZ, objs.typecode);
+			GroundObject var67 = var3.groundObject;
+			if (var67 != null && var67.height != 0) {
+				if (var67.bottom != null) {
+					var67.bottom.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var67.x - eyeX, var67.y - eyeY - var67.height, var67.z - eyeZ, var67.typecode);
 				}
-
-				if (objs.middle != null) {
-					objs.middle.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, objs.x - eyeX, objs.y - eyeY - objs.height, objs.z - eyeZ, objs.typecode);
+				if (var67.middle != null) {
+					var67.middle.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var67.x - eyeX, var67.y - eyeY - var67.height, var67.z - eyeZ, var67.typecode);
 				}
-
-				if (objs.top != null) {
-					objs.top.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, objs.x - eyeX, objs.y - eyeY - objs.height, objs.z - eyeZ, objs.typecode);
+				if (var67.top != null) {
+					var67.top.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var67.x - eyeX, var67.y - eyeY - var67.height, var67.z - eyeZ, var67.typecode);
 				}
 			}
-
-			if (tile.backWallTypes != 0) {
-				Decor decor = tile.decor;
-				if (decor != null && !this.isTileColumnOccluded(originalLevel, tileX, tileZ, decor.model.minY)) {
-					if ((decor.angle1 & tile.backWallTypes) != 0) {
-						decor.model.draw(decor.angle2, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, decor.x - eyeX, decor.y - eyeY, decor.z - eyeZ, decor.typecode);
-					} else if ((decor.angle1 & 0x300) != 0) {
-						int x = decor.x - eyeX;
-						int y = decor.y - eyeY;
-						int z = decor.z - eyeZ;
-						int angle = decor.angle2;
-
-						int nearestX;
-						if (angle == 1 || angle == 2) {
-							nearestX = -x;
+			if (var3.backWallTypes != 0) {
+				Decor var68 = var3.decor;
+				if (var68 != null && !this.isTileColumnOccluded(var7, var4, var5, var68.model.minY)) {
+					if ((var68.angle1 & var3.backWallTypes) != 0) {
+						var68.model.draw(var68.angle2, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var68.x - eyeX, var68.y - eyeY, var68.z - eyeZ, var68.typecode);
+					} else if ((var68.angle1 & 0x300) != 0) {
+						int var69 = var68.x - eyeX;
+						int var70 = var68.y - eyeY;
+						int var71 = var68.z - eyeZ;
+						int var72 = var68.angle2;
+						int var73;
+						if (var72 == 1 || var72 == 2) {
+							var73 = -var69;
 						} else {
-							nearestX = x;
+							var73 = var69;
 						}
-
-						int nearestZ;
-						if (angle == 2 || angle == 3) {
-							nearestZ = -z;
+						int var74;
+						if (var72 == 2 || var72 == 3) {
+							var74 = -var71;
 						} else {
-							nearestZ = z;
+							var74 = var71;
 						}
-
-						if ((decor.angle1 & 0x100) != 0 && nearestZ >= nearestX) {
-							int drawX = x + WALL_DECORATION_INSET_X[angle];
-							int drawZ = z + WALL_DECORATION_INSET_Z[angle];
-							decor.model.draw(angle * 512 + 256, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, drawX, y, drawZ, decor.typecode);
+						if ((var68.angle1 & 0x100) != 0 && var74 >= var73) {
+							int var75 = var69 + WALL_DECORATION_INSET_X[var72];
+							int var76 = var71 + WALL_DECORATION_INSET_Z[var72];
+							var68.model.draw(var72 * 512 + 256, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var75, var70, var76, var68.typecode);
 						}
-
-						if ((decor.angle1 & 0x200) != 0 && nearestZ <= nearestX) {
-							int drawX = x + WALL_DECORATION_OUTSET_X[angle];
-							int drawZ = z + WALL_DECORATION_OUTSET_Z[angle];
-							decor.model.draw(angle * 512 + 1280 & 0x7FF, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, drawX, y, drawZ, decor.typecode);
+						if ((var68.angle1 & 0x200) != 0 && var74 <= var73) {
+							int var77 = var69 + WALL_DECORATION_OUTSET_X[var72];
+							int var78 = var71 + WALL_DECORATION_OUTSET_Z[var72];
+							var68.model.draw(var72 * 512 + 1280 & 0x7FF, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var77, var70, var78, var68.typecode);
 						}
 					}
 				}
-
-				Wall wall = tile.wall;
-				if (wall != null) {
-					if ((wall.angle2 & tile.backWallTypes) != 0 && !this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle2)) {
-						wall.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
+				Wall var79 = var3.wall;
+				if (var79 != null) {
+					if ((var79.angle2 & var3.backWallTypes) != 0 && !this.isTileSideOccluded(var7, var4, var5, var79.angle2)) {
+						var79.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var79.x - eyeX, var79.y - eyeY, var79.z - eyeZ, var79.typecode1);
 					}
-
-					if ((wall.angle1 & tile.backWallTypes) != 0 && !this.isTileSideOccluded(originalLevel, tileX, tileZ, wall.angle1)) {
-						wall.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, wall.x - eyeX, wall.y - eyeY, wall.z - eyeZ, wall.typecode1);
+					if ((var79.angle1 & var3.backWallTypes) != 0 && !this.isTileSideOccluded(var7, var4, var5, var79.angle1)) {
+						var79.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var79.x - eyeX, var79.y - eyeY, var79.z - eyeZ, var79.typecode1);
 					}
 				}
 			}
-
-			if (level < this.maxLevel - 1) {
-				Square above = this.levelTiles[level + 1][tileX][tileZ];
-				if (above != null && above.drawBack) {
-					drawTileQueue.push(above);
+			if (var6 < this.maxLevel - 1) {
+				Square var80 = this.levelTiles[var6 + 1][var4][var5];
+				if (var80 != null && var80.drawBack) {
+					drawTileQueue.push(var80);
 				}
 			}
-
-			if (tileX < eyeTileX) {
-				Square adjacent = tiles[tileX + 1][tileZ];
-				if (adjacent != null && adjacent.drawBack) {
-					drawTileQueue.push(adjacent);
+			if (var4 < eyeTileX) {
+				Square var81 = var8[var4 + 1][var5];
+				if (var81 != null && var81.drawBack) {
+					drawTileQueue.push(var81);
 				}
 			}
-
-			if (tileZ < eyeTileZ) {
-				Square adjacent = tiles[tileX][tileZ + 1];
-				if (adjacent != null && adjacent.drawBack) {
-					drawTileQueue.push(adjacent);
+			if (var5 < eyeTileZ) {
+				Square var82 = var8[var4][var5 + 1];
+				if (var82 != null && var82.drawBack) {
+					drawTileQueue.push(var82);
 				}
 			}
-
-			if (tileX > eyeTileX) {
-				Square adjacent = tiles[tileX - 1][tileZ];
-				if (adjacent != null && adjacent.drawBack) {
-					drawTileQueue.push(adjacent);
+			if (var4 > eyeTileX) {
+				Square var83 = var8[var4 - 1][var5];
+				if (var83 != null && var83.drawBack) {
+					drawTileQueue.push(var83);
 				}
 			}
-
-			if (tileZ > eyeTileZ) {
-				Square adjacent = tiles[tileX][tileZ - 1];
-				if (adjacent != null && adjacent.drawBack) {
-					drawTileQueue.push(adjacent);
+			if (var5 > eyeTileZ) {
+				Square var84 = var8[var4][var5 - 1];
+				if (var84 != null && var84.drawBack) {
+					drawTileQueue.push(var84);
 				}
 			}
 		}

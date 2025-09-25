@@ -175,35 +175,34 @@ public class ClientEntity extends ModelSource {
 			this.primarySeqId = -1;
 		}
 
-		if (jump) {
-			this.routeLength = 0;
-			this.preanimRouteLength = 0;
-			this.seqDelayMove = 0;
-			this.routeTileX[0] = x;
-			this.routeTileZ[0] = z;
-			this.x = this.routeTileX[0] * 128 + this.size * 64;
-			this.z = this.routeTileZ[0] * 128 + this.size * 64;
-		} else {
+		if (!jump) {
 			int dx = x - this.routeTileX[0];
 			int dz = z - this.routeTileZ[0];
-			if (dx < -8 || dx > 8 || dz < -8 || dz > 8) {
+			if (dx >= -8 && dx <= 8 && dz >= -8 && dz <= 8) {
+				if (this.routeLength < 9) {
+					this.routeLength++;
+				}
+
+				for (int i = this.routeLength; i > 0; i--) {
+					this.routeTileX[i] = this.routeTileX[i - 1];
+					this.routeTileZ[i] = this.routeTileZ[i - 1];
+					this.routeRun[i] = this.routeRun[i - 1];
+				}
+
+				this.routeTileX[0] = x;
+				this.routeTileZ[0] = z;
+				this.routeRun[0] = false;
 				return;
 			}
-
-			if (this.routeLength < 9) {
-				this.routeLength++;
-			}
-
-			for (int i = this.routeLength; i > 0; i--) {
-				this.routeTileX[i] = this.routeTileX[i - 1];
-				this.routeTileZ[i] = this.routeTileZ[i - 1];
-				this.routeRun[i] = this.routeRun[i - 1];
-			}
-
-			this.routeTileX[0] = x;
-			this.routeTileZ[0] = z;
-			this.routeRun[0] = false;
 		}
+
+		this.routeLength = 0;
+		this.preanimRouteLength = 0;
+		this.seqDelayMove = 0;
+		this.routeTileX[0] = x;
+		this.routeTileZ[0] = z;
+		this.x = this.routeTileX[0] * 128 + this.size * 64;
+		this.z = this.routeTileZ[0] * 128 + this.size * 64;
 	}
 
 	@ObfuscatedName("z.a(ZII)V")
