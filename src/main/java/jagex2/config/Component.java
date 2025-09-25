@@ -137,10 +137,10 @@ public class Component {
 	public int colour;
 
 	@ObfuscatedName("d.V")
-	public int overColour;
+	public int activeColour;
 
 	@ObfuscatedName("d.W")
-	public int activeColour;
+	public int overColour;
 
 	@ObfuscatedName("d.X")
 	public int activeOverColour;
@@ -327,8 +327,8 @@ public class Component {
 					com.colour = var4.g4();
 				}
 				if (com.type == 3 || com.type == 4) {
-					com.overColour = var4.g4();
 					com.activeColour = var4.g4();
+					com.overColour = var4.g4();
 					com.activeOverColour = var4.g4();
 				}
 				if (com.type == 5) {

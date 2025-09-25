@@ -10048,14 +10048,14 @@ public class Client extends GameShell {
 				}
 				int var32;
 				if (this.executeInterfaceScript(var14)) {
-					var32 = var14.overColour;
+					var32 = var14.activeColour;
 					if (var31 && var14.activeOverColour != 0) {
 						var32 = var14.activeOverColour;
 					}
 				} else {
 					var32 = var14.colour;
-					if (var31 && var14.activeColour != 0) {
-						var32 = var14.activeColour;
+					if (var31 && var14.overColour != 0) {
+						var32 = var14.overColour;
 					}
 				}
 				if (var14.trans == 0) {
@@ -10078,7 +10078,7 @@ public class Client extends GameShell {
 				}
 				int var36;
 				if (this.executeInterfaceScript(var14)) {
-					var36 = var14.overColour;
+					var36 = var14.activeColour;
 					if (var35 && var14.activeOverColour != 0) {
 						var36 = var14.activeOverColour;
 					}
@@ -10087,8 +10087,8 @@ public class Client extends GameShell {
 					}
 				} else {
 					var36 = var14.colour;
-					if (var35 && var14.activeColour != 0) {
-						var36 = var14.activeColour;
+					if (var35 && var14.overColour != 0) {
+						var36 = var14.overColour;
 					}
 				}
 				if (var14.buttonType == 6 && this.pressedContinueOption) {
@@ -10432,7 +10432,7 @@ public class Client extends GameShell {
 			Component var12 = Component.types[arg4.children[var9]];
 			int var13 = var10 + var12.x;
 			int var14 = var11 + var12.y;
-			if ((var12.overlayer >= 0 || var12.activeColour != 0) && arg5 >= var13 && arg2 >= var14 && arg5 < var13 + var12.width && arg2 < var14 + var12.height) {
+			if ((var12.overlayer >= 0 || var12.overColour != 0) && arg5 >= var13 && arg2 >= var14 && arg5 < var13 + var12.width && arg2 < var14 + var12.height) {
 				if (var12.overlayer >= 0) {
 					this.lastHoveredInterfaceId = var12.overlayer;
 				} else {
