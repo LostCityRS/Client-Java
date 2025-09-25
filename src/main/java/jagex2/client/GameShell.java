@@ -317,16 +317,30 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.nextMouseClickY = y;
 		this.nextMouseClickTime = System.currentTimeMillis();
 
-		if (e.isMetaDown()) {
-			this.nextMouseClickButton = 2;
-			this.mouseButton = 2;
-		} else {
-			this.nextMouseClickButton = 1;
-			this.mouseButton = 1;
-		}
+		try {
+			if (e.getButton() == MouseEvent.BUTTON3) {
+				this.nextMouseClickButton = 2;
+				this.mouseButton = 2;
+			} else {
+				this.nextMouseClickButton = 1;
+				this.mouseButton = 1;
+			}
 
-		if (InputTracking.enabled) {
-			InputTracking.mousePressed(y, e.isMetaDown() ? 1 : 0, x);
+			if (InputTracking.enabled) {
+				InputTracking.mousePressed(y, e.getButton() == MouseEvent.BUTTON3 ? 1 : 0, x);
+			}
+		} catch (NoSuchMethodError ex) {
+			if (e.isMetaDown()) {
+				this.nextMouseClickButton = 2;
+				this.mouseButton = 2;
+			} else {
+				this.nextMouseClickButton = 1;
+				this.mouseButton = 1;
+			}
+
+			if (InputTracking.enabled) {
+				InputTracking.mousePressed(y, e.isMetaDown() ? 1 : 0, x);
+			}
 		}
 	}
 
@@ -334,8 +348,14 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.idleCycles = 0;
 		this.mouseButton = 0;
 
-		if (InputTracking.enabled) {
-			InputTracking.mouseReleased(e.isMetaDown() ? 1 : 0);
+		try {
+			if (InputTracking.enabled) {
+				InputTracking.mouseReleased(e.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
+			}
+		} catch (NoSuchMethodError ex) {
+			if (InputTracking.enabled) {
+				InputTracking.mouseReleased(e.isMetaDown() ? 1 : 0);
+			}
 		}
 	}
 
