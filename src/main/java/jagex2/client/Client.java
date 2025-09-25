@@ -4681,7 +4681,7 @@ public class Client extends GameShell {
 							this.redrawChatback = true;
 						}
 					} else if (this.chatInterfaceId == -1) {
-						if (key >= 32 && key <= 122 && this.chatTyped.length() < 80) {
+						if (key >= 32 && (key <= 122 || (this.chatTyped.startsWith("::") && key <= 126)) && this.chatTyped.length() < 80) {
 							this.chatTyped = this.chatTyped + (char) key;
 							this.redrawChatback = true;
 						}
