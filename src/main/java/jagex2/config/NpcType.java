@@ -274,9 +274,9 @@ public class NpcType {
 			int var5 = var3.field1763;
 			int var6 = var3.field1764;
 			int var7 = Client.field510[var6 - var5];
-			var2 = varProvider.field335[var4] >> var5 & var7;
+			var2 = varProvider.varps[var4] >> var5 & var7;
 		} else if (this.field1462 != -1) {
-			var2 = varProvider.field335[this.field1462];
+			var2 = varProvider.varps[this.field1462];
 		}
 		if (var2 < 0 || var2 >= this.field1425.length || this.field1425[var2] == -1) {
 			return false;
@@ -365,9 +365,9 @@ public class NpcType {
 			int var5 = var3.field1763;
 			int var6 = var3.field1764;
 			int var7 = Client.field510[var6 - var5];
-			var2 = varProvider.field335[var4] >> var5 & var7;
+			var2 = varProvider.varps[var4] >> var5 & var7;
 		} else if (this.field1462 != -1) {
-			var2 = varProvider.field335[this.field1462];
+			var2 = varProvider.varps[this.field1462];
 		}
 		return var2 < 0 || var2 >= this.field1425.length || this.field1425[var2] == -1 ? null : get(this.field1425[var2]);
 	}

@@ -129,9 +129,9 @@ public class ClientPlayer extends ClientEntity {
 			Model var7 = new Model(var5, var4, (byte) -89);
 			for (int var8 = 0; var8 < 5; var8++) {
 				if (this.field1682[var8] != 0) {
-					var7.method373(Client.field304[var8][0], Client.field304[var8][this.field1682[var8]]);
+					var7.method373(Client.DESIGN_BODY_COLOUR[var8][0], Client.DESIGN_BODY_COLOUR[var8][this.field1682[var8]]);
 					if (var8 == 1) {
-						var7.method373(Client.field564[0], Client.field564[this.field1682[var8]]);
+						var7.method373(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.field1682[var8]]);
 					}
 				}
 			}
@@ -228,9 +228,9 @@ public class ClientPlayer extends ClientEntity {
 			var11 = new Model(var16, var15, (byte) -89);
 			for (int var18 = 0; var18 < 5; var18++) {
 				if (this.field1682[var18] != 0) {
-					var11.method373(Client.field304[var18][0], Client.field304[var18][this.field1682[var18]]);
+					var11.method373(Client.DESIGN_BODY_COLOUR[var18][0], Client.DESIGN_BODY_COLOUR[var18][this.field1682[var18]]);
 					if (var18 == 1) {
-						var11.method373(Client.field564[0], Client.field564[this.field1682[var18]]);
+						var11.method373(Client.DESIGN_HAIR_COLOUR[0], Client.DESIGN_HAIR_COLOUR[this.field1682[var18]]);
 					}
 				}
 			}
@@ -357,7 +357,7 @@ public class ClientPlayer extends ClientEntity {
 		}
 		for (int var6 = 0; var6 < 5; var6++) {
 			int var11 = arg0.g1();
-			if (var11 < 0 || var11 >= Client.field304[var6].length) {
+			if (var11 < 0 || var11 >= Client.DESIGN_BODY_COLOUR[var6].length) {
 				var11 = 0;
 			}
 			this.field1682[var6] = var11;
