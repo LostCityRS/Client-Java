@@ -58,7 +58,7 @@ public class ClientLocAnim extends ModelSource {
 			int var4 = var3.field1762;
 			int var5 = var3.field1763;
 			int var6 = var3.field1764;
-			int var7 = Client.field510[var6 - var5];
+			int var7 = Client.VARBIT_MASKS[var6 - var5];
 			var2 = varProvider.varps[var4] >> var5 & var7;
 		} else if (this.field1340 != -1) {
 			var2 = varProvider.varps[this.field1340];
