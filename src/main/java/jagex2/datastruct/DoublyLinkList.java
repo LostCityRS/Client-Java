@@ -5,67 +5,68 @@ import deob.ObfuscatedName;
 public class DoublyLinkList {
 
 	@ObfuscatedName("CZYJUOKA.b")
-	public DoublyLinkable field631 = new DoublyLinkable();
+	public DoublyLinkable sentinel = new DoublyLinkable();
 
 	@ObfuscatedName("CZYJUOKA.c")
-	public DoublyLinkable field632;
+	public DoublyLinkable cursor;
 
 	public DoublyLinkList() {
-		this.field631.field633 = this.field631;
-		this.field631.field634 = this.field631;
+		this.sentinel.next2 = this.sentinel;
+		this.sentinel.prev2 = this.sentinel;
 	}
 
 	@ObfuscatedName("CZYJUOKA.a(LDPPNUUMQ;)V")
-	public void method180(DoublyLinkable arg0) {
-		if (arg0.field634 != null) {
-			arg0.method185();
+	public void push(DoublyLinkable node) {
+		if (node.prev2 != null) {
+			node.unlink2();
 		}
-		arg0.field634 = this.field631.field634;
-		arg0.field633 = this.field631;
-		arg0.field634.field633 = arg0;
-		arg0.field633.field634 = arg0;
+
+		node.prev2 = this.sentinel.prev2;
+		node.next2 = this.sentinel;
+		node.prev2.next2 = node;
+		node.next2.prev2 = node;
 	}
 
 	@ObfuscatedName("CZYJUOKA.a()LDPPNUUMQ;")
-	public DoublyLinkable method181() {
-		DoublyLinkable var1 = this.field631.field633;
-		if (this.field631 == var1) {
+	public DoublyLinkable pop() {
+		DoublyLinkable node = this.sentinel.next2;
+		if (this.sentinel == node) {
 			return null;
 		} else {
-			var1.method185();
-			return var1;
+			node.unlink2();
+			return node;
 		}
 	}
 
 	@ObfuscatedName("CZYJUOKA.b()LDPPNUUMQ;")
-	public DoublyLinkable method182() {
-		DoublyLinkable var1 = this.field631.field633;
-		if (this.field631 == var1) {
-			this.field632 = null;
+	public DoublyLinkable head() {
+		DoublyLinkable node = this.sentinel.next2;
+		if (this.sentinel == node) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field632 = var1.field633;
-			return var1;
+			this.cursor = node.next2;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("CZYJUOKA.a(I)LDPPNUUMQ;")
-	public DoublyLinkable method183() {
-		DoublyLinkable var2 = this.field632;
-		if (this.field631 == var2) {
-			this.field632 = null;
+	public DoublyLinkable next() {
+		DoublyLinkable node = this.cursor;
+		if (this.sentinel == node) {
+			this.cursor = null;
 			return null;
 		}
-		this.field632 = var2.field633;
-		return var2;
+		this.cursor = node.next2;
+		return node;
 	}
 
 	@ObfuscatedName("CZYJUOKA.c()I")
-	public int method184() {
-		int var1 = 0;
-		for (DoublyLinkable var2 = this.field631.field633; var2 != this.field631; var2 = var2.field633) {
-			var1++;
+	public int size() {
+		int count = 0;
+		for (DoublyLinkable node = this.sentinel.next2; node != this.sentinel; node = node.next2) {
+			count++;
 		}
-		return var1;
+		return count;
 	}
 }

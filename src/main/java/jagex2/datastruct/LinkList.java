@@ -5,107 +5,112 @@ import deob.ObfuscatedName;
 public class LinkList {
 
 	@ObfuscatedName("BOHLFXVX.c")
-	public Linkable field92 = new Linkable();
+	public Linkable sentinel = new Linkable();
 
 	@ObfuscatedName("BOHLFXVX.d")
-	public Linkable field93;
+	public Linkable cursor;
 
 	public LinkList() {
-		this.field92.field1770 = this.field92;
-		this.field92.field1771 = this.field92;
+		this.sentinel.next = this.sentinel;
+		this.sentinel.prev = this.sentinel;
 	}
 
 	@ObfuscatedName("BOHLFXVX.a(LZUOIJLRD;)V")
-	public void method3(Linkable arg0) {
-		if (arg0.field1771 != null) {
-			arg0.unlink();
+	public void push(Linkable node) {
+		if (node.prev != null) {
+			node.unlink();
 		}
-		arg0.field1771 = this.field92.field1771;
-		arg0.field1770 = this.field92;
-		arg0.field1771.field1770 = arg0;
-		arg0.field1770.field1771 = arg0;
+
+		node.prev = this.sentinel.prev;
+		node.next = this.sentinel;
+		node.prev.next = node;
+		node.next.prev = node;
 	}
 
 	@ObfuscatedName("BOHLFXVX.a(BLZUOIJLRD;)V")
-	public void method4(Linkable arg1) {
-		if (arg1.field1771 != null) {
-			arg1.unlink();
+	public void addHead(Linkable node) {
+		if (node.prev != null) {
+			node.unlink();
 		}
-		arg1.field1771 = this.field92;
-		arg1.field1770 = this.field92.field1770;
-		arg1.field1771.field1770 = arg1;
-		arg1.field1770.field1771 = arg1;
+
+		node.prev = this.sentinel;
+		node.next = this.sentinel.next;
+		node.prev.next = node;
+		node.next.prev = node;
 	}
 
 	@ObfuscatedName("BOHLFXVX.a()LZUOIJLRD;")
-	public Linkable method5() {
-		Linkable var1 = this.field92.field1770;
-		if (this.field92 == var1) {
+	public Linkable pop() {
+		Linkable node = this.sentinel.next;
+		if (this.sentinel == node) {
 			return null;
 		} else {
-			var1.unlink();
-			return var1;
+			node.unlink();
+			return node;
 		}
 	}
 
 	@ObfuscatedName("BOHLFXVX.b()LZUOIJLRD;")
-	public Linkable method6() {
-		Linkable var1 = this.field92.field1770;
-		if (this.field92 == var1) {
-			this.field93 = null;
+	public Linkable head() {
+		Linkable node = this.sentinel.next;
+		if (this.sentinel == node) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field93 = var1.field1770;
-			return var1;
+			this.cursor = node.next;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("BOHLFXVX.a(Z)LZUOIJLRD;")
-	public Linkable method7() {
-		Linkable var2 = this.field92.field1771;
-		if (this.field92 == var2) {
-			this.field93 = null;
+	public Linkable tail() {
+		Linkable node = this.sentinel.prev;
+		if (this.sentinel == node) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field93 = var2.field1771;
-			return var2;
+			this.cursor = node.prev;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("BOHLFXVX.a(I)LZUOIJLRD;")
-	public Linkable method8() {
-		Linkable var2 = this.field93;
-		if (this.field92 == var2) {
-			this.field93 = null;
+	public Linkable next() {
+		Linkable node = this.cursor;
+		if (this.sentinel == node) {
+			this.cursor = null;
 			return null;
 		}
-		this.field93 = var2.field1770;
-		return var2;
+		
+		this.cursor = node.next;
+		return node;
 	}
 
 	@ObfuscatedName("BOHLFXVX.b(I)LZUOIJLRD;")
-	public Linkable method9() {
-		Linkable var2 = this.field93;
-		if (this.field92 == var2) {
-			this.field93 = null;
+	public Linkable prev() {
+		Linkable node = this.cursor;
+		if (this.sentinel == node) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field93 = var2.field1771;
-			return var2;
+			this.cursor = node.prev;
+			return node;
 		}
 	}
 
 	@ObfuscatedName("BOHLFXVX.c()V")
-	public void method10() {
-		if (this.field92.field1770 == this.field92) {
+	public void clear() {
+		if (this.sentinel.next == this.sentinel) {
 			return;
 		}
+
 		while (true) {
-			Linkable var1 = this.field92.field1770;
-			if (this.field92 == var1) {
+			Linkable node = this.sentinel.next;
+			if (this.sentinel == node) {
 				return;
 			}
-			var1.unlink();
+
+			node.unlink();
 		}
 	}
 }

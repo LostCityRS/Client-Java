@@ -5,21 +5,21 @@ import deob.ObfuscatedName;
 public class Linkable {
 
 	@ObfuscatedName("ZUOIJLRD.a")
-	public long field1769;
+	public long key;
 
 	@ObfuscatedName("ZUOIJLRD.b")
-	public Linkable field1770;
+	public Linkable next;
 
 	@ObfuscatedName("ZUOIJLRD.c")
-	public Linkable field1771;
+	public Linkable prev;
 
 	@ObfuscatedName("ZUOIJLRD.a()V")
 	public void unlink() {
-		if (this.field1771 != null) {
-			this.field1771.field1770 = this.field1770;
-			this.field1770.field1771 = this.field1771;
-			this.field1770 = null;
-			this.field1771 = null;
+		if (this.prev != null) {
+			this.prev.next = this.next;
+			this.next.prev = this.prev;
+			this.next = null;
+			this.prev = null;
 		}
 	}
 }

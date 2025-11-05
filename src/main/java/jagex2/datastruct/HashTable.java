@@ -5,42 +5,46 @@ import deob.ObfuscatedName;
 public class HashTable {
 
 	@ObfuscatedName("JLFXAIRK.c")
-	public int field899;
+	public int bucketCount;
 
 	@ObfuscatedName("JLFXAIRK.d")
-	public Linkable[] field900;
+	public Linkable[] buckets;
 
-	public HashTable(int arg1) {
-		this.field899 = arg1;
-		this.field900 = new Linkable[arg1];
-		for (int var3 = 0; var3 < arg1; var3++) {
-			Linkable var5 = this.field900[var3] = new Linkable();
-			var5.field1770 = var5;
-			var5.field1771 = var5;
+	public HashTable(int size) {
+		this.bucketCount = size;
+		this.buckets = new Linkable[size];
+
+		for (int i = 0; i < size; i++) {
+			Linkable node = this.buckets[i] = new Linkable();
+			node.next = node;
+			node.prev = node;
 		}
 	}
 
 	@ObfuscatedName("JLFXAIRK.a(J)LZUOIJLRD;")
-	public Linkable method259(long arg0) {
-		Linkable var3 = this.field900[(int) (arg0 & (long) (this.field899 - 1))];
-		for (Linkable var4 = var3.field1770; var4 != var3; var4 = var4.field1770) {
-			if (var4.field1769 == arg0) {
-				return var4;
+	public Linkable get(long key) {
+		Linkable sentinel = this.buckets[(int) (key & (long) (this.bucketCount - 1))];
+
+		for (Linkable node = sentinel.next; node != sentinel; node = node.next) {
+			if (node.key == key) {
+				return node;
 			}
 		}
+
 		return null;
 	}
 
 	@ObfuscatedName("JLFXAIRK.a(ILZUOIJLRD;J)V")
-	public void method260(Linkable arg1, long arg2) {
-		if (arg1.field1771 != null) {
-			arg1.unlink();
+	public void put(Linkable node, long key) {
+		if (node.prev != null) {
+			node.unlink();
 		}
-		Linkable var5 = this.field900[(int) (arg2 & (long) (this.field899 - 1))];
-		arg1.field1771 = var5.field1771;
-		arg1.field1770 = var5;
-		arg1.field1771.field1770 = arg1;
-		arg1.field1770.field1771 = arg1;
-		arg1.field1769 = arg2;
+
+		Linkable sentinel = this.buckets[(int) (key & (long) (this.bucketCount - 1))];
+		node.prev = sentinel.prev;
+		node.next = sentinel;
+		node.prev.next = node;
+		node.next.prev = node;
+		node.key = key;
 	}
 }

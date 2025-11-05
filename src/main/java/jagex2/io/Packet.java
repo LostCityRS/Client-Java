@@ -53,13 +53,13 @@ public class Packet extends DoublyLinkable {
 			Packet var3 = null;
 			if (arg1 == 0 && field1285 > 0) {
 				field1285--;
-				var3 = (Packet) field1288.method5();
+				var3 = (Packet) field1288.pop();
 			} else if (arg1 == 1 && field1286 > 0) {
 				field1286--;
-				var3 = (Packet) field1289.method5();
+				var3 = (Packet) field1289.pop();
 			} else if (arg1 == 2 && field1287 > 0) {
 				field1287--;
-				var3 = (Packet) field1290.method5();
+				var3 = (Packet) field1290.pop();
 			}
 			if (var3 != null) {
 				var3.pos = 0;

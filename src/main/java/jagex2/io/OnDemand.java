@@ -16,713 +16,812 @@ import sign.signlink;
 public class OnDemand extends OnDemandProvider implements Runnable {
 
 	@ObfuscatedName("ZPGPWCCV.e")
-	public byte[][] field1714 = new byte[4][];
+	public byte[][] priorities = new byte[4][];
 
 	@ObfuscatedName("ZPGPWCCV.f")
-	public boolean field1715 = false;
+	public boolean active = false;
 
 	@ObfuscatedName("ZPGPWCCV.g")
-	public boolean field1716 = true;
+	public boolean running = true;
 
 	@ObfuscatedName("ZPGPWCCV.h")
-	public LinkList field1717 = new LinkList();
+	public LinkList queue = new LinkList();
 
 	@ObfuscatedName("ZPGPWCCV.l")
-	public int[][] field1721 = new int[4][];
+	public int[][] crcs = new int[4][];
 
 	@ObfuscatedName("ZPGPWCCV.o")
-	public String field1724 = "";
+	public String message = "";
 
 	@ObfuscatedName("ZPGPWCCV.s")
-	public LinkList field1728 = new LinkList();
+	public LinkList missing = new LinkList();
 
 	@ObfuscatedName("ZPGPWCCV.v")
-	public CRC32 field1731 = new CRC32();
+	public CRC32 crc32 = new CRC32();
 
 	@ObfuscatedName("ZPGPWCCV.y")
-	public LinkList field1734 = new LinkList();
+	public LinkList completed = new LinkList();
 
 	@ObfuscatedName("ZPGPWCCV.z")
-	public LinkList field1735 = new LinkList();
+	public LinkList prefetches = new LinkList();
 
 	@ObfuscatedName("ZPGPWCCV.A")
-	public byte[] field1736 = new byte[65000];
+	public byte[] data = new byte[65000];
 
 	@ObfuscatedName("ZPGPWCCV.F")
-	public byte[] field1741 = new byte[500];
+	public byte[] buf = new byte[500];
 
 	@ObfuscatedName("ZPGPWCCV.K")
-	public DoublyLinkList field1746 = new DoublyLinkList();
+	public DoublyLinkList requests = new DoublyLinkList();
 
 	@ObfuscatedName("ZPGPWCCV.P")
-	public LinkList field1751 = new LinkList();
+	public LinkList pending = new LinkList();
 
 	@ObfuscatedName("ZPGPWCCV.S")
-	public int[][] field1754 = new int[4][];
+	public int[][] versions = new int[4][];
 
 	@ObfuscatedName("ZPGPWCCV.b")
 	public int loadedPrefetchFiles;
 
 	@ObfuscatedName("ZPGPWCCV.i")
-	public int field1718;
+	public int topPriority;
 
 	@ObfuscatedName("ZPGPWCCV.j")
-	public int field1719;
+	public int urgentCount;
 
 	@ObfuscatedName("ZPGPWCCV.k")
-	public int field1720;
+	public int requestCount;
 
 	@ObfuscatedName("ZPGPWCCV.p")
-	public int field1725;
+	public int cycle;
 
 	@ObfuscatedName("ZPGPWCCV.r")
 	public int totalPrefetchFiles;
 
 	@ObfuscatedName("ZPGPWCCV.u")
-	public int field1730;
+	public int waitCycles;
 
 	@ObfuscatedName("ZPGPWCCV.C")
-	public int field1738;
+	public int partOffset;
 
 	@ObfuscatedName("ZPGPWCCV.D")
-	public int field1739;
+	public int partAvailable;
 
 	@ObfuscatedName("ZPGPWCCV.Q")
-	public int field1752;
+	public int heartbeatCycle;
 
 	@ObfuscatedName("ZPGPWCCV.U")
 	public int tries;
 
 	@ObfuscatedName("ZPGPWCCV.T")
-	public long field1755;
+	public long socketOpenTime;
 
 	@ObfuscatedName("ZPGPWCCV.N")
-	public OnDemandRequest field1749;
+	public OnDemandRequest current;
 
 	@ObfuscatedName("ZPGPWCCV.O")
-	public Client field1750;
+	public Client app;
 
 	@ObfuscatedName("ZPGPWCCV.L")
-	public InputStream field1747;
+	public InputStream in;
 
 	@ObfuscatedName("ZPGPWCCV.q")
-	public OutputStream field1726;
+	public OutputStream out;
 
 	@ObfuscatedName("ZPGPWCCV.w")
-	public Socket field1732;
+	public Socket socket;
 
 	@ObfuscatedName("ZPGPWCCV.c")
-	public byte[] field1712;
+	public byte[] models;
 
 	@ObfuscatedName("ZPGPWCCV.d")
-	public int[] field1713;
+	public int[] mapMembers;
 
 	@ObfuscatedName("ZPGPWCCV.n")
-	public int[] field1723;
+	public int[] mapIndex;
 
 	@ObfuscatedName("ZPGPWCCV.B")
-	public int[] field1737;
+	public int[] mapLand;
 
 	@ObfuscatedName("ZPGPWCCV.G")
-	public int[] field1742;
+	public int[] mapLoc;
 
 	@ObfuscatedName("ZPGPWCCV.H")
-	public int[] field1743;
+	public int[] midiIndex;
 
 	@ObfuscatedName("ZPGPWCCV.R")
-	public int[] field1753;
+	public int[] animIndex;
 
-	@ObfuscatedName("ZPGPWCCV.a(Z)V")
-	public void method581() {
-		try {
-			int var2 = this.field1747.available();
-			if (this.field1739 == 0 && var2 >= 6) {
-				this.field1715 = true;
-				for (int var3 = 0; var3 < 6; var3 += this.field1747.read(this.field1741, var3, 6 - var3)) {
-				}
-				int var4 = this.field1741[0] & 0xFF;
-				int var5 = ((this.field1741[1] & 0xFF) << 8) + (this.field1741[2] & 0xFF);
-				int var6 = ((this.field1741[3] & 0xFF) << 8) + (this.field1741[4] & 0xFF);
-				int var7 = this.field1741[5] & 0xFF;
-				this.field1749 = null;
-				for (OnDemandRequest var8 = (OnDemandRequest) this.field1751.method6(); var8 != null; var8 = (OnDemandRequest) this.field1751.method8()) {
-					if (var8.field1363 == var4 && var8.field1364 == var5) {
-						this.field1749 = var8;
-					}
-					if (this.field1749 != null) {
-						var8.field1365 = 0;
-					}
-				}
-				if (this.field1749 != null) {
-					this.field1730 = 0;
-					if (var6 == 0) {
-						signlink.reporterror("Rej: " + var4 + "," + var5);
-						this.field1749.field1366 = null;
-						if (this.field1749.field1367) {
-							LinkList var9 = this.field1734;
-							synchronized (this.field1734) {
-								this.field1734.method3(this.field1749);
-							}
-						} else {
-							this.field1749.unlink();
-						}
-						this.field1749 = null;
-					} else {
-						if (this.field1749.field1366 == null && var7 == 0) {
-							this.field1749.field1366 = new byte[var6];
-						}
-						if (this.field1749.field1366 == null && var7 != 0) {
-							throw new IOException("missing start of file");
-						}
-					}
-				}
-				this.field1738 = var7 * 500;
-				this.field1739 = 500;
-				if (this.field1739 > var6 - var7 * 500) {
-					this.field1739 = var6 - var7 * 500;
-				}
-			}
-			if (this.field1739 > 0 && var2 >= this.field1739) {
-				this.field1715 = true;
-				byte[] var10 = this.field1741;
-				int var11 = 0;
-				if (this.field1749 != null) {
-					var10 = this.field1749.field1366;
-					var11 = this.field1738;
-				}
-				for (int var12 = 0; var12 < this.field1739; var12 += this.field1747.read(var10, var11 + var12, this.field1739 - var12)) {
-				}
-				if (this.field1739 + this.field1738 >= var10.length && this.field1749 != null) {
-					if (this.field1750.fileStreams[0] != null) {
-						this.field1750.fileStreams[this.field1749.field1363 + 1].method326(var10.length, var10, this.field1749.field1364);
-					}
-					if (!this.field1749.field1367 && this.field1749.field1363 == 3) {
-						this.field1749.field1367 = true;
-						this.field1749.field1363 = 93;
-					}
-					if (this.field1749.field1367) {
-						LinkList var13 = this.field1734;
-						synchronized (this.field1734) {
-							this.field1734.method3(this.field1749);
-						}
-					} else {
-						this.field1749.unlink();
-					}
-				}
-				this.field1739 = 0;
-			}
-		} catch (IOException var18) {
-			try {
-				this.field1732.close();
-			} catch (Exception var15) {
-			}
-			this.field1732 = null;
-			this.field1747 = null;
-			this.field1726 = null;
-			this.field1739 = 0;
-		}
-	}
+	@ObfuscatedName("ZPGPWCCV.a(LATJMVOZR;Lclient;)V")
+	public void unpack(Jagfile jag, Client app) {
+		String[] version = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
+		for (int archive = 0; archive < 4; archive++) {
+			byte[] data = jag.read(version[archive], null);
+			int count = data.length / 2;
+			Packet buf = new Packet(data);
 
-	@ObfuscatedName("ZPGPWCCV.a(II)I")
-	public int getModelFlags(int arg0) {
-		return this.field1712[arg0] & 0xFF;
-	}
+			this.versions[archive] = new int[count];
+			this.priorities[archive] = new byte[count];
 
-	@ObfuscatedName("ZPGPWCCV.a(I)V")
-	public void method456(int arg0) {
-		this.request(0, arg0);
-	}
+			for (int file = 0; file < count; file++) {
+				this.versions[archive][file] = buf.g2();
+			}
+		}
 
-	@ObfuscatedName("ZPGPWCCV.b(I)V")
-	public void method583() {
-		while (this.field1719 == 0) {
-			if (this.field1720 >= 10 || this.field1718 == 0) {
-				return;
-			}
-			LinkList var2 = this.field1735;
-			OnDemandRequest var3;
-			synchronized (this.field1735) {
-				var3 = (OnDemandRequest) this.field1735.method5();
-			}
-			while (var3 != null) {
-				if (this.field1714[var3.field1363][var3.field1364] != 0) {
-					this.field1714[var3.field1363][var3.field1364] = 0;
-					this.field1751.method3(var3);
-					this.method599(var3);
-					this.field1715 = true;
-					if (this.loadedPrefetchFiles < this.totalPrefetchFiles) {
-						this.loadedPrefetchFiles++;
-					}
-					this.field1724 = "Loading extra files - " + this.loadedPrefetchFiles * 100 / this.totalPrefetchFiles + "%";
-					this.field1720++;
-					if (this.field1720 == 10) {
-						return;
-					}
-				}
-				LinkList var4 = this.field1735;
-				synchronized (this.field1735) {
-					var3 = (OnDemandRequest) this.field1735.method5();
-				}
-			}
-			for (int var5 = 0; var5 < 4; var5++) {
-				byte[] var6 = this.field1714[var5];
-				int var7 = var6.length;
-				for (int var8 = 0; var8 < var7; var8++) {
-					if (var6[var8] == this.field1718) {
-						var6[var8] = 0;
-						OnDemandRequest var9 = new OnDemandRequest();
-						var9.field1363 = var5;
-						var9.field1364 = var8;
-						var9.field1367 = false;
-						this.field1751.method3(var9);
-						this.method599(var9);
-						this.field1715 = true;
-						if (this.loadedPrefetchFiles < this.totalPrefetchFiles) {
-							this.loadedPrefetchFiles++;
-						}
-						this.field1724 = "Loading extra files - " + this.loadedPrefetchFiles * 100 / this.totalPrefetchFiles + "%";
-						this.field1720++;
-						if (this.field1720 == 10) {
-							return;
-						}
-					}
-				}
-			}
-			this.field1718--;
-		}
-	}
+		String[] crc = new String[] { "model_crc", "anim_crc", "midi_crc", "map_crc" };
+		for (int archive = 0; archive < 4; archive++) {
+			byte[] data = jag.read(crc[archive], null);
+			int count = data.length / 4;
+			Packet buf = new Packet(data);
 
-	@ObfuscatedName("ZPGPWCCV.a(IIBI)V")
-	public void prefetch(int arg1, byte arg2, int arg3) {
-		if (this.field1750.fileStreams[0] == null || this.field1754[arg1][arg3] == 0) {
-			return;
-		}
-		byte[] var5 = this.field1750.fileStreams[arg1 + 1].method325(arg3);
-		if (this.method598(var5, this.field1754[arg1][arg3], this.field1721[arg1][arg3])) {
-			return;
-		}
-		this.field1714[arg1][arg3] = arg2;
-		if (arg2 > this.field1718) {
-			this.field1718 = arg2;
-		}
-		this.totalPrefetchFiles++;
-	}
+			this.crcs[archive] = new int[count];
 
-	@ObfuscatedName("ZPGPWCCV.a(IZ)Z")
-	public boolean shouldPrefetchMidi(int arg0) {
-		return this.field1743[arg0] == 1;
-	}
-
-	@ObfuscatedName("ZPGPWCCV.b(II)V")
-	public void request(int arg0, int arg1) {
-		if (arg0 < 0 || arg0 > this.field1754.length || arg1 < 0 || arg1 > this.field1754[arg0].length || this.field1754[arg0][arg1] == 0) {
-			return;
-		}
-		DoublyLinkList var3 = this.field1746;
-		synchronized (this.field1746) {
-			for (OnDemandRequest var4 = (OnDemandRequest) this.field1746.method182(); var4 != null; var4 = (OnDemandRequest) this.field1746.method183()) {
-				if (var4.field1363 == arg0 && var4.field1364 == arg1) {
-					return;
-				}
+			for (int file = 0; file < count; file++) {
+				this.crcs[archive][file] = buf.g4();
 			}
-			OnDemandRequest var5 = new OnDemandRequest();
-			var5.field1363 = arg0;
-			var5.field1364 = arg1;
-			var5.field1367 = true;
-			LinkList var6 = this.field1717;
-			synchronized (this.field1717) {
-				this.field1717.method3(var5);
-			}
-			this.field1746.method180(var5);
 		}
-	}
 
-	@ObfuscatedName("ZPGPWCCV.a()LQSLIGKQQ;")
-	public OnDemandRequest method587() {
-		LinkList var1 = this.field1734;
-		OnDemandRequest var2;
-		synchronized (this.field1734) {
-			var2 = (OnDemandRequest) this.field1734.method5();
-		}
-		if (var2 == null) {
-			return null;
-		}
-		DoublyLinkList var3 = this.field1746;
-		synchronized (this.field1746) {
-			var2.method185();
-		}
-		if (var2.field1366 == null) {
-			return var2;
-		}
-		int var4 = 0;
-		try {
-			GZIPInputStream var5 = new GZIPInputStream(new ByteArrayInputStream(var2.field1366));
-			while (true) {
-				if (this.field1736.length == var4) {
-					throw new RuntimeException("buffer overflow!");
-				}
-				int var6 = var5.read(this.field1736, var4, this.field1736.length - var4);
-				if (var6 == -1) {
-					break;
-				}
-				var4 += var6;
-			}
-		} catch (IOException var10) {
-			throw new RuntimeException("error unzipping");
-		}
-		var2.field1366 = new byte[var4];
-		for (int var7 = 0; var7 < var4; var7++) {
-			var2.field1366[var7] = this.field1736[var7];
-		}
-		return var2;
-	}
+		byte[] data = jag.read("model_index", null);
+		int count = this.versions[0].length;
 
-	public void run() {
-		try {
-			while (this.field1716) {
-				this.field1725++;
-				byte var1 = 20;
-				if (this.field1718 == 0 && this.field1750.fileStreams[0] != null) {
-					var1 = 50;
-				}
-				try {
-					Thread.sleep((long) var1);
-				} catch (Exception var9) {
-				}
-				this.field1715 = true;
-				for (int var2 = 0; var2 < 100 && this.field1715; var2++) {
-					this.field1715 = false;
-					this.method595();
-					this.method588();
-					if (this.field1719 == 0 && var2 >= 5) {
-						break;
-					}
-					this.method583();
-					if (this.field1747 != null) {
-						this.method581();
-					}
-				}
-				boolean var3 = false;
-				for (OnDemandRequest var4 = (OnDemandRequest) this.field1751.method6(); var4 != null; var4 = (OnDemandRequest) this.field1751.method8()) {
-					if (var4.field1367) {
-						var3 = true;
-						var4.field1365++;
-						if (var4.field1365 > 50) {
-							var4.field1365 = 0;
-							this.method599(var4);
-						}
-					}
-				}
-				if (!var3) {
-					for (OnDemandRequest var5 = (OnDemandRequest) this.field1751.method6(); var5 != null; var5 = (OnDemandRequest) this.field1751.method8()) {
-						var3 = true;
-						var5.field1365++;
-						if (var5.field1365 > 50) {
-							var5.field1365 = 0;
-							this.method599(var5);
-						}
-					}
-				}
-				if (var3) {
-					this.field1730++;
-					if (this.field1730 > 750) {
-						try {
-							this.field1732.close();
-						} catch (Exception var8) {
-						}
-						this.field1732 = null;
-						this.field1747 = null;
-						this.field1726 = null;
-						this.field1739 = 0;
-					}
-				} else {
-					this.field1730 = 0;
-					this.field1724 = "";
-				}
-				if (this.field1750.ingame && this.field1732 != null && this.field1726 != null && (this.field1718 > 0 || this.field1750.fileStreams[0] == null)) {
-					this.field1752++;
-					if (this.field1752 > 500) {
-						this.field1752 = 0;
-						this.field1741[0] = 0;
-						this.field1741[1] = 0;
-						this.field1741[2] = 0;
-						this.field1741[3] = 10;
-						try {
-							this.field1726.write(this.field1741, 0, 4);
-						} catch (IOException var7) {
-							this.field1730 = 5000;
-						}
-					}
-				}
-			}
-		} catch (Exception var10) {
-			signlink.reporterror("od_ex " + var10.getMessage());
-		}
-	}
+		this.models = new byte[count];
 
-	@ObfuscatedName("ZPGPWCCV.c(I)V")
-	public void method588() {
-		this.field1719 = 0;
-		this.field1720 = 0;
-		for (OnDemandRequest var2 = (OnDemandRequest) this.field1751.method6(); var2 != null; var2 = (OnDemandRequest) this.field1751.method8()) {
-			if (var2.field1367) {
-				this.field1719++;
+		for (int file = 0; file < count; file++) {
+			if (file < data.length) {
+				this.models[file] = data[file];
 			} else {
-				this.field1720++;
+				this.models[file] = 0;
 			}
 		}
-		while (this.field1719 < 10) {
-			OnDemandRequest var3 = (OnDemandRequest) this.field1728.method5();
-			if (var3 == null) {
-				break;
-			}
-			if (this.field1714[var3.field1363][var3.field1364] != 0) {
-				this.loadedPrefetchFiles++;
-			}
-			this.field1714[var3.field1363][var3.field1364] = 0;
-			this.field1751.method3(var3);
-			this.field1719++;
-			this.method599(var3);
-			this.field1715 = true;
+
+		data = jag.read("map_index", null);
+		Packet buf = new Packet(data);
+		count = data.length / 7;
+
+		this.mapIndex = new int[count];
+		this.mapLand = new int[count];
+		this.mapLoc = new int[count];
+		this.mapMembers = new int[count];
+
+		for (int i = 0; i < count; i++) {
+			this.mapIndex[i] = buf.g2();
+			this.mapLand[i] = buf.g2();
+			this.mapLoc[i] = buf.g2();
+			this.mapMembers[i] = buf.g1();
 		}
+
+		data = jag.read("anim_index", null);
+		buf = new Packet(data);
+		count = data.length / 2;
+
+		this.animIndex = new int[count];
+
+		for (int frame = 0; frame < count; frame++) {
+			this.animIndex[frame] = buf.g2();
+		}
+
+		data = jag.read("midi_index", null);
+		buf = new Packet(data);
+		count = data.length;
+
+		this.midiIndex = new int[count];
+
+		for (int file = 0; file < count; file++) {
+			this.midiIndex[file] = buf.g1();
+		}
+
+		this.app = app;
+		this.running = true;
+		this.app.startThread(this, 2);
+	}
+
+	@ObfuscatedName("ZPGPWCCV.c()V")
+	public void stop() {
+		this.running = false;
+	}
+
+	@ObfuscatedName("ZPGPWCCV.c(II)I")
+	public int getFileCount(int archive) {
+		return this.versions[archive].length;
+	}
+
+	@ObfuscatedName("ZPGPWCCV.d(I)I")
+	public int getAnimCount() {
+		return this.animIndex.length;
+	}
+
+	@ObfuscatedName("ZPGPWCCV.a(IIII)I")
+	public int getMapFile(int x, int z, int type) {
+		int index = (x << 8) + z;
+
+		for (int i = 0; i < this.mapIndex.length; i++) {
+			if (this.mapIndex[i] == index) {
+				if (type == 0) {
+					return this.mapLand[i];
+				}
+				return this.mapLoc[i];
+			}
+		}
+
+		return -1;
 	}
 
 	@ObfuscatedName("ZPGPWCCV.a(ZB)V")
-	public void prefetchMaps(boolean arg0) {
-		int var3 = this.field1723.length;
-		for (int var4 = 0; var4 < var3; var4++) {
-			if (arg0 || this.field1713[var4] != 0) {
-				this.prefetch(3, (byte) 2, this.field1742[var4]);
-				this.prefetch(3, (byte) 2, this.field1737[var4]);
+	public void prefetchMaps(boolean members) {
+		int count = this.mapIndex.length;
+		for (int i = 0; i < count; i++) {
+			if (members || this.mapMembers[i] != 0) {
+				this.prefetchPriority(3, (byte) 2, this.mapLoc[i]);
+				this.prefetchPriority(3, (byte) 2, this.mapLand[i]);
 			}
+		}
+	}
+
+	@ObfuscatedName("ZPGPWCCV.b(IZ)Z")
+	public boolean hasMapLocFile(int id) {
+		for (int i = 0; i < this.mapIndex.length; i++) {
+			if (this.mapLoc[i] == id) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@ObfuscatedName("ZPGPWCCV.a(II)I")
+	public int getModelFlags(int id) {
+		return this.models[id] & 0xFF;
+	}
+
+	@ObfuscatedName("ZPGPWCCV.a(IZ)Z")
+	public boolean shouldPrefetchMidi(int id) {
+		return this.midiIndex[id] == 1;
+	}
+
+	@ObfuscatedName("ZPGPWCCV.a(I)V")
+	public void requestModel(int id) {
+		this.request(0, id);
+	}
+
+	@ObfuscatedName("ZPGPWCCV.b(II)V")
+	public void request(int archive, int file) {
+		if (archive < 0 || archive > this.versions.length || file < 0 || file > this.versions[archive].length || this.versions[archive][file] == 0) {
+			return;
+		}
+
+		synchronized (this.requests) {
+			for (OnDemandRequest req = (OnDemandRequest) this.requests.head(); req != null; req = (OnDemandRequest) this.requests.next()) {
+				if (req.archive == archive && req.file == file) {
+					return;
+				}
+			}
+
+			OnDemandRequest req = new OnDemandRequest();
+			req.archive = archive;
+			req.file = file;
+			req.urgent = true;
+
+			synchronized (this.queue) {
+				this.queue.push(req);
+			}
+
+			this.requests.push(req);
 		}
 	}
 
 	@ObfuscatedName("ZPGPWCCV.b()I")
 	public int remaining() {
-		DoublyLinkList var1 = this.field1746;
-		synchronized (this.field1746) {
-			return this.field1746.method184();
+		synchronized (this.requests) {
+			return this.requests.size();
 		}
 	}
 
-	@ObfuscatedName("ZPGPWCCV.b(IZ)Z")
-	public boolean method591(int arg0) {
-		for (int var3 = 0; var3 < this.field1723.length; var3++) {
-			if (this.field1742[var3] == arg0) {
-				return true;
-			}
+	@ObfuscatedName("ZPGPWCCV.a()LQSLIGKQQ;")
+	public OnDemandRequest cycle() {
+		OnDemandRequest req;
+		synchronized (this.completed) {
+			req = (OnDemandRequest) this.completed.pop();
 		}
-		return false;
+
+		if (req == null) {
+			return null;
+		}
+
+		synchronized (this.requests) {
+			req.unlink2();
+		}
+
+		if (req.data == null) {
+			return req;
+		}
+
+		int pos = 0;
+		try {
+			GZIPInputStream input = new GZIPInputStream(new ByteArrayInputStream(req.data));
+			while (true) {
+				if (this.data.length == pos) {
+					throw new RuntimeException("buffer overflow!");
+				}
+				int n = input.read(this.data, pos, this.data.length - pos);
+				if (n == -1) {
+					break;
+				}
+				pos += n;
+			}
+		} catch (IOException ignore) {
+			throw new RuntimeException("error unzipping");
+		}
+
+		req.data = new byte[pos];
+		for (int i = 0; i < pos; i++) {
+			req.data[i] = this.data[i];
+		}
+		return req;
 	}
 
-	@ObfuscatedName("ZPGPWCCV.a(LATJMVOZR;Lclient;)V")
-	public void unpack(Jagfile arg0, Client arg1) {
-		String[] var3 = new String[] { "model_version", "anim_version", "midi_version", "map_version" };
-		for (int var4 = 0; var4 < 4; var4++) {
-			byte[] var26 = arg0.read(var3[var4], null);
-			int var27 = var26.length / 2;
-			Packet var28 = new Packet(var26);
-			this.field1754[var4] = new int[var27];
-			this.field1714[var4] = new byte[var27];
-			for (int var29 = 0; var29 < var27; var29++) {
-				this.field1754[var4][var29] = var28.g2();
-			}
+	@ObfuscatedName("ZPGPWCCV.a(IIBI)V")
+	public void prefetchPriority(int archive, byte priority, int file) {
+		if (this.app.fileStreams[0] == null || this.versions[archive][file] == 0) {
+			return;
 		}
-		String[] var5 = new String[] { "model_crc", "anim_crc", "midi_crc", "map_crc" };
-		for (int var6 = 0; var6 < 4; var6++) {
-			byte[] var22 = arg0.read(var5[var6], null);
-			int var23 = var22.length / 4;
-			Packet var24 = new Packet(var22);
-			this.field1721[var6] = new int[var23];
-			for (int var25 = 0; var25 < var23; var25++) {
-				this.field1721[var6][var25] = var24.g4();
-			}
+
+		byte[] data = this.app.fileStreams[archive + 1].read(file);
+		if (this.validate(data, this.versions[archive][file], this.crcs[archive][file])) {
+			return;
 		}
-		byte[] var7 = arg0.read("model_index", null);
-		int var8 = this.field1754[0].length;
-		this.field1712 = new byte[var8];
-		for (int var9 = 0; var9 < var8; var9++) {
-			if (var9 < var7.length) {
-				this.field1712[var9] = var7[var9];
-			} else {
-				this.field1712[var9] = 0;
-			}
+
+		this.priorities[archive][file] = priority;
+		if (priority > this.topPriority) {
+			this.topPriority = priority;
 		}
-		byte[] var10 = arg0.read("map_index", null);
-		Packet var11 = new Packet(var10);
-		int var12 = var10.length / 7;
-		this.field1723 = new int[var12];
-		this.field1737 = new int[var12];
-		this.field1742 = new int[var12];
-		this.field1713 = new int[var12];
-		for (int var13 = 0; var13 < var12; var13++) {
-			this.field1723[var13] = var11.g2();
-			this.field1737[var13] = var11.g2();
-			this.field1742[var13] = var11.g2();
-			this.field1713[var13] = var11.g1();
-		}
-		byte[] var14 = arg0.read("anim_index", null);
-		Packet var15 = new Packet(var14);
-		int var16 = var14.length / 2;
-		this.field1753 = new int[var16];
-		for (int var17 = 0; var17 < var16; var17++) {
-			this.field1753[var17] = var15.g2();
-		}
-		byte[] var18 = arg0.read("midi_index", null);
-		Packet var19 = new Packet(var18);
-		int var20 = var18.length;
-		this.field1743 = new int[var20];
-		for (int var21 = 0; var21 < var20; var21++) {
-			this.field1743[var21] = var19.g1();
-		}
-		this.field1750 = arg1;
-		this.field1716 = true;
-		this.field1750.startThread(this, 2);
+
+		this.totalPrefetchFiles++;
 	}
 
 	@ObfuscatedName("ZPGPWCCV.a(B)V")
-	public void method593() {
-		LinkList var2 = this.field1735;
-		synchronized (this.field1735) {
-			this.field1735.method10();
+	public void clearPrefetches() {
+		synchronized (this.prefetches) {
+			this.prefetches.clear();
 		}
 	}
 
 	@ObfuscatedName("ZPGPWCCV.a(IIB)V")
-	public void method594(int arg0, int arg1) {
-		if (this.field1750.fileStreams[0] == null || (this.field1754[arg1][arg0] == 0 || (this.field1714[arg1][arg0] == 0 || this.field1718 == 0))) {
+	public void prefetch(int file, int archive) {
+		if (this.app.fileStreams[0] == null || (this.versions[archive][file] == 0 || (this.priorities[archive][file] == 0 || this.topPriority == 0))) {
 			return;
 		}
-		OnDemandRequest var4 = new OnDemandRequest();
-		var4.field1363 = arg1;
-		var4.field1364 = arg0;
-		var4.field1367 = false;
-		LinkList var5 = this.field1735;
-		synchronized (this.field1735) {
-			this.field1735.method3(var4);
+
+		OnDemandRequest req = new OnDemandRequest();
+		req.archive = archive;
+		req.file = file;
+		req.urgent = false;
+
+		synchronized (this.prefetches) {
+			this.prefetches.push(req);
+		}
+	}
+
+	public void run() {
+		try {
+			while (this.running) {
+				this.cycle++;
+
+				byte del = 20;
+				if (this.topPriority == 0 && this.app.fileStreams[0] != null) {
+					del = 50;
+				}
+
+				try {
+					Thread.sleep((long) del);
+				} catch (Exception ignore) {
+				}
+
+				this.active = true;
+
+				for (int i = 0; i < 100 && this.active; i++) {
+					this.active = false;
+
+					this.handleQueue();
+					this.handlePending();
+
+					if (this.urgentCount == 0 && i >= 5) {
+						break;
+					}
+
+					this.handleExtras();
+
+					if (this.in != null) {
+						this.read();
+					}
+				}
+
+				boolean loading = false;
+				for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
+					if (req.urgent) {
+						loading = true;
+
+						req.cycle++;
+						if (req.cycle > 50) {
+							req.cycle = 0;
+
+							this.send(req);
+						}
+					}
+				}
+
+				if (!loading) {
+					for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
+						loading = true;
+
+						req.cycle++;
+						if (req.cycle > 50) {
+							req.cycle = 0;
+
+							this.send(req);
+						}
+					}
+				}
+
+				if (loading) {
+					this.waitCycles++;
+					if (this.waitCycles > 750) {
+						try {
+							this.socket.close();
+						} catch (Exception ignore) {
+						}
+
+						this.socket = null;
+						this.in = null;
+						this.out = null;
+						this.partAvailable = 0;
+					}
+				} else {
+					this.waitCycles = 0;
+					this.message = "";
+				}
+
+				if (this.app.ingame && this.socket != null && this.out != null && (this.topPriority > 0 || this.app.fileStreams[0] == null)) {
+					this.heartbeatCycle++;
+					if (this.heartbeatCycle > 500) {
+						this.heartbeatCycle = 0;
+
+						this.buf[0] = 0;
+						this.buf[1] = 0;
+						this.buf[2] = 0;
+						this.buf[3] = 10;
+
+						try {
+							this.out.write(this.buf, 0, 4);
+						} catch (IOException ignore) {
+							this.waitCycles = 5000;
+						}
+					}
+				}
+			}
+		} catch (Exception ex) {
+			signlink.reporterror("od_ex " + ex.getMessage());
 		}
 	}
 
 	@ObfuscatedName("ZPGPWCCV.b(Z)V")
-	public void method595() {
-		LinkList var2 = this.field1717;
-		OnDemandRequest var3;
-		synchronized (this.field1717) {
-			var3 = (OnDemandRequest) this.field1717.method5();
+	public void handleQueue() {
+		OnDemandRequest req;
+		synchronized (this.queue) {
+			req = (OnDemandRequest) this.queue.pop();
 		}
-		while (var3 != null) {
-			this.field1715 = true;
-			byte[] var5 = null;
-			if (this.field1750.fileStreams[0] != null) {
-				var5 = this.field1750.fileStreams[var3.field1363 + 1].method325(var3.field1364);
+		while (req != null) {
+			this.active = true;
+			byte[] data = null;
+
+			if (this.app.fileStreams[0] != null) {
+				data = this.app.fileStreams[req.archive + 1].read(req.file);
 			}
-			if (!this.method598(var5, this.field1754[var3.field1363][var3.field1364], this.field1721[var3.field1363][var3.field1364])) {
-				var5 = null;
+
+			if (!this.validate(data, this.versions[req.archive][req.file], this.crcs[req.archive][req.file])) {
+				data = null;
 			}
-			LinkList var6 = this.field1717;
-			synchronized (this.field1717) {
-				if (var5 == null) {
-					this.field1728.method3(var3);
+
+			synchronized (this.queue) {
+				if (data == null) {
+					this.missing.push(req);
 				} else {
-					var3.field1366 = var5;
-					LinkList var7 = this.field1734;
-					synchronized (this.field1734) {
-						this.field1734.method3(var3);
+					req.data = data;
+
+					synchronized (this.completed) {
+						this.completed.push(req);
 					}
 				}
-				var3 = (OnDemandRequest) this.field1717.method5();
+
+				req = (OnDemandRequest) this.queue.pop();
 			}
 		}
 	}
 
-	@ObfuscatedName("ZPGPWCCV.c()V")
-	public void method596() {
-		this.field1716 = false;
+	@ObfuscatedName("ZPGPWCCV.c(I)V")
+	public void handlePending() {
+		this.urgentCount = 0;
+		this.requestCount = 0;
+
+		for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
+			if (req.urgent) {
+				this.urgentCount++;
+			} else {
+				this.requestCount++;
+			}
+		}
+
+		while (this.urgentCount < 10) {
+			OnDemandRequest req = (OnDemandRequest) this.missing.pop();
+			if (req == null) {
+				break;
+			}
+
+			if (this.priorities[req.archive][req.file] != 0) {
+				this.loadedPrefetchFiles++;
+			}
+
+			this.priorities[req.archive][req.file] = 0;
+			this.pending.push(req);
+			this.urgentCount++;
+
+			this.send(req);
+			this.active = true;
+		}
 	}
 
-	@ObfuscatedName("ZPGPWCCV.c(II)I")
-	public int getFileCount(int arg0) {
-		return this.field1754[arg0].length;
+	@ObfuscatedName("ZPGPWCCV.b(I)V")
+	public void handleExtras() {
+		while (this.urgentCount == 0) {
+			if (this.requestCount >= 10 || this.topPriority == 0) {
+				return;
+			}
+
+			OnDemandRequest extra;
+			synchronized (this.prefetches) {
+				extra = (OnDemandRequest) this.prefetches.pop();
+			}
+
+			while (extra != null) {
+				if (this.priorities[extra.archive][extra.file] != 0) {
+					this.priorities[extra.archive][extra.file] = 0;
+					this.pending.push(extra);
+
+					this.send(extra);
+					this.active = true;
+
+					if (this.loadedPrefetchFiles < this.totalPrefetchFiles) {
+						this.loadedPrefetchFiles++;
+					}
+
+					this.message = "Loading extra files - " + this.loadedPrefetchFiles * 100 / this.totalPrefetchFiles + "%";
+					this.requestCount++;
+
+					if (this.requestCount == 10) {
+						return;
+					}
+				}
+
+				synchronized (this.prefetches) {
+					extra = (OnDemandRequest) this.prefetches.pop();
+				}
+			}
+
+			for (int archive = 0; archive < 4; archive++) {
+				byte[] priorities = this.priorities[archive];
+				int count = priorities.length;
+
+				for (int i = 0; i < count; i++) {
+					if (priorities[i] == this.topPriority) {
+						priorities[i] = 0;
+
+						OnDemandRequest req = new OnDemandRequest();
+						req.archive = archive;
+						req.file = i;
+						req.urgent = false;
+						this.pending.push(req);
+
+						this.send(req);
+						this.active = true;
+
+						if (this.loadedPrefetchFiles < this.totalPrefetchFiles) {
+							this.loadedPrefetchFiles++;
+						}
+
+						this.message = "Loading extra files - " + this.loadedPrefetchFiles * 100 / this.totalPrefetchFiles + "%";
+
+						this.requestCount++;
+						if (this.requestCount == 10) {
+							return;
+						}
+					}
+				}
+			}
+
+			this.topPriority--;
+		}
+	}
+
+	@ObfuscatedName("ZPGPWCCV.a(Z)V")
+	public void read() {
+		try {
+			int available = this.in.available();
+
+			if (this.partAvailable == 0 && available >= 6) {
+				this.active = true;
+
+				for (int off = 0; off < 6; off += this.in.read(this.buf, off, 6 - off)) {
+				}
+
+				int archive = this.buf[0] & 0xFF;
+				int file = ((this.buf[1] & 0xFF) << 8) + (this.buf[2] & 0xFF);
+				int size = ((this.buf[3] & 0xFF) << 8) + (this.buf[4] & 0xFF);
+				int part = this.buf[5] & 0xFF;
+
+				this.current = null;
+
+				for (OnDemandRequest req = (OnDemandRequest) this.pending.head(); req != null; req = (OnDemandRequest) this.pending.next()) {
+					if (req.archive == archive && req.file == file) {
+						this.current = req;
+					}
+
+					if (this.current != null) {
+						req.cycle = 0;
+					}
+				}
+
+				if (this.current != null) {
+					this.waitCycles = 0;
+
+					if (size == 0) {
+						signlink.reporterror("Rej: " + archive + "," + file);
+
+						this.current.data = null;
+
+						if (this.current.urgent) {
+							synchronized (this.completed) {
+								this.completed.push(this.current);
+							}
+						} else {
+							this.current.unlink();
+						}
+
+						this.current = null;
+					} else {
+						if (this.current.data == null && part == 0) {
+							this.current.data = new byte[size];
+						}
+
+						if (this.current.data == null && part != 0) {
+							throw new IOException("missing start of file");
+						}
+					}
+				}
+
+				this.partOffset = part * 500;
+				this.partAvailable = 500;
+				if (this.partAvailable > size - part * 500) {
+					this.partAvailable = size - part * 500;
+				}
+			}
+
+			if (this.partAvailable > 0 && available >= this.partAvailable) {
+				this.active = true;
+
+				byte[] dst = this.buf;
+				int off = 0;
+
+				if (this.current != null) {
+					dst = this.current.data;
+					off = this.partOffset;
+				}
+
+				for (int n = 0; n < this.partAvailable; n += this.in.read(dst, off + n, this.partAvailable - n)) {
+				}
+
+				if (this.partAvailable + this.partOffset >= dst.length && this.current != null) {
+					if (this.app.fileStreams[0] != null) {
+						this.app.fileStreams[this.current.archive + 1].write(dst.length, dst, this.current.file);
+					}
+
+					if (!this.current.urgent && this.current.archive == 3) {
+						this.current.urgent = true;
+						this.current.archive = 93;
+					}
+
+					if (this.current.urgent) {
+						synchronized (this.completed) {
+							this.completed.push(this.current);
+						}
+					} else {
+						this.current.unlink();
+					}
+				}
+
+				this.partAvailable = 0;
+			}
+		} catch (IOException ignore) {
+			try {
+				this.socket.close();
+			} catch (Exception ignore2) {
+			}
+
+			this.socket = null;
+			this.in = null;
+			this.out = null;
+			this.partAvailable = 0;
+		}
 	}
 
 	@ObfuscatedName("ZPGPWCCV.a([BIII)Z")
-	public boolean method598(byte[] arg0, int arg2, int arg3) {
-		if (arg0 == null || arg0.length < 2) {
+	public boolean validate(byte[] src, int expectedCrc, int expectedVersion) {
+		if (src == null || src.length < 2) {
 			return false;
 		}
-		int var6 = arg0.length - 2;
-		int var7 = ((arg0[var6] & 0xFF) << 8) + (arg0[var6 + 1] & 0xFF);
-		this.field1731.reset();
-		this.field1731.update(arg0, 0, var6);
-		int var8 = (int) this.field1731.getValue();
-		if (arg2 == var7) {
-			return arg3 == var8;
+
+		int versionPos = src.length - 2;
+		int version = ((src[versionPos] & 0xFF) << 8) + (src[versionPos + 1] & 0xFF);
+
+		this.crc32.reset();
+		this.crc32.update(src, 0, versionPos);
+
+		int crc = (int) this.crc32.getValue();
+		if (version == expectedVersion) {
+			return crc == expectedCrc;
 		} else {
 			return false;
 		}
 	}
 
 	@ObfuscatedName("ZPGPWCCV.a(ILQSLIGKQQ;)V")
-	public void method599(OnDemandRequest arg1) {
+	public void send(OnDemandRequest req) {
 		try {
-			if (this.field1732 == null) {
-				long var3 = System.currentTimeMillis();
-				if (var3 - this.field1755 < 4000L) {
+			if (this.socket == null) {
+				long now = System.currentTimeMillis();
+				if (now - this.socketOpenTime < 4000L) {
 					return;
 				}
-				this.field1755 = var3;
-				this.field1732 = this.field1750.openSocket(Client.portOffset + 43594);
-				this.field1747 = this.field1732.getInputStream();
-				this.field1726 = this.field1732.getOutputStream();
-				this.field1726.write(15);
-				for (int var5 = 0; var5 < 8; var5++) {
-					this.field1747.read();
+
+				this.socketOpenTime = now;
+				this.socket = this.app.openSocket(Client.portOffset + 43594);
+				this.in = this.socket.getInputStream();
+				this.out = this.socket.getOutputStream();
+
+				this.out.write(15);
+
+				for (int i = 0; i < 8; i++) {
+					this.in.read();
 				}
-				this.field1730 = 0;
+
+				this.waitCycles = 0;
 			}
-			this.field1741[0] = (byte) arg1.field1363;
-			this.field1741[1] = (byte) (arg1.field1364 >> 8);
-			this.field1741[2] = (byte) arg1.field1364;
-			if (arg1.field1367) {
-				this.field1741[3] = 2;
-			} else if (this.field1750.ingame) {
-				this.field1741[3] = 0;
+
+			this.buf[0] = (byte) req.archive;
+
+			this.buf[1] = (byte) (req.file >> 8);
+			this.buf[2] = (byte) req.file;
+
+			if (req.urgent) {
+				this.buf[3] = 2;
+			} else if (this.app.ingame) {
+				this.buf[3] = 0;
 			} else {
-				this.field1741[3] = 1;
+				this.buf[3] = 1;
 			}
-			this.field1726.write(this.field1741, 0, 4);
-			this.field1752 = 0;
+
+			this.out.write(this.buf, 0, 4);
+			this.heartbeatCycle = 0;
 			this.tries = -10000;
 		} catch (IOException ignore) {
 			try {
-				this.field1732.close();
+				this.socket.close();
 			} catch (Exception ignore2) {
 			}
-			this.field1732 = null;
-			this.field1747 = null;
-			this.field1726 = null;
-			this.field1739 = 0;
+
+			this.socket = null;
+			this.in = null;
+			this.out = null;
+			this.partAvailable = 0;
 			this.tries++;
 		}
-	}
-
-	@ObfuscatedName("ZPGPWCCV.d(I)I")
-	public int getAnimCount() {
-		return this.field1753.length;
-	}
-
-	@ObfuscatedName("ZPGPWCCV.a(IIII)I")
-	public int getMapFile(int arg1, int arg2, int arg3) {
-		int var5 = (arg1 << 8) + arg2;
-		for (int var6 = 0; var6 < this.field1723.length; var6++) {
-			if (this.field1723[var6] == var5) {
-				if (arg3 == 0) {
-					return this.field1737[var6];
-				}
-				return this.field1742[var6];
-			}
-		}
-		return -1;
 	}
 }

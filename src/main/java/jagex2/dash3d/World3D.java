@@ -1198,7 +1198,7 @@ public class World3D {
 
 	@ObfuscatedName("KJCMXHNO.a(LRIEEXHOP;Z)V")
 	public void method314(Square arg0, boolean arg1) {
-		field1054.method3(arg0);
+		field1054.push(arg0);
 		while (true) {
 			Square var3;
 			int var4;
@@ -1219,7 +1219,7 @@ public class World3D {
 									while (true) {
 										while (true) {
 											do {
-												var3 = (Square) field1054.method5();
+												var3 = (Square) field1054.pop();
 												if (var3 == null) {
 													return;
 												}
@@ -1397,25 +1397,25 @@ public class World3D {
 												if (var4 < field1030 && (var35 & 0x4) != 0) {
 													Square var36 = var8[var4 + 1][var5];
 													if (var36 != null && var36.field1396) {
-														field1054.method3(var36);
+														field1054.push(var36);
 													}
 												}
 												if (var5 < field1031 && (var35 & 0x2) != 0) {
 													Square var37 = var8[var4][var5 + 1];
 													if (var37 != null && var37.field1396) {
-														field1054.method3(var37);
+														field1054.push(var37);
 													}
 												}
 												if (var4 > field1030 && (var35 & 0x1) != 0) {
 													Square var38 = var8[var4 - 1][var5];
 													if (var38 != null && var38.field1396) {
-														field1054.method3(var38);
+														field1054.push(var38);
 													}
 												}
 												if (var5 > field1031 && (var35 & 0x8) != 0) {
 													Square var39 = var8[var4][var5 - 1];
 													if (var39 != null && var39.field1396) {
-														field1054.method3(var39);
+														field1054.push(var39);
 													}
 												}
 											}
@@ -1522,9 +1522,9 @@ public class World3D {
 													for (int var65 = var63.field84; var65 <= var63.field85; var65++) {
 														Square var66 = var8[var64][var65];
 														if (var66.field1398 != 0) {
-															field1054.method3(var66);
+															field1054.push(var66);
 														} else if ((var4 != var64 || var5 != var65) && var66.field1396) {
-															field1054.method3(var66);
+															field1054.push(var66);
 														}
 													}
 												}
@@ -1620,31 +1620,31 @@ public class World3D {
 			if (var6 < this.field1014 - 1) {
 				Square var84 = this.field1018[var6 + 1][var4][var5];
 				if (var84 != null && var84.field1396) {
-					field1054.method3(var84);
+					field1054.push(var84);
 				}
 			}
 			if (var4 < field1030) {
 				Square var85 = var8[var4 + 1][var5];
 				if (var85 != null && var85.field1396) {
-					field1054.method3(var85);
+					field1054.push(var85);
 				}
 			}
 			if (var5 < field1031) {
 				Square var86 = var8[var4][var5 + 1];
 				if (var86 != null && var86.field1396) {
-					field1054.method3(var86);
+					field1054.push(var86);
 				}
 			}
 			if (var4 > field1030) {
 				Square var87 = var8[var4 - 1][var5];
 				if (var87 != null && var87.field1396) {
-					field1054.method3(var87);
+					field1054.push(var87);
 				}
 			}
 			if (var5 > field1031) {
 				Square var88 = var8[var4][var5 - 1];
 				if (var88 != null && var88.field1396) {
-					field1054.method3(var88);
+					field1054.push(var88);
 				}
 			}
 		}

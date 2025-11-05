@@ -343,7 +343,7 @@ public class Model extends ModelSource {
 		}
 		Metadata var1 = field1229[arg0];
 		if (var1 == null) {
-			field1230.method456(arg0);
+			field1230.requestModel(arg0);
 			return null;
 		} else {
 			return new Model(arg0, -478);
@@ -357,7 +357,7 @@ public class Model extends ModelSource {
 		}
 		Metadata var1 = field1229[arg0];
 		if (var1 == null) {
-			field1230.method456(arg0);
+			field1230.requestModel(arg0);
 			return false;
 		} else {
 			return true;

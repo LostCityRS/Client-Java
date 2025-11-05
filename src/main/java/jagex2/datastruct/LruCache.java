@@ -5,72 +5,75 @@ import deob.ObfuscatedName;
 public class LruCache {
 
 	@ObfuscatedName("RHNYLZZL.d")
-	public DoublyLinkable field1374 = new DoublyLinkable();
+	public DoublyLinkable search = new DoublyLinkable();
 
 	@ObfuscatedName("RHNYLZZL.h")
-	public DoublyLinkList field1378 = new DoublyLinkList();
+	public DoublyLinkList history = new DoublyLinkList();
 
 	@ObfuscatedName("RHNYLZZL.e")
-	public int field1375;
+	public int capacity;
 
 	@ObfuscatedName("RHNYLZZL.f")
-	public int field1376;
+	public int available;
 
 	@ObfuscatedName("RHNYLZZL.g")
-	public HashTable field1377;
+	public HashTable table;
 
 	@ObfuscatedName("RHNYLZZL.b")
-	public int field1372;
+	public int notFound;
 
 	@ObfuscatedName("RHNYLZZL.c")
-	public int field1373;
+	public int found;
 
-	public LruCache(int arg0) {
-		this.field1375 = arg0;
-		this.field1376 = arg0;
-		this.field1377 = new HashTable(1024);
+	public LruCache(int size) {
+		this.capacity = size;
+		this.available = size;
+		this.table = new HashTable(1024);
 	}
 
 	@ObfuscatedName("RHNYLZZL.a(J)LDPPNUUMQ;")
-	public DoublyLinkable get(long arg0) {
-		DoublyLinkable var3 = (DoublyLinkable) this.field1377.method259(arg0);
-		if (var3 == null) {
-			this.field1372++;
+	public DoublyLinkable get(long key) {
+		DoublyLinkable node = (DoublyLinkable) this.table.get(key);
+		if (node == null) {
+			this.notFound++;
 		} else {
-			this.field1378.method180(var3);
-			this.field1373++;
+			this.history.push(node);
+			this.found++;
 		}
-		return var3;
+		return node;
 	}
 
 	@ObfuscatedName("RHNYLZZL.a(LDPPNUUMQ;JI)V")
-	public void put(DoublyLinkable arg0, long arg1) {
-		if (this.field1376 == 0) {
-			DoublyLinkable var5 = this.field1378.method181();
-			var5.unlink();
-			var5.method185();
-			if (this.field1374 == var5) {
-				DoublyLinkable var6 = this.field1378.method181();
-				var6.unlink();
-				var6.method185();
+	public void put(DoublyLinkable node, long key) {
+		if (this.available == 0) {
+			DoublyLinkable sentinel = this.history.pop();
+			sentinel.unlink();
+			sentinel.unlink2();
+
+			if (this.search == sentinel) {
+				DoublyLinkable next = this.history.pop();
+				next.unlink();
+				next.unlink2();
 			}
 		} else {
-			this.field1376--;
+			this.available--;
 		}
-		this.field1377.method260(arg0, arg1);
-		this.field1378.method180(arg0);
+
+		this.table.put(node, key);
+		this.history.push(node);
 	}
 
 	@ObfuscatedName("RHNYLZZL.a()V")
 	public void clear() {
 		while (true) {
-			DoublyLinkable var1 = this.field1378.method181();
-			if (var1 == null) {
-				this.field1376 = this.field1375;
+			DoublyLinkable node = this.history.pop();
+			if (node == null) {
+				this.available = this.capacity;
 				return;
 			}
-			var1.unlink();
-			var1.method185();
+
+			node.unlink();
+			node.unlink2();
 		}
 	}
 }

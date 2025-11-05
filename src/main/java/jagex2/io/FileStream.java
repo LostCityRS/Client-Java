@@ -29,7 +29,7 @@ public class FileStream {
 	}
 
 	@ObfuscatedName("KNWRHOKF.a(BI)[B")
-	public synchronized byte[] method325(int arg1) {
+	public synchronized byte[] read(int arg1) {
 		try {
 			this.method328(arg1 * 6, this.field1081);
 			int var5;
@@ -91,7 +91,7 @@ public class FileStream {
 	}
 
 	@ObfuscatedName("KNWRHOKF.a(IZ[BI)Z")
-	public synchronized boolean method326(int arg0, byte[] arg2, int arg3) {
+	public synchronized boolean write(int arg0, byte[] arg2, int arg3) {
 		boolean var6 = this.method327(arg2, arg3, true, arg0);
 		if (!var6) {
 			var6 = this.method327(arg2, arg3, false, arg0);

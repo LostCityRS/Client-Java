@@ -190,7 +190,7 @@ public class LocType {
 			return;
 		}
 		for (int var3 = 0; var3 < this.field1617.length; var3++) {
-			arg0.method594(this.field1617[var3] & 0xFFFF, 0);
+			arg0.prefetch(this.field1617[var3] & 0xFFFF, 0);
 		}
 	}
 
