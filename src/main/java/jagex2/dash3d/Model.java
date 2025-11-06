@@ -9,23 +9,11 @@ import jagex2.io.Packet;
 @ObfuscatedName("fb")
 public class Model extends ModelSource {
 
-	@ObfuscatedName("fb.m")
-	public int field529 = -48;
-
-	@ObfuscatedName("fb.n")
-	public static int field530 = 4755;
-
-	@ObfuscatedName("fb.o")
-	public boolean field531 = false;
-
-	@ObfuscatedName("fb.p")
-	public static boolean field532;
-
 	@ObfuscatedName("fb.q")
 	public static int field533;
 
 	@ObfuscatedName("fb.r")
-	public static Model field534 = new Model(true);
+	public static Model field534 = new Model();
 
 	@ObfuscatedName("fb.s")
 	public static int[] field535 = new int[2000];
@@ -241,15 +229,12 @@ public class Model extends ModelSource {
 	public static boolean field597;
 
 	@ObfuscatedName("fb.b(I)V")
-	public static void method135(int arg0) {
+	public static void method135() {
 		field574 = null;
 		field576 = null;
 		field577 = null;
 		field578 = null;
 		field579 = null;
-		if (arg0 <= 0) {
-			field532 = !field532;
-		}
 		field580 = null;
 		field581 = null;
 		field582 = null;
@@ -274,7 +259,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a([BZI)V")
-	public static void method137(byte[] arg0, boolean arg1, int arg2) {
+	public static void method137(byte[] arg0, int arg2) {
 		if (arg0 == null) {
 			Metadata var3 = field574[arg2] = new Metadata();
 			var3.field221 = 0;
@@ -282,7 +267,7 @@ public class Model extends ModelSource {
 			var3.field223 = 0;
 			return;
 		}
-		Packet var4 = new Packet(arg0, (byte) 3);
+		Packet var4 = new Packet(arg0);
 		var4.field711 = arg0.length - 18;
 		Metadata var5 = field574[arg2] = new Metadata();
 		var5.field220 = arg0;
@@ -301,9 +286,6 @@ public class Model extends ModelSource {
 		byte var15 = 0;
 		var5.field224 = var15;
 		int var16 = var15 + var5.field221;
-		if (arg1) {
-			field530 = 89;
-		}
 		var5.field230 = var16;
 		int var17 = var16 + var5.field222;
 		var5.field233 = var17;
@@ -358,10 +340,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(II)Lfb;")
-	public static Model method139(int arg0, int arg1) {
-		if (arg0 != 0) {
-			field530 = -106;
-		}
+	public static Model method139(int arg1) {
 		if (field574 == null) {
 			return null;
 		}
@@ -370,7 +349,7 @@ public class Model extends ModelSource {
 			field575.method279(arg1);
 			return null;
 		} else {
-			return new Model(arg1, false);
+			return new Model(arg1);
 		}
 	}
 
@@ -388,14 +367,10 @@ public class Model extends ModelSource {
 		}
 	}
 
-	public Model(boolean arg0) {
-		if (!arg0) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public Model() {
 	}
 
-	public Model(int arg0, boolean arg1) {
+	public Model(int arg0) {
 		field533++;
 		Metadata var3 = field574[arg0];
 		this.field539 = var3.field221;
@@ -428,23 +403,19 @@ public class Model extends ModelSource {
 			this.field569 = new int[this.field543];
 		}
 		this.field553 = new int[this.field543];
-		Packet var4 = new Packet(var3.field220, (byte) 3);
+		Packet var4 = new Packet(var3.field220);
 		var4.field711 = var3.field224;
-		Packet var5 = new Packet(var3.field220, (byte) 3);
+		Packet var5 = new Packet(var3.field220);
 		var5.field711 = var3.field225;
-		Packet var6 = new Packet(var3.field220, (byte) 3);
+		Packet var6 = new Packet(var3.field220);
 		var6.field711 = var3.field226;
-		Packet var7 = new Packet(var3.field220, (byte) 3);
+		Packet var7 = new Packet(var3.field220);
 		var7.field711 = var3.field227;
-		Packet var8 = new Packet(var3.field220, (byte) 3);
+		Packet var8 = new Packet(var3.field220);
 		var8.field711 = var3.field228;
 		int var9 = 0;
 		int var10 = 0;
 		int var11 = 0;
-		if (arg1) {
-			for (int var12 = 1; var12 > 0; var12++) {
-			}
-		}
 		for (int var13 = 0; var13 < this.field539; var13++) {
 			int var14 = var4.method239();
 			int var15 = 0;
@@ -543,10 +514,7 @@ public class Model extends ModelSource {
 		}
 	}
 
-	public Model(Model[] arg0, int arg1, int arg2) {
-		while (arg2 >= 0) {
-			field530 = 324;
-		}
+	public Model(Model[] arg0, int arg1) {
 		field533++;
 		boolean var4 = false;
 		boolean var5 = false;
@@ -647,7 +615,7 @@ public class Model extends ModelSource {
 		}
 	}
 
-	public Model(byte arg0, int arg1, Model[] arg2, boolean arg3) {
+	public Model(int arg1, Model[] arg2, boolean arg3) {
 		field533++;
 		boolean var5 = false;
 		boolean var6 = false;
@@ -679,11 +647,6 @@ public class Model extends ModelSource {
 			}
 		}
 		this.field540 = new int[this.field539];
-		if (arg0 == 9) {
-			boolean var11 = false;
-		} else {
-			field530 = -379;
-		}
 		this.field541 = new int[this.field539];
 		this.field542 = new int[this.field539];
 		this.field544 = new int[this.field543];
@@ -761,10 +724,10 @@ public class Model extends ModelSource {
 				}
 			}
 		}
-		this.method143(-15382);
+		this.method143();
 	}
 
-	public Model(boolean arg0, int arg1, boolean arg2, boolean arg3, Model arg4) {
+	public Model(boolean arg0, boolean arg2, boolean arg3, Model arg4) {
 		field533++;
 		this.field539 = arg4.field539;
 		this.field543 = arg4.field543;
@@ -813,13 +776,12 @@ public class Model extends ModelSource {
 		this.field546 = arg4.field546;
 		this.field551 = arg4.field551;
 		this.field554 = arg4.field554;
-		int var10 = 2 / arg1;
 		this.field556 = arg4.field556;
 		this.field557 = arg4.field557;
 		this.field558 = arg4.field558;
 	}
 
-	public Model(byte arg0, boolean arg1, Model arg2, boolean arg3) {
+	public Model(boolean arg1, Model arg2, boolean arg3) {
 		field533++;
 		this.field539 = arg2.field539;
 		this.field543 = arg2.field543;
@@ -882,9 +844,6 @@ public class Model extends ModelSource {
 		super.field406 = arg2.field406;
 		this.field564 = arg2.field564;
 		this.field563 = arg2.field563;
-		if (arg0 != 9) {
-			throw new NullPointerException();
-		}
 		this.field566 = arg2.field566;
 		this.field565 = arg2.field565;
 		this.field559 = arg2.field559;
@@ -894,7 +853,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(ZILfb;)V")
-	public void method141(boolean arg0, int arg1, Model arg2) {
+	public void method141(boolean arg0, Model arg2) {
 		this.field539 = arg2.field539;
 		this.field543 = arg2.field543;
 		this.field555 = arg2.field555;
@@ -932,9 +891,6 @@ public class Model extends ModelSource {
 		this.field553 = arg2.field553;
 		this.field551 = arg2.field551;
 		this.field554 = arg2.field554;
-		if (arg1 <= 0) {
-			return;
-		}
 		this.field571 = arg2.field571;
 		this.field570 = arg2.field570;
 		this.field544 = arg2.field544;
@@ -973,13 +929,10 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.d(I)V")
-	public void method143(int arg0) {
+	public void method143() {
 		super.field406 = 0;
 		this.field563 = 0;
 		this.field564 = 0;
-		if (arg0 != -15382) {
-			this.field529 = 115;
-		}
 		for (int var2 = 0; var2 < this.field539; var2++) {
 			int var3 = this.field540[var2];
 			int var4 = this.field541[var2];
@@ -1001,7 +954,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(Z)V")
-	public void method144(boolean arg0) {
+	public void method144() {
 		super.field406 = 0;
 		this.field564 = 0;
 		for (int var2 = 0; var2 < this.field539; var2++) {
@@ -1013,15 +966,12 @@ public class Model extends ModelSource {
 				this.field564 = var3;
 			}
 		}
-		if (!arg0) {
-			field532 = !field532;
-		}
 		this.field566 = (int) (Math.sqrt((double) (this.field563 * this.field563 + super.field406 * super.field406)) + 0.99D);
 		this.field565 = this.field566 + (int) (Math.sqrt((double) (this.field563 * this.field563 + this.field564 * this.field564)) + 0.99D);
 	}
 
 	@ObfuscatedName("fb.e(I)V")
-	public void method145(int arg0) {
+	public void method145() {
 		super.field406 = 0;
 		this.field563 = 0;
 		this.field564 = 0;
@@ -1057,18 +1007,12 @@ public class Model extends ModelSource {
 			}
 		}
 		this.field563 = (int) Math.sqrt((double) this.field563);
-		if (arg0 >= 3 && arg0 <= 3) {
-			this.field566 = (int) Math.sqrt((double) (this.field563 * this.field563 + super.field406 * super.field406));
-			this.field565 = this.field566 + (int) Math.sqrt((double) (this.field563 * this.field563 + this.field564 * this.field564));
-		}
+		this.field566 = (int) Math.sqrt((double) (this.field563 * this.field563 + super.field406 * super.field406));
+		this.field565 = this.field566 + (int) Math.sqrt((double) (this.field563 * this.field563 + this.field564 * this.field564));
 	}
 
 	@ObfuscatedName("fb.a(B)V")
-	public void method146(byte arg0) {
-		if (arg0 != 112) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public void method146() {
 		int var10002;
 		if (this.field568 != null) {
 			int[] var3 = new int[256];
@@ -1118,19 +1062,16 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(ZI)V")
-	public void method147(boolean arg0, int arg1) {
+	public void method147(int arg1) {
 		if (this.field570 == null || arg1 == -1) {
 			return;
 		}
-		AnimFrame var3 = AnimFrame.method61(0, arg1);
+		AnimFrame var3 = AnimFrame.method61(arg1);
 		if (var3 == null) {
 			return;
 		}
 		AnimBase var4 = var3.field165;
 		field594 = 0;
-		if (!arg0) {
-			field530 = 352;
-		}
 		field595 = 0;
 		field596 = 0;
 		for (int var5 = 0; var5 < var3.field166; var5++) {
@@ -1145,16 +1086,16 @@ public class Model extends ModelSource {
 			return;
 		}
 		if (arg0 == null || arg3 == -1) {
-			this.method147(true, arg2);
+			this.method147(arg2);
 			return;
 		}
-		AnimFrame var5 = AnimFrame.method61(0, arg2);
+		AnimFrame var5 = AnimFrame.method61(arg2);
 		if (arg1 >= 0 || var5 == null) {
 			return;
 		}
-		AnimFrame var6 = AnimFrame.method61(0, arg3);
+		AnimFrame var6 = AnimFrame.method61(arg3);
 		if (var6 == null) {
-			this.method147(true, arg2);
+			this.method147(arg2);
 			return;
 		}
 		AnimBase var7 = var5.field165;
@@ -1313,22 +1254,16 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(B)V")
-	public void method150(byte arg0) {
+	public void method150() {
 		for (int var2 = 0; var2 < this.field539; var2++) {
 			int var3 = this.field540[var2];
 			this.field540[var2] = this.field542[var2];
 			this.field542[var2] = -var3;
 		}
-		if (arg0 == 8) {
-			boolean var4 = false;
-		}
 	}
 
 	@ObfuscatedName("fb.a(BI)V")
-	public void method151(byte arg0, int arg1) {
-		if (arg0 != 24) {
-			this.field531 = !this.field531;
-		}
+	public void method151(int arg1) {
 		int var3 = field602[arg1];
 		int var4 = field603[arg1];
 		for (int var5 = 0; var5 < this.field539; var5++) {
@@ -1339,15 +1274,11 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(BIII)V")
-	public void method152(byte arg0, int arg1, int arg2, int arg3) {
+	public void method152(int arg1, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.field539; var5++) {
 			this.field540[var5] += arg1;
 			this.field541[var5] += arg3;
 			this.field542[var5] += arg2;
-		}
-		if (arg0 != -32) {
-			for (int var6 = 1; var6 > 0; var6++) {
-			}
 		}
 	}
 
@@ -1361,10 +1292,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.c(B)V")
-	public void method154(byte arg0) {
-		if (arg0 != 15) {
-			this.field529 = -16;
-		}
+	public void method154() {
 		for (int var2 = 0; var2 < this.field539; var2++) {
 			this.field542[var2] = -this.field542[var2];
 		}
@@ -1376,13 +1304,12 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIII)V")
-	public void method155(int arg0, int arg1, int arg2, int arg3) {
+	public void method155(int arg1, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.field539; var5++) {
 			this.field540[var5] = this.field540[var5] * arg2 / 128;
 			this.field541[var5] = this.field541[var5] * arg3 / 128;
 			this.field542[var5] = this.field542[var5] * arg1 / 128;
 		}
-		int var6 = 61 / arg0;
 	}
 
 	@ObfuscatedName("fb.a(IIIIIZ)V")
@@ -1459,9 +1386,9 @@ public class Model extends ModelSource {
 			}
 		}
 		if (arg5) {
-			this.method143(-15382);
+			this.method143();
 		} else {
-			this.method145(3);
+			this.method145();
 		}
 	}
 

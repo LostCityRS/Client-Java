@@ -7,9 +7,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("rc")
 public class VarpType {
 
-	@ObfuscatedName("rc.a")
-	public static boolean field1152;
-
 	@ObfuscatedName("rc.b")
 	public static int field1153;
 
@@ -53,8 +50,8 @@ public class VarpType {
 	public boolean field1166 = false;
 
 	@ObfuscatedName("rc.a(ZLyb;)V")
-	public static void method391(boolean arg0, JagFile arg1) {
-		Packet var2 = new Packet(arg1.method309("varp.dat", null), (byte) 3);
+	public static void method391(JagFile arg1) {
+		Packet var2 = new Packet(arg1.method309("varp.dat", null));
 		field1155 = 0;
 		field1153 = var2.method241();
 		if (field1154 == null) {
@@ -67,10 +64,7 @@ public class VarpType {
 			if (field1154[var3] == null) {
 				field1154[var3] = new VarpType();
 			}
-			field1154[var3].method392(var3, 890, var2);
-		}
-		if (!arg0) {
-			field1152 = !field1152;
+			field1154[var3].method392(var3, var2);
 		}
 		if (var2.field711 != var2.field710.length) {
 			System.out.println("varptype load mismatch");
@@ -78,11 +72,7 @@ public class VarpType {
 	}
 
 	@ObfuscatedName("rc.a(IILmb;)V")
-	public void method392(int arg0, int arg1, Packet arg2) {
-		if (arg1 <= 0) {
-			for (int var4 = 1; var4 > 0; var4++) {
-			}
-		}
+	public void method392(int arg0, Packet arg2) {
 		while (true) {
 			int var5 = arg2.method239();
 			if (var5 == 0) {

@@ -5,22 +5,13 @@ import deob.ObfuscatedName;
 @ObfuscatedName("qb")
 public class DoublyLinkList {
 
-	@ObfuscatedName("qb.a")
-	public boolean field745 = false;
-
-	@ObfuscatedName("qb.b")
-	public boolean field746 = false;
-
 	@ObfuscatedName("qb.c")
 	public DoublyLinkable field747 = new DoublyLinkable();
 
 	@ObfuscatedName("qb.d")
 	public DoublyLinkable field748;
 
-	public DoublyLinkList(int arg0) {
-		if (arg0 != 0) {
-			this.field746 = !this.field746;
-		}
+	public DoublyLinkList() {
 		this.field747.field401 = this.field747;
 		this.field747.field402 = this.field747;
 	}
@@ -60,16 +51,13 @@ public class DoublyLinkList {
 	}
 
 	@ObfuscatedName("qb.a(I)Lx;")
-	public DoublyLinkable method266(int arg0) {
+	public DoublyLinkable method266() {
 		DoublyLinkable var2 = this.field748;
 		if (var2 == this.field747) {
 			this.field748 = null;
 			return null;
 		}
 		this.field748 = var2.field401;
-		if (arg0 != 6) {
-			this.field745 = !this.field745;
-		}
 		return var2;
 	}
 

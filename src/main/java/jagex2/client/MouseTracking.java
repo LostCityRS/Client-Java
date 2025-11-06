@@ -5,9 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("fc")
 public class MouseTracking implements Runnable {
 
-	@ObfuscatedName("fc.a")
-	public int field970 = 9;
-
 	@ObfuscatedName("fc.b")
 	public Client field971;
 
@@ -26,10 +23,7 @@ public class MouseTracking implements Runnable {
 	@ObfuscatedName("fc.g")
 	public int[] field976 = new int[500];
 
-	public MouseTracking(int arg0, Client arg1) {
-		if (arg0 != 0) {
-			this.field970 = -128;
-		}
+	public MouseTracking(Client arg1) {
 		this.field971 = arg1;
 	}
 

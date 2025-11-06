@@ -6,12 +6,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("dc")
 public class Tone {
 
-	@ObfuscatedName("dc.a")
-	public int field900 = 9;
-
-	@ObfuscatedName("dc.b")
-	public int field901 = 614;
-
 	@ObfuscatedName("dc.c")
 	public Envelope field902;
 
@@ -81,9 +75,6 @@ public class Tone {
 	@ObfuscatedName("dc.y")
 	public static int[] field924 = new int[5];
 
-	@ObfuscatedName("dc.z")
-	public static int field925;
-
 	@ObfuscatedName("dc.a()V")
 	public static final void method328() {
 		field918 = new int[32768];
@@ -110,14 +101,14 @@ public class Tone {
 			return field917;
 		}
 		double var4 = (double) arg0 / ((double) arg1 + 0.0D);
-		this.field902.method320(7);
-		this.field903.method320(7);
+		this.field902.method320();
+		this.field903.method320();
 		int var6 = 0;
 		int var7 = 0;
 		int var8 = 0;
 		if (this.field904 != null) {
-			this.field904.method320(7);
-			this.field905.method320(7);
+			this.field904.method320();
+			this.field905.method320();
 			var6 = (int) ((double) (this.field904.field885 - this.field904.field884) * 32.768D / var4);
 			var7 = (int) ((double) this.field904.field884 * 32.768D / var4);
 		}
@@ -125,8 +116,8 @@ public class Tone {
 		int var10 = 0;
 		int var11 = 0;
 		if (this.field906 != null) {
-			this.field906.method320(7);
-			this.field907.method320(7);
+			this.field906.method320();
+			this.field907.method320();
 			var9 = (int) ((double) (this.field906.field885 - this.field906.field884) * 32.768D / var4);
 			var10 = (int) ((double) this.field906.field884 * 32.768D / var4);
 		}
@@ -140,39 +131,39 @@ public class Tone {
 			}
 		}
 		for (int var13 = 0; var13 < arg0; var13++) {
-			int var14 = this.field902.method321(arg0, -71);
-			int var15 = this.field903.method321(arg0, -71);
+			int var14 = this.field902.method321(arg0);
+			int var15 = this.field903.method321(arg0);
 			if (this.field904 != null) {
-				int var16 = this.field904.method321(arg0, -71);
-				int var17 = this.field905.method321(arg0, -71);
-				var14 += this.method330(this.field904.field886, (byte) 18, var17, var8) >> 1;
+				int var16 = this.field904.method321(arg0);
+				int var17 = this.field905.method321(arg0);
+				var14 += this.method330(this.field904.field886, var17, var8) >> 1;
 				var8 += (var16 * var6 >> 16) + var7;
 			}
 			if (this.field906 != null) {
-				int var18 = this.field906.method321(arg0, -71);
-				int var19 = this.field907.method321(arg0, -71);
-				var15 = var15 * ((this.method330(this.field906.field886, (byte) 18, var19, var11) >> 1) + 32768) >> 15;
+				int var18 = this.field906.method321(arg0);
+				int var19 = this.field907.method321(arg0);
+				var15 = var15 * ((this.method330(this.field906.field886, var19, var11) >> 1) + 32768) >> 15;
 				var11 += (var18 * var9 >> 16) + var10;
 			}
 			for (int var20 = 0; var20 < 5; var20++) {
 				if (this.field910[var20] != 0) {
 					int var21 = var13 + field921[var20];
 					if (var21 < arg0) {
-						field917[var21] += this.method330(this.field902.field886, (byte) 18, var15 * field922[var20] >> 15, field920[var20]);
+						field917[var21] += this.method330(this.field902.field886, var15 * field922[var20] >> 15, field920[var20]);
 						field920[var20] += (var14 * field923[var20] >> 16) + field924[var20];
 					}
 				}
 			}
 		}
 		if (this.field908 != null) {
-			this.field908.method320(7);
-			this.field909.method320(7);
+			this.field908.method320();
+			this.field909.method320();
 			int var22 = 0;
 			boolean var23 = false;
 			boolean var24 = true;
 			for (int var25 = 0; var25 < arg0; var25++) {
-				int var26 = this.field908.method321(arg0, -71);
-				int var27 = this.field909.method321(arg0, -71);
+				int var26 = this.field908.method321(arg0);
+				int var27 = this.field909.method321(arg0);
 				int var28;
 				if (var24) {
 					var28 = this.field908.field884 + ((this.field908.field885 - this.field908.field884) * var26 >> 8);
@@ -207,10 +198,7 @@ public class Tone {
 	}
 
 	@ObfuscatedName("dc.a(IBII)I")
-	public final int method330(int arg0, byte arg1, int arg2, int arg3) {
-		if (arg1 != 18) {
-			this.field901 = -327;
-		}
+	public final int method330(int arg0, int arg2, int arg3) {
 		if (arg0 == 1) {
 			return (arg3 & 0x7FFF) < 16384 ? arg2 : -arg2;
 		} else if (arg0 == 2) {
@@ -225,34 +213,34 @@ public class Tone {
 	}
 
 	@ObfuscatedName("dc.a(ILmb;)V")
-	public final void method331(int arg0, Packet arg1) {
+	public final void method331(Packet arg1) {
 		this.field902 = new Envelope();
-		this.field902.method319(9, arg1);
+		this.field902.method319(arg1);
 		this.field903 = new Envelope();
-		this.field903.method319(9, arg1);
+		this.field903.method319(arg1);
 		int var3 = arg1.method239();
 		if (var3 != 0) {
 			arg1.field711--;
 			this.field904 = new Envelope();
-			this.field904.method319(9, arg1);
+			this.field904.method319(arg1);
 			this.field905 = new Envelope();
-			this.field905.method319(9, arg1);
+			this.field905.method319(arg1);
 		}
 		int var4 = arg1.method239();
 		if (var4 != 0) {
 			arg1.field711--;
 			this.field906 = new Envelope();
-			this.field906.method319(9, arg1);
+			this.field906.method319(arg1);
 			this.field907 = new Envelope();
-			this.field907.method319(9, arg1);
+			this.field907.method319(arg1);
 		}
 		int var5 = arg1.method239();
 		if (var5 != 0) {
 			arg1.field711--;
 			this.field908 = new Envelope();
-			this.field908.method319(9, arg1);
+			this.field908.method319(arg1);
 			this.field909 = new Envelope();
-			this.field909.method319(9, arg1);
+			this.field909.method319(arg1);
 		}
 		for (int var6 = 0; var6 < 10; var6++) {
 			int var7 = arg1.method253();
@@ -266,9 +254,6 @@ public class Tone {
 		this.field913 = arg1.method253();
 		this.field914 = arg1.method253();
 		this.field915 = arg1.method241();
-		if (arg0 != 9) {
-			this.field900 = -185;
-		}
 		this.field916 = arg1.method241();
 	}
 }

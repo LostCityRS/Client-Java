@@ -1,7 +1,6 @@
 package jagex2.client;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.Linkable;
 import jagex2.graphics.Pix32;
 import jagex2.graphics.PixMap;
 
@@ -11,24 +10,6 @@ import java.awt.event.*;
 
 @ObfuscatedName("a")
 public class GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
-
-	@ObfuscatedName("a.a")
-	public int field1 = -74;
-
-	@ObfuscatedName("a.b")
-	public byte field2 = 68;
-
-	@ObfuscatedName("a.c")
-	public int field3;
-
-	@ObfuscatedName("a.d")
-	public boolean field4 = false;
-
-	@ObfuscatedName("a.e")
-	public boolean field5 = false;
-
-	@ObfuscatedName("a.f")
-	public boolean field6 = false;
 
 	@ObfuscatedName("a.g")
 	public int field7;
@@ -124,39 +105,36 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public long field32;
 
 	@ObfuscatedName("a.a(IIB)V")
-	public final void method1(int arg0, int arg1, byte arg2) {
+	public final void method1(int arg0, int arg1) {
 		this.setPreferredSize(new Dimension(arg0, arg1));
 
 		this.field13 = arg0;
 		this.field14 = arg1;
 		this.field18 = new ViewBox(false, this.field14, this, this.field13);
-		this.field15 = this.method11(0).getGraphics();
-		this.field16 = new PixMap(true, this.method11(0), this.field13, this.field14);
+		this.field15 = this.method11().getGraphics();
+		this.field16 = new PixMap(this.method11(), this.field13, this.field14);
 
 		this.method12(this, 1);
 	}
 
 	@ObfuscatedName("a.a(III)V")
-	public final void method2(int arg0, int arg1, int arg2) {
+	public final void method2(int arg1, int arg2) {
 		this.field13 = arg2;
 		this.field14 = arg1;
-		this.field15 = this.method11(0).getGraphics();
-		while (arg0 >= 0) {
-			this.field5 = !this.field5;
-		}
-		this.field16 = new PixMap(true, this.method11(0), this.field13, this.field14);
+		this.field15 = this.method11().getGraphics();
+		this.field16 = new PixMap(this.method11(), this.field13, this.field14);
 		this.method12(this, 1);
 	}
 
 	public void run() {
-		this.method11(0).addMouseListener(this);
-		this.method11(0).addMouseMotionListener(this);
-		this.method11(0).addKeyListener(this);
-		this.method11(0).addFocusListener(this);
+		this.method11().addMouseListener(this);
+		this.method11().addMouseMotionListener(this);
+		this.method11().addKeyListener(this);
+		this.method11().addFocusListener(this);
 		if (this.field18 != null) {
 			this.field18.addWindowListener(this);
 		}
-		this.method13((byte) 6, "Loading...", 0);
+		this.method13("Loading...", 0);
 		this.method6();
 		int var1 = 0;
 		int var2 = 256;
@@ -173,8 +151,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 				if (this.field7 < 0) {
 					if (this.field7 == -1) {
 						this.method3(true);
-					}
-					if (Linkable.field377) {
 					}
 					return;
 				}
@@ -229,7 +205,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 					this.field31 = this.field27;
 					this.field32 = this.field28;
 					this.field25 = 0;
-					this.method7(this.field2);
+					this.update();
 					this.field35 = this.field36;
 					var4 += var2;
 				}
@@ -237,7 +213,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 				if (this.field8 > 0) {
 					this.field11 = var2 * 1000 / (this.field8 * 256);
 				}
-				this.method9(this.field3);
+				this.method9();
 			} while (!this.field12);
 			System.out.println("ntime:" + var11);
 			for (int var14 = 0; var14 < 10; var14++) {
@@ -255,21 +231,16 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	@ObfuscatedName("a.a(Z)V")
 	public final void method3(boolean arg0) {
 		this.field7 = -2;
-		this.method8(false);
-		if (!arg0) {
-			for (int var2 = 1; var2 > 0; var2++) {
+		this.method8();
+		if (this.field18 != null) {
+			try {
+				Thread.sleep(1000L);
+			} catch (Exception var4) {
 			}
-		}
-		if (this.field18 == null) {
-			return;
-		}
-		try {
-			Thread.sleep(1000L);
-		} catch (Exception var4) {
-		}
-		try {
-			System.exit(0);
-		} catch (Throwable var3) {
+			try {
+				System.exit(0);
+			} catch (Throwable var3) {
+			}
 		}
 	}
 
@@ -308,7 +279,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.field15 = arg0;
 		}
 		this.field19 = true;
-		this.method10(0);
+		this.method10();
 	}
 
 	public final void paint(Graphics arg0) {
@@ -316,7 +287,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.field15 = arg0;
 		}
 		this.field19 = true;
-		this.method10(0);
+		this.method10();
 	}
 
 	public final void mousePressed(MouseEvent arg0) {
@@ -338,7 +309,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			}
 
 			if (InputTracking.field151) {
-				InputTracking.method49(var2, (byte) 9, var3, arg0.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
+				InputTracking.method49(var2, var3, arg0.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
 			}
 		} catch (NoSuchMethodError ex) {
 			if (arg0.isMetaDown()) {
@@ -350,7 +321,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			}
 
 			if (InputTracking.field151) {
-				InputTracking.method49(var2, (byte) 9, var3, arg0.isMetaDown() ? 1 : 0);
+				InputTracking.method49(var2, var3, arg0.isMetaDown() ? 1 : 0);
 			}
 		}
 	}
@@ -361,11 +332,11 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 		try {
 			if (InputTracking.field151) {
-				InputTracking.method50(arg0.getButton() == MouseEvent.BUTTON3 ? 1 : 0, (byte) 2);
+				InputTracking.method50(arg0.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
 			}
 		} catch (NoSuchMethodError ex) {
 			if (InputTracking.field151) {
-				InputTracking.method50(arg0.isMetaDown() ? 1 : 0, (byte) 2);
+				InputTracking.method50(arg0.isMetaDown() ? 1 : 0);
 			}
 		}
 	}
@@ -375,7 +346,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	public final void mouseEntered(MouseEvent arg0) {
 		if (InputTracking.field151) {
-			InputTracking.method56(false);
+			InputTracking.method56();
 		}
 	}
 
@@ -384,7 +355,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.field23 = -1;
 		this.field24 = -1;
 		if (InputTracking.field151) {
-			InputTracking.method57(421);
+			InputTracking.method57();
 		}
 	}
 
@@ -395,7 +366,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.field23 = var2;
 		this.field24 = var3;
 		if (InputTracking.field151) {
-			InputTracking.method51(0, var2, var3);
+			InputTracking.method51(var2, var3);
 		}
 	}
 
@@ -406,7 +377,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.field23 = var2;
 		this.field24 = var3;
 		if (InputTracking.field151) {
-			InputTracking.method51(0, var2, var3);
+			InputTracking.method51(var2, var3);
 		}
 	}
 
@@ -467,7 +438,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.field36 = this.field36 + 1 & 0x7F;
 		}
 		if (InputTracking.field151) {
-			InputTracking.method52(var3, 614);
+			InputTracking.method52(var3);
 		}
 	}
 
@@ -509,7 +480,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.field33[var3] = 0;
 		}
 		if (InputTracking.field151) {
-			InputTracking.method53(-10167, var3);
+			InputTracking.method53(var3);
 		}
 	}
 
@@ -517,11 +488,8 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.a(B)I")
-	public final int method5(byte arg0) {
+	public final int method5() {
 		int var2 = -1;
-		if (arg0 != 7) {
-			this.field5 = !this.field5;
-		}
 		if (this.field36 != this.field35) {
 			var2 = this.field34[this.field35];
 			this.field35 = this.field35 + 1 & 0x7F;
@@ -532,16 +500,16 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void focusGained(FocusEvent arg0) {
 		this.field20 = true;
 		this.field19 = true;
-		this.method10(0);
+		this.method10();
 		if (InputTracking.field151) {
-			InputTracking.method54((byte) 3);
+			InputTracking.method54();
 		}
 	}
 
 	public final void focusLost(FocusEvent arg0) {
 		this.field20 = false;
 		if (InputTracking.field151) {
-			InputTracking.method55(8);
+			InputTracking.method55();
 		}
 	}
 
@@ -572,35 +540,23 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.b(B)V")
-	public void method7(byte arg0) {
-		if (arg0 == 68) {
-			;
-		}
+	public void update() {
 	}
 
 	@ObfuscatedName("a.b(Z)V")
-	public void method8(boolean arg0) {
-		if (arg0) {
-			this.field6 = !this.field6;
-		}
+	public void method8() {
 	}
 
 	@ObfuscatedName("a.a(I)V")
-	public void method9(int arg0) {
-		if (arg0 == 0) {
-			;
-		}
+	public void method9() {
 	}
 
 	@ObfuscatedName("a.b(I)V")
-	public void method10(int arg0) {
-		if (arg0 != 0) {
-			this.field5 = !this.field5;
-		}
+	public void method10() {
 	}
 
 	@ObfuscatedName("a.c(I)Ljava/awt/Component;")
-	public Component method11(int arg0) {
+	public Component method11() {
 		return this;
 	}
 
@@ -612,11 +568,11 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.a(BLjava/lang/String;I)V")
-	public void method13(byte arg0, String arg1, int arg2) {
+	public void method13(String arg1, int arg2) {
 		while (this.field15 == null) {
-			this.field15 = this.method11(0).getGraphics();
+			this.field15 = this.method11().getGraphics();
 			try {
-				this.method11(0).repaint();
+				this.method11().repaint();
 			} catch (Exception var10) {
 			}
 			try {
@@ -624,13 +580,10 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			} catch (Exception var9) {
 			}
 		}
-		Font var4 = new Font("Helvetica", 1, 13);
-		FontMetrics var5 = this.method11(0).getFontMetrics(var4);
-		Font var6 = new Font("Helvetica", 0, 13);
-		this.method11(0).getFontMetrics(var6);
-		if (arg0 != 6) {
-			return;
-		}
+		Font var4 = new Font("Helvetica", Font.BOLD, 13);
+		FontMetrics var5 = this.method11().getFontMetrics(var4);
+		Font var6 = new Font("Helvetica", Font.PLAIN, 13);
+		FontMetrics plainMetrics = this.method11().getFontMetrics(var6);
 		if (this.field19) {
 			this.field15.setColor(Color.black);
 			this.field15.fillRect(0, 0, this.field13, this.field14);

@@ -14,12 +14,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("d")
 public class Component {
 
-	@ObfuscatedName("d.a")
-	public int field68;
-
-	@ObfuscatedName("d.b")
-	public static boolean field69 = true;
-
 	@ObfuscatedName("d.c")
 	public static Component[] field70;
 
@@ -129,7 +123,7 @@ public class Component {
 	public String field131;
 
 	@ObfuscatedName("d.mb")
-	public static LruCache field132 = new LruCache((byte) 3, 30);
+	public static LruCache field132 = new LruCache(30);
 
 	@ObfuscatedName("d.nb")
 	public static LruCache field133;
@@ -213,13 +207,9 @@ public class Component {
 	public String[] field106;
 
 	@ObfuscatedName("d.a(Lyb;I[Llb;Lyb;)V")
-	public static void method32(JagFile arg0, int arg1, PixFont[] arg2, JagFile arg3) {
-		field133 = new LruCache((byte) 3, 50000);
-		Packet var4 = new Packet(arg3.method309("data", null), (byte) 3);
-		if (arg1 != 7) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
+	public static void method32(JagFile arg0, PixFont[] arg2, JagFile arg3) {
+		field133 = new LruCache(50000);
+		Packet var4 = new Packet(arg3.method309("data", null));
 		int var6 = -1;
 		int var7 = var4.method241();
 		field70 = new Component[var7];
@@ -307,7 +297,7 @@ public class Component {
 							String var20 = var4.method246();
 							if (arg0 != null && var20.length() > 0) {
 								int var21 = var20.lastIndexOf(",");
-								var9.field103[var18] = method37(59, Integer.parseInt(var20.substring(var21 + 1)), var20.substring(0, var21), arg0);
+								var9.field103[var18] = method37(Integer.parseInt(var20.substring(var21 + 1)), var20.substring(0, var21), arg0);
 							}
 						}
 					}
@@ -346,12 +336,12 @@ public class Component {
 					String var24 = var4.method246();
 					if (arg0 != null && var24.length() > 0) {
 						int var25 = var24.lastIndexOf(",");
-						var9.field117 = method37(59, Integer.parseInt(var24.substring(var25 + 1)), var24.substring(0, var25), arg0);
+						var9.field117 = method37(Integer.parseInt(var24.substring(var25 + 1)), var24.substring(0, var25), arg0);
 					}
 					String var26 = var4.method246();
 					if (arg0 != null && var26.length() > 0) {
 						int var27 = var26.lastIndexOf(",");
-						var9.field118 = method37(59, Integer.parseInt(var26.substring(var27 + 1)), var26.substring(0, var27), arg0);
+						var9.field118 = method37(Integer.parseInt(var26.substring(var27 + 1)), var26.substring(0, var27), arg0);
 					}
 				}
 				if (var9.field77 == 6) {
@@ -427,20 +417,17 @@ public class Component {
 	}
 
 	@ObfuscatedName("d.a(III)V")
-	public void method33(int arg0, int arg1, int arg2) {
+	public void method33(int arg0, int arg1) {
 		int var4 = this.field71[arg1];
 		this.field71[arg1] = this.field71[arg0];
 		this.field71[arg0] = var4;
 		int var5 = this.field72[arg1];
-		if (arg2 < 6 || arg2 > 6) {
-			this.field68 = -214;
-		}
 		this.field72[arg1] = this.field72[arg0];
 		this.field72[arg0] = var5;
 	}
 
 	@ObfuscatedName("d.a(IIZI)Lfb;")
-	public Model method34(int arg0, int arg1, boolean arg2, int arg3) {
+	public Model method34(int arg1, boolean arg2, int arg3) {
 		Model var5;
 		if (arg2) {
 			var5 = this.method35(this.field121, this.field122);
@@ -452,21 +439,17 @@ public class Component {
 		} else if (arg1 == -1 && arg3 == -1 && var5.field553 == null) {
 			return var5;
 		} else {
-			Model var6 = new Model(AnimFrame.method62((byte) 8, arg1) & AnimFrame.method62((byte) 8, arg3), 992, false, true, var5);
+			Model var6 = new Model(AnimFrame.method62(arg1) & AnimFrame.method62(arg3), false, true, var5);
 			if (arg1 != -1 || arg3 != -1) {
-				var6.method146((byte) 112);
+				var6.method146();
 			}
 			if (arg1 != -1) {
-				var6.method147(true, arg1);
+				var6.method147(arg1);
 			}
 			if (arg3 != -1) {
-				var6.method147(true, arg3);
+				var6.method147(arg3);
 			}
 			var6.method156(64, 768, -50, -10, -50, true);
-			if (arg0 != 0) {
-				for (int var7 = 1; var7 > 0; var7++) {
-				}
-			}
 			return var6;
 		}
 	}
@@ -478,46 +461,42 @@ public class Component {
 			return var3;
 		}
 		if (arg0 == 1) {
-			var3 = Model.method139(0, arg1);
+			var3 = Model.method139(arg1);
 		}
 		if (arg0 == 2) {
-			var3 = NpcType.method344(arg1).method347(21159);
+			var3 = NpcType.method344(arg1).method347();
 		}
 		if (arg0 == 3) {
-			var3 = Client.field1231.method132(false);
+			var3 = Client.field1231.method132();
 		}
 		if (arg0 == 4) {
-			var3 = ObjType.method350(arg1).method355(614, 50);
+			var3 = ObjType.method350(arg1).method355(50);
 		}
 		if (arg0 == 5) {
 			var3 = null;
 		}
 		if (var3 != null) {
-			field132.method116(var3, false, (long) ((arg0 << 16) + arg1));
+			field132.method116(var3, (long) ((arg0 << 16) + arg1));
 		}
 		return var3;
 	}
 
 	@ObfuscatedName("d.a(ZILfb;I)V")
-	public static void method36(boolean arg0, int arg1, Model arg2, int arg3) {
-		if (arg0) {
-			field132.method117();
-			if (arg2 != null && arg3 != 4) {
-				field132.method116(arg2, false, (long) ((arg3 << 16) + arg1));
-			}
+	public static void method36(int arg1, Model arg2, int arg3) {
+		field132.method117();
+		if (arg2 != null && arg3 != 4) {
+			field132.method116(arg2, (long) ((arg3 << 16) + arg1));
 		}
 	}
 
 	@ObfuscatedName("d.a(IILjava/lang/String;Lyb;)Ljb;")
-	public static Pix32 method37(int arg0, int arg1, String arg2, JagFile arg3) {
-		long var4 = (JString.method312(193, arg2) << 8) + (long) arg1;
+	public static Pix32 method37(int arg1, String arg2, JagFile arg3) {
+		long var4 = (JString.method312(arg2) << 8) + (long) arg1;
 		Pix32 var6 = (Pix32) field133.method115(var4);
-		if (arg0 <= 0) {
-			throw new NullPointerException();
-		} else if (var6 == null) {
+		if (var6 == null) {
 			try {
 				Pix32 var7 = new Pix32(arg3, arg2, arg1);
-				field133.method116(var7, false, var4);
+				field133.method116(var7, var4);
 				return var7;
 			} catch (Exception var8) {
 				return null;

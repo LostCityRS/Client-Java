@@ -5,21 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("zb")
 public class JString {
 
-	@ObfuscatedName("zb.a")
-	public static int field871 = 4339;
-
-	@ObfuscatedName("zb.b")
-	public static byte field872 = -65;
-
-	@ObfuscatedName("zb.c")
-	public static byte field873 = 6;
-
-	@ObfuscatedName("zb.d")
-	public static byte field874 = -58;
-
-	@ObfuscatedName("zb.e")
-	public static int field875 = -35226;
-
 	@ObfuscatedName("zb.f")
 	public static final char[] field876 = new char[] { '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
@@ -44,7 +29,7 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(JZ)Ljava/lang/String;")
-	public static String method311(long arg0, boolean arg1) {
+	public static String method311(long arg0) {
 		if (arg0 <= 0L || arg0 >= 6582952005840035281L) {
 			return "invalid_name";
 		} else if (arg0 % 37L == 0L) {
@@ -52,9 +37,6 @@ public class JString {
 		} else {
 			int var3 = 0;
 			char[] var4 = new char[12];
-			if (!arg1) {
-				throw new NullPointerException();
-			}
 			while (arg0 != 0L) {
 				long var5 = arg0;
 				arg0 /= 37L;
@@ -65,11 +47,8 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(ILjava/lang/String;)J")
-	public static long method312(int arg0, String arg1) {
+	public static long method312(String arg1) {
 		String var2 = arg1.toUpperCase();
-		if (arg0 <= 0) {
-			throw new NullPointerException();
-		}
 		long var3 = 0L;
 		for (int var5 = 0; var5 < var2.length(); var5++) {
 			long var6 = var3 * 61L + (long) var2.charAt(var5) - 32L;
@@ -79,18 +58,13 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(BI)Ljava/lang/String;")
-	public static String method313(byte arg0, int arg1) {
-		if (arg0 != -43) {
-			field871 = 391;
-		}
+	public static String method313(int arg1) {
 		return (arg1 >> 24 & 0xFF) + "." + (arg1 >> 16 & 0xFF) + "." + (arg1 >> 8 & 0xFF) + "." + (arg1 & 0xFF);
 	}
 
 	@ObfuscatedName("zb.a(ZLjava/lang/String;)Ljava/lang/String;")
-	public static String method314(boolean arg0, String arg1) {
-		if (!arg0) {
-			throw new NullPointerException();
-		} else if (arg1.length() > 0) {
+	public static String method314(String arg1) {
+		if (arg1.length() > 0) {
 			char[] var2 = arg1.toCharArray();
 			for (int var3 = 0; var3 < var2.length; var3++) {
 				if (var2[var3] == '_') {
@@ -110,12 +84,9 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.b(ILjava/lang/String;)Ljava/lang/String;")
-	public static String method315(int arg0, String arg1) {
+	public static String method315(String arg1) {
 		String var2 = arg1.toLowerCase();
 		char[] var3 = var2.toCharArray();
-		if (arg0 != 39922) {
-			throw new NullPointerException();
-		}
 		int var4 = var3.length;
 		boolean var5 = true;
 		for (int var6 = 0; var6 < var4; var6++) {
@@ -132,11 +103,8 @@ public class JString {
 	}
 
 	@ObfuscatedName("zb.a(BLjava/lang/String;)Ljava/lang/String;")
-	public static String method316(byte arg0, String arg1) {
+	public static String method316(String arg1) {
 		StringBuffer var2 = new StringBuffer();
-		if (arg0 != field872) {
-			throw new NullPointerException();
-		}
 		for (int var3 = 0; var3 < arg1.length(); var3++) {
 			var2.append("*");
 		}

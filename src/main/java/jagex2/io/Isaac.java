@@ -5,9 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("xb")
 public class Isaac {
 
-	@ObfuscatedName("xb.a")
-	public boolean field854 = false;
-
 	@ObfuscatedName("xb.b")
 	public int field855;
 
@@ -26,14 +23,9 @@ public class Isaac {
 	@ObfuscatedName("xb.g")
 	public int field860;
 
-	public Isaac(byte arg0, int[] arg1) {
+	public Isaac(int[] arg1) {
 		for (int var3 = 0; var3 < arg1.length; var3++) {
 			this.field856[var3] = arg1[var3];
-		}
-		if (arg0 == 4) {
-			boolean var4 = false;
-		} else {
-			this.field854 = !this.field854;
 		}
 		this.method307();
 	}

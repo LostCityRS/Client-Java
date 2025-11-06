@@ -10,27 +10,6 @@ import java.awt.image.PixelGrabber;
 @ObfuscatedName("jb")
 public class Pix32 extends Pix2D {
 
-	@ObfuscatedName("jb.z")
-	public boolean field659 = true;
-
-	@ObfuscatedName("jb.A")
-	public byte field660 = -32;
-
-	@ObfuscatedName("jb.B")
-	public int field661 = 728;
-
-	@ObfuscatedName("jb.C")
-	public boolean field662 = false;
-
-	@ObfuscatedName("jb.D")
-	public boolean field663 = false;
-
-	@ObfuscatedName("jb.E")
-	public boolean field664 = false;
-
-	@ObfuscatedName("jb.F")
-	public int field665 = 6;
-
 	@ObfuscatedName("jb.G")
 	public int[] field666;
 
@@ -80,8 +59,8 @@ public class Pix32 extends Pix2D {
 	}
 
 	public Pix32(JagFile arg0, String arg1, int arg2) {
-		Packet var4 = new Packet(arg0.method309(arg1 + ".dat", null), (byte) 3);
-		Packet var5 = new Packet(arg0.method309("index.dat", null), (byte) 3);
+		Packet var4 = new Packet(arg0.method309(arg1 + ".dat", null));
+		Packet var5 = new Packet(arg0.method309("index.dat", null));
 		var5.field711 = var4.method241();
 		this.field671 = var5.method241();
 		this.field672 = var5.method241();
@@ -119,15 +98,12 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(B)V")
-	public void method194(byte arg0) {
-		if (arg0 != 9) {
-			this.field664 = !this.field664;
-		}
-		Pix2D.method165(-216, this.field668, this.field666, this.field667);
+	public void method194() {
+		Pix2D.method165(this.field668, this.field666, this.field667);
 	}
 
 	@ObfuscatedName("jb.a(IIII)V")
-	public void method195(int arg0, int arg1, int arg2, int arg3) {
+	public void method195(int arg1, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.field666.length; var5++) {
 			int var6 = this.field666[var5];
 			if (var6 != 0) {
@@ -155,13 +131,10 @@ public class Pix32 extends Pix2D {
 				this.field666[var5] = (var8 << 16) + (var10 << 8) + var12;
 			}
 		}
-		if (arg0 < 0 || arg0 > 0) {
-			;
-		}
 	}
 
 	@ObfuscatedName("jb.a(Z)V")
-	public void method196(boolean arg0) {
+	public void method196() {
 		int[] var2 = new int[this.field671 * this.field672];
 		for (int var3 = 0; var3 < this.field668; var3++) {
 			for (int var4 = 0; var4 < this.field667; var4++) {
@@ -171,24 +144,16 @@ public class Pix32 extends Pix2D {
 		this.field666 = var2;
 		this.field667 = this.field671;
 		this.field668 = this.field672;
-		if (arg0) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
 		this.field669 = 0;
 		this.field670 = 0;
 	}
 
 	@ObfuscatedName("jb.a(III)V")
-	public void method197(int arg0, int arg1, int arg2) {
+	public void method197(int arg0, int arg2) {
 		int var4 = arg2 + this.field669;
 		int var5 = arg0 + this.field670;
 		int var6 = var4 + var5 * Pix2D.field624;
 		int var7 = 0;
-		if (arg1 != -18217) {
-			for (int var8 = 1; var8 > 0; var8++) {
-			}
-		}
 		int var9 = this.field668;
 		int var10 = this.field667;
 		int var11 = Pix2D.field624 - var10;
@@ -219,15 +184,12 @@ public class Pix32 extends Pix2D {
 			var11 += var15;
 		}
 		if (var10 > 0 && var9 > 0) {
-			this.method198(0, Pix2D.field623, var12, this.field666, var7, var6, var11, var9, var10);
+			this.method198(Pix2D.field623, var12, this.field666, var7, var6, var11, var9, var10);
 		}
 	}
 
 	@ObfuscatedName("jb.a(I[II[IIIIII)V")
-	public void method198(int arg0, int[] arg1, int arg2, int[] arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
-		if (arg0 != 0) {
-			this.field663 = !this.field663;
-		}
+	public void method198(int[] arg1, int arg2, int[] arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = -(arg8 >> 2);
 		int var11 = -(arg8 & 0x3);
 		for (int var12 = -arg7; var12 < 0; var12++) {
@@ -246,10 +208,7 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.b(III)V")
-	public void method199(int arg0, int arg1, int arg2) {
-		if (arg0 < 1 || arg0 > 1) {
-			return;
-		}
+	public void method199(int arg1, int arg2) {
 		int var4 = arg1 + this.field669;
 		int var5 = arg2 + this.field670;
 		int var6 = var4 + var5 * Pix2D.field624;
@@ -333,7 +292,7 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.b(IIII)V")
-	public void method201(int arg0, int arg1, int arg2, int arg3) {
+	public void method201(int arg0, int arg2, int arg3) {
 		int var5 = arg0 + this.field669;
 		int var6 = arg3 + this.field670;
 		int var7 = var5 + var6 * Pix2D.field624;
@@ -368,13 +327,12 @@ public class Pix32 extends Pix2D {
 			var11 += var15;
 		}
 		if (var10 > 0 && var9 > 0) {
-			this.method202(var10, this.field660, var8, var7, Pix2D.field623, arg2, 0, this.field666, var12, var9, var11);
-			int var16 = 88 / arg1;
+			this.method202(var10, var8, var7, Pix2D.field623, arg2, 0, this.field666, var12, var9, var11);
 		}
 	}
 
 	@ObfuscatedName("jb.a(IBII[III[IIII)V")
-	public void method202(int arg0, byte arg1, int arg2, int arg3, int[] arg4, int arg5, int arg6, int[] arg7, int arg8, int arg9, int arg10) {
+	public void method202(int arg0, int arg2, int arg3, int[] arg4, int arg5, int arg6, int[] arg7, int arg8, int arg9, int arg10) {
 		int var12 = 256 - arg5;
 		for (int var13 = -arg9; var13 < 0; var13++) {
 			for (int var14 = -arg0; var14 < 0; var14++) {
@@ -389,16 +347,10 @@ public class Pix32 extends Pix2D {
 			arg3 += arg10;
 			arg2 += arg8;
 		}
-		if (arg1 != -32) {
-			this.field664 = !this.field664;
-		}
 	}
 
 	@ObfuscatedName("jb.a(I[II[IZIIIIII)V")
-	public void method203(int arg0, int[] arg1, int arg2, int[] arg3, boolean arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
-		if (arg4) {
-			this.field659 = !this.field659;
-		}
+	public void method203(int arg0, int[] arg1, int arg2, int[] arg3, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		try {
 			int var12 = -arg0 / 2;
 			int var13 = -arg7 / 2;
@@ -428,10 +380,7 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(IIIIIIIDI)V")
-	public void method204(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, double arg7, int arg8) {
-		if (arg5 != 4) {
-			return;
-		}
+	public void method204(int arg0, int arg1, int arg2, int arg3, int arg4, int arg6, double arg7, int arg8) {
 		try {
 			int var11 = -arg6 / 2;
 			int var12 = -arg1 / 2;
@@ -465,12 +414,9 @@ public class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jb.a(ZLkb;II)V")
-	public void method205(boolean arg0, Pix8 arg1, int arg2, int arg3) {
+	public void method205(Pix8 arg1, int arg2, int arg3) {
 		int var5 = arg3 + this.field669;
 		int var6 = arg2 + this.field670;
-		if (!arg0) {
-			this.field662 = !this.field662;
-		}
 		int var7 = var5 + var6 * Pix2D.field624;
 		int var8 = 0;
 		int var9 = this.field668;
@@ -503,17 +449,14 @@ public class Pix32 extends Pix2D {
 			var11 += var15;
 		}
 		if (var10 > 0 && var9 > 0) {
-			this.method206(var8, var12, 0, this.field666, arg1.field674, var10, var9, Pix2D.field623, (byte) 118, var11, var7);
+			this.method206(var8, var12, 0, this.field666, arg1.field674, var10, var9, Pix2D.field623, var11, var7);
 		}
 	}
 
 	@ObfuscatedName("jb.a(III[I[BII[IBII)V")
-	public void method206(int arg0, int arg1, int arg2, int[] arg3, byte[] arg4, int arg5, int arg6, int[] arg7, byte arg8, int arg9, int arg10) {
+	public void method206(int arg0, int arg1, int arg2, int[] arg3, byte[] arg4, int arg5, int arg6, int[] arg7, int arg9, int arg10) {
 		int var12 = -(arg5 >> 2);
 		int var13 = -(arg5 & 0x3);
-		if (arg8 != 118) {
-			this.field659 = !this.field659;
-		}
 		for (int var14 = -arg6; var14 < 0; var14++) {
 			for (int var15 = var12; var15 < 0; var15++) {
 				int var16 = arg3[arg0++];

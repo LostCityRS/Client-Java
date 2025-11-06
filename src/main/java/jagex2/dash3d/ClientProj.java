@@ -84,12 +84,9 @@ public class ClientProj extends ModelSource {
 	@ObfuscatedName("eb.L")
 	public int field528;
 
-	public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
+	public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg10, int arg11) {
 		this.field505 = SpotAnimType.field1132[arg1];
 		this.field506 = arg0;
-		if (arg9 != 0) {
-			throw new NullPointerException();
-		}
 		this.field507 = arg6;
 		this.field508 = arg10;
 		this.field509 = arg4;
@@ -103,7 +100,7 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(IIBII)V")
-	public final void method133(int arg0, int arg1, byte arg2, int arg3, int arg4) {
+	public final void method133(int arg0, int arg1, int arg3, int arg4) {
 		if (!this.field516) {
 			double var6 = (double) (arg3 - this.field507);
 			double var8 = (double) (arg0 - this.field508);
@@ -120,29 +117,23 @@ public class ClientProj extends ModelSource {
 			this.field523 = -this.field522 * Math.tan((double) this.field513 * 0.02454369D);
 		}
 		this.field524 = ((double) arg1 - this.field519 - this.field523 * var12) * 2.0D / (var12 * var12);
-		if (arg2 != 0) {
-			this.field504 = 68;
-		}
 	}
 
 	@ObfuscatedName("eb.a(II)V")
-	public final void method134(int arg0, int arg1) {
+	public final void method134(int arg1) {
 		this.field516 = true;
 		this.field517 += this.field520 * (double) arg1;
 		this.field518 += this.field521 * (double) arg1;
 		this.field519 += this.field523 * (double) arg1 + this.field524 * 0.5D * (double) arg1 * (double) arg1;
 		this.field523 += this.field524 * (double) arg1;
-		if (arg0 >= 0) {
-			this.field503 = !this.field503;
-		}
 		this.field525 = (int) (Math.atan2(this.field520, this.field521) * 325.949D) + 1024 & 0x7FF;
 		this.field526 = (int) (Math.atan2(this.field523, this.field522) * 325.949D) & 0x7FF;
 		if (this.field505.field1136 == null) {
 			return;
 		}
 		this.field528 += arg1;
-		while (this.field528 > this.field505.field1136.method384((byte) -103, this.field527)) {
-			this.field528 -= this.field505.field1136.method384((byte) -103, this.field527) + 1;
+		while (this.field528 > this.field505.field1136.method384(this.field527)) {
+			this.field528 -= this.field505.field1136.method384(this.field527) + 1;
 			this.field527++;
 			if (this.field527 >= this.field505.field1136.field1113) {
 				this.field527 = 0;
@@ -151,7 +142,7 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(I)Lfb;")
-	public final Model method123(int arg0) {
+	public final Model method123() {
 		Model var2 = this.field505.method388();
 		if (var2 == null) {
 			return null;
@@ -160,21 +151,17 @@ public class ClientProj extends ModelSource {
 		if (this.field505.field1136 != null) {
 			var3 = this.field505.field1136.field1114[this.field527];
 		}
-		Model var4 = new Model(AnimFrame.method62((byte) 8, var3), 992, false, true, var2);
-		if (arg0 != 45160) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
+		Model var4 = new Model(AnimFrame.method62(var3), false, true, var2);
 		if (var3 != -1) {
-			var4.method146((byte) 112);
-			var4.method147(true, var3);
+			var4.method146();
+			var4.method147(var3);
 			var4.field571 = null;
 			var4.field570 = null;
 		}
 		if (this.field505.field1139 != 128 || this.field505.field1140 != 128) {
-			var4.method155(792, this.field505.field1139, this.field505.field1139, this.field505.field1140);
+			var4.method155(this.field505.field1139, this.field505.field1139, this.field505.field1140);
 		}
-		var4.method151((byte) 24, this.field526);
+		var4.method151(this.field526);
 		var4.method156(this.field505.field1142 + 64, this.field505.field1143 + 850, -30, -50, -30, true);
 		return var4;
 	}

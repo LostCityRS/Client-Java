@@ -11,15 +11,6 @@ import java.net.Socket;
 @ObfuscatedName("e")
 public class ClientStream implements Runnable {
 
-	@ObfuscatedName("e.a")
-	public int field134 = 6;
-
-	@ObfuscatedName("e.b")
-	public boolean field135 = false;
-
-	@ObfuscatedName("e.c")
-	public boolean field136 = false;
-
 	@ObfuscatedName("e.d")
 	public InputStream field137;
 
@@ -50,16 +41,13 @@ public class ClientStream implements Runnable {
 	@ObfuscatedName("e.m")
 	public boolean field146 = false;
 
-	public ClientStream(GameShell arg0, Socket arg1, int arg2) throws IOException {
+	public ClientStream(GameShell arg0, Socket arg1) throws IOException {
 		this.field141 = arg0;
 		this.field139 = arg1;
 		this.field139.setSoTimeout(30000);
 		this.field139.setTcpNoDelay(true);
 		this.field137 = this.field139.getInputStream();
 		this.field138 = this.field139.getOutputStream();
-		if (arg2 < this.field134 || arg2 > this.field134) {
-			throw new NullPointerException();
-		}
 	}
 
 	@ObfuscatedName("e.a()V")
@@ -111,7 +99,7 @@ public class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("e.a([BIII)V")
-	public void method42(byte[] arg0, int arg1, int arg2, int arg3) throws IOException {
+	public void method42(byte[] arg0, int arg1, int arg3) throws IOException {
 		if (this.field140) {
 			return;
 		}
@@ -135,9 +123,6 @@ public class ClientStream implements Runnable {
 				this.field141.method12(this, 3);
 			}
 			this.notify();
-		}
-		if (arg2 == 0) {
-			;
 		}
 	}
 
@@ -181,12 +166,9 @@ public class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("e.a(I)V")
-	public void method43(int arg0) {
+	public void method43() {
 		System.out.println("dummy:" + this.field140);
 		System.out.println("tcycl:" + this.field143);
-		while (arg0 >= 0) {
-			this.field136 = !this.field136;
-		}
 		System.out.println("tnum:" + this.field144);
 		System.out.println("writer:" + this.field145);
 		System.out.println("ioerror:" + this.field146);

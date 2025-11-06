@@ -1,17 +1,10 @@
 package jagex2.sound;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.Linkable;
 import jagex2.io.Packet;
 
 @ObfuscatedName("bc")
 public class Envelope {
-
-	@ObfuscatedName("bc.a")
-	public boolean field879 = true;
-
-	@ObfuscatedName("bc.b")
-	public int field880 = -536;
 
 	@ObfuscatedName("bc.c")
 	public int field881;
@@ -47,11 +40,8 @@ public class Envelope {
 	public int field891;
 
 	@ObfuscatedName("bc.a(ILmb;)V")
-	public final void method319(int arg0, Packet arg1) {
+	public final void method319(Packet arg1) {
 		this.field886 = arg1.method239();
-		if (arg0 != 9) {
-			this.field879 = !this.field879;
-		}
 		this.field884 = arg1.method244();
 		this.field885 = arg1.method244();
 		this.field881 = arg1.method239();
@@ -61,15 +51,10 @@ public class Envelope {
 			this.field882[var3] = arg1.method241();
 			this.field883[var3] = arg1.method241();
 		}
-		if (Linkable.field377) {
-		}
 	}
 
 	@ObfuscatedName("bc.a(I)V")
-	public final void method320(int arg0) {
-		if (arg0 < 7 || arg0 > 7) {
-			this.field880 = -59;
-		}
+	public final void method320() {
 		this.field887 = 0;
 		this.field888 = 0;
 		this.field889 = 0;
@@ -78,10 +63,7 @@ public class Envelope {
 	}
 
 	@ObfuscatedName("bc.a(II)I")
-	public final int method321(int arg0, int arg1) {
-		if (arg1 >= 0) {
-			return 3;
-		}
+	public final int method321(int arg0) {
 		if (this.field891 >= this.field887) {
 			this.field890 = this.field883[this.field888++] << 15;
 			if (this.field888 >= this.field881) {

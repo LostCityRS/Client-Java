@@ -12,21 +12,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("hc")
 public class ObjType {
 
-	@ObfuscatedName("hc.a")
-	public static boolean field1011;
-
-	@ObfuscatedName("hc.b")
-	public boolean field1012 = false;
-
-	@ObfuscatedName("hc.c")
-	public boolean field1013 = false;
-
-	@ObfuscatedName("hc.d")
-	public int field1014 = 614;
-
-	@ObfuscatedName("hc.e")
-	public static int field1015 = 977;
-
 	@ObfuscatedName("hc.f")
 	public static int field1016;
 
@@ -91,10 +76,10 @@ public class ObjType {
 	public int field1036;
 
 	@ObfuscatedName("hc.Y")
-	public static LruCache field1061 = new LruCache((byte) 3, 50);
+	public static LruCache field1061 = new LruCache(50);
 
 	@ObfuscatedName("hc.Z")
-	public static LruCache field1062 = new LruCache((byte) 3, 100);
+	public static LruCache field1062 = new LruCache(100);
 
 	@ObfuscatedName("hc.F")
 	public byte field1042;
@@ -170,8 +155,8 @@ public class ObjType {
 
 	@ObfuscatedName("hc.a(Lyb;)V")
 	public static final void method348(JagFile arg0) {
-		field1018 = new Packet(arg0.method309("obj.dat", null), (byte) 3);
-		Packet var1 = new Packet(arg0.method309("obj.idx", null), (byte) 3);
+		field1018 = new Packet(arg0.method309("obj.dat", null));
+		Packet var1 = new Packet(arg0.method309("obj.idx", null));
 		field1016 = var1.method241();
 		field1017 = new int[field1016];
 		int var2 = 2;
@@ -186,13 +171,12 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(I)V")
-	public static final void method349(int arg0) {
+	public static final void method349() {
 		field1061 = null;
 		field1062 = null;
 		field1017 = null;
 		field1019 = null;
 		field1018 = null;
-		int var1 = 50 / arg0;
 	}
 
 	@ObfuscatedName("hc.b(I)Lhc;")
@@ -207,9 +191,9 @@ public class ObjType {
 		field1018.field711 = field1017[arg0];
 		var2.field1022 = arg0;
 		var2.method351();
-		var2.method352(9, field1018);
+		var2.method352(field1018);
 		if (var2.field1055 != -1) {
-			var2.method353(false);
+			var2.method353();
 		}
 		if (!field1021 && var2.field1037) {
 			var2.field1024 = "Members Object";
@@ -263,120 +247,114 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(ILmb;)V")
-	public final void method352(int arg0, Packet arg1) {
-		if (arg0 < 9 || arg0 > 9) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
+	public final void method352(Packet arg1) {
 		while (true) {
-			while (true) {
-				int var4 = arg1.method239();
-				if (var4 == 0) {
-					return;
+			int var4 = arg1.method239();
+			if (var4 == 0) {
+				return;
+			}
+			if (var4 == 1) {
+				this.field1023 = arg1.method241();
+			} else if (var4 == 2) {
+				this.field1024 = arg1.method246();
+			} else if (var4 == 3) {
+				this.field1025 = arg1.method247();
+			} else if (var4 == 4) {
+				this.field1028 = arg1.method241();
+			} else if (var4 == 5) {
+				this.field1029 = arg1.method241();
+			} else if (var4 == 6) {
+				this.field1030 = arg1.method241();
+			} else if (var4 == 7) {
+				this.field1032 = arg1.method241();
+				if (this.field1032 > 32767) {
+					this.field1032 -= 65536;
 				}
-				if (var4 == 1) {
-					this.field1023 = arg1.method241();
-				} else if (var4 == 2) {
-					this.field1024 = arg1.method246();
-				} else if (var4 == 3) {
-					this.field1025 = arg1.method247((byte) 3);
-				} else if (var4 == 4) {
-					this.field1028 = arg1.method241();
-				} else if (var4 == 5) {
-					this.field1029 = arg1.method241();
-				} else if (var4 == 6) {
-					this.field1030 = arg1.method241();
-				} else if (var4 == 7) {
-					this.field1032 = arg1.method241();
-					if (this.field1032 > 32767) {
-						this.field1032 -= 65536;
-					}
-				} else if (var4 == 8) {
-					this.field1033 = arg1.method241();
-					if (this.field1033 > 32767) {
-						this.field1033 -= 65536;
-					}
-				} else if (var4 == 10) {
-					this.field1034 = arg1.method241();
-				} else if (var4 == 11) {
-					this.field1035 = true;
-				} else if (var4 == 12) {
-					this.field1036 = arg1.method244();
-				} else if (var4 == 16) {
-					this.field1037 = true;
-				} else if (var4 == 23) {
-					this.field1040 = arg1.method241();
-					this.field1042 = arg1.method240();
-				} else if (var4 == 24) {
-					this.field1041 = arg1.method241();
-				} else if (var4 == 25) {
-					this.field1043 = arg1.method241();
-					this.field1045 = arg1.method240();
-				} else if (var4 == 26) {
-					this.field1044 = arg1.method241();
-				} else if (var4 >= 30 && var4 < 35) {
-					if (this.field1038 == null) {
-						this.field1038 = new String[5];
-					}
-					this.field1038[var4 - 30] = arg1.method246();
-					if (this.field1038[var4 - 30].equalsIgnoreCase("hidden")) {
-						this.field1038[var4 - 30] = null;
-					}
-				} else if (var4 >= 35 && var4 < 40) {
-					if (this.field1039 == null) {
-						this.field1039 = new String[5];
-					}
-					this.field1039[var4 - 35] = arg1.method246();
-				} else if (var4 == 40) {
-					int var5 = arg1.method239();
-					this.field1026 = new int[var5];
-					this.field1027 = new int[var5];
-					for (int var6 = 0; var6 < var5; var6++) {
-						this.field1026[var6] = arg1.method241();
-						this.field1027[var6] = arg1.method241();
-					}
-				} else if (var4 == 78) {
-					this.field1046 = arg1.method241();
-				} else if (var4 == 79) {
-					this.field1047 = arg1.method241();
-				} else if (var4 == 90) {
-					this.field1048 = arg1.method241();
-				} else if (var4 == 91) {
-					this.field1050 = arg1.method241();
-				} else if (var4 == 92) {
-					this.field1049 = arg1.method241();
-				} else if (var4 == 93) {
-					this.field1051 = arg1.method241();
-				} else if (var4 == 95) {
-					this.field1031 = arg1.method241();
-				} else if (var4 == 97) {
-					this.field1054 = arg1.method241();
-				} else if (var4 == 98) {
-					this.field1055 = arg1.method241();
-				} else if (var4 >= 100 && var4 < 110) {
-					if (this.field1052 == null) {
-						this.field1052 = new int[10];
-						this.field1053 = new int[10];
-					}
-					this.field1052[var4 - 100] = arg1.method241();
-					this.field1053[var4 - 100] = arg1.method241();
-				} else if (var4 == 110) {
-					this.field1056 = arg1.method241();
-				} else if (var4 == 111) {
-					this.field1057 = arg1.method241();
-				} else if (var4 == 112) {
-					this.field1058 = arg1.method241();
-				} else if (var4 == 113) {
-					this.field1059 = arg1.method240();
-				} else if (var4 == 114) {
-					this.field1060 = arg1.method240() * 5;
+			} else if (var4 == 8) {
+				this.field1033 = arg1.method241();
+				if (this.field1033 > 32767) {
+					this.field1033 -= 65536;
 				}
+			} else if (var4 == 10) {
+				this.field1034 = arg1.method241();
+			} else if (var4 == 11) {
+				this.field1035 = true;
+			} else if (var4 == 12) {
+				this.field1036 = arg1.method244();
+			} else if (var4 == 16) {
+				this.field1037 = true;
+			} else if (var4 == 23) {
+				this.field1040 = arg1.method241();
+				this.field1042 = arg1.method240();
+			} else if (var4 == 24) {
+				this.field1041 = arg1.method241();
+			} else if (var4 == 25) {
+				this.field1043 = arg1.method241();
+				this.field1045 = arg1.method240();
+			} else if (var4 == 26) {
+				this.field1044 = arg1.method241();
+			} else if (var4 >= 30 && var4 < 35) {
+				if (this.field1038 == null) {
+					this.field1038 = new String[5];
+				}
+				this.field1038[var4 - 30] = arg1.method246();
+				if (this.field1038[var4 - 30].equalsIgnoreCase("hidden")) {
+					this.field1038[var4 - 30] = null;
+				}
+			} else if (var4 >= 35 && var4 < 40) {
+				if (this.field1039 == null) {
+					this.field1039 = new String[5];
+				}
+				this.field1039[var4 - 35] = arg1.method246();
+			} else if (var4 == 40) {
+				int var5 = arg1.method239();
+				this.field1026 = new int[var5];
+				this.field1027 = new int[var5];
+				for (int var6 = 0; var6 < var5; var6++) {
+					this.field1026[var6] = arg1.method241();
+					this.field1027[var6] = arg1.method241();
+				}
+			} else if (var4 == 78) {
+				this.field1046 = arg1.method241();
+			} else if (var4 == 79) {
+				this.field1047 = arg1.method241();
+			} else if (var4 == 90) {
+				this.field1048 = arg1.method241();
+			} else if (var4 == 91) {
+				this.field1050 = arg1.method241();
+			} else if (var4 == 92) {
+				this.field1049 = arg1.method241();
+			} else if (var4 == 93) {
+				this.field1051 = arg1.method241();
+			} else if (var4 == 95) {
+				this.field1031 = arg1.method241();
+			} else if (var4 == 97) {
+				this.field1054 = arg1.method241();
+			} else if (var4 == 98) {
+				this.field1055 = arg1.method241();
+			} else if (var4 >= 100 && var4 < 110) {
+				if (this.field1052 == null) {
+					this.field1052 = new int[10];
+					this.field1053 = new int[10];
+				}
+				this.field1052[var4 - 100] = arg1.method241();
+				this.field1053[var4 - 100] = arg1.method241();
+			} else if (var4 == 110) {
+				this.field1056 = arg1.method241();
+			} else if (var4 == 111) {
+				this.field1057 = arg1.method241();
+			} else if (var4 == 112) {
+				this.field1058 = arg1.method241();
+			} else if (var4 == 113) {
+				this.field1059 = arg1.method240();
+			} else if (var4 == 114) {
+				this.field1060 = arg1.method240() * 5;
 			}
 		}
 	}
 
 	@ObfuscatedName("hc.a(Z)V")
-	public void method353(boolean arg0) {
+	public void method353() {
 		ObjType var2 = method350(this.field1055);
 		this.field1023 = var2.field1023;
 		this.field1028 = var2.field1028;
@@ -391,9 +369,6 @@ public class ObjType {
 		this.field1024 = var3.field1024;
 		this.field1037 = var3.field1037;
 		this.field1036 = var3.field1036;
-		if (arg0) {
-			this.field1013 = !this.field1013;
-		}
 		String var4 = "a";
 		char var5 = var3.field1024.charAt(0);
 		if (var5 == 'A' || var5 == 'E' || var5 == 'I' || var5 == 'O' || var5 == 'U') {
@@ -420,12 +395,12 @@ public class ObjType {
 		if (var4 != null) {
 			return var4;
 		}
-		Model var5 = Model.method139(0, this.field1023);
+		Model var5 = Model.method139(this.field1023);
 		if (var5 == null) {
 			return null;
 		}
 		if (this.field1056 != 128 || this.field1057 != 128 || this.field1058 != 128) {
-			var5.method155(792, this.field1058, this.field1056, this.field1057);
+			var5.method155(this.field1058, this.field1056, this.field1057);
 		}
 		if (this.field1026 != null) {
 			for (int var6 = 0; var6 < this.field1026.length; var6++) {
@@ -434,12 +409,12 @@ public class ObjType {
 		}
 		var5.method156(this.field1059 + 64, this.field1060 + 768, -50, -10, -50, true);
 		var5.field572 = true;
-		field1061.method116(var5, false, (long) this.field1022);
+		field1061.method116(var5, (long) this.field1022);
 		return var5;
 	}
 
 	@ObfuscatedName("hc.a(II)Lfb;")
-	public final Model method355(int arg0, int arg1) {
+	public final Model method355(int arg1) {
 		if (this.field1052 != null && arg1 > 1) {
 			int var3 = -1;
 			for (int var4 = 0; var4 < 10; var4++) {
@@ -448,11 +423,10 @@ public class ObjType {
 				}
 			}
 			if (var3 != -1) {
-				return method350(var3).method355(614, 1);
+				return method350(var3).method355(1);
 			}
 		}
-		Model var5 = Model.method139(0, this.field1023);
-		int var6 = 37 / arg0;
+		Model var5 = Model.method139(this.field1023);
 		if (var5 == null) {
 			return null;
 		}
@@ -465,7 +439,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(IIII)Ljb;")
-	public static final Pix32 method356(int arg0, int arg1, int arg2, int arg3) {
+	public static final Pix32 method356(int arg0, int arg1, int arg2) {
 		if (arg0 == 0) {
 			Pix32 var4 = (Pix32) field1062.method115((long) arg2);
 			if (var4 != null && var4.field672 != arg1 && var4.field672 != -1) {
@@ -497,7 +471,7 @@ public class ObjType {
 		}
 		Pix32 var9 = null;
 		if (var5.field1055 != -1) {
-			var9 = method356(-1, 10, var5.field1054, 977);
+			var9 = method356(-1, 10, var5.field1054);
 			if (var9 == null) {
 				return null;
 			}
@@ -509,17 +483,14 @@ public class ObjType {
 		int[] var14 = Pix2D.field623;
 		int var15 = Pix2D.field624;
 		int var16 = Pix2D.field625;
-		if (arg3 <= 0) {
-			field1011 = !field1011;
-		}
 		int var17 = Pix2D.field628;
 		int var18 = Pix2D.field629;
 		int var19 = Pix2D.field626;
 		int var20 = Pix2D.field627;
 		Pix3D.field639 = false;
-		Pix2D.method165(-216, 32, var10.field666, 32);
-		Pix2D.method170(32, 32, 0, 0, (byte) 3, 0);
-		Pix3D.method178(338);
+		Pix2D.method165(32, var10.field666, 32);
+		Pix2D.method170(32, 32, 0, 0, 0);
+		Pix3D.method178();
 		int var21 = var5.field1028;
 		if (arg0 == -1) {
 			var21 = (int) ((double) var21 * 1.5D);
@@ -575,15 +546,15 @@ public class ObjType {
 			int var31 = var9.field672;
 			var9.field671 = 32;
 			var9.field672 = 32;
-			var9.method199(1, 0, 0);
+			var9.method199(0, 0);
 			var9.field671 = var30;
 			var9.field672 = var31;
 		}
 		if (arg0 == 0) {
-			field1062.method116(var10, false, (long) arg2);
+			field1062.method116(var10, (long) arg2);
 		}
-		Pix2D.method165(-216, var16, var14, var15);
-		Pix2D.method167(var18, true, var17, var20, var19);
+		Pix2D.method165(var16, var14, var15);
+		Pix2D.method167(var18, var17, var20, var19);
 		Pix3D.field641 = var11;
 		Pix3D.field642 = var12;
 		Pix3D.field647 = var13;
@@ -598,7 +569,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(BI)Z")
-	public final boolean method357(byte arg0, int arg1) {
+	public final boolean method357(int arg1) {
 		int var3 = this.field1040;
 		int var4 = this.field1041;
 		int var5 = this.field1046;
@@ -611,9 +582,6 @@ public class ObjType {
 			return true;
 		}
 		boolean var6 = true;
-		if (arg0 != 3) {
-			this.field1014 = -359;
-		}
 		if (!Model.method140(var3)) {
 			var6 = false;
 		}
@@ -627,8 +595,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.b(II)Lfb;")
-	public final Model method358(int arg0, int arg1) {
-		int var3 = 57 / arg0;
+	public final Model method358(int arg1) {
 		int var4 = this.field1040;
 		int var5 = this.field1041;
 		int var6 = this.field1046;
@@ -640,24 +607,24 @@ public class ObjType {
 		if (var4 == -1) {
 			return null;
 		}
-		Model var7 = Model.method139(0, var4);
+		Model var7 = Model.method139(var4);
 		if (var5 != -1) {
 			if (var6 == -1) {
-				Model var11 = Model.method139(0, var5);
+				Model var11 = Model.method139(var5);
 				Model[] var12 = new Model[] { var7, var11 };
-				var7 = new Model(var12, 2, -928);
+				var7 = new Model(var12, 2);
 			} else {
-				Model var8 = Model.method139(0, var5);
-				Model var9 = Model.method139(0, var6);
+				Model var8 = Model.method139(var5);
+				Model var9 = Model.method139(var6);
 				Model[] var10 = new Model[] { var7, var8, var9 };
-				var7 = new Model(var10, 3, -928);
+				var7 = new Model(var10, 3);
 			}
 		}
 		if (arg1 == 0 && this.field1042 != 0) {
-			var7.method152((byte) -32, 0, 0, this.field1042);
+			var7.method152(0, 0, this.field1042);
 		}
 		if (arg1 == 1 && this.field1045 != 0) {
-			var7.method152((byte) -32, 0, 0, this.field1045);
+			var7.method152(0, 0, this.field1045);
 		}
 		if (this.field1026 != null) {
 			for (int var13 = 0; var13 < this.field1026.length; var13++) {
@@ -668,7 +635,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(ZI)Z")
-	public final boolean method359(boolean arg0, int arg1) {
+	public final boolean method359(int arg1) {
 		int var3 = this.field1048;
 		int var4 = this.field1049;
 		if (arg1 == 1) {
@@ -679,9 +646,6 @@ public class ObjType {
 			return true;
 		}
 		boolean var5 = true;
-		if (arg0) {
-			this.field1012 = !this.field1012;
-		}
 		if (!Model.method140(var3)) {
 			var5 = false;
 		}
@@ -692,10 +656,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.b(ZI)Lfb;")
-	public final Model method360(boolean arg0, int arg1) {
-		if (!arg0) {
-			this.field1014 = -367;
-		}
+	public final Model method360(int arg1) {
 		int var3 = this.field1048;
 		int var4 = this.field1049;
 		if (arg1 == 1) {
@@ -705,11 +666,11 @@ public class ObjType {
 		if (var3 == -1) {
 			return null;
 		}
-		Model var5 = Model.method139(0, var3);
+		Model var5 = Model.method139(var3);
 		if (var4 != -1) {
-			Model var6 = Model.method139(0, var4);
+			Model var6 = Model.method139(var4);
 			Model[] var7 = new Model[] { var5, var6 };
-			var5 = new Model(var7, 2, -928);
+			var5 = new Model(var7, 2);
 		}
 		if (this.field1026 != null) {
 			for (int var8 = 0; var8 < this.field1026.length; var8++) {

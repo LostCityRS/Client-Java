@@ -1,13 +1,9 @@
 package jagex2.dash3d;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.Linkable;
 
 @ObfuscatedName("j")
 public class Ground {
-
-	@ObfuscatedName("j.a")
-	public int field180 = 407;
 
 	@ObfuscatedName("j.b")
 	public int[] field181;
@@ -84,7 +80,7 @@ public class Ground {
 	@ObfuscatedName("j.z")
 	public static final int[][] field205 = new int[][] { { 0, 1, 2, 3, 0, 0, 1, 3 }, { 1, 1, 2, 3, 1, 0, 1, 3 }, { 0, 1, 2, 3, 1, 0, 1, 3 }, { 0, 0, 1, 2, 0, 0, 2, 4, 1, 0, 4, 3 }, { 0, 0, 1, 4, 0, 0, 4, 3, 1, 1, 2, 4 }, { 0, 0, 4, 3, 1, 0, 1, 2, 1, 0, 2, 4 }, { 0, 1, 2, 4, 1, 0, 1, 4, 1, 0, 4, 3 }, { 0, 4, 1, 2, 0, 4, 2, 5, 1, 0, 4, 5, 1, 0, 5, 3 }, { 0, 4, 1, 2, 0, 4, 2, 3, 0, 4, 3, 5, 1, 0, 4, 5 }, { 0, 0, 4, 5, 1, 4, 1, 2, 1, 4, 2, 3, 1, 4, 3, 5 }, { 0, 0, 1, 5, 0, 1, 4, 5, 0, 1, 2, 4, 1, 0, 5, 3, 1, 5, 4, 3, 1, 4, 2, 3 }, { 1, 0, 1, 5, 1, 1, 4, 5, 1, 1, 2, 4, 0, 0, 5, 3, 0, 5, 4, 3, 0, 4, 2, 3 }, { 1, 0, 5, 4, 1, 0, 1, 5, 0, 0, 4, 3, 0, 4, 5, 3, 0, 5, 2, 3, 0, 1, 2, 5 } };
 
-	public Ground(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
+	public Ground(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
 		if (arg3 != arg16 || arg3 != arg17 || arg3 != arg2) {
 			this.field191 = false;
 		}
@@ -226,7 +222,6 @@ public class Ground {
 		}
 		int[] var38 = field205[arg5];
 		int var39 = var38.length / 4;
-		int var40 = 78 / arg19;
 		this.field187 = new int[var39];
 		this.field188 = new int[var39];
 		this.field189 = new int[var39];
@@ -293,7 +288,5 @@ public class Ground {
 		}
 		int var49 = var47 / 14;
 		int var50 = var48 / 14;
-		if (Linkable.field377) {
-		}
 	}
 }

@@ -26,7 +26,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 	@ObfuscatedName("rb.f")
 	public Image field754;
 
-	public PixMap(boolean arg0, Component arg1, int arg2, int arg3) {
+	public PixMap(Component arg1, int arg2, int arg3) {
 		this.field750 = arg2;
 		this.field751 = arg3;
 		this.field749 = new int[arg2 * arg3];
@@ -38,27 +38,18 @@ public class PixMap implements ImageProducer, ImageObserver {
 		arg1.prepareImage(this.field754, this);
 		this.method270();
 		arg1.prepareImage(this.field754, this);
-		if (!arg0) {
-			throw new NullPointerException();
-		}
-		this.method268((byte) 9);
+		this.method268();
 	}
 
 	@ObfuscatedName("rb.a(B)V")
-	public void method268(byte arg0) {
-		if (arg0 == 9) {
-			boolean var2 = false;
-			Pix2D.method165(-216, this.field751, this.field749, this.field750);
-		}
+	public void method268() {
+		Pix2D.method165(this.field751, this.field749, this.field750);
 	}
 
 	@ObfuscatedName("rb.a(IILjava/awt/Graphics;Z)V")
-	public void method269(int arg0, int arg1, Graphics arg2, boolean arg3) {
+	public void method269(int arg0, int arg1, Graphics arg2) {
 		this.method270();
 		arg2.drawImage(this.field754, arg1, arg0, this);
-		if (arg3) {
-			;
-		}
 	}
 
 	public synchronized void addConsumer(ImageConsumer arg0) {

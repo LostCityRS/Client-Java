@@ -47,11 +47,8 @@ public class FloType {
 	public int field1088;
 
 	@ObfuscatedName("kc.a(ZLyb;)V")
-	public static void method373(boolean arg0, JagFile arg1) {
-		if (!arg0) {
-			return;
-		}
-		Packet var2 = new Packet(arg1.method309("flo.dat", null), (byte) 3);
+	public static void method373(JagFile arg1) {
+		Packet var2 = new Packet(arg1.method309("flo.dat", null));
 		field1076 = var2.method241();
 		if (field1077 == null) {
 			field1077 = new FloType[field1076];
@@ -60,15 +57,12 @@ public class FloType {
 			if (field1077[var3] == null) {
 				field1077[var3] = new FloType();
 			}
-			field1077[var3].method374(9, var2);
+			field1077[var3].method374(var2);
 		}
 	}
 
 	@ObfuscatedName("kc.a(ILmb;)V")
-	public void method374(int arg0, Packet arg1) {
-		if (arg0 != 9) {
-			throw new NullPointerException();
-		}
+	public void method374(Packet arg1) {
 		while (true) {
 			int var3 = arg1.method239();
 			if (var3 == 0) {

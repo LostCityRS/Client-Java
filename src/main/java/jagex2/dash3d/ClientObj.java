@@ -13,11 +13,8 @@ public class ClientObj extends ModelSource {
 	public int field502;
 
 	@ObfuscatedName("db.a(I)Lfb;")
-	public final Model method123(int arg0) {
+	public final Model method123() {
 		ObjType var2 = ObjType.method350(this.field501);
-		if (arg0 != 45160) {
-			throw new NullPointerException();
-		}
 		return var2.method354(this.field502);
 	}
 }

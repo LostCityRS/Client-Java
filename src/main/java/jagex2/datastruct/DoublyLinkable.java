@@ -11,9 +11,6 @@ public class DoublyLinkable extends Linkable {
 	@ObfuscatedName("x.g")
 	public DoublyLinkable field402;
 
-	@ObfuscatedName("x.h")
-	public static boolean field403;
-
 	@ObfuscatedName("x.b()V")
 	public void method121() {
 		if (this.field402 != null) {

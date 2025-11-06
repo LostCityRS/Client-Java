@@ -10,21 +10,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("c")
 public class World {
 
-	@ObfuscatedName("c.a")
-	public static boolean field39 = true;
-
-	@ObfuscatedName("c.b")
-	public int field40 = -48;
-
-	@ObfuscatedName("c.c")
-	public static int field41 = 678;
-
-	@ObfuscatedName("c.d")
-	public static int field42 = 6;
-
-	@ObfuscatedName("c.e")
-	public int field43 = -62;
-
 	@ObfuscatedName("c.f")
 	public static boolean field44 = true;
 
@@ -97,12 +82,9 @@ public class World {
 	@ObfuscatedName("c.C")
 	public static int field67 = (int) (Math.random() * 33.0D) - 16;
 
-	public World(byte[][][] arg0, int[][][] arg1, int arg2, int arg3, int arg4) {
+	public World(byte[][][] arg0, int[][][] arg1, int arg2, int arg4) {
 		this.field46 = arg2;
 		this.field47 = arg4;
-		if (arg3 < 2 || arg3 > 2) {
-			field41 = 239;
-		}
 		this.field48 = arg1;
 		this.field49 = arg0;
 		this.field50 = new byte[4][this.field46][this.field47];
@@ -120,7 +102,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(BIIII)V")
-	public final void method14(byte arg0, int arg1, int arg2, int arg3, int arg4) {
+	public final void method14(int arg1, int arg2, int arg3, int arg4) {
 		for (int var6 = arg3; var6 <= arg3 + arg4; var6++) {
 			for (int var7 = arg2; var7 <= arg2 + arg1; var7++) {
 				if (var7 >= 0 && var7 < this.field46 && var6 >= 0 && var6 < this.field47) {
@@ -140,15 +122,11 @@ public class World {
 				}
 			}
 		}
-		if (arg0 != 1) {
-			for (int var8 = 1; var8 > 0; var8++) {
-			}
-		}
 	}
 
 	@ObfuscatedName("c.a(II[BIII)V")
-	public final void method15(int arg0, int arg1, byte[] arg2, int arg3, int arg4, int arg5) {
-		Packet var7 = new Packet(arg2, (byte) 3);
+	public final void method15(int arg0, int arg1, byte[] arg2, int arg3, int arg5) {
+		Packet var7 = new Packet(arg2);
 		for (int var8 = 0; var8 < 4; var8++) {
 			for (int var9 = 0; var9 < 64; var9++) {
 				for (int var10 = 0; var10 < 64; var10++) {
@@ -206,19 +184,12 @@ public class World {
 				}
 			}
 		}
-		if (arg4 != 0) {
-			for (int var16 = 1; var16 > 0; var16++) {
-			}
-		}
 	}
 
 	@ObfuscatedName("c.a(II[BB)Z")
-	public static final boolean method16(int arg0, int arg1, byte[] arg2, byte arg3) {
+	public static final boolean method16(int arg0, int arg1, byte[] arg2) {
 		boolean var4 = true;
-		Packet var5 = new Packet(arg2, (byte) 3);
-		if (arg3 != 74) {
-			field41 = -127;
-		}
+		Packet var5 = new Packet(arg2);
 		int var6 = -1;
 		label54: while (true) {
 			int var7 = var5.method253();
@@ -243,7 +214,7 @@ public class World {
 					if (var15 > 0 && var16 > 0 && var15 < 103 && var16 < 103) {
 						LocType var17 = LocType.method334(var6);
 						if (var14 != 22 || !field44 || var17.field945 || var17.field965) {
-							var4 &= var17.method338(0);
+							var4 &= var17.method338();
 							var9 = true;
 						}
 					}
@@ -258,11 +229,8 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(Lmb;Lvb;B)V")
-	public static final void method17(Packet arg0, OnDemand arg1, byte arg2) {
+	public static final void method17(Packet arg0, OnDemand arg1) {
 		int var3 = -1;
-		if (arg2 != -13) {
-			field39 = !field39;
-		}
 		while (true) {
 			int var4 = arg0.method253();
 			if (var4 == 0) {
@@ -270,7 +238,7 @@ public class World {
 			}
 			var3 += var4;
 			LocType var5 = LocType.method334(var3);
-			var5.method339(38488, arg1);
+			var5.method339(arg1);
 			while (true) {
 				int var6 = arg0.method253();
 				if (var6 == 0) {
@@ -282,14 +250,9 @@ public class World {
 	}
 
 	@ObfuscatedName("c.a(ILs;I[B[Ljc;B)V")
-	public final void method18(int arg0, World3D arg1, int arg2, byte[] arg3, CollisionMap[] arg4, byte arg5) {
-		Packet var7 = new Packet(arg3, (byte) 3);
+	public final void method18(int arg0, World3D arg1, int arg2, byte[] arg3, CollisionMap[] arg4) {
+		Packet var7 = new Packet(arg3);
 		int var8 = -1;
-		if (arg5 == 2) {
-			boolean var9 = false;
-		} else {
-			this.field40 = -35;
-		}
 		while (true) {
 			int var10 = var7.method253();
 			if (var10 == 0) {
@@ -335,7 +298,7 @@ public class World {
 			if ((this.field49[arg4][arg2][arg7] & 0x10) != 0) {
 				return;
 			}
-			if (this.method21(11519, arg2, arg7, arg4) != field45) {
+			if (this.method21(arg2, arg7, arg4) != field45) {
 				return;
 			}
 		}
@@ -356,11 +319,11 @@ public class World {
 				if (var15.field949 == -1) {
 					var18 = var15.method340(22, arg1, var10, var11, var12, var13, -1);
 				} else {
-					var18 = new ClientLocAnim(22, arg1, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+					var18 = new ClientLocAnim(22, arg1, var10, arg3, var12, var13, true, var15.field949, var11);
 				}
-				arg8.method70(var18, arg2, var16, -741, arg4, arg7, var14, var17);
+				arg8.method70(var18, arg2, var16, arg4, arg7, var14, var17);
 				if (var15.field943 && var15.field945 && arg6 != null) {
-					arg6.method364(arg7, arg2, 4);
+					arg6.method364(arg7, arg2);
 				}
 			}
 		} else if (arg0 == 10 || arg0 == 11) {
@@ -368,7 +331,7 @@ public class World {
 			if (var15.field949 == -1) {
 				var19 = var15.method340(10, arg1, var10, var11, var12, var13, -1);
 			} else {
-				var19 = new ClientLocAnim(10, arg1, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var19 = new ClientLocAnim(10, arg1, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
 			if (var19 != null) {
 				int var20 = 0;
@@ -384,7 +347,7 @@ public class World {
 					var21 = var15.field941;
 					var22 = var15.field942;
 				}
-				if (arg8.method74(var17, var21, var14, var19, -38295, var22, var16, arg7, arg2, var20, arg4) && var15.field957) {
+				if (arg8.method74(var17, var21, var14, var19, var22, var16, arg7, arg2, var20, arg4) && var15.field957) {
 					Model var23;
 					if (var19 instanceof Model) {
 						var23 = (Model) var19;
@@ -407,30 +370,30 @@ public class World {
 				}
 			}
 			if (var15.field943 && arg6 != null) {
-				arg6.method363(var15.field944, 3, arg7, arg1, var15.field941, var15.field942, arg2);
+				arg6.method363(var15.field944, arg7, arg1, var15.field941, var15.field942, arg2);
 			}
 		} else if (arg0 >= 12) {
 			ModelSource var27;
 			if (var15.field949 == -1) {
 				var27 = var15.method340(arg0, arg1, var10, var11, var12, var13, -1);
 			} else {
-				var27 = new ClientLocAnim(arg0, arg1, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var27 = new ClientLocAnim(arg0, arg1, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method74(var17, 1, var14, var27, -38295, 1, var16, arg7, arg2, 0, arg4);
+			arg8.method74(var17, 1, var14, var27, 1, var16, arg7, arg2, 0, arg4);
 			if (arg0 >= 12 && arg0 <= 17 && arg0 != 13 && arg4 > 0) {
 				this.field61[arg4][arg2][arg7] |= 0x924;
 			}
 			if (var15.field943 && arg6 != null) {
-				arg6.method363(var15.field944, 3, arg7, arg1, var15.field941, var15.field942, arg2);
+				arg6.method363(var15.field944, arg7, arg1, var15.field941, var15.field942, arg2);
 			}
 		} else if (arg0 == 0) {
 			ModelSource var28;
 			if (var15.field949 == -1) {
 				var28 = var15.method340(0, arg1, var10, var11, var12, var13, -1);
 			} else {
-				var28 = new ClientLocAnim(0, arg1, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var28 = new ClientLocAnim(0, arg1, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method72(var28, null, var16, 0, arg7, (byte) 54, var17, arg2, var14, field62[arg1], arg4);
+			arg8.method72(var28, null, var16, 0, arg7, var17, arg2, var14, field62[arg1], arg4);
 			if (arg1 == 0) {
 				if (var15.field957) {
 					this.field54[arg4][arg2][arg7] = 50;
@@ -465,19 +428,19 @@ public class World {
 				}
 			}
 			if (var15.field943 && arg6 != null) {
-				arg6.method362(arg2, arg7, 9, arg1, var15.field944, arg0);
+				arg6.method362(arg2, arg7, arg1, var15.field944, arg0);
 			}
 			if (var15.field950 != 16) {
-				arg8.method80(arg4, arg7, (byte) -85, arg2, var15.field950);
+				arg8.method80(arg4, arg7, arg2, var15.field950);
 			}
 		} else if (arg0 == 1) {
 			ModelSource var29;
 			if (var15.field949 == -1) {
 				var29 = var15.method340(1, arg1, var10, var11, var12, var13, -1);
 			} else {
-				var29 = new ClientLocAnim(1, arg1, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var29 = new ClientLocAnim(1, arg1, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method72(var29, null, var16, 0, arg7, (byte) 54, var17, arg2, var14, field63[arg1], arg4);
+			arg8.method72(var29, null, var16, 0, arg7, var17, arg2, var14, field63[arg1], arg4);
 			if (var15.field957) {
 				if (arg1 == 0) {
 					this.field54[arg4][arg2][arg7 + 1] = 50;
@@ -490,7 +453,7 @@ public class World {
 				}
 			}
 			if (var15.field943 && arg6 != null) {
-				arg6.method362(arg2, arg7, 9, arg1, var15.field944, arg0);
+				arg6.method362(arg2, arg7, arg1, var15.field944, arg0);
 			}
 		} else if (arg0 == 2) {
 			int var30 = arg1 + 1 & 0x3;
@@ -500,10 +463,10 @@ public class World {
 				var31 = var15.method340(2, arg1 + 4, var10, var11, var12, var13, -1);
 				var32 = var15.method340(2, var30, var10, var11, var12, var13, -1);
 			} else {
-				var31 = new ClientLocAnim(2, arg1 + 4, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
-				var32 = new ClientLocAnim(2, var30, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var31 = new ClientLocAnim(2, arg1 + 4, var10, arg3, var12, var13, true, var15.field949, var11);
+				var32 = new ClientLocAnim(2, var30, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method72(var31, var32, var16, field62[var30], arg7, (byte) 54, var17, arg2, var14, field62[arg1], arg4);
+			arg8.method72(var31, var32, var16, field62[var30], arg7, var17, arg2, var14, field62[arg1], arg4);
 			if (var15.field948) {
 				if (arg1 == 0) {
 					this.field61[arg4][arg2][arg7] |= 0x249;
@@ -520,19 +483,19 @@ public class World {
 				}
 			}
 			if (var15.field943 && arg6 != null) {
-				arg6.method362(arg2, arg7, 9, arg1, var15.field944, arg0);
+				arg6.method362(arg2, arg7, arg1, var15.field944, arg0);
 			}
 			if (var15.field950 != 16) {
-				arg8.method80(arg4, arg7, (byte) -85, arg2, var15.field950);
+				arg8.method80(arg4, arg7, arg2, var15.field950);
 			}
 		} else if (arg0 == 3) {
 			ModelSource var33;
 			if (var15.field949 == -1) {
 				var33 = var15.method340(3, arg1, var10, var11, var12, var13, -1);
 			} else {
-				var33 = new ClientLocAnim(3, arg1, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var33 = new ClientLocAnim(3, arg1, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method72(var33, null, var16, 0, arg7, (byte) 54, var17, arg2, var14, field63[arg1], arg4);
+			arg8.method72(var33, null, var16, 0, arg7, var17, arg2, var14, field63[arg1], arg4);
 			if (var15.field957) {
 				if (arg1 == 0) {
 					this.field54[arg4][arg2][arg7 + 1] = 50;
@@ -545,27 +508,27 @@ public class World {
 				}
 			}
 			if (var15.field943 && arg6 != null) {
-				arg6.method362(arg2, arg7, 9, arg1, var15.field944, arg0);
+				arg6.method362(arg2, arg7, arg1, var15.field944, arg0);
 			}
 		} else if (arg0 == 9) {
 			ModelSource var34;
 			if (var15.field949 == -1) {
 				var34 = var15.method340(arg0, arg1, var10, var11, var12, var13, -1);
 			} else {
-				var34 = new ClientLocAnim(arg0, arg1, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var34 = new ClientLocAnim(arg0, arg1, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method74(var17, 1, var14, var34, -38295, 1, var16, arg7, arg2, 0, arg4);
+			arg8.method74(var17, 1, var14, var34, 1, var16, arg7, arg2, 0, arg4);
 			if (var15.field943 && arg6 != null) {
-				arg6.method363(var15.field944, 3, arg7, arg1, var15.field941, var15.field942, arg2);
+				arg6.method363(var15.field944, arg7, arg1, var15.field941, var15.field942, arg2);
 			}
 		} else if (arg0 == 4) {
 			ModelSource var35;
 			if (var15.field949 == -1) {
 				var35 = var15.method340(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var35 = new ClientLocAnim(4, 0, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var35 = new ClientLocAnim(4, 0, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method73(field62[arg1], 0, var17, var14, arg2, var16, arg1 * 512, arg7, 0, var35, arg4, false);
+			arg8.method73(field62[arg1], 0, var17, var14, arg2, var16, arg1 * 512, arg7, 0, var35, arg4);
 		} else if (arg0 == 5) {
 			int var36 = 16;
 			int var37 = arg8.method90(arg4, arg2, arg7);
@@ -576,38 +539,38 @@ public class World {
 			if (var15.field949 == -1) {
 				var38 = var15.method340(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var38 = new ClientLocAnim(4, 0, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var38 = new ClientLocAnim(4, 0, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method73(field62[arg1], field64[arg1] * var36, var17, var14, arg2, var16, arg1 * 512, arg7, field65[arg1] * var36, var38, arg4, false);
+			arg8.method73(field62[arg1], field64[arg1] * var36, var17, var14, arg2, var16, arg1 * 512, arg7, field65[arg1] * var36, var38, arg4);
 		} else if (arg0 == 6) {
 			ModelSource var39;
 			if (var15.field949 == -1) {
 				var39 = var15.method340(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var39 = new ClientLocAnim(4, 0, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var39 = new ClientLocAnim(4, 0, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method73(256, 0, var17, var14, arg2, var16, arg1, arg7, 0, var39, arg4, false);
+			arg8.method73(256, 0, var17, var14, arg2, var16, arg1, arg7, 0, var39, arg4);
 		} else if (arg0 == 7) {
 			ModelSource var40;
 			if (var15.field949 == -1) {
 				var40 = var15.method340(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var40 = new ClientLocAnim(4, 0, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var40 = new ClientLocAnim(4, 0, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method73(512, 0, var17, var14, arg2, var16, arg1, arg7, 0, var40, arg4, false);
+			arg8.method73(512, 0, var17, var14, arg2, var16, arg1, arg7, 0, var40, arg4);
 		} else if (arg0 == 8) {
 			ModelSource var41;
 			if (var15.field949 == -1) {
 				var41 = var15.method340(4, 0, var10, var11, var12, var13, -1);
 			} else {
-				var41 = new ClientLocAnim(4, 0, var10, arg3, 10550, var12, var13, true, var15.field949, var11);
+				var41 = new ClientLocAnim(4, 0, var10, arg3, var12, var13, true, var15.field949, var11);
 			}
-			arg8.method73(768, 0, var17, var14, arg2, var16, arg1, arg7, 0, var41, arg4, false);
+			arg8.method73(768, 0, var17, var14, arg2, var16, arg1, arg7, 0, var41, arg4);
 		}
 	}
 
 	@ObfuscatedName("c.a(Ls;[Ljc;I)V")
-	public final void method20(World3D arg0, CollisionMap[] arg1, int arg2) {
+	public final void method20(World3D arg0, CollisionMap[] arg1) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			for (int var5 = 0; var5 < 104; var5++) {
 				for (int var6 = 0; var6 < 104; var6++) {
@@ -617,7 +580,7 @@ public class World {
 							var7 = var4 - 1;
 						}
 						if (var7 >= 0) {
-							arg1[var7].method364(var6, var5, 4);
+							arg1[var7].method364(var6, var5);
 						}
 					}
 				}
@@ -717,7 +680,7 @@ public class World {
 							var39 -= this.field59[var43];
 							var40 -= this.field60[var43];
 						}
-						if (var41 >= 1 && var41 < this.field47 - 1 && (!field44 || (this.field49[var8][var28][var41] & 0x10) == 0 && this.method21(11519, var28, var41, var8) == field45)) {
+						if (var41 >= 1 && var41 < this.field47 - 1 && (!field44 || (this.field49[var8][var28][var41] & 0x10) == 0 && this.method21(var28, var41, var8) == field45)) {
 							int var44 = this.field50[var8][var28][var41] & 0xFF;
 							int var45 = this.field51[var8][var28][var41] & 0xFF;
 							if (var44 > 0 || var45 > 0) {
@@ -771,7 +734,7 @@ public class World {
 									int var67;
 									int var68;
 									if (var66 >= 0) {
-										var67 = Pix3D.method183(0, var66);
+										var67 = Pix3D.method183(var66);
 										var68 = -1;
 									} else if (var65.field1078 == 16711935) {
 										var67 = 0;
@@ -790,15 +753,15 @@ public class World {
 			}
 			for (int var69 = 1; var69 < this.field47 - 1; var69++) {
 				for (int var70 = 1; var70 < this.field46 - 1; var70++) {
-					arg0.method68(var8, var70, var69, this.method21(11519, var70, var69, var8));
+					arg0.method68(var8, var70, var69, this.method21(var70, var69, var8));
 				}
 			}
 		}
-		arg0.method95(768, -2568, 64, -10, -50, -50);
+		arg0.method95(768, 64, -10, -50, -50);
 		for (int var71 = 0; var71 < this.field46; var71++) {
 			for (int var72 = 0; var72 < this.field47; var72++) {
 				if ((this.field49[1][var71][var72] & 0x2) == 2) {
-					arg0.method66(6, var72, var71);
+					arg0.method66(var72, var71);
 				}
 			}
 		}
@@ -846,7 +809,7 @@ public class World {
 								short var87 = 240;
 								int var88 = this.field48[var83][var79][var80] - var87;
 								int var89 = this.field48[var82][var79][var80];
-								World3D.method67(var79 * 128, -374, 1, var88, var79 * 128, var76, var89, var80 * 128, var81 * 128 + 128);
+								World3D.method67(var79 * 128, 1, var88, var79 * 128, var76, var89, var80 * 128, var81 * 128 + 128);
 								for (int var90 = var82; var90 <= var83; var90++) {
 									for (int var91 = var80; var91 <= var81; var91++) {
 										this.field61[var90][var79][var91] &= ~var73;
@@ -886,7 +849,7 @@ public class World {
 								short var99 = 240;
 								int var100 = this.field48[var95][var92][var78] - var99;
 								int var101 = this.field48[var94][var92][var78];
-								World3D.method67(var92 * 128, -374, 2, var100, var93 * 128 + 128, var76, var101, var78 * 128, var78 * 128);
+								World3D.method67(var92 * 128, 2, var100, var93 * 128 + 128, var76, var101, var78 * 128, var78 * 128);
 								for (int var102 = var94; var102 <= var95; var102++) {
 									for (int var103 = var92; var103 <= var93; var103++) {
 										this.field61[var102][var103][var78] &= ~var74;
@@ -923,7 +886,7 @@ public class World {
 							}
 							if ((var105 - var104 + 1) * (var107 - var106 + 1) >= 4) {
 								int var110 = this.field48[var77][var104][var106];
-								World3D.method67(var104 * 128, -374, 4, var110, var105 * 128 + 128, var76, var110, var106 * 128, var107 * 128 + 128);
+								World3D.method67(var104 * 128, 4, var110, var105 * 128 + 128, var76, var110, var106 * 128, var107 * 128 + 128);
 								for (int var111 = var104; var111 <= var105; var111++) {
 									for (int var112 = var106; var112 <= var107; var112++) {
 										this.field61[var77][var111][var112] &= ~var75;
@@ -935,17 +898,10 @@ public class World {
 				}
 			}
 		}
-		if (arg2 != 44106) {
-			this.field43 = 169;
-		}
 	}
 
 	@ObfuscatedName("c.a(IIII)I")
-	public int method21(int arg0, int arg1, int arg2, int arg3) {
-		if (arg0 != 11519) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
+	public int method21(int arg1, int arg2, int arg3) {
 		if ((this.field49[arg3][arg1][arg2] & 0x8) == 0) {
 			return arg3 <= 0 || (this.field49[1][arg1][arg2] & 0x2) == 0 ? arg3 : arg3 - 1;
 		} else {
@@ -1056,10 +1012,7 @@ public class World {
 	}
 
 	@ObfuscatedName("c.c(III)Z")
-	public static final boolean method30(int arg0, int arg1, int arg2) {
-		if (arg2 != 23745) {
-			field39 = !field39;
-		}
+	public static final boolean method30(int arg0, int arg1) {
 		LocType var3 = LocType.method334(arg0);
 		if (arg1 == 11) {
 			arg1 = 10;
@@ -1067,16 +1020,13 @@ public class World {
 		if (arg1 >= 5 && arg1 <= 8) {
 			arg1 = 4;
 		}
-		return var3.method337(arg1, true);
+		return var3.method337(arg1);
 	}
 
 	@ObfuscatedName("c.a(IILjc;IIILs;[[[IIII)V")
-	public static final void method31(int arg0, int arg1, CollisionMap arg2, int arg3, int arg4, int arg5, World3D arg6, int[][][] arg7, int arg8, int arg9, int arg10) {
+	public static final void method31(int arg0, int arg1, CollisionMap arg2, int arg3, int arg4, int arg5, World3D arg6, int[][][] arg7, int arg9, int arg10) {
 		int var11 = arg7[arg9][arg1][arg3];
 		int var12 = arg7[arg9][arg1 + 1][arg3];
-		if (arg8 != field42) {
-			return;
-		}
 		int var13 = arg7[arg9][arg1 + 1][arg3 + 1];
 		int var14 = arg7[arg9][arg1][arg3 + 1];
 		int var15 = var11 + var12 + var13 + var14 >> 2;
@@ -1091,18 +1041,18 @@ public class World {
 			if (var16.field949 == -1) {
 				var19 = var16.method340(22, arg0, var11, var12, var13, var14, -1);
 			} else {
-				var19 = new ClientLocAnim(22, arg0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var19 = new ClientLocAnim(22, arg0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method70(var19, arg1, var17, -741, arg10, arg3, var15, var18);
+			arg6.method70(var19, arg1, var17, arg10, arg3, var15, var18);
 			if (var16.field943 && var16.field945) {
-				arg2.method364(arg3, arg1, 4);
+				arg2.method364(arg3, arg1);
 			}
 		} else if (arg4 == 10 || arg4 == 11) {
 			ModelSource var20;
 			if (var16.field949 == -1) {
 				var20 = var16.method340(10, arg0, var11, var12, var13, var14, -1);
 			} else {
-				var20 = new ClientLocAnim(10, arg0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var20 = new ClientLocAnim(10, arg0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
 			if (var20 != null) {
 				int var21 = 0;
@@ -1118,43 +1068,43 @@ public class World {
 					var22 = var16.field941;
 					var23 = var16.field942;
 				}
-				arg6.method74(var18, var22, var15, var20, -38295, var23, var17, arg3, arg1, var21, arg10);
+				arg6.method74(var18, var22, var15, var20, var23, var17, arg3, arg1, var21, arg10);
 			}
 			if (var16.field943) {
-				arg2.method363(var16.field944, 3, arg3, arg0, var16.field941, var16.field942, arg1);
+				arg2.method363(var16.field944, arg3, arg0, var16.field941, var16.field942, arg1);
 			}
 		} else if (arg4 >= 12) {
 			ModelSource var24;
 			if (var16.field949 == -1) {
 				var24 = var16.method340(arg4, arg0, var11, var12, var13, var14, -1);
 			} else {
-				var24 = new ClientLocAnim(arg4, arg0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var24 = new ClientLocAnim(arg4, arg0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method74(var18, 1, var15, var24, -38295, 1, var17, arg3, arg1, 0, arg10);
+			arg6.method74(var18, 1, var15, var24, 1, var17, arg3, arg1, 0, arg10);
 			if (var16.field943) {
-				arg2.method363(var16.field944, 3, arg3, arg0, var16.field941, var16.field942, arg1);
+				arg2.method363(var16.field944, arg3, arg0, var16.field941, var16.field942, arg1);
 			}
 		} else if (arg4 == 0) {
 			ModelSource var25;
 			if (var16.field949 == -1) {
 				var25 = var16.method340(0, arg0, var11, var12, var13, var14, -1);
 			} else {
-				var25 = new ClientLocAnim(0, arg0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var25 = new ClientLocAnim(0, arg0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method72(var25, null, var17, 0, arg3, (byte) 54, var18, arg1, var15, field62[arg0], arg10);
+			arg6.method72(var25, null, var17, 0, arg3, var18, arg1, var15, field62[arg0], arg10);
 			if (var16.field943) {
-				arg2.method362(arg1, arg3, 9, arg0, var16.field944, arg4);
+				arg2.method362(arg1, arg3, arg0, var16.field944, arg4);
 			}
 		} else if (arg4 == 1) {
 			ModelSource var26;
 			if (var16.field949 == -1) {
 				var26 = var16.method340(1, arg0, var11, var12, var13, var14, -1);
 			} else {
-				var26 = new ClientLocAnim(1, arg0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var26 = new ClientLocAnim(1, arg0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method72(var26, null, var17, 0, arg3, (byte) 54, var18, arg1, var15, field63[arg0], arg10);
+			arg6.method72(var26, null, var17, 0, arg3, var18, arg1, var15, field63[arg0], arg10);
 			if (var16.field943) {
-				arg2.method362(arg1, arg3, 9, arg0, var16.field944, arg4);
+				arg2.method362(arg1, arg3, arg0, var16.field944, arg4);
 			}
 		} else if (arg4 == 2) {
 			int var27 = arg0 + 1 & 0x3;
@@ -1164,43 +1114,43 @@ public class World {
 				var28 = var16.method340(2, arg0 + 4, var11, var12, var13, var14, -1);
 				var29 = var16.method340(2, var27, var11, var12, var13, var14, -1);
 			} else {
-				var28 = new ClientLocAnim(2, arg0 + 4, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
-				var29 = new ClientLocAnim(2, var27, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var28 = new ClientLocAnim(2, arg0 + 4, var11, arg5, var13, var14, true, var16.field949, var12);
+				var29 = new ClientLocAnim(2, var27, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method72(var28, var29, var17, field62[var27], arg3, (byte) 54, var18, arg1, var15, field62[arg0], arg10);
+			arg6.method72(var28, var29, var17, field62[var27], arg3, var18, arg1, var15, field62[arg0], arg10);
 			if (var16.field943) {
-				arg2.method362(arg1, arg3, 9, arg0, var16.field944, arg4);
+				arg2.method362(arg1, arg3, arg0, var16.field944, arg4);
 			}
 		} else if (arg4 == 3) {
 			ModelSource var30;
 			if (var16.field949 == -1) {
 				var30 = var16.method340(3, arg0, var11, var12, var13, var14, -1);
 			} else {
-				var30 = new ClientLocAnim(3, arg0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var30 = new ClientLocAnim(3, arg0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method72(var30, null, var17, 0, arg3, (byte) 54, var18, arg1, var15, field63[arg0], arg10);
+			arg6.method72(var30, null, var17, 0, arg3, var18, arg1, var15, field63[arg0], arg10);
 			if (var16.field943) {
-				arg2.method362(arg1, arg3, 9, arg0, var16.field944, arg4);
+				arg2.method362(arg1, arg3, arg0, var16.field944, arg4);
 			}
 		} else if (arg4 == 9) {
 			ModelSource var31;
 			if (var16.field949 == -1) {
 				var31 = var16.method340(arg4, arg0, var11, var12, var13, var14, -1);
 			} else {
-				var31 = new ClientLocAnim(arg4, arg0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var31 = new ClientLocAnim(arg4, arg0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method74(var18, 1, var15, var31, -38295, 1, var17, arg3, arg1, 0, arg10);
+			arg6.method74(var18, 1, var15, var31, 1, var17, arg3, arg1, 0, arg10);
 			if (var16.field943) {
-				arg2.method363(var16.field944, 3, arg3, arg0, var16.field941, var16.field942, arg1);
+				arg2.method363(var16.field944, arg3, arg0, var16.field941, var16.field942, arg1);
 			}
 		} else if (arg4 == 4) {
 			ModelSource var32;
 			if (var16.field949 == -1) {
 				var32 = var16.method340(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var32 = new ClientLocAnim(4, 0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var32 = new ClientLocAnim(4, 0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method73(field62[arg0], 0, var18, var15, arg1, var17, arg0 * 512, arg3, 0, var32, arg10, false);
+			arg6.method73(field62[arg0], 0, var18, var15, arg1, var17, arg0 * 512, arg3, 0, var32, arg10);
 		} else if (arg4 == 5) {
 			int var33 = 16;
 			int var34 = arg6.method90(arg10, arg1, arg3);
@@ -1211,33 +1161,33 @@ public class World {
 			if (var16.field949 == -1) {
 				var35 = var16.method340(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var35 = new ClientLocAnim(4, 0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var35 = new ClientLocAnim(4, 0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method73(field62[arg0], field64[arg0] * var33, var18, var15, arg1, var17, arg0 * 512, arg3, field65[arg0] * var33, var35, arg10, false);
+			arg6.method73(field62[arg0], field64[arg0] * var33, var18, var15, arg1, var17, arg0 * 512, arg3, field65[arg0] * var33, var35, arg10);
 		} else if (arg4 == 6) {
 			ModelSource var36;
 			if (var16.field949 == -1) {
 				var36 = var16.method340(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var36 = new ClientLocAnim(4, 0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var36 = new ClientLocAnim(4, 0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method73(256, 0, var18, var15, arg1, var17, arg0, arg3, 0, var36, arg10, false);
+			arg6.method73(256, 0, var18, var15, arg1, var17, arg0, arg3, 0, var36, arg10);
 		} else if (arg4 == 7) {
 			ModelSource var37;
 			if (var16.field949 == -1) {
 				var37 = var16.method340(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var37 = new ClientLocAnim(4, 0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var37 = new ClientLocAnim(4, 0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method73(512, 0, var18, var15, arg1, var17, arg0, arg3, 0, var37, arg10, false);
+			arg6.method73(512, 0, var18, var15, arg1, var17, arg0, arg3, 0, var37, arg10);
 		} else if (arg4 == 8) {
 			ModelSource var38;
 			if (var16.field949 == -1) {
 				var38 = var16.method340(4, 0, var11, var12, var13, var14, -1);
 			} else {
-				var38 = new ClientLocAnim(4, 0, var11, arg5, 10550, var13, var14, true, var16.field949, var12);
+				var38 = new ClientLocAnim(4, 0, var11, arg5, var13, var14, true, var16.field949, var12);
 			}
-			arg6.method73(768, 0, var18, var15, arg1, var17, arg0, arg3, 0, var38, arg10, false);
+			arg6.method73(768, 0, var18, var15, arg1, var17, arg0, arg3, 0, var38, arg10);
 		}
 	}
 }

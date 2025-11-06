@@ -8,9 +8,6 @@ import java.io.RandomAccessFile;
 @ObfuscatedName("wb")
 public class FileStream {
 
-	@ObfuscatedName("wb.a")
-	public boolean field848 = true;
-
 	@ObfuscatedName("wb.b")
 	public static byte[] field849 = new byte[520];
 
@@ -26,10 +23,7 @@ public class FileStream {
 	@ObfuscatedName("wb.f")
 	public int field853 = 65000;
 
-	public FileStream(RandomAccessFile arg0, int arg1, int arg2, int arg3, RandomAccessFile arg4) {
-		if (arg1 != 0) {
-			throw new NullPointerException();
-		}
+	public FileStream(RandomAccessFile arg0, int arg2, int arg3, RandomAccessFile arg4) {
 		this.field852 = arg3;
 		this.field850 = arg4;
 		this.field851 = arg0;
@@ -37,13 +31,9 @@ public class FileStream {
 	}
 
 	@ObfuscatedName("wb.a(II)[B")
-	public synchronized byte[] method301(int arg0, int arg1) {
-		if (arg0 != 9) {
-			for (int var3 = 1; var3 > 0; var3++) {
-			}
-		}
+	public synchronized byte[] method301(int arg1) {
 		try {
-			this.method304(this.field851, arg1 * 6, 0);
+			this.method304(this.field851, arg1 * 6);
 			int var5;
 			for (int var4 = 0; var4 < 6; var4 += var5) {
 				var5 = this.field851.read(field849, var4, 6 - var4);
@@ -63,7 +53,7 @@ public class FileStream {
 					if (var7 == 0) {
 						return null;
 					}
-					this.method304(this.field850, var7 * 520, 0);
+					this.method304(this.field850, var7 * 520);
 					int var11 = 0;
 					int var12 = var6 - var9;
 					if (var12 > 512) {
@@ -103,27 +93,20 @@ public class FileStream {
 	}
 
 	@ObfuscatedName("wb.a(II[BZ)Z")
-	public synchronized boolean method302(int arg0, int arg1, byte[] arg2, boolean arg3) {
-		if (arg3) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
-		boolean var6 = this.method303(arg2, arg1, arg0, (byte) -45, true);
+	public synchronized boolean method302(int arg0, int arg1, byte[] arg2) {
+		boolean var6 = this.method303(arg2, arg1, arg0, true);
 		if (!var6) {
-			var6 = this.method303(arg2, arg1, arg0, (byte) -45, false);
+			var6 = this.method303(arg2, arg1, arg0, false);
 		}
 		return var6;
 	}
 
 	@ObfuscatedName("wb.a([BIIBZ)Z")
-	public synchronized boolean method303(byte[] arg0, int arg1, int arg2, byte arg3, boolean arg4) {
-		if (arg3 != -45) {
-			this.field848 = !this.field848;
-		}
+	public synchronized boolean method303(byte[] arg0, int arg1, int arg2, boolean arg4) {
 		try {
 			int var8;
 			if (arg4) {
-				this.method304(this.field851, arg1 * 6, 0);
+				this.method304(this.field851, arg1 * 6);
 				int var7;
 				for (int var6 = 0; var6 < 6; var6 += var7) {
 					var7 = this.field851.read(field849, var6, 6 - var6);
@@ -147,14 +130,14 @@ public class FileStream {
 			field849[3] = (byte) (var8 >> 16);
 			field849[4] = (byte) (var8 >> 8);
 			field849[5] = (byte) var8;
-			this.method304(this.field851, arg1 * 6, 0);
+			this.method304(this.field851, arg1 * 6);
 			this.field851.write(field849, 0, 6);
 			int var9 = 0;
 			int var10 = 0;
 			while (var9 < arg2) {
 				int var11 = 0;
 				if (arg4) {
-					this.method304(this.field850, var8 * 520, 0);
+					this.method304(this.field850, var8 * 520);
 					int var12;
 					int var13;
 					for (var12 = 0; var12 < 8; var12 += var13) {
@@ -200,7 +183,7 @@ public class FileStream {
 				field849[5] = (byte) (var11 >> 8);
 				field849[6] = (byte) var11;
 				field849[7] = (byte) this.field852;
-				this.method304(this.field850, var8 * 520, 0);
+				this.method304(this.field850, var8 * 520);
 				this.field850.write(field849, 0, 8);
 				int var17 = arg2 - var9;
 				if (var17 > 512) {
@@ -218,10 +201,7 @@ public class FileStream {
 	}
 
 	@ObfuscatedName("wb.a(Ljava/io/RandomAccessFile;II)V")
-	public synchronized void method304(RandomAccessFile arg0, int arg1, int arg2) throws IOException {
-		if (arg2 != 0) {
-			return;
-		}
+	public synchronized void method304(RandomAccessFile arg0, int arg1) throws IOException {
 		if (arg1 < 0 || arg1 > 62914560) {
 			System.out.println("Badseek - pos:" + arg1 + " len:" + arg0.length());
 			arg1 = 62914560;

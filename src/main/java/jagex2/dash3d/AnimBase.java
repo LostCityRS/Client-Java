@@ -15,10 +15,7 @@ public class AnimBase {
 	@ObfuscatedName("g.c")
 	public int[][] field161;
 
-	public AnimBase(Packet arg0, boolean arg1) {
-		if (!arg1) {
-			throw new NullPointerException();
-		}
+	public AnimBase(Packet arg0) {
 		this.field159 = arg0.method239();
 		this.field160 = new int[this.field159];
 		this.field161 = new int[this.field159][];

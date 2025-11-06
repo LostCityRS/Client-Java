@@ -7,12 +7,6 @@ import jagex2.config.SeqType;
 @ObfuscatedName("z")
 public class ClientEntity extends ModelSource {
 
-	@ObfuscatedName("z.m")
-	public boolean field408 = false;
-
-	@ObfuscatedName("z.n")
-	public int field409 = 6;
-
 	@ObfuscatedName("z.o")
 	public int field410;
 
@@ -179,7 +173,7 @@ public class ClientEntity extends ModelSource {
 	public String field422;
 
 	@ObfuscatedName("z.a(IIZZ)V")
-	public final void method124(int arg0, int arg1, boolean arg2, boolean arg3) {
+	public final void method124(int arg0, int arg1, boolean arg3) {
 		if (this.field438 != -1 && SeqType.field1112[this.field438].field1125 == 1) {
 			this.field438 = -1;
 		}
@@ -208,13 +202,10 @@ public class ClientEntity extends ModelSource {
 		this.field461[0] = arg0;
 		this.field410 = this.field460[0] * 128 + this.field414 * 64;
 		this.field411 = this.field461[0] * 128 + this.field414 * 64;
-		if (arg2) {
-			this.field408 = !this.field408;
-		}
 	}
 
 	@ObfuscatedName("z.a(ZIB)V")
-	public final void method125(boolean arg0, int arg1, byte arg2) {
+	public final void method125(boolean arg0, int arg1) {
 		int var4 = this.field460[0];
 		int var5 = this.field461[0];
 		if (arg1 == 0) {
@@ -257,36 +248,23 @@ public class ClientEntity extends ModelSource {
 			this.field462[var6] = this.field462[var6 - 1];
 		}
 		this.field460[0] = var4;
-		if (arg2 != 4) {
-			for (int var7 = 1; var7 > 0; var7++) {
-			}
-		}
 		this.field461[0] = var5;
 		this.field462[0] = arg0;
 	}
 
 	@ObfuscatedName("z.a(Z)V")
-	public final void method126(boolean arg0) {
+	public final void method126() {
 		this.field459 = 0;
 		this.field464 = 0;
-		if (arg0) {
-			this.field409 = -406;
-		}
 	}
 
 	@ObfuscatedName("z.b(I)Z")
-	public boolean method127(int arg0) {
-		if (arg0 >= 0) {
-			throw new NullPointerException();
-		}
+	public boolean method127() {
 		return false;
 	}
 
 	@ObfuscatedName("z.a(III)V")
-	public final void method128(int arg0, int arg1, int arg2) {
-		if (arg0 <= 0) {
-			this.field409 = -332;
-		}
+	public final void method128(int arg1, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			if (this.field428[var4] <= Client.field1591) {
 				this.field426[var4] = arg2;

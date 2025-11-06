@@ -6,9 +6,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("h")
 public class AnimFrame {
 
-	@ObfuscatedName("h.a")
-	public static boolean field162;
-
 	@ObfuscatedName("h.b")
 	public static AnimFrame[] field163;
 
@@ -46,32 +43,29 @@ public class AnimFrame {
 	}
 
 	@ObfuscatedName("h.a(I[B)V")
-	public static void method59(int arg0, byte[] arg1) {
-		Packet var2 = new Packet(arg1, (byte) 3);
+	public static void method59(byte[] arg1) {
+		Packet var2 = new Packet(arg1);
 		var2.field711 = arg1.length - 8;
 		int var3 = var2.method241();
 		int var4 = var2.method241();
 		int var5 = var2.method241();
 		int var6 = var2.method241();
 		byte var7 = 0;
-		Packet var8 = new Packet(arg1, (byte) 3);
+		Packet var8 = new Packet(arg1);
 		var8.field711 = var7;
 		int var9 = var7 + var3 + 2;
-		Packet var10 = new Packet(arg1, (byte) 3);
+		Packet var10 = new Packet(arg1);
 		var10.field711 = var9;
 		int var11 = var9 + var4;
-		if (arg0 < 2 || arg0 > 2) {
-			field162 = !field162;
-		}
-		Packet var12 = new Packet(arg1, (byte) 3);
+		Packet var12 = new Packet(arg1);
 		var12.field711 = var11;
 		int var13 = var11 + var5;
-		Packet var14 = new Packet(arg1, (byte) 3);
+		Packet var14 = new Packet(arg1);
 		var14.field711 = var13;
 		int var15 = var13 + var6;
-		Packet var16 = new Packet(arg1, (byte) 3);
+		Packet var16 = new Packet(arg1);
 		var16.field711 = var15;
-		AnimBase var17 = new AnimBase(var16, true);
+		AnimBase var17 = new AnimBase(var16);
 		int var18 = var8.method241();
 		int[] var19 = new int[500];
 		int[] var20 = new int[500];
@@ -142,26 +136,17 @@ public class AnimFrame {
 	}
 
 	@ObfuscatedName("h.b(I)V")
-	public static void method60(int arg0) {
+	public static void method60() {
 		field163 = null;
-		int var1 = 94 / arg0;
 	}
 
 	@ObfuscatedName("h.a(II)Lh;")
-	public static AnimFrame method61(int arg0, int arg1) {
-		if (arg0 != 0) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public static AnimFrame method61(int arg1) {
 		return field163 == null ? null : field163[arg1];
 	}
 
 	@ObfuscatedName("h.a(BI)Z")
-	public static boolean method62(byte arg0, int arg1) {
-		if (arg0 != 8) {
-			throw new NullPointerException();
-		}
-		boolean var2 = false;
+	public static boolean method62(int arg1) {
 		return arg1 == -1;
 	}
 }

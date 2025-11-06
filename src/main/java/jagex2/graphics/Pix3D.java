@@ -6,9 +6,6 @@ import jagex2.io.JagFile;
 @ObfuscatedName("ib")
 public class Pix3D extends Pix2D {
 
-	@ObfuscatedName("ib.z")
-	public static int field634 = -324;
-
 	@ObfuscatedName("ib.B")
 	public static boolean field636 = true;
 
@@ -82,8 +79,7 @@ public class Pix3D extends Pix2D {
 	public static int[][] field653;
 
 	@ObfuscatedName("ib.c(I)V")
-	public static final void method177(int arg0) {
-		int var1 = 53 / arg0;
+	public static final void method177() {
 		field643 = null;
 		field643 = null;
 		field645 = null;
@@ -100,9 +96,8 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.d(I)V")
-	public static final void method178(int arg0) {
+	public static final void method178() {
 		field647 = new int[Pix2D.field625];
-		int var1 = 24 / arg0;
 		for (int var2 = 0; var2 < Pix2D.field625; var2++) {
 			field647[var2] = Pix2D.field624 * var2;
 		}
@@ -111,11 +106,8 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(III)V")
-	public static final void method179(int arg0, int arg1, int arg2) {
+	public static final void method179(int arg0, int arg2) {
 		field647 = new int[arg2];
-		if (arg1 != 0) {
-			field634 = 327;
-		}
 		for (int var3 = 0; var3 < arg2; var3++) {
 			field647[var3] = arg0 * var3;
 		}
@@ -124,20 +116,16 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.e(I)V")
-	public static final void method180(int arg0) {
+	public static final void method180() {
 		field653 = null;
-		if (arg0 != 2) {
-			for (int var1 = 1; var1 > 0; var1++) {
-			}
-		}
 		for (int var2 = 0; var2 < 50; var2++) {
 			field654[var2] = null;
 		}
 	}
 
 	@ObfuscatedName("ib.a(II)V")
-	public static final void method181(int arg0, int arg1) {
-		if (arg0 != 0 || field653 != null) {
+	public static final void method181(int arg1) {
+		if (field653 != null) {
 			return;
 		}
 		field652 = arg1;
@@ -152,19 +140,15 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(Lyb;Z)V")
-	public static final void method182(JagFile arg0, boolean arg1) {
+	public static final void method182(JagFile arg0) {
 		field648 = 0;
-		if (arg1) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
 		for (int var3 = 0; var3 < 50; var3++) {
 			try {
 				field649[var3] = new Pix8(arg0, String.valueOf(var3), 0);
 				if (field636 && field649[var3].field680 == 128) {
-					field649[var3].method207(true);
+					field649[var3].method207();
 				} else {
-					field649[var3].method208((byte) -86);
+					field649[var3].method208();
 				}
 				field648++;
 			} catch (Exception var4) {
@@ -173,10 +157,7 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.b(II)I")
-	public static final int method183(int arg0, int arg1) {
-		if (arg0 < field635 || arg0 > field635) {
-			field634 = 184;
-		}
+	public static final int method183(int arg1) {
 		if (field651[arg1] != 0) {
 			return field651[arg1];
 		}
@@ -199,12 +180,10 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.c(II)V")
-	public static final void method184(int arg0, int arg1) {
+	public static final void method184(int arg1) {
 		if (field654[arg1] != null) {
 			field653[field652++] = field654[arg1];
-			if (arg0 == 3) {
-				field654[arg1] = null;
-			}
+			field654[arg1] = null;
 		}
 	}
 
@@ -272,10 +251,9 @@ public class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("ib.a(ID)V")
-	public static final void method186(int arg0, double arg1) {
+	public static final void method186(double arg1) {
 		double var3 = arg1 + (Math.random() * 0.03D - 0.015D);
 		int var5 = 0;
-		int var6 = 17 / arg0;
 		for (int var7 = 0; var7 < 512; var7++) {
 			double var8 = (double) (var7 / 8) / 64.0D + 0.0078125D;
 			double var10 = (double) (var7 & 0x7) / 8.0D + 0.0625D;
@@ -346,7 +324,7 @@ public class Pix3D extends Pix2D {
 			}
 		}
 		for (int var39 = 0; var39 < 50; var39++) {
-			method184(3, var39);
+			method184(var39);
 		}
 	}
 

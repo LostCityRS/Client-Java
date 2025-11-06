@@ -11,12 +11,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("ec")
 public class LocType {
 
-	@ObfuscatedName("ec.a")
-	public byte field926 = 8;
-
-	@ObfuscatedName("ec.b")
-	public boolean field927 = false;
-
 	@ObfuscatedName("ec.c")
 	public static int field928;
 
@@ -90,10 +84,10 @@ public class LocType {
 	public byte field951;
 
 	@ObfuscatedName("ec.Q")
-	public static LruCache field968 = new LruCache((byte) 3, 500);
+	public static LruCache field968 = new LruCache(500);
 
 	@ObfuscatedName("ec.R")
-	public static LruCache field969 = new LruCache((byte) 3, 30);
+	public static LruCache field969 = new LruCache(30);
 
 	@ObfuscatedName("ec.A")
 	public byte field952;
@@ -145,8 +139,8 @@ public class LocType {
 
 	@ObfuscatedName("ec.a(Lyb;)V")
 	public static final void method332(JagFile arg0) {
-		field930 = new Packet(arg0.method309("loc.dat", null), (byte) 3);
-		Packet var1 = new Packet(arg0.method309("loc.idx", null), (byte) 3);
+		field930 = new Packet(arg0.method309("loc.dat", null));
+		Packet var1 = new Packet(arg0.method309("loc.idx", null));
 		field928 = var1.method241();
 		field929 = new int[field928];
 		int var2 = 2;
@@ -161,10 +155,9 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(I)V")
-	public static final void method333(int arg0) {
+	public static final void method333() {
 		field968 = null;
 		field969 = null;
-		int var1 = 44 / arg0;
 		field929 = null;
 		field931 = null;
 		field930 = null;
@@ -182,7 +175,7 @@ public class LocType {
 		field930.field711 = field929[arg0];
 		var2.field934 = arg0;
 		var2.method335();
-		var2.method336(9, field930);
+		var2.method336(field930);
 		return var2;
 	}
 
@@ -224,10 +217,7 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(ILmb;)V")
-	public final void method336(int arg0, Packet arg1) {
-		if (arg0 != 9) {
-			throw new NullPointerException();
-		}
+	public final void method336(Packet arg1) {
 		int var3 = -1;
 		while (true) {
 			int var5;
@@ -261,7 +251,7 @@ public class LocType {
 					if (var4 == 2) {
 						this.field937 = arg1.method246();
 					} else if (var4 == 3) {
-						this.field938 = arg1.method247((byte) 3);
+						this.field938 = arg1.method247();
 					} else if (var4 == 5) {
 						int var7 = arg1.method239();
 						if (var7 > 0) {
@@ -358,10 +348,7 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(IZ)Z")
-	public final boolean method337(int arg0, boolean arg1) {
-		if (!arg1) {
-			this.field927 = !this.field927;
-		}
+	public final boolean method337(int arg0) {
 		if (this.field936 != null) {
 			for (int var5 = 0; var5 < this.field936.length; var5++) {
 				if (this.field936[var5] == arg0) {
@@ -383,10 +370,8 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.c(I)Z")
-	public final boolean method338(int arg0) {
-		if (arg0 != 0) {
-			throw new NullPointerException();
-		} else if (this.field935 == null) {
+	public final boolean method338() {
+		if (this.field935 == null) {
 			return true;
 		} else {
 			boolean var2 = true;
@@ -398,22 +383,22 @@ public class LocType {
 	}
 
 	@ObfuscatedName("ec.a(ILvb;)V")
-	public final void method339(int arg0, OnDemand arg1) {
-		if (arg0 == 38488 && this.field935 != null) {
+	public final void method339(OnDemand arg1) {
+		if (this.field935 != null) {
 			for (int var3 = 0; var3 < this.field935.length; var3++) {
-				arg1.method294(0, this.field935[var3] & 0xFFFF, 0);
+				arg1.method294(0, this.field935[var3] & 0xFFFF);
 			}
 		}
 	}
 
 	@ObfuscatedName("ec.a(IIIIIII)Lfb;")
 	public final Model method340(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		Model var8 = this.method341(arg0, (byte) 7, arg6, arg1);
+		Model var8 = this.method341(arg0, arg6, arg1);
 		if (var8 == null) {
 			return null;
 		}
 		if (this.field946 || this.field947) {
-			var8 = new Model((byte) 9, this.field946, var8, this.field947);
+			var8 = new Model(this.field946, var8, this.field947);
 		}
 		if (this.field946) {
 			int var9 = (arg2 + arg3 + arg4 + arg5) / 4;
@@ -425,17 +410,14 @@ public class LocType {
 				int var15 = var13 + (var14 - var13) * (var12 + 64) / 128;
 				var8.field541[var10] += var15 - var9;
 			}
-			var8.method144(true);
+			var8.method144();
 		}
 		return var8;
 	}
 
 	@ObfuscatedName("ec.a(IBII)Lfb;")
-	public final Model method341(int arg0, byte arg1, int arg2, int arg3) {
+	public final Model method341(int arg0, int arg2, int arg3) {
 		Model var5 = null;
-		if (arg1 != 7) {
-			throw new NullPointerException();
-		}
 		boolean var6 = false;
 		long var7;
 		if (this.field936 == null) {
@@ -459,21 +441,21 @@ public class LocType {
 				}
 				var5 = (Model) field968.method115((long) var13);
 				if (var5 == null) {
-					var5 = Model.method139(0, var13 & 0xFFFF);
+					var5 = Model.method139(var13 & 0xFFFF);
 					if (var5 == null) {
 						return null;
 					}
 					if (var10) {
-						var5.method154((byte) 15);
+						var5.method154();
 					}
-					field968.method116(var5, false, (long) var13);
+					field968.method116(var5, (long) var13);
 				}
 				if (var11 > 1) {
 					field933[var12] = var5;
 				}
 			}
 			if (var11 > 1) {
-				var5 = new Model(field933, var11, -928);
+				var5 = new Model(field933, var11);
 			}
 		} else {
 			int var14 = -1;
@@ -498,14 +480,14 @@ public class LocType {
 			}
 			var5 = (Model) field968.method115((long) var17);
 			if (var5 == null) {
-				var5 = Model.method139(0, var17 & 0xFFFF);
+				var5 = Model.method139(var17 & 0xFFFF);
 				if (var5 == null) {
 					return null;
 				}
 				if (var18) {
-					var5.method154((byte) 15);
+					var5.method154();
 				}
-				field968.method116(var5, false, (long) var17);
+				field968.method116(var5, (long) var17);
 			}
 		}
 		boolean var19;
@@ -520,15 +502,15 @@ public class LocType {
 		} else {
 			var20 = true;
 		}
-		Model var21 = new Model(AnimFrame.method62((byte) 8, arg2), 992, arg3 == 0 && arg2 == -1 && !var19 && !var20, this.field939 == null, var5);
+		Model var21 = new Model(AnimFrame.method62(arg2), arg3 == 0 && arg2 == -1 && !var19 && !var20, this.field939 == null, var5);
 		if (arg2 != -1) {
-			var21.method146((byte) 112);
-			var21.method147(true, arg2);
+			var21.method146();
+			var21.method147(arg2);
 			var21.field571 = null;
 			var21.field570 = null;
 		}
 		while (arg3-- > 0) {
-			var21.method150(this.field926);
+			var21.method150();
 		}
 		if (this.field939 != null) {
 			for (int var22 = 0; var22 < this.field939.length; var22++) {
@@ -536,16 +518,16 @@ public class LocType {
 			}
 		}
 		if (var19) {
-			var21.method155(792, this.field960, this.field958, this.field959);
+			var21.method155(this.field960, this.field958, this.field959);
 		}
 		if (var20) {
-			var21.method152((byte) -32, this.field961, this.field963, this.field962);
+			var21.method152(this.field961, this.field963, this.field962);
 		}
 		var21.method156(this.field951 + 64, this.field952 * 5 + 768, -50, -10, -50, !this.field947);
 		if (this.field967 == 1) {
 			var21.field567 = var21.field406;
 		}
-		field969.method116(var21, false, var7);
+		field969.method116(var21, var7);
 		return var21;
 	}
 }

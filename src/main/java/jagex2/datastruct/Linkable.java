@@ -5,9 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("v")
 public class Linkable {
 
-	@ObfuscatedName("v.a")
-	public byte field373 = 114;
-
 	@ObfuscatedName("v.b")
 	public long field374;
 
@@ -16,9 +13,6 @@ public class Linkable {
 
 	@ObfuscatedName("v.d")
 	public Linkable field376;
-
-	@ObfuscatedName("v.e")
-	public static boolean field377;
 
 	@ObfuscatedName("v.a()V")
 	public void method120() {

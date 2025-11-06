@@ -5,22 +5,13 @@ import deob.ObfuscatedName;
 @ObfuscatedName("pb")
 public class LinkList {
 
-	@ObfuscatedName("pb.a")
-	public int field741;
-
-	@ObfuscatedName("pb.b")
-	public boolean field742 = false;
-
 	@ObfuscatedName("pb.c")
 	public Linkable field743 = new Linkable();
 
 	@ObfuscatedName("pb.d")
 	public Linkable field744;
 
-	public LinkList(boolean arg0) {
-		if (arg0) {
-			this.field741 = -32;
-		}
+	public LinkList() {
 		this.field743.field375 = this.field743;
 		this.field743.field376 = this.field743;
 	}
@@ -37,19 +28,14 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(Lv;I)V")
-	public void method256(Linkable arg0, int arg1) {
+	public void method256(Linkable arg0) {
 		if (arg0.field376 != null) {
 			arg0.method120();
 		}
 		arg0.field376 = this.field743;
 		arg0.field375 = this.field743.field375;
 		arg0.field376.field375 = arg0;
-		while (arg1 >= 0) {
-			this.field742 = !this.field742;
-		}
 		arg0.field375.field376 = arg0;
-		if (Linkable.field377) {
-		}
 	}
 
 	@ObfuscatedName("pb.a()Lv;")
@@ -76,11 +62,7 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(B)Lv;")
-	public Linkable method259(byte arg0) {
-		if (arg0 != 2) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public Linkable method259() {
 		Linkable var3 = this.field743.field376;
 		if (var3 == this.field743) {
 			this.field744 = null;
@@ -92,25 +74,19 @@ public class LinkList {
 	}
 
 	@ObfuscatedName("pb.a(I)Lv;")
-	public Linkable method260(int arg0) {
+	public Linkable method260() {
 		Linkable var2 = this.field744;
 		if (var2 == this.field743) {
 			this.field744 = null;
 			return null;
 		}
 		this.field744 = var2.field375;
-		if (arg0 != 6) {
-			this.field742 = !this.field742;
-		}
 		return var2;
 	}
 
 	@ObfuscatedName("pb.b(I)Lv;")
-	public Linkable method261(int arg0) {
+	public Linkable method261() {
 		Linkable var2 = this.field744;
-		if (arg0 != 0) {
-			this.field741 = -273;
-		}
 		if (var2 == this.field743) {
 			this.field744 = null;
 			return null;

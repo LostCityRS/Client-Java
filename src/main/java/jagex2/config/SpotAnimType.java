@@ -49,15 +49,11 @@ public class SpotAnimType {
 	public int field1143;
 
 	@ObfuscatedName("pc.n")
-	public static LruCache field1144 = new LruCache((byte) 3, 30);
+	public static LruCache field1144 = new LruCache(30);
 
 	@ObfuscatedName("pc.a(ZLyb;)V")
-	public static void method386(boolean arg0, JagFile arg1) {
-		if (!arg0) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
-		Packet var3 = new Packet(arg1.method309("spotanim.dat", null), (byte) 3);
+	public static void method386(JagFile arg1) {
+		Packet var3 = new Packet(arg1.method309("spotanim.dat", null));
 		field1131 = var3.method241();
 		if (field1132 == null) {
 			field1132 = new SpotAnimType[field1131];
@@ -67,45 +63,40 @@ public class SpotAnimType {
 				field1132[var4] = new SpotAnimType();
 			}
 			field1132[var4].field1133 = var4;
-			field1132[var4].method387(9, var3);
+			field1132[var4].method387(var3);
 		}
 	}
 
 	@ObfuscatedName("pc.a(ILmb;)V")
-	public void method387(int arg0, Packet arg1) {
-		if (arg0 < 9 || arg0 > 9) {
-			throw new NullPointerException();
-		}
+	public void method387(Packet arg1) {
 		while (true) {
-			while (true) {
-				int var3 = arg1.method239();
-				if (var3 == 0) {
-					return;
+			int var3 = arg1.method239();
+			if (var3 == 0) {
+				return;
+			}
+			if (var3 == 1) {
+				this.field1134 = arg1.method241();
+			} else if (var3 == 2) {
+				this.field1135 = arg1.method241();
+				if (SeqType.field1112 != null) {
+					this.field1136 = SeqType.field1112[this.field1135];
 				}
-				if (var3 == 1) {
-					this.field1134 = arg1.method241();
-				} else if (var3 == 2) {
-					this.field1135 = arg1.method241();
-					if (SeqType.field1112 != null) {
-						this.field1136 = SeqType.field1112[this.field1135];
-					}
-				} else if (var3 == 4) {
-					this.field1139 = arg1.method241();
-				} else if (var3 == 5) {
-					this.field1140 = arg1.method241();
-				} else if (var3 == 6) {
-					this.field1141 = arg1.method241();
-				} else if (var3 == 7) {
-					this.field1142 = arg1.method239();
-				} else if (var3 == 8) {
-					this.field1143 = arg1.method239();
-				} else if (var3 >= 40 && var3 < 50) {
-					this.field1137[var3 - 40] = arg1.method241();
-				} else if (var3 >= 50 && var3 < 60) {
-					this.field1138[var3 - 50] = arg1.method241();
-				} else {
-					System.out.println("Error unrecognised spotanim config code: " + var3);
-				}
+			} else if (var3 == 4) {
+				this.field1139 = arg1.method241();
+			} else if (var3 == 5) {
+				this.field1140 = arg1.method241();
+			} else if (var3 == 6) {
+				this.field1141 = arg1.method241();
+			} else if (var3 == 7) {
+				this.field1142 = arg1.method239();
+			} else if (var3 == 8) {
+				this.field1143 = arg1.method239();
+			} else if (var3 >= 40 && var3 < 50) {
+				this.field1137[var3 - 40] = arg1.method241();
+			} else if (var3 >= 50 && var3 < 60) {
+				this.field1138[var3 - 50] = arg1.method241();
+			} else {
+				System.out.println("Error unrecognised spotanim config code: " + var3);
 			}
 		}
 	}
@@ -116,7 +107,7 @@ public class SpotAnimType {
 		if (var1 != null) {
 			return var1;
 		}
-		Model var2 = Model.method139(0, this.field1134);
+		Model var2 = Model.method139(this.field1134);
 		if (var2 == null) {
 			return null;
 		}
@@ -125,7 +116,7 @@ public class SpotAnimType {
 				var2.method153(this.field1137[var3], this.field1138[var3]);
 			}
 		}
-		field1144.method116(var2, false, (long) this.field1133);
+		field1144.method116(var2, (long) this.field1133);
 		return var2;
 	}
 }

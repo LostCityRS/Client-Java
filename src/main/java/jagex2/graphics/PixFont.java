@@ -1,7 +1,6 @@
 package jagex2.graphics;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.Linkable;
 import jagex2.io.JagFile;
 import jagex2.io.Packet;
 
@@ -9,18 +8,6 @@ import java.util.Random;
 
 @ObfuscatedName("lb")
 public class PixFont extends Pix2D {
-
-	@ObfuscatedName("lb.z")
-	public int field682 = 3;
-
-	@ObfuscatedName("lb.B")
-	public boolean field684 = true;
-
-	@ObfuscatedName("lb.C")
-	public int field685 = 3;
-
-	@ObfuscatedName("lb.D")
-	public boolean field686 = true;
 
 	@ObfuscatedName("lb.E")
 	public byte[][] field687 = new byte[94][];
@@ -55,17 +42,11 @@ public class PixFont extends Pix2D {
 	@ObfuscatedName("lb.O")
 	public static int[] field697 = new int[256];
 
-	@ObfuscatedName("lb.A")
-	public int field683;
-
-	public PixFont(String arg0, JagFile arg1, boolean arg2) {
-		Packet var4 = new Packet(arg1.method309(arg0 + ".dat", null), (byte) 3);
-		Packet var5 = new Packet(arg1.method309("index.dat", null), (byte) 3);
+	public PixFont(String arg0, JagFile arg1) {
+		Packet var4 = new Packet(arg1.method309(arg0 + ".dat", null));
+		Packet var5 = new Packet(arg1.method309("index.dat", null));
 		boolean var6 = true;
 		var5.field711 = var4.method241() + 4;
-		if (!arg2) {
-			this.field682 = -151;
-		}
 		int var7 = var5.method239();
 		if (var7 > 0) {
 			var5.field711 += (var7 - 1) * 3;
@@ -115,27 +96,20 @@ public class PixFont extends Pix2D {
 		for (int var21 = 0; var21 < 256; var21++) {
 			this.field693[var21] = this.field692[field697[var21]];
 		}
-		if (Linkable.field377) {
-		}
 	}
 
 	@ObfuscatedName("lb.a(ILjava/lang/String;III)V")
-	public void method214(int arg0, String arg1, int arg2, int arg3, int arg4) {
-		if (arg2 == 0) {
-			this.method217(arg4, arg3 - this.method216(arg1, true) / 2, arg0, this.field685, arg1);
-		}
+	public void method214(int arg0, String arg1, int arg3, int arg4) {
+		this.method217(arg4, arg3 - this.method216(arg1) / 2, arg0, arg1);
 	}
 
 	@ObfuscatedName("lb.a(IILjava/lang/String;ZIZ)V")
-	public void method215(int arg0, int arg1, String arg2, boolean arg3, int arg4, boolean arg5) {
-		if (!arg3) {
-			this.field686 = !this.field686;
-		}
-		this.method219(arg5, arg2, arg4, (byte) 45, arg0, arg1 - this.method216(arg2, true) / 2);
+	public void method215(int arg0, int arg1, String arg2, int arg4, boolean arg5) {
+		this.method219(arg5, arg2, arg4, arg0, arg1 - this.method216(arg2) / 2);
 	}
 
 	@ObfuscatedName("lb.a(Ljava/lang/String;Z)I")
-	public int method216(String arg0, boolean arg1) {
+	public int method216(String arg0) {
 		if (arg0 == null) {
 			return 0;
 		}
@@ -147,18 +121,11 @@ public class PixFont extends Pix2D {
 				var3 += this.field693[arg0.charAt(var4)];
 			}
 		}
-		if (arg1) {
-			return var3;
-		} else {
-			return this.field683;
-		}
+		return var3;
 	}
 
 	@ObfuscatedName("lb.a(IIIILjava/lang/String;)V")
-	public void method217(int arg0, int arg1, int arg2, int arg3, String arg4) {
-		if (arg3 < 3 || arg3 > 3) {
-			this.field683 = -464;
-		}
+	public void method217(int arg0, int arg1, int arg2, String arg4) {
 		if (arg4 == null) {
 			return;
 		}
@@ -173,16 +140,12 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(IIBILjava/lang/String;I)V")
-	public void method218(int arg0, int arg1, byte arg2, int arg3, String arg4, int arg5) {
+	public void method218(int arg0, int arg1, int arg3, String arg4, int arg5) {
 		if (arg4 == null) {
 			return;
 		}
-		int var7 = arg3 - this.method216(arg4, true) / 2;
+		int var7 = arg3 - this.method216(arg4) / 2;
 		int var8 = arg5 - this.field694;
-		if (arg2 != -94) {
-			for (int var9 = 1; var9 > 0; var9++) {
-			}
-		}
 		for (int var10 = 0; var10 < arg4.length(); var10++) {
 			int var11 = field697[arg4.charAt(var10)];
 			if (var11 != 94) {
@@ -193,19 +156,16 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(ZLjava/lang/String;IBII)V")
-	public void method219(boolean arg0, String arg1, int arg2, byte arg3, int arg4, int arg5) {
+	public void method219(boolean arg0, String arg1, int arg2, int arg4, int arg5) {
 		this.field696 = false;
 		int var7 = arg5;
 		if (arg1 == null) {
 			return;
 		}
 		int var8 = arg2 - this.field694;
-		if (arg3 != 45) {
-			this.field684 = !this.field684;
-		}
 		for (int var9 = 0; var9 < arg1.length(); var9++) {
 			if (arg1.charAt(var9) == '@' && var9 + 4 < arg1.length() && arg1.charAt(var9 + 4) == '@') {
-				int var10 = this.method221((byte) 91, arg1.substring(var9 + 1, var9 + 4));
+				int var10 = this.method221(arg1.substring(var9 + 1, var9 + 4));
 				if (var10 != -1) {
 					arg4 = var10;
 				}
@@ -222,24 +182,21 @@ public class PixFont extends Pix2D {
 			}
 		}
 		if (this.field696) {
-			Pix2D.method173(var7, var8 + (int) ((double) this.field694 * 0.7D), 4, 8388608, arg5 - var7);
+			Pix2D.method173(var7, var8 + (int) ((double) this.field694 * 0.7D), 8388608, arg5 - var7);
 		}
 	}
 
 	@ObfuscatedName("lb.a(ILjava/lang/String;IIZII)V")
-	public void method220(int arg0, String arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6) {
+	public void method220(int arg0, String arg1, int arg3, boolean arg4, int arg5, int arg6) {
 		if (arg1 == null) {
 			return;
 		}
 		this.field695.setSeed((long) arg5);
 		int var8 = (this.field695.nextInt() & 0x1F) + 192;
 		int var9 = arg0 - this.field694;
-		if (arg2 != 21042) {
-			return;
-		}
 		for (int var10 = 0; var10 < arg1.length(); var10++) {
 			if (arg1.charAt(var10) == '@' && var10 + 4 < arg1.length() && arg1.charAt(var10 + 4) == '@') {
-				int var11 = this.method221((byte) 91, arg1.substring(var10 + 1, var10 + 4));
+				int var11 = this.method221(arg1.substring(var10 + 1, var10 + 4));
 				if (var11 != -1) {
 					arg3 = var11;
 				}
@@ -248,9 +205,9 @@ public class PixFont extends Pix2D {
 				int var12 = field697[arg1.charAt(var10)];
 				if (var12 != 94) {
 					if (arg4) {
-						this.method224(this.field689[var12], var9 + this.field691[var12] + 1, 0, 192, this.field688[var12], this.field687[var12], 4, arg6 + this.field690[var12] + 1);
+						this.method224(this.field689[var12], var9 + this.field691[var12] + 1, 0, 192, this.field688[var12], this.field687[var12], arg6 + this.field690[var12] + 1);
 					}
-					this.method224(this.field689[var12], var9 + this.field691[var12], arg3, var8, this.field688[var12], this.field687[var12], 4, arg6 + this.field690[var12]);
+					this.method224(this.field689[var12], var9 + this.field691[var12], arg3, var8, this.field688[var12], this.field687[var12], arg6 + this.field690[var12]);
 				}
 				arg6 += this.field692[var12];
 				if ((this.field695.nextInt() & 0x3) == 0) {
@@ -261,10 +218,8 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(BLjava/lang/String;)I")
-	public int method221(byte arg0, String arg1) {
-		if (arg0 != 91) {
-			return 0;
-		} else if (arg1.equals("red")) {
+	public int method221(String arg1) {
+		if (arg1.equals("red")) {
 			return 16711680;
 		} else if (arg1.equals("gre")) {
 			return 65280;
@@ -382,10 +337,7 @@ public class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("lb.a(IIIII[BII)V")
-	public void method224(int arg0, int arg1, int arg2, int arg3, int arg4, byte[] arg5, int arg6, int arg7) {
-		if (arg6 < 4 || arg6 > 4) {
-			this.field686 = !this.field686;
-		}
+	public void method224(int arg0, int arg1, int arg2, int arg3, int arg4, byte[] arg5, int arg7) {
 		int var9 = arg7 + arg1 * Pix2D.field624;
 		int var10 = Pix2D.field624 - arg4;
 		int var11 = 0;
@@ -416,17 +368,14 @@ public class PixFont extends Pix2D {
 			var10 += var15;
 		}
 		if (arg4 > 0 && arg0 > 0) {
-			this.method225(arg2, Pix2D.field623, arg4, arg3, 32727, var11, arg5, var12, var10, arg0, var9);
+			this.method225(arg2, Pix2D.field623, arg4, arg3, var11, arg5, var12, var10, arg0, var9);
 		}
 	}
 
 	@ObfuscatedName("lb.a(I[IIIII[BIIII)V")
-	public void method225(int arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, byte[] arg6, int arg7, int arg8, int arg9, int arg10) {
+	public void method225(int arg0, int[] arg1, int arg2, int arg3, int arg5, byte[] arg6, int arg7, int arg8, int arg9, int arg10) {
 		int var12 = ((arg0 & 0xFF00FF) * arg3 & 0xFF00FF00) + ((arg0 & 0xFF00) * arg3 & 0xFF0000) >> 8;
 		int var13 = 256 - arg3;
-		if (arg4 != 32727) {
-			return;
-		}
 		for (int var14 = -arg9; var14 < 0; var14++) {
 			for (int var15 = -arg2; var15 < 0; var15++) {
 				if (arg6[arg7++] == 0) {

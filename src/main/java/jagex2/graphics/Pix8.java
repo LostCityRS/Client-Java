@@ -7,9 +7,6 @@ import jagex2.io.Packet;
 @ObfuscatedName("kb")
 public class Pix8 extends Pix2D {
 
-	@ObfuscatedName("kb.z")
-	public boolean field673 = false;
-
 	@ObfuscatedName("kb.G")
 	public int field680;
 
@@ -35,8 +32,8 @@ public class Pix8 extends Pix2D {
 	public byte[] field674;
 
 	public Pix8(JagFile arg0, String arg1, int arg2) {
-		Packet var4 = new Packet(arg0.method309(arg1 + ".dat", null), (byte) 3);
-		Packet var5 = new Packet(arg0.method309("index.dat", null), (byte) 3);
+		Packet var4 = new Packet(arg0.method309(arg1 + ".dat", null));
+		Packet var5 = new Packet(arg0.method309("index.dat", null));
 		var5.field711 = var4.method241();
 		this.field680 = var5.method241();
 		this.field681 = var5.method241();
@@ -71,7 +68,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("kb.a(Z)V")
-	public void method207(boolean arg0) {
+	public void method207() {
 		this.field680 /= 2;
 		this.field681 /= 2;
 		byte[] var2 = new byte[this.field680 * this.field681];
@@ -85,14 +82,11 @@ public class Pix8 extends Pix2D {
 		this.field676 = this.field680;
 		this.field677 = this.field681;
 		this.field678 = 0;
-		if (!arg0) {
-			this.field673 = !this.field673;
-		}
 		this.field679 = 0;
 	}
 
 	@ObfuscatedName("kb.a(B)V")
-	public void method208(byte arg0) {
+	public void method208() {
 		if (this.field676 == this.field680 && this.field677 == this.field681) {
 			return;
 		}
@@ -103,9 +97,6 @@ public class Pix8 extends Pix2D {
 				var2[var5 + this.field678 + (var4 + this.field679) * this.field680] = this.field674[var3++];
 			}
 		}
-		if (arg0 != -86) {
-			this.field673 = !this.field673;
-		}
 		this.field674 = var2;
 		this.field676 = this.field680;
 		this.field677 = this.field681;
@@ -114,7 +105,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("kb.b(B)V")
-	public void method209(byte arg0) {
+	public void method209() {
 		byte[] var2 = new byte[this.field676 * this.field677];
 		int var3 = 0;
 		for (int var4 = 0; var4 < this.field677; var4++) {
@@ -123,19 +114,11 @@ public class Pix8 extends Pix2D {
 			}
 		}
 		this.field674 = var2;
-		if (arg0 != 15) {
-			for (int var6 = 1; var6 > 0; var6++) {
-			}
-		}
 		this.field678 = this.field680 - this.field676 - this.field678;
 	}
 
 	@ObfuscatedName("kb.b(Z)V")
-	public void method210(boolean arg0) {
-		if (arg0) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public void method210() {
 		byte[] var3 = new byte[this.field676 * this.field677];
 		int var4 = 0;
 		for (int var5 = this.field677 - 1; var5 >= 0; var5--) {
@@ -148,7 +131,7 @@ public class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("kb.a(IIII)V")
-	public void method211(int arg0, int arg1, int arg2, int arg3) {
+	public void method211(int arg1, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.field675.length; var5++) {
 			int var6 = this.field675[var5] >> 16 & 0xFF;
 			int var7 = var6 + arg2;
@@ -173,13 +156,10 @@ public class Pix8 extends Pix2D {
 			}
 			this.field675[var5] = (var7 << 16) + (var9 << 8) + var11;
 		}
-		if (arg0 < 0 || arg0 > 0) {
-			;
-		}
 	}
 
 	@ObfuscatedName("kb.a(III)V")
-	public void method212(int arg0, int arg1, int arg2) {
+	public void method212(int arg1, int arg2) {
 		int var4 = arg1 + this.field678;
 		int var5 = arg2 + this.field679;
 		int var6 = var4 + var5 * Pix2D.field624;
@@ -214,18 +194,12 @@ public class Pix8 extends Pix2D {
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			this.method213(this.field674, -107, Pix2D.field623, var7, var11, this.field675, var8, var9, var10, var6);
-			if (arg0 < 1 || arg0 > 1) {
-				;
-			}
+			this.method213(this.field674, Pix2D.field623, var7, var11, this.field675, var8, var9, var10, var6);
 		}
 	}
 
 	@ObfuscatedName("kb.a([BI[III[IIIII)V")
-	public void method213(byte[] arg0, int arg1, int[] arg2, int arg3, int arg4, int[] arg5, int arg6, int arg7, int arg8, int arg9) {
-		if (arg1 >= 0) {
-			return;
-		}
+	public void method213(byte[] arg0, int[] arg2, int arg3, int arg4, int[] arg5, int arg6, int arg7, int arg8, int arg9) {
 		int var11 = -(arg7 >> 2);
 		int var12 = -(arg7 & 0x3);
 		for (int var13 = -arg6; var13 < 0; var13++) {

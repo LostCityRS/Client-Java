@@ -17,24 +17,6 @@ import java.util.zip.GZIPInputStream;
 @ObfuscatedName("vb")
 public class OnDemand extends OnDemandProvider implements Runnable {
 
-	@ObfuscatedName("vb.a")
-	public boolean field804 = false;
-
-	@ObfuscatedName("vb.b")
-	public boolean field805 = false;
-
-	@ObfuscatedName("vb.c")
-	public int field806 = -102;
-
-	@ObfuscatedName("vb.d")
-	public int field807 = -62;
-
-	@ObfuscatedName("vb.e")
-	public int field808 = 810;
-
-	@ObfuscatedName("vb.f")
-	public boolean field809 = true;
-
 	@ObfuscatedName("vb.g")
 	public int[][] field810 = new int[4][];
 
@@ -87,22 +69,22 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	public int field826;
 
 	@ObfuscatedName("vb.x")
-	public DoublyLinkList field827 = new DoublyLinkList(0);
+	public DoublyLinkList field827 = new DoublyLinkList();
 
 	@ObfuscatedName("vb.y")
-	public LinkList field828 = new LinkList(false);
+	public LinkList field828 = new LinkList();
 
 	@ObfuscatedName("vb.z")
-	public LinkList field829 = new LinkList(false);
+	public LinkList field829 = new LinkList();
 
 	@ObfuscatedName("vb.A")
-	public LinkList field830 = new LinkList(false);
+	public LinkList field830 = new LinkList();
 
 	@ObfuscatedName("vb.B")
-	public LinkList field831 = new LinkList(false);
+	public LinkList field831 = new LinkList();
 
 	@ObfuscatedName("vb.C")
-	public LinkList field832 = new LinkList(false);
+	public LinkList field832 = new LinkList();
 
 	@ObfuscatedName("vb.D")
 	public String field833 = "";
@@ -155,7 +137,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		for (int var4 = 0; var4 < 4; var4++) {
 			byte[] var5 = arg0.method309(var3[var4], null);
 			int var6 = var5.length / 2;
-			Packet var7 = new Packet(var5, (byte) 3);
+			Packet var7 = new Packet(var5);
 			this.field810[var4] = new int[var6];
 			this.field812[var4] = new byte[var6];
 			for (int var8 = 0; var8 < var6; var8++) {
@@ -166,7 +148,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		for (int var10 = 0; var10 < 4; var10++) {
 			byte[] var11 = arg0.method309(var9[var10], null);
 			int var12 = var11.length / 4;
-			Packet var13 = new Packet(var11, (byte) 3);
+			Packet var13 = new Packet(var11);
 			this.field811[var10] = new int[var12];
 			for (int var14 = 0; var14 < var12; var14++) {
 				this.field811[var10][var14] = var13.method244();
@@ -183,7 +165,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			}
 		}
 		byte[] var18 = arg0.method309("map_index", null);
-		Packet var19 = new Packet(var18, (byte) 3);
+		Packet var19 = new Packet(var18);
 		int var20 = var18.length / 7;
 		this.field815 = new int[var20];
 		this.field816 = new int[var20];
@@ -196,14 +178,14 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			this.field818[var21] = var19.method239();
 		}
 		byte[] var22 = arg0.method309("anim_index", null);
-		Packet var23 = new Packet(var22, (byte) 3);
+		Packet var23 = new Packet(var22);
 		int var24 = var22.length / 2;
 		this.field819 = new int[var24];
 		for (int var25 = 0; var25 < var24; var25++) {
 			this.field819[var25] = var23.method241();
 		}
 		byte[] var26 = arg0.method309("midi_index", null);
-		Packet var27 = new Packet(var26, (byte) 3);
+		Packet var27 = new Packet(var26);
 		int var28 = var26.length;
 		this.field820 = new int[var28];
 		for (int var29 = 0; var29 < var28; var29++) {
@@ -220,10 +202,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(IB)I")
-	public final int method282(int arg0, byte arg1) {
-		if (arg1 != -1) {
-			this.field809 = !this.field809;
-		}
+	public final int method282(int arg0) {
 		return this.field810[arg0].length;
 	}
 
@@ -233,7 +212,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(IIII)I")
-	public final int method284(int arg0, int arg1, int arg2, int arg3) {
+	public final int method284(int arg0, int arg1, int arg2) {
 		int var5 = (arg0 << 8) + arg1;
 		for (int var6 = 0; var6 < this.field815.length; var6++) {
 			if (this.field815[var6] == var5) {
@@ -243,51 +222,37 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				return this.field817[var6];
 			}
 		}
-		return arg3 < 0 ? -1 : 2;
+		return -1;
 	}
 
 	@ObfuscatedName("vb.a(IZ)V")
-	public final void method285(int arg0, boolean arg1) {
+	public final void method285(boolean arg1) {
 		int var3 = this.field815.length;
 		for (int var4 = 0; var4 < var3; var4++) {
 			if (arg1 || this.field818[var4] != 0) {
-				this.method292(810, 3, (byte) 2, this.field817[var4]);
-				this.method292(810, 3, (byte) 2, this.field816[var4]);
+				this.method292(3, (byte) 2, this.field817[var4]);
+				this.method292(3, (byte) 2, this.field816[var4]);
 			}
-		}
-		if (arg0 != 41461) {
-			this.field809 = !this.field809;
 		}
 	}
 
 	@ObfuscatedName("vb.b(IB)Z")
-	public final boolean method286(int arg0, byte arg1) {
+	public final boolean method286(int arg0) {
 		for (int var3 = 0; var3 < this.field815.length; var3++) {
 			if (this.field817[var3] == arg0) {
 				return true;
 			}
 		}
-		if (arg1 == 1) {
-			boolean var4 = false;
-		} else {
-			this.field805 = !this.field805;
-		}
 		return false;
 	}
 
 	@ObfuscatedName("vb.a(BI)I")
-	public final int method287(byte arg0, int arg1) {
-		if (arg0 != 5) {
-			this.field807 = -465;
-		}
+	public final int method287(int arg1) {
 		return this.field814[arg1] & 0xFF;
 	}
 
 	@ObfuscatedName("vb.b(IZ)Z")
-	public final boolean method288(int arg0, boolean arg1) {
-		if (arg1) {
-			throw new NullPointerException();
-		}
+	public final boolean method288(int arg0) {
 		return this.field820[arg0] == 1;
 	}
 
@@ -303,7 +268,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		}
 		DoublyLinkList var3 = this.field827;
 		synchronized (this.field827) {
-			for (OnDemandRequest var4 = (OnDemandRequest) this.field827.method265(); var4 != null; var4 = (OnDemandRequest) this.field827.method266(6)) {
+			for (OnDemandRequest var4 = (OnDemandRequest) this.field827.method265(); var4 != null; var4 = (OnDemandRequest) this.field827.method266()) {
 				if (var4.field724 == arg0 && var4.field725 == arg1) {
 					return;
 				}
@@ -369,15 +334,12 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(IIBI)V")
-	public final void method292(int arg0, int arg1, byte arg2, int arg3) {
+	public final void method292(int arg1, byte arg2, int arg3) {
 		if (this.field822.field1232[0] == null || this.field810[arg1][arg3] == 0) {
 			return;
 		}
-		byte[] var5 = this.field822.field1232[arg1 + 1].method301(9, arg3);
-		if (arg0 <= 0) {
-			this.field808 = 195;
-		}
-		if (this.method299(var5, this.field810[arg1][arg3], false, this.field811[arg1][arg3])) {
+		byte[] var5 = this.field822.field1232[arg1 + 1].method301(arg3);
+		if (this.method299(var5, this.field810[arg1][arg3], this.field811[arg1][arg3])) {
 			return;
 		}
 		this.field812[arg1][arg3] = arg2;
@@ -388,10 +350,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.b(I)V")
-	public final void method293(int arg0) {
-		if (arg0 != 0) {
-			this.field805 = !this.field805;
-		}
+	public final void method293() {
 		LinkList var2 = this.field832;
 		synchronized (this.field832) {
 			this.field832.method262();
@@ -399,14 +358,11 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(III)V")
-	public final void method294(int arg0, int arg1, int arg2) {
+	public final void method294(int arg0, int arg1) {
 		if (this.field822.field1232[0] == null || (this.field810[arg0][arg1] == 0 || (this.field812[arg0][arg1] == 0 || this.field813 == 0))) {
 			return;
 		}
 		OnDemandRequest var4 = new OnDemandRequest();
-		if (arg2 != 0) {
-			this.field809 = !this.field809;
-		}
 		var4.field724 = arg0;
 		var4.field725 = arg1;
 		var4.field728 = false;
@@ -432,33 +388,33 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				for (int var2 = 0; var2 < 100 && this.field824; var2++) {
 					this.field824 = false;
 					this.method295(2);
-					this.method296(908);
+					this.method296();
 					if (this.field825 == 0 && var2 >= 5) {
 						break;
 					}
-					this.method297(this.field809);
+					this.method297();
 					if (this.field837 != null) {
-						this.method298(0);
+						this.method298();
 					}
 				}
 				boolean var3 = false;
-				for (OnDemandRequest var4 = (OnDemandRequest) this.field830.method258(); var4 != null; var4 = (OnDemandRequest) this.field830.method260(6)) {
+				for (OnDemandRequest var4 = (OnDemandRequest) this.field830.method258(); var4 != null; var4 = (OnDemandRequest) this.field830.method260()) {
 					if (var4.field728) {
 						var3 = true;
 						var4.field727++;
 						if (var4.field727 > 50) {
 							var4.field727 = 0;
-							this.method300(var4, 6);
+							this.method300(var4);
 						}
 					}
 				}
 				if (!var3) {
-					for (OnDemandRequest var5 = (OnDemandRequest) this.field830.method258(); var5 != null; var5 = (OnDemandRequest) this.field830.method260(6)) {
+					for (OnDemandRequest var5 = (OnDemandRequest) this.field830.method258(); var5 != null; var5 = (OnDemandRequest) this.field830.method260()) {
 						var3 = true;
 						var5.field727++;
 						if (var5.field727 > 50) {
 							var5.field727 = 0;
-							this.method300(var5, 6);
+							this.method300(var5);
 						}
 					}
 				}
@@ -513,9 +469,9 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			this.field824 = true;
 			byte[] var4 = null;
 			if (this.field822.field1232[0] != null) {
-				var4 = this.field822.field1232[var3.field724 + 1].method301(9, var3.field725);
+				var4 = this.field822.field1232[var3.field724 + 1].method301(var3.field725);
 			}
-			if (!this.method299(var4, this.field810[var3.field724][var3.field725], false, this.field811[var3.field724][var3.field725])) {
+			if (!this.method299(var4, this.field810[var3.field724][var3.field725], this.field811[var3.field724][var3.field725])) {
 				var4 = null;
 			}
 			LinkList var5 = this.field828;
@@ -535,14 +491,10 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.d(I)V")
-	public final void method296(int arg0) {
-		if (arg0 <= 0) {
-			for (int var2 = 1; var2 > 0; var2++) {
-			}
-		}
+	public final void method296() {
 		this.field825 = 0;
 		this.field826 = 0;
-		for (OnDemandRequest var3 = (OnDemandRequest) this.field830.method258(); var3 != null; var3 = (OnDemandRequest) this.field830.method260(6)) {
+		for (OnDemandRequest var3 = (OnDemandRequest) this.field830.method258(); var3 != null; var3 = (OnDemandRequest) this.field830.method260()) {
 			if (var3.field728) {
 				this.field825++;
 			} else {
@@ -560,16 +512,13 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			this.field812[var4.field724][var4.field725] = 0;
 			this.field830.method255(var4);
 			this.field825++;
-			this.method300(var4, 6);
+			this.method300(var4);
 			this.field824 = true;
 		}
 	}
 
 	@ObfuscatedName("vb.b(Z)V")
-	public final void method297(boolean arg0) {
-		if (!arg0) {
-			return;
-		}
+	public final void method297() {
 		while (this.field825 == 0) {
 			if (this.field826 >= 10 || this.field813 == 0) {
 				return;
@@ -583,7 +532,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				if (this.field812[var3.field724][var3.field725] != 0) {
 					this.field812[var3.field724][var3.field725] = 0;
 					this.field830.method255(var3);
-					this.method300(var3, 6);
+					this.method300(var3);
 					this.field824 = true;
 					if (this.field834 < this.field835) {
 						this.field834++;
@@ -610,7 +559,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 						var9.field725 = var8;
 						var9.field728 = false;
 						this.field830.method255(var9);
-						this.method300(var9, 6);
+						this.method300(var9);
 						this.field824 = true;
 						if (this.field834 < this.field835) {
 							this.field834++;
@@ -628,10 +577,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.e(I)V")
-	public final void method298(int arg0) {
-		if (arg0 != 0) {
-			this.field806 = -307;
-		}
+	public final void method298() {
 		try {
 			int var2 = this.field837.available();
 			if (this.field841 == 0 && var2 >= 6) {
@@ -643,7 +589,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				int var6 = ((this.field842[3] & 0xFF) << 8) + (this.field842[4] & 0xFF);
 				int var7 = this.field842[5] & 0xFF;
 				this.field839 = null;
-				for (OnDemandRequest var8 = (OnDemandRequest) this.field830.method258(); var8 != null; var8 = (OnDemandRequest) this.field830.method260(6)) {
+				for (OnDemandRequest var8 = (OnDemandRequest) this.field830.method258(); var8 != null; var8 = (OnDemandRequest) this.field830.method260()) {
 					if (var8.field724 == var4 && var8.field725 == var5) {
 						this.field839 = var8;
 					}
@@ -692,7 +638,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				}
 				if (this.field841 + this.field840 >= var10.length && this.field839 != null) {
 					if (this.field822.field1232[0] != null) {
-						this.field822.field1232[this.field839.field724 + 1].method302(var10.length, this.field839.field725, var10, this.field804);
+						this.field822.field1232[this.field839.field724 + 1].method302(var10.length, this.field839.field725, var10);
 					}
 					if (!this.field839.field728 && this.field839.field724 == 3) {
 						this.field839.field728 = true;
@@ -722,7 +668,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a([BIZI)Z")
-	public final boolean method299(byte[] arg0, int arg1, boolean arg2, int arg3) {
+	public final boolean method299(byte[] arg0, int arg1, int arg3) {
 		if (arg0 == null || arg0.length < 2) {
 			return false;
 		}
@@ -730,9 +676,6 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		int var6 = ((arg0[var5] & 0xFF) << 8) + (arg0[var5 + 1] & 0xFF);
 		this.field823.reset();
 		this.field823.update(arg0, 0, var5);
-		if (arg2) {
-			this.field805 = !this.field805;
-		}
 		int var7 = (int) this.field823.getValue();
 		if (var6 == arg1) {
 			return var7 == arg3;
@@ -742,10 +685,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	}
 
 	@ObfuscatedName("vb.a(Lnb;I)V")
-	public final void method300(OnDemandRequest arg0, int arg1) {
-		if (arg1 != 6) {
-			return;
-		}
+	public final void method300(OnDemandRequest arg0) {
 		try {
 			if (this.field836 == null) {
 				long var3 = System.currentTimeMillis();

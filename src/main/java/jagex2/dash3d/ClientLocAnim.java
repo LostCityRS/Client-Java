@@ -38,7 +38,7 @@ public class ClientLocAnim extends ModelSource {
 	@ObfuscatedName("cb.v")
 	public int field500;
 
-	public ClientLocAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, boolean arg7, int arg8, int arg9) {
+	public ClientLocAnim(int arg0, int arg1, int arg2, int arg3, int arg5, int arg6, boolean arg7, int arg8, int arg9) {
 		this.field491 = arg3;
 		this.field492 = arg0;
 		this.field493 = arg1;
@@ -48,18 +48,15 @@ public class ClientLocAnim extends ModelSource {
 		this.field497 = arg6;
 		this.field498 = SeqType.field1112[arg8];
 		this.field499 = 0;
-		if (arg4 != 10550) {
-			throw new NullPointerException();
-		}
 		this.field500 = Client.field1591;
 		if (arg7 && this.field498.field1117 != -1) {
 			this.field499 = (int) (Math.random() * (double) this.field498.field1113);
-			this.field500 -= (int) (Math.random() * (double) this.field498.method384((byte) -103, this.field499));
+			this.field500 -= (int) (Math.random() * (double) this.field498.method384(this.field499));
 		}
 	}
 
 	@ObfuscatedName("cb.a(I)Lfb;")
-	public final Model method123(int arg0) {
+	public final Model method123() {
 		if (this.field498 != null) {
 			int var2 = Client.field1591 - this.field500;
 			if (var2 > 100 && this.field498.field1117 > 0) {
@@ -68,10 +65,10 @@ public class ClientLocAnim extends ModelSource {
 			label37: {
 				do {
 					do {
-						if (var2 <= this.field498.method384((byte) -103, this.field499)) {
+						if (var2 <= this.field498.method384(this.field499)) {
 							break label37;
 						}
-						var2 -= this.field498.method384((byte) -103, this.field499);
+						var2 -= this.field498.method384(this.field499);
 						this.field499++;
 					} while (this.field499 < this.field498.field1113);
 					this.field499 -= this.field498.field1117;
@@ -86,9 +83,6 @@ public class ClientLocAnim extends ModelSource {
 		}
 		LocType var4 = LocType.method334(this.field491);
 		Model var5 = var4.method340(this.field492, this.field493, this.field494, this.field495, this.field496, this.field497, var3);
-		if (arg0 != 45160) {
-			throw new NullPointerException();
-		}
 		return var5;
 	}
 }
