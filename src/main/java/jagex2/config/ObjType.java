@@ -1,11 +1,11 @@
 package jagex2.config;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.LruCache;
 import jagex2.dash3d.Model;
-import jagex2.graphics.Pix3D;
+import jagex2.datastruct.LruCache;
 import jagex2.graphics.Pix2D;
 import jagex2.graphics.Pix32;
+import jagex2.graphics.Pix3D;
 import jagex2.io.JagFile;
 import jagex2.io.Packet;
 

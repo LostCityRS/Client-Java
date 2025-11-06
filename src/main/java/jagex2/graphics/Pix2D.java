@@ -1,7 +1,7 @@
 package jagex2.graphics;
 
-import jagex2.datastruct.DoublyLinkable;
 import deob.ObfuscatedName;
+import jagex2.datastruct.DoublyLinkable;
 
 @ObfuscatedName("hb")
 public class Pix2D extends DoublyLinkable {

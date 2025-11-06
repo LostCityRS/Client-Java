@@ -1,6 +1,6 @@
 package jagex2.dash3d;
 
-import deob.*;
+import deob.ObfuscatedName;
 import jagex2.datastruct.LinkList;
 import jagex2.graphics.Pix2D;
 import jagex2.graphics.Pix3D;

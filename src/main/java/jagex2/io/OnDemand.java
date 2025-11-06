@@ -1,5 +1,11 @@
 package jagex2.io;
 
+import deob.ObfuscatedName;
+import jagex2.client.Client;
+import jagex2.datastruct.DoublyLinkList;
+import jagex2.datastruct.LinkList;
+import sign.signlink;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,12 +13,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.zip.CRC32;
 import java.util.zip.GZIPInputStream;
-
-import jagex2.datastruct.DoublyLinkList;
-import jagex2.datastruct.LinkList;
-import deob.ObfuscatedName;
-import jagex2.client.Client;
-import sign.signlink;
 
 @ObfuscatedName("vb")
 public class OnDemand extends OnDemandProvider implements Runnable {

@@ -1,8 +1,8 @@
 package jagex2.io;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.LinkList;
 import jagex2.datastruct.DoublyLinkable;
+import jagex2.datastruct.LinkList;
 import jagex2.datastruct.Linkable;
 
 import java.math.BigInteger;

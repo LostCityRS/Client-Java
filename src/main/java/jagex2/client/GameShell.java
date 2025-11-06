@@ -1,25 +1,13 @@
 package jagex2.client;
 
-import deob.*;
+import deob.ObfuscatedName;
 import jagex2.datastruct.Linkable;
 import jagex2.graphics.Pix32;
 import jagex2.graphics.PixMap;
 
 import java.applet.Applet;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.*;
+import java.awt.event.*;
 
 @ObfuscatedName("a")
 public class GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
@@ -137,14 +125,14 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	@ObfuscatedName("a.a(IIB)V")
 	public final void method1(int arg0, int arg1, byte arg2) {
-		if (arg2 != 7) {
-			return;
-		}
+		this.setPreferredSize(new Dimension(arg0, arg1));
+
 		this.field13 = arg0;
 		this.field14 = arg1;
 		this.field18 = new ViewBox(false, this.field14, this, this.field13);
 		this.field15 = this.method11(0).getGraphics();
 		this.field16 = new PixMap(true, this.method11(0), this.field13, this.field14);
+
 		this.method12(this, 1);
 	}
 
@@ -334,31 +322,51 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void mousePressed(MouseEvent arg0) {
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
-		if (this.field18 != null) {
-			var2 -= 4;
-			var3 -= 22;
-		}
+
 		this.field21 = 0;
 		this.field26 = var2;
 		this.field27 = var3;
 		this.field28 = System.currentTimeMillis();
-		if (arg0.isMetaDown()) {
-			this.field25 = 2;
-			this.field22 = 2;
-		} else {
-			this.field25 = 1;
-			this.field22 = 1;
-		}
-		if (InputTracking.field151) {
-			InputTracking.method49(var2, (byte) 9, var3, arg0.isMetaDown() ? 1 : 0);
+
+		try {
+			if (arg0.getButton() == MouseEvent.BUTTON3) {
+				this.field25 = 2;
+				this.field22 = 2;
+			} else {
+				this.field25 = 1;
+				this.field22 = 1;
+			}
+
+			if (InputTracking.field151) {
+				InputTracking.method49(var2, (byte) 9, var3, arg0.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
+			}
+		} catch (NoSuchMethodError ex) {
+			if (arg0.isMetaDown()) {
+				this.field25 = 2;
+				this.field22 = 2;
+			} else {
+				this.field25 = 1;
+				this.field22 = 1;
+			}
+
+			if (InputTracking.field151) {
+				InputTracking.method49(var2, (byte) 9, var3, arg0.isMetaDown() ? 1 : 0);
+			}
 		}
 	}
 
 	public final void mouseReleased(MouseEvent arg0) {
 		this.field21 = 0;
 		this.field22 = 0;
-		if (InputTracking.field151) {
-			InputTracking.method50(arg0.isMetaDown() ? 1 : 0, (byte) 2);
+
+		try {
+			if (InputTracking.field151) {
+				InputTracking.method50(arg0.getButton() == MouseEvent.BUTTON3 ? 1 : 0, (byte) 2);
+			}
+		} catch (NoSuchMethodError ex) {
+			if (InputTracking.field151) {
+				InputTracking.method50(arg0.isMetaDown() ? 1 : 0, (byte) 2);
+			}
 		}
 	}
 
@@ -383,10 +391,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void mouseDragged(MouseEvent arg0) {
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
-		if (this.field18 != null) {
-			var2 -= 4;
-			var3 -= 22;
-		}
 		this.field21 = 0;
 		this.field23 = var2;
 		this.field24 = var3;
@@ -398,10 +402,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public final void mouseMoved(MouseEvent arg0) {
 		int var2 = arg0.getX();
 		int var3 = arg0.getY();
-		if (this.field18 != null) {
-			var2 -= 4;
-			var3 -= 22;
-		}
 		this.field21 = 0;
 		this.field23 = var2;
 		this.field24 = var3;
@@ -601,10 +601,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	@ObfuscatedName("a.c(I)Ljava/awt/Component;")
 	public Component method11(int arg0) {
-		if (arg0 != 0) {
-			this.field1 = 353;
-		}
-		return this.field18 == null ? this : this.field18;
+		return this;
 	}
 
 	@ObfuscatedName("a.a(Ljava/lang/Runnable;I)V")

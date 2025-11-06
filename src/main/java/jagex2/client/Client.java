@@ -1,18 +1,8 @@
 package jagex2.client;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.URL;
-import java.util.zip.CRC32;
-
-import deob.*;
+import deob.ObfuscatedName;
 import jagex2.config.*;
+import jagex2.config.Component;
 import jagex2.dash3d.*;
 import jagex2.datastruct.JString;
 import jagex2.datastruct.LinkList;
@@ -23,6 +13,15 @@ import jagex2.sound.Wave;
 import jagex2.wordenc.WordFilter;
 import jagex2.wordenc.WordPack;
 import sign.signlink;
+
+import java.awt.*;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.URL;
+import java.util.zip.CRC32;
 
 @ObfuscatedName("client")
 public class Client extends GameShell {
@@ -6812,11 +6811,10 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.c(I)Ljava/awt/Component;")
 	public final java.awt.Component method11(int arg0) {
-		this.field1428 += arg0;
-		if (signlink.mainapp == null) {
-			return super.field18 == null ? this : super.field18;
-		} else {
+		if (signlink.mainapp != null) {
 			return signlink.mainapp;
+		} else {
+			return this;
 		}
 	}
 
@@ -9622,7 +9620,7 @@ public class Client extends GameShell {
 
 	public static final void main(String[] arg0) {
 		try {
-			System.out.println("RS2 user client - release #" + 254);
+			System.out.println("RS2 user client - release #" + signlink.clientversion);
 			if (arg0.length == 5) {
 				field1239 = Integer.parseInt(arg0[0]);
 				field1240 = Integer.parseInt(arg0[1]);

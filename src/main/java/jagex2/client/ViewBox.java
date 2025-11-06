@@ -1,9 +1,9 @@
 package jagex2.client;
 
 import deob.ObfuscatedName;
+import sign.signlink;
 
-import java.awt.Frame;
-import java.awt.Graphics;
+import java.awt.*;
 
 @ObfuscatedName("b")
 public class ViewBox extends Frame {
@@ -13,21 +13,17 @@ public class ViewBox extends Frame {
 
 	public ViewBox(boolean arg0, int arg1, GameShell arg2, int arg3) {
 		this.field38 = arg2;
-		this.setTitle("Jagex");
+		this.setTitle("RS2 user client - release #" + signlink.clientversion);
 		this.setResizable(false);
-		if (arg0) {
-			for (int var5 = 1; var5 > 0; var5++) {
-			}
-		}
-		this.show();
-		this.toFront();
-		this.resize(arg3 + 8, arg1 + 28);
-	}
 
-	public Graphics getGraphics() {
-		Graphics var1 = super.getGraphics();
-		var1.translate(4, 24);
-		return var1;
+		BorderLayout manager = new BorderLayout();
+		this.setLayout(manager);
+
+		this.add(this.field38, BorderLayout.CENTER);
+		this.pack();
+
+		this.setVisible(true);
+		this.toFront();
 	}
 
 	public final void update(Graphics arg0) {

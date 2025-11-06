@@ -1,9 +1,9 @@
 package jagex2.config;
 
 import deob.ObfuscatedName;
-import jagex2.datastruct.LruCache;
-import jagex2.dash3d.Model;
 import jagex2.dash3d.AnimFrame;
+import jagex2.dash3d.Model;
+import jagex2.datastruct.LruCache;
 import jagex2.io.JagFile;
 import jagex2.io.Packet;
 
