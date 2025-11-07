@@ -6,71 +6,71 @@ import deob.ObfuscatedName;
 public class LruCache {
 
 	@ObfuscatedName("t.d")
-	public int field362;
+	public int notFound;
 
 	@ObfuscatedName("t.e")
-	public int field363;
+	public int found;
 
 	@ObfuscatedName("t.f")
-	public DoublyLinkable field364 = new DoublyLinkable();
+	public DoublyLinkable search = new DoublyLinkable();
 
 	@ObfuscatedName("t.g")
-	public int field365;
+	public int capacity;
 
 	@ObfuscatedName("t.h")
-	public int field366;
+	public int available;
 
 	@ObfuscatedName("t.i")
-	public HashTable field367 = new HashTable(1024);
+	public HashTable table = new HashTable(1024);
 
 	@ObfuscatedName("t.j")
-	public DoublyLinkList field368 = new DoublyLinkList();
+	public DoublyLinkList history = new DoublyLinkList();
 
 	public LruCache(int arg1) {
-		this.field365 = arg1;
-		this.field366 = arg1;
+		this.capacity = arg1;
+		this.available = arg1;
 	}
 
 	@ObfuscatedName("t.a(J)Lx;")
-	public DoublyLinkable method115(long arg0) {
-		DoublyLinkable var3 = (DoublyLinkable) this.field367.method118(arg0);
+	public DoublyLinkable get(long arg0) {
+		DoublyLinkable var3 = (DoublyLinkable) this.table.get(arg0);
 		if (var3 == null) {
-			this.field362++;
+			this.notFound++;
 		} else {
-			this.field368.method263(var3);
-			this.field363++;
+			this.history.push(var3);
+			this.found++;
 		}
 		return var3;
 	}
 
 	@ObfuscatedName("t.a(Lx;ZJ)V")
-	public void method116(DoublyLinkable arg0, long arg2) {
-		if (this.field366 == 0) {
-			DoublyLinkable var5 = this.field368.method264();
-			var5.method120();
-			var5.method121();
-			if (var5 == this.field364) {
-				DoublyLinkable var6 = this.field368.method264();
-				var6.method120();
-				var6.method121();
+	public void put(DoublyLinkable arg0, long arg2) {
+		if (this.available == 0) {
+			DoublyLinkable var5 = this.history.pop();
+			var5.unlink();
+			var5.unlink2();
+			if (var5 == this.search) {
+				DoublyLinkable var6 = this.history.pop();
+				var6.unlink();
+				var6.unlink2();
 			}
 		} else {
-			this.field366--;
+			this.available--;
 		}
-		this.field367.method119(arg2, arg0);
-		this.field368.method263(arg0);
+		this.table.put(arg2, arg0);
+		this.history.push(arg0);
 	}
 
 	@ObfuscatedName("t.a()V")
-	public void method117() {
+	public void clear() {
 		while (true) {
-			DoublyLinkable var1 = this.field368.method264();
+			DoublyLinkable var1 = this.history.pop();
 			if (var1 == null) {
-				this.field366 = this.field365;
+				this.available = this.capacity;
 				return;
 			}
-			var1.method120();
-			var1.method121();
+			var1.unlink();
+			var1.unlink2();
 		}
 	}
 }

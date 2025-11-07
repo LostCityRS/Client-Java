@@ -29,11 +29,11 @@ public class WordFilter {
 	public static final String[] field1190 = new String[] { "cook", "cook's", "cooks", "seeks", "sheet", "woop", "woops", "faq" };
 
 	@ObfuscatedName("sc.a(Lyb;)V")
-	public static final void method393(JagFile arg0) {
-		Packet var1 = new Packet(arg0.method309("fragmentsenc.txt", null));
-		Packet var2 = new Packet(arg0.method309("badenc.txt", null));
-		Packet var3 = new Packet(arg0.method309("domainenc.txt", null));
-		Packet var4 = new Packet(arg0.method309("tldlist.txt", null));
+	public static final void unpack(JagFile arg0) {
+		Packet var1 = new Packet(arg0.read("fragmentsenc.txt", null));
+		Packet var2 = new Packet(arg0.read("badenc.txt", null));
+		Packet var3 = new Packet(arg0.read("domainenc.txt", null));
+		Packet var4 = new Packet(arg0.read("tldlist.txt", null));
 		method394(var1, var2, var3, var4);
 	}
 
@@ -47,14 +47,14 @@ public class WordFilter {
 
 	@ObfuscatedName("sc.a(Lmb;I)V")
 	public static final void method395(Packet arg0) {
-		int var2 = arg0.method244();
+		int var2 = arg0.g4();
 		field1188 = new char[var2][];
 		field1189 = new int[var2];
 		for (int var3 = 0; var3 < var2; var3++) {
-			field1189[var3] = arg0.method239();
-			char[] var4 = new char[arg0.method239()];
+			field1189[var3] = arg0.g1();
+			char[] var4 = new char[arg0.g1()];
 			for (int var5 = 0; var5 < var4.length; var5++) {
-				var4[var5] = (char) arg0.method239();
+				var4[var5] = (char) arg0.g1();
 			}
 			field1188[var3] = var4;
 		}
@@ -62,7 +62,7 @@ public class WordFilter {
 
 	@ObfuscatedName("sc.a(ILmb;)V")
 	public static final void method396(Packet arg1) {
-		int var2 = arg1.method244();
+		int var2 = arg1.g4();
 		field1185 = new char[var2][];
 		field1186 = new byte[var2][][];
 		method399(field1185, arg1, field1186);
@@ -70,31 +70,31 @@ public class WordFilter {
 
 	@ObfuscatedName("sc.b(Lmb;I)V")
 	public static final void method397(Packet arg0) {
-		int var3 = arg0.method244();
+		int var3 = arg0.g4();
 		field1187 = new char[var3][];
 		method400(arg0, field1187);
 	}
 
 	@ObfuscatedName("sc.a(Lmb;B)V")
 	public static final void method398(Packet arg0) {
-		field1184 = new int[arg0.method244()];
+		field1184 = new int[arg0.g4()];
 		for (int var3 = 0; var3 < field1184.length; var3++) {
-			field1184[var3] = arg0.method241();
+			field1184[var3] = arg0.g2();
 		}
 	}
 
 	@ObfuscatedName("sc.a([[CLmb;I[[[B)V")
 	public static final void method399(char[][] arg0, Packet arg1, byte[][][] arg3) {
 		for (int var4 = 0; var4 < arg0.length; var4++) {
-			char[] var5 = new char[arg1.method239()];
+			char[] var5 = new char[arg1.g1()];
 			for (int var6 = 0; var6 < var5.length; var6++) {
-				var5[var6] = (char) arg1.method239();
+				var5[var6] = (char) arg1.g1();
 			}
 			arg0[var4] = var5;
-			byte[][] var7 = new byte[arg1.method239()][2];
+			byte[][] var7 = new byte[arg1.g1()][2];
 			for (int var8 = 0; var8 < var7.length; var8++) {
-				var7[var8][0] = (byte) arg1.method239();
-				var7[var8][1] = (byte) arg1.method239();
+				var7[var8][0] = (byte) arg1.g1();
+				var7[var8][1] = (byte) arg1.g1();
 			}
 			if (var7.length > 0) {
 				arg3[var4] = var7;
@@ -105,9 +105,9 @@ public class WordFilter {
 	@ObfuscatedName("sc.a(Lmb;[[CI)V")
 	public static final void method400(Packet arg0, char[][] arg1) {
 		for (int var3 = 0; var3 < arg1.length; var3++) {
-			char[] var4 = new char[arg0.method239()];
+			char[] var4 = new char[arg0.g1()];
 			for (int var5 = 0; var5 < var4.length; var5++) {
-				var4[var5] = (char) arg0.method239();
+				var4[var5] = (char) arg0.g1();
 			}
 			arg1[var3] = var4;
 		}

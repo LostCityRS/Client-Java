@@ -7,14 +7,14 @@ import jagex2.config.ObjType;
 public class ClientObj extends ModelSource {
 
 	@ObfuscatedName("db.m")
-	public int field501;
+	public int id;
 
 	@ObfuscatedName("db.n")
-	public int field502;
+	public int count;
 
 	@ObfuscatedName("db.a(I)Lfb;")
-	public final Model method123() {
-		ObjType var2 = ObjType.method350(this.field501);
-		return var2.method354(this.field502);
+	public final Model getModel() {
+		ObjType var2 = ObjType.get(this.id);
+		return var2.getModel(this.count);
 	}
 }

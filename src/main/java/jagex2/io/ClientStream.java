@@ -12,84 +12,84 @@ import java.net.Socket;
 public class ClientStream implements Runnable {
 
 	@ObfuscatedName("e.d")
-	public InputStream field137;
+	public InputStream in;
 
 	@ObfuscatedName("e.e")
-	public OutputStream field138;
+	public OutputStream out;
 
 	@ObfuscatedName("e.f")
-	public Socket field139;
+	public Socket socket;
 
 	@ObfuscatedName("e.g")
-	public boolean field140 = false;
+	public boolean dummy = false;
 
 	@ObfuscatedName("e.h")
-	public GameShell field141;
+	public GameShell shell;
 
 	@ObfuscatedName("e.i")
-	public byte[] field142;
+	public byte[] data;
 
 	@ObfuscatedName("e.j")
-	public int field143;
+	public int tcycl;
 
 	@ObfuscatedName("e.k")
-	public int field144;
+	public int tnum;
 
 	@ObfuscatedName("e.l")
-	public boolean field145 = false;
+	public boolean writer = false;
 
 	@ObfuscatedName("e.m")
-	public boolean field146 = false;
+	public boolean ioerror = false;
 
 	public ClientStream(GameShell arg0, Socket arg1) throws IOException {
-		this.field141 = arg0;
-		this.field139 = arg1;
-		this.field139.setSoTimeout(30000);
-		this.field139.setTcpNoDelay(true);
-		this.field137 = this.field139.getInputStream();
-		this.field138 = this.field139.getOutputStream();
+		this.shell = arg0;
+		this.socket = arg1;
+		this.socket.setSoTimeout(30000);
+		this.socket.setTcpNoDelay(true);
+		this.in = this.socket.getInputStream();
+		this.out = this.socket.getOutputStream();
 	}
 
 	@ObfuscatedName("e.a()V")
-	public void method38() {
-		this.field140 = true;
+	public void close() {
+		this.dummy = true;
 		try {
-			if (this.field137 != null) {
-				this.field137.close();
+			if (this.in != null) {
+				this.in.close();
 			}
-			if (this.field138 != null) {
-				this.field138.close();
+			if (this.out != null) {
+				this.out.close();
 			}
-			if (this.field139 != null) {
-				this.field139.close();
+			if (this.socket != null) {
+				this.socket.close();
 			}
 		} catch (IOException var3) {
 			System.out.println("Error closing stream");
 		}
-		this.field145 = false;
+		this.writer = false;
 		synchronized (this) {
 			this.notify();
 		}
-		this.field142 = null;
+		this.data = null;
 	}
 
 	@ObfuscatedName("e.b()I")
-	public int method39() throws IOException {
-		return this.field140 ? 0 : this.field137.read();
+	public int read() throws IOException {
+		return this.dummy ? 0 : this.in.read();
 	}
 
 	@ObfuscatedName("e.c()I")
-	public int method40() throws IOException {
-		return this.field140 ? 0 : this.field137.available();
+	public int available() throws IOException {
+		return this.dummy ? 0 : this.in.available();
 	}
 
 	@ObfuscatedName("e.a([BII)V")
-	public void method41(byte[] arg0, int arg1, int arg2) throws IOException {
-		if (this.field140) {
+	public void read(byte[] arg0, int arg1, int arg2) throws IOException {
+		if (this.dummy) {
 			return;
 		}
 		while (arg2 > 0) {
-			int var4 = this.field137.read(arg0, arg1, arg2);
+			int var4 = this.in.read(arg0, arg1, arg2);
 			if (var4 <= 0) {
 				throw new IOException("EOF");
 			}
@@ -99,81 +99,81 @@ public class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("e.a([BIII)V")
-	public void method42(byte[] arg0, int arg1, int arg3) throws IOException {
-		if (this.field140) {
+	public void write(byte[] arg0, int arg1, int arg3) throws IOException {
+		if (this.dummy) {
 			return;
 		}
-		if (this.field146) {
-			this.field146 = false;
+		if (this.ioerror) {
+			this.ioerror = false;
 			throw new IOException("Error in writer thread");
 		}
-		if (this.field142 == null) {
-			this.field142 = new byte[5000];
+		if (this.data == null) {
+			this.data = new byte[5000];
 		}
 		synchronized (this) {
 			for (int var6 = 0; var6 < arg3; var6++) {
-				this.field142[this.field144] = arg0[var6 + arg1];
-				this.field144 = (this.field144 + 1) % 5000;
-				if (this.field144 == (this.field143 + 4900) % 5000) {
+				this.data[this.tnum] = arg0[var6 + arg1];
+				this.tnum = (this.tnum + 1) % 5000;
+				if (this.tnum == (this.tcycl + 4900) % 5000) {
 					throw new IOException("buffer overflow");
 				}
 			}
-			if (!this.field145) {
-				this.field145 = true;
-				this.field141.method12(this, 3);
+			if (!this.writer) {
+				this.writer = true;
+				this.shell.startThread(this, 3);
 			}
 			this.notify();
 		}
 	}
 
 	public void run() {
-		while (this.field145) {
+		while (this.writer) {
 			int var2;
 			int var3;
 			synchronized (this) {
-				if (this.field144 == this.field143) {
+				if (this.tnum == this.tcycl) {
 					try {
 						this.wait();
 					} catch (InterruptedException var6) {
 					}
 				}
-				if (!this.field145) {
+				if (!this.writer) {
 					return;
 				}
-				var2 = this.field143;
-				if (this.field144 >= this.field143) {
-					var3 = this.field144 - this.field143;
+				var2 = this.tcycl;
+				if (this.tnum >= this.tcycl) {
+					var3 = this.tnum - this.tcycl;
 				} else {
-					var3 = 5000 - this.field143;
+					var3 = 5000 - this.tcycl;
 				}
 			}
 			if (var3 > 0) {
 				try {
-					this.field138.write(this.field142, var2, var3);
+					this.out.write(this.data, var2, var3);
 				} catch (IOException var5) {
-					this.field146 = true;
+					this.ioerror = true;
 				}
-				this.field143 = (this.field143 + var3) % 5000;
+				this.tcycl = (this.tcycl + var3) % 5000;
 				try {
-					if (this.field144 == this.field143) {
-						this.field138.flush();
+					if (this.tnum == this.tcycl) {
+						this.out.flush();
 					}
 				} catch (IOException var4) {
-					this.field146 = true;
+					this.ioerror = true;
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("e.a(I)V")
-	public void method43() {
-		System.out.println("dummy:" + this.field140);
-		System.out.println("tcycl:" + this.field143);
-		System.out.println("tnum:" + this.field144);
-		System.out.println("writer:" + this.field145);
-		System.out.println("ioerror:" + this.field146);
+	public void debug() {
+		System.out.println("dummy:" + this.dummy);
+		System.out.println("tcycl:" + this.tcycl);
+		System.out.println("tnum:" + this.tnum);
+		System.out.println("writer:" + this.writer);
+		System.out.println("ioerror:" + this.ioerror);
 		try {
-			System.out.println("available:" + this.method40());
+			System.out.println("available:" + this.available());
 		} catch (IOException var2) {
 		}
 	}

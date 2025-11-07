@@ -6,35 +6,34 @@ import deob.ObfuscatedName;
 public class MouseTracking implements Runnable {
 
 	@ObfuscatedName("fc.b")
-	public Client field971;
+	public Client app;
 
 	@ObfuscatedName("fc.c")
-	public boolean field972 = true;
+	public boolean active = true;
 
 	@ObfuscatedName("fc.d")
-	public Object field973 = new Object();
+	public final Object lock = new Object();
 
 	@ObfuscatedName("fc.e")
-	public int field974;
+	public int length;
 
 	@ObfuscatedName("fc.f")
-	public int[] field975 = new int[500];
+	public int[] x = new int[500];
 
 	@ObfuscatedName("fc.g")
-	public int[] field976 = new int[500];
+	public int[] y = new int[500];
 
 	public MouseTracking(Client arg1) {
-		this.field971 = arg1;
+		this.app = arg1;
 	}
 
 	public void run() {
-		while (this.field972) {
-			Object var1 = this.field973;
-			synchronized (this.field973) {
-				if (this.field974 < 500) {
-					this.field975[this.field974] = this.field971.field23;
-					this.field976[this.field974] = this.field971.field24;
-					this.field974++;
+		while (this.active) {
+			synchronized (this.lock) {
+				if (this.length < 500) {
+					this.x[this.length] = this.app.mouseX;
+					this.y[this.length] = this.app.mouseY;
+					this.length++;
 				}
 			}
 			try {

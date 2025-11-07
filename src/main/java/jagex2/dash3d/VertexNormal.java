@@ -6,14 +6,14 @@ import deob.ObfuscatedName;
 public class VertexNormal {
 
 	@ObfuscatedName("o.a")
-	public int field255;
+	public int x;
 
 	@ObfuscatedName("o.b")
-	public int field256;
+	public int y;
 
 	@ObfuscatedName("o.c")
-	public int field257;
+	public int z;
 
 	@ObfuscatedName("o.d")
-	public int field258;
+	public int w;
 }

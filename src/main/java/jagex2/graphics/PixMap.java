@@ -9,64 +9,64 @@ import java.awt.image.*;
 public class PixMap implements ImageProducer, ImageObserver {
 
 	@ObfuscatedName("rb.a")
-	public int[] field749;
+	public int[] data;
 
 	@ObfuscatedName("rb.b")
-	public int field750;
+	public int width;
 
 	@ObfuscatedName("rb.c")
-	public int field751;
+	public int height;
 
 	@ObfuscatedName("rb.d")
-	public ColorModel field752;
+	public ColorModel model;
 
 	@ObfuscatedName("rb.e")
-	public ImageConsumer field753;
+	public ImageConsumer ic;
 
 	@ObfuscatedName("rb.f")
-	public Image field754;
+	public Image img;
 
 	public PixMap(Component arg1, int arg2, int arg3) {
-		this.field750 = arg2;
-		this.field751 = arg3;
-		this.field749 = new int[arg2 * arg3];
-		this.field752 = new DirectColorModel(32, 16711680, 65280, 255);
-		this.field754 = arg1.createImage(this);
-		this.method270();
-		arg1.prepareImage(this.field754, this);
-		this.method270();
-		arg1.prepareImage(this.field754, this);
-		this.method270();
-		arg1.prepareImage(this.field754, this);
-		this.method268();
+		this.width = arg2;
+		this.height = arg3;
+		this.data = new int[arg2 * arg3];
+		this.model = new DirectColorModel(32, 16711680, 65280, 255);
+		this.img = arg1.createImage(this);
+		this.setPixels();
+		arg1.prepareImage(this.img, this);
+		this.setPixels();
+		arg1.prepareImage(this.img, this);
+		this.setPixels();
+		arg1.prepareImage(this.img, this);
+		this.bind();
 	}
 
 	@ObfuscatedName("rb.a(B)V")
-	public void method268() {
-		Pix2D.method165(this.field751, this.field749, this.field750);
+	public void bind() {
+		Pix2D.bind(this.height, this.data, this.width);
 	}
 
 	@ObfuscatedName("rb.a(IILjava/awt/Graphics;Z)V")
-	public void method269(int arg0, int arg1, Graphics arg2) {
-		this.method270();
-		arg2.drawImage(this.field754, arg1, arg0, this);
+	public void draw(int arg0, int arg1, Graphics arg2) {
+		this.setPixels();
+		arg2.drawImage(this.img, arg1, arg0, this);
 	}
 
 	public synchronized void addConsumer(ImageConsumer arg0) {
-		this.field753 = arg0;
-		arg0.setDimensions(this.field750, this.field751);
+		this.ic = arg0;
+		arg0.setDimensions(this.width, this.height);
 		arg0.setProperties(null);
-		arg0.setColorModel(this.field752);
+		arg0.setColorModel(this.model);
 		arg0.setHints(14);
 	}
 
 	public synchronized boolean isConsumer(ImageConsumer arg0) {
-		return this.field753 == arg0;
+		return this.ic == arg0;
 	}
 
 	public synchronized void removeConsumer(ImageConsumer arg0) {
-		if (this.field753 == arg0) {
-			this.field753 = null;
+		if (this.ic == arg0) {
+			this.ic = null;
 		}
 	}
 
@@ -79,10 +79,10 @@ public class PixMap implements ImageProducer, ImageObserver {
 	}
 
 	@ObfuscatedName("rb.a()V")
-	public synchronized void method270() {
-		if (this.field753 != null) {
-			this.field753.setPixels(0, 0, this.field750, this.field751, this.field752, this.field749, 0, this.field750);
-			this.field753.imageComplete(2);
+	public synchronized void setPixels() {
+		if (this.ic != null) {
+			this.ic.setPixels(0, 0, this.width, this.height, this.model, this.data, 0, this.width);
+			this.ic.imageComplete(2);
 		}
 	}
 

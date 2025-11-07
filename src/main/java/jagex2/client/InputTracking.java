@@ -7,165 +7,165 @@ import jagex2.io.Packet;
 public class InputTracking {
 
 	@ObfuscatedName("f.e")
-	public static boolean field151;
+	public static boolean active;
 
 	@ObfuscatedName("f.f")
-	public static Packet field152 = null;
+	public static Packet old = null;
 
 	@ObfuscatedName("f.g")
-	public static Packet field153 = null;
+	public static Packet out = null;
 
 	@ObfuscatedName("f.h")
-	public static long field154;
+	public static long lastTime;
 
 	@ObfuscatedName("f.i")
-	public static int field155;
+	public static int trackedCount;
 
 	@ObfuscatedName("f.j")
-	public static long field156;
+	public static long lastMoveTime;
 
 	@ObfuscatedName("f.k")
-	public static int field157;
+	public static int lastX;
 
 	@ObfuscatedName("f.l")
-	public static int field158;
+	public static int lastY;
 
 	@ObfuscatedName("f.a(I)V")
-	public static final synchronized void method44() {
-		field152 = Packet.method226(1);
-		field153 = null;
-		field154 = System.currentTimeMillis();
-		field151 = true;
+	public static synchronized void activate() {
+		old = Packet.alloc(1);
+		out = null;
+		lastTime = System.currentTimeMillis();
+		active = true;
 	}
 
 	@ObfuscatedName("f.b(I)V")
-	public static final synchronized void method45() {
-		field151 = false;
-		field152 = null;
-		field153 = null;
+	public static synchronized void deactivate() {
+		active = false;
+		old = null;
+		out = null;
 	}
 
 	@ObfuscatedName("f.c(I)Lmb;")
-	public static final synchronized Packet method46() {
+	public static synchronized Packet flush() {
 		Packet var1 = null;
-		if (field153 != null && field151) {
-			var1 = field153;
+		if (out != null && active) {
+			var1 = out;
 		}
-		field153 = null;
+		out = null;
 		return var1;
 	}
 
 	@ObfuscatedName("f.a(Z)Lmb;")
-	public static final synchronized Packet method47() {
+	public static synchronized Packet stop() {
 		Packet var1 = null;
-		if (field152 != null && field152.field711 > 0 && field151) {
-			var1 = field152;
+		if (old != null && old.pos > 0 && active) {
+			var1 = old;
 		}
-		method45();
+		deactivate();
 		return var1;
 	}
 
 	@ObfuscatedName("f.a(II)V")
-	public static final synchronized void method48(int arg1) {
-		if (field152.field711 + arg1 >= 500) {
-			Packet var2 = field152;
-			field152 = Packet.method226(1);
-			field153 = var2;
+	public static synchronized void ensureCapacity(int arg1) {
+		if (old.pos + arg1 >= 500) {
+			Packet var2 = old;
+			old = Packet.alloc(1);
+			out = var2;
 		}
 	}
 
 	@ObfuscatedName("f.a(IBII)V")
-	public static final synchronized void method49(int arg0, int arg2, int arg3) {
-		if (!field151 || (arg0 < 0 || arg0 >= 789 || arg2 < 0 || arg2 >= 532)) {
+	public static synchronized void mousePressed(int arg0, int arg2, int arg3) {
+		if (!active || (arg0 < 0 || arg0 >= 789 || arg2 < 0 || arg2 >= 532)) {
 			return;
 		}
-		field155++;
+		trackedCount++;
 		long var4 = System.currentTimeMillis();
-		long var6 = (var4 - field154) / 10L;
+		long var6 = (var4 - lastTime) / 10L;
 		if (var6 > 250L) {
 			var6 = 250L;
 		}
-		field154 = var4;
-		method48(5);
+		lastTime = var4;
+		ensureCapacity(5);
 		if (arg3 == 1) {
-			field152.method229(1);
+			old.p1(1);
 		} else {
-			field152.method229(2);
+			old.p1(2);
 		}
-		field152.method229((int) var6);
-		field152.method232(arg0 + (arg2 << 10));
+		old.p1((int) var6);
+		old.p3(arg0 + (arg2 << 10));
 	}
 
 	@ObfuscatedName("f.a(IB)V")
-	public static final synchronized void method50(int arg0) {
-		if (!field151) {
+	public static synchronized void mouseReleased(int arg0) {
+		if (!active) {
 			return;
 		}
-		field155++;
+		trackedCount++;
 		long var2 = System.currentTimeMillis();
-		long var4 = (var2 - field154) / 10L;
+		long var4 = (var2 - lastTime) / 10L;
 		if (var4 > 250L) {
 			var4 = 250L;
 		}
-		field154 = var2;
-		method48(2);
+		lastTime = var2;
+		ensureCapacity(2);
 		if (arg0 == 1) {
-			field152.method229(3);
+			old.p1(3);
 		} else {
-			field152.method229(4);
+			old.p1(4);
 		}
-		field152.method229((int) var4);
+		old.p1((int) var4);
 	}
 
 	@ObfuscatedName("f.a(III)V")
-	public static final synchronized void method51(int arg1, int arg2) {
-		if (!field151 || (arg1 < 0 || arg1 >= 789 || arg2 < 0 || arg2 >= 532)) {
+	public static synchronized void mouseMoved(int arg1, int arg2) {
+		if (!active || (arg1 < 0 || arg1 >= 789 || arg2 < 0 || arg2 >= 532)) {
 			return;
 		}
 		long var4 = System.currentTimeMillis();
-		if (var4 - field156 < 50L) {
+		if (var4 - lastMoveTime < 50L) {
 			return;
 		}
-		field156 = var4;
-		field155++;
-		long var6 = (var4 - field154) / 10L;
+		lastMoveTime = var4;
+		trackedCount++;
+		long var6 = (var4 - lastTime) / 10L;
 		if (var6 > 250L) {
 			var6 = 250L;
 		}
-		field154 = var4;
-		if (arg1 - field157 < 8 && arg1 - field157 >= -8 && arg2 - field158 < 8 && arg2 - field158 >= -8) {
-			method48(3);
-			field152.method229(5);
-			field152.method229((int) var6);
-			field152.method229(arg1 - field157 + 8 + (arg2 - field158 + 8 << 4));
-		} else if (arg1 - field157 < 128 && arg1 - field157 >= -128 && arg2 - field158 < 128 && arg2 - field158 >= -128) {
-			method48(4);
-			field152.method229(6);
-			field152.method229((int) var6);
-			field152.method229(arg1 - field157 + 128);
-			field152.method229(arg2 - field158 + 128);
+		lastTime = var4;
+		if (arg1 - lastX < 8 && arg1 - lastX >= -8 && arg2 - lastY < 8 && arg2 - lastY >= -8) {
+			ensureCapacity(3);
+			old.p1(5);
+			old.p1((int) var6);
+			old.p1(arg1 - lastX + 8 + (arg2 - lastY + 8 << 4));
+		} else if (arg1 - lastX < 128 && arg1 - lastX >= -128 && arg2 - lastY < 128 && arg2 - lastY >= -128) {
+			ensureCapacity(4);
+			old.p1(6);
+			old.p1((int) var6);
+			old.p1(arg1 - lastX + 128);
+			old.p1(arg2 - lastY + 128);
 		} else {
-			method48(5);
-			field152.method229(7);
-			field152.method229((int) var6);
-			field152.method232(arg1 + (arg2 << 10));
+			ensureCapacity(5);
+			old.p1(7);
+			old.p1((int) var6);
+			old.p3(arg1 + (arg2 << 10));
 		}
-		field157 = arg1;
-		field158 = arg2;
+		lastX = arg1;
+		lastY = arg2;
 	}
 
 	@ObfuscatedName("f.b(II)V")
-	public static final synchronized void method52(int arg0) {
-		if (!field151) {
+	public static synchronized void keyPressed(int arg0) {
+		if (!active) {
 			return;
 		}
-		field155++;
+		trackedCount++;
 		long var2 = System.currentTimeMillis();
-		long var4 = (var2 - field154) / 10L;
+		long var4 = (var2 - lastTime) / 10L;
 		if (var4 > 250L) {
 			var4 = 250L;
 		}
-		field154 = var2;
+		lastTime = var2;
 		if (arg0 == 1000) {
 			arg0 = 11;
 		}
@@ -181,24 +181,24 @@ public class InputTracking {
 		if (arg0 >= 1008) {
 			arg0 -= 992;
 		}
-		method48(3);
-		field152.method229(8);
-		field152.method229((int) var4);
-		field152.method229(arg0);
+		ensureCapacity(3);
+		old.p1(8);
+		old.p1((int) var4);
+		old.p1(arg0);
 	}
 
 	@ObfuscatedName("f.c(II)V")
-	public static final synchronized void method53(int arg1) {
-		if (!field151) {
+	public static synchronized void keyReleased(int arg1) {
+		if (!active) {
 			return;
 		}
-		field155++;
+		trackedCount++;
 		long var2 = System.currentTimeMillis();
-		long var4 = (var2 - field154) / 10L;
+		long var4 = (var2 - lastTime) / 10L;
 		if (var4 > 250L) {
 			var4 = 250L;
 		}
-		field154 = var2;
+		lastTime = var2;
 		if (arg1 == 1000) {
 			arg1 = 11;
 		}
@@ -214,77 +214,77 @@ public class InputTracking {
 		if (arg1 >= 1008) {
 			arg1 -= 992;
 		}
-		method48(3);
-		field152.method229(9);
-		field152.method229((int) var4);
-		field152.method229(arg1);
+		ensureCapacity(3);
+		old.p1(9);
+		old.p1((int) var4);
+		old.p1(arg1);
 	}
 
 	@ObfuscatedName("f.a(B)V")
-	public static final synchronized void method54() {
-		if (!field151) {
+	public static synchronized void focusGained() {
+		if (!active) {
 			return;
 		}
-		field155++;
+		trackedCount++;
 		long var2 = System.currentTimeMillis();
-		long var4 = (var2 - field154) / 10L;
+		long var4 = (var2 - lastTime) / 10L;
 		if (var4 > 250L) {
 			var4 = 250L;
 		}
-		field154 = var2;
-		method48(2);
-		field152.method229(10);
-		field152.method229((int) var4);
+		lastTime = var2;
+		ensureCapacity(2);
+		old.p1(10);
+		old.p1((int) var4);
 	}
 
 	@ObfuscatedName("f.d(I)V")
-	public static final synchronized void method55() {
-		if (!field151) {
+	public static synchronized void focusLost() {
+		if (!active) {
 			return;
 		}
-		field155++;
+		trackedCount++;
 		long var1 = System.currentTimeMillis();
-		long var3 = (var1 - field154) / 10L;
+		long var3 = (var1 - lastTime) / 10L;
 		if (var3 > 250L) {
 			var3 = 250L;
 		}
-		field154 = var1;
-		method48(2);
-		field152.method229(11);
-		field152.method229((int) var3);
+		lastTime = var1;
+		ensureCapacity(2);
+		old.p1(11);
+		old.p1((int) var3);
 	}
 
 	@ObfuscatedName("f.b(Z)V")
-	public static final synchronized void method56() {
-		if (!field151) {
+	public static synchronized void mouseEntered() {
+		if (!active) {
 			return;
 		}
-		field155++;
+		trackedCount++;
 		long var1 = System.currentTimeMillis();
-		long var3 = (var1 - field154) / 10L;
+		long var3 = (var1 - lastTime) / 10L;
 		if (var3 > 250L) {
 			var3 = 250L;
 		}
-		field154 = var1;
-		method48(2);
-		field152.method229(12);
-		field152.method229((int) var3);
+		lastTime = var1;
+		ensureCapacity(2);
+		old.p1(12);
+		old.p1((int) var3);
 	}
 
 	@ObfuscatedName("f.e(I)V")
-	public static final synchronized void method57() {
-		if (!field151) {
+	public static synchronized void mouseExited() {
+		if (!active) {
 			return;
 		}
-		field155++;
+		trackedCount++;
 		long var2 = System.currentTimeMillis();
-		long var4 = (var2 - field154) / 10L;
+		long var4 = (var2 - lastTime) / 10L;
 		if (var4 > 250L) {
 			var4 = 250L;
 		}
-		field154 = var2;
-		method48(2);
-		field152.method229(13);
-		field152.method229((int) var4);
+		lastTime = var2;
+		ensureCapacity(2);
+		old.p1(13);
+		old.p1((int) var4);
 	}
 }

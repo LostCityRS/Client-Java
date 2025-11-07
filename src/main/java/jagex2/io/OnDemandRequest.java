@@ -7,17 +7,17 @@ import jagex2.datastruct.DoublyLinkable;
 public class OnDemandRequest extends DoublyLinkable {
 
 	@ObfuscatedName("nb.i")
-	public int field724;
+	public int archive;
 
 	@ObfuscatedName("nb.j")
-	public int field725;
+	public int file;
 
 	@ObfuscatedName("nb.k")
-	public byte[] field726;
+	public byte[] data;
 
 	@ObfuscatedName("nb.l")
-	public int field727;
+	public int cycle;
 
 	@ObfuscatedName("nb.m")
-	public boolean field728 = true;
+	public boolean urgent = true;
 }

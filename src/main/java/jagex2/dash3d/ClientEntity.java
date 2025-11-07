@@ -8,10 +8,10 @@ import jagex2.config.SeqType;
 public class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("z.o")
-	public int field410;
+	public int x;
 
 	@ObfuscatedName("z.p")
-	public int field411;
+	public int z;
 
 	@ObfuscatedName("z.q")
 	public int field412;
@@ -20,28 +20,28 @@ public class ClientEntity extends ModelSource {
 	public boolean field413 = false;
 
 	@ObfuscatedName("z.s")
-	public int field414 = 1;
+	public int size = 1;
 
 	@ObfuscatedName("z.t")
-	public int field415 = -1;
+	public int readyanim = -1;
 
 	@ObfuscatedName("z.u")
-	public int field416 = -1;
+	public int turnanim = -1;
 
 	@ObfuscatedName("z.v")
-	public int field417 = -1;
+	public int walkanim = -1;
 
 	@ObfuscatedName("z.w")
-	public int field418 = -1;
+	public int walkanim_b = -1;
 
 	@ObfuscatedName("z.x")
-	public int field419 = -1;
+	public int walkanim_l = -1;
 
 	@ObfuscatedName("z.y")
-	public int field420 = -1;
+	public int walkanim_r = -1;
 
 	@ObfuscatedName("z.z")
-	public int field421 = -1;
+	public int runanim = -1;
 
 	@ObfuscatedName("z.ab")
 	public int field448;
@@ -65,46 +65,46 @@ public class ClientEntity extends ModelSource {
 	public int field454;
 
 	@ObfuscatedName("z.hb")
-	public int field455;
+	public int cycle;
 
 	@ObfuscatedName("z.ib")
-	public int field456 = 200;
+	public int height = 200;
 
 	@ObfuscatedName("z.jb")
-	public int field457;
+	public int dstYaw;
 
 	@ObfuscatedName("z.kb")
 	public int field458 = 32;
 
 	@ObfuscatedName("z.lb")
-	public int field459;
+	public int routeLength;
 
 	@ObfuscatedName("z.mb")
-	public int[] field460 = new int[10];
+	public int[] routeTileX = new int[10];
 
 	@ObfuscatedName("z.nb")
-	public int[] field461 = new int[10];
+	public int[] routeTileZ = new int[10];
 
 	@ObfuscatedName("z.ob")
-	public boolean[] field462 = new boolean[10];
+	public boolean[] routeRun = new boolean[10];
 
 	@ObfuscatedName("z.pb")
-	public int field463;
+	public int seqDelayMove;
 
 	@ObfuscatedName("z.qb")
-	public int field464;
+	public int preanimRouteLength;
 
 	@ObfuscatedName("z.B")
 	public int field423 = 100;
 
 	@ObfuscatedName("z.E")
-	public int[] field426 = new int[4];
+	public int[] damage = new int[4];
 
 	@ObfuscatedName("z.F")
-	public int[] field427 = new int[4];
+	public int[] damageType = new int[4];
 
 	@ObfuscatedName("z.G")
-	public int[] field428 = new int[4];
+	public int[] damageCycle = new int[4];
 
 	@ObfuscatedName("z.H")
 	public int field429 = -1000;
@@ -113,13 +113,13 @@ public class ClientEntity extends ModelSource {
 	public int field432 = -1;
 
 	@ObfuscatedName("z.N")
-	public int field435 = -1;
+	public int secondarySeqId = -1;
 
 	@ObfuscatedName("z.Q")
-	public int field438 = -1;
+	public int primarySeqId = -1;
 
 	@ObfuscatedName("z.V")
-	public int field443 = -1;
+	public int spotanimId = -1;
 
 	@ObfuscatedName("z.C")
 	public int field424;
@@ -140,25 +140,25 @@ public class ClientEntity extends ModelSource {
 	public int field434;
 
 	@ObfuscatedName("z.O")
-	public int field436;
+	public int secondarySeqFrame;
 
 	@ObfuscatedName("z.P")
 	public int field437;
 
 	@ObfuscatedName("z.R")
-	public int field439;
+	public int primarySeqFrame;
 
 	@ObfuscatedName("z.S")
 	public int field440;
 
 	@ObfuscatedName("z.T")
-	public int field441;
+	public int primarySeqDelay;
 
 	@ObfuscatedName("z.U")
 	public int field442;
 
 	@ObfuscatedName("z.W")
-	public int field444;
+	public int spotanimFrame;
 
 	@ObfuscatedName("z.X")
 	public int field445;
@@ -167,47 +167,47 @@ public class ClientEntity extends ModelSource {
 	public int field446;
 
 	@ObfuscatedName("z.Z")
-	public int field447;
+	public int spotanimHeight;
 
 	@ObfuscatedName("z.A")
 	public String field422;
 
 	@ObfuscatedName("z.a(IIZZ)V")
-	public final void method124(int arg0, int arg1, boolean arg3) {
-		if (this.field438 != -1 && SeqType.field1112[this.field438].field1125 == 1) {
-			this.field438 = -1;
+	public final void move(int arg0, int arg1, boolean arg3) {
+		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_move == 1) {
+			this.primarySeqId = -1;
 		}
 		if (!arg3) {
-			int var5 = arg1 - this.field460[0];
-			int var6 = arg0 - this.field461[0];
+			int var5 = arg1 - this.routeTileX[0];
+			int var6 = arg0 - this.routeTileZ[0];
 			if (var5 >= -8 && var5 <= 8 && var6 >= -8 && var6 <= 8) {
-				if (this.field459 < 9) {
-					this.field459++;
+				if (this.routeLength < 9) {
+					this.routeLength++;
 				}
-				for (int var7 = this.field459; var7 > 0; var7--) {
-					this.field460[var7] = this.field460[var7 - 1];
-					this.field461[var7] = this.field461[var7 - 1];
-					this.field462[var7] = this.field462[var7 - 1];
+				for (int var7 = this.routeLength; var7 > 0; var7--) {
+					this.routeTileX[var7] = this.routeTileX[var7 - 1];
+					this.routeTileZ[var7] = this.routeTileZ[var7 - 1];
+					this.routeRun[var7] = this.routeRun[var7 - 1];
 				}
-				this.field460[0] = arg1;
-				this.field461[0] = arg0;
-				this.field462[0] = false;
+				this.routeTileX[0] = arg1;
+				this.routeTileZ[0] = arg0;
+				this.routeRun[0] = false;
 				return;
 			}
 		}
-		this.field459 = 0;
-		this.field464 = 0;
-		this.field463 = 0;
-		this.field460[0] = arg1;
-		this.field461[0] = arg0;
-		this.field410 = this.field460[0] * 128 + this.field414 * 64;
-		this.field411 = this.field461[0] * 128 + this.field414 * 64;
+		this.routeLength = 0;
+		this.preanimRouteLength = 0;
+		this.seqDelayMove = 0;
+		this.routeTileX[0] = arg1;
+		this.routeTileZ[0] = arg0;
+		this.x = this.routeTileX[0] * 128 + this.size * 64;
+		this.z = this.routeTileZ[0] * 128 + this.size * 64;
 	}
 
 	@ObfuscatedName("z.a(ZIB)V")
-	public final void method125(boolean arg0, int arg1) {
-		int var4 = this.field460[0];
-		int var5 = this.field461[0];
+	public final void step(boolean arg0, int arg1) {
+		int var4 = this.routeTileX[0];
+		int var5 = this.routeTileZ[0];
 		if (arg1 == 0) {
 			var4--;
 			var5++;
@@ -236,40 +236,40 @@ public class ClientEntity extends ModelSource {
 			var4++;
 			var5--;
 		}
-		if (this.field438 != -1 && SeqType.field1112[this.field438].field1125 == 1) {
-			this.field438 = -1;
+		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_move == 1) {
+			this.primarySeqId = -1;
 		}
-		if (this.field459 < 9) {
-			this.field459++;
+		if (this.routeLength < 9) {
+			this.routeLength++;
 		}
-		for (int var6 = this.field459; var6 > 0; var6--) {
-			this.field460[var6] = this.field460[var6 - 1];
-			this.field461[var6] = this.field461[var6 - 1];
-			this.field462[var6] = this.field462[var6 - 1];
+		for (int var6 = this.routeLength; var6 > 0; var6--) {
+			this.routeTileX[var6] = this.routeTileX[var6 - 1];
+			this.routeTileZ[var6] = this.routeTileZ[var6 - 1];
+			this.routeRun[var6] = this.routeRun[var6 - 1];
 		}
-		this.field460[0] = var4;
-		this.field461[0] = var5;
-		this.field462[0] = arg0;
+		this.routeTileX[0] = var4;
+		this.routeTileZ[0] = var5;
+		this.routeRun[0] = arg0;
 	}
 
 	@ObfuscatedName("z.a(Z)V")
-	public final void method126() {
-		this.field459 = 0;
-		this.field464 = 0;
+	public final void clearRoute() {
+		this.routeLength = 0;
+		this.preanimRouteLength = 0;
 	}
 
 	@ObfuscatedName("z.b(I)Z")
-	public boolean method127() {
+	public boolean isVisible() {
 		return false;
 	}
 
 	@ObfuscatedName("z.a(III)V")
-	public final void method128(int arg1, int arg2) {
+	public final void hit(int arg1, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
-			if (this.field428[var4] <= Client.field1591) {
-				this.field426[var4] = arg2;
-				this.field427[var4] = arg1;
-				this.field428[var4] = Client.field1591 + 70;
+			if (this.damageCycle[var4] <= Client.loopCycle) {
+				this.damage[var4] = arg2;
+				this.damageType[var4] = arg1;
+				this.damageCycle[var4] = Client.loopCycle + 70;
 				return;
 			}
 		}

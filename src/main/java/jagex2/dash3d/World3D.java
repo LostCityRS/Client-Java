@@ -9,7 +9,7 @@ import jagex2.graphics.Pix3D;
 public class World3D {
 
 	@ObfuscatedName("s.h")
-	public static boolean field296 = true;
+	public static boolean lowMem = true;
 
 	@ObfuscatedName("s.i")
 	public int field297;
@@ -718,9 +718,9 @@ public class World3D {
 					Square var12 = this.field301[var9][var10][var11];
 					if (var12 != null) {
 						Wall var13 = var12.field384;
-						if (var13 != null && var13.field285 != null && var13.field285.field405 != null) {
+						if (var13 != null && var13.field285 != null && var13.field285.vertexNormal != null) {
 							this.method97(var11, var10, var9, (Model) var13.field285, 1, 1);
-							if (var13.field286 != null && var13.field286.field405 != null) {
+							if (var13.field286 != null && var13.field286.vertexNormal != null) {
 								this.method97(var11, var10, var9, (Model) var13.field286, 1, 1);
 								this.method98((Model) var13.field285, (Model) var13.field286, 0, 0, 0);
 								((Model) var13.field286).method157(arg2, var8, arg4, arg3, arg5);
@@ -729,13 +729,13 @@ public class World3D {
 						}
 						for (int var14 = 0; var14 < var12.field388; var14++) {
 							Sprite var15 = var12.field389[var14];
-							if (var15 != null && var15.field270 != null && var15.field270.field405 != null) {
+							if (var15 != null && var15.field270 != null && var15.field270.vertexNormal != null) {
 								this.method97(var11, var10, var9, (Model) var15.field270, var15.field275 - var15.field274 + 1, var15.field273 - var15.field272 + 1);
 								((Model) var15.field270).method157(arg2, var8, arg4, arg3, arg5);
 							}
 						}
 						GroundDecor var16 = var12.field386;
-						if (var16 != null && var16.field209.field405 != null) {
+						if (var16 != null && var16.field209.vertexNormal != null) {
 							this.method96((Model) var16.field209, var11, var9, var10);
 							((Model) var16.field209).method157(arg2, var8, arg4, arg3, arg5);
 						}
@@ -749,25 +749,25 @@ public class World3D {
 	public void method96(Model arg0, int arg1, int arg2, int arg4) {
 		if (arg4 < this.field298) {
 			Square var7 = this.field301[arg2][arg4 + 1][arg1];
-			if (var7 != null && var7.field386 != null && var7.field386.field209.field405 != null) {
+			if (var7 != null && var7.field386 != null && var7.field386.field209.vertexNormal != null) {
 				this.method98(arg0, (Model) var7.field386.field209, 128, 0, 0);
 			}
 		}
 		if (arg1 < this.field298) {
 			Square var8 = this.field301[arg2][arg4][arg1 + 1];
-			if (var8 != null && var8.field386 != null && var8.field386.field209.field405 != null) {
+			if (var8 != null && var8.field386 != null && var8.field386.field209.vertexNormal != null) {
 				this.method98(arg0, (Model) var8.field386.field209, 0, 0, 128);
 			}
 		}
 		if (arg4 < this.field298 && arg1 < this.field299) {
 			Square var9 = this.field301[arg2][arg4 + 1][arg1 + 1];
-			if (var9 != null && var9.field386 != null && var9.field386.field209.field405 != null) {
+			if (var9 != null && var9.field386 != null && var9.field386.field209.vertexNormal != null) {
 				this.method98(arg0, (Model) var9.field386.field209, 128, 0, 128);
 			}
 		}
 		if (arg4 < this.field298 && arg1 > 0) {
 			Square var10 = this.field301[arg2][arg4 + 1][arg1 - 1];
-			if (var10 != null && var10.field386 != null && var10.field386.field209.field405 != null) {
+			if (var10 != null && var10.field386 != null && var10.field386.field209.vertexNormal != null) {
 				this.method98(arg0, (Model) var10.field386.field209, 128, 0, -128);
 			}
 		}
@@ -790,15 +790,15 @@ public class World3D {
 								if (var17 != null) {
 									int var18 = (this.field300[var14][var15][var16] + this.field300[var14][var15 + 1][var16] + this.field300[var14][var15][var16 + 1] + this.field300[var14][var15 + 1][var16 + 1]) / 4 - (this.field300[arg2][arg1][arg0] + this.field300[arg2][arg1 + 1][arg0] + this.field300[arg2][arg1][arg0 + 1] + this.field300[arg2][arg1 + 1][arg0 + 1]) / 4;
 									Wall var19 = var17.field384;
-									if (var19 != null && var19.field285 != null && var19.field285.field405 != null) {
+									if (var19 != null && var19.field285 != null && var19.field285.vertexNormal != null) {
 										this.method98(arg3, (Model) var19.field285, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64);
 									}
-									if (var19 != null && var19.field286 != null && var19.field286.field405 != null) {
+									if (var19 != null && var19.field286 != null && var19.field286.vertexNormal != null) {
 										this.method98(arg3, (Model) var19.field286, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64);
 									}
 									for (int var20 = 0; var20 < var17.field388; var20++) {
 										Sprite var21 = var17.field389[var20];
-										if (var21 != null && var21.field270 != null && var21.field270.field405 != null) {
+										if (var21 != null && var21.field270 != null && var21.field270.vertexNormal != null) {
 											int var22 = var21.field273 - var21.field272 + 1;
 											int var23 = var21.field275 - var21.field274 + 1;
 											this.method98(arg3, (Model) var21.field270, (var21.field272 - arg1) * 128 + (var22 - arg6) * 64, var18, (var21.field274 - arg0) * 128 + (var23 - arg5) * 64);
@@ -822,9 +822,9 @@ public class World3D {
 		int[] var8 = arg1.field540;
 		int var9 = arg1.field539;
 		for (int var10 = 0; var10 < arg0.field539; var10++) {
-			VertexNormal var11 = arg0.field405[var10];
+			VertexNormal var11 = arg0.vertexNormal[var10];
 			VertexNormal var12 = arg0.field573[var10];
-			if (var12.field258 != 0) {
+			if (var12.w != 0) {
 				int var13 = arg0.field541[var10] - arg3;
 				if (var13 <= arg1.field564) {
 					int var14 = arg0.field540[var10] - arg2;
@@ -832,17 +832,17 @@ public class World3D {
 						int var15 = arg0.field542[var10] - arg4;
 						if (var15 >= arg1.field562 && var15 <= arg1.field561) {
 							for (int var16 = 0; var16 < var9; var16++) {
-								VertexNormal var17 = arg1.field405[var16];
+								VertexNormal var17 = arg1.vertexNormal[var16];
 								VertexNormal var18 = arg1.field573[var16];
-								if (var14 == var8[var16] && var15 == arg1.field542[var16] && var13 == arg1.field541[var16] && var18.field258 != 0) {
-									var11.field255 += var18.field255;
-									var11.field256 += var18.field256;
-									var11.field257 += var18.field257;
-									var11.field258 += var18.field258;
-									var17.field255 += var12.field255;
-									var17.field256 += var12.field256;
-									var17.field257 += var12.field257;
-									var17.field258 += var12.field258;
+								if (var14 == var8[var16] && var15 == arg1.field542[var16] && var13 == arg1.field541[var16] && var18.w != 0) {
+									var11.x += var18.x;
+									var11.y += var18.y;
+									var11.z += var18.z;
+									var11.w += var18.w;
+									var17.x += var12.x;
+									var17.y += var12.y;
+									var17.z += var12.z;
+									var17.w += var12.w;
 									var7++;
 									this.field346[var10] = this.field348;
 									this.field347[var16] = this.field348;
@@ -927,7 +927,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIII[IZ)V")
-	public static void method100(int arg0, int arg1, int arg2, int arg3, int[] arg4) {
+	public static void init(int arg0, int arg1, int arg2, int arg3, int[] arg4) {
 		field355 = 0;
 		field356 = 0;
 		field357 = arg1;
@@ -1175,7 +1175,7 @@ public class World3D {
 
 	@ObfuscatedName("s.a(Lw;Z)V")
 	public void method104(Square arg0, boolean arg1) {
-		field337.method255(arg0);
+		field337.push(arg0);
 		while (true) {
 			Square var3;
 			int var4;
@@ -1196,7 +1196,7 @@ public class World3D {
 									while (true) {
 										while (true) {
 											do {
-												var3 = (Square) field337.method257();
+												var3 = (Square) field337.pop();
 												if (var3 == null) {
 													return;
 												}
@@ -1255,12 +1255,12 @@ public class World3D {
 												}
 												Wall var15 = var14.field384;
 												if (var15 != null) {
-													var15.field285.method122(0, field318, field319, field320, field321, var15.field281 - field315, var15.field280 - field316, var15.field282 - field317, var15.field287);
+													var15.field285.draw(0, field318, field319, field320, field321, var15.field281 - field315, var15.field280 - field316, var15.field282 - field317, var15.field287);
 												}
 												for (int var16 = 0; var16 < var14.field388; var16++) {
 													Sprite var17 = var14.field389[var16];
 													if (var17 != null) {
-														var17.field270.method122(var17.field271, field318, field319, field320, field321, var17.field268 - field315, var17.field267 - field316, var17.field269 - field317, var17.field278);
+														var17.field270.draw(var17.field271, field318, field319, field320, field321, var17.field268 - field315, var17.field267 - field316, var17.field269 - field317, var17.field278);
 													}
 												}
 											}
@@ -1313,15 +1313,15 @@ public class World3D {
 													var3.field398 = 9 - var3.field397;
 												}
 												if ((var21.field283 & var20) != 0 && !this.method111(var7, var4, var5, var21.field283)) {
-													var21.field285.method122(0, field318, field319, field320, field321, var21.field281 - field315, var21.field280 - field316, var21.field282 - field317, var21.field287);
+													var21.field285.draw(0, field318, field319, field320, field321, var21.field281 - field315, var21.field280 - field316, var21.field282 - field317, var21.field287);
 												}
 												if ((var21.field284 & var20) != 0 && !this.method111(var7, var4, var5, var21.field284)) {
-													var21.field286.method122(0, field318, field319, field320, field321, var21.field281 - field315, var21.field280 - field316, var21.field282 - field317, var21.field287);
+													var21.field286.draw(0, field318, field319, field320, field321, var21.field281 - field315, var21.field280 - field316, var21.field282 - field317, var21.field287);
 												}
 											}
-											if (var22 != null && !this.method112(var7, var4, var5, var22.field177.field406)) {
+											if (var22 != null && !this.method112(var7, var4, var5, var22.field177.minY)) {
 												if ((var22.field175 & var20) != 0) {
-													var22.field177.method122(var22.field176, field318, field319, field320, field321, var22.field173 - field315, var22.field172 - field316, var22.field174 - field317, var22.field178);
+													var22.field177.draw(var22.field176, field318, field319, field320, field321, var22.field173 - field315, var22.field172 - field316, var22.field174 - field317, var22.field178);
 												} else if ((var22.field175 & 0x300) != 0) {
 													int var23 = var22.field173 - field315;
 													int var24 = var22.field172 - field316;
@@ -1342,30 +1342,30 @@ public class World3D {
 													if ((var22.field175 & 0x100) != 0 && var28 < var27) {
 														int var29 = var23 + field323[var26];
 														int var30 = var25 + field324[var26];
-														var22.field177.method122(var26 * 512 + 256, field318, field319, field320, field321, var29, var24, var30, var22.field178);
+														var22.field177.draw(var26 * 512 + 256, field318, field319, field320, field321, var29, var24, var30, var22.field178);
 													}
 													if ((var22.field175 & 0x200) != 0 && var28 > var27) {
 														int var31 = var23 + field325[var26];
 														int var32 = var25 + field326[var26];
-														var22.field177.method122(var26 * 512 + 1280 & 0x7FF, field318, field319, field320, field321, var31, var24, var32, var22.field178);
+														var22.field177.draw(var26 * 512 + 1280 & 0x7FF, field318, field319, field320, field321, var31, var24, var32, var22.field178);
 													}
 												}
 											}
 											if (var18) {
 												GroundDecor var33 = var3.field386;
 												if (var33 != null) {
-													var33.field209.method122(0, field318, field319, field320, field321, var33.field207 - field315, var33.field206 - field316, var33.field208 - field317, var33.field210);
+													var33.field209.draw(0, field318, field319, field320, field321, var33.field207 - field315, var33.field206 - field316, var33.field208 - field317, var33.field210);
 												}
 												GroundObject var34 = var3.field387;
 												if (var34 != null && var34.field219 == 0) {
 													if (var34.field216 != null) {
-														var34.field216.method122(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
+														var34.field216.draw(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
 													}
 													if (var34.field217 != null) {
-														var34.field217.method122(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
+														var34.field217.draw(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
 													}
 													if (var34.field215 != null) {
-														var34.field215.method122(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
+														var34.field215.draw(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
 													}
 												}
 											}
@@ -1374,25 +1374,25 @@ public class World3D {
 												if (var4 < field313 && (var35 & 0x4) != 0) {
 													Square var36 = var8[var4 + 1][var5];
 													if (var36 != null && var36.field394) {
-														field337.method255(var36);
+														field337.push(var36);
 													}
 												}
 												if (var5 < field314 && (var35 & 0x2) != 0) {
 													Square var37 = var8[var4][var5 + 1];
 													if (var37 != null && var37.field394) {
-														field337.method255(var37);
+														field337.push(var37);
 													}
 												}
 												if (var4 > field313 && (var35 & 0x1) != 0) {
 													Square var38 = var8[var4 - 1][var5];
 													if (var38 != null && var38.field394) {
-														field337.method255(var38);
+														field337.push(var38);
 													}
 												}
 												if (var5 > field314 && (var35 & 0x8) != 0) {
 													Square var39 = var8[var4][var5 - 1];
 													if (var39 != null && var39.field394) {
-														field337.method255(var39);
+														field337.push(var39);
 													}
 												}
 											}
@@ -1409,7 +1409,7 @@ public class World3D {
 											if (var40) {
 												Wall var42 = var3.field384;
 												if (!this.method111(var7, var4, var5, var42.field283)) {
-													var42.field285.method122(0, field318, field319, field320, field321, var42.field281 - field315, var42.field280 - field316, var42.field282 - field317, var42.field287);
+													var42.field285.draw(0, field318, field319, field320, field321, var42.field281 - field315, var42.field280 - field316, var42.field282 - field317, var42.field287);
 												}
 												var3.field396 = 0;
 											}
@@ -1491,16 +1491,16 @@ public class World3D {
 											}
 											Sprite var63 = field322[var56];
 											var63.field277 = field308;
-											if (!this.method113(var7, var63.field272, var63.field273, var63.field274, var63.field275, var63.field270.field406)) {
-												var63.field270.method122(var63.field271, field318, field319, field320, field321, var63.field268 - field315, var63.field267 - field316, var63.field269 - field317, var63.field278);
+											if (!this.method113(var7, var63.field272, var63.field273, var63.field274, var63.field275, var63.field270.minY)) {
+												var63.field270.draw(var63.field271, field318, field319, field320, field321, var63.field268 - field315, var63.field267 - field316, var63.field269 - field317, var63.field278);
 											}
 											for (int var64 = var63.field272; var64 <= var63.field273; var64++) {
 												for (int var65 = var63.field274; var65 <= var63.field275; var65++) {
 													Square var66 = var8[var64][var65];
 													if (var66.field396 != 0) {
-														field337.method255(var66);
+														field337.push(var66);
 													} else if ((var64 != var4 || var65 != var5) && var66.field394) {
-														field337.method255(var66);
+														field337.push(var66);
 													}
 												}
 											}
@@ -1536,20 +1536,20 @@ public class World3D {
 			GroundObject var71 = var3.field387;
 			if (var71 != null && var71.field219 != 0) {
 				if (var71.field216 != null) {
-					var71.field216.method122(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
+					var71.field216.draw(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
 				}
 				if (var71.field217 != null) {
-					var71.field217.method122(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
+					var71.field217.draw(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
 				}
 				if (var71.field215 != null) {
-					var71.field215.method122(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
+					var71.field215.draw(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
 				}
 			}
 			if (var3.field399 != 0) {
 				Decor var72 = var3.field385;
-				if (var72 != null && !this.method112(var7, var4, var5, var72.field177.field406)) {
+				if (var72 != null && !this.method112(var7, var4, var5, var72.field177.minY)) {
 					if ((var72.field175 & var3.field399) != 0) {
-						var72.field177.method122(var72.field176, field318, field319, field320, field321, var72.field173 - field315, var72.field172 - field316, var72.field174 - field317, var72.field178);
+						var72.field177.draw(var72.field176, field318, field319, field320, field321, var72.field173 - field315, var72.field172 - field316, var72.field174 - field317, var72.field178);
 					} else if ((var72.field175 & 0x300) != 0) {
 						int var73 = var72.field173 - field315;
 						int var74 = var72.field172 - field316;
@@ -1570,53 +1570,53 @@ public class World3D {
 						if ((var72.field175 & 0x100) != 0 && var78 >= var77) {
 							int var79 = var73 + field323[var76];
 							int var80 = var75 + field324[var76];
-							var72.field177.method122(var76 * 512 + 256, field318, field319, field320, field321, var79, var74, var80, var72.field178);
+							var72.field177.draw(var76 * 512 + 256, field318, field319, field320, field321, var79, var74, var80, var72.field178);
 						}
 						if ((var72.field175 & 0x200) != 0 && var78 <= var77) {
 							int var81 = var73 + field325[var76];
 							int var82 = var75 + field326[var76];
-							var72.field177.method122(var76 * 512 + 1280 & 0x7FF, field318, field319, field320, field321, var81, var74, var82, var72.field178);
+							var72.field177.draw(var76 * 512 + 1280 & 0x7FF, field318, field319, field320, field321, var81, var74, var82, var72.field178);
 						}
 					}
 				}
 				Wall var83 = var3.field384;
 				if (var83 != null) {
 					if ((var83.field284 & var3.field399) != 0 && !this.method111(var7, var4, var5, var83.field284)) {
-						var83.field286.method122(0, field318, field319, field320, field321, var83.field281 - field315, var83.field280 - field316, var83.field282 - field317, var83.field287);
+						var83.field286.draw(0, field318, field319, field320, field321, var83.field281 - field315, var83.field280 - field316, var83.field282 - field317, var83.field287);
 					}
 					if ((var83.field283 & var3.field399) != 0 && !this.method111(var7, var4, var5, var83.field283)) {
-						var83.field285.method122(0, field318, field319, field320, field321, var83.field281 - field315, var83.field280 - field316, var83.field282 - field317, var83.field287);
+						var83.field285.draw(0, field318, field319, field320, field321, var83.field281 - field315, var83.field280 - field316, var83.field282 - field317, var83.field287);
 					}
 				}
 			}
 			if (var6 < this.field297 - 1) {
 				Square var84 = this.field301[var6 + 1][var4][var5];
 				if (var84 != null && var84.field394) {
-					field337.method255(var84);
+					field337.push(var84);
 				}
 			}
 			if (var4 < field313) {
 				Square var85 = var8[var4 + 1][var5];
 				if (var85 != null && var85.field394) {
-					field337.method255(var85);
+					field337.push(var85);
 				}
 			}
 			if (var5 < field314) {
 				Square var86 = var8[var4][var5 + 1];
 				if (var86 != null && var86.field394) {
-					field337.method255(var86);
+					field337.push(var86);
 				}
 			}
 			if (var4 > field313) {
 				Square var87 = var8[var4 - 1][var5];
 				if (var87 != null && var87.field394) {
-					field337.method255(var87);
+					field337.push(var87);
 				}
 			}
 			if (var5 > field314) {
 				Square var88 = var8[var4][var5 - 1];
 				if (var88 != null && var88.field394) {
-					field337.method255(var88);
+					field337.push(var88);
 				}
 			}
 		}
@@ -1664,19 +1664,19 @@ public class World3D {
 		if (var43 < 50) {
 			return;
 		}
-		int var45 = Pix3D.field641 + (var21 << 9) / var25;
-		int var46 = Pix3D.field642 + (var24 << 9) / var25;
-		int var47 = Pix3D.field641 + (var27 << 9) / var31;
-		int var48 = Pix3D.field642 + (var30 << 9) / var31;
-		int var49 = Pix3D.field641 + (var33 << 9) / var37;
-		int var50 = Pix3D.field642 + (var36 << 9) / var37;
-		int var51 = Pix3D.field641 + (var39 << 9) / var43;
-		int var52 = Pix3D.field642 + (var42 << 9) / var43;
-		Pix3D.field640 = 0;
+		int var45 = Pix3D.centerX + (var21 << 9) / var25;
+		int var46 = Pix3D.centerY + (var24 << 9) / var25;
+		int var47 = Pix3D.centerX + (var27 << 9) / var31;
+		int var48 = Pix3D.centerY + (var30 << 9) / var31;
+		int var49 = Pix3D.centerX + (var33 << 9) / var37;
+		int var50 = Pix3D.centerY + (var36 << 9) / var37;
+		int var51 = Pix3D.centerX + (var39 << 9) / var43;
+		int var52 = Pix3D.centerY + (var42 << 9) / var43;
+		Pix3D.trans = 0;
 		if ((var49 - var51) * (var48 - var52) - (var50 - var52) * (var47 - var51) > 0) {
-			Pix3D.field637 = false;
-			if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.field630 || var51 > Pix2D.field630 || var47 > Pix2D.field630) {
-				Pix3D.field637 = true;
+			Pix3D.hclip = false;
+			if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.safeWidth || var51 > Pix2D.safeWidth || var47 > Pix2D.safeWidth) {
+				Pix3D.hclip = true;
 			}
 			if (field327 && this.method108(field328, field329, var50, var52, var48, var49, var51, var47)) {
 				field330 = arg6;
@@ -1684,37 +1684,37 @@ public class World3D {
 			}
 			if (arg0.field263 == -1) {
 				if (arg0.field261 != 12345678) {
-					Pix3D.method188(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260);
+					Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260);
 				}
-			} else if (field296) {
+			} else if (lowMem) {
 				int var53 = field345[arg0.field263];
-				Pix3D.method188(var50, var52, var48, var49, var51, var47, this.method107(arg0.field261, var53), this.method107(arg0.field262, var53), this.method107(arg0.field260, var53));
+				Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, this.method107(arg0.field261, var53), this.method107(arg0.field262, var53), this.method107(arg0.field260, var53));
 			} else if (arg0.field264) {
-				Pix3D.method192(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
+				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
 			} else {
-				Pix3D.method192(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.field263);
+				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.field263);
 			}
 		}
 		if ((var45 - var47) * (var52 - var48) - (var46 - var48) * (var51 - var47) <= 0) {
 			return;
 		}
-		Pix3D.field637 = false;
-		if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.field630 || var47 > Pix2D.field630 || var51 > Pix2D.field630) {
-			Pix3D.field637 = true;
+		Pix3D.hclip = false;
+		if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.safeWidth || var47 > Pix2D.safeWidth || var51 > Pix2D.safeWidth) {
+			Pix3D.hclip = true;
 		}
 		if (field327 && this.method108(field328, field329, var46, var48, var52, var45, var47, var51)) {
 			field330 = arg6;
 			field331 = arg7;
 		}
 		if (arg0.field263 != -1) {
-			if (!field296) {
-				Pix3D.method192(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
+			if (!lowMem) {
+				Pix3D.textureTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
 				return;
 			}
 			int var54 = field345[arg0.field263];
-			Pix3D.method188(var46, var48, var52, var45, var47, var51, this.method107(arg0.field259, var54), this.method107(arg0.field260, var54), this.method107(arg0.field262, var54));
+			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, this.method107(arg0.field259, var54), this.method107(arg0.field260, var54), this.method107(arg0.field262, var54));
 		} else if (arg0.field259 != 12345678) {
-			Pix3D.method188(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262);
+			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262);
 			return;
 		}
 	}
@@ -1738,10 +1738,10 @@ public class World3D {
 				Ground.field199[var10] = var17;
 				Ground.field200[var10] = var18;
 			}
-			Ground.field196[var10] = Pix3D.field641 + (var14 << 9) / var18;
-			Ground.field197[var10] = Pix3D.field642 + (var17 << 9) / var18;
+			Ground.field196[var10] = Pix3D.centerX + (var14 << 9) / var18;
+			Ground.field197[var10] = Pix3D.centerY + (var17 << 9) / var18;
 		}
-		Pix3D.field640 = 0;
+		Pix3D.trans = 0;
 		int var21 = arg5.field187.length;
 		for (int var22 = 0; var22 < var21; var22++) {
 			int var23 = arg5.field187[var22];
@@ -1754,9 +1754,9 @@ public class World3D {
 			int var30 = Ground.field197[var24];
 			int var31 = Ground.field197[var25];
 			if ((var26 - var27) * (var31 - var30) - (var29 - var30) * (var28 - var27) > 0) {
-				Pix3D.field637 = false;
-				if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.field630 || var27 > Pix2D.field630 || var28 > Pix2D.field630) {
-					Pix3D.field637 = true;
+				Pix3D.hclip = false;
+				if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth || var28 > Pix2D.safeWidth) {
+					Pix3D.hclip = true;
 				}
 				if (field327 && this.method108(field328, field329, var29, var30, var31, var26, var27, var28)) {
 					field330 = arg6;
@@ -1764,15 +1764,15 @@ public class World3D {
 				}
 				if (arg5.field190 == null || arg5.field190[var22] == -1) {
 					if (arg5.field184[var22] != 12345678) {
-						Pix3D.method188(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22]);
+						Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22]);
 					}
-				} else if (field296) {
+				} else if (lowMem) {
 					int var32 = field345[arg5.field190[var22]];
-					Pix3D.method188(var29, var30, var31, var26, var27, var28, this.method107(arg5.field184[var22], var32), this.method107(arg5.field185[var22], var32), this.method107(arg5.field186[var22], var32));
+					Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, this.method107(arg5.field184[var22], var32), this.method107(arg5.field185[var22], var32), this.method107(arg5.field186[var22], var32));
 				} else if (arg5.field191) {
-					Pix3D.method192(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22], Ground.field198[0], Ground.field198[1], Ground.field198[3], Ground.field199[0], Ground.field199[1], Ground.field199[3], Ground.field200[0], Ground.field200[1], Ground.field200[3], arg5.field190[var22]);
+					Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22], Ground.field198[0], Ground.field198[1], Ground.field198[3], Ground.field199[0], Ground.field199[1], Ground.field199[3], Ground.field200[0], Ground.field200[1], Ground.field200[3], arg5.field190[var22]);
 				} else {
-					Pix3D.method192(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22], Ground.field198[var23], Ground.field198[var24], Ground.field198[var25], Ground.field199[var23], Ground.field199[var24], Ground.field199[var25], Ground.field200[var23], Ground.field200[var24], Ground.field200[var25], arg5.field190[var22]);
+					Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22], Ground.field198[var23], Ground.field198[var24], Ground.field198[var25], Ground.field199[var23], Ground.field199[var24], Ground.field199[var25], Ground.field200[var23], Ground.field200[var24], Ground.field200[var25], arg5.field190[var22]);
 				}
 			}
 		}

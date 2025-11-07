@@ -6,65 +6,65 @@ import deob.ObfuscatedName;
 public class DoublyLinkList {
 
 	@ObfuscatedName("qb.c")
-	public DoublyLinkable field747 = new DoublyLinkable();
+	public DoublyLinkable sentinel = new DoublyLinkable();
 
 	@ObfuscatedName("qb.d")
-	public DoublyLinkable field748;
+	public DoublyLinkable cursor;
 
 	public DoublyLinkList() {
-		this.field747.field401 = this.field747;
-		this.field747.field402 = this.field747;
+		this.sentinel.next2 = this.sentinel;
+		this.sentinel.prev2 = this.sentinel;
 	}
 
 	@ObfuscatedName("qb.a(Lx;)V")
-	public void method263(DoublyLinkable arg0) {
-		if (arg0.field402 != null) {
-			arg0.method121();
+	public void push(DoublyLinkable arg0) {
+		if (arg0.prev2 != null) {
+			arg0.unlink2();
 		}
-		arg0.field402 = this.field747.field402;
-		arg0.field401 = this.field747;
-		arg0.field402.field401 = arg0;
-		arg0.field401.field402 = arg0;
+		arg0.prev2 = this.sentinel.prev2;
+		arg0.next2 = this.sentinel;
+		arg0.prev2.next2 = arg0;
+		arg0.next2.prev2 = arg0;
 	}
 
 	@ObfuscatedName("qb.a()Lx;")
-	public DoublyLinkable method264() {
-		DoublyLinkable var1 = this.field747.field401;
-		if (var1 == this.field747) {
+	public DoublyLinkable pop() {
+		DoublyLinkable var1 = this.sentinel.next2;
+		if (var1 == this.sentinel) {
 			return null;
 		} else {
-			var1.method121();
+			var1.unlink2();
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("qb.b()Lx;")
-	public DoublyLinkable method265() {
-		DoublyLinkable var1 = this.field747.field401;
-		if (var1 == this.field747) {
-			this.field748 = null;
+	public DoublyLinkable head() {
+		DoublyLinkable var1 = this.sentinel.next2;
+		if (var1 == this.sentinel) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field748 = var1.field401;
+			this.cursor = var1.next2;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("qb.a(I)Lx;")
-	public DoublyLinkable method266() {
-		DoublyLinkable var2 = this.field748;
-		if (var2 == this.field747) {
-			this.field748 = null;
+	public DoublyLinkable next() {
+		DoublyLinkable var2 = this.cursor;
+		if (var2 == this.sentinel) {
+			this.cursor = null;
 			return null;
 		}
-		this.field748 = var2.field401;
+		this.cursor = var2.next2;
 		return var2;
 	}
 
 	@ObfuscatedName("qb.c()I")
-	public int method267() {
+	public int size() {
 		int var1 = 0;
-		for (DoublyLinkable var2 = this.field747.field401; var2 != this.field747; var2 = var2.field401) {
+		for (DoublyLinkable var2 = this.sentinel.next2; var2 != this.sentinel; var2 = var2.next2) {
 			var1++;
 		}
 		return var1;

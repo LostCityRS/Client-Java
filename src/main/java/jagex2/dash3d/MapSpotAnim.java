@@ -34,7 +34,7 @@ public class MapSpotAnim extends ModelSource {
 	public boolean field616 = false;
 
 	public MapSpotAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg7) {
-		this.field608 = SpotAnimType.field1132[arg5];
+		this.field608 = SpotAnimType.types[arg5];
 		this.field610 = arg3;
 		this.field611 = arg4;
 		this.field612 = arg2;
@@ -49,50 +49,50 @@ public class MapSpotAnim extends ModelSource {
 		while (true) {
 			do {
 				do {
-					if (this.field615 <= this.field608.field1136.method384(this.field614)) {
+					if (this.field615 <= this.field608.seq.getFrameLength(this.field614)) {
 						return;
 					}
-					this.field615 -= this.field608.field1136.method384(this.field614) + 1;
+					this.field615 -= this.field608.seq.getFrameLength(this.field614) + 1;
 					this.field614++;
-				} while (this.field614 < this.field608.field1136.field1113);
-			} while (this.field614 >= 0 && this.field614 < this.field608.field1136.field1113);
+				} while (this.field614 < this.field608.seq.frameCount);
+			} while (this.field614 >= 0 && this.field614 < this.field608.seq.frameCount);
 			this.field614 = 0;
 			this.field616 = true;
 		}
 	}
 
 	@ObfuscatedName("gb.a(I)Lfb;")
-	public final Model method123() {
-		Model var2 = this.field608.method388();
+	public final Model getModel() {
+		Model var2 = this.field608.getModel();
 		if (var2 == null) {
 			return null;
 		}
-		int var3 = this.field608.field1136.field1114[this.field614];
-		Model var4 = new Model(AnimFrame.method62(var3), false, true, var2);
+		int var3 = this.field608.seq.frames[this.field614];
+		Model var4 = new Model(AnimFrame.isNull(var3), false, true, var2);
 		if (!this.field616) {
-			var4.method146();
-			var4.method147(var3);
-			var4.field571 = null;
-			var4.field570 = null;
+			var4.createLabelReferences();
+			var4.applyFrame(var3);
+			var4.labelFaces = null;
+			var4.labelVertices = null;
 		}
-		if (this.field608.field1139 != 128 || this.field608.field1140 != 128) {
-			var4.method155(this.field608.field1139, this.field608.field1139, this.field608.field1140);
+		if (this.field608.resizeh != 128 || this.field608.resizev != 128) {
+			var4.resize(this.field608.resizeh, this.field608.resizeh, this.field608.resizev);
 		}
-		if (this.field608.field1141 != 0) {
-			if (this.field608.field1141 == 90) {
-				var4.method150();
+		if (this.field608.angle != 0) {
+			if (this.field608.angle == 90) {
+				var4.rotateY90();
 			}
-			if (this.field608.field1141 == 180) {
-				var4.method150();
-				var4.method150();
+			if (this.field608.angle == 180) {
+				var4.rotateY90();
+				var4.rotateY90();
 			}
-			if (this.field608.field1141 == 270) {
-				var4.method150();
-				var4.method150();
-				var4.method150();
+			if (this.field608.angle == 270) {
+				var4.rotateY90();
+				var4.rotateY90();
+				var4.rotateY90();
 			}
 		}
-		var4.method156(this.field608.field1142 + 64, this.field608.field1143 + 850, -30, -50, -30, true);
+		var4.calculateNormals(this.field608.ambient + 64, this.field608.contrast + 850, -30, -50, -30, true);
 		return var4;
 	}
 }

@@ -43,13 +43,13 @@ public class Model extends ModelSource {
 	public int[] field569;
 
 	@ObfuscatedName("fb.bb")
-	public int[][] field570;
+	public int[][] labelVertices;
 
 	@ObfuscatedName("fb.cb")
-	public int[][] field571;
+	public int[][] labelFaces;
 
 	@ObfuscatedName("fb.db")
-	public boolean field572 = false;
+	public boolean picking = false;
 
 	@ObfuscatedName("fb.eb")
 	public VertexNormal[] field573;
@@ -157,7 +157,7 @@ public class Model extends ModelSource {
 	public int[] field552;
 
 	@ObfuscatedName("fb.K")
-	public int[] field553;
+	public int[] faceColour;
 
 	@ObfuscatedName("fb.E")
 	public int[] field547;
@@ -196,16 +196,16 @@ public class Model extends ModelSource {
 	public static int[] field601 = new int[1000];
 
 	@ObfuscatedName("fb.Hb")
-	public static int[] field602 = Pix3D.field645;
+	public static int[] field602 = Pix3D.sinTable;
 
 	@ObfuscatedName("fb.Ib")
-	public static int[] field603 = Pix3D.field646;
+	public static int[] field603 = Pix3D.cosTable;
 
 	@ObfuscatedName("fb.Jb")
-	public static int[] field604 = Pix3D.field657;
+	public static int[] field604 = Pix3D.colourTable;
 
 	@ObfuscatedName("fb.Kb")
-	public static int[] field605 = Pix3D.field644;
+	public static int[] field605 = Pix3D.divTable2;
 
 	@ObfuscatedName("fb.Y")
 	public int field567;
@@ -253,7 +253,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(ILub;)V")
-	public static void method136(int arg0, OnDemandProvider arg1) {
+	public static void init(int arg0, OnDemandProvider arg1) {
 		field574 = new Metadata[arg0];
 		field575 = arg1;
 	}
@@ -268,21 +268,21 @@ public class Model extends ModelSource {
 			return;
 		}
 		Packet var4 = new Packet(arg0);
-		var4.field711 = arg0.length - 18;
+		var4.pos = arg0.length - 18;
 		Metadata var5 = field574[arg2] = new Metadata();
 		var5.field220 = arg0;
-		var5.field221 = var4.method241();
-		var5.field222 = var4.method241();
-		var5.field223 = var4.method239();
-		int var6 = var4.method239();
-		int var7 = var4.method239();
-		int var8 = var4.method239();
-		int var9 = var4.method239();
-		int var10 = var4.method239();
-		int var11 = var4.method241();
-		int var12 = var4.method241();
-		int var13 = var4.method241();
-		int var14 = var4.method241();
+		var5.field221 = var4.g2();
+		var5.field222 = var4.g2();
+		var5.field223 = var4.g1();
+		int var6 = var4.g1();
+		int var7 = var4.g1();
+		int var8 = var4.g1();
+		int var9 = var4.g1();
+		int var10 = var4.g1();
+		int var11 = var4.g2();
+		int var12 = var4.g2();
+		int var13 = var4.g2();
+		int var14 = var4.g2();
 		byte var15 = 0;
 		var5.field224 = var15;
 		int var16 = var15 + var5.field221;
@@ -340,13 +340,13 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(II)Lfb;")
-	public static Model method139(int arg1) {
+	public static Model tryGet(int arg1) {
 		if (field574 == null) {
 			return null;
 		}
 		Metadata var2 = field574[arg1];
 		if (var2 == null) {
-			field575.method279(arg1);
+			field575.requestModel(arg1);
 			return null;
 		} else {
 			return new Model(arg1);
@@ -354,13 +354,13 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.c(I)Z")
-	public static boolean method140(int arg0) {
+	public static boolean check(int arg0) {
 		if (field574 == null) {
 			return false;
 		}
 		Metadata var1 = field574[arg0];
 		if (var1 == null) {
-			field575.method279(arg0);
+			field575.requestModel(arg0);
 			return false;
 		} else {
 			return true;
@@ -402,33 +402,33 @@ public class Model extends ModelSource {
 		if (var3.field235 >= 0) {
 			this.field569 = new int[this.field543];
 		}
-		this.field553 = new int[this.field543];
+		this.faceColour = new int[this.field543];
 		Packet var4 = new Packet(var3.field220);
-		var4.field711 = var3.field224;
+		var4.pos = var3.field224;
 		Packet var5 = new Packet(var3.field220);
-		var5.field711 = var3.field225;
+		var5.pos = var3.field225;
 		Packet var6 = new Packet(var3.field220);
-		var6.field711 = var3.field226;
+		var6.pos = var3.field226;
 		Packet var7 = new Packet(var3.field220);
-		var7.field711 = var3.field227;
+		var7.pos = var3.field227;
 		Packet var8 = new Packet(var3.field220);
-		var8.field711 = var3.field228;
+		var8.pos = var3.field228;
 		int var9 = 0;
 		int var10 = 0;
 		int var11 = 0;
 		for (int var13 = 0; var13 < this.field539; var13++) {
-			int var14 = var4.method239();
+			int var14 = var4.g1();
 			int var15 = 0;
 			if ((var14 & 0x1) != 0) {
-				var15 = var5.method252();
+				var15 = var5.gsmart();
 			}
 			int var16 = 0;
 			if ((var14 & 0x2) != 0) {
-				var16 = var6.method252();
+				var16 = var6.gsmart();
 			}
 			int var17 = 0;
 			if ((var14 & 0x4) != 0) {
-				var17 = var7.method252();
+				var17 = var7.gsmart();
 			}
 			this.field540[var13] = var9 + var15;
 			this.field541[var13] = var10 + var16;
@@ -437,41 +437,41 @@ public class Model extends ModelSource {
 			var10 = this.field541[var13];
 			var11 = this.field542[var13];
 			if (this.field568 != null) {
-				this.field568[var13] = var8.method239();
+				this.field568[var13] = var8.g1();
 			}
 		}
-		var4.field711 = var3.field231;
-		var5.field711 = var3.field232;
-		var6.field711 = var3.field233;
-		var7.field711 = var3.field234;
-		var8.field711 = var3.field235;
+		var4.pos = var3.field231;
+		var5.pos = var3.field232;
+		var6.pos = var3.field233;
+		var7.pos = var3.field234;
+		var8.pos = var3.field235;
 		for (int var18 = 0; var18 < this.field543; var18++) {
-			this.field553[var18] = var4.method241();
+			this.faceColour[var18] = var4.g2();
 			if (this.field550 != null) {
-				this.field550[var18] = var5.method239();
+				this.field550[var18] = var5.g1();
 			}
 			if (this.field551 != null) {
-				this.field551[var18] = var6.method239();
+				this.field551[var18] = var6.g1();
 			}
 			if (this.field552 != null) {
-				this.field552[var18] = var7.method239();
+				this.field552[var18] = var7.g1();
 			}
 			if (this.field569 != null) {
-				this.field569[var18] = var8.method239();
+				this.field569[var18] = var8.g1();
 			}
 		}
-		var4.field711 = var3.field229;
-		var5.field711 = var3.field230;
+		var4.pos = var3.field229;
+		var5.pos = var3.field230;
 		int var19 = 0;
 		int var20 = 0;
 		int var21 = 0;
 		int var22 = 0;
 		for (int var23 = 0; var23 < this.field543; var23++) {
-			int var24 = var5.method239();
+			int var24 = var5.g1();
 			if (var24 == 1) {
-				var19 = var4.method252() + var22;
-				var20 = var4.method252() + var19;
-				var21 = var4.method252() + var20;
+				var19 = var4.gsmart() + var22;
+				var20 = var4.gsmart() + var19;
+				var21 = var4.gsmart() + var20;
 				var22 = var21;
 				this.field544[var23] = var19;
 				this.field545[var23] = var20;
@@ -480,7 +480,7 @@ public class Model extends ModelSource {
 			if (var24 == 2) {
 				var19 = var19;
 				var20 = var21;
-				var21 = var4.method252() + var22;
+				var21 = var4.gsmart() + var22;
 				var22 = var21;
 				this.field544[var23] = var19;
 				this.field545[var23] = var20;
@@ -489,7 +489,7 @@ public class Model extends ModelSource {
 			if (var24 == 3) {
 				var19 = var21;
 				var20 = var20;
-				var21 = var4.method252() + var22;
+				var21 = var4.gsmart() + var22;
 				var22 = var21;
 				this.field544[var23] = var19;
 				this.field545[var23] = var20;
@@ -499,18 +499,18 @@ public class Model extends ModelSource {
 				int var27 = var19;
 				var19 = var20;
 				var20 = var27;
-				var21 = var4.method252() + var22;
+				var21 = var4.gsmart() + var22;
 				var22 = var21;
 				this.field544[var23] = var19;
 				this.field545[var23] = var27;
 				this.field546[var23] = var21;
 			}
 		}
-		var4.field711 = var3.field236;
+		var4.pos = var3.field236;
 		for (int var28 = 0; var28 < this.field555; var28++) {
-			this.field556[var28] = var4.method241();
-			this.field557[var28] = var4.method241();
-			this.field558[var28] = var4.method241();
+			this.field556[var28] = var4.g2();
+			this.field557[var28] = var4.g2();
+			this.field558[var28] = var4.g2();
 		}
 	}
 
@@ -567,7 +567,7 @@ public class Model extends ModelSource {
 		if (var7) {
 			this.field569 = new int[this.field543];
 		}
-		this.field553 = new int[this.field543];
+		this.faceColour = new int[this.field543];
 		this.field539 = 0;
 		this.field543 = 0;
 		this.field555 = 0;
@@ -599,7 +599,7 @@ public class Model extends ModelSource {
 					if (var7 && var11.field569 != null) {
 						this.field569[this.field543] = var11.field569[var12];
 					}
-					this.field553[this.field543] = var11.field553[var12];
+					this.faceColour[this.field543] = var11.faceColour[var12];
 					this.field544[this.field543] = this.method142(var11, var11.field544[var12]);
 					this.field545[this.field543] = this.method142(var11, var11.field545[var12]);
 					this.field546[this.field543] = this.method142(var11, var11.field546[var12]);
@@ -643,7 +643,7 @@ public class Model extends ModelSource {
 					var6 = true;
 				}
 				var7 |= var10.field552 != null;
-				var8 |= var10.field553 != null;
+				var8 |= var10.faceColour != null;
 			}
 		}
 		this.field540 = new int[this.field539];
@@ -668,7 +668,7 @@ public class Model extends ModelSource {
 			this.field552 = new int[this.field543];
 		}
 		if (var8) {
-			this.field553 = new int[this.field543];
+			this.faceColour = new int[this.field543];
 		}
 		this.field539 = 0;
 		this.field543 = 0;
@@ -711,8 +711,8 @@ public class Model extends ModelSource {
 							this.field552[this.field543] = var13.field552[var16];
 						}
 					}
-					if (var8 && var13.field553 != null) {
-						this.field553[this.field543] = var13.field553[var16];
+					if (var8 && var13.faceColour != null) {
+						this.faceColour[this.field543] = var13.faceColour[var16];
 					}
 					this.field543++;
 				}
@@ -724,7 +724,7 @@ public class Model extends ModelSource {
 				}
 			}
 		}
-		this.method143();
+		this.calculateBoundsCylinder();
 	}
 
 	public Model(boolean arg0, boolean arg2, boolean arg3, Model arg4) {
@@ -747,11 +747,11 @@ public class Model extends ModelSource {
 			}
 		}
 		if (arg3) {
-			this.field553 = arg4.field553;
+			this.faceColour = arg4.faceColour;
 		} else {
-			this.field553 = new int[this.field543];
+			this.faceColour = new int[this.field543];
 			for (int var7 = 0; var7 < this.field543; var7++) {
-				this.field553[var7] = arg4.field553[var7];
+				this.faceColour[var7] = arg4.faceColour[var7];
 			}
 		}
 		if (arg0) {
@@ -813,14 +813,14 @@ public class Model extends ModelSource {
 					this.field550[var8] = arg2.field550[var8];
 				}
 			}
-			super.field405 = new VertexNormal[this.field539];
+			super.vertexNormal = new VertexNormal[this.field539];
 			for (int var9 = 0; var9 < this.field539; var9++) {
-				VertexNormal var10 = super.field405[var9] = new VertexNormal();
-				VertexNormal var11 = arg2.field405[var9];
-				var10.field255 = var11.field255;
-				var10.field256 = var11.field256;
-				var10.field257 = var11.field257;
-				var10.field258 = var11.field258;
+				VertexNormal var10 = super.vertexNormal[var9] = new VertexNormal();
+				VertexNormal var11 = arg2.vertexNormal[var9];
+				var10.x = var11.x;
+				var10.y = var11.y;
+				var10.z = var11.z;
+				var10.w = var11.w;
 			}
 			this.field573 = arg2.field573;
 		} else {
@@ -831,7 +831,7 @@ public class Model extends ModelSource {
 		}
 		this.field540 = arg2.field540;
 		this.field542 = arg2.field542;
-		this.field553 = arg2.field553;
+		this.faceColour = arg2.faceColour;
 		this.field552 = arg2.field552;
 		this.field551 = arg2.field551;
 		this.field554 = arg2.field554;
@@ -841,7 +841,7 @@ public class Model extends ModelSource {
 		this.field556 = arg2.field556;
 		this.field557 = arg2.field557;
 		this.field558 = arg2.field558;
-		super.field406 = arg2.field406;
+		super.minY = arg2.minY;
 		this.field564 = arg2.field564;
 		this.field563 = arg2.field563;
 		this.field566 = arg2.field566;
@@ -853,7 +853,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(ZILfb;)V")
-	public void method141(boolean arg0, Model arg2) {
+	public void set(boolean arg0, Model arg2) {
 		this.field539 = arg2.field539;
 		this.field543 = arg2.field543;
 		this.field555 = arg2.field555;
@@ -888,11 +888,11 @@ public class Model extends ModelSource {
 			}
 		}
 		this.field550 = arg2.field550;
-		this.field553 = arg2.field553;
+		this.faceColour = arg2.faceColour;
 		this.field551 = arg2.field551;
 		this.field554 = arg2.field554;
-		this.field571 = arg2.field571;
-		this.field570 = arg2.field570;
+		this.labelFaces = arg2.labelFaces;
+		this.labelVertices = arg2.labelVertices;
 		this.field544 = arg2.field544;
 		this.field545 = arg2.field545;
 		this.field546 = arg2.field546;
@@ -929,16 +929,16 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.d(I)V")
-	public void method143() {
-		super.field406 = 0;
+	public void calculateBoundsCylinder() {
+		super.minY = 0;
 		this.field563 = 0;
 		this.field564 = 0;
 		for (int var2 = 0; var2 < this.field539; var2++) {
 			int var3 = this.field540[var2];
 			int var4 = this.field541[var2];
 			int var5 = this.field542[var2];
-			if (-var4 > super.field406) {
-				super.field406 = -var4;
+			if (-var4 > super.minY) {
+				super.minY = -var4;
 			}
 			if (var4 > this.field564) {
 				this.field564 = var4;
@@ -949,30 +949,30 @@ public class Model extends ModelSource {
 			}
 		}
 		this.field563 = (int) (Math.sqrt((double) this.field563) + 0.99D);
-		this.field566 = (int) (Math.sqrt((double) (this.field563 * this.field563 + super.field406 * super.field406)) + 0.99D);
+		this.field566 = (int) (Math.sqrt((double) (this.field563 * this.field563 + super.minY * super.minY)) + 0.99D);
 		this.field565 = this.field566 + (int) (Math.sqrt((double) (this.field563 * this.field563 + this.field564 * this.field564)) + 0.99D);
 	}
 
 	@ObfuscatedName("fb.a(Z)V")
 	public void method144() {
-		super.field406 = 0;
+		super.minY = 0;
 		this.field564 = 0;
 		for (int var2 = 0; var2 < this.field539; var2++) {
 			int var3 = this.field541[var2];
-			if (-var3 > super.field406) {
-				super.field406 = -var3;
+			if (-var3 > super.minY) {
+				super.minY = -var3;
 			}
 			if (var3 > this.field564) {
 				this.field564 = var3;
 			}
 		}
-		this.field566 = (int) (Math.sqrt((double) (this.field563 * this.field563 + super.field406 * super.field406)) + 0.99D);
+		this.field566 = (int) (Math.sqrt((double) (this.field563 * this.field563 + super.minY * super.minY)) + 0.99D);
 		this.field565 = this.field566 + (int) (Math.sqrt((double) (this.field563 * this.field563 + this.field564 * this.field564)) + 0.99D);
 	}
 
 	@ObfuscatedName("fb.e(I)V")
 	public void method145() {
-		super.field406 = 0;
+		super.minY = 0;
 		this.field563 = 0;
 		this.field564 = 0;
 		this.field559 = 999999;
@@ -995,8 +995,8 @@ public class Model extends ModelSource {
 			if (var5 > this.field561) {
 				this.field561 = var5;
 			}
-			if (-var4 > super.field406) {
-				super.field406 = -var4;
+			if (-var4 > super.minY) {
+				super.minY = -var4;
 			}
 			if (var4 > this.field564) {
 				this.field564 = var4;
@@ -1007,12 +1007,12 @@ public class Model extends ModelSource {
 			}
 		}
 		this.field563 = (int) Math.sqrt((double) this.field563);
-		this.field566 = (int) Math.sqrt((double) (this.field563 * this.field563 + super.field406 * super.field406));
+		this.field566 = (int) Math.sqrt((double) (this.field563 * this.field563 + super.minY * super.minY));
 		this.field565 = this.field566 + (int) Math.sqrt((double) (this.field563 * this.field563 + this.field564 * this.field564));
 	}
 
 	@ObfuscatedName("fb.a(B)V")
-	public void method146() {
+	public void createLabelReferences() {
 		int var10002;
 		if (this.field568 != null) {
 			int[] var3 = new int[256];
@@ -1024,15 +1024,15 @@ public class Model extends ModelSource {
 					var4 = var6;
 				}
 			}
-			this.field570 = new int[var4 + 1][];
+			this.labelVertices = new int[var4 + 1][];
 			for (int var7 = 0; var7 <= var4; var7++) {
-				this.field570[var7] = new int[var3[var7]];
+				this.labelVertices[var7] = new int[var3[var7]];
 				var3[var7] = 0;
 			}
 			int var8 = 0;
 			while (var8 < this.field539) {
 				int var9 = this.field568[var8];
-				this.field570[var9][var3[var9]++] = var8++;
+				this.labelVertices[var9][var3[var9]++] = var8++;
 			}
 			this.field568 = null;
 		}
@@ -1048,70 +1048,70 @@ public class Model extends ModelSource {
 				var11 = var13;
 			}
 		}
-		this.field571 = new int[var11 + 1][];
+		this.labelFaces = new int[var11 + 1][];
 		for (int var14 = 0; var14 <= var11; var14++) {
-			this.field571[var14] = new int[var10[var14]];
+			this.labelFaces[var14] = new int[var10[var14]];
 			var10[var14] = 0;
 		}
 		int var15 = 0;
 		while (var15 < this.field543) {
 			int var16 = this.field569[var15];
-			this.field571[var16][var10[var16]++] = var15++;
+			this.labelFaces[var16][var10[var16]++] = var15++;
 		}
 		this.field569 = null;
 	}
 
 	@ObfuscatedName("fb.b(ZI)V")
-	public void method147(int arg1) {
-		if (this.field570 == null || arg1 == -1) {
+	public void applyFrame(int arg1) {
+		if (this.labelVertices == null || arg1 == -1) {
 			return;
 		}
-		AnimFrame var3 = AnimFrame.method61(arg1);
+		AnimFrame var3 = AnimFrame.get(arg1);
 		if (var3 == null) {
 			return;
 		}
-		AnimBase var4 = var3.field165;
+		AnimBase var4 = var3.base;
 		field594 = 0;
 		field595 = 0;
 		field596 = 0;
-		for (int var5 = 0; var5 < var3.field166; var5++) {
-			int var6 = var3.field167[var5];
-			this.method149(var4.field160[var6], var4.field161[var6], var3.field168[var5], var3.field169[var5], var3.field170[var5]);
+		for (int var5 = 0; var5 < var3.size; var5++) {
+			int var6 = var3.ti[var5];
+			this.method149(var4.types[var6], var4.labels[var6], var3.tx[var5], var3.ty[var5], var3.tz[var5]);
 		}
 	}
 
 	@ObfuscatedName("fb.a([IIII)V")
-	public void method148(int[] arg0, int arg1, int arg2, int arg3) {
+	public void applyFrames(int[] arg0, int arg1, int arg2, int arg3) {
 		if (arg2 == -1) {
 			return;
 		}
 		if (arg0 == null || arg3 == -1) {
-			this.method147(arg2);
+			this.applyFrame(arg2);
 			return;
 		}
-		AnimFrame var5 = AnimFrame.method61(arg2);
+		AnimFrame var5 = AnimFrame.get(arg2);
 		if (arg1 >= 0 || var5 == null) {
 			return;
 		}
-		AnimFrame var6 = AnimFrame.method61(arg3);
+		AnimFrame var6 = AnimFrame.get(arg3);
 		if (var6 == null) {
-			this.method147(arg2);
+			this.applyFrame(arg2);
 			return;
 		}
-		AnimBase var7 = var5.field165;
+		AnimBase var7 = var5.base;
 		field594 = 0;
 		field595 = 0;
 		field596 = 0;
 		byte var8 = 0;
 		int var16 = var8 + 1;
 		int var9 = arg0[var8];
-		for (int var10 = 0; var10 < var5.field166; var10++) {
-			int var11 = var5.field167[var10];
+		for (int var10 = 0; var10 < var5.size; var10++) {
+			int var11 = var5.ti[var10];
 			while (var11 > var9) {
 				var9 = arg0[var16++];
 			}
-			if (var11 != var9 || var7.field160[var11] == 0) {
-				this.method149(var7.field160[var11], var7.field161[var11], var5.field168[var10], var5.field169[var10], var5.field170[var10]);
+			if (var11 != var9 || var7.types[var11] == 0) {
+				this.method149(var7.types[var11], var7.labels[var11], var5.tx[var10], var5.ty[var10], var5.tz[var10]);
 			}
 		}
 		field594 = 0;
@@ -1120,13 +1120,13 @@ public class Model extends ModelSource {
 		byte var12 = 0;
 		int var17 = var12 + 1;
 		int var13 = arg0[var12];
-		for (int var14 = 0; var14 < var6.field166; var14++) {
-			int var15 = var6.field167[var14];
+		for (int var14 = 0; var14 < var6.size; var14++) {
+			int var15 = var6.ti[var14];
 			while (var15 > var13) {
 				var13 = arg0[var17++];
 			}
-			if (var15 == var13 || var7.field160[var15] == 0) {
-				this.method149(var7.field160[var15], var7.field161[var15], var6.field168[var14], var6.field169[var14], var6.field170[var14]);
+			if (var15 == var13 || var7.types[var15] == 0) {
+				this.method149(var7.types[var15], var7.labels[var15], var6.tx[var14], var6.ty[var14], var6.tz[var14]);
 			}
 		}
 	}
@@ -1141,8 +1141,8 @@ public class Model extends ModelSource {
 			field596 = 0;
 			for (int var8 = 0; var8 < var6; var8++) {
 				int var9 = arg1[var8];
-				if (var9 < this.field570.length) {
-					int[] var10 = this.field570[var9];
+				if (var9 < this.labelVertices.length) {
+					int[] var10 = this.labelVertices[var9];
 					for (int var11 = 0; var11 < var10.length; var11++) {
 						int var12 = var10[var11];
 						field594 += this.field540[var12];
@@ -1164,8 +1164,8 @@ public class Model extends ModelSource {
 		} else if (arg0 == 1) {
 			for (int var13 = 0; var13 < var6; var13++) {
 				int var14 = arg1[var13];
-				if (var14 < this.field570.length) {
-					int[] var15 = this.field570[var14];
+				if (var14 < this.labelVertices.length) {
+					int[] var15 = this.labelVertices[var14];
 					for (int var16 = 0; var16 < var15.length; var16++) {
 						int var17 = var15[var16];
 						this.field540[var17] += arg2;
@@ -1177,8 +1177,8 @@ public class Model extends ModelSource {
 		} else if (arg0 == 2) {
 			for (int var18 = 0; var18 < var6; var18++) {
 				int var19 = arg1[var18];
-				if (var19 < this.field570.length) {
-					int[] var20 = this.field570[var19];
+				if (var19 < this.labelVertices.length) {
+					int[] var20 = this.labelVertices[var19];
 					for (int var21 = 0; var21 < var20.length; var21++) {
 						int var22 = var20[var21];
 						this.field540[var22] -= field594;
@@ -1217,8 +1217,8 @@ public class Model extends ModelSource {
 		} else if (arg0 == 3) {
 			for (int var35 = 0; var35 < var6; var35++) {
 				int var36 = arg1[var35];
-				if (var36 < this.field570.length) {
-					int[] var37 = this.field570[var36];
+				if (var36 < this.labelVertices.length) {
+					int[] var37 = this.labelVertices[var36];
 					for (int var38 = 0; var38 < var37.length; var38++) {
 						int var39 = var37[var38];
 						this.field540[var39] -= field594;
@@ -1233,11 +1233,11 @@ public class Model extends ModelSource {
 					}
 				}
 			}
-		} else if (arg0 == 5 && (this.field571 != null && this.field552 != null)) {
+		} else if (arg0 == 5 && (this.labelFaces != null && this.field552 != null)) {
 			for (int var40 = 0; var40 < var6; var40++) {
 				int var41 = arg1[var40];
-				if (var41 < this.field571.length) {
-					int[] var42 = this.field571[var41];
+				if (var41 < this.labelFaces.length) {
+					int[] var42 = this.labelFaces[var41];
 					for (int var43 = 0; var43 < var42.length; var43++) {
 						int var44 = var42[var43];
 						this.field552[var44] += arg2 * 8;
@@ -1254,7 +1254,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(B)V")
-	public void method150() {
+	public void rotateY90() {
 		for (int var2 = 0; var2 < this.field539; var2++) {
 			int var3 = this.field540[var2];
 			this.field540[var2] = this.field542[var2];
@@ -1263,7 +1263,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(BI)V")
-	public void method151(int arg1) {
+	public void rotateX(int arg1) {
 		int var3 = field602[arg1];
 		int var4 = field603[arg1];
 		for (int var5 = 0; var5 < this.field539; var5++) {
@@ -1274,7 +1274,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(BIII)V")
-	public void method152(int arg1, int arg2, int arg3) {
+	public void offset(int arg1, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.field539; var5++) {
 			this.field540[var5] += arg1;
 			this.field541[var5] += arg3;
@@ -1283,10 +1283,10 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(II)V")
-	public void method153(int arg0, int arg1) {
+	public void recolour(int arg0, int arg1) {
 		for (int var3 = 0; var3 < this.field543; var3++) {
-			if (this.field553[var3] == arg0) {
-				this.field553[var3] = arg1;
+			if (this.faceColour[var3] == arg0) {
+				this.faceColour[var3] = arg1;
 			}
 		}
 	}
@@ -1304,7 +1304,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIII)V")
-	public void method155(int arg1, int arg2, int arg3) {
+	public void resize(int arg1, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.field539; var5++) {
 			this.field540[var5] = this.field540[var5] * arg2 / 128;
 			this.field541[var5] = this.field541[var5] * arg3 / 128;
@@ -1313,7 +1313,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIZ)V")
-	public final void method156(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5) {
+	public final void calculateNormals(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5) {
 		int var7 = (int) Math.sqrt((double) (arg2 * arg2 + arg3 * arg3 + arg4 * arg4));
 		int var8 = arg1 * var7 >> 8;
 		if (this.field547 == null) {
@@ -1321,10 +1321,10 @@ public class Model extends ModelSource {
 			this.field548 = new int[this.field543];
 			this.field549 = new int[this.field543];
 		}
-		if (super.field405 == null) {
-			super.field405 = new VertexNormal[this.field539];
+		if (super.vertexNormal == null) {
+			super.vertexNormal = new VertexNormal[this.field539];
 			for (int var9 = 0; var9 < this.field539; var9++) {
-				super.field405[var9] = new VertexNormal();
+				super.vertexNormal[var9] = new VertexNormal();
 			}
 		}
 		for (int var10 = 0; var10 < this.field543; var10++) {
@@ -1352,24 +1352,24 @@ public class Model extends ModelSource {
 			int var25 = var21 * 256 / var23;
 			int var26 = var22 * 256 / var23;
 			if (this.field550 == null || (this.field550[var10] & 0x1) == 0) {
-				VertexNormal var27 = super.field405[var11];
-				var27.field255 += var24;
-				var27.field256 += var25;
-				var27.field257 += var26;
-				var27.field258++;
-				VertexNormal var28 = super.field405[var12];
-				var28.field255 += var24;
-				var28.field256 += var25;
-				var28.field257 += var26;
-				var28.field258++;
-				VertexNormal var29 = super.field405[var13];
-				var29.field255 += var24;
-				var29.field256 += var25;
-				var29.field257 += var26;
-				var29.field258++;
+				VertexNormal var27 = super.vertexNormal[var11];
+				var27.x += var24;
+				var27.y += var25;
+				var27.z += var26;
+				var27.w++;
+				VertexNormal var28 = super.vertexNormal[var12];
+				var28.x += var24;
+				var28.y += var25;
+				var28.z += var26;
+				var28.w++;
+				VertexNormal var29 = super.vertexNormal[var13];
+				var29.x += var24;
+				var29.y += var25;
+				var29.z += var26;
+				var29.w++;
 			} else {
 				int var30 = arg0 + (arg2 * var24 + arg3 * var25 + arg4 * var26) / (var8 + var8 / 2);
-				this.field547[var10] = method158(this.field553[var10], var30, this.field550[var10]);
+				this.field547[var10] = method158(this.faceColour[var10], var30, this.field550[var10]);
 			}
 		}
 		if (arg5) {
@@ -1377,16 +1377,16 @@ public class Model extends ModelSource {
 		} else {
 			this.field573 = new VertexNormal[this.field539];
 			for (int var31 = 0; var31 < this.field539; var31++) {
-				VertexNormal var32 = super.field405[var31];
+				VertexNormal var32 = super.vertexNormal[var31];
 				VertexNormal var33 = this.field573[var31] = new VertexNormal();
-				var33.field255 = var32.field255;
-				var33.field256 = var32.field256;
-				var33.field257 = var32.field257;
-				var33.field258 = var32.field258;
+				var33.x = var32.x;
+				var33.y = var32.y;
+				var33.z = var32.z;
+				var33.w = var32.w;
 			}
 		}
 		if (arg5) {
-			this.method143();
+			this.calculateBoundsCylinder();
 		} else {
 			this.method145();
 		}
@@ -1399,31 +1399,31 @@ public class Model extends ModelSource {
 			int var8 = this.field545[var6];
 			int var9 = this.field546[var6];
 			if (this.field550 == null) {
-				int var10 = this.field553[var6];
-				VertexNormal var11 = super.field405[var7];
-				int var12 = arg0 + (arg2 * var11.field255 + arg3 * var11.field256 + arg4 * var11.field257) / (arg1 * var11.field258);
+				int var10 = this.faceColour[var6];
+				VertexNormal var11 = super.vertexNormal[var7];
+				int var12 = arg0 + (arg2 * var11.x + arg3 * var11.y + arg4 * var11.z) / (arg1 * var11.w);
 				this.field547[var6] = method158(var10, var12, 0);
-				VertexNormal var13 = super.field405[var8];
-				int var14 = arg0 + (arg2 * var13.field255 + arg3 * var13.field256 + arg4 * var13.field257) / (arg1 * var13.field258);
+				VertexNormal var13 = super.vertexNormal[var8];
+				int var14 = arg0 + (arg2 * var13.x + arg3 * var13.y + arg4 * var13.z) / (arg1 * var13.w);
 				this.field548[var6] = method158(var10, var14, 0);
-				VertexNormal var15 = super.field405[var9];
-				int var16 = arg0 + (arg2 * var15.field255 + arg3 * var15.field256 + arg4 * var15.field257) / (arg1 * var15.field258);
+				VertexNormal var15 = super.vertexNormal[var9];
+				int var16 = arg0 + (arg2 * var15.x + arg3 * var15.y + arg4 * var15.z) / (arg1 * var15.w);
 				this.field549[var6] = method158(var10, var16, 0);
 			} else if ((this.field550[var6] & 0x1) == 0) {
-				int var17 = this.field553[var6];
+				int var17 = this.faceColour[var6];
 				int var18 = this.field550[var6];
-				VertexNormal var19 = super.field405[var7];
-				int var20 = arg0 + (arg2 * var19.field255 + arg3 * var19.field256 + arg4 * var19.field257) / (arg1 * var19.field258);
+				VertexNormal var19 = super.vertexNormal[var7];
+				int var20 = arg0 + (arg2 * var19.x + arg3 * var19.y + arg4 * var19.z) / (arg1 * var19.w);
 				this.field547[var6] = method158(var17, var20, var18);
-				VertexNormal var21 = super.field405[var8];
-				int var22 = arg0 + (arg2 * var21.field255 + arg3 * var21.field256 + arg4 * var21.field257) / (arg1 * var21.field258);
+				VertexNormal var21 = super.vertexNormal[var8];
+				int var22 = arg0 + (arg2 * var21.x + arg3 * var21.y + arg4 * var21.z) / (arg1 * var21.w);
 				this.field548[var6] = method158(var17, var22, var18);
-				VertexNormal var23 = super.field405[var9];
-				int var24 = arg0 + (arg2 * var23.field255 + arg3 * var23.field256 + arg4 * var23.field257) / (arg1 * var23.field258);
+				VertexNormal var23 = super.vertexNormal[var9];
+				int var24 = arg0 + (arg2 * var23.x + arg3 * var23.y + arg4 * var23.z) / (arg1 * var23.w);
 				this.field549[var6] = method158(var17, var24, var18);
 			}
 		}
-		super.field405 = null;
+		super.vertexNormal = null;
 		this.field573 = null;
 		this.field568 = null;
 		this.field569 = null;
@@ -1434,7 +1434,7 @@ public class Model extends ModelSource {
 				}
 			}
 		}
-		this.field553 = null;
+		this.faceColour = null;
 	}
 
 	@ObfuscatedName("fb.a(III)I")
@@ -1458,8 +1458,8 @@ public class Model extends ModelSource {
 
 	@ObfuscatedName("fb.a(IIIIIII)V")
 	public final void method159(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		int var8 = Pix3D.field641;
-		int var9 = Pix3D.field642;
+		int var8 = Pix3D.centerX;
+		int var9 = Pix3D.centerY;
 		int var10 = field602[arg0];
 		int var11 = field603[arg0];
 		int var12 = field602[arg1];
@@ -1509,7 +1509,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIIIII)V")
-	public final void method122(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public final void draw(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = arg7 * arg4 - arg5 * arg3 >> 16;
 		int var11 = arg6 * arg1 + var10 * arg2 >> 16;
 		int var12 = this.field563 * arg2 >> 16;
@@ -1519,25 +1519,25 @@ public class Model extends ModelSource {
 		}
 		int var14 = arg7 * arg3 + arg5 * arg4 >> 16;
 		int var15 = var14 - this.field563 << 9;
-		if (var15 / var13 >= Pix2D.field631) {
+		if (var15 / var13 >= Pix2D.centerX2d) {
 			return;
 		}
 		int var16 = var14 + this.field563 << 9;
-		if (var16 / var13 <= -Pix2D.field631) {
+		if (var16 / var13 <= -Pix2D.centerX2d) {
 			return;
 		}
 		int var17 = arg6 * arg2 - var10 * arg1 >> 16;
 		int var18 = this.field563 * arg1 >> 16;
 		int var19 = var17 + var18 << 9;
-		if (var19 / var13 <= -Pix2D.field632) {
+		if (var19 / var13 <= -Pix2D.centerY2d) {
 			return;
 		}
-		int var20 = var18 + (super.field406 * arg2 >> 16);
+		int var20 = var18 + (super.minY * arg2 >> 16);
 		int var21 = var17 - var20 << 9;
-		if (var21 / var13 >= Pix2D.field632) {
+		if (var21 / var13 >= Pix2D.centerY2d) {
 			return;
 		}
-		int var22 = var12 + (super.field406 * arg1 >> 16);
+		int var22 = var12 + (super.minY * arg1 >> 16);
 		boolean var23 = false;
 		if (var11 - var22 <= 50) {
 			var23 = true;
@@ -1566,18 +1566,18 @@ public class Model extends ModelSource {
 				var29 = var19 / var13;
 				var28 = var21 / var25;
 			}
-			int var30 = field598 - Pix3D.field641;
-			int var31 = field599 - Pix3D.field642;
+			int var30 = field598 - Pix3D.centerX;
+			int var31 = field599 - Pix3D.centerY;
 			if (var30 > var26 && var30 < var27 && var31 > var28 && var31 < var29) {
-				if (this.field572) {
+				if (this.picking) {
 					field601[field600++] = arg8;
 				} else {
 					var24 = true;
 				}
 			}
 		}
-		int var32 = Pix3D.field641;
-		int var33 = Pix3D.field642;
+		int var32 = Pix3D.centerX;
+		int var33 = Pix3D.centerY;
 		int var34 = 0;
 		int var35 = 0;
 		if (arg0 != 0) {
@@ -1644,7 +1644,7 @@ public class Model extends ModelSource {
 					}
 					if ((var9 - var10) * (field579[var8] - field579[var7]) - (field579[var6] - field579[var7]) * (var11 - var10) > 0) {
 						field577[var5] = false;
-						if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix2D.field630 && var10 <= Pix2D.field630 && var11 <= Pix2D.field630) {
+						if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix2D.safeWidth && var10 <= Pix2D.safeWidth && var11 <= Pix2D.safeWidth) {
 							field576[var5] = false;
 						} else {
 							field576[var5] = true;
@@ -1792,11 +1792,11 @@ public class Model extends ModelSource {
 		int var2 = this.field544[arg0];
 		int var3 = this.field545[arg0];
 		int var4 = this.field546[arg0];
-		Pix3D.field637 = field576[arg0];
+		Pix3D.hclip = field576[arg0];
 		if (this.field552 == null) {
-			Pix3D.field640 = 0;
+			Pix3D.trans = 0;
 		} else {
-			Pix3D.field640 = this.field552[arg0];
+			Pix3D.trans = this.field552[arg0];
 		}
 		int var5;
 		if (this.field550 == null) {
@@ -1805,28 +1805,28 @@ public class Model extends ModelSource {
 			var5 = this.field550[arg0] & 0x3;
 		}
 		if (var5 == 0) {
-			Pix3D.method188(field579[var2], field579[var3], field579[var4], field578[var2], field578[var3], field578[var4], this.field547[arg0], this.field548[arg0], this.field549[arg0]);
+			Pix3D.gouraudTriangle(field579[var2], field579[var3], field579[var4], field578[var2], field578[var3], field578[var4], this.field547[arg0], this.field548[arg0], this.field549[arg0]);
 		} else if (var5 == 1) {
-			Pix3D.method190(field579[var2], field579[var3], field579[var4], field578[var2], field578[var3], field578[var4], field604[this.field547[arg0]]);
+			Pix3D.flatTriangle(field579[var2], field579[var3], field579[var4], field578[var2], field578[var3], field578[var4], field604[this.field547[arg0]]);
 		} else if (var5 == 2) {
 			int var6 = this.field550[arg0] >> 2;
 			int var7 = this.field556[var6];
 			int var8 = this.field557[var6];
 			int var9 = this.field558[var6];
-			Pix3D.method192(field579[var2], field579[var3], field579[var4], field578[var2], field578[var3], field578[var4], this.field547[arg0], this.field548[arg0], this.field549[arg0], field581[var7], field581[var8], field581[var9], field582[var7], field582[var8], field582[var9], field583[var7], field583[var8], field583[var9], this.field553[arg0]);
+			Pix3D.textureTriangle(field579[var2], field579[var3], field579[var4], field578[var2], field578[var3], field578[var4], this.field547[arg0], this.field548[arg0], this.field549[arg0], field581[var7], field581[var8], field581[var9], field582[var7], field582[var8], field582[var9], field583[var7], field583[var8], field583[var9], this.faceColour[arg0]);
 		} else if (var5 == 3) {
 			int var10 = this.field550[arg0] >> 2;
 			int var11 = this.field556[var10];
 			int var12 = this.field557[var10];
 			int var13 = this.field558[var10];
-			Pix3D.method192(field579[var2], field579[var3], field579[var4], field578[var2], field578[var3], field578[var4], this.field547[arg0], this.field547[arg0], this.field547[arg0], field581[var11], field581[var12], field581[var13], field582[var11], field582[var12], field582[var13], field583[var11], field583[var12], field583[var13], this.field553[arg0]);
+			Pix3D.textureTriangle(field579[var2], field579[var3], field579[var4], field578[var2], field578[var3], field578[var4], this.field547[arg0], this.field547[arg0], this.field547[arg0], field581[var11], field581[var12], field581[var13], field582[var11], field582[var12], field582[var13], field583[var11], field583[var12], field583[var13], this.faceColour[arg0]);
 		}
 	}
 
 	@ObfuscatedName("fb.g(I)V")
 	public final void method162(int arg0) {
-		int var2 = Pix3D.field641;
-		int var3 = Pix3D.field642;
+		int var2 = Pix3D.centerX;
+		int var3 = Pix3D.centerY;
 		int var4 = 0;
 		int var5 = this.field544[arg0];
 		int var6 = this.field545[arg0];
@@ -1906,10 +1906,10 @@ public class Model extends ModelSource {
 		if ((var26 - var27) * (var31 - var30) - (var29 - var30) * (var28 - var27) <= 0) {
 			return;
 		}
-		Pix3D.field637 = false;
+		Pix3D.hclip = false;
 		if (var4 == 3) {
-			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.field630 || var27 > Pix2D.field630 || var28 > Pix2D.field630) {
-				Pix3D.field637 = true;
+			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth || var28 > Pix2D.safeWidth) {
+				Pix3D.hclip = true;
 			}
 			int var32;
 			if (this.field550 == null) {
@@ -1918,28 +1918,28 @@ public class Model extends ModelSource {
 				var32 = this.field550[arg0] & 0x3;
 			}
 			if (var32 == 0) {
-				Pix3D.method188(var29, var30, var31, var26, var27, var28, field593[0], field593[1], field593[2]);
+				Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, field593[0], field593[1], field593[2]);
 			} else if (var32 == 1) {
-				Pix3D.method190(var29, var30, var31, var26, var27, var28, field604[this.field547[arg0]]);
+				Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, field604[this.field547[arg0]]);
 			} else if (var32 == 2) {
 				int var33 = this.field550[arg0] >> 2;
 				int var34 = this.field556[var33];
 				int var35 = this.field557[var33];
 				int var36 = this.field558[var33];
-				Pix3D.method192(var29, var30, var31, var26, var27, var28, field593[0], field593[1], field593[2], field581[var34], field581[var35], field581[var36], field582[var34], field582[var35], field582[var36], field583[var34], field583[var35], field583[var36], this.field553[arg0]);
+				Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, field593[0], field593[1], field593[2], field581[var34], field581[var35], field581[var36], field582[var34], field582[var35], field582[var36], field583[var34], field583[var35], field583[var36], this.faceColour[arg0]);
 			} else if (var32 == 3) {
 				int var37 = this.field550[arg0] >> 2;
 				int var38 = this.field556[var37];
 				int var39 = this.field557[var37];
 				int var40 = this.field558[var37];
-				Pix3D.method192(var29, var30, var31, var26, var27, var28, this.field547[arg0], this.field547[arg0], this.field547[arg0], field581[var38], field581[var39], field581[var40], field582[var38], field582[var39], field582[var40], field583[var38], field583[var39], field583[var40], this.field553[arg0]);
+				Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, this.field547[arg0], this.field547[arg0], this.field547[arg0], field581[var38], field581[var39], field581[var40], field582[var38], field582[var39], field582[var40], field583[var38], field583[var39], field583[var40], this.faceColour[arg0]);
 			}
 		}
 		if (var4 != 4) {
 			return;
 		}
-		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.field630 || var27 > Pix2D.field630 || var28 > Pix2D.field630 || field591[3] < 0 || field591[3] > Pix2D.field630) {
-			Pix3D.field637 = true;
+		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth || var28 > Pix2D.safeWidth || field591[3] < 0 || field591[3] > Pix2D.safeWidth) {
+			Pix3D.hclip = true;
 		}
 		int var41;
 		if (this.field550 == null) {
@@ -1948,14 +1948,14 @@ public class Model extends ModelSource {
 			var41 = this.field550[arg0] & 0x3;
 		}
 		if (var41 == 0) {
-			Pix3D.method188(var29, var30, var31, var26, var27, var28, field593[0], field593[1], field593[2]);
-			Pix3D.method188(var29, var31, field592[3], var26, var28, field591[3], field593[0], field593[2], field593[3]);
+			Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, field593[0], field593[1], field593[2]);
+			Pix3D.gouraudTriangle(var29, var31, field592[3], var26, var28, field591[3], field593[0], field593[2], field593[3]);
 			return;
 		}
 		if (var41 == 1) {
 			int var42 = field604[this.field547[arg0]];
-			Pix3D.method190(var29, var30, var31, var26, var27, var28, var42);
-			Pix3D.method190(var29, var31, field592[3], var26, var28, field591[3], var42);
+			Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, var42);
+			Pix3D.flatTriangle(var29, var31, field592[3], var26, var28, field591[3], var42);
 			return;
 		}
 		if (var41 == 2) {
@@ -1963,8 +1963,8 @@ public class Model extends ModelSource {
 			int var44 = this.field556[var43];
 			int var45 = this.field557[var43];
 			int var46 = this.field558[var43];
-			Pix3D.method192(var29, var30, var31, var26, var27, var28, field593[0], field593[1], field593[2], field581[var44], field581[var45], field581[var46], field582[var44], field582[var45], field582[var46], field583[var44], field583[var45], field583[var46], this.field553[arg0]);
-			Pix3D.method192(var29, var31, field592[3], var26, var28, field591[3], field593[0], field593[2], field593[3], field581[var44], field581[var45], field581[var46], field582[var44], field582[var45], field582[var46], field583[var44], field583[var45], field583[var46], this.field553[arg0]);
+			Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, field593[0], field593[1], field593[2], field581[var44], field581[var45], field581[var46], field582[var44], field582[var45], field582[var46], field583[var44], field583[var45], field583[var46], this.faceColour[arg0]);
+			Pix3D.textureTriangle(var29, var31, field592[3], var26, var28, field591[3], field593[0], field593[2], field593[3], field581[var44], field581[var45], field581[var46], field582[var44], field582[var45], field582[var46], field583[var44], field583[var45], field583[var46], this.faceColour[arg0]);
 			return;
 		}
 		if (var41 != 3) {
@@ -1974,8 +1974,8 @@ public class Model extends ModelSource {
 		int var48 = this.field556[var47];
 		int var49 = this.field557[var47];
 		int var50 = this.field558[var47];
-		Pix3D.method192(var29, var30, var31, var26, var27, var28, this.field547[arg0], this.field547[arg0], this.field547[arg0], field581[var48], field581[var49], field581[var50], field582[var48], field582[var49], field582[var50], field583[var48], field583[var49], field583[var50], this.field553[arg0]);
-		Pix3D.method192(var29, var31, field592[3], var26, var28, field591[3], this.field547[arg0], this.field547[arg0], this.field547[arg0], field581[var48], field581[var49], field581[var50], field582[var48], field582[var49], field582[var50], field583[var48], field583[var49], field583[var50], this.field553[arg0]);
+		Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, this.field547[arg0], this.field547[arg0], this.field547[arg0], field581[var48], field581[var49], field581[var50], field582[var48], field582[var49], field582[var50], field583[var48], field583[var49], field583[var50], this.faceColour[arg0]);
+		Pix3D.textureTriangle(var29, var31, field592[3], var26, var28, field591[3], this.field547[arg0], this.field547[arg0], this.field547[arg0], field581[var48], field581[var49], field581[var50], field582[var48], field582[var49], field582[var50], field583[var48], field583[var49], field583[var50], this.faceColour[arg0]);
 	}
 
 	@ObfuscatedName("fb.a(IIIIIIII)Z")

@@ -10,91 +10,91 @@ import jagex2.io.Packet;
 public class SpotAnimType {
 
 	@ObfuscatedName("pc.a")
-	public static int field1131;
+	public static int count;
 
 	@ObfuscatedName("pc.b")
-	public static SpotAnimType[] field1132;
+	public static SpotAnimType[] types;
 
 	@ObfuscatedName("pc.c")
-	public int field1133;
+	public int id;
 
 	@ObfuscatedName("pc.d")
-	public int field1134;
+	public int model;
 
 	@ObfuscatedName("pc.e")
-	public int field1135 = -1;
+	public int anim = -1;
 
 	@ObfuscatedName("pc.f")
-	public SeqType field1136;
+	public SeqType seq;
 
 	@ObfuscatedName("pc.g")
-	public int[] field1137 = new int[6];
+	public int[] recol_s = new int[6];
 
 	@ObfuscatedName("pc.h")
-	public int[] field1138 = new int[6];
+	public int[] recol_d = new int[6];
 
 	@ObfuscatedName("pc.i")
-	public int field1139 = 128;
+	public int resizeh = 128;
 
 	@ObfuscatedName("pc.j")
-	public int field1140 = 128;
+	public int resizev = 128;
 
 	@ObfuscatedName("pc.k")
-	public int field1141;
+	public int angle;
 
 	@ObfuscatedName("pc.l")
-	public int field1142;
+	public int ambient;
 
 	@ObfuscatedName("pc.m")
-	public int field1143;
+	public int contrast;
 
 	@ObfuscatedName("pc.n")
-	public static LruCache field1144 = new LruCache(30);
+	public static LruCache modelCache = new LruCache(30);
 
 	@ObfuscatedName("pc.a(ZLyb;)V")
-	public static void method386(JagFile arg1) {
-		Packet var3 = new Packet(arg1.method309("spotanim.dat", null));
-		field1131 = var3.method241();
-		if (field1132 == null) {
-			field1132 = new SpotAnimType[field1131];
+	public static void unpack(JagFile arg1) {
+		Packet var3 = new Packet(arg1.read("spotanim.dat", null));
+		count = var3.g2();
+		if (types == null) {
+			types = new SpotAnimType[count];
 		}
-		for (int var4 = 0; var4 < field1131; var4++) {
-			if (field1132[var4] == null) {
-				field1132[var4] = new SpotAnimType();
+		for (int var4 = 0; var4 < count; var4++) {
+			if (types[var4] == null) {
+				types[var4] = new SpotAnimType();
 			}
-			field1132[var4].field1133 = var4;
-			field1132[var4].method387(var3);
+			types[var4].id = var4;
+			types[var4].decode(var3);
 		}
 	}
 
 	@ObfuscatedName("pc.a(ILmb;)V")
-	public void method387(Packet arg1) {
+	public void decode(Packet arg1) {
 		while (true) {
-			int var3 = arg1.method239();
+			int var3 = arg1.g1();
 			if (var3 == 0) {
 				return;
 			}
 			if (var3 == 1) {
-				this.field1134 = arg1.method241();
+				this.model = arg1.g2();
 			} else if (var3 == 2) {
-				this.field1135 = arg1.method241();
-				if (SeqType.field1112 != null) {
-					this.field1136 = SeqType.field1112[this.field1135];
+				this.anim = arg1.g2();
+				if (SeqType.types != null) {
+					this.seq = SeqType.types[this.anim];
 				}
 			} else if (var3 == 4) {
-				this.field1139 = arg1.method241();
+				this.resizeh = arg1.g2();
 			} else if (var3 == 5) {
-				this.field1140 = arg1.method241();
+				this.resizev = arg1.g2();
 			} else if (var3 == 6) {
-				this.field1141 = arg1.method241();
+				this.angle = arg1.g2();
 			} else if (var3 == 7) {
-				this.field1142 = arg1.method239();
+				this.ambient = arg1.g1();
 			} else if (var3 == 8) {
-				this.field1143 = arg1.method239();
+				this.contrast = arg1.g1();
 			} else if (var3 >= 40 && var3 < 50) {
-				this.field1137[var3 - 40] = arg1.method241();
+				this.recol_s[var3 - 40] = arg1.g2();
 			} else if (var3 >= 50 && var3 < 60) {
-				this.field1138[var3 - 50] = arg1.method241();
+				this.recol_d[var3 - 50] = arg1.g2();
 			} else {
 				System.out.println("Error unrecognised spotanim config code: " + var3);
 			}
@@ -102,21 +102,21 @@ public class SpotAnimType {
 	}
 
 	@ObfuscatedName("pc.a()Lfb;")
-	public Model method388() {
-		Model var1 = (Model) field1144.method115((long) this.field1133);
+	public Model getModel() {
+		Model var1 = (Model) modelCache.get((long) this.id);
 		if (var1 != null) {
 			return var1;
 		}
-		Model var2 = Model.method139(this.field1134);
+		Model var2 = Model.tryGet(this.model);
 		if (var2 == null) {
 			return null;
 		}
 		for (int var3 = 0; var3 < 6; var3++) {
-			if (this.field1137[0] != 0) {
-				var2.method153(this.field1137[var3], this.field1138[var3]);
+			if (this.recol_s[0] != 0) {
+				var2.recolour(this.recol_s[var3], this.recol_d[var3]);
 			}
 		}
-		field1144.method116(var2, (long) this.field1133);
+		modelCache.put(var2, (long) this.id);
 		return var2;
 	}
 }

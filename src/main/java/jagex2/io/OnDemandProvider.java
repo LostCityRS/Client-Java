@@ -6,6 +6,6 @@ import deob.ObfuscatedName;
 public class OnDemandProvider {
 
 	@ObfuscatedName("ub.a(I)V")
-	public void method279(int arg0) {
+	public void requestModel(int arg0) {
 	}
 }

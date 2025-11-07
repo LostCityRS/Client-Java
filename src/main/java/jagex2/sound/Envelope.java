@@ -7,75 +7,75 @@ import jagex2.io.Packet;
 public class Envelope {
 
 	@ObfuscatedName("bc.c")
-	public int field881;
+	public int length;
 
 	@ObfuscatedName("bc.d")
-	public int[] field882;
+	public int[] shapeDelta;
 
 	@ObfuscatedName("bc.e")
-	public int[] field883;
+	public int[] shapePeak;
 
 	@ObfuscatedName("bc.f")
-	public int field884;
+	public int start;
 
 	@ObfuscatedName("bc.g")
-	public int field885;
+	public int end;
 
 	@ObfuscatedName("bc.h")
-	public int field886;
+	public int form;
 
 	@ObfuscatedName("bc.i")
-	public int field887;
+	public int threshold;
 
 	@ObfuscatedName("bc.j")
-	public int field888;
+	public int position;
 
 	@ObfuscatedName("bc.k")
-	public int field889;
+	public int delta;
 
 	@ObfuscatedName("bc.l")
-	public int field890;
+	public int amplitude;
 
 	@ObfuscatedName("bc.m")
-	public int field891;
+	public int ticks;
 
 	@ObfuscatedName("bc.a(ILmb;)V")
-	public final void method319(Packet arg1) {
-		this.field886 = arg1.method239();
-		this.field884 = arg1.method244();
-		this.field885 = arg1.method244();
-		this.field881 = arg1.method239();
-		this.field882 = new int[this.field881];
-		this.field883 = new int[this.field881];
-		for (int var3 = 0; var3 < this.field881; var3++) {
-			this.field882[var3] = arg1.method241();
-			this.field883[var3] = arg1.method241();
+	public final void unpack(Packet arg1) {
+		this.form = arg1.g1();
+		this.start = arg1.g4();
+		this.end = arg1.g4();
+		this.length = arg1.g1();
+		this.shapeDelta = new int[this.length];
+		this.shapePeak = new int[this.length];
+		for (int var3 = 0; var3 < this.length; var3++) {
+			this.shapeDelta[var3] = arg1.g2();
+			this.shapePeak[var3] = arg1.g2();
 		}
 	}
 
 	@ObfuscatedName("bc.a(I)V")
-	public final void method320() {
-		this.field887 = 0;
-		this.field888 = 0;
-		this.field889 = 0;
-		this.field890 = 0;
-		this.field891 = 0;
+	public final void genInit() {
+		this.threshold = 0;
+		this.position = 0;
+		this.delta = 0;
+		this.amplitude = 0;
+		this.ticks = 0;
 	}
 
 	@ObfuscatedName("bc.a(II)I")
-	public final int method321(int arg0) {
-		if (this.field891 >= this.field887) {
-			this.field890 = this.field883[this.field888++] << 15;
-			if (this.field888 >= this.field881) {
-				this.field888 = this.field881 - 1;
+	public final int genNext(int arg0) {
+		if (this.ticks >= this.threshold) {
+			this.amplitude = this.shapePeak[this.position++] << 15;
+			if (this.position >= this.length) {
+				this.position = this.length - 1;
 			}
-			this.field887 = (int) ((double) this.field882[this.field888] / 65536.0D * (double) arg0);
-			if (this.field887 > this.field891) {
-				this.field889 = ((this.field883[this.field888] << 15) - this.field890) / (this.field887 - this.field891);
+			this.threshold = (int) ((double) this.shapeDelta[this.position] / 65536.0D * (double) arg0);
+			if (this.threshold > this.ticks) {
+				this.delta = ((this.shapePeak[this.position] << 15) - this.amplitude) / (this.threshold - this.ticks);
 			}
 		}
-		this.field890 += this.field889;
-		this.field891++;
-		return this.field890 - this.field889 >> 15;
+		this.amplitude += this.delta;
+		this.ticks++;
+		return this.amplitude - this.delta >> 15;
 	}
 }

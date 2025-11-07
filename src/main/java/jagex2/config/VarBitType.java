@@ -8,54 +8,54 @@ import jagex2.io.Packet;
 public class VarBitType {
 
 	@ObfuscatedName("qc.b")
-	public static int field1146;
+	public static int count;
 
 	@ObfuscatedName("qc.c")
-	public static VarBitType[] field1147;
+	public static VarBitType[] types;
 
 	@ObfuscatedName("qc.d")
-	public String field1148;
+	public String debugname;
 
 	@ObfuscatedName("qc.e")
-	public int field1149;
+	public int basevar;
 
 	@ObfuscatedName("qc.f")
-	public int field1150;
+	public int startbit;
 
 	@ObfuscatedName("qc.g")
-	public int field1151;
+	public int endbit;
 
 	@ObfuscatedName("qc.a(ZLyb;)V")
-	public static void method389(JagFile arg1) {
-		Packet var2 = new Packet(arg1.method309("varbit.dat", null));
-		field1146 = var2.method241();
-		if (field1147 == null) {
-			field1147 = new VarBitType[field1146];
+	public static void unpack(JagFile arg1) {
+		Packet var2 = new Packet(arg1.read("varbit.dat", null));
+		count = var2.g2();
+		if (types == null) {
+			types = new VarBitType[count];
 		}
-		for (int var3 = 0; var3 < field1146; var3++) {
-			if (field1147[var3] == null) {
-				field1147[var3] = new VarBitType();
+		for (int var3 = 0; var3 < count; var3++) {
+			if (types[var3] == null) {
+				types[var3] = new VarBitType();
 			}
-			field1147[var3].method390(var3, var2);
+			types[var3].decode(var3, var2);
 		}
-		if (var2.field711 != var2.field710.length) {
+		if (var2.pos != var2.data.length) {
 			System.out.println("varbit load mismatch");
 		}
 	}
 
 	@ObfuscatedName("qc.a(IILmb;)V")
-	public void method390(int arg0, Packet arg2) {
+	public void decode(int arg0, Packet arg2) {
 		while (true) {
-			int var5 = arg2.method239();
+			int var5 = arg2.g1();
 			if (var5 == 0) {
 				return;
 			}
 			if (var5 == 1) {
-				this.field1149 = arg2.method241();
-				this.field1150 = arg2.method239();
-				this.field1151 = arg2.method239();
+				this.basevar = arg2.g2();
+				this.startbit = arg2.g1();
+				this.endbit = arg2.g1();
 			} else if (var5 == 10) {
-				this.field1148 = arg2.method246();
+				this.debugname = arg2.gstr();
 			} else {
 				System.out.println("Error unrecognised config code: " + var5);
 			}

@@ -15,488 +15,488 @@ import jagex2.io.Packet;
 public class Component {
 
 	@ObfuscatedName("d.c")
-	public static Component[] field70;
+	public static Component[] types;
 
 	@ObfuscatedName("d.d")
-	public int[] field71;
+	public int[] invSlotObjId;
 
 	@ObfuscatedName("d.e")
-	public int[] field72;
+	public int[] invSlotObjCount;
 
 	@ObfuscatedName("d.f")
-	public int field73;
+	public int seqFrame;
 
 	@ObfuscatedName("d.g")
-	public int field74;
+	public int seqCycle;
 
 	@ObfuscatedName("d.h")
-	public int field75;
+	public int id;
 
 	@ObfuscatedName("d.i")
-	public int field76;
+	public int layer;
 
 	@ObfuscatedName("d.j")
-	public int field77;
+	public int type;
 
 	@ObfuscatedName("d.k")
-	public int field78;
+	public int buttonType;
 
 	@ObfuscatedName("d.l")
-	public int field79;
+	public int clientCode;
 
 	@ObfuscatedName("d.m")
-	public int field80;
+	public int width;
 
 	@ObfuscatedName("d.n")
-	public int field81;
+	public int height;
 
 	@ObfuscatedName("d.o")
-	public byte field82;
+	public byte trans;
 
 	@ObfuscatedName("d.p")
-	public int field83;
+	public int x;
 
 	@ObfuscatedName("d.q")
-	public int field84;
+	public int y;
 
 	@ObfuscatedName("d.r")
-	public int[][] field85;
+	public int[][] scripts;
 
 	@ObfuscatedName("d.s")
-	public int[] field86;
+	public int[] scriptComparator;
 
 	@ObfuscatedName("d.t")
-	public int[] field87;
+	public int[] scriptOperand;
 
 	@ObfuscatedName("d.u")
-	public int field88;
+	public int overlayer;
 
 	@ObfuscatedName("d.v")
-	public int field89;
+	public int scroll;
 
 	@ObfuscatedName("d.w")
-	public int field90;
+	public int scrollPosition;
 
 	@ObfuscatedName("d.x")
-	public boolean field91;
+	public boolean hide;
 
 	@ObfuscatedName("d.y")
-	public int[] field92;
+	public int[] children;
 
 	@ObfuscatedName("d.z")
-	public int[] field93;
+	public int[] childX;
 
 	@ObfuscatedName("d.ab")
-	public int field120;
+	public int model;
 
 	@ObfuscatedName("d.bb")
-	public int field121;
+	public int activeModelType;
 
 	@ObfuscatedName("d.cb")
-	public int field122;
+	public int activeModel;
 
 	@ObfuscatedName("d.db")
-	public int field123;
+	public int anim;
 
 	@ObfuscatedName("d.eb")
-	public int field124;
+	public int activeAnim;
 
 	@ObfuscatedName("d.fb")
-	public int field125;
+	public int zoom;
 
 	@ObfuscatedName("d.gb")
-	public int field126;
+	public int xan;
 
 	@ObfuscatedName("d.hb")
-	public int field127;
+	public int yan;
 
 	@ObfuscatedName("d.ib")
-	public String field128;
+	public String targetVerb;
 
 	@ObfuscatedName("d.jb")
-	public String field129;
+	public String targetText;
 
 	@ObfuscatedName("d.kb")
-	public int field130;
+	public int targetMask;
 
 	@ObfuscatedName("d.lb")
-	public String field131;
+	public String option;
 
 	@ObfuscatedName("d.mb")
-	public static LruCache field132 = new LruCache(30);
+	public static LruCache modelCache = new LruCache(30);
 
 	@ObfuscatedName("d.nb")
-	public static LruCache field133;
+	public static LruCache imageCache;
 
 	@ObfuscatedName("d.H")
-	public int field101;
+	public int marginX;
 
 	@ObfuscatedName("d.I")
-	public int field102;
+	public int marginY;
 
 	@ObfuscatedName("d.T")
-	public int field113;
+	public int colour;
 
 	@ObfuscatedName("d.U")
-	public int field114;
+	public int activeColour;
 
 	@ObfuscatedName("d.V")
-	public int field115;
+	public int overColour;
 
 	@ObfuscatedName("d.W")
-	public int field116;
+	public int activeOverColour;
 
 	@ObfuscatedName("d.Z")
-	public int field119;
+	public int modelType;
 
 	@ObfuscatedName("d.B")
 	public int field95;
 
 	@ObfuscatedName("d.X")
-	public Pix32 field117;
+	public Pix32 graphic;
 
 	@ObfuscatedName("d.Y")
-	public Pix32 field118;
+	public Pix32 activeGraphic;
 
 	@ObfuscatedName("d.Q")
-	public PixFont field110;
+	public PixFont font;
 
 	@ObfuscatedName("d.R")
-	public String field111;
+	public String text;
 
 	@ObfuscatedName("d.S")
-	public String field112;
+	public String activeText;
 
 	@ObfuscatedName("d.G")
-	public boolean field100;
+	public boolean swappable;
 
 	@ObfuscatedName("d.N")
-	public boolean field107;
+	public boolean fill;
 
 	@ObfuscatedName("d.O")
-	public boolean field108;
+	public boolean center;
 
 	@ObfuscatedName("d.P")
-	public boolean field109;
+	public boolean shadowed;
 
 	@ObfuscatedName("d.C")
 	public boolean field96;
 
 	@ObfuscatedName("d.D")
-	public boolean field97;
+	public boolean draggable;
 
 	@ObfuscatedName("d.E")
-	public boolean field98;
+	public boolean interactable;
 
 	@ObfuscatedName("d.F")
-	public boolean field99;
+	public boolean usable;
 
 	@ObfuscatedName("d.K")
-	public int[] field104;
+	public int[] invSlotOffsetX;
 
 	@ObfuscatedName("d.L")
-	public int[] field105;
+	public int[] invSlotOffsetY;
 
 	@ObfuscatedName("d.A")
-	public int[] field94;
+	public int[] childY;
 
 	@ObfuscatedName("d.J")
-	public Pix32[] field103;
+	public Pix32[] invSlotGraphic;
 
 	@ObfuscatedName("d.M")
-	public String[] field106;
+	public String[] iop;
 
 	@ObfuscatedName("d.a(Lyb;I[Llb;Lyb;)V")
-	public static void method32(JagFile arg0, PixFont[] arg2, JagFile arg3) {
-		field133 = new LruCache(50000);
-		Packet var4 = new Packet(arg3.method309("data", null));
+	public static void unpack(JagFile arg0, PixFont[] arg2, JagFile arg3) {
+		imageCache = new LruCache(50000);
+		Packet var4 = new Packet(arg3.read("data", null));
 		int var6 = -1;
-		int var7 = var4.method241();
-		field70 = new Component[var7];
+		int var7 = var4.g2();
+		types = new Component[var7];
 		while (true) {
 			Component var9;
 			do {
-				if (var4.field711 >= var4.field710.length) {
-					field133 = null;
+				if (var4.pos >= var4.data.length) {
+					imageCache = null;
 					return;
 				}
-				int var8 = var4.method241();
+				int var8 = var4.g2();
 				if (var8 == 65535) {
-					var6 = var4.method241();
-					var8 = var4.method241();
+					var6 = var4.g2();
+					var8 = var4.g2();
 				}
-				var9 = field70[var8] = new Component();
-				var9.field75 = var8;
-				var9.field76 = var6;
-				var9.field77 = var4.method239();
-				var9.field78 = var4.method239();
-				var9.field79 = var4.method241();
-				var9.field80 = var4.method241();
-				var9.field81 = var4.method241();
-				var9.field82 = (byte) var4.method239();
-				var9.field88 = var4.method239();
-				if (var9.field88 == 0) {
-					var9.field88 = -1;
+				var9 = types[var8] = new Component();
+				var9.id = var8;
+				var9.layer = var6;
+				var9.type = var4.g1();
+				var9.buttonType = var4.g1();
+				var9.clientCode = var4.g2();
+				var9.width = var4.g2();
+				var9.height = var4.g2();
+				var9.trans = (byte) var4.g1();
+				var9.overlayer = var4.g1();
+				if (var9.overlayer == 0) {
+					var9.overlayer = -1;
 				} else {
-					var9.field88 = (var9.field88 - 1 << 8) + var4.method239();
+					var9.overlayer = (var9.overlayer - 1 << 8) + var4.g1();
 				}
-				int var10 = var4.method239();
+				int var10 = var4.g1();
 				if (var10 > 0) {
-					var9.field86 = new int[var10];
-					var9.field87 = new int[var10];
+					var9.scriptComparator = new int[var10];
+					var9.scriptOperand = new int[var10];
 					for (int var11 = 0; var11 < var10; var11++) {
-						var9.field86[var11] = var4.method239();
-						var9.field87[var11] = var4.method241();
+						var9.scriptComparator[var11] = var4.g1();
+						var9.scriptOperand[var11] = var4.g2();
 					}
 				}
-				int var12 = var4.method239();
+				int var12 = var4.g1();
 				if (var12 > 0) {
-					var9.field85 = new int[var12][];
+					var9.scripts = new int[var12][];
 					for (int var13 = 0; var13 < var12; var13++) {
-						int var14 = var4.method241();
-						var9.field85[var13] = new int[var14];
+						int var14 = var4.g2();
+						var9.scripts[var13] = new int[var14];
 						for (int var15 = 0; var15 < var14; var15++) {
-							var9.field85[var13][var15] = var4.method241();
+							var9.scripts[var13][var15] = var4.g2();
 						}
 					}
 				}
-				if (var9.field77 == 0) {
-					var9.field89 = var4.method241();
-					var9.field91 = var4.method239() == 1;
-					int var16 = var4.method241();
-					var9.field92 = new int[var16];
-					var9.field93 = new int[var16];
-					var9.field94 = new int[var16];
+				if (var9.type == 0) {
+					var9.scroll = var4.g2();
+					var9.hide = var4.g1() == 1;
+					int var16 = var4.g2();
+					var9.children = new int[var16];
+					var9.childX = new int[var16];
+					var9.childY = new int[var16];
 					for (int var17 = 0; var17 < var16; var17++) {
-						var9.field92[var17] = var4.method241();
-						var9.field93[var17] = var4.method242();
-						var9.field94[var17] = var4.method242();
+						var9.children[var17] = var4.g2();
+						var9.childX[var17] = var4.g2b();
+						var9.childY[var17] = var4.g2b();
 					}
 				}
-				if (var9.field77 == 1) {
-					var9.field95 = var4.method241();
-					var9.field96 = var4.method239() == 1;
+				if (var9.type == 1) {
+					var9.field95 = var4.g2();
+					var9.field96 = var4.g1() == 1;
 				}
-				if (var9.field77 == 2) {
-					var9.field71 = new int[var9.field80 * var9.field81];
-					var9.field72 = new int[var9.field80 * var9.field81];
-					var9.field97 = var4.method239() == 1;
-					var9.field98 = var4.method239() == 1;
-					var9.field99 = var4.method239() == 1;
-					var9.field100 = var4.method239() == 1;
-					var9.field101 = var4.method239();
-					var9.field102 = var4.method239();
-					var9.field104 = new int[20];
-					var9.field105 = new int[20];
-					var9.field103 = new Pix32[20];
+				if (var9.type == 2) {
+					var9.invSlotObjId = new int[var9.width * var9.height];
+					var9.invSlotObjCount = new int[var9.width * var9.height];
+					var9.draggable = var4.g1() == 1;
+					var9.interactable = var4.g1() == 1;
+					var9.usable = var4.g1() == 1;
+					var9.swappable = var4.g1() == 1;
+					var9.marginX = var4.g1();
+					var9.marginY = var4.g1();
+					var9.invSlotOffsetX = new int[20];
+					var9.invSlotOffsetY = new int[20];
+					var9.invSlotGraphic = new Pix32[20];
 					for (int var18 = 0; var18 < 20; var18++) {
-						int var19 = var4.method239();
+						int var19 = var4.g1();
 						if (var19 == 1) {
-							var9.field104[var18] = var4.method242();
-							var9.field105[var18] = var4.method242();
-							String var20 = var4.method246();
+							var9.invSlotOffsetX[var18] = var4.g2b();
+							var9.invSlotOffsetY[var18] = var4.g2b();
+							String var20 = var4.gstr();
 							if (arg0 != null && var20.length() > 0) {
 								int var21 = var20.lastIndexOf(",");
-								var9.field103[var18] = method37(Integer.parseInt(var20.substring(var21 + 1)), var20.substring(0, var21), arg0);
+								var9.invSlotGraphic[var18] = getImage(Integer.parseInt(var20.substring(var21 + 1)), var20.substring(0, var21), arg0);
 							}
 						}
 					}
-					var9.field106 = new String[5];
+					var9.iop = new String[5];
 					for (int var22 = 0; var22 < 5; var22++) {
-						var9.field106[var22] = var4.method246();
-						if (var9.field106[var22].length() == 0) {
-							var9.field106[var22] = null;
+						var9.iop[var22] = var4.gstr();
+						if (var9.iop[var22].length() == 0) {
+							var9.iop[var22] = null;
 						}
 					}
 				}
-				if (var9.field77 == 3) {
-					var9.field107 = var4.method239() == 1;
+				if (var9.type == 3) {
+					var9.fill = var4.g1() == 1;
 				}
-				if (var9.field77 == 4 || var9.field77 == 1) {
-					var9.field108 = var4.method239() == 1;
-					int var23 = var4.method239();
+				if (var9.type == 4 || var9.type == 1) {
+					var9.center = var4.g1() == 1;
+					int var23 = var4.g1();
 					if (arg2 != null) {
-						var9.field110 = arg2[var23];
+						var9.font = arg2[var23];
 					}
-					var9.field109 = var4.method239() == 1;
+					var9.shadowed = var4.g1() == 1;
 				}
-				if (var9.field77 == 4) {
-					var9.field111 = var4.method246();
-					var9.field112 = var4.method246();
+				if (var9.type == 4) {
+					var9.text = var4.gstr();
+					var9.activeText = var4.gstr();
 				}
-				if (var9.field77 == 1 || var9.field77 == 3 || var9.field77 == 4) {
-					var9.field113 = var4.method244();
+				if (var9.type == 1 || var9.type == 3 || var9.type == 4) {
+					var9.colour = var4.g4();
 				}
-				if (var9.field77 == 3 || var9.field77 == 4) {
-					var9.field114 = var4.method244();
-					var9.field115 = var4.method244();
-					var9.field116 = var4.method244();
+				if (var9.type == 3 || var9.type == 4) {
+					var9.activeColour = var4.g4();
+					var9.overColour = var4.g4();
+					var9.activeOverColour = var4.g4();
 				}
-				if (var9.field77 == 5) {
-					String var24 = var4.method246();
+				if (var9.type == 5) {
+					String var24 = var4.gstr();
 					if (arg0 != null && var24.length() > 0) {
 						int var25 = var24.lastIndexOf(",");
-						var9.field117 = method37(Integer.parseInt(var24.substring(var25 + 1)), var24.substring(0, var25), arg0);
+						var9.graphic = getImage(Integer.parseInt(var24.substring(var25 + 1)), var24.substring(0, var25), arg0);
 					}
-					String var26 = var4.method246();
+					String var26 = var4.gstr();
 					if (arg0 != null && var26.length() > 0) {
 						int var27 = var26.lastIndexOf(",");
-						var9.field118 = method37(Integer.parseInt(var26.substring(var27 + 1)), var26.substring(0, var27), arg0);
+						var9.activeGraphic = getImage(Integer.parseInt(var26.substring(var27 + 1)), var26.substring(0, var27), arg0);
 					}
 				}
-				if (var9.field77 == 6) {
-					int var28 = var4.method239();
+				if (var9.type == 6) {
+					int var28 = var4.g1();
 					if (var28 != 0) {
-						var9.field119 = 1;
-						var9.field120 = (var28 - 1 << 8) + var4.method239();
+						var9.modelType = 1;
+						var9.model = (var28 - 1 << 8) + var4.g1();
 					}
-					int var29 = var4.method239();
+					int var29 = var4.g1();
 					if (var29 != 0) {
-						var9.field121 = 1;
-						var9.field122 = (var29 - 1 << 8) + var4.method239();
+						var9.activeModelType = 1;
+						var9.activeModel = (var29 - 1 << 8) + var4.g1();
 					}
-					int var30 = var4.method239();
+					int var30 = var4.g1();
 					if (var30 == 0) {
-						var9.field123 = -1;
+						var9.anim = -1;
 					} else {
-						var9.field123 = (var30 - 1 << 8) + var4.method239();
+						var9.anim = (var30 - 1 << 8) + var4.g1();
 					}
-					int var31 = var4.method239();
+					int var31 = var4.g1();
 					if (var31 == 0) {
-						var9.field124 = -1;
+						var9.activeAnim = -1;
 					} else {
-						var9.field124 = (var31 - 1 << 8) + var4.method239();
+						var9.activeAnim = (var31 - 1 << 8) + var4.g1();
 					}
-					var9.field125 = var4.method241();
-					var9.field126 = var4.method241();
-					var9.field127 = var4.method241();
+					var9.zoom = var4.g2();
+					var9.xan = var4.g2();
+					var9.yan = var4.g2();
 				}
-				if (var9.field77 == 7) {
-					var9.field71 = new int[var9.field80 * var9.field81];
-					var9.field72 = new int[var9.field80 * var9.field81];
-					var9.field108 = var4.method239() == 1;
-					int var32 = var4.method239();
+				if (var9.type == 7) {
+					var9.invSlotObjId = new int[var9.width * var9.height];
+					var9.invSlotObjCount = new int[var9.width * var9.height];
+					var9.center = var4.g1() == 1;
+					int var32 = var4.g1();
 					if (arg2 != null) {
-						var9.field110 = arg2[var32];
+						var9.font = arg2[var32];
 					}
-					var9.field109 = var4.method239() == 1;
-					var9.field113 = var4.method244();
-					var9.field101 = var4.method242();
-					var9.field102 = var4.method242();
-					var9.field98 = var4.method239() == 1;
-					var9.field106 = new String[5];
+					var9.shadowed = var4.g1() == 1;
+					var9.colour = var4.g4();
+					var9.marginX = var4.g2b();
+					var9.marginY = var4.g2b();
+					var9.interactable = var4.g1() == 1;
+					var9.iop = new String[5];
 					for (int var33 = 0; var33 < 5; var33++) {
-						var9.field106[var33] = var4.method246();
-						if (var9.field106[var33].length() == 0) {
-							var9.field106[var33] = null;
+						var9.iop[var33] = var4.gstr();
+						if (var9.iop[var33].length() == 0) {
+							var9.iop[var33] = null;
 						}
 					}
 				}
-				if (var9.field78 == 2 || var9.field77 == 2) {
-					var9.field128 = var4.method246();
-					var9.field129 = var4.method246();
-					var9.field130 = var4.method241();
+				if (var9.buttonType == 2 || var9.type == 2) {
+					var9.targetVerb = var4.gstr();
+					var9.targetText = var4.gstr();
+					var9.targetMask = var4.g2();
 				}
-			} while (var9.field78 != 1 && var9.field78 != 4 && var9.field78 != 5 && var9.field78 != 6);
-			var9.field131 = var4.method246();
-			if (var9.field131.length() == 0) {
-				if (var9.field78 == 1) {
-					var9.field131 = "Ok";
+			} while (var9.buttonType != 1 && var9.buttonType != 4 && var9.buttonType != 5 && var9.buttonType != 6);
+			var9.option = var4.gstr();
+			if (var9.option.length() == 0) {
+				if (var9.buttonType == 1) {
+					var9.option = "Ok";
 				}
-				if (var9.field78 == 4) {
-					var9.field131 = "Select";
+				if (var9.buttonType == 4) {
+					var9.option = "Select";
 				}
-				if (var9.field78 == 5) {
-					var9.field131 = "Select";
+				if (var9.buttonType == 5) {
+					var9.option = "Select";
 				}
-				if (var9.field78 == 6) {
-					var9.field131 = "Continue";
+				if (var9.buttonType == 6) {
+					var9.option = "Continue";
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("d.a(III)V")
-	public void method33(int arg0, int arg1) {
-		int var4 = this.field71[arg1];
-		this.field71[arg1] = this.field71[arg0];
-		this.field71[arg0] = var4;
-		int var5 = this.field72[arg1];
-		this.field72[arg1] = this.field72[arg0];
-		this.field72[arg0] = var5;
+	public void swapObj(int arg0, int arg1) {
+		int var4 = this.invSlotObjId[arg1];
+		this.invSlotObjId[arg1] = this.invSlotObjId[arg0];
+		this.invSlotObjId[arg0] = var4;
+		int var5 = this.invSlotObjCount[arg1];
+		this.invSlotObjCount[arg1] = this.invSlotObjCount[arg0];
+		this.invSlotObjCount[arg0] = var5;
 	}
 
 	@ObfuscatedName("d.a(IIZI)Lfb;")
-	public Model method34(int arg1, boolean arg2, int arg3) {
+	public Model getModel(int arg1, boolean arg2, int arg3) {
 		Model var5;
 		if (arg2) {
-			var5 = this.method35(this.field121, this.field122);
+			var5 = this.loadModel(this.activeModelType, this.activeModel);
 		} else {
-			var5 = this.method35(this.field119, this.field120);
+			var5 = this.loadModel(this.modelType, this.model);
 		}
 		if (var5 == null) {
 			return null;
-		} else if (arg1 == -1 && arg3 == -1 && var5.field553 == null) {
+		} else if (arg1 == -1 && arg3 == -1 && var5.faceColour == null) {
 			return var5;
 		} else {
-			Model var6 = new Model(AnimFrame.method62(arg1) & AnimFrame.method62(arg3), false, true, var5);
+			Model var6 = new Model(AnimFrame.isNull(arg1) & AnimFrame.isNull(arg3), false, true, var5);
 			if (arg1 != -1 || arg3 != -1) {
-				var6.method146();
+				var6.createLabelReferences();
 			}
 			if (arg1 != -1) {
-				var6.method147(arg1);
+				var6.applyFrame(arg1);
 			}
 			if (arg3 != -1) {
-				var6.method147(arg3);
+				var6.applyFrame(arg3);
 			}
-			var6.method156(64, 768, -50, -10, -50, true);
+			var6.calculateNormals(64, 768, -50, -10, -50, true);
 			return var6;
 		}
 	}
 
 	@ObfuscatedName("d.a(II)Lfb;")
-	public Model method35(int arg0, int arg1) {
-		Model var3 = (Model) field132.method115((long) ((arg0 << 16) + arg1));
+	public Model loadModel(int arg0, int arg1) {
+		Model var3 = (Model) modelCache.get((long) ((arg0 << 16) + arg1));
 		if (var3 != null) {
 			return var3;
 		}
 		if (arg0 == 1) {
-			var3 = Model.method139(arg1);
+			var3 = Model.tryGet(arg1);
 		}
 		if (arg0 == 2) {
-			var3 = NpcType.method344(arg1).method347();
+			var3 = NpcType.get(arg1).getHeadModel();
 		}
 		if (arg0 == 3) {
-			var3 = Client.field1231.method132();
+			var3 = Client.localPlayer.getHeadModel();
 		}
 		if (arg0 == 4) {
-			var3 = ObjType.method350(arg1).method355(50);
+			var3 = ObjType.get(arg1).getInvModel(50);
 		}
 		if (arg0 == 5) {
 			var3 = null;
 		}
 		if (var3 != null) {
-			field132.method116(var3, (long) ((arg0 << 16) + arg1));
+			modelCache.put(var3, (long) ((arg0 << 16) + arg1));
 		}
 		return var3;
 	}
 
 	@ObfuscatedName("d.a(ZILfb;I)V")
-	public static void method36(int arg1, Model arg2, int arg3) {
-		field132.method117();
+	public static void cacheModel(int arg1, Model arg2, int arg3) {
+		modelCache.clear();
 		if (arg2 != null && arg3 != 4) {
-			field132.method116(arg2, (long) ((arg3 << 16) + arg1));
+			modelCache.put(arg2, (long) ((arg3 << 16) + arg1));
 		}
 	}
 
 	@ObfuscatedName("d.a(IILjava/lang/String;Lyb;)Ljb;")
-	public static Pix32 method37(int arg1, String arg2, JagFile arg3) {
-		long var4 = (JString.method312(arg2) << 8) + (long) arg1;
-		Pix32 var6 = (Pix32) field133.method115(var4);
+	public static Pix32 getImage(int arg1, String arg2, JagFile arg3) {
+		long var4 = (JString.hashCode(arg2) << 8) + (long) arg1;
+		Pix32 var6 = (Pix32) imageCache.get(var4);
 		if (var6 == null) {
 			try {
 				Pix32 var7 = new Pix32(arg3, arg2, arg1);
-				field133.method116(var7, var4);
+				imageCache.put(var7, var4);
 				return var7;
 			} catch (Exception var8) {
 				return null;
