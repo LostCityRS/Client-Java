@@ -12,425 +12,425 @@ public class World3D {
 	public static boolean lowMem = true;
 
 	@ObfuscatedName("s.i")
-	public int field297;
+	public int maxLevel;
 
 	@ObfuscatedName("s.j")
-	public int field298;
+	public int maxTileX;
 
 	@ObfuscatedName("s.k")
-	public int field299;
+	public int maxTileZ;
 
 	@ObfuscatedName("s.l")
-	public int[][][] field300;
+	public int[][][] levelHeightmaps;
 
 	@ObfuscatedName("s.m")
-	public Square[][][] field301;
+	public Square[][][] levelTiles;
 
 	@ObfuscatedName("s.n")
-	public int field302;
+	public int minLevel;
 
 	@ObfuscatedName("s.o")
-	public int field303;
+	public int changedLocCount;
 
 	@ObfuscatedName("s.p")
-	public Sprite[] field304 = new Sprite[5000];
+	public Sprite[] changedLocs = new Sprite[5000];
 
 	@ObfuscatedName("s.q")
-	public int[][][] field305;
+	public int[][][] levelTileOcclusionCycles;
 
 	@ObfuscatedName("s.r")
-	public static int field306;
+	public static int tilesRemaining;
 
 	@ObfuscatedName("s.s")
-	public static int field307;
+	public static int topLevel;
 
 	@ObfuscatedName("s.t")
-	public static int field308;
+	public static int cycle;
 
 	@ObfuscatedName("s.u")
-	public static int field309;
+	public static int minDrawTileX;
 
 	@ObfuscatedName("s.v")
-	public static int field310;
+	public static int maxDrawTileX;
 
 	@ObfuscatedName("s.w")
-	public static int field311;
+	public static int minDrawTileZ;
 
 	@ObfuscatedName("s.x")
-	public static int field312;
+	public static int maxDrawTileZ;
 
 	@ObfuscatedName("s.y")
-	public static int field313;
+	public static int eyeTileX;
 
 	@ObfuscatedName("s.z")
-	public static int field314;
+	public static int eyeTileZ;
 
 	@ObfuscatedName("s.ab")
-	public static final int[] field341 = new int[] { 0, 0, 2, 0, 0, 2, 1, 1, 0 };
+	public static final int[] MIDDEP_16 = new int[] { 0, 0, 2, 0, 0, 2, 1, 1, 0 };
 
 	@ObfuscatedName("s.bb")
-	public static final int[] field342 = new int[] { 2, 0, 0, 2, 0, 0, 0, 4, 4 };
+	public static final int[] MIDDEP_32 = new int[] { 2, 0, 0, 2, 0, 0, 0, 4, 4 };
 
 	@ObfuscatedName("s.cb")
-	public static final int[] field343 = new int[] { 0, 4, 4, 8, 0, 0, 8, 0, 0 };
+	public static final int[] MIDDEP_64 = new int[] { 0, 4, 4, 8, 0, 0, 8, 0, 0 };
 
 	@ObfuscatedName("s.db")
-	public static final int[] field344 = new int[] { 1, 1, 0, 0, 0, 8, 0, 0, 8 };
+	public static final int[] MIDDEP_128 = new int[] { 1, 1, 0, 0, 0, 8, 0, 0, 8 };
 
 	@ObfuscatedName("s.eb")
-	public static final int[] field345 = new int[] { 41, 39248, 41, 4643, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 43086, 41, 41, 41, 41, 41, 41, 41, 8602, 41, 28992, 41, 41, 41, 41, 41, 5056, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 3131, 41, 41, 41 };
+	public static final int[] TEXTURE_HSL = new int[] { 41, 39248, 41, 4643, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 43086, 41, 41, 41, 41, 41, 41, 41, 8602, 41, 28992, 41, 41, 41, 41, 41, 5056, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 3131, 41, 41, 41 };
 
 	@ObfuscatedName("s.fb")
-	public int[] field346 = new int[10000];
+	public int[] mergeIndexA = new int[10000];
 
 	@ObfuscatedName("s.gb")
-	public int[] field347 = new int[10000];
+	public int[] mergeIndexB = new int[10000];
 
 	@ObfuscatedName("s.hb")
-	public int field348;
+	public int tmpMergeIndex;
 
 	@ObfuscatedName("s.ib")
-	public int[][] field349 = new int[][] { new int[16], { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 }, { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1 }, { 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1 } };
+	public int[][] MINIMAP_OVERLAY_SHAPE = new int[][] { new int[16], { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 }, { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1 }, { 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1 } };
 
 	@ObfuscatedName("s.jb")
-	public int[][] field350 = new int[][] { { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, { 12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3 }, { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 }, { 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12 } };
+	public int[][] MINIMAP_OVERLAY_ANGLE = new int[][] { { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, { 12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3 }, { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 }, { 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12 } };
 
 	@ObfuscatedName("s.kb")
-	public static boolean[][][][] field351 = new boolean[8][32][51][51];
+	public static boolean[][][][] visibilityMatrix = new boolean[8][32][51][51];
 
 	@ObfuscatedName("s.lb")
-	public static boolean[][] field352;
+	public static boolean[][] visibilityMap;
 
 	@ObfuscatedName("s.mb")
-	public static int field353;
+	public static int viewportCenterX;
 
 	@ObfuscatedName("s.nb")
-	public static int field354;
+	public static int viewportCenterY;
 
 	@ObfuscatedName("s.ob")
-	public static int field355;
+	public static int viewportLeft;
 
 	@ObfuscatedName("s.pb")
-	public static int field356;
+	public static int viewportTop;
 
 	@ObfuscatedName("s.qb")
-	public static int field357;
+	public static int viewportRight;
 
 	@ObfuscatedName("s.rb")
-	public static int field358;
+	public static int viewportBottom;
 
 	@ObfuscatedName("s.H")
-	public static Sprite[] field322 = new Sprite[100];
+	public static Sprite[] locBuffer = new Sprite[100];
 
 	@ObfuscatedName("s.I")
-	public static final int[] field323 = new int[] { 53, -53, -53, 53 };
+	public static final int[] WALL_DECORATION_INSET_X = new int[] { 53, -53, -53, 53 };
 
 	@ObfuscatedName("s.J")
-	public static final int[] field324 = new int[] { -53, -53, 53, 53 };
+	public static final int[] WALL_DECORATION_INSET_Z = new int[] { -53, -53, 53, 53 };
 
 	@ObfuscatedName("s.K")
-	public static final int[] field325 = new int[] { -45, 45, 45, -45 };
+	public static final int[] WALL_DECORATION_OUTSET_X = new int[] { -45, 45, 45, -45 };
 
 	@ObfuscatedName("s.L")
-	public static final int[] field326 = new int[] { 45, 45, -45, -45 };
+	public static final int[] WALL_DECORATION_OUTSET_Z = new int[] { 45, 45, -45, -45 };
 
 	@ObfuscatedName("s.P")
-	public static int field330 = -1;
+	public static int clickTileX = -1;
 
 	@ObfuscatedName("s.Q")
-	public static int field331 = -1;
+	public static int clickTileZ = -1;
 
 	@ObfuscatedName("s.R")
-	public static int field332 = 4;
+	public static int LEVEL_COUNT = 4;
 
 	@ObfuscatedName("s.S")
-	public static int[] field333 = new int[field332];
+	public static int[] levelOccluderCount = new int[LEVEL_COUNT];
 
 	@ObfuscatedName("s.T")
-	public static Occlude[][] field334 = new Occlude[field332][500];
+	public static Occlude[][] levelOccluders = new Occlude[LEVEL_COUNT][500];
 
 	@ObfuscatedName("s.V")
-	public static Occlude[] field336 = new Occlude[500];
+	public static Occlude[] activeOccluders = new Occlude[500];
 
 	@ObfuscatedName("s.W")
-	public static LinkList field337 = new LinkList();
+	public static LinkList drawTileQueue = new LinkList();
 
 	@ObfuscatedName("s.X")
-	public static final int[] field338 = new int[] { 19, 55, 38, 155, 255, 110, 137, 205, 76 };
+	public static final int[] FRONT_WALL_TYPES = new int[] { 19, 55, 38, 155, 255, 110, 137, 205, 76 };
 
 	@ObfuscatedName("s.Y")
-	public static final int[] field339 = new int[] { 160, 192, 80, 96, 0, 144, 80, 48, 160 };
+	public static final int[] DIRECTION_ALLOW_WALL_CORNER_TYPE = new int[] { 160, 192, 80, 96, 0, 144, 80, 48, 160 };
 
 	@ObfuscatedName("s.Z")
-	public static final int[] field340 = new int[] { 76, 8, 137, 4, 0, 1, 38, 2, 19 };
+	public static final int[] BACK_WALL_TYPES = new int[] { 76, 8, 137, 4, 0, 1, 38, 2, 19 };
 
 	@ObfuscatedName("s.A")
-	public static int field315;
+	public static int eyeX;
 
 	@ObfuscatedName("s.B")
-	public static int field316;
+	public static int eyeY;
 
 	@ObfuscatedName("s.C")
-	public static int field317;
+	public static int eyeZ;
 
 	@ObfuscatedName("s.D")
-	public static int field318;
+	public static int sinEyePitch;
 
 	@ObfuscatedName("s.E")
-	public static int field319;
+	public static int cosEyePitch;
 
 	@ObfuscatedName("s.F")
-	public static int field320;
+	public static int sinEyeYaw;
 
 	@ObfuscatedName("s.G")
-	public static int field321;
+	public static int cosEyeYaw;
 
 	@ObfuscatedName("s.N")
-	public static int field328;
+	public static int mouseX;
 
 	@ObfuscatedName("s.O")
-	public static int field329;
+	public static int mouseY;
 
 	@ObfuscatedName("s.U")
-	public static int field335;
+	public static int activeOccluderCount;
 
 	@ObfuscatedName("s.M")
-	public static boolean field327;
+	public static boolean takingInput;
 
 	public World3D(int arg0, int arg1, int[][][] arg2, int arg4) {
-		this.field297 = arg4;
-		this.field298 = arg0;
-		this.field299 = arg1;
-		this.field301 = new Square[arg4][arg0][arg1];
-		this.field305 = new int[arg4][arg0 + 1][arg1 + 1];
-		this.field300 = arg2;
-		this.method64();
+		this.maxLevel = arg4;
+		this.maxTileX = arg0;
+		this.maxTileZ = arg1;
+		this.levelTiles = new Square[arg4][arg0][arg1];
+		this.levelTileOcclusionCycles = new int[arg4][arg0 + 1][arg1 + 1];
+		this.levelHeightmaps = arg2;
+		this.reset();
 	}
 
 	@ObfuscatedName("s.a(I)V")
-	public static void method63() {
-		field322 = null;
-		field333 = null;
-		field334 = null;
-		field337 = null;
-		field351 = null;
-		field352 = null;
+	public static void unload() {
+		locBuffer = null;
+		levelOccluderCount = null;
+		levelOccluders = null;
+		drawTileQueue = null;
+		visibilityMatrix = null;
+		visibilityMap = null;
 	}
 
 	@ObfuscatedName("s.b(I)V")
-	public void method64() {
-		for (int var2 = 0; var2 < this.field297; var2++) {
-			for (int var3 = 0; var3 < this.field298; var3++) {
-				for (int var4 = 0; var4 < this.field299; var4++) {
-					this.field301[var2][var3][var4] = null;
+	public void reset() {
+		for (int var2 = 0; var2 < this.maxLevel; var2++) {
+			for (int var3 = 0; var3 < this.maxTileX; var3++) {
+				for (int var4 = 0; var4 < this.maxTileZ; var4++) {
+					this.levelTiles[var2][var3][var4] = null;
 				}
 			}
 		}
-		for (int var5 = 0; var5 < field332; var5++) {
-			for (int var6 = 0; var6 < field333[var5]; var6++) {
-				field334[var5][var6] = null;
+		for (int var5 = 0; var5 < LEVEL_COUNT; var5++) {
+			for (int var6 = 0; var6 < levelOccluderCount[var5]; var6++) {
+				levelOccluders[var5][var6] = null;
 			}
-			field333[var5] = 0;
+			levelOccluderCount[var5] = 0;
 		}
-		for (int var7 = 0; var7 < this.field303; var7++) {
-			this.field304[var7] = null;
+		for (int var7 = 0; var7 < this.changedLocCount; var7++) {
+			this.changedLocs[var7] = null;
 		}
-		this.field303 = 0;
-		for (int var9 = 0; var9 < field322.length; var9++) {
-			field322[var9] = null;
+		this.changedLocCount = 0;
+		for (int var9 = 0; var9 < locBuffer.length; var9++) {
+			locBuffer[var9] = null;
 		}
 	}
 
 	@ObfuscatedName("s.a(BI)V")
-	public void method65(int arg1) {
-		this.field302 = arg1;
-		for (int var4 = 0; var4 < this.field298; var4++) {
-			for (int var5 = 0; var5 < this.field299; var5++) {
-				this.field301[arg1][var4][var5] = new Square(arg1, var4, var5);
+	public void setMinLevel(int arg1) {
+		this.minLevel = arg1;
+		for (int var4 = 0; var4 < this.maxTileX; var4++) {
+			for (int var5 = 0; var5 < this.maxTileZ; var5++) {
+				this.levelTiles[arg1][var4][var5] = new Square(arg1, var4, var5);
 			}
 		}
 	}
 
 	@ObfuscatedName("s.a(III)V")
-	public void method66(int arg1, int arg2) {
-		Square var4 = this.field301[0][arg2][arg1];
+	public void setLinkBelow(int arg1, int arg2) {
+		Square var4 = this.levelTiles[0][arg2][arg1];
 		for (int var6 = 0; var6 < 3; var6++) {
-			Square var7 = this.field301[var6][arg2][arg1] = this.field301[var6 + 1][arg2][arg1];
+			Square var7 = this.levelTiles[var6][arg2][arg1] = this.levelTiles[var6 + 1][arg2][arg1];
 			if (var7 != null) {
-				var7.field378--;
-				for (int var8 = 0; var8 < var7.field388; var8++) {
-					Sprite var9 = var7.field389[var8];
-					if ((var9.field278 >> 29 & 0x3) == 2 && var9.field272 == arg2 && var9.field274 == arg1) {
-						var9.field266--;
+				var7.level--;
+				for (int var8 = 0; var8 < var7.primaryCount; var8++) {
+					Sprite var9 = var7.sprite[var8];
+					if ((var9.typecode >> 29 & 0x3) == 2 && var9.minGridX == arg2 && var9.minGridZ == arg1) {
+						var9.level--;
 					}
 				}
 			}
 		}
-		if (this.field301[0][arg2][arg1] == null) {
-			this.field301[0][arg2][arg1] = new Square(0, arg2, arg1);
+		if (this.levelTiles[0][arg2][arg1] == null) {
+			this.levelTiles[0][arg2][arg1] = new Square(0, arg2, arg1);
 		}
-		this.field301[0][arg2][arg1].field400 = var4;
-		this.field301[3][arg2][arg1] = null;
+		this.levelTiles[0][arg2][arg1].linkBelow = var4;
+		this.levelTiles[3][arg2][arg1] = null;
 	}
 
 	@ObfuscatedName("s.a(IIIIIIIII)V")
-	public static void method67(int arg0, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public static void addOccluder(int arg0, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		Occlude var9 = new Occlude();
-		var9.field237 = arg0 / 128;
-		var9.field238 = arg4 / 128;
-		var9.field239 = arg7 / 128;
-		var9.field240 = arg8 / 128;
-		var9.field241 = arg2;
-		var9.field242 = arg0;
-		var9.field243 = arg4;
-		var9.field244 = arg7;
-		var9.field245 = arg8;
-		var9.field246 = arg3;
-		var9.field247 = arg6;
-		field334[arg5][field333[arg5]++] = var9;
+		var9.minGridX = arg0 / 128;
+		var9.maxGridX = arg4 / 128;
+		var9.minGridZ = arg7 / 128;
+		var9.maxGridZ = arg8 / 128;
+		var9.type = arg2;
+		var9.minX = arg0;
+		var9.maxX = arg4;
+		var9.minZ = arg7;
+		var9.maxZ = arg8;
+		var9.minY = arg3;
+		var9.maxY = arg6;
+		levelOccluders[arg5][levelOccluderCount[arg5]++] = var9;
 	}
 
 	@ObfuscatedName("s.a(IIII)V")
-	public void method68(int arg0, int arg1, int arg2, int arg3) {
-		Square var5 = this.field301[arg0][arg1][arg2];
+	public void setDrawLevel(int arg0, int arg1, int arg2, int arg3) {
+		Square var5 = this.levelTiles[arg0][arg1][arg2];
 		if (var5 != null) {
-			this.field301[arg0][arg1][arg2].field392 = arg3;
+			this.levelTiles[arg0][arg1][arg2].drawLevel = arg3;
 		}
 	}
 
 	@ObfuscatedName("s.a(IIIIIIIIIIIIIIIIIIII)V")
-	public void method69(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
+	public void setTile(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
 		if (arg3 == 0) {
 			QuickGround var21 = new QuickGround(arg10, arg11, arg12, arg13, -1, arg18, false);
 			for (int var22 = arg0; var22 >= 0; var22--) {
-				if (this.field301[var22][arg1][arg2] == null) {
-					this.field301[var22][arg1][arg2] = new Square(var22, arg1, arg2);
+				if (this.levelTiles[var22][arg1][arg2] == null) {
+					this.levelTiles[var22][arg1][arg2] = new Square(var22, arg1, arg2);
 				}
 			}
-			this.field301[arg0][arg1][arg2].field382 = var21;
+			this.levelTiles[arg0][arg1][arg2].quickGround = var21;
 		} else if (arg3 == 1) {
 			QuickGround var23 = new QuickGround(arg14, arg15, arg16, arg17, arg5, arg19, arg6 == arg7 && arg6 == arg8 && arg6 == arg9);
 			for (int var24 = arg0; var24 >= 0; var24--) {
-				if (this.field301[var24][arg1][arg2] == null) {
-					this.field301[var24][arg1][arg2] = new Square(var24, arg1, arg2);
+				if (this.levelTiles[var24][arg1][arg2] == null) {
+					this.levelTiles[var24][arg1][arg2] = new Square(var24, arg1, arg2);
 				}
 			}
-			this.field301[arg0][arg1][arg2].field382 = var23;
+			this.levelTiles[arg0][arg1][arg2].quickGround = var23;
 		} else {
 			Ground var25 = new Ground(arg13, arg17, arg9, arg6, arg1, arg3, arg2, arg15, arg5, arg10, arg11, arg18, arg4, arg14, arg12, arg16, arg7, arg8, arg19);
 			for (int var26 = arg0; var26 >= 0; var26--) {
-				if (this.field301[var26][arg1][arg2] == null) {
-					this.field301[var26][arg1][arg2] = new Square(var26, arg1, arg2);
+				if (this.levelTiles[var26][arg1][arg2] == null) {
+					this.levelTiles[var26][arg1][arg2] = new Square(var26, arg1, arg2);
 				}
 			}
-			this.field301[arg0][arg1][arg2].field383 = var25;
+			this.levelTiles[arg0][arg1][arg2].ground = var25;
 		}
 	}
 
 	@ObfuscatedName("s.a(Ly;IIIIIIB)V")
-	public void method70(ModelSource arg0, int arg1, int arg2, int arg4, int arg5, int arg6, byte arg7) {
+	public void addGroundDecor(ModelSource arg0, int arg1, int arg2, int arg4, int arg5, int arg6, byte arg7) {
 		if (arg0 == null) {
 			return;
 		}
 		GroundDecor var9 = new GroundDecor();
-		var9.field209 = arg0;
-		var9.field207 = arg1 * 128 + 64;
-		var9.field208 = arg5 * 128 + 64;
-		var9.field206 = arg6;
-		var9.field210 = arg2;
-		var9.field211 = arg7;
-		if (this.field301[arg4][arg1][arg5] == null) {
-			this.field301[arg4][arg1][arg5] = new Square(arg4, arg1, arg5);
+		var9.model = arg0;
+		var9.x = arg1 * 128 + 64;
+		var9.z = arg5 * 128 + 64;
+		var9.y = arg6;
+		var9.typecode = arg2;
+		var9.typecode2 = arg7;
+		if (this.levelTiles[arg4][arg1][arg5] == null) {
+			this.levelTiles[arg4][arg1][arg5] = new Square(arg4, arg1, arg5);
 		}
-		this.field301[arg4][arg1][arg5].field386 = var9;
+		this.levelTiles[arg4][arg1][arg5].groundDecor = var9;
 	}
 
 	@ObfuscatedName("s.a(Ly;IILy;IZIILy;)V")
-	public void method71(ModelSource arg0, int arg1, int arg2, ModelSource arg3, int arg4, int arg6, int arg7, ModelSource arg8) {
+	public void addGroundObject(ModelSource arg0, int arg1, int arg2, ModelSource arg3, int arg4, int arg6, int arg7, ModelSource arg8) {
 		GroundObject var10 = new GroundObject();
-		var10.field215 = arg0;
-		var10.field213 = arg6 * 128 + 64;
-		var10.field214 = arg7 * 128 + 64;
-		var10.field212 = arg2;
-		var10.field218 = arg1;
-		var10.field216 = arg8;
-		var10.field217 = arg3;
+		var10.top = arg0;
+		var10.x = arg6 * 128 + 64;
+		var10.z = arg7 * 128 + 64;
+		var10.y = arg2;
+		var10.typecode = arg1;
+		var10.bottom = arg8;
+		var10.middle = arg3;
 		int var11 = 0;
-		Square var12 = this.field301[arg4][arg6][arg7];
+		Square var12 = this.levelTiles[arg4][arg6][arg7];
 		if (var12 != null) {
-			for (int var13 = 0; var13 < var12.field388; var13++) {
-				if (var12.field389[var13].field270 instanceof Model) {
-					int var14 = ((Model) var12.field389[var13].field270).field567;
+			for (int var13 = 0; var13 < var12.primaryCount; var13++) {
+				if (var12.sprite[var13].model instanceof Model) {
+					int var14 = ((Model) var12.sprite[var13].model).objRaise;
 					if (var14 > var11) {
 						var11 = var14;
 					}
 				}
 			}
 		}
-		var10.field219 = var11;
-		if (this.field301[arg4][arg6][arg7] == null) {
-			this.field301[arg4][arg6][arg7] = new Square(arg4, arg6, arg7);
+		var10.height = var11;
+		if (this.levelTiles[arg4][arg6][arg7] == null) {
+			this.levelTiles[arg4][arg6][arg7] = new Square(arg4, arg6, arg7);
 		}
-		this.field301[arg4][arg6][arg7].field387 = var10;
+		this.levelTiles[arg4][arg6][arg7].groundObject = var10;
 	}
 
 	@ObfuscatedName("s.a(Ly;Ly;IIIBBIIII)V")
-	public void method72(ModelSource arg0, ModelSource arg1, int arg2, int arg3, int arg4, byte arg6, int arg7, int arg8, int arg9, int arg10) {
+	public void addWall(ModelSource arg0, ModelSource arg1, int arg2, int arg3, int arg4, byte arg6, int arg7, int arg8, int arg9, int arg10) {
 		if (arg0 == null && arg1 == null) {
 			return;
 		}
 		Wall var12 = new Wall();
-		var12.field287 = arg2;
-		var12.field288 = arg6;
-		var12.field281 = arg7 * 128 + 64;
-		var12.field282 = arg4 * 128 + 64;
-		var12.field280 = arg8;
-		var12.field285 = arg0;
-		var12.field286 = arg1;
-		var12.field283 = arg9;
-		var12.field284 = arg3;
+		var12.typecode = arg2;
+		var12.typecode2 = arg6;
+		var12.x = arg7 * 128 + 64;
+		var12.z = arg4 * 128 + 64;
+		var12.y = arg8;
+		var12.model1 = arg0;
+		var12.model2 = arg1;
+		var12.angle1 = arg9;
+		var12.angle2 = arg3;
 		for (int var14 = arg10; var14 >= 0; var14--) {
-			if (this.field301[var14][arg7][arg4] == null) {
-				this.field301[var14][arg7][arg4] = new Square(var14, arg7, arg4);
+			if (this.levelTiles[var14][arg7][arg4] == null) {
+				this.levelTiles[var14][arg7][arg4] = new Square(var14, arg7, arg4);
 			}
 		}
-		this.field301[arg10][arg7][arg4].field384 = var12;
+		this.levelTiles[arg10][arg7][arg4].wall = var12;
 	}
 
 	@ObfuscatedName("s.a(IIBIIIIIILy;IZ)V")
-	public void method73(int arg0, int arg1, byte arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, ModelSource arg9, int arg10) {
+	public void addDecor(int arg0, int arg1, byte arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, ModelSource arg9, int arg10) {
 		if (arg9 == null) {
 			return;
 		}
 		Decor var13 = new Decor();
-		var13.field178 = arg5;
-		var13.field179 = arg2;
-		var13.field173 = arg4 * 128 + 64 + arg1;
-		var13.field174 = arg7 * 128 + 64 + arg8;
-		var13.field172 = arg3;
-		var13.field177 = arg9;
-		var13.field175 = arg0;
-		var13.field176 = arg6;
+		var13.typecode = arg5;
+		var13.typecode2 = arg2;
+		var13.x = arg4 * 128 + 64 + arg1;
+		var13.z = arg7 * 128 + 64 + arg8;
+		var13.y = arg3;
+		var13.model = arg9;
+		var13.angle1 = arg0;
+		var13.angle2 = arg6;
 		for (int var14 = arg10; var14 >= 0; var14--) {
-			if (this.field301[var14][arg4][arg7] == null) {
-				this.field301[var14][arg4][arg7] = new Square(var14, arg4, arg7);
+			if (this.levelTiles[var14][arg4][arg7] == null) {
+				this.levelTiles[var14][arg4][arg7] = new Square(var14, arg4, arg7);
 			}
 		}
-		this.field301[arg10][arg4][arg7].field385 = var13;
+		this.levelTiles[arg10][arg4][arg7].decor = var13;
 	}
 
 	@ObfuscatedName("s.a(BIILy;IIIIIII)Z")
-	public boolean method74(byte arg0, int arg1, int arg2, ModelSource arg3, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public boolean addLoc(byte arg0, int arg1, int arg2, ModelSource arg3, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		if (arg3 == null) {
 			return true;
 		}
 		int var12 = arg8 * 128 + arg1 * 64;
 		int var13 = arg7 * 128 + arg5 * 64;
-		return this.method77(arg10, arg8, arg7, arg1, arg5, var12, var13, arg2, arg3, arg9, false, arg6, arg0);
+		return this.addLoc(arg10, arg8, arg7, arg1, arg5, var12, var13, arg2, arg3, arg9, false, arg6, arg0);
 	}
 
 	@ObfuscatedName("s.a(IIIILy;ZIIZI)Z")
-	public boolean method75(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg6, int arg7, boolean arg8, int arg9) {
+	public boolean addLocChange(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg6, int arg7, boolean arg8, int arg9) {
 		if (arg4 == null) {
 			return true;
 		}
@@ -456,40 +456,40 @@ public class World3D {
 		int var16 = var12 / 128;
 		int var17 = var13 / 128;
 		int var18 = var14 / 128;
-		return this.method77(arg7, var15, var16, var17 - var15 + 1, var18 - var16 + 1, arg3, arg9, arg6, arg4, arg0, true, arg1, (byte) 0);
+		return this.addLoc(arg7, var15, var16, var17 - var15 + 1, var18 - var16 + 1, arg3, arg9, arg6, arg4, arg0, true, arg1, (byte) 0);
 	}
 
 	@ObfuscatedName("s.a(IIIIIILy;IIZIII)Z")
-	public boolean method76(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, ModelSource arg6, int arg7, int arg8, int arg10, int arg11, int arg12) {
-		return arg6 == null ? true : this.method77(arg11, arg7, arg2, arg12 - arg7 + 1, arg4 - arg2 + 1, arg8, arg5, arg0, arg6, arg1, true, arg10, (byte) 0);
+	public boolean addLocChange(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, ModelSource arg6, int arg7, int arg8, int arg10, int arg11, int arg12) {
+		return arg6 == null ? true : this.addLoc(arg11, arg7, arg2, arg12 - arg7 + 1, arg4 - arg2 + 1, arg8, arg5, arg0, arg6, arg1, true, arg10, (byte) 0);
 	}
 
 	@ObfuscatedName("s.a(IIIIIIIILy;IZIB)Z")
-	public boolean method77(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, ModelSource arg8, int arg9, boolean arg10, int arg11, byte arg12) {
+	public boolean addLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, ModelSource arg8, int arg9, boolean arg10, int arg11, byte arg12) {
 		for (int var14 = arg1; var14 < arg1 + arg3; var14++) {
 			for (int var15 = arg2; var15 < arg2 + arg4; var15++) {
-				if (var14 < 0 || var15 < 0 || var14 >= this.field298 || var15 >= this.field299) {
+				if (var14 < 0 || var15 < 0 || var14 >= this.maxTileX || var15 >= this.maxTileZ) {
 					return false;
 				}
-				Square var16 = this.field301[arg0][var14][var15];
-				if (var16 != null && var16.field388 >= 5) {
+				Square var16 = this.levelTiles[arg0][var14][var15];
+				if (var16 != null && var16.primaryCount >= 5) {
 					return false;
 				}
 			}
 		}
 		Sprite var17 = new Sprite();
-		var17.field278 = arg11;
-		var17.field279 = arg12;
-		var17.field266 = arg0;
-		var17.field268 = arg5;
-		var17.field269 = arg6;
-		var17.field267 = arg7;
-		var17.field270 = arg8;
-		var17.field271 = arg9;
-		var17.field272 = arg1;
-		var17.field274 = arg2;
-		var17.field273 = arg1 + arg3 - 1;
-		var17.field275 = arg2 + arg4 - 1;
+		var17.typecode = arg11;
+		var17.typecode2 = arg12;
+		var17.level = arg0;
+		var17.x = arg5;
+		var17.z = arg6;
+		var17.y = arg7;
+		var17.model = arg8;
+		var17.angle = arg9;
+		var17.minGridX = arg1;
+		var17.minGridZ = arg2;
+		var17.maxGridX = arg1 + arg3 - 1;
+		var17.maxGridZ = arg2 + arg4 - 1;
 		for (int var18 = arg1; var18 < arg1 + arg3; var18++) {
 			for (int var19 = arg2; var19 < arg2 + arg4; var19++) {
 				int var20 = 0;
@@ -506,53 +506,53 @@ public class World3D {
 					var20 += 2;
 				}
 				for (int var21 = arg0; var21 >= 0; var21--) {
-					if (this.field301[var21][var18][var19] == null) {
-						this.field301[var21][var18][var19] = new Square(var21, var18, var19);
+					if (this.levelTiles[var21][var18][var19] == null) {
+						this.levelTiles[var21][var18][var19] = new Square(var21, var18, var19);
 					}
 				}
-				Square var22 = this.field301[arg0][var18][var19];
-				var22.field389[var22.field388] = var17;
-				var22.field390[var22.field388] = var20;
-				var22.field391 |= var20;
-				var22.field388++;
+				Square var22 = this.levelTiles[arg0][var18][var19];
+				var22.sprite[var22.primaryCount] = var17;
+				var22.primaryExtendDirections[var22.primaryCount] = var20;
+				var22.combinedPrimaryExtendDirections |= var20;
+				var22.primaryCount++;
 			}
 		}
 		if (arg10) {
-			this.field304[this.field303++] = var17;
+			this.changedLocs[this.changedLocCount++] = var17;
 		}
 		return true;
 	}
 
 	@ObfuscatedName("s.c(I)V")
-	public void method78() {
-		for (int var2 = 0; var2 < this.field303; var2++) {
-			Sprite var3 = this.field304[var2];
-			this.method79(var3);
-			this.field304[var2] = null;
+	public void clearLocChanges() {
+		for (int var2 = 0; var2 < this.changedLocCount; var2++) {
+			Sprite var3 = this.changedLocs[var2];
+			this.removeLoc(var3);
+			this.changedLocs[var2] = null;
 		}
-		this.field303 = 0;
+		this.changedLocCount = 0;
 	}
 
 	@ObfuscatedName("s.a(Lq;I)V")
-	public void method79(Sprite arg0) {
-		for (int var3 = arg0.field272; var3 <= arg0.field273; var3++) {
-			for (int var4 = arg0.field274; var4 <= arg0.field275; var4++) {
-				Square var5 = this.field301[arg0.field266][var3][var4];
+	public void removeLoc(Sprite arg0) {
+		for (int var3 = arg0.minGridX; var3 <= arg0.maxGridX; var3++) {
+			for (int var4 = arg0.minGridZ; var4 <= arg0.maxGridZ; var4++) {
+				Square var5 = this.levelTiles[arg0.level][var3][var4];
 				if (var5 != null) {
-					for (int var6 = 0; var6 < var5.field388; var6++) {
-						if (var5.field389[var6] == arg0) {
-							var5.field388--;
-							for (int var7 = var6; var7 < var5.field388; var7++) {
-								var5.field389[var7] = var5.field389[var7 + 1];
-								var5.field390[var7] = var5.field390[var7 + 1];
+					for (int var6 = 0; var6 < var5.primaryCount; var6++) {
+						if (var5.sprite[var6] == arg0) {
+							var5.primaryCount--;
+							for (int var7 = var6; var7 < var5.primaryCount; var7++) {
+								var5.sprite[var7] = var5.sprite[var7 + 1];
+								var5.primaryExtendDirections[var7] = var5.primaryExtendDirections[var7 + 1];
 							}
-							var5.field389[var5.field388] = null;
+							var5.sprite[var5.primaryCount] = null;
 							break;
 						}
 					}
-					var5.field391 = 0;
-					for (int var8 = 0; var8 < var5.field388; var8++) {
-						var5.field391 |= var5.field390[var8];
+					var5.combinedPrimaryExtendDirections = 0;
+					for (int var8 = 0; var8 < var5.primaryCount; var8++) {
+						var5.combinedPrimaryExtendDirections |= var5.primaryExtendDirections[var8];
 					}
 				}
 			}
@@ -560,88 +560,88 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIBII)V")
-	public void method80(int arg0, int arg1, int arg3, int arg4) {
-		Square var7 = this.field301[arg0][arg3][arg1];
+	public void setDecorOffset(int arg0, int arg1, int arg3, int arg4) {
+		Square var7 = this.levelTiles[arg0][arg3][arg1];
 		if (var7 == null) {
 			return;
 		}
-		Decor var8 = var7.field385;
+		Decor var8 = var7.decor;
 		if (var8 != null) {
 			int var9 = arg3 * 128 + 64;
 			int var10 = arg1 * 128 + 64;
-			var8.field173 = var9 + (var8.field173 - var9) * arg4 / 16;
-			var8.field174 = var10 + (var8.field174 - var10) * arg4 / 16;
+			var8.x = var9 + (var8.x - var9) * arg4 / 16;
+			var8.z = var10 + (var8.z - var10) * arg4 / 16;
 		}
 	}
 
 	@ObfuscatedName("s.b(IIII)V")
-	public void method81(int arg0, int arg1, int arg3) {
-		Square var5 = this.field301[arg1][arg0][arg3];
+	public void removeWall(int arg0, int arg1, int arg3) {
+		Square var5 = this.levelTiles[arg1][arg0][arg3];
 		if (var5 != null) {
-			var5.field384 = null;
+			var5.wall = null;
 		}
 	}
 
 	@ObfuscatedName("s.a(IIZI)V")
-	public void method82(int arg0, int arg1, int arg3) {
-		Square var5 = this.field301[arg3][arg0][arg1];
+	public void removeDecor(int arg0, int arg1, int arg3) {
+		Square var5 = this.levelTiles[arg3][arg0][arg1];
 		if (var5 != null) {
-			var5.field385 = null;
+			var5.decor = null;
 		}
 	}
 
 	@ObfuscatedName("s.c(IIII)V")
-	public void method83(int arg1, int arg2, int arg3) {
-		Square var5 = this.field301[arg3][arg2][arg1];
+	public void removeLoc(int arg1, int arg2, int arg3) {
+		Square var5 = this.levelTiles[arg3][arg2][arg1];
 		if (var5 == null) {
 			return;
 		}
-		for (int var6 = 0; var6 < var5.field388; var6++) {
-			Sprite var7 = var5.field389[var6];
-			if ((var7.field278 >> 29 & 0x3) == 2 && var7.field272 == arg2 && var7.field274 == arg1) {
-				this.method79(var7);
+		for (int var6 = 0; var6 < var5.primaryCount; var6++) {
+			Sprite var7 = var5.sprite[var6];
+			if ((var7.typecode >> 29 & 0x3) == 2 && var7.minGridX == arg2 && var7.minGridZ == arg1) {
+				this.removeLoc(var7);
 				return;
 			}
 		}
 	}
 
 	@ObfuscatedName("s.b(IIZI)V")
-	public void method84(int arg0, int arg1, int arg3) {
-		Square var5 = this.field301[arg0][arg3][arg1];
+	public void removeGroundDecor(int arg0, int arg1, int arg3) {
+		Square var5 = this.levelTiles[arg0][arg3][arg1];
 		if (var5 != null) {
-			var5.field386 = null;
+			var5.groundDecor = null;
 		}
 	}
 
 	@ObfuscatedName("s.b(III)V")
-	public void method85(int arg0, int arg1, int arg2) {
-		Square var4 = this.field301[arg0][arg1][arg2];
+	public void removeGroundObj(int arg0, int arg1, int arg2) {
+		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		if (var4 != null) {
-			var4.field387 = null;
+			var4.groundObject = null;
 		}
 	}
 
 	@ObfuscatedName("s.d(IIII)Lr;")
-	public Wall method86(int arg0, int arg1, int arg2) {
-		Square var5 = this.field301[arg0][arg1][arg2];
-		return var5 == null ? null : var5.field384;
+	public Wall getWall(int arg0, int arg1, int arg2) {
+		Square var5 = this.levelTiles[arg0][arg1][arg2];
+		return var5 == null ? null : var5.wall;
 	}
 
 	@ObfuscatedName("s.a(BIII)Li;")
-	public Decor method87(int arg1, int arg2, int arg3) {
-		Square var5 = this.field301[arg3][arg1][arg2];
-		return var5 == null ? null : var5.field385;
+	public Decor getDecor(int arg1, int arg2, int arg3) {
+		Square var5 = this.levelTiles[arg3][arg1][arg2];
+		return var5 == null ? null : var5.decor;
 	}
 
 	@ObfuscatedName("s.b(BIII)Lq;")
-	public Sprite method88(int arg1, int arg2, int arg3) {
-		Square var5 = this.field301[arg3][arg1][arg2];
+	public Sprite getLoc(int arg1, int arg2, int arg3) {
+		Square var5 = this.levelTiles[arg3][arg1][arg2];
 		if (var5 == null) {
 			return null;
 		}
-		for (int var6 = 0; var6 < var5.field388; var6++) {
-			Sprite var7 = var5.field389[var6];
-			if ((var7.field278 >> 29 & 0x3) == 2 && var7.field272 == arg1 && var7.field274 == arg2) {
+		for (int var6 = 0; var6 < var5.primaryCount; var6++) {
+			Sprite var7 = var5.sprite[var6];
+			if ((var7.typecode >> 29 & 0x3) == 2 && var7.minGridX == arg1 && var7.minGridZ == arg2) {
 				return var7;
 			}
 		}
@@ -649,59 +649,59 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IZII)Lk;")
-	public GroundDecor method89(int arg0, int arg2, int arg3) {
-		Square var5 = this.field301[arg0][arg2][arg3];
-		return var5 == null || var5.field386 == null ? null : var5.field386;
+	public GroundDecor getGroundDecor(int arg0, int arg2, int arg3) {
+		Square var5 = this.levelTiles[arg0][arg2][arg3];
+		return var5 == null || var5.groundDecor == null ? null : var5.groundDecor;
 	}
 
 	@ObfuscatedName("s.c(III)I")
-	public int method90(int arg0, int arg1, int arg2) {
-		Square var4 = this.field301[arg0][arg1][arg2];
-		return var4 == null || var4.field384 == null ? 0 : var4.field384.field287;
+	public int getWallTypecode(int arg0, int arg1, int arg2) {
+		Square var4 = this.levelTiles[arg0][arg1][arg2];
+		return var4 == null || var4.wall == null ? 0 : var4.wall.typecode;
 	}
 
 	@ObfuscatedName("s.e(IIII)I")
-	public int method91(int arg0, int arg1, int arg3) {
-		Square var5 = this.field301[arg1][arg0][arg3];
-		return var5 == null || var5.field385 == null ? 0 : var5.field385.field178;
+	public int getDecorTypecode(int arg0, int arg1, int arg3) {
+		Square var5 = this.levelTiles[arg1][arg0][arg3];
+		return var5 == null || var5.decor == null ? 0 : var5.decor.typecode;
 	}
 
 	@ObfuscatedName("s.d(III)I")
-	public int method92(int arg0, int arg1, int arg2) {
-		Square var4 = this.field301[arg0][arg1][arg2];
+	public int getLocTypecode(int arg0, int arg1, int arg2) {
+		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		if (var4 == null) {
 			return 0;
 		}
-		for (int var5 = 0; var5 < var4.field388; var5++) {
-			Sprite var6 = var4.field389[var5];
-			if ((var6.field278 >> 29 & 0x3) == 2 && var6.field272 == arg1 && var6.field274 == arg2) {
-				return var6.field278;
+		for (int var5 = 0; var5 < var4.primaryCount; var5++) {
+			Sprite var6 = var4.sprite[var5];
+			if ((var6.typecode >> 29 & 0x3) == 2 && var6.minGridX == arg1 && var6.minGridZ == arg2) {
+				return var6.typecode;
 			}
 		}
 		return 0;
 	}
 
 	@ObfuscatedName("s.e(III)I")
-	public int method93(int arg0, int arg1, int arg2) {
-		Square var4 = this.field301[arg0][arg1][arg2];
-		return var4 == null || var4.field386 == null ? 0 : var4.field386.field210;
+	public int getGroundDecorTypecode(int arg0, int arg1, int arg2) {
+		Square var4 = this.levelTiles[arg0][arg1][arg2];
+		return var4 == null || var4.groundDecor == null ? 0 : var4.groundDecor.typecode;
 	}
 
 	@ObfuscatedName("s.f(IIII)I")
-	public int method94(int arg0, int arg1, int arg2, int arg3) {
-		Square var5 = this.field301[arg0][arg1][arg2];
+	public int getInfo(int arg0, int arg1, int arg2, int arg3) {
+		Square var5 = this.levelTiles[arg0][arg1][arg2];
 		if (var5 == null) {
 			return -1;
-		} else if (var5.field384 != null && var5.field384.field287 == arg3) {
-			return var5.field384.field288 & 0xFF;
-		} else if (var5.field385 != null && var5.field385.field178 == arg3) {
-			return var5.field385.field179 & 0xFF;
-		} else if (var5.field386 != null && var5.field386.field210 == arg3) {
-			return var5.field386.field211 & 0xFF;
+		} else if (var5.wall != null && var5.wall.typecode == arg3) {
+			return var5.wall.typecode2 & 0xFF;
+		} else if (var5.decor != null && var5.decor.typecode == arg3) {
+			return var5.decor.typecode2 & 0xFF;
+		} else if (var5.groundDecor != null && var5.groundDecor.typecode == arg3) {
+			return var5.groundDecor.typecode2 & 0xFF;
 		} else {
-			for (int var6 = 0; var6 < var5.field388; var6++) {
-				if (var5.field389[var6].field278 == arg3) {
-					return var5.field389[var6].field279 & 0xFF;
+			for (int var6 = 0; var6 < var5.primaryCount; var6++) {
+				if (var5.sprite[var6].typecode == arg3) {
+					return var5.sprite[var6].typecode2 & 0xFF;
 				}
 			}
 			return -1;
@@ -709,35 +709,35 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIIII)V")
-	public void method95(int arg0, int arg2, int arg3, int arg4, int arg5) {
+	public void buildModels(int arg0, int arg2, int arg3, int arg4, int arg5) {
 		int var7 = (int) Math.sqrt((double) (arg4 * arg4 + arg3 * arg3 + arg5 * arg5));
 		int var8 = arg0 * var7 >> 8;
-		for (int var9 = 0; var9 < this.field297; var9++) {
-			for (int var10 = 0; var10 < this.field298; var10++) {
-				for (int var11 = 0; var11 < this.field299; var11++) {
-					Square var12 = this.field301[var9][var10][var11];
+		for (int var9 = 0; var9 < this.maxLevel; var9++) {
+			for (int var10 = 0; var10 < this.maxTileX; var10++) {
+				for (int var11 = 0; var11 < this.maxTileZ; var11++) {
+					Square var12 = this.levelTiles[var9][var10][var11];
 					if (var12 != null) {
-						Wall var13 = var12.field384;
-						if (var13 != null && var13.field285 != null && var13.field285.vertexNormal != null) {
-							this.method97(var11, var10, var9, (Model) var13.field285, 1, 1);
-							if (var13.field286 != null && var13.field286.vertexNormal != null) {
-								this.method97(var11, var10, var9, (Model) var13.field286, 1, 1);
-								this.method98((Model) var13.field285, (Model) var13.field286, 0, 0, 0);
-								((Model) var13.field286).method157(arg2, var8, arg4, arg3, arg5);
+						Wall var13 = var12.wall;
+						if (var13 != null && var13.model1 != null && var13.model1.vertexNormal != null) {
+							this.mergeLocNormals(var11, var10, var9, (Model) var13.model1, 1, 1);
+							if (var13.model2 != null && var13.model2.vertexNormal != null) {
+								this.mergeLocNormals(var11, var10, var9, (Model) var13.model2, 1, 1);
+								this.mergeNormals((Model) var13.model1, (Model) var13.model2, 0, 0, 0);
+								((Model) var13.model2).applyLighting(arg2, var8, arg4, arg3, arg5);
 							}
-							((Model) var13.field285).method157(arg2, var8, arg4, arg3, arg5);
+							((Model) var13.model1).applyLighting(arg2, var8, arg4, arg3, arg5);
 						}
-						for (int var14 = 0; var14 < var12.field388; var14++) {
-							Sprite var15 = var12.field389[var14];
-							if (var15 != null && var15.field270 != null && var15.field270.vertexNormal != null) {
-								this.method97(var11, var10, var9, (Model) var15.field270, var15.field275 - var15.field274 + 1, var15.field273 - var15.field272 + 1);
-								((Model) var15.field270).method157(arg2, var8, arg4, arg3, arg5);
+						for (int var14 = 0; var14 < var12.primaryCount; var14++) {
+							Sprite var15 = var12.sprite[var14];
+							if (var15 != null && var15.model != null && var15.model.vertexNormal != null) {
+								this.mergeLocNormals(var11, var10, var9, (Model) var15.model, var15.maxGridZ - var15.minGridZ + 1, var15.maxGridX - var15.minGridX + 1);
+								((Model) var15.model).applyLighting(arg2, var8, arg4, arg3, arg5);
 							}
 						}
-						GroundDecor var16 = var12.field386;
-						if (var16 != null && var16.field209.vertexNormal != null) {
-							this.method96((Model) var16.field209, var11, var9, var10);
-							((Model) var16.field209).method157(arg2, var8, arg4, arg3, arg5);
+						GroundDecor var16 = var12.groundDecor;
+						if (var16 != null && var16.model.vertexNormal != null) {
+							this.mergeGroundDecorNormals((Model) var16.model, var11, var9, var10);
+							((Model) var16.model).applyLighting(arg2, var8, arg4, arg3, arg5);
 						}
 					}
 				}
@@ -746,62 +746,62 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(Lfb;IIII)V")
-	public void method96(Model arg0, int arg1, int arg2, int arg4) {
-		if (arg4 < this.field298) {
-			Square var7 = this.field301[arg2][arg4 + 1][arg1];
-			if (var7 != null && var7.field386 != null && var7.field386.field209.vertexNormal != null) {
-				this.method98(arg0, (Model) var7.field386.field209, 128, 0, 0);
+	public void mergeGroundDecorNormals(Model arg0, int arg1, int arg2, int arg4) {
+		if (arg4 < this.maxTileX) {
+			Square var7 = this.levelTiles[arg2][arg4 + 1][arg1];
+			if (var7 != null && var7.groundDecor != null && var7.groundDecor.model.vertexNormal != null) {
+				this.mergeNormals(arg0, (Model) var7.groundDecor.model, 128, 0, 0);
 			}
 		}
-		if (arg1 < this.field298) {
-			Square var8 = this.field301[arg2][arg4][arg1 + 1];
-			if (var8 != null && var8.field386 != null && var8.field386.field209.vertexNormal != null) {
-				this.method98(arg0, (Model) var8.field386.field209, 0, 0, 128);
+		if (arg1 < this.maxTileX) {
+			Square var8 = this.levelTiles[arg2][arg4][arg1 + 1];
+			if (var8 != null && var8.groundDecor != null && var8.groundDecor.model.vertexNormal != null) {
+				this.mergeNormals(arg0, (Model) var8.groundDecor.model, 0, 0, 128);
 			}
 		}
-		if (arg4 < this.field298 && arg1 < this.field299) {
-			Square var9 = this.field301[arg2][arg4 + 1][arg1 + 1];
-			if (var9 != null && var9.field386 != null && var9.field386.field209.vertexNormal != null) {
-				this.method98(arg0, (Model) var9.field386.field209, 128, 0, 128);
+		if (arg4 < this.maxTileX && arg1 < this.maxTileZ) {
+			Square var9 = this.levelTiles[arg2][arg4 + 1][arg1 + 1];
+			if (var9 != null && var9.groundDecor != null && var9.groundDecor.model.vertexNormal != null) {
+				this.mergeNormals(arg0, (Model) var9.groundDecor.model, 128, 0, 128);
 			}
 		}
-		if (arg4 < this.field298 && arg1 > 0) {
-			Square var10 = this.field301[arg2][arg4 + 1][arg1 - 1];
-			if (var10 != null && var10.field386 != null && var10.field386.field209.vertexNormal != null) {
-				this.method98(arg0, (Model) var10.field386.field209, 128, 0, -128);
+		if (arg4 < this.maxTileX && arg1 > 0) {
+			Square var10 = this.levelTiles[arg2][arg4 + 1][arg1 - 1];
+			if (var10 != null && var10.groundDecor != null && var10.groundDecor.model.vertexNormal != null) {
+				this.mergeNormals(arg0, (Model) var10.groundDecor.model, 128, 0, -128);
 			}
 		}
 	}
 
 	@ObfuscatedName("s.a(IIILfb;III)V")
-	public void method97(int arg0, int arg1, int arg2, Model arg3, int arg5, int arg6) {
+	public void mergeLocNormals(int arg0, int arg1, int arg2, Model arg3, int arg5, int arg6) {
 		boolean var8 = true;
 		int var9 = arg1;
 		int var10 = arg1 + arg6;
 		int var11 = arg0 - 1;
 		int var12 = arg0 + arg5;
 		for (int var14 = arg2; var14 <= arg2 + 1; var14++) {
-			if (var14 != this.field297) {
+			if (var14 != this.maxLevel) {
 				for (int var15 = var9; var15 <= var10; var15++) {
-					if (var15 >= 0 && var15 < this.field298) {
+					if (var15 >= 0 && var15 < this.maxTileX) {
 						for (int var16 = var11; var16 <= var12; var16++) {
-							if (var16 >= 0 && var16 < this.field299 && (!var8 || var15 >= var10 || var16 >= var12 || var16 < arg0 && var15 != arg1)) {
-								Square var17 = this.field301[var14][var15][var16];
+							if (var16 >= 0 && var16 < this.maxTileZ && (!var8 || var15 >= var10 || var16 >= var12 || var16 < arg0 && var15 != arg1)) {
+								Square var17 = this.levelTiles[var14][var15][var16];
 								if (var17 != null) {
-									int var18 = (this.field300[var14][var15][var16] + this.field300[var14][var15 + 1][var16] + this.field300[var14][var15][var16 + 1] + this.field300[var14][var15 + 1][var16 + 1]) / 4 - (this.field300[arg2][arg1][arg0] + this.field300[arg2][arg1 + 1][arg0] + this.field300[arg2][arg1][arg0 + 1] + this.field300[arg2][arg1 + 1][arg0 + 1]) / 4;
-									Wall var19 = var17.field384;
-									if (var19 != null && var19.field285 != null && var19.field285.vertexNormal != null) {
-										this.method98(arg3, (Model) var19.field285, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64);
+									int var18 = (this.levelHeightmaps[var14][var15][var16] + this.levelHeightmaps[var14][var15 + 1][var16] + this.levelHeightmaps[var14][var15][var16 + 1] + this.levelHeightmaps[var14][var15 + 1][var16 + 1]) / 4 - (this.levelHeightmaps[arg2][arg1][arg0] + this.levelHeightmaps[arg2][arg1 + 1][arg0] + this.levelHeightmaps[arg2][arg1][arg0 + 1] + this.levelHeightmaps[arg2][arg1 + 1][arg0 + 1]) / 4;
+									Wall var19 = var17.wall;
+									if (var19 != null && var19.model1 != null && var19.model1.vertexNormal != null) {
+										this.mergeNormals(arg3, (Model) var19.model1, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64);
 									}
-									if (var19 != null && var19.field286 != null && var19.field286.vertexNormal != null) {
-										this.method98(arg3, (Model) var19.field286, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64);
+									if (var19 != null && var19.model2 != null && var19.model2.vertexNormal != null) {
+										this.mergeNormals(arg3, (Model) var19.model2, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64);
 									}
-									for (int var20 = 0; var20 < var17.field388; var20++) {
-										Sprite var21 = var17.field389[var20];
-										if (var21 != null && var21.field270 != null && var21.field270.vertexNormal != null) {
-											int var22 = var21.field273 - var21.field272 + 1;
-											int var23 = var21.field275 - var21.field274 + 1;
-											this.method98(arg3, (Model) var21.field270, (var21.field272 - arg1) * 128 + (var22 - arg6) * 64, var18, (var21.field274 - arg0) * 128 + (var23 - arg5) * 64);
+									for (int var20 = 0; var20 < var17.primaryCount; var20++) {
+										Sprite var21 = var17.sprite[var20];
+										if (var21 != null && var21.model != null && var21.model.vertexNormal != null) {
+											int var22 = var21.maxGridX - var21.minGridX + 1;
+											int var23 = var21.maxGridZ - var21.minGridZ + 1;
+											this.mergeNormals(arg3, (Model) var21.model, (var21.minGridX - arg1) * 128 + (var22 - arg6) * 64, var18, (var21.minGridZ - arg0) * 128 + (var23 - arg5) * 64);
 										}
 									}
 								}
@@ -816,25 +816,25 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(Lfb;Lfb;IIIZ)V")
-	public void method98(Model arg0, Model arg1, int arg2, int arg3, int arg4) {
-		this.field348++;
+	public void mergeNormals(Model arg0, Model arg1, int arg2, int arg3, int arg4) {
+		this.tmpMergeIndex++;
 		int var7 = 0;
-		int[] var8 = arg1.field540;
-		int var9 = arg1.field539;
-		for (int var10 = 0; var10 < arg0.field539; var10++) {
+		int[] var8 = arg1.vertexX;
+		int var9 = arg1.vertexCount;
+		for (int var10 = 0; var10 < arg0.vertexCount; var10++) {
 			VertexNormal var11 = arg0.vertexNormal[var10];
-			VertexNormal var12 = arg0.field573[var10];
+			VertexNormal var12 = arg0.vertexNormalOriginal[var10];
 			if (var12.w != 0) {
-				int var13 = arg0.field541[var10] - arg3;
-				if (var13 <= arg1.field564) {
-					int var14 = arg0.field540[var10] - arg2;
-					if (var14 >= arg1.field559 && var14 <= arg1.field560) {
-						int var15 = arg0.field542[var10] - arg4;
-						if (var15 >= arg1.field562 && var15 <= arg1.field561) {
+				int var13 = arg0.vertexY[var10] - arg3;
+				if (var13 <= arg1.maxY) {
+					int var14 = arg0.vertexX[var10] - arg2;
+					if (var14 >= arg1.minX && var14 <= arg1.maxX) {
+						int var15 = arg0.vertexZ[var10] - arg4;
+						if (var15 >= arg1.minZ && var15 <= arg1.maxZ) {
 							for (int var16 = 0; var16 < var9; var16++) {
 								VertexNormal var17 = arg1.vertexNormal[var16];
-								VertexNormal var18 = arg1.field573[var16];
-								if (var14 == var8[var16] && var15 == arg1.field542[var16] && var13 == arg1.field541[var16] && var18.w != 0) {
+								VertexNormal var18 = arg1.vertexNormalOriginal[var16];
+								if (var14 == var8[var16] && var15 == arg1.vertexZ[var16] && var13 == arg1.vertexY[var16] && var18.w != 0) {
 									var11.x += var18.x;
 									var11.y += var18.y;
 									var11.z += var18.z;
@@ -844,8 +844,8 @@ public class World3D {
 									var17.z += var12.z;
 									var17.w += var12.w;
 									var7++;
-									this.field346[var10] = this.field348;
-									this.field347[var16] = this.field348;
+									this.mergeIndexA[var10] = this.tmpMergeIndex;
+									this.mergeIndexB[var16] = this.tmpMergeIndex;
 								}
 							}
 						}
@@ -856,27 +856,27 @@ public class World3D {
 		if (var7 < 3) {
 			return;
 		}
-		for (int var19 = 0; var19 < arg0.field543; var19++) {
-			if (this.field346[arg0.field544[var19]] == this.field348 && this.field346[arg0.field545[var19]] == this.field348 && this.field346[arg0.field546[var19]] == this.field348) {
-				arg0.field550[var19] = -1;
+		for (int var19 = 0; var19 < arg0.faceCount; var19++) {
+			if (this.mergeIndexA[arg0.faceVertexA[var19]] == this.tmpMergeIndex && this.mergeIndexA[arg0.faceVertexB[var19]] == this.tmpMergeIndex && this.mergeIndexA[arg0.faceVertexC[var19]] == this.tmpMergeIndex) {
+				arg0.faceInfo[var19] = -1;
 			}
 		}
-		for (int var20 = 0; var20 < arg1.field543; var20++) {
-			if (this.field347[arg1.field544[var20]] == this.field348 && this.field347[arg1.field545[var20]] == this.field348 && this.field347[arg1.field546[var20]] == this.field348) {
-				arg1.field550[var20] = -1;
+		for (int var20 = 0; var20 < arg1.faceCount; var20++) {
+			if (this.mergeIndexB[arg1.faceVertexA[var20]] == this.tmpMergeIndex && this.mergeIndexB[arg1.faceVertexB[var20]] == this.tmpMergeIndex && this.mergeIndexB[arg1.faceVertexC[var20]] == this.tmpMergeIndex) {
+				arg1.faceInfo[var20] = -1;
 			}
 		}
 	}
 
 	@ObfuscatedName("s.a([IIIIII)V")
-	public void method99(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		Square var7 = this.field301[arg3][arg4][arg5];
+	public void drawMinimapTile(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+		Square var7 = this.levelTiles[arg3][arg4][arg5];
 		if (var7 == null) {
 			return;
 		}
-		QuickGround var8 = var7.field382;
+		QuickGround var8 = var7.quickGround;
 		if (var8 != null) {
-			int var9 = var8.field265;
+			int var9 = var8.rgb;
 			if (var9 != 0) {
 				for (int var10 = 0; var10 < 4; var10++) {
 					arg0[arg1] = var9;
@@ -888,16 +888,16 @@ public class World3D {
 			}
 			return;
 		}
-		Ground var11 = var7.field383;
+		Ground var11 = var7.ground;
 		if (var11 == null) {
 			return;
 		}
-		int var12 = var11.field192;
-		int var13 = var11.field193;
-		int var14 = var11.field194;
-		int var15 = var11.field195;
-		int[] var16 = this.field349[var12];
-		int[] var17 = this.field350[var13];
+		int var12 = var11.shape;
+		int var13 = var11.angle;
+		int var14 = var11.underlayColour;
+		int var15 = var11.overlayColour;
+		int[] var16 = this.MINIMAP_OVERLAY_SHAPE[var12];
+		int[] var17 = this.MINIMAP_OVERLAY_ANGLE[var13];
 		int var18 = 0;
 		if (var14 != 0) {
 			for (int var19 = 0; var19 < 4; var19++) {
@@ -928,19 +928,19 @@ public class World3D {
 
 	@ObfuscatedName("s.a(IIII[IZ)V")
 	public static void init(int arg0, int arg1, int arg2, int arg3, int[] arg4) {
-		field355 = 0;
-		field356 = 0;
-		field357 = arg1;
-		field358 = arg2;
-		field353 = arg1 / 2;
-		field354 = arg2 / 2;
+		viewportLeft = 0;
+		viewportTop = 0;
+		viewportRight = arg1;
+		viewportBottom = arg2;
+		viewportCenterX = arg1 / 2;
+		viewportCenterY = arg2 / 2;
 		boolean[][][][] var6 = new boolean[9][32][53][53];
 		for (int var8 = 128; var8 <= 384; var8 += 32) {
 			for (int var9 = 0; var9 < 2048; var9 += 64) {
-				field318 = Model.field602[var8];
-				field319 = Model.field603[var8];
-				field320 = Model.field602[var9];
-				field321 = Model.field603[var9];
+				sinEyePitch = Model.sinTable[var8];
+				cosEyePitch = Model.cosTable[var8];
+				sinEyeYaw = Model.sinTable[var9];
+				cosEyeYaw = Model.cosTable[var9];
 				int var10 = (var8 - 128) / 32;
 				int var11 = var9 / 64;
 				for (int var12 = -26; var12 <= 26; var12++) {
@@ -949,7 +949,7 @@ public class World3D {
 						int var15 = var13 * 128;
 						boolean var16 = false;
 						for (int var17 = -arg0; var17 <= arg3; var17 += 128) {
-							if (method101(var15, var14, arg4[var10] + var17)) {
+							if (testPoint(var15, var14, arg4[var10] + var17)) {
 								var16 = true;
 								break;
 							}
@@ -984,7 +984,7 @@ public class World3D {
 								}
 							}
 						}
-						field351[var18][var19][var20 + 25][var21 + 25] = var22;
+						visibilityMatrix[var18][var19][var20 + 25][var21 + 25] = var22;
 					}
 				}
 			}
@@ -992,179 +992,179 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.g(IIII)Z")
-	public static boolean method101(int arg1, int arg2, int arg3) {
-		int var4 = arg1 * field320 + arg2 * field321 >> 16;
-		int var5 = arg1 * field321 - arg2 * field320 >> 16;
-		int var6 = arg3 * field318 + var5 * field319 >> 16;
-		int var7 = arg3 * field319 - var5 * field318 >> 16;
+	public static boolean testPoint(int arg1, int arg2, int arg3) {
+		int var4 = arg1 * sinEyeYaw + arg2 * cosEyeYaw >> 16;
+		int var5 = arg1 * cosEyeYaw - arg2 * sinEyeYaw >> 16;
+		int var6 = arg3 * sinEyePitch + var5 * cosEyePitch >> 16;
+		int var7 = arg3 * cosEyePitch - var5 * sinEyePitch >> 16;
 		if (var6 >= 50 && var6 <= 3500) {
-			int var8 = field353 + (var4 << 9) / var6;
-			int var9 = field354 + (var7 << 9) / var6;
-			return var8 >= field355 && var8 <= field357 && var9 >= field356 && var9 <= field358;
+			int var8 = viewportCenterX + (var4 << 9) / var6;
+			int var9 = viewportCenterY + (var7 << 9) / var6;
+			return var8 >= viewportLeft && var8 <= viewportRight && var9 >= viewportTop && var9 <= viewportBottom;
 		} else {
 			return false;
 		}
 	}
 
 	@ObfuscatedName("s.f(III)V")
-	public void method102(int arg1, int arg2) {
-		field327 = true;
-		field328 = arg2;
-		field329 = arg1;
-		field330 = -1;
-		field331 = -1;
+	public void click(int arg1, int arg2) {
+		takingInput = true;
+		mouseX = arg2;
+		mouseY = arg1;
+		clickTileX = -1;
+		clickTileZ = -1;
 	}
 
 	@ObfuscatedName("s.a(IIIIIII)V")
-	public void method103(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void draw(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg0 < 0) {
 			arg0 = 0;
-		} else if (arg0 >= this.field298 * 128) {
-			arg0 = this.field298 * 128 - 1;
+		} else if (arg0 >= this.maxTileX * 128) {
+			arg0 = this.maxTileX * 128 - 1;
 		}
 		if (arg1 < 0) {
 			arg1 = 0;
-		} else if (arg1 >= this.field299 * 128) {
-			arg1 = this.field299 * 128 - 1;
+		} else if (arg1 >= this.maxTileZ * 128) {
+			arg1 = this.maxTileZ * 128 - 1;
 		}
-		field308++;
-		field318 = Model.field602[arg2];
-		field319 = Model.field603[arg2];
-		field320 = Model.field602[arg5];
-		field321 = Model.field603[arg5];
-		field352 = field351[(arg2 - 128) / 32][arg5 / 64];
-		field315 = arg0;
-		field316 = arg3;
-		field317 = arg1;
-		field313 = arg0 / 128;
-		field314 = arg1 / 128;
-		field307 = arg4;
-		field309 = field313 - 25;
-		if (field309 < 0) {
-			field309 = 0;
+		cycle++;
+		sinEyePitch = Model.sinTable[arg2];
+		cosEyePitch = Model.cosTable[arg2];
+		sinEyeYaw = Model.sinTable[arg5];
+		cosEyeYaw = Model.cosTable[arg5];
+		visibilityMap = visibilityMatrix[(arg2 - 128) / 32][arg5 / 64];
+		eyeX = arg0;
+		eyeY = arg3;
+		eyeZ = arg1;
+		eyeTileX = arg0 / 128;
+		eyeTileZ = arg1 / 128;
+		topLevel = arg4;
+		minDrawTileX = eyeTileX - 25;
+		if (minDrawTileX < 0) {
+			minDrawTileX = 0;
 		}
-		field311 = field314 - 25;
-		if (field311 < 0) {
-			field311 = 0;
+		minDrawTileZ = eyeTileZ - 25;
+		if (minDrawTileZ < 0) {
+			minDrawTileZ = 0;
 		}
-		field310 = field313 + 25;
-		if (field310 > this.field298) {
-			field310 = this.field298;
+		maxDrawTileX = eyeTileX + 25;
+		if (maxDrawTileX > this.maxTileX) {
+			maxDrawTileX = this.maxTileX;
 		}
-		field312 = field314 + 25;
-		if (field312 > this.field299) {
-			field312 = this.field299;
+		maxDrawTileZ = eyeTileZ + 25;
+		if (maxDrawTileZ > this.maxTileZ) {
+			maxDrawTileZ = this.maxTileZ;
 		}
-		this.method109();
-		field306 = 0;
-		for (int var8 = this.field302; var8 < this.field297; var8++) {
-			Square[][] var9 = this.field301[var8];
-			for (int var10 = field309; var10 < field310; var10++) {
-				for (int var11 = field311; var11 < field312; var11++) {
+		this.updateActiveOccluders();
+		tilesRemaining = 0;
+		for (int var8 = this.minLevel; var8 < this.maxLevel; var8++) {
+			Square[][] var9 = this.levelTiles[var8];
+			for (int var10 = minDrawTileX; var10 < maxDrawTileX; var10++) {
+				for (int var11 = minDrawTileZ; var11 < maxDrawTileZ; var11++) {
 					Square var12 = var9[var10][var11];
 					if (var12 != null) {
-						if (var12.field392 <= arg4 && (field352[var10 - field313 + 25][var11 - field314 + 25] || this.field300[var8][var10][var11] - arg3 >= 2000)) {
-							var12.field393 = true;
-							var12.field394 = true;
-							if (var12.field388 > 0) {
-								var12.field395 = true;
+						if (var12.drawLevel <= arg4 && (visibilityMap[var10 - eyeTileX + 25][var11 - eyeTileZ + 25] || this.levelHeightmaps[var8][var10][var11] - arg3 >= 2000)) {
+							var12.drawFront = true;
+							var12.drawBack = true;
+							if (var12.primaryCount > 0) {
+								var12.drawPrimaries = true;
 							} else {
-								var12.field395 = false;
+								var12.drawPrimaries = false;
 							}
-							field306++;
+							tilesRemaining++;
 						} else {
-							var12.field393 = false;
-							var12.field394 = false;
-							var12.field396 = 0;
+							var12.drawFront = false;
+							var12.drawBack = false;
+							var12.cornerSides = 0;
 						}
 					}
 				}
 			}
 		}
-		for (int var13 = this.field302; var13 < this.field297; var13++) {
-			Square[][] var14 = this.field301[var13];
+		for (int var13 = this.minLevel; var13 < this.maxLevel; var13++) {
+			Square[][] var14 = this.levelTiles[var13];
 			for (int var15 = -25; var15 <= 0; var15++) {
-				int var16 = field313 + var15;
-				int var17 = field313 - var15;
-				if (var16 >= field309 || var17 < field310) {
+				int var16 = eyeTileX + var15;
+				int var17 = eyeTileX - var15;
+				if (var16 >= minDrawTileX || var17 < maxDrawTileX) {
 					for (int var18 = -25; var18 <= 0; var18++) {
-						int var19 = field314 + var18;
-						int var20 = field314 - var18;
-						if (var16 >= field309) {
-							if (var19 >= field311) {
+						int var19 = eyeTileZ + var18;
+						int var20 = eyeTileZ - var18;
+						if (var16 >= minDrawTileX) {
+							if (var19 >= minDrawTileZ) {
 								Square var21 = var14[var16][var19];
-								if (var21 != null && var21.field393) {
-									this.method104(var21, true);
+								if (var21 != null && var21.drawFront) {
+									this.drawTile(var21, true);
 								}
 							}
-							if (var20 < field312) {
+							if (var20 < maxDrawTileZ) {
 								Square var22 = var14[var16][var20];
-								if (var22 != null && var22.field393) {
-									this.method104(var22, true);
+								if (var22 != null && var22.drawFront) {
+									this.drawTile(var22, true);
 								}
 							}
 						}
-						if (var17 < field310) {
-							if (var19 >= field311) {
+						if (var17 < maxDrawTileX) {
+							if (var19 >= minDrawTileZ) {
 								Square var23 = var14[var17][var19];
-								if (var23 != null && var23.field393) {
-									this.method104(var23, true);
+								if (var23 != null && var23.drawFront) {
+									this.drawTile(var23, true);
 								}
 							}
-							if (var20 < field312) {
+							if (var20 < maxDrawTileZ) {
 								Square var24 = var14[var17][var20];
-								if (var24 != null && var24.field393) {
-									this.method104(var24, true);
+								if (var24 != null && var24.drawFront) {
+									this.drawTile(var24, true);
 								}
 							}
 						}
-						if (field306 == 0) {
-							field327 = false;
+						if (tilesRemaining == 0) {
+							takingInput = false;
 							return;
 						}
 					}
 				}
 			}
 		}
-		for (int var25 = this.field302; var25 < this.field297; var25++) {
-			Square[][] var26 = this.field301[var25];
+		for (int var25 = this.minLevel; var25 < this.maxLevel; var25++) {
+			Square[][] var26 = this.levelTiles[var25];
 			for (int var27 = -25; var27 <= 0; var27++) {
-				int var28 = field313 + var27;
-				int var29 = field313 - var27;
-				if (var28 >= field309 || var29 < field310) {
+				int var28 = eyeTileX + var27;
+				int var29 = eyeTileX - var27;
+				if (var28 >= minDrawTileX || var29 < maxDrawTileX) {
 					for (int var30 = -25; var30 <= 0; var30++) {
-						int var31 = field314 + var30;
-						int var32 = field314 - var30;
-						if (var28 >= field309) {
-							if (var31 >= field311) {
+						int var31 = eyeTileZ + var30;
+						int var32 = eyeTileZ - var30;
+						if (var28 >= minDrawTileX) {
+							if (var31 >= minDrawTileZ) {
 								Square var33 = var26[var28][var31];
-								if (var33 != null && var33.field393) {
-									this.method104(var33, false);
+								if (var33 != null && var33.drawFront) {
+									this.drawTile(var33, false);
 								}
 							}
-							if (var32 < field312) {
+							if (var32 < maxDrawTileZ) {
 								Square var34 = var26[var28][var32];
-								if (var34 != null && var34.field393) {
-									this.method104(var34, false);
+								if (var34 != null && var34.drawFront) {
+									this.drawTile(var34, false);
 								}
 							}
 						}
-						if (var29 < field310) {
-							if (var31 >= field311) {
+						if (var29 < maxDrawTileX) {
+							if (var31 >= minDrawTileZ) {
 								Square var35 = var26[var29][var31];
-								if (var35 != null && var35.field393) {
-									this.method104(var35, false);
+								if (var35 != null && var35.drawFront) {
+									this.drawTile(var35, false);
 								}
 							}
-							if (var32 < field312) {
+							if (var32 < maxDrawTileZ) {
 								Square var36 = var26[var29][var32];
-								if (var36 != null && var36.field393) {
-									this.method104(var36, false);
+								if (var36 != null && var36.drawFront) {
+									this.drawTile(var36, false);
 								}
 							}
 						}
-						if (field306 == 0) {
-							field327 = false;
+						if (tilesRemaining == 0) {
+							takingInput = false;
 							return;
 						}
 					}
@@ -1174,8 +1174,8 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(Lw;Z)V")
-	public void method104(Square arg0, boolean arg1) {
-		field337.push(arg0);
+	public void drawTile(Square arg0, boolean arg1) {
+		drawTileQueue.push(arg0);
 		while (true) {
 			Square var3;
 			int var4;
@@ -1196,137 +1196,137 @@ public class World3D {
 									while (true) {
 										while (true) {
 											do {
-												var3 = (Square) field337.pop();
+												var3 = (Square) drawTileQueue.pop();
 												if (var3 == null) {
 													return;
 												}
-											} while (!var3.field394);
-											var4 = var3.field379;
-											var5 = var3.field380;
-											var6 = var3.field378;
-											var7 = var3.field381;
-											var8 = this.field301[var6];
-											if (!var3.field393) {
+											} while (!var3.drawBack);
+											var4 = var3.x;
+											var5 = var3.z;
+											var6 = var3.level;
+											var7 = var3.originalLevel;
+											var8 = this.levelTiles[var6];
+											if (!var3.drawFront) {
 												break;
 											}
 											if (arg1) {
 												if (var6 > 0) {
-													Square var9 = this.field301[var6 - 1][var4][var5];
-													if (var9 != null && var9.field394) {
+													Square var9 = this.levelTiles[var6 - 1][var4][var5];
+													if (var9 != null && var9.drawBack) {
 														continue;
 													}
 												}
-												if (var4 <= field313 && var4 > field309) {
+												if (var4 <= eyeTileX && var4 > minDrawTileX) {
 													Square var10 = var8[var4 - 1][var5];
-													if (var10 != null && var10.field394 && (var10.field393 || (var3.field391 & 0x1) == 0)) {
+													if (var10 != null && var10.drawBack && (var10.drawFront || (var3.combinedPrimaryExtendDirections & 0x1) == 0)) {
 														continue;
 													}
 												}
-												if (var4 >= field313 && var4 < field310 - 1) {
+												if (var4 >= eyeTileX && var4 < maxDrawTileX - 1) {
 													Square var11 = var8[var4 + 1][var5];
-													if (var11 != null && var11.field394 && (var11.field393 || (var3.field391 & 0x4) == 0)) {
+													if (var11 != null && var11.drawBack && (var11.drawFront || (var3.combinedPrimaryExtendDirections & 0x4) == 0)) {
 														continue;
 													}
 												}
-												if (var5 <= field314 && var5 > field311) {
+												if (var5 <= eyeTileZ && var5 > minDrawTileZ) {
 													Square var12 = var8[var4][var5 - 1];
-													if (var12 != null && var12.field394 && (var12.field393 || (var3.field391 & 0x8) == 0)) {
+													if (var12 != null && var12.drawBack && (var12.drawFront || (var3.combinedPrimaryExtendDirections & 0x8) == 0)) {
 														continue;
 													}
 												}
-												if (var5 >= field314 && var5 < field312 - 1) {
+												if (var5 >= eyeTileZ && var5 < maxDrawTileZ - 1) {
 													Square var13 = var8[var4][var5 + 1];
-													if (var13 != null && var13.field394 && (var13.field393 || (var3.field391 & 0x2) == 0)) {
+													if (var13 != null && var13.drawBack && (var13.drawFront || (var3.combinedPrimaryExtendDirections & 0x2) == 0)) {
 														continue;
 													}
 												}
 											} else {
 												arg1 = true;
 											}
-											var3.field393 = false;
-											if (var3.field400 != null) {
-												Square var14 = var3.field400;
-												if (var14.field382 == null) {
-													if (var14.field383 != null && !this.method110(0, var4, var5)) {
-														this.method106(field321, field320, field318, field319, var14.field383, var4, var5);
+											var3.drawFront = false;
+											if (var3.linkBelow != null) {
+												Square var14 = var3.linkBelow;
+												if (var14.quickGround == null) {
+													if (var14.ground != null && !this.tileVisible(0, var4, var5)) {
+														this.drawGround(cosEyeYaw, sinEyeYaw, sinEyePitch, cosEyePitch, var14.ground, var4, var5);
 													}
-												} else if (!this.method110(0, var4, var5)) {
-													this.method105(var14.field382, 0, field318, field319, field320, field321, var4, var5);
+												} else if (!this.tileVisible(0, var4, var5)) {
+													this.drawQuickGround(var14.quickGround, 0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var4, var5);
 												}
-												Wall var15 = var14.field384;
+												Wall var15 = var14.wall;
 												if (var15 != null) {
-													var15.field285.draw(0, field318, field319, field320, field321, var15.field281 - field315, var15.field280 - field316, var15.field282 - field317, var15.field287);
+													var15.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var15.x - eyeX, var15.y - eyeY, var15.z - eyeZ, var15.typecode);
 												}
-												for (int var16 = 0; var16 < var14.field388; var16++) {
-													Sprite var17 = var14.field389[var16];
+												for (int var16 = 0; var16 < var14.primaryCount; var16++) {
+													Sprite var17 = var14.sprite[var16];
 													if (var17 != null) {
-														var17.field270.draw(var17.field271, field318, field319, field320, field321, var17.field268 - field315, var17.field267 - field316, var17.field269 - field317, var17.field278);
+														var17.model.draw(var17.angle, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var17.x - eyeX, var17.y - eyeY, var17.z - eyeZ, var17.typecode);
 													}
 												}
 											}
 											boolean var18 = false;
-											if (var3.field382 == null) {
-												if (var3.field383 != null && !this.method110(var7, var4, var5)) {
+											if (var3.quickGround == null) {
+												if (var3.ground != null && !this.tileVisible(var7, var4, var5)) {
 													var18 = true;
-													this.method106(field321, field320, field318, field319, var3.field383, var4, var5);
+													this.drawGround(cosEyeYaw, sinEyeYaw, sinEyePitch, cosEyePitch, var3.ground, var4, var5);
 												}
-											} else if (!this.method110(var7, var4, var5)) {
+											} else if (!this.tileVisible(var7, var4, var5)) {
 												var18 = true;
-												this.method105(var3.field382, var7, field318, field319, field320, field321, var4, var5);
+												this.drawQuickGround(var3.quickGround, var7, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var4, var5);
 											}
 											int var19 = 0;
 											int var20 = 0;
-											Wall var21 = var3.field384;
-											Decor var22 = var3.field385;
+											Wall var21 = var3.wall;
+											Decor var22 = var3.decor;
 											if (var21 != null || var22 != null) {
-												if (field313 == var4) {
+												if (eyeTileX == var4) {
 													var19++;
-												} else if (field313 < var4) {
+												} else if (eyeTileX < var4) {
 													var19 += 2;
 												}
-												if (field314 == var5) {
+												if (eyeTileZ == var5) {
 													var19 += 3;
-												} else if (field314 > var5) {
+												} else if (eyeTileZ > var5) {
 													var19 += 6;
 												}
-												var20 = field338[var19];
-												var3.field399 = field340[var19];
+												var20 = FRONT_WALL_TYPES[var19];
+												var3.backWallTypes = BACK_WALL_TYPES[var19];
 											}
 											if (var21 != null) {
-												if ((var21.field283 & field339[var19]) == 0) {
-													var3.field396 = 0;
-												} else if (var21.field283 == 16) {
-													var3.field396 = 3;
-													var3.field397 = field341[var19];
-													var3.field398 = 3 - var3.field397;
-												} else if (var21.field283 == 32) {
-													var3.field396 = 6;
-													var3.field397 = field342[var19];
-													var3.field398 = 6 - var3.field397;
-												} else if (var21.field283 == 64) {
-													var3.field396 = 12;
-													var3.field397 = field343[var19];
-													var3.field398 = 12 - var3.field397;
+												if ((var21.angle1 & DIRECTION_ALLOW_WALL_CORNER_TYPE[var19]) == 0) {
+													var3.cornerSides = 0;
+												} else if (var21.angle1 == 16) {
+													var3.cornerSides = 3;
+													var3.sidesBeforeCorner = MIDDEP_16[var19];
+													var3.sidesAfterCorner = 3 - var3.sidesBeforeCorner;
+												} else if (var21.angle1 == 32) {
+													var3.cornerSides = 6;
+													var3.sidesBeforeCorner = MIDDEP_32[var19];
+													var3.sidesAfterCorner = 6 - var3.sidesBeforeCorner;
+												} else if (var21.angle1 == 64) {
+													var3.cornerSides = 12;
+													var3.sidesBeforeCorner = MIDDEP_64[var19];
+													var3.sidesAfterCorner = 12 - var3.sidesBeforeCorner;
 												} else {
-													var3.field396 = 9;
-													var3.field397 = field344[var19];
-													var3.field398 = 9 - var3.field397;
+													var3.cornerSides = 9;
+													var3.sidesBeforeCorner = MIDDEP_128[var19];
+													var3.sidesAfterCorner = 9 - var3.sidesBeforeCorner;
 												}
-												if ((var21.field283 & var20) != 0 && !this.method111(var7, var4, var5, var21.field283)) {
-													var21.field285.draw(0, field318, field319, field320, field321, var21.field281 - field315, var21.field280 - field316, var21.field282 - field317, var21.field287);
+												if ((var21.angle1 & var20) != 0 && !this.isTileSideOccluded(var7, var4, var5, var21.angle1)) {
+													var21.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var21.x - eyeX, var21.y - eyeY, var21.z - eyeZ, var21.typecode);
 												}
-												if ((var21.field284 & var20) != 0 && !this.method111(var7, var4, var5, var21.field284)) {
-													var21.field286.draw(0, field318, field319, field320, field321, var21.field281 - field315, var21.field280 - field316, var21.field282 - field317, var21.field287);
+												if ((var21.angle2 & var20) != 0 && !this.isTileSideOccluded(var7, var4, var5, var21.angle2)) {
+													var21.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var21.x - eyeX, var21.y - eyeY, var21.z - eyeZ, var21.typecode);
 												}
 											}
-											if (var22 != null && !this.method112(var7, var4, var5, var22.field177.minY)) {
-												if ((var22.field175 & var20) != 0) {
-													var22.field177.draw(var22.field176, field318, field319, field320, field321, var22.field173 - field315, var22.field172 - field316, var22.field174 - field317, var22.field178);
-												} else if ((var22.field175 & 0x300) != 0) {
-													int var23 = var22.field173 - field315;
-													int var24 = var22.field172 - field316;
-													int var25 = var22.field174 - field317;
-													int var26 = var22.field176;
+											if (var22 != null && !this.isTileColumnOccluded(var7, var4, var5, var22.model.minY)) {
+												if ((var22.angle1 & var20) != 0) {
+													var22.model.draw(var22.angle2, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var22.x - eyeX, var22.y - eyeY, var22.z - eyeZ, var22.typecode);
+												} else if ((var22.angle1 & 0x300) != 0) {
+													int var23 = var22.x - eyeX;
+													int var24 = var22.y - eyeY;
+													int var25 = var22.z - eyeZ;
+													int var26 = var22.angle2;
 													int var27;
 													if (var26 == 1 || var26 == 2) {
 														var27 = -var23;
@@ -1339,130 +1339,130 @@ public class World3D {
 													} else {
 														var28 = var25;
 													}
-													if ((var22.field175 & 0x100) != 0 && var28 < var27) {
-														int var29 = var23 + field323[var26];
-														int var30 = var25 + field324[var26];
-														var22.field177.draw(var26 * 512 + 256, field318, field319, field320, field321, var29, var24, var30, var22.field178);
+													if ((var22.angle1 & 0x100) != 0 && var28 < var27) {
+														int var29 = var23 + WALL_DECORATION_INSET_X[var26];
+														int var30 = var25 + WALL_DECORATION_INSET_Z[var26];
+														var22.model.draw(var26 * 512 + 256, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var29, var24, var30, var22.typecode);
 													}
-													if ((var22.field175 & 0x200) != 0 && var28 > var27) {
-														int var31 = var23 + field325[var26];
-														int var32 = var25 + field326[var26];
-														var22.field177.draw(var26 * 512 + 1280 & 0x7FF, field318, field319, field320, field321, var31, var24, var32, var22.field178);
+													if ((var22.angle1 & 0x200) != 0 && var28 > var27) {
+														int var31 = var23 + WALL_DECORATION_OUTSET_X[var26];
+														int var32 = var25 + WALL_DECORATION_OUTSET_Z[var26];
+														var22.model.draw(var26 * 512 + 1280 & 0x7FF, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var31, var24, var32, var22.typecode);
 													}
 												}
 											}
 											if (var18) {
-												GroundDecor var33 = var3.field386;
+												GroundDecor var33 = var3.groundDecor;
 												if (var33 != null) {
-													var33.field209.draw(0, field318, field319, field320, field321, var33.field207 - field315, var33.field206 - field316, var33.field208 - field317, var33.field210);
+													var33.model.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var33.x - eyeX, var33.y - eyeY, var33.z - eyeZ, var33.typecode);
 												}
-												GroundObject var34 = var3.field387;
-												if (var34 != null && var34.field219 == 0) {
-													if (var34.field216 != null) {
-														var34.field216.draw(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
+												GroundObject var34 = var3.groundObject;
+												if (var34 != null && var34.height == 0) {
+													if (var34.bottom != null) {
+														var34.bottom.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
 													}
-													if (var34.field217 != null) {
-														var34.field217.draw(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
+													if (var34.middle != null) {
+														var34.middle.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
 													}
-													if (var34.field215 != null) {
-														var34.field215.draw(0, field318, field319, field320, field321, var34.field213 - field315, var34.field212 - field316, var34.field214 - field317, var34.field218);
+													if (var34.top != null) {
+														var34.top.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var34.x - eyeX, var34.y - eyeY, var34.z - eyeZ, var34.typecode);
 													}
 												}
 											}
-											int var35 = var3.field391;
+											int var35 = var3.combinedPrimaryExtendDirections;
 											if (var35 != 0) {
-												if (var4 < field313 && (var35 & 0x4) != 0) {
+												if (var4 < eyeTileX && (var35 & 0x4) != 0) {
 													Square var36 = var8[var4 + 1][var5];
-													if (var36 != null && var36.field394) {
-														field337.push(var36);
+													if (var36 != null && var36.drawBack) {
+														drawTileQueue.push(var36);
 													}
 												}
-												if (var5 < field314 && (var35 & 0x2) != 0) {
+												if (var5 < eyeTileZ && (var35 & 0x2) != 0) {
 													Square var37 = var8[var4][var5 + 1];
-													if (var37 != null && var37.field394) {
-														field337.push(var37);
+													if (var37 != null && var37.drawBack) {
+														drawTileQueue.push(var37);
 													}
 												}
-												if (var4 > field313 && (var35 & 0x1) != 0) {
+												if (var4 > eyeTileX && (var35 & 0x1) != 0) {
 													Square var38 = var8[var4 - 1][var5];
-													if (var38 != null && var38.field394) {
-														field337.push(var38);
+													if (var38 != null && var38.drawBack) {
+														drawTileQueue.push(var38);
 													}
 												}
-												if (var5 > field314 && (var35 & 0x8) != 0) {
+												if (var5 > eyeTileZ && (var35 & 0x8) != 0) {
 													Square var39 = var8[var4][var5 - 1];
-													if (var39 != null && var39.field394) {
-														field337.push(var39);
+													if (var39 != null && var39.drawBack) {
+														drawTileQueue.push(var39);
 													}
 												}
 											}
 											break;
 										}
-										if (var3.field396 != 0) {
+										if (var3.cornerSides != 0) {
 											boolean var40 = true;
-											for (int var41 = 0; var41 < var3.field388; var41++) {
-												if (var3.field389[var41].field277 != field308 && (var3.field390[var41] & var3.field396) == var3.field397) {
+											for (int var41 = 0; var41 < var3.primaryCount; var41++) {
+												if (var3.sprite[var41].cycle != cycle && (var3.primaryExtendDirections[var41] & var3.cornerSides) == var3.sidesBeforeCorner) {
 													var40 = false;
 													break;
 												}
 											}
 											if (var40) {
-												Wall var42 = var3.field384;
-												if (!this.method111(var7, var4, var5, var42.field283)) {
-													var42.field285.draw(0, field318, field319, field320, field321, var42.field281 - field315, var42.field280 - field316, var42.field282 - field317, var42.field287);
+												Wall var42 = var3.wall;
+												if (!this.isTileSideOccluded(var7, var4, var5, var42.angle1)) {
+													var42.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var42.x - eyeX, var42.y - eyeY, var42.z - eyeZ, var42.typecode);
 												}
-												var3.field396 = 0;
+												var3.cornerSides = 0;
 											}
 										}
-										if (!var3.field395) {
+										if (!var3.drawPrimaries) {
 											break;
 										}
-										int var43 = var3.field388;
-										var3.field395 = false;
+										int var43 = var3.primaryCount;
+										var3.drawPrimaries = false;
 										int var44 = 0;
 										label556: for (int var45 = 0; var45 < var43; var45++) {
-											Sprite var46 = var3.field389[var45];
-											if (var46.field277 != field308) {
-												for (int var47 = var46.field272; var47 <= var46.field273; var47++) {
-													for (int var48 = var46.field274; var48 <= var46.field275; var48++) {
+											Sprite var46 = var3.sprite[var45];
+											if (var46.cycle != cycle) {
+												for (int var47 = var46.minGridX; var47 <= var46.maxGridX; var47++) {
+													for (int var48 = var46.minGridZ; var48 <= var46.maxGridZ; var48++) {
 														Square var49 = var8[var47][var48];
-														if (var49.field393) {
-															var3.field395 = true;
+														if (var49.drawFront) {
+															var3.drawPrimaries = true;
 															continue label556;
 														}
-														if (var49.field396 != 0) {
+														if (var49.cornerSides != 0) {
 															int var50 = 0;
-															if (var47 > var46.field272) {
+															if (var47 > var46.minGridX) {
 																var50++;
 															}
-															if (var47 < var46.field273) {
+															if (var47 < var46.maxGridX) {
 																var50 += 4;
 															}
-															if (var48 > var46.field274) {
+															if (var48 > var46.minGridZ) {
 																var50 += 8;
 															}
-															if (var48 < var46.field275) {
+															if (var48 < var46.maxGridZ) {
 																var50 += 2;
 															}
-															if ((var50 & var49.field396) == var3.field398) {
-																var3.field395 = true;
+															if ((var50 & var49.cornerSides) == var3.sidesAfterCorner) {
+																var3.drawPrimaries = true;
 																continue label556;
 															}
 														}
 													}
 												}
-												field322[var44++] = var46;
-												int var51 = field313 - var46.field272;
-												int var52 = var46.field273 - field313;
+												locBuffer[var44++] = var46;
+												int var51 = eyeTileX - var46.minGridX;
+												int var52 = var46.maxGridX - eyeTileX;
 												if (var52 > var51) {
 													var51 = var52;
 												}
-												int var53 = field314 - var46.field274;
-												int var54 = var46.field275 - field314;
+												int var53 = eyeTileZ - var46.minGridZ;
+												int var54 = var46.maxGridZ - eyeTileZ;
 												if (var54 > var53) {
-													var46.field276 = var51 + var54;
+													var46.distance = var51 + var54;
 												} else {
-													var46.field276 = var51 + var53;
+													var46.distance = var51 + var53;
 												}
 											}
 										}
@@ -1470,16 +1470,16 @@ public class World3D {
 											int var55 = -50;
 											int var56 = -1;
 											for (int var57 = 0; var57 < var44; var57++) {
-												Sprite var58 = field322[var57];
-												if (var58.field277 != field308) {
-													if (var58.field276 > var55) {
-														var55 = var58.field276;
+												Sprite var58 = locBuffer[var57];
+												if (var58.cycle != cycle) {
+													if (var58.distance > var55) {
+														var55 = var58.distance;
 														var56 = var57;
-													} else if (var58.field276 == var55) {
-														int var59 = var58.field268 - field315;
-														int var60 = var58.field269 - field317;
-														int var61 = field322[var56].field268 - field315;
-														int var62 = field322[var56].field269 - field317;
+													} else if (var58.distance == var55) {
+														int var59 = var58.x - eyeX;
+														int var60 = var58.z - eyeZ;
+														int var61 = locBuffer[var56].x - eyeX;
+														int var62 = locBuffer[var56].z - eyeZ;
 														if (var59 * var59 + var60 * var60 > var61 * var61 + var62 * var62) {
 															var56 = var57;
 														}
@@ -1489,72 +1489,72 @@ public class World3D {
 											if (var56 == -1) {
 												break;
 											}
-											Sprite var63 = field322[var56];
-											var63.field277 = field308;
-											if (!this.method113(var7, var63.field272, var63.field273, var63.field274, var63.field275, var63.field270.minY)) {
-												var63.field270.draw(var63.field271, field318, field319, field320, field321, var63.field268 - field315, var63.field267 - field316, var63.field269 - field317, var63.field278);
+											Sprite var63 = locBuffer[var56];
+											var63.cycle = cycle;
+											if (!this.locVisible(var7, var63.minGridX, var63.maxGridX, var63.minGridZ, var63.maxGridZ, var63.model.minY)) {
+												var63.model.draw(var63.angle, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var63.x - eyeX, var63.y - eyeY, var63.z - eyeZ, var63.typecode);
 											}
-											for (int var64 = var63.field272; var64 <= var63.field273; var64++) {
-												for (int var65 = var63.field274; var65 <= var63.field275; var65++) {
+											for (int var64 = var63.minGridX; var64 <= var63.maxGridX; var64++) {
+												for (int var65 = var63.minGridZ; var65 <= var63.maxGridZ; var65++) {
 													Square var66 = var8[var64][var65];
-													if (var66.field396 != 0) {
-														field337.push(var66);
-													} else if ((var64 != var4 || var65 != var5) && var66.field394) {
-														field337.push(var66);
+													if (var66.cornerSides != 0) {
+														drawTileQueue.push(var66);
+													} else if ((var64 != var4 || var65 != var5) && var66.drawBack) {
+														drawTileQueue.push(var66);
 													}
 												}
 											}
 										}
-										if (!var3.field395) {
+										if (!var3.drawPrimaries) {
 											break;
 										}
 									}
-								} while (!var3.field394);
-							} while (var3.field396 != 0);
-							if (var4 > field313 || var4 <= field309) {
+								} while (!var3.drawBack);
+							} while (var3.cornerSides != 0);
+							if (var4 > eyeTileX || var4 <= minDrawTileX) {
 								break;
 							}
 							var67 = var8[var4 - 1][var5];
-						} while (var67 != null && var67.field394);
-						if (var4 < field313 || var4 >= field310 - 1) {
+						} while (var67 != null && var67.drawBack);
+						if (var4 < eyeTileX || var4 >= maxDrawTileX - 1) {
 							break;
 						}
 						var68 = var8[var4 + 1][var5];
-					} while (var68 != null && var68.field394);
-					if (var5 > field314 || var5 <= field311) {
+					} while (var68 != null && var68.drawBack);
+					if (var5 > eyeTileZ || var5 <= minDrawTileZ) {
 						break;
 					}
 					var69 = var8[var4][var5 - 1];
-				} while (var69 != null && var69.field394);
-				if (var5 < field314 || var5 >= field312 - 1) {
+				} while (var69 != null && var69.drawBack);
+				if (var5 < eyeTileZ || var5 >= maxDrawTileZ - 1) {
 					break;
 				}
 				var70 = var8[var4][var5 + 1];
-			} while (var70 != null && var70.field394);
-			var3.field394 = false;
-			field306--;
-			GroundObject var71 = var3.field387;
-			if (var71 != null && var71.field219 != 0) {
-				if (var71.field216 != null) {
-					var71.field216.draw(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
+			} while (var70 != null && var70.drawBack);
+			var3.drawBack = false;
+			tilesRemaining--;
+			GroundObject var71 = var3.groundObject;
+			if (var71 != null && var71.height != 0) {
+				if (var71.bottom != null) {
+					var71.bottom.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var71.x - eyeX, var71.y - eyeY - var71.height, var71.z - eyeZ, var71.typecode);
 				}
-				if (var71.field217 != null) {
-					var71.field217.draw(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
+				if (var71.middle != null) {
+					var71.middle.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var71.x - eyeX, var71.y - eyeY - var71.height, var71.z - eyeZ, var71.typecode);
 				}
-				if (var71.field215 != null) {
-					var71.field215.draw(0, field318, field319, field320, field321, var71.field213 - field315, var71.field212 - field316 - var71.field219, var71.field214 - field317, var71.field218);
+				if (var71.top != null) {
+					var71.top.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var71.x - eyeX, var71.y - eyeY - var71.height, var71.z - eyeZ, var71.typecode);
 				}
 			}
-			if (var3.field399 != 0) {
-				Decor var72 = var3.field385;
-				if (var72 != null && !this.method112(var7, var4, var5, var72.field177.minY)) {
-					if ((var72.field175 & var3.field399) != 0) {
-						var72.field177.draw(var72.field176, field318, field319, field320, field321, var72.field173 - field315, var72.field172 - field316, var72.field174 - field317, var72.field178);
-					} else if ((var72.field175 & 0x300) != 0) {
-						int var73 = var72.field173 - field315;
-						int var74 = var72.field172 - field316;
-						int var75 = var72.field174 - field317;
-						int var76 = var72.field176;
+			if (var3.backWallTypes != 0) {
+				Decor var72 = var3.decor;
+				if (var72 != null && !this.isTileColumnOccluded(var7, var4, var5, var72.model.minY)) {
+					if ((var72.angle1 & var3.backWallTypes) != 0) {
+						var72.model.draw(var72.angle2, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var72.x - eyeX, var72.y - eyeY, var72.z - eyeZ, var72.typecode);
+					} else if ((var72.angle1 & 0x300) != 0) {
+						int var73 = var72.x - eyeX;
+						int var74 = var72.y - eyeY;
+						int var75 = var72.z - eyeZ;
+						int var76 = var72.angle2;
 						int var77;
 						if (var76 == 1 || var76 == 2) {
 							var77 = -var73;
@@ -1567,75 +1567,75 @@ public class World3D {
 						} else {
 							var78 = var75;
 						}
-						if ((var72.field175 & 0x100) != 0 && var78 >= var77) {
-							int var79 = var73 + field323[var76];
-							int var80 = var75 + field324[var76];
-							var72.field177.draw(var76 * 512 + 256, field318, field319, field320, field321, var79, var74, var80, var72.field178);
+						if ((var72.angle1 & 0x100) != 0 && var78 >= var77) {
+							int var79 = var73 + WALL_DECORATION_INSET_X[var76];
+							int var80 = var75 + WALL_DECORATION_INSET_Z[var76];
+							var72.model.draw(var76 * 512 + 256, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var79, var74, var80, var72.typecode);
 						}
-						if ((var72.field175 & 0x200) != 0 && var78 <= var77) {
-							int var81 = var73 + field325[var76];
-							int var82 = var75 + field326[var76];
-							var72.field177.draw(var76 * 512 + 1280 & 0x7FF, field318, field319, field320, field321, var81, var74, var82, var72.field178);
+						if ((var72.angle1 & 0x200) != 0 && var78 <= var77) {
+							int var81 = var73 + WALL_DECORATION_OUTSET_X[var76];
+							int var82 = var75 + WALL_DECORATION_OUTSET_Z[var76];
+							var72.model.draw(var76 * 512 + 1280 & 0x7FF, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var81, var74, var82, var72.typecode);
 						}
 					}
 				}
-				Wall var83 = var3.field384;
+				Wall var83 = var3.wall;
 				if (var83 != null) {
-					if ((var83.field284 & var3.field399) != 0 && !this.method111(var7, var4, var5, var83.field284)) {
-						var83.field286.draw(0, field318, field319, field320, field321, var83.field281 - field315, var83.field280 - field316, var83.field282 - field317, var83.field287);
+					if ((var83.angle2 & var3.backWallTypes) != 0 && !this.isTileSideOccluded(var7, var4, var5, var83.angle2)) {
+						var83.model2.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var83.x - eyeX, var83.y - eyeY, var83.z - eyeZ, var83.typecode);
 					}
-					if ((var83.field283 & var3.field399) != 0 && !this.method111(var7, var4, var5, var83.field283)) {
-						var83.field285.draw(0, field318, field319, field320, field321, var83.field281 - field315, var83.field280 - field316, var83.field282 - field317, var83.field287);
+					if ((var83.angle1 & var3.backWallTypes) != 0 && !this.isTileSideOccluded(var7, var4, var5, var83.angle1)) {
+						var83.model1.draw(0, sinEyePitch, cosEyePitch, sinEyeYaw, cosEyeYaw, var83.x - eyeX, var83.y - eyeY, var83.z - eyeZ, var83.typecode);
 					}
 				}
 			}
-			if (var6 < this.field297 - 1) {
-				Square var84 = this.field301[var6 + 1][var4][var5];
-				if (var84 != null && var84.field394) {
-					field337.push(var84);
+			if (var6 < this.maxLevel - 1) {
+				Square var84 = this.levelTiles[var6 + 1][var4][var5];
+				if (var84 != null && var84.drawBack) {
+					drawTileQueue.push(var84);
 				}
 			}
-			if (var4 < field313) {
+			if (var4 < eyeTileX) {
 				Square var85 = var8[var4 + 1][var5];
-				if (var85 != null && var85.field394) {
-					field337.push(var85);
+				if (var85 != null && var85.drawBack) {
+					drawTileQueue.push(var85);
 				}
 			}
-			if (var5 < field314) {
+			if (var5 < eyeTileZ) {
 				Square var86 = var8[var4][var5 + 1];
-				if (var86 != null && var86.field394) {
-					field337.push(var86);
+				if (var86 != null && var86.drawBack) {
+					drawTileQueue.push(var86);
 				}
 			}
-			if (var4 > field313) {
+			if (var4 > eyeTileX) {
 				Square var87 = var8[var4 - 1][var5];
-				if (var87 != null && var87.field394) {
-					field337.push(var87);
+				if (var87 != null && var87.drawBack) {
+					drawTileQueue.push(var87);
 				}
 			}
-			if (var5 > field314) {
+			if (var5 > eyeTileZ) {
 				Square var88 = var8[var4][var5 - 1];
-				if (var88 != null && var88.field394) {
-					field337.push(var88);
+				if (var88 != null && var88.drawBack) {
+					drawTileQueue.push(var88);
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("s.a(Lp;IIIIIII)V")
-	public void method105(QuickGround arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public void drawQuickGround(QuickGround arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		int var9;
-		int var10 = var9 = (arg6 << 7) - field315;
+		int var10 = var9 = (arg6 << 7) - eyeX;
 		int var11;
-		int var12 = var11 = (arg7 << 7) - field317;
+		int var12 = var11 = (arg7 << 7) - eyeZ;
 		int var13;
 		int var14 = var13 = var10 + 128;
 		int var15;
 		int var16 = var15 = var12 + 128;
-		int var17 = this.field300[arg1][arg6][arg7] - field316;
-		int var18 = this.field300[arg1][arg6 + 1][arg7] - field316;
-		int var19 = this.field300[arg1][arg6 + 1][arg7 + 1] - field316;
-		int var20 = this.field300[arg1][arg6][arg7 + 1] - field316;
+		int var17 = this.levelHeightmaps[arg1][arg6][arg7] - eyeY;
+		int var18 = this.levelHeightmaps[arg1][arg6 + 1][arg7] - eyeY;
+		int var19 = this.levelHeightmaps[arg1][arg6 + 1][arg7 + 1] - eyeY;
+		int var20 = this.levelHeightmaps[arg1][arg6][arg7 + 1] - eyeY;
 		int var21 = var12 * arg4 + var10 * arg5 >> 16;
 		int var22 = var12 * arg5 - var10 * arg4 >> 16;
 		int var24 = var17 * arg3 - var22 * arg2 >> 16;
@@ -1678,21 +1678,21 @@ public class World3D {
 			if (var49 < 0 || var51 < 0 || var47 < 0 || var49 > Pix2D.safeWidth || var51 > Pix2D.safeWidth || var47 > Pix2D.safeWidth) {
 				Pix3D.hclip = true;
 			}
-			if (field327 && this.method108(field328, field329, var50, var52, var48, var49, var51, var47)) {
-				field330 = arg6;
-				field331 = arg7;
+			if (takingInput && this.pointInsideTriangle(mouseX, mouseY, var50, var52, var48, var49, var51, var47)) {
+				clickTileX = arg6;
+				clickTileZ = arg7;
 			}
-			if (arg0.field263 == -1) {
-				if (arg0.field261 != 12345678) {
-					Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260);
+			if (arg0.textureId == -1) {
+				if (arg0.neColour != 12345678) {
+					Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, arg0.neColour, arg0.nwColour, arg0.seColour);
 				}
 			} else if (lowMem) {
-				int var53 = field345[arg0.field263];
-				Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, this.method107(arg0.field261, var53), this.method107(arg0.field262, var53), this.method107(arg0.field260, var53));
-			} else if (arg0.field264) {
-				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
+				int var53 = TEXTURE_HSL[arg0.textureId];
+				Pix3D.gouraudTriangle(var50, var52, var48, var49, var51, var47, this.mulLightness(arg0.neColour, var53), this.mulLightness(arg0.nwColour, var53), this.mulLightness(arg0.seColour, var53));
+			} else if (arg0.flat) {
+				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.neColour, arg0.nwColour, arg0.seColour, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.textureId);
 			} else {
-				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.field261, arg0.field262, arg0.field260, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.field263);
+				Pix3D.textureTriangle(var50, var52, var48, var49, var51, var47, arg0.neColour, arg0.nwColour, arg0.seColour, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.textureId);
 			}
 		}
 		if ((var45 - var47) * (var52 - var48) - (var46 - var48) * (var51 - var47) <= 0) {
@@ -1702,30 +1702,30 @@ public class World3D {
 		if (var45 < 0 || var47 < 0 || var51 < 0 || var45 > Pix2D.safeWidth || var47 > Pix2D.safeWidth || var51 > Pix2D.safeWidth) {
 			Pix3D.hclip = true;
 		}
-		if (field327 && this.method108(field328, field329, var46, var48, var52, var45, var47, var51)) {
-			field330 = arg6;
-			field331 = arg7;
+		if (takingInput && this.pointInsideTriangle(mouseX, mouseY, var46, var48, var52, var45, var47, var51)) {
+			clickTileX = arg6;
+			clickTileZ = arg7;
 		}
-		if (arg0.field263 != -1) {
+		if (arg0.textureId != -1) {
 			if (!lowMem) {
-				Pix3D.textureTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field263);
+				Pix3D.textureTriangle(var46, var48, var52, var45, var47, var51, arg0.swColour, arg0.seColour, arg0.nwColour, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.textureId);
 				return;
 			}
-			int var54 = field345[arg0.field263];
-			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, this.method107(arg0.field259, var54), this.method107(arg0.field260, var54), this.method107(arg0.field262, var54));
-		} else if (arg0.field259 != 12345678) {
-			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, arg0.field259, arg0.field260, arg0.field262);
+			int var54 = TEXTURE_HSL[arg0.textureId];
+			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, this.mulLightness(arg0.swColour, var54), this.mulLightness(arg0.seColour, var54), this.mulLightness(arg0.nwColour, var54));
+		} else if (arg0.swColour != 12345678) {
+			Pix3D.gouraudTriangle(var46, var48, var52, var45, var47, var51, arg0.swColour, arg0.seColour, arg0.nwColour);
 			return;
 		}
 	}
 
 	@ObfuscatedName("s.a(IIZIILj;II)V")
-	public void method106(int arg0, int arg1, int arg3, int arg4, Ground arg5, int arg6, int arg7) {
-		int var9 = arg5.field181.length;
+	public void drawGround(int arg0, int arg1, int arg3, int arg4, Ground arg5, int arg6, int arg7) {
+		int var9 = arg5.vertexX.length;
 		for (int var10 = 0; var10 < var9; var10++) {
-			int var11 = arg5.field181[var10] - field315;
-			int var12 = arg5.field182[var10] - field316;
-			int var13 = arg5.field183[var10] - field317;
+			int var11 = arg5.vertexX[var10] - eyeX;
+			int var12 = arg5.vertexY[var10] - eyeY;
+			int var13 = arg5.vertexZ[var10] - eyeZ;
 			int var14 = var13 * arg1 + var11 * arg0 >> 16;
 			int var15 = var13 * arg0 - var11 * arg1 >> 16;
 			int var17 = var12 * arg4 - var15 * arg3 >> 16;
@@ -1733,53 +1733,53 @@ public class World3D {
 			if (var18 < 50) {
 				return;
 			}
-			if (arg5.field190 != null) {
-				Ground.field198[var10] = var14;
-				Ground.field199[var10] = var17;
-				Ground.field200[var10] = var18;
+			if (arg5.triangleTexture != null) {
+				Ground.drawTextureVertexX[var10] = var14;
+				Ground.drawTextureVertexY[var10] = var17;
+				Ground.drawTextureVertexZ[var10] = var18;
 			}
-			Ground.field196[var10] = Pix3D.centerX + (var14 << 9) / var18;
-			Ground.field197[var10] = Pix3D.centerY + (var17 << 9) / var18;
+			Ground.drawVertexX[var10] = Pix3D.centerX + (var14 << 9) / var18;
+			Ground.drawVertexY[var10] = Pix3D.centerY + (var17 << 9) / var18;
 		}
 		Pix3D.trans = 0;
-		int var21 = arg5.field187.length;
+		int var21 = arg5.triangleVertexA.length;
 		for (int var22 = 0; var22 < var21; var22++) {
-			int var23 = arg5.field187[var22];
-			int var24 = arg5.field188[var22];
-			int var25 = arg5.field189[var22];
-			int var26 = Ground.field196[var23];
-			int var27 = Ground.field196[var24];
-			int var28 = Ground.field196[var25];
-			int var29 = Ground.field197[var23];
-			int var30 = Ground.field197[var24];
-			int var31 = Ground.field197[var25];
+			int var23 = arg5.triangleVertexA[var22];
+			int var24 = arg5.triangleVertexB[var22];
+			int var25 = arg5.triangleVertexC[var22];
+			int var26 = Ground.drawVertexX[var23];
+			int var27 = Ground.drawVertexX[var24];
+			int var28 = Ground.drawVertexX[var25];
+			int var29 = Ground.drawVertexY[var23];
+			int var30 = Ground.drawVertexY[var24];
+			int var31 = Ground.drawVertexY[var25];
 			if ((var26 - var27) * (var31 - var30) - (var29 - var30) * (var28 - var27) > 0) {
 				Pix3D.hclip = false;
 				if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth || var28 > Pix2D.safeWidth) {
 					Pix3D.hclip = true;
 				}
-				if (field327 && this.method108(field328, field329, var29, var30, var31, var26, var27, var28)) {
-					field330 = arg6;
-					field331 = arg7;
+				if (takingInput && this.pointInsideTriangle(mouseX, mouseY, var29, var30, var31, var26, var27, var28)) {
+					clickTileX = arg6;
+					clickTileZ = arg7;
 				}
-				if (arg5.field190 == null || arg5.field190[var22] == -1) {
-					if (arg5.field184[var22] != 12345678) {
-						Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22]);
+				if (arg5.triangleTexture == null || arg5.triangleTexture[var22] == -1) {
+					if (arg5.triangleColourA[var22] != 12345678) {
+						Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, arg5.triangleColourA[var22], arg5.triangleColourB[var22], arg5.triangleColourC[var22]);
 					}
 				} else if (lowMem) {
-					int var32 = field345[arg5.field190[var22]];
-					Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, this.method107(arg5.field184[var22], var32), this.method107(arg5.field185[var22], var32), this.method107(arg5.field186[var22], var32));
-				} else if (arg5.field191) {
-					Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22], Ground.field198[0], Ground.field198[1], Ground.field198[3], Ground.field199[0], Ground.field199[1], Ground.field199[3], Ground.field200[0], Ground.field200[1], Ground.field200[3], arg5.field190[var22]);
+					int var32 = TEXTURE_HSL[arg5.triangleTexture[var22]];
+					Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, this.mulLightness(arg5.triangleColourA[var22], var32), this.mulLightness(arg5.triangleColourB[var22], var32), this.mulLightness(arg5.triangleColourC[var22], var32));
+				} else if (arg5.flat) {
+					Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, arg5.triangleColourA[var22], arg5.triangleColourB[var22], arg5.triangleColourC[var22], Ground.drawTextureVertexX[0], Ground.drawTextureVertexX[1], Ground.drawTextureVertexX[3], Ground.drawTextureVertexY[0], Ground.drawTextureVertexY[1], Ground.drawTextureVertexY[3], Ground.drawTextureVertexZ[0], Ground.drawTextureVertexZ[1], Ground.drawTextureVertexZ[3], arg5.triangleTexture[var22]);
 				} else {
-					Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, arg5.field184[var22], arg5.field185[var22], arg5.field186[var22], Ground.field198[var23], Ground.field198[var24], Ground.field198[var25], Ground.field199[var23], Ground.field199[var24], Ground.field199[var25], Ground.field200[var23], Ground.field200[var24], Ground.field200[var25], arg5.field190[var22]);
+					Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, arg5.triangleColourA[var22], arg5.triangleColourB[var22], arg5.triangleColourC[var22], Ground.drawTextureVertexX[var23], Ground.drawTextureVertexX[var24], Ground.drawTextureVertexX[var25], Ground.drawTextureVertexY[var23], Ground.drawTextureVertexY[var24], Ground.drawTextureVertexY[var25], Ground.drawTextureVertexZ[var23], Ground.drawTextureVertexZ[var24], Ground.drawTextureVertexZ[var25], arg5.triangleTexture[var22]);
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("s.a(IZI)I")
-	public int method107(int arg0, int arg2) {
+	public int mulLightness(int arg0, int arg2) {
 		int var4 = 127 - arg0;
 		int var5 = var4 * (arg2 & 0x7F) / 160;
 		if (var5 < 2) {
@@ -1791,7 +1791,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(IIIIIIII)Z")
-	public boolean method108(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public boolean pointInsideTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		if (arg1 < arg2 && arg1 < arg3 && arg1 < arg4) {
 			return false;
 		} else if (arg1 > arg2 && arg1 > arg3 && arg1 > arg4) {
@@ -1809,120 +1809,120 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.d(I)V")
-	public void method109() {
-		int var2 = field333[field307];
-		Occlude[] var3 = field334[field307];
-		field335 = 0;
+	public void updateActiveOccluders() {
+		int var2 = levelOccluderCount[topLevel];
+		Occlude[] var3 = levelOccluders[topLevel];
+		activeOccluderCount = 0;
 		for (int var4 = 0; var4 < var2; var4++) {
 			Occlude var5 = var3[var4];
-			if (var5.field241 == 1) {
-				int var6 = var5.field237 - field313 + 25;
+			if (var5.type == 1) {
+				int var6 = var5.minGridX - eyeTileX + 25;
 				if (var6 >= 0 && var6 <= 50) {
-					int var7 = var5.field239 - field314 + 25;
+					int var7 = var5.minGridZ - eyeTileZ + 25;
 					if (var7 < 0) {
 						var7 = 0;
 					}
-					int var8 = var5.field240 - field314 + 25;
+					int var8 = var5.maxGridZ - eyeTileZ + 25;
 					if (var8 > 50) {
 						var8 = 50;
 					}
 					boolean var9 = false;
 					while (var7 <= var8) {
-						if (field352[var6][var7++]) {
+						if (visibilityMap[var6][var7++]) {
 							var9 = true;
 							break;
 						}
 					}
 					if (var9) {
-						int var10 = field315 - var5.field242;
+						int var10 = eyeX - var5.minX;
 						if (var10 > 32) {
-							var5.field248 = 1;
+							var5.mode = 1;
 						} else {
 							if (var10 >= -32) {
 								continue;
 							}
-							var5.field248 = 2;
+							var5.mode = 2;
 							var10 = -var10;
 						}
-						var5.field251 = (var5.field244 - field317 << 8) / var10;
-						var5.field252 = (var5.field245 - field317 << 8) / var10;
-						var5.field253 = (var5.field246 - field316 << 8) / var10;
-						var5.field254 = (var5.field247 - field316 << 8) / var10;
-						field336[field335++] = var5;
+						var5.minDeltaZ = (var5.minZ - eyeZ << 8) / var10;
+						var5.maxDeltaZ = (var5.maxZ - eyeZ << 8) / var10;
+						var5.minDeltaY = (var5.minY - eyeY << 8) / var10;
+						var5.maxDeltaY = (var5.maxY - eyeY << 8) / var10;
+						activeOccluders[activeOccluderCount++] = var5;
 					}
 				}
-			} else if (var5.field241 == 2) {
-				int var11 = var5.field239 - field314 + 25;
+			} else if (var5.type == 2) {
+				int var11 = var5.minGridZ - eyeTileZ + 25;
 				if (var11 >= 0 && var11 <= 50) {
-					int var12 = var5.field237 - field313 + 25;
+					int var12 = var5.minGridX - eyeTileX + 25;
 					if (var12 < 0) {
 						var12 = 0;
 					}
-					int var13 = var5.field238 - field313 + 25;
+					int var13 = var5.maxGridX - eyeTileX + 25;
 					if (var13 > 50) {
 						var13 = 50;
 					}
 					boolean var14 = false;
 					while (var12 <= var13) {
-						if (field352[var12++][var11]) {
+						if (visibilityMap[var12++][var11]) {
 							var14 = true;
 							break;
 						}
 					}
 					if (var14) {
-						int var15 = field317 - var5.field244;
+						int var15 = eyeZ - var5.minZ;
 						if (var15 > 32) {
-							var5.field248 = 3;
+							var5.mode = 3;
 						} else {
 							if (var15 >= -32) {
 								continue;
 							}
-							var5.field248 = 4;
+							var5.mode = 4;
 							var15 = -var15;
 						}
-						var5.field249 = (var5.field242 - field315 << 8) / var15;
-						var5.field250 = (var5.field243 - field315 << 8) / var15;
-						var5.field253 = (var5.field246 - field316 << 8) / var15;
-						var5.field254 = (var5.field247 - field316 << 8) / var15;
-						field336[field335++] = var5;
+						var5.minDeltaX = (var5.minX - eyeX << 8) / var15;
+						var5.maxDeltaX = (var5.maxX - eyeX << 8) / var15;
+						var5.minDeltaY = (var5.minY - eyeY << 8) / var15;
+						var5.maxDeltaY = (var5.maxY - eyeY << 8) / var15;
+						activeOccluders[activeOccluderCount++] = var5;
 					}
 				}
-			} else if (var5.field241 == 4) {
-				int var16 = var5.field246 - field316;
+			} else if (var5.type == 4) {
+				int var16 = var5.minY - eyeY;
 				if (var16 > 128) {
-					int var17 = var5.field239 - field314 + 25;
+					int var17 = var5.minGridZ - eyeTileZ + 25;
 					if (var17 < 0) {
 						var17 = 0;
 					}
-					int var18 = var5.field240 - field314 + 25;
+					int var18 = var5.maxGridZ - eyeTileZ + 25;
 					if (var18 > 50) {
 						var18 = 50;
 					}
 					if (var17 <= var18) {
-						int var19 = var5.field237 - field313 + 25;
+						int var19 = var5.minGridX - eyeTileX + 25;
 						if (var19 < 0) {
 							var19 = 0;
 						}
-						int var20 = var5.field238 - field313 + 25;
+						int var20 = var5.maxGridX - eyeTileX + 25;
 						if (var20 > 50) {
 							var20 = 50;
 						}
 						boolean var21 = false;
 						label151: for (int var22 = var19; var22 <= var20; var22++) {
 							for (int var23 = var17; var23 <= var18; var23++) {
-								if (field352[var22][var23]) {
+								if (visibilityMap[var22][var23]) {
 									var21 = true;
 									break label151;
 								}
 							}
 						}
 						if (var21) {
-							var5.field248 = 5;
-							var5.field249 = (var5.field242 - field315 << 8) / var16;
-							var5.field250 = (var5.field243 - field315 << 8) / var16;
-							var5.field251 = (var5.field244 - field317 << 8) / var16;
-							var5.field252 = (var5.field245 - field317 << 8) / var16;
-							field336[field335++] = var5;
+							var5.mode = 5;
+							var5.minDeltaX = (var5.minX - eyeX << 8) / var16;
+							var5.maxDeltaX = (var5.maxX - eyeX << 8) / var16;
+							var5.minDeltaZ = (var5.minZ - eyeZ << 8) / var16;
+							var5.maxDeltaZ = (var5.maxZ - eyeZ << 8) / var16;
+							activeOccluders[activeOccluderCount++] = var5;
 						}
 					}
 				}
@@ -1931,148 +1931,148 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.g(III)Z")
-	public boolean method110(int arg0, int arg1, int arg2) {
-		int var4 = this.field305[arg0][arg1][arg2];
-		if (var4 == -field308) {
+	public boolean tileVisible(int arg0, int arg1, int arg2) {
+		int var4 = this.levelTileOcclusionCycles[arg0][arg1][arg2];
+		if (var4 == -cycle) {
 			return false;
-		} else if (var4 == field308) {
+		} else if (var4 == cycle) {
 			return true;
 		} else {
 			int var5 = arg1 << 7;
 			int var6 = arg2 << 7;
-			if (this.method114(var5 + 1, this.field300[arg0][arg1][arg2], var6 + 1) && this.method114(var5 + 128 - 1, this.field300[arg0][arg1 + 1][arg2], var6 + 1) && this.method114(var5 + 128 - 1, this.field300[arg0][arg1 + 1][arg2 + 1], var6 + 128 - 1) && this.method114(var5 + 1, this.field300[arg0][arg1][arg2 + 1], var6 + 128 - 1)) {
-				this.field305[arg0][arg1][arg2] = field308;
+			if (this.occluded(var5 + 1, this.levelHeightmaps[arg0][arg1][arg2], var6 + 1) && this.occluded(var5 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg2], var6 + 1) && this.occluded(var5 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg2 + 1], var6 + 128 - 1) && this.occluded(var5 + 1, this.levelHeightmaps[arg0][arg1][arg2 + 1], var6 + 128 - 1)) {
+				this.levelTileOcclusionCycles[arg0][arg1][arg2] = cycle;
 				return true;
 			} else {
-				this.field305[arg0][arg1][arg2] = -field308;
+				this.levelTileOcclusionCycles[arg0][arg1][arg2] = -cycle;
 				return false;
 			}
 		}
 	}
 
 	@ObfuscatedName("s.h(IIII)Z")
-	public boolean method111(int arg0, int arg1, int arg2, int arg3) {
-		if (!this.method110(arg0, arg1, arg2)) {
+	public boolean isTileSideOccluded(int arg0, int arg1, int arg2, int arg3) {
+		if (!this.tileVisible(arg0, arg1, arg2)) {
 			return false;
 		}
 		int var5 = arg1 << 7;
 		int var6 = arg2 << 7;
-		int var7 = this.field300[arg0][arg1][arg2] - 1;
+		int var7 = this.levelHeightmaps[arg0][arg1][arg2] - 1;
 		int var8 = var7 - 120;
 		int var9 = var7 - 230;
 		int var10 = var7 - 238;
 		if (arg3 < 16) {
 			if (arg3 == 1) {
-				if (var5 > field315) {
-					if (!this.method114(var5, var7, var6)) {
+				if (var5 > eyeX) {
+					if (!this.occluded(var5, var7, var6)) {
 						return false;
 					}
-					if (!this.method114(var5, var7, var6 + 128)) {
+					if (!this.occluded(var5, var7, var6 + 128)) {
 						return false;
 					}
 				}
 				if (arg0 > 0) {
-					if (!this.method114(var5, var8, var6)) {
+					if (!this.occluded(var5, var8, var6)) {
 						return false;
 					}
-					if (!this.method114(var5, var8, var6 + 128)) {
+					if (!this.occluded(var5, var8, var6 + 128)) {
 						return false;
 					}
 				}
-				if (!this.method114(var5, var9, var6)) {
+				if (!this.occluded(var5, var9, var6)) {
 					return false;
 				}
-				if (!this.method114(var5, var9, var6 + 128)) {
+				if (!this.occluded(var5, var9, var6 + 128)) {
 					return false;
 				}
 				return true;
 			}
 			if (arg3 == 2) {
-				if (var6 < field317) {
-					if (!this.method114(var5, var7, var6 + 128)) {
+				if (var6 < eyeZ) {
+					if (!this.occluded(var5, var7, var6 + 128)) {
 						return false;
 					}
-					if (!this.method114(var5 + 128, var7, var6 + 128)) {
+					if (!this.occluded(var5 + 128, var7, var6 + 128)) {
 						return false;
 					}
 				}
 				if (arg0 > 0) {
-					if (!this.method114(var5, var8, var6 + 128)) {
+					if (!this.occluded(var5, var8, var6 + 128)) {
 						return false;
 					}
-					if (!this.method114(var5 + 128, var8, var6 + 128)) {
+					if (!this.occluded(var5 + 128, var8, var6 + 128)) {
 						return false;
 					}
 				}
-				if (!this.method114(var5, var9, var6 + 128)) {
+				if (!this.occluded(var5, var9, var6 + 128)) {
 					return false;
 				}
-				if (!this.method114(var5 + 128, var9, var6 + 128)) {
+				if (!this.occluded(var5 + 128, var9, var6 + 128)) {
 					return false;
 				}
 				return true;
 			}
 			if (arg3 == 4) {
-				if (var5 < field315) {
-					if (!this.method114(var5 + 128, var7, var6)) {
+				if (var5 < eyeX) {
+					if (!this.occluded(var5 + 128, var7, var6)) {
 						return false;
 					}
-					if (!this.method114(var5 + 128, var7, var6 + 128)) {
+					if (!this.occluded(var5 + 128, var7, var6 + 128)) {
 						return false;
 					}
 				}
 				if (arg0 > 0) {
-					if (!this.method114(var5 + 128, var8, var6)) {
+					if (!this.occluded(var5 + 128, var8, var6)) {
 						return false;
 					}
-					if (!this.method114(var5 + 128, var8, var6 + 128)) {
+					if (!this.occluded(var5 + 128, var8, var6 + 128)) {
 						return false;
 					}
 				}
-				if (!this.method114(var5 + 128, var9, var6)) {
+				if (!this.occluded(var5 + 128, var9, var6)) {
 					return false;
 				}
-				if (!this.method114(var5 + 128, var9, var6 + 128)) {
+				if (!this.occluded(var5 + 128, var9, var6 + 128)) {
 					return false;
 				}
 				return true;
 			}
 			if (arg3 == 8) {
-				if (var6 > field317) {
-					if (!this.method114(var5, var7, var6)) {
+				if (var6 > eyeZ) {
+					if (!this.occluded(var5, var7, var6)) {
 						return false;
 					}
-					if (!this.method114(var5 + 128, var7, var6)) {
+					if (!this.occluded(var5 + 128, var7, var6)) {
 						return false;
 					}
 				}
 				if (arg0 > 0) {
-					if (!this.method114(var5, var8, var6)) {
+					if (!this.occluded(var5, var8, var6)) {
 						return false;
 					}
-					if (!this.method114(var5 + 128, var8, var6)) {
+					if (!this.occluded(var5 + 128, var8, var6)) {
 						return false;
 					}
 				}
-				if (!this.method114(var5, var9, var6)) {
+				if (!this.occluded(var5, var9, var6)) {
 					return false;
 				}
-				if (!this.method114(var5 + 128, var9, var6)) {
+				if (!this.occluded(var5 + 128, var9, var6)) {
 					return false;
 				}
 				return true;
 			}
 		}
-		if (!this.method114(var5 + 64, var10, var6 + 64)) {
+		if (!this.occluded(var5 + 64, var10, var6 + 64)) {
 			return false;
 		} else if (arg3 == 16) {
-			return this.method114(var5, var9, var6 + 128);
+			return this.occluded(var5, var9, var6 + 128);
 		} else if (arg3 == 32) {
-			return this.method114(var5 + 128, var9, var6 + 128);
+			return this.occluded(var5 + 128, var9, var6 + 128);
 		} else if (arg3 == 64) {
-			return this.method114(var5 + 128, var9, var6);
+			return this.occluded(var5 + 128, var9, var6);
 		} else if (arg3 == 128) {
-			return this.method114(var5, var9, var6);
+			return this.occluded(var5, var9, var6);
 		} else {
 			System.out.println("Warning unsupported wall type");
 			return true;
@@ -2080,108 +2080,108 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.i(IIII)Z")
-	public boolean method112(int arg0, int arg1, int arg2, int arg3) {
-		if (this.method110(arg0, arg1, arg2)) {
+	public boolean isTileColumnOccluded(int arg0, int arg1, int arg2, int arg3) {
+		if (this.tileVisible(arg0, arg1, arg2)) {
 			int var5 = arg1 << 7;
 			int var6 = arg2 << 7;
-			return this.method114(var5 + 1, this.field300[arg0][arg1][arg2] - arg3, var6 + 1) && this.method114(var5 + 128 - 1, this.field300[arg0][arg1 + 1][arg2] - arg3, var6 + 1) && this.method114(var5 + 128 - 1, this.field300[arg0][arg1 + 1][arg2 + 1] - arg3, var6 + 128 - 1) && this.method114(var5 + 1, this.field300[arg0][arg1][arg2 + 1] - arg3, var6 + 128 - 1);
+			return this.occluded(var5 + 1, this.levelHeightmaps[arg0][arg1][arg2] - arg3, var6 + 1) && this.occluded(var5 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg2] - arg3, var6 + 1) && this.occluded(var5 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg2 + 1] - arg3, var6 + 128 - 1) && this.occluded(var5 + 1, this.levelHeightmaps[arg0][arg1][arg2 + 1] - arg3, var6 + 128 - 1);
 		} else {
 			return false;
 		}
 	}
 
 	@ObfuscatedName("s.b(IIIIII)Z")
-	public boolean method113(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public boolean locVisible(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg1 != arg2 || arg3 != arg4) {
 			for (int var9 = arg1; var9 <= arg2; var9++) {
 				for (int var10 = arg3; var10 <= arg4; var10++) {
-					if (this.field305[arg0][var9][var10] == -field308) {
+					if (this.levelTileOcclusionCycles[arg0][var9][var10] == -cycle) {
 						return false;
 					}
 				}
 			}
 			int var11 = (arg1 << 7) + 1;
 			int var12 = (arg3 << 7) + 2;
-			int var13 = this.field300[arg0][arg1][arg3] - arg5;
-			if (!this.method114(var11, var13, var12)) {
+			int var13 = this.levelHeightmaps[arg0][arg1][arg3] - arg5;
+			if (!this.occluded(var11, var13, var12)) {
 				return false;
 			}
 			int var14 = (arg2 << 7) - 1;
-			if (!this.method114(var14, var13, var12)) {
+			if (!this.occluded(var14, var13, var12)) {
 				return false;
 			}
 			int var15 = (arg4 << 7) - 1;
-			if (!this.method114(var11, var13, var15)) {
+			if (!this.occluded(var11, var13, var15)) {
 				return false;
-			} else if (this.method114(var14, var13, var15)) {
+			} else if (this.occluded(var14, var13, var15)) {
 				return true;
 			} else {
 				return false;
 			}
-		} else if (this.method110(arg0, arg1, arg3)) {
+		} else if (this.tileVisible(arg0, arg1, arg3)) {
 			int var7 = arg1 << 7;
 			int var8 = arg3 << 7;
-			return this.method114(var7 + 1, this.field300[arg0][arg1][arg3] - arg5, var8 + 1) && this.method114(var7 + 128 - 1, this.field300[arg0][arg1 + 1][arg3] - arg5, var8 + 1) && this.method114(var7 + 128 - 1, this.field300[arg0][arg1 + 1][arg3 + 1] - arg5, var8 + 128 - 1) && this.method114(var7 + 1, this.field300[arg0][arg1][arg3 + 1] - arg5, var8 + 128 - 1);
+			return this.occluded(var7 + 1, this.levelHeightmaps[arg0][arg1][arg3] - arg5, var8 + 1) && this.occluded(var7 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg3] - arg5, var8 + 1) && this.occluded(var7 + 128 - 1, this.levelHeightmaps[arg0][arg1 + 1][arg3 + 1] - arg5, var8 + 128 - 1) && this.occluded(var7 + 1, this.levelHeightmaps[arg0][arg1][arg3 + 1] - arg5, var8 + 128 - 1);
 		} else {
 			return false;
 		}
 	}
 
 	@ObfuscatedName("s.h(III)Z")
-	public boolean method114(int arg0, int arg1, int arg2) {
-		for (int var4 = 0; var4 < field335; var4++) {
-			Occlude var5 = field336[var4];
-			if (var5.field248 == 1) {
-				int var6 = var5.field242 - arg0;
+	public boolean occluded(int arg0, int arg1, int arg2) {
+		for (int var4 = 0; var4 < activeOccluderCount; var4++) {
+			Occlude var5 = activeOccluders[var4];
+			if (var5.mode == 1) {
+				int var6 = var5.minX - arg0;
 				if (var6 > 0) {
-					int var7 = var5.field244 + (var5.field251 * var6 >> 8);
-					int var8 = var5.field245 + (var5.field252 * var6 >> 8);
-					int var9 = var5.field246 + (var5.field253 * var6 >> 8);
-					int var10 = var5.field247 + (var5.field254 * var6 >> 8);
+					int var7 = var5.minZ + (var5.minDeltaZ * var6 >> 8);
+					int var8 = var5.maxZ + (var5.maxDeltaZ * var6 >> 8);
+					int var9 = var5.minY + (var5.minDeltaY * var6 >> 8);
+					int var10 = var5.maxY + (var5.maxDeltaY * var6 >> 8);
 					if (arg2 >= var7 && arg2 <= var8 && arg1 >= var9 && arg1 <= var10) {
 						return true;
 					}
 				}
-			} else if (var5.field248 == 2) {
-				int var11 = arg0 - var5.field242;
+			} else if (var5.mode == 2) {
+				int var11 = arg0 - var5.minX;
 				if (var11 > 0) {
-					int var12 = var5.field244 + (var5.field251 * var11 >> 8);
-					int var13 = var5.field245 + (var5.field252 * var11 >> 8);
-					int var14 = var5.field246 + (var5.field253 * var11 >> 8);
-					int var15 = var5.field247 + (var5.field254 * var11 >> 8);
+					int var12 = var5.minZ + (var5.minDeltaZ * var11 >> 8);
+					int var13 = var5.maxZ + (var5.maxDeltaZ * var11 >> 8);
+					int var14 = var5.minY + (var5.minDeltaY * var11 >> 8);
+					int var15 = var5.maxY + (var5.maxDeltaY * var11 >> 8);
 					if (arg2 >= var12 && arg2 <= var13 && arg1 >= var14 && arg1 <= var15) {
 						return true;
 					}
 				}
-			} else if (var5.field248 == 3) {
-				int var16 = var5.field244 - arg2;
+			} else if (var5.mode == 3) {
+				int var16 = var5.minZ - arg2;
 				if (var16 > 0) {
-					int var17 = var5.field242 + (var5.field249 * var16 >> 8);
-					int var18 = var5.field243 + (var5.field250 * var16 >> 8);
-					int var19 = var5.field246 + (var5.field253 * var16 >> 8);
-					int var20 = var5.field247 + (var5.field254 * var16 >> 8);
+					int var17 = var5.minX + (var5.minDeltaX * var16 >> 8);
+					int var18 = var5.maxX + (var5.maxDeltaX * var16 >> 8);
+					int var19 = var5.minY + (var5.minDeltaY * var16 >> 8);
+					int var20 = var5.maxY + (var5.maxDeltaY * var16 >> 8);
 					if (arg0 >= var17 && arg0 <= var18 && arg1 >= var19 && arg1 <= var20) {
 						return true;
 					}
 				}
-			} else if (var5.field248 == 4) {
-				int var21 = arg2 - var5.field244;
+			} else if (var5.mode == 4) {
+				int var21 = arg2 - var5.minZ;
 				if (var21 > 0) {
-					int var22 = var5.field242 + (var5.field249 * var21 >> 8);
-					int var23 = var5.field243 + (var5.field250 * var21 >> 8);
-					int var24 = var5.field246 + (var5.field253 * var21 >> 8);
-					int var25 = var5.field247 + (var5.field254 * var21 >> 8);
+					int var22 = var5.minX + (var5.minDeltaX * var21 >> 8);
+					int var23 = var5.maxX + (var5.maxDeltaX * var21 >> 8);
+					int var24 = var5.minY + (var5.minDeltaY * var21 >> 8);
+					int var25 = var5.maxY + (var5.maxDeltaY * var21 >> 8);
 					if (arg0 >= var22 && arg0 <= var23 && arg1 >= var24 && arg1 <= var25) {
 						return true;
 					}
 				}
-			} else if (var5.field248 == 5) {
-				int var26 = arg1 - var5.field246;
+			} else if (var5.mode == 5) {
+				int var26 = arg1 - var5.minY;
 				if (var26 > 0) {
-					int var27 = var5.field242 + (var5.field249 * var26 >> 8);
-					int var28 = var5.field243 + (var5.field250 * var26 >> 8);
-					int var29 = var5.field244 + (var5.field251 * var26 >> 8);
-					int var30 = var5.field245 + (var5.field252 * var26 >> 8);
+					int var27 = var5.minX + (var5.minDeltaX * var26 >> 8);
+					int var28 = var5.maxX + (var5.maxDeltaX * var26 >> 8);
+					int var29 = var5.minZ + (var5.minDeltaZ * var26 >> 8);
+					int var30 = var5.maxZ + (var5.maxDeltaZ * var26 >> 8);
 					if (arg0 >= var27 && arg0 <= var28 && arg2 >= var29 && arg2 <= var30) {
 						return true;
 					}

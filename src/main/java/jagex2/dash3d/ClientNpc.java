@@ -12,7 +12,7 @@ public class ClientNpc extends ClientEntity {
 	public NpcType type;
 
 	@ObfuscatedName("ab.a(I)Lfb;")
-	public final Model getModel() {
+	public Model getModel() {
 		if (this.type == null) {
 			return null;
 		} else {
@@ -48,7 +48,7 @@ public class ClientNpc extends ClientEntity {
 	}
 
 	@ObfuscatedName("ab.c(I)Lfb;")
-	public final Model getAnimatedModel() {
+	public Model getAnimatedModel() {
 		if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
 			int var2 = SeqType.types[super.primarySeqId].frames[super.primarySeqFrame];
 			int var3 = -1;
@@ -66,7 +66,7 @@ public class ClientNpc extends ClientEntity {
 	}
 
 	@ObfuscatedName("ab.b(I)Z")
-	public final boolean isVisible() {
+	public boolean isVisible() {
 		return this.type != null;
 	}
 }

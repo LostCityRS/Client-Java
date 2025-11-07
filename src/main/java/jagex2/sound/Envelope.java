@@ -40,7 +40,7 @@ public class Envelope {
 	public int ticks;
 
 	@ObfuscatedName("bc.a(ILmb;)V")
-	public final void unpack(Packet arg1) {
+	public void unpack(Packet arg1) {
 		this.form = arg1.g1();
 		this.start = arg1.g4();
 		this.end = arg1.g4();
@@ -54,7 +54,7 @@ public class Envelope {
 	}
 
 	@ObfuscatedName("bc.a(I)V")
-	public final void genInit() {
+	public void genInit() {
 		this.threshold = 0;
 		this.position = 0;
 		this.delta = 0;
@@ -63,7 +63,7 @@ public class Envelope {
 	}
 
 	@ObfuscatedName("bc.a(II)I")
-	public final int genNext(int arg0) {
+	public int genNext(int arg0) {
 		if (this.ticks >= this.threshold) {
 			this.amplitude = this.shapePeak[this.position++] << 15;
 			if (this.position >= this.length) {

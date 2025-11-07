@@ -31,7 +31,7 @@ public class Wave {
 	}
 
 	@ObfuscatedName("cc.a(ZLmb;)V")
-	public static final void unpack(Packet arg1) {
+	public static void unpack(Packet arg1) {
 		waveBytes = new byte[441000];
 		waveBuffer = new Packet(waveBytes);
 		Tone.init();
@@ -47,7 +47,7 @@ public class Wave {
 	}
 
 	@ObfuscatedName("cc.a(IIB)Lmb;")
-	public static final Packet generate(int arg0, int arg1) {
+	public static Packet generate(int arg0, int arg1) {
 		if (tracks[arg1] == null) {
 			return null;
 		} else {
@@ -57,7 +57,7 @@ public class Wave {
 	}
 
 	@ObfuscatedName("cc.a(ILmb;)V")
-	public final void read(Packet arg1) {
+	public void read(Packet arg1) {
 		for (int var3 = 0; var3 < 10; var3++) {
 			int var4 = arg1.g1();
 			if (var4 != 0) {
@@ -71,7 +71,7 @@ public class Wave {
 	}
 
 	@ObfuscatedName("cc.a(I)I")
-	public final int trim() {
+	public int trim() {
 		int var2 = 9999999;
 		for (int var3 = 0; var3 < 10; var3++) {
 			if (this.tones[var3] != null && this.tones[var3].start / 20 < var2) {
@@ -97,7 +97,7 @@ public class Wave {
 	}
 
 	@ObfuscatedName("cc.a(II)Lmb;")
-	public final Packet getWave(int arg1) {
+	public Packet getWave(int arg1) {
 		int var3 = this.generate(arg1);
 		waveBuffer.pos = 0;
 		waveBuffer.p4(1380533830);
@@ -118,7 +118,7 @@ public class Wave {
 	}
 
 	@ObfuscatedName("cc.b(I)I")
-	public final int generate(int arg0) {
+	public int generate(int arg0) {
 		int var2 = 0;
 		for (int var3 = 0; var3 < 10; var3++) {
 			if (this.tones[var3] != null && this.tones[var3].length + this.tones[var3].start > var2) {

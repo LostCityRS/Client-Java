@@ -31,7 +31,7 @@ public class Isaac {
 	}
 
 	@ObfuscatedName("xb.a()I")
-	public final int nextInt() {
+	public int nextInt() {
 		if (this.count-- == 0) {
 			this.isaac();
 			this.count = 255;
@@ -40,7 +40,7 @@ public class Isaac {
 	}
 
 	@ObfuscatedName("xb.b()V")
-	public final void isaac() {
+	public void isaac() {
 		this.b += ++this.c;
 		for (int var1 = 0; var1 < 256; var1++) {
 			int var2 = this.mem[var1];
@@ -65,7 +65,7 @@ public class Isaac {
 	}
 
 	@ObfuscatedName("xb.c()V")
-	public final void init() {
+	public void init() {
 		int var1 = -1640531527;
 		int var2 = -1640531527;
 		int var3 = -1640531527;

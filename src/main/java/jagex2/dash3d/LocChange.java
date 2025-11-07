@@ -7,38 +7,38 @@ import jagex2.datastruct.Linkable;
 public class LocChange extends Linkable {
 
 	@ObfuscatedName("ob.f")
-	public int field729;
+	public int level;
 
 	@ObfuscatedName("ob.g")
-	public int field730;
+	public int layer;
 
 	@ObfuscatedName("ob.h")
-	public int field731;
+	public int x;
 
 	@ObfuscatedName("ob.i")
-	public int field732;
+	public int z;
 
 	@ObfuscatedName("ob.j")
-	public int field733;
+	public int oldType;
 
 	@ObfuscatedName("ob.k")
-	public int field734;
+	public int oldAngle;
 
 	@ObfuscatedName("ob.l")
-	public int field735;
+	public int oldShape;
 
 	@ObfuscatedName("ob.m")
-	public int field736;
+	public int newType;
 
 	@ObfuscatedName("ob.n")
-	public int field737;
+	public int newAngle;
 
 	@ObfuscatedName("ob.o")
-	public int field738;
+	public int newShape;
 
 	@ObfuscatedName("ob.p")
-	public int field739;
+	public int startTime;
 
 	@ObfuscatedName("ob.q")
-	public int field740 = -1;
+	public int endTime = -1;
 }

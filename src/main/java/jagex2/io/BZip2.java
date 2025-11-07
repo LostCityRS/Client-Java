@@ -6,537 +6,647 @@ import deob.ObfuscatedName;
 public class BZip2 {
 
 	@ObfuscatedName("sb.a")
-	public static BZip2State state = new BZip2State();
+	public static final BZip2State state = new BZip2State();
 
 	@ObfuscatedName("sb.a([BI[BII)I")
-	public static int decompress(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
-		BZip2State var5 = state;
+	public static int decompress(byte[] dst, int ulen, byte[] src, int clen, int off) {
 		synchronized (state) {
-			state.field765 = arg2;
-			state.field766 = arg4;
-			state.field770 = arg0;
-			state.field771 = 0;
-			state.field767 = arg3;
-			state.field772 = arg1;
-			state.field779 = 0;
-			state.field778 = 0;
-			state.field768 = 0;
-			state.field769 = 0;
-			state.field773 = 0;
-			state.field774 = 0;
-			state.field781 = 0;
+			state.stream = src;
+			state.next_in = off;
+			state.decompressed = dst;
+			state.next_out = 0;
+			state.avail_in = clen;
+			state.avail_out = ulen;
+			state.bsLive = 0;
+			state.bsBuff = 0;
+			state.total_in_lo32 = 0;
+			state.total_in_hi32 = 0;
+			state.total_out_lo32 = 0;
+			state.total_out_hi32 = 0;
+			state.currBlockNo = 0;
+
 			decompress(state);
-			return arg1 - state.field772;
+			return ulen - state.avail_out;
 		}
 	}
 
+	// unRLE_obuf_to_output_FAST
 	@ObfuscatedName("sb.a(Ltb;)V")
-	public static void finish(BZip2State arg0) {
-		byte var1 = arg0.field775;
-		int var2 = arg0.field776;
-		int var3 = arg0.field786;
-		int var4 = arg0.field784;
-		int[] var5 = BZip2State.field789;
-		int var6 = arg0.field783;
-		byte[] var7 = arg0.field770;
-		int var8 = arg0.field771;
-		int var9 = arg0.field772;
-		int var10 = var9;
-		int var11 = arg0.field803 + 1;
+	public static void finish(BZip2State s) {
+		byte c_state_out_ch = s.state_out_ch;
+		int c_state_out_len = s.state_out_len;
+		int c_nblock_used = s.c_nblock_used;
+		int c_k0 = s.k0;
+		int[] c_tt = BZip2State.tt;
+		int c_tPos = s.tPos;
+		byte[] cs_decompressed = s.decompressed;
+		int cs_next_out = s.next_out;
+		int cs_avail_out = s.avail_out;
+		int avail_out_INIT = cs_avail_out;
+		int s_save_nblockPP = s.save_nblock + 1;
+
 		label67: while (true) {
-			if (var2 > 0) {
+			if (c_state_out_len > 0) {
 				while (true) {
-					if (var9 == 0) {
+					if (cs_avail_out == 0) {
 						break label67;
 					}
-					if (var2 == 1) {
-						if (var9 == 0) {
-							var2 = 1;
+
+					if (c_state_out_len == 1) {
+						if (cs_avail_out == 0) {
+							c_state_out_len = 1;
 							break label67;
 						}
-						var7[var8] = var1;
-						var8++;
-						var9--;
+
+						cs_decompressed[cs_next_out] = c_state_out_ch;
+						cs_next_out++;
+						cs_avail_out--;
 						break;
 					}
-					var7[var8] = var1;
-					var2--;
-					var8++;
-					var9--;
+
+					cs_decompressed[cs_next_out] = c_state_out_ch;
+					c_state_out_len--;
+					cs_next_out++;
+					cs_avail_out--;
 				}
 			}
-			boolean var12 = true;
-			while (var12) {
-				var12 = false;
-				if (var3 == var11) {
-					var2 = 0;
+
+			boolean next = true;
+			byte k1;
+
+			while (next) {
+				next = false;
+				if (c_nblock_used == s_save_nblockPP) {
+					c_state_out_len = 0;
 					break label67;
 				}
-				var1 = (byte) var4;
-				int var13 = var5[var6];
-				byte var14 = (byte) (var13 & 0xFF);
-				var6 = var13 >> 8;
-				var3++;
-				if (var14 != var4) {
-					var4 = var14;
-					if (var9 == 0) {
-						var2 = 1;
+
+				// macro: BZ_GET_FAST_C
+				c_state_out_ch = (byte) c_k0;
+				c_tPos = c_tt[c_tPos];
+				k1 = (byte) (c_tPos & 0xFF);
+				c_tPos = c_tPos >> 8;
+				c_nblock_used++;
+
+				if (k1 != c_k0) {
+					c_k0 = k1;
+					if (cs_avail_out == 0) {
+						c_state_out_len = 1;
 						break label67;
 					}
-					var7[var8] = var1;
-					var8++;
-					var9--;
-					var12 = true;
-				} else if (var3 == var11) {
-					if (var9 == 0) {
-						var2 = 1;
+
+					cs_decompressed[cs_next_out] = c_state_out_ch;
+					cs_next_out++;
+					cs_avail_out--;
+					next = true;
+				} else if (c_nblock_used == s_save_nblockPP) {
+					if (cs_avail_out == 0) {
+						c_state_out_len = 1;
 						break label67;
 					}
-					var7[var8] = var1;
-					var8++;
-					var9--;
-					var12 = true;
+
+					cs_decompressed[cs_next_out] = c_state_out_ch;
+					cs_next_out++;
+					cs_avail_out--;
+					next = true;
 				}
 			}
-			var2 = 2;
-			int var15 = var5[var6];
-			byte var16 = (byte) (var15 & 0xFF);
-			var6 = var15 >> 8;
-			var3++;
-			if (var3 != var11) {
-				if (var16 == var4) {
-					var2 = 3;
-					int var17 = var5[var6];
-					byte var18 = (byte) (var17 & 0xFF);
-					var6 = var17 >> 8;
-					var3++;
-					if (var3 != var11) {
-						if (var18 == var4) {
-							int var19 = var5[var6];
-							byte var20 = (byte) (var19 & 0xFF);
-							int var21 = var19 >> 8;
-							var3++;
-							var2 = (var20 & 0xFF) + 4;
-							int var22 = var5[var21];
-							var4 = (byte) (var22 & 0xFF);
-							var6 = var22 >> 8;
-							var3++;
+
+			// macro: BZ_GET_FAST_C
+			c_state_out_len = 2;
+			c_tPos = c_tt[c_tPos];
+			k1 = (byte) (c_tPos & 0xFF);
+			c_tPos = c_tPos >> 8;
+			c_nblock_used++;
+
+			if (c_nblock_used != s_save_nblockPP) {
+				if (k1 == c_k0) {
+					// macro: BZ_GET_FAST_C
+					c_state_out_len = 3;
+					c_tPos = c_tt[c_tPos];
+					k1 = (byte) (c_tPos & 0xFF);
+					c_tPos = c_tPos >> 8;
+					c_nblock_used++;
+
+					if (c_nblock_used != s_save_nblockPP) {
+						if (k1 == c_k0) {
+							// macro: BZ_GET_FAST_C
+							c_tPos = c_tt[c_tPos];
+							k1 = (byte) (c_tPos & 0xFF);
+							c_tPos = c_tPos >> 8;
+							c_nblock_used++;
+
+							// macro: BZ_GET_FAST_C
+							c_state_out_len = (k1 & 0xFF) + 4;
+							c_tPos = c_tt[c_tPos];
+							c_k0 = (byte) (c_tPos & 0xFF);
+							c_tPos = c_tPos >> 8;
+							c_nblock_used++;
 						} else {
-							var4 = var18;
+							c_k0 = k1;
 						}
 					}
 				} else {
-					var4 = var16;
+					c_k0 = k1;
 				}
 			}
 		}
-		int var23 = arg0.field773;
-		arg0.field773 += var10 - var9;
-		if (arg0.field773 < var23) {
-			arg0.field774++;
+
+		int var23 = s.total_out_lo32;
+		s.total_out_lo32 += avail_out_INIT - cs_avail_out;
+		if (s.total_out_lo32 < var23) {
+			s.total_out_hi32++;
 		}
-		arg0.field775 = var1;
-		arg0.field776 = var2;
-		arg0.field786 = var3;
-		arg0.field784 = var4;
-		BZip2State.field789 = var5;
-		arg0.field783 = var6;
-		arg0.field770 = var7;
-		arg0.field771 = var8;
-		arg0.field772 = var9;
+
+		// save
+		s.state_out_ch = c_state_out_ch;
+		s.state_out_len = c_state_out_len;
+		s.c_nblock_used = c_nblock_used;
+		s.k0 = c_k0;
+		BZip2State.tt = c_tt;
+		s.tPos = c_tPos;
+		s.decompressed = cs_decompressed;
+		s.next_out = cs_next_out;
+		s.avail_out = cs_avail_out;
+		// end save
 	}
 
 	@ObfuscatedName("sb.b(Ltb;)V")
-	public static void decompress(BZip2State arg0) {
-		boolean var1 = false;
-		boolean var2 = false;
-		boolean var3 = false;
-		boolean var4 = false;
-		boolean var5 = false;
-		boolean var6 = false;
-		boolean var7 = false;
-		boolean var8 = false;
-		boolean var9 = false;
-		boolean var10 = false;
-		boolean var11 = false;
-		boolean var12 = false;
-		boolean var13 = false;
-		boolean var14 = false;
-		boolean var15 = false;
-		boolean var16 = false;
-		boolean var17 = false;
-		boolean var18 = false;
-		boolean var19 = false;
-		int var20 = 0;
-		int[] var21 = null;
-		int[] var22 = null;
-		int[] var23 = null;
-		arg0.field780 = 1;
-		if (BZip2State.field789 == null) {
-			BZip2State.field789 = new int[arg0.field780 * 100000];
+	public static void decompress(BZip2State s) {
+		// libbzip2 uses these variables in a save area
+		/*boolean save_i = false;
+		boolean save_j = false;
+		boolean save_t = false;
+		boolean save_alphaSize = false;
+		boolean save_nGroups = false;
+		boolean save_nSelectors = false;
+		boolean save_EOB = false;
+		boolean save_groupNo = false;
+		boolean save_groupPos = false;
+		boolean save_nextSym = false;
+		boolean save_nblockMAX = false;
+		boolean save_nblock = false;
+		boolean save_es = false;
+		boolean save_N = false;
+		boolean save_curr = false;
+		boolean save_zt = false;
+		boolean save_zn = false;
+		boolean save_zvec = false;
+		boolean save_zj = false;*/
+
+		int gMinLen = 0;
+		int[] gLimit = null;
+		int[] gBase = null;
+		int[] gPerm = null;
+
+		s.blockSize100k = 1;
+		if (BZip2State.tt == null) {
+			BZip2State.tt = new int[s.blockSize100k * 100000];
 		}
-		boolean var24 = true;
-		while (true) {
-			while (var24) {
-				byte var25 = getUnsignedChar(arg0);
-				if (var25 == 23) {
-					return;
-				}
-				byte var26 = getUnsignedChar(arg0);
-				byte var27 = getUnsignedChar(arg0);
-				byte var28 = getUnsignedChar(arg0);
-				byte var29 = getUnsignedChar(arg0);
-				byte var30 = getUnsignedChar(arg0);
-				arg0.field781++;
-				byte var31 = getUnsignedChar(arg0);
-				byte var32 = getUnsignedChar(arg0);
-				byte var33 = getUnsignedChar(arg0);
-				byte var34 = getUnsignedChar(arg0);
-				byte var35 = getBit(arg0);
-				if (var35 == 0) {
-					arg0.field777 = false;
+
+		boolean reading = true;
+		while (reading) {
+			byte uc = getUnsignedChar(s);
+			if (uc == 23) {
+				return;
+			}
+
+			uc = getUnsignedChar(s);
+			uc = getUnsignedChar(s);
+			uc = getUnsignedChar(s);
+			uc = getUnsignedChar(s);
+			uc = getUnsignedChar(s);
+
+			s.currBlockNo++;
+
+			uc = getUnsignedChar(s);
+			uc = getUnsignedChar(s);
+			uc = getUnsignedChar(s);
+			uc = getUnsignedChar(s);
+
+			uc = getBit(s);
+			if (uc == 0) {
+				s.blockRandomized = false;
+			} else {
+				s.blockRandomized = true;
+			}
+
+			if (s.blockRandomized) {
+				System.out.println("PANIC! RANDOMISED BLOCK!");
+			}
+
+			s.origPtr = 0;
+			uc = getUnsignedChar(s);
+			s.origPtr = s.origPtr << 8 | uc & 0xFF;
+			uc = getUnsignedChar(s);
+			s.origPtr = s.origPtr << 8 | uc & 0xFF;
+			uc = getUnsignedChar(s);
+			s.origPtr = s.origPtr << 8 | uc & 0xFF;
+
+			// Receive the mapping table
+			for (int i = 0; i < 16; i++) {
+				uc = getBit(s);
+				if (uc == 1) {
+					s.inUse16[i] = true;
 				} else {
-					arg0.field777 = true;
-				}
-				if (arg0.field777) {
-					System.out.println("PANIC! RANDOMISED BLOCK!");
-				}
-				arg0.field782 = 0;
-				byte var36 = getUnsignedChar(arg0);
-				arg0.field782 = arg0.field782 << 8 | var36 & 0xFF;
-				byte var37 = getUnsignedChar(arg0);
-				arg0.field782 = arg0.field782 << 8 | var37 & 0xFF;
-				byte var38 = getUnsignedChar(arg0);
-				arg0.field782 = arg0.field782 << 8 | var38 & 0xFF;
-				for (int var39 = 0; var39 < 16; var39++) {
-					byte var40 = getBit(arg0);
-					if (var40 == 1) {
-						arg0.field792[var39] = true;
-					} else {
-						arg0.field792[var39] = false;
-					}
-				}
-				for (int var41 = 0; var41 < 256; var41++) {
-					arg0.field791[var41] = false;
-				}
-				for (int var42 = 0; var42 < 16; var42++) {
-					if (arg0.field792[var42]) {
-						for (int var43 = 0; var43 < 16; var43++) {
-							byte var44 = getBit(arg0);
-							if (var44 == 1) {
-								arg0.field791[var42 * 16 + var43] = true;
-							}
-						}
-					}
-				}
-				makeMaps(arg0);
-				int var45 = arg0.field790 + 2;
-				int var46 = getBits(3, arg0);
-				int var47 = getBits(15, arg0);
-				for (int var48 = 0; var48 < var47; var48++) {
-					int var49 = 0;
-					while (true) {
-						byte var50 = getBit(arg0);
-						if (var50 == 0) {
-							arg0.field797[var48] = (byte) var49;
-							break;
-						}
-						var49++;
-					}
-				}
-				byte[] var51 = new byte[6];
-				byte var52 = 0;
-				while (var52 < var46) {
-					var51[var52] = var52++;
-				}
-				for (int var53 = 0; var53 < var47; var53++) {
-					byte var54 = arg0.field797[var53];
-					byte var55 = var51[var54];
-					while (var54 > 0) {
-						var51[var54] = var51[var54 - 1];
-						var54--;
-					}
-					var51[0] = var55;
-					arg0.field796[var53] = var55;
-				}
-				for (int var56 = 0; var56 < var46; var56++) {
-					int var57 = getBits(5, arg0);
-					for (int var58 = 0; var58 < var45; var58++) {
-						while (true) {
-							byte var59 = getBit(arg0);
-							if (var59 == 0) {
-								arg0.field798[var56][var58] = (byte) var57;
-								break;
-							}
-							byte var60 = getBit(arg0);
-							if (var60 == 0) {
-								var57++;
-							} else {
-								var57--;
-							}
-						}
-					}
-				}
-				for (int var61 = 0; var61 < var46; var61++) {
-					byte var62 = 32;
-					byte var63 = 0;
-					for (int var64 = 0; var64 < var45; var64++) {
-						if (arg0.field798[var61][var64] > var63) {
-							var63 = arg0.field798[var61][var64];
-						}
-						if (arg0.field798[var61][var64] < var62) {
-							var62 = arg0.field798[var61][var64];
-						}
-					}
-					createDecodeTables(arg0.field799[var61], arg0.field800[var61], arg0.field801[var61], arg0.field798[var61], var62, var63, var45);
-					arg0.field802[var61] = var62;
-				}
-				int var65 = arg0.field790 + 1;
-				int var66 = arg0.field780 * 100000;
-				int var67 = -1;
-				byte var68 = 0;
-				for (int var69 = 0; var69 <= 255; var69++) {
-					arg0.field785[var69] = 0;
-				}
-				int var70 = 4095;
-				for (int var71 = 15; var71 >= 0; var71--) {
-					for (int var72 = 15; var72 >= 0; var72--) {
-						arg0.field794[var70] = (byte) (var71 * 16 + var72);
-						var70--;
-					}
-					arg0.field795[var71] = var70 + 1;
-				}
-				int var73 = 0;
-				if (var68 == 0) {
-					var67++;
-					var68 = 50;
-					byte var74 = arg0.field796[var67];
-					var20 = arg0.field802[var74];
-					var21 = arg0.field799[var74];
-					var23 = arg0.field801[var74];
-					var22 = arg0.field800[var74];
-				}
-				int var104 = var68 - 1;
-				int var75 = var20;
-				int var76;
-				byte var77;
-				for (var76 = getBits(var20, arg0); var76 > var21[var75]; var76 = var76 << 1 | var77) {
-					var75++;
-					var77 = getBit(arg0);
-				}
-				int var78 = var23[var76 - var22[var75]];
-				while (true) {
-					while (var78 != var65) {
-						if (var78 == 0 || var78 == 1) {
-							int var79 = -1;
-							int var80 = 1;
-							do {
-								if (var78 == 0) {
-									var79 += var80;
-								} else if (var78 == 1) {
-									var79 += var80 * 2;
-								}
-								var80 *= 2;
-								if (var104 == 0) {
-									var67++;
-									var104 = 50;
-									byte var81 = arg0.field796[var67];
-									var20 = arg0.field802[var81];
-									var21 = arg0.field799[var81];
-									var23 = arg0.field801[var81];
-									var22 = arg0.field800[var81];
-								}
-								var104--;
-								int var82 = var20;
-								int var83;
-								byte var84;
-								for (var83 = getBits(var20, arg0); var83 > var21[var82]; var83 = var83 << 1 | var84) {
-									var82++;
-									var84 = getBit(arg0);
-								}
-								var78 = var23[var83 - var22[var82]];
-							} while (var78 == 0 || var78 == 1);
-							var79++;
-							byte var85 = arg0.field793[arg0.field794[arg0.field795[0]] & 0xFF];
-							arg0.field785[var85 & 0xFF] += var79;
-							while (var79 > 0) {
-								BZip2State.field789[var73] = var85 & 0xFF;
-								var73++;
-								var79--;
-							}
-						} else {
-							int var86 = var78 - 1;
-							byte var88;
-							if (var86 < 16) {
-								int var87 = arg0.field795[0];
-								var88 = arg0.field794[var87 + var86];
-								while (var86 > 3) {
-									int var89 = var87 + var86;
-									arg0.field794[var89] = arg0.field794[var89 - 1];
-									arg0.field794[var89 - 1] = arg0.field794[var89 - 2];
-									arg0.field794[var89 - 2] = arg0.field794[var89 - 3];
-									arg0.field794[var89 - 3] = arg0.field794[var89 - 4];
-									var86 -= 4;
-								}
-								while (var86 > 0) {
-									arg0.field794[var87 + var86] = arg0.field794[var87 + var86 - 1];
-									var86--;
-								}
-								arg0.field794[var87] = var88;
-							} else {
-								int var90 = var86 / 16;
-								int var91 = var86 % 16;
-								int var92 = arg0.field795[var90] + var91;
-								var88 = arg0.field794[var92];
-								while (var92 > arg0.field795[var90]) {
-									arg0.field794[var92] = arg0.field794[var92 - 1];
-									var92--;
-								}
-								int var10002 = arg0.field795[var90]++;
-								while (var90 > 0) {
-									var10002 = arg0.field795[var90]--;
-									arg0.field794[arg0.field795[var90]] = arg0.field794[arg0.field795[var90 - 1] + 16 - 1];
-									var90--;
-								}
-								var10002 = arg0.field795[0]--;
-								arg0.field794[arg0.field795[0]] = var88;
-								if (arg0.field795[0] == 0) {
-									int var93 = 4095;
-									for (int var94 = 15; var94 >= 0; var94--) {
-										for (int var95 = 15; var95 >= 0; var95--) {
-											arg0.field794[var93] = arg0.field794[arg0.field795[var94] + var95];
-											var93--;
-										}
-										arg0.field795[var94] = var93 + 1;
-									}
-								}
-							}
-							arg0.field785[arg0.field793[var88 & 0xFF] & 0xFF]++;
-							BZip2State.field789[var73] = arg0.field793[var88 & 0xFF] & 0xFF;
-							var73++;
-							if (var104 == 0) {
-								var67++;
-								var104 = 50;
-								byte var96 = arg0.field796[var67];
-								var20 = arg0.field802[var96];
-								var21 = arg0.field799[var96];
-								var23 = arg0.field801[var96];
-								var22 = arg0.field800[var96];
-							}
-							var104--;
-							int var97 = var20;
-							int var98;
-							byte var99;
-							for (var98 = getBits(var20, arg0); var98 > var21[var97]; var98 = var98 << 1 | var99) {
-								var97++;
-								var99 = getBit(arg0);
-							}
-							var78 = var23[var98 - var22[var97]];
-						}
-					}
-					arg0.field776 = 0;
-					arg0.field775 = 0;
-					arg0.field787[0] = 0;
-					for (int var100 = 1; var100 <= 256; var100++) {
-						arg0.field787[var100] = arg0.field785[var100 - 1];
-					}
-					for (int var101 = 1; var101 <= 256; var101++) {
-						arg0.field787[var101] += arg0.field787[var101 - 1];
-					}
-					for (int var102 = 0; var102 < var73; var102++) {
-						byte var103 = (byte) (BZip2State.field789[var102] & 0xFF);
-						BZip2State.field789[arg0.field787[var103 & 0xFF]] |= var102 << 8;
-						arg0.field787[var103 & 0xFF]++;
-					}
-					arg0.field783 = BZip2State.field789[arg0.field782] >> 8;
-					arg0.field786 = 0;
-					arg0.field783 = BZip2State.field789[arg0.field783];
-					arg0.field784 = (byte) (arg0.field783 & 0xFF);
-					arg0.field783 >>= 0x8;
-					arg0.field786++;
-					arg0.field803 = var73;
-					finish(arg0);
-					if (arg0.field786 == arg0.field803 + 1 && arg0.field776 == 0) {
-						var24 = true;
-						break;
-					}
-					var24 = false;
-					break;
+					s.inUse16[i] = false;
 				}
 			}
-			return;
+
+			for (int i = 0; i < 256; i++) {
+				s.inUse[i] = false;
+			}
+
+			for (int i = 0; i < 16; i++) {
+				if (s.inUse16[i]) {
+					for (int j = 0; j < 16; j++) {
+						uc = getBit(s);
+						if (uc == 1) {
+							s.inUse[i * 16 + j] = true;
+						}
+					}
+				}
+			}
+
+			makeMaps(s);
+			int alphaSize = s.nInUse + 2;
+
+			int nGroups = getBits(3, s);
+			int nSelectors = getBits(15, s);
+			for (int i = 0; i < nSelectors; i++) {
+				int j = 0;
+				while (true) {
+					uc = getBit(s);
+					if (uc == 0) {
+						s.selectorMtf[i] = (byte) j;
+						break;
+					}
+
+					j++;
+				}
+			}
+
+			// Undo the MTF values for the selectors
+			byte[] pos = new byte[6];
+			byte v = 0;
+			while (v < nGroups) {
+				pos[v] = v++;
+			}
+
+			for (int i = 0; i < nSelectors; i++) {
+				v = s.selectorMtf[i];
+				byte tmp = pos[v];
+				while (v > 0) {
+					pos[v] = pos[v - 1];
+					v--;
+				}
+				pos[0] = tmp;
+				s.selector[i] = tmp;
+			}
+
+			// Now the coding tables
+			for (int t = 0; t < nGroups; t++) {
+				int curr = getBits(5, s);
+
+				for (int i = 0; i < alphaSize; i++) {
+					while (true) {
+						uc = getBit(s);
+						if (uc == 0) {
+							s.len[t][i] = (byte) curr;
+							break;
+						}
+
+						uc = getBit(s);
+						if (uc == 0) {
+							curr++;
+						} else {
+							curr--;
+						}
+					}
+				}
+			}
+
+			// Create the Huffman decoding tables
+			for (int t = 0; t < nGroups; t++) {
+				byte minLen = 32;
+				byte maxLen = 0;
+
+				for (int i = 0; i < alphaSize; i++) {
+					if (s.len[t][i] > maxLen) {
+						maxLen = s.len[t][i];
+					}
+
+					if (s.len[t][i] < minLen) {
+						minLen = s.len[t][i];
+					}
+				}
+
+				createDecodeTables(s.limit[t], s.base[t], s.perm[t], s.len[t], minLen, maxLen, alphaSize);
+				s.minLens[t] = minLen;
+			}
+
+			// Now the MTF values
+			int EOB = s.nInUse + 1;
+			int nblockMAX = s.blockSize100k * 100000;
+			int groupNo = -1;
+			byte groupPos = 0;
+
+			for (int i = 0; i <= 255; i++) {
+				s.unzftab[i] = 0;
+			}
+
+			// MTF init
+			int kk = 4095;
+			for (int ii = 15; ii >= 0; ii--) {
+				for (int jj = 15; jj >= 0; jj--) {
+					s.mtfa[kk] = (byte) (ii * 16 + jj);
+					kk--;
+				}
+
+				s.mtfbase[ii] = kk + 1;
+			}
+			// end MTF init
+
+			int nblock = 0;
+
+			// macro: GET_MTF_VAL
+			if (groupPos == 0) {
+				groupNo++;
+				groupPos = 50;
+				byte gSel = s.selector[groupNo];
+				gMinLen = s.minLens[gSel];
+				gLimit = s.limit[gSel];
+				gPerm = s.perm[gSel];
+				gBase = s.base[gSel];
+			}
+
+			int gPos = groupPos - 1;
+			int zn = gMinLen;
+			int zvec;
+			byte zj;
+
+			for (zvec = getBits(gMinLen, s); zvec > gLimit[zn]; zvec = zvec << 1 | zj) {
+				zn++;
+				zj = getBit(s);
+			}
+
+			int nextSym = gPerm[zvec - gBase[zn]];
+			while (nextSym != EOB) {
+				if (nextSym == 0 || nextSym == 1) {
+					int es = -1;
+					int N = 1;
+
+					do {
+						if (nextSym == 0) {
+							es += N;
+						} else if (nextSym == 1) {
+							es += N * 2;
+						}
+
+						N *= 2;
+
+						// macro: GET_MTF_VAL
+						if (gPos == 0) {
+							groupNo++;
+							gPos = 50;
+							byte gSel = s.selector[groupNo];
+							gMinLen = s.minLens[gSel];
+							gLimit = s.limit[gSel];
+							gPerm = s.perm[gSel];
+							gBase = s.base[gSel];
+						}
+
+						gPos--;
+						zn = gMinLen;
+
+						for (zvec = getBits(gMinLen, s); zvec > gLimit[zn]; zvec = zvec << 1 | zj) {
+							zn++;
+							zj = getBit(s);
+						}
+
+						nextSym = gPerm[zvec - gBase[zn]];
+					} while (nextSym == 0 || nextSym == 1);
+
+					es++;
+					byte var85 = s.seqToUnseq[s.mtfa[s.mtfbase[0]] & 0xFF];
+					s.unzftab[var85 & 0xFF] += es;
+
+					while (es > 0) {
+						BZip2State.tt[nblock] = var85 & 0xFF;
+						nblock++;
+						es--;
+					}
+				} else {
+					// uc = MTF ( nextSym-1 )
+
+					int nn = nextSym - 1;
+
+					if (nn < 16) {
+						// avoid general-case expense
+						int pp = s.mtfbase[0];
+						uc = s.mtfa[pp + nn];
+
+						while (nn > 3) {
+							int z = pp + nn;
+							s.mtfa[z] = s.mtfa[z - 1];
+							s.mtfa[z - 1] = s.mtfa[z - 2];
+							s.mtfa[z - 2] = s.mtfa[z - 3];
+							s.mtfa[z - 3] = s.mtfa[z - 4];
+							nn -= 4;
+						}
+
+						while (nn > 0) {
+							s.mtfa[pp + nn] = s.mtfa[pp + nn - 1];
+							nn--;
+						}
+
+						s.mtfa[pp] = uc;
+					} else {
+						// general case
+						int lno = nn / 16;
+						int off = nn % 16;
+
+						int pp = s.mtfbase[lno] + off;
+						uc = s.mtfa[pp];
+
+						while (pp > s.mtfbase[lno]) {
+							s.mtfa[pp] = s.mtfa[pp - 1];
+							pp--;
+						}
+
+						s.mtfbase[lno]++;
+
+						while (lno > 0) {
+							s.mtfbase[lno]--;
+							s.mtfa[s.mtfbase[lno]] = s.mtfa[s.mtfbase[lno - 1] + 16 - 1];
+							lno--;
+						}
+
+						s.mtfbase[0]--;
+						s.mtfa[s.mtfbase[0]] = uc;
+
+						if (s.mtfbase[0] == 0) {
+							kk = 4095;
+
+							for (int ii = 15; ii >= 0; ii--) {
+								for (int jj = 15; jj >= 0; jj--) {
+									s.mtfa[kk] = s.mtfa[s.mtfbase[ii] + jj];
+									kk--;
+								}
+
+								s.mtfbase[ii] = kk + 1;
+							}
+						}
+					}
+					// end uc = MTF ( nextSym-1 )
+
+					s.unzftab[s.seqToUnseq[uc & 0xFF] & 0xFF]++;
+					BZip2State.tt[nblock] = s.seqToUnseq[uc & 0xFF] & 0xFF;
+					nblock++;
+
+					if (gPos == 0) {
+						groupNo++;
+						gPos = 50;
+						byte gSel = s.selector[groupNo];
+						gMinLen = s.minLens[gSel];
+						gLimit = s.limit[gSel];
+						gPerm = s.perm[gSel];
+						gBase = s.base[gSel];
+					}
+
+					gPos--;
+					zn = gMinLen;
+
+					for (zvec = getBits(gMinLen, s); zvec > gLimit[zn]; zvec = zvec << 1 | zj) {
+						zn++;
+						zj = getBit(s);
+					}
+
+					nextSym = gPerm[zvec - gBase[zn]];
+				}
+			}
+
+			// Set up cftab to facilitate generation of T^(-1)
+
+			// Actually generate cftab
+			s.state_out_len = 0;
+			s.state_out_ch = 0;
+
+			s.cftab[0] = 0;
+
+			for (int i = 1; i <= 256; i++) {
+				s.cftab[i] = s.unzftab[i - 1];
+			}
+
+			for (int i = 1; i <= 256; i++) {
+				s.cftab[i] += s.cftab[i - 1];
+			}
+
+			for (int i = 0; i < nblock; i++) {
+				uc = (byte) (BZip2State.tt[i] & 0xFF);
+				BZip2State.tt[s.cftab[uc & 0xFF]] |= i << 8;
+				s.cftab[uc & 0xFF]++;
+			}
+
+			s.tPos = BZip2State.tt[s.origPtr] >> 8;
+			s.c_nblock_used = 0;
+
+			// macro: BZ_GET_FAST
+			s.tPos = BZip2State.tt[s.tPos];
+			s.k0 = (byte) (s.tPos & 0xFF);
+			s.tPos >>= 0x8;
+			s.c_nblock_used++;
+
+			s.save_nblock = nblock;
+			finish(s);
+
+			if (s.c_nblock_used == s.save_nblock + 1 && s.state_out_len == 0) {
+				reading = true;
+			} else {
+				reading = false;
+			}
 		}
 	}
 
 	@ObfuscatedName("sb.c(Ltb;)B")
-	public static byte getUnsignedChar(BZip2State arg0) {
-		return (byte) getBits(8, arg0);
+	public static byte getUnsignedChar(BZip2State s) {
+		return (byte) getBits(8, s);
 	}
 
 	@ObfuscatedName("sb.d(Ltb;)B")
-	public static byte getBit(BZip2State arg0) {
-		return (byte) getBits(1, arg0);
+	public static byte getBit(BZip2State s) {
+		return (byte) getBits(1, s);
 	}
 
 	@ObfuscatedName("sb.a(ILtb;)I")
-	public static int getBits(int arg0, BZip2State arg1) {
-		while (arg1.field779 < arg0) {
-			arg1.field778 = arg1.field778 << 8 | arg1.field765[arg1.field766] & 0xFF;
-			arg1.field779 += 8;
-			arg1.field766++;
-			arg1.field767--;
-			arg1.field768++;
-			if (arg1.field768 == 0) {
-				arg1.field769++;
+	public static int getBits(int n, BZip2State s) {
+		while (s.bsLive < n) {
+			s.bsBuff = s.bsBuff << 8 | s.stream[s.next_in] & 0xFF;
+			s.bsLive += 8;
+
+			s.next_in++;
+			s.avail_in--;
+
+			s.total_in_lo32++;
+			if (s.total_in_lo32 == 0) {
+				s.total_in_hi32++;
 			}
 		}
-		int var2 = arg1.field778 >> arg1.field779 - arg0 & (0x1 << arg0) - 1;
-		arg1.field779 -= arg0;
-		return var2;
+
+		int value = s.bsBuff >> s.bsLive - n & (0x1 << n) - 1;
+		s.bsLive -= n;
+		return value;
 	}
 
 	@ObfuscatedName("sb.e(Ltb;)V")
-	public static void makeMaps(BZip2State arg0) {
-		arg0.field790 = 0;
-		for (int var1 = 0; var1 < 256; var1++) {
-			if (arg0.field791[var1]) {
-				arg0.field793[arg0.field790] = (byte) var1;
-				arg0.field790++;
+	public static void makeMaps(BZip2State s) {
+		s.nInUse = 0;
+
+		for (int i = 0; i < 256; i++) {
+			if (s.inUse[i]) {
+				s.seqToUnseq[s.nInUse] = (byte) i;
+				s.nInUse++;
 			}
 		}
 	}
 
 	@ObfuscatedName("sb.a([I[I[I[BIII)V")
-	public static void createDecodeTables(int[] arg0, int[] arg1, int[] arg2, byte[] arg3, int arg4, int arg5, int arg6) {
-		int var7 = 0;
-		for (int var8 = arg4; var8 <= arg5; var8++) {
-			for (int var9 = 0; var9 < arg6; var9++) {
-				if (arg3[var9] == var8) {
-					arg2[var7] = var9;
-					var7++;
+	public static void createDecodeTables(int[] limit, int[] base, int[] perm, byte[] length, int minLen, int maxLen, int alphaSize) {
+		int pp = 0;
+		for (int i = minLen; i <= maxLen; i++) {
+			for (int j = 0; j < alphaSize; j++) {
+				if (length[j] == i) {
+					perm[pp] = j;
+					pp++;
 				}
 			}
 		}
-		for (int var10 = 0; var10 < 23; var10++) {
-			arg1[var10] = 0;
+
+		for (int i = 0; i < 23; i++) {
+			base[i] = 0;
 		}
-		for (int var11 = 0; var11 < arg6; var11++) {
-			arg1[arg3[var11] + 1]++;
+
+		for (int i = 0; i < alphaSize; i++) {
+			base[length[i] + 1]++;
 		}
-		for (int var12 = 1; var12 < 23; var12++) {
-			arg1[var12] += arg1[var12 - 1];
+
+		for (int i = 1; i < 23; i++) {
+			base[i] += base[i - 1];
 		}
-		for (int var13 = 0; var13 < 23; var13++) {
-			arg0[var13] = 0;
+
+		for (int i = 0; i < 23; i++) {
+			limit[i] = 0;
 		}
-		int var14 = 0;
-		for (int var15 = arg4; var15 <= arg5; var15++) {
-			int var16 = var14 + (arg1[var15 + 1] - arg1[var15]);
-			arg0[var15] = var16 - 1;
-			var14 = var16 << 1;
+
+		int vec = 0;
+		for (int i = minLen; i <= maxLen; i++) {
+			vec = vec + (base[i + 1] - base[i]);
+			limit[i] = vec - 1;
+			vec = vec << 1;
 		}
-		for (int var17 = arg4 + 1; var17 <= arg5; var17++) {
-			arg1[var17] = (arg0[var17 - 1] + 1 << 1) - arg1[var17];
+
+		for (int i = minLen + 1; i <= maxLen; i++) {
+			base[i] = (limit[i - 1] + 1 << 1) - base[i];
 		}
 	}
 }

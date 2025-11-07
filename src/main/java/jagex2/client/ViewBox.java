@@ -26,11 +26,11 @@ public class ViewBox extends Frame {
 		this.toFront();
 	}
 
-	public final void update(Graphics arg0) {
+	public void update(Graphics arg0) {
 		this.shell.update(arg0);
 	}
 
-	public final void paint(Graphics arg0) {
+	public void paint(Graphics arg0) {
 		this.shell.paint(arg0);
 	}
 }

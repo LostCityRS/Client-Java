@@ -59,16 +59,16 @@ public class ClientPlayer extends ClientEntity {
 	public int locOffsetZ;
 
 	@ObfuscatedName("bb.Ib")
-	public int field483;
+	public int minTileX;
 
 	@ObfuscatedName("bb.Jb")
-	public int field484;
+	public int minTileZ;
 
 	@ObfuscatedName("bb.Kb")
-	public int field485;
+	public int maxTileX;
 
 	@ObfuscatedName("bb.Lb")
-	public int field486;
+	public int maxTileZ;
 
 	@ObfuscatedName("bb.Ab")
 	public long hash;
@@ -80,7 +80,7 @@ public class ClientPlayer extends ClientEntity {
 	public NpcType transmog;
 
 	@ObfuscatedName("bb.a(Lmb;Z)V")
-	public final void read(Packet arg0) {
+	public void read(Packet arg0) {
 		arg0.pos = 0;
 		this.gender = arg0.g1();
 		this.headicon = arg0.g1();
@@ -158,7 +158,7 @@ public class ClientPlayer extends ClientEntity {
 	}
 
 	@ObfuscatedName("bb.a(I)Lfb;")
-	public final Model getModel() {
+	public Model getModel() {
 		if (!this.visible) {
 			return null;
 		}
@@ -226,7 +226,7 @@ public class ClientPlayer extends ClientEntity {
 	}
 
 	@ObfuscatedName("bb.c(I)Lfb;")
-	public final Model getAnimatedModel() {
+	public Model getAnimatedModel() {
 		if (this.transmog != null) {
 			int var2 = -1;
 			if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
@@ -327,7 +327,7 @@ public class ClientPlayer extends ClientEntity {
 		if (this.lowMemory) {
 			return var11;
 		}
-		Model var22 = Model.field534;
+		Model var22 = Model.empty;
 		var22.set(AnimFrame.isNull(var6) & AnimFrame.isNull(var7), var11);
 		if (var6 != -1 && var7 != -1) {
 			var22.applyFrames(SeqType.types[super.primarySeqId].walkmerge, -620, var6, var7);
@@ -341,7 +341,7 @@ public class ClientPlayer extends ClientEntity {
 	}
 
 	@ObfuscatedName("bb.b(Z)Lfb;")
-	public final Model getHeadModel() {
+	public Model getHeadModel() {
 		if (!this.visible) {
 			return null;
 		}
@@ -388,7 +388,7 @@ public class ClientPlayer extends ClientEntity {
 	}
 
 	@ObfuscatedName("bb.b(I)Z")
-	public final boolean isVisible() {
+	public boolean isVisible() {
 		return this.visible;
 	}
 }

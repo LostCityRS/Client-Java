@@ -167,7 +167,7 @@ public class FloType {
 	}
 
 	@ObfuscatedName("kc.a(III)I")
-	public final int rgb24to16(int arg0, int arg1, int arg2) {
+	public int rgb24to16(int arg0, int arg1, int arg2) {
 		if (arg2 > 179) {
 			arg1 /= 2;
 		}

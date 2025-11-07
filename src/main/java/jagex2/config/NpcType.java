@@ -107,7 +107,7 @@ public class NpcType {
 	public int contrast;
 
 	@ObfuscatedName("gc.a(Lyb;)V")
-	public static final void unpack(JagFile arg0) {
+	public static void unpack(JagFile arg0) {
 		dat = new Packet(arg0.read("npc.dat", null));
 		Packet var1 = new Packet(arg0.read("npc.idx", null));
 		count = var1.g2();
@@ -124,7 +124,7 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(I)V")
-	public static final void unload() {
+	public static void unload() {
 		modelCache = null;
 		idx = null;
 		cache = null;
@@ -132,7 +132,7 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.b(I)Lgc;")
-	public static final NpcType get(int arg0) {
+	public static NpcType get(int arg0) {
 		for (int var1 = 0; var1 < 20; var1++) {
 			if (cache[var1].id == (long) arg0) {
 				return cache[var1];
@@ -147,7 +147,7 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(ILmb;)V")
-	public final void decode(Packet arg1) {
+	public void decode(Packet arg1) {
 		while (true) {
 			int var3 = arg1.g1();
 			if (var3 == 0) {
@@ -225,7 +225,7 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(II[II)Lfb;")
-	public final Model getModel(int arg1, int[] arg2, int arg3) {
+	public Model getModel(int arg1, int[] arg2, int arg3) {
 		Model var5 = (Model) modelCache.get(this.id);
 		if (var5 == null) {
 			boolean var6 = false;
@@ -255,7 +255,7 @@ public class NpcType {
 			var5.calculateNormals(this.ambient + 64, this.contrast + 850, -30, -50, -30, true);
 			modelCache.put(var5, this.id);
 		}
-		Model var11 = Model.field534;
+		Model var11 = Model.empty;
 		var11.set(AnimFrame.isNull(arg1) & AnimFrame.isNull(arg3), var5);
 		if (arg1 != -1 && arg3 != -1) {
 			var11.applyFrames(arg2, -620, arg1, arg3);
@@ -275,7 +275,7 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.c(I)Lfb;")
-	public final Model getHeadModel() {
+	public Model getHeadModel() {
 		if (this.head == null) {
 			return null;
 		}

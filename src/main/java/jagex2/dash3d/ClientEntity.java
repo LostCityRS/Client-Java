@@ -14,10 +14,10 @@ public class ClientEntity extends ModelSource {
 	public int z;
 
 	@ObfuscatedName("z.q")
-	public int field412;
+	public int yaw;
 
 	@ObfuscatedName("z.r")
-	public boolean field413 = false;
+	public boolean needsForwardDrawPadding = false;
 
 	@ObfuscatedName("z.s")
 	public int size = 1;
@@ -44,25 +44,25 @@ public class ClientEntity extends ModelSource {
 	public int runanim = -1;
 
 	@ObfuscatedName("z.ab")
-	public int field448;
+	public int forceMoveStartSceneTileX;
 
 	@ObfuscatedName("z.bb")
-	public int field449;
+	public int forceMoveEndSceneTileX;
 
 	@ObfuscatedName("z.cb")
-	public int field450;
+	public int forceMoveStartSceneTileZ;
 
 	@ObfuscatedName("z.db")
-	public int field451;
+	public int forceMoveEndSceneTileZ;
 
 	@ObfuscatedName("z.eb")
-	public int field452;
+	public int forceMoveEndCycle;
 
 	@ObfuscatedName("z.fb")
-	public int field453;
+	public int forceMoveStartCycle;
 
 	@ObfuscatedName("z.gb")
-	public int field454;
+	public int forceMoveFaceDirection;
 
 	@ObfuscatedName("z.hb")
 	public int cycle;
@@ -74,7 +74,7 @@ public class ClientEntity extends ModelSource {
 	public int dstYaw;
 
 	@ObfuscatedName("z.kb")
-	public int field458 = 32;
+	public int turnspeed = 32;
 
 	@ObfuscatedName("z.lb")
 	public int routeLength;
@@ -95,7 +95,7 @@ public class ClientEntity extends ModelSource {
 	public int preanimRouteLength;
 
 	@ObfuscatedName("z.B")
-	public int field423 = 100;
+	public int chatTimer = 100;
 
 	@ObfuscatedName("z.E")
 	public int[] damage = new int[4];
@@ -107,10 +107,10 @@ public class ClientEntity extends ModelSource {
 	public int[] damageCycle = new int[4];
 
 	@ObfuscatedName("z.H")
-	public int field429 = -1000;
+	public int combatCycle = -1000;
 
 	@ObfuscatedName("z.K")
-	public int field432 = -1;
+	public int targetId = -1;
 
 	@ObfuscatedName("z.N")
 	public int secondarySeqId = -1;
@@ -122,58 +122,58 @@ public class ClientEntity extends ModelSource {
 	public int spotanimId = -1;
 
 	@ObfuscatedName("z.C")
-	public int field424;
+	public int chatColour;
 
 	@ObfuscatedName("z.D")
-	public int field425;
+	public int chatEffect;
 
 	@ObfuscatedName("z.I")
-	public int field430;
+	public int health;
 
 	@ObfuscatedName("z.J")
-	public int field431;
+	public int totalHealth;
 
 	@ObfuscatedName("z.L")
-	public int field433;
+	public int targetTileX;
 
 	@ObfuscatedName("z.M")
-	public int field434;
+	public int targetTileZ;
 
 	@ObfuscatedName("z.O")
 	public int secondarySeqFrame;
 
 	@ObfuscatedName("z.P")
-	public int field437;
+	public int secondarySeqCycle;
 
 	@ObfuscatedName("z.R")
 	public int primarySeqFrame;
 
 	@ObfuscatedName("z.S")
-	public int field440;
+	public int primarySeqCycle;
 
 	@ObfuscatedName("z.T")
 	public int primarySeqDelay;
 
 	@ObfuscatedName("z.U")
-	public int field442;
+	public int primarySeqLoop;
 
 	@ObfuscatedName("z.W")
 	public int spotanimFrame;
 
 	@ObfuscatedName("z.X")
-	public int field445;
+	public int spotanimCycle;
 
 	@ObfuscatedName("z.Y")
-	public int field446;
+	public int spotanimLastCycle;
 
 	@ObfuscatedName("z.Z")
 	public int spotanimHeight;
 
 	@ObfuscatedName("z.A")
-	public String field422;
+	public String chatMessage;
 
 	@ObfuscatedName("z.a(IIZZ)V")
-	public final void move(int arg0, int arg1, boolean arg3) {
+	public void move(int arg0, int arg1, boolean arg3) {
 		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_move == 1) {
 			this.primarySeqId = -1;
 		}
@@ -205,7 +205,7 @@ public class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("z.a(ZIB)V")
-	public final void step(boolean arg0, int arg1) {
+	public void step(boolean arg0, int arg1) {
 		int var4 = this.routeTileX[0];
 		int var5 = this.routeTileZ[0];
 		if (arg1 == 0) {
@@ -253,7 +253,7 @@ public class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("z.a(Z)V")
-	public final void clearRoute() {
+	public void clearRoute() {
 		this.routeLength = 0;
 		this.preanimRouteLength = 0;
 	}
@@ -264,7 +264,7 @@ public class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("z.a(III)V")
-	public final void hit(int arg1, int arg2) {
+	public void hit(int arg1, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			if (this.damageCycle[var4] <= Client.loopCycle) {
 				this.damage[var4] = arg2;

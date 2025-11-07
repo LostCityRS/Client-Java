@@ -154,7 +154,7 @@ public class ObjType {
 	public String[] iop;
 
 	@ObfuscatedName("hc.a(Lyb;)V")
-	public static final void unpack(JagFile arg0) {
+	public static void unpack(JagFile arg0) {
 		dat = new Packet(arg0.read("obj.dat", null));
 		Packet var1 = new Packet(arg0.read("obj.idx", null));
 		count = var1.g2();
@@ -171,7 +171,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(I)V")
-	public static final void unload() {
+	public static void unload() {
 		modelCache = null;
 		iconCache = null;
 		idx = null;
@@ -180,7 +180,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.b(I)Lhc;")
-	public static final ObjType get(int arg0) {
+	public static ObjType get(int arg0) {
 		for (int var1 = 0; var1 < 10; var1++) {
 			if (cache[var1].id == arg0) {
 				return cache[var1];
@@ -205,7 +205,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a()V")
-	public final void reset() {
+	public void reset() {
 		this.model = 0;
 		this.name = null;
 		this.desc = null;
@@ -247,7 +247,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(ILmb;)V")
-	public final void decode(Packet arg1) {
+	public void decode(Packet arg1) {
 		while (true) {
 			int var4 = arg1.g1();
 			if (var4 == 0) {
@@ -379,7 +379,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.c(I)Lfb;")
-	public final Model getModel(int arg0) {
+	public Model getModel(int arg0) {
 		if (this.countobj != null && arg0 > 1) {
 			int var2 = -1;
 			for (int var3 = 0; var3 < 10; var3++) {
@@ -414,7 +414,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(II)Lfb;")
-	public final Model getInvModel(int arg1) {
+	public Model getInvModel(int arg1) {
 		if (this.countobj != null && arg1 > 1) {
 			int var3 = -1;
 			for (int var4 = 0; var4 < 10; var4++) {
@@ -439,7 +439,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(IIII)Ljb;")
-	public static final Pix32 getIcon(int arg0, int arg1, int arg2) {
+	public static Pix32 getIcon(int arg0, int arg1, int arg2) {
 		if (arg0 == 0) {
 			Pix32 var4 = (Pix32) iconCache.get((long) arg2);
 			if (var4 != null && var4.ohi != arg1 && var4.ohi != -1) {
@@ -500,7 +500,7 @@ public class ObjType {
 		}
 		int var22 = Pix3D.sinTable[var5.xan2d] * var21 >> 16;
 		int var23 = Pix3D.cosTable[var5.xan2d] * var21 >> 16;
-		var8.method159(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var22 + var8.minY / 2 + var5.yof2d, var23 + var5.yof2d);
+		var8.drawSimple(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var22 + var8.minY / 2 + var5.yof2d, var23 + var5.yof2d);
 		for (int var24 = 31; var24 >= 0; var24--) {
 			for (int var25 = 31; var25 >= 0; var25--) {
 				if (var10.pixels[var24 + var25 * 32] == 0) {
@@ -569,7 +569,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(BI)Z")
-	public final boolean checkWearModel(int arg1) {
+	public boolean checkWearModel(int arg1) {
 		int var3 = this.manwear;
 		int var4 = this.manwear2;
 		int var5 = this.manwear3;
@@ -595,7 +595,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.b(II)Lfb;")
-	public final Model getWearModel(int arg1) {
+	public Model getWearModel(int arg1) {
 		int var4 = this.manwear;
 		int var5 = this.manwear2;
 		int var6 = this.manwear3;
@@ -635,7 +635,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(ZI)Z")
-	public final boolean checkHeadModel(int arg1) {
+	public boolean checkHeadModel(int arg1) {
 		int var3 = this.manhead;
 		int var4 = this.manhead2;
 		if (arg1 == 1) {
@@ -656,7 +656,7 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.b(ZI)Lfb;")
-	public final Model getHeadModel(int arg1) {
+	public Model getHeadModel(int arg1) {
 		int var3 = this.manhead;
 		int var4 = this.manhead2;
 		if (arg1 == 1) {

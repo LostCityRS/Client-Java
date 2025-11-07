@@ -56,7 +56,7 @@ public class ClientLocAnim extends ModelSource {
 	}
 
 	@ObfuscatedName("cb.a(I)Lfb;")
-	public final Model getModel() {
+	public Model getModel() {
 		if (this.seq != null) {
 			int var2 = Client.loopCycle - this.seqCycle;
 			if (var2 > 100 && this.seq.loops > 0) {

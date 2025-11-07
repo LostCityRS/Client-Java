@@ -94,7 +94,7 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(IIBII)V")
-	public final void updateVelocity(int arg0, int arg1, int arg3, int arg4) {
+	public void updateVelocity(int arg0, int arg1, int arg3, int arg4) {
 		if (!this.mobile) {
 			double var6 = (double) (arg3 - this.srcX);
 			double var8 = (double) (arg0 - this.srcZ);
@@ -114,7 +114,7 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(II)V")
-	public final void update(int arg1) {
+	public void update(int arg1) {
 		this.mobile = true;
 		this.x += this.velocityX * (double) arg1;
 		this.z += this.velocityZ * (double) arg1;
@@ -135,7 +135,7 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(I)Lfb;")
-	public final Model getModel() {
+	public Model getModel() {
 		Model var2 = this.graphic.getModel();
 		if (var2 == null) {
 			return null;

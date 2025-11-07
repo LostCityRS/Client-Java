@@ -76,7 +76,7 @@ public class Tone {
 	public static int[] fOffset = new int[5];
 
 	@ObfuscatedName("dc.a()V")
-	public static final void init() {
+	public static void init() {
 		noise = new int[32768];
 		for (int var0 = 0; var0 < 32768; var0++) {
 			if (Math.random() > 0.5D) {
@@ -93,7 +93,7 @@ public class Tone {
 	}
 
 	@ObfuscatedName("dc.a(II)[I")
-	public final int[] generate(int arg0, int arg1) {
+	public int[] generate(int arg0, int arg1) {
 		for (int var3 = 0; var3 < arg0; var3++) {
 			buf[var3] = 0;
 		}
@@ -198,7 +198,7 @@ public class Tone {
 	}
 
 	@ObfuscatedName("dc.a(IBII)I")
-	public final int waveFunc(int arg0, int arg2, int arg3) {
+	public int waveFunc(int arg0, int arg2, int arg3) {
 		if (arg0 == 1) {
 			return (arg3 & 0x7FFF) < 16384 ? arg2 : -arg2;
 		} else if (arg0 == 2) {
@@ -213,7 +213,7 @@ public class Tone {
 	}
 
 	@ObfuscatedName("dc.a(ILmb;)V")
-	public final void unpack(Packet arg1) {
+	public void unpack(Packet arg1) {
 		this.frequencyBase = new Envelope();
 		this.frequencyBase.unpack(arg1);
 		this.amplitudeBase = new Envelope();
