@@ -26,7 +26,7 @@ public class ClientNpc extends ClientEntity {
 				Model var4 = var3.getModel();
 				if (var4 != null) {
 					int var5 = var3.seq.frames[super.spotanimFrame];
-					Model var6 = new Model(AnimFrame.isNull(var5), false, true, var4);
+					Model var6 = new Model(AnimFrame.shareAlpha(var5), false, true, var4);
 					var6.offset(0, 0, -super.spotanimHeight);
 					var6.createLabelReferences();
 					var6.applyFrame(var5);

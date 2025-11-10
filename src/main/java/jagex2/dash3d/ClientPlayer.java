@@ -175,7 +175,7 @@ public class ClientPlayer extends ClientEntity {
 			SpotAnimType var3 = SpotAnimType.types[super.spotanimId];
 			Model var4 = var3.getModel();
 			if (var4 != null) {
-				Model var5 = new Model(AnimFrame.isNull(super.spotanimFrame), false, true, var4);
+				Model var5 = new Model(AnimFrame.shareAlpha(super.spotanimFrame), false, true, var4);
 				var5.offset(0, 0, -super.spotanimHeight);
 				var5.createLabelReferences();
 				var5.applyFrame(var3.seq.frames[super.spotanimFrame]);
@@ -328,9 +328,9 @@ public class ClientPlayer extends ClientEntity {
 			return var11;
 		}
 		Model var22 = Model.empty;
-		var22.set(AnimFrame.isNull(var6) & AnimFrame.isNull(var7), var11);
+		var22.set(AnimFrame.shareAlpha(var6) & AnimFrame.shareAlpha(var7), var11);
 		if (var6 != -1 && var7 != -1) {
-			var22.applyFrames(SeqType.types[super.primarySeqId].walkmerge, -620, var6, var7);
+			var22.applyFrames(SeqType.types[super.primarySeqId].walkmerge, var6, var7);
 		} else if (var6 != -1) {
 			var22.applyFrame(var6);
 		}

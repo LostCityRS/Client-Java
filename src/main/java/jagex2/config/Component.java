@@ -439,7 +439,7 @@ public class Component {
 		} else if (arg1 == -1 && arg3 == -1 && var5.faceColour == null) {
 			return var5;
 		} else {
-			Model var6 = new Model(AnimFrame.isNull(arg1) & AnimFrame.isNull(arg3), false, true, var5);
+			Model var6 = new Model(AnimFrame.shareAlpha(arg1) & AnimFrame.shareAlpha(arg3), false, true, var5);
 			if (arg1 != -1 || arg3 != -1) {
 				var6.createLabelReferences();
 			}

@@ -68,7 +68,7 @@ public class MapSpotAnim extends ModelSource {
 			return null;
 		}
 		int var3 = this.type.seq.frames[this.seqFrame];
-		Model var4 = new Model(AnimFrame.isNull(var3), false, true, var2);
+		Model var4 = new Model(AnimFrame.shareAlpha(var3), false, true, var2);
 		if (!this.seqComplete) {
 			var4.createLabelReferences();
 			var4.applyFrame(var3);

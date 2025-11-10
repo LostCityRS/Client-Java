@@ -333,10 +333,8 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(ZI)V")
-	public static void unload(boolean arg0, int arg1) {
-		if (arg0) {
-			meta[arg1] = null;
-		}
+	public static void unload(int arg1) {
+		meta[arg1] = null;
 	}
 
 	@ObfuscatedName("fb.a(II)Lfb;")
@@ -1081,7 +1079,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a([IIII)V")
-	public void applyFrames(int[] arg0, int arg1, int arg2, int arg3) {
+	public void applyFrames(int[] arg0, int arg2, int arg3) {
 		if (arg2 == -1) {
 			return;
 		}
@@ -1090,7 +1088,7 @@ public class Model extends ModelSource {
 			return;
 		}
 		AnimFrame var5 = AnimFrame.get(arg2);
-		if (arg1 >= 0 || var5 == null) {
+		if (var5 == null) {
 			return;
 		}
 		AnimFrame var6 = AnimFrame.get(arg3);

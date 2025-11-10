@@ -256,9 +256,9 @@ public class NpcType {
 			modelCache.put(var5, this.id);
 		}
 		Model var11 = Model.empty;
-		var11.set(AnimFrame.isNull(arg1) & AnimFrame.isNull(arg3), var5);
+		var11.set(AnimFrame.shareAlpha(arg1) & AnimFrame.shareAlpha(arg3), var5);
 		if (arg1 != -1 && arg3 != -1) {
-			var11.applyFrames(arg2, -620, arg1, arg3);
+			var11.applyFrames(arg2, arg1, arg3);
 		} else if (arg1 != -1) {
 			var11.applyFrame(arg1);
 		}

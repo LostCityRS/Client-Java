@@ -144,7 +144,7 @@ public class ClientProj extends ModelSource {
 		if (this.graphic.seq != null) {
 			var3 = this.graphic.seq.frames[this.seqFrame];
 		}
-		Model var4 = new Model(AnimFrame.isNull(var3), false, true, var2);
+		Model var4 = new Model(AnimFrame.shareAlpha(var3), false, true, var2);
 		if (var3 != -1) {
 			var4.createLabelReferences();
 			var4.applyFrame(var3);

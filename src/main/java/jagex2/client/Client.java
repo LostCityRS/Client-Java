@@ -3200,7 +3200,7 @@ public class Client extends GameShell {
 			for (int var24 = 0; var24 < var23; var24++) {
 				int var25 = this.onDemand.getModelFlags(var24);
 				if ((var25 & 0x79) == 0) {
-					Model.unload(true, var24);
+					Model.unload(var24);
 				}
 			}
 		}

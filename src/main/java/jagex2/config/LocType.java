@@ -502,7 +502,7 @@ public class LocType {
 		} else {
 			var20 = true;
 		}
-		Model var21 = new Model(AnimFrame.isNull(arg2), arg3 == 0 && arg2 == -1 && !var19 && !var20, this.recol_s == null, var5);
+		Model var21 = new Model(AnimFrame.shareAlpha(arg2), arg3 == 0 && arg2 == -1 && !var19 && !var20, this.recol_s == null, var5);
 		if (arg2 != -1) {
 			var21.createLabelReferences();
 			var21.applyFrame(arg2);

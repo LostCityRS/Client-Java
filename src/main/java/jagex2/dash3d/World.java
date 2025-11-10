@@ -283,17 +283,14 @@ public class World {
 					if (var21 >= 0) {
 						var22 = arg4[var21];
 					}
-					this.addLoc(var17, var18, var19, var8, var15, 20, var22, var20, arg1);
+					this.addLoc(var17, var18, var19, var8, var15, var22, var20, arg1);
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("c.a(IIIIIILjc;ILs;)V")
-	public void addLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, CollisionMap arg6, int arg7, World3D arg8) {
-		if (arg5 <= 0) {
-			return;
-		}
+	public void addLoc(int arg0, int arg1, int arg2, int arg3, int arg4, CollisionMap arg6, int arg7, World3D arg8) {
 		if (lowMem) {
 			if ((this.flags[arg4][arg2][arg7] & 0x10) != 0) {
 				return;

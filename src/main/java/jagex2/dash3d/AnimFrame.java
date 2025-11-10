@@ -146,7 +146,7 @@ public class AnimFrame {
 	}
 
 	@ObfuscatedName("h.a(BI)Z")
-	public static boolean isNull(int arg1) {
+	public static boolean shareAlpha(int arg1) {
 		return arg1 == -1;
 	}
 }
