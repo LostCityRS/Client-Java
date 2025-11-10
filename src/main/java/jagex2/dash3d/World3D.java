@@ -722,7 +722,7 @@ public class World3D {
 							this.mergeLocNormals(var11, var10, var9, (Model) var13.model1, 1, 1);
 							if (var13.model2 != null && var13.model2.vertexNormal != null) {
 								this.mergeLocNormals(var11, var10, var9, (Model) var13.model2, 1, 1);
-								this.mergeNormals((Model) var13.model1, (Model) var13.model2, 0, 0, 0);
+								this.mergeNormals((Model) var13.model1, (Model) var13.model2, 0, 0, 0, false);
 								((Model) var13.model2).applyLighting(arg2, var8, arg4, arg3, arg5);
 							}
 							((Model) var13.model1).applyLighting(arg2, var8, arg4, arg3, arg5);
@@ -750,25 +750,25 @@ public class World3D {
 		if (arg4 < this.maxTileX) {
 			Square var7 = this.levelTiles[arg2][arg4 + 1][arg1];
 			if (var7 != null && var7.groundDecor != null && var7.groundDecor.model.vertexNormal != null) {
-				this.mergeNormals(arg0, (Model) var7.groundDecor.model, 128, 0, 0);
+				this.mergeNormals(arg0, (Model) var7.groundDecor.model, 128, 0, 0, true);
 			}
 		}
 		if (arg1 < this.maxTileX) {
 			Square var8 = this.levelTiles[arg2][arg4][arg1 + 1];
 			if (var8 != null && var8.groundDecor != null && var8.groundDecor.model.vertexNormal != null) {
-				this.mergeNormals(arg0, (Model) var8.groundDecor.model, 0, 0, 128);
+				this.mergeNormals(arg0, (Model) var8.groundDecor.model, 0, 0, 128, true);
 			}
 		}
 		if (arg4 < this.maxTileX && arg1 < this.maxTileZ) {
 			Square var9 = this.levelTiles[arg2][arg4 + 1][arg1 + 1];
 			if (var9 != null && var9.groundDecor != null && var9.groundDecor.model.vertexNormal != null) {
-				this.mergeNormals(arg0, (Model) var9.groundDecor.model, 128, 0, 128);
+				this.mergeNormals(arg0, (Model) var9.groundDecor.model, 128, 0, 128, true);
 			}
 		}
 		if (arg4 < this.maxTileX && arg1 > 0) {
 			Square var10 = this.levelTiles[arg2][arg4 + 1][arg1 - 1];
 			if (var10 != null && var10.groundDecor != null && var10.groundDecor.model.vertexNormal != null) {
-				this.mergeNormals(arg0, (Model) var10.groundDecor.model, 128, 0, -128);
+				this.mergeNormals(arg0, (Model) var10.groundDecor.model, 128, 0, -128, true);
 			}
 		}
 	}
@@ -791,17 +791,17 @@ public class World3D {
 									int var18 = (this.levelHeightmaps[var14][var15][var16] + this.levelHeightmaps[var14][var15 + 1][var16] + this.levelHeightmaps[var14][var15][var16 + 1] + this.levelHeightmaps[var14][var15 + 1][var16 + 1]) / 4 - (this.levelHeightmaps[arg2][arg1][arg0] + this.levelHeightmaps[arg2][arg1 + 1][arg0] + this.levelHeightmaps[arg2][arg1][arg0 + 1] + this.levelHeightmaps[arg2][arg1 + 1][arg0 + 1]) / 4;
 									Wall var19 = var17.wall;
 									if (var19 != null && var19.model1 != null && var19.model1.vertexNormal != null) {
-										this.mergeNormals(arg3, (Model) var19.model1, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64);
+										this.mergeNormals(arg3, (Model) var19.model1, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64, var8);
 									}
 									if (var19 != null && var19.model2 != null && var19.model2.vertexNormal != null) {
-										this.mergeNormals(arg3, (Model) var19.model2, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64);
+										this.mergeNormals(arg3, (Model) var19.model2, (var15 - arg1) * 128 + (1 - arg6) * 64, var18, (var16 - arg0) * 128 + (1 - arg5) * 64, var8);
 									}
 									for (int var20 = 0; var20 < var17.primaryCount; var20++) {
 										Sprite var21 = var17.sprite[var20];
 										if (var21 != null && var21.model != null && var21.model.vertexNormal != null) {
 											int var22 = var21.maxGridX - var21.minGridX + 1;
 											int var23 = var21.maxGridZ - var21.minGridZ + 1;
-											this.mergeNormals(arg3, (Model) var21.model, (var21.minGridX - arg1) * 128 + (var22 - arg6) * 64, var18, (var21.minGridZ - arg0) * 128 + (var23 - arg5) * 64);
+											this.mergeNormals(arg3, (Model) var21.model, (var21.minGridX - arg1) * 128 + (var22 - arg6) * 64, var18, (var21.minGridZ - arg0) * 128 + (var23 - arg5) * 64, var8);
 										}
 									}
 								}
@@ -816,7 +816,7 @@ public class World3D {
 	}
 
 	@ObfuscatedName("s.a(Lfb;Lfb;IIIZ)V")
-	public void mergeNormals(Model arg0, Model arg1, int arg2, int arg3, int arg4) {
+	public void mergeNormals(Model arg0, Model arg1, int arg2, int arg3, int arg4, boolean arg5) {
 		this.tmpMergeIndex++;
 		int var7 = 0;
 		int[] var8 = arg1.vertexX;
@@ -853,7 +853,7 @@ public class World3D {
 				}
 			}
 		}
-		if (var7 < 3) {
+		if (var7 < 3 || !arg5) {
 			return;
 		}
 		for (int var19 = 0; var19 < arg0.faceCount; var19++) {
