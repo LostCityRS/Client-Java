@@ -225,12 +225,12 @@ public class NpcType {
 	}
 
 	@ObfuscatedName("gc.a(II[II)Lfb;")
-	public Model getModel(int arg1, int[] arg2, int arg3) {
+	public Model getTempModel(int arg1, int[] arg2, int arg3) {
 		Model var5 = (Model) modelCache.get(this.id);
 		if (var5 == null) {
 			boolean var6 = false;
 			for (int var7 = 0; var7 < this.models.length; var7++) {
-				if (!Model.check(this.models[var7])) {
+				if (!Model.requestDownload(this.models[var7])) {
 					var6 = true;
 				}
 			}
@@ -239,7 +239,7 @@ public class NpcType {
 			}
 			Model[] var8 = new Model[this.models.length];
 			for (int var9 = 0; var9 < this.models.length; var9++) {
-				var8[var9] = Model.tryGet(this.models[var9]);
+				var8[var9] = Model.load(this.models[var9]);
 			}
 			if (var8.length == 1) {
 				var5 = var8[0];
@@ -251,37 +251,37 @@ public class NpcType {
 					var5.recolour(this.recol_s[var10], this.recol_d[var10]);
 				}
 			}
-			var5.createLabelReferences();
+			var5.prepareAnim();
 			var5.calculateNormals(this.ambient + 64, this.contrast + 850, -30, -50, -30, true);
 			modelCache.put(var5, this.id);
 		}
 		Model var11 = Model.empty;
 		var11.set(AnimFrame.shareAlpha(arg1) & AnimFrame.shareAlpha(arg3), var5);
 		if (arg1 != -1 && arg3 != -1) {
-			var11.applyFrames(arg2, arg1, arg3);
+			var11.maskAnimate(arg2, arg1, arg3);
 		} else if (arg1 != -1) {
-			var11.applyFrame(arg1);
+			var11.animate(arg1);
 		}
 		if (this.resizeh != 128 || this.resizev != 128) {
 			var11.resize(this.resizeh, this.resizeh, this.resizev);
 		}
-		var11.calculateBoundsCylinder();
+		var11.calcBoundingCylinder();
 		var11.labelFaces = null;
 		var11.labelVertices = null;
 		if (this.size == 1) {
-			var11.picking = true;
+			var11.useAABBMouseCheck = true;
 		}
 		return var11;
 	}
 
 	@ObfuscatedName("gc.c(I)Lfb;")
-	public Model getHeadModel() {
+	public Model getHead() {
 		if (this.head == null) {
 			return null;
 		}
 		boolean var2 = false;
 		for (int var3 = 0; var3 < this.head.length; var3++) {
-			if (!Model.check(this.head[var3])) {
+			if (!Model.requestDownload(this.head[var3])) {
 				var2 = true;
 			}
 		}
@@ -290,7 +290,7 @@ public class NpcType {
 		}
 		Model[] var4 = new Model[this.head.length];
 		for (int var5 = 0; var5 < this.head.length; var5++) {
-			var4[var5] = Model.tryGet(this.head[var5]);
+			var4[var5] = Model.load(this.head[var5]);
 		}
 		Model var6;
 		if (var4.length == 1) {

@@ -37,7 +37,7 @@ public class PixFont extends Pix2D {
 	public boolean strikeout = false;
 
 	@ObfuscatedName("lb.L")
-	public int height;
+	public int height2d;
 
 	@ObfuscatedName("lb.O")
 	public static int[] CHAR_LOOKUP = new int[256];
@@ -70,8 +70,8 @@ public class PixFont extends Pix2D {
 					}
 				}
 			}
-			if (var11 > this.height) {
-				this.height = var11;
+			if (var11 > this.height2d) {
+				this.height2d = var11;
 			}
 			this.charOffsetX[var8] = 1;
 			this.charAdvance[var8] = var10 + 2;
@@ -129,7 +129,7 @@ public class PixFont extends Pix2D {
 		if (arg4 == null) {
 			return;
 		}
-		int var6 = arg2 - this.height;
+		int var6 = arg2 - this.height2d;
 		for (int var7 = 0; var7 < arg4.length(); var7++) {
 			int var8 = CHAR_LOOKUP[arg4.charAt(var7)];
 			if (var8 != 94) {
@@ -145,7 +145,7 @@ public class PixFont extends Pix2D {
 			return;
 		}
 		int var7 = arg3 - this.stringWid(arg4) / 2;
-		int var8 = arg5 - this.height;
+		int var8 = arg5 - this.height2d;
 		for (int var10 = 0; var10 < arg4.length(); var10++) {
 			int var11 = CHAR_LOOKUP[arg4.charAt(var10)];
 			if (var11 != 94) {
@@ -162,7 +162,7 @@ public class PixFont extends Pix2D {
 		if (arg1 == null) {
 			return;
 		}
-		int var8 = arg2 - this.height;
+		int var8 = arg2 - this.height2d;
 		for (int var9 = 0; var9 < arg1.length(); var9++) {
 			if (arg1.charAt(var9) == '@' && var9 + 4 < arg1.length() && arg1.charAt(var9 + 4) == '@') {
 				int var10 = this.evaluateTag(arg1.substring(var9 + 1, var9 + 4));
@@ -182,7 +182,7 @@ public class PixFont extends Pix2D {
 			}
 		}
 		if (this.strikeout) {
-			Pix2D.hline(var7, var8 + (int) ((double) this.height * 0.7D), 8388608, arg5 - var7);
+			Pix2D.hline(var7, var8 + (int) ((double) this.height2d * 0.7D), 8388608, arg5 - var7);
 		}
 	}
 
@@ -193,7 +193,7 @@ public class PixFont extends Pix2D {
 		}
 		this.random.setSeed((long) arg5);
 		int var8 = (this.random.nextInt() & 0x1F) + 192;
-		int var9 = arg0 - this.height;
+		int var9 = arg0 - this.height2d;
 		for (int var10 = 0; var10 < arg1.length(); var10++) {
 			if (arg1.charAt(var10) == '@' && var10 + 4 < arg1.length() && arg1.charAt(var10 + 4) == '@') {
 				int var11 = this.evaluateTag(arg1.substring(var10 + 1, var10 + 4));
@@ -263,42 +263,42 @@ public class PixFont extends Pix2D {
 
 	@ObfuscatedName("lb.a([BIIIII)V")
 	public void plotLetter(byte[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		int var7 = arg1 + arg2 * Pix2D.width2d;
-		int var8 = Pix2D.width2d - arg3;
+		int var7 = arg1 + arg2 * Pix2D.width;
+		int var8 = Pix2D.width - arg3;
 		int var9 = 0;
 		int var10 = 0;
-		if (arg2 < Pix2D.top) {
-			int var11 = Pix2D.top - arg2;
+		if (arg2 < Pix2D.boundTop) {
+			int var11 = Pix2D.boundTop - arg2;
 			arg4 -= var11;
-			arg2 = Pix2D.top;
+			arg2 = Pix2D.boundTop;
 			var10 += var11 * arg3;
-			var7 += var11 * Pix2D.width2d;
+			var7 += var11 * Pix2D.width;
 		}
-		if (arg2 + arg4 >= Pix2D.bottom) {
-			arg4 -= arg2 + arg4 - Pix2D.bottom + 1;
+		if (arg2 + arg4 >= Pix2D.boundBottom) {
+			arg4 -= arg2 + arg4 - Pix2D.boundBottom + 1;
 		}
-		if (arg1 < Pix2D.left) {
-			int var12 = Pix2D.left - arg1;
+		if (arg1 < Pix2D.boundLeft) {
+			int var12 = Pix2D.boundLeft - arg1;
 			arg3 -= var12;
-			arg1 = Pix2D.left;
+			arg1 = Pix2D.boundLeft;
 			var10 += var12;
 			var7 += var12;
 			var9 += var12;
 			var8 += var12;
 		}
-		if (arg1 + arg3 >= Pix2D.right) {
-			int var13 = arg1 + arg3 - Pix2D.right + 1;
+		if (arg1 + arg3 >= Pix2D.boundRight) {
+			int var13 = arg1 + arg3 - Pix2D.boundRight + 1;
 			arg3 -= var13;
 			var9 += var13;
 			var8 += var13;
 		}
 		if (arg3 > 0 && arg4 > 0) {
-			this.plotLetterInner(Pix2D.data, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
+			this.plot(Pix2D.pixels, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
 		}
 	}
 
 	@ObfuscatedName("lb.a([I[BIIIIIII)V")
-	public void plotLetterInner(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void plot(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = -(arg5 >> 2);
 		int var11 = -(arg5 & 0x3);
 		for (int var12 = -arg6; var12 < 0; var12++) {
@@ -338,42 +338,42 @@ public class PixFont extends Pix2D {
 
 	@ObfuscatedName("lb.a(IIIII[BII)V")
 	public void plotLetterTrans(int arg0, int arg1, int arg2, int arg3, int arg4, byte[] arg5, int arg7) {
-		int var9 = arg7 + arg1 * Pix2D.width2d;
-		int var10 = Pix2D.width2d - arg4;
+		int var9 = arg7 + arg1 * Pix2D.width;
+		int var10 = Pix2D.width - arg4;
 		int var11 = 0;
 		int var12 = 0;
-		if (arg1 < Pix2D.top) {
-			int var13 = Pix2D.top - arg1;
+		if (arg1 < Pix2D.boundTop) {
+			int var13 = Pix2D.boundTop - arg1;
 			arg0 -= var13;
-			arg1 = Pix2D.top;
+			arg1 = Pix2D.boundTop;
 			var12 += var13 * arg4;
-			var9 += var13 * Pix2D.width2d;
+			var9 += var13 * Pix2D.width;
 		}
-		if (arg1 + arg0 >= Pix2D.bottom) {
-			arg0 -= arg1 + arg0 - Pix2D.bottom + 1;
+		if (arg1 + arg0 >= Pix2D.boundBottom) {
+			arg0 -= arg1 + arg0 - Pix2D.boundBottom + 1;
 		}
-		if (arg7 < Pix2D.left) {
-			int var14 = Pix2D.left - arg7;
+		if (arg7 < Pix2D.boundLeft) {
+			int var14 = Pix2D.boundLeft - arg7;
 			arg4 -= var14;
-			arg7 = Pix2D.left;
+			arg7 = Pix2D.boundLeft;
 			var12 += var14;
 			var9 += var14;
 			var11 += var14;
 			var10 += var14;
 		}
-		if (arg7 + arg4 >= Pix2D.right) {
-			int var15 = arg7 + arg4 - Pix2D.right + 1;
+		if (arg7 + arg4 >= Pix2D.boundRight) {
+			int var15 = arg7 + arg4 - Pix2D.boundRight + 1;
 			arg4 -= var15;
 			var11 += var15;
 			var10 += var15;
 		}
 		if (arg4 > 0 && arg0 > 0) {
-			this.plotLetterTransInner(arg2, Pix2D.data, arg4, arg3, var11, arg5, var12, var10, arg0, var9);
+			this.plotTrans(arg2, Pix2D.pixels, arg4, arg3, var11, arg5, var12, var10, arg0, var9);
 		}
 	}
 
 	@ObfuscatedName("lb.a(I[IIIII[BIIII)V")
-	public void plotLetterTransInner(int arg0, int[] arg1, int arg2, int arg3, int arg5, byte[] arg6, int arg7, int arg8, int arg9, int arg10) {
+	public void plotTrans(int arg0, int[] arg1, int arg2, int arg3, int arg5, byte[] arg6, int arg7, int arg8, int arg9, int arg10) {
 		int var12 = ((arg0 & 0xFF00FF) * arg3 & 0xFF00FF00) + ((arg0 & 0xFF00) * arg3 & 0xFF0000) >> 8;
 		int var13 = 256 - arg3;
 		for (int var14 = -arg9; var14 < 0; var14++) {

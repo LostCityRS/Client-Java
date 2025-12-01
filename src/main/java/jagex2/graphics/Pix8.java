@@ -29,7 +29,7 @@ public class Pix8 extends Pix2D {
 	public int hi;
 
 	@ObfuscatedName("kb.A")
-	public byte[] pixels;
+	public byte[] data;
 
 	public Pix8(JagFile arg0, String arg1, int arg2) {
 		Packet var4 = new Packet(arg0.read(arg1 + ".dat", null));
@@ -53,15 +53,15 @@ public class Pix8 extends Pix2D {
 		this.hi = var5.g2();
 		int var9 = var5.g1();
 		int var10 = this.wi * this.hi;
-		this.pixels = new byte[var10];
+		this.data = new byte[var10];
 		if (var9 == 0) {
 			for (int var11 = 0; var11 < var10; var11++) {
-				this.pixels[var11] = var4.g1b();
+				this.data[var11] = var4.g1b();
 			}
 		} else if (var9 == 1) {
 			for (int var12 = 0; var12 < this.wi; var12++) {
 				for (int var13 = 0; var13 < this.hi; var13++) {
-					this.pixels[var12 + var13 * this.wi] = var4.g1b();
+					this.data[var12 + var13 * this.wi] = var4.g1b();
 				}
 			}
 		}
@@ -75,10 +75,10 @@ public class Pix8 extends Pix2D {
 		int var3 = 0;
 		for (int var4 = 0; var4 < this.hi; var4++) {
 			for (int var5 = 0; var5 < this.wi; var5++) {
-				var2[(var5 + this.xof >> 1) + (var4 + this.yof >> 1) * this.owi] = this.pixels[var3++];
+				var2[(var5 + this.xof >> 1) + (var4 + this.yof >> 1) * this.owi] = this.data[var3++];
 			}
 		}
-		this.pixels = var2;
+		this.data = var2;
 		this.wi = this.owi;
 		this.hi = this.ohi;
 		this.xof = 0;
@@ -94,10 +94,10 @@ public class Pix8 extends Pix2D {
 		int var3 = 0;
 		for (int var4 = 0; var4 < this.hi; var4++) {
 			for (int var5 = 0; var5 < this.wi; var5++) {
-				var2[var5 + this.xof + (var4 + this.yof) * this.owi] = this.pixels[var3++];
+				var2[var5 + this.xof + (var4 + this.yof) * this.owi] = this.data[var3++];
 			}
 		}
-		this.pixels = var2;
+		this.data = var2;
 		this.wi = this.owi;
 		this.hi = this.ohi;
 		this.xof = 0;
@@ -110,10 +110,10 @@ public class Pix8 extends Pix2D {
 		int var3 = 0;
 		for (int var4 = 0; var4 < this.hi; var4++) {
 			for (int var5 = this.wi - 1; var5 >= 0; var5--) {
-				var2[var3++] = this.pixels[var5 + var4 * this.wi];
+				var2[var3++] = this.data[var5 + var4 * this.wi];
 			}
 		}
-		this.pixels = var2;
+		this.data = var2;
 		this.xof = this.owi - this.wi - this.xof;
 	}
 
@@ -123,10 +123,10 @@ public class Pix8 extends Pix2D {
 		int var4 = 0;
 		for (int var5 = this.hi - 1; var5 >= 0; var5--) {
 			for (int var6 = 0; var6 < this.wi; var6++) {
-				var3[var4++] = this.pixels[var6 + var5 * this.wi];
+				var3[var4++] = this.data[var6 + var5 * this.wi];
 			}
 		}
-		this.pixels = var3;
+		this.data = var3;
 		this.yof = this.ohi - this.hi - this.yof;
 	}
 
@@ -162,39 +162,39 @@ public class Pix8 extends Pix2D {
 	public void plotSprite(int arg1, int arg2) {
 		int var4 = arg1 + this.xof;
 		int var5 = arg2 + this.yof;
-		int var6 = var4 + var5 * Pix2D.width2d;
+		int var6 = var4 + var5 * Pix2D.width;
 		int var7 = 0;
 		int var8 = this.hi;
 		int var9 = this.wi;
-		int var10 = Pix2D.width2d - var9;
+		int var10 = Pix2D.width - var9;
 		int var11 = 0;
-		if (var5 < Pix2D.top) {
-			int var12 = Pix2D.top - var5;
+		if (var5 < Pix2D.boundTop) {
+			int var12 = Pix2D.boundTop - var5;
 			var8 -= var12;
-			var5 = Pix2D.top;
+			var5 = Pix2D.boundTop;
 			var7 += var12 * var9;
-			var6 += var12 * Pix2D.width2d;
+			var6 += var12 * Pix2D.width;
 		}
-		if (var5 + var8 > Pix2D.bottom) {
-			var8 -= var5 + var8 - Pix2D.bottom;
+		if (var5 + var8 > Pix2D.boundBottom) {
+			var8 -= var5 + var8 - Pix2D.boundBottom;
 		}
-		if (var4 < Pix2D.left) {
-			int var13 = Pix2D.left - var4;
+		if (var4 < Pix2D.boundLeft) {
+			int var13 = Pix2D.boundLeft - var4;
 			var9 -= var13;
-			var4 = Pix2D.left;
+			var4 = Pix2D.boundLeft;
 			var7 += var13;
 			var6 += var13;
 			var11 += var13;
 			var10 += var13;
 		}
-		if (var4 + var9 > Pix2D.right) {
-			int var14 = var4 + var9 - Pix2D.right;
+		if (var4 + var9 > Pix2D.boundRight) {
+			int var14 = var4 + var9 - Pix2D.boundRight;
 			var9 -= var14;
 			var11 += var14;
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			this.plot(this.pixels, Pix2D.data, var7, var11, this.bpal, var8, var9, var10, var6);
+			this.plot(this.data, Pix2D.pixels, var7, var11, this.bpal, var8, var9, var10, var6);
 		}
 	}
 

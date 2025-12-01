@@ -33,7 +33,7 @@ public class Ground {
 	public int[] triangleVertexC;
 
 	@ObfuscatedName("j.k")
-	public int[] triangleTexture;
+	public int[] triangleTextureIds;
 
 	@ObfuscatedName("j.l")
 	public boolean flat = true;
@@ -42,7 +42,7 @@ public class Ground {
 	public int shape;
 
 	@ObfuscatedName("j.n")
-	public int angle;
+	public int shapeAngle;
 
 	@ObfuscatedName("j.o")
 	public int underlayColour;
@@ -85,7 +85,7 @@ public class Ground {
 			this.flat = false;
 		}
 		this.shape = arg5;
-		this.angle = arg12;
+		this.shapeAngle = arg12;
 		this.underlayColour = arg11;
 		this.overlayColour = arg18;
 		short var21 = 128;
@@ -229,7 +229,7 @@ public class Ground {
 		this.triangleColourB = new int[var39];
 		this.triangleColourC = new int[var39];
 		if (arg8 != -1) {
-			this.triangleTexture = new int[var39];
+			this.triangleTextureIds = new int[var39];
 		}
 		int var41 = 0;
 		for (int var42 = 0; var42 < var39; var42++) {
@@ -254,15 +254,15 @@ public class Ground {
 				this.triangleColourA[var42] = var27[var44];
 				this.triangleColourB[var42] = var27[var45];
 				this.triangleColourC[var42] = var27[var46];
-				if (this.triangleTexture != null) {
-					this.triangleTexture[var42] = -1;
+				if (this.triangleTextureIds != null) {
+					this.triangleTextureIds[var42] = -1;
 				}
 			} else {
 				this.triangleColourA[var42] = var28[var44];
 				this.triangleColourB[var42] = var28[var45];
 				this.triangleColourC[var42] = var28[var46];
-				if (this.triangleTexture != null) {
-					this.triangleTexture[var42] = arg8;
+				if (this.triangleTextureIds != null) {
+					this.triangleTextureIds[var42] = arg8;
 				}
 			}
 		}

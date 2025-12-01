@@ -11,7 +11,7 @@ public class FloType {
 	public static int count;
 
 	@ObfuscatedName("kc.b")
-	public static FloType[] types;
+	public static FloType[] list;
 
 	@ObfuscatedName("kc.c")
 	public int rgb;
@@ -50,14 +50,14 @@ public class FloType {
 	public static void unpack(JagFile arg1) {
 		Packet var2 = new Packet(arg1.read("flo.dat", null));
 		count = var2.g2();
-		if (types == null) {
-			types = new FloType[count];
+		if (list == null) {
+			list = new FloType[count];
 		}
 		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new FloType();
+			if (list[var3] == null) {
+				list[var3] = new FloType();
 			}
-			types[var3].decode(var2);
+			list[var3].decode(var2);
 		}
 	}
 
@@ -163,11 +163,11 @@ public class FloType {
 		} else if (var23 > 255) {
 			var23 = 255;
 		}
-		this.hsl = this.rgb24to16(var21, var22, var23);
+		this.hsl = this.getTable(var21, var22, var23);
 	}
 
 	@ObfuscatedName("kc.a(III)I")
-	public int rgb24to16(int arg0, int arg1, int arg2) {
+	public int getTable(int arg0, int arg1, int arg2) {
 		if (arg2 > 179) {
 			arg1 /= 2;
 		}

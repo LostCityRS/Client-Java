@@ -7,7 +7,7 @@ import jagex2.io.Packet;
 public class AnimFrame {
 
 	@ObfuscatedName("h.b")
-	public static AnimFrame[] instances;
+	public static AnimFrame[] list;
 
 	@ObfuscatedName("h.c")
 	public int delay;
@@ -35,7 +35,7 @@ public class AnimFrame {
 
 	@ObfuscatedName("h.a(I)V")
 	public static void init(int arg0) {
-		instances = new AnimFrame[arg0 + 1];
+		list = new AnimFrame[arg0 + 1];
 		opaque = new boolean[arg0 + 1];
 		for (int var1 = 0; var1 < arg0 + 1; var1++) {
 			opaque[var1] = true;
@@ -73,7 +73,7 @@ public class AnimFrame {
 		int[] var22 = new int[500];
 		for (int var23 = 0; var23 < var18; var23++) {
 			int var24 = var8.g2();
-			AnimFrame var25 = instances[var24] = new AnimFrame();
+			AnimFrame var25 = list[var24] = new AnimFrame();
 			var25.delay = var14.g1();
 			var25.base = var17;
 			int var26 = var8.g1();
@@ -137,12 +137,12 @@ public class AnimFrame {
 
 	@ObfuscatedName("h.b(I)V")
 	public static void unload() {
-		instances = null;
+		list = null;
 	}
 
 	@ObfuscatedName("h.a(II)Lh;")
 	public static AnimFrame get(int arg1) {
-		return instances == null ? null : instances[arg1];
+		return list == null ? null : list[arg1];
 	}
 
 	@ObfuscatedName("h.a(BI)Z")

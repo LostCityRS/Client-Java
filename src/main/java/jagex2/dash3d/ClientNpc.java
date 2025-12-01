@@ -12,24 +12,24 @@ public class ClientNpc extends ClientEntity {
 	public NpcType type;
 
 	@ObfuscatedName("ab.a(I)Lfb;")
-	public Model getModel() {
+	public Model getTempModel() {
 		if (this.type == null) {
 			return null;
 		} else {
-			Model var2 = this.getAnimatedModel();
+			Model var2 = this.getTempModel2();
 			if (var2 == null) {
 				return null;
 			}
 			super.height = var2.minY;
 			if (super.spotanimId != -1 && super.spotanimFrame != -1) {
-				SpotAnimType var3 = SpotAnimType.types[super.spotanimId];
-				Model var4 = var3.getModel();
+				SpotAnimType var3 = SpotAnimType.list[super.spotanimId];
+				Model var4 = var3.getTempModel();
 				if (var4 != null) {
 					int var5 = var3.seq.frames[super.spotanimFrame];
 					Model var6 = new Model(AnimFrame.shareAlpha(var5), false, true, var4);
-					var6.offset(0, 0, -super.spotanimHeight);
-					var6.createLabelReferences();
-					var6.applyFrame(var5);
+					var6.translate(0, 0, -super.spotanimHeight);
+					var6.prepareAnim();
+					var6.animate(var5);
 					var6.labelFaces = null;
 					var6.labelVertices = null;
 					if (var3.resizeh != 128 || var3.resizev != 128) {
@@ -41,32 +41,32 @@ public class ClientNpc extends ClientEntity {
 				}
 			}
 			if (this.type.size == 1) {
-				var2.picking = true;
+				var2.useAABBMouseCheck = true;
 			}
 			return var2;
 		}
 	}
 
 	@ObfuscatedName("ab.c(I)Lfb;")
-	public Model getAnimatedModel() {
+	public Model getTempModel2() {
 		if (super.primarySeqId >= 0 && super.primarySeqDelay == 0) {
-			int var2 = SeqType.types[super.primarySeqId].frames[super.primarySeqFrame];
+			int var2 = SeqType.list[super.primarySeqId].frames[super.primarySeqFrame];
 			int var3 = -1;
 			if (super.secondarySeqId >= 0 && super.secondarySeqId != super.readyanim) {
-				var3 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
+				var3 = SeqType.list[super.secondarySeqId].frames[super.secondarySeqFrame];
 			}
-			return this.type.getModel(var2, SeqType.types[super.primarySeqId].walkmerge, var3);
+			return this.type.getTempModel(var2, SeqType.list[super.primarySeqId].walkmerge, var3);
 		} else {
 			int var4 = -1;
 			if (super.secondarySeqId >= 0) {
-				var4 = SeqType.types[super.secondarySeqId].frames[super.secondarySeqFrame];
+				var4 = SeqType.list[super.secondarySeqId].frames[super.secondarySeqFrame];
 			}
-			return this.type.getModel(var4, null, -1);
+			return this.type.getTempModel(var4, null, -1);
 		}
 	}
 
 	@ObfuscatedName("ab.b(I)Z")
-	public boolean isVisible() {
+	public boolean isReady() {
 		return this.type != null;
 	}
 }

@@ -79,7 +79,7 @@ public class ClientProj extends ModelSource {
 	public int seqCycle;
 
 	public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg10, int arg11) {
-		this.graphic = SpotAnimType.types[arg1];
+		this.graphic = SpotAnimType.list[arg1];
 		this.level = arg0;
 		this.srcX = arg6;
 		this.srcZ = arg10;
@@ -94,7 +94,7 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(IIBII)V")
-	public void updateVelocity(int arg0, int arg1, int arg3, int arg4) {
+	public void setTarget(int arg0, int arg1, int arg3, int arg4) {
 		if (!this.mobile) {
 			double var6 = (double) (arg3 - this.srcX);
 			double var8 = (double) (arg0 - this.srcZ);
@@ -114,7 +114,7 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(II)V")
-	public void update(int arg1) {
+	public void move(int arg1) {
 		this.mobile = true;
 		this.x += this.velocityX * (double) arg1;
 		this.z += this.velocityZ * (double) arg1;
@@ -124,10 +124,10 @@ public class ClientProj extends ModelSource {
 		this.pitch = (int) (Math.atan2(this.velocityY, this.velocity) * 325.949D) & 0x7FF;
 		if (this.graphic.seq != null) {
 			this.seqCycle += arg1;
-			while (this.seqCycle > this.graphic.seq.getFrameLength(this.seqFrame)) {
-				this.seqCycle -= this.graphic.seq.getFrameLength(this.seqFrame) + 1;
+			while (this.seqCycle > this.graphic.seq.getDuration(this.seqFrame)) {
+				this.seqCycle -= this.graphic.seq.getDuration(this.seqFrame) + 1;
 				this.seqFrame++;
-				if (this.seqFrame >= this.graphic.seq.frameCount) {
+				if (this.seqFrame >= this.graphic.seq.numFrames) {
 					this.seqFrame = 0;
 				}
 			}
@@ -135,8 +135,8 @@ public class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("eb.a(I)Lfb;")
-	public Model getModel() {
-		Model var2 = this.graphic.getModel();
+	public Model getTempModel() {
+		Model var2 = this.graphic.getTempModel();
 		if (var2 == null) {
 			return null;
 		}
@@ -146,15 +146,15 @@ public class ClientProj extends ModelSource {
 		}
 		Model var4 = new Model(AnimFrame.shareAlpha(var3), false, true, var2);
 		if (var3 != -1) {
-			var4.createLabelReferences();
-			var4.applyFrame(var3);
+			var4.prepareAnim();
+			var4.animate(var3);
 			var4.labelFaces = null;
 			var4.labelVertices = null;
 		}
 		if (this.graphic.resizeh != 128 || this.graphic.resizev != 128) {
 			var4.resize(this.graphic.resizeh, this.graphic.resizeh, this.graphic.resizev);
 		}
-		var4.rotateX(this.pitch);
+		var4.rotateXAxis(this.pitch);
 		var4.calculateNormals(this.graphic.ambient + 64, this.graphic.contrast + 850, -30, -50, -30, true);
 		return var4;
 	}

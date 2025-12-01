@@ -12,10 +12,10 @@ public class SeqType {
 	public static int count;
 
 	@ObfuscatedName("nc.c")
-	public static SeqType[] types;
+	public static SeqType[] list;
 
 	@ObfuscatedName("nc.d")
-	public int frameCount;
+	public int numFrames;
 
 	@ObfuscatedName("nc.e")
 	public int[] frames;
@@ -60,19 +60,19 @@ public class SeqType {
 	public static void unpack(JagFile arg1) {
 		Packet var2 = new Packet(arg1.read("seq.dat", null));
 		count = var2.g2();
-		if (types == null) {
-			types = new SeqType[count];
+		if (list == null) {
+			list = new SeqType[count];
 		}
 		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new SeqType();
+			if (list[var3] == null) {
+				list[var3] = new SeqType();
 			}
-			types[var3].decode(var2);
+			list[var3].decode(var2);
 		}
 	}
 
 	@ObfuscatedName("nc.a(BI)I")
-	public int getFrameLength(int arg1) {
+	public int getDuration(int arg1) {
 		int var3 = this.delay[arg1];
 		if (var3 == 0) {
 			AnimFrame var4 = AnimFrame.get(this.frames[arg1]);
@@ -91,8 +91,8 @@ public class SeqType {
 		while (true) {
 			int var3 = arg1.g1();
 			if (var3 == 0) {
-				if (this.frameCount == 0) {
-					this.frameCount = 1;
+				if (this.numFrames == 0) {
+					this.numFrames = 1;
 					this.frames = new int[1];
 					this.frames[0] = -1;
 					this.iframes = new int[1];
@@ -117,11 +117,11 @@ public class SeqType {
 				return;
 			}
 			if (var3 == 1) {
-				this.frameCount = arg1.g1();
-				this.frames = new int[this.frameCount];
-				this.iframes = new int[this.frameCount];
-				this.delay = new int[this.frameCount];
-				for (int var4 = 0; var4 < this.frameCount; var4++) {
+				this.numFrames = arg1.g1();
+				this.frames = new int[this.numFrames];
+				this.iframes = new int[this.numFrames];
+				this.delay = new int[this.numFrames];
+				for (int var4 = 0; var4 < this.numFrames; var4++) {
 					this.frames[var4] = arg1.g2();
 					this.iframes[var4] = arg1.g2();
 					if (this.iframes[var4] == 65535) {

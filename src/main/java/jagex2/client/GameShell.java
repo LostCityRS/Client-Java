@@ -202,7 +202,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 					this.mouseClickY = this.nextMouseClickY;
 					this.mouseClickTime = this.nextMouseClickTime;
 					this.nextMouseClickButton = 0;
-					this.update();
+					this.loop();
 					this.keyQueueReadPos = this.keyQueueWritePos;
 					var4 += var2;
 				}
@@ -535,7 +535,7 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	}
 
 	@ObfuscatedName("a.b(B)V")
-	public void update() {
+	public void loop() {
 	}
 
 	@ObfuscatedName("a.b(Z)V")

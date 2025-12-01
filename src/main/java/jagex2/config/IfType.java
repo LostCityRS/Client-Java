@@ -12,16 +12,16 @@ import jagex2.io.JagFile;
 import jagex2.io.Packet;
 
 @ObfuscatedName("d")
-public class Component {
+public class IfType {
 
 	@ObfuscatedName("d.c")
-	public static Component[] types;
+	public static IfType[] list;
 
 	@ObfuscatedName("d.d")
-	public int[] invSlotObjId;
+	public int[] linkObjType;
 
 	@ObfuscatedName("d.e")
-	public int[] invSlotObjCount;
+	public int[] linkObjCount;
 
 	@ObfuscatedName("d.f")
 	public int seqFrame;
@@ -33,7 +33,7 @@ public class Component {
 	public int id;
 
 	@ObfuscatedName("d.i")
-	public int layer;
+	public int layerId;
 
 	@ObfuscatedName("d.j")
 	public int type;
@@ -51,7 +51,7 @@ public class Component {
 	public int height;
 
 	@ObfuscatedName("d.o")
-	public byte trans;
+	public byte transparency;
 
 	@ObfuscatedName("d.p")
 	public int x;
@@ -72,13 +72,13 @@ public class Component {
 	public int overlayer;
 
 	@ObfuscatedName("d.v")
-	public int scroll;
+	public int scrollSize;
 
 	@ObfuscatedName("d.w")
 	public int scrollPosition;
 
 	@ObfuscatedName("d.x")
-	public boolean hide;
+	public boolean hidden;
 
 	@ObfuscatedName("d.y")
 	public int[] children;
@@ -87,28 +87,28 @@ public class Component {
 	public int[] childX;
 
 	@ObfuscatedName("d.ab")
-	public int model;
+	public int modelId;
 
 	@ObfuscatedName("d.bb")
-	public int activeModelType;
+	public int model2Type;
 
 	@ObfuscatedName("d.cb")
-	public int activeModel;
+	public int model2Id;
 
 	@ObfuscatedName("d.db")
-	public int anim;
+	public int modelAnim;
 
 	@ObfuscatedName("d.eb")
-	public int activeAnim;
+	public int model2Anim;
 
 	@ObfuscatedName("d.fb")
-	public int zoom;
+	public int modelZoom;
 
 	@ObfuscatedName("d.gb")
-	public int xan;
+	public int modelXAn;
 
 	@ObfuscatedName("d.hb")
-	public int yan;
+	public int modelYAn;
 
 	@ObfuscatedName("d.ib")
 	public String targetVerb;
@@ -138,13 +138,13 @@ public class Component {
 	public int colour;
 
 	@ObfuscatedName("d.U")
-	public int activeColour;
+	public int colour2;
 
 	@ObfuscatedName("d.V")
-	public int overColour;
+	public int colourOver;
 
 	@ObfuscatedName("d.W")
-	public int activeOverColour;
+	public int colour2Over;
 
 	@ObfuscatedName("d.Z")
 	public int modelType;
@@ -156,7 +156,7 @@ public class Component {
 	public Pix32 graphic;
 
 	@ObfuscatedName("d.Y")
-	public Pix32 activeGraphic;
+	public Pix32 graphic2;
 
 	@ObfuscatedName("d.Q")
 	public PixFont font;
@@ -165,7 +165,7 @@ public class Component {
 	public String text;
 
 	@ObfuscatedName("d.S")
-	public String activeText;
+	public String text2;
 
 	@ObfuscatedName("d.G")
 	public boolean swappable;
@@ -212,9 +212,9 @@ public class Component {
 		Packet var4 = new Packet(arg3.read("data", null));
 		int var6 = -1;
 		int var7 = var4.g2();
-		types = new Component[var7];
+		list = new IfType[var7];
 		while (true) {
-			Component var9;
+			IfType var9;
 			do {
 				if (var4.pos >= var4.data.length) {
 					imageCache = null;
@@ -225,15 +225,15 @@ public class Component {
 					var6 = var4.g2();
 					var8 = var4.g2();
 				}
-				var9 = types[var8] = new Component();
+				var9 = list[var8] = new IfType();
 				var9.id = var8;
-				var9.layer = var6;
+				var9.layerId = var6;
 				var9.type = var4.g1();
 				var9.buttonType = var4.g1();
 				var9.clientCode = var4.g2();
 				var9.width = var4.g2();
 				var9.height = var4.g2();
-				var9.trans = (byte) var4.g1();
+				var9.transparency = (byte) var4.g1();
 				var9.overlayer = var4.g1();
 				if (var9.overlayer == 0) {
 					var9.overlayer = -1;
@@ -261,8 +261,9 @@ public class Component {
 					}
 				}
 				if (var9.type == 0) {
-					var9.scroll = var4.g2();
-					var9.hide = var4.g1() == 1;
+					// LAEYR
+					var9.scrollSize = var4.g2();
+					var9.hidden = var4.g1() == 1;
 					int var16 = var4.g2();
 					var9.children = new int[var16];
 					var9.childX = new int[var16];
@@ -278,8 +279,8 @@ public class Component {
 					var9.field96 = var4.g1() == 1;
 				}
 				if (var9.type == 2) {
-					var9.invSlotObjId = new int[var9.width * var9.height];
-					var9.invSlotObjCount = new int[var9.width * var9.height];
+					var9.linkObjType = new int[var9.width * var9.height];
+					var9.linkObjCount = new int[var9.width * var9.height];
 					var9.draggable = var4.g1() == 1;
 					var9.interactable = var4.g1() == 1;
 					var9.usable = var4.g1() == 1;
@@ -310,9 +311,11 @@ public class Component {
 					}
 				}
 				if (var9.type == 3) {
+					// RECT
 					var9.fill = var4.g1() == 1;
 				}
 				if (var9.type == 4 || var9.type == 1) {
+					// TEXT
 					var9.center = var4.g1() == 1;
 					int var23 = var4.g1();
 					if (arg2 != null) {
@@ -321,18 +324,22 @@ public class Component {
 					var9.shadowed = var4.g1() == 1;
 				}
 				if (var9.type == 4) {
+					// TEXT
 					var9.text = var4.gstr();
-					var9.activeText = var4.gstr();
+					var9.text2 = var4.gstr();
 				}
 				if (var9.type == 1 || var9.type == 3 || var9.type == 4) {
+					// RECT || TEXT
 					var9.colour = var4.g4();
 				}
 				if (var9.type == 3 || var9.type == 4) {
-					var9.activeColour = var4.g4();
-					var9.overColour = var4.g4();
-					var9.activeOverColour = var4.g4();
+					// RECT || TEXT
+					var9.colour2 = var4.g4();
+					var9.colourOver = var4.g4();
+					var9.colour2Over = var4.g4();
 				}
 				if (var9.type == 5) {
+					// GRAPHIC
 					String var24 = var4.gstr();
 					if (arg0 != null && var24.length() > 0) {
 						int var25 = var24.lastIndexOf(",");
@@ -341,39 +348,40 @@ public class Component {
 					String var26 = var4.gstr();
 					if (arg0 != null && var26.length() > 0) {
 						int var27 = var26.lastIndexOf(",");
-						var9.activeGraphic = getImage(Integer.parseInt(var26.substring(var27 + 1)), var26.substring(0, var27), arg0);
+						var9.graphic2 = getImage(Integer.parseInt(var26.substring(var27 + 1)), var26.substring(0, var27), arg0);
 					}
 				}
 				if (var9.type == 6) {
+					// MODEL
 					int var28 = var4.g1();
 					if (var28 != 0) {
 						var9.modelType = 1;
-						var9.model = (var28 - 1 << 8) + var4.g1();
+						var9.modelId = (var28 - 1 << 8) + var4.g1();
 					}
 					int var29 = var4.g1();
 					if (var29 != 0) {
-						var9.activeModelType = 1;
-						var9.activeModel = (var29 - 1 << 8) + var4.g1();
+						var9.model2Type = 1;
+						var9.model2Id = (var29 - 1 << 8) + var4.g1();
 					}
 					int var30 = var4.g1();
 					if (var30 == 0) {
-						var9.anim = -1;
+						var9.modelAnim = -1;
 					} else {
-						var9.anim = (var30 - 1 << 8) + var4.g1();
+						var9.modelAnim = (var30 - 1 << 8) + var4.g1();
 					}
 					int var31 = var4.g1();
 					if (var31 == 0) {
-						var9.activeAnim = -1;
+						var9.model2Anim = -1;
 					} else {
-						var9.activeAnim = (var31 - 1 << 8) + var4.g1();
+						var9.model2Anim = (var31 - 1 << 8) + var4.g1();
 					}
-					var9.zoom = var4.g2();
-					var9.xan = var4.g2();
-					var9.yan = var4.g2();
+					var9.modelZoom = var4.g2();
+					var9.modelXAn = var4.g2();
+					var9.modelYAn = var4.g2();
 				}
 				if (var9.type == 7) {
-					var9.invSlotObjId = new int[var9.width * var9.height];
-					var9.invSlotObjCount = new int[var9.width * var9.height];
+					var9.linkObjType = new int[var9.width * var9.height];
+					var9.linkObjCount = new int[var9.width * var9.height];
 					var9.center = var4.g1() == 1;
 					int var32 = var4.g1();
 					if (arg2 != null) {
@@ -418,21 +426,21 @@ public class Component {
 
 	@ObfuscatedName("d.a(III)V")
 	public void swapObj(int arg0, int arg1) {
-		int var4 = this.invSlotObjId[arg1];
-		this.invSlotObjId[arg1] = this.invSlotObjId[arg0];
-		this.invSlotObjId[arg0] = var4;
-		int var5 = this.invSlotObjCount[arg1];
-		this.invSlotObjCount[arg1] = this.invSlotObjCount[arg0];
-		this.invSlotObjCount[arg0] = var5;
+		int var4 = this.linkObjType[arg1];
+		this.linkObjType[arg1] = this.linkObjType[arg0];
+		this.linkObjType[arg0] = var4;
+		int var5 = this.linkObjCount[arg1];
+		this.linkObjCount[arg1] = this.linkObjCount[arg0];
+		this.linkObjCount[arg0] = var5;
 	}
 
 	@ObfuscatedName("d.a(IIZI)Lfb;")
-	public Model getModel(int arg1, boolean arg2, int arg3) {
+	public Model getTempModel(int arg1, boolean arg2, int arg3) {
 		Model var5;
 		if (arg2) {
-			var5 = this.loadModel(this.activeModelType, this.activeModel);
+			var5 = this.loadModel(this.model2Type, this.model2Id);
 		} else {
-			var5 = this.loadModel(this.modelType, this.model);
+			var5 = this.loadModel(this.modelType, this.modelId);
 		}
 		if (var5 == null) {
 			return null;
@@ -441,13 +449,13 @@ public class Component {
 		} else {
 			Model var6 = new Model(AnimFrame.shareAlpha(arg1) & AnimFrame.shareAlpha(arg3), false, true, var5);
 			if (arg1 != -1 || arg3 != -1) {
-				var6.createLabelReferences();
+				var6.prepareAnim();
 			}
 			if (arg1 != -1) {
-				var6.applyFrame(arg1);
+				var6.animate(arg1);
 			}
 			if (arg3 != -1) {
-				var6.applyFrame(arg3);
+				var6.animate(arg3);
 			}
 			var6.calculateNormals(64, 768, -50, -10, -50, true);
 			return var6;
@@ -461,15 +469,19 @@ public class Component {
 			return var3;
 		}
 		if (arg0 == 1) {
-			var3 = Model.tryGet(arg1);
+			// MODELTYPE_BASIC
+			var3 = Model.load(arg1);
 		}
 		if (arg0 == 2) {
-			var3 = NpcType.get(arg1).getHeadModel();
+			// MODELTYPE_NPC_HEAD
+			var3 = NpcType.get(arg1).getHead();
 		}
 		if (arg0 == 3) {
+			// MODELTYPE_PLAEYR_HEAD
 			var3 = Client.localPlayer.getHeadModel();
 		}
 		if (arg0 == 4) {
+			// MODELTYPE_OBJECT
 			var3 = ObjType.get(arg1).getInvModel(50);
 		}
 		if (arg0 == 5) {

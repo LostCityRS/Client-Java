@@ -192,7 +192,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(III)V")
-	public void setBlocked(int arg0, int arg1) {
+	public void blockGround(int arg0, int arg1) {
 		int var4 = arg1 - this.baseX;
 		int var5 = arg0 - this.baseZ;
 		this.flags[var4][var5] |= 0x200000;
@@ -360,7 +360,7 @@ public class CollisionMap {
 	}
 
 	@ObfuscatedName("jc.a(ZII)V")
-	public void removeBlocked(int arg1, int arg2) {
+	public void unblockGround(int arg1, int arg2) {
 		int var4 = arg2 - this.baseX;
 		int var5 = arg1 - this.baseZ;
 		this.flags[var4][var5] &= 0xDFFFFF;

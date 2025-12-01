@@ -13,7 +13,7 @@ public class ClientObj extends ModelSource {
 	public int count;
 
 	@ObfuscatedName("db.a(I)Lfb;")
-	public Model getModel() {
+	public Model getTempModel() {
 		ObjType var2 = ObjType.get(this.id);
 		return var2.getModel(this.count);
 	}

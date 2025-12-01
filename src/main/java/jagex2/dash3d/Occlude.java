@@ -6,16 +6,16 @@ import deob.ObfuscatedName;
 public class Occlude {
 
 	@ObfuscatedName("n.a")
-	public int minGridX;
+	public int minTileX;
 
 	@ObfuscatedName("n.b")
-	public int maxGridX;
+	public int maxTileX;
 
 	@ObfuscatedName("n.c")
-	public int minGridZ;
+	public int minTileZ;
 
 	@ObfuscatedName("n.d")
-	public int maxGridZ;
+	public int maxTileZ;
 
 	@ObfuscatedName("n.e")
 	public int type;

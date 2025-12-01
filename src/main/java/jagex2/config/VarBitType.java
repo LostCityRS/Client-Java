@@ -11,7 +11,7 @@ public class VarBitType {
 	public static int count;
 
 	@ObfuscatedName("qc.c")
-	public static VarBitType[] types;
+	public static VarBitType[] list;
 
 	@ObfuscatedName("qc.d")
 	public String debugname;
@@ -29,14 +29,14 @@ public class VarBitType {
 	public static void unpack(JagFile arg1) {
 		Packet var2 = new Packet(arg1.read("varbit.dat", null));
 		count = var2.g2();
-		if (types == null) {
-			types = new VarBitType[count];
+		if (list == null) {
+			list = new VarBitType[count];
 		}
 		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new VarBitType();
+			if (list[var3] == null) {
+				list[var3] = new VarBitType();
 			}
-			types[var3].decode(var3, var2);
+			list[var3].decode(var3, var2);
 		}
 		if (var2.pos != var2.data.length) {
 			System.out.println("varbit load mismatch");

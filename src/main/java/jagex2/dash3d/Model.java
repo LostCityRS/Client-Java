@@ -49,7 +49,7 @@ public class Model extends ModelSource {
 	public int[][] labelFaces;
 
 	@ObfuscatedName("fb.db")
-	public boolean picking = false;
+	public boolean useAABBMouseCheck = false;
 
 	@ObfuscatedName("fb.eb")
 	public VertexNormal[] vertexNormalOriginal;
@@ -115,7 +115,7 @@ public class Model extends ModelSource {
 	public static int[] clippedColour = new int[10];
 
 	@ObfuscatedName("fb.zb")
-	public static int baseX;
+	public static int oX;
 
 	@ObfuscatedName("fb.A")
 	public int faceCount;
@@ -211,10 +211,10 @@ public class Model extends ModelSource {
 	public int objRaise;
 
 	@ObfuscatedName("fb.Ab")
-	public static int baseY;
+	public static int oY;
 
 	@ObfuscatedName("fb.Bb")
-	public static int baseZ;
+	public static int oZ;
 
 	@ObfuscatedName("fb.Db")
 	public static int mouseX;
@@ -338,7 +338,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(II)Lfb;")
-	public static Model tryGet(int arg1) {
+	public static Model load(int arg1) {
 		if (meta == null) {
 			return null;
 		}
@@ -352,7 +352,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.c(I)Z")
-	public static boolean check(int arg0) {
+	public static boolean requestDownload(int arg0) {
 		if (meta == null) {
 			return false;
 		}
@@ -722,7 +722,7 @@ public class Model extends ModelSource {
 				}
 			}
 		}
-		this.calculateBoundsCylinder();
+		this.calcBoundingCylinder();
 	}
 
 	public Model(boolean arg0, boolean arg2, boolean arg3, Model arg4) {
@@ -927,7 +927,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.d(I)V")
-	public void calculateBoundsCylinder() {
+	public void calcBoundingCylinder() {
 		super.minY = 0;
 		this.radius = 0;
 		this.maxY = 0;
@@ -952,7 +952,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(Z)V")
-	public void calculateBoundsY() {
+	public void calcHeight() {
 		super.minY = 0;
 		this.maxY = 0;
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
@@ -969,7 +969,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.e(I)V")
-	public void calculateBoundsAABB() {
+	public void calcAABB() {
 		super.minY = 0;
 		this.radius = 0;
 		this.maxY = 0;
@@ -1010,7 +1010,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(B)V")
-	public void createLabelReferences() {
+	public void prepareAnim() {
 		int var10002;
 		if (this.vertexLabel != null) {
 			int[] var3 = new int[256];
@@ -1060,7 +1060,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(ZI)V")
-	public void applyFrame(int arg1) {
+	public void animate(int arg1) {
 		if (this.labelVertices == null || arg1 == -1) {
 			return;
 		}
@@ -1069,22 +1069,22 @@ public class Model extends ModelSource {
 			return;
 		}
 		AnimBase var4 = var3.base;
-		baseX = 0;
-		baseY = 0;
-		baseZ = 0;
+		oX = 0;
+		oY = 0;
+		oZ = 0;
 		for (int var5 = 0; var5 < var3.size; var5++) {
 			int var6 = var3.ti[var5];
-			this.applyTransform(var4.types[var6], var4.labels[var6], var3.tx[var5], var3.ty[var5], var3.tz[var5]);
+			this.animate2(var4.types[var6], var4.labels[var6], var3.tx[var5], var3.ty[var5], var3.tz[var5]);
 		}
 	}
 
 	@ObfuscatedName("fb.a([IIII)V")
-	public void applyFrames(int[] arg0, int arg2, int arg3) {
+	public void maskAnimate(int[] arg0, int arg2, int arg3) {
 		if (arg2 == -1) {
 			return;
 		}
 		if (arg0 == null || arg3 == -1) {
-			this.applyFrame(arg2);
+			this.animate(arg2);
 			return;
 		}
 		AnimFrame var5 = AnimFrame.get(arg2);
@@ -1093,13 +1093,13 @@ public class Model extends ModelSource {
 		}
 		AnimFrame var6 = AnimFrame.get(arg3);
 		if (var6 == null) {
-			this.applyFrame(arg2);
+			this.animate(arg2);
 			return;
 		}
 		AnimBase var7 = var5.base;
-		baseX = 0;
-		baseY = 0;
-		baseZ = 0;
+		oX = 0;
+		oY = 0;
+		oZ = 0;
 		byte var8 = 0;
 		int var16 = var8 + 1;
 		int var9 = arg0[var8];
@@ -1109,12 +1109,12 @@ public class Model extends ModelSource {
 				var9 = arg0[var16++];
 			}
 			if (var11 != var9 || var7.types[var11] == 0) {
-				this.applyTransform(var7.types[var11], var7.labels[var11], var5.tx[var10], var5.ty[var10], var5.tz[var10]);
+				this.animate2(var7.types[var11], var7.labels[var11], var5.tx[var10], var5.ty[var10], var5.tz[var10]);
 			}
 		}
-		baseX = 0;
-		baseY = 0;
-		baseZ = 0;
+		oX = 0;
+		oY = 0;
+		oZ = 0;
 		byte var12 = 0;
 		int var17 = var12 + 1;
 		int var13 = arg0[var12];
@@ -1124,40 +1124,40 @@ public class Model extends ModelSource {
 				var13 = arg0[var17++];
 			}
 			if (var15 == var13 || var7.types[var15] == 0) {
-				this.applyTransform(var7.types[var15], var7.labels[var15], var6.tx[var14], var6.ty[var14], var6.tz[var14]);
+				this.animate2(var7.types[var15], var7.labels[var15], var6.tx[var14], var6.ty[var14], var6.tz[var14]);
 			}
 		}
 	}
 
 	@ObfuscatedName("fb.a(I[IIII)V")
-	public void applyTransform(int arg0, int[] arg1, int arg2, int arg3, int arg4) {
+	public void animate2(int arg0, int[] arg1, int arg2, int arg3, int arg4) {
 		int var6 = arg1.length;
 		if (arg0 == 0) {
 			int var7 = 0;
-			baseX = 0;
-			baseY = 0;
-			baseZ = 0;
+			oX = 0;
+			oY = 0;
+			oZ = 0;
 			for (int var8 = 0; var8 < var6; var8++) {
 				int var9 = arg1[var8];
 				if (var9 < this.labelVertices.length) {
 					int[] var10 = this.labelVertices[var9];
 					for (int var11 = 0; var11 < var10.length; var11++) {
 						int var12 = var10[var11];
-						baseX += this.vertexX[var12];
-						baseY += this.vertexY[var12];
-						baseZ += this.vertexZ[var12];
+						oX += this.vertexX[var12];
+						oY += this.vertexY[var12];
+						oZ += this.vertexZ[var12];
 						var7++;
 					}
 				}
 			}
 			if (var7 > 0) {
-				baseX = baseX / var7 + arg2;
-				baseY = baseY / var7 + arg3;
-				baseZ = baseZ / var7 + arg4;
+				oX = oX / var7 + arg2;
+				oY = oY / var7 + arg3;
+				oZ = oZ / var7 + arg4;
 			} else {
-				baseX = arg2;
-				baseY = arg3;
-				baseZ = arg4;
+				oX = arg2;
+				oY = arg3;
+				oZ = arg4;
 			}
 		} else if (arg0 == 1) {
 			for (int var13 = 0; var13 < var6; var13++) {
@@ -1179,9 +1179,9 @@ public class Model extends ModelSource {
 					int[] var20 = this.labelVertices[var19];
 					for (int var21 = 0; var21 < var20.length; var21++) {
 						int var22 = var20[var21];
-						this.vertexX[var22] -= baseX;
-						this.vertexY[var22] -= baseY;
-						this.vertexZ[var22] -= baseZ;
+						this.vertexX[var22] -= oX;
+						this.vertexY[var22] -= oY;
+						this.vertexZ[var22] -= oZ;
 						int var23 = (arg2 & 0xFF) * 8;
 						int var24 = (arg3 & 0xFF) * 8;
 						int var25 = (arg4 & 0xFF) * 8;
@@ -1206,9 +1206,9 @@ public class Model extends ModelSource {
 							this.vertexZ[var22] = this.vertexZ[var22] * var33 - this.vertexX[var22] * var32 >> 16;
 							this.vertexX[var22] = var34;
 						}
-						this.vertexX[var22] += baseX;
-						this.vertexY[var22] += baseY;
-						this.vertexZ[var22] += baseZ;
+						this.vertexX[var22] += oX;
+						this.vertexY[var22] += oY;
+						this.vertexZ[var22] += oZ;
 					}
 				}
 			}
@@ -1219,15 +1219,15 @@ public class Model extends ModelSource {
 					int[] var37 = this.labelVertices[var36];
 					for (int var38 = 0; var38 < var37.length; var38++) {
 						int var39 = var37[var38];
-						this.vertexX[var39] -= baseX;
-						this.vertexY[var39] -= baseY;
-						this.vertexZ[var39] -= baseZ;
+						this.vertexX[var39] -= oX;
+						this.vertexY[var39] -= oY;
+						this.vertexZ[var39] -= oZ;
 						this.vertexX[var39] = this.vertexX[var39] * arg2 / 128;
 						this.vertexY[var39] = this.vertexY[var39] * arg3 / 128;
 						this.vertexZ[var39] = this.vertexZ[var39] * arg4 / 128;
-						this.vertexX[var39] += baseX;
-						this.vertexY[var39] += baseY;
-						this.vertexZ[var39] += baseZ;
+						this.vertexX[var39] += oX;
+						this.vertexY[var39] += oY;
+						this.vertexZ[var39] += oZ;
 					}
 				}
 			}
@@ -1252,7 +1252,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.b(B)V")
-	public void rotateY90() {
+	public void rotate90() {
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
 			int var3 = this.vertexX[var2];
 			this.vertexX[var2] = this.vertexZ[var2];
@@ -1261,7 +1261,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(BI)V")
-	public void rotateX(int arg1) {
+	public void rotateXAxis(int arg1) {
 		int var3 = sinTable[arg1];
 		int var4 = cosTable[arg1];
 		for (int var5 = 0; var5 < this.vertexCount; var5++) {
@@ -1272,7 +1272,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(BIII)V")
-	public void offset(int arg1, int arg2, int arg3) {
+	public void translate(int arg1, int arg2, int arg3) {
 		for (int var5 = 0; var5 < this.vertexCount; var5++) {
 			this.vertexX[var5] += arg1;
 			this.vertexY[var5] += arg3;
@@ -1290,7 +1290,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.c(B)V")
-	public void rotateY180() {
+	public void rotate180() {
 		for (int var2 = 0; var2 < this.vertexCount; var2++) {
 			this.vertexZ[var2] = -this.vertexZ[var2];
 		}
@@ -1371,7 +1371,7 @@ public class Model extends ModelSource {
 			}
 		}
 		if (arg5) {
-			this.applyLighting(arg0, var8, arg2, arg3, arg4);
+			this.light(arg0, var8, arg2, arg3, arg4);
 		} else {
 			this.vertexNormalOriginal = new VertexNormal[this.vertexCount];
 			for (int var31 = 0; var31 < this.vertexCount; var31++) {
@@ -1384,14 +1384,14 @@ public class Model extends ModelSource {
 			}
 		}
 		if (arg5) {
-			this.calculateBoundsCylinder();
+			this.calcBoundingCylinder();
 		} else {
-			this.calculateBoundsAABB();
+			this.calcAABB();
 		}
 	}
 
 	@ObfuscatedName("fb.a(IIIII)V")
-	public void applyLighting(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void light(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		for (int var6 = 0; var6 < this.faceCount; var6++) {
 			int var7 = this.faceVertexA[var6];
 			int var8 = this.faceVertexB[var6];
@@ -1455,9 +1455,9 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIII)V")
-	public void drawSimple(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		int var8 = Pix3D.centerX;
-		int var9 = Pix3D.centerY;
+	public void objRender(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+		int var8 = Pix3D.projectionX;
+		int var9 = Pix3D.projectionY;
 		int var10 = sinTable[arg0];
 		int var11 = cosTable[arg0];
 		int var12 = sinTable[arg1];
@@ -1501,13 +1501,13 @@ public class Model extends ModelSource {
 			}
 		}
 		try {
-			this.draw(false, false, 0);
+			this.render2(false, false, 0);
 		} catch (Exception var32) {
 		}
 	}
 
 	@ObfuscatedName("fb.a(IIIIIIIII)V")
-	public void draw(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void worldRender(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = arg7 * arg4 - arg5 * arg3 >> 16;
 		int var11 = arg6 * arg1 + var10 * arg2 >> 16;
 		int var12 = this.radius * arg2 >> 16;
@@ -1517,22 +1517,22 @@ public class Model extends ModelSource {
 		}
 		int var14 = arg7 * arg3 + arg5 * arg4 >> 16;
 		int var15 = var14 - this.radius << 9;
-		if (var15 / var13 >= Pix2D.centerX2d) {
+		if (var15 / var13 >= Pix2D.centerX) {
 			return;
 		}
 		int var16 = var14 + this.radius << 9;
-		if (var16 / var13 <= -Pix2D.centerX2d) {
+		if (var16 / var13 <= -Pix2D.centerX) {
 			return;
 		}
 		int var17 = arg6 * arg2 - var10 * arg1 >> 16;
 		int var18 = this.radius * arg1 >> 16;
 		int var19 = var17 + var18 << 9;
-		if (var19 / var13 <= -Pix2D.centerY2d) {
+		if (var19 / var13 <= -Pix2D.centerY) {
 			return;
 		}
 		int var20 = var18 + (super.minY * arg2 >> 16);
 		int var21 = var17 - var20 << 9;
-		if (var21 / var13 >= Pix2D.centerY2d) {
+		if (var21 / var13 >= Pix2D.centerY) {
 			return;
 		}
 		int var22 = var12 + (super.minY * arg1 >> 16);
@@ -1564,18 +1564,18 @@ public class Model extends ModelSource {
 				var29 = var19 / var13;
 				var28 = var21 / var25;
 			}
-			int var30 = mouseX - Pix3D.centerX;
-			int var31 = mouseY - Pix3D.centerY;
+			int var30 = mouseX - Pix3D.projectionX;
+			int var31 = mouseY - Pix3D.projectionY;
 			if (var30 > var26 && var30 < var27 && var31 > var28 && var31 < var29) {
-				if (this.picking) {
+				if (this.useAABBMouseCheck) {
 					pickedBitsets[pickedCount++] = arg8;
 				} else {
 					var24 = true;
 				}
 			}
 		}
-		int var32 = Pix3D.centerX;
-		int var33 = Pix3D.centerY;
+		int var32 = Pix3D.projectionX;
+		int var33 = Pix3D.projectionY;
 		int var34 = 0;
 		int var35 = 0;
 		if (arg0 != 0) {
@@ -1613,13 +1613,13 @@ public class Model extends ModelSource {
 			}
 		}
 		try {
-			this.draw(var23, var24, arg8);
+			this.render2(var23, var24, arg8);
 		} catch (Exception var50) {
 		}
 	}
 
 	@ObfuscatedName("fb.a(ZZI)V")
-	public void draw(boolean arg0, boolean arg1, int arg2) {
+	public void render2(boolean arg0, boolean arg1, int arg2) {
 		for (int var4 = 0; var4 < this.maxDepth; var4++) {
 			tmpDepthFaceCount[var4] = 0;
 		}
@@ -1636,13 +1636,13 @@ public class Model extends ModelSource {
 					int var12 = (vertexScreenZ[var6] + vertexScreenZ[var7] + vertexScreenZ[var8]) / 3 + this.minDepth;
 					tmpDepthFaces[var12][tmpDepthFaceCount[var12]++] = var5;
 				} else {
-					if (arg1 && this.pointsWithinTriangle(mouseX, mouseY, vertexScreenY[var6], vertexScreenY[var7], vertexScreenY[var8], var9, var10, var11)) {
+					if (arg1 && this.isMouseRoughlyInsideTriangle(mouseX, mouseY, vertexScreenY[var6], vertexScreenY[var7], vertexScreenY[var8], var9, var10, var11)) {
 						pickedBitsets[pickedCount++] = arg2;
 						arg1 = false;
 					}
 					if ((var9 - var10) * (vertexScreenY[var8] - vertexScreenY[var7]) - (vertexScreenY[var6] - vertexScreenY[var7]) * (var11 - var10) > 0) {
 						faceNearClipped[var5] = false;
-						if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix2D.safeWidth && var10 <= Pix2D.safeWidth && var11 <= Pix2D.safeWidth) {
+						if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix2D.clipX && var10 <= Pix2D.clipX && var11 <= Pix2D.clipX) {
 							faceClippedX[var5] = false;
 						} else {
 							faceClippedX[var5] = true;
@@ -1659,7 +1659,7 @@ public class Model extends ModelSource {
 				if (var15 > 0) {
 					int[] var16 = tmpDepthFaces[var14];
 					for (int var17 = 0; var17 < var15; var17++) {
-						this.drawFace(var16[var17]);
+						this.render3(var16[var17]);
 					}
 				}
 			}
@@ -1718,7 +1718,7 @@ public class Model extends ModelSource {
 		}
 		for (int var34 = 0; var34 < 10; var34++) {
 			while (var34 == 0 && var33 > var26) {
-				this.drawFace(var31[var29++]);
+				this.render3(var31[var29++]);
 				if (var29 == var30 && var31 != tmpPriorityFaces[11]) {
 					var29 = 0;
 					var30 = tmpPriorityFaceCount[11];
@@ -1732,7 +1732,7 @@ public class Model extends ModelSource {
 				}
 			}
 			while (var34 == 3 && var33 > var27) {
-				this.drawFace(var31[var29++]);
+				this.render3(var31[var29++]);
 				if (var29 == var30 && var31 != tmpPriorityFaces[11]) {
 					var29 = 0;
 					var30 = tmpPriorityFaceCount[11];
@@ -1746,7 +1746,7 @@ public class Model extends ModelSource {
 				}
 			}
 			while (var34 == 5 && var33 > var28) {
-				this.drawFace(var31[var29++]);
+				this.render3(var31[var29++]);
 				if (var29 == var30 && var31 != tmpPriorityFaces[11]) {
 					var29 = 0;
 					var30 = tmpPriorityFaceCount[11];
@@ -1762,11 +1762,11 @@ public class Model extends ModelSource {
 			int var35 = tmpPriorityFaceCount[var34];
 			int[] var36 = tmpPriorityFaces[var34];
 			for (int var37 = 0; var37 < var35; var37++) {
-				this.drawFace(var36[var37]);
+				this.render3(var36[var37]);
 			}
 		}
 		while (var33 != -1000) {
-			this.drawFace(var31[var29++]);
+			this.render3(var31[var29++]);
 			if (var29 == var30 && var31 != tmpPriorityFaces[11]) {
 				var29 = 0;
 				var31 = tmpPriorityFaces[11];
@@ -1782,9 +1782,9 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.f(I)V")
-	public void drawFace(int arg0) {
+	public void render3(int arg0) {
 		if (faceNearClipped[arg0]) {
-			this.drawFaceNearClipped(arg0);
+			this.render3ZClip(arg0);
 			return;
 		}
 		int var2 = this.faceVertexA[arg0];
@@ -1822,9 +1822,9 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.g(I)V")
-	public void drawFaceNearClipped(int arg0) {
-		int var2 = Pix3D.centerX;
-		int var3 = Pix3D.centerY;
+	public void render3ZClip(int arg0) {
+		int var2 = Pix3D.projectionX;
+		int var3 = Pix3D.projectionY;
 		int var4 = 0;
 		int var5 = this.faceVertexA[arg0];
 		int var6 = this.faceVertexB[arg0];
@@ -1906,7 +1906,7 @@ public class Model extends ModelSource {
 		}
 		Pix3D.hclip = false;
 		if (var4 == 3) {
-			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth || var28 > Pix2D.safeWidth) {
+			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.clipX || var27 > Pix2D.clipX || var28 > Pix2D.clipX) {
 				Pix3D.hclip = true;
 			}
 			int var32;
@@ -1936,7 +1936,7 @@ public class Model extends ModelSource {
 		if (var4 != 4) {
 			return;
 		}
-		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.safeWidth || var27 > Pix2D.safeWidth || var28 > Pix2D.safeWidth || clippedX[3] < 0 || clippedX[3] > Pix2D.safeWidth) {
+		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix2D.clipX || var27 > Pix2D.clipX || var28 > Pix2D.clipX || clippedX[3] < 0 || clippedX[3] > Pix2D.clipX) {
 			Pix3D.hclip = true;
 		}
 		int var41;
@@ -1977,7 +1977,7 @@ public class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("fb.a(IIIIIIII)Z")
-	public boolean pointsWithinTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public boolean isMouseRoughlyInsideTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		if (arg1 < arg2 && arg1 < arg3 && arg1 < arg4) {
 			return false;
 		} else if (arg1 > arg2 && arg1 > arg3 && arg1 > arg4) {

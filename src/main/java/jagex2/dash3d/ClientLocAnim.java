@@ -46,17 +46,17 @@ public class ClientLocAnim extends ModelSource {
 		this.heightSE = arg9;
 		this.heightNE = arg5;
 		this.heightNW = arg6;
-		this.seq = SeqType.types[arg8];
+		this.seq = SeqType.list[arg8];
 		this.seqFrame = 0;
 		this.seqCycle = Client.loopCycle;
 		if (arg7 && this.seq.loops != -1) {
-			this.seqFrame = (int) (Math.random() * (double) this.seq.frameCount);
-			this.seqCycle -= (int) (Math.random() * (double) this.seq.getFrameLength(this.seqFrame));
+			this.seqFrame = (int) (Math.random() * (double) this.seq.numFrames);
+			this.seqCycle -= (int) (Math.random() * (double) this.seq.getDuration(this.seqFrame));
 		}
 	}
 
 	@ObfuscatedName("cb.a(I)Lfb;")
-	public Model getModel() {
+	public Model getTempModel() {
 		if (this.seq != null) {
 			int var2 = Client.loopCycle - this.seqCycle;
 			if (var2 > 100 && this.seq.loops > 0) {
@@ -65,14 +65,14 @@ public class ClientLocAnim extends ModelSource {
 			label37: {
 				do {
 					do {
-						if (var2 <= this.seq.getFrameLength(this.seqFrame)) {
+						if (var2 <= this.seq.getDuration(this.seqFrame)) {
 							break label37;
 						}
-						var2 -= this.seq.getFrameLength(this.seqFrame);
+						var2 -= this.seq.getDuration(this.seqFrame);
 						this.seqFrame++;
-					} while (this.seqFrame < this.seq.frameCount);
+					} while (this.seqFrame < this.seq.numFrames);
 					this.seqFrame -= this.seq.loops;
-				} while (this.seqFrame >= 0 && this.seqFrame < this.seq.frameCount);
+				} while (this.seqFrame >= 0 && this.seqFrame < this.seq.numFrames);
 				this.seq = null;
 			}
 			this.seqCycle = Client.loopCycle - var2;

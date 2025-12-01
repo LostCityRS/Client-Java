@@ -13,7 +13,7 @@ public class SpotAnimType {
 	public static int count;
 
 	@ObfuscatedName("pc.b")
-	public static SpotAnimType[] types;
+	public static SpotAnimType[] list;
 
 	@ObfuscatedName("pc.c")
 	public int id;
@@ -55,15 +55,15 @@ public class SpotAnimType {
 	public static void unpack(JagFile arg1) {
 		Packet var3 = new Packet(arg1.read("spotanim.dat", null));
 		count = var3.g2();
-		if (types == null) {
-			types = new SpotAnimType[count];
+		if (list == null) {
+			list = new SpotAnimType[count];
 		}
 		for (int var4 = 0; var4 < count; var4++) {
-			if (types[var4] == null) {
-				types[var4] = new SpotAnimType();
+			if (list[var4] == null) {
+				list[var4] = new SpotAnimType();
 			}
-			types[var4].id = var4;
-			types[var4].decode(var3);
+			list[var4].id = var4;
+			list[var4].decode(var3);
 		}
 	}
 
@@ -78,8 +78,8 @@ public class SpotAnimType {
 				this.model = arg1.g2();
 			} else if (var3 == 2) {
 				this.anim = arg1.g2();
-				if (SeqType.types != null) {
-					this.seq = SeqType.types[this.anim];
+				if (SeqType.list != null) {
+					this.seq = SeqType.list[this.anim];
 				}
 			} else if (var3 == 4) {
 				this.resizeh = arg1.g2();
@@ -102,12 +102,12 @@ public class SpotAnimType {
 	}
 
 	@ObfuscatedName("pc.a()Lfb;")
-	public Model getModel() {
+	public Model getTempModel() {
 		Model var1 = (Model) modelCache.get((long) this.id);
 		if (var1 != null) {
 			return var1;
 		}
-		Model var2 = Model.tryGet(this.model);
+		Model var2 = Model.load(this.model);
 		if (var2 == null) {
 			return null;
 		}

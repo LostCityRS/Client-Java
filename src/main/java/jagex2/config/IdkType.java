@@ -12,7 +12,7 @@ public class IdkType {
 	public static int count;
 
 	@ObfuscatedName("lc.c")
-	public static IdkType[] types;
+	public static IdkType[] list;
 
 	@ObfuscatedName("lc.d")
 	public int type = -1;
@@ -36,14 +36,14 @@ public class IdkType {
 	public static void unpack(JagFile arg1) {
 		Packet var2 = new Packet(arg1.read("idk.dat", null));
 		count = var2.g2();
-		if (types == null) {
-			types = new IdkType[count];
+		if (list == null) {
+			list = new IdkType[count];
 		}
 		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new IdkType();
+			if (list[var3] == null) {
+				list[var3] = new IdkType();
 			}
-			types[var3].decode(var2);
+			list[var3].decode(var2);
 		}
 	}
 
@@ -83,7 +83,7 @@ public class IdkType {
 		} else {
 			boolean var2 = true;
 			for (int var3 = 0; var3 < this.models.length; var3++) {
-				if (!Model.check(this.models[var3])) {
+				if (!Model.requestDownload(this.models[var3])) {
 					var2 = false;
 				}
 			}
@@ -92,13 +92,13 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.b(Z)Lfb;")
-	public Model getModel() {
+	public Model getModelNoCheck() {
 		if (this.models == null) {
 			return null;
 		}
 		Model[] var2 = new Model[this.models.length];
 		for (int var3 = 0; var3 < this.models.length; var3++) {
-			var2[var3] = Model.tryGet(this.models[var3]);
+			var2[var3] = Model.load(this.models[var3]);
 		}
 		Model var4;
 		if (var2.length == 1) {
@@ -116,7 +116,7 @@ public class IdkType {
 	public boolean checkHead() {
 		boolean var3 = true;
 		for (int var4 = 0; var4 < 5; var4++) {
-			if (this.head[var4] != -1 && !Model.check(this.head[var4])) {
+			if (this.head[var4] != -1 && !Model.requestDownload(this.head[var4])) {
 				var3 = false;
 			}
 		}
@@ -124,12 +124,12 @@ public class IdkType {
 	}
 
 	@ObfuscatedName("lc.a(B)Lfb;")
-	public Model getHeadModel() {
+	public Model getHeadNoCheck() {
 		Model[] var2 = new Model[5];
 		int var3 = 0;
 		for (int var4 = 0; var4 < 5; var4++) {
 			if (this.head[var4] != -1) {
-				var2[var3++] = Model.tryGet(this.head[var4]);
+				var2[var3++] = Model.load(this.head[var4]);
 			}
 		}
 		Model var5 = new Model(var2, var3);

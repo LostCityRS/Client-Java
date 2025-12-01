@@ -43,7 +43,7 @@ public class PixMap implements ImageProducer, ImageObserver {
 
 	@ObfuscatedName("rb.a(B)V")
 	public void bind() {
-		Pix2D.bind(this.height, this.data, this.width);
+		Pix2D.setPixels(this.height, this.data, this.width);
 	}
 
 	@ObfuscatedName("rb.a(IILjava/awt/Graphics;Z)V")

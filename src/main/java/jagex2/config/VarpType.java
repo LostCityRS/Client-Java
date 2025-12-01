@@ -11,7 +11,7 @@ public class VarpType {
 	public static int count;
 
 	@ObfuscatedName("rc.c")
-	public static VarpType[] types;
+	public static VarpType[] list;
 
 	@ObfuscatedName("rc.d")
 	public static int field1155;
@@ -54,17 +54,17 @@ public class VarpType {
 		Packet var2 = new Packet(arg1.read("varp.dat", null));
 		field1155 = 0;
 		count = var2.g2();
-		if (types == null) {
-			types = new VarpType[count];
+		if (list == null) {
+			list = new VarpType[count];
 		}
 		if (field1156 == null) {
 			field1156 = new int[count];
 		}
 		for (int var3 = 0; var3 < count; var3++) {
-			if (types[var3] == null) {
-				types[var3] = new VarpType();
+			if (list[var3] == null) {
+				list[var3] = new VarpType();
 			}
-			types[var3].decode(var3, var2);
+			list[var3].decode(var3, var2);
 		}
 		if (var2.pos != var2.data.length) {
 			System.out.println("varptype load mismatch");

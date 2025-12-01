@@ -44,25 +44,25 @@ public class ClientEntity extends ModelSource {
 	public int runanim = -1;
 
 	@ObfuscatedName("z.ab")
-	public int forceMoveStartSceneTileX;
+	public int exactMoveStartSceneTileX;
 
 	@ObfuscatedName("z.bb")
-	public int forceMoveEndSceneTileX;
+	public int exactMoveEndSceneTileX;
 
 	@ObfuscatedName("z.cb")
-	public int forceMoveStartSceneTileZ;
+	public int exactMoveStartSceneTileZ;
 
 	@ObfuscatedName("z.db")
-	public int forceMoveEndSceneTileZ;
+	public int exactMoveEndSceneTileZ;
 
 	@ObfuscatedName("z.eb")
-	public int forceMoveEndCycle;
+	public int exactMoveEndCycle;
 
 	@ObfuscatedName("z.fb")
-	public int forceMoveStartCycle;
+	public int exactMoveStartCycle;
 
 	@ObfuscatedName("z.gb")
-	public int forceMoveFaceDirection;
+	public int exactMoveFaceDirection;
 
 	@ObfuscatedName("z.hb")
 	public int cycle;
@@ -173,8 +173,8 @@ public class ClientEntity extends ModelSource {
 	public String chatMessage;
 
 	@ObfuscatedName("z.a(IIZZ)V")
-	public void move(int arg0, int arg1, boolean arg3) {
-		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_move == 1) {
+	public void teleport(int arg0, int arg1, boolean arg3) {
+		if (this.primarySeqId != -1 && SeqType.list[this.primarySeqId].postanim_move == 1) {
 			this.primarySeqId = -1;
 		}
 		if (!arg3) {
@@ -205,7 +205,7 @@ public class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("z.a(ZIB)V")
-	public void step(boolean arg0, int arg1) {
+	public void moveCode(boolean arg0, int arg1) {
 		int var4 = this.routeTileX[0];
 		int var5 = this.routeTileZ[0];
 		if (arg1 == 0) {
@@ -236,7 +236,7 @@ public class ClientEntity extends ModelSource {
 			var4++;
 			var5--;
 		}
-		if (this.primarySeqId != -1 && SeqType.types[this.primarySeqId].postanim_move == 1) {
+		if (this.primarySeqId != -1 && SeqType.list[this.primarySeqId].postanim_move == 1) {
 			this.primarySeqId = -1;
 		}
 		if (this.routeLength < 9) {
@@ -253,18 +253,18 @@ public class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("z.a(Z)V")
-	public void clearRoute() {
+	public void abortRoute() {
 		this.routeLength = 0;
 		this.preanimRouteLength = 0;
 	}
 
 	@ObfuscatedName("z.b(I)Z")
-	public boolean isVisible() {
+	public boolean isReady() {
 		return false;
 	}
 
 	@ObfuscatedName("z.a(III)V")
-	public void hit(int arg1, int arg2) {
+	public void addHitmark(int arg1, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			if (this.damageCycle[var4] <= Client.loopCycle) {
 				this.damage[var4] = arg2;

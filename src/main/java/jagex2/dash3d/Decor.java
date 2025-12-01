@@ -15,10 +15,10 @@ public class Decor {
 	public int z;
 
 	@ObfuscatedName("i.d")
-	public int angle1;
+	public int wshape;
 
 	@ObfuscatedName("i.e")
-	public int angle2;
+	public int angle;
 
 	@ObfuscatedName("i.f")
 	public ModelSource model;

@@ -79,7 +79,7 @@ public class ObjType {
 	public static LruCache modelCache = new LruCache(50);
 
 	@ObfuscatedName("hc.Z")
-	public static LruCache iconCache = new LruCache(100);
+	public static LruCache spriteCache = new LruCache(100);
 
 	@ObfuscatedName("hc.F")
 	public byte manwearOffsetY;
@@ -173,7 +173,7 @@ public class ObjType {
 	@ObfuscatedName("hc.a(I)V")
 	public static void unload() {
 		modelCache = null;
-		iconCache = null;
+		spriteCache = null;
 		idx = null;
 		cache = null;
 		dat = null;
@@ -395,7 +395,7 @@ public class ObjType {
 		if (var4 != null) {
 			return var4;
 		}
-		Model var5 = Model.tryGet(this.model);
+		Model var5 = Model.load(this.model);
 		if (var5 == null) {
 			return null;
 		}
@@ -408,7 +408,7 @@ public class ObjType {
 			}
 		}
 		var5.calculateNormals(this.ambient + 64, this.contrast + 768, -50, -10, -50, true);
-		var5.picking = true;
+		var5.useAABBMouseCheck = true;
 		modelCache.put(var5, (long) this.id);
 		return var5;
 	}
@@ -426,7 +426,7 @@ public class ObjType {
 				return get(var3).getInvModel(1);
 			}
 		}
-		Model var5 = Model.tryGet(this.model);
+		Model var5 = Model.load(this.model);
 		if (var5 == null) {
 			return null;
 		}
@@ -439,9 +439,9 @@ public class ObjType {
 	}
 
 	@ObfuscatedName("hc.a(IIII)Ljb;")
-	public static Pix32 getIcon(int arg0, int arg1, int arg2) {
+	public static Pix32 getSprite(int arg0, int arg1, int arg2) {
 		if (arg0 == 0) {
-			Pix32 var4 = (Pix32) iconCache.get((long) arg2);
+			Pix32 var4 = (Pix32) spriteCache.get((long) arg2);
 			if (var4 != null && var4.ohi != arg1 && var4.ohi != -1) {
 				var4.unlink();
 				var4 = null;
@@ -471,26 +471,26 @@ public class ObjType {
 		}
 		Pix32 var9 = null;
 		if (var5.certtemplate != -1) {
-			var9 = getIcon(-1, 10, var5.certlink);
+			var9 = getSprite(-1, 10, var5.certlink);
 			if (var9 == null) {
 				return null;
 			}
 		}
 		Pix32 var10 = new Pix32(32, 32);
-		int var11 = Pix3D.centerX;
-		int var12 = Pix3D.centerY;
-		int[] var13 = Pix3D.lineOffset;
-		int[] var14 = Pix2D.data;
-		int var15 = Pix2D.width2d;
-		int var16 = Pix2D.height2d;
-		int var17 = Pix2D.left;
-		int var18 = Pix2D.right;
-		int var19 = Pix2D.top;
-		int var20 = Pix2D.bottom;
-		Pix3D.jagged = false;
-		Pix2D.bind(32, var10.pixels, 32);
+		int var11 = Pix3D.projectionX;
+		int var12 = Pix3D.projectionY;
+		int[] var13 = Pix3D.scanline;
+		int[] var14 = Pix2D.pixels;
+		int var15 = Pix2D.width;
+		int var16 = Pix2D.height;
+		int var17 = Pix2D.boundLeft;
+		int var18 = Pix2D.boundRight;
+		int var19 = Pix2D.boundTop;
+		int var20 = Pix2D.boundBottom;
+		Pix3D.lowDetail = false;
+		Pix2D.setPixels(32, var10.data, 32);
 		Pix2D.fillRect(32, 32, 0, 0, 0);
-		Pix3D.init2D();
+		Pix3D.init();
 		int var21 = var5.zoom2d;
 		if (arg0 == -1) {
 			var21 = (int) ((double) var21 * 1.5D);
@@ -500,18 +500,18 @@ public class ObjType {
 		}
 		int var22 = Pix3D.sinTable[var5.xan2d] * var21 >> 16;
 		int var23 = Pix3D.cosTable[var5.xan2d] * var21 >> 16;
-		var8.drawSimple(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var22 + var8.minY / 2 + var5.yof2d, var23 + var5.yof2d);
+		var8.objRender(0, var5.yan2d, var5.zan2d, var5.xan2d, var5.xof2d, var22 + var8.minY / 2 + var5.yof2d, var23 + var5.yof2d);
 		for (int var24 = 31; var24 >= 0; var24--) {
 			for (int var25 = 31; var25 >= 0; var25--) {
-				if (var10.pixels[var24 + var25 * 32] == 0) {
-					if (var24 > 0 && var10.pixels[var24 - 1 + var25 * 32] > 1) {
-						var10.pixels[var24 + var25 * 32] = 1;
-					} else if (var25 > 0 && var10.pixels[var24 + (var25 - 1) * 32] > 1) {
-						var10.pixels[var24 + var25 * 32] = 1;
-					} else if (var24 < 31 && var10.pixels[var24 + 1 + var25 * 32] > 1) {
-						var10.pixels[var24 + var25 * 32] = 1;
-					} else if (var25 < 31 && var10.pixels[var24 + (var25 + 1) * 32] > 1) {
-						var10.pixels[var24 + var25 * 32] = 1;
+				if (var10.data[var24 + var25 * 32] == 0) {
+					if (var24 > 0 && var10.data[var24 - 1 + var25 * 32] > 1) {
+						var10.data[var24 + var25 * 32] = 1;
+					} else if (var25 > 0 && var10.data[var24 + (var25 - 1) * 32] > 1) {
+						var10.data[var24 + var25 * 32] = 1;
+					} else if (var24 < 31 && var10.data[var24 + 1 + var25 * 32] > 1) {
+						var10.data[var24 + var25 * 32] = 1;
+					} else if (var25 < 31 && var10.data[var24 + (var25 + 1) * 32] > 1) {
+						var10.data[var24 + var25 * 32] = 1;
 					}
 				}
 			}
@@ -519,15 +519,15 @@ public class ObjType {
 		if (arg0 > 0) {
 			for (int var26 = 31; var26 >= 0; var26--) {
 				for (int var27 = 31; var27 >= 0; var27--) {
-					if (var10.pixels[var26 + var27 * 32] == 0) {
-						if (var26 > 0 && var10.pixels[var26 - 1 + var27 * 32] == 1) {
-							var10.pixels[var26 + var27 * 32] = arg0;
-						} else if (var27 > 0 && var10.pixels[var26 + (var27 - 1) * 32] == 1) {
-							var10.pixels[var26 + var27 * 32] = arg0;
-						} else if (var26 < 31 && var10.pixels[var26 + 1 + var27 * 32] == 1) {
-							var10.pixels[var26 + var27 * 32] = arg0;
-						} else if (var27 < 31 && var10.pixels[var26 + (var27 + 1) * 32] == 1) {
-							var10.pixels[var26 + var27 * 32] = arg0;
+					if (var10.data[var26 + var27 * 32] == 0) {
+						if (var26 > 0 && var10.data[var26 - 1 + var27 * 32] == 1) {
+							var10.data[var26 + var27 * 32] = arg0;
+						} else if (var27 > 0 && var10.data[var26 + (var27 - 1) * 32] == 1) {
+							var10.data[var26 + var27 * 32] = arg0;
+						} else if (var26 < 31 && var10.data[var26 + 1 + var27 * 32] == 1) {
+							var10.data[var26 + var27 * 32] = arg0;
+						} else if (var27 < 31 && var10.data[var26 + (var27 + 1) * 32] == 1) {
+							var10.data[var26 + var27 * 32] = arg0;
 						}
 					}
 				}
@@ -535,8 +535,8 @@ public class ObjType {
 		} else if (arg0 == 0) {
 			for (int var28 = 31; var28 >= 0; var28--) {
 				for (int var29 = 31; var29 >= 0; var29--) {
-					if (var10.pixels[var28 + var29 * 32] == 0 && var28 > 0 && var29 > 0 && var10.pixels[var28 - 1 + (var29 - 1) * 32] > 0) {
-						var10.pixels[var28 + var29 * 32] = 3153952;
+					if (var10.data[var28 + var29 * 32] == 0 && var28 > 0 && var29 > 0 && var10.data[var28 - 1 + (var29 - 1) * 32] > 0) {
+						var10.data[var28 + var29 * 32] = 3153952;
 					}
 				}
 			}
@@ -551,14 +551,14 @@ public class ObjType {
 			var9.ohi = var31;
 		}
 		if (arg0 == 0) {
-			iconCache.put(var10, (long) arg2);
+			spriteCache.put(var10, (long) arg2);
 		}
-		Pix2D.bind(var16, var14, var15);
+		Pix2D.setPixels(var16, var14, var15);
 		Pix2D.setClipping(var18, var17, var20, var19);
-		Pix3D.centerX = var11;
-		Pix3D.centerY = var12;
-		Pix3D.lineOffset = var13;
-		Pix3D.jagged = true;
+		Pix3D.projectionX = var11;
+		Pix3D.projectionY = var12;
+		Pix3D.scanline = var13;
+		Pix3D.lowDetail = true;
 		if (var5.stackable) {
 			var10.owi = 33;
 		} else {
@@ -582,20 +582,20 @@ public class ObjType {
 			return true;
 		}
 		boolean var6 = true;
-		if (!Model.check(var3)) {
+		if (!Model.requestDownload(var3)) {
 			var6 = false;
 		}
-		if (var4 != -1 && !Model.check(var4)) {
+		if (var4 != -1 && !Model.requestDownload(var4)) {
 			var6 = false;
 		}
-		if (var5 != -1 && !Model.check(var5)) {
+		if (var5 != -1 && !Model.requestDownload(var5)) {
 			var6 = false;
 		}
 		return var6;
 	}
 
 	@ObfuscatedName("hc.b(II)Lfb;")
-	public Model getWearModel(int arg1) {
+	public Model getWearModelNoCheck(int arg1) {
 		int var4 = this.manwear;
 		int var5 = this.manwear2;
 		int var6 = this.manwear3;
@@ -607,24 +607,24 @@ public class ObjType {
 		if (var4 == -1) {
 			return null;
 		}
-		Model var7 = Model.tryGet(var4);
+		Model var7 = Model.load(var4);
 		if (var5 != -1) {
 			if (var6 == -1) {
-				Model var11 = Model.tryGet(var5);
+				Model var11 = Model.load(var5);
 				Model[] var12 = new Model[] { var7, var11 };
 				var7 = new Model(var12, 2);
 			} else {
-				Model var8 = Model.tryGet(var5);
-				Model var9 = Model.tryGet(var6);
+				Model var8 = Model.load(var5);
+				Model var9 = Model.load(var6);
 				Model[] var10 = new Model[] { var7, var8, var9 };
 				var7 = new Model(var10, 3);
 			}
 		}
 		if (arg1 == 0 && this.manwearOffsetY != 0) {
-			var7.offset(0, 0, this.manwearOffsetY);
+			var7.translate(0, 0, this.manwearOffsetY);
 		}
 		if (arg1 == 1 && this.womanwearOffsetY != 0) {
-			var7.offset(0, 0, this.womanwearOffsetY);
+			var7.translate(0, 0, this.womanwearOffsetY);
 		}
 		if (this.recol_s != null) {
 			for (int var13 = 0; var13 < this.recol_s.length; var13++) {
@@ -646,17 +646,17 @@ public class ObjType {
 			return true;
 		}
 		boolean var5 = true;
-		if (!Model.check(var3)) {
+		if (!Model.requestDownload(var3)) {
 			var5 = false;
 		}
-		if (var4 != -1 && !Model.check(var4)) {
+		if (var4 != -1 && !Model.requestDownload(var4)) {
 			var5 = false;
 		}
 		return var5;
 	}
 
 	@ObfuscatedName("hc.b(ZI)Lfb;")
-	public Model getHeadModel(int arg1) {
+	public Model getHeadModelNoCheck(int arg1) {
 		int var3 = this.manhead;
 		int var4 = this.manhead2;
 		if (arg1 == 1) {
@@ -666,9 +666,9 @@ public class ObjType {
 		if (var3 == -1) {
 			return null;
 		}
-		Model var5 = Model.tryGet(var3);
+		Model var5 = Model.load(var3);
 		if (var4 != -1) {
-			Model var6 = Model.tryGet(var4);
+			Model var6 = Model.load(var4);
 			Model[] var7 = new Model[] { var5, var6 };
 			var5 = new Model(var7, 2);
 		}

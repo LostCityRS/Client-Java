@@ -24,16 +24,16 @@ public class Sprite {
 	public int angle;
 
 	@ObfuscatedName("q.g")
-	public int minGridX;
+	public int minTileX;
 
 	@ObfuscatedName("q.h")
-	public int maxGridX;
+	public int maxTileX;
 
 	@ObfuscatedName("q.i")
-	public int minGridZ;
+	public int minTileZ;
 
 	@ObfuscatedName("q.j")
-	public int maxGridZ;
+	public int maxTileZ;
 
 	@ObfuscatedName("q.k")
 	public int distance;

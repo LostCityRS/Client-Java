@@ -84,10 +84,10 @@ public class LocType {
 	public byte ambient;
 
 	@ObfuscatedName("ec.Q")
-	public static LruCache modelCacheStatic = new LruCache(500);
+	public static LruCache mc1 = new LruCache(500);
 
 	@ObfuscatedName("ec.R")
-	public static LruCache modelCacheDynamic = new LruCache(30);
+	public static LruCache mc2 = new LruCache(30);
 
 	@ObfuscatedName("ec.A")
 	public byte contrast;
@@ -156,8 +156,8 @@ public class LocType {
 
 	@ObfuscatedName("ec.a(I)V")
 	public static void unload() {
-		modelCacheStatic = null;
-		modelCacheDynamic = null;
+		mc1 = null;
+		mc2 = null;
 		idx = null;
 		cache = null;
 		dat = null;
@@ -352,7 +352,7 @@ public class LocType {
 		if (this.shapes != null) {
 			for (int var5 = 0; var5 < this.shapes.length; var5++) {
 				if (this.shapes[var5] == arg0) {
-					return Model.check(this.models[var5] & 0xFFFF);
+					return Model.requestDownload(this.models[var5] & 0xFFFF);
 				}
 			}
 			return true;
@@ -361,7 +361,7 @@ public class LocType {
 		} else if (arg0 == 10) {
 			boolean var3 = true;
 			for (int var4 = 0; var4 < this.models.length; var4++) {
-				var3 &= Model.check(this.models[var4] & 0xFFFF);
+				var3 &= Model.requestDownload(this.models[var4] & 0xFFFF);
 			}
 			return var3;
 		} else {
@@ -376,14 +376,14 @@ public class LocType {
 		} else {
 			boolean var2 = true;
 			for (int var3 = 0; var3 < this.models.length; var3++) {
-				var2 &= Model.check(this.models[var3] & 0xFFFF);
+				var2 &= Model.requestDownload(this.models[var3] & 0xFFFF);
 			}
 			return var2;
 		}
 	}
 
 	@ObfuscatedName("ec.a(ILvb;)V")
-	public void prefetch(OnDemand arg1) {
+	public void prefetchModelAll(OnDemand arg1) {
 		if (this.models != null) {
 			for (int var3 = 0; var3 < this.models.length; var3++) {
 				arg1.prefetch(0, this.models[var3] & 0xFFFF);
@@ -393,7 +393,7 @@ public class LocType {
 
 	@ObfuscatedName("ec.a(IIIIIII)Lfb;")
 	public Model getModel(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		Model var8 = this.getModel(arg0, arg6, arg1);
+		Model var8 = this.buildModel(arg0, arg6, arg1);
 		if (var8 == null) {
 			return null;
 		}
@@ -410,13 +410,13 @@ public class LocType {
 				int var15 = var13 + (var14 - var13) * (var12 + 64) / 128;
 				var8.vertexY[var10] += var15 - var9;
 			}
-			var8.calculateBoundsY();
+			var8.calcHeight();
 		}
 		return var8;
 	}
 
 	@ObfuscatedName("ec.a(IBII)Lfb;")
-	public Model getModel(int arg0, int arg2, int arg3) {
+	public Model buildModel(int arg0, int arg2, int arg3) {
 		Model var5 = null;
 		boolean var6 = false;
 		long var7;
@@ -425,7 +425,7 @@ public class LocType {
 				return null;
 			}
 			var7 = (long) ((this.id << 6) + arg3) + ((long) (arg2 + 1) << 32);
-			Model var9 = (Model) modelCacheDynamic.get(var7);
+			Model var9 = (Model) mc2.get(var7);
 			if (var9 != null) {
 				return var9;
 			}
@@ -439,16 +439,16 @@ public class LocType {
 				if (var10) {
 					var13 += 65536;
 				}
-				var5 = (Model) modelCacheStatic.get((long) var13);
+				var5 = (Model) mc1.get((long) var13);
 				if (var5 == null) {
-					var5 = Model.tryGet(var13 & 0xFFFF);
+					var5 = Model.load(var13 & 0xFFFF);
 					if (var5 == null) {
 						return null;
 					}
 					if (var10) {
-						var5.rotateY180();
+						var5.rotate180();
 					}
-					modelCacheStatic.put(var5, (long) var13);
+					mc1.put(var5, (long) var13);
 				}
 				if (var11 > 1) {
 					temp[var12] = var5;
@@ -469,7 +469,7 @@ public class LocType {
 				return null;
 			}
 			var7 = (long) ((this.id << 6) + (var14 << 3) + arg3) + ((long) (arg2 + 1) << 32);
-			Model var16 = (Model) modelCacheDynamic.get(var7);
+			Model var16 = (Model) mc2.get(var7);
 			if (var16 != null) {
 				return var16;
 			}
@@ -478,16 +478,16 @@ public class LocType {
 			if (var18) {
 				var17 += 65536;
 			}
-			var5 = (Model) modelCacheStatic.get((long) var17);
+			var5 = (Model) mc1.get((long) var17);
 			if (var5 == null) {
-				var5 = Model.tryGet(var17 & 0xFFFF);
+				var5 = Model.load(var17 & 0xFFFF);
 				if (var5 == null) {
 					return null;
 				}
 				if (var18) {
-					var5.rotateY180();
+					var5.rotate180();
 				}
-				modelCacheStatic.put(var5, (long) var17);
+				mc1.put(var5, (long) var17);
 			}
 		}
 		boolean var19;
@@ -504,13 +504,13 @@ public class LocType {
 		}
 		Model var21 = new Model(AnimFrame.shareAlpha(arg2), arg3 == 0 && arg2 == -1 && !var19 && !var20, this.recol_s == null, var5);
 		if (arg2 != -1) {
-			var21.createLabelReferences();
-			var21.applyFrame(arg2);
+			var21.prepareAnim();
+			var21.animate(arg2);
 			var21.labelFaces = null;
 			var21.labelVertices = null;
 		}
 		while (arg3-- > 0) {
-			var21.rotateY90();
+			var21.rotate90();
 		}
 		if (this.recol_s != null) {
 			for (int var22 = 0; var22 < this.recol_s.length; var22++) {
@@ -521,13 +521,13 @@ public class LocType {
 			var21.resize(this.resizez, this.resizex, this.resizey);
 		}
 		if (var20) {
-			var21.offset(this.offsetx, this.offsetz, this.offsety);
+			var21.translate(this.offsetx, this.offsetz, this.offsety);
 		}
 		var21.calculateNormals(this.ambient + 64, this.contrast * 5 + 768, -50, -10, -50, !this.sharelight);
 		if (this.raiseobject == 1) {
 			var21.objRaise = var21.minY;
 		}
-		modelCacheDynamic.put(var21, var7);
+		mc2.put(var21, var7);
 		return var21;
 	}
 }
