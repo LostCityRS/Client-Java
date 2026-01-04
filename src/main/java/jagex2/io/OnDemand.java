@@ -4,6 +4,7 @@ import deob.ObfuscatedName;
 import jagex2.client.Client;
 import jagex2.datastruct.DoublyLinkList;
 import jagex2.datastruct.LinkList;
+import jagex2.io.*;
 import sign.signlink;
 
 import java.io.ByteArrayInputStream;
@@ -122,14 +123,8 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	@ObfuscatedName("vb.J")
 	public OnDemandRequest current;
 
-	@ObfuscatedName("vb.H")
-	public InputStream in;
-
-	@ObfuscatedName("vb.I")
-	public OutputStream out;
-
 	@ObfuscatedName("vb.G")
-	public Socket socket;
+	public WebClientStream socket;
 
 	@ObfuscatedName("vb.a(Lyb;Lclient;)V")
 	public void unpack(JagFile arg0, Client arg1) {
@@ -335,13 +330,13 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 	@ObfuscatedName("vb.a(IIBI)V")
 	public void prefetchPriority(int arg1, byte arg2, int arg3) {
-		if (this.app.fileStreams[0] == null || this.versions[arg1][arg3] == 0) {
+		if (true || this.versions[arg1][arg3] == 0) { // this.app.fileStreams[0] == null
 			return;
 		}
-		byte[] var5 = this.app.fileStreams[arg1 + 1].read(arg3);
-		if (this.validate(var5, this.versions[arg1][arg3], this.crcs[arg1][arg3])) {
-			return;
-		}
+		// byte[] var5 = this.app.fileStreams[arg1 + 1].read(arg3);
+		// if (this.validate(var5, this.versions[arg1][arg3], this.crcs[arg1][arg3])) {
+		// 	return;
+		// }
 		this.priorities[arg1][arg3] = arg2;
 		if (arg2 > this.topPriority) {
 			this.topPriority = arg2;
@@ -359,7 +354,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 
 	@ObfuscatedName("vb.a(III)V")
 	public void prefetch(int arg0, int arg1) {
-		if (this.app.fileStreams[0] == null || (this.versions[arg0][arg1] == 0 || (this.priorities[arg0][arg1] == 0 || this.topPriority == 0))) {
+		if (true || (this.versions[arg0][arg1] == 0 || (this.priorities[arg0][arg1] == 0 || this.topPriority == 0))) { // this.app.fileStreams[0] == null
 			return;
 		}
 		OnDemandRequest var4 = new OnDemandRequest();
@@ -377,7 +372,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			while (this.running) {
 				this.cycle++;
 				byte var1 = 20;
-				if (this.topPriority == 0 && this.app.fileStreams[0] != null) {
+				if (this.topPriority == 0 && false) { // this.app.fileStreams[0] != null
 					var1 = 50;
 				}
 				try {
@@ -393,7 +388,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 						break;
 					}
 					this.handleExtras();
-					if (this.in != null) {
+					if (this.socket != null) {
 						this.read();
 					}
 				}
@@ -426,15 +421,15 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 						} catch (Exception var8) {
 						}
 						this.socket = null;
-						this.in = null;
-						this.out = null;
+						// this.in = null;
+						// this.out = null;
 						this.partAvailable = 0;
 					}
 				} else {
 					this.waitCycles = 0;
 					this.message = "";
 				}
-				if (this.app.ingame && this.socket != null && this.out != null && (this.topPriority > 0 || this.app.fileStreams[0] == null)) {
+				if (this.app.ingame && this.socket != null && (this.topPriority > 0 || true)) { // this.app.fileStreams[0] == null
 					this.heartbeatCycle++;
 					if (this.heartbeatCycle > 500) {
 						this.heartbeatCycle = 0;
@@ -443,7 +438,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 						this.buf[2] = 0;
 						this.buf[3] = 10;
 						try {
-							this.out.write(this.buf, 0, 4);
+							this.socket.write(this.buf, 0, 4);
 						} catch (IOException var7) {
 							this.waitCycles = 5000;
 						}
@@ -468,9 +463,9 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		while (var3 != null) {
 			this.active = true;
 			byte[] var4 = null;
-			if (this.app.fileStreams[0] != null) {
-				var4 = this.app.fileStreams[var3.archive + 1].read(var3.file);
-			}
+			// if (this.app.fileStreams[0] != null) {
+			// 	var4 = this.app.fileStreams[var3.archive + 1].read(var3.file);
+			// }
 			if (!this.validate(var4, this.versions[var3.archive][var3.file], this.crcs[var3.archive][var3.file])) {
 				var4 = null;
 			}
@@ -579,10 +574,10 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 	@ObfuscatedName("vb.e(I)V")
 	public void read() {
 		try {
-			int var2 = this.in.available();
+			int var2 = this.socket.available();
 			if (this.partAvailable == 0 && var2 >= 6) {
 				this.active = true;
-				for (int var3 = 0; var3 < 6; var3 += this.in.read(this.buf, var3, 6 - var3)) {
+				for (int var3 = 0; var3 < 6; var3 += this.socket.read(this.buf, var3, 6 - var3)) {
 				}
 				int var4 = this.buf[0] & 0xFF;
 				int var5 = ((this.buf[1] & 0xFF) << 8) + (this.buf[2] & 0xFF);
@@ -634,12 +629,12 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 					var10 = this.current.data;
 					var11 = this.partOffset;
 				}
-				for (int var12 = 0; var12 < this.partAvailable; var12 += this.in.read(var10, var12 + var11, this.partAvailable - var12)) {
+				for (int var12 = 0; var12 < this.partAvailable; var12 += this.socket.read(var10, var12 + var11, this.partAvailable - var12)) {
 				}
 				if (this.partAvailable + this.partOffset >= var10.length && this.current != null) {
-					if (this.app.fileStreams[0] != null) {
-						this.app.fileStreams[this.current.archive + 1].write(var10.length, this.current.file, var10);
-					}
+					// if (this.app.fileStreams[0] != null) {
+					// 	this.app.fileStreams[this.current.archive + 1].write(var10.length, this.current.file, var10);
+					// }
 					if (!this.current.urgent && this.current.archive == 3) {
 						this.current.urgent = true;
 						this.current.archive = 93;
@@ -661,8 +656,8 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			} catch (Exception var15) {
 			}
 			this.socket = null;
-			this.in = null;
-			this.out = null;
+			// this.in = null;
+			// this.out = null;
 			this.partAvailable = 0;
 		}
 	}
@@ -694,11 +689,9 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				}
 				this.socketOpenTime = var3;
 				this.socket = this.app.openSocket(Client.portOffset + 43594);
-				this.in = this.socket.getInputStream();
-				this.out = this.socket.getOutputStream();
-				this.out.write(15);
+				this.socket.write(15);
 				for (int var5 = 0; var5 < 8; var5++) {
-					this.in.read();
+					this.socket.read();
 				}
 				this.waitCycles = 0;
 			}
@@ -712,7 +705,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			} else {
 				this.buf[3] = 1;
 			}
-			this.out.write(this.buf, 0, 4);
+			this.socket.write(this.buf, 0, 4);
 			this.heartbeatCycle = 0;
 		} catch (IOException var8) {
 			try {
@@ -720,8 +713,8 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 			} catch (Exception var7) {
 			}
 			this.socket = null;
-			this.in = null;
-			this.out = null;
+			// this.in = null;
+			// this.out = null;
 			this.partAvailable = 0;
 		}
 	}

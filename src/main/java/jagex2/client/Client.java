@@ -16,10 +16,12 @@ import java.awt.*;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
 import java.util.zip.CRC32;
+
+import org.teavm.jso.JSBody;
+import org.teavm.jso.JSObject;
 
 @ObfuscatedName("client")
 public class Client extends GameShell {
@@ -89,9 +91,6 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.yb")
 	public static ClientPlayer localPlayer;
-
-	@ObfuscatedName("client.zb")
-	public FileStream[] fileStreams = new FileStream[5];
 
 	@ObfuscatedName("client.bc")
 	public Packet login = Packet.alloc(1);
@@ -1204,7 +1203,7 @@ public class Client extends GameShell {
 	public MouseTracking mouseTracking;
 
 	@ObfuscatedName("client.Li")
-	public ClientStream stream;
+	public WebClientStream stream;
 
 	@ObfuscatedName("client.S")
 	public String objSelectedName;
@@ -1275,6 +1274,8 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.Ug")
 	public byte[][][] mapl;
 
+	public boolean displayFps = false;
+
 	static {
 		int var0 = 2;
 		for (int var1 = 0; var1 < 32; var1++) {
@@ -1294,6 +1295,7 @@ public class Client extends GameShell {
 	// ----
 
 	public static void main(String[] arg0) {
+		arg0 = new String[] { "10", "0", "highmem", "members", "32" };
 		try {
 			System.out.println("RS2 user client - release #" + signlink.clientversion);
 			if (arg0.length == 5) {
@@ -1316,32 +1318,15 @@ public class Client extends GameShell {
 					return;
 				}
 				signlink.storeid = Integer.parseInt(arg0[4]);
-				signlink.startpriv(InetAddress.getLocalHost());
+				signlink.startpriv("http://localhost");
 				Client var1 = new Client();
-				var1.initApplication(765, 503);
+				var1.initApplet(765, 503);
 			} else {
 				System.out.println("Usage: node-id, port-offset, [lowmem/highmem], [free/members], storeid");
 			}
 		} catch (Exception var3) {
+			var3.printStackTrace();
 		}
-	}
-
-	public void init() {
-		nodeId = Integer.parseInt(this.getParameter("nodeid"));
-		portOffset = Integer.parseInt(this.getParameter("portoff"));
-		String var1 = this.getParameter("lowmem");
-		if (var1 != null && var1.equals("1")) {
-			setLowMem();
-		} else {
-			setHighMem();
-		}
-		String var2 = this.getParameter("free");
-		if (var2 != null && var2.equals("1")) {
-			membersWorld = false;
-		} else {
-			membersWorld = true;
-		}
-		this.initApplet(503, 765);
 	}
 
 	public void run() {
@@ -1370,49 +1355,14 @@ public class Client extends GameShell {
 
 	// ----
 
-	public URL getCodeBase() {
-		if (signlink.mainapp != null) {
-			return signlink.mainapp.getCodeBase();
-		}
-		try {
-			if (super.frame != null) {
-				return new URL("http://127.0.0.1:" + (portOffset + 80));
-			}
-		} catch (Exception var1) {
-		}
-		return super.getCodeBase();
-	}
-
-	public String getParameter(String arg0) {
-		return signlink.mainapp == null ? super.getParameter(arg0) : signlink.mainapp.getParameter(arg0);
-	}
-
-	@ObfuscatedName("client.L(I)Ljava/lang/String;")
-	public String getHost() {
-		if (signlink.mainapp == null) {
-			return super.frame == null ? super.getDocumentBase().getHost().toLowerCase() : "runescape.com";
-		} else {
-			return signlink.mainapp.getDocumentBase().getHost().toLowerCase();
-		}
-	}
-
-	@ObfuscatedName("client.c(I)Ljava/awt/Component;")
-	public java.awt.Component getBaseComponent() {
-		if (signlink.mainapp != null) {
-			return signlink.mainapp;
-		} else {
-			return this;
-		}
-	}
-
 	@ObfuscatedName("client.a(Ljava/lang/String;)Ljava/io/DataInputStream;")
-	public DataInputStream openUrl(String arg0) throws IOException {
-		return signlink.mainapp == null ? new DataInputStream((new URL(this.getCodeBase(), arg0)).openStream()) : signlink.openurl(arg0);
+	public FileDownloadStream openUrl(String arg0) throws IOException {
+		return signlink.openurl(arg0);
 	}
 
 	@ObfuscatedName("client.h(I)Ljava/net/Socket;")
-	public Socket openSocket(int arg0) throws IOException {
-		return signlink.mainapp == null ? new Socket(InetAddress.getByName(this.getCodeBase().getHost()), arg0) : signlink.opensocket(arg0);
+	public WebClientStream openSocket(int arg0) throws IOException {
+		return signlink.opensocket(arg0);
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/Runnable;I)V")
@@ -1420,11 +1370,7 @@ public class Client extends GameShell {
 		if (arg1 > 10) {
 			arg1 = 10;
 		}
-		if (signlink.mainapp == null) {
-			super.startThread(arg0, arg1);
-		} else {
-			signlink.startthread(arg0, arg1);
-		}
+		signlink.startthread(arg0, arg1);
 	}
 
 	@ObfuscatedName("client.a(IZ[B)V")
@@ -1474,51 +1420,51 @@ public class Client extends GameShell {
 			return;
 		}
 		alreadyStarted = true;
-		boolean var1 = false;
-		String var2 = this.getHost();
-		if (var2.endsWith("jagex.com")) {
-			var1 = true;
-		}
-		if (var2.endsWith("runescape.com")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.2")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.246")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.247")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.249")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.253")) {
-			var1 = true;
-		}
-		if (var2.endsWith("192.168.1.254")) {
-			var1 = true;
-		}
-		if (var2.endsWith("127.0.0.1")) {
-			var1 = true;
-		}
-		if (!var1) {
-			this.errorHost = true;
-			return;
-		}
-		if (signlink.cache_dat != null) {
-			for (int var3 = 0; var3 < 5; var3++) {
-				this.fileStreams[var3] = new FileStream(signlink.cache_idx[var3], 500000, var3 + 1, signlink.cache_dat);
-			}
-		}
+		// boolean var1 = false;
+		// String var2 = this.getHost();
+		// if (var2.endsWith("jagex.com")) {
+		// 	var1 = true;
+		// }
+		// if (var2.endsWith("runescape.com")) {
+		// 	var1 = true;
+		// }
+		// if (var2.endsWith("192.168.1.2")) {
+		// 	var1 = true;
+		// }
+		// if (var2.endsWith("192.168.1.246")) {
+		// 	var1 = true;
+		// }
+		// if (var2.endsWith("192.168.1.247")) {
+		// 	var1 = true;
+		// }
+		// if (var2.endsWith("192.168.1.249")) {
+		// 	var1 = true;
+		// }
+		// if (var2.endsWith("192.168.1.253")) {
+		// 	var1 = true;
+		// }
+		// if (var2.endsWith("192.168.1.254")) {
+		// 	var1 = true;
+		// }
+		// if (var2.endsWith("127.0.0.1")) {
+		// 	var1 = true;
+		// }
+		// if (!var1) {
+		// 	this.errorHost = true;
+		// 	return;
+		// }
+		// if (signlink.cache_dat != null) {
+		// 	for (int var3 = 0; var3 < 5; var3++) {
+		// 		this.fileStreams[var3] = new FileStream(signlink.cache_idx[var3], 500000, var3 + 1, signlink.cache_dat);
+		// 	}
+		// }
 		try {
 			int var4 = 5;
 			this.jagChecksum[8] = 0;
 			while (this.jagChecksum[8] == 0) {
 				this.drawProgress("Connecting to web server", 20);
 				try {
-					DataInputStream var5 = this.openUrl("crc" + (int) (Math.random() * 9.9999999E7D));
+					FileDownloadStream var5 = this.openUrl("crc" + (int) (Math.random() * 9.9999999E7D));
 					Packet var6 = new Packet(new byte[36]);
 					var5.readFully(var6.data, 0, 36);
 					for (int var7 = 0; var7 < 9; var7++) {
@@ -1613,7 +1559,7 @@ public class Client extends GameShell {
 				} catch (Exception var72) {
 				}
 			}
-			if (this.fileStreams[0] != null) {
+			if (false) { // this.fileStreams[0] != null
 				this.drawProgress("Requesting maps", 75);
 				this.onDemand.request(3, this.onDemand.getMapFile(47, 48, 0));
 				this.onDemand.request(3, this.onDemand.getMapFile(47, 48, 1));
@@ -1746,31 +1692,31 @@ public class Client extends GameShell {
 				this.imageModIcons[var39] = new Pix8(var11, "mod_icons", var39);
 			}
 			Pix32 var40 = new Pix32(var11, "backleft1", 0);
-			this.areaBackleft1 = new PixMap(this.getBaseComponent(), var40.wi, var40.hi);
+			this.areaBackleft1 = new PixMap(this.context, var40.wi, var40.hi);
 			var40.quickPlotSprite(0, 0);
 			Pix32 var41 = new Pix32(var11, "backleft2", 0);
-			this.areaBackleft2 = new PixMap(this.getBaseComponent(), var41.wi, var41.hi);
+			this.areaBackleft2 = new PixMap(this.context, var41.wi, var41.hi);
 			var41.quickPlotSprite(0, 0);
 			Pix32 var42 = new Pix32(var11, "backright1", 0);
-			this.areaBackright1 = new PixMap(this.getBaseComponent(), var42.wi, var42.hi);
+			this.areaBackright1 = new PixMap(this.context, var42.wi, var42.hi);
 			var42.quickPlotSprite(0, 0);
 			Pix32 var43 = new Pix32(var11, "backright2", 0);
-			this.areaBackright2 = new PixMap(this.getBaseComponent(), var43.wi, var43.hi);
+			this.areaBackright2 = new PixMap(this.context, var43.wi, var43.hi);
 			var43.quickPlotSprite(0, 0);
 			Pix32 var44 = new Pix32(var11, "backtop1", 0);
-			this.areaBacktop1 = new PixMap(this.getBaseComponent(), var44.wi, var44.hi);
+			this.areaBacktop1 = new PixMap(this.context, var44.wi, var44.hi);
 			var44.quickPlotSprite(0, 0);
 			Pix32 var45 = new Pix32(var11, "backvmid1", 0);
-			this.areaBackvmid1 = new PixMap(this.getBaseComponent(), var45.wi, var45.hi);
+			this.areaBackvmid1 = new PixMap(this.context, var45.wi, var45.hi);
 			var45.quickPlotSprite(0, 0);
 			Pix32 var46 = new Pix32(var11, "backvmid2", 0);
-			this.areaBackvmid2 = new PixMap(this.getBaseComponent(), var46.wi, var46.hi);
+			this.areaBackvmid2 = new PixMap(this.context, var46.wi, var46.hi);
 			var46.quickPlotSprite(0, 0);
 			Pix32 var47 = new Pix32(var11, "backvmid3", 0);
-			this.areaBackvmid3 = new PixMap(this.getBaseComponent(), var47.wi, var47.hi);
+			this.areaBackvmid3 = new PixMap(this.context, var47.wi, var47.hi);
 			var47.quickPlotSprite(0, 0);
 			Pix32 var48 = new Pix32(var11, "backhmid2", 0);
-			this.areaBackhmid2 = new PixMap(this.getBaseComponent(), var48.wi, var48.hi);
+			this.areaBackhmid2 = new PixMap(this.context, var48.wi, var48.hi);
 			var48.quickPlotSprite(0, 0);
 			int var49 = (int) (Math.random() * 21.0D) - 10;
 			int var50 = (int) (Math.random() * 21.0D) - 10;
@@ -2034,6 +1980,9 @@ public class Client extends GameShell {
 
 	@ObfuscatedName("client.a(BLjava/lang/String;I)V")
 	public void drawProgress(String arg1, int arg2) {
+		if (this.lastProgressPercent != arg2 && this.lastProgressMessage != arg1) {
+			System.out.println(arg2 + "%: " + arg1);
+		}
 		boolean var4 = false;
 		this.lastProgressPercent = arg2;
 		this.lastProgressMessage = arg1;
@@ -2053,87 +2002,87 @@ public class Client extends GameShell {
 		Pix2D.fillRect(30, arg2 * 3, var5 / 2 - 150, var8 + 2, 9179409);
 		Pix2D.fillRect(30, 300 - arg2 * 3, var5 / 2 - 150 + arg2 * 3, var8 + 2, 0);
 		this.fontBold12.centreString(var6 / 2 + 5 - var7, arg1, var5 / 2, 16777215);
-		this.imageTitle4.draw(171, 202, super.graphics);
+		this.imageTitle4.draw(171, 202, this.context);
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
 			if (!this.flameActive) {
-				this.imageTitle0.draw(0, 0, super.graphics);
-				this.imageTitle1.draw(0, 637, super.graphics);
+				this.imageTitle0.draw(0, 0, this.context);
+				this.imageTitle1.draw(0, 637, this.context);
 			}
-			this.imageTitle2.draw(0, 128, super.graphics);
-			this.imageTitle3.draw(371, 202, super.graphics);
-			this.imageTitle5.draw(265, 0, super.graphics);
-			this.imageTitle6.draw(265, 562, super.graphics);
-			this.imageTitle7.draw(171, 128, super.graphics);
-			this.imageTitle8.draw(171, 562, super.graphics);
+			this.imageTitle2.draw(0, 128, this.context);
+			this.imageTitle3.draw(371, 202, this.context);
+			this.imageTitle5.draw(265, 0, this.context);
+			this.imageTitle6.draw(265, 562, this.context);
+			this.imageTitle7.draw(171, 128, this.context);
+			this.imageTitle8.draw(171, 562, this.context);
 		}
 	}
 
 	@ObfuscatedName("client.s(I)V")
 	public void drawError() {
-		Graphics var2 = this.getBaseComponent().getGraphics();
-		var2.setColor(Color.black);
-		var2.fillRect(0, 0, 765, 503);
-		this.setFramerate(1);
-		if (this.errorLoading) {
-			this.flameActive = false;
-			var2.setFont(new Font("Helvetica", 1, 16));
-			var2.setColor(Color.yellow);
-			byte var3 = 35;
-			var2.drawString("Sorry, an error has occured whilst loading RuneScape", 30, var3);
-			int var5 = var3 + 50;
-			var2.setColor(Color.white);
-			var2.drawString("To fix this try the following (in order):", 30, var5);
-			int var6 = var5 + 50;
-			var2.setColor(Color.white);
-			var2.setFont(new Font("Helvetica", 1, 12));
-			var2.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, var6);
-			int var7 = var6 + 30;
-			var2.drawString("2: Try clearing your web-browsers cache from tools->internet options", 30, var7);
-			int var8 = var7 + 30;
-			var2.drawString("3: Try using a different game-world", 30, var8);
-			int var10 = var8 + 30;
-			var2.drawString("4: Try rebooting your computer", 30, var10);
-			int var12 = var10 + 30;
-			var2.drawString("5: Try selecting a different version of Java from the play-game menu", 30, var12);
-		}
-		if (this.errorHost) {
-			this.flameActive = false;
-			var2.setFont(new Font("Helvetica", 1, 20));
-			var2.setColor(Color.white);
-			var2.drawString("Error - unable to load game!", 50, 50);
-			var2.drawString("To play RuneScape make sure you play from", 50, 100);
-			var2.drawString("http://www.runescape.com", 50, 150);
-		}
-		if (!this.errorStarted) {
-			return;
-		}
-		this.flameActive = false;
-		var2.setColor(Color.yellow);
-		byte var4 = 35;
-		var2.drawString("Error a copy of RuneScape already appears to be loaded", 30, var4);
-		int var9 = var4 + 50;
-		var2.setColor(Color.white);
-		var2.drawString("To fix this try the following (in order):", 30, var9);
-		int var11 = var9 + 50;
-		var2.setColor(Color.white);
-		var2.setFont(new Font("Helvetica", 1, 12));
-		var2.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, var11);
-		int var13 = var11 + 30;
-		var2.drawString("2: Try rebooting your computer, and reloading", 30, var13);
-		int var14 = var13 + 30;
+		// Graphics var2 = this.getBaseComponent().getGraphics();
+		// var2.setColor(Color.black);
+		// var2.fillRect(0, 0, 765, 503);
+		// this.setFramerate(1);
+		// if (this.errorLoading) {
+		// 	this.flameActive = false;
+		// 	var2.setFont(new Font("Helvetica", 1, 16));
+		// 	var2.setColor(Color.yellow);
+		// 	byte var3 = 35;
+		// 	var2.drawString("Sorry, an error has occured whilst loading RuneScape", 30, var3);
+		// 	int var5 = var3 + 50;
+		// 	var2.setColor(Color.white);
+		// 	var2.drawString("To fix this try the following (in order):", 30, var5);
+		// 	int var6 = var5 + 50;
+		// 	var2.setColor(Color.white);
+		// 	var2.setFont(new Font("Helvetica", 1, 12));
+		// 	var2.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, var6);
+		// 	int var7 = var6 + 30;
+		// 	var2.drawString("2: Try clearing your web-browsers cache from tools->internet options", 30, var7);
+		// 	int var8 = var7 + 30;
+		// 	var2.drawString("3: Try using a different game-world", 30, var8);
+		// 	int var10 = var8 + 30;
+		// 	var2.drawString("4: Try rebooting your computer", 30, var10);
+		// 	int var12 = var10 + 30;
+		// 	var2.drawString("5: Try selecting a different version of Java from the play-game menu", 30, var12);
+		// }
+		// if (this.errorHost) {
+		// 	this.flameActive = false;
+		// 	var2.setFont(new Font("Helvetica", 1, 20));
+		// 	var2.setColor(Color.white);
+		// 	var2.drawString("Error - unable to load game!", 50, 50);
+		// 	var2.drawString("To play RuneScape make sure you play from", 50, 100);
+		// 	var2.drawString("http://www.runescape.com", 50, 150);
+		// }
+		// if (!this.errorStarted) {
+		// 	return;
+		// }
+		// this.flameActive = false;
+		// var2.setColor(Color.yellow);
+		// byte var4 = 35;
+		// var2.drawString("Error a copy of RuneScape already appears to be loaded", 30, var4);
+		// int var9 = var4 + 50;
+		// var2.setColor(Color.white);
+		// var2.drawString("To fix this try the following (in order):", 30, var9);
+		// int var11 = var9 + 50;
+		// var2.setColor(Color.white);
+		// var2.setFont(new Font("Helvetica", 1, 12));
+		// var2.drawString("1: Try closing ALL open web-browser windows, and reloading", 30, var11);
+		// int var13 = var11 + 30;
+		// var2.drawString("2: Try rebooting your computer, and reloading", 30, var13);
+		// int var14 = var13 + 30;
 	}
 
 	@ObfuscatedName("client.a(Ljava/lang/String;IIZLjava/lang/String;I)Lyb;")
 	public JagFile getJagFile(String arg0, int arg1, int arg2, String arg4, int arg5) {
 		byte[] var7 = null;
 		int var8 = 5;
-		try {
-			if (this.fileStreams[0] != null) {
-				var7 = this.fileStreams[0].read(arg5);
-			}
-		} catch (Exception var29) {
-		}
+		// try {
+		// 	if (this.fileStreams[0] != null) {
+		// 		var7 = this.fileStreams[0].read(arg5);
+		// 	}
+		// } catch (Exception var29) {
+		// }
 		if (var7 != null) {
 			this.crc32.reset();
 			this.crc32.update(var7);
@@ -2152,7 +2101,7 @@ public class Client extends GameShell {
 			Object var13 = null;
 			try {
 				int var14 = 0;
-				DataInputStream var15 = this.openUrl(arg4 + arg1);
+				FileDownloadStream var15 = this.openUrl(arg4 + arg1);
 				byte[] var16 = new byte[6];
 				var15.readFully(var16, 0, 6);
 				Packet var17 = new Packet(var16);
@@ -2168,7 +2117,7 @@ public class Client extends GameShell {
 					if (var21 > 1000) {
 						var21 = 1000;
 					}
-					int var22 = var15.read(var7, var19, var21);
+					int var22 = var15.readFully(var7, var19, var21);
 					if (var22 < 0) {
 						(new StringBuffer("Length error: ")).append(var19).append("/").append(var18).toString();
 						throw new IOException("EOF");
@@ -2181,13 +2130,13 @@ public class Client extends GameShell {
 					var14 = var23;
 				}
 				var15.close();
-				try {
-					if (this.fileStreams[0] != null) {
-						this.fileStreams[0].write(var7.length, arg5, var7);
-					}
-				} catch (Exception var28) {
-					this.fileStreams[0] = null;
-				}
+				// try {
+				// 	if (this.fileStreams[0] != null) {
+				// 		this.fileStreams[0].write(var7.length, arg5, var7);
+				// 	}
+				// } catch (Exception var28) {
+				// 	this.fileStreams[0] = null;
+				// }
 				if (var7 != null) {
 					this.crc32.reset();
 					this.crc32.update(var7);
@@ -2394,7 +2343,7 @@ public class Client extends GameShell {
 				this.loginMes2 = "Connecting to server...";
 				this.titleScreenDraw(true);
 			}
-			this.stream = new ClientStream(this, this.openSocket(portOffset + 43594));
+			this.stream = this.openSocket(portOffset + 43594);
 			long var4 = JString.toBase37(arg0);
 			int var6 = (int) (var4 >> 16 & 0x1FL);
 			this.out.pos = 0;
@@ -2679,16 +2628,16 @@ public class Client extends GameShell {
 		this.imageTitle6 = null;
 		this.imageTitle7 = null;
 		this.imageTitle8 = null;
-		this.areaChatback = new PixMap(this.getBaseComponent(), 479, 96);
-		this.areaMapback = new PixMap(this.getBaseComponent(), 172, 156);
+		this.areaChatback = new PixMap(this.context, 479, 96);
+		this.areaMapback = new PixMap(this.context, 172, 156);
 		Pix2D.cls();
 		this.imageMapback.plotSprite(0, 0);
-		this.areaSidebar = new PixMap(this.getBaseComponent(), 190, 261);
-		this.areaViewport = new PixMap(this.getBaseComponent(), 512, 334);
+		this.areaSidebar = new PixMap(this.context, 190, 261);
+		this.areaViewport = new PixMap(this.context, 512, 334);
 		Pix2D.cls();
-		this.areaBackbase1 = new PixMap(this.getBaseComponent(), 496, 50);
-		this.areaBackbase2 = new PixMap(this.getBaseComponent(), 269, 37);
-		this.areaBackhmid1 = new PixMap(this.getBaseComponent(), 249, 45);
+		this.areaBackbase1 = new PixMap(this.context, 496, 50);
+		this.areaBackbase2 = new PixMap(this.context, 269, 37);
+		this.areaBackhmid1 = new PixMap(this.context, 249, 45);
 		this.redrawFrame = true;
 	}
 
@@ -3052,9 +3001,9 @@ public class Client extends GameShell {
 		this.fontPlain12.centreString(143, "Connection lost", 256, 16777215);
 		this.fontPlain12.centreString(159, "Please wait - attempting to reestablish", 257, 0);
 		this.fontPlain12.centreString(158, "Please wait - attempting to reestablish", 256, 16777215);
-		this.areaViewport.draw(4, 4, super.graphics);
+		this.areaViewport.draw(4, 4, this.context);
 		this.flagSceneTileX = 0;
-		ClientStream var2 = this.stream;
+		WebClientStream var2 = this.stream;
 		this.ingame = false;
 		this.login(this.loginUser, this.loginPass, true);
 		if (!this.ingame) {
@@ -3072,14 +3021,15 @@ public class Client extends GameShell {
 			this.areaViewport.bind();
 			this.fontPlain12.centreString(151, "Loading - please wait.", 257, 0);
 			this.fontPlain12.centreString(150, "Loading - please wait.", 256, 16777215);
-			this.areaViewport.draw(4, 4, super.graphics);
+			this.areaViewport.draw(4, 4, this.context);
 			this.sceneState = 1;
 			this.sceneLoadStartTime = System.currentTimeMillis();
 		}
 		if (this.sceneState == 1) {
 			int var2 = this.checkScene();
 			if (var2 != 0 && System.currentTimeMillis() - this.sceneLoadStartTime > 360000L) {
-				signlink.reporterror(this.loginUser + " glcfb " + this.serverSeed + "," + var2 + "," + lowMem + "," + this.fileStreams[0] + "," + this.onDemand.remaining() + "," + this.minusedlevel + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ);
+				// this.fileStreams[0] + "," + 
+				signlink.reporterror(this.loginUser + " glcfb " + this.serverSeed + "," + var2 + "," + lowMem + "," + this.onDemand.remaining() + "," + this.minusedlevel + "," + this.sceneCenterZoneX + "," + this.sceneCenterZoneZ);
 				this.sceneLoadStartTime = System.currentTimeMillis();
 			}
 		}
@@ -3193,7 +3143,7 @@ public class Client extends GameShell {
 		} catch (Exception var34) {
 		}
 		LocType.mc1.clear();
-		if (lowMem && signlink.cache_dat != null) {
+		if (lowMem && false) { // signlink.cache_dat != null
 			int var23 = this.onDemand.getFileCount(0);
 			for (int var24 = 0; var24 < var23; var24++) {
 				int var25 = this.onDemand.getModelFlags(var24);
@@ -4377,6 +4327,12 @@ public class Client extends GameShell {
 										this.onDemand.prefetchPriority(2, (byte) 1, var13);
 									}
 								}
+								if (this.chatTyped.equals("::fpson")) {
+									this.displayFps = true;
+								}
+								if (this.chatTyped.equals("::fpsoff")) {
+									this.displayFps = false;
+								}
 							}
 							if (this.chatTyped.startsWith("::")) {
 								// CLIENT_CHEAT
@@ -4496,9 +4452,9 @@ public class Client extends GameShell {
 		System.out.println("draw-cycle:" + drawCycle);
 		System.out.println("ptype:" + this.ptype);
 		System.out.println("psize:" + this.psize);
-		if (this.stream != null) {
-			this.stream.debug();
-		}
+		// if (this.stream != null) {
+		// 	this.stream.debug();
+		// }
 		super.debug = true;
 	}
 
@@ -4855,23 +4811,23 @@ public class Client extends GameShell {
 		this.areaBackbase1 = null;
 		this.areaBackbase2 = null;
 		this.areaBackhmid1 = null;
-		this.imageTitle0 = new PixMap(this.getBaseComponent(), 128, 265);
+		this.imageTitle0 = new PixMap(this.context, 128, 265);
 		Pix2D.cls();
-		this.imageTitle1 = new PixMap(this.getBaseComponent(), 128, 265);
+		this.imageTitle1 = new PixMap(this.context, 128, 265);
 		Pix2D.cls();
-		this.imageTitle2 = new PixMap(this.getBaseComponent(), 509, 171);
+		this.imageTitle2 = new PixMap(this.context, 509, 171);
 		Pix2D.cls();
-		this.imageTitle3 = new PixMap(this.getBaseComponent(), 360, 132);
+		this.imageTitle3 = new PixMap(this.context, 360, 132);
 		Pix2D.cls();
-		this.imageTitle4 = new PixMap(this.getBaseComponent(), 360, 200);
+		this.imageTitle4 = new PixMap(this.context, 360, 200);
 		Pix2D.cls();
-		this.imageTitle5 = new PixMap(this.getBaseComponent(), 202, 238);
+		this.imageTitle5 = new PixMap(this.context, 202, 238);
 		Pix2D.cls();
-		this.imageTitle6 = new PixMap(this.getBaseComponent(), 203, 238);
+		this.imageTitle6 = new PixMap(this.context, 203, 238);
 		Pix2D.cls();
-		this.imageTitle7 = new PixMap(this.getBaseComponent(), 74, 94);
+		this.imageTitle7 = new PixMap(this.context, 74, 94);
 		Pix2D.cls();
-		this.imageTitle8 = new PixMap(this.getBaseComponent(), 75, 94);
+		this.imageTitle8 = new PixMap(this.context, 75, 94);
 		Pix2D.cls();
 		if (this.jagTitle != null) {
 			this.loadTitleBackground();
@@ -4883,7 +4839,7 @@ public class Client extends GameShell {
 	@ObfuscatedName("client.i(B)V")
 	public void loadTitleBackground() {
 		byte[] var2 = this.jagTitle.read("title.dat", null);
-		Pix32 var3 = new Pix32(var2, this);
+		Pix32 var3 = new Pix32(var2, this.context);
 		this.imageTitle0.bind();
 		var3.quickPlotSprite(0, 0);
 		this.imageTitle1.bind();
@@ -5068,15 +5024,15 @@ public class Client extends GameShell {
 			this.imageTitlebutton.plotSprite(var16 - 73, var17 - 20);
 			this.fontBold12.centreStringTag(16777215, var16, "Cancel", var17 + 5, true);
 		}
-		this.imageTitle4.draw(171, 202, super.graphics);
+		this.imageTitle4.draw(171, 202, this.context);
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
-			this.imageTitle2.draw(0, 128, super.graphics);
-			this.imageTitle3.draw(371, 202, super.graphics);
-			this.imageTitle5.draw(265, 0, super.graphics);
-			this.imageTitle6.draw(265, 562, super.graphics);
-			this.imageTitle7.draw(171, 128, super.graphics);
-			this.imageTitle8.draw(171, 562, super.graphics);
+			this.imageTitle2.draw(0, 128, this.context);
+			this.imageTitle3.draw(371, 202, this.context);
+			this.imageTitle5.draw(265, 0, this.context);
+			this.imageTitle6.draw(265, 562, this.context);
+			this.imageTitle7.draw(171, 128, this.context);
+			this.imageTitle8.draw(171, 562, this.context);
 		}
 	}
 
@@ -5084,22 +5040,22 @@ public class Client extends GameShell {
 	public void gameDraw() {
 		if (this.redrawFrame) {
 			this.redrawFrame = false;
-			this.areaBackleft1.draw(4, 0, super.graphics);
-			this.areaBackleft2.draw(357, 0, super.graphics);
-			this.areaBackright1.draw(4, 722, super.graphics);
-			this.areaBackright2.draw(205, 743, super.graphics);
-			this.areaBacktop1.draw(0, 0, super.graphics);
-			this.areaBackvmid1.draw(4, 516, super.graphics);
-			this.areaBackvmid2.draw(205, 516, super.graphics);
-			this.areaBackvmid3.draw(357, 496, super.graphics);
-			this.areaBackhmid2.draw(338, 0, super.graphics);
+			this.areaBackleft1.draw(4, 0, this.context);
+			this.areaBackleft2.draw(357, 0, this.context);
+			this.areaBackright1.draw(4, 722, this.context);
+			this.areaBackright2.draw(205, 743, this.context);
+			this.areaBacktop1.draw(0, 0, this.context);
+			this.areaBackvmid1.draw(4, 516, this.context);
+			this.areaBackvmid2.draw(205, 516, this.context);
+			this.areaBackvmid3.draw(357, 496, this.context);
+			this.areaBackhmid2.draw(338, 0, this.context);
 			this.redrawSidebar = true;
 			this.redrawChatback = true;
 			this.redrawSideicons = true;
 			this.redrawPrivacySettings = true;
 			if (this.sceneState != 2) {
-				this.areaViewport.draw(4, 4, super.graphics);
-				this.areaMapback.draw(4, 550, super.graphics);
+				this.areaViewport.draw(4, 4, this.context);
+				this.areaMapback.draw(4, 550, this.context);
 			}
 		}
 		if (this.sceneState == 2) {
@@ -5165,7 +5121,7 @@ public class Client extends GameShell {
 		}
 		if (this.sceneState == 2) {
 			this.drawMinimap();
-			this.areaMapback.draw(4, 550, super.graphics);
+			this.areaMapback.draw(4, 550, this.context);
 		}
 		if (this.flashingTab != -1) {
 			this.redrawSideicons = true;
@@ -5226,7 +5182,7 @@ public class Client extends GameShell {
 					this.imageSideicons[6].plotSprite(208, 13);
 				}
 			}
-			this.areaBackhmid1.draw(160, 516, super.graphics);
+			this.areaBackhmid1.draw(160, 516, this.context);
 			this.areaBackbase2.bind();
 			this.imageBackbase2.plotSprite(0, 0);
 			if (this.sideLayerId == -1) {
@@ -5272,7 +5228,7 @@ public class Client extends GameShell {
 					this.imageSideicons[12].plotSprite(226, 2);
 				}
 			}
-			this.areaBackbase2.draw(466, 496, super.graphics);
+			this.areaBackbase2.draw(466, 496, this.context);
 			this.areaViewport.bind();
 		}
 		if (this.redrawPrivacySettings) {
@@ -5313,7 +5269,7 @@ public class Client extends GameShell {
 				this.fontPlain12.centreStringTag(16711680, 324, "Off", 41, true);
 			}
 			this.fontPlain12.centreStringTag(16777215, 458, "Report abuse", 33, true);
-			this.areaBackbase1.draw(453, 0, super.graphics);
+			this.areaBackbase1.draw(453, 0, this.context);
 			this.areaViewport.bind();
 		}
 		this.sceneDelta = 0;
@@ -5388,7 +5344,7 @@ public class Client extends GameShell {
 		this.coordArrow();
 		this.textureRunAnims(var12);
 		this.otherOverlays();
-		this.areaViewport.draw(4, 4, super.graphics);
+		this.areaViewport.draw(4, 4, this.context);
 		this.cameraX = var5;
 		this.cameraY = var6;
 		this.cameraZ = var7;
@@ -5974,6 +5930,16 @@ public class Client extends GameShell {
 		if (this.inMultizone == 1) {
 			this.imageHeadicons[1].plotSprite(472, 296);
 		}
+
+		if (this.displayFps) {
+			int color = 0xFFFF00;
+			if (this.fps < 15) {
+				color = 0xFF0000;
+			}
+
+			this.fontPlain12.drawString(color, 4, 40, "Fps: " + this.fps);
+		}
+
 		if (this.systemUpdateTimer == 0) {
 			return;
 		}
@@ -7416,7 +7382,7 @@ public class Client extends GameShell {
 				this.areaViewport.bind();
 				this.fontPlain12.centreString(151, "Loading - please wait.", 257, 0);
 				this.fontPlain12.centreString(150, "Loading - please wait.", 256, 16777215);
-				this.areaViewport.draw(4, 4, super.graphics);
+				this.areaViewport.draw(4, 4, this.context);
 				int var126 = 0;
 				for (int var127 = (this.sceneCenterZoneX - 6) / 8; var127 <= (this.sceneCenterZoneX + 6) / 8; var127++) {
 					for (int var128 = (this.sceneCenterZoneZ - 6) / 8; var128 <= (this.sceneCenterZoneZ + 6) / 8; var128++) {
@@ -10656,7 +10622,7 @@ public class Client extends GameShell {
 		if (this.menuVisible && this.menuArea == 1) {
 			this.drawMenu();
 		}
-		this.areaSidebar.draw(205, 553, super.graphics);
+		this.areaSidebar.draw(205, 553, this.context);
 		this.areaViewport.bind();
 		Pix3D.scanline = this.areaViewportOffset;
 	}
@@ -10785,7 +10751,7 @@ public class Client extends GameShell {
 		if (this.menuVisible && this.menuArea == 2) {
 			this.drawMenu();
 		}
-		this.areaChatback.draw(357, 17, super.graphics);
+		this.areaChatback.draw(357, 17, this.context);
 		this.areaViewport.bind();
 		Pix3D.scanline = this.areaViewportOffset;
 	}
@@ -11260,7 +11226,7 @@ public class Client extends GameShell {
 			}
 			var8 += var11;
 		}
-		this.imageTitle0.draw(0, 0, super.graphics);
+		this.imageTitle0.draw(0, 0, this.context);
 		for (int var18 = 0; var18 < 33920; var18++) {
 			this.imageTitle1.data[var18] = this.imageFlamesRight.data[var18];
 		}
@@ -11284,7 +11250,7 @@ public class Client extends GameShell {
 			var19 += 128 - var23;
 			var20 = var24 + (128 - var23 - var22);
 		}
-		this.imageTitle1.draw(0, 637, super.graphics);
+		this.imageTitle1.draw(0, 637, this.context);
 	}
 
 	@ObfuscatedName("client.a(IZII)I")

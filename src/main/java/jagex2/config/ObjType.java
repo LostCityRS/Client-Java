@@ -40,7 +40,7 @@ public class ObjType {
 	public String name;
 
 	@ObfuscatedName("hc.o")
-	public byte[] desc;
+	public String desc;
 
 	@ObfuscatedName("hc.p")
 	public int[] recol_s;
@@ -197,7 +197,7 @@ public class ObjType {
 		}
 		if (!membersWorld && var2.members) {
 			var2.name = "Members Object";
-			var2.desc = "Login to a members' server to use this object.".getBytes();
+			var2.desc = "Login to a members' server to use this object.";
 			var2.op = null;
 			var2.iop = null;
 		}
@@ -258,7 +258,7 @@ public class ObjType {
 			} else if (var4 == 2) {
 				this.name = arg1.gstr();
 			} else if (var4 == 3) {
-				this.desc = arg1.gstrbyte();
+				this.desc = arg1.gstr();
 			} else if (var4 == 4) {
 				this.zoom2d = arg1.g2();
 			} else if (var4 == 5) {
@@ -374,7 +374,7 @@ public class ObjType {
 		if (var5 == 'A' || var5 == 'E' || var5 == 'I' || var5 == 'O' || var5 == 'U') {
 			var4 = "an";
 		}
-		this.desc = ("Swap this note at any bank for " + var4 + " " + var3.name + ".").getBytes();
+		this.desc = "Swap this note at any bank for " + var4 + " " + var3.name + ".";
 		this.stackable = true;
 	}
 

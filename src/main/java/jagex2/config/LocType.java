@@ -42,7 +42,7 @@ public class LocType {
 	public String name;
 
 	@ObfuscatedName("ec.m")
-	public byte[] desc;
+	public String desc;
 
 	@ObfuscatedName("ec.n")
 	public int[] recol_s;
@@ -251,7 +251,7 @@ public class LocType {
 					if (var4 == 2) {
 						this.name = arg1.gstr();
 					} else if (var4 == 3) {
-						this.desc = arg1.gstrbyte();
+						this.desc = arg1.gstr();
 					} else if (var4 == 5) {
 						int var7 = arg1.g1();
 						if (var7 > 0) {

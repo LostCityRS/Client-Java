@@ -1,48 +1,29 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.guardsquare:proguard-gradle:7.6.0'
-    }
-}
-
 plugins {
     id 'java'
-    id 'application'
+    id "org.teavm" version "0.13.0"
+    id 'war'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+repositories {
+    mavenCentral()
 }
 
-application {
-    mainClass = "jagex2.client.Client"
-}
-
-jar {
-    manifest {
-        attributes(
-            'Main-Class': 'jagex2.client.Client'
-        )
-    }
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+dependencies {
+    implementation teavm.libs.jsoApis
 }
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-tasks.register('proguard', proguard.gradle.ProGuardTask) {
-    configuration file('proguard.pro')
-
-    injars(tasks.named('jar', Jar).flatMap { it.archiveFile })
-
-    outjars(layout.buildDirectory.file("libs/${project.name}.rel.jar"))
+teavm {
+    all {
+        mainClass = "jagex2.client.Client"
+    }
+    js {
+        addedToWebApp = true
+    }
+    wasmGC {
+        addedToWebApp = true
+    }
 }

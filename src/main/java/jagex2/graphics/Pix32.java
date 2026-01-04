@@ -4,8 +4,16 @@ import deob.ObfuscatedName;
 import jagex2.io.JagFile;
 import jagex2.io.Packet;
 
-import java.awt.*;
-import java.awt.image.PixelGrabber;
+import org.teavm.interop.Async;
+import org.teavm.interop.AsyncCallback;
+import org.teavm.jso.JSBody;
+import org.teavm.jso.JSObject;
+import org.teavm.jso.browser.Window;
+import org.teavm.jso.canvas.CanvasRenderingContext2D;
+import org.teavm.jso.canvas.ImageData;
+import org.teavm.jso.dom.html.HTMLImageElement;
+import org.teavm.jso.typedarrays.Uint8Array;
+import org.teavm.jso.typedarrays.Uint8ClampedArray;
 
 @ObfuscatedName("jb")
 public class Pix32 extends Pix2D {
@@ -31,6 +39,23 @@ public class Pix32 extends Pix2D {
 	@ObfuscatedName("jb.J")
 	public int xof;
 
+	@JSBody(params = {"arr", "type"}, script = "return new Blob([arr], {type:type});")
+	public static native JSObject blobify(Uint8Array arr, String type);
+
+	@JSBody(params = {"blob"}, script = "return (window.URL || window.webkitURL).createObjectURL(blob);")
+	public static native String createObjectUrl(JSObject blob);
+
+	@JSBody(params = {"url"}, script = "return (window.URL || window.webkitURL).revokeObjectURL(url);")
+	public static native void revokeObjectURL(String url);
+
+	@Async
+	private static native HTMLImageElement load(String url);
+	private static void load(String url, AsyncCallback<HTMLImageElement> callback) {
+		HTMLImageElement img = Window.current().getDocument().createElement("img").cast();
+		img.addEventListener("load", evt -> callback.complete(img));
+		img.setSrc(url);
+	}
+
 	public Pix32(int arg0, int arg1) {
 		this.data = new int[arg0 * arg1];
 		this.wi = this.owi = arg0;
@@ -38,21 +63,31 @@ public class Pix32 extends Pix2D {
 		this.xof = this.yof = 0;
 	}
 
-	public Pix32(byte[] arg0, Component arg1) {
+	public Pix32(byte[] src, CanvasRenderingContext2D context) {
 		try {
-			Image var3 = Toolkit.getDefaultToolkit().createImage(arg0);
-			MediaTracker var4 = new MediaTracker(arg1);
-			var4.addImage(var3, 0);
-			var4.waitForAll();
-			this.wi = var3.getWidth(arg1);
-			this.hi = var3.getHeight(arg1);
-			this.owi = this.wi;
-			this.ohi = this.hi;
+			Uint8Array arr = Uint8Array.create(src.length);
+			arr.set(src);
+			JSObject blob = blobify(arr, "image/jpeg");
+			String objUrl = createObjectUrl(blob);
+			HTMLImageElement img = load(objUrl);
+			context.drawImage(img, 0, 0);
+			ImageData rawData = context.getImageData(0, 0, img.getWidth(), img.getHeight());
+			revokeObjectURL(objUrl);
+			Uint8ClampedArray raw = rawData.getData();
+
+			this.wi = img.getWidth();
+			this.hi = img.getHeight();
+			this.owi = this.width;
+			this.ohi = this.height;
 			this.xof = 0;
 			this.yof = 0;
 			this.data = new int[this.wi * this.hi];
-			PixelGrabber var5 = new PixelGrabber(var3, 0, 0, this.wi, this.hi, this.data, 0, this.wi);
-			var5.grabPixels();
+			for (int i = 0, off = 0; i < this.wi * this.hi * 4; i += 4) {
+				int r = raw.get(i);
+				int g = raw.get(i + 1);
+				int b = raw.get(i + 2);
+				this.data[off++] = (r << 16) | (g << 8) | b;
+			}
 		} catch (Exception var6) {
 			System.out.println("Error converting jpg");
 		}

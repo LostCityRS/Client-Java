@@ -176,7 +176,7 @@ public class Packet extends DoublyLinkable {
 	// name from passapplet
 	@ObfuscatedName("mb.a(Ljava/lang/String;)V")
 	public void pjstr(String arg0) {
-		arg0.getBytes(0, arg0.length(), this.data, this.pos);
+		System.arraycopy(arg0.getBytes(), 0, this.data, this.pos, arg0.length());
 		this.pos += arg0.length();
 		this.data[this.pos++] = 10;
 	}

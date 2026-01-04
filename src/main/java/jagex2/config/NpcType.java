@@ -32,7 +32,7 @@ public class NpcType {
 	public String name;
 
 	@ObfuscatedName("gc.j")
-	public byte[] desc;
+	public String desc;
 
 	@ObfuscatedName("gc.k")
 	public byte size = 1;
@@ -162,7 +162,7 @@ public class NpcType {
 			} else if (var3 == 2) {
 				this.name = arg1.gstr();
 			} else if (var3 == 3) {
-				this.desc = arg1.gstrbyte();
+				this.desc = arg1.gstr();
 			} else if (var3 == 12) {
 				this.size = arg1.g1b();
 			} else if (var3 == 13) {

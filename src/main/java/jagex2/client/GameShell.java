@@ -8,8 +8,33 @@ import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.*;
 
+import org.teavm.jso.JSBody;
+import org.teavm.jso.JSObject;
+import org.teavm.jso.browser.TimerHandler;
+import org.teavm.jso.browser.Window;
+import org.teavm.jso.canvas.CanvasRenderingContext2D;
+import org.teavm.jso.canvas.ImageData;
+import org.teavm.jso.core.JSArray;
+import org.teavm.jso.core.JSNumber;
+import org.teavm.jso.core.JSString;
+import org.teavm.jso.dom.events.Event;
+import org.teavm.jso.dom.events.EventListener;
+import org.teavm.jso.dom.events.KeyboardEvent;
+import org.teavm.jso.dom.events.MouseEvent;
+import org.teavm.jso.dom.html.HTMLCanvasElement;
+import org.teavm.jso.dom.html.HTMLDocument;
+import org.teavm.jso.dom.html.HTMLElement;
+import org.teavm.jso.dom.html.TextRectangle;
+
 @ObfuscatedName("a")
-public class GameShell extends Applet implements Runnable, MouseListener, MouseMotionListener, KeyListener, FocusListener, WindowListener {
+public class GameShell implements Runnable {
+
+	protected HTMLCanvasElement canvas;
+	protected CanvasRenderingContext2D context;
+	protected ImageData imageData;
+
+	@JSBody(script = "return (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) != null")
+	public static native boolean isFullscreen();
 
 	@ObfuscatedName("a.g")
 	public int state;
@@ -43,9 +68,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	@ObfuscatedName("a.q")
 	public Pix32[] temp = new Pix32[6];
-
-	@ObfuscatedName("a.r")
-	public ViewBox frame;
 
 	@ObfuscatedName("a.s")
 	public boolean redrawScreen = true;
@@ -102,35 +124,100 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public long mouseClickTime;
 
 	@ObfuscatedName("a.a(IIB)V")
-	public void initApplication(int arg0, int arg1) {
-		this.setPreferredSize(new Dimension(arg0, arg1));
-
+	public void initApplet(int arg0, int arg1) {
 		this.canvasWidth = arg0;
 		this.canvasHeight = arg1;
-		this.frame = new ViewBox(false, this.canvasHeight, this, this.canvasWidth);
-		this.graphics = this.getBaseComponent().getGraphics();
-		this.drawArea = new PixMap(this.getBaseComponent(), this.canvasWidth, this.canvasHeight);
 
-		this.startThread(this, 1);
-	}
+		this.canvas = (HTMLCanvasElement) HTMLDocument.current().getElementById("canvas");
+		this.canvas.setAttribute("tabindex", "-1");
+		this.canvas.setWidth(this.canvasWidth);
+		this.canvas.setHeight(this.canvasHeight);
 
-	@ObfuscatedName("a.a(III)V")
-	public void initApplet(int arg1, int arg2) {
-		this.canvasWidth = arg2;
-		this.canvasHeight = arg1;
-		this.graphics = this.getBaseComponent().getGraphics();
-		this.drawArea = new PixMap(this.getBaseComponent(), this.canvasWidth, this.canvasHeight);
+		this.context = (CanvasRenderingContext2D) this.canvas.getContext("2d");
+		this.imageData = context.createImageData(this.canvasWidth, this.canvasHeight);
+
+		this.drawArea = new PixMap(this.context, this.canvasWidth, this.canvasHeight);
+
 		this.startThread(this, 1);
 	}
 
 	public void run() {
-		this.getBaseComponent().addMouseListener(this);
-		this.getBaseComponent().addMouseMotionListener(this);
-		this.getBaseComponent().addKeyListener(this);
-		this.getBaseComponent().addFocusListener(this);
-		if (this.frame != null) {
-			this.frame.addWindowListener(this);
-		}
+		this.canvas.addEventListener("mousedown", new EventListener<MouseEvent>() {
+			public void handleEvent(MouseEvent event) {
+				setMousePosition(event);
+				mousePressed(event.getButton() == 2 ? 2 : 1);
+			}
+		});
+
+		this.canvas.addEventListener("mouseup", new EventListener<MouseEvent>() {
+			public void handleEvent(MouseEvent event) {
+				setMousePosition(event);
+				mouseReleased(event.getButton() == 2 ? 2 : 1);
+			}
+		});
+
+		this.canvas.addEventListener("mouseleave", new EventListener<MouseEvent>() {
+			public void handleEvent(MouseEvent event) {
+				setMousePosition(event);
+				mouseReleased(event.getButton() == 2 ? 2 : 1);
+			}
+		});
+
+		this.canvas.addEventListener("mousemove", new EventListener<MouseEvent>() {
+			public void handleEvent(MouseEvent event) {
+				setMousePosition(event);
+				mouseMoved();
+			}
+		});
+
+		this.canvas.addEventListener("contextmenu", new EventListener<MouseEvent>() {
+			public void handleEvent(MouseEvent event) {
+				event.preventDefault();
+			}
+		});
+
+		this.canvas.addEventListener("keydown", new EventListener<KeyboardEvent>() {
+			public void handleEvent(KeyboardEvent event) {
+				int code = event.getKeyCode();
+				int charCode = event.getKey().length() == 1 ? event.getKey().charAt(0) : 65535;
+
+				if (code == 13) {
+					code = 10; // convert \r to \n (enter key)
+				}
+
+				if (code == 8 || code == 10 || code == 9) {
+					charCode = code;
+				}
+
+				if (event.getModifierState("Alt")) {
+					return;
+				}
+
+				keyPressed(charCode, code);
+			}
+		});
+
+		this.canvas.addEventListener("keyup", new EventListener<KeyboardEvent>() {
+			public void handleEvent(KeyboardEvent event) {
+				int code = event.getKeyCode();
+				int charCode = event.getKey().length() == 1 ? event.getKey().charAt(0) : 65535;
+
+				if (code == 13) {
+					code = 10; // convert \r to \n (enter key)
+				}
+
+				if (code == 8 || code == 10 || code == 9) {
+					charCode = code;
+				}
+
+				if (event.getModifierState("Alt")) {
+					return;
+				}
+
+				keyReleased(charCode, code);
+			}
+		});
+
 		this.drawProgress("Loading...", 0);
 		this.load();
 		int var1 = 0;
@@ -229,16 +316,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public void shutdown(boolean arg0) {
 		this.state = -2;
 		this.unload();
-		if (this.frame != null) {
-			try {
-				Thread.sleep(1000L);
-			} catch (Exception var4) {
-			}
-			try {
-				System.exit(0);
-			} catch (Throwable var3) {
-			}
-		}
 	}
 
 	@ObfuscatedName("a.a(II)V")
@@ -285,101 +362,46 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		this.refresh();
 	}
 
-	public void mousePressed(MouseEvent arg0) {
-		int var2 = arg0.getX();
-		int var3 = arg0.getY();
+	public void mousePressed(int button) {
+		int var2 = this.mouseX;
+		int var3 = this.mouseY;
 
 		this.idleCycles = 0;
 		this.nextMouseClickX = var2;
 		this.nextMouseClickY = var3;
 		this.nextMouseClickTime = System.currentTimeMillis();
 
-		try {
-			if (arg0.getButton() == MouseEvent.BUTTON3) {
-				this.nextMouseClickButton = 2;
-				this.mouseButton = 2;
-			} else {
-				this.nextMouseClickButton = 1;
-				this.mouseButton = 1;
-			}
+		if (button != 1) {
+			this.nextMouseClickButton = 2;
+			this.mouseButton = 2;
+		} else {
+			this.nextMouseClickButton = 1;
+			this.mouseButton = 1;
+		}
 
-			if (InputTracking.active) {
-				InputTracking.mousePressed(var2, var3, arg0.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
-			}
-		} catch (NoSuchMethodError ex) {
-			if (arg0.isMetaDown()) {
-				this.nextMouseClickButton = 2;
-				this.mouseButton = 2;
-			} else {
-				this.nextMouseClickButton = 1;
-				this.mouseButton = 1;
-			}
-
-			if (InputTracking.active) {
-				InputTracking.mousePressed(var2, var3, arg0.isMetaDown() ? 1 : 0);
-			}
+		if (InputTracking.active) {
+			InputTracking.mousePressed(var2, var3, button);
 		}
 	}
 
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(int button) {
 		this.idleCycles = 0;
 		this.mouseButton = 0;
 
-		try {
-			if (InputTracking.active) {
-				InputTracking.mouseReleased(arg0.getButton() == MouseEvent.BUTTON3 ? 1 : 0);
-			}
-		} catch (NoSuchMethodError ex) {
-			if (InputTracking.active) {
-				InputTracking.mouseReleased(arg0.isMetaDown() ? 1 : 0);
-			}
-		}
-	}
-
-	public void mouseClicked(MouseEvent arg0) {
-	}
-
-	public void mouseEntered(MouseEvent arg0) {
 		if (InputTracking.active) {
-			InputTracking.mouseEntered();
+			InputTracking.mouseReleased(button);
 		}
 	}
 
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseMoved() {
 		this.idleCycles = 0;
-		this.mouseX = -1;
-		this.mouseY = -1;
 		if (InputTracking.active) {
-			InputTracking.mouseExited();
+			InputTracking.mouseMoved(this.mouseX, this.mouseY);
 		}
 	}
 
-	public void mouseDragged(MouseEvent arg0) {
-		int var2 = arg0.getX();
-		int var3 = arg0.getY();
+	public void keyPressed(int var3, int var2) {
 		this.idleCycles = 0;
-		this.mouseX = var2;
-		this.mouseY = var3;
-		if (InputTracking.active) {
-			InputTracking.mouseMoved(var2, var3);
-		}
-	}
-
-	public void mouseMoved(MouseEvent arg0) {
-		int var2 = arg0.getX();
-		int var3 = arg0.getY();
-		this.idleCycles = 0;
-		this.mouseX = var2;
-		this.mouseY = var3;
-		if (InputTracking.active) {
-			InputTracking.mouseMoved(var2, var3);
-		}
-	}
-
-	public void keyPressed(KeyEvent arg0) {
-		this.idleCycles = 0;
-		int var2 = arg0.getKeyCode();
-		int var3 = arg0.getKeyChar();
 		if (var3 < 30) {
 			var3 = 0;
 		}
@@ -437,10 +459,8 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(int var3, int var2) {
 		this.idleCycles = 0;
-		int var2 = arg0.getKeyCode();
-		char var3 = arg0.getKeyChar();
 		if (var3 < 30) {
 			var3 = 0;
 		}
@@ -479,9 +499,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 		}
 	}
 
-	public void keyTyped(KeyEvent arg0) {
-	}
-
 	@ObfuscatedName("a.a(B)I")
 	public int pollKey() {
 		int var2 = -1;
@@ -490,44 +507,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 			this.keyQueueReadPos = this.keyQueueReadPos + 1 & 0x7F;
 		}
 		return var2;
-	}
-
-	public void focusGained(FocusEvent arg0) {
-		this.hasFocus = true;
-		this.redrawScreen = true;
-		this.refresh();
-		if (InputTracking.active) {
-			InputTracking.focusGained();
-		}
-	}
-
-	public void focusLost(FocusEvent arg0) {
-		this.hasFocus = false;
-		if (InputTracking.active) {
-			InputTracking.focusLost();
-		}
-	}
-
-	public void windowActivated(WindowEvent arg0) {
-	}
-
-	public void windowClosed(WindowEvent arg0) {
-	}
-
-	public void windowClosing(WindowEvent arg0) {
-		this.destroy();
-	}
-
-	public void windowDeactivated(WindowEvent arg0) {
-	}
-
-	public void windowDeiconified(WindowEvent arg0) {
-	}
-
-	public void windowIconified(WindowEvent arg0) {
-	}
-
-	public void windowOpened(WindowEvent arg0) {
 	}
 
 	@ObfuscatedName("a.a()V")
@@ -550,11 +529,6 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 	public void refresh() {
 	}
 
-	@ObfuscatedName("a.c(I)Ljava/awt/Component;")
-	public Component getBaseComponent() {
-		return this;
-	}
-
 	@ObfuscatedName("a.a(Ljava/lang/Runnable;I)V")
 	public void startThread(Runnable arg0, int arg1) {
 		Thread var3 = new Thread(arg0);
@@ -564,35 +538,75 @@ public class GameShell extends Applet implements Runnable, MouseListener, MouseM
 
 	@ObfuscatedName("a.a(BLjava/lang/String;I)V")
 	public void drawProgress(String arg1, int arg2) {
-		while (this.graphics == null) {
-			this.graphics = this.getBaseComponent().getGraphics();
-			try {
-				this.getBaseComponent().repaint();
-			} catch (Exception var10) {
-			}
-			try {
-				Thread.sleep(1000L);
-			} catch (Exception var9) {
-			}
+		// while (this.graphics == null) {
+		// 	this.graphics = this.getBaseComponent().getGraphics();
+		// 	try {
+		// 		this.getBaseComponent().repaint();
+		// 	} catch (Exception var10) {
+		// 	}
+		// 	try {
+		// 		Thread.sleep(1000L);
+		// 	} catch (Exception var9) {
+		// 	}
+		// }
+		// Font var4 = new Font("Helvetica", Font.BOLD, 13);
+		// FontMetrics var5 = this.getBaseComponent().getFontMetrics(var4);
+		// Font var6 = new Font("Helvetica", Font.PLAIN, 13);
+		// FontMetrics plainMetrics = this.getBaseComponent().getFontMetrics(var6);
+		// if (this.redrawScreen) {
+		// 	this.graphics.setColor(Color.black);
+		// 	this.graphics.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+		// 	this.redrawScreen = false;
+		// }
+		// Color var7 = new Color(140, 17, 17);
+		// int var8 = this.canvasHeight / 2 - 18;
+		// this.graphics.setColor(var7);
+		// this.graphics.drawRect(this.canvasWidth / 2 - 152, var8, 304, 34);
+		// this.graphics.fillRect(this.canvasWidth / 2 - 150, var8 + 2, arg2 * 3, 30);
+		// this.graphics.setColor(Color.black);
+		// this.graphics.fillRect(this.canvasWidth / 2 - 150 + arg2 * 3, var8 + 2, 300 - arg2 * 3, 30);
+		// this.graphics.setFont(var4);
+		// this.graphics.setColor(Color.white);
+		// this.graphics.drawString(arg1, (this.canvasWidth - var5.stringWidth(arg1)) / 2, var8 + 22);
+	}
+
+	private static double mapCoord(double v, double n1, double n2, double m1, double m2) {
+		return (v - n1) * (m2 - m1) / (n2 - n1) + m1;
+	}
+
+	private void setMousePosition(MouseEvent event) {
+		int fixedWidth = 789;
+		int fixedHeight = 532;
+
+		if (isFullscreen()) {
+			HTMLElement element = (HTMLElement) event.getTarget();
+			TextRectangle br = element.getBoundingClientRect();
+			double ratio = (double) Window.current().getInnerHeight() / (double) canvas.getHeight();
+			double offset = ((double) Window.current().getInnerWidth() - ((double) canvas.getWidth() * ratio)) / 2.0;
+			this.mouseX = (int) mapCoord(((double) event.getClientX()) - ((double) br.getLeft()) - offset, 0, ((double) canvas.getWidth()) * ratio, 0, fixedWidth);
+			this.mouseY = (int) mapCoord(((double) event.getClientY()) - ((double) br.getTop()), 0, ((double) canvas.getHeight()) * ratio, 0, fixedHeight);
+		} else {
+			TextRectangle br = canvas.getBoundingClientRect();
+			double scaleX = (double) canvas.getWidth() / br.getWidth();
+			double scaleY = (double) canvas.getHeight() / br.getHeight();
+			this.mouseX = (int) ((event.getClientX() - br.getLeft()) * scaleX);
+			this.mouseY = (int) ((event.getClientY() - br.getTop()) * scaleY);
 		}
-		Font var4 = new Font("Helvetica", Font.BOLD, 13);
-		FontMetrics var5 = this.getBaseComponent().getFontMetrics(var4);
-		Font var6 = new Font("Helvetica", Font.PLAIN, 13);
-		FontMetrics plainMetrics = this.getBaseComponent().getFontMetrics(var6);
-		if (this.redrawScreen) {
-			this.graphics.setColor(Color.black);
-			this.graphics.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
-			this.redrawScreen = false;
+
+		if (this.mouseX < 0) {
+			this.mouseX = 0;
 		}
-		Color var7 = new Color(140, 17, 17);
-		int var8 = this.canvasHeight / 2 - 18;
-		this.graphics.setColor(var7);
-		this.graphics.drawRect(this.canvasWidth / 2 - 152, var8, 304, 34);
-		this.graphics.fillRect(this.canvasWidth / 2 - 150, var8 + 2, arg2 * 3, 30);
-		this.graphics.setColor(Color.black);
-		this.graphics.fillRect(this.canvasWidth / 2 - 150 + arg2 * 3, var8 + 2, 300 - arg2 * 3, 30);
-		this.graphics.setFont(var4);
-		this.graphics.setColor(Color.white);
-		this.graphics.drawString(arg1, (this.canvasWidth - var5.stringWidth(arg1)) / 2, var8 + 22);
+
+		if (this.mouseY < 0) {
+			this.mouseY = 0;
+		}
+
+		if (this.mouseX > fixedWidth) {
+			this.mouseX = fixedWidth;
+		}
+
+		if (this.mouseY > fixedHeight) {
+			this.mouseY = fixedHeight;
+		}
 	}
 }
