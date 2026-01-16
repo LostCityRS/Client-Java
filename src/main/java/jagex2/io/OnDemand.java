@@ -366,7 +366,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 		}
 
 		byte[] data = this.app.fileStreams[archive + 1].read(file);
-		if (this.validate(data, this.versions[archive][file], this.crcs[archive][file])) {
+		if (this.validate(data, this.crcs[archive][file], this.versions[archive][file])) {
 			return;
 		}
 
@@ -517,7 +517,7 @@ public class OnDemand extends OnDemandProvider implements Runnable {
 				data = this.app.fileStreams[req.archive + 1].read(req.file);
 			}
 
-			if (!this.validate(data, this.versions[req.archive][req.file], this.crcs[req.archive][req.file])) {
+			if (!this.validate(data, this.crcs[req.archive][req.file], this.versions[req.archive][req.file])) {
 				data = null;
 			}
 
