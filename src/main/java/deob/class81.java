@@ -57,21 +57,6 @@ public final class class81 extends class9 {
 	@ObfuscatedName("le.B")
 	public static class11 field1872;
 
-	@ObfuscatedName("le.a(Z)V")
-	public static void method637() {
-		field1858 = null;
-		field1872 = null;
-		field1863 = null;
-		field1865 = null;
-		field1864 = null;
-		field1857 = null;
-		field1876 = null;
-		field1877 = null;
-		field1859 = null;
-		field1868 = null;
-		field1873 = null;
-	}
-
 	@ObfuscatedName("le.c(B)Lh;")
 	public static class49 method638() {
 		class49 var0 = new class49();

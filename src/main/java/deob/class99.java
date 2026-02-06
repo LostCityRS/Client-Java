@@ -239,28 +239,6 @@ public abstract class class99 extends class141 {
 		}
 	}
 
-	@ObfuscatedName("ob.d()V")
-	public static void method788() {
-		field2290 = null;
-		field2297 = null;
-		field2282 = null;
-		field2312 = null;
-		field2283 = null;
-		field2295 = null;
-		field2294 = null;
-		field2308 = null;
-		field2279 = null;
-		field2288 = null;
-		field2309 = null;
-		field2300 = null;
-		field2301 = null;
-		field2307 = null;
-		field2291 = null;
-		field2296 = null;
-		field2313 = null;
-		field2314 = null;
-	}
-
 	@ObfuscatedName("ob.a([I[BIIIIIII)V")
 	public static void method792(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var9 = -(arg5 >> 2);

@@ -63,14 +63,6 @@ public final class class149 extends class13 {
 	@ObfuscatedName("vc.R")
 	public int[] field3376;
 
-	@ObfuscatedName("vc.e(I)V")
-	public static void method1106() {
-		field3379 = null;
-		field3372 = null;
-		field3370 = null;
-		field3369 = null;
-	}
-
 	@ObfuscatedName("vc.a(IILec;)V")
 	public static void method1108(int arg0, class32 arg1) {
 		class32 var2 = arg1.method244().method264();

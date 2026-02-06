@@ -32,14 +32,6 @@ public final class class100 {
 		return arg1 / 2 + (arg2 / 32 << 7) + (arg0 / 4 << 10);
 	}
 
-	@ObfuscatedName("oc.a(I)V")
-	public static void method796() {
-		field2315 = null;
-		field2320 = null;
-		field2318 = null;
-		field2317 = null;
-	}
-
 	@ObfuscatedName("oc.a(BLfd;)V")
 	public static void method797(class40 arg0) {
 		arg0.field947 = false;

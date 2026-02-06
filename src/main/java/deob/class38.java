@@ -99,31 +99,6 @@ public final class class38 extends class146 {
 		return var3;
 	}
 
-	@ObfuscatedName("fb.a(Z)V")
-	public static void method317() {
-		field919 = null;
-		field925 = null;
-		field918 = null;
-		field902 = null;
-		field910 = null;
-		field913 = null;
-		field908 = null;
-		field905 = null;
-		field917 = null;
-		field926 = null;
-		field922 = null;
-		field915 = null;
-		field914 = null;
-		field916 = null;
-		field903 = null;
-		field923 = null;
-		field909 = null;
-		field906 = null;
-		field912 = null;
-		field927 = null;
-		field920 = null;
-	}
-
 	public class38() {
 	}
 

@@ -87,19 +87,6 @@ public final class class156 {
 		}
 	}
 
-	@ObfuscatedName("wc.a(B)V")
-	public static void method1198() {
-		field3563 = null;
-		field3573 = null;
-		field3565 = null;
-		field3575 = null;
-		field3566 = null;
-		field3572 = null;
-		field3558 = null;
-		field3561 = null;
-		field3556 = null;
-	}
-
 	@ObfuscatedName("wc.a(IBII)Z")
 	public static boolean method1200(int arg0, int arg1, int arg2) {
 		int var3 = arg2 >> 14 & 0x7FFF;
@@ -194,9 +181,6 @@ public final class class156 {
 	public class146 method1202(byte arg0) {
 		if (this.field3562 == null) {
 			return null;
-		}
-		if (arg0 != -36) {
-			method1198();
 		}
 		class146 var2 = this.field3574[(int) ((long) (this.field3564 - 1) & this.field3567)];
 		while (this.field3562 != var2) {

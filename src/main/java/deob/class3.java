@@ -72,18 +72,6 @@ public final class class3 {
 		return class131.method1005(arg1, var6, var12, var11);
 	}
 
-	@ObfuscatedName("ab.a(I)V")
-	public static void method10() {
-		field45 = null;
-		field47 = null;
-		field44 = null;
-		field50 = null;
-		field48 = null;
-		field51 = null;
-		field43 = null;
-		field46 = null;
-	}
-
 	@ObfuscatedName("ab.a(BLea;Lea;)V")
 	public static void method11(class30 arg0, class30 arg1) {
 		class41.field970 = arg1;

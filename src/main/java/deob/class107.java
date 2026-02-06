@@ -113,16 +113,4 @@ public final class class107 extends class146 {
 			}
 		}
 	}
-
-	@ObfuscatedName("pc.b(B)V")
-	public static void method866() {
-		field2545 = null;
-		field2540 = null;
-		field2533 = null;
-		field2541 = null;
-		field2544 = null;
-		field2547 = null;
-		field2543 = null;
-		field2539 = null;
-	}
 }

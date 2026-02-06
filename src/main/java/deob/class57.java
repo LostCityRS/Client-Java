@@ -175,15 +175,6 @@ public final class class57 extends class13 {
 		}
 	}
 
-	@ObfuscatedName("ia.f(I)V")
-	public static void method452() {
-		field1326 = null;
-		field1325 = null;
-		field1317 = null;
-		field1318 = null;
-		field1314 = null;
-	}
-
 	@ObfuscatedName("ia.a(Ljd;III)V")
 	public void method445(class66 arg0, int arg1, int arg2) {
 		if (arg1 == 1) {

@@ -370,11 +370,6 @@ public final class class122 {
 		return var2;
 	}
 
-	@ObfuscatedName("rd.a()V")
-	public static void method966() {
-		field2878 = null;
-	}
-
 	@ObfuscatedName("rd.d(Lm;)V")
 	public static void method967(class83 arg0) {
 		arg0.field1936 = 0;

@@ -100,20 +100,4 @@ public final class class124 {
 		var8.field618 = var5;
 		return var8;
 	}
-
-	@ObfuscatedName("rf.a(B)V")
-	public static void method976() {
-		field2894 = null;
-		field2889 = null;
-		field2891 = null;
-		field2882 = null;
-		field2883 = null;
-		field2886 = null;
-		field2884 = null;
-		field2892 = null;
-		field2887 = null;
-		field2896 = null;
-		field2890 = null;
-		field2897 = null;
-	}
 }

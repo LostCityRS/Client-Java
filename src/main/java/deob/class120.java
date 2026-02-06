@@ -30,11 +30,6 @@ public final class class120 {
 	@ObfuscatedName("rb.i")
 	public int[] field2862;
 
-	@ObfuscatedName("rb.b()V")
-	public static void method943() {
-		field2854 = null;
-	}
-
 	public class120() {
 	}
 

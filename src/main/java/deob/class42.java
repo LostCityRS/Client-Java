@@ -36,14 +36,6 @@ public final class class42 {
 	@ObfuscatedName("ff.k")
 	public final int[] field982;
 
-	@ObfuscatedName("ff.a()V")
-	public static void method328() {
-		field973 = null;
-		field980 = null;
-		field978 = null;
-		field972 = null;
-	}
-
 	public class42(byte[] arg0, class92 arg1) {
 		this.field974 = arg1;
 		class66 var3 = new class66(arg0);

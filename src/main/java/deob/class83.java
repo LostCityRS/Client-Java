@@ -134,18 +134,6 @@ public final class class83 {
 		class112.field2627 = new class157();
 	}
 
-	@ObfuscatedName("m.a(B)V")
-	public static void method651() {
-		field1939 = null;
-		field1924 = null;
-		field1927 = null;
-		field1966 = null;
-		field1957 = null;
-		field1942 = null;
-		field1931 = null;
-		field1949 = null;
-	}
-
 	@ObfuscatedName("m.b(I)V")
 	public static void method652() {
 		try {

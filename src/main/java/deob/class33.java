@@ -36,16 +36,6 @@ public final class class33 {
 	@ObfuscatedName("ed.t")
 	public static boolean[] field699 = new boolean[5];
 
-	@ObfuscatedName("ed.a(I)V")
-	public static void method279() {
-		field699 = null;
-		field698 = null;
-		field694 = null;
-		field695 = null;
-		field692 = null;
-		field689 = null;
-	}
-
 	@ObfuscatedName("ed.a(IIII)I")
 	public static int method281(int arg0, int arg1, int arg2) {
 		int var3 = arg0 & 0x3;

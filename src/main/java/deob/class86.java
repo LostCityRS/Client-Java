@@ -237,23 +237,6 @@ public final class class86 {
 		}
 	}
 
-	@ObfuscatedName("mc.a(I)V")
-	public static void method665() {
-		field2015 = null;
-		field2010 = null;
-		field2012 = null;
-		field2000 = null;
-		field2009 = null;
-		field2002 = null;
-		field2008 = null;
-		field2020 = null;
-		field2022 = null;
-		field2007 = null;
-		field2018 = null;
-		field2013 = null;
-		field2003 = null;
-	}
-
 	@ObfuscatedName("mc.a(BI)Lrc;")
 	public static class121 method666(int arg0) {
 		class121 var1 = (class121) class64.field1480.method485((long) arg0);

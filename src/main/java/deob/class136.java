@@ -121,14 +121,6 @@ public final class class136 extends class26 {
 		class154.field3512 = arg0;
 	}
 
-	@ObfuscatedName("td.c(B)V")
-	public static void method1036() {
-		field3172 = null;
-		field3148 = null;
-		field3168 = null;
-		field3169 = null;
-	}
-
 	public class136(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		this.field3149 = arg1;
 		this.field3164 = arg2;

@@ -166,12 +166,4 @@ public final class class144 extends class146 {
 		class70.method579();
 		return var0;
 	}
-
-	@ObfuscatedName("ue.f(I)V")
-	public static void method1085() {
-		field3287 = null;
-		field3285 = null;
-		field3283 = null;
-		field3293 = null;
-	}
 }

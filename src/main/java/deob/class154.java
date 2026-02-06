@@ -178,17 +178,6 @@ public final class class154 extends class146 {
 		class135.method1030();
 	}
 
-	@ObfuscatedName("wa.d(I)V")
-	public static void method1191() {
-		field3512 = null;
-		field3548 = null;
-		field3538 = null;
-		field3516 = null;
-		field3510 = null;
-		field3520 = null;
-		field3528 = null;
-	}
-
 	@ObfuscatedName("wa.a(IIB)V")
 	public static void method1192(int arg0, int arg1) {
 		if (class28.method192(arg0)) {

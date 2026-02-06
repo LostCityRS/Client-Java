@@ -30,18 +30,6 @@ public final class class129 {
 	@ObfuscatedName("sd.k")
 	public static class32 field2980 = field2982;
 
-	@ObfuscatedName("sd.a(I)V")
-	public static void method995() {
-		field2974 = null;
-		field2982 = null;
-		field2972 = null;
-		field2980 = null;
-		field2973 = null;
-		field2977 = null;
-		field2970 = null;
-		field2975 = null;
-	}
-
 	@ObfuscatedName("sd.a(BLjd;)Lec;")
 	public static class32 method996(class66 arg0) {
 		return class103.method828(arg0);

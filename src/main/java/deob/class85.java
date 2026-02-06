@@ -1533,22 +1533,4 @@ public final class class85 {
 		}
 		return true;
 	}
-
-	@ObfuscatedName("mb.b(I)V")
-	public static void method662() {
-		field1987 = null;
-		field1991 = null;
-		field1980 = null;
-		field1984 = null;
-		field1981 = null;
-		field1995 = null;
-		field1998 = null;
-		field1985 = null;
-		field1994 = null;
-		field1978 = null;
-		field1986 = null;
-		field1999 = null;
-		field1989 = null;
-		field1988 = null;
-	}
 }

@@ -76,17 +76,6 @@ public final class class11 {
 		return var3 / 8 + var2 / 16 + var4 / 4;
 	}
 
-	@ObfuscatedName("bc.a(I)V")
-	public static void method64() {
-		field186 = null;
-		field176 = null;
-		field191 = null;
-		field188 = null;
-		field174 = null;
-		field184 = null;
-		field183 = null;
-	}
-
 	public class11(class25 arg0, URL arg1) {
 		this.field192 = arg0.method178(arg1);
 		this.field181 = 0;

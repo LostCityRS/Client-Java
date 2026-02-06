@@ -671,15 +671,6 @@ public final class class125 {
 		}
 	}
 
-	@ObfuscatedName("s.c(Z)V")
-	public static void method982() {
-		field2903 = null;
-		field2900 = null;
-		field2901 = null;
-		field2906 = null;
-		field2902 = null;
-	}
-
 	@ObfuscatedName("s.a(IIB)I")
 	public static int method983(int arg0, int arg1) {
 		if (arg1 == -1) {

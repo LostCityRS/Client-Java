@@ -116,17 +116,6 @@ public final class class70 extends class115 {
 		class31.field616 = null;
 	}
 
-	@ObfuscatedName("ka.d(B)V")
-	public static void method580() {
-		field1656 = null;
-		field1651 = null;
-		field1626 = null;
-		field1638 = null;
-		field1630 = null;
-		field1661 = null;
-		field1634 = null;
-	}
-
 	@ObfuscatedName("ka.a(BLjd;)V")
 	public void method576(class66 arg0) {
 		arg0.field1568 = 0;

@@ -226,24 +226,6 @@ public final class class62 extends class13 {
 		return class149.field3372 != null && var2 == class149.field3372.field3324 ? class106.field2529.field1568 * 99 / (class106.field2529.field1586.length - class149.field3372.field2587) + 1 : 0;
 	}
 
-	@ObfuscatedName("j.b(B)V")
-	public static void method480() {
-		field1406 = null;
-		field1432 = null;
-		field1427 = null;
-		field1435 = null;
-		field1439 = null;
-		field1434 = null;
-		field1366 = null;
-		field1438 = null;
-		field1433 = null;
-		field1437 = null;
-		field1413 = null;
-		field1436 = null;
-		field1390 = null;
-		field1418 = null;
-	}
-
 	@ObfuscatedName("j.a(BZ)Z")
 	public boolean method467(boolean arg0) {
 		int var2 = this.field1405;

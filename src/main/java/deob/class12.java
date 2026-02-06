@@ -85,9 +85,4 @@ public final class class12 extends class146 {
 		class92.field2120[45] = 26;
 		class92.field2120[91] = 42;
 	}
-
-	@ObfuscatedName("bd.a(Z)V")
-	public static void method67() {
-		field198 = null;
-	}
 }

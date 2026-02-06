@@ -53,22 +53,6 @@ public final class class64 {
 		return var1;
 	}
 
-	@ObfuscatedName("jb.a(Z)V")
-	public static void method492() {
-		field1486 = null;
-		field1489 = null;
-		field1490 = null;
-		field1480 = null;
-		field1482 = null;
-		field1484 = null;
-		field1488 = null;
-		field1487 = null;
-		field1492 = null;
-		field1477 = null;
-		field1493 = null;
-		field1491 = null;
-	}
-
 	@ObfuscatedName("jb.a(II)V")
 	public static void method493(int arg0) {
 		if (arg0 == -1 || !class28.method192(arg0)) {

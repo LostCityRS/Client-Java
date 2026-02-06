@@ -90,18 +90,6 @@ public class class114 {
 		class74.field1740 = arg1;
 	}
 
-	@ObfuscatedName("qc.c(Z)V")
-	public static void method895() {
-		field2655 = null;
-		field2651 = null;
-		field2653 = null;
-		field2652 = null;
-		field2672 = null;
-		field2661 = null;
-		field2669 = null;
-		field2649 = null;
-	}
-
 	@ObfuscatedName("qc.a(B)V")
 	public final synchronized void method888() {
 		if (class132.field3031 != null) {

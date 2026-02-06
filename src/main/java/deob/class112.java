@@ -58,21 +58,6 @@ public final class class112 {
 		return class129.method998(var4, arg1, arg0, var5);
 	}
 
-	@ObfuscatedName("qa.a(Z)V")
-	public static void method880() {
-		field2617 = null;
-		field2620 = null;
-		field2626 = null;
-		field2628 = null;
-		field2629 = null;
-		field2631 = null;
-		field2632 = null;
-		field2633 = null;
-		field2627 = null;
-		field2625 = null;
-		field2616 = null;
-	}
-
 	@ObfuscatedName("qa.a(Lea;BLea;Ljava/awt/Component;)V")
 	public static void method881(class30 arg0, class30 arg1, Component arg2) {
 		if (class136.field3170) {

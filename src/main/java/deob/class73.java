@@ -91,19 +91,7 @@ public final class class73 extends class146 {
 			}
 		}
 		var4.method269();
-		if (!arg1) {
-			method594();
-		}
 		return var4.method254((byte) 10);
-	}
-
-	@ObfuscatedName("kd.d(I)V")
-	public static void method594() {
-		field1716 = null;
-		field1715 = null;
-		field1729 = null;
-		field1733 = null;
-		field1712 = null;
 	}
 
 	@ObfuscatedName("kd.a(IJ)V")

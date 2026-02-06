@@ -56,17 +56,6 @@ public final class class61 extends class13 {
 		}
 	}
 
-	@ObfuscatedName("ie.e(I)V")
-	public static void method461() {
-		field1348 = null;
-		field1362 = null;
-		field1363 = null;
-		field1364 = null;
-		field1354 = null;
-		field1365 = null;
-		field1360 = null;
-	}
-
 	@ObfuscatedName("ie.a(B)V")
 	public static void method462() {
 		if (!class26.field476) {

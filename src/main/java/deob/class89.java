@@ -26,15 +26,6 @@ public final class class89 {
 	@ObfuscatedName("mf.k")
 	public static class32 field2059 = class73.method593("Sichtbare Karte vorbereitet)3", true);
 
-	@ObfuscatedName("mf.a(B)V")
-	public static void method673() {
-		field2050 = null;
-		field2054 = null;
-		field2059 = null;
-		field2051 = null;
-		field2052 = null;
-	}
-
 	@ObfuscatedName("mf.a(Lf;Lec;Z)Lec;")
 	public static class32 method674(class36 arg0, class32 arg1) {
 		if (arg1.method267(class128.field2936) == -1) {

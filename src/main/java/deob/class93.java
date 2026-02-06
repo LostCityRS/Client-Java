@@ -192,26 +192,6 @@ public final class class93 extends class146 {
 		return var0;
 	}
 
-	@ObfuscatedName("nc.b()V")
-	public static void method733() {
-		field2155 = null;
-		field2148 = null;
-		field2128 = null;
-		field2132 = null;
-		field2145 = null;
-		field2151 = null;
-		field2156 = null;
-		field2140 = null;
-		field2131 = null;
-		field2141 = null;
-		field2150 = null;
-		field2142 = null;
-		field2158 = null;
-		field2149 = null;
-		field2134 = null;
-		field2129 = null;
-	}
-
 	@ObfuscatedName("nc.a(Lea;)Z")
 	public static boolean method734(class30 arg0) {
 		if (!field2147) {

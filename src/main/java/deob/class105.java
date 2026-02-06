@@ -74,23 +74,4 @@ public final class class105 {
 	public static void method857() {
 		class47.field1114.method490();
 	}
-
-	@ObfuscatedName("pa.b(B)V")
-	public static void method858() {
-		field2492 = null;
-		field2496 = null;
-		field2482 = null;
-		field2499 = null;
-		field2489 = null;
-		field2493 = null;
-		field2500 = null;
-		field2497 = null;
-		field2483 = null;
-		field2498 = null;
-		field2487 = null;
-		field2485 = null;
-		field2486 = null;
-		field2484 = null;
-		field2481 = null;
-	}
 }

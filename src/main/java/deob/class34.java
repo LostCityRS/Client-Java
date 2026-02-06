@@ -111,22 +111,6 @@ public final class class34 extends class13 {
 		}
 	}
 
-	@ObfuscatedName("ee.b(Z)V")
-	public static void method290() {
-		field711 = null;
-		field718 = null;
-		field721 = null;
-		field719 = null;
-		field728 = null;
-		field708 = null;
-		field717 = null;
-		field727 = null;
-		field715 = null;
-		field723 = null;
-		field709 = null;
-		field714 = null;
-	}
-
 	@ObfuscatedName("ee.a(ZZI)I")
 	public static int method293() {
 		return class158.field3627 + class64.field1494;

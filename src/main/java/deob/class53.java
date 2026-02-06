@@ -171,18 +171,6 @@ public final class class53 extends class13 {
 	@ObfuscatedName("hd.U")
 	public short[] field1203;
 
-	@ObfuscatedName("hd.b(B)V")
-	public static void method417() {
-		field1239 = null;
-		field1214 = null;
-		field1212 = null;
-		field1258 = null;
-		field1234 = null;
-		field1195 = null;
-		field1202 = null;
-		field1237 = null;
-	}
-
 	@ObfuscatedName("hd.c(B)V")
 	public static void method418() {
 		class26.field476 = false;

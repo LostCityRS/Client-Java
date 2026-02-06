@@ -115,17 +115,6 @@ public final class class14 {
 		}
 	}
 
-	@ObfuscatedName("bf.a(B)V")
-	public static void method77() {
-		field230 = null;
-		field235 = null;
-		field234 = null;
-		field245 = null;
-		field238 = null;
-		field239 = null;
-		field237 = null;
-	}
-
 	@ObfuscatedName("bf.a(BI)Z")
 	public static boolean method78(int arg0) {
 		return (arg0 >> 28 & 0x1) != 0;

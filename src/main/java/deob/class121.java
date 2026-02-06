@@ -142,15 +142,6 @@ public final class class121 extends class13 {
 		}
 	}
 
-	@ObfuscatedName("rc.f(I)V")
-	public static void method957() {
-		field2868 = null;
-		field2874 = null;
-		field2877 = null;
-		field2863 = null;
-		field2876 = null;
-	}
-
 	@ObfuscatedName("rc.b(II)I")
 	public static int method959(int arg0) {
 		int var1 = (arg0 & 0x55555555) + (arg0 >>> 1 & 0x55555555);

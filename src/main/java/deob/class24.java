@@ -97,18 +97,6 @@ public final class class24 {
 		field449 = new int[5];
 	}
 
-	@ObfuscatedName("db.a()V")
-	public static void method171() {
-		field432 = null;
-		field441 = null;
-		field431 = null;
-		field446 = null;
-		field445 = null;
-		field443 = null;
-		field449 = null;
-		field448 = null;
-	}
-
 	@ObfuscatedName("db.a(Ljd;)V")
 	public void method169(class66 arg0) {
 		this.field425 = new class69();

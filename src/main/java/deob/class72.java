@@ -63,17 +63,6 @@ public final class class72 {
 	@ObfuscatedName("kc.v")
 	public int field1710;
 
-	@ObfuscatedName("kc.a(I)V")
-	public static void method588() {
-		field1705 = null;
-		field1699 = null;
-		field1708 = null;
-		field1704 = null;
-		field1701 = null;
-		field1696 = null;
-		field1692 = null;
-	}
-
 	@ObfuscatedName("kc.a(IZ)V")
 	public static void method589(int arg0) {
 		class149.field3394 += arg0 * 128;

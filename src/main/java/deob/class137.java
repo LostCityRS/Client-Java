@@ -127,23 +127,6 @@ public final class class137 implements Runnable {
 		}
 	}
 
-	@ObfuscatedName("te.b(Z)V")
-	public static void method1038() {
-		field3174 = null;
-		field3177 = null;
-		field3187 = null;
-		field3184 = null;
-		field3190 = null;
-		field3186 = null;
-		field3185 = null;
-		field3193 = null;
-		field3182 = null;
-		field3192 = null;
-		field3173 = null;
-		field3188 = null;
-		field3176 = null;
-	}
-
 	@ObfuscatedName("te.a(B)V")
 	public static void method1039() {
 		for (class23 var0 = (class23) class45.field1076.method1211(); var0 != null; var0 = (class23) class45.field1076.method1209()) {

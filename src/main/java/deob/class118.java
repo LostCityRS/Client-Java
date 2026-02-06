@@ -279,17 +279,6 @@ public final class class118 {
 		class113.method886();
 	}
 
-	@ObfuscatedName("r.b(B)V")
-	public static void method934() {
-		field2830 = null;
-		field2818 = null;
-		field2824 = null;
-		field2832 = null;
-		field2833 = null;
-		field2821 = null;
-		field2835 = null;
-	}
-
 	@ObfuscatedName("r.a(ZB)V")
 	public static void method935(boolean arg0) {
 		class125.method980();

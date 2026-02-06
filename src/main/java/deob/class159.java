@@ -41,19 +41,6 @@ public final class class159 extends RuntimeException {
 	@ObfuscatedName("wf.p")
 	public static int field3658 = 0;
 
-	@ObfuscatedName("wf.a(I)V")
-	public static void method1225() {
-		field3657 = null;
-		field3656 = null;
-		field3644 = null;
-		field3649 = null;
-		field3655 = null;
-		field3650 = null;
-		field3651 = null;
-		field3652 = null;
-		field3653 = null;
-	}
-
 	@ObfuscatedName("wf.a(Lnf;ILnf;)V")
 	public static void method1226(class96 arg0, class96 arg1) {
 		if (class117.field2792) {

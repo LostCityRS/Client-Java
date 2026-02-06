@@ -32,14 +32,6 @@ public final class class2 {
 	@ObfuscatedName("aa.n")
 	public static class32 field28 = class73.method593("::gc", true);
 
-	@ObfuscatedName("aa.a(I)V")
-	public static void method5() {
-		field18 = null;
-		field24 = null;
-		field27 = null;
-		field28 = null;
-	}
-
 	@ObfuscatedName("aa.a(BI)V")
 	public static void method7(int arg0) {
 		int[] var1 = class142.field3252.field1144;

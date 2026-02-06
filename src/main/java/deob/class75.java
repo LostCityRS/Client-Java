@@ -172,13 +172,4 @@ public final class class75 {
 	public static void method604(int arg0) {
 		class139.field3209 = arg0;
 	}
-
-	@ObfuscatedName("kf.a(I)V")
-	public static void method605() {
-		field1769 = null;
-		field1757 = null;
-		field1755 = null;
-		field1768 = null;
-		field1759 = null;
-	}
 }

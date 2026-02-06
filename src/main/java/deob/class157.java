@@ -199,19 +199,6 @@ public final class class157 {
 		}
 	}
 
-	@ObfuscatedName("wd.d(B)V")
-	public static void method1217() {
-		field3600 = null;
-		field3604 = null;
-		field3596 = null;
-		field3597 = null;
-		field3592 = null;
-		field3602 = null;
-		field3607 = null;
-		field3594 = null;
-		field3601 = null;
-	}
-
 	@ObfuscatedName("wd.a(BLf;I)I")
 	public static int method1218(class36 arg0, int arg1) {
 		if (arg0.field842 == null || arg1 >= arg0.field842.length) {

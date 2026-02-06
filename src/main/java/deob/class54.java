@@ -186,21 +186,6 @@ public final class class54 extends Canvas {
 		}
 	}
 
-	@ObfuscatedName("he.a(I)V")
-	public static void method429() {
-		field1275 = null;
-		field1271 = null;
-		field1265 = null;
-		field1273 = null;
-		field1264 = null;
-		field1272 = null;
-		field1266 = null;
-		field1274 = null;
-		field1278 = null;
-		field1269 = null;
-		field1280 = null;
-	}
-
 	public class54(Component arg0) {
 		this.field1279 = arg0;
 	}

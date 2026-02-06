@@ -43,13 +43,4 @@ public final class class113 {
 		}
 		class105.field2488 = 0;
 	}
-
-	@ObfuscatedName("qb.b(I)V")
-	public static void method887() {
-		field2634 = null;
-		field2643 = null;
-		field2636 = null;
-		field2635 = null;
-		field2641 = null;
-	}
 }

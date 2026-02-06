@@ -314,23 +314,6 @@ public final class class97 extends class13 {
 		class111.field2610[0] = arg3;
 	}
 
-	@ObfuscatedName("o.a(B)V")
-	public static void method759() {
-		field2233 = null;
-		field2232 = null;
-		field2236 = null;
-		field2231 = null;
-		field2239 = null;
-		field2235 = null;
-		field2237 = null;
-		field2238 = null;
-		field2234 = null;
-		field2242 = null;
-		field2226 = null;
-		field2229 = null;
-		field2212 = null;
-	}
-
 	@ObfuscatedName("o.a(BI)Lvc;")
 	public static class149 method760(int arg0) {
 		class149 var1 = (class149) class92.field2107.method485((long) arg0);

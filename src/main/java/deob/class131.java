@@ -50,17 +50,6 @@ public abstract class class131 {
 		return (var4 * arg2 >> 16) + (arg3 * (65536 - var4) >> 16);
 	}
 
-	@ObfuscatedName("sf.a(Z)V")
-	public static void method1006() {
-		field3019 = null;
-		field3015 = null;
-		field3018 = null;
-		field3016 = null;
-		field3010 = null;
-		field3011 = null;
-		field3012 = null;
-	}
-
 	@ObfuscatedName("sf.a([BB)V")
 	public abstract void method60(byte[] arg0);
 

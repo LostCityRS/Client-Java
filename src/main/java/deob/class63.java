@@ -104,29 +104,6 @@ public final class class63 {
 		class47.field1114.method490();
 	}
 
-	@ObfuscatedName("ja.b(B)V")
-	public static void method488() {
-		field1455 = null;
-		field1472 = null;
-		field1447 = null;
-		field1445 = null;
-		field1454 = null;
-		field1476 = null;
-		field1440 = null;
-		field1467 = null;
-		field1442 = null;
-		field1453 = null;
-		field1452 = null;
-		field1466 = null;
-		field1444 = null;
-		field1459 = null;
-		field1446 = null;
-		field1457 = null;
-		field1470 = null;
-		field1441 = null;
-		field1464 = null;
-	}
-
 	@ObfuscatedName("ja.c(B)V")
 	public static void method489() {
 		Object var0 = class92.field2103;

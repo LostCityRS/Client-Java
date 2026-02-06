@@ -74,18 +74,6 @@ public final class class23 extends class146 {
 	@ObfuscatedName("da.P")
 	public int field420;
 
-	@ObfuscatedName("da.d(I)V")
-	public static void method163() {
-		field415 = null;
-		field417 = null;
-		field424 = null;
-		field397 = null;
-		field421 = null;
-		field422 = null;
-		field403 = null;
-		field402 = null;
-	}
-
 	@ObfuscatedName("da.a(IJ)V")
 	public static void method164(long arg0) {
 		if (arg0 == 0L) {

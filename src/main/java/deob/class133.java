@@ -201,59 +201,6 @@ public final class class133 extends class13 {
 	@ObfuscatedName("ta.Wb")
 	public short[] field3104;
 
-	@ObfuscatedName("ta.e(I)V")
-	public static void method1012() {
-		field3065 = null;
-		field3042 = null;
-		field3056 = null;
-		field3087 = null;
-		field3106 = null;
-		field3058 = null;
-		field3053 = null;
-		field3043 = null;
-		field3100 = null;
-		field3084 = null;
-		field3083 = null;
-		field3066 = null;
-		field3097 = null;
-		field3076 = null;
-		field3099 = null;
-		field3049 = null;
-		field3052 = null;
-		field3088 = null;
-		field3037 = null;
-		field3086 = null;
-		field3080 = null;
-		field3098 = null;
-		field3105 = null;
-		field3057 = null;
-		field3091 = null;
-		field3068 = null;
-		field3093 = null;
-		field3078 = null;
-		field3069 = null;
-		field3090 = null;
-		field3077 = null;
-		field3101 = null;
-		field3075 = null;
-		field3051 = null;
-		field3095 = null;
-		field3038 = null;
-		field3045 = null;
-		field3048 = null;
-		field3072 = null;
-		field3063 = null;
-		field3041 = null;
-		field3046 = null;
-		field3050 = null;
-		field3047 = null;
-		field3107 = null;
-		field3092 = null;
-		field3044 = null;
-		field3085 = null;
-		field3094 = null;
-	}
-
 	@ObfuscatedName("ta.a(IIIZII)Lh;")
 	public static class49 method1016(int arg0, int arg1, boolean arg2, int arg3, int arg4) {
 		long var5 = ((long) arg3 << 40) + ((long) arg0 << 38) + (long) arg1 + ((long) arg4 << 16);

@@ -18,13 +18,6 @@ public final class class84 {
 	@ObfuscatedName("ma.j")
 	public static short[] field1977 = new short[] { -1, -1, -1, -1, -1 };
 
-	@ObfuscatedName("ma.a(B)V")
-	public static void method654() {
-		field1977 = null;
-		field1969 = null;
-		field1970 = null;
-	}
-
 	@ObfuscatedName("ma.a([Lec;IIB)Lec;")
 	public static class32 method655(class32[] arg0, int arg1, int arg2) {
 		int var3 = 0;

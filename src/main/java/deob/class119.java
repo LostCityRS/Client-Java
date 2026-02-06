@@ -115,20 +115,6 @@ public final class class119 {
 		}
 	}
 
-	@ObfuscatedName("ra.a(I)V")
-	public static void method937() {
-		field2847 = null;
-		field2840 = null;
-		field2844 = null;
-		field2850 = null;
-		field2841 = null;
-		field2845 = null;
-		field2852 = null;
-		field2843 = null;
-		field2838 = null;
-		field2846 = null;
-	}
-
 	@ObfuscatedName("ra.a(IB)Lse;")
 	public static class130 method938(int arg0) {
 		class130 var1 = (class130) class113.field2634.method485((long) arg0);

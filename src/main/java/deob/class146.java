@@ -88,13 +88,6 @@ public class class146 {
 		arg0.method543(24, var1);
 	}
 
-	@ObfuscatedName("v.c(I)V")
-	public static void method1095() {
-		field3322 = null;
-		field3317 = null;
-		field3311 = null;
-	}
-
 	@ObfuscatedName("v.a(I)V")
 	public final void method1091() {
 		if (this.field3316 != null) {

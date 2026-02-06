@@ -81,23 +81,6 @@ public final class class117 {
 		field2815 = class73.method593("sl_button", true);
 	}
 
-	@ObfuscatedName("qf.a(I)V")
-	public static void method918() {
-		field2814 = null;
-		field2810 = null;
-		field2809 = null;
-		field2797 = null;
-		field2790 = null;
-		field2779 = null;
-		field2808 = null;
-		field2781 = null;
-		field2815 = null;
-		field2813 = null;
-		field2787 = null;
-		field2807 = null;
-		field2806 = null;
-	}
-
 	@ObfuscatedName("qf.a(ILec;)Z")
 	public static boolean method922(class32 arg0) {
 		if (arg0 == null) {

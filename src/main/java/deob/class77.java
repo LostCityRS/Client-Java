@@ -98,18 +98,6 @@ public final class class77 extends class146 {
 	@ObfuscatedName("la.L")
 	public class73 field1804;
 
-	@ObfuscatedName("la.a(Z)V")
-	public static void method614() {
-		field1801 = null;
-		field1787 = null;
-		field1809 = null;
-		field1807 = null;
-		field1784 = null;
-		field1786 = null;
-		field1790 = null;
-		field1813 = null;
-	}
-
 	@ObfuscatedName("la.a(IILec;II)V")
 	public static void method616(int arg0, int arg1, class32 arg2, int arg3) {
 		class36 var4 = class130.method1000(arg3, arg1);

@@ -73,18 +73,6 @@ public final class class31 {
 		return class139.field3209++;
 	}
 
-	@ObfuscatedName("eb.b(I)V")
-	public static void method225() {
-		field616 = null;
-		field614 = null;
-		field595 = null;
-		field611 = null;
-		field617 = null;
-		field593 = null;
-		field590 = null;
-		field612 = null;
-	}
-
 	@ObfuscatedName("eb.a(III)V")
 	public static void method226(int arg0, int arg1) {
 		long var2 = (long) ((arg0 << 16) + arg1);

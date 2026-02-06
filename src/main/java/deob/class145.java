@@ -35,18 +35,6 @@ public abstract class class145 {
 	@ObfuscatedName("uf.n")
 	public static class32 field3307 = class73.method593(":assist:", true);
 
-	@ObfuscatedName("uf.a(I)V")
-	public static void method1086() {
-		field3300 = null;
-		field3297 = null;
-		field3294 = null;
-		field3304 = null;
-		field3302 = null;
-		field3305 = null;
-		field3307 = null;
-		field3296 = null;
-	}
-
 	@ObfuscatedName("uf.a(Lqd;I)V")
 	public static void method1087(class115 arg0) {
 		arg0.field2708 = arg0.field2687;

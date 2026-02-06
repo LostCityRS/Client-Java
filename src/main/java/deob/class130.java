@@ -75,20 +75,6 @@ public final class class130 extends class13 {
 		}
 	}
 
-	@ObfuscatedName("se.a(B)V")
-	public static void method1001() {
-		field3006 = null;
-		field2998 = null;
-		field2994 = null;
-		field2995 = null;
-		field3003 = null;
-		field3008 = null;
-		field3000 = null;
-		field2997 = null;
-		field3007 = null;
-		field2990 = null;
-	}
-
 	@ObfuscatedName("se.a(IZLtb;Lga;)V")
 	public static void method1002(int arg0, class134 arg1, class44 arg2) {
 		class142 var3 = new class142();

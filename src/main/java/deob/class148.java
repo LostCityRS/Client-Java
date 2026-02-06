@@ -36,11 +36,6 @@ public final class class148 extends class146 {
 	@ObfuscatedName("vb.x")
 	public int[] field3361;
 
-	@ObfuscatedName("vb.b()V")
-	public static void method1104() {
-		field3358 = null;
-	}
-
 	public class148(class66 arg0) {
 		this.field3360 = arg0.method531();
 		this.field3359 = arg0.method532() == 1;

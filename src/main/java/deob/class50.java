@@ -38,19 +38,6 @@ public final class class50 extends class146 {
 	@ObfuscatedName("ha.D")
 	public static class48 field1157;
 
-	@ObfuscatedName("ha.a(B)V")
-	public static void method391() {
-		field1148 = null;
-		field1163 = null;
-		field1146 = null;
-		field1158 = null;
-		field1152 = null;
-		field1157 = null;
-		field1155 = null;
-		field1162 = null;
-		field1159 = null;
-	}
-
 	@ObfuscatedName("ha.d(I)I")
 	public static int method392() {
 		int var0 = class83.method653(class43.field989, class105.field2494, class48.field1126);

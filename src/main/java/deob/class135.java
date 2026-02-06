@@ -109,21 +109,6 @@ public final class class135 {
 		}
 	}
 
-	@ObfuscatedName("tc.a(Z)V")
-	public static void method1028() {
-		field3136 = null;
-		field3138 = null;
-		field3142 = null;
-		field3131 = null;
-		field3139 = null;
-		field3146 = null;
-		field3135 = null;
-		field3140 = null;
-		field3144 = null;
-		field3137 = null;
-		field3145 = null;
-	}
-
 	@ObfuscatedName("tc.a(ZILjava/lang/Object;)[B")
 	public static byte[] method1029(boolean arg0, Object arg1) {
 		if (arg1 == null) {

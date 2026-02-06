@@ -85,18 +85,6 @@ public final class class134 {
 		}
 	}
 
-	@ObfuscatedName("tb.a(I)V")
-	public static void method1022() {
-		field3115 = null;
-		field3122 = null;
-		field3128 = null;
-		field3127 = null;
-		field3110 = null;
-		field3129 = null;
-		field3120 = null;
-		field3123 = null;
-	}
-
 	@ObfuscatedName("tb.a(BILka;I)V")
 	public static void method1023(int arg0, class70 arg1, int arg2) {
 		if (arg2 == arg1.field2712 && arg2 != -1) {

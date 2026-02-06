@@ -18,15 +18,6 @@ public final class class19 {
 	@ObfuscatedName("cd.f")
 	public static class30 field363;
 
-	@ObfuscatedName("cd.a(I)V")
-	public static void method133() {
-		field362 = null;
-		field363 = null;
-		field358 = null;
-		field361 = null;
-		field359 = null;
-	}
-
 	@ObfuscatedName("cd.a(Lea;Lea;ZLnf;B)V")
 	public static void method134(class30 arg0, class30 arg1, boolean arg2, class96 arg3) {
 		class41.field962 = arg1;

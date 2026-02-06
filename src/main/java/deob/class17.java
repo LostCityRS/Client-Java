@@ -49,18 +49,6 @@ public final class class17 extends class26 {
 		return arg0;
 	}
 
-	@ObfuscatedName("cb.e(I)V")
-	public static void method126() {
-		field350 = null;
-		field342 = null;
-		field348 = null;
-		field343 = null;
-		field347 = null;
-		field335 = null;
-		field351 = null;
-		field340 = null;
-	}
-
 	@ObfuscatedName("cb.a(BLf;II)V")
 	public static void method127(class36 arg0, int arg1, int arg2) {
 		if (class158.field3629 != null || class26.field476 || (arg0 == null || class145.method1088(arg0) == null)) {

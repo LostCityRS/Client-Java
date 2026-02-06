@@ -44,14 +44,6 @@ public class class13 extends class146 {
 		return (arg0 >> arg1 + 1 & 0x1) != 0;
 	}
 
-	@ObfuscatedName("be.d(I)V")
-	public static void method70() {
-		field217 = null;
-		field226 = null;
-		field214 = null;
-		field222 = null;
-	}
-
 	@ObfuscatedName("be.a(ZIII)V")
 	public static void method71(boolean arg0) {
 		class32.field652 = 2;

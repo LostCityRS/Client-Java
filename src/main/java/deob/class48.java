@@ -52,19 +52,6 @@ public abstract class class48 {
 	@ObfuscatedName("gf.s")
 	public static class49 field1137;
 
-	@ObfuscatedName("gf.a(I)V")
-	public static void method362() {
-		field1129 = null;
-		field1132 = null;
-		field1135 = null;
-		field1134 = null;
-		field1123 = null;
-		field1125 = null;
-		field1136 = null;
-		field1133 = null;
-		field1137 = null;
-	}
-
 	@ObfuscatedName("gf.a(Z)V")
 	public static void method363() {
 		class37.field886.method490();

@@ -363,21 +363,6 @@ public final class class94 {
 		}
 	}
 
-	@ObfuscatedName("nd.b(B)V")
-	public static void method748() {
-		field2169 = null;
-		field2183 = null;
-		field2170 = null;
-		field2162 = null;
-		field2182 = null;
-		field2161 = null;
-		field2163 = null;
-		field2178 = null;
-		field2180 = null;
-		field2172 = null;
-		field2177 = null;
-	}
-
 	public class94(int[] arg0) {
 		int var2;
 		for (var2 = 1; var2 <= arg0.length + (arg0.length >> 1); var2 <<= 0x1) {

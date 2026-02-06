@@ -34,12 +34,6 @@ public final class class139 extends class13 {
 		class61.field1361 = class44.field1031.method200(16);
 	}
 
-	@ObfuscatedName("u.b(Z)V")
-	public static void method1046() {
-		field3212 = null;
-		field3202 = null;
-	}
-
 	@ObfuscatedName("u.a(Ljd;I)V")
 	public void method1043(class66 arg0) {
 		while (true) {

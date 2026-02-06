@@ -145,23 +145,6 @@ public final class class106 extends class26 {
 		}
 	}
 
-	@ObfuscatedName("pb.f(I)V")
-	public static void method861() {
-		field2505 = null;
-		field2511 = null;
-		field2525 = null;
-		field2531 = null;
-		field2529 = null;
-		field2524 = null;
-		field2527 = null;
-		field2530 = null;
-		field2506 = null;
-		field2521 = null;
-		field2523 = null;
-		field2501 = null;
-		field2518 = null;
-	}
-
 	public class106(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, boolean arg7, class26 arg8) {
 		this.field2515 = arg0;
 		this.field2513 = arg1;

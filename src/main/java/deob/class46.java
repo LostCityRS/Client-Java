@@ -69,17 +69,6 @@ public final class class46 {
 	@ObfuscatedName("gd.v")
 	public final int[] field1099;
 
-	@ObfuscatedName("gd.a()V")
-	public static void method348() {
-		field1082 = null;
-		field1094 = null;
-		field1084 = null;
-		field1093 = null;
-		field1091 = null;
-		field1097 = null;
-		field1081 = null;
-	}
-
 	public class46(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
 		if (arg5 != arg6 || arg5 != arg7 || arg5 != arg8) {
 			this.field1087 = false;

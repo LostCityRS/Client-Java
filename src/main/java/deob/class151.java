@@ -56,23 +56,6 @@ public final class class151 {
 	@ObfuscatedName("ve.s")
 	public static class32 field3470 = field3473;
 
-	@ObfuscatedName("ve.a(Z)V")
-	public static void method1169() {
-		field3461 = null;
-		field3453 = null;
-		field3469 = null;
-		field3454 = null;
-		field3471 = null;
-		field3462 = null;
-		field3466 = null;
-		field3465 = null;
-		field3463 = null;
-		field3473 = null;
-		field3470 = null;
-		field3464 = null;
-		field3456 = null;
-	}
-
 	@ObfuscatedName("ve.b(B)V")
 	public static void method1172() {
 		if (class13.field221 == 0) {

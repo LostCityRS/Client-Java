@@ -103,16 +103,6 @@ public final class class8 implements Runnable {
 		}
 	}
 
-	@ObfuscatedName("b.a(B)V")
-	public static void method47() {
-		field146 = null;
-		field143 = null;
-		field149 = null;
-		field154 = null;
-		field155 = null;
-		field141 = null;
-	}
-
 	@ObfuscatedName("b.b(B)V")
 	public static void method48() {
 		class85.field1987.method490();

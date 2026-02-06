@@ -48,15 +48,6 @@ public final class class140 implements class67 {
 	@ObfuscatedName("ua.v")
 	public final class30 field3234;
 
-	@ObfuscatedName("ua.a(B)V")
-	public static void method1051() {
-		field3215 = null;
-		field3224 = null;
-		field3218 = null;
-		field3222 = null;
-		field3223 = null;
-	}
-
 	public class140(class30 arg0, class30 arg1, int arg2, double arg3, int arg4) {
 		this.field3232 = arg4;
 		this.field3229 = arg3;

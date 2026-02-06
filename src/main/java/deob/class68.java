@@ -231,20 +231,6 @@ public final class class68 {
 		}
 	}
 
-	@ObfuscatedName("jf.a(B)V")
-	public static void method563() {
-		field1604 = null;
-		field1598 = null;
-		field1593 = null;
-		field1602 = null;
-		field1599 = null;
-		field1594 = null;
-		field1592 = null;
-		field1600 = null;
-		field1595 = null;
-		field1605 = null;
-	}
-
 	@ObfuscatedName("jf.a(Z)V")
 	public static void method565() {
 		class83.field1966.method115();

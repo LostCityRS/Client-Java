@@ -67,16 +67,6 @@ public final class class132 implements Runnable {
 		}
 	}
 
-	@ObfuscatedName("t.a(Z)V")
-	public static void method1010() {
-		field3031 = null;
-		field3029 = null;
-		field3034 = null;
-		field3036 = null;
-		field3035 = null;
-		field3032 = null;
-	}
-
 	@ObfuscatedName("t.a(IILjava/awt/Component;I)Lgf;")
 	public static class48 method1011(int arg0, int arg1, Component arg2) {
 		try {

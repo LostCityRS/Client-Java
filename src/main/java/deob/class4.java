@@ -215,30 +215,6 @@ public final class class4 extends class13 {
 		class143.field3277++;
 	}
 
-	@ObfuscatedName("ac.e(I)V")
-	public static void method18() {
-		field73 = null;
-		field79 = null;
-		field63 = null;
-		field62 = null;
-		field58 = null;
-		field67 = null;
-		field71 = null;
-		field70 = null;
-		field59 = null;
-		field65 = null;
-		field64 = null;
-		field69 = null;
-		field54 = null;
-		field81 = null;
-		field55 = null;
-		field52 = null;
-		field74 = null;
-		field57 = null;
-		field56 = null;
-		field77 = null;
-	}
-
 	@ObfuscatedName("ac.a(Ljd;I)V")
 	public void method13(class66 arg0) {
 		while (true) {

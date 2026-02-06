@@ -208,21 +208,6 @@ public final class class15 extends class40 {
 		}
 	}
 
-	@ObfuscatedName("c.g(I)V")
-	public static void method107() {
-		field279 = null;
-		field260 = null;
-		field292 = null;
-		field313 = null;
-		field309 = null;
-		field250 = null;
-		field251 = null;
-		field261 = null;
-		field259 = null;
-		field307 = null;
-		field253 = null;
-	}
-
 	@ObfuscatedName("c.a(ILf;)Lf;")
 	public static class36 method111(class36 arg0) {
 		int var1 = class50.method395(class147.method1100(arg0));

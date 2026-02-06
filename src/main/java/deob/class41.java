@@ -79,21 +79,6 @@ public final class class41 extends class40 {
 		}
 	}
 
-	@ObfuscatedName("fe.a(B)V")
-	public static void method326() {
-		field970 = null;
-		field958 = null;
-		field962 = null;
-		field965 = null;
-		field950 = null;
-		field955 = null;
-		field971 = null;
-		field967 = null;
-		field954 = null;
-		field963 = null;
-		field953 = null;
-	}
-
 	public class41(class15 arg0) {
 		this.field961 = arg0;
 	}

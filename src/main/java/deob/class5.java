@@ -72,31 +72,6 @@ public final class class5 {
 	@ObfuscatedName("ad.A")
 	public static class32 field109 = field108;
 
-	@ObfuscatedName("ad.a(B)V")
-	public static void method19() {
-		field97 = null;
-		field108 = null;
-		field83 = null;
-		field96 = null;
-		field105 = null;
-		field88 = null;
-		field85 = null;
-		field87 = null;
-		field93 = null;
-		field95 = null;
-		field90 = null;
-		field91 = null;
-		field94 = null;
-		field99 = null;
-		field103 = null;
-		field100 = null;
-		field98 = null;
-		field107 = null;
-		field84 = null;
-		field89 = null;
-		field109 = null;
-	}
-
 	@ObfuscatedName("ad.a(Lda;B)V")
 	public static void method20(class23 arg0) {
 		int var1 = 0;

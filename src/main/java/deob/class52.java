@@ -54,18 +54,6 @@ public final class class52 {
 		arg0.addFocusListener(class38.field919);
 	}
 
-	@ObfuscatedName("hc.a(B)V")
-	public static void method404() {
-		field1176 = null;
-		field1179 = null;
-		field1173 = null;
-		field1181 = null;
-		field1178 = null;
-		field1174 = null;
-		field1182 = null;
-		field1175 = null;
-	}
-
 	@ObfuscatedName("hc.a(ILga;I)V")
 	public static void method405(int arg0, class44 arg1) {
 		if (class119.field2846 == null) {

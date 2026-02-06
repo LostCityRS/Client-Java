@@ -106,19 +106,6 @@ public final class class103 {
 		}
 	}
 
-	@ObfuscatedName("of.a(B)V")
-	public static void method829() {
-		field2402 = null;
-		field2418 = null;
-		field2407 = null;
-		field2416 = null;
-		field2424 = null;
-		field2426 = null;
-		field2406 = null;
-		field2405 = null;
-		field2433 = null;
-	}
-
 	@ObfuscatedName("of.a(II)Z")
 	public static boolean method830(int arg0) {
 		return (arg0 >> 30 & 0x1) != 0;

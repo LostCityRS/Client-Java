@@ -246,14 +246,6 @@ public final class class104 extends class26 {
 		return arg0;
 	}
 
-	@ObfuscatedName("p.h()V")
-	public static void method850() {
-		field2473 = null;
-		field2466 = null;
-		field2448 = null;
-		field2442 = null;
-	}
-
 	public class104() {
 	}
 

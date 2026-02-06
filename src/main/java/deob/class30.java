@@ -81,17 +81,6 @@ public abstract class class30 {
 	@ObfuscatedName("ea.V")
 	public int[][] field585;
 
-	@ObfuscatedName("ea.a(I)V")
-	public static void method202() {
-		field587 = null;
-		field578 = null;
-		field567 = null;
-		field561 = null;
-		field546 = null;
-		field539 = null;
-		field572 = null;
-	}
-
 	@ObfuscatedName("ea.a(IIIIII)V")
 	public static void method211(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		int var5 = class159.field3657.method1153(arg1, arg2, arg3);

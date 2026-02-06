@@ -69,15 +69,6 @@ public final class class76 {
 		return var3;
 	}
 
-	@ObfuscatedName("l.a()V")
-	public static void method612() {
-		field1773 = null;
-		field1778 = null;
-		field1781 = null;
-		field1774 = null;
-		field1783 = null;
-	}
-
 	public class76() {
 		int var1 = class93.method738(16);
 		if (var1 != 1) {

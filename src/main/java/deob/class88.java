@@ -68,14 +68,6 @@ public final class class88 {
 		}
 	}
 
-	@ObfuscatedName("me.a(I)V")
-	public static void method670() {
-		field2047 = null;
-		field2030 = null;
-		field2043 = null;
-		field2038 = null;
-	}
-
 	@ObfuscatedName("me.a(IIII)V")
 	public static void method671(int arg0, int arg1, int arg2) {
 		class125.method980();

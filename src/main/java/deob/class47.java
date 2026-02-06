@@ -33,14 +33,6 @@ public final class class47 extends class66 {
 		return true;
 	}
 
-	@ObfuscatedName("ge.h(B)V")
-	public static void method353() {
-		field1116 = null;
-		field1114 = null;
-		field1115 = null;
-		field1117 = null;
-	}
-
 	@ObfuscatedName("ge.v(I)V")
 	public static void method357() {
 		class44.field1014.method490();

@@ -63,23 +63,6 @@ public final class class91 {
 		}
 	}
 
-	@ObfuscatedName("na.b(I)V")
-	public static void method718() {
-		field2093 = null;
-		field2085 = null;
-		field2083 = null;
-		field2098 = null;
-		field2086 = null;
-		field2101 = null;
-		field2092 = null;
-		field2094 = null;
-		field2079 = null;
-		field2088 = null;
-		field2089 = null;
-		field2087 = null;
-		field2090 = null;
-	}
-
 	@ObfuscatedName("na.a(IJ)V")
 	public static void method719(long arg0) {
 		if (arg0 == 0L) {

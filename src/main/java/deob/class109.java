@@ -57,22 +57,6 @@ public final class class109 implements MouseListener, MouseMotionListener, Focus
 	@ObfuscatedName("pe.z")
 	public static class32 field2574 = class73.method593("Unerwartete Antwort vom Anmelde)2Server", true);
 
-	@ObfuscatedName("pe.a(I)V")
-	public static void method867() {
-		field2567 = null;
-		field2563 = null;
-		field2570 = null;
-		field2571 = null;
-		field2573 = null;
-		field2564 = null;
-		field2574 = null;
-		field2561 = null;
-		field2575 = null;
-		field2556 = null;
-		field2568 = null;
-		field2565 = null;
-	}
-
 	@ObfuscatedName("pe.a(Lvd;IIIILqf;IIB)V")
 	public static void method868(class150 arg0, int arg1, int arg2, int arg3, int arg4, class117 arg5, int arg6, int arg7) {
 		if (class154.field3529 && (class3.field50[0][arg7][arg1] & 0x2) == 0) {

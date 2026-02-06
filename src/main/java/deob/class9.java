@@ -84,16 +84,6 @@ public abstract class class9 {
 		class129.field2970 = arg0;
 	}
 
-	@ObfuscatedName("ba.b(B)V")
-	public static void method56() {
-		field168 = null;
-		field164 = null;
-		field169 = null;
-		field167 = null;
-		field162 = null;
-		field160 = null;
-	}
-
 	@ObfuscatedName("ba.a(JI)Lec;")
 	public static class32 method59(long arg0) {
 		if (arg0 <= 0L || arg0 >= 6582952005840035281L) {

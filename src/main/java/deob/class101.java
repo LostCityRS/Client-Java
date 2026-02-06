@@ -189,37 +189,6 @@ public final class class101 extends class26 {
 	@ObfuscatedName("od.W")
 	public int[][] field2324;
 
-	@ObfuscatedName("od.f()V")
-	public static void method815() {
-		field2331 = null;
-		field2342 = null;
-		field2351 = null;
-		field2381 = null;
-		field2376 = null;
-		field2370 = null;
-		field2372 = null;
-		field2364 = null;
-		field2359 = null;
-		field2371 = null;
-		field2356 = null;
-		field2375 = null;
-		field2355 = null;
-		field2374 = null;
-		field2378 = null;
-		field2377 = null;
-		field2368 = null;
-		field2357 = null;
-		field2353 = null;
-		field2360 = null;
-		field2354 = null;
-		field2365 = null;
-		field2367 = null;
-		field2361 = null;
-		field2380 = null;
-		field2369 = null;
-		field2352 = null;
-	}
-
 	public class101() {
 	}
 

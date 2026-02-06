@@ -78,29 +78,6 @@ public final class class147 {
 	@ObfuscatedName("va.i")
 	public static class32[] field3333 = new class32[] { field3351, field3338, field3350, field3340, field3330, field3326, field3337, field3334, field3332, field3327, field3328, field3352 };
 
-	@ObfuscatedName("va.b(I)V")
-	public static void method1098() {
-		field3338 = null;
-		field3353 = null;
-		field3334 = null;
-		field3333 = null;
-		field3341 = null;
-		field3340 = null;
-		field3344 = null;
-		field3328 = null;
-		field3348 = null;
-		field3327 = null;
-		field3326 = null;
-		field3332 = null;
-		field3337 = null;
-		field3330 = null;
-		field3351 = null;
-		field3339 = null;
-		field3350 = null;
-		field3346 = null;
-		field3352 = null;
-	}
-
 	@ObfuscatedName("va.a(BI)I")
 	public static int method1099(int arg0) {
 		int var1 = 0;

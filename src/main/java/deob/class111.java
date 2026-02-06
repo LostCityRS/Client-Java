@@ -132,21 +132,6 @@ public final class class111 extends class115 {
 		return false;
 	}
 
-	@ObfuscatedName("q.d(B)V")
-	public static void method877() {
-		field2603 = null;
-		field2607 = null;
-		field2602 = null;
-		field2610 = null;
-		field2601 = null;
-		field2609 = null;
-		field2598 = null;
-		field2608 = null;
-		field2604 = null;
-		field2605 = null;
-		field2612 = null;
-	}
-
 	@ObfuscatedName("q.a(ZI)Lec;")
 	public static class32 method878(int arg0) {
 		return class56.field1295[arg0].method240() > 0 ? class52.method402(new class32[] { class109.field2575[arg0], class114.field2651, class56.field1295[arg0] }) : class109.field2575[arg0];

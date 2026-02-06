@@ -161,26 +161,6 @@ public final class class71 {
 		class34.field709 = new class156(32);
 	}
 
-	@ObfuscatedName("kb.b(I)V")
-	public static void method587() {
-		field1687 = null;
-		field1666 = null;
-		field1675 = null;
-		field1677 = null;
-		field1688 = null;
-		field1665 = null;
-		field1680 = null;
-		field1685 = null;
-		field1663 = null;
-		field1671 = null;
-		field1667 = null;
-		field1668 = null;
-		field1664 = null;
-		field1673 = null;
-		field1674 = null;
-		field1681 = null;
-	}
-
 	public class71() {
 	}
 

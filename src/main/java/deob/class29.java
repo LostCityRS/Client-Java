@@ -57,19 +57,6 @@ public final class class29 extends class146 {
 	@ObfuscatedName("e.G")
 	public byte[][][] field533;
 
-	@ObfuscatedName("e.d(I)V")
-	public static void method195() {
-		field528 = null;
-		field521 = null;
-		field536 = null;
-		field522 = null;
-		field530 = null;
-		field537 = null;
-		field519 = null;
-		field525 = null;
-		field531 = null;
-	}
-
 	@ObfuscatedName("e.a(IIZ)I")
 	public static int method196(int arg0, int arg1) {
 		class107 var2 = (class107) class34.field709.method1196((long) arg0);

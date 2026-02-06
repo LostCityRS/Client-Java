@@ -108,16 +108,6 @@ public final class class128 extends class26 {
 		arg0.addFocusListener(class38.field909);
 	}
 
-	@ObfuscatedName("sc.c(B)V")
-	public static void method990() {
-		field2962 = null;
-		field2947 = null;
-		field2950 = null;
-		field2936 = null;
-		field2939 = null;
-		field2940 = null;
-	}
-
 	@ObfuscatedName("sc.c(II)Lf;")
 	public static class36 method991(int arg0) {
 		int var1 = arg0 >> 16;

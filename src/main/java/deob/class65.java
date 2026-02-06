@@ -60,20 +60,6 @@ public final class class65 extends class13 {
 	@ObfuscatedName("jc.P")
 	public short[] field1503;
 
-	@ObfuscatedName("jc.f(I)V")
-	public static void method496() {
-		field1512 = null;
-		field1521 = null;
-		field1509 = null;
-		field1508 = null;
-		field1520 = null;
-		field1506 = null;
-		field1505 = null;
-		field1511 = null;
-		field1499 = null;
-		field1514 = null;
-	}
-
 	@ObfuscatedName("jc.a([Lqf;ILvd;)V")
 	public static void method499(class117[] arg0, class150 arg1) {
 		for (int var2 = 0; var2 < 4; var2++) {

@@ -43,18 +43,6 @@ public final class class56 {
 		return (arg0 >> 29 & 0x1) != 0;
 	}
 
-	@ObfuscatedName("i.a(B)V")
-	public static void method437() {
-		field1309 = null;
-		field1300 = null;
-		field1304 = null;
-		field1305 = null;
-		field1308 = null;
-		field1306 = null;
-		field1302 = null;
-		field1295 = null;
-	}
-
 	@ObfuscatedName("i.a(III)I")
 	public static int method438(int arg0, int arg1) {
 		if (arg0 == -2) {

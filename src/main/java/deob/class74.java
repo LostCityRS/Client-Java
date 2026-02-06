@@ -476,22 +476,4 @@ public final class class74 {
 			class158.method1222(var26);
 		}
 	}
-
-	@ObfuscatedName("ke.a(I)V")
-	public static void method601() {
-		field1742 = null;
-		field1753 = null;
-		field1754 = null;
-		field1739 = null;
-		field1746 = null;
-		field1743 = null;
-		field1752 = null;
-		field1740 = null;
-		field1747 = null;
-		field1738 = null;
-		field1748 = null;
-		field1741 = null;
-		field1751 = null;
-		field1750 = null;
-	}
 }

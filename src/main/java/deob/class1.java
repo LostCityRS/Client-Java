@@ -97,18 +97,6 @@ public final class class1 {
 		return;
 	}
 
-	@ObfuscatedName("a.b(I)V")
-	public static void method3() {
-		field10 = null;
-		field7 = null;
-		field14 = null;
-		field4 = null;
-		field12 = null;
-		field1 = null;
-		field6 = null;
-		field2 = null;
-	}
-
 	@ObfuscatedName("a.a(IIZLea;)Lhb;")
 	public static class51 method4(int arg0, int arg1, class30 arg2) {
 		return class28.method193(arg1, arg2, arg0) ? class94.method741() : null;

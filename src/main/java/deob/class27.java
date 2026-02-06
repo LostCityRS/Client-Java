@@ -81,20 +81,6 @@ public final class class27 implements Runnable {
 		}
 	}
 
-	@ObfuscatedName("de.a(B)V")
-	public static void method188() {
-		field489 = null;
-		field496 = null;
-		field490 = null;
-		field495 = null;
-		field483 = null;
-		field481 = null;
-		field502 = null;
-		field491 = null;
-		field504 = null;
-		field488 = null;
-	}
-
 	@ObfuscatedName("de.a(IJ)V")
 	public static void method189(long arg0) {
 		if (arg0 == 0L) {

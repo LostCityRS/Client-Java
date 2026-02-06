@@ -85,16 +85,6 @@ public abstract class class82 extends Applet implements Runnable, FocusListener,
 		class86.field2010 = arg0;
 	}
 
-	@ObfuscatedName("lf.b(Z)V")
-	public static void method648() {
-		field1916 = null;
-		field1906 = null;
-		field1920 = null;
-		field1914 = null;
-		field1891 = null;
-		field1919 = null;
-	}
-
 	@Override
 	public final void windowIconified(WindowEvent arg0) {
 	}
@@ -191,9 +181,6 @@ public abstract class class82 extends Applet implements Runnable, FocusListener,
 		}
 	}
 
-	@ObfuscatedName("lf.c(I)V")
-	public abstract void method147();
-
 	@Override
 	public final AppletContext getAppletContext() {
 		if (class11.field184 == null) {
@@ -240,7 +227,6 @@ public abstract class class82 extends Applet implements Runnable, FocusListener,
 			} catch (Exception var1) {
 			}
 		}
-		this.method147();
 	}
 
 	@Override

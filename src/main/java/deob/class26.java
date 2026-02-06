@@ -24,13 +24,6 @@ public abstract class class26 extends class13 {
 	@ObfuscatedName("dd.L")
 	public static int field473;
 
-	@ObfuscatedName("dd.a(B)V")
-	public static void method183() {
-		field479 = null;
-		field472 = null;
-		field475 = null;
-	}
-
 	@ObfuscatedName("dd.a(Lea;I)V")
 	public static void method185(class30 arg0) {
 		class73.field1715 = arg0;

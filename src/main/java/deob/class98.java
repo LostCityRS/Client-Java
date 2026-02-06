@@ -110,22 +110,6 @@ public final class class98 extends class146 {
 		return var2;
 	}
 
-	@ObfuscatedName("oa.a(Z)V")
-	public static void method766() {
-		field2246 = null;
-		field2254 = null;
-		field2266 = null;
-		field2274 = null;
-		field2257 = null;
-		field2268 = null;
-		field2273 = null;
-		field2252 = null;
-		field2264 = null;
-		field2277 = null;
-		field2262 = null;
-		field2253 = null;
-	}
-
 	@ObfuscatedName("oa.a(ZI)I")
 	public static int method768(int arg0) {
 		return arg0 >> 11 & 0x3F;

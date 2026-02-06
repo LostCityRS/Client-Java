@@ -33,12 +33,6 @@ public final class class55 {
 		return var1 * 3.1415927F / 11025.0F;
 	}
 
-	@ObfuscatedName("hf.a()V")
-	public static void method433() {
-		field1287 = null;
-		field1284 = null;
-	}
-
 	@ObfuscatedName("hf.a(Ljd;Lk;)V")
 	public void method430(class66 arg0, class69 arg1) {
 		int var3 = arg0.method532();

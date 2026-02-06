@@ -2239,26 +2239,6 @@ public final class class158 {
 		}
 	}
 
-	@ObfuscatedName("we.a(I)V")
-	public static void method1223() {
-		field3641 = null;
-		field3625 = null;
-		field3622 = null;
-		field3642 = null;
-		field3624 = null;
-		field3635 = null;
-		field3620 = null;
-		field3634 = null;
-		field3628 = null;
-		field3618 = null;
-		field3612 = null;
-		field3623 = null;
-		field3639 = null;
-		field3640 = null;
-		field3626 = null;
-		field3629 = null;
-	}
-
 	@ObfuscatedName("we.a(II[BIIIILvd;I[Lqf;I)V")
 	public static void method1224(int arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, class150 arg6, int arg7, class117[] arg8, int arg9) {
 		class66 var10 = new class66(arg1);

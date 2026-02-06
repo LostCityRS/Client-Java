@@ -41,15 +41,6 @@ public class class66 extends class146 {
 	@ObfuscatedName("jd.B")
 	public static class44 field1532;
 
-	@ObfuscatedName("jd.d(I)V")
-	public static void method508() {
-		field1552 = null;
-		field1528 = null;
-		field1542 = null;
-		field1532 = null;
-		field1553 = null;
-	}
-
 	@ObfuscatedName("jd.a(IILvd;IIILqf;III)V")
 	public static void method537(int arg0, int arg1, class150 arg2, int arg3, int arg4, int arg5, class117 arg6, int arg7, int arg8) {
 		class53 var9 = class5.method22(arg0);

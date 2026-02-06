@@ -60,21 +60,6 @@ public final class class37 extends class146 {
 	@ObfuscatedName("fa.L")
 	public static int[] field894;
 
-	@ObfuscatedName("fa.a(B)V")
-	public static void method313() {
-		field897 = null;
-		field878 = null;
-		field881 = null;
-		field893 = null;
-		field882 = null;
-		field892 = null;
-		field894 = null;
-		field886 = null;
-		field895 = null;
-		field889 = null;
-		field877 = null;
-	}
-
 	@ObfuscatedName("fa.b(B)Luf;")
 	public static class145 method314() {
 		try {

@@ -76,13 +76,4 @@ public final class class79 {
 	public static void method628(class32 arg0, int arg1, class32 arg2) {
 		class97.method756(arg2, arg1, arg0, null);
 	}
-
-	@ObfuscatedName("lc.a(I)V")
-	public static void method629() {
-		field1833 = null;
-		field1834 = null;
-		field1828 = null;
-		field1825 = null;
-		field1831 = null;
-	}
 }

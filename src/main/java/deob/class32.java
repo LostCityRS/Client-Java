@@ -61,17 +61,6 @@ public final class class32 implements class127 {
 		return var1 == 1005;
 	}
 
-	@ObfuscatedName("ec.a(I)V")
-	public static void method239() {
-		field657 = null;
-		field655 = null;
-		field632 = null;
-		field628 = null;
-		field656 = null;
-		field626 = null;
-		field641 = null;
-	}
-
 	@ObfuscatedName("ec.b(B)V")
 	public static void method242() {
 		for (int var0 = 0; var0 < class61.field1352; var0++) {

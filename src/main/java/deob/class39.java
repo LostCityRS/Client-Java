@@ -49,15 +49,4 @@ public final class class39 extends class146 {
 			return 7 - arg2;
 		}
 	}
-
-	@ObfuscatedName("fc.d(I)V")
-	public static void method319() {
-		field935 = null;
-		field943 = null;
-		field942 = null;
-		field937 = null;
-		field931 = null;
-		field930 = null;
-		field928 = null;
-	}
 }

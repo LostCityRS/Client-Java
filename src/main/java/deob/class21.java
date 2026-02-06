@@ -11,11 +11,6 @@ public final class class21 extends class114 {
 	@ObfuscatedName("cf.A")
 	public static class22 field375;
 
-	@ObfuscatedName("cf.e()V")
-	public static void method140() {
-		field375 = null;
-	}
-
 	public class21(class25 arg0, int arg1) {
 		field375 = arg0.method177();
 		this.field376 = arg1;

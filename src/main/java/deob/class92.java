@@ -69,23 +69,6 @@ public final class class92 extends class146 {
 	@ObfuscatedName("nb.I")
 	public static boolean[] field2119;
 
-	@ObfuscatedName("nb.d(I)V")
-	public static void method727() {
-		field2114 = null;
-		field2112 = null;
-		field2117 = null;
-		field2125 = null;
-		field2103 = null;
-		field2104 = null;
-		field2123 = null;
-		field2119 = null;
-		field2124 = null;
-		field2115 = null;
-		field2120 = null;
-		field2122 = null;
-		field2107 = null;
-	}
-
 	public class92(int arg0, byte[] arg1) {
 		this.field2108 = arg0;
 		class66 var3 = new class66(arg1);

@@ -584,17 +584,6 @@ public final class class7 extends class141 {
 		method42(arg0);
 	}
 
-	@ObfuscatedName("af.d()V")
-	public static void method30() {
-		field116 = null;
-		field123 = null;
-		field126 = null;
-		field119 = null;
-		field127 = null;
-		field113 = null;
-		field121 = null;
-	}
-
 	@ObfuscatedName("af.a(IIIIIIIIIIIIIIIIIII)V")
 	public static void method31(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
 		int[] var19 = field126.method560(arg18);

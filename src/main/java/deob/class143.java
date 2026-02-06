@@ -91,20 +91,6 @@ public final class class143 extends class13 {
 		class45.field1049 = arg4;
 	}
 
-	@ObfuscatedName("ud.e(I)V")
-	public static void method1078() {
-		field3271 = null;
-		field3258 = null;
-		field3272 = null;
-		field3274 = null;
-		field3279 = null;
-		field3273 = null;
-		field3262 = null;
-		field3269 = null;
-		field3276 = null;
-		field3278 = null;
-	}
-
 	@ObfuscatedName("ud.a(IIIIIBI)I")
 	public static int method1079(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var6 = arg5 & 0x3;

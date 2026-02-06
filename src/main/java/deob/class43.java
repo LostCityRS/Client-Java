@@ -276,19 +276,6 @@ public final class class43 extends class48 implements ImageProducer, ImageObserv
 		}
 	}
 
-	@ObfuscatedName("g.d(I)V")
-	public static void method331() {
-		field1000 = null;
-		field1005 = null;
-		field991 = null;
-		field998 = null;
-		field1006 = null;
-		field1009 = null;
-		field1004 = null;
-		field1003 = null;
-		field996 = null;
-	}
-
 	@ObfuscatedName("g.a(BLka;II)V")
 	public static void method333(class70 arg0, int arg1, int arg2) {
 		if ((arg2 & 0x400) != 0) {

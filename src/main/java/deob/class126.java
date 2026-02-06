@@ -86,16 +86,6 @@ public final class class126 {
 		}
 	}
 
-	@ObfuscatedName("sa.a(I)V")
-	public static void method986() {
-		field2925 = null;
-		field2927 = null;
-		field2924 = null;
-		field2923 = null;
-		field2918 = null;
-		field2922 = null;
-	}
-
 	@ObfuscatedName("sa.a(Ljava/awt/Component;I)V")
 	public static void method987(Component arg0) {
 		arg0.removeMouseListener(class38.field909);

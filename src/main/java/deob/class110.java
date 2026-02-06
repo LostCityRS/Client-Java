@@ -98,12 +98,4 @@ public final class class110 extends class13 {
 			class97.field2230 = 0;
 		}
 	}
-
-	@ObfuscatedName("pf.f(I)V")
-	public static void method873() {
-		field2586 = null;
-		field2579 = null;
-		field2581 = null;
-		field2588 = null;
-	}
 }

@@ -402,17 +402,6 @@ public final class class80 implements KeyListener, FocusListener {
 		}
 	}
 
-	@ObfuscatedName("ld.a(Z)V")
-	public static void method635() {
-		field1853 = null;
-		field1837 = null;
-		field1840 = null;
-		field1851 = null;
-		field1838 = null;
-		field1855 = null;
-		field1849 = null;
-	}
-
 	@ObfuscatedName("ld.a(IB)Lac;")
 	public static class4 method636(int arg0) {
 		class4 var1 = (class4) class62.field1406.method485((long) arg0);

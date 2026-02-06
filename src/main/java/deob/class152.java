@@ -97,17 +97,6 @@ public final class class152 {
 		return var3;
 	}
 
-	@ObfuscatedName("vf.e(I)V")
-	public static void method1185() {
-		field3500 = null;
-		field3481 = null;
-		field3499 = null;
-		field3489 = null;
-		field3486 = null;
-		field3508 = null;
-		field3478 = null;
-	}
-
 	@ObfuscatedName("vf.a(Lec;I)V")
 	public static void method1186(class32 arg0) {
 		if (class145.field3301 >= 2) {

@@ -108,14 +108,6 @@ public final class class102 {
 		class12.field206 = arg0;
 	}
 
-	@ObfuscatedName("oe.a(B)V")
-	public static void method826() {
-		field2394 = null;
-		field2400 = null;
-		field2395 = null;
-		field2401 = null;
-	}
-
 	@ObfuscatedName("oe.c(I)V")
 	public static void method827() {
 		for (class136 var0 = (class136) class157.field3594.method1211(); var0 != null; var0 = (class136) class157.field3594.method1209()) {

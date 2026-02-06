@@ -79,16 +79,4 @@ public final class class28 {
 			return true;
 		}
 	}
-
-	@ObfuscatedName("df.a(I)V")
-	public static void method194() {
-		field509 = null;
-		field508 = null;
-		field515 = null;
-		field512 = null;
-		field505 = null;
-		field516 = null;
-		field507 = null;
-		field513 = null;
-	}
 }

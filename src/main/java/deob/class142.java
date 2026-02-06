@@ -66,15 +66,6 @@ public final class class142 extends class146 {
 		class32.method265(class45.field1071, class121.field2864, class36.field863, class110.field2585);
 	}
 
-	@ObfuscatedName("uc.a(Z)V")
-	public static void method1073() {
-		field3247 = null;
-		field3248 = null;
-		field3256 = null;
-		field3252 = null;
-		field3244 = null;
-	}
-
 	@ObfuscatedName("uc.a(ILea;Lea;)I")
 	public static int method1074(class30 arg0, class30 arg1) {
 		int var2 = 0;

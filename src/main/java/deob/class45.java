@@ -181,18 +181,4 @@ public final class class45 {
 			return Class.forName(arg0);
 		}
 	}
-
-	@ObfuscatedName("gb.a(B)V")
-	public static void method347() {
-		field1072 = null;
-		field1074 = null;
-		field1077 = null;
-		field1052 = null;
-		field1073 = null;
-		field1076 = null;
-		field1075 = null;
-		field1070 = null;
-		field1069 = null;
-		field1055 = null;
-	}
 }

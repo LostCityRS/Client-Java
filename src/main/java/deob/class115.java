@@ -237,25 +237,6 @@ public abstract class class115 extends class26 {
 	@ObfuscatedName("qd.Yb")
 	public int field2742;
 
-	@ObfuscatedName("qd.e(I)V")
-	public static void method898() {
-		field2760 = null;
-		field2769 = null;
-		field2719 = null;
-		field2739 = null;
-		field2702 = null;
-		field2768 = null;
-		field2692 = null;
-		field2720 = null;
-		field2766 = null;
-		field2763 = null;
-		field2772 = null;
-		field2699 = null;
-		field2770 = null;
-		field2762 = null;
-		field2771 = null;
-	}
-
 	@ObfuscatedName("qd.f(I)V")
 	public static void method899() {
 		class92.field2107.method490();

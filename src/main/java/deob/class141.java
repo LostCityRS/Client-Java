@@ -293,11 +293,6 @@ public class class141 extends class13 {
 		}
 	}
 
-	@ObfuscatedName("ub.c()V")
-	public static void method1064() {
-		field3237 = null;
-	}
-
 	@ObfuscatedName("ub.c(IIII)V")
 	public static void method1065(int arg0, int arg1, int arg2, int arg3) {
 		if (field3238 < arg0) {

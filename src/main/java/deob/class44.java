@@ -75,22 +75,6 @@ public final class class44 extends class30 {
 	@ObfuscatedName("ga.Ab")
 	public volatile boolean[] field1040;
 
-	@ObfuscatedName("ga.a(B)V")
-	public static void method337() {
-		field1042 = null;
-		field1045 = null;
-		field1026 = null;
-		field1032 = null;
-		field1014 = null;
-		field1034 = null;
-		field1036 = null;
-		field1031 = null;
-		field1033 = null;
-		field1041 = null;
-		field1044 = null;
-		field1029 = null;
-	}
-
 	@ObfuscatedName("ga.f(II)I")
 	public static int method342(int arg0) {
 		int var6 = arg0 - 1;

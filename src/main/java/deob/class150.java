@@ -279,24 +279,6 @@ public final class class150 {
 		return (arg0 & 0xFF80) + var2;
 	}
 
-	@ObfuscatedName("vd.d()V")
-	public static void method1159() {
-		field3418 = null;
-		field3434 = null;
-		field3405 = null;
-		field3430 = null;
-		field3433 = null;
-		field3446 = null;
-		field3449 = null;
-		field3444 = null;
-		field3440 = null;
-		field3439 = null;
-		field3437 = null;
-		field3442 = null;
-		field3435 = null;
-		field3447 = null;
-	}
-
 	public class150(int arg0, int arg1, int arg2, int[][][] arg3) {
 		this.field3410 = arg3;
 		this.method1139();

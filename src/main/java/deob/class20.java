@@ -27,16 +27,6 @@ public final class class20 {
 	@ObfuscatedName("ce.j")
 	public static class70 field373;
 
-	@ObfuscatedName("ce.a(I)V")
-	public static void method135() {
-		field365 = null;
-		field364 = null;
-		field369 = null;
-		field366 = null;
-		field373 = null;
-		field372 = null;
-	}
-
 	@ObfuscatedName("ce.a(ILec;)I")
 	public static int method136(class32 arg0) {
 		if (field371 == 1) {

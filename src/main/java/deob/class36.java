@@ -384,17 +384,6 @@ public final class class36 extends class146 {
 	@ObfuscatedName("f.Xc")
 	public Object[] field871;
 
-	@ObfuscatedName("f.a(B)V")
-	public static void method303() {
-		field857 = null;
-		field744 = null;
-		field767 = null;
-		field789 = null;
-		field832 = null;
-		field826 = null;
-		field854 = null;
-	}
-
 	@ObfuscatedName("f.a(IIIII)V")
 	public static void method304(int arg0, int arg1, int arg2, int arg3) {
 		class107 var4 = (class107) class34.field709.method1196((long) arg0);
