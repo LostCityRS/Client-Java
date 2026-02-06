@@ -9,11 +9,11 @@ public final class class38 extends class146 {
 	@ObfuscatedName("fb.v")
 	public static class32 field902 = class73.method593("<col=ff9040>", true);
 
-	@ObfuscatedName("fb.w")
-	public static class32 field903 = field908;
-
 	@ObfuscatedName("fb.B")
 	public static class32 field908 = class73.method593("Members object", true);
+
+	@ObfuscatedName("fb.w")
+	public static class32 field903 = field908;
 
 	@ObfuscatedName("fb.y")
 	public static class32 field905 = class73.method593("You need a members account to login to this world)3", true);

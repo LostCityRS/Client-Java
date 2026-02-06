@@ -24,11 +24,11 @@ public final class class129 {
 	@ObfuscatedName("sd.i")
 	public static int field2978;
 
-	@ObfuscatedName("sd.k")
-	public static class32 field2980 = field2982;
-
 	@ObfuscatedName("sd.m")
 	public static class32 field2982 = class73.method593("Loaded textures", true);
+
+	@ObfuscatedName("sd.k")
+	public static class32 field2980 = field2982;
 
 	@ObfuscatedName("sd.a(I)V")
 	public static void method995() {

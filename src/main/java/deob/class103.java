@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("of")
 public final class class103 {
 
-	@ObfuscatedName("of.a")
-	public static class32 field2402 = field2405;
-
 	@ObfuscatedName("of.b")
 	public static int field2403 = 0;
 
@@ -14,6 +11,9 @@ public final class class103 {
 
 	@ObfuscatedName("of.d")
 	public static class32 field2405 = class73.method593("Please contact customer support)3", true);
+
+	@ObfuscatedName("of.a")
+	public static class32 field2402 = field2405;
 
 	@ObfuscatedName("of.e")
 	public static class32 field2406 = class73.method593("event_opbase", true);

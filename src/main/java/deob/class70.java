@@ -21,9 +21,6 @@ public final class class70 extends class115 {
 	@ObfuscatedName("ka.gd")
 	public class101 field1654;
 
-	@ObfuscatedName("ka.id")
-	public static class32 field1656 = field1661;
-
 	@ObfuscatedName("ka.kd")
 	public static int field1658 = 0;
 
@@ -35,6 +32,9 @@ public final class class70 extends class115 {
 
 	@ObfuscatedName("ka.nd")
 	public static class32 field1661 = class73.method593("Close", true);
+
+	@ObfuscatedName("ka.id")
+	public static class32 field1656 = field1661;
 
 	@ObfuscatedName("ka.Ic")
 	public static int[][][] field1630 = new int[4][105][105];

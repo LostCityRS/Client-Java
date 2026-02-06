@@ -18,14 +18,14 @@ public abstract class class9 {
 	@ObfuscatedName("ba.h")
 	public static int field166 = 0;
 
-	@ObfuscatedName("ba.i")
-	public static class32 field167 = field169;
-
 	@ObfuscatedName("ba.j")
 	public static class49[] field168;
 
 	@ObfuscatedName("ba.k")
 	public static class32 field169 = class73.method593("Loading interfaces )2 ", true);
+
+	@ObfuscatedName("ba.i")
+	public static class32 field167 = field169;
 
 	@ObfuscatedName("ba.a(B)V")
 	public static void method54() {

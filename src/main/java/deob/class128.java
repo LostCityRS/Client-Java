@@ -23,9 +23,6 @@ public final class class128 extends class26 {
 	@ObfuscatedName("sc.ib")
 	public double field2946;
 
-	@ObfuscatedName("sc.jb")
-	public static class32 field2947 = field2950;
-
 	@ObfuscatedName("sc.kb")
 	public final int field2948;
 
@@ -34,6 +31,9 @@ public final class class128 extends class26 {
 
 	@ObfuscatedName("sc.mb")
 	public static class32 field2950 = class73.method593("yellow:", true);
+
+	@ObfuscatedName("sc.jb")
+	public static class32 field2947 = field2950;
 
 	@ObfuscatedName("sc.nb")
 	public double field2951;

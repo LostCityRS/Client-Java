@@ -15,9 +15,6 @@ public final class class112 {
 	@ObfuscatedName("qa.e")
 	public static class32 field2617 = class73.method593("(Udns", true);
 
-	@ObfuscatedName("qa.h")
-	public static class32 field2620 = field2625;
-
 	@ObfuscatedName("qa.i")
 	public static boolean field2621 = false;
 
@@ -26,6 +23,9 @@ public final class class112 {
 
 	@ObfuscatedName("qa.m")
 	public static class32 field2625 = class73.method593("Type", true);
+
+	@ObfuscatedName("qa.h")
+	public static class32 field2620 = field2625;
 
 	@ObfuscatedName("qa.n")
 	public static int[] field2626 = new int[50];

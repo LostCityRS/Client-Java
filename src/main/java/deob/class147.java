@@ -24,9 +24,6 @@ public final class class147 {
 	@ObfuscatedName("va.h")
 	public static class32 field3332 = class73.method593("Sep", true);
 
-	@ObfuscatedName("va.i")
-	public static class32[] field3333 = new class32[] { field3351, field3338, field3350, field3340, field3330, field3326, field3337, field3334, field3332, field3327, field3328, field3352 };
-
 	@ObfuscatedName("va.j")
 	public static class32 field3334 = class73.method593("Aug", true);
 
@@ -77,6 +74,9 @@ public final class class147 {
 
 	@ObfuscatedName("va.B")
 	public static class32 field3352 = class73.method593("Dec", true);
+
+	@ObfuscatedName("va.i")
+	public static class32[] field3333 = new class32[] { field3351, field3338, field3350, field3340, field3330, field3326, field3337, field3334, field3332, field3327, field3328, field3352 };
 
 	@ObfuscatedName("va.b(I)V")
 	public static void method1098() {

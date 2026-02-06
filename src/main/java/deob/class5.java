@@ -3,12 +3,6 @@ package deob;
 @ObfuscatedName("ad")
 public final class class5 {
 
-	@ObfuscatedName("ad.a")
-	public static class32 field83 = field90;
-
-	@ObfuscatedName("ad.b")
-	public static class32 field84 = field90;
-
 	@ObfuscatedName("ad.c")
 	public static class32 field85 = class73.method593("You can(Wt add yourself to your own friend list", true);
 
@@ -33,9 +27,6 @@ public final class class5 {
 	@ObfuscatedName("ad.k")
 	public static class32 field93 = class73.method593("leuchten2:", true);
 
-	@ObfuscatedName("ad.l")
-	public static class32 field94 = field100;
-
 	@ObfuscatedName("ad.m")
 	public static class32 field95 = field91;
 
@@ -53,6 +44,15 @@ public final class class5 {
 
 	@ObfuscatedName("ad.r")
 	public static class32 field100 = class73.method593("Choose Option", true);
+
+	@ObfuscatedName("ad.a")
+	public static class32 field83 = field90;
+
+	@ObfuscatedName("ad.b")
+	public static class32 field84 = field90;
+
+	@ObfuscatedName("ad.l")
+	public static class32 field94 = field100;
 
 	@ObfuscatedName("ad.t")
 	public static int field102 = 1;

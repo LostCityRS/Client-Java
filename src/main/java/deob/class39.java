@@ -12,9 +12,6 @@ public final class class39 extends class146 {
 	@ObfuscatedName("fc.t")
 	public static class32 field930 = class73.method593("Keine Antwort vom Server)3", true);
 
-	@ObfuscatedName("fc.u")
-	public static class32 field931 = field943;
-
 	@ObfuscatedName("fc.z")
 	public static int field936 = 0;
 
@@ -26,6 +23,9 @@ public final class class39 extends class146 {
 
 	@ObfuscatedName("fc.H")
 	public static class32 field943 = class73.method593("flash2:", true);
+
+	@ObfuscatedName("fc.u")
+	public static class32 field931 = field943;
 
 	@ObfuscatedName("fc.G")
 	public static class32 field942 = field943;

@@ -19,14 +19,8 @@ public final class class32 implements class127 {
 	@ObfuscatedName("ec.fb")
 	public int field674;
 
-	@ObfuscatedName("ec.i")
-	public static class32 field626 = field655;
-
 	@ObfuscatedName("ec.ib")
 	public static int field677 = -1;
-
-	@ObfuscatedName("ec.k")
-	public static class32 field628 = field657;
 
 	@ObfuscatedName("ec.o")
 	public static class32 field632 = class73.method593("logo", true);
@@ -37,8 +31,14 @@ public final class class32 implements class127 {
 	@ObfuscatedName("ec.L")
 	public static class32 field655 = class73.method593("Welcome to RuneScape", true);
 
+	@ObfuscatedName("ec.i")
+	public static class32 field626 = field655;
+
 	@ObfuscatedName("ec.N")
 	public static class32 field657 = class73.method593("Free world", true);
+
+	@ObfuscatedName("ec.k")
+	public static class32 field628 = field657;
 
 	@ObfuscatedName("ec.H")
 	public boolean field651 = true;

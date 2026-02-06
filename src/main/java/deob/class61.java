@@ -3,12 +3,6 @@ package deob;
 @ObfuscatedName("ie")
 public final class class61 extends class13 {
 
-	@ObfuscatedName("ie.ab")
-	public static class32 field1364 = field1363;
-
-	@ObfuscatedName("ie.bb")
-	public static class32 field1365 = field1362;
-
 	@ObfuscatedName("ie.K")
 	public static class32 field1348 = class73.method593("Passwort: ", true);
 
@@ -33,8 +27,14 @@ public final class class61 extends class13 {
 	@ObfuscatedName("ie.Y")
 	public static class32 field1362 = class73.method593("Select", true);
 
+	@ObfuscatedName("ie.bb")
+	public static class32 field1365 = field1362;
+
 	@ObfuscatedName("ie.Z")
 	public static class32 field1363 = class73.method593("RuneScape has been updated(Q", true);
+
+	@ObfuscatedName("ie.ab")
+	public static class32 field1364 = field1363;
 
 	@ObfuscatedName("ie.N")
 	public int field1351 = 0;

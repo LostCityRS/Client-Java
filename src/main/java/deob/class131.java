@@ -12,14 +12,14 @@ public abstract class class131 {
 	@ObfuscatedName("sf.d")
 	public static class32 field3012 = class73.method593("mn", true);
 
-	@ObfuscatedName("sf.g")
-	public static class32 field3015 = field3018;
-
 	@ObfuscatedName("sf.h")
 	public static class32 field3016 = class73.method593("Bitte benutzen Sie eine andere Welt)3", true);
 
 	@ObfuscatedName("sf.j")
 	public static class32 field3018 = class73.method593("Please wait)3)3)3", true);
+
+	@ObfuscatedName("sf.g")
+	public static class32 field3015 = field3018;
 
 	@ObfuscatedName("sf.k")
 	public static class49[] field3019;

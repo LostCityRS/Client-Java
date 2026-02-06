@@ -18,14 +18,11 @@ public final class class68 {
 	@ObfuscatedName("jf.e")
 	public static class32 field1594 = class73.method593("titlebox", true);
 
-	@ObfuscatedName("jf.f")
-	public static class32 field1595 = field1599;
-
-	@ObfuscatedName("jf.i")
-	public static class32 field1598 = field1605;
-
 	@ObfuscatedName("jf.j")
 	public static class32 field1599 = class73.method593("This world is running a closed Beta)3", true);
+
+	@ObfuscatedName("jf.f")
+	public static class32 field1595 = field1599;
 
 	@ObfuscatedName("jf.k")
 	public static int[] field1600 = new int[4000];
@@ -41,6 +38,9 @@ public final class class68 {
 
 	@ObfuscatedName("jf.p")
 	public static class32 field1605 = class73.method593("No reply from loginserver)3", true);
+
+	@ObfuscatedName("jf.i")
+	public static class32 field1598 = field1605;
 
 	@ObfuscatedName("jf.q")
 	public final class30 field1606;

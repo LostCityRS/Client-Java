@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("ea")
 public abstract class class30 {
 
-	@ObfuscatedName("ea.b")
-	public static class32 field539 = field546;
-
 	@ObfuscatedName("ea.c")
 	public int field540;
 
@@ -17,6 +14,9 @@ public abstract class class30 {
 
 	@ObfuscatedName("ea.i")
 	public static class32 field546 = class73.method593("Invalid username or password)3", true);
+
+	@ObfuscatedName("ea.b")
+	public static class32 field539 = field546;
 
 	@ObfuscatedName("ea.k")
 	public int[] field548;

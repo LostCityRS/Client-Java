@@ -6,9 +6,6 @@ public final class class81 extends class9 {
 	@ObfuscatedName("le.l")
 	public static int field1856 = 0;
 
-	@ObfuscatedName("le.m")
-	public static class32 field1857 = field1864;
-
 	@ObfuscatedName("le.n")
 	public static class32 field1858 = class73.method593("Fertigkeit)2", true);
 
@@ -26,6 +23,9 @@ public final class class81 extends class9 {
 
 	@ObfuscatedName("le.t")
 	public static class32 field1864 = class73.method593("Error connecting to server)3", true);
+
+	@ObfuscatedName("le.m")
+	public static class32 field1857 = field1864;
 
 	@ObfuscatedName("le.u")
 	public static class32 field1865 = class73.method593("You have only just left another world)3", true);

@@ -6,9 +6,6 @@ public final class class117 {
 	@ObfuscatedName("qf.c")
 	public static int[] field2779 = new int[32];
 
-	@ObfuscatedName("qf.e")
-	public static class32 field2781 = field2790;
-
 	@ObfuscatedName("qf.i")
 	public final int field2785 = 104;
 
@@ -17,6 +14,9 @@ public final class class117 {
 
 	@ObfuscatedName("qf.n")
 	public static class32 field2790 = class73.method593("Loaded sprites", true);
+
+	@ObfuscatedName("qf.e")
+	public static class32 field2781 = field2790;
 
 	@ObfuscatedName("qf.o")
 	public final int field2791 = 0;

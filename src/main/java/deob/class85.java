@@ -23,9 +23,6 @@ public final class class85 {
 	@ObfuscatedName("mb.h")
 	public static byte[][][] field1985;
 
-	@ObfuscatedName("mb.i")
-	public static class32 field1986 = field1994;
-
 	@ObfuscatedName("mb.j")
 	public static class63 field1987 = new class63(200);
 
@@ -44,17 +41,20 @@ public final class class85 {
 	@ObfuscatedName("mb.q")
 	public static class32 field1994 = class73.method593("Loading title screen )2 ", true);
 
+	@ObfuscatedName("mb.i")
+	public static class32 field1986 = field1994;
+
 	@ObfuscatedName("mb.r")
 	public static class32 field1995 = class73.method593("blaugr-Un:", true);
 
 	@ObfuscatedName("mb.s")
 	public static int field1996 = 0;
 
-	@ObfuscatedName("mb.u")
-	public static class32 field1998 = field1999;
-
 	@ObfuscatedName("mb.v")
 	public static class32 field1999 = class73.method593("Account locked as we suspect it has been stolen)3", true);
+
+	@ObfuscatedName("mb.u")
+	public static class32 field1998 = field1999;
 
 	@ObfuscatedName("mb.a(IIBI)I")
 	public static int method658(int arg0, int arg1, int arg2) {

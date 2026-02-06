@@ -18,9 +18,6 @@ public final class class86 {
 	@ObfuscatedName("mc.e")
 	public static int field2004 = 0;
 
-	@ObfuscatedName("mc.h")
-	public static class32 field2007 = field2018;
-
 	@ObfuscatedName("mc.i")
 	public static class32 field2008 = class73.method593("sch-Utteln:", true);
 
@@ -42,14 +39,14 @@ public final class class86 {
 	@ObfuscatedName("mc.o")
 	public static int field2014 = 1;
 
-	@ObfuscatedName("mc.p")
-	public static class32 field2015 = field2022;
-
 	@ObfuscatedName("mc.q")
 	public static int field2016 = 0;
 
 	@ObfuscatedName("mc.s")
 	public static class32 field2018 = class73.method593("Please wait )2 attempting to reestablish", true);
+
+	@ObfuscatedName("mc.h")
+	public static class32 field2007 = field2018;
 
 	@ObfuscatedName("mc.u")
 	public static class32 field2020 = field2012;
@@ -59,6 +56,9 @@ public final class class86 {
 
 	@ObfuscatedName("mc.w")
 	public static class32 field2022 = class73.method593("Service unavailable)3", true);
+
+	@ObfuscatedName("mc.p")
+	public static class32 field2015 = field2022;
 
 	@ObfuscatedName("mc.a(IIIII)V")
 	public static void method663(int arg0, int arg1, int arg2, int arg3) {

@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("jc")
 public final class class65 extends class13 {
 
-	@ObfuscatedName("jc.ab")
-	public static class32 field1514 = field1499;
-
 	@ObfuscatedName("jc.bb")
 	public int field1515 = -1;
 
@@ -26,6 +23,9 @@ public final class class65 extends class13 {
 
 	@ObfuscatedName("jc.L")
 	public static class32 field1499 = class73.method593("Too many incorrect logins from your address)3", true);
+
+	@ObfuscatedName("jc.ab")
+	public static class32 field1514 = field1499;
 
 	@ObfuscatedName("jc.R")
 	public static class32 field1505 = class73.method593("sl_flags", true);

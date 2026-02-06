@@ -42,9 +42,6 @@ public final class class150 {
 	@ObfuscatedName("vd.i")
 	public final class154[][][] field3404 = new class154[4][104][104];
 
-	@ObfuscatedName("vd.j")
-	public static class103[][] field3405 = new class103[field3409][500];
-
 	@ObfuscatedName("vd.k")
 	public static boolean field3406 = false;
 
@@ -56,6 +53,9 @@ public final class class150 {
 
 	@ObfuscatedName("vd.n")
 	public static final int field3409 = 4;
+
+	@ObfuscatedName("vd.j")
+	public static class103[][] field3405 = new class103[field3409][500];
 
 	@ObfuscatedName("vd.o")
 	public final int[][][] field3410;

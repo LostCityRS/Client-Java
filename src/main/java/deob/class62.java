@@ -6,17 +6,11 @@ public final class class62 extends class13 {
 	@ObfuscatedName("j.ab")
 	public int field1385 = -1;
 
-	@ObfuscatedName("j.ac")
-	public static class32 field1437 = field1436;
-
 	@ObfuscatedName("j.bb")
 	public static class82 field1386 = null;
 
 	@ObfuscatedName("j.bc")
 	public static byte[] field1438 = new byte[520];
-
-	@ObfuscatedName("j.cc")
-	public static class32 field1439 = field1432;
 
 	@ObfuscatedName("j.db")
 	public int field1388 = -1;
@@ -78,11 +72,17 @@ public final class class62 extends class13 {
 	@ObfuscatedName("j.Wb")
 	public static class32 field1433 = field1432;
 
+	@ObfuscatedName("j.cc")
+	public static class32 field1439 = field1432;
+
 	@ObfuscatedName("j.Yb")
 	public static class32 field1435 = class73.method593("auf einer freien Welt zu spielen)3", true);
 
 	@ObfuscatedName("j.Zb")
 	public static class32 field1436 = class73.method593("level)2", true);
+
+	@ObfuscatedName("j.ac")
+	public static class32 field1437 = field1436;
 
 	@ObfuscatedName("j.J")
 	public int field1368 = -1;

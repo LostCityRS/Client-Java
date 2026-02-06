@@ -8,9 +8,6 @@ public abstract class class145 {
 	@ObfuscatedName("uf.a")
 	public static int[] field3294 = new int[5];
 
-	@ObfuscatedName("uf.c")
-	public static class32 field3296 = field3300;
-
 	@ObfuscatedName("uf.d")
 	public static boolean[] field3297 = new boolean[100];
 
@@ -19,6 +16,9 @@ public abstract class class145 {
 
 	@ObfuscatedName("uf.g")
 	public static class32 field3300 = class73.method593("Unable to connect)3", true);
+
+	@ObfuscatedName("uf.c")
+	public static class32 field3296 = field3300;
 
 	@ObfuscatedName("uf.h")
 	public static int field3301 = 0;

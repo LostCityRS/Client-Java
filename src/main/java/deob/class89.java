@@ -5,11 +5,11 @@ import java.io.UnsupportedEncodingException;
 @ObfuscatedName("mf")
 public final class class89 {
 
-	@ObfuscatedName("mf.b")
-	public static class32 field2050 = field2051;
-
 	@ObfuscatedName("mf.c")
 	public static class32 field2051 = class73.method593("K", true);
+
+	@ObfuscatedName("mf.b")
+	public static class32 field2050 = field2051;
 
 	@ObfuscatedName("mf.d")
 	public static class32 field2052 = field2051;

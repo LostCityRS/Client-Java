@@ -12,9 +12,6 @@ public final class class105 {
 	@ObfuscatedName("pa.c")
 	public static class32 field2483 = class73.method593("Loaded update list", true);
 
-	@ObfuscatedName("pa.d")
-	public static class32 field2484 = field2497;
-
 	@ObfuscatedName("pa.e")
 	public static class32 field2485 = field2483;
 
@@ -30,9 +27,6 @@ public final class class105 {
 	@ObfuscatedName("pa.i")
 	public static class32 field2489 = field2486;
 
-	@ObfuscatedName("pa.l")
-	public static class32 field2492 = field2498;
-
 	@ObfuscatedName("pa.m")
 	public static class32 field2493 = class73.method593("Lade Schrifts-=tze )2 ", true);
 
@@ -45,8 +39,14 @@ public final class class105 {
 	@ObfuscatedName("pa.q")
 	public static class32 field2497 = class73.method593("Members only world", true);
 
+	@ObfuscatedName("pa.d")
+	public static class32 field2484 = field2497;
+
 	@ObfuscatedName("pa.r")
 	public static class32 field2498 = class73.method593("Existing User", true);
+
+	@ObfuscatedName("pa.l")
+	public static class32 field2492 = field2498;
 
 	@ObfuscatedName("pa.s")
 	public static class30 field2499;

@@ -8,23 +8,11 @@ public final class class74 {
 	@ObfuscatedName("ke.b")
 	public static int field1737 = 1;
 
-	@ObfuscatedName("ke.c")
-	public static class32 field1738 = field1748;
-
 	@ObfuscatedName("ke.d")
 	public static long[] field1739 = new long[100];
 
-	@ObfuscatedName("ke.e")
-	public static class32 field1740 = field1748;
-
 	@ObfuscatedName("ke.f")
 	public static int[] field1741 = new int[32];
-
-	@ObfuscatedName("ke.g")
-	public static class32 field1742 = field1748;
-
-	@ObfuscatedName("ke.h")
-	public static class32 field1743 = field1748;
 
 	@ObfuscatedName("ke.i")
 	public static long field1744;
@@ -37,6 +25,18 @@ public final class class74 {
 
 	@ObfuscatedName("ke.m")
 	public static class32 field1748 = class73.method593("", true);
+
+	@ObfuscatedName("ke.c")
+	public static class32 field1738 = field1748;
+
+	@ObfuscatedName("ke.e")
+	public static class32 field1740 = field1748;
+
+	@ObfuscatedName("ke.g")
+	public static class32 field1742 = field1748;
+
+	@ObfuscatedName("ke.h")
+	public static class32 field1743 = field1748;
 
 	@ObfuscatedName("ke.o")
 	public static class32 field1750 = class73.method593("Malformed login packet)3", true);

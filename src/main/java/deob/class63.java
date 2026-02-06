@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("ja")
 public final class class63 {
 
-	@ObfuscatedName("ja.a")
-	public static int[] field1440 = new int[field1460];
-
 	@ObfuscatedName("ja.b")
 	public static class32 field1441 = class73.method593("rect_debug=", true);
 
@@ -21,17 +18,11 @@ public final class class63 {
 	@ObfuscatedName("ja.f")
 	public static class32 field1445 = class73.method593(")1p", true);
 
-	@ObfuscatedName("ja.g")
-	public static int[] field1446 = new int[field1460];
-
 	@ObfuscatedName("ja.h")
 	public static class36 field1447;
 
 	@ObfuscatedName("ja.i")
 	public final class13 field1448 = new class13();
-
-	@ObfuscatedName("ja.m")
-	public static class32[] field1452 = new class32[field1460];
 
 	@ObfuscatedName("ja.n")
 	public static class32 field1453 = class73.method593("Loading sprites )2 ", true);
@@ -42,9 +33,6 @@ public final class class63 {
 	@ObfuscatedName("ja.p")
 	public static class32 field1455 = class73.method593("sl_arrows", true);
 
-	@ObfuscatedName("ja.r")
-	public static int[] field1457 = new int[field1460];
-
 	@ObfuscatedName("ja.t")
 	public static class32 field1459 = field1453;
 
@@ -53,6 +41,18 @@ public final class class63 {
 
 	@ObfuscatedName("ja.z")
 	public static int field1465 = -1;
+
+	@ObfuscatedName("ja.a")
+	public static int[] field1440 = new int[field1460];
+
+	@ObfuscatedName("ja.g")
+	public static int[] field1446 = new int[field1460];
+
+	@ObfuscatedName("ja.m")
+	public static class32[] field1452 = new class32[field1460];
+
+	@ObfuscatedName("ja.r")
+	public static int[] field1457 = new int[field1460];
 
 	@ObfuscatedName("ja.y")
 	public static int[] field1464 = new int[field1460];

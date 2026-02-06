@@ -54,9 +54,6 @@ public final class class83 {
 	@ObfuscatedName("m.q")
 	public final int[][] field1938 = new int[6][258];
 
-	@ObfuscatedName("m.r")
-	public static class32 field1939 = field1949;
-
 	@ObfuscatedName("m.s")
 	public final int[] field1940 = new int[257];
 
@@ -68,6 +65,9 @@ public final class class83 {
 
 	@ObfuscatedName("m.B")
 	public static class32 field1949 = class73.method593("Prepared visibility map", true);
+
+	@ObfuscatedName("m.r")
+	public static class32 field1939 = field1949;
 
 	@ObfuscatedName("m.J")
 	public static int[] field1957 = new int[1000];

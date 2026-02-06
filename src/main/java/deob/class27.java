@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("de")
 public final class class27 implements Runnable {
 
-	@ObfuscatedName("de.a")
-	public static class32 field481 = field491;
-
 	@ObfuscatedName("de.c")
 	public static byte[][] field483;
 
@@ -18,17 +15,14 @@ public final class class27 implements Runnable {
 	@ObfuscatedName("de.g")
 	public final class114[] field487 = new class114[2];
 
-	@ObfuscatedName("de.h")
-	public static class32 field488 = field496;
-
-	@ObfuscatedName("de.i")
-	public static class32 field489 = field496;
-
 	@ObfuscatedName("de.j")
 	public static class32 field490 = class73.method593(")4lang)4de", true);
 
 	@ObfuscatedName("de.k")
 	public static class32 field491 = class73.method593(" seconds)3", true);
+
+	@ObfuscatedName("de.a")
+	public static class32 field481 = field491;
 
 	@ObfuscatedName("de.m")
 	public static int field493 = 0;
@@ -38,6 +32,12 @@ public final class class27 implements Runnable {
 
 	@ObfuscatedName("de.p")
 	public static class32 field496 = class73.method593("flash1:", true);
+
+	@ObfuscatedName("de.h")
+	public static class32 field488 = field496;
+
+	@ObfuscatedName("de.i")
+	public static class32 field489 = field496;
 
 	@ObfuscatedName("de.q")
 	public volatile boolean field497 = false;

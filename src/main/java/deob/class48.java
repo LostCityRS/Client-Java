@@ -43,11 +43,11 @@ public abstract class class48 {
 	@ObfuscatedName("gf.p")
 	public static class32 field1134 = class73.method593("Bitte geben Sie Ihren Benutzenamen ein)3", true);
 
-	@ObfuscatedName("gf.q")
-	public static class32 field1135 = field1136;
-
 	@ObfuscatedName("gf.r")
 	public static class32 field1136 = class73.method593("Loading )2 please wait)3", true);
+
+	@ObfuscatedName("gf.q")
+	public static class32 field1135 = field1136;
 
 	@ObfuscatedName("gf.s")
 	public static class49 field1137;

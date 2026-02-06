@@ -12,9 +12,6 @@ public final class class71 {
 	@ObfuscatedName("kb.d")
 	public static class36 field1665;
 
-	@ObfuscatedName("kb.e")
-	public static class32 field1666 = field1681;
-
 	@ObfuscatedName("kb.f")
 	public static class32 field1667 = class73.method593(" x ", true);
 
@@ -47,6 +44,9 @@ public final class class71 {
 
 	@ObfuscatedName("kb.t")
 	public static class32 field1681 = class73.method593("Click to switch", true);
+
+	@ObfuscatedName("kb.e")
+	public static class32 field1666 = field1681;
 
 	@ObfuscatedName("kb.u")
 	public int field1682;

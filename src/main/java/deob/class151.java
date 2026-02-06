@@ -23,9 +23,6 @@ public final class class151 {
 	@ObfuscatedName("ve.k")
 	public static class32 field3462 = class73.method593("Loading textures )2 ", true);
 
-	@ObfuscatedName("ve.l")
-	public static class32 field3463 = field3473;
-
 	@ObfuscatedName("ve.m")
 	public static class32 field3464 = field3462;
 
@@ -44,9 +41,6 @@ public final class class151 {
 	@ObfuscatedName("ve.r")
 	public static class32 field3469 = class73.method593(" weitere Optionen", true);
 
-	@ObfuscatedName("ve.s")
-	public static class32 field3470 = field3473;
-
 	@ObfuscatedName("ve.t")
 	public static class32 field3471 = class73.method593("Schrifts-=tze geladen)3", true);
 
@@ -55,6 +49,12 @@ public final class class151 {
 
 	@ObfuscatedName("ve.v")
 	public static class32 field3473 = class73.method593("cyan:", true);
+
+	@ObfuscatedName("ve.l")
+	public static class32 field3463 = field3473;
+
+	@ObfuscatedName("ve.s")
+	public static class32 field3470 = field3473;
 
 	@ObfuscatedName("ve.a(Z)V")
 	public static void method1169() {

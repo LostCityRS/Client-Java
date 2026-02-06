@@ -14,9 +14,6 @@ public final class class94 {
 	@ObfuscatedName("nd.c")
 	public static class32 field2162 = class73.method593(" from your friend list first", true);
 
-	@ObfuscatedName("nd.d")
-	public static class32 field2163 = field2180;
-
 	@ObfuscatedName("nd.e")
 	public static final boolean field2164 = false;
 
@@ -35,14 +32,17 @@ public final class class94 {
 	@ObfuscatedName("nd.o")
 	public static int field2174;
 
-	@ObfuscatedName("nd.r")
-	public static class32 field2177 = field2180;
-
 	@ObfuscatedName("nd.s")
 	public static class32 field2178 = field2162;
 
 	@ObfuscatedName("nd.u")
 	public static class32 field2180 = class73.method593("red:", true);
+
+	@ObfuscatedName("nd.d")
+	public static class32 field2163 = field2180;
+
+	@ObfuscatedName("nd.r")
+	public static class32 field2177 = field2180;
 
 	@ObfuscatedName("nd.w")
 	public static class32 field2182 = class73.method593("<col=ffff00>", true);

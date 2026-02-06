@@ -9,9 +9,6 @@ public final class class124 {
 	@ObfuscatedName("rf.b")
 	public static int[] field2883 = new int[5];
 
-	@ObfuscatedName("rf.c")
-	public static class32 field2884 = field2894;
-
 	@ObfuscatedName("rf.d")
 	public static int field2885 = 0;
 
@@ -27,14 +24,17 @@ public final class class124 {
 	@ObfuscatedName("rf.i")
 	public static int[] field2890;
 
-	@ObfuscatedName("rf.j")
-	public static class32 field2891 = field2894;
-
 	@ObfuscatedName("rf.k")
 	public static int[] field2892 = new int[100];
 
 	@ObfuscatedName("rf.m")
 	public static class32 field2894 = class73.method593("scroll:", true);
+
+	@ObfuscatedName("rf.c")
+	public static class32 field2884 = field2894;
+
+	@ObfuscatedName("rf.j")
+	public static class32 field2891 = field2894;
 
 	@ObfuscatedName("rf.o")
 	public static class32 field2896 = class73.method593("M", true);

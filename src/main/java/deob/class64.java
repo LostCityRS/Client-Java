@@ -30,11 +30,11 @@ public final class class64 {
 	@ObfuscatedName("jb.m")
 	public static class32 field1489 = class73.method593("Sie k-Onnen sich selbst nicht auf Ihre Freunde)2Liste setzen(Q", true);
 
-	@ObfuscatedName("jb.n")
-	public static class32 field1490 = field1491;
-
 	@ObfuscatedName("jb.o")
 	public static class32 field1491 = class73.method593("No response from server)3", true);
+
+	@ObfuscatedName("jb.n")
+	public static class32 field1490 = field1491;
 
 	@ObfuscatedName("jb.p")
 	public static class32 field1492 = class73.method593(")3runescape)3com", true);

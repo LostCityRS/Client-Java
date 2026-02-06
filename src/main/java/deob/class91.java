@@ -15,9 +15,6 @@ public final class class91 {
 	@ObfuscatedName("na.g")
 	public static int field2081;
 
-	@ObfuscatedName("na.i")
-	public static class32 field2083 = field2098;
-
 	@ObfuscatedName("na.k")
 	public static class32 field2085 = class73.method593("Players", true);
 
@@ -50,6 +47,9 @@ public final class class91 {
 
 	@ObfuscatedName("na.x")
 	public static class32 field2098 = class73.method593("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(Q(R+R(T(U^(V(Z(X(Y)2_=)0[*U]*W;:(W@(S*X)1<)3>)4?*6*V ", true);
+
+	@ObfuscatedName("na.i")
+	public static class32 field2083 = field2098;
 
 	@ObfuscatedName("na.A")
 	public static class32 field2101 = class73.method593("null", true);

@@ -8,17 +8,14 @@ public final class class77 extends class146 {
 	@ObfuscatedName("la.ab")
 	public int field1819;
 
-	@ObfuscatedName("la.r")
-	public static class32 field1784 = field1786;
-
 	@ObfuscatedName("la.s")
 	public int field1785;
 
 	@ObfuscatedName("la.t")
 	public static class32 field1786 = class73.method593("", true);
 
-	@ObfuscatedName("la.u")
-	public static class32 field1787 = field1790;
+	@ObfuscatedName("la.r")
+	public static class32 field1784 = field1786;
 
 	@ObfuscatedName("la.v")
 	public class90 field1788;
@@ -28,6 +25,9 @@ public final class class77 extends class146 {
 
 	@ObfuscatedName("la.x")
 	public static class32 field1790 = class73.method593("Enter your username (V password)3", true);
+
+	@ObfuscatedName("la.u")
+	public static class32 field1787 = field1790;
 
 	@ObfuscatedName("la.T")
 	public static boolean field1812 = true;

@@ -9,11 +9,11 @@ public final class class4 extends class13 {
 	@ObfuscatedName("ac.bb")
 	public static int field72 = 0;
 
-	@ObfuscatedName("ac.cb")
-	public static class32 field73 = field74;
-
 	@ObfuscatedName("ac.db")
 	public static class32 field74 = class73.method593("New User", true);
+
+	@ObfuscatedName("ac.cb")
+	public static class32 field73 = field74;
 
 	@ObfuscatedName("ac.eb")
 	public int field75;

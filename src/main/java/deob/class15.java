@@ -39,9 +39,6 @@ public final class class15 extends class40 {
 	@ObfuscatedName("c.vb")
 	public final int[] field299 = new int[16];
 
-	@ObfuscatedName("c.w")
-	public static class32 field250 = field261;
-
 	@ObfuscatedName("c.wb")
 	public final int[] field300 = new int[16];
 
@@ -59,6 +56,9 @@ public final class class15 extends class40 {
 
 	@ObfuscatedName("c.I")
 	public static class32 field261 = class73.method593("Connection lost", true);
+
+	@ObfuscatedName("c.w")
+	public static class32 field250 = field261;
 
 	@ObfuscatedName("c.Jb")
 	public static int[] field313 = new int[32768];

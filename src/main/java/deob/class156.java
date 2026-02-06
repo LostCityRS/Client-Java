@@ -9,9 +9,6 @@ public final class class156 {
 	@ObfuscatedName("wc.d")
 	public static class32 field3558 = class73.method593("To play on this world move to a free area first", true);
 
-	@ObfuscatedName("wc.g")
-	public static class32 field3561 = field3566;
-
 	@ObfuscatedName("wc.h")
 	public class146 field3562;
 
@@ -26,6 +23,9 @@ public final class class156 {
 
 	@ObfuscatedName("wc.l")
 	public static class32 field3566 = class73.method593("Could not complete login)3", true);
+
+	@ObfuscatedName("wc.g")
+	public static class32 field3561 = field3566;
 
 	@ObfuscatedName("wc.m")
 	public long field3567;

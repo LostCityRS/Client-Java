@@ -9,9 +9,6 @@ public final class class28 {
 	@ObfuscatedName("df.b")
 	public static int field506 = 0;
 
-	@ObfuscatedName("df.c")
-	public static class32 field507 = field513;
-
 	@ObfuscatedName("df.d")
 	public static class32 field508 = field505;
 
@@ -23,6 +20,9 @@ public final class class28 {
 
 	@ObfuscatedName("df.i")
 	public static class32 field513 = class73.method593("Take", true);
+
+	@ObfuscatedName("df.c")
+	public static class32 field507 = field513;
 
 	@ObfuscatedName("df.k")
 	public static class49[] field515;

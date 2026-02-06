@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("ua")
 public final class class140 implements class67 {
 
-	@ObfuscatedName("ua.c")
-	public static class32 field3215 = field3222;
-
 	@ObfuscatedName("ua.d")
 	public static int field3216 = 0;
 
@@ -17,6 +14,9 @@ public final class class140 implements class67 {
 
 	@ObfuscatedName("ua.j")
 	public static class32 field3222 = class73.method593("Sorry invited players only)3", true);
+
+	@ObfuscatedName("ua.c")
+	public static class32 field3215 = field3222;
 
 	@ObfuscatedName("ua.k")
 	public static class32 field3223 = class73.method593("::rect_debug", true);

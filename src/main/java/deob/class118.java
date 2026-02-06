@@ -8,9 +8,6 @@ public final class class118 {
 	@ObfuscatedName("r.b")
 	public class26 field2817;
 
-	@ObfuscatedName("r.c")
-	public static class32 field2818 = field2835;
-
 	@ObfuscatedName("r.e")
 	public int field2820 = 0;
 
@@ -22,9 +19,6 @@ public final class class118 {
 
 	@ObfuscatedName("r.h")
 	public int field2823;
-
-	@ObfuscatedName("r.i")
-	public static class32 field2824 = field2835;
 
 	@ObfuscatedName("r.j")
 	public int field2825 = 0;
@@ -55,6 +49,12 @@ public final class class118 {
 
 	@ObfuscatedName("r.t")
 	public static class32 field2835 = class73.method593("glow3:", true);
+
+	@ObfuscatedName("r.c")
+	public static class32 field2818 = field2835;
+
+	@ObfuscatedName("r.i")
+	public static class32 field2824 = field2835;
 
 	@ObfuscatedName("r.u")
 	public static int field2836;

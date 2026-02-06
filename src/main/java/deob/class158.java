@@ -26,9 +26,6 @@ public final class class158 {
 	@ObfuscatedName("we.i")
 	public static int field3616 = 0;
 
-	@ObfuscatedName("we.k")
-	public static class32 field3618 = field3622;
-
 	@ObfuscatedName("we.l")
 	public static volatile boolean field3619 = false;
 
@@ -40,6 +37,9 @@ public final class class158 {
 
 	@ObfuscatedName("we.o")
 	public static class32 field3622 = class73.method593("wave2:", true);
+
+	@ObfuscatedName("we.k")
+	public static class32 field3618 = field3622;
 
 	@ObfuscatedName("we.p")
 	public static class32 field3623 = class73.method593("Unerwartete Antwort vom Anmelde)2Server)3", true);

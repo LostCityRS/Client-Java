@@ -42,9 +42,6 @@ public final class class106 extends class26 {
 	@ObfuscatedName("pb.pb")
 	public static class32 field2523 = field2521;
 
-	@ObfuscatedName("pb.qb")
-	public static class32 field2524 = field2506;
-
 	@ObfuscatedName("pb.rb")
 	public static class32 field2525 = class73.method593("null", true);
 
@@ -68,6 +65,9 @@ public final class class106 extends class26 {
 
 	@ObfuscatedName("pb.Y")
 	public static class32 field2506 = class73.method593("shake:", true);
+
+	@ObfuscatedName("pb.qb")
+	public static class32 field2524 = field2506;
 
 	@ObfuscatedName("pb.xb")
 	public static class32 field2531 = field2506;

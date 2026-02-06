@@ -27,9 +27,6 @@ public final class class136 extends class26 {
 	@ObfuscatedName("td.mb")
 	public final int field3167;
 
-	@ObfuscatedName("td.nb")
-	public static class32 field3168 = field3148;
-
 	@ObfuscatedName("td.ob")
 	public static class32 field3169 = class73.method593("nicht hergestellt werden)3", true);
 
@@ -47,6 +44,9 @@ public final class class136 extends class26 {
 
 	@ObfuscatedName("td.T")
 	public static class32 field3148 = class73.method593("Please enter your password)3", true);
+
+	@ObfuscatedName("td.nb")
+	public static class32 field3168 = field3148;
 
 	@ObfuscatedName("td.U")
 	public final int field3149;

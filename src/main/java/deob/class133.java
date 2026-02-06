@@ -3,38 +3,14 @@ package deob;
 @ObfuscatedName("ta")
 public final class class133 extends class13 {
 
-	@ObfuscatedName("ta.ab")
-	public static class32 field3056 = field3087;
-
-	@ObfuscatedName("ta.bb")
-	public static class32 field3057 = field3087;
-
-	@ObfuscatedName("ta.cb")
-	public static class32 field3058 = field3087;
-
 	@ObfuscatedName("ta.db")
 	public int field3059 = 0;
-
-	@ObfuscatedName("ta.hb")
-	public static class32 field3063 = field3087;
 
 	@ObfuscatedName("ta.ib")
 	public int field3064 = 0;
 
-	@ObfuscatedName("ta.jb")
-	public static class32 field3065 = field3087;
-
-	@ObfuscatedName("ta.kb")
-	public static class32 field3066 = field3087;
-
 	@ObfuscatedName("ta.lb")
 	public static int field3067 = 0;
-
-	@ObfuscatedName("ta.mb")
-	public static class32 field3068 = field3087;
-
-	@ObfuscatedName("ta.nb")
-	public static class32 field3069 = field3087;
 
 	@ObfuscatedName("ta.ob")
 	public int field3070;
@@ -53,15 +29,6 @@ public final class class133 extends class13 {
 
 	@ObfuscatedName("ta.tb")
 	public static class32 field3075 = field3072;
-
-	@ObfuscatedName("ta.ub")
-	public static class32 field3076 = field3045;
-
-	@ObfuscatedName("ta.vb")
-	public static class32 field3077 = field3087;
-
-	@ObfuscatedName("ta.wb")
-	public static class32 field3078 = field3087;
 
 	@ObfuscatedName("ta.K")
 	public static int field3040 = 0;
@@ -111,6 +78,36 @@ public final class class133 extends class13 {
 	@ObfuscatedName("ta.L")
 	public static class32 field3041 = field3087;
 
+	@ObfuscatedName("ta.vb")
+	public static class32 field3077 = field3087;
+
+	@ObfuscatedName("ta.wb")
+	public static class32 field3078 = field3087;
+
+	@ObfuscatedName("ta.ab")
+	public static class32 field3056 = field3087;
+
+	@ObfuscatedName("ta.bb")
+	public static class32 field3057 = field3087;
+
+	@ObfuscatedName("ta.cb")
+	public static class32 field3058 = field3087;
+
+	@ObfuscatedName("ta.hb")
+	public static class32 field3063 = field3087;
+
+	@ObfuscatedName("ta.jb")
+	public static class32 field3065 = field3087;
+
+	@ObfuscatedName("ta.kb")
+	public static class32 field3066 = field3087;
+
+	@ObfuscatedName("ta.mb")
+	public static class32 field3068 = field3087;
+
+	@ObfuscatedName("ta.nb")
+	public static class32 field3069 = field3087;
+
 	@ObfuscatedName("ta.zb")
 	public static int field3081 = 0;
 
@@ -143,6 +140,9 @@ public final class class133 extends class13 {
 
 	@ObfuscatedName("ta.P")
 	public static class32 field3045 = class73.method593(" is already on your friend list", true);
+
+	@ObfuscatedName("ta.ub")
+	public static class32 field3076 = field3045;
 
 	@ObfuscatedName("ta.S")
 	public static class32 field3048 = field3053;

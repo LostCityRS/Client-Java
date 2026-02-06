@@ -52,9 +52,6 @@ public final class class97 extends class13 {
 	@ObfuscatedName("o.ub")
 	public int field2224;
 
-	@ObfuscatedName("o.wb")
-	public static class32 field2226 = field2242;
-
 	@ObfuscatedName("o.Ab")
 	public static int field2230 = 0;
 
@@ -84,6 +81,9 @@ public final class class97 extends class13 {
 
 	@ObfuscatedName("o.Mb")
 	public static class32 field2242 = class73.method593(" has logged out)3", true);
+
+	@ObfuscatedName("o.wb")
+	public static class32 field2226 = field2242;
 
 	@ObfuscatedName("o.K")
 	public boolean field2188 = true;

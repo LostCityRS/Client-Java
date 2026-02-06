@@ -6,9 +6,6 @@ public final class class130 extends class13 {
 	@ObfuscatedName("se.ab")
 	public int field3002;
 
-	@ObfuscatedName("se.bb")
-	public static class32 field3003 = field3008;
-
 	@ObfuscatedName("se.cb")
 	public static int field3004 = 1;
 
@@ -23,6 +20,9 @@ public final class class130 extends class13 {
 
 	@ObfuscatedName("se.gb")
 	public static class32 field3008 = class73.method593("as it was used to break our rules)3", true);
+
+	@ObfuscatedName("se.bb")
+	public static class32 field3003 = field3008;
 
 	@ObfuscatedName("se.O")
 	public static class66 field2990 = new class66(new byte[5000]);

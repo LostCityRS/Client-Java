@@ -6,9 +6,6 @@ public final class class34 extends class13 {
 	@ObfuscatedName("ee.ab")
 	public static int[] field719;
 
-	@ObfuscatedName("ee.cb")
-	public static class32 field721 = field727;
-
 	@ObfuscatedName("ee.db")
 	public int field722;
 
@@ -20,6 +17,9 @@ public final class class34 extends class13 {
 
 	@ObfuscatedName("ee.ib")
 	public static class32 field727 = class73.method593("Location", true);
+
+	@ObfuscatedName("ee.cb")
+	public static class32 field721 = field727;
 
 	@ObfuscatedName("ee.jb")
 	public static class32 field728 = class73.method593("OFF", true);

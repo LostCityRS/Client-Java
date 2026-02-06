@@ -12,9 +12,6 @@ public final class class109 implements MouseListener, MouseMotionListener, Focus
 	@ObfuscatedName("pe.e")
 	public static boolean field2553 = false;
 
-	@ObfuscatedName("pe.h")
-	public static class32 field2556 = field2564;
-
 	@ObfuscatedName("pe.m")
 	public static class32 field2561 = class73.method593("Loaded input handler", true);
 
@@ -26,6 +23,9 @@ public final class class109 implements MouseListener, MouseMotionListener, Focus
 
 	@ObfuscatedName("pe.p")
 	public static class32 field2564 = class73.method593("Connection timed out)3", true);
+
+	@ObfuscatedName("pe.h")
+	public static class32 field2556 = field2564;
 
 	@ObfuscatedName("pe.q")
 	public static class32 field2565 = class73.method593("Unexpected server response", true);

@@ -11,11 +11,11 @@ public class class114 {
 	@ObfuscatedName("qc.f")
 	public static class32 field2649 = class73.method593(":tradereq:", true);
 
-	@ObfuscatedName("qc.h")
-	public static class32 field2651 = field2652;
-
 	@ObfuscatedName("qc.i")
 	public static class32 field2652 = class73.method593(" ", true);
+
+	@ObfuscatedName("qc.h")
+	public static class32 field2651 = field2652;
 
 	@ObfuscatedName("qc.j")
 	public static int[] field2653 = new int[5];
