@@ -35,7 +35,7 @@ public final class FluType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field2086.method206(1, arg0);
+		byte[] var2 = field2086.getFile(1, arg0);
 		FluType var3 = new FluType();
 		if (var2 != null) {
 			var3.method291(arg0, new Packet(var2));

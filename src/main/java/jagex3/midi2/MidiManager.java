@@ -123,8 +123,8 @@ public class MidiManager {
 
 	@ObfuscatedName("oe.a(Lec;Lea;ZILec;B)V")
 	public static void play(JagString arg0, Js5 arg1, JagString arg2) {
-		int var3 = arg1.method201(arg2);
-		int var4 = arg1.method215(arg0, var3);
+		int var3 = arg1.getGroupId(arg2);
+		int var4 = arg1.getFileId(arg0, var3);
 		play(arg1, var3, 255, var4);
 	}
 
@@ -148,8 +148,8 @@ public class MidiManager {
 
 	@ObfuscatedName("kc.a(Lea;Lec;IZILec;I)V")
 	public static void method590(Js5 arg0, JagString arg1, JagString arg2) {
-		int var3 = arg0.method201(arg1);
-		int var4 = arg0.method215(arg2, var3);
+		int var3 = arg0.getGroupId(arg1);
+		int var4 = arg0.getFileId(arg2, var3);
 		method667(arg0, 255, var4, var3);
 	}
 

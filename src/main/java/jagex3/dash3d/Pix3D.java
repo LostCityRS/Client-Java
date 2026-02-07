@@ -675,21 +675,21 @@ public final class Pix3D extends Pix2D {
 									if (var56 < 0) {
 										return;
 									}
-									method40(Pix2D.field3237, var19, var58, var50 >> 16, var51 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
+									method40(Pix2D.pixels, var19, var58, var50 >> 16, var51 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
 									var50 += var29;
 									var51 += var28;
 									var48 += var32;
-									var58 += Pix2D.field3240;
+									var58 += Pix2D.width;
 									var53 += var41;
 									var54 += var44;
 									var55 += var47;
 								}
 							}
-							method40(Pix2D.field3237, var19, var58, var50 >> 16, var49 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
+							method40(Pix2D.pixels, var19, var58, var50 >> 16, var49 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
 							var50 += var29;
 							var49 += var27;
 							var48 += var32;
-							var58 += Pix2D.field3240;
+							var58 += Pix2D.width;
 							var53 += var41;
 							var54 += var44;
 							var55 += var47;
@@ -706,21 +706,21 @@ public final class Pix3D extends Pix2D {
 									if (var59 < 0) {
 										return;
 									}
-									method40(Pix2D.field3237, var19, var61, var51 >> 16, var50 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
+									method40(Pix2D.pixels, var19, var61, var51 >> 16, var50 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
 									var50 += var29;
 									var51 += var28;
 									var48 += var32;
-									var61 += Pix2D.field3240;
+									var61 += Pix2D.width;
 									var53 += var41;
 									var54 += var44;
 									var55 += var47;
 								}
 							}
-							method40(Pix2D.field3237, var19, var61, var49 >> 16, var50 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
+							method40(Pix2D.pixels, var19, var61, var49 >> 16, var50 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
 							var50 += var29;
 							var49 += var27;
 							var48 += var32;
-							var61 += Pix2D.field3240;
+							var61 += Pix2D.width;
 							var53 += var41;
 							var54 += var44;
 							var55 += var47;
@@ -756,21 +756,21 @@ public final class Pix3D extends Pix2D {
 									if (var72 < 0) {
 										return;
 									}
-									method40(Pix2D.field3237, var19, var74, var62 >> 16, var64 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
+									method40(Pix2D.pixels, var19, var74, var62 >> 16, var64 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
 									var64 += var28;
 									var62 += var27;
 									var48 += var32;
-									var74 += Pix2D.field3240;
+									var74 += Pix2D.width;
 									var66 += var41;
 									var67 += var44;
 									var68 += var47;
 								}
 							}
-							method40(Pix2D.field3237, var19, var74, var62 >> 16, var63 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
+							method40(Pix2D.pixels, var19, var74, var62 >> 16, var63 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
 							var63 += var29;
 							var62 += var27;
 							var48 += var32;
-							var74 += Pix2D.field3240;
+							var74 += Pix2D.width;
 							var66 += var41;
 							var67 += var44;
 							var68 += var47;
@@ -787,21 +787,21 @@ public final class Pix3D extends Pix2D {
 									if (var69 < 0) {
 										return;
 									}
-									method40(Pix2D.field3237, var19, var71, var64 >> 16, var62 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
+									method40(Pix2D.pixels, var19, var71, var64 >> 16, var62 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
 									var64 += var28;
 									var62 += var27;
 									var48 += var32;
-									var71 += Pix2D.field3240;
+									var71 += Pix2D.width;
 									var66 += var41;
 									var67 += var44;
 									var68 += var47;
 								}
 							}
-							method40(Pix2D.field3237, var19, var71, var63 >> 16, var62 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
+							method40(Pix2D.pixels, var19, var71, var63 >> 16, var62 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
 							var63 += var29;
 							var62 += var27;
 							var48 += var32;
-							var71 += Pix2D.field3240;
+							var71 += Pix2D.width;
 							var66 += var41;
 							var67 += var44;
 							var68 += var47;
@@ -848,21 +848,21 @@ public final class Pix3D extends Pix2D {
 									if (var83 < 0) {
 										return;
 									}
-									method40(Pix2D.field3237, var19, var85, var77 >> 16, var78 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
+									method40(Pix2D.pixels, var19, var85, var77 >> 16, var78 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
 									var77 += var27;
 									var78 += var29;
 									var75 += var32;
-									var85 += Pix2D.field3240;
+									var85 += Pix2D.width;
 									var80 += var41;
 									var81 += var44;
 									var82 += var47;
 								}
 							}
-							method40(Pix2D.field3237, var19, var85, var77 >> 16, var76 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
+							method40(Pix2D.pixels, var19, var85, var77 >> 16, var76 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
 							var77 += var27;
 							var76 += var28;
 							var75 += var32;
-							var85 += Pix2D.field3240;
+							var85 += Pix2D.width;
 							var80 += var41;
 							var81 += var44;
 							var82 += var47;
@@ -879,21 +879,21 @@ public final class Pix3D extends Pix2D {
 									if (var86 < 0) {
 										return;
 									}
-									method40(Pix2D.field3237, var19, var88, var78 >> 16, var77 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
+									method40(Pix2D.pixels, var19, var88, var78 >> 16, var77 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
 									var77 += var27;
 									var78 += var29;
 									var75 += var32;
-									var88 += Pix2D.field3240;
+									var88 += Pix2D.width;
 									var80 += var41;
 									var81 += var44;
 									var82 += var47;
 								}
 							}
-							method40(Pix2D.field3237, var19, var88, var76 >> 16, var77 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
+							method40(Pix2D.pixels, var19, var88, var76 >> 16, var77 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
 							var77 += var27;
 							var76 += var28;
 							var75 += var32;
-							var88 += Pix2D.field3240;
+							var88 += Pix2D.width;
 							var80 += var41;
 							var81 += var44;
 							var82 += var47;
@@ -929,21 +929,21 @@ public final class Pix3D extends Pix2D {
 									if (var96 < 0) {
 										return;
 									}
-									method40(Pix2D.field3237, var19, var98, var91 >> 16, var89 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
+									method40(Pix2D.pixels, var19, var98, var91 >> 16, var89 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
 									var91 += var29;
 									var89 += var28;
 									var75 += var32;
-									var98 += Pix2D.field3240;
+									var98 += Pix2D.width;
 									var93 += var41;
 									var94 += var44;
 									var95 += var47;
 								}
 							}
-							method40(Pix2D.field3237, var19, var98, var90 >> 16, var89 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
+							method40(Pix2D.pixels, var19, var98, var90 >> 16, var89 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
 							var90 += var27;
 							var89 += var28;
 							var75 += var32;
-							var98 += Pix2D.field3240;
+							var98 += Pix2D.width;
 							var93 += var41;
 							var94 += var44;
 							var95 += var47;
@@ -960,21 +960,21 @@ public final class Pix3D extends Pix2D {
 									if (var99 < 0) {
 										return;
 									}
-									method40(Pix2D.field3237, var19, var101, var89 >> 16, var91 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
+									method40(Pix2D.pixels, var19, var101, var89 >> 16, var91 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
 									var91 += var29;
 									var89 += var28;
 									var75 += var32;
-									var101 += Pix2D.field3240;
+									var101 += Pix2D.width;
 									var93 += var41;
 									var94 += var44;
 									var95 += var47;
 								}
 							}
-							method40(Pix2D.field3237, var19, var101, var89 >> 16, var90 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
+							method40(Pix2D.pixels, var19, var101, var89 >> 16, var90 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
 							var90 += var27;
 							var89 += var28;
 							var75 += var32;
-							var101 += Pix2D.field3240;
+							var101 += Pix2D.width;
 							var93 += var41;
 							var94 += var44;
 							var95 += var47;
@@ -1020,21 +1020,21 @@ public final class Pix3D extends Pix2D {
 								if (var110 < 0) {
 									return;
 								}
-								method40(Pix2D.field3237, var19, var112, var104 >> 16, var105 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
+								method40(Pix2D.pixels, var19, var112, var104 >> 16, var105 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
 								var104 += var28;
 								var105 += var27;
 								var102 += var32;
-								var112 += Pix2D.field3240;
+								var112 += Pix2D.width;
 								var107 += var41;
 								var108 += var44;
 								var109 += var47;
 							}
 						}
-						method40(Pix2D.field3237, var19, var112, var104 >> 16, var103 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
+						method40(Pix2D.pixels, var19, var112, var104 >> 16, var103 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
 						var104 += var28;
 						var103 += var29;
 						var102 += var32;
-						var112 += Pix2D.field3240;
+						var112 += Pix2D.width;
 						var107 += var41;
 						var108 += var44;
 						var109 += var47;
@@ -1051,21 +1051,21 @@ public final class Pix3D extends Pix2D {
 								if (var113 < 0) {
 									return;
 								}
-								method40(Pix2D.field3237, var19, var115, var105 >> 16, var104 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
+								method40(Pix2D.pixels, var19, var115, var105 >> 16, var104 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
 								var104 += var28;
 								var105 += var27;
 								var102 += var32;
-								var115 += Pix2D.field3240;
+								var115 += Pix2D.width;
 								var107 += var41;
 								var108 += var44;
 								var109 += var47;
 							}
 						}
-						method40(Pix2D.field3237, var19, var115, var103 >> 16, var104 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
+						method40(Pix2D.pixels, var19, var115, var103 >> 16, var104 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
 						var104 += var28;
 						var103 += var29;
 						var102 += var32;
-						var115 += Pix2D.field3240;
+						var115 += Pix2D.width;
 						var107 += var41;
 						var108 += var44;
 						var109 += var47;
@@ -1101,21 +1101,21 @@ public final class Pix3D extends Pix2D {
 								if (var123 < 0) {
 									return;
 								}
-								method40(Pix2D.field3237, var19, var125, var118 >> 16, var116 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
+								method40(Pix2D.pixels, var19, var125, var118 >> 16, var116 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
 								var118 += var27;
 								var116 += var29;
 								var102 += var32;
-								var125 += Pix2D.field3240;
+								var125 += Pix2D.width;
 								var120 += var41;
 								var121 += var44;
 								var122 += var47;
 							}
 						}
-						method40(Pix2D.field3237, var19, var125, var117 >> 16, var116 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
+						method40(Pix2D.pixels, var19, var125, var117 >> 16, var116 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
 						var117 += var28;
 						var116 += var29;
 						var102 += var32;
-						var125 += Pix2D.field3240;
+						var125 += Pix2D.width;
 						var120 += var41;
 						var121 += var44;
 						var122 += var47;
@@ -1132,21 +1132,21 @@ public final class Pix3D extends Pix2D {
 								if (var126 < 0) {
 									return;
 								}
-								method40(Pix2D.field3237, var19, var128, var116 >> 16, var118 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
+								method40(Pix2D.pixels, var19, var128, var116 >> 16, var118 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
 								var118 += var27;
 								var116 += var29;
 								var102 += var32;
-								var128 += Pix2D.field3240;
+								var128 += Pix2D.width;
 								var120 += var41;
 								var121 += var44;
 								var122 += var47;
 							}
 						}
-						method40(Pix2D.field3237, var19, var128, var116 >> 16, var117 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
+						method40(Pix2D.pixels, var19, var128, var116 >> 16, var117 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
 						var117 += var28;
 						var116 += var29;
 						var102 += var32;
-						var128 += Pix2D.field3240;
+						var128 += Pix2D.width;
 						var120 += var41;
 						var121 += var44;
 						var122 += var47;
@@ -1233,18 +1233,18 @@ public final class Pix3D extends Pix2D {
 									if (var25 < 0) {
 										return;
 									}
-									method28(Pix2D.field3237, var27, var23 >> 16, var24 >> 16, var21, var19);
+									method28(Pix2D.pixels, var27, var23 >> 16, var24 >> 16, var21, var19);
 									var23 += var17;
 									var24 += var15;
 									var21 += var20;
-									var27 += Pix2D.field3240;
+									var27 += Pix2D.width;
 								}
 							}
-							method28(Pix2D.field3237, var27, var23 >> 16, var22 >> 16, var21, var19);
+							method28(Pix2D.pixels, var27, var23 >> 16, var22 >> 16, var21, var19);
 							var23 += var17;
 							var22 += var16;
 							var21 += var20;
-							var27 += Pix2D.field3240;
+							var27 += Pix2D.width;
 						}
 					} else {
 						int var28 = arg2 - arg1;
@@ -1258,18 +1258,18 @@ public final class Pix3D extends Pix2D {
 									if (var28 < 0) {
 										return;
 									}
-									method28(Pix2D.field3237, var30, var24 >> 16, var23 >> 16, var21, var19);
+									method28(Pix2D.pixels, var30, var24 >> 16, var23 >> 16, var21, var19);
 									var23 += var17;
 									var24 += var15;
 									var21 += var20;
-									var30 += Pix2D.field3240;
+									var30 += Pix2D.width;
 								}
 							}
-							method28(Pix2D.field3237, var30, var22 >> 16, var23 >> 16, var21, var19);
+							method28(Pix2D.pixels, var30, var22 >> 16, var23 >> 16, var21, var19);
 							var23 += var17;
 							var22 += var16;
 							var21 += var20;
-							var30 += Pix2D.field3240;
+							var30 += Pix2D.width;
 						}
 					}
 				} else {
@@ -1298,18 +1298,18 @@ public final class Pix3D extends Pix2D {
 									if (var34 < 0) {
 										return;
 									}
-									method28(Pix2D.field3237, var36, var33 >> 16, var31 >> 16, var21, var19);
+									method28(Pix2D.pixels, var36, var33 >> 16, var31 >> 16, var21, var19);
 									var33 += var15;
 									var31 += var16;
 									var21 += var20;
-									var36 += Pix2D.field3240;
+									var36 += Pix2D.width;
 								}
 							}
-							method28(Pix2D.field3237, var36, var32 >> 16, var31 >> 16, var21, var19);
+							method28(Pix2D.pixels, var36, var32 >> 16, var31 >> 16, var21, var19);
 							var32 += var17;
 							var31 += var16;
 							var21 += var20;
-							var36 += Pix2D.field3240;
+							var36 += Pix2D.width;
 						}
 					} else {
 						int var37 = arg1 - arg2;
@@ -1323,18 +1323,18 @@ public final class Pix3D extends Pix2D {
 									if (var37 < 0) {
 										return;
 									}
-									method28(Pix2D.field3237, var39, var31 >> 16, var33 >> 16, var21, var19);
+									method28(Pix2D.pixels, var39, var31 >> 16, var33 >> 16, var21, var19);
 									var33 += var15;
 									var31 += var16;
 									var21 += var20;
-									var39 += Pix2D.field3240;
+									var39 += Pix2D.width;
 								}
 							}
-							method28(Pix2D.field3237, var39, var31 >> 16, var32 >> 16, var21, var19);
+							method28(Pix2D.pixels, var39, var31 >> 16, var32 >> 16, var21, var19);
 							var32 += var17;
 							var31 += var16;
 							var21 += var20;
-							var39 += Pix2D.field3240;
+							var39 += Pix2D.width;
 						}
 					}
 				}
@@ -1374,18 +1374,18 @@ public final class Pix3D extends Pix2D {
 									if (var47 < 0) {
 										return;
 									}
-									method28(Pix2D.field3237, var49, var43 >> 16, var42 >> 16, var40, var19);
+									method28(Pix2D.pixels, var49, var43 >> 16, var42 >> 16, var40, var19);
 									var42 += var16;
 									var43 += var17;
 									var40 += var20;
-									var49 += Pix2D.field3240;
+									var49 += Pix2D.width;
 								}
 							}
-							method28(Pix2D.field3237, var49, var41 >> 16, var42 >> 16, var40, var19);
+							method28(Pix2D.pixels, var49, var41 >> 16, var42 >> 16, var40, var19);
 							var42 += var16;
 							var41 += var15;
 							var40 += var20;
-							var49 += Pix2D.field3240;
+							var49 += Pix2D.width;
 						}
 					} else {
 						int var44 = arg0 - arg2;
@@ -1399,18 +1399,18 @@ public final class Pix3D extends Pix2D {
 									if (var44 < 0) {
 										return;
 									}
-									method28(Pix2D.field3237, var46, var42 >> 16, var43 >> 16, var40, var19);
+									method28(Pix2D.pixels, var46, var42 >> 16, var43 >> 16, var40, var19);
 									var42 += var16;
 									var43 += var17;
 									var40 += var20;
-									var46 += Pix2D.field3240;
+									var46 += Pix2D.width;
 								}
 							}
-							method28(Pix2D.field3237, var46, var42 >> 16, var41 >> 16, var40, var19);
+							method28(Pix2D.pixels, var46, var42 >> 16, var41 >> 16, var40, var19);
 							var42 += var16;
 							var41 += var15;
 							var40 += var20;
-							var46 += Pix2D.field3240;
+							var46 += Pix2D.width;
 						}
 					}
 				} else {
@@ -1439,18 +1439,18 @@ public final class Pix3D extends Pix2D {
 									if (var53 < 0) {
 										return;
 									}
-									method28(Pix2D.field3237, var55, var52 >> 16, var50 >> 16, var40, var19);
+									method28(Pix2D.pixels, var55, var52 >> 16, var50 >> 16, var40, var19);
 									var52 += var17;
 									var50 += var15;
 									var40 += var20;
-									var55 += Pix2D.field3240;
+									var55 += Pix2D.width;
 								}
 							}
-							method28(Pix2D.field3237, var55, var51 >> 16, var50 >> 16, var40, var19);
+							method28(Pix2D.pixels, var55, var51 >> 16, var50 >> 16, var40, var19);
 							var51 += var16;
 							var50 += var15;
 							var40 += var20;
-							var55 += Pix2D.field3240;
+							var55 += Pix2D.width;
 						}
 					} else {
 						int var56 = arg2 - arg0;
@@ -1464,18 +1464,18 @@ public final class Pix3D extends Pix2D {
 									if (var56 < 0) {
 										return;
 									}
-									method28(Pix2D.field3237, var58, var50 >> 16, var52 >> 16, var40, var19);
+									method28(Pix2D.pixels, var58, var50 >> 16, var52 >> 16, var40, var19);
 									var52 += var17;
 									var50 += var15;
 									var40 += var20;
-									var58 += Pix2D.field3240;
+									var58 += Pix2D.width;
 								}
 							}
-							method28(Pix2D.field3237, var58, var50 >> 16, var51 >> 16, var40, var19);
+							method28(Pix2D.pixels, var58, var50 >> 16, var51 >> 16, var40, var19);
 							var51 += var16;
 							var50 += var15;
 							var40 += var20;
-							var58 += Pix2D.field3240;
+							var58 += Pix2D.width;
 						}
 					}
 				}
@@ -1514,18 +1514,18 @@ public final class Pix3D extends Pix2D {
 								if (var63 < 0) {
 									return;
 								}
-								method28(Pix2D.field3237, var65, var61 >> 16, var62 >> 16, var59, var19);
+								method28(Pix2D.pixels, var65, var61 >> 16, var62 >> 16, var59, var19);
 								var61 += var15;
 								var62 += var16;
 								var59 += var20;
-								var65 += Pix2D.field3240;
+								var65 += Pix2D.width;
 							}
 						}
-						method28(Pix2D.field3237, var65, var61 >> 16, var60 >> 16, var59, var19);
+						method28(Pix2D.pixels, var65, var61 >> 16, var60 >> 16, var59, var19);
 						var61 += var15;
 						var60 += var17;
 						var59 += var20;
-						var65 += Pix2D.field3240;
+						var65 += Pix2D.width;
 					}
 				} else {
 					int var66 = arg1 - arg0;
@@ -1539,18 +1539,18 @@ public final class Pix3D extends Pix2D {
 								if (var66 < 0) {
 									return;
 								}
-								method28(Pix2D.field3237, var68, var62 >> 16, var61 >> 16, var59, var19);
+								method28(Pix2D.pixels, var68, var62 >> 16, var61 >> 16, var59, var19);
 								var61 += var15;
 								var62 += var16;
 								var59 += var20;
-								var68 += Pix2D.field3240;
+								var68 += Pix2D.width;
 							}
 						}
-						method28(Pix2D.field3237, var68, var60 >> 16, var61 >> 16, var59, var19);
+						method28(Pix2D.pixels, var68, var60 >> 16, var61 >> 16, var59, var19);
 						var61 += var15;
 						var60 += var17;
 						var59 += var20;
-						var68 += Pix2D.field3240;
+						var68 += Pix2D.width;
 					}
 				}
 			} else {
@@ -1579,18 +1579,18 @@ public final class Pix3D extends Pix2D {
 								if (var72 < 0) {
 									return;
 								}
-								method28(Pix2D.field3237, var74, var71 >> 16, var69 >> 16, var59, var19);
+								method28(Pix2D.pixels, var74, var71 >> 16, var69 >> 16, var59, var19);
 								var71 += var16;
 								var69 += var17;
 								var59 += var20;
-								var74 += Pix2D.field3240;
+								var74 += Pix2D.width;
 							}
 						}
-						method28(Pix2D.field3237, var74, var70 >> 16, var69 >> 16, var59, var19);
+						method28(Pix2D.pixels, var74, var70 >> 16, var69 >> 16, var59, var19);
 						var70 += var15;
 						var69 += var17;
 						var59 += var20;
-						var74 += Pix2D.field3240;
+						var74 += Pix2D.width;
 					}
 				} else {
 					int var75 = arg0 - arg1;
@@ -1604,18 +1604,18 @@ public final class Pix3D extends Pix2D {
 								if (var75 < 0) {
 									return;
 								}
-								method28(Pix2D.field3237, var77, var69 >> 16, var71 >> 16, var59, var19);
+								method28(Pix2D.pixels, var77, var69 >> 16, var71 >> 16, var59, var19);
 								var71 += var16;
 								var69 += var17;
 								var59 += var20;
-								var77 += Pix2D.field3240;
+								var77 += Pix2D.width;
 							}
 						}
-						method28(Pix2D.field3237, var77, var69 >> 16, var70 >> 16, var59, var19);
+						method28(Pix2D.pixels, var77, var69 >> 16, var70 >> 16, var59, var19);
 						var70 += var15;
 						var69 += var17;
 						var59 += var20;
-						var77 += Pix2D.field3240;
+						var77 += Pix2D.width;
 					}
 				}
 			}
@@ -1630,10 +1630,10 @@ public final class Pix3D extends Pix2D {
 		if (field116.length < field131) {
 			field116 = new int[method342(field131)];
 		}
-		int var4 = arg1 * Pix2D.field3240 + arg0;
+		int var4 = arg1 * Pix2D.width + arg0;
 		for (int var5 = 0; var5 < field131; var5++) {
 			field116[var5] = var4;
-			var4 += Pix2D.field3240;
+			var4 += Pix2D.width;
 		}
 	}
 
@@ -1719,7 +1719,7 @@ public final class Pix3D extends Pix2D {
 
 	@ObfuscatedName("af.f()V")
 	public static void method36() {
-		method34(Pix2D.field3238, Pix2D.clipMinY, Pix2D.field3241, Pix2D.clipMaxY);
+		method34(Pix2D.clipMinX, Pix2D.clipMinY, Pix2D.clipMaxX, Pix2D.clipMaxY);
 	}
 
 	@ObfuscatedName("af.a(ID)I")
@@ -1783,16 +1783,16 @@ public final class Pix3D extends Pix2D {
 									if (var13 < 0) {
 										return;
 									}
-									method35(Pix2D.field3237, var15, arg6, var11 >> 16, var12 >> 16);
+									method35(Pix2D.pixels, var15, arg6, var11 >> 16, var12 >> 16);
 									var11 += var9;
 									var12 += var8;
-									var15 += Pix2D.field3240;
+									var15 += Pix2D.width;
 								}
 							}
-							method35(Pix2D.field3237, var15, arg6, var11 >> 16, var10 >> 16);
+							method35(Pix2D.pixels, var15, arg6, var11 >> 16, var10 >> 16);
 							var11 += var9;
 							var10 += var7;
-							var15 += Pix2D.field3240;
+							var15 += Pix2D.width;
 						}
 					} else {
 						int var16 = arg2 - arg1;
@@ -1806,16 +1806,16 @@ public final class Pix3D extends Pix2D {
 									if (var16 < 0) {
 										return;
 									}
-									method35(Pix2D.field3237, var18, arg6, var12 >> 16, var11 >> 16);
+									method35(Pix2D.pixels, var18, arg6, var12 >> 16, var11 >> 16);
 									var11 += var9;
 									var12 += var8;
-									var18 += Pix2D.field3240;
+									var18 += Pix2D.width;
 								}
 							}
-							method35(Pix2D.field3237, var18, arg6, var10 >> 16, var11 >> 16);
+							method35(Pix2D.pixels, var18, arg6, var10 >> 16, var11 >> 16);
 							var11 += var9;
 							var10 += var7;
-							var18 += Pix2D.field3240;
+							var18 += Pix2D.width;
 						}
 					}
 				} else {
@@ -1843,16 +1843,16 @@ public final class Pix3D extends Pix2D {
 									if (var22 < 0) {
 										return;
 									}
-									method35(Pix2D.field3237, var24, arg6, var21 >> 16, var19 >> 16);
+									method35(Pix2D.pixels, var24, arg6, var21 >> 16, var19 >> 16);
 									var21 += var8;
 									var19 += var7;
-									var24 += Pix2D.field3240;
+									var24 += Pix2D.width;
 								}
 							}
-							method35(Pix2D.field3237, var24, arg6, var20 >> 16, var19 >> 16);
+							method35(Pix2D.pixels, var24, arg6, var20 >> 16, var19 >> 16);
 							var20 += var9;
 							var19 += var7;
-							var24 += Pix2D.field3240;
+							var24 += Pix2D.width;
 						}
 					} else {
 						int var25 = arg1 - arg2;
@@ -1866,16 +1866,16 @@ public final class Pix3D extends Pix2D {
 									if (var25 < 0) {
 										return;
 									}
-									method35(Pix2D.field3237, var27, arg6, var19 >> 16, var21 >> 16);
+									method35(Pix2D.pixels, var27, arg6, var19 >> 16, var21 >> 16);
 									var21 += var8;
 									var19 += var7;
-									var27 += Pix2D.field3240;
+									var27 += Pix2D.width;
 								}
 							}
-							method35(Pix2D.field3237, var27, arg6, var19 >> 16, var20 >> 16);
+							method35(Pix2D.pixels, var27, arg6, var19 >> 16, var20 >> 16);
 							var20 += var9;
 							var19 += var7;
-							var27 += Pix2D.field3240;
+							var27 += Pix2D.width;
 						}
 					}
 				}
@@ -1913,16 +1913,16 @@ public final class Pix3D extends Pix2D {
 									if (var31 < 0) {
 										return;
 									}
-									method35(Pix2D.field3237, var33, arg6, var29 >> 16, var30 >> 16);
+									method35(Pix2D.pixels, var33, arg6, var29 >> 16, var30 >> 16);
 									var29 += var7;
 									var30 += var9;
-									var33 += Pix2D.field3240;
+									var33 += Pix2D.width;
 								}
 							}
-							method35(Pix2D.field3237, var33, arg6, var29 >> 16, var28 >> 16);
+							method35(Pix2D.pixels, var33, arg6, var29 >> 16, var28 >> 16);
 							var29 += var7;
 							var28 += var8;
-							var33 += Pix2D.field3240;
+							var33 += Pix2D.width;
 						}
 					} else {
 						int var34 = arg0 - arg2;
@@ -1936,16 +1936,16 @@ public final class Pix3D extends Pix2D {
 									if (var34 < 0) {
 										return;
 									}
-									method35(Pix2D.field3237, var36, arg6, var30 >> 16, var29 >> 16);
+									method35(Pix2D.pixels, var36, arg6, var30 >> 16, var29 >> 16);
 									var29 += var7;
 									var30 += var9;
-									var36 += Pix2D.field3240;
+									var36 += Pix2D.width;
 								}
 							}
-							method35(Pix2D.field3237, var36, arg6, var28 >> 16, var29 >> 16);
+							method35(Pix2D.pixels, var36, arg6, var28 >> 16, var29 >> 16);
 							var29 += var7;
 							var28 += var8;
-							var36 += Pix2D.field3240;
+							var36 += Pix2D.width;
 						}
 					}
 				} else {
@@ -1973,16 +1973,16 @@ public final class Pix3D extends Pix2D {
 									if (var40 < 0) {
 										return;
 									}
-									method35(Pix2D.field3237, var42, arg6, var39 >> 16, var37 >> 16);
+									method35(Pix2D.pixels, var42, arg6, var39 >> 16, var37 >> 16);
 									var39 += var9;
 									var37 += var8;
-									var42 += Pix2D.field3240;
+									var42 += Pix2D.width;
 								}
 							}
-							method35(Pix2D.field3237, var42, arg6, var38 >> 16, var37 >> 16);
+							method35(Pix2D.pixels, var42, arg6, var38 >> 16, var37 >> 16);
 							var38 += var7;
 							var37 += var8;
-							var42 += Pix2D.field3240;
+							var42 += Pix2D.width;
 						}
 					} else {
 						int var43 = arg2 - arg0;
@@ -1996,16 +1996,16 @@ public final class Pix3D extends Pix2D {
 									if (var43 < 0) {
 										return;
 									}
-									method35(Pix2D.field3237, var45, arg6, var37 >> 16, var39 >> 16);
+									method35(Pix2D.pixels, var45, arg6, var37 >> 16, var39 >> 16);
 									var39 += var9;
 									var37 += var8;
-									var45 += Pix2D.field3240;
+									var45 += Pix2D.width;
 								}
 							}
-							method35(Pix2D.field3237, var45, arg6, var37 >> 16, var38 >> 16);
+							method35(Pix2D.pixels, var45, arg6, var37 >> 16, var38 >> 16);
 							var38 += var7;
 							var37 += var8;
-							var45 += Pix2D.field3240;
+							var45 += Pix2D.width;
 						}
 					}
 				}
@@ -2042,16 +2042,16 @@ public final class Pix3D extends Pix2D {
 								if (var49 < 0) {
 									return;
 								}
-								method35(Pix2D.field3237, var51, arg6, var47 >> 16, var48 >> 16);
+								method35(Pix2D.pixels, var51, arg6, var47 >> 16, var48 >> 16);
 								var47 += var8;
 								var48 += var7;
-								var51 += Pix2D.field3240;
+								var51 += Pix2D.width;
 							}
 						}
-						method35(Pix2D.field3237, var51, arg6, var47 >> 16, var46 >> 16);
+						method35(Pix2D.pixels, var51, arg6, var47 >> 16, var46 >> 16);
 						var47 += var8;
 						var46 += var9;
-						var51 += Pix2D.field3240;
+						var51 += Pix2D.width;
 					}
 				} else {
 					int var52 = arg1 - arg0;
@@ -2065,16 +2065,16 @@ public final class Pix3D extends Pix2D {
 								if (var52 < 0) {
 									return;
 								}
-								method35(Pix2D.field3237, var54, arg6, var48 >> 16, var47 >> 16);
+								method35(Pix2D.pixels, var54, arg6, var48 >> 16, var47 >> 16);
 								var47 += var8;
 								var48 += var7;
-								var54 += Pix2D.field3240;
+								var54 += Pix2D.width;
 							}
 						}
-						method35(Pix2D.field3237, var54, arg6, var46 >> 16, var47 >> 16);
+						method35(Pix2D.pixels, var54, arg6, var46 >> 16, var47 >> 16);
 						var47 += var8;
 						var46 += var9;
-						var54 += Pix2D.field3240;
+						var54 += Pix2D.width;
 					}
 				}
 			} else {
@@ -2102,16 +2102,16 @@ public final class Pix3D extends Pix2D {
 								if (var58 < 0) {
 									return;
 								}
-								method35(Pix2D.field3237, var60, arg6, var57 >> 16, var55 >> 16);
+								method35(Pix2D.pixels, var60, arg6, var57 >> 16, var55 >> 16);
 								var57 += var7;
 								var55 += var9;
-								var60 += Pix2D.field3240;
+								var60 += Pix2D.width;
 							}
 						}
-						method35(Pix2D.field3237, var60, arg6, var56 >> 16, var55 >> 16);
+						method35(Pix2D.pixels, var60, arg6, var56 >> 16, var55 >> 16);
 						var56 += var8;
 						var55 += var9;
-						var60 += Pix2D.field3240;
+						var60 += Pix2D.width;
 					}
 				} else {
 					int var61 = arg0 - arg1;
@@ -2125,16 +2125,16 @@ public final class Pix3D extends Pix2D {
 								if (var61 < 0) {
 									return;
 								}
-								method35(Pix2D.field3237, var63, arg6, var55 >> 16, var57 >> 16);
+								method35(Pix2D.pixels, var63, arg6, var55 >> 16, var57 >> 16);
 								var57 += var7;
 								var55 += var9;
-								var63 += Pix2D.field3240;
+								var63 += Pix2D.width;
 							}
 						}
-						method35(Pix2D.field3237, var63, arg6, var55 >> 16, var56 >> 16);
+						method35(Pix2D.pixels, var63, arg6, var55 >> 16, var56 >> 16);
 						var56 += var8;
 						var55 += var9;
-						var63 += Pix2D.field3240;
+						var63 += Pix2D.width;
 					}
 				}
 			}
@@ -2229,21 +2229,21 @@ public final class Pix3D extends Pix2D {
 									if (var56 < 0) {
 										return;
 									}
-									method27(Pix2D.field3237, var19, var58, var50 >> 16, var51 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
+									method27(Pix2D.pixels, var19, var58, var50 >> 16, var51 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
 									var50 += var29;
 									var51 += var28;
 									var48 += var32;
-									var58 += Pix2D.field3240;
+									var58 += Pix2D.width;
 									var53 += var41;
 									var54 += var44;
 									var55 += var47;
 								}
 							}
-							method27(Pix2D.field3237, var19, var58, var50 >> 16, var49 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
+							method27(Pix2D.pixels, var19, var58, var50 >> 16, var49 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
 							var50 += var29;
 							var49 += var27;
 							var48 += var32;
-							var58 += Pix2D.field3240;
+							var58 += Pix2D.width;
 							var53 += var41;
 							var54 += var44;
 							var55 += var47;
@@ -2260,21 +2260,21 @@ public final class Pix3D extends Pix2D {
 									if (var59 < 0) {
 										return;
 									}
-									method27(Pix2D.field3237, var19, var61, var51 >> 16, var50 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
+									method27(Pix2D.pixels, var19, var61, var51 >> 16, var50 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
 									var50 += var29;
 									var51 += var28;
 									var48 += var32;
-									var61 += Pix2D.field3240;
+									var61 += Pix2D.width;
 									var53 += var41;
 									var54 += var44;
 									var55 += var47;
 								}
 							}
-							method27(Pix2D.field3237, var19, var61, var49 >> 16, var50 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
+							method27(Pix2D.pixels, var19, var61, var49 >> 16, var50 >> 16, var48, var31, var53, var54, var55, var40, var43, var46);
 							var50 += var29;
 							var49 += var27;
 							var48 += var32;
-							var61 += Pix2D.field3240;
+							var61 += Pix2D.width;
 							var53 += var41;
 							var54 += var44;
 							var55 += var47;
@@ -2310,21 +2310,21 @@ public final class Pix3D extends Pix2D {
 									if (var72 < 0) {
 										return;
 									}
-									method27(Pix2D.field3237, var19, var74, var62 >> 16, var64 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
+									method27(Pix2D.pixels, var19, var74, var62 >> 16, var64 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
 									var64 += var28;
 									var62 += var27;
 									var48 += var32;
-									var74 += Pix2D.field3240;
+									var74 += Pix2D.width;
 									var66 += var41;
 									var67 += var44;
 									var68 += var47;
 								}
 							}
-							method27(Pix2D.field3237, var19, var74, var62 >> 16, var63 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
+							method27(Pix2D.pixels, var19, var74, var62 >> 16, var63 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
 							var63 += var29;
 							var62 += var27;
 							var48 += var32;
-							var74 += Pix2D.field3240;
+							var74 += Pix2D.width;
 							var66 += var41;
 							var67 += var44;
 							var68 += var47;
@@ -2341,21 +2341,21 @@ public final class Pix3D extends Pix2D {
 									if (var69 < 0) {
 										return;
 									}
-									method27(Pix2D.field3237, var19, var71, var64 >> 16, var62 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
+									method27(Pix2D.pixels, var19, var71, var64 >> 16, var62 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
 									var64 += var28;
 									var62 += var27;
 									var48 += var32;
-									var71 += Pix2D.field3240;
+									var71 += Pix2D.width;
 									var66 += var41;
 									var67 += var44;
 									var68 += var47;
 								}
 							}
-							method27(Pix2D.field3237, var19, var71, var63 >> 16, var62 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
+							method27(Pix2D.pixels, var19, var71, var63 >> 16, var62 >> 16, var48, var31, var66, var67, var68, var40, var43, var46);
 							var63 += var29;
 							var62 += var27;
 							var48 += var32;
-							var71 += Pix2D.field3240;
+							var71 += Pix2D.width;
 							var66 += var41;
 							var67 += var44;
 							var68 += var47;
@@ -2402,21 +2402,21 @@ public final class Pix3D extends Pix2D {
 									if (var83 < 0) {
 										return;
 									}
-									method27(Pix2D.field3237, var19, var85, var77 >> 16, var78 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
+									method27(Pix2D.pixels, var19, var85, var77 >> 16, var78 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
 									var77 += var27;
 									var78 += var29;
 									var75 += var32;
-									var85 += Pix2D.field3240;
+									var85 += Pix2D.width;
 									var80 += var41;
 									var81 += var44;
 									var82 += var47;
 								}
 							}
-							method27(Pix2D.field3237, var19, var85, var77 >> 16, var76 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
+							method27(Pix2D.pixels, var19, var85, var77 >> 16, var76 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
 							var77 += var27;
 							var76 += var28;
 							var75 += var32;
-							var85 += Pix2D.field3240;
+							var85 += Pix2D.width;
 							var80 += var41;
 							var81 += var44;
 							var82 += var47;
@@ -2433,21 +2433,21 @@ public final class Pix3D extends Pix2D {
 									if (var86 < 0) {
 										return;
 									}
-									method27(Pix2D.field3237, var19, var88, var78 >> 16, var77 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
+									method27(Pix2D.pixels, var19, var88, var78 >> 16, var77 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
 									var77 += var27;
 									var78 += var29;
 									var75 += var32;
-									var88 += Pix2D.field3240;
+									var88 += Pix2D.width;
 									var80 += var41;
 									var81 += var44;
 									var82 += var47;
 								}
 							}
-							method27(Pix2D.field3237, var19, var88, var76 >> 16, var77 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
+							method27(Pix2D.pixels, var19, var88, var76 >> 16, var77 >> 16, var75, var31, var80, var81, var82, var40, var43, var46);
 							var77 += var27;
 							var76 += var28;
 							var75 += var32;
-							var88 += Pix2D.field3240;
+							var88 += Pix2D.width;
 							var80 += var41;
 							var81 += var44;
 							var82 += var47;
@@ -2483,21 +2483,21 @@ public final class Pix3D extends Pix2D {
 									if (var96 < 0) {
 										return;
 									}
-									method27(Pix2D.field3237, var19, var98, var91 >> 16, var89 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
+									method27(Pix2D.pixels, var19, var98, var91 >> 16, var89 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
 									var91 += var29;
 									var89 += var28;
 									var75 += var32;
-									var98 += Pix2D.field3240;
+									var98 += Pix2D.width;
 									var93 += var41;
 									var94 += var44;
 									var95 += var47;
 								}
 							}
-							method27(Pix2D.field3237, var19, var98, var90 >> 16, var89 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
+							method27(Pix2D.pixels, var19, var98, var90 >> 16, var89 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
 							var90 += var27;
 							var89 += var28;
 							var75 += var32;
-							var98 += Pix2D.field3240;
+							var98 += Pix2D.width;
 							var93 += var41;
 							var94 += var44;
 							var95 += var47;
@@ -2514,21 +2514,21 @@ public final class Pix3D extends Pix2D {
 									if (var99 < 0) {
 										return;
 									}
-									method27(Pix2D.field3237, var19, var101, var89 >> 16, var91 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
+									method27(Pix2D.pixels, var19, var101, var89 >> 16, var91 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
 									var91 += var29;
 									var89 += var28;
 									var75 += var32;
-									var101 += Pix2D.field3240;
+									var101 += Pix2D.width;
 									var93 += var41;
 									var94 += var44;
 									var95 += var47;
 								}
 							}
-							method27(Pix2D.field3237, var19, var101, var89 >> 16, var90 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
+							method27(Pix2D.pixels, var19, var101, var89 >> 16, var90 >> 16, var75, var31, var93, var94, var95, var40, var43, var46);
 							var90 += var27;
 							var89 += var28;
 							var75 += var32;
-							var101 += Pix2D.field3240;
+							var101 += Pix2D.width;
 							var93 += var41;
 							var94 += var44;
 							var95 += var47;
@@ -2574,21 +2574,21 @@ public final class Pix3D extends Pix2D {
 								if (var110 < 0) {
 									return;
 								}
-								method27(Pix2D.field3237, var19, var112, var104 >> 16, var105 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
+								method27(Pix2D.pixels, var19, var112, var104 >> 16, var105 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
 								var104 += var28;
 								var105 += var27;
 								var102 += var32;
-								var112 += Pix2D.field3240;
+								var112 += Pix2D.width;
 								var107 += var41;
 								var108 += var44;
 								var109 += var47;
 							}
 						}
-						method27(Pix2D.field3237, var19, var112, var104 >> 16, var103 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
+						method27(Pix2D.pixels, var19, var112, var104 >> 16, var103 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
 						var104 += var28;
 						var103 += var29;
 						var102 += var32;
-						var112 += Pix2D.field3240;
+						var112 += Pix2D.width;
 						var107 += var41;
 						var108 += var44;
 						var109 += var47;
@@ -2605,21 +2605,21 @@ public final class Pix3D extends Pix2D {
 								if (var113 < 0) {
 									return;
 								}
-								method27(Pix2D.field3237, var19, var115, var105 >> 16, var104 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
+								method27(Pix2D.pixels, var19, var115, var105 >> 16, var104 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
 								var104 += var28;
 								var105 += var27;
 								var102 += var32;
-								var115 += Pix2D.field3240;
+								var115 += Pix2D.width;
 								var107 += var41;
 								var108 += var44;
 								var109 += var47;
 							}
 						}
-						method27(Pix2D.field3237, var19, var115, var103 >> 16, var104 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
+						method27(Pix2D.pixels, var19, var115, var103 >> 16, var104 >> 16, var102, var31, var107, var108, var109, var40, var43, var46);
 						var104 += var28;
 						var103 += var29;
 						var102 += var32;
-						var115 += Pix2D.field3240;
+						var115 += Pix2D.width;
 						var107 += var41;
 						var108 += var44;
 						var109 += var47;
@@ -2655,21 +2655,21 @@ public final class Pix3D extends Pix2D {
 								if (var123 < 0) {
 									return;
 								}
-								method27(Pix2D.field3237, var19, var125, var118 >> 16, var116 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
+								method27(Pix2D.pixels, var19, var125, var118 >> 16, var116 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
 								var118 += var27;
 								var116 += var29;
 								var102 += var32;
-								var125 += Pix2D.field3240;
+								var125 += Pix2D.width;
 								var120 += var41;
 								var121 += var44;
 								var122 += var47;
 							}
 						}
-						method27(Pix2D.field3237, var19, var125, var117 >> 16, var116 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
+						method27(Pix2D.pixels, var19, var125, var117 >> 16, var116 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
 						var117 += var28;
 						var116 += var29;
 						var102 += var32;
-						var125 += Pix2D.field3240;
+						var125 += Pix2D.width;
 						var120 += var41;
 						var121 += var44;
 						var122 += var47;
@@ -2686,21 +2686,21 @@ public final class Pix3D extends Pix2D {
 								if (var126 < 0) {
 									return;
 								}
-								method27(Pix2D.field3237, var19, var128, var116 >> 16, var118 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
+								method27(Pix2D.pixels, var19, var128, var116 >> 16, var118 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
 								var118 += var27;
 								var116 += var29;
 								var102 += var32;
-								var128 += Pix2D.field3240;
+								var128 += Pix2D.width;
 								var120 += var41;
 								var121 += var44;
 								var122 += var47;
 							}
 						}
-						method27(Pix2D.field3237, var19, var128, var116 >> 16, var117 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
+						method27(Pix2D.pixels, var19, var128, var116 >> 16, var117 >> 16, var102, var31, var120, var121, var122, var40, var43, var46);
 						var117 += var28;
 						var116 += var29;
 						var102 += var32;
-						var128 += Pix2D.field3240;
+						var128 += Pix2D.width;
 						var120 += var41;
 						var121 += var44;
 						var122 += var47;
@@ -3096,8 +3096,8 @@ public final class Pix3D extends Pix2D {
 	@ObfuscatedName("af.b(II)V")
 	public static void method43(int arg0, int arg1) {
 		int var2 = field116[0];
-		int var3 = var2 / Pix2D.field3240;
-		int var4 = var2 - var3 * Pix2D.field3240;
+		int var3 = var2 / Pix2D.width;
+		int var4 = var2 - var3 * Pix2D.width;
 		field114 = arg0 - var4;
 		field129 = arg1 - var3;
 		field124 = -field114;

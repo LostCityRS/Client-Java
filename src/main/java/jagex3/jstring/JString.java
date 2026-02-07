@@ -27,7 +27,7 @@ public class JString {
 			}
 			JagString var8 = new JagString();
 			var8.field618 = var5;
-			var8.field674 = var5.length;
+			var8.length = var5.length;
 			return var8;
 		}
 	}

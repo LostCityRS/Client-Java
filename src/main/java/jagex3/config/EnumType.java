@@ -46,7 +46,7 @@ public final class EnumType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field1133.method206(8, arg0);
+		byte[] var2 = field1133.getFile(8, arg0);
 		EnumType var3 = new EnumType();
 		if (var2 != null) {
 			var3.method999(new Packet(var2));

@@ -879,7 +879,7 @@ public final class ClientBuild {
 				return;
 			}
 			if (var8 <= 49) {
-				field2612[arg1][arg5][arg4] = arg0.method544();
+				field2612[arg1][arg5][arg4] = arg0.g1b();
 				field3129[arg1][arg5][arg4] = (byte) ((var8 - 2) / 4);
 				field3123[arg1][arg5][arg4] = (byte) (arg3 + var8 - 2 & 0x3);
 			} else if (var8 <= 81) {

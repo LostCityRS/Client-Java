@@ -151,7 +151,7 @@ public final class ModelUnlit extends ModelSource {
 
 	@ObfuscatedName("p.a(Lea;II)Lp;")
 	public static ModelUnlit method840(Js5 arg0, int arg1) {
-		byte[] var2 = arg0.method206(arg1, 0);
+		byte[] var2 = arg0.getFile(arg1, 0);
 		return var2 == null ? null : new ModelUnlit(var2);
 	}
 
@@ -565,7 +565,7 @@ public final class ModelUnlit extends ModelSource {
 			this.field2464 = new byte[var11];
 			var2.pos = 0;
 			for (int var26 = 0; var26 < var11; var26++) {
-				byte var27 = this.field2464[var26] = var2.method544();
+				byte var27 = this.field2464[var26] = var2.g1b();
 				if (var27 == 0) {
 					var23++;
 				}
@@ -706,13 +706,13 @@ public final class ModelUnlit extends ModelSource {
 		for (int var70 = 0; var70 < var10; var70++) {
 			this.field2434[var70] = (short) var2.g2();
 			if (var12 == 1) {
-				this.field2440[var70] = var3.method544();
+				this.field2440[var70] = var3.g1b();
 			}
 			if (var13 == 255) {
-				this.field2449[var70] = var4.method544();
+				this.field2449[var70] = var4.g1b();
 			}
 			if (var14 == 1) {
-				this.field2437[var70] = var5.method544();
+				this.field2437[var70] = var5.g1b();
 			}
 			if (var15 == 1) {
 				this.field2476[var70] = var6.g1();
@@ -789,7 +789,7 @@ public final class ModelUnlit extends ModelSource {
 				this.field2454[var78] = (short) var4.g2();
 				this.field2458[var78] = (short) var4.g2();
 				this.field2455[var78] = (short) var5.g2();
-				this.field2469[var78] = var6.method544();
+				this.field2469[var78] = var6.g1b();
 				this.field2467[var78] = (short) var7.g2();
 			}
 			if (var79 == 2) {
@@ -800,7 +800,7 @@ public final class ModelUnlit extends ModelSource {
 				this.field2454[var78] = (short) var4.g2();
 				this.field2458[var78] = (short) var4.g2();
 				this.field2455[var78] = (short) var5.g2();
-				this.field2469[var78] = var6.method544();
+				this.field2469[var78] = var6.g1b();
 				this.field2467[var78] = (short) var7.g2();
 				this.field2452[var78] = (short) var7.g2();
 			}
@@ -812,7 +812,7 @@ public final class ModelUnlit extends ModelSource {
 				this.field2454[var78] = (short) var4.g2();
 				this.field2458[var78] = (short) var4.g2();
 				this.field2455[var78] = (short) var5.g2();
-				this.field2469[var78] = var6.method544();
+				this.field2469[var78] = var6.g1b();
 				this.field2467[var78] = (short) var7.g2();
 			}
 		}
@@ -1144,10 +1144,10 @@ public final class ModelUnlit extends ModelSource {
 				}
 			}
 			if (var13 == 255) {
-				this.field2449[var48] = var6.method544();
+				this.field2449[var48] = var6.g1b();
 			}
 			if (var14 == 1) {
-				this.field2437[var48] = var7.method544();
+				this.field2437[var48] = var7.g1b();
 			}
 			if (var15 == 1) {
 				this.field2476[var48] = var8.g1();

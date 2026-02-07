@@ -251,7 +251,7 @@ public class TitleScreen {
 				while (ClientKeyboardListener.method1089()) {
 					boolean var5 = false;
 					for (int var6 = 0; charList.length() > var6; var6++) {
-						if (ClientKeyboardListener.field2562 == charList.method260(var6)) {
+						if (ClientKeyboardListener.field2562 == charList.charAt(var6)) {
 							var5 = true;
 							break;
 						}
@@ -316,7 +316,7 @@ public class TitleScreen {
 		}
 		if (Client.state == 20) {
 			short var2 = 211;
-			titleBox.plotSprite(382 - titleBox.field1167 / 2, 271 - titleBox.field1171 / 2);
+			titleBox.plotSprite(382 - titleBox.wi / 2, 271 - titleBox.hi / 2);
 			arg1.centreString(field1754, 382, 211, 16776960, 0);
 			int var8 = var2 + 15;
 			arg1.centreString(field1742, 382, 226, 16776960, 0);
@@ -324,9 +324,9 @@ public class TitleScreen {
 			arg1.centreString(field1740, 382, 241, 16776960, 0);
 			int var10 = var9 + 15;
 			int var11 = var10 + 10;
-			arg1.method791(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixFont.escape(loginUser) }), 272, 266, 16777215, 0);
+			arg1.drawString(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixFont.escape(loginUser) }), 272, 266, 16777215, 0);
 			int var13 = var11 + 15;
-			arg1.method791(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method248() }), 274, 281, 16777215, 0);
+			arg1.drawString(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method248() }), 274, 281, 16777215, 0);
 			int var15 = var13 + 15;
 		}
 		if (Client.state == 10) {
@@ -348,9 +348,9 @@ public class TitleScreen {
 				arg1.centreString(field1740, 382, 241, 16776960, 0);
 				int var20 = var19 + 15;
 				int var22 = var20 + 10;
-				arg1.method791(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixFont.escape(loginUser), loginSelect == 0 & Client.loopCycle % 40 < 20 ? field2104 : AUTO_EMPTY}), 272, 266, 16777215, 0);
+				arg1.drawString(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixFont.escape(loginUser), loginSelect == 0 & Client.loopCycle % 40 < 20 ? field2104 : AUTO_EMPTY}), 272, 266, 16777215, 0);
 				int var23 = var22 + 15;
-				arg1.method791(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method248(), Client.loopCycle % 40 < 20 & loginSelect == 1 ? field2104 : AUTO_EMPTY}), 274, 281, 16777215, 0);
+				arg1.drawString(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method248(), Client.loopCycle % 40 < 20 & loginSelect == 1 ? field2104 : AUTO_EMPTY}), 274, 281, 16777215, 0);
 				int var24 = var23 + 15;
 				titleBut.plotSprite(229, 301);
 				arg1.centreString(Text.LOGIN, 302, 326, 16777215, 0);
@@ -408,7 +408,7 @@ public class TitleScreen {
 		Pix2D.cls();
 		byte[] var3 = arg0.method219(field1906, AUTO_EMPTY);
 		field2320 = new Pix32(var3, arg2);
-		field1052 = field2320.method385();
+		field1052 = field2320.copyHFlip();
 		field2262 = PixLoader.makePix8(AUTO_EMPTY, arg1, field632);
 		titleBox = PixLoader.makePix8(AUTO_EMPTY, arg1, field1594);
 		titleBut = PixLoader.makePix8(AUTO_EMPTY, arg1, field2760);
@@ -477,7 +477,7 @@ public class TitleScreen {
 		open = true;
 		field2320.quickPlotSprite(0, 0);
 		field1052.quickPlotSprite(382, 0);
-		field2262.plotSprite(382 - field2262.field1167 / 2, 18);
+		field2262.plotSprite(382 - field2262.wi / 2, 18);
 	}
 
 	@ObfuscatedName("da.a(B)V")
@@ -559,14 +559,14 @@ public class TitleScreen {
 			field3556 = PixLoader.makePix8Array(AUTO_EMPTY, field2607, Client.sprites);
 		}
 		Pix2D.fillRect(0, 23, 765, 480, 0);
-		Pix2D.method1059(0, 0, 125, 23, 12425273, 9135624);
-		Pix2D.method1059(125, 0, 640, 23, 5197647, 2697513);
+		Pix2D.fillRectVGrad(0, 0, 125, 23, 12425273, 9135624);
+		Pix2D.fillRectVGrad(125, 0, 640, 23, 5197647, 2697513);
 		arg0.centreString(Text.SELECTAWORLD, 62, 15, 0, -1);
 		if (field3556 != null) {
 			field3556[1].plotSprite(140, 1);
-			arg1.method791(Text.MEMBERSONLYWORLD, 152, 10, 16777215, -1);
+			arg1.drawString(Text.MEMBERSONLYWORLD, 152, 10, 16777215, -1);
 			field3556[0].plotSprite(140, 12);
-			arg1.method791(Text.SL_FREEWORLD, 152, 21, 16777215, -1);
+			arg1.drawString(Text.SL_FREEWORLD, 152, 21, 16777215, -1);
 		}
 		if (field958 != null) {
 			if (field3510[0] == 0 && field2264[0] == 0) {
@@ -579,7 +579,7 @@ public class TitleScreen {
 			} else {
 				field958[1].plotSprite(295, 4);
 			}
-			arg0.method791(Text.field292, 312, 17, 16777215, -1);
+			arg0.drawString(Text.field292, 312, 17, 16777215, -1);
 			if (field3510[0] == 1 && field2264[0] == 0) {
 				field958[2].plotSprite(390, 4);
 			} else {
@@ -590,7 +590,7 @@ public class TitleScreen {
 			} else {
 				field958[1].plotSprite(405, 4);
 			}
-			arg0.method791(Text.SL_PLAYERS, 422, 17, 16777215, -1);
+			arg0.drawString(Text.SL_PLAYERS, 422, 17, 16777215, -1);
 			if (field3510[0] == 2 && field2264[0] == 0) {
 				field958[2].plotSprite(500, 4);
 			} else {
@@ -601,7 +601,7 @@ public class TitleScreen {
 			} else {
 				field958[1].plotSprite(515, 4);
 			}
-			arg0.method791(Text.SL_LOCATION, 532, 17, 16777215, -1);
+			arg0.drawString(Text.SL_LOCATION, 532, 17, 16777215, -1);
 			if (field3510[0] == 3 && field2264[0] == 0) {
 				field958[2].plotSprite(610, 4);
 			} else {
@@ -612,7 +612,7 @@ public class TitleScreen {
 			} else {
 				field958[1].plotSprite(625, 4);
 			}
-			arg0.method791(Text.SL_TYPE, 642, 17, 16777215, -1);
+			arg0.drawString(Text.SL_TYPE, 642, 17, 16777215, -1);
 		}
 		Pix2D.fillRect(708, 4, 50, 16, 0);
 		arg1.centreString(Text.CANCEL, 733, 16, 16777215, -1);
@@ -661,7 +661,7 @@ public class TitleScreen {
 				}
 				if (var11 <= ClientMouseListener.mouseX && ClientMouseListener.mouseY >= var10 && var11 + 88 > ClientMouseListener.mouseX && ClientMouseListener.mouseY < var10 + 19 && var15) {
 					slLastWorld = var13;
-					field1651[var14.members ? 1 : 0].method386(var11, var10);
+					field1651[var14.members ? 1 : 0].litPlotSprite(var11, var10);
 				} else {
 					field1651[var14.members ? 1 : 0].quickPlotSprite(var11, var10);
 				}
@@ -805,11 +805,11 @@ public class TitleScreen {
 			return;
 		}
 		int var9 = 0;
-		for (int var10 = 0; var10 < arg0.field1171; var10++) {
-			for (int var11 = 0; var11 < arg0.field1167; var11++) {
-				if (arg0.field1164[var9++] != 0) {
-					int var12 = arg0.field1170 + var11 + 16;
-					int var13 = var10 + arg0.field1165 + 16;
+		for (int var10 = 0; var10 < arg0.hi; var10++) {
+			for (int var11 = 0; var11 < arg0.wi; var11++) {
+				if (arg0.bspr[var9++] != 0) {
+					int var12 = arg0.xof + var11 + 16;
+					int var13 = var10 + arg0.yof + 16;
 					int var14 = (var13 << 7) + var12;
 					field99[var14] = 0;
 				}
@@ -916,7 +916,7 @@ public class TitleScreen {
 			switchScreen = false;
 			field2320.quickPlotSprite(0, 0);
 			field1052.quickPlotSprite(382, 0);
-			field2262.plotSprite(382 - field2262.field1167 / 2, 18);
+			field2262.plotSprite(382 - field2262.wi / 2, 18);
 			return;
 		}
 		if (slLastWorld != -1) {
@@ -934,7 +934,7 @@ public class TitleScreen {
 				switchScreen = false;
 				field2320.quickPlotSprite(0, 0);
 				field1052.quickPlotSprite(382, 0);
-				field2262.plotSprite(382 - field2262.field1167 / 2, 18);
+				field2262.plotSprite(382 - field2262.wi / 2, 18);
 				return;
 			}
 			JagString var3 = JagString.join(new JagString[]{field3528, var1.host, field1492, Client.field1784, field3456, JagString.parseInt(Client.lowMem ? 1 : 0), field1445, JagString.parseInt(Client.plug), field251, JagString.parseInt(Client.js)});
@@ -1068,9 +1068,9 @@ public class TitleScreen {
 		}
 		int var3 = 0;
 		int var4 = 6885;
-		Pix2D.method1066(0, 9, 128, 263);
+		Pix2D.setClipping(0, 9, 128, 263);
 		field2320.quickPlotSprite(0, 0);
-		Pix2D.method1056();
+		Pix2D.resetClipping();
 		for (int var5 = 1; var5 < 255; var5++) {
 			int var6 = (256 - var5) * field1868[var5] / 256;
 			int var7 = var6 + 22;
@@ -1083,19 +1083,19 @@ public class TitleScreen {
 				if (var9 == 0) {
 					var4++;
 				} else {
-					int var11 = GameShell.drawArea.field1124[var4];
+					int var11 = GameShell.drawArea.data[var4];
 					int var12 = 256 - var9;
 					int var13 = field1442[var9];
-					GameShell.drawArea.field1124[var4++] = ((var13 & 0xFF00) * var9 + var12 * (var11 & 0xFF00) & 0xFF0000) + (var12 * (var11 & 0xFF00FF) + (var13 & 0xFF00FF) * var9 & 0xFF00FF00) >> 8;
+					GameShell.drawArea.data[var4++] = ((var13 & 0xFF00) * var9 + var12 * (var11 & 0xFF00) & 0xFF0000) + (var12 * (var11 & 0xFF00FF) + (var13 & 0xFF00FF) * var9 & 0xFF00FF00) >> 8;
 				}
 			}
 			var4 += var7 + 765 - 128;
 		}
 		int var14 = 7546;
 		int var15 = 0;
-		Pix2D.method1066(637, 9, 765, 263);
+		Pix2D.setClipping(637, 9, 765, 263);
 		field1052.quickPlotSprite(382, 0);
-		Pix2D.method1056();
+		Pix2D.resetClipping();
 		for (int var16 = 1; var16 < 255; var16++) {
 			int var17 = field1868[var16] * (256 - var16) / 256;
 			int var18 = var14 + var17;
@@ -1106,9 +1106,9 @@ public class TitleScreen {
 					var18++;
 				} else {
 					int var23 = 256 - var21;
-					int var24 = GameShell.drawArea.field1124[var18];
+					int var24 = GameShell.drawArea.data[var18];
 					int var25 = field1442[var21];
-					GameShell.drawArea.field1124[var18++] = ((var25 & 0xFF00FF) * var21 + var23 * (var24 & 0xFF00FF) & 0xFF00FF00) + ((var25 & 0xFF00) * var21 + var23 * (var24 & 0xFF00) & 0xFF0000) >> 8;
+					GameShell.drawArea.data[var18++] = ((var25 & 0xFF00FF) * var21 + var23 * (var24 & 0xFF00FF) & 0xFF00FF00) + ((var25 & 0xFF00) * var21 + var23 * (var24 & 0xFF00) & 0xFF0000) >> 8;
 				}
 			}
 			var15 += 128 - var19;
@@ -1120,23 +1120,23 @@ public class TitleScreen {
 	public static int method136(JagString arg0) {
 		if (Client.lang == 1) {
 			return 7;
-		} else if (arg0.method262(field3012)) {
+		} else if (arg0.startsWith(field3012)) {
 			return 1;
-		} else if (arg0.method262(field2940)) {
+		} else if (arg0.startsWith(field2940)) {
 			return 1;
-		} else if (arg0.method262(field2843)) {
+		} else if (arg0.startsWith(field2843)) {
 			return 2;
-		} else if (arg0.method262(field3379)) {
+		} else if (arg0.startsWith(field3379)) {
 			return 2;
-		} else if (arg0.method262(field926)) {
+		} else if (arg0.startsWith(field926)) {
 			return 3;
-		} else if (arg0.method262(field1271)) {
+		} else if (arg0.startsWith(field1271)) {
 			return 4;
-		} else if (arg0.method262(field48)) {
+		} else if (arg0.startsWith(field48)) {
 			return 4;
-		} else if (arg0.method262(field3136)) {
+		} else if (arg0.startsWith(field3136)) {
 			return 5;
-		} else if (arg0.method262(field3592)) {
+		} else if (arg0.startsWith(field3592)) {
 			return 6;
 		} else {
 			return 0;

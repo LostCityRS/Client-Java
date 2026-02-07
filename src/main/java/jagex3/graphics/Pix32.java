@@ -9,28 +9,28 @@ import java.awt.image.PixelGrabber;
 public final class Pix32 extends Pix2D {
 
 	@ObfuscatedName("h.U")
-	public int[] field1144;
+	public int[] data;
 
 	@ObfuscatedName("h.O")
-	public int field1138;
+	public int owi;
 
 	@ObfuscatedName("h.R")
-	public int field1141;
+	public int wi;
 
 	@ObfuscatedName("h.Q")
-	public int field1140;
+	public int ohi;
 
 	@ObfuscatedName("h.S")
-	public int field1142;
+	public int hi;
 
 	@ObfuscatedName("h.T")
-	public int field1143;
+	public int yof;
 
 	@ObfuscatedName("h.P")
-	public int field1139;
+	public int xof;
 
 	@ObfuscatedName("h.a([I[IIIIIIIIIIII)V")
-	public static void method367(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
+	public static void tranScale(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 		int var12 = 256 - arg11;
 		int var13 = arg2;
 		for (int var14 = -arg7; var14 < 0; var14++) {
@@ -52,7 +52,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("h.a([I[IIIIIIII)V")
-	public static void method368(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public static void plotSprite(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		int var8 = -(arg4 >> 2);
 		int var9 = -(arg4 & 0x3);
 		for (int var10 = -arg5; var10 < 0; var10++) {
@@ -96,7 +96,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("h.a([I[IIIIIIIIII[B)V")
-	public static void method375(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, byte[] arg10) {
+	public static void plotScanline(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, byte[] arg10) {
 		int var11 = -(arg5 >> 2);
 		int var12 = -(arg5 & 0x3);
 		for (int var13 = -arg6; var13 < 0; var13++) {
@@ -146,7 +146,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("h.a([I[IIIIIII)V")
-	public static void method377(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public static void plotQuick(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		for (int var8 = -arg5; var8 < 0; var8++) {
 			int var9 = arg3 + arg4 - 3;
 			while (arg3 < var9) {
@@ -165,7 +165,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("h.a([I[IIIIIIIII)V")
-	public static void method379(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public static void tranSprite(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var9 = 256 - arg8;
 		for (int var10 = -arg5; var10 < 0; var10++) {
 			for (int var11 = -arg4; var11 < 0; var11++) {
@@ -183,7 +183,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("h.a([I[IIIIIIIIIII)V")
-	public static void method381(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public static void plotScale(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		int var11 = arg2;
 		for (int var12 = -arg7; var12 < 0; var12++) {
 			int var13 = (arg3 >> 16) * arg10;
@@ -203,7 +203,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("h.a([I[IIIIIIIIII)V")
-	public static void method383(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public static void litSprite(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		for (int var8 = -arg5; var8 < 0; var8++) {
 			for (int var9 = -arg4; var9 < 0; var9++) {
 				int var10 = arg1[arg2++];
@@ -224,10 +224,10 @@ public final class Pix32 extends Pix2D {
 	}
 
 	public Pix32(int arg0, int arg1) {
-		this.field1144 = new int[arg0 * arg1];
-		this.field1141 = this.field1138 = arg0;
-		this.field1142 = this.field1140 = arg1;
-		this.field1139 = this.field1143 = 0;
+		this.data = new int[arg0 * arg1];
+		this.wi = this.owi = arg0;
+		this.hi = this.ohi = arg1;
+		this.xof = this.yof = 0;
 	}
 
 	public Pix32(byte[] arg0, Component arg1) {
@@ -236,37 +236,37 @@ public final class Pix32 extends Pix2D {
 			MediaTracker var4 = new MediaTracker(arg1);
 			var4.addImage(var3, 0);
 			var4.waitForAll();
-			this.field1141 = var3.getWidth(arg1);
-			this.field1142 = var3.getHeight(arg1);
-			this.field1138 = this.field1141;
-			this.field1140 = this.field1142;
-			this.field1139 = 0;
-			this.field1143 = 0;
-			this.field1144 = new int[this.field1141 * this.field1142];
-			PixelGrabber var5 = new PixelGrabber(var3, 0, 0, this.field1141, this.field1142, this.field1144, 0, this.field1141);
+			this.wi = var3.getWidth(arg1);
+			this.hi = var3.getHeight(arg1);
+			this.owi = this.wi;
+			this.ohi = this.hi;
+			this.xof = 0;
+			this.yof = 0;
+			this.data = new int[this.wi * this.hi];
+			PixelGrabber var5 = new PixelGrabber(var3, 0, 0, this.wi, this.hi, this.data, 0, this.wi);
 			var5.grabPixels();
 		} catch (InterruptedException var6) {
 		}
 	}
 
 	@ObfuscatedName("h.d(IIIIII)V")
-	public void method364(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void pixelPerfectRotateScalePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg5 == 0) {
 			return;
 		}
-		int var7 = arg0 - (this.field1139 << 4);
-		int var8 = arg1 - (this.field1143 << 4);
+		int var7 = arg0 - (this.xof << 4);
+		int var8 = arg1 - (this.yof << 4);
 		double var9 = (double) (arg4 & 0xFFFF) * 9.587379924285257E-5D;
 		int var11 = (int) Math.floor(Math.sin(var9) * (double) arg5 + 0.5D);
 		int var12 = (int) Math.floor(Math.cos(var9) * (double) arg5 + 0.5D);
 		int var13 = -var7 * var12 + -var8 * var11;
 		int var14 = var7 * var11 + -var8 * var12;
-		int var15 = ((this.field1141 << 4) - var7) * var12 + -var8 * var11;
-		int var16 = -((this.field1141 << 4) - var7) * var11 + -var8 * var12;
-		int var17 = -var7 * var12 + ((this.field1142 << 4) - var8) * var11;
-		int var18 = var7 * var11 + ((this.field1142 << 4) - var8) * var12;
-		int var19 = ((this.field1141 << 4) - var7) * var12 + ((this.field1142 << 4) - var8) * var11;
-		int var20 = -((this.field1141 << 4) - var7) * var11 + ((this.field1142 << 4) - var8) * var12;
+		int var15 = ((this.wi << 4) - var7) * var12 + -var8 * var11;
+		int var16 = -((this.wi << 4) - var7) * var11 + -var8 * var12;
+		int var17 = -var7 * var12 + ((this.hi << 4) - var8) * var11;
+		int var18 = var7 * var11 + ((this.hi << 4) - var8) * var12;
+		int var19 = ((this.wi << 4) - var7) * var12 + ((this.hi << 4) - var8) * var11;
+		int var20 = -((this.wi << 4) - var7) * var11 + ((this.hi << 4) - var8) * var12;
 		int var21;
 		int var22;
 		if (var13 < var15) {
@@ -321,11 +321,11 @@ public final class Pix32 extends Pix2D {
 		int var34 = var30 + 15 >> 4;
 		int var35 = var31 >> 4;
 		int var36 = var32 + 15 >> 4;
-		if (var33 < Pix2D.field3238) {
-			var33 = Pix2D.field3238;
+		if (var33 < Pix2D.clipMinX) {
+			var33 = Pix2D.clipMinX;
 		}
-		if (var34 > Pix2D.field3241) {
-			var34 = Pix2D.field3241;
+		if (var34 > Pix2D.clipMaxX) {
+			var34 = Pix2D.clipMaxX;
 		}
 		if (var35 < Pix2D.clipMinY) {
 			var35 = Pix2D.clipMinY;
@@ -341,7 +341,7 @@ public final class Pix32 extends Pix2D {
 		if (var38 >= 0) {
 			return;
 		}
-		int var39 = var35 * Pix2D.field3240 + var33;
+		int var39 = var35 * Pix2D.width + var33;
 		double var40 = 1.6777216E7D / (double) arg5;
 		int var42 = (int) Math.floor(Math.sin(var9) * var40 + 0.5D);
 		int var43 = (int) Math.floor(Math.cos(var9) * var40 + 0.5D);
@@ -355,19 +355,19 @@ public final class Pix32 extends Pix2D {
 				while (var48 < 0) {
 					int var49 = var39;
 					int var50 = var37;
-					if (var46 >= 0 && var47 >= 0 && var46 - (this.field1141 << 12) < 0 && var47 - (this.field1142 << 12) < 0) {
+					if (var46 >= 0 && var47 >= 0 && var46 - (this.wi << 12) < 0 && var47 - (this.hi << 12) < 0) {
 						while (var50 < 0) {
-							int var51 = this.field1144[(var47 >> 12) * this.field1141 + (var46 >> 12)];
+							int var51 = this.data[(var47 >> 12) * this.wi + (var46 >> 12)];
 							if (var51 == 0) {
 								var49++;
 							} else {
-								Pix2D.field3237[var49++] = var51;
+								Pix2D.pixels[var49++] = var51;
 							}
 							var50++;
 						}
 					}
 					var48++;
-					var39 += Pix2D.field3240;
+					var39 += Pix2D.width;
 				}
 			} else if (var42 < 0) {
 				int var52 = var38;
@@ -375,9 +375,9 @@ public final class Pix32 extends Pix2D {
 					int var53 = var39;
 					int var54 = var47 + (var44 * var42 >> 4);
 					int var55 = var37;
-					if (var46 >= 0 && var46 - (this.field1141 << 12) < 0) {
+					if (var46 >= 0 && var46 - (this.wi << 12) < 0) {
 						int var56;
-						if ((var56 = var54 - (this.field1142 << 12)) >= 0) {
+						if ((var56 = var54 - (this.hi << 12)) >= 0) {
 							int var57 = (var42 - var56) / var42;
 							var55 = var37 + var57;
 							var54 += var42 * var57;
@@ -388,11 +388,11 @@ public final class Pix32 extends Pix2D {
 							var55 = var58;
 						}
 						while (var55 < 0) {
-							int var59 = this.field1144[(var54 >> 12) * this.field1141 + (var46 >> 12)];
+							int var59 = this.data[(var54 >> 12) * this.wi + (var46 >> 12)];
 							if (var59 == 0) {
 								var53++;
 							} else {
-								Pix2D.field3237[var53++] = var59;
+								Pix2D.pixels[var53++] = var59;
 							}
 							var54 += var42;
 							var55++;
@@ -400,7 +400,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var52++;
 					var46 -= var42;
-					var39 += Pix2D.field3240;
+					var39 += Pix2D.width;
 				}
 			} else {
 				int var60 = var38;
@@ -408,7 +408,7 @@ public final class Pix32 extends Pix2D {
 					int var61 = var39;
 					int var62 = var47 + (var44 * var42 >> 4);
 					int var63 = var37;
-					if (var46 >= 0 && var46 - (this.field1141 << 12) < 0) {
+					if (var46 >= 0 && var46 - (this.wi << 12) < 0) {
 						if (var62 < 0) {
 							int var64 = (var42 - var62 - 1) / var42;
 							var63 = var37 + var64;
@@ -416,15 +416,15 @@ public final class Pix32 extends Pix2D {
 							var61 = var39 + var64;
 						}
 						int var65;
-						if ((var65 = (var62 + 1 - (this.field1142 << 12) - var42) / var42) > var63) {
+						if ((var65 = (var62 + 1 - (this.hi << 12) - var42) / var42) > var63) {
 							var63 = var65;
 						}
 						while (var63 < 0) {
-							int var66 = this.field1144[(var62 >> 12) * this.field1141 + (var46 >> 12)];
+							int var66 = this.data[(var62 >> 12) * this.wi + (var46 >> 12)];
 							if (var66 == 0) {
 								var61++;
 							} else {
-								Pix2D.field3237[var61++] = var66;
+								Pix2D.pixels[var61++] = var66;
 							}
 							var62 += var42;
 							var63++;
@@ -432,7 +432,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var60++;
 					var46 -= var42;
-					var39 += Pix2D.field3240;
+					var39 += Pix2D.width;
 				}
 			}
 		} else if (var43 < 0) {
@@ -442,9 +442,9 @@ public final class Pix32 extends Pix2D {
 					int var68 = var39;
 					int var69 = var46 + (var44 * var43 >> 4);
 					int var70 = var37;
-					if (var47 >= 0 && var47 - (this.field1142 << 12) < 0) {
+					if (var47 >= 0 && var47 - (this.hi << 12) < 0) {
 						int var71;
-						if ((var71 = var69 - (this.field1141 << 12)) >= 0) {
+						if ((var71 = var69 - (this.wi << 12)) >= 0) {
 							int var72 = (var43 - var71) / var43;
 							var70 = var37 + var72;
 							var69 += var43 * var72;
@@ -455,11 +455,11 @@ public final class Pix32 extends Pix2D {
 							var70 = var73;
 						}
 						while (var70 < 0) {
-							int var74 = this.field1144[(var47 >> 12) * this.field1141 + (var69 >> 12)];
+							int var74 = this.data[(var47 >> 12) * this.wi + (var69 >> 12)];
 							if (var74 == 0) {
 								var68++;
 							} else {
-								Pix2D.field3237[var68++] = var74;
+								Pix2D.pixels[var68++] = var74;
 							}
 							var69 += var43;
 							var70++;
@@ -467,7 +467,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var67++;
 					var47 += var43;
-					var39 += Pix2D.field3240;
+					var39 += Pix2D.width;
 				}
 			} else if (var42 < 0) {
 				int var75 = var38;
@@ -477,7 +477,7 @@ public final class Pix32 extends Pix2D {
 					int var78 = var47 + (var44 * var42 >> 4);
 					int var79 = var37;
 					int var80;
-					if ((var80 = var77 - (this.field1141 << 12)) >= 0) {
+					if ((var80 = var77 - (this.wi << 12)) >= 0) {
 						int var81 = (var43 - var80) / var43;
 						var79 = var37 + var81;
 						var77 += var43 * var81;
@@ -489,7 +489,7 @@ public final class Pix32 extends Pix2D {
 						var79 = var82;
 					}
 					int var83;
-					if ((var83 = var78 - (this.field1142 << 12)) >= 0) {
+					if ((var83 = var78 - (this.hi << 12)) >= 0) {
 						int var84 = (var42 - var83) / var42;
 						var79 += var84;
 						var77 += var43 * var84;
@@ -501,11 +501,11 @@ public final class Pix32 extends Pix2D {
 						var79 = var85;
 					}
 					while (var79 < 0) {
-						int var86 = this.field1144[(var78 >> 12) * this.field1141 + (var77 >> 12)];
+						int var86 = this.data[(var78 >> 12) * this.wi + (var77 >> 12)];
 						if (var86 == 0) {
 							var76++;
 						} else {
-							Pix2D.field3237[var76++] = var86;
+							Pix2D.pixels[var76++] = var86;
 						}
 						var77 += var43;
 						var78 += var42;
@@ -514,7 +514,7 @@ public final class Pix32 extends Pix2D {
 					var75++;
 					var46 -= var42;
 					var47 += var43;
-					var39 += Pix2D.field3240;
+					var39 += Pix2D.width;
 				}
 			} else {
 				int var87 = var38;
@@ -524,7 +524,7 @@ public final class Pix32 extends Pix2D {
 					int var90 = var47 + (var44 * var42 >> 4);
 					int var91 = var37;
 					int var92;
-					if ((var92 = var89 - (this.field1141 << 12)) >= 0) {
+					if ((var92 = var89 - (this.wi << 12)) >= 0) {
 						int var93 = (var43 - var92) / var43;
 						var91 = var37 + var93;
 						var89 += var43 * var93;
@@ -543,15 +543,15 @@ public final class Pix32 extends Pix2D {
 						var88 += var95;
 					}
 					int var96;
-					if ((var96 = (var90 + 1 - (this.field1142 << 12) - var42) / var42) > var91) {
+					if ((var96 = (var90 + 1 - (this.hi << 12) - var42) / var42) > var91) {
 						var91 = var96;
 					}
 					while (var91 < 0) {
-						int var97 = this.field1144[(var90 >> 12) * this.field1141 + (var89 >> 12)];
+						int var97 = this.data[(var90 >> 12) * this.wi + (var89 >> 12)];
 						if (var97 == 0) {
 							var88++;
 						} else {
-							Pix2D.field3237[var88++] = var97;
+							Pix2D.pixels[var88++] = var97;
 						}
 						var89 += var43;
 						var90 += var42;
@@ -560,7 +560,7 @@ public final class Pix32 extends Pix2D {
 					var87++;
 					var46 -= var42;
 					var47 += var43;
-					var39 += Pix2D.field3240;
+					var39 += Pix2D.width;
 				}
 			}
 		} else if (var42 == 0) {
@@ -569,7 +569,7 @@ public final class Pix32 extends Pix2D {
 				int var99 = var39;
 				int var100 = var46 + (var44 * var43 >> 4);
 				int var101 = var37;
-				if (var47 >= 0 && var47 - (this.field1142 << 12) < 0) {
+				if (var47 >= 0 && var47 - (this.hi << 12) < 0) {
 					if (var100 < 0) {
 						int var102 = (var43 - var100 - 1) / var43;
 						var101 = var37 + var102;
@@ -577,15 +577,15 @@ public final class Pix32 extends Pix2D {
 						var99 = var39 + var102;
 					}
 					int var103;
-					if ((var103 = (var100 + 1 - (this.field1141 << 12) - var43) / var43) > var101) {
+					if ((var103 = (var100 + 1 - (this.wi << 12) - var43) / var43) > var101) {
 						var101 = var103;
 					}
 					while (var101 < 0) {
-						int var104 = this.field1144[(var47 >> 12) * this.field1141 + (var100 >> 12)];
+						int var104 = this.data[(var47 >> 12) * this.wi + (var100 >> 12)];
 						if (var104 == 0) {
 							var99++;
 						} else {
-							Pix2D.field3237[var99++] = var104;
+							Pix2D.pixels[var99++] = var104;
 						}
 						var100 += var43;
 						var101++;
@@ -593,7 +593,7 @@ public final class Pix32 extends Pix2D {
 				}
 				var98++;
 				var47 += var43;
-				var39 += Pix2D.field3240;
+				var39 += Pix2D.width;
 			}
 		} else if (var42 < 0) {
 			int var105 = var38;
@@ -610,11 +610,11 @@ public final class Pix32 extends Pix2D {
 					var106 = var39 + var110;
 				}
 				int var111;
-				if ((var111 = (var107 + 1 - (this.field1141 << 12) - var43) / var43) > var109) {
+				if ((var111 = (var107 + 1 - (this.wi << 12) - var43) / var43) > var109) {
 					var109 = var111;
 				}
 				int var112;
-				if ((var112 = var108 - (this.field1142 << 12)) >= 0) {
+				if ((var112 = var108 - (this.hi << 12)) >= 0) {
 					int var113 = (var42 - var112) / var42;
 					var109 += var113;
 					var107 += var43 * var113;
@@ -626,11 +626,11 @@ public final class Pix32 extends Pix2D {
 					var109 = var114;
 				}
 				while (var109 < 0) {
-					int var115 = this.field1144[(var108 >> 12) * this.field1141 + (var107 >> 12)];
+					int var115 = this.data[(var108 >> 12) * this.wi + (var107 >> 12)];
 					if (var115 == 0) {
 						var106++;
 					} else {
-						Pix2D.field3237[var106++] = var115;
+						Pix2D.pixels[var106++] = var115;
 					}
 					var107 += var43;
 					var108 += var42;
@@ -639,7 +639,7 @@ public final class Pix32 extends Pix2D {
 				var105++;
 				var46 -= var42;
 				var47 += var43;
-				var39 += Pix2D.field3240;
+				var39 += Pix2D.width;
 			}
 		} else {
 			int var116 = var38;
@@ -656,7 +656,7 @@ public final class Pix32 extends Pix2D {
 					var117 = var39 + var121;
 				}
 				int var122;
-				if ((var122 = (var118 + 1 - (this.field1141 << 12) - var43) / var43) > var120) {
+				if ((var122 = (var118 + 1 - (this.wi << 12) - var43) / var43) > var120) {
 					var120 = var122;
 				}
 				if (var119 < 0) {
@@ -667,15 +667,15 @@ public final class Pix32 extends Pix2D {
 					var117 += var123;
 				}
 				int var124;
-				if ((var124 = (var119 + 1 - (this.field1142 << 12) - var42) / var42) > var120) {
+				if ((var124 = (var119 + 1 - (this.hi << 12) - var42) / var42) > var120) {
 					var120 = var124;
 				}
 				while (var120 < 0) {
-					int var125 = this.field1144[(var119 >> 12) * this.field1141 + (var118 >> 12)];
+					int var125 = this.data[(var119 >> 12) * this.wi + (var118 >> 12)];
 					if (var125 == 0) {
 						var117++;
 					} else {
-						Pix2D.field3237[var117++] = var125;
+						Pix2D.pixels[var117++] = var125;
 					}
 					var118 += var43;
 					var119 += var42;
@@ -684,26 +684,26 @@ public final class Pix32 extends Pix2D {
 				var116++;
 				var46 -= var42;
 				var47 += var43;
-				var39 += Pix2D.field3240;
+				var39 += Pix2D.width;
 			}
 		}
 	}
 
 	@ObfuscatedName("h.d()V")
-	public void method365() {
-		int[] var1 = new int[this.field1141 * this.field1142];
+	public void hflip() {
+		int[] var1 = new int[this.wi * this.hi];
 		int var2 = 0;
-		for (int var3 = 0; var3 < this.field1142; var3++) {
-			for (int var4 = this.field1141 - 1; var4 >= 0; var4--) {
-				var1[var2++] = this.field1144[var4 + var3 * this.field1141];
+		for (int var3 = 0; var3 < this.hi; var3++) {
+			for (int var4 = this.wi - 1; var4 >= 0; var4--) {
+				var1[var2++] = this.data[var4 + var3 * this.wi];
 			}
 		}
-		this.field1144 = var1;
-		this.field1139 = this.field1138 - this.field1141 - this.field1139;
+		this.data = var1;
+		this.xof = this.owi - this.wi - this.xof;
 	}
 
 	@ObfuscatedName("h.a(IIIIIIII[I[I)V")
-	public void method366(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int[] arg8, int[] arg9) {
+	public void scanlineRotatePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int[] arg8, int[] arg9) {
 		try {
 			int var11 = -arg2 / 2;
 			int var12 = -arg3 / 2;
@@ -713,20 +713,20 @@ public final class Pix32 extends Pix2D {
 			int var16 = var14 * arg7 >> 8;
 			int var17 = (arg4 << 16) + var12 * var15 + var11 * var16;
 			int var18 = (arg5 << 16) + (var12 * var16 - var11 * var15);
-			int var19 = arg0 + arg1 * Pix2D.field3240;
+			int var19 = arg0 + arg1 * Pix2D.width;
 			for (int var20 = 0; var20 < arg3; var20++) {
 				int var21 = arg8[var20];
 				int var22 = var19 + var21;
 				int var23 = var17 + var16 * var21;
 				int var24 = var18 - var15 * var21;
 				for (int var25 = -arg9[var20]; var25 < 0; var25++) {
-					Pix2D.field3237[var22++] = this.field1144[(var23 >> 16) + (var24 >> 16) * this.field1141];
+					Pix2D.pixels[var22++] = this.data[(var23 >> 16) + (var24 >> 16) * this.wi];
 					var23 += var16;
 					var24 -= var15;
 				}
 				var17 += var15;
 				var18 += var16;
-				var19 += Pix2D.field3240;
+				var19 += Pix2D.width;
 			}
 		} catch (Exception var26) {
 		}
@@ -734,66 +734,66 @@ public final class Pix32 extends Pix2D {
 
 	@ObfuscatedName("h.b(II)V")
 	public void plotSprite(int arg0, int arg1) {
-		int var3 = arg0 + this.field1139;
-		int var4 = arg1 + this.field1143;
-		int var5 = var3 + var4 * Pix2D.field3240;
+		int var3 = arg0 + this.xof;
+		int var4 = arg1 + this.yof;
+		int var5 = var3 + var4 * Pix2D.width;
 		int var6 = 0;
-		int var7 = this.field1142;
-		int var8 = this.field1141;
-		int var9 = Pix2D.field3240 - var8;
+		int var7 = this.hi;
+		int var8 = this.wi;
+		int var9 = Pix2D.width - var8;
 		int var10 = 0;
 		if (var4 < Pix2D.clipMinY) {
 			int var11 = Pix2D.clipMinY - var4;
 			var7 -= var11;
 			var4 = Pix2D.clipMinY;
 			var6 = var11 * var8;
-			var5 += var11 * Pix2D.field3240;
+			var5 += var11 * Pix2D.width;
 		}
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;
 		}
-		if (var3 < Pix2D.field3238) {
-			int var12 = Pix2D.field3238 - var3;
+		if (var3 < Pix2D.clipMinX) {
+			int var12 = Pix2D.clipMinX - var3;
 			var8 -= var12;
-			var3 = Pix2D.field3238;
+			var3 = Pix2D.clipMinX;
 			var6 += var12;
 			var5 += var12;
 			var10 = var12;
 			var9 += var12;
 		}
-		if (var3 + var8 > Pix2D.field3241) {
-			int var13 = var3 + var8 - Pix2D.field3241;
+		if (var3 + var8 > Pix2D.clipMaxX) {
+			int var13 = var3 + var8 - Pix2D.clipMaxX;
 			var8 -= var13;
 			var10 += var13;
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method368(Pix2D.field3237, this.field1144, var6, var5, var8, var7, var9, var10);
+			plotSprite(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
 	@ObfuscatedName("h.e(IIII)V")
-	public void method370(int arg0, int arg1, int arg2, int arg3) {
+	public void scalePlotSprite(int arg0, int arg1, int arg2, int arg3) {
 		if (arg2 <= 0 || arg3 <= 0) {
 			return;
 		}
-		int var5 = this.field1141;
-		int var6 = this.field1142;
+		int var5 = this.wi;
+		int var6 = this.hi;
 		int var7 = 0;
 		int var8 = 0;
-		int var9 = this.field1138;
-		int var10 = this.field1140;
+		int var9 = this.owi;
+		int var10 = this.ohi;
 		int var11 = (var9 << 16) / arg2;
 		int var12 = (var10 << 16) / arg3;
-		if (this.field1139 > 0) {
-			int var13 = ((this.field1139 << 16) + var11 - 1) / var11;
+		if (this.xof > 0) {
+			int var13 = ((this.xof << 16) + var11 - 1) / var11;
 			arg0 += var13;
-			var7 = var13 * var11 - (this.field1139 << 16);
+			var7 = var13 * var11 - (this.xof << 16);
 		}
-		if (this.field1143 > 0) {
-			int var14 = ((this.field1143 << 16) + var12 - 1) / var12;
+		if (this.yof > 0) {
+			int var14 = ((this.yof << 16) + var12 - 1) / var12;
 			arg1 += var14;
-			var8 = var14 * var12 - (this.field1143 << 16);
+			var8 = var14 * var12 - (this.yof << 16);
 		}
 		if (var5 < var9) {
 			arg2 = ((var5 << 16) + var11 - var7 - 1) / var11;
@@ -801,99 +801,99 @@ public final class Pix32 extends Pix2D {
 		if (var6 < var10) {
 			arg3 = ((var6 << 16) + var12 - var8 - 1) / var12;
 		}
-		int var15 = arg0 + arg1 * Pix2D.field3240;
-		int var16 = Pix2D.field3240 - arg2;
+		int var15 = arg0 + arg1 * Pix2D.width;
+		int var16 = Pix2D.width - arg2;
 		if (arg1 + arg3 > Pix2D.clipMaxY) {
 			arg3 -= arg1 + arg3 - Pix2D.clipMaxY;
 		}
 		if (arg1 < Pix2D.clipMinY) {
 			int var17 = Pix2D.clipMinY - arg1;
 			arg3 -= var17;
-			var15 += var17 * Pix2D.field3240;
+			var15 += var17 * Pix2D.width;
 			var8 += var12 * var17;
 		}
-		if (arg0 + arg2 > Pix2D.field3241) {
-			int var18 = arg0 + arg2 - Pix2D.field3241;
+		if (arg0 + arg2 > Pix2D.clipMaxX) {
+			int var18 = arg0 + arg2 - Pix2D.clipMaxX;
 			arg2 -= var18;
 			var16 += var18;
 		}
-		if (arg0 < Pix2D.field3238) {
-			int var19 = Pix2D.field3238 - arg0;
+		if (arg0 < Pix2D.clipMinX) {
+			int var19 = Pix2D.clipMinX - arg0;
 			arg2 -= var19;
 			var15 += var19;
 			var7 += var11 * var19;
 			var16 += var19;
 		}
-		method381(Pix2D.field3237, this.field1144, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
+		plotScale(Pix2D.pixels, this.data, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
 	}
 
 	@ObfuscatedName("h.a(Lhb;II)V")
-	public void method371(Pix8 arg0, int arg1, int arg2) {
-		if (Pix2D.field3241 - Pix2D.field3238 != arg0.field1167 || Pix2D.clipMaxY - Pix2D.clipMinY != arg0.field1171) {
+	public void scanlinePlotSprite(Pix8 arg0, int arg1, int arg2) {
+		if (Pix2D.clipMaxX - Pix2D.clipMinX != arg0.wi || Pix2D.clipMaxY - Pix2D.clipMinY != arg0.hi) {
 			throw new IllegalStateException();
 		}
-		int var4 = arg1 + this.field1139;
-		int var5 = arg2 + this.field1143;
-		int var6 = var4 + var5 * Pix2D.field3240;
+		int var4 = arg1 + this.xof;
+		int var5 = arg2 + this.yof;
+		int var6 = var4 + var5 * Pix2D.width;
 		int var7 = 0;
-		int var8 = this.field1142;
-		int var9 = this.field1141;
-		int var10 = Pix2D.field3240 - var9;
+		int var8 = this.hi;
+		int var9 = this.wi;
+		int var10 = Pix2D.width - var9;
 		int var11 = 0;
 		if (var5 < Pix2D.clipMinY) {
 			int var12 = Pix2D.clipMinY - var5;
 			var8 -= var12;
 			var5 = Pix2D.clipMinY;
 			var7 = var12 * var9;
-			var6 += var12 * Pix2D.field3240;
+			var6 += var12 * Pix2D.width;
 		}
 		if (var5 + var8 > Pix2D.clipMaxY) {
 			var8 -= var5 + var8 - Pix2D.clipMaxY;
 		}
-		if (var4 < Pix2D.field3238) {
-			int var13 = Pix2D.field3238 - var4;
+		if (var4 < Pix2D.clipMinX) {
+			int var13 = Pix2D.clipMinX - var4;
 			var9 -= var13;
-			var4 = Pix2D.field3238;
+			var4 = Pix2D.clipMinX;
 			var7 += var13;
 			var6 += var13;
 			var11 = var13;
 			var10 += var13;
 		}
-		if (var4 + var9 > Pix2D.field3241) {
-			int var14 = var4 + var9 - Pix2D.field3241;
+		if (var4 + var9 > Pix2D.clipMaxX) {
+			int var14 = var4 + var9 - Pix2D.clipMaxX;
 			var9 -= var14;
 			var11 += var14;
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			int var15 = var4 + (var5 - Pix2D.clipMinY) * arg0.field1167 - Pix2D.field3238;
-			int var16 = arg0.field1167 - var9;
-			method375(Pix2D.field3237, this.field1144, var7, var6, var15, var9, var8, var10, var11, var16, arg0.field1164);
+			int var15 = var4 + (var5 - Pix2D.clipMinY) * arg0.wi - Pix2D.clipMinX;
+			int var16 = arg0.wi - var9;
+			plotScanline(Pix2D.pixels, this.data, var7, var6, var15, var9, var8, var10, var11, var16, arg0.bspr);
 		}
 	}
 
 	@ObfuscatedName("h.f(IIIII)V")
-	public void method372(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void transScalePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg2 <= 0 || arg3 <= 0) {
 			return;
 		}
-		int var6 = this.field1141;
-		int var7 = this.field1142;
+		int var6 = this.wi;
+		int var7 = this.hi;
 		int var8 = 0;
 		int var9 = 0;
-		int var10 = this.field1138;
-		int var11 = this.field1140;
+		int var10 = this.owi;
+		int var11 = this.ohi;
 		int var12 = (var10 << 16) / arg2;
 		int var13 = (var11 << 16) / arg3;
-		if (this.field1139 > 0) {
-			int var14 = ((this.field1139 << 16) + var12 - 1) / var12;
+		if (this.xof > 0) {
+			int var14 = ((this.xof << 16) + var12 - 1) / var12;
 			arg0 += var14;
-			var8 = var14 * var12 - (this.field1139 << 16);
+			var8 = var14 * var12 - (this.xof << 16);
 		}
-		if (this.field1143 > 0) {
-			int var15 = ((this.field1143 << 16) + var13 - 1) / var13;
+		if (this.yof > 0) {
+			int var15 = ((this.yof << 16) + var13 - 1) / var13;
 			arg1 += var15;
-			var9 = var15 * var13 - (this.field1143 << 16);
+			var9 = var15 * var13 - (this.yof << 16);
 		}
 		if (var6 < var10) {
 			arg2 = ((var6 << 16) + var12 - var8 - 1) / var12;
@@ -901,39 +901,39 @@ public final class Pix32 extends Pix2D {
 		if (var7 < var11) {
 			arg3 = ((var7 << 16) + var13 - var9 - 1) / var13;
 		}
-		int var16 = arg0 + arg1 * Pix2D.field3240;
-		int var17 = Pix2D.field3240 - arg2;
+		int var16 = arg0 + arg1 * Pix2D.width;
+		int var17 = Pix2D.width - arg2;
 		if (arg1 + arg3 > Pix2D.clipMaxY) {
 			arg3 -= arg1 + arg3 - Pix2D.clipMaxY;
 		}
 		if (arg1 < Pix2D.clipMinY) {
 			int var18 = Pix2D.clipMinY - arg1;
 			arg3 -= var18;
-			var16 += var18 * Pix2D.field3240;
+			var16 += var18 * Pix2D.width;
 			var9 += var13 * var18;
 		}
-		if (arg0 + arg2 > Pix2D.field3241) {
-			int var19 = arg0 + arg2 - Pix2D.field3241;
+		if (arg0 + arg2 > Pix2D.clipMaxX) {
+			int var19 = arg0 + arg2 - Pix2D.clipMaxX;
 			arg2 -= var19;
 			var17 += var19;
 		}
-		if (arg0 < Pix2D.field3238) {
-			int var20 = Pix2D.field3238 - arg0;
+		if (arg0 < Pix2D.clipMinX) {
+			int var20 = Pix2D.clipMinX - arg0;
 			arg2 -= var20;
 			var16 += var20;
 			var8 += var12 * var20;
 			var17 += var20;
 		}
-		method367(Pix2D.field3237, this.field1144, var8, var9, var16, var17, arg2, arg3, var12, var13, var6, arg4);
+		tranScale(Pix2D.pixels, this.data, var8, var9, var16, var17, arg2, arg3, var12, var13, var6, arg4);
 	}
 
 	@ObfuscatedName("h.e(I)V")
-	public void method373(int arg0) {
-		for (int var2 = this.field1142 - 1; var2 > 0; var2--) {
-			int var3 = var2 * this.field1141;
-			for (int var4 = this.field1141 - 1; var4 > 0; var4--) {
-				if (this.field1144[var4 + var3] == 0 && this.field1144[var4 + var3 - this.field1141 - 1] != 0) {
-					this.field1144[var4 + var3] = arg0;
+	public void addShadow(int arg0) {
+		for (int var2 = this.hi - 1; var2 > 0; var2--) {
+			int var3 = var2 * this.wi;
+			for (int var4 = this.wi - 1; var4 > 0; var4--) {
+				if (this.data[var4 + var3] == 0 && this.data[var4 + var3 - this.wi - 1] != 0) {
+					this.data[var4 + var3] = arg0;
 				}
 			}
 		}
@@ -941,244 +941,244 @@ public final class Pix32 extends Pix2D {
 
 	@ObfuscatedName("h.e()V")
 	public void trim() {
-		if (this.field1141 == this.field1138 && this.field1142 == this.field1140) {
+		if (this.wi == this.owi && this.hi == this.ohi) {
 			return;
 		}
-		int[] var1 = new int[this.field1138 * this.field1140];
-		for (int var2 = 0; var2 < this.field1142; var2++) {
-			for (int var3 = 0; var3 < this.field1141; var3++) {
-				var1[(var2 + this.field1143) * this.field1138 + var3 + this.field1139] = this.field1144[var2 * this.field1141 + var3];
+		int[] var1 = new int[this.owi * this.ohi];
+		for (int var2 = 0; var2 < this.hi; var2++) {
+			for (int var3 = 0; var3 < this.wi; var3++) {
+				var1[(var2 + this.yof) * this.owi + var3 + this.xof] = this.data[var2 * this.wi + var3];
 			}
 		}
-		this.field1144 = var1;
-		this.field1141 = this.field1138;
-		this.field1142 = this.field1140;
-		this.field1139 = 0;
-		this.field1143 = 0;
+		this.data = var1;
+		this.wi = this.owi;
+		this.hi = this.ohi;
+		this.xof = 0;
+		this.yof = 0;
 	}
 
 	@ObfuscatedName("h.f(I)V")
-	public void method376(int arg0) {
-		if (this.field1141 == this.field1138 && this.field1142 == this.field1140) {
+	public void untrim(int arg0) {
+		if (this.wi == this.owi && this.hi == this.ohi) {
 			return;
 		}
 		int var2 = arg0;
-		if (arg0 > this.field1139) {
-			var2 = this.field1139;
+		if (arg0 > this.xof) {
+			var2 = this.xof;
 		}
 		int var3 = arg0;
-		if (arg0 + this.field1139 + this.field1141 > this.field1138) {
-			var3 = this.field1138 - this.field1139 - this.field1141;
+		if (arg0 + this.xof + this.wi > this.owi) {
+			var3 = this.owi - this.xof - this.wi;
 		}
 		int var4 = arg0;
-		if (arg0 > this.field1143) {
-			var4 = this.field1143;
+		if (arg0 > this.yof) {
+			var4 = this.yof;
 		}
 		int var5 = arg0;
-		if (arg0 + this.field1143 + this.field1142 > this.field1140) {
-			var5 = this.field1140 - this.field1143 - this.field1142;
+		if (arg0 + this.yof + this.hi > this.ohi) {
+			var5 = this.ohi - this.yof - this.hi;
 		}
-		int var6 = this.field1141 + var2 + var3;
-		int var7 = this.field1142 + var4 + var5;
+		int var6 = this.wi + var2 + var3;
+		int var7 = this.hi + var4 + var5;
 		int[] var8 = new int[var6 * var7];
-		for (int var9 = 0; var9 < this.field1142; var9++) {
-			for (int var10 = 0; var10 < this.field1141; var10++) {
-				var8[(var9 + var4) * var6 + var10 + var2] = this.field1144[var9 * this.field1141 + var10];
+		for (int var9 = 0; var9 < this.hi; var9++) {
+			for (int var10 = 0; var10 < this.wi; var10++) {
+				var8[(var9 + var4) * var6 + var10 + var2] = this.data[var9 * this.wi + var10];
 			}
 		}
-		this.field1144 = var8;
-		this.field1141 = var6;
-		this.field1142 = var7;
-		this.field1139 -= var2;
-		this.field1143 -= var4;
+		this.data = var8;
+		this.wi = var6;
+		this.hi = var7;
+		this.xof -= var2;
+		this.yof -= var4;
 	}
 
 	@ObfuscatedName("h.g(I)V")
-	public void method378(int arg0) {
-		int[] var2 = new int[this.field1141 * this.field1142];
+	public void addOutline(int arg0) {
+		int[] var2 = new int[this.wi * this.hi];
 		int var3 = 0;
-		for (int var4 = 0; var4 < this.field1142; var4++) {
-			for (int var5 = 0; var5 < this.field1141; var5++) {
-				int var6 = this.field1144[var3];
+		for (int var4 = 0; var4 < this.hi; var4++) {
+			for (int var5 = 0; var5 < this.wi; var5++) {
+				int var6 = this.data[var3];
 				if (var6 == 0) {
-					if (var5 > 0 && this.field1144[var3 - 1] != 0) {
+					if (var5 > 0 && this.data[var3 - 1] != 0) {
 						var6 = arg0;
-					} else if (var4 > 0 && this.field1144[var3 - this.field1141] != 0) {
+					} else if (var4 > 0 && this.data[var3 - this.wi] != 0) {
 						var6 = arg0;
-					} else if (var5 < this.field1141 - 1 && this.field1144[var3 + 1] != 0) {
+					} else if (var5 < this.wi - 1 && this.data[var3 + 1] != 0) {
 						var6 = arg0;
-					} else if (var4 < this.field1142 - 1 && this.field1144[var3 + this.field1141] != 0) {
+					} else if (var4 < this.hi - 1 && this.data[var3 + this.wi] != 0) {
 						var6 = arg0;
 					}
 				}
 				var2[var3++] = var6;
 			}
 		}
-		this.field1144 = var2;
+		this.data = var2;
 	}
 
 	@ObfuscatedName("h.f()V")
-	public void method380() {
-		int[] var1 = new int[this.field1141 * this.field1142];
+	public void vflip() {
+		int[] var1 = new int[this.wi * this.hi];
 		int var2 = 0;
-		for (int var3 = this.field1142 - 1; var3 >= 0; var3--) {
-			for (int var4 = 0; var4 < this.field1141; var4++) {
-				var1[var2++] = this.field1144[var4 + var3 * this.field1141];
+		for (int var3 = this.hi - 1; var3 >= 0; var3--) {
+			for (int var4 = 0; var4 < this.wi; var4++) {
+				var1[var2++] = this.data[var4 + var3 * this.wi];
 			}
 		}
-		this.field1144 = var1;
-		this.field1143 = this.field1140 - this.field1142 - this.field1143;
+		this.data = var1;
+		this.yof = this.ohi - this.hi - this.yof;
 	}
 
 	@ObfuscatedName("h.f(IIII)V")
-	public void method382(int arg0, int arg1, int arg2, int arg3) {
-		this.method364(this.field1138 << 3, this.field1140 << 3, arg0 << 4, arg1 << 4, arg2, arg3);
+	public void pixelPerfectRotateScalePlotSprite(int arg0, int arg1, int arg2, int arg3) {
+		this.pixelPerfectRotateScalePlotSprite(this.owi << 3, this.ohi << 3, arg0 << 4, arg1 << 4, arg2, arg3);
 	}
 
 	@ObfuscatedName("h.b(III)V")
-	public void method384(int arg0, int arg1, int arg2) {
-		int var4 = arg0 + this.field1139;
-		int var5 = arg1 + this.field1143;
-		int var6 = var4 + var5 * Pix2D.field3240;
+	public void transPlotSprite(int arg0, int arg1, int arg2) {
+		int var4 = arg0 + this.xof;
+		int var5 = arg1 + this.yof;
+		int var6 = var4 + var5 * Pix2D.width;
 		int var7 = 0;
-		int var8 = this.field1142;
-		int var9 = this.field1141;
-		int var10 = Pix2D.field3240 - var9;
+		int var8 = this.hi;
+		int var9 = this.wi;
+		int var10 = Pix2D.width - var9;
 		int var11 = 0;
 		if (var5 < Pix2D.clipMinY) {
 			int var12 = Pix2D.clipMinY - var5;
 			var8 -= var12;
 			var5 = Pix2D.clipMinY;
 			var7 = var12 * var9;
-			var6 += var12 * Pix2D.field3240;
+			var6 += var12 * Pix2D.width;
 		}
 		if (var5 + var8 > Pix2D.clipMaxY) {
 			var8 -= var5 + var8 - Pix2D.clipMaxY;
 		}
-		if (var4 < Pix2D.field3238) {
-			int var13 = Pix2D.field3238 - var4;
+		if (var4 < Pix2D.clipMinX) {
+			int var13 = Pix2D.clipMinX - var4;
 			var9 -= var13;
-			var4 = Pix2D.field3238;
+			var4 = Pix2D.clipMinX;
 			var7 += var13;
 			var6 += var13;
 			var11 = var13;
 			var10 += var13;
 		}
-		if (var4 + var9 > Pix2D.field3241) {
-			int var14 = var4 + var9 - Pix2D.field3241;
+		if (var4 + var9 > Pix2D.clipMaxX) {
+			int var14 = var4 + var9 - Pix2D.clipMaxX;
 			var9 -= var14;
 			var11 += var14;
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			method379(Pix2D.field3237, this.field1144, var7, var6, var9, var8, var10, var11, arg2);
+			tranSprite(Pix2D.pixels, this.data, var7, var6, var9, var8, var10, var11, arg2);
 		}
 	}
 
 	@ObfuscatedName("h.g()Lh;")
-	public Pix32 method385() {
-		Pix32 var1 = new Pix32(this.field1141, this.field1142);
-		var1.field1138 = this.field1138;
-		var1.field1140 = this.field1140;
-		var1.field1139 = this.field1138 - this.field1141 - this.field1139;
-		var1.field1143 = this.field1143;
-		for (int var2 = 0; var2 < this.field1142; var2++) {
-			for (int var3 = 0; var3 < this.field1141; var3++) {
-				var1.field1144[var2 * this.field1141 + var3] = this.field1144[var2 * this.field1141 + this.field1141 - var3 - 1];
+	public Pix32 copyHFlip() {
+		Pix32 var1 = new Pix32(this.wi, this.hi);
+		var1.owi = this.owi;
+		var1.ohi = this.ohi;
+		var1.xof = this.owi - this.wi - this.xof;
+		var1.yof = this.yof;
+		for (int var2 = 0; var2 < this.hi; var2++) {
+			for (int var3 = 0; var3 < this.wi; var3++) {
+				var1.data[var2 * this.wi + var3] = this.data[var2 * this.wi + this.wi - var3 - 1];
 			}
 		}
 		return var1;
 	}
 
 	@ObfuscatedName("h.g(IIII)V")
-	public void method386(int arg0, int arg1) {
-		int var3 = arg0 + this.field1139;
-		int var4 = arg1 + this.field1143;
-		int var5 = var3 + var4 * Pix2D.field3240;
+	public void litPlotSprite(int arg0, int arg1) {
+		int var3 = arg0 + this.xof;
+		int var4 = arg1 + this.yof;
+		int var5 = var3 + var4 * Pix2D.width;
 		int var6 = 0;
-		int var7 = this.field1142;
-		int var8 = this.field1141;
-		int var9 = Pix2D.field3240 - var8;
+		int var7 = this.hi;
+		int var8 = this.wi;
+		int var9 = Pix2D.width - var8;
 		int var10 = 0;
 		if (var4 < Pix2D.clipMinY) {
 			int var11 = Pix2D.clipMinY - var4;
 			var7 -= var11;
 			var4 = Pix2D.clipMinY;
 			var6 = var11 * var8;
-			var5 += var11 * Pix2D.field3240;
+			var5 += var11 * Pix2D.width;
 		}
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;
 		}
-		if (var3 < Pix2D.field3238) {
-			int var12 = Pix2D.field3238 - var3;
+		if (var3 < Pix2D.clipMinX) {
+			int var12 = Pix2D.clipMinX - var3;
 			var8 -= var12;
-			var3 = Pix2D.field3238;
+			var3 = Pix2D.clipMinX;
 			var6 += var12;
 			var5 += var12;
 			var10 = var12;
 			var9 += var12;
 		}
-		if (var3 + var8 > Pix2D.field3241) {
-			int var13 = var3 + var8 - Pix2D.field3241;
+		if (var3 + var8 > Pix2D.clipMaxX) {
+			int var13 = var3 + var8 - Pix2D.clipMaxX;
 			var8 -= var13;
 			var10 += var13;
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method383(Pix2D.field3237, this.field1144, var6, var5, var8, var7, var9, var10);
+			litSprite(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
 	@ObfuscatedName("h.c(II)V")
 	public void quickPlotSprite(int arg0, int arg1) {
-		int var3 = arg0 + this.field1139;
-		int var4 = arg1 + this.field1143;
-		int var5 = var3 + var4 * Pix2D.field3240;
+		int var3 = arg0 + this.xof;
+		int var4 = arg1 + this.yof;
+		int var5 = var3 + var4 * Pix2D.width;
 		int var6 = 0;
-		int var7 = this.field1142;
-		int var8 = this.field1141;
-		int var9 = Pix2D.field3240 - var8;
+		int var7 = this.hi;
+		int var8 = this.wi;
+		int var9 = Pix2D.width - var8;
 		int var10 = 0;
 		if (var4 < Pix2D.clipMinY) {
 			int var11 = Pix2D.clipMinY - var4;
 			var7 -= var11;
 			var4 = Pix2D.clipMinY;
 			var6 = var11 * var8;
-			var5 += var11 * Pix2D.field3240;
+			var5 += var11 * Pix2D.width;
 		}
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;
 		}
-		if (var3 < Pix2D.field3238) {
-			int var12 = Pix2D.field3238 - var3;
+		if (var3 < Pix2D.clipMinX) {
+			int var12 = Pix2D.clipMinX - var3;
 			var8 -= var12;
-			var3 = Pix2D.field3238;
+			var3 = Pix2D.clipMinX;
 			var6 += var12;
 			var5 += var12;
 			var10 = var12;
 			var9 += var12;
 		}
-		if (var3 + var8 > Pix2D.field3241) {
-			int var13 = var3 + var8 - Pix2D.field3241;
+		if (var3 + var8 > Pix2D.clipMaxX) {
+			int var13 = var3 + var8 - Pix2D.clipMaxX;
 			var8 -= var13;
 			var10 += var13;
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method377(Pix2D.field3237, this.field1144, var6, var5, var8, var7, var9, var10);
+			plotQuick(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
 	@ObfuscatedName("h.h()V")
-	public void method388() {
-		Pix2D.method1052(this.field1144, this.field1141, this.field1142);
+	public void setPixels() {
+		Pix2D.setPixels(this.data, this.wi, this.hi);
 	}
 
 	@ObfuscatedName("h.c(III)V")
 	public void rgbAdjust(int arg0, int arg1, int arg2) {
-		for (int var4 = 0; var4 < this.field1144.length; var4++) {
-			int var5 = this.field1144[var4];
+		for (int var4 = 0; var4 < this.data.length; var4++) {
+			int var5 = this.data[var4];
 			if (var5 != 0) {
 				int var6 = var5 >> 16 & 0xFF;
 				int var7 = var6 + arg0;
@@ -1201,13 +1201,13 @@ public final class Pix32 extends Pix2D {
 				} else if (var11 > 255) {
 					var11 = 255;
 				}
-				this.field1144[var4] = (var7 << 16) + (var9 << 8) + var11;
+				this.data[var4] = (var7 << 16) + (var9 << 8) + var11;
 			}
 		}
 	}
 
 	@ObfuscatedName("h.a(IIIIIIDI)V")
-	public void method390(int arg0, int arg1, double arg2) {
+	public void rotateTransPlotSprite(int arg0, int arg1, double arg2) {
 		try {
 			int var5 = (int) (Math.sin(arg2) * 65536.0D);
 			int var6 = (int) (Math.cos(arg2) * 65536.0D);
@@ -1215,24 +1215,24 @@ public final class Pix32 extends Pix2D {
 			int var8 = var6 * 256 >> 8;
 			int var9 = var7 * -10 + var8 * -10 + 983040;
 			int var10 = var8 * -10 + 983040 - var7 * -10;
-			int var11 = arg0 + arg1 * Pix2D.field3240;
+			int var11 = arg0 + arg1 * Pix2D.width;
 			for (int var12 = 0; var12 < 20; var12++) {
 				int var13 = var11;
 				int var14 = var9;
 				int var15 = var10;
 				for (int var16 = -20; var16 < 0; var16++) {
-					int var17 = this.field1144[(var14 >> 16) + (var15 >> 16) * this.field1141];
+					int var17 = this.data[(var14 >> 16) + (var15 >> 16) * this.wi];
 					if (var17 == 0) {
 						var13++;
 					} else {
-						Pix2D.field3237[var13++] = var17;
+						Pix2D.pixels[var13++] = var17;
 					}
 					var14 += var8;
 					var15 -= var7;
 				}
 				var9 += var7;
 				var10 += var8;
-				var11 += Pix2D.field3240;
+				var11 += Pix2D.width;
 			}
 		} catch (Exception var18) {
 		}

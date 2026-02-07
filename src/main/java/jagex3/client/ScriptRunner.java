@@ -145,7 +145,7 @@ public class ScriptRunner {
 					field47[var10++] = var14;
 				} else if (var1[var12] instanceof JagString) {
 					JagString var13 = (JagString) var1[var12];
-					if (var13.method272(field2406)) {
+					if (var13.strEquals(field2406)) {
 						var13 = arg0.field203;
 					}
 					field928[var11++] = var13;
@@ -594,7 +594,7 @@ public class ScriptRunner {
 					if (var270 == 1112) {
 						var4--;
 						JagString var56 = field1305[var4];
-						if (!var56.method272(var54.field763)) {
+						if (!var56.strEquals(var54.field763)) {
 							var54.field763 = var56;
 							Client.componentUpdated(var54);
 						}
@@ -703,7 +703,7 @@ public class ScriptRunner {
 						var4--;
 						JagString var62 = field1305[var4];
 						int[] var63 = null;
-						if (var62.length() > 0 && var62.method260(var62.length() - 1) == 89) {
+						if (var62.length() > 0 && var62.charAt(var62.length() - 1) == 89) {
 							var5--;
 							int var64 = field916[var5];
 							if (var64 > 0) {
@@ -717,7 +717,7 @@ public class ScriptRunner {
 						}
 						Object[] var65 = new Object[var62.length() + 1];
 						for (int var66 = var65.length - 1; var66 >= 1; var66--) {
-							if (var62.method260(var66 - 1) == 115) {
+							if (var62.charAt(var66 - 1) == 115) {
 								var4--;
 								var65[var66] = field1305[var4];
 							} else {
@@ -1058,7 +1058,7 @@ public class ScriptRunner {
 							JagString var242 = field1305[var4];
 							int var243 = 0;
 							if (var242.method274()) {
-								var243 = var242.method261();
+								var243 = var242.checkedParseInt();
 							}
 							Client.out.p1Enc(216);
 							Client.out.p4(var243);
@@ -1381,8 +1381,8 @@ public class ScriptRunner {
 						if (var270 == 3609) {
 							var4--;
 							JagString var232 = field1305[var4];
-							if (var232.method262(field1152) || var232.method262(field1768)) {
-								var232 = var232.method268(7);
+							if (var232.startsWith(field1152) || var232.startsWith(field1768)) {
+								var232 = var232.substring(7);
 							}
 							field916[var5++] = Client.method922(var232) ? 1 : 0;
 							continue;
@@ -1407,7 +1407,7 @@ public class ScriptRunner {
 							var5--;
 							int var233 = field916[var5];
 							if (Client.field3010 != null && var233 < Client.field3636) {
-								field1305[var4++] = Client.field2609[var233].field885.method264();
+								field1305[var4++] = Client.field2609[var233].username.method264();
 								continue;
 							}
 							field1305[var4++] = field3652;
@@ -1417,7 +1417,7 @@ public class ScriptRunner {
 							var5--;
 							int var234 = field916[var5];
 							if (Client.field3010 != null && var234 < Client.field3636) {
-								field916[var5++] = Client.field2609[var234].field887;
+								field916[var5++] = Client.field2609[var234].world;
 								continue;
 							}
 							field916[var5++] = 0;
@@ -1427,7 +1427,7 @@ public class ScriptRunner {
 							var5--;
 							int var235 = field916[var5];
 							if (Client.field3010 != null && var235 < Client.field3636) {
-								field916[var5++] = Client.field2609[var235].field880;
+								field916[var5++] = Client.field2609[var235].rank;
 								continue;
 							}
 							field916[var5++] = 0;
@@ -1478,8 +1478,8 @@ public class ScriptRunner {
 						if (var270 == 3623) {
 							var4--;
 							JagString var239 = field1305[var4];
-							if (var239.method262(field1152) || var239.method262(field1768)) {
-								var239 = var239.method268(7);
+							if (var239.startsWith(field1152) || var239.startsWith(field1768)) {
+								var239 = var239.substring(7);
 							}
 							field916[var5++] = Client.method876(var239) ? 1 : 0;
 							continue;
@@ -1487,7 +1487,7 @@ public class ScriptRunner {
 						if (var270 == 3624) {
 							var5--;
 							int var240 = field916[var5];
-							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].field885.method271(Client.field373.field1659)) {
+							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].username.method271(Client.field373.field1659)) {
 								field916[var5++] = 1;
 								continue;
 							}
@@ -1695,9 +1695,9 @@ public class ScriptRunner {
 							JagString var158 = field1305[var4];
 							int var159 = field916[var5];
 							int var160 = field916[var5 + 1];
-							byte[] var161 = Client.fontMetrics.method206(var160, 0);
+							byte[] var161 = Client.fontMetrics.getFile(var160, 0);
 							PixFontGeneric var162 = new PixFontGeneric(var161);
-							field916[var5++] = var162.method775(var158, var159);
+							field916[var5++] = var162.predictLinesMultiline(var158, var159);
 							continue;
 						}
 						if (var270 == 4109) {
@@ -1706,9 +1706,9 @@ public class ScriptRunner {
 							var4--;
 							JagString var164 = field1305[var4];
 							int var165 = field916[var5];
-							byte[] var166 = Client.fontMetrics.method206(var163, 0);
+							byte[] var166 = Client.fontMetrics.getFile(var163, 0);
 							PixFontGeneric var167 = new PixFontGeneric(var166);
-							field916[var5++] = var167.method789(var164, var165);
+							field916[var5++] = var167.predictWidthMultiline(var164, var165);
 							continue;
 						}
 						if (var270 == 4110) {
@@ -1783,16 +1783,16 @@ public class ScriptRunner {
 						if (var270 == 4119) {
 							var4--;
 							JagString var181 = field1305[var4];
-							JagString var182 = JagString.method491(var181.length());
+							JagString var182 = JagString.newStringBuilder(var181.length());
 							boolean var183 = false;
 							for (int var184 = 0; var184 < var181.length(); var184++) {
-								int var185 = var181.method260(var184);
+								int var185 = var181.charAt(var184);
 								if (var185 == 60) {
 									var183 = true;
 								} else if (var185 == 62) {
 									var183 = false;
 								} else if (!var183) {
-									var182.method273(var185);
+									var182.append(var185);
 								}
 							}
 							var182.method269();
@@ -1936,118 +1936,118 @@ public class ScriptRunner {
 						if (var270 == 5008) {
 							var4--;
 							JagString var195 = field1305[var4];
-							if (var195.method262(field3110)) {
+							if (var195.startsWith(field3110)) {
 								Client.doCheat(var195);
 							} else {
 								JagString var196 = var195.method270();
 								byte var197 = 0;
 								byte var198 = 0;
-								if (var196.method262(Text.field2947)) {
+								if (var196.startsWith(Text.field2947)) {
 									var198 = 0;
-									var195 = var195.method268(Text.field2947.length());
-								} else if (var196.method262(Text.field2177)) {
+									var195 = var195.substring(Text.field2947.length());
+								} else if (var196.startsWith(Text.field2177)) {
 									var198 = 1;
-									var195 = var195.method268(Text.field2177.length());
-								} else if (var196.method262(Text.field906)) {
-									var195 = var195.method268(Text.field906.length());
+									var195 = var195.substring(Text.field2177.length());
+								} else if (var196.startsWith(Text.field906)) {
+									var195 = var195.substring(Text.field906.length());
 									var198 = 2;
-								} else if (var196.method262(Text.field3463)) {
+								} else if (var196.startsWith(Text.field3463)) {
 									var198 = 3;
-									var195 = var195.method268(Text.field3463.length());
-								} else if (var196.method262(Text.field3000)) {
+									var195 = var195.substring(Text.field3463.length());
+								} else if (var196.startsWith(Text.field3000)) {
 									var198 = 4;
-									var195 = var195.method268(Text.field3000.length());
-								} else if (var196.method262(Text.field107)) {
-									var195 = var195.method268(Text.field107.length());
+									var195 = var195.substring(Text.field3000.length());
+								} else if (var196.startsWith(Text.field107)) {
+									var195 = var195.substring(Text.field107.length());
 									var198 = 5;
-								} else if (var196.method262(Text.field488)) {
+								} else if (var196.startsWith(Text.field488)) {
 									var198 = 6;
-									var195 = var195.method268(Text.field488.length());
-								} else if (var196.method262(Text.field931)) {
+									var195 = var195.substring(Text.field488.length());
+								} else if (var196.startsWith(Text.field931)) {
 									var198 = 7;
-									var195 = var195.method268(Text.field931.length());
-								} else if (var196.method262(Text.field84)) {
-									var195 = var195.method268(Text.field84.length());
+									var195 = var195.substring(Text.field931.length());
+								} else if (var196.startsWith(Text.field84)) {
+									var195 = var195.substring(Text.field84.length());
 									var198 = 8;
-								} else if (var196.method262(Text.field1073)) {
+								} else if (var196.startsWith(Text.field1073)) {
 									var198 = 9;
-									var195 = var195.method268(Text.field1073.length());
-								} else if (var196.method262(Text.field3188)) {
+									var195 = var195.substring(Text.field1073.length());
+								} else if (var196.startsWith(Text.field3188)) {
 									var198 = 10;
-									var195 = var195.method268(Text.field3188.length());
-								} else if (var196.method262(Text.field2824)) {
+									var195 = var195.substring(Text.field3188.length());
+								} else if (var196.startsWith(Text.field2824)) {
 									var198 = 11;
-									var195 = var195.method268(Text.field2824.length());
+									var195 = var195.substring(Text.field2824.length());
 								} else if (Client.lang != 0) {
-									if (var196.method262(Text.field2962)) {
+									if (var196.startsWith(Text.field2962)) {
 										var198 = 0;
-										var195 = var195.method268(Text.field2962.length());
-									} else if (var196.method262(Text.field2163)) {
-										var195 = var195.method268(Text.field2163.length());
+										var195 = var195.substring(Text.field2962.length());
+									} else if (var196.startsWith(Text.field2163)) {
+										var195 = var195.substring(Text.field2163.length());
 										var198 = 1;
-									} else if (var196.method262(Text.field918)) {
+									} else if (var196.startsWith(Text.field918)) {
 										var198 = 2;
-										var195 = var195.method268(Text.field918.length());
-									} else if (var196.method262(Text.field3470)) {
+										var195 = var195.substring(Text.field918.length());
+									} else if (var196.startsWith(Text.field3470)) {
 										var198 = 3;
-										var195 = var195.method268(Text.field3470.length());
-									} else if (var196.method262(Text.field2994)) {
+										var195 = var195.substring(Text.field3470.length());
+									} else if (var196.startsWith(Text.field2994)) {
 										var198 = 4;
-										var195 = var195.method268(Text.field2994.length());
-									} else if (var196.method262(Text.field109)) {
+										var195 = var195.substring(Text.field2994.length());
+									} else if (var196.startsWith(Text.field109)) {
 										var198 = 5;
-										var195 = var195.method268(Text.field109.length());
-									} else if (var196.method262(Text.field489)) {
-										var195 = var195.method268(Text.field489.length());
+										var195 = var195.substring(Text.field109.length());
+									} else if (var196.startsWith(Text.field489)) {
+										var195 = var195.substring(Text.field489.length());
 										var198 = 6;
-									} else if (var196.method262(Text.field942)) {
-										var195 = var195.method268(Text.field942.length());
+									} else if (var196.startsWith(Text.field942)) {
+										var195 = var195.substring(Text.field942.length());
 										var198 = 7;
-									} else if (var196.method262(Text.field83)) {
-										var195 = var195.method268(Text.field83.length());
+									} else if (var196.startsWith(Text.field83)) {
+										var195 = var195.substring(Text.field83.length());
 										var198 = 8;
-									} else if (var196.method262(Text.field1074)) {
+									} else if (var196.startsWith(Text.field1074)) {
 										var198 = 9;
-										var195 = var195.method268(Text.field1074.length());
-									} else if (var196.method262(Text.field3192)) {
-										var195 = var195.method268(Text.field3192.length());
+										var195 = var195.substring(Text.field1074.length());
+									} else if (var196.startsWith(Text.field3192)) {
+										var195 = var195.substring(Text.field3192.length());
 										var198 = 10;
-									} else if (var196.method262(Text.field2818)) {
+									} else if (var196.startsWith(Text.field2818)) {
 										var198 = 11;
-										var195 = var195.method268(Text.field2818.length());
+										var195 = var195.substring(Text.field2818.length());
 									}
 								}
 								JagString var199 = var195.method270();
-								if (var199.method262(Text.field1439)) {
-									var195 = var195.method268(Text.field1439.length());
+								if (var199.startsWith(Text.field1439)) {
+									var195 = var195.substring(Text.field1439.length());
 									var197 = 1;
-								} else if (var199.method262(Text.field3618)) {
+								} else if (var199.startsWith(Text.field3618)) {
 									var197 = 2;
-									var195 = var195.method268(Text.field3618.length());
-								} else if (var199.method262(Text.field2524)) {
-									var195 = var195.method268(Text.field2524.length());
+									var195 = var195.substring(Text.field3618.length());
+								} else if (var199.startsWith(Text.field2524)) {
+									var195 = var195.substring(Text.field2524.length());
 									var197 = 3;
-								} else if (var199.method262(Text.field2884)) {
+								} else if (var199.startsWith(Text.field2884)) {
 									var197 = 4;
-									var195 = var195.method268(Text.field2884.length());
-								} else if (var199.method262(Text.field2523)) {
-									var195 = var195.method268(Text.field2523.length());
+									var195 = var195.substring(Text.field2884.length());
+								} else if (var199.startsWith(Text.field2523)) {
+									var195 = var195.substring(Text.field2523.length());
 									var197 = 5;
 								} else if (Client.lang != 0) {
-									if (var199.method262(Text.field1433)) {
+									if (var199.startsWith(Text.field1433)) {
 										var197 = 1;
-										var195 = var195.method268(Text.field1433.length());
-									} else if (var199.method262(Text.field3628)) {
+										var195 = var195.substring(Text.field1433.length());
+									} else if (var199.startsWith(Text.field3628)) {
 										var197 = 2;
-										var195 = var195.method268(Text.field3628.length());
-									} else if (var199.method262(Text.field2531)) {
-										var195 = var195.method268(Text.field2531.length());
+										var195 = var195.substring(Text.field3628.length());
+									} else if (var199.startsWith(Text.field2531)) {
+										var195 = var195.substring(Text.field2531.length());
 										var197 = 3;
-									} else if (var199.method262(Text.field2891)) {
+									} else if (var199.startsWith(Text.field2891)) {
 										var197 = 4;
-										var195 = var195.method268(Text.field2891.length());
-									} else if (var199.method262(Text.field2527)) {
-										var195 = var195.method268(Text.field2527.length());
+										var195 = var195.substring(Text.field2891.length());
+									} else if (var199.startsWith(Text.field2527)) {
+										var195 = var195.substring(Text.field2527.length());
 										var197 = 5;
 									}
 								}
@@ -2184,14 +2184,14 @@ public class ScriptRunner {
 				}
 				JagException.report(var269, "CS2 - scr:" + var3.key + " op:" + var8);
 			} else {
-				JagString var266 = JagString.method491(30);
-				var266.method243(field714).method243(var3.field3261);
+				JagString var266 = JagString.newStringBuilder(30);
+				var266.append(field714).append(var3.field3261);
 				for (int var267 = field3233 - 1; var267 >= 0; var267--) {
-					var266.method243(field1924).method243(field1302[var267].field2921.field3261);
+					var266.append(field1924).append(field1302[var267].field2921.field3261);
 				}
 				if (var8 == 40) {
 					int var268 = var7[var9];
-					var266.method243(field695).method243(JagString.parseInt(var268));
+					var266.append(field695).append(JagString.parseInt(var268));
 				}
 				if (Client.modewhere != 0) {
 					Client.addChat(JagString.join(new JagString[]{field1675, var3.field3261}), 0, field3652);

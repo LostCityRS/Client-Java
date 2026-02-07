@@ -52,7 +52,7 @@ public final class Patch extends Linkable {
 		}
 		byte[] var4 = new byte[var2];
 		for (int var5 = 0; var5 < var2; var5++) {
-			var4[var5] = var3.method544();
+			var4[var5] = var3.g1b();
 		}
 		var3.pos++;
 		var2++;
@@ -64,7 +64,7 @@ public final class Patch extends Linkable {
 		}
 		byte[] var8 = new byte[var7];
 		for (int var9 = 0; var9 < var7; var9++) {
-			var8[var9] = var3.method544();
+			var8[var9] = var3.g1b();
 		}
 		var7++;
 		int var10 = 0;
@@ -76,7 +76,7 @@ public final class Patch extends Linkable {
 		}
 		byte[] var12 = new byte[var10];
 		for (int var13 = 0; var13 < var10; var13++) {
-			var12[var13] = var3.method544();
+			var12[var13] = var3.g1b();
 		}
 		var3.pos++;
 		var10++;
@@ -124,7 +124,7 @@ public final class Patch extends Linkable {
 		}
 		byte[] var29 = new byte[var26];
 		for (int var30 = 0; var30 < var26; var30++) {
-			var29[var30] = var3.method544();
+			var29[var30] = var3.g1b();
 		}
 		var26++;
 		var3.pos++;
@@ -227,23 +227,23 @@ public final class Patch extends Linkable {
 			EnvelopeSet var56 = var19[var55];
 			if (var56.field1689 != null) {
 				for (int var57 = 1; var57 < var56.field1689.length; var57 += 2) {
-					var56.field1689[var57] = var3.method544();
+					var56.field1689[var57] = var3.g1b();
 				}
 			}
 			if (var56.field1703 != null) {
 				for (int var58 = 3; var58 < var56.field1703.length - 2; var58 += 2) {
-					var56.field1703[var58] = var3.method544();
+					var56.field1703[var58] = var3.g1b();
 				}
 			}
 		}
 		if (var25 != null) {
 			for (int var59 = 1; var59 < var25.length; var59 += 2) {
-				var25[var59] = var3.method544();
+				var25[var59] = var3.g1b();
 			}
 		}
 		if (var28 != null) {
 			for (int var60 = 1; var60 < var28.length; var60 += 2) {
-				var28[var60] = var3.method544();
+				var28[var60] = var3.g1b();
 			}
 		}
 		for (int var61 = 0; var61 < var15; var61++) {
@@ -381,7 +381,7 @@ public final class Patch extends Linkable {
 
 	@ObfuscatedName("ia.a(ILea;I)Lkd;")
 	public static Patch method448(int arg0, Js5 arg1) {
-		byte[] var2 = arg1.method218(arg0);
+		byte[] var2 = arg1.getFile(arg0);
 		return var2 == null ? null : new Patch(var2);
 	}
 

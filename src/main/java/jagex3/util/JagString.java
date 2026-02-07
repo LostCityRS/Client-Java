@@ -45,7 +45,7 @@ public final class JagString implements StringInterface {
 	public int field619;
 
 	@ObfuscatedName("ec.fb")
-	public int field674;
+	public int length;
 
 	@ObfuscatedName("ec.H")
 	public boolean field651 = true;
@@ -64,9 +64,9 @@ public final class JagString implements StringInterface {
 					break;
 				}
 				int var7 = var2[var5++] & 0xFF;
-				var4.field618[var4.field674++] = (byte) (var7 + (var6 + -40) * 43 - 48);
+				var4.field618[var4.length++] = (byte) (var7 + (var6 + -40) * 43 - 48);
 			} else if (var6 != 0) {
-				var4.field618[var4.field674++] = (byte) var6;
+				var4.field618[var4.length++] = (byte) var6;
 			}
 		}
 		var4.method269();
@@ -88,17 +88,17 @@ public final class JagString implements StringInterface {
 			if (arg0[var4 + arg2] == null) {
 				arg0[arg2 + var4] = field479;
 			}
-			var3 += arg0[var4 + arg2].field674;
+			var3 += arg0[var4 + arg2].length;
 		}
 		byte[] var5 = new byte[var3];
 		int var6 = 0;
 		for (int var7 = 0; var7 < arg1; var7++) {
 			JagString var8 = arg0[arg2 + var7];
-			ArrayUtil.method457(var8.field618, 0, var5, var6, var8.field674);
-			var6 += var8.field674;
+			ArrayUtil.method457(var8.field618, 0, var5, var6, var8.length);
+			var6 += var8.length;
 		}
 		JagString var9 = new JagString();
-		var9.field674 = var3;
+		var9.length = var3;
 		var9.field618 = var5;
 		return var9;
 	}
@@ -138,7 +138,7 @@ public final class JagString implements StringInterface {
 			var5[var4 - var6 - 1] = (byte) (var7 + 48);
 		}
 		JagString var8 = new JagString();
-		var8.field674 = var4;
+		var8.length = var4;
 		var8.field618 = var5;
 		return var8;
 	}
@@ -149,10 +149,10 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("jb.a(ZI)Lec;")
-	public static JagString method491(int arg0) {
+	public static JagString newStringBuilder(int arg0) {
 		JagString var1 = new JagString();
 		var1.field618 = new byte[arg0];
-		var1.field674 = 0;
+		var1.length = 0;
 		return var1;
 	}
 
@@ -160,7 +160,7 @@ public final class JagString implements StringInterface {
 	public static JagString method978(int arg0) {
 		JagString var1 = parseInt(arg0);
 		for (int var2 = var1.length() - 3; var2 > 0; var2 -= 3) {
-			var1 = join(new JagString[] { var1.substring(0, var2), field1769, var1.method268(var2) });
+			var1 = join(new JagString[] { var1.substring(0, var2), field1769, var1.substring(var2) });
 		}
 		if (var1.length() > 9) {
 			return join(new JagString[] { field3138, var1.substring(0, var1.length() - 8), Text.field1044, Client.field954, var1, field2501 });
@@ -186,19 +186,19 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("wa.a(Lec;BLjd;)I")
 	public static int method1194(JagString arg0, Packet arg1) {
 		int var2 = arg1.pos;
-		arg1.method545(arg0.field674);
-		arg1.pos += WordPack.field2088.method75(0, arg0.field674, arg1.pos, arg0.field618, arg1.data);
+		arg1.method545(arg0.length);
+		arg1.pos += WordPack.field2088.method75(0, arg0.length, arg1.pos, arg0.field618, arg1.data);
 		return arg1.pos - var2;
 	}
 
 	@ObfuscatedName("dd.a([BBII)Lec;")
 	public static JagString method186(byte[] arg0, int arg1, int arg2) {
 		JagString var3 = new JagString();
-		var3.field674 = 0;
+		var3.length = 0;
 		var3.field618 = new byte[arg2];
 		for (int var4 = arg1; var4 < arg1 + arg2; var4++) {
 			if (arg0[var4] != 0) {
-				var3.field618[var3.field674++] = arg0[var4];
+				var3.field618[var3.length++] = arg0[var4];
 			}
 		}
 		return var3;
@@ -225,7 +225,7 @@ public final class JagString implements StringInterface {
 		boolean var1 = false;
 		int var2 = 0;
 		boolean var3 = false;
-		for (int var4 = 0; var4 < this.field674; var4++) {
+		for (int var4 = 0; var4 < this.length; var4++) {
 			int var5 = this.field618[var4] & 0xFF;
 			if (var4 == 0) {
 				if (var5 == 45) {
@@ -266,16 +266,16 @@ public final class JagString implements StringInterface {
 		if (!(arg0 instanceof JagString)) {
 			throw new IllegalArgumentException();
 		}
-		return this.method272((JagString) arg0);
+		return this.strEquals((JagString) arg0);
 	}
 
 	@ObfuscatedName("ec.a(ILec;)I")
 	public int method238(JagString arg0) {
 		int var2;
-		if (arg0.field674 < this.field674) {
-			var2 = arg0.field674;
+		if (arg0.length < this.length) {
+			var2 = arg0.length;
 		} else {
-			var2 = this.field674;
+			var2 = this.length;
 		}
 		for (int var3 = 0; var3 < var2; var3++) {
 			if ((arg0.field618[var3] & 0xFF) > (this.field618[var3] & 0xFF)) {
@@ -285,9 +285,9 @@ public final class JagString implements StringInterface {
 				return 1;
 			}
 		}
-		if (this.field674 < arg0.field674) {
+		if (this.length < arg0.length) {
 			return -1;
-		} else if (arg0.field674 < this.field674) {
+		} else if (arg0.length < this.length) {
 			return 1;
 		} else {
 			return 0;
@@ -296,34 +296,34 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("ec.a(B)I")
 	public int length() {
-		return this.field674;
+		return this.length;
 	}
 
 	@ObfuscatedName("ec.a(BII)Lec;")
 	public JagString substring(int arg0, int arg1) {
 		JagString var3 = new JagString();
-		var3.field674 = arg1 - arg0;
+		var3.length = arg1 - arg0;
 		var3.field618 = new byte[arg1 - arg0];
-		ArrayUtil.method457(this.field618, arg0, var3.field618, 0, var3.field674);
+		ArrayUtil.method457(this.field618, arg0, var3.field618, 0, var3.length);
 		return var3;
 	}
 
 	@ObfuscatedName("ec.a(Lec;B)Lec;")
-	public JagString method243(JagString arg0) {
+	public JagString append(JagString arg0) {
 		if (!this.field651) {
 			throw new IllegalArgumentException();
 		}
 		this.field619 = 0;
-		if (this.field674 + arg0.field674 > this.field618.length) {
+		if (this.length + arg0.length > this.field618.length) {
 			int var2;
-			for (var2 = 1; var2 < arg0.field674 + this.field674; var2 += var2) {
+			for (var2 = 1; var2 < arg0.length + this.length; var2 += var2) {
 			}
 			byte[] var3 = new byte[var2];
-			ArrayUtil.method457(this.field618, 0, var3, 0, this.field674);
+			ArrayUtil.method457(this.field618, 0, var3, 0, this.length);
 			this.field618 = var3;
 		}
-		ArrayUtil.method457(arg0.field618, 0, this.field618, this.field674, arg0.field674);
-		this.field674 += arg0.field674;
+		ArrayUtil.method457(arg0.field618, 0, this.field618, this.length, arg0.length);
+		this.length += arg0.length;
 		return this;
 	}
 
@@ -337,14 +337,14 @@ public final class JagString implements StringInterface {
 		JagString var1 = new JagString();
 		var1.field618 = new byte[12];
 		int var2 = 0;
-		var1.field674 = 0;
-		for (int var3 = 0; var3 < this.field674; var3++) {
+		var1.length = 0;
+		for (int var3 = 0; var3 < this.length; var3++) {
 			if (this.field618[var3] >= 65 && this.field618[var3] <= 90) {
 				var1.field618[var2++] = (byte) (this.field618[var3] + 97 - 65);
-				var1.field674 = var2;
+				var1.length = var2;
 			} else if (this.field618[var3] >= 97 && this.field618[var3] <= 122 || this.field618[var3] >= 48 && this.field618[var3] <= 57) {
 				var1.field618[var2++] = this.field618[var3];
-				var1.field674 = var2;
+				var1.length = var2;
 			} else if (var2 > 0) {
 				var1.field618[var2++] = 95;
 			}
@@ -358,10 +358,10 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.b(ILec;)I")
 	public int method245(JagString arg0) {
 		int var2;
-		if (this.field674 > arg0.field674) {
-			var2 = arg0.field674;
+		if (this.length > arg0.length) {
+			var2 = arg0.length;
 		} else {
-			var2 = this.field674;
+			var2 = this.length;
 		}
 		for (int var3 = 0; var3 < var2; var3++) {
 			if (field1807[this.field618[var3] & 0xFF] < field1807[arg0.field618[var3] & 0xFF]) {
@@ -371,9 +371,9 @@ public final class JagString implements StringInterface {
 				return 1;
 			}
 		}
-		if (this.field674 < arg0.field674) {
+		if (this.length < arg0.length) {
 			return -1;
-		} else if (arg0.field674 < this.field674) {
+		} else if (arg0.length < this.length) {
 			return 1;
 		} else {
 			return 0;
@@ -387,7 +387,7 @@ public final class JagString implements StringInterface {
 		if (arg0 <= 80) {
 			this.method247();
 		}
-		while (this.field674 > var4) {
+		while (this.length > var4) {
 			var2 = (var2 << 5) + (long) (this.field618[var4] & 0xFF) - var2;
 			var4++;
 		}
@@ -397,7 +397,7 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.c(I)I")
 	public int method247() {
 		int var1 = 0;
-		for (int var2 = 0; var2 < this.field674; var2++) {
+		for (int var2 = 0; var2 < this.length; var2++) {
 			var1 = (var1 << 5) + (this.field618[var2] & 0xFF) - var1;
 		}
 		return var1;
@@ -406,9 +406,9 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.d(I)Lec;")
 	public JagString method248() {
 		JagString var1 = new JagString();
-		var1.field674 = this.field674;
-		var1.field618 = new byte[this.field674];
-		for (int var2 = 0; var2 < this.field674; var2++) {
+		var1.length = this.length;
+		var1.field618 = new byte[this.length];
+		for (int var2 = 0; var2 < this.length; var2++) {
 			var1.field618[var2] = 42;
 		}
 		return var1;
@@ -416,22 +416,22 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("ec.a(Lec;II)I")
 	public int method249(JagString arg0) {
-		int[] var2 = new int[arg0.field674];
+		int[] var2 = new int[arg0.length];
 		int[] var3 = new int[256];
-		int[] var4 = new int[arg0.field674];
+		int[] var4 = new int[arg0.length];
 		for (int var5 = 0; var5 < var3.length; var5++) {
-			var3[var5] = arg0.field674;
+			var3[var5] = arg0.length;
 		}
-		for (int var6 = 1; var6 <= arg0.field674; var6++) {
-			var2[var6 - 1] = (arg0.field674 << 1) - var6;
-			var3[arg0.field618[var6 - 1] & 0xFF] = arg0.field674 - var6;
+		for (int var6 = 1; var6 <= arg0.length; var6++) {
+			var2[var6 - 1] = (arg0.length << 1) - var6;
+			var3[arg0.field618[var6 - 1] & 0xFF] = arg0.length - var6;
 		}
-		int var7 = arg0.field674 + 1;
-		for (int var8 = arg0.field674; var8 > 0; var8--) {
+		int var7 = arg0.length + 1;
+		for (int var8 = arg0.length; var8 > 0; var8--) {
 			var4[var8 - 1] = var7;
-			while (arg0.field674 >= var7 && arg0.field618[var7 - 1] != arg0.field618[var8 - 1]) {
-				if (var2[var7 - 1] >= arg0.field674 - var8) {
-					var2[var7 - 1] = arg0.field674 - var8;
+			while (arg0.length >= var7 && arg0.field618[var7 - 1] != arg0.field618[var8 - 1]) {
+				if (var2[var7 - 1] >= arg0.length - var8) {
+					var2[var7 - 1] = arg0.length - var8;
 				}
 				var7 = var4[var7 - 1];
 			}
@@ -440,7 +440,7 @@ public final class JagString implements StringInterface {
 		int var9 = var7;
 		int var10 = 0;
 		int var11 = 1;
-		int var12 = arg0.field674 + 1 - var7;
+		int var12 = arg0.length + 1 - var7;
 		int var13 = 1;
 		while (var12 >= var13) {
 			var4[var13 - 1] = var10;
@@ -450,10 +450,10 @@ public final class JagString implements StringInterface {
 			var13++;
 			var10++;
 		}
-		while (arg0.field674 > var9) {
+		while (arg0.length > var9) {
 			for (int var14 = var11; var14 <= var9; var14++) {
-				if (arg0.field674 + var9 - var14 <= var2[var14 - 1]) {
-					var2[var14 - 1] = var9 + arg0.field674 - var14;
+				if (arg0.length + var9 - var14 <= var2[var14 - 1]) {
+					var2[var14 - 1] = var9 + arg0.length - var14;
 				}
 			}
 			var11 = var9 + 1;
@@ -461,8 +461,8 @@ public final class JagString implements StringInterface {
 			var12 = var4[var12 - 1];
 		}
 		int var16;
-		for (int var15 = arg0.field674 - 1; var15 < this.field674; var15 += Math.max(var3[this.field618[var15] & 0xFF], var2[var16])) {
-			for (var16 = arg0.field674 - 1; var16 >= 0 && arg0.field618[var16] == this.field618[var15]; var16--) {
+		for (int var15 = arg0.length - 1; var15 < this.length; var15 += Math.max(var3[this.field618[var15] & 0xFF], var2[var16])) {
+			for (var16 = arg0.length - 1; var16 >= 0 && arg0.field618[var16] == this.field618[var15]; var16--) {
 				var15--;
 			}
 			if (var16 == -1) {
@@ -475,7 +475,7 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.a(III)I")
 	public int method250(int arg0) {
 		byte var2 = (byte) arg0;
-		for (int var3 = 0; var3 < this.field674; var3++) {
+		for (int var3 = 0; var3 < this.length; var3++) {
 			if (this.field618[var3] == var2) {
 				return var3;
 			}
@@ -492,9 +492,9 @@ public final class JagString implements StringInterface {
 	public int stringWidth(FontMetrics arg0) {
 		String var2;
 		try {
-			var2 = new String(this.field618, 0, this.field674, "ISO-8859-1");
+			var2 = new String(this.field618, 0, this.length, "ISO-8859-1");
 		} catch (UnsupportedEncodingException var3) {
-			var2 = new String(this.field618, 0, this.field674);
+			var2 = new String(this.field618, 0, this.length);
 		}
 		return arg0.stringWidth(var2);
 	}
@@ -503,9 +503,9 @@ public final class JagString implements StringInterface {
 	public void drawString(int arg0, int arg1, Graphics arg2) {
 		String var4;
 		try {
-			var4 = new String(this.field618, 0, this.field674, "ISO-8859-1");
+			var4 = new String(this.field618, 0, this.length, "ISO-8859-1");
 		} catch (UnsupportedEncodingException var5) {
-			var4 = new String(this.field618, 0, this.field674);
+			var4 = new String(this.field618, 0, this.length);
 		}
 		arg2.drawString(var4, arg0, arg1);
 	}
@@ -522,7 +522,7 @@ public final class JagString implements StringInterface {
 				field3597 = new HashTable(4096);
 			} else {
 				for (class39 var5 = (class39) field3597.find(var2); var5 != null; var5 = (class39) field3597.method1202()) {
-					if (this.method272(var5.field929)) {
+					if (this.strEquals(var5.field929)) {
 						return var5.field929;
 					}
 				}
@@ -537,17 +537,17 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("ec.e(I)[B")
 	public byte[] method255() {
-		byte[] var1 = new byte[this.field674];
-		ArrayUtil.method457(this.field618, 0, var1, 0, this.field674);
+		byte[] var1 = new byte[this.length];
+		ArrayUtil.method457(this.field618, 0, var1, 0, this.length);
 		return var1;
 	}
 
 	@ObfuscatedName("ec.a(ZI)I")
-	public int method256(int arg0) {
+	public int checkedParseInt(int arg0) {
 		boolean var2 = false;
 		int var3 = 0;
 		boolean var4 = false;
-		for (int var5 = 0; var5 < this.field674; var5++) {
+		for (int var5 = 0; var5 < this.length; var5++) {
 			int var6 = this.field618[var5] & 0xFF;
 			if (var5 == 0) {
 				if (var6 == 45) {
@@ -590,9 +590,9 @@ public final class JagString implements StringInterface {
 	public JagString forceCapitalisationOfWords() {
 		JagString var1 = new JagString();
 		byte var2 = 2;
-		var1.field674 = this.field674;
-		var1.field618 = new byte[this.field674];
-		for (int var3 = 0; var3 < this.field674; var3++) {
+		var1.length = this.length;
+		var1.field618 = new byte[this.length];
+		for (int var3 = 0; var3 < this.length; var3++) {
 			byte var4 = this.field618[var3];
 			if (var4 >= 97 && var4 <= 122 || !(var4 < -32 || var4 > -2 || var4 == -9)) {
 				if (var2 == 2) {
@@ -619,7 +619,7 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.g(I)J")
 	public long method259() {
 		long var1 = 0L;
-		for (int var3 = 0; this.field674 > var3 && var3 < 12; var3++) {
+		for (int var3 = 0; this.length > var3 && var3 < 12; var3++) {
 			var1 *= 37L;
 			byte var4 = this.field618[var3];
 			if (var4 >= 65 && var4 <= 90) {
@@ -637,21 +637,21 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.b(II)I")
-	public int method260(int arg0) {
+	public int charAt(int arg0) {
 		return this.field618[arg0] & 0xFF;
 	}
 
 	@ObfuscatedName("ec.h(I)I")
-	public int method261() {
-		return this.method256(10);
+	public int checkedParseInt() {
+		return this.checkedParseInt(10);
 	}
 
 	@ObfuscatedName("ec.a(Lec;Z)Z")
-	public boolean method262(JagString arg0) {
-		if (this.field674 < arg0.field674) {
+	public boolean startsWith(JagString arg0) {
+		if (this.length < arg0.length) {
 			return false;
 		}
-		for (int var2 = 0; var2 < arg0.field674; var2++) {
+		for (int var2 = 0; var2 < arg0.length; var2++) {
 			if (arg0.field618[var2] != this.field618[var2]) {
 				return false;
 			}
@@ -667,10 +667,10 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.e(B)Lec;")
 	public JagString method264() {
 		JagString var1 = new JagString();
-		var1.field674 = this.field674;
+		var1.length = this.length;
 		boolean var2 = true;
-		var1.field618 = new byte[this.field674];
-		for (int var3 = 0; var3 < this.field674; var3++) {
+		var1.field618 = new byte[this.length];
+		for (int var3 = 0; var3 < this.length; var3++) {
 			byte var4 = this.field618[var3];
 			if (var4 == 95) {
 				var1.field618[var3] = 32;
@@ -688,11 +688,11 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("ec.c(ILec;)Z")
 	public boolean method266(JagString arg0) {
-		if (this.field674 < arg0.field674) {
+		if (this.length < arg0.length) {
 			return false;
 		}
-		int var2 = this.field674 - arg0.field674;
-		for (int var3 = 0; var3 < arg0.field674; var3++) {
+		int var2 = this.length - arg0.length;
+		for (int var3 = 0; var3 < arg0.length; var3++) {
 			if (this.field618[var2 + var3] != arg0.field618[var3]) {
 				return false;
 			}
@@ -706,8 +706,8 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.b(BI)Lec;")
-	public JagString method268(int arg0) {
-		return this.substring(arg0, this.field674);
+	public JagString substring(int arg0) {
+		return this.substring(arg0, this.length);
 	}
 
 	@ObfuscatedName("ec.i(I)Lec;")
@@ -716,9 +716,9 @@ public final class JagString implements StringInterface {
 			throw new IllegalArgumentException();
 		}
 		this.field619 = 0;
-		if (this.field618.length != this.field674) {
-			byte[] var1 = new byte[this.field674];
-			ArrayUtil.method457(this.field618, 0, var1, 0, this.field674);
+		if (this.field618.length != this.length) {
+			byte[] var1 = new byte[this.length];
+			ArrayUtil.method457(this.field618, 0, var1, 0, this.length);
 			this.field618 = var1;
 		}
 		return this;
@@ -727,9 +727,9 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.a(Z)Lec;")
 	public JagString method270() {
 		JagString var1 = new JagString();
-		var1.field674 = this.field674;
-		var1.field618 = new byte[this.field674];
-		for (int var2 = 0; var2 < this.field674; var2++) {
+		var1.length = this.length;
+		var1.field618 = new byte[this.length];
+		for (int var2 = 0; var2 < this.length; var2++) {
 			byte var3 = this.field618[var2];
 			if (var3 >= 65 && var3 <= 90 || var3 >= -64 && var3 <= -34 && var3 != -41) {
 				var3 = (byte) (var3 + 32);
@@ -743,8 +743,8 @@ public final class JagString implements StringInterface {
 	public boolean method271(JagString arg0) {
 		if (arg0 == null) {
 			return false;
-		} else if (arg0.field674 == this.field674) {
-			for (int var2 = 0; var2 < this.field674; var2++) {
+		} else if (arg0.length == this.length) {
+			for (int var2 = 0; var2 < this.length; var2++) {
 				byte var3 = arg0.field618[var2];
 				if (var3 >= 65 && var3 <= 90 || var3 >= -64 && var3 <= -34 && var3 != -41) {
 					var3 = (byte) (var3 + 32);
@@ -764,10 +764,10 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.a(ZLec;)Z")
-	public boolean method272(JagString arg0) {
+	public boolean strEquals(JagString arg0) {
 		if (arg0 == null) {
 			return false;
-		} else if (arg0.field674 == this.field674) {
+		} else if (arg0.length == this.length) {
 			if (!this.field651 || !arg0.field651) {
 				if (this.field619 == 0) {
 					this.field619 = this.method247();
@@ -785,7 +785,7 @@ public final class JagString implements StringInterface {
 					return false;
 				}
 			}
-			for (int var2 = 0; var2 < this.field674; var2++) {
+			for (int var2 = 0; var2 < this.length; var2++) {
 				if (arg0.field618[var2] != this.field618[var2]) {
 					return false;
 				}
@@ -797,20 +797,20 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.c(II)Lec;")
-	public JagString method273(int arg0) {
+	public JagString append(int arg0) {
 		if (arg0 <= 0 || arg0 > 255) {
 			throw new IllegalArgumentException("invalid char:" + arg0);
 		} else if (this.field651) {
 			this.field619 = 0;
-			if (this.field674 == this.field618.length) {
+			if (this.length == this.field618.length) {
 				int var2;
-				for (var2 = 1; var2 <= this.field674; var2 += var2) {
+				for (var2 = 1; var2 <= this.length; var2 += var2) {
 				}
 				byte[] var3 = new byte[var2];
-				ArrayUtil.method457(this.field618, 0, var3, 0, this.field674);
+				ArrayUtil.method457(this.field618, 0, var3, 0, this.length);
 				this.field618 = var3;
 			}
-			this.field618[this.field674++] = (byte) arg0;
+			this.field618[this.length++] = (byte) arg0;
 			return this;
 		} else {
 			throw new IllegalArgumentException();
@@ -825,18 +825,18 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.j(I)Lec;")
 	public JagString trim() {
 		int var1;
-		for (var1 = 0; this.field674 > var1 && (this.field618[var1] >= 0 && this.field618[var1] <= 32 || (this.field618[var1] & 0xFF) == 160); var1++) {
+		for (var1 = 0; this.length > var1 && (this.field618[var1] >= 0 && this.field618[var1] <= 32 || (this.field618[var1] & 0xFF) == 160); var1++) {
 		}
 		int var2;
-		for (var2 = this.field674; var1 < var2 && (this.field618[var2 - 1] >= 0 && this.field618[var2 - 1] <= 32 || (this.field618[var2 - 1] & 0xFF) == 160); var2--) {
+		for (var2 = this.length; var1 < var2 && (this.field618[var2 - 1] >= 0 && this.field618[var2 - 1] <= 32 || (this.field618[var2 - 1] & 0xFF) == 160); var2--) {
 		}
-		if (var1 == 0 && var2 == this.field674) {
+		if (var1 == 0 && var2 == this.length) {
 			return this;
 		}
 		JagString var3 = new JagString();
-		var3.field674 = var2 - var1;
-		var3.field618 = new byte[var3.field674];
-		for (int var4 = 0; var4 < var3.field674; var4++) {
+		var3.length = var2 - var1;
+		var3.field618 = new byte[var3.length];
+		for (int var4 = 0; var4 < var3.length; var4++) {
 			var3.field618[var4] = this.field618[var4 + var1];
 		}
 		return var3;
@@ -848,15 +848,15 @@ public final class JagString implements StringInterface {
 			throw new IllegalArgumentException("invalid char");
 		}
 		JagString var2 = new JagString();
-		var2.field618 = new byte[this.field674 + 1];
-		var2.field674 = this.field674 + 1;
-		ArrayUtil.method457(this.field618, 0, var2.field618, 0, this.field674);
-		var2.field618[this.field674] = (byte) arg0;
+		var2.field618 = new byte[this.length + 1];
+		var2.length = this.length + 1;
+		ArrayUtil.method457(this.field618, 0, var2.field618, 0, this.length);
+		var2.field618[this.length] = (byte) arg0;
 		return var2;
 	}
 
 	@ObfuscatedName("ec.k(I)Ljava/net/URL;")
 	public URL method278() throws MalformedURLException {
-		return new URL(new String(this.field618, 0, this.field674));
+		return new URL(new String(this.field618, 0, this.length));
 	}
 }

@@ -39,7 +39,7 @@ public final class WorldTextureProvider implements TextureProvider {
 		int var8 = var7.length;
 		this.field3226 = new Texture[arg0.method200(0)];
 		for (int var9 = 0; var9 < var8; var9++) {
-			Packet var10 = new Packet(arg0.method206(0, var7[var9]));
+			Packet var10 = new Packet(arg0.getFile(0, var7[var9]));
 			this.field3226[var7[var9]] = new Texture(var10);
 		}
 	}

@@ -417,7 +417,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				}
 			}
 			this.addCanvas();
-			drawArea = PixMap.create(sHei, sWid, canvas);
+			drawArea = PixMap.createSafe(sHei, sWid, canvas);
 			this.maininit();
 			timer = Timer.create();
 			while (killtime == 0L || MonotonicTime.currentTime() < killtime) {

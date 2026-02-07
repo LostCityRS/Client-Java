@@ -427,7 +427,7 @@ public final class IfType extends Linkable {
 			}
 			for (int var2 = 0; var2 < var1; var2++) {
 				if (field1825[arg0][var2] == null) {
-					byte[] var3 = field1991.method206(arg0, var2);
+					byte[] var3 = field1991.getFile(arg0, var2);
 					if (var3 != null) {
 						field1825[arg0][var2] = new IfType();
 						field1825[arg0][var2].field743 = (arg0 << 16) + var2;
@@ -520,28 +520,28 @@ public final class IfType extends Linkable {
 		if (var5 != null) {
 			return var5;
 		}
-		Pix32 var6 = PixLoader.method312(0, field198, var2);
+		Pix32 var6 = PixLoader.makePix32(0, field198, var2);
 		if (var6 == null) {
 			field2914 = true;
 			return null;
 		}
 		if (this.field814) {
-			var6.method380();
+			var6.vflip();
 		}
 		if (this.field772) {
-			var6.method365();
+			var6.hflip();
 		}
 		if (this.field796 > 0) {
-			var6.method376(this.field796);
+			var6.untrim(this.field796);
 		}
 		if (this.field796 >= 1) {
-			var6.method378(1);
+			var6.addOutline(1);
 		}
 		if (this.field796 >= 2) {
-			var6.method378(16777215);
+			var6.addOutline(16777215);
 		}
 		if (this.field817 != 0) {
-			var6.method373(this.field817);
+			var6.addShadow(this.field817);
 		}
 		field1987.put(var3, var6);
 		return var6;
@@ -584,7 +584,7 @@ public final class IfType extends Linkable {
 		if (var1 != null) {
 			return var1;
 		}
-		PixFontGeneric var2 = PixLoader.method998(this.field807, field57, field198, 0);
+		PixFontGeneric var2 = PixLoader.makePixFont(this.field807, field57, field198, 0);
 		if (var2 == null) {
 			field2914 = true;
 		} else {
@@ -671,7 +671,7 @@ public final class IfType extends Linkable {
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = PixLoader.method312(0, field198, var2);
+		Pix32 var4 = PixLoader.makePix32(0, field198, var2);
 		if (var4 == null) {
 			field2914 = true;
 		} else {

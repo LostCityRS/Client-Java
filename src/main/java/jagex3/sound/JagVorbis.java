@@ -201,7 +201,7 @@ public final class JagVorbis extends Linkable {
 	@ObfuscatedName("nc.a(Lea;)Z")
 	public static boolean method734(Js5 arg0) {
 		if (!field2147) {
-			byte[] var1 = arg0.method206(0, 0);
+			byte[] var1 = arg0.getFile(0, 0);
 			if (var1 == null) {
 				return false;
 			}
@@ -221,7 +221,7 @@ public final class JagVorbis extends Linkable {
 	@ObfuscatedName("nc.a(Lea;II)Lnc;")
 	public static JagVorbis method736(Js5 arg0, int arg1, int arg2) {
 		if (method734(arg0)) {
-			byte[] var3 = arg0.method206(arg1, arg2);
+			byte[] var3 = arg0.getFile(arg1, arg2);
 			return var3 == null ? null : new JagVorbis(var3);
 		} else {
 			arg0.method213(arg1, arg2);

@@ -123,7 +123,7 @@ public final class NPCType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field3512.method206(9, arg0);
+		byte[] var2 = field3512.getFile(9, arg0);
 		NPCType var3 = new NPCType();
 		var3.field2224 = arg0;
 		if (var2 != null) {
@@ -346,9 +346,9 @@ public final class NPCType extends Linkable2 {
 		} else if (arg1 == 99) {
 			this.field2243 = true;
 		} else if (arg1 == 100) {
-			this.field2191 = arg0.method544();
+			this.field2191 = arg0.g1b();
 		} else if (arg1 == 101) {
-			this.field2222 = arg0.method544() * 5;
+			this.field2222 = arg0.g1b() * 5;
 		} else if (arg1 == 102) {
 			this.field2217 = arg0.g2();
 		} else if (arg1 == 103) {

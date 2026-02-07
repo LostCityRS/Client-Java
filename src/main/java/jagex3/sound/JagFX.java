@@ -18,7 +18,7 @@ public final class JagFX {
 
 	@ObfuscatedName("re.a(Lea;II)Lre;")
 	public static JagFX method972(Js5 arg0, int arg1, int arg2) {
-		byte[] var3 = arg0.method206(arg1, arg2);
+		byte[] var3 = arg0.getFile(arg1, arg2);
 		return var3 == null ? null : new JagFX(new Packet(var3));
 	}
 

@@ -14,12 +14,12 @@ public class WordPack {
 	public static JagString unpack2(Packet arg0) {
 		try {
 			JagString var1 = new JagString();
-			var1.field674 = arg0.gsmart();
-			if (var1.field674 > 32767) {
-				var1.field674 = 32767;
+			var1.length = arg0.gsmart();
+			if (var1.length > 32767) {
+				var1.length = 32767;
 			}
-			var1.field618 = new byte[var1.field674];
-			arg0.pos += field2088.method73(0, arg0.pos, var1.field618, var1.field674, arg0.data);
+			var1.field618 = new byte[var1.length];
+			arg0.pos += field2088.method73(0, arg0.pos, var1.field618, var1.length, arg0.data);
 			return var1;
 		} catch (Exception var2) {
 			return field3499;

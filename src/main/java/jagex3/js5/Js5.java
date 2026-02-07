@@ -75,7 +75,7 @@ public abstract class Js5 {
 			if (var5 > 0) {
 				var8 = arg4;
 			}
-			int[] var10 = Client.minimap.field1144;
+			int[] var10 = Client.minimap.data;
 			int var11 = var5 >> 14 & 0x7FFF;
 			int var12 = (52736 - arg3 * 512) * 4 + arg2 * 4 + 24624;
 			LocType var13 = LocType.list(var11);
@@ -140,8 +140,8 @@ public abstract class Js5 {
 			} else {
 				Pix8 var14 = Client.mapscene[var13.field1226];
 				if (var14 != null) {
-					int var15 = (var13.field1222 * 4 - var14.field1167) / 2;
-					int var16 = (var13.field1233 * 4 - var14.field1171) / 2;
+					int var15 = (var13.field1222 * 4 - var14.wi) / 2;
+					int var16 = (var13.field1233 * 4 - var14.hi) / 2;
 					var14.plotSprite(var15 + arg2 * 4 + 48, var16 + (-var13.field1233 + -arg3 + 104) * 4 + 48);
 				}
 			}
@@ -156,13 +156,13 @@ public abstract class Js5 {
 			if (var22.field1226 != -1) {
 				Pix8 var23 = Client.mapscene[var22.field1226];
 				if (var23 != null) {
-					int var24 = (var22.field1222 * 4 - var23.field1167) / 2;
-					int var25 = (var22.field1233 * 4 - var23.field1171) / 2;
+					int var24 = (var22.field1222 * 4 - var23.wi) / 2;
+					int var25 = (var22.field1233 * 4 - var23.hi) / 2;
 					var23.plotSprite(arg2 * 4 + var24 + 48, var25 + (-var22.field1233 + -arg3 + 104) * 4 + 48);
 				}
 			} else if (var20 == 9) {
 				int var26 = 15658734;
-				int[] var27 = Client.minimap.field1144;
+				int[] var27 = Client.minimap.data;
 				int var28 = arg2 * 4 + (-(arg3 * 512) + 52736) * 4 + 24624;
 				if (var17 > 0) {
 					var26 = 15597568;
@@ -191,8 +191,8 @@ public abstract class Js5 {
 		}
 		Pix8 var32 = Client.mapscene[var31.field1226];
 		if (var32 != null) {
-			int var33 = (var31.field1222 * 4 - var32.field1167) / 2;
-			int var34 = (var31.field1233 * 4 - var32.field1171) / 2;
+			int var33 = (var31.field1222 * 4 - var32.wi) / 2;
+			int var34 = (var31.field1233 * 4 - var32.hi) / 2;
 			var32.plotSprite(var33 + arg2 * 4 + 48, var34 + (-arg3 - var31.field1233 + 104) * 4 + 48);
 			return;
 		}
@@ -320,7 +320,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("ea.a(ILec;)I")
-	public final int method201(JagString arg0) {
+	public final int getGroupId(JagString arg0) {
 		JagString var2 = arg0.method270();
 		return this.field579.find(var2.method247());
 	}
@@ -345,7 +345,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("ea.a(III)[B")
-	public final byte[] method206(int arg0, int arg1) {
+	public final byte[] getFile(int arg0, int arg1) {
 		return this.method220(arg0, null, arg1);
 	}
 
@@ -487,7 +487,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("ea.a(Lec;IZ)I")
-	public final int method215(JagString arg0, int arg1) {
+	public final int getFileId(JagString arg0, int arg1) {
 		JagString var3 = arg0.method270();
 		return this.field568[arg1].find(var3.method247());
 	}
@@ -522,11 +522,11 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("ea.e(II)[B")
-	public final byte[] method218(int arg0) {
+	public final byte[] getFile(int arg0) {
 		if (this.field552.length == 1) {
-			return this.method206(0, arg0);
+			return this.getFile(0, arg0);
 		} else if (this.field552[arg0].length == 1) {
-			return this.method206(arg0, 0);
+			return this.getFile(arg0, 0);
 		} else {
 			throw new RuntimeException();
 		}
@@ -538,7 +538,7 @@ public abstract class Js5 {
 		JagString var4 = arg1.method270();
 		int var5 = this.field579.find(var3.method247());
 		int var6 = this.field568[var5].find(var4.method247());
-		return this.method206(var5, var6);
+		return this.getFile(var5, var6);
 	}
 
 	@ObfuscatedName("ea.a(II[II)[B")

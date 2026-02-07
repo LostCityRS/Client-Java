@@ -8,12 +8,12 @@ import jagex3.util.JagString;
 public final class FriendChatUser extends Linkable {
 
 	@ObfuscatedName("fa.v")
-	public byte field880;
+	public byte rank;
 
 	@ObfuscatedName("fa.C")
-	public int field887;
+	public int world;
 
 	@ObfuscatedName("fa.A")
-	public JagString field885;
+	public JagString username;
 
 }

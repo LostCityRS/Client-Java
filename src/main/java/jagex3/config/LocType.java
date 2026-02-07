@@ -168,7 +168,7 @@ public final class LocType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field3454.method206(6, arg0);
+		byte[] var2 = field3454.getFile(6, arg0);
 		LocType var3 = new LocType();
 		var3.field1221 = arg0;
 		if (var2 != null) {
@@ -462,10 +462,10 @@ public final class LocType extends Linkable2 {
 				this.field1245 = arg0.g1();
 				return;
 			} else if (arg1 == 29) {
-				this.field1231 = arg0.method544();
+				this.field1231 = arg0.g1b();
 				return;
 			} else if (arg1 == 39) {
-				this.field1242 = arg0.method544() * 5;
+				this.field1242 = arg0.g1b() * 5;
 				return;
 			} else {
 				if (arg1 >= 30 && arg1 < 35) {

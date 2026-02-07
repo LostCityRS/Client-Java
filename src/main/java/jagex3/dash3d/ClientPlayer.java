@@ -78,8 +78,8 @@ public final class ClientPlayer extends ClientEntity {
 		int[] var2 = new int[12];
 		int var3 = -1;
 		int var4 = arg0.g1();
-		this.field1649 = arg0.method544();
-		this.field1660 = arg0.method544();
+		this.field1649 = arg0.g1b();
+		this.field1660 = arg0.g1b();
 		this.field1637 = 0;
 		for (int var5 = 0; var5 < 12; var5++) {
 			int var6 = arg0.g1();

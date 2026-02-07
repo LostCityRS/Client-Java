@@ -42,7 +42,7 @@ public final class ClientScript extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = Client.scripts.method206(arg0, 0);
+		byte[] var2 = Client.scripts.getFile(arg0, 0);
 		if (var2 == null) {
 			return null;
 		}

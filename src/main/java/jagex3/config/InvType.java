@@ -23,7 +23,7 @@ public final class InvType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field2970.method206(5, arg0);
+		byte[] var2 = field2970.getFile(5, arg0);
 		InvType var3 = new InvType();
 		if (var2 != null) {
 			var3.method1043(new Packet(var2));

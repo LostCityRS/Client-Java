@@ -313,7 +313,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.f(B)B")
-	public final byte method544() {
+	public final byte g1b() {
 		return this.data[this.pos++];
 	}
 

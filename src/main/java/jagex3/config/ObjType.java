@@ -173,7 +173,7 @@ public final class ObjType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field962.method206(10, arg0);
+		byte[] var2 = field962.getFile(10, arg0);
 		ObjType var3 = new ObjType();
 		var3.field1399 = arg0;
 		if (var2 != null) {
@@ -245,13 +245,13 @@ public final class ObjType extends Linkable2 {
 				return null;
 			}
 		}
-		int[] var13 = Pix2D.field3237;
-		int var14 = Pix2D.field3240;
-		int var15 = Pix2D.field3235;
+		int[] var13 = Pix2D.pixels;
+		int var14 = Pix2D.width;
+		int var15 = Pix2D.height;
 		int[] var16 = new int[4];
-		Pix2D.method1070(var16);
+		Pix2D.saveClipping(var16);
 		Pix32 var17 = new Pix32(36, 32);
-		Pix2D.method1052(var17.field1144, 36, 32);
+		Pix2D.setPixels(var17.data, 36, 32);
 		Pix2D.cls();
 		Pix3D.method36();
 		Pix3D.method43(16, 16);
@@ -267,26 +267,26 @@ public final class ObjType extends Linkable2 {
 		var11.method804();
 		var11.method813(var8.field1416, var8.field1374, var8.field1426, var8.field1384, var8.field1376 + var19 + var11.field470 / 2, var8.field1376 + var20);
 		if (arg0 >= 1) {
-			var17.method378(1);
+			var17.addOutline(1);
 		}
 		if (arg0 >= 2) {
-			var17.method378(16777215);
+			var17.addOutline(16777215);
 		}
 		if (arg3 != 0) {
-			var17.method373(arg3);
+			var17.addShadow(arg3);
 		}
-		Pix2D.method1052(var17.field1144, 36, 32);
+		Pix2D.setPixels(var17.data, 36, 32);
 		if (var8.field1388 != -1) {
 			var12.plotSprite(0, 0);
 		}
 		if (!arg2 && (var8.field1409 == 1 || arg4 != 1) && arg4 != -1) {
-			field1278.method791(method598(arg4), 0, 9, 16776960, 1);
+			field1278.drawString(method598(arg4), 0, 9, 16776960, 1);
 		}
 		if (!arg2) {
 			field1114.put(var5, var17);
 		}
-		Pix2D.method1052(var13, var14, var15);
-		Pix2D.method1061(var16);
+		Pix2D.setPixels(var13, var14, var15);
+		Pix2D.restoreClipping(var16);
 		Pix3D.method36();
 		Pix3D.field118 = true;
 		return var17;
@@ -571,11 +571,11 @@ public final class ObjType extends Linkable2 {
 									}
 									if (arg1 != 112) {
 										if (arg1 == 113) {
-											this.field1381 = arg0.method544();
+											this.field1381 = arg0.g1b();
 											return;
 										}
 										if (arg1 == 114) {
-											this.field1383 = arg0.method544() * 5;
+											this.field1383 = arg0.g1b() * 5;
 										} else if (arg1 == 115) {
 											this.field1425 = arg0.g1();
 											return;
