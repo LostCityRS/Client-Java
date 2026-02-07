@@ -1030,11 +1030,11 @@ public final class ClientBuild {
 					if (var23 >= 0 && var23 < 104) {
 						int var24 = field2814[var6][var23][var22] & 0xFF;
 						if (var24 > 0) {
-							FluType var25 = FluType.method1177(var24 - 1);
-							field894[var22] += var25.field722;
-							field1592[var22] += var25.field706;
-							field2511[var22] += var25.field704;
-							field698[var22] += var25.field724;
+							FluType var25 = FluType.list(var24 - 1);
+							field894[var22] += var25.chroma;
+							field1592[var22] += var25.saturation;
+							field2511[var22] += var25.hue;
+							field698[var22] += var25.luminance;
 							var10002 = field3272[var22]++;
 						}
 					}
@@ -1042,11 +1042,11 @@ public final class ClientBuild {
 					if (var26 >= 0 && var26 < 104) {
 						int var27 = field2814[var6][var26][var22] & 0xFF;
 						if (var27 > 0) {
-							FluType var28 = FluType.method1177(var27 - 1);
-							field894[var22] -= var28.field722;
-							field1592[var22] -= var28.field706;
-							field2511[var22] -= var28.field704;
-							field698[var22] -= var28.field724;
+							FluType var28 = FluType.list(var27 - 1);
+							field894[var22] -= var28.chroma;
+							field1592[var22] -= var28.saturation;
+							field2511[var22] -= var28.hue;
+							field698[var22] -= var28.luminance;
 							var10002 = field3272[var22]--;
 						}
 					}
@@ -1110,7 +1110,7 @@ public final class ClientBuild {
 									if (var37 == 0 && field3129[var6][var21][var34] != 0) {
 										var54 = false;
 									}
-									if (var38 > 0 && !FloType.method396(var38 - 1).field1338) {
+									if (var38 > 0 && !FloType.list(var38 - 1).occlude) {
 										var54 = false;
 									}
 									if (var54 && var39 == var40 && var41 == var39 && var42 == var39) {
@@ -1126,41 +1126,41 @@ public final class ClientBuild {
 								} else {
 									int var56 = field3129[var6][var21][var34] + 1;
 									byte var57 = field3123[var6][var21][var34];
-									FloType var58 = FloType.method396(var38 - 1);
-									int var59 = var58.field1336;
+									FloType var58 = FloType.list(var38 - 1);
+									int var59 = var58.texture;
 									int var60;
 									int var61;
 									if (var59 >= 0) {
 										var61 = -1;
 										var60 = Pix3D.field126.getAverageRgb(var59);
-									} else if (var58.field1316 == 16711935) {
+									} else if (var58.rgb == 16711935) {
 										var59 = -1;
 										var60 = -2;
 										var61 = -2;
 									} else {
-										var61 = getTable(var58.field1332, var58.field1330, var58.field1333);
-										int var62 = field1276 + var58.field1332 & 0xFF;
-										int var63 = field2764 + var58.field1330;
+										var61 = getTable(var58.saturation, var58.hue, var58.luminance);
+										int var62 = field1276 + var58.saturation & 0xFF;
+										int var63 = field2764 + var58.hue;
 										if (var63 < 0) {
 											var63 = 0;
 										} else if (var63 > 255) {
 											var63 = 255;
 										}
-										var60 = getTable(var62, var63, var58.field1333);
+										var60 = getTable(var62, var63, var58.luminance);
 									}
 									int var64 = 0;
 									if (var60 != -2) {
 										var64 = Pix3D.field123[getOCol(var60, 96)];
 									}
-									if (var58.field1312 != -1) {
-										int var65 = var58.field1335 + field1276 & 0xFF;
-										int var66 = var58.field1322 + field2764;
+									if (var58.mapcolour != -1) {
+										int var65 = var58.mapSaturation + field1276 & 0xFF;
+										int var66 = var58.mapHue + field2764;
 										if (var66 < 0) {
 											var66 = 0;
 										} else if (var66 > 255) {
 											var66 = 255;
 										}
-										int var67 = getTable(var65, var66, var58.field1315);
+										int var67 = getTable(var65, var66, var58.mapLuminance);
 										var64 = Pix3D.field123[getOCol(var67, 96)];
 									}
 									arg1.method1144(var6, var21, var34, var56, var57, var59, var39, var40, var41, var42, method983(var43, var46), method983(var45, var46), method983(var44, var46), method983(var48, var46), getOCol(var61, var43), getOCol(var61, var45), getOCol(var61, var44), getOCol(var61, var48), var55, var64);

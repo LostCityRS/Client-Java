@@ -10,53 +10,72 @@ import jagex3.js5.Js5;
 public final class FluType extends Linkable2 {
 
 	@ObfuscatedName("na.l")
-	public static Js5 field2086;
+	public static Js5 configClient;
+
 	@ObfuscatedName("aa.j")
-	public static LruCache field24 = new LruCache(64);
-
-	@ObfuscatedName("ee.db")
-	public int field722;
-
-	@ObfuscatedName("ee.fb")
-	public int field724;
+	public static LruCache recentUse = new LruCache(64);
 
 	@ObfuscatedName("ee.M")
-	public int field705 = 0;
+	public int rgb = 0;
+
+	@ObfuscatedName("ee.db")
+	public int chroma;
 
 	@ObfuscatedName("ee.L")
-	public int field704;
+	public int hue;
 
 	@ObfuscatedName("ee.N")
-	public int field706;
+	public int saturation;
 
-	@ObfuscatedName("vf.a(II)Lee;")
-	public static FluType method1177(int arg0) {
-		FluType var1 = (FluType) field24.find((long) arg0);
-		if (var1 != null) {
-			return var1;
-		}
-		byte[] var2 = field2086.getFile(1, arg0);
-		FluType var3 = new FluType();
-		if (var2 != null) {
-			var3.method291(arg0, new Packet(var2));
-		}
-		var3.method292();
-		field24.put((long) arg0, var3);
-		return var3;
-	}
+	@ObfuscatedName("ee.fb")
+	public int luminance;
 
 	@ObfuscatedName("hc.a(BLea;)V")
 	public static void init(Js5 arg0) {
-		field2086 = arg0;
+		configClient = arg0;
 	}
 
-	@ObfuscatedName("wd.d(I)V")
-	public static void method1219() {
-		field24.clear();
+	@ObfuscatedName("vf.a(II)Lee;")
+	public static FluType list(int arg0) {
+		FluType var1 = (FluType) recentUse.find((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = configClient.getFile(1, arg0);
+		FluType var3 = new FluType();
+		if (var2 != null) {
+			var3.decode(arg0, new Packet(var2));
+		}
+		var3.postDecode();
+		recentUse.put((long) arg0, var3);
+		return var3;
+	}
+
+	@ObfuscatedName("ee.a(B)V")
+	public void postDecode() {
+		this.getHsl(this.rgb);
+	}
+
+	@ObfuscatedName("ee.a(ZILjd;)V")
+	public void decode(int arg0, Packet arg1) {
+		while (true) {
+			int var3 = arg1.g1();
+			if (var3 == 0) {
+				return;
+			}
+			this.decode(arg0, arg1, var3);
+		}
+	}
+
+	@ObfuscatedName("ee.a(IILjd;I)V")
+	public void decode(int arg0, Packet arg1, int arg2) {
+		if (arg2 == 1) {
+			this.rgb = arg1.g3();
+		}
 	}
 
 	@ObfuscatedName("ee.a(IZ)V")
-	public void method288(int arg0) {
+	public void getHsl(int arg0) {
 		double var2 = (double) (arg0 >> 16 & 0xFF) / 256.0D;
 		double var4 = (double) (arg0 >> 8 & 0xFF) / 256.0D;
 		double var6 = var2;
@@ -77,11 +96,11 @@ public final class FluType extends Linkable2 {
 			var6 = var8;
 		}
 		double var16 = (var12 + var6) / 2.0D;
-		this.field704 = (int) (var16 * 256.0D);
-		if (this.field704 < 0) {
-			this.field704 = 0;
-		} else if (this.field704 > 255) {
-			this.field704 = 255;
+		this.hue = (int) (var16 * 256.0D);
+		if (this.hue < 0) {
+			this.hue = 0;
+		} else if (this.hue > 255) {
+			this.hue = 255;
 		}
 		if (var6 != var12) {
 			if (var16 < 0.5D) {
@@ -99,43 +118,25 @@ public final class FluType extends Linkable2 {
 			}
 		}
 		if (var16 > 0.5D) {
-			this.field724 = (int) ((1.0D - var16) * var10 * 512.0D);
+			this.luminance = (int) ((1.0D - var16) * var10 * 512.0D);
 		} else {
-			this.field724 = (int) (var16 * var10 * 512.0D);
+			this.luminance = (int) (var16 * var10 * 512.0D);
 		}
-		this.field706 = (int) (var10 * 256.0D);
-		if (this.field706 < 0) {
-			this.field706 = 0;
-		} else if (this.field706 > 255) {
-			this.field706 = 255;
+		this.saturation = (int) (var10 * 256.0D);
+		if (this.saturation < 0) {
+			this.saturation = 0;
+		} else if (this.saturation > 255) {
+			this.saturation = 255;
 		}
 		double var18 = var14 / 6.0D;
-		if (this.field724 < 1) {
-			this.field724 = 1;
+		if (this.luminance < 1) {
+			this.luminance = 1;
 		}
-		this.field722 = (int) (var18 * (double) this.field724);
+		this.chroma = (int) (var18 * (double) this.luminance);
 	}
 
-	@ObfuscatedName("ee.a(ZILjd;)V")
-	public void method291(int arg0, Packet arg1) {
-		while (true) {
-			int var3 = arg1.g1();
-			if (var3 == 0) {
-				return;
-			}
-			this.method294(arg0, arg1, var3);
-		}
-	}
-
-	@ObfuscatedName("ee.a(B)V")
-	public void method292() {
-		this.method288(this.field705);
-	}
-
-	@ObfuscatedName("ee.a(IILjd;I)V")
-	public void method294(int arg0, Packet arg1, int arg2) {
-		if (arg2 == 1) {
-			this.field705 = arg1.g3();
-		}
+	@ObfuscatedName("wd.d(I)V")
+	public static void resetCache() {
+		recentUse.clear();
 	}
 }

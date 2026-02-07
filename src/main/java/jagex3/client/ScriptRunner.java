@@ -1270,16 +1270,16 @@ public class ScriptRunner {
 							var5 -= 2;
 							int var99 = intStack[var5];
 							int var100 = intStack[var5 + 1];
-							EnumType var101 = EnumType.method938(var99);
-							for (int var102 = 0; var102 < var101.field2991; var102++) {
-								if (var100 == var101.field2985[var102]) {
-									stringStack[var4++] = var101.field2989[var102];
+							EnumType var101 = EnumType.list(var99);
+							for (int var102 = 0; var102 < var101.count; var102++) {
+								if (var100 == var101.keys[var102]) {
+									stringStack[var4++] = var101.stringValues[var102];
 									var101 = null;
 									break;
 								}
 							}
 							if (var101 != null) {
-								stringStack[var4++] = var101.field2984;
+								stringStack[var4++] = var101.defaultString;
 							}
 							continue;
 						}
@@ -1289,14 +1289,14 @@ public class ScriptRunner {
 							int var104 = intStack[var5];
 							int var105 = intStack[var5 + 2];
 							int var106 = intStack[var5 + 3];
-							EnumType var107 = EnumType.method938(var105);
-							if (var107.field3005 == var104 && var103 == var107.field3002) {
-								for (int var108 = 0; var108 < var107.field2991; var108++) {
-									if (var106 == var107.field2985[var108]) {
+							EnumType var107 = EnumType.list(var105);
+							if (var107.inputtype == var104 && var103 == var107.outputtype) {
+								for (int var108 = 0; var108 < var107.count; var108++) {
+									if (var106 == var107.keys[var108]) {
 										if (var103 == 115) {
-											stringStack[var4++] = var107.field2989[var108];
+											stringStack[var4++] = var107.stringValues[var108];
 										} else {
-											intStack[var5++] = var107.field2988[var108];
+											intStack[var5++] = var107.intValues[var108];
 										}
 										var107 = null;
 										break;
@@ -1304,9 +1304,9 @@ public class ScriptRunner {
 								}
 								if (var107 != null) {
 									if (var103 == 115) {
-										stringStack[var4++] = var107.field2984;
+										stringStack[var4++] = var107.defaultString;
 									} else {
-										intStack[var5++] = var107.field2996;
+										intStack[var5++] = var107.defaultInt;
 									}
 								}
 								continue;

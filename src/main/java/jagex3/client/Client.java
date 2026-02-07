@@ -3721,8 +3721,8 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("oe.b(I)V")
 	public static void clearCaches() {
-		FloType.method465();
-		FluType.method1219();
+		FloType.resetCache();
+		FluType.resetCache();
 		IdkType.method363();
 		LocType.method357();
 		NPCType.method630();
