@@ -391,7 +391,7 @@ public final class MidiPlayer extends PcmStream {
 		if ((this.field297[arg0] & 0x2) == 0) {
 			return;
 		}
-		for (MidiNote var2 = (MidiNote) this.field329.field957.method1211(); var2 != null; var2 = (MidiNote) this.field329.field957.method1209()) {
+		for (MidiNote var2 = (MidiNote) this.field329.field957.head(); var2 != null; var2 = (MidiNote) this.field329.field957.next()) {
 			if (var2.field1818 == arg0 && this.field318[arg0][var2.field1803] == null && var2.field1819 < 0) {
 				var2.field1819 = 0;
 			}
@@ -402,7 +402,7 @@ public final class MidiPlayer extends PcmStream {
 	public void method94(int arg0, int arg1, int arg2) {
 		this.method99(arg2, 64, arg1);
 		if ((this.field297[arg1] & 0x2) != 0) {
-			for (MidiNote var4 = (MidiNote) this.field329.field957.method1220(); var4 != null; var4 = (MidiNote) this.field329.field957.method1208()) {
+			for (MidiNote var4 = (MidiNote) this.field329.field957.tail(); var4 != null; var4 = (MidiNote) this.field329.field957.prev()) {
 				if (arg1 == var4.field1818 && var4.field1819 < 0) {
 					this.field318[arg1][var4.field1803] = null;
 					this.field318[arg1][arg2] = var4;
@@ -415,7 +415,7 @@ public final class MidiPlayer extends PcmStream {
 				}
 			}
 		}
-		Patch var6 = (Patch) this.field312.method1196((long) this.field270[arg1]);
+		Patch var6 = (Patch) this.field312.find((long) this.field270[arg1]);
 		if (var6 == null) {
 			return;
 		}
@@ -455,7 +455,7 @@ public final class MidiPlayer extends PcmStream {
 			}
 			this.field269[arg1][var8.field1793] = var8;
 		}
-		this.field329.field957.method1214(var8);
+		this.field329.field957.push(var8);
 		this.field318[arg1][arg2] = var8;
 	}
 
@@ -469,8 +469,8 @@ public final class MidiPlayer extends PcmStream {
 		boolean var4 = true;
 		int[] var5 = new int[] { 22050 };
 		for (ByteArrayNode var6 = (ByteArrayNode) arg2.field110.search(); var6 != null; var6 = (ByteArrayNode) arg2.field110.findnext()) {
-			int var7 = (int) var6.field3324;
-			Patch var8 = (Patch) this.field312.method1196((long) var7);
+			int var7 = (int) var6.key;
+			Patch var8 = (Patch) this.field312.find((long) var7);
 			if (var8 == null) {
 				var8 = Patch.method448(var7, arg0);
 				if (var8 == null) {
@@ -504,7 +504,7 @@ public final class MidiPlayer extends PcmStream {
 		if ((this.field297[arg0] & 0x4) == 0) {
 			return;
 		}
-		for (MidiNote var2 = (MidiNote) this.field329.field957.method1211(); var2 != null; var2 = (MidiNote) this.field329.field957.method1209()) {
+		for (MidiNote var2 = (MidiNote) this.field329.field957.head(); var2 != null; var2 = (MidiNote) this.field329.field957.next()) {
 			if (arg0 == var2.field1818) {
 				var2.field1800 = 0;
 			}
@@ -522,7 +522,7 @@ public final class MidiPlayer extends PcmStream {
 			var4.field1819 = 0;
 			return;
 		}
-		for (MidiNote var5 = (MidiNote) this.field329.field957.method1211(); var5 != null; var5 = (MidiNote) this.field329.field957.method1209()) {
+		for (MidiNote var5 = (MidiNote) this.field329.field957.head(); var5 != null; var5 = (MidiNote) this.field329.field957.next()) {
 			if (var4.field1818 == var5.field1818 && var5.field1819 < 0 && var5 != var4) {
 				var4.field1819 = 0;
 				return;
@@ -532,7 +532,7 @@ public final class MidiPlayer extends PcmStream {
 
 	@ObfuscatedName("c.d(II)V")
 	public void method100(int arg0) {
-		for (MidiNote var2 = (MidiNote) this.field329.field957.method1211(); var2 != null; var2 = (MidiNote) this.field329.field957.method1209()) {
+		for (MidiNote var2 = (MidiNote) this.field329.field957.head(); var2 != null; var2 = (MidiNote) this.field329.field957.next()) {
 			if ((arg0 < 0 || arg0 == var2.field1818) && var2.field1819 < 0) {
 				this.field318[var2.field1818][var2.field1803] = null;
 				var2.field1819 = 0;
@@ -679,7 +679,7 @@ public final class MidiPlayer extends PcmStream {
 
 	@ObfuscatedName("c.f(II)V")
 	public void method110(int arg0) {
-		for (MidiNote var2 = (MidiNote) this.field329.field957.method1211(); var2 != null; var2 = (MidiNote) this.field329.field957.method1209()) {
+		for (MidiNote var2 = (MidiNote) this.field329.field957.head(); var2 != null; var2 = (MidiNote) this.field329.field957.next()) {
 			if (arg0 < 0 || arg0 == var2.field1818) {
 				if (var2.field1788 != null) {
 					var2.field1788.method682(PcmPlayer.frequency / 100);

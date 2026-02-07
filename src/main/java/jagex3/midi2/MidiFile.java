@@ -353,7 +353,7 @@ public final class MidiFile extends Linkable {
 						int var17 = var8 >> 16 & 0x7F;
 						if (var17 > 0) {
 							int var18 = var2[var15];
-							ByteArrayNode var19 = (ByteArrayNode) this.field110.method1196((long) var18);
+							ByteArrayNode var19 = (ByteArrayNode) this.field110.find((long) var18);
 							if (var19 == null) {
 								var19 = new ByteArrayNode(new byte[128]);
 								this.field110.put((long) var18, var19);

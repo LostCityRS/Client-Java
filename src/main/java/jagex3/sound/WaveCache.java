@@ -29,7 +29,7 @@ public final class WaveCache {
 		int var4 = ((arg2 & 0xA0000FFF) << 4 | arg2 >>> 12) ^ arg0;
 		int var5 = var4 | arg2 << 16;
 		long var6 = (long) var5;
-		Wave var8 = (Wave) this.field1613.method1196(var6);
+		Wave var8 = (Wave) this.field1613.find(var6);
 		if (var8 != null) {
 			return var8;
 		} else if (arg1 == null || arg1[0] > 0) {
@@ -75,11 +75,11 @@ public final class WaveCache {
 		int var4 = arg0 ^ (arg1 >>> 12 | arg1 << 4 & 0xFFFF);
 		int var5 = var4 | arg1 << 16;
 		long var6 = (long) var5 ^ 0x100000000L;
-		Wave var8 = (Wave) this.field1613.method1196(var6);
+		Wave var8 = (Wave) this.field1613.find(var6);
 		if (var8 != null) {
 			return var8;
 		} else if (arg2 == null || arg2[0] > 0) {
-			JagVorbis var9 = (JagVorbis) this.field1610.method1196(var6);
+			JagVorbis var9 = (JagVorbis) this.field1610.find(var6);
 			if (var9 == null) {
 				var9 = JagVorbis.method736(this.field1606, arg1, arg0);
 				if (var9 == null) {

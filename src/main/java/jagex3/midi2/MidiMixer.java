@@ -28,7 +28,7 @@ public final class MidiMixer extends PcmStream {
 	public PcmStream method113() {
 		MidiNote var1;
 		do {
-			var1 = (MidiNote) this.field957.method1209();
+			var1 = (MidiNote) this.field957.next();
 			if (var1 == null) {
 				return null;
 			}
@@ -62,7 +62,7 @@ public final class MidiMixer extends PcmStream {
 	@Override
 	public void method116(int[] arg0, int arg1, int arg2) {
 		this.field969.method116(arg0, arg1, arg2);
-		for (MidiNote var4 = (MidiNote) this.field957.method1211(); var4 != null; var4 = (MidiNote) this.field957.method1209()) {
+		for (MidiNote var4 = (MidiNote) this.field957.head(); var4 != null; var4 = (MidiNote) this.field957.next()) {
 			if (!this.field961.method114(var4)) {
 				int var5 = arg1;
 				int var6 = arg2;
@@ -83,7 +83,7 @@ public final class MidiMixer extends PcmStream {
 	@ObfuscatedName("fe.c()Lfd;")
 	@Override
 	public PcmStream method106() {
-		MidiNote var1 = (MidiNote) this.field957.method1211();
+		MidiNote var1 = (MidiNote) this.field957.head();
 		if (var1 == null) {
 			return null;
 		} else if (var1.field1788 == null) {
@@ -103,7 +103,7 @@ public final class MidiMixer extends PcmStream {
 	@Override
 	public void method104(int arg0) {
 		this.field969.method104(arg0);
-		for (MidiNote var2 = (MidiNote) this.field957.method1211(); var2 != null; var2 = (MidiNote) this.field957.method1209()) {
+		for (MidiNote var2 = (MidiNote) this.field957.head(); var2 != null; var2 = (MidiNote) this.field957.next()) {
 			if (!this.field961.method114(var2)) {
 				int var3 = arg0;
 				do {

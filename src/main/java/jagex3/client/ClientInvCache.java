@@ -17,7 +17,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("oe.a(II)V")
 	public static void method822(int arg0) {
-		ClientInvCache var1 = (ClientInvCache) invList.method1196((long) arg0);
+		ClientInvCache var1 = (ClientInvCache) invList.find((long) arg0);
 		if (var1 != null) {
 			for (int var2 = 0; var2 < var1.field2537.length; var2++) {
 				var1.field2537[var2] = -1;
@@ -28,7 +28,7 @@ public final class ClientInvCache extends Linkable {
 
     @ObfuscatedName("gb.a(BI)V")
     public static void method344(int arg0) {
-        ClientInvCache var1 = (ClientInvCache) invList.method1196((long) arg0);
+        ClientInvCache var1 = (ClientInvCache) invList.find((long) arg0);
         if (var1 != null) {
             var1.unlink();
         }
@@ -36,7 +36,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("f.a(IIIII)V")
 	public static void method304(int arg0, int arg1, int arg2, int arg3) {
-		ClientInvCache var4 = (ClientInvCache) invList.method1196((long) arg0);
+		ClientInvCache var4 = (ClientInvCache) invList.find((long) arg0);
 		if (var4 == null) {
 			var4 = new ClientInvCache();
 			invList.put((long) arg0, var4);
@@ -61,7 +61,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("kd.a(III)I")
 	public static int method597(int arg0, int arg1) {
-		ClientInvCache var2 = (ClientInvCache) invList.method1196((long) arg1);
+		ClientInvCache var2 = (ClientInvCache) invList.find((long) arg1);
 		if (var2 == null) {
 			return -1;
 		} else if (arg0 >= 0 && arg0 < var2.field2537.length) {
@@ -78,7 +78,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("hc.a(III)I")
 	public static int method406(int arg0, int arg1) {
-		ClientInvCache var2 = (ClientInvCache) invList.method1196((long) arg0);
+		ClientInvCache var2 = (ClientInvCache) invList.find((long) arg0);
 		if (var2 == null) {
 			return 0;
 		} else if (arg1 >= 0 && var2.field2535.length > arg1) {
@@ -90,7 +90,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("e.a(IIZ)I")
 	public static int method196(int arg0, int arg1) {
-		ClientInvCache var2 = (ClientInvCache) invList.method1196((long) arg0);
+		ClientInvCache var2 = (ClientInvCache) invList.find((long) arg0);
 		if (var2 == null) {
 			return 0;
 		} else if (arg1 == -1) {

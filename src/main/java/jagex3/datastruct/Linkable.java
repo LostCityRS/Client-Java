@@ -6,26 +6,26 @@ import deob.ObfuscatedName;
 public class Linkable {
 
 	@ObfuscatedName("v.i")
-	public Linkable field3316;
+	public Linkable prev;
 
 	@ObfuscatedName("v.m")
-	public Linkable field3320;
+	public Linkable next;
 
 	@ObfuscatedName("v.q")
-	public long field3324;
+	public long key;
 
 	@ObfuscatedName("v.a(I)V")
 	public final void unlink() {
-		if (this.field3316 != null) {
-			this.field3316.field3320 = this.field3320;
-			this.field3320.field3316 = this.field3316;
-			this.field3316 = null;
-			this.field3320 = null;
+		if (this.prev != null) {
+			this.prev.next = this.next;
+			this.next.prev = this.prev;
+			this.prev = null;
+			this.next = null;
 		}
 	}
 
 	@ObfuscatedName("v.b(I)Z")
-	public final boolean method1094() {
-		return this.field3316 != null;
+	public final boolean isLinked() {
+		return this.prev != null;
 	}
 }

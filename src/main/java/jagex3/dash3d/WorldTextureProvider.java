@@ -96,19 +96,19 @@ public final class WorldTextureProvider implements TextureProvider {
 		Texture var2 = this.field3226[arg0];
 		if (var2 != null) {
 			if (var2.field3361 != null) {
-				this.field3227.method1207(var2);
+				this.field3227.pushFront(var2);
 				var2.field3365 = true;
 				return var2.field3361;
 			}
 			boolean var3 = var2.method1105(this.field3229, this.field3232, this.field3234);
 			if (var3) {
 				if (this.field3231 == 0) {
-					Texture var4 = (Texture) this.field3227.method1206();
+					Texture var4 = (Texture) this.field3227.pop();
 					var4.method1103();
 				} else {
 					this.field3231--;
 				}
-				this.field3227.method1207(var2);
+				this.field3227.pushFront(var2);
 				var2.field3365 = true;
 				return var2.field3361;
 			}

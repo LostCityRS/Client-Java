@@ -521,7 +521,7 @@ public final class JagString implements StringInterface {
 			if (field3597 == null) {
 				field3597 = new HashTable(4096);
 			} else {
-				for (class39 var5 = (class39) field3597.method1196(var2); var5 != null; var5 = (class39) field3597.method1202((byte) -36)) {
+				for (class39 var5 = (class39) field3597.find(var2); var5 != null; var5 = (class39) field3597.method1202()) {
 					if (this.method272(var5.field929)) {
 						return var5.field929;
 					}

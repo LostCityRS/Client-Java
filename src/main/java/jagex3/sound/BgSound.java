@@ -55,7 +55,7 @@ public final class BgSound extends Linkable {
 
 	@ObfuscatedName("s.b(Z)V")
 	public static void method981() {
-		for (BgSound var0 = (BgSound) field1466.method1211(); var0 != null; var0 = (BgSound) field1466.method1209()) {
+		for (BgSound var0 = (BgSound) field1466.head(); var0 != null; var0 = (BgSound) field1466.next()) {
 			if (var0.field2250 != null) {
 				var0.method767();
 			}
@@ -64,7 +64,7 @@ public final class BgSound extends Linkable {
 
 	@ObfuscatedName("ed.a(Z)V")
 	public static void reset() {
-		for (BgSound var0 = (BgSound) field1466.method1211(); var0 != null; var0 = (BgSound) field1466.method1209()) {
+		for (BgSound var0 = (BgSound) field1466.head(); var0 != null; var0 = (BgSound) field1466.next()) {
 			if (var0.field2247 != null) {
 				Client.soundMixer.method907(var0.field2247);
 				var0.field2247 = null;

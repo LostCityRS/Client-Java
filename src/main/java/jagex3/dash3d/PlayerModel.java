@@ -98,7 +98,7 @@ public final class PlayerModel {
 		this.field594[9] = var4;
 		this.field594[5] = var3;
 		if (var1 != 0L && this.field588 != var1) {
-			field925.method486(var1);
+			field925.remove(var1);
 		}
 	}
 

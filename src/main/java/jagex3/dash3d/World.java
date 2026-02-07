@@ -312,7 +312,7 @@ public final class World {
 			var5.field2250 = arg1;
 			var5.method767();
 		}
-		BgSound.field1466.method1214(var5);
+		BgSound.field1466.push(var5);
 		if (var5.field2245 != null) {
 			var5.field2269 = (int) ((double) (var5.field2249 - var5.field2244) * Math.random()) + var5.field2244;
 		}
@@ -963,7 +963,7 @@ public final class World {
 
 	@ObfuscatedName("vd.a(Lwa;Z)V")
 	public void method1147(Square arg0, boolean arg1) {
-		field3433.method1214(arg0);
+		field3433.push(arg0);
 		while (true) {
 			Square var3;
 			int var4;
@@ -984,7 +984,7 @@ public final class World {
 									while (true) {
 										while (true) {
 											do {
-												var3 = (Square) field3433.method1215();
+												var3 = (Square) field3433.popFront();
 												if (var3 == null) {
 													return;
 												}
@@ -1159,25 +1159,25 @@ public final class World {
 												if (var4 < field3428 && (var31 & 0x4) != 0) {
 													Square var32 = var8[var4 + 1][var5];
 													if (var32 != null && var32.field3534) {
-														field3433.method1214(var32);
+														field3433.push(var32);
 													}
 												}
 												if (var5 < field3402 && (var31 & 0x2) != 0) {
 													Square var33 = var8[var4][var5 + 1];
 													if (var33 != null && var33.field3534) {
-														field3433.method1214(var33);
+														field3433.push(var33);
 													}
 												}
 												if (var4 > field3428 && (var31 & 0x1) != 0) {
 													Square var34 = var8[var4 - 1][var5];
 													if (var34 != null && var34.field3534) {
-														field3433.method1214(var34);
+														field3433.push(var34);
 													}
 												}
 												if (var5 > field3402 && (var31 & 0x8) != 0) {
 													Square var35 = var8[var4][var5 - 1];
 													if (var35 != null && var35.field3534) {
-														field3433.method1214(var35);
+														field3433.push(var35);
 													}
 												}
 											}
@@ -1284,9 +1284,9 @@ public final class World {
 													for (int var61 = var59.field1051; var61 <= var59.field1064; var61++) {
 														Square var62 = var8[var60][var61];
 														if (var62.field3524 != 0) {
-															field3433.method1214(var62);
+															field3433.push(var62);
 														} else if ((var60 != var4 || var61 != var5) && var62.field3534) {
-															field3433.method1214(var62);
+															field3433.push(var62);
 														}
 													}
 												}
@@ -1377,31 +1377,31 @@ public final class World {
 			if (var6 < this.field3396 - 1) {
 				Square var76 = this.field3404[var6 + 1][var4][var5];
 				if (var76 != null && var76.field3534) {
-					field3433.method1214(var76);
+					field3433.push(var76);
 				}
 			}
 			if (var4 < field3428) {
 				Square var77 = var8[var4 + 1][var5];
 				if (var77 != null && var77.field3534) {
-					field3433.method1214(var77);
+					field3433.push(var77);
 				}
 			}
 			if (var5 < field3402) {
 				Square var78 = var8[var4][var5 + 1];
 				if (var78 != null && var78.field3534) {
-					field3433.method1214(var78);
+					field3433.push(var78);
 				}
 			}
 			if (var4 > field3428) {
 				Square var79 = var8[var4 - 1][var5];
 				if (var79 != null && var79.field3534) {
-					field3433.method1214(var79);
+					field3433.push(var79);
 				}
 			}
 			if (var5 > field3402) {
 				Square var80 = var8[var4][var5 - 1];
 				if (var80 != null && var80.field3534) {
-					field3433.method1214(var80);
+					field3433.push(var80);
 				}
 			}
 		}

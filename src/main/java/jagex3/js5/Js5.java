@@ -322,7 +322,7 @@ public abstract class Js5 {
 	@ObfuscatedName("ea.a(ILec;)I")
 	public final int method201(JagString arg0) {
 		JagString var2 = arg0.method270();
-		return this.field579.method743(var2.method247());
+		return this.field579.find(var2.method247());
 	}
 
 	@ObfuscatedName("ea.b(II)Z")
@@ -447,15 +447,15 @@ public abstract class Js5 {
 	public final boolean method210(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.method270();
 		JagString var4 = arg1.method270();
-		int var5 = this.field579.method743(var3.method247());
-		int var6 = this.field568[var5].method743(var4.method247());
+		int var5 = this.field579.find(var3.method247());
+		int var6 = this.field568[var5].find(var4.method247());
 		return this.method213(var5, var6);
 	}
 
 	@ObfuscatedName("ea.a(BLec;)V")
 	public final void updateCacheHint(JagString arg0) {
 		JagString var2 = arg0.method270();
-		int var3 = this.field579.method743(var2.method247());
+		int var3 = this.field579.find(var2.method247());
 		if (var3 >= 0) {
 			this.method205(var3);
 		}
@@ -489,7 +489,7 @@ public abstract class Js5 {
 	@ObfuscatedName("ea.a(Lec;IZ)I")
 	public final int method215(JagString arg0, int arg1) {
 		JagString var3 = arg0.method270();
-		return this.field568[arg1].method743(var3.method247());
+		return this.field568[arg1].find(var3.method247());
 	}
 
 	@ObfuscatedName("ea.d(II)[B")
@@ -536,8 +536,8 @@ public abstract class Js5 {
 	public final byte[] method219(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.method270();
 		JagString var4 = arg1.method270();
-		int var5 = this.field579.method743(var3.method247());
-		int var6 = this.field568[var5].method743(var4.method247());
+		int var5 = this.field579.find(var3.method247());
+		int var6 = this.field568[var5].find(var4.method247());
 		return this.method206(var5, var6);
 	}
 

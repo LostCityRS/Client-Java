@@ -178,7 +178,7 @@ public final class ModelUnlit extends ModelSource {
 		int var8 = arg1.field2443;
 		for (int var9 = 0; var9 < arg0.field2443; var9++) {
 			PointNormal var10 = arg0.field2447[var9];
-			if (var10.field1676 != 0) {
+			if (var10.w != 0) {
 				int var11 = arg0.field2459[var9] - arg3;
 				if (var11 <= arg1.field2475) {
 					int var12 = arg0.field2444[var9] - arg2;
@@ -187,7 +187,7 @@ public final class ModelUnlit extends ModelSource {
 						if (var13 >= arg1.field2456 && var13 <= arg1.field2463) {
 							for (int var14 = 0; var14 < var8; var14++) {
 								PointNormal var15 = arg1.field2447[var14];
-								if (var12 == var7[var14] && var13 == arg1.field2435[var14] && var11 == arg1.field2459[var14] && var15.field1676 != 0) {
+								if (var12 == var7[var14] && var13 == arg1.field2435[var14] && var11 == arg1.field2459[var14] && var15.w != 0) {
 									if (arg0.field2460 == null) {
 										arg0.field2460 = new PointNormal[arg0.field2443];
 									}
@@ -202,14 +202,14 @@ public final class ModelUnlit extends ModelSource {
 									if (var17 == null) {
 										var17 = arg1.field2460[var14] = new PointNormal(var15);
 									}
-									var16.field1684 += var15.field1684;
-									var16.field1682 += var15.field1682;
-									var16.field1672 += var15.field1672;
-									var16.field1676 += var15.field1676;
-									var17.field1684 += var10.field1684;
-									var17.field1682 += var10.field1682;
-									var17.field1672 += var10.field1672;
-									var17.field1676 += var10.field1676;
+									var16.x += var15.x;
+									var16.y += var15.y;
+									var16.z += var15.z;
+									var16.w += var15.w;
+									var17.x += var10.x;
+									var17.y += var10.y;
+									var17.z += var10.z;
+									var17.w += var10.w;
 									var6++;
 									field2473[var9] = field2445;
 									field2466[var14] = field2445;
@@ -974,28 +974,28 @@ public final class ModelUnlit extends ModelSource {
 			}
 			if (var19 == 0) {
 				PointNormal var20 = this.field2447[var3];
-				var20.field1684 += var16;
-				var20.field1682 += var17;
-				var20.field1672 += var18;
-				var20.field1676++;
+				var20.x += var16;
+				var20.y += var17;
+				var20.z += var18;
+				var20.w++;
 				PointNormal var21 = this.field2447[var4];
-				var21.field1684 += var16;
-				var21.field1682 += var17;
-				var21.field1672 += var18;
-				var21.field1676++;
+				var21.x += var16;
+				var21.y += var17;
+				var21.z += var18;
+				var21.w++;
 				PointNormal var22 = this.field2447[var5];
-				var22.field1684 += var16;
-				var22.field1682 += var17;
-				var22.field1672 += var18;
-				var22.field1676++;
+				var22.x += var16;
+				var22.y += var17;
+				var22.z += var18;
+				var22.w++;
 			} else if (var19 == 1) {
 				if (this.field2478 == null) {
 					this.field2478 = new FaceNormal[this.field2465];
 				}
 				FaceNormal var23 = this.field2478[var2] = new FaceNormal();
-				var23.field2075 = var16;
-				var23.field2091 = var17;
-				var23.field2078 = var18;
+				var23.x = var16;
+				var23.y = var17;
+				var23.z = var18;
 			}
 		}
 	}
@@ -1390,7 +1390,7 @@ public final class ModelUnlit extends ModelSource {
 					} else {
 						var20 = this.field2460[this.field2441[var15]];
 					}
-					int var21 = arg0 + (arg2 * var20.field1684 + arg3 * var20.field1682 + arg4 * var20.field1672) / (var7 * var20.field1676);
+					int var21 = arg0 + (arg2 * var20.x + arg3 * var20.y + arg4 * var20.z) / (var7 * var20.w);
 					var8.field2345[var15] = method846(var19, var21);
 					PointNormal var22;
 					if (this.field2460 == null || this.field2460[this.field2480[var15]] == null) {
@@ -1398,7 +1398,7 @@ public final class ModelUnlit extends ModelSource {
 					} else {
 						var22 = this.field2460[this.field2480[var15]];
 					}
-					int var23 = arg0 + (arg2 * var22.field1684 + arg3 * var22.field1682 + arg4 * var22.field1672) / (var7 * var22.field1676);
+					int var23 = arg0 + (arg2 * var22.x + arg3 * var22.y + arg4 * var22.z) / (var7 * var22.w);
 					var8.field2327[var15] = method846(var19, var23);
 					PointNormal var24;
 					if (this.field2460 == null || this.field2460[this.field2472[var15]] == null) {
@@ -1406,11 +1406,11 @@ public final class ModelUnlit extends ModelSource {
 					} else {
 						var24 = this.field2460[this.field2472[var15]];
 					}
-					int var25 = arg0 + (arg2 * var24.field1684 + arg3 * var24.field1682 + arg4 * var24.field1672) / (var7 * var24.field1676);
+					int var25 = arg0 + (arg2 * var24.x + arg3 * var24.y + arg4 * var24.z) / (var7 * var24.w);
 					var8.field2325[var15] = method846(var19, var25);
 				} else if (var16 == 1) {
 					FaceNormal var26 = this.field2478[var15];
-					int var27 = arg0 + (arg2 * var26.field2075 + arg3 * var26.field2091 + arg4 * var26.field2078) / (var7 + var7 / 2);
+					int var27 = arg0 + (arg2 * var26.x + arg3 * var26.y + arg4 * var26.z) / (var7 + var7 / 2);
 					var8.field2345[var15] = method846(this.field2434[var15] & 0xFFFF, var27);
 					var8.field2325[var15] = -1;
 				} else if (var16 == 3) {
@@ -1426,7 +1426,7 @@ public final class ModelUnlit extends ModelSource {
 				} else {
 					var28 = this.field2460[this.field2441[var15]];
 				}
-				int var29 = arg0 + (arg2 * var28.field1684 + arg3 * var28.field1682 + arg4 * var28.field1672) / (var7 * var28.field1676);
+				int var29 = arg0 + (arg2 * var28.x + arg3 * var28.y + arg4 * var28.z) / (var7 * var28.w);
 				var8.field2345[var15] = method849(var29);
 				PointNormal var30;
 				if (this.field2460 == null || this.field2460[this.field2480[var15]] == null) {
@@ -1434,7 +1434,7 @@ public final class ModelUnlit extends ModelSource {
 				} else {
 					var30 = this.field2460[this.field2480[var15]];
 				}
-				int var31 = arg0 + (arg2 * var30.field1684 + arg3 * var30.field1682 + arg4 * var30.field1672) / (var7 * var30.field1676);
+				int var31 = arg0 + (arg2 * var30.x + arg3 * var30.y + arg4 * var30.z) / (var7 * var30.w);
 				var8.field2327[var15] = method849(var31);
 				PointNormal var32;
 				if (this.field2460 == null || this.field2460[this.field2472[var15]] == null) {
@@ -1442,11 +1442,11 @@ public final class ModelUnlit extends ModelSource {
 				} else {
 					var32 = this.field2460[this.field2472[var15]];
 				}
-				int var33 = arg0 + (arg2 * var32.field1684 + arg3 * var32.field1682 + arg4 * var32.field1672) / (var7 * var32.field1676);
+				int var33 = arg0 + (arg2 * var32.x + arg3 * var32.y + arg4 * var32.z) / (var7 * var32.w);
 				var8.field2325[var15] = method849(var33);
 			} else if (var16 == 1) {
 				FaceNormal var34 = this.field2478[var15];
-				int var35 = arg0 + (arg2 * var34.field2075 + arg3 * var34.field2091 + arg4 * var34.field2078) / (var7 + var7 / 2);
+				int var35 = arg0 + (arg2 * var34.x + arg3 * var34.y + arg4 * var34.z) / (var7 + var7 / 2);
 				var8.field2345[var15] = method849(var35);
 				var8.field2325[var15] = -1;
 			} else {

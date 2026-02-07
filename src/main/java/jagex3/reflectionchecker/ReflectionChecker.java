@@ -20,7 +20,7 @@ public class ReflectionChecker {
 	@ObfuscatedName("o.a(BILge;)V")
 	public static void performCheck(PacketBit arg0) {
 		while (true) {
-			ReflectionCheck var1 = (ReflectionCheck) field2627.method1211();
+			ReflectionCheck var1 = (ReflectionCheck) field2627.head();
 			if (var1 == null) {
 				return;
 			}
@@ -190,7 +190,7 @@ public class ReflectionChecker {
 				var3.field524[var4] = -5;
 			}
 		}
-		field2627.method1214(var3);
+		field2627.push(var3);
 	}
 
 	@ObfuscatedName("gb.a(Ljava/lang/String;I)Ljava/lang/Class;")

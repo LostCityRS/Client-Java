@@ -20,7 +20,7 @@ public final class AnimFrameSet extends Linkable2 {
 			AnimBase var9 = null;
 			byte[] var10 = arg0.method206(arg2, var7[var8]);
 			int var11 = (var10[0] & 0xFF) << 8 | var10[1] & 0xFF;
-			for (AnimBase var12 = (AnimBase) var5.method1211(); var12 != null; var12 = (AnimBase) var5.method1209()) {
+			for (AnimBase var12 = (AnimBase) var5.head(); var12 != null; var12 = (AnimBase) var5.next()) {
 				if (var11 == var12.field2108) {
 					var9 = var12;
 					break;
@@ -29,7 +29,7 @@ public final class AnimFrameSet extends Linkable2 {
 			if (var9 == null) {
 				byte[] var13 = arg1.method217(0, var11);
 				var9 = new AnimBase(var11, var13);
-				var5.method1214(var9);
+				var5.push(var9);
 			}
 			this.field2871[var7[var8]] = new AnimFrame(var10, var9);
 		}

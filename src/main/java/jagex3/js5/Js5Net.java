@@ -100,13 +100,13 @@ public class Js5Net {
 						field3157 = MonotonicTime.currentTime();
 						return;
 					}
-					field2918.method1168(var3);
-					field3029.put(var3.field3324, var3);
+					field2918.pushFront(var3);
+					field3029.put(var3.key, var3);
 					field697++;
 					field1579--;
 				}
 			}
-			field2212.put(var2.field3324, var2);
+			field2212.put(var2.key, var2);
 			field3627++;
 			field1494--;
 		}
@@ -122,18 +122,18 @@ public class Js5Net {
 	@ObfuscatedName("sa.a(ZBBIILga;I)V")
 	public static void queueRequest(boolean arg0, byte arg1, int arg2, int arg3, Js5Loader arg4, int arg5) {
 		long var6 = (long) (arg2 + (arg3 << 16));
-		Js5NetRequest var8 = (Js5NetRequest) field2212.method1196(var6);
+		Js5NetRequest var8 = (Js5NetRequest) field2212.find(var6);
 		if (var8 != null) {
 			return;
 		}
-		Js5NetRequest var9 = (Js5NetRequest) field2616.method1196(var6);
+		Js5NetRequest var9 = (Js5NetRequest) field2616.find(var6);
 		if (var9 != null) {
 			return;
 		}
-		Js5NetRequest var10 = (Js5NetRequest) field3029.method1196(var6);
+		Js5NetRequest var10 = (Js5NetRequest) field3029.find(var6);
 		if (var10 == null) {
 			if (!arg0) {
-				Js5NetRequest var11 = (Js5NetRequest) field593.method1196(var6);
+				Js5NetRequest var11 = (Js5NetRequest) field593.find(var6);
 				if (var11 != null) {
 					return;
 				}
@@ -146,12 +146,12 @@ public class Js5Net {
 				field2212.put(var6, var12);
 				field3627++;
 			} else {
-				field2918.method1171(var12);
+				field2918.push(var12);
 				field3029.put(var6, var12);
 				field697++;
 			}
 		} else if (arg0) {
-			var10.method68();
+			var10.unlink2();
 			field2212.put(var6, var10);
 			field3627++;
 			field697--;
@@ -225,20 +225,20 @@ public class Js5Net {
 					Js5NetRequest var3 = (Js5NetRequest) field2212.search();
 					Packet var4 = new Packet(4);
 					var4.p1(1);
-					var4.method550((int) var3.field3324);
+					var4.method550((int) var3.key);
 					stream.write(var4.data, 4);
-					field2616.put(var3.field3324, var3);
+					field2616.put(var3.key, var3);
 					field1494++;
 					field3627--;
 				}
 				while (field1579 < 20 && field697 > 0) {
-					Js5NetRequest var5 = (Js5NetRequest) field2918.method1170();
+					Js5NetRequest var5 = (Js5NetRequest) field2918.next();
 					Packet var6 = new Packet(4);
 					var6.p1(0);
-					var6.method550((int) var5.field3324);
+					var6.method550((int) var5.key);
 					stream.write(var6.data, 4);
-					var5.method68();
-					field593.put(var5.field3324, var5);
+					var5.unlink2();
+					field593.put(var5.key, var5);
 					field1579++;
 					field697--;
 				}
@@ -279,10 +279,10 @@ public class Js5Net {
 							long var14 = (long) (var13 + (var12 << 16));
 							int var16 = field1354.g1();
 							int var17 = field1354.g4();
-							Js5NetRequest var18 = (Js5NetRequest) field2616.method1196(var14);
+							Js5NetRequest var18 = (Js5NetRequest) field2616.find(var14);
 							field219 = true;
 							if (var18 == null) {
-								var18 = (Js5NetRequest) field593.method1196(var14);
+								var18 = (Js5NetRequest) field593.find(var14);
 								field219 = false;
 							}
 							if (var18 == null) {
@@ -321,7 +321,7 @@ public class Js5Net {
 						field921 += var21;
 						field2529.pos += var21;
 						if (var20 == field2529.pos) {
-							if (field3372.field3324 == 16711935L) {
+							if (field3372.key == 16711935L) {
 								masterIndexBuffer = field2529;
 								for (int var24 = 0; var24 < 256; var24++) {
 									Js5Loader var25 = field2047[var24];
@@ -348,7 +348,7 @@ public class Js5Net {
 								}
 								crcErrorCount = 0;
 								ioErrorCount = 0;
-								field3372.field2589.method335(field219, (int) (field3372.field3324 & 0xFFFFL), (field3372.field3324 & 0xFF0000L) == 16711680L, field2529.data);
+								field3372.field2589.method335(field219, (int) (field3372.key & 0xFFFFL), (field3372.key & 0xFF0000L) == 16711680L, field2529.data);
 							}
 							field3372.unlink();
 							if (field219) {
@@ -383,9 +383,9 @@ public class Js5Net {
 	@ObfuscatedName("eb.a(III)V")
 	public static void method226(int arg0, int arg1) {
 		long var2 = (long) ((arg0 << 16) + arg1);
-		Js5NetRequest var4 = (Js5NetRequest) field3029.method1196(var2);
+		Js5NetRequest var4 = (Js5NetRequest) field3029.find(var2);
 		if (var4 != null) {
-			field2918.method1168(var4);
+			field2918.pushFront(var4);
 		}
 	}
 

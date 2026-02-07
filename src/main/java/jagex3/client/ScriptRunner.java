@@ -1003,7 +1003,7 @@ public class ScriptRunner {
 						if (var270 == 2702) {
 							var5--;
 							int var73 = field916[var5];
-							SubInterface var74 = (SubInterface) Client.field2571.method1196((long) var73);
+							SubInterface var74 = (SubInterface) Client.field2571.find((long) var73);
 							if (var74 == null) {
 								field916[var5++] = 0;
 							} else {
@@ -2182,7 +2182,7 @@ public class ScriptRunner {
 				if (Client.modewhere != 0) {
 					Client.addChat(field2808, 0, field3652);
 				}
-				JagException.report(var269, "CS2 - scr:" + var3.field3324 + " op:" + var8);
+				JagException.report(var269, "CS2 - scr:" + var3.key + " op:" + var8);
 			} else {
 				JagString var266 = JagString.method491(30);
 				var266.method243(field714).method243(var3.field3261);
@@ -2196,7 +2196,7 @@ public class ScriptRunner {
 				if (Client.modewhere != 0) {
 					Client.addChat(JagString.join(new JagString[]{field1675, var3.field3261}), 0, field3652);
 				}
-				JagException.report(var269, "CS2 - scr:" + var3.field3324 + " op:" + var8 + new String(var266.method255()));
+				JagException.report(var269, "CS2 - scr:" + var3.key + " op:" + var8 + new String(var266.method255()));
 			}
 		}
 	}

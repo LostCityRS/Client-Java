@@ -23,8 +23,8 @@ public final class Js5NetThread implements Runnable {
 		byte[] var3 = null;
 		LinkList var4 = field18;
 		synchronized (field18) {
-			for (Js5WorkerRequest var5 = (Js5WorkerRequest) field18.method1211(); var5 != null; var5 = (Js5WorkerRequest) field18.method1209()) {
-				if ((long) arg0 == var5.field3324 && arg2 == var5.field3245 && var5.field3243 == 0) {
+			for (Js5WorkerRequest var5 = (Js5WorkerRequest) field18.head(); var5 != null; var5 = (Js5WorkerRequest) field18.next()) {
+				if ((long) arg0 == var5.key && arg2 == var5.field3245 && var5.field3243 == 0) {
 					var3 = var5.field3249;
 					break;
 				}
@@ -44,25 +44,25 @@ public final class Js5NetThread implements Runnable {
 			LinkList var0 = field18;
 			Js5WorkerRequest var1;
 			synchronized (field18) {
-				var1 = (Js5WorkerRequest) field3649.method1215();
+				var1 = (Js5WorkerRequest) field3649.popFront();
 			}
 			if (var1 == null) {
 				return;
 			}
-			var1.field3254.method340(false, var1.field3249, (int) var1.field3324, var1.field3245);
+			var1.field3254.method340(false, var1.field3249, (int) var1.key, var1.field3245);
 		}
 	}
 
 	@ObfuscatedName("se.a(IZLtb;Lga;)V")
 	public static void method1002(int arg0, DataFile arg1, Js5Loader arg2) {
 		Js5WorkerRequest var3 = new Js5WorkerRequest();
-		var3.field3324 = arg0;
+		var3.key = arg0;
 		var3.field3254 = arg2;
 		var3.field3243 = 1;
 		var3.field3245 = arg1;
 		LinkList var4 = field18;
 		synchronized (field18) {
-			field18.method1214(var3);
+			field18.push(var3);
 		}
 		Js5Net.method875();
 	}
@@ -70,19 +70,19 @@ public final class Js5NetThread implements Runnable {
 	@ObfuscatedName("j.a(IIB)I")
 	public static int method478(int arg0, int arg1) {
 		long var2 = (long) ((arg1 << 16) + arg0);
-		return Js5Net.field3372 != null && var2 == Js5Net.field3372.field3324 ? Js5Net.field2529.pos * 99 / (Js5Net.field2529.data.length - Js5Net.field3372.field2587) + 1 : 0;
+		return Js5Net.field3372 != null && var2 == Js5Net.field3372.key ? Js5Net.field2529.pos * 99 / (Js5Net.field2529.data.length - Js5Net.field3372.field2587) + 1 : 0;
 	}
 
 	@ObfuscatedName("de.a(Ltb;I[BI)V")
 	public static void method190(DataFile arg0, int arg1, byte[] arg2) {
 		Js5WorkerRequest var3 = new Js5WorkerRequest();
 		var3.field3249 = arg2;
-		var3.field3324 = arg1;
+		var3.key = arg1;
 		var3.field3245 = arg0;
 		var3.field3243 = 0;
 		LinkList var4 = field18;
 		synchronized (field18) {
-			field18.method1214(var3);
+			field18.push(var3);
 		}
 		Js5Net.method875();
 	}
@@ -94,7 +94,7 @@ public final class Js5NetThread implements Runnable {
 				LinkList var1 = field18;
 				Js5WorkerRequest var2;
 				synchronized (field18) {
-					var2 = (Js5WorkerRequest) field18.method1211();
+					var2 = (Js5WorkerRequest) field18.head();
 				}
 				if (var2 == null) {
 					ThreadSleep.sleepPrecise(100L);
@@ -109,16 +109,16 @@ public final class Js5NetThread implements Runnable {
 					}
 				} else {
 					if (var2.field3243 == 0) {
-						var2.field3245.method1026((int) var2.field3324, var2.field3249.length, var2.field3249);
+						var2.field3245.method1026((int) var2.key, var2.field3249.length, var2.field3249);
 						LinkList var4 = field18;
 						synchronized (field18) {
 							var2.unlink();
 						}
 					} else if (var2.field3243 == 1) {
-						var2.field3249 = var2.field3245.method1024((int) var2.field3324);
+						var2.field3249 = var2.field3245.method1024((int) var2.key);
 						LinkList var3 = field18;
 						synchronized (field18) {
-							field3649.method1214(var2);
+							field3649.push(var2);
 						}
 					}
 					Object var5 = lock;
