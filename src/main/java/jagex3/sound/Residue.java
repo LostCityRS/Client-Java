@@ -5,17 +5,14 @@ import deob.ObfuscatedName;
 @ObfuscatedName("tf")
 public final class Residue {
 
-	@ObfuscatedName("tf.a")
-	public final int end = JagVorbis.readBits(24);
-
-	@ObfuscatedName("tf.b")
-	public final int[] residue_books;
+	@ObfuscatedName("tf.g")
+	public final int type = JagVorbis.readBits(16);
 
 	@ObfuscatedName("tf.c")
 	public final int begin = JagVorbis.readBits(24);
 
-	@ObfuscatedName("tf.d")
-	public final int classbook = JagVorbis.readBits(8);
+	@ObfuscatedName("tf.a")
+	public final int end = JagVorbis.readBits(24);
 
 	@ObfuscatedName("tf.e")
 	public final int partition_size = JagVorbis.readBits(24) + 1;
@@ -23,8 +20,11 @@ public final class Residue {
 	@ObfuscatedName("tf.f")
 	public final int classifications = JagVorbis.readBits(6) + 1;
 
-	@ObfuscatedName("tf.g")
-	public final int type = JagVorbis.readBits(16);
+	@ObfuscatedName("tf.d")
+	public final int classbook = JagVorbis.readBits(8);
+
+	@ObfuscatedName("tf.b")
+	public final int[] residue_books;
 
 	public Residue() {
 		int[] var1 = new int[this.classifications];
