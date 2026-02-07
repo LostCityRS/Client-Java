@@ -6,25 +6,25 @@ import deob.ObfuscatedName;
 public final class Sprite {
 
 	@ObfuscatedName("gb.d")
-	public int field1050;
+	public int x;
 
 	@ObfuscatedName("gb.e")
-	public int field1051;
+	public int minTileZ;
 
 	@ObfuscatedName("gb.g")
-	public int field1053;
+	public int z;
 
 	@ObfuscatedName("gb.h")
-	public int field1054;
+	public int minTileX;
 
 	@ObfuscatedName("gb.j")
-	public int field1056;
+	public int cycle;
 
 	@ObfuscatedName("gb.l")
 	public ModelSource model;
 
 	@ObfuscatedName("gb.m")
-	public int field1059 = 0;
+	public int typecode2 = 0;
 
 	@ObfuscatedName("gb.n")
 	public int field1060;
@@ -33,18 +33,18 @@ public final class Sprite {
 	public int field1061;
 
 	@ObfuscatedName("gb.p")
-	public int field1062;
+	public int distance;
 
 	@ObfuscatedName("gb.q")
-	public int field1063;
+	public int maxTileX;
 
 	@ObfuscatedName("gb.r")
-	public int field1064;
+	public int maxTileZ;
 
 	@ObfuscatedName("gb.s")
 	public int field1065;
 
 	@ObfuscatedName("gb.u")
-	public int field1067 = 0;
+	public int typecode = 0;
 
 }

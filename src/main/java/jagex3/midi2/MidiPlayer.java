@@ -479,7 +479,7 @@ public final class MidiPlayer extends PcmStream {
 				}
 				this.field312.put((long) var7, var8);
 			}
-			if (!var8.method595(arg1, var6.field1145, var5)) {
+			if (!var8.method595(arg1, var6.data, var5)) {
 				var4 = false;
 			}
 		}

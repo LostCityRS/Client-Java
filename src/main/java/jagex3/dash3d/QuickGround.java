@@ -15,7 +15,7 @@ public final class QuickGround {
 	public final int field3615;
 
 	@ObfuscatedName("we.n")
-	public final int field3621;
+	public final int colourNE;
 
 	@ObfuscatedName("we.w")
 	public final int field3630;
@@ -31,7 +31,7 @@ public final class QuickGround {
 		this.field3630 = arg0;
 		this.field3631 = arg4;
 		this.field3609 = arg1;
-		this.field3621 = arg2;
+		this.colourNE = arg2;
 		this.field3615 = arg3;
 		this.field3614 = arg6;
 	}

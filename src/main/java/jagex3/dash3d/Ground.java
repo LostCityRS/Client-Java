@@ -12,64 +12,64 @@ public final class Ground {
 	public final int field1079;
 
 	@ObfuscatedName("gd.c")
-	public final int[] field1080;
+	public final int[] faceVertexC;
 
 	@ObfuscatedName("gd.d")
 	public static int[][] defShapeF = new int[][] { { 0, 1, 2, 3, 0, 0, 1, 3 }, { 1, 1, 2, 3, 1, 0, 1, 3 }, { 0, 1, 2, 3, 1, 0, 1, 3 }, { 0, 0, 1, 2, 0, 0, 2, 4, 1, 0, 4, 3 }, { 0, 0, 1, 4, 0, 0, 4, 3, 1, 1, 2, 4 }, { 0, 0, 4, 3, 1, 0, 1, 2, 1, 0, 2, 4 }, { 0, 1, 2, 4, 1, 0, 1, 4, 1, 0, 4, 3 }, { 0, 4, 1, 2, 0, 4, 2, 5, 1, 0, 4, 5, 1, 0, 5, 3 }, { 0, 4, 1, 2, 0, 4, 2, 3, 0, 4, 3, 5, 1, 0, 4, 5 }, { 0, 0, 4, 5, 1, 4, 1, 2, 1, 4, 2, 3, 1, 4, 3, 5 }, { 0, 0, 1, 5, 0, 1, 4, 5, 0, 1, 2, 4, 1, 0, 5, 3, 1, 5, 4, 3, 1, 4, 2, 3 }, { 1, 0, 1, 5, 1, 1, 4, 5, 1, 1, 2, 4, 0, 0, 5, 3, 0, 5, 4, 3, 0, 4, 2, 3 }, { 1, 0, 5, 4, 1, 0, 1, 5, 0, 0, 4, 3, 0, 4, 5, 3, 0, 5, 2, 3, 0, 1, 2, 5 } };
 
 	@ObfuscatedName("gd.e")
-	public static int[] field1082 = new int[6];
+	public static int[] drawVertexX = new int[6];
 
 	@ObfuscatedName("gd.f")
-	public final int[] field1083;
+	public final int[] vertexY;
 
 	@ObfuscatedName("gd.g")
-	public static int[] field1084 = new int[6];
+	public static int[] drawTextureVertexX = new int[6];
 
 	@ObfuscatedName("gd.h")
 	public final int[] field1085;
 
 	@ObfuscatedName("gd.i")
-	public int[] field1086;
+	public int[] faceTexture;
 
 	@ObfuscatedName("gd.j")
 	public boolean flat = true;
 
 	@ObfuscatedName("gd.k")
-	public final int[] field1088;
+	public final int[] faceColourA;
 
 	@ObfuscatedName("gd.l")
-	public final int[] field1089;
+	public final int[] vertexX;
 
 	@ObfuscatedName("gd.m")
 	public final int field1090;
 
 	@ObfuscatedName("gd.n")
-	public static int[] field1091 = new int[6];
+	public static int[] drawTextureVertexZ = new int[6];
 
 	@ObfuscatedName("gd.o")
 	public final int[] field1092;
 
 	@ObfuscatedName("gd.p")
-	public static int[] field1093 = new int[6];
+	public static int[] drawTextureVertexY = new int[6];
 
 	@ObfuscatedName("gd.q")
-	public static int[] field1094 = new int[6];
+	public static int[] drawVertexY = new int[6];
 
 	@ObfuscatedName("gd.r")
 	public final int field1095;
 
 	@ObfuscatedName("gd.s")
-	public final int[] field1096;
+	public final int[] faceVertexA;
 
 	@ObfuscatedName("gd.t")
 	public static int[][] defShapeP = new int[][] { { 1, 3, 5, 7 }, { 1, 3, 5, 7 }, { 1, 3, 5, 7 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 6 }, { 1, 3, 5, 7, 2, 6 }, { 1, 3, 5, 7, 2, 8 }, { 1, 3, 5, 7, 2, 8 }, { 1, 3, 5, 7, 11, 12 }, { 1, 3, 5, 7, 11, 12 }, { 1, 3, 5, 7, 13, 14 } };
 
 	@ObfuscatedName("gd.u")
-	public final int[] field1098;
+	public final int[] vertexZ;
 
 	@ObfuscatedName("gd.v")
-	public final int[] field1099;
+	public final int[] faceVertexB;
 
 	public Ground(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
 		if (arg5 != arg6 || arg5 != arg7 || arg5 != arg8) {
@@ -81,9 +81,9 @@ public final class Ground {
 		this.field1095 = arg18;
 		int[] var20 = defShapeP[arg0];
 		int var21 = var20.length;
-		this.field1089 = new int[var21];
-		this.field1083 = new int[var21];
-		this.field1098 = new int[var21];
+		this.vertexX = new int[var21];
+		this.vertexY = new int[var21];
+		this.vertexZ = new int[var21];
 		int[] var22 = new int[var21];
 		int[] var23 = new int[var21];
 		int var24 = arg3 * 128;
@@ -201,22 +201,22 @@ public final class Ground {
 				var31 = arg12;
 				var32 = arg16;
 			}
-			this.field1089[var26] = var28;
-			this.field1083[var26] = var30;
-			this.field1098[var26] = var29;
+			this.vertexX[var26] = var28;
+			this.vertexY[var26] = var30;
+			this.vertexZ[var26] = var29;
 			var22[var26] = var31;
 			var23[var26] = var32;
 		}
 		int[] var33 = defShapeF[arg0];
 		int var34 = var33.length / 4;
-		this.field1096 = new int[var34];
-		this.field1099 = new int[var34];
-		this.field1080 = new int[var34];
-		this.field1088 = new int[var34];
+		this.faceVertexA = new int[var34];
+		this.faceVertexB = new int[var34];
+		this.faceVertexC = new int[var34];
+		this.faceColourA = new int[var34];
 		this.field1085 = new int[var34];
 		this.field1092 = new int[var34];
 		if (arg2 != -1) {
-			this.field1086 = new int[var34];
+			this.faceTexture = new int[var34];
 		}
 		int var35 = 0;
 		for (int var36 = 0; var36 < var34; var36++) {
@@ -234,22 +234,22 @@ public final class Ground {
 			if (var40 < 4) {
 				var40 = var40 - arg1 & 0x3;
 			}
-			this.field1096[var36] = var38;
-			this.field1099[var36] = var39;
-			this.field1080[var36] = var40;
+			this.faceVertexA[var36] = var38;
+			this.faceVertexB[var36] = var39;
+			this.faceVertexC[var36] = var40;
 			if (var37 == 0) {
-				this.field1088[var36] = var22[var38];
+				this.faceColourA[var36] = var22[var38];
 				this.field1085[var36] = var22[var39];
 				this.field1092[var36] = var22[var40];
-				if (this.field1086 != null) {
-					this.field1086[var36] = -1;
+				if (this.faceTexture != null) {
+					this.faceTexture[var36] = -1;
 				}
 			} else {
-				this.field1088[var36] = var23[var38];
+				this.faceColourA[var36] = var23[var38];
 				this.field1085[var36] = var23[var39];
 				this.field1092[var36] = var23[var40];
-				if (this.field1086 != null) {
-					this.field1086[var36] = arg2;
+				if (this.faceTexture != null) {
+					this.faceTexture[var36] = arg2;
 				}
 			}
 		}

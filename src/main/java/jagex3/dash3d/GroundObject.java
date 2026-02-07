@@ -15,16 +15,16 @@ public final class GroundObject {
 	public int field2034;
 
 	@ObfuscatedName("me.j")
-	public ModelSource field2037;
+	public ModelSource middleObj;
 
 	@ObfuscatedName("me.l")
-	public int field2039;
+	public int height;
 
 	@ObfuscatedName("me.m")
-	public ModelSource field2040;
+	public ModelSource topObj;
 
 	@ObfuscatedName("me.o")
-	public ModelSource field2042;
+	public ModelSource bottomObj;
 
 	@ObfuscatedName("me.s")
 	public int field2046;

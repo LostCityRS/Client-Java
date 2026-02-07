@@ -16,71 +16,71 @@ import java.net.Socket;
 public final class ClientStream implements Runnable {
 
 	@ObfuscatedName("b.c")
-	public boolean field134 = false;
+	public boolean ioerror = false;
 
 	@ObfuscatedName("b.e")
-	public boolean field136 = false;
+	public boolean dummy = false;
 
 	@ObfuscatedName("b.f")
-	public final Socket field137;
+	public final Socket socket;
 
 	@ObfuscatedName("b.h")
-	public byte[] field139;
+	public byte[] buf;
 
 	@ObfuscatedName("b.i")
-	public final SignLink field140;
+	public final SignLink signlink;
 
 	@ObfuscatedName("b.n")
-	public final OutputStream field145;
+	public final OutputStream out;
 
 	@ObfuscatedName("b.p")
-	public final InputStream field147;
+	public final InputStream in;
 
 	@ObfuscatedName("b.q")
-	public PrivilegedRequest field148;
+	public PrivilegedRequest writer;
 
 	@ObfuscatedName("b.u")
-	public int field152 = 0;
+	public int tnum = 0;
 
 	@ObfuscatedName("b.z")
-	public int field157 = 0;
+	public int tcyl = 0;
 
 	public ClientStream(Socket arg0, SignLink arg1) throws IOException {
-		this.field140 = arg1;
-		this.field137 = arg0;
-		this.field137.setSoTimeout(30000);
-		this.field137.setTcpNoDelay(true);
-		this.field147 = this.field137.getInputStream();
-		this.field145 = this.field137.getOutputStream();
+		this.signlink = arg1;
+		this.socket = arg0;
+		this.socket.setSoTimeout(30000);
+		this.socket.setTcpNoDelay(true);
+		this.in = this.socket.getInputStream();
+		this.out = this.socket.getOutputStream();
 	}
 
 	@ObfuscatedName("b.b(I)I")
 	public int read() throws IOException {
-		return this.field136 ? 0 : this.field147.read();
+		return this.dummy ? 0 : this.in.read();
 	}
 
 	@ObfuscatedName("b.a([BIIB)V")
 	public void write(byte[] arg0, int arg1) throws IOException {
-		if (this.field136) {
+		if (this.dummy) {
 			return;
 		}
-		if (this.field134) {
-			this.field134 = false;
+		if (this.ioerror) {
+			this.ioerror = false;
 			throw new IOException();
 		}
-		if (this.field139 == null) {
-			this.field139 = new byte[5000];
+		if (this.buf == null) {
+			this.buf = new byte[5000];
 		}
 		synchronized (this) {
 			for (int var4 = 0; var4 < arg1; var4++) {
-				this.field139[this.field152] = arg0[var4];
-				this.field152 = (this.field152 + 1) % 5000;
-				if (this.field152 == (this.field157 + 4900) % 5000) {
+				this.buf[this.tnum] = arg0[var4];
+				this.tnum = (this.tnum + 1) % 5000;
+				if (this.tnum == (this.tcyl + 4900) % 5000) {
 					throw new IOException();
 				}
 			}
-			if (this.field148 == null) {
-				this.field148 = this.field140.threadreq(3, this, 106);
+			if (this.writer == null) {
+				this.writer = this.signlink.threadreq(3, this, 106);
 			}
 			this.notifyAll();
 		}
@@ -88,11 +88,11 @@ public final class ClientStream implements Runnable {
 
 	@ObfuscatedName("b.a(II[BI)V")
 	public void read(int arg0, byte[] arg1, int arg2) throws IOException {
-		if (this.field136) {
+		if (this.dummy) {
 			return;
 		}
 		while (arg2 > 0) {
-			int var4 = this.field147.read(arg1, arg0, arg2);
+			int var4 = this.in.read(arg1, arg0, arg2);
 			if (var4 <= 0) {
 				throw new EOFException();
 			}
@@ -108,7 +108,7 @@ public final class ClientStream implements Runnable {
 
 	@ObfuscatedName("b.c(B)I")
 	public int available() throws IOException {
-		return this.field136 ? 0 : this.field147.available();
+		return this.dummy ? 0 : this.in.available();
 	}
 
 	@Override
@@ -119,8 +119,8 @@ public final class ClientStream implements Runnable {
 					int var2;
 					int var3;
 					synchronized (this) {
-						if (this.field152 == this.field157) {
-							if (this.field136) {
+						if (this.tnum == this.tcyl) {
+							if (this.dummy) {
 								break label80;
 							}
 							try {
@@ -128,44 +128,44 @@ public final class ClientStream implements Runnable {
 							} catch (InterruptedException var8) {
 							}
 						}
-						if (this.field152 < this.field157) {
-							var2 = 5000 - this.field157;
+						if (this.tnum < this.tcyl) {
+							var2 = 5000 - this.tcyl;
 						} else {
-							var2 = this.field152 - this.field157;
+							var2 = this.tnum - this.tcyl;
 						}
-						var3 = this.field157;
+						var3 = this.tcyl;
 					}
 					if (var2 <= 0) {
 						continue;
 					}
 					try {
-						this.field145.write(this.field139, var3, var2);
+						this.out.write(this.buf, var3, var2);
 					} catch (IOException var7) {
-						this.field134 = true;
+						this.ioerror = true;
 					}
-					this.field157 = (var2 + this.field157) % 5000;
+					this.tcyl = (var2 + this.tcyl) % 5000;
 					try {
-						if (this.field157 == this.field152) {
-							this.field145.flush();
+						if (this.tcyl == this.tnum) {
+							this.out.flush();
 						}
 					} catch (IOException var6) {
-						this.field134 = true;
+						this.ioerror = true;
 					}
 					continue;
 				}
 				try {
-					if (this.field147 != null) {
-						this.field147.close();
+					if (this.in != null) {
+						this.in.close();
 					}
-					if (this.field145 != null) {
-						this.field145.close();
+					if (this.out != null) {
+						this.out.close();
 					}
-					if (this.field137 != null) {
-						this.field137.close();
+					if (this.socket != null) {
+						this.socket.close();
 					}
 				} catch (IOException var5) {
 				}
-				this.field139 = null;
+				this.buf = null;
 				break;
 			}
 		} catch (Exception var10) {
@@ -175,24 +175,24 @@ public final class ClientStream implements Runnable {
 
 	@ObfuscatedName("b.c(I)V")
 	public void close() {
-		if (this.field136) {
+		if (this.dummy) {
 			return;
 		}
 		synchronized (this) {
-			this.field136 = true;
+			this.dummy = true;
 			this.notifyAll();
 		}
-		if (this.field148 != null) {
-			while (this.field148.status == 0) {
+		if (this.writer != null) {
+			while (this.writer.status == 0) {
 				ThreadSleep.sleepPrecise(1L);
 			}
-			if (this.field148.status == 1) {
+			if (this.writer.status == 1) {
 				try {
-					((Thread) this.field148.result).join();
+					((Thread) this.writer.result).join();
 				} catch (InterruptedException var2) {
 				}
 			}
 		}
-		this.field148 = null;
+		this.writer = null;
 	}
 }

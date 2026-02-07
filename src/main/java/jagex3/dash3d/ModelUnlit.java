@@ -167,7 +167,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.a(Lp;Lp;IIIZ)V")
-	public static void method848(ModelUnlit arg0, ModelUnlit arg1, int arg2, int arg3, int arg4, boolean arg5) {
+	public static void shareLight(ModelUnlit arg0, ModelUnlit arg1, int arg2, int arg3, int arg4, boolean arg5) {
 		arg0.method843();
 		arg0.calculateNormals();
 		arg1.method843();

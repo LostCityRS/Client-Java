@@ -170,8 +170,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
     public static void storeUID192(Packet arg0) {
         if (uidDat != null) {
             try {
-                uidDat.method1184(0L);
-                uidDat.method1175(arg0.data, 24, arg0.pos);
+                uidDat.seek(0L);
+                uidDat.write(arg0.data, 24, arg0.pos);
             } catch (Exception var1) {
             }
         }
@@ -183,7 +183,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 		byte[] var1 = new byte[24];
 		if (uidDat != null) {
 			try {
-				uidDat.method1184(0L);
+				uidDat.seek(0L);
 				int var2 = 0;
 				uidDat.method1182(var1);
 				while (var2 < 24 && var1[var2] == 0) {

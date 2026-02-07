@@ -124,7 +124,7 @@ public class ReflectionChecker {
 					arg0.p1(var1.field524[var5]);
 				}
 			}
-			arg0.method522(var4);
+			arg0.addcrc(var4);
 			arg0.method515(arg0.pos - var4);
 			var1.unlink();
 		}

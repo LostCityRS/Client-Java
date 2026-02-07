@@ -6,7 +6,8 @@ import deob.ObfuscatedName;
 public final class BZip2 {
 
 	@ObfuscatedName("rd.a")
-	public static BZip2State field2878 = new BZip2State();
+	public static BZip2State state = new BZip2State();
+
 	@ObfuscatedName("i.r")
 	public static int[] field1309;
 
@@ -342,21 +343,21 @@ public final class BZip2 {
 
 	@ObfuscatedName("rd.a([BI[BII)I")
 	public static int decompress(byte[] arg0, int arg1, byte[] arg2, int arg3) {
-		BZip2State var4 = field2878;
-		synchronized (field2878) {
-			field2878.field1935 = arg2;
-			field2878.field1923 = 9;
-			field2878.field1945 = arg0;
-			field2878.field1953 = 0;
-			field2878.field1932 = arg1;
-			field2878.field1934 = 0;
-			field2878.field1937 = 0;
-			field2878.field1956 = 0;
-			field2878.field1967 = 0;
-			method962(field2878);
-			int var5 = arg1 - field2878.field1932;
-			field2878.field1935 = null;
-			field2878.field1945 = null;
+		BZip2State var4 = state;
+		synchronized (state) {
+			state.field1935 = arg2;
+			state.field1923 = 9;
+			state.field1945 = arg0;
+			state.field1953 = 0;
+			state.field1932 = arg1;
+			state.field1934 = 0;
+			state.field1937 = 0;
+			state.field1956 = 0;
+			state.field1967 = 0;
+			method962(state);
+			int var5 = arg1 - state.field1932;
+			state.field1935 = null;
+			state.field1945 = null;
 			return var5;
 		}
 	}

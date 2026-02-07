@@ -45,19 +45,19 @@ public final class BufferedRandomAccessFile {
 
 	public BufferedRandomAccessFile(FileOnDisk arg0, int arg1, int arg2) throws IOException {
 		this.field3502 = arg0;
-		this.field3496 = this.field3501 = arg0.method622();
+		this.field3496 = this.field3501 = arg0.length();
 		this.field3482 = 0L;
 		this.field3477 = new byte[0];
 		this.field3488 = new byte[arg1];
 	}
 
 	@ObfuscatedName("vf.a(I)J")
-	public long method1174() {
+	public long length() {
 		return this.field3496;
 	}
 
 	@ObfuscatedName("vf.a([BBII)V")
-	public void method1175(byte[] arg0, int arg1, int arg2) throws IOException {
+	public void write(byte[] arg0, int arg1, int arg2) throws IOException {
 		try {
 			if ((long) arg1 + this.field3482 > this.field3496) {
 				this.field3496 = this.field3482 + (long) arg1;
@@ -76,10 +76,10 @@ public final class BufferedRandomAccessFile {
 			}
 			if (arg1 > this.field3477.length) {
 				if (this.field3484 != this.field3482) {
-					this.field3502.method620(this.field3482);
+					this.field3502.seek(this.field3482);
 					this.field3484 = this.field3482;
 				}
-				this.field3502.method623(arg0, arg2, arg1);
+				this.field3502.write(arg0, arg2, arg1);
 				long var5 = -1L;
 				this.field3484 += arg1;
 				long var7 = -1L;
@@ -119,17 +119,17 @@ public final class BufferedRandomAccessFile {
 
 	@ObfuscatedName("vf.b(I)Ljava/io/File;")
 	public File method1178() {
-		return this.field3502.method619();
+		return this.field3502.getFile();
 	}
 
 	@ObfuscatedName("vf.c(I)V")
 	public void close() throws IOException {
 		this.method1181();
-		this.field3502.method624();
+		this.field3502.close();
 	}
 
 	@ObfuscatedName("vf.a(II[BI)V")
-	public void method1180(int arg0, byte[] arg1, int arg2) throws IOException {
+	public void read(int arg0, byte[] arg1, int arg2) throws IOException {
 		try {
 			if (arg0 > arg1.length) {
 				throw new ArrayIndexOutOfBoundsException(arg0 - arg1.length);
@@ -152,10 +152,10 @@ public final class BufferedRandomAccessFile {
 				this.field3482 += var7;
 			}
 			if (arg0 > this.field3488.length) {
-				this.field3502.method620(this.field3482);
+				this.field3502.seek(this.field3482);
 				this.field3484 = this.field3482;
 				while (arg0 > 0) {
-					int var9 = this.field3502.method621(arg2, arg1, arg0);
+					int var9 = this.field3502.read(arg2, arg1, arg0);
 					if (var9 == -1) {
 						break;
 					}
@@ -224,10 +224,10 @@ public final class BufferedRandomAccessFile {
 		}
 		long var1 = -1L;
 		if (this.field3484 != this.field3483) {
-			this.field3502.method620(this.field3483);
+			this.field3502.seek(this.field3483);
 			this.field3484 = this.field3483;
 		}
-		this.field3502.method623(this.field3477, 0, this.field3498);
+		this.field3502.write(this.field3477, 0, this.field3498);
 		if (this.field3475 <= this.field3483 && this.field3483 < (long) this.field3480 + this.field3475) {
 			var1 = this.field3483;
 		} else if (this.field3475 >= this.field3483 && this.field3475 < this.field3483 + (long) this.field3498) {
@@ -253,19 +253,19 @@ public final class BufferedRandomAccessFile {
 
 	@ObfuscatedName("vf.a([BI)V")
 	public void method1182(byte[] arg0) throws IOException {
-		this.method1180(arg0.length, arg0, 0);
+		this.read(arg0.length, arg0, 0);
 	}
 
 	@ObfuscatedName("vf.a(B)V")
 	public void method1183() throws IOException {
 		this.field3480 = 0;
 		if (this.field3484 != this.field3482) {
-			this.field3502.method620(this.field3482);
+			this.field3502.seek(this.field3482);
 			this.field3484 = this.field3482;
 		}
 		this.field3475 = this.field3482;
 		while (this.field3480 < this.field3488.length) {
-			int var1 = this.field3502.method621(this.field3480, this.field3488, this.field3488.length - this.field3480);
+			int var1 = this.field3502.read(this.field3480, this.field3488, this.field3488.length - this.field3480);
 			if (var1 == -1) {
 				break;
 			}
@@ -275,7 +275,7 @@ public final class BufferedRandomAccessFile {
 	}
 
 	@ObfuscatedName("vf.a(BJ)V")
-	public void method1184(long arg0) throws IOException {
+	public void seek(long arg0) throws IOException {
 		if (arg0 < 0L) {
 			throw new IOException("Invalid seek to " + arg0 + " in file " + this.method1178());
 		}

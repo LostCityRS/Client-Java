@@ -163,7 +163,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.c(BI)I")
-	public final int method522(int arg0) {
+	public final int addcrc(int arg0) {
 		int var2 = getcrc(this.pos, arg0, this.data);
 		this.p4(var2);
 		return var2;
@@ -391,7 +391,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.d(IZ)V")
-	public final void method554(int arg0) {
+	public final void pMidiVarLen(int arg0) {
 		if ((arg0 & 0xFFFFFF80) != 0) {
 			if ((arg0 & 0xFFFFC000) != 0) {
 				if ((arg0 & 0xFFE00000) != 0) {

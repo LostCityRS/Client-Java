@@ -77,6 +77,35 @@ public final class BgSound extends Linkable {
 		field1466.clear();
 	}
 
+	@ObfuscatedName("kf.a(IILhd;III)V")
+	public static void method603(int arg0, LocType arg1, int arg2, int arg3, int arg4) {
+		BgSound var5 = new BgSound();
+		var5.field2276 = arg4 * 128;
+		var5.field2275 = arg1.bgsound_sound;
+		var5.field2256 = arg3 * 128;
+		var5.field2249 = arg1.bgsound_maxdelay;
+		var5.field2245 = arg1.bgsound_random;
+		int var6 = arg1.width;
+		var5.field2251 = arg2;
+		var5.field2260 = arg1.bgsound_range * 128;
+		var5.field2244 = arg1.bgsound_mindelay;
+		int var7 = arg1.length;
+		if (arg0 == 1 || arg0 == 3) {
+			var7 = arg1.width;
+			var6 = arg1.length;
+		}
+		var5.field2248 = (var7 + arg4) * 128;
+		var5.field2255 = (var6 + arg3) * 128;
+		if (arg1.multiloc != null) {
+			var5.field2250 = arg1;
+			var5.method767();
+		}
+		field1466.push(var5);
+		if (var5.field2245 != null) {
+			var5.field2269 = (int) ((double) (var5.field2249 - var5.field2244) * Math.random()) + var5.field2244;
+		}
+	}
+
 	@ObfuscatedName("oa.d(I)V")
 	public void method767() {
 		int var1 = this.field2275;

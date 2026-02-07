@@ -189,7 +189,7 @@ public final class MidiFile extends Linkable {
 			while (true) {
 				while (true) {
 					int var73 = arg0.method510();
-					var60.method554(var73);
+					var60.pMidiVarLen(var73);
 					int var74 = arg0.data[var38++] & 0xFF;
 					boolean var75 = var74 != var72;
 					var72 = var74 & 0xF;
@@ -358,7 +358,7 @@ public final class MidiFile extends Linkable {
 								var19 = new ByteArrayNode(new byte[128]);
 								this.field110.put((long) var18, var19);
 							}
-							var19.field1145[var16] = 1;
+							var19.data[var16] = 1;
 						}
 					}
 					var3.method951(var6);

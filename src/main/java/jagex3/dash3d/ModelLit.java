@@ -314,11 +314,11 @@ public final class ModelLit extends ModelSource {
 		int var2 = this.field2338[arg0];
 		int var3 = this.field2333[arg0];
 		int var4 = this.field2346[arg0];
-		Pix3D.field117 = field2376[arg0];
+		Pix3D.hclip = field2376[arg0];
 		if (this.field2336 == null) {
-			Pix3D.field128 = 0;
+			Pix3D.trans = 0;
 		} else {
-			Pix3D.field128 = this.field2336[arg0] & 0xFF;
+			Pix3D.trans = this.field2336[arg0] & 0xFF;
 		}
 		if (this.field2332 != null && this.field2332[arg0] != -1) {
 			int var6;
@@ -335,14 +335,14 @@ public final class ModelLit extends ModelSource {
 				var8 = this.field2326[var5];
 			}
 			if (this.field2325[arg0] == -1) {
-				Pix3D.method39(field2364[var2], field2364[var3], field2364[var4], field2372[var2], field2372[var3], field2372[var4], this.field2345[arg0], this.field2345[arg0], this.field2345[arg0], field2371[var6], field2371[var7], field2371[var8], field2356[var6], field2356[var7], field2356[var8], field2375[var6], field2375[var7], field2375[var8], this.field2332[arg0]);
+				Pix3D.textureTriangle(field2364[var2], field2364[var3], field2364[var4], field2372[var2], field2372[var3], field2372[var4], this.field2345[arg0], this.field2345[arg0], this.field2345[arg0], field2371[var6], field2371[var7], field2371[var8], field2356[var6], field2356[var7], field2356[var8], field2375[var6], field2375[var7], field2375[var8], this.field2332[arg0]);
 			} else {
-				Pix3D.method39(field2364[var2], field2364[var3], field2364[var4], field2372[var2], field2372[var3], field2372[var4], this.field2345[arg0], this.field2327[arg0], this.field2325[arg0], field2371[var6], field2371[var7], field2371[var8], field2356[var6], field2356[var7], field2356[var8], field2375[var6], field2375[var7], field2375[var8], this.field2332[arg0]);
+				Pix3D.textureTriangle(field2364[var2], field2364[var3], field2364[var4], field2372[var2], field2372[var3], field2372[var4], this.field2345[arg0], this.field2327[arg0], this.field2325[arg0], field2371[var6], field2371[var7], field2371[var8], field2356[var6], field2356[var7], field2356[var8], field2375[var6], field2375[var7], field2375[var8], this.field2332[arg0]);
 			}
 		} else if (this.field2325[arg0] == -1) {
-			Pix3D.method38(field2364[var2], field2364[var3], field2364[var4], field2372[var2], field2372[var3], field2372[var4], field2369[this.field2345[arg0]]);
+			Pix3D.flatTriangle(field2364[var2], field2364[var3], field2364[var4], field2372[var2], field2372[var3], field2372[var4], field2369[this.field2345[arg0]]);
 		} else {
-			Pix3D.method33(field2364[var2], field2364[var3], field2364[var4], field2372[var2], field2372[var3], field2372[var4], this.field2345[arg0], this.field2327[arg0], this.field2325[arg0]);
+			Pix3D.gouraudTriangle(field2364[var2], field2364[var3], field2364[var4], field2372[var2], field2372[var3], field2372[var4], this.field2345[arg0], this.field2327[arg0], this.field2325[arg0]);
 		}
 	}
 
@@ -1094,9 +1094,9 @@ public final class ModelLit extends ModelSource {
 		int var9 = field2375[var6];
 		int var10 = field2375[var7];
 		if (this.field2336 == null) {
-			Pix3D.field128 = 0;
+			Pix3D.trans = 0;
 		} else {
-			Pix3D.field128 = this.field2336[arg0] & 0xFF;
+			Pix3D.trans = this.field2336[arg0] & 0xFF;
 		}
 		if (var8 >= 50) {
 			field2360[0] = field2372[var5];
@@ -1169,10 +1169,10 @@ public final class ModelLit extends ModelSource {
 		int var29 = field2354[0];
 		int var30 = field2354[1];
 		int var31 = field2354[2];
-		Pix3D.field117 = false;
+		Pix3D.hclip = false;
 		if (var4 == 3) {
 			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.sizeX || var27 > Pix3D.sizeX || var28 > Pix3D.sizeX) {
-				Pix3D.field117 = true;
+				Pix3D.hclip = true;
 			}
 			if (this.field2332 != null && this.field2332[arg0] != -1) {
 				int var33;
@@ -1189,31 +1189,31 @@ public final class ModelLit extends ModelSource {
 					var35 = this.field2326[var32];
 				}
 				if (this.field2325[arg0] == -1) {
-					Pix3D.method39(var29, var30, var31, var26, var27, var28, this.field2345[arg0], this.field2345[arg0], this.field2345[arg0], field2371[var33], field2371[var34], field2371[var35], field2356[var33], field2356[var34], field2356[var35], field2375[var33], field2375[var34], field2375[var35], this.field2332[arg0]);
+					Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, this.field2345[arg0], this.field2345[arg0], this.field2345[arg0], field2371[var33], field2371[var34], field2371[var35], field2356[var33], field2356[var34], field2356[var35], field2375[var33], field2375[var34], field2375[var35], this.field2332[arg0]);
 				} else {
-					Pix3D.method39(var29, var30, var31, var26, var27, var28, field2365[0], field2365[1], field2365[2], field2371[var33], field2371[var34], field2371[var35], field2356[var33], field2356[var34], field2356[var35], field2375[var33], field2375[var34], field2375[var35], this.field2332[arg0]);
+					Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, field2365[0], field2365[1], field2365[2], field2371[var33], field2371[var34], field2371[var35], field2356[var33], field2356[var34], field2356[var35], field2375[var33], field2375[var34], field2375[var35], this.field2332[arg0]);
 				}
 			} else if (this.field2325[arg0] == -1) {
-				Pix3D.method38(var29, var30, var31, var26, var27, var28, field2369[this.field2345[arg0]]);
+				Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, field2369[this.field2345[arg0]]);
 			} else {
-				Pix3D.method33(var29, var30, var31, var26, var27, var28, field2365[0], field2365[1], field2365[2]);
+				Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, field2365[0], field2365[1], field2365[2]);
 			}
 		}
 		if (var4 != 4) {
 			return;
 		}
 		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.sizeX || var27 > Pix3D.sizeX || var28 > Pix3D.sizeX || field2360[3] < 0 || field2360[3] > Pix3D.sizeX) {
-			Pix3D.field117 = true;
+			Pix3D.hclip = true;
 		}
 		if (this.field2332 == null || this.field2332[arg0] == -1) {
 			if (this.field2325[arg0] == -1) {
 				int var36 = field2369[this.field2345[arg0]];
-				Pix3D.method38(var29, var30, var31, var26, var27, var28, var36);
-				Pix3D.method38(var29, var31, field2354[3], var26, var28, field2360[3], var36);
+				Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, var36);
+				Pix3D.flatTriangle(var29, var31, field2354[3], var26, var28, field2360[3], var36);
 				return;
 			}
-			Pix3D.method33(var29, var30, var31, var26, var27, var28, field2365[0], field2365[1], field2365[2]);
-			Pix3D.method33(var29, var31, field2354[3], var26, var28, field2360[3], field2365[0], field2365[2], field2365[3]);
+			Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, field2365[0], field2365[1], field2365[2]);
+			Pix3D.gouraudTriangle(var29, var31, field2354[3], var26, var28, field2360[3], field2365[0], field2365[2], field2365[3]);
 			return;
 		}
 		int var38;
@@ -1231,12 +1231,12 @@ public final class ModelLit extends ModelSource {
 		}
 		short var41 = this.field2332[arg0];
 		if (this.field2325[arg0] == -1) {
-			Pix3D.method39(var29, var30, var31, var26, var27, var28, this.field2345[arg0], this.field2345[arg0], this.field2345[arg0], field2371[var38], field2371[var39], field2371[var40], field2356[var38], field2356[var39], field2356[var40], field2375[var38], field2375[var39], field2375[var40], var41);
-			Pix3D.method39(var29, var31, field2354[3], var26, var28, field2360[3], this.field2345[arg0], this.field2345[arg0], this.field2345[arg0], field2371[var38], field2371[var39], field2371[var40], field2356[var38], field2356[var39], field2356[var40], field2375[var38], field2375[var39], field2375[var40], var41);
+			Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, this.field2345[arg0], this.field2345[arg0], this.field2345[arg0], field2371[var38], field2371[var39], field2371[var40], field2356[var38], field2356[var39], field2356[var40], field2375[var38], field2375[var39], field2375[var40], var41);
+			Pix3D.textureTriangle(var29, var31, field2354[3], var26, var28, field2360[3], this.field2345[arg0], this.field2345[arg0], this.field2345[arg0], field2371[var38], field2371[var39], field2371[var40], field2356[var38], field2356[var39], field2356[var40], field2375[var38], field2375[var39], field2375[var40], var41);
 			return;
 		}
-		Pix3D.method39(var29, var30, var31, var26, var27, var28, field2365[0], field2365[1], field2365[2], field2371[var38], field2371[var39], field2371[var40], field2356[var38], field2356[var39], field2356[var40], field2375[var38], field2375[var39], field2375[var40], var41);
-		Pix3D.method39(var29, var31, field2354[3], var26, var28, field2360[3], field2365[0], field2365[2], field2365[3], field2371[var38], field2371[var39], field2371[var40], field2356[var38], field2356[var39], field2356[var40], field2375[var38], field2375[var39], field2375[var40], var41);
+		Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, field2365[0], field2365[1], field2365[2], field2371[var38], field2371[var39], field2371[var40], field2356[var38], field2356[var39], field2356[var40], field2375[var38], field2375[var39], field2375[var40], var41);
+		Pix3D.textureTriangle(var29, var31, field2354[3], var26, var28, field2360[3], field2365[0], field2365[2], field2365[3], field2371[var38], field2371[var39], field2371[var40], field2356[var38], field2356[var39], field2356[var40], field2375[var38], field2375[var39], field2375[var40], var41);
 	}
 
 	@ObfuscatedName("od.a(I[IIII)V")

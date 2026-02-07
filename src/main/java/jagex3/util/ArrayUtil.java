@@ -72,7 +72,7 @@ public final class ArrayUtil {
 	}
 
 	@ObfuscatedName("mc.a(I[B)[B")
-	public static byte[] method668(byte[] arg0) {
+	public static byte[] copy(byte[] arg0) {
 		int var1 = arg0.length;
 		byte[] var2 = new byte[var1];
 		copy(arg0, 0, var2, 0, var1);

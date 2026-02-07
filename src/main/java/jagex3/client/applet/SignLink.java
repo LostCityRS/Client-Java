@@ -194,11 +194,11 @@ public final class SignLink implements Runnable {
 								this.field467 = this.field463 = var13;
 							} catch (Exception var19) {
 								try {
-									this.field454.method624();
+									this.field454.close();
 									for (int var17 = 0; var17 < arg2; var17++) {
-										this.field455[var17].method624();
+										this.field455[var17].close();
 									}
-									this.field460.method624();
+									this.field460.close();
 								} catch (Exception var18) {
 								}
 								this.field455 = null;
@@ -236,13 +236,13 @@ public final class SignLink implements Runnable {
 		}
 		if (this.field454 != null) {
 			try {
-				this.field454.method624();
+				this.field454.close();
 			} catch (IOException var6) {
 			}
 		}
 		if (this.field460 != null) {
 			try {
-				this.field460.method624();
+				this.field460.close();
 			} catch (IOException var5) {
 			}
 		}
@@ -250,7 +250,7 @@ public final class SignLink implements Runnable {
 			for (int var2 = 0; var2 < this.field455.length; var2++) {
 				if (this.field455[var2] != null) {
 					try {
-						this.field455[var2].method624();
+						this.field455[var2].close();
 					} catch (IOException var4) {
 					}
 				}
@@ -258,7 +258,7 @@ public final class SignLink implements Runnable {
 		}
 		if (this.field468 != null) {
 			try {
-				this.field468.method624();
+				this.field468.close();
 			} catch (IOException var3) {
 			}
 		}

@@ -7,7 +7,7 @@ import jagex3.util.ArrayUtil;
 public abstract class ByteArrayWrapper {
 
 	@ObfuscatedName("qd.vc")
-	public static boolean field2765 = false;
+	public static boolean useDirectBuffer = false;
 
 	@ObfuscatedName("tc.a(ZILjava/lang/Object;)[B")
 	public static byte[] unwrap(boolean arg0, Object arg1) {
@@ -15,10 +15,10 @@ public abstract class ByteArrayWrapper {
 			return null;
 		} else if (arg1 instanceof byte[]) {
 			byte[] var2 = (byte[]) arg1;
-			return arg0 ? ArrayUtil.method668(var2) : var2;
+			return arg0 ? ArrayUtil.copy(var2) : var2;
 		} else if (arg1 instanceof ByteArrayWrapper) {
 			ByteArrayWrapper var3 = (ByteArrayWrapper) arg1;
-			return var3.method61();
+			return var3.toByteArray();
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -29,21 +29,21 @@ public abstract class ByteArrayWrapper {
 		if (arg0 == null) {
 			return null;
 		}
-		if (arg0.length > 136 && !field2765) {
+		if (arg0.length > 136 && !useDirectBuffer) {
 			try {
 				ByteArrayWrapper var1 = (ByteArrayWrapper) Class.forName("jagex3.io.ByteBufferNode").getDeclaredConstructor().newInstance();
-				var1.method60(arg0);
+				var1.set(arg0);
 				return var1;
 			} catch (Throwable var2) {
-				field2765 = true;
+				useDirectBuffer = true;
 			}
 		}
 		return arg0;
 	}
 
 	@ObfuscatedName("sf.a([BB)V")
-	public abstract void method60(byte[] arg0);
+	public abstract void set(byte[] arg0);
 
 	@ObfuscatedName("sf.a(B)[B")
-	public abstract byte[] method61();
+	public abstract byte[] toByteArray();
 }

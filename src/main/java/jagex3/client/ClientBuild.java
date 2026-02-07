@@ -7,6 +7,7 @@ import jagex3.config.LocType;
 import jagex3.dash3d.*;
 import jagex3.io.BZip2State;
 import jagex3.io.Packet;
+import jagex3.sound.BgSound;
 
 @ObfuscatedName("lc")
 public final class ClientBuild {
@@ -201,7 +202,7 @@ public final class ClientBuild {
 			var20 += 256;
 		}
 		if (var8.hasBgSound()) {
-			World.method603(arg4, var8, arg6, arg7, arg1);
+			BgSound.method603(arg4, var8, arg6, arg7, arg1);
 		}
 		if (arg2 == 22) {
 			if (!Client.lowMem || var8.active != 0 || var8.blockwalk == 1 || var8.forcedecor) {
@@ -263,7 +264,7 @@ public final class ClientBuild {
 			} else {
 				var27 = new ClientLocAnim(arg3, 0, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
-			arg0.method1117(arg6, arg7, arg1, var19, var27, null, field3176[arg4], 0, var18, var20);
+			arg0.setWall(arg6, arg7, arg1, var19, var27, null, field3176[arg4], 0, var18, var20);
 			if (arg4 == 0) {
 				if (var8.shadow) {
 					field1985[arg6][arg7][arg1] = 50;
@@ -310,7 +311,7 @@ public final class ClientBuild {
 			} else {
 				var28 = new ClientLocAnim(arg3, 1, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
-			arg0.method1117(arg6, arg7, arg1, var19, var28, null, field2877[arg4], 0, var18, var20);
+			arg0.setWall(arg6, arg7, arg1, var19, var28, null, field2877[arg4], 0, var18, var20);
 			if (var8.shadow) {
 				if (arg4 == 0) {
 					field1985[arg6][arg7][arg1 + 1] = 50;
@@ -336,7 +337,7 @@ public final class ClientBuild {
 				var30 = new ClientLocAnim(arg3, 2, arg4 + 4, arg6, arg7, arg1, var8.anim, true, null);
 				var31 = new ClientLocAnim(arg3, 2, var29, arg6, arg7, arg1, var8.anim, true, null);
 			}
-			arg0.method1117(arg6, arg7, arg1, var19, var30, var31, field3176[arg4], field3176[var29], var18, var20);
+			arg0.setWall(arg6, arg7, arg1, var19, var30, var31, field3176[arg4], field3176[var29], var18, var20);
 			if (var8.occlude) {
 				if (arg4 == 0) {
 					field2426[arg6][arg7][arg1] |= 0x249;
@@ -365,7 +366,7 @@ public final class ClientBuild {
 			} else {
 				var32 = new ClientLocAnim(arg3, 3, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
-			arg0.method1117(arg6, arg7, arg1, var19, var32, null, field2877[arg4], 0, var18, var20);
+			arg0.setWall(arg6, arg7, arg1, var19, var32, null, field2877[arg4], 0, var18, var20);
 			if (var8.shadow) {
 				if (arg4 == 0) {
 					field1985[arg6][arg7][arg1 + 1] = 50;
@@ -541,7 +542,7 @@ public final class ClientBuild {
 			} else {
 				var25 = new ClientLocAnim(arg0, 0, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
-			arg2.method1117(arg7, arg5, arg3, var17, var25, null, field3176[arg8], 0, var20, var21);
+			arg2.setWall(arg7, arg5, arg3, var17, var25, null, field3176[arg8], 0, var20, var21);
 			if (var9.blockwalk != 0) {
 				arg6.addWall(var9.blockrange, arg1, arg5, arg3, arg8);
 			}
@@ -552,7 +553,7 @@ public final class ClientBuild {
 			} else {
 				var26 = new ClientLocAnim(arg0, 1, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
-			arg2.method1117(arg7, arg5, arg3, var17, var26, null, field2877[arg8], 0, var20, var21);
+			arg2.setWall(arg7, arg5, arg3, var17, var26, null, field2877[arg8], 0, var20, var21);
 			if (var9.blockwalk != 0) {
 				arg6.addWall(var9.blockrange, arg1, arg5, arg3, arg8);
 			}
@@ -567,7 +568,7 @@ public final class ClientBuild {
 				var28 = new ClientLocAnim(arg0, 2, arg8 + 4, arg4, arg5, arg3, var9.anim, true, null);
 				var29 = new ClientLocAnim(arg0, 2, var27, arg4, arg5, arg3, var9.anim, true, null);
 			}
-			arg2.method1117(arg7, arg5, arg3, var17, var28, var29, field3176[arg8], field3176[var27], var20, var21);
+			arg2.setWall(arg7, arg5, arg3, var17, var28, var29, field3176[arg8], field3176[var27], var20, var21);
 			if (var9.blockwalk != 0) {
 				arg6.addWall(var9.blockrange, arg1, arg5, arg3, arg8);
 			}
@@ -578,7 +579,7 @@ public final class ClientBuild {
 			} else {
 				var30 = new ClientLocAnim(arg0, 3, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
-			arg2.method1117(arg7, arg5, arg3, var17, var30, null, field2877[arg8], 0, var20, var21);
+			arg2.setWall(arg7, arg5, arg3, var17, var30, null, field2877[arg8], 0, var20, var21);
 			if (var9.blockwalk != 0) {
 				arg6.addWall(var9.blockrange, arg1, arg5, arg3, arg8);
 			}
@@ -1132,7 +1133,7 @@ public final class ClientBuild {
 									int var61;
 									if (var59 >= 0) {
 										var61 = -1;
-										var60 = Pix3D.field126.getAverageRgb(var59);
+										var60 = Pix3D.textureProvider.getAverageRgb(var59);
 									} else if (var58.rgb == 16711935) {
 										var59 = -1;
 										var60 = -2;
@@ -1229,7 +1230,7 @@ public final class ClientBuild {
 							if (var85 >= 8) {
 								int var86 = groundh[var81][var78][var79] - 240;
 								int var87 = groundh[var82][var78][var79];
-								World.method1145(var75, 1, var78 * 128, var78 * 128, var79 * 128, var80 * 128 + 128, var86, var87);
+								World.setOcclude(var75, 1, var78 * 128, var78 * 128, var79 * 128, var80 * 128 + 128, var86, var87);
 								for (int var88 = var82; var88 <= var81; var88++) {
 									for (int var89 = var79; var89 <= var80; var89++) {
 										field2426[var88][var78][var89] &= ~var72;
@@ -1268,7 +1269,7 @@ public final class ClientBuild {
 							if (var96 >= 8) {
 								int var97 = groundh[var93][var90][var77] - 240;
 								int var98 = groundh[var92][var90][var77];
-								World.method1145(var75, 2, var90 * 128, var91 * 128 + 128, var77 * 128, var77 * 128, var97, var98);
+								World.setOcclude(var75, 2, var90 * 128, var91 * 128 + 128, var77 * 128, var77 * 128, var97, var98);
 								for (int var99 = var92; var99 <= var93; var99++) {
 									for (int var100 = var90; var100 <= var91; var100++) {
 										field2426[var99][var100][var77] &= ~var73;
@@ -1304,7 +1305,7 @@ public final class ClientBuild {
 							}
 							if ((var102 + 1 - var103) * (var104 + 1 - var101) >= 4) {
 								int var107 = groundh[var76][var101][var103];
-								World.method1145(var75, 4, var101 * 128, var104 * 128 + 128, var103 * 128, var102 * 128 + 128, var107, var107);
+								World.setOcclude(var75, 4, var101 * 128, var104 * 128 + 128, var103 * 128, var102 * 128 + 128, var107, var107);
 								for (int var108 = var101; var108 <= var104; var108++) {
 									for (int var109 = var103; var109 <= var102; var109++) {
 										field2426[var76][var108][var109] &= ~var74;
@@ -1331,5 +1332,17 @@ public final class ClientBuild {
 	public static int method1005(int arg0, int arg1, int arg2, int arg3) {
 		int var4 = 65536 - Pix3D.cosTable[arg1 * 1024 / arg0] >> 1;
 		return (var4 * arg2 >> 16) + (arg3 * (65536 - var4) >> 16);
+	}
+
+	@ObfuscatedName("ed.a(BII)Z")
+	public static boolean changeLocAvailable(int arg0, int arg1) {
+		LocType var2 = LocType.list(arg0);
+		if (arg1 == 11) {
+			arg1 = 10;
+		}
+		if (arg1 >= 5 && arg1 <= 8) {
+			arg1 = 4;
+		}
+		return var2.checkModel(arg1);
 	}
 }

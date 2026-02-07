@@ -7,9 +7,9 @@ import jagex3.datastruct.Linkable;
 public final class ByteArrayNode extends Linkable {
 
 	@ObfuscatedName("ha.r")
-	public final byte[] field1145;
+	public final byte[] data;
 
 	public ByteArrayNode(byte[] arg0) {
-		this.field1145 = arg0;
+		this.data = arg0;
 	}
 }
