@@ -17,7 +17,7 @@ public final class MidiFile extends Linkable {
 	public final byte[] field111;
 
 	@ObfuscatedName("ae.a(Lea;II)Lae;")
-	public static MidiFile method25(Js5 arg0, int arg1, int arg2) {
+	public static MidiFile load(Js5 arg0, int arg1, int arg2) {
 		byte[] var3 = arg0.getFile(arg1, arg2);
 		return var3 == null ? null : new MidiFile(new Packet(var3));
 	}

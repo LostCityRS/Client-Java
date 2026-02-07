@@ -11,101 +11,101 @@ public class MidiManager {
 	@ObfuscatedName("wd.C")
 	public static int field3606;
 	@ObfuscatedName("oa.K")
-	public static int field2263 = 0;
+	public static int state = 0;
 	@ObfuscatedName("m.S")
-	public static MidiPlayer field1966;
+	public static MidiPlayer midiPlayer;
 	@ObfuscatedName("ee.Z")
-	public static Js5 field718;
+	public static Js5 midis;
 	@ObfuscatedName("ia.Q")
-	public static int field1321;
+	public static int pendingVolume;
 	@ObfuscatedName("sa.n")
 	public static int field2928;
 	@ObfuscatedName("rc.O")
-	public static boolean field2870;
+	public static boolean pendingLoop;
 	@ObfuscatedName("pa.s")
 	public static Js5 field2499;
 	@ObfuscatedName("o.Hb")
-	public static Js5 field2237;
+	public static Js5 patches;
 	@ObfuscatedName("oa.E")
 	public static Js5 field2257;
 	@ObfuscatedName("wf.b")
-	public static WaveCache field3644;
+	public static WaveCache loadingWaveCache;
 	@ObfuscatedName("sd.h")
-	public static MidiFile field2977;
+	public static MidiFile loadingMidiFile;
 
 	@ObfuscatedName("we.a(Z)V")
 	public static void updateFadeOut() {
 		try {
-			if (field2263 == 1) {
-				int var0 = field1966.method112();
-				if (var0 > 0 && field1966.method90()) {
+			if (state == 1) {
+				int var0 = midiPlayer.method112();
+				if (var0 > 0 && midiPlayer.method90()) {
 					int var1 = var0 - field1724;
 					if (var1 < 0) {
 						var1 = 0;
 					}
-					field1966.method89(var1);
+					midiPlayer.setGlobalVolume(var1);
 				} else {
-					field1966.method115();
-					field1966.method91();
-					field3644 = null;
-					if (field718 == null) {
-						field2263 = 0;
+					midiPlayer.method115();
+					midiPlayer.method91();
+					loadingWaveCache = null;
+					if (midis == null) {
+						state = 0;
 					} else {
-						field2263 = 2;
+						state = 2;
 					}
-					field2977 = null;
+					loadingMidiFile = null;
 				}
 			}
 		} catch (Exception var3) {
 			var3.printStackTrace();
-			field1966.method115();
-			field3644 = null;
-			field2263 = 0;
-			field2977 = null;
-			field718 = null;
+			midiPlayer.method115();
+			loadingWaveCache = null;
+			state = 0;
+			loadingMidiFile = null;
+			midis = null;
 		}
 	}
 
 	@ObfuscatedName("b.d(I)Z")
 	public static boolean updateLoading() {
 		try {
-			if (field2263 == 2) {
-				if (field2977 == null) {
-					field2977 = MidiFile.method25(field718, field3606, field2928);
-					if (field2977 == null) {
+			if (state == 2) {
+				if (loadingMidiFile == null) {
+					loadingMidiFile = MidiFile.load(midis, field3606, field2928);
+					if (loadingMidiFile == null) {
 						return false;
 					}
 				}
-				if (field3644 == null) {
-					field3644 = new WaveCache(field2499, field2257);
+				if (loadingWaveCache == null) {
+					loadingWaveCache = new WaveCache(field2499, field2257);
 				}
-				if (field1966.method96(field2237, field3644, field2977)) {
-					field1966.method121();
-					field1966.method89(field1321);
-					field1966.method84(field2870, field2977);
-					field3644 = null;
-					field2263 = 0;
-					field2977 = null;
-					field718 = null;
+				if (midiPlayer.loadAndQueuePatches(patches, loadingWaveCache, loadingMidiFile)) {
+					midiPlayer.freeWaveIds();
+					midiPlayer.setGlobalVolume(pendingVolume);
+					midiPlayer.start(pendingLoop, loadingMidiFile);
+					loadingWaveCache = null;
+					state = 0;
+					loadingMidiFile = null;
+					midis = null;
 					return true;
 				}
 			}
 		} catch (Exception var1) {
 			var1.printStackTrace();
-			field1966.method115();
-			field2977 = null;
-			field718 = null;
-			field3644 = null;
-			field2263 = 0;
+			midiPlayer.method115();
+			loadingMidiFile = null;
+			midis = null;
+			loadingWaveCache = null;
+			state = 0;
 		}
 		return false;
 	}
 
 	@ObfuscatedName("ge.a(Lea;Lea;Lc;BLea;)Z")
 	public static boolean init(Js5 arg0, Js5 arg1, MidiPlayer arg2, Js5 arg3) {
-		field1966 = arg2;
+		midiPlayer = arg2;
 		field2499 = arg0;
-		field2237 = arg3;
+		patches = arg3;
 		field2257 = arg1;
 		return true;
 	}
@@ -114,10 +114,10 @@ public class MidiManager {
 	public static void play(Js5 arg0, int arg1, int arg2, int arg3) {
 		field2928 = arg3;
 		field3606 = arg1;
-		field718 = arg0;
-		field1321 = arg2;
-		field2263 = 1;
-		field2870 = false;
+		midis = arg0;
+		pendingVolume = arg2;
+		state = 1;
+		pendingLoop = false;
 		field1724 = 10000;
 	}
 
@@ -130,19 +130,19 @@ public class MidiManager {
 
 	@ObfuscatedName("jf.a(Z)V")
 	public static void stop() {
-		field1966.method115();
-		field718 = null;
-		field2263 = 1;
+		midiPlayer.method115();
+		midis = null;
+		state = 1;
 	}
 
 	@ObfuscatedName("vf.a(IB)V")
 	public static void method1176() {
 		field1724 = 2;
 		field3606 = -1;
-		field2263 = 1;
-		field718 = null;
-		field1321 = 0;
-		field2870 = false;
+		state = 1;
+		midis = null;
+		pendingVolume = 0;
+		pendingLoop = false;
 		field2928 = -1;
 	}
 
@@ -156,25 +156,25 @@ public class MidiManager {
 	@ObfuscatedName("mc.a(ZLea;IZIII)V")
 	public static void method667(Js5 arg0, int arg1, int arg2, int arg3) {
 		field1724 = 2;
-		field718 = arg0;
+		midis = arg0;
 		field3606 = arg3;
-		field2870 = false;
-		field1321 = arg1;
-		field2263 = 1;
+		pendingLoop = false;
+		pendingVolume = arg1;
+		state = 1;
 		field2928 = arg2;
 	}
 
 	@ObfuscatedName("jf.a(IZ)V")
 	public static void method568(int arg0) {
-		if (field2263 == 0) {
-			field1966.method89(arg0);
+		if (state == 0) {
+			midiPlayer.setGlobalVolume(arg0);
 		} else {
-			field1321 = arg0;
+			pendingVolume = arg0;
 		}
 	}
 
 	@ObfuscatedName("e.e(I)Z")
 	public static boolean method197() {
-		return field2263 == 0 ? field1966.method90() : true;
+		return state == 0 ? midiPlayer.method90() : true;
 	}
 }

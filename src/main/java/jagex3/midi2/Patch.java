@@ -380,7 +380,7 @@ public final class Patch extends Linkable {
 	}
 
 	@ObfuscatedName("ia.a(ILea;I)Lkd;")
-	public static Patch method448(int arg0, Js5 arg1) {
+	public static Patch load(int arg0, Js5 arg1) {
 		byte[] var2 = arg1.getFile(arg0);
 		return var2 == null ? null : new Patch(var2);
 	}
@@ -397,7 +397,7 @@ public final class Patch extends Linkable {
 	}
 
 	@ObfuscatedName("kd.a(ILjf;[B[I)Z")
-	public boolean method595(WaveCache arg0, byte[] arg1, int[] arg2) {
+	public boolean loadWaves(WaveCache arg0, byte[] arg1, int[] arg2) {
 		boolean var4 = true;
 		Wave var5 = null;
 		int var6 = 0;
@@ -408,9 +408,9 @@ public final class Patch extends Linkable {
 					if (var6 != var8) {
 						var6 = var8--;
 						if ((var8 & 0x1) == 0) {
-							var5 = arg0.method566(var8 >> 2, arg2);
+							var5 = arg0.getJagFx(var8 >> 2, arg2);
 						} else {
-							var5 = arg0.method567(arg2, var8 >> 2);
+							var5 = arg0.getJagVorbis(arg2, var8 >> 2);
 						}
 						if (var5 == null) {
 							var4 = false;

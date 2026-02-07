@@ -7,25 +7,25 @@ import jagex3.util.MathTool;
 public final class CodeBook {
 
 	@ObfuscatedName("ef.a")
-	public float[][] field730;
+	public float[][] vqLookup;
 
 	@ObfuscatedName("ef.b")
-	public int[] field731;
+	public int[] multiplicands;
 
 	@ObfuscatedName("ef.c")
-	public final int[] field732;
+	public final int[] lengths;
 
 	@ObfuscatedName("ef.d")
-	public final int field733;
+	public final int dimensions;
 
 	@ObfuscatedName("ef.e")
-	public final int field734;
+	public final int entries;
 
 	@ObfuscatedName("ef.f")
-	public int[] field735;
+	public int[] huffmanTree;
 
 	@ObfuscatedName("ef.a(II)I")
-	public static int method296(int arg0, int arg1) {
+	public static int lookup1Values(int arg0, int arg1) {
 		int var2;
 		for (var2 = (int) Math.pow((double) arg0, 1.0D / (double) arg1) + 1; method15(var2, arg1) > arg0; var2--) {
 		}
@@ -34,56 +34,56 @@ public final class CodeBook {
 
 	public CodeBook() {
 		JagVorbis.readBits(24);
-		this.field733 = JagVorbis.readBits(16);
-		this.field734 = JagVorbis.readBits(24);
-		this.field732 = new int[this.field734];
+		this.dimensions = JagVorbis.readBits(16);
+		this.entries = JagVorbis.readBits(24);
+		this.lengths = new int[this.entries];
 		boolean var1 = JagVorbis.readBit() != 0;
 		if (var1) {
 			int var2 = 0;
 			int var3 = JagVorbis.readBits(5) + 1;
-			while (var2 < this.field734) {
-				int var4 = JagVorbis.readBits(MathTool.bitsRequired(this.field734 - var2));
+			while (var2 < this.entries) {
+				int var4 = JagVorbis.readBits(MathTool.bitsRequired(this.entries - var2));
 				for (int var5 = 0; var5 < var4; var5++) {
-					this.field732[var2++] = var3;
+					this.lengths[var2++] = var3;
 				}
 				var3++;
 			}
 		} else {
 			boolean var6 = JagVorbis.readBit() != 0;
-			for (int var7 = 0; var7 < this.field734; var7++) {
+			for (int var7 = 0; var7 < this.entries; var7++) {
 				if (var6 && JagVorbis.readBit() == 0) {
-					this.field732[var7] = 0;
+					this.lengths[var7] = 0;
 				} else {
-					this.field732[var7] = JagVorbis.readBits(5) + 1;
+					this.lengths[var7] = JagVorbis.readBits(5) + 1;
 				}
 			}
 		}
-		this.method298();
+		this.prepareHuffman();
 		int var8 = JagVorbis.readBits(4);
 		if (var8 > 0) {
-			float var9 = JagVorbis.method737(JagVorbis.readBits(32));
-			float var10 = JagVorbis.method737(JagVorbis.readBits(32));
+			float var9 = JagVorbis.float32Unpack(JagVorbis.readBits(32));
+			float var10 = JagVorbis.float32Unpack(JagVorbis.readBits(32));
 			int var11 = JagVorbis.readBits(4) + 1;
 			boolean var12 = JagVorbis.readBit() != 0;
 			int var13;
 			if (var8 == 1) {
-				var13 = method296(this.field734, this.field733);
+				var13 = lookup1Values(this.entries, this.dimensions);
 			} else {
-				var13 = this.field734 * this.field733;
+				var13 = this.entries * this.dimensions;
 			}
-			this.field731 = new int[var13];
+			this.multiplicands = new int[var13];
 			for (int var14 = 0; var14 < var13; var14++) {
-				this.field731[var14] = JagVorbis.readBits(var11);
+				this.multiplicands[var14] = JagVorbis.readBits(var11);
 			}
-			this.field730 = new float[this.field734][this.field733];
+			this.vqLookup = new float[this.entries][this.dimensions];
 			if (var8 == 1) {
-				for (int var15 = 0; var15 < this.field734; var15++) {
+				for (int var15 = 0; var15 < this.entries; var15++) {
 					float var16 = 0.0F;
 					int var17 = 1;
-					for (int var18 = 0; var18 < this.field733; var18++) {
+					for (int var18 = 0; var18 < this.dimensions; var18++) {
 						int var19 = var15 / var17 % var13;
-						float var20 = (float) this.field731[var19] * var10 + var9 + var16;
-						this.field730[var15][var18] = var20;
+						float var20 = (float) this.multiplicands[var19] * var10 + var9 + var16;
+						this.vqLookup[var15][var18] = var20;
 						if (var12) {
 							var16 = var20;
 						}
@@ -92,12 +92,12 @@ public final class CodeBook {
 				}
 				return;
 			}
-			for (int var21 = 0; var21 < this.field734; var21++) {
+			for (int var21 = 0; var21 < this.entries; var21++) {
 				float var22 = 0.0F;
-				int var23 = var21 * this.field733;
-				for (int var24 = 0; var24 < this.field733; var24++) {
-					float var25 = (float) this.field731[var23] * var10 + var9 + var22;
-					this.field730[var21][var24] = var25;
+				int var23 = var21 * this.dimensions;
+				for (int var24 = 0; var24 < this.dimensions; var24++) {
+					float var25 = (float) this.multiplicands[var23] * var10 + var9 + var22;
+					this.vqLookup[var21][var24] = var25;
 					if (var12) {
 						var22 = var25;
 					}
@@ -123,24 +123,24 @@ public final class CodeBook {
 	}
 
 	@ObfuscatedName("ef.a()[F")
-	public float[] method295() {
-		return this.field730[this.method297()];
+	public float[] decodeVQ() {
+		return this.vqLookup[this.decodeScalar()];
 	}
 
 	@ObfuscatedName("ef.b()I")
-	public int method297() {
+	public int decodeScalar() {
 		int var1;
-		for (var1 = 0; this.field735[var1] >= 0; var1 = JagVorbis.readBit() == 0 ? var1 + 1 : this.field735[var1]) {
+		for (var1 = 0; this.huffmanTree[var1] >= 0; var1 = JagVorbis.readBit() == 0 ? var1 + 1 : this.huffmanTree[var1]) {
 		}
-		return ~this.field735[var1];
+		return ~this.huffmanTree[var1];
 	}
 
 	@ObfuscatedName("ef.c()V")
-	public void method298() {
-		int[] var1 = new int[this.field734];
+	public void prepareHuffman() {
+		int[] var1 = new int[this.entries];
 		int[] var2 = new int[33];
-		for (int var3 = 0; var3 < this.field734; var3++) {
-			int var4 = this.field732[var3];
+		for (int var3 = 0; var3 < this.entries; var3++) {
+			int var4 = this.lengths[var3];
 			if (var4 != 0) {
 				int var5 = 0x1 << 32 - var4;
 				int var6 = var2[var4];
@@ -172,10 +172,10 @@ public final class CodeBook {
 				}
 			}
 		}
-		this.field735 = new int[8];
+		this.huffmanTree = new int[8];
 		int var13 = 0;
-		for (int var14 = 0; var14 < this.field734; var14++) {
-			int var15 = this.field732[var14];
+		for (int var14 = 0; var14 < this.entries; var14++) {
+			int var15 = this.lengths[var14];
 			if (var15 != 0) {
 				int var16 = var1[var14];
 				int var17 = 0;
@@ -184,20 +184,20 @@ public final class CodeBook {
 					if ((var16 & var19) == 0) {
 						var17++;
 					} else {
-						if (this.field735[var17] == 0) {
-							this.field735[var17] = var13;
+						if (this.huffmanTree[var17] == 0) {
+							this.huffmanTree[var17] = var13;
 						}
-						var17 = this.field735[var17];
+						var17 = this.huffmanTree[var17];
 					}
-					if (var17 >= this.field735.length) {
-						int[] var20 = new int[this.field735.length * 2];
-						for (int var21 = 0; var21 < this.field735.length; var21++) {
-							var20[var21] = this.field735[var21];
+					if (var17 >= this.huffmanTree.length) {
+						int[] var20 = new int[this.huffmanTree.length * 2];
+						for (int var21 = 0; var21 < this.huffmanTree.length; var21++) {
+							var20[var21] = this.huffmanTree[var21];
 						}
-						this.field735 = var20;
+						this.huffmanTree = var20;
 					}
 				}
-				this.field735[var17] = ~var14;
+				this.huffmanTree[var17] = ~var14;
 				if (var17 >= var13) {
 					var13 = var17 + 1;
 				}

@@ -16,7 +16,7 @@ public final class JagVorbis extends Linkable {
 	public int field2127;
 
 	@ObfuscatedName("nc.t")
-	public static Floor[] field2128;
+	public static Floor[] floor_config;
 
 	@ObfuscatedName("nc.u")
 	public static int[] field2129;
@@ -28,7 +28,7 @@ public final class JagVorbis extends Linkable {
 	public static float[] field2131;
 
 	@ObfuscatedName("nc.M")
-	public static boolean field2147 = false;
+	public static boolean gotHeaders = false;
 
 	@ObfuscatedName("nc.C")
 	public int field2137;
@@ -40,25 +40,25 @@ public final class JagVorbis extends Linkable {
 	public int field2139;
 
 	@ObfuscatedName("nc.I")
-	public static int field2143;
+	public static int bytePos;
 
 	@ObfuscatedName("nc.J")
 	public int field2144;
 
 	@ObfuscatedName("nc.L")
-	public static int field2146;
+	public static int blocksize1;
 
 	@ObfuscatedName("nc.R")
 	public int field2152;
 
 	@ObfuscatedName("nc.S")
-	public static int field2153;
+	public static int blocksize0;
 
 	@ObfuscatedName("nc.T")
 	public int field2154;
 
 	@ObfuscatedName("nc.Y")
-	public static int field2159;
+	public static int bitPos;
 
 	@ObfuscatedName("nc.y")
 	public boolean field2133;
@@ -67,7 +67,7 @@ public final class JagVorbis extends Linkable {
 	public boolean field2135;
 
 	@ObfuscatedName("nc.U")
-	public static byte[] field2155;
+	public static byte[] staticUnpacker;
 
 	@ObfuscatedName("nc.W")
 	public byte[] field2157;
@@ -76,7 +76,7 @@ public final class JagVorbis extends Linkable {
 	public float[] field2136;
 
 	@ObfuscatedName("nc.F")
-	public static float[] field2140;
+	public static float[] workBuffer;
 
 	@ObfuscatedName("nc.G")
 	public static float[] field2141;
@@ -97,28 +97,28 @@ public final class JagVorbis extends Linkable {
 	public static int[] field2134;
 
 	@ObfuscatedName("nc.V")
-	public static int[] field2156;
+	public static int[] mapping;
 
 	@ObfuscatedName("nc.x")
-	public static Residue[] field2132;
+	public static Residue[] residue_config;
 
 	@ObfuscatedName("nc.K")
-	public static Mapping[] field2145;
+	public static Mapping[] mapping_config;
 
 	@ObfuscatedName("nc.N")
-	public static CodeBook[] field2148;
+	public static CodeBook[] codebooks;
 
 	@ObfuscatedName("nc.Q")
-	public static boolean[] field2151;
+	public static boolean[] blockflag;
 
 	@ObfuscatedName("nc.b([B)V")
 	public static void processHeaders(byte[] arg0) {
 		setBitPos(arg0);
-		field2153 = 0x1 << readBits(4);
-		field2146 = 0x1 << readBits(4);
-		field2140 = new float[field2146];
+		blocksize0 = 0x1 << readBits(4);
+		blocksize1 = 0x1 << readBits(4);
+		workBuffer = new float[blocksize1];
 		for (int var1 = 0; var1 < 2; var1++) {
-			int var2 = var1 == 0 ? field2153 : field2146;
+			int var2 = var1 == 0 ? blocksize0 : blocksize1;
 			int var3 = var2 >> 1;
 			int var4 = var2 >> 2;
 			int var5 = var2 >> 3;
@@ -155,72 +155,72 @@ public final class JagVorbis extends Linkable {
 			}
 		}
 		int var15 = readBits(8) + 1;
-		field2148 = new CodeBook[var15];
+		codebooks = new CodeBook[var15];
 		for (int var16 = 0; var16 < var15; var16++) {
-			field2148[var16] = new CodeBook();
+			codebooks[var16] = new CodeBook();
 		}
 		int var17 = readBits(6) + 1;
 		for (int var18 = 0; var18 < var17; var18++) {
 			readBits(16);
 		}
 		int var19 = readBits(6) + 1;
-		field2128 = new Floor[var19];
+		floor_config = new Floor[var19];
 		for (int var20 = 0; var20 < var19; var20++) {
-			field2128[var20] = new Floor();
+			floor_config[var20] = new Floor();
 		}
 		int var21 = readBits(6) + 1;
-		field2132 = new Residue[var21];
+		residue_config = new Residue[var21];
 		for (int var22 = 0; var22 < var21; var22++) {
-			field2132[var22] = new Residue();
+			residue_config[var22] = new Residue();
 		}
 		int var23 = readBits(6) + 1;
-		field2145 = new Mapping[var23];
+		mapping_config = new Mapping[var23];
 		for (int var24 = 0; var24 < var23; var24++) {
-			field2145[var24] = new Mapping();
+			mapping_config[var24] = new Mapping();
 		}
 		int var25 = readBits(6) + 1;
-		field2151 = new boolean[var25];
-		field2156 = new int[var25];
+		blockflag = new boolean[var25];
+		mapping = new int[var25];
 		for (int var26 = 0; var26 < var25; var26++) {
-			field2151[var26] = readBit() != 0;
+			blockflag[var26] = readBit() != 0;
 			readBits(16);
 			readBits(16);
-			field2156[var26] = readBits(8);
+			mapping[var26] = readBits(8);
 		}
 	}
 
 	@ObfuscatedName("nc.a()I")
 	public static int readBit() {
-		int var0 = field2155[field2143] >> field2159 & 0x1;
-		field2159++;
-		field2143 += field2159 >> 3;
-		field2159 &= 0x7;
+		int var0 = staticUnpacker[bytePos] >> bitPos & 0x1;
+		bitPos++;
+		bytePos += bitPos >> 3;
+		bitPos &= 0x7;
 		return var0;
 	}
 
 	@ObfuscatedName("nc.a(Lea;)Z")
-	public static boolean method734(Js5 arg0) {
-		if (!field2147) {
+	public static boolean getHeaders(Js5 arg0) {
+		if (!gotHeaders) {
 			byte[] var1 = arg0.getFile(0, 0);
 			if (var1 == null) {
 				return false;
 			}
 			processHeaders(var1);
-			field2147 = true;
+			gotHeaders = true;
 		}
 		return true;
 	}
 
 	@ObfuscatedName("nc.a([BI)V")
 	public static void setBitPos(byte[] arg0) {
-		field2155 = arg0;
-		field2143 = 0;
-		field2159 = 0;
+		staticUnpacker = arg0;
+		bytePos = 0;
+		bitPos = 0;
 	}
 
 	@ObfuscatedName("nc.a(Lea;II)Lnc;")
-	public static JagVorbis method736(Js5 arg0, int arg1, int arg2) {
-		if (method734(arg0)) {
+	public static JagVorbis load(Js5 arg0, int arg1, int arg2) {
+		if (getHeaders(arg0)) {
 			byte[] var3 = arg0.getFile(arg1, arg2);
 			return var3 == null ? null : new JagVorbis(var3);
 		} else {
@@ -230,7 +230,7 @@ public final class JagVorbis extends Linkable {
 	}
 
 	@ObfuscatedName("nc.e(I)F")
-	public static float method737(int arg0) {
+	public static float float32Unpack(int arg0) {
 		int var1 = arg0 & 0x1FFFFF;
 		int var2 = arg0 & Integer.MIN_VALUE;
 		int var3 = arg0 >> 21 & 0x3FF;
@@ -244,19 +244,19 @@ public final class JagVorbis extends Linkable {
 	public static int readBits(int arg0) {
 		int var1 = 0;
 		int var2 = 0;
-		while (arg0 >= 8 - field2159) {
-			int var3 = 8 - field2159;
+		while (arg0 >= 8 - bitPos) {
+			int var3 = 8 - bitPos;
 			int var4 = (0x1 << var3) - 1;
-			var1 += (field2155[field2143] >> field2159 & var4) << var2;
-			field2159 = 0;
-			field2143++;
+			var1 += (staticUnpacker[bytePos] >> bitPos & var4) << var2;
+			bitPos = 0;
+			bytePos++;
 			var2 += var3;
 			arg0 -= var3;
 		}
 		if (arg0 > 0) {
 			int var5 = (0x1 << arg0) - 1;
-			var1 += (field2155[field2143] >> field2159 & var5) << var2;
-			field2159 += arg0;
+			var1 += (staticUnpacker[bytePos] >> bitPos & var5) << var2;
+			bitPos += arg0;
 		}
 		return var1;
 	}
@@ -295,9 +295,9 @@ public final class JagVorbis extends Linkable {
 	public float[] method730(int arg0) {
 		setBitPos(this.field2126[arg0]);
 		readBit();
-		int var2 = readBits(MathTool.bitsRequired(field2156.length - 1));
-		boolean var3 = field2151[var2];
-		int var4 = var3 ? field2146 : field2153;
+		int var2 = readBits(MathTool.bitsRequired(mapping.length - 1));
+		boolean var3 = blockflag[var2];
+		int var4 = var3 ? blocksize1 : blocksize0;
 		boolean var5 = false;
 		boolean var6 = false;
 		if (var3) {
@@ -309,9 +309,9 @@ public final class JagVorbis extends Linkable {
 		int var9;
 		int var10;
 		if (var3 && !var5) {
-			var8 = (var4 >> 2) - (field2153 >> 2);
-			var9 = (var4 >> 2) + (field2153 >> 2);
-			var10 = field2153 >> 1;
+			var8 = (var4 >> 2) - (blocksize0 >> 2);
+			var9 = (var4 >> 2) + (blocksize0 >> 2);
+			var10 = blocksize0 >> 1;
 		} else {
 			var8 = 0;
 			var9 = var7;
@@ -321,37 +321,37 @@ public final class JagVorbis extends Linkable {
 		int var12;
 		int var13;
 		if (var3 && !var6) {
-			var11 = var4 - (var4 >> 2) - (field2153 >> 2);
-			var12 = var4 + (field2153 >> 2) - (var4 >> 2);
-			var13 = field2153 >> 1;
+			var11 = var4 - (var4 >> 2) - (blocksize0 >> 2);
+			var12 = var4 + (blocksize0 >> 2) - (var4 >> 2);
+			var13 = blocksize0 >> 1;
 		} else {
 			var11 = var7;
 			var12 = var4;
 			var13 = var4 >> 1;
 		}
-		Mapping var14 = field2145[field2156[var2]];
-		int var15 = var14.field3554;
-		int var16 = var14.field3553[var15];
-		boolean var17 = !field2128[var16].method613();
-		for (int var18 = 0; var18 < var14.field3552; var18++) {
-			Residue var19 = field2132[var14.field3551[var18]];
-			float[] var20 = field2140;
-			var19.method1042(var20, var4 >> 1, var17);
+		Mapping var14 = mapping_config[mapping[var2]];
+		int var15 = var14.mux;
+		int var16 = var14.submap_floor[var15];
+		boolean var17 = !floor_config[var16].packetDecode();
+		for (int var18 = 0; var18 < var14.submaps; var18++) {
+			Residue var19 = residue_config[var14.submap_residue[var18]];
+			float[] var20 = workBuffer;
+			var19.packetDecode(var20, var4 >> 1, var17);
 		}
 		if (!var17) {
-			int var21 = var14.field3554;
-			int var22 = var14.field3553[var21];
-			field2128[var22].method606(field2140, var4 >> 1);
+			int var21 = var14.mux;
+			int var22 = var14.submap_floor[var21];
+			floor_config[var22].synthMul(workBuffer, var4 >> 1);
 		}
 		if (var17) {
 			for (int var23 = var4 >> 1; var23 < var4; var23++) {
-				field2140[var23] = 0.0F;
+				workBuffer[var23] = 0.0F;
 			}
 		} else {
 			int var24 = var4 >> 1;
 			int var25 = var4 >> 2;
 			int var26 = var4 >> 3;
-			float[] var27 = field2140;
+			float[] var27 = workBuffer;
 			for (int var28 = 0; var28 < var24; var28++) {
 				var27[var28] *= 0.5F;
 			}
@@ -464,11 +464,11 @@ public final class JagVorbis extends Linkable {
 			}
 			for (int var85 = var8; var85 < var9; var85++) {
 				float var86 = (float) Math.sin(((double) (var85 - var8) + 0.5D) / (double) var10 * 0.5D * 3.141592653589793D);
-				field2140[var85] *= (float) Math.sin((double) var86 * 1.5707963267948966D * (double) var86);
+				workBuffer[var85] *= (float) Math.sin((double) var86 * 1.5707963267948966D * (double) var86);
 			}
 			for (int var87 = var11; var87 < var12; var87++) {
 				float var88 = (float) Math.sin(((double) (var87 - var11) + 0.5D) / (double) var13 * 0.5D * 3.141592653589793D + 1.5707963267948966D);
-				field2140[var87] *= (float) Math.sin((double) var88 * 1.5707963267948966D * (double) var88);
+				workBuffer[var87] *= (float) Math.sin((double) var88 * 1.5707963267948966D * (double) var88);
 			}
 		}
 		float[] var89 = null;
@@ -484,13 +484,13 @@ public final class JagVorbis extends Linkable {
 			if (!var17) {
 				for (int var93 = var8; var93 < var4 >> 1; var93++) {
 					int var94 = var89.length + var93 - (var4 >> 1);
-					var89[var94] += field2140[var93];
+					var89[var94] += workBuffer[var93];
 				}
 			}
 		}
 		float[] var95 = this.field2136;
-		this.field2136 = field2140;
-		field2140 = var95;
+		this.field2136 = workBuffer;
+		workBuffer = var95;
 		this.field2137 = var4;
 		this.field2130 = var12 - (var4 >> 1);
 		this.field2135 = var17;
@@ -498,13 +498,13 @@ public final class JagVorbis extends Linkable {
 	}
 
 	@ObfuscatedName("nc.a([I)Lib;")
-	public Wave method732(int[] arg0) {
+	public Wave toWave(int[] arg0) {
 		if (arg0 != null && arg0[0] <= 0) {
 			return null;
 		}
 		if (this.field2157 == null) {
 			this.field2137 = 0;
-			this.field2136 = new float[field2146];
+			this.field2136 = new float[blocksize1];
 			this.field2157 = new byte[this.field2138];
 			this.field2152 = 0;
 			this.field2154 = 0;

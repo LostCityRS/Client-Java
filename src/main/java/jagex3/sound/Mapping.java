@@ -6,33 +6,33 @@ import deob.ObfuscatedName;
 public final class Mapping {
 
 	@ObfuscatedName("wb.a")
-	public final int[] field3551;
+	public final int[] submap_residue;
 
 	@ObfuscatedName("wb.b")
-	public final int field3552;
+	public final int submaps;
 
 	@ObfuscatedName("wb.c")
-	public final int[] field3553;
+	public final int[] submap_floor;
 
 	@ObfuscatedName("wb.d")
-	public int field3554;
+	public int mux;
 
 	public Mapping() {
 		JagVorbis.readBits(16);
-		this.field3552 = JagVorbis.readBit() == 0 ? 1 : JagVorbis.readBits(4) + 1;
+		this.submaps = JagVorbis.readBit() == 0 ? 1 : JagVorbis.readBits(4) + 1;
 		if (JagVorbis.readBit() != 0) {
 			JagVorbis.readBits(8);
 		}
 		JagVorbis.readBits(2);
-		if (this.field3552 > 1) {
-			this.field3554 = JagVorbis.readBits(4);
+		if (this.submaps > 1) {
+			this.mux = JagVorbis.readBits(4);
 		}
-		this.field3553 = new int[this.field3552];
-		this.field3551 = new int[this.field3552];
-		for (int var1 = 0; var1 < this.field3552; var1++) {
+		this.submap_floor = new int[this.submaps];
+		this.submap_residue = new int[this.submaps];
+		for (int var1 = 0; var1 < this.submaps; var1++) {
 			JagVorbis.readBits(8);
-			this.field3553[var1] = JagVorbis.readBits(8);
-			this.field3551[var1] = JagVorbis.readBits(8);
+			this.submap_floor[var1] = JagVorbis.readBits(8);
+			this.submap_residue[var1] = JagVorbis.readBits(8);
 		}
 	}
 }

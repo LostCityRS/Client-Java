@@ -79,7 +79,7 @@ public final class MidiPlayer extends PcmStream {
 	public final MidiMixer field329 = new MidiMixer(this);
 
 	@ObfuscatedName("c.Ib")
-	public final HashTable field312 = new HashTable(128);
+	public final HashTable patches = new HashTable(128);
 
 	@ObfuscatedName("c.Xb")
 	public int field327;
@@ -137,7 +137,7 @@ public final class MidiPlayer extends PcmStream {
 	}
 
 	@ObfuscatedName("c.a(IZLae;)V")
-	public synchronized void method84(boolean arg0, MidiFile arg1) {
+	public synchronized void start(boolean arg0, MidiFile arg1) {
 		this.method115();
 		this.field285.method952(arg1.field111);
 		this.field331 = 0L;
@@ -352,7 +352,7 @@ public final class MidiPlayer extends PcmStream {
 	}
 
 	@ObfuscatedName("c.b(II)V")
-	public synchronized void method89(int arg0) {
+	public synchronized void setGlobalVolume(int arg0) {
 		this.field296 = arg0;
 	}
 
@@ -363,7 +363,7 @@ public final class MidiPlayer extends PcmStream {
 
 	@ObfuscatedName("c.a(B)V")
 	public synchronized void method91() {
-		for (Patch var1 = (Patch) this.field312.search(); var1 != null; var1 = (Patch) this.field312.findnext()) {
+		for (Patch var1 = (Patch) this.patches.search(); var1 != null; var1 = (Patch) this.patches.findnext()) {
 			var1.unlink();
 		}
 	}
@@ -415,7 +415,7 @@ public final class MidiPlayer extends PcmStream {
 				}
 			}
 		}
-		Patch var6 = (Patch) this.field312.find((long) this.field270[arg1]);
+		Patch var6 = (Patch) this.patches.find((long) this.field270[arg1]);
 		if (var6 == null) {
 			return;
 		}
@@ -464,22 +464,22 @@ public final class MidiPlayer extends PcmStream {
 	}
 
 	@ObfuscatedName("c.a(ILea;Ljf;Lae;I)Z")
-	public synchronized boolean method96(Js5 arg0, WaveCache arg1, MidiFile arg2) {
+	public synchronized boolean loadAndQueuePatches(Js5 arg0, WaveCache arg1, MidiFile arg2) {
 		arg2.method23();
 		boolean var4 = true;
 		int[] var5 = new int[] { 22050 };
 		for (ByteArrayNode var6 = (ByteArrayNode) arg2.field110.search(); var6 != null; var6 = (ByteArrayNode) arg2.field110.findnext()) {
 			int var7 = (int) var6.key;
-			Patch var8 = (Patch) this.field312.find((long) var7);
+			Patch var8 = (Patch) this.patches.find((long) var7);
 			if (var8 == null) {
-				var8 = Patch.method448(var7, arg0);
+				var8 = Patch.load(var7, arg0);
 				if (var8 == null) {
 					var4 = false;
 					continue;
 				}
-				this.field312.put((long) var7, var8);
+				this.patches.put((long) var7, var8);
 			}
-			if (!var8.method595(arg1, var6.data, var5)) {
+			if (!var8.loadWaves(arg1, var6.data, var5)) {
 				var4 = false;
 			}
 		}
@@ -794,8 +794,8 @@ public final class MidiPlayer extends PcmStream {
 	}
 
 	@ObfuscatedName("c.j(I)V")
-	public synchronized void method121() {
-		for (Patch var1 = (Patch) this.field312.search(); var1 != null; var1 = (Patch) this.field312.findnext()) {
+	public synchronized void freeWaveIds() {
+		for (Patch var1 = (Patch) this.patches.search(); var1 != null; var1 = (Patch) this.patches.findnext()) {
 			var1.method592();
 		}
 	}
