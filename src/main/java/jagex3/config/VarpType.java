@@ -44,7 +44,12 @@ public final class VarpType extends Linkable2 {
 	@ObfuscatedName("u.a(Lea;I)V")
 	public static void init(Js5 arg0) {
 		field1031 = arg0;
-		field1361 = field1031.method200(16);
+		field1361 = field1031.getFileIdLimit(16);
+	}
+
+	@ObfuscatedName("hc.a(I)V")
+	public static void method410() {
+		field43.clear();
 	}
 
 	@ObfuscatedName("ie.b(Ljd;B)V")

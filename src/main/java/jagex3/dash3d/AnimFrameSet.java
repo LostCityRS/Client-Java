@@ -13,9 +13,9 @@ public final class AnimFrameSet extends Linkable2 {
 
 	public AnimFrameSet(Js5 arg0, Js5 arg1, int arg2, boolean arg3) {
 		LinkList var5 = new LinkList();
-		int var6 = arg0.method200(arg2);
+		int var6 = arg0.getFileIdLimit(arg2);
 		this.field2871 = new AnimFrame[var6];
-		int[] var7 = arg0.method207(arg2);
+		int[] var7 = arg0.getFileList(arg2);
 		for (int var8 = 0; var8 < var7.length; var8++) {
 			AnimBase var9 = null;
 			byte[] var10 = arg0.getFile(arg2, var7[var8]);
@@ -27,7 +27,7 @@ public final class AnimFrameSet extends Linkable2 {
 				}
 			}
 			if (var9 == null) {
-				byte[] var13 = arg1.method217(0, var11);
+				byte[] var13 = arg1.peekFile(0, var11);
 				var9 = new AnimBase(var11, var13);
 				var5.push(var9);
 			}
@@ -37,15 +37,15 @@ public final class AnimFrameSet extends Linkable2 {
 
 	@ObfuscatedName("ed.a(BLea;Lea;ZI)Lrc;")
 	public static AnimFrameSet load(Js5 arg0, Js5 arg1, int arg2) {
-		int[] var3 = arg1.method207(arg2);
+		int[] var3 = arg1.getFileList(arg2);
 		boolean var4 = true;
 		for (int var5 = 0; var5 < var3.length; var5++) {
-			byte[] var6 = arg1.method217(var3[var5], arg2);
+			byte[] var6 = arg1.peekFile(var3[var5], arg2);
 			if (var6 == null) {
 				var4 = false;
 			} else {
 				int var7 = var6[1] & 0xFF | (var6[0] & 0xFF) << 8;
-				byte[] var8 = arg0.method217(0, var7);
+				byte[] var8 = arg0.peekFile(0, var7);
 				if (var8 == null) {
 					var4 = false;
 				}

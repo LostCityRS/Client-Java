@@ -50,9 +50,9 @@ public final class WaveCache {
 
 	@ObfuscatedName("jf.a(IB[I)Lib;")
 	public Wave method566(int arg0, int[] arg1) {
-		if (this.field1612.method204() == 1) {
+		if (this.field1612.getGroupCount() == 1) {
 			return this.method564(arg0, arg1, 0);
-		} else if (this.field1612.method200(arg0) == 1) {
+		} else if (this.field1612.getFileIdLimit(arg0) == 1) {
 			return this.method564(0, arg1, arg0);
 		} else {
 			throw new RuntimeException();
@@ -61,9 +61,9 @@ public final class WaveCache {
 
 	@ObfuscatedName("jf.a([IBI)Lib;")
 	public Wave method567(int[] arg0, int arg1) {
-		if (this.field1606.method204() == 1) {
+		if (this.field1606.getGroupCount() == 1) {
 			return this.method570(arg1, 0, arg0);
-		} else if (this.field1606.method200(arg1) == 1) {
+		} else if (this.field1606.getFileIdLimit(arg1) == 1) {
 			return this.method570(0, arg1, arg0);
 		} else {
 			throw new RuntimeException();

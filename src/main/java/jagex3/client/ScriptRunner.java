@@ -1653,7 +1653,7 @@ public class ScriptRunner {
 						if (var270 == 4103) {
 							var4--;
 							JagString var148 = field1305[var4];
-							field1305[var4++] = var148.method270();
+							field1305[var4++] = var148.toLowerCase();
 							continue;
 						}
 						if (var270 == 4104) {
@@ -1939,7 +1939,7 @@ public class ScriptRunner {
 							if (var195.startsWith(field3110)) {
 								Client.doCheat(var195);
 							} else {
-								JagString var196 = var195.method270();
+								JagString var196 = var195.toLowerCase();
 								byte var197 = 0;
 								byte var198 = 0;
 								if (var196.startsWith(Text.field2947)) {
@@ -2017,7 +2017,7 @@ public class ScriptRunner {
 										var195 = var195.substring(Text.field2818.length());
 									}
 								}
-								JagString var199 = var195.method270();
+								JagString var199 = var195.toLowerCase();
 								if (var199.startsWith(Text.field1439)) {
 									var195 = var195.substring(Text.field1439.length());
 									var197 = 1;
@@ -2182,7 +2182,7 @@ public class ScriptRunner {
 				if (Client.modewhere != 0) {
 					Client.addChat(field2808, 0, field3652);
 				}
-				JagException.report(var269, "CS2 - scr:" + var3.key + " op:" + var8);
+				JagException.report("CS2 - scr:" + var3.key + " op:" + var8, var269);
 			} else {
 				JagString var266 = JagString.newStringBuilder(30);
 				var266.append(field714).append(var3.field3261);
@@ -2196,7 +2196,7 @@ public class ScriptRunner {
 				if (Client.modewhere != 0) {
 					Client.addChat(JagString.join(new JagString[]{field1675, var3.field3261}), 0, field3652);
 				}
-				JagException.report(var269, "CS2 - scr:" + var3.key + " op:" + var8 + new String(var266.method255()));
+				JagException.report("CS2 - scr:" + var3.key + " op:" + var8 + new String(var266.method255()), var269);
 			}
 		}
 	}

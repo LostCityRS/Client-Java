@@ -61,7 +61,7 @@ public final class IdkType extends Linkable2 {
 	public static void init(Js5 arg0, Js5 arg1) {
 		field226 = arg1;
 		field307 = arg0;
-		field2081 = field226.method200(3);
+		field2081 = field226.getFileIdLimit(3);
 	}
 
 	@ObfuscatedName("gf.a(Z)V")
@@ -76,7 +76,7 @@ public final class IdkType extends Linkable2 {
 		}
 		boolean var1 = true;
 		for (int var2 = 0; var2 < this.field1510.length; var2++) {
-			if (!field307.method213(this.field1510[var2], 0)) {
+			if (!field307.requestDownload(this.field1510[var2], 0)) {
 				var1 = false;
 			}
 		}
@@ -98,7 +98,7 @@ public final class IdkType extends Linkable2 {
 	public boolean method498() {
 		boolean var1 = true;
 		for (int var2 = 0; var2 < 5; var2++) {
-			if (this.field1495[var2] != -1 && !field307.method213(this.field1495[var2], 0)) {
+			if (this.field1495[var2] != -1 && !field307.requestDownload(this.field1495[var2], 0)) {
 				var1 = false;
 			}
 		}

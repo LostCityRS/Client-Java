@@ -142,7 +142,7 @@ public final class Texture extends Linkable {
 	@ObfuscatedName("vb.a(DILea;)Z")
 	public boolean method1105(double arg0, int arg1, Js5 arg2) {
 		for (int var5 = 0; var5 < this.field3363.length; var5++) {
-			if (arg2.method216(this.field3363[var5]) == null) {
+			if (arg2.peekFile(this.field3363[var5]) == null) {
 				return false;
 			}
 		}

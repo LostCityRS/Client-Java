@@ -120,7 +120,7 @@ public final class DataFile {
 	}
 
 	@ObfuscatedName("tb.a(II)[B")
-	public byte[] method1024(int arg0) {
+	public byte[] readFromFile(int arg0) {
 		BufferedRandomAccessFile var2 = this.field3119;
 		synchronized (this.field3119) {
 			try {
@@ -184,7 +184,7 @@ public final class DataFile {
 	}
 
 	@ObfuscatedName("tb.a(BII[B)Z")
-	public boolean method1026(int arg0, int arg1, byte[] arg2) {
+	public boolean writeToFile(int arg0, int arg1, byte[] arg2) {
 		BufferedRandomAccessFile var4 = this.field3119;
 		synchronized (this.field3119) {
 			if (arg1 < 0 || this.field3118 < arg1) {

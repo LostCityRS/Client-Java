@@ -151,7 +151,7 @@ public final class Tone {
 
 	@ObfuscatedName("db.a(II)[I")
 	public int[] method170(int arg0, int arg1) {
-		ArrayUtil.method458(field432, 0, arg0);
+		ArrayUtil.clear(field432, 0, arg0);
 		if (arg1 < 10) {
 			return field432;
 		}

@@ -354,7 +354,7 @@ public final class LocType extends Linkable2 {
 		}
 		boolean var1 = true;
 		for (int var2 = 0; var2 < this.field1243.length; var2++) {
-			var1 &= field2840.method213(this.field1243[var2] & 0xFFFF, 0);
+			var1 &= field2840.requestDownload(this.field1243[var2] & 0xFFFF, 0);
 		}
 		return var1;
 	}
@@ -641,7 +641,7 @@ public final class LocType extends Linkable2 {
 		if (this.field1199 != null) {
 			for (int var2 = 0; var2 < this.field1199.length; var2++) {
 				if (this.field1199[var2] == arg0) {
-					return field2840.method213(this.field1243[var2] & 0xFFFF, 0);
+					return field2840.requestDownload(this.field1243[var2] & 0xFFFF, 0);
 				}
 			}
 			return true;
@@ -650,7 +650,7 @@ public final class LocType extends Linkable2 {
 		} else if (arg0 == 10) {
 			boolean var3 = true;
 			for (int var4 = 0; var4 < this.field1243.length; var4++) {
-				var3 &= field2840.method213(this.field1243[var4] & 0xFFFF, 0);
+				var3 &= field2840.requestDownload(this.field1243[var4] & 0xFFFF, 0);
 			}
 			return var3;
 		} else {

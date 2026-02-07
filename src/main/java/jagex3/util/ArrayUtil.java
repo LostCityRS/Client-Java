@@ -6,7 +6,7 @@ import deob.ObfuscatedName;
 public final class ArrayUtil {
 
 	@ObfuscatedName("id.a([BI[BII)V")
-	public static void method457(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
+	public static void copy(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
 		if (arg0 == arg2) {
 			if (arg1 == arg3) {
 				return;
@@ -53,7 +53,7 @@ public final class ArrayUtil {
 	}
 
 	@ObfuscatedName("id.a([III)V")
-	public static void method458(int[] arg0, int arg1, int arg2) {
+	public static void clear(int[] arg0, int arg1, int arg2) {
 		int var3 = arg2 - 7;
 		while (arg1 < var3) {
 			arg0[arg1++] = 0;
@@ -75,7 +75,7 @@ public final class ArrayUtil {
 	public static byte[] method668(byte[] arg0) {
 		int var1 = arg0.length;
 		byte[] var2 = new byte[var1];
-		method457(arg0, 0, var2, 0, var1);
+		copy(arg0, 0, var2, 0, var1);
 		return var2;
 	}
 }

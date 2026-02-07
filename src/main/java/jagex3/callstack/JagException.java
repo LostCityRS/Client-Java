@@ -28,11 +28,11 @@ public final class JagException extends RuntimeException {
 	}
 
 	@ObfuscatedName("pf.a(Ljava/lang/Throwable;Ljava/lang/String;I)V")
-	public static void report(Throwable arg0, String arg1) {
+	public static void report(String arg1, Throwable arg0) {
 		try {
 			String var2 = "";
 			if (arg0 != null) {
-				var2 = method571(arg0);
+				var2 = getInfo(arg0);
 			}
 			if (arg1 != null) {
 				if (arg0 != null) {
@@ -61,7 +61,7 @@ public final class JagException extends RuntimeException {
 	}
 
 	@ObfuscatedName("jf.a(ILjava/lang/Throwable;)Ljava/lang/String;")
-	public static String method571(Throwable arg0) throws IOException {
+	public static String getInfo(Throwable arg0) throws IOException {
 		String var2;
 		if (arg0 instanceof JagException) {
 			JagException var1 = (JagException) arg0;
@@ -104,7 +104,7 @@ public final class JagException extends RuntimeException {
 	}
 
 	@ObfuscatedName("oa.a(Ljava/lang/Throwable;Ljava/lang/String;)Lwf;")
-	public static JagException method765(Throwable arg0, String arg1) {
+	public static JagException report(Throwable arg0, String arg1) {
 		JagException var2;
 		if (arg0 instanceof JagException) {
 			var2 = (JagException) arg0;

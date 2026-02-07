@@ -94,7 +94,7 @@ public final class JagString implements StringInterface {
 		int var6 = 0;
 		for (int var7 = 0; var7 < arg1; var7++) {
 			JagString var8 = arg0[arg2 + var7];
-			ArrayUtil.method457(var8.field618, 0, var5, var6, var8.length);
+			ArrayUtil.copy(var8.field618, 0, var5, var6, var8.length);
 			var6 += var8.length;
 		}
 		JagString var9 = new JagString();
@@ -216,7 +216,7 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("ec.a(BIII[B)I")
 	public int method235(int arg0, int arg1, byte[] arg2) {
-		ArrayUtil.method457(this.field618, 0, arg2, arg0, arg1);
+		ArrayUtil.copy(this.field618, 0, arg2, arg0, arg1);
 		return arg1;
 	}
 
@@ -304,7 +304,7 @@ public final class JagString implements StringInterface {
 		JagString var3 = new JagString();
 		var3.length = arg1 - arg0;
 		var3.field618 = new byte[arg1 - arg0];
-		ArrayUtil.method457(this.field618, arg0, var3.field618, 0, var3.length);
+		ArrayUtil.copy(this.field618, arg0, var3.field618, 0, var3.length);
 		return var3;
 	}
 
@@ -319,10 +319,10 @@ public final class JagString implements StringInterface {
 			for (var2 = 1; var2 < arg0.length + this.length; var2 += var2) {
 			}
 			byte[] var3 = new byte[var2];
-			ArrayUtil.method457(this.field618, 0, var3, 0, this.length);
+			ArrayUtil.copy(this.field618, 0, var3, 0, this.length);
 			this.field618 = var3;
 		}
-		ArrayUtil.method457(arg0.field618, 0, this.field618, this.length, arg0.length);
+		ArrayUtil.copy(arg0.field618, 0, this.field618, this.length, arg0.length);
 		this.length += arg0.length;
 		return this;
 	}
@@ -385,7 +385,7 @@ public final class JagString implements StringInterface {
 		long var2 = 0L;
 		int var4 = 0;
 		if (arg0 <= 80) {
-			this.method247();
+			this.computeCp1252HashFromUtf8();
 		}
 		while (this.length > var4) {
 			var2 = (var2 << 5) + (long) (this.field618[var4] & 0xFF) - var2;
@@ -395,7 +395,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.c(I)I")
-	public int method247() {
+	public int computeCp1252HashFromUtf8() {
 		int var1 = 0;
 		for (int var2 = 0; var2 < this.length; var2++) {
 			var1 = (var1 << 5) + (this.field618[var2] & 0xFF) - var1;
@@ -485,7 +485,7 @@ public final class JagString implements StringInterface {
 
 	@Override
 	public int hashCode() {
-		return this.method247();
+		return this.computeCp1252HashFromUtf8();
 	}
 
 	@ObfuscatedName("ec.a(ILjava/awt/FontMetrics;)I")
@@ -538,7 +538,7 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ec.e(I)[B")
 	public byte[] method255() {
 		byte[] var1 = new byte[this.length];
-		ArrayUtil.method457(this.field618, 0, var1, 0, this.length);
+		ArrayUtil.copy(this.field618, 0, var1, 0, this.length);
 		return var1;
 	}
 
@@ -718,14 +718,14 @@ public final class JagString implements StringInterface {
 		this.field619 = 0;
 		if (this.field618.length != this.length) {
 			byte[] var1 = new byte[this.length];
-			ArrayUtil.method457(this.field618, 0, var1, 0, this.length);
+			ArrayUtil.copy(this.field618, 0, var1, 0, this.length);
 			this.field618 = var1;
 		}
 		return this;
 	}
 
 	@ObfuscatedName("ec.a(Z)Lec;")
-	public JagString method270() {
+	public JagString toLowerCase() {
 		JagString var1 = new JagString();
 		var1.length = this.length;
 		var1.field618 = new byte[this.length];
@@ -770,13 +770,13 @@ public final class JagString implements StringInterface {
 		} else if (arg0.length == this.length) {
 			if (!this.field651 || !arg0.field651) {
 				if (this.field619 == 0) {
-					this.field619 = this.method247();
+					this.field619 = this.computeCp1252HashFromUtf8();
 					if (this.field619 == 0) {
 						this.field619 = 1;
 					}
 				}
 				if (arg0.field619 == 0) {
-					arg0.field619 = arg0.method247();
+					arg0.field619 = arg0.computeCp1252HashFromUtf8();
 					if (arg0.field619 == 0) {
 						arg0.field619 = 1;
 					}
@@ -807,7 +807,7 @@ public final class JagString implements StringInterface {
 				for (var2 = 1; var2 <= this.length; var2 += var2) {
 				}
 				byte[] var3 = new byte[var2];
-				ArrayUtil.method457(this.field618, 0, var3, 0, this.length);
+				ArrayUtil.copy(this.field618, 0, var3, 0, this.length);
 				this.field618 = var3;
 			}
 			this.field618[this.length++] = (byte) arg0;
@@ -850,7 +850,7 @@ public final class JagString implements StringInterface {
 		JagString var2 = new JagString();
 		var2.field618 = new byte[this.length + 1];
 		var2.length = this.length + 1;
-		ArrayUtil.method457(this.field618, 0, var2.field618, 0, this.length);
+		ArrayUtil.copy(this.field618, 0, var2.field618, 0, this.length);
 		var2.field618[this.length] = (byte) arg0;
 		return var2;
 	}

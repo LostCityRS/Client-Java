@@ -293,7 +293,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			JagException.signlink = signlink = new SignLink(true, null, arg6, arg3, arg0);
 			signlink.threadreq(arg1, this, arg1 ^ 0x67);
 		} catch (Exception var10) {
-			JagException.report(var10, null);
+			JagException.report(null, var10);
 		}
 	}
 
@@ -429,7 +429,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				SignLink.flushEvents(canvas, signlink);
 			}
 		} catch (Exception var7) {
-			JagException.report(var7, null);
+			JagException.report(null, var7);
 			this.error("crash");
 		}
 		this.shutdown();
@@ -510,7 +510,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				}
 			}
 		} catch (Exception var3) {
-			JagException.report(var3, null);
+			JagException.report(null, var3);
 			this.error("crash");
 		}
 	}

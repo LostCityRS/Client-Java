@@ -52,7 +52,7 @@ public class Packet extends Linkable {
 	}
 
     @ObfuscatedName("rf.a(BI[B)I")
-    public static int method973(int arg0, byte[] arg1) {
+    public static int getcrc(int arg0, byte[] arg1) {
         return getcrc(arg0, 0, arg1);
     }
 
@@ -112,7 +112,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.a(IB)V")
-	public final void method513(int arg0) {
+	public final void p2(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 >> 8);
 		this.data[this.pos++] = (byte) arg0;
 	}
@@ -170,7 +170,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.a(III[I)V")
-	public final void method523(int arg0, int[] arg1) {
+	public final void tinydec(int arg0, int[] arg1) {
 		int var3 = this.pos;
 		this.pos = 5;
 		int var4 = (arg0 - 5) / 8;
@@ -322,7 +322,7 @@ public class Packet extends Linkable {
 		if (arg0 >= 0 && arg0 < 128) {
 			this.p1(arg0);
 		} else if (arg0 >= 0 && arg0 < 32768) {
-			this.method513(arg0 + 32768);
+			this.p2(arg0 + 32768);
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -352,7 +352,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.h(II)V")
-	public final void method550(int arg0) {
+	public final void p3(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 >> 16);
 		this.data[this.pos++] = (byte) (arg0 >> 8);
 		this.data[this.pos++] = (byte) arg0;
@@ -373,7 +373,7 @@ public class Packet extends Linkable {
 		int var3 = this.pos;
 		this.pos = 0;
 		byte[] var4 = new byte[var3];
-		this.method557(var3, var4);
+		this.gdata(var3, var4);
 		BigInteger var5 = new BigInteger(var4);
 		BigInteger var6 = var5.modPow(arg1, arg0);
 		byte[] var7 = var6.toByteArray();
@@ -424,7 +424,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.a(IIZ[B)V")
-	public final void method557(int arg0, byte[] arg1) {
+	public final void gdata(int arg0, byte[] arg1) {
 		for (int var3 = 0; var3 < arg0; var3++) {
 			arg1[var3] = this.data[this.pos++];
 		}

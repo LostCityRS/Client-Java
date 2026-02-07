@@ -156,7 +156,7 @@ public final class NPCType extends Linkable2 {
 		} else {
 			boolean var2 = false;
 			for (int var3 = 0; var3 < this.field2203.length; var3++) {
-				if (!field363.method213(this.field2203[var3], 0)) {
+				if (!field363.requestDownload(this.field2203[var3], 0)) {
 					var2 = true;
 				}
 			}
@@ -233,7 +233,7 @@ public final class NPCType extends Linkable2 {
 		if (var6 == null) {
 			boolean var7 = false;
 			for (int var8 = 0; var8 < this.field2190.length; var8++) {
-				if (!field363.method213(this.field2190[var8], 0)) {
+				if (!field363.requestDownload(this.field2190[var8], 0)) {
 					var7 = true;
 				}
 			}

@@ -167,7 +167,7 @@ public class ReflectionChecker {
 						for (int var12 = 0; var12 < var8; var12++) {
 							int var13 = arg1.g4();
 							var11[var12] = new byte[var13];
-							arg1.method557(var13, var11[var12]);
+							arg1.gdata(var13, var11[var12]);
 						}
 					}
 					Class[] var14 = new Class[var8];

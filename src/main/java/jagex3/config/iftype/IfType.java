@@ -180,9 +180,6 @@ public final class IfType extends Linkable {
 	@ObfuscatedName("f.wc")
 	public int field844 = -1;
 
-	@ObfuscatedName("f.x")
-	public static final int field742 = 0;
-
 	@ObfuscatedName("f.X")
 	public static JagString field767 = JagString.wrap("m");
 
@@ -408,16 +405,16 @@ public final class IfType extends Linkable {
 		field1991 = arg3;
 		field3635 = arg1;
 		field198 = arg0;
-		field1825 = new IfType[field1991.method204()][];
-		field2119 = new boolean[field1991.method204()];
+		field1825 = new IfType[field1991.getGroupCount()][];
+		field2119 = new boolean[field1991.getGroupCount()];
 	}
 
 	@ObfuscatedName("df.b(II)Z")
 	public static boolean method192(int arg0) {
 		if (field2119[arg0]) {
 			return true;
-		} else if (field1991.method203(arg0)) {
-			int var1 = field1991.method200(arg0);
+		} else if (field1991.requestGroupDownload(arg0)) {
+			int var1 = field1991.getFileIdLimit(arg0);
 			if (var1 == 0) {
 				field2119[arg0] = true;
 				return true;
@@ -464,7 +461,7 @@ public final class IfType extends Linkable {
 		if (arg0 == -1 || !field2119[arg0]) {
 			return;
 		}
-		field1991.method221(arg0);
+		field1991.discardFiles(arg0);
 		if (field1825[arg0] == null) {
 			return;
 		}

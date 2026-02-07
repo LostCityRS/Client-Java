@@ -198,7 +198,7 @@ public final class ObjType extends Linkable2 {
 		field962 = arg1;
 		field692 = arg0;
 		field193 = arg2;
-		field962.method200(10);
+		field962.getFileIdLimit(10);
 		field1278 = arg3;
 	}
 
@@ -316,10 +316,10 @@ public final class ObjType extends Linkable2 {
 			return true;
 		}
 		boolean var4 = true;
-		if (!field692.method213(var2, 0)) {
+		if (!field692.requestDownload(var2, 0)) {
 			var4 = false;
 		}
-		if (var3 != -1 && !field692.method213(var3, 0)) {
+		if (var3 != -1 && !field692.requestDownload(var3, 0)) {
 			var4 = false;
 		}
 		return var4;
@@ -633,13 +633,13 @@ public final class ObjType extends Linkable2 {
 			return true;
 		}
 		boolean var5 = true;
-		if (!field692.method213(var2, 0)) {
+		if (!field692.requestDownload(var2, 0)) {
 			var5 = false;
 		}
-		if (var3 != -1 && !field692.method213(var3, 0)) {
+		if (var3 != -1 && !field692.requestDownload(var3, 0)) {
 			var5 = false;
 		}
-		if (var4 != -1 && !field692.method213(var4, 0)) {
+		if (var4 != -1 && !field692.requestDownload(var4, 0)) {
 			var5 = false;
 		}
 		return var5;

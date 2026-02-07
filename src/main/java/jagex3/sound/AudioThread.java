@@ -35,7 +35,7 @@ public final class AudioThread implements Runnable {
 				SignLink.flushEvents(null, this.signlink);
 			}
 		} catch (Exception var9) {
-			JagException.report(var9, null);
+			JagException.report(null, var9);
 		} finally {
 			Object var6 = null;
 			this.running = false;

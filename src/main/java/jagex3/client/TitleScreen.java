@@ -406,7 +406,7 @@ public class TitleScreen {
 			return;
 		}
 		Pix2D.cls();
-		byte[] var3 = arg0.method219(field1906, AUTO_EMPTY);
+		byte[] var3 = arg0.getFile(field1906, AUTO_EMPTY);
 		field2320 = new Pix32(var3, arg2);
 		field1052 = field2320.copyHFlip();
 		field2262 = PixLoader.makePix8(AUTO_EMPTY, arg1, field632);
@@ -473,7 +473,7 @@ public class TitleScreen {
 		} else {
 			MidiManager.method590(Client.songs, field1712, AUTO_EMPTY);
 		}
-		Js5Net.method740(false);
+		Js5Net.sendLoginLogoutPacket(false);
 		open = true;
 		field2320.quickPlotSprite(0, 0);
 		field1052.quickPlotSprite(382, 0);
@@ -506,36 +506,36 @@ public class TitleScreen {
 		field160 = null;
 		field1264 = null;
 		MidiManager.method1176();
-		Js5Net.method740(true);
+		Js5Net.sendLoginLogoutPacket(true);
 		open = false;
 	}
 
 	@ObfuscatedName("uc.a(ILea;Lea;)I")
 	public static int ready(Js5 arg0, Js5 arg1) {
 		int var2 = 0;
-		if (arg1.method210(field1906, AUTO_EMPTY)) {
+		if (arg1.requestDownload(field1906, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg0.method210(field632, AUTO_EMPTY)) {
+		if (arg0.requestDownload(field632, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg0.method210(field1594, AUTO_EMPTY)) {
+		if (arg0.requestDownload(field1594, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg0.method210(field2760, AUTO_EMPTY)) {
+		if (arg0.requestDownload(field2760, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg0.method210(field1673, AUTO_EMPTY)) {
+		if (arg0.requestDownload(field1673, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg0.method210(field2500, AUTO_EMPTY)) {
+		if (arg0.requestDownload(field2500, AUTO_EMPTY)) {
 			var2++;
 		}
-		arg0.method210(field1688, AUTO_EMPTY);
-		arg0.method210(field1505, AUTO_EMPTY);
-		arg0.method210(field1455, AUTO_EMPTY);
-		arg0.method210(field2607, AUTO_EMPTY);
-		arg0.method210(field2815, AUTO_EMPTY);
+		arg0.requestDownload(field1688, AUTO_EMPTY);
+		arg0.requestDownload(field1505, AUTO_EMPTY);
+		arg0.requestDownload(field1455, AUTO_EMPTY);
+		arg0.requestDownload(field2607, AUTO_EMPTY);
+		arg0.requestDownload(field2815, AUTO_EMPTY);
 		return var2;
 	}
 

@@ -168,9 +168,9 @@ public final class MidiFile extends Linkable {
 		Packet var60 = new Packet(this.field111);
 		var60.p4(1297377380);
 		var60.p4(6);
-		var60.method513(var2 > 1 ? 1 : 0);
-		var60.method513(var2);
-		var60.method513(var3);
+		var60.p2(var2 > 1 ? 1 : 0);
+		var60.p2(var2);
+		var60.p2(var3);
 		arg0.pos = var19;
 		int var61 = 0;
 		int var62 = 0;

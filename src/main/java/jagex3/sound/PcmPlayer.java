@@ -176,7 +176,7 @@ public class PcmPlayer {
 		if (JavaPcmPlayer.field1310) {
 			var2 = 512;
 		}
-		ArrayUtil.method458(arg0, 0, var2);
+		ArrayUtil.clear(arg0, 0, var2);
 		this.field2683 -= 256;
 		if (this.field2665 != null && this.field2683 <= 0) {
 			this.field2683 += frequency >> 4;

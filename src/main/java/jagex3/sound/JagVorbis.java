@@ -224,7 +224,7 @@ public final class JagVorbis extends Linkable {
 			byte[] var3 = arg0.getFile(arg1, arg2);
 			return var3 == null ? null : new JagVorbis(var3);
 		} else {
-			arg0.method213(arg1, arg2);
+			arg0.requestDownload(arg1, arg2);
 			return null;
 		}
 	}
@@ -286,7 +286,7 @@ public final class JagVorbis extends Linkable {
 				var5 += var6;
 			} while (var6 >= 255);
 			byte[] var7 = new byte[var5];
-			var2.method557(var5, var7);
+			var2.gdata(var5, var7);
 			this.field2126[var4] = var7;
 		}
 	}
