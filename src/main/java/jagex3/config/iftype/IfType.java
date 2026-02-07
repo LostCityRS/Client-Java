@@ -342,7 +342,7 @@ public final class IfType extends Linkable {
 	public Object[] field822;
 
 	@ObfuscatedName("f.bc")
-	public int field823 = -1;
+	public int drawCount = -1;
 
 	@ObfuscatedName("f.cc")
 	public IfType draggable = null;
@@ -366,7 +366,7 @@ public final class IfType extends Linkable {
 	public int field737 = 0;
 
 	@ObfuscatedName("f.sc")
-	public int field840 = -1;
+	public int drawTime = -1;
 
 	@ObfuscatedName("f.vc")
 	public int field843 = 0;

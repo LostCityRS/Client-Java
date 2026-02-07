@@ -679,13 +679,13 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.j(III)I")
-	public int method1134(int arg0, int arg1, int arg2) {
+	public int gdType(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		return var4 == null || var4.groundDecor == null ? 0 : var4.groundDecor.typecode;
 	}
 
 	@ObfuscatedName("vd.a()V")
-	public void method1135() {
+	public void removeSprites() {
 		for (int var1 = 0; var1 < this.field3398; var1++) {
 			Sprite var2 = this.field3399[var1];
 			this.method1164(var2);
@@ -1384,7 +1384,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.a([IIIIII)V")
-	public void method1149(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void render2DGround(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
 		Square var6 = this.levelTiles[arg2][arg3][arg4];
 		if (var6 == null) {
 			return;
@@ -1404,40 +1404,39 @@ public final class World {
 			return;
 		}
 		Ground var10 = var6.ground;
-		if (var10 == null) {
-			return;
-		}
-		int var11 = var10.field1090;
-		int var12 = var10.field1078;
-		int var13 = var10.field1079;
-		int var14 = var10.field1095;
-		int[] var15 = this.field3443[var11];
-		int[] var16 = this.field3448[var12];
-		int var17 = 0;
-		if (var13 != 0) {
-			for (int var18 = 0; var18 < 4; var18++) {
-				arg0[arg1] = var15[var16[var17++]] == 0 ? var13 : var14;
-				arg0[arg1 + 1] = var15[var16[var17++]] == 0 ? var13 : var14;
-				arg0[arg1 + 2] = var15[var16[var17++]] == 0 ? var13 : var14;
-				arg0[arg1 + 3] = var15[var16[var17++]] == 0 ? var13 : var14;
+		if (var10 != null) {
+			int var11 = var10.field1090;
+			int var12 = var10.field1078;
+			int var13 = var10.field1079;
+			int var14 = var10.field1095;
+			int[] var15 = this.field3443[var11];
+			int[] var16 = this.field3448[var12];
+			int var17 = 0;
+			if (var13 != 0) {
+				for (int var18 = 0; var18 < 4; var18++) {
+					arg0[arg1] = var15[var16[var17++]] == 0 ? var13 : var14;
+					arg0[arg1 + 1] = var15[var16[var17++]] == 0 ? var13 : var14;
+					arg0[arg1 + 2] = var15[var16[var17++]] == 0 ? var13 : var14;
+					arg0[arg1 + 3] = var15[var16[var17++]] == 0 ? var13 : var14;
+					arg1 += 512;
+				}
+				return;
+			}
+			for (int var19 = 0; var19 < 4; var19++) {
+				if (var15[var16[var17++]] != 0) {
+					arg0[arg1] = var14;
+				}
+				if (var15[var16[var17++]] != 0) {
+					arg0[arg1 + 1] = var14;
+				}
+				if (var15[var16[var17++]] != 0) {
+					arg0[arg1 + 2] = var14;
+				}
+				if (var15[var16[var17++]] != 0) {
+					arg0[arg1 + 3] = var14;
+				}
 				arg1 += 512;
 			}
-			return;
-		}
-		for (int var19 = 0; var19 < 4; var19++) {
-			if (var15[var16[var17++]] != 0) {
-				arg0[arg1] = var14;
-			}
-			if (var15[var16[var17++]] != 0) {
-				arg0[arg1 + 1] = var14;
-			}
-			if (var15[var16[var17++]] != 0) {
-				arg0[arg1 + 2] = var14;
-			}
-			if (var15[var16[var17++]] != 0) {
-				arg0[arg1 + 3] = var14;
-			}
-			arg1 += 512;
 		}
 	}
 
@@ -1955,7 +1954,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.b(IIIIII)V")
-	public void method1167(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void renderAll(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg0 < 0) {
 			arg0 = 0;
 		} else if (arg0 >= this.maxTileX * 128) {

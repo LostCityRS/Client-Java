@@ -700,7 +700,7 @@ public class ScriptRunner {
 					}
 					if (var270 == 1202) {
 						var57.model1Type = 3;
-						var57.model1Id = Client.field373.model.method234();
+						var57.model1Id = Client.localPlayer.model.method234();
 						continue;
 					}
 				} else if ((var270 < 1300 || var270 >= 1400) && (var270 < 2300 || var270 >= 2400)) {
@@ -1016,7 +1016,7 @@ public class ScriptRunner {
 						if (var270 == 2702) {
 							var5--;
 							int var73 = intStack[var5];
-							SubInterface var74 = (SubInterface) Client.field2571.find((long) var73);
+							SubInterface var74 = (SubInterface) Client.subinterfaces.find((long) var73);
 							if (var74 == null) {
 								intStack[var5++] = 0;
 							} else {
@@ -1059,11 +1059,11 @@ public class ScriptRunner {
 						}
 						if (var270 == 3101) {
 							var5 -= 2;
-							Client.method1023(intStack[var5 + 1], Client.field373, intStack[var5]);
+							Client.method1023(intStack[var5 + 1], Client.localPlayer, intStack[var5]);
 							continue;
 						}
 						if (var270 == 3103) {
-							Client.method871();
+							Client.closeModal();
 							continue;
 						}
 						if (var270 == 3104) {
@@ -1185,8 +1185,8 @@ public class ScriptRunner {
 						}
 						if (var270 == 3308) {
 							int var87 = Client.minusedlevel;
-							int var88 = (Client.field373.x >> 7) + Client.field1700;
-							int var89 = Client.field2836 + (Client.field373.z >> 7);
+							int var88 = (Client.localPlayer.x >> 7) + Client.mapBuildBaseX;
+							int var89 = Client.mapBuildBaseZ + (Client.localPlayer.z >> 7);
 							intStack[var5++] = var89 + (var87 << 28) + (var88 << 14);
 							continue;
 						}
@@ -1397,7 +1397,7 @@ public class ScriptRunner {
 							if (var232.startsWith(field1152) || var232.startsWith(field1768)) {
 								var232 = var232.substring(7);
 							}
-							intStack[var5++] = Client.method922(var232) ? 1 : 0;
+							intStack[var5++] = Client.isFriend(var232) ? 1 : 0;
 							continue;
 						}
 						if (var270 == 3611) {
@@ -1500,7 +1500,7 @@ public class ScriptRunner {
 						if (var270 == 3624) {
 							var5--;
 							int var240 = intStack[var5];
-							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].username.equalsIgnoreCase(Client.field373.name)) {
+							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].username.equalsIgnoreCase(Client.localPlayer.name)) {
 								intStack[var5++] = 1;
 								continue;
 							}
@@ -1684,7 +1684,7 @@ public class ScriptRunner {
 							var4 -= 2;
 							JagString var155 = stringStack[var4 + 1];
 							JagString var156 = stringStack[var4];
-							if (Client.field373.model != null && Client.field373.model.gender) {
+							if (Client.localPlayer.model != null && Client.localPlayer.model.gender) {
 								stringStack[var4++] = var155;
 								continue;
 							}
@@ -1893,16 +1893,16 @@ public class ScriptRunner {
 						}
 					} else if (var270 < 5100) {
 						if (var270 == 5000) {
-							intStack[var5++] = Client.field21;
+							intStack[var5++] = Client.publicChatFilter;
 							continue;
 						}
 						if (var270 == 5001) {
 							var5 -= 3;
-							Client.field21 = intStack[var5];
+							Client.publicChatFilter = intStack[var5];
 							Client.field23 = intStack[var5 + 1];
 							Client.field990 = intStack[var5 + 2];
 							Client.out.p1Enc(69);
-							Client.out.p1(Client.field21);
+							Client.out.p1(Client.publicChatFilter);
 							Client.out.p1(Client.field23);
 							Client.out.p1(Client.field990);
 							continue;
@@ -2114,10 +2114,10 @@ public class ScriptRunner {
 						}
 						if (var270 == 5015) {
 							JagString var208;
-							if (Client.field373 == null || Client.field373.name == null) {
+							if (Client.localPlayer == null || Client.localPlayer.name == null) {
 								var208 = TitleScreen.loginUser;
 							} else {
-								var208 = Client.field373.name;
+								var208 = Client.localPlayer.name;
 							}
 							stringStack[var4++] = var208;
 							continue;

@@ -106,6 +106,70 @@ public final class BgSound extends Linkable {
 		}
 	}
 
+	@ObfuscatedName("gb.a(IIIII)V")
+	public static void doMix(int arg0, int arg1, int arg2, int arg3) {
+		for (BgSound var4 = (BgSound) field1466.head(); var4 != null; var4 = (BgSound) field1466.next()) {
+			if (var4.field2275 != -1 || var4.field2245 != null) {
+				int var5 = 0;
+				if (arg1 > var4.field2255) {
+					var5 = arg1 - var4.field2255;
+				} else if (arg1 < var4.field2256) {
+					var5 = var4.field2256 - arg1;
+				}
+				if (var4.field2248 < arg0) {
+					var5 += arg0 - var4.field2248;
+				} else if (var4.field2276 > arg0) {
+					var5 += var4.field2276 - arg0;
+				}
+				if (var4.field2260 < var5 - 64 || PcmPlayer.field2646 == 0 || arg3 != var4.field2251) {
+					if (var4.field2247 != null) {
+						Client.soundMixer.method907(var4.field2247);
+						var4.field2247 = null;
+					}
+					if (var4.field2271 != null) {
+						Client.soundMixer.method907(var4.field2271);
+						var4.field2271 = null;
+					}
+				} else {
+					var5 -= 64;
+					if (var5 < 0) {
+						var5 = 0;
+					}
+					int var6 = (var4.field2260 - var5) * PcmPlayer.field2646 / var4.field2260;
+					if (var4.field2247 != null) {
+						var4.field2247.method690(var6);
+					} else if (var4.field2275 >= 0) {
+						JagFX var7 = JagFX.method972(Client.jagFX, var4.field2275, 0);
+						if (var7 != null) {
+							Wave var8 = var7.method971().method453(Client.soundDecimator);
+							WaveStream var9 = WaveStream.method686(var8, var6);
+							var9.method684(-1);
+							Client.soundMixer.method912(var9);
+							var4.field2247 = var9;
+						}
+					}
+					if (var4.field2271 != null) {
+						var4.field2271.method690(var6);
+						if (!var4.field2271.isLinked()) {
+							var4.field2271 = null;
+						}
+					} else if (var4.field2245 != null && (var4.field2269 -= arg2) <= 0) {
+						int var10 = (int) (Math.random() * (double) var4.field2245.length);
+						JagFX var11 = JagFX.method972(Client.jagFX, var4.field2245[var10], 0);
+						if (var11 != null) {
+							Wave var12 = var11.method971().method453(Client.soundDecimator);
+							WaveStream var13 = WaveStream.method686(var12, var6);
+							var13.method684(0);
+							Client.soundMixer.method912(var13);
+							var4.field2269 = (int) (Math.random() * (double) (var4.field2249 - var4.field2244)) + var4.field2244;
+							var4.field2271 = var13;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	@ObfuscatedName("oa.d(I)V")
 	public void method767() {
 		int var1 = this.field2275;

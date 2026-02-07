@@ -131,7 +131,7 @@ public class ReflectionChecker {
 	}
 
 	@ObfuscatedName("q.a(ILjd;ILdc;)V")
-	public static void method874(int arg0, Packet arg1, SignLink arg2) {
+	public static void addCheck(int arg0, Packet arg1, SignLink arg2) {
 		ReflectionCheck var3 = new ReflectionCheck();
 		var3.field535 = arg1.g1();
 		var3.field518 = arg1.g4();

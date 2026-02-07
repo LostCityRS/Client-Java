@@ -144,7 +144,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("df.a(II)Lec;")
-	public static JagString method191(int arg0) {
+	public static JagString formatIPv4(int arg0) {
 		return join(new JagString[] { parseInt(arg0 >> 24 & 0xFF), field1477, parseInt(arg0 >> 16 & 0xFF), field1477, parseInt(arg0 >> 8 & 0xFF), field1477, parseInt(arg0 & 0xFF) });
 	}
 
@@ -192,7 +192,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("dd.a([BBII)Lec;")
-	public static JagString method186(byte[] arg0, int arg1, int arg2) {
+	public static JagString fromBytes(byte[] arg0, int arg1, int arg2) {
 		JagString var3 = new JagString();
 		var3.length = 0;
 		var3.field618 = new byte[arg2];
@@ -701,7 +701,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.d(ILec;)I")
-	public int method267(JagString arg0) {
+	public int indexOf(JagString arg0) {
 		return this.method249(arg0);
 	}
 

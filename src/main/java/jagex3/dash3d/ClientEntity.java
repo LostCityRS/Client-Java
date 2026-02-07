@@ -95,7 +95,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int primarySeqId = -1;
 
 	@ObfuscatedName("qd.vb")
-	public int field2713 = 0;
+	public int cycle = 0;
 
 	@ObfuscatedName("qd.wb")
 	public int field2714 = 0;
@@ -125,7 +125,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int height = 200;
 
 	@ObfuscatedName("qd.Db")
-	public JagString field2721 = null;
+	public JagString chat = null;
 
 	@ObfuscatedName("qd.Sb")
 	public final int[] routeZ = new int[10];

@@ -21,7 +21,7 @@ public final class ModelLit extends ModelSource {
 	public int[] field2330;
 
 	@ObfuscatedName("od.cc")
-	public static int field2382 = 0;
+	public static int pickedCount = 0;
 
 	@ObfuscatedName("od.db")
 	public static ModelLit field2331 = new ModelLit();
@@ -117,10 +117,10 @@ public final class ModelLit extends ModelSource {
 	public static int[] field2364 = new int[4096];
 
 	@ObfuscatedName("od.Ib")
-	public static int field2362 = 0;
+	public static int mouseX = 0;
 
 	@ObfuscatedName("od.Jb")
-	public static int field2363 = 0;
+	public static int mouseY = 0;
 
 	@ObfuscatedName("od.Bb")
 	public static int[] field2355 = new int[1600];
@@ -138,7 +138,7 @@ public final class ModelLit extends ModelSource {
 	public static int[] field2371 = new int[4096];
 
 	@ObfuscatedName("od.Tb")
-	public static boolean field2373 = false;
+	public static boolean checkHover = false;
 
 	@ObfuscatedName("od.Sb")
 	public static int[] field2372 = new int[4096];
@@ -396,7 +396,7 @@ public final class ModelLit extends ModelSource {
 		}
 		boolean var25 = var24 || this.field2334 > 0;
 		boolean var26 = false;
-		if (arg8 > 0 && field2373) {
+		if (arg8 > 0 && checkHover) {
 			int var27 = var11 - var12;
 			if (var27 <= 50) {
 				var27 = 50;
@@ -419,11 +419,11 @@ public final class ModelLit extends ModelSource {
 				var31 = var19 / var13;
 				var30 = var21 / var27;
 			}
-			int var32 = field2362 - Pix3D.originX;
-			int var33 = field2363 - Pix3D.originY;
+			int var32 = mouseX - Pix3D.originX;
+			int var33 = mouseY - Pix3D.originY;
 			if (var32 > var28 && var32 < var29 && var33 > var30 && var33 < var31) {
 				if (this.useAABBMouseCheck) {
-					field2367[field2382++] = arg8;
+					field2367[pickedCount++] = arg8;
 				} else {
 					var26 = true;
 				}
@@ -633,8 +633,8 @@ public final class ModelLit extends ModelSource {
 						field2374[var30][field2355[var30]++] = var5;
 					}
 				} else {
-					if (arg1 && this.method811(field2362, field2363, field2364[var6], field2364[var7], field2364[var8], var9, var10, var11)) {
-						field2367[field2382++] = arg2;
+					if (arg1 && this.method811(mouseX, mouseY, field2364[var6], field2364[var7], field2364[var8], var9, var10, var11)) {
+						field2367[pickedCount++] = arg2;
 						arg1 = false;
 					}
 					if ((var9 - var10) * (field2364[var8] - field2364[var7]) - (field2364[var6] - field2364[var7]) * (var11 - var10) > 0) {

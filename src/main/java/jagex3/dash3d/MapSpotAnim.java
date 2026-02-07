@@ -29,18 +29,18 @@ public final class MapSpotAnim extends ModelSource {
 	public final int field3171;
 
 	@ObfuscatedName("td.U")
-	public final int field3149;
+	public final int level;
 
 	@ObfuscatedName("td.W")
-	public final int field3151;
+	public final int startCycle;
 
 	@ObfuscatedName("td.Z")
 	public SeqType anim;
 
 	public MapSpotAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		this.field3149 = arg1;
+		this.level = arg1;
 		this.field3164 = arg2;
-		this.field3151 = arg5 + arg6;
+		this.startCycle = arg5 + arg6;
 		this.field3171 = arg3;
 		this.type = arg0;
 		this.field3167 = arg4;
