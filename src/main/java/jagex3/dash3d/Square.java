@@ -10,7 +10,7 @@ public final class Square extends Linkable {
 	public int field3546;
 
 	@ObfuscatedName("wa.db")
-	public QuickGround field3547;
+	public QuickGround quickGround;
 
 	@ObfuscatedName("wa.fb")
 	public final int field3549;
@@ -19,22 +19,22 @@ public final class Square extends Linkable {
 	public int field3550;
 
 	@ObfuscatedName("wa.I")
-	public final Sprite[] field3527 = new Sprite[5];
+	public final Sprite[] sprites = new Sprite[5];
 
 	@ObfuscatedName("wa.M")
-	public int field3531 = 0;
+	public int spriteSpans = 0;
 
 	@ObfuscatedName("wa.W")
-	public final int[] field3540 = new int[5];
+	public final int[] spriteSpan = new int[5];
 
 	@ObfuscatedName("wa.O")
 	public final int field3533;
 
 	@ObfuscatedName("wa.z")
-	public int field3518;
+	public int level;
 
 	@ObfuscatedName("wa.N")
-	public final int field3532;
+	public final int originalLevel;
 
 	@ObfuscatedName("wa.C")
 	public int field3521;
@@ -49,22 +49,22 @@ public final class Square extends Linkable {
 	public int field3525;
 
 	@ObfuscatedName("wa.S")
-	public Decor field3537;
+	public Decor decor;
 
 	@ObfuscatedName("wa.R")
-	public Square field3536;
+	public Square linkedSquare;
 
 	@ObfuscatedName("wa.X")
-	public Wall field3541;
+	public Wall wall;
 
 	@ObfuscatedName("wa.y")
-	public Ground field3517;
+	public Ground ground;
 
 	@ObfuscatedName("wa.E")
-	public GroundDecor field3523;
+	public GroundDecor groundDecor;
 
 	@ObfuscatedName("wa.Y")
-	public GroundObject field3542;
+	public GroundObject groundObject;
 
 	@ObfuscatedName("wa.L")
 	public boolean field3530;
@@ -78,6 +78,6 @@ public final class Square extends Linkable {
 	public Square(int arg0, int arg1, int arg2) {
 		this.field3533 = arg1;
 		this.field3549 = arg2;
-		this.field3532 = this.field3518 = arg0;
+		this.originalLevel = this.level = arg0;
 	}
 }

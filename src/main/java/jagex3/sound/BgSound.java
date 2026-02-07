@@ -80,7 +80,7 @@ public final class BgSound extends Linkable {
 	@ObfuscatedName("oa.d(I)V")
 	public void method767() {
 		int var1 = this.field2275;
-		LocType var2 = this.field2250.method422();
+		LocType var2 = this.field2250.getMultiLoc();
 		if (var2 == null) {
 			this.field2275 = -1;
 			this.field2245 = null;

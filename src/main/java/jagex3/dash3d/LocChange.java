@@ -13,10 +13,10 @@ public final class LocChange extends Linkable {
 	public int field401;
 
 	@ObfuscatedName("da.G")
-	public int field412 = 0;
+	public int startTime = 0;
 
 	@ObfuscatedName("da.F")
-	public int field411 = -1;
+	public int endTime = -1;
 
 	@ObfuscatedName("da.y")
 	public int field404;

@@ -10,54 +10,54 @@ import jagex3.config.SeqType;
 public final class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("pb.ab")
-	public int field2508;
+	public int animFrame;
 
 	@ObfuscatedName("pb.bb")
-	public SeqType field2509;
+	public SeqType anim;
 
 	@ObfuscatedName("pb.eb")
-	public final int field2512;
+	public final int x;
 
 	@ObfuscatedName("pb.fb")
-	public final int field2513;
+	public final int shape;
 
 	@ObfuscatedName("pb.hb")
-	public final int field2515;
+	public final int id;
 
 	@ObfuscatedName("pb.ib")
-	public final int field2516;
+	public final int z;
 
 	@ObfuscatedName("pb.jb")
-	public final int field2517;
+	public final int angle;
 
 	@ObfuscatedName("pb.lb")
-	public int field2519;
+	public int animCycle;
 
 	@ObfuscatedName("pb.V")
-	public final int field2503;
+	public final int level;
 
 	public ClientLocAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, boolean arg7, ModelSource arg8) {
-		this.field2515 = arg0;
-		this.field2513 = arg1;
-		this.field2503 = arg3;
-		this.field2516 = arg5;
-		this.field2517 = arg2;
-		this.field2512 = arg4;
+		this.id = arg0;
+		this.shape = arg1;
+		this.level = arg3;
+		this.z = arg5;
+		this.angle = arg2;
+		this.x = arg4;
 		if (arg6 != -1) {
-			this.field2509 = SeqType.method760(arg6);
-			this.field2508 = 0;
-			this.field2519 = Client.loopCycle - 1;
-			if (this.field2509.field3395 == 0 && arg8 != null && arg8 instanceof ClientLocAnim) {
+			this.anim = SeqType.list(arg6);
+			this.animFrame = 0;
+			this.animCycle = Client.loopCycle - 1;
+			if (this.anim.duplicatebehavior == 0 && arg8 != null && arg8 instanceof ClientLocAnim) {
 				ClientLocAnim var10 = (ClientLocAnim) arg8;
-				if (this.field2509 == var10.field2509) {
-					this.field2508 = var10.field2508;
-					this.field2519 = var10.field2519;
+				if (this.anim == var10.anim) {
+					this.animFrame = var10.animFrame;
+					this.animCycle = var10.animCycle;
 					return;
 				}
 			}
-			if (arg7 && this.field2509.field3386 != -1) {
-				this.field2508 = (int) ((double) this.field2509.field3393.length * Math.random());
-				this.field2519 -= (int) ((double) this.field2509.field3376[this.field2508] * Math.random());
+			if (arg7 && this.anim.loops != -1) {
+				this.animFrame = (int) ((double) this.anim.frames.length * Math.random());
+				this.animCycle -= (int) ((double) this.anim.delay[this.animFrame] * Math.random());
 				return;
 			}
 		}
@@ -65,51 +65,51 @@ public final class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("pb.b(B)Lod;")
 	@Override
-	public ModelLit method132() {
-		if (this.field2509 != null) {
-			int var1 = Client.loopCycle - this.field2519;
-			if (var1 > 100 && this.field2509.field3386 > 0) {
+	public ModelLit getTempModel() {
+		if (this.anim != null) {
+			int var1 = Client.loopCycle - this.animCycle;
+			if (var1 > 100 && this.anim.loops > 0) {
 				var1 = 100;
 			}
 			label46: {
 				do {
 					do {
-						if (var1 <= this.field2509.field3376[this.field2508]) {
+						if (var1 <= this.anim.delay[this.animFrame]) {
 							break label46;
 						}
-						var1 -= this.field2509.field3376[this.field2508];
-						this.field2508++;
-					} while (this.field2509.field3393.length > this.field2508);
-					this.field2508 -= this.field2509.field3386;
-				} while (this.field2508 >= 0 && this.field2509.field3393.length > this.field2508);
-				this.field2509 = null;
+						var1 -= this.anim.delay[this.animFrame];
+						this.animFrame++;
+					} while (this.anim.frames.length > this.animFrame);
+					this.animFrame -= this.anim.loops;
+				} while (this.animFrame >= 0 && this.anim.frames.length > this.animFrame);
+				this.anim = null;
 			}
-			this.field2519 = Client.loopCycle - var1;
+			this.animCycle = Client.loopCycle - var1;
 		}
-		LocType var2 = LocType.list(this.field2515);
-		if (var2.field1251 != null) {
-			var2 = var2.method422();
+		LocType var2 = LocType.list(this.id);
+		if (var2.multiloc != null) {
+			var2 = var2.getMultiLoc();
 		}
 		if (var2 == null) {
 			return null;
 		}
 		int var3;
 		int var4;
-		if (this.field2517 == 1 || this.field2517 == 3) {
-			var3 = var2.field1222;
-			var4 = var2.field1233;
+		if (this.angle == 1 || this.angle == 3) {
+			var3 = var2.width;
+			var4 = var2.length;
 		} else {
-			var4 = var2.field1222;
-			var3 = var2.field1233;
+			var4 = var2.width;
+			var3 = var2.length;
 		}
-		int var5 = this.field2512 + (var4 + 1 >> 1);
-		int var6 = this.field2512 + (var4 >> 1);
-		int var7 = this.field2516 + (var3 >> 1);
-		int var8 = (var3 + 1 >> 1) + this.field2516;
-		int[][] var9 = ClientBuild.groundh[this.field2503];
+		int var5 = this.x + (var4 + 1 >> 1);
+		int var6 = this.x + (var4 >> 1);
+		int var7 = this.z + (var3 >> 1);
+		int var8 = (var3 + 1 >> 1) + this.z;
+		int[][] var9 = ClientBuild.groundh[this.level];
 		int var10 = var9[var5][var8] + var9[var6][var8] + var9[var6][var7] + var9[var5][var7] >> 2;
-		int var11 = (this.field2512 << 7) + (var4 << 6);
-		int var12 = (this.field2516 << 7) + (var3 << 6);
-		return var2.method415(this.field2509, var12, this.field2513, var9, var11, this.field2508, var10, this.field2517);
+		int var11 = (this.x << 7) + (var4 << 6);
+		int var12 = (this.z << 7) + (var3 << 6);
+		return var2.method415(this.anim, var12, this.shape, var9, var11, this.animFrame, var10, this.angle);
 	}
 }

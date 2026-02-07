@@ -38,7 +38,7 @@ public final class SpotType extends Linkable2 {
 	public int field3074 = 128;
 
 	@ObfuscatedName("ta.Ob")
-	public int field3096 = -1;
+	public int anim = -1;
 
 	@ObfuscatedName("ta.xb")
 	public int field3079 = 128;
@@ -56,7 +56,7 @@ public final class SpotType extends Linkable2 {
 	public short[] field3104;
 
 	@ObfuscatedName("fb.b(II)Lta;")
-	public static SpotType method316(int arg0) {
+	public static SpotType list(int arg0) {
 		SpotType var1 = (SpotType) field2170.find((long) arg0);
 		if (var1 != null) {
 			return var1;
@@ -99,7 +99,7 @@ public final class SpotType extends Linkable2 {
 		if (arg0 == 1) {
 			this.field3039 = arg1.g2();
 		} else if (arg0 == 2) {
-			this.field3096 = arg1.g2();
+			this.anim = arg1.g2();
 		} else if (arg0 == 4) {
 			this.field3079 = arg1.g2();
 		} else if (arg0 == 5) {
@@ -131,7 +131,7 @@ public final class SpotType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ta.c(II)Lod;")
-	public ModelLit method1017(int arg0) {
+	public ModelLit getTempModel2(int arg0) {
 		ModelLit var2 = (ModelLit) field1115.find((long) this.field3070);
 		if (var2 == null) {
 			ModelUnlit var3 = ModelUnlit.method840(field3634, this.field3039);
@@ -140,7 +140,7 @@ public final class SpotType extends Linkable2 {
 			}
 			if (this.field3071 != null) {
 				for (int var4 = 0; var4 < this.field3071.length; var4++) {
-					var3.method833(this.field3071[var4], this.field3055[var4]);
+					var3.recolour(this.field3071[var4], this.field3055[var4]);
 				}
 			}
 			if (this.field3102 != null) {
@@ -148,30 +148,30 @@ public final class SpotType extends Linkable2 {
 					var3.method853(this.field3102[var5], this.field3104[var5]);
 				}
 			}
-			var2 = var3.method847(this.field3073 + 64, this.field3064 + 850, -30, -50, -30);
+			var2 = var3.light(this.field3073 + 64, this.field3064 + 850, -30, -50, -30);
 			field1115.put((long) this.field3070, var2);
 		}
 		ModelLit var6;
-		if (this.field3096 == -1 || arg0 == -1) {
+		if (this.anim == -1 || arg0 == -1) {
 			var6 = var2.method820(true);
 		} else {
-			var6 = SeqType.method760(this.field3096).method1111(var2, arg0);
+			var6 = SeqType.list(this.anim).method1111(var2, arg0);
 		}
 		if (this.field3079 != 128 || this.field3074 != 128) {
 			var6.method805(this.field3079, this.field3074, this.field3079);
 		}
 		if (this.field3059 != 0) {
 			if (this.field3059 == 90) {
-				var6.method801();
+				var6.rotate90();
 			}
 			if (this.field3059 == 180) {
-				var6.method801();
-				var6.method801();
+				var6.rotate90();
+				var6.rotate90();
 			}
 			if (this.field3059 == 270) {
-				var6.method801();
-				var6.method801();
-				var6.method801();
+				var6.rotate90();
+				var6.rotate90();
+				var6.rotate90();
 			}
 		}
 		return var6;

@@ -8,32 +8,32 @@ import jagex3.io.Packet;
 public final class AnimBase extends Linkable {
 
 	@ObfuscatedName("nb.r")
-	public final int[][] field2102;
+	public final int[][] labels;
 
 	@ObfuscatedName("nb.v")
-	public final int[] field2106;
+	public final int[] type;
 
 	@ObfuscatedName("nb.x")
-	public final int field2108;
+	public final int id;
 
 	@ObfuscatedName("nb.A")
-	public final int field2111;
+	public final int size;
 
 	public AnimBase(int arg0, byte[] arg1) {
-		this.field2108 = arg0;
+		this.id = arg0;
 		Packet var3 = new Packet(arg1);
-		this.field2111 = var3.g1();
-		this.field2102 = new int[this.field2111][];
-		this.field2106 = new int[this.field2111];
-		for (int var4 = 0; var4 < this.field2111; var4++) {
-			this.field2106[var4] = var3.g1();
+		this.size = var3.g1();
+		this.labels = new int[this.size][];
+		this.type = new int[this.size];
+		for (int var4 = 0; var4 < this.size; var4++) {
+			this.type[var4] = var3.g1();
 		}
-		for (int var5 = 0; var5 < this.field2111; var5++) {
-			this.field2102[var5] = new int[var3.g1()];
+		for (int var5 = 0; var5 < this.size; var5++) {
+			this.labels[var5] = new int[var3.g1()];
 		}
-		for (int var6 = 0; var6 < this.field2111; var6++) {
-			for (int var7 = 0; var7 < this.field2102[var6].length; var7++) {
-				this.field2102[var6][var7] = var3.g1();
+		for (int var6 = 0; var6 < this.size; var6++) {
+			for (int var7 = 0; var7 < this.labels[var6].length; var7++) {
+				this.labels[var6][var7] = var3.g1();
 			}
 		}
 	}

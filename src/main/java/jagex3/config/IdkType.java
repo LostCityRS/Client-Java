@@ -15,11 +15,11 @@ public final class IdkType extends Linkable2 {
 	@ObfuscatedName("c.Db")
 	public static Js5 field307;
 	@ObfuscatedName("na.g")
-	public static int field2081;
+	public static int numDefinitions;
 	@ObfuscatedName("fa.B")
 	public static LruCache field886 = new LruCache(64);
 	@ObfuscatedName("jc.bb")
-	public int field1515 = -1;
+	public int type = -1;
 
 	@ObfuscatedName("jc.cb")
 	public short[] field1516;
@@ -28,7 +28,7 @@ public final class IdkType extends Linkable2 {
 	public short[] field1518;
 
 	@ObfuscatedName("jc.Q")
-	public boolean field1504 = false;
+	public boolean disable = false;
 
 	@ObfuscatedName("jc.H")
 	public final int[] field1495 = new int[] { -1, -1, -1, -1, -1 };
@@ -43,7 +43,7 @@ public final class IdkType extends Linkable2 {
 	public short[] field1503;
 
 	@ObfuscatedName("tb.a(BI)Ljc;")
-	public static IdkType method1020(int arg0) {
+	public static IdkType list(int arg0) {
 		IdkType var1 = (IdkType) field886.find((long) arg0);
 		if (var1 != null) {
 			return var1;
@@ -61,7 +61,7 @@ public final class IdkType extends Linkable2 {
 	public static void init(Js5 arg0, Js5 arg1) {
 		field226 = arg1;
 		field307 = arg0;
-		field2081 = field226.getFileIdLimit(3);
+		numDefinitions = field226.getFileIdLimit(3);
 	}
 
 	@ObfuscatedName("gf.a(Z)V")
@@ -70,7 +70,7 @@ public final class IdkType extends Linkable2 {
 	}
 
 	@ObfuscatedName("jc.e(I)Z")
-	public boolean method495() {
+	public boolean checkModel() {
 		if (this.field1510 == null) {
 			return true;
 		}
@@ -95,7 +95,7 @@ public final class IdkType extends Linkable2 {
 	}
 
 	@ObfuscatedName("jc.a(B)Z")
-	public boolean method498() {
+	public boolean checkHead() {
 		boolean var1 = true;
 		for (int var2 = 0; var2 < 5; var2++) {
 			if (this.field1495[var2] != -1 && !field307.requestDownload(this.field1495[var2], 0)) {
@@ -122,7 +122,7 @@ public final class IdkType extends Linkable2 {
 		}
 		if (this.field1496 != null) {
 			for (int var4 = 0; var4 < this.field1496.length; var4++) {
-				var3.method833(this.field1496[var4], this.field1516[var4]);
+				var3.recolour(this.field1496[var4], this.field1516[var4]);
 			}
 		}
 		if (this.field1518 != null) {
@@ -136,7 +136,7 @@ public final class IdkType extends Linkable2 {
 	@ObfuscatedName("jc.a(ILjd;B)V")
 	public void method501(int arg0, Packet arg1) {
 		if (arg0 == 1) {
-			this.field1515 = arg1.g1();
+			this.type = arg1.g1();
 		} else if (arg0 == 2) {
 			int var3 = arg1.g1();
 			this.field1510 = new int[var3];
@@ -144,7 +144,7 @@ public final class IdkType extends Linkable2 {
 				this.field1510[var4] = arg1.g2();
 			}
 		} else if (arg0 == 3) {
-			this.field1504 = true;
+			this.disable = true;
 		} else if (arg0 == 40) {
 			int var7 = arg1.g1();
 			this.field1516 = new short[var7];
@@ -178,7 +178,7 @@ public final class IdkType extends Linkable2 {
 		ModelUnlit var4 = new ModelUnlit(var1, var2);
 		if (this.field1496 != null) {
 			for (int var5 = 0; var5 < this.field1496.length; var5++) {
-				var4.method833(this.field1496[var5], this.field1516[var5]);
+				var4.recolour(this.field1496[var5], this.field1516[var5]);
 			}
 		}
 		if (this.field1518 != null) {

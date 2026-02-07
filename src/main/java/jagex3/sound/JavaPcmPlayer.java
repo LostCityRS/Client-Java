@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import jagex3.dash3d.Pix3D;
 import jagex3.util.MathTool;
 
 import javax.sound.sampled.AudioFormat;
@@ -49,7 +48,7 @@ public final class JavaPcmPlayer extends PcmPlayer {
 				this.field2026 = null;
 				throw var4;
 			} else {
-				this.method143(Pix3D.method342(arg0));
+				this.method143(MathTool.method342(arg0));
 			}
 		}
 	}

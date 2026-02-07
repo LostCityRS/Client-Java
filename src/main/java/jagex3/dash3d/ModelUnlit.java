@@ -12,7 +12,7 @@ public final class ModelUnlit extends ModelSource {
 	public int[] field2441;
 
 	@ObfuscatedName("p.bb")
-	public static int[] field2442 = Pix3D.field121;
+	public static int[] field2442 = Pix3D.cosTable;
 
 	@ObfuscatedName("p.cb")
 	public int field2443 = 0;
@@ -516,7 +516,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.a(SS)V")
-	public void method833(short arg0, short arg1) {
+	public void recolour(short arg0, short arg1) {
 		for (int var3 = 0; var3 < this.field2465; var3++) {
 			if (this.field2434[var3] == arg0) {
 				this.field2434[var3] = arg1;
@@ -676,15 +676,15 @@ public final class ModelUnlit extends ModelSource {
 			int var66 = var2.g1();
 			int var67 = 0;
 			if ((var66 & 0x1) != 0) {
-				var67 = var3.method516();
+				var67 = var3.gsmarts();
 			}
 			int var68 = 0;
 			if ((var66 & 0x2) != 0) {
-				var68 = var4.method516();
+				var68 = var4.gsmarts();
 			}
 			int var69 = 0;
 			if ((var66 & 0x4) != 0) {
-				var69 = var5.method516();
+				var69 = var5.gsmarts();
 			}
 			this.field2444[var65] = var62 + var67;
 			this.field2459[var65] = var63 + var68;
@@ -733,9 +733,9 @@ public final class ModelUnlit extends ModelSource {
 		for (int var75 = 0; var75 < var10; var75++) {
 			int var76 = var3.g1();
 			if (var76 == 1) {
-				var71 = var2.method516() + var74;
-				var72 = var2.method516() + var71;
-				var73 = var2.method516() + var72;
+				var71 = var2.gsmarts() + var74;
+				var72 = var2.gsmarts() + var71;
+				var73 = var2.gsmarts() + var72;
 				var74 = var73;
 				this.field2441[var75] = var71;
 				this.field2480[var75] = var72;
@@ -743,7 +743,7 @@ public final class ModelUnlit extends ModelSource {
 			}
 			if (var76 == 2) {
 				var72 = var73;
-				var73 = var2.method516() + var74;
+				var73 = var2.gsmarts() + var74;
 				var74 = var73;
 				this.field2441[var75] = var71;
 				this.field2480[var75] = var72;
@@ -751,7 +751,7 @@ public final class ModelUnlit extends ModelSource {
 			}
 			if (var76 == 3) {
 				var71 = var73;
-				var73 = var2.method516() + var74;
+				var73 = var2.gsmarts() + var74;
 				var74 = var73;
 				this.field2441[var75] = var71;
 				this.field2480[var75] = var72;
@@ -761,7 +761,7 @@ public final class ModelUnlit extends ModelSource {
 				int var77 = var71;
 				var71 = var72;
 				var72 = var77;
-				var73 = var2.method516() + var74;
+				var73 = var2.gsmarts() + var74;
 				var74 = var73;
 				this.field2441[var75] = var71;
 				this.field2480[var75] = var77;
@@ -894,7 +894,7 @@ public final class ModelUnlit extends ModelSource {
 			}
 		} else {
 			for (int var25 = 0; var25 < var14.field2443; var25++) {
-				int var26 = (-this.field2459[var25] << 16) / super.field470;
+				int var26 = (-this.field2459[var25] << 16) / super.minY;
 				if (var26 < arg4) {
 					int var27 = this.field2444[var25] + arg1;
 					int var28 = this.field2435[var25] + arg3;
@@ -1096,15 +1096,15 @@ public final class ModelUnlit extends ModelSource {
 			int var44 = var4.g1();
 			int var45 = 0;
 			if ((var44 & 0x1) != 0) {
-				var45 = var5.method516();
+				var45 = var5.gsmarts();
 			}
 			int var46 = 0;
 			if ((var44 & 0x2) != 0) {
-				var46 = var6.method516();
+				var46 = var6.gsmarts();
 			}
 			int var47 = 0;
 			if ((var44 & 0x4) != 0) {
-				var47 = var7.method516();
+				var47 = var7.gsmarts();
 			}
 			this.field2444[var43] = var40 + var45;
 			this.field2459[var43] = var41 + var46;
@@ -1162,9 +1162,9 @@ public final class ModelUnlit extends ModelSource {
 		for (int var54 = 0; var54 < var10; var54++) {
 			int var55 = var5.g1();
 			if (var55 == 1) {
-				var50 = var4.method516() + var53;
-				var51 = var4.method516() + var50;
-				var52 = var4.method516() + var51;
+				var50 = var4.gsmarts() + var53;
+				var51 = var4.gsmarts() + var50;
+				var52 = var4.gsmarts() + var51;
 				var53 = var52;
 				this.field2441[var54] = var50;
 				this.field2480[var54] = var51;
@@ -1172,7 +1172,7 @@ public final class ModelUnlit extends ModelSource {
 			}
 			if (var55 == 2) {
 				var51 = var52;
-				var52 = var4.method516() + var53;
+				var52 = var4.gsmarts() + var53;
 				var53 = var52;
 				this.field2441[var54] = var50;
 				this.field2480[var54] = var51;
@@ -1180,7 +1180,7 @@ public final class ModelUnlit extends ModelSource {
 			}
 			if (var55 == 3) {
 				var50 = var52;
-				var52 = var4.method516() + var53;
+				var52 = var4.gsmarts() + var53;
 				var53 = var52;
 				this.field2441[var54] = var50;
 				this.field2480[var54] = var51;
@@ -1190,7 +1190,7 @@ public final class ModelUnlit extends ModelSource {
 				int var56 = var50;
 				var50 = var51;
 				var51 = var56;
-				var52 = var4.method516() + var53;
+				var52 = var4.gsmarts() + var53;
 				var53 = var52;
 				this.field2441[var54] = var50;
 				this.field2480[var54] = var56;
@@ -1242,7 +1242,7 @@ public final class ModelUnlit extends ModelSource {
 		if (this.field2439) {
 			return;
 		}
-		super.field470 = 0;
+		super.minY = 0;
 		this.field2475 = 0;
 		this.field2479 = 999999;
 		this.field2468 = -999999;
@@ -1264,8 +1264,8 @@ public final class ModelUnlit extends ModelSource {
 			if (var4 > this.field2463) {
 				this.field2463 = var4;
 			}
-			if (-var3 > super.field470) {
-				super.field470 = -var3;
+			if (-var3 > super.minY) {
+				super.minY = -var3;
 			}
 			if (var3 > this.field2475) {
 				this.field2475 = var3;
@@ -1312,7 +1312,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.a(IIIII)Lod;")
-	public ModelLit method847(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public ModelLit light(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		this.method839();
 		int var6 = (int) Math.sqrt((double) (arg2 * arg2 + arg3 * arg3 + arg4 * arg4));
 		int var7 = arg1 * var6 >> 8;

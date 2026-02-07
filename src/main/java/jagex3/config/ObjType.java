@@ -112,7 +112,7 @@ public final class ObjType extends Linkable2 {
 	public int field1424 = -1;
 
 	@ObfuscatedName("j.Ob")
-	public int field1425 = 0;
+	public int team = 0;
 
 	@ObfuscatedName("j.zb")
 	public JagString[] field1410 = new JagString[] { null, null, Text.TAKE, null, null };
@@ -168,7 +168,7 @@ public final class ObjType extends Linkable2 {
 	public short[] field1431;
 
 	@ObfuscatedName("v.a(II)Lj;")
-	public static ObjType method1092(int arg0) {
+	public static ObjType list(int arg0) {
 		ObjType var1 = (ObjType) field1914.find((long) arg0);
 		if (var1 != null) {
 			return var1;
@@ -181,11 +181,11 @@ public final class ObjType extends Linkable2 {
 		}
 		var3.method472();
 		if (var3.field1388 != -1) {
-			var3.method481(method1092(var3.field1411), method1092(var3.field1388));
+			var3.method481(list(var3.field1411), list(var3.field1388));
 		}
 		if (!field193 && var3.field1392) {
 			var3.field1410 = null;
-			var3.field1425 = 0;
+			var3.team = 0;
 			var3.field1429 = Text.MEMBERS_OBJECT;
 			var3.field1428 = null;
 		}
@@ -222,7 +222,7 @@ public final class ObjType extends Linkable2 {
 				return var7;
 			}
 		}
-		ObjType var8 = method1092(arg1);
+		ObjType var8 = list(arg1);
 		if (arg4 > 1 && var8.field1412 != null) {
 			int var9 = -1;
 			for (int var10 = 0; var10 < 10; var10++) {
@@ -231,10 +231,10 @@ public final class ObjType extends Linkable2 {
 				}
 			}
 			if (var9 != -1) {
-				var8 = method1092(var9);
+				var8 = list(var9);
 			}
 		}
-		ModelLit var11 = var8.method470(1);
+		ModelLit var11 = var8.getModelLit(1);
 		if (var11 == null) {
 			return null;
 		}
@@ -253,8 +253,8 @@ public final class ObjType extends Linkable2 {
 		Pix32 var17 = new Pix32(36, 32);
 		Pix2D.setPixels(var17.data, 36, 32);
 		Pix2D.cls();
-		Pix3D.method36();
-		Pix3D.method43(16, 16);
+		Pix3D.setRenderClipping();
+		Pix3D.setOrigin(16, 16);
 		int var18 = var8.field1391;
 		Pix3D.field118 = false;
 		if (arg2) {
@@ -263,9 +263,9 @@ public final class ObjType extends Linkable2 {
 			var18 = (int) ((double) var18 * 1.04D);
 		}
 		int var19 = Pix3D.sinTable[var8.field1426] * var18 >> 16;
-		int var20 = Pix3D.field121[var8.field1426] * var18 >> 16;
-		var11.method804();
-		var11.method813(var8.field1416, var8.field1374, var8.field1426, var8.field1384, var8.field1376 + var19 + var11.field470 / 2, var8.field1376 + var20);
+		int var20 = Pix3D.cosTable[var8.field1426] * var18 >> 16;
+		var11.calcBoundingCylinder();
+		var11.method813(var8.field1416, var8.field1374, var8.field1426, var8.field1384, var8.field1376 + var19 + var11.minY / 2, var8.field1376 + var20);
 		if (arg0 >= 1) {
 			var17.addOutline(1);
 		}
@@ -287,7 +287,7 @@ public final class ObjType extends Linkable2 {
 		}
 		Pix2D.setPixels(var13, var14, var15);
 		Pix2D.restoreClipping(var16);
-		Pix3D.method36();
+		Pix3D.setRenderClipping();
 		Pix3D.field118 = true;
 		return var17;
 	}
@@ -305,7 +305,7 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("j.a(BZ)Z")
-	public boolean method467(boolean arg0) {
+	public boolean checkHeadModel(boolean arg0) {
 		int var2 = this.field1405;
 		int var3 = this.field1395;
 		if (arg0) {
@@ -358,7 +358,7 @@ public final class ObjType extends Linkable2 {
 		}
 		if (this.field1421 != null) {
 			for (int var10 = 0; var10 < this.field1421.length; var10++) {
-				var5.method833(this.field1421[var10], this.field1431[var10]);
+				var5.recolour(this.field1421[var10], this.field1431[var10]);
 			}
 		}
 		if (this.field1378 != null) {
@@ -370,7 +370,7 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("j.b(II)Lod;")
-	public ModelLit method470(int arg0) {
+	public ModelLit getModelLit(int arg0) {
 		if (this.field1412 != null && arg0 > 1) {
 			int var2 = -1;
 			for (int var3 = 0; var3 < 10; var3++) {
@@ -379,7 +379,7 @@ public final class ObjType extends Linkable2 {
 				}
 			}
 			if (var2 != -1) {
-				return method1092(var2).method470(1);
+				return list(var2).getModelLit(1);
 			}
 		}
 		ModelLit var4 = (ModelLit) field1125.find((long) this.field1399);
@@ -395,7 +395,7 @@ public final class ObjType extends Linkable2 {
 		}
 		if (this.field1421 != null) {
 			for (int var6 = 0; var6 < this.field1421.length; var6++) {
-				var5.method833(this.field1421[var6], this.field1431[var6]);
+				var5.recolour(this.field1421[var6], this.field1431[var6]);
 			}
 		}
 		if (this.field1378 != null) {
@@ -403,8 +403,8 @@ public final class ObjType extends Linkable2 {
 				var5.method853(this.field1378[var7], this.field1367[var7]);
 			}
 		}
-		ModelLit var8 = var5.method847(this.field1381 + 64, 768 - -this.field1383, -50, -10, -50);
-		var8.field2322 = true;
+		ModelLit var8 = var5.light(this.field1381 + 64, 768 - -this.field1383, -50, -10, -50);
+		var8.useAABBMouseCheck = true;
 		field1125.put((long) this.field1399, var8);
 		return var8;
 	}
@@ -419,7 +419,7 @@ public final class ObjType extends Linkable2 {
 				}
 			}
 			if (var2 != -1) {
-				return method1092(var2);
+				return list(var2);
 			}
 		}
 		return this;
@@ -448,7 +448,7 @@ public final class ObjType extends Linkable2 {
 		}
 		if (this.field1421 != null) {
 			for (int var7 = 0; var7 < this.field1421.length; var7++) {
-				var4.method833(this.field1421[var7], this.field1431[var7]);
+				var4.recolour(this.field1421[var7], this.field1431[var7]);
 			}
 		}
 		if (this.field1378 != null) {
@@ -577,7 +577,7 @@ public final class ObjType extends Linkable2 {
 										if (arg1 == 114) {
 											this.field1383 = arg0.g1b() * 5;
 										} else if (arg1 == 115) {
-											this.field1425 = arg0.g1();
+											this.team = arg0.g1();
 											return;
 										}
 										return;
@@ -620,7 +620,7 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("j.a(ZI)Z")
-	public boolean method479(boolean arg0) {
+	public boolean checkWearModel(boolean arg0) {
 		int var2 = this.field1385;
 		int var3 = this.field1417;
 		int var4 = this.field1380;
@@ -674,7 +674,7 @@ public final class ObjType extends Linkable2 {
 				}
 			}
 			if (var2 != -1) {
-				return method1092(var2).method482(1);
+				return list(var2).method482(1);
 			}
 		}
 		ModelUnlit var4 = ModelUnlit.method840(field692, this.field1407);
@@ -686,7 +686,7 @@ public final class ObjType extends Linkable2 {
 		}
 		if (this.field1421 != null) {
 			for (int var5 = 0; var5 < this.field1421.length; var5++) {
-				var4.method833(this.field1421[var5], this.field1431[var5]);
+				var4.recolour(this.field1421[var5], this.field1431[var5]);
 			}
 		}
 		if (this.field1378 != null) {

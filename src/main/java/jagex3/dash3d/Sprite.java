@@ -21,7 +21,7 @@ public final class Sprite {
 	public int field1056;
 
 	@ObfuscatedName("gb.l")
-	public ModelSource field1058;
+	public ModelSource model;
 
 	@ObfuscatedName("gb.m")
 	public int field1059 = 0;

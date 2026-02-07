@@ -128,7 +128,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.h(I)I")
-	public final int method516() {
+	public final int gsmarts() {
 		int var1 = this.data[this.pos] & 0xFF;
 		return var1 >= 128 ? this.g2() - 49152 : this.g1() + -64;
 	}
@@ -212,7 +212,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.k(I)J")
-	public final long method527() {
+	public final long g8() {
 		long var1 = (long) this.g4() & 0xFFFFFFFFL;
 		long var3 = (long) this.g4() & 0xFFFFFFFFL;
 		return (var1 << 32) + var3;

@@ -615,35 +615,35 @@ public final class IfType extends Linkable {
 						field2914 = true;
 						return null;
 					}
-					var7 = var8.method847(64, 768, -50, -10, -50);
+					var7 = var8.light(64, 768, -50, -10, -50);
 				}
 				if (var6 == 2) {
-					ModelUnlit var9 = NPCType.method130(var5).method752();
+					ModelUnlit var9 = NPCType.list(var5).getHead();
 					if (var9 == null) {
 						field2914 = true;
 						return null;
 					}
-					var7 = var9.method847(64, 768, -50, -10, -50);
+					var7 = var9.light(64, 768, -50, -10, -50);
 				}
 				if (var6 == 3) {
 					if (arg1 == null) {
 						return null;
 					}
-					ModelUnlit var10 = arg1.method230();
+					ModelUnlit var10 = arg1.getHeadModel();
 					if (var10 == null) {
 						field2914 = true;
 						return null;
 					}
-					var7 = var10.method847(64, 768, -50, -10, -50);
+					var7 = var10.light(64, 768, -50, -10, -50);
 				}
 				if (var6 == 4) {
-					ObjType var11 = ObjType.method1092(var5);
+					ObjType var11 = ObjType.list(var5);
 					ModelUnlit var12 = var11.method482(10);
 					if (var12 == null) {
 						field2914 = true;
 						return null;
 					}
-					var7 = var12.method847(var11.field1381 + 64, var11.field1383 + 768, -50, -10, -50);
+					var7 = var12.light(var11.field1381 + 64, var11.field1383 + 768, -50, -10, -50);
 				}
 				field2922.put((long) ((var6 << 16) + var5), var7);
 			}

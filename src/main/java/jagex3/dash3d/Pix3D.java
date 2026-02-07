@@ -2,33 +2,34 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import jagex3.graphics.Pix2D;
+import jagex3.util.MathTool;
 
 @ObfuscatedName("af")
 public final class Pix3D extends Pix2D {
 
 	@ObfuscatedName("af.ab")
-	public static int field124;
+	public static int minX;
 
 	@ObfuscatedName("af.bb")
-	public static int field125;
+	public static int minY;
 
 	@ObfuscatedName("af.cb")
 	public static TextureProvider field126;
 
 	@ObfuscatedName("af.db")
-	public static int[] field127 = new int[2048];
+	public static int[] divTable2 = new int[2048];
 
 	@ObfuscatedName("af.eb")
 	public static int field128 = 0;
 
 	@ObfuscatedName("af.fb")
-	public static int field129;
+	public static int originY;
 
 	@ObfuscatedName("af.gb")
-	public static int field130;
+	public static int sizeX;
 
 	@ObfuscatedName("af.hb")
-	public static int field131;
+	public static int sizeY;
 
 	@ObfuscatedName("af.Y")
 	public static boolean field122 = false;
@@ -43,13 +44,13 @@ public final class Pix3D extends Pix2D {
 	public static boolean field117 = false;
 
 	@ObfuscatedName("af.V")
-	public static int[] field119 = new int[512];
+	public static int[] divTable = new int[512];
 
 	@ObfuscatedName("af.X")
-	public static int[] field121 = new int[2048];
+	public static int[] cosTable = new int[2048];
 
 	@ObfuscatedName("af.S")
-	public static int[] field116 = new int[1024];
+	public static int[] scanline = new int[1024];
 
 	@ObfuscatedName("af.P")
 	public static int[] sinTable = new int[2048];
@@ -58,37 +59,37 @@ public final class Pix3D extends Pix2D {
 	public static int[] field123 = new int[65536];
 
 	@ObfuscatedName("af.O")
-	public static int field112;
+	public static int maxY;
 
 	@ObfuscatedName("af.Q")
-	public static int field114;
+	public static int originX;
 
 	@ObfuscatedName("af.R")
-	public static int field115;
+	public static int maxX;
 
 	static {
 		for (int var0 = 1; var0 < 512; var0++) {
-			field119[var0] = 32768 / var0;
+			divTable[var0] = 32768 / var0;
 		}
 		for (int var1 = 1; var1 < 2048; var1++) {
-			field127[var1] = 65536 / var1;
+			divTable2[var1] = 65536 / var1;
 		}
 		for (int var2 = 0; var2 < 2048; var2++) {
 			sinTable[var2] = (int) (Math.sin((double) var2 * 0.0030679615D) * 65536.0D);
-			field121[var2] = (int) (Math.cos((double) var2 * 0.0030679615D) * 65536.0D);
+			cosTable[var2] = (int) (Math.cos((double) var2 * 0.0030679615D) * 65536.0D);
 		}
 	}
 
 	@ObfuscatedName("af.b(III)V")
-	public static void method26(int arg0, int arg1, int arg2) {
-		field117 = arg0 < 0 || arg0 > field130 || arg1 < 0 || arg1 > field130 || arg2 < 0 || arg2 > field130;
+	public static void setHClip(int arg0, int arg1, int arg2) {
+		field117 = arg0 < 0 || arg0 > sizeX || arg1 < 0 || arg1 > sizeX || arg2 < 0 || arg2 > sizeX;
 	}
 
 	@ObfuscatedName("af.a([I[IIIIIIIIIIIIII)V")
 	public static void method27(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
 		if (field117) {
-			if (arg4 > field130) {
-				arg4 = field130;
+			if (arg4 > sizeX) {
+				arg4 = sizeX;
 			}
 			if (arg3 < 0) {
 				arg3 = 0;
@@ -101,7 +102,7 @@ public final class Pix3D extends Pix2D {
 		int var14 = arg5 + arg6 * arg3;
 		int var15 = arg4 - arg3;
 		if (!field122) {
-			int var74 = arg3 - field114;
+			int var74 = arg3 - originX;
 			int var75 = arg7 + (arg10 >> 3) * var74;
 			int var76 = arg8 + (arg11 >> 3) * var74;
 			int var77 = arg9 + (arg12 >> 3) * var74;
@@ -294,7 +295,7 @@ public final class Pix3D extends Pix2D {
 			}
 			return;
 		}
-		int var16 = arg3 - field114;
+		int var16 = arg3 - originX;
 		int var17 = arg7 + (arg10 >> 3) * var16;
 		int var18 = arg8 + (arg11 >> 3) * var16;
 		int var19 = arg9 + (arg12 >> 3) * var16;
@@ -492,8 +493,8 @@ public final class Pix3D extends Pix2D {
 	@ObfuscatedName("af.a([IIIIIIII)V")
 	public static void method28(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (field117) {
-			if (arg3 > field130) {
-				arg3 = field130;
+			if (arg3 > sizeX) {
+				arg3 = sizeX;
 			}
 			if (arg2 < 0) {
 				arg2 = 0;
@@ -584,19 +585,19 @@ public final class Pix3D extends Pix2D {
 
 	@ObfuscatedName("af.a(D)V")
 	public static void initColourTable(double arg0) {
-		method42(arg0);
+		initColourTable2(arg0);
 	}
 
 	@ObfuscatedName("af.a(IIIIIIIIIIIIIIIIIII)V")
 	public static void method31(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = field126.method560(arg18);
+		int[] var19 = field126.getTexels(arg18);
 		if (var19 == null) {
-			int var20 = field126.method558(arg18);
-			method33(arg0, arg1, arg2, arg3, arg4, arg5, method44(var20, arg6), method44(var20, arg7), method44(var20, arg8));
+			int var20 = field126.getAverageRgb(arg18);
+			method33(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
-		field122 = field126.method559(arg18);
-		field120 = field126.method561(arg18);
+		field122 = field126.isLowMem(arg18);
+		field120 = field126.isOpaque(arg18);
 		int var21 = arg4 - arg3;
 		int var22 = arg1 - arg0;
 		int var23 = arg5 - arg3;
@@ -637,12 +638,12 @@ public final class Pix3D extends Pix2D {
 		int var46 = var35 * var37 - var34 * var38 << 5;
 		int var47 = var33 * var38 - var35 * var36 << 5;
 		if (arg0 <= arg1 && arg0 <= arg2) {
-			if (arg0 < field131) {
-				if (arg1 > field131) {
-					arg1 = field131;
+			if (arg0 < sizeY) {
+				if (arg1 > sizeY) {
+					arg1 = sizeY;
 				}
-				if (arg2 > field131) {
-					arg2 = field131;
+				if (arg2 > sizeY) {
+					arg2 = sizeY;
 				}
 				int var48 = (arg6 << 9) + var31 - var31 * arg3;
 				if (arg1 < arg2) {
@@ -659,14 +660,14 @@ public final class Pix3D extends Pix2D {
 						var51 -= var28 * arg1;
 						arg1 = 0;
 					}
-					int var52 = arg0 - field129;
+					int var52 = arg0 - originY;
 					int var53 = var39 + var41 * var52;
 					int var54 = var42 + var44 * var52;
 					int var55 = var45 + var47 * var52;
 					if (arg0 != arg1 && var29 < var27 || arg0 == arg1 && var29 > var28) {
 						int var56 = arg2 - arg1;
 						int var57 = arg1 - arg0;
-						int var58 = field116[arg0];
+						int var58 = scanline[arg0];
 						while (true) {
 							var57--;
 							if (var57 < 0) {
@@ -697,7 +698,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var59 = arg2 - arg1;
 						int var60 = arg1 - arg0;
-						int var61 = field116[arg0];
+						int var61 = scanline[arg0];
 						while (true) {
 							var60--;
 							if (var60 < 0) {
@@ -740,14 +741,14 @@ public final class Pix3D extends Pix2D {
 						var64 -= var28 * arg2;
 						arg2 = 0;
 					}
-					int var65 = arg0 - field129;
+					int var65 = arg0 - originY;
 					int var66 = var39 + var41 * var65;
 					int var67 = var42 + var44 * var65;
 					int var68 = var45 + var47 * var65;
 					if ((arg0 == arg2 || var29 >= var27) && (arg0 != arg2 || var28 <= var27)) {
 						int var72 = arg1 - arg2;
 						int var73 = arg2 - arg0;
-						int var74 = field116[arg0];
+						int var74 = scanline[arg0];
 						while (true) {
 							var73--;
 							if (var73 < 0) {
@@ -778,7 +779,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var69 = arg1 - arg2;
 						int var70 = arg2 - arg0;
-						int var71 = field116[arg0];
+						int var71 = scanline[arg0];
 						while (true) {
 							var70--;
 							if (var70 < 0) {
@@ -810,12 +811,12 @@ public final class Pix3D extends Pix2D {
 				}
 			}
 		} else if (arg1 <= arg2) {
-			if (arg1 < field131) {
-				if (arg2 > field131) {
-					arg2 = field131;
+			if (arg1 < sizeY) {
+				if (arg2 > sizeY) {
+					arg2 = sizeY;
 				}
-				if (arg0 > field131) {
-					arg0 = field131;
+				if (arg0 > sizeY) {
+					arg0 = sizeY;
 				}
 				int var75 = (arg7 << 9) + var31 - var31 * arg4;
 				if (arg2 < arg0) {
@@ -832,14 +833,14 @@ public final class Pix3D extends Pix2D {
 						var78 -= var29 * arg2;
 						arg2 = 0;
 					}
-					int var79 = arg1 - field129;
+					int var79 = arg1 - originY;
 					int var80 = var39 + var41 * var79;
 					int var81 = var42 + var44 * var79;
 					int var82 = var45 + var47 * var79;
 					if (arg1 != arg2 && var27 < var28 || arg1 == arg2 && var27 > var29) {
 						int var83 = arg0 - arg2;
 						int var84 = arg2 - arg1;
-						int var85 = field116[arg1];
+						int var85 = scanline[arg1];
 						while (true) {
 							var84--;
 							if (var84 < 0) {
@@ -870,7 +871,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var86 = arg0 - arg2;
 						int var87 = arg2 - arg1;
-						int var88 = field116[arg1];
+						int var88 = scanline[arg1];
 						while (true) {
 							var87--;
 							if (var87 < 0) {
@@ -913,14 +914,14 @@ public final class Pix3D extends Pix2D {
 						var91 -= var29 * arg0;
 						arg0 = 0;
 					}
-					int var92 = arg1 - field129;
+					int var92 = arg1 - originY;
 					int var93 = var39 + var41 * var92;
 					int var94 = var42 + var44 * var92;
 					int var95 = var45 + var47 * var92;
 					if (var27 < var28) {
 						int var96 = arg2 - arg0;
 						int var97 = arg0 - arg1;
-						int var98 = field116[arg1];
+						int var98 = scanline[arg1];
 						while (true) {
 							var97--;
 							if (var97 < 0) {
@@ -951,7 +952,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var99 = arg2 - arg0;
 						int var100 = arg0 - arg1;
-						int var101 = field116[arg1];
+						int var101 = scanline[arg1];
 						while (true) {
 							var100--;
 							if (var100 < 0) {
@@ -982,12 +983,12 @@ public final class Pix3D extends Pix2D {
 					}
 				}
 			}
-		} else if (arg2 < field131) {
-			if (arg0 > field131) {
-				arg0 = field131;
+		} else if (arg2 < sizeY) {
+			if (arg0 > sizeY) {
+				arg0 = sizeY;
 			}
-			if (arg1 > field131) {
-				arg1 = field131;
+			if (arg1 > sizeY) {
+				arg1 = sizeY;
 			}
 			int var102 = (arg8 << 9) + var31 - var31 * arg5;
 			if (arg0 < arg1) {
@@ -1004,14 +1005,14 @@ public final class Pix3D extends Pix2D {
 					var105 -= var27 * arg0;
 					arg0 = 0;
 				}
-				int var106 = arg2 - field129;
+				int var106 = arg2 - originY;
 				int var107 = var39 + var41 * var106;
 				int var108 = var42 + var44 * var106;
 				int var109 = var45 + var47 * var106;
 				if (var28 < var29) {
 					int var110 = arg1 - arg0;
 					int var111 = arg0 - arg2;
-					int var112 = field116[arg2];
+					int var112 = scanline[arg2];
 					while (true) {
 						var111--;
 						if (var111 < 0) {
@@ -1042,7 +1043,7 @@ public final class Pix3D extends Pix2D {
 				} else {
 					int var113 = arg1 - arg0;
 					int var114 = arg0 - arg2;
-					int var115 = field116[arg2];
+					int var115 = scanline[arg2];
 					while (true) {
 						var114--;
 						if (var114 < 0) {
@@ -1085,14 +1086,14 @@ public final class Pix3D extends Pix2D {
 					var118 -= var27 * arg1;
 					arg1 = 0;
 				}
-				int var119 = arg2 - field129;
+				int var119 = arg2 - originY;
 				int var120 = var39 + var41 * var119;
 				int var121 = var42 + var44 * var119;
 				int var122 = var45 + var47 * var119;
 				if (var28 < var29) {
 					int var123 = arg0 - arg1;
 					int var124 = arg1 - arg2;
-					int var125 = field116[arg2];
+					int var125 = scanline[arg2];
 					while (true) {
 						var124--;
 						if (var124 < 0) {
@@ -1123,7 +1124,7 @@ public final class Pix3D extends Pix2D {
 				} else {
 					int var126 = arg0 - arg1;
 					int var127 = arg1 - arg2;
-					int var128 = field116[arg2];
+					int var128 = scanline[arg2];
 					while (true) {
 						var127--;
 						if (var127 < 0) {
@@ -1157,13 +1158,13 @@ public final class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("af.e()V")
-	public static void method32() {
-		field114 = field130 / 2;
-		field129 = field131 / 2;
-		field124 = -field114;
-		field115 = field130 - field114;
-		field125 = -field129;
-		field112 = field131 - field129;
+	public static void resetOrigin() {
+		originX = sizeX / 2;
+		originY = sizeY / 2;
+		minX = -originX;
+		maxX = sizeX - originX;
+		minY = -originY;
+		maxY = sizeY - originY;
 	}
 
 	@ObfuscatedName("af.a(IIIIIIIII)V")
@@ -1199,12 +1200,12 @@ public final class Pix3D extends Pix2D {
 		int var19 = (var13 * var12 - var14 * var10 << 8) / var18;
 		int var20 = (var14 * var9 - var13 * var11 << 8) / var18;
 		if (arg0 <= arg1 && arg0 <= arg2) {
-			if (arg0 < field131) {
-				if (arg1 > field131) {
-					arg1 = field131;
+			if (arg0 < sizeY) {
+				if (arg1 > sizeY) {
+					arg1 = sizeY;
 				}
-				if (arg2 > field131) {
-					arg2 = field131;
+				if (arg2 > sizeY) {
+					arg2 = sizeY;
 				}
 				int var21 = (arg6 << 8) + var19 - var19 * arg3;
 				if (arg1 < arg2) {
@@ -1224,7 +1225,7 @@ public final class Pix3D extends Pix2D {
 					if (arg0 != arg1 && var17 < var16 || arg0 == arg1 && var17 > var15) {
 						int var25 = arg2 - arg1;
 						int var26 = arg1 - arg0;
-						int var27 = field116[arg0];
+						int var27 = scanline[arg0];
 						while (true) {
 							var26--;
 							if (var26 < 0) {
@@ -1249,7 +1250,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var28 = arg2 - arg1;
 						int var29 = arg1 - arg0;
-						int var30 = field116[arg0];
+						int var30 = scanline[arg0];
 						while (true) {
 							var29--;
 							if (var29 < 0) {
@@ -1289,7 +1290,7 @@ public final class Pix3D extends Pix2D {
 					if (arg0 != arg2 && var17 < var16 || arg0 == arg2 && var15 > var16) {
 						int var34 = arg1 - arg2;
 						int var35 = arg2 - arg0;
-						int var36 = field116[arg0];
+						int var36 = scanline[arg0];
 						while (true) {
 							var35--;
 							if (var35 < 0) {
@@ -1314,7 +1315,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var37 = arg1 - arg2;
 						int var38 = arg2 - arg0;
-						int var39 = field116[arg0];
+						int var39 = scanline[arg0];
 						while (true) {
 							var38--;
 							if (var38 < 0) {
@@ -1340,12 +1341,12 @@ public final class Pix3D extends Pix2D {
 				}
 			}
 		} else if (arg1 <= arg2) {
-			if (arg1 < field131) {
-				if (arg2 > field131) {
-					arg2 = field131;
+			if (arg1 < sizeY) {
+				if (arg2 > sizeY) {
+					arg2 = sizeY;
 				}
-				if (arg0 > field131) {
-					arg0 = field131;
+				if (arg0 > sizeY) {
+					arg0 = sizeY;
 				}
 				int var40 = (arg7 << 8) + var19 - var19 * arg4;
 				if (arg2 < arg0) {
@@ -1365,7 +1366,7 @@ public final class Pix3D extends Pix2D {
 					if ((arg1 == arg2 || var16 >= var15) && (arg1 != arg2 || var16 <= var17)) {
 						int var47 = arg0 - arg2;
 						int var48 = arg2 - arg1;
-						int var49 = field116[arg1];
+						int var49 = scanline[arg1];
 						while (true) {
 							var48--;
 							if (var48 < 0) {
@@ -1390,7 +1391,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var44 = arg0 - arg2;
 						int var45 = arg2 - arg1;
-						int var46 = field116[arg1];
+						int var46 = scanline[arg1];
 						while (true) {
 							var45--;
 							if (var45 < 0) {
@@ -1430,7 +1431,7 @@ public final class Pix3D extends Pix2D {
 					if (var16 < var15) {
 						int var53 = arg2 - arg0;
 						int var54 = arg0 - arg1;
-						int var55 = field116[arg1];
+						int var55 = scanline[arg1];
 						while (true) {
 							var54--;
 							if (var54 < 0) {
@@ -1455,7 +1456,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var56 = arg2 - arg0;
 						int var57 = arg0 - arg1;
-						int var58 = field116[arg1];
+						int var58 = scanline[arg1];
 						while (true) {
 							var57--;
 							if (var57 < 0) {
@@ -1480,12 +1481,12 @@ public final class Pix3D extends Pix2D {
 					}
 				}
 			}
-		} else if (arg2 < field131) {
-			if (arg0 > field131) {
-				arg0 = field131;
+		} else if (arg2 < sizeY) {
+			if (arg0 > sizeY) {
+				arg0 = sizeY;
 			}
-			if (arg1 > field131) {
-				arg1 = field131;
+			if (arg1 > sizeY) {
+				arg1 = sizeY;
 			}
 			int var59 = (arg8 << 8) + var19 - var19 * arg5;
 			if (arg0 < arg1) {
@@ -1505,7 +1506,7 @@ public final class Pix3D extends Pix2D {
 				if (var15 < var17) {
 					int var63 = arg1 - arg0;
 					int var64 = arg0 - arg2;
-					int var65 = field116[arg2];
+					int var65 = scanline[arg2];
 					while (true) {
 						var64--;
 						if (var64 < 0) {
@@ -1530,7 +1531,7 @@ public final class Pix3D extends Pix2D {
 				} else {
 					int var66 = arg1 - arg0;
 					int var67 = arg0 - arg2;
-					int var68 = field116[arg2];
+					int var68 = scanline[arg2];
 					while (true) {
 						var67--;
 						if (var67 < 0) {
@@ -1570,7 +1571,7 @@ public final class Pix3D extends Pix2D {
 				if (var15 < var17) {
 					int var72 = arg0 - arg1;
 					int var73 = arg1 - arg2;
-					int var74 = field116[arg2];
+					int var74 = scanline[arg2];
 					while (true) {
 						var73--;
 						if (var73 < 0) {
@@ -1595,7 +1596,7 @@ public final class Pix3D extends Pix2D {
 				} else {
 					int var75 = arg0 - arg1;
 					int var76 = arg1 - arg2;
-					int var77 = field116[arg2];
+					int var77 = scanline[arg2];
 					while (true) {
 						var76--;
 						if (var76 < 0) {
@@ -1623,16 +1624,16 @@ public final class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("af.e(IIII)V")
-	public static void method34(int arg0, int arg1, int arg2, int arg3) {
-		field130 = arg2 - arg0;
-		field131 = arg3 - arg1;
-		method32();
-		if (field116.length < field131) {
-			field116 = new int[method342(field131)];
+	public static void setClipping(int arg0, int arg1, int arg2, int arg3) {
+		sizeX = arg2 - arg0;
+		sizeY = arg3 - arg1;
+		resetOrigin();
+		if (scanline.length < sizeY) {
+			scanline = new int[MathTool.method342(sizeY)];
 		}
 		int var4 = arg1 * Pix2D.width + arg0;
-		for (int var5 = 0; var5 < field131; var5++) {
-			field116[var5] = var4;
+		for (int var5 = 0; var5 < sizeY; var5++) {
+			scanline[var5] = var4;
 			var4 += Pix2D.width;
 		}
 	}
@@ -1640,8 +1641,8 @@ public final class Pix3D extends Pix2D {
 	@ObfuscatedName("af.a([IIIIII)V")
 	public static void method35(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (field117) {
-			if (arg4 > field130) {
-				arg4 = field130;
+			if (arg4 > sizeX) {
+				arg4 = sizeX;
 			}
 			if (arg3 < 0) {
 				arg3 = 0;
@@ -1718,12 +1719,12 @@ public final class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("af.f()V")
-	public static void method36() {
-		method34(Pix2D.clipMinX, Pix2D.clipMinY, Pix2D.clipMaxX, Pix2D.clipMaxY);
+	public static void setRenderClipping() {
+		setClipping(Pix2D.clipMinX, Pix2D.clipMinY, Pix2D.clipMaxX, Pix2D.clipMaxY);
 	}
 
 	@ObfuscatedName("af.a(ID)I")
-	public static int method37(int arg0, double arg1) {
+	public static int gammaCorrect(int arg0, double arg1) {
 		double var3 = (double) (arg0 >> 16) / 256.0D;
 		double var5 = (double) (arg0 >> 8 & 0xFF) / 256.0D;
 		double var7 = (double) (arg0 & 0xFF) / 256.0D;
@@ -1751,12 +1752,12 @@ public final class Pix3D extends Pix2D {
 			var9 = (arg3 - arg5 << 16) / (arg0 - arg2);
 		}
 		if (arg0 <= arg1 && arg0 <= arg2) {
-			if (arg0 < field131) {
-				if (arg1 > field131) {
-					arg1 = field131;
+			if (arg0 < sizeY) {
+				if (arg1 > sizeY) {
+					arg1 = sizeY;
 				}
-				if (arg2 > field131) {
-					arg2 = field131;
+				if (arg2 > sizeY) {
+					arg2 = sizeY;
 				}
 				if (arg1 < arg2) {
 					int var10;
@@ -1774,7 +1775,7 @@ public final class Pix3D extends Pix2D {
 					if (arg0 != arg1 && var9 < var7 || arg0 == arg1 && var9 > var8) {
 						int var13 = arg2 - arg1;
 						int var14 = arg1 - arg0;
-						int var15 = field116[arg0];
+						int var15 = scanline[arg0];
 						while (true) {
 							var14--;
 							if (var14 < 0) {
@@ -1797,7 +1798,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var16 = arg2 - arg1;
 						int var17 = arg1 - arg0;
-						int var18 = field116[arg0];
+						int var18 = scanline[arg0];
 						while (true) {
 							var17--;
 							if (var17 < 0) {
@@ -1834,7 +1835,7 @@ public final class Pix3D extends Pix2D {
 					if (arg0 != arg2 && var9 < var7 || arg0 == arg2 && var8 > var7) {
 						int var22 = arg1 - arg2;
 						int var23 = arg2 - arg0;
-						int var24 = field116[arg0];
+						int var24 = scanline[arg0];
 						while (true) {
 							var23--;
 							if (var23 < 0) {
@@ -1857,7 +1858,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var25 = arg1 - arg2;
 						int var26 = arg2 - arg0;
-						int var27 = field116[arg0];
+						int var27 = scanline[arg0];
 						while (true) {
 							var26--;
 							if (var26 < 0) {
@@ -1881,12 +1882,12 @@ public final class Pix3D extends Pix2D {
 				}
 			}
 		} else if (arg1 <= arg2) {
-			if (arg1 < field131) {
-				if (arg2 > field131) {
-					arg2 = field131;
+			if (arg1 < sizeY) {
+				if (arg2 > sizeY) {
+					arg2 = sizeY;
 				}
-				if (arg0 > field131) {
-					arg0 = field131;
+				if (arg0 > sizeY) {
+					arg0 = sizeY;
 				}
 				if (arg2 < arg0) {
 					int var28;
@@ -1904,7 +1905,7 @@ public final class Pix3D extends Pix2D {
 					if (arg1 != arg2 && var7 < var8 || arg1 == arg2 && var7 > var9) {
 						int var31 = arg0 - arg2;
 						int var32 = arg2 - arg1;
-						int var33 = field116[arg1];
+						int var33 = scanline[arg1];
 						while (true) {
 							var32--;
 							if (var32 < 0) {
@@ -1927,7 +1928,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var34 = arg0 - arg2;
 						int var35 = arg2 - arg1;
-						int var36 = field116[arg1];
+						int var36 = scanline[arg1];
 						while (true) {
 							var35--;
 							if (var35 < 0) {
@@ -1964,7 +1965,7 @@ public final class Pix3D extends Pix2D {
 					if (var7 < var8) {
 						int var40 = arg2 - arg0;
 						int var41 = arg0 - arg1;
-						int var42 = field116[arg1];
+						int var42 = scanline[arg1];
 						while (true) {
 							var41--;
 							if (var41 < 0) {
@@ -1987,7 +1988,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var43 = arg2 - arg0;
 						int var44 = arg0 - arg1;
-						int var45 = field116[arg1];
+						int var45 = scanline[arg1];
 						while (true) {
 							var44--;
 							if (var44 < 0) {
@@ -2010,12 +2011,12 @@ public final class Pix3D extends Pix2D {
 					}
 				}
 			}
-		} else if (arg2 < field131) {
-			if (arg0 > field131) {
-				arg0 = field131;
+		} else if (arg2 < sizeY) {
+			if (arg0 > sizeY) {
+				arg0 = sizeY;
 			}
-			if (arg1 > field131) {
-				arg1 = field131;
+			if (arg1 > sizeY) {
+				arg1 = sizeY;
 			}
 			if (arg0 < arg1) {
 				int var46;
@@ -2033,7 +2034,7 @@ public final class Pix3D extends Pix2D {
 				if (var8 < var9) {
 					int var49 = arg1 - arg0;
 					int var50 = arg0 - arg2;
-					int var51 = field116[arg2];
+					int var51 = scanline[arg2];
 					while (true) {
 						var50--;
 						if (var50 < 0) {
@@ -2056,7 +2057,7 @@ public final class Pix3D extends Pix2D {
 				} else {
 					int var52 = arg1 - arg0;
 					int var53 = arg0 - arg2;
-					int var54 = field116[arg2];
+					int var54 = scanline[arg2];
 					while (true) {
 						var53--;
 						if (var53 < 0) {
@@ -2093,7 +2094,7 @@ public final class Pix3D extends Pix2D {
 				if (var8 < var9) {
 					int var58 = arg0 - arg1;
 					int var59 = arg1 - arg2;
-					int var60 = field116[arg2];
+					int var60 = scanline[arg2];
 					while (true) {
 						var59--;
 						if (var59 < 0) {
@@ -2116,7 +2117,7 @@ public final class Pix3D extends Pix2D {
 				} else {
 					int var61 = arg0 - arg1;
 					int var62 = arg1 - arg2;
-					int var63 = field116[arg2];
+					int var63 = scanline[arg2];
 					while (true) {
 						var62--;
 						if (var62 < 0) {
@@ -2143,14 +2144,14 @@ public final class Pix3D extends Pix2D {
 
 	@ObfuscatedName("af.b(IIIIIIIIIIIIIIIIIII)V")
 	public static void method39(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = field126.method560(arg18);
+		int[] var19 = field126.getTexels(arg18);
 		if (var19 == null) {
-			int var20 = field126.method558(arg18);
-			method33(arg0, arg1, arg2, arg3, arg4, arg5, method44(var20, arg6), method44(var20, arg7), method44(var20, arg8));
+			int var20 = field126.getAverageRgb(arg18);
+			method33(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
-		field122 = field126.method559(arg18);
-		field120 = field126.method561(arg18);
+		field122 = field126.isLowMem(arg18);
+		field120 = field126.isOpaque(arg18);
 		int var21 = arg4 - arg3;
 		int var22 = arg1 - arg0;
 		int var23 = arg5 - arg3;
@@ -2191,12 +2192,12 @@ public final class Pix3D extends Pix2D {
 		int var46 = var35 * var37 - var34 * var38 << 8;
 		int var47 = var33 * var38 - var35 * var36 << 5;
 		if (arg0 <= arg1 && arg0 <= arg2) {
-			if (arg0 < field131) {
-				if (arg1 > field131) {
-					arg1 = field131;
+			if (arg0 < sizeY) {
+				if (arg1 > sizeY) {
+					arg1 = sizeY;
 				}
-				if (arg2 > field131) {
-					arg2 = field131;
+				if (arg2 > sizeY) {
+					arg2 = sizeY;
 				}
 				int var48 = (arg6 << 9) + var31 - var31 * arg3;
 				if (arg1 < arg2) {
@@ -2213,14 +2214,14 @@ public final class Pix3D extends Pix2D {
 						var51 -= var28 * arg1;
 						arg1 = 0;
 					}
-					int var52 = arg0 - field129;
+					int var52 = arg0 - originY;
 					int var53 = var39 + var41 * var52;
 					int var54 = var42 + var44 * var52;
 					int var55 = var45 + var47 * var52;
 					if (arg0 != arg1 && var29 < var27 || arg0 == arg1 && var29 > var28) {
 						int var56 = arg2 - arg1;
 						int var57 = arg1 - arg0;
-						int var58 = field116[arg0];
+						int var58 = scanline[arg0];
 						while (true) {
 							var57--;
 							if (var57 < 0) {
@@ -2251,7 +2252,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var59 = arg2 - arg1;
 						int var60 = arg1 - arg0;
-						int var61 = field116[arg0];
+						int var61 = scanline[arg0];
 						while (true) {
 							var60--;
 							if (var60 < 0) {
@@ -2294,14 +2295,14 @@ public final class Pix3D extends Pix2D {
 						var64 -= var28 * arg2;
 						arg2 = 0;
 					}
-					int var65 = arg0 - field129;
+					int var65 = arg0 - originY;
 					int var66 = var39 + var41 * var65;
 					int var67 = var42 + var44 * var65;
 					int var68 = var45 + var47 * var65;
 					if ((arg0 == arg2 || var29 >= var27) && (arg0 != arg2 || var28 <= var27)) {
 						int var72 = arg1 - arg2;
 						int var73 = arg2 - arg0;
-						int var74 = field116[arg0];
+						int var74 = scanline[arg0];
 						while (true) {
 							var73--;
 							if (var73 < 0) {
@@ -2332,7 +2333,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var69 = arg1 - arg2;
 						int var70 = arg2 - arg0;
-						int var71 = field116[arg0];
+						int var71 = scanline[arg0];
 						while (true) {
 							var70--;
 							if (var70 < 0) {
@@ -2364,12 +2365,12 @@ public final class Pix3D extends Pix2D {
 				}
 			}
 		} else if (arg1 <= arg2) {
-			if (arg1 < field131) {
-				if (arg2 > field131) {
-					arg2 = field131;
+			if (arg1 < sizeY) {
+				if (arg2 > sizeY) {
+					arg2 = sizeY;
 				}
-				if (arg0 > field131) {
-					arg0 = field131;
+				if (arg0 > sizeY) {
+					arg0 = sizeY;
 				}
 				int var75 = (arg7 << 9) + var31 - var31 * arg4;
 				if (arg2 < arg0) {
@@ -2386,14 +2387,14 @@ public final class Pix3D extends Pix2D {
 						var78 -= var29 * arg2;
 						arg2 = 0;
 					}
-					int var79 = arg1 - field129;
+					int var79 = arg1 - originY;
 					int var80 = var39 + var41 * var79;
 					int var81 = var42 + var44 * var79;
 					int var82 = var45 + var47 * var79;
 					if (arg1 != arg2 && var27 < var28 || arg1 == arg2 && var27 > var29) {
 						int var83 = arg0 - arg2;
 						int var84 = arg2 - arg1;
-						int var85 = field116[arg1];
+						int var85 = scanline[arg1];
 						while (true) {
 							var84--;
 							if (var84 < 0) {
@@ -2424,7 +2425,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var86 = arg0 - arg2;
 						int var87 = arg2 - arg1;
-						int var88 = field116[arg1];
+						int var88 = scanline[arg1];
 						while (true) {
 							var87--;
 							if (var87 < 0) {
@@ -2467,14 +2468,14 @@ public final class Pix3D extends Pix2D {
 						var91 -= var29 * arg0;
 						arg0 = 0;
 					}
-					int var92 = arg1 - field129;
+					int var92 = arg1 - originY;
 					int var93 = var39 + var41 * var92;
 					int var94 = var42 + var44 * var92;
 					int var95 = var45 + var47 * var92;
 					if (var27 < var28) {
 						int var96 = arg2 - arg0;
 						int var97 = arg0 - arg1;
-						int var98 = field116[arg1];
+						int var98 = scanline[arg1];
 						while (true) {
 							var97--;
 							if (var97 < 0) {
@@ -2505,7 +2506,7 @@ public final class Pix3D extends Pix2D {
 					} else {
 						int var99 = arg2 - arg0;
 						int var100 = arg0 - arg1;
-						int var101 = field116[arg1];
+						int var101 = scanline[arg1];
 						while (true) {
 							var100--;
 							if (var100 < 0) {
@@ -2536,12 +2537,12 @@ public final class Pix3D extends Pix2D {
 					}
 				}
 			}
-		} else if (arg2 < field131) {
-			if (arg0 > field131) {
-				arg0 = field131;
+		} else if (arg2 < sizeY) {
+			if (arg0 > sizeY) {
+				arg0 = sizeY;
 			}
-			if (arg1 > field131) {
-				arg1 = field131;
+			if (arg1 > sizeY) {
+				arg1 = sizeY;
 			}
 			int var102 = (arg8 << 9) + var31 - var31 * arg5;
 			if (arg0 < arg1) {
@@ -2558,14 +2559,14 @@ public final class Pix3D extends Pix2D {
 					var105 -= var27 * arg0;
 					arg0 = 0;
 				}
-				int var106 = arg2 - field129;
+				int var106 = arg2 - originY;
 				int var107 = var39 + var41 * var106;
 				int var108 = var42 + var44 * var106;
 				int var109 = var45 + var47 * var106;
 				if (var28 < var29) {
 					int var110 = arg1 - arg0;
 					int var111 = arg0 - arg2;
-					int var112 = field116[arg2];
+					int var112 = scanline[arg2];
 					while (true) {
 						var111--;
 						if (var111 < 0) {
@@ -2596,7 +2597,7 @@ public final class Pix3D extends Pix2D {
 				} else {
 					int var113 = arg1 - arg0;
 					int var114 = arg0 - arg2;
-					int var115 = field116[arg2];
+					int var115 = scanline[arg2];
 					while (true) {
 						var114--;
 						if (var114 < 0) {
@@ -2639,14 +2640,14 @@ public final class Pix3D extends Pix2D {
 					var118 -= var27 * arg1;
 					arg1 = 0;
 				}
-				int var119 = arg2 - field129;
+				int var119 = arg2 - originY;
 				int var120 = var39 + var41 * var119;
 				int var121 = var42 + var44 * var119;
 				int var122 = var45 + var47 * var119;
 				if (var28 < var29) {
 					int var123 = arg0 - arg1;
 					int var124 = arg1 - arg2;
-					int var125 = field116[arg2];
+					int var125 = scanline[arg2];
 					while (true) {
 						var124--;
 						if (var124 < 0) {
@@ -2677,7 +2678,7 @@ public final class Pix3D extends Pix2D {
 				} else {
 					int var126 = arg0 - arg1;
 					int var127 = arg1 - arg2;
-					int var128 = field116[arg2];
+					int var128 = scanline[arg2];
 					while (true) {
 						var127--;
 						if (var127 < 0) {
@@ -2713,8 +2714,8 @@ public final class Pix3D extends Pix2D {
 	@ObfuscatedName("af.b([I[IIIIIIIIIIIIII)V")
 	public static void method40(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12) {
 		if (field117) {
-			if (arg4 > field130) {
-				arg4 = field130;
+			if (arg4 > sizeX) {
+				arg4 = sizeX;
 			}
 			if (arg3 < 0) {
 				arg3 = 0;
@@ -2727,7 +2728,7 @@ public final class Pix3D extends Pix2D {
 		int var14 = arg5 + arg6 * arg3;
 		int var15 = arg4 - arg3;
 		if (!field122) {
-			int var68 = arg3 - field114;
+			int var68 = arg3 - originX;
 			int var69 = arg7 + arg10 * var68;
 			int var70 = arg8 + arg11 * var68;
 			int var71 = arg9 + arg12 * var68;
@@ -2872,7 +2873,7 @@ public final class Pix3D extends Pix2D {
 			}
 			return;
 		}
-		int var16 = arg3 - field114;
+		int var16 = arg3 - originX;
 		int var17 = arg7 + arg10 * var16;
 		int var18 = arg8 + arg11 * var16;
 		int var19 = arg9 + arg12 * var16;
@@ -3025,7 +3026,7 @@ public final class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("af.a(DII)V")
-	public static void method42(double arg0) {
+	public static void initColourTable2(double arg0) {
 		double var2 = arg0 + Math.random() * 0.03D - 0.015D;
 		int var4 = 0;
 		for (int var5 = 0; var5 < 512; var5++) {
@@ -3084,7 +3085,7 @@ public final class Pix3D extends Pix2D {
 				int var28 = (int) (var15 * 256.0D);
 				int var29 = (int) (var17 * 256.0D);
 				int var30 = (var27 << 16) + (var28 << 8) + var29;
-				int var31 = method37(var30, var2);
+				int var31 = gammaCorrect(var30, var2);
 				if (var31 == 0) {
 					var31 = 1;
 				}
@@ -3094,20 +3095,20 @@ public final class Pix3D extends Pix2D {
 	}
 
 	@ObfuscatedName("af.b(II)V")
-	public static void method43(int arg0, int arg1) {
-		int var2 = field116[0];
+	public static void setOrigin(int arg0, int arg1) {
+		int var2 = scanline[0];
 		int var3 = var2 / Pix2D.width;
 		int var4 = var2 - var3 * Pix2D.width;
-		field114 = arg0 - var4;
-		field129 = arg1 - var3;
-		field124 = -field114;
-		field115 = field130 - field114;
-		field125 = -field129;
-		field112 = field131 - field129;
+		originX = arg0 - var4;
+		originY = arg1 - var3;
+		minX = -originX;
+		maxX = sizeX - originX;
+		minY = -originY;
+		maxY = sizeY - originY;
 	}
 
 	@ObfuscatedName("af.c(II)I")
-	public static int method44(int arg0, int arg1) {
+	public static int textureLightColour(int arg0, int arg1) {
 		int var2 = arg1 * (arg0 & 0x7F) >> 7;
 		if (var2 < 2) {
 			var2 = 2;
@@ -3117,14 +3118,4 @@ public final class Pix3D extends Pix2D {
 		return (arg0 & 0xFF80) + var2;
 	}
 
-	@ObfuscatedName("ga.f(II)I")
-	public static int method342(int arg0) {
-		int var6 = arg0 - 1;
-		int var1 = var6 | var6 >>> 1;
-		int var2 = var1 | var1 >>> 2;
-		int var3 = var2 | var2 >>> 4;
-		int var4 = var3 | var3 >>> 8;
-		int var5 = var4 | var4 >>> 16;
-		return var5 + 1;
-	}
 }

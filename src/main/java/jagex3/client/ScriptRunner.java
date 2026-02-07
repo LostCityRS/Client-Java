@@ -667,7 +667,7 @@ public class ScriptRunner {
 						int var59 = field916[var5 + 1];
 						var57.field786 = var59;
 						var57.field804 = var58;
-						ObjType var60 = ObjType.method1092(var58);
+						ObjType var60 = ObjType.list(var58);
 						var57.field874 = var60.field1416;
 						var57.field812 = var60.field1426;
 						var57.field808 = var60.field1391;
@@ -687,7 +687,7 @@ public class ScriptRunner {
 					}
 					if (var270 == 1202) {
 						var57.field770 = 3;
-						var57.field849 = Client.field373.field1631.method234();
+						var57.field849 = Client.field373.model.method234();
 						continue;
 					}
 				} else if ((var270 < 1300 || var270 >= 1400) && (var270 < 2300 || var270 >= 2400)) {
@@ -1172,8 +1172,8 @@ public class ScriptRunner {
 						}
 						if (var270 == 3308) {
 							int var87 = Client.minusedlevel;
-							int var88 = (Client.field373.field2747 >> 7) + Client.field1700;
-							int var89 = Client.field2836 + (Client.field373.field2698 >> 7);
+							int var88 = (Client.field373.x >> 7) + Client.field1700;
+							int var89 = Client.field2836 + (Client.field373.z >> 7);
 							field916[var5++] = var89 + (var87 << 28) + (var88 << 14);
 							continue;
 						}
@@ -1487,7 +1487,7 @@ public class ScriptRunner {
 						if (var270 == 3624) {
 							var5--;
 							int var240 = field916[var5];
-							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].username.method271(Client.field373.field1659)) {
+							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].username.method271(Client.field373.name)) {
 								field916[var5++] = 1;
 								continue;
 							}
@@ -1671,7 +1671,7 @@ public class ScriptRunner {
 							var4 -= 2;
 							JagString var155 = field1305[var4 + 1];
 							JagString var156 = field1305[var4];
-							if (Client.field373.field1631 != null && Client.field373.field1631.field606) {
+							if (Client.field373.model != null && Client.field373.model.gender) {
 								field1305[var4++] = var155;
 								continue;
 							}
@@ -1811,14 +1811,14 @@ public class ScriptRunner {
 						if (var270 == 4200) {
 							var5--;
 							int var209 = field916[var5];
-							field1305[var4++] = ObjType.method1092(var209).field1429;
+							field1305[var4++] = ObjType.list(var209).field1429;
 							continue;
 						}
 						if (var270 == 4201) {
 							var5 -= 2;
 							int var210 = field916[var5];
 							int var211 = field916[var5 + 1];
-							ObjType var212 = ObjType.method1092(var210);
+							ObjType var212 = ObjType.list(var210);
 							if (var211 >= 1 && var211 <= 5 && var212.field1410[var211 - 1] != null) {
 								field1305[var4++] = var212.field1410[var211 - 1];
 								continue;
@@ -1830,7 +1830,7 @@ public class ScriptRunner {
 							var5 -= 2;
 							int var213 = field916[var5];
 							int var214 = field916[var5 + 1];
-							ObjType var215 = ObjType.method1092(var213);
+							ObjType var215 = ObjType.list(var213);
 							if (var214 >= 1 && var214 <= 5 && var215.field1428[var214 - 1] != null) {
 								field1305[var4++] = var215.field1428[var214 - 1];
 								continue;
@@ -1841,19 +1841,19 @@ public class ScriptRunner {
 						if (var270 == 4203) {
 							var5--;
 							int var216 = field916[var5];
-							field916[var5++] = ObjType.method1092(var216).field1375;
+							field916[var5++] = ObjType.list(var216).field1375;
 							continue;
 						}
 						if (var270 == 4204) {
 							var5--;
 							int var217 = field916[var5];
-							field916[var5++] = ObjType.method1092(var217).field1409 == 1 ? 1 : 0;
+							field916[var5++] = ObjType.list(var217).field1409 == 1 ? 1 : 0;
 							continue;
 						}
 						if (var270 == 4205) {
 							var5--;
 							int var218 = field916[var5];
-							ObjType var219 = ObjType.method1092(var218);
+							ObjType var219 = ObjType.list(var218);
 							if (var219.field1388 == -1 && var219.field1411 >= 0) {
 								field916[var5++] = var219.field1411;
 								continue;
@@ -1864,7 +1864,7 @@ public class ScriptRunner {
 						if (var270 == 4206) {
 							var5--;
 							int var220 = field916[var5];
-							ObjType var221 = ObjType.method1092(var220);
+							ObjType var221 = ObjType.list(var220);
 							if (var221.field1388 >= 0 && var221.field1411 >= 0) {
 								field916[var5++] = var221.field1411;
 								continue;
@@ -1875,7 +1875,7 @@ public class ScriptRunner {
 						if (var270 == 4207) {
 							var5--;
 							int var222 = field916[var5];
-							field916[var5++] = ObjType.method1092(var222).field1392 ? 1 : 0;
+							field916[var5++] = ObjType.list(var222).field1392 ? 1 : 0;
 							continue;
 						}
 					} else if (var270 < 5100) {
@@ -2101,10 +2101,10 @@ public class ScriptRunner {
 						}
 						if (var270 == 5015) {
 							JagString var208;
-							if (Client.field373 == null || Client.field373.field1659 == null) {
+							if (Client.field373 == null || Client.field373.name == null) {
 								var208 = TitleScreen.loginUser;
 							} else {
-								var208 = Client.field373.field1659;
+								var208 = Client.field373.name;
 							}
 							field1305[var4++] = var208;
 							continue;

@@ -4,7 +4,7 @@ import deob.ObfuscatedName;
 
 public class RegionRotate {
 	@ObfuscatedName("ud.a(IIIIIBI)I")
-	public static int method1079(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public static int DX(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var6 = arg5 & 0x3;
 		if ((arg2 & 0x1) == 1) {
 			int var7 = arg3;
@@ -23,7 +23,7 @@ public class RegionRotate {
 	}
 
 	@ObfuscatedName("fc.a(IIII)I")
-	public static int method318(int arg0, int arg1, int arg2) {
+	public static int DX(int arg0, int arg1, int arg2) {
 		int var3 = arg0 & 0x3;
 		if (var3 == 0) {
 			return arg1;
@@ -37,7 +37,7 @@ public class RegionRotate {
 	}
 
 	@ObfuscatedName("kb.a(IIIIIII)I")
-	public static int method582(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public static int DZ(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if ((arg0 & 0x1) == 1) {
 			int var6 = arg4;
 			arg4 = arg3;
@@ -56,7 +56,7 @@ public class RegionRotate {
 	}
 
     @ObfuscatedName("ed.a(IIII)I")
-    public static int method281(int arg0, int arg1, int arg2) {
+    public static int DZ(int arg0, int arg1, int arg2) {
         int var3 = arg0 & 0x3;
         if (var3 == 0) {
             return arg1;

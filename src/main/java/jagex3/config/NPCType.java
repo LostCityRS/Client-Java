@@ -76,7 +76,7 @@ public final class NPCType extends Linkable2 {
 	public int field2195 = -1;
 
 	@ObfuscatedName("o.S")
-	public int field2196 = 1;
+	public int size = 1;
 
 	@ObfuscatedName("o.Y")
 	public int field2202 = -1;
@@ -118,7 +118,7 @@ public final class NPCType extends Linkable2 {
 	public short[] field2228;
 
 	@ObfuscatedName("cb.b(II)Lo;")
-	public static NPCType method130(int arg0) {
+	public static NPCType list(int arg0) {
 		NPCType var1 = (NPCType) field164.find((long) arg0);
 		if (var1 != null) {
 			return var1;
@@ -147,10 +147,10 @@ public final class NPCType extends Linkable2 {
 	}
 
 	@ObfuscatedName("o.e(I)Lp;")
-	public ModelUnlit method752() {
+	public ModelUnlit getHead() {
 		if (this.field2214 != null) {
 			NPCType var1 = this.method757();
-			return var1 == null ? null : var1.method752();
+			return var1 == null ? null : var1.getHead();
 		} else if (this.field2203 == null) {
 			return null;
 		} else {
@@ -175,7 +175,7 @@ public final class NPCType extends Linkable2 {
 			}
 			if (this.field2228 != null) {
 				for (int var7 = 0; var7 < this.field2228.length; var7++) {
-					var6.method833(this.field2228[var7], this.field2220[var7]);
+					var6.recolour(this.field2228[var7], this.field2220[var7]);
 				}
 			}
 			if (this.field2193 != null) {
@@ -209,7 +209,7 @@ public final class NPCType extends Linkable2 {
 		} else if (this.field2186 != -1) {
 			var1 = VarCache.field504[this.field2186];
 		}
-		return var1 < 0 || var1 >= this.field2214.length || this.field2214[var1] == -1 ? null : method130(this.field2214[var1]);
+		return var1 < 0 || var1 >= this.field2214.length || this.field2214[var1] == -1 ? null : list(this.field2214[var1]);
 	}
 
 	@ObfuscatedName("o.a(BLjd;)V")
@@ -224,10 +224,10 @@ public final class NPCType extends Linkable2 {
 	}
 
 	@ObfuscatedName("o.a(Lvc;ILvc;BI)Lod;")
-	public ModelLit method761(SeqType arg0, int arg1, SeqType arg2, int arg3) {
+	public ModelLit getTempModel(SeqType arg0, int arg1, SeqType arg2, int arg3) {
 		if (this.field2214 != null) {
 			NPCType var5 = this.method757();
-			return var5 == null ? null : var5.method761(arg0, arg1, arg2, arg3);
+			return var5 == null ? null : var5.getTempModel(arg0, arg1, arg2, arg3);
 		}
 		ModelLit var6 = (ModelLit) field3269.find((long) this.field2224);
 		if (var6 == null) {
@@ -252,7 +252,7 @@ public final class NPCType extends Linkable2 {
 			}
 			if (this.field2228 != null) {
 				for (int var12 = 0; var12 < this.field2228.length; var12++) {
-					var11.method833(this.field2228[var12], this.field2220[var12]);
+					var11.recolour(this.field2228[var12], this.field2220[var12]);
 				}
 			}
 			if (this.field2193 != null) {
@@ -260,18 +260,18 @@ public final class NPCType extends Linkable2 {
 					var11.method853(this.field2193[var13], this.field2197[var13]);
 				}
 			}
-			var6 = var11.method847(this.field2191 + 64, this.field2222 + 850, -30, -50, -30);
+			var6 = var11.light(this.field2191 + 64, this.field2222 + 850, -30, -50, -30);
 			field3269.put((long) this.field2224, var6);
 		}
 		ModelLit var14;
 		if (arg2 != null && arg0 != null) {
-			var14 = arg2.method1114(arg3, arg0, var6, arg1);
+			var14 = arg2.splitAnimateModel(arg3, arg0, var6, arg1);
 		} else if (arg2 != null) {
-			var14 = arg2.method1116(var6, arg1);
+			var14 = arg2.animateModel(var6, arg1);
 		} else if (arg0 == null) {
 			var14 = var6.method799(true);
 		} else {
-			var14 = arg0.method1116(var6, arg3);
+			var14 = arg0.animateModel(var6, arg3);
 		}
 		if (this.field2206 != 128 || this.field2227 != 128) {
 			var14.method805(this.field2206, this.field2227, this.field2206);
@@ -294,7 +294,7 @@ public final class NPCType extends Linkable2 {
 		} else if (arg1 == 2) {
 			this.field2204 = arg0.method555();
 		} else if (arg1 == 12) {
-			this.field2196 = arg0.g1();
+			this.size = arg0.g1();
 		} else if (arg1 == 13) {
 			this.field2195 = arg0.g2();
 		} else if (arg1 == 14) {

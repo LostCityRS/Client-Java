@@ -9,7 +9,7 @@ public final class ModelLit extends ModelSource {
 	public byte field2328 = 0;
 
 	@ObfuscatedName("od.ac")
-	public static int[] field2380 = Pix3D.field121;
+	public static int[] field2380 = Pix3D.cosTable;
 
 	@ObfuscatedName("od.bb")
 	public int field2329;
@@ -87,7 +87,7 @@ public final class ModelLit extends ModelSource {
 	public static ModelLit field2351 = new ModelLit();
 
 	@ObfuscatedName("od.yb")
-	public static int[] field2352 = Pix3D.field127;
+	public static int[] field2352 = Pix3D.divTable2;
 
 	@ObfuscatedName("od.Ab")
 	public static int[] field2354 = new int[10];
@@ -162,7 +162,7 @@ public final class ModelLit extends ModelSource {
 	public static int[] field2367 = new int[1000];
 
 	@ObfuscatedName("od.U")
-	public boolean field2322 = false;
+	public boolean useAABBMouseCheck = false;
 
 	@ObfuscatedName("od.T")
 	public int[] field2321;
@@ -356,10 +356,10 @@ public final class ModelLit extends ModelSource {
 
 	@ObfuscatedName("od.a(IIIIIIIII)V")
 	@Override
-	public void method184(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void worldRender(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		field2355[0] = -1;
 		if (this.field2340 != 1) {
-			this.method804();
+			this.calcBoundingCylinder();
 		}
 		int var10 = arg7 * arg4 - arg5 * arg3 >> 16;
 		int var11 = arg6 * arg1 + var10 * arg2 >> 16;
@@ -370,25 +370,25 @@ public final class ModelLit extends ModelSource {
 		}
 		int var14 = arg7 * arg3 + arg5 * arg4 >> 16;
 		int var15 = var14 - this.field2329 << 9;
-		if (var15 / var13 >= Pix3D.field115) {
+		if (var15 / var13 >= Pix3D.maxX) {
 			return;
 		}
 		int var16 = var14 + this.field2329 << 9;
-		if (var16 / var13 <= Pix3D.field124) {
+		if (var16 / var13 <= Pix3D.minX) {
 			return;
 		}
 		int var17 = arg6 * arg2 - var10 * arg1 >> 16;
 		int var18 = this.field2329 * arg1 >> 16;
 		int var19 = var17 + var18 << 9;
-		if (var19 / var13 <= Pix3D.field125) {
+		if (var19 / var13 <= Pix3D.minY) {
 			return;
 		}
-		int var20 = var18 + (super.field470 * arg2 >> 16);
+		int var20 = var18 + (super.minY * arg2 >> 16);
 		int var21 = var17 - var20 << 9;
-		if (var21 / var13 >= Pix3D.field112) {
+		if (var21 / var13 >= Pix3D.maxY) {
 			return;
 		}
-		int var22 = var12 + (super.field470 * arg1 >> 16);
+		int var22 = var12 + (super.minY * arg1 >> 16);
 		boolean var23 = false;
 		boolean var24 = false;
 		if (var11 - var22 <= 50) {
@@ -419,18 +419,18 @@ public final class ModelLit extends ModelSource {
 				var31 = var19 / var13;
 				var30 = var21 / var27;
 			}
-			int var32 = field2362 - Pix3D.field114;
-			int var33 = field2363 - Pix3D.field129;
+			int var32 = field2362 - Pix3D.originX;
+			int var33 = field2363 - Pix3D.originY;
 			if (var32 > var28 && var32 < var29 && var33 > var30 && var33 < var31) {
-				if (this.field2322) {
+				if (this.useAABBMouseCheck) {
 					field2367[field2382++] = arg8;
 				} else {
 					var26 = true;
 				}
 			}
 		}
-		int var34 = Pix3D.field114;
-		int var35 = Pix3D.field129;
+		int var34 = Pix3D.originX;
+		int var35 = Pix3D.originY;
 		int var36 = 0;
 		int var37 = 0;
 		if (arg0 != 0) {
@@ -517,13 +517,13 @@ public final class ModelLit extends ModelSource {
 		arg1.field2326 = this.field2326;
 		arg1.field2344 = this.field2344;
 		arg1.field2324 = this.field2324;
-		arg1.field2322 = this.field2322;
+		arg1.useAABBMouseCheck = this.useAABBMouseCheck;
 		arg1.field2340 = 0;
 		return arg1;
 	}
 
 	@ObfuscatedName("od.a()V")
-	public void method801() {
+	public void rotate90() {
 		for (int var1 = 0; var1 < this.field2347; var1++) {
 			int var2 = this.field2337[var1];
 			this.field2337[var1] = this.field2330[var1];
@@ -533,7 +533,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.f(I)V")
-	public void method802(int arg0) {
+	public void rotateXAxis(int arg0) {
 		int var2 = field2361[arg0];
 		int var3 = field2380[arg0];
 		for (int var4 = 0; var4 < this.field2347; var4++) {
@@ -554,20 +554,20 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.c()V")
-	public void method804() {
+	public void calcBoundingCylinder() {
 		if (this.field2340 == 1) {
 			return;
 		}
 		this.field2340 = 1;
-		super.field470 = 0;
+		super.minY = 0;
 		this.field2343 = 0;
 		this.field2329 = 0;
 		for (int var1 = 0; var1 < this.field2347; var1++) {
 			int var2 = this.field2337[var1];
 			int var3 = this.field2321[var1];
 			int var4 = this.field2330[var1];
-			if (-var3 > super.field470) {
-				super.field470 = -var3;
+			if (-var3 > super.minY) {
+				super.minY = -var3;
 			}
 			if (var3 > this.field2343) {
 				this.field2343 = var3;
@@ -578,7 +578,7 @@ public final class ModelLit extends ModelSource {
 			}
 		}
 		this.field2329 = (int) (Math.sqrt((double) this.field2329) + 0.99D);
-		this.field2323 = (int) (Math.sqrt((double) (this.field2329 * this.field2329 + super.field470 * super.field470)) + 0.99D);
+		this.field2323 = (int) (Math.sqrt((double) (this.field2329 * this.field2329 + super.minY * super.minY)) + 0.99D);
 		this.field2341 = this.field2323 + (int) (Math.sqrt((double) (this.field2329 * this.field2329 + this.field2343 * this.field2343)) + 0.99D);
 	}
 
@@ -639,7 +639,7 @@ public final class ModelLit extends ModelSource {
 					}
 					if ((var9 - var10) * (field2364[var8] - field2364[var7]) - (field2364[var6] - field2364[var7]) * (var11 - var10) > 0) {
 						field2370[var5] = false;
-						if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix3D.field130 && var10 <= Pix3D.field130 && var11 <= Pix3D.field130) {
+						if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix3D.sizeX && var10 <= Pix3D.sizeX && var11 <= Pix3D.sizeX) {
 							field2376[var5] = false;
 						} else {
 							field2376[var5] = true;
@@ -801,7 +801,7 @@ public final class ModelLit extends ModelSource {
 
 	@ObfuscatedName("od.a([[IIIIZI)Lod;")
 	public ModelLit method808(int[][] arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5) {
-		this.method804();
+		this.calcBoundingCylinder();
 		int var7 = arg1 - this.field2329;
 		int var8 = arg1 + this.field2329;
 		int var9 = arg3 - this.field2329;
@@ -840,7 +840,7 @@ public final class ModelLit extends ModelSource {
 			var15.field2326 = this.field2326;
 			var15.field2344 = this.field2344;
 			var15.field2324 = this.field2324;
-			var15.field2322 = this.field2322;
+			var15.useAABBMouseCheck = this.useAABBMouseCheck;
 			var15.field2321 = new int[var15.field2347];
 		} else {
 			var15 = this;
@@ -860,7 +860,7 @@ public final class ModelLit extends ModelSource {
 			}
 		} else {
 			for (int var26 = 0; var26 < var15.field2347; var26++) {
-				int var27 = (-this.field2321[var26] << 16) / super.field470;
+				int var27 = (-this.field2321[var26] << 16) / super.minY;
 				if (var27 < arg5) {
 					int var28 = this.field2337[var26] + arg1;
 					int var29 = this.field2330[var26] + arg3;
@@ -885,8 +885,8 @@ public final class ModelLit extends ModelSource {
 		if (this.field2340 != 2 && this.field2340 != 1) {
 			this.method807();
 		}
-		int var8 = Pix3D.field114;
-		int var9 = Pix3D.field129;
+		int var8 = Pix3D.originX;
+		int var9 = Pix3D.originY;
 		int var10 = field2361[0];
 		int var11 = field2380[0];
 		int var12 = field2361[arg0];
@@ -935,14 +935,14 @@ public final class ModelLit extends ModelSource {
 		if (this.field2344 == null || arg1 == -1) {
 			return;
 		}
-		AnimFrame var3 = arg0.field2871[arg1];
-		AnimBase var4 = var3.field974;
+		AnimFrame var3 = arg0.list[arg1];
+		AnimBase var4 = var3.base;
 		field2366 = 0;
 		field2358 = 0;
 		field2379 = 0;
-		for (int var5 = 0; var5 < var3.field975; var5++) {
-			int var6 = var3.field981[var5];
-			this.method819(var4.field2106[var6], var4.field2102[var6], var3.field979[var5], var3.field982[var5], var3.field976[var5]);
+		for (int var5 = 0; var5 < var3.size; var5++) {
+			int var6 = var3.ti[var5];
+			this.method819(var4.type[var6], var4.labels[var6], var3.tx[var5], var3.ty[var5], var3.tz[var5]);
 		}
 		this.field2340 = 0;
 	}
@@ -976,8 +976,8 @@ public final class ModelLit extends ModelSource {
 		if (this.field2340 != 2 && this.field2340 != 1) {
 			this.method807();
 		}
-		int var7 = Pix3D.field114;
-		int var8 = Pix3D.field129;
+		int var7 = Pix3D.originX;
+		int var8 = Pix3D.originY;
 		int var9 = field2361[0];
 		int var10 = field2380[0];
 		int var11 = field2361[arg0];
@@ -1030,22 +1030,22 @@ public final class ModelLit extends ModelSource {
 			this.method810(arg0, arg1);
 			return;
 		}
-		AnimFrame var6 = arg0.field2871[arg1];
-		AnimFrame var7 = arg2.field2871[arg3];
-		AnimBase var8 = var6.field974;
+		AnimFrame var6 = arg0.list[arg1];
+		AnimFrame var7 = arg2.list[arg3];
+		AnimBase var8 = var6.base;
 		field2366 = 0;
 		field2358 = 0;
 		field2379 = 0;
 		byte var9 = 0;
 		int var17 = var9 + 1;
 		int var10 = arg4[0];
-		for (int var11 = 0; var11 < var6.field975; var11++) {
-			int var12 = var6.field981[var11];
+		for (int var11 = 0; var11 < var6.size; var11++) {
+			int var12 = var6.ti[var11];
 			while (var12 > var10) {
 				var10 = arg4[var17++];
 			}
-			if (var12 != var10 || var8.field2106[var12] == 0) {
-				this.method819(var8.field2106[var12], var8.field2102[var12], var6.field979[var11], var6.field982[var11], var6.field976[var11]);
+			if (var12 != var10 || var8.type[var12] == 0) {
+				this.method819(var8.type[var12], var8.labels[var12], var6.tx[var11], var6.ty[var11], var6.tz[var11]);
 			}
 		}
 		field2366 = 0;
@@ -1054,13 +1054,13 @@ public final class ModelLit extends ModelSource {
 		byte var13 = 0;
 		int var18 = var13 + 1;
 		int var14 = arg4[0];
-		for (int var15 = 0; var15 < var7.field975; var15++) {
-			int var16 = var7.field981[var15];
+		for (int var15 = 0; var15 < var7.size; var15++) {
+			int var16 = var7.ti[var15];
 			while (var16 > var14) {
 				var14 = arg4[var18++];
 			}
-			if (var16 == var14 || var8.field2106[var16] == 0) {
-				this.method819(var8.field2106[var16], var8.field2102[var16], var7.field979[var15], var7.field982[var15], var7.field976[var15]);
+			if (var16 == var14 || var8.type[var16] == 0) {
+				this.method819(var8.type[var16], var8.labels[var16], var7.tx[var15], var7.ty[var15], var7.tz[var15]);
 			}
 		}
 		this.field2340 = 0;
@@ -1068,12 +1068,12 @@ public final class ModelLit extends ModelSource {
 
 	@ObfuscatedName("od.g()I")
 	public int method816() {
-		this.method804();
+		this.calcBoundingCylinder();
 		return this.field2329;
 	}
 
 	@ObfuscatedName("od.c(III)V")
-	public void method817(int arg0, int arg1, int arg2) {
+	public void translate(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < this.field2347; var4++) {
 			this.field2337[var4] += arg0;
 			this.field2321[var4] += arg1;
@@ -1084,8 +1084,8 @@ public final class ModelLit extends ModelSource {
 
 	@ObfuscatedName("od.g(I)V")
 	public void method818(int arg0) {
-		int var2 = Pix3D.field114;
-		int var3 = Pix3D.field129;
+		int var2 = Pix3D.originX;
+		int var3 = Pix3D.originY;
 		int var4 = 0;
 		int var5 = this.field2338[arg0];
 		int var6 = this.field2333[arg0];
@@ -1171,7 +1171,7 @@ public final class ModelLit extends ModelSource {
 		int var31 = field2354[2];
 		Pix3D.field117 = false;
 		if (var4 == 3) {
-			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.field130 || var27 > Pix3D.field130 || var28 > Pix3D.field130) {
+			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.sizeX || var27 > Pix3D.sizeX || var28 > Pix3D.sizeX) {
 				Pix3D.field117 = true;
 			}
 			if (this.field2332 != null && this.field2332[arg0] != -1) {
@@ -1202,7 +1202,7 @@ public final class ModelLit extends ModelSource {
 		if (var4 != 4) {
 			return;
 		}
-		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.field130 || var27 > Pix3D.field130 || var28 > Pix3D.field130 || field2360[3] < 0 || field2360[3] > Pix3D.field130) {
+		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.sizeX || var27 > Pix3D.sizeX || var28 > Pix3D.sizeX || field2360[3] < 0 || field2360[3] > Pix3D.sizeX) {
 			Pix3D.field117 = true;
 		}
 		if (this.field2332 == null || this.field2332[arg0] == -1) {

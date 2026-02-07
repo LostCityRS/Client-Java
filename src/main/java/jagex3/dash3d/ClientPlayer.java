@@ -13,43 +13,43 @@ import jagex3.util.JagString;
 public final class ClientPlayer extends ClientEntity {
 
 	@ObfuscatedName("ka.ad")
-	public int field1648;
+	public int locOffsetZ;
 
 	@ObfuscatedName("ka.bd")
-	public int field1649 = -1;
+	public int headiconPk = -1;
 
 	@ObfuscatedName("ka.ed")
-	public int field1652 = 0;
+	public int skillLevel = 0;
 
 	@ObfuscatedName("ka.fd")
-	public int field1653 = 0;
+	public int locEndCycle = 0;
 
 	@ObfuscatedName("ka.gd")
-	public ModelLit field1654;
+	public ModelLit locModel;
 
 	@ObfuscatedName("ka.ld")
-	public JagString field1659;
+	public JagString name;
 
 	@ObfuscatedName("ka.md")
-	public int field1660 = -1;
+	public int headiconPrayer = -1;
 
 	@ObfuscatedName("ka.Lc")
 	public static int field1633 = -1;
 
 	@ObfuscatedName("ka.Rc")
-	public int field1639 = 0;
+	public int locStartCycle = 0;
 
 	@ObfuscatedName("ka.Pc")
-	public int field1637 = 0;
+	public int team = 0;
 
 	@ObfuscatedName("ka.Nc")
-	public int field1635 = 0;
+	public int combatLevel = 0;
 
 	@ObfuscatedName("ka.Tc")
-	public boolean field1641 = false;
+	public boolean lowMem = false;
 
 	@ObfuscatedName("ka.Fc")
-	public int field1627;
+	public int locOffsetX;
 
 	@ObfuscatedName("ka.Kc")
 	public int field1632;
@@ -70,17 +70,17 @@ public final class ClientPlayer extends ClientEntity {
 	public int field1645;
 
 	@ObfuscatedName("ka.Jc")
-	public PlayerModel field1631;
+	public PlayerModel model;
 
 	@ObfuscatedName("ka.a(BLjd;)V")
-	public void method576(Packet arg0) {
+	public void setAppearance(Packet arg0) {
 		arg0.pos = 0;
 		int[] var2 = new int[12];
 		int var3 = -1;
 		int var4 = arg0.g1();
-		this.field1649 = arg0.g1b();
-		this.field1660 = arg0.g1b();
-		this.field1637 = 0;
+		this.headiconPk = arg0.g1b();
+		this.headiconPrayer = arg0.g1b();
+		this.team = 0;
 		for (int var5 = 0; var5 < 12; var5++) {
 			int var6 = arg0.g1();
 			if (var6 == 0) {
@@ -93,9 +93,9 @@ public final class ClientPlayer extends ClientEntity {
 					break;
 				}
 				if (var2[var5] >= 512) {
-					int var8 = ObjType.method1092(var2[var5] - 512).field1425;
+					int var8 = ObjType.list(var2[var5] - 512).team;
 					if (var8 != 0) {
-						this.field1637 = var8;
+						this.team = var8;
 					}
 				}
 			}
@@ -103,110 +103,110 @@ public final class ClientPlayer extends ClientEntity {
 		int[] var9 = new int[5];
 		for (int var10 = 0; var10 < 5; var10++) {
 			int var11 = arg0.g1();
-			if (var11 < 0 || PlayerModel.field3218[var10].length <= var11) {
+			if (var11 < 0 || PlayerModel.recol1d[var10].length <= var11) {
 				var11 = 0;
 			}
 			var9[var10] = var11;
 		}
-		super.field2687 = arg0.g2();
-		if (super.field2687 == 65535) {
-			super.field2687 = -1;
+		super.readyanim = arg0.g2();
+		if (super.readyanim == 65535) {
+			super.readyanim = -1;
 		}
-		super.field2744 = arg0.g2();
-		if (super.field2744 == 65535) {
-			super.field2744 = -1;
+		super.turnleftanim = arg0.g2();
+		if (super.turnleftanim == 65535) {
+			super.turnleftanim = -1;
 		}
-		super.field2716 = super.field2744;
-		super.field2709 = arg0.g2();
-		if (super.field2709 == 65535) {
-			super.field2709 = -1;
+		super.turnrightanim = super.turnleftanim;
+		super.walkanim = arg0.g2();
+		if (super.walkanim == 65535) {
+			super.walkanim = -1;
 		}
-		super.field2734 = arg0.g2();
-		if (super.field2734 == 65535) {
-			super.field2734 = -1;
+		super.walkanim_b = arg0.g2();
+		if (super.walkanim_b == 65535) {
+			super.walkanim_b = -1;
 		}
-		super.field2723 = arg0.g2();
-		if (super.field2723 == 65535) {
-			super.field2723 = -1;
+		super.walkanim_l = arg0.g2();
+		if (super.walkanim_l == 65535) {
+			super.walkanim_l = -1;
 		}
-		super.field2729 = arg0.g2();
-		if (super.field2729 == 65535) {
-			super.field2729 = -1;
+		super.walkanim_r = arg0.g2();
+		if (super.walkanim_r == 65535) {
+			super.walkanim_r = -1;
 		}
-		super.field2705 = arg0.g2();
-		if (super.field2705 == 65535) {
-			super.field2705 = -1;
+		super.runanim = arg0.g2();
+		if (super.runanim == 65535) {
+			super.runanim = -1;
 		}
-		this.field1659 = JString.method59(arg0.method527()).method264();
-		this.field1635 = arg0.g1();
-		this.field1652 = arg0.g2();
-		if (this.field1631 == null) {
-			this.field1631 = new PlayerModel();
+		this.name = JString.method59(arg0.g8()).method264();
+		this.combatLevel = arg0.g1();
+		this.skillLevel = arg0.g2();
+		if (this.model == null) {
+			this.model = new PlayerModel();
 		}
-		this.field1631.setAppearance(var9, var3, var2, var4 == 1);
+		this.model.setAppearance(var9, var3, var2, var4 == 1);
 	}
 
 	@ObfuscatedName("ka.b(B)Lod;")
 	@Override
-	public ModelLit method132() {
-		if (this.field1631 == null) {
+	public ModelLit getTempModel() {
+		if (this.model == null) {
 			return null;
 		}
-		SeqType var1 = super.field2712 != -1 && super.field2715 == 0 ? SeqType.method760(super.field2712) : null;
-		SeqType var2 = super.field2708 == -1 || this.field1641 || super.field2708 == super.field2687 && var1 != null ? null : SeqType.method760(super.field2708);
-		ModelLit var3 = this.field1631.method233(var1, super.field2728, var2, super.field2725);
+		SeqType var1 = super.primarySeqId != -1 && super.primarySeqDelay == 0 ? SeqType.list(super.primarySeqId) : null;
+		SeqType var2 = super.secondarySeqId == -1 || this.lowMem || super.secondarySeqId == super.readyanim && var1 != null ? null : SeqType.list(super.secondarySeqId);
+		ModelLit var3 = this.model.getTempModel(var1, super.field2728, var2, super.field2725);
 		if (var3 == null) {
 			return null;
 		}
-		var3.method804();
-		super.field2688 = var3.field470;
-		if (!this.field1641 && super.field2731 != -1 && super.field2754 != -1) {
-			ModelLit var4 = SpotType.method316(super.field2731).method1017(super.field2754);
+		var3.calcBoundingCylinder();
+		super.height = var3.minY;
+		if (!this.lowMem && super.spotanimId != -1 && super.spotanimFrame != -1) {
+			ModelLit var4 = SpotType.list(super.spotanimId).getTempModel2(super.spotanimFrame);
 			if (var4 != null) {
 				ModelLit[] var5 = new ModelLit[] { var3, var4 };
-				var4.method817(0, -super.field2727, 0);
+				var4.translate(0, -super.spotanimHeight, 0);
 				var3 = new ModelLit(var5, 2);
 			}
 		}
-		if (!this.field1641 && this.field1654 != null) {
-			if (this.field1653 <= Client.loopCycle) {
-				this.field1654 = null;
+		if (!this.lowMem && this.locModel != null) {
+			if (this.locEndCycle <= Client.loopCycle) {
+				this.locModel = null;
 			}
-			if (this.field1639 <= Client.loopCycle && this.field1653 > Client.loopCycle) {
-				ModelLit var6 = this.field1654;
-				var6.method817(this.field1627 - super.field2747, this.field1644 + -this.field1643, this.field1648 - super.field2698);
-				if (super.field2742 == 512) {
-					var6.method801();
-					var6.method801();
-					var6.method801();
-				} else if (super.field2742 == 1024) {
-					var6.method801();
-					var6.method801();
-				} else if (super.field2742 == 1536) {
-					var6.method801();
+			if (this.locStartCycle <= Client.loopCycle && this.locEndCycle > Client.loopCycle) {
+				ModelLit var6 = this.locModel;
+				var6.translate(this.locOffsetX - super.x, this.field1644 + -this.field1643, this.locOffsetZ - super.z);
+				if (super.dstYaw == 512) {
+					var6.rotate90();
+					var6.rotate90();
+					var6.rotate90();
+				} else if (super.dstYaw == 1024) {
+					var6.rotate90();
+					var6.rotate90();
+				} else if (super.dstYaw == 1536) {
+					var6.rotate90();
 				}
 				ModelLit[] var7 = new ModelLit[] { var3, var6 };
 				var3 = new ModelLit(var7, 2);
-				if (super.field2742 == 512) {
-					var6.method801();
-				} else if (super.field2742 == 1024) {
-					var6.method801();
-					var6.method801();
-				} else if (super.field2742 == 1536) {
-					var6.method801();
-					var6.method801();
-					var6.method801();
+				if (super.dstYaw == 512) {
+					var6.rotate90();
+				} else if (super.dstYaw == 1024) {
+					var6.rotate90();
+					var6.rotate90();
+				} else if (super.dstYaw == 1536) {
+					var6.rotate90();
+					var6.rotate90();
+					var6.rotate90();
 				}
-				var6.method817(super.field2747 - this.field1627, this.field1643 - this.field1644, super.field2698 - this.field1648);
+				var6.translate(super.x - this.locOffsetX, this.field1643 - this.field1644, super.z - this.locOffsetZ);
 			}
 		}
-		var3.field2322 = true;
+		var3.useAABBMouseCheck = true;
 		return var3;
 	}
 
 	@ObfuscatedName("ka.j(I)Z")
 	@Override
-	public boolean method578() {
-		return this.field1631 != null;
+	public boolean ready() {
+		return this.model != null;
 	}
 }
