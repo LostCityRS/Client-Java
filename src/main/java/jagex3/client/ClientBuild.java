@@ -192,38 +192,38 @@ public final class ClientBuild {
 		int var16 = (var9 << 6) + (arg7 << 7);
 		int var17 = (var10 << 6) + (arg1 << 7);
 		int var18 = (arg3 << 14) + (arg1 << 7) + arg7 + 1073741824;
-		if (var8.field1193 == 0) {
+		if (var8.active == 0) {
 			var18 += Integer.MIN_VALUE;
 		}
 		int var19 = var15[var12][var13] + var15[var11][var13] + var15[var11][var14] + var15[var12][var14] >> 2;
 		int var20 = arg2 + (arg4 << 6);
-		if (var8.field1252 == 1) {
+		if (var8.raiseobject == 1) {
 			var20 += 256;
 		}
-		if (var8.method411()) {
+		if (var8.hasBgSound()) {
 			World.method603(arg4, var8, arg6, arg7, arg1);
 		}
 		if (arg2 == 22) {
-			if (!Client.lowMem || var8.field1193 != 0 || var8.field1235 == 1 || var8.field1204) {
+			if (!Client.lowMem || var8.active != 0 || var8.blockwalk == 1 || var8.forcedecor) {
 				ModelSource var21;
-				if (var8.field1225 == -1 && var8.multiloc == null) {
-					var21 = var8.method421(var17, var19, arg4, var15, var16, 22);
+				if (var8.anim == -1 && var8.multiloc == null) {
+					var21 = var8.getModel(var17, var19, arg4, var15, var16, 22);
 				} else {
-					var21 = new ClientLocAnim(arg3, 22, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+					var21 = new ClientLocAnim(arg3, 22, arg4, arg6, arg7, arg1, var8.anim, true, null);
 				}
 				arg0.method1138(arg6, arg7, arg1, var19, var21, var18, var20);
-				if (var8.field1235 == 1 && arg5 != null) {
+				if (var8.blockwalk == 1 && arg5 != null) {
 					arg5.blockGroundDecor(arg7, arg1);
 				}
 			}
 		} else if (arg2 == 10 || arg2 == 11) {
 			ModelSource var22;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var22 = var8.method421(var17, var19, arg4, var15, var16, 10);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var22 = var8.getModel(var17, var19, arg4, var15, var16, 10);
 			} else {
-				var22 = new ClientLocAnim(arg3, 10, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+				var22 = new ClientLocAnim(arg3, 10, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
-			if (var22 != null && arg0.method1151(arg6, arg7, arg1, var19, var9, var10, var22, arg2 == 11 ? 256 : 0, var18, var20) && var8.field1253) {
+			if (var22 != null && arg0.method1151(arg6, arg7, arg1, var19, var9, var10, var22, arg2 == 11 ? 256 : 0, var18, var20) && var8.shadow) {
 				int var23 = 15;
 				if (var22 instanceof ModelLit) {
 					var23 = ((ModelLit) var22).method816() / 4;
@@ -239,79 +239,79 @@ public final class ClientBuild {
 					}
 				}
 			}
-			if (var8.field1235 != 0 && arg5 != null) {
-				arg5.addLoc(var10, var8.field1219, arg7, arg1, var9);
+			if (var8.blockwalk != 0 && arg5 != null) {
+				arg5.addLoc(var10, var8.blockrange, arg7, arg1, var9);
 			}
 		} else if (arg2 >= 12) {
 			ModelSource var26;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var26 = var8.method421(var17, var19, arg4, var15, var16, arg2);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var26 = var8.getModel(var17, var19, arg4, var15, var16, arg2);
 			} else {
-				var26 = new ClientLocAnim(arg3, arg2, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+				var26 = new ClientLocAnim(arg3, arg2, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1151(arg6, arg7, arg1, var19, 1, 1, var26, 0, var18, var20);
 			if (arg2 >= 12 && arg2 <= 17 && arg2 != 13 && arg6 > 0) {
 				field2426[arg6][arg7][arg1] |= 0x924;
 			}
-			if (var8.field1235 != 0 && arg5 != null) {
-				arg5.addLoc(var10, var8.field1219, arg7, arg1, var9);
+			if (var8.blockwalk != 0 && arg5 != null) {
+				arg5.addLoc(var10, var8.blockrange, arg7, arg1, var9);
 			}
 		} else if (arg2 == 0) {
 			ModelSource var27;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var27 = var8.method421(var17, var19, arg4, var15, var16, 0);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var27 = var8.getModel(var17, var19, arg4, var15, var16, 0);
 			} else {
-				var27 = new ClientLocAnim(arg3, 0, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+				var27 = new ClientLocAnim(arg3, 0, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1117(arg6, arg7, arg1, var19, var27, null, field3176[arg4], 0, var18, var20);
 			if (arg4 == 0) {
-				if (var8.field1253) {
+				if (var8.shadow) {
 					field1985[arg6][arg7][arg1] = 50;
 					field1985[arg6][arg7][arg1 + 1] = 50;
 				}
-				if (var8.field1210) {
+				if (var8.occlude) {
 					field2426[arg6][arg7][arg1] |= 0x249;
 				}
 			} else if (arg4 == 1) {
-				if (var8.field1253) {
+				if (var8.shadow) {
 					field1985[arg6][arg7][arg1 + 1] = 50;
 					field1985[arg6][arg7 + 1][arg1 + 1] = 50;
 				}
-				if (var8.field1210) {
+				if (var8.occlude) {
 					field2426[arg6][arg7][arg1 + 1] |= 0x492;
 				}
 			} else if (arg4 == 2) {
-				if (var8.field1253) {
+				if (var8.shadow) {
 					field1985[arg6][arg7 + 1][arg1] = 50;
 					field1985[arg6][arg7 + 1][arg1 + 1] = 50;
 				}
-				if (var8.field1210) {
+				if (var8.occlude) {
 					field2426[arg6][arg7 + 1][arg1] |= 0x249;
 				}
 			} else if (arg4 == 3) {
-				if (var8.field1253) {
+				if (var8.shadow) {
 					field1985[arg6][arg7][arg1] = 50;
 					field1985[arg6][arg7 + 1][arg1] = 50;
 				}
-				if (var8.field1210) {
+				if (var8.occlude) {
 					field2426[arg6][arg7][arg1] |= 0x492;
 				}
 			}
-			if (var8.field1235 != 0 && arg5 != null) {
-				arg5.addWall(var8.field1219, arg2, arg7, arg1, arg4);
+			if (var8.blockwalk != 0 && arg5 != null) {
+				arg5.addWall(var8.blockrange, arg2, arg7, arg1, arg4);
 			}
-			if (var8.field1245 != 16) {
-				arg0.method1152(arg6, arg7, arg1, var8.field1245);
+			if (var8.wallwidth != 16) {
+				arg0.method1152(arg6, arg7, arg1, var8.wallwidth);
 			}
 		} else if (arg2 == 1) {
 			ModelSource var28;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var28 = var8.method421(var17, var19, arg4, var15, var16, 1);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var28 = var8.getModel(var17, var19, arg4, var15, var16, 1);
 			} else {
-				var28 = new ClientLocAnim(arg3, 1, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+				var28 = new ClientLocAnim(arg3, 1, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1117(arg6, arg7, arg1, var19, var28, null, field2877[arg4], 0, var18, var20);
-			if (var8.field1253) {
+			if (var8.shadow) {
 				if (arg4 == 0) {
 					field1985[arg6][arg7][arg1 + 1] = 50;
 				} else if (arg4 == 1) {
@@ -322,22 +322,22 @@ public final class ClientBuild {
 					field1985[arg6][arg7][arg1] = 50;
 				}
 			}
-			if (var8.field1235 != 0 && arg5 != null) {
-				arg5.addWall(var8.field1219, arg2, arg7, arg1, arg4);
+			if (var8.blockwalk != 0 && arg5 != null) {
+				arg5.addWall(var8.blockrange, arg2, arg7, arg1, arg4);
 			}
 		} else if (arg2 == 2) {
 			int var29 = arg4 + 1 & 0x3;
 			ModelSource var30;
 			ModelSource var31;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var30 = var8.method421(var17, var19, arg4 + 4, var15, var16, 2);
-				var31 = var8.method421(var17, var19, var29, var15, var16, 2);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var30 = var8.getModel(var17, var19, arg4 + 4, var15, var16, 2);
+				var31 = var8.getModel(var17, var19, var29, var15, var16, 2);
 			} else {
-				var30 = new ClientLocAnim(arg3, 2, arg4 + 4, arg6, arg7, arg1, var8.field1225, true, null);
-				var31 = new ClientLocAnim(arg3, 2, var29, arg6, arg7, arg1, var8.field1225, true, null);
+				var30 = new ClientLocAnim(arg3, 2, arg4 + 4, arg6, arg7, arg1, var8.anim, true, null);
+				var31 = new ClientLocAnim(arg3, 2, var29, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1117(arg6, arg7, arg1, var19, var30, var31, field3176[arg4], field3176[var29], var18, var20);
-			if (var8.field1210) {
+			if (var8.occlude) {
 				if (arg4 == 0) {
 					field2426[arg6][arg7][arg1] |= 0x249;
 					field2426[arg6][arg7][arg1 + 1] |= 0x492;
@@ -352,21 +352,21 @@ public final class ClientBuild {
 					field2426[arg6][arg7][arg1] |= 0x249;
 				}
 			}
-			if (var8.field1235 != 0 && arg5 != null) {
-				arg5.addWall(var8.field1219, arg2, arg7, arg1, arg4);
+			if (var8.blockwalk != 0 && arg5 != null) {
+				arg5.addWall(var8.blockrange, arg2, arg7, arg1, arg4);
 			}
-			if (var8.field1245 != 16) {
-				arg0.method1152(arg6, arg7, arg1, var8.field1245);
+			if (var8.wallwidth != 16) {
+				arg0.method1152(arg6, arg7, arg1, var8.wallwidth);
 			}
 		} else if (arg2 == 3) {
 			ModelSource var32;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var32 = var8.method421(var17, var19, arg4, var15, var16, 3);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var32 = var8.getModel(var17, var19, arg4, var15, var16, 3);
 			} else {
-				var32 = new ClientLocAnim(arg3, 3, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+				var32 = new ClientLocAnim(arg3, 3, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1117(arg6, arg7, arg1, var19, var32, null, field2877[arg4], 0, var18, var20);
-			if (var8.field1253) {
+			if (var8.shadow) {
 				if (arg4 == 0) {
 					field1985[arg6][arg7][arg1 + 1] = 50;
 				} else if (arg4 == 1) {
@@ -377,81 +377,81 @@ public final class ClientBuild {
 					field1985[arg6][arg7][arg1] = 50;
 				}
 			}
-			if (var8.field1235 != 0 && arg5 != null) {
-				arg5.addWall(var8.field1219, arg2, arg7, arg1, arg4);
+			if (var8.blockwalk != 0 && arg5 != null) {
+				arg5.addWall(var8.blockrange, arg2, arg7, arg1, arg4);
 			}
 		} else if (arg2 == 9) {
 			ModelSource var33;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var33 = var8.method421(var17, var19, arg4, var15, var16, arg2);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var33 = var8.getModel(var17, var19, arg4, var15, var16, arg2);
 			} else {
-				var33 = new ClientLocAnim(arg3, arg2, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+				var33 = new ClientLocAnim(arg3, arg2, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1151(arg6, arg7, arg1, var19, 1, 1, var33, 0, var18, var20);
-			if (var8.field1235 != 0 && arg5 != null) {
-				arg5.addLoc(var10, var8.field1219, arg7, arg1, var9);
+			if (var8.blockwalk != 0 && arg5 != null) {
+				arg5.addLoc(var10, var8.blockrange, arg7, arg1, var9);
 			}
-			if (var8.field1245 != 16) {
-				arg0.method1152(arg6, arg7, arg1, var8.field1245);
+			if (var8.wallwidth != 16) {
+				arg0.method1152(arg6, arg7, arg1, var8.wallwidth);
 			}
 		} else if (arg2 == 4) {
 			ModelSource var34;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var34 = var8.method421(var17, var19, arg4, var15, var16, 4);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var34 = var8.getModel(var17, var19, arg4, var15, var16, 4);
 			} else {
-				var34 = new ClientLocAnim(arg3, 4, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+				var34 = new ClientLocAnim(arg3, 4, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1158(arg6, arg7, arg1, var19, var34, null, field3176[arg4], 0, 0, 0, var18, var20);
 		} else if (arg2 == 5) {
 			int var35 = 16;
 			int var36 = arg0.method1153(arg6, arg7, arg1);
 			if (var36 != 0) {
-				var35 = LocType.list(var36 >> 14 & 0x7FFF).field1245;
+				var35 = LocType.list(var36 >> 14 & 0x7FFF).wallwidth;
 			}
 			ModelSource var37;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var37 = var8.method421(var17, var19, arg4, var15, var16, 4);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var37 = var8.getModel(var17, var19, arg4, var15, var16, 4);
 			} else {
-				var37 = new ClientLocAnim(arg3, 4, arg4, arg6, arg7, arg1, var8.field1225, true, null);
+				var37 = new ClientLocAnim(arg3, 4, arg4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1158(arg6, arg7, arg1, var19, var37, null, field3176[arg4], 0, var35 * field2974[arg4], var35 * BZip2State.field1927[arg4], var18, var20);
 		} else if (arg2 == 6) {
 			int var38 = 8;
 			int var39 = arg0.method1153(arg6, arg7, arg1);
 			if (var39 != 0) {
-				var38 = LocType.list(var39 >> 14 & 0x7FFF).field1245 / 2;
+				var38 = LocType.list(var39 >> 14 & 0x7FFF).wallwidth / 2;
 			}
 			ModelSource var40;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var40 = var8.method421(var17, var19, arg4 + 4, var15, var16, 4);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var40 = var8.getModel(var17, var19, arg4 + 4, var15, var16, 4);
 			} else {
-				var40 = new ClientLocAnim(arg3, 4, arg4 + 4, arg6, arg7, arg1, var8.field1225, true, null);
+				var40 = new ClientLocAnim(arg3, 4, arg4 + 4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1158(arg6, arg7, arg1, var19, var40, null, 256, arg4, field3279[arg4] * var38, var38 * field955[arg4], var18, var20);
 		} else if (arg2 == 7) {
 			int var41 = arg4 + 2 & 0x3;
 			ModelSource var42;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var42 = var8.method421(var17, var19, var41 + 4, var15, var16, 4);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var42 = var8.getModel(var17, var19, var41 + 4, var15, var16, 4);
 			} else {
-				var42 = new ClientLocAnim(arg3, 4, var41 + 4, arg6, arg7, arg1, var8.field1225, true, null);
+				var42 = new ClientLocAnim(arg3, 4, var41 + 4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1158(arg6, arg7, arg1, var19, var42, null, 256, var41, 0, 0, var18, var20);
 		} else if (arg2 == 8) {
 			int var43 = 8;
 			int var44 = arg0.method1153(arg6, arg7, arg1);
 			if (var44 != 0) {
-				var43 = LocType.list(var44 >> 14 & 0x7FFF).field1245 / 2;
+				var43 = LocType.list(var44 >> 14 & 0x7FFF).wallwidth / 2;
 			}
 			int var45 = arg4 + 2 & 0x3;
 			ModelSource var46;
 			ModelSource var47;
-			if (var8.field1225 == -1 && var8.multiloc == null) {
-				var46 = var8.method421(var17, var19, arg4 + 4, var15, var16, 4);
-				var47 = var8.method421(var17, var19, var45 + 4, var15, var16, 4);
+			if (var8.anim == -1 && var8.multiloc == null) {
+				var46 = var8.getModel(var17, var19, arg4 + 4, var15, var16, 4);
+				var47 = var8.getModel(var17, var19, var45 + 4, var15, var16, 4);
 			} else {
-				var46 = new ClientLocAnim(arg3, 4, arg4 + 4, arg6, arg7, arg1, var8.field1225, true, null);
-				var47 = new ClientLocAnim(arg3, 4, var45 + 4, arg6, arg7, arg1, var8.field1225, true, null);
+				var46 = new ClientLocAnim(arg3, 4, arg4 + 4, arg6, arg7, arg1, var8.anim, true, null);
+				var47 = new ClientLocAnim(arg3, 4, var45 + 4, arg6, arg7, arg1, var8.anim, true, null);
 			}
 			arg0.method1158(arg6, arg7, arg1, var19, var46, var47, 256, arg4, field3279[arg4] * var43, var43 * field955[arg4], var18, var20);
 		}
@@ -492,165 +492,165 @@ public final class ClientBuild {
 		int var18 = (var10 << 6) + (arg3 << 7);
 		int var19 = (var11 << 6) + (arg5 << 7);
 		int var20 = (arg0 << 14) + (arg3 << 7) + arg5 + 1073741824;
-		if (var9.field1193 == 0) {
+		if (var9.active == 0) {
 			var20 += Integer.MIN_VALUE;
 		}
 		int var21 = (arg8 << 6) + arg1;
-		if (var9.field1252 == 1) {
+		if (var9.raiseobject == 1) {
 			var21 += 256;
 		}
 		if (arg1 == 22) {
 			ModelSource var22;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var22 = var9.method412(var19, 22, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var22 = var9.getModelLit(var19, 22, var18, var16, arg8, var17);
 			} else {
-				var22 = new ClientLocAnim(arg0, 22, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var22 = new ClientLocAnim(arg0, 22, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1138(arg7, arg5, arg3, var17, var22, var20, var21);
-			if (var9.field1235 == 1) {
+			if (var9.blockwalk == 1) {
 				arg6.blockGroundDecor(arg5, arg3);
 			}
 		} else if (arg1 == 10 || arg1 == 11) {
 			ModelSource var23;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var23 = var9.method412(var19, 10, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var23 = var9.getModelLit(var19, 10, var18, var16, arg8, var17);
 			} else {
-				var23 = new ClientLocAnim(arg0, 10, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var23 = new ClientLocAnim(arg0, 10, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			if (var23 != null) {
 				arg2.method1151(arg7, arg5, arg3, var17, var11, var10, var23, arg1 == 11 ? 256 : 0, var20, var21);
 			}
-			if (var9.field1235 != 0) {
-				arg6.addLoc(var10, var9.field1219, arg5, arg3, var11);
+			if (var9.blockwalk != 0) {
+				arg6.addLoc(var10, var9.blockrange, arg5, arg3, var11);
 			}
 		} else if (arg1 >= 12) {
 			ModelSource var24;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var24 = var9.method412(var19, arg1, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var24 = var9.getModelLit(var19, arg1, var18, var16, arg8, var17);
 			} else {
-				var24 = new ClientLocAnim(arg0, arg1, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var24 = new ClientLocAnim(arg0, arg1, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1151(arg7, arg5, arg3, var17, 1, 1, var24, 0, var20, var21);
-			if (var9.field1235 != 0) {
-				arg6.addLoc(var10, var9.field1219, arg5, arg3, var11);
+			if (var9.blockwalk != 0) {
+				arg6.addLoc(var10, var9.blockrange, arg5, arg3, var11);
 			}
 		} else if (arg1 == 0) {
 			ModelSource var25;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var25 = var9.method412(var19, 0, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var25 = var9.getModelLit(var19, 0, var18, var16, arg8, var17);
 			} else {
-				var25 = new ClientLocAnim(arg0, 0, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var25 = new ClientLocAnim(arg0, 0, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1117(arg7, arg5, arg3, var17, var25, null, field3176[arg8], 0, var20, var21);
-			if (var9.field1235 != 0) {
-				arg6.addWall(var9.field1219, arg1, arg5, arg3, arg8);
+			if (var9.blockwalk != 0) {
+				arg6.addWall(var9.blockrange, arg1, arg5, arg3, arg8);
 			}
 		} else if (arg1 == 1) {
 			ModelSource var26;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var26 = var9.method412(var19, 1, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var26 = var9.getModelLit(var19, 1, var18, var16, arg8, var17);
 			} else {
-				var26 = new ClientLocAnim(arg0, 1, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var26 = new ClientLocAnim(arg0, 1, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1117(arg7, arg5, arg3, var17, var26, null, field2877[arg8], 0, var20, var21);
-			if (var9.field1235 != 0) {
-				arg6.addWall(var9.field1219, arg1, arg5, arg3, arg8);
+			if (var9.blockwalk != 0) {
+				arg6.addWall(var9.blockrange, arg1, arg5, arg3, arg8);
 			}
 		} else if (arg1 == 2) {
 			int var27 = arg8 + 1 & 0x3;
 			ModelSource var28;
 			ModelSource var29;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var28 = var9.method412(var19, 2, var18, var16, arg8 + 4, var17);
-				var29 = var9.method412(var19, 2, var18, var16, var27, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var28 = var9.getModelLit(var19, 2, var18, var16, arg8 + 4, var17);
+				var29 = var9.getModelLit(var19, 2, var18, var16, var27, var17);
 			} else {
-				var28 = new ClientLocAnim(arg0, 2, arg8 + 4, arg4, arg5, arg3, var9.field1225, true, null);
-				var29 = new ClientLocAnim(arg0, 2, var27, arg4, arg5, arg3, var9.field1225, true, null);
+				var28 = new ClientLocAnim(arg0, 2, arg8 + 4, arg4, arg5, arg3, var9.anim, true, null);
+				var29 = new ClientLocAnim(arg0, 2, var27, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1117(arg7, arg5, arg3, var17, var28, var29, field3176[arg8], field3176[var27], var20, var21);
-			if (var9.field1235 != 0) {
-				arg6.addWall(var9.field1219, arg1, arg5, arg3, arg8);
+			if (var9.blockwalk != 0) {
+				arg6.addWall(var9.blockrange, arg1, arg5, arg3, arg8);
 			}
 		} else if (arg1 == 3) {
 			ModelSource var30;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var30 = var9.method412(var19, 3, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var30 = var9.getModelLit(var19, 3, var18, var16, arg8, var17);
 			} else {
-				var30 = new ClientLocAnim(arg0, 3, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var30 = new ClientLocAnim(arg0, 3, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1117(arg7, arg5, arg3, var17, var30, null, field2877[arg8], 0, var20, var21);
-			if (var9.field1235 != 0) {
-				arg6.addWall(var9.field1219, arg1, arg5, arg3, arg8);
+			if (var9.blockwalk != 0) {
+				arg6.addWall(var9.blockrange, arg1, arg5, arg3, arg8);
 			}
 		} else if (arg1 == 9) {
 			ModelSource var31;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var31 = var9.method412(var19, arg1, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var31 = var9.getModelLit(var19, arg1, var18, var16, arg8, var17);
 			} else {
-				var31 = new ClientLocAnim(arg0, arg1, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var31 = new ClientLocAnim(arg0, arg1, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1151(arg7, arg5, arg3, var17, 1, 1, var31, 0, var20, var21);
-			if (var9.field1235 != 0) {
-				arg6.addLoc(var10, var9.field1219, arg5, arg3, var11);
+			if (var9.blockwalk != 0) {
+				arg6.addLoc(var10, var9.blockrange, arg5, arg3, var11);
 			}
 		} else if (arg1 == 4) {
 			ModelSource var32;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var32 = var9.method412(var19, 4, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var32 = var9.getModelLit(var19, 4, var18, var16, arg8, var17);
 			} else {
-				var32 = new ClientLocAnim(arg0, 4, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var32 = new ClientLocAnim(arg0, 4, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1158(arg7, arg5, arg3, var17, var32, null, field3176[arg8], 0, 0, 0, var20, var21);
 		} else if (arg1 == 5) {
 			int var33 = arg2.method1153(arg7, arg5, arg3);
 			int var34 = 16;
 			if (var33 != 0) {
-				var34 = LocType.list(var33 >> 14 & 0x7FFF).field1245;
+				var34 = LocType.list(var33 >> 14 & 0x7FFF).wallwidth;
 			}
 			ModelSource var35;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var35 = var9.method412(var19, 4, var18, var16, arg8, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var35 = var9.getModelLit(var19, 4, var18, var16, arg8, var17);
 			} else {
-				var35 = new ClientLocAnim(arg0, 4, arg8, arg4, arg5, arg3, var9.field1225, true, null);
+				var35 = new ClientLocAnim(arg0, 4, arg8, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1158(arg7, arg5, arg3, var17, var35, null, field3176[arg8], 0, var34 * field2974[arg8], var34 * BZip2State.field1927[arg8], var20, var21);
 		} else if (arg1 == 6) {
 			int var36 = 8;
 			int var37 = arg2.method1153(arg7, arg5, arg3);
 			if (var37 != 0) {
-				var36 = LocType.list(var37 >> 14 & 0x7FFF).field1245 / 2;
+				var36 = LocType.list(var37 >> 14 & 0x7FFF).wallwidth / 2;
 			}
 			ModelSource var38;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var38 = var9.method412(var19, 4, var18, var16, arg8 + 4, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var38 = var9.getModelLit(var19, 4, var18, var16, arg8 + 4, var17);
 			} else {
-				var38 = new ClientLocAnim(arg0, 4, arg8 + 4, arg4, arg5, arg3, var9.field1225, true, null);
+				var38 = new ClientLocAnim(arg0, 4, arg8 + 4, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1158(arg7, arg5, arg3, var17, var38, null, 256, arg8, field3279[arg8] * var36, var36 * field955[arg8], var20, var21);
 		} else if (arg1 == 7) {
 			int var39 = arg8 + 2 & 0x3;
 			ModelSource var40;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var40 = var9.method412(var19, 4, var18, var16, var39 + 4, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var40 = var9.getModelLit(var19, 4, var18, var16, var39 + 4, var17);
 			} else {
-				var40 = new ClientLocAnim(arg0, 4, var39 + 4, arg4, arg5, arg3, var9.field1225, true, null);
+				var40 = new ClientLocAnim(arg0, 4, var39 + 4, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1158(arg7, arg5, arg3, var17, var40, null, 256, var39, 0, 0, var20, var21);
 		} else if (arg1 == 8) {
 			int var41 = 8;
 			int var42 = arg2.method1153(arg7, arg5, arg3);
 			if (var42 != 0) {
-				var41 = LocType.list(var42 >> 14 & 0x7FFF).field1245 / 2;
+				var41 = LocType.list(var42 >> 14 & 0x7FFF).wallwidth / 2;
 			}
 			int var43 = arg8 + 2 & 0x3;
 			ModelSource var44;
 			ModelSource var45;
-			if (var9.field1225 == -1 && var9.multiloc == null) {
-				var44 = var9.method412(var19, 4, var18, var16, arg8 + 4, var17);
-				var45 = var9.method412(var19, 4, var18, var16, var43 + 4, var17);
+			if (var9.anim == -1 && var9.multiloc == null) {
+				var44 = var9.getModelLit(var19, 4, var18, var16, arg8 + 4, var17);
+				var45 = var9.getModelLit(var19, 4, var18, var16, var43 + 4, var17);
 			} else {
-				var44 = new ClientLocAnim(arg0, 4, arg8 + 4, arg4, arg5, arg3, var9.field1225, true, null);
-				var45 = new ClientLocAnim(arg0, 4, var43 + 4, arg4, arg5, arg3, var9.field1225, true, null);
+				var44 = new ClientLocAnim(arg0, 4, arg8 + 4, arg4, arg5, arg3, var9.anim, true, null);
+				var45 = new ClientLocAnim(arg0, 4, var43 + 4, arg4, arg5, arg3, var9.anim, true, null);
 			}
 			arg2.method1158(arg7, arg5, arg3, var17, var44, var45, 256, arg8, var41 * field3279[arg8], var41 * field955[arg8], var20, var21);
 		}
@@ -695,9 +695,9 @@ public final class ClientBuild {
 					int var15 = var14 + arg2;
 					if (var12 > 0 && var15 > 0 && var12 < 103 && var15 < 103) {
 						LocType var16 = LocType.list(var4);
-						if (var13 != 22 || !Client.lowMem || var16.field1193 != 0 || var16.field1235 == 1 || var16.field1204) {
+						if (var13 != 22 || !Client.lowMem || var16.active != 0 || var16.blockwalk == 1 || var16.forcedecor) {
 							var7 = true;
-							if (!var16.method414()) {
+							if (!var16.checkModelAll()) {
 								Client.locModelLoadCount++;
 								var5 = false;
 							}

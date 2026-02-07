@@ -35,7 +35,7 @@ public final class Pix3D extends Pix2D {
 	public static boolean field122 = false;
 
 	@ObfuscatedName("af.U")
-	public static boolean field118 = true;
+	public static boolean lowDetail = true;
 
 	@ObfuscatedName("af.W")
 	public static boolean field120 = false;
@@ -505,7 +505,7 @@ public final class Pix3D extends Pix2D {
 		}
 		int var6 = arg1 + arg2;
 		int var7 = arg4 + arg5 * arg2;
-		if (!field118) {
+		if (!lowDetail) {
 			int var25 = arg3 - arg2;
 			if (field128 == 0) {
 				do {

@@ -110,6 +110,6 @@ public final class ClientLocAnim extends ModelSource {
 		int var10 = var9[var5][var8] + var9[var6][var8] + var9[var6][var7] + var9[var5][var7] >> 2;
 		int var11 = (this.x << 7) + (var4 << 6);
 		int var12 = (this.z << 7) + (var3 << 6);
-		return var2.method415(this.anim, var12, this.shape, var9, var11, this.animFrame, var10, this.angle);
+		return var2.getTempModel(this.anim, var12, this.shape, var9, var11, this.animFrame, var10, this.angle);
 	}
 }

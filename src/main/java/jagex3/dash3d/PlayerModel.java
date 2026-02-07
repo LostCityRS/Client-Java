@@ -154,13 +154,13 @@ public final class PlayerModel {
 		for (int var6 = 0; var6 < 12; var6++) {
 			int var7 = this.appearance[var6];
 			if (var7 >= 256 && var7 < 512) {
-				ModelUnlit var8 = IdkType.list(var7 - 256).method502();
+				ModelUnlit var8 = IdkType.list(var7 - 256).getHeadNoCheck();
 				if (var8 != null) {
 					var4[var5++] = var8;
 				}
 			}
 			if (var7 >= 512) {
-				ModelUnlit var9 = ObjType.list(var7 - 512).method473(this.gender);
+				ModelUnlit var9 = ObjType.list(var7 - 512).getHeadModelNoCheck(this.gender);
 				if (var9 != null) {
 					var4[var5++] = var9;
 				}
@@ -264,13 +264,13 @@ public final class PlayerModel {
 				for (int var15 = 0; var15 < 12; var15++) {
 					int var16 = var7[var15];
 					if (var16 >= 256 && var16 < 512) {
-						ModelUnlit var17 = IdkType.list(var16 - 256).method500();
+						ModelUnlit var17 = IdkType.list(var16 - 256).getModelNoCheck();
 						if (var17 != null) {
 							var13[var14++] = var17;
 						}
 					}
 					if (var16 >= 512) {
-						ModelUnlit var18 = ObjType.list(var16 - 512).method469(this.gender);
+						ModelUnlit var18 = ObjType.list(var16 - 512).getWearModelNoCheck(this.gender);
 						if (var18 != null) {
 							var13[var14++] = var18;
 						}
@@ -306,6 +306,6 @@ public final class PlayerModel {
 
 	@ObfuscatedName("eb.e(I)I")
 	public int method234() {
-		return this.transmog == -1 ? (this.appearance[0] << 15) + ((this.colour[0] << 25) + (this.colour[4] << 20) + (this.appearance[8] << 10)) + (this.appearance[11] << 5) + this.appearance[1] : NPCType.list(this.transmog).field2224 + 305419896;
+		return this.transmog == -1 ? (this.appearance[0] << 15) + ((this.colour[0] << 25) + (this.colour[4] << 20) + (this.appearance[8] << 10)) + (this.appearance[11] << 5) + this.appearance[1] : NPCType.list(this.transmog).id + 305419896;
 	}
 }

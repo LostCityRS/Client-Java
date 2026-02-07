@@ -421,12 +421,12 @@ public class TextGerman {
 		Text.field3470 = field1995;
 		Text.field95 = field1444;
 		Text.field3296 = field2608;
-		Text.field2052 = field2643;
+		Text.THOUSAND_SHORT = field2643;
 		Text.field942 = field3625;
 		Text.field963 = field2533;
 		Text.CONLOST = CONLOST;
 		Text.field539 = field1265;
-		Text.field1044 = field2896;
+		Text.MILLION = field2896;
 		Text.field1437 = field342;
 		Text.field3063 = field253;
 		Text.SELECT = SELECT;
@@ -451,7 +451,7 @@ public class TextGerman {
 		Text.EXISTINGUSER = EXISTINGUSER;
 		Text.field509 = field3548;
 		Text.MEMBERS_OBJECT = MEMBERS_OBJECT;
-		Text.field2050 = field2643;
+		Text.THOUSAND = field2643;
 		Text.field1998 = field2845;
 		Text.field3088 = field1699;
 		Text.field3563 = field2054;
@@ -537,7 +537,7 @@ public class TextGerman {
 		Text.field292 = field2003;
 		Text.field3369 = field1859;
 		Text.field1459 = field79;
-		Text.field1041 = field2896;
+		Text.MILLION_SHORT = field2896;
 		Text.field531 = field1179;
 		Text.field3092 = field253;
 		Text.LOGIN = LOGIN;

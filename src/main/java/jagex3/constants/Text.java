@@ -579,18 +579,18 @@ public class Text {
 	public static JagString field2651 = field2652;
 
 	@ObfuscatedName("ga.wb")
-	public static JagString field1036 = JagString.wrap("M");
-	@ObfuscatedName("ga.Bb")
-	public static JagString field1041 = field1036;
+	public static JagString AUTO_MILLION = JagString.wrap("M");
 	@ObfuscatedName("ga.Eb")
-	public static JagString field1044 = field1036;
+	public static JagString MILLION = AUTO_MILLION;
+	@ObfuscatedName("ga.Bb")
+	public static JagString MILLION_SHORT = AUTO_MILLION;
 
 	@ObfuscatedName("mf.c")
-	public static JagString field2051 = JagString.wrap("K");
+	public static JagString AUTO_THOUSAND = JagString.wrap("K");
 	@ObfuscatedName("mf.b")
-	public static JagString field2050 = field2051;
+	public static JagString THOUSAND = AUTO_THOUSAND;
 	@ObfuscatedName("mf.d")
-	public static JagString field2052 = field2051;
+	public static JagString THOUSAND_SHORT = AUTO_THOUSAND;
 
 	@ObfuscatedName("c.bb")
 	public static JagString field279 = JagString.wrap("World");

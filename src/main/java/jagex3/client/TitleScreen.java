@@ -834,7 +834,7 @@ public class TitleScreen {
 						var3.id = var4 & 0x7FFF;
 						var3.members = (var4 & 0x8000) != 0;
 						var3.host = var1.gjstr();
-						var3.field2390 = var1.method551();
+						var3.field2390 = var1.g2b();
 						var3.field2398 = var2;
 						var3.field2387 = method136(var3.host);
 					}

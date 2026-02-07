@@ -293,14 +293,14 @@ public final class World {
 	public static void method603(int arg0, LocType arg1, int arg2, int arg3, int arg4) {
 		BgSound var5 = new BgSound();
 		var5.field2276 = arg4 * 128;
-		var5.field2275 = arg1.field1256;
+		var5.field2275 = arg1.bgsound_sound;
 		var5.field2256 = arg3 * 128;
-		var5.field2249 = arg1.field1250;
-		var5.field2245 = arg1.field1218;
+		var5.field2249 = arg1.bgsound_maxdelay;
+		var5.field2245 = arg1.bgsound_random;
 		int var6 = arg1.width;
 		var5.field2251 = arg2;
-		var5.field2260 = arg1.field1240 * 128;
-		var5.field2244 = arg1.field1259;
+		var5.field2260 = arg1.bgsound_range * 128;
+		var5.field2244 = arg1.bgsound_mindelay;
 		int var7 = arg1.length;
 		if (arg0 == 1 || arg0 == 3) {
 			var7 = arg1.width;
@@ -802,23 +802,23 @@ public final class World {
 								ModelUnlit var7 = (ModelUnlit) var5.field32;
 								this.method1162(var7, var1, var2, var3, 1, 1);
 								ModelUnlit.method848(var6, var7, 0, 0, 0, false);
-								var5.field32 = var7.light(var7.field2446, var7.field2457, -50, -10, -50);
+								var5.field32 = var7.light(var7.ambient, var7.contrast, -50, -10, -50);
 							}
-							var5.field29 = var6.light(var6.field2446, var6.field2457, -50, -10, -50);
+							var5.field29 = var6.light(var6.ambient, var6.contrast, -50, -10, -50);
 						}
 						for (int var8 = 0; var8 < var4.field3546; var8++) {
 							Sprite var9 = var4.sprites[var8];
 							if (var9 != null && var9.model instanceof ModelUnlit) {
 								ModelUnlit var10 = (ModelUnlit) var9.model;
 								this.method1162(var10, var1, var2, var3, var9.field1063 + 1 - var9.field1054, var9.field1064 - var9.field1051 + 1);
-								var9.model = var10.light(var10.field2446, var10.field2457, -50, -10, -50);
+								var9.model = var10.light(var10.ambient, var10.contrast, -50, -10, -50);
 							}
 						}
 						GroundDecor var11 = var4.groundDecor;
 						if (var11 != null && var11.field1770 instanceof ModelUnlit) {
 							ModelUnlit var12 = (ModelUnlit) var11.field1770;
 							this.method1118(var12, var1, var2, var3);
-							var11.field1770 = var12.light(var12.field2446, var12.field2457, -50, -10, -50);
+							var11.field1770 = var12.light(var12.ambient, var12.contrast, -50, -10, -50);
 						}
 					}
 				}

@@ -180,13 +180,13 @@ public class ScriptRunner {
 					}
 					if (var270 == 1) {
 						int var16 = var7[var9];
-						intStack[var5++] = VarCache.field504[var16];
+						intStack[var5++] = VarCache.var[var16];
 						continue;
 					}
 					if (var270 == 2) {
 						int var17 = var7[var9];
 						var5--;
-						VarCache.field504[var17] = intStack[var5];
+						VarCache.var[var17] = intStack[var5];
 						continue;
 					}
 					if (var270 == 3) {
@@ -409,25 +409,25 @@ public class ScriptRunner {
 							throw new RuntimeException();
 						}
 						IfType var44 = IfType.get(var41);
-						if (var44.field754 == null) {
-							var44.field754 = new IfType[var43 + 1];
+						if (var44.subcomponents == null) {
+							var44.subcomponents = new IfType[var43 + 1];
 						}
-						if (var43 >= var44.field754.length) {
+						if (var43 >= var44.subcomponents.length) {
 							IfType[] var45 = new IfType[var43 + 1];
-							for (int var46 = 0; var46 < var44.field754.length; var46++) {
-								var45[var46] = var44.field754[var46];
+							for (int var46 = 0; var46 < var44.subcomponents.length; var46++) {
+								var45[var46] = var44.subcomponents[var46];
 							}
-							var44.field754 = var45;
+							var44.subcomponents = var45;
 						}
-						if (var43 > 0 && var44.field754[var43 - 1] == null) {
+						if (var43 > 0 && var44.subcomponents[var43 - 1] == null) {
 							throw new RuntimeException("Gap at:" + (var43 - 1));
 						}
 						IfType var47 = new IfType();
-						var47.field755 = var42;
-						var47.field848 = true;
+						var47.type = var42;
+						var47.v3 = true;
 						var47.subId = var43;
-						var47.field864 = var47.parentId = var44.parentId;
-						var44.field754[var43] = var47;
+						var47.layerId = var47.parentId = var44.parentId;
+						var44.subcomponents[var43] = var47;
 						if (var40) {
 							activeComponent2 = var47;
 						} else {
@@ -439,14 +439,14 @@ public class ScriptRunner {
 					if (var270 == 101) {
 						IfType var48 = var40 ? activeComponent2 : activeComponent;
 						IfType var49 = IfType.get(var48.parentId);
-						var49.field754[var48.subId] = null;
+						var49.subcomponents[var48.subId] = null;
 						Client.componentUpdated(var49);
 						continue;
 					}
 					if (var270 == 102) {
 						var5--;
 						IfType var50 = IfType.get(intStack[var5]);
-						var50.field754 = null;
+						var50.subcomponents = null;
 						Client.componentUpdated(var50);
 						continue;
 					}
@@ -478,14 +478,14 @@ public class ScriptRunner {
 					}
 					if (var270 == 1000) {
 						var5 -= 2;
-						var263.field829 = intStack[var5];
-						var263.field855 = intStack[var5 + 1];
+						var263.x = intStack[var5];
+						var263.y = intStack[var5 + 1];
 						Client.componentUpdated(var263);
 						continue;
 					}
 					if (var270 == 1001) {
 						var5 -= 2;
-						var263.field810 = intStack[var5];
+						var263.width = intStack[var5];
 						var263.height = intStack[var5 + 1];
 						Client.componentUpdated(var263);
 						continue;
@@ -493,8 +493,8 @@ public class ScriptRunner {
 					if (var270 == 1003) {
 						var5--;
 						boolean var264 = intStack[var5] == 1;
-						if (var263.field740 != var264) {
-							var263.field740 = var264;
+						if (var263.hide != var264) {
+							var263.hide = var264;
 							Client.componentUpdated(var263);
 						}
 						continue;
@@ -511,8 +511,8 @@ public class ScriptRunner {
 					if (var270 == 1100) {
 						var5 -= 2;
 						var54.field843 = intStack[var5];
-						if (var54.field860 - var54.field810 < var54.field843) {
-							var54.field843 = var54.field860 - var54.field810;
+						if (var54.scrollWidth - var54.width < var54.field843) {
+							var54.field843 = var54.scrollWidth - var54.width;
 						}
 						if (var54.field843 < 0) {
 							var54.field843 = 0;
@@ -529,137 +529,137 @@ public class ScriptRunner {
 					}
 					if (var270 == 1101) {
 						var5--;
-						var54.field776 = intStack[var5];
+						var54.colour = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1102) {
 						var5--;
-						var54.field803 = intStack[var5] == 1;
+						var54.fill = intStack[var5] == 1;
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1103) {
 						var5--;
-						var54.field861 = intStack[var5];
+						var54.trans = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1104) {
 						var5--;
-						var54.field788 = intStack[var5];
+						var54.lineWidth = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1105) {
 						var5--;
-						var54.field819 = intStack[var5];
+						var54.graphic = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1106) {
 						var5--;
-						var54.field777 = intStack[var5];
+						var54.rotate = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1107) {
 						var5--;
-						var54.field748 = intStack[var5] == 1;
+						var54.tiling = intStack[var5] == 1;
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1108) {
-						var54.field770 = 1;
+						var54.model1Type = 1;
 						var5--;
-						var54.field849 = intStack[var5];
+						var54.model1Id = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1109) {
 						var5 -= 6;
-						var54.field816 = intStack[var5];
-						var54.field851 = intStack[var5 + 1];
-						var54.field812 = intStack[var5 + 2];
-						var54.field874 = intStack[var5 + 3];
-						var54.field750 = intStack[var5 + 4];
-						var54.field808 = intStack[var5 + 5];
+						var54.modelXOf = intStack[var5];
+						var54.modelYOf = intStack[var5 + 1];
+						var54.modelXAn = intStack[var5 + 2];
+						var54.modelYAn = intStack[var5 + 3];
+						var54.modelZAn = intStack[var5 + 4];
+						var54.modelZoom = intStack[var5 + 5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1110) {
 						var5--;
 						int var55 = intStack[var5];
-						if (var55 != var54.field765) {
+						if (var55 != var54.modelAnim) {
 							var54.field839 = 0;
 							var54.field762 = 0;
-							var54.field765 = var55;
+							var54.modelAnim = var55;
 							Client.componentUpdated(var54);
 						}
 						continue;
 					}
 					if (var270 == 1111) {
 						var5--;
-						var54.field853 = intStack[var5] == 1;
+						var54.orthog = intStack[var5] == 1;
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1112) {
 						var4--;
 						JagString var56 = stringStack[var4];
-						if (!var56.strEquals(var54.field763)) {
-							var54.field763 = var56;
+						if (!var56.strEquals(var54.text)) {
+							var54.text = var56;
 							Client.componentUpdated(var54);
 						}
 						continue;
 					}
 					if (var270 == 1113) {
 						var5--;
-						var54.field807 = intStack[var5];
+						var54.font = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1114) {
 						var5 -= 3;
-						var54.field841 = intStack[var5];
-						var54.field799 = intStack[var5 + 1];
-						var54.field838 = intStack[var5 + 2];
+						var54.hAlign = intStack[var5];
+						var54.vAlign = intStack[var5 + 1];
+						var54.lineHeight = intStack[var5 + 2];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1115) {
 						var5--;
-						var54.field856 = intStack[var5] == 1;
+						var54.shadow = intStack[var5] == 1;
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1116) {
 						var5--;
-						var54.field796 = intStack[var5];
+						var54.outline = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1117) {
 						var5--;
-						var54.field817 = intStack[var5];
+						var54.shadowColour = intStack[var5];
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1118) {
 						var5--;
-						var54.field814 = intStack[var5] == 1;
+						var54.vFlip = intStack[var5] == 1;
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1119) {
 						var5--;
-						var54.field772 = intStack[var5] == 1;
+						var54.hFlip = intStack[var5] == 1;
 						Client.componentUpdated(var54);
 						continue;
 					}
 					if (var270 == 1120) {
 						var5 -= 2;
-						var54.field860 = intStack[var5];
+						var54.scrollWidth = intStack[var5];
 						var54.scrollHeight = intStack[var5 + 1];
 						Client.componentUpdated(var54);
 						continue;
@@ -681,26 +681,26 @@ public class ScriptRunner {
 						var57.field786 = var59;
 						var57.field804 = var58;
 						ObjType var60 = ObjType.list(var58);
-						var57.field874 = var60.field1416;
-						var57.field812 = var60.field1426;
-						var57.field808 = var60.field1391;
-						var57.field851 = var60.field1376;
-						var57.field750 = var60.field1374;
-						if (var57.field810 > 0) {
-							var57.field808 = var57.field808 * 32 / var57.field810;
+						var57.modelYAn = var60.yan2d;
+						var57.modelXAn = var60.xan2d;
+						var57.modelZoom = var60.zoom2d;
+						var57.modelYOf = var60.yof2d;
+						var57.modelZAn = var60.zan2d;
+						if (var57.width > 0) {
+							var57.modelZoom = var57.modelZoom * 32 / var57.width;
 						}
-						var57.field816 = var60.field1384;
+						var57.modelXOf = var60.xof2d;
 						continue;
 					}
 					if (var270 == 1201) {
-						var57.field770 = 2;
+						var57.model1Type = 2;
 						var5--;
-						var57.field849 = intStack[var5];
+						var57.model1Id = intStack[var5];
 						continue;
 					}
 					if (var270 == 1202) {
-						var57.field770 = 3;
-						var57.field849 = Client.field373.model.method234();
+						var57.model1Type = 3;
+						var57.model1Id = Client.field373.model.method234();
 						continue;
 					}
 				} else if ((var270 < 1300 || var270 >= 1400) && (var270 < 2300 || var270 >= 2400)) {
@@ -746,23 +746,23 @@ public class ScriptRunner {
 							var65[0] = Integer.valueOf(var67);
 						}
 						if (var270 == 1405) {
-							var61.field852 = var65;
+							var61.ondrag = var65;
 						}
 						if (var270 == 1412) {
-							var61.field836 = var65;
+							var61.onmouserepeat = var65;
 						}
 						if (var270 == 1400) {
-							var61.field865 = var65;
+							var61.onclick = var65;
 						}
 						if (var270 == 1406) {
-							var61.field802 = var65;
+							var61.ontargetleave = var65;
 						}
 						if (var270 == 1404) {
-							var61.field775 = var65;
+							var61.onmouseleave = var65;
 						}
 						if (var270 == 1415) {
-							var61.field771 = var65;
-							var61.field875 = var63;
+							var61.onstattransmit = var65;
+							var61.onstattransmitlist = var63;
 						}
 						if (var270 == 1421) {
 							var61.field793 = var65;
@@ -771,28 +771,28 @@ public class ScriptRunner {
 							var61.field782 = var65;
 						}
 						if (var270 == 1402) {
-							var61.field835 = var65;
+							var61.onrelease = var65;
 						}
 						if (var270 == 1401) {
-							var61.field779 = var65;
+							var61.onhold = var65;
 						}
 						if (var270 == 1424) {
 							var61.field795 = var65;
 						}
 						if (var270 == 1414) {
-							var61.field747 = var63;
-							var61.field751 = var65;
+							var61.oninvtransmitlist = var63;
+							var61.oninvtransmit = var65;
 						}
-						var61.field847 = true;
+						var61.hashook = true;
 						if (var270 == 1409) {
-							var61.field794 = var65;
+							var61.onop = var65;
 						}
 						if (var270 == 1420) {
 							var61.field780 = var65;
 						}
 						if (var270 == 1407) {
-							var61.field821 = var63;
-							var61.field800 = var65;
+							var61.onvartransmitlist = var63;
+							var61.onvartransmit = var65;
 						}
 						if (var270 == 1422) {
 							var61.field822 = var65;
@@ -801,40 +801,40 @@ public class ScriptRunner {
 							var61.field741 = var65;
 						}
 						if (var270 == 1416) {
-							var61.field837 = var65;
+							var61.ontargetenter = var65;
 						}
 						if (var270 == 1423) {
 							var61.field758 = var65;
 						}
 						if (var270 == 1417) {
-							var61.field866 = var65;
+							var61.onscrollwheel = var65;
 						}
 						if (var270 == 1403) {
-							var61.field850 = var65;
+							var61.onmouseover = var65;
 						}
 						if (var270 == 1411) {
-							var61.field846 = var65;
+							var61.onclickrepeat = var65;
 						}
 						if (var270 == 1410) {
-							var61.field871 = var65;
+							var61.ondragcomplete = var65;
 						}
 						if (var270 == 1408) {
-							var61.field766 = var65;
+							var61.ontimer = var65;
 						}
 						continue;
 					}
 					if (var270 < 1600) {
 						IfType var258 = var40 ? activeComponent2 : activeComponent;
 						if (var270 == 1500) {
-							intStack[var5++] = var258.field829;
+							intStack[var5++] = var258.x;
 							continue;
 						}
 						if (var270 == 1501) {
-							intStack[var5++] = var258.field855;
+							intStack[var5++] = var258.y;
 							continue;
 						}
 						if (var270 == 1502) {
-							intStack[var5++] = var258.field810;
+							intStack[var5++] = var258.width;
 							continue;
 						}
 						if (var270 == 1503) {
@@ -842,11 +842,11 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 1504) {
-							intStack[var5++] = var258.field740 ? 1 : 0;
+							intStack[var5++] = var258.hide ? 1 : 0;
 							continue;
 						}
 						if (var270 == 1505) {
-							intStack[var5++] = var258.field864;
+							intStack[var5++] = var258.layerId;
 							continue;
 						}
 					} else if (var270 < 1700) {
@@ -860,11 +860,11 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 1602) {
-							stringStack[var4++] = var68.field763;
+							stringStack[var4++] = var68.text;
 							continue;
 						}
 						if (var270 == 1603) {
-							intStack[var5++] = var68.field860;
+							intStack[var5++] = var68.scrollWidth;
 							continue;
 						}
 						if (var270 == 1604) {
@@ -872,19 +872,19 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 1605) {
-							intStack[var5++] = var68.field808;
+							intStack[var5++] = var68.modelZoom;
 							continue;
 						}
 						if (var270 == 1606) {
-							intStack[var5++] = var68.field812;
+							intStack[var5++] = var68.modelXAn;
 							continue;
 						}
 						if (var270 == 1607) {
-							intStack[var5++] = var68.field750;
+							intStack[var5++] = var68.modelZAn;
 							continue;
 						}
 						if (var270 == 1608) {
-							intStack[var5++] = var68.field874;
+							intStack[var5++] = var68.modelYAn;
 							continue;
 						}
 					} else if (var270 < 1800) {
@@ -908,25 +908,25 @@ public class ScriptRunner {
 					} else if (var270 < 1900) {
 						IfType var256 = var40 ? activeComponent2 : activeComponent;
 						if (var270 == 1800) {
-							intStack[var5++] = ServerActive.method768(Client.method1100(var256));
+							intStack[var5++] = ServerActive.targetMask(Client.method1100(var256));
 							continue;
 						}
 						if (var270 == 1801) {
 							var5--;
 							int var257 = intStack[var5];
 							int var272 = var257 - 1;
-							if (var256.field738 != null && var256.field738.length > var272 && var256.field738[var272] != null) {
-								stringStack[var4++] = var256.field738[var272];
+							if (var256.opNames != null && var256.opNames.length > var272 && var256.opNames[var272] != null) {
+								stringStack[var4++] = var256.opNames[var272];
 								continue;
 							}
 							stringStack[var4++] = field3652;
 							continue;
 						}
 						if (var270 == 1802) {
-							if (var256.field813 == null) {
+							if (var256.baseOpName == null) {
 								stringStack[var4++] = field3652;
 							} else {
-								stringStack[var4++] = var256.field813;
+								stringStack[var4++] = var256.baseOpName;
 							}
 							continue;
 						}
@@ -934,15 +934,15 @@ public class ScriptRunner {
 						var5--;
 						IfType var70 = IfType.get(intStack[var5]);
 						if (var270 == 2500) {
-							intStack[var5++] = var70.field829;
+							intStack[var5++] = var70.x;
 							continue;
 						}
 						if (var270 == 2501) {
-							intStack[var5++] = var70.field855;
+							intStack[var5++] = var70.y;
 							continue;
 						}
 						if (var270 == 2502) {
-							intStack[var5++] = var70.field810;
+							intStack[var5++] = var70.width;
 							continue;
 						}
 						if (var270 == 2503) {
@@ -950,11 +950,11 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 2504) {
-							intStack[var5++] = var70.field740 ? 1 : 0;
+							intStack[var5++] = var70.hide ? 1 : 0;
 							continue;
 						}
 						if (var270 == 2505) {
-							intStack[var5++] = var70.field864;
+							intStack[var5++] = var70.layerId;
 							continue;
 						}
 					} else if (var270 < 2700) {
@@ -969,11 +969,11 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 2602) {
-							stringStack[var4++] = var255.field763;
+							stringStack[var4++] = var255.text;
 							continue;
 						}
 						if (var270 == 2603) {
-							intStack[var5++] = var255.field860;
+							intStack[var5++] = var255.scrollWidth;
 							continue;
 						}
 						if (var270 == 2604) {
@@ -981,19 +981,19 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 2605) {
-							intStack[var5++] = var255.field808;
+							intStack[var5++] = var255.modelZoom;
 							continue;
 						}
 						if (var270 == 2606) {
-							intStack[var5++] = var255.field812;
+							intStack[var5++] = var255.modelXAn;
 							continue;
 						}
 						if (var270 == 2607) {
-							intStack[var5++] = var255.field750;
+							intStack[var5++] = var255.modelZAn;
 							continue;
 						}
 						if (var270 == 2608) {
-							intStack[var5++] = var255.field874;
+							intStack[var5++] = var255.modelYAn;
 							continue;
 						}
 					} else if (var270 < 2800) {
@@ -1028,25 +1028,25 @@ public class ScriptRunner {
 						var5--;
 						IfType var75 = IfType.get(intStack[var5]);
 						if (var270 == 2800) {
-							intStack[var5++] = ServerActive.method768(Client.method1100(var75));
+							intStack[var5++] = ServerActive.targetMask(Client.method1100(var75));
 							continue;
 						}
 						if (var270 == 2801) {
 							var5--;
 							int var76 = intStack[var5];
 							int var271 = var76 - 1;
-							if (var75.field738 != null && var75.field738.length > var271 && var75.field738[var271] != null) {
-								stringStack[var4++] = var75.field738[var271];
+							if (var75.opNames != null && var75.opNames.length > var271 && var75.opNames[var271] != null) {
+								stringStack[var4++] = var75.opNames[var271];
 								continue;
 							}
 							stringStack[var4++] = field3652;
 							continue;
 						}
 						if (var270 == 2802) {
-							if (var75.field813 == null) {
+							if (var75.baseOpName == null) {
 								stringStack[var4++] = field3652;
 							} else {
-								stringStack[var4++] = var75.field813;
+								stringStack[var4++] = var75.baseOpName;
 							}
 							continue;
 						}
@@ -1162,7 +1162,7 @@ public class ScriptRunner {
 						if (var270 == 3304) {
 							var5--;
 							int var83 = intStack[var5];
-							intStack[var5++] = InvType.method724(var83).field3207;
+							intStack[var5++] = InvType.list(var83).size;
 							continue;
 						}
 						if (var270 == 3305) {
@@ -1500,7 +1500,7 @@ public class ScriptRunner {
 						if (var270 == 3624) {
 							var5--;
 							int var240 = intStack[var5];
-							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].username.method271(Client.field373.name)) {
+							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].username.equalsIgnoreCase(Client.field373.name)) {
 								intStack[var5++] = 1;
 								continue;
 							}
@@ -1824,7 +1824,7 @@ public class ScriptRunner {
 						if (var270 == 4200) {
 							var5--;
 							int var209 = intStack[var5];
-							stringStack[var4++] = ObjType.list(var209).field1429;
+							stringStack[var4++] = ObjType.list(var209).name;
 							continue;
 						}
 						if (var270 == 4201) {
@@ -1832,8 +1832,8 @@ public class ScriptRunner {
 							int var210 = intStack[var5];
 							int var211 = intStack[var5 + 1];
 							ObjType var212 = ObjType.list(var210);
-							if (var211 >= 1 && var211 <= 5 && var212.field1410[var211 - 1] != null) {
-								stringStack[var4++] = var212.field1410[var211 - 1];
+							if (var211 >= 1 && var211 <= 5 && var212.op[var211 - 1] != null) {
+								stringStack[var4++] = var212.op[var211 - 1];
 								continue;
 							}
 							stringStack[var4++] = field3652;
@@ -1844,8 +1844,8 @@ public class ScriptRunner {
 							int var213 = intStack[var5];
 							int var214 = intStack[var5 + 1];
 							ObjType var215 = ObjType.list(var213);
-							if (var214 >= 1 && var214 <= 5 && var215.field1428[var214 - 1] != null) {
-								stringStack[var4++] = var215.field1428[var214 - 1];
+							if (var214 >= 1 && var214 <= 5 && var215.iop[var214 - 1] != null) {
+								stringStack[var4++] = var215.iop[var214 - 1];
 								continue;
 							}
 							stringStack[var4++] = field3652;
@@ -1854,21 +1854,21 @@ public class ScriptRunner {
 						if (var270 == 4203) {
 							var5--;
 							int var216 = intStack[var5];
-							intStack[var5++] = ObjType.list(var216).field1375;
+							intStack[var5++] = ObjType.list(var216).cost;
 							continue;
 						}
 						if (var270 == 4204) {
 							var5--;
 							int var217 = intStack[var5];
-							intStack[var5++] = ObjType.list(var217).field1409 == 1 ? 1 : 0;
+							intStack[var5++] = ObjType.list(var217).stackable == 1 ? 1 : 0;
 							continue;
 						}
 						if (var270 == 4205) {
 							var5--;
 							int var218 = intStack[var5];
 							ObjType var219 = ObjType.list(var218);
-							if (var219.field1388 == -1 && var219.field1411 >= 0) {
-								intStack[var5++] = var219.field1411;
+							if (var219.certtemplate == -1 && var219.certlink >= 0) {
+								intStack[var5++] = var219.certlink;
 								continue;
 							}
 							intStack[var5++] = var218;
@@ -1878,8 +1878,8 @@ public class ScriptRunner {
 							var5--;
 							int var220 = intStack[var5];
 							ObjType var221 = ObjType.list(var220);
-							if (var221.field1388 >= 0 && var221.field1411 >= 0) {
-								intStack[var5++] = var221.field1411;
+							if (var221.certtemplate >= 0 && var221.certlink >= 0) {
+								intStack[var5++] = var221.certlink;
 								continue;
 							}
 							intStack[var5++] = var220;
@@ -1888,7 +1888,7 @@ public class ScriptRunner {
 						if (var270 == 4207) {
 							var5--;
 							int var222 = intStack[var5];
-							intStack[var5++] = ObjType.list(var222).field1392 ? 1 : 0;
+							intStack[var5++] = ObjType.list(var222).members ? 1 : 0;
 							continue;
 						}
 					} else if (var270 < 5100) {
@@ -2145,7 +2145,7 @@ public class ScriptRunner {
 						int var260 = intStack[var5] - 1;
 						if (var260 >= 0 && var260 <= 9) {
 							var4--;
-							var259.method301(stringStack[var4], var260);
+							var259.setOpName(stringStack[var4], var260);
 							continue;
 						}
 						var4--;
@@ -2155,36 +2155,36 @@ public class ScriptRunner {
 						var5 -= 2;
 						int var261 = intStack[var5 + 1];
 						int var262 = intStack[var5];
-						var259.field824 = IfType.get(var261, var262);
+						var259.draggable = IfType.get(var261, var262);
 						continue;
 					}
 					if (var270 == 1302) {
 						var5--;
-						var259.field862 = intStack[var5] == 1;
+						var259.draggablebehavior = intStack[var5] == 1;
 						continue;
 					}
 					if (var270 == 1303) {
 						var5--;
-						var259.field760 = intStack[var5];
+						var259.dragdeadzone = intStack[var5];
 						continue;
 					}
 					if (var270 == 1304) {
 						var5--;
-						var259.field746 = intStack[var5];
+						var259.dragdeadtime = intStack[var5];
 						continue;
 					}
 					if (var270 == 1305) {
 						var4--;
-						var259.field813 = stringStack[var4];
+						var259.baseOpName = stringStack[var4];
 						continue;
 					}
 					if (var270 == 1306) {
 						var4--;
-						var259.field825 = stringStack[var4];
+						var259.targetVerb = stringStack[var4];
 						continue;
 					}
 					if (var270 == 1307) {
-						var259.field738 = null;
+						var259.opNames = null;
 						continue;
 					}
 				}
@@ -2216,16 +2216,16 @@ public class ScriptRunner {
 
 	@ObfuscatedName("jb.a(II)V")
 	public static void executeOnLoad(int arg0) {
-		if (arg0 == -1 || !IfType.method192(arg0)) {
+		if (arg0 == -1 || !IfType.openInterface(arg0)) {
 			return;
 		}
-		IfType[] var1 = IfType.field1825[arg0];
+		IfType[] var1 = IfType.list[arg0];
 		for (int var2 = 0; var2 < var1.length; var2++) {
 			IfType var3 = var1[var2];
-			if (var3.field867 != null) {
+			if (var3.onload != null) {
 				HookReq var4 = new HookReq();
 				var4.component = var3;
-				var4.onop = var3.field867;
+				var4.onop = var3.onload;
 				executeScript(var4);
 			}
 		}

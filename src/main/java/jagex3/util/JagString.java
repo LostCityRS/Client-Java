@@ -163,9 +163,9 @@ public final class JagString implements StringInterface {
 			var1 = join(new JagString[] { var1.substring(0, var2), field1769, var1.substring(var2) });
 		}
 		if (var1.length() > 9) {
-			return join(new JagString[] { field3138, var1.substring(0, var1.length() - 8), Text.field1044, Client.field954, var1, field2501 });
+			return join(new JagString[] { field3138, var1.substring(0, var1.length() - 8), Text.MILLION, Client.field954, var1, field2501 });
 		} else if (var1.length() > 6) {
-			return join(new JagString[] { field927, var1.substring(0, var1.length() - 4), Text.field2050, Client.field954, var1, field2501 });
+			return join(new JagString[] { field927, var1.substring(0, var1.length() - 4), Text.THOUSAND, Client.field954, var1, field2501 });
 		} else {
 			return join(new JagString[] { field3466, var1, field1508 });
 		}
@@ -740,7 +740,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.a(BLec;)Z")
-	public boolean method271(JagString arg0) {
+	public boolean equalsIgnoreCase(JagString arg0) {
 		if (arg0 == null) {
 			return false;
 		} else if (arg0.length == this.length) {

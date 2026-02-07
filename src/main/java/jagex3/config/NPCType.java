@@ -15,234 +15,264 @@ import jagex3.var.VarCache;
 public final class NPCType extends Linkable2 {
 
 	@ObfuscatedName("wa.t")
-	public static Js5 field3512;
+	public static Js5 configClient;
+
 	@ObfuscatedName("cd.f")
-	public static Js5 field363;
+	public static Js5 models;
+
 	@ObfuscatedName("ba.f")
-	public static LruCache field164 = new LruCache(64);
+	public static LruCache recentUse = new LruCache(64);
+
 	@ObfuscatedName("ud.T")
-	public static LruCache field3269 = new LruCache(50);
-	@ObfuscatedName("kb.j")
-	public static JagString field1671 = JagString.wrap("null");
-	@ObfuscatedName("o.ab")
-	public JagString field2204 = field1671;
-
-	@ObfuscatedName("o.cb")
-	public int field2206 = 128;
-
-	@ObfuscatedName("o.fb")
-	public int field2209 = -1;
-
-	@ObfuscatedName("o.hb")
-	public int field2211 = -1;
-
-	@ObfuscatedName("o.kb")
-	public int[] field2214;
-
-	@ObfuscatedName("o.nb")
-	public int field2217 = -1;
-
-	@ObfuscatedName("o.ob")
-	public int field2218 = 32;
-
-	@ObfuscatedName("o.pb")
-	public int field2219 = -1;
-
-	@ObfuscatedName("o.qb")
-	public short[] field2220;
-
-	@ObfuscatedName("o.rb")
-	public boolean field2221 = true;
-
-	@ObfuscatedName("o.sb")
-	public int field2222 = 0;
+	public static LruCache modelCache = new LruCache(50);
 
 	@ObfuscatedName("o.ub")
-	public int field2224;
+	public int id;
 
-	@ObfuscatedName("o.K")
-	public boolean field2188 = true;
-
-	@ObfuscatedName("o.L")
-	public final JagString[] field2189 = new JagString[5];
-
-	@ObfuscatedName("o.H")
-	public int field2185 = -1;
-
-	@ObfuscatedName("o.O")
-	public int field2192 = -1;
-
-	@ObfuscatedName("o.R")
-	public int field2195 = -1;
+	@ObfuscatedName("kb.j")
+	public static JagString AUTO_NAME = JagString.wrap("null");
+	@ObfuscatedName("o.ab")
+	public JagString name = AUTO_NAME;
 
 	@ObfuscatedName("o.S")
 	public int size = 1;
 
-	@ObfuscatedName("o.Y")
-	public int field2202 = -1;
-
-	@ObfuscatedName("o.N")
-	public int field2191 = 0;
-
-	@ObfuscatedName("o.U")
-	public int field2198 = -1;
-
-	@ObfuscatedName("o.I")
-	public int field2186 = -1;
-
-	@ObfuscatedName("o.X")
-	public int field2201 = -1;
-
-	@ObfuscatedName("o.xb")
-	public int field2227 = 128;
-
-	@ObfuscatedName("o.Lb")
-	public boolean field2241 = true;
-
-	@ObfuscatedName("o.Nb")
-	public boolean field2243 = false;
-
 	@ObfuscatedName("o.M")
-	public int[] field2190;
+	public int[] model;
 
 	@ObfuscatedName("o.Z")
-	public int[] field2203;
+	public int[] head;
 
-	@ObfuscatedName("o.P")
-	public short[] field2193;
+	@ObfuscatedName("o.R")
+	public int readyanim = -1;
 
-	@ObfuscatedName("o.T")
-	public short[] field2197;
+	@ObfuscatedName("o.H")
+	public int turnrightanim = -1;
+
+	@ObfuscatedName("o.fb")
+	public int turnleftanim = -1;
+
+	@ObfuscatedName("o.Y")
+	public int walkanim = -1;
+
+	@ObfuscatedName("o.X")
+	public int walkanim_b = -1;
+
+	@ObfuscatedName("o.pb")
+	public int walkanim_l = -1;
+
+	@ObfuscatedName("o.hb")
+	public int walkanim_r = -1;
 
 	@ObfuscatedName("o.yb")
-	public short[] field2228;
+	public short[] recol_s;
 
-	@ObfuscatedName("cb.b(II)Lo;")
-	public static NPCType list(int arg0) {
-		NPCType var1 = (NPCType) field164.find((long) arg0);
-		if (var1 != null) {
-			return var1;
-		}
-		byte[] var2 = field3512.getFile(9, arg0);
-		NPCType var3 = new NPCType();
-		var3.field2224 = arg0;
-		if (var2 != null) {
-			var3.method758(new Packet(var2));
-		}
-		var3.method762();
-		field164.put((long) arg0, var3);
-		return var3;
-	}
+	@ObfuscatedName("o.qb")
+	public short[] recol_d;
+
+	@ObfuscatedName("o.P")
+	public short[] retex_s;
+
+	@ObfuscatedName("o.T")
+	public short[] retex_d;
+
+	@ObfuscatedName("o.L")
+	public final JagString[] op = new JagString[5];
+
+	@ObfuscatedName("o.rb")
+	public boolean minimap = true;
+
+	@ObfuscatedName("o.U")
+	public int vislevel = -1;
+
+	@ObfuscatedName("o.cb")
+	public int resizeh = 128;
+
+	@ObfuscatedName("o.xb")
+	public int resizev = 128;
+
+	@ObfuscatedName("o.Nb")
+	public boolean alwaysontop = false;
+
+	@ObfuscatedName("o.N")
+	public int ambient = 0;
+
+	@ObfuscatedName("o.sb")
+	public int contrast = 0;
+
+	@ObfuscatedName("o.nb")
+	public int headicon = -1;
+
+	@ObfuscatedName("o.ob")
+	public int turnspeed = 32;
+
+	@ObfuscatedName("o.kb")
+	public int[] multinpc;
+
+	@ObfuscatedName("o.O")
+	public int multivarbit = -1;
+
+	@ObfuscatedName("o.I")
+	public int multivarp = -1;
+
+	@ObfuscatedName("o.K")
+	public boolean active = true;
+
+	@ObfuscatedName("o.Lb")
+	public boolean walksmoothing = true;
 
 	@ObfuscatedName("td.a(Lea;Lea;B)V")
 	public static void init(Js5 arg0, Js5 arg1) {
-		field363 = arg1;
-		field3512 = arg0;
+		models = arg1;
+		configClient = arg0;
 	}
 
-	@ObfuscatedName("ld.a(I)V")
-	public static void method630() {
-		field164.clear();
-		field3269.clear();
+	@ObfuscatedName("cb.b(II)Lo;")
+	public static NPCType list(int arg0) {
+		NPCType var1 = (NPCType) recentUse.find((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = configClient.getFile(9, arg0);
+		NPCType var3 = new NPCType();
+		var3.id = arg0;
+		if (var2 != null) {
+			var3.decode(new Packet(var2));
+		}
+		var3.postDecode();
+		recentUse.put((long) arg0, var3);
+		return var3;
 	}
 
-	@ObfuscatedName("o.e(I)Lp;")
-	public ModelUnlit getHead() {
-		if (this.field2214 != null) {
-			NPCType var1 = this.method757();
-			return var1 == null ? null : var1.getHead();
-		} else if (this.field2203 == null) {
-			return null;
-		} else {
-			boolean var2 = false;
-			for (int var3 = 0; var3 < this.field2203.length; var3++) {
-				if (!field363.requestDownload(this.field2203[var3], 0)) {
-					var2 = true;
-				}
-			}
-			if (var2) {
-				return null;
-			}
-			ModelUnlit[] var4 = new ModelUnlit[this.field2203.length];
-			for (int var5 = 0; var5 < this.field2203.length; var5++) {
-				var4[var5] = ModelUnlit.method840(field363, this.field2203[var5]);
-			}
-			ModelUnlit var6;
-			if (var4.length == 1) {
-				var6 = var4[0];
-			} else {
-				var6 = new ModelUnlit(var4, var4.length);
-			}
-			if (this.field2228 != null) {
-				for (int var7 = 0; var7 < this.field2228.length; var7++) {
-					var6.recolour(this.field2228[var7], this.field2220[var7]);
-				}
-			}
-			if (this.field2193 != null) {
-				for (int var8 = 0; var8 < this.field2193.length; var8++) {
-					var6.method853(this.field2193[var8], this.field2197[var8]);
-				}
-			}
-			return var6;
-		}
-	}
-
-	@ObfuscatedName("o.f(I)Z")
-	public boolean method755() {
-		if (this.field2214 == null) {
-			return true;
-		}
-		int var1 = -1;
-		if (this.field2192 != -1) {
-			var1 = VarCache.getVarbit(this.field2192);
-		} else if (this.field2186 != -1) {
-			var1 = VarCache.field504[this.field2186];
-		}
-		return var1 >= 0 && var1 < this.field2214.length && this.field2214[var1] != -1;
-	}
-
-	@ObfuscatedName("o.g(I)Lo;")
-	public NPCType method757() {
-		int var1 = -1;
-		if (this.field2192 != -1) {
-			var1 = VarCache.getVarbit(this.field2192);
-		} else if (this.field2186 != -1) {
-			var1 = VarCache.field504[this.field2186];
-		}
-		return var1 < 0 || var1 >= this.field2214.length || this.field2214[var1] == -1 ? null : list(this.field2214[var1]);
+	@ObfuscatedName("o.b(B)V")
+	public void postDecode() {
 	}
 
 	@ObfuscatedName("o.a(BLjd;)V")
-	public void method758(Packet arg0) {
+	public void decode(Packet arg0) {
 		while (true) {
 			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}
-			this.method763(arg0, var2);
+			this.decode(arg0, var2);
+		}
+	}
+
+	@ObfuscatedName("o.a(ILjd;I)V")
+	public void decode(Packet arg0, int arg1) {
+		if (arg1 == 1) {
+			int var3 = arg0.g1();
+			this.model = new int[var3];
+			for (int var4 = 0; var4 < var3; var4++) {
+				this.model[var4] = arg0.g2();
+			}
+		} else if (arg1 == 2) {
+			this.name = arg0.gjstr();
+		} else if (arg1 == 12) {
+			this.size = arg0.g1();
+		} else if (arg1 == 13) {
+			this.readyanim = arg0.g2();
+		} else if (arg1 == 14) {
+			this.walkanim = arg0.g2();
+		} else if (arg1 == 15) {
+			this.turnleftanim = arg0.g2();
+		} else if (arg1 == 16) {
+			this.turnrightanim = arg0.g2();
+		} else if (arg1 == 17) {
+			this.walkanim = arg0.g2();
+			this.walkanim_b = arg0.g2();
+			this.walkanim_l = arg0.g2();
+			this.walkanim_r = arg0.g2();
+		} else if (arg1 >= 30 && arg1 < 35) {
+			this.op[arg1 - 30] = arg0.gjstr();
+			if (this.op[arg1 - 30].equalsIgnoreCase(Text.HIDDEN)) {
+				this.op[arg1 - 30] = null;
+			}
+		} else if (arg1 == 40) {
+			int var11 = arg0.g1();
+			this.recol_s = new short[var11];
+			this.recol_d = new short[var11];
+			for (int var12 = 0; var12 < var11; var12++) {
+				this.recol_s[var12] = (short) arg0.g2();
+				this.recol_d[var12] = (short) arg0.g2();
+			}
+		} else if (arg1 == 41) {
+			int var9 = arg0.g1();
+			this.retex_s = new short[var9];
+			this.retex_d = new short[var9];
+			for (int var10 = 0; var10 < var9; var10++) {
+				this.retex_s[var10] = (short) arg0.g2();
+				this.retex_d[var10] = (short) arg0.g2();
+			}
+		} else if (arg1 == 60) {
+			int var5 = arg0.g1();
+			this.head = new int[var5];
+			for (int var6 = 0; var6 < var5; var6++) {
+				this.head[var6] = arg0.g2();
+			}
+		} else if (arg1 == 93) {
+			this.minimap = false;
+		} else if (arg1 == 95) {
+			this.vislevel = arg0.g2();
+		} else if (arg1 == 97) {
+			this.resizeh = arg0.g2();
+		} else if (arg1 == 98) {
+			this.resizev = arg0.g2();
+		} else if (arg1 == 99) {
+			this.alwaysontop = true;
+		} else if (arg1 == 100) {
+			this.ambient = arg0.g1b();
+		} else if (arg1 == 101) {
+			this.contrast = arg0.g1b() * 5;
+		} else if (arg1 == 102) {
+			this.headicon = arg0.g2();
+		} else if (arg1 == 103) {
+			this.turnspeed = arg0.g2();
+		} else if (arg1 == 106) {
+			this.multivarbit = arg0.g2();
+			if (this.multivarbit == 65535) {
+				this.multivarbit = -1;
+			}
+			this.multivarp = arg0.g2();
+			if (this.multivarp == 65535) {
+				this.multivarp = -1;
+			}
+			int var7 = arg0.g1();
+			this.multinpc = new int[var7 + 1];
+			for (int var8 = 0; var8 <= var7; var8++) {
+				this.multinpc[var8] = arg0.g2();
+				if (this.multinpc[var8] == 65535) {
+					this.multinpc[var8] = -1;
+				}
+			}
+		} else if (arg1 == 107) {
+			this.active = false;
+		} else if (arg1 == 109) {
+			this.walksmoothing = false;
 		}
 	}
 
 	@ObfuscatedName("o.a(Lvc;ILvc;BI)Lod;")
 	public ModelLit getTempModel(SeqType arg0, int arg1, SeqType arg2, int arg3) {
-		if (this.field2214 != null) {
-			NPCType var5 = this.method757();
+		if (this.multinpc != null) {
+			NPCType var5 = this.getMultiNpc();
 			return var5 == null ? null : var5.getTempModel(arg0, arg1, arg2, arg3);
 		}
-		ModelLit var6 = (ModelLit) field3269.find((long) this.field2224);
+		ModelLit var6 = (ModelLit) modelCache.find((long) this.id);
 		if (var6 == null) {
 			boolean var7 = false;
-			for (int var8 = 0; var8 < this.field2190.length; var8++) {
-				if (!field363.requestDownload(this.field2190[var8], 0)) {
+			for (int var8 = 0; var8 < this.model.length; var8++) {
+				if (!models.requestDownload(this.model[var8], 0)) {
 					var7 = true;
 				}
 			}
 			if (var7) {
 				return null;
 			}
-			ModelUnlit[] var9 = new ModelUnlit[this.field2190.length];
-			for (int var10 = 0; var10 < this.field2190.length; var10++) {
-				var9[var10] = ModelUnlit.method840(field363, this.field2190[var10]);
+			ModelUnlit[] var9 = new ModelUnlit[this.model.length];
+			for (int var10 = 0; var10 < this.model.length; var10++) {
+				var9[var10] = ModelUnlit.load(models, this.model[var10]);
 			}
 			ModelUnlit var11;
 			if (var9.length == 1) {
@@ -250,18 +280,18 @@ public final class NPCType extends Linkable2 {
 			} else {
 				var11 = new ModelUnlit(var9, var9.length);
 			}
-			if (this.field2228 != null) {
-				for (int var12 = 0; var12 < this.field2228.length; var12++) {
-					var11.recolour(this.field2228[var12], this.field2220[var12]);
+			if (this.recol_s != null) {
+				for (int var12 = 0; var12 < this.recol_s.length; var12++) {
+					var11.recolour(this.recol_s[var12], this.recol_d[var12]);
 				}
 			}
-			if (this.field2193 != null) {
-				for (int var13 = 0; var13 < this.field2193.length; var13++) {
-					var11.method853(this.field2193[var13], this.field2197[var13]);
+			if (this.retex_s != null) {
+				for (int var13 = 0; var13 < this.retex_s.length; var13++) {
+					var11.retexture(this.retex_s[var13], this.retex_d[var13]);
 				}
 			}
-			var6 = var11.light(this.field2191 + 64, this.field2222 + 850, -30, -50, -30);
-			field3269.put((long) this.field2224, var6);
+			var6 = var11.light(this.ambient + 64, this.contrast + 850, -30, -50, -30);
+			modelCache.put((long) this.id, var6);
 		}
 		ModelLit var14;
 		if (arg2 != null && arg0 != null) {
@@ -269,111 +299,85 @@ public final class NPCType extends Linkable2 {
 		} else if (arg2 != null) {
 			var14 = arg2.animateModel(var6, arg1);
 		} else if (arg0 == null) {
-			var14 = var6.method799(true);
+			var14 = var6.copyForAnim(true);
 		} else {
 			var14 = arg0.animateModel(var6, arg3);
 		}
-		if (this.field2206 != 128 || this.field2227 != 128) {
-			var14.method805(this.field2206, this.field2227, this.field2206);
+		if (this.resizeh != 128 || this.resizev != 128) {
+			var14.resize(this.resizeh, this.resizev, this.resizeh);
 		}
 		return var14;
 	}
 
-	@ObfuscatedName("o.b(B)V")
-	public void method762() {
-	}
-
-	@ObfuscatedName("o.a(ILjd;I)V")
-	public void method763(Packet arg0, int arg1) {
-		if (arg1 == 1) {
-			int var3 = arg0.g1();
-			this.field2190 = new int[var3];
-			for (int var4 = 0; var4 < var3; var4++) {
-				this.field2190[var4] = arg0.g2();
-			}
-		} else if (arg1 == 2) {
-			this.field2204 = arg0.gjstr();
-		} else if (arg1 == 12) {
-			this.size = arg0.g1();
-		} else if (arg1 == 13) {
-			this.field2195 = arg0.g2();
-		} else if (arg1 == 14) {
-			this.field2202 = arg0.g2();
-		} else if (arg1 == 15) {
-			this.field2209 = arg0.g2();
-		} else if (arg1 == 16) {
-			this.field2185 = arg0.g2();
-		} else if (arg1 == 17) {
-			this.field2202 = arg0.g2();
-			this.field2201 = arg0.g2();
-			this.field2219 = arg0.g2();
-			this.field2211 = arg0.g2();
-		} else if (arg1 >= 30 && arg1 < 35) {
-			this.field2189[arg1 - 30] = arg0.gjstr();
-			if (this.field2189[arg1 - 30].method271(Text.HIDDEN)) {
-				this.field2189[arg1 - 30] = null;
-			}
-		} else if (arg1 == 40) {
-			int var11 = arg0.g1();
-			this.field2228 = new short[var11];
-			this.field2220 = new short[var11];
-			for (int var12 = 0; var12 < var11; var12++) {
-				this.field2228[var12] = (short) arg0.g2();
-				this.field2220[var12] = (short) arg0.g2();
-			}
-		} else if (arg1 == 41) {
-			int var9 = arg0.g1();
-			this.field2193 = new short[var9];
-			this.field2197 = new short[var9];
-			for (int var10 = 0; var10 < var9; var10++) {
-				this.field2193[var10] = (short) arg0.g2();
-				this.field2197[var10] = (short) arg0.g2();
-			}
-		} else if (arg1 == 60) {
-			int var5 = arg0.g1();
-			this.field2203 = new int[var5];
-			for (int var6 = 0; var6 < var5; var6++) {
-				this.field2203[var6] = arg0.g2();
-			}
-		} else if (arg1 == 93) {
-			this.field2221 = false;
-		} else if (arg1 == 95) {
-			this.field2198 = arg0.g2();
-		} else if (arg1 == 97) {
-			this.field2206 = arg0.g2();
-		} else if (arg1 == 98) {
-			this.field2227 = arg0.g2();
-		} else if (arg1 == 99) {
-			this.field2243 = true;
-		} else if (arg1 == 100) {
-			this.field2191 = arg0.g1b();
-		} else if (arg1 == 101) {
-			this.field2222 = arg0.g1b() * 5;
-		} else if (arg1 == 102) {
-			this.field2217 = arg0.g2();
-		} else if (arg1 == 103) {
-			this.field2218 = arg0.g2();
-		} else if (arg1 == 106) {
-			this.field2192 = arg0.g2();
-			if (this.field2192 == 65535) {
-				this.field2192 = -1;
-			}
-			this.field2186 = arg0.g2();
-			if (this.field2186 == 65535) {
-				this.field2186 = -1;
-			}
-			int var7 = arg0.g1();
-			this.field2214 = new int[var7 + 1];
-			for (int var8 = 0; var8 <= var7; var8++) {
-				this.field2214[var8] = arg0.g2();
-				if (this.field2214[var8] == 65535) {
-					this.field2214[var8] = -1;
+	@ObfuscatedName("o.e(I)Lp;")
+	public ModelUnlit getHead() {
+		if (this.multinpc != null) {
+			NPCType var1 = this.getMultiNpc();
+			return var1 == null ? null : var1.getHead();
+		} else if (this.head == null) {
+			return null;
+		} else {
+			boolean var2 = false;
+			for (int var3 = 0; var3 < this.head.length; var3++) {
+				if (!models.requestDownload(this.head[var3], 0)) {
+					var2 = true;
 				}
 			}
-		} else if (arg1 == 107) {
-			this.field2188 = false;
-		} else if (arg1 == 109) {
-			this.field2241 = false;
+			if (var2) {
+				return null;
+			}
+			ModelUnlit[] var4 = new ModelUnlit[this.head.length];
+			for (int var5 = 0; var5 < this.head.length; var5++) {
+				var4[var5] = ModelUnlit.load(models, this.head[var5]);
+			}
+			ModelUnlit var6;
+			if (var4.length == 1) {
+				var6 = var4[0];
+			} else {
+				var6 = new ModelUnlit(var4, var4.length);
+			}
+			if (this.recol_s != null) {
+				for (int var7 = 0; var7 < this.recol_s.length; var7++) {
+					var6.recolour(this.recol_s[var7], this.recol_d[var7]);
+				}
+			}
+			if (this.retex_s != null) {
+				for (int var8 = 0; var8 < this.retex_s.length; var8++) {
+					var6.retexture(this.retex_s[var8], this.retex_d[var8]);
+				}
+			}
+			return var6;
 		}
+	}
+
+	@ObfuscatedName("o.g(I)Lo;")
+	public NPCType getMultiNpc() {
+		int var1 = -1;
+		if (this.multivarbit != -1) {
+			var1 = VarCache.getVarbit(this.multivarbit);
+		} else if (this.multivarp != -1) {
+			var1 = VarCache.var[this.multivarp];
+		}
+		return var1 < 0 || var1 >= this.multinpc.length || this.multinpc[var1] == -1 ? null : list(this.multinpc[var1]);
+	}
+
+	@ObfuscatedName("o.f(I)Z")
+	public boolean isMultiNpcVisible() {
+		if (this.multinpc == null) {
+			return true;
+		}
+		int var1 = -1;
+		if (this.multivarbit != -1) {
+			var1 = VarCache.getVarbit(this.multivarbit);
+		} else if (this.multivarp != -1) {
+			var1 = VarCache.var[this.multivarp];
+		}
+		return var1 >= 0 && var1 < this.multinpc.length && this.multinpc[var1] != -1;
+	}
+
+	@ObfuscatedName("ld.a(I)V")
+	public static void resetCache() {
+		recentUse.clear();
+		modelCache.clear();
 	}
 }

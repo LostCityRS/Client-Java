@@ -347,7 +347,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.b(Z)Lod;")
-	public ModelLit method799(boolean arg0) {
+	public ModelLit copyForAnim(boolean arg0) {
 		if (!arg0 && field2342.length < this.field2348) {
 			field2342 = new byte[this.field2348 + 100];
 		}
@@ -545,7 +545,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.b()V")
-	public void method803() {
+	public void rotate180() {
 		for (int var1 = 0; var1 < this.field2347; var1++) {
 			this.field2337[var1] = -this.field2337[var1];
 			this.field2330[var1] = -this.field2330[var1];
@@ -583,7 +583,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.b(III)V")
-	public void method805(int arg0, int arg1, int arg2) {
+	public void resize(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < this.field2347; var4++) {
 			this.field2337[var4] = this.field2337[var4] * arg0 / 128;
 			this.field2321[var4] = this.field2321[var4] * arg1 / 128;
@@ -800,7 +800,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.a([[IIIIZI)Lod;")
-	public ModelLit method808(int[][] arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5) {
+	public ModelLit hillSkew(int[][] arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5) {
 		this.calcBoundingCylinder();
 		int var7 = arg1 - this.field2329;
 		int var8 = arg1 + this.field2329;
@@ -931,7 +931,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.a(Lrc;I)V")
-	public void method810(AnimFrameSet arg0, int arg1) {
+	public void animate(AnimFrameSet arg0, int arg1) {
 		if (this.field2344 == null || arg1 == -1) {
 			return;
 		}
@@ -961,7 +961,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.e()V")
-	public void method812() {
+	public void rotate270() {
 		for (int var1 = 0; var1 < this.field2347; var1++) {
 			int var2 = this.field2330[var1];
 			this.field2330[var1] = this.field2337[var1];
@@ -971,7 +971,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.a(IIIIIII)V")
-	public void method813(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void objRender(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		field2355[0] = -1;
 		if (this.field2340 != 2 && this.field2340 != 1) {
 			this.method807();
@@ -1027,7 +1027,7 @@ public final class ModelLit extends ModelSource {
 			return;
 		}
 		if (arg4 == null || arg3 == -1) {
-			this.method810(arg0, arg1);
+			this.animate(arg0, arg1);
 			return;
 		}
 		AnimFrame var6 = arg0.list[arg1];
@@ -1362,7 +1362,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.c(Z)Lod;")
-	public ModelLit method820(boolean arg0) {
+	public ModelLit copyForAnim2(boolean arg0) {
 		if (!arg0 && field2381.length < this.field2348) {
 			field2381 = new byte[this.field2348 + 100];
 		}

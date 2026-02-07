@@ -1,7 +1,6 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import jagex3.config.ObjType;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -9,7 +8,9 @@ import java.io.IOException;
 @ObfuscatedName("tb")
 public final class DataFile {
 
-	@ObfuscatedName("tb.j")
+    @ObfuscatedName("j.bc")
+    public static byte[] field1438 = new byte[520];
+    @ObfuscatedName("tb.j")
 	public final int field3117;
 
 	@ObfuscatedName("tb.k")
@@ -39,8 +40,8 @@ public final class DataFile {
 						return false;
 					}
 					this.field3130.method1184((long) (arg0 * 6));
-					this.field3130.method1180(6, ObjType.field1438, 0);
-					var6 = ((ObjType.field1438[3] & 0xFF) << 16) - (-((ObjType.field1438[4] & 0xFF) << 8) - (ObjType.field1438[5] & 0xFF));
+					this.field3130.method1180(6, field1438, 0);
+					var6 = ((field1438[3] & 0xFF) << 16) - (-((field1438[4] & 0xFF) << 8) - (field1438[5] & 0xFF));
 					if (var6 <= 0 || this.field3119.method1174() / 520L < (long) var6) {
 						return false;
 					}
@@ -50,29 +51,29 @@ public final class DataFile {
 						var6 = 1;
 					}
 				}
-				ObjType.field1438[3] = (byte) (var6 >> 16);
-				ObjType.field1438[4] = (byte) (var6 >> 8);
-				ObjType.field1438[0] = (byte) (arg1 >> 16);
-				ObjType.field1438[5] = (byte) var6;
-				ObjType.field1438[2] = (byte) arg1;
+				field1438[3] = (byte) (var6 >> 16);
+				field1438[4] = (byte) (var6 >> 8);
+				field1438[0] = (byte) (arg1 >> 16);
+				field1438[5] = (byte) var6;
+				field1438[2] = (byte) arg1;
 				int var7 = 0;
-				ObjType.field1438[1] = (byte) (arg1 >> 8);
+				field1438[1] = (byte) (arg1 >> 8);
 				int var8 = 0;
 				this.field3130.method1184((long) (arg0 * 6));
-				this.field3130.method1175(ObjType.field1438, 6, 0);
+				this.field3130.method1175(field1438, 6, 0);
 				while (arg1 > var7) {
 					int var9 = 0;
 					if (arg2) {
 						this.field3119.method1184((long) (var6 * 520));
 						try {
-							this.field3119.method1180(8, ObjType.field1438, 0);
+							this.field3119.method1180(8, field1438, 0);
 						} catch (EOFException var14) {
 							return true;
 						}
-						var9 = ((ObjType.field1438[4] & 0xFF) << 16) + ((ObjType.field1438[5] << 8 & 0xFF00) + (ObjType.field1438[6] & 0xFF));
-						int var10 = ((ObjType.field1438[0] & 0xFF) << 8) + (ObjType.field1438[1] & 0xFF);
-						int var11 = (ObjType.field1438[3] & 0xFF) + ((ObjType.field1438[2] & 0xFF) << 8);
-						int var12 = ObjType.field1438[7] & 0xFF;
+						var9 = ((field1438[4] & 0xFF) << 16) + ((field1438[5] << 8 & 0xFF00) + (field1438[6] & 0xFF));
+						int var10 = ((field1438[0] & 0xFF) << 8) + (field1438[1] & 0xFF);
+						int var11 = (field1438[3] & 0xFF) + ((field1438[2] & 0xFF) << 8);
+						int var12 = field1438[7] & 0xFF;
 						if (var10 != arg0 || var8 != var11 || this.field3117 != var12) {
 							return false;
 						}
@@ -90,24 +91,24 @@ public final class DataFile {
 							var9++;
 						}
 					}
-					ObjType.field1438[2] = (byte) (var8 >> 8);
-					ObjType.field1438[3] = (byte) var8;
-					ObjType.field1438[1] = (byte) arg0;
+					field1438[2] = (byte) (var8 >> 8);
+					field1438[3] = (byte) var8;
+					field1438[1] = (byte) arg0;
 					int var13 = arg1 - var7;
-					ObjType.field1438[7] = (byte) this.field3117;
+					field1438[7] = (byte) this.field3117;
 					var8++;
-					ObjType.field1438[0] = (byte) (arg0 >> 8);
+					field1438[0] = (byte) (arg0 >> 8);
 					if (var13 > 512) {
 						var13 = 512;
 					}
 					if (arg1 - var7 <= 512) {
 						var9 = 0;
 					}
-					ObjType.field1438[6] = (byte) var9;
-					ObjType.field1438[5] = (byte) (var9 >> 8);
-					ObjType.field1438[4] = (byte) (var9 >> 16);
+					field1438[6] = (byte) var9;
+					field1438[5] = (byte) (var9 >> 8);
+					field1438[4] = (byte) (var9 >> 16);
 					this.field3119.method1184((long) (var6 * 520));
-					this.field3119.method1175(ObjType.field1438, 8, 0);
+					this.field3119.method1175(field1438, 8, 0);
 					this.field3119.method1175(arg3, var13, var7);
 					var6 = var9;
 					var7 += var13;
@@ -128,9 +129,9 @@ public final class DataFile {
 					return null;
 				}
 				this.field3130.method1184((long) (arg0 * 6));
-				this.field3130.method1180(6, ObjType.field1438, 0);
-				int var4 = ((ObjType.field1438[0] & 0xFF) << 16) + ((ObjType.field1438[1] & 0xFF) << 8) + (ObjType.field1438[2] & 0xFF);
-				int var5 = ((ObjType.field1438[4] & 0xFF) << 8) + ((ObjType.field1438[3] & 0xFF) << 16) + (ObjType.field1438[5] & 0xFF);
+				this.field3130.method1180(6, field1438, 0);
+				int var4 = ((field1438[0] & 0xFF) << 16) + ((field1438[1] & 0xFF) << 8) + (field1438[2] & 0xFF);
+				int var5 = ((field1438[4] & 0xFF) << 8) + ((field1438[3] & 0xFF) << 16) + (field1438[5] & 0xFF);
 				if (var4 < 0 || var4 > this.field3118) {
 					return null;
 				} else if (var5 > 0 && (long) var5 <= this.field3119.method1174() / 520L) {
@@ -146,11 +147,11 @@ public final class DataFile {
 						if (var12 > 512) {
 							var12 = 512;
 						}
-						this.field3119.method1180(var12 + 8, ObjType.field1438, 0);
-						int var13 = ((ObjType.field1438[2] & 0xFF) << 8) + (ObjType.field1438[3] & 0xFF);
-						int var14 = (ObjType.field1438[1] & 0xFF) + ((ObjType.field1438[0] & 0xFF) << 8);
-						int var15 = (ObjType.field1438[6] & 0xFF) + (((ObjType.field1438[4] & 0xFF) << 16) + ((ObjType.field1438[5] & 0xFF) << 8));
-						int var16 = ObjType.field1438[7] & 0xFF;
+						this.field3119.method1180(var12 + 8, field1438, 0);
+						int var13 = ((field1438[2] & 0xFF) << 8) + (field1438[3] & 0xFF);
+						int var14 = (field1438[1] & 0xFF) + ((field1438[0] & 0xFF) << 8);
+						int var15 = (field1438[6] & 0xFF) + (((field1438[4] & 0xFF) << 16) + ((field1438[5] & 0xFF) << 8));
+						int var16 = field1438[7] & 0xFF;
 						if (arg0 == var14 && var10 == var13 && var16 == this.field3117) {
 							if (var15 >= 0 && (long) var15 <= this.field3119.method1174() / 520L) {
 								var5 = var15;
@@ -160,7 +161,7 @@ public final class DataFile {
 									if (var12 <= var19) {
 										continue label55;
 									}
-									var8[var9++] = ObjType.field1438[var19 + 8];
+									var8[var9++] = field1438[var19 + 8];
 									var19++;
 								}
 							}

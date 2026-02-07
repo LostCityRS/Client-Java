@@ -88,11 +88,11 @@ public final class BgSound extends Linkable {
 			this.field2260 = 0;
 			this.field2249 = 0;
 		} else {
-			this.field2249 = var2.field1250;
-			this.field2244 = var2.field1259;
-			this.field2275 = var2.field1256;
-			this.field2245 = var2.field1218;
-			this.field2260 = var2.field1240 * 128;
+			this.field2249 = var2.bgsound_maxdelay;
+			this.field2244 = var2.bgsound_mindelay;
+			this.field2275 = var2.bgsound_sound;
+			this.field2245 = var2.bgsound_random;
+			this.field2260 = var2.bgsound_range * 128;
 		}
 		if (this.field2275 != var1 && this.field2247 != null) {
 			Client.soundMixer.method907(this.field2247);

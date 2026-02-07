@@ -359,7 +359,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.d(Z)I")
-	public final int method551() {
+	public final int g2b() {
 		this.pos += 2;
 		int var1 = ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] & 0xFF);
 		if (var1 > 32767) {

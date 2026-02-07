@@ -23,9 +23,9 @@ public final class EnumType extends Linkable2 {
 	public int outputtype;
 
 	@ObfuscatedName("t.p")
-	public static JagString AUTO_NULL = JagString.wrap("null");
+	public static JagString AUTO_DEFAULTSTRING = JagString.wrap("null");
 	@ObfuscatedName("se.I")
-	public JagString defaultString = AUTO_NULL;
+	public JagString defaultString = AUTO_DEFAULTSTRING;
 
 	@ObfuscatedName("se.U")
 	public int defaultInt;

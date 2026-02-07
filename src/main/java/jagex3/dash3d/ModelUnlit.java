@@ -24,7 +24,7 @@ public final class ModelUnlit extends ModelSource {
 	public static int field2445 = 0;
 
 	@ObfuscatedName("p.fb")
-	public short field2446;
+	public short ambient;
 
 	@ObfuscatedName("p.gb")
 	public PointNormal[] field2447;
@@ -57,7 +57,7 @@ public final class ModelUnlit extends ModelSource {
 	public int field2456;
 
 	@ObfuscatedName("p.qb")
-	public short field2457;
+	public short contrast;
 
 	@ObfuscatedName("p.rb")
 	public short[] field2458;
@@ -150,7 +150,7 @@ public final class ModelUnlit extends ModelSource {
 	public int field2479;
 
 	@ObfuscatedName("p.a(Lea;II)Lp;")
-	public static ModelUnlit method840(Js5 arg0, int arg1) {
+	public static ModelUnlit load(Js5 arg0, int arg1) {
 		byte[] var2 = arg0.getFile(arg1, 0);
 		return var2 == null ? null : new ModelUnlit(var2);
 	}
@@ -169,9 +169,9 @@ public final class ModelUnlit extends ModelSource {
 	@ObfuscatedName("p.a(Lp;Lp;IIIZ)V")
 	public static void method848(ModelUnlit arg0, ModelUnlit arg1, int arg2, int arg3, int arg4, boolean arg5) {
 		arg0.method843();
-		arg0.method839();
+		arg0.calculateNormals();
 		arg1.method843();
-		arg1.method839();
+		arg1.calculateNormals();
 		field2445++;
 		int var6 = 0;
 		int[] var7 = arg1.field2444;
@@ -465,12 +465,12 @@ public final class ModelUnlit extends ModelSource {
 		this.field2447 = arg0.field2447;
 		this.field2478 = arg0.field2478;
 		this.field2460 = arg0.field2460;
-		this.field2446 = arg0.field2446;
-		this.field2457 = arg0.field2457;
+		this.ambient = arg0.ambient;
+		this.contrast = arg0.contrast;
 	}
 
 	@ObfuscatedName("p.a()Lp;")
-	public ModelUnlit method832() {
+	public ModelUnlit copyForShareLight() {
 		ModelUnlit var1 = new ModelUnlit();
 		if (this.field2440 != null) {
 			var1.field2440 = new byte[this.field2465];
@@ -510,8 +510,8 @@ public final class ModelUnlit extends ModelSource {
 		var1.field2471 = this.field2471;
 		var1.field2447 = this.field2447;
 		var1.field2478 = this.field2478;
-		var1.field2446 = this.field2446;
-		var1.field2457 = this.field2457;
+		var1.ambient = this.ambient;
+		var1.contrast = this.contrast;
 		return var1;
 	}
 
@@ -525,7 +525,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.b(III)V")
-	public void method834(int arg0, int arg1, int arg2) {
+	public void translate(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < this.field2443; var4++) {
 			this.field2444[var4] += arg0;
 			this.field2459[var4] += arg1;
@@ -829,7 +829,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.a([[IIIIZI)Lp;")
-	public ModelUnlit method836(int[][] arg0, int arg1, int arg2, int arg3, int arg4) {
+	public ModelUnlit hillSkew(int[][] arg0, int arg1, int arg2, int arg3, int arg4) {
 		this.method843();
 		int var6 = arg1 + this.field2479;
 		int var7 = arg1 + this.field2468;
@@ -876,8 +876,8 @@ public final class ModelUnlit extends ModelSource {
 		var14.field2476 = this.field2476;
 		var14.field2470 = this.field2470;
 		var14.field2471 = this.field2471;
-		var14.field2446 = this.field2446;
-		var14.field2457 = this.field2457;
+		var14.ambient = this.ambient;
+		var14.contrast = this.contrast;
 		var14.field2459 = new int[var14.field2443];
 		if (arg4 == 0) {
 			for (int var15 = 0; var15 < var14.field2443; var15++) {
@@ -914,7 +914,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.b()V")
-	public void method837() {
+	public void rotate90() {
 		for (int var1 = 0; var1 < this.field2443; var1++) {
 			int var2 = this.field2444[var1];
 			this.field2444[var1] = this.field2435[var1];
@@ -924,7 +924,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.c()V")
-	public void method838() {
+	public void rotate270() {
 		for (int var1 = 0; var1 < this.field2443; var1++) {
 			int var2 = this.field2435[var1];
 			this.field2435[var1] = this.field2444[var1];
@@ -934,7 +934,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.d()V")
-	public void method839() {
+	public void calculateNormals() {
 		if (this.field2447 != null) {
 			return;
 		}
@@ -1229,7 +1229,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.e()V")
-	public void method842() {
+	public void rotate180() {
 		for (int var1 = 0; var1 < this.field2443; var1++) {
 			this.field2444[var1] = -this.field2444[var1];
 			this.field2435[var1] = -this.field2435[var1];
@@ -1275,7 +1275,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.g()V")
-	public void method844() {
+	public void mirror() {
 		for (int var1 = 0; var1 < this.field2443; var1++) {
 			this.field2435[var1] = -this.field2435[var1];
 		}
@@ -1313,7 +1313,7 @@ public final class ModelUnlit extends ModelSource {
 
 	@ObfuscatedName("p.a(IIIII)Lod;")
 	public ModelLit light(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		this.method839();
+		this.calculateNormals();
 		int var6 = (int) Math.sqrt((double) (arg2 * arg2 + arg3 * arg3 + arg4 * arg4));
 		int var7 = arg1 * var6 >> 8;
 		ModelLit var8 = new ModelLit();
@@ -1472,7 +1472,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.f(I)V")
-	public void method851() {
+	public void rotateXAxis() {
 		int var1 = field2448[256];
 		int var2 = field2442[256];
 		for (int var3 = 0; var3 < this.field2443; var3++) {
@@ -1534,7 +1534,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.b(SS)V")
-	public void method853(short arg0, short arg1) {
+	public void retexture(short arg0, short arg1) {
 		if (this.field2438 == null) {
 			return;
 		}
@@ -1554,7 +1554,7 @@ public final class ModelUnlit extends ModelSource {
 	}
 
 	@ObfuscatedName("p.c(III)V")
-	public void method855(int arg0, int arg1, int arg2) {
+	public void resize(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < this.field2443; var4++) {
 			this.field2444[var4] = this.field2444[var4] * arg0 / 128;
 			this.field2459[var4] = this.field2459[var4] * arg1 / 128;

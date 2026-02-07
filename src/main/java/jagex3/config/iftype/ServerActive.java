@@ -7,57 +7,62 @@ import jagex3.datastruct.Linkable;
 public final class ServerActive extends Linkable {
 
 	@ObfuscatedName("fb.t")
-	public int field900;
+	public int eventCode;
 
 	public ServerActive() {
 	}
 
 	public ServerActive(int arg0) {
-		this.field900 = arg0;
-	}
-
-	@ObfuscatedName("ha.b(II)I")
-	public static int method395(int arg0) {
-		return arg0 >> 17 & 0x7;
-	}
-
-	@ObfuscatedName("i.a(II)Z")
-	public static boolean method436(int arg0) {
-		return (arg0 >> 29 & 0x1) != 0;
-	}
-
-	@ObfuscatedName("nd.a(IB)Z")
-	public static boolean method742(int arg0) {
-		return (arg0 >> 21 & 0x1) != 0;
-	}
-
-	@ObfuscatedName("of.a(II)Z")
-	public static boolean method830(int arg0) {
-		return (arg0 >> 30 & 0x1) != 0;
-	}
-
-	@ObfuscatedName("oa.a(ZI)I")
-	public static int method768(int arg0) {
-		return arg0 >> 11 & 0x3F;
-	}
-
-	@ObfuscatedName("bf.a(BI)Z")
-	public static boolean method78(int arg0) {
-		return (arg0 >> 28 & 0x1) != 0;
-	}
-
-	@ObfuscatedName("qf.a(II)Z")
-	public static boolean method924(int arg0) {
-		return (arg0 >> 20 & 0x1) != 0;
+		this.eventCode = arg0;
 	}
 
 	@ObfuscatedName("kb.a(II)Z")
-	public static boolean method583(int arg0) {
+	public static boolean pauseButton(int arg0) {
 		return (arg0 & 0x1) != 0;
 	}
 
+	@ObfuscatedName("be.a(III)Z")
+	public static boolean hasOp(int arg0, int opindex) {
+		return ((arg0 >> (opindex + 1)) & 0x1) != 0;
+	}
+
+	@ObfuscatedName("oa.a(ZI)I")
+	public static int targetMask(int arg0) {
+		return arg0 >> 11 & 0x3F;
+	}
+
+	@ObfuscatedName("ha.b(II)I")
+	public static int serverDraggable(int arg0) {
+		return arg0 >> 17 & 0x7;
+	}
+
+	@ObfuscatedName("qf.a(II)Z")
+	public static boolean isDragTarget(int arg0) {
+		return (arg0 >> 20 & 0x1) != 0;
+	}
+
+	@ObfuscatedName("nd.a(IB)Z")
+	public static boolean isUseTarget(int arg0) {
+		return (arg0 >> 21 & 0x1) != 0;
+	}
+
+	@ObfuscatedName("bf.a(BI)Z")
+	public static boolean isObjSwapEnabled(int arg0) {
+		return (arg0 >> 28 & 0x1) != 0;
+	}
+
+	@ObfuscatedName("i.a(II)Z")
+	public static boolean isObjReplaceEnabled(int arg0) {
+		return (arg0 >> 29 & 0x1) != 0;
+	}
+
+	@ObfuscatedName("of.a(II)Z")
+	public static boolean isObjOpsEnabled(int arg0) {
+		return (arg0 >> 30 & 0x1) != 0;
+	}
+
 	@ObfuscatedName("wd.a(II)Z")
-	public static boolean method1210(int arg0) {
+	public static boolean isObjUseEnabled(int arg0) {
 		return (arg0 >> 31 & 0x1) != 0;
 	}
 }
