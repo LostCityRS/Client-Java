@@ -19,15 +19,15 @@ public class TitleScreen {
 	@ObfuscatedName("ke.m")
 	public static JagString AUTO_EMPTY = JagString.wrap("");
 	@ObfuscatedName("ke.s")
-	public static JagString field1754 = AUTO_EMPTY;
+	public static JagString loginMes1 = AUTO_EMPTY;
 	@ObfuscatedName("ke.p")
 	public static JagString loginUser = AUTO_EMPTY;
 	@ObfuscatedName("ke.h")
 	public static JagString loadString = AUTO_EMPTY;
 	@ObfuscatedName("ke.g")
-	public static JagString field1742 = AUTO_EMPTY;
+	public static JagString loginMes2 = AUTO_EMPTY;
 	@ObfuscatedName("ke.e")
-	public static JagString field1740 = AUTO_EMPTY;
+	public static JagString loginMes3 = AUTO_EMPTY;
 	@ObfuscatedName("ke.c")
 	public static JagString loginPass = AUTO_EMPTY;
 	@ObfuscatedName("wc.k")
@@ -210,10 +210,10 @@ public class TitleScreen {
 				loginscreen = 3;
 			}
 			if (var1 == 1 && var3 >= 387 && var3 <= 537 && var2 >= 271 && var2 <= 311) {
-				field1754 = Text.field3090;
-				field1740 = Text.field3065;
+				loginMes1 = Text.PLEASELOGIN1;
+				loginMes3 = Text.PLEASELOGIN3;
 				loginSelect = 0;
-				field1742 = Text.PLEASELOGIN2;
+				loginMes2 = Text.PLEASELOGIN2;
 				loginscreen = 2;
 				return;
 			}
@@ -231,14 +231,14 @@ public class TitleScreen {
 			if (var1 == 1 && var3 >= 227 && var3 <= 377 && var2 >= 301 && var2 <= 341) {
 				loginUser = loginUser.method244().method264();
 				if (loginUser.length() == 0) {
-					loginMes(Text.field3094, Text.field3037, Text.field892);
+					loginMes(Text.LOGIN_USER_LENGTH_A, Text.LOGIN_USER_LENGTH_B, Text.LOGIN_USER_LENGTH_C);
 					return;
 				}
 				if (loginPass.length() == 0) {
-					loginMes(Text.field3083, Text.field3095, Text.field3168);
+					loginMes(Text.LOGIN_PASS_LENGTH_A, Text.LOGIN_PASS_LENGTH_B, Text.LOGIN_PASS_LENGTH_C);
 					return;
 				}
-				loginMes(Text.field3051, Text.field3077, Text.CONNECTING);
+				loginMes(Text.CONNECTING1, Text.CONNECTING2, Text.CONNECTING3);
 				Client.setMainState(20);
 				return;
 			}
@@ -276,14 +276,14 @@ public class TitleScreen {
 						if (Client.modewhere == 2 && ClientKeyboardListener.code == 84) {
 							loginUser = loginUser.method244().method264();
 							if (loginUser.length() == 0) {
-								loginMes(Text.field3094, Text.field3037, Text.field892);
+								loginMes(Text.LOGIN_USER_LENGTH_A, Text.LOGIN_USER_LENGTH_B, Text.LOGIN_USER_LENGTH_C);
 								return;
 							}
 							if (loginPass.length() == 0) {
-								loginMes(Text.field3083, Text.field3095, Text.field3168);
+								loginMes(Text.LOGIN_PASS_LENGTH_A, Text.LOGIN_PASS_LENGTH_B, Text.LOGIN_PASS_LENGTH_C);
 								return;
 							}
-							loginMes(Text.field3051, Text.field3077, Text.CONNECTING);
+							loginMes(Text.CONNECTING1, Text.CONNECTING2, Text.CONNECTING3);
 							Client.setMainState(20);
 							return;
 						}
@@ -307,7 +307,7 @@ public class TitleScreen {
 			return;
 		}
 		if (Client.state == 0 || Client.state == 5) {
-			arg1.centreString(Text.field3642, 382, 225, 16777215, -1);
+			arg1.centreString(Text.LOADING_TITLE, 382, 225, 16777215, -1);
 			Pix2D.drawRect(230, 233, 304, 34, 9179409);
 			Pix2D.drawRect(231, 234, 302, 32, 0);
 			Pix2D.fillRect(232, 235, loadPos * 3, 30, 9179409);
@@ -317,11 +317,11 @@ public class TitleScreen {
 		if (Client.state == 20) {
 			short var2 = 211;
 			titleBox.plotSprite(382 - titleBox.wi / 2, 271 - titleBox.hi / 2);
-			arg1.centreString(field1754, 382, 211, 16776960, 0);
+			arg1.centreString(loginMes1, 382, 211, 16776960, 0);
 			int var8 = var2 + 15;
-			arg1.centreString(field1742, 382, 226, 16776960, 0);
+			arg1.centreString(loginMes2, 382, 226, 16776960, 0);
 			int var9 = var8 + 15;
-			arg1.centreString(field1740, 382, 241, 16776960, 0);
+			arg1.centreString(loginMes3, 382, 241, 16776960, 0);
 			int var10 = var9 + 15;
 			int var11 = var10 + 10;
 			arg1.drawString(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixFont.escape(loginUser) }), 272, 266, 16777215, 0);
@@ -341,11 +341,11 @@ public class TitleScreen {
 				arg1.drawStringMultiline(Text.EXISTINGUSER, 389, 271, 144, 40, 16777215, 0, 1, 1, 0);
 			} else if (loginscreen == 2) {
 				short var4 = 211;
-				arg1.centreString(field1754, 382, 211, 16776960, 0);
+				arg1.centreString(loginMes1, 382, 211, 16776960, 0);
 				int var17 = var4 + 15;
-				arg1.centreString(field1742, 382, 226, 16776960, 0);
+				arg1.centreString(loginMes2, 382, 226, 16776960, 0);
 				int var19 = var17 + 15;
-				arg1.centreString(field1740, 382, 241, 16776960, 0);
+				arg1.centreString(loginMes3, 382, 241, 16776960, 0);
 				int var20 = var19 + 15;
 				int var22 = var20 + 10;
 				arg1.drawString(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixFont.escape(loginUser), loginSelect == 0 & Client.loopCycle % 40 < 20 ? field2104 : AUTO_EMPTY}), 272, 266, 16777215, 0);
@@ -566,7 +566,7 @@ public class TitleScreen {
 			field3556[1].plotSprite(140, 1);
 			arg1.drawString(Text.MEMBERSONLYWORLD, 152, 10, 16777215, -1);
 			field3556[0].plotSprite(140, 12);
-			arg1.drawString(Text.SL_FREEWORLD, 152, 21, 16777215, -1);
+			arg1.drawString(Text.FREEWORLD, 152, 21, 16777215, -1);
 		}
 		if (field958 != null) {
 			if (field3510[0] == 0 && field2264[0] == 0) {
@@ -869,10 +869,10 @@ public class TitleScreen {
 	}
 
 	@ObfuscatedName("qc.a(ZLec;Lec;Lec;)V")
-	public static void loginMes(JagString arg0, JagString arg1, JagString arg2) {
-		field1742 = arg2;
-		field1754 = arg0;
-		field1740 = arg1;
+	public static void loginMes(JagString arg0, JagString arg2, JagString arg1) {
+		loginMes2 = arg2;
+		loginMes1 = arg0;
+		loginMes3 = arg1;
 	}
 
 	@ObfuscatedName("ra.a(BLlf;)V")

@@ -1180,7 +1180,7 @@ public final class Client extends GameShell {
 			vorbis = openJs5(14, false, false, true);
 			patches = openJs5(15, true, false, true);
 			TitleScreen.loadPos = 20;
-			TitleScreen.loadString = Text.field1626;
+			TitleScreen.loadString = Text.MAINLOAD30;
 			loadingStep = 40;
 		} else if (loadingStep == 40) {
 			int var6 = anims.getIndexPercentage() * 4 / 100;
@@ -1199,14 +1199,14 @@ public final class Client extends GameShell {
 			int var19 = var18 + fontMetrics.getIndexPercentage() * 2 / 100;
 			int var20 = var19 + vorbis.getIndexPercentage() * 2 / 100;
 			int var21 = var20 + patches.getIndexPercentage() * 2 / 100;
-			if (var21 == 100) {
-				TitleScreen.loadString = Text.field2485;
-				loadingStep = 45;
+			if (var21 != 100) {
+				if (var21 != 0) {
+					TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD40, JagString.parseInt(var21), AUTO_PCT});
+				}
 				TitleScreen.loadPos = 30;
 			} else {
-				if (var21 != 0) {
-					TitleScreen.loadString = JagString.join(new JagString[] { Text.field1274, JagString.parseInt(var21), AUTO_PCT});
-				}
+				TitleScreen.loadString = Text.MAINLOAD40B;
+				loadingStep = 45;
 				TitleScreen.loadPos = 30;
 			}
 		} else if (loadingStep == 45) {
@@ -1222,7 +1222,7 @@ public final class Client extends GameShell {
 			soundDecimator = new Decimator(22050, PcmPlayer.frequency);
 			loadingStep = 50;
 			TitleScreen.loadPos = 35;
-			TitleScreen.loadString = Text.field1326;
+			TitleScreen.loadString = Text.MAINLOAD45;
 		} else if (loadingStep == 50) {
 			int var23 = 0;
 			if (p11 == null) {
@@ -1241,10 +1241,10 @@ public final class Client extends GameShell {
 				var23++;
 			}
 			if (var23 < 3) {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field1729, JagString.parseInt(var23 * 100 / 3), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD50, JagString.parseInt(var23 * 100 / 3), AUTO_PCT});
 				TitleScreen.loadPos = 40;
 			} else {
-				TitleScreen.loadString = Text.field528;
+				TitleScreen.loadString = Text.MAINLOAD50B;
 				TitleScreen.loadPos = 40;
 				loadingStep = 60;
 			}
@@ -1252,16 +1252,19 @@ public final class Client extends GameShell {
 			int var24 = TitleScreen.ready(sprites, binary);
 			int var25 = TitleScreen.readyMax();
 			if (var25 > var24) {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field1986, JagString.parseInt(var24 * 100 / var25), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD60, JagString.parseInt(var24 * 100 / var25), AUTO_PCT});
 				TitleScreen.loadPos = 50;
 			} else {
 				TitleScreen.loadPos = 50;
-				TitleScreen.loadString = Text.field1182;
+				TitleScreen.loadString = Text.MAINLOAD60B;
 				setMainState(5);
 				loadingStep = 70;
 			}
 		} else if (loadingStep == 70) {
-			if (configs.requestFullDownload()) {
+			if (!configs.requestFullDownload()) {
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD70, JagString.parseInt(configs.getIndexLoadProgress()), AUTO_PCT});
+				TitleScreen.loadPos = 60;
+			} else {
 				FloType.init(configs);
 				FluType.init(configs);
 				IdkType.init(models, configs);
@@ -1275,12 +1278,9 @@ public final class Client extends GameShell {
 				IfType.init(sprites, models, fontMetrics, interfaces);
 				InvType.init(configs);
 				EnumType.init(configs);
-				TitleScreen.loadString = Text.field1004;
+				TitleScreen.loadString = Text.MAINLOAD70B;
 				TitleScreen.loadPos = 60;
 				loadingStep = 80;
-			} else {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field1552, JagString.parseInt(configs.getIndexLoadProgress()), AUTO_PCT});
-				TitleScreen.loadPos = 60;
 			}
 		} else if (loadingStep == 80) {
 			int var26 = 0;
@@ -1355,7 +1355,7 @@ public final class Client extends GameShell {
 				var26++;
 			}
 			if (var26 < 14) {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field1459, JagString.parseInt(var26 * 100 / 14), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD80, JagString.parseInt(var26 * 100 / 14), AUTO_PCT});
 				TitleScreen.loadPos = 70;
 			} else {
 				PixFont.modicons = modicons;
@@ -1369,20 +1369,20 @@ public final class Client extends GameShell {
 				}
 				mapscene[0].rgbAdjust(var30 + var27, var30 + var28, var29 + var30);
 				prepareMinimap();
-				TitleScreen.loadString = Text.field2781;
+				TitleScreen.loadString = Text.MAINLOAD80B;
 				TitleScreen.loadPos = 70;
 				loadingStep = 90;
 			}
 		} else if (loadingStep == 90) {
-			if (textures.requestFullDownload()) {
+			if (!textures.requestFullDownload()) {
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD90, JagString.parseInt(textures.getIndexLoadProgress()), AUTO_PCT});
+				TitleScreen.loadPos = 90;
+			} else {
 				WorldTextureProvider var32 = new WorldTextureProvider(textures, sprites, 20, 0.8D, lowMem ? 64 : 128);
 				Pix3D.setTextures(var32);
 				Pix3D.initColourTable(0.8D);
 				loadingStep = 110;
-				TitleScreen.loadString = Text.field2980;
-				TitleScreen.loadPos = 90;
-			} else {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field3464, JagString.parseInt(textures.getIndexLoadProgress()), AUTO_PCT});
+				TitleScreen.loadString = Text.MAINLOAD90B;
 				TitleScreen.loadPos = 90;
 			}
 		} else if (loadingStep == 110) {
@@ -1390,31 +1390,31 @@ public final class Client extends GameShell {
 			signlink.threadreq(10, mouseTracking, 105);
 			TitleScreen.loadPos = 94;
 			loadingStep = 120;
-			TitleScreen.loadString = Text.field2568;
+			TitleScreen.loadString = Text.MAINLOAD110;
 		} else if (loadingStep == 120) {
-			if (binary.requestDownload(field2927, field1786)) {
+			if (!binary.requestDownload(field2927, field1786)) {
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD120, field922 });
+				TitleScreen.loadPos = 96;
+			} else {
 				Huffman var33 = new Huffman(binary.getFile(field2927, field1786));
 				WordPack.method997(var33);
-				TitleScreen.loadString = Text.field1988;
+				TitleScreen.loadString = Text.MAINLOAD120B;
 				TitleScreen.loadPos = 96;
 				loadingStep = 130;
-			} else {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field3602, field922 });
-				TitleScreen.loadPos = 96;
 			}
 		} else if (loadingStep == 130) {
 			if (!interfaces.requestFullDownload()) {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field167, JagString.parseInt(interfaces.getIndexLoadProgress() * 4 / 5), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD130, JagString.parseInt(interfaces.getIndexLoadProgress() * 4 / 5), AUTO_PCT});
 				TitleScreen.loadPos = 100;
 			} else if (!scripts.requestFullDownload()) {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field167, JagString.parseInt(scripts.getIndexLoadProgress() / 6 + 80), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD130, JagString.parseInt(scripts.getIndexLoadProgress() / 6 + 80), AUTO_PCT});
 				TitleScreen.loadPos = 100;
-			} else if (fontMetrics.requestFullDownload()) {
-				loadingStep = 140;
-				TitleScreen.loadString = Text.field1989;
+			} else if (!fontMetrics.requestFullDownload()) {
+				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD130, JagString.parseInt(fontMetrics.getIndexLoadProgress() / 20 + 96), AUTO_PCT});
 				TitleScreen.loadPos = 100;
 			} else {
-				TitleScreen.loadString = JagString.join(new JagString[] { Text.field167, JagString.parseInt(fontMetrics.getIndexLoadProgress() / 20 + 96), AUTO_PCT});
+				loadingStep = 140;
+				TitleScreen.loadString = Text.MAINLOAD130B;
 				TitleScreen.loadPos = 100;
 			}
 		} else if (loadingStep == 140) {
@@ -1575,7 +1575,7 @@ public final class Client extends GameShell {
 			}
 			if (loginFailCount == 8) {
 				loginWaitingTime = 0;
-				TitleScreen.loginMes(Text.field1873, JagString.join(new JagString[] { JagString.parseInt(loginHopTimer / 60), Text.field481 }), Text.field309);
+				TitleScreen.loginMes(Text.LOGINHOP_A, Text.LOGINHOP_B, JagString.join(new JagString[] { JagString.parseInt(loginHopTimer / 60), Text.LOGINHOP_C}));
 				if (--loginHopTimer <= 0) {
 					loginFailCount = 0;
 				}
@@ -2857,7 +2857,7 @@ public final class Client extends GameShell {
 			}
 		}
 		if (!var3) {
-			addChat(JagString.join(new JagString[] { Text.field2238, var2 }), 0, field1786);
+			addChat(JagString.join(new JagString[] { Text.UNABLETOFIND, var2 }), 0, field1786);
 		}
 	}
 
@@ -3563,24 +3563,24 @@ public final class Client extends GameShell {
 			return;
 		}
 		if (field20 >= 100 && membersAccount != 1 || field20 >= 200) {
-			addChat(Text.field1413, 0, field1786);
+			addChat(Text.FRIENDLISTFULL, 0, field1786);
 			return;
 		}
 		JagString var2 = JString.method59(arg0).method264();
 		for (int var3 = 0; var3 < field20; var3++) {
 			if (field694[var3] == arg0) {
-				addChat(JagString.join(new JagString[] { var2, Text.field3076 }), 0, field1786);
+				addChat(JagString.join(new JagString[] { var2, Text.FRIENDLISTDUPE}), 0, field1786);
 				return;
 			}
 		}
 		for (int var4 = 0; var4 < field2504; var4++) {
 			if (field2407[var4] == arg0) {
-				addChat(JagString.join(new JagString[] { Text.field97, var2, Text.field3486 }), 0, field1786);
+				addChat(JagString.join(new JagString[] { Text.field97, var2, Text.REMOVEIGNORE2}), 0, field1786);
 				return;
 			}
 		}
 		if (var2.strEquals(field373.name)) {
-			addChat(Text.field96, 0, field1786);
+			addChat(Text.FRIENDCANTADDSELF, 0, field1786);
 			return;
 		}
 		field239[field20] = var2;
@@ -4136,7 +4136,7 @@ public final class Client extends GameShell {
 					var7 = VarCache.var[var2[var5++]];
 				}
 				if (var6 == 6) {
-					var7 = Skills.field3142[field1159[var2[var5++]] - 1];
+					var7 = Skills.skillxp[field1159[var2[var5++]] - 1];
 				}
 				if (var6 == 7) {
 					var7 = VarCache.var[var2[var5++]] * 100 / 46875;
@@ -4146,7 +4146,7 @@ public final class Client extends GameShell {
 				}
 				if (var6 == 9) {
 					for (int var14 = 0; var14 < 25; var14++) {
-						if (Skills.field1069[var14]) {
+						if (Skills.used[var14]) {
 							var7 += field1159[var14];
 						}
 					}
@@ -4379,7 +4379,7 @@ public final class Client extends GameShell {
 		Pix2D.fillRect(var3, var0, var1, var2, 6116423);
 		Pix2D.fillRect(var3 + 1, var0 + 1, var1 - 2, 16, 0);
 		Pix2D.drawRect(var3 + 1, var0 - -18, var1 - 2, var2 - 19, 0);
-		b12.drawString(Text.field94, var3 + 3, var0 + 14, 6116423, -1);
+		b12.drawString(Text.CHOOSEOPTION, var3 + 3, var0 + 14, 6116423, -1);
 		int var4 = ClientMouseListener.mouseY;
 		int var5 = ClientMouseListener.mouseX;
 		for (int var6 = 0; var6 < field2849; var6++) {
@@ -5029,7 +5029,7 @@ public final class Client extends GameShell {
 						}
 					}
 					if (!var29 && overrideChat == 0) {
-						addChat(Text.field1853, 4, var28);
+						addChat(Text.TRADEREQ, 4, var28);
 					}
 				} else if (var27.method266(field2496)) {
 					boolean var33 = false;
@@ -5042,7 +5042,7 @@ public final class Client extends GameShell {
 						}
 					}
 					if (!var33 && overrideChat == 0) {
-						addChat(Text.field2852, 8, var34);
+						addChat(Text.DUELREQ, 8, var34);
 					}
 				} else if (var27.method266(field350)) {
 					JagString var46 = var27.substring(0, var27.method267(field3508));
@@ -5371,7 +5371,7 @@ public final class Client extends GameShell {
 				field3173[var113] = var115;
 				field1159[var113] = 1;
 				for (int var116 = 0; var116 < 98; var116++) {
-					if (var114 >= Skills.field3142[var116]) {
+					if (var114 >= Skills.skillxp[var116]) {
 						field1159[var113] = var116 + 2;
 					}
 				}
@@ -6300,7 +6300,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("mc.a(IIIII)V")
 	public static void method663(int arg0, int arg1, int arg2, int arg3) {
 		if (field2913 == 0 && !field3468) {
-			method442(0, Text.field1116, arg3 - arg1, 3, field1786, arg0 - arg2);
+			method442(0, Text.WALKHERE, arg3 - arg1, 3, field1786, arg0 - arg2);
 		}
 		int var4 = -1;
 		for (int var5 = 0; var5 < ModelLit.field2382; var5++) {
@@ -6320,7 +6320,7 @@ public final class Client extends GameShell {
 						continue;
 					}
 					if (field2913 == 1) {
-						method442(var6, Text.field965, var10, 49, JagString.join(new JagString[] { field1148, field2087, var11.name}), var8);
+						method442(var6, Text.USE, var10, 49, JagString.join(new JagString[] { field1148, field2087, var11.name}), var8);
 					} else if (!field3468) {
 						JagString[] var12 = var11.op;
 						if (field2164) {
@@ -6349,7 +6349,7 @@ public final class Client extends GameShell {
 								}
 							}
 						}
-						method442(var11.id << 14, Text.field3140, var10, 1002, JagString.join(new JagString[] { field3052, var11.name}), var8);
+						method442(var11.id << 14, Text.EXAMINE, var10, 1002, JagString.join(new JagString[] { field3052, var11.name}), var8);
 					} else if ((field2045 & 0x4) == 4) {
 						method442(var6, field3353, var10, 2, JagString.join(new JagString[] { field234, field2087, var11.name}), var8);
 					}
@@ -6396,7 +6396,7 @@ public final class Client extends GameShell {
 						for (ClientObj var26 = (ClientObj) var25.tail(); var26 != null; var26 = (ClientObj) var25.prev()) {
 							ObjType var27 = ObjType.list(var26.id);
 							if (field2913 == 1) {
-								method442(var26.id, Text.field965, var10, 20, JagString.join(new JagString[] { field1148, field1132, var27.name}), var8);
+								method442(var26.id, Text.USE, var10, 20, JagString.join(new JagString[] { field1148, field1132, var27.name}), var8);
 							} else if (!field3468) {
 								JagString[] var28 = var27.op;
 								if (field2164) {
@@ -6425,7 +6425,7 @@ public final class Client extends GameShell {
 										method442(var26.id, Text.TAKE, var10, 31, JagString.join(new JagString[] { field902, var27.name}), var8);
 									}
 								}
-								method442(var26.id, Text.field3140, var10, 1001, JagString.join(new JagString[] { field902, var27.name}), var8);
+								method442(var26.id, Text.EXAMINE, var10, 1001, JagString.join(new JagString[] { field902, var27.name}), var8);
 							} else if ((field2045 & 0x1) == 1) {
 								method442(var26.id, field3353, var10, 33, JagString.join(new JagString[] { field234, field1132, var27.name}), var8);
 							}
@@ -6654,7 +6654,7 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("tc.a(I)V")
 	public static void method1030() {
-		int var0 = b12.stringWid(Text.field94);
+		int var0 = b12.stringWid(Text.CHOOSEOPTION);
 		for (int var1 = 0; var1 < field2849; var1++) {
 			int var2 = b12.stringWid(method878(var1));
 			if (var2 > var0) {
@@ -6764,14 +6764,14 @@ public final class Client extends GameShell {
 		}
 		JagString var2;
 		if (field2913 == 1 && field2849 < 2) {
-			var2 = JagString.join(new JagString[] { Text.field965, Text.field2651, field1148, field1300 });
+			var2 = JagString.join(new JagString[] { Text.USE, Text.MINISEPARATOR, field1148, field1300 });
 		} else if (field3468 && field2849 < 2) {
-			var2 = JagString.join(new JagString[] { field3353, Text.field2651, field234, field1300 });
+			var2 = JagString.join(new JagString[] { field3353, Text.MINISEPARATOR, field234, field1300 });
 		} else {
 			var2 = method878(field2849 - 1);
 		}
 		if (field2849 > 2) {
-			var2 = JagString.join(new JagString[] { var2, field711, JagString.parseInt(field2849 - 2), Text.field2797 });
+			var2 = JagString.join(new JagString[] { var2, field711, JagString.parseInt(field2849 - 2), Text.MOREOPTIONS});
 		}
 		b12.drawStringAntiMacro(var2, arg1 + 4, arg0 + 15, loopCycle / 1000);
 	}
@@ -7393,7 +7393,7 @@ public final class Client extends GameShell {
 											}
 										}
 										if (field1158 == var10) {
-											var49 = Text.field3015;
+											var49 = Text.PLEASEWAIT;
 											var50 = var10.colour;
 										}
 										if (!var10.v3) {
@@ -7927,7 +7927,7 @@ public final class Client extends GameShell {
 			}
 		}
 		if (arg1.buttonType == 3) {
-			method442(0, Text.field1656, arg1.parentId, 4, field1786, 0);
+			method442(0, Text.CLOSE, arg1.parentId, 4, field1786, 0);
 		}
 		if (arg1.buttonType == 4) {
 			method442(0, arg1.buttonText, arg1.parentId, 40, field1786, 0);
@@ -7955,7 +7955,7 @@ public final class Client extends GameShell {
 							ObjType var9 = ObjType.list(arg1.linkObjType[var4] - 1);
 							if (field2913 == 1 && ServerActive.isObjOpsEnabled(method1100(arg1))) {
 								if (field1038 != arg1.parentId || field966 != var4) {
-									method442(var9.id, Text.field965, arg1.parentId, 25, JagString.join(new JagString[] { field1148, field1132, var9.name}), var4);
+									method442(var9.id, Text.USE, arg1.parentId, 25, JagString.join(new JagString[] { field1148, field1132, var9.name}), var4);
 								}
 							} else if (!field3468 || !ServerActive.isObjOpsEnabled(method1100(arg1))) {
 								JagString[] var10 = var9.iop;
@@ -7978,7 +7978,7 @@ public final class Client extends GameShell {
 									}
 								}
 								if (ServerActive.isObjUseEnabled(method1100(arg1))) {
-									method442(var9.id, Text.field965, arg1.parentId, 21, JagString.join(new JagString[] { field902, var9.name}), var4);
+									method442(var9.id, Text.USE, arg1.parentId, 21, JagString.join(new JagString[] { field902, var9.name}), var4);
 								}
 								if (ServerActive.isObjOpsEnabled(method1100(arg1)) && var10 != null) {
 									for (int var13 = 2; var13 >= 0; var13--) {
@@ -8024,7 +8024,7 @@ public final class Client extends GameShell {
 										}
 									}
 								}
-								method442(var9.id, Text.field3140, arg1.parentId, 1004, JagString.join(new JagString[] { field902, var9.name}), var4);
+								method442(var9.id, Text.EXAMINE, arg1.parentId, 1004, JagString.join(new JagString[] { field902, var9.name}), var4);
 							} else if ((field2045 & 0x10) == 16) {
 								method442(var9.id, field3353, arg1.parentId, 43, JagString.join(new JagString[] { field234, field1132, var9.name}), var4);
 							}
@@ -8146,59 +8146,59 @@ public final class Client extends GameShell {
 	@ObfuscatedName("jd.d(II)V")
 	public static void loginError(int arg0) {
 		if (arg0 == -3) {
-			TitleScreen.loginMes(Text.field2556, Text.field3056, Text.field2763);
+			TitleScreen.loginMes(Text.LOGINM3_A, Text.LOGINM3_B, Text.LOGINM3_C);
 		} else if (arg0 == -2) {
-			TitleScreen.loginMes(Text.field3063, Text.field3044, Text.field1857);
+			TitleScreen.loginMes(Text.LOGINM2_A, Text.LOGINM2_B, Text.LOGINM2_C);
 		} else if (arg0 == -1) {
-			TitleScreen.loginMes(Text.field1490, Text.field3058, Text.field2772);
+			TitleScreen.loginMes(Text.LOGINM1_A, Text.LOGINM1_B, Text.LOGINM1_C);
 		} else if (arg0 == 3) {
-			TitleScreen.loginMes(Text.field3078, Text.field3084, Text.field539);
+			TitleScreen.loginMes(Text.LOGIN3_A, Text.LOGIN3_B, Text.LOGIN3_C);
 		} else if (arg0 == 4) {
-			TitleScreen.loginMes(Text.field58, Text.field3093, Text.field359);
+			TitleScreen.loginMes(Text.LOGIN4_A, Text.LOGIN4_B, Text.LOGIN4_C);
 		} else if (arg0 == 5) {
-			TitleScreen.loginMes(Text.field3369, Text.field3038, Text.field3088);
+			TitleScreen.loginMes(Text.LOGIN5_A, Text.LOGIN5_B, Text.LOGIN5_C);
 		} else if (arg0 == 6) {
-			TitleScreen.loginMes(Text.field1364, Text.field3100, Text.field857);
+			TitleScreen.loginMes(Text.LOGIN6_A, Text.LOGIN6_B, Text.LOGIN6_C);
 		} else if (arg0 == 7) {
-			TitleScreen.loginMes(Text.field3048, Text.field3101, Text.field63);
+			TitleScreen.loginMes(Text.LOGIN7_A, Text.LOGIN7_B, Text.LOGIN7_C);
 		} else if (arg0 == 8) {
-			TitleScreen.loginMes(Text.field3302, Text.field3092, Text.field1176);
+			TitleScreen.loginMes(Text.LOGIN8_A, Text.LOGIN8_B, Text.LOGIN8_C);
 		} else if (arg0 == 9) {
-			TitleScreen.loginMes(Text.field1234, Text.field3066, Text.field2906);
+			TitleScreen.loginMes(Text.LOGIN9_A, Text.LOGIN9_B, Text.LOGIN9_C);
 		} else if (arg0 == 10) {
-			TitleScreen.loginMes(Text.field3296, Text.field3097, Text.field3075);
+			TitleScreen.loginMes(Text.LOGIN10_A, Text.LOGIN10_B, Text.LOGIN10_C);
 		} else if (arg0 == 11) {
-			TitleScreen.loginMes(Text.field531, Text.field3098, Text.field1876);
+			TitleScreen.loginMes(Text.LOGIN11_A, Text.LOGIN11_B, Text.LOGIN11_C);
 		} else if (arg0 == 12) {
-			TitleScreen.loginMes(Text.field915, Text.field3069, Text.field1916);
+			TitleScreen.loginMes(Text.LOGIN12_A, Text.LOGIN12_B, Text.LOGIN12_C);
 		} else if (arg0 == 13) {
-			TitleScreen.loginMes(Text.field3561, Text.field3042, Text.field2771);
+			TitleScreen.loginMes(Text.LOGIN13_A, Text.LOGIN13_B, Text.LOGIN13_C);
 		} else if (arg0 == 14) {
-			TitleScreen.loginMes(Text.field1809, Text.field3107, Text.field509);
+			TitleScreen.loginMes(Text.LOGIN14_A, Text.LOGIN14_B, Text.LOGIN14_C);
 		} else if (arg0 == 16) {
-			TitleScreen.loginMes(Text.field1514, Text.field3057, Text.field12);
+			TitleScreen.loginMes(Text.LOGIN16_A, Text.LOGIN16_B, Text.LOGIN16_C);
 		} else if (arg0 == 17) {
-			TitleScreen.loginMes(Text.field2239, Text.field3106, Text.field3563);
+			TitleScreen.loginMes(Text.LOGIN17_A, Text.LOGIN17_B, Text.LOGIN17_C);
 		} else if (arg0 == 18) {
-			TitleScreen.loginMes(Text.field1998, Text.field3080, Text.field1484);
+			TitleScreen.loginMes(Text.LOGIN18_A, Text.LOGIN18_B, Text.LOGIN18_C);
 		} else if (arg0 == 19) {
-			TitleScreen.loginMes(Text.field1595, Text.field62, Text.field3215);
+			TitleScreen.loginMes(Text.LOGIN19_A, Text.LOGIN19_B, Text.LOGIN19_C);
 		} else if (arg0 == 20) {
-			TitleScreen.loginMes(Text.field3348, Text.field3085, Text.field2766);
+			TitleScreen.loginMes(Text.LOGIN20_A, Text.LOGIN20_B, Text.LOGIN20_C);
 		} else if (arg0 == 22) {
-			TitleScreen.loginMes(Text.field1753, Text.field3099, Text.field2236);
+			TitleScreen.loginMes(Text.LOGIN22_A, Text.LOGIN22_B, Text.LOGIN22_C);
 		} else if (arg0 == 23) {
-			TitleScreen.loginMes(Text.field1598, Text.field3091, Text.field508);
+			TitleScreen.loginMes(Text.LOGIN23_A, Text.LOGIN23_B, Text.LOGIN23_C);
 		} else if (arg0 == 24) {
-			TitleScreen.loginMes(Text.field2043, Text.field3050, Text.field2402);
+			TitleScreen.loginMes(Text.LOGIN24_A, Text.LOGIN24_B, Text.LOGIN24_C);
 		} else if (arg0 == 25) {
-			TitleScreen.loginMes(Text.field2115, Text.field3043, Text.field2769);
+			TitleScreen.loginMes(Text.LOGIN25_A, Text.LOGIN25_B, Text.LOGIN25_C);
 		} else if (arg0 == 26) {
-			TitleScreen.loginMes(Text.field1275, Text.field3068, Text.field3003);
+			TitleScreen.loginMes(Text.LOGIN26_A, Text.LOGIN26_B, Text.LOGIN26_C);
 		} else if (arg0 == 27) {
-			TitleScreen.loginMes(Text.field3041, Text.field3049, Text.field2015);
+			TitleScreen.loginMes(Text.LOGIN27_A, Text.LOGIN27_B, Text.LOGIN27_C);
 		} else {
-			TitleScreen.loginMes(Text.field2570, Text.field3046, Text.field2770);
+			TitleScreen.loginMes(Text.LOGINMIS_A, Text.LOGINMIS_B, Text.LOGINMIS_C);
 		}
 		setMainState(10);
 	}
@@ -8920,24 +8920,24 @@ public final class Client extends GameShell {
 			return;
 		}
 		if (field2504 >= 100) {
-			addChat(Text.field2545, 0, field1786);
+			addChat(Text.IGNORELISTFULL, 0, field1786);
 			return;
 		}
 		JagString var2 = JString.method59(arg0).method264();
 		for (int var3 = 0; var3 < field2504; var3++) {
 			if (field2407[var3] == arg0) {
-				addChat(JagString.join(new JagString[] { var2, Text.field59 }), 0, field1786);
+				addChat(JagString.join(new JagString[] { var2, Text.IGNORELISTDUPE}), 0, field1786);
 				return;
 			}
 		}
 		for (int var4 = 0; var4 < field20; var4++) {
 			if (field694[var4] == arg0) {
-				addChat(JagString.join(new JagString[] { Text.field95, var2, Text.field2178 }), 0, field1786);
+				addChat(JagString.join(new JagString[] { Text.field95, var2, Text.REMOVEFRIEND2}), 0, field1786);
 				return;
 			}
 		}
 		if (var2.strEquals(field373.name)) {
-			addChat(Text.field1009, 0, field1786);
+			addChat(Text.IGNORECANTADDSELF, 0, field1786);
 			return;
 		}
 		field2407[field2504] = arg0;
@@ -9195,10 +9195,10 @@ public final class Client extends GameShell {
 		}
 		JagString var4 = arg1.name;
 		if (arg1.vislevel != 0) {
-			var4 = JagString.join(new JagString[] { var4, method187(arg1.vislevel, field373.combatLevel), field954, Text.field1437, JagString.parseInt(arg1.vislevel), field403 });
+			var4 = JagString.join(new JagString[] { var4, method187(arg1.vislevel, field373.combatLevel), field954, Text.LEVEL, JagString.parseInt(arg1.vislevel), field403 });
 		}
 		if (field2913 == 1) {
-			method442(arg2, Text.field965, arg3, 58, JagString.join(new JagString[] { field1148, field1755, var4 }), arg0);
+			method442(arg2, Text.USE, arg3, 58, JagString.join(new JagString[] { field1148, field1755, var4 }), arg0);
 		} else if (!field3468) {
 			JagString[] var5 = arg1.op;
 			if (field2164) {
@@ -9206,7 +9206,7 @@ public final class Client extends GameShell {
 			}
 			if (var5 != null) {
 				for (int var6 = 4; var6 >= 0; var6--) {
-					if (var5[var6] != null && !var5[var6].equalsIgnoreCase(Text.field1704)) {
+					if (var5[var6] != null && !var5[var6].equalsIgnoreCase(Text.ATTACK)) {
 						byte var7 = 0;
 						if (var6 == 0) {
 							var7 = 14;
@@ -9229,7 +9229,7 @@ public final class Client extends GameShell {
 			}
 			if (var5 != null) {
 				for (int var8 = 4; var8 >= 0; var8--) {
-					if (var5[var8] != null && var5[var8].equalsIgnoreCase(Text.field1704)) {
+					if (var5[var8] != null && var5[var8].equalsIgnoreCase(Text.ATTACK)) {
 						short var9 = 0;
 						if (arg1.vislevel > field373.combatLevel) {
 							var9 = 2000;
@@ -9254,7 +9254,7 @@ public final class Client extends GameShell {
 					}
 				}
 			}
-			method442(arg2, Text.field3140, arg3, 1006, JagString.join(new JagString[] { field3182, var4 }), arg0);
+			method442(arg2, Text.EXAMINE, arg3, 1006, JagString.join(new JagString[] { field3182, var4 }), arg0);
 		} else if ((field2045 & 0x2) == 2) {
 			method442(arg2, field3353, arg3, 12, JagString.join(new JagString[] { field234, field1755, var4 }), arg0);
 			return;
@@ -9447,17 +9447,17 @@ public final class Client extends GameShell {
 		}
 		JagString var4;
 		if (arg2.skillLevel == 0) {
-			var4 = JagString.join(new JagString[] { arg2.name, method187(arg2.combatLevel, field373.combatLevel), field954, Text.field1437, JagString.parseInt(arg2.combatLevel), field403 });
+			var4 = JagString.join(new JagString[] { arg2.name, method187(arg2.combatLevel, field373.combatLevel), field954, Text.LEVEL, JagString.parseInt(arg2.combatLevel), field403 });
 		} else {
-			var4 = JagString.join(new JagString[] { arg2.name, field954, Text.field2813, JagString.parseInt(arg2.skillLevel), field403 });
+			var4 = JagString.join(new JagString[] { arg2.name, field954, Text.SKILL, JagString.parseInt(arg2.skillLevel), field403 });
 		}
 		if (field2913 == 1) {
-			method442(arg0, Text.field965, arg1, 5, JagString.join(new JagString[] { field1148, field3127, var4 }), arg3);
+			method442(arg0, Text.USE, arg1, 5, JagString.join(new JagString[] { field1148, field3127, var4 }), arg3);
 		} else if (!field3468) {
 			for (int var5 = 7; var5 >= 0; var5--) {
 				if (field914[var5] != null) {
 					short var6 = 0;
-					if (field914[var5].equalsIgnoreCase(Text.field1704)) {
+					if (field914[var5].equalsIgnoreCase(Text.ATTACK)) {
 						if (field373.combatLevel < arg2.combatLevel) {
 							var6 = 2000;
 						}
@@ -10040,7 +10040,7 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("q.a(ZI)Lec;")
 	public static JagString method878(int arg0) {
-		return field1295[arg0].length() > 0 ? JagString.join(new JagString[] { field2575[arg0], Text.field2651, field1295[arg0] }) : field2575[arg0];
+		return field1295[arg0].length() > 0 ? JagString.join(new JagString[] { field2575[arg0], Text.MINISEPARATOR, field1295[arg0] }) : field2575[arg0];
 	}
 
 	@ObfuscatedName("q.a(BLec;)Z")
