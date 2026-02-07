@@ -78,7 +78,7 @@ public final class EnumType extends Linkable2 {
 		} else if (arg0 == 2) {
 			this.field3002 = arg1.g1();
 		} else if (arg0 == 3) {
-			this.field2984 = arg1.method555();
+			this.field2984 = arg1.gjstr();
 		} else if (arg0 == 4) {
 			this.field2996 = arg1.g4();
 		} else if (arg0 == 5) {
@@ -87,7 +87,7 @@ public final class EnumType extends Linkable2 {
 			this.field2985 = new int[this.field2991];
 			for (int var3 = 0; var3 < this.field2991; var3++) {
 				this.field2985[var3] = arg1.g4();
-				this.field2989[var3] = arg1.method555();
+				this.field2989[var3] = arg1.gjstr();
 			}
 		} else if (arg0 == 6) {
 			this.field2991 = arg1.g2();

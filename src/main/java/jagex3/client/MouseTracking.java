@@ -14,13 +14,13 @@ public final class MouseTracking implements Runnable {
 	public final Object lock = new Object();
 
 	@ObfuscatedName("t.h")
-	public final int[] field3027 = new int[500];
+	public final int[] x = new int[500];
 
 	@ObfuscatedName("t.i")
 	public int length = 0;
 
 	@ObfuscatedName("t.k")
-	public final int[] field3030 = new int[500];
+	public final int[] y = new int[500];
 
 	@Override
 	public void run() {
@@ -28,8 +28,8 @@ public final class MouseTracking implements Runnable {
 			Object var1 = this.lock;
 			synchronized (this.lock) {
 				if (this.length < 500) {
-					this.field3027[this.length] = ClientMouseListener.mouseX;
-					this.field3030[this.length] = ClientMouseListener.mouseY;
+					this.x[this.length] = ClientMouseListener.mouseX;
+					this.y[this.length] = ClientMouseListener.mouseY;
 					this.length++;
 				}
 			}

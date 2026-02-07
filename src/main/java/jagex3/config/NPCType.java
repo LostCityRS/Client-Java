@@ -292,7 +292,7 @@ public final class NPCType extends Linkable2 {
 				this.field2190[var4] = arg0.g2();
 			}
 		} else if (arg1 == 2) {
-			this.field2204 = arg0.method555();
+			this.field2204 = arg0.gjstr();
 		} else if (arg1 == 12) {
 			this.size = arg0.g1();
 		} else if (arg1 == 13) {
@@ -309,7 +309,7 @@ public final class NPCType extends Linkable2 {
 			this.field2219 = arg0.g2();
 			this.field2211 = arg0.g2();
 		} else if (arg1 >= 30 && arg1 < 35) {
-			this.field2189[arg1 - 30] = arg0.method555();
+			this.field2189[arg1 - 30] = arg0.gjstr();
 			if (this.field2189[arg1 - 30].method271(Text.HIDDEN)) {
 				this.field2189[arg1 - 30] = null;
 			}

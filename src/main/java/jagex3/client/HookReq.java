@@ -9,30 +9,30 @@ import jagex3.util.JagString;
 public final class HookReq extends Linkable {
 
 	@ObfuscatedName("bd.v")
-	public int field199;
+	public int keyCode;
 
 	@ObfuscatedName("bd.A")
-	public int field204;
+	public int mouseX;
 
 	@ObfuscatedName("bd.B")
-	public int field205;
+	public int opindex;
 
 	@ObfuscatedName("bd.D")
-	public int field207;
+	public int keyChar;
 
 	@ObfuscatedName("bd.G")
-	public int field210;
+	public int mouseY;
 
 	@ObfuscatedName("bd.z")
-	public JagString field203;
+	public JagString opbase;
 
 	@ObfuscatedName("bd.y")
-	public IfType field202;
+	public IfType drop;
 
 	@ObfuscatedName("bd.F")
-	public IfType field209;
+	public IfType component;
 
 	@ObfuscatedName("bd.E")
-	public Object[] field208;
+	public Object[] onop;
 
 }

@@ -823,7 +823,7 @@ public class TitleScreen {
 			if (gameworldListDownloadRequest == null) {
 				gameworldListDownloadRequest = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { field1045, Client.field1784, field3248 }).method278());
 			} else {
-				byte[] var0 = gameworldListDownloadRequest.method63();
+				byte[] var0 = gameworldListDownloadRequest.getData();
 				if (var0 != null) {
 					Packet var1 = new Packet(var0);
 					field1758 = var1.g2();
@@ -833,7 +833,7 @@ public class TitleScreen {
 						int var4 = var1.g2();
 						var3.id = var4 & 0x7FFF;
 						var3.members = (var4 & 0x8000) != 0;
-						var3.host = var1.method555();
+						var3.host = var1.gjstr();
 						var3.field2390 = var1.method551();
 						var3.field2398 = var2;
 						var3.field2387 = method136(var3.host);

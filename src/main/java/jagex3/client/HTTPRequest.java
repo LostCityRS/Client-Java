@@ -14,72 +14,72 @@ import java.net.URL;
 public final class HTTPRequest {
 
 	@ObfuscatedName("bc.a")
-	public int field171;
+	public int read2;
 
 	@ObfuscatedName("bc.b")
-	public int field172;
+	public int read1;
 
 	@ObfuscatedName("bc.g")
-	public byte[] field177;
+	public byte[] data;
 
 	@ObfuscatedName("bc.h")
-	public DataInputStream field178;
+	public DataInputStream stream;
 
 	@ObfuscatedName("bc.j")
 	public final byte[] field180 = new byte[4];
 
 	@ObfuscatedName("bc.k")
-	public int field181;
+	public int stage;
 
 	@ObfuscatedName("bc.t")
-	public final long field190;
+	public final long timeout;
 
 	@ObfuscatedName("bc.v")
-	public final PrivilegedRequest field192;
+	public final PrivilegedRequest req;
 
 	public HTTPRequest(SignLink arg0, URL arg1) {
-		this.field192 = arg0.urlreq(arg1);
-		this.field181 = 0;
-		this.field190 = MonotonicTime.currentTime() + 30000L;
+		this.req = arg0.urlreq(arg1);
+		this.stage = 0;
+		this.timeout = MonotonicTime.currentTime() + 30000L;
 	}
 
 	@ObfuscatedName("bc.a(Z)[B")
-	public byte[] method63() throws IOException {
-		if (this.field190 < MonotonicTime.currentTime()) {
+	public byte[] getData() throws IOException {
+		if (this.timeout < MonotonicTime.currentTime()) {
 			throw new IOException("fdt");
 		}
-		if (this.field181 == 0) {
-			if (this.field192.status == 2) {
+		if (this.stage == 0) {
+			if (this.req.status == 2) {
 				throw new IOException("fds");
 			}
-			if (this.field192.status == 1) {
-				this.field181 = 1;
-				this.field178 = (DataInputStream) this.field192.result;
+			if (this.req.status == 1) {
+				this.stage = 1;
+				this.stream = (DataInputStream) this.req.result;
 			}
 		}
-		if (this.field181 == 1) {
-			int var1 = this.field178.available();
+		if (this.stage == 1) {
+			int var1 = this.stream.available();
 			if (var1 > 0) {
-				if (var1 + this.field172 > 4) {
-					var1 = 4 - this.field172;
+				if (var1 + this.read1 > 4) {
+					var1 = 4 - this.read1;
 				}
-				this.field172 += this.field178.read(this.field180, this.field172, var1);
-				if (this.field172 == 4) {
+				this.read1 += this.stream.read(this.field180, this.read1, var1);
+				if (this.read1 == 4) {
 					int var2 = (new Packet(this.field180)).g4();
-					this.field177 = new byte[var2];
-					this.field181 = 2;
+					this.data = new byte[var2];
+					this.stage = 2;
 				}
 			}
 		}
-		if (this.field181 == 2) {
-			int var3 = this.field178.available();
+		if (this.stage == 2) {
+			int var3 = this.stream.available();
 			if (var3 > 0) {
-				if (this.field177.length < this.field171 + var3) {
-					var3 = this.field177.length - this.field171;
+				if (this.data.length < this.read2 + var3) {
+					var3 = this.data.length - this.read2;
 				}
-				this.field171 += this.field178.read(this.field177, this.field171, var3);
-				if (this.field177.length == this.field171) {
-					return this.field177;
+				this.read2 += this.stream.read(this.data, this.read2, var3);
+				if (this.data.length == this.read2) {
+					return this.data;
 				}
 			}
 		}

@@ -409,7 +409,7 @@ public final class LocType extends Linkable2 {
 				return;
 			}
 		} else if (arg1 == 2) {
-			this.field1213 = arg0.method555();
+			this.field1213 = arg0.gjstr();
 		} else if (arg1 == 5) {
 			int var13 = arg0.g1();
 			if (var13 > 0) {
@@ -469,7 +469,7 @@ public final class LocType extends Linkable2 {
 				return;
 			} else {
 				if (arg1 >= 30 && arg1 < 35) {
-					this.field1255[arg1 - 30] = arg0.method555();
+					this.field1255[arg1 - 30] = arg0.gjstr();
 					if (this.field1255[arg1 - 30].method271(Text.HIDDEN)) {
 						this.field1255[arg1 - 30] = null;
 						return;

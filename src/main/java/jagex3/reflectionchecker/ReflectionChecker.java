@@ -145,8 +145,8 @@ public class ReflectionChecker {
 			try {
 				int var5 = arg1.g1();
 				if (var5 == 0 || var5 == 1 || var5 == 2) {
-					String var16 = new String(arg1.method555().method255());
-					String var17 = new String(arg1.method555().method255());
+					String var16 = new String(arg1.gjstr().method255());
+					String var17 = new String(arg1.gjstr().method255());
 					int var18 = 0;
 					if (var5 == 1) {
 						var18 = arg1.g4();
@@ -155,12 +155,12 @@ public class ReflectionChecker {
 					var3.field526[var4] = var18;
 					var3.field529[var4] = arg2.getDeclaredField(findClass(var16), var17);
 				} else if (var5 == 3 || var5 == 4) {
-					String var6 = new String(arg1.method555().method255());
-					String var7 = new String(arg1.method555().method255());
+					String var6 = new String(arg1.gjstr().method255());
+					String var7 = new String(arg1.gjstr().method255());
 					int var8 = arg1.g1();
 					String[] var9 = new String[var8];
 					for (int var10 = 0; var10 < var8; var10++) {
-						var9[var10] = new String(arg1.method555().method255());
+						var9[var10] = new String(arg1.gjstr().method255());
 					}
 					byte[][] var11 = new byte[var8][];
 					if (var5 == 3) {

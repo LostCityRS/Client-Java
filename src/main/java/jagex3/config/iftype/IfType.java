@@ -190,7 +190,7 @@ public final class IfType extends Linkable {
 	public int field746 = 0;
 
 	@ObfuscatedName("f.y")
-	public int field743 = -1;
+	public int parentId = -1;
 
 	@ObfuscatedName("f.D")
 	public boolean field748 = false;
@@ -262,7 +262,7 @@ public final class IfType extends Linkable {
 	public int field849 = -1;
 
 	@ObfuscatedName("f.gc")
-	public int field828 = -1;
+	public int subId = -1;
 
 	@ObfuscatedName("f.Ib")
 	public int field804 = -1;
@@ -427,7 +427,7 @@ public final class IfType extends Linkable {
 					byte[] var3 = field1991.getFile(arg0, var2);
 					if (var3 != null) {
 						field1825[arg0][var2] = new IfType();
-						field1825[arg0][var2].field743 = (arg0 << 16) + var2;
+						field1825[arg0][var2].parentId = (arg0 << 16) + var2;
 						if (var3[0] == -1) {
 							field1825[arg0][var2].method311(new Packet(var3));
 						} else {
@@ -692,7 +692,7 @@ public final class IfType extends Linkable {
 		if (this.field864 == 65535) {
 			this.field864 = -1;
 		} else {
-			this.field864 += this.field743 & 0xFFFF0000;
+			this.field864 += this.parentId & 0xFFFF0000;
 		}
 		this.field752 = arg0.g2();
 		if (this.field752 == 65535) {
@@ -765,7 +765,7 @@ public final class IfType extends Linkable {
 			}
 			this.field756 = new JagString[5];
 			for (int var14 = 0; var14 < 5; var14++) {
-				JagString var15 = arg0.method555();
+				JagString var15 = arg0.gjstr();
 				if (var15.length() > 0) {
 					this.field756[var14] = var15;
 					this.field768 |= 0x1 << var14 + 23;
@@ -786,8 +786,8 @@ public final class IfType extends Linkable {
 			this.field856 = arg0.g1() == 1;
 		}
 		if (this.field755 == 4) {
-			this.field763 = arg0.method555();
-			this.field774 = arg0.method555();
+			this.field763 = arg0.gjstr();
+			this.field774 = arg0.gjstr();
 		}
 		if (this.field755 == 1 || this.field755 == 3 || this.field755 == 4) {
 			this.field776 = arg0.g4();
@@ -842,7 +842,7 @@ public final class IfType extends Linkable {
 				this.field768 |= 0x40000000;
 			}
 			for (int var17 = 0; var17 < 5; var17++) {
-				JagString var18 = arg0.method555();
+				JagString var18 = arg0.gjstr();
 				if (var18.length() > 0) {
 					this.field756[var17] = var18;
 					this.field768 |= 0x1 << var17 + 23;
@@ -850,16 +850,16 @@ public final class IfType extends Linkable {
 			}
 		}
 		if (this.field755 == 8) {
-			this.field763 = arg0.method555();
+			this.field763 = arg0.gjstr();
 		}
 		if (this.field790 == 2 || this.field755 == 2) {
-			this.field825 = arg0.method555();
-			this.field833 = arg0.method555();
+			this.field825 = arg0.gjstr();
+			this.field833 = arg0.gjstr();
 			int var19 = arg0.g2() & 0x3F;
 			this.field768 |= var19 << 11;
 		}
 		if (this.field790 == 1 || this.field790 == 4 || this.field790 == 5 || this.field790 == 6) {
-			this.field791 = arg0.method555();
+			this.field791 = arg0.gjstr();
 			if (this.field791.length() == 0) {
 				if (this.field790 == 1) {
 					this.field791 = Text.OK;
@@ -905,7 +905,7 @@ public final class IfType extends Linkable {
 			if (var5 == 0) {
 				var3[var4] = Integer.valueOf(arg0.g4());
 			} else if (var5 == 1) {
-				var3[var4] = arg0.method555();
+				var3[var4] = arg0.gjstr();
 			}
 		}
 		this.field847 = true;
@@ -930,7 +930,7 @@ public final class IfType extends Linkable {
 		if (this.field864 == 65535) {
 			this.field864 = -1;
 		} else {
-			this.field864 += this.field743 & 0xFFFF0000;
+			this.field864 += this.parentId & 0xFFFF0000;
 		}
 		this.field740 = arg0.g1() == 1;
 		if (this.field755 == 0) {
@@ -970,7 +970,7 @@ public final class IfType extends Linkable {
 			if (this.field807 == 65535) {
 				this.field807 = -1;
 			}
-			this.field763 = arg0.method555();
+			this.field763 = arg0.gjstr();
 			this.field838 = arg0.g1();
 			this.field841 = arg0.g1();
 			this.field799 = arg0.g1();
@@ -987,18 +987,18 @@ public final class IfType extends Linkable {
 			this.field776 = arg0.g4();
 		}
 		this.field768 = arg0.g3();
-		this.field813 = arg0.method555();
+		this.field813 = arg0.gjstr();
 		int var2 = arg0.g1();
 		if (var2 > 0) {
 			this.field738 = new JagString[var2];
 			for (int var3 = 0; var3 < var2; var3++) {
-				this.field738[var3] = arg0.method555();
+				this.field738[var3] = arg0.gjstr();
 			}
 		}
 		this.field760 = arg0.g1();
 		this.field746 = arg0.g1();
 		this.field862 = arg0.g1() == 1;
-		this.field825 = arg0.method555();
+		this.field825 = arg0.gjstr();
 		this.field867 = this.method310(arg0);
 		this.field850 = this.method310(arg0);
 		this.field775 = this.method310(arg0);

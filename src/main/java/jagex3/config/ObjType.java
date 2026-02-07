@@ -475,7 +475,7 @@ public final class ObjType extends Linkable2 {
 		if (arg1 == 1) {
 			this.field1407 = arg0.g2();
 		} else if (arg1 == 2) {
-			this.field1429 = arg0.method555();
+			this.field1429 = arg0.gjstr();
 		} else if (arg1 == 4) {
 			this.field1391 = arg0.g2();
 		} else if (arg1 == 5) {
@@ -517,7 +517,7 @@ public final class ObjType extends Linkable2 {
 				this.field1414 = arg0.g2();
 				return;
 			} else if (arg1 >= 30 && arg1 < 35) {
-				this.field1410[arg1 - 30] = arg0.method555();
+				this.field1410[arg1 - 30] = arg0.gjstr();
 				if (this.field1410[arg1 - 30].method271(Text.HIDDEN)) {
 					this.field1410[arg1 - 30] = null;
 					return;
@@ -612,7 +612,7 @@ public final class ObjType extends Linkable2 {
 				}
 				return;
 			} else {
-				this.field1428[arg1 - 35] = arg0.method555();
+				this.field1428[arg1 - 35] = arg0.gjstr();
 				return;
 			}
 			return;

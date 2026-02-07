@@ -74,12 +74,12 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.a(B)Lec;")
-	public final JagString method507() {
+	public final JagString fastgstr() {
 		if (this.data[this.pos] == 0) {
 			this.pos++;
 			return null;
 		} else {
-			return this.method555();
+			return this.gjstr();
 		}
 	}
 
@@ -408,7 +408,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.r(I)Lec;")
-	public final JagString method555() {
+	public final JagString gjstr() {
 		int var1 = this.pos;
 		while (this.data[this.pos++] != 0) {
 		}
