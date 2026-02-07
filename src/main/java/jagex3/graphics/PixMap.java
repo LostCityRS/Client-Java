@@ -22,7 +22,7 @@ public abstract class PixMap {
 	@ObfuscatedName("t.a(IILjava/awt/Component;I)Lgf;")
 	public static PixMap create(int arg0, int arg1, Component arg2) {
 		try {
-			Class var3 = Class.forName("ca");
+			Class var3 = Class.forName("jagex3.graphics.JavaPixMap");
 			PixMap var4 = (PixMap) var3.getDeclaredConstructor().newInstance();
 			var4.method123(arg0, arg1, arg2);
 			return var4;

@@ -81,7 +81,7 @@ public class PcmPlayer {
 			throw new IllegalStateException();
 		}
 		try {
-			PcmPlayer var4 = (PcmPlayer) Class.forName("md").getDeclaredConstructor().newInstance();
+			PcmPlayer var4 = (PcmPlayer) Class.forName("jagex3.sound.JavaPcmPlayer").getDeclaredConstructor().newInstance();
 			var4.field2679 = arg2;
 			var4.field2656 = new int[(JavaPcmPlayer.field1310 ? 2 : 1) * 256];
 			var4.method141(arg3);

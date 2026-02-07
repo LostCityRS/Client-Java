@@ -10,7 +10,7 @@ public abstract class MouseWheelInterface {
 	@ObfuscatedName("fa.b(B)Luf;")
 	public static MouseWheelInterface getProvider() {
 		try {
-			return (MouseWheelInterface) Class.forName("ic").getDeclaredConstructor().newInstance();
+			return (MouseWheelInterface) Class.forName("jagex3.client.input.mouse.ClientMouseWheelListener").getDeclaredConstructor().newInstance();
 		} catch (Throwable var0) {
 			return null;
 		}

@@ -31,7 +31,7 @@ public abstract class ByteArrayWrapper {
 		}
 		if (arg0.length > 136 && !field2765) {
 			try {
-				ByteArrayWrapper var1 = (ByteArrayWrapper) Class.forName("bb").getDeclaredConstructor().newInstance();
+				ByteArrayWrapper var1 = (ByteArrayWrapper) Class.forName("jagex3.io.ByteBufferNode").getDeclaredConstructor().newInstance();
 				var1.method60(arg0);
 				return var1;
 			} catch (Throwable var2) {
