@@ -6,7 +6,7 @@ import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("ua")
-public final class WorldTextureProvider implements TextureProvider {
+public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ua.n")
 	public final Texture[] textures;
@@ -29,7 +29,7 @@ public final class WorldTextureProvider implements TextureProvider {
 	@ObfuscatedName("ua.v")
 	public final Js5 sprites;
 
-	public WorldTextureProvider(Js5 arg0, Js5 arg1, int arg2, double arg3, int arg4) {
+	public TextureManager(Js5 arg0, Js5 arg1, int arg2, double arg3, int arg4) {
 		this.resolution = arg4;
 		this.brightness = arg3;
 		this.sprites = arg1;

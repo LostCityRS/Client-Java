@@ -17,7 +17,7 @@ public final class JagFX {
 	public final Tone[] field2881 = new Tone[10];
 
 	@ObfuscatedName("re.a(Lea;II)Lre;")
-	public static JagFX method972(Js5 arg0, int arg1, int arg2) {
+	public static JagFX load(Js5 arg0, int arg1, int arg2) {
 		byte[] var3 = arg0.getFile(arg1, arg2);
 		return var3 == null ? null : new JagFX(new Packet(var3));
 	}
@@ -39,7 +39,7 @@ public final class JagFX {
 	}
 
 	@ObfuscatedName("re.a()I")
-	public int method969() {
+	public int optimiseStart() {
 		int var1 = 9999999;
 		for (int var2 = 0; var2 < 10; var2++) {
 			if (this.field2881[var2] != null && this.field2881[var2].field434 / 20 < var1) {
@@ -95,7 +95,7 @@ public final class JagFX {
 	}
 
 	@ObfuscatedName("re.c()Lib;")
-	public Wave method971() {
+	public Wave toWave() {
 		byte[] var1 = this.method970();
 		return new Wave(22050, var1, this.field2879 * 22050 / 1000, this.field2880 * 22050 / 1000);
 	}

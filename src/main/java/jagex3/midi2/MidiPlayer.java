@@ -445,7 +445,7 @@ public final class MidiPlayer extends PcmStream {
 			this.method92(var6.field1722[arg2] < 0, var8);
 		}
 		if (var6.field1722[arg2] < 0) {
-			var8.field1788.method684(-1);
+			var8.field1788.setLoopCount(-1);
 		}
 		if (var8.field1793 >= 0) {
 			MidiNote var9 = this.field269[arg1][var8.field1793];
@@ -642,7 +642,7 @@ public final class MidiPlayer extends PcmStream {
 			arg0.field1788.method116(arg2, arg1, arg3);
 		}
 		if (arg0.field1788.method716()) {
-			this.field329.field969.method912(arg0.field1788);
+			this.field329.field969.playStream(arg0.field1788);
 		}
 		arg0.method615();
 		if (arg0.field1819 >= 0) {
@@ -684,7 +684,7 @@ public final class MidiPlayer extends PcmStream {
 				if (var2.field1788 != null) {
 					var2.field1788.method682(PcmPlayer.frequency / 100);
 					if (var2.field1788.method716()) {
-						this.field329.field969.method912(var2.field1788);
+						this.field329.field969.playStream(var2.field1788);
 					}
 					var2.method615();
 				}

@@ -868,7 +868,7 @@ public final class Pix32 extends Pix2D {
 		if (var9 > 0 && var8 > 0) {
 			int var15 = var4 + (var5 - Pix2D.clipMinY) * arg0.wi - Pix2D.clipMinX;
 			int var16 = arg0.wi - var9;
-			plotScanline(Pix2D.pixels, this.data, var7, var6, var15, var9, var8, var10, var11, var16, arg0.bspr);
+			plotScanline(Pix2D.pixels, this.data, var7, var6, var15, var9, var8, var10, var11, var16, arg0.data);
 		}
 	}
 

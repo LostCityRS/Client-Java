@@ -50,7 +50,7 @@ public final class MidiMixer extends PcmStream {
 					this.field961.method92(arg1.field1804.field1722[arg1.field1803] < 0, arg1);
 				}
 				if (arg1.field1804.field1722[arg1.field1803] < 0) {
-					arg1.field1788.method684(-1);
+					arg1.field1788.setLoopCount(-1);
 				}
 				arg0 = arg1.field1800 / var3;
 			}
@@ -147,12 +147,12 @@ public final class MidiMixer extends PcmStream {
 					arg0.field1788.method678(var10, var9.method701());
 				}
 				if (arg0.field1804.field1722[arg0.field1803] < 0) {
-					arg0.field1788.method684(-1);
+					arg0.field1788.setLoopCount(-1);
 				}
 				var9.method682(var10);
 				var9.method116(arg1, arg2, arg3 - arg2);
 				if (var9.method716()) {
-					this.field969.method912(var9);
+					this.field969.playStream(var9);
 				}
 			}
 		}

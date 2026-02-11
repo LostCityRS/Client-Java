@@ -1,7 +1,7 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import jagex3.config.NPCType;
+import jagex3.config.NpcType;
 import jagex3.config.SeqType;
 import jagex3.config.SpotType;
 
@@ -9,7 +9,7 @@ import jagex3.config.SpotType;
 public final class ClientNpc extends ClientEntity {
 
 	@ObfuscatedName("q.Hc")
-	public NPCType type;
+	public NpcType type;
 
 	@ObfuscatedName("q.j(I)Z")
 	@Override
@@ -25,7 +25,7 @@ public final class ClientNpc extends ClientEntity {
 		}
 		SeqType var1 = super.primarySeqId != -1 && super.primarySeqDelay == 0 ? SeqType.list(super.primarySeqId) : null;
 		SeqType var2 = super.secondarySeqId == -1 || super.secondarySeqId == super.readyanim && var1 != null ? null : SeqType.list(super.secondarySeqId);
-		ModelLit var3 = this.type.getTempModel(var2, super.field2725, var1, super.field2728);
+		ModelLit var3 = this.type.getTempModel(var2, super.primarySeqFrame, var1, super.secondarySeqFrame);
 		if (var3 == null) {
 			return null;
 		}

@@ -1,7 +1,7 @@
 package jagex3.config.iftype;
 
 import deob.ObfuscatedName;
-import jagex3.config.NPCType;
+import jagex3.config.NpcType;
 import jagex3.config.ObjType;
 import jagex3.config.SeqType;
 import jagex3.constants.Text;
@@ -984,7 +984,7 @@ public final class IfType extends Linkable {
 					var7 = var8.light(64, 768, -50, -10, -50);
 				}
 				if (var6 == 2) {
-					ModelUnlit var9 = NPCType.list(var5).getHead();
+					ModelUnlit var9 = NpcType.list(var5).getHead();
 					if (var9 == null) {
 						loadingAsset = true;
 						return null;

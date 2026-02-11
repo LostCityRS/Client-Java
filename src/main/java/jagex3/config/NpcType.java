@@ -12,7 +12,7 @@ import jagex3.util.JagString;
 import jagex3.var.VarCache;
 
 @ObfuscatedName("o")
-public final class NPCType extends Linkable2 {
+public final class NpcType extends Linkable2 {
 
 	@ObfuscatedName("wa.t")
 	public static Js5 configClient;
@@ -128,13 +128,13 @@ public final class NPCType extends Linkable2 {
 	}
 
 	@ObfuscatedName("cb.b(II)Lo;")
-	public static NPCType list(int arg0) {
-		NPCType var1 = (NPCType) recentUse.find((long) arg0);
+	public static NpcType list(int arg0) {
+		NpcType var1 = (NpcType) recentUse.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
 		byte[] var2 = configClient.getFile(9, arg0);
-		NPCType var3 = new NPCType();
+		NpcType var3 = new NpcType();
 		var3.id = arg0;
 		if (var2 != null) {
 			var3.decode(new Packet(var2));
@@ -256,7 +256,7 @@ public final class NPCType extends Linkable2 {
 	@ObfuscatedName("o.a(Lvc;ILvc;BI)Lod;")
 	public ModelLit getTempModel(SeqType arg0, int arg1, SeqType arg2, int arg3) {
 		if (this.multinpc != null) {
-			NPCType var5 = this.getMultiNpc();
+			NpcType var5 = this.getMultiNpc();
 			return var5 == null ? null : var5.getTempModel(arg0, arg1, arg2, arg3);
 		}
 		ModelLit var6 = (ModelLit) modelCache.find((long) this.id);
@@ -312,7 +312,7 @@ public final class NPCType extends Linkable2 {
 	@ObfuscatedName("o.e(I)Lp;")
 	public ModelUnlit getHead() {
 		if (this.multinpc != null) {
-			NPCType var1 = this.getMultiNpc();
+			NpcType var1 = this.getMultiNpc();
 			return var1 == null ? null : var1.getHead();
 		} else if (this.head == null) {
 			return null;
@@ -351,7 +351,7 @@ public final class NPCType extends Linkable2 {
 	}
 
 	@ObfuscatedName("o.g(I)Lo;")
-	public NPCType getMultiNpc() {
+	public NpcType getMultiNpc() {
 		int var1 = -1;
 		if (this.multivarbit != -1) {
 			var1 = VarCache.getVarbit(this.multivarbit);

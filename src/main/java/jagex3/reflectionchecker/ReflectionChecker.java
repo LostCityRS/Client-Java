@@ -46,6 +46,7 @@ public class ReflectionChecker {
 			if (var2) {
 				return;
 			}
+			// REFLECTION_CHECK_REPLY
 			arg0.p1Enc(183);
 			arg0.p1(0);
 			int var4 = arg0.pos;
@@ -125,7 +126,7 @@ public class ReflectionChecker {
 				}
 			}
 			arg0.addcrc(var4);
-			arg0.method515(arg0.pos - var4);
+			arg0.psize1(arg0.pos - var4);
 			var1.unlink();
 		}
 	}

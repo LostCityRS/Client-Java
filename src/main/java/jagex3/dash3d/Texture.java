@@ -151,7 +151,7 @@ public final class Texture extends Linkable {
 		for (int var7 = 0; var7 < this.fileIds.length; var7++) {
 			Pix8 var8 = PixLoader.makePix8(arg2, this.fileIds[var7]);
 			var8.trim();
-			byte[] var9 = var8.bspr;
+			byte[] var9 = var8.data;
 			int[] var10 = var8.bpal;
 			int var11 = this.op3[var7];
 			if ((var11 & 0xFF000000) == 50331648) {

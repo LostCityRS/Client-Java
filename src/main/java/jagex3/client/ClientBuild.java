@@ -405,7 +405,7 @@ public final class ClientBuild {
 			arg0.method1158(arg6, arg7, arg1, var19, var34, null, field3176[arg4], 0, 0, 0, var18, var20);
 		} else if (arg2 == 5) {
 			int var35 = 16;
-			int var36 = arg0.method1153(arg6, arg7, arg1);
+			int var36 = arg0.wallType(arg6, arg7, arg1);
 			if (var36 != 0) {
 				var35 = LocType.list(var36 >> 14 & 0x7FFF).wallwidth;
 			}
@@ -418,7 +418,7 @@ public final class ClientBuild {
 			arg0.method1158(arg6, arg7, arg1, var19, var37, null, field3176[arg4], 0, var35 * field2974[arg4], var35 * BZip2State.field1927[arg4], var18, var20);
 		} else if (arg2 == 6) {
 			int var38 = 8;
-			int var39 = arg0.method1153(arg6, arg7, arg1);
+			int var39 = arg0.wallType(arg6, arg7, arg1);
 			if (var39 != 0) {
 				var38 = LocType.list(var39 >> 14 & 0x7FFF).wallwidth / 2;
 			}
@@ -440,7 +440,7 @@ public final class ClientBuild {
 			arg0.method1158(arg6, arg7, arg1, var19, var42, null, 256, var41, 0, 0, var18, var20);
 		} else if (arg2 == 8) {
 			int var43 = 8;
-			int var44 = arg0.method1153(arg6, arg7, arg1);
+			int var44 = arg0.wallType(arg6, arg7, arg1);
 			if (var44 != 0) {
 				var43 = LocType.list(var44 >> 14 & 0x7FFF).wallwidth / 2;
 			}
@@ -603,7 +603,7 @@ public final class ClientBuild {
 			}
 			arg2.method1158(arg7, arg5, arg3, var17, var32, null, field3176[arg8], 0, 0, 0, var20, var21);
 		} else if (arg1 == 5) {
-			int var33 = arg2.method1153(arg7, arg5, arg3);
+			int var33 = arg2.wallType(arg7, arg5, arg3);
 			int var34 = 16;
 			if (var33 != 0) {
 				var34 = LocType.list(var33 >> 14 & 0x7FFF).wallwidth;
@@ -617,7 +617,7 @@ public final class ClientBuild {
 			arg2.method1158(arg7, arg5, arg3, var17, var35, null, field3176[arg8], 0, var34 * field2974[arg8], var34 * BZip2State.field1927[arg8], var20, var21);
 		} else if (arg1 == 6) {
 			int var36 = 8;
-			int var37 = arg2.method1153(arg7, arg5, arg3);
+			int var37 = arg2.wallType(arg7, arg5, arg3);
 			if (var37 != 0) {
 				var36 = LocType.list(var37 >> 14 & 0x7FFF).wallwidth / 2;
 			}
@@ -639,7 +639,7 @@ public final class ClientBuild {
 			arg2.method1158(arg7, arg5, arg3, var17, var40, null, 256, var39, 0, 0, var20, var21);
 		} else if (arg1 == 8) {
 			int var41 = 8;
-			int var42 = arg2.method1153(arg7, arg5, arg3);
+			int var42 = arg2.wallType(arg7, arg5, arg3);
 			if (var42 != 0) {
 				var41 = LocType.list(var42 >> 14 & 0x7FFF).wallwidth / 2;
 			}
@@ -1133,7 +1133,7 @@ public final class ClientBuild {
 									int var61;
 									if (var59 >= 0) {
 										var61 = -1;
-										var60 = Pix3D.textureProvider.getAverageRgb(var59);
+										var60 = Pix3D.textureManager.getAverageRgb(var59);
 									} else if (var58.rgb == 16711935) {
 										var59 = -1;
 										var60 = -2;

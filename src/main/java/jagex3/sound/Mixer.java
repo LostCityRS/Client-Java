@@ -137,7 +137,7 @@ public final class Mixer extends PcmStream {
 	}
 
 	@ObfuscatedName("qe.b(Lfd;)V")
-	public synchronized void method912(PcmStream arg0) {
+	public synchronized void playStream(PcmStream arg0) {
 		this.field2773.pushFront(arg0);
 	}
 

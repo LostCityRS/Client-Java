@@ -24,7 +24,7 @@ public final class Pix8 extends Pix2D {
 	public int hi;
 
 	@ObfuscatedName("hb.O")
-	public byte[] bspr;
+	public byte[] data;
 
 	@ObfuscatedName("hb.Q")
 	public int[] bpal;
@@ -82,10 +82,10 @@ public final class Pix8 extends Pix2D {
 		int var2 = 0;
 		for (int var3 = 0; var3 < this.hi; var3++) {
 			for (int var4 = 0; var4 < this.wi; var4++) {
-				var1[var4 + this.xof + (var3 + this.yof) * this.owi] = this.bspr[var2++];
+				var1[var4 + this.xof + (var3 + this.yof) * this.owi] = this.data[var2++];
 			}
 		}
-		this.bspr = var1;
+		this.data = var1;
 		this.wi = this.owi;
 		this.hi = this.ohi;
 		this.xof = 0;
@@ -128,7 +128,7 @@ public final class Pix8 extends Pix2D {
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			plotSprite(Pix2D.pixels, this.bspr, this.bpal, var6, var5, var8, var7, var9, var10);
+			plotSprite(Pix2D.pixels, this.data, this.bpal, var6, var5, var8, var7, var9, var10);
 		}
 	}
 

@@ -14,7 +14,7 @@ public final class Pix3D extends Pix2D {
 	public static int minY;
 
 	@ObfuscatedName("af.cb")
-	public static TextureProvider textureProvider;
+	public static TextureProvider textureManager;
 
 	@ObfuscatedName("af.db")
 	public static int[] divTable2 = new int[2048];
@@ -590,14 +590,14 @@ public final class Pix3D extends Pix2D {
 
 	@ObfuscatedName("af.a(IIIIIIIIIIIIIIIIIII)V")
 	public static void textureTriangleAffine(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = textureProvider.getTexels(arg18);
+		int[] var19 = textureManager.getTexels(arg18);
 		if (var19 == null) {
-			int var20 = textureProvider.getAverageRgb(arg18);
+			int var20 = textureManager.getAverageRgb(arg18);
 			gouraudTriangle(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
-		lowMem = textureProvider.isLowMem(arg18);
-		opaque = textureProvider.isOpaque(arg18);
+		lowMem = textureManager.isLowMem(arg18);
+		opaque = textureManager.isOpaque(arg18);
 		int var21 = arg4 - arg3;
 		int var22 = arg1 - arg0;
 		int var23 = arg5 - arg3;
@@ -2144,14 +2144,14 @@ public final class Pix3D extends Pix2D {
 
 	@ObfuscatedName("af.b(IIIIIIIIIIIIIIIIIII)V")
 	public static void textureTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = textureProvider.getTexels(arg18);
+		int[] var19 = textureManager.getTexels(arg18);
 		if (var19 == null) {
-			int var20 = textureProvider.getAverageRgb(arg18);
+			int var20 = textureManager.getAverageRgb(arg18);
 			gouraudTriangle(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
-		lowMem = textureProvider.isLowMem(arg18);
-		opaque = textureProvider.isOpaque(arg18);
+		lowMem = textureManager.isLowMem(arg18);
+		opaque = textureManager.isOpaque(arg18);
 		int var21 = arg4 - arg3;
 		int var22 = arg1 - arg0;
 		int var23 = arg5 - arg3;
@@ -3022,7 +3022,7 @@ public final class Pix3D extends Pix2D {
 
 	@ObfuscatedName("af.a(Lje;)V")
 	public static void setTextures(TextureProvider arg0) {
-		textureProvider = arg0;
+		textureManager = arg0;
 	}
 
 	@ObfuscatedName("af.a(DII)V")

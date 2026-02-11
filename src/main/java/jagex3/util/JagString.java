@@ -172,7 +172,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("s.a([Lec;I)[Lec;")
-	public static JagString[] method984(JagString[] arg0) {
+	public static JagString[] prependOpIndex(JagString[] arg0) {
 		JagString[] var1 = new JagString[5];
 		for (int var2 = 0; var2 < 5; var2++) {
 			var1[var2] = join(new JagString[] { parseInt(var2), field717 });

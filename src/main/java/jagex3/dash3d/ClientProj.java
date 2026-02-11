@@ -50,7 +50,7 @@ public final class ClientProj extends ModelSource {
 	public double velocity;
 
 	@ObfuscatedName("sc.wb")
-	public final int field2960;
+	public final int target;
 
 	@ObfuscatedName("sc.Cb")
 	public final int startPos;
@@ -59,13 +59,13 @@ public final class ClientProj extends ModelSource {
 	public final int srcZ;
 
 	@ObfuscatedName("sc.X")
-	public final int field2935;
+	public final int level;
 
 	@ObfuscatedName("sc.T")
 	public final int h1;
 
 	@ObfuscatedName("sc.zb")
-	public final int field2963;
+	public final int t1;
 
 	@ObfuscatedName("sc.Db")
 	public final int srcX;
@@ -85,12 +85,12 @@ public final class ClientProj extends ModelSource {
 	public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		this.startPos = arg8;
 		this.srcZ = arg3;
-		this.field2935 = arg1;
+		this.level = arg1;
 		this.h1 = arg4;
-		this.field2960 = arg9;
+		this.target = arg9;
 		this.angle = arg7;
 		this.spotanim = arg0;
-		this.field2963 = arg5;
+		this.t1 = arg5;
 		this.t2 = arg6;
 		this.mobile = false;
 		this.srcX = arg2;

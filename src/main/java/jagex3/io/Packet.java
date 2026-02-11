@@ -123,7 +123,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.a(IZ)V")
-	public final void method515(int arg0) {
+	public final void psize1(int arg0) {
 		this.data[this.pos - arg0 - 1] = (byte) arg0;
 	}
 

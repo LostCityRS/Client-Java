@@ -159,7 +159,7 @@ public final class ModelLit extends ModelSource {
 	public static int[] field2375 = new int[4096];
 
 	@ObfuscatedName("od.Nb")
-	public static int[] field2367 = new int[1000];
+	public static int[] pickedEntityTypecode = new int[1000];
 
 	@ObfuscatedName("od.U")
 	public boolean useAABBMouseCheck = false;
@@ -423,7 +423,7 @@ public final class ModelLit extends ModelSource {
 			int var33 = mouseY - Pix3D.originY;
 			if (var32 > var28 && var32 < var29 && var33 > var30 && var33 < var31) {
 				if (this.useAABBMouseCheck) {
-					field2367[pickedCount++] = arg8;
+					pickedEntityTypecode[pickedCount++] = arg8;
 				} else {
 					var26 = true;
 				}
@@ -634,7 +634,7 @@ public final class ModelLit extends ModelSource {
 					}
 				} else {
 					if (arg1 && this.method811(mouseX, mouseY, field2364[var6], field2364[var7], field2364[var8], var9, var10, var11)) {
-						field2367[pickedCount++] = arg2;
+						pickedEntityTypecode[pickedCount++] = arg2;
 						arg1 = false;
 					}
 					if ((var9 - var10) * (field2364[var8] - field2364[var7]) - (field2364[var6] - field2364[var7]) * (var11 - var10) > 0) {

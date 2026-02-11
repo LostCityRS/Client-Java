@@ -12,9 +12,6 @@ import java.awt.*;
 @ObfuscatedName("qc")
 public class PcmPlayer {
 
-	@ObfuscatedName("qc.c")
-	public static int field2646 = 127;
-
 	@ObfuscatedName("qc.j")
 	public static int[] field2653 = new int[5];
 	@ObfuscatedName("u.Q")

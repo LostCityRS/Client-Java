@@ -908,7 +908,7 @@ public class ScriptRunner {
 					} else if (var270 < 1900) {
 						IfType var256 = var40 ? activeComponent2 : activeComponent;
 						if (var270 == 1800) {
-							intStack[var5++] = ServerActive.targetMask(Client.method1100(var256));
+							intStack[var5++] = ServerActive.targetMask(Client.getActive(var256));
 							continue;
 						}
 						if (var270 == 1801) {
@@ -1028,7 +1028,7 @@ public class ScriptRunner {
 						var5--;
 						IfType var75 = IfType.get(intStack[var5]);
 						if (var270 == 2800) {
-							intStack[var5++] = ServerActive.targetMask(Client.method1100(var75));
+							intStack[var5++] = ServerActive.targetMask(Client.getActive(var75));
 							continue;
 						}
 						if (var270 == 2801) {
@@ -1125,7 +1125,7 @@ public class ScriptRunner {
 						}
 						if (var270 == 3201) {
 							var5--;
-							Client.method825(intStack[var5]);
+							Client.playSongs(intStack[var5]);
 							continue;
 						}
 						if (var270 == 3202) {
@@ -1168,19 +1168,19 @@ public class ScriptRunner {
 						if (var270 == 3305) {
 							var5--;
 							int var84 = intStack[var5];
-							intStack[var5++] = Client.field3173[var84];
+							intStack[var5++] = Client.statEffectiveLevel[var84];
 							continue;
 						}
 						if (var270 == 3306) {
 							var5--;
 							int var85 = intStack[var5];
-							intStack[var5++] = Client.field1159[var85];
+							intStack[var5++] = Client.statBaseLevel[var85];
 							continue;
 						}
 						if (var270 == 3307) {
 							var5--;
 							int var86 = intStack[var5];
-							intStack[var5++] = Client.field343[var86];
+							intStack[var5++] = Client.statXP[var86];
 							continue;
 						}
 						if (var270 == 3308) {
@@ -1242,7 +1242,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 3317) {
-							intStack[var5++] = Client.field1294;
+							intStack[var5++] = Client.logoutTimer;
 							continue;
 						}
 						if (var270 == 3318) {
@@ -1250,11 +1250,11 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 3321) {
-							intStack[var5++] = Client.field3153;
+							intStack[var5++] = Client.runenergy;
 							continue;
 						}
 						if (var270 == 3322) {
-							intStack[var5++] = Client.field49;
+							intStack[var5++] = Client.runweight;
 							continue;
 						}
 						if (var270 == 3323) {
@@ -2070,7 +2070,7 @@ public class ScriptRunner {
 								Client.out.p1(var198);
 								Client.out.p1(var197);
 								JagString.method1194(var195, Client.out);
-								Client.out.method515(Client.out.pos - var200);
+								Client.out.psize1(Client.out.pos - var200);
 							}
 							continue;
 						}
@@ -2083,7 +2083,7 @@ public class ScriptRunner {
 							int var203 = Client.out.pos;
 							Client.out.p8(var201.method259());
 							JagString.method1194(var202, Client.out);
-							Client.out.method515(Client.out.pos - var203);
+							Client.out.psize1(Client.out.pos - var203);
 							continue;
 						}
 						if (var270 == 5010) {

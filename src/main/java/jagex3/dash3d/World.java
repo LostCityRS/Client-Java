@@ -664,7 +664,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.i(III)I")
-	public int method1133(int arg0, int arg1, int arg2) {
+	public int sceneType(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		if (var4 == null) {
 			return 0;
@@ -842,7 +842,7 @@ public final class World {
 						Pix3D.gouraudTriangle(var26, var27, var28, var23, var24, var25, arg0.faceColourA[var19], arg0.field1085[var19], arg0.field1092[var19]);
 					}
 				} else if (lowMem) {
-					int var29 = Pix3D.textureProvider.getAverageRgb(arg0.faceTexture[var19]);
+					int var29 = Pix3D.textureManager.getAverageRgb(arg0.faceTexture[var19]);
 					Pix3D.gouraudTriangle(var26, var27, var28, var23, var24, var25, mulLightness(var29, arg0.faceColourA[var19]), mulLightness(var29, arg0.field1085[var19]), mulLightness(var29, arg0.field1092[var19]));
 				} else if (arg0.flat) {
 					Pix3D.textureTriangleAffine(var26, var27, var28, var23, var24, var25, arg0.faceColourA[var19], arg0.field1085[var19], arg0.field1092[var19], Ground.drawTextureVertexX[0], Ground.drawTextureVertexX[1], Ground.drawTextureVertexX[3], Ground.drawTextureVertexY[0], Ground.drawTextureVertexY[1], Ground.drawTextureVertexY[3], Ground.drawTextureVertexZ[0], Ground.drawTextureVertexZ[1], Ground.drawTextureVertexZ[3], arg0.faceTexture[var19]);
@@ -1471,7 +1471,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.o(III)I")
-	public int method1153(int arg0, int arg1, int arg2) {
+	public int wallType(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		return var4 == null || var4.wall == null ? 0 : var4.wall.typecode;
 	}
@@ -1541,7 +1541,7 @@ public final class World {
 					Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.field3615, arg0.field3609);
 				}
 			} else if (lowMem) {
-				int var52 = Pix3D.textureProvider.getAverageRgb(arg0.field3631);
+				int var52 = Pix3D.textureManager.getAverageRgb(arg0.field3631);
 				Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, mulLightness(var52, arg0.colourNE), mulLightness(var52, arg0.field3615), mulLightness(var52, arg0.field3609));
 			} else if (arg0.field3614) {
 				Pix3D.textureTriangleAffine(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.field3615, arg0.field3609, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field3631);
@@ -1565,7 +1565,7 @@ public final class World {
 				Pix3D.textureTriangleAffine(var45, var47, var51, var44, var46, var50, arg0.field3630, arg0.field3609, arg0.field3615, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field3631);
 				return;
 			}
-			int var53 = Pix3D.textureProvider.getAverageRgb(arg0.field3631);
+			int var53 = Pix3D.textureManager.getAverageRgb(arg0.field3631);
 			Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, mulLightness(var53, arg0.field3630), mulLightness(var53, arg0.field3609), mulLightness(var53, arg0.field3615));
 		} else if (arg0.field3630 != 12345678) {
 			Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, arg0.field3630, arg0.field3609, arg0.field3615);
@@ -1906,7 +1906,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.a(IIIILdd;ILdd;Ldd;)V")
-	public void method1165(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, ModelSource arg6, ModelSource arg7) {
+	public void setObj(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, ModelSource arg6, ModelSource arg7) {
 		GroundObject var9 = new GroundObject();
 		var9.topObj = arg4;
 		var9.field2033 = arg1 * 128 + 64;

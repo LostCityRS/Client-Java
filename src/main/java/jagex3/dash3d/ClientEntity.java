@@ -11,16 +11,16 @@ public abstract class ClientEntity extends ModelSource {
 	public int turnleftanim = -1;
 
 	@ObfuscatedName("qd.bb")
-	public int field2693 = 32;
+	public int turnspeed = 32;
 
 	@ObfuscatedName("qd.bc")
-	public int field2745;
+	public int yaw;
 
 	@ObfuscatedName("qd.cb")
 	public int animDelayMove = 0;
 
 	@ObfuscatedName("qd.cc")
-	public final int[] field2746 = new int[4];
+	public final int[] danageTypes = new int[4];
 
 	@ObfuscatedName("qd.dc")
 	public int x;
@@ -41,13 +41,13 @@ public abstract class ClientEntity extends ModelSource {
 	public int z;
 
 	@ObfuscatedName("qd.hc")
-	public int field2751;
+	public int exactMoveFacing;
 
 	@ObfuscatedName("qd.ic")
 	public int field2752 = 0;
 
 	@ObfuscatedName("qd.jb")
-	public int field2701 = 0;
+	public int spotanimCycle = 0;
 
 	@ObfuscatedName("qd.jc")
 	public int field2753 = 0;
@@ -59,7 +59,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field2755;
 
 	@ObfuscatedName("qd.mb")
-	public int field2704;
+	public int spotanimLastCycle;
 
 	@ObfuscatedName("qd.mc")
 	public int targetId = -1;
@@ -68,13 +68,13 @@ public abstract class ClientEntity extends ModelSource {
 	public int runanim = -1;
 
 	@ObfuscatedName("qd.nc")
-	public int field2757 = 0;
+	public int secondarySeqCycle = 0;
 
 	@ObfuscatedName("qd.ob")
-	public int field2706 = 100;
+	public int chatTimer = 100;
 
 	@ObfuscatedName("qd.oc")
-	public final int[] field2758 = new int[4];
+	public final int[] damageValues = new int[4];
 
 	@ObfuscatedName("qd.pc")
 	public final int[] routeX = new int[10];
@@ -86,7 +86,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int walkanim = -1;
 
 	@ObfuscatedName("qd.sb")
-	public int field2710;
+	public int exactStartX;
 
 	@ObfuscatedName("qd.tb")
 	public int size = 1;
@@ -98,7 +98,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int cycle = 0;
 
 	@ObfuscatedName("qd.wb")
-	public int field2714 = 0;
+	public int primarySeqLoop = 0;
 
 	@ObfuscatedName("qd.yb")
 	public int turnrightanim = -1;
@@ -110,7 +110,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final int[] damageCycles = new int[4];
 
 	@ObfuscatedName("qd.Rb")
-	public boolean field2735 = false;
+	public boolean needsForwardDrawPadding = false;
 
 	@ObfuscatedName("qd.Qb")
 	public int walkanim_b = -1;
@@ -134,46 +134,46 @@ public abstract class ClientEntity extends ModelSource {
 	public int primarySeqDelay = 0;
 
 	@ObfuscatedName("qd.Kb")
-	public int field2728 = 0;
+	public int secondarySeqFrame = 0;
 
 	@ObfuscatedName("qd.Z")
-	public int field2691 = -1000;
+	public int combatCycle = -1000;
 
 	@ObfuscatedName("qd.Lb")
 	public int walkanim_r = -1;
 
 	@ObfuscatedName("qd.Hb")
-	public int field2725 = 0;
+	public int primarySeqFrame = 0;
 
 	@ObfuscatedName("qd.Pb")
 	public final boolean[] routeRun = new boolean[10];
 
 	@ObfuscatedName("qd.Tb")
-	public int field2737 = 0;
+	public int primarySeqCycle = 0;
 
 	@ObfuscatedName("qd.Xb")
 	public int field2741 = 0;
 
 	@ObfuscatedName("qd.Y")
-	public int field2690;
+	public int exactEndX;
 
 	@ObfuscatedName("qd.zb")
-	public int field2717;
+	public int exactStartZ;
 
 	@ObfuscatedName("qd.Gb")
-	public int field2724;
+	public int exactMoveStart;
 
 	@ObfuscatedName("qd.Jb")
 	public int spotanimHeight;
 
 	@ObfuscatedName("qd.Mb")
-	public int field2730;
+	public int exactMoveEnd;
 
 	@ObfuscatedName("qd.Ub")
 	public int field2738;
 
 	@ObfuscatedName("qd.Wb")
-	public int field2740;
+	public int exactEndZ;
 
 	@ObfuscatedName("qd.Yb")
 	public int dstYaw;
@@ -273,8 +273,8 @@ public abstract class ClientEntity extends ModelSource {
 	public final void addHitmark(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			if (this.damageCycles[var4] <= arg0) {
-				this.field2758[var4] = arg2;
-				this.field2746[var4] = arg1;
+				this.damageValues[var4] = arg2;
+				this.danageTypes[var4] = arg1;
 				this.damageCycles[var4] = arg0 + 70;
 				return;
 			}

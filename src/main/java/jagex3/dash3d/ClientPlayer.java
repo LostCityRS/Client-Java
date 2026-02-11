@@ -33,9 +33,6 @@ public final class ClientPlayer extends ClientEntity {
 	@ObfuscatedName("ka.md")
 	public int headiconPrayer = -1;
 
-	@ObfuscatedName("ka.Lc")
-	public static int field1633 = -1;
-
 	@ObfuscatedName("ka.Rc")
 	public int locStartCycle = 0;
 
@@ -154,7 +151,7 @@ public final class ClientPlayer extends ClientEntity {
 		}
 		SeqType var1 = super.primarySeqId != -1 && super.primarySeqDelay == 0 ? SeqType.list(super.primarySeqId) : null;
 		SeqType var2 = super.secondarySeqId == -1 || this.lowMem || super.secondarySeqId == super.readyanim && var1 != null ? null : SeqType.list(super.secondarySeqId);
-		ModelLit var3 = this.model.getTempModel(var1, super.field2728, var2, super.field2725);
+		ModelLit var3 = this.model.getTempModel(var1, super.secondarySeqFrame, var2, super.primarySeqFrame);
 		if (var3 == null) {
 			return null;
 		}

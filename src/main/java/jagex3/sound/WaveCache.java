@@ -33,11 +33,11 @@ public final class WaveCache {
 		if (var8 != null) {
 			return var8;
 		} else if (arg1 == null || arg1[0] > 0) {
-			JagFX var9 = JagFX.method972(this.field1612, arg2, arg0);
+			JagFX var9 = JagFX.load(this.field1612, arg2, arg0);
 			if (var9 == null) {
 				return null;
 			}
-			Wave var10 = var9.method971();
+			Wave var10 = var9.toWave();
 			this.waveCache.put(var6, var10);
 			if (arg1 != null) {
 				arg1[0] -= var10.field1343.length;

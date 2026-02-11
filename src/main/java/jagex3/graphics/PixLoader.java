@@ -59,7 +59,7 @@ public class PixLoader {
 			var2.wi = wi[var1];
 			var2.hi = hi[var1];
 			var2.bpal = bpal;
-			var2.bspr = bspr[var1];
+			var2.data = bspr[var1];
 		}
 		reset();
 		return var0;
@@ -161,7 +161,7 @@ public class PixLoader {
 		Pix8 var0 = new Pix8();
 		var0.bpal = bpal;
 		var0.xof = xof[0];
-		var0.bspr = bspr[0];
+		var0.data = bspr[0];
 		var0.ohi = ohi;
 		var0.owi = owi;
 		var0.hi = hi[0];

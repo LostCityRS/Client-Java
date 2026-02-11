@@ -458,7 +458,7 @@ public class TitleScreen {
 		field1442 = new int[256];
 		method581(null);
 		loginUser = AUTO_EMPTY;
-		if (Client.field3638 == 0) {
+		if (Client.midiVolume == 0) {
 			mute = true;
 		} else {
 			mute = false;
@@ -469,7 +469,7 @@ public class TitleScreen {
 		loginPass = AUTO_EMPTY;
 		field44 = new int[32768];
 		if (mute) {
-			MidiManager.method1176();
+			MidiManager.stop2();
 		} else {
 			MidiManager.method590(Client.songs, field1712, AUTO_EMPTY);
 		}
@@ -505,7 +505,7 @@ public class TitleScreen {
 		field1442 = null;
 		field160 = null;
 		field1264 = null;
-		MidiManager.method1176();
+		MidiManager.stop2();
 		Js5Net.sendLoginLogoutPacket(true);
 		open = false;
 	}
@@ -807,7 +807,7 @@ public class TitleScreen {
 		int var9 = 0;
 		for (int var10 = 0; var10 < arg0.hi; var10++) {
 			for (int var11 = 0; var11 < arg0.wi; var11++) {
-				if (arg0.bspr[var9++] != 0) {
+				if (arg0.data[var9++] != 0) {
 					int var12 = arg0.xof + var11 + 16;
 					int var13 = var10 + arg0.yof + 16;
 					int var14 = (var13 << 7) + var12;

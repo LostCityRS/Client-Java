@@ -2,7 +2,7 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import jagex3.config.IdkType;
-import jagex3.config.NPCType;
+import jagex3.config.NpcType;
 import jagex3.config.ObjType;
 import jagex3.config.SeqType;
 import jagex3.datastruct.LruCache;
@@ -134,7 +134,7 @@ public final class PlayerModel {
 	@ObfuscatedName("eb.d(I)Lp;")
 	public ModelUnlit getHeadModel() {
 		if (this.transmog != -1) {
-			return NPCType.list(this.transmog).getHead();
+			return NpcType.list(this.transmog).getHead();
 		}
 		boolean var1 = false;
 		for (int var2 = 0; var2 < 12; var2++) {
@@ -220,7 +220,7 @@ public final class PlayerModel {
 	@ObfuscatedName("eb.a(Lvc;ILvc;II)Lod;")
 	public ModelLit getTempModel(SeqType arg0, int arg1, SeqType arg2, int arg3) {
 		if (this.transmog != -1) {
-			return NPCType.list(this.transmog).getTempModel(arg2, arg3, arg0, arg1);
+			return NpcType.list(this.transmog).getTempModel(arg2, arg3, arg0, arg1);
 		}
 		long var5 = this.baseId;
 		int[] var7 = this.appearance;
@@ -306,6 +306,6 @@ public final class PlayerModel {
 
 	@ObfuscatedName("eb.e(I)I")
 	public int method234() {
-		return this.transmog == -1 ? (this.appearance[0] << 15) + ((this.colour[0] << 25) + (this.colour[4] << 20) + (this.appearance[8] << 10)) + (this.appearance[11] << 5) + this.appearance[1] : NPCType.list(this.transmog).id + 305419896;
+		return this.transmog == -1 ? (this.appearance[0] << 15) + ((this.colour[0] << 25) + (this.colour[4] << 20) + (this.appearance[8] << 10)) + (this.appearance[11] << 5) + this.appearance[1] : NpcType.list(this.transmog).id + 305419896;
 	}
 }

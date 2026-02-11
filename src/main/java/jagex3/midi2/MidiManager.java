@@ -136,7 +136,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("vf.a(IB)V")
-	public static void method1176() {
+	public static void stop2() {
 		field1724 = 2;
 		field3606 = -1;
 		state = 1;
@@ -150,11 +150,11 @@ public class MidiManager {
 	public static void method590(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.getGroupId(arg1);
 		int var4 = arg0.getFileId(arg2, var3);
-		method667(arg0, 255, var4, var3);
+		swapSongs(arg0, 255, var4, var3);
 	}
 
 	@ObfuscatedName("mc.a(ZLea;IZIII)V")
-	public static void method667(Js5 arg0, int arg1, int arg2, int arg3) {
+	public static void swapSongs(Js5 arg0, int arg1, int arg2, int arg3) {
 		field1724 = 2;
 		midis = arg0;
 		field3606 = arg3;
@@ -174,7 +174,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("e.e(I)Z")
-	public static boolean method197() {
+	public static boolean isInitialised() {
 		return state == 0 ? midiPlayer.method90() : true;
 	}
 }
