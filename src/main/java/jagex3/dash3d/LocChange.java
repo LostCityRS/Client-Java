@@ -10,7 +10,7 @@ public final class LocChange extends Linkable {
 	public int field398;
 
 	@ObfuscatedName("da.v")
-	public int field401;
+	public int level;
 
 	@ObfuscatedName("da.G")
 	public int startTime = 0;
@@ -22,7 +22,7 @@ public final class LocChange extends Linkable {
 	public int field404;
 
 	@ObfuscatedName("da.z")
-	public int field405;
+	public int x;
 
 	@ObfuscatedName("da.A")
 	public int field406;
@@ -40,6 +40,6 @@ public final class LocChange extends Linkable {
 	public int field414;
 
 	@ObfuscatedName("da.P")
-	public int field420;
+	public int z;
 
 }

@@ -1130,7 +1130,7 @@ public class ScriptRunner {
 						}
 						if (var270 == 3202) {
 							var5 -= 2;
-							Client.method315(intStack[var5], intStack[var5 + 1]);
+							Client.playJingle(intStack[var5], intStack[var5 + 1]);
 							continue;
 						}
 					} else if (var270 < 3400) {
@@ -1325,14 +1325,14 @@ public class ScriptRunner {
 							} else if (Client.field1356 == 1) {
 								intStack[var5++] = -1;
 							} else {
-								intStack[var5++] = Client.field20;
+								intStack[var5++] = Client.friendCount;
 							}
 							continue;
 						}
 						if (var270 == 3601) {
 							var5--;
 							int var223 = intStack[var5];
-							if (Client.field1356 == 2 && Client.field20 > var223) {
+							if (Client.field1356 == 2 && Client.friendCount > var223) {
 								stringStack[var4++] = Client.field239[var223];
 								continue;
 							}
@@ -1342,7 +1342,7 @@ public class ScriptRunner {
 						if (var270 == 3602) {
 							var5--;
 							int var224 = intStack[var5];
-							if (Client.field1356 == 2 && Client.field20 > var224) {
+							if (Client.field1356 == 2 && Client.friendCount > var224) {
 								intStack[var5++] = Client.field2094[var224];
 								continue;
 							}
@@ -1352,7 +1352,7 @@ public class ScriptRunner {
 						if (var270 == 3603) {
 							var5--;
 							int var225 = intStack[var5];
-							if (Client.field1356 == 2 && Client.field20 > var225) {
+							if (Client.field1356 == 2 && Client.friendCount > var225) {
 								intStack[var5++] = Client.field103[var225];
 								continue;
 							}
@@ -1412,15 +1412,15 @@ public class ScriptRunner {
 							if (Client.field3010 == null) {
 								intStack[var5++] = 0;
 							} else {
-								intStack[var5++] = Client.field3636;
+								intStack[var5++] = Client.friendChatCount;
 							}
 							continue;
 						}
 						if (var270 == 3613) {
 							var5--;
 							int var233 = intStack[var5];
-							if (Client.field3010 != null && var233 < Client.field3636) {
-								stringStack[var4++] = Client.field2609[var233].username.method264();
+							if (Client.field3010 != null && var233 < Client.friendChatCount) {
+								stringStack[var4++] = Client.friendChatList[var233].username.method264();
 								continue;
 							}
 							stringStack[var4++] = field3652;
@@ -1429,8 +1429,8 @@ public class ScriptRunner {
 						if (var270 == 3614) {
 							var5--;
 							int var234 = intStack[var5];
-							if (Client.field3010 != null && var234 < Client.field3636) {
-								intStack[var5++] = Client.field2609[var234].world;
+							if (Client.field3010 != null && var234 < Client.friendChatCount) {
+								intStack[var5++] = Client.friendChatList[var234].world;
 								continue;
 							}
 							intStack[var5++] = 0;
@@ -1439,15 +1439,15 @@ public class ScriptRunner {
 						if (var270 == 3615) {
 							var5--;
 							int var235 = intStack[var5];
-							if (Client.field3010 != null && var235 < Client.field3636) {
-								intStack[var5++] = Client.field2609[var235].rank;
+							if (Client.field3010 != null && var235 < Client.friendChatCount) {
+								intStack[var5++] = Client.friendChatList[var235].rank;
 								continue;
 							}
 							intStack[var5++] = 0;
 							continue;
 						}
 						if (var270 == 3616) {
-							intStack[var5++] = Client.field2389;
+							intStack[var5++] = Client.chatMinKick;
 							continue;
 						}
 						if (var270 == 3617) {
@@ -1457,7 +1457,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 3618) {
-							intStack[var5++] = Client.field3383;
+							intStack[var5++] = Client.chatRank;
 							continue;
 						}
 						if (var270 == 3619) {
@@ -1474,15 +1474,15 @@ public class ScriptRunner {
 							if (Client.field1356 == 0) {
 								intStack[var5++] = -1;
 							} else {
-								intStack[var5++] = Client.field2504;
+								intStack[var5++] = Client.ignoreCount;
 							}
 							continue;
 						}
 						if (var270 == 3622) {
 							var5--;
 							int var238 = intStack[var5];
-							if (Client.field1356 != 0 && var238 < Client.field2504) {
-								stringStack[var4++] = JString.method59(Client.field2407[var238]).method264();
+							if (Client.field1356 != 0 && var238 < Client.ignoreCount) {
+								stringStack[var4++] = JString.toRawUsername(Client.ignoreList[var238]).method264();
 								continue;
 							}
 							stringStack[var4++] = field3652;
@@ -1500,7 +1500,7 @@ public class ScriptRunner {
 						if (var270 == 3624) {
 							var5--;
 							int var240 = intStack[var5];
-							if (Client.field2609 != null && Client.field3636 > var240 && Client.field2609[var240].username.equalsIgnoreCase(Client.localPlayer.name)) {
+							if (Client.friendChatList != null && Client.friendChatCount > var240 && Client.friendChatList[var240].username.equalsIgnoreCase(Client.localPlayer.name)) {
 								intStack[var5++] = 1;
 								continue;
 							}
@@ -1893,18 +1893,18 @@ public class ScriptRunner {
 						}
 					} else if (var270 < 5100) {
 						if (var270 == 5000) {
-							intStack[var5++] = Client.publicChatFilter;
+							intStack[var5++] = Client.chatPublicMode;
 							continue;
 						}
 						if (var270 == 5001) {
 							var5 -= 3;
-							Client.publicChatFilter = intStack[var5];
-							Client.field23 = intStack[var5 + 1];
-							Client.field990 = intStack[var5 + 2];
+							Client.chatPublicMode = intStack[var5];
+							Client.chatPrivateMode = intStack[var5 + 1];
+							Client.chatTradeMode = intStack[var5 + 2];
 							Client.out.p1Enc(69);
-							Client.out.p1(Client.publicChatFilter);
-							Client.out.p1(Client.field23);
-							Client.out.p1(Client.field990);
+							Client.out.p1(Client.chatPublicMode);
+							Client.out.p1(Client.chatPrivateMode);
+							Client.out.p1(Client.chatTradeMode);
 							continue;
 						}
 						if (var270 == 5002) {
@@ -1943,7 +1943,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 5005) {
-							intStack[var5++] = Client.field23;
+							intStack[var5++] = Client.chatPrivateMode;
 							continue;
 						}
 						if (var270 == 5008) {
@@ -2123,7 +2123,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var270 == 5016) {
-							intStack[var5++] = Client.field990;
+							intStack[var5++] = Client.chatTradeMode;
 							continue;
 						}
 						if (var270 == 5017) {

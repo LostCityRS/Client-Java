@@ -5,7 +5,7 @@ import jagex3.config.VarBitType;
 
 public class VarCache {
 	@ObfuscatedName("bf.l")
-	public static int[] field238 = new int[2000];
+	public static int[] varServ = new int[2000];
 	@ObfuscatedName("de.x")
 	public static int[] var = new int[2000];
     @ObfuscatedName("qf.c")

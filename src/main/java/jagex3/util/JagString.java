@@ -270,7 +270,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.a(ILec;)I")
-	public int method238(JagString arg0) {
+	public int compare(JagString arg0) {
 		int var2;
 		if (arg0.length < this.length) {
 			var2 = arg0.length;
