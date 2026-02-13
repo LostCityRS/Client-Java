@@ -198,7 +198,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				}
 			}
 		}
-		arg0.method543(24, var1);
+		arg0.pdata(24, var1);
 	}
 
 	@Override

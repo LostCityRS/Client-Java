@@ -148,7 +148,7 @@ public final class Patch extends Linkable {
 				} else {
 					var35 = -1;
 				}
-				var36 = var3.method510();
+				var36 = var3.gMidiVarLen();
 			}
 			var35--;
 			this.field1722[var38] = (short) (this.field1722[var38] + ((var36 - 1 & 0x2) << 14));

@@ -54,7 +54,7 @@ public final class MidiParser {
 		if (var3 != 240 && var3 != 247) {
 			return this.method941(arg0, var3);
 		}
-		int var4 = this.packet.method510();
+		int var4 = this.packet.gMidiVarLen();
 		if (var3 == 247 && var4 > 0) {
 			int var5 = this.packet.data[this.packet.pos] & 0xFF;
 			if (var5 >= 241 && var5 <= 243 || var5 == 246 || var5 == 248 || var5 >= 250 && var5 <= 252 || var5 == 254) {
@@ -86,7 +86,7 @@ public final class MidiParser {
 			return var8;
 		}
 		int var3 = this.packet.g1();
-		int var4 = this.packet.method510();
+		int var4 = this.packet.gMidiVarLen();
 		if (var3 == 47) {
 			this.packet.pos += var4;
 			return 1;
@@ -173,7 +173,7 @@ public final class MidiParser {
 
 	@ObfuscatedName("rb.d(I)V")
 	public void method951(int arg0) {
-		int var2 = this.packet.method510();
+		int var2 = this.packet.gMidiVarLen();
 		this.field2862[arg0] += var2;
 	}
 

@@ -74,7 +74,7 @@ public final class MidiFile extends Linkable {
 		int var19 = arg0.pos;
 		int var20 = var2 + var5 + var6 + var7 + var8 + var9 + var10 + var11 + var12;
 		for (int var21 = 0; var21 < var20; var21++) {
-			arg0.method510();
+			arg0.gMidiVarLen();
 		}
 		int var22 = var18 + arg0.pos - var19;
 		int var23 = arg0.pos;
@@ -188,7 +188,7 @@ public final class MidiFile extends Linkable {
 			int var72 = -1;
 			while (true) {
 				while (true) {
-					int var73 = arg0.method510();
+					int var73 = arg0.gMidiVarLen();
 					var60.pMidiVarLen(var73);
 					int var74 = arg0.data[var38++] & 0xFF;
 					boolean var75 = var74 != var72;
@@ -199,7 +199,7 @@ public final class MidiFile extends Linkable {
 						}
 						var60.p1(47);
 						var60.p1(0);
-						var60.method540(var60.pos - var71);
+						var60.psize4(var60.pos - var71);
 						continue label220;
 					}
 					if (var74 == 23) {

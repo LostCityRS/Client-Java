@@ -229,7 +229,7 @@ public class TitleScreen {
 			}
 			var7 += 15;
 			if (var1 == 1 && var3 >= 227 && var3 <= 377 && var2 >= 301 && var2 <= 341) {
-				loginUser = loginUser.method244().method264();
+				loginUser = loginUser.method244().toScreenName();
 				if (loginUser.length() == 0) {
 					loginMes(Text.LOGIN_USER_LENGTH_A, Text.LOGIN_USER_LENGTH_B, Text.LOGIN_USER_LENGTH_C);
 					return;
@@ -274,7 +274,7 @@ public class TitleScreen {
 							loginSelect = 0;
 						}
 						if (Client.modewhere == 2 && ClientKeyboardListener.code == 84) {
-							loginUser = loginUser.method244().method264();
+							loginUser = loginUser.method244().toScreenName();
 							if (loginUser.length() == 0) {
 								loginMes(Text.LOGIN_USER_LENGTH_A, Text.LOGIN_USER_LENGTH_B, Text.LOGIN_USER_LENGTH_C);
 								return;

@@ -57,7 +57,7 @@ public class Packet extends Linkable {
     }
 
     @ObfuscatedName("jd.b(II)V")
-	public final void method504(int arg0) {
+	public final void p2_alt3(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 + 128);
 		this.data[this.pos++] = (byte) (arg0 >> 8);
 	}
@@ -69,7 +69,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.a(BI)V")
-	public final void method506(int arg0) {
+	public final void p1_alt1(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 + 128);
 	}
 
@@ -84,13 +84,13 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.e(I)I")
-	public final int method509() {
+	public final int g4_alt3() {
 		this.pos += 4;
 		return (this.data[this.pos - 2] & 0xFF) + ((this.data[this.pos - 3] & 0xFF) << 24) + ((this.data[this.pos + -4] & 0xFF) << 16) + ((this.data[this.pos + -1] & 0xFF) << 8);
 	}
 
 	@ObfuscatedName("jd.f(I)I")
-	public final int method510() {
+	public final int gMidiVarLen() {
 		byte var1 = this.data[this.pos++];
 		int var2 = 0;
 		while (var1 < 0) {
@@ -101,14 +101,14 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.g(I)B")
-	public final byte method511() {
+	public final byte g1b_alt3() {
 		return (byte) (128 - this.data[this.pos++]);
 	}
 
 	@ObfuscatedName("jd.a(IJ)V")
-	public final void method512(long arg0) {
-		this.method526((int) (arg0 >> 32));
-		this.method526((int) arg0);
+	public final void p8_alt1(long arg0) {
+		this.p4_alt1((int) (arg0 >> 32));
+		this.p4_alt1((int) arg0);
 	}
 
 	@ObfuscatedName("jd.a(IB)V")
@@ -140,19 +140,19 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.b(Z)I")
-	public final int method518() {
+	public final int g2_alt2() {
 		this.pos += 2;
 		return (this.data[this.pos - 1] - 128 & 0xFF) + ((this.data[this.pos - 2] & 0xFF) << 8);
 	}
 
 	@ObfuscatedName("jd.c(B)I")
-	public final int method519() {
+	public final int g2_alt3() {
 		this.pos += 2;
 		return ((this.data[this.pos - 1] & 0xFF) << 8) + (this.data[this.pos - 2] - 128 & 0xFF);
 	}
 
 	@ObfuscatedName("jd.i(I)I")
-	public final int method520() {
+	public final int g1_alt1() {
 		return this.data[this.pos++] - 128 & 0xFF;
 	}
 
@@ -192,19 +192,19 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.d(B)I")
-	public final int method524() {
+	public final int g2_alt1() {
 		this.pos += 2;
 		return ((this.data[this.pos - 1] & 0xFF) << 8) + (this.data[this.pos - 2] & 0xFF);
 	}
 
 	@ObfuscatedName("jd.j(I)I")
-	public final int method525() {
+	public final int g4_alt1() {
 		this.pos += 4;
 		return ((this.data[this.pos - 3] & 0xFF) << 8) + (this.data[this.pos - 2] << 16 & 0xFF0000) + ((this.data[this.pos + -1] & 0xFF) << 24) + (this.data[this.pos - 4] & 0xFF);
 	}
 
 	@ObfuscatedName("jd.c(II)V")
-	public final void method526(int arg0) {
+	public final void p4_alt1(int arg0) {
 		this.data[this.pos++] = (byte) arg0;
 		this.data[this.pos++] = (byte) (arg0 >> 8);
 		this.data[this.pos++] = (byte) (arg0 >> 16);
@@ -219,7 +219,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.l(I)I")
-	public final int method528() {
+	public final int g2b_alt2() {
 		this.pos += 2;
 		int var1 = (this.data[this.pos - 1] - 128 & 0xFF) + ((this.data[this.pos - 2] & 0xFF) << 8);
 		if (var1 > 32767) {
@@ -229,7 +229,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.e(B)I")
-	public final int method529() {
+	public final int g1_alt2() {
 		return -this.data[this.pos++] & 0xFF;
 	}
 
@@ -253,22 +253,22 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.b(IZ)V")
-	public final void method533(int arg0) {
+	public final void p1_alt2(int arg0) {
 		this.data[this.pos++] = (byte) -arg0;
 	}
 
 	@ObfuscatedName("jd.o(I)B")
-	public final byte method534() {
+	public final byte g1b_alt2() {
 		return (byte) -this.data[this.pos++];
 	}
 
 	@ObfuscatedName("jd.p(I)I")
-	public final int method535() {
+	public final int g1_alt3() {
 		return 128 - this.data[this.pos++] & 0xFF;
 	}
 
 	@ObfuscatedName("jd.q(I)B")
-	public final byte method536() {
+	public final byte g1b_alt1() {
 		return (byte) (this.data[this.pos++] - 128);
 	}
 
@@ -279,14 +279,14 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.a([BIBI)V")
-	public final void method539(byte[] arg0, int arg1) {
+	public final void gdata_alt1(byte[] arg0, int arg1) {
 		for (int var3 = arg1 - 1; var3 >= 0; var3--) {
 			arg0[var3] = this.data[this.pos++];
 		}
 	}
 
 	@ObfuscatedName("jd.c(IZ)V")
-	public final void method540(int arg0) {
+	public final void psize4(int arg0) {
 		this.data[this.pos - arg0 - 4] = (byte) (arg0 >> 24);
 		this.data[this.pos - arg0 - 3] = (byte) (arg0 >> 16);
 		this.data[this.pos - arg0 - 2] = (byte) (arg0 >> 8);
@@ -306,7 +306,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.a(III[B)V")
-	public final void method543(int arg0, byte[] arg1) {
+	public final void pdata(int arg0, byte[] arg1) {
 		for (int var3 = 0; var3 < arg0; var3++) {
 			this.data[this.pos++] = arg1[var3];
 		}
@@ -318,7 +318,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.e(II)V")
-	public final void method545(int arg0) {
+	public final void psmart(int arg0) {
 		if (arg0 >= 0 && arg0 < 128) {
 			this.p1(arg0);
 		} else if (arg0 >= 0 && arg0 < 32768) {
@@ -329,24 +329,24 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.f(II)V")
-	public final void method546(int arg0) {
+	public final void p2_alt1(int arg0) {
 		this.data[this.pos++] = (byte) arg0;
 		this.data[this.pos++] = (byte) (arg0 >> 8);
 	}
 
 	@ObfuscatedName("jd.b(IB)V")
-	public final void method547(int arg0) {
+	public final void p1_alt3(int arg0) {
 		this.data[this.pos++] = (byte) (128 - arg0);
 	}
 
 	@ObfuscatedName("jd.g(II)V")
-	public final void method548(int arg0) {
+	public final void p2_alt2(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 >> 8);
 		this.data[this.pos++] = (byte) (arg0 + 128);
 	}
 
 	@ObfuscatedName("jd.g(B)I")
-	public final int method549() {
+	public final int g4_alt2() {
 		this.pos += 4;
 		return (this.data[this.pos - 3] & 0xFF) + (((this.data[this.pos - 2] & 0xFF) << 24) - (-((this.data[this.pos - 1] & 0xFF) << 16) - ((this.data[this.pos - 4] & 0xFF) << 8)));
 	}
@@ -379,11 +379,11 @@ public class Packet extends Linkable {
 		byte[] var7 = var6.toByteArray();
 		this.pos = 0;
 		this.p1(var7.length);
-		this.method543(var7.length, var7);
+		this.pdata(var7.length, var7);
 	}
 
 	@ObfuscatedName("jd.i(II)V")
-	public final void method553(int arg0) {
+	public final void p4_alt3(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 >> 16);
 		this.data[this.pos++] = (byte) (arg0 >> 24);
 		this.data[this.pos++] = (byte) arg0;
@@ -416,7 +416,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("jd.c(IB)V")
-	public final void method556(int arg0) {
+	public final void p4_alt2(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 >> 8);
 		this.data[this.pos++] = (byte) arg0;
 		this.data[this.pos++] = (byte) (arg0 >> 24);

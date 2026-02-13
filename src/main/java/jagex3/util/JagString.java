@@ -186,7 +186,7 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("wa.a(Lec;BLjd;)I")
 	public static int method1194(JagString arg0, Packet arg1) {
 		int var2 = arg1.pos;
-		arg1.method545(arg0.length);
+		arg1.psmart(arg0.length);
 		arg1.pos += WordPack.field2088.method75(0, arg0.length, arg1.pos, arg0.field618, arg1.data);
 		return arg1.pos - var2;
 	}
@@ -665,7 +665,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("ec.e(B)Lec;")
-	public JagString method264() {
+	public JagString toScreenName() {
 		JagString var1 = new JagString();
 		var1.length = this.length;
 		boolean var2 = true;
