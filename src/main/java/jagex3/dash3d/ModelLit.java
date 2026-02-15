@@ -126,7 +126,7 @@ public final class ModelLit extends ModelSource {
 	public static int[] field2355 = new int[1600];
 
 	@ObfuscatedName("od.Pb")
-	public static int[] field2369 = Pix3D.field123;
+	public static int[] field2369 = Pix3D.colourTable;
 
 	@ObfuscatedName("od.Qb")
 	public static boolean[] field2370 = new boolean[4096];
@@ -1067,7 +1067,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.g()I")
-	public int method816() {
+	public int getRadiusCylinder() {
 		this.calcBoundingCylinder();
 		return this.field2329;
 	}

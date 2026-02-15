@@ -30,4 +30,12 @@ public class WordPack {
 	public static void setHuffman(Huffman arg0) {
 		field2088 = arg0;
 	}
+
+    @ObfuscatedName("wa.a(Lec;BLjd;)I")
+    public static int pack(JagString arg0, Packet arg1) {
+        int var2 = arg1.pos;
+        arg1.psmart(arg0.length);
+        arg1.pos += field2088.method75(0, arg0.length, arg1.pos, arg0.data, arg1.data);
+        return arg1.pos - var2;
+    }
 }

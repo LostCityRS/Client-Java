@@ -379,7 +379,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.b(IIII)V")
-	public void method1122(int arg0, int arg1, int arg2, int arg3) {
+	public void setLayer(int arg0, int arg1, int arg2, int arg3) {
 		Square var5 = this.levelTiles[arg0][arg1][arg2];
 		if (var5 != null) {
 			this.levelTiles[arg0][arg1][arg2].field3550 = arg3;
@@ -714,7 +714,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.a(IIIILdd;II)V")
-	public void method1138(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6) {
+	public void setGroundDecor(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6) {
 		if (arg4 == null) {
 			return;
 		}
@@ -756,7 +756,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.l(III)V")
-	public void method1140() {
+	public void shareLight() {
 		for (int var1 = 0; var1 < this.maxTileLevel; var1++) {
 			for (int var2 = 0; var2 < this.maxTileX; var2++) {
 				for (int var3 = 0; var3 < this.maxTileZ; var3++) {
@@ -871,7 +871,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.a(IIIIIIIIIIIIIIIIIIII)V")
-	public void method1144(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
+	public void setGround(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
 		if (arg3 == 0) {
 			QuickGround var21 = new QuickGround(arg10, arg11, arg12, arg13, -1, arg18, false);
 			for (int var22 = arg0; var22 >= 0; var22--) {
@@ -1447,7 +1447,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.a(IIIIIILdd;III)Z")
-	public boolean method1151(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, ModelSource arg6, int arg7, int arg8, int arg9) {
+	public boolean addScenery(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, ModelSource arg6, int arg7, int arg8, int arg9) {
 		if (arg6 == null) {
 			return true;
 		} else {
@@ -1458,7 +1458,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.e(IIII)V")
-	public void method1152(int arg0, int arg1, int arg2, int arg3) {
+	public void setDecorOffset(int arg0, int arg1, int arg2, int arg3) {
 		Square var5 = this.levelTiles[arg0][arg1][arg2];
 		if (var5 == null) {
 			return;
@@ -1696,7 +1696,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.b(II)V")
-	public void method1157(int arg0, int arg1) {
+	public void pushDown(int arg0, int arg1) {
 		Square var3 = this.levelTiles[0][arg0][arg1];
 		for (int var4 = 0; var4 < 3; var4++) {
 			Square var5 = this.levelTiles[var4][arg0][arg1] = this.levelTiles[var4 + 1][arg0][arg1];
@@ -1718,7 +1718,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.a(IIIILdd;Ldd;IIIIII)V")
-	public void method1158(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, ModelSource arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
+	public void setDecor(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, ModelSource arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 		if (arg4 == null) {
 			return;
 		}

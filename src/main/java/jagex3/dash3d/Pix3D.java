@@ -56,7 +56,7 @@ public final class Pix3D extends Pix2D {
 	public static int[] sinTable = new int[2048];
 
 	@ObfuscatedName("af.Z")
-	public static int[] field123 = new int[65536];
+	public static int[] colourTable = new int[65536];
 
 	@ObfuscatedName("af.O")
 	public static int maxY;
@@ -509,7 +509,7 @@ public final class Pix3D extends Pix2D {
 			int var25 = arg3 - arg2;
 			if (trans == 0) {
 				do {
-					arg0[var6++] = field123[var7 >> 8];
+					arg0[var6++] = colourTable[var7 >> 8];
 					var7 += arg5;
 					var25--;
 				} while (var25 > 0);
@@ -517,7 +517,7 @@ public final class Pix3D extends Pix2D {
 				int var26 = trans;
 				int var27 = 256 - trans;
 				do {
-					int var28 = field123[var7 >> 8];
+					int var28 = colourTable[var7 >> 8];
 					var7 += arg5;
 					int var29 = ((var28 & 0xFF00FF) * var27 >> 8 & 0xFF00FF) + ((var28 & 0xFF00) * var27 >> 8 & 0xFF00);
 					int var30 = arg0[var6];
@@ -532,7 +532,7 @@ public final class Pix3D extends Pix2D {
 		if (trans == 0) {
 			if (var8 > 0) {
 				do {
-					int var10 = field123[var7 >> 8];
+					int var10 = colourTable[var7 >> 8];
 					var7 += var9;
 					arg0[var6++] = var10;
 					arg0[var6++] = var10;
@@ -543,7 +543,7 @@ public final class Pix3D extends Pix2D {
 			}
 			int var11 = arg3 - arg2 & 0x3;
 			if (var11 > 0) {
-				int var12 = field123[var7 >> 8];
+				int var12 = colourTable[var7 >> 8];
 				do {
 					arg0[var6++] = var12;
 					var11--;
@@ -556,7 +556,7 @@ public final class Pix3D extends Pix2D {
 		int var14 = 256 - trans;
 		if (var8 > 0) {
 			do {
-				int var15 = field123[var7 >> 8];
+				int var15 = colourTable[var7 >> 8];
 				var7 += var9;
 				int var16 = ((var15 & 0xFF00FF) * var14 >> 8 & 0xFF00FF) + ((var15 & 0xFF00) * var14 >> 8 & 0xFF00);
 				int var17 = arg0[var6];
@@ -574,7 +574,7 @@ public final class Pix3D extends Pix2D {
 		if (var21 <= 0) {
 			return;
 		}
-		int var22 = field123[var7 >> 8];
+		int var22 = colourTable[var7 >> 8];
 		int var23 = ((var22 & 0xFF00FF) * var14 >> 8 & 0xFF00FF) + ((var22 & 0xFF00) * var14 >> 8 & 0xFF00);
 		do {
 			int var24 = arg0[var6];
@@ -3089,7 +3089,7 @@ public final class Pix3D extends Pix2D {
 				if (var31 == 0) {
 					var31 = 1;
 				}
-				field123[var4++] = var31;
+				colourTable[var4++] = var31;
 			}
 		}
 	}

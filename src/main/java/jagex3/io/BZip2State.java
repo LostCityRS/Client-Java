@@ -14,9 +14,6 @@ public final class BZip2State {
 	@ObfuscatedName("m.e")
 	public final byte[] field1926 = new byte[256];
 
-	@ObfuscatedName("m.f")
-	public static int[] field1927 = new int[] { 0, -1, 0, 1 };
-
 	@ObfuscatedName("m.g")
 	public final byte[] field1928 = new byte[4096];
 

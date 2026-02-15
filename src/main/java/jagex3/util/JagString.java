@@ -184,14 +184,6 @@ public final class JagString implements StringInterface {
 		return var1;
 	}
 
-	@ObfuscatedName("wa.a(Lec;BLjd;)I")
-	public static int method1194(JagString arg0, Packet arg1) {
-		int var2 = arg1.pos;
-		arg1.psmart(arg0.length);
-		arg1.pos += WordPack.field2088.method75(0, arg0.length, arg1.pos, arg0.data, arg1.data);
-		return arg1.pos - var2;
-	}
-
 	@ObfuscatedName("dd.a([BBII)Lec;")
 	public static JagString fromBytes(byte[] arg0, int arg1, int arg2) {
 		JagString var3 = new JagString();

@@ -697,121 +697,121 @@ public class Text {
 	@ObfuscatedName("sc.mb")
 	public static JagString field2950 = JagString.wrap("yellow:");
 	@ObfuscatedName("sc.jb")
-	public static JagString field2947 = field2950;
+	public static JagString CHATCOL_YELLOW = field2950;
 	@ObfuscatedName("sc.yb")
-	public static JagString field2962 = field2950;
+	public static JagString CHATCOL_YELLOW_GER = field2950;
 
 	@ObfuscatedName("nd.u")
 	public static JagString field2180 = JagString.wrap("red:");
 	@ObfuscatedName("nd.r")
-	public static JagString field2177 = field2180;
+	public static JagString CHATCOL_RED = field2180;
 	@ObfuscatedName("nd.d")
-	public static JagString field2163 = field2180;
+	public static JagString CHATCOL_RED_GER = field2180;
 
 	@ObfuscatedName("fb.K")
 	public static JagString field917 = JagString.wrap("green:");
 	@ObfuscatedName("fb.z")
-	public static JagString field906 = field917;
+	public static JagString CHATCOL_GREEN = field917;
 	@ObfuscatedName("fb.L")
-	public static JagString field918 = field917;
+	public static JagString CHATCOL_GREEN_GER = field917;
 
 	@ObfuscatedName("ve.v")
 	public static JagString field3473 = JagString.wrap("cyan:");
 	@ObfuscatedName("ve.l")
-	public static JagString field3463 = field3473;
+	public static JagString CHATCOL_CYAN = field3473;
 	@ObfuscatedName("ve.s")
-	public static JagString field3470 = field3473;
+	public static JagString CHATCOL_CYAN_GER = field3473;
 
 	@ObfuscatedName("se.T")
 	public static JagString field2995 = JagString.wrap("purple:");
 	@ObfuscatedName("se.S")
-	public static JagString field2994 = field2995;
+	public static JagString CHATCOL_PURPLE_GER = field2995;
 	@ObfuscatedName("se.Y")
-	public static JagString field3000 = field2995;
+	public static JagString CHATCOL_PURPLE = field2995;
 
 	@ObfuscatedName("ad.z")
 	public static JagString field108 = JagString.wrap("white:");
 	@ObfuscatedName("ad.A")
-	public static JagString field109 = field108;
+	public static JagString CHATCOL_WHITE_GER = field108;
 	@ObfuscatedName("ad.y")
-	public static JagString field107 = field108;
+	public static JagString CHATCOL_WHITE = field108;
 
 	@ObfuscatedName("de.p")
 	public static JagString field496 = JagString.wrap("flash1:");
 	@ObfuscatedName("de.h")
-	public static JagString field488 = field496;
+	public static JagString CHATEFFECT_FLASH1 = field496;
 	@ObfuscatedName("de.i")
-	public static JagString field489 = field496;
+	public static JagString CHATEFFECT_FLASH1_GER = field496;
 
 	@ObfuscatedName("fc.H")
 	public static JagString field943 = JagString.wrap("flash2:");
 	@ObfuscatedName("fc.G")
-	public static JagString field942 = field943;
+	public static JagString CHATEFFECT_FLASH2_GER = field943;
 	@ObfuscatedName("fc.u")
-	public static JagString field931 = field943;
+	public static JagString CHATEFFECT_FLASH2 = field943;
 
 	@ObfuscatedName("ad.h")
 	public static JagString field90 = JagString.wrap("flash3:");
 	@ObfuscatedName("ad.b")
-	public static JagString field84 = field90;
+	public static JagString CHATEFFECT_FLASH3 = field90;
 	@ObfuscatedName("ad.a")
-	public static JagString field83 = field90;
+	public static JagString CHATEFFECT_FLASH3_GER = field90;
 
 	@ObfuscatedName("gb.C")
 	public static JagString field1075 = JagString.wrap("glow1:");
 	@ObfuscatedName("gb.A")
-	public static JagString field1073 = field1075;
+	public static JagString CHATEFFECT_GLOW1 = field1075;
 	@ObfuscatedName("gb.B")
-	public static JagString field1074 = field1075;
+	public static JagString CHATEFFECT_GLOW1_GER = field1075;
 
 	@ObfuscatedName("te.e")
 	public static JagString field3177 = JagString.wrap("glow2:");
 	@ObfuscatedName("te.p")
-	public static JagString field3188 = field3177;
+	public static JagString CHATEFFECT_GLOW2 = field3177;
 	@ObfuscatedName("te.t")
-	public static JagString field3192 = field3177;
+	public static JagString CHATEFFECT_GLOW2_GER = field3177;
 
 	@ObfuscatedName("r.t")
 	public static JagString field2835 = JagString.wrap("glow3:");
 	@ObfuscatedName("r.i")
-	public static JagString field2824 = field2835;
+	public static JagString CHATEFFECT_GLOW3 = field2835;
 	@ObfuscatedName("r.c")
-	public static JagString field2818 = field2835;
+	public static JagString CHATEFFECT_GLOW3_GER = field2835;
 
 	@ObfuscatedName("j.Vb")
 	public static JagString field1432 = JagString.wrap("wave:");
 	@ObfuscatedName("j.cc")
-	public static JagString field1439 = field1432;
+	public static JagString CHATEFFECT_WAVE = field1432;
 	@ObfuscatedName("j.Wb")
-	public static JagString field1433 = field1432;
+	public static JagString CHATEFFECT_WAVE_GER = field1432;
 
 	@ObfuscatedName("we.o")
 	public static JagString field3622 = JagString.wrap("wave2:");
 	@ObfuscatedName("we.k")
-	public static JagString field3618 = field3622;
+	public static JagString CHATEFFECT_WAVE2 = field3622;
 	@ObfuscatedName("we.u")
-	public static JagString field3628 = field3622;
+	public static JagString CHATEFFECT_WAVE2_GER = field3622;
 
 	@ObfuscatedName("pb.Y")
 	public static JagString field2506 = JagString.wrap("shake:");
 	@ObfuscatedName("pb.xb")
-	public static JagString field2531 = field2506;
+	public static JagString CHATEFFECT_SHAKE_GER = field2506;
 	@ObfuscatedName("pb.qb")
-	public static JagString field2524 = field2506;
+	public static JagString CHATEFFECT_SHAKE = field2506;
 
 	@ObfuscatedName("rf.m")
 	public static JagString field2894 = JagString.wrap("scroll:");
 	@ObfuscatedName("rf.c")
-	public static JagString field2884 = field2894;
+	public static JagString CHATEFFECT_SCROLL = field2894;
 	@ObfuscatedName("rf.j")
-	public static JagString field2891 = field2894;
+	public static JagString CHATEFFECT_SCROLL_GER = field2894;
 
 	@ObfuscatedName("pb.nb")
 	public static JagString field2521 = JagString.wrap("slide:");
 	@ObfuscatedName("pb.pb")
-	public static JagString field2523 = field2521;
+	public static JagString CHATEFFECT_SLIDE = field2521;
 	@ObfuscatedName("pb.tb")
-	public static JagString field2527 = field2521;
+	public static JagString CHATEFFECT_SLIDE_GER = field2521;
 
 	// ----
 

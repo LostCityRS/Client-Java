@@ -78,7 +78,7 @@ public final class BgSound extends Linkable {
 	}
 
 	@ObfuscatedName("kf.a(IILhd;III)V")
-	public static void method603(int arg0, LocType arg1, int arg2, int arg3, int arg4) {
+	public static void addSound(int arg0, LocType arg1, int arg2, int arg3, int arg4) {
 		BgSound var5 = new BgSound();
 		var5.field2276 = arg4 * 128;
 		var5.field2275 = arg1.bgsound_sound;

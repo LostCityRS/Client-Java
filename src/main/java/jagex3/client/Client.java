@@ -238,13 +238,13 @@ public final class Client extends GameShell {
 	@ObfuscatedName("bf.s")
 	public static JagString[] field245 = new JagString[100];
 	@ObfuscatedName("f.kc")
-	public static JagString[] field832 = new JagString[100];
+	public static JagString[] chatText = new JagString[100];
 	@ObfuscatedName("q.Wc")
 	public static JagString[] field2610 = new JagString[100];
 	@ObfuscatedName("c.Pb")
 	public static int chatTransmitNum = 0;
 	@ObfuscatedName("da.S")
-	public static int field423 = 0;
+	public static int chatHistoryLength = 0;
 	@ObfuscatedName("qd.xc")
 	public static int transmitNum = 1;
 	@ObfuscatedName("we.e")
@@ -432,7 +432,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ke.d")
 	public static long[] messageIds = new long[100];
 	@ObfuscatedName("of.f")
-	public static long[] ignoreList = new long[100];
+	public static long[] ignoreUserhash = new long[100];
 	@ObfuscatedName("pb.W")
 	public static int ignoreCount = 0;
 	@ObfuscatedName("pb.gb")
@@ -560,9 +560,9 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ta.Y")
 	public static int orbitCameraYaw = 0;
 	@ObfuscatedName("de.m")
-	public static int field493 = 0;
+	public static int macroMinimapAngle = 0;
 	@ObfuscatedName("e.A")
-	public static int field527 = 0;
+	public static int macroMinimapZoom = 0;
 	@ObfuscatedName("tc.q")
 	public static int crossMode = 0;
 	@ObfuscatedName("wa.Z")
@@ -632,7 +632,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("lc.h")
 	public static int[] field1831 = new int[2000];
 	@ObfuscatedName("bc.c")
-	public static int field173 = 0;
+	public static int macroCameraAngle = 0;
 	@ObfuscatedName("be.F")
 	public static int macroCameraZ = 0;
 	@ObfuscatedName("ta.lb")
@@ -814,7 +814,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ab.u")
 	public static int runweight = 0;
 	@ObfuscatedName("kb.x")
-	public static JagString[] field1685 = new JagString[100];
+	public static JagString[] ignoreUsername = new JagString[100];
 	@ObfuscatedName("of.q")
 	public static JagString AUTO_TAG_COLOUR1 = JagString.wrap("<col=ff0000>");
 	@ObfuscatedName("tc.n")
@@ -2184,38 +2184,38 @@ public final class Client extends GameShell {
 													macroCameraZ += field553;
 												}
 												if ((var41 & 0x4) == 4) {
-													field173 += field194;
+													macroCameraAngle += field194;
 												}
 												if ((var41 & 0x1) == 1) {
 													macroCameraX += field1501;
 												}
 											}
-											if (field173 < -40) {
+											if (macroCameraAngle < -40) {
 												field194 = 1;
 											}
 											if (field1469 > 500) {
 												field1469 = 0;
 												int var42 = (int) (Math.random() * 8.0D);
 												if ((var42 & 0x1) == 1) {
-													field493 += field701;
+													macroMinimapAngle += field701;
 												}
 												if ((var42 & 0x2) == 2) {
-													field527 += field102;
+													macroMinimapZoom += field102;
 												}
 											}
 											if (macroCameraX < -50) {
 												field1501 = 2;
 											}
-											if (field527 < -20) {
+											if (macroMinimapZoom < -20) {
 												field102 = 1;
 											}
-											if (field527 > 10) {
+											if (macroMinimapZoom > 10) {
 												field102 = -1;
 											}
 											if (macroCameraX > 50) {
 												field1501 = -2;
 											}
-											if (field173 > 40) {
+											if (macroCameraAngle > 40) {
 												field194 = -1;
 											}
 											if (macroCameraZ < -55) {
@@ -2224,10 +2224,10 @@ public final class Client extends GameShell {
 											if (macroCameraZ > 55) {
 												field553 = -2;
 											}
-											if (field493 < -60) {
+											if (macroMinimapAngle < -60) {
 												field701 = 2;
 											}
-											if (field493 > 60) {
+											if (macroMinimapAngle > 60) {
 												field701 = -2;
 											}
 											if (noTimeoutTimer > 50) {
@@ -3610,7 +3610,7 @@ public final class Client extends GameShell {
 			}
 		}
 		for (int var4 = 0; var4 < ignoreCount; var4++) {
-			if (ignoreList[var4] == arg0) {
+			if (ignoreUserhash[var4] == arg0) {
 				addChat(JagString.join(new JagString[] { Text.field97, var2, Text.REMOVEIGNORE2}), 0, AUTO_EMPTY);
 				return;
 			}
@@ -3655,11 +3655,11 @@ public final class Client extends GameShell {
 			minimapDrawDot(arg2, arg1, arg3, arg4, arg0);
 			return;
 		}
-		int var6 = orbitCameraYaw + field493 & 0x7FF;
+		int var6 = orbitCameraYaw + macroMinimapAngle & 0x7FF;
 		int var7 = Pix3D.cosTable[var6];
-		int var8 = var7 * 256 / (field527 + 256);
+		int var8 = var7 * 256 / (macroMinimapZoom + 256);
 		int var9 = Pix3D.sinTable[var6];
-		int var10 = var9 * 256 / (field527 + 256);
+		int var10 = var9 * 256 / (macroMinimapZoom + 256);
 		int var11 = arg0 * var8 + arg3 * var10 >> 16;
 		int var12 = arg3 * var8 - arg0 * var10 >> 16;
 		double var13 = Math.atan2((double) var11, (double) var12);
@@ -3680,11 +3680,11 @@ public final class Client extends GameShell {
 		}
 		var2 -= 73;
 		var3 -= 75;
-		int var4 = orbitCameraYaw + field493 & 0x7FF;
+		int var4 = orbitCameraYaw + macroMinimapAngle & 0x7FF;
 		int var5 = Pix3D.sinTable[var4];
-		int var6 = (field527 + 256) * var5 >> 8;
+		int var6 = (macroMinimapZoom + 256) * var5 >> 8;
 		int var7 = Pix3D.cosTable[var4];
-		int var8 = (field527 + 256) * var7 >> 8;
+		int var8 = (macroMinimapZoom + 256) * var7 >> 8;
 		int var9 = var3 * var8 - var2 * var6 >> 11;
 		int var10 = var6 * var3 + var2 * var8 >> 11;
 		int var11 = localPlayer.z - var9 >> 7;
@@ -3695,8 +3695,8 @@ public final class Client extends GameShell {
 			out.p1(var3);
 			out.p2(orbitCameraYaw);
 			out.p1(57);
-			out.p1(field493);
-			out.p1(field527);
+			out.p1(macroMinimapAngle);
+			out.p1(macroMinimapZoom);
 			out.p1(89);
 			out.p2(localPlayer.x);
 			out.p2(localPlayer.z);
@@ -3810,17 +3810,19 @@ public final class Client extends GameShell {
 	}
 
 	@ObfuscatedName("pf.b(Z)V")
-	public static void method872() {
+	public static void getSpecialArea() {
 		chatDisabled = 0;
-		int var0 = (localPlayer.x >> 7) + mapBuildBaseX;
-		int var1 = (localPlayer.z >> 7) + mapBuildBaseZ;
-		if (var0 >= 3053 && var0 <= 3156 && var1 >= 3056 && var1 <= 3136) {
+
+		int x = (localPlayer.x >> 7) + mapBuildBaseX;
+		int z = (localPlayer.z >> 7) + mapBuildBaseZ;
+
+		if (x >= 3053 && x <= 3156 && z >= 3056 && z <= 3136) {
+			chatDisabled = 1;
+		} else if (x >= 3072 && x <= 3118 && z >= 9492 && z <= 9535) {
 			chatDisabled = 1;
 		}
-		if (var0 >= 3072 && var0 <= 3118 && var1 >= 9492 && var1 <= 9535) {
-			chatDisabled = 1;
-		}
-		if (chatDisabled == 1 && var0 >= 3139 && var0 <= 3199 && var1 >= 3008 && var1 <= 3062) {
+
+		if (chatDisabled == 1 && x >= 3139 && x <= 3199 && z >= 3008 && z <= 3062) {
 			chatDisabled = 0;
 		}
 	}
@@ -4364,11 +4366,11 @@ public final class Client extends GameShell {
 			return;
 		}
 		for (int var2 = 0; var2 < ignoreCount; var2++) {
-			if (arg0 == ignoreList[var2]) {
+			if (arg0 == ignoreUserhash[var2]) {
 				ignoreCount--;
 				for (int var3 = var2; var3 < ignoreCount; var3++) {
-					ignoreList[var3] = ignoreList[var3 + 1];
-					field1685[var3] = field1685[var3 + 1];
+					ignoreUserhash[var3] = ignoreUserhash[var3 + 1];
+					ignoreUsername[var3] = ignoreUsername[var3 + 1];
 				}
 				friendTransmitNum = transmitNum;
 				out.p1Enc(239);
@@ -4741,7 +4743,7 @@ public final class Client extends GameShell {
 		addMapAnim();
 		if (!cinemaCam) {
 			int var4 = orbitCameraPitch;
-			int var5 = orbitCameraYaw + field173 & 0x7FF;
+			int var5 = orbitCameraYaw + macroCameraAngle & 0x7FF;
 			if (var4 < cameraPitchClamp / 256) {
 				var4 = cameraPitchClamp / 256;
 			}
@@ -4976,8 +4978,8 @@ public final class Client extends GameShell {
 				// UPDATE_IGNORELIST
 				ignoreCount = psize / 8;
 				for (int var11 = 0; var11 < ignoreCount; var11++) {
-					ignoreList[var11] = in.g8();
-					field1685[var11] = JString.toRawUsername(ignoreList[var11]);
+					ignoreUserhash[var11] = in.g8();
+					ignoreUsername[var11] = JString.toRawUsername(ignoreUserhash[var11]);
 				}
 				friendTransmitNum = transmitNum;
 
@@ -5089,7 +5091,7 @@ public final class Client extends GameShell {
 					boolean var29 = false;
 					long var30 = var28.toUserhash();
 					for (int var32 = 0; var32 < ignoreCount; var32++) {
-						if (var30 == ignoreList[var32]) {
+						if (var30 == ignoreUserhash[var32]) {
 							var29 = true;
 							break;
 						}
@@ -5102,7 +5104,7 @@ public final class Client extends GameShell {
 					JagString var34 = var27.substring(0, var27.indexOf(AUTO_COLON));
 					long var35 = var34.toUserhash();
 					for (int var37 = 0; var37 < ignoreCount; var37++) {
-						if (ignoreList[var37] == var35) {
+						if (ignoreUserhash[var37] == var35) {
 							var33 = true;
 							break;
 						}
@@ -5115,7 +5117,7 @@ public final class Client extends GameShell {
 					boolean var47 = false;
 					long var48 = var46.toUserhash();
 					for (int var50 = 0; var50 < ignoreCount; var50++) {
-						if (ignoreList[var50] == var48) {
+						if (ignoreUserhash[var50] == var48) {
 							var47 = true;
 							break;
 						}
@@ -5129,7 +5131,7 @@ public final class Client extends GameShell {
 					long var42 = var41.toUserhash();
 					boolean var44 = false;
 					for (int var45 = 0; var45 < ignoreCount; var45++) {
-						if (var42 == ignoreList[var45]) {
+						if (var42 == ignoreUserhash[var45]) {
 							var44 = true;
 							break;
 						}
@@ -5254,7 +5256,7 @@ public final class Client extends GameShell {
 				}
 				if (var76 <= 1) {
 					for (int var80 = 0; var80 < ignoreCount; var80++) {
-						if (var67 == ignoreList[var80]) {
+						if (var67 == ignoreUserhash[var80]) {
 							var71 = true;
 							break;
 						}
@@ -5628,7 +5630,7 @@ public final class Client extends GameShell {
 				}
 				if (var138 <= 1) {
 					for (int var140 = 0; var140 < ignoreCount; var140++) {
-						if (var129 == ignoreList[var140]) {
+						if (var129 == ignoreUserhash[var140]) {
 							var137 = true;
 							break;
 						}
@@ -6737,10 +6739,10 @@ public final class Client extends GameShell {
 		if (minimapState == 2 || minimapState == 5) {
 			Pix2D.fillScanLine(arg1 + 25, arg0 + 5, minimapMaskLineOffsets, minimapMaskLineLengths);
 		} else {
-			int var3 = field493 + orbitCameraYaw & 0x7FF;
+			int var3 = macroMinimapAngle + orbitCameraYaw & 0x7FF;
 			int var4 = localPlayer.x / 32 + 48;
 			int var5 = 464 - localPlayer.z / 32;
-			minimap.scanlineRotatePlotSprite(arg1 + 25, arg0 + 5, 146, 151, var4, var5, var3, field527 + 256, minimapMaskLineOffsets, minimapMaskLineLengths);
+			minimap.scanlineRotatePlotSprite(arg1 + 25, arg0 + 5, 146, 151, var4, var5, var3, macroMinimapZoom + 256, minimapMaskLineOffsets, minimapMaskLineLengths);
 			for (int var6 = 0; var6 < activeMapFunctionCount; var6++) {
 				int var7 = activeMapFunctionX[var6] * 4 + 2 - localPlayer.x / 32;
 				int var8 = activeMapFunctionZ[var6] * 4 + 2 - localPlayer.z / 32;
@@ -7871,14 +7873,14 @@ public final class Client extends GameShell {
 		for (int var4 = 99; var4 > 0; var4--) {
 			field347[var4] = field347[var4 - 1];
 			field245[var4] = field245[var4 - 1];
-			field832[var4] = field832[var4 - 1];
+			chatText[var4] = chatText[var4 - 1];
 			field2610[var4] = field2610[var4 - 1];
 		}
 		chatTransmitNum = transmitNum;
 		field245[0] = arg0;
-		field423++;
+		chatHistoryLength++;
 		field347[0] = arg1;
-		field832[0] = arg2;
+		chatText[0] = arg2;
 		field2610[0] = arg3;
 	}
 
@@ -8026,7 +8028,7 @@ public final class Client extends GameShell {
 				long var13 = arg0.name.toUserhash();
 				if (var9 <= 1) {
 					for (int var15 = 0; var15 < ignoreCount; var15++) {
-						if (var13 == ignoreList[var15]) {
+						if (var13 == ignoreUserhash[var15]) {
 							var12 = true;
 							break;
 						}
@@ -9129,7 +9131,7 @@ public final class Client extends GameShell {
 		}
 		JagString var2 = JString.toRawUsername(arg0).toScreenName();
 		for (int var3 = 0; var3 < ignoreCount; var3++) {
-			if (ignoreList[var3] == arg0) {
+			if (ignoreUserhash[var3] == arg0) {
 				addChat(JagString.join(new JagString[] { var2, Text.IGNORELISTDUPE}), 0, AUTO_EMPTY);
 				return;
 			}
@@ -9144,8 +9146,8 @@ public final class Client extends GameShell {
 			addChat(Text.IGNORECANTADDSELF, 0, AUTO_EMPTY);
 			return;
 		}
-		ignoreList[ignoreCount] = arg0;
-		field1685[ignoreCount++] = JString.toRawUsername(arg0);
+		ignoreUserhash[ignoreCount] = arg0;
+		ignoreUsername[ignoreCount++] = JString.toRawUsername(arg0);
 		friendTransmitNum = transmitNum;
 		out.p1Enc(38);
 		out.p8(arg0);
@@ -9173,14 +9175,14 @@ public final class Client extends GameShell {
 		ptype = -1;
 		ClientMouseListener.setIdleTimer(0);
 		for (int var0 = 0; var0 < 100; var0++) {
-			field832[var0] = null;
+			chatText[var0] = null;
 		}
 		macroCameraZ = (int) (Math.random() * 110.0D) - 55;
 		npcCount = 0;
 		playerCount = 0;
 		minimapFlagX = 0;
-		field493 = (int) (Math.random() * 120.0D) - 60;
-		field173 = (int) (Math.random() * 80.0D) - 40;
+		macroMinimapAngle = (int) (Math.random() * 120.0D) - 60;
+		macroCameraAngle = (int) (Math.random() * 80.0D) - 40;
 		macroCameraX = (int) (Math.random() * 100.0D) - 50;
 		minimapLevel = -1;
 		waveCount = 0;
@@ -9188,9 +9190,9 @@ public final class Client extends GameShell {
 		orbitCameraYaw = (int) (Math.random() * 20.0D) - 10 & 0x7FF;
 		minimapFlagZ = 0;
 		minimapState = 0;
-		field527 = (int) (Math.random() * 30.0D) - 20;
+		macroMinimapZoom = (int) (Math.random() * 30.0D) - 20;
 		targetMode = false;
-		field423 = 0;
+		chatHistoryLength = 0;
 		for (int var1 = 0; var1 < 2048; var1++) {
 			players[var1] = null;
 			playerAppearanceBuffer[var1] = null;
@@ -9729,7 +9731,7 @@ public final class Client extends GameShell {
 			cross[crossCycle / 100 + 4].plotSprite(crossX - 8, crossY + -8);
 		}
 
-		method872();
+		getSpecialArea();
 
 		if (showFps) {
 			int var4 = arg2 + 507;
@@ -10247,12 +10249,12 @@ public final class Client extends GameShell {
 	}
 
 	@ObfuscatedName("q.a(BLec;)Z")
-	public static boolean method876(JagString arg0) {
+	public static boolean isIgnored(JagString arg0) {
 		if (arg0 == null) {
 			return false;
 		}
 		for (int var1 = 0; var1 < ignoreCount; var1++) {
-			if (arg0.equalsIgnoreCase(field1685[var1])) {
+			if (arg0.equalsIgnoreCase(ignoreUsername[var1])) {
 				return true;
 			}
 		}
@@ -10387,15 +10389,15 @@ public final class Client extends GameShell {
 		if (arg3 == null) {
 			return;
 		}
-		int var5 = field493 + orbitCameraYaw & 0x7FF;
+		int var5 = macroMinimapAngle + orbitCameraYaw & 0x7FF;
 		int var6 = arg4 * arg4 + arg2 * arg2;
 		if (var6 > 6400) {
 			return;
 		}
 		int var7 = Pix3D.sinTable[var5];
-		int var8 = var7 * 256 / (field527 + 256);
+		int var8 = var7 * 256 / (macroMinimapZoom + 256);
 		int var9 = Pix3D.cosTable[var5];
-		int var10 = var9 * 256 / (field527 + 256);
+		int var10 = var9 * 256 / (macroMinimapZoom + 256);
 		int var11 = var10 * arg2 - arg4 * var8 >> 16;
 		int var12 = arg2 * var8 + var10 * arg4 >> 16;
 		if (var6 <= 2500) {

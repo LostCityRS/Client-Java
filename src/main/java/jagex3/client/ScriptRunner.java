@@ -14,6 +14,7 @@ import jagex3.jstring.JString;
 import jagex3.jstring.StringTools;
 import jagex3.util.JagString;
 import jagex3.var.VarCache;
+import jagex3.wordfilter2.WordPack;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -93,7 +94,7 @@ public class ScriptRunner {
 	@ObfuscatedName("mb.g")
 	public static JagString field1984 = JagString.wrap(")2");
 	@ObfuscatedName("tb.c")
-	public static JagString field3110 = JagString.wrap("::");
+	public static JagString AUTO_CHEATPREFIX = JagString.wrap("::");
 	@ObfuscatedName("qf.F")
 	public static JagString field2808 = JagString.wrap("Clientscript error )2 check log for details");
 	@ObfuscatedName("ee.V")
@@ -1536,19 +1537,20 @@ public class ScriptRunner {
 							isp--;
 							int var238 = intStack[isp];
 							if (Client.friendServerStatus != 0 && var238 < Client.ignoreCount) {
-								stringStack[ssp++] = JString.toRawUsername(Client.ignoreList[var238]).toScreenName();
+								stringStack[ssp++] = JString.toRawUsername(Client.ignoreUserhash[var238]).toScreenName();
 								continue;
 							}
 							stringStack[ssp++] = AUTO_EMPTY;
 							continue;
 						}
 						if (opcode == 3623) {
+							// ignore_test
 							ssp--;
 							JagString var239 = stringStack[ssp];
 							if (var239.startsWith(AUTO_TAG_IMG_0) || var239.startsWith(AUTO_TAG_IMG_1)) {
 								var239 = var239.substring(7);
 							}
-							intStack[isp++] = Client.method876(var239) ? 1 : 0;
+							intStack[isp++] = Client.isIgnored(var239) ? 1 : 0;
 							continue;
 						}
 						if (opcode == 3624) {
@@ -1940,13 +1942,16 @@ public class ScriptRunner {
 							continue;
 						}
 						if (opcode == 4207) {
+							// oc_members
 							isp--;
 							int var222 = intStack[isp];
+
 							intStack[isp++] = ObjType.list(var222).members ? 1 : 0;
 							continue;
 						}
 					} else if (opcode < 5100) {
 						if (opcode == 5000) {
+							// chat_getfilter_public
 							intStack[isp++] = Client.chatPublicMode;
 							continue;
 						}
@@ -1955,6 +1960,8 @@ public class ScriptRunner {
 							Client.chatPublicMode = intStack[isp];
 							Client.chatPrivateMode = intStack[isp + 1];
 							Client.chatTradeMode = intStack[isp + 2];
+
+							// SET_CHATFILTERSETTINGS
 							Client.out.p1Enc(69);
 							Client.out.p1(Client.chatPublicMode);
 							Client.out.p1(Client.chatPrivateMode);
@@ -1962,11 +1969,15 @@ public class ScriptRunner {
 							continue;
 						}
 						if (opcode == 5002) {
+							// chat_sendabusereport
 							ssp--;
 							JagString var188 = stringStack[ssp];
+
 							isp -= 2;
 							int var189 = intStack[isp + 1];
 							int var190 = intStack[isp];
+
+							// SEND_SNAPSHOT
 							Client.out.p1Enc(192);
 							Client.out.p8(var188.toUserhash());
 							Client.out.p1(var190 - 1);
@@ -1974,173 +1985,194 @@ public class ScriptRunner {
 							continue;
 						}
 						if (opcode == 5003) {
+							// chat_gethistory_bytypeandline
 							isp--;
 							int var191 = intStack[isp];
+
 							JagString var192 = null;
 							if (var191 < 100) {
-								var192 = Client.field832[var191];
+								var192 = Client.chatText[var191];
 							}
+
 							if (var192 == null) {
 								var192 = AUTO_EMPTY;
 							}
+
 							stringStack[ssp++] = var192;
 							continue;
 						}
 						if (opcode == 5004) {
+							// chat_gethistory_byuid
 							isp--;
 							int var193 = intStack[isp];
+
 							int var194 = -1;
-							if (var193 < 100 && Client.field832[var193] != null) {
+							if (var193 < 100 && Client.chatText[var193] != null) {
 								var194 = Client.field347[var193];
 							}
+
 							intStack[isp++] = var194;
 							continue;
 						}
 						if (opcode == 5005) {
+							// chat_getfilter_private
 							intStack[isp++] = Client.chatPrivateMode;
 							continue;
 						}
 						if (opcode == 5008) {
+							// chat_sendpublic
 							ssp--;
 							JagString var195 = stringStack[ssp];
-							if (var195.startsWith(field3110)) {
+
+							if (var195.startsWith(AUTO_CHEATPREFIX)) {
 								Client.doCheat(var195);
 							} else {
 								JagString var196 = var195.toLowerCase();
 								byte var197 = 0;
 								byte var198 = 0;
-								if (var196.startsWith(Text.field2947)) {
+								if (var196.startsWith(Text.CHATCOL_YELLOW)) {
 									var198 = 0;
-									var195 = var195.substring(Text.field2947.length());
-								} else if (var196.startsWith(Text.field2177)) {
+									var195 = var195.substring(Text.CHATCOL_YELLOW.length());
+								} else if (var196.startsWith(Text.CHATCOL_RED)) {
 									var198 = 1;
-									var195 = var195.substring(Text.field2177.length());
-								} else if (var196.startsWith(Text.field906)) {
-									var195 = var195.substring(Text.field906.length());
+									var195 = var195.substring(Text.CHATCOL_RED.length());
+								} else if (var196.startsWith(Text.CHATCOL_GREEN)) {
+									var195 = var195.substring(Text.CHATCOL_GREEN.length());
 									var198 = 2;
-								} else if (var196.startsWith(Text.field3463)) {
+								} else if (var196.startsWith(Text.CHATCOL_CYAN)) {
 									var198 = 3;
-									var195 = var195.substring(Text.field3463.length());
-								} else if (var196.startsWith(Text.field3000)) {
+									var195 = var195.substring(Text.CHATCOL_CYAN.length());
+								} else if (var196.startsWith(Text.CHATCOL_PURPLE)) {
 									var198 = 4;
-									var195 = var195.substring(Text.field3000.length());
-								} else if (var196.startsWith(Text.field107)) {
-									var195 = var195.substring(Text.field107.length());
+									var195 = var195.substring(Text.CHATCOL_PURPLE.length());
+								} else if (var196.startsWith(Text.CHATCOL_WHITE)) {
+									var195 = var195.substring(Text.CHATCOL_WHITE.length());
 									var198 = 5;
-								} else if (var196.startsWith(Text.field488)) {
+								} else if (var196.startsWith(Text.CHATEFFECT_FLASH1)) {
 									var198 = 6;
-									var195 = var195.substring(Text.field488.length());
-								} else if (var196.startsWith(Text.field931)) {
+									var195 = var195.substring(Text.CHATEFFECT_FLASH1.length());
+								} else if (var196.startsWith(Text.CHATEFFECT_FLASH2)) {
 									var198 = 7;
-									var195 = var195.substring(Text.field931.length());
-								} else if (var196.startsWith(Text.field84)) {
-									var195 = var195.substring(Text.field84.length());
+									var195 = var195.substring(Text.CHATEFFECT_FLASH2.length());
+								} else if (var196.startsWith(Text.CHATEFFECT_FLASH3)) {
+									var195 = var195.substring(Text.CHATEFFECT_FLASH3.length());
 									var198 = 8;
-								} else if (var196.startsWith(Text.field1073)) {
+								} else if (var196.startsWith(Text.CHATEFFECT_GLOW1)) {
 									var198 = 9;
-									var195 = var195.substring(Text.field1073.length());
-								} else if (var196.startsWith(Text.field3188)) {
+									var195 = var195.substring(Text.CHATEFFECT_GLOW1.length());
+								} else if (var196.startsWith(Text.CHATEFFECT_GLOW2)) {
 									var198 = 10;
-									var195 = var195.substring(Text.field3188.length());
-								} else if (var196.startsWith(Text.field2824)) {
+									var195 = var195.substring(Text.CHATEFFECT_GLOW2.length());
+								} else if (var196.startsWith(Text.CHATEFFECT_GLOW3)) {
 									var198 = 11;
-									var195 = var195.substring(Text.field2824.length());
+									var195 = var195.substring(Text.CHATEFFECT_GLOW3.length());
 								} else if (Client.lang != 0) {
-									if (var196.startsWith(Text.field2962)) {
+									if (var196.startsWith(Text.CHATCOL_YELLOW_GER)) {
 										var198 = 0;
-										var195 = var195.substring(Text.field2962.length());
-									} else if (var196.startsWith(Text.field2163)) {
-										var195 = var195.substring(Text.field2163.length());
+										var195 = var195.substring(Text.CHATCOL_YELLOW_GER.length());
+									} else if (var196.startsWith(Text.CHATCOL_RED_GER)) {
+										var195 = var195.substring(Text.CHATCOL_RED_GER.length());
 										var198 = 1;
-									} else if (var196.startsWith(Text.field918)) {
+									} else if (var196.startsWith(Text.CHATCOL_GREEN_GER)) {
 										var198 = 2;
-										var195 = var195.substring(Text.field918.length());
-									} else if (var196.startsWith(Text.field3470)) {
+										var195 = var195.substring(Text.CHATCOL_GREEN_GER.length());
+									} else if (var196.startsWith(Text.CHATCOL_CYAN_GER)) {
 										var198 = 3;
-										var195 = var195.substring(Text.field3470.length());
-									} else if (var196.startsWith(Text.field2994)) {
+										var195 = var195.substring(Text.CHATCOL_CYAN_GER.length());
+									} else if (var196.startsWith(Text.CHATCOL_PURPLE_GER)) {
 										var198 = 4;
-										var195 = var195.substring(Text.field2994.length());
-									} else if (var196.startsWith(Text.field109)) {
+										var195 = var195.substring(Text.CHATCOL_PURPLE_GER.length());
+									} else if (var196.startsWith(Text.CHATCOL_WHITE_GER)) {
 										var198 = 5;
-										var195 = var195.substring(Text.field109.length());
-									} else if (var196.startsWith(Text.field489)) {
-										var195 = var195.substring(Text.field489.length());
+										var195 = var195.substring(Text.CHATCOL_WHITE_GER.length());
+									} else if (var196.startsWith(Text.CHATEFFECT_FLASH1_GER)) {
+										var195 = var195.substring(Text.CHATEFFECT_FLASH1_GER.length());
 										var198 = 6;
-									} else if (var196.startsWith(Text.field942)) {
-										var195 = var195.substring(Text.field942.length());
+									} else if (var196.startsWith(Text.CHATEFFECT_FLASH2_GER)) {
+										var195 = var195.substring(Text.CHATEFFECT_FLASH2_GER.length());
 										var198 = 7;
-									} else if (var196.startsWith(Text.field83)) {
-										var195 = var195.substring(Text.field83.length());
+									} else if (var196.startsWith(Text.CHATEFFECT_FLASH3_GER)) {
+										var195 = var195.substring(Text.CHATEFFECT_FLASH3_GER.length());
 										var198 = 8;
-									} else if (var196.startsWith(Text.field1074)) {
+									} else if (var196.startsWith(Text.CHATEFFECT_GLOW1_GER)) {
 										var198 = 9;
-										var195 = var195.substring(Text.field1074.length());
-									} else if (var196.startsWith(Text.field3192)) {
-										var195 = var195.substring(Text.field3192.length());
+										var195 = var195.substring(Text.CHATEFFECT_GLOW1_GER.length());
+									} else if (var196.startsWith(Text.CHATEFFECT_GLOW2_GER)) {
+										var195 = var195.substring(Text.CHATEFFECT_GLOW2_GER.length());
 										var198 = 10;
-									} else if (var196.startsWith(Text.field2818)) {
+									} else if (var196.startsWith(Text.CHATEFFECT_GLOW3_GER)) {
 										var198 = 11;
-										var195 = var195.substring(Text.field2818.length());
+										var195 = var195.substring(Text.CHATEFFECT_GLOW3_GER.length());
 									}
 								}
+
 								JagString var199 = var195.toLowerCase();
-								if (var199.startsWith(Text.field1439)) {
-									var195 = var195.substring(Text.field1439.length());
+								if (var199.startsWith(Text.CHATEFFECT_WAVE)) {
+									var195 = var195.substring(Text.CHATEFFECT_WAVE.length());
 									var197 = 1;
-								} else if (var199.startsWith(Text.field3618)) {
+								} else if (var199.startsWith(Text.CHATEFFECT_WAVE2)) {
 									var197 = 2;
-									var195 = var195.substring(Text.field3618.length());
-								} else if (var199.startsWith(Text.field2524)) {
-									var195 = var195.substring(Text.field2524.length());
+									var195 = var195.substring(Text.CHATEFFECT_WAVE2.length());
+								} else if (var199.startsWith(Text.CHATEFFECT_SHAKE)) {
+									var195 = var195.substring(Text.CHATEFFECT_SHAKE.length());
 									var197 = 3;
-								} else if (var199.startsWith(Text.field2884)) {
+								} else if (var199.startsWith(Text.CHATEFFECT_SCROLL)) {
 									var197 = 4;
-									var195 = var195.substring(Text.field2884.length());
-								} else if (var199.startsWith(Text.field2523)) {
-									var195 = var195.substring(Text.field2523.length());
+									var195 = var195.substring(Text.CHATEFFECT_SCROLL.length());
+								} else if (var199.startsWith(Text.CHATEFFECT_SLIDE)) {
+									var195 = var195.substring(Text.CHATEFFECT_SLIDE.length());
 									var197 = 5;
 								} else if (Client.lang != 0) {
-									if (var199.startsWith(Text.field1433)) {
+									if (var199.startsWith(Text.CHATEFFECT_WAVE_GER)) {
 										var197 = 1;
-										var195 = var195.substring(Text.field1433.length());
-									} else if (var199.startsWith(Text.field3628)) {
+										var195 = var195.substring(Text.CHATEFFECT_WAVE_GER.length());
+									} else if (var199.startsWith(Text.CHATEFFECT_WAVE2_GER)) {
 										var197 = 2;
-										var195 = var195.substring(Text.field3628.length());
-									} else if (var199.startsWith(Text.field2531)) {
-										var195 = var195.substring(Text.field2531.length());
+										var195 = var195.substring(Text.CHATEFFECT_WAVE2_GER.length());
+									} else if (var199.startsWith(Text.CHATEFFECT_SHAKE_GER)) {
+										var195 = var195.substring(Text.CHATEFFECT_SHAKE_GER.length());
 										var197 = 3;
-									} else if (var199.startsWith(Text.field2891)) {
+									} else if (var199.startsWith(Text.CHATEFFECT_SCROLL_GER)) {
 										var197 = 4;
-										var195 = var195.substring(Text.field2891.length());
-									} else if (var199.startsWith(Text.field2527)) {
-										var195 = var195.substring(Text.field2527.length());
+										var195 = var195.substring(Text.CHATEFFECT_SCROLL_GER.length());
+									} else if (var199.startsWith(Text.CHATEFFECT_SLIDE_GER)) {
+										var195 = var195.substring(Text.CHATEFFECT_SLIDE_GER.length());
 										var197 = 5;
 									}
 								}
+
+								// MESSAGE_PUBLIC
 								Client.out.p1Enc(27);
 								Client.out.p1(0);
-								int var200 = Client.out.pos;
+								int start = Client.out.pos;
+
 								Client.out.p1(var198);
 								Client.out.p1(var197);
-								JagString.method1194(var195, Client.out);
-								Client.out.psize1(Client.out.pos - var200);
+								WordPack.pack(var195, Client.out);
+
+								Client.out.psize1(Client.out.pos - start);
 							}
 							continue;
 						}
 						if (opcode == 5009) {
+							// chat_sendprivate
 							ssp -= 2;
 							JagString var201 = stringStack[ssp];
 							JagString var202 = stringStack[ssp + 1];
+
+							// MESSAGE_PRIVATE
 							Client.out.p1Enc(164);
 							Client.out.p1(0);
-							int var203 = Client.out.pos;
+							int start = Client.out.pos;
+
 							Client.out.p8(var201.toUserhash());
-							JagString.method1194(var202, Client.out);
-							Client.out.psize1(Client.out.pos - var203);
+							WordPack.pack(var202, Client.out);
+
+							Client.out.psize1(Client.out.pos - start);
 							continue;
 						}
 						if (opcode == 5010) {
+							// chat_sendclan
 							isp--;
 							int var204 = intStack[isp];
 							JagString var205 = null;
@@ -2167,6 +2199,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (opcode == 5015) {
+							// chat_playername
 							JagString var208;
 							if (Client.localPlayer == null || Client.localPlayer.name == null) {
 								var208 = TitleScreen.loginUser;
@@ -2177,11 +2210,13 @@ public class ScriptRunner {
 							continue;
 						}
 						if (opcode == 5016) {
+							// chat_getfilter_trade
 							intStack[isp++] = Client.chatTradeMode;
 							continue;
 						}
 						if (opcode == 5017) {
-							intStack[isp++] = Client.field423;
+							// chat_gethistorylength
+							intStack[isp++] = Client.chatHistoryLength;
 							continue;
 						}
 					}
