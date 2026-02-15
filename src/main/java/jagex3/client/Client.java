@@ -262,7 +262,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("la.t")
 	public static JagString AUTO_EMPTY = JagString.wrap("");
 	@ObfuscatedName("la.r")
-	public static JagString field1784 = AUTO_EMPTY;
+	public static JagString ACTIVE_LANG = AUTO_EMPTY;
 	@ObfuscatedName("e.J")
 	public static JagString field536 = JagString.wrap("compass");
 	@ObfuscatedName("ab.w")
@@ -646,7 +646,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("td.bb")
 	public static int selectedCycle = 0;
 	@ObfuscatedName("de.j")
-	public static JagString field490 = JagString.wrap(")4lang)4de");
+	public static JagString AUTO_LANG_DE = JagString.wrap(")4lang)4de");
 	@ObfuscatedName("ha.B")
 	public static JagString field1155 = JagString.wrap("p11_full");
 	@ObfuscatedName("jb.k")
@@ -1060,6 +1060,7 @@ public final class Client extends GameShell {
 			idkDesign.idkChangeGender(true);
 		}
 		if (var1 == 326) {
+			// IDK_SAVEDESIGN
 			out.p1Enc(78);
 			idkDesign.idkSaveDesign(out);
 			return true;
@@ -1071,8 +1072,9 @@ public final class Client extends GameShell {
 	public static void main(String[] arg0) {
 		try {
 			if (arg0.length != 7) {
-				method717();
+				errorUsage();
 			}
+
 			worldid = Integer.parseInt(arg0[0]);
 			if (arg0[1].equals("live")) {
 				modewhere = 0;
@@ -1081,8 +1083,9 @@ public final class Client extends GameShell {
 			} else if (arg0[1].equals("local")) {
 				modewhere = 2;
 			} else {
-				method717();
+				errorUsage();
 			}
+
 			if (arg0[2].equals("live")) {
 				modewhat = 0;
 			} else if (arg0[2].equals("rc")) {
@@ -1090,43 +1093,49 @@ public final class Client extends GameShell {
 			} else if (arg0[2].equals("wip")) {
 				modewhat = 2;
 			} else {
-				method717();
+				errorUsage();
 			}
+
 			if (arg0[3].equals("lowmem")) {
 				setLowMem();
 			} else if (arg0[3].equals("highmem")) {
 				setHighMem();
 			} else {
-				method717();
+				errorUsage();
 			}
+
 			if (arg0[4].equals("free")) {
 				memServer = false;
 			} else if (arg0[4].equals("members")) {
 				memServer = true;
 			} else {
-				method717();
+				errorUsage();
 			}
+
 			if (arg0[5].equals("english")) {
 				lang = 0;
 			} else if (arg0[5].equals("german")) {
 				TextGerman.swapGerman();
 				lang = 1;
-				field1784 = field490;
+				ACTIVE_LANG = AUTO_LANG_DE;
 			} else {
-				method717();
+				errorUsage();
 			}
+
 			if (arg0[6].equals("game0")) {
 				modegame = 0;
 			} else if (arg0[6].equals("game1")) {
 				modegame = 1;
 			} else {
-				method717();
+				errorUsage();
 			}
+
 			loginHost = "127.0.0.1";
-			Client var1 = new Client();
-			var1.startApplication(16, 1, 468, "runescape", 765, 503, modewhat + 32);
-		} catch (Exception var3) {
-			JagException.report(null, var3);
+
+			Client app = new Client();
+			app.startApplication(16, 1, 468, "runescape", 765, 503, modewhat + 32);
+		} catch (Exception ignore) {
+			JagException.report(null, ignore);
 		}
 	}
 
@@ -1816,13 +1825,18 @@ public final class Client extends GameShell {
 				showObject(var50, var49);
 			}
 		}
+
 		doAudio();
 		locChangePostBuildCorrect();
+
 		LocType.mc1.clear();
+
 		if (GameShell.frame != null) {
+			// WINDOW_STATUS
 			out.p1Enc(153);
 			out.p4(1057001181);
 		}
+
 		if (!regionmode) {
 			int var51 = (field1422 + 6) / 8;
 			int var52 = (field3251 + 6) / 8;
@@ -1954,8 +1968,6 @@ public final class Client extends GameShell {
 			if (ClientMouseListener.mouseClickButton == 2) {
 				var15 = 1;
 			}
-			// EVENT_MOUSE_CLICK
-			out.p1Enc(242);
 			int var16 = (int) var11;
 			if (var14 < 0) {
 				var14 = 0;
@@ -1963,6 +1975,9 @@ public final class Client extends GameShell {
 				var14 = 502;
 			}
 			int var17 = var14 * 765 + var13;
+
+			// EVENT_MOUSE_CLICK
+			out.p1Enc(242);
 			out.p4((var16 << 20) + ((var15 << 19) + var17));
 		}
 
@@ -2303,6 +2318,7 @@ public final class Client extends GameShell {
 
 		noTimeoutTimer++;
 		if (noTimeoutTimer > 50) {
+			// NO_TIMEOUT
 			out.p1Enc(232);
 		}
 
@@ -2703,7 +2719,7 @@ public final class Client extends GameShell {
 	}
 
 	@ObfuscatedName("na.a(I)V")
-	public static void method717() {
+	public static void errorUsage() {
 		System.out.println("Usage: worldid, [live/office/local], [live/rc/wip], [lowmem/highmem], [free/members], [english/german], [game0/game1]");
 		System.exit(1);
 	}
@@ -2880,14 +2896,17 @@ public final class Client extends GameShell {
 				var31 = 25;
 			}
 			if (arg10 == 0) {
+				// MOVE_GAMECLICK
 				out.p1Enc(184);
 				out.p1(var31 + var31 + 3);
 			}
 			if (arg10 == 1) {
+				// MOVE_MINIMAPCLICK
 				out.p1Enc(24);
 				out.p1(var31 + var31 + 17);
 			}
 			if (arg10 == 2) {
+				// MOVE_OPCLICK (custom name)
 				out.p1Enc(110);
 				out.p1(var31 + var31 + 3);
 			}
@@ -2920,15 +2939,19 @@ public final class Client extends GameShell {
 				tryMove(false, 0, localPlayer.routeZ[0], 0, 1, player.routeX[0], localPlayer.routeX[0], 0, player.routeZ[0], 1, 2);
 
 				if (arg0 == 1) {
+					// OPPLAYER1
 					out.p1Enc(35);
 					out.p2_alt1(playerIds[i]);
 				} else if (arg0 == 4) {
+					// OPPLAYER4
 					out.p1Enc(81);
 					out.p2_alt3(playerIds[i]);
 				} else if (arg0 == 6) {
+					// OPPLAYER6
 					out.p1Enc(193);
 					out.p2(playerIds[i]);
 				} else if (arg0 == 7) {
+					// OPPLAYER7
 					out.p1Enc(138);
 					out.p2_alt2(playerIds[i]);
 				}
@@ -2945,6 +2968,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("vc.a(JI)V")
 	public static void friendsChatJoinChat(long arg0) {
 		if (arg0 != 0L) {
+			// CLAN_JOINCHAT_LEAVECHAT
 			out.p1Enc(23);
 			out.p8(arg0);
 		}
@@ -3672,6 +3696,8 @@ public final class Client extends GameShell {
 		field103[friendCount] = 0;
 		friendTransmitNum = transmitNum;
 		friendCount++;
+
+		// FRIENDLIST_ADD
 		out.p1Enc(28);
 		out.p8(arg0);
 	}
@@ -3690,6 +3716,7 @@ public final class Client extends GameShell {
 			var1++;
 		}
 		if (friendChatList.length > var1 && friendChatList[var1] != null) {
+			// CLAN_KICKUSER
 			out.p1Enc(194);
 			out.p8(friendChatList[var1].key);
 		}
@@ -4408,7 +4435,7 @@ public final class Client extends GameShell {
 	}
 
 	@ObfuscatedName("de.a(IJ)V")
-	public static void delIgnoore(long arg0) {
+	public static void delIgnore(long arg0) {
 		if (arg0 == 0L) {
 			return;
 		}
@@ -4420,6 +4447,8 @@ public final class Client extends GameShell {
 					ignoreUsername[var3] = ignoreUsername[var3 + 1];
 				}
 				friendTransmitNum = transmitNum;
+
+				// IGNORELIST_DEL
 				out.p1Enc(239);
 				out.p8(arg0);
 				break;
@@ -6997,6 +7026,7 @@ public final class Client extends GameShell {
 		if (var4 == null) {
 			return;
 		}
+
 		if (var4.onop != null) {
 			HookReq var5 = new HookReq();
 			var5.component = var4;
@@ -7005,62 +7035,64 @@ public final class Client extends GameShell {
 			var5.onop = var4.onop;
 			ScriptRunner.executeScript(var5);
 		}
+
 		boolean var6 = true;
 		if (var4.clientCode > 0) {
 			var6 = clientButton(var4);
 		}
-		if (!var6 || !ServerActive.hasOp(getActive(var4), arg0 - 1)) {
-			return;
-		}
-		if (arg0 == 1) {
-			out.p1Enc(221);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 2) {
-			out.p1Enc(108);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 3) {
-			out.p1Enc(181);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 4) {
-			out.p1Enc(143);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 5) {
-			out.p1Enc(167);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 6) {
-			out.p1Enc(175);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 7) {
-			out.p1Enc(162);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 8) {
-			out.p1Enc(98);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 9) {
-			out.p1Enc(103);
-			out.p4(arg1);
-			out.p2(arg3);
-		}
-		if (arg0 == 10) {
-			out.p1Enc(150);
-			out.p4(arg1);
-			out.p2(arg3);
+
+		if (var6 && ServerActive.hasOp(getActive(var4), arg0 - 1)) {
+			if (arg0 == 1) {
+				// IF_BUTTON1
+				out.p1Enc(221);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 2) {
+				// IF_BUTTON2
+				out.p1Enc(108);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 3) {
+				// IF_BUTTON3
+				out.p1Enc(181);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 4) {
+				// IF_BUTTON4
+				out.p1Enc(143);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 5) {
+				// IF_BUTTON5
+				out.p1Enc(167);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 6) {
+				// IF_BUTTON6
+				out.p1Enc(175);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 7) {
+				// IF_BUTTON7
+				out.p1Enc(162);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 8) {
+				// IF_BUTTON8
+				out.p1Enc(98);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 9) {
+				// IF_BUTTON9
+				out.p1Enc(103);
+				out.p4(arg1);
+				out.p2(arg3);
+			} else if (arg0 == 10) {
+				// IF_BUTTON10
+				out.p1Enc(150);
+				out.p4(arg1);
+				out.p2(arg3);
+			}
 		}
 	}
 
@@ -9197,9 +9229,13 @@ public final class Client extends GameShell {
 			addChat(Text.IGNORECANTADDSELF, 0, AUTO_EMPTY);
 			return;
 		}
+
 		ignoreUserhash[ignoreCount] = arg0;
 		ignoreUsername[ignoreCount++] = JString.toRawUsername(arg0);
+
 		friendTransmitNum = transmitNum;
+
+		// IGNORELIST_ADD
 		out.p1Enc(38);
 		out.p8(arg0);
 	}
@@ -9769,6 +9805,7 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("qd.g(I)V")
 	public static void friendsChatLeaveChat() {
+		// CLAN_JOINCHAT_LEAVECHAT
 		out.p1Enc(23);
 		out.p8((long) 0);
 	}
@@ -9818,6 +9855,8 @@ public final class Client extends GameShell {
 					field103[var3] = field103[var3 + 1];
 				}
 				friendTransmitNum = transmitNum;
+
+				// FRIENDLIST_DEL
 				out.p1Enc(135);
 				out.p8(arg0);
 				return;
@@ -10126,6 +10165,7 @@ public final class Client extends GameShell {
 				qaOpTest = true;
 			}
 		}
+
 		// CLIENT_CHEAT
 		out.p1Enc(89);
 		out.p1(arg0.length() - 1);
@@ -10940,7 +10980,7 @@ public final class Client extends GameShell {
 		if (var3 != null && var3.equals("1")) {
 			TextGerman.swapGerman();
 			lang = 1;
-			field1784 = field490;
+			ACTIVE_LANG = AUTO_LANG_DE;
 		}
 		String var4 = this.getParameter("game");
 		if (var4 != null && var4.equals("1")) {

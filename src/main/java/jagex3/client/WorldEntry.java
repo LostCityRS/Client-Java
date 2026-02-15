@@ -10,10 +10,10 @@ public final class WorldEntry {
 	public JagString host;
 
 	@ObfuscatedName("oe.e")
-	public int field2387;
+	public int country;
 
 	@ObfuscatedName("oe.h")
-	public int field2390;
+	public int players;
 
 	@ObfuscatedName("oe.k")
 	public boolean members;
@@ -22,6 +22,6 @@ public final class WorldEntry {
 	public int id;
 
 	@ObfuscatedName("oe.p")
-	public int field2398;
+	public int index;
 
 }

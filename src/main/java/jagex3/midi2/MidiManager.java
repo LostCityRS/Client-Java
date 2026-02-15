@@ -147,7 +147,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("kc.a(Lea;Lec;IZILec;I)V")
-	public static void method590(Js5 arg0, JagString arg1, JagString arg2) {
+	public static void swap(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.getGroupId(arg1);
 		int var4 = arg0.getFileId(arg2, var3);
 		swapSongs(arg0, 255, var4, var3);

@@ -1424,7 +1424,7 @@ public class ScriptRunner {
 							ssp--;
 							JagString var231 = stringStack[ssp];
 
-							Client.delIgnoore(var231.toUserhash());
+							Client.delIgnore(var231.toUserhash());
 							continue;
 						}
 						if (opcode == 3609) {

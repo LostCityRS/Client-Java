@@ -639,11 +639,11 @@ public class Text {
 	// ----
 
 	@ObfuscatedName("c.bb")
-	public static JagString field279 = JagString.wrap("World");
+	public static JagString AUTO_WORLD = JagString.wrap("World");
 	@ObfuscatedName("c.ob")
-	public static JagString field292 = field279;
+	public static JagString SL_WORLD = AUTO_WORLD;
 	@ObfuscatedName("c.H")
-	public static JagString field260 = field279;
+	public static JagString WORLD = AUTO_WORLD;
 
 	@ObfuscatedName("j.Qb")
 	public static JagString AUTO_FRIENDLISTFULL = JagString.wrap("Your friend list is full)3 Max of 100 for free users)1 and 200 for members");
