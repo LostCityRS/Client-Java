@@ -54,7 +54,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("nd.e")
 	public static final boolean showOpIndex = false;
 	@ObfuscatedName("nb.K")
-	public static final int field2121 = 50;
+	public static final int tooltipRedraw = 50;
 	@ObfuscatedName("client.gb")
 	public static PixFontGeneric p11;
 
@@ -642,9 +642,9 @@ public final class Client extends GameShell {
 	@ObfuscatedName("la.T")
 	public static boolean focusIn = true;
 	@ObfuscatedName("ad.g")
-	public static IfType field89;
+	public static IfType selectedCom;
 	@ObfuscatedName("td.bb")
-	public static int field3156 = 0;
+	public static int selectedCycle = 0;
 	@ObfuscatedName("de.j")
 	public static JagString field490 = JagString.wrap(")4lang)4de");
 	@ObfuscatedName("ha.B")
@@ -694,19 +694,19 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ee.eb")
 	public static IfType objDragCom;
 	@ObfuscatedName("pe.u")
-	public static int field2569 = 0;
+	public static int objDragCycles = 0;
 	@ObfuscatedName("qb.d")
-	public static int field2637 = 0;
+	public static int objGrabX = 0;
 	@ObfuscatedName("kc.e")
-	public static boolean field1693 = false;
+	public static boolean objGrabThreshold = false;
 	@ObfuscatedName("gf.e")
 	public static IfType hoveredSlotParent;
 	@ObfuscatedName("pc.B")
-	public static int field2542 = 0;
+	public static int objDragSlot = 0;
 	@ObfuscatedName("le.l")
-	public static int field1856 = 0;
+	public static int hoveredSlot = 0;
 	@ObfuscatedName("ha.K")
-	public static IfType hoveredCom;
+	public static IfType overCom;
 	@ObfuscatedName("kb.d")
 	public static IfType tooltipCom;
 	@ObfuscatedName("hd.Ob")
@@ -722,23 +722,23 @@ public final class Client extends GameShell {
 	@ObfuscatedName("bc.f")
 	public static LinkList hookRequests = new LinkList();
 	@ObfuscatedName("fb.R")
-	public static int field924 = 0;
+	public static int tooltipNum = 0;
 	@ObfuscatedName("cb.lb")
-	public static int[] field351 = new int[5];
+	public static int[] camShakeCycle = new int[5];
 	@ObfuscatedName("ja.D")
-	public static int field1469 = 0;
+	public static int macroMinimapCycle = 0;
 	@ObfuscatedName("m.l")
-	public static int field1933 = 0;
+	public static int macroCameraCycle = 0;
 	@ObfuscatedName("ea.p")
-	public static int field553 = 2;
+	public static int macroCameraXModifier = 2;
 	@ObfuscatedName("bc.x")
-	public static int field194 = 1;
+	public static int macroCameraZModifier = 1;
 	@ObfuscatedName("jc.N")
-	public static int field1501 = 2;
+	public static int macroCameraAngleModifier = 2;
 	@ObfuscatedName("ee.I")
-	public static int field701 = 2;
+	public static int macroMinimapAngleModifier = 2;
 	@ObfuscatedName("ad.t")
-	public static int field102 = 1;
+	public static int macroMinimapZoomModifier = 1;
 	@ObfuscatedName("wa.u")
 	public static int minimenuMouseOverY = -1;
 	@ObfuscatedName("ea.z")
@@ -922,7 +922,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ee.S")
 	public static JagString field711 = JagString.wrap("<col=ffffff> )4 ");
 	@ObfuscatedName("rf.d")
-	public static int field2885 = 0;
+	public static int bankArrangeMode = 0;
 	@ObfuscatedName("nd.a")
 	public static int objGrabY = 0;
 	@ObfuscatedName("ee.kb")
@@ -2011,47 +2011,53 @@ public final class Client extends GameShell {
 		movePlayers();
 		moveNpcs();
 		timeoutChat();
+
+		worldUpdateNum++;
+
 		if (crossMode != 0) {
 			crossCycle += 20;
 			if (crossCycle >= 400) {
 				crossMode = 0;
 			}
 		}
-		worldUpdateNum++;
-		if (field89 != null) {
-			field3156++;
-			if (field3156 >= 15) {
-				componentUpdated(field89);
-				field89 = null;
+
+		if (selectedCom != null) {
+			selectedCycle++;
+			if (selectedCycle >= 15) {
+				componentUpdated(selectedCom);
+				selectedCom = null;
 			}
 		}
+
 		if (objDragCom != null) {
 			componentUpdated(objDragCom);
-			field2569++;
-			if (field2637 + 5 < ClientMouseListener.mouseX || field2637 - 5 > ClientMouseListener.mouseX || ClientMouseListener.mouseY > objGrabY + 5 || ClientMouseListener.mouseY < objGrabY - 5) {
-				field1693 = true;
+			objDragCycles++;
+
+			if (objGrabX + 5 < ClientMouseListener.mouseX || objGrabX - 5 > ClientMouseListener.mouseX || ClientMouseListener.mouseY > objGrabY + 5 || ClientMouseListener.mouseY < objGrabY - 5) {
+				objGrabThreshold = true;
 			}
+
 			if (ClientMouseListener.mouseButton == 0) {
-				if (field1693 && field2569 >= 5) {
-					if (objDragCom == hoveredSlotParent && field2542 != field1856) {
+				if (objGrabThreshold && objDragCycles >= 5) {
+					if (objDragCom == hoveredSlotParent && objDragSlot != hoveredSlot) {
 						IfType var18 = objDragCom;
 						byte var19 = 0;
-						if (field2885 == 1 && var18.clientCode == 206) {
+						if (bankArrangeMode == 1 && var18.clientCode == 206) {
 							var19 = 1;
 						}
-						if (var18.linkObjType[field1856] <= 0) {
+						if (var18.linkObjType[hoveredSlot] <= 0) {
 							var19 = 0;
 						}
 						if (ServerActive.isObjReplaceEnabled(getActive(var18))) {
-							int var22 = field1856;
-							int var23 = field2542;
+							int var22 = hoveredSlot;
+							int var23 = objDragSlot;
 							var18.linkObjType[var22] = var18.linkObjType[var23];
 							var18.linkObjNumber[var22] = var18.linkObjNumber[var23];
 							var18.linkObjType[var23] = -1;
 							var18.linkObjNumber[var23] = 0;
 						} else if (var19 == 1) {
-							int var20 = field1856;
-							int var21 = field2542;
+							int var20 = hoveredSlot;
+							int var21 = objDragSlot;
 							while (var20 != var21) {
 								if (var21 > var20) {
 									var18.swapSlots(var21 - 1, var21);
@@ -2062,13 +2068,15 @@ public final class Client extends GameShell {
 								}
 							}
 						} else {
-							var18.swapSlots(field1856, field2542);
+							var18.swapSlots(hoveredSlot, objDragSlot);
 						}
+
+						// INV_BUTTOND
 						out.p1Enc(56);
-						out.p2_alt2(field1856);
+						out.p2_alt2(hoveredSlot);
 						out.p1_alt2(var19);
 						out.p4_alt3(objDragCom.parentId);
-						out.p2_alt1(field2542);
+						out.p2_alt1(objDragSlot);
 					}
 				} else if ((oneMouseButton == 1 || isAddFriendOption(menuNumEntries - 1)) && menuNumEntries > 2) {
 					openMenu();
@@ -2076,201 +2084,236 @@ public final class Client extends GameShell {
 					doAction(menuNumEntries - 1);
 				}
 				objDragCom = null;
-				field3156 = 10;
+				selectedCycle = 10;
 				ClientMouseListener.mouseClickButton = 0;
 			}
 		}
-		dragParentFound = false;
-		keypresses = 0;
+
+		IfType var24 = overCom;
+		IfType var25 = tooltipCom;
+		overCom = null;
+		tooltipCom = null;
 		dropCom = null;
 		dragging = false;
-		IfType var24 = hoveredCom;
-		hoveredCom = null;
-		IfType var25 = tooltipCom;
-		tooltipCom = null;
+		dragParentFound = false;
+
+		keypresses = 0;
 		while (ClientKeyboardListener.pollKey() && keypresses < 128) {
 			keypressKeycodes[keypresses] = ClientKeyboardListener.code;
 			keypressKeychars[keypresses] = ClientKeyboardListener.ch;
 			keypresses++;
 		}
+
 		loopInterface(toplevelinterface, 0, 0, 503, 0, 765, 0);
 		transmitNum++;
-		while (true) {
-			HookReq var26;
-			IfType var27;
-			IfType var28;
-			do {
-				var26 = (HookReq) hookRequestsTimer.popFront();
-				if (var26 == null) {
-					while (true) {
-						HookReq var29;
-						IfType var30;
-						IfType var31;
-						do {
-							var29 = (HookReq) hookRequestsMouseStop.popFront();
-							if (var29 == null) {
-								while (true) {
-									HookReq var32;
-									IfType var33;
-									IfType var34;
-									do {
-										var32 = (HookReq) hookRequests.popFront();
-										if (var32 == null) {
-											if (dragCom != null) {
-												loopIf3Drag();
-											}
-											if (World.groundX != -1) {
-												int var35 = World.groundX;
-												int var36 = World.groundZ;
-												boolean var37 = tryMove(true, 0, localPlayer.routeZ[0], 0, 0, var35, localPlayer.routeX[0], 0, var36, 0, 0);
-												World.groundX = -1;
-												if (var37) {
-													crossCycle = 0;
-													crossY = ClientMouseListener.mouseClickY;
-													crossMode = 1;
-													crossX = ClientMouseListener.mouseClickX;
-												}
-											}
-											mouseLoop();
-											if (var24 != hoveredCom) {
-												if (var24 != null) {
-													componentUpdated(var24);
-												}
-												if (hoveredCom != null) {
-													componentUpdated(hoveredCom);
-												}
-											}
-											if (tooltipCom != var25 && field924 == field2121) {
-												if (var25 != null) {
-													componentUpdated(var25);
-												}
-												if (tooltipCom != null) {
-													componentUpdated(tooltipCom);
-												}
-											}
-											if (tooltipCom == null) {
-												if (field924 > 0) {
-													field924--;
-												}
-											} else if (field2121 > field924) {
-												field924++;
-												if (field924 == field2121) {
-													componentUpdated(tooltipCom);
-												}
-											}
-											followCamera();
-											if (cinemaCam) {
-												cinemaCamera();
-											}
-											for (int var38 = 0; var38 < 5; var38++) {
-												int var10002 = field351[var38]++;
-											}
-											int var39 = ClientMouseListener.getIdleTimer();
-											int var40 = ClientKeyboardListener.getIdleTimer();
-											if (var39 > 4500 && var40 > 4500) {
-												rebootTimer = 250;
-												ClientMouseListener.setIdleTimer(4000);
 
-												// IDLE_TIMER
-												out.p1Enc(13);
-											}
-											field1469++;
-											field1933++;
-											noTimeoutTimer++;
-											if (field1933 > 500) {
-												field1933 = 0;
-												int var41 = (int) (Math.random() * 8.0D);
-												if ((var41 & 0x2) == 2) {
-													macroCameraZ += field553;
-												}
-												if ((var41 & 0x4) == 4) {
-													macroCameraAngle += field194;
-												}
-												if ((var41 & 0x1) == 1) {
-													macroCameraX += field1501;
-												}
-											}
-											if (macroCameraAngle < -40) {
-												field194 = 1;
-											}
-											if (field1469 > 500) {
-												field1469 = 0;
-												int var42 = (int) (Math.random() * 8.0D);
-												if ((var42 & 0x1) == 1) {
-													macroMinimapAngle += field701;
-												}
-												if ((var42 & 0x2) == 2) {
-													macroMinimapZoom += field102;
-												}
-											}
-											if (macroCameraX < -50) {
-												field1501 = 2;
-											}
-											if (macroMinimapZoom < -20) {
-												field102 = 1;
-											}
-											if (macroMinimapZoom > 10) {
-												field102 = -1;
-											}
-											if (macroCameraX > 50) {
-												field1501 = -2;
-											}
-											if (macroCameraAngle > 40) {
-												field194 = -1;
-											}
-											if (macroCameraZ < -55) {
-												field553 = 2;
-											}
-											if (macroCameraZ > 55) {
-												field553 = -2;
-											}
-											if (macroMinimapAngle < -60) {
-												field701 = 2;
-											}
-											if (macroMinimapAngle > 60) {
-												field701 = -2;
-											}
-											if (noTimeoutTimer > 50) {
-												out.p1Enc(232);
-											}
-											try {
-												if (stream != null && out.pos > 0) {
-													stream.write(out.data, out.pos);
-													out.pos = 0;
-													noTimeoutTimer = 0;
-													return;
-												}
-												return;
-											} catch (IOException var43) {
-												lostCon();
-												return;
-											}
-										}
-										var33 = var32.component;
-										if (var33.subId < 0) {
-											break;
-										}
-										var34 = IfType.get(var33.layerId);
-									} while (var34 == null || var34.subcomponents == null || var34.subcomponents.length <= var33.subId || var33 != var34.subcomponents[var33.subId]);
-									ScriptRunner.executeScript(var32);
-								}
-							}
-							var30 = var29.component;
-							if (var30.subId < 0) {
-								break;
-							}
-							var31 = IfType.get(var30.layerId);
-						} while (var31 == null || var31.subcomponents == null || var31.subcomponents.length <= var30.subId || var31.subcomponents[var30.subId] != var30);
-						ScriptRunner.executeScript(var29);
-					}
-				}
-				var27 = var26.component;
-				if (var27.subId < 0) {
+		// todo: revisit this code if something is broken -- tried to flatten the do { } while () blocks
+		while (true) {
+			HookReq req;
+			IfType child;
+			IfType com;
+
+			do {
+				req = (HookReq) hookRequestsTimer.popFront();
+				if (req == null) {
 					break;
 				}
-				var28 = IfType.get(var27.layerId);
-			} while (var28 == null || var28.subcomponents == null || var27.subId >= var28.subcomponents.length || var27 != var28.subcomponents[var27.subId]);
-			ScriptRunner.executeScript(var26);
+
+				child = req.component;
+				if (child.subId < 0) {
+					break;
+				}
+
+				com = IfType.get(child.layerId);
+			} while (com == null || com.subcomponents == null || child.subId >= com.subcomponents.length || child != com.subcomponents[child.subId]);
+			if (req != null) {
+				ScriptRunner.executeScript(req);
+				continue;
+			}
+
+			do {
+				req = (HookReq) hookRequestsMouseStop.popFront();
+				if (req == null) {
+					break;
+				}
+
+				child = req.component;
+				if (child.subId < 0) {
+					break;
+				}
+
+				com = IfType.get(child.layerId);
+			} while (com == null || com.subcomponents == null || com.subcomponents.length <= child.subId || com.subcomponents[child.subId] != child);
+			if (req != null) {
+				ScriptRunner.executeScript(req);
+				continue;
+			}
+
+			do {
+				req = (HookReq) hookRequests.popFront();
+				if (req == null) {
+					break;
+				}
+
+				child = req.component;
+				if (child.subId < 0) {
+					break;
+				}
+
+				com = IfType.get(child.layerId);
+			} while (com == null || com.subcomponents == null || com.subcomponents.length <= child.subId || child != com.subcomponents[child.subId]);
+			if (req != null) {
+				ScriptRunner.executeScript(req);
+				continue;
+			}
+
+			break;
+		}
+
+		if (dragCom != null) {
+			loopIf3Drag();
+		}
+
+		if (World.groundX != -1) {
+			int var35 = World.groundX;
+			int var36 = World.groundZ;
+			boolean var37 = tryMove(true, 0, localPlayer.routeZ[0], 0, 0, var35, localPlayer.routeX[0], 0, var36, 0, 0);
+			World.groundX = -1;
+			if (var37) {
+				crossCycle = 0;
+				crossY = ClientMouseListener.mouseClickY;
+				crossMode = 1;
+				crossX = ClientMouseListener.mouseClickX;
+			}
+		}
+
+		mouseLoop();
+
+		if (var24 != overCom) {
+			if (var24 != null) {
+				componentUpdated(var24);
+			}
+			if (overCom != null) {
+				componentUpdated(overCom);
+			}
+		}
+
+		if (tooltipCom != var25 && tooltipNum == tooltipRedraw) {
+			if (var25 != null) {
+				componentUpdated(var25);
+			}
+			if (tooltipCom != null) {
+				componentUpdated(tooltipCom);
+			}
+		}
+
+		if (tooltipCom == null) {
+			if (tooltipNum > 0) {
+				tooltipNum--;
+			}
+		} else if (tooltipRedraw > tooltipNum) {
+			tooltipNum++;
+			if (tooltipNum == tooltipRedraw) {
+				componentUpdated(tooltipCom);
+			}
+		}
+
+		followCamera();
+
+		if (cinemaCam) {
+			cinemaCamera();
+		}
+
+		for (int var38 = 0; var38 < 5; var38++) {
+			camShakeCycle[var38]++;
+		}
+
+		int var39 = ClientMouseListener.getIdleTimer();
+		int var40 = ClientKeyboardListener.getIdleTimer();
+		if (var39 > 4500 && var40 > 4500) {
+			rebootTimer = 250;
+			ClientMouseListener.setIdleTimer(4000);
+
+			// IDLE_TIMER
+			out.p1Enc(13);
+		}
+
+		macroCameraCycle++;
+		if (macroCameraCycle > 500) {
+			macroCameraCycle = 0;
+
+			int var41 = (int) (Math.random() * 8.0D);
+			if ((var41 & 0x2) == 2) {
+				macroCameraZ += macroCameraXModifier;
+			}
+			if ((var41 & 0x4) == 4) {
+				macroCameraAngle += macroCameraZModifier;
+			}
+			if ((var41 & 0x1) == 1) {
+				macroCameraX += macroCameraAngleModifier;
+			}
+		}
+
+		if (macroCameraX < -50) {
+			macroCameraAngleModifier = 2;
+		}
+		if (macroCameraX > 50) {
+			macroCameraAngleModifier = -2;
+		}
+
+		if (macroCameraZ < -55) {
+			macroCameraXModifier = 2;
+		}
+		if (macroCameraZ > 55) {
+			macroCameraXModifier = -2;
+		}
+
+		if (macroCameraAngle < -40) {
+			macroCameraZModifier = 1;
+		}
+		if (macroCameraAngle > 40) {
+			macroCameraZModifier = -1;
+		}
+
+		macroMinimapCycle++;
+		if (macroMinimapCycle > 500) {
+			macroMinimapCycle = 0;
+			int var42 = (int) (Math.random() * 8.0D);
+			if ((var42 & 0x1) == 1) {
+				macroMinimapAngle += macroMinimapAngleModifier;
+			}
+			if ((var42 & 0x2) == 2) {
+				macroMinimapZoom += macroMinimapZoomModifier;
+			}
+		}
+
+		if (macroMinimapAngle < -60) {
+			macroMinimapAngleModifier = 2;
+		}
+		if (macroMinimapAngle > 60) {
+			macroMinimapAngleModifier = -2;
+		}
+
+		if (macroMinimapZoom < -20) {
+			macroMinimapZoomModifier = 1;
+		}
+		if (macroMinimapZoom > 10) {
+			macroMinimapZoomModifier = -1;
+		}
+
+		noTimeoutTimer++;
+		if (noTimeoutTimer > 50) {
+			out.p1Enc(232);
+		}
+
+		try {
+			if (stream != null && out.pos > 0) {
+				stream.write(out.data, out.pos);
+				out.pos = 0;
+				noTimeoutTimer = 0;
+			}
+		} catch (IOException var43) {
+			lostCon();
 		}
 	}
 
@@ -4765,7 +4808,7 @@ public final class Client extends GameShell {
 		int var11 = camYaw;
 		for (int var12 = 0; var12 < 5; var12++) {
 			if (camShake[var12]) {
-				int var13 = (int) ((double) -field2653[var12] + (double) (field2653[var12] * 2 + 1) * Math.random() + Math.sin((double) field351[var12] * ((double) field3294[var12] / 100.0D)) * (double) camShakeRan[var12]);
+				int var13 = (int) ((double) -field2653[var12] + (double) (field2653[var12] * 2 + 1) * Math.random() + Math.sin((double) camShakeCycle[var12] * ((double) field3294[var12] / 100.0D)) * (double) camShakeRan[var12]);
 				if (var12 == 4) {
 					camPitch += var13;
 					if (camPitch < 128) {
@@ -6018,7 +6061,7 @@ public final class Client extends GameShell {
 				field2653[var200] = var201;
 				camShakeRan[var200] = var202;
 				field3294[var200] = var203;
-				field351[var200] = 0;
+				camShakeCycle[var200] = 0;
 
 				ptype = -1;
 				return true;
@@ -6303,7 +6346,7 @@ public final class Client extends GameShell {
 				minimapLoop(var10, var11);
 			} else {
 				if (var9.type == 0) {
-					if (!var9.v3 && hide(var9) && hoveredCom != var9) {
+					if (!var9.v3 && hide(var9) && overCom != var9) {
 						continue;
 					}
 
@@ -6541,9 +6584,9 @@ public final class Client extends GameShell {
 					}
 					if ((var9.overLayerId >= 0 || var9.colourOver != 0) && ClientMouseListener.mouseX >= var12 && var15 <= ClientMouseListener.mouseY && var13 > ClientMouseListener.mouseX && ClientMouseListener.mouseY < var14) {
 						if (var9.overLayerId < 0) {
-							hoveredCom = var9;
+							overCom = var9;
 						} else {
-							hoveredCom = arg0[var9.overLayerId];
+							overCom = arg0[var9.overLayerId];
 						}
 					}
 					if (var9.type == 8 && ClientMouseListener.mouseX >= var12 && var15 <= ClientMouseListener.mouseY && ClientMouseListener.mouseX < var13 && var14 > ClientMouseListener.mouseY) {
@@ -7248,7 +7291,7 @@ public final class Client extends GameShell {
 			oneMouseButton = var2;
 		}
 		if (var1 == 9) {
-			field2885 = var2;
+			bankArrangeMode = var2;
 		}
 	}
 
@@ -7258,7 +7301,7 @@ public final class Client extends GameShell {
 			IfType var3 = arg1[var2];
 			if (var3 != null && var3.layerId == arg0 && (!var3.v3 || !hide(var3))) {
 				if (var3.type == 0) {
-					if (!var3.v3 && hide(var3) && hoveredCom != var3) {
+					if (!var3.v3 && hide(var3) && overCom != var3) {
 						continue;
 					}
 					animateLayer(var3.parentId, arg1);
@@ -7423,7 +7466,7 @@ public final class Client extends GameShell {
 							addComponentOptions(var32 - var14, var10, var31 - var12);
 						}
 						if (var10.type == 0) {
-							if (!var10.v3 && hide(var10) && var10 != hoveredCom) {
+							if (!var10.v3 && hide(var10) && var10 != overCom) {
 								continue;
 							}
 							if (!var10.v3) {
@@ -7468,7 +7511,7 @@ public final class Client extends GameShell {
 											}
 											if (var10.linkObjType[var34] > 0) {
 												int var39 = var10.linkObjType[var34] - 1;
-												if (arg1 < var37 + 32 && var37 < arg0 && arg7 < var38 + 32 && var38 < arg8 || objDragCom == var10 && var34 == field2542) {
+												if (arg1 < var37 + 32 && var37 < arg0 && arg7 < var38 + 32 && var38 < arg8 || objDragCom == var10 && var34 == objDragSlot) {
 													Pix32 var40;
 													if (useMode == 1 && var34 == field966 && field1038 == var10.parentId) {
 														var40 = ObjType.getSprite(2, var39, false, 0, var10.linkObjNumber[var34]);
@@ -7477,8 +7520,8 @@ public final class Client extends GameShell {
 													}
 													if (var40 == null) {
 														componentUpdated(var10);
-													} else if (var10 == objDragCom && field2542 == var34) {
-														int var41 = ClientMouseListener.mouseX - field2637;
+													} else if (var10 == objDragCom && objDragSlot == var34) {
+														int var41 = ClientMouseListener.mouseX - objGrabX;
 														int var42 = ClientMouseListener.mouseY - objGrabY;
 														if (var41 < 5 && var41 > -5) {
 															var41 = 0;
@@ -7486,7 +7529,7 @@ public final class Client extends GameShell {
 														if (var42 < 5 && var42 > -5) {
 															var42 = 0;
 														}
-														if (field2569 < 5) {
+														if (objDragCycles < 5) {
 															var42 = 0;
 															var41 = 0;
 														}
@@ -7518,7 +7561,7 @@ public final class Client extends GameShell {
 																componentUpdated(var43);
 															}
 														}
-													} else if (var10 == field89 && field729 == var34) {
+													} else if (var10 == selectedCom && field729 == var34) {
 														var40.transPlotSprite(var37, var38, 128);
 													} else {
 														var40.plotSprite(var37, var38);
@@ -7539,12 +7582,12 @@ public final class Client extends GameShell {
 									int var47;
 									if (getIfActive(var10)) {
 										var47 = var10.colour2;
-										if (var10 == hoveredCom && var10.colour2Over != 0) {
+										if (var10 == overCom && var10.colour2Over != 0) {
 											var47 = var10.colour2Over;
 										}
 									} else {
 										var47 = var10.colour;
-										if (var10 == hoveredCom && var10.colourOver != 0) {
+										if (var10 == overCom && var10.colourOver != 0) {
 											var47 = var10.colourOver;
 										}
 									}
@@ -7566,7 +7609,7 @@ public final class Client extends GameShell {
 										int var50;
 										if (getIfActive(var10)) {
 											var50 = var10.colour2;
-											if (hoveredCom == var10 && var10.colour2Over != 0) {
+											if (overCom == var10 && var10.colour2Over != 0) {
 												var50 = var10.colour2Over;
 											}
 											if (var10.text2.length() > 0) {
@@ -7574,7 +7617,7 @@ public final class Client extends GameShell {
 											}
 										} else {
 											var50 = var10.colour;
-											if (var10 == hoveredCom && var10.colourOver != 0) {
+											if (var10 == overCom && var10.colourOver != 0) {
 												var50 = var10.colourOver;
 											}
 										}
@@ -7739,7 +7782,7 @@ public final class Client extends GameShell {
 											}
 										}
 									}
-									if (var10.type == 8 && tooltipCom == var10 && field924 == field2121) {
+									if (var10.type == 8 && tooltipCom == var10 && tooltipNum == tooltipRedraw) {
 										int var78 = 0;
 										PixFontGeneric var79 = p12;
 										JagString var80 = var10.text;
@@ -8146,7 +8189,7 @@ public final class Client extends GameShell {
 					}
 					if (var7 <= arg2 && var8 <= arg0 && var7 + 32 > arg2 && arg0 < var8 + 32) {
 						hoveredSlotParent = arg1;
-						field1856 = var4;
+						hoveredSlot = var4;
 						if (arg1.linkObjType[var4] > 0) {
 							ObjType var9 = ObjType.list(arg1.linkObjType[var4] - 1);
 							if (useMode == 1 && ServerActive.isObjOpsEnabled(getActive(arg1))) {
@@ -8495,8 +8538,8 @@ public final class Client extends GameShell {
 			out.p4_alt2(var2);
 			out.p2(var1);
 			out.p2_alt1(var4);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 50) {
@@ -8565,8 +8608,8 @@ public final class Client extends GameShell {
 			out.p2_alt1(var1);
 			out.p4_alt2(var2);
 			out.p2(var4);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 36) {
@@ -8590,8 +8633,8 @@ public final class Client extends GameShell {
 			out.p2_alt2(var4);
 			out.p2_alt3(field3319);
 			out.p2_alt3(var1);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 16) {
@@ -8674,8 +8717,8 @@ public final class Client extends GameShell {
 			out.p2_alt1(var1);
 			out.p2(field966);
 			out.p4_alt1(var2);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 1001) {
@@ -8691,8 +8734,8 @@ public final class Client extends GameShell {
 			out.p2_alt2(var4);
 			out.p4_alt2(var2);
 			out.p2_alt3(var1);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 44) {
@@ -8729,8 +8772,8 @@ public final class Client extends GameShell {
 			out.p2_alt1(var1);
 			out.p4(var2);
 			out.p2_alt3(var4);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 13) {
@@ -8752,8 +8795,8 @@ public final class Client extends GameShell {
 			out.p2(var4);
 			out.p2_alt3(var1);
 			out.p4_alt1(var2);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 6) {
@@ -8809,8 +8852,8 @@ public final class Client extends GameShell {
 			out.p2(var4);
 			out.p2(var1);
 			out.p4(var2);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 49 && interactWithLoc(var2, var1, var4)) {
@@ -8909,8 +8952,8 @@ public final class Client extends GameShell {
 			out.p2_alt2(var4);
 			out.p4_alt2(var2);
 			out.p2_alt3(var1);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 28) {
@@ -8930,8 +8973,8 @@ public final class Client extends GameShell {
 			out.p2(var1);
 			out.p4_alt1(var2);
 			out.p2_alt2(var4);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 57) {
@@ -8987,8 +9030,8 @@ public final class Client extends GameShell {
 			} else {
 				addChat(JagString.join(new JagString[] { JagString.parseInt(var37.linkObjNumber[var1]), field1667, ObjType.list(var4).name}), 0, AUTO_EMPTY);
 			}
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 5) {
@@ -9025,8 +9068,8 @@ public final class Client extends GameShell {
 			out.p4(var2);
 			out.p2_alt1(var1);
 			out.p2_alt2(var4);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 33) {
@@ -9085,8 +9128,8 @@ public final class Client extends GameShell {
 			out.p2_alt1(var1);
 			out.p4(var2);
 			out.p2(var4);
-			field3156 = 0;
-			field89 = IfType.get(var2);
+			selectedCycle = 0;
+			selectedCom = IfType.get(var2);
 			field729 = var1;
 		}
 		if (var3 == 9) {
@@ -9115,8 +9158,8 @@ public final class Client extends GameShell {
 		if (targetMode) {
 			endTargetMode();
 		}
-		if (field89 != null && field3156 == 0) {
-			componentUpdated(field89);
+		if (selectedCom != null && selectedCycle == 0) {
+			componentUpdated(selectedCom);
 		}
 	}
 
@@ -10358,15 +10401,15 @@ public final class Client extends GameShell {
 				int var13 = field3620[menuNumEntries - 1];
 				IfType var14 = IfType.get(var13);
 				if (ServerActive.isObjSwapEnabled(getActive(var14)) || ServerActive.isObjReplaceEnabled(getActive(var14))) {
-					field2569 = 0;
-					field1693 = false;
+					objDragCycles = 0;
+					objGrabThreshold = false;
 					if (objDragCom != null) {
 						componentUpdated(objDragCom);
 					}
 					objDragCom = IfType.get(var13);
 					objGrabY = ClientMouseListener.mouseClickY;
-					field2637 = ClientMouseListener.mouseClickX;
-					field2542 = var12;
+					objGrabX = ClientMouseListener.mouseClickX;
+					objDragSlot = var12;
 					componentUpdated(objDragCom);
 					return;
 				}
