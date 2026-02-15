@@ -54,7 +54,7 @@ public final class BgSound extends Linkable {
 	public WaveStream field2271;
 
 	@ObfuscatedName("s.b(Z)V")
-	public static void method981() {
+	public static void recalculateMultilocs() {
 		for (BgSound var0 = (BgSound) field1466.head(); var0 != null; var0 = (BgSound) field1466.next()) {
 			if (var0.field2250 != null) {
 				var0.method767();

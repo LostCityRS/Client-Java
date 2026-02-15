@@ -79,7 +79,7 @@ public final class HashTable {
 	}
 
 	@ObfuscatedName("wc.b(B)Lv;")
-	public Linkable method1202() {
+	public Linkable searchnext() {
 		if (this.searchCursor == null) {
 			return null;
 		}

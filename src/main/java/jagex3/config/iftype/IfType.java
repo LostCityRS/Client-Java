@@ -339,7 +339,7 @@ public final class IfType extends Linkable {
 	// ---- todo: identify and sort these
 
 	@ObfuscatedName("f.ac")
-	public Object[] field822;
+	public Object[] onmisctransmit;
 
 	@ObfuscatedName("f.bc")
 	public int drawCount = -1;
@@ -348,22 +348,22 @@ public final class IfType extends Linkable {
 	public IfType draggable = null;
 
 	@ObfuscatedName("f.jc")
-	public boolean field831 = false;
+	public boolean mouseTrigger = false;
 
 	@ObfuscatedName("f.kb")
-	public Object[] field780;
+	public Object[] onfriendtransmit;
 
 	@ObfuscatedName("f.mb")
-	public Object[] field782;
+	public Object[] onchattransmit;
 
 	@ObfuscatedName("f.qb")
-	public int field786 = 0;
+	public int invcount = 0;
 
 	@ObfuscatedName("f.rc")
 	public int field839 = 0;
 
 	@ObfuscatedName("f.s")
-	public int field737 = 0;
+	public int invTransmitNum = 0;
 
 	@ObfuscatedName("f.sc")
 	public int drawTime = -1;
@@ -372,10 +372,10 @@ public final class IfType extends Linkable {
 	public int field843 = 0;
 
 	@ObfuscatedName("f.w")
-	public Object[] field741;
+	public Object[] onkey;
 
 	@ObfuscatedName("f.wb")
-	public int field792 = 0;
+	public int varTransmitNum = 0;
 
 	@ObfuscatedName("f.E")
 	public int field749 = 0;
@@ -384,16 +384,16 @@ public final class IfType extends Linkable {
 	public int field762 = 0;
 
 	@ObfuscatedName("f.Ib")
-	public int field804 = -1;
+	public int invobject = -1;
 
 	@ObfuscatedName("f.Tb")
-	public int field815 = 0;
+	public int statTransmitNum = 0;
 
 	@ObfuscatedName("f.Kb")
-	public boolean field806 = false;
+	public boolean clickTrigger = false;
 
 	@ObfuscatedName("f.Zc")
-	public int field873 = -1;
+	public int transmitNum = -1;
 
 	@ObfuscatedName("f.J")
 	public IfType[] subcomponents;
@@ -402,7 +402,7 @@ public final class IfType extends Linkable {
 	public Object[] field758;
 
 	@ObfuscatedName("f.xb")
-	public Object[] field793;
+	public Object[] onclantransmit;
 
 	@ObfuscatedName("f.zb")
 	public Object[] field795;

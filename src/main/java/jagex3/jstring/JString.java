@@ -26,7 +26,7 @@ public class JString {
 				var5[var2] = field519[(int) (var6 - arg0 * 37L)];
 			}
 			JagString var8 = new JagString();
-			var8.field618 = var5;
+			var8.data = var5;
 			var8.length = var5.length;
 			return var8;
 		}

@@ -387,13 +387,13 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.c(III)Lab;")
-	public Wall method1123(int arg0, int arg1, int arg2) {
+	public Wall getWall(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		return var4 == null ? null : var4.wall;
 	}
 
 	@ObfuscatedName("vd.d(III)V")
-	public void method1124(int arg0, int arg1, int arg2) {
+	public void delDecor(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.decor = null;
@@ -537,7 +537,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.f(III)V")
-	public void method1128(int arg0, int arg1, int arg2) {
+	public void delLoc(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		if (var4 == null) {
 			return;
@@ -611,7 +611,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.g(III)V")
-	public void method1130(int arg0, int arg1, int arg2) {
+	public void updateMousePicking(int arg0, int arg1, int arg2) {
 		click = true;
 		field3424 = arg0;
 		field3419 = arg1;
@@ -621,7 +621,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.h(III)I")
-	public int method1131(int arg0, int arg1, int arg2) {
+	public int decorType(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		return var4 == null || var4.decor == null ? 0 : var4.decor.typecode;
 	}
@@ -695,7 +695,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.k(III)V")
-	public void method1136(int arg0, int arg1, int arg2) {
+	public void delGroundDecor(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.groundDecor = null;
@@ -866,7 +866,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.a(IIIIILdd;IIIIII)Z")
-	public boolean method1143(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public boolean addDynamic(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		return arg4 == null ? true : this.method1129(arg0, arg7, arg8, arg9 + 1 - arg7, arg10 - arg8 + 1, arg1, arg2, arg3, arg4, arg5, true, arg6, 0);
 	}
 
@@ -1376,7 +1376,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.m(III)V")
-	public void method1148(int arg0, int arg1, int arg2) {
+	public void delWall(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.wall = null;
@@ -1441,7 +1441,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.n(III)Lr;")
-	public Decor method1150(int arg0, int arg1, int arg2) {
+	public Decor getDecor(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		return var4 == null ? null : var4.decor;
 	}
@@ -1743,7 +1743,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("vd.p(III)Lkf;")
-	public GroundDecor method1160(int arg0, int arg1, int arg2) {
+	public GroundDecor getGd(int arg0, int arg1, int arg2) {
 		Square var4 = this.levelTiles[arg0][arg1][arg2];
 		return var4 == null || var4.groundDecor == null ? null : var4.groundDecor;
 	}

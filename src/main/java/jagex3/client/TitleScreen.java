@@ -248,10 +248,10 @@ public class TitleScreen {
 				loginUser = AUTO_EMPTY;
 			}
 			while (true) {
-				while (ClientKeyboardListener.method1089()) {
+				while (ClientKeyboardListener.pollKey()) {
 					boolean var5 = false;
 					for (int var6 = 0; charList.length() > var6; var6++) {
-						if (ClientKeyboardListener.field2562 == charList.charAt(var6)) {
+						if (ClientKeyboardListener.ch == charList.charAt(var6)) {
 							var5 = true;
 							break;
 						}
@@ -264,7 +264,7 @@ public class TitleScreen {
 							loginSelect = 1;
 						}
 						if (var5 && loginUser.length() < 12) {
-							loginUser = loginUser.method277(ClientKeyboardListener.field2562);
+							loginUser = loginUser.method277(ClientKeyboardListener.ch);
 						}
 					} else if (loginSelect == 1) {
 						if (ClientKeyboardListener.code == 85 && loginPass.length() > 0) {
@@ -288,7 +288,7 @@ public class TitleScreen {
 							return;
 						}
 						if (var5 && loginPass.length() < 20) {
-							loginPass = loginPass.method277(ClientKeyboardListener.field2562);
+							loginPass = loginPass.method277(ClientKeyboardListener.ch);
 						}
 					}
 				}
@@ -922,7 +922,7 @@ public class TitleScreen {
 		if (slLastWorld != -1) {
 			WorldEntry var1 = list[slLastWorld];
 			if (Client.memServer == var1.members) {
-				byte[] var2 = JagString.join(new JagString[]{var1.host, field1492}).method255();
+				byte[] var2 = JagString.join(new JagString[]{var1.host, field1492}).copy();
 				Client.loginHost = new String(var2, 0, var2.length);
 				if (Client.modewhere != 0) {
 					Client.loginPort = 43594;

@@ -294,7 +294,7 @@ public abstract class PixFont extends Pix2D {
 		int var1 = arg0.length();
 		int var2 = 0;
 		for (int var3 = 0; var3 < var1; var3++) {
-			byte var4 = arg0.field618[var3];
+			byte var4 = arg0.data[var3];
 			// < || >
 			if (var4 == 60 || var4 == 62) {
 				var2 += 3;
@@ -302,24 +302,24 @@ public abstract class PixFont extends Pix2D {
 		}
 		JagString var5 = new JagString();
 		var5.length = var1 + var2;
-		var5.field618 = new byte[var5.length];
+		var5.data = new byte[var5.length];
 		int var6 = 0;
 		for (int var7 = 0; var7 < var1; var7++) {
-			byte var8 = arg0.field618[var7];
+			byte var8 = arg0.data[var7];
 			if (var8 == 60) { // <
 				// <lt>
-				var5.field618[var6++] = 60;
-				var5.field618[var6++] = 108;
-				var5.field618[var6++] = 116;
-				var5.field618[var6++] = 62;
+				var5.data[var6++] = 60;
+				var5.data[var6++] = 108;
+				var5.data[var6++] = 116;
+				var5.data[var6++] = 62;
 			} else if (var8 == 62) { // >
 				// <gt>
-				var5.field618[var6++] = 60;
-				var5.field618[var6++] = 103;
-				var5.field618[var6++] = 116;
-				var5.field618[var6++] = 62;
+				var5.data[var6++] = 60;
+				var5.data[var6++] = 103;
+				var5.data[var6++] = 116;
+				var5.data[var6++] = 62;
 			} else {
-				var5.field618[var6++] = var8;
+				var5.data[var6++] = var8;
 			}
 		}
 		return var5;
@@ -385,7 +385,7 @@ public abstract class PixFont extends Pix2D {
 		int var3 = -1;
 		int var4 = 0;
 		for (int var5 = 0; var5 < arg0.length; var5++) {
-			int var6 = arg0.field618[var5] & 0xFF;
+			int var6 = arg0.data[var5] & 0xFF;
 			if (var6 == 60) {
 				var2 = var5;
 			} else {
@@ -540,7 +540,7 @@ public abstract class PixFont extends Pix2D {
 		int var8 = -1;
 		int var9 = 0;
 		for (int var10 = 0; var10 < arg0.length; var10++) {
-			int var11 = arg0.field618[var10] & 0xFF;
+			int var11 = arg0.data[var10] & 0xFF;
 			if (var11 == 60) {
 				var7 = var10;
 			} else {
@@ -807,7 +807,7 @@ public abstract class PixFont extends Pix2D {
 		int var5 = -1;
 		int var6 = -1;
 		for (int var7 = 0; var7 < arg0.length; var7++) {
-			int var8 = arg0.field618[var7] & 0xFF;
+			int var8 = arg0.data[var7] & 0xFF;
 			if (var8 == 60) {
 				var5 = var7;
 			} else {

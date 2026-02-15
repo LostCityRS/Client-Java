@@ -286,7 +286,7 @@ public final class MidiPlayer extends PcmStream {
 		} else if (var2 == 192) {
 			int var17 = arg0 & 0xF;
 			int var18 = arg0 >> 8 & 0x7F;
-			this.method97(var17, var18 + this.field264[var17]);
+			this.setInst(var17, var18 + this.field264[var17]);
 		} else if (var2 == 208) {
 			int var19 = arg0 & 0xF;
 			int var20 = arg0 >> 8 & 0x7F;
@@ -304,8 +304,8 @@ public final class MidiPlayer extends PcmStream {
 	}
 
 	@ObfuscatedName("c.a(BII)V")
-	public synchronized void method86() {
-		this.method119();
+	public synchronized void setChannelDefaultPatch() {
+		this.setPatchAndBank();
 	}
 
 	@ObfuscatedName("c.a()I")
@@ -490,7 +490,7 @@ public final class MidiPlayer extends PcmStream {
 	}
 
 	@ObfuscatedName("c.b(III)V")
-	public void method97(int arg0, int arg1) {
+	public void setInst(int arg0, int arg1) {
 		if (arg1 != this.field270[arg0]) {
 			this.field270[arg0] = arg1;
 			for (int var3 = 0; var3 < 128; var3++) {
@@ -768,10 +768,10 @@ public final class MidiPlayer extends PcmStream {
 	}
 
 	@ObfuscatedName("c.c(III)V")
-	public void method119() {
+	public void setPatchAndBank() {
 		this.field256[9] = 128;
 		this.field264[9] = 128;
-		this.method97(9, 128);
+		this.setInst(9, 128);
 	}
 
 	@ObfuscatedName("c.a(Lla;B)I")

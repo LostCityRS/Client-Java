@@ -880,7 +880,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("od.a(IIIIIIII)V")
-	public void method809(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public void objRenderOrthog(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		field2355[0] = -1;
 		if (this.field2340 != 2 && this.field2340 != 1) {
 			this.method807();

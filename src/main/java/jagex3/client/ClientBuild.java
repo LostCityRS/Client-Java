@@ -459,7 +459,7 @@ public final class ClientBuild {
 	}
 
 	@ObfuscatedName("jd.a(IILvd;IIILqf;III)V")
-	public static void method537(int arg0, int arg1, World arg2, int arg3, int arg4, int arg5, CollisionMap arg6, int arg7, int arg8) {
+	public static void changeLocUnchecked(int arg0, int arg1, World arg2, int arg3, int arg4, int arg5, CollisionMap arg6, int arg7, int arg8) {
 		LocType var9 = LocType.list(arg0);
 		int var10;
 		int var11;
@@ -670,7 +670,7 @@ public final class ClientBuild {
 	}
 
 	@ObfuscatedName("bf.a(IZ[BI)Z")
-	public static boolean method76(int arg0, byte[] arg1, int arg2) {
+	public static boolean checkLocations(int arg0, byte[] arg1, int arg2) {
 		Packet var3 = new Packet(arg1);
 		int var4 = -1;
 		boolean var5 = true;
@@ -930,7 +930,7 @@ public final class ClientBuild {
 	}
 
 	@ObfuscatedName("ld.a(ILvd;[B[Lqf;II)V")
-	public static void method634(int arg0, World arg1, byte[] arg2, CollisionMap[] arg3, int arg4) {
+	public static void loadLocations(int arg0, World arg1, byte[] arg2, CollisionMap[] arg3, int arg4) {
 		int var5 = -1;
 		Packet var6 = new Packet(arg2);
 		while (true) {

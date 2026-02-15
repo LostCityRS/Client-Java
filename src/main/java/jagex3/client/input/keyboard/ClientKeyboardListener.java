@@ -36,7 +36,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	@ObfuscatedName("be.E")
 	public static int code;
 	@ObfuscatedName("pe.n")
-	public static int field2562;
+	public static int ch;
 	@ObfuscatedName("pc.z")
 	public static boolean[] keyHeld = new boolean[112];
 	@ObfuscatedName("fc.z")
@@ -134,14 +134,14 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	}
 
 	@ObfuscatedName("uf.b(B)Z")
-	public static boolean method1089() {
+	public static boolean pollKey() {
 		ClientKeyboardListener var0 = instance;
 		synchronized (instance) {
 			if (field936 == field8) {
 				return false;
 			} else {
 				code = field3285[field8];
-				field2562 = field2518[field8];
+				ch = field2518[field8];
 				field8 = field8 + 1 & 0x7F;
 				return true;
 			}

@@ -7,7 +7,7 @@ import jagex3.datastruct.Linkable;
 public final class LocChange extends Linkable {
 
 	@ObfuscatedName("da.s")
-	public int field398;
+	public int layer;
 
 	@ObfuscatedName("da.v")
 	public int level;

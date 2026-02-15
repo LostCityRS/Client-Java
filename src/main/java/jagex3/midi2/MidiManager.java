@@ -165,7 +165,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("jf.a(IZ)V")
-	public static void method568(int arg0) {
+	public static void setVolume(int arg0) {
 		if (state == 0) {
 			midiPlayer.setGlobalVolume(arg0);
 		} else {

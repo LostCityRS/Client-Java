@@ -18,8 +18,8 @@ public class WordPack {
 			if (var1.length > 32767) {
 				var1.length = 32767;
 			}
-			var1.field618 = new byte[var1.length];
-			arg0.pos += field2088.method73(0, arg0.pos, var1.field618, var1.length, arg0.data);
+			var1.data = new byte[var1.length];
+			arg0.pos += field2088.method73(0, arg0.pos, var1.data, var1.length, arg0.data);
 			return var1;
 		} catch (Exception var2) {
 			return field3499;
@@ -27,7 +27,7 @@ public class WordPack {
 	}
 
 	@ObfuscatedName("sd.a(Lbf;I)V")
-	public static void method997(Huffman arg0) {
+	public static void setHuffman(Huffman arg0) {
 		field2088 = arg0;
 	}
 }

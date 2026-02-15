@@ -4,9 +4,9 @@ import jagex3.datastruct.Linkable;
 import jagex3.util.JagString;
 
 @ObfuscatedName("fc")
-public final class class39 extends Linkable {
+public final class StringNode extends Linkable {
 
 	@ObfuscatedName("fc.s")
-	public JagString field929;
+	public JagString value;
 
 }

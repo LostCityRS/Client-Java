@@ -58,7 +58,7 @@ public final class ClientPlayer extends ClientEntity {
 	public int field1642;
 
 	@ObfuscatedName("ka.Vc")
-	public int field1643;
+	public int y;
 
 	@ObfuscatedName("ka.Wc")
 	public int field1644;
@@ -171,7 +171,7 @@ public final class ClientPlayer extends ClientEntity {
 			}
 			if (this.locStartCycle <= Client.loopCycle && this.locEndCycle > Client.loopCycle) {
 				ModelLit var6 = this.locModel;
-				var6.translate(this.locOffsetX - super.x, this.field1644 + -this.field1643, this.locOffsetZ - super.z);
+				var6.translate(this.locOffsetX - super.x, this.field1644 + -this.y, this.locOffsetZ - super.z);
 				if (super.dstYaw == 512) {
 					var6.rotate90();
 					var6.rotate90();
@@ -194,7 +194,7 @@ public final class ClientPlayer extends ClientEntity {
 					var6.rotate90();
 					var6.rotate90();
 				}
-				var6.translate(super.x - this.locOffsetX, this.field1643 - this.field1644, super.z - this.locOffsetZ);
+				var6.translate(super.x - this.locOffsetX, this.y - this.field1644, super.z - this.locOffsetZ);
 			}
 		}
 		var3.useAABBMouseCheck = true;
