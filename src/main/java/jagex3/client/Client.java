@@ -102,7 +102,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("nb.F")
 	public static int componentRectDebug = 0;
 	@ObfuscatedName("le.s")
-	public static boolean[] componentRedrawRequested2 = new boolean[100];
+	public static boolean[] componentBlitArea = new boolean[100];
 	@ObfuscatedName("ta.zb")
 	public static int componentDrawCount = 0;
 	@ObfuscatedName("dd.L")
@@ -378,7 +378,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("bf.d")
 	public static ClientNpc[] npcs = new ClientNpc[32768];
 	@ObfuscatedName("uf.d")
-	public static boolean[] componentRedrawRequested1 = new boolean[100];
+	public static boolean[] componentDirtyArea = new boolean[100];
 	@ObfuscatedName("pe.w")
 	public static HashTable subinterfaces = new HashTable(8);
 	@ObfuscatedName("ha.E")
@@ -746,7 +746,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ec.ib")
 	public static int minimenuMouseOverX = -1;
 	@ObfuscatedName("ia.N")
-	public static boolean[] componentDrawSomething2 = new boolean[100];
+	public static boolean[] componentRedraw = new boolean[100];
 	@ObfuscatedName("ia.W")
 	public static int field1327 = 0;
 	@ObfuscatedName("tc.a")
@@ -2345,16 +2345,20 @@ public final class Client extends GameShell {
 			menuNumEntries = 1;
 			menuAction[0] = 1007;
 		}
+
 		if (toplevelinterface != -1) {
 			animateInterface(toplevelinterface);
 		}
+
 		for (int var0 = 0; var0 < componentDrawCount; var0++) {
-			if (componentRedrawRequested1[var0]) {
-				componentRedrawRequested2[var0] = true;
+			if (componentDirtyArea[var0]) {
+				componentBlitArea[var0] = true;
 			}
-			componentDrawSomething2[var0] = componentRedrawRequested1[var0];
-			componentRedrawRequested1[var0] = false;
+
+			componentRedraw[var0] = componentDirtyArea[var0];
+			componentDirtyArea[var0] = false;
 		}
+
 		hoveredSlotParent = null;
 		minimenuMouseOverY = -1;
 		componentDrawTime = loopCycle;
@@ -2372,9 +2376,9 @@ public final class Client extends GameShell {
 		}
 		if (componentRectDebug == 3) {
 			for (int var1 = 0; var1 < componentDrawCount; var1++) {
-				if (componentDrawSomething2[var1]) {
+				if (componentRedraw[var1]) {
 					Pix2D.fillRectTrans(componentDrawX[var1], componentDrawY[var1], componentDrawWidth[var1], componentDrawHeight[var1], 0xff00ff, 128);
-				} else if (componentRedrawRequested2[var1]) {
+				} else if (componentBlitArea[var1]) {
 					Pix2D.fillRectTrans(componentDrawX[var1], componentDrawY[var1], componentDrawWidth[var1], componentDrawHeight[var1], 0xff0000, 128);
 				}
 			}
@@ -3751,7 +3755,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("t.a(Lf;B)V")
 	public static void componentUpdated(IfType arg0) {
 		if (arg0.drawTime == componentDrawTime) {
-			componentRedrawRequested1[arg0.drawCount] = true;
+			componentDirtyArea[arg0.drawCount] = true;
 		}
 	}
 
@@ -4881,10 +4885,10 @@ public final class Client extends GameShell {
 			}
 		} else if (arg4 == -1) {
 			for (int var8 = 0; var8 < 100; var8++) {
-				componentRedrawRequested1[var8] = true;
+				componentDirtyArea[var8] = true;
 			}
 		} else {
-			componentRedrawRequested1[arg4] = true;
+			componentDirtyArea[arg4] = true;
 		}
 	}
 
@@ -4967,7 +4971,7 @@ public final class Client extends GameShell {
 				ifAnimReset(var1);
 				ScriptRunner.executeOnLoad(toplevelinterface);
 				for (int var2 = 0; var2 < 100; var2++) {
-					componentRedrawRequested1[var2] = true;
+					componentDirtyArea[var2] = true;
 				}
 
 				ptype = -1;
@@ -5956,7 +5960,7 @@ public final class Client extends GameShell {
 					ifAnimReset(toplevelinterface);
 					ScriptRunner.executeOnLoad(toplevelinterface);
 					for (int var176 = 0; var176 < 100; var176++) {
-						componentRedrawRequested1[var176] = true;
+						componentDirtyArea[var176] = true;
 					}
 				}
 				while (var175-- > 0) {
@@ -6876,10 +6880,10 @@ public final class Client extends GameShell {
 		} else {
 			Pix2D.fillScanLine(arg1, arg0, compassMaskLineOffsets, compassMaskLineLengths);
 		}
-		if (componentDrawSomething2[arg2]) {
+		if (componentRedraw[arg2]) {
 			mapback.plotSprite(arg1, arg0);
 		}
-		componentRedrawRequested2[arg2] = true;
+		componentBlitArea[arg2] = true;
 	}
 
 	@ObfuscatedName("mf.a(Lf;Lec;Z)Lec;")
@@ -6887,6 +6891,8 @@ public final class Client extends GameShell {
 		if (arg1.indexOf(AUTO_PCT) == -1) {
 			return arg1;
 		}
+
+		// text "optimization" did this: `"%" + i` was unrolled and evaluated to const
 		while (true) {
 			int var2 = arg1.indexOf(field1308);
 			if (var2 == -1) {
@@ -7477,10 +7483,13 @@ public final class Client extends GameShell {
 									var10.scrollPosY = 0;
 								}
 							}
+
 							drawLayer(var22, var20, arg2, var10.parentId, var12 - var10.field843, -var10.scrollPosY + var14, var11, var21, var19);
+
 							if (var10.subcomponents != null) {
 								drawLayer(var22, var20, var10.subcomponents, var10.parentId, var12 - var10.field843, -var10.scrollPosY + var14, var11, var21, var19);
 							}
+
 							SubInterface var33 = (SubInterface) subinterfaces.find((long) var10.parentId);
 							if (var33 != null) {
 								if (var33.type == 0 && ClientMouseListener.mouseX >= var20 && ClientMouseListener.mouseY >= var21 && ClientMouseListener.mouseX < var22 && var19 > ClientMouseListener.mouseY && !isMenuOpen && !qaOpTest) {
@@ -7489,390 +7498,389 @@ public final class Client extends GameShell {
 									menuVerb[0] = Text.CANCEL;
 									menuSubject[0] = AUTO_EMPTY;
 								}
+
 								drawInterface(var21, var12, var33.id, var20, var11, var22, var19, var14);
 							}
+
 							Pix2D.setClipping(arg1, arg7, arg0, arg8);
 							Pix3D.setRenderClipping();
 						}
-						if (componentDrawSomething2[var11] || componentRectDebug > 1) {
-							if (var10.type == 0 && !var10.v3 && var10.height < var10.scrollHeight) {
-								drawScrollbar(var10.scrollPosY, var14, var10.width + var12, var10.scrollHeight, var10.height);
+
+						if (!componentRedraw[var11] && componentRectDebug <= 1) {
+							continue;
+						}
+
+						if (var10.type == 0 && !var10.v3 && var10.height < var10.scrollHeight) {
+							drawScrollbar(var10.scrollPosY, var14, var10.width + var12, var10.scrollHeight, var10.height);
+						} else if (var10.type == 1) {
+						} else if (var10.type == 2) {
+							int var34 = 0;
+							for (int var35 = 0; var35 < var10.height; var35++) {
+								for (int var36 = 0; var36 < var10.width; var36++) {
+									int var37 = var12 + (var10.marginX + 32) * var36;
+									int var38 = var14 + var35 * (var10.marginY + 32);
+									if (var34 < 20) {
+										var38 += var10.invBackgroundY[var34];
+										var37 += var10.invBackgroundX[var34];
+									}
+									if (var10.linkObjType[var34] > 0) {
+										int var39 = var10.linkObjType[var34] - 1;
+										if (arg1 < var37 + 32 && var37 < arg0 && arg7 < var38 + 32 && var38 < arg8 || objDragCom == var10 && var34 == objDragSlot) {
+											Pix32 var40;
+											if (useMode == 1 && var34 == field966 && field1038 == var10.parentId) {
+												var40 = ObjType.getSprite(2, var39, false, 0, var10.linkObjNumber[var34]);
+											} else {
+												var40 = ObjType.getSprite(1, var39, false, 3153952, var10.linkObjNumber[var34]);
+											}
+											if (var40 == null) {
+												componentUpdated(var10);
+											} else if (var10 == objDragCom && objDragSlot == var34) {
+												int var41 = ClientMouseListener.mouseX - objGrabX;
+												int var42 = ClientMouseListener.mouseY - objGrabY;
+												if (var41 < 5 && var41 > -5) {
+													var41 = 0;
+												}
+												if (var42 < 5 && var42 > -5) {
+													var42 = 0;
+												}
+												if (objDragCycles < 5) {
+													var42 = 0;
+													var41 = 0;
+												}
+												var40.transPlotSprite(var37 + var41, var38 - -var42, 128);
+												if (arg3 != -1) {
+													IfType var43 = arg2[arg3 & 0xFFFF];
+													if (Pix2D.clipMinY > var42 + var38 && var43.scrollPosY > 0) {
+														int var44 = (Pix2D.clipMinY - var38 - var42) * worldUpdateNum / 3;
+														if (var44 > worldUpdateNum * 10) {
+															var44 = worldUpdateNum * 10;
+														}
+														if (var44 > var43.scrollPosY) {
+															var44 = var43.scrollPosY;
+														}
+														var43.scrollPosY -= var44;
+														objGrabY += var44;
+														componentUpdated(var43);
+													}
+													if (var42 + var38 + 32 > Pix2D.clipMaxY && var43.scrollHeight - var43.height > var43.scrollPosY) {
+														int var45 = worldUpdateNum * (var38 + var42 + 32 - Pix2D.clipMaxY) / 3;
+														if (worldUpdateNum * 10 < var45) {
+															var45 = worldUpdateNum * 10;
+														}
+														if (var45 > var43.scrollHeight - var43.scrollPosY - var43.height) {
+															var45 = var43.scrollHeight - var43.height - var43.scrollPosY;
+														}
+														var43.scrollPosY += var45;
+														objGrabY -= var45;
+														componentUpdated(var43);
+													}
+												}
+											} else if (var10 == selectedCom && field729 == var34) {
+												var40.transPlotSprite(var37, var38, 128);
+											} else {
+												var40.plotSprite(var37, var38);
+											}
+										}
+									} else if (var10.invBackground != null && var34 < 20) {
+										Pix32 var46 = var10.getInvBackground(var34);
+										if (var46 != null) {
+											var46.plotSprite(var37, var38);
+										} else if (IfType.loadingAsset) {
+											componentUpdated(var10);
+										}
+									}
+									var34++;
+								}
 							}
-							if (var10.type != 1) {
-								if (var10.type == 2) {
-									int var34 = 0;
-									for (int var35 = 0; var35 < var10.height; var35++) {
-										for (int var36 = 0; var36 < var10.width; var36++) {
-											int var37 = var12 + (var10.marginX + 32) * var36;
-											int var38 = var14 + var35 * (var10.marginY + 32);
-											if (var34 < 20) {
-												var38 += var10.invBackgroundY[var34];
-												var37 += var10.invBackgroundX[var34];
-											}
-											if (var10.linkObjType[var34] > 0) {
-												int var39 = var10.linkObjType[var34] - 1;
-												if (arg1 < var37 + 32 && var37 < arg0 && arg7 < var38 + 32 && var38 < arg8 || objDragCom == var10 && var34 == objDragSlot) {
-													Pix32 var40;
-													if (useMode == 1 && var34 == field966 && field1038 == var10.parentId) {
-														var40 = ObjType.getSprite(2, var39, false, 0, var10.linkObjNumber[var34]);
-													} else {
-														var40 = ObjType.getSprite(1, var39, false, 3153952, var10.linkObjNumber[var34]);
-													}
-													if (var40 == null) {
-														componentUpdated(var10);
-													} else if (var10 == objDragCom && objDragSlot == var34) {
-														int var41 = ClientMouseListener.mouseX - objGrabX;
-														int var42 = ClientMouseListener.mouseY - objGrabY;
-														if (var41 < 5 && var41 > -5) {
-															var41 = 0;
-														}
-														if (var42 < 5 && var42 > -5) {
-															var42 = 0;
-														}
-														if (objDragCycles < 5) {
-															var42 = 0;
-															var41 = 0;
-														}
-														var40.transPlotSprite(var37 + var41, var38 - -var42, 128);
-														if (arg3 != -1) {
-															IfType var43 = arg2[arg3 & 0xFFFF];
-															if (Pix2D.clipMinY > var42 + var38 && var43.scrollPosY > 0) {
-																int var44 = (Pix2D.clipMinY - var38 - var42) * worldUpdateNum / 3;
-																if (var44 > worldUpdateNum * 10) {
-																	var44 = worldUpdateNum * 10;
-																}
-																if (var44 > var43.scrollPosY) {
-																	var44 = var43.scrollPosY;
-																}
-																var43.scrollPosY -= var44;
-																objGrabY += var44;
-																componentUpdated(var43);
-															}
-															if (var42 + var38 + 32 > Pix2D.clipMaxY && var43.scrollHeight - var43.height > var43.scrollPosY) {
-																int var45 = worldUpdateNum * (var38 + var42 + 32 - Pix2D.clipMaxY) / 3;
-																if (worldUpdateNum * 10 < var45) {
-																	var45 = worldUpdateNum * 10;
-																}
-																if (var45 > var43.scrollHeight - var43.scrollPosY - var43.height) {
-																	var45 = var43.scrollHeight - var43.height - var43.scrollPosY;
-																}
-																var43.scrollPosY += var45;
-																objGrabY -= var45;
-																componentUpdated(var43);
-															}
-														}
-													} else if (var10 == selectedCom && field729 == var34) {
-														var40.transPlotSprite(var37, var38, 128);
-													} else {
-														var40.plotSprite(var37, var38);
-													}
-												}
-											} else if (var10.invBackground != null && var34 < 20) {
-												Pix32 var46 = var10.getInvBackground(var34);
-												if (var46 != null) {
-													var46.plotSprite(var37, var38);
-												} else if (IfType.loadingAsset) {
-													componentUpdated(var10);
-												}
-											}
-											var34++;
-										}
-									}
-								} else if (var10.type == 3) {
-									int var47;
-									if (getIfActive(var10)) {
-										var47 = var10.colour2;
-										if (var10 == overCom && var10.colour2Over != 0) {
-											var47 = var10.colour2Over;
-										}
-									} else {
-										var47 = var10.colour;
-										if (var10 == overCom && var10.colourOver != 0) {
-											var47 = var10.colourOver;
-										}
-									}
-									if (var13 == 0) {
-										if (var10.fill) {
-											Pix2D.fillRect(var12, var14, var10.width, var10.height, var47);
-										} else {
-											Pix2D.drawRect(var12, var14, var10.width, var10.height, var47);
-										}
-									} else if (var10.fill) {
-										Pix2D.fillRectTrans(var12, var14, var10.width, var10.height, var47, 256 - (var13 & 0xFF));
-									} else {
-										Pix2D.drawRectTrans(var12, var14, var10.width, var10.height, var47, 256 - (var13 & 0xFF));
-									}
-								} else if (var10.type == 4) {
-									PixFontGeneric var48 = var10.getFont();
-									if (var48 != null) {
-										JagString var49 = var10.text;
-										int var50;
-										if (getIfActive(var10)) {
-											var50 = var10.colour2;
-											if (overCom == var10 && var10.colour2Over != 0) {
-												var50 = var10.colour2Over;
-											}
-											if (var10.text2.length() > 0) {
-												var49 = var10.text2;
-											}
-										} else {
-											var50 = var10.colour;
-											if (var10 == overCom && var10.colourOver != 0) {
-												var50 = var10.colourOver;
-											}
-										}
-										if (var10.v3 && var10.invobject != -1) {
-											ObjType var51 = ObjType.list(var10.invobject);
-											var49 = var51.name;
-											if (var49 == null) {
-												var49 = AUTO_NULL2;
-											}
-											if ((var51.stackable == 1 || var10.invcount != 1) && var10.invcount != -1) {
-												var49 = JagString.join(new JagString[] {AUTO_TAG_COLOUR_ff9040, var49, AUTO_TAG_COLOURCLOSE_X, JagString.niceNumber(var10.invcount) });
-											}
-										}
-										if (resumePauseCom == var10) {
-											var49 = Text.PLEASEWAIT;
-											var50 = var10.colour;
-										}
-										if (!var10.v3) {
-											var49 = substituteVars(var10, var49);
-										}
-										var48.drawStringMultiline(var49, var12, var14, var10.width, var10.height, var50, var10.shadow ? 0 : -1, var10.hAlign, var10.vAlign, var10.lineHeight);
-									} else if (IfType.loadingAsset) {
-										componentUpdated(var10);
-									}
-								} else if (var10.type == 5) {
-									if (var10.v3) {
-										Pix32 var53;
-										if (var10.invobject == -1) {
-											var53 = var10.getGraphic(false);
-										} else {
-											var53 = ObjType.getSprite(var10.outline, var10.invobject, false, var10.shadowColour, var10.invcount);
-										}
-										if (var53 != null) {
-											int var54 = var53.owi;
-											int var55 = var53.ohi;
-											if (var10.tiling) {
-												Pix2D.setSubClipping(var12, var14, var12 + var10.width, var10.height + var14);
-												int var57 = (var54 + var10.width - 1) / var54;
-												int var58 = (var55 + var10.height - 1) / var55;
-												for (int var59 = 0; var59 < var57; var59++) {
-													for (int var60 = 0; var60 < var58; var60++) {
-														if (var10.rotate != 0) {
-															var53.pixelPerfectRotateScalePlotSprite(var12 + var54 * var59 + var54 / 2, var55 * var60 + var14 + var55 / 2, var10.rotate, 4096);
-														} else if (var13 == 0) {
-															var53.plotSprite(var12 + var54 * var59, var14 - -(var60 * var55));
-														} else {
-															var53.transPlotSprite(var59 * var54 + var12, var60 * var55 + var14, 256 - (var13 & 0xFF));
-														}
-													}
-												}
-												Pix2D.setClipping(arg1, arg7, arg0, arg8);
-											} else {
-												int var56 = var10.width * 4096 / var54;
-												if (var10.rotate != 0) {
-													var53.pixelPerfectRotateScalePlotSprite(var10.width / 2 + var12, var14 + var10.height / 2, var10.rotate, var56);
-												} else if (var13 != 0) {
-													var53.transScalePlotSprite(var12, var14, var10.width, var10.height, 256 - (var13 & 0xFF));
-												} else if (var10.width == var54 && var10.height == var55) {
-													var53.plotSprite(var12, var14);
-												} else {
-													var53.scalePlotSprite(var12, var14, var10.width, var10.height);
-												}
-											}
-										} else if (IfType.loadingAsset) {
-											componentUpdated(var10);
-										}
-									} else {
-										Pix32 var52 = var10.getGraphic(getIfActive(var10));
-										if (var52 != null) {
-											var52.plotSprite(var12, var14);
-										} else if (IfType.loadingAsset) {
-											componentUpdated(var10);
-										}
-									}
-								} else if (var10.type == 6) {
-									boolean var61 = getIfActive(var10);
-									int var62;
-									if (var61) {
-										var62 = var10.modelAnim2;
-									} else {
-										var62 = var10.modelAnim;
-									}
-									ModelLit var63 = null;
-									int var64 = 0;
-									if (var10.invobject != -1) {
-										ObjType var66 = ObjType.list(var10.invobject);
-										if (var66 != null) {
-											ObjType var67 = var66.getStackSizeAlt(var10.invcount);
-											var63 = var67.getModelLit(1);
-											if (var63 == null) {
-												componentUpdated(var10);
-											} else {
-												var63.calcBoundingCylinder();
-												var64 = var63.minY / 2;
-											}
-										}
-									} else if (var10.model1Type == 5) {
-										if (var10.model1Id == 0) {
-											var63 = idkDesign.getTempModel(null, -1, null, -1);
-										} else {
-											var63 = localPlayer.getTempModel();
-										}
-									} else if (var62 == -1) {
-										var63 = var10.getTempModel(null, localPlayer.model, -1, var61);
-										if (var63 == null && IfType.loadingAsset) {
-											componentUpdated(var10);
-										}
-									} else {
-										SeqType var65 = SeqType.list(var62);
-										var63 = var10.getTempModel(var65, localPlayer.model, var10.field762, var61);
-										if (var63 == null && IfType.loadingAsset) {
-											componentUpdated(var10);
-										}
-									}
-									Pix3D.setOrigin(var10.width / 2 + var12, var10.height / 2 + var14);
-									int var68 = Pix3D.sinTable[var10.modelXAn] * var10.modelZoom >> 16;
-									int var69 = var10.modelZoom * Pix3D.cosTable[var10.modelXAn] >> 16;
-									if (var63 != null) {
-										if (var10.v3) {
-											var63.calcBoundingCylinder();
-											if (var10.orthog) {
-												var63.objRenderOrthog(var10.modelYAn, var10.modelZAn, var10.modelXAn, var10.modelXOf, var64 + var68 + var10.modelYOf, var10.modelYOf + var69, var10.modelZoom);
-											} else {
-												var63.objRender(var10.modelYAn, var10.modelZAn, var10.modelXAn, var10.modelXOf, var10.modelYOf + var64 + var68, var69 + var10.modelYOf);
-											}
-										} else {
-											var63.objRender(var10.modelYAn, 0, var10.modelXAn, 0, var68, var69);
-										}
-									}
-									Pix3D.resetOrigin();
+						} else if (var10.type == 3) {
+							int var47;
+							if (getIfActive(var10)) {
+								var47 = var10.colour2;
+								if (var10 == overCom && var10.colour2Over != 0) {
+									var47 = var10.colour2Over;
+								}
+							} else {
+								var47 = var10.colour;
+								if (var10 == overCom && var10.colourOver != 0) {
+									var47 = var10.colourOver;
+								}
+							}
+							if (var13 == 0) {
+								if (var10.fill) {
+									Pix2D.fillRect(var12, var14, var10.width, var10.height, var47);
 								} else {
-									if (var10.type == 7) {
-										PixFontGeneric var70 = var10.getFont();
-										if (var70 == null) {
-											if (IfType.loadingAsset) {
-												componentUpdated(var10);
-											}
-											continue;
-										}
-										int var71 = 0;
-										for (int var72 = 0; var72 < var10.height; var72++) {
-											for (int var73 = 0; var73 < var10.width; var73++) {
-												if (var10.linkObjType[var71] > 0) {
-													ObjType var74 = ObjType.list(var10.linkObjType[var71] - 1);
-													JagString var75;
-													if (var74.stackable != 1 && var10.linkObjNumber[var71] == 1) {
-														var75 = JagString.join(new JagString[] {AUTO_TAG_COLOUR_ff9040, var74.name, JagString.field1508 });
-													} else {
-														var75 = JagString.join(new JagString[] {AUTO_TAG_COLOUR_ff9040, var74.name, AUTO_TAG_COLOURCLOSE_X, JagString.niceNumber(var10.linkObjNumber[var71]) });
-													}
-													int var76 = var12 + var73 * (var10.marginX + 115);
-													int var77 = var72 * (var10.marginY + 12) + var14;
-													if (var10.hAlign == 0) {
-														var70.drawString(var75, var76, var77, var10.colour, var10.shadow ? 0 : -1);
-													} else if (var10.hAlign == 1) {
-														var70.centreString(var75, var76 + var10.width / 2, var77, var10.colour, var10.shadow ? 0 : -1);
-													} else {
-														var70.rightString(var75, var10.width + var76 - 1, var77, var10.colour, var10.shadow ? 0 : -1);
-													}
-												}
-												var71++;
-											}
-										}
+									Pix2D.drawRect(var12, var14, var10.width, var10.height, var47);
+								}
+							} else if (var10.fill) {
+								Pix2D.fillRectTrans(var12, var14, var10.width, var10.height, var47, 256 - (var13 & 0xFF));
+							} else {
+								Pix2D.drawRectTrans(var12, var14, var10.width, var10.height, var47, 256 - (var13 & 0xFF));
+							}
+						} else if (var10.type == 4) {
+							PixFontGeneric var48 = var10.getFont();
+							if (var48 != null) {
+								JagString var49 = var10.text;
+								int var50;
+								if (getIfActive(var10)) {
+									var50 = var10.colour2;
+									if (overCom == var10 && var10.colour2Over != 0) {
+										var50 = var10.colour2Over;
 									}
-									if (var10.type == 8 && tooltipCom == var10 && tooltipNum == tooltipRedraw) {
-										int var78 = 0;
-										PixFontGeneric var79 = p12;
-										JagString var80 = var10.text;
-										JagString var81 = substituteVars(var10, var80);
-										int var82 = 0;
-										while (var81.length() > 0) {
-											int var83 = var81.indexOf(field3538);
-											JagString var84;
-											if (var83 == -1) {
-												var84 = var81;
-												var81 = AUTO_EMPTY;
-											} else {
-												var84 = var81.substring(0, var83);
-												var81 = var81.substring(var83 + 4);
-											}
-											int var85 = var79.stringWid(var84);
-											var82 += var79.ascent + 1;
-											if (var85 > var78) {
-												var78 = var85;
-											}
-										}
-										var78 += 6;
-										var82 += 7;
-										int var86 = var10.width + var12 - var78 - 5;
-										if (var12 + 5 > var86) {
-											var86 = var12 + 5;
-										}
-										if (arg0 < var86 + var78) {
-											var86 = arg0 - var78;
-										}
-										int var87 = var14 + var10.height + 5;
-										if (arg8 < var82 + var87) {
-											var87 = arg8 - var82;
-										}
-										Pix2D.fillRect(var86, var87, var78, var82, 16777120);
-										Pix2D.drawRect(var86, var87, var78, var82, 0);
-										int var88 = var87 + var79.ascent + 2;
-										JagString var89 = var10.text;
-										JagString var90 = substituteVars(var10, var89);
-										while (var90.length() > 0) {
-											int var91 = var90.indexOf(field3538);
-											JagString var92;
-											if (var91 == -1) {
-												var92 = var90;
-												var90 = AUTO_EMPTY;
-											} else {
-												var92 = var90.substring(0, var91);
-												var90 = var90.substring(var91 + 4);
-											}
-											var79.drawString(var92, var86 + 3, var88, 0, -1);
-											var88 += var79.ascent + 1;
-										}
+									if (var10.text2.length() > 0) {
+										var49 = var10.text2;
 									}
-									if (var10.type == 9) {
-										if (var10.lineWidth == 1) {
-											Pix2D.line(var12, var14, var12 + var10.width, var14 - -var10.height, var10.colour);
-										} else {
-											int var93 = var10.height >= 0 ? var10.height : -var10.height;
-											int var94 = var10.width >= 0 ? var10.width : -var10.width;
-											int var95 = var94;
-											if (var93 > var94) {
-												var95 = var93;
-											}
-											if (var95 != 0) {
-												int var96 = (var10.width << 16) / var95;
-												int var97 = (var10.height << 16) / var95;
-												if (var97 > var96) {
-													var97 = -var97;
+								} else {
+									var50 = var10.colour;
+									if (var10 == overCom && var10.colourOver != 0) {
+										var50 = var10.colourOver;
+									}
+								}
+								if (var10.v3 && var10.invobject != -1) {
+									ObjType var51 = ObjType.list(var10.invobject);
+									var49 = var51.name;
+									if (var49 == null) {
+										var49 = AUTO_NULL2;
+									}
+									if ((var51.stackable == 1 || var10.invcount != 1) && var10.invcount != -1) {
+										var49 = JagString.join(new JagString[] {AUTO_TAG_COLOUR_ff9040, var49, AUTO_TAG_COLOURCLOSE_X, JagString.niceNumber(var10.invcount) });
+									}
+								}
+								if (resumePauseCom == var10) {
+									var49 = Text.PLEASEWAIT;
+									var50 = var10.colour;
+								}
+								if (!var10.v3) {
+									var49 = substituteVars(var10, var49);
+								}
+								var48.drawStringMultiline(var49, var12, var14, var10.width, var10.height, var50, var10.shadow ? 0 : -1, var10.hAlign, var10.vAlign, var10.lineHeight);
+							} else if (IfType.loadingAsset) {
+								componentUpdated(var10);
+							}
+						} else if (var10.type == 5) {
+							if (var10.v3) {
+								Pix32 var53;
+								if (var10.invobject == -1) {
+									var53 = var10.getGraphic(false);
+								} else {
+									var53 = ObjType.getSprite(var10.outline, var10.invobject, false, var10.shadowColour, var10.invcount);
+								}
+								if (var53 != null) {
+									int var54 = var53.owi;
+									int var55 = var53.ohi;
+									if (var10.tiling) {
+										Pix2D.setSubClipping(var12, var14, var12 + var10.width, var10.height + var14);
+										int var57 = (var54 + var10.width - 1) / var54;
+										int var58 = (var55 + var10.height - 1) / var55;
+										for (int var59 = 0; var59 < var57; var59++) {
+											for (int var60 = 0; var60 < var58; var60++) {
+												if (var10.rotate != 0) {
+													var53.pixelPerfectRotateScalePlotSprite(var12 + var54 * var59 + var54 / 2, var55 * var60 + var14 + var55 / 2, var10.rotate, 4096);
+												} else if (var13 == 0) {
+													var53.plotSprite(var12 + var54 * var59, var14 - -(var60 * var55));
 												} else {
-													var96 = -var96;
+													var53.transPlotSprite(var59 * var54 + var12, var60 * var55 + var14, 256 - (var13 & 0xFF));
 												}
-												int var98 = var10.lineWidth * var97 >> 17;
-												int var99 = var10.lineWidth * var97 + 1 >> 17;
-												int var100 = var10.lineWidth * var96 + 1 >> 17;
-												int var101 = var96 * var10.lineWidth >> 17;
-												int var102 = var12 - var99;
-												int var103 = var12 + var98;
-												int var104 = var12 + var10.width - var99;
-												int var105 = var98 + var12 + var10.width;
-												int var106 = var101 + var14;
-												int var107 = var14 - var100;
-												int var108 = var10.height + var14 - var100;
-												int var109 = var10.height + var14 + var101;
-												Pix3D.setHClip(var103, var102, var104);
-												Pix3D.flatTriangle(var106, var107, var108, var103, var102, var104, var10.colour);
-												Pix3D.setHClip(var103, var104, var105);
-												Pix3D.flatTriangle(var106, var108, var109, var103, var104, var105, var10.colour);
 											}
 										}
+										Pix2D.setClipping(arg1, arg7, arg0, arg8);
+									} else {
+										int var56 = var10.width * 4096 / var54;
+										if (var10.rotate != 0) {
+											var53.pixelPerfectRotateScalePlotSprite(var10.width / 2 + var12, var14 + var10.height / 2, var10.rotate, var56);
+										} else if (var13 != 0) {
+											var53.transScalePlotSprite(var12, var14, var10.width, var10.height, 256 - (var13 & 0xFF));
+										} else if (var10.width == var54 && var10.height == var55) {
+											var53.plotSprite(var12, var14);
+										} else {
+											var53.scalePlotSprite(var12, var14, var10.width, var10.height);
+										}
 									}
+								} else if (IfType.loadingAsset) {
+									componentUpdated(var10);
+								}
+							} else {
+								Pix32 var52 = var10.getGraphic(getIfActive(var10));
+								if (var52 != null) {
+									var52.plotSprite(var12, var14);
+								} else if (IfType.loadingAsset) {
+									componentUpdated(var10);
+								}
+							}
+						} else if (var10.type == 6) {
+							boolean var61 = getIfActive(var10);
+							int var62;
+							if (var61) {
+								var62 = var10.modelAnim2;
+							} else {
+								var62 = var10.modelAnim;
+							}
+							ModelLit var63 = null;
+							int var64 = 0;
+							if (var10.invobject != -1) {
+								ObjType var66 = ObjType.list(var10.invobject);
+								if (var66 != null) {
+									ObjType var67 = var66.getStackSizeAlt(var10.invcount);
+									var63 = var67.getModelLit(1);
+									if (var63 == null) {
+										componentUpdated(var10);
+									} else {
+										var63.calcBoundingCylinder();
+										var64 = var63.minY / 2;
+									}
+								}
+							} else if (var10.model1Type == 5) {
+								if (var10.model1Id == 0) {
+									var63 = idkDesign.getTempModel(null, -1, null, -1);
+								} else {
+									var63 = localPlayer.getTempModel();
+								}
+							} else if (var62 == -1) {
+								var63 = var10.getTempModel(null, localPlayer.model, -1, var61);
+								if (var63 == null && IfType.loadingAsset) {
+									componentUpdated(var10);
+								}
+							} else {
+								SeqType var65 = SeqType.list(var62);
+								var63 = var10.getTempModel(var65, localPlayer.model, var10.field762, var61);
+								if (var63 == null && IfType.loadingAsset) {
+									componentUpdated(var10);
+								}
+							}
+							Pix3D.setOrigin(var10.width / 2 + var12, var10.height / 2 + var14);
+							int var68 = Pix3D.sinTable[var10.modelXAn] * var10.modelZoom >> 16;
+							int var69 = var10.modelZoom * Pix3D.cosTable[var10.modelXAn] >> 16;
+							if (var63 != null) {
+								if (var10.v3) {
+									var63.calcBoundingCylinder();
+									if (var10.orthog) {
+										var63.objRenderOrthog(var10.modelYAn, var10.modelZAn, var10.modelXAn, var10.modelXOf, var64 + var68 + var10.modelYOf, var10.modelYOf + var69, var10.modelZoom);
+									} else {
+										var63.objRender(var10.modelYAn, var10.modelZAn, var10.modelXAn, var10.modelXOf, var10.modelYOf + var64 + var68, var69 + var10.modelYOf);
+									}
+								} else {
+									var63.objRender(var10.modelYAn, 0, var10.modelXAn, 0, var68, var69);
+								}
+							}
+							Pix3D.resetOrigin();
+						} else if (var10.type == 7) {
+							PixFontGeneric var70 = var10.getFont();
+							if (var70 == null) {
+								if (IfType.loadingAsset) {
+									componentUpdated(var10);
+								}
+								continue;
+							}
+							int var71 = 0;
+							for (int var72 = 0; var72 < var10.height; var72++) {
+								for (int var73 = 0; var73 < var10.width; var73++) {
+									if (var10.linkObjType[var71] > 0) {
+										ObjType var74 = ObjType.list(var10.linkObjType[var71] - 1);
+										JagString var75;
+										if (var74.stackable != 1 && var10.linkObjNumber[var71] == 1) {
+											var75 = JagString.join(new JagString[]{AUTO_TAG_COLOUR_ff9040, var74.name, JagString.field1508});
+										} else {
+											var75 = JagString.join(new JagString[]{AUTO_TAG_COLOUR_ff9040, var74.name, AUTO_TAG_COLOURCLOSE_X, JagString.niceNumber(var10.linkObjNumber[var71])});
+										}
+										int var76 = var12 + var73 * (var10.marginX + 115);
+										int var77 = var72 * (var10.marginY + 12) + var14;
+										if (var10.hAlign == 0) {
+											var70.drawString(var75, var76, var77, var10.colour, var10.shadow ? 0 : -1);
+										} else if (var10.hAlign == 1) {
+											var70.centreString(var75, var76 + var10.width / 2, var77, var10.colour, var10.shadow ? 0 : -1);
+										} else {
+											var70.rightString(var75, var10.width + var76 - 1, var77, var10.colour, var10.shadow ? 0 : -1);
+										}
+									}
+									var71++;
+								}
+							}
+						} else if (var10.type == 8 && tooltipCom == var10 && tooltipNum == tooltipRedraw) {
+							int var78 = 0;
+							PixFontGeneric var79 = p12;
+							JagString var80 = var10.text;
+							JagString var81 = substituteVars(var10, var80);
+							int var82 = 0;
+							while (var81.length() > 0) {
+								int var83 = var81.indexOf(field3538);
+								JagString var84;
+								if (var83 == -1) {
+									var84 = var81;
+									var81 = AUTO_EMPTY;
+								} else {
+									var84 = var81.substring(0, var83);
+									var81 = var81.substring(var83 + 4);
+								}
+								int var85 = var79.stringWid(var84);
+								var82 += var79.ascent + 1;
+								if (var85 > var78) {
+									var78 = var85;
+								}
+							}
+							var78 += 6;
+							var82 += 7;
+							int var86 = var10.width + var12 - var78 - 5;
+							if (var12 + 5 > var86) {
+								var86 = var12 + 5;
+							}
+							if (arg0 < var86 + var78) {
+								var86 = arg0 - var78;
+							}
+							int var87 = var14 + var10.height + 5;
+							if (arg8 < var82 + var87) {
+								var87 = arg8 - var82;
+							}
+							Pix2D.fillRect(var86, var87, var78, var82, 16777120);
+							Pix2D.drawRect(var86, var87, var78, var82, 0);
+							int var88 = var87 + var79.ascent + 2;
+							JagString var89 = var10.text;
+							JagString var90 = substituteVars(var10, var89);
+							while (var90.length() > 0) {
+								int var91 = var90.indexOf(field3538);
+								JagString var92;
+								if (var91 == -1) {
+									var92 = var90;
+									var90 = AUTO_EMPTY;
+								} else {
+									var92 = var90.substring(0, var91);
+									var90 = var90.substring(var91 + 4);
+								}
+								var79.drawString(var92, var86 + 3, var88, 0, -1);
+								var88 += var79.ascent + 1;
+							}
+						} else if (var10.type == 9) {
+							if (var10.lineWidth == 1) {
+								Pix2D.line(var12, var14, var12 + var10.width, var14 - -var10.height, var10.colour);
+							} else {
+								int var93 = var10.height >= 0 ? var10.height : -var10.height;
+								int var94 = var10.width >= 0 ? var10.width : -var10.width;
+								int var95 = var94;
+								if (var93 > var94) {
+									var95 = var93;
+								}
+								if (var95 != 0) {
+									int var96 = (var10.width << 16) / var95;
+									int var97 = (var10.height << 16) / var95;
+									if (var97 > var96) {
+										var97 = -var97;
+									} else {
+										var96 = -var96;
+									}
+									int var98 = var10.lineWidth * var97 >> 17;
+									int var99 = var10.lineWidth * var97 + 1 >> 17;
+									int var100 = var10.lineWidth * var96 + 1 >> 17;
+									int var101 = var96 * var10.lineWidth >> 17;
+									int var102 = var12 - var99;
+									int var103 = var12 + var98;
+									int var104 = var12 + var10.width - var99;
+									int var105 = var98 + var12 + var10.width;
+									int var106 = var101 + var14;
+									int var107 = var14 - var100;
+									int var108 = var10.height + var14 - var100;
+									int var109 = var10.height + var14 + var101;
+									Pix3D.setHClip(var103, var102, var104);
+									Pix3D.flatTriangle(var106, var107, var108, var103, var102, var104, var10.colour);
+									Pix3D.setHClip(var103, var104, var105);
+									Pix3D.flatTriangle(var106, var108, var109, var103, var104, var105, var10.colour);
 								}
 							}
 						}
@@ -9285,7 +9293,7 @@ public final class Client extends GameShell {
 		ClientInvCache.deleteAll();
 		js5Loading = true;
 		for (int var11 = 0; var11 < 100; var11++) {
-			componentRedrawRequested1[var11] = true;
+			componentDirtyArea[var11] = true;
 		}
 		chatDisplayName = null;
 		friendChatCount = 0;
@@ -9536,7 +9544,7 @@ public final class Client extends GameShell {
 	public static void blitArea(int arg0, int arg1, int arg2, int arg3) {
 		for (int var4 = 0; var4 < componentDrawCount; var4++) {
 			if (arg2 < componentDrawX[var4] + componentDrawWidth[var4] && componentDrawX[var4] < arg2 + arg0 && componentDrawY[var4] + componentDrawHeight[var4] > arg1 && componentDrawY[var4] < arg3 + arg1) {
-				componentRedrawRequested2[var4] = true;
+				componentBlitArea[var4] = true;
 			}
 		}
 	}
@@ -9847,7 +9855,7 @@ public final class Client extends GameShell {
 	public static void dirtyArea(int arg0, int arg1, int arg2, int arg3) {
 		for (int var4 = 0; var4 < componentDrawCount; var4++) {
 			if (componentDrawX[var4] + componentDrawWidth[var4] > arg0 && arg2 + arg0 > componentDrawX[var4] && componentDrawY[var4] + componentDrawHeight[var4] > arg1 && componentDrawY[var4] < arg1 + arg3) {
-				componentRedrawRequested1[var4] = true;
+				componentDirtyArea[var4] = true;
 			}
 		}
 	}
@@ -10021,7 +10029,7 @@ public final class Client extends GameShell {
 		ClientInvCache.deleteAll();
 		setMainState(30);
 		for (int var2 = 0; var2 < 100; var2++) {
-			componentRedrawRequested1[var2] = true;
+			componentDirtyArea[var2] = true;
 		}
 	}
 
@@ -10762,9 +10770,9 @@ public final class Client extends GameShell {
 			try {
 				Graphics var4 = GameShell.canvas.getGraphics();
 				for (int var5 = 0; var5 < componentDrawCount; var5++) {
-					if (componentRedrawRequested2[var5]) {
+					if (componentBlitArea[var5]) {
 						GameShell.drawArea.draw(var4, componentDrawWidth[var5], componentDrawHeight[var5], componentDrawX[var5], componentDrawY[var5]);
-						componentRedrawRequested2[var5] = false;
+						componentBlitArea[var5] = false;
 					}
 				}
 			} catch (Exception var8) {
@@ -10776,7 +10784,7 @@ public final class Client extends GameShell {
 				GameShell.drawArea.draw(var6);
 				fullredraw = false;
 				for (int var7 = 0; var7 < componentDrawCount; var7++) {
-					componentRedrawRequested2[var7] = false;
+					componentBlitArea[var7] = false;
 				}
 			} catch (Exception var9) {
 				GameShell.canvas.repaint();
