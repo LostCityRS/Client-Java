@@ -13,7 +13,7 @@ public final class class6 {
 	public static int field226 = 0;
 
 	@ObfuscatedName("ae.g")
-	public static class64 field230 = null;
+	public static GameShell field230 = null;
 
 	@ObfuscatedName("ae.j")
 	public static int field233 = 0;

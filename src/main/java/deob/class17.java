@@ -13,10 +13,10 @@ public final class class17 {
 	public int field532;
 
 	@ObfuscatedName("cd.g")
-	public class128 field535;
+	public ModelSource field535;
 
 	@ObfuscatedName("cd.h")
-	public class128 field536;
+	public ModelSource field536;
 
 	@ObfuscatedName("cd.i")
 	public int field537;
@@ -34,7 +34,7 @@ public final class class17 {
 	public static int[] field546 = new int[4000];
 
 	@ObfuscatedName("cd.t")
-	public static class100 field548 = null;
+	public static IfType field548 = null;
 
 	@ObfuscatedName("cd.u")
 	public static int[] field549 = new int[25];

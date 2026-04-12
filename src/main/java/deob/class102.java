@@ -10,7 +10,7 @@ public final class class102 {
 	public static int field2568 = 0;
 
 	@ObfuscatedName("r.k")
-	public static class5[] field2569 = new class5[4];
+	public static CollisionMap[] field2569 = new CollisionMap[4];
 
 	@ObfuscatedName("r.n")
 	public static int field2572 = 0;

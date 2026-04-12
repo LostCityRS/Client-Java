@@ -18,7 +18,7 @@ public final class class52 {
 	public int field1368;
 
 	@ObfuscatedName("id.n")
-	public class128 field1373;
+	public ModelSource field1373;
 
 	@ObfuscatedName("id.o")
 	public int field1374;

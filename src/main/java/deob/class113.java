@@ -10,7 +10,7 @@ public final class class113 {
 	public static int field2776 = 0;
 
 	@ObfuscatedName("se.e")
-	public class128 field2777;
+	public ModelSource field2777;
 
 	@ObfuscatedName("se.g")
 	public int field2779;
@@ -22,13 +22,13 @@ public final class class113 {
 	public int field2785;
 
 	@ObfuscatedName("se.n")
-	public class128 field2786;
+	public ModelSource field2786;
 
 	@ObfuscatedName("se.o")
-	public class128 field2787;
+	public ModelSource field2787;
 
 	@ObfuscatedName("se.p")
-	public static class15 field2788 = new class15(64);
+	public static LruCache field2788 = new LruCache(64);
 
 	@ObfuscatedName("se.r")
 	public int field2790;

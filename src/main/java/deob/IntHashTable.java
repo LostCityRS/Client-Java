@@ -7,7 +7,7 @@ public final class IntHashTable {
 	public final int[] field2134;
 
 	@ObfuscatedName("oa.k")
-	public static class15 field2136 = new class15(100);
+	public static LruCache field2136 = new LruCache(100);
 
 	@ObfuscatedName("oa.s")
 	public static int field2144 = 0;

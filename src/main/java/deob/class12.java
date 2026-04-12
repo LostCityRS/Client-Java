@@ -19,7 +19,7 @@ public final class class12 extends Linkable {
 	public int field423;
 
 	@ObfuscatedName("be.mb")
-	public class61 field424;
+	public WaveStream field424;
 
 	@ObfuscatedName("be.nb")
 	public int field425;
@@ -34,10 +34,10 @@ public final class class12 extends Linkable {
 	public int field430;
 
 	@ObfuscatedName("be.vb")
-	public class61 field433;
+	public WaveStream field433;
 
 	@ObfuscatedName("be.wb")
-	public class49 field434;
+	public LocType field434;
 
 	@ObfuscatedName("be.xb")
 	public int field435;
@@ -51,7 +51,7 @@ public final class class12 extends Linkable {
 	@ObfuscatedName("be.c(I)V")
 	public void method247() {
 		int var1 = this.field420;
-		class49 var2 = this.field434.method516();
+		LocType var2 = this.field434.method516();
 		if (var2 == null) {
 			this.field423 = 0;
 			this.field435 = 0;

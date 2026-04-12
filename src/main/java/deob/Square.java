@@ -61,7 +61,7 @@ public final class Square extends Linkable {
 	public class17 field880;
 
 	@ObfuscatedName("fa.Eb")
-	public class18 field876;
+	public Ground field876;
 
 	@ObfuscatedName("fa.Lb")
 	public class52 field883;

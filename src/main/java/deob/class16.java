@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("cc")
-public final class class16 extends class44 {
+public final class class16 extends Linkable2 {
 
 	@ObfuscatedName("cc.tb")
 	public int[] field509;

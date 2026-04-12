@@ -16,7 +16,7 @@ public final class Occlude {
 	public int field1725;
 
 	@ObfuscatedName("ld.f")
-	public static class36 field1726 = new class36(5000);
+	public static PacketBit field1726 = new PacketBit(5000);
 
 	@ObfuscatedName("ld.g")
 	public int field1727;

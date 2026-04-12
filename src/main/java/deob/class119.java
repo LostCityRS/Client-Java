@@ -16,10 +16,10 @@ public final class class119 extends Linkable {
 	public int[] field2959;
 
 	@ObfuscatedName("te.lb")
-	public class29[] field2960;
+	public PrivilegedRequest[] field2960;
 
 	@ObfuscatedName("te.mb")
-	public class29[] field2961;
+	public PrivilegedRequest[] field2961;
 
 	@ObfuscatedName("te.nb")
 	public static int field2962 = 0;

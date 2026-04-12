@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("fd")
-public final class class35 extends class44 {
+public final class class35 extends Linkable2 {
 
 	@ObfuscatedName("fd.Cb")
 	public static int field934 = 0;
@@ -22,7 +22,7 @@ public final class class35 extends class44 {
 	public int field945;
 
 	@ObfuscatedName("fd.a(ILba;)V")
-	public void method402(class8 arg0) {
+	public void method402(Packet arg0) {
 		while (true) {
 			int var2 = arg0.method144();
 			if (var2 == 0) {
@@ -33,7 +33,7 @@ public final class class35 extends class44 {
 	}
 
 	@ObfuscatedName("fd.a(Lba;II)V")
-	public void method403(class8 arg0, int arg1) {
+	public void method403(Packet arg0, int arg1) {
 		if (arg1 == 1) {
 			this.field933 = arg0.method145();
 			this.field943 = arg0.method144();

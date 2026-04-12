@@ -10,7 +10,7 @@ public final class class24 {
 	public static int[] field724 = new int[25];
 
 	@ObfuscatedName("de.g")
-	public static class15 field727 = new class15(64);
+	public static LruCache field727 = new LruCache(64);
 
 	@ObfuscatedName("de.o")
 	public static boolean[] field735 = new boolean[5];

@@ -13,7 +13,7 @@ public final class class93 {
 	public int field2314;
 
 	@ObfuscatedName("pc.q")
-	public static class15 field2322 = new class15(500);
+	public static LruCache field2322 = new LruCache(500);
 
 	@ObfuscatedName("pc.w")
 	public int field2328;

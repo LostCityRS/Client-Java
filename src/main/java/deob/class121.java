@@ -10,7 +10,7 @@ public final class class121 {
 	public int[] field3000;
 
 	@ObfuscatedName("ua.e")
-	public static class36 field3003 = new class36(5000);
+	public static PacketBit field3003 = new PacketBit(5000);
 
 	@ObfuscatedName("ua.l")
 	public JagString[] field3010;

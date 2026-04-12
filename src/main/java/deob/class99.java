@@ -4,7 +4,7 @@ package deob;
 public final class class99 {
 
 	@ObfuscatedName("qc.d")
-	public static class15 field2428 = new class15(30);
+	public static LruCache field2428 = new LruCache(30);
 
 	@ObfuscatedName("qc.f")
 	public static volatile int field2430 = 0;

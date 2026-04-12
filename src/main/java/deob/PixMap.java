@@ -6,7 +6,7 @@ import java.awt.*;
 public abstract class PixMap {
 
 	@ObfuscatedName("wc.a")
-	public static class15 field3282 = new class15(64);
+	public static LruCache field3282 = new LruCache(64);
 
 	@ObfuscatedName("wc.c")
 	public int field3284;
@@ -37,7 +37,7 @@ public abstract class PixMap {
 
 	@ObfuscatedName("wc.a(B)V")
 	public final void method1054() {
-		class111.method926(this.field3288, this.field3286, this.field3284);
+		Pix2D.method926(this.field3288, this.field3286, this.field3284);
 	}
 
 	@ObfuscatedName("wc.a(IILjava/awt/Component;I)V")

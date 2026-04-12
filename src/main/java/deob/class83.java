@@ -10,5 +10,5 @@ public abstract class class83 extends Linkable {
 	public abstract void method742();
 
 	@ObfuscatedName("ne.a(Lb;)I")
-	public abstract int method743(class7 arg0);
+	public abstract int method743(Mixer arg0);
 }

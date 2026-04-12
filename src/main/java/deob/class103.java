@@ -7,7 +7,7 @@ public final class class103 {
 	public static int field2589 = 0;
 
 	@ObfuscatedName("ra.h")
-	public static class48 field2596 = new class48(4096);
+	public static HashTable field2596 = new HashTable(4096);
 
 	@ObfuscatedName("ra.i")
 	public static final int field2597 = 0;

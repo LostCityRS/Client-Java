@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("ta")
-public final class class115 extends class44 {
+public final class class115 extends Linkable2 {
 
 	@ObfuscatedName("ta.ac")
 	public int field2860 = 0;
@@ -177,7 +177,7 @@ public final class class115 extends class44 {
 	}
 
 	@ObfuscatedName("ta.a(ZI)Lpa;")
-	public class91 method941(boolean arg0) {
+	public ModelLit method941(boolean arg0) {
 		int var2 = this.field2867;
 		int var3 = this.field2851;
 		int var4 = this.field2855;
@@ -189,16 +189,16 @@ public final class class115 extends class44 {
 		if (var2 == -1) {
 			return null;
 		}
-		class91 var5 = class91.method798(Statics.field458, var2);
+		ModelLit var5 = ModelLit.method798(Statics.field458, var2);
 		if (var3 != -1) {
-			class91 var6 = class91.method798(Statics.field458, var3);
+			ModelLit var6 = ModelLit.method798(Statics.field458, var3);
 			if (var4 == -1) {
-				class91[] var7 = new class91[] { var5, var6 };
-				var5 = new class91(var7, 2);
+				ModelLit[] var7 = new ModelLit[] { var5, var6 };
+				var5 = new ModelLit(var7, 2);
 			} else {
-				class91 var8 = class91.method798(Statics.field458, var4);
-				class91[] var9 = new class91[] { var5, var6, var8 };
-				var5 = new class91(var9, 3);
+				ModelLit var8 = ModelLit.method798(Statics.field458, var4);
+				ModelLit[] var9 = new ModelLit[] { var5, var6, var8 };
+				var5 = new ModelLit(var9, 3);
 			}
 		}
 		if (!arg0 && this.field2849 != 0) {
@@ -236,7 +236,7 @@ public final class class115 extends class44 {
 	}
 
 	@ObfuscatedName("ta.b(ZB)Lpa;")
-	public class91 method948(boolean arg0) {
+	public ModelLit method948(boolean arg0) {
 		int var2 = this.field2831;
 		int var3 = this.field2872;
 		if (arg0) {
@@ -246,11 +246,11 @@ public final class class115 extends class44 {
 		if (var2 == -1) {
 			return null;
 		}
-		class91 var4 = class91.method798(Statics.field458, var2);
+		ModelLit var4 = ModelLit.method798(Statics.field458, var2);
 		if (var3 != -1) {
-			class91 var5 = class91.method798(Statics.field458, var3);
-			class91[] var6 = new class91[] { var4, var5 };
-			var4 = new class91(var6, 2);
+			ModelLit var5 = ModelLit.method798(Statics.field458, var3);
+			ModelLit[] var6 = new ModelLit[] { var4, var5 };
+			var4 = new ModelLit(var6, 2);
 		}
 		if (this.field2834 != null) {
 			for (int var7 = 0; var7 < this.field2834.length; var7++) {
@@ -261,7 +261,7 @@ public final class class115 extends class44 {
 	}
 
 	@ObfuscatedName("ta.a(IILba;)V")
-	public void method951(int arg0, class8 arg1) {
+	public void method951(int arg0, Packet arg1) {
 		if (arg0 == 1) {
 			this.field2836 = arg1.method145();
 		} else if (arg0 == 2) {
@@ -354,7 +354,7 @@ public final class class115 extends class44 {
 	}
 
 	@ObfuscatedName("ta.a(Lba;I)V")
-	public void method952(class8 arg0) {
+	public void method952(Packet arg0) {
 		while (true) {
 			int var2 = arg0.method144();
 			if (var2 == 0) {
@@ -382,7 +382,7 @@ public final class class115 extends class44 {
 	}
 
 	@ObfuscatedName("ta.a(ZII)Lpa;")
-	public class91 method954(boolean arg0, int arg1) {
+	public ModelLit method954(boolean arg0, int arg1) {
 		if (this.field2862 != null && arg1 > 1) {
 			int var3 = -1;
 			for (int var4 = 0; var4 < 10; var4++) {
@@ -395,12 +395,12 @@ public final class class115 extends class44 {
 			}
 		}
 		if (arg0) {
-			class91 var5 = (class91) class122.field3035.method263((long) this.field2883);
+			ModelLit var5 = (ModelLit) ClientMouseListener.field3035.method263((long) this.field2883);
 			if (var5 != null) {
 				return var5;
 			}
 		}
-		class91 var6 = class91.method798(Statics.field458, this.field2836);
+		ModelLit var6 = ModelLit.method798(Statics.field458, this.field2836);
 		if (var6 == null) {
 			return null;
 		}
@@ -415,7 +415,7 @@ public final class class115 extends class44 {
 		if (arg0) {
 			var6.method770(this.field2856 + 64, this.field2871 + 768, -50, -10, -50, true);
 			var6.field2205 = true;
-			class122.field3035.method262((long) this.field2883, var6);
+			ClientMouseListener.field3035.method262((long) this.field2883, var6);
 		}
 		return var6;
 	}

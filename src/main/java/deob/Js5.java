@@ -31,7 +31,7 @@ public abstract class Js5 {
 	public int[] field377;
 
 	@ObfuscatedName("bd.s")
-	public static class15 field379 = new class15(260);
+	public static LruCache field379 = new LruCache(260);
 
 	@ObfuscatedName("bd.w")
 	public final boolean field383;
@@ -133,7 +133,7 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.a(I[B)V")
 	public final void method223(byte[] arg0) {
 		this.field366 = Statics.method244(arg0, arg0.length);
-		class8 var2 = new class8(Statics.method863(arg0));
+		Packet var2 = new Packet(Statics.method863(arg0));
 		int var3 = var2.method144();
 		if (var3 != 5) {
 			return;
@@ -231,7 +231,7 @@ public abstract class Js5 {
 		} else {
 			var8 = new byte[this.field362[arg0].length];
 			class33.method392(this.field362[arg0], 0, var8, 0, var8.length);
-			class8 var9 = new class8(var8);
+			Packet var9 = new Packet(var8);
 			var9.method159(arg1, var9.field284.length);
 		}
 		byte[] var10;
@@ -247,7 +247,7 @@ public abstract class Js5 {
 			int var12 = var10.length;
 			int var26 = var12 - 1;
 			int var13 = var10[var26] & 0xFF;
-			class8 var14 = new class8(var10);
+			Packet var14 = new Packet(var10);
 			int var15 = var26 - var3 * var13 * 4;
 			var14.field267 = var15;
 			int[] var16 = new int[var3];

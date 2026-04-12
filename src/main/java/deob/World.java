@@ -161,7 +161,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIILvb;Lvb;IIII)V")
-	public void method50(int arg0, int arg1, int arg2, int arg3, class128 arg4, class128 arg5, int arg6, int arg7, int arg8, int arg9) {
+	public void method50(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, ModelSource arg5, int arg6, int arg7, int arg8, int arg9) {
 		if (arg4 == null && arg5 == null) {
 			return;
 		}
@@ -194,10 +194,10 @@ public final class World {
 		boolean[][][][] var1 = new boolean[9][32][53][53];
 		for (int var2 = 128; var2 <= 384; var2 += 32) {
 			for (int var3 = 0; var3 < 2048; var3 += 64) {
-				Statics.field109 = class91.field2256[var2];
-				Statics.field137 = class91.field2258[var2];
-				Statics.field131 = class91.field2256[var3];
-				Statics.field126 = class91.field2258[var3];
+				Statics.field109 = ModelLit.field2256[var2];
+				Statics.field137 = ModelLit.field2258[var2];
+				Statics.field131 = ModelLit.field2256[var3];
+				Statics.field126 = ModelLit.field2258[var3];
 				int var4 = (var2 - 128) / 32;
 				int var5 = var3 / 64;
 				for (int var6 = -26; var6 <= 26; var6++) {
@@ -268,7 +268,7 @@ public final class World {
 			}
 			return;
 		}
-		class18 var10 = var6.field876;
+		Ground var10 = var6.field876;
 		if (var10 == null) {
 			return;
 		}
@@ -319,10 +319,10 @@ public final class World {
 			arg2 = this.field143 * 128 - 1;
 		}
 		Statics.field113++;
-		Statics.field109 = class91.field2256[arg3];
-		Statics.field137 = class91.field2258[arg3];
-		Statics.field131 = class91.field2256[arg4];
-		Statics.field126 = class91.field2258[arg4];
+		Statics.field109 = ModelLit.field2256[arg3];
+		Statics.field137 = ModelLit.field2258[arg3];
+		Statics.field131 = ModelLit.field2256[arg4];
+		Statics.field126 = ModelLit.field2258[arg4];
 		Statics.field160 = field161[(arg3 - 128) / 32][arg4 / 64];
 		Statics.field103 = arg0;
 		Statics.field116 = arg1;
@@ -508,7 +508,7 @@ public final class World {
 			}
 			this.field102[arg0][arg1][arg2].field878 = var23;
 		} else {
-			class18 var25 = new class18(arg3, arg4, arg5, arg1, arg2, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19);
+			Ground var25 = new Ground(arg3, arg4, arg5, arg1, arg2, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19);
 			for (int var26 = arg0; var26 >= 0; var26--) {
 				if (this.field102[var26][arg1][arg2] == null) {
 					this.field102[var26][arg1][arg2] = new Square(var26, arg1, arg2);
@@ -1253,7 +1253,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIILvb;IIIIII)V")
-	public void method65(int arg0, int arg1, int arg2, int arg3, class128 arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public void method65(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		if (arg4 == null) {
 			return;
 		}
@@ -1301,7 +1301,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIIILvb;IIIIII)Z")
-	public boolean method68(int arg0, int arg1, int arg2, int arg3, class128 arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public boolean method68(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		return arg4 == null ? true : this.method96(arg0, arg7, arg8, arg9 + 1 - arg7, arg10 - arg8 + 1, arg1, arg2, arg3, arg4, arg5, true, arg6, 0);
 	}
 
@@ -1380,11 +1380,11 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(Lpa;III)V")
-	public void method73(class91 arg0, int arg1, int arg2, int arg3) {
+	public void method73(ModelLit arg0, int arg1, int arg2, int arg3) {
 		if (arg2 < this.field124) {
 			Square var5 = this.field102[arg1][arg2 + 1][arg3];
-			if (var5 != null && var5.field883 != null && var5.field883.field1373 instanceof class91) {
-				class91 var6 = (class91) var5.field883.field1373;
+			if (var5 != null && var5.field883 != null && var5.field883.field1373 instanceof ModelLit) {
+				ModelLit var6 = (ModelLit) var5.field883.field1373;
 				if (var6.field2215 != null) {
 					this.method77(arg0, var6, 128, 0, 0, true);
 				}
@@ -1392,8 +1392,8 @@ public final class World {
 		}
 		if (arg3 < this.field124) {
 			Square var7 = this.field102[arg1][arg2][arg3 + 1];
-			if (var7 != null && var7.field883 != null && var7.field883.field1373 instanceof class91) {
-				class91 var8 = (class91) var7.field883.field1373;
+			if (var7 != null && var7.field883 != null && var7.field883.field1373 instanceof ModelLit) {
+				ModelLit var8 = (ModelLit) var7.field883.field1373;
 				if (var8.field2215 != null) {
 					this.method77(arg0, var8, 0, 0, 128, true);
 				}
@@ -1401,8 +1401,8 @@ public final class World {
 		}
 		if (arg2 < this.field124 && arg3 < this.field143) {
 			Square var9 = this.field102[arg1][arg2 + 1][arg3 + 1];
-			if (var9 != null && var9.field883 != null && var9.field883.field1373 instanceof class91) {
-				class91 var10 = (class91) var9.field883.field1373;
+			if (var9 != null && var9.field883 != null && var9.field883.field1373 instanceof ModelLit) {
+				ModelLit var10 = (ModelLit) var9.field883.field1373;
 				if (var10.field2215 != null) {
 					this.method77(arg0, var10, 128, 0, 128, true);
 				}
@@ -1412,8 +1412,8 @@ public final class World {
 			return;
 		}
 		Square var11 = this.field102[arg1][arg2 + 1][arg3 - 1];
-		if (var11 != null && var11.field883 != null && var11.field883.field1373 instanceof class91) {
-			class91 var12 = (class91) var11.field883.field1373;
+		if (var11 != null && var11.field883 != null && var11.field883.field1373 instanceof ModelLit) {
+			ModelLit var12 = (ModelLit) var11.field883.field1373;
 			if (var12.field2215 != null) {
 				this.method77(arg0, var12, 128, 0, -128, true);
 			}
@@ -1428,12 +1428,12 @@ public final class World {
 					Square var4 = this.field102[var1][var2][var3];
 					if (var4 != null) {
 						class17 var5 = var4.field880;
-						if (var5 != null && var5.field536 instanceof class91) {
-							class91 var6 = (class91) var5.field536;
+						if (var5 != null && var5.field536 instanceof ModelLit) {
+							ModelLit var6 = (ModelLit) var5.field536;
 							if (var6.field2215 != null) {
 								this.method85(var6, var1, var2, var3, 1, 1);
-								if (var5.field535 instanceof class91) {
-									class91 var7 = (class91) var5.field535;
+								if (var5.field535 instanceof ModelLit) {
+									ModelLit var7 = (ModelLit) var5.field535;
 									if (var7.field2215 != null) {
 										this.method85(var7, var1, var2, var3, 1, 1);
 										this.method77(var6, var7, 0, 0, 0, false);
@@ -1445,8 +1445,8 @@ public final class World {
 						}
 						for (int var8 = 0; var8 < var4.field888; var8++) {
 							Sprite var9 = var4.field873[var8];
-							if (var9 != null && var9.field985 instanceof class91) {
-								class91 var10 = (class91) var9.field985;
+							if (var9 != null && var9.field985 instanceof ModelLit) {
+								ModelLit var10 = (ModelLit) var9.field985;
 								if (var10.field2215 != null) {
 									this.method85(var10, var1, var2, var3, var9.field995 + 1 - var9.field984, var9.field988 - var9.field992 + 1);
 									var10.method794();
@@ -1454,8 +1454,8 @@ public final class World {
 							}
 						}
 						class52 var11 = var4.field883;
-						if (var11 != null && var11.field1373 instanceof class91) {
-							class91 var12 = (class91) var11.field1373;
+						if (var11 != null && var11.field1373 instanceof ModelLit) {
+							ModelLit var12 = (ModelLit) var11.field1373;
 							if (var12.field2215 != null) {
 								this.method73(var12, var1, var2, var3);
 								var12.method794();
@@ -1514,7 +1514,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(Lpa;Lpa;IIIZ)V")
-	public void method77(class91 arg0, class91 arg1, int arg2, int arg3, int arg4, boolean arg5) {
+	public void method77(ModelLit arg0, ModelLit arg1, int arg2, int arg3, int arg4, boolean arg5) {
 		arg1.method790();
 		this.field153++;
 		int var7 = 0;
@@ -1775,11 +1775,11 @@ public final class World {
 		int var49 = (var36 << 9) / var37 + Statics.field763;
 		int var50 = (var39 << 9) / var43 + Statics.field769;
 		int var51 = (var42 << 9) / var43 + Statics.field763;
-		class27.field765 = 0;
+		Pix3D.field765 = 0;
 		if ((var47 - var51) * (var48 - var50) - (var46 - var50) * (var49 - var51) > 0) {
-			class27.field779 = false;
+			Pix3D.field779 = false;
 			if (var48 < 0 || var50 < 0 || var46 < 0 || var48 > Statics.field777 || var50 > Statics.field777 || var46 > Statics.field777) {
-				class27.field779 = true;
+				Pix3D.field779 = true;
 			}
 			if (field141 && this.method98(field118, field104, var49, var51, var47, var48, var50, var46)) {
 				field105 = arg6;
@@ -1787,23 +1787,23 @@ public final class World {
 			}
 			if (arg0.field2636 == -1) {
 				if (arg0.field2651 != 12345678) {
-					class27.method360(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641);
+					Pix3D.method360(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641);
 				}
 			} else if (field115) {
 				int var52 = Statics.field771.method693(arg0.field2636);
-				class27.method360(var49, var51, var47, var48, var50, var46, method64(var52, arg0.field2651), method64(var52, arg0.field2648), method64(var52, arg0.field2641));
+				Pix3D.method360(var49, var51, var47, var48, var50, var46, method64(var52, arg0.field2651), method64(var52, arg0.field2648), method64(var52, arg0.field2641));
 			} else if (arg0.field2645) {
-				class27.method353(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field2636);
+				Pix3D.method353(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field2636);
 			} else {
-				class27.method353(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.field2636);
+				Pix3D.method353(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.field2636);
 			}
 		}
 		if ((var44 - var46) * (var51 - var47) - (var45 - var47) * (var50 - var46) <= 0) {
 			return;
 		}
-		class27.field779 = false;
+		Pix3D.field779 = false;
 		if (var44 < 0 || var46 < 0 || var50 < 0 || var44 > Statics.field777 || var46 > Statics.field777 || var50 > Statics.field777) {
-			class27.field779 = true;
+			Pix3D.field779 = true;
 		}
 		if (field141 && this.method98(field118, field104, var45, var47, var51, var44, var46, var50)) {
 			field105 = arg6;
@@ -1811,19 +1811,19 @@ public final class World {
 		}
 		if (arg0.field2636 != -1) {
 			if (!field115) {
-				class27.method353(var45, var47, var51, var44, var46, var50, arg0.field2647, arg0.field2641, arg0.field2648, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field2636);
+				Pix3D.method353(var45, var47, var51, var44, var46, var50, arg0.field2647, arg0.field2641, arg0.field2648, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field2636);
 				return;
 			}
 			int var53 = Statics.field771.method693(arg0.field2636);
-			class27.method360(var45, var47, var51, var44, var46, var50, method64(var53, arg0.field2647), method64(var53, arg0.field2641), method64(var53, arg0.field2648));
+			Pix3D.method360(var45, var47, var51, var44, var46, var50, method64(var53, arg0.field2647), method64(var53, arg0.field2641), method64(var53, arg0.field2648));
 		} else if (arg0.field2647 != 12345678) {
-			class27.method360(var45, var47, var51, var44, var46, var50, arg0.field2647, arg0.field2641, arg0.field2648);
+			Pix3D.method360(var45, var47, var51, var44, var46, var50, arg0.field2647, arg0.field2641, arg0.field2648);
 			return;
 		}
 	}
 
 	@ObfuscatedName("ab.a(Lpa;IIIII)V")
-	public void method85(class91 arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void method85(ModelLit arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		boolean var7 = true;
 		int var8 = arg2;
 		int var9 = arg2 + arg4;
@@ -1840,14 +1840,14 @@ public final class World {
 									int var16 = (this.field132[var12][var13 + 1][var14] + this.field132[var12][var13][var14] + this.field132[var12][var13][var14 + 1] + this.field132[var12][var13 + 1][var14 + 1]) / 4 - (this.field132[arg1][arg2 + 1][arg3] + this.field132[arg1][arg2][arg3] + this.field132[arg1][arg2][arg3 + 1] + this.field132[arg1][arg2 + 1][arg3 + 1]) / 4;
 									class17 var17 = var15.field880;
 									if (var17 != null) {
-										if (var17.field536 instanceof class91) {
-											class91 var18 = (class91) var17.field536;
+										if (var17.field536 instanceof ModelLit) {
+											ModelLit var18 = (ModelLit) var17.field536;
 											if (var18.field2215 != null) {
 												this.method77(arg0, var18, (var13 - arg2) * 128 + (1 - arg4) * 64, var16, (var14 - arg3) * 128 + (1 - arg5) * 64, var7);
 											}
 										}
-										if (var17.field535 instanceof class91) {
-											class91 var19 = (class91) var17.field535;
+										if (var17.field535 instanceof ModelLit) {
+											ModelLit var19 = (ModelLit) var17.field535;
 											if (var19.field2215 != null) {
 												this.method77(arg0, var19, (var13 - arg2) * 128 + (1 - arg4) * 64, var16, (var14 - arg3) * 128 + (1 - arg5) * 64, var7);
 											}
@@ -1855,8 +1855,8 @@ public final class World {
 									}
 									for (int var20 = 0; var20 < var15.field888; var20++) {
 										Sprite var21 = var15.field873[var20];
-										if (var21 != null && var21.field985 instanceof class91) {
-											class91 var22 = (class91) var21.field985;
+										if (var21 != null && var21.field985 instanceof ModelLit) {
+											ModelLit var22 = (ModelLit) var21.field985;
 											if (var22.field2215 != null) {
 												int var23 = var21.field995 + 1 - var21.field984;
 												int var24 = var21.field988 + 1 - var21.field992;
@@ -1892,7 +1892,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIILvb;II)V")
-	public void method88(int arg0, int arg1, int arg2, int arg3, class128 arg4, int arg5, int arg6) {
+	public void method88(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6) {
 		if (arg4 == null) {
 			return;
 		}
@@ -1916,7 +1916,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIIILvb;IIZ)Z")
-	public boolean method90(int arg0, int arg1, int arg2, int arg3, int arg4, class128 arg5, int arg6, int arg7, boolean arg8) {
+	public boolean method90(int arg0, int arg1, int arg2, int arg3, int arg4, ModelSource arg5, int arg6, int arg7, boolean arg8) {
 		if (arg5 == null) {
 			return true;
 		}
@@ -1973,7 +1973,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIIIILvb;III)Z")
-	public boolean method93(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, class128 arg6, int arg7, int arg8, int arg9) {
+	public boolean method93(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, ModelSource arg6, int arg7, int arg8, int arg9) {
 		if (arg6 == null) {
 			return true;
 		} else {
@@ -1984,7 +1984,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(Lce;IIIIII)V")
-	public void method94(class18 arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public void method94(Ground arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var8 = arg0.field554.length;
 		for (int var9 = 0; var9 < var8; var9++) {
 			int var10 = arg0.field554[var9] - Statics.field103;
@@ -1998,29 +1998,29 @@ public final class World {
 				return;
 			}
 			if (arg0.field556 != null) {
-				class18.field565[var9] = var13;
-				class18.field570[var9] = var16;
-				class18.field555[var9] = var17;
+				Ground.field565[var9] = var13;
+				Ground.field570[var9] = var16;
+				Ground.field555[var9] = var17;
 			}
-			class18.field558[var9] = (var13 << 9) / var17 + Statics.field769;
-			class18.field553[var9] = (var16 << 9) / var17 + Statics.field763;
+			Ground.field558[var9] = (var13 << 9) / var17 + Statics.field769;
+			Ground.field553[var9] = (var16 << 9) / var17 + Statics.field763;
 		}
-		class27.field765 = 0;
+		Pix3D.field765 = 0;
 		int var18 = arg0.field569.length;
 		for (int var19 = 0; var19 < var18; var19++) {
 			int var20 = arg0.field569[var19];
 			int var21 = arg0.field557[var19];
 			int var22 = arg0.field563[var19];
-			int var23 = class18.field558[var20];
-			int var24 = class18.field558[var21];
-			int var25 = class18.field558[var22];
-			int var26 = class18.field553[var20];
-			int var27 = class18.field553[var21];
-			int var28 = class18.field553[var22];
+			int var23 = Ground.field558[var20];
+			int var24 = Ground.field558[var21];
+			int var25 = Ground.field558[var22];
+			int var26 = Ground.field553[var20];
+			int var27 = Ground.field553[var21];
+			int var28 = Ground.field553[var22];
 			if ((var23 - var24) * (var28 - var27) - (var25 - var24) * (var26 - var27) > 0) {
-				class27.field779 = false;
+				Pix3D.field779 = false;
 				if (var23 < 0 || var24 < 0 || var25 < 0 || var23 > Statics.field777 || var24 > Statics.field777 || var25 > Statics.field777) {
-					class27.field779 = true;
+					Pix3D.field779 = true;
 				}
 				if (field141 && this.method98(field118, field104, var26, var27, var28, var23, var24, var25)) {
 					field105 = arg5;
@@ -2028,22 +2028,22 @@ public final class World {
 				}
 				if (arg0.field556 == null || arg0.field556[var19] == -1) {
 					if (arg0.field562[var19] != 12345678) {
-						class27.method360(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19]);
+						Pix3D.method360(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19]);
 					}
 				} else if (field115) {
 					int var29 = Statics.field771.method693(arg0.field556[var19]);
-					class27.method360(var26, var27, var28, var23, var24, var25, method64(var29, arg0.field562[var19]), method64(var29, arg0.field564[var19]), method64(var29, arg0.field567[var19]));
+					Pix3D.method360(var26, var27, var28, var23, var24, var25, method64(var29, arg0.field562[var19]), method64(var29, arg0.field564[var19]), method64(var29, arg0.field567[var19]));
 				} else if (arg0.field560) {
-					class27.method353(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19], class18.field565[0], class18.field565[1], class18.field565[3], class18.field570[0], class18.field570[1], class18.field570[3], class18.field555[0], class18.field555[1], class18.field555[3], arg0.field556[var19]);
+					Pix3D.method353(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19], Ground.field565[0], Ground.field565[1], Ground.field565[3], Ground.field570[0], Ground.field570[1], Ground.field570[3], Ground.field555[0], Ground.field555[1], Ground.field555[3], arg0.field556[var19]);
 				} else {
-					class27.method353(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19], class18.field565[var20], class18.field565[var21], class18.field565[var22], class18.field570[var20], class18.field570[var21], class18.field570[var22], class18.field555[var20], class18.field555[var21], class18.field555[var22], arg0.field556[var19]);
+					Pix3D.method353(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19], Ground.field565[var20], Ground.field565[var21], Ground.field565[var22], Ground.field570[var20], Ground.field570[var21], Ground.field570[var22], Ground.field555[var20], Ground.field555[var21], Ground.field555[var22], arg0.field556[var19]);
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("ab.a(IIIILvb;ILvb;Lvb;)V")
-	public void method95(int arg0, int arg1, int arg2, int arg3, class128 arg4, int arg5, class128 arg6, class128 arg7) {
+	public void method95(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, ModelSource arg6, ModelSource arg7) {
 		class113 var9 = new class113();
 		var9.field2777 = arg4;
 		var9.field2796 = arg1 * 128 + 64;
@@ -2056,8 +2056,8 @@ public final class World {
 		Square var11 = this.field102[arg0][arg1][arg2];
 		if (var11 != null) {
 			for (int var12 = 0; var12 < var11.field888; var12++) {
-				if ((var11.field873[var12].field982 & 0x100) == 256 && var11.field873[var12].field985 instanceof class91) {
-					class91 var13 = (class91) var11.field873[var12].field985;
+				if ((var11.field873[var12].field982 & 0x100) == 256 && var11.field873[var12].field985 instanceof ModelLit) {
+					ModelLit var13 = (ModelLit) var11.field873[var12].field985;
 					var13.method766();
 					if (var13.field3135 > var10) {
 						var10 = var13.field3135;
@@ -2073,7 +2073,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIIIIIILvb;IZII)Z")
-	public boolean method96(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, class128 arg8, int arg9, boolean arg10, int arg11, int arg12) {
+	public boolean method96(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, ModelSource arg8, int arg9, boolean arg10, int arg11, int arg12) {
 		for (int var14 = arg1; var14 < arg1 + arg3; var14++) {
 			for (int var15 = arg2; var15 < arg2 + arg4; var15++) {
 				if (var14 < 0 || var15 < 0 || var14 >= this.field124 || var15 >= this.field143) {

@@ -254,7 +254,7 @@ public final class JagString implements StringInterface {
 		Class var4 = JagString.class;
 		synchronized (JagString.class) {
 			if (Statics.field1795 == null) {
-				Statics.field1795 = new class48(4096);
+				Statics.field1795 = new HashTable(4096);
 			} else {
 				for (class73 var5 = (class73) Statics.field1795.method499(var2); var5 != null; var5 = (class73) Statics.field1795.method501()) {
 					if (this.method5(var5.field1781)) {

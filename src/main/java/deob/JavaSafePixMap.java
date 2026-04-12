@@ -13,7 +13,7 @@ public final class JavaSafePixMap extends PixMap implements ImageProducer, Image
 	public static int[] field181 = new int[] { 0, -1, 0, 1 };
 
 	@ObfuscatedName("ac.W")
-	public static int field185;
+	public static int field185 = 2;
 
 	@ObfuscatedName("ac.E")
 	public ColorModel field168;
@@ -27,9 +27,6 @@ public final class JavaSafePixMap extends PixMap implements ImageProducer, Image
 			field173[var1] = var0 - 1;
 			var0 += var0;
 		}
-		field185 = 2;
-		Statics.field186 = JagString.wrap("Login server offline)3");
-		Statics.field183 = Statics.field186;
 	}
 
 	@Override

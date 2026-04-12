@@ -4,7 +4,7 @@ package deob;
 public final class class112 {
 
 	@ObfuscatedName("sd.b")
-	public static class15 field2755 = new class15(64);
+	public static LruCache field2755 = new LruCache(64);
 
 	@ObfuscatedName("sd.c")
 	public static LinkList field2756 = new LinkList();

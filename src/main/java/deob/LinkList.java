@@ -19,13 +19,13 @@ public final class LinkList {
 	public static int field2295 = 0;
 
 	@ObfuscatedName("pb.E")
-	public static class8 field2301 = new class8(8);
+	public static Packet field2301 = new Packet(8);
 
 	@ObfuscatedName("pb.G")
 	public static int[] field2303 = new int[1000];
 
 	@ObfuscatedName("pb.F")
-	public static class67 field2302 = new class67();
+	public static PlayerModel field2302 = new PlayerModel();
 
 	@ObfuscatedName("pb.a(B)Lnd;")
 	public Linkable method799() {

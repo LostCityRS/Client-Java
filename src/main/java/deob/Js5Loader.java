@@ -13,7 +13,7 @@ public final class Js5Loader extends Js5 {
 	public volatile boolean field2979 = false;
 
 	@ObfuscatedName("u.lb")
-	public final class109 field2981;
+	public final DataFile field2981;
 
 	@ObfuscatedName("u.qb")
 	public final int field2986;
@@ -25,10 +25,10 @@ public final class Js5Loader extends Js5 {
 	public boolean field2990 = false;
 
 	@ObfuscatedName("u.vb")
-	public final class109 field2991;
+	public final DataFile field2991;
 
 	@ObfuscatedName("u.wb")
-	public static class130[] field2992 = new class130[32768];
+	public static ClientNpc[] field2992 = new ClientNpc[32768];
 
 	@ObfuscatedName("u.Cb")
 	public static int field2998 = -1;
@@ -72,7 +72,7 @@ public final class Js5Loader extends Js5 {
 	}
 
 	@ObfuscatedName("u.a(BZ[BILsa;)V")
-	public void method978(boolean arg0, byte[] arg1, int arg2, class109 arg3) {
+	public void method978(boolean arg0, byte[] arg1, int arg2, DataFile arg3) {
 		if (this.field2981 == arg3) {
 			if (this.field2979) {
 				throw new RuntimeException();
@@ -135,7 +135,7 @@ public final class Js5Loader extends Js5 {
 		Statics.method661(this.field2986, arg0);
 	}
 
-	public Js5Loader(class109 arg0, class109 arg1, int arg2, boolean arg3, boolean arg4, boolean arg5) {
+	public Js5Loader(DataFile arg0, DataFile arg1, int arg2, boolean arg3, boolean arg4, boolean arg5) {
 		super(arg3, arg4);
 		this.field2991 = arg0;
 		this.field2990 = arg5;

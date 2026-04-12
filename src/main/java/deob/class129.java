@@ -28,13 +28,13 @@ public final class class129 implements Runnable {
 	public static int field3157 = -1;
 
 	@ObfuscatedName("vc.m")
-	public class29 field3158;
+	public PrivilegedRequest field3158;
 
 	@ObfuscatedName("vc.n")
 	public boolean field3159 = false;
 
 	@ObfuscatedName("vc.p")
-	public final class69 field3161;
+	public final SignLink field3161;
 
 	@ObfuscatedName("vc.u")
 	public int field3166 = 0;
@@ -71,7 +71,7 @@ public final class class129 implements Runnable {
 		}
 		if (this.field3158 != null) {
 			while (this.field3158.field815 == 0) {
-				Statics.method753(1L);
+				Statics.sleepPrecise(1L);
 			}
 			if (this.field3158.field815 == 1) {
 				try {
@@ -115,7 +115,7 @@ public final class class129 implements Runnable {
 		this.method1015();
 	}
 
-	public class129(Socket arg0, class69 arg1) throws IOException {
+	public class129(Socket arg0, SignLink arg1) throws IOException {
 		this.field3161 = arg1;
 		this.field3154 = arg0;
 		this.field3154.setSoTimeout(30000);

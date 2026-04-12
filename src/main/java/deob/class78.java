@@ -4,7 +4,7 @@ package deob;
 public final class class78 {
 
 	@ObfuscatedName("n.k")
-	public static class48 field1917 = new class48(32);
+	public static HashTable field1917 = new HashTable(32);
 
 	@ObfuscatedName("n.m")
 	public static boolean field1919 = false;

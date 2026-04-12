@@ -10,10 +10,10 @@ public final class class106 {
 	public int field2660;
 
 	@ObfuscatedName("rd.f")
-	public static class15 field2663 = new class15(64);
+	public static LruCache field2663 = new LruCache(64);
 
 	@ObfuscatedName("rd.h")
-	public class128 field2665;
+	public ModelSource field2665;
 
 	@ObfuscatedName("rd.k")
 	public int field2668;
@@ -34,7 +34,7 @@ public final class class106 {
 	public int field2678 = 0;
 
 	@ObfuscatedName("rd.w")
-	public static class15 field2680 = new class15(50);
+	public static LruCache field2680 = new LruCache(50);
 
 	@ObfuscatedName("rd.z")
 	public static long[] field2683 = new long[100];

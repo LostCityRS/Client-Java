@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("rb")
-public final class class104 extends class44 {
+public final class class104 extends Linkable2 {
 
 	@ObfuscatedName("rb.ub")
 	public Js5Loader field2615;
@@ -10,7 +10,7 @@ public final class class104 extends class44 {
 	public static long[] field2618 = new long[100];
 
 	@ObfuscatedName("rb.Cb")
-	public static class91[] field2623 = new class91[4];
+	public static ModelLit[] field2623 = new ModelLit[4];
 
 	@ObfuscatedName("rb.Eb")
 	public static int[] field2625 = new int[128];

@@ -4,7 +4,7 @@ package deob;
 public final class class86 {
 
 	@ObfuscatedName("ob.a")
-	public static class15 field2152 = new class15(64);
+	public static LruCache field2152 = new LruCache(64);
 
 	@ObfuscatedName("ob.g")
 	public static int field2158 = 0;

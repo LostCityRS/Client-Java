@@ -10,7 +10,7 @@ public final class Sprite {
 	public int field980 = 0;
 
 	@ObfuscatedName("g.d")
-	public static class15 field981 = new class15(10);
+	public static LruCache field981 = new LruCache(10);
 
 	@ObfuscatedName("g.e")
 	public int field982 = 0;
@@ -22,7 +22,7 @@ public final class Sprite {
 	public int field984;
 
 	@ObfuscatedName("g.h")
-	public class128 field985;
+	public ModelSource field985;
 
 	@ObfuscatedName("g.j")
 	public int field987;
@@ -46,7 +46,7 @@ public final class Sprite {
 	public int field995;
 
 	@ObfuscatedName("g.s")
-	public static class63 field996 = new class63();
+	public static LinkList2 field996 = new LinkList2();
 
 	@ObfuscatedName("g.t")
 	public int field997;
