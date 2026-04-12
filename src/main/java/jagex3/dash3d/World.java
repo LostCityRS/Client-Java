@@ -42,22 +42,22 @@ public final class World {
 	public static int field105 = -1;
 
 	@ObfuscatedName("ab.db")
-	public final int[][] field156 = new int[][] { new int[16], { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 }, { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1 }, { 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1 } };
+	public final int[][] field156 = new int[][]{new int[16], {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1}, {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1}, {1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1}};
 
 	@ObfuscatedName("ab.eb")
-	public static int[] field157 = new int[] { 76, 8, 137, 4, 0, 1, 38, 2, 19 };
+	public static int[] field157 = new int[]{76, 8, 137, 4, 0, 1, 38, 2, 19};
 
 	@ObfuscatedName("ab.f")
-	public static int[] field107 = new int[] { 53, -53, -53, 53 };
+	public static int[] field107 = new int[]{53, -53, -53, 53};
 
 	@ObfuscatedName("ab.fb")
-	public static int[] field158 = new int[] { 1, 1, 0, 0, 0, 8, 0, 0, 8 };
+	public static int[] field158 = new int[]{1, 1, 0, 0, 0, 8, 0, 0, 8};
 
 	@ObfuscatedName("ab.g")
 	public static int field108 = -1;
 
 	@ObfuscatedName("ab.gb")
-	public static int[] field159 = new int[] { 0, 4, 4, 8, 0, 0, 8, 0, 0 };
+	public static int[] field159 = new int[]{0, 4, 4, 8, 0, 0, 8, 0, 0};
 
 	@ObfuscatedName("ab.i")
 	public final int[][][] field110 = new int[4][105][105];
@@ -84,7 +84,7 @@ public final class World {
 	public final Sprite[] field120 = new Sprite[5000];
 
 	@ObfuscatedName("ab.t")
-	public static int[] field121 = new int[] { -45, 45, 45, -45 };
+	public static int[] field121 = new int[]{-45, 45, 45, -45};
 
 	@ObfuscatedName("ab.v")
 	public static int field123 = 0;
@@ -93,7 +93,7 @@ public final class World {
 	public final int field124 = 104;
 
 	@ObfuscatedName("ab.B")
-	public static int[] field129 = new int[] { 45, 45, -45, -45 };
+	public static int[] field129 = new int[]{45, 45, -45, -45};
 
 	@ObfuscatedName("ab.A")
 	public static int[] field128 = new int[field117];
@@ -105,7 +105,7 @@ public final class World {
 	public static boolean field141 = false;
 
 	@ObfuscatedName("ab.M")
-	public static int[] field139 = new int[] { -53, -53, 53, 53 };
+	public static int[] field139 = new int[]{-53, -53, 53, 53};
 
 	@ObfuscatedName("ab.N")
 	public static Occlude[][] field140 = new Occlude[field117][500];
@@ -120,22 +120,22 @@ public final class World {
 	public static LinkList field135 = new LinkList();
 
 	@ObfuscatedName("ab.R")
-	public static int[] field144 = new int[] { 160, 192, 80, 96, 0, 144, 80, 48, 160 };
+	public static int[] field144 = new int[]{160, 192, 80, 96, 0, 144, 80, 48, 160};
 
 	@ObfuscatedName("ab.T")
-	public static int[] field146 = new int[] { 0, 0, 2, 0, 0, 2, 1, 1, 0 };
+	public static int[] field146 = new int[]{0, 0, 2, 0, 0, 2, 1, 1, 0};
 
 	@ObfuscatedName("ab.U")
-	public static int[] field147 = new int[] { 19, 55, 38, 155, 255, 110, 137, 205, 76 };
+	public static int[] field147 = new int[]{19, 55, 38, 155, 255, 110, 137, 205, 76};
 
 	@ObfuscatedName("ab.Z")
-	public static int[] field152 = new int[] { 2, 0, 0, 2, 0, 0, 0, 4, 4 };
+	public static int[] field152 = new int[]{2, 0, 0, 2, 0, 0, 0, 4, 4};
 
 	@ObfuscatedName("ab.C")
 	public int field130 = 0;
 
 	@ObfuscatedName("ab.V")
-	public final int[][] field148 = new int[][] { { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, { 12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3 }, { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 }, { 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12 } };
+	public final int[][] field148 = new int[][]{{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, {12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3}, {15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0}, {3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12}};
 
 	@ObfuscatedName("ab.X")
 	public final int[] field150 = new int[10000];
@@ -148,6 +148,28 @@ public final class World {
 
 	@ObfuscatedName("ab.F")
 	public final int[][][] field132;
+
+	@ObfuscatedName("ab.c()V")
+	public static void method70() {
+		field133 = null;
+		field107 = null;
+		field139 = null;
+		field121 = null;
+		field129 = null;
+		field128 = null;
+		field140 = null;
+		field134 = null;
+		field135 = null;
+		field147 = null;
+		field144 = null;
+		field157 = null;
+		field146 = null;
+		field152 = null;
+		field159 = null;
+		field158 = null;
+		field161 = null;
+		Statics.field160 = null;
+	}
 
 	@ObfuscatedName("ab.a(III)I")
 	public int method47(int arg0, int arg1, int arg2) {
@@ -244,7 +266,8 @@ public final class World {
 				for (int var14 = -25; var14 < 25; var14++) {
 					for (int var15 = -25; var15 < 25; var15++) {
 						boolean var16 = false;
-						label76: for (int var17 = -1; var17 <= 1; var17++) {
+						label76:
+						for (int var17 = -1; var17 <= 1; var17++) {
 							for (int var18 = -1; var18 <= 1; var18++) {
 								if (var1[var12][var13][var14 + var17 + 25 + 1][var15 + var18 + 25 + 1]) {
 									var16 = true;
@@ -330,7 +353,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIIII)V")
-	public void method53(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void renderAll(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg0 < 0) {
 			arg0 = 0;
 		} else if (arg0 >= this.field124 * 128) {
@@ -760,7 +783,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.b()V")
-	public void method60() {
+	public void removeSprites() {
 		for (int var1 = 0; var1 < this.field119; var1++) {
 			Sprite var2 = this.field120[var1];
 			this.method61(var2);
@@ -1043,7 +1066,8 @@ public final class World {
 											int var43 = var3.field888;
 											var3.field870 = false;
 											int var44 = 0;
-											label559: for (int var45 = 0; var45 < var43; var45++) {
+											label559:
+											for (int var45 = 0; var45 < var43; var45++) {
 												Sprite var46 = var3.field873[var45];
 												if (Statics.field113 != var46.field997) {
 													for (int var47 = var46.field984; var47 <= var46.field995; var47++) {
@@ -1674,7 +1698,8 @@ public final class World {
 							var19 = 50;
 						}
 						boolean var20 = false;
-						label142: for (int var21 = var18; var21 <= var19; var21++) {
+						label142:
+						for (int var21 = var18; var21 <= var19; var21++) {
 							for (int var22 = var16; var22 <= var17; var22++) {
 								if (Statics.field160[var21][var22]) {
 									var20 = true;
@@ -1791,7 +1816,7 @@ public final class World {
 					Pix3D.method360(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641);
 				}
 			} else if (field115) {
-				int var52 = Statics.field771.method693(arg0.field2636);
+				int var52 = Pix3D.field771.method693(arg0.field2636);
 				Pix3D.method360(var49, var51, var47, var48, var50, var46, method64(var52, arg0.field2651), method64(var52, arg0.field2648), method64(var52, arg0.field2641));
 			} else if (arg0.field2645) {
 				Pix3D.method353(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field2636);
@@ -1815,7 +1840,7 @@ public final class World {
 				Pix3D.method353(var45, var47, var51, var44, var46, var50, arg0.field2647, arg0.field2641, arg0.field2648, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field2636);
 				return;
 			}
-			int var53 = Statics.field771.method693(arg0.field2636);
+			int var53 = Pix3D.field771.method693(arg0.field2636);
 			Pix3D.method360(var45, var47, var51, var44, var46, var50, method64(var53, arg0.field2647), method64(var53, arg0.field2641), method64(var53, arg0.field2648));
 		} else if (arg0.field2647 != 12345678) {
 			Pix3D.method360(var45, var47, var51, var44, var46, var50, arg0.field2647, arg0.field2641, arg0.field2648);
@@ -2032,7 +2057,7 @@ public final class World {
 						Pix3D.method360(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19]);
 					}
 				} else if (field115) {
-					int var29 = Statics.field771.method693(arg0.field556[var19]);
+					int var29 = Pix3D.field771.method693(arg0.field556[var19]);
 					Pix3D.method360(var26, var27, var28, var23, var24, var25, method64(var29, arg0.field562[var19]), method64(var29, arg0.field564[var19]), method64(var29, arg0.field567[var19]));
 				} else if (arg0.field560) {
 					Pix3D.method353(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19], Ground.field565[0], Ground.field565[1], Ground.field565[3], Ground.field570[0], Ground.field570[1], Ground.field570[3], Ground.field555[0], Ground.field555[1], Ground.field555[3], arg0.field556[var19]);

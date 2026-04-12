@@ -10,15 +10,6 @@ public class class14 {
 	@ObfuscatedName("ca.e")
 	public static Calendar field453 = Calendar.getInstance();
 
-	@ObfuscatedName("ca.p")
-	public static int field464 = 0;
-
-	@ObfuscatedName("ca.r")
-	public static int field466 = 0;
-
-	@ObfuscatedName("ca.w")
-	public static int[] field471 = new int[5];
-
 	@ObfuscatedName("ca.B")
 	public static byte field476 = 0;
 

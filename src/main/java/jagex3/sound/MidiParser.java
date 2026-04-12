@@ -25,13 +25,18 @@ public final class MidiParser {
 	public int[] field757;
 
 	@ObfuscatedName("ea.g")
-	public static byte[] field758 = new byte[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	public static byte[] field758 = new byte[]{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	@ObfuscatedName("ea.h")
 	public int field759;
 
 	@ObfuscatedName("ea.i")
 	public int field760;
+
+	@ObfuscatedName("ea.h()V")
+	public static void method351() {
+		field758 = null;
+	}
 
 	@ObfuscatedName("ea.a()I")
 	public int method335() {
@@ -80,7 +85,7 @@ public final class MidiParser {
 	@ObfuscatedName("ea.a([B)V")
 	public void method341(byte[] arg0) {
 		this.field752.field284 = arg0;
-		this.field752.field267 = 10;
+		this.field752.pos = 10;
 		int var2 = this.field752.method145();
 		this.field760 = this.field752.method145();
 		this.field759 = 500000;
@@ -90,10 +95,10 @@ public final class MidiParser {
 			int var4 = this.field752.method167();
 			int var5 = this.field752.method167();
 			if (var4 == 1297379947) {
-				this.field755[var3] = this.field752.field267;
+				this.field755[var3] = this.field752.pos;
 				var3++;
 			}
-			this.field752.field267 += var5;
+			this.field752.pos += var5;
 		}
 		this.field754 = (int[]) this.field755.clone();
 		this.field756 = new int[var2];
@@ -107,7 +112,7 @@ public final class MidiParser {
 
 	@ObfuscatedName("ea.e()Z")
 	public boolean method343() {
-		return this.field752.field267 < 0;
+		return this.field752.pos < 0;
 	}
 
 	@ObfuscatedName("ea.a(J)V")
@@ -117,25 +122,25 @@ public final class MidiParser {
 		for (int var4 = 0; var4 < var3; var4++) {
 			this.field756[var4] = 0;
 			this.field757[var4] = 0;
-			this.field752.field267 = this.field755[var4];
+			this.field752.pos = this.field755[var4];
 			this.method339(var4);
-			this.field754[var4] = this.field752.field267;
+			this.field754[var4] = this.field752.pos;
 		}
 	}
 
 	@ObfuscatedName("ea.d(I)V")
 	public void method345(int arg0) {
-		this.field754[arg0] = this.field752.field267;
+		this.field754[arg0] = this.field752.pos;
 	}
 
 	@ObfuscatedName("ea.e(I)I")
 	public int method346(int arg0) {
-		byte var2 = this.field752.field284[this.field752.field267];
+		byte var2 = this.field752.field284[this.field752.pos];
 		int var3;
 		if (var2 < 0) {
 			var3 = var2 & 0xFF;
 			this.field757[arg0] = var3;
-			this.field752.field267++;
+			this.field752.pos++;
 		} else {
 			var3 = this.field757[arg0];
 		}
@@ -144,14 +149,14 @@ public final class MidiParser {
 		}
 		int var4 = this.field752.method176();
 		if (var3 == 247 && var4 > 0) {
-			int var5 = this.field752.field284[this.field752.field267] & 0xFF;
+			int var5 = this.field752.field284[this.field752.pos] & 0xFF;
 			if (var5 >= 241 && var5 <= 243 || var5 == 246 || var5 == 248 || var5 >= 250 && var5 <= 252 || var5 == 254) {
-				this.field752.field267++;
+				this.field752.pos++;
 				this.field757[arg0] = var5;
 				return this.method347(arg0, var5);
 			}
 		}
-		this.field752.field267 += var4;
+		this.field752.pos += var4;
 		return 0;
 	}
 
@@ -171,7 +176,7 @@ public final class MidiParser {
 		int var3 = this.field752.method144();
 		int var4 = this.field752.method176();
 		if (var3 == 47) {
-			this.field752.field267 += var4;
+			this.field752.pos += var4;
 			return 1;
 		} else if (var3 == 81) {
 			int var5 = this.field752.method164();
@@ -179,10 +184,10 @@ public final class MidiParser {
 			int var6 = this.field756[arg0];
 			this.field753 += (long) (this.field759 - var5) * (long) var6;
 			this.field759 = var5;
-			this.field752.field267 += var4;
+			this.field752.pos += var4;
 			return 2;
 		} else {
-			this.field752.field267 += var4;
+			this.field752.pos += var4;
 			return 3;
 		}
 	}
@@ -200,12 +205,12 @@ public final class MidiParser {
 
 	@ObfuscatedName("ea.g()V")
 	public void method349() {
-		this.field752.field267 = -1;
+		this.field752.pos = -1;
 	}
 
 	@ObfuscatedName("ea.f(I)V")
 	public void method350(int arg0) {
-		this.field752.field267 = this.field754[arg0];
+		this.field752.pos = this.field754[arg0];
 	}
 
 }

@@ -82,7 +82,7 @@ public final class JagFX {
 		for (int var2 = 0; var2 < 10; var2++) {
 			int var3 = arg0.method144();
 			if (var3 != 0) {
-				arg0.field267--;
+				arg0.pos--;
 				this.field1904[var2] = new Tone();
 				this.field1904[var2].method1003(arg0);
 			}

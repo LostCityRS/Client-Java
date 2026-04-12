@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.ObjType;
 import deob.Statics;
 import deob.class106;
 import jagex3.dash3d.Model;

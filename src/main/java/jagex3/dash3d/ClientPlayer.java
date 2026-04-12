@@ -1,8 +1,9 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.ObjType;
 import deob.Statics;
+import jagex3.client.Client;
+import jagex3.config.ObjType;
 import jagex3.config.SeqType;
 import jagex3.config.SpotType;
 import jagex3.io.Packet;
@@ -86,15 +87,15 @@ public final class ClientPlayer extends ClientEntity {
 			Model var4 = SpotType.method713(super.field1965).method371(super.field2014);
 			if (var4 != null) {
 				var4.method796(0, -super.field1984, 0);
-				Model[] var5 = new Model[] { var3, var4 };
+				Model[] var5 = new Model[]{var3, var4};
 				var3 = new Model(var5, 2, true);
 			}
 		}
 		if (!this.field95 && this.field73 != null) {
-			if (Statics.field2063 >= this.field82) {
+			if (Client.loopCycle >= this.field82) {
 				this.field73 = null;
 			}
-			if (this.field91 <= Statics.field2063 && this.field82 > Statics.field2063) {
+			if (this.field91 <= Client.loopCycle && this.field82 > Client.loopCycle) {
 				Model var6 = this.field73;
 				var6.method796(this.field79 - super.field1972, -this.field84 + this.field80, this.field99 - super.field1963);
 				if (super.field1954 == 512) {
@@ -107,7 +108,7 @@ public final class ClientPlayer extends ClientEntity {
 				} else if (super.field1954 == 1536) {
 					var6.method781();
 				}
-				Model[] var7 = new Model[] { var3, var6 };
+				Model[] var7 = new Model[]{var3, var6};
 				var3 = new Model(var7, 2, true);
 				if (super.field1954 == 512) {
 					var6.method781();
@@ -134,7 +135,7 @@ public final class ClientPlayer extends ClientEntity {
 
 	@ObfuscatedName("aa.a(BLba;)V")
 	public void method43(Packet arg0) {
-		arg0.field267 = 0;
+		arg0.pos = 0;
 		int var2 = arg0.method144();
 		this.field76 = arg0.method184();
 		this.field81 = arg0.method184();

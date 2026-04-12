@@ -1,7 +1,7 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.ObjType;
+import jagex3.config.ObjType;
 
 @ObfuscatedName("je")
 public final class ClientObj extends ModelSource {

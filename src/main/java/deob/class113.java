@@ -6,20 +6,11 @@ import jagex3.datastruct.LruCache;
 @ObfuscatedName("se")
 public final class class113 {
 
-	@ObfuscatedName("se.a")
-	public static boolean field2773 = false;
-
-	@ObfuscatedName("se.d")
-	public static int field2776 = 0;
-
 	@ObfuscatedName("se.e")
 	public ModelSource field2777;
 
 	@ObfuscatedName("se.g")
 	public int field2779;
-
-	@ObfuscatedName("se.j")
-	public static int[] field2782 = new int[5];
 
 	@ObfuscatedName("se.m")
 	public int field2785;
@@ -38,9 +29,6 @@ public final class class113 {
 
 	@ObfuscatedName("se.w")
 	public int field2795;
-
-	@ObfuscatedName("se.y")
-	public static int field2797 = 0;
 
 	@ObfuscatedName("se.B")
 	public static int field2800 = -1;

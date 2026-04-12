@@ -5,7 +5,7 @@ import jagex3.datastruct.Linkable;
 import jagex3.util.JagString;
 
 @ObfuscatedName("te")
-public final class class119 extends Linkable {
+public final class ReflectionCheck extends Linkable {
 
 	@ObfuscatedName("te.cb")
 	public static JagString[] field2951 = new JagString[200];

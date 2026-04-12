@@ -6,9 +6,6 @@ import deob.Statics;
 @ObfuscatedName("uc")
 public abstract class MidiPlayer extends MidiStream {
 
-	@ObfuscatedName("uc.G")
-	public static int field3069 = 0;
-
 	@ObfuscatedName("uc.a(IIJI)V")
 	public final void method996(int arg0, int arg1, long arg2) {
 		int var5 = (int) ((double) arg0 * Math.pow(0.1D, (double) arg1 * 5.0E-4D) + 0.5D);

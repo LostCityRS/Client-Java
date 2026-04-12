@@ -393,7 +393,7 @@ public final class LocType extends Linkable2 {
 						this.field1305[var12] = arg0.method144();
 					}
 				} else {
-					arg0.field267 += var11 * 3;
+					arg0.pos += var11 * 3;
 				}
 			}
 		} else if (arg1 == 2) {
@@ -408,7 +408,7 @@ public final class LocType extends Linkable2 {
 						this.field1308[var10] = arg0.method145();
 					}
 				} else {
-					arg0.field267 += var9 * 2;
+					arg0.pos += var9 * 2;
 				}
 			}
 		} else if (arg1 == 14) {

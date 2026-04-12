@@ -29,7 +29,7 @@ public final class ClientNpc extends ClientEntity {
 			Model var4 = SpotType.method713(super.field1965).method371(super.field2014);
 			if (var4 != null) {
 				var4.method796(0, -super.field1984, 0);
-				Model[] var5 = new Model[] { var3, var4 };
+				Model[] var5 = new Model[]{var3, var4};
 				var3 = new Model(var5, 2, true);
 			}
 		}

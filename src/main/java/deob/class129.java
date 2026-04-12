@@ -132,7 +132,8 @@ public final class class129 implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				label77: {
+				label77:
+				{
 					int var2;
 					int var3;
 					synchronized (this) {

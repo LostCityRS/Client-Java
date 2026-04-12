@@ -1,7 +1,12 @@
-package deob;
+package jagex3.config;
 
+import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.dash3d.Model;
+import jagex3.dash3d.Pix3D;
 import jagex3.datastruct.Linkable2;
+import jagex3.graphics.Pix2D;
+import jagex3.graphics.Pix32;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.util.JagString;
@@ -48,26 +53,14 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("ta.tc")
 	public int field2879 = -1;
 
-	@ObfuscatedName("ta.ub")
-	public static int field2828 = 0;
-
 	@ObfuscatedName("ta.uc")
 	public boolean field2880 = false;
 
-	@ObfuscatedName("ta.vb")
-	public static int field2829 = 0;
-
-	@ObfuscatedName("ta.vc")
-	public static int field2881 = -1;
-
 	@ObfuscatedName("ta.wb")
-	public JagString[] field2830 = new JagString[] { null, null, null, null, Statics.field487 };
+	public JagString[] field2830 = new JagString[]{null, null, null, null, Statics.field487};
 
 	@ObfuscatedName("ta.wc")
 	public int field2882 = -1;
-
-	@ObfuscatedName("ta.Lb")
-	public static int[] field2845 = new int[50];
 
 	@ObfuscatedName("ta.xb")
 	public int field2831 = -1;
@@ -91,7 +84,7 @@ public final class ObjType extends Linkable2 {
 	public int field2851 = -1;
 
 	@ObfuscatedName("ta.Bb")
-	public JagString[] field2835 = new JagString[] { null, null, Statics.field1594, null, null };
+	public JagString[] field2835 = new JagString[]{null, null, Statics.field1594, null, null};
 
 	@ObfuscatedName("ta.Kb")
 	public int field2844 = 128;
@@ -169,6 +162,138 @@ public final class ObjType extends Linkable2 {
 		Statics.field1590 = Statics.field1405.method235(10);
 	}
 
+	@ObfuscatedName("va.b(IIII)Ljd;")
+	public static Pix32 method1007(int arg0, int arg1, int arg2) {
+		if (arg2 == 0) {
+			Pix32 var3 = (Pix32) Statics.field253.method263((long) arg1);
+			if (var3 != null && var3.field1477 != arg0 && var3.field1477 != -1) {
+				var3.method739();
+				var3 = null;
+			}
+			if (var3 != null) {
+				return var3;
+			}
+		}
+		ObjType var4 = method760(arg1);
+		if (var4.field2862 == null) {
+			arg0 = -1;
+		}
+		if (arg0 > 1) {
+			int var5 = -1;
+			for (int var6 = 0; var6 < 10; var6++) {
+				if (arg0 >= var4.field2865[var6] && var4.field2865[var6] != 0) {
+					var5 = var4.field2862[var6];
+				}
+			}
+			if (var5 != -1) {
+				var4 = method760(var5);
+			}
+		}
+		Model var7 = var4.method954(true, 1);
+		if (var7 == null) {
+			return null;
+		}
+		Pix32 var8 = null;
+		if (var4.field2838 != -1) {
+			var8 = method1007(10, var4.field2843, -1);
+			if (var8 == null) {
+				return null;
+			}
+		}
+		int[] var9 = Statics.field2747;
+		int var10 = Statics.field2750;
+		int var11 = Statics.field2749;
+		int var12 = Pix2D.field2752;
+		int var13 = Pix2D.field2753;
+		int var14 = Pix2D.field2748;
+		int var15 = Pix2D.field2751;
+		int[] var16 = Pix3D.method367();
+		int var17 = Statics.field762;
+		int var18 = Statics.field777;
+		Pix32 var19 = new Pix32(32, 32);
+		Pix2D.method926(var19.field1480, 32, 32);
+		Statics.field2909 = Pix3D.method362(Statics.field2909);
+		Pix2D.method913(0, 0, 32, 32, 0);
+		int var20 = var4.field2848;
+		if (arg2 == -1) {
+			var20 = (int) ((double) var20 * 1.5D);
+		}
+		if (arg2 > 0) {
+			var20 = (int) ((double) var20 * 1.04D);
+		}
+		Pix3D.field776 = false;
+		int var21 = Pix3D.field775[var4.field2875] * var20 >> 16;
+		int var22 = Pix3D.field778[var4.field2875] * var20 >> 16;
+		var7.method766();
+		var7.method780(var4.field2861, var4.field2858, var4.field2875, var4.field2837, var7.field3135 / 2 + var4.field2841 + var21, var4.field2841 + var22);
+		for (int var23 = 31; var23 >= 0; var23--) {
+			for (int var24 = 31; var24 >= 0; var24--) {
+				if (var19.field1480[var24 * 32 + var23] == 0) {
+					if (var23 > 0 && var19.field1480[var24 * 32 + var23 - 1] > 1) {
+						var19.field1480[var24 * 32 + var23] = 1;
+					} else if (var24 > 0 && var19.field1480[var23 + (var24 - 1) * 32] > 1) {
+						var19.field1480[var24 * 32 + var23] = 1;
+					} else if (var23 < 31 && var19.field1480[var24 * 32 + var23 + 1] > 1) {
+						var19.field1480[var24 * 32 + var23] = 1;
+					} else if (var24 < 31 && var19.field1480[(var24 + 1) * 32 + var23] > 1) {
+						var19.field1480[var24 * 32 + var23] = 1;
+					}
+				}
+			}
+		}
+		if (arg2 > 0) {
+			for (int var25 = 31; var25 >= 0; var25--) {
+				for (int var26 = 31; var26 >= 0; var26--) {
+					if (var19.field1480[var25 + var26 * 32] == 0) {
+						if (var25 > 0 && var19.field1480[var26 * 32 + var25 - 1] == 1) {
+							var19.field1480[var26 * 32 + var25] = arg2;
+						} else if (var26 > 0 && var19.field1480[var25 + (var26 - 1) * 32] == 1) {
+							var19.field1480[var25 + var26 * 32] = arg2;
+						} else if (var25 < 31 && var19.field1480[var25 + var26 * 32 + 1] == 1) {
+							var19.field1480[var25 + var26 * 32] = arg2;
+						} else if (var26 < 31 && var19.field1480[var26 * 32 + var25 + 32] == 1) {
+							var19.field1480[var26 * 32 + var25] = arg2;
+						}
+					}
+				}
+			}
+		} else if (arg2 == 0) {
+			for (int var27 = 31; var27 >= 0; var27--) {
+				for (int var28 = 31; var28 >= 0; var28--) {
+					if (var19.field1480[var28 * 32 + var27] == 0 && var27 > 0 && var28 > 0 && var19.field1480[var27 + (var28 - 1) * 32 - 1] > 0) {
+						var19.field1480[var28 * 32 + var27] = 3153952;
+					}
+				}
+			}
+		}
+		if (var4.field2838 != -1) {
+			int var29 = var8.field1477;
+			int var30 = var8.field1479;
+			var8.field1477 = 32;
+			var8.field1479 = 32;
+			var8.method551(0, 0);
+			var8.field1479 = var30;
+			var8.field1477 = var29;
+		}
+		if (arg2 == 0) {
+			Statics.field253.method262((long) arg1, var19);
+		}
+		Pix2D.method926(var9, var11, var10);
+		Pix2D.method912(var12, var14, var13, var15);
+		Pix3D.method362(var16);
+		Statics.field762 = var17;
+		Statics.field777 = var18;
+		Pix3D.method356();
+		Pix3D.field776 = true;
+		if (var4.field2826 == 1) {
+			var19.field1479 = 33;
+		} else {
+			var19.field1479 = 32;
+		}
+		var19.field1477 = arg0;
+		return var19;
+	}
+
 	@ObfuscatedName("ta.a(BZ)Z")
 	public boolean method939(boolean arg0) {
 		int var2 = this.field2831;
@@ -233,11 +358,11 @@ public final class ObjType extends Linkable2 {
 		if (var3 != -1) {
 			Model var6 = Model.method798(Statics.field458, var3);
 			if (var4 == -1) {
-				Model[] var7 = new Model[] { var5, var6 };
+				Model[] var7 = new Model[]{var5, var6};
 				var5 = new Model(var7, 2);
 			} else {
 				Model var8 = Model.method798(Statics.field458, var4);
-				Model[] var9 = new Model[] { var5, var6, var8 };
+				Model[] var9 = new Model[]{var5, var6, var8};
 				var5 = new Model(var9, 3);
 			}
 		}
@@ -289,7 +414,7 @@ public final class ObjType extends Linkable2 {
 		Model var4 = Model.method798(Statics.field458, var2);
 		if (var3 != -1) {
 			Model var5 = Model.method798(Statics.field458, var3);
-			Model[] var6 = new Model[] { var4, var5 };
+			Model[] var6 = new Model[]{var4, var5};
 			var4 = new Model(var6, 2);
 		}
 		if (this.field2834 != null) {

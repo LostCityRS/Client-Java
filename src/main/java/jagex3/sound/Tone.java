@@ -94,6 +94,18 @@ public final class Tone {
 		}
 	}
 
+	@ObfuscatedName("ue.a()V")
+	public static void method1004() {
+		field3088 = null;
+		field3097 = null;
+		field3084 = null;
+		field3105 = null;
+		field3101 = null;
+		field3098 = null;
+		field3099 = null;
+		field3102 = null;
+	}
+
 	@ObfuscatedName("ue.a(Lba;)V")
 	public void method1003(Packet arg0) {
 		this.field3094 = new Envelope();
@@ -102,7 +114,7 @@ public final class Tone {
 		this.field3096.method249(arg0);
 		int var2 = arg0.method144();
 		if (var2 != 0) {
-			arg0.field267--;
+			arg0.pos--;
 			this.field3090 = new Envelope();
 			this.field3090.method249(arg0);
 			this.field3104 = new Envelope();
@@ -110,7 +122,7 @@ public final class Tone {
 		}
 		int var3 = arg0.method144();
 		if (var3 != 0) {
-			arg0.field267--;
+			arg0.pos--;
 			this.field3095 = new Envelope();
 			this.field3095.method249(arg0);
 			this.field3087 = new Envelope();
@@ -118,7 +130,7 @@ public final class Tone {
 		}
 		int var4 = arg0.method144();
 		if (var4 != 0) {
-			arg0.field267--;
+			arg0.pos--;
 			this.field3103 = new Envelope();
 			this.field3103.method249(arg0);
 			this.field3086 = new Envelope();

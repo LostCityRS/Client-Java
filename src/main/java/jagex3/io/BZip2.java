@@ -33,7 +33,8 @@ public final class BZip2 {
 		int var9 = arg0.field1813;
 		int var10 = var9;
 		int var11 = arg0.field1799 + 1;
-		label63: while (true) {
+		label63:
+		while (true) {
 			if (var2 > 0) {
 				while (true) {
 					if (var9 == 0) {
@@ -495,5 +496,10 @@ public final class BZip2 {
 			field1081.field1827 = null;
 			return var5;
 		}
+	}
+
+	@ObfuscatedName("ge.a()V")
+	public static void method438() {
+		field1081 = null;
 	}
 }

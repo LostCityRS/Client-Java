@@ -4,6 +4,7 @@ import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.graphics.PixMap;
+import jagex3.util.JagString;
 import jagex3.util.Timer;
 
 import java.applet.Applet;
@@ -54,7 +55,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("qa.Fb")
 	public static volatile boolean field2402 = true;
 	@ObfuscatedName("wb.b")
-	public static volatile boolean field3242 = false;
+	public static volatile boolean canvasReplaceRecommended = false;
 	@ObfuscatedName("rc.e")
 	public static volatile boolean field2631 = true;
 	@ObfuscatedName("nc.d")
@@ -76,6 +77,67 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@ObfuscatedName("kd.Q")
 	public boolean field1640 = false;
+
+	@ObfuscatedName("j.a(ILjava/awt/Color;La;I)V")
+	public static void drawProgress(int arg0, Color arg1, JagString arg2) {
+		try {
+			Graphics var3 = canvas.getGraphics();
+			if (Statics.field842 == null) {
+				Statics.field842 = new Font("Helvetica", 1, 13);
+				Statics.field469 = canvas.getFontMetrics(Statics.field842);
+			}
+			if (field2402) {
+				field2402 = false;
+				var3.setColor(Color.black);
+				var3.fillRect(0, 0, field711, field2372);
+			}
+			if (arg1 == null) {
+				arg1 = new Color(140, 17, 17);
+			}
+			try {
+				if (Statics.field1397 == null) {
+					Statics.field1397 = canvas.createImage(304, 34);
+				}
+				Graphics var4 = Statics.field1397.getGraphics();
+				var4.setColor(arg1);
+				var4.drawRect(0, 0, 303, 33);
+				var4.fillRect(2, 2, arg0 * 3, 30);
+				var4.setColor(Color.black);
+				var4.drawRect(1, 1, 301, 31);
+				var4.fillRect(arg0 * 3 + 2, 2, 300 - arg0 * 3, 30);
+				var4.setFont(Statics.field842);
+				var4.setColor(Color.white);
+				arg2.method16((304 - arg2.method24(Statics.field469)) / 2, 22, var4);
+				var3.drawImage(Statics.field1397, field711 / 2 - 152, field2372 / 2 + -18, null);
+			} catch (Exception var7) {
+				int var5 = field711 / 2 - 152;
+				int var6 = field2372 / 2 - 18;
+				var3.setColor(arg1);
+				var3.drawRect(var5, var6, 303, 33);
+				var3.fillRect(var5 + 2, var6 - -2, arg0 * 3, 30);
+				var3.setColor(Color.black);
+				var3.drawRect(var5 + 1, var6 + 1, 301, 31);
+				var3.fillRect(arg0 * 3 + var5 + 2, var6 + 2, 300 - arg0 * 3, 30);
+				var3.setFont(Statics.field842);
+				var3.setColor(Color.white);
+				arg2.method16((304 - arg2.method24(Statics.field469)) / 2 + var5, var6 + 22, var3);
+			}
+		} catch (Exception var8) {
+			canvas.repaint();
+		}
+	}
+
+	@ObfuscatedName("td.c(I)V")
+	public static void doneslowupdate() {
+		field1747.method571();
+		for (int var0 = 0; var0 < 32; var0++) {
+			field1601[var0] = 0L;
+		}
+		for (int var1 = 0; var1 < 32; var1++) {
+			field3281[var1] = 0L;
+		}
+		field681 = 0;
+	}
 
 	@Override
 	public final void run() {
@@ -103,8 +165,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 					}
 				}
 			}
-			this.method628();
-			field187 = Statics.method875(field2372, field711, canvas);
+			this.addCanvas();
+			field187 = PixMap.method875(field2372, field711, canvas);
 			this.method290();
 			field1747 = Timer.method909();
 			field1747.method571();
@@ -218,7 +280,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 		if (SignLink.javaVersion != null && SignLink.javaVersion.startsWith("1.5") && Statics.currentTime() - field225 > 1000L) {
 			Rectangle var2 = arg0.getClipBounds();
 			if (var2 == null || field711 <= var2.width && var2.height >= field2372) {
-				field3242 = true;
+				canvasReplaceRecommended = true;
 			}
 		}
 	}
@@ -327,7 +389,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 		synchronized (this) {
 			field1277 = field2631;
 		}
-		this.method279();
+		this.mainloop();
 	}
 
 	@ObfuscatedName("kd.a(Ljava/lang/String;IIIILjava/net/InetAddress;II)V")
@@ -385,7 +447,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("kd.b(B)V")
-	public final synchronized void method628() {
+	public final synchronized void addCanvas() {
 		Container var1;
 		if (field1859 == null) {
 			var1 = signlink.applet;
@@ -409,7 +471,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 		canvas.addFocusListener(this);
 		canvas.requestFocus();
 		field2402 = true;
-		field3242 = false;
+		canvasReplaceRecommended = false;
 		field225 = Statics.currentTime();
 	}
 
@@ -431,7 +493,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public abstract void init();
 
 	@ObfuscatedName("kd.d(I)V")
-	public abstract void method279();
+	public abstract void mainloop();
 
 	@ObfuscatedName("kd.e(I)V")
 	public abstract void method286();

@@ -27,9 +27,6 @@ public final class class106 {
 	@ObfuscatedName("rd.m")
 	public int field2670;
 
-	@ObfuscatedName("rd.p")
-	public static int field2673 = 0;
-
 	@ObfuscatedName("rd.t")
 	public int field2677;
 

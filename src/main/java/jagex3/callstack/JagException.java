@@ -2,6 +2,7 @@ package jagex3.callstack;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.client.Client;
 import jagex3.client.GameShell;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
@@ -43,7 +44,7 @@ public final class JagException extends RuntimeException {
 			String var4 = var3.replace('@', '_');
 			String var5 = var4.replace('&', '_');
 			String var6 = var5.replace('#', '_');
-			PrivilegedRequest var7 = signlink.method650(new URL(signlink.applet.getCodeBase(), "clienterror.ws?c=" + GameShell.field2038 + "&u=" + Statics.field1843 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
+			PrivilegedRequest var7 = signlink.method650(new URL(signlink.applet.getCodeBase(), "clienterror.ws?c=" + GameShell.field2038 + "&u=" + Client.field1843 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
 			while (var7.field815 == 0) {
 				Statics.sleepPrecise(1L);
 			}
@@ -54,5 +55,17 @@ public final class JagException extends RuntimeException {
 			}
 		} catch (Exception var9) {
 		}
+	}
+
+	@ObfuscatedName("ca.a(Ljava/lang/Throwable;Ljava/lang/String;)Lha;")
+	public static JagException report(Throwable arg0, String arg1) {
+		JagException var2;
+		if (arg0 instanceof JagException) {
+			var2 = (JagException) arg0;
+			var2.field1156 = var2.field1156 + ' ' + arg1;
+		} else {
+			var2 = new JagException(arg0, arg1);
+		}
+		return var2;
 	}
 }

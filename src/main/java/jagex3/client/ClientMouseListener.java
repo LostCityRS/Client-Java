@@ -27,12 +27,58 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	public static volatile long field919 = 0L;
 	@ObfuscatedName("nb.cd")
 	public static volatile int field2017 = 0;
+	@ObfuscatedName("r.j")
+	public static int field2568 = 0;
+	@ObfuscatedName("de.u")
+	public static int field741 = 0;
 
 	@ObfuscatedName("ha.a(Ljava/awt/Component;B)V")
-	public static void method465(Component arg0) {
+	public static void addListeners(Component arg0) {
 		arg0.addMouseListener(field1412);
 		arg0.addMouseMotionListener(field1412);
 		arg0.addFocusListener(field1412);
+	}
+
+	@ObfuscatedName("s.a(ILjava/awt/Component;)V")
+	public static void removeListeners(Component arg0) {
+		arg0.removeMouseListener(field1412);
+		arg0.removeMouseMotionListener(field1412);
+		arg0.removeFocusListener(field1412);
+	}
+
+	@ObfuscatedName("de.a(Z)V")
+	public static void method327() {
+		if (field1412 != null) {
+			ClientMouseListener var0 = field1412;
+			synchronized (field1412) {
+				field1412 = null;
+			}
+		}
+	}
+
+	@ObfuscatedName("vc.c(I)V")
+	public static void cycle() {
+		ClientMouseListener var0 = field1412;
+		synchronized (field1412) {
+			Client.field801 = field494;
+			field741 = field710;
+			field2568 = field496;
+			Client.field3050 = field2017;
+			Client.field2762 = field2711;
+			Client.field14 = field2396;
+			Client.field1344 = field919;
+			field2017 = 0;
+		}
+	}
+
+	@ObfuscatedName("ld.b(I)I")
+	public static int method662() {
+		return field2293++;
+	}
+
+	@ObfuscatedName("rb.a(ZI)V")
+	public static void method876(int arg0) {
+		field2293 = arg0;
 	}
 
 	@Override

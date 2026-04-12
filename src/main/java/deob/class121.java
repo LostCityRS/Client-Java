@@ -1,6 +1,6 @@
 package deob;
 
-import jagex3.io.PacketBit;
+import jagex3.client.ClientScript;
 import jagex3.util.JagString;
 
 @ObfuscatedName("ua")
@@ -11,9 +11,6 @@ public final class class121 {
 
 	@ObfuscatedName("ua.b")
 	public int[] field3000;
-
-	@ObfuscatedName("ua.e")
-	public static PacketBit field3003 = new PacketBit(5000);
 
 	@ObfuscatedName("ua.l")
 	public JagString[] field3010;

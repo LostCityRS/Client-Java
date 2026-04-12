@@ -79,7 +79,12 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 
 	@ObfuscatedName("k.a(Llc;IZB)Z")
 	public static boolean init(SignLink arg0, boolean arg1) {
-		return Statics.method734(arg0, arg1);
+		return MidiStream.method734(arg0, arg1);
+	}
+
+	@ObfuscatedName("pd.b()V")
+	public static void method816() {
+		field2347 = null;
 	}
 
 	@ObfuscatedName("pd.b(J)V")

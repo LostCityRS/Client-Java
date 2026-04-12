@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("s")
 public final class class108 {
 
-	@ObfuscatedName("s.c")
-	public static int field2704 = 0;
-
 	@ObfuscatedName("s.k")
 	public static int field2712 = -1;
 

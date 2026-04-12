@@ -11,6 +11,11 @@ public final class JavaSafePcmPlayer extends PcmPlayer {
 	@ObfuscatedName("gd.T")
 	public static AudioSource field1080;
 
+	@ObfuscatedName("gd.f()V")
+	public static void method437() {
+		field1080 = null;
+	}
+
 	@ObfuscatedName("gd.d(I)V")
 	@Override
 	public void method433(int arg0) throws Exception {

@@ -116,7 +116,7 @@ public final class SignLink implements Runnable {
 
 	@ObfuscatedName("lc.a([Ljava/lang/Class;Ljava/lang/String;Ljava/lang/Class;B)Led;")
 	public PrivilegedRequest method648(Class[] arg0, String arg1, Class arg2) {
-		return this.method651(0, 9, new Object[] { arg2, arg1, arg0 });
+		return this.method651(0, 9, new Object[]{arg2, arg1, arg0});
 	}
 
 	@ObfuscatedName("lc.b(I)Lle;")
@@ -261,7 +261,7 @@ public final class SignLink implements Runnable {
 
 	@ObfuscatedName("lc.a(Ljava/lang/Class;Ljava/lang/String;Z)Led;")
 	public PrivilegedRequest method654(Class arg0, String arg1) {
-		return this.method651(0, 10, new Object[] { arg0, arg1 });
+		return this.method651(0, 10, new Object[]{arg0, arg1});
 	}
 
 	@ObfuscatedName("lc.a(II)Led;")
@@ -293,7 +293,7 @@ public final class SignLink implements Runnable {
 			field1705 = "~/";
 		}
 		String var4 = ".file_store_" + arg1;
-		String[] var5 = new String[] { "c:/rscache/", "/rscache/", "c:/windows/", "c:/winnt/", "d:/windows/", "d:/winnt/", "e:/windows/", "e:/winnt/", "f:/windows/", "f:/winnt/", "c:/", field1705, "/tmp/", "" };
+		String[] var5 = new String[]{"c:/rscache/", "/rscache/", "c:/windows/", "c:/winnt/", "d:/windows/", "d:/winnt/", "e:/windows/", "e:/winnt/", "f:/windows/", "f:/winnt/", "c:/", field1705, "/tmp/", ""};
 		if (arg0 != -3849) {
 			this.method654(null, null);
 		}

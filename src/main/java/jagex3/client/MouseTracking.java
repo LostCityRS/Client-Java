@@ -2,8 +2,6 @@ package jagex3.client;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class102;
-import deob.class24;
 
 @ObfuscatedName("nc")
 public final class MouseTracking implements Runnable {
@@ -29,8 +27,8 @@ public final class MouseTracking implements Runnable {
 			Object var1 = this.lock;
 			synchronized (this.lock) {
 				if (this.field2058 < 500) {
-					this.field2059[this.field2058] = class24.field741;
-					this.field2057[this.field2058] = class102.field2568;
+					this.field2059[this.field2058] = ClientMouseListener.field741;
+					this.field2057[this.field2058] = ClientMouseListener.field2568;
 					this.field2058++;
 				}
 			}

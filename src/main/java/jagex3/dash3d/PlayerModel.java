@@ -1,10 +1,10 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.ObjType;
 import deob.Statics;
 import jagex3.config.IdkType;
 import jagex3.config.NpcType;
+import jagex3.config.ObjType;
 import jagex3.config.SeqType;
 import jagex3.io.Packet;
 

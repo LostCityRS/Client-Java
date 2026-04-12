@@ -1,7 +1,8 @@
-package deob;
+package jagex3.client;
 
-import jagex3.client.Client;
-import jagex3.datastruct.LinkList;
+import deob.ObfuscatedName;
+import deob.Statics;
+import deob.class31;
 import jagex3.datastruct.Linkable2;
 import jagex3.io.Packet;
 import jagex3.util.JagString;
@@ -14,18 +15,6 @@ public final class ClientScript extends Linkable2 {
 
 	@ObfuscatedName("cc.ub")
 	public int field510;
-
-	@ObfuscatedName("cc.zb")
-	public static LinkList field515 = new LinkList();
-
-	@ObfuscatedName("cc.Hb")
-	public static int field523 = 0;
-
-	@ObfuscatedName("cc.Lb")
-	public static int field527 = 0;
-
-	@ObfuscatedName("cc.Jb")
-	public static int field525 = 0;
 
 	@ObfuscatedName("cc.xb")
 	public int field513;
@@ -49,10 +38,10 @@ public final class ClientScript extends Linkable2 {
 		if (var4 != null) {
 			return var4;
 		}
-		byte[] var5 = Client.field2739.method215(Statics.field1437, JagString.join(new JagString[] { Statics.method502(arg1), Statics.field1160, Statics.method502(arg0) }));
+		byte[] var5 = Client.field2739.method215(Statics.field1437, JagString.join(new JagString[]{Statics.method502(arg1), Statics.field1160, Statics.method502(arg0)}));
 		Packet var6 = new Packet(var5);
 		ClientScript var7 = new ClientScript();
-		var6.field267 = var6.field284.length - 12;
+		var6.pos = var6.field284.length - 12;
 		int var8 = var6.method167();
 		int var9 = 0;
 		var7.field518 = var6.method145();
@@ -61,9 +50,9 @@ public final class ClientScript extends Linkable2 {
 		var7.field513 = var6.method145();
 		var7.field517 = new JagString[var8];
 		var7.field509 = new int[var8];
-		var6.field267 = 0;
+		var6.pos = 0;
 		var7.field519 = new int[var8];
-		while (var6.field267 < var6.field284.length - 12) {
+		while (var6.pos < var6.field284.length - 12) {
 			int var10 = var6.method145();
 			if (var10 == 3) {
 				var7.field517[var9] = var6.method140();

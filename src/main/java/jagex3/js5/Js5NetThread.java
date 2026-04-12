@@ -3,10 +3,22 @@ package jagex3.js5;
 import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.callstack.JagException;
+import jagex3.client.GameShell;
 import jagex3.datastruct.LinkList;
 
 @ObfuscatedName("oe")
 public final class Js5NetThread implements Runnable {
+
+	@ObfuscatedName("i.a(I)V")
+	public static void method500() {
+		Object var0 = Statics.field213;
+		synchronized (Statics.field213) {
+			if (Statics.field307 == 0) {
+				GameShell.signlink.method656(5, new Js5NetThread());
+			}
+			Statics.field307 = 600;
+		}
+	}
 
 	@Override
 	public void run() {

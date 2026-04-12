@@ -1,12 +1,10 @@
-package deob;
+package jagex3.dash3d;
 
+import deob.ObfuscatedName;
 import jagex3.datastruct.Linkable;
 
 @ObfuscatedName("dc")
 public final class LocChange extends Linkable {
-
-	@ObfuscatedName("dc.db")
-	public static int[] field677 = new int[32768];
 
 	@ObfuscatedName("dc.eb")
 	public int field678;
@@ -14,17 +12,8 @@ public final class LocChange extends Linkable {
 	@ObfuscatedName("dc.fb")
 	public int field679;
 
-	@ObfuscatedName("dc.ib")
-	public static int field682 = 0;
-
-	@ObfuscatedName("dc.kb")
-	public static int[] field684 = new int[50];
-
 	@ObfuscatedName("dc.mb")
 	public int field686;
-
-	@ObfuscatedName("dc.nb")
-	public static boolean field687 = false;
 
 	@ObfuscatedName("dc.ob")
 	public int field688;
@@ -37,9 +26,6 @@ public final class LocChange extends Linkable {
 
 	@ObfuscatedName("dc.sb")
 	public int field692 = -1;
-
-	@ObfuscatedName("dc.tb")
-	public static int field693 = 0;
 
 	@ObfuscatedName("dc.ub")
 	public int field694 = 0;

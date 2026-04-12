@@ -43,11 +43,11 @@ public final class AnimFrame {
 		this.field2121 = arg1;
 		Packet var3 = new Packet(arg0);
 		Packet var4 = new Packet(arg0);
-		var3.field267 = 2;
+		var3.pos = 2;
 		int var5 = var3.method144();
 		int var6 = -1;
 		int var7 = 0;
-		var4.field267 = var3.field267 + var5;
+		var4.pos = var3.pos + var5;
 		for (int var8 = 0; var8 < var5; var8++) {
 			int var9 = var3.method144();
 			if (var9 > 0) {
@@ -90,7 +90,7 @@ public final class AnimFrame {
 				}
 			}
 		}
-		if (arg0.length != var4.field267) {
+		if (arg0.length != var4.pos) {
 			throw new RuntimeException();
 		}
 		this.field2119 = var7;
@@ -104,5 +104,13 @@ public final class AnimFrame {
 			this.field2125[var12] = field2115[var12];
 			this.field2124[var12] = field2118[var12];
 		}
+	}
+
+	@ObfuscatedName("o.a()V")
+	public static void method744() {
+		field2116 = null;
+		field2117 = null;
+		field2115 = null;
+		field2118 = null;
 	}
 }

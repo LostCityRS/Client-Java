@@ -84,7 +84,8 @@ public final class WaveStream extends PcmStream {
 		if (this.field1536 >= 0) {
 			if (this.field1536 > 0) {
 				if (this.field1539) {
-					label118: {
+					label118:
+					{
 						if (this.field1534 < 0) {
 							var9 = this.method579(arg0, arg1, var5, var10, var4.field3308[this.field1532]);
 							if (this.field1540 >= var5) {
@@ -485,7 +486,8 @@ public final class WaveStream extends PcmStream {
 		if (this.field1536 >= 0) {
 			if (this.field1536 > 0) {
 				if (this.field1539) {
-					label113: {
+					label113:
+					{
 						if (this.field1534 < 0) {
 							if (this.field1540 >= var3) {
 								return;

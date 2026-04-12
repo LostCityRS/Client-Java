@@ -28,7 +28,4 @@ public final class class52 {
 	@ObfuscatedName("id.p")
 	public int field1375;
 
-	@ObfuscatedName("id.B")
-	public static int field1387 = -1;
-
 }

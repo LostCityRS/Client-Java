@@ -3,6 +3,7 @@ package jagex3.js5;
 import deob.ObfuscatedName;
 import deob.Statics;
 import deob.class33;
+import jagex3.callstack.JagException;
 import jagex3.datastruct.IntHashTable;
 import jagex3.io.Packet;
 import jagex3.util.JagString;
@@ -233,7 +234,7 @@ public abstract class Js5 {
 		try {
 			var10 = Statics.method863(var8);
 		} catch (RuntimeException var25) {
-			throw Statics.method259(var25, "T3 - " + (arg1 != null) + "," + arg0 + "," + var8.length + "," + Statics.method244(var8, var8.length) + "," + Statics.method244(var8, var8.length - 2) + "," + this.field402[arg0] + "," + this.field366);
+			throw JagException.report(var25, "T3 - " + (arg1 != null) + "," + arg0 + "," + var8.length + "," + Statics.method244(var8, var8.length) + "," + Statics.method244(var8, var8.length - 2) + "," + this.field402[arg0] + "," + this.field366);
 		}
 		if (this.field383) {
 			this.field362[arg0] = null;
@@ -244,7 +245,7 @@ public abstract class Js5 {
 			int var13 = var10[var26] & 0xFF;
 			Packet var14 = new Packet(var10);
 			int var15 = var26 - var3 * var13 * 4;
-			var14.field267 = var15;
+			var14.pos = var15;
 			int[] var16 = new int[var3];
 			for (int var17 = 0; var17 < var13; var17++) {
 				int var18 = 0;
@@ -259,7 +260,7 @@ public abstract class Js5 {
 				}
 				var16[var20] = 0;
 			}
-			var14.field267 = var15;
+			var14.pos = var15;
 			int var21 = 0;
 			for (int var22 = 0; var22 < var13; var22++) {
 				int var23 = 0;

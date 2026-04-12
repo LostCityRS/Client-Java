@@ -9,9 +9,6 @@ public final class class105 {
 	@ObfuscatedName("rc.j")
 	public final int field2636;
 
-	@ObfuscatedName("rc.k")
-	public static boolean field2637 = false;
-
 	@ObfuscatedName("rc.l")
 	public static int field2638 = 0;
 

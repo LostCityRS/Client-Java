@@ -25,6 +25,12 @@ public final class Filter {
 	@ObfuscatedName("ee.h")
 	public final int[][][] field826 = new int[2][2][4];
 
+	@ObfuscatedName("ee.a()V")
+	public static void method376() {
+		field822 = null;
+		field821 = null;
+	}
+
 	@ObfuscatedName("ee.a(Lba;Lc;)V")
 	public void method375(Packet arg0, Envelope arg1) {
 		int var3 = arg0.method144();

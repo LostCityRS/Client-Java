@@ -20,7 +20,7 @@ public final class IdkType extends Linkable2 {
 	public boolean field2373 = false;
 
 	@ObfuscatedName("pe.Rb")
-	public final int[] field2377 = new int[] { -1, -1, -1, -1, -1 };
+	public final int[] field2377 = new int[]{-1, -1, -1, -1, -1};
 
 	@ObfuscatedName("pe.Bb")
 	public final int[] field2361 = new int[6];

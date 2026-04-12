@@ -18,10 +18,4 @@ public final class class112 {
 	@ObfuscatedName("sd.f")
 	public static int[][] field2759 = new int[104][104];
 
-	@ObfuscatedName("sd.i")
-	public static int field2762 = 0;
-
-	@ObfuscatedName("sd.m")
-	public static int field2766 = 0;
-
 }

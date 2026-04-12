@@ -17,10 +17,4 @@ public final class class24 {
 	@ObfuscatedName("de.o")
 	public static boolean[] field735 = new boolean[5];
 
-	@ObfuscatedName("de.t")
-	public static int field740 = 2;
-
-	@ObfuscatedName("de.u")
-	public static int field741 = 0;
-
 }

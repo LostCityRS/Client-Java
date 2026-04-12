@@ -36,6 +36,8 @@ public final class Pix3D {
 
 	@ObfuscatedName("eb.Sb")
 	public static boolean field780 = false;
+	@ObfuscatedName("eb.Jb")
+	public static TextureProvider field771;
 
 	static {
 		for (int var0 = 1; var0 < 512; var0++) {
@@ -108,14 +110,14 @@ public final class Pix3D {
 
 	@ObfuscatedName("eb.a(IIIIIIIIIIIIIIIIIII)V")
 	public static void method353(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = Statics.field771.method692(arg18);
+		int[] var19 = field771.method692(arg18);
 		if (var19 == null) {
-			int var20 = Statics.field771.method693(arg18);
+			int var20 = field771.method693(arg18);
 			method360(arg0, arg1, arg2, arg3, arg4, arg5, method363(var20, arg6), method363(var20, arg7), method363(var20, arg8));
 			return;
 		}
-		field780 = Statics.field771.method698(arg18);
-		field768 = Statics.field771.method695(arg18);
+		field780 = field771.method698(arg18);
+		field768 = field771.method695(arg18);
 		int var21 = arg9 - arg10;
 		int var22 = arg12 - arg13;
 		int var23 = arg15 - arg16;
@@ -1135,7 +1137,7 @@ public final class Pix3D {
 
 	@ObfuscatedName("eb.a(Lod;)V")
 	public static void method357(TextureProvider arg0) {
-		Statics.field771 = arg0;
+		field771 = arg0;
 	}
 
 	@ObfuscatedName("eb.a([IIIIIIII)V")
@@ -2279,5 +2281,16 @@ public final class Pix3D {
 				field764[var4++] = var31;
 			}
 		}
+	}
+
+	@ObfuscatedName("eb.e()V")
+	public static void method358() {
+		Statics.field770 = null;
+		field764 = null;
+		field771 = null;
+		field772 = null;
+		field761 = null;
+		field775 = null;
+		field778 = null;
 	}
 }

@@ -1,7 +1,7 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
+import jagex3.client.Client;
 import jagex3.config.LocType;
 import jagex3.config.SeqType;
 
@@ -42,11 +42,12 @@ public final class ClientLocAnim extends ModelSource {
 	@Override
 	public Model method41() {
 		if (this.field1427 != null) {
-			int var1 = Statics.field2063 - this.field1417;
+			int var1 = Client.loopCycle - this.field1417;
 			if (var1 > 100 && this.field1427.field1254 > 0) {
 				var1 = 100;
 			}
-			label37: {
+			label37:
+			{
 				do {
 					do {
 						if (this.field1427.field1223[this.field1419] >= var1) {
@@ -59,7 +60,7 @@ public final class ClientLocAnim extends ModelSource {
 				} while (this.field1419 >= 0 && this.field1427.field1242.length > this.field1419);
 				this.field1427 = null;
 			}
-			this.field1417 = Statics.field2063 - var1;
+			this.field1417 = Client.loopCycle - var1;
 		}
 		LocType var2 = LocType.method389(this.field1428);
 		if (var2.field1317 != null) {
@@ -79,7 +80,7 @@ public final class ClientLocAnim extends ModelSource {
 		if (arg7 != -1) {
 			this.field1427 = SeqType.method103(arg7);
 			this.field1419 = 0;
-			this.field1417 = Statics.field2063 - 1;
+			this.field1417 = Client.loopCycle - 1;
 			if (arg8 && this.field1427.field1254 != -1) {
 				this.field1419 = (int) ((double) this.field1427.field1242.length * Math.random());
 				this.field1417 -= (int) (Math.random() * (double) this.field1427.field1223[this.field1419]);
