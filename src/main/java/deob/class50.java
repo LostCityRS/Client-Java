@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("ib")
 public final class class50 {
 
-	@ObfuscatedName("ib.a")
-	public static JagString field1345 = JagString.wrap("Freund hinzuf-Ugen");
-
 	@ObfuscatedName("ib.d")
 	public static int[] field1348 = new int[2048];
 

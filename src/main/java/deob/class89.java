@@ -3,20 +3,8 @@ package deob;
 @ObfuscatedName("oe")
 public final class class89 implements Runnable {
 
-	@ObfuscatedName("oe.e")
-	public static JagString field2173 = JagString.wrap("Please remove ");
-
-	@ObfuscatedName("oe.d")
-	public static JagString field2172 = field2173;
-
-	@ObfuscatedName("oe.f")
-	public static JagString field2174 = JagString.wrap("System)2Update in: ");
-
 	@ObfuscatedName("oe.g")
 	public static int field2175 = 0;
-
-	@ObfuscatedName("oe.j")
-	public static JagString field2178 = field2173;
 
 	@ObfuscatedName("oe.k")
 	public static byte[][] field2179 = new byte[250][];
@@ -24,14 +12,8 @@ public final class class89 implements Runnable {
 	@ObfuscatedName("oe.l")
 	public static int field2180 = 256;
 
-	@ObfuscatedName("oe.m")
-	public static JagString field2181 = JagString.wrap("(U");
-
 	@ObfuscatedName("oe.n")
 	public static int field2182 = 0;
-
-	@ObfuscatedName("oe.o")
-	public static JagString field2183 = JagString.wrap("null");
 
 	@ObfuscatedName("oe.t")
 	public static int field2188 = -1;

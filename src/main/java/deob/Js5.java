@@ -36,20 +36,8 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.w")
 	public final boolean field383;
 
-	@ObfuscatedName("bd.T")
-	public static JagString field406 = JagString.wrap("backbase2");
-
-	@ObfuscatedName("bd.U")
-	public static JagString field407 = JagString.wrap("Please try again)3");
-
-	@ObfuscatedName("bd.V")
-	public static JagString field408 = field407;
-
 	@ObfuscatedName("bd.X")
 	public static boolean field410 = false;
-
-	@ObfuscatedName("bd.W")
-	public static JagString field409 = JagString.wrap("Sie befinden sich in einem Mitglieder)2Gebiet(Q");
 
 	@ObfuscatedName("bd.R")
 	public IntHashTable field404;

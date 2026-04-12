@@ -3,41 +3,11 @@ package deob;
 @ObfuscatedName("kc")
 public final class class63 {
 
-	@ObfuscatedName("kc.b")
-	public static JagString field1566 = JagString.wrap("Loading game screen )2 ");
-
-	@ObfuscatedName("kc.c")
-	public static JagString field1567 = JagString.wrap("invback");
-
-	@ObfuscatedName("kc.h")
-	public static JagString field1572 = JagString.wrap(")2");
-
-	@ObfuscatedName("kc.l")
-	public static JagString field1576 = JagString.wrap("sich mit einer anderen Welt zu verbinden)3");
-
-	@ObfuscatedName("kc.q")
-	public static JagString field1581 = JagString.wrap("und loggen sich dann erneut ein)3");
-
-	@ObfuscatedName("kc.r")
-	public static JagString field1582 = JagString.wrap("Offline");
-
 	@ObfuscatedName("kc.w")
 	public static int field1587 = 0;
 
-	@ObfuscatedName("kc.C")
-	public static JagString field1593 = field1582;
-
 	@ObfuscatedName("kc.E")
 	public static int[] field1595 = new int[] { 1, 0, -1, 0 };
-
-	@ObfuscatedName("kc.A")
-	public static JagString field1591 = JagString.wrap("Take");
-
-	@ObfuscatedName("kc.D")
-	public static JagString field1594 = field1591;
-
-	@ObfuscatedName("kc.G")
-	public static JagString field1597 = field1566;
 
 	@ObfuscatedName("kc.y")
 	public final class44 field1589 = new class44();

@@ -15,9 +15,6 @@ public final class class19 extends class128 {
 	@ObfuscatedName("d.dc")
 	public int field633;
 
-	@ObfuscatedName("d.ec")
-	public static JagString field634 = JagString.wrap("Regeln versto-8en hat)3");
-
 	@ObfuscatedName("d.hc")
 	public double field637;
 
@@ -30,23 +27,11 @@ public final class class19 extends class128 {
 	@ObfuscatedName("d.lc")
 	public final int field641;
 
-	@ObfuscatedName("d.mc")
-	public static JagString field642 = JagString.wrap("Jun");
-
 	@ObfuscatedName("d.oc")
 	public static int[] field644 = new int[] { 768, 1024, 1280, 512, 1536, 256, 0, 1792 };
 
-	@ObfuscatedName("d.pc")
-	public static JagString field645 = JagString.wrap("Nov");
-
 	@ObfuscatedName("d.qc")
 	public final int field646;
-
-	@ObfuscatedName("d.rc")
-	public static JagString field647 = JagString.wrap("Mar");
-
-	@ObfuscatedName("d.sc")
-	public static JagString field648 = JagString.wrap("Jul");
 
 	@ObfuscatedName("d.tc")
 	public double field649;
@@ -57,47 +42,8 @@ public final class class19 extends class128 {
 	@ObfuscatedName("d.wc")
 	public double field652;
 
-	@ObfuscatedName("d.Qb")
-	public static JagString field620 = JagString.wrap("Feb");
-
-	@ObfuscatedName("d.Wb")
-	public static JagString field626 = JagString.wrap("Aug");
-
-	@ObfuscatedName("d.Ub")
-	public static JagString field624 = JagString.wrap("Dec");
-
 	@ObfuscatedName("d.Ac")
 	public static int field656 = 0;
-
-	@ObfuscatedName("d.zc")
-	public static JagString field655 = JagString.wrap("May");
-
-	@ObfuscatedName("d.Dc")
-	public static JagString field659 = JagString.wrap("Loading wordpack )2 ");
-
-	@ObfuscatedName("d.Sb")
-	public static JagString field622 = JagString.wrap("Oct");
-
-	@ObfuscatedName("d.Lc")
-	public static JagString field667 = JagString.wrap("Connecting to server)3)3)3");
-
-	@ObfuscatedName("d.Kc")
-	public static JagString field666 = field667;
-
-	@ObfuscatedName("d.Nc")
-	public static JagString field669 = JagString.wrap("Jan");
-
-	@ObfuscatedName("d.Tb")
-	public static JagString field623 = JagString.wrap("Sep");
-
-	@ObfuscatedName("d.Pc")
-	public static JagString field671 = field659;
-
-	@ObfuscatedName("d.Qc")
-	public static JagString field672 = JagString.wrap("Apr");
-
-	@ObfuscatedName("d.Rb")
-	public static JagString[] field621 = new JagString[] { field669, field620, field647, field672, field655, field642, field648, field626, field623, field622, field645, field624 };
 
 	@ObfuscatedName("d.Vb")
 	public boolean field625 = false;

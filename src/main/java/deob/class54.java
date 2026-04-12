@@ -9,41 +9,14 @@ public final class class54 extends class128 {
 	@ObfuscatedName("j.cc")
 	public final int field1428;
 
-	@ObfuscatedName("j.dc")
-	public static JagString field1429 = JagString.wrap("Accept challenge");
-
-	@ObfuscatedName("j.ec")
-	public static JagString field1430 = JagString.wrap("Okay");
-
 	@ObfuscatedName("j.hc")
 	public static int field1433 = 0;
-
-	@ObfuscatedName("j.ic")
-	public static JagString field1434 = JagString.wrap("Loaded gamescreen");
-
-	@ObfuscatedName("j.fc")
-	public static JagString field1431 = field1434;
-
-	@ObfuscatedName("j.kc")
-	public static JagString field1436 = JagString.wrap("Bitte laden Sie die Seite neu)3");
-
-	@ObfuscatedName("j.lc")
-	public static JagString field1437 = JagString.wrap("");
-
-	@ObfuscatedName("j.nc")
-	public static JagString field1439 = JagString.wrap("Absender:");
-
-	@ObfuscatedName("j.oc")
-	public static JagString field1440 = JagString.wrap("mapfunction");
 
 	@ObfuscatedName("j.pc")
 	public static int field1441 = 1;
 
 	@ObfuscatedName("j.Mb")
 	public static class122 field1412 = new class122();
-
-	@ObfuscatedName("j.gc")
-	public static JagString field1432 = field1429;
 
 	@ObfuscatedName("j.Wb")
 	public final int field1422;

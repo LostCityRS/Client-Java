@@ -6,9 +6,6 @@ public final class LinkList {
 	@ObfuscatedName("pb.f")
 	public final Linkable field2276 = new Linkable();
 
-	@ObfuscatedName("pb.i")
-	public static JagString field2279 = JagString.wrap("Bitte entfernen Sie ");
-
 	@ObfuscatedName("pb.n")
 	public static LinkList field2284 = new LinkList();
 
@@ -21,32 +18,11 @@ public final class LinkList {
 	@ObfuscatedName("pb.y")
 	public static int field2295 = 0;
 
-	@ObfuscatedName("pb.A")
-	public static JagString field2297 = JagString.wrap("(U2");
-
-	@ObfuscatedName("pb.D")
-	public static JagString field2300 = JagString.wrap("cyan:");
-
-	@ObfuscatedName("pb.z")
-	public static JagString field2296 = field2300;
-
-	@ObfuscatedName("pb.B")
-	public static JagString field2298 = JagString.wrap("(WSpielkonto wiederherstellen(W Option auf der Hauptseite)3");
-
-	@ObfuscatedName("pb.C")
-	public static JagString field2299 = JagString.wrap("Name des Gegenstands eingeben:");
-
 	@ObfuscatedName("pb.E")
 	public static class8 field2301 = new class8(8);
 
 	@ObfuscatedName("pb.G")
 	public static int[] field2303 = new int[1000];
-
-	@ObfuscatedName("pb.H")
-	public static JagString field2304 = JagString.wrap("Texturen geladen)3");
-
-	@ObfuscatedName("pb.I")
-	public static JagString field2305 = JagString.wrap("m");
 
 	@ObfuscatedName("pb.F")
 	public static class67 field2302 = new class67();

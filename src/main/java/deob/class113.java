@@ -18,9 +18,6 @@ public final class class113 {
 	@ObfuscatedName("se.j")
 	public static int[] field2782 = new int[5];
 
-	@ObfuscatedName("se.k")
-	public static JagString field2783 = JagString.wrap("::clientdrop");
-
 	@ObfuscatedName("se.m")
 	public int field2785;
 
@@ -33,29 +30,17 @@ public final class class113 {
 	@ObfuscatedName("se.p")
 	public static class15 field2788 = new class15(64);
 
-	@ObfuscatedName("se.q")
-	public static JagString field2789 = JagString.wrap("Message");
-
-	@ObfuscatedName("se.f")
-	public static JagString field2778 = field2789;
-
 	@ObfuscatedName("se.r")
 	public int field2790;
 
 	@ObfuscatedName("se.w")
 	public int field2795;
 
-	@ObfuscatedName("se.z")
-	public static JagString field2798 = JagString.wrap("backvmid1");
-
 	@ObfuscatedName("se.y")
 	public static int field2797 = 0;
 
 	@ObfuscatedName("se.B")
 	public static int field2800 = -1;
-
-	@ObfuscatedName("se.D")
-	public static JagString field2802 = JagString.wrap("Chat panel redrawn");
 
 	@ObfuscatedName("se.C")
 	public static byte[][] field2801 = new byte[1000][];

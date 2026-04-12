@@ -3,44 +3,8 @@ package deob;
 @ObfuscatedName("ec")
 public final class class28 extends class44 {
 
-	@ObfuscatedName("ec.tb")
-	public static JagString field782 = JagString.wrap("Loading textures )2 ");
-
-	@ObfuscatedName("ec.Ab")
-	public static JagString field789 = JagString.wrap("::noclip");
-
-	@ObfuscatedName("ec.Gb")
-	public static JagString field795 = JagString.wrap("Nehmen");
-
-	@ObfuscatedName("ec.Cb")
-	public static JagString field791 = JagString.wrap("Verbindung konnte nicht hergestellt werden)3");
-
-	@ObfuscatedName("ec.Jb")
-	public static JagString field798 = JagString.wrap("Loaded input handler");
-
-	@ObfuscatedName("ec.Bb")
-	public static JagString field790 = JagString.wrap("W-=hlen Sie eine Option");
-
 	@ObfuscatedName("ec.Mb")
 	public static int field801 = 0;
-
-	@ObfuscatedName("ec.Qb")
-	public static JagString field805 = JagString.wrap(" )2> @yel@");
-
-	@ObfuscatedName("ec.Nb")
-	public static JagString field802 = JagString.wrap("level)2");
-
-	@ObfuscatedName("ec.wb")
-	public static JagString field785 = field802;
-
-	@ObfuscatedName("ec.Vb")
-	public static JagString field810 = JagString.wrap("leuchten3:");
-
-	@ObfuscatedName("ec.Hb")
-	public static JagString field796 = field798;
-
-	@ObfuscatedName("ec.Eb")
-	public static JagString field793 = field782;
 
 	@ObfuscatedName("ec.Fb")
 	public int field794 = 0;

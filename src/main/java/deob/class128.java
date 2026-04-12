@@ -9,20 +9,8 @@ public abstract class class128 extends class44 {
 	@ObfuscatedName("vb.vb")
 	public static long field3132 = 0L;
 
-	@ObfuscatedName("vb.zb")
-	public static JagString field3136 = JagString.wrap("@cya@");
-
 	@ObfuscatedName("vb.Gb")
 	public static int field3143 = 0;
-
-	@ObfuscatedName("vb.Hb")
-	public static JagString field3144 = JagString.wrap(" from your friend list first");
-
-	@ObfuscatedName("vb.Bb")
-	public static JagString field3138 = field3144;
-
-	@ObfuscatedName("vb.Ib")
-	public static JagString field3145 = JagString.wrap("Bitte versuchen Sie)1");
 
 	@ObfuscatedName("vb.yb")
 	public int field3135 = 1000;

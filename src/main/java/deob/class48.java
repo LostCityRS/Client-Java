@@ -6,20 +6,11 @@ public final class class48 {
 	@ObfuscatedName("i.b")
 	public long field1256;
 
-	@ObfuscatedName("i.e")
-	public static JagString field1259 = JagString.wrap("l");
-
 	@ObfuscatedName("i.f")
 	public static int field1260 = 0;
 
-	@ObfuscatedName("i.j")
-	public static JagString field1264 = JagString.wrap("Ung-Ultige Session)2ID)3");
-
 	@ObfuscatedName("i.n")
 	public final int field1268;
-
-	@ObfuscatedName("i.o")
-	public static JagString field1269 = JagString.wrap("und die Schaltfl-=che (WSpielkonto erstellen(W am");
 
 	@ObfuscatedName("i.q")
 	public static boolean field1271 = false;
@@ -29,9 +20,6 @@ public final class class48 {
 
 	@ObfuscatedName("i.s")
 	public final Linkable[] field1273;
-
-	@ObfuscatedName("i.u")
-	public static JagString field1275 = JagString.wrap(" (X");
 
 	@ObfuscatedName("i.y")
 	public static int field1279 = -1;

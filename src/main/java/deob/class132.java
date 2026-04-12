@@ -6,38 +6,17 @@ public final class class132 {
 	@ObfuscatedName("wa.a")
 	public int[] field3207;
 
-	@ObfuscatedName("wa.e")
-	public static JagString field3211 = JagString.wrap("Side panel redrawn");
-
 	@ObfuscatedName("wa.f")
 	public static int field3212 = 0;
-
-	@ObfuscatedName("wa.g")
-	public static JagString field3213 = JagString.wrap("Icons redrawn");
 
 	@ObfuscatedName("wa.i")
 	public static int field3215 = -1;
 
-	@ObfuscatedName("wa.j")
-	public static JagString field3216 = JagString.wrap("leuchten1:");
-
 	@ObfuscatedName("wa.l")
 	public final int[] field3218;
 
-	@ObfuscatedName("wa.o")
-	public static JagString field3221 = JagString.wrap("Connecting to friendserver");
-
-	@ObfuscatedName("wa.m")
-	public static JagString field3219 = field3221;
-
-	@ObfuscatedName("wa.p")
-	public static JagString field3222 = JagString.wrap("Remove");
-
 	@ObfuscatedName("wa.r")
 	public final byte[] field3224;
-
-	@ObfuscatedName("wa.s")
-	public static JagString field3225 = JagString.wrap("leuchten2:");
 
 	@ObfuscatedName("wa.t")
 	public static final int field3226 = 7759444;
@@ -48,32 +27,8 @@ public final class class132 {
 	@ObfuscatedName("wa.y")
 	public static int[] field3231 = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, 85, 80, 84, -1, 91, -1, -1, -1, 81, 82, 86, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 83, 104, 105, 103, 102, 96, 98, 97, 99, -1, -1, -1, -1, -1, -1, -1, 25, 16, 17, 18, 19, 20, 21, 22, 23, 24, -1, -1, -1, -1, -1, -1, -1, 48, 68, 66, 50, 34, 51, 52, 53, 39, 54, 55, 56, 70, 69, 40, 41, 32, 35, 49, 36, 38, 67, 33, 65, 37, 64, -1, -1, -1, -1, -1, 228, 231, 227, 233, 224, 219, 225, 230, 226, 232, 89, 87, -1, 88, 229, 90, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, -1, -1, -1, 101, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 100, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
-	@ObfuscatedName("wa.G")
-	public static JagString field3239 = field3222;
-
 	@ObfuscatedName("wa.D")
 	public static int[] field3236 = new int[100];
-
-	@ObfuscatedName("wa.B")
-	public static JagString field3234 = JagString.wrap("");
-
-	@ObfuscatedName("wa.c")
-	public static JagString field3209 = field3234;
-
-	@ObfuscatedName("wa.d")
-	public static JagString field3210 = field3234;
-
-	@ObfuscatedName("wa.k")
-	public static JagString field3217 = field3234;
-
-	@ObfuscatedName("wa.q")
-	public static JagString field3223 = field3234;
-
-	@ObfuscatedName("wa.x")
-	public static JagString field3230 = field3234;
-
-	@ObfuscatedName("wa.z")
-	public static JagString field3232 = field3234;
 
 	@ObfuscatedName("wa.a([BII[BII)I")
 	public int method1033(byte[] arg0, int arg1, int arg2, byte[] arg3, int arg4) {

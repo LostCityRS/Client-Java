@@ -9,38 +9,14 @@ public final class class60 extends class79 {
 	@ObfuscatedName("k.v")
 	public int field1508;
 
-	@ObfuscatedName("k.y")
-	public static JagString field1511 = JagString.wrap(" has logged out)3");
-
 	@ObfuscatedName("k.C")
 	public static int[] field1514 = new int[99];
-
-	@ObfuscatedName("k.x")
-	public static JagString field1510 = field1511;
 
 	@ObfuscatedName("k.J")
 	public static int[] field1521;
 
-	@ObfuscatedName("k.L")
-	public static JagString field1523;
-
-	@ObfuscatedName("k.R")
-	public static JagString field1529;
-
-	@ObfuscatedName("k.N")
-	public static JagString field1525;
-
-	@ObfuscatedName("k.K")
-	public static JagString field1522;
-
-	@ObfuscatedName("k.O")
-	public static JagString field1526;
-
 	@ObfuscatedName("k.Q")
 	public static int field1528;
-
-	@ObfuscatedName("k.P")
-	public static JagString field1527;
 
 	@ObfuscatedName("k.D")
 	public final long[] field1515 = new long[10];
@@ -63,13 +39,13 @@ public final class class60 extends class79 {
 			field1514[var1] = var0 / 4;
 		}
 		field1521 = new int[50];
-		field1523 = null;
-		field1529 = JagString.wrap("Attack");
-		field1525 = JagString.wrap("Loaded sprites");
-		field1522 = field1529;
-		field1526 = JagString.wrap("b12_full");
+		Statics.field1523 = null;
+		Statics.field1529 = JagString.wrap("Attack");
+		Statics.field1525 = JagString.wrap("Loaded sprites");
+		Statics.field1522 = Statics.field1529;
+		Statics.field1526 = JagString.wrap("b12_full");
 		field1528 = 0;
-		field1527 = field1525;
+		Statics.field1527 = Statics.field1525;
 	}
 
 	@ObfuscatedName("k.b(I)V")

@@ -3,59 +3,8 @@ package deob;
 @ObfuscatedName("uc")
 public abstract class class123 extends class45 {
 
-	@ObfuscatedName("uc.t")
-	public static JagString field3056 = JagString.wrap("Please use a different world)3");
-
-	@ObfuscatedName("uc.v")
-	public static JagString field3058 = JagString.wrap("");
-
-	@ObfuscatedName("uc.w")
-	public static JagString field3059 = JagString.wrap("@yel@*V");
-
-	@ObfuscatedName("uc.E")
-	public static JagString field3067 = JagString.wrap("");
-
-	@ObfuscatedName("uc.s")
-	public static JagString field3055 = field3067;
-
-	@ObfuscatedName("uc.H")
-	public static JagString field3070 = JagString.wrap("Benutzen");
-
-	@ObfuscatedName("uc.B")
-	public static JagString field3064 = JagString.wrap("Fehler bei der Verbindung zum Server)3");
-
-	@ObfuscatedName("uc.I")
-	public static JagString field3071 = field3067;
-
-	@ObfuscatedName("uc.z")
-	public static JagString field3062 = field3067;
-
-	@ObfuscatedName("uc.x")
-	public static JagString field3060 = field3067;
-
 	@ObfuscatedName("uc.G")
 	public static int field3069 = 0;
-
-	@ObfuscatedName("uc.D")
-	public static JagString field3066 = JagString.wrap("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(Q(R+R(T(U^(V(Z(X(Y)2_=)0[*U]*W;:(W@(S*X)1<)3>)4?*6*V ");
-
-	@ObfuscatedName("uc.J")
-	public static JagString field3072 = field3056;
-
-	@ObfuscatedName("uc.L")
-	public static JagString field3074 = field3066;
-
-	@ObfuscatedName("uc.N")
-	public static JagString field3076 = JagString.wrap("Walk here");
-
-	@ObfuscatedName("uc.u")
-	public static JagString field3057 = field3076;
-
-	@ObfuscatedName("uc.O")
-	public static JagString field3077 = field3067;
-
-	@ObfuscatedName("uc.Q")
-	public static JagString field3079 = field3067;
 
 	@ObfuscatedName("uc.a(IIJI)V")
 	public final void method996(int arg0, int arg1, long arg2) {

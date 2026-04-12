@@ -140,7 +140,7 @@ public final class client extends class64 {
 			Statics.method465(Statics.field3049);
 		}
 		if (class103.field2599 == 0) {
-			Statics.method536(class133.field3274, null, class123.field3079);
+			Statics.method536(class133.field3274, null, Statics.field3079);
 		} else if (class103.field2599 == 5) {
 			Statics.method888(Statics.field2902, Statics.field2892);
 		} else if (class103.field2599 == 10) {
@@ -153,22 +153,22 @@ public final class client extends class64 {
 					class36.field948 = class78.field1922;
 				}
 				int var1 = (class36.field948 - class78.field1922) * 50 / class36.field948;
-				Statics.method872(class133.field3252, true, Statics.method956(new JagString[] { class5.field221, Statics.method502(var1), class67.field1673 }));
+				Statics.method872(Statics.field3252, true, Statics.method956(new JagString[] { Statics.field221, Statics.method502(var1), Statics.field1673 }));
 			} else if (PixMap.field3301 == 2) {
 				if (class95.field2358 > class54.field1441) {
 					class54.field1441 = class95.field2358;
 				}
 				int var2 = (class54.field1441 - class95.field2358) * 50 / class54.field1441 + 50;
-				Statics.method872(class133.field3252, true, Statics.method956(new JagString[] { class5.field221, Statics.method502(var2), class67.field1673 }));
+				Statics.method872(Statics.field3252, true, Statics.method956(new JagString[] { Statics.field221, Statics.method502(var2), Statics.field1673 }));
 			} else {
-				Statics.method872(class133.field3252, false, null);
+				Statics.method872(Statics.field3252, false, null);
 			}
 		} else if (class103.field2599 == 30) {
 			Statics.method611();
 		} else if (class103.field2599 == 35) {
 			Statics.method188();
 		} else if (class103.field2599 == 40) {
-			Statics.method872(class130.field3187, false, class80.field2033);
+			Statics.method872(Statics.field3187, false, Statics.field2033);
 		}
 		class130.field3176 = 0;
 	}

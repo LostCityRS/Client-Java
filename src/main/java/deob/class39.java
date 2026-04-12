@@ -15,9 +15,6 @@ public final class class39 {
 	@ObfuscatedName("gb.i")
 	public static boolean field1055 = false;
 
-	@ObfuscatedName("gb.j")
-	public static JagString field1056 = JagString.wrap("titlebutton");
-
 	@ObfuscatedName("gb.l")
 	public final int[] field1058 = new int[256];
 
@@ -33,35 +30,14 @@ public final class class39 {
 	@ObfuscatedName("gb.q")
 	public int field1063;
 
-	@ObfuscatedName("gb.s")
-	public static JagString field1065 = JagString.wrap(": ");
-
 	@ObfuscatedName("gb.t")
 	public static class15 field1066 = new class15(64);
-
-	@ObfuscatedName("gb.u")
-	public static JagString field1067 = JagString.wrap("Gegenstand f-Ur Mitglieder");
-
-	@ObfuscatedName("gb.v")
-	public static JagString field1068 = JagString.wrap("Invalid username or password)3");
 
 	@ObfuscatedName("gb.w")
 	public static boolean field1069 = true;
 
 	@ObfuscatedName("gb.z")
 	public static int field1072 = -1;
-
-	@ObfuscatedName("gb.D")
-	public static JagString field1076 = field1068;
-
-	@ObfuscatedName("gb.E")
-	public static JagString field1077 = JagString.wrap("blinken3:");
-
-	@ObfuscatedName("gb.A")
-	public static JagString field1073 = JagString.wrap("oberen Rand der Webseite ausw-=hlen)3");
-
-	@ObfuscatedName("gb.G")
-	public static JagString field1079 = JagString.wrap("Begeben Sie sich in ein freies Gebiet)1 um");
 
 	@ObfuscatedName("gb.a(B)V")
 	public void method428() {

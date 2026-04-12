@@ -3,14 +3,8 @@ package deob;
 @ObfuscatedName("ga")
 public final class class38 extends class45 {
 
-	@ObfuscatedName("ga.cb")
-	public static JagString field1044 = JagString.wrap("Verbindung abgebrochen)3");
-
 	@ObfuscatedName("ga.db")
 	public final class69 field1045;
-
-	@ObfuscatedName("ga.eb")
-	public static JagString field1046 = JagString.wrap("Password: ");
 
 	@ObfuscatedName("ga.s")
 	public boolean field1008;
@@ -18,53 +12,8 @@ public final class class38 extends class45 {
 	@ObfuscatedName("ga.t")
 	public class29 field1009;
 
-	@ObfuscatedName("ga.v")
-	public static JagString field1011 = JagString.wrap("T");
-
-	@ObfuscatedName("ga.B")
-	public static JagString[] field1017 = new JagString[100];
-
-	@ObfuscatedName("ga.F")
-	public static JagString field1021 = JagString.wrap("This computers address has been blocked");
-
-	@ObfuscatedName("ga.I")
-	public static JagString field1024 = field1021;
-
-	@ObfuscatedName("ga.C")
-	public static JagString field1018 = JagString.wrap("Enter your username (V password)3");
-
-	@ObfuscatedName("ga.G")
-	public static JagString field1022 = JagString.wrap("welle:");
-
-	@ObfuscatedName("ga.O")
-	public static JagString field1030 = field1018;
-
-	@ObfuscatedName("ga.Y")
-	public static JagString field1040 = JagString.wrap("Loaded interfaces");
-
-	@ObfuscatedName("ga.U")
-	public static JagString field1036 = JagString.wrap("Please wait 5 minutes before trying again)3");
-
-	@ObfuscatedName("ga.bb")
-	public static JagString field1043 = field1036;
-
-	@ObfuscatedName("ga.S")
-	public static JagString field1034 = JagString.wrap("headicons_prayer");
-
 	@ObfuscatedName("ga.D")
 	public static int[] field1019 = new int[5];
-
-	@ObfuscatedName("ga.Z")
-	public static JagString field1041 = JagString.wrap("Report abuse");
-
-	@ObfuscatedName("ga.P")
-	public static JagString field1031 = field1040;
-
-	@ObfuscatedName("ga.W")
-	public static JagString field1038 = field1041;
-
-	@ObfuscatedName("ga.V")
-	public static JagString field1037 = field1046;
 
 	@ObfuscatedName("ga.E")
 	public static int[] field1020 = new int[2000];

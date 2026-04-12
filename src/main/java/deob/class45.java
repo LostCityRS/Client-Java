@@ -3,32 +3,17 @@ package deob;
 @ObfuscatedName("hc")
 public abstract class class45 {
 
-	@ObfuscatedName("hc.c")
-	public static JagString field1175 = JagString.wrap("M");
-
 	@ObfuscatedName("hc.d")
 	public static class8[] field1176 = new class8[2048];
 
 	@ObfuscatedName("hc.g")
 	public static int field1179 = 0;
 
-	@ObfuscatedName("hc.h")
-	public static JagString field1180 = JagString.wrap("Angreifen");
-
 	@ObfuscatedName("hc.k")
 	public static boolean field1183 = false;
 
-	@ObfuscatedName("hc.l")
-	public static JagString field1184 = field1175;
-
 	@ObfuscatedName("hc.n")
 	public static boolean field1186 = false;
-
-	@ObfuscatedName("hc.p")
-	public static JagString field1188 = JagString.wrap("Your account is already logged in)3");
-
-	@ObfuscatedName("hc.b")
-	public static JagString field1174 = field1188;
 
 	@ObfuscatedName("hc.q")
 	public static int field1189 = 0;

@@ -3,15 +3,6 @@ package deob;
 @ObfuscatedName("mc")
 public final class class75 implements class88 {
 
-	@ObfuscatedName("mc.b")
-	public static JagString field1847 = JagString.wrap("Enter object name");
-
-	@ObfuscatedName("mc.g")
-	public static JagString field1852 = JagString.wrap("null");
-
-	@ObfuscatedName("mc.h")
-	public static JagString field1853 = JagString.wrap("Wen m-Ochten Sie der Liste hinzuf-Ugen?");
-
 	@ObfuscatedName("mc.i")
 	public LinkList field1854 = new LinkList();
 
@@ -20,9 +11,6 @@ public final class class75 implements class88 {
 
 	@ObfuscatedName("mc.l")
 	public static int field1857 = 0;
-
-	@ObfuscatedName("mc.m")
-	public static JagString field1858 = JagString.wrap("Handel)4Duell");
 
 	@ObfuscatedName("mc.o")
 	public static int field1860 = 0;
@@ -33,9 +21,6 @@ public final class class75 implements class88 {
 	@ObfuscatedName("mc.q")
 	public static boolean field1862 = true;
 
-	@ObfuscatedName("mc.r")
-	public static JagString field1863 = JagString.wrap("Enter message to send to ");
-
 	@ObfuscatedName("mc.s")
 	public static int field1864 = 0;
 
@@ -44,15 +29,6 @@ public final class class75 implements class88 {
 
 	@ObfuscatedName("mc.v")
 	public final class90[] field1867;
-
-	@ObfuscatedName("mc.C")
-	public static JagString field1874 = field1847;
-
-	@ObfuscatedName("mc.y")
-	public static JagString field1870 = JagString.wrap("und haben es deaktiviert)3 Benutzen Sie die");
-
-	@ObfuscatedName("mc.B")
-	public static JagString field1873 = field1863;
 
 	@ObfuscatedName("mc.F")
 	public double field1877 = 1.0D;

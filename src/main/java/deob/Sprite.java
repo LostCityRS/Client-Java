@@ -30,9 +30,6 @@ public final class Sprite {
 	@ObfuscatedName("g.k")
 	public int field988;
 
-	@ObfuscatedName("g.l")
-	public static JagString field989 = JagString.wrap("(Z");
-
 	@ObfuscatedName("g.m")
 	public int field990;
 
@@ -57,23 +54,14 @@ public final class Sprite {
 	@ObfuscatedName("g.u")
 	public static int field998 = 0;
 
-	@ObfuscatedName("g.w")
-	public static JagString field1000 = JagString.wrap("Public chat");
-
 	@ObfuscatedName("g.x")
 	public static boolean field1001 = false;
 
 	@ObfuscatedName("g.A")
 	public static int field1004 = 0;
 
-	@ObfuscatedName("g.C")
-	public static JagString field1006 = field1000;
-
 	@ObfuscatedName("g.D")
 	public static boolean field1007 = false;
-
-	@ObfuscatedName("g.B")
-	public static JagString field1005 = JagString.wrap("@gr3@");
 
 	@ObfuscatedName("g.y")
 	public int field1002;

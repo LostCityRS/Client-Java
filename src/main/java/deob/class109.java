@@ -12,12 +12,6 @@ public final class class109 {
 	@ObfuscatedName("sa.e")
 	public class133 field2729 = null;
 
-	@ObfuscatedName("sa.f")
-	public static JagString field2730 = JagString.wrap(" weitere Optionen");
-
-	@ObfuscatedName("sa.h")
-	public static JagString field2732 = JagString.wrap("Zu viele Verbindungen von Ihrer Adresse)3");
-
 	@ObfuscatedName("sa.j")
 	public static final int field2734 = 3353893;
 

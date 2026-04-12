@@ -15,18 +15,6 @@ public final class class16 extends class44 {
 	@ObfuscatedName("cc.Hb")
 	public static int field523 = 0;
 
-	@ObfuscatedName("cc.Kb")
-	public static JagString field526 = JagString.wrap("Lade Ignorieren)2Liste)3)3)3");
-
-	@ObfuscatedName("cc.Ib")
-	public static JagString field524 = JagString.wrap(" )2> @cya@");
-
-	@ObfuscatedName("cc.Eb")
-	public static JagString field520 = JagString.wrap("To");
-
-	@ObfuscatedName("cc.Fb")
-	public static JagString field521 = field520;
-
 	@ObfuscatedName("cc.Lb")
 	public static int field527 = 0;
 

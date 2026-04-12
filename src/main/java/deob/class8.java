@@ -23,15 +23,6 @@ public class class8 extends Linkable {
 	@ObfuscatedName("ba.lc")
 	public static int field307 = 0;
 
-	@ObfuscatedName("ba.mc")
-	public static JagString field308 = JagString.wrap("Too many incorrect logins from your address)3");
-
-	@ObfuscatedName("ba.hc")
-	public static JagString field303 = field308;
-
-	@ObfuscatedName("ba.oc")
-	public static JagString field310 = JagString.wrap("Ausw-=hlen");
-
 	@ObfuscatedName("ba.gc")
 	public static int field302 = 0;
 

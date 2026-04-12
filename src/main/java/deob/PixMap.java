@@ -29,32 +29,11 @@ public abstract class PixMap {
 	@ObfuscatedName("wc.p")
 	public static int field3297 = 0;
 
-	@ObfuscatedName("wc.s")
-	public static JagString field3300 = JagString.wrap(" is already on your ignore list");
-
-	@ObfuscatedName("wc.n")
-	public static JagString field3295 = field3300;
-
 	@ObfuscatedName("wc.t")
 	public static int field3301 = 0;
 
-	@ObfuscatedName("wc.v")
-	public static JagString field3303 = JagString.wrap("Loaded title screen");
-
 	@ObfuscatedName("wc.w")
 	public static int field3304 = 0;
-
-	@ObfuscatedName("wc.x")
-	public static JagString field3305 = field3303;
-
-	@ObfuscatedName("wc.y")
-	public static JagString field3306 = JagString.wrap("@or2@");
-
-	@ObfuscatedName("wc.z")
-	public static JagString field3307 = JagString.wrap("Cancel");
-
-	@ObfuscatedName("wc.u")
-	public static JagString field3302 = field3307;
 
 	@ObfuscatedName("wc.a(B)V")
 	public final void method1054() {

@@ -9,17 +9,8 @@ public final class Js5Loader extends Js5 {
 	@ObfuscatedName("u.gb")
 	public int field2976 = -1;
 
-	@ObfuscatedName("u.hb")
-	public static JagString field2977 = JagString.wrap("blinken1:");
-
-	@ObfuscatedName("u.ib")
-	public static JagString field2978 = JagString.wrap("Offline");
-
 	@ObfuscatedName("u.jb")
 	public volatile boolean field2979 = false;
-
-	@ObfuscatedName("u.kb")
-	public static JagString field2980 = JagString.wrap("Freunde");
 
 	@ObfuscatedName("u.lb")
 	public final class109 field2981;
@@ -38,12 +29,6 @@ public final class Js5Loader extends Js5 {
 
 	@ObfuscatedName("u.wb")
 	public static class130[] field2992 = new class130[32768];
-
-	@ObfuscatedName("u.xb")
-	public static JagString field2993 = JagString.wrap("Das ist eine Mitglieder)2Welt(Q");
-
-	@ObfuscatedName("u.zb")
-	public static JagString field2995 = JagString.wrap(" zuerst von Ihrer Freunde)2Liste(Q");
 
 	@ObfuscatedName("u.Cb")
 	public static int field2998 = -1;

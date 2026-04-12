@@ -4,7 +4,7 @@ package deob;
 public final class class100 extends class44 {
 
 	@ObfuscatedName("qd.ac")
-	public JagString field2474 = class123.field3058;
+	public JagString field2474 = Statics.field3058;
 
 	@ObfuscatedName("qd.ad")
 	public int field2526 = 0;
@@ -40,19 +40,13 @@ public final class class100 extends class44 {
 	public boolean field2533 = false;
 
 	@ObfuscatedName("qd.ic")
-	public JagString field2482 = class81.field2056;
+	public JagString field2482 = Statics.field2056;
 
 	@ObfuscatedName("qd.id")
 	public int field2534 = 100;
 
 	@ObfuscatedName("qd.jc")
 	public Object[] field2483;
-
-	@ObfuscatedName("qd.jd")
-	public static JagString field2535 = JagString.wrap("@cr2@");
-
-	@ObfuscatedName("qd.kc")
-	public static JagString field2484 = JagString.wrap("Enter name of friend to add to list");
 
 	@ObfuscatedName("qd.kd")
 	public boolean field2536 = false;
@@ -93,9 +87,6 @@ public final class class100 extends class44 {
 	@ObfuscatedName("qd.rd")
 	public int field2543 = 0;
 
-	@ObfuscatedName("qd.sc")
-	public static JagString field2492 = JagString.wrap("Starting game engine)3)3)3");
-
 	@ObfuscatedName("qd.sd")
 	public int field2544 = -1;
 
@@ -108,15 +99,6 @@ public final class class100 extends class44 {
 	@ObfuscatedName("qd.uc")
 	public boolean field2494 = false;
 
-	@ObfuscatedName("qd.ud")
-	public static JagString field2546 = field2484;
-
-	@ObfuscatedName("qd.vb")
-	public static JagString field2443 = JagString.wrap("glow2:");
-
-	@ObfuscatedName("qd.dc")
-	public static JagString field2477 = field2443;
-
 	@ObfuscatedName("qd.vc")
 	public int field2495 = -1;
 
@@ -128,21 +110,6 @@ public final class class100 extends class44 {
 
 	@ObfuscatedName("qd.wd")
 	public int[] field2548;
-
-	@ObfuscatedName("qd.Mc")
-	public static JagString field2512 = JagString.wrap("Choose Option");
-
-	@ObfuscatedName("qd.qc")
-	public static JagString field2490 = field2512;
-
-	@ObfuscatedName("qd.xc")
-	public static JagString field2497 = JagString.wrap("::errortest");
-
-	@ObfuscatedName("qd.Wc")
-	public static JagString field2522 = JagString.wrap("Fehler beim Laden Ihres Charakter)2Profils");
-
-	@ObfuscatedName("qd.gc")
-	public static JagString field2480 = field2492;
 
 	@ObfuscatedName("qd.Jb")
 	public int field2457 = 1;
@@ -160,7 +127,7 @@ public final class class100 extends class44 {
 	public boolean field2447 = false;
 
 	@ObfuscatedName("qd.Wb")
-	public JagString field2470 = class123.field3058;
+	public JagString field2470 = Statics.field3058;
 
 	@ObfuscatedName("qd.Mb")
 	public int field2460 = 0;
@@ -199,7 +166,7 @@ public final class class100 extends class44 {
 	public int field2455 = 0;
 
 	@ObfuscatedName("qd.yb")
-	public JagString field2446 = class123.field3058;
+	public JagString field2446 = Statics.field3058;
 
 	@ObfuscatedName("qd.Jc")
 	public boolean field2509 = false;
@@ -214,7 +181,7 @@ public final class class100 extends class44 {
 	public int field2465 = -1;
 
 	@ObfuscatedName("qd.Pc")
-	public JagString field2515 = class123.field3058;
+	public JagString field2515 = Statics.field3058;
 
 	@ObfuscatedName("qd.Nb")
 	public boolean field2461 = false;
@@ -485,18 +452,18 @@ public final class class100 extends class44 {
 			return;
 		}
 		if (this.field2520 == 1) {
-			this.field2482 = class81.field2056;
+			this.field2482 = Statics.field2056;
 		}
 		if (this.field2520 == 4) {
-			this.field2482 = class43.field1152;
+			this.field2482 = Statics.field1152;
 		}
 		if (this.field2520 == 5) {
-			this.field2482 = class43.field1152;
+			this.field2482 = Statics.field1152;
 		}
 		if (this.field2520 != 6) {
 			return;
 		}
-		this.field2482 = class5.field218;
+		this.field2482 = Statics.field218;
 	}
 
 	@ObfuscatedName("qd.a(BI)Ljd;")

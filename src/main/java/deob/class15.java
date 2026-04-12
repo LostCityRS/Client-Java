@@ -6,12 +6,6 @@ public final class class15 {
 	@ObfuscatedName("cb.d")
 	public final class44 field483 = new class44();
 
-	@ObfuscatedName("cb.g")
-	public static JagString field486 = JagString.wrap("Drop");
-
-	@ObfuscatedName("cb.h")
-	public static JagString field487 = field486;
-
 	@ObfuscatedName("cb.i")
 	public static class36 field488 = new class36(5000);
 
@@ -39,32 +33,11 @@ public final class class15 {
 	@ObfuscatedName("cb.s")
 	public static int field498 = 0;
 
-	@ObfuscatedName("cb.t")
-	public static JagString field499 = JagString.wrap("Ung-Ultiger Benutzername");
-
 	@ObfuscatedName("cb.u")
 	public static class15 field500 = new class15(200);
 
-	@ObfuscatedName("cb.v")
-	public static JagString field501 = JagString.wrap("@or1@");
-
-	@ObfuscatedName("cb.w")
-	public static JagString field502 = JagString.wrap("Please check your message)2centre for details)3");
-
-	@ObfuscatedName("cb.r")
-	public static JagString field497 = field502;
-
-	@ObfuscatedName("cb.A")
-	public static JagString field506 = JagString.wrap("Classic");
-
-	@ObfuscatedName("cb.z")
-	public static JagString field505 = JagString.wrap("RuneScape wird geladen )2 bitte warten)3)3)3");
-
 	@ObfuscatedName("cb.y")
 	public static boolean field504 = false;
-
-	@ObfuscatedName("cb.B")
-	public static JagString field507 = field506;
 
 	@ObfuscatedName("cb.a(IJLhb;)V")
 	public void method262(long arg0, class44 arg1) {

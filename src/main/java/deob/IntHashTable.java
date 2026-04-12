@@ -3,41 +3,11 @@ package deob;
 @ObfuscatedName("oa")
 public final class IntHashTable {
 
-	@ObfuscatedName("oa.b")
-	public static JagString field2127 = JagString.wrap("We suspect someone knows your password)3");
-
-	@ObfuscatedName("oa.c")
-	public static JagString field2128 = JagString.wrap("Unable to connect)3");
-
-	@ObfuscatedName("oa.h")
-	public static JagString field2133 = JagString.wrap(" has logged in)3");
-
-	@ObfuscatedName("oa.a")
-	public static JagString field2126 = field2133;
-
 	@ObfuscatedName("oa.i")
 	public final int[] field2134;
 
-	@ObfuscatedName("oa.j")
-	public static JagString field2135 = field2128;
-
 	@ObfuscatedName("oa.k")
 	public static class15 field2136 = new class15(100);
-
-	@ObfuscatedName("oa.n")
-	public static JagString field2139 = field2127;
-
-	@ObfuscatedName("oa.o")
-	public static JagString field2140 = field2128;
-
-	@ObfuscatedName("oa.p")
-	public static JagString field2141 = JagString.wrap("Lade Konfiguration )2 ");
-
-	@ObfuscatedName("oa.r")
-	public static JagString field2143 = JagString.wrap("Loaded config");
-
-	@ObfuscatedName("oa.m")
-	public static JagString field2138 = field2143;
 
 	@ObfuscatedName("oa.s")
 	public static int field2144 = 0;
@@ -47,12 +17,6 @@ public final class IntHashTable {
 
 	@ObfuscatedName("oa.w")
 	public static int field2148 = 2;
-
-	@ObfuscatedName("oa.y")
-	public static JagString field2150 = JagString.wrap("Existing user");
-
-	@ObfuscatedName("oa.x")
-	public static JagString field2149 = field2150;
 
 	@ObfuscatedName("oa.a(II)I")
 	public int method745(int arg0) {

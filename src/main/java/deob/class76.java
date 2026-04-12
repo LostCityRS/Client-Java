@@ -9,23 +9,8 @@ public final class class76 extends class44 {
 	@ObfuscatedName("md.tb")
 	public int field1882;
 
-	@ObfuscatedName("md.ub")
-	public static JagString field1883 = JagString.wrap("Welt");
-
 	@ObfuscatedName("md.vb")
 	public int field1884;
-
-	@ObfuscatedName("md.Ab")
-	public static JagString field1889 = JagString.wrap("flash2:");
-
-	@ObfuscatedName("md.wb")
-	public static JagString field1885 = field1889;
-
-	@ObfuscatedName("md.Nb")
-	public static JagString field1902 = JagString.wrap(" million");
-
-	@ObfuscatedName("md.Hb")
-	public static JagString field1896 = field1902;
 
 	@ObfuscatedName("md.Jb")
 	public int field1898 = 0;

@@ -3,15 +3,6 @@ package deob;
 @ObfuscatedName("qb")
 public final class class98 {
 
-	@ObfuscatedName("qb.b")
-	public static JagString field2406 = JagString.wrap(" ");
-
-	@ObfuscatedName("qb.d")
-	public static JagString field2408 = JagString.wrap("Loading title screen )2 ");
-
-	@ObfuscatedName("qb.c")
-	public static JagString field2407 = field2408;
-
 	@ObfuscatedName("qb.e")
 	public static int field2409 = 0;
 
@@ -21,20 +12,11 @@ public final class class98 {
 	@ObfuscatedName("qb.g")
 	public int[][] field2411;
 
-	@ObfuscatedName("qb.h")
-	public static JagString field2412 = JagString.wrap("RuneScape is loading )2 please wait)3)3)3");
-
-	@ObfuscatedName("qb.a")
-	public static JagString field2405 = field2412;
-
 	@ObfuscatedName("qb.j")
 	public final int field2414;
 
 	@ObfuscatedName("qb.l")
 	public final int field2416;
-
-	@ObfuscatedName("qb.p")
-	public static JagString field2420 = JagString.wrap("M");
 
 	@ObfuscatedName("qb.q")
 	public static int field2421 = -1;

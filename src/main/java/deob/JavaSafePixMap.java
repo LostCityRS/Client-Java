@@ -6,9 +6,6 @@ import java.awt.image.*;
 @ObfuscatedName("ac")
 public final class JavaSafePixMap extends PixMap implements ImageProducer, ImageObserver {
 
-	@ObfuscatedName("ac.I")
-	public static JagString field172 = JagString.wrap("Name eingeben:");
-
 	@ObfuscatedName("ac.J")
 	public static int[] field173 = new int[32];
 
@@ -17,12 +14,6 @@ public final class JavaSafePixMap extends PixMap implements ImageProducer, Image
 
 	@ObfuscatedName("ac.W")
 	public static int field185;
-
-	@ObfuscatedName("ac.X")
-	public static JagString field186;
-
-	@ObfuscatedName("ac.U")
-	public static JagString field183;
 
 	@ObfuscatedName("ac.E")
 	public ColorModel field168;
@@ -37,8 +28,8 @@ public final class JavaSafePixMap extends PixMap implements ImageProducer, Image
 			var0 += var0;
 		}
 		field185 = 2;
-		field186 = JagString.wrap("Login server offline)3");
-		field183 = field186;
+		Statics.field186 = JagString.wrap("Login server offline)3");
+		Statics.field183 = Statics.field186;
 	}
 
 	@Override

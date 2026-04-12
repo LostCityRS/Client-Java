@@ -37,7 +37,7 @@ public final class class115 extends class44 {
 	public int field2826 = 0;
 
 	@ObfuscatedName("ta.tb")
-	public JagString field2827 = class121.field3017;
+	public JagString field2827 = Statics.field3017;
 
 	@ObfuscatedName("ta.tc")
 	public int field2879 = -1;
@@ -55,7 +55,7 @@ public final class class115 extends class44 {
 	public static int field2881 = -1;
 
 	@ObfuscatedName("ta.wb")
-	public JagString[] field2830 = new JagString[] { null, null, null, null, class15.field487 };
+	public JagString[] field2830 = new JagString[] { null, null, null, null, Statics.field487 };
 
 	@ObfuscatedName("ta.wc")
 	public int field2882 = -1;
@@ -85,7 +85,7 @@ public final class class115 extends class44 {
 	public int field2851 = -1;
 
 	@ObfuscatedName("ta.Bb")
-	public JagString[] field2835 = new JagString[] { null, null, class63.field1594, null, null };
+	public JagString[] field2835 = new JagString[] { null, null, Statics.field1594, null, null };
 
 	@ObfuscatedName("ta.Kb")
 	public int field2844 = 128;
@@ -300,7 +300,7 @@ public final class class115 extends class44 {
 			this.field2850 = arg1.method145();
 		} else if (arg0 >= 30 && arg0 < 35) {
 			this.field2835[arg0 - 30] = arg1.method140();
-			if (this.field2835[arg0 - 30].method14(class117.field2928)) {
+			if (this.field2835[arg0 - 30].method14(Statics.field2928)) {
 				this.field2835[arg0 - 30] = null;
 			}
 		} else if (arg0 >= 35 && arg0 < 40) {

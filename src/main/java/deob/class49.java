@@ -43,7 +43,7 @@ public final class class49 extends class44 {
 	public int field1331 = -1;
 
 	@ObfuscatedName("ia.rc")
-	public JagString field1332 = class89.field2183;
+	public JagString field1332 = Statics.field2183;
 
 	@ObfuscatedName("ia.tb")
 	public int field1282 = 0;
@@ -60,20 +60,11 @@ public final class class49 extends class44 {
 	@ObfuscatedName("ia.wb")
 	public int field1285 = 0;
 
-	@ObfuscatedName("ia.Ub")
-	public static JagString field1309 = JagString.wrap("(Udns");
-
-	@ObfuscatedName("ia.yc")
-	public static JagString field1339 = JagString.wrap("blaugr-Un:");
-
 	@ObfuscatedName("ia.Bc")
 	public static int field1342 = 0;
 
 	@ObfuscatedName("ia.zc")
 	public static int field1340 = 0;
-
-	@ObfuscatedName("ia.Cc")
-	public static JagString field1343 = JagString.wrap(": ");
 
 	@ObfuscatedName("ia.Dc")
 	public static long field1344 = 0L;
@@ -432,7 +423,7 @@ public final class class49 extends class44 {
 			this.field1327 = arg0.method184() * 5;
 		} else if (arg1 >= 30 && arg1 < 35) {
 			this.field1291[arg1 - 30] = arg0.method140();
-			if (this.field1291[arg1 - 30].method14(class117.field2928)) {
+			if (this.field1291[arg1 - 30].method14(Statics.field2928)) {
 				this.field1291[arg1 - 30] = null;
 			}
 		} else if (arg1 == 40) {

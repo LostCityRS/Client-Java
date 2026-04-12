@@ -9,9 +9,6 @@ public final class class42 extends class44 {
 	@ObfuscatedName("h.bc")
 	public int field1117 = 128;
 
-	@ObfuscatedName("h.cc")
-	public static JagString field1118 = JagString.wrap("Unexpected server response");
-
 	@ObfuscatedName("h.dc")
 	public int field1119 = 0;
 
@@ -27,17 +24,11 @@ public final class class42 extends class44 {
 	@ObfuscatedName("h.kc")
 	public static byte[] field1126 = new byte[520];
 
-	@ObfuscatedName("h.lc")
-	public static JagString field1127 = JagString.wrap("Versteckt");
-
 	@ObfuscatedName("h.mc")
 	public int field1128 = -1;
 
 	@ObfuscatedName("h.pc")
 	public int field1131 = -1;
-
-	@ObfuscatedName("h.rc")
-	public static JagString field1133 = JagString.wrap("(X100(U(Y");
 
 	@ObfuscatedName("h.sb")
 	public boolean field1082 = true;
@@ -63,44 +54,14 @@ public final class class42 extends class44 {
 	@ObfuscatedName("h.wc")
 	public int[] field1138;
 
-	@ObfuscatedName("h.Db")
-	public static JagString field1093 = JagString.wrap("Please wait 1 minute and try again)3");
-
-	@ObfuscatedName("h.ec")
-	public static JagString field1120 = field1093;
-
-	@ObfuscatedName("h.Ab")
-	public static JagString field1090 = JagString.wrap("Moderator option: Mute player for 48 hours: <ON>");
-
-	@ObfuscatedName("h.Tb")
-	public static JagString field1109 = JagString.wrap("Loaded fonts");
-
-	@ObfuscatedName("h.Vb")
-	public static JagString field1111 = field1093;
-
-	@ObfuscatedName("h.Eb")
-	public static JagString field1094 = field1090;
-
 	@ObfuscatedName("h.Ob")
 	public static int field1104 = 0;
 
 	@ObfuscatedName("h.Yb")
 	public static int field1114 = 0;
 
-	@ObfuscatedName("h.Mb")
-	public static JagString field1102 = field1109;
-
-	@ObfuscatedName("h.Ib")
-	public static JagString field1098 = JagString.wrap("Checking for updates )2 ");
-
-	@ObfuscatedName("h.Qb")
-	public static JagString field1106 = field1098;
-
 	@ObfuscatedName("h.Bc")
 	public static int field1143 = -1;
-
-	@ObfuscatedName("h.Ac")
-	public static JagString field1142 = field1118;
 
 	@ObfuscatedName("h.Cb")
 	public int field1092 = -1;
@@ -127,7 +88,7 @@ public final class class42 extends class44 {
 	public int field1099 = -1;
 
 	@ObfuscatedName("h.Wb")
-	public JagString field1112 = class75.field1852;
+	public JagString field1112 = Statics.field1852;
 
 	@ObfuscatedName("h.yc")
 	public boolean field1140 = true;
@@ -230,7 +191,7 @@ public final class class42 extends class44 {
 			this.field1123 = arg1.method145();
 		} else if (arg0 >= 30 && arg0 < 35) {
 			this.field1086[arg0 - 30] = arg1.method140();
-			if (this.field1086[arg0 - 30].method14(class117.field2928)) {
+			if (this.field1086[arg0 - 30].method14(Statics.field2928)) {
 				this.field1086[arg0 - 30] = null;
 			}
 		} else if (arg0 == 40) {

@@ -20,9 +20,6 @@ public abstract class class80 extends class128 {
 	@ObfuscatedName("nb.cd")
 	public static volatile int field2017 = 0;
 
-	@ObfuscatedName("nb.dc")
-	public static JagString field1966 = JagString.wrap("Loaded textures");
-
 	@ObfuscatedName("nb.ec")
 	public int field1967;
 
@@ -65,12 +62,6 @@ public abstract class class80 extends class128 {
 	@ObfuscatedName("nb.nc")
 	public int field1976 = 0;
 
-	@ObfuscatedName("nb.nd")
-	public static JagString field2028 = JagString.wrap("Lade Schrifts-=tze )2 ");
-
-	@ObfuscatedName("nb.od")
-	public static JagString field2029 = JagString.wrap("Please wait )2 attempting to reestablish");
-
 	@ObfuscatedName("nb.pc")
 	public int field1978 = 0;
 
@@ -80,14 +71,8 @@ public abstract class class80 extends class128 {
 	@ObfuscatedName("nb.qc")
 	public boolean field1979 = false;
 
-	@ObfuscatedName("nb.rd")
-	public static JagString field2032 = JagString.wrap("Registrierter Benutzer");
-
 	@ObfuscatedName("nb.sc")
 	public int field1981;
-
-	@ObfuscatedName("nb.sd")
-	public static JagString field2033 = field2029;
 
 	@ObfuscatedName("nb.td")
 	public static JagString[] field2034 = new JagString[100];
@@ -97,15 +82,6 @@ public abstract class class80 extends class128 {
 
 	@ObfuscatedName("nb.vc")
 	public int field1984;
-
-	@ObfuscatedName("nb.zc")
-	public static JagString field1988 = JagString.wrap("Login limit exceeded)3");
-
-	@ObfuscatedName("nb.Jc")
-	public static JagString field1998 = field1966;
-
-	@ObfuscatedName("nb.Xc")
-	public static JagString field2012 = field1988;
 
 	@ObfuscatedName("nb.Ec")
 	public static BigInteger field1993 = new BigInteger("7162900525229798032761816791230527296329313291232324290237849263501208207972894053929065636522363163621000728841182238772712427862772219676577293600221789");

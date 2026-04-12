@@ -30,14 +30,8 @@ public final class class119 extends Linkable {
 	@ObfuscatedName("te.pb")
 	public int field2964;
 
-	@ObfuscatedName("te.qb")
-	public static JagString field2965 = JagString.wrap("headicons_pk");
-
 	@ObfuscatedName("te.sb")
 	public static int field2967 = 0;
-
-	@ObfuscatedName("te.tb")
-	public static JagString field2968 = JagString.wrap("::fpsoff");
 
 	@ObfuscatedName("te.ub")
 	public int[] field2969;

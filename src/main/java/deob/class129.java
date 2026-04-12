@@ -9,20 +9,11 @@ import java.net.Socket;
 @ObfuscatedName("vc")
 public final class class129 implements Runnable {
 
-	@ObfuscatedName("vc.a")
-	public static JagString field3146 = JagString.wrap("Your account has been disabled)3");
-
-	@ObfuscatedName("vc.c")
-	public static JagString field3148 = JagString.wrap("Wordpack geladen)3");
-
 	@ObfuscatedName("vc.d")
 	public final InputStream field3149;
 
 	@ObfuscatedName("vc.e")
 	public byte[] field3150;
-
-	@ObfuscatedName("vc.f")
-	public static JagString field3151 = JagString.wrap("Handel akzeptieren");
 
 	@ObfuscatedName("vc.i")
 	public final Socket field3154;
@@ -45,20 +36,8 @@ public final class class129 implements Runnable {
 	@ObfuscatedName("vc.p")
 	public final class69 field3161;
 
-	@ObfuscatedName("vc.r")
-	public static JagString field3163 = JagString.wrap("redstone3");
-
 	@ObfuscatedName("vc.u")
 	public int field3166 = 0;
-
-	@ObfuscatedName("vc.A")
-	public static JagString field3172 = field3146;
-
-	@ObfuscatedName("vc.x")
-	public static JagString field3169 = JagString.wrap("");
-
-	@ObfuscatedName("vc.y")
-	public static JagString field3170 = JagString.wrap("Menge eingeben:");
 
 	@ObfuscatedName("vc.D")
 	public static int field3175 = 99;

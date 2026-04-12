@@ -20,27 +20,6 @@ public abstract class class64 extends Applet implements Runnable, FocusListener,
 	@ObfuscatedName("kd.d")
 	public static long[] field1601 = new long[32];
 
-	@ObfuscatedName("kd.h")
-	public static JagString field1605 = null;
-
-	@ObfuscatedName("kd.n")
-	public static JagString field1611 = JagString.wrap("Anmelde)2Limit -Uberschritten)3");
-
-	@ObfuscatedName("kd.u")
-	public static JagString field1618 = JagString.wrap("Bitte warten Sie eine Minute");
-
-	@ObfuscatedName("kd.I")
-	public static JagString field1632 = JagString.wrap("Die Adresse dieses Computers wurde gesperrt)1");
-
-	@ObfuscatedName("kd.H")
-	public static JagString field1631 = JagString.wrap("null");
-
-	@ObfuscatedName("kd.y")
-	public static JagString field1622 = JagString.wrap("Hier klicken)1 um fortzufahren)3)3)3");
-
-	@ObfuscatedName("kd.B")
-	public static JagString field1625 = JagString.wrap("null");
-
 	@ObfuscatedName("kd.Q")
 	public boolean field1640 = false;
 

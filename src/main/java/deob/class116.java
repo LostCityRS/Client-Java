@@ -3,20 +3,11 @@ package deob;
 @ObfuscatedName("tb")
 public final class class116 extends class128 {
 
-	@ObfuscatedName("tb.ac")
-	public static JagString field2903 = JagString.wrap("Die Verbindung konnte");
-
 	@ObfuscatedName("tb.cc")
 	public final int field2905;
 
-	@ObfuscatedName("tb.hc")
-	public static JagString field2910 = JagString.wrap("redstone2");
-
 	@ObfuscatedName("tb.Rb")
 	public static int[][] field2894 = new int[][] { { 6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 2983, 54193 }, { 8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003, 25239 }, { 25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003 }, { 4626, 11146, 6439, 12, 4758, 10270 }, { 4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574 } };
-
-	@ObfuscatedName("tb.Yb")
-	public static JagString field2901 = JagString.wrap("Sie haben gerade eine andere Welt verlassen)3");
 
 	@ObfuscatedName("tb.Tb")
 	public int field2896 = 0;

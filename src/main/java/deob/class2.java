@@ -9,17 +9,8 @@ public final class class2 extends class80 {
 	@ObfuscatedName("aa.be")
 	public int field97;
 
-	@ObfuscatedName("aa.ce")
-	public static JagString field98 = JagString.wrap("Spieler kann nicht gefunden werden: ");
-
 	@ObfuscatedName("aa.de")
 	public int field99;
-
-	@ObfuscatedName("aa.fe")
-	public static JagString field101 = JagString.wrap("green:");
-
-	@ObfuscatedName("aa.ud")
-	public static JagString field64 = field101;
 
 	@ObfuscatedName("aa.vd")
 	public int field65 = 0;
@@ -27,23 +18,8 @@ public final class class2 extends class80 {
 	@ObfuscatedName("aa.wd")
 	public int field66;
 
-	@ObfuscatedName("aa.Hd")
-	public static JagString field77 = JagString.wrap("Mitteilung");
-
-	@ObfuscatedName("aa.Nd")
-	public static JagString field83 = JagString.wrap("Bitte starten Sie eine Mitgliedschaft");
-
 	@ObfuscatedName("aa.Cd")
 	public static int field72 = 0;
-
-	@ObfuscatedName("aa.xd")
-	public static JagString field67 = JagString.wrap("Try again in 60 secs)3)3)3");
-
-	@ObfuscatedName("aa.Xd")
-	public static JagString field93 = JagString.wrap("Keine Antwort vom Anmelde)2Server)3");
-
-	@ObfuscatedName("aa.Yd")
-	public static JagString field94 = field67;
 
 	@ObfuscatedName("aa.yd")
 	public int field68 = 0;

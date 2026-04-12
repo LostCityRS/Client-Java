@@ -66,12 +66,6 @@ public final class Occlude {
 	@ObfuscatedName("ld.C")
 	public static int field1749 = 0;
 
-	@ObfuscatedName("ld.E")
-	public static JagString field1751 = JagString.wrap("title)3jpg");
-
-	@ObfuscatedName("ld.y")
-	public static JagString field1745 = JagString.wrap("Ignorieren");
-
 	@ObfuscatedName("ld.G")
 	public static int[] field1753 = new int[] { 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800 };
 

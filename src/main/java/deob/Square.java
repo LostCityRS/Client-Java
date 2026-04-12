@@ -3,38 +3,8 @@ package deob;
 @ObfuscatedName("fa")
 public final class Square extends Linkable {
 
-	@ObfuscatedName("fa.gb")
-	public static JagString field852 = JagString.wrap("Schrifts-=tze geladen)3");
-
-	@ObfuscatedName("fa.ib")
-	public static JagString field854 = JagString.wrap("Verbindung mit Freunde)2Server)3)3)3");
-
 	@ObfuscatedName("fa.lb")
 	public static int field857 = 0;
-
-	@ObfuscatedName("fa.nb")
-	public static JagString field859 = JagString.wrap("m-Ochte sich mit Ihnen duellieren)3");
-
-	@ObfuscatedName("fa.rb")
-	public static JagString field863 = JagString.wrap("Please try using a different world)3");
-
-	@ObfuscatedName("fa.eb")
-	public static JagString field850 = field863;
-
-	@ObfuscatedName("fa.jb")
-	public static JagString field855 = field863;
-
-	@ObfuscatedName("fa.mb")
-	public static JagString field858 = field863;
-
-	@ObfuscatedName("fa.pb")
-	public static JagString field861 = field863;
-
-	@ObfuscatedName("fa.qb")
-	public static JagString field862 = field863;
-
-	@ObfuscatedName("fa.tb")
-	public static JagString field865 = field863;
 
 	@ObfuscatedName("fa.ub")
 	public Square field866;

@@ -6,20 +6,11 @@ public final class class95 extends class44 {
 	@ObfuscatedName("pe.tb")
 	public final int[] field2353 = new int[6];
 
-	@ObfuscatedName("pe.vb")
-	public static JagString field2355 = JagString.wrap("backvmid2");
-
 	@ObfuscatedName("pe.Fb")
 	public static int field2365 = 0;
 
 	@ObfuscatedName("pe.Eb")
 	public static boolean field2364 = false;
-
-	@ObfuscatedName("pe.zb")
-	public static JagString field2359 = JagString.wrap("Anmelde)2Zeitlimit -Uberschritten)3");
-
-	@ObfuscatedName("pe.Sb")
-	public static JagString field2378 = JagString.wrap("Bitte versuchen Sie es in ");
 
 	@ObfuscatedName("pe.Jb")
 	public static int[] field2369 = new int[50];
@@ -27,29 +18,11 @@ public final class class95 extends class44 {
 	@ObfuscatedName("pe.yb")
 	public static int field2358 = 0;
 
-	@ObfuscatedName("pe.Cb")
-	public static JagString field2362 = JagString.wrap("K");
-
-	@ObfuscatedName("pe.ub")
-	public static JagString field2354 = field2362;
-
-	@ObfuscatedName("pe.Ab")
-	public static JagString field2360 = field2362;
-
 	@ObfuscatedName("pe.Lb")
 	public static LinkList field2371 = new LinkList();
 
-	@ObfuscatedName("pe.Vb")
-	public static JagString field2381 = JagString.wrap("Wen m-Ochten Sie entfernen?");
-
 	@ObfuscatedName("pe.Ub")
 	public static int field2380 = 0;
-
-	@ObfuscatedName("pe.Xb")
-	public static JagString field2383 = JagString.wrap("Bad session id)3");
-
-	@ObfuscatedName("pe.Wb")
-	public static JagString field2382 = field2383;
 
 	@ObfuscatedName("pe.Gb")
 	public int field2366 = -1;

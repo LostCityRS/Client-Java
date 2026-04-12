@@ -14,15 +14,6 @@ public final class class122 implements MouseListener, MouseMotionListener, Focus
 	@ObfuscatedName("ub.k")
 	public static int field3037 = -1;
 
-	@ObfuscatedName("ub.q")
-	public static JagString field3043 = JagString.wrap("wave2:");
-
-	@ObfuscatedName("ub.r")
-	public static JagString field3044 = JagString.wrap(" is already on your friend list");
-
-	@ObfuscatedName("ub.s")
-	public static JagString field3045 = field3044;
-
 	@ObfuscatedName("ub.t")
 	public static class58[] field3046 = new class58[1000];
 
@@ -31,12 +22,6 @@ public final class class122 implements MouseListener, MouseMotionListener, Focus
 
 	@ObfuscatedName("ub.z")
 	public static int field3052 = 78;
-
-	@ObfuscatedName("ub.y")
-	public static JagString field3051 = JagString.wrap("Lade Titelbild )2 ");
-
-	@ObfuscatedName("ub.B")
-	public static JagString field3054 = field3043;
 
 	@Override
 	public synchronized void mouseEntered(MouseEvent arg0) {

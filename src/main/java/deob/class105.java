@@ -3,17 +3,11 @@ package deob;
 @ObfuscatedName("rc")
 public final class class105 {
 
-	@ObfuscatedName("rc.c")
-	public static JagString field2629 = JagString.wrap(" @whi@(X");
-
 	@ObfuscatedName("rc.d")
 	public static int field2630 = 0;
 
 	@ObfuscatedName("rc.e")
 	public static volatile boolean field2631 = true;
-
-	@ObfuscatedName("rc.f")
-	public static JagString field2632 = JagString.wrap("New User");
 
 	@ObfuscatedName("rc.i")
 	public static int field2635 = 0;
@@ -27,23 +21,14 @@ public final class class105 {
 	@ObfuscatedName("rc.l")
 	public static int field2638 = 0;
 
-	@ObfuscatedName("rc.m")
-	public static JagString field2639 = field2632;
-
 	@ObfuscatedName("rc.o")
 	public final int field2641;
 
 	@ObfuscatedName("rc.p")
 	public final int field2642;
 
-	@ObfuscatedName("rc.r")
-	public static JagString field2644 = JagString.wrap("Ihre Freunde)2Liste ist voll(Q Mitglieder k-Onnen 200 Freunde hinzuf-Ugen)1 freie Spieler nur 100)3");
-
 	@ObfuscatedName("rc.s")
 	public boolean field2645 = true;
-
-	@ObfuscatedName("rc.t")
-	public static JagString field2646 = JagString.wrap("headicons_hint");
 
 	@ObfuscatedName("rc.u")
 	public final int field2647;
@@ -53,18 +38,6 @@ public final class class105 {
 
 	@ObfuscatedName("rc.w")
 	public static int field2649 = 0;
-
-	@ObfuscatedName("rc.x")
-	public static JagString field2650 = JagString.wrap("Connection timed out)3");
-
-	@ObfuscatedName("rc.h")
-	public static JagString field2634 = field2650;
-
-	@ObfuscatedName("rc.B")
-	public static JagString field2654 = JagString.wrap("Der Server wird gerade aktualisiert)3");
-
-	@ObfuscatedName("rc.E")
-	public static JagString field2657 = JagString.wrap("Lade Wordpack )2 ");
 
 	@ObfuscatedName("rc.y")
 	public final int field2651;

@@ -3,23 +3,11 @@ package deob;
 @ObfuscatedName("fc")
 public final class class34 extends class44 {
 
-	@ObfuscatedName("fc.sb")
-	public static JagString field889 = JagString.wrap("Malformed login packet)3");
-
-	@ObfuscatedName("fc.tb")
-	public static JagString field890 = JagString.wrap("Zu viele Anmelde)2Versuche von Ihrer Adresse");
-
 	@ObfuscatedName("fc.xb")
 	public static int field894 = 0;
 
-	@ObfuscatedName("fc.Fb")
-	public static JagString field902 = JagString.wrap("-5berpr-Ufen Sie Ihr Mitteilungsfach)3");
-
 	@ObfuscatedName("fc.zb")
 	public static int field896 = 0;
-
-	@ObfuscatedName("fc.Db")
-	public static JagString field900 = field889;
 
 	@ObfuscatedName("fc.Bb")
 	public static byte[][][] field898 = new byte[4][104][104];

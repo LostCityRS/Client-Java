@@ -6,23 +6,8 @@ public final class class47 extends class44 {
 	@ObfuscatedName("he.ub")
 	public int[] field1223;
 
-	@ObfuscatedName("he.Ab")
-	public static JagString field1229 = JagString.wrap(":tradereq:");
-
-	@ObfuscatedName("he.Jb")
-	public static JagString field1238 = JagString.wrap("Gegenstand konnte nicht gefunden werden)1 verk-Urzen Sie den Suchbegriff)3");
-
 	@ObfuscatedName("he.Ib")
 	public static int field1237 = 0;
-
-	@ObfuscatedName("he.Qb")
-	public static JagString field1245 = JagString.wrap("titlebox");
-
-	@ObfuscatedName("he.Db")
-	public static JagString field1232 = JagString.wrap("Bitte versuchen Sie es erneut)3");
-
-	@ObfuscatedName("he.Pb")
-	public static JagString field1244 = JagString.wrap("sch-Utteln:");
 
 	@ObfuscatedName("he.yb")
 	public int field1227 = -1;

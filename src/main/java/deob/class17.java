@@ -12,9 +12,6 @@ public final class class17 {
 	@ObfuscatedName("cd.d")
 	public int field532;
 
-	@ObfuscatedName("cd.e")
-	public static JagString field533 = JagString.wrap("backhmid1");
-
 	@ObfuscatedName("cd.g")
 	public class128 field535;
 
@@ -23,15 +20,6 @@ public final class class17 {
 
 	@ObfuscatedName("cd.i")
 	public int field537;
-
-	@ObfuscatedName("cd.j")
-	public static JagString field538 = JagString.wrap("Geben Sie Ihren Benutzernamen");
-
-	@ObfuscatedName("cd.m")
-	public static JagString field541 = JagString.wrap("The server is being updated)3");
-
-	@ObfuscatedName("cd.k")
-	public static JagString field539 = field541;
 
 	@ObfuscatedName("cd.n")
 	public int field542;
@@ -44,9 +32,6 @@ public final class class17 {
 
 	@ObfuscatedName("cd.r")
 	public static int[] field546 = new int[4000];
-
-	@ObfuscatedName("cd.s")
-	public static JagString field547 = JagString.wrap("Neuer Benutzer");
 
 	@ObfuscatedName("cd.t")
 	public static class100 field548 = null;

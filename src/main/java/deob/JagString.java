@@ -9,38 +9,14 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("a.eb")
 	public static final int field57 = 50;
 
-	@ObfuscatedName("a.gb")
-	public static JagString field59 = wrap("Diese Welt ist voll)3");
-
-	@ObfuscatedName("a.jb")
-	public static JagString field62 = wrap("chatback");
-
 	@ObfuscatedName("a.n")
 	public static int field14 = 0;
 
 	@ObfuscatedName("a.u")
 	public boolean field21 = true;
 
-	@ObfuscatedName("a.w")
-	public static JagString field23 = wrap("scrollbar");
-
-	@ObfuscatedName("a.K")
-	public static JagString field37 = wrap("Private chat");
-
 	@ObfuscatedName("a.J")
 	public static int field36 = 0;
-
-	@ObfuscatedName("a.S")
-	public static JagString field45 = wrap("purple:");
-
-	@ObfuscatedName("a.kb")
-	public static JagString field63 = field45;
-
-	@ObfuscatedName("a.W")
-	public static JagString field49 = field37;
-
-	@ObfuscatedName("a.V")
-	public static JagString field48 = wrap("Der Anmelde)2Server ist offline)3");
 
 	@ObfuscatedName("a.Z")
 	public static int[] field52 = new int[128];

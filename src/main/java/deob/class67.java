@@ -6,32 +6,14 @@ public final class class67 {
 	@ObfuscatedName("la.d")
 	public boolean field1658;
 
-	@ObfuscatedName("la.g")
-	public static JagString field1661 = JagString.wrap("*6n");
-
 	@ObfuscatedName("la.m")
 	public int[] field1667;
 
 	@ObfuscatedName("la.q")
 	public int field1671;
 
-	@ObfuscatedName("la.s")
-	public static JagString field1673 = JagString.wrap("(U(Y");
-
-	@ObfuscatedName("la.t")
-	public static JagString field1674 = JagString.wrap("Trade)4compete");
-
-	@ObfuscatedName("la.v")
-	public static JagString field1676 = field1674;
-
 	@ObfuscatedName("la.y")
 	public static int field1679 = 0;
-
-	@ObfuscatedName("la.E")
-	public static JagString field1685 = JagString.wrap("Off");
-
-	@ObfuscatedName("la.c")
-	public static JagString field1657 = field1685;
 
 	@ObfuscatedName("la.D")
 	public static final int field1684 = 50;
@@ -62,9 +44,6 @@ public final class class67 {
 
 	@ObfuscatedName("la.C")
 	public static int field1683 = -1;
-
-	@ObfuscatedName("la.K")
-	public static JagString field1691 = JagString.wrap("scape main");
 
 	@ObfuscatedName("la.M")
 	public long field1693;
