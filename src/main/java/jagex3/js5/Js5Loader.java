@@ -143,7 +143,7 @@ public final class Js5Loader extends Js5 {
 		this.field2990 = arg5;
 		this.field2981 = arg1;
 		this.field2986 = arg2;
-		Statics.method280(this, this.field2986);
+		Js5Net.method280(this, this.field2986);
 	}
 
 	@ObfuscatedName("u.e(I)V")

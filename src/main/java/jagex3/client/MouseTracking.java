@@ -1,7 +1,7 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
+import jagex3.util.ThreadUtil;
 
 @ObfuscatedName("nc")
 public final class MouseTracking implements Runnable {
@@ -32,7 +32,7 @@ public final class MouseTracking implements Runnable {
 					this.field2058++;
 				}
 			}
-			Statics.sleepPrecise(50L);
+			ThreadUtil.sleepPrecise(50L);
 		}
 	}
 }

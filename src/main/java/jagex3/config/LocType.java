@@ -1,6 +1,7 @@
 package jagex3.config;
 
-import deob.*;
+import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
@@ -157,7 +158,7 @@ public final class LocType extends Linkable2 {
 
 	@ObfuscatedName("fa.b(IB)Lia;")
 	public static LocType method389(int arg0) {
-		LocType var1 = (LocType) field2788.method263((long) arg0);
+		LocType var1 = (LocType) field2788.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -178,10 +179,10 @@ public final class LocType extends Linkable2 {
 
 	@ObfuscatedName("qd.c(B)V")
 	public static void method859() {
-		field2788.method267();
-		field2322.method267();
-		Statics.field981.method267();
-		field2428.method267();
+		field2788.clear();
+		field2322.clear();
+		Statics.field981.clear();
+		field2428.clear();
 	}
 
 	@ObfuscatedName("ia.a(IIIIIBI)Lpa;")
@@ -192,7 +193,7 @@ public final class LocType extends Linkable2 {
 		} else {
 			var7 = (this.field1321 << 10) + (arg4 << 3) + arg2;
 		}
-		Model var9 = (Model) Statics.field981.method263(var7);
+		Model var9 = (Model) Statics.field981.find(var7);
 		if (var9 == null) {
 			var9 = this.method511(!this.field1303, false, arg2, arg4);
 			if (var9 == null) {
@@ -279,7 +280,7 @@ public final class LocType extends Linkable2 {
 				if (var6) {
 					var9 += 65536;
 				}
-				var5 = (Model) field2322.method263((long) var9);
+				var5 = (Model) field2322.find((long) var9);
 				if (var5 == null) {
 					var5 = Model.method798(field51, var9 & 0xFFFF);
 					if (var5 == null) {
@@ -313,7 +314,7 @@ public final class LocType extends Linkable2 {
 			if (var13) {
 				var12 += 65536;
 			}
-			var5 = (Model) field2322.method263((long) var12);
+			var5 = (Model) field2322.find((long) var12);
 			if (var5 == null) {
 				var5 = Model.method798(field51, var12 & 0xFFFF);
 				if (var5 == null) {
@@ -372,7 +373,7 @@ public final class LocType extends Linkable2 {
 		} else {
 			var9 = (this.field1321 << 10) + (arg3 << 3) + arg4;
 		}
-		Model var11 = (Model) field2428.method263(var9);
+		Model var11 = (Model) field2428.find(var9);
 		if (var11 == null) {
 			var11 = this.method511(true, true, arg4, arg3);
 			if (var11 == null) {

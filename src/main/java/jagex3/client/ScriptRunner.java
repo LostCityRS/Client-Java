@@ -1,6 +1,7 @@
 package jagex3.client;
 
-import deob.*;
+import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.config.IfType;
 import jagex3.config.ObjType;
 import jagex3.util.JagString;
@@ -472,7 +473,7 @@ public class ScriptRunner {
 						int var49 = Statics.field3255[var4];
 						int var50 = Statics.field3255[var4 + 2];
 						int var51 = Statics.field3255[var4 + 1];
-						IfType var52 = Statics.method607(Statics.field2922[var49], var50, true, 0, -1, 0, var51);
+						IfType var52 = Statics.method607(IfType.field2922[var49], var50, true, 0, -1, 0, var51);
 						if (var52 == null) {
 							Statics.field3255[var4++] = 0;
 						} else {
@@ -537,7 +538,7 @@ public class ScriptRunner {
 						int var58 = Statics.field3255[var4 + 1];
 						int var59 = Statics.field3255[var4];
 						int var60 = Statics.field3255[var4 + 2];
-						IfType var61 = Statics.method607(Statics.field2922[var59], var60, false, 0, -1, 0, var58);
+						IfType var61 = Statics.method607(IfType.field2922[var59], var60, false, 0, -1, 0, var58);
 						if (var61 == null) {
 							Statics.field3255[var4++] = -1;
 						} else {
@@ -551,7 +552,7 @@ public class ScriptRunner {
 						IfType var62 = Client.method1053(Statics.field3255[var4]);
 						int var63 = Statics.field3255[var4 + 1];
 						int var64 = Statics.field3255[var4 + 2];
-						IfType var65 = Statics.method607(Statics.field2922[var62.field2495 >> 16], var64, false, var62.field2537, var62.field2495 & 0xFFFF, var62.field2552, var63);
+						IfType var65 = Statics.method607(IfType.field2922[var62.field2495 >> 16], var64, false, var62.field2537, var62.field2495 & 0xFFFF, var62.field2552, var63);
 						if (var65 == null) {
 							Statics.field3255[var4++] = -1;
 						} else {
@@ -782,7 +783,7 @@ public class ScriptRunner {
 					} else if (var14 == 3100) {
 						var8--;
 						JagString var118 = Statics.field2957[var8];
-						Statics.method758(0, var118, Statics.field2585);
+						Client.method758(0, var118, Statics.field2585);
 					} else {
 						if (var14 != 3101) {
 							break;

@@ -1,11 +1,11 @@
 package jagex3.callstack;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.Client;
 import jagex3.client.GameShell;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
+import jagex3.util.ThreadUtil;
 
 import java.io.*;
 import java.net.URL;
@@ -46,7 +46,7 @@ public final class JagException extends RuntimeException {
 			String var6 = var5.replace('#', '_');
 			PrivilegedRequest var7 = signlink.method650(new URL(signlink.applet.getCodeBase(), "clienterror.ws?c=" + GameShell.field2038 + "&u=" + Client.field1843 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
 			while (var7.field815 == 0) {
-				Statics.sleepPrecise(1L);
+				ThreadUtil.sleepPrecise(1L);
 			}
 			if (var7.field815 == 1) {
 				DataInputStream var8 = (DataInputStream) var7.field818;

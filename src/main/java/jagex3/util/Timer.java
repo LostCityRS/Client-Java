@@ -6,7 +6,7 @@ import deob.ObfuscatedName;
 public abstract class Timer {
 
 	@ObfuscatedName("sa.a(B)Lna;")
-	public static Timer method909() {
+	public static Timer create() {
 		try {
 			return (Timer) Class.forName("jagex3.util.NanoTimer").getDeclaredConstructor().newInstance();
 		} catch (Throwable var0) {
@@ -18,8 +18,8 @@ public abstract class Timer {
 	public abstract int count(int arg0, int arg1);
 
 	@ObfuscatedName("na.a(I)V")
-	public abstract void method571();
+	public abstract void init();
 
 	@ObfuscatedName("na.b(I)V")
-	public abstract void method570();
+	public abstract void reset();
 }

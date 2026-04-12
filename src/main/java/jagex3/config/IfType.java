@@ -18,6 +18,16 @@ public final class IfType extends Linkable2 {
 
 	@ObfuscatedName("rd.w")
 	public static LruCache field2680 = new LruCache(50);
+	@ObfuscatedName("cb.x")
+	public static Js5 field503;
+	@ObfuscatedName("fd.sb")
+	public static Js5 field924;
+	@ObfuscatedName("t.yb")
+	public static Js5 field2810;
+	@ObfuscatedName("tc.k")
+	public static IfType[][] field2922;
+	@ObfuscatedName("wc.o")
+	public static boolean[] field3296;
 	@ObfuscatedName("qd.ac")
 	public JagString field2474 = Statics.field3058;
 
@@ -293,45 +303,75 @@ public final class IfType extends Linkable2 {
 
 	@ObfuscatedName("d.a(Lbd;Lbd;Lbd;B)V")
 	public static void init(Js5 arg0, Js5 arg1, Js5 arg2) {
-		Statics.field503 = arg2;
-		Statics.field924 = arg0;
-		Statics.field2810 = arg1;
-		Statics.field2922 = new IfType[Statics.field924.method220()][];
-		Statics.field3296 = new boolean[Statics.field924.method220()];
+		field503 = arg2;
+		field924 = arg0;
+		field2810 = arg1;
+		field2922 = new IfType[field924.method220()][];
+		field3296 = new boolean[field924.method220()];
 	}
 
 	@ObfuscatedName("wc.a(II)Z")
 	public static boolean method1052(int arg0) {
-		if (Statics.field3296[arg0]) {
+		if (field3296[arg0]) {
 			return true;
-		} else if (Statics.field924.method231(arg0)) {
-			int var1 = Statics.field924.method235(arg0);
+		} else if (field924.method231(arg0)) {
+			int var1 = field924.method235(arg0);
 			if (var1 == 0) {
-				Statics.field3296[arg0] = true;
+				field3296[arg0] = true;
 				return true;
 			}
-			if (Statics.field2922[arg0] == null) {
-				Statics.field2922[arg0] = new IfType[var1];
+			if (field2922[arg0] == null) {
+				field2922[arg0] = new IfType[var1];
 			}
 			for (int var2 = 0; var2 < var1; var2++) {
-				if (Statics.field2922[arg0][var2] == null) {
-					byte[] var3 = Statics.field924.method217(var2, arg0);
+				if (field2922[arg0][var2] == null) {
+					byte[] var3 = field924.method217(var2, arg0);
 					if (var3 != null) {
-						Statics.field2922[arg0][var2] = new IfType();
-						Statics.field2922[arg0][var2].field2495 = (arg0 << 16) + var2;
+						field2922[arg0][var2] = new IfType();
+						field2922[arg0][var2].field2495 = (arg0 << 16) + var2;
 						if (var3[0] == -1) {
-							Statics.field2922[arg0][var2].method858(new Packet(var3));
+							field2922[arg0][var2].method858(new Packet(var3));
 						} else {
-							Statics.field2922[arg0][var2].method851(new Packet(var3));
+							field2922[arg0][var2].method851(new Packet(var3));
 						}
 					}
 				}
 			}
-			Statics.field3296[arg0] = true;
+			field3296[arg0] = true;
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	@ObfuscatedName("ua.a(BI)V")
+	public static void method985(int arg0) {
+		if (arg0 == -1 || !field3296[arg0]) {
+			return;
+		}
+		field924.method216(arg0);
+		if (field2922[arg0] == null) {
+			return;
+		}
+		boolean var1 = true;
+		for (int var2 = 0; var2 < field2922[arg0].length; var2++) {
+			if (field2922[arg0][var2] != null) {
+				if (field2922[arg0][var2].field2489 == 2) {
+					var1 = false;
+				} else {
+					field2922[arg0][var2] = null;
+				}
+			}
+		}
+		if (var1) {
+			field2922[arg0] = null;
+		}
+		field3296[arg0] = false;
+	}
+
+	@ObfuscatedName("s.a(II)V")
+	public static void method895(int arg0) {
+		method985(arg0);
 	}
 
 	@ObfuscatedName("qd.a(IZI)V")
@@ -531,11 +571,11 @@ public final class IfType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) Statics.field500.method263((long) var2);
+		Pix32 var3 = (Pix32) Statics.field500.find((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = PixLoader.method846(0, Statics.field2810, var2);
+		Pix32 var4 = PixLoader.method846(0, field2810, var2);
 		if (var4 == null) {
 			Statics.field3116 = true;
 		} else {
@@ -556,11 +596,11 @@ public final class IfType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) Statics.field500.method263((long) var2);
+		Pix32 var3 = (Pix32) Statics.field500.find((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = PixLoader.method846(0, Statics.field2810, var2);
+		Pix32 var4 = PixLoader.method846(0, field2810, var2);
 		if (var4 == null) {
 			Statics.field3116 = true;
 		} else {
@@ -687,10 +727,10 @@ public final class IfType extends Linkable2 {
 		} else if (var6 == 1 && var5 == -1) {
 			return null;
 		} else {
-			Model var7 = (Model) field2680.method263((long) ((var6 << 16) + var5));
+			Model var7 = (Model) field2680.find((long) ((var6 << 16) + var5));
 			if (var7 == null) {
 				if (var6 == 1) {
-					var7 = Model.method798(Statics.field503, var5);
+					var7 = Model.method798(field503, var5);
 					if (var7 == null) {
 						Statics.field3116 = true;
 						return null;
@@ -744,11 +784,11 @@ public final class IfType extends Linkable2 {
 		if (this.field2448 == 65535) {
 			return null;
 		}
-		PixFont var1 = (PixFont) Statics.field3249.method263((long) this.field2448);
+		PixFont var1 = (PixFont) Statics.field3249.find((long) this.field2448);
 		if (var1 != null) {
 			return var1;
 		}
-		PixFont var2 = Statics.method294(0, Statics.field2810, this.field2448);
+		PixFont var2 = Statics.method294(0, field2810, this.field2448);
 		if (var2 == null) {
 			Statics.field3116 = true;
 		} else {

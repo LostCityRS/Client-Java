@@ -6,15 +6,15 @@ import deob.ObfuscatedName;
 public final class LinkList {
 
 	@ObfuscatedName("pb.f")
-	public final Linkable field2276 = new Linkable();
+	public final Linkable sentinel = new Linkable();
 
 	@ObfuscatedName("pb.r")
-	public Linkable field2288;
+	public Linkable cursor;
 
 	@ObfuscatedName("pb.a(B)Lnd;")
-	public Linkable method799() {
-		Linkable var1 = this.field2276.field2105;
-		if (this.field2276 == var1) {
+	public Linkable pop() {
+		Linkable var1 = this.sentinel.prev;
+		if (this.sentinel == var1) {
 			return null;
 		} else {
 			var1.unlink();
@@ -23,56 +23,56 @@ public final class LinkList {
 	}
 
 	@ObfuscatedName("pb.b(B)Lnd;")
-	public Linkable method801() {
-		Linkable var1 = this.field2276.field2105;
-		if (this.field2276 == var1) {
-			this.field2288 = null;
+	public Linkable tail() {
+		Linkable var1 = this.sentinel.prev;
+		if (this.sentinel == var1) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field2288 = var1.field2105;
+			this.cursor = var1.prev;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("pb.c(B)Lnd;")
-	public Linkable method802() {
-		Linkable var1 = this.field2276.field2087;
-		if (this.field2276 == var1) {
-			this.field2288 = null;
+	public Linkable head() {
+		Linkable var1 = this.sentinel.next;
+		if (this.sentinel == var1) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field2288 = var1.field2087;
+			this.cursor = var1.next;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("pb.a(Lnd;I)V")
-	public void method804(Linkable arg0) {
-		if (arg0.field2105 != null) {
+	public void push(Linkable arg0) {
+		if (arg0.prev != null) {
 			arg0.unlink();
 		}
-		arg0.field2105 = this.field2276.field2105;
-		arg0.field2087 = this.field2276;
-		arg0.field2105.field2087 = arg0;
-		arg0.field2087.field2105 = arg0;
+		arg0.prev = this.sentinel.prev;
+		arg0.next = this.sentinel;
+		arg0.prev.next = arg0;
+		arg0.next.prev = arg0;
 	}
 
 	@ObfuscatedName("pb.a(ILnd;)V")
-	public void method805(Linkable arg0) {
-		if (arg0.field2105 != null) {
+	public void pushFront(Linkable arg0) {
+		if (arg0.prev != null) {
 			arg0.unlink();
 		}
-		arg0.field2087 = this.field2276.field2087;
-		arg0.field2105 = this.field2276;
-		arg0.field2105.field2087 = arg0;
-		arg0.field2087.field2105 = arg0;
+		arg0.next = this.sentinel.next;
+		arg0.prev = this.sentinel;
+		arg0.prev.next = arg0;
+		arg0.next.prev = arg0;
 	}
 
 	@ObfuscatedName("pb.b(I)V")
-	public void method806() {
+	public void clear() {
 		while (true) {
-			Linkable var1 = this.field2276.field2087;
-			if (this.field2276 == var1) {
+			Linkable var1 = this.sentinel.next;
+			if (this.sentinel == var1) {
 				return;
 			}
 			var1.unlink();
@@ -80,49 +80,49 @@ public final class LinkList {
 	}
 
 	public LinkList() {
-		this.field2276.field2105 = this.field2276;
-		this.field2276.field2087 = this.field2276;
+		this.sentinel.prev = this.sentinel;
+		this.sentinel.next = this.sentinel;
 	}
 
 	@ObfuscatedName("pb.d(I)Lnd;")
-	public Linkable method809() {
-		Linkable var1 = this.field2288;
-		if (this.field2276 == var1) {
-			this.field2288 = null;
+	public Linkable next() {
+		Linkable var1 = this.cursor;
+		if (this.sentinel == var1) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field2288 = var1.field2087;
+			this.cursor = var1.next;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("pb.a(ILnd;Lnd;)V")
-	public void method811(Linkable arg0, Linkable arg1) {
-		if (arg1.field2105 != null) {
+	public void insertBefore(Linkable arg0, Linkable arg1) {
+		if (arg1.prev != null) {
 			arg1.unlink();
 		}
-		arg1.field2087 = arg0;
-		arg1.field2105 = arg0.field2105;
-		arg1.field2105.field2087 = arg1;
-		arg1.field2087.field2105 = arg1;
+		arg1.next = arg0;
+		arg1.prev = arg0.prev;
+		arg1.prev.next = arg1;
+		arg1.next.prev = arg1;
 	}
 
 	@ObfuscatedName("pb.f(I)Lnd;")
-	public Linkable method812() {
-		Linkable var1 = this.field2288;
-		if (this.field2276 == var1) {
-			this.field2288 = null;
+	public Linkable prev() {
+		Linkable var1 = this.cursor;
+		if (this.sentinel == var1) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field2288 = var1.field2105;
+			this.cursor = var1.prev;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("pb.g(I)Lnd;")
-	public Linkable method813() {
-		Linkable var1 = this.field2276.field2087;
-		if (this.field2276 == var1) {
+	public Linkable popFront() {
+		Linkable var1 = this.sentinel.next;
+		if (this.sentinel == var1) {
 			return null;
 		} else {
 			var1.unlink();

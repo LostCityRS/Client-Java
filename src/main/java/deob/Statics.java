@@ -3,13 +3,19 @@ package deob;
 import jagex3.callstack.JagException;
 import jagex3.client.*;
 import jagex3.config.*;
-import jagex3.dash3d.*;
+import jagex3.dash3d.ClientEntity;
+import jagex3.dash3d.Pix3D;
+import jagex3.dash3d.PlayerModel;
 import jagex3.datastruct.HashTable;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.LruCache;
 import jagex3.graphics.*;
-import jagex3.io.*;
+import jagex3.io.BufferedRandomAccessFile;
+import jagex3.io.DataFile;
+import jagex3.io.Packet;
+import jagex3.io.PacketBit;
 import jagex3.js5.*;
+import jagex3.reflectionchecker.ReflectionChecker;
 import jagex3.sound.*;
 import jagex3.util.ArrayUtil;
 import jagex3.util.JagString;
@@ -17,7 +23,6 @@ import jagex3.wordfilter2.Huffman;
 
 import java.applet.Applet;
 import java.awt.*;
-import java.io.*;
 // import netscape.javascript.JSObject;
 
 public class Statics {
@@ -118,20 +123,11 @@ public class Statics {
 	@ObfuscatedName("j.mc")
 	public static PixMap field1438;
 
-	@ObfuscatedName("ja.R")
-	public static class21 field1442;
-
 	@ObfuscatedName("ja.S")
 	public static boolean field1443;
 
-	@ObfuscatedName("ja.U")
-	public static int field1445;
-
 	@ObfuscatedName("ja.W")
 	public static boolean field1447;
-
-	@ObfuscatedName("ja.X")
-	public static int field1448;
 
 	@ObfuscatedName("jc.kb")
 	public static Pix8 field1457;
@@ -192,9 +188,6 @@ public class Statics {
 
 	@ObfuscatedName("mb.ab")
 	public static int[] field1842;
-
-	@ObfuscatedName("mb.db")
-	public static Pix8 field1845;
 
 	@ObfuscatedName("mc.z")
 	public static Pix8 field1871;
@@ -301,9 +294,6 @@ public class Statics {
 	@ObfuscatedName("sc.vb")
 	public static int field2750;
 
-	@ObfuscatedName("sd.q")
-	public static Pix8 field2770;
-
 	@ObfuscatedName("sd.r")
 	public static int[] field2771;
 
@@ -318,9 +308,6 @@ public class Statics {
 
 	@ObfuscatedName("t.vb")
 	public static Pix8[] field2807;
-
-	@ObfuscatedName("t.yb")
-	public static Js5 field2810;
 
 	@ObfuscatedName("ta.Mb")
 	public static int field2846;
@@ -354,9 +341,6 @@ public class Statics {
 
 	@ObfuscatedName("tc.i")
 	public static int field2920;
-
-	@ObfuscatedName("tc.k")
-	public static IfType[][] field2922;
 
 	@ObfuscatedName("td.n")
 	public static int field2945;
@@ -406,12 +390,6 @@ public class Statics {
 	@ObfuscatedName("bb.j")
 	public static int[] field320;
 
-	@ObfuscatedName("wa.b")
-	public static PixMap field3208;
-
-	@ObfuscatedName("wc.o")
-	public static boolean[] field3296;
-
 	@ObfuscatedName("wc.q")
 	public static PixMap field3298;
 
@@ -429,9 +407,6 @@ public class Statics {
 
 	@ObfuscatedName("ca.x")
 	public static PixMap field472;
-
-	@ObfuscatedName("cb.x")
-	public static Js5 field503;
 
 	@ObfuscatedName("cc.Gb")
 	public static PixMap field522;
@@ -516,9 +491,6 @@ public class Statics {
 
 	@ObfuscatedName("aa.Wd")
 	public static int[] field92;
-
-	@ObfuscatedName("fd.sb")
-	public static Js5 field924;
 
 	@ObfuscatedName("fd.tb")
 	public static PixMap field925;
@@ -1960,8 +1932,6 @@ public class Statics {
 	public static int field1548 = 0;
 	@ObfuscatedName("ha.a")
 	public static int field1144 = 0;
-	@ObfuscatedName("re.h")
-	public static LinkList field2694 = new LinkList();
 	@ObfuscatedName("ub.d")
 	public static int field3030 = -1;
 	@ObfuscatedName("ub.i")
@@ -1974,8 +1944,6 @@ public class Statics {
 	public static int field2046 = 0;
 	@ObfuscatedName("fc.Gb")
 	public static int field903 = -1;
-	@ObfuscatedName("fc.Lb")
-	public static int[][][] field908 = new int[4][13][13];
 	@ObfuscatedName("md.sb")
 	public static int field1881 = -1;
 	@ObfuscatedName("pe.Eb")
@@ -2004,8 +1972,6 @@ public class Statics {
 	public static int field2811 = 0;
 	@ObfuscatedName("t.xb")
 	public static int field2809 = 0;
-	@ObfuscatedName("t.Hb")
-	public static int[] field2819 = new int[]{16, 32, 64, 128};
 	@ObfuscatedName("nb.id")
 	public static int[] field2023 = new int[1000];
 	@ObfuscatedName("nb.td")
@@ -2016,12 +1982,8 @@ public class Statics {
 	public static int[] field3186 = new int[]{0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3};
 	@ObfuscatedName("je.Lb")
 	public static int[] field1483 = new int[25];
-	@ObfuscatedName("je.Ub")
-	public static int field1492 = 0;
 	@ObfuscatedName("je.Zb")
 	public static int field1497 = -1;
-	@ObfuscatedName("aa.ae")
-	public static int field96 = 0;
 	@ObfuscatedName("d.oc")
 	public static int[] field644 = new int[]{768, 1024, 1280, 512, 1536, 256, 0, 1792};
 	@ObfuscatedName("ad.z")
@@ -2034,8 +1996,6 @@ public class Statics {
 	public static int[][] field2894 = new int[][]{{6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 2983, 54193}, {8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003, 25239}, {25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003}, {4626, 11146, 6439, 12, 4758, 10270}, {4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574}};
 	@ObfuscatedName("vb.tb")
 	public static JagString[] field3130 = new JagString[100];
-	@ObfuscatedName("ld.t")
-	public static int[] field1740 = new int[]{1, 2, 4, 8};
 	@ObfuscatedName("ld.C")
 	public static int field1749 = 0;
 	@ObfuscatedName("ld.G")
@@ -2066,18 +2026,10 @@ public class Statics {
 	public static int[] field2303 = new int[1000];
 	@ObfuscatedName("pb.F")
 	public static PlayerModel field2302 = new PlayerModel();
-	@ObfuscatedName("kc.w")
-	public static int field1587 = 0;
-	@ObfuscatedName("kc.E")
-	public static int[] field1595 = new int[]{1, 0, -1, 0};
-	@ObfuscatedName("cb.s")
-	public static int field498 = 0;
 	@ObfuscatedName("cb.u")
 	public static LruCache field500 = new LruCache(200);
 	@ObfuscatedName("ac.J")
 	public static int[] field173 = new int[32];
-	@ObfuscatedName("ac.S")
-	public static int[] field181 = new int[]{0, -1, 0, 1};
 	@ObfuscatedName("wc.i")
 	public static int field3290 = 0;
 	@ObfuscatedName("wc.w")
@@ -2096,8 +2048,6 @@ public class Statics {
 	public static int[] field304 = new int[2000];
 	@ObfuscatedName("ba.jb")
 	public static LruCache field253 = new LruCache(100);
-	@ObfuscatedName("ba.jc")
-	public static int field305 = -1;
 	@ObfuscatedName("ba.lc")
 	public static int field307 = 0;
 	@ObfuscatedName("ba.gc")
@@ -2108,8 +2058,6 @@ public class Statics {
 	public static long field958 = 0L;
 	@ObfuscatedName("fe.xc")
 	public static JagFX[] field955 = new JagFX[50];
-	@ObfuscatedName("fe.Hc")
-	public static int field965 = 0;
 	@ObfuscatedName("bd.s")
 	public static LruCache field379 = new LruCache(260);
 	@ObfuscatedName("bd.X")
@@ -2124,12 +2072,8 @@ public class Statics {
 	public static int[] field1458 = new int[]{16776960, 16711680, 65280, 65535, 16711935, 16777215};
 	@ObfuscatedName("jc.xb")
 	public static int field1470 = 0;
-	@ObfuscatedName("jc.zb")
-	public static int field1472 = 0;
 	@ObfuscatedName("ga.E")
 	public static int[] field1020 = new int[2000];
-	@ObfuscatedName("a.J")
-	public static int field36 = 0;
 	@ObfuscatedName("k.C")
 	public static int[] field1514 = new int[99];
 	@ObfuscatedName("k.J")
@@ -2158,8 +2102,6 @@ public class Statics {
 	public static int field2881 = -1;
 	@ObfuscatedName("ta.Lb")
 	public static int[] field2845 = new int[50];
-	@ObfuscatedName("hc.d")
-	public static Packet[] field1176 = new Packet[2048];
 	@ObfuscatedName("hc.r")
 	public static boolean[] field1190 = new boolean[]{true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, false, false};
 	@ObfuscatedName("ua.q")
@@ -2236,114 +2178,6 @@ public class Statics {
 		BgSound.field515 = null;
 	}
 
-	@ObfuscatedName("f.a(Lvc;IZ)V")
-	public static void method381(ClientStream arg0, boolean arg1) {
-		if (Js5Net.field2769 != null) {
-			try {
-				Js5Net.field2769.method1015();
-			} catch (Exception var7) {
-			}
-			Js5Net.field2769 = null;
-		}
-		Js5Net.field2769 = arg0;
-		Js5Net.method617(arg1);
-		Js5Net.field2301.pos = 0;
-		Js5Net.field2613 = null;
-		Js5Net.field2559 = 0;
-		Js5Net.field967 = null;
-		while (true) {
-			Js5NetRequest var2 = (Js5NetRequest) Js5Net.field1917.method497();
-			if (var2 == null) {
-				while (true) {
-					Js5NetRequest var3 = (Js5NetRequest) Js5Net.field1831.method497();
-					if (var3 == null) {
-						if (Js5Net.field476 != 0) {
-							try {
-								Packet var4 = new Packet(4);
-								var4.method141(4);
-								var4.method141(Js5Net.field476);
-								var4.method150(0);
-								Js5Net.field2769.method1016(4, var4.field284);
-							} catch (IOException var6) {
-								try {
-									Js5Net.field2769.method1015();
-								} catch (Exception var5) {
-								}
-								Js5Net.field2769 = null;
-								Js5Net.field525++;
-							}
-						}
-						Js5Net.field1189 = 0;
-						Js5Net.field2271 = currentTime();
-						return;
-					}
-					Js5Net.field996.method613(var3);
-					Js5Net.field1328.method498(var3, var3.field2073);
-					Js5Net.field2144--;
-					Js5Net.field1260++;
-				}
-			}
-			Js5Net.field2596.method498(var2, var2.field2073);
-			Js5Net.field845--;
-			Js5Net.field3285++;
-		}
-	}
-
-	@ObfuscatedName("fa.a(BLqd;La;)La;")
-	public static JagString method386(IfType arg0, JagString arg1) {
-		if (arg1.method11(field2181) == -1) {
-			return arg1;
-		}
-		while (true) {
-			int var2 = arg1.method11(field1938);
-			if (var2 == -1) {
-				while (true) {
-					int var3 = arg1.method11(field2297);
-					if (var3 == -1) {
-						while (true) {
-							int var4 = arg1.method11(field3277);
-							if (var4 == -1) {
-								while (true) {
-									int var5 = arg1.method11(field2716);
-									if (var5 == -1) {
-										while (true) {
-											int var6 = arg1.method11(field1166);
-											if (var6 == -1) {
-												while (true) {
-													int var7 = arg1.method11(field1309);
-													if (var7 == -1) {
-														return arg1;
-													}
-													JagString var8 = field3234;
-													if (field715 != null) {
-														var8 = method984(field715.field813);
-														try {
-															if (field715.field818 != null) {
-																byte[] var9 = ((String) field715.field818).getBytes("ISO-8859-1");
-																var8 = method419(var9, 0, var9.length);
-															}
-														} catch (UnsupportedEncodingException var10) {
-														}
-													}
-													arg1 = JagString.join(new JagString[]{arg1.method19(0, var7), var8, arg1.method1(var7 + 4)});
-												}
-											}
-											arg1 = JagString.join(new JagString[]{arg1.method19(0, var6), Client.method973(Client.method1039(4, arg0)), arg1.method1(var6 + 2)});
-										}
-									}
-									arg1 = JagString.join(new JagString[]{arg1.method19(0, var5), Client.method973(Client.method1039(3, arg0)), arg1.method1(var5 + 2)});
-								}
-							}
-							arg1 = JagString.join(new JagString[]{arg1.method19(0, var4), Client.method973(Client.method1039(2, arg0)), arg1.method1(var4 + 2)});
-						}
-					}
-					arg1 = JagString.join(new JagString[]{arg1.method19(0, var3), Client.method973(Client.method1039(1, arg0)), arg1.method1(var3 + 2)});
-				}
-			}
-			arg1 = JagString.join(new JagString[]{arg1.method19(0, var2), Client.method973(Client.method1039(0, arg0)), arg1.method1(var2 + 2)});
-		}
-	}
-
 	@ObfuscatedName("hd.b(Z)V")
 	public static void method477() {
 		field1218 = null;
@@ -2363,100 +2197,6 @@ public class Statics {
 		field1197 = null;
 	}
 
-	@ObfuscatedName("mc.a(Lbd;BILbd;Z)Lt;")
-	public static AnimFrameSet method690(Js5 arg0, int arg1, Js5 arg2) {
-		boolean var3 = true;
-		int[] var4 = arg0.method237(arg1);
-		for (int var5 = 0; var5 < var4.length; var5++) {
-			byte[] var6 = arg0.method227(var4[var5], arg1);
-			if (var6 == null) {
-				var3 = false;
-			} else {
-				int var7 = var6[1] & 0xFF | (var6[0] & 0xFF) << 8;
-				byte[] var8 = arg2.method227(0, var7);
-				if (var8 == null) {
-					var3 = false;
-				}
-			}
-		}
-		if (!var3) {
-			return null;
-		}
-		try {
-			return new AnimFrameSet(arg0, arg2, arg1, false);
-		} catch (Exception var9) {
-			return null;
-		}
-	}
-
-	@ObfuscatedName("qa.a(Lnb;Z)V")
-	public static void method835(ClientEntity arg0) {
-		int var1 = arg0.field1999 * 128 + arg0.field1970 * 64;
-		int var2 = arg0.field1986 - Client.loopCycle;
-		if (arg0.field1947 == 0) {
-			arg0.field1954 = 1024;
-		}
-		if (arg0.field1947 == 1) {
-			arg0.field1954 = 1536;
-		}
-		if (arg0.field1947 == 2) {
-			arg0.field1954 = 0;
-		}
-		int var3 = arg0.field1970 * 64 + arg0.field1955 * 128;
-		arg0.field1972 += (var1 - arg0.field1972) / var2;
-		if (arg0.field1947 == 3) {
-			arg0.field1954 = 512;
-		}
-		arg0.field1948 = 0;
-		arg0.field1963 += (var3 - arg0.field1963) / var2;
-	}
-
-	@ObfuscatedName("rc.a(IILbc;II)V")
-	public static void method880(int arg0, PixFont arg1, int arg2, int arg3) {
-		field3208.method1054();
-		field2770.method329(0, 0);
-		arg1.method211(field1006, 55, 28, 16777215, true);
-		if (arg3 == 0) {
-			arg1.method211(field3193, 55, 41, 65280, true);
-		}
-		if (arg3 == 1) {
-			arg1.method211(field2817, 55, 41, 16776960, true);
-		}
-		if (arg3 == 2) {
-			arg1.method211(field1657, 55, 41, 16711680, true);
-		}
-		if (arg3 == 3) {
-			arg1.method211(field2393, 55, 41, 65535, true);
-		}
-		arg1.method211(field49, 184, 28, 16777215, true);
-		if (arg2 == 0) {
-			arg1.method211(field3193, 184, 41, 65280, true);
-		}
-		if (arg2 == 1) {
-			arg1.method211(field2817, 184, 41, 16776960, true);
-		}
-		if (arg2 == 2) {
-			arg1.method211(field1657, 184, 41, 16711680, true);
-		}
-		arg1.method211(field1676, 324, 28, 16777215, true);
-		if (arg0 == 0) {
-			arg1.method211(field3193, 324, 41, 65280, true);
-		}
-		if (arg0 == 1) {
-			arg1.method211(field2817, 324, 41, 16776960, true);
-		}
-		if (arg0 == 2) {
-			arg1.method211(field1657, 324, 41, 16711680, true);
-		}
-		arg1.method195(field1038, 417, 17, 85, 25, 16777215, true, 1, 1, 0);
-		try {
-			Graphics var4 = GameShell.canvas.getGraphics();
-			field3208.method101(0, var4, 453);
-		} catch (Exception var5) {
-			GameShell.canvas.repaint();
-		}
-	}
-
 	@ObfuscatedName("na.a(B)V")
 	public static void method721() {
 		field1930 = null;
@@ -2472,11 +2212,6 @@ public class Statics {
 		field1935 = null;
 		field1934 = null;
 		field1936 = null;
-	}
-
-	@ObfuscatedName("s.a(II)V")
-	public static void method895(int arg0) {
-		method985(arg0);
 	}
 
 	@ObfuscatedName("sa.a(I)V")
@@ -2495,7 +2230,7 @@ public class Statics {
 		field1174 = null;
 		field1180 = null;
 		field1177 = null;
-		field1176 = null;
+		Client.field1176 = null;
 		field1184 = null;
 		field1175 = null;
 		field1190 = null;
@@ -2520,63 +2255,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("ob.a(JI)V")
-	public static void sleepPrecise(long arg0) {
-		if (arg0 <= 0L) {
-			return;
-		}
-		if (arg0 % 10L == 0L) {
-			method427(arg0 - 1L);
-			method427(1L);
-		} else {
-			method427(arg0);
-		}
-	}
-
-	@ObfuscatedName("oe.a(IILa;La;)V")
-	public static void method758(int arg0, JagString arg1, JagString arg2) {
-		if (Client.field2166 == -1) {
-			Client.field2637 = true;
-		}
-		if (arg0 == 0 && Client.field2421 != -1) {
-			Client.field3050 = 0;
-			Client.field1605 = arg1;
-		}
-		for (int var3 = 99; var3 > 0; var3--) {
-			field3236[var3] = field3236[var3 - 1];
-			field3130[var3] = field3130[var3 - 1];
-			field2034[var3] = field2034[var3 - 1];
-		}
-		field3236[0] = arg0;
-		field3130[0] = arg2;
-		field2034[0] = arg1;
-	}
-
-	@ObfuscatedName("uc.d(I)[Le;")
-	public static Pix8[] method994() {
-		Pix8[] var0 = new Pix8[field1900];
-		for (int var1 = 0; var1 < field1900; var1++) {
-			Pix8 var2 = var0[var1] = new Pix8();
-			var2.field746 = field2877;
-			var2.field747 = field1628;
-			var2.field751 = field2771[var1];
-			var2.field750 = field1985[var1];
-			var2.field744 = field837[var1];
-			var2.field749 = field3194[var1];
-			var2.field745 = field292;
-			var2.field748 = field2794[var1];
-		}
-		method449();
-		return var0;
-	}
-
-	@ObfuscatedName("h.f(I)V")
-	public static void method447() {
-		if (Js5Net.field2769 != null) {
-			Js5Net.field2769.method1015();
-		}
-	}
-
 	@ObfuscatedName("he.f(I)V")
 	public static void method484() {
 		field1245 = null;
@@ -2588,21 +2266,6 @@ public class Statics {
 		field1238 = null;
 		field1244 = null;
 		ClientBuild.field1247 = null;
-	}
-
-	@ObfuscatedName("hb.b(I)Le;")
-	public static Pix8 method467() {
-		Pix8 var0 = new Pix8();
-		var0.field746 = field2877;
-		var0.field747 = field1628;
-		var0.field751 = field2771[0];
-		var0.field750 = field1985[0];
-		var0.field744 = field837[0];
-		var0.field749 = field3194[0];
-		var0.field745 = field292;
-		var0.field748 = field2794[0];
-		method449();
-		return var0;
 	}
 
 	@ObfuscatedName("pc.a(I)V")
@@ -2657,31 +2320,6 @@ public class Statics {
 		field718 = null;
 	}
 
-	@ObfuscatedName("ua.a(BI)V")
-	public static void method985(int arg0) {
-		if (arg0 == -1 || !field3296[arg0]) {
-			return;
-		}
-		field924.method216(arg0);
-		if (field2922[arg0] == null) {
-			return;
-		}
-		boolean var1 = true;
-		for (int var2 = 0; var2 < field2922[arg0].length; var2++) {
-			if (field2922[arg0][var2] != null) {
-				if (field2922[arg0][var2].field2489 == 2) {
-					var1 = false;
-				} else {
-					field2922[arg0][var2] = null;
-				}
-			}
-		}
-		if (var1) {
-			field2922[arg0] = null;
-		}
-		field3296[arg0] = false;
-	}
-
 	@ObfuscatedName("g.a([BZII)La;")
 	public static JagString method419(byte[] arg0, int arg1, int arg2) {
 		JagString var3 = new JagString();
@@ -2722,14 +2360,14 @@ public class Statics {
 	@ObfuscatedName("mb.a(BII)I")
 	public static int method684(int arg0, int arg1) {
 		long var2 = (long) ((arg0 << 16) + arg1);
-		return Js5Net.field967 != null && Js5Net.field967.field2073 == var2 ? Js5Net.field2613.pos * 99 / (Js5Net.field2613.field284.length - Js5Net.field967.field2619) + 1 : 0;
+		return Js5Net.field967 != null && Js5Net.field967.key == var2 ? Js5Net.field2613.pos * 99 / (Js5Net.field2613.field284.length - Js5Net.field967.field2619) + 1 : 0;
 	}
 
 	@ObfuscatedName("sd.a(I)V")
 	public static void method927() {
 		Client.field2756 = null;
 		field2772 = null;
-		field2770 = null;
+		Client.field2770 = null;
 		Client.field2759 = null;
 		VarBitType.field2755 = null;
 		field2760 = null;
@@ -2772,7 +2410,7 @@ public class Statics {
 		field172 = null;
 		field186 = null;
 		field173 = null;
-		field181 = null;
+		ClientBuild.field181 = null;
 	}
 
 	@ObfuscatedName("l.a(I)V")
@@ -2796,7 +2434,7 @@ public class Statics {
 		if (!IfType.method1052(arg0)) {
 			return false;
 		}
-		IfType[] var1 = field2922[arg0];
+		IfType[] var1 = IfType.field2922[arg0];
 		boolean var2 = false;
 		for (int var3 = 0; var3 < var1.length; var3++) {
 			IfType var4 = var1[var3];
@@ -2846,7 +2484,7 @@ public class Statics {
 	@ObfuscatedName("wa.a(I)V")
 	public static void method1032() {
 		field3232 = null;
-		field3208 = null;
+		Client.field3208 = null;
 		field3225 = null;
 		field3222 = null;
 		field3230 = null;
@@ -2879,8 +2517,8 @@ public class Statics {
 		field2808 = null;
 		field2818 = null;
 		field2804 = null;
-		field2810 = null;
-		field2819 = null;
+		IfType.field2810 = null;
+		ClientBuild.field2819 = null;
 		field2824 = null;
 		field2817 = null;
 		field2812 = null;
@@ -2907,7 +2545,7 @@ public class Statics {
 
 	@ObfuscatedName("ib.a(ILbd;II)[Le;")
 	public static Pix8[] method518(Js5 arg0, int arg1, int arg2) {
-		return method885(arg1, arg2, arg0) ? method994() : null;
+		return method885(arg1, arg2, arg0) ? PixLoader.method994() : null;
 	}
 
 	@ObfuscatedName("sa.a([La;Z)[La;")
@@ -2953,11 +2591,6 @@ public class Statics {
 		field1347 = Pix3D.method362(field1347);
 	}
 
-	@ObfuscatedName("hd.a(IIIBIII)Z")
-	public static boolean method478(int arg0, int arg1, int arg2, int arg3) {
-		return IfType.method1052(arg0) ? Client.method278(arg2, 0, 0, 0, -1, arg1, arg3, 0, field2922[arg0]) : false;
-	}
-
 	@ObfuscatedName("m.a(IZIILbd;IIZ)V")
 	public static synchronized void method670(int arg0, int arg1, Js5 arg2, int arg3) {
 		if (!method521()) {
@@ -2972,17 +2605,6 @@ public class Statics {
 		field917 = arg0;
 		field1462 = 0;
 		field463 = arg1;
-	}
-
-	@ObfuscatedName("l.a(III)Z")
-	public static boolean method631(int arg0, int arg1) {
-		if (arg0 == 0 && field2881 == arg1) {
-			return true;
-		} else if (arg0 == 1 && field214 == arg1) {
-			return true;
-		} else {
-			return (arg0 == 2 || arg0 == 3) && Client.field2712 == arg1;
-		}
 	}
 
 	@ObfuscatedName("ma.b(I)V")
@@ -3002,7 +2624,7 @@ public class Statics {
 		if (!IfType.method1052(arg0)) {
 			return;
 		}
-		IfType[] var1 = field2922[arg0];
+		IfType[] var1 = IfType.field2922[arg0];
 		for (int var2 = 0; var2 < var1.length; var2++) {
 			IfType var3 = var1[var2];
 			if (var3 != null) {
@@ -3038,7 +2660,7 @@ public class Statics {
 		field2687 = null;
 		field2699 = null;
 		field2701 = null;
-		field2694 = null;
+		ReflectionChecker.field2694 = null;
 		Packet.field2698 = null;
 		field2700 = null;
 	}
@@ -3047,7 +2669,7 @@ public class Statics {
 	public static void method1051() {
 		field3305 = null;
 		field3306 = null;
-		field3296 = null;
+		IfType.field3296 = null;
 		field3298 = null;
 		Client.field3299 = null;
 		field3303 = null;
@@ -3074,7 +2696,7 @@ public class Statics {
 		if (arg0 == null) {
 			return false;
 		}
-		for (int var1 = 0; var1 < field1492; var1++) {
+		for (int var1 = 0; var1 < Client.field1492; var1++) {
 			if (arg0.method14(field2951[var1])) {
 				return true;
 			}
@@ -3179,7 +2801,7 @@ public class Statics {
 
 	@ObfuscatedName("j.a(ILbd;I)Le;")
 	public static Pix8 method533(Js5 arg0, int arg1) {
-		return method148(arg0, arg1) ? method467() : null;
+		return method148(arg0, arg1) ? PixLoader.method467() : null;
 	}
 
 	@ObfuscatedName("ua.a(I)V")
@@ -3211,12 +2833,12 @@ public class Statics {
 			LinkList var0 = field1547;
 			Js5WorkerRequest var1;
 			synchronized (field1547) {
-				var1 = (Js5WorkerRequest) field2371.method813();
+				var1 = (Js5WorkerRequest) field2371.popFront();
 			}
 			if (var1 == null) {
 				return;
 			}
-			var1.field1456.method978(false, var1.field1454, (int) var1.field2073, var1.field1469);
+			var1.field1456.method978(false, var1.field1454, (int) var1.key, var1.field1469);
 		}
 	}
 
@@ -3342,19 +2964,6 @@ public class Statics {
 		field418 = null;
 		field431 = null;
 		field414 = null;
-	}
-
-	@ObfuscatedName("hb.d(I)V")
-	public static void method469() {
-		field2694 = new LinkList();
-	}
-
-	@ObfuscatedName("oa.a(III)I")
-	public static int method747(int arg0, int arg1) {
-		int var2 = arg1 * 57 + arg0;
-		int var3 = var2 ^ var2 << 13;
-		int var4 = (var3 * var3 * 15731 + 789221) * var3 + 1376312589 & Integer.MAX_VALUE;
-		return var4 >> 19 & 0xFF;
 	}
 
 	@ObfuscatedName("pe.f(I)V")
@@ -3523,7 +3132,7 @@ public class Statics {
 		field1842 = null;
 		field1795 = null;
 		field1840 = null;
-		field1845 = null;
+		Client.field1845 = null;
 	}
 
 	@ObfuscatedName("oa.a(IIZ[BI)V")
@@ -3560,9 +3169,9 @@ public class Statics {
 		field926 = null;
 		SeqType.field939 = null;
 		field925 = null;
-		field924 = null;
+		IfType.field924 = null;
 		field932 = null;
-		VarBitType.field936 = null;
+		PacketBit.field936 = null;
 		field931 = null;
 		field929 = null;
 		field942 = null;
@@ -3590,7 +3199,7 @@ public class Statics {
 		Client.in = null;
 		field499 = null;
 		field500 = null;
-		field503 = null;
+		IfType.field503 = null;
 		field501 = null;
 		field497 = null;
 	}
@@ -3613,7 +3222,7 @@ public class Statics {
 	@ObfuscatedName("tc.a(B)V")
 	public static void method963() {
 		Client.field2917 = null;
-		field2922 = null;
+		IfType.field2922 = null;
 		ClientBuild.field2930 = null;
 		field2926 = null;
 		field2919 = null;
@@ -3641,9 +3250,9 @@ public class Statics {
 	@ObfuscatedName("ld.a(III)V")
 	public static void method661(int arg0, int arg1) {
 		long var2 = (long) ((arg0 << 16) + arg1);
-		Js5NetRequest var4 = (Js5NetRequest) Js5Net.field1328.method499(var2);
+		Js5NetRequest var4 = (Js5NetRequest) Js5Net.field1328.find(var2);
 		if (var4 != null) {
-			Js5Net.field996.method613(var4);
+			Js5Net.field996.pushFront(var4);
 		}
 	}
 
@@ -3981,7 +3590,7 @@ public class Statics {
 
 	@ObfuscatedName("ra.a(B)V")
 	public static void method873() {
-		field379.method267();
+		field379.clear();
 	}
 
 	@ObfuscatedName("fc.a(II)V")
@@ -4062,7 +3671,7 @@ public class Statics {
 		if (!IfType.method1052(arg0)) {
 			return;
 		}
-		IfType[] var1 = field2922[arg0];
+		IfType[] var1 = IfType.field2922[arg0];
 		for (int var2 = 0; var2 < var1.length; var2++) {
 			IfType var3 = var1[var2];
 			if (var3.field2483 != null) {
@@ -4077,7 +3686,7 @@ public class Statics {
 		GameShell.field1747 = null;
 		field1745 = null;
 		field1751 = null;
-		field1740 = null;
+		ClientBuild.field1740 = null;
 		Client.out = null;
 		Client.field1752 = null;
 	}
@@ -4203,30 +3812,30 @@ public class Statics {
 		if (arg0 == 0L) {
 			return;
 		}
-		if (field1492 >= 100 && Client.field2189 != 1 || field1492 >= 200) {
-			method758(0, field2931, field3234);
+		if (Client.field1492 >= 100 && Client.field2189 != 1 || Client.field1492 >= 200) {
+			Client.method758(0, field2931, field3234);
 			return;
 		}
 		JagString var2 = method969(arg0).method36();
-		for (int var3 = 0; var3 < field1492; var3++) {
+		for (int var3 = 0; var3 < Client.field1492; var3++) {
 			if (Client.field2929[var3] == arg0) {
-				method758(0, JagString.join(new JagString[]{var2, field3045}), field3234);
+				Client.method758(0, JagString.join(new JagString[]{var2, field3045}), field3234);
 				return;
 			}
 		}
 		for (int var4 = 0; var4 < field2146; var4++) {
 			if (Client.field2683[var4] == arg0) {
-				method758(0, JagString.join(new JagString[]{field2178, var2, field2054}), field3234);
+				Client.method758(0, JagString.join(new JagString[]{field2178, var2, field2054}), field3234);
 				return;
 			}
 		}
 		if (var2.method5(Client.field2621.field86)) {
 			return;
 		}
-		field2951[field1492] = var2;
-		Client.field2929[field1492] = arg0;
-		Client.field1788[field1492] = 0;
-		field1492++;
+		field2951[Client.field1492] = var2;
+		Client.field2929[Client.field1492] = arg0;
+		Client.field1788[Client.field1492] = 0;
+		Client.field1492++;
 		Client.field1055 = true;
 		Client.out.method415(114);
 		Client.out.method157(arg0);
@@ -4241,18 +3850,6 @@ public class Statics {
 		Client.field2626 = null;
 		Client.field2618 = null;
 		Client.field2614 = null;
-	}
-
-	@ObfuscatedName("oa.a(IBI)I")
-	public static int method751(int arg0, int arg1) {
-		int var2 = ClientBuild.method124(arg0 + 45365, 4, arg1 + 91923) + (ClientBuild.method124(arg0 - -10294, 2, arg1 + 37821) - 128 >> 1) + (ClientBuild.method124(arg0, 1, arg1) + -128 >> 2) - 128;
-		int var3 = (int) ((double) var2 * 0.3D) + 35;
-		if (var3 < 10) {
-			var3 = 10;
-		} else if (var3 > 60) {
-			var3 = 60;
-		}
-		return var3;
 	}
 
 	@ObfuscatedName("ia.b(Z)V")
@@ -4425,14 +4022,6 @@ public class Statics {
 		return method418(false, arg0);
 	}
 
-	@ObfuscatedName("ja.e(B)V")
-	public static void method540() {
-		if (field1448 > 0) {
-			field1442.method310(JavaSafeMidiPlayer.field1446, field1448);
-			field1448 = 0;
-		}
-	}
-
 	@ObfuscatedName("te.b(B)V")
 	public static void method975() {
 		field2957 = null;
@@ -4588,7 +4177,7 @@ public class Statics {
 		field1581 = null;
 		field1597 = null;
 		field1594 = null;
-		field1595 = null;
+		ClientBuild.field1595 = null;
 		field1593 = null;
 		field1572 = null;
 		field1566 = null;
@@ -4684,17 +4273,6 @@ public class Statics {
 				}
 			}
 		}
-	}
-
-	@ObfuscatedName("ja.a(IBIII)V")
-	public static void method541(int arg0, int arg1, int arg2, int arg3) {
-		if (JavaSafeMidiPlayer.field1446.length <= field1448) {
-			field1442.method310(JavaSafeMidiPlayer.field1446, field1448);
-			field1448 = 0;
-		}
-		JavaSafeMidiPlayer.field1446[field1448++] = arg2 - field1445;
-		field1445 = arg2;
-		JavaSafeMidiPlayer.field1446[field1448++] = arg3 | arg0 << 8 | arg1 << 16;
 	}
 
 	@ObfuscatedName("fe.a(ZBII)La;")
@@ -4793,9 +4371,9 @@ public class Statics {
 		if (!IfType.method1052(var1)) {
 			return null;
 		} else if (arg0.field2544 >= 0) {
-			return field2922[var1][arg0.field2544 & 0xFFFF];
+			return IfType.field2922[var1][arg0.field2544 & 0xFFFF];
 		} else {
-			IfType var2 = field2922[var1][arg0.field2544 >> 15 & 0xFFFF];
+			IfType var2 = IfType.field2922[var1][arg0.field2544 >> 15 & 0xFFFF];
 			return var2.field2519[arg0.field2544 & 0x7FFF];
 		}
 	}
@@ -4846,85 +4424,6 @@ public class Statics {
 		return method474(arg0);
 	}
 
-	@ObfuscatedName("ac.a(ILqd;)Z")
-	public static boolean method104(IfType arg0) {
-		int var1 = arg0.field2445;
-		if (var1 >= 1 && var1 <= 200 || !(var1 < 701 || var1 > 900)) {
-			if (var1 >= 801) {
-				var1 -= 701;
-			} else if (var1 >= 701) {
-				var1 -= 601;
-			} else if (var1 < 101) {
-				var1--;
-			} else {
-				var1 -= 101;
-			}
-			Client.method398(0, field3239, 0, 0, 13, JagString.join(new JagString[]{field1393, field2951[var1]}));
-			Client.method398(0, field2778, 0, 0, 18, JagString.join(new JagString[]{field1393, field2951[var1]}));
-			return true;
-		} else if (var1 >= 401 && var1 <= 500) {
-			Client.method398(0, field3239, 0, 0, 35, JagString.join(new JagString[]{field1393, arg0.field2474}));
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@ObfuscatedName("de.a(II)[B")
-	public static synchronized byte[] method324(int arg0) {
-		if (arg0 == 100 && field551 > 0) {
-			byte[] var1 = field2801[--field551];
-			field2801[field551] = null;
-			return var1;
-		} else if (arg0 == 5000 && Client.field585 > 0) {
-			byte[] var2 = field2179[--Client.field585];
-			field2179[Client.field585] = null;
-			return var2;
-		} else if (arg0 == 30000 && VarBitType.field934 > 0) {
-			byte[] var3 = field1541[--VarBitType.field934];
-			field1541[VarBitType.field934] = null;
-			return var3;
-		} else {
-			return new byte[arg0];
-		}
-	}
-
-	@ObfuscatedName("va.a(ILe;)V")
-	public static void method1010(Pix8 arg0) {
-		for (int var1 = 0; var1 < field2570.length; var1++) {
-			field2570[var1] = 0;
-		}
-		for (int var2 = 0; var2 < 5000; var2++) {
-			int var3 = (int) ((double) 256 * 128.0D * Math.random());
-			field2570[var3] = (int) (Math.random() * 256.0D);
-		}
-		for (int var4 = 0; var4 < 20; var4++) {
-			for (int var5 = 1; var5 < 255; var5++) {
-				for (int var6 = 1; var6 < 127; var6++) {
-					int var7 = (var5 << 7) + var6;
-					field3025[var7] = (field2570[var7 + 1] + field2570[var7 + 128] + field2570[var7 - 128] + field2570[var7 + -1]) / 4;
-				}
-			}
-			int[] var8 = field2570;
-			field2570 = field3025;
-			field3025 = var8;
-		}
-		if (arg0 == null) {
-			return;
-		}
-		int var9 = 0;
-		for (int var10 = 0; var10 < arg0.field749; var10++) {
-			for (int var11 = 0; var11 < arg0.field744; var11++) {
-				if (arg0.field748[var9++] != 0) {
-					int var12 = arg0.field750 + var10 + 16;
-					int var13 = var11 + arg0.field751 + 16;
-					int var14 = (var12 << 7) + var13;
-					field2570[var14] = 0;
-				}
-			}
-		}
-	}
-
 	@ObfuscatedName("ta.h(I)V")
 	public static void method946() {
 		field2845 = null;
@@ -4932,9 +4431,9 @@ public class Statics {
 
 	@ObfuscatedName("nb.g(I)V")
 	public static void method726() {
-		field500.method267();
-		IfType.field2680.method267();
-		field3249.method267();
+		field500.clear();
+		IfType.field2680.clear();
+		field3249.clear();
 	}
 
 	@ObfuscatedName("aa.c(Z)V")
@@ -4966,7 +4465,7 @@ public class Statics {
 		int var3 = arg0.field2502;
 		int var4 = arg0.field2454;
 		while (var4 != -1) {
-			IfType var5 = field2922[var1][var4 & 0xFFFF];
+			IfType var5 = IfType.field2922[var1][var4 & 0xFFFF];
 			var2 += var5.field2462;
 			if (!arg0.field2500) {
 				var2 -= var5.field2552;
@@ -5020,7 +4519,7 @@ public class Statics {
 
 	@ObfuscatedName("j.d(B)V")
 	public static void method538() {
-		field253.method267();
+		field253.clear();
 	}
 
 	@ObfuscatedName("u.f(II)La;")
@@ -5182,15 +4681,15 @@ public class Statics {
 
 	@ObfuscatedName("rd.a(IBII)V")
 	public static void method887(int arg0, int arg1, int arg2) {
-		if (Client.field322 == 0 || arg1 == 0 || field965 >= 50) {
+		if (Client.field322 == 0 || arg1 == 0 || Client.field965 >= 50) {
 			return;
 		}
-		field2369[field965] = arg0;
-		field2845[field965] = arg1;
-		field684[field965] = arg2;
-		field955[field965] = null;
-		field1521[field965] = 0;
-		field965++;
+		field2369[Client.field965] = arg0;
+		field2845[Client.field965] = arg1;
+		field684[Client.field965] = arg2;
+		field955[Client.field965] = null;
+		field1521[Client.field965] = 0;
+		Client.field965++;
 	}
 
 	@ObfuscatedName("m.b(Z)V")
@@ -5437,19 +4936,11 @@ public class Statics {
 		field463 = arg1;
 	}
 
-	@ObfuscatedName("gb.a(JI)V")
-	public static void method427(long arg0) {
-		try {
-			Thread.sleep(arg0);
-		} catch (InterruptedException var2) {
-		}
-	}
-
 	@ObfuscatedName("a.a(ILbd;III)[B")
 	public static byte[] method25(int arg0, Js5 arg1, int arg2, int arg3) {
 		long var4 = ((long) arg3 << 32) + (long) (arg2 * 37 + arg0 & 0xFFFF) + (long) (arg2 << 16);
 		if (field30 != null) {
-			class46 var6 = (class46) field30.method263(var4);
+			class46 var6 = (class46) field30.find(var4);
 			if (var6 != null) {
 				return var6.field1198;
 			}
@@ -5483,18 +4974,6 @@ public class Statics {
 		field1102 = null;
 		field1118 = null;
 		field1094 = null;
-	}
-
-	@ObfuscatedName("client.a(Lu;BI)V")
-	public static void method280(Js5Loader arg0, int arg1) {
-		if (Js5Net.field2415 == null) {
-			Js5Net.method495(true, null, 255, 255, (byte) 0, 0);
-			Js5Net.field1350[arg1] = arg0;
-		} else {
-			Js5Net.field2415.pos = arg1 * 4 + 5;
-			int var2 = Js5Net.field2415.method167();
-			arg0.method980(var2);
-		}
 	}
 
 	@ObfuscatedName("gb.c(B)I")
@@ -5563,35 +5042,6 @@ public class Statics {
 		return var7;
 	}
 
-	@ObfuscatedName("client.a(IIIIIII)I")
-	public static int method287(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		int var6 = arg4 & 0x3;
-		if ((arg0 & 0x1) == 1) {
-			int var7 = arg1;
-			arg1 = arg3;
-			arg3 = var7;
-		}
-		if (var6 == 0) {
-			return arg2;
-		} else if (var6 == 1) {
-			return arg5;
-		} else if (var6 == 2) {
-			return 7 + 1 - arg2 - arg1;
-		} else {
-			return 1 + 7 - arg5 - arg3;
-		}
-	}
-
-	@ObfuscatedName("kc.a(Lbd;BII)Le;")
-	public static Pix8 method609(Js5 arg0, int arg1, int arg2) {
-		return method885(arg1, arg2, arg0) ? method467() : null;
-	}
-
-	@ObfuscatedName("kc.a(BZZ)I")
-	public static int method614() {
-		return Js5Net.field845 + Js5Net.field3285;
-	}
-
 	@ObfuscatedName("ad.c(I)V")
 	public static void method116() {
 		field220 = null;
@@ -5601,14 +5051,6 @@ public class Statics {
 		field215 = null;
 		field222 = null;
 		field217 = null;
-	}
-
-	@ObfuscatedName("ad.b(III)I")
-	public static int method121(int arg0, int arg1) {
-		int var2 = method747(arg0 - 1, arg1 + -1) + method747(arg0 + 1, arg1 - 1) + method747(arg0 + -1, arg1 + 1) + method747(arg0 + 1, arg1 - -1);
-		int var3 = method747(arg0 - 1, arg1) + method747(arg0 + 1, arg1) + method747(arg0, arg1 - 1) + method747(arg0, arg1 + 1);
-		int var4 = method747(arg0, arg1);
-		return var2 / 16 + var3 / 8 + var4 / 4;
 	}
 
 	@ObfuscatedName("p.b()V")

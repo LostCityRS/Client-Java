@@ -35,7 +35,7 @@ public final class FluType extends Linkable2 {
 
 	@ObfuscatedName("dc.a(BI)Lmd;")
 	public static FluType method317(int arg0) {
-		FluType var1 = (FluType) field2663.method263((long) arg0);
+		FluType var1 = (FluType) field2663.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -51,7 +51,7 @@ public final class FluType extends Linkable2 {
 
 	@ObfuscatedName("bd.b(Z)V")
 	public static void method234() {
-		field2663.method267();
+		field2663.clear();
 	}
 
 	@ObfuscatedName("md.b(IB)V")

@@ -141,7 +141,7 @@ public final class ObjType extends Linkable2 {
 
 	@ObfuscatedName("oe.a(II)Lta;")
 	public static ObjType method760(int arg0) {
-		ObjType var1 = (ObjType) field1066.method263((long) arg0);
+		ObjType var1 = (ObjType) field1066.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -176,7 +176,7 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("va.b(IIII)Ljd;")
 	public static Pix32 method1007(int arg0, int arg1, int arg2) {
 		if (arg2 == 0) {
-			Pix32 var3 = (Pix32) Statics.field253.method263((long) arg1);
+			Pix32 var3 = (Pix32) Statics.field253.find((long) arg1);
 			if (var3 != null && var3.field1477 != arg0 && var3.field1477 != -1) {
 				var3.unlink();
 				var3 = null;
@@ -307,9 +307,9 @@ public final class ObjType extends Linkable2 {
 
 	@ObfuscatedName("ca.a(B)V")
 	public static void method254() {
-		field1066.method267();
-		Statics.field3035.method267();
-		Statics.field253.method267();
+		field1066.clear();
+		Statics.field3035.clear();
+		Statics.field253.clear();
 	}
 
     @ObfuscatedName("qd.b(IB)La;")
@@ -589,7 +589,7 @@ public final class ObjType extends Linkable2 {
 			}
 		}
 		if (arg0) {
-			Model var5 = (Model) Statics.field3035.method263((long) this.field2883);
+			Model var5 = (Model) Statics.field3035.find((long) this.field2883);
 			if (var5 != null) {
 				return var5;
 			}

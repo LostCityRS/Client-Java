@@ -36,7 +36,7 @@ public final class ClientScript extends Linkable2 {
 	@ObfuscatedName("pe.a(III)Lcc;")
 	public static ClientScript method824(int arg0, int arg1) {
 		long var2 = (long) ((arg1 << 16) + arg0);
-		ClientScript var4 = (ClientScript) field830.method263(var2);
+		ClientScript var4 = (ClientScript) field830.find(var2);
 		if (var4 != null) {
 			return var4;
 		}

@@ -20,7 +20,7 @@ public final class VarpType extends Linkable2 {
 
 	@ObfuscatedName("vd.a(BI)Lqa;")
 	public static VarpType method1023(int arg0) {
-		VarpType var1 = (VarpType) field727.method263((long) arg0);
+		VarpType var1 = (VarpType) field727.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -41,7 +41,7 @@ public final class VarpType extends Linkable2 {
 
 	@ObfuscatedName("bb.c(I)V")
 	public static void method191() {
-		field727.method267();
+		field727.clear();
 	}
 
 	@ObfuscatedName("qa.a(Lba;I)V")

@@ -421,7 +421,7 @@ public final class WaveStream extends PcmStream {
 
 	@ObfuscatedName("ka.b()Z")
 	public boolean method589() {
-		return this.method736();
+		return this.isLinked();
 	}
 
 	@ObfuscatedName("ka.a(Lwd;II)Lka;")

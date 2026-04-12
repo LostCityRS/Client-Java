@@ -6,6 +6,7 @@ import jagex3.callstack.JagException;
 import jagex3.client.GameShell;
 import jagex3.datastruct.LinkList;
 import jagex3.io.DataFile;
+import jagex3.util.ThreadUtil;
 
 @ObfuscatedName("oe")
 public final class Js5NetThread implements Runnable {
@@ -24,13 +25,13 @@ public final class Js5NetThread implements Runnable {
 	@ObfuscatedName("ha.a([BBLsa;I)V")
 	public static void method464(byte[] arg0, DataFile arg1, int arg2) {
 		Js5WorkerRequest var3 = new Js5WorkerRequest();
-		var3.field2073 = arg2;
+		var3.key = arg2;
 		var3.field1454 = arg0;
 		var3.field1464 = 0;
 		var3.field1469 = arg1;
 		LinkList var4 = Statics.field1547;
 		synchronized (Statics.field1547) {
-			Statics.field1547.method804(var3);
+			Statics.field1547.push(var3);
 		}
 		method500();
 	}
@@ -40,8 +41,8 @@ public final class Js5NetThread implements Runnable {
         byte[] var3 = null;
         LinkList var4 = Statics.field1547;
         synchronized (Statics.field1547) {
-            for (Js5WorkerRequest var5 = (Js5WorkerRequest) Statics.field1547.method802(); var5 != null; var5 = (Js5WorkerRequest) Statics.field1547.method809()) {
-                if ((long) arg1 == var5.field2073 && var5.field1469 == arg2 && var5.field1464 == 0) {
+            for (Js5WorkerRequest var5 = (Js5WorkerRequest) Statics.field1547.head(); var5 != null; var5 = (Js5WorkerRequest) Statics.field1547.next()) {
+                if ((long) arg1 == var5.key && var5.field1469 == arg2 && var5.field1464 == 0) {
                     var3 = var5.field1454;
                     break;
                 }
@@ -59,12 +60,12 @@ public final class Js5NetThread implements Runnable {
 	public static void method410(int arg0, Js5Loader arg1, DataFile arg2) {
 		Js5WorkerRequest var3 = new Js5WorkerRequest();
 		var3.field1464 = 1;
-		var3.field2073 = arg0;
+		var3.key = arg0;
 		var3.field1469 = arg2;
 		var3.field1456 = arg1;
 		LinkList var4 = Statics.field1547;
 		synchronized (Statics.field1547) {
-			Statics.field1547.method804(var3);
+			Statics.field1547.push(var3);
 		}
 		method500();
 	}
@@ -76,10 +77,10 @@ public final class Js5NetThread implements Runnable {
 				LinkList var1 = Statics.field1547;
 				Js5WorkerRequest var2;
 				synchronized (Statics.field1547) {
-					var2 = (Js5WorkerRequest) Statics.field1547.method802();
+					var2 = (Js5WorkerRequest) Statics.field1547.head();
 				}
 				if (var2 == null) {
-					Statics.sleepPrecise(100L);
+					ThreadUtil.sleepPrecise(100L);
 					Object var3 = Statics.field213;
 					synchronized (Statics.field213) {
 						if (Statics.field307 <= 1) {
@@ -91,16 +92,16 @@ public final class Js5NetThread implements Runnable {
 					}
 				} else {
 					if (var2.field1464 == 0) {
-						var2.field1469.method908(var2.field1454, var2.field1454.length, (int) var2.field2073);
+						var2.field1469.method908(var2.field1454, var2.field1454.length, (int) var2.key);
 						LinkList var5 = Statics.field1547;
 						synchronized (Statics.field1547) {
 							var2.unlink();
 						}
 					} else if (var2.field1464 == 1) {
-						var2.field1454 = var2.field1469.method906((int) var2.field2073);
+						var2.field1454 = var2.field1469.method906((int) var2.key);
 						LinkList var4 = Statics.field1547;
 						synchronized (Statics.field1547) {
-							Statics.field2371.method804(var2);
+							Statics.field2371.push(var2);
 						}
 					}
 					Object var6 = Statics.field213;

@@ -342,7 +342,7 @@ public class Packet extends Linkable {
 	}
 
 	public Packet(int arg0) {
-		this.field284 = Statics.method324(arg0);
+		this.field284 = ByteArrayPool.method324(arg0);
 		this.pos = 0;
 	}
 

@@ -9,14 +9,6 @@ import jagex3.js5.Js5;
 @ObfuscatedName("fd")
 public final class VarBitType extends Linkable2 {
 
-	@ObfuscatedName("fd.Cb")
-	public static int field934 = 0;
-
-	@ObfuscatedName("fd.Eb")
-	public static int[] field936 = new int[]{0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, Integer.MAX_VALUE, -1};
-
-	@ObfuscatedName("fd.Jb")
-	public static int field941 = 0;
 	@ObfuscatedName("sd.b")
 	public static LruCache field2755 = new LruCache(64);
 	@ObfuscatedName("kb.o")
@@ -33,7 +25,7 @@ public final class VarBitType extends Linkable2 {
 
 	@ObfuscatedName("mb.a(II)Lfd;")
 	public static VarBitType method686(int arg0) {
-		VarBitType var1 = (VarBitType) field2755.method263((long) arg0);
+		VarBitType var1 = (VarBitType) field2755.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -53,7 +45,7 @@ public final class VarBitType extends Linkable2 {
 
 	@ObfuscatedName("pb.c(I)V")
 	public static void method807() {
-		field2755.method267();
+		field2755.clear();
 	}
 
 	@ObfuscatedName("fd.a(ILba;)V")

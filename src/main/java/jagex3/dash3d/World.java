@@ -820,7 +820,7 @@ public final class World {
 
 	@ObfuscatedName("ab.a(Lfa;Z)V")
 	public void method62(Square arg0, boolean arg1) {
-		field135.method804(arg0);
+		field135.push(arg0);
 		while (true) {
 			Square var3;
 			int var4;
@@ -841,7 +841,7 @@ public final class World {
 									while (true) {
 										while (true) {
 											do {
-												var3 = (Square) field135.method813();
+												var3 = (Square) field135.popFront();
 												if (var3 == null) {
 													return;
 												}
@@ -1019,25 +1019,25 @@ public final class World {
 												if (var4 < Statics.field106 && (var35 & 0x4) != 0) {
 													Square var36 = var8[var4 + 1][var5];
 													if (var36 != null && var36.field885) {
-														field135.method804(var36);
+														field135.push(var36);
 													}
 												}
 												if (var5 < Statics.field127 && (var35 & 0x2) != 0) {
 													Square var37 = var8[var4][var5 + 1];
 													if (var37 != null && var37.field885) {
-														field135.method804(var37);
+														field135.push(var37);
 													}
 												}
 												if (var4 > Statics.field106 && (var35 & 0x1) != 0) {
 													Square var38 = var8[var4 - 1][var5];
 													if (var38 != null && var38.field885) {
-														field135.method804(var38);
+														field135.push(var38);
 													}
 												}
 												if (var5 > Statics.field127 && (var35 & 0x8) != 0) {
 													Square var39 = var8[var4][var5 - 1];
 													if (var39 != null && var39.field885) {
-														field135.method804(var39);
+														field135.push(var39);
 													}
 												}
 											}
@@ -1145,9 +1145,9 @@ public final class World {
 													for (int var65 = var63.field992; var65 <= var63.field988; var65++) {
 														Square var66 = var8[var64][var65];
 														if (var66.field875 != 0) {
-															field135.method804(var66);
+															field135.push(var66);
 														} else if ((var4 != var64 || var5 != var65) && var66.field885) {
-															field135.method804(var66);
+															field135.push(var66);
 														}
 													}
 												}
@@ -1243,31 +1243,31 @@ public final class World {
 			if (var6 < this.field142 - 1) {
 				Square var84 = this.field102[var6 + 1][var4][var5];
 				if (var84 != null && var84.field885) {
-					field135.method804(var84);
+					field135.push(var84);
 				}
 			}
 			if (var4 < Statics.field106) {
 				Square var85 = var8[var4 + 1][var5];
 				if (var85 != null && var85.field885) {
-					field135.method804(var85);
+					field135.push(var85);
 				}
 			}
 			if (var5 < Statics.field127) {
 				Square var86 = var8[var4][var5 + 1];
 				if (var86 != null && var86.field885) {
-					field135.method804(var86);
+					field135.push(var86);
 				}
 			}
 			if (var4 > Statics.field106) {
 				Square var87 = var8[var4 - 1][var5];
 				if (var87 != null && var87.field885) {
-					field135.method804(var87);
+					field135.push(var87);
 				}
 			}
 			if (var5 > Statics.field127) {
 				Square var88 = var8[var4][var5 - 1];
 				if (var88 != null && var88.field885) {
-					field135.method804(var88);
+					field135.push(var88);
 				}
 			}
 		}

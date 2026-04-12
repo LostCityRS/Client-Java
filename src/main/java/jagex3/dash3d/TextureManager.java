@@ -46,19 +46,19 @@ public final class TextureManager implements TextureProvider {
 		Texture var2 = this.field1867[arg0];
 		if (var2 != null) {
 			if (var2.field2194 != null) {
-				this.field1854.method805(var2);
+				this.field1854.pushFront(var2);
 				var2.field2201 = true;
 				return var2.field2194;
 			}
 			boolean var3 = var2.method763(this.field1877, this.field1875, this.field1876);
 			if (var3) {
 				if (this.field1880 == 0) {
-					Texture var4 = (Texture) this.field1854.method799();
+					Texture var4 = (Texture) this.field1854.pop();
 					var4.method764();
 				} else {
 					this.field1880--;
 				}
-				this.field1854.method805(var2);
+				this.field1854.pushFront(var2);
 				var2.field2201 = true;
 				return var2.field2194;
 			}

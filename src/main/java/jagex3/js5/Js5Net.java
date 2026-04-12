@@ -1,6 +1,7 @@
 package jagex3.js5;
 
-import deob.*;
+import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.datastruct.HashTable;
 import jagex3.datastruct.LinkList2;
 import jagex3.io.ClientStream;
@@ -76,23 +77,23 @@ public class Js5Net {
 					throw new IOException();
 				}
 				while (field845 < 20 && field3285 > 0) {
-					Js5NetRequest var3 = (Js5NetRequest) field2596.method497();
+					Js5NetRequest var3 = (Js5NetRequest) field2596.search();
 					Packet var4 = new Packet(4);
 					var4.method141(1);
-					var4.method153((int) var3.field2073);
+					var4.method153((int) var3.key);
 					field2769.method1016(4, var4.field284);
-					field1917.method498(var3, var3.field2073);
+					field1917.put(var3, var3.key);
 					field3285--;
 					field845++;
 				}
 				while (field2144 < 20 && field1260 > 0) {
-					Js5NetRequest var5 = (Js5NetRequest) field996.method608();
+					Js5NetRequest var5 = (Js5NetRequest) field996.next();
 					Packet var6 = new Packet(4);
 					var6.method141(0);
-					var6.method153((int) var5.field2073);
+					var6.method153((int) var5.key);
 					field2769.method1016(4, var6.field284);
-					var5.method468();
-					field1831.method498(var5, var5.field2073);
+					var5.unlink2();
+					field1831.put(var5, var5.key);
 					field2144++;
 					field1260--;
 				}
@@ -129,7 +130,7 @@ public class Js5Net {
 						field2613.pos += var11;
 						field2559 += var11;
 						if (field2613.pos == var10) {
-							if (field967.field2073 == 16711935L) {
+							if (field967.key == 16711935L) {
 								field2415 = field2613;
 								for (int var14 = 0; var14 < 256; var14++) {
 									Js5Loader var15 = field1350[var14];
@@ -155,7 +156,7 @@ public class Js5Net {
 								}
 								field525 = 0;
 								field1803 = 0;
-								field967.field2615.method976((field967.field2073 & 0xFF0000L) == 16711680L, (int) (field967.field2073 & 0xFFFFL), field3180, field2613.field284);
+								field967.field2615.method976((field967.key & 0xFF0000L) == 16711680L, (int) (field967.key & 0xFFFFL), field3180, field2613.field284);
 							}
 							field967.unlink();
 							field967 = null;
@@ -194,10 +195,10 @@ public class Js5Net {
 							int var21 = field2301.method144();
 							int var22 = field2301.method167();
 							long var23 = (long) ((var19 << 16) + var20);
-							Js5NetRequest var25 = (Js5NetRequest) field1917.method499(var23);
+							Js5NetRequest var25 = (Js5NetRequest) field1917.find(var23);
 							field3180 = true;
 							if (var25 == null) {
-								var25 = (Js5NetRequest) field1831.method499(var23);
+								var25 = (Js5NetRequest) field1831.find(var23);
 								field3180 = false;
 							}
 							if (var25 == null) {
@@ -256,18 +257,18 @@ public class Js5Net {
 	@ObfuscatedName("i.a(ZLu;IIBIB)V")
 	public static void method495(boolean arg0, Js5Loader arg1, int arg2, int arg3, byte arg4, int arg5) {
 		long var6 = (long) ((arg2 << 16) + arg3);
-		Js5NetRequest var8 = (Js5NetRequest) field2596.method499(var6);
+		Js5NetRequest var8 = (Js5NetRequest) field2596.find(var6);
 		if (var8 != null) {
 			return;
 		}
-		Js5NetRequest var9 = (Js5NetRequest) field1917.method499(var6);
+		Js5NetRequest var9 = (Js5NetRequest) field1917.find(var6);
 		if (var9 != null) {
 			return;
 		}
-		Js5NetRequest var10 = (Js5NetRequest) field1328.method499(var6);
+		Js5NetRequest var10 = (Js5NetRequest) field1328.find(var6);
 		if (var10 == null) {
 			if (!arg0) {
-				Js5NetRequest var11 = (Js5NetRequest) field1831.method499(var6);
+				Js5NetRequest var11 = (Js5NetRequest) field1831.find(var6);
 				if (var11 != null) {
 					return;
 				}
@@ -277,18 +278,95 @@ public class Js5Net {
 			var12.field2619 = arg4;
 			var12.field2615 = arg1;
 			if (arg0) {
-				field2596.method498(var12, var6);
+				field2596.put(var12, var6);
 				field3285++;
 			} else {
-				field996.method598(var12);
-				field1328.method498(var12, var6);
+				field996.push(var12);
+				field1328.put(var12, var6);
 				field1260++;
 			}
 		} else if (arg0) {
-			var10.method468();
-			field2596.method498(var10, var6);
+			var10.unlink2();
+			field2596.put(var10, var6);
 			field1260--;
 			field3285++;
+		}
+	}
+
+	@ObfuscatedName("kc.a(BZZ)I")
+	public static int method614() {
+		return field845 + field3285;
+	}
+
+	@ObfuscatedName("client.a(Lu;BI)V")
+	public static void method280(Js5Loader arg0, int arg1) {
+		if (field2415 == null) {
+			method495(true, null, 255, 255, (byte) 0, 0);
+			field1350[arg1] = arg0;
+		} else {
+			field2415.pos = arg1 * 4 + 5;
+			int var2 = field2415.method167();
+			arg0.method980(var2);
+		}
+	}
+
+	@ObfuscatedName("f.a(Lvc;IZ)V")
+	public static void method381(ClientStream arg0, boolean arg1) {
+		if (field2769 != null) {
+			try {
+				field2769.method1015();
+			} catch (Exception var7) {
+			}
+			field2769 = null;
+		}
+		field2769 = arg0;
+		method617(arg1);
+		field2301.pos = 0;
+		field2613 = null;
+		field2559 = 0;
+		field967 = null;
+		while (true) {
+			Js5NetRequest var2 = (Js5NetRequest) field1917.search();
+			if (var2 == null) {
+				while (true) {
+					Js5NetRequest var3 = (Js5NetRequest) field1831.search();
+					if (var3 == null) {
+						if (field476 != 0) {
+							try {
+								Packet var4 = new Packet(4);
+								var4.method141(4);
+								var4.method141(field476);
+								var4.method150(0);
+								field2769.method1016(4, var4.field284);
+							} catch (IOException var6) {
+								try {
+									field2769.method1015();
+								} catch (Exception var5) {
+								}
+								field2769 = null;
+								field525++;
+							}
+						}
+						field1189 = 0;
+						field2271 = Statics.currentTime();
+						return;
+					}
+					field996.pushFront(var3);
+					field1328.put(var3, var3.key);
+					field2144--;
+					field1260++;
+				}
+			}
+			field2596.put(var2, var2.key);
+			field845--;
+			field3285++;
+		}
+	}
+
+	@ObfuscatedName("h.f(I)V")
+	public static void method447() {
+		if (field2769 != null) {
+			field2769.method1015();
 		}
 	}
 }

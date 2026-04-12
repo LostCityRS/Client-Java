@@ -71,7 +71,7 @@ public final class PlayerModel {
 				var7[3] = arg0.field1246;
 			}
 		}
-		Model var9 = (Model) Statics.field379.method263(var5);
+		Model var9 = (Model) Statics.field379.find(var5);
 		if (var9 == null) {
 			boolean var10 = false;
 			for (int var11 = 0; var11 < 12; var11++) {
@@ -85,7 +85,7 @@ public final class PlayerModel {
 			}
 			if (var10) {
 				if (this.field1694 != -1L) {
-					var9 = (Model) Statics.field379.method263(this.field1694);
+					var9 = (Model) Statics.field379.find(this.field1694);
 				}
 				if (var9 == null) {
 					return null;
@@ -167,7 +167,7 @@ public final class PlayerModel {
 		this.field1667[5] = var2;
 		this.field1667[9] = var1;
 		if (var3 != 0L && this.field1693 != var3) {
-			Statics.field379.method264(var3);
+			Statics.field379.remove(var3);
 		}
 	}
 

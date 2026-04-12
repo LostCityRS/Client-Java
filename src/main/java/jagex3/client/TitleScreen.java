@@ -1,6 +1,7 @@
 package jagex3.client;
 
-import deob.*;
+import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.graphics.*;
 import jagex3.js5.Js5;
 import jagex3.js5.Js5Net;
@@ -329,7 +330,7 @@ public class TitleScreen {
 		Statics.field2151 = new int[256];
 		Statics.field3025 = new int[32768];
 		Statics.field2570 = new int[32768];
-		Statics.method1010(null);
+		method1010(null);
 		Statics.field2911 = new int[32768];
 		Statics.field3055 = Statics.field3067;
 		field3071 = Statics.field3067;
@@ -401,7 +402,7 @@ public class TitleScreen {
 		if (Statics.field1144 > Statics.field2570.length) {
 			Statics.field1144 -= Statics.field2570.length;
 			int var9 = (int) (Math.random() * 12.0D);
-			Statics.method1010(Statics.field1177[var9]);
+			method1010(Statics.field1177[var9]);
 		}
 		for (int var10 = 1; var10 < 255; var10++) {
 			for (int var11 = 1; var11 < 127; var11++) {
@@ -512,4 +513,40 @@ public class TitleScreen {
             var16 += 128 - var20;
         }
     }
+
+	@ObfuscatedName("va.a(ILe;)V")
+	public static void method1010(Pix8 arg0) {
+		for (int var1 = 0; var1 < Statics.field2570.length; var1++) {
+			Statics.field2570[var1] = 0;
+		}
+		for (int var2 = 0; var2 < 5000; var2++) {
+			int var3 = (int) ((double) 256 * 128.0D * Math.random());
+			Statics.field2570[var3] = (int) (Math.random() * 256.0D);
+		}
+		for (int var4 = 0; var4 < 20; var4++) {
+			for (int var5 = 1; var5 < 255; var5++) {
+				for (int var6 = 1; var6 < 127; var6++) {
+					int var7 = (var5 << 7) + var6;
+					Statics.field3025[var7] = (Statics.field2570[var7 + 1] + Statics.field2570[var7 + 128] + Statics.field2570[var7 - 128] + Statics.field2570[var7 + -1]) / 4;
+				}
+			}
+			int[] var8 = Statics.field2570;
+			Statics.field2570 = Statics.field3025;
+			Statics.field3025 = var8;
+		}
+		if (arg0 == null) {
+			return;
+		}
+		int var9 = 0;
+		for (int var10 = 0; var10 < arg0.field749; var10++) {
+			for (int var11 = 0; var11 < arg0.field744; var11++) {
+				if (arg0.field748[var9++] != 0) {
+					int var12 = arg0.field750 + var10 + 16;
+					int var13 = var11 + arg0.field751 + 16;
+					int var14 = (var12 << 7) + var13;
+					Statics.field2570[var14] = 0;
+				}
+			}
+		}
+	}
 }

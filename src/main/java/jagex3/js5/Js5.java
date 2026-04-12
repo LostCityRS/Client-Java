@@ -2,11 +2,11 @@ package jagex3.js5;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.util.ArrayUtil;
 import jagex3.callstack.JagException;
 import jagex3.datastruct.IntHashTable;
 import jagex3.io.BZip2;
 import jagex3.io.Packet;
+import jagex3.util.ArrayUtil;
 import jagex3.util.JagString;
 
 import java.io.ByteArrayInputStream;
@@ -99,8 +99,8 @@ public abstract class Js5 {
 	public final byte[] method215(JagString arg0, JagString arg1) {
 		JagString var3 = arg1.method30();
 		JagString var4 = arg0.method30();
-		int var5 = this.field404.method745(var3.method27());
-		int var6 = this.field367[var5].method745(var4.method27());
+		int var5 = this.field404.find(var3.method27());
+		int var6 = this.field367[var5].find(var4.method27());
 		return this.method217(var6, var5);
 	}
 
@@ -239,7 +239,7 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.a(IILa;)I")
 	public final int method224(int arg0, JagString arg1) {
 		JagString var3 = arg1.method30();
-		return this.field367[arg0].method745(var3.method27());
+		return this.field367[arg0].find(var3.method27());
 	}
 
 	@ObfuscatedName("bd.a(II[I)Z")
@@ -337,7 +337,7 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.a(ILa;)I")
 	public final int method228(JagString arg0) {
 		JagString var2 = arg0.method30();
-		return this.field404.method745(var2.method27());
+		return this.field404.find(var2.method27());
 	}
 
 	@ObfuscatedName("bd.a(B)Z")
@@ -412,15 +412,15 @@ public abstract class Js5 {
 	public final boolean method239(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.method30();
 		JagString var4 = arg1.method30();
-		int var5 = this.field404.method745(var3.method27());
-		int var6 = this.field367[var5].method745(var4.method27());
+		int var5 = this.field404.find(var3.method27());
+		int var6 = this.field367[var5].find(var4.method27());
 		return this.method218(var5, var6);
 	}
 
 	@ObfuscatedName("bd.b(ILa;)V")
 	public final void updateCacheHint(JagString arg0) {
 		JagString var2 = arg0.method30();
-		int var3 = this.field404.method745(var2.method27());
+		int var3 = this.field404.find(var2.method27());
 		if (var3 >= 0) {
 			this.method219(var3);
 		}

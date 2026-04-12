@@ -58,7 +58,7 @@ public final class BgSound extends Linkable {
 
 	@ObfuscatedName("n.c(I)V")
 	public static void reset() {
-		for (BgSound var0 = (BgSound) field515.method802(); var0 != null; var0 = (BgSound) field515.method809()) {
+		for (BgSound var0 = (BgSound) field515.head(); var0 != null; var0 = (BgSound) field515.next()) {
 			if (var0.field424 != null) {
 				Client.soundMixer.method135(var0.field424);
 				var0.field424 = null;
@@ -68,7 +68,7 @@ public final class BgSound extends Linkable {
 				var0.field433 = null;
 			}
 		}
-		field515.method806();
+		field515.clear();
 	}
 
 	@ObfuscatedName("n.a(IZIIILia;)V")
@@ -94,7 +94,7 @@ public final class BgSound extends Linkable {
 			var5.field434 = arg4;
 			var5.method247();
 		}
-		field515.method804(var5);
+		field515.push(var5);
 		if (var5.field428 != null) {
 			var5.field437 = (int) ((double) (var5.field425 - var5.field435) * Math.random()) + var5.field435;
 		}
@@ -102,7 +102,7 @@ public final class BgSound extends Linkable {
 
 	@ObfuscatedName("r.a(IIIII)V")
 	public static void method866(int arg0, int arg1, int arg2, int arg3) {
-		for (BgSound var4 = (BgSound) field515.method802(); var4 != null; var4 = (BgSound) field515.method809()) {
+		for (BgSound var4 = (BgSound) field515.head(); var4 != null; var4 = (BgSound) field515.next()) {
 			if (var4.field420 != -1 || var4.field428 != null) {
 				int var5 = 0;
 				if (arg0 > var4.field436) {
@@ -166,7 +166,7 @@ public final class BgSound extends Linkable {
 
 	@ObfuscatedName("wa.a(B)V")
 	public static void method1040() {
-		for (BgSound var0 = (BgSound) field515.method802(); var0 != null; var0 = (BgSound) field515.method809()) {
+		for (BgSound var0 = (BgSound) field515.head(); var0 != null; var0 = (BgSound) field515.next()) {
 			if (var0.field434 != null) {
 				var0.method247();
 			}

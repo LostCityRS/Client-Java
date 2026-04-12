@@ -1,9 +1,9 @@
 package jagex3.reflectionchecker;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
+import jagex3.datastruct.LinkList;
 import jagex3.io.Packet;
 import jagex3.io.PacketBit;
 import jagex3.util.JagString;
@@ -14,6 +14,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class ReflectionChecker {
+	@ObfuscatedName("re.h")
+	public static LinkList field2694 = new LinkList();
+
 	@ObfuscatedName("ie.a(BLjava/lang/String;)Ljava/lang/Class;")
 	public static Class method530(String arg0) throws ClassNotFoundException {
 		if (arg0.equals("B")) {
@@ -97,13 +100,13 @@ public class ReflectionChecker {
 				var3.field2959[var4] = -5;
 			}
 		}
-		Statics.field2694.method804(var3);
+		field2694.push(var3);
 	}
 
 	@ObfuscatedName("hd.a(IILfe;)V")
 	public static void method479(PacketBit arg0) {
 		while (true) {
-			ReflectionCheck var1 = (ReflectionCheck) Statics.field2694.method802();
+			ReflectionCheck var1 = (ReflectionCheck) field2694.head();
 			if (var1 == null) {
 				return;
 			}
@@ -211,5 +214,10 @@ public class ReflectionChecker {
 			arg0.method155(arg0.pos - var4);
 			var1.unlink();
 		}
+	}
+
+	@ObfuscatedName("hb.d(I)V")
+	public static void method469() {
+		field2694 = new LinkList();
 	}
 }

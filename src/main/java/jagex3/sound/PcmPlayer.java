@@ -1,11 +1,12 @@
 package jagex3.sound;
 
-import jagex3.util.ArrayUtil;
 import deob.ObfuscatedName;
 import deob.Statics;
 import deob.class14;
 import jagex3.callstack.JagException;
 import jagex3.client.SignLink;
+import jagex3.util.ArrayUtil;
+import jagex3.util.ThreadUtil;
 
 import java.awt.*;
 
@@ -209,7 +210,7 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 					return;
 				}
 			}
-			Statics.sleepPrecise(50L);
+			ThreadUtil.sleepPrecise(50L);
 		}
 	}
 
@@ -227,7 +228,7 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 					}
 					this.method255(Statics.currentTime());
 				}
-				Statics.sleepPrecise(5L);
+				ThreadUtil.sleepPrecise(5L);
 			}
 		} catch (Exception var4) {
 			JagException.report(null, var4);

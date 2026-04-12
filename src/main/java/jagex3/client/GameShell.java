@@ -10,6 +10,7 @@ import jagex3.dash3d.ModelSource;
 import jagex3.dash3d.World;
 import jagex3.graphics.PixMap;
 import jagex3.util.JagString;
+import jagex3.util.ThreadUtil;
 import jagex3.util.Timer;
 
 import java.applet.Applet;
@@ -134,7 +135,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@ObfuscatedName("td.c(I)V")
 	public static void doneslowupdate() {
-		field1747.method571();
+		field1747.init();
 		for (int var0 = 0; var0 < 32; var0++) {
 			field1601[var0] = 0L;
 		}
@@ -215,7 +216,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			} else {
 				var23 = new ClientLocAnim(arg1, 0, arg6, var9, var10, var12, var11, var13.field1289, true);
 			}
-			arg5.method50(arg3, arg8, arg7, var14, var23, null, Statics.field1740[arg6], 0, var16, var15);
+			arg5.method50(arg3, arg8, arg7, var14, var23, null, ClientBuild.field1740[arg6], 0, var16, var15);
 			if (var13.field1284) {
 				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
 			}
@@ -226,7 +227,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			} else {
 				var24 = new ClientLocAnim(arg1, 1, arg6, var9, var10, var12, var11, var13.field1289, true);
 			}
-			arg5.method50(arg3, arg8, arg7, var14, var24, null, Statics.field2819[arg6], 0, var16, var15);
+			arg5.method50(arg3, arg8, arg7, var14, var24, null, ClientBuild.field2819[arg6], 0, var16, var15);
 			if (var13.field1284) {
 				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
 			}
@@ -241,7 +242,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				var26 = new ClientLocAnim(arg1, 2, arg6 + 4, var9, var10, var12, var11, var13.field1289, true);
 				var27 = new ClientLocAnim(arg1, 2, var25, var9, var10, var12, var11, var13.field1289, true);
 			}
-			arg5.method50(arg3, arg8, arg7, var14, var26, var27, Statics.field1740[arg6], Statics.field1740[var25], var16, var15);
+			arg5.method50(arg3, arg8, arg7, var14, var26, var27, ClientBuild.field1740[arg6], ClientBuild.field1740[var25], var16, var15);
 			if (var13.field1284) {
 				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
 			}
@@ -252,7 +253,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			} else {
 				var28 = new ClientLocAnim(arg1, 3, arg6, var9, var10, var12, var11, var13.field1289, true);
 			}
-			arg5.method50(arg3, arg8, arg7, var14, var28, null, Statics.field2819[arg6], 0, var16, var15);
+			arg5.method50(arg3, arg8, arg7, var14, var28, null, ClientBuild.field2819[arg6], 0, var16, var15);
 			if (var13.field1284) {
 				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
 			}
@@ -297,7 +298,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				} else {
 					var34 = new ClientLocAnim(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
 				}
-				arg5.method65(arg3, arg8, arg7, var14, var34, Statics.field1740[arg6], arg6 * 512, 0, 0, var16, var15);
+				arg5.method65(arg3, arg8, arg7, var14, var34, ClientBuild.field1740[arg6], arg6 * 512, 0, 0, var16, var15);
 			} else if (arg4 == 5) {
 				int var35 = 16;
 				int var36 = arg5.method78(arg3, arg8, arg7);
@@ -310,7 +311,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				} else {
 					var37 = new ClientLocAnim(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
 				}
-				arg5.method65(arg3, arg8, arg7, var14, var37, Statics.field1740[arg6], arg6 * 512, Statics.field1595[arg6] * var35, Statics.field181[arg6] * var35, var16, var15);
+				arg5.method65(arg3, arg8, arg7, var14, var37, ClientBuild.field1740[arg6], arg6 * 512, ClientBuild.field1595[arg6] * var35, ClientBuild.field181[arg6] * var35, var16, var15);
 			} else if (arg4 == 6) {
 				ModelSource var38;
 				if (var13.field1289 == -1 && var13.field1317 == null) {
@@ -341,7 +342,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@ObfuscatedName("ha.b(I)V")
 	public static void doneslowupdate2() {
-		field1747.method570();
+		field1747.reset();
 		for (int var0 = 0; var0 < 32; var0++) {
 			field1601[var0] = 0L;
 		}
@@ -380,8 +381,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			this.addCanvas();
 			field187 = PixMap.method875(field2372, field711, canvas);
 			this.method290();
-			field1747 = Timer.method909();
-			field1747.method571();
+			field1747 = Timer.create();
+			field1747.init();
 			while (field369 == 0L || Statics.currentTime() < field369) {
 				field681 = field1747.count(field2049, mindel);
 				for (int var4 = 0; var4 < field681; var4++) {
@@ -501,7 +502,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public final void destroy() {
 		if (shell == this && !field972) {
 			field369 = Statics.currentTime();
-			Statics.sleepPrecise(5000L);
+			ThreadUtil.sleepPrecise(5000L);
 			JagException.signlink = null;
 			this.method615();
 		}

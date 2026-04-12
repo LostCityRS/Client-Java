@@ -257,7 +257,7 @@ public final class JagString implements StringInterface {
 			if (Statics.field1795 == null) {
 				Statics.field1795 = new HashTable(4096);
 			} else {
-				for (class73 var5 = (class73) Statics.field1795.method499(var2); var5 != null; var5 = (class73) Statics.field1795.method501()) {
+				for (class73 var5 = (class73) Statics.field1795.find(var2); var5 != null; var5 = (class73) Statics.field1795.searchnext()) {
 					if (this.method5(var5.field1781)) {
 						return var5.field1781;
 					}
@@ -266,7 +266,7 @@ public final class JagString implements StringInterface {
 			class73 var7 = new class73();
 			this.field21 = false;
 			var7.field1781 = this;
-			Statics.field1795.method498(var7, var2);
+			Statics.field1795.put(var7, var2);
 			return this;
 		}
 	}

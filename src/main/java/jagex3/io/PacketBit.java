@@ -1,12 +1,13 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import jagex3.config.VarBitType;
 
 @ObfuscatedName("fe")
 public final class PacketBit extends Packet {
 
-	@ObfuscatedName("fe.Dc")
+    @ObfuscatedName("fd.Eb")
+    public static int[] field936 = new int[]{0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, Integer.MAX_VALUE, -1};
+    @ObfuscatedName("fe.Dc")
 	public int field961;
 
 	@ObfuscatedName("fe.yc")
@@ -34,15 +35,15 @@ public final class PacketBit extends Packet {
 		int var4 = 8 - (this.field961 & 0x7);
 		this.field961 += arg0;
 		while (var4 < arg0) {
-			var3 += (VarBitType.field936[var4] & super.field284[var2++]) << arg0 - var4;
+			var3 += (field936[var4] & super.field284[var2++]) << arg0 - var4;
 			arg0 -= var4;
 			var4 = 8;
 		}
 		int var5;
 		if (arg0 == var4) {
-			var5 = (super.field284[var2] & VarBitType.field936[var4]) + var3;
+			var5 = (super.field284[var2] & field936[var4]) + var3;
 		} else {
-			var5 = (VarBitType.field936[arg0] & super.field284[var2] >> var4 - arg0) + var3;
+			var5 = (field936[arg0] & super.field284[var2] >> var4 - arg0) + var3;
 		}
 		return var5;
 	}

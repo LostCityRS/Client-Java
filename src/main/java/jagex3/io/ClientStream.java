@@ -1,10 +1,10 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
+import jagex3.util.ThreadUtil;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -74,7 +74,7 @@ public final class ClientStream implements Runnable {
 		}
 		if (this.field3158 != null) {
 			while (this.field3158.field815 == 0) {
-				Statics.sleepPrecise(1L);
+				ThreadUtil.sleepPrecise(1L);
 			}
 			if (this.field3158.field815 == 1) {
 				try {

@@ -68,7 +68,7 @@ public final class SeqType extends Linkable2 {
 
 	@ObfuscatedName("ac.b(II)Lhe;")
 	public static SeqType method103(int arg0) {
-		SeqType var1 = (SeqType) field1196.method263((long) arg0);
+		SeqType var1 = (SeqType) field1196.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -84,8 +84,8 @@ public final class SeqType extends Linkable2 {
 
 	@ObfuscatedName("bd.a(Z)V")
 	public static void method233() {
-		field1196.method267();
-		Statics.field2136.method267();
+		field1196.clear();
+		Statics.field2136.clear();
 	}
 
 	@ObfuscatedName("he.a(Lpa;Lhe;IIB)Lpa;")

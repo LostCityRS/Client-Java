@@ -50,7 +50,7 @@ public final class FloType extends Linkable2 {
 
 	@ObfuscatedName("vd.b(II)Lfc;")
 	public static FloType method1026(int arg0) {
-		FloType var1 = (FloType) field1757.method263((long) arg0);
+		FloType var1 = (FloType) field1757.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -66,7 +66,7 @@ public final class FloType extends Linkable2 {
 
 	@ObfuscatedName("cb.a(Z)V")
 	public static void method265() {
-		field1757.method267();
+		field1757.clear();
 	}
 
 	@ObfuscatedName("fc.a(BILba;)V")

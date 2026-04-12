@@ -6,96 +6,96 @@ import deob.ObfuscatedName;
 public final class HashTable {
 
 	@ObfuscatedName("i.b")
-	public long field1256;
+	public long searchKey;
 
 	@ObfuscatedName("i.n")
-	public final int field1268;
+	public final int bucketCount;
 
 	@ObfuscatedName("i.r")
-	public Linkable field1272;
+	public Linkable searchCursor;
 
 	@ObfuscatedName("i.s")
-	public final Linkable[] field1273;
+	public final Linkable[] buckets;
 
 	@ObfuscatedName("i.x")
-	public int field1278 = 0;
+	public int iteratorBucket = 0;
 
 	@ObfuscatedName("i.z")
-	public Linkable field1280;
+	public Linkable iteratorCursor;
 
 	@ObfuscatedName("i.b(Z)Lnd;")
-	public Linkable method497() {
-		this.field1278 = 0;
-		return this.method504();
+	public Linkable search() {
+		this.iteratorBucket = 0;
+		return this.findnext();
 	}
 
 	@ObfuscatedName("i.a(Lnd;BJ)V")
-	public void method498(Linkable arg0, long arg1) {
-		if (arg0.field2105 != null) {
+	public void put(Linkable arg0, long arg1) {
+		if (arg0.prev != null) {
 			arg0.unlink();
 		}
-		Linkable var4 = this.field1273[(int) ((long) (this.field1268 - 1) & arg1)];
-		arg0.field2087 = var4;
-		arg0.field2073 = arg1;
-		arg0.field2105 = var4.field2105;
-		arg0.field2105.field2087 = arg0;
-		arg0.field2087.field2105 = arg0;
+		Linkable var4 = this.buckets[(int) ((long) (this.bucketCount - 1) & arg1)];
+		arg0.next = var4;
+		arg0.key = arg1;
+		arg0.prev = var4.prev;
+		arg0.prev.next = arg0;
+		arg0.next.prev = arg0;
 	}
 
 	@ObfuscatedName("i.a(JI)Lnd;")
-	public Linkable method499(long arg0) {
-		this.field1256 = arg0;
-		Linkable var3 = this.field1273[(int) ((long) (this.field1268 - 1) & arg0)];
-		for (this.field1272 = var3.field2087; this.field1272 != var3; this.field1272 = this.field1272.field2087) {
-			if (this.field1272.field2073 == arg0) {
-				Linkable var4 = this.field1272;
-				this.field1272 = this.field1272.field2087;
+	public Linkable find(long arg0) {
+		this.searchKey = arg0;
+		Linkable var3 = this.buckets[(int) ((long) (this.bucketCount - 1) & arg0)];
+		for (this.searchCursor = var3.next; this.searchCursor != var3; this.searchCursor = this.searchCursor.next) {
+			if (this.searchCursor.key == arg0) {
+				Linkable var4 = this.searchCursor;
+				this.searchCursor = this.searchCursor.next;
 				return var4;
 			}
 		}
-		this.field1272 = null;
+		this.searchCursor = null;
 		return null;
 	}
 
 	@ObfuscatedName("i.b(I)Lnd;")
-	public Linkable method501() {
-		if (this.field1272 == null) {
+	public Linkable searchnext() {
+		if (this.searchCursor == null) {
 			return null;
 		}
-		Linkable var2 = this.field1273[(int) (this.field1256 & (long) (this.field1268 - 1))];
-		while (this.field1272 != var2) {
-			if (this.field1272.field2073 == this.field1256) {
-				Linkable var3 = this.field1272;
-				this.field1272 = this.field1272.field2087;
+		Linkable var2 = this.buckets[(int) (this.searchKey & (long) (this.bucketCount - 1))];
+		while (this.searchCursor != var2) {
+			if (this.searchCursor.key == this.searchKey) {
+				Linkable var3 = this.searchCursor;
+				this.searchCursor = this.searchCursor.next;
 				return var3;
 			}
-			this.field1272 = this.field1272.field2087;
+			this.searchCursor = this.searchCursor.next;
 		}
-		this.field1272 = null;
+		this.searchCursor = null;
 		return null;
 	}
 
 	public HashTable(int arg0) {
-		this.field1268 = arg0;
-		this.field1273 = new Linkable[arg0];
+		this.bucketCount = arg0;
+		this.buckets = new Linkable[arg0];
 		for (int var2 = 0; var2 < arg0; var2++) {
-			Linkable var3 = this.field1273[var2] = new Linkable();
-			var3.field2087 = var3;
-			var3.field2105 = var3;
+			Linkable var3 = this.buckets[var2] = new Linkable();
+			var3.next = var3;
+			var3.prev = var3;
 		}
 	}
 
 	@ObfuscatedName("i.b(B)Lnd;")
-	public Linkable method504() {
-		if (this.field1278 > 0 && this.field1273[this.field1278 - 1] != this.field1280) {
-			Linkable var1 = this.field1280;
-			this.field1280 = var1.field2087;
+	public Linkable findnext() {
+		if (this.iteratorBucket > 0 && this.buckets[this.iteratorBucket - 1] != this.iteratorCursor) {
+			Linkable var1 = this.iteratorCursor;
+			this.iteratorCursor = var1.next;
 			return var1;
 		}
-		while (this.field1268 > this.field1278) {
-			Linkable var2 = this.field1273[this.field1278++].field2087;
-			if (this.field1273[this.field1278 - 1] != var2) {
-				this.field1280 = var2.field2087;
+		while (this.bucketCount > this.iteratorBucket) {
+			Linkable var2 = this.buckets[this.iteratorBucket++].next;
+			if (this.buckets[this.iteratorBucket - 1] != var2) {
+				this.iteratorCursor = var2.next;
 				return var2;
 			}
 		}

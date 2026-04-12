@@ -110,7 +110,7 @@ public final class NpcType extends Linkable2 {
 
 	@ObfuscatedName("r.a(BI)Lh;")
 	public static NpcType method864(int arg0) {
-		NpcType var1 = (NpcType) field1060.method263((long) arg0);
+		NpcType var1 = (NpcType) field1060.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -127,8 +127,8 @@ public final class NpcType extends Linkable2 {
 
 	@ObfuscatedName("hd.f(I)V")
 	public static void method481() {
-		field1060.method267();
-		Statics.field3278.method267();
+		field1060.clear();
+		Statics.field3278.clear();
 	}
 
 	@ObfuscatedName("h.a(BLhe;Lhe;II)Lpa;")
@@ -137,7 +137,7 @@ public final class NpcType extends Linkable2 {
 			NpcType var5 = this.method457();
 			return var5 == null ? null : var5.method448(arg0, arg1, arg2, arg3);
 		}
-		Model var6 = (Model) Statics.field3278.method263((long) this.field1137);
+		Model var6 = (Model) Statics.field3278.find((long) this.field1137);
 		if (var6 == null) {
 			boolean var7 = false;
 			for (int var8 = 0; var8 < this.field1115.length; var8++) {

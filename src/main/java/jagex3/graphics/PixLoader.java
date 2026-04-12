@@ -98,7 +98,7 @@ public class PixLoader {
 	public static Pix8 method605(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.method228(arg0);
 		int var4 = arg2.method224(var3, arg1);
-		return Statics.method609(arg2, var4, var3);
+		return method609(arg2, var4, var3);
 	}
 
 	@ObfuscatedName("uc.d(B)[Ljd;")
@@ -133,6 +133,44 @@ public class PixLoader {
 	@ObfuscatedName("td.a(I)Lbc;")
 	public static PixFont method965() {
 		PixFont var0 = new PixFont(Statics.field1985, Statics.field837, Statics.field3194, Statics.field292, Statics.field2794);
+		Statics.method449();
+		return var0;
+	}
+
+	@ObfuscatedName("kc.a(Lbd;BII)Le;")
+	public static Pix8 method609(Js5 arg0, int arg1, int arg2) {
+		return Statics.method885(arg1, arg2, arg0) ? method467() : null;
+	}
+
+	@ObfuscatedName("hb.b(I)Le;")
+	public static Pix8 method467() {
+		Pix8 var0 = new Pix8();
+		var0.field746 = Statics.field2877;
+		var0.field747 = Statics.field1628;
+		var0.field751 = Statics.field2771[0];
+		var0.field750 = Statics.field1985[0];
+		var0.field744 = Statics.field837[0];
+		var0.field749 = Statics.field3194[0];
+		var0.field745 = Statics.field292;
+		var0.field748 = Statics.field2794[0];
+		Statics.method449();
+		return var0;
+	}
+
+	@ObfuscatedName("uc.d(I)[Le;")
+	public static Pix8[] method994() {
+		Pix8[] var0 = new Pix8[Statics.field1900];
+		for (int var1 = 0; var1 < Statics.field1900; var1++) {
+			Pix8 var2 = var0[var1] = new Pix8();
+			var2.field746 = Statics.field2877;
+			var2.field747 = Statics.field1628;
+			var2.field751 = Statics.field2771[var1];
+			var2.field750 = Statics.field1985[var1];
+			var2.field744 = Statics.field837[var1];
+			var2.field749 = Statics.field3194[var1];
+			var2.field745 = Statics.field292;
+			var2.field748 = Statics.field2794[var1];
+		}
 		Statics.method449();
 		return var0;
 	}

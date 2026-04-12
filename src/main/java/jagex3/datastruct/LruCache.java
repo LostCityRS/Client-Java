@@ -6,76 +6,76 @@ import deob.ObfuscatedName;
 public final class LruCache {
 
 	@ObfuscatedName("cb.d")
-	public final Linkable2 field483 = new Linkable2();
+	public final Linkable2 sentinel = new Linkable2();
 
 	@ObfuscatedName("cb.k")
-	public int field490;
+	public int available;
 
 	@ObfuscatedName("cb.l")
-	public final int field491;
+	public final int capacity;
 
 	@ObfuscatedName("cb.m")
-	public final HashTable field492;
+	public final HashTable cache;
 
 	@ObfuscatedName("cb.n")
-	public final LinkList2 field493 = new LinkList2();
+	public final LinkList2 order = new LinkList2();
 
 	@ObfuscatedName("cb.a(IJLhb;)V")
 	public void method262(long arg0, Linkable2 arg1) {
-		if (this.field490 == 0) {
-			Linkable2 var4 = this.field493.method597();
+		if (this.available == 0) {
+			Linkable2 var4 = this.order.popFront();
 			var4.unlink();
-			var4.method468();
-			if (this.field483 == var4) {
-				Linkable2 var5 = this.field493.method597();
+			var4.unlink2();
+			if (this.sentinel == var4) {
+				Linkable2 var5 = this.order.popFront();
 				var5.unlink();
-				var5.method468();
+				var5.unlink2();
 			}
 		} else {
-			this.field490--;
+			this.available--;
 		}
-		this.field492.method498(arg1, arg0);
-		this.field493.method598(arg1);
+		this.cache.put(arg1, arg0);
+		this.order.push(arg1);
 	}
 
 	@ObfuscatedName("cb.a(JB)Lhb;")
-	public Linkable2 method263(long arg0) {
-		Linkable2 var3 = (Linkable2) this.field492.method499(arg0);
+	public Linkable2 find(long arg0) {
+		Linkable2 var3 = (Linkable2) this.cache.find(arg0);
 		if (var3 != null) {
-			this.field493.method598(var3);
+			this.order.push(var3);
 		}
 		return var3;
 	}
 
 	@ObfuscatedName("cb.a(JI)V")
-	public void method264(long arg0) {
-		Linkable2 var3 = (Linkable2) this.field492.method499(arg0);
+	public void remove(long arg0) {
+		Linkable2 var3 = (Linkable2) this.cache.find(arg0);
 		if (var3 != null) {
 			var3.unlink();
-			var3.method468();
-			this.field490++;
+			var3.unlink2();
+			this.available++;
 		}
 	}
 
 	@ObfuscatedName("cb.a(B)V")
-	public void method267() {
+	public void clear() {
 		while (true) {
-			Linkable2 var1 = this.field493.method597();
+			Linkable2 var1 = this.order.popFront();
 			if (var1 == null) {
-				this.field490 = this.field491;
+				this.available = this.capacity;
 				return;
 			}
 			var1.unlink();
-			var1.method468();
+			var1.unlink2();
 		}
 	}
 
 	public LruCache(int arg0) {
-		this.field491 = arg0;
+		this.capacity = arg0;
 		int var2;
 		for (var2 = 1; var2 + var2 < arg0; var2 += var2) {
 		}
-		this.field490 = arg0;
-		this.field492 = new HashTable(var2);
+		this.available = arg0;
+		this.cache = new HashTable(var2);
 	}
 }

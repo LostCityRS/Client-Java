@@ -29,7 +29,7 @@ public final class Mixer extends PcmStream {
 	@ObfuscatedName("b.a(Loc;)V")
 	public synchronized void method126(PcmStream arg0) {
 		LinkList var2 = this.field241[method130(arg0)];
-		var2.method805(arg0);
+		var2.pushFront(arg0);
 	}
 
 	@ObfuscatedName("b.b(I)V")
@@ -50,7 +50,7 @@ public final class Mixer extends PcmStream {
 			arg0 -= var2;
 			this.field245 += var2;
 			this.method133();
-			class83 var3 = (class83) this.field242.method802();
+			class83 var3 = (class83) this.field242.head();
 			synchronized (var3) {
 				int var5 = var3.method743(this);
 				if (var5 < 0) {
@@ -58,7 +58,7 @@ public final class Mixer extends PcmStream {
 					this.method131(var3);
 				} else {
 					var3.field2114 = var5;
-					this.method128(var3.field2087, var3);
+					this.method128(var3.next, var3);
 				}
 			}
 		} while (arg0 != 0);
@@ -66,11 +66,11 @@ public final class Mixer extends PcmStream {
 
 	@ObfuscatedName("b.a(Lnd;Lne;)V")
 	public void method128(Linkable arg0, class83 arg1) {
-		while (this.field242.field2276 != arg0 && ((class83) arg0).field2114 <= arg1.field2114) {
-			arg0 = arg0.field2087;
+		while (this.field242.sentinel != arg0 && ((class83) arg0).field2114 <= arg1.field2114) {
+			arg0 = arg0.next;
 		}
-		this.field242.method811(arg0, arg1);
-		this.field244 = ((class83) this.field242.field2276.field2087).field2114;
+		this.field242.insertBefore(arg0, arg1);
+		this.field244 = ((class83) this.field242.sentinel.next).field2114;
 	}
 
 	@ObfuscatedName("b.b([III)I")
@@ -80,17 +80,17 @@ public final class Mixer extends PcmStream {
 			this.field243 += PcmPlayer.frequency >> 4;
 			for (int var4 = 0; var4 < 8; var4++) {
 				LinkList var5 = this.field241[var4];
-				for (PcmStream var6 = (PcmStream) var5.method802(); var6 != null; var6 = (PcmStream) var5.method809()) {
+				for (PcmStream var6 = (PcmStream) var5.head(); var6 != null; var6 = (PcmStream) var5.next()) {
 					int var7 = method130(var6);
 					if (var4 != var7) {
-						this.field241[var7].method805(var6);
+						this.field241[var7].pushFront(var6);
 					}
 				}
 			}
 		}
 		for (int var8 = 0; var8 < 8; var8++) {
 			LinkList var9 = this.field241[var8];
-			for (PcmStream var10 = (PcmStream) var9.method802(); var10 != null; var10 = (PcmStream) var9.method809()) {
+			for (PcmStream var10 = (PcmStream) var9.head(); var10 != null; var10 = (PcmStream) var9.next()) {
 				var10.field2167 = false;
 				if (var10.field2168 != null) {
 					var10.field2168.field3080 = 0;
@@ -114,7 +114,7 @@ public final class Mixer extends PcmStream {
 				if ((var16 & 0x1) != 0) {
 					var12 &= ~(0x1 << var14);
 					LinkList var17 = this.field241[var14];
-					for (PcmStream var18 = (PcmStream) var17.method802(); var18 != null; var18 = (PcmStream) var17.method809()) {
+					for (PcmStream var18 = (PcmStream) var17.head(); var18 != null; var18 = (PcmStream) var17.next()) {
 						if (!var18.field2167) {
 							PcmStreamable var19 = var18.field2168;
 							if (var19 == null || var19.field3080 <= var15) {
@@ -151,8 +151,8 @@ public final class Mixer extends PcmStream {
 	public void method131(class83 arg0) {
 		arg0.unlink();
 		arg0.method742();
-		Linkable var2 = this.field242.field2276.field2087;
-		if (this.field242.field2276 == var2) {
+		Linkable var2 = this.field242.sentinel.next;
+		if (this.field242.sentinel == var2) {
 			this.field244 = -1;
 		} else {
 			this.field244 = ((class83) var2).field2114;
@@ -173,7 +173,7 @@ public final class Mixer extends PcmStream {
 		}
 		for (int var2 = 0; var2 < 8; var2++) {
 			LinkList var3 = this.field241[var2];
-			for (PcmStream var4 = (PcmStream) var3.method802(); var4 != null; var4 = (PcmStream) var3.method809()) {
+			for (PcmStream var4 = (PcmStream) var3.head(); var4 != null; var4 = (PcmStream) var3.next()) {
 				var4.method127(arg0);
 			}
 		}
@@ -184,7 +184,7 @@ public final class Mixer extends PcmStream {
 		if (this.field245 <= 0) {
 			return;
 		}
-		for (class83 var1 = (class83) this.field242.method802(); var1 != null; var1 = (class83) this.field242.method809()) {
+		for (class83 var1 = (class83) this.field242.head(); var1 != null; var1 = (class83) this.field242.next()) {
 			var1.field2114 -= this.field245;
 		}
 		this.field244 -= this.field245;
@@ -209,7 +209,7 @@ public final class Mixer extends PcmStream {
 			arg2 -= var4;
 			this.field245 += var4;
 			this.method133();
-			class83 var6 = (class83) this.field242.method802();
+			class83 var6 = (class83) this.field242.head();
 			synchronized (var6) {
 				int var8 = var6.method743(this);
 				if (var8 < 0) {
@@ -217,7 +217,7 @@ public final class Mixer extends PcmStream {
 					this.method131(var6);
 				} else {
 					var6.field2114 = var8;
-					this.method128(var6.field2087, var6);
+					this.method128(var6.next, var6);
 				}
 			}
 		} while (arg2 != 0);

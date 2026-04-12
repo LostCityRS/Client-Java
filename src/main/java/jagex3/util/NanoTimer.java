@@ -1,7 +1,6 @@
 package jagex3.util;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 @ObfuscatedName("sb")
 public final class NanoTimer extends Timer {
@@ -11,13 +10,13 @@ public final class NanoTimer extends Timer {
 
 	@ObfuscatedName("sb.b(I)V")
 	@Override
-	public void method570() {
-		this.method571();
+	public void reset() {
+		this.init();
 	}
 
 	@ObfuscatedName("sb.a(I)V")
 	@Override
-	public void method571() {
+	public void init() {
 		this.field2746 = System.nanoTime();
 	}
 
@@ -29,7 +28,7 @@ public final class NanoTimer extends Timer {
 		if (var5 < var3) {
 			var5 = var3;
 		}
-		Statics.sleepPrecise(var5 / 1000000L);
+		ThreadUtil.sleepPrecise(var5 / 1000000L);
 		long var7 = System.nanoTime();
 		int var9;
 		for (var9 = 0; var9 < 10 && (var9 < 1 || this.field2746 < var7); var9++) {
@@ -42,6 +41,6 @@ public final class NanoTimer extends Timer {
 	}
 
 	public NanoTimer() {
-		this.method571();
+		this.init();
 	}
 }

@@ -26,7 +26,7 @@ public final class MillisTimer extends Timer {
 
 	@ObfuscatedName("k.b(I)V")
 	@Override
-	public void method570() {
+	public void reset() {
 		for (int var1 = 0; var1 < 10; var1++) {
 			this.field1515[var1] = 0L;
 		}
@@ -34,7 +34,7 @@ public final class MillisTimer extends Timer {
 
 	@ObfuscatedName("k.a(I)V")
 	@Override
-	public void method571() {
+	public void init() {
 		this.field1520 = 256;
 		this.field1508 = 0;
 		this.field1517 = 1;
@@ -80,7 +80,7 @@ public final class MillisTimer extends Timer {
 		if (this.field1517 < arg1) {
 			this.field1517 = arg1;
 		}
-		Statics.sleepPrecise((long) this.field1517);
+		ThreadUtil.sleepPrecise((long) this.field1517);
 		int var6 = 0;
 		while (this.field1508 < 256) {
 			var6++;
@@ -91,6 +91,6 @@ public final class MillisTimer extends Timer {
 	}
 
 	public MillisTimer() {
-		this.method571();
+		this.init();
 	}
 }

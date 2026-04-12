@@ -45,7 +45,7 @@ public final class IdkType extends Linkable2 {
 
 	@ObfuscatedName("ba.a(BI)Lpe;")
 	public static IdkType method177(int arg0) {
-		IdkType var1 = (IdkType) field3282.method263((long) arg0);
+		IdkType var1 = (IdkType) field3282.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -60,7 +60,7 @@ public final class IdkType extends Linkable2 {
 
 	@ObfuscatedName("qd.b(B)V")
 	public static void method854() {
-		field3282.method267();
+		field3282.clear();
 	}
 
 	@ObfuscatedName("pe.a(BLba;)V")

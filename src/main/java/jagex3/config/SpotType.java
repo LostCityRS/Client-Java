@@ -49,7 +49,7 @@ public final class SpotType extends Linkable2 {
 
 	@ObfuscatedName("n.a(II)Lec;")
 	public static SpotType method713(int arg0) {
-		SpotType var1 = (SpotType) field2152.method263((long) arg0);
+		SpotType var1 = (SpotType) field2152.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -71,8 +71,8 @@ public final class SpotType extends Linkable2 {
 
 	@ObfuscatedName("uc.e(I)V")
 	public static void method995() {
-		field2152.method267();
-		field1841.method267();
+		field2152.clear();
+		field1841.clear();
 	}
 
 	@ObfuscatedName("ec.a(IBLba;)V")
@@ -100,7 +100,7 @@ public final class SpotType extends Linkable2 {
 
 	@ObfuscatedName("ec.a(II)Lpa;")
 	public Model method371(int arg0) {
-		Model var2 = (Model) field1841.method263((long) this.field809);
+		Model var2 = (Model) field1841.find((long) this.field809);
 		if (var2 == null) {
 			var2 = Model.method798(Statics.field1901, this.field792);
 			if (var2 == null) {

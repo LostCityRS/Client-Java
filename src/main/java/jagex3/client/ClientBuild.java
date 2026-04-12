@@ -1,6 +1,5 @@
 package jagex3.client;
 
-import jagex3.sound.BgSound;
 import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.config.FloType;
@@ -8,6 +7,7 @@ import jagex3.config.FluType;
 import jagex3.config.LocType;
 import jagex3.dash3d.*;
 import jagex3.io.Packet;
+import jagex3.sound.BgSound;
 
 public class ClientBuild {
 	@ObfuscatedName("fc.Bb")
@@ -44,6 +44,18 @@ public class ClientBuild {
 	public static int field2822 = (int) (Math.random() * 17.0D) - 8;
 	@ObfuscatedName("nb.kd")
 	public static int field2025 = (int) (Math.random() * 33.0D) - 16;
+	@ObfuscatedName("jc.zb")
+	public static int field1472 = 0;
+	@ObfuscatedName("ld.t")
+	public static int[] field1740 = new int[]{1, 2, 4, 8};
+	@ObfuscatedName("t.Hb")
+	public static int[] field2819 = new int[]{16, 32, 64, 128};
+	@ObfuscatedName("kc.E")
+	public static int[] field1595 = new int[]{1, 0, -1, 0};
+	@ObfuscatedName("ac.S")
+	public static int[] field181 = new int[]{0, -1, 0, 1};
+	@ObfuscatedName("fc.Lb")
+	public static int[][][] field908 = new int[4][13][13];
 
 	@ObfuscatedName("nd.a(IIB)Z")
 	public static boolean method741(int arg0, int arg1) {
@@ -278,7 +290,7 @@ public class ClientBuild {
 				int var20 = var17 & 0x3;
 				if (arg4 == var15 && arg0 <= var16 && var16 < arg0 + 8 && arg8 <= var19 && arg8 + 8 > var19) {
 					LocType var21 = LocType.method389(var11);
-					int var22 = Statics.method287(var20, var21.field1286, var16 & 0x7, var21.field1298, arg3, var19 & 0x7) + arg9;
+					int var22 = RegionRotate.method287(var20, var21.field1286, var16 & 0x7, var21.field1298, arg3, var19 & 0x7) + arg9;
 					int var23 = Statics.method404(var19 & 0x7, var21.field1298, var16 & 0x7, var21.field1286, arg3, var20) + arg6;
 					if (var22 > 0 && var23 > 0 && var22 < 103 && var23 < 103) {
 						CollisionMap var24 = null;
@@ -402,7 +414,7 @@ public class ClientBuild {
 							var33 -= field3246[var36];
 							var29 -= field2906[var36];
 						}
-						if (var34 >= 1 && var34 < 103 && (!Client.lowMem || (mapl[0][var21][var34] & 0x2) != 0 || (mapl[var6][var21][var34] & 0x10) == 0 && method964(var6, var34, var21) == Statics.field1472)) {
+						if (var34 >= 1 && var34 < 103 && (!Client.lowMem || (mapl[0][var21][var34] & 0x2) != 0 || (mapl[var6][var21][var34] & 0x10) == 0 && method964(var6, var34, var21) == field1472)) {
 							if (var6 < minusedlevel) {
 								minusedlevel = var6;
 							}
@@ -692,7 +704,7 @@ public class ClientBuild {
 			int var7 = arg2.method144();
 			if (var7 == 0) {
 				if (arg6 == 0) {
-					groundh[0][arg0][arg3] = -Statics.method751(arg0 + arg5 + 932731, arg4 + 556238 + arg3) * 8;
+					groundh[0][arg0][arg3] = -method751(arg0 + arg5 + 932731, arg4 + 556238 + arg3) * 8;
 				} else {
 					groundh[arg6][arg0][arg3] = groundh[arg6 - 1][arg0][arg3] - 240;
 				}
@@ -728,7 +740,7 @@ public class ClientBuild {
 			if ((mapl[arg7][arg2][arg6] & 0x10) != 0) {
 				return;
 			}
-			if (method964(arg7, arg6, arg2) != Statics.field1472) {
+			if (method964(arg7, arg6, arg2) != field1472) {
 				return;
 			}
 		}
@@ -832,7 +844,7 @@ public class ClientBuild {
 			} else {
 				var26 = new ClientLocAnim(arg5, 0, arg0, var9, var10, var8, var11, var15.field1289, true);
 			}
-			arg3.method50(arg7, arg2, arg6, var14, var26, null, Statics.field1740[arg0], 0, var12, var13);
+			arg3.method50(arg7, arg2, arg6, var14, var26, null, field1740[arg0], 0, var12, var13);
 			if (arg0 == 0) {
 				if (var15.field1324) {
 					field1003[arg7][arg2][arg6] = 50;
@@ -879,7 +891,7 @@ public class ClientBuild {
 			} else {
 				var27 = new ClientLocAnim(arg5, 1, arg0, var9, var10, var8, var11, var15.field1289, true);
 			}
-			arg3.method50(arg7, arg2, arg6, var14, var27, null, Statics.field2819[arg0], 0, var12, var13);
+			arg3.method50(arg7, arg2, arg6, var14, var27, null, field2819[arg0], 0, var12, var13);
 			if (var15.field1324) {
 				if (arg0 == 0) {
 					field1003[arg7][arg2][arg6 + 1] = 50;
@@ -905,7 +917,7 @@ public class ClientBuild {
 				var29 = new ClientLocAnim(arg5, 2, arg0 + 4, var9, var10, var8, var11, var15.field1289, true);
 				var30 = new ClientLocAnim(arg5, 2, var28, var9, var10, var8, var11, var15.field1289, true);
 			}
-			arg3.method50(arg7, arg2, arg6, var14, var29, var30, Statics.field1740[arg0], Statics.field1740[var28], var12, var13);
+			arg3.method50(arg7, arg2, arg6, var14, var29, var30, field1740[arg0], field1740[var28], var12, var13);
 			if (var15.field1304) {
 				if (arg0 == 0) {
 					field412[arg7][arg2][arg6] |= 0x249;
@@ -934,7 +946,7 @@ public class ClientBuild {
 			} else {
 				var31 = new ClientLocAnim(arg5, 3, arg0, var9, var10, var8, var11, var15.field1289, true);
 			}
-			arg3.method50(arg7, arg2, arg6, var14, var31, null, Statics.field2819[arg0], 0, var12, var13);
+			arg3.method50(arg7, arg2, arg6, var14, var31, null, field2819[arg0], 0, var12, var13);
 			if (var15.field1324) {
 				if (arg0 == 0) {
 					field1003[arg7][arg2][arg6 + 1] = 50;
@@ -990,7 +1002,7 @@ public class ClientBuild {
 				} else {
 					var37 = new ClientLocAnim(arg5, 4, 0, var9, var10, var8, var11, var15.field1289, true);
 				}
-				arg3.method65(arg7, arg2, arg6, var14, var37, Statics.field1740[arg0], arg0 * 512, 0, 0, var12, var13);
+				arg3.method65(arg7, arg2, arg6, var14, var37, field1740[arg0], arg0 * 512, 0, 0, var12, var13);
 			} else if (arg4 == 5) {
 				int var38 = arg3.method78(arg7, arg2, arg6);
 				int var39 = 16;
@@ -1003,7 +1015,7 @@ public class ClientBuild {
 				} else {
 					var40 = new ClientLocAnim(arg5, 4, 0, var9, var10, var8, var11, var15.field1289, true);
 				}
-				arg3.method65(arg7, arg2, arg6, var14, var40, Statics.field1740[arg0], arg0 * 512, Statics.field1595[arg0] * var39, Statics.field181[arg0] * var39, var12, var13);
+				arg3.method65(arg7, arg2, arg6, var14, var40, field1740[arg0], arg0 * 512, field1595[arg0] * var39, field181[arg0] * var39, var12, var13);
 			} else if (arg4 == 6) {
 				ModelSource var41;
 				if (var15.field1289 == -1 && var15.field1317 == null) {
@@ -1098,7 +1110,7 @@ public class ClientBuild {
 	public static void method394() {
 		field910 = null;
 		mapl = null;
-		Statics.field908 = null;
+		field908 = null;
 		Statics.field890 = null;
 		Statics.field889 = null;
 		Statics.field902 = null;
@@ -1118,12 +1130,40 @@ public class ClientBuild {
 		int var4 = arg2 / arg1;
 		int var5 = arg1 - 1 & arg2;
 		int var6 = arg0 / arg1;
-		int var7 = Statics.method121(var6, var4);
-		int var8 = Statics.method121(var6 + 1, var4);
-		int var9 = Statics.method121(var6, var4 + 1);
-		int var10 = Statics.method121(var6 + 1, var4 + 1);
+		int var7 = method121(var6, var4);
+		int var8 = method121(var6 + 1, var4);
+		int var9 = method121(var6, var4 + 1);
+		int var10 = method121(var6 + 1, var4 + 1);
 		int var11 = method627(var7, arg1, var8, var3);
 		int var12 = method627(var9, arg1, var10, var3);
 		return method627(var11, arg1, var12, var5);
+	}
+
+	@ObfuscatedName("oa.a(IBI)I")
+	public static int method751(int arg0, int arg1) {
+		int var2 = method124(arg0 + 45365, 4, arg1 + 91923) + (method124(arg0 - -10294, 2, arg1 + 37821) - 128 >> 1) + (method124(arg0, 1, arg1) + -128 >> 2) - 128;
+		int var3 = (int) ((double) var2 * 0.3D) + 35;
+		if (var3 < 10) {
+			var3 = 10;
+		} else if (var3 > 60) {
+			var3 = 60;
+		}
+		return var3;
+	}
+
+	@ObfuscatedName("ad.b(III)I")
+	public static int method121(int arg0, int arg1) {
+		int var2 = method747(arg0 - 1, arg1 + -1) + method747(arg0 + 1, arg1 - 1) + method747(arg0 + -1, arg1 + 1) + method747(arg0 + 1, arg1 - -1);
+		int var3 = method747(arg0 - 1, arg1) + method747(arg0 + 1, arg1) + method747(arg0, arg1 - 1) + method747(arg0, arg1 + 1);
+		int var4 = method747(arg0, arg1);
+		return var2 / 16 + var3 / 8 + var4 / 4;
+	}
+
+	@ObfuscatedName("oa.a(III)I")
+	public static int method747(int arg0, int arg1) {
+		int var2 = arg1 * 57 + arg0;
+		int var3 = var2 ^ var2 << 13;
+		int var4 = (var3 * var3 * 15731 + 789221) * var3 + 1376312589 & Integer.MAX_VALUE;
+		return var4 >> 19 & 0xFF;
 	}
 }
