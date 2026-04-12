@@ -1,5 +1,9 @@
 package deob;
 
+import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
+import jagex3.io.BufferedRandomAccessFile;
+
 @ObfuscatedName("hd")
 public final class class46 extends Linkable2 {
 

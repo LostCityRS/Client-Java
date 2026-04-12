@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.client.ClientKeyboardListener;
+import jagex3.io.Packet;
+
 @ObfuscatedName("tc")
 public final class class117 {
 

@@ -1,5 +1,7 @@
 package deob;
 
+import jagex3.datastruct.LruCache;
+
 @ObfuscatedName("f")
 public final class class31 {
 

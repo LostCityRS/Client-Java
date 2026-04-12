@@ -1,5 +1,7 @@
 package deob;
 
+import jagex3.datastruct.HashTable;
+
 @ObfuscatedName("n")
 public final class class78 {
 

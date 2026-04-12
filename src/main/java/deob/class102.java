@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.dash3d.CollisionMap;
+import jagex3.util.JagString;
+
 @ObfuscatedName("r")
 public final class class102 {
 

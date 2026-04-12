@@ -1,5 +1,9 @@
 package deob;
 
+import jagex3.config.IfType;
+import jagex3.dash3d.ModelSource;
+import jagex3.datastruct.LinkList;
+
 @ObfuscatedName("cd")
 public final class class17 {
 

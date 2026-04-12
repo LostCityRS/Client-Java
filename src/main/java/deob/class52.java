@@ -1,5 +1,7 @@
 package deob;
 
+import jagex3.dash3d.ModelSource;
+
 import java.util.zip.CRC32;
 
 @ObfuscatedName("id")

@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.datastruct.LinkList;
+import jagex3.datastruct.LruCache;
+
 @ObfuscatedName("sd")
 public final class class112 {
 

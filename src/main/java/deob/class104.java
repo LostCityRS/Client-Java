@@ -1,5 +1,9 @@
 package deob;
 
+import jagex3.dash3d.ModelLit;
+import jagex3.datastruct.Linkable2;
+import jagex3.js5.Js5Loader;
+
 @ObfuscatedName("rb")
 public final class class104 extends Linkable2 {
 

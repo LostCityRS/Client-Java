@@ -1,5 +1,7 @@
 package deob;
 
+import jagex3.js5.Js5Loader;
+
 @ObfuscatedName("ib")
 public final class class50 {
 

@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.client.PrivilegedRequest;
+import jagex3.client.SignLink;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;

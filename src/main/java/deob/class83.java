@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.datastruct.Linkable;
+import jagex3.sound.Mixer;
+
 @ObfuscatedName("ne")
 public abstract class class83 extends Linkable {
 

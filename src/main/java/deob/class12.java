@@ -1,5 +1,9 @@
 package deob;
 
+import jagex3.config.LocType;
+import jagex3.datastruct.Linkable;
+import jagex3.sound.WaveStream;
+
 @ObfuscatedName("be")
 public final class class12 extends Linkable {
 

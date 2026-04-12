@@ -1,5 +1,7 @@
 package deob;
 
+import jagex3.client.GameShell;
+
 @ObfuscatedName("ae")
 public final class class6 {
 

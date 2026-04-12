@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.datastruct.Linkable2;
+import jagex3.io.Packet;
+
 @ObfuscatedName("fd")
 public final class class35 extends Linkable2 {
 

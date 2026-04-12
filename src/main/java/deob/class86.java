@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.datastruct.LinkList;
+import jagex3.datastruct.LruCache;
+
 @ObfuscatedName("ob")
 public final class class86 {
 

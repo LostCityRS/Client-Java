@@ -1,5 +1,11 @@
 package deob;
 
+import jagex3.client.ClientMouseListener;
+import jagex3.dash3d.ModelLit;
+import jagex3.datastruct.Linkable2;
+import jagex3.io.Packet;
+import jagex3.util.JagString;
+
 @ObfuscatedName("ta")
 public final class class115 extends Linkable2 {
 

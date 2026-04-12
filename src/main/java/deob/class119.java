@@ -1,5 +1,9 @@
 package deob;
 
+import jagex3.client.PrivilegedRequest;
+import jagex3.datastruct.Linkable;
+import jagex3.util.JagString;
+
 @ObfuscatedName("te")
 public final class class119 extends Linkable {
 

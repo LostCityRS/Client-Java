@@ -1,5 +1,7 @@
 package deob;
 
+import jagex3.datastruct.Linkable;
+
 @ObfuscatedName("dc")
 public final class class22 extends Linkable {
 

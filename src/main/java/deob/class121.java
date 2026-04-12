@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.io.PacketBit;
+import jagex3.util.JagString;
+
 @ObfuscatedName("ua")
 public final class class121 {
 

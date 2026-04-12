@@ -1,5 +1,9 @@
 package deob;
 
+import jagex3.datastruct.LinkList;
+import jagex3.datastruct.Linkable2;
+import jagex3.util.JagString;
+
 @ObfuscatedName("cc")
 public final class class16 extends Linkable2 {
 

@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.dash3d.ModelSource;
+import jagex3.datastruct.LruCache;
+
 @ObfuscatedName("se")
 public final class class113 {
 
