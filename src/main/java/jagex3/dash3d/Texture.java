@@ -4,6 +4,7 @@ import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.datastruct.Linkable;
 import jagex3.graphics.Pix8;
+import jagex3.graphics.PixLoader;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
@@ -115,7 +116,7 @@ public final class Texture extends Linkable {
 		int var6 = arg1 * arg1;
 		this.field2194 = new int[var6 * 4];
 		for (int var7 = 0; var7 < this.field2199.length; var7++) {
-			Pix8 var8 = Statics.method533(arg2, this.field2199[var7]);
+			Pix8 var8 = PixLoader.method533(arg2, this.field2199[var7]);
 			var8.method331();
 			byte[] var9 = var8.field748;
 			int[] var10 = var8.field745;

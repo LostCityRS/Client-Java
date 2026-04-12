@@ -6,11 +6,14 @@ import jagex3.config.IdkType;
 import jagex3.config.NpcType;
 import jagex3.config.ObjType;
 import jagex3.config.SeqType;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 
 @ObfuscatedName("la")
 public final class PlayerModel {
 
+	@ObfuscatedName("bd.s")
+	public static LruCache field379 = new LruCache(260);
 	@ObfuscatedName("la.d")
 	public boolean field1658;
 
@@ -28,6 +31,11 @@ public final class PlayerModel {
 
 	@ObfuscatedName("la.H")
 	public int[] field1688;
+
+	@ObfuscatedName("ra.a(B)V")
+	public static void method873() {
+		field379.clear();
+	}
 
 	@ObfuscatedName("la.a(I)I")
 	public int method634() {
@@ -71,7 +79,7 @@ public final class PlayerModel {
 				var7[3] = arg0.field1246;
 			}
 		}
-		Model var9 = (Model) Statics.field379.find(var5);
+		Model var9 = (Model) field379.find(var5);
 		if (var9 == null) {
 			boolean var10 = false;
 			for (int var11 = 0; var11 < 12; var11++) {
@@ -85,7 +93,7 @@ public final class PlayerModel {
 			}
 			if (var10) {
 				if (this.field1694 != -1L) {
-					var9 = (Model) Statics.field379.find(this.field1694);
+					var9 = (Model) field379.find(this.field1694);
 				}
 				if (var9 == null) {
 					return null;
@@ -120,7 +128,7 @@ public final class PlayerModel {
 				}
 				var9.method778();
 				var9.method770(64, 850, -30, -50, -30, true);
-				Statics.field379.method262(var5, var9);
+				field379.method262(var5, var9);
 				this.field1694 = var5;
 			}
 		}
@@ -167,7 +175,7 @@ public final class PlayerModel {
 		this.field1667[5] = var2;
 		this.field1667[9] = var1;
 		if (var3 != 0L && this.field1693 != var3) {
-			Statics.field379.remove(var3);
+			field379.remove(var3);
 		}
 	}
 

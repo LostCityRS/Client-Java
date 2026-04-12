@@ -24,7 +24,7 @@ public final class VarBitType extends Linkable2 {
 	public int field945;
 
 	@ObfuscatedName("mb.a(II)Lfd;")
-	public static VarBitType method686(int arg0) {
+	public static VarBitType list(int arg0) {
 		VarBitType var1 = (VarBitType) field2755.find((long) arg0);
 		if (var1 != null) {
 			return var1;

@@ -80,10 +80,10 @@ public class TitleScreen {
 						if (Statics.field2084 != 0) {
 							continue label138;
 						}
-						if (Statics.field2885 == 85 && field3071.method10() > 0) {
+						if (Client.field2885 == 85 && field3071.method10() > 0) {
 							field3071 = field3071.method19(0, field3071.method10() - 1);
 						}
-						if (Statics.field2885 == 84 || Statics.field2885 == 80) {
+						if (Client.field2885 == 84 || Client.field2885 == 80) {
 							Statics.field2084 = 1;
 						}
 						if (var4 && field3071.method10() < 12) {
@@ -92,10 +92,10 @@ public class TitleScreen {
 					}
 					return;
 				} while (Statics.field2084 != 1);
-				if (Statics.field2885 == 85 && Statics.field3055.method10() > 0) {
+				if (Client.field2885 == 85 && Statics.field3055.method10() > 0) {
 					Statics.field3055 = Statics.field3055.method19(0, Statics.field3055.method10() - 1);
 				}
-				if (Statics.field2885 == 84 || Statics.field2885 == 80) {
+				if (Client.field2885 == 84 || Client.field2885 == 80) {
 					Statics.field2084 = 0;
 				}
 				if (var4 && Statics.field3055.method10() < 20) {
@@ -274,7 +274,7 @@ public class TitleScreen {
 		var4.method557(254, -171);
 		Statics.field3298.method1054();
 		var4.method557(-180, -171);
-		Pix32 var9 = Statics.method1038(arg2, Client.field583, Statics.field3067);
+		Pix32 var9 = PixLoader.method1038(arg2, Client.field583, Statics.field3067);
 		Statics.field2044.method1054();
 		var9.method551(382 - var9.field1476 / 2 - 128, 18);
 		Statics.field2806 = PixLoader.method605(Statics.field1245, Statics.field3067, arg2);

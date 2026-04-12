@@ -230,7 +230,7 @@ public class ClientBuild {
 			for (int var13 = 0; var13 < 64; var13++) {
 				for (int var14 = 0; var14 < 64; var14++) {
 					if (arg2 == var12 && var13 >= arg1 && arg1 + 8 > var13 && var14 >= arg5 && arg5 + 8 > var14) {
-						method841(arg4 + RegionRotate.method519(arg6, var13 & 0x7, var14 & 0x7), arg6, var11, arg0 + Statics.method677(var13 & 0x7, var14 & 0x7, arg6), 0, 0, arg3);
+						method841(arg4 + RegionRotate.method519(arg6, var13 & 0x7, var14 & 0x7), arg6, var11, arg0 + RegionRotate.method677(var13 & 0x7, var14 & 0x7, arg6), 0, 0, arg3);
 					} else {
 						method841(-1, 0, var11, -1, 0, 0, 0);
 					}
@@ -1165,5 +1165,200 @@ public class ClientBuild {
 		int var3 = var2 ^ var2 << 13;
 		int var4 = (var3 * var3 * 15731 + 789221) * var3 + 1376312589 & Integer.MAX_VALUE;
 		return var4 >> 19 & 0xFF;
+	}
+
+	@ObfuscatedName("cc.a(Lad;IIIILab;IIII)V")
+	public static void method270(CollisionMap arg0, int arg1, int arg2, int arg3, int arg4, World arg5, int arg6, int arg7, int arg8) {
+		int var9 = groundh[arg2][arg8][arg7];
+		int var10 = groundh[arg2][arg8 + 1][arg7];
+		int var11 = groundh[arg2][arg8][arg7 + 1];
+		int var12 = groundh[arg2][arg8 + 1][arg7 + 1];
+		LocType var13 = LocType.method389(arg1);
+		int var14 = var9 + var11 + var10 + var12 >> 2;
+		int var15 = (arg6 << 6) + arg4;
+		int var16 = arg8 + (arg7 << 7) + (arg1 << 14) + 1073741824;
+		if (var13.field1329 == 0) {
+			var16 += Integer.MIN_VALUE;
+		}
+		if (var13.field1316 == 1) {
+			var15 += 256;
+		}
+		if (arg4 == 22) {
+			ModelSource var17;
+			if (var13.field1289 == -1 && var13.field1317 == null) {
+				var17 = var13.method505(var12, var11, arg6, var9, 22, var10);
+			} else {
+				var17 = new ClientLocAnim(arg1, 22, arg6, var9, var10, var12, var11, var13.field1289, true);
+			}
+			arg5.method88(arg3, arg8, arg7, var14, var17, var16, var15);
+			if (var13.field1284 && var13.field1329 == 1) {
+				arg0.method115(arg7, arg8);
+			}
+		} else if (arg4 == 10 || arg4 == 11) {
+			ModelSource var18;
+			if (var13.field1289 == -1 && var13.field1317 == null) {
+				var18 = var13.method505(var12, var11, arg6, var9, 10, var10);
+			} else {
+				var18 = new ClientLocAnim(arg1, 10, arg6, var9, var10, var12, var11, var13.field1289, true);
+			}
+			if (var18 != null) {
+				int var19;
+				int var20;
+				if (arg6 == 1 || arg6 == 3) {
+					var20 = var13.field1286;
+					var19 = var13.field1298;
+				} else {
+					var19 = var13.field1286;
+					var20 = var13.field1298;
+				}
+				int var21 = 0;
+				if (arg4 == 11) {
+					var21 += 256;
+				}
+				arg5.method93(arg3, arg8, arg7, var14, var19, var20, var18, var21, var16, var15);
+			}
+			if (var13.field1284) {
+				arg0.method118(arg8, var13.field1311, var13.field1298, arg6, arg7, var13.field1286);
+			}
+		} else if (arg4 >= 12) {
+			ModelSource var22;
+			if (var13.field1289 == -1 && var13.field1317 == null) {
+				var22 = var13.method505(var12, var11, arg6, var9, arg4, var10);
+			} else {
+				var22 = new ClientLocAnim(arg1, arg4, arg6, var9, var10, var12, var11, var13.field1289, true);
+			}
+			arg5.method93(arg3, arg8, arg7, var14, 1, 1, var22, 0, var16, var15);
+			if (var13.field1284) {
+				arg0.method118(arg8, var13.field1311, var13.field1298, arg6, arg7, var13.field1286);
+			}
+		} else if (arg4 == 0) {
+			ModelSource var23;
+			if (var13.field1289 == -1 && var13.field1317 == null) {
+				var23 = var13.method505(var12, var11, arg6, var9, 0, var10);
+			} else {
+				var23 = new ClientLocAnim(arg1, 0, arg6, var9, var10, var12, var11, var13.field1289, true);
+			}
+			arg5.method50(arg3, arg8, arg7, var14, var23, null, field1740[arg6], 0, var16, var15);
+			if (var13.field1284) {
+				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
+			}
+		} else if (arg4 == 1) {
+			ModelSource var24;
+			if (var13.field1289 == -1 && var13.field1317 == null) {
+				var24 = var13.method505(var12, var11, arg6, var9, 1, var10);
+			} else {
+				var24 = new ClientLocAnim(arg1, 1, arg6, var9, var10, var12, var11, var13.field1289, true);
+			}
+			arg5.method50(arg3, arg8, arg7, var14, var24, null, field2819[arg6], 0, var16, var15);
+			if (var13.field1284) {
+				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
+			}
+		} else if (arg4 == 2) {
+			int var25 = arg6 + 1 & 0x3;
+			ModelSource var26;
+			ModelSource var27;
+			if (var13.field1289 == -1 && var13.field1317 == null) {
+				var26 = var13.method505(var12, var11, arg6 + 4, var9, 2, var10);
+				var27 = var13.method505(var12, var11, var25, var9, 2, var10);
+			} else {
+				var26 = new ClientLocAnim(arg1, 2, arg6 + 4, var9, var10, var12, var11, var13.field1289, true);
+				var27 = new ClientLocAnim(arg1, 2, var25, var9, var10, var12, var11, var13.field1289, true);
+			}
+			arg5.method50(arg3, arg8, arg7, var14, var26, var27, field1740[arg6], field1740[var25], var16, var15);
+			if (var13.field1284) {
+				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
+			}
+		} else if (arg4 == 3) {
+			ModelSource var28;
+			if (var13.field1289 == -1 && var13.field1317 == null) {
+				var28 = var13.method505(var12, var11, arg6, var9, 3, var10);
+			} else {
+				var28 = new ClientLocAnim(arg1, 3, arg6, var9, var10, var12, var11, var13.field1289, true);
+			}
+			arg5.method50(arg3, arg8, arg7, var14, var28, null, field2819[arg6], 0, var16, var15);
+			if (var13.field1284) {
+				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
+			}
+		} else if (arg4 == 9) {
+			ModelSource var29;
+			if (var13.field1289 == -1 && var13.field1317 == null) {
+				var29 = var13.method505(var12, var11, arg6, var9, arg4, var10);
+			} else {
+				var29 = new ClientLocAnim(arg1, arg4, arg6, var9, var10, var12, var11, var13.field1289, true);
+			}
+			arg5.method93(arg3, arg8, arg7, var14, 1, 1, var29, 0, var16, var15);
+			if (var13.field1284) {
+				arg0.method118(arg8, var13.field1311, var13.field1298, arg6, arg7, var13.field1286);
+			}
+		} else {
+			if (var13.field1313) {
+				if (arg6 == 1) {
+					int var33 = var11;
+					var11 = var12;
+					var12 = var10;
+					var10 = var9;
+					var9 = var33;
+				} else if (arg6 == 2) {
+					int var31 = var11;
+					var11 = var10;
+					var10 = var31;
+					int var32 = var12;
+					var12 = var9;
+					var9 = var32;
+				} else if (arg6 == 3) {
+					int var30 = var11;
+					var11 = var9;
+					var9 = var10;
+					var10 = var12;
+					var12 = var30;
+				}
+			}
+			if (arg4 == 4) {
+				ModelSource var34;
+				if (var13.field1289 == -1 && var13.field1317 == null) {
+					var34 = var13.method505(var12, var11, 0, var9, 4, var10);
+				} else {
+					var34 = new ClientLocAnim(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
+				}
+				arg5.method65(arg3, arg8, arg7, var14, var34, field1740[arg6], arg6 * 512, 0, 0, var16, var15);
+			} else if (arg4 == 5) {
+				int var35 = 16;
+				int var36 = arg5.method78(arg3, arg8, arg7);
+				if (var36 > 0) {
+					var35 = LocType.method389(var36 >> 14 & 0x7FFF).field1288;
+				}
+				ModelSource var37;
+				if (var13.field1289 == -1 && var13.field1317 == null) {
+					var37 = var13.method505(var12, var11, 0, var9, 4, var10);
+				} else {
+					var37 = new ClientLocAnim(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
+				}
+				arg5.method65(arg3, arg8, arg7, var14, var37, field1740[arg6], arg6 * 512, field1595[arg6] * var35, field181[arg6] * var35, var16, var15);
+			} else if (arg4 == 6) {
+				ModelSource var38;
+				if (var13.field1289 == -1 && var13.field1317 == null) {
+					var38 = var13.method505(var12, var11, 0, var9, 4, var10);
+				} else {
+					var38 = new ClientLocAnim(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
+				}
+				arg5.method65(arg3, arg8, arg7, var14, var38, 256, arg6, 0, 0, var16, var15);
+			} else if (arg4 == 7) {
+				ModelSource var39;
+				if (var13.field1289 == -1 && var13.field1317 == null) {
+					var39 = var13.method505(var12, var11, 0, var9, 4, var10);
+				} else {
+					var39 = new ClientLocAnim(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
+				}
+				arg5.method65(arg3, arg8, arg7, var14, var39, 512, arg6, 0, 0, var16, var15);
+			} else if (arg4 == 8) {
+				ModelSource var40;
+				if (var13.field1289 == -1 && var13.field1317 == null) {
+					var40 = var13.method505(var12, var11, 0, var9, 4, var10);
+				} else {
+					var40 = new ClientLocAnim(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
+				}
+				arg5.method65(arg3, arg8, arg7, var14, var40, 768, arg6, 0, 0, var16, var15);
+			}
+		}
 	}
 }

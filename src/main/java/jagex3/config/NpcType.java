@@ -8,6 +8,7 @@ import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.util.JagString;
+import jagex3.var.VarCache;
 
 @ObfuscatedName("h")
 public final class NpcType extends Linkable2 {
@@ -189,9 +190,9 @@ public final class NpcType extends Linkable2 {
 		}
 		int var1 = -1;
 		if (this.field1121 != -1) {
-			var1 = Statics.method480(this.field1121);
+			var1 = VarCache.method480(this.field1121);
 		} else if (this.field1095 != -1) {
-			var1 = Statics.field2803[this.field1095];
+			var1 = VarCache.field2803[this.field1095];
 		}
 		return var1 >= 0 && this.field1136.length > var1 && this.field1136[var1] != -1;
 	}
@@ -331,9 +332,9 @@ public final class NpcType extends Linkable2 {
 	public NpcType method457() {
 		int var1 = -1;
 		if (this.field1121 != -1) {
-			var1 = Statics.method480(this.field1121);
+			var1 = VarCache.method480(this.field1121);
 		} else if (this.field1095 != -1) {
-			var1 = Statics.field2803[this.field1095];
+			var1 = VarCache.field2803[this.field1095];
 		}
 		return var1 < 0 || var1 >= this.field1136.length || this.field1136[var1] == -1 ? null : method864(this.field1136[var1]);
 	}

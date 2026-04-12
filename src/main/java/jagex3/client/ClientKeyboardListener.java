@@ -133,7 +133,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 			if (field2921 == field2630) {
 				return false;
 			} else {
-				Statics.field2885 = field1465[field2921];
+				Client.field2885 = field1465[field2921];
 				Statics.field2920 = field2625[field2921];
 				field2921 = field2921 + 1 & 0x7F;
 				return true;

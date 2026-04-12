@@ -28,6 +28,10 @@ public final class IfType extends Linkable2 {
 	public static IfType[][] field2922;
 	@ObfuscatedName("wc.o")
 	public static boolean[] field3296;
+	@ObfuscatedName("cb.u")
+	public static LruCache field500 = new LruCache(200);
+	@ObfuscatedName("wb.i")
+	public static LruCache field3249 = new LruCache(20);
 	@ObfuscatedName("qd.ac")
 	public JagString field2474 = Statics.field3058;
 
@@ -374,6 +378,26 @@ public final class IfType extends Linkable2 {
 		method985(arg0);
 	}
 
+	@ObfuscatedName("nb.g(I)V")
+	public static void method726() {
+		field500.clear();
+		field2680.clear();
+		field3249.clear();
+	}
+
+	@ObfuscatedName("wc.a(IB)Lqd;")
+	public static IfType method1053(int arg0) {
+		int var1 = arg0 >> 16;
+		int var2 = arg0 & 0xFFFF;
+		if (field2922[var1] == null || field2922[var1][var2] == null) {
+			boolean var3 = method1052(var1);
+			if (!var3) {
+				return null;
+			}
+		}
+		return field2922[var1][var2];
+	}
+
 	@ObfuscatedName("qd.a(IZI)V")
 	public void method850(int arg0, int arg1) {
 		int var3 = this.field2491[arg1];
@@ -571,7 +595,7 @@ public final class IfType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) Statics.field500.find((long) var2);
+		Pix32 var3 = (Pix32) field500.find((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
@@ -579,7 +603,7 @@ public final class IfType extends Linkable2 {
 		if (var4 == null) {
 			Statics.field3116 = true;
 		} else {
-			Statics.field500.method262((long) var2, var4);
+			field500.method262((long) var2, var4);
 		}
 		return var4;
 	}
@@ -596,7 +620,7 @@ public final class IfType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) Statics.field500.find((long) var2);
+		Pix32 var3 = (Pix32) field500.find((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
@@ -604,7 +628,7 @@ public final class IfType extends Linkable2 {
 		if (var4 == null) {
 			Statics.field3116 = true;
 		} else {
-			Statics.field500.method262((long) var2, var4);
+			field500.method262((long) var2, var4);
 		}
 		return var4;
 	}
@@ -784,7 +808,7 @@ public final class IfType extends Linkable2 {
 		if (this.field2448 == 65535) {
 			return null;
 		}
-		PixFont var1 = (PixFont) Statics.field3249.find((long) this.field2448);
+		PixFont var1 = (PixFont) field3249.find((long) this.field2448);
 		if (var1 != null) {
 			return var1;
 		}
@@ -792,7 +816,7 @@ public final class IfType extends Linkable2 {
 		if (var2 == null) {
 			Statics.field3116 = true;
 		} else {
-			Statics.field3249.method262((long) this.field2448, var2);
+			field3249.method262((long) this.field2448, var2);
 		}
 		return var2;
 	}

@@ -8,6 +8,7 @@ import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.util.JagString;
+import jagex3.var.VarCache;
 
 @ObfuscatedName("ia")
 public final class LocType extends Linkable2 {
@@ -561,9 +562,9 @@ public final class LocType extends Linkable2 {
 	public LocType method516() {
 		int var1 = -1;
 		if (this.field1331 != -1) {
-			var1 = Statics.method480(this.field1331);
+			var1 = VarCache.method480(this.field1331);
 		} else if (this.field1319 != -1) {
-			var1 = Statics.field2803[this.field1319];
+			var1 = VarCache.field2803[this.field1319];
 		}
 		return var1 < 0 || this.field1317.length <= var1 || this.field1317[var1] == -1 ? null : method389(this.field1317[var1]);
 	}

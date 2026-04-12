@@ -174,4 +174,16 @@ public class PixLoader {
 		Statics.method449();
 		return var0;
 	}
+
+	@ObfuscatedName("wa.a(Lbd;La;BLa;)Ljd;")
+	public static Pix32 method1038(Js5 arg0, JagString arg1, JagString arg2) {
+		int var3 = arg0.method228(arg1);
+		int var4 = arg0.method224(var3, arg2);
+		return method846(var4, arg0, var3);
+	}
+
+	@ObfuscatedName("j.a(ILbd;I)Le;")
+	public static Pix8 method533(Js5 arg0, int arg1) {
+		return Statics.method148(arg0, arg1) ? method467() : null;
+	}
 }
