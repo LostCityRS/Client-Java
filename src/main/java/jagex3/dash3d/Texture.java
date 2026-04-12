@@ -179,11 +179,6 @@ public final class Texture extends Linkable {
 		this.field2194 = null;
 	}
 
-	@ObfuscatedName("p.b()V")
-	public static void method765() {
-		Statics.field2196 = null;
-	}
-
 	public Texture(Packet arg0) {
 		this.field2192 = arg0.method145();
 		this.field2198 = arg0.method144() == 1;

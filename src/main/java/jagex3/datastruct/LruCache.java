@@ -1,16 +1,12 @@
 package jagex3.datastruct;
 
 import deob.ObfuscatedName;
-import jagex3.io.PacketBit;
 
 @ObfuscatedName("cb")
 public final class LruCache {
 
 	@ObfuscatedName("cb.d")
 	public final Linkable2 field483 = new Linkable2();
-
-	@ObfuscatedName("cb.i")
-	public static PacketBit field488 = new PacketBit(5000);
 
 	@ObfuscatedName("cb.k")
 	public int field490;
@@ -23,24 +19,6 @@ public final class LruCache {
 
 	@ObfuscatedName("cb.n")
 	public final LinkList2 field493 = new LinkList2();
-
-	@ObfuscatedName("cb.o")
-	public static volatile int field494 = 0;
-
-	@ObfuscatedName("cb.p")
-	public static final int field495 = 5063219;
-
-	@ObfuscatedName("cb.q")
-	public static volatile int field496 = -1;
-
-	@ObfuscatedName("cb.s")
-	public static int field498 = 0;
-
-	@ObfuscatedName("cb.u")
-	public static LruCache field500 = new LruCache(200);
-
-	@ObfuscatedName("cb.y")
-	public static boolean field504 = false;
 
 	@ObfuscatedName("cb.a(IJLhb;)V")
 	public void method262(long arg0, Linkable2 arg1) {

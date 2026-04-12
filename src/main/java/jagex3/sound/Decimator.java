@@ -6,12 +6,6 @@ import deob.Statics;
 @ObfuscatedName("qb")
 public final class Decimator {
 
-	@ObfuscatedName("qb.e")
-	public static int field2409 = 0;
-
-	@ObfuscatedName("qb.f")
-	public static int field2410 = 0;
-
 	@ObfuscatedName("qb.g")
 	public int[][] field2411;
 
@@ -20,9 +14,6 @@ public final class Decimator {
 
 	@ObfuscatedName("qb.l")
 	public final int field2416;
-
-	@ObfuscatedName("qb.q")
-	public static int field2421 = -1;
 
 	@ObfuscatedName("qb.a(II)I")
 	public int method840(int arg0) {

@@ -275,14 +275,4 @@ public final class Ground {
 		}
 	}
 
-	@ObfuscatedName("ce.a()V")
-	public static void method276() {
-		field558 = null;
-		field553 = null;
-		field565 = null;
-		field570 = null;
-		field555 = null;
-		field572 = null;
-		field566 = null;
-	}
 }

@@ -1,5 +1,6 @@
 package deob;
 
+import jagex3.callstack.JagException;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
 
@@ -185,7 +186,7 @@ public final class class129 implements Runnable {
 				return;
 			}
 		} catch (Exception var10) {
-			Statics.method214(null, var10);
+			JagException.report(null, var10);
 		}
 	}
 

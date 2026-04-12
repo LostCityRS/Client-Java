@@ -2,34 +2,16 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.dash3d.ModelLit;
-import jagex3.datastruct.LinkList;
+import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 
 @ObfuscatedName("pe")
 public final class IdkType extends Linkable2 {
 
 	@ObfuscatedName("pe.tb")
 	public final int[] field2353 = new int[6];
-
-	@ObfuscatedName("pe.Fb")
-	public static int field2365 = 0;
-
-	@ObfuscatedName("pe.Eb")
-	public static boolean field2364 = false;
-
-	@ObfuscatedName("pe.Jb")
-	public static int[] field2369 = new int[50];
-
-	@ObfuscatedName("pe.yb")
-	public static int field2358 = 0;
-
-	@ObfuscatedName("pe.Lb")
-	public static LinkList field2371 = new LinkList();
-
-	@ObfuscatedName("pe.Ub")
-	public static int field2380 = 0;
 
 	@ObfuscatedName("pe.Gb")
 	public int field2366 = -1;
@@ -45,6 +27,28 @@ public final class IdkType extends Linkable2 {
 
 	@ObfuscatedName("pe.Hb")
 	public int[] field2367;
+
+	@ObfuscatedName("se.a(ILbd;Lbd;)V")
+	public static void init(Js5 arg0, Js5 arg1) {
+		Statics.field1583 = arg1;
+		Statics.field2433 = arg0;
+		Statics.field974 = Statics.field2433.method235(3);
+	}
+
+	@ObfuscatedName("ba.a(BI)Lpe;")
+	public static IdkType method177(int arg0) {
+		IdkType var1 = (IdkType) Statics.field3282.method263((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = Statics.field2433.method217(arg0, 3);
+		IdkType var3 = new IdkType();
+		if (var2 != null) {
+			var3.method820(new Packet(var2));
+		}
+		Statics.field3282.method262((long) arg0, var3);
+		return var3;
+	}
 
 	@ObfuscatedName("pe.a(BLba;)V")
 	public void method820(Packet arg0) {
@@ -104,15 +108,15 @@ public final class IdkType extends Linkable2 {
 	}
 
 	@ObfuscatedName("pe.b(B)Lpa;")
-	public ModelLit method827() {
-		ModelLit[] var1 = new ModelLit[5];
+	public Model method827() {
+		Model[] var1 = new Model[5];
 		int var2 = 0;
 		for (int var3 = 0; var3 < 5; var3++) {
 			if (this.field2377[var3] != -1) {
-				var1[var2++] = ModelLit.method798(Statics.field1583, this.field2377[var3]);
+				var1[var2++] = Model.method798(Statics.field1583, this.field2377[var3]);
 			}
 		}
-		ModelLit var4 = new ModelLit(var1, var2);
+		Model var4 = new Model(var1, var2);
 		for (int var5 = 0; var5 < 6 && this.field2353[var5] != 0; var5++) {
 			var4.method771(this.field2353[var5], this.field2361[var5]);
 		}
@@ -120,19 +124,19 @@ public final class IdkType extends Linkable2 {
 	}
 
 	@ObfuscatedName("pe.d(Z)Lpa;")
-	public ModelLit method828() {
+	public Model method828() {
 		if (this.field2367 == null) {
 			return null;
 		}
-		ModelLit[] var1 = new ModelLit[this.field2367.length];
+		Model[] var1 = new Model[this.field2367.length];
 		for (int var2 = 0; var2 < this.field2367.length; var2++) {
-			var1[var2] = ModelLit.method798(Statics.field1583, this.field2367[var2]);
+			var1[var2] = Model.method798(Statics.field1583, this.field2367[var2]);
 		}
-		ModelLit var3;
+		Model var3;
 		if (var1.length == 1) {
 			var3 = var1[0];
 		} else {
-			var3 = new ModelLit(var1, var1.length);
+			var3 = new Model(var1, var1.length);
 		}
 		for (int var4 = 0; var4 < 6 && this.field2353[var4] != 0; var4++) {
 			var3.method771(this.field2353[var4], this.field2361[var4]);

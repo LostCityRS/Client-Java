@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.config.SeqType;
 import jagex3.config.SpotType;
 
@@ -10,9 +9,6 @@ public final class MapSpotAnim extends ModelSource {
 
 	@ObfuscatedName("tb.cc")
 	public final int field2905;
-
-	@ObfuscatedName("tb.Rb")
-	public static int[][] field2894 = new int[][] { { 6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 2983, 54193 }, { 8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003, 25239 }, { 25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003 }, { 4626, 11146, 6439, 12, 4758, 10270 }, { 4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574 } };
 
 	@ObfuscatedName("tb.Tb")
 	public int field2896 = 0;
@@ -48,20 +44,20 @@ public final class MapSpotAnim extends ModelSource {
 		this.field2887 = arg4;
 		this.field2905 = arg0;
 		this.field2895 = arg1;
-		int var8 = Statics.method713(this.field2905).field786;
+		int var8 = SpotType.method713(this.field2905).field786;
 		if (var8 == -1) {
 			this.field2893 = true;
 		} else {
 			this.field2893 = false;
-			this.field2898 = Statics.method103(var8);
+			this.field2898 = SeqType.method103(var8);
 		}
 	}
 
 	@ObfuscatedName("tb.f(I)Lpa;")
 	@Override
-	public ModelLit method41() {
-		SpotType var1 = Statics.method713(this.field2905);
-		ModelLit var2;
+	public Model method41() {
+		SpotType var1 = SpotType.method713(this.field2905);
+		Model var2;
 		if (this.field2893) {
 			var2 = var1.method371(-1);
 		} else {

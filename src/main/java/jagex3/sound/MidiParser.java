@@ -208,8 +208,4 @@ public final class MidiParser {
 		this.field752.field267 = this.field754[arg0];
 	}
 
-	@ObfuscatedName("ea.h()V")
-	public static void method351() {
-		field758 = null;
-	}
 }

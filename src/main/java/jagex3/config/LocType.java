@@ -1,12 +1,10 @@
 package jagex3.config;
 
 import deob.*;
-import jagex3.dash3d.ModelLit;
-import jagex3.dash3d.Sprite;
-import jagex3.dash3d.TextureManager;
-import jagex3.datastruct.HashTable;
+import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 import jagex3.util.JagString;
 
 @ObfuscatedName("ia")
@@ -33,14 +31,8 @@ public final class LocType extends Linkable2 {
 	@ObfuscatedName("ia.kc")
 	public int field1325 = 0;
 
-	@ObfuscatedName("ia.lc")
-	public static int field1326 = 0;
-
 	@ObfuscatedName("ia.mc")
 	public int field1327 = 0;
-
-	@ObfuscatedName("ia.nc")
-	public static HashTable field1328 = new HashTable(4096);
 
 	@ObfuscatedName("ia.oc")
 	public int field1329 = -1;
@@ -68,18 +60,6 @@ public final class LocType extends Linkable2 {
 
 	@ObfuscatedName("ia.wb")
 	public int field1285 = 0;
-
-	@ObfuscatedName("ia.Bc")
-	public static int field1342 = 0;
-
-	@ObfuscatedName("ia.zc")
-	public static int field1340 = 0;
-
-	@ObfuscatedName("ia.Dc")
-	public static long field1344 = 0L;
-
-	@ObfuscatedName("ia.Ac")
-	public static int field1341 = 0;
 
 	@ObfuscatedName("ia.Fb")
 	public int field1294 = -1;
@@ -153,24 +133,52 @@ public final class LocType extends Linkable2 {
 	@ObfuscatedName("ia.Tb")
 	public int[] field1308;
 
+	@ObfuscatedName("se.a(ILbd;ZLbd;)V")
+	public static void init(Js5 arg0, boolean arg1, Js5 arg2) {
+		Statics.field698 = arg2;
+		Statics.field1861 = arg1;
+		Statics.field51 = arg0;
+	}
+
+	@ObfuscatedName("fa.b(IB)Lia;")
+	public static LocType method389(int arg0) {
+		LocType var1 = (LocType) class113.field2788.method263((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = Statics.field698.method217(arg0, 6);
+		LocType var3 = new LocType();
+		var3.field1321 = arg0;
+		if (var2 != null) {
+			var3.method508(new Packet(var2));
+		}
+		var3.method510();
+		if (var3.field1301) {
+			var3.field1284 = false;
+			var3.field1311 = false;
+		}
+		class113.field2788.method262((long) arg0, var3);
+		return var3;
+	}
+
 	@ObfuscatedName("ia.a(IIIIIBI)Lpa;")
-	public ModelLit method505(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public Model method505(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		long var7;
 		if (this.field1305 == null) {
 			var7 = (this.field1321 << 10) + arg2;
 		} else {
 			var7 = (this.field1321 << 10) + (arg4 << 3) + arg2;
 		}
-		ModelLit var9 = (ModelLit) Sprite.field981.method263(var7);
+		Model var9 = (Model) Statics.field981.method263(var7);
 		if (var9 == null) {
 			var9 = this.method511(!this.field1303, false, arg2, arg4);
 			if (var9 == null) {
 				return null;
 			}
-			Sprite.field981.method262(var7, var9);
+			Statics.field981.method262(var7, var9);
 		}
 		if (this.field1313 || this.field1303) {
-			var9 = new ModelLit(var9, this.field1313, this.field1303);
+			var9 = new Model(var9, this.field1313, this.field1303);
 		}
 		if (this.field1313) {
 			int var10 = (arg0 + arg5 + arg1 + arg3) / 4;
@@ -193,7 +201,7 @@ public final class LocType extends Linkable2 {
 		}
 		for (int var1 = 0; var1 < this.field1317.length; var1++) {
 			if (this.field1317[var1] != -1) {
-				LocType var2 = Statics.method389(this.field1317[var1]);
+				LocType var2 = method389(this.field1317[var1]);
 				if (var2.field1296 != -1 || var2.field1306 != null) {
 					return true;
 				}
@@ -232,8 +240,8 @@ public final class LocType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ia.a(ZBZII)Lpa;")
-	public ModelLit method511(boolean arg0, boolean arg1, int arg2, int arg3) {
-		ModelLit var5 = null;
+	public Model method511(boolean arg0, boolean arg1, int arg2, int arg3) {
+		Model var5 = null;
 		if (this.field1305 == null) {
 			if (arg3 != 10) {
 				return null;
@@ -248,9 +256,9 @@ public final class LocType extends Linkable2 {
 				if (var6) {
 					var9 += 65536;
 				}
-				var5 = (ModelLit) class93.field2322.method263((long) var9);
+				var5 = (Model) class93.field2322.method263((long) var9);
 				if (var5 == null) {
-					var5 = ModelLit.method798(Statics.field51, var9 & 0xFFFF);
+					var5 = Model.method798(Statics.field51, var9 & 0xFFFF);
 					if (var5 == null) {
 						return null;
 					}
@@ -264,7 +272,7 @@ public final class LocType extends Linkable2 {
 				}
 			}
 			if (var7 > 1) {
-				var5 = new ModelLit(class104.field2623, var7);
+				var5 = new Model(class104.field2623, var7);
 			}
 		} else {
 			int var10 = -1;
@@ -282,9 +290,9 @@ public final class LocType extends Linkable2 {
 			if (var13) {
 				var12 += 65536;
 			}
-			var5 = (ModelLit) class93.field2322.method263((long) var12);
+			var5 = (Model) class93.field2322.method263((long) var12);
 			if (var5 == null) {
-				var5 = ModelLit.method798(Statics.field51, var12 & 0xFFFF);
+				var5 = Model.method798(Statics.field51, var12 & 0xFFFF);
 				if (var5 == null) {
 					return null;
 				}
@@ -306,7 +314,7 @@ public final class LocType extends Linkable2 {
 		} else {
 			var15 = true;
 		}
-		ModelLit var16 = new ModelLit(var5, arg2 == 0 && !var14 && !var15, this.field1299 == null, true);
+		Model var16 = new Model(var5, arg2 == 0 && !var14 && !var15, this.field1299 == null, true);
 		int var17 = arg2 & 0x3;
 		if (var17 == 1) {
 			var16.method781();
@@ -334,14 +342,14 @@ public final class LocType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ia.a(IIIIIILhe;II)Lpa;")
-	public ModelLit method512(int arg0, int arg1, int arg2, int arg3, int arg4, SeqType arg5, int arg6, int arg7) {
+	public Model method512(int arg0, int arg1, int arg2, int arg3, int arg4, SeqType arg5, int arg6, int arg7) {
 		long var9;
 		if (this.field1305 == null) {
 			var9 = (this.field1321 << 10) + arg4;
 		} else {
 			var9 = (this.field1321 << 10) + (arg3 << 3) + arg4;
 		}
-		ModelLit var11 = (ModelLit) class99.field2428.method263(var9);
+		Model var11 = (Model) class99.field2428.method263(var9);
 		if (var11 == null) {
 			var11 = this.method511(true, true, arg4, arg3);
 			if (var11 == null) {
@@ -352,7 +360,7 @@ public final class LocType extends Linkable2 {
 		if (arg5 == null && !this.field1313) {
 			return var11;
 		}
-		ModelLit var12;
+		Model var12;
 		if (arg5 == null) {
 			var12 = var11.method785(true);
 		} else {
@@ -377,7 +385,7 @@ public final class LocType extends Linkable2 {
 		if (arg1 == 1) {
 			int var11 = arg0.method144();
 			if (var11 > 0) {
-				if (this.field1308 == null || TextureManager.field1861) {
+				if (this.field1308 == null || Statics.field1861) {
 					this.field1305 = new int[var11];
 					this.field1308 = new int[var11];
 					for (int var12 = 0; var12 < var11; var12++) {
@@ -393,7 +401,7 @@ public final class LocType extends Linkable2 {
 		} else if (arg1 == 5) {
 			int var9 = arg0.method144();
 			if (var9 > 0) {
-				if (this.field1308 == null || TextureManager.field1861) {
+				if (this.field1308 == null || Statics.field1861) {
 					this.field1305 = null;
 					this.field1308 = new int[var9];
 					for (int var10 = 0; var10 < var9; var10++) {
@@ -533,7 +541,7 @@ public final class LocType extends Linkable2 {
 		} else if (this.field1319 != -1) {
 			var1 = class113.field2803[this.field1319];
 		}
-		return var1 < 0 || this.field1317.length <= var1 || this.field1317[var1] == -1 ? null : Statics.method389(this.field1317[var1]);
+		return var1 < 0 || this.field1317.length <= var1 || this.field1317[var1] == -1 ? null : method389(this.field1317[var1]);
 	}
 
 	@ObfuscatedName("ia.c(B)Z")

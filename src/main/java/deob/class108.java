@@ -6,9 +6,6 @@ public final class class108 {
 	@ObfuscatedName("s.c")
 	public static int field2704 = 0;
 
-	@ObfuscatedName("s.j")
-	public static volatile int field2711 = 0;
-
 	@ObfuscatedName("s.k")
 	public static int field2712 = -1;
 

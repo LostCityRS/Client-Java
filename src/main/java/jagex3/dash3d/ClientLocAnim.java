@@ -2,10 +2,8 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.client.ClientMouseListener;
 import jagex3.config.LocType;
 import jagex3.config.SeqType;
-import jagex3.datastruct.Linkable;
 
 @ObfuscatedName("j")
 public final class ClientLocAnim extends ModelSource {
@@ -15,15 +13,6 @@ public final class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("j.cc")
 	public final int field1428;
-
-	@ObfuscatedName("j.hc")
-	public static int field1433 = 0;
-
-	@ObfuscatedName("j.pc")
-	public static int field1441 = 1;
-
-	@ObfuscatedName("j.Mb")
-	public static ClientMouseListener field1412 = new ClientMouseListener();
 
 	@ObfuscatedName("j.Wb")
 	public final int field1422;
@@ -51,9 +40,9 @@ public final class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("j.f(I)Lpa;")
 	@Override
-	public ModelLit method41() {
+	public Model method41() {
 		if (this.field1427 != null) {
-			int var1 = Linkable.field2063 - this.field1417;
+			int var1 = Statics.field2063 - this.field1417;
 			if (var1 > 100 && this.field1427.field1254 > 0) {
 				var1 = 100;
 			}
@@ -70,9 +59,9 @@ public final class ClientLocAnim extends ModelSource {
 				} while (this.field1419 >= 0 && this.field1427.field1242.length > this.field1419);
 				this.field1427 = null;
 			}
-			this.field1417 = Linkable.field2063 - var1;
+			this.field1417 = Statics.field2063 - var1;
 		}
-		LocType var2 = Statics.method389(this.field1428);
+		LocType var2 = LocType.method389(this.field1428);
 		if (var2.field1317 != null) {
 			var2 = var2.method516();
 		}
@@ -88,9 +77,9 @@ public final class ClientLocAnim extends ModelSource {
 		this.field1409 = arg5;
 		this.field1414 = arg1;
 		if (arg7 != -1) {
-			this.field1427 = Statics.method103(arg7);
+			this.field1427 = SeqType.method103(arg7);
 			this.field1419 = 0;
-			this.field1417 = Linkable.field2063 - 1;
+			this.field1417 = Statics.field2063 - 1;
 			if (arg8 && this.field1427.field1254 != -1) {
 				this.field1419 = (int) ((double) this.field1427.field1242.length * Math.random());
 				this.field1417 -= (int) (Math.random() * (double) this.field1427.field1223[this.field1419]);

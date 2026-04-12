@@ -16,14 +16,8 @@ public final class AnimBase extends Linkable {
 	@ObfuscatedName("va.jb")
 	public final int field3114;
 
-	@ObfuscatedName("va.lb")
-	public static boolean field3116 = false;
-
 	@ObfuscatedName("va.mb")
 	public final int[] field3117;
-
-	@ObfuscatedName("va.rb")
-	public static int field3122 = 0;
 
 	public AnimBase(int arg0, byte[] arg1) {
 		this.field3114 = arg0;

@@ -18,12 +18,6 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 	@ObfuscatedName("ga.t")
 	public PrivilegedRequest field1009;
 
-	@ObfuscatedName("ga.D")
-	public static int[] field1019 = new int[5];
-
-	@ObfuscatedName("ga.E")
-	public static int[] field1020 = new int[2000];
-
 	@ObfuscatedName("ga.R")
 	public int field1033;
 
@@ -43,7 +37,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 	public void method305() {
 		if (this.field1008) {
 			try {
-				Statics.method629(this.field1045.field1719, "midibox.src=\"c:/silence.mid\";");
+				Statics.method629(this.field1045.applet, "midibox.src=\"c:/silence.mid\";");
 			} catch (Throwable var1) {
 			}
 			this.field1008 = false;
@@ -63,7 +57,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 				var1.method832(this.field1039, 0, this.field1039.length);
 				var1.method831();
 				try {
-					Statics.method629(this.field1045.field1719, "midibox.loop=" + (this.field1025 ? "\"infinite\"" : "0") + "; midibox.src=\"" + var1.method829().getPath().replace('\\', '/') + "\"; midibox.volume=" + this.field1033 + ";");
+					Statics.method629(this.field1045.applet, "midibox.loop=" + (this.field1025 ? "\"infinite\"" : "0") + "; midibox.src=\"" + var1.method829().getPath().replace('\\', '/') + "\"; midibox.volume=" + this.field1033 + ";");
 					this.field1008 = true;
 				} catch (Throwable var3) {
 				}
@@ -93,7 +87,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 			this.field1033 = var3;
 		} else if (this.field1008) {
 			try {
-				Statics.method629(this.field1045.field1719, "midibox.volume=" + var3 + ";");
+				Statics.method629(this.field1045.applet, "midibox.volume=" + var3 + ";");
 			} catch (Throwable var4) {
 			}
 		}

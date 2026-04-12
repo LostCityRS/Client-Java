@@ -315,29 +315,6 @@ public final class PixFont extends Pix2D {
 		}
 	}
 
-	@ObfuscatedName("bc.d()V")
-	public static void method199() {
-		field343 = null;
-		field344 = null;
-		field335 = null;
-		field357 = null;
-		field333 = null;
-		field336 = null;
-		field338 = null;
-		field346 = null;
-		field352 = null;
-		field353 = null;
-		field339 = null;
-		field334 = null;
-		field345 = null;
-		field349 = null;
-		field340 = null;
-		field341 = null;
-		field356 = null;
-		field348 = null;
-		field337 = null;
-	}
-
 	@ObfuscatedName("bc.a(La;IIIZ)V")
 	public void method200(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		this.method206(arg0, arg1 - this.method204(arg0), arg2, arg3, arg4);

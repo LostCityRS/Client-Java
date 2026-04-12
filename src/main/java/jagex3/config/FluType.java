@@ -1,14 +1,13 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.datastruct.Linkable2;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 
 @ObfuscatedName("md")
 public final class FluType extends Linkable2 {
-
-	@ObfuscatedName("md.sb")
-	public static int field1881 = -1;
 
 	@ObfuscatedName("md.tb")
 	public int field1882;
@@ -24,6 +23,11 @@ public final class FluType extends Linkable2 {
 
 	@ObfuscatedName("md.Eb")
 	public int field1893;
+
+	@ObfuscatedName("md.a(Lbd;B)V")
+	public static void init(Js5 arg0) {
+		Statics.field2024 = arg0;
+	}
 
 	@ObfuscatedName("md.b(IB)V")
 	public void method699(int arg0) {

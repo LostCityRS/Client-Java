@@ -1,5 +1,7 @@
 package deob;
 
+import jagex3.sound.PcmPlayer;
+
 import java.util.Calendar;
 
 @ObfuscatedName("ca")
@@ -24,8 +26,8 @@ public class class14 {
 	public static int field475 = 0;
 
 	public class14(int arg0) {
-		Statics.field192 = arg0;
-		Statics.field462 = Statics.method869();
+		PcmPlayer.frequency = arg0;
+		Statics.field462 = Statics.currentTime();
 	}
 
 	@ObfuscatedName("ca.a(J)V")

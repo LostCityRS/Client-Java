@@ -7,7 +7,7 @@ import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("pa")
-public final class ModelLit extends ModelSource {
+public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.ac")
 	public int[] field2219;
@@ -58,7 +58,7 @@ public final class ModelLit extends ModelSource {
 	public int[] field2235;
 
 	@ObfuscatedName("pa.rc")
-	public static ModelLit field2236 = new ModelLit();
+	public static Model field2236 = new Model();
 
 	@ObfuscatedName("pa.sc")
 	public int[] field2237;
@@ -76,7 +76,7 @@ public final class ModelLit extends ModelSource {
 	public static int[] field2241 = new int[1600];
 
 	@ObfuscatedName("pa.Sb")
-	public static ModelLit field2211 = new ModelLit();
+	public static Model field2211 = new Model();
 
 	@ObfuscatedName("pa.Bc")
 	public static int[] field2246 = new int[10];
@@ -377,38 +377,6 @@ public final class ModelLit extends ModelSource {
 		}
 	}
 
-	@ObfuscatedName("pa.b()V")
-	public static void method768() {
-		field2211 = null;
-		field2233 = null;
-		field2236 = null;
-		field2255 = null;
-		field2242 = null;
-		field2265 = null;
-		field2250 = null;
-		field2245 = null;
-		field2253 = null;
-		field2266 = null;
-		field2244 = null;
-		field2264 = null;
-		field2241 = null;
-		field2251 = null;
-		field2267 = null;
-		field2249 = null;
-		field2260 = null;
-		field2257 = null;
-		field2262 = null;
-		field2268 = null;
-		field2246 = null;
-		field2263 = null;
-		field2252 = null;
-		field2256 = null;
-		field2258 = null;
-		field2243 = null;
-		field2269 = null;
-		field2240 = null;
-	}
-
 	@ObfuscatedName("pa.a(IIIIIIII)V")
 	public void method769(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (this.field2210 != 2 && this.field2210 != 1) {
@@ -564,7 +532,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.b(Z)Lpa;")
-	public ModelLit method774(boolean arg0) {
+	public Model method774(boolean arg0) {
 		if (!arg0 && field2255.length < this.field2209) {
 			field2255 = new int[this.field2209 + 100];
 		}
@@ -675,7 +643,7 @@ public final class ModelLit extends ModelSource {
 		}
 	}
 
-	public ModelLit(byte[] arg0) {
+	public Model(byte[] arg0) {
 		Packet var2 = new Packet(arg0);
 		Packet var3 = new Packet(arg0);
 		Packet var4 = new Packet(arg0);
@@ -865,10 +833,10 @@ public final class ModelLit extends ModelSource {
 		}
 	}
 
-	public ModelLit() {
+	public Model() {
 	}
 
-	public ModelLit(ModelLit[] arg0, int arg1) {
+	public Model(Model[] arg0, int arg1) {
 		boolean var3 = false;
 		boolean var4 = false;
 		boolean var5 = false;
@@ -878,7 +846,7 @@ public final class ModelLit extends ModelSource {
 		this.field2221 = 0;
 		this.field2238 = -1;
 		for (int var7 = 0; var7 < arg1; var7++) {
-			ModelLit var8 = arg0[var7];
+			Model var8 = arg0[var7];
 			if (var8 != null) {
 				this.field2208 += var8.field2208;
 				this.field2209 += var8.field2209;
@@ -926,7 +894,7 @@ public final class ModelLit extends ModelSource {
 		this.field2221 = 0;
 		int var9 = 0;
 		for (int var10 = 0; var10 < arg1; var10++) {
-			ModelLit var11 = arg0[var10];
+			Model var11 = arg0[var10];
 			if (var11 != null) {
 				for (int var12 = 0; var12 < var11.field2209; var12++) {
 					if (var3) {
@@ -974,7 +942,7 @@ public final class ModelLit extends ModelSource {
 		}
 	}
 
-	public ModelLit(ModelLit[] arg0, int arg1, boolean arg2) {
+	public Model(Model[] arg0, int arg1, boolean arg2) {
 		boolean var4 = false;
 		boolean var5 = false;
 		boolean var6 = false;
@@ -984,7 +952,7 @@ public final class ModelLit extends ModelSource {
 		this.field2221 = 0;
 		this.field2238 = -1;
 		for (int var8 = 0; var8 < 2; var8++) {
-			ModelLit var9 = arg0[var8];
+			Model var9 = arg0[var8];
 			if (var9 != null) {
 				this.field2208 += var9.field2208;
 				this.field2209 += var9.field2209;
@@ -1033,7 +1001,7 @@ public final class ModelLit extends ModelSource {
 		this.field2221 = 0;
 		int var10 = 0;
 		for (int var11 = 0; var11 < 2; var11++) {
-			ModelLit var12 = arg0[var11];
+			Model var12 = arg0[var11];
 			if (var12 != null) {
 				int var13 = this.field2208;
 				for (int var14 = 0; var14 < var12.field2208; var14++) {
@@ -1090,7 +1058,7 @@ public final class ModelLit extends ModelSource {
 		}
 	}
 
-	public ModelLit(ModelLit arg0, boolean arg1, boolean arg2, boolean arg3) {
+	public Model(Model arg0, boolean arg1, boolean arg2, boolean arg3) {
 		this.field2208 = arg0.field2208;
 		this.field2209 = arg0.field2209;
 		this.field2221 = arg0.field2221;
@@ -1131,7 +1099,7 @@ public final class ModelLit extends ModelSource {
 		this.field2205 = arg0.field2205;
 	}
 
-	public ModelLit(ModelLit arg0, boolean arg1, boolean arg2) {
+	public Model(Model arg0, boolean arg1, boolean arg2) {
 		this.field2208 = arg0.field2208;
 		this.field2209 = arg0.field2209;
 		this.field2221 = arg0.field2221;
@@ -1792,7 +1760,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.c(Z)Lpa;")
-	public ModelLit method785(boolean arg0) {
+	public Model method785(boolean arg0) {
 		if (!arg0 && field2233.length < this.field2209) {
 			field2233 = new int[this.field2209 + 100];
 		}
@@ -1824,7 +1792,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.a(ZLpa;[I)Lpa;")
-	public ModelLit method788(boolean arg0, ModelLit arg1, int[] arg2) {
+	public Model method788(boolean arg0, Model arg1, int[] arg2) {
 		arg1.field2208 = this.field2208;
 		arg1.field2209 = this.field2209;
 		arg1.field2221 = this.field2221;
@@ -2028,7 +1996,7 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.a(Lpa;I)I")
-	public int method797(ModelLit arg0, int arg1) {
+	public int method797(Model arg0, int arg1) {
 		int var3 = -1;
 		int var4 = arg0.field2229[arg1];
 		int var5 = arg0.field2228[arg1];
@@ -2052,8 +2020,8 @@ public final class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.a(Lbd;II)Lpa;")
-	public static ModelLit method798(Js5 arg0, int arg1) {
+	public static Model method798(Js5 arg0, int arg1) {
 		byte[] var2 = arg0.method217(0, arg1);
-		return var2 == null ? null : new ModelLit(var2);
+		return var2 == null ? null : new Model(var2);
 	}
 }

@@ -299,11 +299,6 @@ public class Pix2D extends Linkable2 {
 		}
 	}
 
-	@ObfuscatedName("sc.c()V")
-	public static void method924() {
-		Statics.field2747 = null;
-	}
-
 	@ObfuscatedName("sc.d(IIII)V")
 	public static void method925(int arg0, int arg1, int arg2, int arg3) {
 		if (arg0 < field2752 || arg0 >= field2753) {

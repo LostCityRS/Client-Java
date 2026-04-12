@@ -3,7 +3,6 @@ package jagex3.js5;
 import deob.ObfuscatedName;
 import deob.Statics;
 import deob.class131;
-import jagex3.dash3d.ClientNpc;
 import jagex3.io.DataFile;
 
 @ObfuscatedName("u")
@@ -32,12 +31,6 @@ public final class Js5Loader extends Js5 {
 
 	@ObfuscatedName("u.vb")
 	public final DataFile field2991;
-
-	@ObfuscatedName("u.wb")
-	public static ClientNpc[] field2992 = new ClientNpc[32768];
-
-	@ObfuscatedName("u.Cb")
-	public static int field2998 = -1;
 
 	@ObfuscatedName("u.a(ZZIZ[B)V")
 	public void method976(boolean arg0, int arg1, boolean arg2, byte[] arg3) {

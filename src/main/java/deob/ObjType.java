@@ -1,13 +1,13 @@
 package deob;
 
-import jagex3.client.ClientMouseListener;
-import jagex3.dash3d.ModelLit;
+import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 import jagex3.util.JagString;
 
 @ObfuscatedName("ta")
-public final class class115 extends Linkable2 {
+public final class ObjType extends Linkable2 {
 
 	@ObfuscatedName("ta.ac")
 	public int field2860 = 0;
@@ -135,6 +135,40 @@ public final class class115 extends Linkable2 {
 	@ObfuscatedName("ta.Nb")
 	public int[] field2847;
 
+	@ObfuscatedName("oe.a(II)Lta;")
+	public static ObjType method760(int arg0) {
+		ObjType var1 = (ObjType) Statics.field1066.method263((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = Statics.field1405.method217(arg0, 10);
+		ObjType var3 = new ObjType();
+		var3.field2883 = arg0;
+		if (var2 != null) {
+			var3.method952(new Packet(var2));
+		}
+		var3.method942();
+		if (var3.field2838 != -1) {
+			var3.method953(method760(var3.field2838), method760(var3.field2843));
+		}
+		if (!Statics.field2384 && var3.field2880) {
+			var3.field2830 = null;
+			var3.field2854 = 0;
+			var3.field2835 = null;
+			var3.field2827 = Statics.field1501;
+		}
+		Statics.field1066.method262((long) arg0, var3);
+		return var3;
+	}
+
+	@ObfuscatedName("oa.a(Lbd;ZLbd;I)V")
+	public static void init(Js5 arg0, boolean arg1, Js5 arg2) {
+		Statics.field2384 = arg1;
+		Statics.field458 = arg2;
+		Statics.field1405 = arg0;
+		Statics.field1590 = Statics.field1405.method235(10);
+	}
+
 	@ObfuscatedName("ta.a(BZ)Z")
 	public boolean method939(boolean arg0) {
 		int var2 = this.field2831;
@@ -183,7 +217,7 @@ public final class class115 extends Linkable2 {
 	}
 
 	@ObfuscatedName("ta.a(ZI)Lpa;")
-	public ModelLit method941(boolean arg0) {
+	public Model method941(boolean arg0) {
 		int var2 = this.field2867;
 		int var3 = this.field2851;
 		int var4 = this.field2855;
@@ -195,16 +229,16 @@ public final class class115 extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		ModelLit var5 = ModelLit.method798(Statics.field458, var2);
+		Model var5 = Model.method798(Statics.field458, var2);
 		if (var3 != -1) {
-			ModelLit var6 = ModelLit.method798(Statics.field458, var3);
+			Model var6 = Model.method798(Statics.field458, var3);
 			if (var4 == -1) {
-				ModelLit[] var7 = new ModelLit[] { var5, var6 };
-				var5 = new ModelLit(var7, 2);
+				Model[] var7 = new Model[] { var5, var6 };
+				var5 = new Model(var7, 2);
 			} else {
-				ModelLit var8 = ModelLit.method798(Statics.field458, var4);
-				ModelLit[] var9 = new ModelLit[] { var5, var6, var8 };
-				var5 = new ModelLit(var9, 3);
+				Model var8 = Model.method798(Statics.field458, var4);
+				Model[] var9 = new Model[] { var5, var6, var8 };
+				var5 = new Model(var9, 3);
 			}
 		}
 		if (!arg0 && this.field2849 != 0) {
@@ -226,7 +260,7 @@ public final class class115 extends Linkable2 {
 	}
 
 	@ObfuscatedName("ta.a(BI)Lta;")
-	public class115 method944(int arg0) {
+	public ObjType method944(int arg0) {
 		if (this.field2862 != null && arg0 > 1) {
 			int var2 = -1;
 			for (int var3 = 0; var3 < 10; var3++) {
@@ -235,14 +269,14 @@ public final class class115 extends Linkable2 {
 				}
 			}
 			if (var2 != -1) {
-				return Statics.method760(var2);
+				return method760(var2);
 			}
 		}
 		return this;
 	}
 
 	@ObfuscatedName("ta.b(ZB)Lpa;")
-	public ModelLit method948(boolean arg0) {
+	public Model method948(boolean arg0) {
 		int var2 = this.field2831;
 		int var3 = this.field2872;
 		if (arg0) {
@@ -252,11 +286,11 @@ public final class class115 extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		ModelLit var4 = ModelLit.method798(Statics.field458, var2);
+		Model var4 = Model.method798(Statics.field458, var2);
 		if (var3 != -1) {
-			ModelLit var5 = ModelLit.method798(Statics.field458, var3);
-			ModelLit[] var6 = new ModelLit[] { var4, var5 };
-			var4 = new ModelLit(var6, 2);
+			Model var5 = Model.method798(Statics.field458, var3);
+			Model[] var6 = new Model[] { var4, var5 };
+			var4 = new Model(var6, 2);
 		}
 		if (this.field2834 != null) {
 			for (int var7 = 0; var7 < this.field2834.length; var7++) {
@@ -371,7 +405,7 @@ public final class class115 extends Linkable2 {
 	}
 
 	@ObfuscatedName("ta.a(Lta;ZLta;)V")
-	public void method953(class115 arg0, class115 arg1) {
+	public void method953(ObjType arg0, ObjType arg1) {
 		this.field2875 = arg0.field2875;
 		this.field2837 = arg0.field2837;
 		this.field2858 = arg0.field2858;
@@ -388,7 +422,7 @@ public final class class115 extends Linkable2 {
 	}
 
 	@ObfuscatedName("ta.a(ZII)Lpa;")
-	public ModelLit method954(boolean arg0, int arg1) {
+	public Model method954(boolean arg0, int arg1) {
 		if (this.field2862 != null && arg1 > 1) {
 			int var3 = -1;
 			for (int var4 = 0; var4 < 10; var4++) {
@@ -397,16 +431,16 @@ public final class class115 extends Linkable2 {
 				}
 			}
 			if (var3 != -1) {
-				return Statics.method760(var3).method954(arg0, 1);
+				return method760(var3).method954(arg0, 1);
 			}
 		}
 		if (arg0) {
-			ModelLit var5 = (ModelLit) ClientMouseListener.field3035.method263((long) this.field2883);
+			Model var5 = (Model) Statics.field3035.method263((long) this.field2883);
 			if (var5 != null) {
 				return var5;
 			}
 		}
-		ModelLit var6 = ModelLit.method798(Statics.field458, this.field2836);
+		Model var6 = Model.method798(Statics.field458, this.field2836);
 		if (var6 == null) {
 			return null;
 		}
@@ -421,7 +455,7 @@ public final class class115 extends Linkable2 {
 		if (arg0) {
 			var6.method770(this.field2856 + 64, this.field2871 + 768, -50, -10, -50, true);
 			var6.field2205 = true;
-			ClientMouseListener.field3035.method262((long) this.field2883, var6);
+			Statics.field3035.method262((long) this.field2883, var6);
 		}
 		return var6;
 	}

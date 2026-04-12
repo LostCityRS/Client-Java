@@ -1,18 +1,16 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
+import deob.ObjType;
 import deob.Statics;
 import deob.class106;
-import deob.class115;
-import jagex3.dash3d.AnimBase;
-import jagex3.dash3d.ModelLit;
+import jagex3.dash3d.Model;
 import jagex3.dash3d.PlayerModel;
 import jagex3.datastruct.Linkable2;
-import jagex3.datastruct.LruCache;
 import jagex3.graphics.Pix32;
 import jagex3.graphics.PixFont;
-import jagex3.io.BufferedRandomAccessFile;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 import jagex3.util.JagString;
 
 @ObfuscatedName("qd")
@@ -116,9 +114,6 @@ public final class IfType extends Linkable2 {
 
 	@ObfuscatedName("qd.vc")
 	public int field2495 = -1;
-
-	@ObfuscatedName("qd.vd")
-	public static int field2547 = 0;
 
 	@ObfuscatedName("qd.wc")
 	public int field2496 = 0;
@@ -293,6 +288,15 @@ public final class IfType extends Linkable2 {
 
 	@ObfuscatedName("qd.Cd")
 	public int[][] field2554;
+
+	@ObfuscatedName("d.a(Lbd;Lbd;Lbd;B)V")
+	public static void init(Js5 arg0, Js5 arg1, Js5 arg2) {
+		Statics.field503 = arg2;
+		Statics.field924 = arg0;
+		Statics.field2810 = arg1;
+		Statics.field2922 = new IfType[Statics.field924.method220()][];
+		Statics.field3296 = new boolean[Statics.field924.method220()];
+	}
 
 	@ObfuscatedName("qd.a(IZI)V")
 	public void method850(int arg0, int arg1) {
@@ -483,7 +487,7 @@ public final class IfType extends Linkable2 {
 
 	@ObfuscatedName("qd.a(BI)Ljd;")
 	public Pix32 method852(int arg0) {
-		AnimBase.field3116 = false;
+		Statics.field3116 = false;
 		if (arg0 < 0 || this.field2510.length <= arg0) {
 			return null;
 		}
@@ -491,22 +495,22 @@ public final class IfType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) LruCache.field500.method263((long) var2);
+		Pix32 var3 = (Pix32) Statics.field500.method263((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
 		Pix32 var4 = Statics.method846(0, Statics.field2810, var2);
 		if (var4 == null) {
-			AnimBase.field3116 = true;
+			Statics.field3116 = true;
 		} else {
-			LruCache.field500.method262((long) var2, var4);
+			Statics.field500.method262((long) var2, var4);
 		}
 		return var4;
 	}
 
 	@ObfuscatedName("qd.a(IZ)Ljd;")
 	public Pix32 method857(boolean arg0) {
-		AnimBase.field3116 = false;
+		Statics.field3116 = false;
 		int var2;
 		if (arg0) {
 			var2 = this.field2476;
@@ -516,15 +520,15 @@ public final class IfType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) LruCache.field500.method263((long) var2);
+		Pix32 var3 = (Pix32) Statics.field500.method263((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
 		Pix32 var4 = Statics.method846(0, Statics.field2810, var2);
 		if (var4 == null) {
-			AnimBase.field3116 = true;
+			Statics.field3116 = true;
 		} else {
-			LruCache.field500.method262((long) var2, var4);
+			Statics.field500.method262((long) var2, var4);
 		}
 		return var4;
 	}
@@ -631,8 +635,8 @@ public final class IfType extends Linkable2 {
 	}
 
 	@ObfuscatedName("qd.a(BLhe;IZLla;)Lpa;")
-	public ModelLit method860(SeqType arg0, int arg1, boolean arg2, PlayerModel arg3) {
-		AnimBase.field3116 = false;
+	public Model method860(SeqType arg0, int arg1, boolean arg2, PlayerModel arg3) {
+		Statics.field3116 = false;
 		int var5;
 		int var6;
 		if (arg2) {
@@ -647,21 +651,21 @@ public final class IfType extends Linkable2 {
 		} else if (var6 == 1 && var5 == -1) {
 			return null;
 		} else {
-			ModelLit var7 = (ModelLit) class106.field2680.method263((long) ((var6 << 16) + var5));
+			Model var7 = (Model) class106.field2680.method263((long) ((var6 << 16) + var5));
 			if (var7 == null) {
 				if (var6 == 1) {
-					var7 = ModelLit.method798(Statics.field503, var5);
+					var7 = Model.method798(Statics.field503, var5);
 					if (var7 == null) {
-						AnimBase.field3116 = true;
+						Statics.field3116 = true;
 						return null;
 					}
 					var7.method778();
 					var7.method770(64, 768, -50, -10, -50, true);
 				}
 				if (var6 == 2) {
-					var7 = Statics.method864(var5).method455();
+					var7 = NpcType.method864(var5).method455();
 					if (var7 == null) {
-						AnimBase.field3116 = true;
+						Statics.field3116 = true;
 						return null;
 					}
 					var7.method778();
@@ -673,17 +677,17 @@ public final class IfType extends Linkable2 {
 					}
 					var7 = arg3.method639();
 					if (var7 == null) {
-						AnimBase.field3116 = true;
+						Statics.field3116 = true;
 						return null;
 					}
 					var7.method778();
 					var7.method770(64, 768, -50, -10, -50, true);
 				}
 				if (var6 == 4) {
-					class115 var8 = Statics.method760(var5);
+					ObjType var8 = ObjType.method760(var5);
 					var7 = var8.method954(false, 10);
 					if (var7 == null) {
-						AnimBase.field3116 = true;
+						Statics.field3116 = true;
 						return null;
 					}
 					var7.method778();
@@ -700,19 +704,19 @@ public final class IfType extends Linkable2 {
 
 	@ObfuscatedName("qd.d(B)Lbc;")
 	public PixFont method861() {
-		AnimBase.field3116 = false;
+		Statics.field3116 = false;
 		if (this.field2448 == 65535) {
 			return null;
 		}
-		PixFont var1 = (PixFont) BufferedRandomAccessFile.field3249.method263((long) this.field2448);
+		PixFont var1 = (PixFont) Statics.field3249.method263((long) this.field2448);
 		if (var1 != null) {
 			return var1;
 		}
 		PixFont var2 = Statics.method294(0, Statics.field2810, this.field2448);
 		if (var2 == null) {
-			AnimBase.field3116 = true;
+			Statics.field3116 = true;
 		} else {
-			BufferedRandomAccessFile.field3249.method262((long) this.field2448, var2);
+			Statics.field3249.method262((long) this.field2448, var2);
 		}
 		return var2;
 	}

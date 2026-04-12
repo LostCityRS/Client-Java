@@ -1,5 +1,7 @@
 package deob;
 
+import jagex3.callstack.JagException;
+
 import java.io.InputStream;
 
 @ObfuscatedName("lb")
@@ -68,7 +70,7 @@ public final class class68 extends InputStream {
 			}
 		} catch (Exception var7) {
 			this.field1696 = true;
-			Statics.method214(null, var7);
+			JagException.report(null, var7);
 			return -1;
 		}
 	}

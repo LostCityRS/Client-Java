@@ -3,7 +3,7 @@ package deob;
 import jagex3.datastruct.Linkable;
 
 @ObfuscatedName("dc")
-public final class class22 extends Linkable {
+public final class LocChange extends Linkable {
 
 	@ObfuscatedName("dc.db")
 	public static int[] field677 = new int[32768];
@@ -19,9 +19,6 @@ public final class class22 extends Linkable {
 
 	@ObfuscatedName("dc.kb")
 	public static int[] field684 = new int[50];
-
-	@ObfuscatedName("dc.lb")
-	public static int field685 = 1;
 
 	@ObfuscatedName("dc.mb")
 	public int field686;

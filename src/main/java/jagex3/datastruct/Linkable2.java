@@ -8,9 +8,6 @@ public class Linkable2 extends Linkable {
 	@ObfuscatedName("hb.db")
 	public Linkable2 field1158;
 
-	@ObfuscatedName("hb.eb")
-	public static boolean field1159 = false;
-
 	@ObfuscatedName("hb.ib")
 	public Linkable2 field1163;
 

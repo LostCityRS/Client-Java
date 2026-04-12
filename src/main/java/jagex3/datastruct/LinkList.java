@@ -1,8 +1,6 @@
 package jagex3.datastruct;
 
 import deob.ObfuscatedName;
-import jagex3.dash3d.PlayerModel;
-import jagex3.io.Packet;
 
 @ObfuscatedName("pb")
 public final class LinkList {
@@ -10,26 +8,8 @@ public final class LinkList {
 	@ObfuscatedName("pb.f")
 	public final Linkable field2276 = new Linkable();
 
-	@ObfuscatedName("pb.n")
-	public static LinkList field2284 = new LinkList();
-
 	@ObfuscatedName("pb.r")
 	public Linkable field2288;
-
-	@ObfuscatedName("pb.w")
-	public static volatile int field2293 = 0;
-
-	@ObfuscatedName("pb.y")
-	public static int field2295 = 0;
-
-	@ObfuscatedName("pb.E")
-	public static Packet field2301 = new Packet(8);
-
-	@ObfuscatedName("pb.G")
-	public static int[] field2303 = new int[1000];
-
-	@ObfuscatedName("pb.F")
-	public static PlayerModel field2302 = new PlayerModel();
 
 	@ObfuscatedName("pb.a(B)Lnd;")
 	public Linkable method799() {

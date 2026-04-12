@@ -7,7 +7,7 @@ import jagex3.util.JagString;
 public final class class121 {
 
 	@ObfuscatedName("ua.a")
-	public class16 field2999;
+	public ClientScript field2999;
 
 	@ObfuscatedName("ua.b")
 	public int[] field3000;

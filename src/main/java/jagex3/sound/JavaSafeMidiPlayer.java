@@ -3,6 +3,7 @@ package jagex3.sound;
 import deob.ObfuscatedName;
 import deob.Statics;
 import deob.class21;
+import jagex3.callstack.JagException;
 import jagex3.client.SignLink;
 
 @ObfuscatedName("ja")
@@ -84,7 +85,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 				Statics.sleepPrecise(100L);
 			}
 		} catch (Exception var4) {
-			Statics.method214(null, var4);
+			JagException.report(null, var4);
 		}
 	}
 

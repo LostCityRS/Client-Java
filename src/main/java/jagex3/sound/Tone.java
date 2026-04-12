@@ -142,18 +142,6 @@ public final class Tone {
 		this.field3081.method375(arg0, this.field3093);
 	}
 
-	@ObfuscatedName("ue.a()V")
-	public static void method1004() {
-		field3088 = null;
-		field3097 = null;
-		field3084 = null;
-		field3105 = null;
-		field3101 = null;
-		field3098 = null;
-		field3099 = null;
-		field3102 = null;
-	}
-
 	@ObfuscatedName("ue.a(III)I")
 	public int method1005(int arg0, int arg1, int arg2) {
 		if (arg2 == 1) {

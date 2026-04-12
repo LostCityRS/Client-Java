@@ -8,28 +8,11 @@ import java.awt.image.*;
 @ObfuscatedName("ac")
 public final class JavaSafePixMap extends PixMap implements ImageProducer, ImageObserver {
 
-	@ObfuscatedName("ac.J")
-	public static int[] field173 = new int[32];
-
-	@ObfuscatedName("ac.S")
-	public static int[] field181 = new int[] { 0, -1, 0, 1 };
-
-	@ObfuscatedName("ac.W")
-	public static int field185 = 2;
-
 	@ObfuscatedName("ac.E")
 	public ColorModel field168;
 
 	@ObfuscatedName("ac.H")
 	public ImageConsumer field171;
-
-	static {
-		int var0 = 2;
-		for (int var1 = 0; var1 < 32; var1++) {
-			field173[var1] = var0 - 1;
-			var0 += var0;
-		}
-	}
 
 	@Override
 	public synchronized boolean isConsumer(ImageConsumer arg0) {

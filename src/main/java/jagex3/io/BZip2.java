@@ -9,11 +9,6 @@ public final class BZip2 {
 	@ObfuscatedName("ge.a")
 	public static BZip2State field1081 = new BZip2State();
 
-	@ObfuscatedName("ge.a()V")
-	public static void method438() {
-		field1081 = null;
-	}
-
 	@ObfuscatedName("ge.a(Lmb;)V")
 	public static void method439(BZip2State arg0) {
 		arg0.field1833 = 0;

@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import deob.class83;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.Linkable;
@@ -78,7 +77,7 @@ public final class Mixer extends PcmStream {
 	public int method129(int[] arg0, int arg1, int arg2) {
 		this.field243 -= arg2;
 		if (this.field243 <= 0) {
-			this.field243 += Statics.field192 >> 4;
+			this.field243 += PcmPlayer.frequency >> 4;
 			for (int var4 = 0; var4 < 8; var4++) {
 				LinkList var5 = this.field241[var4];
 				for (PcmStream var6 = (PcmStream) var5.method802(); var6 != null; var6 = (PcmStream) var5.method809()) {

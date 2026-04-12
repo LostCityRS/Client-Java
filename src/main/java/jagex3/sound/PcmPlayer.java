@@ -3,6 +3,7 @@ package jagex3.sound;
 import deob.ObfuscatedName;
 import deob.Statics;
 import deob.class14;
+import jagex3.callstack.JagException;
 import jagex3.client.SignLink;
 
 import java.awt.*;
@@ -12,6 +13,8 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 
 	@ObfuscatedName("pd.O")
 	public static int[] field2347 = new int[256];
+	@ObfuscatedName("ad.e")
+	public static int frequency;
 
 	@ObfuscatedName("pd.K")
 	public int field2343 = 0;
@@ -62,7 +65,7 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 			try {
 				Statics.field217 = new JavaSafePcmPlayer(arg1, arg0);
 			} catch (Throwable var4) {
-				if (SignLink.field1714.toLowerCase().indexOf("microsoft") >= 0) {
+				if (SignLink.javaVendor.toLowerCase().indexOf("microsoft") >= 0) {
 					try {
 						Statics.field217 = new JavaMicrosoftPcmPlayer();
 						return;
@@ -72,6 +75,11 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 				Statics.field217 = new class14(8000);
 			}
 		}
+	}
+
+	@ObfuscatedName("k.a(Llc;IZB)Z")
+	public static boolean init(SignLink arg0, boolean arg1) {
+		return Statics.method734(arg0, arg1);
 	}
 
 	@ObfuscatedName("pd.b(J)V")
@@ -88,11 +96,6 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 			}
 			this.method436();
 		}
-	}
-
-	@ObfuscatedName("pd.b()V")
-	public static void method816() {
-		field2347 = null;
 	}
 
 	@ObfuscatedName("pd.c(J)V")
@@ -114,11 +117,11 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 					break;
 				}
 				Statics.method260();
-				this.field2350 += 256000 / Statics.field192;
+				this.field2350 += 256000 / frequency;
 			}
 		}
 		while (this.field2350 < arg0) {
-			this.field2350 += 250880 / Statics.field192;
+			this.field2350 += 250880 / frequency;
 			int var3;
 			try {
 				var3 = this.method434();
@@ -184,7 +187,7 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 	@ObfuscatedName("pd.a(Llc;I)V")
 	public final void method818(SignLink arg0, int arg1) throws Exception {
 		this.field2349 = arg1;
-		this.method815(Statics.method869());
+		this.method815(Statics.currentTime());
 		arg0.method656(10, this);
 	}
 
@@ -216,12 +219,12 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 						this.field2338 = false;
 						return;
 					}
-					this.method255(Statics.method869());
+					this.method255(Statics.currentTime());
 				}
 				Statics.sleepPrecise(5L);
 			}
 		} catch (Exception var4) {
-			Statics.method214(null, var4);
+			JagException.report(null, var4);
 		}
 	}
 

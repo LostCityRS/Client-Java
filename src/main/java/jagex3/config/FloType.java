@@ -1,29 +1,13 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.datastruct.Linkable2;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 
 @ObfuscatedName("fc")
 public final class FloType extends Linkable2 {
-
-	@ObfuscatedName("fc.xb")
-	public static int field894 = 0;
-
-	@ObfuscatedName("fc.zb")
-	public static int field896 = 0;
-
-	@ObfuscatedName("fc.Bb")
-	public static byte[][][] field898 = new byte[4][104][104];
-
-	@ObfuscatedName("fc.Gb")
-	public static int field903 = -1;
-
-	@ObfuscatedName("fc.Lb")
-	public static int[][][] field908 = new int[4][13][13];
-
-	@ObfuscatedName("fc.Wb")
-	public static volatile long field919 = 0L;
 
 	@ObfuscatedName("fc.Qb")
 	public boolean field913 = true;
@@ -54,6 +38,11 @@ public final class FloType extends Linkable2 {
 
 	@ObfuscatedName("fc.Yb")
 	public int field921;
+
+	@ObfuscatedName("na.a(Lbd;I)V")
+	public static void init(Js5 arg0) {
+		Statics.field2018 = arg0;
+	}
 
 	@ObfuscatedName("fc.a(BILba;)V")
 	public void method393(int arg0, Packet arg1) {

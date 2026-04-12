@@ -4,7 +4,6 @@ import deob.ObfuscatedName;
 import deob.Statics;
 import deob.class33;
 import jagex3.datastruct.IntHashTable;
-import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.util.JagString;
 
@@ -20,9 +19,6 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.g")
 	public IntHashTable[] field367;
 
-	@ObfuscatedName("bd.i")
-	public static long field369 = 0L;
-
 	@ObfuscatedName("bd.j")
 	public final boolean field370;
 
@@ -32,20 +28,11 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.n")
 	public int[] field374;
 
-	@ObfuscatedName("bd.o")
-	public static int[] field375 = new int[1000];
-
 	@ObfuscatedName("bd.q")
 	public int[] field377;
 
-	@ObfuscatedName("bd.s")
-	public static LruCache field379 = new LruCache(260);
-
 	@ObfuscatedName("bd.w")
 	public final boolean field383;
-
-	@ObfuscatedName("bd.X")
-	public static boolean field410 = false;
 
 	@ObfuscatedName("bd.R")
 	public IntHashTable field404;

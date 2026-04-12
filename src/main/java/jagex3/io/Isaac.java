@@ -1,7 +1,6 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import jagex3.datastruct.LruCache;
 
 @ObfuscatedName("gb")
 public final class Isaac {
@@ -15,32 +14,14 @@ public final class Isaac {
 	@ObfuscatedName("gb.f")
 	public int field1052;
 
-	@ObfuscatedName("gb.i")
-	public static boolean field1055 = false;
-
 	@ObfuscatedName("gb.l")
 	public final int[] field1058 = new int[256];
-
-	@ObfuscatedName("gb.m")
-	public static int field1059 = 0;
-
-	@ObfuscatedName("gb.n")
-	public static LruCache field1060 = new LruCache(64);
 
 	@ObfuscatedName("gb.o")
 	public final int[] field1061 = new int[256];
 
 	@ObfuscatedName("gb.q")
 	public int field1063;
-
-	@ObfuscatedName("gb.t")
-	public static LruCache field1066 = new LruCache(64);
-
-	@ObfuscatedName("gb.w")
-	public static boolean field1069 = true;
-
-	@ObfuscatedName("gb.z")
-	public static int field1072 = -1;
 
 	@ObfuscatedName("gb.a(B)V")
 	public void method428() {

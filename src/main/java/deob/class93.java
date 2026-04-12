@@ -20,9 +20,6 @@ public final class class93 {
 	@ObfuscatedName("pc.w")
 	public int field2328;
 
-	@ObfuscatedName("pc.A")
-	public static boolean field2332 = false;
-
 	@ObfuscatedName("pc.y")
 	public static int field2330 = 0;
 

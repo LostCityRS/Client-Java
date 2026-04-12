@@ -11,27 +11,6 @@ public final class TextureManager implements TextureProvider {
 	@ObfuscatedName("mc.i")
 	public LinkList field1854 = new LinkList();
 
-	@ObfuscatedName("mc.j")
-	public static int field1855 = 0;
-
-	@ObfuscatedName("mc.l")
-	public static int field1857 = 0;
-
-	@ObfuscatedName("mc.o")
-	public static int field1860 = 0;
-
-	@ObfuscatedName("mc.p")
-	public static boolean field1861 = false;
-
-	@ObfuscatedName("mc.q")
-	public static boolean field1862 = true;
-
-	@ObfuscatedName("mc.s")
-	public static int field1864 = 0;
-
-	@ObfuscatedName("mc.t")
-	public static int[] field1865 = new int[] { 9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 58654, 5027, 1457, 16565, 34991, 25486 };
-
 	@ObfuscatedName("mc.v")
 	public final Texture[] field1867;
 

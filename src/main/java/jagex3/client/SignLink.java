@@ -16,9 +16,9 @@ import java.net.URL;
 public final class SignLink implements Runnable {
 
 	@ObfuscatedName("lc.t")
-	public static String field1718;
+	public static String javaVersion;
 	@ObfuscatedName("lc.p")
-	public static String field1714;
+	public static String javaVendor;
 	@ObfuscatedName("lc.g")
 	public static String field1705;
 	@ObfuscatedName("lc.j")
@@ -71,7 +71,7 @@ public final class SignLink implements Runnable {
 	public String field1717 = null;
 
 	@ObfuscatedName("lc.u")
-	public Applet field1719 = null;
+	public Applet applet = null;
 
 	@ObfuscatedName("lc.v")
 	public String field1720 = null;
@@ -148,13 +148,13 @@ public final class SignLink implements Runnable {
 	}
 
 	public SignLink(boolean arg0, Applet arg1, InetAddress arg2, int arg3, String arg4, int arg5) throws IOException {
-		this.field1719 = arg1;
+		this.applet = arg1;
 		this.field1709 = arg2;
-		field1718 = "1.1";
-		field1714 = "Unknown";
+		javaVersion = "1.1";
+		javaVendor = "Unknown";
 		try {
-			field1714 = System.getProperty("java.vendor");
-			field1718 = System.getProperty("java.version");
+			javaVendor = System.getProperty("java.vendor");
+			javaVersion = System.getProperty("java.version");
 			field1705 = System.getProperty("user.home");
 			if (field1705 != null) {
 				field1705 = field1705 + "/";
@@ -185,7 +185,7 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("lc.c(I)V")
-	public void method652(int arg0) {
+	public void method652() {
 		try {
 			File var2 = new File(this.field1717 + "uid.dat");
 			if (!var2.exists() || var2.length() < 4L) {
@@ -194,9 +194,6 @@ public final class SignLink implements Runnable {
 				var3.close();
 			}
 		} catch (Exception var6) {
-		}
-		if (arg0 != 6) {
-			this.field1701 = 116;
 		}
 		try {
 			DataInputStream var4 = new DataInputStream(new FileInputStream(this.field1717 + "uid.dat"));

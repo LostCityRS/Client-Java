@@ -1,37 +1,10 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import deob.class35;
-import jagex3.sound.JagFX;
-
-import java.math.BigInteger;
+import jagex3.config.VarBitType;
 
 @ObfuscatedName("fe")
 public final class PacketBit extends Packet {
-
-	@ObfuscatedName("fe.qc")
-	public static int field948 = 1;
-
-	@ObfuscatedName("fe.vc")
-	public static boolean field953 = false;
-
-	@ObfuscatedName("fe.Ac")
-	public static long field958 = 0L;
-
-	@ObfuscatedName("fe.xc")
-	public static JagFX[] field955 = new JagFX[50];
-
-	@ObfuscatedName("fe.Hc")
-	public static int field965 = 0;
-
-	@ObfuscatedName("fe.Gc")
-	public static BigInteger field964 = new BigInteger("58778699976184461502525193738213253649000149147835990136706041084440742975821");
-
-	@ObfuscatedName("fe.Oc")
-	public static boolean field972 = false;
-
-	@ObfuscatedName("fe.Pc")
-	public static int field973 = 0;
 
 	@ObfuscatedName("fe.Dc")
 	public int field961;
@@ -61,15 +34,15 @@ public final class PacketBit extends Packet {
 		int var4 = 8 - (this.field961 & 0x7);
 		this.field961 += arg0;
 		while (var4 < arg0) {
-			var3 += (class35.field936[var4] & super.field284[var2++]) << arg0 - var4;
+			var3 += (VarBitType.field936[var4] & super.field284[var2++]) << arg0 - var4;
 			arg0 -= var4;
 			var4 = 8;
 		}
 		int var5;
 		if (arg0 == var4) {
-			var5 = (super.field284[var2] & class35.field936[var4]) + var3;
+			var5 = (super.field284[var2] & VarBitType.field936[var4]) + var3;
 		} else {
-			var5 = (class35.field936[arg0] & super.field284[var2] >> var4 - arg0) + var3;
+			var5 = (VarBitType.field936[arg0] & super.field284[var2] >> var4 - arg0) + var3;
 		}
 		return var5;
 	}

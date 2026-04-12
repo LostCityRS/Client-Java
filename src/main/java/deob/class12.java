@@ -1,5 +1,6 @@
 package deob;
 
+import jagex3.client.Client;
 import jagex3.config.LocType;
 import jagex3.datastruct.Linkable;
 import jagex3.sound.WaveStream;
@@ -70,7 +71,7 @@ public final class class12 extends Linkable {
 			this.field428 = var2.field1306;
 		}
 		if (this.field420 != var1 && this.field424 != null) {
-			Statics.field2435.method135(this.field424);
+			Client.soundMixer.method135(this.field424);
 			this.field424 = null;
 		}
 	}

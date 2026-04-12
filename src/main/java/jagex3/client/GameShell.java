@@ -1,11 +1,9 @@
 package jagex3.client;
 
-import deob.*;
-import jagex3.config.VarpType;
-import jagex3.datastruct.Linkable;
-import jagex3.io.BufferedRandomAccessFile;
-import jagex3.io.PacketBit;
-import jagex3.js5.Js5;
+import deob.ObfuscatedName;
+import deob.Statics;
+import jagex3.callstack.JagException;
+import jagex3.graphics.PixMap;
 import jagex3.util.Timer;
 
 import java.applet.Applet;
@@ -22,11 +20,59 @@ import java.net.URL;
 @ObfuscatedName("kd")
 public abstract class GameShell extends Applet implements Runnable, FocusListener, WindowListener {
 
+	@ObfuscatedName("nc.o")
+	public static final int field2049 = 20;
 	@ObfuscatedName("kd.b")
 	public static int[] field1599 = new int[5];
 
 	@ObfuscatedName("kd.d")
 	public static long[] field1601 = new long[32];
+	@ObfuscatedName("dc.lb")
+	public static int mindel = 1;
+	@ObfuscatedName("gb.y")
+	public static SignLink signlink;
+	@ObfuscatedName("ac.Y")
+	public static PixMap field187;
+	@ObfuscatedName("ld.A")
+	public static Timer field1747;
+	@ObfuscatedName("bd.i")
+	public static long field369 = 0L;
+	@ObfuscatedName("dc.hb")
+	public static int field681;
+	@ObfuscatedName("pe.Mb")
+	public static int field2372;
+	@ObfuscatedName("dd.k")
+	public static int field711;
+	@ObfuscatedName("ub.w")
+	public static Canvas canvas;
+	@ObfuscatedName("fe.Oc")
+	public static boolean field972 = false;
+	@ObfuscatedName("mc.n")
+	public static Frame field1859;
+	@ObfuscatedName("ae.g")
+	public static GameShell shell = null;
+	@ObfuscatedName("qa.Fb")
+	public static volatile boolean field2402 = true;
+	@ObfuscatedName("wb.b")
+	public static volatile boolean field3242 = false;
+	@ObfuscatedName("rc.e")
+	public static volatile boolean field2631 = true;
+	@ObfuscatedName("nc.d")
+	public static int field2038;
+	@ObfuscatedName("la.b")
+	public static int field1656;
+	@ObfuscatedName("rc.i")
+	public static int field2635 = 0;
+	@ObfuscatedName("nd.p")
+	public static int field2075 = 500;
+	@ObfuscatedName("wb.O")
+	public static long[] field3281 = new long[32];
+	@ObfuscatedName("ub.v")
+	public static int field3048;
+	@ObfuscatedName("i.w")
+	public static boolean field1277;
+	@ObfuscatedName("ae.b")
+	public static volatile long field225 = 0L;
 
 	@ObfuscatedName("kd.Q")
 	public boolean field1640 = false;
@@ -34,71 +80,71 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@Override
 	public final void run() {
 		try {
-			if (SignLink.field1714 != null) {
-				String var1 = SignLink.field1714.toLowerCase();
+			if (SignLink.javaVendor != null) {
+				String var1 = SignLink.javaVendor.toLowerCase();
 				if (var1.indexOf("sun") != -1 || var1.indexOf("apple") != -1) {
-					String var2 = SignLink.field1718;
+					String var2 = SignLink.javaVersion;
 					if (var2.equals("1.1") || var2.startsWith("1.1.") || var2.equals("1.2") || var2.startsWith("1.2.")) {
-						this.method620("wrongjava");
+						this.error("wrongjava");
 						return;
 					}
-					class22.field685 = 5;
-				} else if (var1.indexOf("ibm") != -1 && (SignLink.field1718 == null || SignLink.field1718.equals("1.4.2"))) {
-					this.method620("wrongjava");
+					mindel = 5;
+				} else if (var1.indexOf("ibm") != -1 && (SignLink.javaVersion == null || SignLink.javaVersion.equals("1.4.2"))) {
+					this.error("wrongjava");
 					return;
 				}
 			}
-			if (Statics.field1071.field1719 != null) {
+			if (signlink.applet != null) {
 				Method var3 = SignLink.field1703;
 				if (var3 != null) {
 					try {
-						var3.invoke(Statics.field1071.field1719, Boolean.TRUE);
+						var3.invoke(signlink.applet, Boolean.TRUE);
 					} catch (Throwable var6) {
 					}
 				}
 			}
 			this.method628();
-			Statics.field187 = Statics.method875(Statics.field2372, Statics.field711, Statics.field3049);
+			field187 = Statics.method875(field2372, field711, canvas);
 			this.method290();
-			Statics.field1747 = Timer.method909();
-			Statics.field1747.method571();
-			while (Js5.field369 == 0L || Statics.method869() < Js5.field369) {
-				Statics.field681 = Statics.field1747.method573(MouseTracking.field2049, class22.field685);
-				for (int var4 = 0; var4 < Statics.field681; var4++) {
+			field1747 = Timer.method909();
+			field1747.method571();
+			while (field369 == 0L || Statics.currentTime() < field369) {
+				field681 = field1747.count(field2049, mindel);
+				for (int var4 = 0; var4 < field681; var4++) {
 					this.method625();
 				}
 				this.method622();
 			}
 		} catch (Exception var7) {
-			Statics.method214(null, var7);
-			this.method620("crash");
+			JagException.report(null, var7);
+			this.error("crash");
 		}
 		this.method615();
 	}
 
 	@ObfuscatedName("kd.b(I)V")
 	public synchronized void method615() {
-		if (PacketBit.field972) {
+		if (field972) {
 			return;
 		}
-		PacketBit.field972 = true;
+		field972 = true;
 		try {
-			Statics.field3049.removeFocusListener(this);
+			canvas.removeFocusListener(this);
 		} catch (Exception var4) {
 		}
 		try {
 			this.method286();
 		} catch (Exception var3) {
 		}
-		if (Statics.field1859 != null) {
+		if (field1859 != null) {
 			try {
 				System.exit(0);
 			} catch (Throwable var2) {
 			}
 		}
-		if (Statics.field1071 != null) {
+		if (signlink != null) {
 			try {
-				Statics.field1071.method647();
+				signlink.method647();
 			} catch (Exception var1) {
 			}
 		}
@@ -107,8 +153,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@Override
 	public final void stop() {
-		if (class6.field230 == this && !PacketBit.field972) {
-			Js5.field369 = Statics.method869() + 4000L;
+		if (shell == this && !field972) {
+			field369 = Statics.currentTime() + 4000L;
 		}
 	}
 
@@ -128,7 +174,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			if (var1.endsWith("192.168.1.")) {
 				return true;
 			} else {
-				this.method620("invalidhost");
+				this.error("invalidhost");
 				return false;
 			}
 		}
@@ -139,7 +185,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("kd.a(BLjava/lang/String;)V")
-	public final void method620(String arg0) {
+	public final void error(String arg0) {
 		if (this.field1640) {
 			return;
 		}
@@ -153,50 +199,50 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@Override
 	public final void start() {
-		if (class6.field230 == this && !PacketBit.field972) {
-			Js5.field369 = 0L;
+		if (shell == this && !field972) {
+			field369 = 0L;
 		}
 	}
 
 	@Override
 	public final void focusLost(FocusEvent arg0) {
-		class105.field2631 = false;
+		field2631 = false;
 	}
 
 	@Override
 	public final synchronized void paint(Graphics arg0) {
-		if (class6.field230 != this || PacketBit.field972) {
+		if (shell != this || field972) {
 			return;
 		}
-		VarpType.field2402 = true;
-		if (SignLink.field1718 != null && SignLink.field1718.startsWith("1.5") && Statics.method869() - class6.field225 > 1000L) {
+		field2402 = true;
+		if (SignLink.javaVersion != null && SignLink.javaVersion.startsWith("1.5") && Statics.currentTime() - field225 > 1000L) {
 			Rectangle var2 = arg0.getClipBounds();
-			if (var2 == null || Statics.field711 <= var2.width && var2.height >= Statics.field2372) {
-				BufferedRandomAccessFile.field3242 = true;
+			if (var2 == null || field711 <= var2.width && var2.height >= field2372) {
+				field3242 = true;
 			}
 		}
 	}
 
 	@Override
 	public final void destroy() {
-		if (class6.field230 == this && !PacketBit.field972) {
-			Js5.field369 = Statics.method869();
+		if (shell == this && !field972) {
+			field369 = Statics.currentTime();
 			Statics.sleepPrecise(5000L);
-			Statics.field2026 = null;
+			JagException.signlink = null;
 			this.method615();
 		}
 	}
 
 	@Override
 	public final void focusGained(FocusEvent arg0) {
-		class105.field2631 = true;
-		VarpType.field2402 = true;
+		field2631 = true;
+		field2402 = true;
 	}
 
 	@Override
 	public final URL getDocumentBase() {
-		if (Statics.field1859 == null) {
-			return Statics.field1071 == null || Statics.field1071.field1719 == this ? super.getDocumentBase() : Statics.field1071.field1719.getDocumentBase();
+		if (field1859 == null) {
+			return signlink == null || signlink.applet == this ? super.getDocumentBase() : signlink.applet.getDocumentBase();
 		} else {
 			return null;
 		}
@@ -205,21 +251,21 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("kd.a(BIIII)V")
 	public final void method621(int arg0) {
 		try {
-			if (class6.field230 != null) {
-				this.method620("alreadyloaded");
+			if (shell != null) {
+				this.error("alreadyloaded");
 				return;
 			}
-			Statics.field711 = 765;
-			Statics.field2038 = 435;
-			Statics.field2372 = 503;
-			class6.field230 = this;
-			if (Statics.field1071 == null) {
-				Statics.field2026 = Statics.field1071 = new SignLink(false, this, InetAddress.getByName(this.getCodeBase().getHost()), arg0, null, 0);
+			field711 = 765;
+			field2038 = 435;
+			field2372 = 503;
+			shell = this;
+			if (signlink == null) {
+				JagException.signlink = signlink = new SignLink(false, this, InetAddress.getByName(this.getCodeBase().getHost()), arg0, null, 0);
 			}
-			Statics.field1071.method656(1, this);
+			signlink.method656(1, this);
 		} catch (Exception var3) {
-			Statics.method214(null, var3);
-			this.method620("crash");
+			JagException.report(null, var3);
+			this.error("crash");
 		}
 	}
 
@@ -228,30 +274,30 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	public static void providesignlink(SignLink arg0) {
-		Statics.field1071 = arg0;
-		Statics.field2026 = arg0;
+		signlink = arg0;
+		JagException.signlink = arg0;
 	}
 
 	@ObfuscatedName("kd.a(B)V")
 	public void method622() {
-		long var1 = Statics.method869();
-		long var3 = field1601[Statics.field1656];
-		field1601[Statics.field1656] = var1;
+		long var1 = Statics.currentTime();
+		long var3 = field1601[field1656];
+		field1601[field1656] = var1;
 		if (var3 != 0L && var3 < var1) {
 			int var5 = (int) (var1 - var3);
-			class105.field2635 = ((var5 >> 1) + 32000) / var5;
+			field2635 = ((var5 >> 1) + 32000) / var5;
 		}
-		Statics.field1656 = Statics.field1656 + 1 & 0x1F;
-		if (Linkable.field2075++ > 50) {
-			Linkable.field2075 -= 50;
-			VarpType.field2402 = true;
-			Statics.field3049.setSize(Statics.field711, Statics.field2372);
-			Statics.field3049.setVisible(true);
-			if (Statics.field1859 == null) {
-				Statics.field3049.setLocation(0, 0);
+		field1656 = field1656 + 1 & 0x1F;
+		if (field2075++ > 50) {
+			field2075 -= 50;
+			field2402 = true;
+			canvas.setSize(field711, field2372);
+			canvas.setVisible(true);
+			if (field1859 == null) {
+				canvas.setLocation(0, 0);
 			} else {
-				Insets var6 = Statics.field1859.getInsets();
-				Statics.field3049.setLocation(var6.left, var6.top);
+				Insets var6 = field1859.getInsets();
+				canvas.setLocation(var6.left, var6.top);
 			}
 		}
 		this.method283();
@@ -259,8 +305,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@Override
 	public final AppletContext getAppletContext() {
-		if (Statics.field1859 == null) {
-			return Statics.field1071 == null || Statics.field1071.field1719 == this ? super.getAppletContext() : Statics.field1071.field1719.getAppletContext();
+		if (field1859 == null) {
+			return signlink == null || signlink.applet == this ? super.getAppletContext() : signlink.applet.getAppletContext();
 		} else {
 			return null;
 		}
@@ -268,18 +314,18 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@ObfuscatedName("kd.b(Z)V")
 	public void method625() {
-		long var1 = Statics.method869();
-		long var3 = BufferedRandomAccessFile.field3281[Statics.field3048];
+		long var1 = Statics.currentTime();
+		long var3 = field3281[field3048];
 		boolean var10000;
 		if (var3 == 0L || var1 <= var3) {
 			var10000 = false;
 		} else {
 			var10000 = true;
 		}
-		BufferedRandomAccessFile.field3281[Statics.field3048] = var1;
-		Statics.field3048 = Statics.field3048 + 1 & 0x1F;
+		field3281[field3048] = var1;
+		field3048 = field3048 + 1 & 0x1F;
 		synchronized (this) {
-			Statics.field1277 = class105.field2631;
+			field1277 = field2631;
 		}
 		this.method279();
 	}
@@ -287,29 +333,29 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("kd.a(Ljava/lang/String;IIIILjava/net/InetAddress;II)V")
 	public final void method626(String arg0, int arg1, int arg2, int arg3, InetAddress arg4, int arg5, int arg6) {
 		try {
-			Statics.field2038 = arg5;
-			Statics.field711 = arg6;
-			class6.field230 = this;
-			Statics.field2372 = arg2;
-			Statics.field1859 = new Frame();
-			Statics.field1859.setTitle("Jagex");
-			Statics.field1859.setResizable(false);
-			Statics.field1859.addWindowListener(this);
-			Statics.field1859.setVisible(true);
-			Statics.field1859.toFront();
-			Insets var8 = Statics.field1859.getInsets();
-			Statics.field1859.setSize(arg6 + var8.left + var8.right, var8.top + var8.bottom + arg2);
-			Statics.field2026 = Statics.field1071 = new SignLink(true, null, arg4, arg3, arg0, arg1);
-			Statics.field1071.method656(1, this);
+			field2038 = arg5;
+			field711 = arg6;
+			shell = this;
+			field2372 = arg2;
+			field1859 = new Frame();
+			field1859.setTitle("Jagex");
+			field1859.setResizable(false);
+			field1859.addWindowListener(this);
+			field1859.setVisible(true);
+			field1859.toFront();
+			Insets var8 = field1859.getInsets();
+			field1859.setSize(arg6 + var8.left + var8.right, var8.top + var8.bottom + arg2);
+			JagException.signlink = signlink = new SignLink(true, null, arg4, arg3, arg0, arg1);
+			signlink.method656(1, this);
 		} catch (Exception var10) {
-			Statics.method214(null, var10);
+			JagException.report(null, var10);
 		}
 	}
 
 	@Override
 	public final URL getCodeBase() {
-		if (Statics.field1859 == null) {
-			return Statics.field1071 == null || Statics.field1071.field1719 == this ? super.getCodeBase() : Statics.field1071.field1719.getCodeBase();
+		if (field1859 == null) {
+			return signlink == null || signlink.applet == this ? super.getCodeBase() : signlink.applet.getCodeBase();
 		} else {
 			return null;
 		}
@@ -327,8 +373,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@Override
 	public final String getParameter(String arg0) {
-		if (Statics.field1859 == null) {
-			return Statics.field1071 == null || Statics.field1071.field1719 == this ? super.getParameter(arg0) : Statics.field1071.field1719.getParameter(arg0);
+		if (field1859 == null) {
+			return signlink == null || signlink.applet == this ? super.getParameter(arg0) : signlink.applet.getParameter(arg0);
 		} else {
 			return null;
 		}
@@ -341,30 +387,30 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("kd.b(B)V")
 	public final synchronized void method628() {
 		Container var1;
-		if (Statics.field1859 == null) {
-			var1 = Statics.field1071.field1719;
+		if (field1859 == null) {
+			var1 = signlink.applet;
 		} else {
-			var1 = Statics.field1859;
+			var1 = field1859;
 		}
-		if (Statics.field3049 != null) {
-			Statics.field3049.removeFocusListener(this);
-			var1.remove(Statics.field3049);
+		if (canvas != null) {
+			canvas.removeFocusListener(this);
+			var1.remove(canvas);
 		}
-		Statics.field3049 = new GameCanvas(this);
-		var1.add(Statics.field3049);
-		Statics.field3049.setSize(Statics.field711, Statics.field2372);
-		Statics.field3049.setVisible(true);
-		if (Statics.field1859 == null) {
-			Statics.field3049.setLocation(0, 0);
+		canvas = new GameCanvas(this);
+		var1.add(canvas);
+		canvas.setSize(field711, field2372);
+		canvas.setVisible(true);
+		if (field1859 == null) {
+			canvas.setLocation(0, 0);
 		} else {
-			Insets var2 = Statics.field1859.getInsets();
-			Statics.field3049.setLocation(var2.left, var2.top);
+			Insets var2 = field1859.getInsets();
+			canvas.setLocation(var2.left, var2.top);
 		}
-		Statics.field3049.addFocusListener(this);
-		Statics.field3049.requestFocus();
-		VarpType.field2402 = true;
-		BufferedRandomAccessFile.field3242 = false;
-		class6.field225 = Statics.method869();
+		canvas.addFocusListener(this);
+		canvas.requestFocus();
+		field2402 = true;
+		field3242 = false;
+		field225 = Statics.currentTime();
 	}
 
 	@Override

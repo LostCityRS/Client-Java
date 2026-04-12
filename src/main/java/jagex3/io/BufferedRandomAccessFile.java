@@ -2,7 +2,6 @@ package jagex3.io;
 
 import deob.ObfuscatedName;
 import deob.class33;
-import jagex3.datastruct.LruCache;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -10,23 +9,11 @@ import java.io.IOException;
 @ObfuscatedName("wb")
 public final class BufferedRandomAccessFile {
 
-	@ObfuscatedName("wb.b")
-	public static volatile boolean field3242 = false;
-
 	@ObfuscatedName("wb.e")
 	public long field3245;
 
-	@ObfuscatedName("wb.i")
-	public static LruCache field3249 = new LruCache(20);
-
 	@ObfuscatedName("wb.j")
 	public final byte[] field3250;
-
-	@ObfuscatedName("wb.m")
-	public static int field3253 = -1;
-
-	@ObfuscatedName("wb.o")
-	public static int[] field3255 = new int[1000];
 
 	@ObfuscatedName("wb.p")
 	public int field3256;
@@ -42,18 +29,6 @@ public final class BufferedRandomAccessFile {
 
 	@ObfuscatedName("wb.w")
 	public long field3263 = -1L;
-
-	@ObfuscatedName("wb.B")
-	public static boolean field3268 = false;
-
-	@ObfuscatedName("wb.H")
-	public static int field3274 = 10;
-
-	@ObfuscatedName("wb.L")
-	public static LruCache field3278 = new LruCache(50);
-
-	@ObfuscatedName("wb.O")
-	public static long[] field3281 = new long[32];
 
 	@ObfuscatedName("wb.D")
 	public final FileOnDisk field3270;

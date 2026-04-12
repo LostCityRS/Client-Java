@@ -20,18 +20,6 @@ public final class CollisionMap {
 	@ObfuscatedName("ad.q")
 	public final int field204 = 104;
 
-	@ObfuscatedName("ad.z")
-	public static Object field213 = new Object();
-
-	@ObfuscatedName("ad.C")
-	public static int field216 = 0;
-
-	@ObfuscatedName("ad.A")
-	public static int field214 = -1;
-
-	@ObfuscatedName("ad.G")
-	public static byte[] field220 = new byte[] { 95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 };
-
 	@ObfuscatedName("ad.a(ZIII)V")
 	public void method107(int arg0, int arg1, int arg2) {
 		this.field201[arg0][arg1] |= arg2;

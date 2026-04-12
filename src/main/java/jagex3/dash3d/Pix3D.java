@@ -1138,17 +1138,6 @@ public final class Pix3D {
 		Statics.field771 = arg0;
 	}
 
-	@ObfuscatedName("eb.e()V")
-	public static void method358() {
-		Statics.field770 = null;
-		field764 = null;
-		Statics.field771 = null;
-		field772 = null;
-		field761 = null;
-		field775 = null;
-		field778 = null;
-	}
-
 	@ObfuscatedName("eb.a([IIIIIIII)V")
 	public static void method359(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (field776) {

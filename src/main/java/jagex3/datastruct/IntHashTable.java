@@ -8,18 +8,6 @@ public final class IntHashTable {
 	@ObfuscatedName("oa.i")
 	public final int[] field2134;
 
-	@ObfuscatedName("oa.k")
-	public static LruCache field2136 = new LruCache(100);
-
-	@ObfuscatedName("oa.s")
-	public static int field2144 = 0;
-
-	@ObfuscatedName("oa.u")
-	public static int field2146 = 0;
-
-	@ObfuscatedName("oa.w")
-	public static int field2148 = 2;
-
 	@ObfuscatedName("oa.a(II)I")
 	public int method745(int arg0) {
 		int var2 = this.field2134.length - 2;

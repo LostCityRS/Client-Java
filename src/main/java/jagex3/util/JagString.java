@@ -12,20 +12,8 @@ import java.io.UnsupportedEncodingException;
 @ObfuscatedName("a")
 public final class JagString implements StringInterface {
 
-	@ObfuscatedName("a.eb")
-	public static final int field57 = 50;
-
-	@ObfuscatedName("a.n")
-	public static int field14 = 0;
-
 	@ObfuscatedName("a.u")
 	public boolean field21 = true;
-
-	@ObfuscatedName("a.J")
-	public static int field36 = 0;
-
-	@ObfuscatedName("a.Z")
-	public static int[] field52 = new int[128];
 
 	@ObfuscatedName("a.z")
 	public int field26;
@@ -57,6 +45,14 @@ public final class JagString implements StringInterface {
 		}
 		var4.method28();
 		return var4.method17();
+	}
+
+	@ObfuscatedName("tb.a(I[La;)La;")
+	public static JagString join(JagString[] arg0) {
+		if (arg0.length < 2) {
+			throw new IllegalArgumentException();
+		}
+		return Statics.method825(arg0.length, 0, arg0);
 	}
 
 	@ObfuscatedName("a.a(BI)La;")

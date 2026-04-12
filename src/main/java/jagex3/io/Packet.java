@@ -3,7 +3,6 @@ package jagex3.io;
 import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.datastruct.Linkable;
-import jagex3.datastruct.LruCache;
 import jagex3.util.JagString;
 
 import java.math.BigInteger;
@@ -11,26 +10,22 @@ import java.math.BigInteger;
 @ObfuscatedName("ba")
 public class Packet extends Linkable {
 
-	@ObfuscatedName("ba.ac")
-	public static int field296 = 0;
+	@ObfuscatedName("re.l")
+	public static int[] field2698 = new int[256];
 
-	@ObfuscatedName("ba.cc")
-	public static int field298 = 0;
-
-	@ObfuscatedName("ba.ic")
-	public static int[] field304 = new int[2000];
-
-	@ObfuscatedName("ba.jb")
-	public static LruCache field253 = new LruCache(100);
-
-	@ObfuscatedName("ba.jc")
-	public static int field305 = -1;
-
-	@ObfuscatedName("ba.lc")
-	public static int field307 = 0;
-
-	@ObfuscatedName("ba.gc")
-	public static int field302 = 0;
+	static {
+		for (int var0 = 0; var0 < 256; var0++) {
+			int var1 = var0;
+			for (int var2 = 0; var2 < 8; var2++) {
+				if ((var1 & 0x1) == 1) {
+					var1 = var1 >>> 1 ^ 0xEDB88320;
+				} else {
+					var1 >>>= 0x1;
+				}
+			}
+			field2698[var0] = var1;
+		}
+	}
 
 	@ObfuscatedName("ba.Ob")
 	public byte[] field284;

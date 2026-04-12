@@ -6,6 +6,26 @@ import jagex3.datastruct.LinkList;
 @ObfuscatedName("ab")
 public final class World {
 
+	@ObfuscatedName("ab.S")
+	public static int field145;
+	@ObfuscatedName("ab.Y")
+	public static int field151;
+	@ObfuscatedName("ab.kb")
+	public static int field163;
+	@ObfuscatedName("ab.cb")
+	public static int field155;
+	@ObfuscatedName("ab.jb")
+	public static int field162;
+	@ObfuscatedName("ab.W")
+	public static int field149;
+	@ObfuscatedName("ab.h")
+	public static int field109;
+	@ObfuscatedName("ab.K")
+	public static int field137;
+	@ObfuscatedName("ab.E")
+	public static int field131;
+	@ObfuscatedName("ab.y")
+	public static int field126;
 	@ObfuscatedName("ab.a")
 	public final Square[][][] field102 = new Square[4][104][104];
 
@@ -188,19 +208,19 @@ public final class World {
 
 	@ObfuscatedName("ab.a([IIIII)V")
 	public static void method51(int[] arg0) {
-		Statics.field145 = 0;
-		Statics.field151 = 0;
-		Statics.field163 = 512;
-		Statics.field155 = 334;
-		Statics.field149 = 256;
-		Statics.field162 = 167;
+		field145 = 0;
+		field151 = 0;
+		field163 = 512;
+		field155 = 334;
+		field149 = 256;
+		field162 = 167;
 		boolean[][][][] var1 = new boolean[9][32][53][53];
 		for (int var2 = 128; var2 <= 384; var2 += 32) {
 			for (int var3 = 0; var3 < 2048; var3 += 64) {
-				Statics.field109 = ModelLit.field2256[var2];
-				Statics.field137 = ModelLit.field2258[var2];
-				Statics.field131 = ModelLit.field2256[var3];
-				Statics.field126 = ModelLit.field2258[var3];
+				field109 = Model.field2256[var2];
+				field137 = Model.field2258[var2];
+				field131 = Model.field2256[var3];
+				field126 = Model.field2258[var3];
 				int var4 = (var2 - 128) / 32;
 				int var5 = var3 / 64;
 				for (int var6 = -26; var6 <= 26; var6++) {
@@ -322,10 +342,10 @@ public final class World {
 			arg2 = this.field143 * 128 - 1;
 		}
 		Statics.field113++;
-		Statics.field109 = ModelLit.field2256[arg3];
-		Statics.field137 = ModelLit.field2258[arg3];
-		Statics.field131 = ModelLit.field2256[arg4];
-		Statics.field126 = ModelLit.field2258[arg4];
+		field109 = Model.field2256[arg3];
+		field137 = Model.field2258[arg3];
+		field131 = Model.field2256[arg4];
+		field126 = Model.field2258[arg4];
 		Statics.field160 = field161[(arg3 - 128) / 32][arg4 / 64];
 		Statics.field103 = arg0;
 		Statics.field116 = arg1;
@@ -850,19 +870,19 @@ public final class World {
 												Square var14 = var3.field866;
 												if (var14.field878 == null) {
 													if (var14.field876 != null && !this.method57(0, var4, var5)) {
-														this.method94(var14.field876, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var4, var5);
+														this.method94(var14.field876, field109, field137, field131, field126, var4, var5);
 													}
 												} else if (!this.method57(0, var4, var5)) {
-													this.method84(var14.field878, 0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var4, var5);
+													this.method84(var14.field878, 0, field109, field137, field131, field126, var4, var5);
 												}
 												class17 var15 = var14.field880;
 												if (var15 != null) {
-													var15.field536.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var15.field529 - Statics.field103, var15.field537 - Statics.field116, var15.field550 - Statics.field125, var15.field531);
+													var15.field536.method767(0, field109, field137, field131, field126, var15.field529 - Statics.field103, var15.field537 - Statics.field116, var15.field550 - Statics.field125, var15.field531);
 												}
 												for (int var16 = 0; var16 < var14.field888; var16++) {
 													Sprite var17 = var14.field873[var16];
 													if (var17 != null) {
-														var17.field985.method767(var17.field991, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var17.field987 - Statics.field103, var17.field990 - Statics.field116, var17.field983 - Statics.field125, var17.field980);
+														var17.field985.method767(var17.field991, field109, field137, field131, field126, var17.field987 - Statics.field103, var17.field990 - Statics.field116, var17.field983 - Statics.field125, var17.field980);
 													}
 												}
 											}
@@ -870,11 +890,11 @@ public final class World {
 											if (var3.field878 == null) {
 												if (var3.field876 != null && !this.method57(var7, var4, var5)) {
 													var18 = true;
-													this.method94(var3.field876, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var4, var5);
+													this.method94(var3.field876, field109, field137, field131, field126, var4, var5);
 												}
 											} else if (!this.method57(var7, var4, var5)) {
 												var18 = true;
-												this.method84(var3.field878, var7, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var4, var5);
+												this.method84(var3.field878, var7, field109, field137, field131, field126, var4, var5);
 											}
 											int var19 = 0;
 											int var20 = 0;
@@ -915,15 +935,15 @@ public final class World {
 													var3.field867 = 9 - var3.field884;
 												}
 												if ((var21.field532 & var20) != 0 && !this.method58(var7, var4, var5, var21.field532)) {
-													var21.field536.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var21.field529 - Statics.field103, var21.field537 - Statics.field116, var21.field550 - Statics.field125, var21.field531);
+													var21.field536.method767(0, field109, field137, field131, field126, var21.field529 - Statics.field103, var21.field537 - Statics.field116, var21.field550 - Statics.field125, var21.field531);
 												}
 												if ((var21.field542 & var20) != 0 && !this.method58(var7, var4, var5, var21.field542)) {
-													var21.field535.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var21.field529 - Statics.field103, var21.field537 - Statics.field116, var21.field550 - Statics.field125, var21.field531);
+													var21.field535.method767(0, field109, field137, field131, field126, var21.field529 - Statics.field103, var21.field537 - Statics.field116, var21.field550 - Statics.field125, var21.field531);
 												}
 											}
 											if (var22 != null && !this.method67(var7, var4, var5, var22.field2665.field3135)) {
 												if ((var22.field2658 & var20) != 0) {
-													var22.field2665.method767(var22.field2668, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var22.field2677 - Statics.field103, var22.field2660 - Statics.field116, var22.field2670 - Statics.field125, var22.field2678);
+													var22.field2665.method767(var22.field2668, field109, field137, field131, field126, var22.field2677 - Statics.field103, var22.field2660 - Statics.field116, var22.field2670 - Statics.field125, var22.field2678);
 												} else if ((var22.field2658 & 0x300) != 0) {
 													int var23 = var22.field2677 - Statics.field103;
 													int var24 = var22.field2660 - Statics.field116;
@@ -944,30 +964,30 @@ public final class World {
 													if ((var22.field2658 & 0x100) != 0 && var28 < var27) {
 														int var29 = field107[var26] + var23;
 														int var30 = field139[var26] + var25;
-														var22.field2665.method767(var26 * 512 + 256, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var29, var24, var30, var22.field2678);
+														var22.field2665.method767(var26 * 512 + 256, field109, field137, field131, field126, var29, var24, var30, var22.field2678);
 													}
 													if ((var22.field2658 & 0x200) != 0 && var28 > var27) {
 														int var31 = field121[var26] + var23;
 														int var32 = field129[var26] + var25;
-														var22.field2665.method767(var26 * 512 + 1280 & 0x7FF, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var31, var24, var32, var22.field2678);
+														var22.field2665.method767(var26 * 512 + 1280 & 0x7FF, field109, field137, field131, field126, var31, var24, var32, var22.field2678);
 													}
 												}
 											}
 											if (var18) {
 												class52 var33 = var3.field883;
 												if (var33 != null) {
-													var33.field1373.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var33.field1368 - Statics.field103, var33.field1375 - Statics.field116, var33.field1374 - Statics.field125, var33.field1361);
+													var33.field1373.method767(0, field109, field137, field131, field126, var33.field1368 - Statics.field103, var33.field1375 - Statics.field116, var33.field1374 - Statics.field125, var33.field1361);
 												}
 												class113 var34 = var3.field868;
 												if (var34 != null && var34.field2795 == 0) {
 													if (var34.field2786 != null) {
-														var34.field2786.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var34.field2796 - Statics.field103, var34.field2785 - Statics.field116, var34.field2779 - Statics.field125, var34.field2790);
+														var34.field2786.method767(0, field109, field137, field131, field126, var34.field2796 - Statics.field103, var34.field2785 - Statics.field116, var34.field2779 - Statics.field125, var34.field2790);
 													}
 													if (var34.field2787 != null) {
-														var34.field2787.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var34.field2796 - Statics.field103, var34.field2785 - Statics.field116, var34.field2779 - Statics.field125, var34.field2790);
+														var34.field2787.method767(0, field109, field137, field131, field126, var34.field2796 - Statics.field103, var34.field2785 - Statics.field116, var34.field2779 - Statics.field125, var34.field2790);
 													}
 													if (var34.field2777 != null) {
-														var34.field2777.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var34.field2796 - Statics.field103, var34.field2785 - Statics.field116, var34.field2779 - Statics.field125, var34.field2790);
+														var34.field2777.method767(0, field109, field137, field131, field126, var34.field2796 - Statics.field103, var34.field2785 - Statics.field116, var34.field2779 - Statics.field125, var34.field2790);
 													}
 												}
 											}
@@ -1011,7 +1031,7 @@ public final class World {
 											if (var40) {
 												class17 var42 = var3.field880;
 												if (!this.method58(var7, var4, var5, var42.field532)) {
-													var42.field536.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var42.field529 - Statics.field103, var42.field537 - Statics.field116, var42.field550 - Statics.field125, var42.field531);
+													var42.field536.method767(0, field109, field137, field131, field126, var42.field529 - Statics.field103, var42.field537 - Statics.field116, var42.field550 - Statics.field125, var42.field531);
 												}
 												var3.field875 = 0;
 											}
@@ -1095,7 +1115,7 @@ public final class World {
 												Sprite var63 = field133[var56];
 												var63.field997 = Statics.field113;
 												if (!this.method75(var7, var63.field984, var63.field995, var63.field992, var63.field988, var63.field985.field3135)) {
-													var63.field985.method767(var63.field991, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var63.field987 - Statics.field103, var63.field990 - Statics.field116, var63.field983 - Statics.field125, var63.field980);
+													var63.field985.method767(var63.field991, field109, field137, field131, field126, var63.field987 - Statics.field103, var63.field990 - Statics.field116, var63.field983 - Statics.field125, var63.field980);
 												}
 												for (int var64 = var63.field984; var64 <= var63.field995; var64++) {
 													for (int var65 = var63.field992; var65 <= var63.field988; var65++) {
@@ -1143,20 +1163,20 @@ public final class World {
 			class113 var71 = var3.field868;
 			if (var71 != null && var71.field2795 != 0) {
 				if (var71.field2786 != null) {
-					var71.field2786.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var71.field2796 - Statics.field103, var71.field2785 - Statics.field116 - var71.field2795, var71.field2779 - Statics.field125, var71.field2790);
+					var71.field2786.method767(0, field109, field137, field131, field126, var71.field2796 - Statics.field103, var71.field2785 - Statics.field116 - var71.field2795, var71.field2779 - Statics.field125, var71.field2790);
 				}
 				if (var71.field2787 != null) {
-					var71.field2787.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var71.field2796 - Statics.field103, var71.field2785 - Statics.field116 - var71.field2795, var71.field2779 - Statics.field125, var71.field2790);
+					var71.field2787.method767(0, field109, field137, field131, field126, var71.field2796 - Statics.field103, var71.field2785 - Statics.field116 - var71.field2795, var71.field2779 - Statics.field125, var71.field2790);
 				}
 				if (var71.field2777 != null) {
-					var71.field2777.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var71.field2796 - Statics.field103, var71.field2785 - Statics.field116 - var71.field2795, var71.field2779 - Statics.field125, var71.field2790);
+					var71.field2777.method767(0, field109, field137, field131, field126, var71.field2796 - Statics.field103, var71.field2785 - Statics.field116 - var71.field2795, var71.field2779 - Statics.field125, var71.field2790);
 				}
 			}
 			if (var3.field872 != 0) {
 				class106 var72 = var3.field887;
 				if (var72 != null && !this.method67(var7, var4, var5, var72.field2665.field3135)) {
 					if ((var72.field2658 & var3.field872) != 0) {
-						var72.field2665.method767(var72.field2668, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var72.field2677 - Statics.field103, var72.field2660 - Statics.field116, var72.field2670 - Statics.field125, var72.field2678);
+						var72.field2665.method767(var72.field2668, field109, field137, field131, field126, var72.field2677 - Statics.field103, var72.field2660 - Statics.field116, var72.field2670 - Statics.field125, var72.field2678);
 					} else if ((var72.field2658 & 0x300) != 0) {
 						int var73 = var72.field2677 - Statics.field103;
 						int var74 = var72.field2660 - Statics.field116;
@@ -1177,22 +1197,22 @@ public final class World {
 						if ((var72.field2658 & 0x100) != 0 && var78 >= var77) {
 							int var79 = field107[var76] + var73;
 							int var80 = field139[var76] + var75;
-							var72.field2665.method767(var76 * 512 + 256, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var79, var74, var80, var72.field2678);
+							var72.field2665.method767(var76 * 512 + 256, field109, field137, field131, field126, var79, var74, var80, var72.field2678);
 						}
 						if ((var72.field2658 & 0x200) != 0 && var78 <= var77) {
 							int var81 = field121[var76] + var73;
 							int var82 = field129[var76] + var75;
-							var72.field2665.method767(var76 * 512 + 1280 & 0x7FF, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var81, var74, var82, var72.field2678);
+							var72.field2665.method767(var76 * 512 + 1280 & 0x7FF, field109, field137, field131, field126, var81, var74, var82, var72.field2678);
 						}
 					}
 				}
 				class17 var83 = var3.field880;
 				if (var83 != null) {
 					if ((var83.field542 & var3.field872) != 0 && !this.method58(var7, var4, var5, var83.field542)) {
-						var83.field535.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var83.field529 - Statics.field103, var83.field537 - Statics.field116, var83.field550 - Statics.field125, var83.field531);
+						var83.field535.method767(0, field109, field137, field131, field126, var83.field529 - Statics.field103, var83.field537 - Statics.field116, var83.field550 - Statics.field125, var83.field531);
 					}
 					if ((var83.field532 & var3.field872) != 0 && !this.method58(var7, var4, var5, var83.field532)) {
-						var83.field536.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var83.field529 - Statics.field103, var83.field537 - Statics.field116, var83.field550 - Statics.field125, var83.field531);
+						var83.field536.method767(0, field109, field137, field131, field126, var83.field529 - Statics.field103, var83.field537 - Statics.field116, var83.field550 - Statics.field125, var83.field531);
 					}
 				}
 			}
@@ -1310,14 +1330,14 @@ public final class World {
 
 	@ObfuscatedName("ab.h(III)Z")
 	public static boolean method69(int arg0, int arg1, int arg2) {
-		int var3 = Statics.field131 * arg2 + Statics.field126 * arg0 >> 16;
-		int var4 = Statics.field126 * arg2 - Statics.field131 * arg0 >> 16;
-		int var5 = Statics.field137 * var4 + Statics.field109 * arg1 >> 16;
-		int var6 = Statics.field137 * arg1 - Statics.field109 * var4 >> 16;
+		int var3 = field131 * arg2 + field126 * arg0 >> 16;
+		int var4 = field126 * arg2 - field131 * arg0 >> 16;
+		int var5 = field137 * var4 + field109 * arg1 >> 16;
+		int var6 = field137 * arg1 - field109 * var4 >> 16;
 		if (var5 >= 50 && var5 <= 3500) {
-			int var7 = (var3 << 9) / var5 + Statics.field149;
-			int var8 = (var6 << 9) / var5 + Statics.field162;
-			return var7 >= Statics.field145 && var7 <= Statics.field163 && var8 >= Statics.field151 && var8 <= Statics.field155;
+			int var7 = (var3 << 9) / var5 + field149;
+			int var8 = (var6 << 9) / var5 + field162;
+			return var7 >= field145 && var7 <= field163 && var8 >= field151 && var8 <= field155;
 		} else {
 			return false;
 		}
@@ -1326,28 +1346,6 @@ public final class World {
 	public World(int arg0, int arg1, int arg2, int[][][] arg3) {
 		this.field132 = arg3;
 		this.method54();
-	}
-
-	@ObfuscatedName("ab.c()V")
-	public static void method70() {
-		field133 = null;
-		field107 = null;
-		field139 = null;
-		field121 = null;
-		field129 = null;
-		field128 = null;
-		field140 = null;
-		field134 = null;
-		field135 = null;
-		field147 = null;
-		field144 = null;
-		field157 = null;
-		field146 = null;
-		field152 = null;
-		field159 = null;
-		field158 = null;
-		field161 = null;
-		Statics.field160 = null;
 	}
 
 	@ObfuscatedName("ab.c(IIII)V")
@@ -1383,11 +1381,11 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(Lpa;III)V")
-	public void method73(ModelLit arg0, int arg1, int arg2, int arg3) {
+	public void method73(Model arg0, int arg1, int arg2, int arg3) {
 		if (arg2 < this.field124) {
 			Square var5 = this.field102[arg1][arg2 + 1][arg3];
-			if (var5 != null && var5.field883 != null && var5.field883.field1373 instanceof ModelLit) {
-				ModelLit var6 = (ModelLit) var5.field883.field1373;
+			if (var5 != null && var5.field883 != null && var5.field883.field1373 instanceof Model) {
+				Model var6 = (Model) var5.field883.field1373;
 				if (var6.field2215 != null) {
 					this.method77(arg0, var6, 128, 0, 0, true);
 				}
@@ -1395,8 +1393,8 @@ public final class World {
 		}
 		if (arg3 < this.field124) {
 			Square var7 = this.field102[arg1][arg2][arg3 + 1];
-			if (var7 != null && var7.field883 != null && var7.field883.field1373 instanceof ModelLit) {
-				ModelLit var8 = (ModelLit) var7.field883.field1373;
+			if (var7 != null && var7.field883 != null && var7.field883.field1373 instanceof Model) {
+				Model var8 = (Model) var7.field883.field1373;
 				if (var8.field2215 != null) {
 					this.method77(arg0, var8, 0, 0, 128, true);
 				}
@@ -1404,8 +1402,8 @@ public final class World {
 		}
 		if (arg2 < this.field124 && arg3 < this.field143) {
 			Square var9 = this.field102[arg1][arg2 + 1][arg3 + 1];
-			if (var9 != null && var9.field883 != null && var9.field883.field1373 instanceof ModelLit) {
-				ModelLit var10 = (ModelLit) var9.field883.field1373;
+			if (var9 != null && var9.field883 != null && var9.field883.field1373 instanceof Model) {
+				Model var10 = (Model) var9.field883.field1373;
 				if (var10.field2215 != null) {
 					this.method77(arg0, var10, 128, 0, 128, true);
 				}
@@ -1415,8 +1413,8 @@ public final class World {
 			return;
 		}
 		Square var11 = this.field102[arg1][arg2 + 1][arg3 - 1];
-		if (var11 != null && var11.field883 != null && var11.field883.field1373 instanceof ModelLit) {
-			ModelLit var12 = (ModelLit) var11.field883.field1373;
+		if (var11 != null && var11.field883 != null && var11.field883.field1373 instanceof Model) {
+			Model var12 = (Model) var11.field883.field1373;
 			if (var12.field2215 != null) {
 				this.method77(arg0, var12, 128, 0, -128, true);
 			}
@@ -1431,12 +1429,12 @@ public final class World {
 					Square var4 = this.field102[var1][var2][var3];
 					if (var4 != null) {
 						class17 var5 = var4.field880;
-						if (var5 != null && var5.field536 instanceof ModelLit) {
-							ModelLit var6 = (ModelLit) var5.field536;
+						if (var5 != null && var5.field536 instanceof Model) {
+							Model var6 = (Model) var5.field536;
 							if (var6.field2215 != null) {
 								this.method85(var6, var1, var2, var3, 1, 1);
-								if (var5.field535 instanceof ModelLit) {
-									ModelLit var7 = (ModelLit) var5.field535;
+								if (var5.field535 instanceof Model) {
+									Model var7 = (Model) var5.field535;
 									if (var7.field2215 != null) {
 										this.method85(var7, var1, var2, var3, 1, 1);
 										this.method77(var6, var7, 0, 0, 0, false);
@@ -1448,8 +1446,8 @@ public final class World {
 						}
 						for (int var8 = 0; var8 < var4.field888; var8++) {
 							Sprite var9 = var4.field873[var8];
-							if (var9 != null && var9.field985 instanceof ModelLit) {
-								ModelLit var10 = (ModelLit) var9.field985;
+							if (var9 != null && var9.field985 instanceof Model) {
+								Model var10 = (Model) var9.field985;
 								if (var10.field2215 != null) {
 									this.method85(var10, var1, var2, var3, var9.field995 + 1 - var9.field984, var9.field988 - var9.field992 + 1);
 									var10.method794();
@@ -1457,8 +1455,8 @@ public final class World {
 							}
 						}
 						class52 var11 = var4.field883;
-						if (var11 != null && var11.field1373 instanceof ModelLit) {
-							ModelLit var12 = (ModelLit) var11.field1373;
+						if (var11 != null && var11.field1373 instanceof Model) {
+							Model var12 = (Model) var11.field1373;
 							if (var12.field2215 != null) {
 								this.method73(var12, var1, var2, var3);
 								var12.method794();
@@ -1517,7 +1515,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(Lpa;Lpa;IIIZ)V")
-	public void method77(ModelLit arg0, ModelLit arg1, int arg2, int arg3, int arg4, boolean arg5) {
+	public void method77(Model arg0, Model arg1, int arg2, int arg3, int arg4, boolean arg5) {
 		arg1.method790();
 		this.field153++;
 		int var7 = 0;
@@ -1826,7 +1824,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(Lpa;IIIII)V")
-	public void method85(ModelLit arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void method85(Model arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		boolean var7 = true;
 		int var8 = arg2;
 		int var9 = arg2 + arg4;
@@ -1843,14 +1841,14 @@ public final class World {
 									int var16 = (this.field132[var12][var13 + 1][var14] + this.field132[var12][var13][var14] + this.field132[var12][var13][var14 + 1] + this.field132[var12][var13 + 1][var14 + 1]) / 4 - (this.field132[arg1][arg2 + 1][arg3] + this.field132[arg1][arg2][arg3] + this.field132[arg1][arg2][arg3 + 1] + this.field132[arg1][arg2 + 1][arg3 + 1]) / 4;
 									class17 var17 = var15.field880;
 									if (var17 != null) {
-										if (var17.field536 instanceof ModelLit) {
-											ModelLit var18 = (ModelLit) var17.field536;
+										if (var17.field536 instanceof Model) {
+											Model var18 = (Model) var17.field536;
 											if (var18.field2215 != null) {
 												this.method77(arg0, var18, (var13 - arg2) * 128 + (1 - arg4) * 64, var16, (var14 - arg3) * 128 + (1 - arg5) * 64, var7);
 											}
 										}
-										if (var17.field535 instanceof ModelLit) {
-											ModelLit var19 = (ModelLit) var17.field535;
+										if (var17.field535 instanceof Model) {
+											Model var19 = (Model) var17.field535;
 											if (var19.field2215 != null) {
 												this.method77(arg0, var19, (var13 - arg2) * 128 + (1 - arg4) * 64, var16, (var14 - arg3) * 128 + (1 - arg5) * 64, var7);
 											}
@@ -1858,8 +1856,8 @@ public final class World {
 									}
 									for (int var20 = 0; var20 < var15.field888; var20++) {
 										Sprite var21 = var15.field873[var20];
-										if (var21 != null && var21.field985 instanceof ModelLit) {
-											ModelLit var22 = (ModelLit) var21.field985;
+										if (var21 != null && var21.field985 instanceof Model) {
+											Model var22 = (Model) var21.field985;
 											if (var22.field2215 != null) {
 												int var23 = var21.field995 + 1 - var21.field984;
 												int var24 = var21.field988 + 1 - var21.field992;
@@ -2059,8 +2057,8 @@ public final class World {
 		Square var11 = this.field102[arg0][arg1][arg2];
 		if (var11 != null) {
 			for (int var12 = 0; var12 < var11.field888; var12++) {
-				if ((var11.field873[var12].field982 & 0x100) == 256 && var11.field873[var12].field985 instanceof ModelLit) {
-					ModelLit var13 = (ModelLit) var11.field873[var12].field985;
+				if ((var11.field873[var12].field982 & 0x100) == 256 && var11.field873[var12].field985 instanceof Model) {
+					Model var13 = (Model) var11.field873[var12].field985;
 					var13.method766();
 					if (var13.field3135 > var10) {
 						var10 = var13.field3135;

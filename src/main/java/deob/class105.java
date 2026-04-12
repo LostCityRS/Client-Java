@@ -6,12 +6,6 @@ public final class class105 {
 	@ObfuscatedName("rc.d")
 	public static int field2630 = 0;
 
-	@ObfuscatedName("rc.e")
-	public static volatile boolean field2631 = true;
-
-	@ObfuscatedName("rc.i")
-	public static int field2635 = 0;
-
 	@ObfuscatedName("rc.j")
 	public final int field2636;
 

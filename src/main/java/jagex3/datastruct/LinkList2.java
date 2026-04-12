@@ -5,12 +5,6 @@ import deob.ObfuscatedName;
 @ObfuscatedName("kc")
 public final class LinkList2 {
 
-	@ObfuscatedName("kc.w")
-	public static int field1587 = 0;
-
-	@ObfuscatedName("kc.E")
-	public static int[] field1595 = new int[] { 1, 0, -1, 0 };
-
 	@ObfuscatedName("kc.y")
 	public final Linkable2 field1589 = new Linkable2();
 

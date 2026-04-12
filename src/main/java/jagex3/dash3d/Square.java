@@ -6,9 +6,6 @@ import jagex3.datastruct.Linkable;
 @ObfuscatedName("fa")
 public final class Square extends Linkable {
 
-	@ObfuscatedName("fa.lb")
-	public static int field857 = 0;
-
 	@ObfuscatedName("fa.ub")
 	public Square field866;
 

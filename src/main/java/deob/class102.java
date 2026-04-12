@@ -1,6 +1,5 @@
 package deob;
 
-import jagex3.dash3d.CollisionMap;
 import jagex3.util.JagString;
 
 @ObfuscatedName("r")
@@ -11,9 +10,6 @@ public final class class102 {
 
 	@ObfuscatedName("r.j")
 	public static int field2568 = 0;
-
-	@ObfuscatedName("r.k")
-	public static CollisionMap[] field2569 = new CollisionMap[4];
 
 	@ObfuscatedName("r.n")
 	public static int field2572 = 0;

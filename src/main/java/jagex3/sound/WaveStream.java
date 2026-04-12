@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 @ObfuscatedName("ka")
 public final class WaveStream extends PcmStream {
@@ -426,7 +425,7 @@ public final class WaveStream extends PcmStream {
 
 	@ObfuscatedName("ka.a(Lwd;II)Lka;")
 	public static WaveStream method590(Wave arg0, int arg1) {
-		return arg0.field3308 == null || arg0.field3308.length == 0 ? null : new WaveStream(arg0, (int) ((long) arg0.field3311 * 256L * (long) 100 / (long) (Statics.field192 * 100)), arg1);
+		return arg0.field3308 == null || arg0.field3308.length == 0 ? null : new WaveStream(arg0, (int) ((long) arg0.field3311 * 256L * (long) 100 / (long) (PcmPlayer.frequency * 100)), arg1);
 	}
 
 	@ObfuscatedName("ka.b(II[B[IIIIIIILka;II)I")

@@ -9,16 +9,7 @@ import deob.class24;
 public final class MouseTracking implements Runnable {
 
 	@ObfuscatedName("nc.h")
-	public final Object field2042 = new Object();
-
-	@ObfuscatedName("nc.i")
-	public static boolean field2043 = false;
-
-	@ObfuscatedName("nc.l")
-	public static int field2046 = 0;
-
-	@ObfuscatedName("nc.o")
-	public static final int field2049 = 20;
+	public final Object lock = new Object();
 
 	@ObfuscatedName("nc.p")
 	public boolean field2050 = true;
@@ -35,8 +26,8 @@ public final class MouseTracking implements Runnable {
 	@Override
 	public void run() {
 		while (this.field2050) {
-			Object var1 = this.field2042;
-			synchronized (this.field2042) {
+			Object var1 = this.lock;
+			synchronized (this.lock) {
 				if (this.field2058 < 500) {
 					this.field2059[this.field2058] = class24.field741;
 					this.field2057[this.field2058] = class102.field2568;

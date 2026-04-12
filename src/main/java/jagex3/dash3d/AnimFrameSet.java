@@ -1,6 +1,7 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.Linkable2;
 import jagex3.js5.Js5;
@@ -8,29 +9,21 @@ import jagex3.js5.Js5;
 @ObfuscatedName("t")
 public final class AnimFrameSet extends Linkable2 {
 
-	@ObfuscatedName("t.wb")
-	public static int[] field2808 = new int[] { 8, 11, 4, 6, 9, 7, 10 };
-
-	@ObfuscatedName("t.zb")
-	public static int field2811 = 0;
-
-	@ObfuscatedName("t.Bb")
-	public static int field2813 = 0;
-
-	@ObfuscatedName("t.xb")
-	public static int field2809 = 0;
-
-	@ObfuscatedName("t.Hb")
-	public static int[] field2819 = new int[] { 16, 32, 64, 128 };
-
-	@ObfuscatedName("t.Db")
-	public static boolean field2815 = false;
-
-	@ObfuscatedName("t.Kb")
-	public static int field2822 = (int) (Math.random() * 17.0D) - 8;
-
 	@ObfuscatedName("t.Nb")
 	public final AnimFrame[] field2825;
+
+	@ObfuscatedName("s.a(BI)Lt;")
+	public static AnimFrameSet method897(int arg0) {
+		AnimFrameSet var1 = (AnimFrameSet) Statics.field2136.method263((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		AnimFrameSet var2 = Statics.method690(Statics.field939, arg0, Statics.field2966);
+		if (var2 != null) {
+			Statics.field2136.method262((long) arg0, var2);
+		}
+		return var2;
+	}
 
 	@ObfuscatedName("t.a(II)Z")
 	public boolean method938(int arg0) {

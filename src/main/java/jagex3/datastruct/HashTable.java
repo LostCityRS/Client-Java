@@ -8,23 +8,14 @@ public final class HashTable {
 	@ObfuscatedName("i.b")
 	public long field1256;
 
-	@ObfuscatedName("i.f")
-	public static int field1260 = 0;
-
 	@ObfuscatedName("i.n")
 	public final int field1268;
-
-	@ObfuscatedName("i.q")
-	public static boolean field1271 = false;
 
 	@ObfuscatedName("i.r")
 	public Linkable field1272;
 
 	@ObfuscatedName("i.s")
 	public final Linkable[] field1273;
-
-	@ObfuscatedName("i.y")
-	public static int field1279 = -1;
 
 	@ObfuscatedName("i.x")
 	public int field1278 = 0;

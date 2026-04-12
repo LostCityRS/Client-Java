@@ -42,8 +42,4 @@ public final class JavaSafePcmPlayer extends PcmPlayer {
 		field1080.method665(PcmPlayer.field2347);
 	}
 
-	@ObfuscatedName("gd.f()V")
-	public static void method437() {
-		field1080 = null;
-	}
 }

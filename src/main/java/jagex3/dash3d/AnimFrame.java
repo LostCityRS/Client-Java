@@ -39,14 +39,6 @@ public final class AnimFrame {
 	@ObfuscatedName("o.k")
 	public final int[] field2125;
 
-	@ObfuscatedName("o.a()V")
-	public static void method744() {
-		field2116 = null;
-		field2117 = null;
-		field2115 = null;
-		field2118 = null;
-	}
-
 	public AnimFrame(byte[] arg0, AnimBase arg1) {
 		this.field2121 = arg1;
 		Packet var3 = new Packet(arg0);

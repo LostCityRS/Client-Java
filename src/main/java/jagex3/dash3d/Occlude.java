@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import jagex3.io.PacketBit;
 
 @ObfuscatedName("ld")
 public final class Occlude {
@@ -17,9 +16,6 @@ public final class Occlude {
 
 	@ObfuscatedName("ld.e")
 	public int field1725;
-
-	@ObfuscatedName("ld.f")
-	public static PacketBit field1726 = new PacketBit(5000);
 
 	@ObfuscatedName("ld.g")
 	public int field1727;
@@ -54,9 +50,6 @@ public final class Occlude {
 	@ObfuscatedName("ld.s")
 	public int field1739;
 
-	@ObfuscatedName("ld.t")
-	public static int[] field1740 = new int[] { 1, 2, 4, 8 };
-
 	@ObfuscatedName("ld.u")
 	public int field1741;
 
@@ -66,12 +59,4 @@ public final class Occlude {
 	@ObfuscatedName("ld.w")
 	public int field1743;
 
-	@ObfuscatedName("ld.C")
-	public static int field1749 = 0;
-
-	@ObfuscatedName("ld.G")
-	public static int[] field1753 = new int[] { 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800 };
-
-	@ObfuscatedName("ld.D")
-	public static int field1750 = 0;
 }

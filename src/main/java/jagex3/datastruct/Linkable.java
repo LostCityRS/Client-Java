@@ -5,17 +5,8 @@ import deob.ObfuscatedName;
 @ObfuscatedName("nd")
 public class Linkable {
 
-	@ObfuscatedName("nd.d")
-	public static int field2063 = 0;
-
 	@ObfuscatedName("nd.n")
 	public long field2073;
-
-	@ObfuscatedName("nd.p")
-	public static int field2075 = 500;
-
-	@ObfuscatedName("nd.y")
-	public static int field2084 = 0;
 
 	@ObfuscatedName("nd.B")
 	public Linkable field2087;

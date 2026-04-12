@@ -2,19 +2,18 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import deob.class46;
 import jagex3.dash3d.AnimFrameSet;
-import jagex3.dash3d.ModelLit;
+import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 
 @ObfuscatedName("he")
 public final class SeqType extends Linkable2 {
 
 	@ObfuscatedName("he.ub")
 	public int[] field1223;
-
-	@ObfuscatedName("he.Ib")
-	public static int field1237 = 0;
 
 	@ObfuscatedName("he.yb")
 	public int field1227 = -1;
@@ -52,23 +51,46 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("he.Nb")
 	public int[] field1242;
 
+	@ObfuscatedName("cb.a(ZLbd;Lbd;Lbd;)V")
+	public static void init(Js5 arg0, Js5 arg1, Js5 arg2) {
+		Statics.field2966 = arg0;
+		Statics.field939 = arg2;
+		Statics.field1241 = arg1;
+	}
+
+	@ObfuscatedName("ac.b(II)Lhe;")
+	public static SeqType method103(int arg0) {
+		SeqType var1 = (SeqType) class46.field1196.method263((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = Statics.field1241.method217(arg0, 12);
+		SeqType var3 = new SeqType();
+		if (var2 != null) {
+			var3.method489(new Packet(var2));
+		}
+		var3.method486();
+		class46.field1196.method262((long) arg0, var3);
+		return var3;
+	}
+
 	@ObfuscatedName("he.a(Lpa;Lhe;IIB)Lpa;")
-	public ModelLit method485(ModelLit arg0, SeqType arg1, int arg2, int arg3) {
+	public Model method485(Model arg0, SeqType arg1, int arg2, int arg3) {
 		int var5 = this.field1242[arg2];
-		AnimFrameSet var6 = Statics.method897(var5 >> 16);
+		AnimFrameSet var6 = AnimFrameSet.method897(var5 >> 16);
 		int var7 = var5 & 0xFFFF;
 		if (var6 == null) {
 			return arg1.method494(arg3, arg0);
 		}
 		int var8 = arg1.field1242[arg3];
-		AnimFrameSet var9 = Statics.method897(var8 >> 16);
+		AnimFrameSet var9 = AnimFrameSet.method897(var8 >> 16);
 		int var10 = var8 & 0xFFFF;
 		if (var9 == null) {
-			ModelLit var11 = arg0.method785(!var6.method938(var7));
+			Model var11 = arg0.method785(!var6.method938(var7));
 			var11.method793(var6, var7);
 			return var11;
 		} else {
-			ModelLit var12 = arg0.method785(!var6.method938(var7) & !var9.method938(var10));
+			Model var12 = arg0.method785(!var6.method938(var7) & !var9.method938(var10));
 			var12.method777(var6, var7, var9, var10, this.field1230);
 			return var12;
 		}
@@ -94,15 +116,15 @@ public final class SeqType extends Linkable2 {
 	}
 
 	@ObfuscatedName("he.a(IZLpa;I)Lpa;")
-	public ModelLit method488(int arg0, ModelLit arg1, int arg2) {
+	public Model method488(int arg0, Model arg1, int arg2) {
 		int var4 = this.field1242[arg0];
-		AnimFrameSet var5 = Statics.method897(var4 >> 16);
+		AnimFrameSet var5 = AnimFrameSet.method897(var4 >> 16);
 		int var6 = var4 & 0xFFFF;
 		if (var5 == null) {
 			return arg1.method785(true);
 		}
 		int var7 = arg2 & 0x3;
-		ModelLit var8 = arg1.method785(!var5.method938(var6));
+		Model var8 = arg1.method785(!var5.method938(var6));
 		if (var7 == 1) {
 			var8.method792();
 		} else if (var7 == 2) {
@@ -187,23 +209,23 @@ public final class SeqType extends Linkable2 {
 	}
 
 	@ObfuscatedName("he.a(BLpa;I)Lpa;")
-	public ModelLit method492(ModelLit arg0, int arg1) {
+	public Model method492(Model arg0, int arg1) {
 		int var3 = this.field1242[arg1];
-		AnimFrameSet var4 = Statics.method897(var3 >> 16);
+		AnimFrameSet var4 = AnimFrameSet.method897(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
 			return arg0.method774(true);
 		} else {
-			ModelLit var6 = arg0.method774(!var4.method938(var5));
+			Model var6 = arg0.method774(!var4.method938(var5));
 			var6.method793(var4, var5);
 			return var6;
 		}
 	}
 
 	@ObfuscatedName("he.a(ILpa;Z)Lpa;")
-	public ModelLit method493(int arg0, ModelLit arg1) {
+	public Model method493(int arg0, Model arg1) {
 		int var3 = this.field1242[arg0];
-		AnimFrameSet var4 = Statics.method897(var3 >> 16);
+		AnimFrameSet var4 = AnimFrameSet.method897(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
 			return arg1.method785(true);
@@ -212,15 +234,15 @@ public final class SeqType extends Linkable2 {
 		int var7 = 0;
 		if (this.field1236 != null && this.field1236.length > arg0) {
 			int var8 = this.field1236[arg0];
-			var6 = Statics.method897(var8 >> 16);
+			var6 = AnimFrameSet.method897(var8 >> 16);
 			var7 = var8 & 0xFFFF;
 		}
 		if (var6 == null || var7 == 65535) {
-			ModelLit var9 = arg1.method785(!var4.method938(var5));
+			Model var9 = arg1.method785(!var4.method938(var5));
 			var9.method793(var4, var5);
 			return var9;
 		} else {
-			ModelLit var10 = arg1.method785(!var4.method938(var5) & !var6.method938(var7));
+			Model var10 = arg1.method785(!var4.method938(var5) & !var6.method938(var7));
 			var10.method793(var4, var5);
 			var10.method793(var6, var7);
 			return var10;
@@ -228,14 +250,14 @@ public final class SeqType extends Linkable2 {
 	}
 
 	@ObfuscatedName("he.b(ILpa;Z)Lpa;")
-	public ModelLit method494(int arg0, ModelLit arg1) {
+	public Model method494(int arg0, Model arg1) {
 		int var3 = this.field1242[arg0];
-		AnimFrameSet var4 = Statics.method897(var3 >> 16);
+		AnimFrameSet var4 = AnimFrameSet.method897(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
 			return arg1.method785(true);
 		} else {
-			ModelLit var6 = arg1.method785(!var4.method938(var5));
+			Model var6 = arg1.method785(!var4.method938(var5));
 			var6.method793(var4, var5);
 			return var6;
 		}

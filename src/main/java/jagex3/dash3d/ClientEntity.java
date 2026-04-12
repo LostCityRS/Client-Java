@@ -1,10 +1,8 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
+import jagex3.config.SeqType;
 import jagex3.util.JagString;
-
-import java.math.BigInteger;
 
 @ObfuscatedName("nb")
 public abstract class ClientEntity extends ModelSource {
@@ -20,9 +18,6 @@ public abstract class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("nb.cc")
 	public int field1965 = -1;
-
-	@ObfuscatedName("nb.cd")
-	public static volatile int field2017 = 0;
 
 	@ObfuscatedName("nb.ec")
 	public int field1967;
@@ -42,17 +37,11 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("nb.ic")
 	public int field1971 = 0;
 
-	@ObfuscatedName("nb.id")
-	public static int[] field2023 = new int[1000];
-
 	@ObfuscatedName("nb.jc")
 	public int field1972;
 
 	@ObfuscatedName("nb.kc")
 	public int field1973;
-
-	@ObfuscatedName("nb.kd")
-	public static int field2025 = (int) (Math.random() * 33.0D) - 16;
 
 	@ObfuscatedName("nb.lc")
 	public int field1974 = 0;
@@ -60,17 +49,11 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("nb.mc")
 	public int field1975;
 
-	@ObfuscatedName("nb.md")
-	public static int field2027 = 0;
-
 	@ObfuscatedName("nb.nc")
 	public int field1976 = 0;
 
 	@ObfuscatedName("nb.pc")
 	public int field1978 = 0;
-
-	@ObfuscatedName("nb.pd")
-	public static ClientPlayer[] field2030 = new ClientPlayer[2048];
 
 	@ObfuscatedName("nb.qc")
 	public boolean field1979 = false;
@@ -78,17 +61,11 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("nb.sc")
 	public int field1981;
 
-	@ObfuscatedName("nb.td")
-	public static JagString[] field2034 = new JagString[100];
-
 	@ObfuscatedName("nb.uc")
 	public int field1983 = 0;
 
 	@ObfuscatedName("nb.vc")
 	public int field1984;
-
-	@ObfuscatedName("nb.Ec")
-	public static BigInteger field1993 = new BigInteger("7162900525229798032761816791230527296329313291232324290237849263501208207972894053929065636522363163621000728841182238772712427862772219676577293600221789");
 
 	@ObfuscatedName("nb.gc")
 	public int field1969 = 0;
@@ -209,7 +186,7 @@ public abstract class ClientEntity extends ModelSource {
 			var4++;
 			var3--;
 		}
-		if (this.field2015 != -1 && Statics.method103(this.field2015).field1233 == 1) {
+		if (this.field2015 != -1 && SeqType.method103(this.field2015).field1233 == 1) {
 			this.field2015 = -1;
 		}
 		if (this.field1983 < 9) {
@@ -268,7 +245,7 @@ public abstract class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("nb.a(IIZI)V")
 	public final void method729(int arg0, boolean arg1, int arg2) {
-		if (this.field2015 != -1 && Statics.method103(this.field2015).field1233 == 1) {
+		if (this.field2015 != -1 && SeqType.method103(this.field2015).field1233 == 1) {
 			this.field2015 = -1;
 		}
 		if (!arg1) {

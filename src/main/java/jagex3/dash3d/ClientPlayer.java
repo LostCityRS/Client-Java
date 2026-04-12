@@ -1,17 +1,15 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
+import deob.ObjType;
 import deob.Statics;
 import jagex3.config.SeqType;
-import jagex3.datastruct.Linkable;
+import jagex3.config.SpotType;
 import jagex3.io.Packet;
 import jagex3.util.JagString;
 
 @ObfuscatedName("aa")
 public final class ClientPlayer extends ClientEntity {
-
-	@ObfuscatedName("aa.ae")
-	public static int field96 = 0;
 
 	@ObfuscatedName("aa.be")
 	public int field97;
@@ -24,9 +22,6 @@ public final class ClientPlayer extends ClientEntity {
 
 	@ObfuscatedName("aa.wd")
 	public int field66;
-
-	@ObfuscatedName("aa.Cd")
-	public static int field72 = 0;
 
 	@ObfuscatedName("aa.yd")
 	public int field68 = 0;
@@ -71,36 +66,36 @@ public final class ClientPlayer extends ClientEntity {
 	public PlayerModel field90;
 
 	@ObfuscatedName("aa.Dd")
-	public ModelLit field73;
+	public Model field73;
 
 	@ObfuscatedName("aa.f(I)Lpa;")
 	@Override
-	public ModelLit method41() {
+	public Model method41() {
 		if (this.field90 == null) {
 			return null;
 		}
-		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? Statics.method103(super.field2015) : null;
-		SeqType var2 = super.field1951 == -1 || this.field95 || super.field2000 == super.field1951 && var1 != null ? null : Statics.method103(super.field1951);
-		ModelLit var3 = this.field90.method637(var1, var2, super.field1990, super.field1978);
+		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.method103(super.field2015) : null;
+		SeqType var2 = super.field1951 == -1 || this.field95 || super.field2000 == super.field1951 && var1 != null ? null : SeqType.method103(super.field1951);
+		Model var3 = this.field90.method637(var1, var2, super.field1990, super.field1978);
 		if (var3 == null) {
 			return null;
 		}
 		var3.method766();
 		super.field1991 = var3.field3135;
 		if (!this.field95 && super.field1965 != -1 && super.field2014 != -1) {
-			ModelLit var4 = Statics.method713(super.field1965).method371(super.field2014);
+			Model var4 = SpotType.method713(super.field1965).method371(super.field2014);
 			if (var4 != null) {
 				var4.method796(0, -super.field1984, 0);
-				ModelLit[] var5 = new ModelLit[] { var3, var4 };
-				var3 = new ModelLit(var5, 2, true);
+				Model[] var5 = new Model[] { var3, var4 };
+				var3 = new Model(var5, 2, true);
 			}
 		}
 		if (!this.field95 && this.field73 != null) {
-			if (Linkable.field2063 >= this.field82) {
+			if (Statics.field2063 >= this.field82) {
 				this.field73 = null;
 			}
-			if (this.field91 <= Linkable.field2063 && this.field82 > Linkable.field2063) {
-				ModelLit var6 = this.field73;
+			if (this.field91 <= Statics.field2063 && this.field82 > Statics.field2063) {
+				Model var6 = this.field73;
 				var6.method796(this.field79 - super.field1972, -this.field84 + this.field80, this.field99 - super.field1963);
 				if (super.field1954 == 512) {
 					var6.method781();
@@ -112,8 +107,8 @@ public final class ClientPlayer extends ClientEntity {
 				} else if (super.field1954 == 1536) {
 					var6.method781();
 				}
-				ModelLit[] var7 = new ModelLit[] { var3, var6 };
-				var3 = new ModelLit(var7, 2, true);
+				Model[] var7 = new Model[] { var3, var6 };
+				var3 = new Model(var7, 2, true);
 				if (super.field1954 == 512) {
 					var6.method781();
 				} else if (super.field1954 == 1024) {
@@ -158,7 +153,7 @@ public final class ClientPlayer extends ClientEntity {
 					break;
 				}
 				if (var4[var5] >= 512) {
-					int var8 = Statics.method760(var4[var5] - 512).field2854;
+					int var8 = ObjType.method760(var4[var5] - 512).field2854;
 					if (var8 != 0) {
 						this.field74 = var8;
 					}
@@ -168,7 +163,7 @@ public final class ClientPlayer extends ClientEntity {
 		int[] var9 = new int[5];
 		for (int var10 = 0; var10 < 5; var10++) {
 			int var11 = arg0.method144();
-			if (var11 < 0 || MapSpotAnim.field2894[var10].length <= var11) {
+			if (var11 < 0 || Statics.field2894[var10].length <= var11) {
 				var11 = 0;
 			}
 			var9[var10] = var11;

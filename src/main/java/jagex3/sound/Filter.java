@@ -59,12 +59,6 @@ public final class Filter {
 		}
 	}
 
-	@ObfuscatedName("ee.a()V")
-	public static void method376() {
-		field822 = null;
-		field821 = null;
-	}
-
 	@ObfuscatedName("ee.a(IIF)F")
 	public float method377(int arg0, int arg1, float arg2) {
 		float var4 = (float) (this.field826[arg0][1][arg1] - this.field826[arg0][0][arg1]) * arg2 + (float) this.field826[arg0][0][arg1];

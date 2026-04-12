@@ -1,10 +1,14 @@
-package deob;
+package jagex3.config;
 
+import deob.ObfuscatedName;
+import deob.Statics;
+import deob.class112;
 import jagex3.datastruct.Linkable2;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 
 @ObfuscatedName("fd")
-public final class class35 extends Linkable2 {
+public final class VarBitType extends Linkable2 {
 
 	@ObfuscatedName("fd.Cb")
 	public static int field934 = 0;
@@ -23,6 +27,26 @@ public final class class35 extends Linkable2 {
 
 	@ObfuscatedName("fd.Nb")
 	public int field945;
+
+	@ObfuscatedName("mb.a(II)Lfd;")
+	public static VarBitType method686(int arg0) {
+		VarBitType var1 = (VarBitType) class112.field2755.method263((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = Statics.field1555.method217(arg0, 14);
+		VarBitType var3 = new VarBitType();
+		if (var2 != null) {
+			var3.method402(new Packet(var2));
+		}
+		class112.field2755.method262((long) arg0, var3);
+		return var3;
+	}
+
+	@ObfuscatedName("r.a(ILbd;)V")
+	public static void init(Js5 arg0) {
+		Statics.field1555 = arg0;
+	}
 
 	@ObfuscatedName("fd.a(ILba;)V")
 	public void method402(Packet arg0) {

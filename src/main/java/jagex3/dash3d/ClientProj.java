@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.config.SeqType;
 import jagex3.config.SpotType;
 
@@ -13,9 +12,6 @@ public final class ClientProj extends ModelSource {
 
 	@ObfuscatedName("d.bc")
 	public final int field631;
-
-	@ObfuscatedName("d.cc")
-	public static boolean[] field632 = new boolean[5];
 
 	@ObfuscatedName("d.dc")
 	public int field633;
@@ -32,9 +28,6 @@ public final class ClientProj extends ModelSource {
 	@ObfuscatedName("d.lc")
 	public final int field641;
 
-	@ObfuscatedName("d.oc")
-	public static int[] field644 = new int[] { 768, 1024, 1280, 512, 1536, 256, 0, 1792 };
-
 	@ObfuscatedName("d.qc")
 	public final int field646;
 
@@ -46,9 +39,6 @@ public final class ClientProj extends ModelSource {
 
 	@ObfuscatedName("d.wc")
 	public double field652;
-
-	@ObfuscatedName("d.Ac")
-	public static int field656 = 0;
 
 	@ObfuscatedName("d.Vb")
 	public boolean field625 = false;
@@ -105,19 +95,19 @@ public final class ClientProj extends ModelSource {
 		this.field618 = arg9;
 		this.field641 = arg3;
 		this.field654 = arg7;
-		int var12 = Statics.method713(this.field619).field786;
+		int var12 = SpotType.method713(this.field619).field786;
 		if (var12 == -1) {
 			this.field663 = null;
 		} else {
-			this.field663 = Statics.method103(var12);
+			this.field663 = SeqType.method103(var12);
 		}
 	}
 
 	@ObfuscatedName("d.f(I)Lpa;")
 	@Override
-	public ModelLit method41() {
-		SpotType var1 = Statics.method713(this.field619);
-		ModelLit var2 = var1.method371(this.field639);
+	public Model method41() {
+		SpotType var1 = SpotType.method713(this.field619);
+		Model var2 = var1.method371(this.field639);
 		if (var2 == null) {
 			return null;
 		} else {

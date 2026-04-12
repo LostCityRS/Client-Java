@@ -3,10 +3,10 @@ package jagex3.config;
 import deob.ObfuscatedName;
 import deob.Statics;
 import deob.class113;
-import jagex3.dash3d.ModelLit;
+import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
-import jagex3.io.BufferedRandomAccessFile;
 import jagex3.io.Packet;
+import jagex3.js5.Js5;
 import jagex3.util.JagString;
 
 @ObfuscatedName("h")
@@ -29,9 +29,6 @@ public final class NpcType extends Linkable2 {
 
 	@ObfuscatedName("h.jc")
 	public int field1125 = 128;
-
-	@ObfuscatedName("h.kc")
-	public static byte[] field1126 = new byte[520];
 
 	@ObfuscatedName("h.mc")
 	public int field1128 = -1;
@@ -62,15 +59,6 @@ public final class NpcType extends Linkable2 {
 
 	@ObfuscatedName("h.wc")
 	public int[] field1138;
-
-	@ObfuscatedName("h.Ob")
-	public static int field1104 = 0;
-
-	@ObfuscatedName("h.Yb")
-	public static int field1114 = 0;
-
-	@ObfuscatedName("h.Bc")
-	public static int field1143 = -1;
 
 	@ObfuscatedName("h.Cb")
 	public int field1092 = -1;
@@ -108,13 +96,36 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("h.Zb")
 	public int[] field1115;
 
+	@ObfuscatedName("kc.a(Lbd;ILbd;)V")
+	public static void init(Js5 arg0, Js5 arg1) {
+		Statics.field2799 = arg1;
+		Statics.field3244 = arg0;
+	}
+
+	@ObfuscatedName("r.a(BI)Lh;")
+	public static NpcType method864(int arg0) {
+		NpcType var1 = (NpcType) Statics.field1060.method263((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = Statics.field2799.method217(arg0, 9);
+		NpcType var3 = new NpcType();
+		var3.field1137 = arg0;
+		if (var2 != null) {
+			var3.method453(new Packet(var2));
+		}
+		var3.method459();
+		Statics.field1060.method262((long) arg0, var3);
+		return var3;
+	}
+
 	@ObfuscatedName("h.a(BLhe;Lhe;II)Lpa;")
-	public ModelLit method448(SeqType arg0, SeqType arg1, int arg2, int arg3) {
+	public Model method448(SeqType arg0, SeqType arg1, int arg2, int arg3) {
 		if (this.field1136 != null) {
 			NpcType var5 = this.method457();
 			return var5 == null ? null : var5.method448(arg0, arg1, arg2, arg3);
 		}
-		ModelLit var6 = (ModelLit) BufferedRandomAccessFile.field3278.method263((long) this.field1137);
+		Model var6 = (Model) Statics.field3278.method263((long) this.field1137);
 		if (var6 == null) {
 			boolean var7 = false;
 			for (int var8 = 0; var8 < this.field1115.length; var8++) {
@@ -125,14 +136,14 @@ public final class NpcType extends Linkable2 {
 			if (var7) {
 				return null;
 			}
-			ModelLit[] var9 = new ModelLit[this.field1115.length];
+			Model[] var9 = new Model[this.field1115.length];
 			for (int var10 = 0; var10 < this.field1115.length; var10++) {
-				var9[var10] = ModelLit.method798(Statics.field3244, this.field1115[var10]);
+				var9[var10] = Model.method798(Statics.field3244, this.field1115[var10]);
 			}
 			if (var9.length == 1) {
 				var6 = var9[0];
 			} else {
-				var6 = new ModelLit(var9, var9.length);
+				var6 = new Model(var9, var9.length);
 			}
 			if (this.field1138 != null) {
 				for (int var11 = 0; var11 < this.field1138.length; var11++) {
@@ -141,9 +152,9 @@ public final class NpcType extends Linkable2 {
 			}
 			var6.method778();
 			var6.method770(this.field1097 + 64, 850 - -this.field1119, -30, -50, -30, true);
-			BufferedRandomAccessFile.field3278.method262((long) this.field1137, var6);
+			Statics.field3278.method262((long) this.field1137, var6);
 		}
-		ModelLit var12;
+		Model var12;
 		if (arg0 != null && arg1 != null) {
 			var12 = arg0.method485(var6, arg1, arg3, arg2);
 		} else if (arg0 != null) {
@@ -269,7 +280,7 @@ public final class NpcType extends Linkable2 {
 	}
 
 	@ObfuscatedName("h.b(B)Lpa;")
-	public ModelLit method455() {
+	public Model method455() {
 		if (this.field1136 != null) {
 			NpcType var1 = this.method457();
 			return var1 == null ? null : var1.method455();
@@ -285,15 +296,15 @@ public final class NpcType extends Linkable2 {
 			if (var2) {
 				return null;
 			}
-			ModelLit[] var4 = new ModelLit[this.field1085.length];
+			Model[] var4 = new Model[this.field1085.length];
 			for (int var5 = 0; var5 < this.field1085.length; var5++) {
-				var4[var5] = ModelLit.method798(Statics.field3244, this.field1085[var5]);
+				var4[var5] = Model.method798(Statics.field3244, this.field1085[var5]);
 			}
-			ModelLit var6;
+			Model var6;
 			if (var4.length == 1) {
 				var6 = var4[0];
 			} else {
-				var6 = new ModelLit(var4, var4.length);
+				var6 = new Model(var4, var4.length);
 			}
 			if (this.field1138 != null) {
 				for (int var7 = 0; var7 < this.field1138.length; var7++) {
@@ -312,7 +323,7 @@ public final class NpcType extends Linkable2 {
 		} else if (this.field1095 != -1) {
 			var1 = class113.field2803[this.field1095];
 		}
-		return var1 < 0 || var1 >= this.field1136.length || this.field1136[var1] == -1 ? null : Statics.method864(this.field1136[var1]);
+		return var1 < 0 || var1 >= this.field1136.length || this.field1136[var1] == -1 ? null : method864(this.field1136[var1]);
 	}
 
 	@ObfuscatedName("h.c(B)V")

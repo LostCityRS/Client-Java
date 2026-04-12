@@ -23,7 +23,7 @@ public final class NanoTimer extends Timer {
 
 	@ObfuscatedName("sb.a(III)I")
 	@Override
-	public int method573(int arg0, int arg1) {
+	public int count(int arg0, int arg1) {
 		long var3 = (long) arg1 * 1000000L;
 		long var5 = this.field2746 - System.nanoTime();
 		if (var5 < var3) {

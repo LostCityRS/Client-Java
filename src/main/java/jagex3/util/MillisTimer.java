@@ -12,15 +12,6 @@ public final class MillisTimer extends Timer {
 	@ObfuscatedName("k.v")
 	public int field1508;
 
-	@ObfuscatedName("k.C")
-	public static int[] field1514 = new int[99];
-
-	@ObfuscatedName("k.J")
-	public static int[] field1521 = new int[50];
-
-	@ObfuscatedName("k.Q")
-	public static int field1528 = 0;
-
 	@ObfuscatedName("k.D")
 	public final long[] field1515 = new long[10];
 
@@ -32,16 +23,6 @@ public final class MillisTimer extends Timer {
 
 	@ObfuscatedName("k.H")
 	public long field1519;
-
-	static {
-		int var0 = 0;
-		for (int var1 = 0; var1 < 99; var1++) {
-			int var2 = var1 + 1;
-			int var3 = (int) ((double) var2 + Math.pow(2.0D, (double) var2 / 7.0D) * 300.0D);
-			var0 += var3;
-			field1514[var1] = var0 / 4;
-		}
-	}
 
 	@ObfuscatedName("k.b(I)V")
 	@Override
@@ -57,7 +38,7 @@ public final class MillisTimer extends Timer {
 		this.field1520 = 256;
 		this.field1508 = 0;
 		this.field1517 = 1;
-		this.field1519 = Statics.method869();
+		this.field1519 = Statics.currentTime();
 		for (int var1 = 0; var1 < 10; var1++) {
 			this.field1515[var1] = this.field1519;
 		}
@@ -65,12 +46,12 @@ public final class MillisTimer extends Timer {
 
 	@ObfuscatedName("k.a(III)I")
 	@Override
-	public int method573(int arg0, int arg1) {
+	public int count(int arg0, int arg1) {
 		int var3 = this.field1517;
 		this.field1517 = 1;
 		int var4 = this.field1520;
 		this.field1520 = 300;
-		this.field1519 = Statics.method869();
+		this.field1519 = Statics.currentTime();
 		if (this.field1515[this.field1505] == 0L) {
 			this.field1520 = var4;
 			this.field1517 = var3;
