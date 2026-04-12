@@ -1,0 +1,151 @@
+package deob;
+
+@ObfuscatedName("ec")
+public final class class28 extends class44 {
+
+	@ObfuscatedName("ec.tb")
+	public static class1 field782 = Statics.method931("Loading textures )2 ");
+
+	@ObfuscatedName("ec.Ab")
+	public static class1 field789 = Statics.method931("::noclip");
+
+	@ObfuscatedName("ec.Gb")
+	public static class1 field795 = Statics.method931("Nehmen");
+
+	@ObfuscatedName("ec.Cb")
+	public static class1 field791 = Statics.method931("Verbindung konnte nicht hergestellt werden)3");
+
+	@ObfuscatedName("ec.Jb")
+	public static class1 field798 = Statics.method931("Loaded input handler");
+
+	@ObfuscatedName("ec.Bb")
+	public static class1 field790 = Statics.method931("W-=hlen Sie eine Option");
+
+	@ObfuscatedName("ec.Mb")
+	public static int field801 = 0;
+
+	@ObfuscatedName("ec.Qb")
+	public static class1 field805 = Statics.method931(" )2> @yel@");
+
+	@ObfuscatedName("ec.Nb")
+	public static class1 field802 = Statics.method931("level)2");
+
+	@ObfuscatedName("ec.wb")
+	public static class1 field785 = field802;
+
+	@ObfuscatedName("ec.Vb")
+	public static class1 field810 = Statics.method931("leuchten3:");
+
+	@ObfuscatedName("ec.Hb")
+	public static class1 field796 = field798;
+
+	@ObfuscatedName("ec.Eb")
+	public static class1 field793 = field782;
+
+	@ObfuscatedName("ec.Fb")
+	public int field794 = 0;
+
+	@ObfuscatedName("ec.Kb")
+	public int field799 = 0;
+
+	@ObfuscatedName("ec.Pb")
+	public int field804 = 128;
+
+	@ObfuscatedName("ec.xb")
+	public int field786 = -1;
+
+	@ObfuscatedName("ec.Tb")
+	public final int[] field808 = new int[6];
+
+	@ObfuscatedName("ec.Sb")
+	public int field807 = 0;
+
+	@ObfuscatedName("ec.Xb")
+	public int field812 = 128;
+
+	@ObfuscatedName("ec.Wb")
+	public final int[] field811 = new int[6];
+
+	@ObfuscatedName("ec.Db")
+	public int field792;
+
+	@ObfuscatedName("ec.Ub")
+	public int field809;
+
+	@ObfuscatedName("ec.a(IBLba;)V")
+	public void method369(int arg0, class8 arg1) {
+		if (arg0 == 1) {
+			this.field792 = arg1.method145();
+		} else if (arg0 == 2) {
+			this.field786 = arg1.method145();
+		} else if (arg0 == 4) {
+			this.field804 = arg1.method145();
+		} else if (arg0 == 5) {
+			this.field812 = arg1.method145();
+		} else if (arg0 == 6) {
+			this.field807 = arg1.method145();
+		} else if (arg0 == 7) {
+			this.field799 = arg1.method144();
+		} else if (arg0 == 8) {
+			this.field794 = arg1.method144();
+		} else if (arg0 >= 40 && arg0 < 50) {
+			this.field808[arg0 - 40] = arg1.method145();
+		} else if (arg0 >= 50 && arg0 < 60) {
+			this.field811[arg0 - 50] = arg1.method145();
+		}
+	}
+
+	@ObfuscatedName("ec.a(II)Lpa;")
+	public class91 method371(int arg0) {
+		class91 var2 = (class91) class74.field1841.method263((long) this.field809);
+		if (var2 == null) {
+			var2 = class91.method798(Statics.field1901, this.field792);
+			if (var2 == null) {
+				return null;
+			}
+			for (int var3 = 0; var3 < 6; var3++) {
+				if (this.field808[0] != 0) {
+					var2.method771(this.field808[var3], this.field811[var3]);
+				}
+			}
+			var2.method778();
+			var2.method770(this.field799 + 64, this.field794 + 850, -30, -50, -30, true);
+			class74.field1841.method262((long) this.field809, var2);
+		}
+		class91 var4;
+		if (this.field786 == -1 || arg0 == -1) {
+			var4 = var2.method774(true);
+		} else {
+			var4 = Statics.method103(this.field786).method492(var2, arg0);
+		}
+		if (this.field804 != 128 || this.field812 != 128) {
+			var4.method789(this.field804, this.field812, this.field804);
+		}
+		if (this.field807 != 0) {
+			if (this.field807 == 90) {
+				var4.method781();
+			}
+			if (this.field807 == 180) {
+				var4.method781();
+				var4.method781();
+			}
+			if (this.field807 == 270) {
+				var4.method781();
+				var4.method781();
+				var4.method781();
+			}
+		}
+		return var4;
+	}
+
+	@ObfuscatedName("ec.a(Lba;B)V")
+	public void method373(class8 arg0) {
+		while (true) {
+			int var2 = arg0.method144();
+			if (var2 == 0) {
+				return;
+			}
+			this.method369(var2, arg0);
+		}
+	}
+}
