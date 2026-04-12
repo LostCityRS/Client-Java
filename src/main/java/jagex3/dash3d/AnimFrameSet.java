@@ -2,6 +2,7 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.config.SeqType;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.Linkable2;
 import jagex3.js5.Js5;
@@ -18,7 +19,7 @@ public final class AnimFrameSet extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		AnimFrameSet var2 = Statics.method690(Statics.field939, arg0, Statics.field2966);
+		AnimFrameSet var2 = Statics.method690(SeqType.field939, arg0, SeqType.field2966);
 		if (var2 != null) {
 			Statics.field2136.method262((long) arg0, var2);
 		}

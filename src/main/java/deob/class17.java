@@ -34,9 +34,6 @@ public final class class17 {
 	@ObfuscatedName("cd.p")
 	public static int field544 = 0;
 
-	@ObfuscatedName("cd.r")
-	public static int[] field546 = new int[4000];
-
 	@ObfuscatedName("cd.t")
 	public static IfType field548 = null;
 

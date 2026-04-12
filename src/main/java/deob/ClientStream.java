@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 @ObfuscatedName("vc")
-public final class class129 implements Runnable {
+public final class ClientStream implements Runnable {
 
 	@ObfuscatedName("vc.d")
 	public final InputStream field3149;
@@ -42,9 +42,6 @@ public final class class129 implements Runnable {
 
 	@ObfuscatedName("vc.u")
 	public int field3166 = 0;
-
-	@ObfuscatedName("vc.D")
-	public static int field3175 = 99;
 
 	@ObfuscatedName("vc.C")
 	public final OutputStream field3174;
@@ -119,7 +116,7 @@ public final class class129 implements Runnable {
 		this.method1015();
 	}
 
-	public class129(Socket arg0, SignLink arg1) throws IOException {
+	public ClientStream(Socket arg0, SignLink arg1) throws IOException {
 		this.field3161 = arg1;
 		this.field3154 = arg0;
 		this.field3154.setSoTimeout(30000);

@@ -56,7 +56,7 @@ public final class WaveStream extends PcmStream {
 				return arg1;
 			}
 			if (this.field1535 == Integer.MIN_VALUE) {
-				this.method739();
+				this.unlink();
 				return arg3;
 			}
 			this.field1537 = this.field1535;
@@ -151,13 +151,13 @@ public final class WaveStream extends PcmStream {
 				this.method579(arg0, var9, 0, var10, 0);
 				if (this.field1540 < 0) {
 					this.field1540 = 0;
-					this.method739();
+					this.unlink();
 				}
 			} else {
 				this.method592(arg0, var9, var7, var10, 0);
 				if (this.field1540 >= var7) {
 					this.field1540 = var7 - 1;
-					this.method739();
+					this.unlink();
 				}
 			}
 			return 1;
@@ -463,7 +463,7 @@ public final class WaveStream extends PcmStream {
 		if (this.field1533 > 0) {
 			if (arg0 >= this.field1533) {
 				if (this.field1535 == Integer.MIN_VALUE) {
-					this.method739();
+					this.unlink();
 					arg0 = this.field1533;
 				} else {
 					this.field1537 = this.field1535;
@@ -542,12 +542,12 @@ public final class WaveStream extends PcmStream {
 			if (this.field1534 < 0) {
 				if (this.field1540 < 0) {
 					this.field1540 = 0;
-					this.method739();
+					this.unlink();
 					return;
 				}
 			} else if (this.field1540 >= var5) {
 				this.field1540 = var5 - 1;
-				this.method739();
+				this.unlink();
 			}
 		} else if (this.field1539) {
 			if (this.field1534 < 0) {
@@ -593,7 +593,7 @@ public final class WaveStream extends PcmStream {
 				return arg1;
 			}
 			if (this.field1535 == Integer.MIN_VALUE) {
-				this.method739();
+				this.unlink();
 				return arg3;
 			}
 			this.field1537 = this.field1535;

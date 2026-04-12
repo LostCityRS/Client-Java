@@ -5,6 +5,7 @@ import deob.Statics;
 import jagex3.dash3d.Model;
 import jagex3.dash3d.Pix3D;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.graphics.Pix2D;
 import jagex3.graphics.Pix32;
 import jagex3.io.Packet;
@@ -14,6 +15,16 @@ import jagex3.util.JagString;
 @ObfuscatedName("ta")
 public final class ObjType extends Linkable2 {
 
+	@ObfuscatedName("pe.Yb")
+	public static boolean field2384;
+	@ObfuscatedName("ca.j")
+	public static Js5 field458;
+	@ObfuscatedName("ie.q")
+	public static Js5 field1405;
+	@ObfuscatedName("kc.z")
+	public static int field1590;
+	@ObfuscatedName("gb.t")
+	public static LruCache field1066 = new LruCache(64);
 	@ObfuscatedName("ta.ac")
 	public int field2860 = 0;
 
@@ -130,11 +141,11 @@ public final class ObjType extends Linkable2 {
 
 	@ObfuscatedName("oe.a(II)Lta;")
 	public static ObjType method760(int arg0) {
-		ObjType var1 = (ObjType) Statics.field1066.method263((long) arg0);
+		ObjType var1 = (ObjType) field1066.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = Statics.field1405.method217(arg0, 10);
+		byte[] var2 = field1405.method217(arg0, 10);
 		ObjType var3 = new ObjType();
 		var3.field2883 = arg0;
 		if (var2 != null) {
@@ -144,22 +155,22 @@ public final class ObjType extends Linkable2 {
 		if (var3.field2838 != -1) {
 			var3.method953(method760(var3.field2838), method760(var3.field2843));
 		}
-		if (!Statics.field2384 && var3.field2880) {
+		if (!field2384 && var3.field2880) {
 			var3.field2830 = null;
 			var3.field2854 = 0;
 			var3.field2835 = null;
 			var3.field2827 = Statics.field1501;
 		}
-		Statics.field1066.method262((long) arg0, var3);
+		field1066.method262((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("oa.a(Lbd;ZLbd;I)V")
 	public static void init(Js5 arg0, boolean arg1, Js5 arg2) {
-		Statics.field2384 = arg1;
-		Statics.field458 = arg2;
-		Statics.field1405 = arg0;
-		Statics.field1590 = Statics.field1405.method235(10);
+		field2384 = arg1;
+		field458 = arg2;
+		field1405 = arg0;
+		field1590 = field1405.method235(10);
 	}
 
 	@ObfuscatedName("va.b(IIII)Ljd;")
@@ -167,7 +178,7 @@ public final class ObjType extends Linkable2 {
 		if (arg2 == 0) {
 			Pix32 var3 = (Pix32) Statics.field253.method263((long) arg1);
 			if (var3 != null && var3.field1477 != arg0 && var3.field1477 != -1) {
-				var3.method739();
+				var3.unlink();
 				var3 = null;
 			}
 			if (var3 != null) {
@@ -294,6 +305,13 @@ public final class ObjType extends Linkable2 {
 		return var19;
 	}
 
+	@ObfuscatedName("ca.a(B)V")
+	public static void method254() {
+		field1066.method267();
+		Statics.field3035.method267();
+		Statics.field253.method267();
+	}
+
 	@ObfuscatedName("ta.a(BZ)Z")
 	public boolean method939(boolean arg0) {
 		int var2 = this.field2831;
@@ -306,10 +324,10 @@ public final class ObjType extends Linkable2 {
 			return true;
 		}
 		boolean var4 = true;
-		if (!Statics.field458.method218(var2, 0)) {
+		if (!field458.method218(var2, 0)) {
 			var4 = false;
 		}
-		if (var3 != -1 && !Statics.field458.method218(var3, 0)) {
+		if (var3 != -1 && !field458.method218(var3, 0)) {
 			var4 = false;
 		}
 		return var4;
@@ -329,13 +347,13 @@ public final class ObjType extends Linkable2 {
 			return true;
 		}
 		boolean var5 = true;
-		if (!Statics.field458.method218(var2, 0)) {
+		if (!field458.method218(var2, 0)) {
 			var5 = false;
 		}
-		if (var3 != -1 && !Statics.field458.method218(var3, 0)) {
+		if (var3 != -1 && !field458.method218(var3, 0)) {
 			var5 = false;
 		}
-		if (var4 != -1 && !Statics.field458.method218(var4, 0)) {
+		if (var4 != -1 && !field458.method218(var4, 0)) {
 			var5 = false;
 		}
 		return var5;
@@ -354,14 +372,14 @@ public final class ObjType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Model var5 = Model.method798(Statics.field458, var2);
+		Model var5 = Model.method798(field458, var2);
 		if (var3 != -1) {
-			Model var6 = Model.method798(Statics.field458, var3);
+			Model var6 = Model.method798(field458, var3);
 			if (var4 == -1) {
 				Model[] var7 = new Model[]{var5, var6};
 				var5 = new Model(var7, 2);
 			} else {
-				Model var8 = Model.method798(Statics.field458, var4);
+				Model var8 = Model.method798(field458, var4);
 				Model[] var9 = new Model[]{var5, var6, var8};
 				var5 = new Model(var9, 3);
 			}
@@ -411,9 +429,9 @@ public final class ObjType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Model var4 = Model.method798(Statics.field458, var2);
+		Model var4 = Model.method798(field458, var2);
 		if (var3 != -1) {
-			Model var5 = Model.method798(Statics.field458, var3);
+			Model var5 = Model.method798(field458, var3);
 			Model[] var6 = new Model[]{var4, var5};
 			var4 = new Model(var6, 2);
 		}
@@ -565,7 +583,7 @@ public final class ObjType extends Linkable2 {
 				return var5;
 			}
 		}
-		Model var6 = Model.method798(Statics.field458, this.field2836);
+		Model var6 = Model.method798(field458, this.field2836);
 		if (var6 == null) {
 			return null;
 		}

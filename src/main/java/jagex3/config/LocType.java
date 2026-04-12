@@ -3,6 +3,7 @@ package jagex3.config;
 import deob.*;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.util.JagString;
@@ -10,6 +11,16 @@ import jagex3.util.JagString;
 @ObfuscatedName("ia")
 public final class LocType extends Linkable2 {
 
+	@ObfuscatedName("dc.yb")
+	public static Js5 field698;
+	@ObfuscatedName("mc.p")
+	public static boolean field1861 = false;
+	@ObfuscatedName("a.Y")
+	public static Js5 field51;
+	@ObfuscatedName("se.p")
+	public static LruCache field2788 = new LruCache(64);
+	@ObfuscatedName("pc.q")
+	public static LruCache field2322 = new LruCache(500);
 	@ObfuscatedName("ia.bc")
 	public int field1316 = -1;
 
@@ -135,18 +146,18 @@ public final class LocType extends Linkable2 {
 
 	@ObfuscatedName("se.a(ILbd;ZLbd;)V")
 	public static void init(Js5 arg0, boolean arg1, Js5 arg2) {
-		Statics.field698 = arg2;
-		Statics.field1861 = arg1;
-		Statics.field51 = arg0;
+		field698 = arg2;
+		field1861 = arg1;
+		field51 = arg0;
 	}
 
 	@ObfuscatedName("fa.b(IB)Lia;")
 	public static LocType method389(int arg0) {
-		LocType var1 = (LocType) class113.field2788.method263((long) arg0);
+		LocType var1 = (LocType) field2788.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = Statics.field698.method217(arg0, 6);
+		byte[] var2 = field698.method217(arg0, 6);
 		LocType var3 = new LocType();
 		var3.field1321 = arg0;
 		if (var2 != null) {
@@ -157,8 +168,16 @@ public final class LocType extends Linkable2 {
 			var3.field1284 = false;
 			var3.field1311 = false;
 		}
-		class113.field2788.method262((long) arg0, var3);
+		field2788.method262((long) arg0, var3);
 		return var3;
+	}
+
+	@ObfuscatedName("qd.c(B)V")
+	public static void method859() {
+		field2788.method267();
+		field2322.method267();
+		Statics.field981.method267();
+		class99.field2428.method267();
 	}
 
 	@ObfuscatedName("ia.a(IIIIIBI)Lpa;")
@@ -256,16 +275,16 @@ public final class LocType extends Linkable2 {
 				if (var6) {
 					var9 += 65536;
 				}
-				var5 = (Model) class93.field2322.method263((long) var9);
+				var5 = (Model) field2322.method263((long) var9);
 				if (var5 == null) {
-					var5 = Model.method798(Statics.field51, var9 & 0xFFFF);
+					var5 = Model.method798(field51, var9 & 0xFFFF);
 					if (var5 == null) {
 						return null;
 					}
 					if (var6) {
 						var5.method786();
 					}
-					class93.field2322.method262((long) var9, var5);
+					field2322.method262((long) var9, var5);
 				}
 				if (var7 > 1) {
 					class104.field2623[var8] = var5;
@@ -290,16 +309,16 @@ public final class LocType extends Linkable2 {
 			if (var13) {
 				var12 += 65536;
 			}
-			var5 = (Model) class93.field2322.method263((long) var12);
+			var5 = (Model) field2322.method263((long) var12);
 			if (var5 == null) {
-				var5 = Model.method798(Statics.field51, var12 & 0xFFFF);
+				var5 = Model.method798(field51, var12 & 0xFFFF);
 				if (var5 == null) {
 					return null;
 				}
 				if (var13) {
 					var5.method786();
 				}
-				class93.field2322.method262((long) var12, var5);
+				field2322.method262((long) var12, var5);
 			}
 		}
 		boolean var14;
@@ -385,7 +404,7 @@ public final class LocType extends Linkable2 {
 		if (arg1 == 1) {
 			int var11 = arg0.method144();
 			if (var11 > 0) {
-				if (this.field1308 == null || Statics.field1861) {
+				if (this.field1308 == null || field1861) {
 					this.field1305 = new int[var11];
 					this.field1308 = new int[var11];
 					for (int var12 = 0; var12 < var11; var12++) {
@@ -401,7 +420,7 @@ public final class LocType extends Linkable2 {
 		} else if (arg1 == 5) {
 			int var9 = arg0.method144();
 			if (var9 > 0) {
-				if (this.field1308 == null || Statics.field1861) {
+				if (this.field1308 == null || field1861) {
 					this.field1305 = null;
 					this.field1308 = new int[var9];
 					for (int var10 = 0; var10 < var9; var10++) {
@@ -516,7 +535,7 @@ public final class LocType extends Linkable2 {
 		if (this.field1305 != null) {
 			for (int var2 = 0; var2 < this.field1305.length; var2++) {
 				if (this.field1305[var2] == arg0) {
-					return Statics.field51.method218(this.field1308[var2] & 0xFFFF, 0);
+					return field51.method218(this.field1308[var2] & 0xFFFF, 0);
 				}
 			}
 			return true;
@@ -525,7 +544,7 @@ public final class LocType extends Linkable2 {
 		} else if (arg0 == 10) {
 			boolean var3 = true;
 			for (int var4 = 0; var4 < this.field1308.length; var4++) {
-				var3 &= Statics.field51.method218(this.field1308[var4] & 0xFFFF, 0);
+				var3 &= field51.method218(this.field1308[var4] & 0xFFFF, 0);
 			}
 			return var3;
 		} else {
@@ -539,7 +558,7 @@ public final class LocType extends Linkable2 {
 		if (this.field1331 != -1) {
 			var1 = Statics.method480(this.field1331);
 		} else if (this.field1319 != -1) {
-			var1 = class113.field2803[this.field1319];
+			var1 = Statics.field2803[this.field1319];
 		}
 		return var1 < 0 || this.field1317.length <= var1 || this.field1317[var1] == -1 ? null : method389(this.field1317[var1]);
 	}
@@ -551,7 +570,7 @@ public final class LocType extends Linkable2 {
 		}
 		boolean var1 = true;
 		for (int var2 = 0; var2 < this.field1308.length; var2++) {
-			var1 &= Statics.field51.method218(this.field1308[var2] & 0xFFFF, 0);
+			var1 &= field51.method218(this.field1308[var2] & 0xFFFF, 0);
 		}
 		return var1;
 	}

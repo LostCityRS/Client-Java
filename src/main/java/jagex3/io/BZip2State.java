@@ -1,8 +1,6 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import jagex3.datastruct.HashTable;
-import jagex3.datastruct.LruCache;
 
 @ObfuscatedName("mb")
 public final class BZip2State {
@@ -12,9 +10,6 @@ public final class BZip2State {
 
 	@ObfuscatedName("mb.c")
 	public int field1792;
-
-	@ObfuscatedName("mb.cb")
-	public static int field1844 = -1;
 
 	@ObfuscatedName("mb.i")
 	public final byte[] field1798 = new byte[18002];
@@ -30,9 +25,6 @@ public final class BZip2State {
 
 	@ObfuscatedName("mb.m")
 	public int field1802;
-
-	@ObfuscatedName("mb.n")
-	public static int field1803 = 0;
 
 	@ObfuscatedName("mb.o")
 	public final byte[] field1804 = new byte[256];
@@ -51,15 +43,6 @@ public final class BZip2State {
 
 	@ObfuscatedName("mb.w")
 	public final byte[][] field1812 = new byte[6][258];
-
-	@ObfuscatedName("mb.P")
-	public static HashTable field1831 = new HashTable(4096);
-
-	@ObfuscatedName("mb.W")
-	public static int field1838 = 0;
-
-	@ObfuscatedName("mb.Z")
-	public static LruCache field1841 = new LruCache(30);
 
 	@ObfuscatedName("mb.z")
 	public int field1815 = 0;

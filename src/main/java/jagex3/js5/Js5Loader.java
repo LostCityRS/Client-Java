@@ -2,13 +2,16 @@ package jagex3.js5;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class131;
 import jagex3.io.DataFile;
+
+import java.util.zip.CRC32;
 
 @ObfuscatedName("u")
 public final class Js5Loader extends Js5 {
 
-	@ObfuscatedName("u.fb")
+    @ObfuscatedName("w.b")
+    public static CRC32 field3198 = new CRC32();
+    @ObfuscatedName("u.fb")
 	public volatile boolean[] field2975;
 
 	@ObfuscatedName("u.gb")
@@ -38,7 +41,7 @@ public final class Js5Loader extends Js5 {
 			arg3[arg3.length - 2] = (byte) (super.field374[arg1] >> 8);
 			arg3[arg3.length - 1] = (byte) super.field374[arg1];
 			if (this.field2991 != null) {
-				Statics.method464(arg3, this.field2991, arg1);
+				Js5NetThread.method464(arg3, this.field2991, arg1);
 				this.field2975[arg1] = true;
 			}
 			if (arg2) {
@@ -48,7 +51,7 @@ public final class Js5Loader extends Js5 {
 			throw new RuntimeException();
 		} else {
 			if (this.field2981 != null) {
-				Statics.method464(arg3, this.field2981, this.field2986);
+				Js5NetThread.method464(arg3, this.field2981, this.field2986);
 			}
 			this.method223(arg3);
 			this.method979();
@@ -80,9 +83,9 @@ public final class Js5Loader extends Js5 {
 				Statics.method495(true, this, 255, this.field2986, (byte) 0, this.field2989);
 				return;
 			}
-			class131.field3198.reset();
-			class131.field3198.update(arg1, 0, arg1.length);
-			int var5 = (int) class131.field3198.getValue();
+			field3198.reset();
+			field3198.update(arg1, 0, arg1.length);
+			int var5 = (int) field3198.getValue();
 			if (this.field2989 != var5) {
 				Statics.method495(true, this, 255, this.field2986, (byte) 0, this.field2989);
 				return;
@@ -101,9 +104,9 @@ public final class Js5Loader extends Js5 {
 			}
 			return;
 		}
-		class131.field3198.reset();
-		class131.field3198.update(arg1, 0, arg1.length - 2);
-		int var6 = (int) class131.field3198.getValue();
+		field3198.reset();
+		field3198.update(arg1, 0, arg1.length - 2);
+		int var6 = (int) field3198.getValue();
 		int var7 = ((arg1[arg1.length - 2] & 0xFF) << 8) + (arg1[arg1.length - 1] & 0xFF);
 		if (super.field402[arg2] != var6 || super.field374[arg2] != var7) {
 			this.field2975[arg2] = false;

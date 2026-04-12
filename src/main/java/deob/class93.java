@@ -1,7 +1,5 @@
 package deob;
 
-import jagex3.datastruct.LruCache;
-
 @ObfuscatedName("pc")
 public final class class93 {
 
@@ -13,9 +11,6 @@ public final class class93 {
 
 	@ObfuscatedName("pc.i")
 	public int field2314;
-
-	@ObfuscatedName("pc.q")
-	public static LruCache field2322 = new LruCache(500);
 
 	@ObfuscatedName("pc.w")
 	public int field2328;

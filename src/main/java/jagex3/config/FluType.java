@@ -1,15 +1,18 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
-import deob.class106;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("md")
 public final class FluType extends Linkable2 {
 
+	@ObfuscatedName("nb.jd")
+	public static Js5 field2024;
+	@ObfuscatedName("rd.f")
+	public static LruCache field2663 = new LruCache(64);
 	@ObfuscatedName("md.tb")
 	public int field1882;
 
@@ -27,23 +30,28 @@ public final class FluType extends Linkable2 {
 
 	@ObfuscatedName("md.a(Lbd;B)V")
 	public static void init(Js5 arg0) {
-		Statics.field2024 = arg0;
+		field2024 = arg0;
 	}
 
 	@ObfuscatedName("dc.a(BI)Lmd;")
 	public static FluType method317(int arg0) {
-		FluType var1 = (FluType) class106.field2663.method263((long) arg0);
+		FluType var1 = (FluType) field2663.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = Statics.field2024.method217(arg0, 1);
+		byte[] var2 = field2024.method217(arg0, 1);
 		FluType var3 = new FluType();
 		if (var2 != null) {
 			var3.method704(arg0, new Packet(var2));
 		}
 		var3.method701();
-		class106.field2663.method262((long) arg0, var3);
+		field2663.method262((long) arg0, var3);
 		return var3;
+	}
+
+	@ObfuscatedName("bd.b(Z)V")
+	public static void method234() {
+		field2663.method267();
 	}
 
 	@ObfuscatedName("md.b(IB)V")

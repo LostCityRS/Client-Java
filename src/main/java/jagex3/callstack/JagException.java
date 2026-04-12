@@ -7,7 +7,7 @@ import jagex3.client.GameShell;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
 
-import java.io.DataInputStream;
+import java.io.*;
 import java.net.URL;
 
 @ObfuscatedName("ha")
@@ -31,7 +31,7 @@ public final class JagException extends RuntimeException {
 		try {
 			String var2 = "";
 			if (arg1 != null) {
-				var2 = Statics.method896(arg1);
+				var2 = method896(arg1);
 			}
 			if (arg0 != null) {
 				if (arg1 != null) {
@@ -68,4 +68,47 @@ public final class JagException extends RuntimeException {
 		}
 		return var2;
 	}
+
+    @ObfuscatedName("s.a(ILjava/lang/Throwable;)Ljava/lang/String;")
+    public static String method896(Throwable arg0) throws IOException {
+        String var2;
+        if (arg0 instanceof JagException) {
+            JagException var1 = (JagException) arg0;
+            var2 = var1.field1156 + " | ";
+            arg0 = var1.field1155;
+        } else {
+            var2 = "";
+        }
+        StringWriter var3 = new StringWriter();
+        PrintWriter var4 = new PrintWriter(var3);
+        arg0.printStackTrace(var4);
+        var4.close();
+        String var5 = var3.toString();
+        BufferedReader var6 = new BufferedReader(new StringReader(var5));
+        String var7 = var6.readLine();
+        while (true) {
+            while (true) {
+                String var8 = var6.readLine();
+                if (var8 == null) {
+                    return var2 + "| " + var7;
+                }
+                int var9 = var8.indexOf(40);
+                int var10 = var8.indexOf(41, var9 + 1);
+                if (var9 >= 0 && var10 >= 0) {
+                    String var11 = var8.substring(var9 + 1, var10);
+                    int var12 = var11.indexOf(".java:");
+                    if (var12 >= 0) {
+                        String var13 = var11.substring(0, var12) + var11.substring(var12 + 5);
+                        var2 = var2 + var13 + ' ';
+                        continue;
+                    }
+                    var8 = var8.substring(0, var9);
+                }
+                String var14 = var8.trim();
+                String var15 = var14.substring(var14.lastIndexOf(32) + 1);
+                String var16 = var15.substring(var15.lastIndexOf(9) + 1);
+                var2 = var2 + var16 + ' ';
+            }
+        }
+    }
 }

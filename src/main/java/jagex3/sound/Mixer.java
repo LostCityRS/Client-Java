@@ -149,7 +149,7 @@ public final class Mixer extends PcmStream {
 
 	@ObfuscatedName("b.a(Lne;)V")
 	public void method131(class83 arg0) {
-		arg0.method739();
+		arg0.unlink();
 		arg0.method742();
 		Linkable var2 = this.field242.field2276.field2087;
 		if (this.field242.field2276 == var2) {
@@ -226,6 +226,6 @@ public final class Mixer extends PcmStream {
 
 	@ObfuscatedName("b.c(Loc;)V")
 	public synchronized void method135(PcmStream arg0) {
-		arg0.method739();
+		arg0.unlink();
 	}
 }

@@ -20,7 +20,7 @@ public class Linkable {
 	}
 
 	@ObfuscatedName("nd.a(I)V")
-	public final void method739() {
+	public final void unlink() {
 		if (this.field2105 != null) {
 			this.field2105.field2087 = this.field2087;
 			this.field2087.field2105 = this.field2105;

@@ -12,9 +12,6 @@ public final class class106 {
 	@ObfuscatedName("rd.c")
 	public int field2660;
 
-	@ObfuscatedName("rd.f")
-	public static LruCache field2663 = new LruCache(64);
-
 	@ObfuscatedName("rd.h")
 	public ModelSource field2665;
 

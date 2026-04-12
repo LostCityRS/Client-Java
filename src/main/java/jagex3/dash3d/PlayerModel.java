@@ -223,7 +223,7 @@ public final class PlayerModel {
 		if (arg0 == null) {
 			arg0 = new int[12];
 			for (int var5 = 0; var5 < 7; var5++) {
-				for (int var6 = 0; var6 < Statics.field974; var6++) {
+				for (int var6 = 0; var6 < IdkType.field974; var6++) {
 					IdkType var7 = IdkType.method177(var6);
 					if (var7 != null && !var7.field2373 && var5 + (arg1 ? 7 : 0) == var7.field2366) {
 						arg0[Statics.field2808[var5]] = var6 + 256;
@@ -253,13 +253,13 @@ public final class PlayerModel {
 		do {
 			if (arg1) {
 				var3++;
-				if (Statics.field974 <= var3) {
+				if (IdkType.field974 <= var3) {
 					var3 = 0;
 				}
 			} else {
 				var3--;
 				if (var3 < 0) {
-					var3 = Statics.field974 - 1;
+					var3 = IdkType.field974 - 1;
 				}
 			}
 			var4 = IdkType.method177(var3);

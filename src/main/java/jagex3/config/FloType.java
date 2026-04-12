@@ -1,14 +1,18 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("fc")
 public final class FloType extends Linkable2 {
 
+	@ObfuscatedName("nb.dd")
+	public static Js5 field2018;
+	@ObfuscatedName("m.d")
+	public static LruCache field1757 = new LruCache(64);
 	@ObfuscatedName("fc.Qb")
 	public boolean field913 = true;
 
@@ -41,7 +45,28 @@ public final class FloType extends Linkable2 {
 
 	@ObfuscatedName("na.a(Lbd;I)V")
 	public static void init(Js5 arg0) {
-		Statics.field2018 = arg0;
+		field2018 = arg0;
+	}
+
+	@ObfuscatedName("vd.b(II)Lfc;")
+	public static FloType method1026(int arg0) {
+		FloType var1 = (FloType) field1757.method263((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		byte[] var2 = field2018.method217(arg0, 4);
+		FloType var3 = new FloType();
+		if (var2 != null) {
+			var3.method393(arg0, new Packet(var2));
+		}
+		var3.method395();
+		field1757.method262((long) arg0, var3);
+		return var3;
+	}
+
+	@ObfuscatedName("cb.a(Z)V")
+	public static void method265() {
+		field1757.method267();
 	}
 
 	@ObfuscatedName("fc.a(BILba;)V")

@@ -1,15 +1,23 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("pe")
 public final class IdkType extends Linkable2 {
 
+	@ObfuscatedName("kc.s")
+	public static Js5 field1583;
+	@ObfuscatedName("qc.i")
+	public static Js5 field2433;
+	@ObfuscatedName("fe.Qc")
+	public static int field974;
+	@ObfuscatedName("wc.a")
+	public static LruCache field3282 = new LruCache(64);
 	@ObfuscatedName("pe.tb")
 	public final int[] field2353 = new int[6];
 
@@ -30,24 +38,29 @@ public final class IdkType extends Linkable2 {
 
 	@ObfuscatedName("se.a(ILbd;Lbd;)V")
 	public static void init(Js5 arg0, Js5 arg1) {
-		Statics.field1583 = arg1;
-		Statics.field2433 = arg0;
-		Statics.field974 = Statics.field2433.method235(3);
+		field1583 = arg1;
+		field2433 = arg0;
+		field974 = field2433.method235(3);
 	}
 
 	@ObfuscatedName("ba.a(BI)Lpe;")
 	public static IdkType method177(int arg0) {
-		IdkType var1 = (IdkType) Statics.field3282.method263((long) arg0);
+		IdkType var1 = (IdkType) field3282.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = Statics.field2433.method217(arg0, 3);
+		byte[] var2 = field2433.method217(arg0, 3);
 		IdkType var3 = new IdkType();
 		if (var2 != null) {
 			var3.method820(new Packet(var2));
 		}
-		Statics.field3282.method262((long) arg0, var3);
+		field3282.method262((long) arg0, var3);
 		return var3;
+	}
+
+	@ObfuscatedName("qd.b(B)V")
+	public static void method854() {
+		field3282.method267();
 	}
 
 	@ObfuscatedName("pe.a(BLba;)V")
@@ -68,7 +81,7 @@ public final class IdkType extends Linkable2 {
 		}
 		boolean var1 = true;
 		for (int var2 = 0; var2 < this.field2367.length; var2++) {
-			if (!Statics.field1583.method218(this.field2367[var2], 0)) {
+			if (!field1583.method218(this.field2367[var2], 0)) {
 				var1 = false;
 			}
 		}
@@ -79,7 +92,7 @@ public final class IdkType extends Linkable2 {
 	public boolean method822() {
 		boolean var1 = true;
 		for (int var2 = 0; var2 < 5; var2++) {
-			if (this.field2377[var2] != -1 && !Statics.field1583.method218(this.field2377[var2], 0)) {
+			if (this.field2377[var2] != -1 && !field1583.method218(this.field2377[var2], 0)) {
 				var1 = false;
 			}
 		}
@@ -113,7 +126,7 @@ public final class IdkType extends Linkable2 {
 		int var2 = 0;
 		for (int var3 = 0; var3 < 5; var3++) {
 			if (this.field2377[var3] != -1) {
-				var1[var2++] = Model.method798(Statics.field1583, this.field2377[var3]);
+				var1[var2++] = Model.method798(field1583, this.field2377[var3]);
 			}
 		}
 		Model var4 = new Model(var1, var2);
@@ -130,7 +143,7 @@ public final class IdkType extends Linkable2 {
 		}
 		Model[] var1 = new Model[this.field2367.length];
 		for (int var2 = 0; var2 < this.field2367.length; var2++) {
-			var1[var2] = Model.method798(Statics.field1583, this.field2367[var2]);
+			var1[var2] = Model.method798(field1583, this.field2367[var2]);
 		}
 		Model var3;
 		if (var1.length == 1) {

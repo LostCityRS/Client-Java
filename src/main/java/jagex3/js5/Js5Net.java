@@ -1,12 +1,17 @@
 package jagex3.js5;
 
 import deob.*;
-import jagex3.io.BZip2State;
+import jagex3.datastruct.HashTable;
 import jagex3.io.Packet;
 
 import java.io.IOException;
 
 public class Js5Net {
+	@ObfuscatedName("mb.n")
+	public static int field1803 = 0;
+	@ObfuscatedName("mb.P")
+	public static HashTable field1831 = new HashTable(4096);
+
 	@ObfuscatedName("id.a(B)Z")
 	public static boolean loop() {
 		long var0 = Statics.currentTime();
@@ -42,7 +47,7 @@ public class Js5Net {
 					var6.method153((int) var5.field2073);
 					Statics.field2769.method1016(4, var6.field284);
 					var5.method468();
-					BZip2State.field1831.method498(var5, var5.field2073);
+					field1831.method498(var5, var5.field2073);
 					Statics.field2144++;
 					Statics.field1260--;
 				}
@@ -100,14 +105,14 @@ public class Js5Net {
 									}
 									class14.field476 = (byte) (Math.random() * 255.0D + 1.0D);
 									Statics.field2769 = null;
-									BZip2State.field1803++;
+									field1803++;
 									return false;
 								}
 								Statics.field525 = 0;
-								BZip2State.field1803 = 0;
+								field1803 = 0;
 								Statics.field967.field2615.method976((Statics.field967.field2073 & 0xFF0000L) == 16711680L, (int) (Statics.field967.field2073 & 0xFFFFL), Statics.field3180, Statics.field2613.field284);
 							}
-							Statics.field967.method739();
+							Statics.field967.unlink();
 							Statics.field967 = null;
 							Statics.field2613 = null;
 							class102.field2559 = 0;
@@ -147,7 +152,7 @@ public class Js5Net {
 							class104 var25 = (class104) class78.field1917.method499(var23);
 							Statics.field3180 = true;
 							if (var25 == null) {
-								var25 = (class104) BZip2State.field1831.method499(var23);
+								var25 = (class104) field1831.method499(var23);
 								Statics.field3180 = false;
 							}
 							if (var25 == null) {

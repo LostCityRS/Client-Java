@@ -4,7 +4,7 @@ import jagex3.client.ClientScript;
 import jagex3.util.JagString;
 
 @ObfuscatedName("ua")
-public final class class121 {
+public final class ClientGosubFrame {
 
 	@ObfuscatedName("ua.a")
 	public ClientScript field2999;
@@ -17,11 +17,5 @@ public final class class121 {
 
 	@ObfuscatedName("ua.o")
 	public int field3013 = -1;
-
-	@ObfuscatedName("ua.q")
-	public static int[][] field3015 = new int[104][104];
-
-	@ObfuscatedName("ua.z")
-	public static boolean field3024 = false;
 
 }

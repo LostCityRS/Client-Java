@@ -2,16 +2,21 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class86;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
-import jagex3.io.BZip2State;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("ec")
 public final class SpotType extends Linkable2 {
 
+	@ObfuscatedName("ob.a")
+	public static LruCache field2152 = new LruCache(64);
+	@ObfuscatedName("g.v")
+	public static Js5 field999;
+	@ObfuscatedName("mb.Z")
+	public static LruCache field1841 = new LruCache(30);
 	@ObfuscatedName("ec.Fb")
 	public int field794 = 0;
 
@@ -44,24 +49,30 @@ public final class SpotType extends Linkable2 {
 
 	@ObfuscatedName("n.a(II)Lec;")
 	public static SpotType method713(int arg0) {
-		SpotType var1 = (SpotType) class86.field2152.method263((long) arg0);
+		SpotType var1 = (SpotType) field2152.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = Statics.field999.method217(arg0, 13);
+		byte[] var2 = field999.method217(arg0, 13);
 		SpotType var3 = new SpotType();
 		var3.field809 = arg0;
 		if (var2 != null) {
 			var3.method373(new Packet(var2));
 		}
-		class86.field2152.method262((long) arg0, var3);
+		field2152.method262((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("s.a(ILbd;Lbd;)V")
 	public static void init(Js5 arg0, Js5 arg1) {
 		Statics.field1901 = arg0;
-		Statics.field999 = arg1;
+		field999 = arg1;
+	}
+
+	@ObfuscatedName("uc.e(I)V")
+	public static void method995() {
+		field2152.method267();
+		field1841.method267();
 	}
 
 	@ObfuscatedName("ec.a(IBLba;)V")
@@ -89,7 +100,7 @@ public final class SpotType extends Linkable2 {
 
 	@ObfuscatedName("ec.a(II)Lpa;")
 	public Model method371(int arg0) {
-		Model var2 = (Model) BZip2State.field1841.method263((long) this.field809);
+		Model var2 = (Model) field1841.method263((long) this.field809);
 		if (var2 == null) {
 			var2 = Model.method798(Statics.field1901, this.field792);
 			if (var2 == null) {
@@ -102,7 +113,7 @@ public final class SpotType extends Linkable2 {
 			}
 			var2.method778();
 			var2.method770(this.field799 + 64, this.field794 + 850, -30, -50, -30, true);
-			BZip2State.field1841.method262((long) this.field809, var2);
+			field1841.method262((long) this.field809, var2);
 		}
 		Model var4;
 		if (this.field786 == -1 || arg0 == -1) {

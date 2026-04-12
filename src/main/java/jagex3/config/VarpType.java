@@ -1,37 +1,47 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
-import deob.class24;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("qa")
 public final class VarpType extends Linkable2 {
 
+	@ObfuscatedName("de.g")
+	public static LruCache field727 = new LruCache(64);
+	@ObfuscatedName("vc.v")
+	public static Js5 field3167;
+	@ObfuscatedName("tc.d")
+	public static int field2915;
 	@ObfuscatedName("qa.Hb")
 	public int field2404 = 0;
 
 	@ObfuscatedName("vd.a(BI)Lqa;")
 	public static VarpType method1023(int arg0) {
-		VarpType var1 = (VarpType) class24.field727.method263((long) arg0);
+		VarpType var1 = (VarpType) field727.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = Statics.field3167.method217(arg0, 16);
+		byte[] var2 = field3167.method217(arg0, 16);
 		VarpType var3 = new VarpType();
 		if (var2 != null) {
 			var3.method838(new Packet(var2));
 		}
-		class24.field727.method262((long) arg0, var3);
+		field727.method262((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("client.a(Lbd;Z)V")
 	public static void init(Js5 arg0) {
-		Statics.field3167 = arg0;
-		Statics.field2915 = Statics.field3167.method235(16);
+		field3167 = arg0;
+		field2915 = field3167.method235(16);
+	}
+
+	@ObfuscatedName("bb.c(I)V")
+	public static void method191() {
+		field727.method267();
 	}
 
 	@ObfuscatedName("qa.a(Lba;I)V")

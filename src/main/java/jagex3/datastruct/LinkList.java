@@ -17,7 +17,7 @@ public final class LinkList {
 		if (this.field2276 == var1) {
 			return null;
 		} else {
-			var1.method739();
+			var1.unlink();
 			return var1;
 		}
 	}
@@ -49,7 +49,7 @@ public final class LinkList {
 	@ObfuscatedName("pb.a(Lnd;I)V")
 	public void method804(Linkable arg0) {
 		if (arg0.field2105 != null) {
-			arg0.method739();
+			arg0.unlink();
 		}
 		arg0.field2105 = this.field2276.field2105;
 		arg0.field2087 = this.field2276;
@@ -60,7 +60,7 @@ public final class LinkList {
 	@ObfuscatedName("pb.a(ILnd;)V")
 	public void method805(Linkable arg0) {
 		if (arg0.field2105 != null) {
-			arg0.method739();
+			arg0.unlink();
 		}
 		arg0.field2087 = this.field2276.field2087;
 		arg0.field2105 = this.field2276;
@@ -75,7 +75,7 @@ public final class LinkList {
 			if (this.field2276 == var1) {
 				return;
 			}
-			var1.method739();
+			var1.unlink();
 		}
 	}
 
@@ -99,7 +99,7 @@ public final class LinkList {
 	@ObfuscatedName("pb.a(ILnd;Lnd;)V")
 	public void method811(Linkable arg0, Linkable arg1) {
 		if (arg1.field2105 != null) {
-			arg1.method739();
+			arg1.unlink();
 		}
 		arg1.field2087 = arg0;
 		arg1.field2105 = arg0.field2105;
@@ -125,7 +125,7 @@ public final class LinkList {
 		if (this.field2276 == var1) {
 			return null;
 		} else {
-			var1.method739();
+			var1.unlink();
 			return var1;
 		}
 	}

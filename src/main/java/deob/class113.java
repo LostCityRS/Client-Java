@@ -1,7 +1,6 @@
 package deob;
 
 import jagex3.dash3d.ModelSource;
-import jagex3.datastruct.LruCache;
 
 @ObfuscatedName("se")
 public final class class113 {
@@ -21,23 +20,11 @@ public final class class113 {
 	@ObfuscatedName("se.o")
 	public ModelSource field2787;
 
-	@ObfuscatedName("se.p")
-	public static LruCache field2788 = new LruCache(64);
-
 	@ObfuscatedName("se.r")
 	public int field2790;
 
 	@ObfuscatedName("se.w")
 	public int field2795;
-
-	@ObfuscatedName("se.B")
-	public static int field2800 = -1;
-
-	@ObfuscatedName("se.C")
-	public static byte[][] field2801 = new byte[1000][];
-
-	@ObfuscatedName("se.E")
-	public static int[] field2803 = new int[2000];
 
 	@ObfuscatedName("se.x")
 	public int field2796;

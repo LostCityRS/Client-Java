@@ -145,7 +145,16 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 		return field2430++;
 	}
 
-	@Override
+    @ObfuscatedName("ra.a(ILjava/awt/event/KeyEvent;)I")
+    public static int method870(KeyEvent arg0) {
+        int var1 = arg0.getKeyChar();
+        if (var1 <= 0 || var1 >= 256) {
+            var1 = -1;
+        }
+        return var1;
+    }
+
+    @Override
 	public void keyTyped(KeyEvent arg0) {
 		arg0.consume();
 	}
@@ -179,7 +188,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 			if (var3 == 85 || var3 == 80 || var3 == 84 || var3 == 0 || var3 == 101) {
 				var4 = -1;
 			} else {
-				var4 = Statics.method870(arg0);
+				var4 = method870(arg0);
 			}
 			if (field1326 >= 0 && var3 >= 0) {
 				field52[field1326] = var3;

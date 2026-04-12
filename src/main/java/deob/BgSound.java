@@ -59,7 +59,7 @@ public final class BgSound extends Linkable {
 	public int field437;
 
 	@ObfuscatedName("n.c(I)V")
-	public static void method718() {
+	public static void reset() {
 		for (BgSound var0 = (BgSound) field515.method802(); var0 != null; var0 = (BgSound) field515.method809()) {
 			if (var0.field424 != null) {
 				Client.soundMixer.method135(var0.field424);

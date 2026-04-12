@@ -33,7 +33,7 @@ public final class CollisionMap {
 	}
 
 	@ObfuscatedName("ad.b(I)V")
-	public void method110() {
+	public void reset() {
 		for (int var1 = 0; var1 < this.field204; var1++) {
 			for (int var2 = 0; var2 < this.field196; var2++) {
 				if (var1 == 0 || var2 == 0 || this.field204 - 1 == var1 || this.field196 - 1 == var2) {
@@ -501,7 +501,7 @@ public final class CollisionMap {
 	}
 
 	public CollisionMap(int arg0, int arg1) {
-		this.method110();
+		this.reset();
 	}
 
 	@ObfuscatedName("ad.a(IIIIIBI)Z")

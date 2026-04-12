@@ -24,11 +24,11 @@ public final class LruCache {
 	public void method262(long arg0, Linkable2 arg1) {
 		if (this.field490 == 0) {
 			Linkable2 var4 = this.field493.method597();
-			var4.method739();
+			var4.unlink();
 			var4.method468();
 			if (this.field483 == var4) {
 				Linkable2 var5 = this.field493.method597();
-				var5.method739();
+				var5.unlink();
 				var5.method468();
 			}
 		} else {
@@ -51,7 +51,7 @@ public final class LruCache {
 	public void method264(long arg0) {
 		Linkable2 var3 = (Linkable2) this.field492.method499(arg0);
 		if (var3 != null) {
-			var3.method739();
+			var3.unlink();
 			var3.method468();
 			this.field490++;
 		}
@@ -65,7 +65,7 @@ public final class LruCache {
 				this.field490 = this.field491;
 				return;
 			}
-			var1.method739();
+			var1.unlink();
 			var1.method468();
 		}
 	}

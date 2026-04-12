@@ -12,7 +12,4 @@ public final class class102 {
 	@ObfuscatedName("r.o")
 	public static int field2573 = 0;
 
-	@ObfuscatedName("r.s")
-	public static int[][] field2577 = new int[104][104];
-
 }

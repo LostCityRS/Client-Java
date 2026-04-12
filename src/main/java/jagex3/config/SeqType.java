@@ -2,16 +2,24 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class46;
 import jagex3.dash3d.AnimFrameSet;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("he")
 public final class SeqType extends Linkable2 {
 
+	@ObfuscatedName("hd.xb")
+	public static LruCache field1196 = new LruCache(64);
+	@ObfuscatedName("he.Mb")
+	public static Js5 field1241;
+	@ObfuscatedName("te.rb")
+	public static Js5 field2966;
+	@ObfuscatedName("fd.Hb")
+	public static Js5 field939;
 	@ObfuscatedName("he.ub")
 	public int[] field1223;
 
@@ -53,25 +61,31 @@ public final class SeqType extends Linkable2 {
 
 	@ObfuscatedName("cb.a(ZLbd;Lbd;Lbd;)V")
 	public static void init(Js5 arg0, Js5 arg1, Js5 arg2) {
-		Statics.field2966 = arg0;
-		Statics.field939 = arg2;
-		Statics.field1241 = arg1;
+		field2966 = arg0;
+		field939 = arg2;
+		field1241 = arg1;
 	}
 
 	@ObfuscatedName("ac.b(II)Lhe;")
 	public static SeqType method103(int arg0) {
-		SeqType var1 = (SeqType) class46.field1196.method263((long) arg0);
+		SeqType var1 = (SeqType) field1196.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = Statics.field1241.method217(arg0, 12);
+		byte[] var2 = field1241.method217(arg0, 12);
 		SeqType var3 = new SeqType();
 		if (var2 != null) {
 			var3.method489(new Packet(var2));
 		}
 		var3.method486();
-		class46.field1196.method262((long) arg0, var3);
+		field1196.method262((long) arg0, var3);
 		return var3;
+	}
+
+	@ObfuscatedName("bd.a(Z)V")
+	public static void method233() {
+		field1196.method267();
+		Statics.field2136.method267();
 	}
 
 	@ObfuscatedName("he.a(Lpa;Lhe;IIB)Lpa;")

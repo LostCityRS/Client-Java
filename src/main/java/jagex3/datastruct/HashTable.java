@@ -32,7 +32,7 @@ public final class HashTable {
 	@ObfuscatedName("i.a(Lnd;BJ)V")
 	public void method498(Linkable arg0, long arg1) {
 		if (arg0.field2105 != null) {
-			arg0.method739();
+			arg0.unlink();
 		}
 		Linkable var4 = this.field1273[(int) ((long) (this.field1268 - 1) & arg1)];
 		arg0.field2087 = var4;

@@ -512,7 +512,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a()V")
-	public void method54() {
+	public void resetMap() {
 		for (int var1 = 0; var1 < this.field142; var1++) {
 			for (int var2 = 0; var2 < this.field124; var2++) {
 				for (int var3 = 0; var3 < this.field143; var3++) {
@@ -1369,7 +1369,7 @@ public final class World {
 
 	public World(int arg0, int arg1, int arg2, int[][][] arg3) {
 		this.field132 = arg3;
-		this.method54();
+		this.resetMap();
 	}
 
 	@ObfuscatedName("ab.c(IIII)V")
@@ -1987,7 +1987,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(I)V")
-	public void method92(int arg0) {
+	public void fillBaseLevel(int arg0) {
 		this.field130 = arg0;
 		for (int var2 = 0; var2 < this.field124; var2++) {
 			for (int var3 = 0; var3 < this.field143; var3++) {

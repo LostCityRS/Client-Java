@@ -2,11 +2,18 @@ package jagex3.js5;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import deob.class103;
 import deob.class33;
 import jagex3.callstack.JagException;
 import jagex3.datastruct.IntHashTable;
+import jagex3.io.BZip2;
 import jagex3.io.Packet;
 import jagex3.util.JagString;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.util.zip.GZIPInputStream;
 
 @ObfuscatedName("bd")
 public abstract class Js5 {
@@ -55,6 +62,37 @@ public abstract class Js5 {
 
 	@ObfuscatedName("bd.M")
 	public byte[][][] field399;
+
+	@ObfuscatedName("r.a([BI)[B")
+	public static byte[] method863(byte[] arg0) {
+		Packet var1 = new Packet(arg0);
+		int var2 = var1.method144();
+		int var3 = var1.method167();
+		if (var3 < 0 || class103.field2597 != 0 && class103.field2597 < var3) {
+			throw new RuntimeException();
+		} else if (var2 == 0) {
+			byte[] var7 = new byte[var3];
+			var1.method173(var7, var3);
+			return var7;
+		} else {
+			int var4 = var1.method167();
+			if (var4 < 0 || class103.field2597 != 0 && var4 > class103.field2597) {
+				throw new RuntimeException();
+			}
+			byte[] var5 = new byte[var4];
+			if (var2 == 1) {
+				BZip2.method446(var5, var4, arg0, var3);
+			} else {
+				try {
+					DataInputStream var6 = new DataInputStream(new GZIPInputStream(new ByteArrayInputStream(arg0, 9, var3)));
+					var6.readFully(var5);
+					var6.close();
+				} catch (IOException var8) {
+				}
+			}
+			return var5;
+		}
+	}
 
 	@ObfuscatedName("bd.a(La;La;I)[B")
 	public final byte[] method215(JagString arg0, JagString arg1) {
@@ -129,7 +167,7 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.a(I[B)V")
 	public final void method223(byte[] arg0) {
 		this.field366 = Statics.method244(arg0, arg0.length);
-		Packet var2 = new Packet(Statics.method863(arg0));
+		Packet var2 = new Packet(method863(arg0));
 		int var3 = var2.method144();
 		if (var3 != 5) {
 			return;
@@ -232,7 +270,7 @@ public abstract class Js5 {
 		}
 		byte[] var10;
 		try {
-			var10 = Statics.method863(var8);
+			var10 = method863(var8);
 		} catch (RuntimeException var25) {
 			throw JagException.report(var25, "T3 - " + (arg1 != null) + "," + arg0 + "," + var8.length + "," + Statics.method244(var8, var8.length) + "," + Statics.method244(var8, var8.length - 2) + "," + this.field402[arg0] + "," + this.field366);
 		}
@@ -379,7 +417,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.b(ILa;)V")
-	public final void method240(JagString arg0) {
+	public final void updateCacheHint(JagString arg0) {
 		JagString var2 = arg0.method30();
 		int var3 = this.field404.method745(var2.method27());
 		if (var3 >= 0) {
