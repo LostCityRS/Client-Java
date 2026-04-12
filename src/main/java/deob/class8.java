@@ -3,7 +3,7 @@ package deob;
 import java.math.BigInteger;
 
 @ObfuscatedName("ba")
-public class class8 extends class82 {
+public class class8 extends Linkable {
 
 	@ObfuscatedName("ba.ac")
 	public static int field296 = 0;
@@ -24,13 +24,13 @@ public class class8 extends class82 {
 	public static int field307 = 0;
 
 	@ObfuscatedName("ba.mc")
-	public static class1 field308 = Statics.method931("Too many incorrect logins from your address)3");
+	public static JagString field308 = JagString.wrap("Too many incorrect logins from your address)3");
 
 	@ObfuscatedName("ba.hc")
-	public static class1 field303 = field308;
+	public static JagString field303 = field308;
 
 	@ObfuscatedName("ba.oc")
-	public static class1 field310 = Statics.method931("Ausw-=hlen");
+	public static JagString field310 = JagString.wrap("Ausw-=hlen");
 
 	@ObfuscatedName("ba.gc")
 	public static int field302 = 0;
@@ -75,7 +75,7 @@ public class class8 extends class82 {
 	}
 
 	@ObfuscatedName("ba.c(I)La;")
-	public final class1 method140() {
+	public final JagString method140() {
 		int var1 = this.field267;
 		while (this.field284[this.field267++] != 0) {
 		}
@@ -344,7 +344,7 @@ public class class8 extends class82 {
 	}
 
 	@ObfuscatedName("ba.a(La;B)V")
-	public final void method181(class1 arg0) {
+	public final void method181(JagString arg0) {
 		this.field267 += arg0.method2(arg0.method10(), this.field284, this.field267);
 		this.field284[this.field267++] = 0;
 	}

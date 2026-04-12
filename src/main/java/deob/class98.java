@@ -4,13 +4,13 @@ package deob;
 public final class class98 {
 
 	@ObfuscatedName("qb.b")
-	public static class1 field2406 = Statics.method931(" ");
+	public static JagString field2406 = JagString.wrap(" ");
 
 	@ObfuscatedName("qb.d")
-	public static class1 field2408 = Statics.method931("Loading title screen )2 ");
+	public static JagString field2408 = JagString.wrap("Loading title screen )2 ");
 
 	@ObfuscatedName("qb.c")
-	public static class1 field2407 = field2408;
+	public static JagString field2407 = field2408;
 
 	@ObfuscatedName("qb.e")
 	public static int field2409 = 0;
@@ -22,10 +22,10 @@ public final class class98 {
 	public int[][] field2411;
 
 	@ObfuscatedName("qb.h")
-	public static class1 field2412 = Statics.method931("RuneScape is loading )2 please wait)3)3)3");
+	public static JagString field2412 = JagString.wrap("RuneScape is loading )2 please wait)3)3)3");
 
 	@ObfuscatedName("qb.a")
-	public static class1 field2405 = field2412;
+	public static JagString field2405 = field2412;
 
 	@ObfuscatedName("qb.j")
 	public final int field2414;
@@ -34,7 +34,7 @@ public final class class98 {
 	public final int field2416;
 
 	@ObfuscatedName("qb.p")
-	public static class1 field2420 = Statics.method931("M");
+	public static JagString field2420 = JagString.wrap("M");
 
 	@ObfuscatedName("qb.q")
 	public static int field2421 = -1;

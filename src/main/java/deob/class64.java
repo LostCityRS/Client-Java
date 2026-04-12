@@ -21,25 +21,25 @@ public abstract class class64 extends Applet implements Runnable, FocusListener,
 	public static long[] field1601 = new long[32];
 
 	@ObfuscatedName("kd.h")
-	public static class1 field1605 = null;
+	public static JagString field1605 = null;
 
 	@ObfuscatedName("kd.n")
-	public static class1 field1611 = Statics.method931("Anmelde)2Limit -Uberschritten)3");
+	public static JagString field1611 = JagString.wrap("Anmelde)2Limit -Uberschritten)3");
 
 	@ObfuscatedName("kd.u")
-	public static class1 field1618 = Statics.method931("Bitte warten Sie eine Minute");
+	public static JagString field1618 = JagString.wrap("Bitte warten Sie eine Minute");
 
 	@ObfuscatedName("kd.I")
-	public static class1 field1632 = Statics.method931("Die Adresse dieses Computers wurde gesperrt)1");
+	public static JagString field1632 = JagString.wrap("Die Adresse dieses Computers wurde gesperrt)1");
 
 	@ObfuscatedName("kd.H")
-	public static class1 field1631 = Statics.method931("null");
+	public static JagString field1631 = JagString.wrap("null");
 
 	@ObfuscatedName("kd.y")
-	public static class1 field1622 = Statics.method931("Hier klicken)1 um fortzufahren)3)3)3");
+	public static JagString field1622 = JagString.wrap("Hier klicken)1 um fortzufahren)3)3)3");
 
 	@ObfuscatedName("kd.B")
-	public static class1 field1625 = Statics.method931("null");
+	public static JagString field1625 = JagString.wrap("null");
 
 	@ObfuscatedName("kd.Q")
 	public boolean field1640 = false;
@@ -75,7 +75,7 @@ public abstract class class64 extends Applet implements Runnable, FocusListener,
 			this.method290();
 			Statics.field1747 = Statics.method909();
 			Statics.field1747.method571();
-			while (class11.field369 == 0L || Statics.method869() < class11.field369) {
+			while (Js5.field369 == 0L || Statics.method869() < Js5.field369) {
 				Statics.field681 = Statics.field1747.method573(class81.field2049, class22.field685);
 				for (int var4 = 0; var4 < Statics.field681; var4++) {
 					this.method625();
@@ -121,7 +121,7 @@ public abstract class class64 extends Applet implements Runnable, FocusListener,
 	@Override
 	public final void stop() {
 		if (class6.field230 == this && !class36.field972) {
-			class11.field369 = Statics.method869() + 4000L;
+			Js5.field369 = Statics.method869() + 4000L;
 		}
 	}
 
@@ -167,7 +167,7 @@ public abstract class class64 extends Applet implements Runnable, FocusListener,
 	@Override
 	public final void start() {
 		if (class6.field230 == this && !class36.field972) {
-			class11.field369 = 0L;
+			Js5.field369 = 0L;
 		}
 	}
 
@@ -193,7 +193,7 @@ public abstract class class64 extends Applet implements Runnable, FocusListener,
 	@Override
 	public final void destroy() {
 		if (class6.field230 == this && !class36.field972) {
-			class11.field369 = Statics.method869();
+			Js5.field369 = Statics.method869();
 			Statics.method753(5000L);
 			Statics.field2026 = null;
 			this.method615();
@@ -255,8 +255,8 @@ public abstract class class64 extends Applet implements Runnable, FocusListener,
 			class105.field2635 = ((var5 >> 1) + 32000) / var5;
 		}
 		Statics.field1656 = Statics.field1656 + 1 & 0x1F;
-		if (class82.field2075++ > 50) {
-			class82.field2075 -= 50;
+		if (Linkable.field2075++ > 50) {
+			Linkable.field2075 -= 50;
 			class97.field2402 = true;
 			Statics.field3049.setSize(Statics.field711, Statics.field2372);
 			Statics.field3049.setVisible(true);

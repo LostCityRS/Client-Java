@@ -1,19 +1,19 @@
 package deob;
 
 @ObfuscatedName("pb")
-public final class class92 {
+public final class LinkList {
 
 	@ObfuscatedName("pb.f")
-	public final class82 field2276 = new class82();
+	public final Linkable field2276 = new Linkable();
 
 	@ObfuscatedName("pb.i")
-	public static class1 field2279 = Statics.method931("Bitte entfernen Sie ");
+	public static JagString field2279 = JagString.wrap("Bitte entfernen Sie ");
 
 	@ObfuscatedName("pb.n")
-	public static class92 field2284 = new class92();
+	public static LinkList field2284 = new LinkList();
 
 	@ObfuscatedName("pb.r")
-	public class82 field2288;
+	public Linkable field2288;
 
 	@ObfuscatedName("pb.w")
 	public static volatile int field2293 = 0;
@@ -22,19 +22,19 @@ public final class class92 {
 	public static int field2295 = 0;
 
 	@ObfuscatedName("pb.A")
-	public static class1 field2297 = Statics.method931("(U2");
+	public static JagString field2297 = JagString.wrap("(U2");
 
 	@ObfuscatedName("pb.D")
-	public static class1 field2300 = Statics.method931("cyan:");
+	public static JagString field2300 = JagString.wrap("cyan:");
 
 	@ObfuscatedName("pb.z")
-	public static class1 field2296 = field2300;
+	public static JagString field2296 = field2300;
 
 	@ObfuscatedName("pb.B")
-	public static class1 field2298 = Statics.method931("(WSpielkonto wiederherstellen(W Option auf der Hauptseite)3");
+	public static JagString field2298 = JagString.wrap("(WSpielkonto wiederherstellen(W Option auf der Hauptseite)3");
 
 	@ObfuscatedName("pb.C")
-	public static class1 field2299 = Statics.method931("Name des Gegenstands eingeben:");
+	public static JagString field2299 = JagString.wrap("Name des Gegenstands eingeben:");
 
 	@ObfuscatedName("pb.E")
 	public static class8 field2301 = new class8(8);
@@ -43,17 +43,17 @@ public final class class92 {
 	public static int[] field2303 = new int[1000];
 
 	@ObfuscatedName("pb.H")
-	public static class1 field2304 = Statics.method931("Texturen geladen)3");
+	public static JagString field2304 = JagString.wrap("Texturen geladen)3");
 
 	@ObfuscatedName("pb.I")
-	public static class1 field2305 = Statics.method931("m");
+	public static JagString field2305 = JagString.wrap("m");
 
 	@ObfuscatedName("pb.F")
 	public static class67 field2302 = new class67();
 
 	@ObfuscatedName("pb.a(B)Lnd;")
-	public class82 method799() {
-		class82 var1 = this.field2276.field2105;
+	public Linkable method799() {
+		Linkable var1 = this.field2276.field2105;
 		if (this.field2276 == var1) {
 			return null;
 		} else {
@@ -63,8 +63,8 @@ public final class class92 {
 	}
 
 	@ObfuscatedName("pb.b(B)Lnd;")
-	public class82 method801() {
-		class82 var1 = this.field2276.field2105;
+	public Linkable method801() {
+		Linkable var1 = this.field2276.field2105;
 		if (this.field2276 == var1) {
 			this.field2288 = null;
 			return null;
@@ -75,8 +75,8 @@ public final class class92 {
 	}
 
 	@ObfuscatedName("pb.c(B)Lnd;")
-	public class82 method802() {
-		class82 var1 = this.field2276.field2087;
+	public Linkable method802() {
+		Linkable var1 = this.field2276.field2087;
 		if (this.field2276 == var1) {
 			this.field2288 = null;
 			return null;
@@ -87,7 +87,7 @@ public final class class92 {
 	}
 
 	@ObfuscatedName("pb.a(Lnd;I)V")
-	public void method804(class82 arg0) {
+	public void method804(Linkable arg0) {
 		if (arg0.field2105 != null) {
 			arg0.method739();
 		}
@@ -98,7 +98,7 @@ public final class class92 {
 	}
 
 	@ObfuscatedName("pb.a(ILnd;)V")
-	public void method805(class82 arg0) {
+	public void method805(Linkable arg0) {
 		if (arg0.field2105 != null) {
 			arg0.method739();
 		}
@@ -111,7 +111,7 @@ public final class class92 {
 	@ObfuscatedName("pb.b(I)V")
 	public void method806() {
 		while (true) {
-			class82 var1 = this.field2276.field2087;
+			Linkable var1 = this.field2276.field2087;
 			if (this.field2276 == var1) {
 				return;
 			}
@@ -119,14 +119,14 @@ public final class class92 {
 		}
 	}
 
-	public class92() {
+	public LinkList() {
 		this.field2276.field2105 = this.field2276;
 		this.field2276.field2087 = this.field2276;
 	}
 
 	@ObfuscatedName("pb.d(I)Lnd;")
-	public class82 method809() {
-		class82 var1 = this.field2288;
+	public Linkable method809() {
+		Linkable var1 = this.field2288;
 		if (this.field2276 == var1) {
 			this.field2288 = null;
 			return null;
@@ -137,7 +137,7 @@ public final class class92 {
 	}
 
 	@ObfuscatedName("pb.a(ILnd;Lnd;)V")
-	public void method811(class82 arg0, class82 arg1) {
+	public void method811(Linkable arg0, Linkable arg1) {
 		if (arg1.field2105 != null) {
 			arg1.method739();
 		}
@@ -148,8 +148,8 @@ public final class class92 {
 	}
 
 	@ObfuscatedName("pb.f(I)Lnd;")
-	public class82 method812() {
-		class82 var1 = this.field2288;
+	public Linkable method812() {
+		Linkable var1 = this.field2288;
 		if (this.field2276 == var1) {
 			this.field2288 = null;
 			return null;
@@ -160,8 +160,8 @@ public final class class92 {
 	}
 
 	@ObfuscatedName("pb.g(I)Lnd;")
-	public class82 method813() {
-		class82 var1 = this.field2276.field2087;
+	public Linkable method813() {
+		Linkable var1 = this.field2276.field2087;
 		if (this.field2276 == var1) {
 			return null;
 		} else {

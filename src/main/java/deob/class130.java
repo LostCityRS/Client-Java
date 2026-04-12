@@ -7,34 +7,34 @@ public final class class130 extends class80 {
 	public static int field3176 = 0;
 
 	@ObfuscatedName("vd.vd")
-	public static class1 field3177 = null;
+	public static JagString field3177 = null;
 
 	@ObfuscatedName("vd.Cd")
-	public static class1 field3184 = Statics.method931("Sichtbare Karte vorbereitet)3");
+	public static JagString field3184 = JagString.wrap("Sichtbare Karte vorbereitet)3");
 
 	@ObfuscatedName("vd.Id")
-	public static class1 field3190 = Statics.method931("gr-Un:");
+	public static JagString field3190 = JagString.wrap("gr-Un:");
 
 	@ObfuscatedName("vd.Jd")
-	public static class1 field3191 = Statics.method931("Hierhin gehen");
+	public static JagString field3191 = JagString.wrap("Hierhin gehen");
 
 	@ObfuscatedName("vd.Ed")
 	public static int[] field3186 = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 };
 
 	@ObfuscatedName("vd.Hd")
-	public static class1 field3189 = Statics.method931("Keine Antwort vom Server)3");
+	public static JagString field3189 = JagString.wrap("Keine Antwort vom Server)3");
 
 	@ObfuscatedName("vd.xd")
-	public static class1 field3179 = Statics.method931("On");
+	public static JagString field3179 = JagString.wrap("On");
 
 	@ObfuscatedName("vd.Ld")
-	public static class1 field3193 = field3179;
+	public static JagString field3193 = field3179;
 
 	@ObfuscatedName("vd.Od")
-	public static class1 field3196 = Statics.method931("Connection lost");
+	public static JagString field3196 = JagString.wrap("Connection lost");
 
 	@ObfuscatedName("vd.Fd")
-	public static class1 field3187 = field3196;
+	public static JagString field3187 = field3196;
 
 	@ObfuscatedName("vd.Ad")
 	public class42 field3182;

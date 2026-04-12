@@ -4,25 +4,25 @@ package deob;
 public final class class46 extends class44 {
 
 	@ObfuscatedName("hd.sb")
-	public static class1 field1191 = Statics.method931(":duelreq:");
+	public static JagString field1191 = JagString.wrap(":duelreq:");
 
 	@ObfuscatedName("hd.ub")
 	public static class133[] field1193 = new class133[13];
 
 	@ObfuscatedName("hd.Fb")
-	public static class1 field1204 = Statics.method931("@yel@*V");
+	public static JagString field1204 = JagString.wrap("@yel@*V");
 
 	@ObfuscatedName("hd.yb")
-	public static class1 field1197 = Statics.method931("Enter name:");
+	public static JagString field1197 = JagString.wrap("Enter name:");
 
 	@ObfuscatedName("hd.Eb")
-	public static class1 field1203 = field1197;
+	public static JagString field1203 = field1197;
 
 	@ObfuscatedName("hd.Ab")
-	public static class1 field1199 = Statics.method931("scroll:");
+	public static JagString field1199 = JagString.wrap("scroll:");
 
 	@ObfuscatedName("hd.wb")
-	public static class1 field1195 = field1199;
+	public static JagString field1195 = field1199;
 
 	@ObfuscatedName("hd.Kb")
 	public static int field1209 = 0;
@@ -34,25 +34,25 @@ public final class class46 extends class44 {
 	public static class15 field1196 = new class15(64);
 
 	@ObfuscatedName("hd.Pb")
-	public static class1 field1214 = Statics.method931(" steht bereits auf Ihrer Ignorieren)2Liste(Q");
+	public static JagString field1214 = JagString.wrap(" steht bereits auf Ihrer Ignorieren)2Liste(Q");
 
 	@ObfuscatedName("hd.Rb")
-	public static class1 field1216 = Statics.method931("From");
+	public static JagString field1216 = JagString.wrap("From");
 
 	@ObfuscatedName("hd.Qb")
-	public static class1 field1215 = field1216;
+	public static JagString field1215 = field1216;
 
 	@ObfuscatedName("hd.Tb")
-	public static class1 field1218 = Statics.method931("Error connecting to server)3");
+	public static JagString field1218 = JagString.wrap("Error connecting to server)3");
 
 	@ObfuscatedName("hd.Vb")
-	public static class1 field1220 = Statics.method931("RuneScape has been updated(Q");
+	public static JagString field1220 = JagString.wrap("RuneScape has been updated(Q");
 
 	@ObfuscatedName("hd.Sb")
-	public static class1 field1217 = field1220;
+	public static JagString field1217 = field1220;
 
 	@ObfuscatedName("hd.Ub")
-	public static class1 field1219 = field1218;
+	public static JagString field1219 = field1218;
 
 	@ObfuscatedName("hd.zb")
 	public final byte[] field1198;

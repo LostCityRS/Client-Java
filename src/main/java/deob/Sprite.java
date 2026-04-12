@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("g")
-public final class class37 {
+public final class Sprite {
 
 	@ObfuscatedName("g.b")
 	public int field979;
@@ -31,7 +31,7 @@ public final class class37 {
 	public int field988;
 
 	@ObfuscatedName("g.l")
-	public static class1 field989 = Statics.method931("(Z");
+	public static JagString field989 = JagString.wrap("(Z");
 
 	@ObfuscatedName("g.m")
 	public int field990;
@@ -58,7 +58,7 @@ public final class class37 {
 	public static int field998 = 0;
 
 	@ObfuscatedName("g.w")
-	public static class1 field1000 = Statics.method931("Public chat");
+	public static JagString field1000 = JagString.wrap("Public chat");
 
 	@ObfuscatedName("g.x")
 	public static boolean field1001 = false;
@@ -67,13 +67,13 @@ public final class class37 {
 	public static int field1004 = 0;
 
 	@ObfuscatedName("g.C")
-	public static class1 field1006 = field1000;
+	public static JagString field1006 = field1000;
 
 	@ObfuscatedName("g.D")
 	public static boolean field1007 = false;
 
 	@ObfuscatedName("g.B")
-	public static class1 field1005 = Statics.method931("@gr3@");
+	public static JagString field1005 = JagString.wrap("@gr3@");
 
 	@ObfuscatedName("g.y")
 	public int field1002;

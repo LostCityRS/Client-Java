@@ -10,16 +10,16 @@ public final class class2 extends class80 {
 	public int field97;
 
 	@ObfuscatedName("aa.ce")
-	public static class1 field98 = Statics.method931("Spieler kann nicht gefunden werden: ");
+	public static JagString field98 = JagString.wrap("Spieler kann nicht gefunden werden: ");
 
 	@ObfuscatedName("aa.de")
 	public int field99;
 
 	@ObfuscatedName("aa.fe")
-	public static class1 field101 = Statics.method931("green:");
+	public static JagString field101 = JagString.wrap("green:");
 
 	@ObfuscatedName("aa.ud")
-	public static class1 field64 = field101;
+	public static JagString field64 = field101;
 
 	@ObfuscatedName("aa.vd")
 	public int field65 = 0;
@@ -28,22 +28,22 @@ public final class class2 extends class80 {
 	public int field66;
 
 	@ObfuscatedName("aa.Hd")
-	public static class1 field77 = Statics.method931("Mitteilung");
+	public static JagString field77 = JagString.wrap("Mitteilung");
 
 	@ObfuscatedName("aa.Nd")
-	public static class1 field83 = Statics.method931("Bitte starten Sie eine Mitgliedschaft");
+	public static JagString field83 = JagString.wrap("Bitte starten Sie eine Mitgliedschaft");
 
 	@ObfuscatedName("aa.Cd")
 	public static int field72 = 0;
 
 	@ObfuscatedName("aa.xd")
-	public static class1 field67 = Statics.method931("Try again in 60 secs)3)3)3");
+	public static JagString field67 = JagString.wrap("Try again in 60 secs)3)3)3");
 
 	@ObfuscatedName("aa.Xd")
-	public static class1 field93 = Statics.method931("Keine Antwort vom Anmelde)2Server)3");
+	public static JagString field93 = JagString.wrap("Keine Antwort vom Anmelde)2Server)3");
 
 	@ObfuscatedName("aa.Yd")
-	public static class1 field94 = field67;
+	public static JagString field94 = field67;
 
 	@ObfuscatedName("aa.yd")
 	public int field68 = 0;
@@ -82,7 +82,7 @@ public final class class2 extends class80 {
 	public int field89;
 
 	@ObfuscatedName("aa.Qd")
-	public class1 field86;
+	public JagString field86;
 
 	@ObfuscatedName("aa.Ud")
 	public class67 field90;
@@ -113,10 +113,10 @@ public final class class2 extends class80 {
 			}
 		}
 		if (!this.field95 && this.field73 != null) {
-			if (class82.field2063 >= this.field82) {
+			if (Linkable.field2063 >= this.field82) {
 				this.field73 = null;
 			}
-			if (this.field91 <= class82.field2063 && this.field82 > class82.field2063) {
+			if (this.field91 <= Linkable.field2063 && this.field82 > Linkable.field2063) {
 				class91 var6 = this.field73;
 				var6.method796(this.field79 - super.field1972, -this.field84 + this.field80, this.field99 - super.field1963);
 				if (super.field1954 == 512) {

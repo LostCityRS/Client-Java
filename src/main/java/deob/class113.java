@@ -19,7 +19,7 @@ public final class class113 {
 	public static int[] field2782 = new int[5];
 
 	@ObfuscatedName("se.k")
-	public static class1 field2783 = Statics.method931("::clientdrop");
+	public static JagString field2783 = JagString.wrap("::clientdrop");
 
 	@ObfuscatedName("se.m")
 	public int field2785;
@@ -34,10 +34,10 @@ public final class class113 {
 	public static class15 field2788 = new class15(64);
 
 	@ObfuscatedName("se.q")
-	public static class1 field2789 = Statics.method931("Message");
+	public static JagString field2789 = JagString.wrap("Message");
 
 	@ObfuscatedName("se.f")
-	public static class1 field2778 = field2789;
+	public static JagString field2778 = field2789;
 
 	@ObfuscatedName("se.r")
 	public int field2790;
@@ -46,7 +46,7 @@ public final class class113 {
 	public int field2795;
 
 	@ObfuscatedName("se.z")
-	public static class1 field2798 = Statics.method931("backvmid1");
+	public static JagString field2798 = JagString.wrap("backvmid1");
 
 	@ObfuscatedName("se.y")
 	public static int field2797 = 0;
@@ -55,7 +55,7 @@ public final class class113 {
 	public static int field2800 = -1;
 
 	@ObfuscatedName("se.D")
-	public static class1 field2802 = Statics.method931("Chat panel redrawn");
+	public static JagString field2802 = JagString.wrap("Chat panel redrawn");
 
 	@ObfuscatedName("se.C")
 	public static byte[][] field2801 = new byte[1000][];

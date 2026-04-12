@@ -1,13 +1,13 @@
 package deob;
 
 @ObfuscatedName("te")
-public final class class119 extends class82 {
+public final class class119 extends Linkable {
 
 	@ObfuscatedName("te.cb")
-	public static class1[] field2951 = new class1[200];
+	public static JagString[] field2951 = new JagString[200];
 
 	@ObfuscatedName("te.ib")
-	public static class1[] field2957 = new class1[1000];
+	public static JagString[] field2957 = new JagString[1000];
 
 	@ObfuscatedName("te.jb")
 	public int[] field2958;
@@ -31,13 +31,13 @@ public final class class119 extends class82 {
 	public int field2964;
 
 	@ObfuscatedName("te.qb")
-	public static class1 field2965 = Statics.method931("headicons_pk");
+	public static JagString field2965 = JagString.wrap("headicons_pk");
 
 	@ObfuscatedName("te.sb")
 	public static int field2967 = 0;
 
 	@ObfuscatedName("te.tb")
-	public static class1 field2968 = Statics.method931("::fpsoff");
+	public static JagString field2968 = JagString.wrap("::fpsoff");
 
 	@ObfuscatedName("te.ub")
 	public int[] field2969;

@@ -13,7 +13,7 @@ public final class class74 {
 	public static int field1844 = -1;
 
 	@ObfuscatedName("mb.e")
-	public static class1 field1794 = Statics.method931("m-Ochte mit Ihnen handeln)3");
+	public static JagString field1794 = JagString.wrap("m-Ochte mit Ihnen handeln)3");
 
 	@ObfuscatedName("mb.i")
 	public final byte[] field1798 = new byte[18002];
@@ -52,22 +52,22 @@ public final class class74 {
 	public final byte[][] field1812 = new byte[6][258];
 
 	@ObfuscatedName("mb.A")
-	public static class1 field1816 = Statics.method931("Click to continue");
+	public static JagString field1816 = JagString.wrap("Click to continue");
 
 	@ObfuscatedName("mb.D")
-	public static class1 field1819 = field1816;
+	public static JagString field1819 = field1816;
 
 	@ObfuscatedName("mb.S")
-	public static class1 field1834 = Statics.method931("Press (Wrecover a locked account(W on front page)3");
+	public static JagString field1834 = JagString.wrap("Press (Wrecover a locked account(W on front page)3");
 
 	@ObfuscatedName("mb.r")
-	public static class1 field1807 = field1834;
+	public static JagString field1807 = field1834;
 
 	@ObfuscatedName("mb.P")
 	public static class48 field1831 = new class48(4096);
 
 	@ObfuscatedName("mb.Y")
-	public static class1 field1840 = Statics.method931("Suche nach Updates )2 ");
+	public static JagString field1840 = JagString.wrap("Suche nach Updates )2 ");
 
 	@ObfuscatedName("mb.W")
 	public static int field1838 = 0;

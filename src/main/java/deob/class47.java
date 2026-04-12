@@ -7,22 +7,22 @@ public final class class47 extends class44 {
 	public int[] field1223;
 
 	@ObfuscatedName("he.Ab")
-	public static class1 field1229 = Statics.method931(":tradereq:");
+	public static JagString field1229 = JagString.wrap(":tradereq:");
 
 	@ObfuscatedName("he.Jb")
-	public static class1 field1238 = Statics.method931("Gegenstand konnte nicht gefunden werden)1 verk-Urzen Sie den Suchbegriff)3");
+	public static JagString field1238 = JagString.wrap("Gegenstand konnte nicht gefunden werden)1 verk-Urzen Sie den Suchbegriff)3");
 
 	@ObfuscatedName("he.Ib")
 	public static int field1237 = 0;
 
 	@ObfuscatedName("he.Qb")
-	public static class1 field1245 = Statics.method931("titlebox");
+	public static JagString field1245 = JagString.wrap("titlebox");
 
 	@ObfuscatedName("he.Db")
-	public static class1 field1232 = Statics.method931("Bitte versuchen Sie es erneut)3");
+	public static JagString field1232 = JagString.wrap("Bitte versuchen Sie es erneut)3");
 
 	@ObfuscatedName("he.Pb")
-	public static class1 field1244 = Statics.method931("sch-Utteln:");
+	public static JagString field1244 = JagString.wrap("sch-Utteln:");
 
 	@ObfuscatedName("he.yb")
 	public int field1227 = -1;

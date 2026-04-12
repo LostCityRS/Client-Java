@@ -10,7 +10,7 @@ public final class class42 extends class44 {
 	public int field1117 = 128;
 
 	@ObfuscatedName("h.cc")
-	public static class1 field1118 = Statics.method931("Unexpected server response");
+	public static JagString field1118 = JagString.wrap("Unexpected server response");
 
 	@ObfuscatedName("h.dc")
 	public int field1119 = 0;
@@ -28,7 +28,7 @@ public final class class42 extends class44 {
 	public static byte[] field1126 = new byte[520];
 
 	@ObfuscatedName("h.lc")
-	public static class1 field1127 = Statics.method931("Versteckt");
+	public static JagString field1127 = JagString.wrap("Versteckt");
 
 	@ObfuscatedName("h.mc")
 	public int field1128 = -1;
@@ -37,7 +37,7 @@ public final class class42 extends class44 {
 	public int field1131 = -1;
 
 	@ObfuscatedName("h.rc")
-	public static class1 field1133 = Statics.method931("(X100(U(Y");
+	public static JagString field1133 = JagString.wrap("(X100(U(Y");
 
 	@ObfuscatedName("h.sb")
 	public boolean field1082 = true;
@@ -58,28 +58,28 @@ public final class class42 extends class44 {
 	public int field1137;
 
 	@ObfuscatedName("h.wb")
-	public final class1[] field1086 = new class1[5];
+	public final JagString[] field1086 = new JagString[5];
 
 	@ObfuscatedName("h.wc")
 	public int[] field1138;
 
 	@ObfuscatedName("h.Db")
-	public static class1 field1093 = Statics.method931("Please wait 1 minute and try again)3");
+	public static JagString field1093 = JagString.wrap("Please wait 1 minute and try again)3");
 
 	@ObfuscatedName("h.ec")
-	public static class1 field1120 = field1093;
+	public static JagString field1120 = field1093;
 
 	@ObfuscatedName("h.Ab")
-	public static class1 field1090 = Statics.method931("Moderator option: Mute player for 48 hours: <ON>");
+	public static JagString field1090 = JagString.wrap("Moderator option: Mute player for 48 hours: <ON>");
 
 	@ObfuscatedName("h.Tb")
-	public static class1 field1109 = Statics.method931("Loaded fonts");
+	public static JagString field1109 = JagString.wrap("Loaded fonts");
 
 	@ObfuscatedName("h.Vb")
-	public static class1 field1111 = field1093;
+	public static JagString field1111 = field1093;
 
 	@ObfuscatedName("h.Eb")
-	public static class1 field1094 = field1090;
+	public static JagString field1094 = field1090;
 
 	@ObfuscatedName("h.Ob")
 	public static int field1104 = 0;
@@ -88,19 +88,19 @@ public final class class42 extends class44 {
 	public static int field1114 = 0;
 
 	@ObfuscatedName("h.Mb")
-	public static class1 field1102 = field1109;
+	public static JagString field1102 = field1109;
 
 	@ObfuscatedName("h.Ib")
-	public static class1 field1098 = Statics.method931("Checking for updates )2 ");
+	public static JagString field1098 = JagString.wrap("Checking for updates )2 ");
 
 	@ObfuscatedName("h.Qb")
-	public static class1 field1106 = field1098;
+	public static JagString field1106 = field1098;
 
 	@ObfuscatedName("h.Bc")
 	public static int field1143 = -1;
 
 	@ObfuscatedName("h.Ac")
-	public static class1 field1142 = field1118;
+	public static JagString field1142 = field1118;
 
 	@ObfuscatedName("h.Cb")
 	public int field1092 = -1;
@@ -127,7 +127,7 @@ public final class class42 extends class44 {
 	public int field1099 = -1;
 
 	@ObfuscatedName("h.Wb")
-	public class1 field1112 = class75.field1852;
+	public JagString field1112 = class75.field1852;
 
 	@ObfuscatedName("h.yc")
 	public boolean field1140 = true;

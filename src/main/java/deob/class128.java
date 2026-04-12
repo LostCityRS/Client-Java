@@ -4,25 +4,25 @@ package deob;
 public abstract class class128 extends class44 {
 
 	@ObfuscatedName("vb.tb")
-	public static class1[] field3130 = new class1[100];
+	public static JagString[] field3130 = new JagString[100];
 
 	@ObfuscatedName("vb.vb")
 	public static long field3132 = 0L;
 
 	@ObfuscatedName("vb.zb")
-	public static class1 field3136 = Statics.method931("@cya@");
+	public static JagString field3136 = JagString.wrap("@cya@");
 
 	@ObfuscatedName("vb.Gb")
 	public static int field3143 = 0;
 
 	@ObfuscatedName("vb.Hb")
-	public static class1 field3144 = Statics.method931(" from your friend list first");
+	public static JagString field3144 = JagString.wrap(" from your friend list first");
 
 	@ObfuscatedName("vb.Bb")
-	public static class1 field3138 = field3144;
+	public static JagString field3138 = field3144;
 
 	@ObfuscatedName("vb.Ib")
-	public static class1 field3145 = Statics.method931("Bitte versuchen Sie)1");
+	public static JagString field3145 = JagString.wrap("Bitte versuchen Sie)1");
 
 	@ObfuscatedName("vb.yb")
 	public int field3135 = 1000;

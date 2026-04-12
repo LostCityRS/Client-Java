@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("p")
-public final class class90 extends class82 {
+public final class class90 extends Linkable {
 
 	@ObfuscatedName("p.cb")
 	public final int field2191;
@@ -99,7 +99,7 @@ public final class class90 extends class82 {
 	}
 
 	@ObfuscatedName("p.a(DILbd;)Z")
-	public boolean method763(double arg0, int arg1, class11 arg2) {
+	public boolean method763(double arg0, int arg1, Js5 arg2) {
 		for (int var5 = 0; var5 < this.field2199.length; var5++) {
 			if (arg2.method238(this.field2199[var5]) == null) {
 				return false;

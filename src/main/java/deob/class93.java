@@ -7,49 +7,49 @@ public final class class93 {
 	public int field2307;
 
 	@ObfuscatedName("pc.d")
-	public static class1 field2309 = Statics.method931("wave:");
+	public static JagString field2309 = JagString.wrap("wave:");
 
 	@ObfuscatedName("pc.g")
 	public int field2312;
 
 	@ObfuscatedName("pc.h")
-	public static class1 field2313 = Statics.method931("Prepared sound engine");
+	public static JagString field2313 = JagString.wrap("Prepared sound engine");
 
 	@ObfuscatedName("pc.i")
 	public int field2314;
 
 	@ObfuscatedName("pc.j")
-	public static class1 field2315 = Statics.method931("Moderator option: Mute player for 48 hours: <OFF>");
+	public static JagString field2315 = JagString.wrap("Moderator option: Mute player for 48 hours: <OFF>");
 
 	@ObfuscatedName("pc.c")
-	public static class1 field2308 = field2315;
+	public static JagString field2308 = field2315;
 
 	@ObfuscatedName("pc.l")
-	public static class1 field2317 = field2309;
+	public static JagString field2317 = field2309;
 
 	@ObfuscatedName("pc.m")
-	public static class1 field2318 = Statics.method931("Loading fonts )2 ");
+	public static JagString field2318 = JagString.wrap("Loading fonts )2 ");
 
 	@ObfuscatedName("pc.n")
-	public static class1 field2319 = field2318;
+	public static JagString field2319 = field2318;
 
 	@ObfuscatedName("pc.o")
-	public static class1 field2320 = Statics.method931("Close");
+	public static JagString field2320 = JagString.wrap("Close");
 
 	@ObfuscatedName("pc.e")
-	public static class1 field2310 = field2320;
+	public static JagString field2310 = field2320;
 
 	@ObfuscatedName("pc.q")
 	public static class15 field2322 = new class15(500);
 
 	@ObfuscatedName("pc.t")
-	public static class1 field2325 = field2313;
+	public static JagString field2325 = field2313;
 
 	@ObfuscatedName("pc.w")
 	public int field2328;
 
 	@ObfuscatedName("pc.x")
-	public static class1 field2329 = Statics.method931("Ihr Spielkonto wurde deaktiviert)3");
+	public static JagString field2329 = JagString.wrap("Ihr Spielkonto wurde deaktiviert)3");
 
 	@ObfuscatedName("pc.A")
 	public static boolean field2332 = false;
@@ -58,20 +58,20 @@ public final class class93 {
 	public static int field2330 = 0;
 
 	@ObfuscatedName("pc.B")
-	public static class1 field2333 = Statics.method931("mapback");
+	public static JagString field2333 = JagString.wrap("mapback");
 
 	@ObfuscatedName("pc.C")
-	public static class1 field2334 = Statics.method931("@lre@");
+	public static JagString field2334 = JagString.wrap("@lre@");
 
 	@ObfuscatedName("pc.z")
-	public static class1 field2331 = Statics.method931(" ");
+	public static JagString field2331 = JagString.wrap(" ");
 
 	@ObfuscatedName("pc.D")
-	public static class1 field2335 = Statics.method931("Lade Freunde)2Liste)3)3)3");
+	public static JagString field2335 = JagString.wrap("Lade Freunde)2Liste)3)3)3");
 
 	@ObfuscatedName("pc.E")
-	public static class1 field2336 = Statics.method931("Benutzen Sie die (WPasswort -=ndern(W Option");
+	public static JagString field2336 = JagString.wrap("Benutzen Sie die (WPasswort -=ndern(W Option");
 
 	@ObfuscatedName("pc.F")
-	public static class1 field2337 = field2331;
+	public static JagString field2337 = field2331;
 }

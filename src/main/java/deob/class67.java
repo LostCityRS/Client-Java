@@ -7,7 +7,7 @@ public final class class67 {
 	public boolean field1658;
 
 	@ObfuscatedName("la.g")
-	public static class1 field1661 = Statics.method931("*6n");
+	public static JagString field1661 = JagString.wrap("*6n");
 
 	@ObfuscatedName("la.m")
 	public int[] field1667;
@@ -16,28 +16,28 @@ public final class class67 {
 	public int field1671;
 
 	@ObfuscatedName("la.s")
-	public static class1 field1673 = Statics.method931("(U(Y");
+	public static JagString field1673 = JagString.wrap("(U(Y");
 
 	@ObfuscatedName("la.t")
-	public static class1 field1674 = Statics.method931("Trade)4compete");
+	public static JagString field1674 = JagString.wrap("Trade)4compete");
 
 	@ObfuscatedName("la.v")
-	public static class1 field1676 = field1674;
+	public static JagString field1676 = field1674;
 
 	@ObfuscatedName("la.y")
 	public static int field1679 = 0;
 
 	@ObfuscatedName("la.E")
-	public static class1 field1685 = Statics.method931("Off");
+	public static JagString field1685 = JagString.wrap("Off");
 
 	@ObfuscatedName("la.c")
-	public static class1 field1657 = field1685;
+	public static JagString field1657 = field1685;
 
 	@ObfuscatedName("la.D")
 	public static final int field1684 = 50;
 
 	@ObfuscatedName("la.r")
-	public static class1[] field1672 = new class1[field1684];
+	public static JagString[] field1672 = new JagString[field1684];
 
 	@ObfuscatedName("la.p")
 	public static int[] field1670 = new int[field1684];
@@ -64,7 +64,7 @@ public final class class67 {
 	public static int field1683 = -1;
 
 	@ObfuscatedName("la.K")
-	public static class1 field1691 = Statics.method931("scape main");
+	public static JagString field1691 = JagString.wrap("scape main");
 
 	@ObfuscatedName("la.M")
 	public long field1693;
@@ -117,7 +117,7 @@ public final class class67 {
 				var7[3] = arg0.field1246;
 			}
 		}
-		class91 var9 = (class91) class11.field379.method263(var5);
+		class91 var9 = (class91) Js5.field379.method263(var5);
 		if (var9 == null) {
 			boolean var10 = false;
 			for (int var11 = 0; var11 < 12; var11++) {
@@ -131,7 +131,7 @@ public final class class67 {
 			}
 			if (var10) {
 				if (this.field1694 != -1L) {
-					var9 = (class91) class11.field379.method263(this.field1694);
+					var9 = (class91) Js5.field379.method263(this.field1694);
 				}
 				if (var9 == null) {
 					return null;
@@ -166,7 +166,7 @@ public final class class67 {
 				}
 				var9.method778();
 				var9.method770(64, 850, -30, -50, -30, true);
-				class11.field379.method262(var5, var9);
+				Js5.field379.method262(var5, var9);
 				this.field1694 = var5;
 			}
 		}
@@ -213,7 +213,7 @@ public final class class67 {
 		this.field1667[5] = var2;
 		this.field1667[9] = var1;
 		if (var3 != 0L && this.field1693 != var3) {
-			class11.field379.method264(var3);
+			Js5.field379.method264(var3);
 		}
 	}
 

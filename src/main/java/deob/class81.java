@@ -4,13 +4,13 @@ package deob;
 public final class class81 implements Runnable {
 
 	@ObfuscatedName("nc.a")
-	public static class1 field2035 = Statics.method931(" steht bereits auf Ihrer Freunde)2Liste(Q");
+	public static JagString field2035 = JagString.wrap(" steht bereits auf Ihrer Freunde)2Liste(Q");
 
 	@ObfuscatedName("nc.b")
-	public static class1 field2036 = Statics.method931("Benutzen Sie bitte eine andere Welt)3");
+	public static JagString field2036 = JagString.wrap("Benutzen Sie bitte eine andere Welt)3");
 
 	@ObfuscatedName("nc.c")
-	public static class1 field2037 = Statics.method931("Ok");
+	public static JagString field2037 = JagString.wrap("Ok");
 
 	@ObfuscatedName("nc.h")
 	public final Object field2042 = new Object();
@@ -22,10 +22,10 @@ public final class class81 implements Runnable {
 	public static int field2046 = 0;
 
 	@ObfuscatedName("nc.m")
-	public static class1 field2047 = Statics.method931(" from your ignore list first");
+	public static JagString field2047 = JagString.wrap(" from your ignore list first");
 
 	@ObfuscatedName("nc.n")
-	public static class1 field2048 = Statics.method931("Spiel)2Fenster geladen)3");
+	public static JagString field2048 = JagString.wrap("Spiel)2Fenster geladen)3");
 
 	@ObfuscatedName("nc.o")
 	public static final int field2049 = 20;
@@ -34,19 +34,19 @@ public final class class81 implements Runnable {
 	public boolean field2050 = true;
 
 	@ObfuscatedName("nc.q")
-	public static class1 field2051 = Statics.method931("Stufe)2");
+	public static JagString field2051 = JagString.wrap("Stufe)2");
 
 	@ObfuscatedName("nc.r")
-	public static class1 field2052 = Statics.method931(" more options");
+	public static JagString field2052 = JagString.wrap(" more options");
 
 	@ObfuscatedName("nc.g")
-	public static class1 field2041 = field2052;
+	public static JagString field2041 = field2052;
 
 	@ObfuscatedName("nc.t")
-	public static class1 field2054 = field2047;
+	public static JagString field2054 = field2047;
 
 	@ObfuscatedName("nc.v")
-	public static class1 field2056 = field2037;
+	public static JagString field2056 = field2037;
 
 	@ObfuscatedName("nc.w")
 	public final int[] field2057 = new int[500];

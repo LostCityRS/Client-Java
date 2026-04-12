@@ -13,25 +13,25 @@ public final class class97 extends class44 {
 	public static int[] field2397 = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
 	@ObfuscatedName("qa.Eb")
-	public static class1 field2401 = Statics.method931("Hide");
+	public static JagString field2401 = JagString.wrap("Hide");
 
 	@ObfuscatedName("qa.wb")
-	public static class1 field2393 = field2401;
+	public static JagString field2393 = field2401;
 
 	@ObfuscatedName("qa.xb")
-	public static class1 field2394 = Statics.method931("button near the top of that page)3");
+	public static JagString field2394 = JagString.wrap("button near the top of that page)3");
 
 	@ObfuscatedName("qa.Bb")
-	public static class1 field2398 = Statics.method931("yellow:");
+	public static JagString field2398 = JagString.wrap("yellow:");
 
 	@ObfuscatedName("qa.ub")
-	public static class1 field2391 = field2398;
+	public static JagString field2391 = field2398;
 
 	@ObfuscatedName("qa.Fb")
 	public static volatile boolean field2402 = true;
 
 	@ObfuscatedName("qa.Db")
-	public static class1 field2400 = field2394;
+	public static JagString field2400 = field2394;
 
 	@ObfuscatedName("qa.zb")
 	public static volatile int field2396 = 0;

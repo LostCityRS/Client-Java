@@ -9,19 +9,19 @@ import java.awt.event.KeyListener;
 public final class class107 implements KeyListener, FocusListener {
 
 	@ObfuscatedName("re.a")
-	public static class1 field2687 = Statics.method931("Benutzername: ");
+	public static JagString field2687 = JagString.wrap("Benutzername: ");
 
 	@ObfuscatedName("re.h")
-	public static class92 field2694 = new class92();
+	public static LinkList field2694 = new LinkList();
 
 	@ObfuscatedName("re.l")
 	public static int[] field2698 = new int[256];
 
 	@ObfuscatedName("re.m")
-	public static class1 field2699;
+	public static JagString field2699;
 
 	@ObfuscatedName("re.n")
-	public static class1 field2700;
+	public static JagString field2700;
 
 	static {
 		for (int var0 = 0; var0 < 256; var0++) {
@@ -35,8 +35,8 @@ public final class class107 implements KeyListener, FocusListener {
 			}
 			field2698[var0] = var1;
 		}
-		field2699 = Statics.method931("@yel@");
-		field2700 = Statics.method931("compass");
+		field2699 = JagString.wrap("@yel@");
+		field2700 = JagString.wrap("compass");
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public final class class107 implements KeyListener, FocusListener {
 				var4 = Statics.method870(arg0);
 			}
 			if (class49.field1326 >= 0 && var3 >= 0) {
-				class1.field52[class49.field1326] = var3;
+				JagString.field52[class49.field1326] = var3;
 				class49.field1326 = class49.field1326 + 1 & 0x7F;
 				if (class49.field1326 == class127.field3122) {
 					class49.field1326 = -1;
@@ -106,7 +106,7 @@ public final class class107 implements KeyListener, FocusListener {
 				var3 = -1;
 			}
 			if (class49.field1326 >= 0 && var3 >= 0) {
-				class1.field52[class49.field1326] = ~var3;
+				JagString.field52[class49.field1326] = ~var3;
 				class49.field1326 = class49.field1326 + 1 & 0x7F;
 				if (class49.field1326 == class127.field3122) {
 					class49.field1326 = -1;

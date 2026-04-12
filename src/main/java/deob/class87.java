@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("oc")
-public abstract class class87 extends class82 {
+public abstract class class87 extends Linkable {
 
 	@ObfuscatedName("oc.cb")
 	public boolean field2167;

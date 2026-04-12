@@ -15,10 +15,10 @@ public final class class52 {
 	public static CRC32 field1363 = new CRC32();
 
 	@ObfuscatedName("id.h")
-	public static class1 field1367 = Statics.method931("Connecting to update server");
+	public static JagString field1367 = JagString.wrap("Connecting to update server");
 
 	@ObfuscatedName("id.c")
-	public static class1 field1362 = field1367;
+	public static JagString field1362 = field1367;
 
 	@ObfuscatedName("id.i")
 	public int field1368;
@@ -33,26 +33,26 @@ public final class class52 {
 	public int field1375;
 
 	@ObfuscatedName("id.t")
-	public static class1 field1379 = Statics.method931("Add friend");
+	public static JagString field1379 = JagString.wrap("Add friend");
 
 	@ObfuscatedName("id.e")
-	public static class1 field1364 = field1379;
+	public static JagString field1364 = field1379;
 
 	@ObfuscatedName("id.w")
-	public static class1 field1382 = Statics.method931("blinken2:");
+	public static JagString field1382 = JagString.wrap("blinken2:");
 
 	@ObfuscatedName("id.x")
-	public static class1 field1383 = Statics.method931("@red@");
+	public static JagString field1383 = JagString.wrap("@red@");
 
 	@ObfuscatedName("id.y")
-	public static class1 field1384 = null;
+	public static JagString field1384 = null;
 
 	@ObfuscatedName("id.A")
-	public static class1 field1386 = Statics.method931("Verbindung mit Update)2Server)3)3)3");
+	public static JagString field1386 = JagString.wrap("Verbindung mit Update)2Server)3)3)3");
 
 	@ObfuscatedName("id.B")
 	public static int field1387 = -1;
 
 	@ObfuscatedName("id.C")
-	public static class1 field1388 = Statics.method931("huffman");
+	public static JagString field1388 = JagString.wrap("huffman");
 }

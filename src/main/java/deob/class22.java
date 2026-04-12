@@ -1,10 +1,10 @@
 package deob;
 
 @ObfuscatedName("dc")
-public final class class22 extends class82 {
+public final class class22 extends Linkable {
 
 	@ObfuscatedName("dc.cb")
-	public static class1 field676 = Statics.method931("::fpson");
+	public static JagString field676 = JagString.wrap("::fpson");
 
 	@ObfuscatedName("dc.db")
 	public static int[] field677 = new int[32768];

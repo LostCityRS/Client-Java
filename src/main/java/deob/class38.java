@@ -4,13 +4,13 @@ package deob;
 public final class class38 extends class45 {
 
 	@ObfuscatedName("ga.cb")
-	public static class1 field1044 = Statics.method931("Verbindung abgebrochen)3");
+	public static JagString field1044 = JagString.wrap("Verbindung abgebrochen)3");
 
 	@ObfuscatedName("ga.db")
 	public final class69 field1045;
 
 	@ObfuscatedName("ga.eb")
-	public static class1 field1046 = Statics.method931("Password: ");
+	public static JagString field1046 = JagString.wrap("Password: ");
 
 	@ObfuscatedName("ga.s")
 	public boolean field1008;
@@ -19,52 +19,52 @@ public final class class38 extends class45 {
 	public class29 field1009;
 
 	@ObfuscatedName("ga.v")
-	public static class1 field1011 = Statics.method931("T");
+	public static JagString field1011 = JagString.wrap("T");
 
 	@ObfuscatedName("ga.B")
-	public static class1[] field1017 = new class1[100];
+	public static JagString[] field1017 = new JagString[100];
 
 	@ObfuscatedName("ga.F")
-	public static class1 field1021 = Statics.method931("This computers address has been blocked");
+	public static JagString field1021 = JagString.wrap("This computers address has been blocked");
 
 	@ObfuscatedName("ga.I")
-	public static class1 field1024 = field1021;
+	public static JagString field1024 = field1021;
 
 	@ObfuscatedName("ga.C")
-	public static class1 field1018 = Statics.method931("Enter your username (V password)3");
+	public static JagString field1018 = JagString.wrap("Enter your username (V password)3");
 
 	@ObfuscatedName("ga.G")
-	public static class1 field1022 = Statics.method931("welle:");
+	public static JagString field1022 = JagString.wrap("welle:");
 
 	@ObfuscatedName("ga.O")
-	public static class1 field1030 = field1018;
+	public static JagString field1030 = field1018;
 
 	@ObfuscatedName("ga.Y")
-	public static class1 field1040 = Statics.method931("Loaded interfaces");
+	public static JagString field1040 = JagString.wrap("Loaded interfaces");
 
 	@ObfuscatedName("ga.U")
-	public static class1 field1036 = Statics.method931("Please wait 5 minutes before trying again)3");
+	public static JagString field1036 = JagString.wrap("Please wait 5 minutes before trying again)3");
 
 	@ObfuscatedName("ga.bb")
-	public static class1 field1043 = field1036;
+	public static JagString field1043 = field1036;
 
 	@ObfuscatedName("ga.S")
-	public static class1 field1034 = Statics.method931("headicons_prayer");
+	public static JagString field1034 = JagString.wrap("headicons_prayer");
 
 	@ObfuscatedName("ga.D")
 	public static int[] field1019 = new int[5];
 
 	@ObfuscatedName("ga.Z")
-	public static class1 field1041 = Statics.method931("Report abuse");
+	public static JagString field1041 = JagString.wrap("Report abuse");
 
 	@ObfuscatedName("ga.P")
-	public static class1 field1031 = field1040;
+	public static JagString field1031 = field1040;
 
 	@ObfuscatedName("ga.W")
-	public static class1 field1038 = field1041;
+	public static JagString field1038 = field1041;
 
 	@ObfuscatedName("ga.V")
-	public static class1 field1037 = field1046;
+	public static JagString field1037 = field1046;
 
 	@ObfuscatedName("ga.E")
 	public static int[] field1020 = new int[2000];

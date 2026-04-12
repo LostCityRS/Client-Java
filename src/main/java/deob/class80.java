@@ -12,7 +12,7 @@ public abstract class class80 extends class128 {
 	public int field2015 = -1;
 
 	@ObfuscatedName("nb.bc")
-	public class1 field1964 = null;
+	public JagString field1964 = null;
 
 	@ObfuscatedName("nb.cc")
 	public int field1965 = -1;
@@ -21,7 +21,7 @@ public abstract class class80 extends class128 {
 	public static volatile int field2017 = 0;
 
 	@ObfuscatedName("nb.dc")
-	public static class1 field1966 = Statics.method931("Loaded textures");
+	public static JagString field1966 = JagString.wrap("Loaded textures");
 
 	@ObfuscatedName("nb.ec")
 	public int field1967;
@@ -66,10 +66,10 @@ public abstract class class80 extends class128 {
 	public int field1976 = 0;
 
 	@ObfuscatedName("nb.nd")
-	public static class1 field2028 = Statics.method931("Lade Schrifts-=tze )2 ");
+	public static JagString field2028 = JagString.wrap("Lade Schrifts-=tze )2 ");
 
 	@ObfuscatedName("nb.od")
-	public static class1 field2029 = Statics.method931("Please wait )2 attempting to reestablish");
+	public static JagString field2029 = JagString.wrap("Please wait )2 attempting to reestablish");
 
 	@ObfuscatedName("nb.pc")
 	public int field1978 = 0;
@@ -81,16 +81,16 @@ public abstract class class80 extends class128 {
 	public boolean field1979 = false;
 
 	@ObfuscatedName("nb.rd")
-	public static class1 field2032 = Statics.method931("Registrierter Benutzer");
+	public static JagString field2032 = JagString.wrap("Registrierter Benutzer");
 
 	@ObfuscatedName("nb.sc")
 	public int field1981;
 
 	@ObfuscatedName("nb.sd")
-	public static class1 field2033 = field2029;
+	public static JagString field2033 = field2029;
 
 	@ObfuscatedName("nb.td")
-	public static class1[] field2034 = new class1[100];
+	public static JagString[] field2034 = new JagString[100];
 
 	@ObfuscatedName("nb.uc")
 	public int field1983 = 0;
@@ -99,13 +99,13 @@ public abstract class class80 extends class128 {
 	public int field1984;
 
 	@ObfuscatedName("nb.zc")
-	public static class1 field1988 = Statics.method931("Login limit exceeded)3");
+	public static JagString field1988 = JagString.wrap("Login limit exceeded)3");
 
 	@ObfuscatedName("nb.Jc")
-	public static class1 field1998 = field1966;
+	public static JagString field1998 = field1966;
 
 	@ObfuscatedName("nb.Xc")
-	public static class1 field2012 = field1988;
+	public static JagString field2012 = field1988;
 
 	@ObfuscatedName("nb.Ec")
 	public static BigInteger field1993 = new BigInteger("7162900525229798032761816791230527296329313291232324290237849263501208207972894053929065636522363163621000728841182238772712427862772219676577293600221789");

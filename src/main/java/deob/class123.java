@@ -4,58 +4,58 @@ package deob;
 public abstract class class123 extends class45 {
 
 	@ObfuscatedName("uc.t")
-	public static class1 field3056 = Statics.method931("Please use a different world)3");
+	public static JagString field3056 = JagString.wrap("Please use a different world)3");
 
 	@ObfuscatedName("uc.v")
-	public static class1 field3058 = Statics.method931("");
+	public static JagString field3058 = JagString.wrap("");
 
 	@ObfuscatedName("uc.w")
-	public static class1 field3059 = Statics.method931("@yel@*V");
+	public static JagString field3059 = JagString.wrap("@yel@*V");
 
 	@ObfuscatedName("uc.E")
-	public static class1 field3067 = Statics.method931("");
+	public static JagString field3067 = JagString.wrap("");
 
 	@ObfuscatedName("uc.s")
-	public static class1 field3055 = field3067;
+	public static JagString field3055 = field3067;
 
 	@ObfuscatedName("uc.H")
-	public static class1 field3070 = Statics.method931("Benutzen");
+	public static JagString field3070 = JagString.wrap("Benutzen");
 
 	@ObfuscatedName("uc.B")
-	public static class1 field3064 = Statics.method931("Fehler bei der Verbindung zum Server)3");
+	public static JagString field3064 = JagString.wrap("Fehler bei der Verbindung zum Server)3");
 
 	@ObfuscatedName("uc.I")
-	public static class1 field3071 = field3067;
+	public static JagString field3071 = field3067;
 
 	@ObfuscatedName("uc.z")
-	public static class1 field3062 = field3067;
+	public static JagString field3062 = field3067;
 
 	@ObfuscatedName("uc.x")
-	public static class1 field3060 = field3067;
+	public static JagString field3060 = field3067;
 
 	@ObfuscatedName("uc.G")
 	public static int field3069 = 0;
 
 	@ObfuscatedName("uc.D")
-	public static class1 field3066 = Statics.method931("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(Q(R+R(T(U^(V(Z(X(Y)2_=)0[*U]*W;:(W@(S*X)1<)3>)4?*6*V ");
+	public static JagString field3066 = JagString.wrap("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(Q(R+R(T(U^(V(Z(X(Y)2_=)0[*U]*W;:(W@(S*X)1<)3>)4?*6*V ");
 
 	@ObfuscatedName("uc.J")
-	public static class1 field3072 = field3056;
+	public static JagString field3072 = field3056;
 
 	@ObfuscatedName("uc.L")
-	public static class1 field3074 = field3066;
+	public static JagString field3074 = field3066;
 
 	@ObfuscatedName("uc.N")
-	public static class1 field3076 = Statics.method931("Walk here");
+	public static JagString field3076 = JagString.wrap("Walk here");
 
 	@ObfuscatedName("uc.u")
-	public static class1 field3057 = field3076;
+	public static JagString field3057 = field3076;
 
 	@ObfuscatedName("uc.O")
-	public static class1 field3077 = field3067;
+	public static JagString field3077 = field3067;
 
 	@ObfuscatedName("uc.Q")
-	public static class1 field3079 = field3067;
+	public static JagString field3079 = field3067;
 
 	@ObfuscatedName("uc.a(IIJI)V")
 	public final void method996(int arg0, int arg1, long arg2) {
@@ -75,7 +75,7 @@ public abstract class class123 extends class45 {
 	public final void method997(long arg0, int arg1) {
 		class89.field2180 = arg1;
 		for (int var4 = 0; var4 < 16; var4++) {
-			class70.field1753[var4] = 12800;
+			Occlude.field1753[var4] = 12800;
 		}
 		for (int var5 = 0; var5 < 16; var5++) {
 			int var6 = method1002(var5);
@@ -133,7 +133,7 @@ public abstract class class123 extends class45 {
 			if (arg1 == 121) {
 				this.method306(arg0, arg1, arg2, arg3);
 				int var8 = arg0 & 0xF;
-				class70.field1753[var8] = 12800;
+				Occlude.field1753[var8] = 12800;
 				int var9 = method1002(var8);
 				this.method306(arg0, 7, var9 >> 7, arg3);
 				this.method306(arg0, 39, var9 & 0x7F, arg3);
@@ -142,9 +142,9 @@ public abstract class class123 extends class45 {
 			if (arg1 == 7 || arg1 == 39) {
 				int var10 = arg0 & 0xF;
 				if (arg1 == 7) {
-					class70.field1753[var10] = (arg2 << 7) + (class70.field1753[var10] & 0x7F);
+					Occlude.field1753[var10] = (arg2 << 7) + (Occlude.field1753[var10] & 0x7F);
 				} else {
-					class70.field1753[var10] = (class70.field1753[var10] & 0x3F80) + arg2;
+					Occlude.field1753[var10] = (Occlude.field1753[var10] & 0x3F80) + arg2;
 				}
 				int var11 = method1002(var10);
 				this.method306(arg0, 7, var11 >> 7, arg3);
@@ -157,7 +157,7 @@ public abstract class class123 extends class45 {
 
 	@ObfuscatedName("uc.g(I)I")
 	public static int method1002(int arg0) {
-		int var1 = class70.field1753[arg0];
+		int var1 = Occlude.field1753[arg0];
 		int var2 = (class89.field2180 * var1 >> 8) * var1;
 		return (int) (Math.sqrt((double) var2) + 0.5D);
 	}

@@ -13,25 +13,25 @@ public final class class121 {
 	public static class36 field3003 = new class36(5000);
 
 	@ObfuscatedName("ua.g")
-	public static class1 field3005 = Statics.method931("Username: ");
+	public static JagString field3005 = JagString.wrap("Username: ");
 
 	@ObfuscatedName("ua.d")
-	public static class1 field3002 = field3005;
+	public static JagString field3002 = field3005;
 
 	@ObfuscatedName("ua.h")
-	public static class1 field3006 = Statics.method931("Ladevorgang )2 bitte warten Sie)3");
+	public static JagString field3006 = JagString.wrap("Ladevorgang )2 bitte warten Sie)3");
 
 	@ObfuscatedName("ua.i")
-	public static class1 field3007 = Statics.method931("mapedge");
+	public static JagString field3007 = JagString.wrap("mapedge");
 
 	@ObfuscatedName("ua.k")
-	public static class1 field3009 = Statics.method931("wishes to duel with you)3");
+	public static JagString field3009 = JagString.wrap("wishes to duel with you)3");
 
 	@ObfuscatedName("ua.j")
-	public static class1 field3008 = field3009;
+	public static JagString field3008 = field3009;
 
 	@ObfuscatedName("ua.l")
-	public class1[] field3010;
+	public JagString[] field3010;
 
 	@ObfuscatedName("ua.o")
 	public int field3013 = -1;
@@ -40,26 +40,26 @@ public final class class121 {
 	public static int[][] field3015 = new int[104][104];
 
 	@ObfuscatedName("ua.s")
-	public static class1 field3017 = Statics.method931("null");
+	public static JagString field3017 = JagString.wrap("null");
 
 	@ObfuscatedName("ua.t")
-	public static class1 field3018 = Statics.method931("System update in: ");
+	public static JagString field3018 = JagString.wrap("System update in: ");
 
 	@ObfuscatedName("ua.n")
-	public static class1 field3012 = field3018;
+	public static JagString field3012 = field3018;
 
 	@ObfuscatedName("ua.u")
-	public static class1 field3019 = Statics.method931("To play on this world move to a free area first");
+	public static JagString field3019 = JagString.wrap("To play on this world move to a free area first");
 
 	@ObfuscatedName("ua.c")
-	public static class1 field3001 = field3019;
+	public static JagString field3001 = field3019;
 
 	@ObfuscatedName("ua.v")
-	public static class1 field3020 = Statics.method931("backleft1");
+	public static JagString field3020 = JagString.wrap("backleft1");
 
 	@ObfuscatedName("ua.z")
 	public static boolean field3024 = false;
 
 	@ObfuscatedName("ua.B")
-	public static class1 field3026 = Statics.method931("Fps:");
+	public static JagString field3026 = JagString.wrap("Fps:");
 }

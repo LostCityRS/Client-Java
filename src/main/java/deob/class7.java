@@ -7,10 +7,10 @@ public final class class7 extends class87 {
 	public final int field240 = 16;
 
 	@ObfuscatedName("b.fb")
-	public final class92[] field241 = new class92[8];
+	public final LinkList[] field241 = new LinkList[8];
 
 	@ObfuscatedName("b.gb")
-	public final class92 field242 = new class92();
+	public final LinkList field242 = new LinkList();
 
 	@ObfuscatedName("b.hb")
 	public int field243 = 0;
@@ -23,7 +23,7 @@ public final class class7 extends class87 {
 
 	@ObfuscatedName("b.a(Loc;)V")
 	public synchronized void method126(class87 arg0) {
-		class92 var2 = this.field241[method130(arg0)];
+		LinkList var2 = this.field241[method130(arg0)];
 		var2.method805(arg0);
 	}
 
@@ -60,7 +60,7 @@ public final class class7 extends class87 {
 	}
 
 	@ObfuscatedName("b.a(Lnd;Lne;)V")
-	public void method128(class82 arg0, class83 arg1) {
+	public void method128(Linkable arg0, class83 arg1) {
 		while (this.field242.field2276 != arg0 && ((class83) arg0).field2114 <= arg1.field2114) {
 			arg0 = arg0.field2087;
 		}
@@ -74,7 +74,7 @@ public final class class7 extends class87 {
 		if (this.field243 <= 0) {
 			this.field243 += Statics.field192 >> 4;
 			for (int var4 = 0; var4 < 8; var4++) {
-				class92 var5 = this.field241[var4];
+				LinkList var5 = this.field241[var4];
 				for (class87 var6 = (class87) var5.method802(); var6 != null; var6 = (class87) var5.method809()) {
 					int var7 = method130(var6);
 					if (var4 != var7) {
@@ -84,7 +84,7 @@ public final class class7 extends class87 {
 			}
 		}
 		for (int var8 = 0; var8 < 8; var8++) {
-			class92 var9 = this.field241[var8];
+			LinkList var9 = this.field241[var8];
 			for (class87 var10 = (class87) var9.method802(); var10 != null; var10 = (class87) var9.method809()) {
 				var10.field2167 = false;
 				if (var10.field2168 != null) {
@@ -108,7 +108,7 @@ public final class class7 extends class87 {
 			for (int var16 = var12 >>> var14 & 0x11111111; var16 != 0; var16 >>>= 0x4) {
 				if ((var16 & 0x1) != 0) {
 					var12 &= ~(0x1 << var14);
-					class92 var17 = this.field241[var14];
+					LinkList var17 = this.field241[var14];
 					for (class87 var18 = (class87) var17.method802(); var18 != null; var18 = (class87) var17.method809()) {
 						if (!var18.field2167) {
 							class124 var19 = var18.field2168;
@@ -146,7 +146,7 @@ public final class class7 extends class87 {
 	public void method131(class83 arg0) {
 		arg0.method739();
 		arg0.method742();
-		class82 var2 = this.field242.field2276.field2087;
+		Linkable var2 = this.field242.field2276.field2087;
 		if (this.field242.field2276 == var2) {
 			this.field244 = -1;
 		} else {
@@ -156,7 +156,7 @@ public final class class7 extends class87 {
 
 	public class7() {
 		for (int var1 = 0; var1 < 8; var1++) {
-			this.field241[var1] = new class92();
+			this.field241[var1] = new LinkList();
 		}
 	}
 
@@ -167,7 +167,7 @@ public final class class7 extends class87 {
 			this.field243 = 0;
 		}
 		for (int var2 = 0; var2 < 8; var2++) {
-			class92 var3 = this.field241[var2];
+			LinkList var3 = this.field241[var2];
 			for (class87 var4 = (class87) var3.method802(); var4 != null; var4 = (class87) var3.method809()) {
 				var4.method127(arg0);
 			}

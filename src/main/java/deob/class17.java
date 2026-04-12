@@ -13,7 +13,7 @@ public final class class17 {
 	public int field532;
 
 	@ObfuscatedName("cd.e")
-	public static class1 field533 = Statics.method931("backhmid1");
+	public static JagString field533 = JagString.wrap("backhmid1");
 
 	@ObfuscatedName("cd.g")
 	public class128 field535;
@@ -25,13 +25,13 @@ public final class class17 {
 	public int field537;
 
 	@ObfuscatedName("cd.j")
-	public static class1 field538 = Statics.method931("Geben Sie Ihren Benutzernamen");
+	public static JagString field538 = JagString.wrap("Geben Sie Ihren Benutzernamen");
 
 	@ObfuscatedName("cd.m")
-	public static class1 field541 = Statics.method931("The server is being updated)3");
+	public static JagString field541 = JagString.wrap("The server is being updated)3");
 
 	@ObfuscatedName("cd.k")
-	public static class1 field539 = field541;
+	public static JagString field539 = field541;
 
 	@ObfuscatedName("cd.n")
 	public int field542;
@@ -46,7 +46,7 @@ public final class class17 {
 	public static int[] field546 = new int[4000];
 
 	@ObfuscatedName("cd.s")
-	public static class1 field547 = Statics.method931("Neuer Benutzer");
+	public static JagString field547 = JagString.wrap("Neuer Benutzer");
 
 	@ObfuscatedName("cd.t")
 	public static class100 field548 = null;
@@ -61,5 +61,5 @@ public final class class17 {
 	public static int field551 = 0;
 
 	@ObfuscatedName("cd.x")
-	public static class92[][][] field552 = new class92[4][104][104];
+	public static LinkList[][][] field552 = new LinkList[4][104][104];
 }

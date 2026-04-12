@@ -4,13 +4,13 @@ package deob;
 public final class class50 {
 
 	@ObfuscatedName("ib.a")
-	public static class1 field1345 = Statics.method931("Freund hinzuf-Ugen");
+	public static JagString field1345 = JagString.wrap("Freund hinzuf-Ugen");
 
 	@ObfuscatedName("ib.d")
 	public static int[] field1348 = new int[2048];
 
 	@ObfuscatedName("ib.f")
-	public static class120[] field1350 = new class120[256];
+	public static Js5Loader[] field1350 = new Js5Loader[256];
 
 	@ObfuscatedName("ib.g")
 	public static int[] field1351 = new int[4000];

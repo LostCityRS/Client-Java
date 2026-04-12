@@ -12,16 +12,16 @@ public final class class62 extends Canvas {
 	public final Component field1543;
 
 	@ObfuscatedName("kb.g")
-	public static class92 field1547 = new class92();
+	public static LinkList field1547 = new LinkList();
 
 	@ObfuscatedName("kb.h")
 	public static int field1548 = 0;
 
 	@ObfuscatedName("kb.i")
-	public static class1 field1549 = Statics.method931("shake:");
+	public static JagString field1549 = JagString.wrap("shake:");
 
 	@ObfuscatedName("kb.e")
-	public static class1 field1545 = field1549;
+	public static JagString field1545 = field1549;
 
 	@ObfuscatedName("kb.n")
 	public static int field1554 = 255;
@@ -30,19 +30,19 @@ public final class class62 extends Canvas {
 	public static int field1559 = 127;
 
 	@ObfuscatedName("kb.v")
-	public static class1 field1562 = Statics.method931("k");
+	public static JagString field1562 = JagString.wrap("k");
 
 	@ObfuscatedName("kb.w")
-	public static class1 field1563 = Statics.method931("Your profile will be transferred in:");
+	public static JagString field1563 = JagString.wrap("Your profile will be transferred in:");
 
 	@ObfuscatedName("kb.u")
-	public static class1 field1561 = field1563;
+	public static JagString field1561 = field1563;
 
 	@ObfuscatedName("kb.x")
-	public static class1 field1564 = Statics.method931("Prepared visibility map");
+	public static JagString field1564 = JagString.wrap("Prepared visibility map");
 
 	@ObfuscatedName("kb.q")
-	public static class1 field1557 = field1564;
+	public static JagString field1557 = field1564;
 
 	@Override
 	public void paint(Graphics arg0) {

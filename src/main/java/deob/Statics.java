@@ -22,7 +22,7 @@ public class Statics {
 	public static long field1014;
 
 	@ObfuscatedName("ga.M")
-	public static class11 field1028;
+	public static Js5 field1028;
 
 	@ObfuscatedName("ga.N")
 	public static int field1029;
@@ -52,7 +52,7 @@ public class Statics {
 	public static class71 field1080;
 
 	@ObfuscatedName("h.xb")
-	public static class120 field1087;
+	public static Js5Loader field1087;
 
 	@ObfuscatedName("ab.h")
 	public static int field109;
@@ -61,7 +61,7 @@ public class Statics {
 	public static int[] field1096;
 
 	@ObfuscatedName("a.k")
-	public static class134 field11;
+	public static PixMap field11;
 
 	@ObfuscatedName("ab.j")
 	public static int field111;
@@ -82,7 +82,7 @@ public class Statics {
 	public static int[] field1162;
 
 	@ObfuscatedName("hb.mb")
-	public static class134 field1167;
+	public static PixMap field1167;
 
 	@ObfuscatedName("hc.e")
 	public static class25[] field1177;
@@ -106,7 +106,7 @@ public class Statics {
 	public static class58 field1239;
 
 	@ObfuscatedName("he.Mb")
-	public static class11 field1241;
+	public static Js5 field1241;
 
 	@ObfuscatedName("he.Sb")
 	public static int[][] field1247;
@@ -130,7 +130,7 @@ public class Statics {
 	public static boolean field1277;
 
 	@ObfuscatedName("ia.Sb")
-	public static class134 field1307;
+	public static PixMap field1307;
 
 	@ObfuscatedName("ab.E")
 	public static int field131;
@@ -148,7 +148,7 @@ public class Statics {
 	public static class58[] field1376;
 
 	@ObfuscatedName("id.s")
-	public static class120 field1378;
+	public static Js5Loader field1378;
 
 	@ObfuscatedName("ab.L")
 	public static int field138;
@@ -169,16 +169,16 @@ public class Statics {
 	public static int field1400;
 
 	@ObfuscatedName("ie.q")
-	public static class11 field1405;
+	public static Js5 field1405;
 
 	@ObfuscatedName("ie.t")
 	public static int field1408;
 
 	@ObfuscatedName("j.jc")
-	public static class134 field1435;
+	public static PixMap field1435;
 
 	@ObfuscatedName("j.mc")
-	public static class134 field1438;
+	public static PixMap field1438;
 
 	@ObfuscatedName("ja.R")
 	public static class21 field1442;
@@ -223,7 +223,7 @@ public class Statics {
 	public static class25 field1524;
 
 	@ObfuscatedName("kb.b")
-	public static class120 field1542;
+	public static Js5Loader field1542;
 
 	@ObfuscatedName("ab.cb")
 	public static int field155;
@@ -232,16 +232,16 @@ public class Statics {
 	public static int field1551;
 
 	@ObfuscatedName("kb.m")
-	public static class134 field1553;
+	public static PixMap field1553;
 
 	@ObfuscatedName("kb.o")
-	public static class11 field1555;
+	public static Js5 field1555;
 
 	@ObfuscatedName("kb.p")
 	public static int[] field1556;
 
 	@ObfuscatedName("kb.r")
-	public static class134 field1558;
+	public static PixMap field1558;
 
 	@ObfuscatedName("kb.t")
 	public static int[] field1560;
@@ -250,7 +250,7 @@ public class Statics {
 	public static class58[] field1578;
 
 	@ObfuscatedName("kc.s")
-	public static class11 field1583;
+	public static Js5 field1583;
 
 	@ObfuscatedName("kc.z")
 	public static int field1590;
@@ -283,7 +283,7 @@ public class Statics {
 	public static class133 field1668;
 
 	@ObfuscatedName("la.I")
-	public static class134 field1689;
+	public static PixMap field1689;
 
 	@ObfuscatedName("la.L")
 	public static class129 field1692;
@@ -313,13 +313,13 @@ public class Statics {
 	public static int field1748;
 
 	@ObfuscatedName("ld.F")
-	public static class120 field1752;
+	public static Js5Loader field1752;
 
 	@ObfuscatedName("ac.P")
 	public static class58[] field178;
 
 	@ObfuscatedName("ma.db")
-	public static class134 field1780;
+	public static PixMap field1780;
 
 	@ObfuscatedName("mb.f")
 	public static class48 field1795;
@@ -343,7 +343,7 @@ public class Statics {
 	public static Frame field1859;
 
 	@ObfuscatedName("ac.Y")
-	public static class134 field187;
+	public static PixMap field187;
 
 	@ObfuscatedName("mc.z")
 	public static class25 field1871;
@@ -355,7 +355,7 @@ public class Statics {
 	public static class58[] field1886;
 
 	@ObfuscatedName("md.Bb")
-	public static class120 field1890;
+	public static Js5Loader field1890;
 
 	@ObfuscatedName("md.Gb")
 	public static int field1895;
@@ -364,7 +364,7 @@ public class Statics {
 	public static int field1900;
 
 	@ObfuscatedName("md.Mb")
-	public static class11 field1901;
+	public static Js5 field1901;
 
 	@ObfuscatedName("ad.e")
 	public static int field192;
@@ -373,7 +373,7 @@ public class Statics {
 	public static class58[] field1926;
 
 	@ObfuscatedName("na.g")
-	public static class134 field1935;
+	public static PixMap field1935;
 
 	@ObfuscatedName("na.l")
 	public static int field1940;
@@ -382,25 +382,25 @@ public class Statics {
 	public static int[] field1985;
 
 	@ObfuscatedName("nb.dd")
-	public static class11 field2018;
+	public static Js5 field2018;
 
 	@ObfuscatedName("nb.jd")
-	public static class11 field2024;
+	public static Js5 field2024;
 
 	@ObfuscatedName("nb.ld")
 	public static class69 field2026;
 
 	@ObfuscatedName("nb.qd")
-	public static class120 field2031;
+	public static Js5Loader field2031;
 
 	@ObfuscatedName("nc.d")
 	public static int field2038;
 
 	@ObfuscatedName("nc.j")
-	public static class134 field2044;
+	public static PixMap field2044;
 
 	@ObfuscatedName("nc.k")
-	public static class134 field2045;
+	public static PixMap field2045;
 
 	@ObfuscatedName("nc.u")
 	public static class58 field2055;
@@ -457,7 +457,7 @@ public class Statics {
 	public static int field2306;
 
 	@ObfuscatedName("pc.s")
-	public static class120 field2324;
+	public static Js5Loader field2324;
 
 	@ObfuscatedName("pe.xb")
 	public static class132 field2357;
@@ -466,7 +466,7 @@ public class Statics {
 	public static int field2372;
 
 	@ObfuscatedName("pe.Qb")
-	public static class120 field2376;
+	public static Js5Loader field2376;
 
 	@ObfuscatedName("pe.Yb")
 	public static boolean field2384;
@@ -478,7 +478,7 @@ public class Statics {
 	public static class8 field2415;
 
 	@ObfuscatedName("qc.i")
-	public static class11 field2433;
+	public static Js5 field2433;
 
 	@ObfuscatedName("qc.k")
 	public static class7 field2435;
@@ -490,7 +490,7 @@ public class Statics {
 	public static int[] field2570;
 
 	@ObfuscatedName("r.C")
-	public static class134 field2587;
+	public static PixMap field2587;
 
 	@ObfuscatedName("r.D")
 	public static int[] field2588;
@@ -502,10 +502,10 @@ public class Statics {
 	public static int field2604;
 
 	@ObfuscatedName("ra.r")
-	public static class1[] field2606;
+	public static JagString[] field2606;
 
 	@ObfuscatedName("ra.t")
-	public static class134 field2608;
+	public static PixMap field2608;
 
 	@ObfuscatedName("rb.sb")
 	public static class8 field2613;
@@ -529,10 +529,10 @@ public class Statics {
 	public static class25 field2686;
 
 	@ObfuscatedName("re.o")
-	public static class134 field2701;
+	public static PixMap field2701;
 
 	@ObfuscatedName("s.a")
-	public static class120 field2702;
+	public static Js5Loader field2702;
 
 	@ObfuscatedName("s.d")
 	public static class98 field2705;
@@ -541,7 +541,7 @@ public class Statics {
 	public static class25 field2731;
 
 	@ObfuscatedName("sa.o")
-	public static class120 field2739;
+	public static Js5Loader field2739;
 
 	@ObfuscatedName("sa.u")
 	public static class25 field2745;
@@ -571,7 +571,7 @@ public class Statics {
 	public static byte[][] field2794;
 
 	@ObfuscatedName("se.A")
-	public static class11 field2799;
+	public static Js5 field2799;
 
 	@ObfuscatedName("t.ub")
 	public static class25 field2806;
@@ -580,7 +580,7 @@ public class Statics {
 	public static class25[] field2807;
 
 	@ObfuscatedName("t.yb")
-	public static class11 field2810;
+	public static Js5 field2810;
 
 	@ObfuscatedName("ta.Mb")
 	public static int field2846;
@@ -595,7 +595,7 @@ public class Statics {
 	public static class10 field2892;
 
 	@ObfuscatedName("tb.Wb")
-	public static class134 field2899;
+	public static PixMap field2899;
 
 	@ObfuscatedName("tb.Zb")
 	public static class10 field2902;
@@ -640,7 +640,7 @@ public class Statics {
 	public static int field2949;
 
 	@ObfuscatedName("te.rb")
-	public static class11 field2966;
+	public static Js5 field2966;
 
 	@ObfuscatedName("u.pb")
 	public static int field2985;
@@ -649,7 +649,7 @@ public class Statics {
 	public static class15 field30;
 
 	@ObfuscatedName("ua.w")
-	public static class134 field3021;
+	public static PixMap field3021;
 
 	@ObfuscatedName("ua.A")
 	public static int[] field3025;
@@ -676,7 +676,7 @@ public class Statics {
 	public static class45 field311;
 
 	@ObfuscatedName("vb.ub")
-	public static class120 field3131;
+	public static Js5Loader field3131;
 
 	@ObfuscatedName("vb.xb")
 	public static class25 field3134;
@@ -691,13 +691,13 @@ public class Statics {
 	public static int field316;
 
 	@ObfuscatedName("vc.v")
-	public static class11 field3167;
+	public static Js5 field3167;
 
 	@ObfuscatedName("vd.yd")
 	public static boolean field3180;
 
 	@ObfuscatedName("vd.Bd")
-	public static class3 field3183;
+	public static World field3183;
 
 	@ObfuscatedName("vd.Md")
 	public static int[] field3194;
@@ -706,13 +706,13 @@ public class Statics {
 	public static int[] field320;
 
 	@ObfuscatedName("w.d")
-	public static class120 field3200;
+	public static Js5Loader field3200;
 
 	@ObfuscatedName("wa.b")
-	public static class134 field3208;
+	public static PixMap field3208;
 
 	@ObfuscatedName("wb.d")
-	public static class11 field3244;
+	public static Js5 field3244;
 
 	@ObfuscatedName("wb.f")
 	public static int[] field3246;
@@ -721,7 +721,7 @@ public class Statics {
 	public static boolean[] field3296;
 
 	@ObfuscatedName("wc.q")
-	public static class134 field3298;
+	public static PixMap field3298;
 
 	@ObfuscatedName("wc.r")
 	public static class29 field3299;
@@ -736,7 +736,7 @@ public class Statics {
 	public static int[][][] field412;
 
 	@ObfuscatedName("ca.j")
-	public static class11 field458;
+	public static Js5 field458;
 
 	@ObfuscatedName("ca.n")
 	public static long field462;
@@ -751,16 +751,16 @@ public class Statics {
 	public static class58[] field470;
 
 	@ObfuscatedName("ca.x")
-	public static class134 field472;
+	public static PixMap field472;
 
 	@ObfuscatedName("cb.x")
-	public static class11 field503;
+	public static Js5 field503;
 
 	@ObfuscatedName("a.Y")
-	public static class11 field51;
+	public static Js5 field51;
 
 	@ObfuscatedName("cc.Gb")
-	public static class134 field522;
+	public static PixMap field522;
 
 	@ObfuscatedName("cd.q")
 	public static int field545;
@@ -778,7 +778,7 @@ public class Statics {
 	public static int field640;
 
 	@ObfuscatedName("d.Bc")
-	public static class120 field657;
+	public static Js5Loader field657;
 
 	@ObfuscatedName("d.Fc")
 	public static int field661;
@@ -790,7 +790,7 @@ public class Statics {
 	public static int field681;
 
 	@ObfuscatedName("dc.yb")
-	public static class11 field698;
+	public static Js5 field698;
 
 	@ObfuscatedName("dd.d")
 	public static class100 field704;
@@ -877,10 +877,10 @@ public class Statics {
 	public static Font field842;
 
 	@ObfuscatedName("f.q")
-	public static class134 field843;
+	public static PixMap field843;
 
 	@ObfuscatedName("f.r")
-	public static class134 field844;
+	public static PixMap field844;
 
 	@ObfuscatedName("fa.fb")
 	public static class58 field851;
@@ -907,16 +907,16 @@ public class Statics {
 	public static int[] field92;
 
 	@ObfuscatedName("fd.sb")
-	public static class11 field924;
+	public static Js5 field924;
 
 	@ObfuscatedName("fd.tb")
-	public static class134 field925;
+	public static PixMap field925;
 
 	@ObfuscatedName("fd.zb")
 	public static class109 field931;
 
 	@ObfuscatedName("fd.Hb")
-	public static class11 field939;
+	public static Js5 field939;
 
 	@ObfuscatedName("fe.Jc")
 	public static class104 field967;
@@ -931,10 +931,10 @@ public class Statics {
 	public static int field986;
 
 	@ObfuscatedName("g.p")
-	public static class134 field993;
+	public static PixMap field993;
 
 	@ObfuscatedName("g.v")
-	public static class11 field999;
+	public static Js5 field999;
 
 	@ObfuscatedName("cd.a(I)V")
 	public static void method274() {
@@ -970,7 +970,7 @@ public class Statics {
 		}
 		field2769 = arg0;
 		method617(arg1);
-		class92.field2301.field267 = 0;
+		LinkList.field2301.field267 = 0;
 		field2613 = null;
 		class102.field2559 = 0;
 		field967 = null;
@@ -1000,20 +1000,20 @@ public class Statics {
 						field2271 = method869();
 						return;
 					}
-					class37.field996.method613(var3);
+					Sprite.field996.method613(var3);
 					class49.field1328.method498(var3, var3.field2073);
-					class85.field2144--;
+					IntHashTable.field2144--;
 					class48.field1260++;
 				}
 			}
 			class103.field2596.method498(var2, var2.field2073);
 			class31.field845--;
-			class134.field3285++;
+			PixMap.field3285++;
 		}
 	}
 
 	@ObfuscatedName("fa.a(BLqd;La;)La;")
-	public static class1 method386(class100 arg0, class1 arg1) {
+	public static JagString method386(class100 arg0, JagString arg1) {
 		if (arg1.method11(class89.field2181) == -1) {
 			return arg1;
 		}
@@ -1021,7 +1021,7 @@ public class Statics {
 			int var2 = arg1.method11(class79.field1938);
 			if (var2 == -1) {
 				while (true) {
-					int var3 = arg1.method11(class92.field2297);
+					int var3 = arg1.method11(LinkList.field2297);
 					if (var3 == -1) {
 						while (true) {
 							int var4 = arg1.method11(class133.field3277);
@@ -1037,7 +1037,7 @@ public class Statics {
 													if (var7 == -1) {
 														return arg1;
 													}
-													class1 var8 = class132.field3234;
+													JagString var8 = class132.field3234;
 													if (field715 != null) {
 														var8 = method984(field715.field813);
 														try {
@@ -1048,27 +1048,27 @@ public class Statics {
 														} catch (UnsupportedEncodingException var10) {
 														}
 													}
-													arg1 = method956(new class1[] { arg1.method19(0, var7), var8, arg1.method1(var7 + 4) });
+													arg1 = method956(new JagString[] { arg1.method19(0, var7), var8, arg1.method1(var7 + 4) });
 												}
 											}
-											arg1 = method956(new class1[] { arg1.method19(0, var6), method973(method1039(4, arg0)), arg1.method1(var6 + 2) });
+											arg1 = method956(new JagString[] { arg1.method19(0, var6), method973(method1039(4, arg0)), arg1.method1(var6 + 2) });
 										}
 									}
-									arg1 = method956(new class1[] { arg1.method19(0, var5), method973(method1039(3, arg0)), arg1.method1(var5 + 2) });
+									arg1 = method956(new JagString[] { arg1.method19(0, var5), method973(method1039(3, arg0)), arg1.method1(var5 + 2) });
 								}
 							}
-							arg1 = method956(new class1[] { arg1.method19(0, var4), method973(method1039(2, arg0)), arg1.method1(var4 + 2) });
+							arg1 = method956(new JagString[] { arg1.method19(0, var4), method973(method1039(2, arg0)), arg1.method1(var4 + 2) });
 						}
 					}
-					arg1 = method956(new class1[] { arg1.method19(0, var3), method973(method1039(1, arg0)), arg1.method1(var3 + 2) });
+					arg1 = method956(new JagString[] { arg1.method19(0, var3), method973(method1039(1, arg0)), arg1.method1(var3 + 2) });
 				}
 			}
-			arg1 = method956(new class1[] { arg1.method19(0, var2), method973(method1039(0, arg0)), arg1.method1(var2 + 2) });
+			arg1 = method956(new JagString[] { arg1.method19(0, var2), method973(method1039(0, arg0)), arg1.method1(var2 + 2) });
 		}
 	}
 
 	@ObfuscatedName("gb.a(Lab;I[Lad;)V")
-	public static void method425(class3 arg0, class5[] arg1) {
+	public static void method425(World arg0, class5[] arg1) {
 		for (int var2 = 0; var2 < 4; var2++) {
 			for (int var3 = 0; var3 < 104; var3++) {
 				for (int var4 = 0; var4 < 104; var4++) {
@@ -1329,7 +1329,7 @@ public class Statics {
 							if (var85 >= 8) {
 								int var86 = class57.field1451[var82][var78][var79] - 240;
 								int var87 = class57.field1451[var81][var78][var79];
-								class3.method72(var75, 1, var78 * 128, var78 * 128, var79 * 128, var80 * 128 + 128, var86, var87);
+								World.method72(var75, 1, var78 * 128, var78 * 128, var79 * 128, var80 * 128 + 128, var86, var87);
 								for (int var88 = var81; var88 <= var82; var88++) {
 									for (int var89 = var79; var89 <= var80; var89++) {
 										field412[var88][var78][var89] &= ~var72;
@@ -1367,7 +1367,7 @@ public class Statics {
 							if (var96 >= 8) {
 								int var97 = class57.field1451[var93][var90][var77];
 								int var98 = class57.field1451[var91][var90][var77] - 240;
-								class3.method72(var75, 2, var90 * 128, var92 * 128 + 128, var77 * 128, var77 * 128, var98, var97);
+								World.method72(var75, 2, var90 * 128, var92 * 128 + 128, var77 * 128, var77 * 128, var98, var97);
 								for (int var99 = var93; var99 <= var91; var99++) {
 									for (int var100 = var90; var100 <= var92; var100++) {
 										field412[var99][var100][var77] &= ~var73;
@@ -1404,7 +1404,7 @@ public class Statics {
 							}
 							if ((var104 + 1 - var103) * (var102 + 1 - var101) >= 4) {
 								int var107 = class57.field1451[var76][var101][var103];
-								class3.method72(var75, 4, var101 * 128, var102 * 128 + 128, var103 * 128, var104 * 128 + 128, var107, var107);
+								World.method72(var75, 4, var101 * 128, var102 * 128 + 128, var103 * 128, var104 * 128 + 128, var107, var107);
 								for (int var108 = var101; var108 <= var102; var108++) {
 									for (int var109 = var103; var109 <= var104; var109++) {
 										field412[var76][var108][var109] &= ~var74;
@@ -1438,7 +1438,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("mc.a(Lbd;BILbd;Z)Lt;")
-	public static class114 method690(class11 arg0, int arg1, class11 arg2) {
+	public static class114 method690(Js5 arg0, int arg1, Js5 arg2) {
 		boolean var3 = true;
 		int[] var4 = arg0.method237(arg1);
 		for (int var5 = 0; var5 < var4.length; var5++) {
@@ -1466,7 +1466,7 @@ public class Statics {
 	@ObfuscatedName("qa.a(Lnb;Z)V")
 	public static void method835(class80 arg0) {
 		int var1 = arg0.field1999 * 128 + arg0.field1970 * 64;
-		int var2 = arg0.field1986 - class82.field2063;
+		int var2 = arg0.field1986 - Linkable.field2063;
 		if (arg0.field1947 == 0) {
 			arg0.field1954 = 1024;
 		}
@@ -1486,14 +1486,14 @@ public class Statics {
 	}
 
 	@ObfuscatedName("rb.a(IILjava/awt/Component;I)Lwc;")
-	public static class134 method875(int arg0, int arg1, Component arg2) {
+	public static PixMap method875(int arg0, int arg1, Component arg2) {
 		try {
-			Class var3 = Class.forName("qe");
-			class134 var4 = (class134) var3.getDeclaredConstructor().newInstance();
+			Class var3 = Class.forName("JavaPixMap");
+			PixMap var4 = (PixMap) var3.getDeclaredConstructor().newInstance();
 			var4.method106(arg1, arg2, arg0);
 			return var4;
 		} catch (Throwable var6) {
-			class4 var5 = new class4();
+			JavaSafePixMap var5 = new JavaSafePixMap();
 			var5.method106(arg1, arg2, arg0);
 			return var5;
 		}
@@ -1503,7 +1503,7 @@ public class Statics {
 	public static void method880(int arg0, class10 arg1, int arg2, int arg3) {
 		field3208.method1054();
 		field2770.method329(0, 0);
-		arg1.method211(class37.field1006, 55, 28, 16777215, true);
+		arg1.method211(Sprite.field1006, 55, 28, 16777215, true);
 		if (arg3 == 0) {
 			arg1.method211(class130.field3193, 55, 41, 65280, true);
 		}
@@ -1516,7 +1516,7 @@ public class Statics {
 		if (arg3 == 3) {
 			arg1.method211(class97.field2393, 55, 41, 65535, true);
 		}
-		arg1.method211(class1.field49, 184, 28, 16777215, true);
+		arg1.method211(JagString.field49, 184, 28, 16777215, true);
 		if (arg2 == 0) {
 			arg1.method211(class130.field3193, 184, 41, 65280, true);
 		}
@@ -1546,7 +1546,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("i.a(ZLu;IIBIB)V")
-	public static void method495(boolean arg0, class120 arg1, int arg2, int arg3, byte arg4, int arg5) {
+	public static void method495(boolean arg0, Js5Loader arg1, int arg2, int arg3, byte arg4, int arg5) {
 		long var6 = (long) ((arg2 << 16) + arg3);
 		class104 var8 = (class104) class103.field2596.method499(var6);
 		if (var8 != null) {
@@ -1570,9 +1570,9 @@ public class Statics {
 			var12.field2615 = arg1;
 			if (arg0) {
 				class103.field2596.method498(var12, var6);
-				class134.field3285++;
+				PixMap.field3285++;
 			} else {
-				class37.field996.method598(var12);
+				Sprite.field996.method598(var12);
 				class49.field1328.method498(var12, var6);
 				class48.field1260++;
 			}
@@ -1580,7 +1580,7 @@ public class Statics {
 			var10.method468();
 			class103.field2596.method498(var10, var6);
 			class48.field1260--;
-			class134.field3285++;
+			PixMap.field3285++;
 		}
 	}
 
@@ -1626,7 +1626,7 @@ public class Statics {
 	@ObfuscatedName("wc.a(Ljava/awt/Component;ILlc;)V")
 	public static void method1050(Component arg0, class69 arg1) {
 		try {
-			class94 var2 = (class94) Class.forName("ic").getDeclaredConstructor().newInstance();
+			class94 var2 = (class94) Class.forName("class51").getDeclaredConstructor().newInstance();
 			var2.method818(arg1, 2048);
 			field217 = var2;
 		} catch (Throwable var5) {
@@ -1759,7 +1759,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("oe.a(IILa;La;)V")
-	public static void method758(int arg0, class1 arg1, class1 arg2) {
+	public static void method758(int arg0, JagString arg1, JagString arg2) {
 		if (class86.field2166 == -1) {
 			class105.field2637 = true;
 		}
@@ -1812,7 +1812,7 @@ public class Statics {
 					}
 				}
 				if (var6 == 2) {
-					class37 var15 = field3183.method63(field75, var2, var1);
+					Sprite var15 = field3183.method63(field75, var2, var1);
 					if (var4 == 11) {
 						var4 = 10;
 					}
@@ -1871,7 +1871,7 @@ public class Statics {
 				if (var35 >= 0 && var36 >= 0 && var35 < 104 && var36 < 104) {
 					int var40 = var36 * 128 + 64;
 					int var41 = var35 * 128 + 64;
-					class116 var42 = new class116(var37, field75, var41, var40, method712(field75, var41, var40) - var38, var39, class82.field2063);
+					class116 var42 = new class116(var37, field75, var41, var40, method712(field75, var41, var40) - var38, var39, Linkable.field2063);
 					class112.field2756.method804(var42);
 				}
 			} else if (class112.field2761 == 99) {
@@ -1882,7 +1882,7 @@ public class Statics {
 				int var47 = class15.field488.method145();
 				int var48 = class15.field488.method145();
 				if (var44 >= 0 && var45 >= 0 && var44 < 104 && var45 < 104) {
-					class92 var49 = class17.field552[field75][var44][var45];
+					LinkList var49 = class17.field552[field75][var44][var45];
 					if (var49 != null) {
 						for (class59 var50 = (class59) var49.method802(); var50 != null; var50 = (class59) var49.method809()) {
 							if ((var46 & 0x7FFF) == var50.field1499 && var50.field1490 == var47) {
@@ -1946,10 +1946,10 @@ public class Statics {
 								var60 = var81;
 							}
 							method514(-1, var68, 0, var72 + 1, field75, var67, var65, 0, var69 + 1);
-							var73.field82 = class82.field2063 + var72;
+							var73.field82 = Linkable.field2063 + var72;
 							int var82 = var74.field1286;
 							var73.field73 = var79;
-							var73.field91 = class82.field2063 + var69;
+							var73.field91 = Linkable.field2063 + var69;
 							int var83 = var74.field1298;
 							if (var63 == 1 || var63 == 3) {
 								var83 = var74.field1286;
@@ -1971,7 +1971,7 @@ public class Statics {
 					int var86 = (var84 & 0x7) + field893;
 					int var87 = class15.field488.method137();
 					if (var85 >= 0 && var86 >= 0 && var85 < 104 && var86 < 104) {
-						class92 var88 = class17.field552[field75][var85][var86];
+						LinkList var88 = class17.field552[field75][var85][var86];
 						if (var88 != null) {
 							for (class59 var89 = (class59) var88.method802(); var89 != null; var89 = (class59) var88.method809()) {
 								if ((var87 & 0x7FFF) == var89.field1499) {
@@ -2003,9 +2003,9 @@ public class Statics {
 						int var103 = var93 * 128 + 64;
 						int var104 = var92 * 128 + 64;
 						int var105 = var91 * 128 + 64;
-						class19 var106 = new class19(var96, field75, var104, var105, method712(field75, var104, var105) - var97, var99 - -class82.field2063, var100 + class82.field2063, var101, var102, var95, var98);
+						class19 var106 = new class19(var96, field75, var104, var105, method712(field75, var104, var105) - var97, var99 - -Linkable.field2063, var100 + Linkable.field2063, var101, var102, var95, var98);
 						int var107 = var94 * 128 + 64;
-						var106.method300(class82.field2063 + var99, var107, method712(field75, var103, var107) - var98, var103);
+						var106.method300(Linkable.field2063 + var99, var107, method712(field75, var103, var107) - var98, var103);
 						class86.field2160.method804(var106);
 					}
 				} else if (class112.field2761 == 19) {
@@ -2020,7 +2020,7 @@ public class Statics {
 						var114.field1499 = var110;
 						var114.field1490 = var108;
 						if (class17.field552[field75][var112][var113] == null) {
-							class17.field552[field75][var112][var113] = new class92();
+							class17.field552[field75][var112][var113] = new LinkList();
 						}
 						class17.field552[field75][var112][var113].method804(var114);
 						method1011(var113, var112);
@@ -2036,7 +2036,7 @@ public class Statics {
 						var120.field1490 = var116;
 						var120.field1499 = var115;
 						if (class17.field552[field75][var119][var118] == null) {
-							class17.field552[field75][var119][var118] = new class92();
+							class17.field552[field75][var119][var118] = new LinkList();
 						}
 						class17.field552[field75][var119][var118].method804(var120);
 						method1011(var118, var119);
@@ -2050,7 +2050,7 @@ public class Statics {
 	public static void method252() {
 		for (int var0 = 0; var0 < class49.field1341; var0++) {
 			int var1 = class22.field677[var0];
-			class130 var2 = class120.field2992[var1];
+			class130 var2 = Js5Loader.field2992[var1];
 			if (var2 != null) {
 				method319(var2, var2.field3182.field1084);
 			}
@@ -2286,7 +2286,7 @@ public class Statics {
 
 	@ObfuscatedName("tc.a(I)V")
 	public static void method960() {
-		if (class70.field1750 > 0) {
+		if (Occlude.field1750 > 0) {
 			method847();
 		} else {
 			method399(40);
@@ -2296,7 +2296,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("d.a(Lbd;Lbd;Lbd;B)V")
-	public static void method292(class11 arg0, class11 arg1, class11 arg2) {
+	public static void method292(Js5 arg0, Js5 arg1, Js5 arg2) {
 		field503 = arg2;
 		field924 = arg0;
 		field2810 = arg1;
@@ -2369,9 +2369,9 @@ public class Statics {
 			arg0.field1963 = arg0.field2009[0] * 128 + arg0.field1970 * 64;
 			arg0.method732();
 		}
-		if (class82.field2063 < arg0.field1986) {
+		if (Linkable.field2063 < arg0.field1986) {
 			method835(arg0);
-		} else if (arg0.field1981 < class82.field2063) {
+		} else if (arg0.field1981 < Linkable.field2063) {
 			method761(arg0);
 		} else {
 			method641(arg0);
@@ -2381,8 +2381,8 @@ public class Statics {
 	}
 
 	@ObfuscatedName("g.a([BZII)La;")
-	public static class1 method419(byte[] arg0, int arg1, int arg2) {
-		class1 var3 = new class1();
+	public static JagString method419(byte[] arg0, int arg1, int arg2) {
+		JagString var3 = new JagString();
 		var3.field26 = 0;
 		var3.field38 = new byte[arg2];
 		for (int var4 = arg1; var4 < arg1 + arg2; var4++) {
@@ -2432,7 +2432,7 @@ public class Statics {
 		for (int var14 = 0; var14 < 255; var14++) {
 			class31.field847[var14] = class31.field847[var14 + 1];
 		}
-		class31.field847[255] = (int) (Math.sin((double) class82.field2063 / 14.0D) * 16.0D + Math.sin((double) class82.field2063 / 15.0D) * 14.0D + Math.sin((double) class82.field2063 / 16.0D) * 12.0D);
+		class31.field847[255] = (int) (Math.sin((double) Linkable.field2063 / 14.0D) * 16.0D + Math.sin((double) Linkable.field2063 / 15.0D) * 14.0D + Math.sin((double) Linkable.field2063 / 16.0D) * 12.0D);
 		if (class46.field1209 > 0) {
 			class46.field1209 -= 4;
 		}
@@ -2476,7 +2476,7 @@ public class Statics {
 		int var3 = var2.field943;
 		int var4 = var2.field933;
 		int var5 = var2.field945;
-		int var6 = class4.field173[var5 - var3];
+		int var6 = JavaSafePixMap.field173[var5 - var3];
 		if (arg0 < 0 || var6 < arg0) {
 			arg0 = 0;
 		}
@@ -2523,17 +2523,17 @@ public class Statics {
 		method752();
 		method323();
 		for (int var0 = 0; var0 < class31.field841; var0++) {
-			int var1 = class11.field375[var0];
-			if (class82.field2063 != class120.field2992[var1].field2008) {
-				class120.field2992[var1].field3182 = null;
-				class120.field2992[var1] = null;
+			int var1 = Js5.field375[var0];
+			if (Linkable.field2063 != Js5Loader.field2992[var1].field2008) {
+				Js5Loader.field2992[var1].field3182 = null;
+				Js5Loader.field2992[var1] = null;
 			}
 		}
 		if (class100.field2547 != class15.field488.field267) {
 			throw new RuntimeException("gnp1 pos:" + class15.field488.field267 + " psize:" + class100.field2547);
 		}
 		for (int var2 = 0; var2 < class49.field1341; var2++) {
-			if (class120.field2992[class22.field677[var2]] == null) {
+			if (Js5Loader.field2992[class22.field677[var2]] == null) {
 				throw new RuntimeException("gnp2 pos:" + var2 + " size:" + class49.field1341);
 			}
 		}
@@ -2541,7 +2541,7 @@ public class Statics {
 
 	@ObfuscatedName("ld.a(I)V")
 	public static void method660() {
-		class1 var0 = null;
+		JagString var0 = null;
 		for (int var1 = 0; var1 < class42.field1104; var1++) {
 			if (class102.field2586[var1].method11(class93.field2334) != -1) {
 				var0 = class102.field2586[var1].method1(class102.field2586[var1].method11(class93.field2334));
@@ -2582,7 +2582,7 @@ public class Statics {
 		}
 		for (int var8 = 0; var8 < class42.field1104; var8++) {
 			int var9 = (class42.field1104 - var8 - 1) * 15 + var5 + 31;
-			class1 var10 = class102.field2586[var8];
+			JagString var10 = class102.field2586[var8];
 			int var11 = 16777215;
 			if (var10.method38(var0)) {
 				var10 = var10.method19(0, var10.method10() - var0.method10());
@@ -2772,11 +2772,11 @@ public class Statics {
 	public static void method99() {
 		field187 = null;
 		field178 = null;
-		class4.field183 = null;
-		class4.field172 = null;
-		class4.field186 = null;
-		class4.field173 = null;
-		class4.field181 = null;
+		JavaSafePixMap.field183 = null;
+		JavaSafePixMap.field172 = null;
+		JavaSafePixMap.field186 = null;
+		JavaSafePixMap.field173 = null;
+		JavaSafePixMap.field181 = null;
 	}
 
 	@ObfuscatedName("id.a(ZI)V")
@@ -2813,8 +2813,8 @@ public class Statics {
 					int var36 = (var34 << 8) + var35;
 					if (!var32 || var35 != 49 && var35 != 149 && var35 != 147 && var34 != 50 && (var34 != 49 || var35 != 47)) {
 						field1078[var33] = var36;
-						field2291[var33] = field3131.method228(method956(new class1[] { class92.field2305, method502(var34), class14.field477, method502(var35) }));
-						field742[var33] = field3131.method228(method956(new class1[] { class48.field1259, method502(var34), class14.field477, method502(var35) }));
+						field2291[var33] = field3131.method228(method956(new JagString[] { LinkList.field2305, method502(var34), class14.field477, method502(var35) }));
+						field742[var33] = field3131.method228(method956(new JagString[] { class48.field1259, method502(var34), class14.field477, method502(var35) }));
 						var33++;
 					}
 				}
@@ -2872,8 +2872,8 @@ public class Statics {
 							field1078[var13] = var20;
 							int var22 = var20 & 0xFF;
 							int var23 = var20 >> 8 & 0xFF;
-							field2291[var13] = field3131.method228(method956(new class1[] { class92.field2305, method502(var23), class14.field477, method502(var22) }));
-							field742[var13] = field3131.method228(method956(new class1[] { class48.field1259, method502(var23), class14.field477, method502(var22) }));
+							field2291[var13] = field3131.method228(method956(new JagString[] { LinkList.field2305, method502(var23), class14.field477, method502(var22) }));
+							field742[var13] = field3131.method228(method956(new JagString[] { class48.field1259, method502(var23), class14.field477, method502(var22) }));
 							var13++;
 						}
 					}
@@ -3079,17 +3079,17 @@ public class Statics {
 				arg0.field2520 = 0;
 			} else {
 				if (class73.field1788[var1] == 0) {
-					arg0.field2474 = method956(new class1[] { class52.field1383, class63.field1593 });
+					arg0.field2474 = method956(new JagString[] { class52.field1383, class63.field1593 });
 				} else if (class73.field1788[var1] < 5000) {
 					if (class73.field1788[var1] == class24.field723) {
-						arg0.field2474 = method956(new class1[] { class102.field2564, class53.field1407, method502(class73.field1788[var1]) });
+						arg0.field2474 = method956(new JagString[] { class102.field2564, class53.field1407, method502(class73.field1788[var1]) });
 					} else {
-						arg0.field2474 = method956(new class1[] { class107.field2699, class53.field1407, method502(class73.field1788[var1]) });
+						arg0.field2474 = method956(new JagString[] { class107.field2699, class53.field1407, method502(class73.field1788[var1]) });
 					}
 				} else if (class73.field1788[var1] == class24.field723) {
-					arg0.field2474 = method956(new class1[] { class102.field2564, class15.field507, method502(class73.field1788[var1] - 5000) });
+					arg0.field2474 = method956(new JagString[] { class102.field2564, class15.field507, method502(class73.field1788[var1] - 5000) });
 				} else {
-					arg0.field2474 = method956(new class1[] { class107.field2699, class15.field507, method502(class73.field1788[var1] - 5000) });
+					arg0.field2474 = method956(new JagString[] { class107.field2699, class15.field507, method502(class73.field1788[var1] - 5000) });
 				}
 				arg0.field2520 = 1;
 			}
@@ -3111,7 +3111,7 @@ public class Statics {
 				arg0.field2474 = class36.field957;
 				arg0.field2520 = 0;
 			} else {
-				int var5 = class85.field2146;
+				int var5 = IntHashTable.field2146;
 				if (class23.field701 == 0) {
 					var5 = 0;
 				}
@@ -3124,7 +3124,7 @@ public class Statics {
 				}
 			}
 		} else if (var1 == 503) {
-			arg0.field2526 = class85.field2146 * 15 + 20;
+			arg0.field2526 = IntHashTable.field2146 * 15 + 20;
 			if (arg0.field2449 >= arg0.field2526) {
 				arg0.field2526 = arg0.field2449 + 1;
 			}
@@ -3133,7 +3133,7 @@ public class Statics {
 				class129.field3157 = arg0.field2550;
 				client.field590 = arg0.field2476;
 			}
-			if (class92.field2302.field1658) {
+			if (LinkList.field2302.field1658) {
 				arg0.field2550 = class129.field3157;
 			} else {
 				arg0.field2550 = client.field590;
@@ -3143,25 +3143,25 @@ public class Statics {
 				client.field590 = arg0.field2476;
 				class129.field3157 = arg0.field2550;
 			}
-			if (class92.field2302.field1658) {
+			if (LinkList.field2302.field1658) {
 				arg0.field2550 = client.field590;
 			} else {
 				arg0.field2550 = class129.field3157;
 			}
 		} else if (var1 == 327) {
 			arg0.field2496 = 150;
-			arg0.field2463 = (int) (Math.sin((double) class82.field2063 / 40.0D) * 256.0D) & 0x7FF;
+			arg0.field2463 = (int) (Math.sin((double) Linkable.field2063 / 40.0D) * 256.0D) & 0x7FF;
 			arg0.field2479 = 0;
 			arg0.field2493 = 5;
 		} else if (var1 == 328) {
 			arg0.field2496 = 150;
-			arg0.field2463 = (int) (Math.sin((double) class82.field2063 / 40.0D) * 256.0D) & 0x7FF;
+			arg0.field2463 = (int) (Math.sin((double) Linkable.field2063 / 40.0D) * 256.0D) & 0x7FF;
 			arg0.field2479 = 1;
 			arg0.field2493 = 5;
 		} else if (var1 == 600) {
-			arg0.field2474 = method956(new class1[] { class132.field3217, class123.field3059 });
+			arg0.field2474 = method956(new JagString[] { class132.field3217, class123.field3059 });
 		} else if (var1 == 620) {
-			if (class37.field1004 < 1) {
+			if (Sprite.field1004 < 1) {
 				arg0.field2474 = class132.field3234;
 			} else if (class133.field3268) {
 				arg0.field2453 = 16711680;
@@ -3394,7 +3394,7 @@ public class Statics {
 						}
 						class122.field3046[class54.field1433] = field470[var15];
 						class80.field2023[class54.field1433] = var17;
-						class92.field2303[class54.field1433] = var16;
+						LinkList.field2303[class54.field1433] = var16;
 						class54.field1433++;
 					}
 				}
@@ -3404,39 +3404,39 @@ public class Statics {
 
 	@ObfuscatedName("pb.a(I)V")
 	public static void method800() {
-		class92.field2300 = null;
-		class92.field2303 = null;
-		class92.field2284 = null;
-		class92.field2302 = null;
-		class92.field2297 = null;
+		LinkList.field2300 = null;
+		LinkList.field2303 = null;
+		LinkList.field2284 = null;
+		LinkList.field2302 = null;
+		LinkList.field2297 = null;
 		field2277 = null;
-		class92.field2305 = null;
-		class92.field2301 = null;
+		LinkList.field2305 = null;
+		LinkList.field2301 = null;
 		field2291 = null;
-		class92.field2304 = null;
-		class92.field2299 = null;
-		class92.field2296 = null;
-		class92.field2279 = null;
-		class92.field2298 = null;
+		LinkList.field2304 = null;
+		LinkList.field2299 = null;
+		LinkList.field2296 = null;
+		LinkList.field2279 = null;
+		LinkList.field2298 = null;
 	}
 
 	@ObfuscatedName("te.a(II)La;")
-	public static class1 method973(int arg0) {
-		return arg0 < 999999999 ? method502(arg0) : class37.field989;
+	public static JagString method973(int arg0) {
+		return arg0 < 999999999 ? method502(arg0) : Sprite.field989;
 	}
 
 	@ObfuscatedName("ib.a(ILbd;II)[Le;")
-	public static class25[] method518(class11 arg0, int arg1, int arg2) {
+	public static class25[] method518(Js5 arg0, int arg1, int arg2) {
 		return method885(arg1, arg2, arg0) ? method994() : null;
 	}
 
 	@ObfuscatedName("sa.a([La;Z)[La;")
-	public static class1[] method905(class1[] arg0) {
-		class1[] var1 = new class1[5];
+	public static JagString[] method905(JagString[] arg0) {
+		JagString[] var1 = new JagString[5];
 		for (int var2 = 0; var2 < 5; var2++) {
-			var1[var2] = method956(new class1[] { method502(var2), class39.field1065 });
+			var1[var2] = method956(new JagString[] { method502(var2), class39.field1065 });
 			if (arg0 != null && arg0[var2] != null) {
-				var1[var2] = method956(new class1[] { var1[var2], arg0[var2] });
+				var1[var2] = method956(new JagString[] { var1[var2], arg0[var2] });
 			}
 		}
 		return var1;
@@ -3452,7 +3452,7 @@ public class Statics {
 		int var9 = -1;
 		try {
 			field1162 = new int[var5.field518];
-			field2606 = new class1[var5.field514];
+			field2606 = new JagString[var5.field514];
 			int var10 = 0;
 			int var11 = 0;
 			for (int var12 = 1; var12 < arg0.length; var12++) {
@@ -3471,8 +3471,8 @@ public class Statics {
 						var13 = 0;
 					}
 					field1162[var10++] = var13;
-				} else if (arg0[var12] instanceof class1) {
-					field2606[var11++] = (class1) arg0[var12];
+				} else if (arg0[var12] instanceof JagString) {
+					field2606[var11++] = (JagString) arg0[var12];
 				}
 			}
 			while (true) {
@@ -3561,7 +3561,7 @@ public class Statics {
 						} else if (var14 == 37) {
 							int var20 = var6[var9];
 							var8 -= var20;
-							class1 var21 = method825(var20, var8, class119.field2957);
+							JagString var21 = method825(var20, var8, class119.field2957);
 							class119.field2957[var8++] = var21;
 						} else if (var14 == 38) {
 							var4--;
@@ -3571,7 +3571,7 @@ public class Statics {
 							int var22 = var6[var9];
 							class16 var23 = method824(var22, 73);
 							int[] var24 = new int[var23.field518];
-							class1[] var25 = new class1[var23.field514];
+							JagString[] var25 = new JagString[var23.field514];
 							for (int var26 = 0; var26 < var23.field510; var26++) {
 								var24[var26] = class133.field3255[var4 + var26 - var23.field510];
 							}
@@ -3800,7 +3800,7 @@ public class Statics {
 					}
 					if (var14 >= 1300 && var14 <= 1309 || !(var14 < 1314 || var14 > 1317)) {
 						var8--;
-						class1 var122 = class119.field2957[var8];
+						JagString var122 = class119.field2957[var8];
 						Object[] var123 = new Object[var122.method10() + 1];
 						for (int var124 = var123.length - 1; var124 >= 1; var124--) {
 							if (var122.method6(var124 - 1) == 115) {
@@ -3854,7 +3854,7 @@ public class Statics {
 						int var125 = class133.field3255[var4] - 1;
 						if (var125 >= 0 && var125 <= 9) {
 							if (var121.field2467 == null || var121.field2467.length <= var125) {
-								class1[] var126 = new class1[var125 + 1];
+								JagString[] var126 = new JagString[var125 + 1];
 								if (var121.field2467 != null) {
 									for (int var127 = 0; var127 < var121.field2467.length; var127++) {
 										var126[var127] = var121.field2467[var127];
@@ -4024,9 +4024,9 @@ public class Statics {
 						if (var14 == 3000) {
 							var4--;
 							int var67 = class133.field3255[var4];
-							if (class120.field2998 == -1) {
+							if (Js5Loader.field2998 == -1) {
 								method414(0, var67);
-								class120.field2998 = var67;
+								Js5Loader.field2998 = var67;
 							}
 						} else if (var14 == 3001 || var14 == 3003) {
 							var4 -= 2;
@@ -4035,9 +4035,9 @@ public class Statics {
 							method673(0, var69, var68);
 						} else if (var14 == 3002) {
 							class100 var70 = var29 ? field1468 : field3068;
-							if (class120.field2998 == -1) {
+							if (Js5Loader.field2998 == -1) {
 								method414(var70.field2495 & 0x7FFF, var70.field2454);
-								class120.field2998 = var70.field2495;
+								Js5Loader.field2998 = var70.field2495;
 							}
 						} else {
 							if (var14 != 3003) {
@@ -4067,31 +4067,31 @@ public class Statics {
 							if (var14 != 3300) {
 								break;
 							}
-							class133.field3255[var4++] = class82.field2063;
+							class133.field3255[var4++] = Linkable.field2063;
 						} else if (var14 >= 4100) {
 							if (var14 >= 4200) {
 								break;
 							}
 							if (var14 == 4100) {
 								var8--;
-								class1 var102 = class119.field2957[var8];
+								JagString var102 = class119.field2957[var8];
 								var4--;
 								int var103 = class133.field3255[var4];
-								class119.field2957[var8++] = method956(new class1[] { var102, method502(var103) });
+								class119.field2957[var8++] = method956(new JagString[] { var102, method502(var103) });
 							} else if (var14 == 4101) {
 								var8 -= 2;
-								class1 var104 = class119.field2957[var8 + 1];
-								class1 var105 = class119.field2957[var8];
-								class119.field2957[var8++] = method956(new class1[] { var105, var104 });
+								JagString var104 = class119.field2957[var8 + 1];
+								JagString var105 = class119.field2957[var8];
+								class119.field2957[var8++] = method956(new JagString[] { var105, var104 });
 							} else if (var14 == 4102) {
 								var8--;
-								class1 var106 = class119.field2957[var8];
+								JagString var106 = class119.field2957[var8];
 								var4--;
 								int var107 = class133.field3255[var4];
-								class119.field2957[var8++] = method956(new class1[] { var106, method1034(var107) });
+								class119.field2957[var8++] = method956(new JagString[] { var106, method1034(var107) });
 							} else if (var14 == 4103) {
 								var8--;
-								class1 var108 = class119.field2957[var8];
+								JagString var108 = class119.field2957[var8];
 								class119.field2957[var8++] = var108.method30();
 							} else if (var14 == 4104) {
 								var4--;
@@ -4101,11 +4101,11 @@ public class Statics {
 								int var112 = class14.field453.get(5);
 								int var113 = class14.field453.get(2);
 								int var114 = class14.field453.get(1);
-								class119.field2957[var8++] = method956(new class1[] { method502(var112), class63.field1572, class19.field621[var113], class63.field1572, method502(var114) });
+								class119.field2957[var8++] = method956(new JagString[] { method502(var112), class63.field1572, class19.field621[var113], class63.field1572, method502(var114) });
 							} else if (var14 == 4105) {
 								var8 -= 2;
-								class1 var115 = class119.field2957[var8];
-								class1 var116 = class119.field2957[var8 + 1];
+								JagString var115 = class119.field2957[var8];
+								JagString var116 = class119.field2957[var8 + 1];
 								if (field2621.field90 != null && field2621.field90.field1658) {
 									class119.field2957[var8++] = var116;
 								} else {
@@ -4209,7 +4209,7 @@ public class Statics {
 						}
 					} else if (var14 == 3100) {
 						var8--;
-						class1 var118 = class119.field2957[var8];
+						JagString var118 = class119.field2957[var8];
 						method758(0, var118, class102.field2585);
 					} else {
 						if (var14 != 3101) {
@@ -4230,7 +4230,7 @@ public class Statics {
 		int var0 = class15.field488.method412(8);
 		if (var0 < class49.field1341) {
 			for (int var1 = var0; var1 < class49.field1341; var1++) {
-				class11.field375[class31.field841++] = class22.field677[var1];
+				Js5.field375[class31.field841++] = class22.field677[var1];
 			}
 		}
 		if (var0 > class49.field1341) {
@@ -4239,20 +4239,20 @@ public class Statics {
 		class49.field1341 = 0;
 		for (int var2 = 0; var2 < var0; var2++) {
 			int var3 = class22.field677[var2];
-			class130 var4 = class120.field2992[var3];
+			class130 var4 = Js5Loader.field2992[var3];
 			int var5 = class15.field488.method412(1);
 			if (var5 == 0) {
 				class22.field677[class49.field1341++] = var3;
-				var4.field2008 = class82.field2063;
+				var4.field2008 = Linkable.field2063;
 			} else {
 				int var6 = class15.field488.method412(2);
 				if (var6 == 0) {
 					class22.field677[class49.field1341++] = var3;
-					var4.field2008 = class82.field2063;
+					var4.field2008 = Linkable.field2063;
 					class50.field1348[class80.field2027++] = var3;
 				} else if (var6 == 1) {
 					class22.field677[class49.field1341++] = var3;
-					var4.field2008 = class82.field2063;
+					var4.field2008 = Linkable.field2063;
 					int var7 = class15.field488.method412(3);
 					var4.method725(var7, false);
 					int var8 = class15.field488.method412(1);
@@ -4261,7 +4261,7 @@ public class Statics {
 					}
 				} else if (var6 == 2) {
 					class22.field677[class49.field1341++] = var3;
-					var4.field2008 = class82.field2063;
+					var4.field2008 = Linkable.field2063;
 					int var9 = class15.field488.method412(3);
 					var4.method725(var9, true);
 					int var10 = class15.field488.method412(3);
@@ -4271,7 +4271,7 @@ public class Statics {
 						class50.field1348[class80.field2027++] = var3;
 					}
 				} else if (var6 == 3) {
-					class11.field375[class31.field841++] = var3;
+					Js5.field375[class31.field841++] = var3;
 				}
 			}
 		}
@@ -4303,7 +4303,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("cc.a(Lad;IIIILab;IIII)V")
-	public static void method270(class5 arg0, int arg1, int arg2, int arg3, int arg4, class3 arg5, int arg6, int arg7, int arg8) {
+	public static void method270(class5 arg0, int arg1, int arg2, int arg3, int arg4, World arg5, int arg6, int arg7, int arg8) {
 		int var9 = class57.field1451[arg2][arg8][arg7];
 		int var10 = class57.field1451[arg2][arg8 + 1][arg7];
 		int var11 = class57.field1451[arg2][arg8][arg7 + 1];
@@ -4373,7 +4373,7 @@ public class Statics {
 			} else {
 				var23 = new class54(arg1, 0, arg6, var9, var10, var12, var11, var13.field1289, true);
 			}
-			arg5.method50(arg3, arg8, arg7, var14, var23, null, class70.field1740[arg6], 0, var16, var15);
+			arg5.method50(arg3, arg8, arg7, var14, var23, null, Occlude.field1740[arg6], 0, var16, var15);
 			if (var13.field1284) {
 				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
 			}
@@ -4399,7 +4399,7 @@ public class Statics {
 				var26 = new class54(arg1, 2, arg6 + 4, var9, var10, var12, var11, var13.field1289, true);
 				var27 = new class54(arg1, 2, var25, var9, var10, var12, var11, var13.field1289, true);
 			}
-			arg5.method50(arg3, arg8, arg7, var14, var26, var27, class70.field1740[arg6], class70.field1740[var25], var16, var15);
+			arg5.method50(arg3, arg8, arg7, var14, var26, var27, Occlude.field1740[arg6], Occlude.field1740[var25], var16, var15);
 			if (var13.field1284) {
 				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
 			}
@@ -4455,7 +4455,7 @@ public class Statics {
 				} else {
 					var34 = new class54(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
 				}
-				arg5.method65(arg3, arg8, arg7, var14, var34, class70.field1740[arg6], arg6 * 512, 0, 0, var16, var15);
+				arg5.method65(arg3, arg8, arg7, var14, var34, Occlude.field1740[arg6], arg6 * 512, 0, 0, var16, var15);
 			} else if (arg4 == 5) {
 				int var35 = 16;
 				int var36 = arg5.method78(arg3, arg8, arg7);
@@ -4468,7 +4468,7 @@ public class Statics {
 				} else {
 					var37 = new class54(arg1, 4, 0, var9, var10, var12, var11, var13.field1289, true);
 				}
-				arg5.method65(arg3, arg8, arg7, var14, var37, class70.field1740[arg6], arg6 * 512, class63.field1595[arg6] * var35, class4.field181[arg6] * var35, var16, var15);
+				arg5.method65(arg3, arg8, arg7, var14, var37, Occlude.field1740[arg6], arg6 * 512, class63.field1595[arg6] * var35, JavaSafePixMap.field181[arg6] * var35, var16, var15);
 			} else if (arg4 == 6) {
 				class128 var38;
 				if (var13.field1289 == -1 && var13.field1317 == null) {
@@ -4559,7 +4559,7 @@ public class Statics {
 	@ObfuscatedName("dc.c(I)V")
 	public static void method316() {
 		if (class46.field1208 == 0) {
-			field3183 = new class3(4, 104, 104, class57.field1451);
+			field3183 = new World(4, 104, 104, class57.field1451);
 			for (int var0 = 0; var0 < 4; var0++) {
 				class102.field2569[var0] = new class5(104, 104);
 			}
@@ -4575,7 +4575,7 @@ public class Statics {
 				int var5 = class27.field775[var3];
 				var1[var2] = var4 * var5 >> 16;
 			}
-			class3.method51(var1);
+			World.method51(var1);
 			class133.field3274 = 10;
 			class123.field3079 = class62.field1557;
 			class46.field1208 = 30;
@@ -4616,7 +4616,7 @@ public class Statics {
 				class133.field3274 = 30;
 			} else {
 				if (var18 != 0) {
-					class123.field3079 = method956(new class1[] { class42.field1106, method502(var18), class89.field2181 });
+					class123.field3079 = method956(new JagString[] { class42.field1106, method502(var18), class89.field2181 });
 				}
 				class133.field3274 = 30;
 			}
@@ -4645,7 +4645,7 @@ public class Statics {
 				var19++;
 			}
 			if (var19 < 3) {
-				class123.field3079 = method956(new class1[] { class93.field2319, method502(var19 * 100 / 3), class89.field2181 });
+				class123.field3079 = method956(new JagString[] { class93.field2319, method502(var19 * 100 / 3), class89.field2181 });
 				class133.field3274 = 40;
 			} else {
 				class46.field1208 = 60;
@@ -4656,10 +4656,10 @@ public class Statics {
 			int var20 = method966(field1542, field1087);
 			int var21 = method432();
 			if (var20 < var21) {
-				class123.field3079 = method956(new class1[] { class98.field2407, method502(var20 * 100 / var21), class89.field2181 });
+				class123.field3079 = method956(new JagString[] { class98.field2407, method502(var20 * 100 / var21), class89.field2181 });
 				class133.field3274 = 50;
 			} else {
-				class123.field3079 = class134.field3305;
+				class123.field3079 = PixMap.field3305;
 				class133.field3274 = 50;
 				method399(5);
 				class46.field1208 = 70;
@@ -4679,9 +4679,9 @@ public class Statics {
 				method292(field3200, field1087, field1890);
 				class46.field1208 = 80;
 				class133.field3274 = 60;
-				class123.field3079 = class85.field2138;
+				class123.field3079 = IntHashTable.field2138;
 			} else {
-				class123.field3079 = method956(new class1[] { class72.field1762, method502(field2376.method982()), class89.field2181 });
+				class123.field3079 = method956(new JagString[] { class72.field1762, method502(field2376.method982()), class89.field2181 });
 				class133.field3274 = 60;
 			}
 		} else if (class46.field1208 == 80) {
@@ -4747,7 +4747,7 @@ public class Statics {
 				var22++;
 			}
 			if (field365 == null) {
-				field365 = method372(field1087, class1.field23, class132.field3234);
+				field365 = method372(field1087, JagString.field23, class132.field3234);
 			} else {
 				var22++;
 			}
@@ -4757,7 +4757,7 @@ public class Statics {
 				var22++;
 			}
 			if (var22 < 14) {
-				class123.field3079 = method956(new class1[] { class31.field833, method502(var22 * 100 / 14), class89.field2181 });
+				class123.field3079 = method956(new JagString[] { class31.field833, method502(var22 * 100 / 14), class89.field2181 });
 				class133.field3274 = 70;
 			} else {
 				field784.method556();
@@ -4777,7 +4777,7 @@ public class Statics {
 			int var28 = method892(field1087);
 			int var29 = method456();
 			if (var28 < var29) {
-				class123.field3079 = method956(new class1[] { class63.field1597, method502(var28 * 100 / var29), class89.field2181 });
+				class123.field3079 = method956(new JagString[] { class63.field1597, method502(var28 * 100 / var29), class89.field2181 });
 				class133.field3274 = 80;
 			} else {
 				class123.field3079 = class54.field1431;
@@ -4793,7 +4793,7 @@ public class Statics {
 				class133.field3274 = 90;
 				class123.field3079 = class80.field1998;
 			} else {
-				class123.field3079 = method956(new class1[] { class28.field793, method502(field1752.method982()), class89.field2181 });
+				class123.field3079 = method956(new JagString[] { class28.field793, method502(field1752.method982()), class89.field2181 });
 				class133.field3274 = 90;
 			}
 		} else if (class46.field1208 == 110) {
@@ -4810,19 +4810,19 @@ public class Statics {
 				class123.field3079 = class102.field2575;
 				class133.field3274 = 96;
 			} else {
-				class123.field3079 = method956(new class1[] { class19.field671, class112.field2772 });
+				class123.field3079 = method956(new JagString[] { class19.field671, class112.field2772 });
 				class133.field3274 = 96;
 			}
 		} else if (class46.field1208 == 130) {
 			if (!field3200.method230()) {
-				class123.field3079 = method956(new class1[] { class73.field1789, method502(field3200.method982() * 4 / 5), class89.field2181 });
+				class123.field3079 = method956(new JagString[] { class73.field1789, method502(field3200.method982() * 4 / 5), class89.field2181 });
 				class133.field3274 = 100;
 			} else if (field2739.method230()) {
 				class123.field3079 = class38.field1031;
 				class46.field1208 = 140;
 				class133.field3274 = 100;
 			} else {
-				class123.field3079 = method956(new class1[] { class73.field1789, method502(field2739.method982() / 5 + 80), class89.field2181 });
+				class123.field3079 = method956(new JagString[] { class73.field1789, method502(field2739.method982() / 5 + 80), class89.field2181 });
 				class133.field3274 = 100;
 			}
 		} else if (class46.field1208 == 140) {
@@ -4836,7 +4836,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("m.a(IZIILbd;IIZ)V")
-	public static synchronized void method670(int arg0, int arg1, class11 arg2, int arg3) {
+	public static synchronized void method670(int arg0, int arg1, Js5 arg2, int arg3) {
 		if (!method521()) {
 			return;
 		}
@@ -4900,7 +4900,7 @@ public class Statics {
 
 	@ObfuscatedName("tc.b(I)V")
 	public static void method961() {
-		class3.field115 = true;
+		World.field115 = true;
 		class93.field2332 = true;
 	}
 
@@ -4944,13 +4944,13 @@ public class Statics {
 
 	@ObfuscatedName("rb.a(ZI)V")
 	public static void method876(int arg0) {
-		class92.field2293 = arg0;
+		LinkList.field2293 = arg0;
 	}
 
 	@ObfuscatedName("td.a(Lbd;Lbd;I)I")
-	public static int method966(class11 arg0, class11 arg1) {
+	public static int method966(Js5 arg0, Js5 arg1) {
 		int var2 = 0;
-		if (arg0.method239(class70.field1751, class123.field3067)) {
+		if (arg0.method239(Occlude.field1751, class123.field3067)) {
 			var2++;
 		}
 		if (arg1.method239(client.field583, class123.field3067)) {
@@ -5007,7 +5007,7 @@ public class Statics {
 	@ObfuscatedName("ca.b(I)V")
 	public static void method253() {
 		class93.field2332 = false;
-		class3.field115 = false;
+		World.field115 = false;
 	}
 
 	@ObfuscatedName("re.a(B)V")
@@ -5021,13 +5021,13 @@ public class Statics {
 	}
 
 	@ObfuscatedName("fe.a(ILu;Lsa;B)V")
-	public static void method410(int arg0, class120 arg1, class109 arg2) {
+	public static void method410(int arg0, Js5Loader arg1, class109 arg2) {
 		class57 var3 = new class57();
 		var3.field1464 = 1;
 		var3.field2073 = arg0;
 		var3.field1469 = arg2;
 		var3.field1456 = arg1;
-		class92 var4 = class62.field1547;
+		LinkList var4 = class62.field1547;
 		synchronized (class62.field1547) {
 			class62.field1547.method804(var3);
 		}
@@ -5058,17 +5058,17 @@ public class Statics {
 
 	@ObfuscatedName("wc.a(I)V")
 	public static void method1051() {
-		class134.field3305 = null;
-		class134.field3306 = null;
+		PixMap.field3305 = null;
+		PixMap.field3306 = null;
 		field3296 = null;
 		field3298 = null;
 		field3299 = null;
-		class134.field3303 = null;
-		class134.field3282 = null;
-		class134.field3307 = null;
-		class134.field3302 = null;
-		class134.field3295 = null;
-		class134.field3300 = null;
+		PixMap.field3303 = null;
+		PixMap.field3282 = null;
+		PixMap.field3307 = null;
+		PixMap.field3302 = null;
+		PixMap.field3295 = null;
+		PixMap.field3300 = null;
 	}
 
 	@ObfuscatedName("qa.f(I)V")
@@ -5083,7 +5083,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("be.a(La;I)Z")
-	public static boolean method242(class1 arg0) {
+	public static boolean method242(JagString arg0) {
 		if (arg0 == null) {
 			return false;
 		}
@@ -5131,7 +5131,7 @@ public class Statics {
 				if (var4 == 0) {
 					var2++;
 				}
-				class1 var6 = class128.field3130[var3];
+				JagString var6 = class128.field3130[var3];
 				if (var6 != null && var6.method26(class103.field2612)) {
 					var6 = var6.method1(5);
 				}
@@ -5140,27 +5140,27 @@ public class Statics {
 				}
 				if ((var4 == 1 || var4 == 2) && (var4 == 1 || class75.field1864 == 0 || class75.field1864 == 1 && method242(var6))) {
 					if (arg1 > var5 - 14 && arg1 <= var5 && !var6.method5(field2621.field86)) {
-						if (class37.field1004 >= 1) {
-							method398(0, class38.field1038, 0, 0, 28, method956(new class1[] { class53.field1393, var6 }));
+						if (Sprite.field1004 >= 1) {
+							method398(0, class38.field1038, 0, 0, 28, method956(new JagString[] { class53.field1393, var6 }));
 						}
-						method398(0, class79.field1933, 0, 0, 51, method956(new class1[] { class53.field1393, var6 }));
-						method398(0, class52.field1364, 0, 0, 45, method956(new class1[] { class53.field1393, var6 }));
+						method398(0, class79.field1933, 0, 0, 51, method956(new JagString[] { class53.field1393, var6 }));
+						method398(0, class52.field1364, 0, 0, 45, method956(new JagString[] { class53.field1393, var6 }));
 					}
 					var2++;
 				}
 				if ((var4 == 3 || var4 == 7) && class5.field216 == 0 && (var4 == 7 || class6.field236 == 0 || class6.field236 == 1 && method242(var6))) {
 					var2++;
 					if (arg1 > var5 - 14 && arg1 <= var5) {
-						if (class37.field1004 >= 1) {
-							method398(0, class38.field1038, 0, 0, 28, method956(new class1[] { class53.field1393, var6 }));
+						if (Sprite.field1004 >= 1) {
+							method398(0, class38.field1038, 0, 0, 28, method956(new JagString[] { class53.field1393, var6 }));
 						}
-						method398(0, class79.field1933, 0, 0, 51, method956(new class1[] { class53.field1393, var6 }));
-						method398(0, class52.field1364, 0, 0, 45, method956(new class1[] { class53.field1393, var6 }));
+						method398(0, class79.field1933, 0, 0, 51, method956(new JagString[] { class53.field1393, var6 }));
+						method398(0, class52.field1364, 0, 0, 45, method956(new JagString[] { class53.field1393, var6 }));
 					}
 				}
 				if (var4 == 4 && (class115.field2828 == 0 || class115.field2828 == 1 && method242(var6))) {
 					if (arg1 > var5 - 14 && arg1 <= var5) {
-						method398(0, class103.field2610, 0, 0, 26, method956(new class1[] { class53.field1393, var6 }));
+						method398(0, class103.field2610, 0, 0, 26, method956(new JagString[] { class53.field1393, var6 }));
 					}
 					var2++;
 				}
@@ -5169,7 +5169,7 @@ public class Statics {
 				}
 				if (var4 == 8 && (class115.field2828 == 0 || class115.field2828 == 1 && method242(var6))) {
 					if (var5 - 14 < arg1 && arg1 <= var5) {
-						method398(0, class54.field1432, 0, 0, 46, method956(new class1[] { class53.field1393, var6 }));
+						method398(0, class54.field1432, 0, 0, 46, method956(new JagString[] { class53.field1393, var6 }));
 					}
 					var2++;
 				}
@@ -5364,7 +5364,7 @@ public class Statics {
 		for (int var1 = 0; var1 < 100; var1++) {
 			if (class80.field2034[var1] != null) {
 				int var2 = class132.field3236[var1];
-				class1 var3 = class128.field3130[var1];
+				JagString var3 = class128.field3130[var1];
 				if (var3 != null && var3.method26(class103.field2612)) {
 					var3 = var3.method1(5);
 				}
@@ -5375,16 +5375,16 @@ public class Statics {
 					int var4 = 329 - var0 * 13;
 					var0++;
 					if (class24.field741 > 4 && var4 - 10 < class102.field2568 + -4 && class102.field2568 - 4 <= var4 + 3) {
-						int var5 = field2684.method208(method956(new class1[] { class46.field1215, class23.field713, var3, class80.field2034[var1] })) + 25;
+						int var5 = field2684.method208(method956(new JagString[] { class46.field1215, class23.field713, var3, class80.field2034[var1] })) + 25;
 						if (var5 > 450) {
 							var5 = 450;
 						}
 						if (class24.field741 < var5 + 4) {
-							if (class37.field1004 >= 1) {
-								method398(0, class38.field1038, 0, 0, 2028, method956(new class1[] { class53.field1393, var3 }));
+							if (Sprite.field1004 >= 1) {
+								method398(0, class38.field1038, 0, 0, 2028, method956(new JagString[] { class53.field1393, var3 }));
 							}
-							method398(0, class79.field1933, 0, 0, 2051, method956(new class1[] { class53.field1393, var3 }));
-							method398(0, class52.field1364, 0, 0, 2045, method956(new class1[] { class53.field1393, var3 }));
+							method398(0, class79.field1933, 0, 0, 2051, method956(new JagString[] { class53.field1393, var3 }));
+							method398(0, class52.field1364, 0, 0, 2045, method956(new JagString[] { class53.field1393, var3 }));
 						}
 					}
 					if (var0 >= 5) {
@@ -5484,7 +5484,7 @@ public class Statics {
 
 	@ObfuscatedName("m.a(B)V")
 	public static void method671() {
-		class70.field1749 = 0;
+		Occlude.field1749 = 0;
 		for (int var0 = -1; var0 < class118.field2939 + class49.field1341; var0++) {
 			class80 var1;
 			if (var0 == -1) {
@@ -5492,7 +5492,7 @@ public class Statics {
 			} else if (class118.field2939 > var0) {
 				var1 = class80.field2030[class112.field2758[var0]];
 			} else {
-				var1 = class120.field2992[class22.field677[var0 - class118.field2939]];
+				var1 = Js5Loader.field2992[class22.field677[var0 - class118.field2939]];
 			}
 			if (var1 != null && var1.method42()) {
 				if (var1 instanceof class130) {
@@ -5512,7 +5512,7 @@ public class Statics {
 							field178[var3.field1091].method551(class39.field1072 - 12, class89.field2188 + -30);
 						}
 					}
-					if (class2.field96 == 1 && class22.field677[var0 - class118.field2939] == class132.field3212 && class82.field2063 % 20 < 10) {
+					if (class2.field96 == 1 && class22.field677[var0 - class118.field2939] == class132.field3212 && Linkable.field2063 % 20 < 10) {
 						method523(var1.field1991 + 15, var1);
 						if (class39.field1072 > -1) {
 							field1886[0].method551(class39.field1072 - 12, class89.field2188 + -28);
@@ -5534,7 +5534,7 @@ public class Statics {
 							}
 						}
 					}
-					if (var0 >= 0 && class2.field96 == 10 && class112.field2758[var0] == class134.field3290) {
+					if (var0 >= 0 && class2.field96 == 10 && class112.field2758[var0] == PixMap.field3290) {
 						method523(var1.field1991 + 15, var1);
 						if (class39.field1072 > -1) {
 							field1886[1].method551(class39.field1072 - 12, -var5 + class89.field2188);
@@ -5543,19 +5543,19 @@ public class Statics {
 				}
 				if (var1.field1964 != null && (var0 >= class118.field2939 || class75.field1864 == 0 || class75.field1864 == 3 || class75.field1864 == 1 && method242(((class2) var1).field86))) {
 					method523(var1.field1991, var1);
-					if (class39.field1072 > -1 && class67.field1684 > class70.field1749) {
-						class67.field1655[class70.field1749] = field2902.method208(var1.field1964) / 2;
-						class67.field1663[class70.field1749] = field2902.field350;
-						class67.field1690[class70.field1749] = class39.field1072;
-						class67.field1660[class70.field1749] = class89.field2188;
-						class67.field1687[class70.field1749] = var1.field1976;
-						class67.field1670[class70.field1749] = var1.field1997;
-						class67.field1659[class70.field1749] = var1.field1952;
-						class67.field1672[class70.field1749] = var1.field1964;
-						class70.field1749++;
+					if (class39.field1072 > -1 && class67.field1684 > Occlude.field1749) {
+						class67.field1655[Occlude.field1749] = field2902.method208(var1.field1964) / 2;
+						class67.field1663[Occlude.field1749] = field2902.field350;
+						class67.field1690[Occlude.field1749] = class39.field1072;
+						class67.field1660[Occlude.field1749] = class89.field2188;
+						class67.field1687[Occlude.field1749] = var1.field1976;
+						class67.field1670[Occlude.field1749] = var1.field1997;
+						class67.field1659[Occlude.field1749] = var1.field1952;
+						class67.field1672[Occlude.field1749] = var1.field1964;
+						Occlude.field1749++;
 					}
 				}
-				if (class82.field2063 < var1.field2013) {
+				if (Linkable.field2063 < var1.field2013) {
 					method523(var1.field1991 + 15, var1);
 					if (class39.field1072 > -1) {
 						int var6 = var1.field2004 * 30 / var1.field1975;
@@ -5567,7 +5567,7 @@ public class Statics {
 					}
 				}
 				for (int var7 = 0; var7 < 4; var7++) {
-					if (class82.field2063 < var1.field2010[var7]) {
+					if (Linkable.field2063 < var1.field2010[var7]) {
 						method523(var1.field1991 / 2, var1);
 						if (class39.field1072 > -1) {
 							if (var7 == 1) {
@@ -5589,7 +5589,7 @@ public class Statics {
 				}
 			}
 		}
-		for (int var8 = 0; var8 < class70.field1749; var8++) {
+		for (int var8 = 0; var8 < Occlude.field1749; var8++) {
 			int var9 = class67.field1690[var8];
 			int var10 = class67.field1660[var8];
 			int var11 = class67.field1655[var8];
@@ -5606,7 +5606,7 @@ public class Statics {
 			}
 			class39.field1072 = class67.field1690[var8];
 			class89.field2188 = class67.field1660[var8] = var10;
-			class1 var15 = class67.field1672[var8];
+			JagString var15 = class67.field1672[var8];
 			if (class16.field527 == 0) {
 				int var16 = 16776960;
 				if (class67.field1687[var8] < 6) {
@@ -5727,7 +5727,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("j.a(ILbd;I)Le;")
-	public static class25 method533(class11 arg0, int arg1) {
+	public static class25 method533(Js5 arg0, int arg1) {
 		return method148(arg0, arg1) ? method467() : null;
 	}
 
@@ -5757,7 +5757,7 @@ public class Statics {
 	@ObfuscatedName("de.a(B)V")
 	public static void method320() {
 		while (true) {
-			class92 var0 = class62.field1547;
+			LinkList var0 = class62.field1547;
 			class57 var1;
 			synchronized (class62.field1547) {
 				var1 = (class57) class95.field2371.method813();
@@ -5835,8 +5835,8 @@ public class Statics {
 		if ((arg1 & 0x100) != 0) {
 			int var3 = class15.field488.method156();
 			int var4 = class15.field488.method152();
-			arg0.method727(var4, class82.field2063, var3);
-			arg0.field2013 = class82.field2063 + 300;
+			arg0.method727(var4, Linkable.field2063, var3);
+			arg0.field2013 = Linkable.field2063 + 300;
 			arg0.field2004 = class15.field488.method156();
 			arg0.field1975 = class15.field488.method152();
 		}
@@ -5861,8 +5861,8 @@ public class Statics {
 		if ((arg1 & 0x40) != 0) {
 			int var7 = class15.field488.method144();
 			int var8 = class15.field488.method152();
-			arg0.method727(var8, class82.field2063, var7);
-			arg0.field2013 = class82.field2063 + 300;
+			arg0.method727(var8, Linkable.field2063, var7);
+			arg0.field2013 = Linkable.field2063 + 300;
 			arg0.field2004 = class15.field488.method152();
 			arg0.field1975 = class15.field488.method152();
 		}
@@ -5871,8 +5871,8 @@ public class Statics {
 			arg0.field1955 = class15.field488.method156();
 			arg0.field1973 = class15.field488.method144();
 			arg0.field2001 = class15.field488.method144();
-			arg0.field1986 = class15.field488.method137() + class82.field2063;
-			arg0.field1981 = class15.field488.method180() + class82.field2063;
+			arg0.field1986 = class15.field488.method137() + Linkable.field2063;
+			arg0.field1981 = class15.field488.method180() + Linkable.field2063;
 			arg0.field1947 = class15.field488.method152();
 			arg0.method732();
 		}
@@ -5885,7 +5885,7 @@ public class Statics {
 				long var13 = arg0.field86.method9();
 				boolean var15 = false;
 				if (var10 <= 1) {
-					for (int var16 = 0; var16 < class85.field2146; var16++) {
+					for (int var16 = 0; var16 < IntHashTable.field2146; var16++) {
 						if (class106.field2683[var16] == var13) {
 							var15 = true;
 							break;
@@ -5896,15 +5896,15 @@ public class Statics {
 					class117.field2917.field267 = 0;
 					class15.field488.method138(class117.field2917.field284, var11);
 					class117.field2917.field267 = 0;
-					class1 var17 = method893(class117.field2917).method4();
+					JagString var17 = method893(class117.field2917).method4();
 					arg0.field1964 = var17.method40();
 					arg0.field1952 = 150;
 					arg0.field1997 = var9 & 0xFF;
 					arg0.field1976 = var9 >> 8;
 					if (var10 == 2 || var10 == 3) {
-						method758(1, var17, method956(new class1[] { class100.field2535, arg0.field86 }));
+						method758(1, var17, method956(new JagString[] { class100.field2535, arg0.field86 }));
 					} else if (var10 == 1) {
-						method758(1, var17, method956(new class1[] { class103.field2612, arg0.field86 }));
+						method758(1, var17, method956(new JagString[] { class103.field2612, arg0.field86 }));
 					} else {
 						method758(2, var17, arg0.field86);
 					}
@@ -5924,13 +5924,13 @@ public class Statics {
 			arg0.field1965 = class15.field488.method166();
 			int var21 = class15.field488.method146();
 			arg0.field2003 = 0;
-			arg0.field1967 = (var21 & 0xFFFF) + class82.field2063;
+			arg0.field1967 = (var21 & 0xFFFF) + Linkable.field2063;
 			if (arg0.field1965 == 65535) {
 				arg0.field1965 = -1;
 			}
 			arg0.field2014 = 0;
 			arg0.field1984 = var21 >> 16;
-			if (arg0.field1967 > class82.field2063) {
+			if (arg0.field1967 > Linkable.field2063) {
 				arg0.field2014 = -1;
 			}
 		}
@@ -5956,7 +5956,7 @@ public class Statics {
 		var3.field1454 = arg0;
 		var3.field1464 = 0;
 		var3.field1469 = arg1;
-		class92 var4 = class62.field1547;
+		LinkList var4 = class62.field1547;
 		synchronized (class62.field1547) {
 			class62.field1547.method804(var3);
 		}
@@ -5968,7 +5968,7 @@ public class Statics {
 		int var0 = class15.field488.method412(8);
 		if (class118.field2939 > var0) {
 			for (int var1 = var0; var1 < class118.field2939; var1++) {
-				class11.field375[class31.field841++] = class112.field2758[var1];
+				Js5.field375[class31.field841++] = class112.field2758[var1];
 			}
 		}
 		if (var0 > class118.field2939) {
@@ -5981,16 +5981,16 @@ public class Statics {
 			int var5 = class15.field488.method412(1);
 			if (var5 == 0) {
 				class112.field2758[class118.field2939++] = var3;
-				var4.field2008 = class82.field2063;
+				var4.field2008 = Linkable.field2063;
 			} else {
 				int var6 = class15.field488.method412(2);
 				if (var6 == 0) {
 					class112.field2758[class118.field2939++] = var3;
-					var4.field2008 = class82.field2063;
+					var4.field2008 = Linkable.field2063;
 					class50.field1348[class80.field2027++] = var3;
 				} else if (var6 == 1) {
 					class112.field2758[class118.field2939++] = var3;
-					var4.field2008 = class82.field2063;
+					var4.field2008 = Linkable.field2063;
 					int var7 = class15.field488.method412(3);
 					var4.method725(var7, false);
 					int var8 = class15.field488.method412(1);
@@ -5999,7 +5999,7 @@ public class Statics {
 					}
 				} else if (var6 == 2) {
 					class112.field2758[class118.field2939++] = var3;
-					var4.field2008 = class82.field2063;
+					var4.field2008 = Linkable.field2063;
 					int var9 = class15.field488.method412(3);
 					var4.method725(var9, true);
 					int var10 = class15.field488.method412(3);
@@ -6009,7 +6009,7 @@ public class Statics {
 						class50.field1348[class80.field2027++] = var3;
 					}
 				} else if (var6 == 3) {
-					class11.field375[class31.field841++] = var3;
+					Js5.field375[class31.field841++] = var3;
 				}
 			}
 		}
@@ -6101,7 +6101,7 @@ public class Statics {
 										int var26 = 0;
 										int var27 = var11.field2491[var20] - 1;
 										int var28 = 0;
-										if (class111.field2752 - 32 < var23 && var23 < class111.field2753 && class111.field2748 - 32 < var24 && class111.field2751 > var24 || class32.field857 != 0 && class113.field2776 == var20) {
+										if (class111.field2752 - 32 < var23 && var23 < class111.field2753 && class111.field2748 - 32 < var24 && class111.field2751 > var24 || Square.field857 != 0 && class113.field2776 == var20) {
 											int var29 = 0;
 											if (class14.field475 == 1 && field2281 == var20 && field1075 == var11.field2495) {
 												var29 = 16777215;
@@ -6110,7 +6110,7 @@ public class Statics {
 											if (var30 == null) {
 												var9 = false;
 											} else {
-												if (class32.field857 != 0 && class113.field2776 == var20 && class98.field2410 == var11.field2495) {
+												if (Square.field857 != 0 && class113.field2776 == var20 && class98.field2410 == var11.field2495) {
 													var28 = class102.field2568 - class115.field2829;
 													var26 = class24.field741 - class128.field3143;
 													if (var26 < 5 && var26 > -5) {
@@ -6199,7 +6199,7 @@ public class Statics {
 						} else if (var11.field2489 == 4) {
 							class10 var36 = var11.method861();
 							if (var36 != null) {
-								class1 var37 = var11.field2474;
+								JagString var37 = var11.field2474;
 								int var38;
 								if (method947(var11)) {
 									var38 = var11.field2532;
@@ -6222,10 +6222,10 @@ public class Statics {
 										var37 = class64.field1631;
 									}
 									if (var39.field2826 == 1 || var11.field2540 != 1) {
-										var37 = method956(new class1[] { var37, class66.field1649, method803(var11.field2540) });
+										var37 = method956(new JagString[] { var37, class66.field1649, method803(var11.field2540) });
 									}
 								}
-								if (var11.field2520 == 6 && class120.field2998 == var11.field2495) {
+								if (var11.field2520 == 6 && Js5Loader.field2998 == var11.field2495) {
 									var38 = var11.field2453;
 									var37 = class36.field957;
 								}
@@ -6237,7 +6237,7 @@ public class Statics {
 										var38 = 16777215;
 									}
 								}
-								class1 var40 = method386(var11, var37);
+								JagString var40 = method386(var11, var37);
 								var36.method195(var40, var12, var13, var11.field2498, var11.field2449, var38, var11.field2471, var11.field2539, var11.field2521, var11.field2538);
 							} else if (class127.field3116) {
 								var9 = false;
@@ -6335,7 +6335,7 @@ public class Statics {
 							class91 var59;
 							if (var11.field2493 == 5) {
 								if (var11.field2479 == 0) {
-									var59 = class92.field2302.method637(null, null, -1, -1);
+									var59 = LinkList.field2302.method637(null, null, -1, -1);
 								} else {
 									var59 = field2621.method41();
 								}
@@ -6403,12 +6403,12 @@ public class Statics {
 									for (int var74 = 0; var74 < var11.field2498; var74++) {
 										if (var11.field2491[var72] > 0) {
 											class115 var75 = method760(var11.field2491[var72] - 1);
-											class1 var76 = var75.field2827;
+											JagString var76 = var75.field2827;
 											if (var76 == null) {
 												var76 = class64.field1631;
 											}
 											if (var75.field2826 == 1 || var11.field2516[var72] != 1) {
-												var76 = method956(new class1[] { var76, class66.field1649, method803(var11.field2516[var72]) });
+												var76 = method956(new JagString[] { var76, class66.field1649, method803(var11.field2516[var72]) });
 											}
 											int var77 = (var11.field2555 + 115) * var74 + var12;
 											int var78 = (var11.field2473 + 12) * var73 + var13;
@@ -6424,15 +6424,15 @@ public class Statics {
 									}
 								}
 							}
-							if (var11.field2489 == 8 && method720(arg0, var10) && class106.field2673 == class1.field57) {
+							if (var11.field2489 == 8 && method720(arg0, var10) && class106.field2673 == JagString.field57) {
 								int var79 = 0;
 								int var80 = 0;
 								class10 var81 = field2684;
-								class1 var82 = var11.field2474;
-								class1 var83 = method386(var11, var82);
+								JagString var82 = var11.field2474;
+								JagString var83 = method386(var11, var82);
 								while (var83.method10() > 0) {
 									int var84 = var83.method11(class67.field1661);
-									class1 var85;
+									JagString var85;
 									if (var84 == -1) {
 										var85 = var83;
 										var83 = class132.field3234;
@@ -6461,12 +6461,12 @@ public class Statics {
 								}
 								class111.method913(var88, var87, var79, var80, 16777120);
 								class111.method922(var88, var87, var79, var80, 0);
-								class1 var89 = var11.field2474;
+								JagString var89 = var11.field2474;
 								int var90 = var87 + var81.field350 + 2;
-								class1 var91 = method386(var11, var89);
+								JagString var91 = method386(var11, var89);
 								while (var91.method10() > 0) {
 									int var92 = var91.method11(class67.field1661);
-									class1 var93;
+									JagString var93;
 									if (var92 == -1) {
 										var93 = var91;
 										var91 = class132.field3234;
@@ -6564,7 +6564,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("rc.a(BILbd;I)[Ljd;")
-	public static class58[] method881(int arg0, class11 arg1, int arg2) {
+	public static class58[] method881(int arg0, Js5 arg1, int arg2) {
 		return method885(arg2, arg0, arg1) ? method998() : null;
 	}
 
@@ -6587,7 +6587,7 @@ public class Statics {
 				}
 			}
 		}
-		if (arg0.field1965 != -1 && arg0.field1967 <= class82.field2063) {
+		if (arg0.field1965 != -1 && arg0.field1967 <= Linkable.field2063) {
 			if (arg0.field2014 < 0) {
 				arg0.field2014 = 0;
 			}
@@ -6612,7 +6612,7 @@ public class Statics {
 		}
 		if (arg0.field2015 != -1 && arg0.field1996 <= 1) {
 			class47 var4 = method103(arg0.field2015);
-			if (var4.field1227 == 1 && arg0.field1968 > 0 && arg0.field1986 <= class82.field2063 && arg0.field1981 < class82.field2063) {
+			if (var4.field1227 == 1 && arg0.field1968 > 0 && arg0.field1986 <= Linkable.field2063 && arg0.field1981 < Linkable.field2063) {
 				arg0.field1996 = 1;
 				return;
 			}
@@ -6660,7 +6660,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("na.a(Lbd;I)V")
-	public static void method723(class11 arg0) {
+	public static void method723(Js5 arg0) {
 		field2018 = arg0;
 	}
 
@@ -6718,7 +6718,7 @@ public class Statics {
 
 	@ObfuscatedName("hb.d(I)V")
 	public static void method469() {
-		class107.field2694 = new class92();
+		class107.field2694 = new LinkList();
 	}
 
 	@ObfuscatedName("oa.a(III)I")
@@ -6792,7 +6792,7 @@ public class Statics {
 		}
 		for (int var2 = 0; var2 < 100; var2++) {
 			if (class80.field2034[var2] != null) {
-				class1 var3 = class128.field3130[var2];
+				JagString var3 = class128.field3130[var2];
 				byte var4 = 0;
 				int var5 = class132.field3236[var2];
 				if (var3 != null && var3.method26(class103.field2612)) {
@@ -6818,8 +6818,8 @@ public class Statics {
 						field2614[1].method329(var8, var6 - 12);
 						var8 += 14;
 					}
-					var0.method213(method956(new class1[] { var3, class39.field1065, class80.field2034[var2] }), var8, var6, 0);
-					var0.method213(method956(new class1[] { var3, class39.field1065, class80.field2034[var2] }), var8, var6 - 1, 65535);
+					var0.method213(method956(new JagString[] { var3, class39.field1065, class80.field2034[var2] }), var8, var6, 0);
+					var0.method213(method956(new JagString[] { var3, class39.field1065, class80.field2034[var2] }), var8, var6 - 1, 65535);
 					if (var1 >= 5) {
 						return;
 					}
@@ -6836,8 +6836,8 @@ public class Statics {
 				if (var5 == 6 && class6.field236 < 2) {
 					int var10 = 329 - var1 * 13;
 					var1++;
-					var0.method213(method956(new class1[] { class16.field521, class98.field2406, var3, class39.field1065, class80.field2034[var2] }), 4, var10, 0);
-					var0.method213(method956(new class1[] { class16.field521, class98.field2406, var3, class39.field1065, class80.field2034[var2] }), 4, var10 - 1, 65535);
+					var0.method213(method956(new JagString[] { class16.field521, class98.field2406, var3, class39.field1065, class80.field2034[var2] }), 4, var10, 0);
+					var0.method213(method956(new JagString[] { class16.field521, class98.field2406, var3, class39.field1065, class80.field2034[var2] }), 4, var10 - 1, 65535);
 					if (var1 >= 5) {
 						return;
 					}
@@ -6903,11 +6903,11 @@ public class Statics {
 			field1450.method1014(0, class100.field2547, class15.field488.field284);
 			class99.field2434 = class15.field498;
 			class75.field1855 = 0;
-			class15.field498 = class1.field36;
-			class1.field36 = class112.field2761;
+			class15.field498 = JagString.field36;
+			JagString.field36 = class112.field2761;
 			if (class112.field2761 == 71) {
 				long var1 = class15.field488.method174();
-				class1 var3 = method893(class15.field488).method4();
+				JagString var3 = method893(class15.field488).method4();
 				method758(6, var3, method969(var1).method36());
 				class112.field2761 = -1;
 				return true;
@@ -6915,17 +6915,17 @@ public class Statics {
 			if (class112.field2761 == 156) {
 				long var4 = class15.field488.method174();
 				int var6 = class15.field488.method145();
-				class1 var7 = method969(var4).method36();
+				JagString var7 = method969(var4).method36();
 				for (int var8 = 0; var8 < class59.field1492; var8++) {
 					if (class117.field2929[var8] == var4) {
 						if (class73.field1788[var8] != var6) {
 							class73.field1788[var8] = var6;
 							class39.field1055 = true;
 							if (var6 > 0) {
-								method758(5, method956(new class1[] { var7, class85.field2126 }), class132.field3234);
+								method758(5, method956(new JagString[] { var7, IntHashTable.field2126 }), class132.field3234);
 							}
 							if (var6 == 0) {
-								method758(5, method956(new class1[] { var7, class60.field1510 }), class132.field3234);
+								method758(5, method956(new JagString[] { var7, class60.field1510 }), class132.field3234);
 							}
 						}
 						var7 = null;
@@ -6948,7 +6948,7 @@ public class Statics {
 							int var11 = class73.field1788[var10];
 							class73.field1788[var10] = class73.field1788[var10 + 1];
 							class73.field1788[var10 + 1] = var11;
-							class1 var12 = class119.field2951[var10];
+							JagString var12 = class119.field2951[var10];
 							class119.field2951[var10] = class119.field2951[var10 + 1];
 							class119.field2951[var10 + 1] = var12;
 							long var13 = class117.field2929[var10];
@@ -7078,12 +7078,12 @@ public class Statics {
 				return true;
 			}
 			if (class112.field2761 == 82) {
-				class1 var41 = class15.field488.method140();
+				JagString var41 = class15.field488.method140();
 				if (var41.method38(class47.field1229)) {
-					class1 var53 = var41.method19(0, var41.method11(class86.field2165));
+					JagString var53 = var41.method19(0, var41.method11(class86.field2165));
 					long var54 = var53.method9();
 					boolean var56 = false;
-					for (int var57 = 0; var57 < class85.field2146; var57++) {
+					for (int var57 = 0; var57 < IntHashTable.field2146; var57++) {
 						if (class106.field2683[var57] == var54) {
 							var56 = true;
 							break;
@@ -7093,10 +7093,10 @@ public class Statics {
 						method758(4, class6.field231, var53);
 					}
 				} else if (var41.method38(class46.field1191)) {
-					class1 var48 = var41.method19(0, var41.method11(class86.field2165));
+					JagString var48 = var41.method19(0, var41.method11(class86.field2165));
 					long var49 = var48.method9();
 					boolean var51 = false;
-					for (int var52 = 0; var52 < class85.field2146; var52++) {
+					for (int var52 = 0; var52 < IntHashTable.field2146; var52++) {
 						if (class106.field2683[var52] == var49) {
 							var51 = true;
 							break;
@@ -7105,18 +7105,18 @@ public class Statics {
 					if (!var51 && class6.field233 == 0) {
 						method758(8, class121.field3008, var48);
 					}
-				} else if (var41.method38(class82.field2085)) {
-					class1 var42 = var41.method19(0, var41.method11(class86.field2165));
+				} else if (var41.method38(Linkable.field2085)) {
+					JagString var42 = var41.method19(0, var41.method11(class86.field2165));
 					long var43 = var42.method9();
 					boolean var45 = false;
-					for (int var46 = 0; var46 < class85.field2146; var46++) {
+					for (int var46 = 0; var46 < IntHashTable.field2146; var46++) {
 						if (class106.field2683[var46] == var43) {
 							var45 = true;
 							break;
 						}
 					}
 					if (!var45 && class6.field233 == 0) {
-						class1 var47 = var41.method19(var41.method11(class86.field2165) + 1, var41.method10() + -9);
+						JagString var47 = var41.method19(var41.method11(class86.field2165) + 1, var41.method10() + -9);
 						method758(8, var47, var42);
 					}
 				} else {
@@ -7239,7 +7239,7 @@ public class Statics {
 					method895(class66.field1648);
 					class66.field1648 = var78;
 				}
-				class120.field2998 = -1;
+				Js5Loader.field2998 = -1;
 				if (class114.field2811 != 0) {
 					class105.field2637 = true;
 					class114.field2811 = 0;
@@ -7260,7 +7260,7 @@ public class Statics {
 						}
 					}
 				}
-				for (class22 var82 = (class22) class92.field2284.method802(); var82 != null; var82 = (class22) class92.field2284.method809()) {
+				for (class22 var82 = (class22) LinkList.field2284.method802(); var82 != null; var82 = (class22) LinkList.field2284.method809()) {
 					if (var82.field700 >= field1471 && field1471 + 8 > var82.field700 && var82.field699 >= field893 && field893 + 8 > var82.field699 && field75 == var82.field679) {
 						var82.field692 = 0;
 					}
@@ -7269,7 +7269,7 @@ public class Statics {
 				return true;
 			}
 			if (class112.field2761 == 223) {
-				class1 var83 = class15.field488.method140();
+				JagString var83 = class15.field488.method140();
 				int var84 = class15.field488.method156();
 				int var85 = class15.field488.method144();
 				if (var85 >= 1 && var85 <= 5) {
@@ -7309,7 +7309,7 @@ public class Statics {
 					method895(class132.field3227);
 					class132.field3227 = var86;
 				}
-				class120.field2998 = -1;
+				Js5Loader.field2998 = -1;
 				if (class114.field2811 != 0) {
 					class105.field2637 = true;
 					class114.field2811 = 0;
@@ -7379,7 +7379,7 @@ public class Statics {
 					method895(class76.field1881);
 					class76.field1881 = var88;
 				}
-				class120.field2998 = -1;
+				Js5Loader.field2998 = -1;
 				class114.field2811 = 0;
 				class112.field2761 = -1;
 				return true;
@@ -7410,7 +7410,7 @@ public class Statics {
 					class132.field3227 = -1;
 				}
 				class112.field2761 = -1;
-				class120.field2998 = -1;
+				Js5Loader.field2998 = -1;
 				if (class114.field2811 != 0) {
 					class105.field2637 = true;
 					class114.field2811 = 0;
@@ -7445,7 +7445,7 @@ public class Statics {
 				}
 				class105.field2637 = true;
 				class112.field2761 = -1;
-				class120.field2998 = -1;
+				Js5Loader.field2998 = -1;
 				return true;
 			}
 			if (class112.field2761 == 217) {
@@ -7573,7 +7573,7 @@ public class Statics {
 					class105.field2637 = true;
 					class114.field2811 = 0;
 				}
-				class120.field2998 = -1;
+				Js5Loader.field2998 = -1;
 				class112.field2761 = -1;
 				class39.field1055 = true;
 				return true;
@@ -7670,7 +7670,7 @@ public class Statics {
 				class132.field3210 = class132.field3234;
 				class114.field2811 = 1;
 				class105.field2637 = true;
-				class37.field1001 = false;
+				Sprite.field1001 = false;
 				return true;
 			}
 			if (class112.field2761 == 186) {
@@ -7700,12 +7700,12 @@ public class Statics {
 						class75.field1857 = 128;
 					}
 					class2.field96 = 2;
-					class134.field3304 = class15.field488.method145();
+					PixMap.field3304 = class15.field488.method145();
 					class6.field226 = class15.field488.method145();
 					class42.field1114 = class15.field488.method144();
 				}
 				if (class2.field96 == 10) {
-					class134.field3290 = class15.field488.method145();
+					PixMap.field3290 = class15.field488.method145();
 				}
 				class112.field2761 = -1;
 				return true;
@@ -7720,7 +7720,7 @@ public class Statics {
 			}
 			if (class112.field2761 == 110) {
 				int var119 = class15.field488.method161();
-				class1 var120 = class15.field488.method140();
+				JagString var120 = class15.field488.method140();
 				class100 var121 = method1053(var119);
 				var121.field2474 = var120;
 				if (var119 >> 16 == class97.field2397[class9.field330]) {
@@ -7775,7 +7775,7 @@ public class Statics {
 					}
 				}
 				if (var133 <= 1) {
-					for (int var138 = 0; var138 < class85.field2146; var138++) {
+					for (int var138 = 0; var138 < IntHashTable.field2146; var138++) {
 						if (class106.field2683[var138] == var127) {
 							var134 = true;
 							break;
@@ -7785,11 +7785,11 @@ public class Statics {
 				if (!var134 && class6.field233 == 0) {
 					class104.field2618[class22.field682] = var135;
 					class22.field682 = (class22.field682 + 1) % 100;
-					class1 var139 = method893(class15.field488).method4();
+					JagString var139 = method893(class15.field488).method4();
 					if (var133 == 2 || var133 == 3) {
-						method758(7, var139, method956(new class1[] { class100.field2535, method969(var127).method36() }));
+						method758(7, var139, method956(new JagString[] { class100.field2535, method969(var127).method36() }));
 					} else if (var133 == 1) {
-						method758(7, var139, method956(new class1[] { class103.field2612, method969(var127).method36() }));
+						method758(7, var139, method956(new JagString[] { class103.field2612, method969(var127).method36() }));
 					} else {
 						method758(3, var139, method969(var127).method36());
 					}
@@ -7803,9 +7803,9 @@ public class Statics {
 						class80.field2030[var140].field2015 = -1;
 					}
 				}
-				for (int var141 = 0; var141 < class120.field2992.length; var141++) {
-					if (class120.field2992[var141] != null) {
-						class120.field2992[var141].field2015 = -1;
+				for (int var141 = 0; var141 < Js5Loader.field2992.length; var141++) {
+					if (Js5Loader.field2992[var141] != null) {
+						Js5Loader.field2992[var141].field2015 = -1;
 					}
 				}
 				class112.field2761 = -1;
@@ -7924,8 +7924,8 @@ public class Statics {
 				return true;
 			}
 			if (class112.field2761 == 211) {
-				class85.field2146 = class100.field2547 / 8;
-				for (int var168 = 0; var168 < class85.field2146; var168++) {
+				IntHashTable.field2146 = class100.field2547 / 8;
+				for (int var168 = 0; var168 < IntHashTable.field2146; var168++) {
 					class106.field2683[var168] = class15.field488.method174();
 				}
 				class112.field2761 = -1;
@@ -7940,7 +7940,7 @@ public class Statics {
 				class132.field3210 = class132.field3234;
 				class114.field2811 = 2;
 				class112.field2761 = -1;
-				class37.field1001 = false;
+				Sprite.field1001 = false;
 				return true;
 			}
 			method214("T1 - " + class112.field2761 + "," + class15.field498 + "," + class99.field2434 + " - " + class100.field2547, null);
@@ -7979,10 +7979,10 @@ public class Statics {
 	@ObfuscatedName("re.a(I)V")
 	public static void method891() {
 		method275();
-		if (class92.field2295 == 1) {
+		if (LinkList.field2295 == 1) {
 			field1926[class34.field894 / 100].method551(class119.field2967 - 4 - 8, class16.field523 - 4 + -8);
 		}
-		if (class92.field2295 == 2) {
+		if (LinkList.field2295 == 2) {
 			field1926[class34.field894 / 100 + 4].method551(class119.field2967 - 8 - 4, class16.field523 + -4 - 8);
 		}
 		if (class113.field2800 != -1) {
@@ -8003,7 +8003,7 @@ public class Statics {
 		if (class57.field1470 == 1) {
 			field2277.method551(472, 296);
 		}
-		if (class37.field1007) {
+		if (Sprite.field1007) {
 			byte var0 = 20;
 			int var1 = 16776960;
 			if (class105.field2635 < 30 && class93.field2332) {
@@ -8012,7 +8012,7 @@ public class Statics {
 			if (class105.field2635 < 20 && !class93.field2332) {
 				var1 = 16711680;
 			}
-			field2684.method210(method956(new class1[] { class121.field3026, method502(class105.field2635) }), 20, var1);
+			field2684.method210(method956(new JagString[] { class121.field3026, method502(class105.field2635) }), 20, var1);
 			int var2 = 16776960;
 			int var8 = var0 + 15;
 			Runtime var3 = Runtime.getRuntime();
@@ -8023,17 +8023,17 @@ public class Statics {
 			if (var4 > 65536 && !class93.field2332) {
 				var2 = 16711680;
 			}
-			field2684.method210(method956(new class1[] { class73.field1786, method502(var4), class62.field1562 }), 35, var2);
+			field2684.method210(method956(new JagString[] { class73.field1786, method502(var4), class62.field1562 }), 35, var2);
 			var8 += 15;
 			if (class79.field1941) {
 				field2684.method210(class132.field3211, 50, 16711680);
 				var8 += 15;
 				class79.field1941 = false;
 			}
-			if (class11.field410) {
+			if (Js5.field410) {
 				field2684.method210(class113.field2802, var8, 16711680);
 				var8 += 15;
-				class11.field410 = false;
+				Js5.field410 = false;
 			}
 			if (class22.field687) {
 				field2684.method210(class132.field3213, var8, 16711680);
@@ -8048,9 +8048,9 @@ public class Statics {
 		int var6 = var5 / 60;
 		int var7 = var5 % 60;
 		if (var7 < 10) {
-			field2684.method213(method956(new class1[] { class121.field3012, method502(var6), class31.field846, method502(var7) }), 4, 329, 16776960);
+			field2684.method213(method956(new JagString[] { class121.field3012, method502(var6), class31.field846, method502(var7) }), 4, 329, 16776960);
 		} else {
-			field2684.method213(method956(new class1[] { class121.field3012, method502(var6), class86.field2165, method502(var7) }), 4, 329, 16776960);
+			field2684.method213(method956(new JagString[] { class121.field3012, method502(var6), class86.field2165, method502(var7) }), 4, 329, 16776960);
 		}
 	}
 
@@ -8098,7 +8098,7 @@ public class Statics {
 		}
 		var0 += 8;
 		int var3 = class42.field1104 * 15 + 21;
-		if (class112.field2762 > 4 && class1.field14 > 4 && class112.field2762 < 516 && class1.field14 < 338) {
+		if (class112.field2762 > 4 && JagString.field14 > 4 && class112.field2762 < 516 && JagString.field14 < 338) {
 			field640 = 0;
 			field219 = class42.field1104 * 15 + 22;
 			class6.field224 = true;
@@ -8111,7 +8111,7 @@ public class Statics {
 				var4 = 0;
 			}
 			field986 = var4;
-			int var5 = class1.field14 - 4;
+			int var5 = JagString.field14 - 4;
 			if (var5 + var3 > 334) {
 				var5 = 334 - var3;
 			}
@@ -8120,10 +8120,10 @@ public class Statics {
 			}
 			field579 = var5;
 		}
-		if (class112.field2762 > 553 && class1.field14 > 205 && class112.field2762 < 743 && class1.field14 < 466) {
+		if (class112.field2762 > 553 && JagString.field14 > 205 && class112.field2762 < 743 && JagString.field14 < 466) {
 			field219 = class42.field1104 * 15 + 22;
 			field640 = 1;
-			int var6 = class1.field14 - 205;
+			int var6 = JagString.field14 - 205;
 			int var7 = class112.field2762 - var0 / 2 - 553;
 			if (var7 < 0) {
 				var7 = 0;
@@ -8140,13 +8140,13 @@ public class Statics {
 			field2306 = var0;
 			field579 = var6;
 		}
-		if (class112.field2762 <= 17 || class1.field14 <= 357 || class112.field2762 >= 496 || class1.field14 >= 453) {
+		if (class112.field2762 <= 17 || JagString.field14 <= 357 || class112.field2762 >= 496 || JagString.field14 >= 453) {
 			return;
 		}
 		field2306 = var0;
 		field640 = 2;
 		field219 = class42.field1104 * 15 + 22;
-		int var8 = class1.field14 - 357;
+		int var8 = JagString.field14 - 357;
 		if (var8 < 0) {
 			var8 = 0;
 		} else if (var3 + var8 > 96) {
@@ -8236,9 +8236,9 @@ public class Statics {
 							} else if (var19 instanceof Number) {
 								arg0.method141(1);
 								arg0.method157(((Number) var19).longValue());
-							} else if (var19 instanceof class1) {
+							} else if (var19 instanceof JagString) {
 								arg0.method141(2);
-								arg0.method181((class1) var19);
+								arg0.method181((JagString) var19);
 							} else {
 								arg0.method141(4);
 							}
@@ -8285,20 +8285,20 @@ public class Statics {
 
 	@ObfuscatedName("g.a(Z)V")
 	public static void method420() {
-		class37.field1006 = null;
-		class37.field1005 = null;
+		Sprite.field1006 = null;
+		Sprite.field1005 = null;
 		field993 = null;
-		class37.field1000 = null;
-		class37.field996 = null;
+		Sprite.field1000 = null;
+		Sprite.field996 = null;
 		field1003 = null;
-		class37.field981 = null;
-		class37.field989 = null;
-		class37.field994 = null;
+		Sprite.field981 = null;
+		Sprite.field989 = null;
+		Sprite.field994 = null;
 		field999 = null;
 	}
 
 	@ObfuscatedName("tb.a(I[La;)La;")
-	public static class1 method956(class1[] arg0) {
+	public static JagString method956(JagString[] arg0) {
 		if (arg0.length < 2) {
 			throw new IllegalArgumentException();
 		}
@@ -8341,7 +8341,7 @@ public class Statics {
 	public static boolean method734(class69 arg0, boolean arg1) {
 		class62.field1548 = 20;
 		try {
-			field311 = (class45) Class.forName("da").getDeclaredConstructor().newInstance();
+			field311 = (class45) Class.forName("class20").getDeclaredConstructor().newInstance();
 			return true;
 		} catch (Throwable var3) {
 			class21 var2 = arg0.method653();
@@ -8365,7 +8365,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("oa.a(Lbd;ZLbd;I)V")
-	public static void method748(class11 arg0, boolean arg1, class11 arg2) {
+	public static void method748(Js5 arg0, boolean arg1, Js5 arg2) {
 		field2384 = arg1;
 		field458 = arg2;
 		field1405 = arg0;
@@ -8377,8 +8377,8 @@ public class Statics {
 		if (class114.field2813 > 1) {
 			class114.field2813--;
 		}
-		if (class70.field1750 > 0) {
-			class70.field1750--;
+		if (Occlude.field1750 > 0) {
+			Occlude.field1750--;
 		}
 		if (class78.field1919) {
 			class78.field1919 = false;
@@ -8399,17 +8399,17 @@ public class Statics {
 				class59.field1488[var1] = false;
 			}
 		}
-		method479(class70.field1726);
+		method479(Occlude.field1726);
 		Object var2 = field708.field2042;
 		synchronized (field708.field2042) {
 			if (!class45.field1186) {
 				field708.field2058 = 0;
 			} else if (class122.field3050 != 0 || field708.field2058 >= 40) {
 				int var3 = 0;
-				class70.field1726.method415(210);
-				class70.field1726.method141(0);
-				int var4 = class70.field1726.field267;
-				for (int var5 = 0; var5 < field708.field2058 && class70.field1726.field267 - var4 < 240; var5++) {
+				Occlude.field1726.method415(210);
+				Occlude.field1726.method141(0);
+				int var4 = Occlude.field1726.field267;
+				for (int var5 = 0; var5 < field708.field2058 && Occlude.field1726.field267 - var4 < 240; var5++) {
 					var3++;
 					int var6 = field708.field2057[var5];
 					if (var6 < 0) {
@@ -8437,20 +8437,20 @@ public class Statics {
 						if (class123.field3069 < 8 && var9 >= -32 && var9 <= 31 && var10 >= -32 && var10 <= 31) {
 							var9 += 32;
 							var10 += 32;
-							class70.field1726.method150((class123.field3069 << 12) + (var9 << 6) + var10);
+							Occlude.field1726.method150((class123.field3069 << 12) + (var9 << 6) + var10);
 							class123.field3069 = 0;
 						} else if (class123.field3069 < 8) {
-							class70.field1726.method153(var8 + (class123.field3069 << 19) + 8388608);
+							Occlude.field1726.method153(var8 + (class123.field3069 << 19) + 8388608);
 							class123.field3069 = 0;
 						} else {
-							class70.field1726.method182((class123.field3069 << 19) + var8 - 1073741824);
+							Occlude.field1726.method182((class123.field3069 << 19) + var8 - 1073741824);
 							class123.field3069 = 0;
 						}
 					} else if (class123.field3069 < 2047) {
 						class123.field3069++;
 					}
 				}
-				class70.field1726.method155(class70.field1726.field267 - var4);
+				Occlude.field1726.method155(Occlude.field1726.field267 - var4);
 				if (var3 < field708.field2058) {
 					field708.field2058 -= var3;
 					for (int var11 = 0; var11 < field708.field2058; var11++) {
@@ -8465,7 +8465,7 @@ public class Statics {
 		if (class122.field3050 != 0) {
 			long var12 = (class49.field1344 - class103.field2605) / 50L;
 			int var14 = class112.field2762;
-			int var15 = class1.field14;
+			int var15 = JagString.field14;
 			class103.field2605 = class49.field1344;
 			if (var14 < 0) {
 				var14 = 0;
@@ -8485,32 +8485,32 @@ public class Statics {
 				var12 = 4095L;
 			}
 			int var17 = (int) var12;
-			class70.field1726.method415(234);
+			Occlude.field1726.method415(234);
 			int var18 = var15 * 765 + var14;
-			class70.field1726.method170((var16 << 19) + ((var17 << 20) + var18));
+			Occlude.field1726.method170((var16 << 19) + ((var17 << 20) + var18));
 		}
-		if (class37.field998 > 0) {
-			class37.field998--;
+		if (Sprite.field998 > 0) {
+			Sprite.field998--;
 		}
 		if (class59.field1488[96] || class59.field1488[97] || class59.field1488[98] || class59.field1488[99]) {
 			class48.field1271 = true;
 		}
-		if (class48.field1271 && class37.field998 <= 0) {
-			class37.field998 = 20;
+		if (class48.field1271 && Sprite.field998 <= 0) {
+			Sprite.field998 = 20;
 			class48.field1271 = false;
-			class70.field1726.method415(58);
-			class70.field1726.method150(class113.field2797);
-			class70.field1726.method150(class131.field3204);
+			Occlude.field1726.method415(58);
+			Occlude.field1726.method150(class113.field2797);
+			Occlude.field1726.method150(class131.field3204);
 		}
 		if (field1277 && !class75.field1862) {
 			class75.field1862 = true;
-			class70.field1726.method415(160);
-			class70.field1726.method141(1);
+			Occlude.field1726.method415(160);
+			Occlude.field1726.method141(1);
 		}
 		if (!field1277 && class75.field1862) {
 			class75.field1862 = false;
-			class70.field1726.method415(160);
-			class70.field1726.method141(0);
+			Occlude.field1726.method415(160);
+			Occlude.field1726.method141(0);
 		}
 		method810();
 		if (class103.field2599 != 30 && class103.field2599 != 35) {
@@ -8526,10 +8526,10 @@ public class Statics {
 		method384();
 		method252();
 		method424();
-		if (class92.field2295 != 0) {
+		if (LinkList.field2295 != 0) {
 			class34.field894 += 20;
 			if (class34.field894 >= 400) {
-				class92.field2295 = 0;
+				LinkList.field2295 = 0;
 			}
 		}
 		if (class19.field656 != 0) {
@@ -8545,19 +8545,19 @@ public class Statics {
 			}
 		}
 		class9.field321++;
-		if (class32.field857 != 0) {
+		if (Square.field857 != 0) {
 			class8.field298++;
 			if (class24.field741 > class128.field3143 + 5 || class128.field3143 - 5 > class24.field741 || class115.field2829 + 5 < class102.field2568 || class115.field2829 - 5 > class102.field2568) {
 				class114.field2815 = true;
 			}
 			if (class28.field801 == 0) {
-				if (class32.field857 == 3) {
+				if (Square.field857 == 3) {
 					class105.field2637 = true;
 				}
-				if (class32.field857 == 2) {
+				if (Square.field857 == 2) {
 					class39.field1055 = true;
 				}
-				class32.field857 = 0;
+				Square.field857 = 0;
 				if (class114.field2815 && class8.field298 >= 5) {
 					class43.field1145 = -1;
 					method757();
@@ -8592,13 +8592,13 @@ public class Statics {
 						} else {
 							var19.method850(class108.field2704, class113.field2776);
 						}
-						class70.field1726.method415(83);
-						class70.field1726.method165(var20);
-						class70.field1726.method169(class113.field2776);
-						class70.field1726.method154(class108.field2704);
-						class70.field1726.method179(class98.field2410);
+						Occlude.field1726.method415(83);
+						Occlude.field1726.method165(var20);
+						Occlude.field1726.method169(class113.field2776);
+						Occlude.field1726.method154(class108.field2704);
+						Occlude.field1726.method179(class98.field2410);
 					}
-				} else if ((class134.field3297 == 1 || method676(class42.field1104 - 1)) && class42.field1104 > 2) {
+				} else if ((PixMap.field3297 == 1 || method676(class42.field1104 - 1)) && class42.field1104 > 2) {
 					method968();
 				} else if (class42.field1104 > 0) {
 					method604(class42.field1104 - 1);
@@ -8607,17 +8607,17 @@ public class Statics {
 				class122.field3050 = 0;
 			}
 		}
-		if (class3.field105 != -1) {
-			int var25 = class3.field105;
-			int var26 = class3.field108;
+		if (World.field105 != -1) {
+			int var25 = World.field105;
+			int var26 = World.field108;
 			boolean var27 = method576(0, 0, field2621.field1962[0], var25, 0, true, 0, 0, field2621.field2009[0], var26, 0);
 			if (var27) {
-				class16.field523 = class1.field14;
+				class16.field523 = JagString.field14;
 				class34.field894 = 0;
 				class119.field2967 = class112.field2762;
-				class92.field2295 = 1;
+				LinkList.field2295 = 1;
 			}
-			class3.field105 = -1;
+			World.field105 = -1;
 		}
 		if (class122.field3050 == 1 && class64.field1605 != null) {
 			class122.field3050 = 0;
@@ -8663,9 +8663,9 @@ public class Statics {
 			if (class106.field2673 > 0) {
 				class106.field2673--;
 			}
-		} else if (class1.field57 > class106.field2673) {
+		} else if (JagString.field57 > class106.field2673) {
 			class106.field2673++;
-			if (class106.field2673 == class1.field57) {
+			if (class106.field2673 == JagString.field57) {
 				if (class133.field3253 != -1) {
 					class105.field2637 = true;
 				}
@@ -8685,19 +8685,19 @@ public class Statics {
 		int var29 = method662();
 		int var30 = method382();
 		if (var29 > 4500 && var30 > 4500) {
-			class70.field1750 = 250;
+			Occlude.field1750 = 250;
 			method876(4000);
-			class70.field1726.method415(216);
+			Occlude.field1726.method415(216);
 		}
 		class2.field72++;
 		class60.field1528++;
 		if (class60.field1528 > 500) {
 			int var31 = (int) (Math.random() * 8.0D);
 			if ((var31 & 0x2) == 2) {
-				class98.field2409 += class4.field185;
+				class98.field2409 += JavaSafePixMap.field185;
 			}
 			if ((var31 & 0x1) == 1) {
-				class8.field296 += class85.field2148;
+				class8.field296 += IntHashTable.field2148;
 			}
 			class60.field1528 = 0;
 			if ((var31 & 0x4) == 4) {
@@ -8705,7 +8705,7 @@ public class Statics {
 			}
 		}
 		if (class98.field2409 < -55) {
-			class4.field185 = 2;
+			JavaSafePixMap.field185 = 2;
 		}
 		if (class2.field72 > 500) {
 			int var32 = (int) (Math.random() * 8.0D);
@@ -8718,17 +8718,17 @@ public class Statics {
 			class2.field72 = 0;
 		}
 		if (class98.field2409 > 55) {
-			class4.field185 = -2;
+			JavaSafePixMap.field185 = -2;
 		}
 		if (class8.field296 < -50) {
-			class85.field2148 = 2;
+			IntHashTable.field2148 = 2;
 		}
 		if (class86.field2158 < -60) {
 			class24.field740 = 2;
 		}
 		class45.field1179++;
 		if (class8.field296 > 50) {
-			class85.field2148 = -2;
+			IntHashTable.field2148 = -2;
 		}
 		if (class86.field2158 > 60) {
 			class24.field740 = -2;
@@ -8746,13 +8746,13 @@ public class Statics {
 			client.field587 = -1;
 		}
 		if (class45.field1179 > 50) {
-			class70.field1726.method415(13);
+			Occlude.field1726.method415(13);
 		}
 		try {
-			if (field1450 != null && class70.field1726.field267 > 0) {
-				field1450.method1016(class70.field1726.field267, class70.field1726.field284);
+			if (field1450 != null && Occlude.field1726.field267 > 0) {
+				field1450.method1016(Occlude.field1726.field267, Occlude.field1726.field284);
 				class45.field1179 = 0;
-				class70.field1726.field267 = 0;
+				Occlude.field1726.field267 = 0;
 			}
 		} catch (IOException var33) {
 			method960();
@@ -8771,7 +8771,7 @@ public class Statics {
 		if (var4 != null) {
 			return var4;
 		}
-		byte[] var5 = field2739.method215(class54.field1437, method956(new class1[] { method502(arg1), class44.field1160, method502(arg0) }));
+		byte[] var5 = field2739.method215(class54.field1437, method956(new JagString[] { method502(arg1), class44.field1160, method502(arg0) }));
 		class8 var6 = new class8(var5);
 		class16 var7 = new class16();
 		var6.field267 = var6.field284.length - 12;
@@ -8781,7 +8781,7 @@ public class Statics {
 		var7.field514 = var6.method145();
 		var7.field510 = var6.method145();
 		var7.field513 = var6.method145();
-		var7.field517 = new class1[var8];
+		var7.field517 = new JagString[var8];
 		var7.field509 = new int[var8];
 		var6.field267 = 0;
 		var7.field519 = new int[var8];
@@ -8822,17 +8822,17 @@ public class Statics {
 	}
 
 	@ObfuscatedName("pb.a(IB)La;")
-	public static class1 method803(int arg0) {
-		class1 var1 = method502(arg0);
+	public static JagString method803(int arg0) {
+		JagString var1 = method502(arg0);
 		for (int var2 = var1.method10() - 3; var2 > 0; var2 -= 3) {
-			var1 = method956(new class1[] { var1.method19(0, var2), class72.field1774, var1.method1(var2) });
+			var1 = method956(new JagString[] { var1.method19(0, var2), class72.field1774, var1.method1(var2) });
 		}
 		if (var1.method10() > 8) {
-			var1 = method956(new class1[] { class102.field2564, var1.method19(0, var1.method10() - 8), class76.field1896, class105.field2629, var1, class103.field2601 });
+			var1 = method956(new JagString[] { class102.field2564, var1.method19(0, var1.method10() - 8), class76.field1896, class105.field2629, var1, class103.field2601 });
 		} else if (var1.method10() > 4) {
-			var1 = method956(new class1[] { class128.field3136, var1.method19(0, var1.method10() - 4), class95.field2360, class105.field2629, var1, class103.field2601 });
+			var1 = method956(new JagString[] { class128.field3136, var1.method19(0, var1.method10() - 4), class95.field2360, class105.field2629, var1, class103.field2601 });
 		}
-		return method956(new class1[] { class98.field2406, var1 });
+		return method956(new JagString[] { class98.field2406, var1 });
 	}
 
 	@ObfuscatedName("ca.c(I)V")
@@ -8880,7 +8880,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("ib.a(ILab;IIII[BI[Lad;II)V")
-	public static void method522(int arg0, class3 arg1, int arg2, int arg3, int arg4, byte[] arg5, int arg6, class5[] arg7, int arg8, int arg9) {
+	public static void method522(int arg0, World arg1, int arg2, int arg3, int arg4, byte[] arg5, int arg6, class5[] arg7, int arg8, int arg9) {
 		class8 var10 = new class8(arg5);
 		int var11 = -1;
 		while (true) {
@@ -8944,7 +8944,7 @@ public class Statics {
 			}
 		}
 		if (!var0) {
-			class134.field3301 = 1;
+			PixMap.field3301 = 1;
 			return;
 		}
 		boolean var2 = true;
@@ -8962,10 +8962,10 @@ public class Statics {
 			}
 		}
 		if (!var2) {
-			class134.field3301 = 2;
+			PixMap.field3301 = 2;
 			return;
 		}
-		if (class134.field3301 != 0) {
+		if (PixMap.field3301 != 0) {
 			method872(class133.field3252, true, class42.field1133);
 		}
 		method595();
@@ -9091,8 +9091,8 @@ public class Statics {
 		method429();
 		class93.field2322.method267();
 		if (field1859 != null) {
-			class70.field1726.method415(121);
-			class70.field1726.method182(1057001181);
+			Occlude.field1726.method415(121);
+			Occlude.field1726.method182(1057001181);
 		}
 		if (!class113.field2773) {
 			int var51 = (field2604 - 6) / 8;
@@ -9102,8 +9102,8 @@ public class Statics {
 			for (int var55 = var51 - 1; var55 <= var54 + 1; var55++) {
 				for (int var56 = var52 - 1; var56 <= var53 + 1; var56++) {
 					if (var51 > var55 || var55 > var54 || var56 < var52 || var56 > var53) {
-						field3131.method240(method956(new class1[] { class92.field2305, method502(var55), class14.field477, method502(var56) }));
-						field3131.method240(method956(new class1[] { class48.field1259, method502(var55), class14.field477, method502(var56) }));
+						field3131.method240(method956(new JagString[] { LinkList.field2305, method502(var55), class14.field477, method502(var56) }));
+						field3131.method240(method956(new JagString[] { class48.field1259, method502(var55), class14.field477, method502(var56) }));
 					}
 				}
 			}
@@ -9114,12 +9114,12 @@ public class Statics {
 			method399(35);
 		}
 		method910();
-		class70.field1726.method415(178);
+		Occlude.field1726.method415(178);
 		method466();
 	}
 
 	@ObfuscatedName("be.a(Lbd;ILa;La;)[Ljd;")
-	public static class58[] method245(class11 arg0, class1 arg1, class1 arg2) {
+	public static class58[] method245(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.method228(arg1);
 		int var4 = arg0.method224(var3, arg2);
 		return method881(var3, arg0, var4);
@@ -9127,7 +9127,7 @@ public class Statics {
 
 	@ObfuscatedName("rb.b(B)V")
 	public static void method878() {
-		for (class22 var0 = (class22) class92.field2284.method802(); var0 != null; var0 = (class22) class92.field2284.method809()) {
+		for (class22 var0 = (class22) LinkList.field2284.method802(); var0 != null; var0 = (class22) LinkList.field2284.method809()) {
 			if (var0.field692 > 0) {
 				var0.field692--;
 			}
@@ -9166,7 +9166,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("j.a(ILab;[Lad;[BIB)V")
-	public static void method535(int arg0, class3 arg1, class5[] arg2, byte[] arg3, int arg4) {
+	public static void method535(int arg0, World arg1, class5[] arg2, byte[] arg3, int arg4) {
 		class8 var5 = new class8(arg3);
 		int var6 = -1;
 		while (true) {
@@ -9213,13 +9213,13 @@ public class Statics {
 
 	@ObfuscatedName("s.a(BI)Lt;")
 	public static class114 method897(int arg0) {
-		class114 var1 = (class114) class85.field2136.method263((long) arg0);
+		class114 var1 = (class114) IntHashTable.field2136.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
 		class114 var2 = method690(field939, arg0, field2966);
 		if (var2 != null) {
-			class85.field2136.method262((long) arg0, var2);
+			IntHashTable.field2136.method262((long) arg0, var2);
 		}
 		return var2;
 	}
@@ -9229,33 +9229,33 @@ public class Statics {
 		if (arg0 == 0L) {
 			return;
 		}
-		if (class85.field2146 >= 100) {
+		if (IntHashTable.field2146 >= 100) {
 			method758(0, class102.field2582, class132.field3234);
 			return;
 		}
-		class1 var2 = method969(arg0).method36();
-		for (int var3 = 0; var3 < class85.field2146; var3++) {
+		JagString var2 = method969(arg0).method36();
+		for (int var3 = 0; var3 < IntHashTable.field2146; var3++) {
 			if (class106.field2683[var3] == arg0) {
-				method758(0, method956(new class1[] { var2, class134.field3295 }), class132.field3234);
+				method758(0, method956(new JagString[] { var2, PixMap.field3295 }), class132.field3234);
 				return;
 			}
 		}
 		for (int var4 = 0; var4 < class59.field1492; var4++) {
 			if (class117.field2929[var4] == arg0) {
-				method758(0, method956(new class1[] { class89.field2172, var2, class128.field3138 }), class132.field3234);
+				method758(0, method956(new JagString[] { class89.field2172, var2, class128.field3138 }), class132.field3234);
 				return;
 			}
 		}
 		if (!var2.method5(field2621.field86)) {
-			class106.field2683[class85.field2146++] = arg0;
+			class106.field2683[IntHashTable.field2146++] = arg0;
 			class39.field1055 = true;
-			class70.field1726.method415(251);
-			class70.field1726.method157(arg0);
+			Occlude.field1726.method415(251);
+			Occlude.field1726.method157(arg0);
 		}
 	}
 
 	@ObfuscatedName("ra.a(ILa;ZLa;)V")
-	public static void method872(class1 arg0, boolean arg1, class1 arg2) {
+	public static void method872(JagString arg0, boolean arg1, JagString arg2) {
 		if (class97.field2402) {
 			class97.field2402 = false;
 			method943();
@@ -9266,7 +9266,7 @@ public class Statics {
 			method246(class9.field330, class97.field2397, class66.field1648 == -1, -1);
 			class79.field1941 = true;
 			class22.field687 = true;
-			class11.field410 = true;
+			Js5.field410 = true;
 		}
 		short var3 = 151;
 		method1028();
@@ -9286,9 +9286,9 @@ public class Statics {
 	}
 
 	@ObfuscatedName("ia.a(Lu;ILsa;B)V")
-	public static void method507(class120 arg0, int arg1, class109 arg2) {
+	public static void method507(Js5Loader arg0, int arg1, class109 arg2) {
 		byte[] var3 = null;
-		class92 var4 = class62.field1547;
+		LinkList var4 = class62.field1547;
 		synchronized (class62.field1547) {
 			for (class57 var5 = (class57) class62.field1547.method802(); var5 != null; var5 = (class57) class62.field1547.method809()) {
 				if ((long) arg1 == var5.field2073 && var5.field1469 == arg2 && var5.field1464 == 0) {
@@ -9727,23 +9727,23 @@ public class Statics {
 		long var2 = (long) ((arg0 << 16) + arg1);
 		class104 var4 = (class104) class49.field1328.method499(var2);
 		if (var4 != null) {
-			class37.field996.method613(var4);
+			Sprite.field996.method613(var4);
 		}
 	}
 
 	@ObfuscatedName("fe.o(I)V")
 	public static void method413() {
-		class70.field1726.method415(176);
+		Occlude.field1726.method415(176);
 		if (class66.field1648 != -1) {
 			method895(class66.field1648);
-			class120.field2998 = -1;
+			Js5Loader.field2998 = -1;
 			class95.field2364 = true;
 			class39.field1055 = true;
 			class66.field1648 = -1;
 		}
 		if (class86.field2166 != -1) {
 			method895(class86.field2166);
-			class120.field2998 = -1;
+			Js5Loader.field2998 = -1;
 			class105.field2637 = true;
 			class86.field2166 = -1;
 		}
@@ -9759,7 +9759,7 @@ public class Statics {
 		if (class132.field3227 != -1) {
 			method895(class132.field3227);
 			class132.field3227 = -1;
-			class120.field2998 = -1;
+			Js5Loader.field2998 = -1;
 		}
 	}
 
@@ -9875,7 +9875,7 @@ public class Statics {
 			return;
 		}
 		int var0 = class112.field2762 - 575;
-		int var1 = class1.field14 - 4 - 5;
+		int var1 = JagString.field14 - 4 - 5;
 		if (var0 < 0 || var1 < 0 || var0 >= 146 || var1 >= 151) {
 			return;
 		}
@@ -9894,22 +9894,22 @@ public class Statics {
 		if (!var11) {
 			return;
 		}
-		class70.field1726.method141(var0);
-		class70.field1726.method141(var1);
-		class70.field1726.method150(class113.field2797);
-		class70.field1726.method141(57);
-		class70.field1726.method141(class86.field2158);
-		class70.field1726.method141(class103.field2589);
-		class70.field1726.method141(89);
-		class70.field1726.method150(field2621.field1972);
-		class70.field1726.method150(field2621.field1963);
-		class70.field1726.method141(class114.field2809);
-		class70.field1726.method141(63);
+		Occlude.field1726.method141(var0);
+		Occlude.field1726.method141(var1);
+		Occlude.field1726.method150(class113.field2797);
+		Occlude.field1726.method141(57);
+		Occlude.field1726.method141(class86.field2158);
+		Occlude.field1726.method141(class103.field2589);
+		Occlude.field1726.method141(89);
+		Occlude.field1726.method150(field2621.field1972);
+		Occlude.field1726.method150(field2621.field1963);
+		Occlude.field1726.method141(class114.field2809);
+		Occlude.field1726.method141(63);
 		return;
 	}
 
 	@ObfuscatedName("d.a(IBLbd;I)Lbc;")
-	public static class10 method294(int arg0, class11 arg1, int arg2) {
+	public static class10 method294(int arg0, Js5 arg1, int arg2) {
 		return method885(arg0, arg2, arg1) ? method965() : null;
 	}
 
@@ -9919,8 +9919,8 @@ public class Statics {
 		class112.field2761 = -1;
 		class42.field1104 = 0;
 		class100.field2547 = 0;
-		class70.field1726.field267 = 0;
-		class1.field36 = -1;
+		Occlude.field1726.field267 = 0;
+		JagString.field36 = -1;
 		class15.field498 = -1;
 		class75.field1855 = 0;
 		class99.field2434 = -1;
@@ -9933,9 +9933,9 @@ public class Statics {
 				class80.field2030[var0].field2011 = -1;
 			}
 		}
-		for (int var1 = 0; var1 < class120.field2992.length; var1++) {
-			if (class120.field2992[var1] != null) {
-				class120.field2992[var1].field2011 = -1;
+		for (int var1 = 0; var1 < Js5Loader.field2992.length; var1++) {
+			if (Js5Loader.field2992[var1] != null) {
+				Js5Loader.field2992[var1].field2011 = -1;
 			}
 		}
 		method399(30);
@@ -9968,7 +9968,7 @@ public class Statics {
 					}
 					class112.field2758[class118.field2939++] = var0;
 					class2 var2 = class80.field2030[var0];
-					var2.field2008 = class82.field2063;
+					var2.field2008 = Linkable.field2063;
 					int var3 = class15.field488.method412(5);
 					int var4 = class15.field488.method412(5);
 					if (var3 > 15) {
@@ -10071,7 +10071,7 @@ public class Statics {
 					var4.field95 = true;
 				}
 				if (var5 >= 0 && var5 < 104 && var6 >= 0 && var6 < 104) {
-					if (var4.field73 == null || var4.field91 > class82.field2063 || class82.field2063 >= var4.field82) {
+					if (var4.field73 == null || var4.field91 > Linkable.field2063 || Linkable.field2063 >= var4.field82) {
 						if ((var4.field1972 & 0x7F) == 64 && (var4.field1963 & 0x7F) == 64) {
 							if (class121.field3015[var5][var6] == class97.field2399) {
 								continue;
@@ -10092,7 +10092,7 @@ public class Statics {
 
 	@ObfuscatedName("ld.b(I)I")
 	public static int method662() {
-		return class92.field2293++;
+		return LinkList.field2293++;
 	}
 
 	@ObfuscatedName("bb.b(I)V")
@@ -10216,17 +10216,17 @@ public class Statics {
 
 	@ObfuscatedName("fa.b(I)V")
 	public static void method388() {
-		class32.field850 = null;
-		class32.field863 = null;
-		class32.field858 = null;
-		class32.field855 = null;
-		class32.field852 = null;
-		class32.field859 = null;
-		class32.field865 = null;
-		class32.field861 = null;
+		Square.field850 = null;
+		Square.field863 = null;
+		Square.field858 = null;
+		Square.field855 = null;
+		Square.field852 = null;
+		Square.field859 = null;
+		Square.field865 = null;
+		Square.field861 = null;
 		field856 = null;
-		class32.field862 = null;
-		class32.field854 = null;
+		Square.field862 = null;
+		Square.field854 = null;
 		field851 = null;
 	}
 
@@ -10249,10 +10249,10 @@ public class Statics {
 
 	@ObfuscatedName("s.b(I)V")
 	public static void method899() {
-		class81.field2054 = class82.field2070;
-		class32.field865 = class128.field3145;
+		class81.field2054 = Linkable.field2070;
+		Square.field865 = class128.field3145;
 		client.field602 = class78.field1928;
-		class1.field63 = class23.field719;
+		JagString.field63 = class23.field719;
 		class74.field1807 = class75.field1870;
 		class80.field2033 = class127.field3115;
 		class9.field326 = class127.field3113;
@@ -10260,131 +10260,131 @@ public class Statics {
 		class75.field1873 = class78.field1920;
 		class103.field2598 = class28.field810;
 		class129.field3172 = class93.field2329;
-		class82.field2066 = class63.field1581;
+		Linkable.field2066 = class63.field1581;
 		class97.field2393 = class42.field1127;
 		class59.field1498 = class116.field2903;
 		class117.field2928 = class42.field1127;
-		class134.field3302 = class131.field3197;
-		class82.field2103 = class133.field3280;
-		class37.field1006 = class118.field2933;
+		PixMap.field3302 = class131.field3197;
+		Linkable.field2103 = class133.field3280;
+		Sprite.field1006 = class118.field2933;
 		class42.field1106 = class74.field1840;
-		class32.field862 = class78.field1908;
-		class82.field2095 = class129.field3169;
+		Square.field862 = class78.field1908;
+		Linkable.field2095 = class129.field3169;
 		class62.field1545 = class47.field1244;
 		class108.field2707 = class133.field3276;
-		class134.field3305 = class127.field3124;
+		PixMap.field3305 = class127.field3124;
 		class78.field1921 = class72.field1758;
-		class82.field2096 = class106.field2681;
+		Linkable.field2096 = class106.field2681;
 		class28.field793 = class133.field3279;
 		class93.field2337 = class49.field1343;
 		class15.field497 = class34.field902;
 		class122.field3045 = class81.field2035;
 		class106.field2667 = class48.field1269;
-		class82.field2097 = class19.field634;
-		class82.field2083 = class129.field3169;
+		Linkable.field2097 = class19.field634;
+		Linkable.field2083 = class129.field3169;
 		class105.field2639 = class17.field547;
 		class34.field900 = class12.field414;
-		class32.field855 = class78.field1908;
+		Square.field855 = class78.field1908;
 		class24.field738 = class95.field2381;
 		class17.field539 = class105.field2654;
 		class23.field720 = class118.field2941;
 		class46.field1215 = class54.field1439;
 		class80.field2012 = class64.field1611;
 		class112.field2767 = class39.field1077;
-		class82.field2090 = class129.field3169;
-		class82.field2079 = class129.field3169;
+		Linkable.field2090 = class129.field3169;
+		Linkable.field2079 = class129.field3169;
 		class123.field3057 = class130.field3191;
-		class82.field2089 = class129.field3169;
+		Linkable.field2089 = class129.field3169;
 		class114.field2805 = class53.field1403;
-		class82.field2091 = class129.field3169;
+		Linkable.field2091 = class129.field3169;
 		class130.field3193 = class99.field2429;
-		class134.field3295 = class46.field1214;
+		PixMap.field3295 = class46.field1214;
 		class24.field726 = class93.field2335;
 		class95.field2354 = class38.field1011;
 		class97.field2391 = class53.field1404;
-		class63.field1593 = class120.field2978;
+		class63.field1593 = Js5Loader.field2978;
 		class121.field3002 = class107.field2687;
 		class102.field2583 = class132.field3216;
 		class73.field1782 = class133.field3258;
 		class76.field1896 = class98.field2420;
-		class128.field3138 = class120.field2995;
-		class4.field183 = class1.field48;
+		class128.field3138 = Js5Loader.field2995;
+		JavaSafePixMap.field183 = JagString.field48;
 		class42.field1094 = class106.field2685;
 		class45.field1174 = class112.field2764;
 		class133.field3265 = class78.field1915;
 		class130.field3187 = class38.field1044;
 		class52.field1364 = class50.field1345;
-		class82.field2077 = class78.field1927;
+		Linkable.field2077 = class78.field1927;
 		class28.field796 = class59.field1494;
 		class60.field1522 = class45.field1180;
 		class67.field1676 = class75.field1858;
-		class85.field2135 = class28.field791;
+		IntHashTable.field2135 = class28.field791;
 		class81.field2041 = class109.field2730;
 		class121.field3001 = class39.field1079;
 		class15.field487 = class44.field1171;
 		class100.field2546 = class59.field1503;
-		class85.field2139 = class99.field2438;
+		IntHashTable.field2139 = class99.field2438;
 		class43.field1152 = class8.field310;
 		class103.field2602 = class75.field1853;
 		class132.field3239 = class79.field1944;
 		class15.field507 = class23.field712;
 		class103.field2610 = class129.field3151;
-		class82.field2088 = class129.field3169;
-		class82.field2068 = class36.field976;
+		Linkable.field2088 = class129.field3169;
+		Linkable.field2068 = class36.field976;
 		client.field584 = class123.field3070;
 		class8.field303 = class34.field890;
 		class102.field2575 = class129.field3148;
-		class32.field861 = class128.field3145;
+		Square.field861 = class128.field3145;
 		class28.field785 = class81.field2051;
-		class32.field858 = class78.field1908;
-		class82.field2106 = class129.field3169;
-		class82.field2071 = class129.field3169;
+		Square.field858 = class78.field1908;
+		Linkable.field2106 = class129.field3169;
+		Linkable.field2071 = class129.field3169;
 		class46.field1217 = client.field578;
 		class93.field2319 = class80.field2028;
 		class95.field2360 = class38.field1011;
 		class2.field94 = class95.field2378;
-		class82.field2110 = class129.field3169;
+		Linkable.field2110 = class129.field3169;
 		class52.field1362 = class52.field1386;
 		class2.field64 = class130.field3190;
 		class16.field521 = class99.field2432;
 		class14.field452 = class24.field732;
 		class105.field2634 = class95.field2359;
-		class82.field2092 = class129.field3169;
+		Linkable.field2092 = class129.field3169;
 		class117.field2931 = class105.field2644;
 		class38.field1024 = class64.field1632;
-		class82.field2086 = class63.field1576;
+		Linkable.field2086 = class63.field1576;
 		class46.field1219 = class123.field3064;
-		class127.field3127 = class120.field2993;
-		class85.field2140 = class28.field791;
+		class127.field3127 = Js5Loader.field2993;
+		IntHashTable.field2140 = class28.field791;
 		class60.field1510 = class106.field2662;
-		class82.field2094 = class63.field1581;
-		class79.field1933 = class70.field1745;
+		Linkable.field2094 = class63.field1581;
+		class79.field1933 = Occlude.field1745;
 		class38.field1030 = class23.field702;
 		class62.field1561 = class114.field2824;
-		class82.field2109 = class78.field1908;
+		Linkable.field2109 = class78.field1908;
 		class53.field1392 = class73.field1785;
 		class63.field1597 = class12.field418;
 		class42.field1142 = class35.field929;
 		class97.field2400 = class39.field1073;
-		class32.field850 = class106.field2679;
-		class82.field2111 = class15.field499;
+		Square.field850 = class106.field2679;
+		Linkable.field2111 = class15.field499;
 		class123.field3072 = class81.field2036;
-		class132.field3219 = class32.field854;
-		class82.field2113 = class129.field3169;
-		class82.field2080 = class118.field2940;
-		class82.field2067 = class129.field3169;
-		class46.field1195 = class82.field2102;
+		class132.field3219 = Square.field854;
+		Linkable.field2113 = class129.field3169;
+		Linkable.field2080 = class118.field2940;
+		Linkable.field2067 = class129.field3169;
+		class46.field1195 = Linkable.field2102;
 		class79.field1930 = class2.field93;
 		class73.field1789 = class23.field716;
 		class62.field1557 = class130.field3184;
-		class112.field2763 = class1.field59;
+		class112.field2763 = JagString.field59;
 		class102.field2576 = class129.field3170;
 		class79.field1931 = class114.field2812;
 		class38.field1037 = class102.field2562;
-		class82.field2093 = class63.field1576;
+		Linkable.field2093 = class63.field1576;
 		class100.field2477 = class132.field3225;
-		class86.field2157 = class120.field2977;
-		class46.field1203 = class4.field172;
+		class86.field2157 = Js5Loader.field2977;
+		class46.field1203 = JavaSafePixMap.field172;
 		class100.field2490 = class28.field790;
 		class63.field1594 = class28.field795;
 		class98.field2407 = class122.field3051;
@@ -10392,53 +10392,53 @@ public class Statics {
 		class99.field2431 = class16.field526;
 		class72.field1778 = class130.field3189;
 		class6.field231 = class74.field1794;
-		class114.field2817 = class120.field2980;
+		class114.field2817 = Js5Loader.field2980;
 		class54.field1432 = class14.field467;
 		class19.field666 = client.field598;
 		class54.field1431 = class81.field2048;
 		class31.field833 = class43.field1147;
-		class85.field2126 = class127.field3125;
+		IntHashTable.field2126 = class127.field3125;
 		class113.field2778 = class2.field77;
 		class38.field1038 = class43.field1150;
-		class121.field3008 = class32.field859;
+		class121.field3008 = Square.field859;
 		class100.field2480 = class72.field1776;
 		class67.field1657 = class36.field962;
 		class42.field1120 = class64.field1618;
 		class76.field1885 = class52.field1382;
-		class82.field2081 = class129.field3169;
+		Linkable.field2081 = class129.field3169;
 		class36.field957 = class99.field2436;
 		class93.field2325 = class127.field3120;
-		class85.field2149 = class80.field2032;
+		IntHashTable.field2149 = class80.field2032;
 		class38.field1043 = class99.field2426;
 		class122.field3054 = class14.field474;
-		class82.field2074 = class129.field3169;
+		Linkable.field2074 = class129.field3169;
 		class93.field2310 = class86.field2164;
 		class42.field1111 = class64.field1618;
-		class82.field2104 = class17.field538;
+		Linkable.field2104 = class17.field538;
 		class131.field3205 = class54.field1436;
-		class42.field1102 = class32.field852;
+		class42.field1102 = Square.field852;
 		class93.field2317 = class38.field1022;
 		class57.field1449 = class47.field1238;
 		class133.field3252 = class121.field3006;
-		class1.field49 = class23.field706;
+		JagString.field49 = class23.field706;
 		class93.field2308 = class53.field1406;
-		class92.field2296 = class49.field1339;
+		LinkList.field2296 = class49.field1339;
 		class74.field1819 = class64.field1622;
 		class5.field218 = class53.field1402;
-		class102.field2580 = class11.field409;
+		class102.field2580 = Js5.field409;
 		class121.field3012 = class89.field2174;
-		class82.field2078 = class129.field3169;
+		Linkable.field2078 = class129.field3169;
 		class53.field1407 = class76.field1883;
 		class106.field2675 = class23.field717;
 		class35.field926 = class6.field232;
 		class38.field1031 = class23.field703;
-		class11.field408 = class47.field1232;
-		class75.field1874 = class92.field2299;
-		class72.field1762 = class85.field2141;
+		Js5.field408 = class47.field1232;
+		class75.field1874 = LinkList.field2299;
+		class72.field1762 = IntHashTable.field2141;
 		class95.field2382 = class48.field1264;
 		client.field582 = class31.field838;
 		class60.field1527 = class23.field707;
-		class89.field2178 = class92.field2279;
+		class89.field2178 = LinkList.field2279;
 		class59.field1482 = class109.field2732;
 		class57.field1463 = class93.field2336;
 		class81.field2056 = class54.field1430;
@@ -10446,38 +10446,38 @@ public class Statics {
 		class102.field2582 = class12.field431;
 		class45.field1184 = class98.field2420;
 		class31.field836 = class36.field977;
-		class82.field2061 = class108.field2708;
+		Linkable.field2061 = class108.field2708;
 		class108.field2714 = class59.field1487;
-		class80.field1998 = class92.field2304;
+		class80.field1998 = LinkList.field2304;
 		class118.field2948 = class100.field2522;
-		class85.field2138 = class5.field215;
+		IntHashTable.field2138 = class5.field215;
 		class39.field1076 = class24.field743;
-		class82.field2100 = class92.field2298;
+		Linkable.field2100 = LinkList.field2298;
 		class59.field1501 = class39.field1067;
 		class98.field2405 = class15.field505;
 		class19.field671 = class105.field2657;
-		class89.field2172 = class92.field2279;
+		class89.field2172 = LinkList.field2279;
 		class35.field932 = class2.field83;
 		class14.field468 = class116.field2901;
-		class82.field2101 = class129.field3169;
+		Linkable.field2101 = class129.field3169;
 	}
 
 	@ObfuscatedName("ra.a(B)V")
 	public static void method873() {
-		class11.field379.method267();
+		Js5.field379.method267();
 	}
 
 	@ObfuscatedName("de.a(I)V")
 	public static void method323() {
 		for (int var0 = 0; var0 < class80.field2027; var0++) {
 			int var1 = class50.field1348[var0];
-			class130 var2 = class120.field2992[var1];
+			class130 var2 = Js5Loader.field2992[var1];
 			int var3 = class15.field488.method144();
 			if ((var3 & 0x1) != 0) {
 				int var4 = class15.field488.method152();
 				int var5 = class15.field488.method156();
-				var2.method727(var5, class82.field2063, var4);
-				var2.field2013 = class82.field2063 + 300;
+				var2.method727(var5, Linkable.field2063, var4);
+				var2.field2013 = Linkable.field2063 + 300;
 				var2.field2004 = class15.field488.method152();
 				var2.field1975 = class15.field488.method144();
 			}
@@ -10485,10 +10485,10 @@ public class Statics {
 				var2.field1965 = class15.field488.method180();
 				int var6 = class15.field488.method167();
 				var2.field2003 = 0;
-				var2.field1967 = (var6 & 0xFFFF) + class82.field2063;
+				var2.field1967 = (var6 & 0xFFFF) + Linkable.field2063;
 				var2.field1984 = var6 >> 16;
 				var2.field2014 = 0;
-				if (var2.field1967 > class82.field2063) {
+				if (var2.field1967 > Linkable.field2063) {
 					var2.field2014 = -1;
 				}
 				if (var2.field1965 == 65535) {
@@ -10504,8 +10504,8 @@ public class Statics {
 			if ((var3 & 0x2) != 0) {
 				int var7 = class15.field488.method152();
 				int var8 = class15.field488.method144();
-				var2.method727(var8, class82.field2063, var7);
-				var2.field2013 = class82.field2063 + 300;
+				var2.method727(var8, Linkable.field2063, var7);
+				var2.field2013 = Linkable.field2063 + 300;
 				var2.field2004 = class15.field488.method156();
 				var2.field1975 = class15.field488.method156();
 			}
@@ -10595,21 +10595,21 @@ public class Statics {
 
 	@ObfuscatedName("oa.a(B)V")
 	public static void method750() {
-		class85.field2126 = null;
-		class85.field2141 = null;
-		class85.field2139 = null;
-		class85.field2127 = null;
-		class85.field2150 = null;
-		class85.field2136 = null;
+		IntHashTable.field2126 = null;
+		IntHashTable.field2141 = null;
+		IntHashTable.field2139 = null;
+		IntHashTable.field2127 = null;
+		IntHashTable.field2150 = null;
+		IntHashTable.field2136 = null;
 		field2151 = null;
 		field2131 = null;
-		class85.field2133 = null;
-		class85.field2128 = null;
-		class85.field2143 = null;
-		class85.field2135 = null;
-		class85.field2149 = null;
-		class85.field2140 = null;
-		class85.field2138 = null;
+		IntHashTable.field2133 = null;
+		IntHashTable.field2128 = null;
+		IntHashTable.field2143 = null;
+		IntHashTable.field2135 = null;
+		IntHashTable.field2149 = null;
+		IntHashTable.field2140 = null;
+		IntHashTable.field2138 = null;
 	}
 
 	@ObfuscatedName("ga.a(BLjava/awt/Component;)V")
@@ -10623,15 +10623,15 @@ public class Statics {
 		if (arg0 == 0L) {
 			return;
 		}
-		for (int var2 = 0; var2 < class85.field2146; var2++) {
+		for (int var2 = 0; var2 < IntHashTable.field2146; var2++) {
 			if (class106.field2683[var2] == arg0) {
 				class39.field1055 = true;
-				class85.field2146--;
-				for (int var3 = var2; var3 < class85.field2146; var3++) {
+				IntHashTable.field2146--;
+				for (int var3 = var2; var3 < IntHashTable.field2146; var3++) {
 					class106.field2683[var3] = class106.field2683[var3 + 1];
 				}
-				class70.field1726.method415(28);
-				class70.field1726.method157(arg0);
+				Occlude.field1726.method415(28);
+				Occlude.field1726.method157(arg0);
 				return;
 			}
 		}
@@ -10668,7 +10668,7 @@ public class Statics {
 						}
 					}
 					if (var12.field2520 == 2 && client.field594 == 0 && arg7 >= var14 && arg4 >= var13 && arg7 < var12.field2498 + var14 && arg4 < var13 + var12.field2449) {
-						method398(0, var12.field2470, var12.field2495, 0, 33, method956(new class1[] { class102.field2564, var12.field2515 }));
+						method398(0, var12.field2470, var12.field2495, 0, 33, method956(new JagString[] { class102.field2564, var12.field2515 }));
 					}
 					if (var12.field2520 == 3 && arg7 >= var14 && arg4 >= var13 && var12.field2498 + var14 > arg7 && arg4 < var12.field2449 + var13) {
 						byte var16;
@@ -10685,7 +10685,7 @@ public class Statics {
 					if (var12.field2520 == 5 && var14 <= arg7 && var13 <= arg4 && arg7 < var14 + var12.field2498 && var12.field2449 + var13 > arg4) {
 						method398(0, var12.field2482, var12.field2495, 0, 57, class132.field3234);
 					}
-					if (var12.field2520 == 6 && class120.field2998 == -1 && var14 <= arg7 && var13 <= arg4 && arg7 < var14 + var12.field2498 && arg4 < var12.field2449 + var13) {
+					if (var12.field2520 == 6 && Js5Loader.field2998 == -1 && var14 <= arg7 && var13 <= arg4 && arg7 < var14 + var12.field2498 && arg4 < var12.field2449 + var13) {
 						method398(0, var12.field2482, var12.field2495, 0, 54, class132.field3234);
 					}
 					if (var12.field2489 == 2) {
@@ -10705,10 +10705,10 @@ public class Statics {
 										class115 var22 = method760(var12.field2491[var17] - 1);
 										if (class14.field475 == 1 && var12.field2533) {
 											if (field1075 != var12.field2495 || field2281 != var17) {
-												method398(var22.field2883, client.field584, var12.field2495, var17, 56, method956(new class1[] { class130.field3177, class9.field328, var22.field2827 }));
+												method398(var22.field2883, client.field584, var12.field2495, var17, 56, method956(new JagString[] { class130.field3177, class9.field328, var22.field2827 }));
 											}
 										} else if (client.field594 != 1 || !var12.field2533) {
-											class1[] var23 = var22.field2830;
+											JagString[] var23 = var22.field2830;
 											if (class118.field2934) {
 												var23 = method905(var23);
 											}
@@ -10721,14 +10721,14 @@ public class Statics {
 														} else {
 															var25 = 11;
 														}
-														method398(var22.field2883, var23[var24], var12.field2495, var17, var25, method956(new class1[] { class93.field2334, var22.field2827 }));
+														method398(var22.field2883, var23[var24], var12.field2495, var17, var25, method956(new JagString[] { class93.field2334, var22.field2827 }));
 													} else if (var24 == 4) {
-														method398(var22.field2883, class15.field487, var12.field2495, var17, 11, method956(new class1[] { class93.field2334, var22.field2827 }));
+														method398(var22.field2883, class15.field487, var12.field2495, var17, 11, method956(new JagString[] { class93.field2334, var22.field2827 }));
 													}
 												}
 											}
 											if (var12.field2461) {
-												method398(var22.field2883, client.field584, var12.field2495, var17, 19, method956(new class1[] { class93.field2334, var22.field2827 }));
+												method398(var22.field2883, client.field584, var12.field2495, var17, 19, method956(new JagString[] { class93.field2334, var22.field2827 }));
 											}
 											if (var12.field2533 && var23 != null) {
 												for (int var26 = 2; var26 >= 0; var26--) {
@@ -10743,11 +10743,11 @@ public class Statics {
 														if (var26 == 2) {
 															var27 = 31;
 														}
-														method398(var22.field2883, var23[var26], var12.field2495, var17, var27, method956(new class1[] { class93.field2334, var22.field2827 }));
+														method398(var22.field2883, var23[var26], var12.field2495, var17, var27, method956(new JagString[] { class93.field2334, var22.field2827 }));
 													}
 												}
 											}
-											class1[] var28 = var12.field2504;
+											JagString[] var28 = var12.field2504;
 											if (class118.field2934) {
 												var28 = method905(var28);
 											}
@@ -10770,13 +10770,13 @@ public class Statics {
 														if (var29 == 4) {
 															var30 = 24;
 														}
-														method398(var22.field2883, var28[var29], var12.field2495, var17, var30, method956(new class1[] { class93.field2334, var22.field2827 }));
+														method398(var22.field2883, var28[var29], var12.field2495, var17, var30, method956(new JagString[] { class93.field2334, var22.field2827 }));
 													}
 												}
 											}
-											method398(var22.field2883, class114.field2805, var12.field2495, var17, 1006, method956(new class1[] { class93.field2334, var22.field2827 }));
+											method398(var22.field2883, class114.field2805, var12.field2495, var17, 1006, method956(new JagString[] { class93.field2334, var22.field2827 }));
 										} else if ((field2846 & 0x10) == 16) {
-											method398(var22.field2883, class60.field1523, var12.field2495, var17, 37, method956(new class1[] { class52.field1384, class9.field328, var22.field2827 }));
+											method398(var22.field2883, class60.field1523, var12.field2495, var17, 37, method956(new JagString[] { class52.field1384, class9.field328, var22.field2827 }));
 										}
 									}
 								}
@@ -10787,39 +10787,39 @@ public class Statics {
 					if (var12.field2442 && var12.field2524 != -1 && arg7 >= var14 && arg4 >= var13 && arg7 < var12.field2498 + var14 && arg4 < var12.field2449 + var13) {
 						class115 var31 = method760(var12.field2524);
 						if (var12.field2533) {
-							class1[] var32 = var31.field2830;
+							JagString[] var32 = var31.field2830;
 							if (class118.field2934) {
 								var32 = method905(var32);
 							}
 							if (var32 == null || var32[4] == null) {
-								method398(var31.field2883, class15.field487, var12.field2495, var12.field2542 - 1, 11, method956(new class1[] { class93.field2334, var31.field2827 }));
+								method398(var31.field2883, class15.field487, var12.field2495, var12.field2542 - 1, 11, method956(new JagString[] { class93.field2334, var31.field2827 }));
 							} else {
-								method398(var31.field2883, var32[4], var12.field2495, var12.field2542 - 1, 11, method956(new class1[] { class93.field2334, var31.field2827 }));
+								method398(var31.field2883, var32[4], var12.field2495, var12.field2542 - 1, 11, method956(new JagString[] { class93.field2334, var31.field2827 }));
 							}
 							if (var32 != null && var32[3] != null) {
-								method398(var31.field2883, var32[3], var12.field2495, var12.field2542 - 1, 43, method956(new class1[] { class93.field2334, var31.field2827 }));
+								method398(var31.field2883, var32[3], var12.field2495, var12.field2542 - 1, 43, method956(new JagString[] { class93.field2334, var31.field2827 }));
 							}
 							if (var32 != null && var32[2] != null) {
-								method398(var31.field2883, var32[2], var12.field2495, var12.field2542 - 1, 31, method956(new class1[] { class93.field2334, var31.field2827 }));
+								method398(var31.field2883, var32[2], var12.field2495, var12.field2542 - 1, 31, method956(new JagString[] { class93.field2334, var31.field2827 }));
 							}
 							if (var32 != null && var32[1] != null) {
-								method398(var31.field2883, var32[1], var12.field2495, var12.field2542 - 1, 6, method956(new class1[] { class93.field2334, var31.field2827 }));
+								method398(var31.field2883, var32[1], var12.field2495, var12.field2542 - 1, 6, method956(new JagString[] { class93.field2334, var31.field2827 }));
 							}
 							if (var32 != null && var32[0] != null) {
-								method398(var31.field2883, var32[0], var12.field2495, var12.field2542 - 1, 52, method956(new class1[] { class93.field2334, var31.field2827 }));
+								method398(var31.field2883, var32[0], var12.field2495, var12.field2542 - 1, 52, method956(new JagString[] { class93.field2334, var31.field2827 }));
 							}
 						}
 						if (var12.field2495 >= 0) {
-							method398(var31.field2883, class114.field2805, var12.field2495, -1, 1007, method956(new class1[] { class93.field2334, var31.field2827 }));
+							method398(var31.field2883, class114.field2805, var12.field2495, -1, 1007, method956(new JagString[] { class93.field2334, var31.field2827 }));
 						} else {
-							method398(var31.field2883, class114.field2805, var12.field2454, var12.field2495 & 0x7FFF, 1007, method956(new class1[] { class93.field2334, var31.field2827 }));
+							method398(var31.field2883, class114.field2805, var12.field2454, var12.field2495 & 0x7FFF, 1007, method956(new JagString[] { class93.field2334, var31.field2827 }));
 						}
 					}
 					if (var12.field2494 && var12.field2467 != null && var14 <= arg7 && var13 <= arg4 && var12.field2498 + var14 > arg7 && arg4 < var12.field2449 + var13) {
-						class1 var33 = class132.field3234;
+						JagString var33 = class132.field3234;
 						if (var12.field2524 != -1) {
 							class115 var34 = method760(var12.field2524);
-							var33 = method956(new class1[] { class93.field2334, var34.field2827 });
+							var33 = method956(new JagString[] { class93.field2334, var34.field2827 });
 						}
 						for (int var35 = var12.field2467.length - 1; var35 >= 0; var35--) {
 							if (var12.field2467[var35] != null) {
@@ -10882,7 +10882,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("md.a(Lbd;B)V")
-	public static void method702(class11 arg0) {
+	public static void method702(Js5 arg0) {
 		field2024 = arg0;
 	}
 
@@ -10895,8 +10895,8 @@ public class Statics {
 		method688();
 		method837();
 		for (int var0 = 0; var0 < class31.field841; var0++) {
-			int var1 = class11.field375[var0];
-			if (class82.field2063 != class80.field2030[var1].field2008) {
+			int var1 = Js5.field375[var0];
+			if (Linkable.field2063 != class80.field2030[var1].field2008) {
 				class80.field2030[var1] = null;
 			}
 		}
@@ -10912,12 +10912,12 @@ public class Statics {
 
 	@ObfuscatedName("ld.c(I)V")
 	public static void method663() {
-		class70.field1753 = null;
+		Occlude.field1753 = null;
 		field1747 = null;
-		class70.field1745 = null;
-		class70.field1751 = null;
-		class70.field1740 = null;
-		class70.field1726 = null;
+		Occlude.field1745 = null;
+		Occlude.field1751 = null;
+		Occlude.field1740 = null;
+		Occlude.field1726 = null;
 		field1752 = null;
 	}
 
@@ -10995,14 +10995,14 @@ public class Statics {
 	}
 
 	@ObfuscatedName("ec.a(Lbd;BLa;La;)[Le;")
-	public static class25[] method372(class11 arg0, class1 arg1, class1 arg2) {
+	public static class25[] method372(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.method228(arg1);
 		int var4 = arg0.method224(var3, arg2);
 		return method518(arg0, var4, var3);
 	}
 
 	@ObfuscatedName("pe.a(III[La;)La;")
-	public static class1 method825(int arg0, int arg1, class1[] arg2) {
+	public static JagString method825(int arg0, int arg1, JagString[] arg2) {
 		int var3 = 0;
 		for (int var4 = 0; var4 < arg0; var4++) {
 			if (arg2[arg1 + var4] == null) {
@@ -11013,29 +11013,29 @@ public class Statics {
 		byte[] var5 = new byte[var3];
 		int var6 = 0;
 		for (int var7 = 0; var7 < arg0; var7++) {
-			class1 var8 = arg2[arg1 + var7];
+			JagString var8 = arg2[arg1 + var7];
 			class33.method392(var8.field38, 0, var5, var6, var8.field26);
 			var6 += var8.field26;
 		}
-		class1 var9 = new class1();
+		JagString var9 = new JagString();
 		var9.field26 = var3;
 		var9.field38 = var5;
 		return var9;
 	}
 
 	@ObfuscatedName("fc.a(ILa;IIIILa;)V")
-	public static void method398(int arg0, class1 arg1, int arg2, int arg3, int arg4, class1 arg5) {
+	public static void method398(int arg0, JagString arg1, int arg2, int arg3, int arg4, JagString arg5) {
 		if (class42.field1104 >= 500) {
 			return;
 		}
 		if (arg5.method10() <= 0) {
 			class102.field2586[class42.field1104] = arg1;
 		} else {
-			class102.field2586[class42.field1104] = method956(new class1[] { arg1, class93.field2337, arg5 });
+			class102.field2586[class42.field1104] = method956(new JagString[] { arg1, class93.field2337, arg5 });
 		}
 		class79.field1932[class42.field1104] = arg4;
 		class72.field1770[class42.field1104] = arg0;
-		class37.field994[class42.field1104] = arg3;
+		Sprite.field994[class42.field1104] = arg3;
 		class117.field2925[class42.field1104] = arg2;
 		class42.field1104++;
 	}
@@ -11114,7 +11114,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("cb.a(ZLbd;Lbd;Lbd;)V")
-	public static void method268(class11 arg0, class11 arg1, class11 arg2) {
+	public static void method268(Js5 arg0, Js5 arg1, Js5 arg2) {
 		field2966 = arg0;
 		field939 = arg2;
 		field1241 = arg1;
@@ -11122,9 +11122,9 @@ public class Statics {
 
 	@ObfuscatedName("fe.a(III)V")
 	public static void method414(int arg0, int arg1) {
-		class70.field1726.method415(132);
-		class70.field1726.method179(arg1);
-		class70.field1726.method162(arg0);
+		Occlude.field1726.method415(132);
+		Occlude.field1726.method179(arg1);
+		Occlude.field1726.method162(arg0);
 	}
 
 	@ObfuscatedName("n.a(Z)V")
@@ -11149,12 +11149,12 @@ public class Statics {
 		field2626.method554(25, 5, 146, 151, var4, var5, var6, class103.field2589 + 256, field2588, field1842);
 		for (int var7 = 0; var7 < class54.field1433; var7++) {
 			int var8 = class80.field2023[var7] * 4 + 2 - field2621.field1972 / 32;
-			int var9 = class92.field2303[var7] * 4 + 2 - field2621.field1963 / 32;
+			int var9 = LinkList.field2303[var7] * 4 + 2 - field2621.field1963 / 32;
 			method387(var9, var8, class122.field3046[var7]);
 		}
 		for (int var10 = 0; var10 < 104; var10++) {
 			for (int var11 = 0; var11 < 104; var11++) {
-				class92 var12 = class17.field552[field75][var10][var11];
+				LinkList var12 = class17.field552[field75][var10][var11];
 				if (var12 != null) {
 					int var13 = var11 * 4 + 2 - field2621.field1963 / 32;
 					int var14 = var10 * 4 + 2 - field2621.field1972 / 32;
@@ -11163,7 +11163,7 @@ public class Statics {
 			}
 		}
 		for (int var15 = 0; var15 < class49.field1341; var15++) {
-			class130 var16 = class120.field2992[class22.field677[var15]];
+			class130 var16 = Js5Loader.field2992[class22.field677[var15]];
 			if (var16 != null && var16.method42()) {
 				class42 var17 = var16.field3182;
 				if (var17.field1136 != null) {
@@ -11202,9 +11202,9 @@ public class Statics {
 				}
 			}
 		}
-		if (class2.field96 != 0 && class82.field2063 % 20 < 10) {
-			if (class2.field96 == 1 && class132.field3212 >= 0 && class120.field2992.length > class132.field3212) {
-				class130 var29 = class120.field2992[class132.field3212];
+		if (class2.field96 != 0 && Linkable.field2063 % 20 < 10) {
+			if (class2.field96 == 1 && class132.field3212 >= 0 && Js5Loader.field2992.length > class132.field3212) {
+				class130 var29 = Js5Loader.field2992[class132.field3212];
 				if (var29 != null) {
 					int var30 = var29.field1972 / 32 - field2621.field1972 / 32;
 					int var31 = var29.field1963 / 32 - field2621.field1963 / 32;
@@ -11213,11 +11213,11 @@ public class Statics {
 			}
 			if (class2.field96 == 2) {
 				int var32 = (class6.field226 - field1408) * 4 + 2 - field2621.field1963 / 32;
-				int var33 = (class134.field3304 - field806) * 4 + 2 - field2621.field1972 / 32;
+				int var33 = (PixMap.field3304 - field806) * 4 + 2 - field2621.field1972 / 32;
 				method400(var33, field680[1], var32);
 			}
-			if (class2.field96 == 10 && class134.field3290 >= 0 && class80.field2030.length > class134.field3290) {
-				class2 var34 = class80.field2030[class134.field3290];
+			if (class2.field96 == 10 && PixMap.field3290 >= 0 && class80.field2030.length > PixMap.field3290) {
+				class2 var34 = class80.field2030[PixMap.field3290];
 				if (var34 != null) {
 					int var35 = var34.field1963 / 32 - field2621.field1963 / 32;
 					int var36 = var34.field1972 / 32 - field2621.field1972 / 32;
@@ -11268,16 +11268,16 @@ public class Statics {
 			method758(0, class117.field2931, class132.field3234);
 			return;
 		}
-		class1 var2 = method969(arg0).method36();
+		JagString var2 = method969(arg0).method36();
 		for (int var3 = 0; var3 < class59.field1492; var3++) {
 			if (class117.field2929[var3] == arg0) {
-				method758(0, method956(new class1[] { var2, class122.field3045 }), class132.field3234);
+				method758(0, method956(new JagString[] { var2, class122.field3045 }), class132.field3234);
 				return;
 			}
 		}
-		for (int var4 = 0; var4 < class85.field2146; var4++) {
+		for (int var4 = 0; var4 < IntHashTable.field2146; var4++) {
 			if (class106.field2683[var4] == arg0) {
-				method758(0, method956(new class1[] { class89.field2178, var2, class81.field2054 }), class132.field3234);
+				method758(0, method956(new JagString[] { class89.field2178, var2, class81.field2054 }), class132.field3234);
 				return;
 			}
 		}
@@ -11289,8 +11289,8 @@ public class Statics {
 		class73.field1788[class59.field1492] = 0;
 		class59.field1492++;
 		class39.field1055 = true;
-		class70.field1726.method415(114);
-		class70.field1726.method157(arg0);
+		Occlude.field1726.method415(114);
+		Occlude.field1726.method157(arg0);
 	}
 
 	@ObfuscatedName("rb.f(I)V")
@@ -11360,7 +11360,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("j.a(ILjava/awt/Color;La;I)V")
-	public static void method536(int arg0, Color arg1, class1 arg2) {
+	public static void method536(int arg0, Color arg1, JagString arg2) {
 		try {
 			Graphics var3 = field3049.getGraphics();
 			if (field842 == null) {
@@ -11435,39 +11435,39 @@ public class Statics {
 
 	@ObfuscatedName("ub.a(I)V")
 	public static void method992() {
-		if (class32.field857 != 0) {
+		if (Square.field857 != 0) {
 			return;
 		}
 		int var0 = class122.field3050;
-		if (client.field594 == 1 && class112.field2762 >= 516 && class1.field14 >= 160 && class112.field2762 <= 765 && class1.field14 <= 205) {
+		if (client.field594 == 1 && class112.field2762 >= 516 && JagString.field14 >= 160 && class112.field2762 <= 765 && JagString.field14 <= 205) {
 			var0 = 0;
 		}
 		if (!class6.field224) {
 			if (var0 == 1 && class42.field1104 > 0) {
 				int var1 = class79.field1932[class42.field1104 - 1];
 				if (var1 == 53 || var1 == 25 || var1 == 55 || var1 == 48 || var1 == 24 || var1 == 52 || var1 == 6 || var1 == 31 || var1 == 43 || var1 == 11 || var1 == 19 || var1 == 1006) {
-					int var2 = class37.field994[class42.field1104 - 1];
+					int var2 = Sprite.field994[class42.field1104 - 1];
 					int var3 = class117.field2925[class42.field1104 - 1];
 					class100 var4 = method1053(var3);
 					if (var4.field2509 || var4.field2529) {
 						class128.field3143 = class112.field2762;
 						class114.field2815 = false;
-						class32.field857 = 2;
+						Square.field857 = 2;
 						class98.field2410 = var3;
-						class115.field2829 = class1.field14;
+						class115.field2829 = JagString.field14;
 						class113.field2776 = var2;
 						if (var3 >> 16 == class132.field3227) {
-							class32.field857 = 1;
+							Square.field857 = 1;
 						}
 						if (var3 >> 16 == class86.field2166) {
-							class32.field857 = 3;
+							Square.field857 = 3;
 						}
 						class8.field298 = 0;
 						return;
 					}
 				}
 			}
-			if (var0 == 1 && (class134.field3297 == 1 || method676(class42.field1104 - 1)) && class42.field1104 > 2) {
+			if (var0 == 1 && (PixMap.field3297 == 1 || method676(class42.field1104 - 1)) && class42.field1104 > 2) {
 				var0 = 2;
 			}
 			if (var0 == 1 && class42.field1104 > 0) {
@@ -11511,7 +11511,7 @@ public class Statics {
 		int var9 = field2306;
 		int var10 = class112.field2762;
 		int var11 = -1;
-		int var12 = class1.field14;
+		int var12 = JagString.field14;
 		if (field640 == 0) {
 			var10 -= 4;
 			var12 -= 4;
@@ -11550,47 +11550,47 @@ public class Statics {
 
 	@ObfuscatedName("nd.a(B)V")
 	public static void method740() {
-		class82.field2089 = null;
-		class82.field2076 = null;
-		class82.field2101 = null;
-		class82.field2102 = null;
-		class82.field2077 = null;
-		class82.field2110 = null;
-		class82.field2061 = null;
-		class82.field2071 = null;
-		class82.field2104 = null;
-		class82.field2091 = null;
-		class82.field2109 = null;
-		class82.field2113 = null;
-		class82.field2081 = null;
-		class82.field2096 = null;
-		class82.field2080 = null;
-		class82.field2070 = null;
-		class82.field2112 = null;
-		class82.field2086 = null;
-		class82.field2088 = null;
-		class82.field2111 = null;
-		class82.field2100 = null;
-		class82.field2079 = null;
-		class82.field2083 = null;
-		class82.field2066 = null;
-		class82.field2092 = null;
-		class82.field2068 = null;
-		class82.field2078 = null;
-		class82.field2082 = null;
-		class82.field2067 = null;
-		class82.field2093 = null;
-		class82.field2085 = null;
-		class82.field2103 = null;
-		class82.field2097 = null;
-		class82.field2106 = null;
-		class82.field2069 = null;
-		class82.field2060 = null;
-		class82.field2090 = null;
-		class82.field2094 = null;
-		class82.field2074 = null;
-		class82.field2062 = null;
-		class82.field2095 = null;
+		Linkable.field2089 = null;
+		Linkable.field2076 = null;
+		Linkable.field2101 = null;
+		Linkable.field2102 = null;
+		Linkable.field2077 = null;
+		Linkable.field2110 = null;
+		Linkable.field2061 = null;
+		Linkable.field2071 = null;
+		Linkable.field2104 = null;
+		Linkable.field2091 = null;
+		Linkable.field2109 = null;
+		Linkable.field2113 = null;
+		Linkable.field2081 = null;
+		Linkable.field2096 = null;
+		Linkable.field2080 = null;
+		Linkable.field2070 = null;
+		Linkable.field2112 = null;
+		Linkable.field2086 = null;
+		Linkable.field2088 = null;
+		Linkable.field2111 = null;
+		Linkable.field2100 = null;
+		Linkable.field2079 = null;
+		Linkable.field2083 = null;
+		Linkable.field2066 = null;
+		Linkable.field2092 = null;
+		Linkable.field2068 = null;
+		Linkable.field2078 = null;
+		Linkable.field2082 = null;
+		Linkable.field2067 = null;
+		Linkable.field2093 = null;
+		Linkable.field2085 = null;
+		Linkable.field2103 = null;
+		Linkable.field2097 = null;
+		Linkable.field2106 = null;
+		Linkable.field2069 = null;
+		Linkable.field2060 = null;
+		Linkable.field2090 = null;
+		Linkable.field2094 = null;
+		Linkable.field2074 = null;
+		Linkable.field2062 = null;
+		Linkable.field2095 = null;
 	}
 
 	@ObfuscatedName("fc.b(II)V")
@@ -11619,7 +11619,7 @@ public class Statics {
 			class36.field948 = 1;
 			class95.field2358 = 0;
 			class54.field1441 = 1;
-			class134.field3301 = 0;
+			PixMap.field3301 = 0;
 		}
 		if (arg0 == 35) {
 			method525();
@@ -11694,7 +11694,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("ba.a(ILbd;I)Z")
-	public static boolean method148(class11 arg0, int arg1) {
+	public static boolean method148(Js5 arg0, int arg1) {
 		byte[] var2 = arg0.method232(arg1);
 		if (var2 == null) {
 			return false;
@@ -11753,7 +11753,7 @@ public class Statics {
 						class17.field548 = var10;
 						class97.field2392 = class102.field2568;
 					}
-					if (class122.field3050 == 1 && var16 <= class112.field2762 && class1.field14 >= var14 && class112.field2762 < var18 && class1.field14 < var17) {
+					if (class122.field3050 == 1 && var16 <= class112.field2762 && JagString.field14 >= var14 && class112.field2762 < var18 && JagString.field14 < var17) {
 						var21 = true;
 					}
 					if (class17.field548 != null) {
@@ -11764,7 +11764,7 @@ public class Statics {
 					if (!var10.field2536 && var21 && (arg3 & 0x1) != 0) {
 						var10.field2536 = true;
 						if (var10.field2487 != null) {
-							method754(var10.field2487, class1.field14 - var12, var10, class112.field2762 - var11);
+							method754(var10.field2487, JagString.field14 - var12, var10, class112.field2762 - var11);
 						}
 					}
 					if (var10.field2536 && var20 && (arg3 & 0x4) != 0 && var10.field2553 != null) {
@@ -11797,7 +11797,7 @@ public class Statics {
 					if (var10.field2518 != null && (arg3 & 0x80) != 0) {
 						method754(var10.field2518, 0, var10, 0);
 					}
-					if (class82.field2063 == class47.field1237 && var10.field2456 != null && (arg3 & 0x100) != 0) {
+					if (Linkable.field2063 == class47.field1237 && var10.field2456 != null && (arg3 & 0x100) != 0) {
 						method754(var10.field2456, 0, var10, 0);
 					}
 				}
@@ -11920,13 +11920,13 @@ public class Statics {
 	}
 
 	@ObfuscatedName("wa.a(ZBI)La;")
-	public static class1 method1034(int arg0) {
+	public static JagString method1034(int arg0) {
 		return method418(true, arg0);
 	}
 
 	@ObfuscatedName("je.b(II)La;")
-	public static class1 method566() {
-		class1 var0 = new class1();
+	public static JagString method566() {
+		JagString var0 = new JagString();
 		var0.field38 = new byte[100];
 		var0.field26 = 0;
 		return var0;
@@ -11970,7 +11970,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("i.a(II)La;")
-	public static class1 method502(int arg0) {
+	public static JagString method502(int arg0) {
 		return method418(false, arg0);
 	}
 
@@ -11997,7 +11997,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("td.a(IJ)La;")
-	public static class1 method969(long arg0) {
+	public static JagString method969(long arg0) {
 		if (arg0 <= 0L || arg0 >= 6582952005840035281L) {
 			return null;
 		} else if (arg0 % 37L == 0L) {
@@ -12016,7 +12016,7 @@ public class Statics {
 				var4--;
 				var5[var4] = class5.field220[(int) (var6 - arg0 * 37L)];
 			}
-			class1 var8 = new class1();
+			JagString var8 = new JagString();
 			var8.field38 = var5;
 			var8.field26 = var5.length;
 			return var8;
@@ -12034,14 +12034,14 @@ public class Statics {
 		if (arg3 == null || !arg3.field1082) {
 			return;
 		}
-		class1 var4 = arg3.field1112;
+		JagString var4 = arg3.field1112;
 		if (arg3.field1103 != 0) {
-			var4 = method956(new class1[] { var4, method390(field2621.field68, arg3.field1103), class48.field1275, class28.field785, method502(arg3.field1103), class103.field2601 });
+			var4 = method956(new JagString[] { var4, method390(field2621.field68, arg3.field1103), class48.field1275, class28.field785, method502(arg3.field1103), class103.field2601 });
 		}
 		if (class14.field475 == 1) {
-			method398(arg2, client.field584, arg1, arg0, 49, method956(new class1[] { class130.field3177, class28.field805, var4 }));
+			method398(arg2, client.field584, arg1, arg0, 49, method956(new JagString[] { class130.field3177, class28.field805, var4 }));
 		} else if (client.field594 != 1) {
-			class1[] var5 = arg3.field1086;
+			JagString[] var5 = arg3.field1086;
 			if (class118.field2934) {
 				var5 = method905(var5);
 			}
@@ -12064,7 +12064,7 @@ public class Statics {
 						if (var6 == 4) {
 							var7 = 20;
 						}
-						method398(arg2, var5[var6], arg1, arg0, var7, method956(new class1[] { class107.field2699, var4 }));
+						method398(arg2, var5[var6], arg1, arg0, var7, method956(new JagString[] { class107.field2699, var4 }));
 					}
 				}
 			}
@@ -12091,13 +12091,13 @@ public class Statics {
 						if (var8 == 4) {
 							var10 = var9 + 20;
 						}
-						method398(arg2, var5[var8], arg1, arg0, var10, method956(new class1[] { class107.field2699, var4 }));
+						method398(arg2, var5[var8], arg1, arg0, var10, method956(new JagString[] { class107.field2699, var4 }));
 					}
 				}
 			}
-			method398(arg2, class114.field2805, arg1, arg0, 1001, method956(new class1[] { class107.field2699, var4 }));
+			method398(arg2, class114.field2805, arg1, arg0, 1001, method956(new JagString[] { class107.field2699, var4 }));
 		} else if ((field2846 & 0x2) == 2) {
-			method398(arg2, class60.field1523, arg1, arg0, 21, method956(new class1[] { class52.field1384, class28.field805, var4 }));
+			method398(arg2, class60.field1523, arg1, arg0, 21, method956(new JagString[] { class52.field1384, class28.field805, var4 }));
 			return;
 		}
 	}
@@ -12117,9 +12117,9 @@ public class Statics {
 	}
 
 	@ObfuscatedName("hc.a(Lba;II)La;")
-	public static class1 method474(class8 arg0) {
+	public static JagString method474(class8 arg0) {
 		try {
-			class1 var1 = new class1();
+			JagString var1 = new JagString();
 			var1.field26 = arg0.method178();
 			if (var1.field26 > 32767) {
 				var1.field26 = 32767;
@@ -12133,12 +12133,12 @@ public class Statics {
 	}
 
 	@ObfuscatedName("re.a(Lbd;B)I")
-	public static int method892(class11 arg0) {
+	public static int method892(Js5 arg0) {
 		int var1 = 0;
 		if (arg0.method239(class63.field1567, class14.field479)) {
 			var1++;
 		}
-		if (arg0.method239(class1.field62, class14.field479)) {
+		if (arg0.method239(JagString.field62, class14.field479)) {
 			var1++;
 		}
 		if (arg0.method239(class93.field2333, class14.field479)) {
@@ -12147,7 +12147,7 @@ public class Statics {
 		if (arg0.method239(class117.field2927, class14.field479)) {
 			var1++;
 		}
-		if (arg0.method239(class11.field406, class14.field479)) {
+		if (arg0.method239(Js5.field406, class14.field479)) {
 			var1++;
 		}
 		if (arg0.method239(class17.field533, class14.field479)) {
@@ -12207,13 +12207,13 @@ public class Statics {
 				int var0 = class15.field488.method412(15);
 				if (var0 != 32767) {
 					boolean var1 = false;
-					if (class120.field2992[var0] == null) {
-						class120.field2992[var0] = new class130();
+					if (Js5Loader.field2992[var0] == null) {
+						Js5Loader.field2992[var0] = new class130();
 						var1 = true;
 					}
-					class130 var2 = class120.field2992[var0];
+					class130 var2 = Js5Loader.field2992[var0];
 					class22.field677[class49.field1341++] = var0;
-					var2.field2008 = class82.field2063;
+					var2.field2008 = Linkable.field2063;
 					int var3 = class19.field644[class15.field488.method412(3)];
 					if (var1) {
 						var2.field1992 = var3;
@@ -12291,7 +12291,7 @@ public class Statics {
 			return;
 		}
 		if (arg0.field2011 != -1 && arg0.field2011 < 32768) {
-			class130 var1 = class120.field2992[arg0.field2011];
+			class130 var1 = Js5Loader.field2992[arg0.field2011];
 			if (var1 != null) {
 				int var2 = arg0.field1963 - var1.field1963;
 				int var3 = arg0.field1972 - var1.field1972;
@@ -12369,13 +12369,13 @@ public class Statics {
 	@ObfuscatedName("i.a(B)V")
 	public static void method503() {
 		for (class19 var0 = (class19) class86.field2160.method802(); var0 != null; var0 = (class19) class86.field2160.method809()) {
-			if (field75 != var0.field638 || class82.field2063 > var0.field628) {
+			if (field75 != var0.field638 || Linkable.field2063 > var0.field628) {
 				var0.method739();
-			} else if (var0.field631 <= class82.field2063) {
+			} else if (var0.field631 <= Linkable.field2063) {
 				if (var0.field618 > 0) {
-					class130 var1 = class120.field2992[var0.field618 - 1];
+					class130 var1 = Js5Loader.field2992[var0.field618 - 1];
 					if (var1 != null && var1.field1972 >= 0 && var1.field1972 < 13312 && var1.field1963 >= 0 && var1.field1963 < 13312) {
-						var0.method300(class82.field2063, var1.field1963, method712(var0.field638, var1.field1972, var1.field1963) - var0.field617, var1.field1972);
+						var0.method300(Linkable.field2063, var1.field1963, method712(var0.field638, var1.field1972, var1.field1963) - var0.field617, var1.field1972);
 					}
 				}
 				if (var0.field618 < 0) {
@@ -12387,7 +12387,7 @@ public class Statics {
 						var3 = class80.field2030[var2];
 					}
 					if (var3 != null && var3.field1972 >= 0 && var3.field1972 < 13312 && var3.field1963 >= 0 && var3.field1963 < 13312) {
-						var0.method300(class82.field2063, var3.field1963, method712(var0.field638, var3.field1972, var3.field1963) - var0.field617, var3.field1972);
+						var0.method300(Linkable.field2063, var3.field1963, method712(var0.field638, var3.field1972, var3.field1963) - var0.field617, var3.field1972);
 					}
 				}
 				var0.method299(class9.field321);
@@ -12432,22 +12432,22 @@ public class Statics {
 	}
 
 	@ObfuscatedName("fa.a(III)La;")
-	public static class1 method390(int arg0, int arg1) {
+	public static JagString method390(int arg0, int arg1) {
 		int var2 = arg0 - arg1;
 		if (var2 < -9) {
 			return class52.field1383;
 		} else if (var2 < -6) {
 			return class66.field1645;
 		} else if (var2 < -3) {
-			return class134.field3306;
+			return PixMap.field3306;
 		} else if (var2 < 0) {
 			return class15.field501;
 		} else if (var2 > 9) {
 			return class102.field2564;
 		} else if (var2 > 6) {
-			return class37.field1005;
+			return Sprite.field1005;
 		} else if (var2 > 3) {
-			return class82.field2069;
+			return Linkable.field2069;
 		} else if (var2 > 0) {
 			return class78.field1925;
 		} else {
@@ -12522,7 +12522,7 @@ public class Statics {
 		}
 		for (int var3 = 0; var3 < class49.field1341; var3++) {
 			int var4 = class22.field677[var3];
-			class130 var5 = class120.field2992[var4];
+			class130 var5 = Js5Loader.field2992[var4];
 			if (var5 != null && var5.field1952 > 0) {
 				var5.field1952--;
 				if (var5.field1952 == 0) {
@@ -12537,7 +12537,7 @@ public class Statics {
 		for (class116 var0 = (class116) class112.field2756.method802(); var0 != null; var0 = (class116) class112.field2756.method809()) {
 			if (field75 != var0.field2895 || var0.field2893) {
 				var0.method739();
-			} else if (class82.field2063 >= var0.field2886) {
+			} else if (Linkable.field2063 >= var0.field2886) {
 				var0.method958(class9.field321);
 				if (var0.field2893) {
 					var0.method739();
@@ -12549,7 +12549,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("je.a(Ljava/awt/Component;ZLbd;Lbd;)V")
-	public static void method568(Component arg0, class11 arg1, class11 arg2) {
+	public static void method568(Component arg0, Js5 arg1, Js5 arg2) {
 		if (field1062) {
 			return;
 		}
@@ -12571,7 +12571,7 @@ public class Statics {
 		class111.method920();
 		field3298 = method875(94, 75, arg0);
 		class111.method920();
-		byte[] var3 = arg1.method215(class123.field3067, class70.field1751);
+		byte[] var3 = arg1.method215(class123.field3067, Occlude.field1751);
 		class58 var4 = new class58(var3, arg0);
 		field472.method1054();
 		var4.method557(0, 0);
@@ -12703,18 +12703,18 @@ public class Statics {
 	}
 
 	@ObfuscatedName("j.a(BLa;)V")
-	public static void method537(class1 arg0) {
+	public static void method537(JagString arg0) {
 		if (arg0 == null || arg0.method10() == 0) {
 			class93.field2330 = 0;
 			return;
 		}
-		class1 var1 = arg0;
-		class1[] var2 = new class1[100];
+		JagString var1 = arg0;
+		JagString[] var2 = new JagString[100];
 		int var3 = 0;
 		while (true) {
 			int var4 = var1.method8();
 			if (var4 == -1) {
-				class1 var5 = var1.method40();
+				JagString var5 = var1.method40();
 				if (var5.method10() > 0) {
 					var2[var3++] = var5.method30();
 				}
@@ -12722,7 +12722,7 @@ public class Statics {
 				label46: for (int var7 = 0; var7 < field1590; var7++) {
 					class115 var8 = method760(var7);
 					if (var8.field2838 == -1 && var8.field2827 != null) {
-						class1 var9 = var8.field2827.method30();
+						JagString var9 = var8.field2827.method30();
 						for (int var10 = 0; var10 < var3; var10++) {
 							if (var9.method11(var2[var10]) == -1) {
 								continue label46;
@@ -12738,7 +12738,7 @@ public class Statics {
 				}
 				return;
 			}
-			class1 var6 = var1.method19(0, var4).method40();
+			JagString var6 = var1.method19(0, var4).method40();
 			if (var6.method10() > 0) {
 				var2[var3++] = var6.method30();
 			}
@@ -12766,72 +12766,72 @@ public class Statics {
 		if (class122.field3050 != 1) {
 			return;
 		}
-		if (class112.field2762 >= 539 && class112.field2762 <= 573 && class1.field14 >= 169 && class1.field14 < 205 && class97.field2397[0] != -1) {
+		if (class112.field2762 >= 539 && class112.field2762 <= 573 && JagString.field14 >= 169 && JagString.field14 < 205 && class97.field2397[0] != -1) {
 			class95.field2364 = true;
 			class39.field1055 = true;
 			class9.field330 = 0;
 		}
-		if (class112.field2762 >= 569 && class112.field2762 <= 599 && class1.field14 >= 168 && class1.field14 < 205 && class97.field2397[1] != -1) {
+		if (class112.field2762 >= 569 && class112.field2762 <= 599 && JagString.field14 >= 168 && JagString.field14 < 205 && class97.field2397[1] != -1) {
 			class9.field330 = 1;
 			class39.field1055 = true;
 			class95.field2364 = true;
 		}
-		if (class112.field2762 >= 597 && class112.field2762 <= 627 && class1.field14 >= 168 && class1.field14 < 205 && class97.field2397[2] != -1) {
+		if (class112.field2762 >= 597 && class112.field2762 <= 627 && JagString.field14 >= 168 && JagString.field14 < 205 && class97.field2397[2] != -1) {
 			class95.field2364 = true;
 			class9.field330 = 2;
 			class39.field1055 = true;
 		}
-		if (class112.field2762 >= 625 && class112.field2762 <= 669 && class1.field14 >= 168 && class1.field14 < 203 && class97.field2397[3] != -1) {
+		if (class112.field2762 >= 625 && class112.field2762 <= 669 && JagString.field14 >= 168 && JagString.field14 < 203 && class97.field2397[3] != -1) {
 			class95.field2364 = true;
 			class39.field1055 = true;
 			class9.field330 = 3;
 		}
-		if (class112.field2762 >= 666 && class112.field2762 <= 696 && class1.field14 >= 168 && class1.field14 < 205 && class97.field2397[4] != -1) {
+		if (class112.field2762 >= 666 && class112.field2762 <= 696 && JagString.field14 >= 168 && JagString.field14 < 205 && class97.field2397[4] != -1) {
 			class9.field330 = 4;
 			class39.field1055 = true;
 			class95.field2364 = true;
 		}
-		if (class112.field2762 >= 694 && class112.field2762 <= 724 && class1.field14 >= 168 && class1.field14 < 205 && class97.field2397[5] != -1) {
+		if (class112.field2762 >= 694 && class112.field2762 <= 724 && JagString.field14 >= 168 && JagString.field14 < 205 && class97.field2397[5] != -1) {
 			class95.field2364 = true;
 			class39.field1055 = true;
 			class9.field330 = 5;
 		}
-		if (class112.field2762 >= 722 && class112.field2762 <= 756 && class1.field14 >= 169 && class1.field14 < 205 && class97.field2397[6] != -1) {
+		if (class112.field2762 >= 722 && class112.field2762 <= 756 && JagString.field14 >= 169 && JagString.field14 < 205 && class97.field2397[6] != -1) {
 			class39.field1055 = true;
 			class9.field330 = 6;
 			class95.field2364 = true;
 		}
-		if (class112.field2762 >= 540 && class112.field2762 <= 574 && class1.field14 >= 466 && class1.field14 < 502 && class97.field2397[7] != -1) {
+		if (class112.field2762 >= 540 && class112.field2762 <= 574 && JagString.field14 >= 466 && JagString.field14 < 502 && class97.field2397[7] != -1) {
 			class9.field330 = 7;
 			class95.field2364 = true;
 			class39.field1055 = true;
 		}
-		if (class112.field2762 >= 572 && class112.field2762 <= 602 && class1.field14 >= 466 && class1.field14 < 503 && class97.field2397[8] != -1) {
+		if (class112.field2762 >= 572 && class112.field2762 <= 602 && JagString.field14 >= 466 && JagString.field14 < 503 && class97.field2397[8] != -1) {
 			class39.field1055 = true;
 			class95.field2364 = true;
 			class9.field330 = 8;
 		}
-		if (class112.field2762 >= 599 && class112.field2762 <= 629 && class1.field14 >= 466 && class1.field14 < 503 && class97.field2397[9] != -1) {
+		if (class112.field2762 >= 599 && class112.field2762 <= 629 && JagString.field14 >= 466 && JagString.field14 < 503 && class97.field2397[9] != -1) {
 			class95.field2364 = true;
 			class9.field330 = 9;
 			class39.field1055 = true;
 		}
-		if (class112.field2762 >= 627 && class112.field2762 <= 671 && class1.field14 >= 467 && class1.field14 < 502 && class97.field2397[10] != -1) {
+		if (class112.field2762 >= 627 && class112.field2762 <= 671 && JagString.field14 >= 467 && JagString.field14 < 502 && class97.field2397[10] != -1) {
 			class9.field330 = 10;
 			class95.field2364 = true;
 			class39.field1055 = true;
 		}
-		if (class112.field2762 >= 669 && class112.field2762 <= 699 && class1.field14 >= 466 && class1.field14 < 503 && class97.field2397[11] != -1) {
+		if (class112.field2762 >= 669 && class112.field2762 <= 699 && JagString.field14 >= 466 && JagString.field14 < 503 && class97.field2397[11] != -1) {
 			class9.field330 = 11;
 			class39.field1055 = true;
 			class95.field2364 = true;
 		}
-		if (class112.field2762 >= 696 && class112.field2762 <= 726 && class1.field14 >= 466 && class1.field14 < 503 && class97.field2397[12] != -1) {
+		if (class112.field2762 >= 696 && class112.field2762 <= 726 && JagString.field14 >= 466 && JagString.field14 < 503 && class97.field2397[12] != -1) {
 			class39.field1055 = true;
 			class95.field2364 = true;
 			class9.field330 = 12;
 		}
-		if (class112.field2762 >= 724 && class112.field2762 <= 758 && class1.field14 >= 466 && class1.field14 < 502 && class97.field2397[13] != -1) {
+		if (class112.field2762 >= 724 && class112.field2762 <= 758 && JagString.field14 >= 466 && JagString.field14 < 502 && class97.field2397[13] != -1) {
 			class9.field330 = 13;
 			class39.field1055 = true;
 			class95.field2364 = true;
@@ -12840,7 +12840,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("kc.a(Lbd;ILbd;)V")
-	public static void method603(class11 arg0, class11 arg1) {
+	public static void method603(Js5 arg0, Js5 arg1) {
 		field2799 = arg1;
 		field3244 = arg0;
 	}
@@ -12885,11 +12885,11 @@ public class Statics {
 			}
 			if (class22.field693 == 2) {
 				long var0 = field1843 = class123.field3071.method9();
-				class70.field1726.field267 = 0;
-				class70.field1726.method141(14);
+				Occlude.field1726.field267 = 0;
+				Occlude.field1726.method141(14);
 				int var2 = (int) (var0 >> 16 & 0x1FL);
-				class70.field1726.method141(var2);
-				field1450.method1016(2, class70.field1726.field284);
+				Occlude.field1726.method141(var2);
+				field1450.method1016(2, Occlude.field1726.field284);
 				class22.field693 = 3;
 				class15.field488.field267 = 0;
 			}
@@ -12921,23 +12921,23 @@ public class Statics {
 			}
 			if (class22.field693 == 5) {
 				int[] var5 = new int[] { (int) (Math.random() * 9.9999999E7D), (int) (Math.random() * 9.9999999E7D), (int) (class128.field3132 >> 32), (int) class128.field3132 };
-				class70.field1726.field267 = 0;
-				class70.field1726.method141(10);
-				class70.field1726.method182(var5[0]);
-				class70.field1726.method182(var5[1]);
-				class70.field1726.method182(var5[2]);
-				class70.field1726.method182(var5[3]);
-				class70.field1726.method182(field1071.field1701);
-				class70.field1726.method157(class123.field3071.method9());
-				class70.field1726.method181(class123.field3055);
-				class70.field1726.method142(class80.field1993, class36.field964);
+				Occlude.field1726.field267 = 0;
+				Occlude.field1726.method141(10);
+				Occlude.field1726.method182(var5[0]);
+				Occlude.field1726.method182(var5[1]);
+				Occlude.field1726.method182(var5[2]);
+				Occlude.field1726.method182(var5[3]);
+				Occlude.field1726.method182(field1071.field1701);
+				Occlude.field1726.method157(class123.field3071.method9());
+				Occlude.field1726.method181(class123.field3055);
+				Occlude.field1726.method142(class80.field1993, class36.field964);
 				class121.field3003.field267 = 0;
 				if (class103.field2599 == 40) {
 					class121.field3003.method141(18);
 				} else {
 					class121.field3003.method141(16);
 				}
-				class121.field3003.method141(class70.field1726.field267 + 57);
+				class121.field3003.method141(Occlude.field1726.field267 + 57);
 				class121.field3003.method182(435);
 				class121.field3003.method141(class93.field2332 ? 1 : 0);
 				class121.field3003.method182(field1378.field366);
@@ -12953,9 +12953,9 @@ public class Statics {
 				class121.field3003.method182(field1542.field366);
 				class121.field3003.method182(field2324.field366);
 				class121.field3003.method182(field2739.field366);
-				class121.field3003.method151(class70.field1726.field267, class70.field1726.field284);
+				class121.field3003.method151(Occlude.field1726.field267, Occlude.field1726.field284);
 				field1450.method1016(class121.field3003.field267, class121.field3003.field284);
-				class70.field1726.method416(var5);
+				Occlude.field1726.method416(var5);
 				for (int var6 = 0; var6 < 4; var6++) {
 					var5[var6] += 50;
 				}
@@ -12985,13 +12985,13 @@ public class Statics {
 			}
 			if (class22.field693 == 8) {
 				client.field577 = 0;
-				method678(method956(new class1[] { method502(class72.field1763 / 60), class79.field1931 }), class14.field468, class62.field1561);
+				method678(method956(new JagString[] { method502(class72.field1763 / 60), class79.field1931 }), class14.field468, class62.field1561);
 				if (--class72.field1763 <= 0) {
 					class22.field693 = 0;
 				}
 			} else {
 				if (class22.field693 == 9 && field1450.method1020() >= 8) {
-					class37.field1004 = field1450.method1022();
+					Sprite.field1004 = field1450.method1022();
 					class45.field1186 = field1450.method1022() == 1;
 					class67.field1683 = field1450.method1022();
 					class67.field1683 <<= 0x8;
@@ -13070,7 +13070,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("fe.a(ZBII)La;")
-	public static class1 method418(boolean arg0, int arg1) {
+	public static JagString method418(boolean arg0, int arg1) {
 		int var2 = 1;
 		int var3 = arg1 / 10;
 		while (var3 != 0) {
@@ -13098,7 +13098,7 @@ public class Statics {
 			}
 			var5[var4 - var6 - 1] = (byte) (var7 + 48);
 		}
-		class1 var8 = new class1();
+		JagString var8 = new JagString();
 		var8.field38 = var5;
 		var8.field26 = var4;
 		return var8;
@@ -13138,7 +13138,7 @@ public class Statics {
 		if (arg0 < 0) {
 			return;
 		}
-		int var1 = class37.field994[arg0];
+		int var1 = Sprite.field994[arg0];
 		int var2 = class117.field2925[arg0];
 		int var3 = class79.field1932[arg0];
 		if (var3 >= 2000) {
@@ -13150,11 +13150,11 @@ public class Statics {
 			class105.field2637 = true;
 		}
 		if (var3 == 37) {
-			class70.field1726.method415(21);
-			class70.field1726.method170(field2949);
-			class70.field1726.method179(var2);
-			class70.field1726.method150(var4);
-			class70.field1726.method150(var1);
+			Occlude.field1726.method415(21);
+			Occlude.field1726.method170(field2949);
+			Occlude.field1726.method179(var2);
+			Occlude.field1726.method150(var4);
+			Occlude.field1726.method150(var1);
 			class19.field656 = 2;
 			class105.field2649 = var1;
 			class43.field1154 = 0;
@@ -13172,28 +13172,28 @@ public class Statics {
 				method576(1, 0, field2621.field1962[0], var1, 0, false, 0, 1, field2621.field2009[0], var2, 2);
 			}
 			class34.field894 = 0;
-			class16.field523 = class1.field14;
+			class16.field523 = JagString.field14;
 			class119.field2967 = class112.field2762;
-			class92.field2295 = 2;
-			class70.field1726.method415(190);
-			class70.field1726.method154(var1 + field806);
-			class70.field1726.method150(var4);
-			class70.field1726.method150(field1408 + var2);
+			LinkList.field2295 = 2;
+			Occlude.field1726.method415(190);
+			Occlude.field1726.method154(var1 + field806);
+			Occlude.field1726.method150(var4);
+			Occlude.field1726.method150(field1408 + var2);
 		}
 		if (var3 == 1004) {
-			class16.field523 = class1.field14;
+			class16.field523 = JagString.field14;
 			class119.field2967 = class112.field2762;
-			class92.field2295 = 2;
+			LinkList.field2295 = 2;
 			class34.field894 = 0;
-			class70.field1726.method415(148);
-			class70.field1726.method162(var4 >> 14 & 0x7FFF);
+			Occlude.field1726.method415(148);
+			Occlude.field1726.method162(var4 >> 14 & 0x7FFF);
 		}
 		if (var3 == 27) {
 			method491(var1, var4, var2);
-			class70.field1726.method415(229);
-			class70.field1726.method162(field806 + var1);
-			class70.field1726.method162(var4 >> 14 & 0x7FFF);
-			class70.field1726.method162(field1408 + var2);
+			Occlude.field1726.method415(229);
+			Occlude.field1726.method162(field806 + var1);
+			Occlude.field1726.method162(var4 >> 14 & 0x7FFF);
+			Occlude.field1726.method162(field1408 + var2);
 		}
 		if (var3 == 1) {
 			class2 var7 = class80.field2030[var4];
@@ -13201,19 +13201,19 @@ public class Statics {
 				method576(1, 0, field2621.field1962[0], var7.field1962[0], 0, false, 0, 1, field2621.field2009[0], var7.field2009[0], 2);
 				class119.field2967 = class112.field2762;
 				class34.field894 = 0;
-				class92.field2295 = 2;
-				class16.field523 = class1.field14;
-				class70.field1726.method415(221);
-				class70.field1726.method163(field2949);
-				class70.field1726.method162(var4);
+				LinkList.field2295 = 2;
+				class16.field523 = JagString.field14;
+				Occlude.field1726.method415(221);
+				Occlude.field1726.method163(field2949);
+				Occlude.field1726.method162(var4);
 			}
 		}
 		if (var3 == 26 || var3 == 46) {
-			class1 var8 = class102.field2586[arg0];
+			JagString var8 = class102.field2586[arg0];
 			int var9 = var8.method11(class53.field1393);
 			if (var9 != -1) {
-				class1 var10 = var8.method1(var9 + 5).method40();
-				class1 var11 = var10.method13().method36();
+				JagString var10 = var8.method1(var9 + 5).method40();
+				JagString var11 = var10.method13().method36();
 				boolean var12 = false;
 				for (int var13 = 0; var13 < class118.field2939; var13++) {
 					class2 var14 = class80.field2030[class112.field2758[var13]];
@@ -13221,26 +13221,26 @@ public class Statics {
 						var12 = true;
 						method576(1, 0, field2621.field1962[0], var14.field1962[0], 0, false, 0, 1, field2621.field2009[0], var14.field2009[0], 2);
 						if (var3 == 26) {
-							class70.field1726.method415(96);
-							class70.field1726.method169(class112.field2758[var13]);
+							Occlude.field1726.method415(96);
+							Occlude.field1726.method169(class112.field2758[var13]);
 						}
 						if (var3 == 46) {
-							class70.field1726.method415(68);
-							class70.field1726.method162(class112.field2758[var13]);
+							Occlude.field1726.method415(68);
+							Occlude.field1726.method162(class112.field2758[var13]);
 						}
 						break;
 					}
 				}
 				if (!var12) {
-					method758(0, method956(new class1[] { class23.field718, var11 }), class132.field3234);
+					method758(0, method956(new JagString[] { class23.field718, var11 }), class132.field3234);
 				}
 			}
 		}
 		if (var3 == 55) {
-			class70.field1726.method415(26);
-			class70.field1726.method169(var1);
-			class70.field1726.method170(var2);
-			class70.field1726.method169(var4);
+			Occlude.field1726.method415(26);
+			Occlude.field1726.method169(var1);
+			Occlude.field1726.method170(var2);
+			Occlude.field1726.method169(var4);
 			class67.field1679 = var2;
 			class43.field1154 = 0;
 			class105.field2649 = var1;
@@ -13253,10 +13253,10 @@ public class Statics {
 			}
 		}
 		if (var3 == 53) {
-			class70.field1726.method415(38);
-			class70.field1726.method169(var4);
-			class70.field1726.method162(var1);
-			class70.field1726.method163(var2);
+			Occlude.field1726.method415(38);
+			Occlude.field1726.method169(var4);
+			Occlude.field1726.method162(var1);
+			Occlude.field1726.method163(var2);
 			class105.field2649 = var1;
 			class19.field656 = 2;
 			class43.field1154 = 0;
@@ -13269,8 +13269,8 @@ public class Statics {
 			}
 		}
 		if (var3 == 57) {
-			class70.field1726.method415(64);
-			class70.field1726.method182(var2);
+			Occlude.field1726.method415(64);
+			Occlude.field1726.method182(var2);
 			class100 var15 = method1053(var2);
 			if (var15.field2554 != null && var15.field2554[0][0] == 5) {
 				int var16 = var15.field2554[0][1];
@@ -13282,10 +13282,10 @@ public class Statics {
 			}
 		}
 		if (var3 == 52) {
-			class70.field1726.method415(240);
-			class70.field1726.method154(var1);
-			class70.field1726.method162(var4);
-			class70.field1726.method179(var2);
+			Occlude.field1726.method415(240);
+			Occlude.field1726.method154(var1);
+			Occlude.field1726.method162(var4);
+			Occlude.field1726.method179(var2);
 			class105.field2649 = var1;
 			class67.field1679 = var2;
 			class43.field1154 = 0;
@@ -13302,11 +13302,11 @@ public class Statics {
 			if (var17 != null) {
 				method576(1, 0, field2621.field1962[0], var17.field1962[0], 0, false, 0, 1, field2621.field2009[0], var17.field2009[0], 2);
 				class119.field2967 = class112.field2762;
-				class92.field2295 = 2;
-				class16.field523 = class1.field14;
+				LinkList.field2295 = 2;
+				class16.field523 = JagString.field14;
 				class34.field894 = 0;
-				class70.field1726.method415(68);
-				class70.field1726.method162(var4);
+				Occlude.field1726.method415(68);
+				Occlude.field1726.method162(var4);
 			}
 		}
 		if (var3 == 14) {
@@ -13314,27 +13314,27 @@ public class Statics {
 			if (var18 != null) {
 				method576(1, 0, field2621.field1962[0], var18.field1962[0], 0, false, 0, 1, field2621.field2009[0], var18.field2009[0], 2);
 				class34.field894 = 0;
-				class92.field2295 = 2;
-				class16.field523 = class1.field14;
+				LinkList.field2295 = 2;
+				class16.field523 = JagString.field14;
 				class119.field2967 = class112.field2762;
-				class70.field1726.method415(96);
-				class70.field1726.method169(var4);
+				Occlude.field1726.method415(96);
+				Occlude.field1726.method169(var4);
 			}
 		}
 		if (var3 == 1001) {
 			class119.field2967 = class112.field2762;
-			class92.field2295 = 2;
-			class16.field523 = class1.field14;
+			LinkList.field2295 = 2;
+			class16.field523 = JagString.field14;
 			class34.field894 = 0;
-			class130 var19 = class120.field2992[var4];
+			class130 var19 = Js5Loader.field2992[var4];
 			if (var19 != null) {
 				class42 var20 = var19.field3182;
 				if (var20.field1136 != null) {
 					var20 = var20.method457();
 				}
 				if (var20 != null) {
-					class70.field1726.method415(247);
-					class70.field1726.method154(var20.field1137);
+					Occlude.field1726.method415(247);
+					Occlude.field1726.method154(var20.field1137);
 				}
 			}
 		}
@@ -13343,14 +13343,14 @@ public class Statics {
 			if (var21 != null) {
 				method576(1, 0, field2621.field1962[0], var21.field1962[0], 0, false, 0, 1, field2621.field2009[0], var21.field2009[0], 2);
 				class119.field2967 = class112.field2762;
-				class92.field2295 = 2;
-				class16.field523 = class1.field14;
+				LinkList.field2295 = 2;
+				class16.field523 = JagString.field14;
 				class34.field894 = 0;
-				class70.field1726.method415(110);
-				class70.field1726.method154(var4);
-				class70.field1726.method163(field1075);
-				class70.field1726.method150(field2437);
-				class70.field1726.method150(field2281);
+				Occlude.field1726.method415(110);
+				Occlude.field1726.method154(var4);
+				Occlude.field1726.method163(field1075);
+				Occlude.field1726.method150(field2437);
+				Occlude.field1726.method150(field2281);
 			}
 		}
 		if (var3 == 19) {
@@ -13358,7 +13358,7 @@ public class Statics {
 			field2281 = var1;
 			field1075 = var2;
 			class14.field475 = 1;
-			class130.field3177 = method956(new class1[] { class93.field2334, method760(var4).field2827, class53.field1393 });
+			class130.field3177 = method956(new JagString[] { class93.field2334, method760(var4).field2827, class53.field1393 });
 			client.field594 = 0;
 			if (class130.field3177 == null) {
 				class130.field3177 = class64.field1631;
@@ -13372,18 +13372,18 @@ public class Statics {
 				method576(1, 0, field2621.field1962[0], var1, 0, false, 0, 1, field2621.field2009[0], var2, 2);
 			}
 			class34.field894 = 0;
-			class92.field2295 = 2;
-			class16.field523 = class1.field14;
+			LinkList.field2295 = 2;
+			class16.field523 = JagString.field14;
 			class119.field2967 = class112.field2762;
-			class70.field1726.method415(168);
-			class70.field1726.method162(var4);
-			class70.field1726.method169(field806 + var1);
-			class70.field1726.method163(field2949);
-			class70.field1726.method150(field1408 + var2);
+			Occlude.field1726.method415(168);
+			Occlude.field1726.method162(var4);
+			Occlude.field1726.method169(field806 + var1);
+			Occlude.field1726.method163(field2949);
+			Occlude.field1726.method150(field1408 + var2);
 		}
 		if (var3 == 23) {
-			class70.field1726.method415(64);
-			class70.field1726.method182(var2);
+			Occlude.field1726.method415(64);
+			Occlude.field1726.method182(var2);
 			class100 var24 = method1053(var2);
 			if (var24.field2554 != null && var24.field2554[0][0] == 5) {
 				int var25 = var24.field2554[0][1];
@@ -13393,10 +13393,10 @@ public class Statics {
 			}
 		}
 		if (var3 == 48) {
-			class70.field1726.method415(147);
-			class70.field1726.method169(var4);
-			class70.field1726.method162(var1);
-			class70.field1726.method170(var2);
+			Occlude.field1726.method415(147);
+			Occlude.field1726.method169(var4);
+			Occlude.field1726.method162(var1);
+			Occlude.field1726.method170(var2);
 			class19.field656 = 2;
 			class105.field2649 = var1;
 			class67.field1679 = var2;
@@ -13409,7 +13409,7 @@ public class Statics {
 			class43.field1154 = 0;
 		}
 		if (var3 == 18) {
-			class1 var26 = class102.field2586[arg0];
+			JagString var26 = class102.field2586[arg0];
 			int var27 = var26.method11(class53.field1393);
 			if (var27 != -1) {
 				long var28 = var26.method1(var27 + 5).method40().method9();
@@ -13425,90 +13425,90 @@ public class Statics {
 					class105.field2637 = true;
 					class114.field2811 = 0;
 					class132.field3232 = class132.field3234;
-					class37.field1001 = true;
+					Sprite.field1001 = true;
 					class36.field958 = class117.field2929[var30];
-					class132.field3230 = method956(new class1[] { class75.field1873, class119.field2951[var30] });
+					class132.field3230 = method956(new JagString[] { class75.field1873, class119.field2951[var30] });
 				}
 			}
 		}
 		if (var3 == 1003) {
 			class34.field894 = 0;
-			class92.field2295 = 2;
-			class16.field523 = class1.field14;
+			LinkList.field2295 = 2;
+			class16.field523 = JagString.field14;
 			class119.field2967 = class112.field2762;
-			class70.field1726.method415(151);
-			class70.field1726.method154(var4);
+			Occlude.field1726.method415(151);
+			Occlude.field1726.method154(var4);
 		}
 		if (var3 == 1002) {
 			method491(var1, var4, var2);
-			class70.field1726.method415(62);
-			class70.field1726.method150(var4 >> 14 & 0x7FFF);
-			class70.field1726.method162(var2 + field1408);
-			class70.field1726.method154(field806 + var1);
+			Occlude.field1726.method415(62);
+			Occlude.field1726.method150(var4 >> 14 & 0x7FFF);
+			Occlude.field1726.method162(var2 + field1408);
+			Occlude.field1726.method154(field806 + var1);
 		}
 		if (var3 == 30) {
-			class130 var32 = class120.field2992[var4];
+			class130 var32 = Js5Loader.field2992[var4];
 			if (var32 != null) {
 				method576(1, 0, field2621.field1962[0], var32.field1962[0], 0, false, 0, 1, field2621.field2009[0], var32.field2009[0], 2);
 				class34.field894 = 0;
 				class119.field2967 = class112.field2762;
-				class16.field523 = class1.field14;
-				class92.field2295 = 2;
-				class70.field1726.method415(57);
-				class70.field1726.method150(var4);
+				class16.field523 = JagString.field14;
+				LinkList.field2295 = 2;
+				Occlude.field1726.method415(57);
+				Occlude.field1726.method150(var4);
 			}
 		}
 		if (var3 == 49) {
-			class130 var33 = class120.field2992[var4];
+			class130 var33 = Js5Loader.field2992[var4];
 			if (var33 != null) {
 				method576(1, 0, field2621.field1962[0], var33.field1962[0], 0, false, 0, 1, field2621.field2009[0], var33.field2009[0], 2);
 				class119.field2967 = class112.field2762;
-				class16.field523 = class1.field14;
+				class16.field523 = JagString.field14;
 				class34.field894 = 0;
-				class92.field2295 = 2;
-				class70.field1726.method415(208);
-				class70.field1726.method169(var4);
-				class70.field1726.method169(field2437);
-				class70.field1726.method154(field2281);
-				class70.field1726.method182(field1075);
+				LinkList.field2295 = 2;
+				Occlude.field1726.method415(208);
+				Occlude.field1726.method169(var4);
+				Occlude.field1726.method169(field2437);
+				Occlude.field1726.method154(field2281);
+				Occlude.field1726.method182(field1075);
 			}
 		}
 		if (var3 == 29) {
 			method491(var1, var4, var2);
-			class70.field1726.method415(164);
-			class70.field1726.method154(field806 + var1);
-			class70.field1726.method154(field1408 + var2);
-			class70.field1726.method154(var4 >> 14 & 0x7FFF);
+			Occlude.field1726.method415(164);
+			Occlude.field1726.method154(field806 + var1);
+			Occlude.field1726.method154(field1408 + var2);
+			Occlude.field1726.method154(var4 >> 14 & 0x7FFF);
 		}
 		if (var3 == 5 && method491(var1, var4, var2)) {
-			class70.field1726.method415(24);
-			class70.field1726.method154(field1408 + var2);
-			class70.field1726.method169(field2437);
-			class70.field1726.method162(var4 >> 14 & 0x7FFF);
-			class70.field1726.method154(field2281);
-			class70.field1726.method163(field1075);
-			class70.field1726.method154(field806 + var1);
+			Occlude.field1726.method415(24);
+			Occlude.field1726.method154(field1408 + var2);
+			Occlude.field1726.method169(field2437);
+			Occlude.field1726.method162(var4 >> 14 & 0x7FFF);
+			Occlude.field1726.method154(field2281);
+			Occlude.field1726.method163(field1075);
+			Occlude.field1726.method154(field806 + var1);
 		}
 		if (var3 == 34) {
-			class130 var34 = class120.field2992[var4];
+			class130 var34 = Js5Loader.field2992[var4];
 			if (var34 != null) {
 				method576(1, 0, field2621.field1962[0], var34.field1962[0], 0, false, 0, 1, field2621.field2009[0], var34.field2009[0], 2);
 				class34.field894 = 0;
-				class92.field2295 = 2;
+				LinkList.field2295 = 2;
 				class119.field2967 = class112.field2762;
-				class16.field523 = class1.field14;
-				class70.field1726.method415(0);
-				class70.field1726.method169(var4);
+				class16.field523 = JagString.field14;
+				Occlude.field1726.method415(0);
+				Occlude.field1726.method169(var4);
 			}
 		}
 		if (var3 == 56) {
-			class70.field1726.method415(40);
-			class70.field1726.method154(var4);
-			class70.field1726.method154(var1);
-			class70.field1726.method170(var2);
-			class70.field1726.method170(field1075);
-			class70.field1726.method162(field2437);
-			class70.field1726.method169(field2281);
+			Occlude.field1726.method415(40);
+			Occlude.field1726.method154(var4);
+			Occlude.field1726.method154(var1);
+			Occlude.field1726.method170(var2);
+			Occlude.field1726.method170(field1075);
+			Occlude.field1726.method162(field2437);
+			Occlude.field1726.method169(field2281);
 			class67.field1679 = var2;
 			class43.field1154 = 0;
 			class105.field2649 = var1;
@@ -13528,7 +13528,7 @@ public class Statics {
 			field2846 = var35.field2508;
 			class14.field475 = 0;
 			field2949 = var2;
-			class52.field1384 = method956(new class1[] { class102.field2564, var35.field2515, class53.field1393 });
+			class52.field1384 = method956(new JagString[] { class102.field2564, var35.field2515, class53.field1393 });
 			if (field2846 == 16) {
 				class95.field2364 = true;
 				class9.field330 = 3;
@@ -13542,10 +13542,10 @@ public class Statics {
 				var36 = var36.field2519[var1];
 			}
 			if (var36 == null || var36.field2540 < 100000) {
-				class70.field1726.method415(151);
-				class70.field1726.method154(var4);
+				Occlude.field1726.method415(151);
+				Occlude.field1726.method154(var4);
 			} else {
-				method758(0, method956(new class1[] { method502(var36.field2540), class131.field3203, method760(var4).field2827 }), class132.field3234);
+				method758(0, method956(new JagString[] { method502(var36.field2540), class131.field3203, method760(var4).field2827 }), class132.field3234);
 			}
 		}
 		if (var3 == 42) {
@@ -13555,15 +13555,15 @@ public class Statics {
 				var38 = method190(var37);
 			}
 			if (var38) {
-				class70.field1726.method415(64);
-				class70.field1726.method182(var2);
+				Occlude.field1726.method415(64);
+				Occlude.field1726.method182(var2);
 			}
 		}
 		if (var3 == 31) {
-			class70.field1726.method415(163);
-			class70.field1726.method154(var1);
-			class70.field1726.method154(var4);
-			class70.field1726.method182(var2);
+			Occlude.field1726.method415(163);
+			Occlude.field1726.method154(var1);
+			Occlude.field1726.method154(var4);
+			Occlude.field1726.method182(var2);
 			class105.field2649 = var1;
 			class19.field656 = 2;
 			class67.field1679 = var2;
@@ -13576,15 +13576,15 @@ public class Statics {
 			}
 		}
 		if (var3 == 12) {
-			class130 var39 = class120.field2992[var4];
+			class130 var39 = Js5Loader.field2992[var4];
 			if (var39 != null) {
 				method576(1, 0, field2621.field1962[0], var39.field1962[0], 0, false, 0, 1, field2621.field2009[0], var39.field2009[0], 2);
 				class119.field2967 = class112.field2762;
-				class16.field523 = class1.field14;
+				class16.field523 = JagString.field14;
 				class34.field894 = 0;
-				class92.field2295 = 2;
-				class70.field1726.method415(63);
-				class70.field1726.method154(var4);
+				LinkList.field2295 = 2;
+				Occlude.field1726.method415(63);
+				Occlude.field1726.method154(var4);
 			}
 		}
 		if (var3 == 2) {
@@ -13592,14 +13592,14 @@ public class Statics {
 			if (!var40) {
 				method576(1, 0, field2621.field1962[0], var1, 0, false, 0, 1, field2621.field2009[0], var2, 2);
 			}
-			class92.field2295 = 2;
+			LinkList.field2295 = 2;
 			class34.field894 = 0;
 			class119.field2967 = class112.field2762;
-			class16.field523 = class1.field14;
-			class70.field1726.method415(244);
-			class70.field1726.method162(var1 + field806);
-			class70.field1726.method169(field1408 + var2);
-			class70.field1726.method150(var4);
+			class16.field523 = JagString.field14;
+			Occlude.field1726.method415(244);
+			Occlude.field1726.method162(var1 + field806);
+			Occlude.field1726.method169(field1408 + var2);
+			Occlude.field1726.method150(var4);
 		}
 		if (var3 == 3) {
 			boolean var42 = method576(0, 0, field2621.field1962[0], var1, 0, false, 0, 0, field2621.field2009[0], var2, 2);
@@ -13608,28 +13608,28 @@ public class Statics {
 			}
 			class34.field894 = 0;
 			class119.field2967 = class112.field2762;
-			class92.field2295 = 2;
-			class16.field523 = class1.field14;
-			class70.field1726.method415(85);
-			class70.field1726.method169(field1408 + var2);
-			class70.field1726.method169(var4);
-			class70.field1726.method162(field806 + var1);
+			LinkList.field2295 = 2;
+			class16.field523 = JagString.field14;
+			Occlude.field1726.method415(85);
+			Occlude.field1726.method169(field1408 + var2);
+			Occlude.field1726.method169(var4);
+			Occlude.field1726.method162(field806 + var1);
 		}
 		if (var3 == 21) {
-			class130 var44 = class120.field2992[var4];
+			class130 var44 = Js5Loader.field2992[var4];
 			if (var44 != null) {
 				method576(1, 0, field2621.field1962[0], var44.field1962[0], 0, false, 0, 1, field2621.field2009[0], var44.field2009[0], 2);
 				class119.field2967 = class112.field2762;
-				class16.field523 = class1.field14;
+				class16.field523 = JagString.field14;
 				class34.field894 = 0;
-				class92.field2295 = 2;
-				class70.field1726.method415(253);
-				class70.field1726.method150(var4);
-				class70.field1726.method163(field2949);
+				LinkList.field2295 = 2;
+				Occlude.field1726.method415(253);
+				Occlude.field1726.method150(var4);
+				Occlude.field1726.method163(field2949);
 			}
 		}
 		if (var3 == 45 || var3 == 51 || var3 == 13 || var3 == 35) {
-			class1 var45 = class102.field2586[arg0];
+			JagString var45 = class102.field2586[arg0];
 			int var46 = var45.method11(class53.field1393);
 			if (var46 != -1) {
 				long var47 = var45.method1(var46 + 5).method40().method9();
@@ -13651,28 +13651,28 @@ public class Statics {
 			class2 var49 = class80.field2030[var4];
 			if (var49 != null) {
 				method576(1, 0, field2621.field1962[0], var49.field1962[0], 0, false, 0, 1, field2621.field2009[0], var49.field2009[0], 2);
-				class92.field2295 = 2;
+				LinkList.field2295 = 2;
 				class34.field894 = 0;
 				class119.field2967 = class112.field2762;
-				class16.field523 = class1.field14;
-				class70.field1726.method415(220);
-				class70.field1726.method150(var4);
+				class16.field523 = JagString.field14;
+				Occlude.field1726.method415(220);
+				Occlude.field1726.method150(var4);
 			}
 		}
 		if (var3 == 7) {
 			if (class6.field224) {
 				field3183.method76(var1 - 4, var2 + -4);
 			} else {
-				field3183.method76(class112.field2762 - 4, class1.field14 + -4);
+				field3183.method76(class112.field2762 - 4, JagString.field14 + -4);
 			}
 		}
 		if (var3 == 1006) {
 			class100 var50 = method1053(var2);
 			if (var50 == null || var50.field2516[var1] < 100000) {
-				class70.field1726.method415(151);
-				class70.field1726.method154(var4);
+				Occlude.field1726.method415(151);
+				Occlude.field1726.method154(var4);
 			} else {
-				method758(0, method956(new class1[] { method502(var50.field2516[var1]), class131.field3203, method760(var4).field2827 }), class132.field3234);
+				method758(0, method956(new JagString[] { method502(var50.field2516[var1]), class131.field3203, method760(var4).field2827 }), class132.field3234);
 			}
 			class105.field2649 = var1;
 			class43.field1154 = 0;
@@ -13687,10 +13687,10 @@ public class Statics {
 		}
 		if (var3 == 17) {
 			method491(var1, var4, var2);
-			class70.field1726.method415(183);
-			class70.field1726.method169(var2 + field1408);
-			class70.field1726.method150(var4 >> 14 & 0x7FFF);
-			class70.field1726.method169(var1 + field806);
+			Occlude.field1726.method415(183);
+			Occlude.field1726.method169(var2 + field1408);
+			Occlude.field1726.method150(var4 >> 14 & 0x7FFF);
+			Occlude.field1726.method169(var1 + field806);
 		}
 		if (var3 == 50) {
 			method673(var1, var4, var2);
@@ -13701,17 +13701,17 @@ public class Statics {
 			class105.field2637 = true;
 		}
 		if (var3 == 32 && method491(var1, var4, var2)) {
-			class70.field1726.method415(225);
-			class70.field1726.method150(var4 >> 14 & 0x7FFF);
-			class70.field1726.method154(var2 + field1408);
-			class70.field1726.method163(field2949);
-			class70.field1726.method162(field806 + var1);
+			Occlude.field1726.method415(225);
+			Occlude.field1726.method150(var4 >> 14 & 0x7FFF);
+			Occlude.field1726.method154(var2 + field1408);
+			Occlude.field1726.method163(field2949);
+			Occlude.field1726.method162(field806 + var1);
 		}
 		if (var3 == 25) {
-			class70.field1726.method415(228);
-			class70.field1726.method162(var4);
-			class70.field1726.method170(var2);
-			class70.field1726.method162(var1);
+			Occlude.field1726.method415(228);
+			Occlude.field1726.method162(var4);
+			Occlude.field1726.method170(var2);
+			Occlude.field1726.method162(var1);
 			class43.field1154 = 0;
 			class19.field656 = 2;
 			if (var2 >> 16 == class132.field3227) {
@@ -13724,10 +13724,10 @@ public class Statics {
 			class105.field2649 = var1;
 		}
 		if (var3 == 11) {
-			class70.field1726.method415(29);
-			class70.field1726.method163(var2);
-			class70.field1726.method169(var1);
-			class70.field1726.method162(var4);
+			Occlude.field1726.method415(29);
+			Occlude.field1726.method163(var2);
+			Occlude.field1726.method169(var1);
+			Occlude.field1726.method162(var4);
 			class105.field2649 = var1;
 			class67.field1679 = var2;
 			class19.field656 = 2;
@@ -13743,16 +13743,16 @@ public class Statics {
 			class2 var51 = class80.field2030[var4];
 			if (var51 != null) {
 				method576(1, 0, field2621.field1962[0], var51.field1962[0], 0, false, 0, 1, field2621.field2009[0], var51.field2009[0], 2);
-				class92.field2295 = 2;
-				class16.field523 = class1.field14;
+				LinkList.field2295 = 2;
+				class16.field523 = JagString.field14;
 				class119.field2967 = class112.field2762;
 				class34.field894 = 0;
-				class70.field1726.method415(187);
-				class70.field1726.method154(var4);
+				Occlude.field1726.method415(187);
+				Occlude.field1726.method154(var4);
 			}
 		}
 		if (var3 == 28) {
-			class1 var52 = class102.field2586[arg0];
+			JagString var52 = class102.field2586[arg0];
 			int var53 = var52.method11(class53.field1393);
 			if (var53 != -1) {
 				if (class132.field3227 == -1) {
@@ -13774,25 +13774,25 @@ public class Statics {
 			}
 			class119.field2967 = class112.field2762;
 			class34.field894 = 0;
-			class92.field2295 = 2;
-			class16.field523 = class1.field14;
-			class70.field1726.method415(65);
-			class70.field1726.method169(var4);
-			class70.field1726.method169(var2 + field1408);
-			class70.field1726.method162(field806 + var1);
+			LinkList.field2295 = 2;
+			class16.field523 = JagString.field14;
+			Occlude.field1726.method415(65);
+			Occlude.field1726.method169(var4);
+			Occlude.field1726.method169(var2 + field1408);
+			Occlude.field1726.method162(field806 + var1);
 		}
 		if (var3 == 9) {
 			method413();
 		}
-		if (var3 == 54 && class120.field2998 == -1) {
+		if (var3 == 54 && Js5Loader.field2998 == -1) {
 			method414(0, var2);
-			class120.field2998 = var2;
+			Js5Loader.field2998 = var2;
 		}
 		if (var3 == 43) {
-			class70.field1726.method415(98);
-			class70.field1726.method150(var1);
-			class70.field1726.method163(var2);
-			class70.field1726.method150(var4);
+			Occlude.field1726.method415(98);
+			Occlude.field1726.method150(var1);
+			Occlude.field1726.method163(var2);
+			Occlude.field1726.method150(var4);
 			class43.field1154 = 0;
 			class19.field656 = 2;
 			if (var2 >> 16 == class132.field3227) {
@@ -13809,14 +13809,14 @@ public class Statics {
 			if (!var56) {
 				method576(1, 0, field2621.field1962[0], var1, 0, false, 0, 1, field2621.field2009[0], var2, 2);
 			}
-			class16.field523 = class1.field14;
-			class92.field2295 = 2;
+			class16.field523 = JagString.field14;
+			LinkList.field2295 = 2;
 			class34.field894 = 0;
 			class119.field2967 = class112.field2762;
-			class70.field1726.method415(27);
-			class70.field1726.method150(field806 + var1);
-			class70.field1726.method169(var4);
-			class70.field1726.method169(field1408 + var2);
+			Occlude.field1726.method415(27);
+			Occlude.field1726.method150(field806 + var1);
+			Occlude.field1726.method169(var4);
+			Occlude.field1726.method169(field1408 + var2);
 		}
 		if (var3 == 39) {
 			class2 var58 = class80.field2030[var4];
@@ -13824,17 +13824,17 @@ public class Statics {
 				method576(1, 0, field2621.field1962[0], var58.field1962[0], 0, false, 0, 1, field2621.field2009[0], var58.field2009[0], 2);
 				class34.field894 = 0;
 				class119.field2967 = class112.field2762;
-				class92.field2295 = 2;
-				class16.field523 = class1.field14;
-				class70.field1726.method415(211);
-				class70.field1726.method162(var4);
+				LinkList.field2295 = 2;
+				class16.field523 = JagString.field14;
+				Occlude.field1726.method415(211);
+				Occlude.field1726.method162(var4);
 			}
 		}
 		if (var3 == 24) {
-			class70.field1726.method415(124);
-			class70.field1726.method150(var1);
-			class70.field1726.method170(var2);
-			class70.field1726.method150(var4);
+			Occlude.field1726.method415(124);
+			Occlude.field1726.method150(var1);
+			Occlude.field1726.method170(var2);
+			Occlude.field1726.method150(var4);
 			class67.field1679 = var2;
 			class43.field1154 = 0;
 			class105.field2649 = var1;
@@ -13848,21 +13848,21 @@ public class Statics {
 		}
 		if (var3 == 16) {
 			method491(var1, var4, var2);
-			class70.field1726.method415(30);
-			class70.field1726.method169(var4 >> 14 & 0x7FFF);
-			class70.field1726.method169(field1408 + var2);
-			class70.field1726.method154(field806 + var1);
+			Occlude.field1726.method415(30);
+			Occlude.field1726.method169(var4 >> 14 & 0x7FFF);
+			Occlude.field1726.method169(field1408 + var2);
+			Occlude.field1726.method154(field806 + var1);
 		}
 		if (var3 == 20) {
-			class130 var59 = class120.field2992[var4];
+			class130 var59 = Js5Loader.field2992[var4];
 			if (var59 != null) {
 				method576(1, 0, field2621.field1962[0], var59.field1962[0], 0, false, 0, 1, field2621.field2009[0], var59.field2009[0], 2);
-				class92.field2295 = 2;
+				LinkList.field2295 = 2;
 				class119.field2967 = class112.field2762;
-				class16.field523 = class1.field14;
+				class16.field523 = JagString.field14;
 				class34.field894 = 0;
-				class70.field1726.method415(153);
-				class70.field1726.method162(var4);
+				Occlude.field1726.method415(153);
+				Occlude.field1726.method162(var4);
 			}
 		}
 		if (var3 == 47) {
@@ -13871,22 +13871,22 @@ public class Statics {
 				method576(1, 0, field2621.field1962[0], var1, 0, false, 0, 1, field2621.field2009[0], var2, 2);
 			}
 			class119.field2967 = class112.field2762;
-			class16.field523 = class1.field14;
+			class16.field523 = JagString.field14;
 			class34.field894 = 0;
-			class92.field2295 = 2;
-			class70.field1726.method415(172);
-			class70.field1726.method169(field806 + var1);
-			class70.field1726.method150(field2281);
-			class70.field1726.method169(var4);
-			class70.field1726.method179(field1075);
-			class70.field1726.method162(field1408 + var2);
-			class70.field1726.method162(field2437);
+			LinkList.field2295 = 2;
+			Occlude.field1726.method415(172);
+			Occlude.field1726.method169(field806 + var1);
+			Occlude.field1726.method150(field2281);
+			Occlude.field1726.method169(var4);
+			Occlude.field1726.method179(field1075);
+			Occlude.field1726.method162(field1408 + var2);
+			Occlude.field1726.method162(field2437);
 		}
 		if (var3 == 6) {
-			class70.field1726.method415(102);
-			class70.field1726.method170(var2);
-			class70.field1726.method154(var1);
-			class70.field1726.method150(var4);
+			Occlude.field1726.method415(102);
+			Occlude.field1726.method170(var2);
+			Occlude.field1726.method154(var1);
+			Occlude.field1726.method150(var4);
 			class105.field2649 = var1;
 			class43.field1154 = 0;
 			class19.field656 = 2;
@@ -13899,15 +13899,15 @@ public class Statics {
 			}
 		}
 		if (var3 == 4) {
-			class130 var62 = class120.field2992[var4];
+			class130 var62 = Js5Loader.field2992[var4];
 			if (var62 != null) {
 				method576(1, 0, field2621.field1962[0], var62.field1962[0], 0, false, 0, 1, field2621.field2009[0], var62.field2009[0], 2);
-				class92.field2295 = 2;
+				LinkList.field2295 = 2;
 				class119.field2967 = class112.field2762;
 				class34.field894 = 0;
-				class16.field523 = class1.field14;
-				class70.field1726.method415(116);
-				class70.field1726.method162(var4);
+				class16.field523 = JagString.field14;
+				Occlude.field1726.method415(116);
+				Occlude.field1726.method162(var4);
 			}
 		}
 		if (class14.field475 != 0) {
@@ -13947,7 +13947,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("se.a(ILbd;Lbd;)V")
-	public static void method930(class11 arg0, class11 arg1) {
+	public static void method930(Js5 arg0, Js5 arg1) {
 		field1583 = arg1;
 		field2433 = arg0;
 		field974 = field2433.method235(3);
@@ -13959,7 +13959,7 @@ public class Statics {
 		int var2 = var1.field945;
 		int var3 = var1.field933;
 		int var4 = var1.field943;
-		int var5 = class4.field173[var2 - var4];
+		int var5 = JavaSafePixMap.field173[var2 - var4];
 		return class113.field2803[var3] >> var4 & var5;
 	}
 
@@ -14006,9 +14006,9 @@ public class Statics {
 						continue;
 					}
 					if (class14.field475 == 1) {
-						method398(var2, client.field584, var4, var3, 5, method956(new class1[] { class130.field3177, class16.field524, var7.field1332 }));
+						method398(var2, client.field584, var4, var3, 5, method956(new JagString[] { class130.field3177, class16.field524, var7.field1332 }));
 					} else if (client.field594 != 1) {
-						class1[] var8 = var7.field1291;
+						JagString[] var8 = var7.field1291;
 						if (class118.field2934) {
 							var8 = method905(var8);
 						}
@@ -14031,20 +14031,20 @@ public class Statics {
 									if (var9 == 4) {
 										var10 = 1002;
 									}
-									method398(var2, var8[var9], var4, var3, var10, method956(new class1[] { class128.field3136, var7.field1332 }));
+									method398(var2, var8[var9], var4, var3, var10, method956(new JagString[] { class128.field3136, var7.field1332 }));
 								}
 							}
 						}
-						method398(var7.field1321 << 14, class114.field2805, var4, var3, 1004, method956(new class1[] { class128.field3136, var7.field1332 }));
+						method398(var7.field1321 << 14, class114.field2805, var4, var3, 1004, method956(new JagString[] { class128.field3136, var7.field1332 }));
 					} else if ((field2846 & 0x4) == 4) {
-						method398(var2, class60.field1523, var4, var3, 32, method956(new class1[] { class52.field1384, class16.field524, var7.field1332 }));
+						method398(var2, class60.field1523, var4, var3, 32, method956(new JagString[] { class52.field1384, class16.field524, var7.field1332 }));
 					}
 				}
 				if (var5 == 1) {
-					class130 var11 = class120.field2992[var6];
+					class130 var11 = Js5Loader.field2992[var6];
 					if (var11.field3182.field1084 == 1 && (var11.field1972 & 0x7F) == 64 && (var11.field1963 & 0x7F) == 64) {
 						for (int var12 = 0; var12 < class49.field1341; var12++) {
-							class130 var13 = class120.field2992[class22.field677[var12]];
+							class130 var13 = Js5Loader.field2992[class22.field677[var12]];
 							if (var13 != null && var11 != var13 && var13.field3182.field1084 == 1 && var11.field1972 == var13.field1972 && var11.field1963 == var13.field1963) {
 								method1035(var3, var4, class22.field677[var12], var13.field3182);
 							}
@@ -14062,7 +14062,7 @@ public class Statics {
 					class2 var16 = class80.field2030[var6];
 					if ((var16.field1972 & 0x7F) == 64 && (var16.field1963 & 0x7F) == 64) {
 						for (int var17 = 0; var17 < class49.field1341; var17++) {
-							class130 var18 = class120.field2992[class22.field677[var17]];
+							class130 var18 = Js5Loader.field2992[class22.field677[var17]];
 							if (var18 != null && var18.field3182.field1084 == 1 && var16.field1972 == var18.field1972 && var16.field1963 == var18.field1963) {
 								method1035(var3, var4, class22.field677[var17], var18.field3182);
 							}
@@ -14077,14 +14077,14 @@ public class Statics {
 					method272(var4, var3, var16, var6);
 				}
 				if (var5 == 3) {
-					class92 var21 = class17.field552[field75][var3][var4];
+					LinkList var21 = class17.field552[field75][var3][var4];
 					if (var21 != null) {
 						for (class59 var22 = (class59) var21.method801(); var22 != null; var22 = (class59) var21.method812()) {
 							class115 var23 = method760(var22.field1499);
 							if (class14.field475 == 1) {
-								method398(var22.field1499, client.field584, var4, var3, 47, method956(new class1[] { class130.field3177, class9.field328, var23.field2827 }));
+								method398(var22.field1499, client.field584, var4, var3, 47, method956(new JagString[] { class130.field3177, class9.field328, var23.field2827 }));
 							} else if (client.field594 != 1) {
-								class1[] var24 = var23.field2835;
+								JagString[] var24 = var23.field2835;
 								if (class118.field2934) {
 									var24 = method905(var24);
 								}
@@ -14106,14 +14106,14 @@ public class Statics {
 										if (var25 == 4) {
 											var26 = 36;
 										}
-										method398(var22.field1499, var24[var25], var4, var3, var26, method956(new class1[] { class93.field2334, var23.field2827 }));
+										method398(var22.field1499, var24[var25], var4, var3, var26, method956(new JagString[] { class93.field2334, var23.field2827 }));
 									} else if (var25 == 2) {
-										method398(var22.field1499, class63.field1594, var4, var3, 3, method956(new class1[] { class93.field2334, var23.field2827 }));
+										method398(var22.field1499, class63.field1594, var4, var3, 3, method956(new JagString[] { class93.field2334, var23.field2827 }));
 									}
 								}
-								method398(var22.field1499, class114.field2805, var4, var3, 1003, method956(new class1[] { class93.field2334, var23.field2827 }));
+								method398(var22.field1499, class114.field2805, var4, var3, 1003, method956(new JagString[] { class93.field2334, var23.field2827 }));
 							} else if ((field2846 & 0x1) == 1) {
-								method398(var22.field1499, class60.field1523, var4, var3, 15, method956(new class1[] { class52.field1384, class9.field328, var23.field2827 }));
+								method398(var22.field1499, class60.field1523, var4, var3, 15, method956(new JagString[] { class52.field1384, class9.field328, var23.field2827 }));
 							}
 						}
 					}
@@ -14123,7 +14123,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("rc.a(IILbd;I)Z")
-	public static boolean method885(int arg0, int arg1, class11 arg2) {
+	public static boolean method885(int arg0, int arg1, Js5 arg2) {
 		byte[] var3 = arg2.method217(arg0, arg1);
 		if (var3 == null) {
 			return false;
@@ -14167,23 +14167,23 @@ public class Statics {
 		if (class42.field1104 < 2 && class14.field475 == 0 && client.field594 == 0) {
 			return;
 		}
-		class1 var0;
+		JagString var0;
 		if (class14.field475 == 1 && class42.field1104 < 2) {
-			var0 = method956(new class1[] { client.field584, class93.field2337, class130.field3177, class79.field1942 });
+			var0 = method956(new JagString[] { client.field584, class93.field2337, class130.field3177, class79.field1942 });
 		} else if (client.field594 == 1 && class42.field1104 < 2) {
-			var0 = method956(new class1[] { class60.field1523, class93.field2337, class52.field1384, class79.field1942 });
+			var0 = method956(new JagString[] { class60.field1523, class93.field2337, class52.field1384, class79.field1942 });
 		} else {
 			var0 = class102.field2586[class42.field1104 - 1];
 		}
 		if (class42.field1104 > 2) {
-			var0 = method956(new class1[] { var0, class106.field2659, method502(class42.field1104 - 2), class81.field2041 });
+			var0 = method956(new JagString[] { var0, class106.field2659, method502(class42.field1104 - 2), class81.field2041 });
 		}
-		field2902.method207(var0, 4, 16777215, class82.field2063 / 1000);
+		field2902.method207(var0, 4, 16777215, Linkable.field2063 / 1000);
 	}
 
 	@ObfuscatedName("hc.b(II)V")
 	public static void method476(int arg0) {
-		class47.field1237 = class82.field2063;
+		class47.field1237 = Linkable.field2063;
 		method1040();
 		int var1 = method1023(arg0).field2404;
 		if (var1 == 0) {
@@ -14285,7 +14285,7 @@ public class Statics {
 			class16.field527 = var2;
 		}
 		if (var1 == 5) {
-			class134.field3297 = var2;
+			PixMap.field3297 = var2;
 		}
 	}
 
@@ -14307,29 +14307,6 @@ public class Statics {
 		return var2;
 	}
 
-	@ObfuscatedName("se.a(ILjava/lang/String;)La;")
-	public static class1 method931(String arg1) {
-		byte[] var2 = arg1.getBytes();
-		int var3 = var2.length;
-		class1 var4 = new class1();
-		int var5 = 0;
-		var4.field38 = new byte[var3];
-		while (var3 > var5) {
-			int var6 = var2[var5++] & 0xFF;
-			if (var6 <= 45 && var6 >= 40) {
-				if (var5 >= var3) {
-					break;
-				}
-				int var7 = var2[var5++] & 0xFF;
-				var4.field38[var4.field26++] = (byte) ((var6 - 40) * 43 + var7 - 48);
-			} else if (var6 != 0) {
-				var4.field38[var4.field26++] = (byte) var6;
-			}
-		}
-		var4.method28();
-		return var4.method17();
-	}
-
 	@ObfuscatedName("ta.b(B)V")
 	public static void method945() {
 		if (class117.field2924 != null) {
@@ -14348,18 +14325,18 @@ public class Statics {
 		}
 		int var0 = class112.field2762 - 202;
 		int var1 = class122.field3050;
-		int var2 = class1.field14 - 171;
+		int var2 = JagString.field14 - 171;
 		if (class53.field1395 == 0) {
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 100 && var2 <= 140) {
-				class82.field2084 = 0;
+				Linkable.field2084 = 0;
 				class53.field1395 = 3;
 			}
 			if (var1 == 1 && var0 >= 185 && var0 <= 335 && var2 >= 100 && var2 <= 140) {
 				class53.field1395 = 2;
-				class82.field2084 = 0;
-				class123.field3060 = class82.field2104;
+				Linkable.field2084 = 0;
+				class123.field3060 = Linkable.field2104;
 				class123.field3077 = class38.field1030;
-				class123.field3062 = class82.field2088;
+				class123.field3062 = Linkable.field2088;
 				return;
 			}
 			return;
@@ -14368,16 +14345,16 @@ public class Statics {
 			byte var3 = 60;
 			int var6 = var3 + 30;
 			if (var1 == 1 && var2 >= 75 && var2 < 90) {
-				class82.field2084 = 0;
+				Linkable.field2084 = 0;
 			}
 			var6 += 15;
 			if (var1 == 1 && var2 >= 90 && var2 < 105) {
-				class82.field2084 = 1;
+				Linkable.field2084 = 1;
 			}
 			var6 += 15;
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 130 && var2 <= 170) {
 				class123.field3071 = class123.field3071.method13().method36();
-				method678(class82.field2101, class82.field2095, class19.field666);
+				method678(Linkable.field2101, Linkable.field2095, class19.field666);
 				method399(20);
 				return;
 			}
@@ -14397,26 +14374,26 @@ public class Statics {
 								break;
 							}
 						}
-						if (class82.field2084 != 0) {
+						if (Linkable.field2084 != 0) {
 							continue label138;
 						}
 						if (field2885 == 85 && class123.field3071.method10() > 0) {
 							class123.field3071 = class123.field3071.method19(0, class123.field3071.method10() - 1);
 						}
 						if (field2885 == 84 || field2885 == 80) {
-							class82.field2084 = 1;
+							Linkable.field2084 = 1;
 						}
 						if (var4 && class123.field3071.method10() < 12) {
 							class123.field3071 = class123.field3071.method21(field2920);
 						}
 					}
 					return;
-				} while (class82.field2084 != 1);
+				} while (Linkable.field2084 != 1);
 				if (field2885 == 85 && class123.field3055.method10() > 0) {
 					class123.field3055 = class123.field3055.method19(0, class123.field3055.method10() - 1);
 				}
 				if (field2885 == 84 || field2885 == 80) {
-					class82.field2084 = 0;
+					Linkable.field2084 = 0;
 				}
 				if (var4 && class123.field3055.method10() < 20) {
 					class123.field3055 = class123.field3055.method21(field2920);
@@ -14442,7 +14419,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("re.a(ILba;)La;")
-	public static class1 method893(class8 arg0) {
+	public static JagString method893(class8 arg0) {
 		return method474(arg0);
 	}
 
@@ -14459,11 +14436,11 @@ public class Statics {
 			} else {
 				var1 -= 101;
 			}
-			method398(0, class132.field3239, 0, 0, 13, method956(new class1[] { class53.field1393, class119.field2951[var1] }));
-			method398(0, class113.field2778, 0, 0, 18, method956(new class1[] { class53.field1393, class119.field2951[var1] }));
+			method398(0, class132.field3239, 0, 0, 13, method956(new JagString[] { class53.field1393, class119.field2951[var1] }));
+			method398(0, class113.field2778, 0, 0, 18, method956(new JagString[] { class53.field1393, class119.field2951[var1] }));
 			return true;
 		} else if (var1 >= 401 && var1 <= 500) {
-			method398(0, class132.field3239, 0, 0, 35, method956(new class1[] { class53.field1393, arg0.field2474 }));
+			method398(0, class132.field3239, 0, 0, 35, method956(new JagString[] { class53.field1393, arg0.field2474 }));
 			return true;
 		} else {
 			return false;
@@ -14473,7 +14450,7 @@ public class Statics {
 	@ObfuscatedName("sa.a(B)Lna;")
 	public static class79 method909() {
 		try {
-			return (class79) Class.forName("sb").getDeclaredConstructor().newInstance();
+			return (class79) Class.forName("class110").getDeclaredConstructor().newInstance();
 		} catch (Throwable var0) {
 			return new class60();
 		}
@@ -14486,7 +14463,7 @@ public class Statics {
 			if (var1 == 201) {
 				class78.field1924 = 1;
 				class132.field3230 = class100.field2546;
-				class37.field1001 = true;
+				Sprite.field1001 = true;
 				class114.field2811 = 0;
 				class132.field3232 = class132.field3234;
 				class105.field2637 = true;
@@ -14496,12 +14473,12 @@ public class Statics {
 				class132.field3230 = class24.field738;
 				class105.field2637 = true;
 				class114.field2811 = 0;
-				class37.field1001 = true;
+				Sprite.field1001 = true;
 				class132.field3232 = class132.field3234;
 			}
 		}
 		if (var1 == 205) {
-			class70.field1750 = 250;
+			Occlude.field1750 = 250;
 			return true;
 		}
 		if (var1 == 501) {
@@ -14510,35 +14487,35 @@ public class Statics {
 			class105.field2637 = true;
 			class132.field3230 = class103.field2602;
 			class132.field3232 = class132.field3234;
-			class37.field1001 = true;
+			Sprite.field1001 = true;
 		}
 		if (var1 == 502) {
 			class105.field2637 = true;
 			class114.field2811 = 0;
 			class78.field1924 = 5;
-			class37.field1001 = true;
+			Sprite.field1001 = true;
 			class132.field3232 = class132.field3234;
 			class132.field3230 = class23.field720;
 		}
 		if (var1 >= 300 && var1 <= 313) {
 			int var2 = (var1 - 300) / 2;
 			int var3 = var1 & 0x1;
-			class92.field2302.method642(var2, var3 == 1);
+			LinkList.field2302.method642(var2, var3 == 1);
 		}
 		if (var1 >= 314 && var1 <= 323) {
 			int var4 = (var1 - 314) / 2;
 			int var5 = var1 & 0x1;
-			class92.field2302.method644(var5 == 1, var4);
+			LinkList.field2302.method644(var5 == 1, var4);
 		}
 		if (var1 == 324) {
-			class92.field2302.method643(false);
+			LinkList.field2302.method643(false);
 		}
 		if (var1 == 325) {
-			class92.field2302.method643(true);
+			LinkList.field2302.method643(true);
 		}
 		if (var1 == 326) {
-			class70.field1726.method415(231);
-			class92.field2302.method635(class70.field1726);
+			Occlude.field1726.method415(231);
+			LinkList.field2302.method635(Occlude.field1726);
 			return true;
 		}
 		if (var1 == 620) {
@@ -14547,10 +14524,10 @@ public class Statics {
 		if (var1 >= 601 && var1 <= 613) {
 			method413();
 			if (class132.field3217.method10() > 0) {
-				class70.field1726.method415(202);
-				class70.field1726.method157(class132.field3217.method9());
-				class70.field1726.method141(var1 - 601);
-				class70.field1726.method141(class133.field3268 ? 1 : 0);
+				Occlude.field1726.method415(202);
+				Occlude.field1726.method157(class132.field3217.method9());
+				Occlude.field1726.method141(var1 - 601);
+				Occlude.field1726.method141(class133.field3268 ? 1 : 0);
 			}
 		}
 		return false;
@@ -14622,34 +14599,34 @@ public class Statics {
 		if (class122.field3050 != 1) {
 			return;
 		}
-		if (class112.field2762 >= 6 && class112.field2762 <= 106 && class1.field14 >= 467 && class1.field14 <= 499) {
+		if (class112.field2762 >= 6 && class112.field2762 <= 106 && JagString.field14 >= 467 && JagString.field14 <= 499) {
 			class15.field504 = true;
 			class75.field1864 = (class75.field1864 + 1) % 4;
 			class105.field2637 = true;
-			class70.field1726.method415(32);
-			class70.field1726.method141(class75.field1864);
-			class70.field1726.method141(class6.field236);
-			class70.field1726.method141(class115.field2828);
+			Occlude.field1726.method415(32);
+			Occlude.field1726.method141(class75.field1864);
+			Occlude.field1726.method141(class6.field236);
+			Occlude.field1726.method141(class115.field2828);
 		}
-		if (class112.field2762 >= 135 && class112.field2762 <= 235 && class1.field14 >= 467 && class1.field14 <= 499) {
+		if (class112.field2762 >= 135 && class112.field2762 <= 235 && JagString.field14 >= 467 && JagString.field14 <= 499) {
 			class105.field2637 = true;
 			class6.field236 = (class6.field236 + 1) % 3;
 			class15.field504 = true;
-			class70.field1726.method415(32);
-			class70.field1726.method141(class75.field1864);
-			class70.field1726.method141(class6.field236);
-			class70.field1726.method141(class115.field2828);
+			Occlude.field1726.method415(32);
+			Occlude.field1726.method141(class75.field1864);
+			Occlude.field1726.method141(class6.field236);
+			Occlude.field1726.method141(class115.field2828);
 		}
-		if (class112.field2762 >= 273 && class112.field2762 <= 373 && class1.field14 >= 467 && class1.field14 <= 499) {
+		if (class112.field2762 >= 273 && class112.field2762 <= 373 && JagString.field14 >= 467 && JagString.field14 <= 499) {
 			class115.field2828 = (class115.field2828 + 1) % 3;
 			class15.field504 = true;
 			class105.field2637 = true;
-			class70.field1726.method415(32);
-			class70.field1726.method141(class75.field1864);
-			class70.field1726.method141(class6.field236);
-			class70.field1726.method141(class115.field2828);
+			Occlude.field1726.method415(32);
+			Occlude.field1726.method141(class75.field1864);
+			Occlude.field1726.method141(class6.field236);
+			Occlude.field1726.method141(class115.field2828);
 		}
-		if (class112.field2762 < 412 || class112.field2762 > 512 || class1.field14 < 467 || class1.field14 > 499) {
+		if (class112.field2762 < 412 || class112.field2762 > 512 || JagString.field14 < 467 || JagString.field14 > 499) {
 			return;
 		}
 		if (class132.field3227 == -1) {
@@ -14667,12 +14644,12 @@ public class Statics {
 	}
 
 	@ObfuscatedName("re.a(IZZBZ)Lu;")
-	public static class120 method894(int arg0, boolean arg1, boolean arg2, boolean arg3) {
+	public static Js5Loader method894(int arg0, boolean arg1, boolean arg2, boolean arg3) {
 		class109 var4 = null;
 		if (field797 != null) {
 			var4 = new class109(arg0, field797, class46.field1193[arg0], 1000000);
 		}
-		return new class120(var4, field931, arg0, arg2, arg3, arg1);
+		return new Js5Loader(var4, field931, arg0, arg2, arg3, arg1);
 	}
 
 	@ObfuscatedName("ta.h(I)V")
@@ -14710,7 +14687,7 @@ public class Statics {
 			var2 = 200;
 		}
 		class45.field1189 += var2;
-		if (class85.field2144 == 0 && class31.field845 == 0 && class48.field1260 == 0 && class134.field3285 == 0) {
+		if (IntHashTable.field2144 == 0 && class31.field845 == 0 && class48.field1260 == 0 && PixMap.field3285 == 0) {
 			return true;
 		} else if (field2769 == null) {
 			return false;
@@ -14719,25 +14696,25 @@ public class Statics {
 				if (class45.field1189 > 30000) {
 					throw new IOException();
 				}
-				while (class31.field845 < 20 && class134.field3285 > 0) {
+				while (class31.field845 < 20 && PixMap.field3285 > 0) {
 					class104 var3 = (class104) class103.field2596.method497();
 					class8 var4 = new class8(4);
 					var4.method141(1);
 					var4.method153((int) var3.field2073);
 					field2769.method1016(4, var4.field284);
 					class78.field1917.method498(var3, var3.field2073);
-					class134.field3285--;
+					PixMap.field3285--;
 					class31.field845++;
 				}
-				while (class85.field2144 < 20 && class48.field1260 > 0) {
-					class104 var5 = (class104) class37.field996.method608();
+				while (IntHashTable.field2144 < 20 && class48.field1260 > 0) {
+					class104 var5 = (class104) Sprite.field996.method608();
 					class8 var6 = new class8(4);
 					var6.method141(0);
 					var6.method153((int) var5.field2073);
 					field2769.method1016(4, var6.field284);
 					var5.method468();
 					class74.field1831.method498(var5, var5.field2073);
-					class85.field2144++;
+					IntHashTable.field2144++;
 					class48.field1260--;
 				}
 				for (int var7 = 0; var7 < 100; var7++) {
@@ -14776,7 +14753,7 @@ public class Statics {
 							if (field967.field2073 == 16711935L) {
 								field2415 = field2613;
 								for (int var14 = 0; var14 < 256; var14++) {
-									class120 var15 = class50.field1350[var14];
+									Js5Loader var15 = class50.field1350[var14];
 									if (var15 != null) {
 										field2415.field267 = var14 * 4 + 5;
 										int var16 = field2415.method167();
@@ -14808,7 +14785,7 @@ public class Statics {
 							if (field3180) {
 								class31.field845--;
 							} else {
-								class85.field2144--;
+								IntHashTable.field2144--;
 							}
 						} else {
 							if (class102.field2559 != 512) {
@@ -14817,26 +14794,26 @@ public class Statics {
 							class102.field2559 = 0;
 						}
 					} else {
-						int var17 = var9 - class92.field2301.field267;
+						int var17 = var9 - LinkList.field2301.field267;
 						if (var17 > var8) {
 							var17 = var8;
 						}
-						field2769.method1014(class92.field2301.field267, var17, class92.field2301.field284);
+						field2769.method1014(LinkList.field2301.field267, var17, LinkList.field2301.field284);
 						if (class14.field476 != 0) {
 							for (int var18 = 0; var18 < var17; var18++) {
-								class92.field2301.field284[class92.field2301.field267 + var18] ^= class14.field476;
+								LinkList.field2301.field284[LinkList.field2301.field267 + var18] ^= class14.field476;
 							}
 						}
-						class92.field2301.field267 += var17;
-						if (var9 > class92.field2301.field267) {
+						LinkList.field2301.field267 += var17;
+						if (var9 > LinkList.field2301.field267) {
 							break;
 						}
 						if (field967 == null) {
-							class92.field2301.field267 = 0;
-							int var19 = class92.field2301.method144();
-							int var20 = class92.field2301.method145();
-							int var21 = class92.field2301.method144();
-							int var22 = class92.field2301.method167();
+							LinkList.field2301.field267 = 0;
+							int var19 = LinkList.field2301.method144();
+							int var20 = LinkList.field2301.method145();
+							int var21 = LinkList.field2301.method144();
+							int var22 = LinkList.field2301.method167();
 							long var23 = (long) ((var19 << 16) + var20);
 							class104 var25 = (class104) class78.field1917.method499(var23);
 							field3180 = true;
@@ -14853,10 +14830,10 @@ public class Statics {
 							field2613.method141(var21);
 							field2613.method182(var22);
 							class102.field2559 = 8;
-							class92.field2301.field267 = 0;
+							LinkList.field2301.field267 = 0;
 						} else if (class102.field2559 == 0) {
-							if (class92.field2301.field284[0] == -1) {
-								class92.field2301.field267 = 0;
+							if (LinkList.field2301.field284[0] == -1) {
+								LinkList.field2301.field267 = 0;
 								class102.field2559 = 1;
 							} else {
 								field967 = null;
@@ -14903,7 +14880,7 @@ public class Statics {
 				if ((method936(field2920) || field2920 == 32) && class132.field3217.method10() < 12) {
 					class132.field3217 = class132.field3217.method21(field2920);
 				}
-			} else if (class37.field1001) {
+			} else if (Sprite.field1001) {
 				if (field2885 == 85 && class132.field3232.method10() > 0) {
 					class132.field3232 = class132.field3232.method19(0, class132.field3232.method10() - 1);
 					class105.field2637 = true;
@@ -14913,7 +14890,7 @@ public class Statics {
 					class105.field2637 = true;
 				}
 				if (field2885 == 84) {
-					class37.field1001 = false;
+					Sprite.field1001 = false;
 					class105.field2637 = true;
 					if (class78.field1924 == 1) {
 						long var9 = class132.field3232.method9();
@@ -14924,26 +14901,26 @@ public class Statics {
 						method624(var11);
 					}
 					if (class78.field1924 == 3 && class132.field3232.method10() > 0) {
-						class70.field1726.method415(207);
-						class70.field1726.method141(0);
-						int var13 = class70.field1726.field267;
-						class70.field1726.method157(class36.field958);
-						method105(class132.field3232, class70.field1726);
-						class70.field1726.method155(class70.field1726.field267 - var13);
+						Occlude.field1726.method415(207);
+						Occlude.field1726.method141(0);
+						int var13 = Occlude.field1726.field267;
+						Occlude.field1726.method157(class36.field958);
+						method105(class132.field3232, Occlude.field1726);
+						Occlude.field1726.method155(Occlude.field1726.field267 - var13);
 						if (class6.field236 == 2) {
 							class6.field236 = 1;
 							class15.field504 = true;
-							class70.field1726.method415(32);
-							class70.field1726.method141(class75.field1864);
-							class70.field1726.method141(class6.field236);
-							class70.field1726.method141(class115.field2828);
+							Occlude.field1726.method415(32);
+							Occlude.field1726.method141(class75.field1864);
+							Occlude.field1726.method141(class6.field236);
+							Occlude.field1726.method141(class115.field2828);
 						}
 					}
-					if (class78.field1924 == 4 && class85.field2146 < 100) {
+					if (class78.field1924 == 4 && IntHashTable.field2146 < 100) {
 						long var14 = class132.field3232.method9();
 						method383(var14);
 					}
-					if (class78.field1924 == 5 && class85.field2146 > 0) {
+					if (class78.field1924 == 5 && IntHashTable.field2146 > 0) {
 						long var16 = class132.field3232.method9();
 						method544(var16);
 					}
@@ -14963,8 +14940,8 @@ public class Statics {
 						if (class132.field3210.method33()) {
 							var0 = class132.field3210.method3();
 						}
-						class70.field1726.method415(238);
-						class70.field1726.method182(var0);
+						Occlude.field1726.method415(238);
+						Occlude.field1726.method182(var0);
 					}
 					class105.field2637 = true;
 					class114.field2811 = 0;
@@ -14980,8 +14957,8 @@ public class Statics {
 				}
 				if (field2885 == 84) {
 					if (class132.field3210.method10() > 0) {
-						class70.field1726.method415(86);
-						class70.field1726.method157(class132.field3210.method9());
+						Occlude.field1726.method415(86);
+						Occlude.field1726.method157(class132.field3210.method9());
 					}
 					class114.field2811 = 0;
 					class105.field2637 = true;
@@ -15005,15 +14982,15 @@ public class Statics {
 					class105.field2637 = true;
 				}
 				if (field2885 == 84 && class132.field3223.method10() > 0) {
-					if (class37.field1004 == 2) {
+					if (Sprite.field1004 == 2) {
 						if (class132.field3223.method5(class113.field2783)) {
 							method960();
 						}
 						if (class132.field3223.method5(class22.field676)) {
-							class37.field1007 = true;
+							Sprite.field1007 = true;
 						}
 						if (class132.field3223.method5(class119.field2968)) {
-							class37.field1007 = false;
+							Sprite.field1007 = false;
 						}
 						if (class132.field3223.method5(class28.field789)) {
 							for (int var1 = 0; var1 < 4; var1++) {
@@ -15032,12 +15009,12 @@ public class Statics {
 						}
 					}
 					if (class132.field3223.method26(class72.field1765)) {
-						class70.field1726.method415(248);
-						class70.field1726.method141(class132.field3223.method10() - 1);
-						class70.field1726.method181(class132.field3223.method1(2));
+						Occlude.field1726.method415(248);
+						Occlude.field1726.method141(class132.field3223.method10() - 1);
+						Occlude.field1726.method181(class132.field3223.method1(2));
 					} else {
 						byte var4 = 0;
-						class1 var5 = class132.field3223.method30();
+						JagString var5 = class132.field3223.method30();
 						byte var6 = 0;
 						if (var5.method26(class97.field2391)) {
 							var6 = 0;
@@ -15048,14 +15025,14 @@ public class Statics {
 						} else if (var5.method26(class2.field64)) {
 							var6 = 2;
 							class132.field3223 = class132.field3223.method1(class2.field64.method10());
-						} else if (var5.method26(class92.field2296)) {
+						} else if (var5.method26(LinkList.field2296)) {
 							var6 = 3;
-							class132.field3223 = class132.field3223.method1(class92.field2296.method10());
-						} else if (var5.method26(class1.field63)) {
+							class132.field3223 = class132.field3223.method1(LinkList.field2296.method10());
+						} else if (var5.method26(JagString.field63)) {
 							var6 = 4;
-							class132.field3223 = class132.field3223.method1(class1.field63.method10());
-						} else if (var5.method26(class82.field2077)) {
-							class132.field3223 = class132.field3223.method1(class82.field2077.method10());
+							class132.field3223 = class132.field3223.method1(JagString.field63.method10());
+						} else if (var5.method26(Linkable.field2077)) {
+							class132.field3223 = class132.field3223.method1(Linkable.field2077.method10());
 							var6 = 5;
 						} else if (var5.method26(class86.field2157)) {
 							var6 = 6;
@@ -15076,7 +15053,7 @@ public class Statics {
 							class132.field3223 = class132.field3223.method1(class103.field2598.method10());
 							var6 = 11;
 						}
-						class1 var7 = class132.field3223.method30();
+						JagString var7 = class132.field3223.method30();
 						if (var7.method26(class93.field2317)) {
 							var4 = 1;
 							class132.field3223 = class132.field3223.method1(class93.field2317.method10());
@@ -15093,20 +15070,20 @@ public class Statics {
 							var4 = 5;
 							class132.field3223 = class132.field3223.method1(class108.field2707.method10());
 						}
-						class70.field1726.method415(75);
-						class70.field1726.method141(0);
-						int var8 = class70.field1726.field267;
-						class70.field1726.method141(var6);
-						class70.field1726.method141(var4);
-						method105(class132.field3223, class70.field1726);
-						class70.field1726.method155(class70.field1726.field267 - var8);
+						Occlude.field1726.method415(75);
+						Occlude.field1726.method141(0);
+						int var8 = Occlude.field1726.field267;
+						Occlude.field1726.method141(var6);
+						Occlude.field1726.method141(var4);
+						method105(class132.field3223, Occlude.field1726);
+						Occlude.field1726.method155(Occlude.field1726.field267 - var8);
 						if (class75.field1864 == 2) {
 							class15.field504 = true;
 							class75.field1864 = 3;
-							class70.field1726.method415(32);
-							class70.field1726.method141(class75.field1864);
-							class70.field1726.method141(class6.field236);
-							class70.field1726.method141(class115.field2828);
+							Occlude.field1726.method415(32);
+							Occlude.field1726.method141(class75.field1864);
+							Occlude.field1726.method141(class6.field236);
+							Occlude.field1726.method141(class115.field2828);
 						}
 					}
 					class105.field2637 = true;
@@ -15118,17 +15095,17 @@ public class Statics {
 
 	@ObfuscatedName("se.a(Z)V")
 	public static void method932() {
-		class11.field410 = true;
+		Js5.field410 = true;
 		method473();
-		if (class37.field1001) {
+		if (Sprite.field1001) {
 			field2902.method209(class132.field3230, 239, 40, 0);
-			field2902.method209(method956(new class1[] { class132.field3232, class37.field989 }), 239, 60, 128);
+			field2902.method209(method956(new JagString[] { class132.field3232, Sprite.field989 }), 239, 60, 128);
 		} else if (class114.field2811 == 1) {
 			field2902.method209(class102.field2576, 239, 40, 0);
-			field2902.method209(method956(new class1[] { class132.field3210, class37.field989 }), 239, 60, 128);
+			field2902.method209(method956(new JagString[] { class132.field3210, Sprite.field989 }), 239, 60, 128);
 		} else if (class114.field2811 == 2) {
 			field2902.method209(class46.field1203, 239, 40, 0);
-			field2902.method209(method956(new class1[] { class132.field3210, class37.field989 }), 239, 60, 128);
+			field2902.method209(method956(new JagString[] { class132.field3210, Sprite.field989 }), 239, 60, 128);
 		} else if (class114.field2811 == 3) {
 			if (class132.field3210 != class132.field3209) {
 				method537(class132.field3210);
@@ -15151,7 +15128,7 @@ public class Statics {
 			} else if (class93.field2330 == 0) {
 				field2902.method209(class57.field1449, 239, 40, 0);
 			}
-			var15.method209(method956(new class1[] { class132.field3210, class37.field989 }), 239, 90, 0);
+			var15.method209(method956(new JagString[] { class132.field3210, Sprite.field989 }), 239, 90, 0);
 			class111.method916(0, 77, 479, 0);
 		} else if (class64.field1605 != null) {
 			field2902.method209(class64.field1605, 239, 40, 0);
@@ -15168,7 +15145,7 @@ public class Statics {
 			for (int var3 = 0; var3 < 100; var3++) {
 				if (class80.field2034[var3] != null) {
 					int var4 = class132.field3236[var3];
-					class1 var5 = class128.field3130[var3];
+					JagString var5 = class128.field3130[var3];
 					int var6 = class49.field1340 + 70 - var1 * 14;
 					byte var7 = 0;
 					if (var5 != null && var5.method26(class103.field2612)) {
@@ -15196,7 +15173,7 @@ public class Statics {
 								field2614[1].method329(var8, var6 - 12);
 								var8 += 14;
 							}
-							var2.method213(method956(new class1[] { var5, class86.field2165 }), var8, var6, 0);
+							var2.method213(method956(new JagString[] { var5, class86.field2165 }), var8, var6, 0);
 							int var9 = var8 + var2.method208(var5) + 8;
 							var2.method213(class80.field2034[var3], var9, var6, 255);
 						}
@@ -15216,7 +15193,7 @@ public class Statics {
 								field2614[1].method329(var11, var6 - 12);
 								var11 += 14;
 							}
-							var2.method213(method956(new class1[] { var5, class86.field2165 }), var11, var6, 0);
+							var2.method213(method956(new JagString[] { var5, class86.field2165 }), var11, var6, 0);
 							int var12 = var11 + var2.method208(var5) + 8;
 							var2.method213(class80.field2034[var3], var12, var6, 8388608);
 						}
@@ -15224,7 +15201,7 @@ public class Statics {
 					if (var4 == 4 && (class115.field2828 == 0 || class115.field2828 == 1 && method242(var5))) {
 						var1++;
 						if (var6 > 0 && var6 < 110) {
-							var2.method213(method956(new class1[] { var5, class98.field2406, class80.field2034[var3] }), 4, var6, 8388736);
+							var2.method213(method956(new JagString[] { var5, class98.field2406, class80.field2034[var3] }), 4, var6, 8388736);
 						}
 					}
 					if (var4 == 5 && class5.field216 == 0 && class6.field236 < 2) {
@@ -15235,15 +15212,15 @@ public class Statics {
 					}
 					if (var4 == 6 && class5.field216 == 0 && class6.field236 < 2) {
 						if (var6 > 0 && var6 < 110) {
-							var2.method213(method956(new class1[] { class16.field521, class98.field2406, var5, class86.field2165 }), 4, var6, 0);
-							var2.method213(class80.field2034[var3], var2.method208(method956(new class1[] { class16.field521, class98.field2406, var5 })) + 12, var6, 8388608);
+							var2.method213(method956(new JagString[] { class16.field521, class98.field2406, var5, class86.field2165 }), 4, var6, 0);
+							var2.method213(class80.field2034[var3], var2.method208(method956(new JagString[] { class16.field521, class98.field2406, var5 })) + 12, var6, 8388608);
 						}
 						var1++;
 					}
 					if (var4 == 8 && (class115.field2828 == 0 || class115.field2828 == 1 && method242(var5))) {
 						var1++;
 						if (var6 > 0 && var6 < 110) {
-							var2.method213(method956(new class1[] { var5, class98.field2406, class80.field2034[var3] }), 4, var6, 8270336);
+							var2.method213(method956(new JagString[] { var5, class98.field2406, class80.field2034[var3] }), 4, var6, 8270336);
 						}
 					}
 				}
@@ -15254,14 +15231,14 @@ public class Statics {
 				class122.field3052 = 78;
 			}
 			method601(class122.field3052 - class49.field1340 - 77, class122.field3052, 463, 77, 0);
-			class1 var13;
+			JagString var13;
 			if (field2621 == null || field2621.field86 == null) {
 				var13 = class123.field3071;
 			} else {
 				var13 = field2621.field86;
 			}
-			var2.method213(method956(new class1[] { var13, class86.field2165 }), 4, 90, 0);
-			var2.method213(method956(new class1[] { class132.field3223, class37.field989 }), var2.method208(method956(new class1[] { var13, class39.field1065 })) + 6, 90, 255);
+			var2.method213(method956(new JagString[] { var13, class86.field2165 }), 4, 90, 0);
+			var2.method213(method956(new JagString[] { class132.field3223, Sprite.field989 }), var2.method208(method956(new JagString[] { var13, class39.field1065 })) + 6, 90, 255);
 			class111.method916(0, 77, 479, 0);
 		} else {
 			boolean var0 = method478(class98.field2421, 96, 3, 479);
@@ -15314,7 +15291,7 @@ public class Statics {
 				class49.field1326 = class127.field3122;
 			} else {
 				while (class49.field1326 != class127.field3122) {
-					int var2 = class1.field52[class127.field3122];
+					int var2 = JagString.field52[class127.field3122];
 					class127.field3122 = class127.field3122 + 1 & 0x7F;
 					if (var2 < 0) {
 						class59.field1488[~var2] = false;
@@ -15357,7 +15334,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("ac.a(ILa;Lba;)I")
-	public static int method105(class1 arg0, class8 arg1) {
+	public static int method105(JagString arg0, class8 arg1) {
 		int var2 = arg1.field267;
 		arg1.method185(arg0.field26);
 		arg1.field267 += field2357.method1036(0, arg1.field267, arg0.field26, arg0.field38, arg1.field284);
@@ -15365,15 +15342,15 @@ public class Statics {
 	}
 
 	@ObfuscatedName("d.a(Ljava/awt/Component;BLbd;)V")
-	public static void method297(Component arg0, class11 arg1) {
+	public static void method297(Component arg0, Js5 arg1) {
 		if (class44.field1159) {
 			return;
 		}
 		field1366 = method605(class63.field1567, class14.field479, arg1);
-		field2187 = method605(class1.field62, class14.field479, arg1);
+		field2187 = method605(JagString.field62, class14.field479, arg1);
 		field1845 = method605(class93.field2333, class14.field479, arg1);
 		field2770 = method605(class117.field2927, class14.field479, arg1);
-		field2745 = method605(class11.field406, class14.field479, arg1);
+		field2745 = method605(Js5.field406, class14.field479, arg1);
 		field279 = method605(class17.field533, class14.field479, arg1);
 		field1558 = method875(96, 479, arg0);
 		field2187.method329(0, 0);
@@ -15475,14 +15452,14 @@ public class Statics {
 
 	@ObfuscatedName("bd.b(I)V")
 	public static void method225() {
-		class11.field409 = null;
+		Js5.field409 = null;
 		field365 = null;
-		class11.field406 = null;
-		class11.field379 = null;
-		class11.field407 = null;
-		class11.field375 = null;
+		Js5.field406 = null;
+		Js5.field379 = null;
+		Js5.field407 = null;
+		Js5.field375 = null;
 		field412 = null;
-		class11.field408 = null;
+		Js5.field408 = null;
 	}
 
 	@ObfuscatedName("ub.a(Llc;Ljava/awt/Component;I)Lb;")
@@ -15666,26 +15643,26 @@ public class Statics {
 			int var32 = class17.field546[var36];
 			int var33 = class50.field1351[var36];
 			if (arg10 == 0) {
-				class70.field1726.method415(73);
-				class70.field1726.method141(var31 + var31 + 3);
+				Occlude.field1726.method415(73);
+				Occlude.field1726.method141(var31 + var31 + 3);
 			}
 			if (arg10 == 1) {
-				class70.field1726.method415(236);
-				class70.field1726.method141(var31 + var31 + 14 + 3);
+				Occlude.field1726.method415(236);
+				Occlude.field1726.method141(var31 + var31 + 14 + 3);
 			}
 			if (arg10 == 2) {
-				class70.field1726.method415(89);
-				class70.field1726.method141(var31 + var31 + 3);
+				Occlude.field1726.method415(89);
+				Occlude.field1726.method141(var31 + var31 + 3);
 			}
-			class70.field1726.method162(var32 + field1408);
-			class70.field1726.method172(class59.field1488[82] ? 1 : 0);
-			class70.field1726.method162(field806 + var33);
+			Occlude.field1726.method162(var32 + field1408);
+			Occlude.field1726.method172(class59.field1488[82] ? 1 : 0);
+			Occlude.field1726.method162(field806 + var33);
 			class35.field941 = class50.field1351[0];
 			class108.field2720 = class17.field546[0];
 			for (int var34 = 1; var34 < var31; var34++) {
 				var36--;
-				class70.field1726.method165(class50.field1351[var36] - var33);
-				class70.field1726.method172(class17.field546[var36] - var32);
+				Occlude.field1726.method165(class50.field1351[var36] - var33);
+				Occlude.field1726.method172(class17.field546[var36] - var32);
 			}
 			return true;
 		} else if (arg10 == 1) {
@@ -15697,12 +15674,12 @@ public class Statics {
 
 	@ObfuscatedName("u.f(I)V")
 	public static void method983() {
-		class120.field2978 = null;
-		class120.field2992 = null;
-		class120.field2980 = null;
-		class120.field2977 = null;
-		class120.field2995 = null;
-		class120.field2993 = null;
+		Js5Loader.field2978 = null;
+		Js5Loader.field2992 = null;
+		Js5Loader.field2980 = null;
+		Js5Loader.field2977 = null;
+		Js5Loader.field2995 = null;
+		Js5Loader.field2993 = null;
 	}
 
 	@ObfuscatedName("he.a(IIBI)Z")
@@ -15734,8 +15711,8 @@ public class Statics {
 			method576(0, 0, field2621.field1962[0], arg0, var6 + 1, true, var5, 0, field2621.field2009[0], arg2, 2);
 		}
 		class119.field2967 = class112.field2762;
-		class92.field2295 = 2;
-		class16.field523 = class1.field14;
+		LinkList.field2295 = 2;
+		class16.field523 = JagString.field14;
 		class34.field894 = 0;
 		return true;
 	}
@@ -15762,7 +15739,7 @@ public class Statics {
 
 	@ObfuscatedName("qd.b(B)V")
 	public static void method854() {
-		class134.field3282.method267();
+		PixMap.field3282.method267();
 	}
 
 	@ObfuscatedName("cc.a(IZILaa;I)V")
@@ -15770,14 +15747,14 @@ public class Statics {
 		if (field2621 == arg2 || class42.field1104 >= 400) {
 			return;
 		}
-		class1 var4;
+		JagString var4;
 		if (arg2.field65 == 0) {
-			var4 = method956(new class1[] { arg2.field86, method390(field2621.field68, arg2.field68), class48.field1275, class28.field785, method502(arg2.field68), class103.field2601 });
+			var4 = method956(new JagString[] { arg2.field86, method390(field2621.field68, arg2.field68), class48.field1275, class28.field785, method502(arg2.field68), class103.field2601 });
 		} else {
-			var4 = method956(new class1[] { arg2.field86, class48.field1275, class53.field1392, method502(arg2.field65), class103.field2601 });
+			var4 = method956(new JagString[] { arg2.field86, class48.field1275, class53.field1392, method502(arg2.field65), class103.field2601 });
 		}
 		if (class14.field475 == 1) {
-			method398(arg3, client.field584, arg0, arg1, 22, method956(new class1[] { class130.field3177, class59.field1500, var4 }));
+			method398(arg3, client.field584, arg0, arg1, 22, method956(new JagString[] { class130.field3177, class59.field1500, var4 }));
 		} else if (client.field594 != 1) {
 			for (int var5 = 4; var5 >= 0; var5--) {
 				if (client.field599[var5] != null) {
@@ -15812,23 +15789,23 @@ public class Statics {
 					if (var5 == 4) {
 						var6 = var7 + 41;
 					}
-					method398(arg3, client.field599[var5], arg0, arg1, var6, method956(new class1[] { class53.field1393, var4 }));
+					method398(arg3, client.field599[var5], arg0, arg1, var6, method956(new JagString[] { class53.field1393, var4 }));
 				}
 			}
 		} else if ((field2846 & 0x8) == 8) {
-			method398(arg3, class60.field1523, arg0, arg1, 1, method956(new class1[] { class52.field1384, class59.field1500, var4 }));
+			method398(arg3, class60.field1523, arg0, arg1, 1, method956(new JagString[] { class52.field1384, class59.field1500, var4 }));
 		}
 		for (int var8 = 0; var8 < class42.field1104; var8++) {
 			if (class79.field1932[var8] == 7) {
-				class102.field2586[var8] = method956(new class1[] { class123.field3057, class93.field2337, class53.field1393, var4 });
+				class102.field2586[var8] = method956(new JagString[] { class123.field3057, class93.field2337, class53.field1393, var4 });
 				return;
 			}
 		}
 	}
 
 	@ObfuscatedName("u.f(II)La;")
-	public static class1 method984(int arg0) {
-		return method956(new class1[] { method502(arg0 >> 24 & 0xFF), class82.field2112, method502(arg0 >> 16 & 0xFF), class82.field2112, method502(arg0 >> 8 & 0xFF), class82.field2112, method502(arg0 & 0xFF) });
+	public static JagString method984(int arg0) {
+		return method956(new JagString[] { method502(arg0 >> 24 & 0xFF), Linkable.field2112, method502(arg0 >> 16 & 0xFF), Linkable.field2112, method502(arg0 >> 8 & 0xFF), Linkable.field2112, method502(arg0 & 0xFF) });
 	}
 
 	@ObfuscatedName("de.b(I)V")
@@ -15882,7 +15859,7 @@ public class Statics {
 
 	@ObfuscatedName("va.a(BII)V")
 	public static void method1011(int arg0, int arg1) {
-		class92 var2 = class17.field552[field75][arg1][arg0];
+		LinkList var2 = class17.field552[field75][arg1][arg0];
 		if (var2 == null) {
 			field3183.method81(field75, arg1, arg0);
 			return;
@@ -15997,9 +15974,9 @@ public class Statics {
 
 	@ObfuscatedName("la.a(ILnb;)V")
 	public static void method641(class80 arg0) {
-		if (class82.field2063 == arg0.field1981 || arg0.field2015 == -1 || arg0.field1996 != 0 || arg0.field1989 + 1 > method103(arg0.field2015).field1223[arg0.field1978]) {
+		if (Linkable.field2063 == arg0.field1981 || arg0.field2015 == -1 || arg0.field1996 != 0 || arg0.field1989 + 1 > method103(arg0.field2015).field1223[arg0.field1978]) {
 			int var1 = arg0.field1981 - arg0.field1986;
-			int var2 = class82.field2063 - arg0.field1986;
+			int var2 = Linkable.field2063 - arg0.field1986;
 			int var3 = arg0.field1999 * 128 + arg0.field1970 * 64;
 			int var4 = arg0.field1970 * 64 + arg0.field1955 * 128;
 			int var5 = arg0.field1973 * 128 + arg0.field1970 * 64;
@@ -16049,7 +16026,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("wa.a(Lbd;La;BLa;)Ljd;")
-	public static class58 method1038(class11 arg0, class1 arg1, class1 arg2) {
+	public static class58 method1038(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.method228(arg1);
 		int var4 = arg0.method224(var3, arg2);
 		return method846(var4, arg0, var3);
@@ -16058,54 +16035,54 @@ public class Statics {
 	@ObfuscatedName("m.a(IIII)V")
 	public static void method673(int arg0, int arg1, int arg2) {
 		if (arg1 == 1) {
-			class70.field1726.method415(111);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(111);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 2) {
-			class70.field1726.method415(9);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(9);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 3) {
-			class70.field1726.method415(193);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(193);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 4) {
-			class70.field1726.method415(53);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(53);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 5) {
-			class70.field1726.method415(94);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(94);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 6) {
-			class70.field1726.method415(213);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(213);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 7) {
-			class70.field1726.method415(46);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(46);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 8) {
-			class70.field1726.method415(130);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(130);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 9) {
-			class70.field1726.method415(157);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(157);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 		if (arg1 == 10) {
-			class70.field1726.method415(84);
-			class70.field1726.method182(arg2);
-			class70.field1726.method150(arg0);
+			Occlude.field1726.method415(84);
+			Occlude.field1726.method182(arg2);
+			Occlude.field1726.method150(arg0);
 		}
 	}
 
@@ -16359,7 +16336,7 @@ public class Statics {
 	@ObfuscatedName("ta.c(ZI)V")
 	public static void method950(boolean arg0) {
 		for (int var1 = 0; var1 < class49.field1341; var1++) {
-			class130 var2 = class120.field2992[class22.field677[var1]];
+			class130 var2 = Js5Loader.field2992[class22.field677[var1]];
 			int var3 = (class22.field677[var1] << 14) + 536870912;
 			if (var2 != null && var2.method42() && arg0 == var2.field3182.field1107 && var2.field3182.method451()) {
 				int var4 = var2.field1972 >> 7;
@@ -16381,7 +16358,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("s.a(ILbd;Lbd;)V")
-	public static void method903(class11 arg0, class11 arg1) {
+	public static void method903(Js5 arg0, Js5 arg1) {
 		field1901 = arg0;
 		field999 = arg1;
 	}
@@ -16551,9 +16528,9 @@ public class Statics {
 			arg0.method211(class123.field3062, 180, 70, 16776960, true);
 			int var10 = var9 + 15;
 			int var11 = var10 + 10;
-			arg0.method206(method956(new class1[] { class121.field3002, class123.field3071 }), 90, 95, 16777215, true);
+			arg0.method206(method956(new JagString[] { class121.field3002, class123.field3071 }), 90, 95, 16777215, true);
 			int var13 = var11 + 15;
-			arg0.method206(method956(new class1[] { class38.field1037, class123.field3055.method12() }), 92, 110, 16777215, true);
+			arg0.method206(method956(new JagString[] { class38.field1037, class123.field3055.method12() }), 92, 110, 16777215, true);
 			int var15 = var13 + 15;
 		}
 		if (class103.field2599 == 10) {
@@ -16565,7 +16542,7 @@ public class Statics {
 				field2919.method329(27, 100);
 				arg0.method195(class105.field2639, 27, 100, 144, 40, 16777215, true, 1, 1, 0);
 				field2919.method329(187, 100);
-				arg0.method195(class85.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
+				arg0.method195(IntHashTable.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
 			} else if (class53.field1395 == 2) {
 				byte var3 = 40;
 				arg0.method211(class123.field3060, 180, 40, 16776960, true);
@@ -16575,14 +16552,14 @@ public class Statics {
 				arg0.method211(class123.field3062, 180, 70, 16776960, true);
 				int var16 = var14 + 15;
 				int var17 = var16 + 10;
-				arg0.method206(method956(new class1[] { class121.field3002, class123.field3071, class82.field2063 % 40 < 20 & class82.field2084 == 0 ? class46.field1204 : class123.field3067 }), 90, 95, 16777215, true);
+				arg0.method206(method956(new JagString[] { class121.field3002, class123.field3071, Linkable.field2063 % 40 < 20 & Linkable.field2084 == 0 ? class46.field1204 : class123.field3067 }), 90, 95, 16777215, true);
 				int var19 = var17 + 15;
-				arg0.method206(method956(new class1[] { class38.field1037, class123.field3055.method12(), class82.field2063 % 40 < 20 & class82.field2084 == 1 ? class46.field1204 : class123.field3067 }), 92, 110, 16777215, true);
+				arg0.method206(method956(new JagString[] { class38.field1037, class123.field3055.method12(), Linkable.field2063 % 40 < 20 & Linkable.field2084 == 1 ? class46.field1204 : class123.field3067 }), 92, 110, 16777215, true);
 				field2919.method329(27, 130);
 				int var21 = var19 + 15;
 				arg0.method211(class35.field926, 100, 155, 16777215, true);
 				field2919.method329(187, 130);
-				arg0.method211(class134.field3302, 260, 155, 16777215, true);
+				arg0.method211(PixMap.field3302, 260, 155, 16777215, true);
 			} else if (class53.field1395 == 3) {
 				arg0.method211(class133.field3265, 180, 40, 16776960, true);
 				byte var4 = 65;
@@ -16594,7 +16571,7 @@ public class Statics {
 				int var22 = var20 + 15;
 				arg0.method211(class97.field2400, 180, 110, 16777215, true);
 				field2919.method329(107, 130);
-				arg0.method211(class134.field3302, 180, 155, 16777215, true);
+				arg0.method211(PixMap.field3302, 180, 155, 16777215, true);
 				int var24 = var22 + 15;
 			}
 		}
@@ -16779,7 +16756,7 @@ public class Statics {
 			class102.field2568 = class15.field496;
 			class122.field3050 = class80.field2017;
 			class112.field2762 = class108.field2711;
-			class1.field14 = class97.field2396;
+			JagString.field14 = class97.field2396;
 			class49.field1344 = class34.field919;
 			class80.field2017 = 0;
 		}
@@ -16805,7 +16782,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("id.a(Lbd;ILa;La;)Lbc;")
-	public static class10 method528(class11 arg0, class1 arg1, class1 arg2) {
+	public static class10 method528(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.method228(arg2);
 		int var4 = arg0.method224(var3, arg1);
 		return method294(var4, arg0, var3);
@@ -16891,22 +16868,22 @@ public class Statics {
 					class73.field1788[var3] = class73.field1788[var3 + 1];
 					class117.field2929[var3] = class117.field2929[var3 + 1];
 				}
-				class70.field1726.method415(255);
-				class70.field1726.method157(arg0);
+				Occlude.field1726.method415(255);
+				Occlude.field1726.method157(arg0);
 				return;
 			}
 		}
 	}
 
 	@ObfuscatedName("m.a(La;La;La;B)V")
-	public static void method678(class1 arg0, class1 arg1, class1 arg2) {
+	public static void method678(JagString arg0, JagString arg1, JagString arg2) {
 		class123.field3062 = arg0;
 		class123.field3077 = arg2;
 		class123.field3060 = arg1;
 	}
 
 	@ObfuscatedName("se.a(ILbd;ZLbd;)V")
-	public static void method933(class11 arg0, boolean arg1, class11 arg2) {
+	public static void method933(Js5 arg0, boolean arg1, Js5 arg2) {
 		field698 = arg2;
 		class75.field1861 = arg1;
 		field51 = arg0;
@@ -16932,7 +16909,7 @@ public class Statics {
 		field1408 = (arg1 - 6) * 8;
 		int var8 = field1408 - var5;
 		for (int var9 = 0; var9 < 32768; var9++) {
-			class130 var10 = class120.field2992[var9];
+			class130 var10 = Js5Loader.field2992[var9];
 			if (var10 != null) {
 				for (int var11 = 0; var11 < 10; var11++) {
 					var10.field1962[var11] -= var7;
@@ -16984,7 +16961,7 @@ public class Statics {
 				}
 			}
 		}
-		for (class22 var26 = (class22) class92.field2284.method802(); var26 != null; var26 = (class22) class92.field2284.method809()) {
+		for (class22 var26 = (class22) LinkList.field2284.method802(); var26 != null; var26 = (class22) LinkList.field2284.method809()) {
 			var26.field699 -= var8;
 			var26.field700 -= var7;
 			if (var26.field700 < 0 || var26.field699 < 0 || var26.field700 >= 104 || var26.field699 >= 104) {
@@ -17003,7 +16980,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("m.a(ZLbd;IBLa;ILa;I)V")
-	public static synchronized void method679(class11 arg0, class1 arg1, class1 arg2, int arg3) {
+	public static synchronized void method679(Js5 arg0, JagString arg1, JagString arg2, int arg3) {
 		if (method521()) {
 			int var4 = arg0.method228(arg1);
 			int var5 = arg0.method224(var4, arg2);
@@ -17013,7 +16990,7 @@ public class Statics {
 
 	@ObfuscatedName("ba.a(BI)Lpe;")
 	public static class95 method177(int arg0) {
-		class95 var1 = (class95) class134.field3282.method263((long) arg0);
+		class95 var1 = (class95) PixMap.field3282.method263((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -17022,7 +16999,7 @@ public class Statics {
 		if (var2 != null) {
 			var3.method820(new class8(var2));
 		}
-		class134.field3282.method262((long) arg0, var3);
+		PixMap.field3282.method262((long) arg0, var3);
 		return var3;
 	}
 
@@ -17108,7 +17085,7 @@ public class Statics {
 	public static void method859() {
 		class113.field2788.method267();
 		class93.field2322.method267();
-		class37.field981.method267();
+		Sprite.field981.method267();
 		class99.field2428.method267();
 	}
 
@@ -17201,7 +17178,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("qb.a(ILbd;ZI)Ljd;")
-	public static class58 method846(int arg0, class11 arg1, int arg2) {
+	public static class58 method846(int arg0, Js5 arg1, int arg2) {
 		return method885(arg0, arg2, arg1) ? method458() : null;
 	}
 
@@ -17263,7 +17240,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("d.a(ILad;ILab;IIIII)V")
-	public static void method301(int arg0, class5 arg1, int arg2, class3 arg3, int arg4, int arg5, int arg6, int arg7) {
+	public static void method301(int arg0, class5 arg1, int arg2, World arg3, int arg4, int arg5, int arg6, int arg7) {
 		if (class93.field2332 && (class34.field898[0][arg2][arg6] & 0x2) == 0) {
 			if ((class34.field898[arg7][arg2][arg6] & 0x10) != 0) {
 				return;
@@ -17372,7 +17349,7 @@ public class Statics {
 			} else {
 				var26 = new class54(arg5, 0, arg0, var9, var10, var8, var11, var15.field1289, true);
 			}
-			arg3.method50(arg7, arg2, arg6, var14, var26, null, class70.field1740[arg0], 0, var12, var13);
+			arg3.method50(arg7, arg2, arg6, var14, var26, null, Occlude.field1740[arg0], 0, var12, var13);
 			if (arg0 == 0) {
 				if (var15.field1324) {
 					field1003[arg7][arg2][arg6] = 50;
@@ -17445,7 +17422,7 @@ public class Statics {
 				var29 = new class54(arg5, 2, arg0 + 4, var9, var10, var8, var11, var15.field1289, true);
 				var30 = new class54(arg5, 2, var28, var9, var10, var8, var11, var15.field1289, true);
 			}
-			arg3.method50(arg7, arg2, arg6, var14, var29, var30, class70.field1740[arg0], class70.field1740[var28], var12, var13);
+			arg3.method50(arg7, arg2, arg6, var14, var29, var30, Occlude.field1740[arg0], Occlude.field1740[var28], var12, var13);
 			if (var15.field1304) {
 				if (arg0 == 0) {
 					field412[arg7][arg2][arg6] |= 0x249;
@@ -17530,7 +17507,7 @@ public class Statics {
 				} else {
 					var37 = new class54(arg5, 4, 0, var9, var10, var8, var11, var15.field1289, true);
 				}
-				arg3.method65(arg7, arg2, arg6, var14, var37, class70.field1740[arg0], arg0 * 512, 0, 0, var12, var13);
+				arg3.method65(arg7, arg2, arg6, var14, var37, Occlude.field1740[arg0], arg0 * 512, 0, 0, var12, var13);
 			} else if (arg4 == 5) {
 				int var38 = arg3.method78(arg7, arg2, arg6);
 				int var39 = 16;
@@ -17543,7 +17520,7 @@ public class Statics {
 				} else {
 					var40 = new class54(arg5, 4, 0, var9, var10, var8, var11, var15.field1289, true);
 				}
-				arg3.method65(arg7, arg2, arg6, var14, var40, class70.field1740[arg0], arg0 * 512, class63.field1595[arg0] * var39, class4.field181[arg0] * var39, var12, var13);
+				arg3.method65(arg7, arg2, arg6, var14, var40, Occlude.field1740[arg0], arg0 * 512, class63.field1595[arg0] * var39, JavaSafePixMap.field181[arg0] * var39, var12, var13);
 			} else if (arg4 == 6) {
 				class128 var41;
 				if (var15.field1289 == -1 && var15.field1317 == null) {
@@ -17594,15 +17571,15 @@ public class Statics {
 	@ObfuscatedName("k.d(B)V")
 	public static void method578() {
 		if (class2.field96 == 2) {
-			method423(class42.field1114 * 2, (class6.field226 - field1408 << 7) + class75.field1857, (-field806 + class134.field3304 << 7) - -class102.field2572);
-			if (class39.field1072 > -1 && class82.field2063 % 20 < 10) {
+			method423(class42.field1114 * 2, (class6.field226 - field1408 << 7) + class75.field1857, (-field806 + PixMap.field3304 << 7) - -class102.field2572);
+			if (class39.field1072 > -1 && Linkable.field2063 % 20 < 10) {
 				field1886[0].method551(class39.field1072 - 12, class89.field2188 + -28);
 			}
 		}
 	}
 
 	@ObfuscatedName("m.a(ZIIIILbd;I)V")
-	public static synchronized void method681(int arg0, int arg1, int arg2, class11 arg3) {
+	public static synchronized void method681(int arg0, int arg1, int arg2, Js5 arg3) {
 		if (!method521()) {
 			return;
 		}
@@ -17628,13 +17605,13 @@ public class Statics {
 	@ObfuscatedName("bd.a(Z)V")
 	public static void method233() {
 		class46.field1196.method267();
-		class85.field2136.method267();
+		IntHashTable.field2136.method267();
 	}
 
 	@ObfuscatedName("ia.a(IZIIIIIIII)V")
 	public static void method514(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		class22 var9 = null;
-		for (class22 var10 = (class22) class92.field2284.method802(); var10 != null; var10 = (class22) class92.field2284.method809()) {
+		for (class22 var10 = (class22) LinkList.field2284.method802(); var10 != null; var10 = (class22) LinkList.field2284.method809()) {
 			if (var10.field679 == arg4 && var10.field700 == arg1 && var10.field699 == arg5 && var10.field688 == arg6) {
 				var9 = var10;
 				break;
@@ -17647,7 +17624,7 @@ public class Statics {
 			var9.field679 = arg4;
 			var9.field699 = arg5;
 			method733(var9);
-			class92.field2284.method804(var9);
+			LinkList.field2284.method804(var9);
 		}
 		var9.field678 = arg0;
 		var9.field692 = arg3;
@@ -17662,12 +17639,12 @@ public class Statics {
 	}
 
 	@ObfuscatedName("r.a(ILbd;)V")
-	public static void method868(class11 arg0) {
+	public static void method868(Js5 arg0) {
 		field1555 = arg0;
 	}
 
 	@ObfuscatedName("a.a(ILbd;III)[B")
-	public static byte[] method25(int arg0, class11 arg1, int arg2, int arg3) {
+	public static byte[] method25(int arg0, Js5 arg1, int arg2, int arg3) {
 		long var4 = ((long) arg3 << 32) + (long) (arg2 * 37 + arg0 & 0xFFFF) + (long) (arg2 << 16);
 		if (field30 != null) {
 			class46 var6 = (class46) field30.method263(var4);
@@ -17757,7 +17734,7 @@ public class Statics {
 
 	@ObfuscatedName("gb.b(B)V")
 	public static void method429() {
-		for (class22 var0 = (class22) class92.field2284.method802(); var0 != null; var0 = (class22) class92.field2284.method809()) {
+		for (class22 var0 = (class22) LinkList.field2284.method802(); var0 != null; var0 = (class22) LinkList.field2284.method809()) {
 			if (var0.field692 == -1) {
 				var0.field694 = 0;
 				method733(var0);
@@ -17768,7 +17745,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("client.a(Lu;BI)V")
-	public static void method280(class120 arg0, int arg1) {
+	public static void method280(Js5Loader arg0, int arg1) {
 		if (field2415 == null) {
 			method495(true, null, 255, 255, (byte) 0, 0);
 			class50.field1350[arg1] = arg0;
@@ -17857,13 +17834,13 @@ public class Statics {
 	}
 
 	@ObfuscatedName("qd.b(IB)La;")
-	public static class1 method862(int arg0) {
+	public static JagString method862(int arg0) {
 		if (arg0 < 100000) {
 			return method502(arg0);
 		} else if (arg0 < 10000000) {
-			return method956(new class1[] { method502(arg0 / 1000), class95.field2354 });
+			return method956(new JagString[] { method502(arg0 / 1000), class95.field2354 });
 		} else {
-			return method956(new class1[] { method502(arg0 / 1000000), class45.field1184 });
+			return method956(new JagString[] { method502(arg0 / 1000000), class45.field1184 });
 		}
 	}
 
@@ -17875,22 +17852,22 @@ public class Statics {
 	@ObfuscatedName("a.e(B)V")
 	public static void method34() {
 		field30 = null;
-		class1.field59 = null;
+		JagString.field59 = null;
 		field61 = null;
-		class1.field23 = null;
+		JagString.field23 = null;
 		field51 = null;
-		class1.field48 = null;
-		class1.field63 = null;
+		JagString.field48 = null;
+		JagString.field63 = null;
 		field11 = null;
-		class1.field45 = null;
-		class1.field62 = null;
-		class1.field37 = null;
-		class1.field49 = null;
-		class1.field52 = null;
+		JagString.field45 = null;
+		JagString.field62 = null;
+		JagString.field37 = null;
+		JagString.field49 = null;
+		JagString.field52 = null;
 	}
 
 	@ObfuscatedName("kc.a(La;La;Lbd;B)Le;")
-	public static class25 method605(class1 arg0, class1 arg1, class11 arg2) {
+	public static class25 method605(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.method228(arg0);
 		int var4 = arg2.method224(var3, arg1);
 		return method609(arg2, var4, var3);
@@ -17992,10 +17969,10 @@ public class Statics {
 
 	@ObfuscatedName("ob.a(Z)V")
 	public static void method757() {
-		if (class32.field857 != 0) {
+		if (Square.field857 != 0) {
 			return;
 		}
-		class102.field2586[0] = class134.field3302;
+		class102.field2586[0] = PixMap.field3302;
 		class79.field1932[0] = 1005;
 		class42.field1104 = 1;
 		if (class42.field1143 != -1) {
@@ -18060,15 +18037,15 @@ public class Statics {
 			for (int var1 = 0; var1 < class42.field1104 - 1; var1++) {
 				if (class79.field1932[var1] < 1000 && class79.field1932[var1 + 1] > 1000) {
 					var0 = false;
-					class1 var2 = class102.field2586[var1];
+					JagString var2 = class102.field2586[var1];
 					class102.field2586[var1] = class102.field2586[var1 + 1];
 					class102.field2586[var1 + 1] = var2;
 					int var3 = class79.field1932[var1];
 					class79.field1932[var1] = class79.field1932[var1 + 1];
 					class79.field1932[var1 + 1] = var3;
-					int var4 = class37.field994[var1];
-					class37.field994[var1] = class37.field994[var1 + 1];
-					class37.field994[var1 + 1] = var4;
+					int var4 = Sprite.field994[var1];
+					Sprite.field994[var1] = Sprite.field994[var1 + 1];
+					Sprite.field994[var1 + 1] = var4;
 					int var5 = class117.field2925[var1];
 					class117.field2925[var1] = class117.field2925[var1 + 1];
 					class117.field2925[var1 + 1] = var5;
@@ -18133,7 +18110,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("kc.a(Lbd;BII)Le;")
-	public static class25 method609(class11 arg0, int arg1, int arg2) {
+	public static class25 method609(Js5 arg0, int arg1, int arg2) {
 		return method885(arg1, arg2, arg0) ? method467() : null;
 	}
 
@@ -18147,10 +18124,10 @@ public class Statics {
 		if (class78.field1919 || field1450 == null) {
 			return;
 		}
-		class70.field1726.method415(13);
+		Occlude.field1726.method415(13);
 		try {
-			field1450.method1016(class70.field1726.field267, class70.field1726.field284);
-			class70.field1726.field267 = 0;
+			field1450.method1016(Occlude.field1726.field267, Occlude.field1726.field284);
+			Occlude.field1726.field267 = 0;
 		} catch (IOException var1) {
 			class78.field1919 = true;
 		}
@@ -18179,7 +18156,7 @@ public class Statics {
 		if (class19.field656 == 2) {
 			class39.field1055 = true;
 		}
-		if (class32.field857 == 2) {
+		if (Square.field857 == 2) {
 			class39.field1055 = true;
 		}
 		if (class39.field1055) {
@@ -18230,7 +18207,7 @@ public class Statics {
 		if (class19.field656 == 3) {
 			class105.field2637 = true;
 		}
-		if (class32.field857 == 3) {
+		if (Square.field857 == 3) {
 			class105.field2637 = true;
 		}
 		if (class64.field1605 != null) {
@@ -18250,12 +18227,12 @@ public class Statics {
 		if (class95.field2364) {
 			if (class103.field2607 != -1 && class9.field330 == class103.field2607) {
 				class103.field2607 = -1;
-				class70.field1726.method415(44);
-				class70.field1726.method141(class9.field330);
+				Occlude.field1726.method415(44);
+				Occlude.field1726.method141(class9.field330);
 			}
 			class95.field2364 = false;
 			class22.field687 = true;
-			method246(class9.field330, class97.field2397, class66.field1648 == -1, class82.field2063 % 20 >= 10 ? class103.field2607 : -1);
+			method246(class9.field330, class97.field2397, class66.field1648 == -1, Linkable.field2063 % 20 >= 10 ? class103.field2607 : -1);
 		}
 		if (class15.field504) {
 			class22.field687 = true;
@@ -18267,7 +18244,7 @@ public class Statics {
 	}
 
 	@ObfuscatedName("client.a(Lbd;Z)V")
-	public static void method289(class11 arg0) {
+	public static void method289(Js5 arg0) {
 		field3167 = arg0;
 		field2915 = field3167.method235(16);
 	}
@@ -18275,57 +18252,57 @@ public class Statics {
 	@ObfuscatedName("kc.b(II)V")
 	public static void method612(int arg0) {
 		if (arg0 == -3) {
-			method678(class82.field2093, class105.field2634, class32.field865);
+			method678(Linkable.field2093, class105.field2634, Square.field865);
 		} else if (arg0 == -2) {
-			method678(class82.field2071, class82.field2106, class46.field1219);
+			method678(Linkable.field2071, Linkable.field2106, class46.field1219);
 		} else if (arg0 == -1) {
-			method678(class82.field2086, class72.field1778, class32.field861);
+			method678(Linkable.field2086, class72.field1778, Square.field861);
 		} else if (arg0 == 3) {
-			method678(class82.field2078, class82.field2111, class39.field1076);
+			method678(Linkable.field2078, Linkable.field2111, class39.field1076);
 		} else if (arg0 == 4) {
-			method678(class82.field2113, class129.field3172, class15.field497);
+			method678(Linkable.field2113, class129.field3172, class15.field497);
 		} else if (arg0 == 5) {
-			method678(class82.field2103, class45.field1174, class2.field94);
+			method678(Linkable.field2103, class45.field1174, class2.field94);
 		} else if (arg0 == 6) {
-			method678(class82.field2067, class46.field1217, class131.field3205);
+			method678(Linkable.field2067, class46.field1217, class131.field3205);
 		} else if (arg0 == 7) {
-			method678(class82.field2090, class112.field2763, class123.field3072);
+			method678(Linkable.field2090, class112.field2763, class123.field3072);
 		} else if (arg0 == 8) {
-			method678(class82.field2074, class85.field2135, class4.field183);
+			method678(Linkable.field2074, IntHashTable.field2135, JavaSafePixMap.field183);
 		} else if (arg0 == 9) {
-			method678(class82.field2079, class80.field2012, class59.field1482);
+			method678(Linkable.field2079, class80.field2012, class59.field1482);
 		} else if (arg0 == 10) {
-			method678(class82.field2089, class85.field2140, class95.field2382);
+			method678(Linkable.field2089, IntHashTable.field2140, class95.field2382);
 		} else if (arg0 == 11) {
-			method678(class82.field2080, class85.field2139, class57.field1463);
+			method678(Linkable.field2080, IntHashTable.field2139, class57.field1463);
 		} else if (arg0 == 12) {
-			method678(class82.field2068, class127.field3127, class35.field932);
+			method678(Linkable.field2068, class127.field3127, class35.field932);
 		} else if (arg0 == 13) {
-			method678(class82.field2109, class59.field1498, class32.field850);
+			method678(Linkable.field2109, class59.field1498, Square.field850);
 		} else if (arg0 == 14) {
-			method678(class82.field2066, class17.field539, class42.field1111);
+			method678(Linkable.field2066, class17.field539, class42.field1111);
 		} else if (arg0 == 16) {
-			method678(class82.field2061, class8.field303, class38.field1043);
+			method678(Linkable.field2061, class8.field303, class38.field1043);
 		} else if (arg0 == 17) {
-			method678(class82.field2096, class102.field2580, class121.field3001);
+			method678(Linkable.field2096, class102.field2580, class121.field3001);
 		} else if (arg0 == 18) {
-			method678(class82.field2100, client.field602, class74.field1807);
+			method678(Linkable.field2100, client.field602, class74.field1807);
 		} else if (arg0 == 20) {
-			method678(class82.field2081, class108.field2714, class32.field855);
+			method678(Linkable.field2081, class108.field2714, Square.field855);
 		} else if (arg0 == 22) {
-			method678(class82.field2092, class34.field900, class11.field408);
+			method678(Linkable.field2092, class34.field900, Js5.field408);
 		} else if (arg0 == 23) {
-			method678(class82.field2094, class79.field1930, class42.field1120);
+			method678(Linkable.field2094, class79.field1930, class42.field1120);
 		} else if (arg0 == 24) {
-			method678(class82.field2091, class118.field2948, class9.field315);
+			method678(Linkable.field2091, class118.field2948, class9.field315);
 		} else if (arg0 == 25) {
-			method678(class82.field2110, class14.field452, class32.field858);
+			method678(Linkable.field2110, class14.field452, Square.field858);
 		} else if (arg0 == 26) {
-			method678(class82.field2097, class38.field1024, class31.field836);
+			method678(Linkable.field2097, class38.field1024, class31.field836);
 		} else if (arg0 == 27) {
-			method678(class82.field2082, class82.field2062, class127.field3128);
+			method678(Linkable.field2082, Linkable.field2062, class127.field3128);
 		} else {
-			method678(class82.field2083, class42.field1142, class32.field862);
+			method678(Linkable.field2083, class42.field1142, Square.field862);
 		}
 		method399(10);
 	}
@@ -18340,13 +18317,13 @@ public class Statics {
 		method469();
 		class15.field498 = -1;
 		class6.field224 = false;
-		class1.field36 = -1;
+		JagString.field36 = -1;
 		class112.field2761 = -1;
 		class114.field2813 = 0;
 		class75.field1855 = 0;
 		class2.field96 = 0;
-		class70.field1726.field267 = 0;
-		class70.field1750 = 0;
+		Occlude.field1726.field267 = 0;
+		Occlude.field1750 = 0;
 		class99.field2434 = -1;
 		class15.field488.field267 = 0;
 		class42.field1104 = 0;
@@ -18374,7 +18351,7 @@ public class Statics {
 			class45.field1176[var1] = null;
 		}
 		for (int var2 = 0; var2 < 32768; var2++) {
-			class120.field2992[var2] = null;
+			Js5Loader.field2992[var2] = null;
 		}
 		field2621 = class80.field2030[2047] = new class2();
 		class86.field2160.method806();
@@ -18386,7 +18363,7 @@ public class Statics {
 				}
 			}
 		}
-		class92.field2284 = new class92();
+		LinkList.field2284 = new LinkList();
 		class59.field1492 = 0;
 		class23.field701 = 0;
 		method895(class98.field2421);
@@ -18403,15 +18380,15 @@ public class Statics {
 		class66.field1648 = -1;
 		method895(class113.field2800);
 		class114.field2811 = 0;
-		class37.field1001 = false;
+		Sprite.field1001 = false;
 		class6.field224 = false;
 		class113.field2800 = -1;
 		class64.field1605 = null;
-		class120.field2998 = -1;
+		Js5Loader.field2998 = -1;
 		class103.field2607 = -1;
 		class57.field1470 = 0;
 		class9.field330 = 3;
-		class92.field2302.method640(null, false, new int[5], -1);
+		LinkList.field2302.method640(null, false, new int[5], -1);
 		for (int var6 = 0; var6 < 5; var6++) {
 			client.field599[var6] = null;
 			class24.field735[var6] = false;
@@ -18421,7 +18398,7 @@ public class Statics {
 
 	@ObfuscatedName("kc.a(BZZ)I")
 	public static int method614() {
-		return class31.field845 + class134.field3285;
+		return class31.field845 + PixMap.field3285;
 	}
 
 	@ObfuscatedName("ad.c(I)V")

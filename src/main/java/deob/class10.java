@@ -9,61 +9,61 @@ public final class class10 extends class111 {
 	public final int field360;
 
 	@ObfuscatedName("bc.Db")
-	public static class1[] field337 = new class1[100];
+	public static JagString[] field337 = new JagString[100];
 
 	@ObfuscatedName("bc.Fb")
-	public static class1 field339 = Statics.method931("dbl");
+	public static JagString field339 = JagString.wrap("dbl");
 
 	@ObfuscatedName("bc.Ab")
-	public static class1 field334 = Statics.method931("or1");
+	public static JagString field334 = JagString.wrap("or1");
 
 	@ObfuscatedName("bc.Cb")
-	public static class1 field336 = Statics.method931("mag");
+	public static JagString field336 = JagString.wrap("mag");
 
 	@ObfuscatedName("bc.Jb")
-	public static class1 field343 = Statics.method931("red");
+	public static JagString field343 = JagString.wrap("red");
 
 	@ObfuscatedName("bc.zb")
-	public static class1 field333 = Statics.method931("cya");
+	public static JagString field333 = JagString.wrap("cya");
 
 	@ObfuscatedName("bc.Lb")
-	public static class1 field345 = Statics.method931("or2");
+	public static JagString field345 = JagString.wrap("or2");
 
 	@ObfuscatedName("bc.Gb")
-	public static class1 field340 = Statics.method931("gr1");
+	public static JagString field340 = JagString.wrap("gr1");
 
 	@ObfuscatedName("bc.Mb")
-	public static class1 field346 = Statics.method931("bla");
+	public static JagString field346 = JagString.wrap("bla");
 
 	@ObfuscatedName("bc.Bb")
-	public static class1 field335 = Statics.method931("blu");
+	public static JagString field335 = JagString.wrap("blu");
 
 	@ObfuscatedName("bc.Sb")
-	public static class1 field352 = Statics.method931("lre");
+	public static JagString field352 = JagString.wrap("lre");
 
 	@ObfuscatedName("bc.Tb")
-	public static class1 field353 = Statics.method931("dre");
+	public static JagString field353 = JagString.wrap("dre");
 
 	@ObfuscatedName("bc.Hb")
-	public static class1 field341 = Statics.method931("gr2");
+	public static JagString field341 = JagString.wrap("gr2");
 
 	@ObfuscatedName("bc.Ob")
-	public static class1 field348 = Statics.method931("str");
+	public static JagString field348 = JagString.wrap("str");
 
 	@ObfuscatedName("bc.Kb")
-	public static class1 field344 = Statics.method931("gre");
+	public static JagString field344 = JagString.wrap("gre");
 
 	@ObfuscatedName("bc.Pb")
-	public static class1 field349 = Statics.method931("or3");
+	public static JagString field349 = JagString.wrap("or3");
 
 	@ObfuscatedName("bc.Xb")
-	public static class1 field357 = Statics.method931("yel");
+	public static JagString field357 = JagString.wrap("yel");
 
 	@ObfuscatedName("bc.Wb")
-	public static class1 field356 = Statics.method931("gr3");
+	public static JagString field356 = JagString.wrap("gr3");
 
 	@ObfuscatedName("bc.Eb")
-	public static class1 field338 = Statics.method931("whi");
+	public static JagString field338 = JagString.wrap("whi");
 
 	@ObfuscatedName("bc.Ub")
 	public byte[][] field354 = new byte[256][];
@@ -90,7 +90,7 @@ public final class class10 extends class111 {
 	public final int field359;
 
 	@ObfuscatedName("bc.a(La;)I")
-	public int method193(class1 arg0) {
+	public int method193(JagString arg0) {
 		if (arg0.method5(field343)) {
 			return 16711680;
 		} else if (arg0.method5(field344)) {
@@ -173,16 +173,16 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.a(La;IIIIIZIII)V")
-	public void method195(class1 arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6, int arg7, int arg8, int arg9) {
+	public void method195(JagString arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6, int arg7, int arg8, int arg9) {
 		if (arg0 == null) {
 			return;
 		}
 		int var11 = 0;
 		int var12 = 0;
-		class1 var13 = Statics.method566();
+		JagString var13 = Statics.method566();
 		int var14 = -1;
 		int var15 = 0;
-		class1 var16 = null;
+		JagString var16 = null;
 		if (arg9 == 0) {
 			arg9 = this.field360;
 		}
@@ -262,7 +262,7 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.a(La;IIII)V")
-	public void method196(class1 arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void method196(JagString arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg0 == null) {
 			return;
 		}
@@ -296,7 +296,7 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.b(La;IIII)V")
-	public void method198(class1 arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void method198(JagString arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg0 == null) {
 			return;
 		}
@@ -335,12 +335,12 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.a(La;IIIZ)V")
-	public void method200(class1 arg0, int arg1, int arg2, int arg3, boolean arg4) {
+	public void method200(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		this.method206(arg0, arg1 - this.method204(arg0), arg2, arg3, arg4);
 	}
 
 	@ObfuscatedName("bc.a(La;IIIII)V")
-	public void method201(class1 arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void method201(JagString arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg0 == null) {
 			return;
 		}
@@ -396,8 +396,8 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.a(La;IIIZI)V")
-	public void method203(class1 arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5) {
-		class1 var7 = arg0.method40();
+	public void method203(JagString arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5) {
+		JagString var7 = arg0.method40();
 		int var8 = 0;
 		for (int var9 = 0; var9 < var7.method10(); var9++) {
 			if (var7.method6(var9) == 32) {
@@ -444,7 +444,7 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.b(La;)I")
-	public int method204(class1 arg0) {
+	public int method204(JagString arg0) {
 		if (arg0 == null) {
 			return 0;
 		}
@@ -496,7 +496,7 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.b(La;IIIZ)V")
-	public void method206(class1 arg0, int arg1, int arg2, int arg3, boolean arg4) {
+	public void method206(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		this.field358 = false;
 		int var6 = arg1;
 		if (arg0 == null) {
@@ -527,7 +527,7 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.b(La;IIIZI)V")
-	public void method207(class1 arg0, int arg1, int arg2, int arg3) {
+	public void method207(JagString arg0, int arg1, int arg2, int arg3) {
 		if (arg0 == null) {
 			return;
 		}
@@ -556,7 +556,7 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.c(La;)I")
-	public int method208(class1 arg0) {
+	public int method208(JagString arg0) {
 		if (arg0 == null) {
 			return 0;
 		}
@@ -568,17 +568,17 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.a(La;III)V")
-	public void method209(class1 arg0, int arg1, int arg2, int arg3) {
+	public void method209(JagString arg0, int arg1, int arg2, int arg3) {
 		this.method213(arg0, arg1 - this.method208(arg0) / 2, arg2, arg3);
 	}
 
 	@ObfuscatedName("bc.b(La;III)V")
-	public void method210(class1 arg0, int arg1, int arg2) {
+	public void method210(JagString arg0, int arg1, int arg2) {
 		this.method213(arg0, 507 - this.method208(arg0), arg1, arg2);
 	}
 
 	@ObfuscatedName("bc.c(La;IIIZ)V")
-	public void method211(class1 arg0, int arg1, int arg2, int arg3, boolean arg4) {
+	public void method211(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		this.method206(arg0, arg1 - this.method204(arg0) / 2, arg2, arg3, arg4);
 	}
 
@@ -619,7 +619,7 @@ public final class class10 extends class111 {
 	}
 
 	@ObfuscatedName("bc.c(La;III)V")
-	public void method213(class1 arg0, int arg1, int arg2, int arg3) {
+	public void method213(JagString arg0, int arg1, int arg2, int arg3) {
 		if (arg0 == null) {
 			return;
 		}

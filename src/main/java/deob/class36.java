@@ -15,7 +15,7 @@ public final class class36 extends class8 {
 	public static long field958 = 0L;
 
 	@ObfuscatedName("fe.Ec")
-	public static class1 field962 = Statics.method931("Aus");
+	public static JagString field962 = JagString.wrap("Aus");
 
 	@ObfuscatedName("fe.xc")
 	public static class77[] field955 = new class77[50];
@@ -24,10 +24,10 @@ public final class class36 extends class8 {
 	public static int field965 = 0;
 
 	@ObfuscatedName("fe.Nc")
-	public static class1 field971 = Statics.method931("Please wait)3)3)3");
+	public static JagString field971 = JagString.wrap("Please wait)3)3)3");
 
 	@ObfuscatedName("fe.zc")
-	public static class1 field957 = field971;
+	public static JagString field957 = field971;
 
 	@ObfuscatedName("fe.Gc")
 	public static BigInteger field964 = new BigInteger("58778699976184461502525193738213253649000149147835990136706041084440742975821");
@@ -36,10 +36,10 @@ public final class class36 extends class8 {
 	public static boolean field972 = false;
 
 	@ObfuscatedName("fe.Tc")
-	public static class1 field977 = Statics.method931("da dieser Computer gegen unsere ");
+	public static JagString field977 = JagString.wrap("da dieser Computer gegen unsere ");
 
 	@ObfuscatedName("fe.Sc")
-	public static class1 field976 = Statics.method931("oder benutzen Sie eine andere Welt)3");
+	public static JagString field976 = JagString.wrap("oder benutzen Sie eine andere Welt)3");
 
 	@ObfuscatedName("fe.Pc")
 	public static int field973 = 0;

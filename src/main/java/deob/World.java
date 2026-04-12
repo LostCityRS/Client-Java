@@ -1,10 +1,10 @@
 package deob;
 
 @ObfuscatedName("ab")
-public final class class3 {
+public final class World {
 
 	@ObfuscatedName("ab.a")
-	public final class32[][][] field102 = new class32[4][104][104];
+	public final Square[][][] field102 = new Square[4][104][104];
 
 	@ObfuscatedName("ab.ab")
 	public int field153 = 0;
@@ -58,7 +58,7 @@ public final class class3 {
 	public int field119 = 0;
 
 	@ObfuscatedName("ab.s")
-	public final class37[] field120 = new class37[5000];
+	public final Sprite[] field120 = new Sprite[5000];
 
 	@ObfuscatedName("ab.t")
 	public static int[] field121 = new int[] { -45, 45, 45, -45 };
@@ -85,16 +85,16 @@ public final class class3 {
 	public static int[] field139 = new int[] { -53, -53, 53, 53 };
 
 	@ObfuscatedName("ab.N")
-	public static class70[][] field140 = new class70[field117][500];
+	public static Occlude[][] field140 = new Occlude[field117][500];
 
 	@ObfuscatedName("ab.H")
-	public static class70[] field134 = new class70[500];
+	public static Occlude[] field134 = new Occlude[500];
 
 	@ObfuscatedName("ab.G")
-	public static class37[] field133 = new class37[100];
+	public static Sprite[] field133 = new Sprite[100];
 
 	@ObfuscatedName("ab.I")
-	public static class92 field135 = new class92();
+	public static LinkList field135 = new LinkList();
 
 	@ObfuscatedName("ab.R")
 	public static int[] field144 = new int[] { 160, 192, 80, 96, 0, 144, 80, 48, 160 };
@@ -128,19 +128,19 @@ public final class class3 {
 
 	@ObfuscatedName("ab.a(III)I")
 	public int method47(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null || var4.field887 == null ? 0 : var4.field887.field2678;
 	}
 
 	@ObfuscatedName("ab.a(II)V")
 	public void method48(int arg0, int arg1) {
-		class32 var3 = this.field102[0][arg0][arg1];
+		Square var3 = this.field102[0][arg0][arg1];
 		for (int var4 = 0; var4 < 3; var4++) {
-			class32 var5 = this.field102[var4][arg0][arg1] = this.field102[var4 + 1][arg0][arg1];
+			Square var5 = this.field102[var4][arg0][arg1] = this.field102[var4 + 1][arg0][arg1];
 			if (var5 != null) {
 				var5.field874--;
 				for (int var6 = 0; var6 < var5.field888; var6++) {
-					class37 var7 = var5.field873[var6];
+					Sprite var7 = var5.field873[var6];
 					if ((var7.field980 >> 29 & 0x3) == 2 && var7.field984 == arg0 && var7.field992 == arg1) {
 						var7.field979--;
 					}
@@ -148,7 +148,7 @@ public final class class3 {
 			}
 		}
 		if (this.field102[0][arg0][arg1] == null) {
-			this.field102[0][arg0][arg1] = new class32(0, arg0, arg1);
+			this.field102[0][arg0][arg1] = new Square(0, arg0, arg1);
 		}
 		this.field102[0][arg0][arg1].field866 = var3;
 		this.field102[3][arg0][arg1] = null;
@@ -156,7 +156,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.b(III)I")
 	public int method49(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null || var4.field883 == null ? 0 : var4.field883.field1361;
 	}
 
@@ -177,7 +177,7 @@ public final class class3 {
 		var11.field542 = arg7;
 		for (int var12 = arg0; var12 >= 0; var12--) {
 			if (this.field102[var12][arg1][arg2] == null) {
-				this.field102[var12][arg1][arg2] = new class32(var12, arg1, arg2);
+				this.field102[var12][arg1][arg2] = new Square(var12, arg1, arg2);
 			}
 		}
 		this.field102[arg0][arg1][arg2].field880 = var11;
@@ -250,7 +250,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.a([IIIIII)V")
 	public void method52(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
-		class32 var6 = this.field102[arg2][arg3][arg4];
+		Square var6 = this.field102[arg2][arg3][arg4];
 		if (var6 == null) {
 			return;
 		}
@@ -349,10 +349,10 @@ public final class class3 {
 		this.method79();
 		field136 = 0;
 		for (int var7 = this.field130; var7 < this.field142; var7++) {
-			class32[][] var8 = this.field102[var7];
+			Square[][] var8 = this.field102[var7];
 			for (int var9 = Statics.field122; var9 < Statics.field111; var9++) {
 				for (int var10 = Statics.field114; var10 < Statics.field138; var10++) {
-					class32 var11 = var8[var9][var10];
+					Square var11 = var8[var9][var10];
 					if (var11 != null) {
 						if (var11.field871 <= arg5 && (Statics.field160[var9 + 25 - Statics.field106][var10 + 25 - Statics.field127] || this.field132[var7][var9][var10] - arg1 >= 2000)) {
 							var11.field879 = true;
@@ -373,7 +373,7 @@ public final class class3 {
 			}
 		}
 		for (int var12 = this.field130; var12 < this.field142; var12++) {
-			class32[][] var13 = this.field102[var12];
+			Square[][] var13 = this.field102[var12];
 			for (int var14 = -25; var14 <= 0; var14++) {
 				int var15 = Statics.field106 + var14;
 				int var16 = Statics.field106 - var14;
@@ -383,13 +383,13 @@ public final class class3 {
 						int var19 = Statics.field127 - var17;
 						if (var15 >= Statics.field122) {
 							if (var18 >= Statics.field114) {
-								class32 var20 = var13[var15][var18];
+								Square var20 = var13[var15][var18];
 								if (var20 != null && var20.field879) {
 									this.method62(var20, true);
 								}
 							}
 							if (var19 < Statics.field138) {
-								class32 var21 = var13[var15][var19];
+								Square var21 = var13[var15][var19];
 								if (var21 != null && var21.field879) {
 									this.method62(var21, true);
 								}
@@ -397,13 +397,13 @@ public final class class3 {
 						}
 						if (var16 < Statics.field111) {
 							if (var18 >= Statics.field114) {
-								class32 var22 = var13[var16][var18];
+								Square var22 = var13[var16][var18];
 								if (var22 != null && var22.field879) {
 									this.method62(var22, true);
 								}
 							}
 							if (var19 < Statics.field138) {
-								class32 var23 = var13[var16][var19];
+								Square var23 = var13[var16][var19];
 								if (var23 != null && var23.field879) {
 									this.method62(var23, true);
 								}
@@ -418,7 +418,7 @@ public final class class3 {
 			}
 		}
 		for (int var24 = this.field130; var24 < this.field142; var24++) {
-			class32[][] var25 = this.field102[var24];
+			Square[][] var25 = this.field102[var24];
 			for (int var26 = -25; var26 <= 0; var26++) {
 				int var27 = Statics.field106 + var26;
 				int var28 = Statics.field106 - var26;
@@ -428,13 +428,13 @@ public final class class3 {
 						int var31 = Statics.field127 - var29;
 						if (var27 >= Statics.field122) {
 							if (var30 >= Statics.field114) {
-								class32 var32 = var25[var27][var30];
+								Square var32 = var25[var27][var30];
 								if (var32 != null && var32.field879) {
 									this.method62(var32, false);
 								}
 							}
 							if (var31 < Statics.field138) {
-								class32 var33 = var25[var27][var31];
+								Square var33 = var25[var27][var31];
 								if (var33 != null && var33.field879) {
 									this.method62(var33, false);
 								}
@@ -442,13 +442,13 @@ public final class class3 {
 						}
 						if (var28 < Statics.field111) {
 							if (var30 >= Statics.field114) {
-								class32 var34 = var25[var28][var30];
+								Square var34 = var25[var28][var30];
 								if (var34 != null && var34.field879) {
 									this.method62(var34, false);
 								}
 							}
 							if (var31 < Statics.field138) {
-								class32 var35 = var25[var28][var31];
+								Square var35 = var25[var28][var31];
 								if (var35 != null && var35.field879) {
 									this.method62(var35, false);
 								}
@@ -495,7 +495,7 @@ public final class class3 {
 			class105 var21 = new class105(arg10, arg11, arg12, arg13, -1, arg18, false);
 			for (int var22 = arg0; var22 >= 0; var22--) {
 				if (this.field102[var22][arg1][arg2] == null) {
-					this.field102[var22][arg1][arg2] = new class32(var22, arg1, arg2);
+					this.field102[var22][arg1][arg2] = new Square(var22, arg1, arg2);
 				}
 			}
 			this.field102[arg0][arg1][arg2].field878 = var21;
@@ -503,7 +503,7 @@ public final class class3 {
 			class105 var23 = new class105(arg14, arg15, arg16, arg17, arg5, arg19, arg6 == arg7 && arg6 == arg8 && arg6 == arg9);
 			for (int var24 = arg0; var24 >= 0; var24--) {
 				if (this.field102[var24][arg1][arg2] == null) {
-					this.field102[var24][arg1][arg2] = new class32(var24, arg1, arg2);
+					this.field102[var24][arg1][arg2] = new Square(var24, arg1, arg2);
 				}
 			}
 			this.field102[arg0][arg1][arg2].field878 = var23;
@@ -511,7 +511,7 @@ public final class class3 {
 			class18 var25 = new class18(arg3, arg4, arg5, arg1, arg2, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19);
 			for (int var26 = arg0; var26 >= 0; var26--) {
 				if (this.field102[var26][arg1][arg2] == null) {
-					this.field102[var26][arg1][arg2] = new class32(var26, arg1, arg2);
+					this.field102[var26][arg1][arg2] = new Square(var26, arg1, arg2);
 				}
 			}
 			this.field102[arg0][arg1][arg2].field876 = var25;
@@ -520,7 +520,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.c(III)Lrd;")
 	public class106 method56(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null ? null : var4.field887;
 	}
 
@@ -675,7 +675,7 @@ public final class class3 {
 	@ObfuscatedName("ab.e(III)Z")
 	public boolean method59(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < field123; var4++) {
-			class70 var5 = field134[var4];
+			Occlude var5 = field134[var4];
 			if (var5.field1728 == 1) {
 				int var6 = var5.field1734 - arg0;
 				if (var6 > 0) {
@@ -739,7 +739,7 @@ public final class class3 {
 	@ObfuscatedName("ab.b()V")
 	public void method60() {
 		for (int var1 = 0; var1 < this.field119; var1++) {
-			class37 var2 = this.field120[var1];
+			Sprite var2 = this.field120[var1];
 			this.method61(var2);
 			this.field120[var1] = null;
 		}
@@ -747,10 +747,10 @@ public final class class3 {
 	}
 
 	@ObfuscatedName("ab.a(Lg;)V")
-	public void method61(class37 arg0) {
+	public void method61(Sprite arg0) {
 		for (int var2 = arg0.field984; var2 <= arg0.field995; var2++) {
 			for (int var3 = arg0.field992; var3 <= arg0.field988; var3++) {
-				class32 var4 = this.field102[arg0.field979][var2][var3];
+				Square var4 = this.field102[arg0.field979][var2][var3];
 				if (var4 != null) {
 					for (int var5 = 0; var5 < var4.field888; var5++) {
 						if (var4.field873[var5] == arg0) {
@@ -773,29 +773,29 @@ public final class class3 {
 	}
 
 	@ObfuscatedName("ab.a(Lfa;Z)V")
-	public void method62(class32 arg0, boolean arg1) {
+	public void method62(Square arg0, boolean arg1) {
 		field135.method804(arg0);
 		while (true) {
-			class32 var3;
+			Square var3;
 			int var4;
 			int var5;
 			int var6;
 			int var7;
-			class32[][] var8;
-			class32 var70;
+			Square[][] var8;
+			Square var70;
 			do {
-				class32 var69;
+				Square var69;
 				do {
-					class32 var68;
+					Square var68;
 					do {
-						class32 var67;
+						Square var67;
 						do {
 							do {
 								do {
 									while (true) {
 										while (true) {
 											do {
-												var3 = (class32) field135.method813();
+												var3 = (Square) field135.method813();
 												if (var3 == null) {
 													return;
 												}
@@ -810,31 +810,31 @@ public final class class3 {
 											}
 											if (arg1) {
 												if (var6 > 0) {
-													class32 var9 = this.field102[var6 - 1][var4][var5];
+													Square var9 = this.field102[var6 - 1][var4][var5];
 													if (var9 != null && var9.field885) {
 														continue;
 													}
 												}
 												if (var4 <= Statics.field106 && var4 > Statics.field122) {
-													class32 var10 = var8[var4 - 1][var5];
+													Square var10 = var8[var4 - 1][var5];
 													if (var10 != null && var10.field885 && (var10.field879 || (var3.field881 & 0x1) == 0)) {
 														continue;
 													}
 												}
 												if (var4 >= Statics.field106 && var4 < Statics.field111 - 1) {
-													class32 var11 = var8[var4 + 1][var5];
+													Square var11 = var8[var4 + 1][var5];
 													if (var11 != null && var11.field885 && (var11.field879 || (var3.field881 & 0x4) == 0)) {
 														continue;
 													}
 												}
 												if (var5 <= Statics.field127 && var5 > Statics.field114) {
-													class32 var12 = var8[var4][var5 - 1];
+													Square var12 = var8[var4][var5 - 1];
 													if (var12 != null && var12.field885 && (var12.field879 || (var3.field881 & 0x8) == 0)) {
 														continue;
 													}
 												}
 												if (var5 >= Statics.field127 && var5 < Statics.field138 - 1) {
-													class32 var13 = var8[var4][var5 + 1];
+													Square var13 = var8[var4][var5 + 1];
 													if (var13 != null && var13.field885 && (var13.field879 || (var3.field881 & 0x2) == 0)) {
 														continue;
 													}
@@ -844,7 +844,7 @@ public final class class3 {
 											}
 											var3.field879 = false;
 											if (var3.field866 != null) {
-												class32 var14 = var3.field866;
+												Square var14 = var3.field866;
 												if (var14.field878 == null) {
 													if (var14.field876 != null && !this.method57(0, var4, var5)) {
 														this.method94(var14.field876, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var4, var5);
@@ -857,7 +857,7 @@ public final class class3 {
 													var15.field536.method767(0, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var15.field529 - Statics.field103, var15.field537 - Statics.field116, var15.field550 - Statics.field125, var15.field531);
 												}
 												for (int var16 = 0; var16 < var14.field888; var16++) {
-													class37 var17 = var14.field873[var16];
+													Sprite var17 = var14.field873[var16];
 													if (var17 != null) {
 														var17.field985.method767(var17.field991, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var17.field987 - Statics.field103, var17.field990 - Statics.field116, var17.field983 - Statics.field125, var17.field980);
 													}
@@ -971,25 +971,25 @@ public final class class3 {
 											int var35 = var3.field881;
 											if (var35 != 0) {
 												if (var4 < Statics.field106 && (var35 & 0x4) != 0) {
-													class32 var36 = var8[var4 + 1][var5];
+													Square var36 = var8[var4 + 1][var5];
 													if (var36 != null && var36.field885) {
 														field135.method804(var36);
 													}
 												}
 												if (var5 < Statics.field127 && (var35 & 0x2) != 0) {
-													class32 var37 = var8[var4][var5 + 1];
+													Square var37 = var8[var4][var5 + 1];
 													if (var37 != null && var37.field885) {
 														field135.method804(var37);
 													}
 												}
 												if (var4 > Statics.field106 && (var35 & 0x1) != 0) {
-													class32 var38 = var8[var4 - 1][var5];
+													Square var38 = var8[var4 - 1][var5];
 													if (var38 != null && var38.field885) {
 														field135.method804(var38);
 													}
 												}
 												if (var5 > Statics.field127 && (var35 & 0x8) != 0) {
-													class32 var39 = var8[var4][var5 - 1];
+													Square var39 = var8[var4][var5 - 1];
 													if (var39 != null && var39.field885) {
 														field135.method804(var39);
 													}
@@ -1021,11 +1021,11 @@ public final class class3 {
 											var3.field870 = false;
 											int var44 = 0;
 											label559: for (int var45 = 0; var45 < var43; var45++) {
-												class37 var46 = var3.field873[var45];
+												Sprite var46 = var3.field873[var45];
 												if (Statics.field113 != var46.field997) {
 													for (int var47 = var46.field984; var47 <= var46.field995; var47++) {
 														for (int var48 = var46.field992; var48 <= var46.field988; var48++) {
-															class32 var49 = var8[var47][var48];
+															Square var49 = var8[var47][var48];
 															if (var49.field879) {
 																var3.field870 = true;
 																continue label559;
@@ -1070,7 +1070,7 @@ public final class class3 {
 												int var55 = -50;
 												int var56 = -1;
 												for (int var57 = 0; var57 < var44; var57++) {
-													class37 var58 = field133[var57];
+													Sprite var58 = field133[var57];
 													if (Statics.field113 != var58.field997) {
 														if (var58.field1002 > var55) {
 															var55 = var58.field1002;
@@ -1089,14 +1089,14 @@ public final class class3 {
 												if (var56 == -1) {
 													break;
 												}
-												class37 var63 = field133[var56];
+												Sprite var63 = field133[var56];
 												var63.field997 = Statics.field113;
 												if (!this.method75(var7, var63.field984, var63.field995, var63.field992, var63.field988, var63.field985.field3135)) {
 													var63.field985.method767(var63.field991, Statics.field109, Statics.field137, Statics.field131, Statics.field126, var63.field987 - Statics.field103, var63.field990 - Statics.field116, var63.field983 - Statics.field125, var63.field980);
 												}
 												for (int var64 = var63.field984; var64 <= var63.field995; var64++) {
 													for (int var65 = var63.field992; var65 <= var63.field988; var65++) {
-														class32 var66 = var8[var64][var65];
+														Square var66 = var8[var64][var65];
 														if (var66.field875 != 0) {
 															field135.method804(var66);
 														} else if ((var4 != var64 || var5 != var65) && var66.field885) {
@@ -1194,31 +1194,31 @@ public final class class3 {
 				}
 			}
 			if (var6 < this.field142 - 1) {
-				class32 var84 = this.field102[var6 + 1][var4][var5];
+				Square var84 = this.field102[var6 + 1][var4][var5];
 				if (var84 != null && var84.field885) {
 					field135.method804(var84);
 				}
 			}
 			if (var4 < Statics.field106) {
-				class32 var85 = var8[var4 + 1][var5];
+				Square var85 = var8[var4 + 1][var5];
 				if (var85 != null && var85.field885) {
 					field135.method804(var85);
 				}
 			}
 			if (var5 < Statics.field127) {
-				class32 var86 = var8[var4][var5 + 1];
+				Square var86 = var8[var4][var5 + 1];
 				if (var86 != null && var86.field885) {
 					field135.method804(var86);
 				}
 			}
 			if (var4 > Statics.field106) {
-				class32 var87 = var8[var4 - 1][var5];
+				Square var87 = var8[var4 - 1][var5];
 				if (var87 != null && var87.field885) {
 					field135.method804(var87);
 				}
 			}
 			if (var5 > Statics.field127) {
-				class32 var88 = var8[var4][var5 - 1];
+				Square var88 = var8[var4][var5 - 1];
 				if (var88 != null && var88.field885) {
 					field135.method804(var88);
 				}
@@ -1227,13 +1227,13 @@ public final class class3 {
 	}
 
 	@ObfuscatedName("ab.f(III)Lg;")
-	public class37 method63(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+	public Sprite method63(int arg0, int arg1, int arg2) {
+		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 == null) {
 			return null;
 		}
 		for (int var5 = 0; var5 < var4.field888; var5++) {
-			class37 var6 = var4.field873[var5];
+			Sprite var6 = var4.field873[var5];
 			if ((var6.field980 >> 29 & 0x3) == 2 && var6.field984 == arg1 && var6.field992 == arg2) {
 				return var6;
 			}
@@ -1268,7 +1268,7 @@ public final class class3 {
 		var12.field2668 = arg6;
 		for (int var13 = arg0; var13 >= 0; var13--) {
 			if (this.field102[var13][arg1][arg2] == null) {
-				this.field102[var13][arg1][arg2] = new class32(var13, arg1, arg2);
+				this.field102[var13][arg1][arg2] = new Square(var13, arg1, arg2);
 			}
 		}
 		this.field102[arg0][arg1][arg2].field887 = var12;
@@ -1276,12 +1276,12 @@ public final class class3 {
 
 	@ObfuscatedName("ab.g(III)I")
 	public int method66(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 == null) {
 			return 0;
 		}
 		for (int var5 = 0; var5 < var4.field888; var5++) {
-			class37 var6 = var4.field873[var5];
+			Sprite var6 = var4.field873[var5];
 			if ((var6.field980 >> 29 & 0x3) == 2 && var6.field984 == arg1 && var6.field992 == arg2) {
 				return var6.field980;
 			}
@@ -1320,7 +1320,7 @@ public final class class3 {
 		}
 	}
 
-	public class3(int arg0, int arg1, int arg2, int[][][] arg3) {
+	public World(int arg0, int arg1, int arg2, int[][][] arg3) {
 		this.field132 = arg3;
 		this.method54();
 	}
@@ -1349,7 +1349,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.c(IIII)V")
 	public void method71(int arg0, int arg1, int arg2, int arg3) {
-		class32 var5 = this.field102[arg0][arg1][arg2];
+		Square var5 = this.field102[arg0][arg1][arg2];
 		if (var5 == null) {
 			return;
 		}
@@ -1364,7 +1364,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.a(IIIIIIII)V")
 	public static void method72(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
-		class70 var8 = new class70();
+		Occlude var8 = new Occlude();
 		var8.field1736 = arg2 / 128;
 		var8.field1741 = arg3 / 128;
 		var8.field1724 = arg4 / 128;
@@ -1382,7 +1382,7 @@ public final class class3 {
 	@ObfuscatedName("ab.a(Lpa;III)V")
 	public void method73(class91 arg0, int arg1, int arg2, int arg3) {
 		if (arg2 < this.field124) {
-			class32 var5 = this.field102[arg1][arg2 + 1][arg3];
+			Square var5 = this.field102[arg1][arg2 + 1][arg3];
 			if (var5 != null && var5.field883 != null && var5.field883.field1373 instanceof class91) {
 				class91 var6 = (class91) var5.field883.field1373;
 				if (var6.field2215 != null) {
@@ -1391,7 +1391,7 @@ public final class class3 {
 			}
 		}
 		if (arg3 < this.field124) {
-			class32 var7 = this.field102[arg1][arg2][arg3 + 1];
+			Square var7 = this.field102[arg1][arg2][arg3 + 1];
 			if (var7 != null && var7.field883 != null && var7.field883.field1373 instanceof class91) {
 				class91 var8 = (class91) var7.field883.field1373;
 				if (var8.field2215 != null) {
@@ -1400,7 +1400,7 @@ public final class class3 {
 			}
 		}
 		if (arg2 < this.field124 && arg3 < this.field143) {
-			class32 var9 = this.field102[arg1][arg2 + 1][arg3 + 1];
+			Square var9 = this.field102[arg1][arg2 + 1][arg3 + 1];
 			if (var9 != null && var9.field883 != null && var9.field883.field1373 instanceof class91) {
 				class91 var10 = (class91) var9.field883.field1373;
 				if (var10.field2215 != null) {
@@ -1411,7 +1411,7 @@ public final class class3 {
 		if (arg2 >= this.field124 || arg3 <= 0) {
 			return;
 		}
-		class32 var11 = this.field102[arg1][arg2 + 1][arg3 - 1];
+		Square var11 = this.field102[arg1][arg2 + 1][arg3 - 1];
 		if (var11 != null && var11.field883 != null && var11.field883.field1373 instanceof class91) {
 			class91 var12 = (class91) var11.field883.field1373;
 			if (var12.field2215 != null) {
@@ -1425,7 +1425,7 @@ public final class class3 {
 		for (int var1 = 0; var1 < this.field142; var1++) {
 			for (int var2 = 0; var2 < this.field124; var2++) {
 				for (int var3 = 0; var3 < this.field143; var3++) {
-					class32 var4 = this.field102[var1][var2][var3];
+					Square var4 = this.field102[var1][var2][var3];
 					if (var4 != null) {
 						class17 var5 = var4.field880;
 						if (var5 != null && var5.field536 instanceof class91) {
@@ -1444,7 +1444,7 @@ public final class class3 {
 							}
 						}
 						for (int var8 = 0; var8 < var4.field888; var8++) {
-							class37 var9 = var4.field873[var8];
+							Sprite var9 = var4.field873[var8];
 							if (var9 != null && var9.field985 instanceof class91) {
 								class91 var10 = (class91) var9.field985;
 								if (var10.field2215 != null) {
@@ -1569,17 +1569,17 @@ public final class class3 {
 
 	@ObfuscatedName("ab.j(III)I")
 	public int method78(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null || var4.field880 == null ? 0 : var4.field880.field531;
 	}
 
 	@ObfuscatedName("ab.d()V")
 	public void method79() {
 		int var1 = field128[field112];
-		class70[] var2 = field140[field112];
+		Occlude[] var2 = field140[field112];
 		field123 = 0;
 		for (int var3 = 0; var3 < var1; var3++) {
-			class70 var4 = var2[var3];
+			Occlude var4 = var2[var3];
 			if (var4.field1735 == 1) {
 				int var5 = var4.field1736 + 25 - Statics.field106;
 				if (var5 >= 0 && var5 <= 50) {
@@ -1697,7 +1697,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.k(III)V")
 	public void method80(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.field880 = null;
 		}
@@ -1705,7 +1705,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.l(III)V")
 	public void method81(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.field868 = null;
 		}
@@ -1713,13 +1713,13 @@ public final class class3 {
 
 	@ObfuscatedName("ab.m(III)Lcd;")
 	public class17 method82(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null ? null : var4.field880;
 	}
 
 	@ObfuscatedName("ab.n(III)V")
 	public void method83(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.field887 = null;
 		}
@@ -1835,7 +1835,7 @@ public final class class3 {
 					if (var13 >= 0 && var13 < this.field124) {
 						for (int var14 = var10; var14 <= var11; var14++) {
 							if (var14 >= 0 && var14 < this.field143 && (!var7 || var13 >= var9 || var14 >= var11 || var14 < arg3 && arg2 != var13)) {
-								class32 var15 = this.field102[var12][var13][var14];
+								Square var15 = this.field102[var12][var13][var14];
 								if (var15 != null) {
 									int var16 = (this.field132[var12][var13 + 1][var14] + this.field132[var12][var13][var14] + this.field132[var12][var13][var14 + 1] + this.field132[var12][var13 + 1][var14 + 1]) / 4 - (this.field132[arg1][arg2 + 1][arg3] + this.field132[arg1][arg2][arg3] + this.field132[arg1][arg2][arg3 + 1] + this.field132[arg1][arg2 + 1][arg3 + 1]) / 4;
 									class17 var17 = var15.field880;
@@ -1854,7 +1854,7 @@ public final class class3 {
 										}
 									}
 									for (int var20 = 0; var20 < var15.field888; var20++) {
-										class37 var21 = var15.field873[var20];
+										Sprite var21 = var15.field873[var20];
 										if (var21 != null && var21.field985 instanceof class91) {
 											class91 var22 = (class91) var21.field985;
 											if (var22.field2215 != null) {
@@ -1877,7 +1877,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.d(IIII)V")
 	public void method86(int arg0, int arg1, int arg2, int arg3) {
-		class32 var5 = this.field102[arg0][arg1][arg2];
+		Square var5 = this.field102[arg0][arg1][arg2];
 		if (var5 != null) {
 			this.field102[arg0][arg1][arg2].field871 = arg3;
 		}
@@ -1885,7 +1885,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.o(III)V")
 	public void method87(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.field883 = null;
 		}
@@ -1904,14 +1904,14 @@ public final class class3 {
 		var8.field1361 = arg5;
 		var8.field1360 = arg6;
 		if (this.field102[arg0][arg1][arg2] == null) {
-			this.field102[arg0][arg1][arg2] = new class32(arg0, arg1, arg2);
+			this.field102[arg0][arg1][arg2] = new Square(arg0, arg1, arg2);
 		}
 		this.field102[arg0][arg1][arg2].field883 = var8;
 	}
 
 	@ObfuscatedName("ab.p(III)Lid;")
 	public class52 method89(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null || var4.field883 == null ? null : var4.field883;
 	}
 
@@ -1947,12 +1947,12 @@ public final class class3 {
 
 	@ObfuscatedName("ab.q(III)V")
 	public void method91(int arg0, int arg1, int arg2) {
-		class32 var4 = this.field102[arg0][arg1][arg2];
+		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 == null) {
 			return;
 		}
 		for (int var5 = 0; var5 < var4.field888; var5++) {
-			class37 var6 = var4.field873[var5];
+			Sprite var6 = var4.field873[var5];
 			if ((var6.field980 >> 29 & 0x3) == 2 && var6.field984 == arg1 && var6.field992 == arg2) {
 				this.method61(var6);
 				return;
@@ -1966,7 +1966,7 @@ public final class class3 {
 		for (int var2 = 0; var2 < this.field124; var2++) {
 			for (int var3 = 0; var3 < this.field143; var3++) {
 				if (this.field102[arg0][var2][var3] == null) {
-					this.field102[arg0][var2][var3] = new class32(arg0, var2, var3);
+					this.field102[arg0][var2][var3] = new Square(arg0, var2, var3);
 				}
 			}
 		}
@@ -2053,7 +2053,7 @@ public final class class3 {
 		var9.field2786 = arg6;
 		var9.field2787 = arg7;
 		int var10 = 0;
-		class32 var11 = this.field102[arg0][arg1][arg2];
+		Square var11 = this.field102[arg0][arg1][arg2];
 		if (var11 != null) {
 			for (int var12 = 0; var12 < var11.field888; var12++) {
 				if ((var11.field873[var12].field982 & 0x100) == 256 && var11.field873[var12].field985 instanceof class91) {
@@ -2067,7 +2067,7 @@ public final class class3 {
 		}
 		var9.field2795 = var10;
 		if (this.field102[arg0][arg1][arg2] == null) {
-			this.field102[arg0][arg1][arg2] = new class32(arg0, arg1, arg2);
+			this.field102[arg0][arg1][arg2] = new Square(arg0, arg1, arg2);
 		}
 		this.field102[arg0][arg1][arg2].field868 = var9;
 	}
@@ -2079,13 +2079,13 @@ public final class class3 {
 				if (var14 < 0 || var15 < 0 || var14 >= this.field124 || var15 >= this.field143) {
 					return false;
 				}
-				class32 var16 = this.field102[arg0][var14][var15];
+				Square var16 = this.field102[arg0][var14][var15];
 				if (var16 != null && var16.field888 >= 5) {
 					return false;
 				}
 			}
 		}
-		class37 var17 = new class37();
+		Sprite var17 = new Sprite();
 		var17.field980 = arg11;
 		var17.field982 = arg12;
 		var17.field979 = arg0;
@@ -2115,10 +2115,10 @@ public final class class3 {
 				}
 				for (int var21 = arg0; var21 >= 0; var21--) {
 					if (this.field102[var21][var18][var19] == null) {
-						this.field102[var21][var18][var19] = new class32(var21, var18, var19);
+						this.field102[var21][var18][var19] = new Square(var21, var18, var19);
 					}
 				}
-				class32 var22 = this.field102[arg0][var18][var19];
+				Square var22 = this.field102[arg0][var18][var19];
 				var22.field873[var22.field888] = var17;
 				var22.field882[var22.field888] = var20;
 				var22.field881 |= var20;
@@ -2133,7 +2133,7 @@ public final class class3 {
 
 	@ObfuscatedName("ab.e(IIII)I")
 	public int method97(int arg0, int arg1, int arg2, int arg3) {
-		class32 var5 = this.field102[arg0][arg1][arg2];
+		Square var5 = this.field102[arg0][arg1][arg2];
 		if (var5 == null) {
 			return -1;
 		} else if (var5.field880 != null && var5.field880.field531 == arg3) {

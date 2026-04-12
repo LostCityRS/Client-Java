@@ -10,10 +10,10 @@ import java.net.Socket;
 public final class class129 implements Runnable {
 
 	@ObfuscatedName("vc.a")
-	public static class1 field3146 = Statics.method931("Your account has been disabled)3");
+	public static JagString field3146 = JagString.wrap("Your account has been disabled)3");
 
 	@ObfuscatedName("vc.c")
-	public static class1 field3148 = Statics.method931("Wordpack geladen)3");
+	public static JagString field3148 = JagString.wrap("Wordpack geladen)3");
 
 	@ObfuscatedName("vc.d")
 	public final InputStream field3149;
@@ -22,7 +22,7 @@ public final class class129 implements Runnable {
 	public byte[] field3150;
 
 	@ObfuscatedName("vc.f")
-	public static class1 field3151 = Statics.method931("Handel akzeptieren");
+	public static JagString field3151 = JagString.wrap("Handel akzeptieren");
 
 	@ObfuscatedName("vc.i")
 	public final Socket field3154;
@@ -46,19 +46,19 @@ public final class class129 implements Runnable {
 	public final class69 field3161;
 
 	@ObfuscatedName("vc.r")
-	public static class1 field3163 = Statics.method931("redstone3");
+	public static JagString field3163 = JagString.wrap("redstone3");
 
 	@ObfuscatedName("vc.u")
 	public int field3166 = 0;
 
 	@ObfuscatedName("vc.A")
-	public static class1 field3172 = field3146;
+	public static JagString field3172 = field3146;
 
 	@ObfuscatedName("vc.x")
-	public static class1 field3169 = Statics.method931("");
+	public static JagString field3169 = JagString.wrap("");
 
 	@ObfuscatedName("vc.y")
-	public static class1 field3170 = Statics.method931("Menge eingeben:");
+	public static JagString field3170 = JagString.wrap("Menge eingeben:");
 
 	@ObfuscatedName("vc.D")
 	public static int field3175 = 99;

@@ -91,7 +91,7 @@ public final class class77 {
 	}
 
 	@ObfuscatedName("me.a(Lbd;II)Lme;")
-	public static class77 method711(class11 arg0, int arg1) {
+	public static class77 method711(Js5 arg0, int arg1) {
 		byte[] var2 = arg0.method217(0, arg1);
 		return var2 == null ? null : new class77(new class8(var2));
 	}

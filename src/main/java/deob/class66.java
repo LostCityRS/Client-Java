@@ -4,16 +4,16 @@ package deob;
 public final class class66 {
 
 	@ObfuscatedName("l.b")
-	public static class1 field1645 = Statics.method931("@or3@");
+	public static JagString field1645 = JagString.wrap("@or3@");
 
 	@ObfuscatedName("l.c")
-	public static class1 field1646 = Statics.method931("mapscene");
+	public static JagString field1646 = JagString.wrap("mapscene");
 
 	@ObfuscatedName("l.e")
 	public static int field1648 = -1;
 
 	@ObfuscatedName("l.f")
-	public static class1 field1649 = Statics.method931(" x");
+	public static JagString field1649 = JagString.wrap(" x");
 
 	@ObfuscatedName("l.j")
 	public static int field1653 = 0;

@@ -1,10 +1,10 @@
 package deob;
 
 @ObfuscatedName("be")
-public final class class12 extends class82 {
+public final class class12 extends Linkable {
 
 	@ObfuscatedName("be.cb")
-	public static class1 field414 = Statics.method931("Ung-Ultiges Anmelde)2Paket)3");
+	public static JagString field414 = JagString.wrap("Ung-Ultiges Anmelde)2Paket)3");
 
 	@ObfuscatedName("be.eb")
 	public int field416;
@@ -13,7 +13,7 @@ public final class class12 extends class82 {
 	public int field417;
 
 	@ObfuscatedName("be.gb")
-	public static class1 field418 = Statics.method931("Lade Spiel)2Fenster )2 ");
+	public static JagString field418 = JagString.wrap("Lade Spiel)2Fenster )2 ");
 
 	@ObfuscatedName("be.hb")
 	public static int field419 = 0;
@@ -40,7 +40,7 @@ public final class class12 extends class82 {
 	public int field430;
 
 	@ObfuscatedName("be.tb")
-	public static class1 field431 = Statics.method931("Ihre Ignorieren)2Liste ist voll)1 Sie k-Onnen nur 100 Spieler darauf eintragen)3");
+	public static JagString field431 = JagString.wrap("Ihre Ignorieren)2Liste ist voll)1 Sie k-Onnen nur 100 Spieler darauf eintragen)3");
 
 	@ObfuscatedName("be.vb")
 	public class61 field433;

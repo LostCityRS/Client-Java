@@ -5,7 +5,7 @@ import java.awt.image.*;
 import java.util.Hashtable;
 
 @ObfuscatedName("qe")
-public final class class101 extends class134 {
+public final class JavaPixMap extends PixMap {
 
 	@ObfuscatedName("qe.B")
 	public Component field2558;

@@ -4,10 +4,10 @@ import java.awt.*;
 import java.awt.image.*;
 
 @ObfuscatedName("ac")
-public final class class4 extends class134 implements ImageProducer, ImageObserver {
+public final class JavaSafePixMap extends PixMap implements ImageProducer, ImageObserver {
 
 	@ObfuscatedName("ac.I")
-	public static class1 field172 = Statics.method931("Name eingeben:");
+	public static JagString field172 = JagString.wrap("Name eingeben:");
 
 	@ObfuscatedName("ac.J")
 	public static int[] field173 = new int[32];
@@ -19,10 +19,10 @@ public final class class4 extends class134 implements ImageProducer, ImageObserv
 	public static int field185;
 
 	@ObfuscatedName("ac.X")
-	public static class1 field186;
+	public static JagString field186;
 
 	@ObfuscatedName("ac.U")
-	public static class1 field183;
+	public static JagString field183;
 
 	@ObfuscatedName("ac.E")
 	public ColorModel field168;
@@ -37,7 +37,7 @@ public final class class4 extends class134 implements ImageProducer, ImageObserv
 			var0 += var0;
 		}
 		field185 = 2;
-		field186 = Statics.method931("Login server offline)3");
+		field186 = JagString.wrap("Login server offline)3");
 		field183 = field186;
 	}
 

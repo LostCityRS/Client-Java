@@ -1,43 +1,43 @@
 package deob;
 
 @ObfuscatedName("oa")
-public final class class85 {
+public final class IntHashTable {
 
 	@ObfuscatedName("oa.b")
-	public static class1 field2127 = Statics.method931("We suspect someone knows your password)3");
+	public static JagString field2127 = JagString.wrap("We suspect someone knows your password)3");
 
 	@ObfuscatedName("oa.c")
-	public static class1 field2128 = Statics.method931("Unable to connect)3");
+	public static JagString field2128 = JagString.wrap("Unable to connect)3");
 
 	@ObfuscatedName("oa.h")
-	public static class1 field2133 = Statics.method931(" has logged in)3");
+	public static JagString field2133 = JagString.wrap(" has logged in)3");
 
 	@ObfuscatedName("oa.a")
-	public static class1 field2126 = field2133;
+	public static JagString field2126 = field2133;
 
 	@ObfuscatedName("oa.i")
 	public final int[] field2134;
 
 	@ObfuscatedName("oa.j")
-	public static class1 field2135 = field2128;
+	public static JagString field2135 = field2128;
 
 	@ObfuscatedName("oa.k")
 	public static class15 field2136 = new class15(100);
 
 	@ObfuscatedName("oa.n")
-	public static class1 field2139 = field2127;
+	public static JagString field2139 = field2127;
 
 	@ObfuscatedName("oa.o")
-	public static class1 field2140 = field2128;
+	public static JagString field2140 = field2128;
 
 	@ObfuscatedName("oa.p")
-	public static class1 field2141 = Statics.method931("Lade Konfiguration )2 ");
+	public static JagString field2141 = JagString.wrap("Lade Konfiguration )2 ");
 
 	@ObfuscatedName("oa.r")
-	public static class1 field2143 = Statics.method931("Loaded config");
+	public static JagString field2143 = JagString.wrap("Loaded config");
 
 	@ObfuscatedName("oa.m")
-	public static class1 field2138 = field2143;
+	public static JagString field2138 = field2143;
 
 	@ObfuscatedName("oa.s")
 	public static int field2144 = 0;
@@ -49,10 +49,10 @@ public final class class85 {
 	public static int field2148 = 2;
 
 	@ObfuscatedName("oa.y")
-	public static class1 field2150 = Statics.method931("Existing user");
+	public static JagString field2150 = JagString.wrap("Existing user");
 
 	@ObfuscatedName("oa.x")
-	public static class1 field2149 = field2150;
+	public static JagString field2149 = field2150;
 
 	@ObfuscatedName("oa.a(II)I")
 	public int method745(int arg0) {
@@ -70,7 +70,7 @@ public final class class85 {
 		}
 	}
 
-	public class85(int[] arg0) {
+	public IntHashTable(int[] arg0) {
 		int var2;
 		for (var2 = 1; var2 <= (arg0.length >> 1) + arg0.length; var2 <<= 0x1) {
 		}

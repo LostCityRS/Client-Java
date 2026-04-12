@@ -4,7 +4,7 @@ package deob;
 public final class class100 extends class44 {
 
 	@ObfuscatedName("qd.ac")
-	public class1 field2474 = class123.field3058;
+	public JagString field2474 = class123.field3058;
 
 	@ObfuscatedName("qd.ad")
 	public int field2526 = 0;
@@ -40,7 +40,7 @@ public final class class100 extends class44 {
 	public boolean field2533 = false;
 
 	@ObfuscatedName("qd.ic")
-	public class1 field2482 = class81.field2056;
+	public JagString field2482 = class81.field2056;
 
 	@ObfuscatedName("qd.id")
 	public int field2534 = 100;
@@ -49,10 +49,10 @@ public final class class100 extends class44 {
 	public Object[] field2483;
 
 	@ObfuscatedName("qd.jd")
-	public static class1 field2535 = Statics.method931("@cr2@");
+	public static JagString field2535 = JagString.wrap("@cr2@");
 
 	@ObfuscatedName("qd.kc")
-	public static class1 field2484 = Statics.method931("Enter name of friend to add to list");
+	public static JagString field2484 = JagString.wrap("Enter name of friend to add to list");
 
 	@ObfuscatedName("qd.kd")
 	public boolean field2536 = false;
@@ -94,7 +94,7 @@ public final class class100 extends class44 {
 	public int field2543 = 0;
 
 	@ObfuscatedName("qd.sc")
-	public static class1 field2492 = Statics.method931("Starting game engine)3)3)3");
+	public static JagString field2492 = JagString.wrap("Starting game engine)3)3)3");
 
 	@ObfuscatedName("qd.sd")
 	public int field2544 = -1;
@@ -109,13 +109,13 @@ public final class class100 extends class44 {
 	public boolean field2494 = false;
 
 	@ObfuscatedName("qd.ud")
-	public static class1 field2546 = field2484;
+	public static JagString field2546 = field2484;
 
 	@ObfuscatedName("qd.vb")
-	public static class1 field2443 = Statics.method931("glow2:");
+	public static JagString field2443 = JagString.wrap("glow2:");
 
 	@ObfuscatedName("qd.dc")
-	public static class1 field2477 = field2443;
+	public static JagString field2477 = field2443;
 
 	@ObfuscatedName("qd.vc")
 	public int field2495 = -1;
@@ -130,19 +130,19 @@ public final class class100 extends class44 {
 	public int[] field2548;
 
 	@ObfuscatedName("qd.Mc")
-	public static class1 field2512 = Statics.method931("Choose Option");
+	public static JagString field2512 = JagString.wrap("Choose Option");
 
 	@ObfuscatedName("qd.qc")
-	public static class1 field2490 = field2512;
+	public static JagString field2490 = field2512;
 
 	@ObfuscatedName("qd.xc")
-	public static class1 field2497 = Statics.method931("::errortest");
+	public static JagString field2497 = JagString.wrap("::errortest");
 
 	@ObfuscatedName("qd.Wc")
-	public static class1 field2522 = Statics.method931("Fehler beim Laden Ihres Charakter)2Profils");
+	public static JagString field2522 = JagString.wrap("Fehler beim Laden Ihres Charakter)2Profils");
 
 	@ObfuscatedName("qd.gc")
-	public static class1 field2480 = field2492;
+	public static JagString field2480 = field2492;
 
 	@ObfuscatedName("qd.Jb")
 	public int field2457 = 1;
@@ -160,7 +160,7 @@ public final class class100 extends class44 {
 	public boolean field2447 = false;
 
 	@ObfuscatedName("qd.Wb")
-	public class1 field2470 = class123.field3058;
+	public JagString field2470 = class123.field3058;
 
 	@ObfuscatedName("qd.Mb")
 	public int field2460 = 0;
@@ -199,7 +199,7 @@ public final class class100 extends class44 {
 	public int field2455 = 0;
 
 	@ObfuscatedName("qd.yb")
-	public class1 field2446 = class123.field3058;
+	public JagString field2446 = class123.field3058;
 
 	@ObfuscatedName("qd.Jc")
 	public boolean field2509 = false;
@@ -214,7 +214,7 @@ public final class class100 extends class44 {
 	public int field2465 = -1;
 
 	@ObfuscatedName("qd.Pc")
-	public class1 field2515 = class123.field3058;
+	public JagString field2515 = class123.field3058;
 
 	@ObfuscatedName("qd.Nb")
 	public boolean field2461 = false;
@@ -283,10 +283,10 @@ public final class class100 extends class44 {
 	public class100[] field2519;
 
 	@ObfuscatedName("qd.Tb")
-	public class1[] field2467;
+	public JagString[] field2467;
 
 	@ObfuscatedName("qd.Ec")
-	public class1[] field2504;
+	public JagString[] field2504;
 
 	@ObfuscatedName("qd.Cb")
 	public Object[] field2450;
@@ -394,7 +394,7 @@ public final class class100 extends class44 {
 					this.field2510[var8] = -1;
 				}
 			}
-			this.field2504 = new class1[5];
+			this.field2504 = new JagString[5];
 			for (int var10 = 0; var10 < 5; var10++) {
 				this.field2504[var10] = arg0.method140();
 				if (this.field2504[var10].method10() == 0) {
@@ -461,7 +461,7 @@ public final class class100 extends class44 {
 			this.field2555 = arg0.method139();
 			this.field2473 = arg0.method139();
 			this.field2533 = arg0.method144() == 1;
-			this.field2504 = new class1[5];
+			this.field2504 = new JagString[5];
 			for (int var11 = 0; var11 < 5; var11++) {
 				this.field2504[var11] = arg0.method140();
 				if (this.field2504[var11].method10() == 0) {
@@ -636,7 +636,7 @@ public final class class100 extends class44 {
 		arg0.method144();
 		int var2 = arg0.method144();
 		if (var2 > 0) {
-			this.field2467 = new class1[var2];
+			this.field2467 = new JagString[var2];
 			for (int var3 = 0; var3 < var2; var3++) {
 				this.field2467[var3] = arg0.method140();
 			}

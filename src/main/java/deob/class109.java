@@ -13,10 +13,10 @@ public final class class109 {
 	public class133 field2729 = null;
 
 	@ObfuscatedName("sa.f")
-	public static class1 field2730 = Statics.method931(" weitere Optionen");
+	public static JagString field2730 = JagString.wrap(" weitere Optionen");
 
 	@ObfuscatedName("sa.h")
-	public static class1 field2732 = Statics.method931("Zu viele Verbindungen von Ihrer Adresse)3");
+	public static JagString field2732 = JagString.wrap("Zu viele Verbindungen von Ihrer Adresse)3");
 
 	@ObfuscatedName("sa.j")
 	public static final int field2734 = 3353893;

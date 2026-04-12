@@ -10,31 +10,31 @@ public final class class54 extends class128 {
 	public final int field1428;
 
 	@ObfuscatedName("j.dc")
-	public static class1 field1429 = Statics.method931("Accept challenge");
+	public static JagString field1429 = JagString.wrap("Accept challenge");
 
 	@ObfuscatedName("j.ec")
-	public static class1 field1430 = Statics.method931("Okay");
+	public static JagString field1430 = JagString.wrap("Okay");
 
 	@ObfuscatedName("j.hc")
 	public static int field1433 = 0;
 
 	@ObfuscatedName("j.ic")
-	public static class1 field1434 = Statics.method931("Loaded gamescreen");
+	public static JagString field1434 = JagString.wrap("Loaded gamescreen");
 
 	@ObfuscatedName("j.fc")
-	public static class1 field1431 = field1434;
+	public static JagString field1431 = field1434;
 
 	@ObfuscatedName("j.kc")
-	public static class1 field1436 = Statics.method931("Bitte laden Sie die Seite neu)3");
+	public static JagString field1436 = JagString.wrap("Bitte laden Sie die Seite neu)3");
 
 	@ObfuscatedName("j.lc")
-	public static class1 field1437 = Statics.method931("");
+	public static JagString field1437 = JagString.wrap("");
 
 	@ObfuscatedName("j.nc")
-	public static class1 field1439 = Statics.method931("Absender:");
+	public static JagString field1439 = JagString.wrap("Absender:");
 
 	@ObfuscatedName("j.oc")
-	public static class1 field1440 = Statics.method931("mapfunction");
+	public static JagString field1440 = JagString.wrap("mapfunction");
 
 	@ObfuscatedName("j.pc")
 	public static int field1441 = 1;
@@ -43,7 +43,7 @@ public final class class54 extends class128 {
 	public static class122 field1412 = new class122();
 
 	@ObfuscatedName("j.gc")
-	public static class1 field1432 = field1429;
+	public static JagString field1432 = field1429;
 
 	@ObfuscatedName("j.Wb")
 	public final int field1422;
@@ -73,7 +73,7 @@ public final class class54 extends class128 {
 	@Override
 	public class91 method41() {
 		if (this.field1427 != null) {
-			int var1 = class82.field2063 - this.field1417;
+			int var1 = Linkable.field2063 - this.field1417;
 			if (var1 > 100 && this.field1427.field1254 > 0) {
 				var1 = 100;
 			}
@@ -90,7 +90,7 @@ public final class class54 extends class128 {
 				} while (this.field1419 >= 0 && this.field1427.field1242.length > this.field1419);
 				this.field1427 = null;
 			}
-			this.field1417 = class82.field2063 - var1;
+			this.field1417 = Linkable.field2063 - var1;
 		}
 		class49 var2 = Statics.method389(this.field1428);
 		if (var2.field1317 != null) {
@@ -110,7 +110,7 @@ public final class class54 extends class128 {
 		if (arg7 != -1) {
 			this.field1427 = Statics.method103(arg7);
 			this.field1419 = 0;
-			this.field1417 = class82.field2063 - 1;
+			this.field1417 = Linkable.field2063 - 1;
 			if (arg8 && this.field1427.field1254 != -1) {
 				this.field1419 = (int) ((double) this.field1427.field1242.length * Math.random());
 				this.field1417 -= (int) (Math.random() * (double) this.field1427.field1223[this.field1419]);

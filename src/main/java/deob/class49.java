@@ -43,7 +43,7 @@ public final class class49 extends class44 {
 	public int field1331 = -1;
 
 	@ObfuscatedName("ia.rc")
-	public class1 field1332 = class89.field2183;
+	public JagString field1332 = class89.field2183;
 
 	@ObfuscatedName("ia.tb")
 	public int field1282 = 0;
@@ -61,10 +61,10 @@ public final class class49 extends class44 {
 	public int field1285 = 0;
 
 	@ObfuscatedName("ia.Ub")
-	public static class1 field1309 = Statics.method931("(Udns");
+	public static JagString field1309 = JagString.wrap("(Udns");
 
 	@ObfuscatedName("ia.yc")
-	public static class1 field1339 = Statics.method931("blaugr-Un:");
+	public static JagString field1339 = JagString.wrap("blaugr-Un:");
 
 	@ObfuscatedName("ia.Bc")
 	public static int field1342 = 0;
@@ -73,7 +73,7 @@ public final class class49 extends class44 {
 	public static int field1340 = 0;
 
 	@ObfuscatedName("ia.Cc")
-	public static class1 field1343 = Statics.method931(": ");
+	public static JagString field1343 = JagString.wrap(": ");
 
 	@ObfuscatedName("ia.Dc")
 	public static long field1344 = 0L;
@@ -109,7 +109,7 @@ public final class class49 extends class44 {
 	public int field1288 = 16;
 
 	@ObfuscatedName("ia.Cb")
-	public final class1[] field1291 = new class1[5];
+	public final JagString[] field1291 = new JagString[5];
 
 	@ObfuscatedName("ia.Nb")
 	public int field1302 = 0;
@@ -161,13 +161,13 @@ public final class class49 extends class44 {
 		} else {
 			var7 = (this.field1321 << 10) + (arg4 << 3) + arg2;
 		}
-		class91 var9 = (class91) class37.field981.method263(var7);
+		class91 var9 = (class91) Sprite.field981.method263(var7);
 		if (var9 == null) {
 			var9 = this.method511(!this.field1303, false, arg2, arg4);
 			if (var9 == null) {
 				return null;
 			}
-			class37.field981.method262(var7, var9);
+			Sprite.field981.method262(var7, var9);
 		}
 		if (this.field1313 || this.field1303) {
 			var9 = new class91(var9, this.field1313, this.field1303);

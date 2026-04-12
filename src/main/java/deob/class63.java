@@ -4,40 +4,40 @@ package deob;
 public final class class63 {
 
 	@ObfuscatedName("kc.b")
-	public static class1 field1566 = Statics.method931("Loading game screen )2 ");
+	public static JagString field1566 = JagString.wrap("Loading game screen )2 ");
 
 	@ObfuscatedName("kc.c")
-	public static class1 field1567 = Statics.method931("invback");
+	public static JagString field1567 = JagString.wrap("invback");
 
 	@ObfuscatedName("kc.h")
-	public static class1 field1572 = Statics.method931(")2");
+	public static JagString field1572 = JagString.wrap(")2");
 
 	@ObfuscatedName("kc.l")
-	public static class1 field1576 = Statics.method931("sich mit einer anderen Welt zu verbinden)3");
+	public static JagString field1576 = JagString.wrap("sich mit einer anderen Welt zu verbinden)3");
 
 	@ObfuscatedName("kc.q")
-	public static class1 field1581 = Statics.method931("und loggen sich dann erneut ein)3");
+	public static JagString field1581 = JagString.wrap("und loggen sich dann erneut ein)3");
 
 	@ObfuscatedName("kc.r")
-	public static class1 field1582 = Statics.method931("Offline");
+	public static JagString field1582 = JagString.wrap("Offline");
 
 	@ObfuscatedName("kc.w")
 	public static int field1587 = 0;
 
 	@ObfuscatedName("kc.C")
-	public static class1 field1593 = field1582;
+	public static JagString field1593 = field1582;
 
 	@ObfuscatedName("kc.E")
 	public static int[] field1595 = new int[] { 1, 0, -1, 0 };
 
 	@ObfuscatedName("kc.A")
-	public static class1 field1591 = Statics.method931("Take");
+	public static JagString field1591 = JagString.wrap("Take");
 
 	@ObfuscatedName("kc.D")
-	public static class1 field1594 = field1591;
+	public static JagString field1594 = field1591;
 
 	@ObfuscatedName("kc.G")
-	public static class1 field1597 = field1566;
+	public static JagString field1597 = field1566;
 
 	@ObfuscatedName("kc.y")
 	public final class44 field1589 = new class44();

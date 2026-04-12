@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("ld")
-public final class class70 {
+public final class Occlude {
 
 	@ObfuscatedName("ld.a")
 	public int field1721;
@@ -67,10 +67,10 @@ public final class class70 {
 	public static int field1749 = 0;
 
 	@ObfuscatedName("ld.E")
-	public static class1 field1751 = Statics.method931("title)3jpg");
+	public static JagString field1751 = JagString.wrap("title)3jpg");
 
 	@ObfuscatedName("ld.y")
-	public static class1 field1745 = Statics.method931("Ignorieren");
+	public static JagString field1745 = JagString.wrap("Ignorieren");
 
 	@ObfuscatedName("ld.G")
 	public static int[] field1753 = new int[] { 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800 };

@@ -7,7 +7,7 @@ public final class class95 extends class44 {
 	public final int[] field2353 = new int[6];
 
 	@ObfuscatedName("pe.vb")
-	public static class1 field2355 = Statics.method931("backvmid2");
+	public static JagString field2355 = JagString.wrap("backvmid2");
 
 	@ObfuscatedName("pe.Fb")
 	public static int field2365 = 0;
@@ -16,10 +16,10 @@ public final class class95 extends class44 {
 	public static boolean field2364 = false;
 
 	@ObfuscatedName("pe.zb")
-	public static class1 field2359 = Statics.method931("Anmelde)2Zeitlimit -Uberschritten)3");
+	public static JagString field2359 = JagString.wrap("Anmelde)2Zeitlimit -Uberschritten)3");
 
 	@ObfuscatedName("pe.Sb")
-	public static class1 field2378 = Statics.method931("Bitte versuchen Sie es in ");
+	public static JagString field2378 = JagString.wrap("Bitte versuchen Sie es in ");
 
 	@ObfuscatedName("pe.Jb")
 	public static int[] field2369 = new int[50];
@@ -28,28 +28,28 @@ public final class class95 extends class44 {
 	public static int field2358 = 0;
 
 	@ObfuscatedName("pe.Cb")
-	public static class1 field2362 = Statics.method931("K");
+	public static JagString field2362 = JagString.wrap("K");
 
 	@ObfuscatedName("pe.ub")
-	public static class1 field2354 = field2362;
+	public static JagString field2354 = field2362;
 
 	@ObfuscatedName("pe.Ab")
-	public static class1 field2360 = field2362;
+	public static JagString field2360 = field2362;
 
 	@ObfuscatedName("pe.Lb")
-	public static class92 field2371 = new class92();
+	public static LinkList field2371 = new LinkList();
 
 	@ObfuscatedName("pe.Vb")
-	public static class1 field2381 = Statics.method931("Wen m-Ochten Sie entfernen?");
+	public static JagString field2381 = JagString.wrap("Wen m-Ochten Sie entfernen?");
 
 	@ObfuscatedName("pe.Ub")
 	public static int field2380 = 0;
 
 	@ObfuscatedName("pe.Xb")
-	public static class1 field2383 = Statics.method931("Bad session id)3");
+	public static JagString field2383 = JagString.wrap("Bad session id)3");
 
 	@ObfuscatedName("pe.Wb")
-	public static class1 field2382 = field2383;
+	public static JagString field2382 = field2383;
 
 	@ObfuscatedName("pe.Gb")
 	public int field2366 = -1;

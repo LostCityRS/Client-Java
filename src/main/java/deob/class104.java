@@ -4,7 +4,7 @@ package deob;
 public final class class104 extends class44 {
 
 	@ObfuscatedName("rb.ub")
-	public class120 field2615;
+	public Js5Loader field2615;
 
 	@ObfuscatedName("rb.xb")
 	public static long[] field2618 = new long[100];

@@ -10,7 +10,7 @@ public final class class9 {
 	public static int field317 = 1;
 
 	@ObfuscatedName("bb.h")
-	public static class1 field318 = Statics.method931("backvmid3");
+	public static JagString field318 = JagString.wrap("backvmid3");
 
 	@ObfuscatedName("bb.k")
 	public static int field321 = 0;
@@ -19,23 +19,23 @@ public final class class9 {
 	public static int field322 = 127;
 
 	@ObfuscatedName("bb.n")
-	public static class1 field324 = Statics.method931("red:");
+	public static JagString field324 = JagString.wrap("red:");
 
 	@ObfuscatedName("bb.o")
-	public static class1 field325 = Statics.method931("mapmarker");
+	public static JagString field325 = JagString.wrap("mapmarker");
 
 	@ObfuscatedName("bb.p")
-	public static class1 field326 = field324;
+	public static JagString field326 = field324;
 
 	@ObfuscatedName("bb.r")
-	public static class1 field328 = Statics.method931(" )2> @lre@");
+	public static JagString field328 = JagString.wrap(" )2> @lre@");
 
 	@ObfuscatedName("bb.t")
 	public static int field330 = 3;
 
 	@ObfuscatedName("bb.v")
-	public static class1 field332 = Statics.method931("Please contact customer support)3");
+	public static JagString field332 = JagString.wrap("Please contact customer support)3");
 
 	@ObfuscatedName("bb.e")
-	public static class1 field315 = field332;
+	public static JagString field315 = field332;
 }

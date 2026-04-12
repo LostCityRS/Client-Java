@@ -4,16 +4,16 @@ package deob;
 public final class class75 implements class88 {
 
 	@ObfuscatedName("mc.b")
-	public static class1 field1847 = Statics.method931("Enter object name");
+	public static JagString field1847 = JagString.wrap("Enter object name");
 
 	@ObfuscatedName("mc.g")
-	public static class1 field1852 = Statics.method931("null");
+	public static JagString field1852 = JagString.wrap("null");
 
 	@ObfuscatedName("mc.h")
-	public static class1 field1853 = Statics.method931("Wen m-Ochten Sie der Liste hinzuf-Ugen?");
+	public static JagString field1853 = JagString.wrap("Wen m-Ochten Sie der Liste hinzuf-Ugen?");
 
 	@ObfuscatedName("mc.i")
-	public class92 field1854 = new class92();
+	public LinkList field1854 = new LinkList();
 
 	@ObfuscatedName("mc.j")
 	public static int field1855 = 0;
@@ -22,7 +22,7 @@ public final class class75 implements class88 {
 	public static int field1857 = 0;
 
 	@ObfuscatedName("mc.m")
-	public static class1 field1858 = Statics.method931("Handel)4Duell");
+	public static JagString field1858 = JagString.wrap("Handel)4Duell");
 
 	@ObfuscatedName("mc.o")
 	public static int field1860 = 0;
@@ -34,7 +34,7 @@ public final class class75 implements class88 {
 	public static boolean field1862 = true;
 
 	@ObfuscatedName("mc.r")
-	public static class1 field1863 = Statics.method931("Enter message to send to ");
+	public static JagString field1863 = JagString.wrap("Enter message to send to ");
 
 	@ObfuscatedName("mc.s")
 	public static int field1864 = 0;
@@ -46,13 +46,13 @@ public final class class75 implements class88 {
 	public final class90[] field1867;
 
 	@ObfuscatedName("mc.C")
-	public static class1 field1874 = field1847;
+	public static JagString field1874 = field1847;
 
 	@ObfuscatedName("mc.y")
-	public static class1 field1870 = Statics.method931("und haben es deaktiviert)3 Benutzen Sie die");
+	public static JagString field1870 = JagString.wrap("und haben es deaktiviert)3 Benutzen Sie die");
 
 	@ObfuscatedName("mc.B")
-	public static class1 field1873 = field1863;
+	public static JagString field1873 = field1863;
 
 	@ObfuscatedName("mc.F")
 	public double field1877 = 1.0D;
@@ -67,7 +67,7 @@ public final class class75 implements class88 {
 	public final int field1879 = 20;
 
 	@ObfuscatedName("mc.E")
-	public final class11 field1876;
+	public final Js5 field1876;
 
 	@ObfuscatedName("mc.a(I)V")
 	public void method691() {
@@ -76,7 +76,7 @@ public final class class75 implements class88 {
 				this.field1867[var1].method764();
 			}
 		}
-		this.field1854 = new class92();
+		this.field1854 = new LinkList();
 		this.field1880 = this.field1879;
 	}
 
@@ -141,7 +141,7 @@ public final class class75 implements class88 {
 		return this.field1875 == 64;
 	}
 
-	public class75(class11 arg0, class11 arg1, int arg2, double arg3, int arg4) {
+	public class75(Js5 arg0, Js5 arg1, int arg2, double arg3, int arg4) {
 		this.field1876 = arg1;
 		this.field1877 = arg3;
 		this.field1875 = arg4;

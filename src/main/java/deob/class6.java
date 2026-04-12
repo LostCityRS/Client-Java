@@ -13,25 +13,25 @@ public final class class6 {
 	public static int field226 = 0;
 
 	@ObfuscatedName("ae.d")
-	public static class1 field227 = Statics.method931("wishes to trade with you)3");
+	public static JagString field227 = JagString.wrap("wishes to trade with you)3");
 
 	@ObfuscatedName("ae.e")
-	public static class1 field228 = Statics.method931("::hiddenbuttontest");
+	public static JagString field228 = JagString.wrap("::hiddenbuttontest");
 
 	@ObfuscatedName("ae.g")
 	public static class64 field230 = null;
 
 	@ObfuscatedName("ae.h")
-	public static class1 field231 = field227;
+	public static JagString field231 = field227;
 
 	@ObfuscatedName("ae.i")
-	public static class1 field232 = Statics.method931("Einloggen");
+	public static JagString field232 = JagString.wrap("Einloggen");
 
 	@ObfuscatedName("ae.j")
 	public static int field233 = 0;
 
 	@ObfuscatedName("ae.k")
-	public static class1 field234 = Statics.method931("mapdots");
+	public static JagString field234 = JagString.wrap("mapdots");
 
 	@ObfuscatedName("ae.m")
 	public static int field236 = 0;

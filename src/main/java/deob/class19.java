@@ -16,7 +16,7 @@ public final class class19 extends class128 {
 	public int field633;
 
 	@ObfuscatedName("d.ec")
-	public static class1 field634 = Statics.method931("Regeln versto-8en hat)3");
+	public static JagString field634 = JagString.wrap("Regeln versto-8en hat)3");
 
 	@ObfuscatedName("d.hc")
 	public double field637;
@@ -31,22 +31,22 @@ public final class class19 extends class128 {
 	public final int field641;
 
 	@ObfuscatedName("d.mc")
-	public static class1 field642 = Statics.method931("Jun");
+	public static JagString field642 = JagString.wrap("Jun");
 
 	@ObfuscatedName("d.oc")
 	public static int[] field644 = new int[] { 768, 1024, 1280, 512, 1536, 256, 0, 1792 };
 
 	@ObfuscatedName("d.pc")
-	public static class1 field645 = Statics.method931("Nov");
+	public static JagString field645 = JagString.wrap("Nov");
 
 	@ObfuscatedName("d.qc")
 	public final int field646;
 
 	@ObfuscatedName("d.rc")
-	public static class1 field647 = Statics.method931("Mar");
+	public static JagString field647 = JagString.wrap("Mar");
 
 	@ObfuscatedName("d.sc")
-	public static class1 field648 = Statics.method931("Jul");
+	public static JagString field648 = JagString.wrap("Jul");
 
 	@ObfuscatedName("d.tc")
 	public double field649;
@@ -58,46 +58,46 @@ public final class class19 extends class128 {
 	public double field652;
 
 	@ObfuscatedName("d.Qb")
-	public static class1 field620 = Statics.method931("Feb");
+	public static JagString field620 = JagString.wrap("Feb");
 
 	@ObfuscatedName("d.Wb")
-	public static class1 field626 = Statics.method931("Aug");
+	public static JagString field626 = JagString.wrap("Aug");
 
 	@ObfuscatedName("d.Ub")
-	public static class1 field624 = Statics.method931("Dec");
+	public static JagString field624 = JagString.wrap("Dec");
 
 	@ObfuscatedName("d.Ac")
 	public static int field656 = 0;
 
 	@ObfuscatedName("d.zc")
-	public static class1 field655 = Statics.method931("May");
+	public static JagString field655 = JagString.wrap("May");
 
 	@ObfuscatedName("d.Dc")
-	public static class1 field659 = Statics.method931("Loading wordpack )2 ");
+	public static JagString field659 = JagString.wrap("Loading wordpack )2 ");
 
 	@ObfuscatedName("d.Sb")
-	public static class1 field622 = Statics.method931("Oct");
+	public static JagString field622 = JagString.wrap("Oct");
 
 	@ObfuscatedName("d.Lc")
-	public static class1 field667 = Statics.method931("Connecting to server)3)3)3");
+	public static JagString field667 = JagString.wrap("Connecting to server)3)3)3");
 
 	@ObfuscatedName("d.Kc")
-	public static class1 field666 = field667;
+	public static JagString field666 = field667;
 
 	@ObfuscatedName("d.Nc")
-	public static class1 field669 = Statics.method931("Jan");
+	public static JagString field669 = JagString.wrap("Jan");
 
 	@ObfuscatedName("d.Tb")
-	public static class1 field623 = Statics.method931("Sep");
+	public static JagString field623 = JagString.wrap("Sep");
 
 	@ObfuscatedName("d.Pc")
-	public static class1 field671 = field659;
+	public static JagString field671 = field659;
 
 	@ObfuscatedName("d.Qc")
-	public static class1 field672 = Statics.method931("Apr");
+	public static JagString field672 = JagString.wrap("Apr");
 
 	@ObfuscatedName("d.Rb")
-	public static class1[] field621 = new class1[] { field669, field620, field647, field672, field655, field642, field648, field626, field623, field622, field645, field624 };
+	public static JagString[] field621 = new JagString[] { field669, field620, field647, field672, field655, field642, field648, field626, field623, field622, field645, field624 };
 
 	@ObfuscatedName("d.Vb")
 	public boolean field625 = false;

@@ -22,7 +22,7 @@ public final class class5 {
 	public static Object field213 = new Object();
 
 	@ObfuscatedName("ad.B")
-	public static class1 field215 = Statics.method931("Konfig geladen)3");
+	public static JagString field215 = JagString.wrap("Konfig geladen)3");
 
 	@ObfuscatedName("ad.C")
 	public static int field216 = 0;
@@ -34,13 +34,13 @@ public final class class5 {
 	public static byte[] field220 = new byte[] { 95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 };
 
 	@ObfuscatedName("ad.I")
-	public static class1 field222 = Statics.method931("Continue");
+	public static JagString field222 = JagString.wrap("Continue");
 
 	@ObfuscatedName("ad.E")
-	public static class1 field218 = field222;
+	public static JagString field218 = field222;
 
 	@ObfuscatedName("ad.H")
-	public static class1 field221 = Statics.method931("(X");
+	public static JagString field221 = JagString.wrap("(X");
 
 	@ObfuscatedName("ad.a(ZIII)V")
 	public void method107(int arg0, int arg1, int arg2) {

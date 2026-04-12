@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("bd")
-public abstract class class11 {
+public abstract class Js5 {
 
 	@ObfuscatedName("bd.b")
 	public byte[][] field362;
@@ -10,7 +10,7 @@ public abstract class class11 {
 	public int field366;
 
 	@ObfuscatedName("bd.g")
-	public class85[] field367;
+	public IntHashTable[] field367;
 
 	@ObfuscatedName("bd.i")
 	public static long field369 = 0L;
@@ -37,22 +37,22 @@ public abstract class class11 {
 	public final boolean field383;
 
 	@ObfuscatedName("bd.T")
-	public static class1 field406 = Statics.method931("backbase2");
+	public static JagString field406 = JagString.wrap("backbase2");
 
 	@ObfuscatedName("bd.U")
-	public static class1 field407 = Statics.method931("Please try again)3");
+	public static JagString field407 = JagString.wrap("Please try again)3");
 
 	@ObfuscatedName("bd.V")
-	public static class1 field408 = field407;
+	public static JagString field408 = field407;
 
 	@ObfuscatedName("bd.X")
 	public static boolean field410 = false;
 
 	@ObfuscatedName("bd.W")
-	public static class1 field409 = Statics.method931("Sie befinden sich in einem Mitglieder)2Gebiet(Q");
+	public static JagString field409 = JagString.wrap("Sie befinden sich in einem Mitglieder)2Gebiet(Q");
 
 	@ObfuscatedName("bd.R")
-	public class85 field404;
+	public IntHashTable field404;
 
 	@ObfuscatedName("bd.C")
 	public int[] field389;
@@ -73,9 +73,9 @@ public abstract class class11 {
 	public byte[][][] field399;
 
 	@ObfuscatedName("bd.a(La;La;I)[B")
-	public final byte[] method215(class1 arg0, class1 arg1) {
-		class1 var3 = arg1.method30();
-		class1 var4 = arg0.method30();
+	public final byte[] method215(JagString arg0, JagString arg1) {
+		JagString var3 = arg1.method30();
+		JagString var4 = arg0.method30();
 		int var5 = this.field404.method745(var3.method27());
 		int var6 = this.field367[var5].method745(var4.method27());
 		return this.method217(var6, var5);
@@ -172,7 +172,7 @@ public abstract class class11 {
 			for (int var8 = 0; var8 < this.field371; var8++) {
 				this.field389[this.field377[var8]] = var2.method167();
 			}
-			this.field404 = new class85(this.field389);
+			this.field404 = new IntHashTable(this.field389);
 		}
 		for (int var9 = 0; var9 < this.field371; var9++) {
 			this.field402[this.field377[var9]] = var2.method167();
@@ -200,7 +200,7 @@ public abstract class class11 {
 		if (var5 == 0) {
 			return;
 		}
-		this.field367 = new class85[var6 + 1];
+		this.field367 = new IntHashTable[var6 + 1];
 		this.field386 = new int[var6 + 1][];
 		for (int var19 = 0; var19 < this.field371; var19++) {
 			int var20 = this.field377[var19];
@@ -209,13 +209,13 @@ public abstract class class11 {
 			for (int var22 = 0; var22 < var21; var22++) {
 				this.field386[var20][this.field393[var20][var22]] = var2.method167();
 			}
-			this.field367[var20] = new class85(this.field386[var20]);
+			this.field367[var20] = new IntHashTable(this.field386[var20]);
 		}
 	}
 
 	@ObfuscatedName("bd.a(IILa;)I")
-	public final int method224(int arg0, class1 arg1) {
-		class1 var3 = arg1.method30();
+	public final int method224(int arg0, JagString arg1) {
+		JagString var3 = arg1.method30();
 		return this.field367[arg0].method745(var3.method27());
 	}
 
@@ -312,8 +312,8 @@ public abstract class class11 {
 	}
 
 	@ObfuscatedName("bd.a(ILa;)I")
-	public final int method228(class1 arg0) {
-		class1 var2 = arg0.method30();
+	public final int method228(JagString arg0) {
+		JagString var2 = arg0.method30();
 		return this.field404.method745(var2.method27());
 	}
 
@@ -386,24 +386,24 @@ public abstract class class11 {
 	}
 
 	@ObfuscatedName("bd.b(La;La;I)Z")
-	public final boolean method239(class1 arg0, class1 arg1) {
-		class1 var3 = arg0.method30();
-		class1 var4 = arg1.method30();
+	public final boolean method239(JagString arg0, JagString arg1) {
+		JagString var3 = arg0.method30();
+		JagString var4 = arg1.method30();
 		int var5 = this.field404.method745(var3.method27());
 		int var6 = this.field367[var5].method745(var4.method27());
 		return this.method218(var5, var6);
 	}
 
 	@ObfuscatedName("bd.b(ILa;)V")
-	public final void method240(class1 arg0) {
-		class1 var2 = arg0.method30();
+	public final void method240(JagString arg0) {
+		JagString var2 = arg0.method30();
 		int var3 = this.field404.method745(var2.method27());
 		if (var3 >= 0) {
 			this.method219(var3);
 		}
 	}
 
-	public class11(boolean arg0, boolean arg1) {
+	public Js5(boolean arg0, boolean arg1) {
 		this.field370 = arg1;
 		this.field383 = arg0;
 	}

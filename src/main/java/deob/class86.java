@@ -10,25 +10,25 @@ public final class class86 {
 	public static int field2158 = 0;
 
 	@ObfuscatedName("ob.h")
-	public static class1 field2159 = Statics.method931("flash1:");
+	public static JagString field2159 = JagString.wrap("flash1:");
 
 	@ObfuscatedName("ob.f")
-	public static class1 field2157 = field2159;
+	public static JagString field2157 = field2159;
 
 	@ObfuscatedName("ob.i")
-	public static class92 field2160 = new class92();
+	public static LinkList field2160 = new LinkList();
 
 	@ObfuscatedName("ob.k")
-	public static class1 field2162 = Statics.method931("backleft2");
+	public static JagString field2162 = JagString.wrap("backleft2");
 
 	@ObfuscatedName("ob.l")
 	public static int field2163 = 0;
 
 	@ObfuscatedName("ob.m")
-	public static class1 field2164 = Statics.method931("Schlie-8en");
+	public static JagString field2164 = JagString.wrap("Schlie-8en");
 
 	@ObfuscatedName("ob.n")
-	public static class1 field2165 = Statics.method931(":");
+	public static JagString field2165 = JagString.wrap(":");
 
 	@ObfuscatedName("ob.o")
 	public static int field2166 = -1;

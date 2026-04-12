@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("u")
-public final class class120 extends class11 {
+public final class Js5Loader extends Js5 {
 
 	@ObfuscatedName("u.fb")
 	public volatile boolean[] field2975;
@@ -10,16 +10,16 @@ public final class class120 extends class11 {
 	public int field2976 = -1;
 
 	@ObfuscatedName("u.hb")
-	public static class1 field2977 = Statics.method931("blinken1:");
+	public static JagString field2977 = JagString.wrap("blinken1:");
 
 	@ObfuscatedName("u.ib")
-	public static class1 field2978 = Statics.method931("Offline");
+	public static JagString field2978 = JagString.wrap("Offline");
 
 	@ObfuscatedName("u.jb")
 	public volatile boolean field2979 = false;
 
 	@ObfuscatedName("u.kb")
-	public static class1 field2980 = Statics.method931("Freunde");
+	public static JagString field2980 = JagString.wrap("Freunde");
 
 	@ObfuscatedName("u.lb")
 	public final class109 field2981;
@@ -40,10 +40,10 @@ public final class class120 extends class11 {
 	public static class130[] field2992 = new class130[32768];
 
 	@ObfuscatedName("u.xb")
-	public static class1 field2993 = Statics.method931("Das ist eine Mitglieder)2Welt(Q");
+	public static JagString field2993 = JagString.wrap("Das ist eine Mitglieder)2Welt(Q");
 
 	@ObfuscatedName("u.zb")
-	public static class1 field2995 = Statics.method931(" zuerst von Ihrer Freunde)2Liste(Q");
+	public static JagString field2995 = JagString.wrap(" zuerst von Ihrer Freunde)2Liste(Q");
 
 	@ObfuscatedName("u.Cb")
 	public static int field2998 = -1;
@@ -150,7 +150,7 @@ public final class class120 extends class11 {
 		Statics.method661(this.field2986, arg0);
 	}
 
-	public class120(class109 arg0, class109 arg1, int arg2, boolean arg3, boolean arg4, boolean arg5) {
+	public Js5Loader(class109 arg0, class109 arg1, int arg2, boolean arg3, boolean arg4, boolean arg5) {
 		super(arg3, arg4);
 		this.field2991 = arg0;
 		this.field2990 = arg5;

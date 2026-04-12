@@ -13,7 +13,7 @@ public final class class133 {
 	public long field3245;
 
 	@ObfuscatedName("wb.g")
-	public static class1 field3247 = Statics.method931("p12_full");
+	public static JagString field3247 = JagString.wrap("p12_full");
 
 	@ObfuscatedName("wb.i")
 	public static class15 field3249 = new class15(20);
@@ -31,10 +31,10 @@ public final class class133 {
 	public int field3256;
 
 	@ObfuscatedName("wb.q")
-	public static class1 field3257 = Statics.method931("Create a free account");
+	public static JagString field3257 = JagString.wrap("Create a free account");
 
 	@ObfuscatedName("wb.r")
-	public static class1 field3258 = Statics.method931("Update)2Liste geladen)3");
+	public static JagString field3258 = JagString.wrap("Update)2Liste geladen)3");
 
 	@ObfuscatedName("wb.s")
 	public final byte[] field3259;
@@ -55,19 +55,19 @@ public final class class133 {
 	public static int field3274 = 10;
 
 	@ObfuscatedName("wb.F")
-	public static class1 field3272 = Statics.method931("Loading )2 please wait)3");
+	public static JagString field3272 = JagString.wrap("Loading )2 please wait)3");
 
 	@ObfuscatedName("wb.l")
-	public static class1 field3252 = field3272;
+	public static JagString field3252 = field3272;
 
 	@ObfuscatedName("wb.J")
-	public static class1 field3276 = Statics.method931("gleiten:");
+	public static JagString field3276 = JagString.wrap("gleiten:");
 
 	@ObfuscatedName("wb.K")
-	public static class1 field3277 = Statics.method931("(U3");
+	public static JagString field3277 = JagString.wrap("(U3");
 
 	@ObfuscatedName("wb.y")
-	public static class1 field3265 = field3257;
+	public static JagString field3265 = field3257;
 
 	@ObfuscatedName("wb.L")
 	public static class15 field3278 = new class15(50);
@@ -76,10 +76,10 @@ public final class class133 {
 	public static long[] field3281 = new long[32];
 
 	@ObfuscatedName("wb.N")
-	public static class1 field3280 = Statics.method931("60 Sekunden noch einmal)3)3)3");
+	public static JagString field3280 = JagString.wrap("60 Sekunden noch einmal)3)3)3");
 
 	@ObfuscatedName("wb.M")
-	public static class1 field3279 = Statics.method931("Lade Texturen )2 ");
+	public static JagString field3279 = JagString.wrap("Lade Texturen )2 ");
 
 	@ObfuscatedName("wb.D")
 	public final class96 field3270;

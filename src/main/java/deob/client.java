@@ -8,7 +8,7 @@ import java.net.Socket;
 public final class client extends class64 {
 
 	@ObfuscatedName("client.cb")
-	public static class1 field583 = Statics.method931("logo");
+	public static JagString field583 = JagString.wrap("logo");
 
 	@ObfuscatedName("client.eb")
 	public static int field585 = 0;
@@ -17,10 +17,10 @@ public final class client extends class64 {
 	public static int field587 = 1;
 
 	@ObfuscatedName("client.hb")
-	public static class1 field588 = Statics.method931("Use");
+	public static JagString field588 = JagString.wrap("Use");
 
 	@ObfuscatedName("client.db")
-	public static class1 field584 = field588;
+	public static JagString field584 = field588;
 
 	@ObfuscatedName("client.jb")
 	public static int field590 = -1;
@@ -29,31 +29,31 @@ public final class client extends class64 {
 	public static int field594 = 0;
 
 	@ObfuscatedName("client.pb")
-	public static class1 field596 = Statics.method931("Account locked as we suspect it has been stolen)3");
+	public static JagString field596 = JagString.wrap("Account locked as we suspect it has been stolen)3");
 
 	@ObfuscatedName("client.rb")
-	public static class1 field598 = Statics.method931("Verbinde mit Server)3)3)3");
+	public static JagString field598 = JagString.wrap("Verbinde mit Server)3)3)3");
 
 	@ObfuscatedName("client.sb")
-	public static class1[] field599 = new class1[5];
+	public static JagString[] field599 = new JagString[5];
 
 	@ObfuscatedName("client.vb")
-	public static class1 field602 = field596;
+	public static JagString field602 = field596;
 
 	@ObfuscatedName("client.X")
-	public static class1 field578 = Statics.method931("RuneScape wurde aktualisiert(Q");
+	public static JagString field578 = JagString.wrap("RuneScape wurde aktualisiert(Q");
 
 	@ObfuscatedName("client.W")
 	public static int field577 = 0;
 
 	@ObfuscatedName("client.xb")
-	public static class1 field604 = Statics.method931("Welcome to RuneScape");
+	public static JagString field604 = JagString.wrap("Welcome to RuneScape");
 
 	@ObfuscatedName("client.bb")
-	public static class1 field582 = field604;
+	public static JagString field582 = field604;
 
 	@ObfuscatedName("client.Cb")
-	public static class1 field609 = Statics.method931("backtop1");
+	public static JagString field609 = JagString.wrap("backtop1");
 
 	@ObfuscatedName("client.b(II)V")
 	public void method277(int arg0) {
@@ -89,7 +89,7 @@ public final class client extends class64 {
 	@ObfuscatedName("client.d(I)V")
 	@Override
 	public void method279() {
-		class82.field2063++;
+		Linkable.field2063++;
 		this.method282();
 		Statics.method320();
 		Statics.method680();
@@ -148,18 +148,18 @@ public final class client extends class64 {
 		} else if (class103.field2599 == 20) {
 			Statics.method888(Statics.field2902, Statics.field2892);
 		} else if (class103.field2599 == 25) {
-			if (class134.field3301 == 1) {
+			if (PixMap.field3301 == 1) {
 				if (class78.field1922 > class36.field948) {
 					class36.field948 = class78.field1922;
 				}
 				int var1 = (class36.field948 - class78.field1922) * 50 / class36.field948;
-				Statics.method872(class133.field3252, true, Statics.method956(new class1[] { class5.field221, Statics.method502(var1), class67.field1673 }));
-			} else if (class134.field3301 == 2) {
+				Statics.method872(class133.field3252, true, Statics.method956(new JagString[] { class5.field221, Statics.method502(var1), class67.field1673 }));
+			} else if (PixMap.field3301 == 2) {
 				if (class95.field2358 > class54.field1441) {
 					class54.field1441 = class95.field2358;
 				}
 				int var2 = (class54.field1441 - class95.field2358) * 50 / class54.field1441 + 50;
-				Statics.method872(class133.field3252, true, Statics.method956(new class1[] { class5.field221, Statics.method502(var2), class67.field1673 }));
+				Statics.method872(class133.field3252, true, Statics.method956(new JagString[] { class5.field221, Statics.method502(var2), class67.field1673 }));
 			} else {
 				Statics.method872(class133.field3252, false, null);
 			}
@@ -373,7 +373,7 @@ public final class client extends class64 {
 		Statics.method1025();
 		Statics.method411();
 		class10.method199();
-		class3.method70();
+		World.method70();
 		Statics.method116();
 		Statics.method46();
 		Statics.method800();
@@ -499,7 +499,7 @@ public final class client extends class64 {
 			Statics.field1668 = null;
 		}
 		if (class89.field2182 != 0) {
-			class37.field1007 = true;
+			Sprite.field1007 = true;
 		}
 		Statics.field704 = new class100();
 	}

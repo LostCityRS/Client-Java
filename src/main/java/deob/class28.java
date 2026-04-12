@@ -4,43 +4,43 @@ package deob;
 public final class class28 extends class44 {
 
 	@ObfuscatedName("ec.tb")
-	public static class1 field782 = Statics.method931("Loading textures )2 ");
+	public static JagString field782 = JagString.wrap("Loading textures )2 ");
 
 	@ObfuscatedName("ec.Ab")
-	public static class1 field789 = Statics.method931("::noclip");
+	public static JagString field789 = JagString.wrap("::noclip");
 
 	@ObfuscatedName("ec.Gb")
-	public static class1 field795 = Statics.method931("Nehmen");
+	public static JagString field795 = JagString.wrap("Nehmen");
 
 	@ObfuscatedName("ec.Cb")
-	public static class1 field791 = Statics.method931("Verbindung konnte nicht hergestellt werden)3");
+	public static JagString field791 = JagString.wrap("Verbindung konnte nicht hergestellt werden)3");
 
 	@ObfuscatedName("ec.Jb")
-	public static class1 field798 = Statics.method931("Loaded input handler");
+	public static JagString field798 = JagString.wrap("Loaded input handler");
 
 	@ObfuscatedName("ec.Bb")
-	public static class1 field790 = Statics.method931("W-=hlen Sie eine Option");
+	public static JagString field790 = JagString.wrap("W-=hlen Sie eine Option");
 
 	@ObfuscatedName("ec.Mb")
 	public static int field801 = 0;
 
 	@ObfuscatedName("ec.Qb")
-	public static class1 field805 = Statics.method931(" )2> @yel@");
+	public static JagString field805 = JagString.wrap(" )2> @yel@");
 
 	@ObfuscatedName("ec.Nb")
-	public static class1 field802 = Statics.method931("level)2");
+	public static JagString field802 = JagString.wrap("level)2");
 
 	@ObfuscatedName("ec.wb")
-	public static class1 field785 = field802;
+	public static JagString field785 = field802;
 
 	@ObfuscatedName("ec.Vb")
-	public static class1 field810 = Statics.method931("leuchten3:");
+	public static JagString field810 = JagString.wrap("leuchten3:");
 
 	@ObfuscatedName("ec.Hb")
-	public static class1 field796 = field798;
+	public static JagString field796 = field798;
 
 	@ObfuscatedName("ec.Eb")
-	public static class1 field793 = field782;
+	public static JagString field793 = field782;
 
 	@ObfuscatedName("ec.Fb")
 	public int field794 = 0;

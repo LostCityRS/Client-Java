@@ -4,16 +4,16 @@ import java.awt.*;
 import java.io.UnsupportedEncodingException;
 
 @ObfuscatedName("a")
-public final class class1 implements class56 {
+public final class JagString implements StringInterface {
 
 	@ObfuscatedName("a.eb")
 	public static final int field57 = 50;
 
 	@ObfuscatedName("a.gb")
-	public static class1 field59 = Statics.method931("Diese Welt ist voll)3");
+	public static JagString field59 = wrap("Diese Welt ist voll)3");
 
 	@ObfuscatedName("a.jb")
-	public static class1 field62 = Statics.method931("chatback");
+	public static JagString field62 = wrap("chatback");
 
 	@ObfuscatedName("a.n")
 	public static int field14 = 0;
@@ -22,25 +22,25 @@ public final class class1 implements class56 {
 	public boolean field21 = true;
 
 	@ObfuscatedName("a.w")
-	public static class1 field23 = Statics.method931("scrollbar");
+	public static JagString field23 = wrap("scrollbar");
 
 	@ObfuscatedName("a.K")
-	public static class1 field37 = Statics.method931("Private chat");
+	public static JagString field37 = wrap("Private chat");
 
 	@ObfuscatedName("a.J")
 	public static int field36 = 0;
 
 	@ObfuscatedName("a.S")
-	public static class1 field45 = Statics.method931("purple:");
+	public static JagString field45 = wrap("purple:");
 
 	@ObfuscatedName("a.kb")
-	public static class1 field63 = field45;
+	public static JagString field63 = field45;
 
 	@ObfuscatedName("a.W")
-	public static class1 field49 = field37;
+	public static JagString field49 = field37;
 
 	@ObfuscatedName("a.V")
-	public static class1 field48 = Statics.method931("Der Anmelde)2Server ist offline)3");
+	public static JagString field48 = wrap("Der Anmelde)2Server ist offline)3");
 
 	@ObfuscatedName("a.Z")
 	public static int[] field52 = new int[128];
@@ -54,8 +54,31 @@ public final class class1 implements class56 {
 	@ObfuscatedName("a.L")
 	public byte[] field38;
 
+	@ObfuscatedName("se.a(ILjava/lang/String;)La;")
+	public static JagString wrap(String arg1) {
+		byte[] var2 = arg1.getBytes();
+		int var3 = var2.length;
+		JagString var4 = new JagString();
+		int var5 = 0;
+		var4.field38 = new byte[var3];
+		while (var3 > var5) {
+			int var6 = var2[var5++] & 0xFF;
+			if (var6 <= 45 && var6 >= 40) {
+				if (var5 >= var3) {
+					break;
+				}
+				int var7 = var2[var5++] & 0xFF;
+				var4.field38[var4.field26++] = (byte) ((var6 - 40) * 43 + var7 - 48);
+			} else if (var6 != 0) {
+				var4.field38[var4.field26++] = (byte) var6;
+			}
+		}
+		var4.method28();
+		return var4.method17();
+	}
+
 	@ObfuscatedName("a.a(BI)La;")
-	public class1 method1(int arg0) {
+	public JagString method1(int arg0) {
 		return this.method19(arg0, this.field26);
 	}
 
@@ -71,8 +94,8 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(I)La;")
-	public class1 method4() {
-		class1 var1 = new class1();
+	public JagString method4() {
+		JagString var1 = new JagString();
 		var1.field26 = this.field26;
 		var1.field38 = new byte[this.field26];
 		boolean var2 = true;
@@ -98,7 +121,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(La;I)Z")
-	public boolean method5(class1 arg0) {
+	public boolean method5(JagString arg0) {
 		if (arg0 == null) {
 			return false;
 		} else if (this.field26 == arg0.field26) {
@@ -166,13 +189,13 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.b(La;I)I")
-	public int method11(class1 arg0) {
+	public int method11(JagString arg0) {
 		return this.method32(arg0);
 	}
 
 	@ObfuscatedName("a.a(Z)La;")
-	public class1 method12() {
-		class1 var1 = new class1();
+	public JagString method12() {
+		JagString var1 = new JagString();
 		var1.field26 = this.field26;
 		var1.field38 = new byte[this.field26];
 		for (int var2 = 0; var2 < this.field26; var2++) {
@@ -182,8 +205,8 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.c(I)La;")
-	public class1 method13() {
-		class1 var1 = new class1();
+	public JagString method13() {
+		JagString var1 = new JagString();
 		var1.field26 = 0;
 		int var2 = 0;
 		var1.field38 = new byte[12];
@@ -205,7 +228,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(La;Z)Z")
-	public boolean method14(class1 arg0) {
+	public boolean method14(JagString arg0) {
 		if (arg0 == null) {
 			return false;
 		} else if (this.field26 == arg0.field26) {
@@ -250,10 +273,10 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.d(I)La;")
-	public class1 method17() {
+	public JagString method17() {
 		long var2 = this.method37();
-		Class var4 = class1.class;
-		synchronized (class1.class) {
+		Class var4 = JagString.class;
+		synchronized (JagString.class) {
 			if (Statics.field1795 == null) {
 				Statics.field1795 = new class48(4096);
 			} else {
@@ -318,8 +341,8 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(III)La;")
-	public class1 method19(int arg0, int arg1) {
-		class1 var3 = new class1();
+	public JagString method19(int arg0, int arg1) {
+		JagString var3 = new JagString();
 		var3.field38 = new byte[arg1 - arg0];
 		var3.field26 = arg1 - arg0;
 		class33.method392(this.field38, arg0, var3.field38, 0, var3.field26);
@@ -327,7 +350,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(La;II)La;")
-	public class1 method20(class1 arg0, int arg1) {
+	public JagString method20(JagString arg0, int arg1) {
 		if (!this.field21) {
 			throw new IllegalArgumentException();
 		} else if (arg1 > this.field26) {
@@ -351,11 +374,11 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.b(II)La;")
-	public class1 method21(int arg0) {
+	public JagString method21(int arg0) {
 		if (arg0 <= 0 || arg0 > 255) {
 			throw new IllegalArgumentException("invalid char");
 		}
-		class1 var2 = new class1();
+		JagString var2 = new JagString();
 		var2.field38 = new byte[this.field26 + 1];
 		var2.field26 = this.field26 + 1;
 		class33.method392(this.field38, 0, var2.field38, 0, this.field26);
@@ -369,7 +392,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(La;B)La;")
-	public class1 method23(class1 arg0) {
+	public JagString method23(JagString arg0) {
 		if (!this.field21) {
 			throw new IllegalArgumentException();
 		}
@@ -399,7 +422,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(BLa;)Z")
-	public boolean method26(class1 arg0) {
+	public boolean method26(JagString arg0) {
 		if (arg0.field26 > this.field26) {
 			return false;
 		}
@@ -421,7 +444,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.d(B)La;")
-	public class1 method28() {
+	public JagString method28() {
 		if (!this.field21) {
 			throw new IllegalArgumentException();
 		}
@@ -435,7 +458,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.c(II)La;")
-	public class1 method29(int arg0) {
+	public JagString method29(int arg0) {
 		if (arg0 <= 0 || arg0 > 255) {
 			throw new IllegalArgumentException("invalid char");
 		} else if (this.field21) {
@@ -456,8 +479,8 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.f(I)La;")
-	public class1 method30() {
-		class1 var1 = new class1();
+	public JagString method30() {
+		JagString var1 = new JagString();
 		var1.field26 = this.field26;
 		var1.field38 = new byte[this.field26];
 		for (int var2 = 0; var2 < this.field26; var2++) {
@@ -478,7 +501,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(La;IZ)I")
-	public int method32(class1 arg0) {
+	public int method32(JagString arg0) {
 		int[] var2 = new int[arg0.field26];
 		int[] var3 = new int[arg0.field26];
 		int[] var4 = new int[256];
@@ -544,7 +567,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.b(La;B)I")
-	public int method35(class1 arg0) {
+	public int method35(JagString arg0) {
 		int var2;
 		if (arg0.field26 >= this.field26) {
 			var2 = this.field26;
@@ -569,9 +592,9 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.i(I)La;")
-	public class1 method36() {
+	public JagString method36() {
 		boolean var1 = true;
-		class1 var2 = new class1();
+		JagString var2 = new JagString();
 		var2.field26 = this.field26;
 		var2.field38 = new byte[this.field26];
 		for (int var3 = 0; var3 < this.field26; var3++) {
@@ -600,7 +623,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.a(ILa;)Z")
-	public boolean method38(class1 arg0) {
+	public boolean method38(JagString arg0) {
 		if (arg0.field26 > this.field26) {
 			return false;
 		}
@@ -658,7 +681,7 @@ public final class class1 implements class56 {
 	}
 
 	@ObfuscatedName("a.b(Z)La;")
-	public class1 method40() {
+	public JagString method40() {
 		int var1 = 0;
 		int var2 = this.field26;
 		while (var1 < this.field26 && (this.field38[var1] >= 0 && this.field38[var1] <= 32 || (this.field38[var1] & 0xFF) == 160)) {
@@ -670,7 +693,7 @@ public final class class1 implements class56 {
 		if (var1 == 0 && this.field26 == var2) {
 			return this;
 		}
-		class1 var3 = new class1();
+		JagString var3 = new JagString();
 		var3.field26 = var2 - var1;
 		var3.field38 = new byte[var3.field26];
 		for (int var4 = 0; var4 < var3.field26; var4++) {

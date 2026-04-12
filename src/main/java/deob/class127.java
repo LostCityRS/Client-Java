@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("va")
-public final class class127 extends class82 {
+public final class class127 extends Linkable {
 
 	@ObfuscatedName("va.cb")
 	public final int[][] field3107;
@@ -10,16 +10,16 @@ public final class class127 extends class82 {
 	public final int field3110;
 
 	@ObfuscatedName("va.gb")
-	public static class1 field3111 = Statics.method931("Service unavailable)3");
+	public static JagString field3111 = JagString.wrap("Service unavailable)3");
 
 	@ObfuscatedName("va.ib")
-	public static class1 field3113 = Statics.method931("rot:");
+	public static JagString field3113 = JagString.wrap("rot:");
 
 	@ObfuscatedName("va.jb")
 	public final int field3114;
 
 	@ObfuscatedName("va.kb")
-	public static class1 field3115 = Statics.method931("Bitte warten Sie )2 es wird versucht)1 die Verbindung wiederherzustellen)3");
+	public static JagString field3115 = JagString.wrap("Bitte warten Sie )2 es wird versucht)1 die Verbindung wiederherzustellen)3");
 
 	@ObfuscatedName("va.lb")
 	public static boolean field3116 = false;
@@ -28,28 +28,28 @@ public final class class127 extends class82 {
 	public final int[] field3117;
 
 	@ObfuscatedName("va.nb")
-	public static class1 field3118 = Statics.method931("cross");
+	public static JagString field3118 = JagString.wrap("cross");
 
 	@ObfuscatedName("va.pb")
-	public static class1 field3120 = Statics.method931("Musik)2Engine vorbereitet)3");
+	public static JagString field3120 = JagString.wrap("Musik)2Engine vorbereitet)3");
 
 	@ObfuscatedName("va.rb")
 	public static int field3122 = 0;
 
 	@ObfuscatedName("va.tb")
-	public static class1 field3124 = Statics.method931("Titelbild geladen)3");
+	public static JagString field3124 = JagString.wrap("Titelbild geladen)3");
 
 	@ObfuscatedName("va.ub")
-	public static class1 field3125 = Statics.method931(" hat sich eingeloggt)3");
+	public static JagString field3125 = JagString.wrap(" hat sich eingeloggt)3");
 
 	@ObfuscatedName("va.vb")
-	public static class1 field3126 = Statics.method931("You need a members account to login to this world)3");
+	public static JagString field3126 = JagString.wrap("You need a members account to login to this world)3");
 
 	@ObfuscatedName("va.wb")
-	public static class1 field3127 = field3126;
+	public static JagString field3127 = field3126;
 
 	@ObfuscatedName("va.xb")
-	public static class1 field3128 = field3111;
+	public static JagString field3128 = field3111;
 
 	public class127(int arg0, byte[] arg1) {
 		this.field3114 = arg0;

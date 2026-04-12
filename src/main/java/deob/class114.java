@@ -4,13 +4,13 @@ package deob;
 public final class class114 extends class44 {
 
 	@ObfuscatedName("t.sb")
-	public static class1 field2804 = Statics.method931("Um ein neues Spielkonto zu erstellen)1 m-Ussen Sie");
+	public static JagString field2804 = JagString.wrap("Um ein neues Spielkonto zu erstellen)1 m-Ussen Sie");
 
 	@ObfuscatedName("t.wb")
 	public static int[] field2808 = new int[] { 8, 11, 4, 6, 9, 7, 10 };
 
 	@ObfuscatedName("t.Ab")
-	public static class1 field2812 = Statics.method931(" Sekunde(Xn(Y -Ubertragen)3");
+	public static JagString field2812 = JagString.wrap(" Sekunde(Xn(Y -Ubertragen)3");
 
 	@ObfuscatedName("t.zb")
 	public static int field2811 = 0;
@@ -25,25 +25,25 @@ public final class class114 extends class44 {
 	public static int[] field2819 = new int[] { 16, 32, 64, 128 };
 
 	@ObfuscatedName("t.Gb")
-	public static class1 field2818 = Statics.method931("sideicons");
+	public static JagString field2818 = JagString.wrap("sideicons");
 
 	@ObfuscatedName("t.Db")
 	public static boolean field2815 = false;
 
 	@ObfuscatedName("t.Jb")
-	public static class1 field2821 = Statics.method931("Friends");
+	public static JagString field2821 = JagString.wrap("Friends");
 
 	@ObfuscatedName("t.Lb")
-	public static class1 field2823 = Statics.method931("Examine");
+	public static JagString field2823 = JagString.wrap("Examine");
 
 	@ObfuscatedName("t.tb")
-	public static class1 field2805 = field2823;
+	public static JagString field2805 = field2823;
 
 	@ObfuscatedName("t.Fb")
-	public static class1 field2817 = field2821;
+	public static JagString field2817 = field2821;
 
 	@ObfuscatedName("t.Mb")
-	public static class1 field2824 = Statics.method931("Ihr Charakter)2Profil wird in:");
+	public static JagString field2824 = JagString.wrap("Ihr Charakter)2Profil wird in:");
 
 	@ObfuscatedName("t.Kb")
 	public static int field2822 = (int) (Math.random() * 17.0D) - 8;
@@ -56,8 +56,8 @@ public final class class114 extends class44 {
 		return this.field2825[arg0].field2123;
 	}
 
-	public class114(class11 arg0, class11 arg1, int arg2, boolean arg3) {
-		class92 var5 = new class92();
+	public class114(Js5 arg0, Js5 arg1, int arg2, boolean arg3) {
+		LinkList var5 = new LinkList();
 		int var6 = arg0.method235(arg2);
 		this.field2825 = new class84[var6];
 		int[] var7 = arg0.method237(arg2);

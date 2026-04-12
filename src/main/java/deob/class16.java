@@ -10,22 +10,22 @@ public final class class16 extends class44 {
 	public int field510;
 
 	@ObfuscatedName("cc.zb")
-	public static class92 field515 = new class92();
+	public static LinkList field515 = new LinkList();
 
 	@ObfuscatedName("cc.Hb")
 	public static int field523 = 0;
 
 	@ObfuscatedName("cc.Kb")
-	public static class1 field526 = Statics.method931("Lade Ignorieren)2Liste)3)3)3");
+	public static JagString field526 = JagString.wrap("Lade Ignorieren)2Liste)3)3)3");
 
 	@ObfuscatedName("cc.Ib")
-	public static class1 field524 = Statics.method931(" )2> @cya@");
+	public static JagString field524 = JagString.wrap(" )2> @cya@");
 
 	@ObfuscatedName("cc.Eb")
-	public static class1 field520 = Statics.method931("To");
+	public static JagString field520 = JagString.wrap("To");
 
 	@ObfuscatedName("cc.Fb")
-	public static class1 field521 = field520;
+	public static JagString field521 = field520;
 
 	@ObfuscatedName("cc.Lb")
 	public static int field527 = 0;
@@ -46,5 +46,5 @@ public final class class16 extends class44 {
 	public int[] field519;
 
 	@ObfuscatedName("cc.Bb")
-	public class1[] field517;
+	public JagString[] field517;
 }

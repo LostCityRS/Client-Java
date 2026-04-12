@@ -9,52 +9,52 @@ public class class14 {
 	public static Calendar field453 = Calendar.getInstance();
 
 	@ObfuscatedName("ca.g")
-	public static class1 field455 = Statics.method931("backright1");
+	public static JagString field455 = JagString.wrap("backright1");
 
 	@ObfuscatedName("ca.l")
-	public static class1 field460 = Statics.method931("Unexpected loginserver response)3");
+	public static JagString field460 = JagString.wrap("Unexpected loginserver response)3");
 
 	@ObfuscatedName("ca.d")
-	public static class1 field452 = field460;
+	public static JagString field452 = field460;
 
 	@ObfuscatedName("ca.p")
 	public static int field464 = 0;
 
 	@ObfuscatedName("ca.q")
-	public static class1 field465 = Statics.method931("You have only just left another world)3");
+	public static JagString field465 = JagString.wrap("You have only just left another world)3");
 
 	@ObfuscatedName("ca.r")
 	public static int field466 = 0;
 
 	@ObfuscatedName("ca.s")
-	public static class1 field467 = Statics.method931("Duell akzeptieren");
+	public static JagString field467 = JagString.wrap("Duell akzeptieren");
 
 	@ObfuscatedName("ca.t")
-	public static class1 field468 = field465;
+	public static JagString field468 = field465;
 
 	@ObfuscatedName("ca.w")
 	public static int[] field471 = new int[5];
 
 	@ObfuscatedName("ca.y")
-	public static class1 field473 = Statics.method931("runes");
+	public static JagString field473 = JagString.wrap("runes");
 
 	@ObfuscatedName("ca.B")
 	public static byte field476 = 0;
 
 	@ObfuscatedName("ca.C")
-	public static class1 field477 = Statics.method931("_");
+	public static JagString field477 = JagString.wrap("_");
 
 	@ObfuscatedName("ca.z")
-	public static class1 field474 = Statics.method931("welle2:");
+	public static JagString field474 = JagString.wrap("welle2:");
 
 	@ObfuscatedName("ca.A")
 	public static int field475 = 0;
 
 	@ObfuscatedName("ca.E")
-	public static class1 field479 = Statics.method931("");
+	public static JagString field479 = JagString.wrap("");
 
 	@ObfuscatedName("ca.D")
-	public static class1 field478 = Statics.method931("backhmid2");
+	public static JagString field478 = JagString.wrap("backhmid2");
 
 	public class14(int arg0) {
 		Statics.field192 = arg0;

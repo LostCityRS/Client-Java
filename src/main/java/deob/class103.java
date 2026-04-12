@@ -16,13 +16,13 @@ public final class class103 {
 	public static int field2599 = 0;
 
 	@ObfuscatedName("ra.m")
-	public static class1 field2601 = Statics.method931("(Y");
+	public static JagString field2601 = JagString.wrap("(Y");
 
 	@ObfuscatedName("ra.o")
-	public static class1 field2603 = Statics.method931("Enter name of player to add to list");
+	public static JagString field2603 = JagString.wrap("Enter name of player to add to list");
 
 	@ObfuscatedName("ra.n")
-	public static class1 field2602 = field2603;
+	public static JagString field2602 = field2603;
 
 	@ObfuscatedName("ra.q")
 	public static long field2605 = 0L;
@@ -31,17 +31,17 @@ public final class class103 {
 	public static int field2607 = -1;
 
 	@ObfuscatedName("ra.u")
-	public static class1 field2609 = Statics.method931("Accept trade");
+	public static JagString field2609 = JagString.wrap("Accept trade");
 
 	@ObfuscatedName("ra.v")
-	public static class1 field2610 = field2609;
+	public static JagString field2610 = field2609;
 
 	@ObfuscatedName("ra.w")
-	public static class1 field2611 = Statics.method931("glow3:");
+	public static JagString field2611 = JagString.wrap("glow3:");
 
 	@ObfuscatedName("ra.j")
-	public static class1 field2598 = field2611;
+	public static JagString field2598 = field2611;
 
 	@ObfuscatedName("ra.x")
-	public static class1 field2612 = Statics.method931("@cr1@");
+	public static JagString field2612 = JagString.wrap("@cr1@");
 }

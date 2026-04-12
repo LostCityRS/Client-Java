@@ -2046,7 +2046,7 @@ public final class class91 extends class128 {
 	}
 
 	@ObfuscatedName("pa.a(Lbd;II)Lpa;")
-	public static class91 method798(class11 arg0, int arg1) {
+	public static class91 method798(Js5 arg0, int arg1) {
 		byte[] var2 = arg0.method217(0, arg1);
 		return var2 == null ? null : new class91(var2);
 	}
