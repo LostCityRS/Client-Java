@@ -2,8 +2,7 @@ package jagex3.js5;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class103;
-import deob.class33;
+import jagex3.util.ArrayUtil;
 import jagex3.callstack.JagException;
 import jagex3.datastruct.IntHashTable;
 import jagex3.io.BZip2;
@@ -18,7 +17,9 @@ import java.util.zip.GZIPInputStream;
 @ObfuscatedName("bd")
 public abstract class Js5 {
 
-	@ObfuscatedName("bd.b")
+    @ObfuscatedName("ra.i")
+    public static final int field2597 = 0;
+    @ObfuscatedName("bd.b")
 	public byte[][] field362;
 
 	@ObfuscatedName("bd.f")
@@ -68,7 +69,7 @@ public abstract class Js5 {
 		Packet var1 = new Packet(arg0);
 		int var2 = var1.method144();
 		int var3 = var1.method167();
-		if (var3 < 0 || class103.field2597 != 0 && class103.field2597 < var3) {
+		if (var3 < 0 || field2597 != 0 && field2597 < var3) {
 			throw new RuntimeException();
 		} else if (var2 == 0) {
 			byte[] var7 = new byte[var3];
@@ -76,7 +77,7 @@ public abstract class Js5 {
 			return var7;
 		} else {
 			int var4 = var1.method167();
-			if (var4 < 0 || class103.field2597 != 0 && var4 > class103.field2597) {
+			if (var4 < 0 || field2597 != 0 && var4 > field2597) {
 				throw new RuntimeException();
 			}
 			byte[] var5 = new byte[var4];
@@ -264,7 +265,7 @@ public abstract class Js5 {
 			var8 = this.field362[arg0];
 		} else {
 			var8 = new byte[this.field362[arg0].length];
-			class33.method392(this.field362[arg0], 0, var8, 0, var8.length);
+			ArrayUtil.copy(this.field362[arg0], 0, var8, 0, var8.length);
 			Packet var9 = new Packet(var8);
 			var9.method159(arg1, var9.field284.length);
 		}
@@ -304,7 +305,7 @@ public abstract class Js5 {
 				int var23 = 0;
 				for (int var24 = 0; var24 < var3; var24++) {
 					var23 += var14.method167();
-					class33.method392(var10, var21, var4[var5[var24]], var16[var24], var23);
+					ArrayUtil.copy(var10, var21, var4[var5[var24]], var16[var24], var23);
 					var16[var24] += var23;
 					var21 += var23;
 				}

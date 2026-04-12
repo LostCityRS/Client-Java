@@ -1,5 +1,7 @@
-package deob;
+package jagex3.io;
 
+import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;

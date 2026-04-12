@@ -1,6 +1,6 @@
-package deob;
+package jagex3.client;
 
-import jagex3.client.ClientScript;
+import deob.ObfuscatedName;
 import jagex3.util.JagString;
 
 @ObfuscatedName("ua")

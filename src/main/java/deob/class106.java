@@ -1,7 +1,6 @@
 package deob;
 
 import jagex3.dash3d.ModelSource;
-import jagex3.datastruct.LruCache;
 
 @ObfuscatedName("rd")
 public final class class106 {
@@ -29,11 +28,5 @@ public final class class106 {
 
 	@ObfuscatedName("rd.u")
 	public int field2678 = 0;
-
-	@ObfuscatedName("rd.w")
-	public static LruCache field2680 = new LruCache(50);
-
-	@ObfuscatedName("rd.z")
-	public static long[] field2683 = new long[100];
 
 }

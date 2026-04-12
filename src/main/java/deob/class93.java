@@ -15,7 +15,4 @@ public final class class93 {
 	@ObfuscatedName("pc.w")
 	public int field2328;
 
-	@ObfuscatedName("pc.y")
-	public static int field2330 = 0;
-
 }

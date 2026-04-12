@@ -2,8 +2,6 @@ package deob;
 
 import jagex3.dash3d.ModelSource;
 
-import java.util.zip.CRC32;
-
 @ObfuscatedName("id")
 public final class class52 {
 
@@ -12,9 +10,6 @@ public final class class52 {
 
 	@ObfuscatedName("id.b")
 	public int field1361;
-
-	@ObfuscatedName("id.d")
-	public static CRC32 field1363 = new CRC32();
 
 	@ObfuscatedName("id.i")
 	public int field1368;

@@ -3,14 +3,8 @@ package deob;
 @ObfuscatedName("rc")
 public final class class105 {
 
-	@ObfuscatedName("rc.d")
-	public static int field2630 = 0;
-
 	@ObfuscatedName("rc.j")
 	public final int field2636;
-
-	@ObfuscatedName("rc.l")
-	public static int field2638 = 0;
 
 	@ObfuscatedName("rc.o")
 	public final int field2641;
@@ -26,9 +20,6 @@ public final class class105 {
 
 	@ObfuscatedName("rc.v")
 	public final int field2648;
-
-	@ObfuscatedName("rc.w")
-	public static int field2649 = 0;
 
 	@ObfuscatedName("rc.y")
 	public final int field2651;

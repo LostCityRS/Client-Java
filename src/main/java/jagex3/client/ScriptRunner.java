@@ -5,9 +5,15 @@ import jagex3.config.IfType;
 import jagex3.config.ObjType;
 import jagex3.util.JagString;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class ScriptRunner {
+	@ObfuscatedName("l.j")
+	public static int field1653 = 0;
+	@ObfuscatedName("ca.e")
+	public static Calendar field453 = Calendar.getInstance();
+
 	@ObfuscatedName("ob.a([Ljava/lang/Object;IILqd;IZ)V")
 	public static void method754(Object[] arg0, int arg1, IfType arg2, int arg3) {
 		int var4 = 0;
@@ -59,7 +65,7 @@ public class ScriptRunner {
 						var4--;
 						Statics.field2803[var16] = Statics.field3255[var4];
 					} else if (var14 == 3) {
-						ReflectionCheck.field2957[var8++] = var5.field517[var9];
+						Statics.field2957[var8++] = var5.field517[var9];
 					} else if (var14 == 6) {
 						var9 += var6[var9];
 					} else if (var14 == 7) {
@@ -83,10 +89,10 @@ public class ScriptRunner {
 							var9 += var6[var9];
 						}
 					} else if (var14 == 21) {
-						if (class66.field1653 == 0) {
+						if (field1653 == 0) {
 							return;
 						}
-						ClientGosubFrame var17 = Statics.field2736[--class66.field1653];
+						ClientGosubFrame var17 = Statics.field2736[--field1653];
 						Statics.field2606 = var17.field3010;
 						Statics.field1162 = var17.field3000;
 						var9 = var17.field3013;
@@ -119,16 +125,16 @@ public class ScriptRunner {
 							var4--;
 							Statics.field1162[var10001] = Statics.field3255[var4];
 						} else if (var14 == 35) {
-							ReflectionCheck.field2957[var8++] = Statics.field2606[var6[var9]];
+							Statics.field2957[var8++] = Statics.field2606[var6[var9]];
 						} else if (var14 == 36) {
 							var10001 = var6[var9];
 							var8--;
-							Statics.field2606[var10001] = ReflectionCheck.field2957[var8];
+							Statics.field2606[var10001] = Statics.field2957[var8];
 						} else if (var14 == 37) {
 							int var20 = var6[var9];
 							var8 -= var20;
-							JagString var21 = Statics.method825(var20, var8, ReflectionCheck.field2957);
-							ReflectionCheck.field2957[var8++] = var21;
+							JagString var21 = Statics.method825(var20, var8, Statics.field2957);
+							Statics.field2957[var8++] = var21;
 						} else if (var14 == 38) {
 							var4--;
 						} else if (var14 == 39) {
@@ -142,7 +148,7 @@ public class ScriptRunner {
 								var24[var26] = Statics.field3255[var4 + var26 - var23.field510];
 							}
 							for (int var27 = 0; var27 < var23.field513; var27++) {
-								var25[var27] = ReflectionCheck.field2957[var8 + var27 - var23.field513];
+								var25[var27] = Statics.field2957[var8 + var27 - var23.field513];
 							}
 							var8 -= var23.field513;
 							var4 -= var23.field510;
@@ -152,7 +158,7 @@ public class ScriptRunner {
 							var28.field3000 = Statics.field1162;
 							var5 = var23;
 							var28.field3013 = var9;
-							Statics.field2736[class66.field1653++] = var28;
+							Statics.field2736[field1653++] = var28;
 							var6 = var23.field509;
 							Statics.field2606 = var25;
 							var9 = -1;
@@ -299,7 +305,7 @@ public class ScriptRunner {
 						var41.field2507 = Statics.field3255[var4] == 1;
 					} else if (var14 == 1112) {
 						var8--;
-						var41.field2474 = ReflectionCheck.field2957[var8];
+						var41.field2474 = Statics.field2957[var8];
 					} else if (var14 == 1113) {
 						var4--;
 						var41.field2448 = Statics.field3255[var4];
@@ -366,12 +372,12 @@ public class ScriptRunner {
 					}
 					if (var14 >= 1300 && var14 <= 1309 || !(var14 < 1314 || var14 > 1317)) {
 						var8--;
-						JagString var122 = ReflectionCheck.field2957[var8];
+						JagString var122 = Statics.field2957[var8];
 						Object[] var123 = new Object[var122.method10() + 1];
 						for (int var124 = var123.length - 1; var124 >= 1; var124--) {
 							if (var122.method6(var124 - 1) == 115) {
 								var8--;
-								var123[var124] = ReflectionCheck.field2957[var8];
+								var123[var124] = Statics.field2957[var8];
 							} else {
 								var4--;
 								var123[var124] = Integer.valueOf(Statics.field3255[var4]);
@@ -429,7 +435,7 @@ public class ScriptRunner {
 								var121.field2467 = var126;
 							}
 							var8--;
-							var121.field2467[var125] = ReflectionCheck.field2957[var8];
+							var121.field2467[var125] = Statics.field2957[var8];
 						} else {
 							var8--;
 						}
@@ -627,7 +633,7 @@ public class ScriptRunner {
 									break;
 								}
 								var4 -= 2;
-								Statics.method928(Statics.field3255[var4 + 1], Statics.field3255[var4]);
+								Client.method928(Statics.field3255[var4 + 1], Statics.field3255[var4]);
 							}
 						} else if (var14 < 3400) {
 							if (var14 != 3300) {
@@ -640,53 +646,53 @@ public class ScriptRunner {
 							}
 							if (var14 == 4100) {
 								var8--;
-								JagString var102 = ReflectionCheck.field2957[var8];
+								JagString var102 = Statics.field2957[var8];
 								var4--;
 								int var103 = Statics.field3255[var4];
-								ReflectionCheck.field2957[var8++] = JagString.join(new JagString[]{var102, Statics.method502(var103)});
+								Statics.field2957[var8++] = JagString.join(new JagString[]{var102, Statics.method502(var103)});
 							} else if (var14 == 4101) {
 								var8 -= 2;
-								JagString var104 = ReflectionCheck.field2957[var8 + 1];
-								JagString var105 = ReflectionCheck.field2957[var8];
-								ReflectionCheck.field2957[var8++] = JagString.join(new JagString[]{var105, var104});
+								JagString var104 = Statics.field2957[var8 + 1];
+								JagString var105 = Statics.field2957[var8];
+								Statics.field2957[var8++] = JagString.join(new JagString[]{var105, var104});
 							} else if (var14 == 4102) {
 								var8--;
-								JagString var106 = ReflectionCheck.field2957[var8];
+								JagString var106 = Statics.field2957[var8];
 								var4--;
 								int var107 = Statics.field3255[var4];
-								ReflectionCheck.field2957[var8++] = JagString.join(new JagString[]{var106, Statics.method1034(var107)});
+								Statics.field2957[var8++] = JagString.join(new JagString[]{var106, Statics.method1034(var107)});
 							} else if (var14 == 4103) {
 								var8--;
-								JagString var108 = ReflectionCheck.field2957[var8];
-								ReflectionCheck.field2957[var8++] = var108.method30();
+								JagString var108 = Statics.field2957[var8];
+								Statics.field2957[var8++] = var108.method30();
 							} else if (var14 == 4104) {
 								var4--;
 								int var109 = Statics.field3255[var4];
 								long var110 = ((long) var109 + 11745L) * 86400000L;
-								class14.field453.setTime(new Date(var110));
-								int var112 = class14.field453.get(5);
-								int var113 = class14.field453.get(2);
-								int var114 = class14.field453.get(1);
-								ReflectionCheck.field2957[var8++] = JagString.join(new JagString[]{Statics.method502(var112), Statics.field1572, Statics.field621[var113], Statics.field1572, Statics.method502(var114)});
+								field453.setTime(new Date(var110));
+								int var112 = field453.get(5);
+								int var113 = field453.get(2);
+								int var114 = field453.get(1);
+								Statics.field2957[var8++] = JagString.join(new JagString[]{Statics.method502(var112), Statics.field1572, Statics.field621[var113], Statics.field1572, Statics.method502(var114)});
 							} else if (var14 == 4105) {
 								var8 -= 2;
-								JagString var115 = ReflectionCheck.field2957[var8];
-								JagString var116 = ReflectionCheck.field2957[var8 + 1];
+								JagString var115 = Statics.field2957[var8];
+								JagString var116 = Statics.field2957[var8 + 1];
 								if (Client.field2621.field90 != null && Client.field2621.field90.field1658) {
-									ReflectionCheck.field2957[var8++] = var116;
+									Statics.field2957[var8++] = var116;
 								} else {
-									ReflectionCheck.field2957[var8++] = var115;
+									Statics.field2957[var8++] = var115;
 								}
 							} else if (var14 == 4106) {
 								var4--;
 								int var117 = Statics.field3255[var4];
-								ReflectionCheck.field2957[var8++] = Statics.method502(var117);
+								Statics.field2957[var8++] = Statics.method502(var117);
 							} else {
 								if (var14 != 4107) {
 									break;
 								}
 								var8 -= 2;
-								Statics.field3255[var4++] = ReflectionCheck.field2957[var8].method35(ReflectionCheck.field2957[var8 + 1]);
+								Statics.field3255[var4++] = Statics.field2957[var8].method35(Statics.field2957[var8 + 1]);
 							}
 						} else if (var14 == 4000) {
 							var4 -= 2;
@@ -775,7 +781,7 @@ public class ScriptRunner {
 						}
 					} else if (var14 == 3100) {
 						var8--;
-						JagString var118 = ReflectionCheck.field2957[var8];
+						JagString var118 = Statics.field2957[var8];
 						Statics.method758(0, var118, Statics.field2585);
 					} else {
 						if (var14 != 3101) {

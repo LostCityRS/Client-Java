@@ -1,6 +1,7 @@
 package deob;
 
 import jagex3.callstack.JagException;
+import jagex3.util.ArrayUtil;
 
 import java.io.InputStream;
 
@@ -58,7 +59,7 @@ public final class class68 extends InputStream {
 				this.read(arg0, arg1 + 256, arg2 - 256);
 				return arg2;
 			} else {
-				class14.method258(this.field1698, arg2);
+				ArrayUtil.clear(this.field1698, arg2);
 				for (int var4 = 0; var4 < arg2; var4++) {
 					int var5 = this.field1698[var4];
 					if ((var5 + 8388608 & 0xFF000000) != 0) {

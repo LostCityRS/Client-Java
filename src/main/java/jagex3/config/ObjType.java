@@ -312,7 +312,18 @@ public final class ObjType extends Linkable2 {
 		Statics.field253.method267();
 	}
 
-	@ObfuscatedName("ta.a(BZ)Z")
+    @ObfuscatedName("qd.b(IB)La;")
+    public static JagString method862(int arg0) {
+        if (arg0 < 100000) {
+            return Statics.method502(arg0);
+        } else if (arg0 < 10000000) {
+            return JagString.join(new JagString[]{Statics.method502(arg0 / 1000), Statics.field2354});
+        } else {
+            return JagString.join(new JagString[]{Statics.method502(arg0 / 1000000), Statics.field1184});
+        }
+    }
+
+    @ObfuscatedName("ta.a(BZ)Z")
 	public boolean method939(boolean arg0) {
 		int var2 = this.field2831;
 		int var3 = this.field2872;

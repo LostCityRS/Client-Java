@@ -2,7 +2,6 @@ package jagex3.client;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class105;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -34,8 +33,10 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	public static int[] field2625 = new int[128];
 	@ObfuscatedName("va.rb")
 	public static int field3122 = 0;
+    @ObfuscatedName("rc.d")
+    public static int field2630 = 0;
 
-	@ObfuscatedName("ta.b(B)V")
+    @ObfuscatedName("ta.b(B)V")
 	public static void method945() {
 		if (field2924 != null) {
 			ClientKeyboardListener var0 = field2924;
@@ -104,7 +105,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	public static void cycle() {
 		ClientKeyboardListener var0 = field2924;
 		synchronized (field2924) {
-			field2921 = class105.field2630;
+			field2921 = field2630;
 			if (field1326 < 0) {
 				for (int var1 = 0; var1 < 112; var1++) {
 					Client.field1488[var1] = false;
@@ -121,7 +122,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 					}
 				}
 			}
-			class105.field2630 = field2365;
+			field2630 = field2365;
 		}
 	}
 
@@ -129,7 +130,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	public static boolean method685() {
 		ClientKeyboardListener var0 = field2924;
 		synchronized (field2924) {
-			if (field2921 == class105.field2630) {
+			if (field2921 == field2630) {
 				return false;
 			} else {
 				Statics.field2885 = field1465[field2921];

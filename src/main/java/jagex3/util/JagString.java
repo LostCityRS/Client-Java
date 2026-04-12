@@ -2,7 +2,6 @@ package jagex3.util;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class33;
 import deob.class73;
 import jagex3.datastruct.HashTable;
 
@@ -62,7 +61,7 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("a.a(II[BII)I")
 	public int method2(int arg0, byte[] arg1, int arg2) {
-		class33.method392(this.field38, 0, arg1, arg2, arg0);
+		ArrayUtil.copy(this.field38, 0, arg1, arg2, arg0);
 		return arg0;
 	}
 
@@ -323,7 +322,7 @@ public final class JagString implements StringInterface {
 		JagString var3 = new JagString();
 		var3.field38 = new byte[arg1 - arg0];
 		var3.field26 = arg1 - arg0;
-		class33.method392(this.field38, arg0, var3.field38, 0, var3.field26);
+		ArrayUtil.copy(this.field38, arg0, var3.field38, 0, var3.field26);
 		return var3;
 	}
 
@@ -340,10 +339,10 @@ public final class JagString implements StringInterface {
 				for (var3 = 1; var3 < arg0.field26 + arg1; var3 += var3) {
 				}
 				byte[] var4 = new byte[var3];
-				class33.method392(this.field38, 0, var4, 0, this.field26);
+				ArrayUtil.copy(this.field38, 0, var4, 0, this.field26);
 				this.field38 = var4;
 			}
-			class33.method392(arg0.field38, 0, this.field38, arg1, arg0.field26);
+			ArrayUtil.copy(arg0.field38, 0, this.field38, arg1, arg0.field26);
 			if (this.field26 < arg1 + arg0.field26) {
 				this.field26 = arg0.field26 + arg1;
 			}
@@ -359,7 +358,7 @@ public final class JagString implements StringInterface {
 		JagString var2 = new JagString();
 		var2.field38 = new byte[this.field26 + 1];
 		var2.field26 = this.field26 + 1;
-		class33.method392(this.field38, 0, var2.field38, 0, this.field26);
+		ArrayUtil.copy(this.field38, 0, var2.field38, 0, this.field26);
 		var2.field38[this.field26] = (byte) arg0;
 		return var2;
 	}
@@ -380,10 +379,10 @@ public final class JagString implements StringInterface {
 			for (var2 = 1; var2 < this.field26 + arg0.field26; var2 += var2) {
 			}
 			byte[] var3 = new byte[var2];
-			class33.method392(this.field38, 0, var3, 0, this.field26);
+			ArrayUtil.copy(this.field38, 0, var3, 0, this.field26);
 			this.field38 = var3;
 		}
-		class33.method392(arg0.field38, 0, this.field38, this.field26, arg0.field26);
+		ArrayUtil.copy(arg0.field38, 0, this.field38, this.field26, arg0.field26);
 		this.field26 += arg0.field26;
 		return this;
 	}
@@ -429,7 +428,7 @@ public final class JagString implements StringInterface {
 		this.field42 = 0;
 		if (this.field38.length != this.field26) {
 			byte[] var1 = new byte[this.field26];
-			class33.method392(this.field38, 0, var1, 0, this.field26);
+			ArrayUtil.copy(this.field38, 0, var1, 0, this.field26);
 			this.field38 = var1;
 		}
 		return this;
@@ -446,7 +445,7 @@ public final class JagString implements StringInterface {
 				for (var2 = 1; var2 <= this.field26; var2 += var2) {
 				}
 				byte[] var3 = new byte[var2];
-				class33.method392(this.field38, 0, var3, 0, this.field26);
+				ArrayUtil.copy(this.field38, 0, var3, 0, this.field26);
 				this.field38 = var3;
 			}
 			this.field38[this.field26++] = (byte) arg0;
@@ -474,7 +473,7 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("a.g(I)[B")
 	public byte[] method31() {
 		byte[] var1 = new byte[this.field26];
-		class33.method392(this.field38, 0, var1, 0, this.field26);
+		ArrayUtil.copy(this.field38, 0, var1, 0, this.field26);
 		return var1;
 	}
 

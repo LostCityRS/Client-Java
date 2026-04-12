@@ -1,7 +1,7 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import deob.class33;
+import jagex3.util.ArrayUtil;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -66,7 +66,7 @@ public final class BufferedRandomAccessFile {
 			if (this.field3260 != -1L && (long) arg1 + this.field3245 > (long) this.field3259.length + this.field3260) {
 				int var4 = (int) (this.field3260 + (long) this.field3259.length - this.field3245);
 				arg1 -= var4;
-				class33.method392(arg2, arg0, this.field3259, (int) (this.field3245 - this.field3260), var4);
+				ArrayUtil.copy(arg2, arg0, this.field3259, (int) (this.field3245 - this.field3260), var4);
 				this.field3245 += var4;
 				this.field3262 = this.field3259.length;
 				arg0 += var4;
@@ -96,14 +96,14 @@ public final class BufferedRandomAccessFile {
 				}
 				if (var7 > -1L && var5 > var7) {
 					int var9 = (int) (var5 - var7);
-					class33.method392(arg2, (int) (var7 + (long) arg0 - this.field3245), this.field3250, (int) (var7 - this.field3263), var9);
+					ArrayUtil.copy(arg2, (int) (var7 + (long) arg0 - this.field3245), this.field3250, (int) (var7 - this.field3263), var9);
 				}
 				this.field3245 += arg1;
 			} else if (arg1 > 0) {
 				if (this.field3260 == -1L) {
 					this.field3260 = this.field3245;
 				}
-				class33.method392(arg2, arg0, this.field3259, (int) (this.field3245 - this.field3260), arg1);
+				ArrayUtil.copy(arg2, arg0, this.field3259, (int) (this.field3245 - this.field3260), arg1);
 				this.field3245 += arg1;
 				if ((long) this.field3262 < this.field3245 - this.field3260) {
 					this.field3262 = (int) (this.field3245 - this.field3260);
@@ -122,7 +122,7 @@ public final class BufferedRandomAccessFile {
 				throw new ArrayIndexOutOfBoundsException(arg1 - arg2.length);
 			}
 			if (this.field3260 != -1L && this.field3245 >= this.field3260 && (long) arg1 + this.field3245 <= (long) this.field3262 + this.field3260) {
-				class33.method392(this.field3259, (int) (this.field3245 - this.field3260), arg2, 0, arg1);
+				ArrayUtil.copy(this.field3259, (int) (this.field3245 - this.field3260), arg2, 0, arg1);
 				this.field3245 += arg1;
 				return;
 			}
@@ -133,7 +133,7 @@ public final class BufferedRandomAccessFile {
 				if (var7 > arg1) {
 					var7 = arg1;
 				}
-				class33.method392(this.field3250, (int) (this.field3245 - this.field3263), arg2, 0, var7);
+				ArrayUtil.copy(this.field3250, (int) (this.field3245 - this.field3263), arg2, 0, var7);
 				arg0 = var7;
 				this.field3245 += var7;
 				arg1 -= var7;
@@ -157,7 +157,7 @@ public final class BufferedRandomAccessFile {
 				if (arg1 > this.field3256) {
 					var8 = this.field3256;
 				}
-				class33.method392(this.field3250, 0, arg2, arg0, var8);
+				ArrayUtil.copy(this.field3250, 0, arg2, arg0, var8);
 				this.field3245 += var8;
 				arg0 += var8;
 				arg1 -= var8;
@@ -188,7 +188,7 @@ public final class BufferedRandomAccessFile {
 				}
 				if (var13 > -1L && var13 < var11) {
 					int var15 = (int) (var11 - var13);
-					class33.method392(this.field3259, (int) (var13 - this.field3260), arg2, (int) (var13 - var5), var15);
+					ArrayUtil.copy(this.field3259, (int) (var13 - this.field3260), arg2, (int) (var13 - var5), var15);
 					if (this.field3245 < var11) {
 						arg1 = (int) ((long) arg1 + this.field3245 - var11);
 						this.field3245 = var11;
@@ -264,7 +264,7 @@ public final class BufferedRandomAccessFile {
 		}
 		if (var1 > -1L && var3 > var1) {
 			int var5 = (int) (var3 - var1);
-			class33.method392(this.field3259, (int) (var1 - this.field3260), this.field3250, (int) (var1 - this.field3263), var5);
+			ArrayUtil.copy(this.field3259, (int) (var1 - this.field3260), this.field3250, (int) (var1 - this.field3263), var5);
 		}
 		this.field3262 = 0;
 		this.field3260 = -1L;

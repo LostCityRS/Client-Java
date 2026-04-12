@@ -1,12 +1,10 @@
-package deob;
+package jagex3.sound;
 
+import deob.ObfuscatedName;
 import jagex3.client.Client;
 import jagex3.config.LocType;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.Linkable;
-import jagex3.sound.JagFX;
-import jagex3.sound.Wave;
-import jagex3.sound.WaveStream;
 
 @ObfuscatedName("be")
 public final class BgSound extends Linkable {

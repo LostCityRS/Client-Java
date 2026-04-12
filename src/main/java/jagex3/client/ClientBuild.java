@@ -1,6 +1,6 @@
 package jagex3.client;
 
-import deob.BgSound;
+import jagex3.sound.BgSound;
 import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.config.FloType;
@@ -218,7 +218,7 @@ public class ClientBuild {
 			for (int var13 = 0; var13 < 64; var13++) {
 				for (int var14 = 0; var14 < 64; var14++) {
 					if (arg2 == var12 && var13 >= arg1 && arg1 + 8 > var13 && var14 >= arg5 && arg5 + 8 > var14) {
-						method841(arg4 + Statics.method519(arg6, var13 & 0x7, var14 & 0x7), arg6, var11, arg0 + Statics.method677(var13 & 0x7, var14 & 0x7, arg6), 0, 0, arg3);
+						method841(arg4 + RegionRotate.method519(arg6, var13 & 0x7, var14 & 0x7), arg6, var11, arg0 + Statics.method677(var13 & 0x7, var14 & 0x7, arg6), 0, 0, arg3);
 					} else {
 						method841(-1, 0, var11, -1, 0, 0, 0);
 					}
@@ -1104,5 +1104,26 @@ public class ClientBuild {
 		Statics.field902 = null;
 		Statics.field900 = null;
 		Statics.field899 = null;
+	}
+
+	@ObfuscatedName("kd.a(IIIZI)I")
+	public static int method627(int arg0, int arg1, int arg2, int arg3) {
+		int var4 = 65536 - Pix3D.field778[arg3 * 1024 / arg1] >> 1;
+		return ((65536 - var4) * arg0 >> 16) + (arg2 * var4 >> 16);
+	}
+
+	@ObfuscatedName("ae.a(IIII)I")
+	public static int method124(int arg0, int arg1, int arg2) {
+		int var3 = arg0 & arg1 - 1;
+		int var4 = arg2 / arg1;
+		int var5 = arg1 - 1 & arg2;
+		int var6 = arg0 / arg1;
+		int var7 = Statics.method121(var6, var4);
+		int var8 = Statics.method121(var6 + 1, var4);
+		int var9 = Statics.method121(var6, var4 + 1);
+		int var10 = Statics.method121(var6 + 1, var4 + 1);
+		int var11 = method627(var7, arg1, var8, var3);
+		int var12 = method627(var9, arg1, var10, var3);
+		return method627(var11, arg1, var12, var5);
 	}
 }

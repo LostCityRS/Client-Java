@@ -35,6 +35,40 @@ public final class Js5NetThread implements Runnable {
 		method500();
 	}
 
+    @ObfuscatedName("ia.a(Lu;ILsa;B)V")
+    public static void method507(Js5Loader arg0, int arg1, DataFile arg2) {
+        byte[] var3 = null;
+        LinkList var4 = Statics.field1547;
+        synchronized (Statics.field1547) {
+            for (Js5WorkerRequest var5 = (Js5WorkerRequest) Statics.field1547.method802(); var5 != null; var5 = (Js5WorkerRequest) Statics.field1547.method809()) {
+                if ((long) arg1 == var5.field2073 && var5.field1469 == arg2 && var5.field1464 == 0) {
+                    var3 = var5.field1454;
+                    break;
+                }
+            }
+        }
+        if (var3 == null) {
+            byte[] var6 = arg2.method906(arg1);
+            arg0.method978(true, var6, arg1, arg2);
+        } else {
+            arg0.method978(true, var3, arg1, arg2);
+        }
+    }
+
+	@ObfuscatedName("fe.a(ILu;Lsa;B)V")
+	public static void method410(int arg0, Js5Loader arg1, DataFile arg2) {
+		Js5WorkerRequest var3 = new Js5WorkerRequest();
+		var3.field1464 = 1;
+		var3.field2073 = arg0;
+		var3.field1469 = arg2;
+		var3.field1456 = arg1;
+		LinkList var4 = Statics.field1547;
+		synchronized (Statics.field1547) {
+			Statics.field1547.method804(var3);
+		}
+		method500();
+	}
+
 	@Override
 	public void run() {
 		try {

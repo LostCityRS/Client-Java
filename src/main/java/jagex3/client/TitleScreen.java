@@ -1,11 +1,9 @@
 package jagex3.client;
 
 import deob.*;
-import jagex3.graphics.Pix2D;
-import jagex3.graphics.Pix32;
-import jagex3.graphics.PixFont;
-import jagex3.graphics.PixMap;
+import jagex3.graphics.*;
 import jagex3.js5.Js5;
+import jagex3.js5.Js5Net;
 import jagex3.util.JagString;
 
 import java.awt.*;
@@ -13,6 +11,12 @@ import java.awt.*;
 public class TitleScreen {
 	@ObfuscatedName("uc.I")
 	public static JagString field3071 = Statics.field3067;
+	@ObfuscatedName("ie.g")
+	public static int field1395 = 0;
+	@ObfuscatedName("f.u")
+	public static int[] field847 = new int[256];
+	@ObfuscatedName("hd.Kb")
+	public static int field1209 = 0;
 
 	@ObfuscatedName("td.d(I)V")
 	public static void loop() {
@@ -23,13 +27,13 @@ public class TitleScreen {
 		int var0 = Client.field2762 - 202;
 		int var1 = Client.field3050;
 		int var2 = Client.field14 - 171;
-		if (class53.field1395 == 0) {
+		if (field1395 == 0) {
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 100 && var2 <= 140) {
 				Statics.field2084 = 0;
-				class53.field1395 = 3;
+				field1395 = 3;
 			}
 			if (var1 == 1 && var0 >= 185 && var0 <= 335 && var2 >= 100 && var2 <= 140) {
-				class53.field1395 = 2;
+				field1395 = 2;
 				Statics.field2084 = 0;
 				Statics.field3060 = Statics.field2104;
 				Statics.field3077 = Statics.field1030;
@@ -38,7 +42,7 @@ public class TitleScreen {
 			}
 			return;
 		}
-		if (class53.field1395 == 2) {
+		if (field1395 == 2) {
 			byte var3 = 60;
 			int var6 = var3 + 30;
 			if (var1 == 1 && var2 >= 75 && var2 < 90) {
@@ -58,7 +62,7 @@ public class TitleScreen {
 			if (var1 == 1 && var0 >= 185 && var0 <= 335 && var2 >= 130 && var2 <= 170) {
 				field3071 = Statics.field3067;
 				Statics.field3055 = Statics.field3067;
-				class53.field1395 = 0;
+				field1395 = 0;
 			}
 			while (true) {
 				boolean var4;
@@ -98,10 +102,10 @@ public class TitleScreen {
 				}
 			}
 		}
-		if (class53.field1395 != 3 || var1 != 1 || var0 < 105 || var0 > 255 || var2 < 130 || var2 > 170) {
+		if (field1395 != 3 || var1 != 1 || var0 < 105 || var0 > 255 || var2 < 130 || var2 > 170) {
 			return;
 		}
-		class53.field1395 = 0;
+		field1395 = 0;
 	}
 
 	@ObfuscatedName("rd.a(ILbc;Lbc;)V")
@@ -132,7 +136,7 @@ public class TitleScreen {
 		}
 		if (Client.state == 10) {
 			Statics.field2806.method329(0, 0);
-			if (class53.field1395 == 0) {
+			if (field1395 == 0) {
 				byte var5 = 80;
 				arg0.method211(Client.field582, 180, 80, 16776960, true);
 				int var23 = var5 + 30;
@@ -140,7 +144,7 @@ public class TitleScreen {
 				arg0.method195(Statics.field2639, 27, 100, 144, 40, 16777215, true, 1, 1, 0);
 				Statics.field2919.method329(187, 100);
 				arg0.method195(Statics.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
-			} else if (class53.field1395 == 2) {
+			} else if (field1395 == 2) {
 				byte var3 = 40;
 				arg0.method211(Statics.field3060, 180, 40, 16776960, true);
 				int var12 = var3 + 15;
@@ -157,7 +161,7 @@ public class TitleScreen {
 				arg0.method211(Statics.field926, 100, 155, 16777215, true);
 				Statics.field2919.method329(187, 130);
 				arg0.method211(Statics.field3302, 260, 155, 16777215, true);
-			} else if (class53.field1395 == 3) {
+			} else if (field1395 == 3) {
 				arg0.method211(Statics.field3265, 180, 40, 16776960, true);
 				byte var4 = 65;
 				arg0.method211(Statics.field2757, 180, 65, 16777215, true);
@@ -172,7 +176,7 @@ public class TitleScreen {
 				int var24 = var22 + 15;
 			}
 		}
-		Statics.method281();
+		method281();
 		try {
 			Graphics var6 = GameShell.canvas.getGraphics();
 			Statics.field1935.method101(202, var6, 171);
@@ -272,8 +276,8 @@ public class TitleScreen {
 		Pix32 var9 = Statics.method1038(arg2, Client.field583, Statics.field3067);
 		Statics.field2044.method1054();
 		var9.method551(382 - var9.field1476 / 2 - 128, 18);
-		Statics.field2806 = Statics.method605(Statics.field1245, Statics.field3067, arg2);
-		Statics.field2919 = Statics.method605(Statics.field1056, Statics.field3067, arg2);
+		Statics.field2806 = PixLoader.method605(Statics.field1245, Statics.field3067, arg2);
+		Statics.field2919 = PixLoader.method605(Statics.field1056, Statics.field3067, arg2);
 		Statics.field1177 = Statics.method372(arg2, Statics.field473, Statics.field3067);
 		Statics.field2055 = new Pix32(128, 265);
 		Statics.field851 = new Pix32(128, 265);
@@ -330,13 +334,13 @@ public class TitleScreen {
 		Statics.field3055 = Statics.field3067;
 		field3071 = Statics.field3067;
 		Statics.field229 = new int[32768];
-		class53.field1395 = 0;
+		field1395 = 0;
 		if (Client.field1554 == 0 || Client.lowMem) {
 			Statics.method672();
 		} else {
 			Statics.method679(Client.field2702, Statics.field1691, Statics.field3067, Client.field1554);
 		}
-		Statics.method617(false);
+		Js5Net.method617(false);
 		GameShell.field2402 = true;
 		Statics.field1062 = true;
 	}
@@ -369,7 +373,7 @@ public class TitleScreen {
 		Statics.field844 = null;
 		Statics.field2151 = null;
 		Statics.method672();
-		Statics.method617(true);
+		Js5Net.method617(true);
 		Statics.field1062 = false;
 	}
 
@@ -410,25 +414,102 @@ public class TitleScreen {
 			}
 		}
 		for (int var14 = 0; var14 < 255; var14++) {
-			class31.field847[var14] = class31.field847[var14 + 1];
+			field847[var14] = field847[var14 + 1];
 		}
-		class31.field847[255] = (int) (Math.sin((double) Client.loopCycle / 14.0D) * 16.0D + Math.sin((double) Client.loopCycle / 15.0D) * 14.0D + Math.sin((double) Client.loopCycle / 16.0D) * 12.0D);
-		if (class46.field1209 > 0) {
-			class46.field1209 -= 4;
+		field847[255] = (int) (Math.sin((double) Client.loopCycle / 14.0D) * 16.0D + Math.sin((double) Client.loopCycle / 15.0D) * 14.0D + Math.sin((double) Client.loopCycle / 16.0D) * 12.0D);
+		if (field1209 > 0) {
+			field1209 -= 4;
 		}
 		if (Statics.field2380 > 0) {
 			Statics.field2380 -= 4;
 		}
-		if (class46.field1209 != 0 || Statics.field2380 != 0) {
+		if (field1209 != 0 || Statics.field2380 != 0) {
 			return;
 		}
 		int var15 = (int) (Math.random() * 2000.0D);
 		if (var15 == 0) {
-			class46.field1209 = 1024;
+			field1209 = 1024;
 		}
 		if (var15 == 1) {
 			Statics.field2380 = 1024;
 			return;
 		}
 	}
+
+    @ObfuscatedName("client.g(I)V")
+    public static void method281() {
+        if (field1209 > 0) {
+            for (int var2 = 0; var2 < 256; var2++) {
+                if (field1209 > 768) {
+                    Statics.field2151[var2] = Statics.method700(Statics.field2600[var2], Statics.field3139[var2], 1024 - field1209);
+                } else if (field1209 > 256) {
+                    Statics.field2151[var2] = Statics.field3139[var2];
+                } else {
+                    Statics.field2151[var2] = Statics.method700(Statics.field3139[var2], Statics.field2600[var2], 256 - field1209);
+                }
+            }
+        } else if (Statics.field2380 > 0) {
+            for (int var0 = 0; var0 < 256; var0++) {
+                if (Statics.field2380 > 768) {
+                    Statics.field2151[var0] = Statics.method700(Statics.field2600[var0], Statics.field2904[var0], 1024 - Statics.field2380);
+                } else if (Statics.field2380 > 256) {
+                    Statics.field2151[var0] = Statics.field2904[var0];
+                } else {
+                    Statics.field2151[var0] = Statics.method700(Statics.field2904[var0], Statics.field2600[var0], 256 - Statics.field2380);
+                }
+            }
+        } else {
+            for (int var1 = 0; var1 < 256; var1++) {
+                Statics.field2151[var1] = Statics.field2600[var1];
+            }
+        }
+        for (int var3 = 0; var3 < 33920; var3++) {
+            Statics.field472.field3288[var3] = Statics.field2055.field1480[var3];
+        }
+        int var4 = 0;
+        int var5 = 1152;
+        for (int var6 = 1; var6 < 255; var6++) {
+            int var7 = (256 - var6) * field847[var6] / 256;
+            int var8 = var7 + 22;
+            if (var8 < 0) {
+                var8 = 0;
+            }
+            var4 += var8;
+            for (int var9 = var8; var9 < 128; var9++) {
+                int var10 = Statics.field229[var4++];
+                if (var10 == 0) {
+                    var5++;
+                } else {
+                    int var11 = 256 - var10;
+                    int var13 = Statics.field2151[var10];
+                    int var14 = Statics.field472.field3288[var5];
+                    Statics.field472.field3288[var5++] = ((var13 & 0xFF00FF) * var10 + (var14 & 0xFF00FF) * var11 & 0xFF00FF00) + ((var13 & 0xFF00) * var10 + (var14 & 0xFF00) * var11 & 0xFF0000) >> 8;
+                }
+            }
+            var5 += var8;
+        }
+        int var15 = 1176;
+        int var16 = 0;
+        for (int var17 = 0; var17 < 33920; var17++) {
+            Statics.field1435.field3288[var17] = Statics.field851.field1480[var17];
+        }
+        for (int var18 = 1; var18 < 255; var18++) {
+            int var19 = (256 - var18) * field847[var18] / 256;
+            int var20 = 103 - var19;
+            int var21 = var15 + var19;
+            for (int var22 = 0; var22 < var20; var22++) {
+                int var23 = Statics.field229[var16++];
+                if (var23 == 0) {
+                    var21++;
+                } else {
+                    int var25 = Statics.field1435.field3288[var21];
+                    int var26 = 256 - var23;
+                    int var27 = Statics.field2151[var23];
+                    Statics.field1435.field3288[var21++] = ((var25 & 0xFF00) * var26 + (var27 & 0xFF00) * var23 & 0xFF0000) + ((var25 & 0xFF00FF) * var26 + (var27 & 0xFF00FF) * var23 & 0xFF00FF00) >> 8;
+                }
+            }
+            var15 = var21 + 128 - var20 - var19;
+            var16 += 128 - var20;
+        }
+    }
 }

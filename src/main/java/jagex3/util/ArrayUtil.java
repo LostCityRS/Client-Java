@@ -1,10 +1,13 @@
-package deob;
+package jagex3.util;
+
+import deob.ObfuscatedName;
+import deob.Statics;
 
 @ObfuscatedName("fb")
-public final class class33 {
+public final class ArrayUtil {
 
 	@ObfuscatedName("fb.a([BI[BII)V")
-	public static void method392(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
+	public static void copy(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
 		if (arg0 == arg2) {
 			if (arg1 == arg3) {
 				return;
@@ -48,5 +51,29 @@ public final class class33 {
 		while (arg1 < var8) {
 			arg2[arg3++] = arg0[arg1++];
 		}
+	}
+
+	@ObfuscatedName("ca.a([II)V")
+	public static synchronized void clear(int[] arg0, int arg1) {
+		int var2 = 0;
+		int var3 = arg1 - 7;
+		while (var2 < var3) {
+			arg0[var2++] = 0;
+			arg0[var2++] = 0;
+			arg0[var2++] = 0;
+			arg0[var2++] = 0;
+			arg0[var2++] = 0;
+			arg0[var2++] = 0;
+			arg0[var2++] = 0;
+			arg0[var2++] = 0;
+		}
+		var3 += 7;
+		while (var2 < var3) {
+			arg0[var2++] = 0;
+		}
+		if (Statics.field1381 != null) {
+			Statics.field1381.method134(arg0, 0, var3);
+		}
+		Statics.method949(var3);
 	}
 }

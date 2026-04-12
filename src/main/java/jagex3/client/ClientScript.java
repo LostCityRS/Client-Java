@@ -2,15 +2,17 @@ package jagex3.client;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class31;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.util.JagString;
 
 @ObfuscatedName("cc")
 public final class ClientScript extends Linkable2 {
 
-	@ObfuscatedName("cc.tb")
+    @ObfuscatedName("f.d")
+    public static LruCache field830 = new LruCache(128);
+    @ObfuscatedName("cc.tb")
 	public int[] field509;
 
 	@ObfuscatedName("cc.ub")
@@ -34,7 +36,7 @@ public final class ClientScript extends Linkable2 {
 	@ObfuscatedName("pe.a(III)Lcc;")
 	public static ClientScript method824(int arg0, int arg1) {
 		long var2 = (long) ((arg1 << 16) + arg0);
-		ClientScript var4 = (ClientScript) class31.field830.method263(var2);
+		ClientScript var4 = (ClientScript) field830.method263(var2);
 		if (var4 != null) {
 			return var4;
 		}
@@ -63,7 +65,7 @@ public final class ClientScript extends Linkable2 {
 			}
 			var7.field519[var9++] = var10;
 		}
-		class31.field830.method262(var2, var7);
+		field830.method262(var2, var7);
 		return var7;
 	}
 }

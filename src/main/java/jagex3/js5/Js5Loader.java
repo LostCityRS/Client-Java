@@ -80,14 +80,14 @@ public final class Js5Loader extends Js5 {
 				throw new RuntimeException();
 			}
 			if (arg1 == null) {
-				Statics.method495(true, this, 255, this.field2986, (byte) 0, this.field2989);
+				Js5Net.method495(true, this, 255, this.field2986, (byte) 0, this.field2989);
 				return;
 			}
 			field3198.reset();
 			field3198.update(arg1, 0, arg1.length);
 			int var5 = (int) field3198.getValue();
 			if (this.field2989 != var5) {
-				Statics.method495(true, this, 255, this.field2986, (byte) 0, this.field2989);
+				Js5Net.method495(true, this, 255, this.field2986, (byte) 0, this.field2989);
 				return;
 			}
 			this.method223(arg1);
@@ -100,7 +100,7 @@ public final class Js5Loader extends Js5 {
 		if (arg1 == null || arg1.length <= 2) {
 			this.field2975[arg2] = false;
 			if (this.field2990 || arg0) {
-				Statics.method495(arg0, this, this.field2986, arg2, (byte) 2, super.field402[arg2]);
+				Js5Net.method495(arg0, this, this.field2986, arg2, (byte) 2, super.field402[arg2]);
 			}
 			return;
 		}
@@ -111,7 +111,7 @@ public final class Js5Loader extends Js5 {
 		if (super.field402[arg2] != var6 || super.field374[arg2] != var7) {
 			this.field2975[arg2] = false;
 			if (this.field2990 || arg0) {
-				Statics.method495(arg0, this, this.field2986, arg2, (byte) 2, super.field402[arg2]);
+				Js5Net.method495(arg0, this, this.field2986, arg2, (byte) 2, super.field402[arg2]);
 			}
 			return;
 		}
@@ -125,9 +125,9 @@ public final class Js5Loader extends Js5 {
 	@Override
 	public void method222(int arg0) {
 		if (this.field2991 == null || this.field2975 == null || !this.field2975[arg0]) {
-			Statics.method495(true, this, this.field2986, arg0, (byte) 2, super.field402[arg0]);
+			Js5Net.method495(true, this, this.field2986, arg0, (byte) 2, super.field402[arg0]);
 		} else {
-			Statics.method507(this, arg0, this.field2991);
+			Js5NetThread.method507(this, arg0, this.field2991);
 		}
 	}
 
@@ -159,7 +159,7 @@ public final class Js5Loader extends Js5 {
 		this.field2976 = -1;
 		for (int var2 = 0; var2 < this.field2975.length; var2++) {
 			if (super.field411[var2] > 0) {
-				Statics.method410(var2, this, this.field2991);
+				Js5NetThread.method410(var2, this, this.field2991);
 				this.field2976 = var2;
 			}
 		}
@@ -172,9 +172,9 @@ public final class Js5Loader extends Js5 {
 	public void method980(int arg0) {
 		this.field2989 = arg0;
 		if (this.field2981 == null) {
-			Statics.method495(true, this, 255, this.field2986, (byte) 0, this.field2989);
+			Js5Net.method495(true, this, 255, this.field2986, (byte) 0, this.field2989);
 		} else {
-			Statics.method507(this, this.field2986, this.field2981);
+			Js5NetThread.method507(this, this.field2986, this.field2981);
 		}
 	}
 

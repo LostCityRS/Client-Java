@@ -1,5 +1,6 @@
 package jagex3.sound;
 
+import jagex3.util.ArrayUtil;
 import deob.ObfuscatedName;
 import deob.Statics;
 import deob.class14;
@@ -163,7 +164,7 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 			if (var3 < this.field2345) {
 				break;
 			}
-			class14.method258(field2347, 256);
+			ArrayUtil.clear(field2347, 256);
 			try {
 				this.method436();
 			} catch (Exception var7) {

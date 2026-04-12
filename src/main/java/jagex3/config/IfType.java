@@ -2,12 +2,13 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class106;
 import jagex3.dash3d.Model;
 import jagex3.dash3d.PlayerModel;
 import jagex3.datastruct.Linkable2;
+import jagex3.datastruct.LruCache;
 import jagex3.graphics.Pix32;
 import jagex3.graphics.PixFont;
+import jagex3.graphics.PixLoader;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.util.JagString;
@@ -15,6 +16,8 @@ import jagex3.util.JagString;
 @ObfuscatedName("qd")
 public final class IfType extends Linkable2 {
 
+	@ObfuscatedName("rd.w")
+	public static LruCache field2680 = new LruCache(50);
 	@ObfuscatedName("qd.ac")
 	public JagString field2474 = Statics.field3058;
 
@@ -297,6 +300,40 @@ public final class IfType extends Linkable2 {
 		Statics.field3296 = new boolean[Statics.field924.method220()];
 	}
 
+	@ObfuscatedName("wc.a(II)Z")
+	public static boolean method1052(int arg0) {
+		if (Statics.field3296[arg0]) {
+			return true;
+		} else if (Statics.field924.method231(arg0)) {
+			int var1 = Statics.field924.method235(arg0);
+			if (var1 == 0) {
+				Statics.field3296[arg0] = true;
+				return true;
+			}
+			if (Statics.field2922[arg0] == null) {
+				Statics.field2922[arg0] = new IfType[var1];
+			}
+			for (int var2 = 0; var2 < var1; var2++) {
+				if (Statics.field2922[arg0][var2] == null) {
+					byte[] var3 = Statics.field924.method217(var2, arg0);
+					if (var3 != null) {
+						Statics.field2922[arg0][var2] = new IfType();
+						Statics.field2922[arg0][var2].field2495 = (arg0 << 16) + var2;
+						if (var3[0] == -1) {
+							Statics.field2922[arg0][var2].method858(new Packet(var3));
+						} else {
+							Statics.field2922[arg0][var2].method851(new Packet(var3));
+						}
+					}
+				}
+			}
+			Statics.field3296[arg0] = true;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	@ObfuscatedName("qd.a(IZI)V")
 	public void method850(int arg0, int arg1) {
 		int var3 = this.field2491[arg1];
@@ -498,7 +535,7 @@ public final class IfType extends Linkable2 {
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = Statics.method846(0, Statics.field2810, var2);
+		Pix32 var4 = PixLoader.method846(0, Statics.field2810, var2);
 		if (var4 == null) {
 			Statics.field3116 = true;
 		} else {
@@ -523,7 +560,7 @@ public final class IfType extends Linkable2 {
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = Statics.method846(0, Statics.field2810, var2);
+		Pix32 var4 = PixLoader.method846(0, Statics.field2810, var2);
 		if (var4 == null) {
 			Statics.field3116 = true;
 		} else {
@@ -650,7 +687,7 @@ public final class IfType extends Linkable2 {
 		} else if (var6 == 1 && var5 == -1) {
 			return null;
 		} else {
-			Model var7 = (Model) class106.field2680.method263((long) ((var6 << 16) + var5));
+			Model var7 = (Model) field2680.method263((long) ((var6 << 16) + var5));
 			if (var7 == null) {
 				if (var6 == 1) {
 					var7 = Model.method798(Statics.field503, var5);
@@ -692,7 +729,7 @@ public final class IfType extends Linkable2 {
 					var7.method778();
 					var7.method770(var8.field2856 + 64, var8.field2871 + 768, -50, -10, -50, true);
 				}
-				class106.field2680.method262((long) ((var6 << 16) + var5), var7);
+				field2680.method262((long) ((var6 << 16) + var5), var7);
 			}
 			if (arg0 != null) {
 				var7 = arg0.method493(arg1, var7);

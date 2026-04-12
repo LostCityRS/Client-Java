@@ -21,6 +21,10 @@ public final class LocType extends Linkable2 {
 	public static LruCache field2788 = new LruCache(64);
 	@ObfuscatedName("pc.q")
 	public static LruCache field2322 = new LruCache(500);
+	@ObfuscatedName("qc.d")
+	public static LruCache field2428 = new LruCache(30);
+	@ObfuscatedName("rb.Cb")
+	public static Model[] field2623 = new Model[4];
 	@ObfuscatedName("ia.bc")
 	public int field1316 = -1;
 
@@ -177,7 +181,7 @@ public final class LocType extends Linkable2 {
 		field2788.method267();
 		field2322.method267();
 		Statics.field981.method267();
-		class99.field2428.method267();
+		field2428.method267();
 	}
 
 	@ObfuscatedName("ia.a(IIIIIBI)Lpa;")
@@ -287,11 +291,11 @@ public final class LocType extends Linkable2 {
 					field2322.method262((long) var9, var5);
 				}
 				if (var7 > 1) {
-					class104.field2623[var8] = var5;
+					field2623[var8] = var5;
 				}
 			}
 			if (var7 > 1) {
-				var5 = new Model(class104.field2623, var7);
+				var5 = new Model(field2623, var7);
 			}
 		} else {
 			int var10 = -1;
@@ -368,13 +372,13 @@ public final class LocType extends Linkable2 {
 		} else {
 			var9 = (this.field1321 << 10) + (arg3 << 3) + arg4;
 		}
-		Model var11 = (Model) class99.field2428.method263(var9);
+		Model var11 = (Model) field2428.method263(var9);
 		if (var11 == null) {
 			var11 = this.method511(true, true, arg4, arg3);
 			if (var11 == null) {
 				return null;
 			}
-			class99.field2428.method262(var9, var11);
+			field2428.method262(var9, var11);
 		}
 		if (arg5 == null && !this.field1313) {
 			return var11;
