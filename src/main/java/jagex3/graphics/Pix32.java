@@ -230,7 +230,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.a(II)V")
-	public void method551(int arg0, int arg1) {
+	public void plotSprite(int arg0, int arg1) {
 		int var3 = this.field1478 + arg0;
 		int var4 = this.field1474 + arg1;
 		int var5 = Statics.field2749 * var4 + var3;

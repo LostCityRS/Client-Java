@@ -369,4 +369,10 @@ public class Js5Net {
 			field2769.method1015();
 		}
 	}
+
+    @ObfuscatedName("mb.a(BII)I")
+    public static int method684(int arg0, int arg1) {
+        long var2 = (long) ((arg0 << 16) + arg1);
+        return field967 != null && field967.key == var2 ? field2613.pos * 99 / (field2613.field284.length - field967.field2619) + 1 : 0;
+    }
 }

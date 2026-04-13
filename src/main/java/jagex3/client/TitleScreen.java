@@ -114,10 +114,10 @@ public class TitleScreen {
 		Statics.field1935.method1054();
 		if (Client.state == 0 || Client.state == 5) {
 			arg0.method209(Statics.field2405, 180, 54, 16777215);
-			Pix2D.method922(28, 62, 304, 34, 9179409);
-			Pix2D.method922(29, 63, 302, 32, 0);
-			Pix2D.method913(30, 64, Client.field3274 * 3, 30, 9179409);
-			Pix2D.method913(Client.field3274 * 3 + 30, 64, 300 - Client.field3274 * 3, 30, 0);
+			Pix2D.drawRect(28, 62, 304, 34, 9179409);
+			Pix2D.drawRect(29, 63, 302, 32, 0);
+			Pix2D.fillRect(30, 64, Client.field3274 * 3, 30, 9179409);
+			Pix2D.fillRect(Client.field3274 * 3 + 30, 64, 300 - Client.field3274 * 3, 30, 0);
 			arg0.method209(Client.field3079, 180, 85, 16777215);
 		}
 		if (Client.state == 20) {
@@ -130,9 +130,9 @@ public class TitleScreen {
 			arg0.method211(Statics.field3062, 180, 70, 16776960, true);
 			int var10 = var9 + 15;
 			int var11 = var10 + 10;
-			arg0.method206(JagString.join(new JagString[]{Statics.field3002, field3071}), 90, 95, 16777215, true);
+			arg0.drawString(JagString.join(new JagString[]{Statics.field3002, field3071}), 90, 95, 16777215, true);
 			int var13 = var11 + 15;
-			arg0.method206(JagString.join(new JagString[]{Statics.field1037, Statics.field3055.method12()}), 92, 110, 16777215, true);
+			arg0.drawString(JagString.join(new JagString[]{Statics.field1037, Statics.field3055.method12()}), 92, 110, 16777215, true);
 			int var15 = var13 + 15;
 		}
 		if (Client.state == 10) {
@@ -154,9 +154,9 @@ public class TitleScreen {
 				arg0.method211(Statics.field3062, 180, 70, 16776960, true);
 				int var16 = var14 + 15;
 				int var17 = var16 + 10;
-				arg0.method206(JagString.join(new JagString[]{Statics.field3002, field3071, Client.loopCycle % 40 < 20 & Statics.field2084 == 0 ? Statics.field1204 : Statics.field3067}), 90, 95, 16777215, true);
+				arg0.drawString(JagString.join(new JagString[]{Statics.field3002, field3071, Client.loopCycle % 40 < 20 & Statics.field2084 == 0 ? Statics.field1204 : Statics.field3067}), 90, 95, 16777215, true);
 				int var19 = var17 + 15;
-				arg0.method206(JagString.join(new JagString[]{Statics.field1037, Statics.field3055.method12(), Client.loopCycle % 40 < 20 & Statics.field2084 == 1 ? Statics.field1204 : Statics.field3067}), 92, 110, 16777215, true);
+				arg0.drawString(JagString.join(new JagString[]{Statics.field1037, Statics.field3055.method12(), Client.loopCycle % 40 < 20 & Statics.field2084 == 1 ? Statics.field1204 : Statics.field3067}), 92, 110, 16777215, true);
 				Statics.field2919.method329(27, 130);
 				int var21 = var19 + 15;
 				arg0.method211(Statics.field926, 100, 155, 16777215, true);
@@ -276,10 +276,10 @@ public class TitleScreen {
 		var4.method557(-180, -171);
 		Pix32 var9 = PixLoader.method1038(arg2, Client.field583, Statics.field3067);
 		Statics.field2044.method1054();
-		var9.method551(382 - var9.field1476 / 2 - 128, 18);
+		var9.plotSprite(382 - var9.field1476 / 2 - 128, 18);
 		Statics.field2806 = PixLoader.method605(Statics.field1245, Statics.field3067, arg2);
 		Statics.field2919 = PixLoader.method605(Statics.field1056, Statics.field3067, arg2);
-		Statics.field1177 = Statics.method372(arg2, Statics.field473, Statics.field3067);
+		Statics.field1177 = PixLoader.method372(arg2, Statics.field473, Statics.field3067);
 		Statics.field2055 = new Pix32(128, 265);
 		Statics.field851 = new Pix32(128, 265);
 		for (int var10 = 0; var10 < 33920; var10++) {

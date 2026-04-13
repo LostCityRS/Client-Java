@@ -50,7 +50,7 @@ public class Pix2D extends Linkable2 {
 	}
 
 	@ObfuscatedName("sc.a(IIIII)V")
-	public static void method913(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public static void fillRect(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg0 < field2752) {
 			arg2 -= field2752 - arg0;
 			arg0 = field2752;
@@ -225,7 +225,7 @@ public class Pix2D extends Linkable2 {
 	}
 
 	@ObfuscatedName("sc.d(IIIII)V")
-	public static void method922(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public static void drawRect(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		method916(arg0, arg1, arg2, arg4);
 		method916(arg0, arg1 + arg3 - 1, arg2, arg4);
 		method925(arg0, arg1, arg3, arg4);

@@ -227,7 +227,7 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("la.a([IZI[II)V")
-	public void method640(int[] arg0, boolean arg1, int[] arg2, int arg3) {
+	public void setAppearance(int[] arg0, boolean arg1, int[] arg2, int arg3) {
 		if (arg0 == null) {
 			arg0 = new int[12];
 			for (int var5 = 0; var5 < 7; var5++) {
@@ -279,7 +279,7 @@ public final class PlayerModel {
 	@ObfuscatedName("la.a(ZB)V")
 	public void method643(boolean arg0) {
 		if (this.field1658 != arg0) {
-			this.method640(null, arg0, this.field1688, -1);
+			this.setAppearance(null, arg0, this.field1688, -1);
 		}
 	}
 

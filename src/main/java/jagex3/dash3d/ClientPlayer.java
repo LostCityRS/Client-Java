@@ -204,6 +204,6 @@ public final class ClientPlayer extends ClientEntity {
 		if (this.field90 == null) {
 			this.field90 = new PlayerModel();
 		}
-		this.field90.method640(var4, var2 == 1, var9, var3);
+		this.field90.setAppearance(var4, var2 == 1, var9, var3);
 	}
 }

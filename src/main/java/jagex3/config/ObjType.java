@@ -224,7 +224,7 @@ public final class ObjType extends Linkable2 {
 		Pix32 var19 = new Pix32(32, 32);
 		Pix2D.method926(var19.field1480, 32, 32);
 		Statics.field2909 = Pix3D.method362(Statics.field2909);
-		Pix2D.method913(0, 0, 32, 32, 0);
+		Pix2D.fillRect(0, 0, 32, 32, 0);
 		int var20 = var4.field2848;
 		if (arg2 == -1) {
 			var20 = (int) ((double) var20 * 1.5D);
@@ -282,7 +282,7 @@ public final class ObjType extends Linkable2 {
 			int var30 = var8.field1479;
 			var8.field1477 = 32;
 			var8.field1479 = 32;
-			var8.method551(0, 0);
+			var8.plotSprite(0, 0);
 			var8.field1479 = var30;
 			var8.field1477 = var29;
 		}

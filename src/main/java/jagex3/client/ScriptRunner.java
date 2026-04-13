@@ -369,7 +369,7 @@ public class ScriptRunner {
 						var128.field2479 = field3255[var4];
 					} else if (var14 == 1202) {
 						var128.field2493 = 3;
-						var128.field2479 = Client.field2621.field90.method634();
+						var128.field2479 = Client.localPlayer.field90.method634();
 					} else {
 						if (var14 != 1203) {
 							break;
@@ -643,7 +643,7 @@ public class ScriptRunner {
 								Client.method887(field3255[var4], field3255[var4 + 1], field3255[var4 + 2]);
 							} else if (var14 == 3201) {
 								var4--;
-								Statics.method874(field3255[var4]);
+								Client.method874(field3255[var4]);
 							} else {
 								if (var14 != 3202) {
 									break;
@@ -694,7 +694,7 @@ public class ScriptRunner {
 								var8 -= 2;
 								JagString var115 = field2957[var8];
 								JagString var116 = field2957[var8 + 1];
-								if (Client.field2621.field90 != null && Client.field2621.field90.field1658) {
+								if (Client.localPlayer.field90 != null && Client.localPlayer.field90.field1658) {
 									field2957[var8++] = var116;
 								} else {
 									field2957[var8++] = var115;
@@ -804,7 +804,7 @@ public class ScriptRunner {
 							break;
 						}
 						var4 -= 2;
-						Client.method450(field3255[var4], field3255[var4 + 1], Client.field2621);
+						Client.method450(field3255[var4], field3255[var4 + 1], Client.localPlayer);
 					}
 				}
 			}

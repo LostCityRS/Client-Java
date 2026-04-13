@@ -17,9 +17,6 @@ public final class BgSound extends Linkable {
 	@ObfuscatedName("be.fb")
 	public int field417;
 
-	@ObfuscatedName("be.hb")
-	public static int field419 = 0;
-
 	@ObfuscatedName("be.ib")
 	public int field420;
 
@@ -101,7 +98,7 @@ public final class BgSound extends Linkable {
 	}
 
 	@ObfuscatedName("r.a(IIIII)V")
-	public static void method866(int arg0, int arg1, int arg2, int arg3) {
+	public static void doMix(int arg0, int arg1, int arg2, int arg3) {
 		for (BgSound var4 = (BgSound) field515.head(); var4 != null; var4 = (BgSound) field515.next()) {
 			if (var4.field420 != -1 || var4.field428 != null) {
 				int var5 = 0;

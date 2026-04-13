@@ -274,13 +274,13 @@ public final class PixFont extends Pix2D {
 		}
 		for (int var24 = 0; var24 < var18; var24++) {
 			if (arg7 == 0) {
-				this.method206(field337[var24], arg1, var22, arg5, arg6);
+				this.drawString(field337[var24], arg1, var22, arg5, arg6);
 			} else if (arg7 == 1) {
 				this.method211(field337[var24], arg3 / 2 + arg1, var22, arg5, arg6);
 			} else if (arg7 == 2) {
 				this.method200(field337[var24], arg1 + arg3, var22, arg5, arg6);
 			} else if (var18 - 1 == var24) {
-				this.method206(field337[var24], arg1, var22, arg5, arg6);
+				this.drawString(field337[var24], arg1, var22, arg5, arg6);
 			} else {
 				this.method203(field337[var24], arg1, var22, arg5, arg6, arg3);
 			}
@@ -340,7 +340,7 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.a(La;IIIZ)V")
 	public void method200(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
-		this.method206(arg0, arg1 - this.method204(arg0), arg2, arg3, arg4);
+		this.drawString(arg0, arg1 - this.method204(arg0), arg2, arg3, arg4);
 	}
 
 	@ObfuscatedName("bc.a(La;IIIII)V")
@@ -500,7 +500,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.b(La;IIIZ)V")
-	public void method206(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
+	public void drawString(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		this.field358 = false;
 		int var6 = arg1;
 		if (arg0 == null) {
@@ -573,17 +573,17 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.a(La;III)V")
 	public void method209(JagString arg0, int arg1, int arg2, int arg3) {
-		this.method213(arg0, arg1 - this.method208(arg0) / 2, arg2, arg3);
+		this.drawString(arg0, arg1 - this.method208(arg0) / 2, arg2, arg3);
 	}
 
 	@ObfuscatedName("bc.b(La;III)V")
 	public void method210(JagString arg0, int arg1, int arg2) {
-		this.method213(arg0, 507 - this.method208(arg0), arg1, arg2);
+		this.drawString(arg0, 507 - this.method208(arg0), arg1, arg2);
 	}
 
 	@ObfuscatedName("bc.c(La;IIIZ)V")
 	public void method211(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
-		this.method206(arg0, arg1 - this.method204(arg0) / 2, arg2, arg3, arg4);
+		this.drawString(arg0, arg1 - this.method204(arg0) / 2, arg2, arg3, arg4);
 	}
 
 	public PixFont(int[] arg0, int[] arg1, int[] arg2, int[] arg3, byte[][] arg4) {
@@ -623,7 +623,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.c(La;III)V")
-	public void method213(JagString arg0, int arg1, int arg2, int arg3) {
+	public void drawString(JagString arg0, int arg1, int arg2, int arg3) {
 		if (arg0 == null) {
 			return;
 		}

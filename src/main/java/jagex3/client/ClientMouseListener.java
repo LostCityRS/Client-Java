@@ -77,7 +77,7 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	}
 
 	@ObfuscatedName("rb.a(ZI)V")
-	public static void method876(int arg0) {
+	public static void setIdleTimer(int arg0) {
 		field2293 = arg0;
 	}
 

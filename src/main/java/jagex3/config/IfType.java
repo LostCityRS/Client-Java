@@ -398,6 +398,53 @@ public final class IfType extends Linkable2 {
 		return field2922[var1][var2];
 	}
 
+    @ObfuscatedName("va.a(ILqd;)Lqd;")
+    public static IfType method1009(IfType arg0) {
+        int var1;
+        if (arg0.field2495 < 0) {
+            var1 = arg0.field2454 >> 16;
+        } else {
+            var1 = arg0.field2495 >> 16;
+        }
+        if (!method1052(var1)) {
+            return null;
+        } else if (arg0.field2544 >= 0) {
+            return field2922[var1][arg0.field2544 & 0xFFFF];
+        } else {
+            IfType var2 = field2922[var1][arg0.field2544 >> 15 & 0xFFFF];
+            return var2.field2519[arg0.field2544 & 0x7FFF];
+        }
+    }
+
+	@ObfuscatedName("de.a(Lqd;B)[I")
+	public static int[] method325(IfType arg0) {
+		int var1;
+		if (arg0.field2495 < 0) {
+			var1 = arg0.field2454 >> 16;
+		} else {
+			var1 = arg0.field2495 >> 16;
+		}
+		if (!method1052(var1)) {
+			return null;
+		}
+		int var2 = arg0.field2462;
+		int var3 = arg0.field2502;
+		int var4 = arg0.field2454;
+		while (var4 != -1) {
+			IfType var5 = field2922[var1][var4 & 0xFFFF];
+			var2 += var5.field2462;
+			if (!arg0.field2500) {
+				var2 -= var5.field2552;
+			}
+			var3 += var5.field2502;
+			var4 = var5.field2454;
+			if (!arg0.field2500) {
+				var3 -= var5.field2537;
+			}
+		}
+		return new int[]{var2, var3};
+	}
+
 	@ObfuscatedName("qd.a(IZI)V")
 	public void method850(int arg0, int arg1) {
 		int var3 = this.field2491[arg1];
@@ -812,7 +859,7 @@ public final class IfType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		PixFont var2 = Statics.method294(0, field2810, this.field2448);
+		PixFont var2 = PixLoader.method294(0, field2810, this.field2448);
 		if (var2 == null) {
 			Statics.field3116 = true;
 		} else {
