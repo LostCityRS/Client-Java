@@ -200,78 +200,78 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("h.a(IILba;)V")
 	public void method452(int arg0, Packet arg1) {
 		if (arg0 == 1) {
-			int var3 = arg1.method144();
+			int var3 = arg1.g1();
 			this.field1115 = new int[var3];
 			for (int var4 = 0; var4 < var3; var4++) {
-				this.field1115[var4] = arg1.method145();
+				this.field1115[var4] = arg1.g2();
 			}
 		} else if (arg0 == 2) {
 			this.field1112 = arg1.method140();
 		} else if (arg0 == 12) {
-			this.field1084 = arg1.method144();
+			this.field1084 = arg1.g1();
 		} else if (arg0 == 13) {
-			this.field1092 = arg1.method145();
+			this.field1092 = arg1.g2();
 		} else if (arg0 == 14) {
-			this.field1135 = arg1.method145();
+			this.field1135 = arg1.g2();
 		} else if (arg0 == 15) {
-			this.field1131 = arg1.method145();
+			this.field1131 = arg1.g2();
 		} else if (arg0 == 16) {
-			this.field1099 = arg1.method145();
+			this.field1099 = arg1.g2();
 		} else if (arg0 == 17) {
-			this.field1135 = arg1.method145();
-			this.field1116 = arg1.method145();
-			this.field1128 = arg1.method145();
-			this.field1123 = arg1.method145();
+			this.field1135 = arg1.g2();
+			this.field1116 = arg1.g2();
+			this.field1128 = arg1.g2();
+			this.field1123 = arg1.g2();
 		} else if (arg0 >= 30 && arg0 < 35) {
 			this.field1086[arg0 - 30] = arg1.method140();
 			if (this.field1086[arg0 - 30].method14(Statics.field2928)) {
 				this.field1086[arg0 - 30] = null;
 			}
 		} else if (arg0 == 40) {
-			int var5 = arg1.method144();
+			int var5 = arg1.g1();
 			this.field1105 = new int[var5];
 			this.field1138 = new int[var5];
 			for (int var6 = 0; var6 < var5; var6++) {
-				this.field1138[var6] = arg1.method145();
-				this.field1105[var6] = arg1.method145();
+				this.field1138[var6] = arg1.g2();
+				this.field1105[var6] = arg1.g2();
 			}
 		} else if (arg0 == 60) {
-			int var9 = arg1.method144();
+			int var9 = arg1.g1();
 			this.field1085 = new int[var9];
 			for (int var10 = 0; var10 < var9; var10++) {
-				this.field1085[var10] = arg1.method145();
+				this.field1085[var10] = arg1.g2();
 			}
 		} else if (arg0 == 93) {
 			this.field1140 = false;
 		} else if (arg0 == 95) {
-			this.field1103 = arg1.method145();
+			this.field1103 = arg1.g2();
 		} else if (arg0 == 97) {
-			this.field1117 = arg1.method145();
+			this.field1117 = arg1.g2();
 		} else if (arg0 == 98) {
-			this.field1125 = arg1.method145();
+			this.field1125 = arg1.g2();
 		} else if (arg0 == 99) {
 			this.field1107 = true;
 		} else if (arg0 == 100) {
-			this.field1097 = arg1.method184();
+			this.field1097 = arg1.g1b();
 		} else if (arg0 == 101) {
-			this.field1119 = arg1.method184() * 5;
+			this.field1119 = arg1.g1b() * 5;
 		} else if (arg0 == 102) {
-			this.field1091 = arg1.method145();
+			this.field1091 = arg1.g2();
 		} else if (arg0 == 103) {
-			this.field1101 = arg1.method145();
+			this.field1101 = arg1.g2();
 		} else if (arg0 == 106) {
-			this.field1121 = arg1.method145();
+			this.field1121 = arg1.g2();
 			if (this.field1121 == 65535) {
 				this.field1121 = -1;
 			}
-			this.field1095 = arg1.method145();
+			this.field1095 = arg1.g2();
 			if (this.field1095 == 65535) {
 				this.field1095 = -1;
 			}
-			int var7 = arg1.method144();
+			int var7 = arg1.g1();
 			this.field1136 = new int[var7 + 1];
 			for (int var8 = 0; var8 <= var7; var8++) {
-				this.field1136[var8] = arg1.method145();
+				this.field1136[var8] = arg1.g2();
 				if (this.field1136[var8] == 65535) {
 					this.field1136[var8] = -1;
 				}
@@ -284,7 +284,7 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("h.a(ZLba;)V")
 	public void method453(Packet arg0) {
 		while (true) {
-			int var2 = arg0.method144();
+			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}

@@ -141,7 +141,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.b(B)J")
-	public long method9() {
+	public long toUserhash() {
 		long var1 = 0L;
 		for (int var3 = 0; this.field26 > var3 && var3 < 12; var3++) {
 			var1 *= 37L;

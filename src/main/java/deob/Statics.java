@@ -3,6 +3,7 @@ package deob;
 import jagex3.callstack.JagException;
 import jagex3.client.*;
 import jagex3.config.*;
+import jagex3.constants.Text;
 import jagex3.dash3d.ClientEntity;
 import jagex3.dash3d.Pix3D;
 import jagex3.dash3d.PlayerModel;
@@ -337,20 +338,12 @@ public class Statics {
 	public static JagString field83 = JagString.wrap("Bitte starten Sie eine Mitgliedschaft");
 	@ObfuscatedName("aa.xd")
 	public static JagString field67 = JagString.wrap("Try again in 60 secs)3)3)3");
-	@ObfuscatedName("aa.Yd")
-	public static JagString field94 = field67;
 	@ObfuscatedName("aa.Xd")
 	public static JagString field93 = JagString.wrap("Keine Antwort vom Anmelde)2Server)3");
 	@ObfuscatedName("oa.b")
 	public static JagString field2127 = JagString.wrap("We suspect someone knows your password)3");
-	@ObfuscatedName("oa.n")
-	public static JagString field2139 = field2127;
 	@ObfuscatedName("oa.c")
 	public static JagString field2128 = JagString.wrap("Unable to connect)3");
-	@ObfuscatedName("oa.o")
-	public static JagString field2140 = field2128;
-	@ObfuscatedName("oa.j")
-	public static JagString field2135 = field2128;
 	@ObfuscatedName("oa.h")
 	public static JagString field2133 = JagString.wrap(" has logged in)3");
 	@ObfuscatedName("oa.a")
@@ -385,8 +378,6 @@ public class Statics {
 	public static JagString field172 = JagString.wrap("Name eingeben:");
 	@ObfuscatedName("ac.X")
 	public static JagString field186 = JagString.wrap("Login server offline)3");
-	@ObfuscatedName("ac.U")
-	public static JagString field183 = field186;
 	@ObfuscatedName("bd.T")
 	public static JagString field406 = JagString.wrap("backbase2");
 	@ObfuscatedName("bd.U")
@@ -407,38 +398,22 @@ public class Statics {
 	public static JagString field2995 = JagString.wrap(" zuerst von Ihrer Freunde)2Liste(Q");
 	@ObfuscatedName("nd.a")
 	public static JagString field2060 = JagString.wrap("");
-	@ObfuscatedName("nd.X")
-	public static JagString field2109 = field2060;
 	@ObfuscatedName("nd.O")
 	public static JagString field2100 = field2060;
-	@ObfuscatedName("nd.H")
-	public static JagString field2093 = field2060;
 	@ObfuscatedName("nd.Y")
 	public static JagString field2110 = field2060;
 	@ObfuscatedName("nd.L")
 	public static JagString field2097 = field2060;
-	@ObfuscatedName("nd.E")
-	public static JagString field2090 = field2060;
 	@ObfuscatedName("nd.F")
 	public static JagString field2091 = field2060;
 	@ObfuscatedName("nd.I")
 	public static JagString field2094 = field2060;
-	@ObfuscatedName("nd.D")
-	public static JagString field2089 = field2060;
 	@ObfuscatedName("nd.x")
 	public static JagString field2083 = field2060;
-	@ObfuscatedName("nd.U")
-	public static JagString field2106 = field2060;
 	@ObfuscatedName("nd.P")
 	public static JagString field2101 = field2060;
 	@ObfuscatedName("nd.K")
 	public static JagString field2096 = field2060;
-	@ObfuscatedName("nd.Z")
-	public static JagString field2111 = field2060;
-	@ObfuscatedName("nd.A")
-	public static JagString field2086 = field2060;
-	@ObfuscatedName("nd.R")
-	public static JagString field2103 = field2060;
 	@ObfuscatedName("nd.C")
 	public static JagString field2088 = field2060;
 	@ObfuscatedName("nd.S")
@@ -451,26 +426,8 @@ public class Statics {
 	public static JagString field2082 = field2060;
 	@ObfuscatedName("nd.v")
 	public static JagString field2081 = field2060;
-	@ObfuscatedName("nd.u")
-	public static JagString field2080 = field2060;
-	@ObfuscatedName("nd.t")
-	public static JagString field2079 = field2060;
-	@ObfuscatedName("nd.s")
-	public static JagString field2078 = field2060;
-	@ObfuscatedName("nd.o")
-	public static JagString field2074 = field2060;
-	@ObfuscatedName("nd.l")
-	public static JagString field2071 = field2060;
-	@ObfuscatedName("nd.i")
-	public static JagString field2068 = field2060;
-	@ObfuscatedName("nd.h")
-	public static JagString field2067 = field2060;
-	@ObfuscatedName("nd.g")
-	public static JagString field2066 = field2060;
 	@ObfuscatedName("nd.c")
 	public static JagString field2062 = field2060;
-	@ObfuscatedName("nd.bb")
-	public static JagString field2113 = field2060;
 	@ObfuscatedName("nd.b")
 	public static JagString field2061 = field2060;
 	@ObfuscatedName("nd.ab")
@@ -537,18 +494,12 @@ public class Statics {
 	public static JagString field859 = JagString.wrap("m-Ochte sich mit Ihnen duellieren)3");
 	@ObfuscatedName("fa.rb")
 	public static JagString field863 = JagString.wrap("Please try using a different world)3");
-	@ObfuscatedName("fa.tb")
-	public static JagString field865 = field863;
 	@ObfuscatedName("fa.qb")
 	public static JagString field862 = field863;
-	@ObfuscatedName("fa.pb")
-	public static JagString field861 = field863;
 	@ObfuscatedName("fa.mb")
 	public static JagString field858 = field863;
 	@ObfuscatedName("fa.jb")
 	public static JagString field855 = field863;
-	@ObfuscatedName("fa.eb")
-	public static JagString field850 = field863;
 	@ObfuscatedName("ad.B")
 	public static JagString field215 = JagString.wrap("Konfig geladen)3");
 	@ObfuscatedName("ad.I")
@@ -625,8 +576,6 @@ public class Statics {
 	public static JagString field501 = JagString.wrap("@or1@");
 	@ObfuscatedName("cb.w")
 	public static JagString field502 = JagString.wrap("Please check your message)2centre for details)3");
-	@ObfuscatedName("cb.r")
-	public static JagString field497 = field502;
 	@ObfuscatedName("cb.A")
 	public static JagString field506 = JagString.wrap("Classic");
 	@ObfuscatedName("cb.B")
@@ -647,8 +596,6 @@ public class Statics {
 	public static JagString field538 = JagString.wrap("Geben Sie Ihren Benutzernamen");
 	@ObfuscatedName("cd.m")
 	public static JagString field541 = JagString.wrap("The server is being updated)3");
-	@ObfuscatedName("cd.k")
-	public static JagString field539 = field541;
 	@ObfuscatedName("cd.s")
 	public static JagString field547 = JagString.wrap("Neuer Benutzer");
 	@ObfuscatedName("d.ec")
@@ -777,8 +724,6 @@ public class Statics {
 	public static JagString field926 = field927;
 	@ObfuscatedName("fd.Kb")
 	public static JagString field942 = JagString.wrap("Please subscribe)1 or use a different world)3");
-	@ObfuscatedName("fd.Ab")
-	public static JagString field932 = field942;
 	@ObfuscatedName("fd.xb")
 	public static JagString field929 = JagString.wrap("Unerwartete Antwort vom Anmelde)2Server");
 	@ObfuscatedName("fe.Ec")
@@ -833,8 +778,6 @@ public class Statics {
 	public static JagString field1067 = JagString.wrap("Gegenstand f-Ur Mitglieder");
 	@ObfuscatedName("gb.v")
 	public static JagString field1068 = JagString.wrap("Invalid username or password)3");
-	@ObfuscatedName("gb.D")
-	public static JagString field1076 = field1068;
 	@ObfuscatedName("gb.E")
 	public static JagString field1077 = JagString.wrap("blinken3:");
 	@ObfuscatedName("gb.A")
@@ -891,8 +834,6 @@ public class Statics {
 	public static JagString field1180 = JagString.wrap("Angreifen");
 	@ObfuscatedName("hc.p")
 	public static JagString field1188 = JagString.wrap("Your account is already logged in)3");
-	@ObfuscatedName("hc.b")
-	public static JagString field1174 = field1188;
 	@ObfuscatedName("hd.sb")
 	public static JagString field1191 = JagString.wrap(":duelreq:");
 	@ObfuscatedName("hd.Fb")
@@ -913,12 +854,8 @@ public class Statics {
 	public static JagString field1215 = field1216;
 	@ObfuscatedName("hd.Tb")
 	public static JagString field1218 = JagString.wrap("Error connecting to server)3");
-	@ObfuscatedName("hd.Ub")
-	public static JagString field1219 = field1218;
 	@ObfuscatedName("hd.Vb")
 	public static JagString field1220 = JagString.wrap("RuneScape has been updated(Q");
-	@ObfuscatedName("hd.Sb")
-	public static JagString field1217 = field1220;
 	@ObfuscatedName("he.Ab")
 	public static JagString field1229 = JagString.wrap(":tradereq:");
 	@ObfuscatedName("he.Jb")
@@ -1011,16 +948,12 @@ public class Statics {
 	public static JagString field1466 = JagString.wrap("hitmarks");
 	@ObfuscatedName("jc.Ab")
 	public static JagString field1473 = JagString.wrap("Press (Wchange your password(W on front page)3");
-	@ObfuscatedName("jc.qb")
-	public static JagString field1463 = field1473;
 	@ObfuscatedName("je.cc")
 	public static JagString field1500 = JagString.wrap(" )2> @whi@");
 	@ObfuscatedName("je.fc")
 	public static JagString field1503 = JagString.wrap("Wen m-Ochten Sie hinzuf-Ugen?");
 	@ObfuscatedName("je.Jb")
 	public static JagString field1481 = JagString.wrap("Could not complete login)3");
-	@ObfuscatedName("je.ac")
-	public static JagString field1498 = field1481;
 	@ObfuscatedName("je.Pb")
 	public static JagString field1487 = JagString.wrap("Ung-Ultige Verbindung mit einem Anmelde)2Server)3");
 	@ObfuscatedName("je.Ob")
@@ -1029,8 +962,6 @@ public class Statics {
 	public static JagString field1501 = field1486;
 	@ObfuscatedName("je.Tb")
 	public static JagString field1491 = JagString.wrap("Too many connections from your address)3");
-	@ObfuscatedName("je.Kb")
-	public static JagString field1482 = field1491;
 	@ObfuscatedName("je.Wb")
 	public static JagString field1494 = JagString.wrap("Lade Eingabe)2Steuerungsprogramm)3)3)3");
 	@ObfuscatedName("k.y")
@@ -1131,8 +1062,6 @@ public class Statics {
 	public static JagString field1776 = JagString.wrap("Spiel)2Engine wird gestartet)3)3)3");
 	@ObfuscatedName("m.x")
 	public static JagString field1777 = JagString.wrap("No response from server)3");
-	@ObfuscatedName("m.y")
-	public static JagString field1778 = field1777;
 	@ObfuscatedName("ma.hb")
 	public static JagString field1784 = JagString.wrap("Loading interfaces )2 ");
 	@ObfuscatedName("ma.mb")
@@ -1233,8 +1162,6 @@ public class Statics {
 	public static JagString field2032 = JagString.wrap("Registrierter Benutzer");
 	@ObfuscatedName("nb.zc")
 	public static JagString field1988 = JagString.wrap("Login limit exceeded)3");
-	@ObfuscatedName("nb.Xc")
-	public static JagString field2012 = field1988;
 	@ObfuscatedName("nc.a")
 	public static JagString field2035 = JagString.wrap(" steht bereits auf Ihrer Freunde)2Liste(Q");
 	@ObfuscatedName("nc.b")
@@ -1325,8 +1252,6 @@ public class Statics {
 	public static JagString field2381 = JagString.wrap("Wen m-Ochten Sie entfernen?");
 	@ObfuscatedName("pe.Xb")
 	public static JagString field2383 = JagString.wrap("Bad session id)3");
-	@ObfuscatedName("pe.Wb")
-	public static JagString field2382 = field2383;
 	@ObfuscatedName("qa.Eb")
 	public static JagString field2401 = JagString.wrap("Hide");
 	@ObfuscatedName("qa.wb")
@@ -1441,8 +1366,6 @@ public class Statics {
 	public static JagString field2646 = JagString.wrap("headicons_hint");
 	@ObfuscatedName("rc.x")
 	public static JagString field2650 = JagString.wrap("Connection timed out)3");
-	@ObfuscatedName("rc.h")
-	public static JagString field2634 = field2650;
 	@ObfuscatedName("rc.B")
 	public static JagString field2654 = JagString.wrap("Der Server wird gerade aktualisiert)3");
 	@ObfuscatedName("rc.E")
@@ -1497,8 +1420,6 @@ public class Statics {
 	public static JagString field2764 = JagString.wrap("Ihr Spielkonto wird bereits benutzt)3");
 	@ObfuscatedName("sd.l")
 	public static JagString field2765 = JagString.wrap("This world is full)3");
-	@ObfuscatedName("sd.j")
-	public static JagString field2763 = field2765;
 	@ObfuscatedName("sd.o")
 	public static JagString field2768 = JagString.wrap("flash3:");
 	@ObfuscatedName("sd.n")
@@ -1599,8 +1520,6 @@ public class Statics {
 	public static JagString field3051 = JagString.wrap("Lade Titelbild )2 ");
 	@ObfuscatedName("uc.t")
 	public static JagString field3056 = JagString.wrap("Please use a different world)3");
-	@ObfuscatedName("uc.J")
-	public static JagString field3072 = field3056;
 	@ObfuscatedName("uc.v")
 	public static JagString field3058 = JagString.wrap("");
 	@ObfuscatedName("uc.w")
@@ -1613,8 +1532,6 @@ public class Statics {
 	public static JagString field3060 = field3067;
 	@ObfuscatedName("uc.z")
 	public static JagString field3062 = field3067;
-	@ObfuscatedName("uc.s")
-	public static JagString field3055 = field3067;
 	@ObfuscatedName("uc.H")
 	public static JagString field3070 = JagString.wrap("Benutzen");
 	@ObfuscatedName("uc.B")
@@ -1645,8 +1562,6 @@ public class Statics {
 	public static JagString field3125 = JagString.wrap(" hat sich eingeloggt)3");
 	@ObfuscatedName("va.vb")
 	public static JagString field3126 = JagString.wrap("You need a members account to login to this world)3");
-	@ObfuscatedName("va.wb")
-	public static JagString field3127 = field3126;
 	@ObfuscatedName("vb.zb")
 	public static JagString field3136 = JagString.wrap("@cya@");
 	@ObfuscatedName("vb.Hb")
@@ -1657,8 +1572,6 @@ public class Statics {
 	public static JagString field3145 = JagString.wrap("Bitte versuchen Sie)1");
 	@ObfuscatedName("vc.a")
 	public static JagString field3146 = JagString.wrap("Your account has been disabled)3");
-	@ObfuscatedName("vc.A")
-	public static JagString field3172 = field3146;
 	@ObfuscatedName("vc.c")
 	public static JagString field3148 = JagString.wrap("Wordpack geladen)3");
 	@ObfuscatedName("vc.f")
@@ -1691,8 +1604,6 @@ public class Statics {
 	public static JagString field3197 = JagString.wrap("Abbrechen");
 	@ObfuscatedName("w.f")
 	public static JagString field3202 = JagString.wrap("Please reload this page)3");
-	@ObfuscatedName("w.i")
-	public static JagString field3205 = field3202;
 	@ObfuscatedName("w.g")
 	public static JagString field3203 = JagString.wrap(" x ");
 	@ObfuscatedName("wa.e")
@@ -1901,7 +1812,7 @@ public class Statics {
 	@ObfuscatedName("cd.a(I)V")
 	public static void method274() {
 		field547 = null;
-		field539 = null;
+		Text.field539 = null;
 		field533 = null;
 		field549 = null;
 		Client.groundObj = null;
@@ -1933,10 +1844,10 @@ public class Statics {
 		Client.field1193 = null;
 		field1215 = null;
 		field1199 = null;
-		field1219 = null;
+		Text.field1219 = null;
 		SeqType.field1196 = null;
 		field1214 = null;
-		field1217 = null;
+		Text.field1217 = null;
 		field1197 = null;
 	}
 
@@ -1962,7 +1873,7 @@ public class Statics {
 		field2730 = null;
 		ScriptRunner.field2736 = null;
 		Client.field2731 = null;
-		Client.field2739 = null;
+		Client.scripts = null;
 		field2732 = null;
 		Client.field2745 = null;
 	}
@@ -1970,7 +1881,7 @@ public class Statics {
 	@ObfuscatedName("hc.a(I)V")
 	public static void method471() {
 		field1188 = null;
-		field1174 = null;
+		Text.field1174 = null;
 		field1180 = null;
 		field1177 = null;
 		Client.field1176 = null;
@@ -2030,7 +1941,7 @@ public class Statics {
 		field2333 = null;
 		field2317 = null;
 		field2309 = null;
-		Client.field2324 = null;
+		Client.jingles = null;
 		field2331 = null;
 	}
 
@@ -2096,10 +2007,10 @@ public class Statics {
 		field2760 = null;
 		field2768 = null;
 		Js5Net.field2769 = null;
-		field2763 = null;
+		Text.field2763 = null;
 		field2764 = null;
 		field2767 = null;
-		PixLoader.field2771 = null;
+		PixLoader.xof = null;
 		Client.field2758 = null;
 		field2765 = null;
 		field2757 = null;
@@ -2117,10 +2028,10 @@ public class Statics {
 
 	@ObfuscatedName("w.a(B)V")
 	public static void method1027() {
-		Client.field3200 = null;
+		Client.interfaces = null;
 		Js5Loader.field3198 = null;
 		field3197 = null;
-		field3205 = null;
+		Text.field3205 = null;
 		field3203 = null;
 		field3202 = null;
 	}
@@ -2129,7 +2040,7 @@ public class Statics {
 	public static void method99() {
 		GameShell.field187 = null;
 		Client.field178 = null;
-		field183 = null;
+		Text.field183 = null;
 		field172 = null;
 		field186 = null;
 		VarCache.field173 = null;
@@ -2598,10 +2509,10 @@ public class Statics {
 	@ObfuscatedName("pe.f(I)V")
 	public static void method823() {
 		field2362 = null;
-		field2382 = null;
+		Text.field2382 = null;
 		field2378 = null;
 		field2355 = null;
-		Client.field2376 = null;
+		Client.configs = null;
 		field2357 = null;
 		field2383 = null;
 		field2381 = null;
@@ -2656,7 +2567,7 @@ public class Statics {
 		field1562 = null;
 		field1564 = null;
 		field1541 = null;
-		Client.field1542 = null;
+		Client.binary = null;
 		field1557 = null;
 		field1549 = null;
 		Client.field1556 = null;
@@ -2799,7 +2710,7 @@ public class Statics {
 		SeqType.field939 = null;
 		Client.field925 = null;
 		IfType.field924 = null;
-		field932 = null;
+		Text.field932 = null;
 		PacketBit.field936 = null;
 		field931 = null;
 		field929 = null;
@@ -2820,7 +2731,7 @@ public class Statics {
 		IfType.field500 = null;
 		IfType.field503 = null;
 		field501 = null;
-		field497 = null;
+		Text.field497 = null;
 	}
 
 	@ObfuscatedName("ie.a(I)V")
@@ -2857,7 +2768,7 @@ public class Statics {
 	@ObfuscatedName("vc.a(Z)V")
 	public static void method1017() {
 		field3151 = null;
-		field3172 = null;
+		Text.field3172 = null;
 		field3169 = null;
 		field3148 = null;
 		VarpType.field3167 = null;
@@ -2893,7 +2804,7 @@ public class Statics {
 		field2710 = null;
 		field2716 = null;
 		field2707 = null;
-		Client.field2702 = null;
+		Client.songs = null;
 		field2717 = null;
 		Client.soundDecimator = null;
 		field2714 = null;
@@ -2901,7 +2812,7 @@ public class Statics {
 
 	@ObfuscatedName("jc.b(B)V")
 	public static void method543() {
-		field1463 = null;
+		Text.field1463 = null;
 		ClientBuild.groundh = null;
 		field1466 = null;
 		field1473 = null;
@@ -2956,14 +2867,14 @@ public class Statics {
 
 	@ObfuscatedName("fa.b(I)V")
 	public static void method388() {
-		field850 = null;
+		Text.field850 = null;
 		field863 = null;
 		field858 = null;
 		field855 = null;
 		field852 = null;
 		field859 = null;
-		field865 = null;
-		field861 = null;
+		Text.field865 = null;
+		Text.field861 = null;
 		ClientBuild.field856 = null;
 		field862 = null;
 		field854 = null;
@@ -2990,7 +2901,7 @@ public class Statics {
 	@ObfuscatedName("s.b(I)V")
 	public static void method899() {
 		field2054 = field2070;
-		field865 = field3145;
+		Text.field865 = field3145;
 		Client.field602 = field1928;
 		field63 = field719;
 		field1807 = field1870;
@@ -2999,13 +2910,13 @@ public class Statics {
 		field2757 = field2804;
 		field1873 = field1920;
 		field2598 = field810;
-		field3172 = field2329;
-		field2066 = field1581;
+		Text.field3172 = field2329;
+		Text.field2066 = field1581;
 		field2393 = field1127;
-		field1498 = field2903;
+		Text.field1498 = field2903;
 		field2928 = field1127;
 		field3302 = field3197;
-		field2103 = field3280;
+		Text.field2103 = field3280;
 		field1006 = field2933;
 		field1106 = field1840;
 		field862 = field1908;
@@ -3017,7 +2928,7 @@ public class Statics {
 		field2096 = field2681;
 		field793 = field3279;
 		field2337 = field1343;
-		field497 = field902;
+		Text.field497 = field902;
 		field3045 = field2035;
 		field2667 = field1269;
 		field2097 = field634;
@@ -3026,15 +2937,15 @@ public class Statics {
 		field900 = field414;
 		field855 = field1908;
 		field738 = field2381;
-		field539 = field2654;
+		Text.field539 = field2654;
 		field720 = field2941;
 		field1215 = field1439;
-		field2012 = field1611;
+		Text.field2012 = field1611;
 		field2767 = field1077;
-		field2090 = field3169;
-		field2079 = field3169;
+		Text.field2090 = field3169;
+		Text.field2079 = field3169;
 		field3057 = field3191;
-		field2089 = field3169;
+		Text.field2089 = field3169;
 		field2805 = field1403;
 		field2091 = field3169;
 		field3193 = field2429;
@@ -3048,9 +2959,9 @@ public class Statics {
 		field1782 = field3258;
 		field1896 = field2420;
 		field3138 = field2995;
-		field183 = field48;
+		Text.field183 = field48;
 		field1094 = field2685;
-		field1174 = field2764;
+		Text.field1174 = field2764;
 		field3265 = field1915;
 		field3187 = field1044;
 		field1364 = field1345;
@@ -3058,70 +2969,70 @@ public class Statics {
 		field796 = field1494;
 		field1522 = field1180;
 		field1676 = field1858;
-		field2135 = field791;
+		Text.field2135 = field791;
 		field2041 = field2730;
 		field3001 = field1079;
 		field487 = field1171;
 		field2546 = field1503;
-		field2139 = field2438;
+		Text.field2139 = field2438;
 		field1152 = field310;
 		field2602 = field1853;
 		field3239 = field1944;
 		field507 = field712;
 		field2610 = field3151;
 		field2088 = field3169;
-		field2068 = field976;
+		Text.field2068 = field976;
 		Client.field584 = field3070;
 		field303 = field890;
 		field2575 = field3148;
-		field861 = field3145;
+		Text.field861 = field3145;
 		field785 = field2051;
 		field858 = field1908;
-		field2106 = field3169;
-		field2071 = field3169;
-		field1217 = Client.field578;
+		Text.field2106 = field3169;
+		Text.field2071 = field3169;
+		Text.field1217 = Client.field578;
 		field2319 = field2028;
 		field2360 = field1011;
-		field94 = field2378;
+		Text.field94 = field2378;
 		field2110 = field3169;
 		field1362 = field1386;
 		field64 = field3190;
 		field521 = field2432;
 		field452 = field732;
-		field2634 = field2359;
+		Text.field2634 = field2359;
 		field2092 = field3169;
 		field2931 = field2644;
 		field1024 = field1632;
-		field2086 = field1576;
-		field1219 = field3064;
-		field3127 = field2993;
-		field2140 = field791;
+		Text.field2086 = field1576;
+		Text.field1219 = field3064;
+		Text.field3127 = field2993;
+		Text.field2140 = field791;
 		field1510 = field2662;
 		field2094 = field1581;
 		field1933 = field1745;
 		field1030 = field702;
 		field1561 = field2824;
-		field2109 = field1908;
+		Text.field2109 = field1908;
 		field1392 = field1785;
 		field1597 = field418;
 		field1142 = field929;
 		field2400 = field1073;
-		field850 = field2679;
-		field2111 = field499;
-		field3072 = field2036;
+		Text.field850 = field2679;
+		Text.field2111 = field499;
+		Text.field3072 = field2036;
 		field3219 = field854;
-		field2113 = field3169;
-		field2080 = field2940;
-		field2067 = field3169;
+		Text.field2113 = field3169;
+		Text.field2080 = field2940;
+		Text.field2067 = field3169;
 		field1195 = field2102;
 		field1930 = field93;
 		field1789 = field716;
 		field1557 = field3184;
-		field2763 = field59;
+		Text.field2763 = field59;
 		field2576 = field3170;
 		field1931 = field2812;
 		field1037 = field2562;
-		field2093 = field1576;
+		Text.field2093 = field1576;
 		field2477 = field3225;
 		field2157 = field2977;
 		field1203 = field172;
@@ -3130,7 +3041,7 @@ public class Statics {
 		field2407 = field3051;
 		field315 = field2563;
 		field2431 = field526;
-		field1778 = field3189;
+		Text.field1778 = field3189;
 		field231 = field1794;
 		field2817 = field2980;
 		field1432 = field467;
@@ -3151,11 +3062,11 @@ public class Statics {
 		field2149 = field2032;
 		field1043 = field2426;
 		field3054 = field474;
-		field2074 = field3169;
+		Text.field2074 = field3169;
 		field2310 = field2164;
 		field1111 = field1618;
 		field2104 = field538;
-		field3205 = field1436;
+		Text.field3205 = field1436;
 		field1102 = field852;
 		field2317 = field1022;
 		field1449 = field1238;
@@ -3167,7 +3078,7 @@ public class Statics {
 		field218 = field1402;
 		field2580 = field409;
 		field3012 = field2174;
-		field2078 = field3169;
+		Text.field2078 = field3169;
 		field1407 = field1883;
 		field2675 = field717;
 		field926 = field232;
@@ -3175,12 +3086,12 @@ public class Statics {
 		field408 = field1232;
 		field1874 = field2299;
 		field1762 = field2141;
-		field2382 = field1264;
+		Text.field2382 = field1264;
 		Client.field582 = field838;
 		field1527 = field707;
 		field2178 = field2279;
-		field1482 = field2732;
-		field1463 = field2336;
+		Text.field1482 = field2732;
+		Text.field1463 = field2336;
 		field2056 = field1430;
 		field718 = field98;
 		field2582 = field431;
@@ -3191,13 +3102,13 @@ public class Statics {
 		field1998 = field2304;
 		field2948 = field2522;
 		field2138 = field215;
-		field1076 = field743;
+		Text.field1076 = field743;
 		field2100 = field2298;
 		field1501 = field1067;
 		field2405 = field505;
 		field671 = field2657;
 		field2172 = field2279;
-		field932 = field83;
+		Text.field932 = field83;
 		field468 = field2901;
 		field2101 = field3169;
 	}
@@ -3241,7 +3152,7 @@ public class Statics {
 	public static void method750() {
 		field2126 = null;
 		field2141 = null;
-		field2139 = null;
+		Text.field2139 = null;
 		field2127 = null;
 		field2150 = null;
 		field2136 = null;
@@ -3250,9 +3161,9 @@ public class Statics {
 		field2133 = null;
 		field2128 = null;
 		field2143 = null;
-		field2135 = null;
+		Text.field2135 = null;
 		field2149 = null;
-		field2140 = null;
+		Text.field2140 = null;
 		field2138 = null;
 	}
 
@@ -3264,7 +3175,7 @@ public class Statics {
 		field1751 = null;
 		ClientBuild.field1740 = null;
 		Client.out = null;
-		Client.field1752 = null;
+		Client.textures = null;
 	}
 
 	@ObfuscatedName("ua.c(I)V")
@@ -3371,7 +3282,7 @@ public class Statics {
 		if (arg0 == 0L) {
 			return;
 		}
-		if (Client.field1492 >= 100 && Client.field2189 != 1 || Client.field1492 >= 200) {
+		if (Client.field1492 >= 100 && Client.membersAccount != 1 || Client.field1492 >= 200) {
 			Client.method758(0, field2931, field3234);
 			return;
 		}
@@ -3397,7 +3308,7 @@ public class Statics {
 		Client.field1492++;
 		Client.field1055 = true;
 		Client.out.method415(114);
-		Client.out.method157(arg0);
+		Client.out.p8(arg0);
 	}
 
 	@ObfuscatedName("rb.f(I)V")
@@ -3442,14 +3353,14 @@ public class Statics {
 		ScriptRunner.field3068 = null;
 		field3060 = null;
 		field3059 = null;
-		TitleScreen.field3071 = null;
+		TitleScreen.loginUser = null;
 		field3074 = null;
-		field3072 = null;
+		Text.field3072 = null;
 		field3057 = null;
 		field3056 = null;
 		field3070 = null;
 		field3077 = null;
-		field3055 = null;
+		TitleScreen.loginPass = null;
 		field3064 = null;
 		field3076 = null;
 	}
@@ -3459,7 +3370,7 @@ public class Statics {
 		field621 = null;
 		field623 = null;
 		field620 = null;
-		Client.field657 = null;
+		Client.bases = null;
 		Client.field632 = null;
 		field647 = null;
 		field634 = null;
@@ -3486,45 +3397,45 @@ public class Statics {
 
 	@ObfuscatedName("nd.a(B)V")
 	public static void method740() {
-		field2089 = null;
+		Text.field2089 = null;
 		field2076 = null;
 		field2101 = null;
 		field2102 = null;
 		field2077 = null;
 		field2110 = null;
 		field2061 = null;
-		field2071 = null;
+		Text.field2071 = null;
 		field2104 = null;
 		field2091 = null;
-		field2109 = null;
-		field2113 = null;
+		Text.field2109 = null;
+		Text.field2113 = null;
 		field2081 = null;
 		field2096 = null;
-		field2080 = null;
+		Text.field2080 = null;
 		field2070 = null;
 		field2112 = null;
-		field2086 = null;
+		Text.field2086 = null;
 		field2088 = null;
-		field2111 = null;
+		Text.field2111 = null;
 		field2100 = null;
-		field2079 = null;
+		Text.field2079 = null;
 		field2083 = null;
-		field2066 = null;
+		Text.field2066 = null;
 		field2092 = null;
-		field2068 = null;
-		field2078 = null;
+		Text.field2068 = null;
+		Text.field2078 = null;
 		field2082 = null;
-		field2067 = null;
-		field2093 = null;
+		Text.field2067 = null;
+		Text.field2093 = null;
 		field2085 = null;
-		field2103 = null;
+		Text.field2103 = null;
 		field2097 = null;
-		field2106 = null;
+		Text.field2106 = null;
 		field2069 = null;
 		field2060 = null;
-		field2090 = null;
+		Text.field2090 = null;
 		field2094 = null;
-		field2074 = null;
+		Text.field2074 = null;
 		field2062 = null;
 		field2095 = null;
 	}
@@ -3552,7 +3463,7 @@ public class Statics {
 		field836 = null;
 		field844 = null;
 		field838 = null;
-		PixLoader.field837 = null;
+		PixLoader.wi = null;
 		field832 = null;
 		field842 = null;
 		TitleScreen.field847 = null;
@@ -3608,7 +3519,7 @@ public class Statics {
 		field2639 = null;
 		field2650 = null;
 		Client.field2633 = null;
-		field2634 = null;
+		Text.field2634 = null;
 		field2632 = null;
 		field2646 = null;
 	}
@@ -3622,7 +3533,7 @@ public class Statics {
 				var1.field26 = 32767;
 			}
 			var1.field38 = new byte[var1.field26];
-			arg0.pos += field2357.method1033(arg0.field284, var1.field26, 0, var1.field38, arg0.pos);
+			arg0.pos += field2357.method1033(arg0.data, var1.field26, 0, var1.field38, arg0.pos);
 			return var1;
 		} catch (Exception var2) {
 			return field1756;
@@ -3795,7 +3706,7 @@ public class Statics {
 
 	@ObfuscatedName("va.b(I)V")
 	public static void method1008() {
-		field3127 = null;
+		Text.field3127 = null;
 		field3120 = null;
 		field3118 = null;
 		field3125 = null;
@@ -3830,13 +3741,13 @@ public class Statics {
 
 	@ObfuscatedName("id.a(BLba;)[Ljava/lang/Object;")
 	public static Object[] method526(Packet arg0) {
-		int var1 = arg0.method144();
+		int var1 = arg0.g1();
 		if (var1 == 0) {
 			return null;
 		}
 		Object[] var2 = new Object[var1];
 		for (int var3 = 0; var3 < var1; var3++) {
-			int var4 = arg0.method144();
+			int var4 = arg0.g1();
 			if (var4 == 0) {
 				var2[var3] = Integer.valueOf(arg0.method167());
 			} else if (var4 == 1) {
@@ -3855,7 +3766,7 @@ public class Statics {
 		field1901 = null;
 		field1896 = null;
 		field1889 = null;
-		Client.field1890 = null;
+		Client.models = null;
 	}
 
 	@ObfuscatedName("re.a(ILba;)La;")
@@ -3877,7 +3788,7 @@ public class Statics {
 		Client.field92 = null;
 		field67 = null;
 		field101 = null;
-		field94 = null;
+		Text.field94 = null;
 		field98 = null;
 		field64 = null;
 	}
@@ -3886,7 +3797,7 @@ public class Statics {
 	public static int method105(JagString arg0, Packet arg1) {
 		int var2 = arg1.pos;
 		arg1.method185(arg0.field26);
-		arg1.pos += field2357.method1036(0, arg1.pos, arg0.field26, arg0.field38, arg1.field284);
+		arg1.pos += field2357.method1036(0, arg1.pos, arg0.field26, arg0.field38, arg1.data);
 		return arg1.pos - var2;
 	}
 
@@ -4042,11 +3953,11 @@ public class Statics {
 	public static void method569() {
 		Client.field1488 = null;
 		field1486 = null;
-		field1482 = null;
+		Text.field1482 = null;
 		field1491 = null;
 		field1501 = null;
 		field1494 = null;
-		field1498 = null;
+		Text.field1498 = null;
 		field1500 = null;
 		field1483 = null;
 		field1487 = null;
@@ -4073,7 +3984,7 @@ public class Statics {
 	@ObfuscatedName("m.a(I)V")
 	public static void method675() {
 		field1758 = null;
-		field1778 = null;
+		Text.field1778 = null;
 		field1765 = null;
 		Client.field1770 = null;
 		field1775 = null;
@@ -4098,7 +4009,7 @@ public class Statics {
 		field308 = null;
 		field303 = null;
 		field253 = null;
-		PixLoader.field292 = null;
+		PixLoader.bpal = null;
 	}
 
 	@ObfuscatedName("id.b(I)V")
@@ -4113,21 +4024,21 @@ public class Statics {
 		ClientBuild.field1385 = null;
 		field1364 = null;
 		Client.field1376 = null;
-		Client.field1378 = null;
+		Client.anims = null;
 		field1362 = null;
 		field1388 = null;
 		field1382 = null;
-		Client.field1380 = null;
+		Client.loginSocketReq = null;
 		field1381 = null;
 	}
 
 	@ObfuscatedName("nb.i(I)V")
 	public static void method730() {
 		field2032 = null;
-		Client.field2031 = null;
+		Client.jagFX = null;
 		field1966 = null;
 		field2028 = null;
-		field2012 = null;
+		Text.field2012 = null;
 		field1988 = null;
 		Client.field2034 = null;
 		Client.field2030 = null;
@@ -4135,7 +4046,7 @@ public class Statics {
 		field2029 = null;
 		FloType.field2018 = null;
 		JagException.signlink = null;
-		PixLoader.field1985 = null;
+		PixLoader.yof = null;
 		field1998 = null;
 		field2023 = null;
 		Client.field1993 = null;
@@ -4160,7 +4071,7 @@ public class Statics {
 		field2798 = null;
 		LocType.field2788 = null;
 		Client.field2782 = null;
-		PixLoader.field2794 = null;
+		PixLoader.bspr = null;
 		field2802 = null;
 		field2783 = null;
 		NpcType.field2799 = null;
@@ -4176,7 +4087,7 @@ public class Statics {
 		field3177 = null;
 		field3193 = null;
 		field3190 = null;
-		PixLoader.field3194 = null;
+		PixLoader.hi = null;
 		field3184 = null;
 		Client.world = null;
 		field3191 = null;
@@ -4267,7 +4178,7 @@ public class Statics {
 		field1079 = null;
 		field1065 = null;
 		field1068 = null;
-		field1076 = null;
+		Text.field1076 = null;
 		Client.field1074 = null;
 		field1056 = null;
 		NpcType.field1060 = null;
@@ -4318,7 +4229,7 @@ public class Statics {
 	@ObfuscatedName("h.k(I)V")
 	public static void method461() {
 		Client.field1096 = null;
-		Client.field1087 = null;
+		Client.sprites = null;
 		field1098 = null;
 		field1109 = null;
 		field1142 = null;

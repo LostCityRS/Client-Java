@@ -12,7 +12,7 @@ public final class PrivilegedRequest {
 	public int field814;
 
 	@ObfuscatedName("ed.c")
-	public volatile int field815 = 0;
+	public volatile int status = 0;
 
 	@ObfuscatedName("ed.d")
 	public Object field816;
@@ -21,5 +21,5 @@ public final class PrivilegedRequest {
 	public PrivilegedRequest field817;
 
 	@ObfuscatedName("ed.f")
-	public volatile Object field818;
+	public volatile Object result;
 }

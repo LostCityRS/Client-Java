@@ -22,18 +22,18 @@ public final class AnimBase extends Linkable {
 	public AnimBase(int arg0, byte[] arg1) {
 		this.field3114 = arg0;
 		Packet var3 = new Packet(arg1);
-		this.field3110 = var3.method144();
+		this.field3110 = var3.g1();
 		this.field3107 = new int[this.field3110][];
 		this.field3117 = new int[this.field3110];
 		for (int var4 = 0; var4 < this.field3110; var4++) {
-			this.field3117[var4] = var3.method144();
+			this.field3117[var4] = var3.g1();
 		}
 		for (int var5 = 0; var5 < this.field3110; var5++) {
-			this.field3107[var5] = new int[var3.method144()];
+			this.field3107[var5] = new int[var3.g1()];
 		}
 		for (int var6 = 0; var6 < this.field3110; var6++) {
 			for (int var7 = 0; var7 < this.field3107[var6].length; var7++) {
-				this.field3107[var6][var7] = var3.method144();
+				this.field3107[var6][var7] = var3.g1();
 			}
 		}
 	}

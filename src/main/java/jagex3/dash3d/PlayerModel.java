@@ -44,17 +44,17 @@ public final class PlayerModel {
 
 	@ObfuscatedName("la.a(ILba;)V")
 	public void method635(Packet arg0) {
-		arg0.method141(this.field1658 ? 1 : 0);
+		arg0.p1(this.field1658 ? 1 : 0);
 		for (int var2 = 0; var2 < 7; var2++) {
 			int var3 = this.field1667[Statics.field2808[var2]];
 			if (var3 == 0) {
-				arg0.method141(-1);
+				arg0.p1(-1);
 			} else {
-				arg0.method141(var3 - 256);
+				arg0.p1(var3 - 256);
 			}
 		}
 		for (int var4 = 0; var4 < 5; var4++) {
-			arg0.method141(this.field1688[var4]);
+			arg0.p1(this.field1688[var4]);
 		}
 	}
 

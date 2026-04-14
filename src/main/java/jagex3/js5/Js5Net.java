@@ -79,9 +79,9 @@ public class Js5Net {
 				while (field845 < 20 && field3285 > 0) {
 					Js5NetRequest var3 = (Js5NetRequest) field2596.search();
 					Packet var4 = new Packet(4);
-					var4.method141(1);
+					var4.p1(1);
 					var4.method153((int) var3.key);
-					field2769.method1016(4, var4.field284);
+					field2769.write(4, var4.data);
 					field1917.put(var3, var3.key);
 					field3285--;
 					field845++;
@@ -89,16 +89,16 @@ public class Js5Net {
 				while (field2144 < 20 && field1260 > 0) {
 					Js5NetRequest var5 = (Js5NetRequest) field996.next();
 					Packet var6 = new Packet(4);
-					var6.method141(0);
+					var6.p1(0);
 					var6.method153((int) var5.key);
-					field2769.method1016(4, var6.field284);
+					field2769.write(4, var6.data);
 					var5.unlink2();
 					field1831.put(var5, var5.key);
 					field2144++;
 					field1260--;
 				}
 				for (int var7 = 0; var7 < 100; var7++) {
-					int var8 = field2769.method1020();
+					int var8 = field2769.available();
 					if (var8 < 0) {
 						throw new IOException();
 					}
@@ -113,7 +113,7 @@ public class Js5Net {
 						var9 = 1;
 					}
 					if (var9 <= 0) {
-						int var10 = field2613.field284.length - field967.field2619;
+						int var10 = field2613.data.length - field967.field2619;
 						int var11 = 512 - field2559;
 						if (var10 - field2613.pos < var11) {
 							var11 = var10 - field2613.pos;
@@ -121,10 +121,10 @@ public class Js5Net {
 						if (var11 > var8) {
 							var11 = var8;
 						}
-						field2769.method1014(field2613.pos, var11, field2613.field284);
+						field2769.read(field2613.pos, var11, field2613.data);
 						if (field476 != 0) {
 							for (int var12 = 0; var12 < var11; var12++) {
-								field2613.field284[field2613.pos + var12] ^= field476;
+								field2613.data[field2613.pos + var12] ^= field476;
 							}
 						}
 						field2613.pos += var11;
@@ -142,11 +142,11 @@ public class Js5Net {
 								}
 							} else {
 								field1363.reset();
-								field1363.update(field2613.field284, 0, var10);
+								field1363.update(field2613.data, 0, var10);
 								int var13 = (int) field1363.getValue();
 								if (field967.field2624 != var13) {
 									try {
-										field2769.method1015();
+										field2769.close();
 									} catch (Exception var28) {
 									}
 									field476 = (byte) (Math.random() * 255.0D + 1.0D);
@@ -156,7 +156,7 @@ public class Js5Net {
 								}
 								field525 = 0;
 								field1803 = 0;
-								field967.field2615.method976((field967.key & 0xFF0000L) == 16711680L, (int) (field967.key & 0xFFFFL), field3180, field2613.field284);
+								field967.field2615.method976((field967.key & 0xFF0000L) == 16711680L, (int) (field967.key & 0xFFFFL), field3180, field2613.data);
 							}
 							field967.unlink();
 							field967 = null;
@@ -178,10 +178,10 @@ public class Js5Net {
 						if (var17 > var8) {
 							var17 = var8;
 						}
-						field2769.method1014(field2301.pos, var17, field2301.field284);
+						field2769.read(field2301.pos, var17, field2301.data);
 						if (field476 != 0) {
 							for (int var18 = 0; var18 < var17; var18++) {
-								field2301.field284[field2301.pos + var18] ^= field476;
+								field2301.data[field2301.pos + var18] ^= field476;
 							}
 						}
 						field2301.pos += var17;
@@ -190,9 +190,9 @@ public class Js5Net {
 						}
 						if (field967 == null) {
 							field2301.pos = 0;
-							int var19 = field2301.method144();
-							int var20 = field2301.method145();
-							int var21 = field2301.method144();
+							int var19 = field2301.g1();
+							int var20 = field2301.g2();
+							int var21 = field2301.g1();
 							int var22 = field2301.method167();
 							long var23 = (long) ((var19 << 16) + var20);
 							Js5NetRequest var25 = (Js5NetRequest) field1917.find(var23);
@@ -207,12 +207,12 @@ public class Js5Net {
 							field967 = var25;
 							int var26 = var21 == 0 ? 5 : 9;
 							field2613 = new Packet(field967.field2619 + var26 + var22);
-							field2613.method141(var21);
-							field2613.method182(var22);
+							field2613.p1(var21);
+							field2613.p4(var22);
 							field2559 = 8;
 							field2301.pos = 0;
 						} else if (field2559 == 0) {
-							if (field2301.field284[0] == -1) {
+							if (field2301.data[0] == -1) {
 								field2301.pos = 0;
 								field2559 = 1;
 							} else {
@@ -224,7 +224,7 @@ public class Js5Net {
 				return true;
 			} catch (IOException var29) {
 				try {
-					field2769.method1015();
+					field2769.close();
 				} catch (Exception var27) {
 				}
 				field525++;
@@ -241,12 +241,12 @@ public class Js5Net {
         }
         try {
             Packet var1 = new Packet(4);
-            var1.method141(arg0 ? 2 : 3);
+            var1.p1(arg0 ? 2 : 3);
             var1.method153(0);
-            field2769.method1016(4, var1.field284);
+            field2769.write(4, var1.data);
         } catch (IOException var3) {
             try {
-                field2769.method1015();
+                field2769.close();
             } catch (Exception var2) {
             }
             field2769 = null;
@@ -314,7 +314,7 @@ public class Js5Net {
 	public static void method381(ClientStream arg0, boolean arg1) {
 		if (field2769 != null) {
 			try {
-				field2769.method1015();
+				field2769.close();
 			} catch (Exception var7) {
 			}
 			field2769 = null;
@@ -334,13 +334,13 @@ public class Js5Net {
 						if (field476 != 0) {
 							try {
 								Packet var4 = new Packet(4);
-								var4.method141(4);
-								var4.method141(field476);
+								var4.p1(4);
+								var4.p1(field476);
 								var4.method150(0);
-								field2769.method1016(4, var4.field284);
+								field2769.write(4, var4.data);
 							} catch (IOException var6) {
 								try {
-									field2769.method1015();
+									field2769.close();
 								} catch (Exception var5) {
 								}
 								field2769 = null;
@@ -366,13 +366,13 @@ public class Js5Net {
 	@ObfuscatedName("h.f(I)V")
 	public static void method447() {
 		if (field2769 != null) {
-			field2769.method1015();
+			field2769.close();
 		}
 	}
 
     @ObfuscatedName("mb.a(BII)I")
     public static int method684(int arg0, int arg1) {
         long var2 = (long) ((arg0 << 16) + arg1);
-        return field967 != null && field967.key == var2 ? field2613.pos * 99 / (field2613.field284.length - field967.field2619) + 1 : 0;
+        return field967 != null && field967.key == var2 ? field2613.pos * 99 / (field2613.data.length - field967.field2619) + 1 : 0;
     }
 }

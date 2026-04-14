@@ -78,23 +78,23 @@ public final class SpotType extends Linkable2 {
 	@ObfuscatedName("ec.a(IBLba;)V")
 	public void method369(int arg0, Packet arg1) {
 		if (arg0 == 1) {
-			this.field792 = arg1.method145();
+			this.field792 = arg1.g2();
 		} else if (arg0 == 2) {
-			this.field786 = arg1.method145();
+			this.field786 = arg1.g2();
 		} else if (arg0 == 4) {
-			this.field804 = arg1.method145();
+			this.field804 = arg1.g2();
 		} else if (arg0 == 5) {
-			this.field812 = arg1.method145();
+			this.field812 = arg1.g2();
 		} else if (arg0 == 6) {
-			this.field807 = arg1.method145();
+			this.field807 = arg1.g2();
 		} else if (arg0 == 7) {
-			this.field799 = arg1.method144();
+			this.field799 = arg1.g1();
 		} else if (arg0 == 8) {
-			this.field794 = arg1.method144();
+			this.field794 = arg1.g1();
 		} else if (arg0 >= 40 && arg0 < 50) {
-			this.field808[arg0 - 40] = arg1.method145();
+			this.field808[arg0 - 40] = arg1.g2();
 		} else if (arg0 >= 50 && arg0 < 60) {
-			this.field811[arg0 - 50] = arg1.method145();
+			this.field811[arg0 - 50] = arg1.g2();
 		}
 	}
 
@@ -144,7 +144,7 @@ public final class SpotType extends Linkable2 {
 	@ObfuscatedName("ec.a(Lba;B)V")
 	public void method373(Packet arg0) {
 		while (true) {
-			int var2 = arg0.method144();
+			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}

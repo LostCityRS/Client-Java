@@ -32,7 +32,7 @@ public final class SignLink implements Runnable {
 	public boolean field1700 = false;
 
 	@ObfuscatedName("lc.c")
-	public int field1701 = 0;
+	public int uid = 0;
 
 	@ObfuscatedName("lc.d")
 	public FileOnDisk[] field1702;
@@ -197,7 +197,7 @@ public final class SignLink implements Runnable {
 		}
 		try {
 			DataInputStream var4 = new DataInputStream(new FileInputStream(this.field1717 + "uid.dat"));
-			this.field1701 = var4.readInt() + 1;
+			this.uid = var4.readInt() + 1;
 			var4.close();
 		} catch (Exception var5) {
 		}
@@ -234,27 +234,27 @@ public final class SignLink implements Runnable {
 			try {
 				int var3 = var2.field814;
 				if (var3 == 1) {
-					var2.field818 = new Socket(this.field1709, var2.field813);
+					var2.result = new Socket(this.field1709, var2.field813);
 				} else if (var3 == 2) {
 					Thread var6 = new Thread((Runnable) var2.field816);
 					var6.setDaemon(true);
 					var6.start();
 					var6.setPriority(var2.field813);
-					var2.field818 = var6;
+					var2.result = var6;
 				} else if (var3 == 4) {
-					var2.field818 = new DataInputStream(((URL) var2.field816).openStream());
+					var2.result = new DataInputStream(((URL) var2.field816).openStream());
 				} else if (var3 == 9) {
 					Object[] var4 = (Object[]) var2.field816;
-					var2.field818 = ((Class) var4[0]).getDeclaredMethod((String) var4[1], (Class[]) var4[2]);
+					var2.result = ((Class) var4[0]).getDeclaredMethod((String) var4[1], (Class[]) var4[2]);
 				} else if (var3 == 10) {
 					Object[] var5 = (Object[]) var2.field816;
-					var2.field818 = ((Class) var5[0]).getDeclaredField((String) var5[1]);
+					var2.result = ((Class) var5[0]).getDeclaredField((String) var5[1]);
 				} else {
 					throw new Exception();
 				}
-				var2.field815 = 1;
+				var2.status = 1;
 			} catch (Exception var7) {
-				var2.field815 = 2;
+				var2.status = 2;
 			}
 		}
 	}
@@ -275,7 +275,7 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("lc.b(II)Led;")
-	public PrivilegedRequest method657(int arg0) {
+	public PrivilegedRequest socketreq(int arg0) {
 		return this.method651(arg0, 1, null);
 	}
 

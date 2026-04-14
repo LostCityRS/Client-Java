@@ -7,74 +7,74 @@ import jagex3.util.JagString;
 
 public class PixLoader {
 	@ObfuscatedName("md.Lb")
-	public static int field1900;
+	public static int count;
 	@ObfuscatedName("nb.wc")
-	public static int[] field1985;
+	public static int[] yof;
 	@ObfuscatedName("se.v")
-	public static byte[][] field2794;
+	public static byte[][] bspr;
 	@ObfuscatedName("f.k")
-	public static int[] field837;
+	public static int[] wi;
 	@ObfuscatedName("vd.Md")
-	public static int[] field3194;
+	public static int[] hi;
 	@ObfuscatedName("sd.r")
-	public static int[] field2771;
+	public static int[] xof;
 	@ObfuscatedName("ta.rc")
-	public static int field2877;
+	public static int owi;
 	@ObfuscatedName("kd.E")
-	public static int field1628;
+	public static int ohi;
 	@ObfuscatedName("ba.Wb")
-	public static int[] field292;
+	public static int[] bpal;
 
 	@ObfuscatedName("bd.a([BI)V")
 	public static void method229(byte[] arg0) {
 		Packet var1 = new Packet(arg0);
 		var1.pos = arg0.length - 2;
-		field1900 = var1.method145();
-		field1985 = new int[field1900];
-		field2794 = new byte[field1900][];
-		field837 = new int[field1900];
-		field3194 = new int[field1900];
-		field2771 = new int[field1900];
-		var1.pos = arg0.length - field1900 * 8 - 7;
-		field2877 = var1.method145();
-		field1628 = var1.method145();
-		int var2 = (var1.method144() & 0xFF) + 1;
-		for (int var3 = 0; var3 < field1900; var3++) {
-			field2771[var3] = var1.method145();
+		count = var1.g2();
+		yof = new int[count];
+		bspr = new byte[count][];
+		wi = new int[count];
+		hi = new int[count];
+		xof = new int[count];
+		var1.pos = arg0.length - count * 8 - 7;
+		owi = var1.g2();
+		ohi = var1.g2();
+		int var2 = (var1.g1() & 0xFF) + 1;
+		for (int var3 = 0; var3 < count; var3++) {
+			xof[var3] = var1.g2();
 		}
-		for (int var4 = 0; var4 < field1900; var4++) {
-			field1985[var4] = var1.method145();
+		for (int var4 = 0; var4 < count; var4++) {
+			yof[var4] = var1.g2();
 		}
-		for (int var5 = 0; var5 < field1900; var5++) {
-			field837[var5] = var1.method145();
+		for (int var5 = 0; var5 < count; var5++) {
+			wi[var5] = var1.g2();
 		}
-		for (int var6 = 0; var6 < field1900; var6++) {
-			field3194[var6] = var1.method145();
+		for (int var6 = 0; var6 < count; var6++) {
+			hi[var6] = var1.g2();
 		}
-		var1.pos = arg0.length + 3 - field1900 * 8 - var2 * 3 - 7;
-		field292 = new int[var2];
+		var1.pos = arg0.length + 3 - count * 8 - var2 * 3 - 7;
+		bpal = new int[var2];
 		for (int var7 = 1; var7 < var2; var7++) {
-			field292[var7] = var1.method164();
-			if (field292[var7] == 0) {
-				field292[var7] = 1;
+			bpal[var7] = var1.g3();
+			if (bpal[var7] == 0) {
+				bpal[var7] = 1;
 			}
 		}
 		var1.pos = 0;
-		for (int var8 = 0; var8 < field1900; var8++) {
-			int var9 = field3194[var8];
-			int var10 = field837[var8];
+		for (int var8 = 0; var8 < count; var8++) {
+			int var9 = hi[var8];
+			int var10 = wi[var8];
 			int var11 = var9 * var10;
 			byte[] var12 = new byte[var11];
-			field2794[var8] = var12;
-			int var13 = var1.method144();
+			bspr[var8] = var12;
+			int var13 = var1.g1();
 			if (var13 == 0) {
 				for (int var16 = 0; var16 < var11; var16++) {
-					var12[var16] = var1.method184();
+					var12[var16] = var1.g1b();
 				}
 			} else if (var13 == 1) {
 				for (int var14 = 0; var14 < var10; var14++) {
 					for (int var15 = 0; var15 < var9; var15++) {
-						var12[var10 * var15 + var14] = var1.method184();
+						var12[var10 * var15 + var14] = var1.g1b();
 					}
 				}
 			}
@@ -82,21 +82,21 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("h.j(I)Ljd;")
-	public static Pix32 method458() {
+	public static Pix32 makePix32() {
 		Pix32 var0 = new Pix32();
-		var0.field1479 = field2877;
-		var0.field1477 = field1628;
-		var0.field1478 = field2771[0];
-		var0.field1474 = field1985[0];
-		var0.field1476 = field837[0];
-		var0.field1475 = field3194[0];
-		byte[] var1 = field2794[0];
-		int var2 = var0.field1476 * var0.field1475;
-		var0.field1480 = new int[var2];
+		var0.owi = owi;
+		var0.ohi = ohi;
+		var0.xof = xof[0];
+		var0.yof = yof[0];
+		var0.wi = wi[0];
+		var0.hi = hi[0];
+		byte[] var1 = bspr[0];
+		int var2 = var0.wi * var0.hi;
+		var0.data = new int[var2];
 		for (int var3 = 0; var3 < var2; var3++) {
-			var0.field1480[var3] = field292[var1[var3] & 0xFF];
+			var0.data[var3] = bpal[var1[var3] & 0xFF];
 		}
-		method449();
+		reset();
 		return var0;
 	}
 
@@ -109,7 +109,7 @@ public class PixLoader {
 
 	@ObfuscatedName("qb.a(ILbd;ZI)Ljd;")
 	public static Pix32 method846(int arg0, Js5 arg1, int arg2) {
-		return method885(arg0, arg2, arg1) ? method458() : null;
+		return method885(arg0, arg2, arg1) ? makePix32() : null;
 	}
 
 	@ObfuscatedName("kc.a(La;La;Lbd;B)Le;")
@@ -121,23 +121,23 @@ public class PixLoader {
 
 	@ObfuscatedName("uc.d(B)[Ljd;")
 	public static Pix32[] method998() {
-		Pix32[] var0 = new Pix32[field1900];
-		for (int var1 = 0; var1 < field1900; var1++) {
+		Pix32[] var0 = new Pix32[count];
+		for (int var1 = 0; var1 < count; var1++) {
 			Pix32 var2 = var0[var1] = new Pix32();
-			var2.field1479 = field2877;
-			var2.field1477 = field1628;
-			var2.field1478 = field2771[var1];
-			var2.field1474 = field1985[var1];
-			var2.field1476 = field837[var1];
-			var2.field1475 = field3194[var1];
-			byte[] var3 = field2794[var1];
-			int var4 = var2.field1476 * var2.field1475;
-			var2.field1480 = new int[var4];
+			var2.owi = owi;
+			var2.ohi = ohi;
+			var2.xof = xof[var1];
+			var2.yof = yof[var1];
+			var2.wi = wi[var1];
+			var2.hi = hi[var1];
+			byte[] var3 = bspr[var1];
+			int var4 = var2.wi * var2.hi;
+			var2.data = new int[var4];
 			for (int var5 = 0; var5 < var4; var5++) {
-				var2.field1480[var5] = field292[var3[var5] & 0xFF];
+				var2.data[var5] = bpal[var3[var5] & 0xFF];
 			}
 		}
-		method449();
+		reset();
 		return var0;
 	}
 
@@ -150,46 +150,46 @@ public class PixLoader {
 
 	@ObfuscatedName("td.a(I)Lbc;")
 	public static PixFont method965() {
-		PixFont var0 = new PixFont(field1985, field837, field3194, field292, field2794);
-		method449();
+		PixFont var0 = new PixFont(yof, wi, hi, bpal, bspr);
+		reset();
 		return var0;
 	}
 
 	@ObfuscatedName("kc.a(Lbd;BII)Le;")
 	public static Pix8 method609(Js5 arg0, int arg1, int arg2) {
-		return method885(arg1, arg2, arg0) ? method467() : null;
+		return method885(arg1, arg2, arg0) ? makePix8() : null;
 	}
 
 	@ObfuscatedName("hb.b(I)Le;")
-	public static Pix8 method467() {
+	public static Pix8 makePix8() {
 		Pix8 var0 = new Pix8();
-		var0.field746 = field2877;
-		var0.field747 = field1628;
-		var0.field751 = field2771[0];
-		var0.field750 = field1985[0];
-		var0.field744 = field837[0];
-		var0.field749 = field3194[0];
-		var0.field745 = field292;
-		var0.field748 = field2794[0];
-		method449();
+		var0.owi = owi;
+		var0.ohi = ohi;
+		var0.xof = xof[0];
+		var0.yof = yof[0];
+		var0.wi = wi[0];
+		var0.hi = hi[0];
+		var0.bpal = bpal;
+		var0.data = bspr[0];
+		reset();
 		return var0;
 	}
 
 	@ObfuscatedName("uc.d(I)[Le;")
-	public static Pix8[] method994() {
-		Pix8[] var0 = new Pix8[field1900];
-		for (int var1 = 0; var1 < field1900; var1++) {
+	public static Pix8[] makePix8Array() {
+		Pix8[] var0 = new Pix8[count];
+		for (int var1 = 0; var1 < count; var1++) {
 			Pix8 var2 = var0[var1] = new Pix8();
-			var2.field746 = field2877;
-			var2.field747 = field1628;
-			var2.field751 = field2771[var1];
-			var2.field750 = field1985[var1];
-			var2.field744 = field837[var1];
-			var2.field749 = field3194[var1];
-			var2.field745 = field292;
-			var2.field748 = field2794[var1];
+			var2.owi = owi;
+			var2.ohi = ohi;
+			var2.xof = xof[var1];
+			var2.yof = yof[var1];
+			var2.wi = wi[var1];
+			var2.hi = hi[var1];
+			var2.bpal = bpal;
+			var2.data = bspr[var1];
 		}
-		method449();
+		reset();
 		return var0;
 	}
 
@@ -202,7 +202,7 @@ public class PixLoader {
 
 	@ObfuscatedName("j.a(ILbd;I)Le;")
 	public static Pix8 method533(Js5 arg0, int arg1) {
-		return method148(arg0, arg1) ? method467() : null;
+		return method148(arg0, arg1) ? makePix8() : null;
 	}
 
     @ObfuscatedName("ec.a(Lbd;BLa;La;)[Le;")
@@ -214,7 +214,7 @@ public class PixLoader {
 
 	@ObfuscatedName("ib.a(ILbd;II)[Le;")
 	public static Pix8[] method518(Js5 arg0, int arg1, int arg2) {
-		return method885(arg1, arg2, arg0) ? method994() : null;
+		return method885(arg1, arg2, arg0) ? makePix8Array() : null;
 	}
 
 	@ObfuscatedName("rc.a(BILbd;I)[Ljd;")
@@ -228,13 +228,13 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("h.b(Z)V")
-	public static void method449() {
-		field837 = null;
-		field2794 = null;
-		field3194 = null;
-		field1985 = null;
-		field292 = null;
-		field2771 = null;
+	public static void reset() {
+		wi = null;
+		bspr = null;
+		hi = null;
+		yof = null;
+		bpal = null;
+		xof = null;
 	}
 
 	@ObfuscatedName("rc.a(IILbd;I)Z")

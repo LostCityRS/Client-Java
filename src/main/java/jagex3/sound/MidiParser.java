@@ -75,7 +75,7 @@ public final class MidiParser {
 
 	@ObfuscatedName("ea.c()V")
 	public void method340() {
-		this.field752.field284 = null;
+		this.field752.data = null;
 		this.field755 = null;
 		this.field754 = null;
 		this.field756 = null;
@@ -84,10 +84,10 @@ public final class MidiParser {
 
 	@ObfuscatedName("ea.a([B)V")
 	public void method341(byte[] arg0) {
-		this.field752.field284 = arg0;
+		this.field752.data = arg0;
 		this.field752.pos = 10;
-		int var2 = this.field752.method145();
-		this.field760 = this.field752.method145();
+		int var2 = this.field752.g2();
+		this.field760 = this.field752.g2();
 		this.field759 = 500000;
 		this.field755 = new int[var2];
 		int var3 = 0;
@@ -107,7 +107,7 @@ public final class MidiParser {
 
 	@ObfuscatedName("ea.d()Z")
 	public boolean method342() {
-		return this.field752.field284 != null;
+		return this.field752.data != null;
 	}
 
 	@ObfuscatedName("ea.e()Z")
@@ -135,7 +135,7 @@ public final class MidiParser {
 
 	@ObfuscatedName("ea.e(I)I")
 	public int method346(int arg0) {
-		byte var2 = this.field752.field284[this.field752.pos];
+		byte var2 = this.field752.data[this.field752.pos];
 		int var3;
 		if (var2 < 0) {
 			var3 = var2 & 0xFF;
@@ -149,7 +149,7 @@ public final class MidiParser {
 		}
 		int var4 = this.field752.method176();
 		if (var3 == 247 && var4 > 0) {
-			int var5 = this.field752.field284[this.field752.pos] & 0xFF;
+			int var5 = this.field752.data[this.field752.pos] & 0xFF;
 			if (var5 >= 241 && var5 <= 243 || var5 == 246 || var5 == 248 || var5 >= 250 && var5 <= 252 || var5 == 254) {
 				this.field752.pos++;
 				this.field757[arg0] = var5;
@@ -166,20 +166,20 @@ public final class MidiParser {
 			byte var7 = field758[arg1 - 128];
 			int var8 = arg1;
 			if (var7 >= 1) {
-				var8 = arg1 | this.field752.method144() << 8;
+				var8 = arg1 | this.field752.g1() << 8;
 			}
 			if (var7 >= 2) {
-				var8 |= this.field752.method144() << 16;
+				var8 |= this.field752.g1() << 16;
 			}
 			return var8;
 		}
-		int var3 = this.field752.method144();
+		int var3 = this.field752.g1();
 		int var4 = this.field752.method176();
 		if (var3 == 47) {
 			this.field752.pos += var4;
 			return 1;
 		} else if (var3 == 81) {
-			int var5 = this.field752.method164();
+			int var5 = this.field752.g3();
 			var4 -= 3;
 			int var6 = this.field756[arg0];
 			this.field753 += (long) (this.field759 - var5) * (long) var6;

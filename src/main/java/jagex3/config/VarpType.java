@@ -47,7 +47,7 @@ public final class VarpType extends Linkable2 {
 	@ObfuscatedName("qa.a(Lba;I)V")
 	public void method838(Packet arg0) {
 		while (true) {
-			int var2 = arg0.method144();
+			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}
@@ -58,7 +58,7 @@ public final class VarpType extends Linkable2 {
 	@ObfuscatedName("qa.a(IILba;)V")
 	public void method839(int arg0, Packet arg1) {
 		if (arg0 == 5) {
-			this.field2404 = arg1.method145();
+			this.field2404 = arg1.g2();
 		}
 	}
 }

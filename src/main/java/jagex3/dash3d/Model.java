@@ -682,18 +682,18 @@ public final class Model extends ModelSource {
 		Packet var5 = new Packet(arg0);
 		Packet var6 = new Packet(arg0);
 		var2.pos = arg0.length - 18;
-		int var7 = var2.method145();
-		int var8 = var2.method145();
-		int var9 = var2.method144();
-		int var10 = var2.method144();
-		int var11 = var2.method144();
-		int var12 = var2.method144();
-		int var13 = var2.method144();
-		int var14 = var2.method144();
-		int var15 = var2.method145();
-		int var16 = var2.method145();
-		int var17 = var2.method145();
-		int var18 = var2.method145();
+		int var7 = var2.g2();
+		int var8 = var2.g2();
+		int var9 = var2.g1();
+		int var10 = var2.g1();
+		int var11 = var2.g1();
+		int var12 = var2.g1();
+		int var13 = var2.g1();
+		int var14 = var2.g1();
+		int var15 = var2.g2();
+		int var16 = var2.g2();
+		int var17 = var2.g2();
+		int var18 = var2.g2();
 		int var19 = var7;
 		int var21 = var8 + var19;
 		int var22 = var21;
@@ -770,7 +770,7 @@ public final class Model extends ModelSource {
 		int var39 = 0;
 		int var40 = 0;
 		for (int var41 = 0; var41 < var7; var41++) {
-			int var42 = var2.method144();
+			int var42 = var2.g1();
 			int var43 = 0;
 			if ((var42 & 0x1) != 0) {
 				var43 = var3.method158();
@@ -790,7 +790,7 @@ public final class Model extends ModelSource {
 			var39 = this.field2228[var41];
 			var40 = this.field2203[var41];
 			if (this.field2214 != null) {
-				this.field2214[var41] = var6.method144();
+				this.field2214[var41] = var6.g1();
 			}
 		}
 		var2.pos = var28;
@@ -799,18 +799,18 @@ public final class Model extends ModelSource {
 		var5.pos = var26;
 		var6.pos = var23;
 		for (int var46 = 0; var46 < var8; var46++) {
-			this.field2232[var46] = var2.method145();
+			this.field2232[var46] = var2.g2();
 			if (this.field2219 != null) {
-				this.field2219[var46] = var3.method144();
+				this.field2219[var46] = var3.g1();
 			}
 			if (this.field2226 != null) {
-				this.field2226[var46] = var4.method144();
+				this.field2226[var46] = var4.g1();
 			}
 			if (this.field2224 != null) {
-				this.field2224[var46] = var5.method144();
+				this.field2224[var46] = var5.g1();
 			}
 			if (this.field2207 != null) {
-				this.field2207[var46] = var6.method144();
+				this.field2207[var46] = var6.g1();
 			}
 		}
 		var2.pos = var21;
@@ -820,7 +820,7 @@ public final class Model extends ModelSource {
 		int var49 = 0;
 		int var50 = 0;
 		for (int var51 = 0; var51 < var8; var51++) {
-			int var52 = var3.method144();
+			int var52 = var3.g1();
 			if (var52 == 1) {
 				var47 = var2.method158() + var50;
 				var48 = var2.method158() + var47;
@@ -859,9 +859,9 @@ public final class Model extends ModelSource {
 		}
 		var2.pos = var30;
 		for (int var54 = 0; var54 < var9; var54++) {
-			this.field2220[var54] = var2.method145();
-			this.field2231[var54] = var2.method145();
-			this.field2235[var54] = var2.method145();
+			this.field2220[var54] = var2.g2();
+			this.field2231[var54] = var2.g2();
+			this.field2235[var54] = var2.g2();
 		}
 	}
 

@@ -45,11 +45,11 @@ public final class JagException extends RuntimeException {
 			String var5 = var4.replace('&', '_');
 			String var6 = var5.replace('#', '_');
 			PrivilegedRequest var7 = signlink.method650(new URL(signlink.applet.getCodeBase(), "clienterror.ws?c=" + GameShell.field2038 + "&u=" + Client.field1843 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
-			while (var7.field815 == 0) {
+			while (var7.status == 0) {
 				ThreadUtil.sleepPrecise(1L);
 			}
-			if (var7.field815 == 1) {
-				DataInputStream var8 = (DataInputStream) var7.field818;
+			if (var7.status == 1) {
+				DataInputStream var8 = (DataInputStream) var7.result;
 				var8.read();
 				var8.close();
 			}

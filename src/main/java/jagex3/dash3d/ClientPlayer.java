@@ -136,21 +136,21 @@ public final class ClientPlayer extends ClientEntity {
 	@ObfuscatedName("aa.a(BLba;)V")
 	public void method43(Packet arg0) {
 		arg0.pos = 0;
-		int var2 = arg0.method144();
-		this.field76 = arg0.method184();
-		this.field81 = arg0.method184();
+		int var2 = arg0.g1();
+		this.field76 = arg0.g1b();
+		this.field81 = arg0.g1b();
 		int var3 = -1;
 		this.field74 = 0;
 		int[] var4 = new int[12];
 		for (int var5 = 0; var5 < 12; var5++) {
-			int var6 = arg0.method144();
+			int var6 = arg0.g1();
 			if (var6 == 0) {
 				var4[var5] = 0;
 			} else {
-				int var7 = arg0.method144();
+				int var7 = arg0.g1();
 				var4[var5] = (var6 << 8) + var7;
 				if (var5 == 0 && var4[0] == 65535) {
-					var3 = arg0.method145();
+					var3 = arg0.g2();
 					break;
 				}
 				if (var4[var5] >= 512) {
@@ -163,44 +163,44 @@ public final class ClientPlayer extends ClientEntity {
 		}
 		int[] var9 = new int[5];
 		for (int var10 = 0; var10 < 5; var10++) {
-			int var11 = arg0.method144();
+			int var11 = arg0.g1();
 			if (var11 < 0 || Statics.field2894[var10].length <= var11) {
 				var11 = 0;
 			}
 			var9[var10] = var11;
 		}
-		super.field2000 = arg0.method145();
+		super.field2000 = arg0.g2();
 		if (super.field2000 == 65535) {
 			super.field2000 = -1;
 		}
-		super.field2019 = arg0.method145();
+		super.field2019 = arg0.g2();
 		if (super.field2019 == 65535) {
 			super.field2019 = -1;
 		}
 		super.field1957 = super.field2019;
-		super.field2005 = arg0.method145();
+		super.field2005 = arg0.g2();
 		if (super.field2005 == 65535) {
 			super.field2005 = -1;
 		}
-		super.field1953 = arg0.method145();
+		super.field1953 = arg0.g2();
 		if (super.field1953 == 65535) {
 			super.field1953 = -1;
 		}
-		super.field1949 = arg0.method145();
+		super.field1949 = arg0.g2();
 		if (super.field1949 == 65535) {
 			super.field1949 = -1;
 		}
-		super.field2006 = arg0.method145();
+		super.field2006 = arg0.g2();
 		if (super.field2006 == 65535) {
 			super.field2006 = -1;
 		}
-		super.field1956 = arg0.method145();
+		super.field1956 = arg0.g2();
 		if (super.field1956 == 65535) {
 			super.field1956 = -1;
 		}
 		this.field86 = Statics.method969(arg0.method174()).method36();
-		this.field68 = arg0.method144();
-		this.field65 = arg0.method145();
+		this.field68 = arg0.g1();
+		this.field65 = arg0.g2();
 		if (this.field90 == null) {
 			this.field90 = new PlayerModel();
 		}

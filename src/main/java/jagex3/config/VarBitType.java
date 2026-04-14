@@ -51,7 +51,7 @@ public final class VarBitType extends Linkable2 {
 	@ObfuscatedName("fd.a(ILba;)V")
 	public void method402(Packet arg0) {
 		while (true) {
-			int var2 = arg0.method144();
+			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}
@@ -62,9 +62,9 @@ public final class VarBitType extends Linkable2 {
 	@ObfuscatedName("fd.a(Lba;II)V")
 	public void method403(Packet arg0, int arg1) {
 		if (arg1 == 1) {
-			this.field933 = arg0.method145();
-			this.field943 = arg0.method144();
-			this.field945 = arg0.method144();
+			this.field933 = arg0.g2();
+			this.field943 = arg0.g1();
+			this.field945 = arg0.g1();
 		}
 	}
 }

@@ -24,8 +24,8 @@ public final class PacketBit extends Packet {
 	}
 
 	@ObfuscatedName("fe.m(B)I")
-	public int method409() {
-		return super.field284[super.pos++] - this.field956.method430() & 0xFF;
+	public int g1Enc() {
+		return super.data[super.pos++] - this.field956.method430() & 0xFF;
 	}
 
 	@ObfuscatedName("fe.e(IB)I")
@@ -35,15 +35,15 @@ public final class PacketBit extends Packet {
 		int var4 = 8 - (this.field961 & 0x7);
 		this.field961 += arg0;
 		while (var4 < arg0) {
-			var3 += (field936[var4] & super.field284[var2++]) << arg0 - var4;
+			var3 += (field936[var4] & super.data[var2++]) << arg0 - var4;
 			arg0 -= var4;
 			var4 = 8;
 		}
 		int var5;
 		if (arg0 == var4) {
-			var5 = (super.field284[var2] & field936[var4]) + var3;
+			var5 = (super.data[var2] & field936[var4]) + var3;
 		} else {
-			var5 = (field936[arg0] & super.field284[var2] >> var4 - arg0) + var3;
+			var5 = (field936[arg0] & super.data[var2] >> var4 - arg0) + var3;
 		}
 		return var5;
 	}
@@ -54,11 +54,11 @@ public final class PacketBit extends Packet {
 
 	@ObfuscatedName("fe.n(II)V")
 	public void method415(int arg0) {
-		super.field284[super.pos++] = (byte) (this.field956.method430() + arg0);
+		super.data[super.pos++] = (byte) (this.field956.method430() + arg0);
 	}
 
 	@ObfuscatedName("fe.a(I[I)V")
-	public void method416(int[] arg0) {
+	public void seed(int[] arg0) {
 		this.field956 = new Isaac(arg0);
 	}
 

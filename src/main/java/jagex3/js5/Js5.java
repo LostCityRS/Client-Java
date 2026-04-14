@@ -23,7 +23,7 @@ public abstract class Js5 {
 	public byte[][] field362;
 
 	@ObfuscatedName("bd.f")
-	public int field366;
+	public int crc;
 
 	@ObfuscatedName("bd.g")
 	public IntHashTable[] field367;
@@ -67,7 +67,7 @@ public abstract class Js5 {
 	@ObfuscatedName("r.a([BI)[B")
 	public static byte[] method863(byte[] arg0) {
 		Packet var1 = new Packet(arg0);
-		int var2 = var1.method144();
+		int var2 = var1.g1();
 		int var3 = var1.method167();
 		if (var3 < 0 || field2597 != 0 && field2597 < var3) {
 			throw new RuntimeException();
@@ -167,19 +167,19 @@ public abstract class Js5 {
 
 	@ObfuscatedName("bd.a(I[B)V")
 	public final void method223(byte[] arg0) {
-		this.field366 = Statics.method244(arg0, arg0.length);
+		this.crc = Statics.method244(arg0, arg0.length);
 		Packet var2 = new Packet(method863(arg0));
-		int var3 = var2.method144();
+		int var3 = var2.g1();
 		if (var3 != 5) {
 			return;
 		}
 		int var4 = 0;
-		int var5 = var2.method144();
-		this.field371 = var2.method145();
+		int var5 = var2.g1();
+		this.field371 = var2.g2();
 		this.field377 = new int[this.field371];
 		int var6 = -1;
 		for (int var7 = 0; var7 < this.field371; var7++) {
-			this.field377[var7] = var4 += var2.method145();
+			this.field377[var7] = var4 += var2.g2();
 			if (this.field377[var7] > var6) {
 				var6 = this.field377[var7];
 			}
@@ -204,7 +204,7 @@ public abstract class Js5 {
 			this.field374[this.field377[var10]] = var2.method167();
 		}
 		for (int var11 = 0; var11 < this.field371; var11++) {
-			this.field411[this.field377[var11]] = var2.method145();
+			this.field411[this.field377[var11]] = var2.g2();
 		}
 		for (int var12 = 0; var12 < this.field371; var12++) {
 			int var13 = 0;
@@ -213,7 +213,7 @@ public abstract class Js5 {
 			int var16 = this.field411[var14];
 			this.field393[var14] = new int[var16];
 			for (int var17 = 0; var17 < var16; var17++) {
-				int var18 = this.field393[var14][var17] = var13 += var2.method145();
+				int var18 = this.field393[var14][var17] = var13 += var2.g2();
 				if (var18 > var15) {
 					var15 = var18;
 				}
@@ -267,13 +267,13 @@ public abstract class Js5 {
 			var8 = new byte[this.field362[arg0].length];
 			ArrayUtil.copy(this.field362[arg0], 0, var8, 0, var8.length);
 			Packet var9 = new Packet(var8);
-			var9.method159(arg1, var9.field284.length);
+			var9.method159(arg1, var9.data.length);
 		}
 		byte[] var10;
 		try {
 			var10 = method863(var8);
 		} catch (RuntimeException var25) {
-			throw JagException.report(var25, "T3 - " + (arg1 != null) + "," + arg0 + "," + var8.length + "," + Statics.method244(var8, var8.length) + "," + Statics.method244(var8, var8.length - 2) + "," + this.field402[arg0] + "," + this.field366);
+			throw JagException.report(var25, "T3 - " + (arg1 != null) + "," + arg0 + "," + var8.length + "," + Statics.method244(var8, var8.length) + "," + Statics.method244(var8, var8.length - 2) + "," + this.field402[arg0] + "," + this.crc);
 		}
 		if (this.field383) {
 			this.field362[arg0] = null;

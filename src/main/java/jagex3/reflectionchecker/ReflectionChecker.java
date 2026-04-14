@@ -43,7 +43,7 @@ public class ReflectionChecker {
 	@ObfuscatedName("h.a(Llc;BLba;I)V")
 	public static void method460(SignLink arg0, Packet arg1, int arg2) {
 		ReflectionCheck var3 = new ReflectionCheck();
-		var3.field2964 = arg1.method144();
+		var3.field2964 = arg1.g1();
 		var3.field2970 = arg1.method167();
 		var3.field2958 = new int[var3.field2964];
 		var3.field2961 = new PrivilegedRequest[var3.field2964];
@@ -53,7 +53,7 @@ public class ReflectionChecker {
 		var3.field2959 = new int[var3.field2964];
 		for (int var4 = 0; var4 < var3.field2964; var4++) {
 			try {
-				int var5 = arg1.method144();
+				int var5 = arg1.g1();
 				if (var5 == 0 || var5 == 1 || var5 == 2) {
 					int var16 = 0;
 					String var17 = new String(arg1.method140().method31());
@@ -67,7 +67,7 @@ public class ReflectionChecker {
 				} else if (var5 == 3 || var5 == 4) {
 					String var6 = new String(arg1.method140().method31());
 					String var7 = new String(arg1.method140().method31());
-					int var8 = arg1.method144();
+					int var8 = arg1.g1();
 					String[] var9 = new String[var8];
 					for (int var10 = 0; var10 < var8; var10++) {
 						var9[var10] = new String(arg1.method140().method31());
@@ -113,18 +113,18 @@ public class ReflectionChecker {
 			boolean var2 = false;
 			for (int var3 = 0; var3 < var1.field2964; var3++) {
 				if (var1.field2961[var3] != null) {
-					if (var1.field2961[var3].field815 == 2) {
+					if (var1.field2961[var3].status == 2) {
 						var1.field2959[var3] = -5;
 					}
-					if (var1.field2961[var3].field815 == 0) {
+					if (var1.field2961[var3].status == 0) {
 						var2 = true;
 					}
 				}
 				if (var1.field2960[var3] != null) {
-					if (var1.field2960[var3].field815 == 2) {
+					if (var1.field2960[var3].status == 2) {
 						var1.field2959[var3] = -6;
 					}
-					if (var1.field2960[var3].field815 == 0) {
+					if (var1.field2960[var3].status == 0) {
 						var2 = true;
 					}
 				}
@@ -133,30 +133,30 @@ public class ReflectionChecker {
 				return;
 			}
 			arg0.method415(205);
-			arg0.method141(0);
+			arg0.p1(0);
 			int var4 = arg0.pos;
-			arg0.method182(var1.field2970);
+			arg0.p4(var1.field2970);
 			for (int var5 = 0; var5 < var1.field2964; var5++) {
 				if (var1.field2959[var5] == 0) {
 					try {
 						int var6 = var1.field2958[var5];
 						if (var6 == 0) {
-							Field var7 = (Field) var1.field2961[var5].field818;
+							Field var7 = (Field) var1.field2961[var5].result;
 							int var8 = var7.getInt(null);
-							arg0.method141(0);
-							arg0.method182(var8);
+							arg0.p1(0);
+							arg0.p4(var8);
 						} else if (var6 == 1) {
-							Field var9 = (Field) var1.field2961[var5].field818;
+							Field var9 = (Field) var1.field2961[var5].result;
 							var9.setInt(null, var1.field2969[var5]);
-							arg0.method141(0);
+							arg0.p1(0);
 						} else if (var6 == 2) {
-							Field var10 = (Field) var1.field2961[var5].field818;
+							Field var10 = (Field) var1.field2961[var5].result;
 							int var11 = var10.getModifiers();
-							arg0.method141(0);
-							arg0.method182(var11);
+							arg0.p1(0);
+							arg0.p4(var11);
 						}
 						if (var6 == 3) {
-							Method var14 = (Method) var1.field2960[var5].field818;
+							Method var14 = (Method) var1.field2960[var5].result;
 							byte[][] var15 = var1.field2963[var5];
 							Object[] var16 = new Object[var15.length];
 							for (int var17 = 0; var17 < var15.length; var17++) {
@@ -165,49 +165,49 @@ public class ReflectionChecker {
 							}
 							Object var19 = var14.invoke(null, var16);
 							if (var19 == null) {
-								arg0.method141(0);
+								arg0.p1(0);
 							} else if (var19 instanceof Number) {
-								arg0.method141(1);
-								arg0.method157(((Number) var19).longValue());
+								arg0.p1(1);
+								arg0.p8(((Number) var19).longValue());
 							} else if (var19 instanceof JagString) {
-								arg0.method141(2);
-								arg0.method181((JagString) var19);
+								arg0.p1(2);
+								arg0.pjstr((JagString) var19);
 							} else {
-								arg0.method141(4);
+								arg0.p1(4);
 							}
 						} else if (var6 == 4) {
-							Method var12 = (Method) var1.field2960[var5].field818;
+							Method var12 = (Method) var1.field2960[var5].result;
 							int var13 = var12.getModifiers();
-							arg0.method141(0);
-							arg0.method182(var13);
+							arg0.p1(0);
+							arg0.p4(var13);
 						}
 					} catch (ClassNotFoundException var20) {
-						arg0.method141(-10);
+						arg0.p1(-10);
 					} catch (InvalidClassException var21) {
-						arg0.method141(-11);
+						arg0.p1(-11);
 					} catch (StreamCorruptedException var22) {
-						arg0.method141(-12);
+						arg0.p1(-12);
 					} catch (OptionalDataException var23) {
-						arg0.method141(-13);
+						arg0.p1(-13);
 					} catch (IllegalAccessException var24) {
-						arg0.method141(-14);
+						arg0.p1(-14);
 					} catch (IllegalArgumentException var25) {
-						arg0.method141(-15);
+						arg0.p1(-15);
 					} catch (InvocationTargetException var26) {
-						arg0.method141(-16);
+						arg0.p1(-16);
 					} catch (SecurityException var27) {
-						arg0.method141(-17);
+						arg0.p1(-17);
 					} catch (IOException var28) {
-						arg0.method141(-18);
+						arg0.p1(-18);
 					} catch (NullPointerException var29) {
-						arg0.method141(-19);
+						arg0.p1(-19);
 					} catch (Exception var30) {
-						arg0.method141(-20);
+						arg0.p1(-20);
 					} catch (Throwable var31) {
-						arg0.method141(-21);
+						arg0.p1(-21);
 					}
 				} else {
-					arg0.method141(var1.field2959[var5]);
+					arg0.p1(var1.field2959[var5]);
 				}
 			}
 			arg0.method149(var4);

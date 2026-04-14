@@ -28,7 +28,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.Ob")
-	public byte[] field284;
+	public byte[] data;
 
 	@ObfuscatedName("ba.xb")
 	public int pos;
@@ -36,7 +36,7 @@ public class Packet extends Linkable {
 	@ObfuscatedName("ba.b(I)I")
 	public final int method136() {
 		this.pos += 2;
-		int var1 = ((this.field284[this.pos - 2] & 0xFF) << 8) + (this.field284[this.pos - 1] - 128 & 0xFF);
+		int var1 = ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] - 128 & 0xFF);
 		if (var1 > 32767) {
 			var1 -= 65536;
 		}
@@ -46,20 +46,20 @@ public class Packet extends Linkable {
 	@ObfuscatedName("ba.b(B)I")
 	public final int method137() {
 		this.pos += 2;
-		return ((this.field284[this.pos - 2] & 0xFF) << 8) + (this.field284[this.pos - 1] - 128 & 0xFF);
+		return ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] - 128 & 0xFF);
 	}
 
 	@ObfuscatedName("ba.a(BI[BI)V")
 	public final void method138(byte[] arg0, int arg1) {
 		for (int var3 = 0; var3 < arg1; var3++) {
-			arg0[var3] = (byte) (this.field284[this.pos++] - 128);
+			arg0[var3] = (byte) (this.data[this.pos++] - 128);
 		}
 	}
 
 	@ObfuscatedName("ba.c(B)I")
 	public final int method139() {
 		this.pos += 2;
-		int var1 = ((this.field284[this.pos - 2] & 0xFF) << 8) + (this.field284[this.pos - 1] & 0xFF);
+		int var1 = ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] & 0xFF);
 		if (var1 > 32767) {
 			var1 -= 65536;
 		}
@@ -69,18 +69,18 @@ public class Packet extends Linkable {
 	@ObfuscatedName("ba.c(I)La;")
 	public final JagString method140() {
 		int var1 = this.pos;
-		while (this.field284[this.pos++] != 0) {
+		while (this.data[this.pos++] != 0) {
 		}
-		return Statics.method419(this.field284, var1, this.pos - var1 - 1);
+		return Statics.method419(this.data, var1, this.pos - var1 - 1);
 	}
 
 	@ObfuscatedName("ba.b(IB)V")
-	public final void method141(int arg0) {
-		this.field284[this.pos++] = (byte) arg0;
+	public final void p1(int arg0) {
+		this.data[this.pos++] = (byte) arg0;
 	}
 
 	@ObfuscatedName("ba.a(Ljava/math/BigInteger;Ljava/math/BigInteger;I)V")
-	public final void method142(BigInteger arg0, BigInteger arg1) {
+	public final void rsaenc(BigInteger arg0, BigInteger arg1) {
 		int var3 = this.pos;
 		this.pos = 0;
 		byte[] var4 = new byte[var3];
@@ -89,101 +89,101 @@ public class Packet extends Linkable {
 		BigInteger var6 = var5.modPow(arg1, arg0);
 		byte[] var7 = var6.toByteArray();
 		this.pos = 0;
-		this.method141(var7.length);
-		this.method151(var7.length, var7);
+		this.p1(var7.length);
+		this.pdata(var7.length, var7);
 	}
 
 	@ObfuscatedName("ba.d(B)B")
 	public final byte method143() {
-		return (byte) -this.field284[this.pos++];
+		return (byte) -this.data[this.pos++];
 	}
 
 	@ObfuscatedName("ba.b(Z)I")
-	public final int method144() {
-		return this.field284[this.pos++] & 0xFF;
+	public final int g1() {
+		return this.data[this.pos++] & 0xFF;
 	}
 
 	@ObfuscatedName("ba.d(I)I")
-	public final int method145() {
+	public final int g2() {
 		this.pos += 2;
-		return ((this.field284[this.pos - 2] & 0xFF) << 8) + (this.field284[this.pos - 1] & 0xFF);
+		return ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] & 0xFF);
 	}
 
 	@ObfuscatedName("ba.e(I)I")
 	public final int method146() {
 		this.pos += 4;
-		return ((this.field284[this.pos - 1] & 0xFF) << 8) + ((this.field284[this.pos - 3] & 0xFF) << 24) + ((this.field284[this.pos + -4] & 0xFF) << 16) + (this.field284[this.pos + -2] & 0xFF);
+		return ((this.data[this.pos - 1] & 0xFF) << 8) + ((this.data[this.pos - 3] & 0xFF) << 24) + ((this.data[this.pos + -4] & 0xFF) << 16) + (this.data[this.pos + -2] & 0xFF);
 	}
 
 	@ObfuscatedName("ba.e(B)I")
 	public final int method147() {
-		return -this.field284[this.pos++] & 0xFF;
+		return -this.data[this.pos++] & 0xFF;
 	}
 
 	@ObfuscatedName("ba.a(II)I")
 	public final int method149(int arg0) {
-		int var2 = Statics.method1044(arg0, this.pos, this.field284);
-		this.method182(var2);
+		int var2 = Statics.method1044(arg0, this.pos, this.data);
+		this.p4(var2);
 		return var2;
 	}
 
 	@ObfuscatedName("ba.b(II)V")
 	public final void method150(int arg0) {
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
-		this.field284[this.pos++] = (byte) arg0;
+		this.data[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) arg0;
 	}
 
 	@ObfuscatedName("ba.a(I[BII)V")
-	public final void method151(int arg0, byte[] arg1) {
+	public final void pdata(int arg0, byte[] arg1) {
 		for (int var3 = 0; var3 < arg0; var3++) {
-			this.field284[this.pos++] = arg1[var3];
+			this.data[this.pos++] = arg1[var3];
 		}
 	}
 
 	@ObfuscatedName("ba.f(I)I")
 	public final int method152() {
-		return this.field284[this.pos++] - 128 & 0xFF;
+		return this.data[this.pos++] - 128 & 0xFF;
 	}
 
 	@ObfuscatedName("ba.c(II)V")
 	public final void method153(int arg0) {
-		this.field284[this.pos++] = (byte) (arg0 >> 16);
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
-		this.field284[this.pos++] = (byte) arg0;
+		this.data[this.pos++] = (byte) (arg0 >> 16);
+		this.data[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) arg0;
 	}
 
 	@ObfuscatedName("ba.d(II)V")
 	public final void method154(int arg0) {
-		this.field284[this.pos++] = (byte) (arg0 + 128);
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) (arg0 + 128);
+		this.data[this.pos++] = (byte) (arg0 >> 8);
 	}
 
 	@ObfuscatedName("ba.c(IB)V")
 	public final void method155(int arg0) {
-		this.field284[this.pos - arg0 - 1] = (byte) arg0;
+		this.data[this.pos - arg0 - 1] = (byte) arg0;
 	}
 
 	@ObfuscatedName("ba.f(B)I")
 	public final int method156() {
-		return 128 - this.field284[this.pos++] & 0xFF;
+		return 128 - this.data[this.pos++] & 0xFF;
 	}
 
 	@ObfuscatedName("ba.a(JZ)V")
-	public final void method157(long arg0) {
-		this.field284[this.pos++] = (byte) (arg0 >> 56);
-		this.field284[this.pos++] = (byte) (arg0 >> 48);
-		this.field284[this.pos++] = (byte) (arg0 >> 40);
-		this.field284[this.pos++] = (byte) (arg0 >> 32);
-		this.field284[this.pos++] = (byte) (arg0 >> 24);
-		this.field284[this.pos++] = (byte) (arg0 >> 16);
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
-		this.field284[this.pos++] = (byte) arg0;
+	public final void p8(long arg0) {
+		this.data[this.pos++] = (byte) (arg0 >> 56);
+		this.data[this.pos++] = (byte) (arg0 >> 48);
+		this.data[this.pos++] = (byte) (arg0 >> 40);
+		this.data[this.pos++] = (byte) (arg0 >> 32);
+		this.data[this.pos++] = (byte) (arg0 >> 24);
+		this.data[this.pos++] = (byte) (arg0 >> 16);
+		this.data[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) arg0;
 	}
 
 	@ObfuscatedName("ba.g(B)I")
 	public final int method158() {
-		int var1 = this.field284[this.pos] & 0xFF;
-		return var1 >= 128 ? this.method145() - 49152 : this.method144() + -64;
+		int var1 = this.data[this.pos] & 0xFF;
+		return var1 >= 128 ? this.g2() - 49152 : this.g1() + -64;
 	}
 
 	@ObfuscatedName("ba.a([IZII)V")
@@ -202,8 +202,8 @@ public class Packet extends Linkable {
 				var6 -= (var7 >>> 5 ^ var7 << 4) + var7 ^ arg0[var9 & 0x3] + var9;
 			}
 			this.pos -= 8;
-			this.method182(var6);
-			this.method182(var7);
+			this.p4(var6);
+			this.p4(var7);
 		}
 		this.pos = var4;
 	}
@@ -211,7 +211,7 @@ public class Packet extends Linkable {
 	@ObfuscatedName("ba.h(B)I")
 	public final int method160() {
 		this.pos += 2;
-		int var1 = ((this.field284[this.pos - 1] & 0xFF) << 8) + (this.field284[this.pos - 2] - 128 & 0xFF);
+		int var1 = ((this.data[this.pos - 1] & 0xFF) << 8) + (this.data[this.pos - 2] - 128 & 0xFF);
 		if (var1 > 32767) {
 			var1 -= 65536;
 		}
@@ -221,79 +221,79 @@ public class Packet extends Linkable {
 	@ObfuscatedName("ba.i(B)I")
 	public final int method161() {
 		this.pos += 4;
-		return (this.field284[this.pos - 4] & 0xFF) + ((this.field284[this.pos - 3] & 0xFF) << 8) + ((this.field284[this.pos + -1] & 0xFF) << 24) + ((this.field284[this.pos + -2] & 0xFF) << 16);
+		return (this.data[this.pos - 4] & 0xFF) + ((this.data[this.pos - 3] & 0xFF) << 8) + ((this.data[this.pos + -1] & 0xFF) << 24) + ((this.data[this.pos + -2] & 0xFF) << 16);
 	}
 
 	@ObfuscatedName("ba.e(II)V")
 	public final void method162(int arg0) {
-		this.field284[this.pos++] = (byte) arg0;
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) arg0;
+		this.data[this.pos++] = (byte) (arg0 >> 8);
 	}
 
 	@ObfuscatedName("ba.d(IB)V")
 	public final void method163(int arg0) {
-		this.field284[this.pos++] = (byte) (arg0 >> 16);
-		this.field284[this.pos++] = (byte) (arg0 >> 24);
-		this.field284[this.pos++] = (byte) arg0;
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) (arg0 >> 16);
+		this.data[this.pos++] = (byte) (arg0 >> 24);
+		this.data[this.pos++] = (byte) arg0;
+		this.data[this.pos++] = (byte) (arg0 >> 8);
 	}
 
 	@ObfuscatedName("ba.c(Z)I")
-	public final int method164() {
+	public final int g3() {
 		this.pos += 3;
-		return (this.field284[this.pos - 1] & 0xFF) + (((this.field284[this.pos - 3] & 0xFF) << 16) + ((this.field284[this.pos - 2] & 0xFF) << 8));
+		return (this.data[this.pos - 1] & 0xFF) + (((this.data[this.pos - 3] & 0xFF) << 16) + ((this.data[this.pos - 2] & 0xFF) << 8));
 	}
 
 	@ObfuscatedName("ba.f(II)V")
 	public final void method165(int arg0) {
-		this.field284[this.pos++] = (byte) (arg0 + 128);
+		this.data[this.pos++] = (byte) (arg0 + 128);
 	}
 
 	@ObfuscatedName("ba.j(B)I")
 	public final int method166() {
 		this.pos += 2;
-		return ((this.field284[this.pos - 1] & 0xFF) << 8) + (this.field284[this.pos - 2] & 0xFF);
+		return ((this.data[this.pos - 1] & 0xFF) << 8) + (this.data[this.pos - 2] & 0xFF);
 	}
 
 	@ObfuscatedName("ba.g(I)I")
 	public final int method167() {
 		this.pos += 4;
-		return ((this.field284[this.pos - 4] & 0xFF) << 24) + (this.field284[this.pos - 3] << 16 & 0xFF0000) + ((this.field284[this.pos + -2] & 0xFF) << 8) + (this.field284[this.pos + -1] & 0xFF);
+		return ((this.data[this.pos - 4] & 0xFF) << 24) + (this.data[this.pos - 3] << 16 & 0xFF0000) + ((this.data[this.pos + -2] & 0xFF) << 8) + (this.data[this.pos + -1] & 0xFF);
 	}
 
 	@ObfuscatedName("ba.h(I)B")
 	public final byte method168() {
-		return (byte) (128 - this.field284[this.pos++]);
+		return (byte) (128 - this.data[this.pos++]);
 	}
 
 	@ObfuscatedName("ba.g(II)V")
 	public final void method169(int arg0) {
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
-		this.field284[this.pos++] = (byte) (arg0 + 128);
+		this.data[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) (arg0 + 128);
 	}
 
 	@ObfuscatedName("ba.h(II)V")
 	public final void method170(int arg0) {
-		this.field284[this.pos++] = (byte) arg0;
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
-		this.field284[this.pos++] = (byte) (arg0 >> 16);
-		this.field284[this.pos++] = (byte) (arg0 >> 24);
+		this.data[this.pos++] = (byte) arg0;
+		this.data[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) (arg0 >> 16);
+		this.data[this.pos++] = (byte) (arg0 >> 24);
 	}
 
 	@ObfuscatedName("ba.i(I)B")
 	public final byte method171() {
-		return (byte) (this.field284[this.pos++] - 128);
+		return (byte) (this.data[this.pos++] - 128);
 	}
 
 	@ObfuscatedName("ba.i(II)V")
 	public final void method172(int arg0) {
-		this.field284[this.pos++] = (byte) -arg0;
+		this.data[this.pos++] = (byte) -arg0;
 	}
 
 	@ObfuscatedName("ba.a([BIIB)V")
 	public final void method173(byte[] arg0, int arg1) {
 		for (int var3 = 0; var3 < arg1; var3++) {
-			arg0[var3] = this.field284[this.pos++];
+			arg0[var3] = this.data[this.pos++];
 		}
 	}
 
@@ -306,69 +306,69 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("ba.k(I)I")
 	public final int method176() {
-		byte var1 = this.field284[this.pos++];
+		byte var1 = this.data[this.pos++];
 		int var2 = 0;
 		while (var1 < 0) {
 			var2 = (var1 & 0x7F | var2) << 7;
-			var1 = this.field284[this.pos++];
+			var1 = this.data[this.pos++];
 		}
 		return var1 | var2;
 	}
 
 	@ObfuscatedName("ba.k(B)I")
 	public final int method178() {
-		int var1 = this.field284[this.pos] & 0xFF;
-		return var1 >= 128 ? this.method145() - 32768 : this.method144();
+		int var1 = this.data[this.pos] & 0xFF;
+		return var1 >= 128 ? this.g2() - 32768 : this.g1();
 	}
 
 	@ObfuscatedName("ba.j(II)V")
 	public final void method179(int arg0) {
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
-		this.field284[this.pos++] = (byte) arg0;
-		this.field284[this.pos++] = (byte) (arg0 >> 24);
-		this.field284[this.pos++] = (byte) (arg0 >> 16);
+		this.data[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) arg0;
+		this.data[this.pos++] = (byte) (arg0 >> 24);
+		this.data[this.pos++] = (byte) (arg0 >> 16);
 	}
 
 	@ObfuscatedName("ba.e(Z)I")
 	public final int method180() {
 		this.pos += 2;
-		return ((this.field284[this.pos - 1] & 0xFF) << 8) + (this.field284[this.pos - 2] - 128 & 0xFF);
+		return ((this.data[this.pos - 1] & 0xFF) << 8) + (this.data[this.pos - 2] - 128 & 0xFF);
 	}
 
 	@ObfuscatedName("ba.a(La;B)V")
-	public final void method181(JagString arg0) {
-		this.pos += arg0.method2(arg0.method10(), this.field284, this.pos);
-		this.field284[this.pos++] = 0;
+	public final void pjstr(JagString arg0) {
+		this.pos += arg0.method2(arg0.method10(), this.data, this.pos);
+		this.data[this.pos++] = 0;
 	}
 
 	public Packet(int arg0) {
-		this.field284 = ByteArrayPool.method324(arg0);
+		this.data = ByteArrayPool.method324(arg0);
 		this.pos = 0;
 	}
 
 	@ObfuscatedName("ba.k(II)V")
-	public final void method182(int arg0) {
-		this.field284[this.pos++] = (byte) (arg0 >> 24);
-		this.field284[this.pos++] = (byte) (arg0 >> 16);
-		this.field284[this.pos++] = (byte) (arg0 >> 8);
-		this.field284[this.pos++] = (byte) arg0;
+	public final void p4(int arg0) {
+		this.data[this.pos++] = (byte) (arg0 >> 24);
+		this.data[this.pos++] = (byte) (arg0 >> 16);
+		this.data[this.pos++] = (byte) (arg0 >> 8);
+		this.data[this.pos++] = (byte) arg0;
 	}
 
 	@ObfuscatedName("ba.l(I)I")
 	public final int method183() {
 		this.pos += 4;
-		return ((this.field284[this.pos - 4] & 0xFF) << 8) + ((this.field284[this.pos - 2] << 24 & 0xFF000000) + (this.field284[this.pos - 1] << 16 & 0xFF0000) + (this.field284[this.pos + -3] & 0xFF));
+		return ((this.data[this.pos - 4] & 0xFF) << 8) + ((this.data[this.pos - 2] << 24 & 0xFF000000) + (this.data[this.pos - 1] << 16 & 0xFF0000) + (this.data[this.pos + -3] & 0xFF));
 	}
 
 	@ObfuscatedName("ba.m(I)B")
-	public final byte method184() {
-		return this.field284[this.pos++];
+	public final byte g1b() {
+		return this.data[this.pos++];
 	}
 
 	@ObfuscatedName("ba.l(II)V")
 	public final void method185(int arg0) {
 		if (arg0 >= 0 && arg0 < 128) {
-			this.method141(arg0);
+			this.p1(arg0);
 		} else if (arg0 >= 0 && arg0 < 32768) {
 			this.method150(arg0 + 32768);
 		} else {
@@ -378,6 +378,6 @@ public class Packet extends Linkable {
 
 	public Packet(byte[] arg0) {
 		this.pos = 0;
-		this.field284 = arg0;
+		this.data = arg0;
 	}
 }

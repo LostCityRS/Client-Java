@@ -124,7 +124,7 @@ public final class FluType extends Linkable2 {
 	@ObfuscatedName("md.a(BILba;)V")
 	public void method704(int arg0, Packet arg1) {
 		while (true) {
-			int var3 = arg1.method144();
+			int var3 = arg1.g1();
 			if (var3 == 0) {
 				return;
 			}
@@ -135,7 +135,7 @@ public final class FluType extends Linkable2 {
 	@ObfuscatedName("md.a(BILba;I)V")
 	public void method706(int arg0, Packet arg1, int arg2) {
 		if (arg0 == 1) {
-			this.field1898 = arg1.method164();
+			this.field1898 = arg1.g3();
 		}
 	}
 }

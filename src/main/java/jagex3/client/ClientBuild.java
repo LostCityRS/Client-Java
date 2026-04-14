@@ -91,7 +91,7 @@ public class ClientBuild {
 					}
 					var7 += var10 - 1;
 					int var11 = var7 & 0x3F;
-					int var12 = var4.method144() >> 2;
+					int var12 = var4.g1() >> 2;
 					int var13 = var7 >> 6 & 0x3F;
 					int var14 = var13 + arg1;
 					int var15 = var11 + arg2;
@@ -110,7 +110,7 @@ public class ClientBuild {
 				if (var9 == 0) {
 					break;
 				}
-				var4.method144();
+				var4.g1();
 			}
 		}
 	}
@@ -196,7 +196,7 @@ public class ClientBuild {
 				int var10 = var8 & 0x3F;
 				int var11 = var8 >> 6 & 0x3F;
 				int var12 = var8 >> 12;
-				int var13 = var5.method144();
+				int var13 = var5.g1();
 				int var14 = var13 >> 2;
 				int var15 = var13 & 0x3;
 				int var16 = arg0 + var11;
@@ -284,7 +284,7 @@ public class ClientBuild {
 				var13 += var14 - 1;
 				int var15 = var13 >> 12;
 				int var16 = var13 >> 6 & 0x3F;
-				int var17 = var10.method144();
+				int var17 = var10.g1();
 				int var18 = var17 >> 2;
 				int var19 = var13 & 0x3F;
 				int var20 = var17 & 0x3;
@@ -685,23 +685,23 @@ public class ClientBuild {
 	public static void method841(int arg0, int arg1, Packet arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (arg0 < 0 || arg0 >= 104 || arg3 < 0 || arg3 >= 104) {
 			while (true) {
-				int var9 = arg2.method144();
+				int var9 = arg2.g1();
 				if (var9 == 0) {
 					break;
 				}
 				if (var9 == 1) {
-					arg2.method144();
+					arg2.g1();
 					break;
 				}
 				if (var9 <= 49) {
-					arg2.method144();
+					arg2.g1();
 				}
 			}
 			return;
 		}
 		mapl[arg6][arg0][arg3] = 0;
 		while (true) {
-			int var7 = arg2.method144();
+			int var7 = arg2.g1();
 			if (var7 == 0) {
 				if (arg6 == 0) {
 					groundh[0][arg0][arg3] = -method751(arg0 + arg5 + 932731, arg4 + 556238 + arg3) * 8;
@@ -711,7 +711,7 @@ public class ClientBuild {
 				break;
 			}
 			if (var7 == 1) {
-				int var8 = arg2.method144();
+				int var8 = arg2.g1();
 				if (var8 == 1) {
 					var8 = 0;
 				}
@@ -723,7 +723,7 @@ public class ClientBuild {
 				break;
 			}
 			if (var7 <= 49) {
-				field3053[arg6][arg0][arg3] = arg2.method184();
+				field3053[arg6][arg0][arg3] = arg2.g1b();
 				field910[arg6][arg0][arg3] = (byte) ((var7 - 2) / 4);
 				field1872[arg6][arg0][arg3] = (byte) (arg1 + var7 - 2 & 0x3);
 			} else if (var7 <= 81) {

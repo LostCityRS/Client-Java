@@ -66,7 +66,7 @@ public final class IdkType extends Linkable2 {
 	@ObfuscatedName("pe.a(BLba;)V")
 	public void method820(Packet arg0) {
 		while (true) {
-			int var2 = arg0.method144();
+			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}
@@ -102,21 +102,21 @@ public final class IdkType extends Linkable2 {
 	@ObfuscatedName("pe.a(Lba;II)V")
 	public void method826(Packet arg0, int arg1) {
 		if (arg1 == 1) {
-			this.field2366 = arg0.method144();
+			this.field2366 = arg0.g1();
 		} else if (arg1 == 2) {
-			int var3 = arg0.method144();
+			int var3 = arg0.g1();
 			this.field2367 = new int[var3];
 			for (int var4 = 0; var4 < var3; var4++) {
-				this.field2367[var4] = arg0.method145();
+				this.field2367[var4] = arg0.g2();
 			}
 		} else if (arg1 == 3) {
 			this.field2373 = true;
 		} else if (arg1 >= 40 && arg1 < 50) {
-			this.field2353[arg1 - 40] = arg0.method145();
+			this.field2353[arg1 - 40] = arg0.g2();
 		} else if (arg1 >= 50 && arg1 < 60) {
-			this.field2361[arg1 - 50] = arg0.method145();
+			this.field2361[arg1 - 50] = arg0.g2();
 		} else if (arg1 >= 60 && arg1 < 70) {
-			this.field2377[arg1 - 60] = arg0.method145();
+			this.field2377[arg1 - 60] = arg0.g2();
 		}
 	}
 

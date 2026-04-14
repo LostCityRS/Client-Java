@@ -160,7 +160,7 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("he.a(ILba;)V")
 	public void method489(Packet arg0) {
 		while (true) {
-			int var2 = arg0.method144();
+			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}
@@ -171,52 +171,52 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("he.a(IILba;)V")
 	public void method490(int arg0, Packet arg1) {
 		if (arg0 == 1) {
-			int var3 = arg1.method144();
+			int var3 = arg1.g1();
 			this.field1223 = new int[var3];
 			for (int var4 = 0; var4 < var3; var4++) {
-				this.field1223[var4] = arg1.method145();
+				this.field1223[var4] = arg1.g2();
 			}
 			this.field1242 = new int[var3];
 			for (int var5 = 0; var5 < var3; var5++) {
-				this.field1242[var5] = arg1.method145();
+				this.field1242[var5] = arg1.g2();
 			}
 			for (int var6 = 0; var6 < var3; var6++) {
-				this.field1242[var6] += arg1.method145() << 16;
+				this.field1242[var6] += arg1.g2() << 16;
 			}
 		} else if (arg0 == 2) {
-			this.field1254 = arg1.method145();
+			this.field1254 = arg1.g2();
 		} else if (arg0 == 3) {
-			int var10 = arg1.method144();
+			int var10 = arg1.g1();
 			this.field1230 = new int[var10 + 1];
 			for (int var11 = 0; var11 < var10; var11++) {
-				this.field1230[var11] = arg1.method144();
+				this.field1230[var11] = arg1.g1();
 			}
 			this.field1230[var10] = 9999999;
 		} else if (arg0 == 4) {
 			this.field1253 = true;
 		} else if (arg0 == 5) {
-			this.field1251 = arg1.method144();
+			this.field1251 = arg1.g1();
 		} else if (arg0 == 6) {
-			this.field1234 = arg1.method145();
+			this.field1234 = arg1.g2();
 		} else if (arg0 == 7) {
-			this.field1246 = arg1.method145();
+			this.field1246 = arg1.g2();
 		} else if (arg0 == 8) {
-			this.field1252 = arg1.method144();
+			this.field1252 = arg1.g1();
 		} else if (arg0 == 9) {
-			this.field1227 = arg1.method144();
+			this.field1227 = arg1.g1();
 		} else if (arg0 == 10) {
-			this.field1233 = arg1.method144();
+			this.field1233 = arg1.g1();
 		} else if (arg0 == 11) {
-			this.field1240 = arg1.method144();
+			this.field1240 = arg1.g1();
 			return;
 		} else if (arg0 == 12) {
-			int var7 = arg1.method144();
+			int var7 = arg1.g1();
 			this.field1236 = new int[var7];
 			for (int var8 = 0; var8 < var7; var8++) {
-				this.field1236[var8] = arg1.method145();
+				this.field1236[var8] = arg1.g2();
 			}
 			for (int var9 = 0; var9 < var7; var9++) {
-				this.field1236[var9] += arg1.method145() << 16;
+				this.field1236[var9] += arg1.g2() << 16;
 			}
 			return;
 		}

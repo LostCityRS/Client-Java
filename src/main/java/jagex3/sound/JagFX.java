@@ -80,15 +80,15 @@ public final class JagFX {
 
 	public JagFX(Packet arg0) {
 		for (int var2 = 0; var2 < 10; var2++) {
-			int var3 = arg0.method144();
+			int var3 = arg0.g1();
 			if (var3 != 0) {
 				arg0.pos--;
 				this.field1904[var2] = new Tone();
 				this.field1904[var2].method1003(arg0);
 			}
 		}
-		this.field1905 = arg0.method145();
-		this.field1906 = arg0.method145();
+		this.field1905 = arg0.g2();
+		this.field1906 = arg0.g2();
 	}
 
 	public JagFX() {

@@ -72,7 +72,7 @@ public final class FloType extends Linkable2 {
 	@ObfuscatedName("fc.a(BILba;)V")
 	public void method393(int arg0, Packet arg1) {
 		while (true) {
-			int var3 = arg1.method144();
+			int var3 = arg1.g1();
 			if (var3 == 0) {
 				return;
 			}
@@ -94,13 +94,13 @@ public final class FloType extends Linkable2 {
 	@ObfuscatedName("fc.a(ILba;IB)V")
 	public void method396(int arg0, Packet arg1, int arg2) {
 		if (arg2 == 1) {
-			this.field920 = arg1.method164();
+			this.field920 = arg1.g3();
 		} else if (arg2 == 2) {
-			this.field897 = arg1.method144();
+			this.field897 = arg1.g1();
 		} else if (arg2 == 5) {
 			this.field913 = false;
 		} else if (arg2 == 7) {
-			this.field911 = arg1.method164();
+			this.field911 = arg1.g3();
 			return;
 		}
 	}

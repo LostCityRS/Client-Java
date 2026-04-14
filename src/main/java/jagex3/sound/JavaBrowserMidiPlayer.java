@@ -48,11 +48,11 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 	@ObfuscatedName("ga.b(I)V")
 	@Override
 	public void method308() {
-		if (this.field1009 == null || this.field1009.field815 == 0) {
+		if (this.field1009 == null || this.field1009.status == 0) {
 			return;
 		}
-		if (this.field1009.field815 == 1) {
-			FileOnDisk var1 = (FileOnDisk) this.field1009.field818;
+		if (this.field1009.status == 1) {
+			FileOnDisk var1 = (FileOnDisk) this.field1009.result;
 			try {
 				var1.method832(this.field1039, 0, this.field1039.length);
 				var1.method831();

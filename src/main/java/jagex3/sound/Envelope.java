@@ -50,7 +50,7 @@ public final class Envelope {
 
 	@ObfuscatedName("c.a(Lba;)V")
 	public void method249(Packet arg0) {
-		this.field441 = arg0.method144();
+		this.field441 = arg0.g1();
 		this.field440 = arg0.method167();
 		this.field442 = arg0.method167();
 		this.method250(arg0);
@@ -58,12 +58,12 @@ public final class Envelope {
 
 	@ObfuscatedName("c.b(Lba;)V")
 	public void method250(Packet arg0) {
-		this.field438 = arg0.method144();
+		this.field438 = arg0.g1();
 		this.field439 = new int[this.field438];
 		this.field443 = new int[this.field438];
 		for (int var2 = 0; var2 < this.field438; var2++) {
-			this.field439[var2] = arg0.method145();
-			this.field443[var2] = arg0.method145();
+			this.field439[var2] = arg0.g2();
+			this.field443[var2] = arg0.g2();
 		}
 	}
 

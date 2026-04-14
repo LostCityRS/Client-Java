@@ -49,7 +49,7 @@ public final class ClientStream implements Runnable {
 	public final OutputStream field3174;
 
 	@ObfuscatedName("vc.a(III[B)V")
-	public void method1014(int arg0, int arg1, byte[] arg2) throws IOException {
+	public void read(int arg0, int arg1, byte[] arg2) throws IOException {
 		if (this.field3159) {
 			return;
 		}
@@ -64,7 +64,7 @@ public final class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("vc.a(I)V")
-	public void method1015() {
+	public void close() {
 		if (this.field3159) {
 			return;
 		}
@@ -73,12 +73,12 @@ public final class ClientStream implements Runnable {
 			this.notifyAll();
 		}
 		if (this.field3158 != null) {
-			while (this.field3158.field815 == 0) {
+			while (this.field3158.status == 0) {
 				ThreadUtil.sleepPrecise(1L);
 			}
-			if (this.field3158.field815 == 1) {
+			if (this.field3158.status == 1) {
 				try {
-					((Thread) this.field3158.field818).join();
+					((Thread) this.field3158.result).join();
 				} catch (InterruptedException var2) {
 				}
 			}
@@ -87,7 +87,7 @@ public final class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("vc.a(IBI[B)V")
-	public void method1016(int arg0, byte[] arg1) throws IOException {
+	public void write(int arg0, byte[] arg1) throws IOException {
 		if (this.field3159) {
 			return;
 		}
@@ -115,7 +115,7 @@ public final class ClientStream implements Runnable {
 
 	@Override
 	public void finalize() {
-		this.method1015();
+		this.close();
 	}
 
 	public ClientStream(Socket arg0, SignLink arg1) throws IOException {
@@ -191,12 +191,12 @@ public final class ClientStream implements Runnable {
 	}
 
 	@ObfuscatedName("vc.b(I)I")
-	public int method1020() throws IOException {
+	public int available() throws IOException {
 		return this.field3159 ? 0 : this.field3149.available();
 	}
 
 	@ObfuscatedName("vc.d(I)I")
-	public int method1022() throws IOException {
+	public int read() throws IOException {
 		return this.field3159 ? 0 : this.field3149.read();
 	}
 }
