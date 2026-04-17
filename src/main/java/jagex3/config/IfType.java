@@ -2,6 +2,7 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.constants.Text;
 import jagex3.dash3d.Model;
 import jagex3.dash3d.PlayerModel;
 import jagex3.datastruct.Linkable2;
@@ -69,7 +70,7 @@ public final class IfType extends Linkable2 {
 	public boolean field2533 = false;
 
 	@ObfuscatedName("qd.ic")
-	public JagString field2482 = Statics.field2056;
+	public JagString field2482 = Text.field2056;
 
 	@ObfuscatedName("qd.id")
 	public int field2534 = 100;
@@ -618,18 +619,18 @@ public final class IfType extends Linkable2 {
 			return;
 		}
 		if (this.field2520 == 1) {
-			this.field2482 = Statics.field2056;
+			this.field2482 = Text.field2056;
 		}
 		if (this.field2520 == 4) {
-			this.field2482 = Statics.field1152;
+			this.field2482 = Text.field1152;
 		}
 		if (this.field2520 == 5) {
-			this.field2482 = Statics.field1152;
+			this.field2482 = Text.field1152;
 		}
 		if (this.field2520 != 6) {
 			return;
 		}
-		this.field2482 = Statics.field218;
+		this.field2482 = Text.field218;
 	}
 
 	@ObfuscatedName("qd.a(BI)Ljd;")

@@ -406,7 +406,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("kd.a(Ljava/lang/String;IIIILjava/net/InetAddress;II)V")
-	public final void method626(String arg0, int arg1, int arg2, int arg3, InetAddress arg4, int arg5, int arg6) {
+	public final void startApplication(String arg0, int arg1, int arg2, int arg3, InetAddress arg4, int arg5, int arg6) {
 		try {
 			field2038 = arg5;
 			field711 = arg6;

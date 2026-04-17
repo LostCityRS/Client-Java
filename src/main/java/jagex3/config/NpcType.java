@@ -2,6 +2,7 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.constants.Text;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
@@ -224,7 +225,7 @@ public final class NpcType extends Linkable2 {
 			this.field1123 = arg1.g2();
 		} else if (arg0 >= 30 && arg0 < 35) {
 			this.field1086[arg0 - 30] = arg1.method140();
-			if (this.field1086[arg0 - 30].method14(Statics.field2928)) {
+			if (this.field1086[arg0 - 30].method14(Text.field2928)) {
 				this.field1086[arg0 - 30] = null;
 			}
 		} else if (arg0 == 40) {

@@ -5,6 +5,8 @@ import deob.Statics;
 import jagex3.config.FloType;
 import jagex3.config.FluType;
 import jagex3.config.LocType;
+import jagex3.constants.Text;
+import jagex3.constants.TextGerman;
 import jagex3.dash3d.*;
 import jagex3.io.Packet;
 import jagex3.sound.BgSound;
@@ -1111,10 +1113,10 @@ public class ClientBuild {
 		field910 = null;
 		mapl = null;
 		field908 = null;
-		Statics.field890 = null;
-		Statics.field889 = null;
-		Statics.field902 = null;
-		Statics.field900 = null;
+		TextGerman.field890 = null;
+		Text.field889 = null;
+		TextGerman.field902 = null;
+		Text.field900 = null;
 		Statics.field899 = null;
 	}
 

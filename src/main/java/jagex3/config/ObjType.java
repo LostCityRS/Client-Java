@@ -2,6 +2,7 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.constants.Text;
 import jagex3.dash3d.Model;
 import jagex3.dash3d.Pix3D;
 import jagex3.datastruct.Linkable2;
@@ -68,7 +69,7 @@ public final class ObjType extends Linkable2 {
 	public boolean field2880 = false;
 
 	@ObfuscatedName("ta.wb")
-	public JagString[] field2830 = new JagString[]{null, null, null, null, Statics.field487};
+	public JagString[] field2830 = new JagString[]{null, null, null, null, Text.field487};
 
 	@ObfuscatedName("ta.wc")
 	public int field2882 = -1;
@@ -95,7 +96,7 @@ public final class ObjType extends Linkable2 {
 	public int field2851 = -1;
 
 	@ObfuscatedName("ta.Bb")
-	public JagString[] field2835 = new JagString[]{null, null, Statics.field1594, null, null};
+	public JagString[] field2835 = new JagString[]{null, null, Text.field1594, null, null};
 
 	@ObfuscatedName("ta.Kb")
 	public int field2844 = 128;
@@ -159,7 +160,7 @@ public final class ObjType extends Linkable2 {
 			var3.field2830 = null;
 			var3.field2854 = 0;
 			var3.field2835 = null;
-			var3.field2827 = Statics.field1501;
+			var3.field2827 = Text.field1501;
 		}
 		field1066.method262((long) arg0, var3);
 		return var3;
@@ -317,9 +318,9 @@ public final class ObjType extends Linkable2 {
         if (arg0 < 100000) {
             return Statics.method502(arg0);
         } else if (arg0 < 10000000) {
-            return JagString.join(new JagString[]{Statics.method502(arg0 / 1000), Statics.field2354});
+            return JagString.join(new JagString[]{Statics.method502(arg0 / 1000), Text.field2354});
         } else {
-            return JagString.join(new JagString[]{Statics.method502(arg0 / 1000000), Statics.field1184});
+            return JagString.join(new JagString[]{Statics.method502(arg0 / 1000000), Text.field1184});
         }
     }
 
@@ -494,7 +495,7 @@ public final class ObjType extends Linkable2 {
 			this.field2850 = arg1.g2();
 		} else if (arg0 >= 30 && arg0 < 35) {
 			this.field2835[arg0 - 30] = arg1.method140();
-			if (this.field2835[arg0 - 30].method14(Statics.field2928)) {
+			if (this.field2835[arg0 - 30].method14(Text.field2928)) {
 				this.field2835[arg0 - 30] = null;
 			}
 		} else if (arg0 >= 35 && arg0 < 40) {

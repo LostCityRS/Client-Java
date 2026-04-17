@@ -2,6 +2,7 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.constants.Text;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
@@ -465,7 +466,7 @@ public final class LocType extends Linkable2 {
 			this.field1327 = arg0.g1b() * 5;
 		} else if (arg1 >= 30 && arg1 < 35) {
 			this.field1291[arg1 - 30] = arg0.method140();
-			if (this.field1291[arg1 - 30].method14(Statics.field2928)) {
+			if (this.field1291[arg1 - 30].method14(Text.field2928)) {
 				this.field1291[arg1 - 30] = null;
 			}
 		} else if (arg1 == 40) {

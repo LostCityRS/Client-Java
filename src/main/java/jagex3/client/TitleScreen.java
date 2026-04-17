@@ -2,6 +2,7 @@ package jagex3.client;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.constants.Text;
 import jagex3.graphics.*;
 import jagex3.js5.Js5;
 import jagex3.js5.Js5Net;
@@ -38,9 +39,9 @@ public class TitleScreen {
 			if (var1 == 1 && var0 >= 185 && var0 <= 335 && var2 >= 100 && var2 <= 140) {
 				field1395 = 2;
 				Statics.field2084 = 0;
-				Statics.field3060 = Statics.field2104;
-				Statics.field3077 = Statics.field1030;
-				Statics.field3062 = Statics.field2088;
+				Statics.field3060 = Text.field2104;
+				Statics.field3077 = Text.field1030;
+				Statics.field3062 = Text.field2088;
 				return;
 			}
 			return;
@@ -58,7 +59,7 @@ public class TitleScreen {
 			var6 += 15;
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 130 && var2 <= 170) {
 				loginUser = loginUser.method13().method36();
-				loginMes(Statics.field2101, Statics.field2095, Statics.field666);
+				loginMes(Text.field2101, Text.field2095, Text.field666);
 				Client.setMainState(20);
 				return;
 			}
@@ -115,7 +116,7 @@ public class TitleScreen {
 	public static void draw(PixFont arg0, PixFont arg1) {
 		Statics.field1935.method1054();
 		if (Client.state == 0 || Client.state == 5) {
-			arg0.method209(Statics.field2405, 180, 54, 16777215);
+			arg0.method209(Text.field2405, 180, 54, 16777215);
 			Pix2D.drawRect(28, 62, 304, 34, 9179409);
 			Pix2D.drawRect(29, 63, 302, 32, 0);
 			Pix2D.fillRect(30, 64, Client.field3274 * 3, 30, 9179409);
@@ -132,21 +133,21 @@ public class TitleScreen {
 			arg0.method211(Statics.field3062, 180, 70, 16776960, true);
 			int var10 = var9 + 15;
 			int var11 = var10 + 10;
-			arg0.drawString(JagString.join(new JagString[]{Statics.field3002, loginUser}), 90, 95, 16777215, true);
+			arg0.drawString(JagString.join(new JagString[]{Text.field3002, loginUser}), 90, 95, 16777215, true);
 			int var13 = var11 + 15;
-			arg0.drawString(JagString.join(new JagString[]{Statics.field1037, loginPass.method12()}), 92, 110, 16777215, true);
+			arg0.drawString(JagString.join(new JagString[]{Text.field1037, loginPass.method12()}), 92, 110, 16777215, true);
 			int var15 = var13 + 15;
 		}
 		if (Client.state == 10) {
 			Statics.field2806.method329(0, 0);
 			if (field1395 == 0) {
 				byte var5 = 80;
-				arg0.method211(Client.field582, 180, 80, 16776960, true);
+				arg0.method211(Text.field582, 180, 80, 16776960, true);
 				int var23 = var5 + 30;
 				Statics.field2919.method329(27, 100);
-				arg0.method195(Statics.field2639, 27, 100, 144, 40, 16777215, true, 1, 1, 0);
+				arg0.method195(Text.field2639, 27, 100, 144, 40, 16777215, true, 1, 1, 0);
 				Statics.field2919.method329(187, 100);
-				arg0.method195(Statics.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
+				arg0.method195(Text.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
 			} else if (field1395 == 2) {
 				byte var3 = 40;
 				arg0.method211(Statics.field3060, 180, 40, 16776960, true);
@@ -156,26 +157,26 @@ public class TitleScreen {
 				arg0.method211(Statics.field3062, 180, 70, 16776960, true);
 				int var16 = var14 + 15;
 				int var17 = var16 + 10;
-				arg0.drawString(JagString.join(new JagString[]{Statics.field3002, loginUser, Client.loopCycle % 40 < 20 & Statics.field2084 == 0 ? Statics.field1204 : Statics.field3067}), 90, 95, 16777215, true);
+				arg0.drawString(JagString.join(new JagString[]{Text.field3002, loginUser, Client.loopCycle % 40 < 20 & Statics.field2084 == 0 ? Statics.field1204 : Statics.field3067}), 90, 95, 16777215, true);
 				int var19 = var17 + 15;
-				arg0.drawString(JagString.join(new JagString[]{Statics.field1037, loginPass.method12(), Client.loopCycle % 40 < 20 & Statics.field2084 == 1 ? Statics.field1204 : Statics.field3067}), 92, 110, 16777215, true);
+				arg0.drawString(JagString.join(new JagString[]{Text.field1037, loginPass.method12(), Client.loopCycle % 40 < 20 & Statics.field2084 == 1 ? Statics.field1204 : Statics.field3067}), 92, 110, 16777215, true);
 				Statics.field2919.method329(27, 130);
 				int var21 = var19 + 15;
-				arg0.method211(Statics.field926, 100, 155, 16777215, true);
+				arg0.method211(Text.field926, 100, 155, 16777215, true);
 				Statics.field2919.method329(187, 130);
-				arg0.method211(Statics.field3302, 260, 155, 16777215, true);
+				arg0.method211(Text.field3302, 260, 155, 16777215, true);
 			} else if (field1395 == 3) {
-				arg0.method211(Statics.field3265, 180, 40, 16776960, true);
+				arg0.method211(Text.field3265, 180, 40, 16776960, true);
 				byte var4 = 65;
-				arg0.method211(Statics.field2757, 180, 65, 16777215, true);
+				arg0.method211(Text.field2757, 180, 65, 16777215, true);
 				int var18 = var4 + 15;
-				arg0.method211(Statics.field2675, 180, 80, 16777215, true);
+				arg0.method211(Text.field2675, 180, 80, 16777215, true);
 				int var20 = var18 + 15;
-				arg0.method211(Statics.field2667, 180, 95, 16777215, true);
+				arg0.method211(Text.field2667, 180, 95, 16777215, true);
 				int var22 = var20 + 15;
-				arg0.method211(Statics.field2400, 180, 110, 16777215, true);
+				arg0.method211(Text.field2400, 180, 110, 16777215, true);
 				Statics.field2919.method329(107, 130);
-				arg0.method211(Statics.field3302, 180, 155, 16777215, true);
+				arg0.method211(Text.field3302, 180, 155, 16777215, true);
 				int var24 = var22 + 15;
 			}
 		}
