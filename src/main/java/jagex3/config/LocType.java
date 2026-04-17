@@ -31,7 +31,7 @@ public final class LocType extends Linkable2 {
 	public int field1316 = -1;
 
 	@ObfuscatedName("ia.cc")
-	public int[] field1317;
+	public int[] multiloc;
 
 	@ObfuscatedName("ia.ec")
 	public int field1319 = -1;
@@ -100,10 +100,10 @@ public final class LocType extends Linkable2 {
 	public boolean field1313 = false;
 
 	@ObfuscatedName("ia.Ab")
-	public int field1289 = -1;
+	public int anim = -1;
 
 	@ObfuscatedName("ia.zb")
-	public int field1288 = 16;
+	public int wallwidth = 16;
 
 	@ObfuscatedName("ia.Cb")
 	public final JagString[] field1291 = new JagString[5];
@@ -158,7 +158,7 @@ public final class LocType extends Linkable2 {
 	}
 
 	@ObfuscatedName("fa.b(IB)Lia;")
-	public static LocType method389(int arg0) {
+	public static LocType list(int arg0) {
 		LocType var1 = (LocType) field2788.find((long) arg0);
 		if (var1 != null) {
 			return var1;
@@ -187,7 +187,7 @@ public final class LocType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ia.a(IIIIIBI)Lpa;")
-	public Model method505(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public Model getModel(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		long var7;
 		if (this.field1305 == null) {
 			var7 = (this.field1321 << 10) + arg2;
@@ -221,12 +221,12 @@ public final class LocType extends Linkable2 {
 
 	@ObfuscatedName("ia.b(B)Z")
 	public boolean method506() {
-		if (this.field1317 == null) {
+		if (this.multiloc == null) {
 			return this.field1296 != -1 || this.field1306 != null;
 		}
-		for (int var1 = 0; var1 < this.field1317.length; var1++) {
-			if (this.field1317[var1] != -1) {
-				LocType var2 = method389(this.field1317[var1]);
+		for (int var1 = 0; var1 < this.multiloc.length; var1++) {
+			if (this.multiloc[var1] != -1) {
+				LocType var2 = list(this.multiloc[var1]);
 				if (var2.field1296 != -1 || var2.field1306 != null) {
 					return true;
 				}
@@ -453,12 +453,12 @@ public final class LocType extends Linkable2 {
 		} else if (arg1 == 23) {
 			this.field1304 = true;
 		} else if (arg1 == 24) {
-			this.field1289 = arg0.g2();
-			if (this.field1289 == 65535) {
-				this.field1289 = -1;
+			this.anim = arg0.g2();
+			if (this.anim == 65535) {
+				this.anim = -1;
 			}
 		} else if (arg1 == 28) {
-			this.field1288 = arg0.g1();
+			this.wallwidth = arg0.g1();
 		} else if (arg1 == 29) {
 			this.field1310 = arg0.g1b();
 		} else if (arg1 == 39) {
@@ -514,11 +514,11 @@ public final class LocType extends Linkable2 {
 				this.field1319 = -1;
 			}
 			int var5 = arg0.g1();
-			this.field1317 = new int[var5 + 1];
+			this.multiloc = new int[var5 + 1];
 			for (int var6 = 0; var6 <= var5; var6++) {
-				this.field1317[var6] = arg0.g2();
-				if (this.field1317[var6] == 65535) {
-					this.field1317[var6] = -1;
+				this.multiloc[var6] = arg0.g2();
+				if (this.multiloc[var6] == 65535) {
+					this.multiloc[var6] = -1;
 				}
 			}
 		} else if (arg1 == 78) {
@@ -566,7 +566,7 @@ public final class LocType extends Linkable2 {
 		} else if (this.field1319 != -1) {
 			var1 = VarCache.field2803[this.field1319];
 		}
-		return var1 < 0 || this.field1317.length <= var1 || this.field1317[var1] == -1 ? null : method389(this.field1317[var1]);
+		return var1 < 0 || this.multiloc.length <= var1 || this.multiloc[var1] == -1 ? null : list(this.multiloc[var1]);
 	}
 
 	@ObfuscatedName("ia.c(B)Z")

@@ -2,7 +2,6 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class93;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
@@ -181,10 +180,10 @@ public final class Model extends ModelSource {
 	public int[] field2225;
 
 	@ObfuscatedName("pa.Wb")
-	public class93[] field2215;
+	public PointNormal[] field2215;
 
 	@ObfuscatedName("pa.Ub")
-	public class93[] field2213;
+	public PointNormal[] field2213;
 
 	@ObfuscatedName("pa.Lb")
 	public int field2204;
@@ -469,9 +468,9 @@ public final class Model extends ModelSource {
 			this.field2227 = new int[this.field2209];
 		}
 		if (this.field2215 == null) {
-			this.field2215 = new class93[this.field2208];
+			this.field2215 = new PointNormal[this.field2208];
 			for (int var9 = 0; var9 < this.field2208; var9++) {
-				this.field2215[var9] = new class93();
+				this.field2215[var9] = new PointNormal();
 			}
 		}
 		for (int var10 = 0; var10 < this.field2209; var10++) {
@@ -499,17 +498,17 @@ public final class Model extends ModelSource {
 			int var25 = var21 * 256 / var23;
 			int var26 = var22 * 256 / var23;
 			if (this.field2219 == null || (this.field2219[var10] & 0x1) == 0) {
-				class93 var27 = this.field2215[var11];
+				PointNormal var27 = this.field2215[var11];
 				var27.field2312 += var24;
 				var27.field2307 += var25;
 				var27.field2314 += var26;
 				var27.field2328++;
-				class93 var28 = this.field2215[var12];
+				PointNormal var28 = this.field2215[var12];
 				var28.field2312 += var24;
 				var28.field2307 += var25;
 				var28.field2314 += var26;
 				var28.field2328++;
-				class93 var29 = this.field2215[var13];
+				PointNormal var29 = this.field2215[var13];
 				var29.field2312 += var24;
 				var29.field2307 += var25;
 				var29.field2314 += var26;
@@ -523,10 +522,10 @@ public final class Model extends ModelSource {
 			this.method776(arg0, var8, arg2, arg3, arg4);
 			return;
 		}
-		this.field2213 = new class93[this.field2208];
+		this.field2213 = new PointNormal[this.field2208];
 		for (int var31 = 0; var31 < this.field2208; var31++) {
-			class93 var32 = this.field2215[var31];
-			class93 var33 = this.field2213[var31] = new class93();
+			PointNormal var32 = this.field2215[var31];
+			PointNormal var33 = this.field2213[var31] = new PointNormal();
 			var33.field2312 = var32.field2312;
 			var33.field2307 = var32.field2307;
 			var33.field2314 = var32.field2314;
@@ -592,25 +591,25 @@ public final class Model extends ModelSource {
 			int var9 = this.field2206[var6];
 			if (this.field2219 == null) {
 				int var10 = this.field2232[var6];
-				class93 var11 = this.field2215[var7];
+				PointNormal var11 = this.field2215[var7];
 				int var12 = (var11.field2314 * arg4 + var11.field2312 * arg2 + var11.field2307 * arg3) / (var11.field2328 * arg1) + arg0;
 				this.field2225[var6] = method784(var10, var12, 0);
-				class93 var13 = this.field2215[var8];
+				PointNormal var13 = this.field2215[var8];
 				int var14 = (var13.field2314 * arg4 + var13.field2312 * arg2 + var13.field2307 * arg3) / (var13.field2328 * arg1) + arg0;
 				this.field2222[var6] = method784(var10, var14, 0);
-				class93 var15 = this.field2215[var9];
+				PointNormal var15 = this.field2215[var9];
 				int var16 = (var15.field2314 * arg4 + var15.field2312 * arg2 + var15.field2307 * arg3) / (var15.field2328 * arg1) + arg0;
 				this.field2227[var6] = method784(var10, var16, 0);
 			} else if ((this.field2219[var6] & 0x1) == 0) {
 				int var17 = this.field2232[var6];
 				int var18 = this.field2219[var6];
-				class93 var19 = this.field2215[var7];
+				PointNormal var19 = this.field2215[var7];
 				int var20 = (var19.field2314 * arg4 + var19.field2312 * arg2 + var19.field2307 * arg3) / (var19.field2328 * arg1) + arg0;
 				this.field2225[var6] = method784(var17, var20, var18);
-				class93 var21 = this.field2215[var8];
+				PointNormal var21 = this.field2215[var8];
 				int var22 = (var21.field2314 * arg4 + var21.field2312 * arg2 + var21.field2307 * arg3) / (var21.field2328 * arg1) + arg0;
 				this.field2222[var6] = method784(var17, var22, var18);
-				class93 var23 = this.field2215[var9];
+				PointNormal var23 = this.field2215[var9];
 				int var24 = (var23.field2314 * arg4 + var23.field2312 * arg2 + var23.field2307 * arg3) / (var23.field2328 * arg1) + arg0;
 				this.field2227[var6] = method784(var17, var24, var18);
 			}
@@ -1162,10 +1161,10 @@ public final class Model extends ModelSource {
 					this.field2219[var7] = arg0.field2219[var7];
 				}
 			}
-			this.field2215 = new class93[this.field2208];
+			this.field2215 = new PointNormal[this.field2208];
 			for (int var8 = 0; var8 < this.field2208; var8++) {
-				class93 var9 = this.field2215[var8] = new class93();
-				class93 var10 = arg0.field2215[var8];
+				PointNormal var9 = this.field2215[var8] = new PointNormal();
+				PointNormal var10 = arg0.field2215[var8];
 				var9.field2312 = var10.field2312;
 				var9.field2307 = var10.field2307;
 				var9.field2314 = var10.field2314;

@@ -13,7 +13,7 @@ public final class Square extends Linkable {
 	public int field867;
 
 	@ObfuscatedName("fa.wb")
-	public class113 field868;
+	public GroundObject field868;
 
 	@ObfuscatedName("fa.Bb")
 	public final Sprite[] field873 = new Sprite[5];
@@ -52,19 +52,19 @@ public final class Square extends Linkable {
 	public int field888;
 
 	@ObfuscatedName("fa.Gb")
-	public class105 field878;
+	public QuickGround field878;
 
 	@ObfuscatedName("fa.Pb")
-	public class106 field887;
+	public Decor field887;
 
 	@ObfuscatedName("fa.Ib")
-	public class17 field880;
+	public Wall field880;
 
 	@ObfuscatedName("fa.Eb")
 	public Ground field876;
 
 	@ObfuscatedName("fa.Lb")
-	public class52 field883;
+	public GroundDecor field883;
 
 	@ObfuscatedName("fa.yb")
 	public boolean field870;

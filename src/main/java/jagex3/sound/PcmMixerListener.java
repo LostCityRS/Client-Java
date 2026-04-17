@@ -1,10 +1,10 @@
-package deob;
+package jagex3.sound;
 
+import deob.ObfuscatedName;
 import jagex3.datastruct.Linkable;
-import jagex3.sound.Mixer;
 
 @ObfuscatedName("ne")
-public abstract class class83 extends Linkable {
+public abstract class PcmMixerListener extends Linkable {
 
 	@ObfuscatedName("ne.cb")
 	public int field2114;

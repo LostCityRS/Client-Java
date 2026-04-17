@@ -1,7 +1,9 @@
-package deob;
+package jagex3.dash3d;
+
+import deob.ObfuscatedName;
 
 @ObfuscatedName("rc")
-public final class class105 {
+public final class QuickGround {
 
 	@ObfuscatedName("rc.j")
 	public final int field2636;
@@ -24,7 +26,7 @@ public final class class105 {
 	@ObfuscatedName("rc.y")
 	public final int field2651;
 
-	public class105(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6) {
+	public QuickGround(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6) {
 		this.field2647 = arg0;
 		this.field2645 = arg6;
 		this.field2641 = arg1;

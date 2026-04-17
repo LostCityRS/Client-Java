@@ -62,8 +62,8 @@ public final class ClientLocAnim extends ModelSource {
 			}
 			this.field1417 = Client.loopCycle - var1;
 		}
-		LocType var2 = LocType.method389(this.field1428);
-		if (var2.field1317 != null) {
+		LocType var2 = LocType.list(this.field1428);
+		if (var2.multiloc != null) {
 			var2 = var2.method516();
 		}
 		return var2 == null ? null : var2.method512(this.field1422, this.field1423, this.field1419, this.field1414, this.field1411, this.field1427, this.field1420, this.field1409);

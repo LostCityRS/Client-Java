@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.class83;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.Linkable;
 
@@ -50,7 +49,7 @@ public final class Mixer extends PcmStream {
 			arg0 -= var2;
 			this.field245 += var2;
 			this.method133();
-			class83 var3 = (class83) this.field242.head();
+			PcmMixerListener var3 = (PcmMixerListener) this.field242.head();
 			synchronized (var3) {
 				int var5 = var3.method743(this);
 				if (var5 < 0) {
@@ -65,12 +64,12 @@ public final class Mixer extends PcmStream {
 	}
 
 	@ObfuscatedName("b.a(Lnd;Lne;)V")
-	public void method128(Linkable arg0, class83 arg1) {
-		while (this.field242.sentinel != arg0 && ((class83) arg0).field2114 <= arg1.field2114) {
+	public void method128(Linkable arg0, PcmMixerListener arg1) {
+		while (this.field242.sentinel != arg0 && ((PcmMixerListener) arg0).field2114 <= arg1.field2114) {
 			arg0 = arg0.next;
 		}
 		this.field242.insertBefore(arg0, arg1);
-		this.field244 = ((class83) this.field242.sentinel.next).field2114;
+		this.field244 = ((PcmMixerListener) this.field242.sentinel.next).field2114;
 	}
 
 	@ObfuscatedName("b.b([III)I")
@@ -148,14 +147,14 @@ public final class Mixer extends PcmStream {
 	}
 
 	@ObfuscatedName("b.a(Lne;)V")
-	public void method131(class83 arg0) {
+	public void method131(PcmMixerListener arg0) {
 		arg0.unlink();
 		arg0.method742();
 		Linkable var2 = this.field242.sentinel.next;
 		if (this.field242.sentinel == var2) {
 			this.field244 = -1;
 		} else {
-			this.field244 = ((class83) var2).field2114;
+			this.field244 = ((PcmMixerListener) var2).field2114;
 		}
 	}
 
@@ -184,7 +183,7 @@ public final class Mixer extends PcmStream {
 		if (this.field245 <= 0) {
 			return;
 		}
-		for (class83 var1 = (class83) this.field242.head(); var1 != null; var1 = (class83) this.field242.next()) {
+		for (PcmMixerListener var1 = (PcmMixerListener) this.field242.head(); var1 != null; var1 = (PcmMixerListener) this.field242.next()) {
 			var1.field2114 -= this.field245;
 		}
 		this.field244 -= this.field245;
@@ -209,7 +208,7 @@ public final class Mixer extends PcmStream {
 			arg2 -= var4;
 			this.field245 += var4;
 			this.method133();
-			class83 var6 = (class83) this.field242.head();
+			PcmMixerListener var6 = (PcmMixerListener) this.field242.head();
 			synchronized (var6) {
 				int var8 = var6.method743(this);
 				if (var8 < 0) {

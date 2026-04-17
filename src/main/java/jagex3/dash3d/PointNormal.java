@@ -1,7 +1,9 @@
-package deob;
+package jagex3.dash3d;
+
+import deob.ObfuscatedName;
 
 @ObfuscatedName("pc")
-public final class class93 {
+public final class PointNormal {
 
 	@ObfuscatedName("pc.b")
 	public int field2307;

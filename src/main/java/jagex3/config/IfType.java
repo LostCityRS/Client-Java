@@ -831,7 +831,7 @@ public final class IfType extends Linkable2 {
 					var7.method770(64, 768, -50, -10, -50, true);
 				}
 				if (var6 == 4) {
-					ObjType var8 = ObjType.method760(var5);
+					ObjType var8 = ObjType.list(var5);
 					var7 = var8.method954(false, 10);
 					if (var7 == null) {
 						Statics.field3116 = true;

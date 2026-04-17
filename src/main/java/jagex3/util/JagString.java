@@ -2,7 +2,7 @@ package jagex3.util;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class73;
+import jagex3.datastruct.StringNode;
 import jagex3.datastruct.HashTable;
 
 import java.awt.*;
@@ -11,6 +11,8 @@ import java.io.UnsupportedEncodingException;
 @ObfuscatedName("a")
 public final class JagString implements StringInterface {
 
+	@ObfuscatedName("mb.f")
+	public static HashTable cache;
 	@ObfuscatedName("a.u")
 	public boolean field21 = true;
 
@@ -98,7 +100,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(La;I)Z")
-	public boolean method5(JagString arg0) {
+	public boolean strEquals(JagString arg0) {
 		if (arg0 == null) {
 			return false;
 		} else if (this.field26 == arg0.field26) {
@@ -254,19 +256,19 @@ public final class JagString implements StringInterface {
 		long var2 = this.method37();
 		Class var4 = JagString.class;
 		synchronized (JagString.class) {
-			if (Statics.field1795 == null) {
-				Statics.field1795 = new HashTable(4096);
+			if (cache == null) {
+				cache = new HashTable(4096);
 			} else {
-				for (class73 var5 = (class73) Statics.field1795.find(var2); var5 != null; var5 = (class73) Statics.field1795.searchnext()) {
-					if (this.method5(var5.field1781)) {
-						return var5.field1781;
+				for (StringNode var5 = (StringNode) cache.find(var2); var5 != null; var5 = (StringNode) cache.searchnext()) {
+					if (this.strEquals(var5.value)) {
+						return var5.value;
 					}
 				}
 			}
-			class73 var7 = new class73();
+			StringNode var7 = new StringNode();
 			this.field21 = false;
-			var7.field1781 = this;
-			Statics.field1795.put(var7, var2);
+			var7.value = this;
+			cache.put(var7, var2);
 			return this;
 		}
 	}

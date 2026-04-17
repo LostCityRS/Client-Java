@@ -1,7 +1,9 @@
-package deob;
+package jagex3.sound;
+
+import deob.ObfuscatedName;
 
 @ObfuscatedName("db")
-public interface class21 extends Runnable {
+public interface MidiDevice extends Runnable {
 
 	@ObfuscatedName("db.a(B)V")
 	void method309();

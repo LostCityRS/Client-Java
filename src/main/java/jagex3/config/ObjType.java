@@ -56,7 +56,7 @@ public final class ObjType extends Linkable2 {
 	public int field2876 = -1;
 
 	@ObfuscatedName("ta.sb")
-	public int field2826 = 0;
+	public int stackable = 0;
 
 	@ObfuscatedName("ta.tb")
 	public JagString field2827 = Statics.field3017;
@@ -83,7 +83,7 @@ public final class ObjType extends Linkable2 {
 	public int field2841 = 0;
 
 	@ObfuscatedName("ta.Zb")
-	public int field2859 = 1;
+	public int cost = 1;
 
 	@ObfuscatedName("ta.Db")
 	public int field2837 = 0;
@@ -140,7 +140,7 @@ public final class ObjType extends Linkable2 {
 	public int[] field2847;
 
 	@ObfuscatedName("oe.a(II)Lta;")
-	public static ObjType method760(int arg0) {
+	public static ObjType list(int arg0) {
 		ObjType var1 = (ObjType) field1066.find((long) arg0);
 		if (var1 != null) {
 			return var1;
@@ -153,7 +153,7 @@ public final class ObjType extends Linkable2 {
 		}
 		var3.method942();
 		if (var3.field2838 != -1) {
-			var3.method953(method760(var3.field2838), method760(var3.field2843));
+			var3.method953(list(var3.field2838), list(var3.field2843));
 		}
 		if (!field2384 && var3.field2880) {
 			var3.field2830 = null;
@@ -185,7 +185,7 @@ public final class ObjType extends Linkable2 {
 				return var3;
 			}
 		}
-		ObjType var4 = method760(arg1);
+		ObjType var4 = list(arg1);
 		if (var4.field2862 == null) {
 			arg0 = -1;
 		}
@@ -197,7 +197,7 @@ public final class ObjType extends Linkable2 {
 				}
 			}
 			if (var5 != -1) {
-				var4 = method760(var5);
+				var4 = list(var5);
 			}
 		}
 		Model var7 = var4.method954(true, 1);
@@ -296,7 +296,7 @@ public final class ObjType extends Linkable2 {
 		Statics.field777 = var18;
 		Pix3D.method356();
 		Pix3D.field776 = true;
-		if (var4.field2826 == 1) {
+		if (var4.stackable == 1) {
 			var19.owi = 33;
 		} else {
 			var19.owi = 32;
@@ -423,7 +423,7 @@ public final class ObjType extends Linkable2 {
 				}
 			}
 			if (var2 != -1) {
-				return method760(var2);
+				return list(var2);
 			}
 		}
 		return this;
@@ -477,9 +477,9 @@ public final class ObjType extends Linkable2 {
 				this.field2841 -= 65536;
 			}
 		} else if (arg0 == 11) {
-			this.field2826 = 1;
+			this.stackable = 1;
 		} else if (arg0 == 12) {
-			this.field2859 = arg1.method167();
+			this.cost = arg1.method167();
 		} else if (arg0 == 16) {
 			this.field2880 = true;
 		} else if (arg0 == 23) {
@@ -564,8 +564,8 @@ public final class ObjType extends Linkable2 {
 		this.field2837 = arg0.field2837;
 		this.field2858 = arg0.field2858;
 		this.field2827 = arg1.field2827;
-		this.field2859 = arg1.field2859;
-		this.field2826 = 1;
+		this.cost = arg1.cost;
+		this.stackable = 1;
 		this.field2848 = arg0.field2848;
 		this.field2880 = arg1.field2880;
 		this.field2847 = arg0.field2847;
@@ -585,7 +585,7 @@ public final class ObjType extends Linkable2 {
 				}
 			}
 			if (var3 != -1) {
-				return method760(var3).method954(arg0, 1);
+				return list(var3).method954(arg0, 1);
 			}
 		}
 		if (arg0) {

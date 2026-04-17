@@ -2,7 +2,6 @@ package jagex3.sound;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class21;
 import jagex3.client.SignLink;
 
 @ObfuscatedName("hc")
@@ -15,7 +14,7 @@ public abstract class MidiStream {
 			Statics.field311 = (MidiStream) Class.forName("jagex3.sound.JavaMidiPlayer").getDeclaredConstructor().newInstance();
 			return true;
 		} catch (Throwable var3) {
-			class21 var2 = arg0.method653();
+			MidiDevice var2 = arg0.method653();
 			if (var2 != null) {
 				Statics.field311 = new JavaSafeMidiPlayer(arg0, var2);
 				return true;

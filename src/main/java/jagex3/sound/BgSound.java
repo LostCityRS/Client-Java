@@ -87,7 +87,7 @@ public final class BgSound extends Linkable {
 		var5.field430 = (arg0 + var7) * 128;
 		var5.field436 = (arg3 + var6) * 128;
 		var5.field420 = arg4.field1296;
-		if (arg4.field1317 != null) {
+		if (arg4.multiloc != null) {
 			var5.field434 = arg4;
 			var5.method247();
 		}

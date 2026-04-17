@@ -154,7 +154,7 @@ public final class ClientPlayer extends ClientEntity {
 					break;
 				}
 				if (var4[var5] >= 512) {
-					int var8 = ObjType.method760(var4[var5] - 512).field2854;
+					int var8 = ObjType.list(var4[var5] - 512).field2854;
 					if (var8 != 0) {
 						this.field74 = var8;
 					}

@@ -353,7 +353,7 @@ public class ScriptRunner {
 						if (var129 == -1) {
 							var128.field2493 = 0;
 						} else {
-							ObjType var131 = ObjType.method760(var129);
+							ObjType var131 = ObjType.list(var129);
 							var128.field2493 = 4;
 							var128.field2496 = var131.field2875;
 							var128.field2531 = var131.field2858;

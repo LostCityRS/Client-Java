@@ -1,7 +1,7 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.class21;
+import jagex3.sound.MidiDevice;
 import jagex3.io.FileOnDisk;
 import jagex3.sound.AudioSource;
 
@@ -41,7 +41,7 @@ public final class SignLink implements Runnable {
 	public PrivilegedRequest field1704 = null;
 
 	@ObfuscatedName("lc.h")
-	public class21 field1706;
+	public MidiDevice field1706;
 
 	@ObfuscatedName("lc.i")
 	public FileOnDisk field1707 = null;
@@ -204,7 +204,7 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("lc.d(I)Ldb;")
-	public class21 method653() {
+	public MidiDevice method653() {
 		return this.field1706;
 	}
 

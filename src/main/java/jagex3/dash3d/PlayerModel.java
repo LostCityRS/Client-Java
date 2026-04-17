@@ -87,7 +87,7 @@ public final class PlayerModel {
 				if (var12 >= 256 && var12 < 512 && !IdkType.method177(var12 - 256).method821()) {
 					var10 = true;
 				}
-				if (var12 >= 512 && !ObjType.method760(var12 - 512).method940(this.field1658)) {
+				if (var12 >= 512 && !ObjType.list(var12 - 512).method940(this.field1658)) {
 					var10 = true;
 				}
 			}
@@ -111,7 +111,7 @@ public final class PlayerModel {
 						}
 					}
 					if (var16 >= 512) {
-						Model var18 = ObjType.method760(var16 - 512).method941(this.field1658);
+						Model var18 = ObjType.list(var16 - 512).method941(this.field1658);
 						if (var18 != null) {
 							var13[var14++] = var18;
 						}
@@ -190,7 +190,7 @@ public final class PlayerModel {
 			if (var3 >= 256 && var3 < 512 && !IdkType.method177(var3 - 256).method822()) {
 				var1 = true;
 			}
-			if (var3 >= 512 && !ObjType.method760(var3 - 512).method939(this.field1658)) {
+			if (var3 >= 512 && !ObjType.list(var3 - 512).method939(this.field1658)) {
 				var1 = true;
 			}
 		}
@@ -208,7 +208,7 @@ public final class PlayerModel {
 				}
 			}
 			if (var7 >= 512) {
-				Model var9 = ObjType.method760(var7 - 512).method948(this.field1658);
+				Model var9 = ObjType.list(var7 - 512).method948(this.field1658);
 				if (var9 != null) {
 					var4[var5++] = var9;
 				}

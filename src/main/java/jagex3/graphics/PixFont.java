@@ -118,42 +118,42 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.a(La;)I")
 	public int method193(JagString arg0) {
-		if (arg0.method5(field343)) {
+		if (arg0.strEquals(field343)) {
 			return 16711680;
-		} else if (arg0.method5(field344)) {
+		} else if (arg0.strEquals(field344)) {
 			return 65280;
-		} else if (arg0.method5(field335)) {
+		} else if (arg0.strEquals(field335)) {
 			return 255;
-		} else if (arg0.method5(field357)) {
+		} else if (arg0.strEquals(field357)) {
 			return 16776960;
-		} else if (arg0.method5(field333)) {
+		} else if (arg0.strEquals(field333)) {
 			return 65535;
-		} else if (arg0.method5(field336)) {
+		} else if (arg0.strEquals(field336)) {
 			return 16711935;
-		} else if (arg0.method5(field338)) {
+		} else if (arg0.strEquals(field338)) {
 			return 16777215;
-		} else if (arg0.method5(field346)) {
+		} else if (arg0.strEquals(field346)) {
 			return 0;
-		} else if (arg0.method5(field352)) {
+		} else if (arg0.strEquals(field352)) {
 			return 16748608;
-		} else if (arg0.method5(field353)) {
+		} else if (arg0.strEquals(field353)) {
 			return 8388608;
-		} else if (arg0.method5(field339)) {
+		} else if (arg0.strEquals(field339)) {
 			return 128;
-		} else if (arg0.method5(field334)) {
+		} else if (arg0.strEquals(field334)) {
 			return 16756736;
-		} else if (arg0.method5(field345)) {
+		} else if (arg0.strEquals(field345)) {
 			return 16740352;
-		} else if (arg0.method5(field349)) {
+		} else if (arg0.strEquals(field349)) {
 			return 16723968;
-		} else if (arg0.method5(field340)) {
+		} else if (arg0.strEquals(field340)) {
 			return 12648192;
-		} else if (arg0.method5(field341)) {
+		} else if (arg0.strEquals(field341)) {
 			return 8453888;
-		} else if (arg0.method5(field356)) {
+		} else if (arg0.strEquals(field356)) {
 			return 4259584;
 		} else {
-			if (arg0.method5(field348)) {
+			if (arg0.strEquals(field348)) {
 				this.field358 = true;
 			}
 			return -1;

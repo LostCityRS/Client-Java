@@ -7,7 +7,7 @@ import jagex3.constants.Text;
 import jagex3.dash3d.ClientEntity;
 import jagex3.dash3d.Pix3D;
 import jagex3.dash3d.PlayerModel;
-import jagex3.datastruct.HashTable;
+import jagex3.datastruct.ByteArrayNode;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.LruCache;
 import jagex3.graphics.*;
@@ -116,9 +116,6 @@ public class Statics {
 	@ObfuscatedName("la.n")
 	public static BufferedRandomAccessFile field1668;
 
-	@ObfuscatedName("mb.f")
-	public static HashTable field1795;
-
 	@ObfuscatedName("md.Gb")
 	public static int field1895;
 
@@ -141,7 +138,7 @@ public class Statics {
 	public static int[] field2151;
 
 	@ObfuscatedName("ad.D")
-	public static class14 field217;
+	public static PcmPlayerBase field217;
 
 	@ObfuscatedName("p.hb")
 	public static int[] field2196;
@@ -244,9 +241,6 @@ public class Statics {
 
 	@ObfuscatedName("bd.S")
 	public static int field405;
-
-	@ObfuscatedName("ca.n")
-	public static long field462;
 
 	@ObfuscatedName("ca.o")
 	public static int field463;
@@ -2138,14 +2132,14 @@ public class Statics {
 			return;
 		}
 		long var0 = currentTime();
-		if (var0 <= field462) {
+		if (var0 <= PcmPlayer.field462) {
 			return;
 		}
 		field217.method255(var0);
-		int var2 = (int) (var0 - field462);
-		field462 = var0;
-		Class var3 = class14.class;
-		synchronized (class14.class) {
+		int var2 = (int) (var0 - PcmPlayer.field462);
+		PcmPlayer.field462 = var0;
+		Class var3 = PcmPlayerBase.class;
+		synchronized (PcmPlayerBase.class) {
 			field1157 += PcmPlayer.frequency * var2;
 			int var4 = (field1157 - PcmPlayer.frequency * 2000) / 1000;
 			if (var4 > 0) {
@@ -2670,7 +2664,7 @@ public class Statics {
 		Js5Net.field1831 = null;
 		field1819 = null;
 		Client.field1842 = null;
-		field1795 = null;
+		JagString.cache = null;
 		field1840 = null;
 		Client.field1845 = null;
 	}
@@ -3299,7 +3293,7 @@ public class Statics {
 				return;
 			}
 		}
-		if (var2.method5(Client.localPlayer.field86)) {
+		if (var2.strEquals(Client.localPlayer.field86)) {
 			return;
 		}
 		Client.field2951[Client.field1492] = var2;
@@ -4210,7 +4204,7 @@ public class Statics {
 	public static byte[] method25(int arg0, Js5 arg1, int arg2, int arg3) {
 		long var4 = ((long) arg3 << 32) + (long) (arg2 * 37 + arg0 & 0xFFFF) + (long) (arg2 << 16);
 		if (field30 != null) {
-			class46 var6 = (class46) field30.find(var4);
+			ByteArrayNode var6 = (ByteArrayNode) field30.find(var4);
 			if (var6 != null) {
 				return var6.field1198;
 			}
@@ -4220,7 +4214,7 @@ public class Statics {
 			return null;
 		} else {
 			if (field30 != null) {
-				field30.method262(var4, new class46(var7));
+				field30.method262(var4, new ByteArrayNode(var7));
 			}
 			return var7;
 		}

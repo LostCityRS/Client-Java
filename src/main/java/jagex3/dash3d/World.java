@@ -206,11 +206,11 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIILvb;Lvb;IIII)V")
-	public void method50(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, ModelSource arg5, int arg6, int arg7, int arg8, int arg9) {
+	public void setWall(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, ModelSource arg5, int arg6, int arg7, int arg8, int arg9) {
 		if (arg4 == null && arg5 == null) {
 			return;
 		}
-		class17 var11 = new class17();
+		Wall var11 = new Wall();
 		var11.field531 = arg8;
 		var11.field543 = arg9;
 		var11.field529 = arg1 * 128 + 64;
@@ -300,7 +300,7 @@ public final class World {
 		if (var6 == null) {
 			return;
 		}
-		class105 var7 = var6.field878;
+		QuickGround var7 = var6.field878;
 		if (var7 != null) {
 			int var8 = var7.field2642;
 			if (var8 != 0) {
@@ -538,7 +538,7 @@ public final class World {
 	@ObfuscatedName("ab.a(IIIIIIIIIIIIIIIIIIII)V")
 	public void method55(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
 		if (arg3 == 0) {
-			class105 var21 = new class105(arg10, arg11, arg12, arg13, -1, arg18, false);
+			QuickGround var21 = new QuickGround(arg10, arg11, arg12, arg13, -1, arg18, false);
 			for (int var22 = arg0; var22 >= 0; var22--) {
 				if (this.field102[var22][arg1][arg2] == null) {
 					this.field102[var22][arg1][arg2] = new Square(var22, arg1, arg2);
@@ -546,7 +546,7 @@ public final class World {
 			}
 			this.field102[arg0][arg1][arg2].field878 = var21;
 		} else if (arg3 == 1) {
-			class105 var23 = new class105(arg14, arg15, arg16, arg17, arg5, arg19, arg6 == arg7 && arg6 == arg8 && arg6 == arg9);
+			QuickGround var23 = new QuickGround(arg14, arg15, arg16, arg17, arg5, arg19, arg6 == arg7 && arg6 == arg8 && arg6 == arg9);
 			for (int var24 = arg0; var24 >= 0; var24--) {
 				if (this.field102[var24][arg1][arg2] == null) {
 					this.field102[var24][arg1][arg2] = new Square(var24, arg1, arg2);
@@ -565,7 +565,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.c(III)Lrd;")
-	public class106 method56(int arg0, int arg1, int arg2) {
+	public Decor method56(int arg0, int arg1, int arg2) {
 		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null ? null : var4.field887;
 	}
@@ -898,7 +898,7 @@ public final class World {
 												} else if (!this.method57(0, var4, var5)) {
 													this.method84(var14.field878, 0, field109, field137, field131, field126, var4, var5);
 												}
-												class17 var15 = var14.field880;
+												Wall var15 = var14.field880;
 												if (var15 != null) {
 													var15.field536.method767(0, field109, field137, field131, field126, var15.field529 - Statics.field103, var15.field537 - Statics.field116, var15.field550 - Statics.field125, var15.field531);
 												}
@@ -921,8 +921,8 @@ public final class World {
 											}
 											int var19 = 0;
 											int var20 = 0;
-											class17 var21 = var3.field880;
-											class106 var22 = var3.field887;
+											Wall var21 = var3.field880;
+											Decor var22 = var3.field887;
 											if (var21 != null || var22 != null) {
 												if (Statics.field106 == var4) {
 													var19++;
@@ -997,11 +997,11 @@ public final class World {
 												}
 											}
 											if (var18) {
-												class52 var33 = var3.field883;
+												GroundDecor var33 = var3.field883;
 												if (var33 != null) {
 													var33.field1373.method767(0, field109, field137, field131, field126, var33.field1368 - Statics.field103, var33.field1375 - Statics.field116, var33.field1374 - Statics.field125, var33.field1361);
 												}
-												class113 var34 = var3.field868;
+												GroundObject var34 = var3.field868;
 												if (var34 != null && var34.field2795 == 0) {
 													if (var34.field2786 != null) {
 														var34.field2786.method767(0, field109, field137, field131, field126, var34.field2796 - Statics.field103, var34.field2785 - Statics.field116, var34.field2779 - Statics.field125, var34.field2790);
@@ -1052,7 +1052,7 @@ public final class World {
 												}
 											}
 											if (var40) {
-												class17 var42 = var3.field880;
+												Wall var42 = var3.field880;
 												if (!this.method58(var7, var4, var5, var42.field532)) {
 													var42.field536.method767(0, field109, field137, field131, field126, var42.field529 - Statics.field103, var42.field537 - Statics.field116, var42.field550 - Statics.field125, var42.field531);
 												}
@@ -1184,7 +1184,7 @@ public final class World {
 			} while (var70 != null && var70.field885);
 			var3.field885 = false;
 			field136--;
-			class113 var71 = var3.field868;
+			GroundObject var71 = var3.field868;
 			if (var71 != null && var71.field2795 != 0) {
 				if (var71.field2786 != null) {
 					var71.field2786.method767(0, field109, field137, field131, field126, var71.field2796 - Statics.field103, var71.field2785 - Statics.field116 - var71.field2795, var71.field2779 - Statics.field125, var71.field2790);
@@ -1197,7 +1197,7 @@ public final class World {
 				}
 			}
 			if (var3.field872 != 0) {
-				class106 var72 = var3.field887;
+				Decor var72 = var3.field887;
 				if (var72 != null && !this.method67(var7, var4, var5, var72.field2665.field3135)) {
 					if ((var72.field2658 & var3.field872) != 0) {
 						var72.field2665.method767(var72.field2668, field109, field137, field131, field126, var72.field2677 - Statics.field103, var72.field2660 - Statics.field116, var72.field2670 - Statics.field125, var72.field2678);
@@ -1230,7 +1230,7 @@ public final class World {
 						}
 					}
 				}
-				class17 var83 = var3.field880;
+				Wall var83 = var3.field880;
 				if (var83 != null) {
 					if ((var83.field542 & var3.field872) != 0 && !this.method58(var7, var4, var5, var83.field542)) {
 						var83.field535.method767(0, field109, field137, field131, field126, var83.field529 - Statics.field103, var83.field537 - Statics.field116, var83.field550 - Statics.field125, var83.field531);
@@ -1300,11 +1300,11 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIILvb;IIIIII)V")
-	public void method65(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public void setDecor(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		if (arg4 == null) {
 			return;
 		}
-		class106 var12 = new class106();
+		Decor var12 = new Decor();
 		var12.field2678 = arg9;
 		var12.field2669 = arg10;
 		var12.field2677 = arg1 * 128 + arg7 + 64;
@@ -1378,7 +1378,7 @@ public final class World {
 		if (var5 == null) {
 			return;
 		}
-		class106 var6 = var5.field887;
+		Decor var6 = var5.field887;
 		if (var6 != null) {
 			int var7 = arg1 * 128 + 64;
 			int var8 = arg2 * 128 + 64;
@@ -1452,7 +1452,7 @@ public final class World {
 				for (int var3 = 0; var3 < this.field143; var3++) {
 					Square var4 = this.field102[var1][var2][var3];
 					if (var4 != null) {
-						class17 var5 = var4.field880;
+						Wall var5 = var4.field880;
 						if (var5 != null && var5.field536 instanceof Model) {
 							Model var6 = (Model) var5.field536;
 							if (var6.field2215 != null) {
@@ -1478,7 +1478,7 @@ public final class World {
 								}
 							}
 						}
-						class52 var11 = var4.field883;
+						GroundDecor var11 = var4.field883;
 						if (var11 != null && var11.field1373 instanceof Model) {
 							Model var12 = (Model) var11.field1373;
 							if (var12.field2215 != null) {
@@ -1546,8 +1546,8 @@ public final class World {
 		int[] var8 = arg1.field2229;
 		int var9 = arg1.field2208;
 		for (int var10 = 0; var10 < arg0.field2208; var10++) {
-			class93 var11 = arg0.field2215[var10];
-			class93 var12 = arg0.field2213[var10];
+			PointNormal var11 = arg0.field2215[var10];
+			PointNormal var12 = arg0.field2213[var10];
 			if (var12.field2328 != 0) {
 				int var13 = arg0.field2228[var10] - arg3;
 				if (var13 <= arg1.field2216) {
@@ -1556,8 +1556,8 @@ public final class World {
 						int var15 = arg0.field2203[var10] - arg4;
 						if (var15 >= arg1.field2218 && var15 <= arg1.field2230) {
 							for (int var16 = 0; var16 < var9; var16++) {
-								class93 var17 = arg1.field2215[var16];
-								class93 var18 = arg1.field2213[var16];
+								PointNormal var17 = arg1.field2215[var16];
+								PointNormal var18 = arg1.field2213[var16];
 								if (var8[var16] == var14 && arg1.field2203[var16] == var15 && arg1.field2228[var16] == var13 && var18.field2328 != 0) {
 									var11.field2312 += var18.field2312;
 									var11.field2307 += var18.field2307;
@@ -1593,7 +1593,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.j(III)I")
-	public int method78(int arg0, int arg1, int arg2) {
+	public int wallType(int arg0, int arg1, int arg2) {
 		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null || var4.field880 == null ? 0 : var4.field880.field531;
 	}
@@ -1730,7 +1730,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.l(III)V")
-	public void method81(int arg0, int arg1, int arg2) {
+	public void delObj(int arg0, int arg1, int arg2) {
 		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.field868 = null;
@@ -1738,7 +1738,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.m(III)Lcd;")
-	public class17 method82(int arg0, int arg1, int arg2) {
+	public Wall method82(int arg0, int arg1, int arg2) {
 		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null ? null : var4.field880;
 	}
@@ -1752,7 +1752,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(Lrc;IIIIIII)V")
-	public void method84(class105 arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public void method84(QuickGround arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		int var9;
 		int var10 = var9 = (arg6 << 7) - Statics.field103;
 		int var11;
@@ -1864,7 +1864,7 @@ public final class World {
 								Square var15 = this.field102[var12][var13][var14];
 								if (var15 != null) {
 									int var16 = (this.field132[var12][var13 + 1][var14] + this.field132[var12][var13][var14] + this.field132[var12][var13][var14 + 1] + this.field132[var12][var13 + 1][var14 + 1]) / 4 - (this.field132[arg1][arg2 + 1][arg3] + this.field132[arg1][arg2][arg3] + this.field132[arg1][arg2][arg3 + 1] + this.field132[arg1][arg2 + 1][arg3 + 1]) / 4;
-									class17 var17 = var15.field880;
+									Wall var17 = var15.field880;
 									if (var17 != null) {
 										if (var17.field536 instanceof Model) {
 											Model var18 = (Model) var17.field536;
@@ -1918,11 +1918,11 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIILvb;II)V")
-	public void method88(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6) {
+	public void setGroundDecor(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, int arg6) {
 		if (arg4 == null) {
 			return;
 		}
-		class52 var8 = new class52();
+		GroundDecor var8 = new GroundDecor();
 		var8.field1373 = arg4;
 		var8.field1368 = arg1 * 128 + 64;
 		var8.field1374 = arg2 * 128 + 64;
@@ -1936,7 +1936,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.p(III)Lid;")
-	public class52 method89(int arg0, int arg1, int arg2) {
+	public GroundDecor method89(int arg0, int arg1, int arg2) {
 		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null || var4.field883 == null ? null : var4.field883;
 	}
@@ -1999,7 +1999,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIIIILvb;III)Z")
-	public boolean method93(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, ModelSource arg6, int arg7, int arg8, int arg9) {
+	public boolean addScenery(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, ModelSource arg6, int arg7, int arg8, int arg9) {
 		if (arg6 == null) {
 			return true;
 		} else {
@@ -2069,8 +2069,8 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIILvb;ILvb;Lvb;)V")
-	public void method95(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, ModelSource arg6, ModelSource arg7) {
-		class113 var9 = new class113();
+	public void setObj(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, ModelSource arg6, ModelSource arg7) {
+		GroundObject var9 = new GroundObject();
 		var9.field2777 = arg4;
 		var9.field2796 = arg1 * 128 + 64;
 		var9.field2779 = arg2 * 128 + 64;

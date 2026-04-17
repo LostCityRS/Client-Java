@@ -1,9 +1,9 @@
-package deob;
+package jagex3.dash3d;
 
-import jagex3.dash3d.ModelSource;
+import deob.ObfuscatedName;
 
 @ObfuscatedName("rd")
-public final class class106 {
+public final class Decor {
 
 	@ObfuscatedName("rd.a")
 	public int field2658;

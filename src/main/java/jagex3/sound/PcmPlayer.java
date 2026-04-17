@@ -2,7 +2,6 @@ package jagex3.sound;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import deob.class14;
 import jagex3.callstack.JagException;
 import jagex3.client.SignLink;
 import jagex3.util.ArrayUtil;
@@ -11,12 +10,14 @@ import jagex3.util.ThreadUtil;
 import java.awt.*;
 
 @ObfuscatedName("pd")
-public abstract class PcmPlayer extends class14 implements Runnable {
+public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 
 	@ObfuscatedName("pd.O")
 	public static int[] field2347 = new int[256];
 	@ObfuscatedName("ad.e")
 	public static int frequency;
+	@ObfuscatedName("ca.n")
+	public static long field462;
 
 	@ObfuscatedName("pd.K")
 	public int field2343 = 0;
@@ -74,7 +75,7 @@ public abstract class PcmPlayer extends class14 implements Runnable {
 					} catch (Throwable var3) {
 					}
 				}
-				Statics.field217 = new class14(8000);
+				Statics.field217 = new PcmPlayerBase(8000);
 			}
 		}
 	}
