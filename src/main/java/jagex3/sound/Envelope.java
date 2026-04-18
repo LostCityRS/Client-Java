@@ -51,8 +51,8 @@ public final class Envelope {
 	@ObfuscatedName("c.a(Lba;)V")
 	public void method249(Packet arg0) {
 		this.field441 = arg0.g1();
-		this.field440 = arg0.method167();
-		this.field442 = arg0.method167();
+		this.field440 = arg0.g4();
+		this.field442 = arg0.g4();
 		this.method250(arg0);
 	}
 

@@ -227,7 +227,7 @@ public final class NpcType extends Linkable2 {
 			this.walkanim_l = arg1.g2();
 		} else if (arg0 >= 30 && arg0 < 35) {
 			this.op[arg0 - 30] = arg1.gjstr();
-			if (this.op[arg0 - 30].method14(Text.field2928)) {
+			if (this.op[arg0 - 30].equalsIgnoreCase(Text.field2928)) {
 				this.op[arg0 - 30] = null;
 			}
 		} else if (arg0 == 40) {

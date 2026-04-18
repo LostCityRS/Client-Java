@@ -92,8 +92,8 @@ public final class MidiParser {
 		this.field755 = new int[var2];
 		int var3 = 0;
 		while (var3 < var2) {
-			int var4 = this.field752.method167();
-			int var5 = this.field752.method167();
+			int var4 = this.field752.g4();
+			int var5 = this.field752.g4();
 			if (var4 == 1297379947) {
 				this.field755[var3] = this.field752.pos;
 				var3++;

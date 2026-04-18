@@ -1120,7 +1120,7 @@ public class ClientBuild {
 
 	@ObfuscatedName("kd.a(IIIZI)I")
 	public static int method627(int arg0, int arg1, int arg2, int arg3) {
-		int var4 = 65536 - Pix3D.field778[arg3 * 1024 / arg1] >> 1;
+		int var4 = 65536 - Pix3D.cosTable[arg3 * 1024 / arg1] >> 1;
 		return ((65536 - var4) * arg0 >> 16) + (arg2 * var4 >> 16);
 	}
 

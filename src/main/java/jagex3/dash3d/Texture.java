@@ -205,7 +205,7 @@ public final class Texture extends Linkable {
 		}
 		this.field2200 = new int[var2];
 		for (int var6 = 0; var6 < var2; var6++) {
-			this.field2200[var6] = arg0.method167();
+			this.field2200[var6] = arg0.g4();
 		}
 		this.field2191 = arg0.g1();
 		this.field2197 = arg0.g1();

@@ -739,6 +739,24 @@ public final class Client extends GameShell {
 	public static int[] waveAmbient = new int[50];
 	@ObfuscatedName("t.xb")
 	public static int tryMoveNearest = 0;
+    @ObfuscatedName("ub.t")
+    public static Pix32[] field3046 = new Pix32[1000];
+	@ObfuscatedName("nb.id")
+	public static int[] field2023 = new int[1000];
+	@ObfuscatedName("vb.tb")
+	public static JagString[] field3130 = new JagString[100];
+	@ObfuscatedName("pb.G")
+	public static int[] field2303 = new int[1000];
+	@ObfuscatedName("jc.lb")
+	public static int[] field1458 = new int[]{16776960, 16711680, 65280, 65535, 16711935, 16777215};
+	@ObfuscatedName("ua.q")
+	public static int[][] field3015 = new int[104][104];
+	@ObfuscatedName("cd.u")
+	public static int[] field549 = new int[25];
+	@ObfuscatedName("bb.c")
+	public static int[] field313 = new int[100];
+	@ObfuscatedName("vd.Ed")
+	public static int[] field3186 = new int[]{0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3};
 
 	@ObfuscatedName("dc.c(I)V")
 	public static void mainLoad() {
@@ -756,7 +774,7 @@ public final class Client extends GameShell {
 			for (int var2 = 0; var2 < 9; var2++) {
 				int var3 = var2 * 32 + 128 + 15;
 				int var4 = var3 * 3 + 600;
-				int var5 = Pix3D.field775[var3];
+				int var5 = Pix3D.sinTable[var3];
 				var1[var2] = var4 * var5 >> 16;
 			}
 			World.method51(var1);
@@ -1420,7 +1438,7 @@ public final class Client extends GameShell {
 			int var3 = in.method152();
 			int var4 = var3 >> 2;
 			int var5 = var3 & 0x3;
-			int var6 = Statics.field3186[var4];
+			int var6 = field3186[var4];
 			int var7 = in.method180();
 			if (var2 >= 0 && var1 >= 0 && var2 < 103 && var1 < 103) {
 				int var8 = ClientBuild.groundh[minusedlevel][var2][var1];
@@ -1465,7 +1483,7 @@ public final class Client extends GameShell {
 			int var17 = in.method147();
 			int var18 = var17 & 0x3;
 			int var19 = var17 >> 2;
-			int var20 = Statics.field3186[var19];
+			int var20 = field3186[var19];
 			int var21 = in.g2();
 			int var22 = in.method152();
 			int var23 = (var22 & 0x7) + zoneUpdateZ;
@@ -1534,7 +1552,7 @@ public final class Client extends GameShell {
 				int var54 = in.method147();
 				int var55 = var54 & 0x3;
 				int var56 = var54 >> 2;
-				int var57 = Statics.field3186[var56];
+				int var57 = field3186[var56];
 				if (var53 >= 0 && var52 >= 0 && var53 < 104 && var52 < 104) {
 					locChangeCreate(-1, var53, var55, -1, minusedlevel, var52, var57, var56, 0);
 				}
@@ -1547,7 +1565,7 @@ public final class Client extends GameShell {
 					int var62 = in.method152();
 					int var63 = var62 & 0x3;
 					int var64 = var62 >> 2;
-					int var65 = Statics.field3186[var64];
+					int var65 = field3186[var64];
 					int var66 = in.method156();
 					int var67 = (var66 & 0x7) + zoneUpdateZ;
 					int var68 = zoneUpdateX + (var66 >> 4 & 0x7);
@@ -2136,9 +2154,9 @@ public final class Client extends GameShell {
 								}
 							}
 						}
-						Statics.field3046[Statics.field1433] = field470[var15];
-						Statics.field2023[Statics.field1433] = var17;
-						Statics.field2303[Statics.field1433] = var16;
+						field3046[Statics.field1433] = field470[var15];
+						field2023[Statics.field1433] = var17;
+						field2303[Statics.field1433] = var16;
 						Statics.field1433++;
 					}
 				}
@@ -2274,7 +2292,7 @@ public final class Client extends GameShell {
 			if (field527 == 0) {
 				int var16 = 16776960;
 				if (field1687[var8] < 6) {
-					var16 = Statics.field1458[field1687[var8]];
+					var16 = field1458[field1687[var8]];
 				}
 				if (field1687[var8] == 6) {
 					var16 = field2399 % 20 >= 10 ? 16776960 : 16711680;
@@ -2334,7 +2352,7 @@ public final class Client extends GameShell {
 				if (field1670[var8] == 4) {
 					int var20 = b12.method208(var15);
 					int var21 = (150 - field1659[var8]) * (var20 + 100) / 150;
-					Pix2D.method912(field1072 - 50, 0, field1072 + 50, 334);
+					Pix2D.setClipping(field1072 - 50, 0, field1072 + 50, 334);
 					b12.drawString(var15, field1072 + 50 - var21, field2188 + 1, 0);
 					b12.drawString(var15, field1072 + 50 - var21, field2188, var16);
 					Pix2D.method919();
@@ -2342,7 +2360,7 @@ public final class Client extends GameShell {
 				if (field1670[var8] == 5) {
 					int var22 = 0;
 					int var23 = 150 - field1659[var8];
-					Pix2D.method912(0, field2188 - b12.field350 - 1, 512, field2188 + 5);
+					Pix2D.setClipping(0, field2188 - b12.field350 - 1, 512, field2188 + 5);
 					if (var23 < 25) {
 						var22 = var23 - 25;
 					} else if (var23 > 125) {
@@ -2545,7 +2563,7 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("client.a(IIIIIIII[Lqd;Z)Z")
 	public static boolean method278(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, IfType[] arg8) {
-		Pix2D.method912(arg2, arg1, arg6, arg5);
+		Pix2D.setClipping(arg2, arg1, arg6, arg5);
 		boolean var9 = true;
 		for (int var10 = 0; var10 < arg8.length; var10++) {
 			IfType var11 = arg8[var10];
@@ -2601,7 +2619,7 @@ public final class Client extends GameShell {
 						if (var11.field2519 != null) {
 							var9 &= method278(arg0, var13, var12, var11.field2552, var11.field2495, var13 + var11.field2449, var11.field2498 + var12, var11.field2537, var11.field2519);
 						}
-						Pix2D.method912(arg2, arg1, arg6, arg5);
+						Pix2D.setClipping(arg2, arg1, arg6, arg5);
 						if (var11.field2449 < var11.field2526) {
 							method601(var11.field2537, var11.field2526, var11.field2498 + var12, var11.field2449, var13);
 						}
@@ -2626,7 +2644,7 @@ public final class Client extends GameShell {
 											if (field475 == 1 && Statics.field2281 == var20 && Statics.field1075 == var11.field2495) {
 												var29 = 16777215;
 											}
-											Pix32 var30 = ObjType.method1007(var11.field2516[var20], var27, var29);
+											Pix32 var30 = ObjType.getSprite(var11.field2516[var20], var27, var29);
 											if (var30 == null) {
 												var9 = false;
 											} else {
@@ -2676,8 +2694,8 @@ public final class Client extends GameShell {
 												}
 												if (var30.owi == 33 || var11.field2516[var20] != 1) {
 													int var34 = var11.field2516[var20];
-													p11.drawString(ObjType.method862(var34), var23 + var26 + 1, var24 + 10 - -var28, 0);
-													p11.drawString(ObjType.method862(var34), var23 + var26, var24 - -9 + var28, 16776960);
+													p11.drawString(ObjType.invNumber(var34), var23 + var26 + 1, var24 + 10 - -var28, 0);
+													p11.drawString(ObjType.invNumber(var34), var23 + var26, var24 - -9 + var28, 16776960);
 												}
 											}
 										}
@@ -2737,7 +2755,7 @@ public final class Client extends GameShell {
 								}
 								if (var11.field2442 && var11.field2524 != -1) {
 									ObjType var39 = ObjType.list(var11.field2524);
-									var37 = var39.field2827;
+									var37 = var39.name;
 									if (var37 == null) {
 										var37 = Statics.field1631;
 									}
@@ -2749,7 +2767,7 @@ public final class Client extends GameShell {
 									var38 = var11.field2453;
 									var37 = Text.field957;
 								}
-								if (Statics.field2749 == 479) {
+								if (Pix2D.field2749 == 479) {
 									if (var38 == 16776960) {
 										var38 = 255;
 									}
@@ -2770,7 +2788,7 @@ public final class Client extends GameShell {
 								if (var11.field2524 == -1) {
 									var44 = var11.method857(false);
 								} else {
-									var44 = ObjType.method1007(var11.field2540, var11.field2524, 0);
+									var44 = ObjType.getSprite(var11.field2540, var11.field2524, 0);
 									var42 = var44.owi;
 									var43 = var44.ohi;
 									var44.ohi = 32;
@@ -2798,7 +2816,7 @@ public final class Client extends GameShell {
 										if (var52 > var48[3]) {
 											var52 = var48[3];
 										}
-										Pix2D.method912(var49, var50, var51, var52);
+										Pix2D.setClipping(var49, var50, var51, var52);
 										int var53 = (var11.field2498 + var46 - 1) / var46;
 										int var54 = (var11.field2449 + var45 - 1) / var45;
 										for (int var55 = 0; var55 < var53; var55++) {
@@ -2880,35 +2898,35 @@ public final class Client extends GameShell {
 							if (var11.field2524 != -1) {
 								ObjType var67 = ObjType.list(var11.field2524);
 								if (var67 != null) {
-									ObjType var68 = var67.method944(var11.field2540);
-									var59 = var68.method954(true, 1);
-									var62 = var68.field2858;
-									var63 = var68.field2841;
-									var65 = var68.field2837;
-									var61 = var68.field2875;
-									var66 = var68.field2848;
-									var64 = var68.field2861;
+									ObjType var68 = var67.getStackSizeAlt(var11.field2540);
+									var59 = var68.getModelLit(true, 1);
+									var62 = var68.zan2d;
+									var63 = var68.yof2d;
+									var65 = var68.xof2d;
+									var61 = var68.xan2d;
+									var66 = var68.zoom2d;
+									var64 = var68.yan2d;
 									if (var11.field2498 > 0) {
 										var66 = var66 * 32 / var11.field2498;
 									}
 								}
 							}
 							Pix3D.method364(var11.field2498 / 2 + var12, var11.field2449 / 2 + var13);
-							int var69 = Pix3D.field775[var61] * var66 >> 16;
-							int var70 = Pix3D.field778[var61] * var66 >> 16;
+							int var69 = Pix3D.sinTable[var61] * var66 >> 16;
+							int var70 = Pix3D.cosTable[var61] * var66 >> 16;
 							if (var59 != null) {
 								if (var11.field2442) {
-									var59.method766();
+									var59.calcBoundingCylinder();
 									if (var11.field2507) {
 										var59.method769(var64, var62, var61, var65, var59.field3135 / 2 + var63 + var69, var70 - -var63, var66);
 									} else {
-										var59.method780(var64, var62, var61, var65, var59.field3135 / 2 + var69 + var63, var63 + var70);
+										var59.objRender(var64, var62, var61, var65, var59.field3135 / 2 + var69 + var63, var63 + var70);
 									}
 								} else {
-									var59.method780(var64, 0, var61, 0, var69, var70);
+									var59.objRender(var64, 0, var61, 0, var69, var70);
 								}
 							}
-							Pix3D.method356();
+							Pix3D.setRenderClipping();
 						} else {
 							if (var11.field2489 == 7) {
 								PixFont var71 = var11.method861();
@@ -2923,7 +2941,7 @@ public final class Client extends GameShell {
 									for (int var74 = 0; var74 < var11.field2498; var74++) {
 										if (var11.field2491[var72] > 0) {
 											ObjType var75 = ObjType.list(var11.field2491[var72] - 1);
-											JagString var76 = var75.field2827;
+											JagString var76 = var75.name;
 											if (var76 == null) {
 												var76 = Statics.field1631;
 											}
@@ -3228,7 +3246,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 12) {
 				field1055 = true;
-				int var21 = in.method167();
+				int var21 = in.g4();
 				IfType var22 = IfType.method1053(var21);
 				if (var22.field2442) {
 					IfType[] var24 = IfType.field2922[var21 >> 16];
@@ -3249,7 +3267,7 @@ public final class Client extends GameShell {
 				for (int var28 = 0; var28 < var27; var28++) {
 					int var29 = in.method152();
 					if (var29 == 255) {
-						var29 = in.method167();
+						var29 = in.g4();
 					}
 					int var30 = in.method137();
 					if (var22.field2442) {
@@ -3407,7 +3425,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 24) {
 				int var70 = in.g2b();
-				int var71 = in.method167();
+				int var71 = in.g4();
 				IfType var72 = IfType.method1053(var71);
 				if (var72.field2465 != var70 || var70 == -1) {
 					var72.field2466 = 0;
@@ -3497,7 +3515,7 @@ public final class Client extends GameShell {
 				int var84 = in.method156();
 				int var85 = in.g1();
 				if (var85 >= 1 && var85 <= 5) {
-					if (var83.method14(Statics.field1631)) {
+					if (var83.equalsIgnoreCase(Statics.field1631)) {
 						var83 = null;
 					}
 					playerOp[var85 - 1] = var83;
@@ -3976,11 +3994,11 @@ public final class Client extends GameShell {
 					return true;
 				} else {
 					ObjType var126 = ObjType.list(var123);
-					var125.field2496 = var126.field2875;
+					var125.field2496 = var126.xan2d;
 					var125.field2479 = var123;
 					var125.field2493 = 4;
-					var125.field2534 = var126.field2848 * 100 / var122;
-					var125.field2463 = var126.field2861;
+					var125.field2534 = var126.zoom2d * 100 / var122;
+					var125.field2463 = var126.yan2d;
 				}
 				ptype = -1;
 				return true;
@@ -4057,17 +4075,17 @@ public final class Client extends GameShell {
 				int var146 = in.method146();
 				Statics.field1483[var145] = var146;
 				field724[var145] = var144;
-				Statics.field549[var145] = 1;
+				field549[var145] = 1;
 				for (int var147 = 0; var147 < 98; var147++) {
 					if (Statics.field1514[var147] <= var146) {
-						Statics.field549[var145] = var147 + 2;
+						field549[var145] = var147 + 2;
 					}
 				}
 				ptype = -1;
 				return true;
 			}
 			if (ptype == 3) {
-				int var148 = in.method167();
+				int var148 = in.g4();
 				int var149 = in.method160();
 				int var150 = in.method160();
 				IfType var151 = IfType.method1053(var148);
@@ -4100,7 +4118,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 214) {
 				field1055 = true;
-				int var154 = in.method167();
+				int var154 = in.g4();
 				IfType var155 = IfType.method1053(var154);
 				while (true) {
 					while (psize > in.pos) {
@@ -4110,7 +4128,7 @@ public final class Client extends GameShell {
 						if (var157 != 0) {
 							var158 = in.g1();
 							if (var158 == 255) {
-								var158 = in.method167();
+								var158 = in.g4();
 							}
 						}
 						if (var155.field2442) {
@@ -4917,8 +4935,8 @@ public final class Client extends GameShell {
 		var1 -= 75;
 		var0 -= 73;
 		int var2 = macroMinimapAngle + field2797 & 0x7FF;
-		int var3 = Pix3D.field775[var2];
-		int var4 = Pix3D.field778[var2];
+		int var3 = Pix3D.sinTable[var2];
+		int var4 = Pix3D.cosTable[var2];
 		int var5 = (macroMinimapZoom + 256) * var4 >> 8;
 		int var6 = (macroMinimapZoom + 256) * var3 >> 8;
 		int var7 = var1 * var6 + var0 * var5 >> 11;
@@ -5015,10 +5033,10 @@ public final class Client extends GameShell {
 				if (var5 >= 0 && var5 < 104 && var6 >= 0 && var6 < 104) {
 					if (var4.field73 == null || var4.field91 > loopCycle || loopCycle >= var4.field82) {
 						if ((var4.field1972 & 0x7F) == 64 && (var4.field1963 & 0x7F) == 64) {
-							if (Statics.field3015[var5][var6] == field2399) {
+							if (field3015[var5][var6] == field2399) {
 								continue;
 							}
-							Statics.field3015[var5][var6] = field2399;
+							field3015[var5][var6] = field2399;
 						}
 						var4.field84 = getAvH(minusedlevel, var4.field1972, var4.field1963);
 						world.method90(minusedlevel, var4.field1972, var4.field1963, var4.field84, 60, var4, var4.yaw, var3, var4.field1979);
@@ -5048,7 +5066,7 @@ public final class Client extends GameShell {
 			}
 			if ((var3 & 0x20) != 0) {
 				var2.field1965 = in.method180();
-				int var6 = in.method167();
+				int var6 = in.g4();
 				var2.field2003 = 0;
 				var2.field1967 = (var6 & 0xFFFF) + loopCycle;
 				var2.field1984 = var6 >> 16;
@@ -5390,7 +5408,7 @@ public final class Client extends GameShell {
 			}
 			if (var5 != null) {
 				for (int var6 = 4; var6 >= 0; var6--) {
-					if (var5[var6] != null && !var5[var6].method14(Text.field1522)) {
+					if (var5[var6] != null && !var5[var6].equalsIgnoreCase(Text.field1522)) {
 						byte var7 = 0;
 						if (var6 == 0) {
 							var7 = 12;
@@ -5413,7 +5431,7 @@ public final class Client extends GameShell {
 			}
 			if (var5 != null) {
 				for (int var8 = 4; var8 >= 0; var8--) {
-					if (var5[var8] != null && var5[var8].method14(Text.field1522)) {
+					if (var5[var8] != null && var5[var8].equalsIgnoreCase(Text.field1522)) {
 						short var9 = 0;
 						if (localPlayer.field68 < arg3.vislevel) {
 							var9 = 2000;
@@ -5584,10 +5602,10 @@ public final class Client extends GameShell {
 				int var5 = var2.field1963 >> 7;
 				if (var4 >= 0 && var4 < 104 && var5 >= 0 && var5 < 104) {
 					if (var2.size == 1 && (var2.field1972 & 0x7F) == 64 && (var2.field1963 & 0x7F) == 64) {
-						if (Statics.field3015[var4][var5] == field2399) {
+						if (field3015[var4][var5] == field2399) {
 							continue;
 						}
-						Statics.field3015[var4][var5] = field2399;
+						field3015[var4][var5] = field2399;
 					}
 					if (!var2.type.active) {
 						var3 += Integer.MIN_VALUE;
@@ -6027,7 +6045,7 @@ public final class Client extends GameShell {
 				if (playerOp[var5] != null) {
 					int var6 = 0;
 					short var7 = 0;
-					if (playerOp[var5].method14(Text.field1522)) {
+					if (playerOp[var5].equalsIgnoreCase(Text.field1522)) {
 						if (localPlayer.field68 < arg2.field68) {
 							var7 = 2000;
 						}
@@ -6097,7 +6115,7 @@ public final class Client extends GameShell {
 					var6 = field724[var2[var4++]];
 				}
 				if (var8 == 2) {
-					var6 = Statics.field549[var2[var4++]];
+					var6 = field549[var2[var4++]];
 				}
 				if (var8 == 3) {
 					var6 = Statics.field1483[var2[var4++]];
@@ -6110,7 +6128,7 @@ public final class Client extends GameShell {
 					int var10 = var9 + var2[var4++];
 					IfType var11 = IfType.method1053(var10);
 					int var12 = var2[var4++];
-					if (var12 != -1 && (!ObjType.list(var12).field2880 || memServer)) {
+					if (var12 != -1 && (!ObjType.list(var12).members || memServer)) {
 						for (int var13 = 0; var13 < var11.field2491.length; var13++) {
 							if (var12 + 1 == var11.field2491[var13]) {
 								var6 += var11.field2516[var13];
@@ -6122,7 +6140,7 @@ public final class Client extends GameShell {
 					var6 = VarCache.var[var2[var4++]];
 				}
 				if (var8 == 6) {
-					var6 = Statics.field1514[Statics.field549[var2[var4++]] - 1];
+					var6 = Statics.field1514[field549[var2[var4++]] - 1];
 				}
 				if (var8 == 7) {
 					var6 = VarCache.var[var2[var4++]] * 100 / 46875;
@@ -6133,7 +6151,7 @@ public final class Client extends GameShell {
 				if (var8 == 9) {
 					for (int var14 = 0; var14 < 25; var14++) {
 						if (Statics.field1190[var14]) {
-							var6 += Statics.field549[var14];
+							var6 += field549[var14];
 						}
 					}
 				}
@@ -6142,7 +6160,7 @@ public final class Client extends GameShell {
 					int var16 = var15 + var2[var4++];
 					IfType var17 = IfType.method1053(var16);
 					int var18 = var2[var4++];
-					if (var18 != -1 && (!ObjType.list(var18).field2880 || memServer)) {
+					if (var18 != -1 && (!ObjType.list(var18).members || memServer)) {
 						for (int var19 = 0; var19 < var17.field2491.length; var19++) {
 							if (var18 + 1 == var17.field2491[var19]) {
 								var6 = 999999999;
@@ -6494,7 +6512,7 @@ public final class Client extends GameShell {
 				Statics.field3209 = Statics.field3210;
 			}
 			PixFont var15 = p12;
-			Pix2D.method912(0, 0, 463, 77);
+			Pix2D.setClipping(0, 0, 463, 77);
 			for (int var16 = 0; var16 < field2330; var16++) {
 				int var17 = var16 * 14 + 18 - field1390;
 				if (var17 > 0 && var17 < 110) {
@@ -6523,11 +6541,11 @@ public final class Client extends GameShell {
 		} else if (field2421 == -1) {
 			int var1 = 0;
 			PixFont var2 = p12;
-			Pix2D.method912(0, 0, 463, 77);
+			Pix2D.setClipping(0, 0, 463, 77);
 			for (int var3 = 0; var3 < 100; var3++) {
 				if (field2034[var3] != null) {
 					int var4 = Statics.field3236[var3];
-					JagString var5 = Statics.field3130[var3];
+					JagString var5 = field3130[var3];
 					int var6 = field1340 + 70 - var1 * 14;
 					byte var7 = 0;
 					if (var5 != null && var5.method26(Statics.field2612)) {
@@ -6810,9 +6828,9 @@ public final class Client extends GameShell {
 						for (ClientObj var22 = (ClientObj) var21.tail(); var22 != null; var22 = (ClientObj) var21.prev()) {
 							ObjType var23 = ObjType.list(var22.id);
 							if (field475 == 1) {
-								method398(var22.id, Text.field584, var4, var3, 47, JagString.join(new JagString[]{Statics.field3177, Statics.field328, var23.field2827}));
+								method398(var22.id, Text.field584, var4, var3, 47, JagString.join(new JagString[]{Statics.field3177, Statics.field328, var23.name}));
 							} else if (field594 != 1) {
-								JagString[] var24 = var23.field2835;
+								JagString[] var24 = var23.op;
 								if (field2934) {
 									var24 = Statics.method905(var24);
 								}
@@ -6834,14 +6852,14 @@ public final class Client extends GameShell {
 										if (var25 == 4) {
 											var26 = 36;
 										}
-										method398(var22.id, var24[var25], var4, var3, var26, JagString.join(new JagString[]{field2334, var23.field2827}));
+										method398(var22.id, var24[var25], var4, var3, var26, JagString.join(new JagString[]{field2334, var23.name}));
 									} else if (var25 == 2) {
-										method398(var22.id, Text.field1594, var4, var3, 3, JagString.join(new JagString[]{field2334, var23.field2827}));
+										method398(var22.id, Text.field1594, var4, var3, 3, JagString.join(new JagString[]{field2334, var23.name}));
 									}
 								}
-								method398(var22.id, Text.field2805, var4, var3, 1003, JagString.join(new JagString[]{field2334, var23.field2827}));
+								method398(var22.id, Text.field2805, var4, var3, 1003, JagString.join(new JagString[]{field2334, var23.name}));
 							} else if ((Statics.field2846 & 0x1) == 1) {
-								method398(var22.id, Statics.field1523, var4, var3, 15, JagString.join(new JagString[]{Statics.field1384, Statics.field328, var23.field2827}));
+								method398(var22.id, Statics.field1523, var4, var3, 15, JagString.join(new JagString[]{Statics.field1384, Statics.field328, var23.name}));
 							}
 						}
 					}
@@ -6964,7 +6982,7 @@ public final class Client extends GameShell {
 				boolean var12 = false;
 				for (int var13 = 0; var13 < playerCount; var13++) {
 					ClientPlayer var14 = players[playerIds[var13]];
-					if (var14 != null && var14.field86 != null && var14.field86.method14(var11)) {
+					if (var14 != null && var14.field86 != null && var14.field86.equalsIgnoreCase(var11)) {
 						var12 = true;
 						tryMove(1, 0, localPlayer.field1962[0], var14.field1962[0], 0, false, 0, 1, localPlayer.field2009[0], var14.field2009[0], 2);
 						if (var3 == 26) {
@@ -7105,7 +7123,7 @@ public final class Client extends GameShell {
 			Statics.field2281 = var1;
 			Statics.field1075 = var2;
 			field475 = 1;
-			Statics.field3177 = JagString.join(new JagString[]{field2334, ObjType.list(var4).field2827, Statics.field1393});
+			Statics.field3177 = JagString.join(new JagString[]{field2334, ObjType.list(var4).name, Statics.field1393});
 			field594 = 0;
 			if (Statics.field3177 == null) {
 				Statics.field3177 = Statics.field1631;
@@ -7292,7 +7310,7 @@ public final class Client extends GameShell {
 				out.p1Enc(151);
 				out.method154(var4);
 			} else {
-				method758(0, JagString.join(new JagString[]{Statics.method502(var36.field2540), Statics.field3203, ObjType.list(var4).field2827}), Statics.field3234);
+				method758(0, JagString.join(new JagString[]{Statics.method502(var36.field2540), Statics.field3203, ObjType.list(var4).name}), Statics.field3234);
 			}
 		}
 		if (var3 == 42) {
@@ -7419,7 +7437,7 @@ public final class Client extends GameShell {
 				out.p1Enc(151);
 				out.method154(var4);
 			} else {
-				method758(0, JagString.join(new JagString[]{Statics.method502(var50.field2516[var1]), Statics.field3203, ObjType.list(var4).field2827}), Statics.field3234);
+				method758(0, JagString.join(new JagString[]{Statics.method502(var50.field2516[var1]), Statics.field3203, ObjType.list(var4).name}), Statics.field3234);
 			}
 			field2649 = var1;
 			field1154 = 0;
@@ -7862,7 +7880,7 @@ public final class Client extends GameShell {
 		}
 		field321 = 0;
 		field187.method1054();
-		field92 = Pix3D.method362(field92);
+		field92 = Pix2D.restoreClipping(field92);
 		Pix2D.method920();
 		method478(field1143, 503, 0, 765);
 		if (field1881 != -1) {
@@ -8428,7 +8446,7 @@ public final class Client extends GameShell {
 		}
 		for (int var2 = 0; var2 < 100; var2++) {
 			if (field2034[var2] != null) {
-				JagString var3 = Statics.field3130[var2];
+				JagString var3 = field3130[var2];
 				byte var4 = 0;
 				int var5 = Statics.field3236[var2];
 				if (var3 != null && var3.method26(Statics.field2612)) {
@@ -8494,7 +8512,7 @@ public final class Client extends GameShell {
 		for (int var1 = 0; var1 < 100; var1++) {
 			if (field2034[var1] != null) {
 				int var2 = Statics.field3236[var1];
-				JagString var3 = Statics.field3130[var1];
+				JagString var3 = field3130[var1];
 				if (var3 != null && var3.method26(Statics.field2612)) {
 					var3 = var3.method1(5);
 				}
@@ -9582,10 +9600,10 @@ public final class Client extends GameShell {
 										ObjType var22 = ObjType.list(var12.field2491[var17] - 1);
 										if (field475 == 1 && var12.field2533) {
 											if (Statics.field1075 != var12.field2495 || Statics.field2281 != var17) {
-												method398(var22.id, Text.field584, var12.field2495, var17, 56, JagString.join(new JagString[]{Statics.field3177, Statics.field328, var22.field2827}));
+												method398(var22.id, Text.field584, var12.field2495, var17, 56, JagString.join(new JagString[]{Statics.field3177, Statics.field328, var22.name}));
 											}
 										} else if (field594 != 1 || !var12.field2533) {
-											JagString[] var23 = var22.field2830;
+											JagString[] var23 = var22.iop;
 											if (field2934) {
 												var23 = Statics.method905(var23);
 											}
@@ -9598,14 +9616,14 @@ public final class Client extends GameShell {
 														} else {
 															var25 = 11;
 														}
-														method398(var22.id, var23[var24], var12.field2495, var17, var25, JagString.join(new JagString[]{field2334, var22.field2827}));
+														method398(var22.id, var23[var24], var12.field2495, var17, var25, JagString.join(new JagString[]{field2334, var22.name}));
 													} else if (var24 == 4) {
-														method398(var22.id, Text.field487, var12.field2495, var17, 11, JagString.join(new JagString[]{field2334, var22.field2827}));
+														method398(var22.id, Text.field487, var12.field2495, var17, 11, JagString.join(new JagString[]{field2334, var22.name}));
 													}
 												}
 											}
 											if (var12.field2461) {
-												method398(var22.id, Text.field584, var12.field2495, var17, 19, JagString.join(new JagString[]{field2334, var22.field2827}));
+												method398(var22.id, Text.field584, var12.field2495, var17, 19, JagString.join(new JagString[]{field2334, var22.name}));
 											}
 											if (var12.field2533 && var23 != null) {
 												for (int var26 = 2; var26 >= 0; var26--) {
@@ -9620,7 +9638,7 @@ public final class Client extends GameShell {
 														if (var26 == 2) {
 															var27 = 31;
 														}
-														method398(var22.id, var23[var26], var12.field2495, var17, var27, JagString.join(new JagString[]{field2334, var22.field2827}));
+														method398(var22.id, var23[var26], var12.field2495, var17, var27, JagString.join(new JagString[]{field2334, var22.name}));
 													}
 												}
 											}
@@ -9647,13 +9665,13 @@ public final class Client extends GameShell {
 														if (var29 == 4) {
 															var30 = 24;
 														}
-														method398(var22.id, var28[var29], var12.field2495, var17, var30, JagString.join(new JagString[]{field2334, var22.field2827}));
+														method398(var22.id, var28[var29], var12.field2495, var17, var30, JagString.join(new JagString[]{field2334, var22.name}));
 													}
 												}
 											}
-											method398(var22.id, Text.field2805, var12.field2495, var17, 1006, JagString.join(new JagString[]{field2334, var22.field2827}));
+											method398(var22.id, Text.field2805, var12.field2495, var17, 1006, JagString.join(new JagString[]{field2334, var22.name}));
 										} else if ((Statics.field2846 & 0x10) == 16) {
-											method398(var22.id, Statics.field1523, var12.field2495, var17, 37, JagString.join(new JagString[]{Statics.field1384, Statics.field328, var22.field2827}));
+											method398(var22.id, Statics.field1523, var12.field2495, var17, 37, JagString.join(new JagString[]{Statics.field1384, Statics.field328, var22.name}));
 										}
 									}
 								}
@@ -9664,39 +9682,39 @@ public final class Client extends GameShell {
 					if (var12.field2442 && var12.field2524 != -1 && arg7 >= var14 && arg4 >= var13 && arg7 < var12.field2498 + var14 && arg4 < var12.field2449 + var13) {
 						ObjType var31 = ObjType.list(var12.field2524);
 						if (var12.field2533) {
-							JagString[] var32 = var31.field2830;
+							JagString[] var32 = var31.iop;
 							if (field2934) {
 								var32 = Statics.method905(var32);
 							}
 							if (var32 == null || var32[4] == null) {
-								method398(var31.id, Text.field487, var12.field2495, var12.field2542 - 1, 11, JagString.join(new JagString[]{field2334, var31.field2827}));
+								method398(var31.id, Text.field487, var12.field2495, var12.field2542 - 1, 11, JagString.join(new JagString[]{field2334, var31.name}));
 							} else {
-								method398(var31.id, var32[4], var12.field2495, var12.field2542 - 1, 11, JagString.join(new JagString[]{field2334, var31.field2827}));
+								method398(var31.id, var32[4], var12.field2495, var12.field2542 - 1, 11, JagString.join(new JagString[]{field2334, var31.name}));
 							}
 							if (var32 != null && var32[3] != null) {
-								method398(var31.id, var32[3], var12.field2495, var12.field2542 - 1, 43, JagString.join(new JagString[]{field2334, var31.field2827}));
+								method398(var31.id, var32[3], var12.field2495, var12.field2542 - 1, 43, JagString.join(new JagString[]{field2334, var31.name}));
 							}
 							if (var32 != null && var32[2] != null) {
-								method398(var31.id, var32[2], var12.field2495, var12.field2542 - 1, 31, JagString.join(new JagString[]{field2334, var31.field2827}));
+								method398(var31.id, var32[2], var12.field2495, var12.field2542 - 1, 31, JagString.join(new JagString[]{field2334, var31.name}));
 							}
 							if (var32 != null && var32[1] != null) {
-								method398(var31.id, var32[1], var12.field2495, var12.field2542 - 1, 6, JagString.join(new JagString[]{field2334, var31.field2827}));
+								method398(var31.id, var32[1], var12.field2495, var12.field2542 - 1, 6, JagString.join(new JagString[]{field2334, var31.name}));
 							}
 							if (var32 != null && var32[0] != null) {
-								method398(var31.id, var32[0], var12.field2495, var12.field2542 - 1, 52, JagString.join(new JagString[]{field2334, var31.field2827}));
+								method398(var31.id, var32[0], var12.field2495, var12.field2542 - 1, 52, JagString.join(new JagString[]{field2334, var31.name}));
 							}
 						}
 						if (var12.field2495 >= 0) {
-							method398(var31.id, Text.field2805, var12.field2495, -1, 1007, JagString.join(new JagString[]{field2334, var31.field2827}));
+							method398(var31.id, Text.field2805, var12.field2495, -1, 1007, JagString.join(new JagString[]{field2334, var31.name}));
 						} else {
-							method398(var31.id, Text.field2805, var12.field2454, var12.field2495 & 0x7FFF, 1007, JagString.join(new JagString[]{field2334, var31.field2827}));
+							method398(var31.id, Text.field2805, var12.field2454, var12.field2495 & 0x7FFF, 1007, JagString.join(new JagString[]{field2334, var31.name}));
 						}
 					}
 					if (var12.field2494 && var12.field2467 != null && var14 <= arg7 && var13 <= arg4 && var12.field2498 + var14 > arg7 && arg4 < var12.field2449 + var13) {
 						JagString var33 = Statics.field3234;
 						if (var12.field2524 != -1) {
 							ObjType var34 = ObjType.list(var12.field2524);
-							var33 = JagString.join(new JagString[]{field2334, var34.field2827});
+							var33 = JagString.join(new JagString[]{field2334, var34.name});
 						}
 						for (int var35 = var12.field2467.length - 1; var35 >= 0; var35--) {
 							if (var12.field2467[var35] != null) {
@@ -9732,7 +9750,7 @@ public final class Client extends GameShell {
 	public static void method717() {
 		method594();
 		if (field1587 == 2) {
-			int[] var0 = Statics.field2747;
+			int[] var0 = Pix2D.pixels;
 			byte[] var1 = field1845.data;
 			int var2 = var1.length;
 			for (int var3 = 0; var3 < var2; var3++) {
@@ -9749,9 +9767,9 @@ public final class Client extends GameShell {
 		int var6 = macroMinimapAngle + field2797 & 0x7FF;
 		field2626.method554(25, 5, 146, 151, var4, var5, var6, macroMinimapZoom + 256, field2588, field1842);
 		for (int var7 = 0; var7 < Statics.field1433; var7++) {
-			int var8 = Statics.field2023[var7] * 4 + 2 - localPlayer.field1972 / 32;
-			int var9 = Statics.field2303[var7] * 4 + 2 - localPlayer.field1963 / 32;
-			method387(var9, var8, Statics.field3046[var7]);
+			int var8 = field2023[var7] * 4 + 2 - localPlayer.field1972 / 32;
+			int var9 = field2303[var7] * 4 + 2 - localPlayer.field1963 / 32;
+			method387(var9, var8, field3046[var7]);
 		}
 		for (int var10 = 0; var10 < 104; var10++) {
 			for (int var11 = 0; var11 < 104; var11++) {
@@ -10156,7 +10174,7 @@ public final class Client extends GameShell {
 				if (var4 == 0) {
 					var2++;
 				}
-				JagString var6 = Statics.field3130[var3];
+				JagString var6 = field3130[var3];
 				if (var6 != null && var6.method26(Statics.field2612)) {
 					var6 = var6.method1(5);
 				}
@@ -10719,11 +10737,11 @@ public final class Client extends GameShell {
 		}
 		for (int var3 = 99; var3 > 0; var3--) {
 			Statics.field3236[var3] = Statics.field3236[var3 - 1];
-			Statics.field3130[var3] = Statics.field3130[var3 - 1];
+			field3130[var3] = field3130[var3 - 1];
 			field2034[var3] = field2034[var3 - 1];
 		}
 		Statics.field3236[0] = arg0;
-		Statics.field3130[0] = arg2;
+		field3130[0] = arg2;
 		field2034[0] = arg1;
 	}
 
@@ -10754,7 +10772,7 @@ public final class Client extends GameShell {
 	public static void method986() {
 		field1167.method1054();
 		field1366.method329(0, 0);
-		field1096 = Pix3D.method362(field1096);
+		field1096 = Pix2D.restoreClipping(field1096);
 	}
 
 	@ObfuscatedName("j.a(BLa;)V")
@@ -10777,15 +10795,15 @@ public final class Client extends GameShell {
 				label46:
 				for (int var7 = 0; var7 < ObjType.numDefinitions; var7++) {
 					ObjType var8 = ObjType.list(var7);
-					if (var8.field2838 == -1 && var8.field2827 != null) {
-						JagString var9 = var8.field2827.method30();
+					if (var8.certtemplate == -1 && var8.name != null) {
+						JagString var9 = var8.name.method30();
 						for (int var10 = 0; var10 < var3; var10++) {
 							if (var9.method11(var2[var10]) == -1) {
 								continue label46;
 							}
 						}
 						Statics.field1017[field2330] = var9;
-						Statics.field313[field2330] = var7;
+						field313[field2330] = var7;
 						field2330++;
 						if (field2330 >= Statics.field1017.length) {
 							return;
@@ -10939,7 +10957,7 @@ public final class Client extends GameShell {
 	public static void method473() {
 		field1558.method1054();
 		field2187.method329(0, 0);
-		field320 = Pix3D.method362(field320);
+		field320 = Pix2D.restoreClipping(field320);
 	}
 
 	@ObfuscatedName("be.a(La;I)Z")
@@ -10948,11 +10966,11 @@ public final class Client extends GameShell {
 			return false;
 		}
 		for (int var1 = 0; var1 < field1492; var1++) {
-			if (arg0.method14(field2951[var1])) {
+			if (arg0.equalsIgnoreCase(field2951[var1])) {
 				return true;
 			}
 		}
-		return arg0.method14(localPlayer.field86);
+		return arg0.equalsIgnoreCase(localPlayer.field86);
 	}
 
 	@ObfuscatedName("pb.d(B)V")
@@ -10978,7 +10996,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("w.b(B)V")
 	public static void method1028() {
 		field925.method1054();
-		field1347 = Pix3D.method362(field1347);
+		field1347 = Pix2D.restoreClipping(field1347);
 	}
 
 	@ObfuscatedName("client.b(II)V")

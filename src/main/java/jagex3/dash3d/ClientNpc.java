@@ -23,7 +23,7 @@ public final class ClientNpc extends ClientEntity {
 		if (var3 == null) {
 			return null;
 		}
-		var3.method766();
+		var3.calcBoundingCylinder();
 		super.field1991 = var3.field3135;
 		if (super.field1965 != -1 && super.field2014 != -1) {
 			Model var4 = SpotType.list(super.field1965).getTempModel2(super.field2014);
@@ -34,7 +34,7 @@ public final class ClientNpc extends ClientEntity {
 			}
 		}
 		if (this.type.size == 1) {
-			var3.field2205 = true;
+			var3.useAABBMouseCheck = true;
 		}
 		return var3;
 	}

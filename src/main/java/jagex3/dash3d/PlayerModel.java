@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.config.IdkType;
 import jagex3.config.NpcType;
 import jagex3.config.ObjType;
@@ -14,6 +13,12 @@ public final class PlayerModel {
 
 	@ObfuscatedName("bd.s")
 	public static LruCache field379 = new LruCache(260);
+    @ObfuscatedName("mc.t")
+    public static int[] field1865 = new int[]{9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 58654, 5027, 1457, 16565, 34991, 25486};
+	@ObfuscatedName("tb.Rb")
+	public static int[][] field2894 = new int[][]{{6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 2983, 54193}, {8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003, 25239}, {25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003}, {4626, 11146, 6439, 12, 4758, 10270}, {4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574}};
+	@ObfuscatedName("t.wb")
+	public static int[] field2808 = new int[]{8, 11, 4, 6, 9, 7, 10};
 	@ObfuscatedName("la.d")
 	public boolean field1658;
 
@@ -46,7 +51,7 @@ public final class PlayerModel {
 	public void method635(Packet arg0) {
 		arg0.p1(this.field1658 ? 1 : 0);
 		for (int var2 = 0; var2 < 7; var2++) {
-			int var3 = this.field1667[Statics.field2808[var2]];
+			int var3 = this.field1667[field2808[var2]];
 			if (var3 == 0) {
 				arg0.p1(-1);
 			} else {
@@ -87,7 +92,7 @@ public final class PlayerModel {
 				if (var12 >= 256 && var12 < 512 && !IdkType.list(var12 - 256).checkModel()) {
 					var10 = true;
 				}
-				if (var12 >= 512 && !ObjType.list(var12 - 512).method940(this.field1658)) {
+				if (var12 >= 512 && !ObjType.list(var12 - 512).checkWearModel(this.field1658)) {
 					var10 = true;
 				}
 			}
@@ -111,7 +116,7 @@ public final class PlayerModel {
 						}
 					}
 					if (var16 >= 512) {
-						Model var18 = ObjType.list(var16 - 512).method941(this.field1658);
+						Model var18 = ObjType.list(var16 - 512).getWearModelNoCheck(this.field1658);
 						if (var18 != null) {
 							var13[var14++] = var18;
 						}
@@ -120,9 +125,9 @@ public final class PlayerModel {
 				var9 = new Model(var13, var14);
 				for (int var19 = 0; var19 < 5; var19++) {
 					if (this.field1688[var19] != 0) {
-						var9.recolour(Statics.field2894[var19][0], Statics.field2894[var19][this.field1688[var19]]);
+						var9.recolour(field2894[var19][0], field2894[var19][this.field1688[var19]]);
 						if (var19 == 1) {
-							var9.recolour(Statics.field1865[0], Statics.field1865[this.field1688[var19]]);
+							var9.recolour(field1865[0], field1865[this.field1688[var19]]);
 						}
 					}
 				}
@@ -190,7 +195,7 @@ public final class PlayerModel {
 			if (var3 >= 256 && var3 < 512 && !IdkType.list(var3 - 256).checkHead()) {
 				var1 = true;
 			}
-			if (var3 >= 512 && !ObjType.list(var3 - 512).method939(this.field1658)) {
+			if (var3 >= 512 && !ObjType.list(var3 - 512).checkHeadModel(this.field1658)) {
 				var1 = true;
 			}
 		}
@@ -208,7 +213,7 @@ public final class PlayerModel {
 				}
 			}
 			if (var7 >= 512) {
-				Model var9 = ObjType.list(var7 - 512).method948(this.field1658);
+				Model var9 = ObjType.list(var7 - 512).getHeadModelNoCheck(this.field1658);
 				if (var9 != null) {
 					var4[var5++] = var9;
 				}
@@ -217,9 +222,9 @@ public final class PlayerModel {
 		Model var10 = new Model(var4, var5);
 		for (int var11 = 0; var11 < 5; var11++) {
 			if (this.field1688[var11] != 0) {
-				var10.recolour(Statics.field2894[var11][0], Statics.field2894[var11][this.field1688[var11]]);
+				var10.recolour(field2894[var11][0], field2894[var11][this.field1688[var11]]);
 				if (var11 == 1) {
-					var10.recolour(Statics.field1865[0], Statics.field1865[this.field1688[var11]]);
+					var10.recolour(field1865[0], field1865[this.field1688[var11]]);
 				}
 			}
 		}
@@ -234,7 +239,7 @@ public final class PlayerModel {
 				for (int var6 = 0; var6 < IdkType.numDefinitions; var6++) {
 					IdkType var7 = IdkType.list(var6);
 					if (var7 != null && !var7.disable && var5 + (arg1 ? 7 : 0) == var7.type) {
-						arg0[Statics.field2808[var5]] = var6 + 256;
+						arg0[field2808[var5]] = var6 + 256;
 						break;
 					}
 				}
@@ -252,7 +257,7 @@ public final class PlayerModel {
 		if (arg0 == 1 && this.field1658) {
 			return;
 		}
-		int var3 = this.field1667[Statics.field2808[arg0]];
+		int var3 = this.field1667[field2808[arg0]];
 		if (var3 == 0) {
 			return;
 		}
@@ -272,7 +277,7 @@ public final class PlayerModel {
 			}
 			var4 = IdkType.list(var3);
 		} while (var4 == null || var4.disable || var4.type != arg0 + (this.field1658 ? 7 : 0));
-		this.field1667[Statics.field2808[arg0]] = var3 + 256;
+		this.field1667[field2808[arg0]] = var3 + 256;
 		this.method638();
 	}
 
@@ -288,13 +293,13 @@ public final class PlayerModel {
 		int var3 = this.field1688[arg1];
 		if (arg0) {
 			var3++;
-			if (var3 >= Statics.field2894[arg1].length) {
+			if (var3 >= field2894[arg1].length) {
 				var3 = 0;
 			}
 		} else {
 			var3--;
 			if (var3 < 0) {
-				var3 = Statics.field2894[arg1].length - 1;
+				var3 = field2894[arg1].length - 1;
 			}
 		}
 		this.field1688[arg1] = var3;

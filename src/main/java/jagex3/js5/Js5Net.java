@@ -136,7 +136,7 @@ public class Js5Net {
 									Js5Loader var15 = field1350[var14];
 									if (var15 != null) {
 										field2415.pos = var14 * 4 + 5;
-										int var16 = field2415.method167();
+										int var16 = field2415.g4();
 										var15.method980(var16);
 									}
 								}
@@ -193,7 +193,7 @@ public class Js5Net {
 							int var19 = field2301.g1();
 							int var20 = field2301.g2();
 							int var21 = field2301.g1();
-							int var22 = field2301.method167();
+							int var22 = field2301.g4();
 							long var23 = (long) ((var19 << 16) + var20);
 							Js5NetRequest var25 = (Js5NetRequest) field1917.find(var23);
 							field3180 = true;
@@ -305,7 +305,7 @@ public class Js5Net {
 			field1350[arg1] = arg0;
 		} else {
 			field2415.pos = arg1 * 4 + 5;
-			int var2 = field2415.method167();
+			int var2 = field2415.g4();
 			arg0.method980(var2);
 		}
 	}

@@ -355,12 +355,12 @@ public class ScriptRunner {
 						} else {
 							ObjType var131 = ObjType.list(var129);
 							var128.field2493 = 4;
-							var128.field2496 = var131.field2875;
-							var128.field2531 = var131.field2858;
-							var128.field2534 = var131.field2848 * 100 / var130;
-							var128.field2463 = var131.field2861;
-							var128.field2485 = var131.field2841;
-							var128.field2543 = var131.field2837;
+							var128.field2496 = var131.xan2d;
+							var128.field2531 = var131.zan2d;
+							var128.field2534 = var131.zoom2d * 100 / var130;
+							var128.field2463 = var131.yan2d;
+							var128.field2485 = var131.yof2d;
+							var128.field2543 = var131.xof2d;
 							var128.field2479 = var129;
 						}
 					} else if (var14 == 1201) {

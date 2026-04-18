@@ -207,7 +207,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(La;Z)Z")
-	public boolean method14(JagString arg0) {
+	public boolean equalsIgnoreCase(JagString arg0) {
 		if (arg0 == null) {
 			return false;
 		} else if (this.field26 == arg0.field26) {

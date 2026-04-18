@@ -35,7 +35,7 @@ public abstract class PixMap {
 
 	@ObfuscatedName("wc.a(B)V")
 	public final void method1054() {
-		Pix2D.method926(this.field3288, this.field3286, this.field3284);
+		Pix2D.setPixels(this.field3288, this.field3286, this.field3284);
 	}
 
 	@ObfuscatedName("wc.a(IILjava/awt/Component;I)V")

@@ -44,7 +44,7 @@ public class ReflectionChecker {
 	public static void method460(SignLink arg0, Packet arg1, int arg2) {
 		ReflectionCheck var3 = new ReflectionCheck();
 		var3.field2964 = arg1.g1();
-		var3.field2970 = arg1.method167();
+		var3.field2970 = arg1.g4();
 		var3.field2958 = new int[var3.field2964];
 		var3.field2961 = new PrivilegedRequest[var3.field2964];
 		var3.field2969 = new int[var3.field2964];
@@ -59,7 +59,7 @@ public class ReflectionChecker {
 					String var17 = new String(arg1.gjstr().method31());
 					String var18 = new String(arg1.gjstr().method31());
 					if (var5 == 1) {
-						var16 = arg1.method167();
+						var16 = arg1.g4();
 					}
 					var3.field2958[var4] = var5;
 					var3.field2969[var4] = var16;
@@ -75,7 +75,7 @@ public class ReflectionChecker {
 					byte[][] var11 = new byte[var8][];
 					if (var5 == 3) {
 						for (int var12 = 0; var12 < var8; var12++) {
-							int var13 = arg1.method167();
+							int var13 = arg1.g4();
 							var11[var12] = new byte[var13];
 							arg1.method173(var11[var12], var13);
 						}

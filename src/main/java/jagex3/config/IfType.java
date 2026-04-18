@@ -523,7 +523,7 @@ public final class IfType extends Linkable2 {
 				if (var9 == 1) {
 					this.field2505[var8] = arg0.g2b();
 					this.field2514[var8] = arg0.g2b();
-					this.field2510[var8] = arg0.method167();
+					this.field2510[var8] = arg0.g4();
 				} else {
 					this.field2510[var8] = -1;
 				}
@@ -551,16 +551,16 @@ public final class IfType extends Linkable2 {
 			this.field2446 = arg0.gjstr();
 		}
 		if (this.field2489 == 1 || this.field2489 == 3 || this.field2489 == 4) {
-			this.field2453 = arg0.method167();
+			this.field2453 = arg0.g4();
 		}
 		if (this.field2489 == 3 || this.field2489 == 4) {
-			this.field2532 = arg0.method167();
-			this.field2525 = arg0.method167();
-			this.field2469 = arg0.method167();
+			this.field2532 = arg0.g4();
+			this.field2525 = arg0.g4();
+			this.field2469 = arg0.g4();
 		}
 		if (this.field2489 == 5) {
-			this.field2550 = arg0.method167();
-			this.field2476 = arg0.method167();
+			this.field2550 = arg0.g4();
+			this.field2476 = arg0.g4();
 		}
 		if (this.field2489 == 6) {
 			this.field2493 = 1;
@@ -591,7 +591,7 @@ public final class IfType extends Linkable2 {
 			this.field2539 = arg0.g1();
 			this.field2448 = arg0.g2();
 			this.field2471 = arg0.g1() == 1;
-			this.field2453 = arg0.method167();
+			this.field2453 = arg0.g4();
 			this.field2555 = arg0.g2b();
 			this.field2473 = arg0.g2b();
 			this.field2533 = arg0.g1() == 1;
@@ -706,7 +706,7 @@ public final class IfType extends Linkable2 {
 			this.field2537 = arg0.g2();
 		}
 		if (this.field2489 == 5) {
-			this.field2550 = arg0.method167();
+			this.field2550 = arg0.g4();
 			this.field2557 = arg0.g2();
 			this.field2447 = arg0.g1() == 1;
 			this.field2551 = arg0.g1();
@@ -736,16 +736,16 @@ public final class IfType extends Linkable2 {
 			this.field2539 = arg0.g1();
 			this.field2521 = arg0.g1();
 			this.field2471 = arg0.g1() == 1;
-			this.field2453 = arg0.method167();
+			this.field2453 = arg0.g4();
 		}
 		if (this.field2489 == 3) {
-			this.field2453 = arg0.method167();
+			this.field2453 = arg0.g4();
 			this.field2451 = arg0.g1() == 1;
 			this.field2551 = arg0.g1();
 		}
 		if (this.field2489 == 9) {
 			arg0.g1();
-			this.field2453 = arg0.method167();
+			this.field2453 = arg0.g4();
 		}
 		if (!this.field2494) {
 			return;
@@ -833,13 +833,13 @@ public final class IfType extends Linkable2 {
 				}
 				if (var6 == 4) {
 					ObjType var8 = ObjType.list(var5);
-					var7 = var8.method954(false, 10);
+					var7 = var8.getModelLit(false, 10);
 					if (var7 == null) {
 						Statics.field3116 = true;
 						return null;
 					}
 					var7.prepareAnim();
-					var7.light(var8.field2856 + 64, var8.field2871 + 768, -50, -10, -50, true);
+					var7.light(var8.ambient + 64, var8.contrast + 768, -50, -10, -50, true);
 				}
 				field2680.put((long) ((var6 << 16) + var5), var7);
 			}

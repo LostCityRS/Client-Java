@@ -44,7 +44,7 @@ public final class ClientScript extends Linkable2 {
 		Packet var6 = new Packet(var5);
 		ClientScript var7 = new ClientScript();
 		var6.pos = var6.data.length - 12;
-		int var8 = var6.method167();
+		int var8 = var6.g4();
 		int var9 = 0;
 		var7.field518 = var6.g2();
 		var7.field514 = var6.g2();
@@ -61,7 +61,7 @@ public final class ClientScript extends Linkable2 {
 			} else if (var10 >= 100 || var10 == 21 || var10 == 38 || var10 == 39) {
 				var7.field509[var9] = var6.g1();
 			} else {
-				var7.field509[var9] = var6.method167();
+				var7.field509[var9] = var6.g4();
 			}
 			var7.field519[var9++] = var10;
 		}

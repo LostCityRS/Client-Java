@@ -365,8 +365,8 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.a([BIIIIII)V")
 	public void method202(byte[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		int var8 = Statics.field2749 * arg2 + arg1;
-		int var9 = Statics.field2749 - arg3;
+		int var8 = Pix2D.field2749 * arg2 + arg1;
+		int var9 = Pix2D.field2749 - arg3;
 		int var10 = 0;
 		int var11 = 0;
 		if (arg2 < Pix2D.field2748) {
@@ -374,7 +374,7 @@ public final class PixFont extends Pix2D {
 			arg4 -= var12;
 			arg2 = Pix2D.field2748;
 			var11 = arg3 * var12;
-			var8 += Statics.field2749 * var12;
+			var8 += Pix2D.field2749 * var12;
 		}
 		if (arg2 + arg4 > Pix2D.field2751) {
 			arg4 -= arg2 + arg4 - Pix2D.field2751;
@@ -395,7 +395,7 @@ public final class PixFont extends Pix2D {
 			var9 += var14;
 		}
 		if (arg3 > 0 && arg4 > 0) {
-			this.method197(Statics.field2747, arg0, arg5, var11, var8, arg3, arg4, var9, var10, arg6);
+			this.method197(Pix2D.pixels, arg0, arg5, var11, var8, arg3, arg4, var9, var10, arg6);
 		}
 	}
 
@@ -465,8 +465,8 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.a([BIIIII)V")
 	public void method205(byte[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		int var7 = Statics.field2749 * arg2 + arg1;
-		int var8 = Statics.field2749 - arg3;
+		int var7 = Pix2D.field2749 * arg2 + arg1;
+		int var8 = Pix2D.field2749 - arg3;
 		int var9 = 0;
 		int var10 = 0;
 		if (arg2 < Pix2D.field2748) {
@@ -474,7 +474,7 @@ public final class PixFont extends Pix2D {
 			arg4 -= var11;
 			arg2 = Pix2D.field2748;
 			var10 = arg3 * var11;
-			var7 += Statics.field2749 * var11;
+			var7 += Pix2D.field2749 * var11;
 		}
 		if (arg2 + arg4 > Pix2D.field2751) {
 			arg4 -= arg2 + arg4 - Pix2D.field2751;
@@ -495,7 +495,7 @@ public final class PixFont extends Pix2D {
 			var8 += var13;
 		}
 		if (arg3 > 0 && arg4 > 0) {
-			this.method194(Statics.field2747, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
+			this.method194(Pix2D.pixels, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
 		}
 	}
 

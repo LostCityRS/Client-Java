@@ -81,7 +81,7 @@ public final class ClientPlayer extends ClientEntity {
 		if (var3 == null) {
 			return null;
 		}
-		var3.method766();
+		var3.calcBoundingCylinder();
 		super.field1991 = var3.field3135;
 		if (!this.field95 && super.field1965 != -1 && super.field2014 != -1) {
 			Model var4 = SpotType.list(super.field1965).getTempModel2(super.field2014);
@@ -123,7 +123,7 @@ public final class ClientPlayer extends ClientEntity {
 				var6.translate(super.field1972 - this.field79, -this.field80 + this.field84, super.field1963 - this.field99);
 			}
 		}
-		var3.field2205 = true;
+		var3.useAABBMouseCheck = true;
 		return var3;
 	}
 
@@ -154,7 +154,7 @@ public final class ClientPlayer extends ClientEntity {
 					break;
 				}
 				if (var4[var5] >= 512) {
-					int var8 = ObjType.list(var4[var5] - 512).field2854;
+					int var8 = ObjType.list(var4[var5] - 512).team;
 					if (var8 != 0) {
 						this.field74 = var8;
 					}
@@ -164,7 +164,7 @@ public final class ClientPlayer extends ClientEntity {
 		int[] var9 = new int[5];
 		for (int var10 = 0; var10 < 5; var10++) {
 			int var11 = arg0.g1();
-			if (var11 < 0 || Statics.field2894[var10].length <= var11) {
+			if (var11 < 0 || PlayerModel.field2894[var10].length <= var11) {
 				var11 = 0;
 			}
 			var9[var10] = var11;

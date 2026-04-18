@@ -126,7 +126,7 @@ public final class Model extends ModelSource {
 	public static int[] field2264 = new int[4096];
 
 	@ObfuscatedName("pa.Lc")
-	public static int[] field2256 = Pix3D.field775;
+	public static int[] field2256 = Pix3D.sinTable;
 
 	@ObfuscatedName("pa.Vc")
 	public static int[] field2266 = new int[4096];
@@ -141,13 +141,13 @@ public final class Model extends ModelSource {
 	public static int[] field2262 = new int[12];
 
 	@ObfuscatedName("pa.Nc")
-	public static int[] field2258 = Pix3D.field778;
+	public static int[] field2258 = Pix3D.cosTable;
 
 	@ObfuscatedName("pa.Uc")
 	public static boolean[] field2265 = new boolean[4096];
 
 	@ObfuscatedName("pa.Yc")
-	public static int[] field2269 = Pix3D.field761;
+	public static int[] field2269 = Pix3D.divTable2;
 
 	@ObfuscatedName("pa.Zc")
 	public static int field2270 = 0;
@@ -159,7 +159,7 @@ public final class Model extends ModelSource {
 	public int numFaces = 0;
 
 	@ObfuscatedName("pa.Mb")
-	public boolean field2205 = false;
+	public boolean useAABBMouseCheck = false;
 
 	@ObfuscatedName("pa.Pb")
 	public int numPoints = 0;
@@ -262,7 +262,7 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.a()V")
-	public void method766() {
+	public void calcBoundingCylinder() {
 		if (this.field2210 == 1) {
 			return;
 		}
@@ -294,7 +294,7 @@ public final class Model extends ModelSource {
 	@Override
 	public void method767(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		if (this.field2210 != 1) {
-			this.method766();
+			this.calcBoundingCylinder();
 		}
 		int var10 = arg4 * arg7 - arg3 * arg5 >> 16;
 		int var11 = arg1 * arg6 + arg2 * var10 >> 16;
@@ -305,22 +305,22 @@ public final class Model extends ModelSource {
 		}
 		int var14 = arg3 * arg7 + arg4 * arg5 >> 16;
 		int var15 = var14 - this.field2212 << 9;
-		if (var15 / var13 >= Statics.field766) {
+		if (var15 / var13 >= Pix3D.field766) {
 			return;
 		}
 		int var16 = this.field2212 + var14 << 9;
-		if (var16 / var13 <= Statics.field774) {
+		if (var16 / var13 <= Pix3D.field774) {
 			return;
 		}
 		int var17 = arg2 * arg6 - arg1 * var10 >> 16;
 		int var18 = this.field2212 * arg1 >> 16;
 		int var19 = var17 + var18 << 9;
-		if (var19 / var13 <= Statics.field767) {
+		if (var19 / var13 <= Pix3D.field767) {
 			return;
 		}
 		int var20 = (super.field3135 * arg2 >> 16) + var18;
 		int var21 = var17 - var20 << 9;
-		if (var21 / var13 >= Statics.field773) {
+		if (var21 / var13 >= Pix3D.field773) {
 			return;
 		}
 		int var22 = (super.field3135 * arg1 >> 16) + var12;
@@ -354,18 +354,18 @@ public final class Model extends ModelSource {
 				var31 = var19 / var13;
 				var30 = var21 / var27;
 			}
-			int var32 = field2270 - Statics.field769;
-			int var33 = field2239 - Statics.field763;
+			int var32 = field2270 - Pix3D.originX;
+			int var33 = field2239 - Pix3D.originY;
 			if (var32 > var28 && var32 < var29 && var33 > var30 && var33 < var31) {
-				if (this.field2205) {
+				if (this.useAABBMouseCheck) {
 					field2252[field2261++] = arg8;
 				} else {
 					var26 = true;
 				}
 			}
 		}
-		int var34 = Statics.field769;
-		int var35 = Statics.field763;
+		int var34 = Pix3D.originX;
+		int var35 = Pix3D.originY;
 		int var36 = 0;
 		int var37 = 0;
 		if (arg0 != 0) {
@@ -413,8 +413,8 @@ public final class Model extends ModelSource {
 		if (this.field2210 != 2 && this.field2210 != 1) {
 			this.method795();
 		}
-		int var8 = Statics.field769;
-		int var9 = Statics.field763;
+		int var8 = Pix3D.originX;
+		int var9 = Pix3D.originY;
 		int var10 = field2256[0];
 		int var11 = field2258[0];
 		int var12 = field2256[arg0];
@@ -558,7 +558,7 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.c()I")
 	public int method773() {
-		this.method766();
+		this.calcBoundingCylinder();
 		return this.field2212;
 	}
 
@@ -1127,7 +1127,7 @@ public final class Model extends ModelSource {
 		this.field2220 = arg0.field2220;
 		this.field2231 = arg0.field2231;
 		this.field2235 = arg0.field2235;
-		this.field2205 = arg0.field2205;
+		this.useAABBMouseCheck = arg0.useAABBMouseCheck;
 	}
 
 	public Model(Model arg0, boolean arg1, boolean arg2) {
@@ -1189,7 +1189,7 @@ public final class Model extends ModelSource {
 		this.field2220 = arg0.field2220;
 		this.field2231 = arg0.field2231;
 		this.field2235 = arg0.field2235;
-		this.field2205 = arg0.field2205;
+		this.useAABBMouseCheck = arg0.useAABBMouseCheck;
 		this.field2234 = arg0.field2234;
 	}
 
@@ -1365,12 +1365,12 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.a(IIIIIII)V")
-	public void method780(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void objRender(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (this.field2210 != 2 && this.field2210 != 1) {
 			this.method795();
 		}
-		int var7 = Statics.field769;
-		int var8 = Statics.field763;
+		int var7 = Pix3D.originX;
+		int var8 = Pix3D.originY;
 		int var9 = field2256[0];
 		int var10 = field2258[0];
 		int var11 = field2256[arg0];
@@ -1427,8 +1427,8 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.h(I)V")
 	public void method782(int arg0) {
-		int var2 = Statics.field769;
-		int var3 = Statics.field763;
+		int var2 = Pix3D.originX;
+		int var3 = Pix3D.originY;
 		int var4 = 0;
 		int var5 = this.field2223[arg0];
 		int var6 = this.field2237[arg0];
@@ -1514,7 +1514,7 @@ public final class Model extends ModelSource {
 		int var31 = field2246[2];
 		Pix3D.field779 = false;
 		if (var4 == 3) {
-			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Statics.field777 || var27 > Statics.field777 || var28 > Statics.field777) {
+			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.width || var27 > Pix3D.width || var28 > Pix3D.width) {
 				Pix3D.field779 = true;
 			}
 			int var32;
@@ -1544,7 +1544,7 @@ public final class Model extends ModelSource {
 		if (var4 != 4) {
 			return;
 		}
-		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Statics.field777 || var27 > Statics.field777 || var28 > Statics.field777 || field2268[3] < 0 || field2268[3] > Statics.field777) {
+		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.width || var27 > Pix3D.width || var28 > Pix3D.width || field2268[3] < 0 || field2268[3] > Pix3D.width) {
 			Pix3D.field779 = true;
 		}
 		int var41;
@@ -1631,7 +1631,7 @@ public final class Model extends ModelSource {
 					}
 					if ((field2245[var8] - field2245[var7]) * (var9 - var10) - (field2245[var6] - field2245[var7]) * (var11 - var10) > 0) {
 						field2265[var5] = false;
-						if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Statics.field777 && var10 <= Statics.field777 && var11 <= Statics.field777) {
+						if (var9 >= 0 && var10 >= 0 && var11 >= 0 && var9 <= Pix3D.width && var10 <= Pix3D.width && var11 <= Pix3D.width) {
 							field2242[var5] = false;
 						} else {
 							field2242[var5] = true;
@@ -1865,7 +1865,7 @@ public final class Model extends ModelSource {
 		arg1.field2220 = this.field2220;
 		arg1.field2231 = this.field2231;
 		arg1.field2235 = this.field2235;
-		arg1.field2205 = this.field2205;
+		arg1.useAABBMouseCheck = this.useAABBMouseCheck;
 		arg1.field2210 = 0;
 		return arg1;
 	}

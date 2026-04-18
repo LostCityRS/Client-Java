@@ -15,6 +15,6 @@ public final class ClientObj extends ModelSource {
 	@ObfuscatedName("je.f(I)Lpa;")
 	@Override
 	public Model method41() {
-		return ObjType.list(this.id).method954(true, this.count);
+		return ObjType.list(this.id).getModelLit(true, this.count);
 	}
 }

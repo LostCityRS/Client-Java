@@ -1793,18 +1793,18 @@ public final class World {
 		if (var43 < 50) {
 			return;
 		}
-		int var44 = (var21 << 9) / var25 + Statics.field769;
-		int var45 = (var24 << 9) / var25 + Statics.field763;
-		int var46 = (var27 << 9) / var31 + Statics.field769;
-		int var47 = (var30 << 9) / var31 + Statics.field763;
-		int var48 = (var33 << 9) / var37 + Statics.field769;
-		int var49 = (var36 << 9) / var37 + Statics.field763;
-		int var50 = (var39 << 9) / var43 + Statics.field769;
-		int var51 = (var42 << 9) / var43 + Statics.field763;
+		int var44 = (var21 << 9) / var25 + Pix3D.originX;
+		int var45 = (var24 << 9) / var25 + Pix3D.originY;
+		int var46 = (var27 << 9) / var31 + Pix3D.originX;
+		int var47 = (var30 << 9) / var31 + Pix3D.originY;
+		int var48 = (var33 << 9) / var37 + Pix3D.originX;
+		int var49 = (var36 << 9) / var37 + Pix3D.originY;
+		int var50 = (var39 << 9) / var43 + Pix3D.originX;
+		int var51 = (var42 << 9) / var43 + Pix3D.originY;
 		Pix3D.field765 = 0;
 		if ((var47 - var51) * (var48 - var50) - (var46 - var50) * (var49 - var51) > 0) {
 			Pix3D.field779 = false;
-			if (var48 < 0 || var50 < 0 || var46 < 0 || var48 > Statics.field777 || var50 > Statics.field777 || var46 > Statics.field777) {
+			if (var48 < 0 || var50 < 0 || var46 < 0 || var48 > Pix3D.width || var50 > Pix3D.width || var46 > Pix3D.width) {
 				Pix3D.field779 = true;
 			}
 			if (field141 && this.method98(field118, field104, var49, var51, var47, var48, var50, var46)) {
@@ -1828,7 +1828,7 @@ public final class World {
 			return;
 		}
 		Pix3D.field779 = false;
-		if (var44 < 0 || var46 < 0 || var50 < 0 || var44 > Statics.field777 || var46 > Statics.field777 || var50 > Statics.field777) {
+		if (var44 < 0 || var46 < 0 || var50 < 0 || var44 > Pix3D.width || var46 > Pix3D.width || var50 > Pix3D.width) {
 			Pix3D.field779 = true;
 		}
 		if (field141 && this.method98(field118, field104, var45, var47, var51, var44, var46, var50)) {
@@ -2028,8 +2028,8 @@ public final class World {
 				Ground.field570[var9] = var16;
 				Ground.field555[var9] = var17;
 			}
-			Ground.field558[var9] = (var13 << 9) / var17 + Statics.field769;
-			Ground.field553[var9] = (var16 << 9) / var17 + Statics.field763;
+			Ground.field558[var9] = (var13 << 9) / var17 + Pix3D.originX;
+			Ground.field553[var9] = (var16 << 9) / var17 + Pix3D.originY;
 		}
 		Pix3D.field765 = 0;
 		int var18 = arg0.field569.length;
@@ -2045,7 +2045,7 @@ public final class World {
 			int var28 = Ground.field553[var22];
 			if ((var23 - var24) * (var28 - var27) - (var25 - var24) * (var26 - var27) > 0) {
 				Pix3D.field779 = false;
-				if (var23 < 0 || var24 < 0 || var25 < 0 || var23 > Statics.field777 || var24 > Statics.field777 || var25 > Statics.field777) {
+				if (var23 < 0 || var24 < 0 || var25 < 0 || var23 > Pix3D.width || var24 > Pix3D.width || var25 > Pix3D.width) {
 					Pix3D.field779 = true;
 				}
 				if (field141 && this.method98(field118, field104, var26, var27, var28, var23, var24, var25)) {
@@ -2084,7 +2084,7 @@ public final class World {
 			for (int var12 = 0; var12 < var11.field888; var12++) {
 				if ((var11.field873[var12].field982 & 0x100) == 256 && var11.field873[var12].field985 instanceof Model) {
 					Model var13 = (Model) var11.field873[var12].field985;
-					var13.method766();
+					var13.calcBoundingCylinder();
 					if (var13.field3135 > var10) {
 						var10 = var13.field3135;
 					}

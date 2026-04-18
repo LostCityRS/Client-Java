@@ -201,8 +201,8 @@ public class Packet extends Linkable {
 		int var4 = this.pos;
 		this.pos = 5;
 		for (int var5 = 0; var5 < var3; var5++) {
-			int var6 = this.method167();
-			int var7 = this.method167();
+			int var6 = this.g4();
+			int var7 = this.g4();
 			int var8 = 32;
 			int var9 = -957401312;
 			while (var8-- > 0) {
@@ -265,7 +265,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.g(I)I")
-	public final int method167() {
+	public final int g4() {
 		this.pos += 4;
 		return ((this.data[this.pos - 4] & 0xFF) << 24) + (this.data[this.pos - 3] << 16 & 0xFF0000) + ((this.data[this.pos + -2] & 0xFF) << 8) + (this.data[this.pos + -1] & 0xFF);
 	}
@@ -308,8 +308,8 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("ba.j(I)J")
 	public final long method174() {
-		long var1 = (long) this.method167() & 0xFFFFFFFFL;
-		long var3 = (long) this.method167() & 0xFFFFFFFFL;
+		long var1 = (long) this.g4() & 0xFFFFFFFFL;
+		long var3 = (long) this.g4() & 0xFFFFFFFFL;
 		return (var1 << 32) + var3;
 	}
 

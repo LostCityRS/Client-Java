@@ -68,7 +68,7 @@ public abstract class Js5 {
 	public static byte[] method863(byte[] arg0) {
 		Packet var1 = new Packet(arg0);
 		int var2 = var1.g1();
-		int var3 = var1.method167();
+		int var3 = var1.g4();
 		if (var3 < 0 || field2597 != 0 && field2597 < var3) {
 			throw new RuntimeException();
 		} else if (var2 == 0) {
@@ -76,7 +76,7 @@ public abstract class Js5 {
 			var1.method173(var7, var3);
 			return var7;
 		} else {
-			int var4 = var1.method167();
+			int var4 = var1.g4();
 			if (var4 < 0 || field2597 != 0 && var4 > field2597) {
 				throw new RuntimeException();
 			}
@@ -193,15 +193,15 @@ public abstract class Js5 {
 		if (var5 != 0) {
 			this.field389 = new int[var6 + 1];
 			for (int var8 = 0; var8 < this.field371; var8++) {
-				this.field389[this.field377[var8]] = var2.method167();
+				this.field389[this.field377[var8]] = var2.g4();
 			}
 			this.field404 = new IntHashTable(this.field389);
 		}
 		for (int var9 = 0; var9 < this.field371; var9++) {
-			this.field402[this.field377[var9]] = var2.method167();
+			this.field402[this.field377[var9]] = var2.g4();
 		}
 		for (int var10 = 0; var10 < this.field371; var10++) {
-			this.field374[this.field377[var10]] = var2.method167();
+			this.field374[this.field377[var10]] = var2.g4();
 		}
 		for (int var11 = 0; var11 < this.field371; var11++) {
 			this.field411[this.field377[var11]] = var2.g2();
@@ -230,7 +230,7 @@ public abstract class Js5 {
 			int var21 = this.field411[var20];
 			this.field386[var20] = new int[this.field399[var20].length];
 			for (int var22 = 0; var22 < var21; var22++) {
-				this.field386[var20][this.field393[var20][var22]] = var2.method167();
+				this.field386[var20][this.field393[var20][var22]] = var2.g4();
 			}
 			this.field367[var20] = new IntHashTable(this.field386[var20]);
 		}
@@ -289,7 +289,7 @@ public abstract class Js5 {
 			for (int var17 = 0; var17 < var13; var17++) {
 				int var18 = 0;
 				for (int var19 = 0; var19 < var3; var19++) {
-					var18 += var14.method167();
+					var18 += var14.g4();
 					var16[var19] += var18;
 				}
 			}
@@ -304,7 +304,7 @@ public abstract class Js5 {
 			for (int var22 = 0; var22 < var13; var22++) {
 				int var23 = 0;
 				for (int var24 = 0; var24 < var3; var24++) {
-					var23 += var14.method167();
+					var23 += var14.g4();
 					ArrayUtil.copy(var10, var21, var4[var5[var24]], var16[var24], var23);
 					var16[var24] += var23;
 					var21 += var23;

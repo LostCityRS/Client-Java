@@ -1,7 +1,6 @@
 package jagex3.graphics;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 import java.awt.*;
 import java.awt.image.PixelGrabber;
@@ -79,15 +78,15 @@ public final class Pix32 extends Pix2D {
 		if (var7 < var11) {
 			arg3 = ((var7 << 16) + var13 - var9 - 1) / var13;
 		}
-		int var16 = Statics.field2749 * arg1 + arg0;
-		int var17 = Statics.field2749 - arg2;
+		int var16 = Pix2D.field2749 * arg1 + arg0;
+		int var17 = Pix2D.field2749 - arg2;
 		if (arg1 + arg3 > Pix2D.field2751) {
 			arg3 -= arg1 + arg3 - Pix2D.field2751;
 		}
 		if (arg1 < Pix2D.field2748) {
 			int var18 = Pix2D.field2748 - arg1;
 			arg3 -= var18;
-			var16 += Statics.field2749 * var18;
+			var16 += Pix2D.field2749 * var18;
 			var9 += var13 * var18;
 		}
 		if (arg0 + arg2 > Pix2D.field2753) {
@@ -102,7 +101,7 @@ public final class Pix32 extends Pix2D {
 			var8 += var12 * var20;
 			var17 += var20;
 		}
-		method563(Statics.field2747, this.data, var8, var9, var16, var17, arg2, arg3, var12, var13, var6, arg4);
+		method563(Pix2D.pixels, this.data, var8, var9, var16, var17, arg2, arg3, var12, var13, var6, arg4);
 	}
 
 	@ObfuscatedName("jd.a(III)V")
@@ -233,18 +232,18 @@ public final class Pix32 extends Pix2D {
 	public void plotSprite(int arg0, int arg1) {
 		int var3 = this.xof + arg0;
 		int var4 = this.yof + arg1;
-		int var5 = Statics.field2749 * var4 + var3;
+		int var5 = Pix2D.field2749 * var4 + var3;
 		int var6 = 0;
 		int var7 = this.hi;
 		int var8 = this.wi;
-		int var9 = Statics.field2749 - var8;
+		int var9 = Pix2D.field2749 - var8;
 		int var10 = 0;
 		if (var4 < Pix2D.field2748) {
 			int var11 = Pix2D.field2748 - var4;
 			var7 -= var11;
 			var4 = Pix2D.field2748;
 			var6 = var8 * var11;
-			var5 += Statics.field2749 * var11;
+			var5 += Pix2D.field2749 * var11;
 		}
 		if (var4 + var7 > Pix2D.field2751) {
 			var7 -= var4 + var7 - Pix2D.field2751;
@@ -265,7 +264,7 @@ public final class Pix32 extends Pix2D {
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method549(Statics.field2747, this.data, var6, var5, var8, var7, var9, var10);
+			method549(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
@@ -361,7 +360,7 @@ public final class Pix32 extends Pix2D {
 		if (var38 >= 0) {
 			return;
 		}
-		int var39 = Statics.field2749 * var35 + var33;
+		int var39 = Pix2D.field2749 * var35 + var33;
 		double var40 = 1.6777216E7D / (double) arg5;
 		int var42 = (int) Math.floor(Math.sin(var9) * var40 + 0.5D);
 		int var43 = (int) Math.floor(Math.cos(var9) * var40 + 0.5D);
@@ -381,13 +380,13 @@ public final class Pix32 extends Pix2D {
 							if (var51 == 0) {
 								var49++;
 							} else {
-								Statics.field2747[var49++] = var51;
+								Pix2D.pixels[var49++] = var51;
 							}
 							var50++;
 						}
 					}
 					var48++;
-					var39 += Statics.field2749;
+					var39 += Pix2D.field2749;
 				}
 			} else if (var42 < 0) {
 				int var52 = var38;
@@ -412,7 +411,7 @@ public final class Pix32 extends Pix2D {
 							if (var59 == 0) {
 								var53++;
 							} else {
-								Statics.field2747[var53++] = var59;
+								Pix2D.pixels[var53++] = var59;
 							}
 							var54 += var42;
 							var55++;
@@ -420,7 +419,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var52++;
 					var46 -= var42;
-					var39 += Statics.field2749;
+					var39 += Pix2D.field2749;
 				}
 			} else {
 				int var60 = var38;
@@ -444,7 +443,7 @@ public final class Pix32 extends Pix2D {
 							if (var66 == 0) {
 								var61++;
 							} else {
-								Statics.field2747[var61++] = var66;
+								Pix2D.pixels[var61++] = var66;
 							}
 							var62 += var42;
 							var63++;
@@ -452,7 +451,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var60++;
 					var46 -= var42;
-					var39 += Statics.field2749;
+					var39 += Pix2D.field2749;
 				}
 			}
 		} else if (var43 < 0) {
@@ -479,7 +478,7 @@ public final class Pix32 extends Pix2D {
 							if (var74 == 0) {
 								var68++;
 							} else {
-								Statics.field2747[var68++] = var74;
+								Pix2D.pixels[var68++] = var74;
 							}
 							var69 += var43;
 							var70++;
@@ -487,7 +486,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var67++;
 					var47 += var43;
-					var39 += Statics.field2749;
+					var39 += Pix2D.field2749;
 				}
 			} else if (var42 < 0) {
 				int var75 = var38;
@@ -525,7 +524,7 @@ public final class Pix32 extends Pix2D {
 						if (var86 == 0) {
 							var76++;
 						} else {
-							Statics.field2747[var76++] = var86;
+							Pix2D.pixels[var76++] = var86;
 						}
 						var77 += var43;
 						var78 += var42;
@@ -534,7 +533,7 @@ public final class Pix32 extends Pix2D {
 					var75++;
 					var46 -= var42;
 					var47 += var43;
-					var39 += Statics.field2749;
+					var39 += Pix2D.field2749;
 				}
 			} else {
 				int var87 = var38;
@@ -571,7 +570,7 @@ public final class Pix32 extends Pix2D {
 						if (var97 == 0) {
 							var88++;
 						} else {
-							Statics.field2747[var88++] = var97;
+							Pix2D.pixels[var88++] = var97;
 						}
 						var89 += var43;
 						var90 += var42;
@@ -580,7 +579,7 @@ public final class Pix32 extends Pix2D {
 					var87++;
 					var46 -= var42;
 					var47 += var43;
-					var39 += Statics.field2749;
+					var39 += Pix2D.field2749;
 				}
 			}
 		} else if (var42 == 0) {
@@ -605,7 +604,7 @@ public final class Pix32 extends Pix2D {
 						if (var104 == 0) {
 							var99++;
 						} else {
-							Statics.field2747[var99++] = var104;
+							Pix2D.pixels[var99++] = var104;
 						}
 						var100 += var43;
 						var101++;
@@ -613,7 +612,7 @@ public final class Pix32 extends Pix2D {
 				}
 				var98++;
 				var47 += var43;
-				var39 += Statics.field2749;
+				var39 += Pix2D.field2749;
 			}
 		} else if (var42 < 0) {
 			int var105 = var38;
@@ -650,7 +649,7 @@ public final class Pix32 extends Pix2D {
 					if (var115 == 0) {
 						var106++;
 					} else {
-						Statics.field2747[var106++] = var115;
+						Pix2D.pixels[var106++] = var115;
 					}
 					var107 += var43;
 					var108 += var42;
@@ -659,7 +658,7 @@ public final class Pix32 extends Pix2D {
 				var105++;
 				var46 -= var42;
 				var47 += var43;
-				var39 += Statics.field2749;
+				var39 += Pix2D.field2749;
 			}
 		} else {
 			int var116 = var38;
@@ -695,7 +694,7 @@ public final class Pix32 extends Pix2D {
 					if (var125 == 0) {
 						var117++;
 					} else {
-						Statics.field2747[var117++] = var125;
+						Pix2D.pixels[var117++] = var125;
 					}
 					var118 += var43;
 					var119 += var42;
@@ -704,14 +703,14 @@ public final class Pix32 extends Pix2D {
 				var116++;
 				var46 -= var42;
 				var47 += var43;
-				var39 += Statics.field2749;
+				var39 += Pix2D.field2749;
 			}
 		}
 	}
 
 	@ObfuscatedName("jd.d()V")
 	public void method553() {
-		Pix2D.method926(this.data, this.wi, this.hi);
+		Pix2D.setPixels(this.data, this.wi, this.hi);
 	}
 
 	@ObfuscatedName("jd.a(IIIIIIII[I[I)V")
@@ -725,20 +724,20 @@ public final class Pix32 extends Pix2D {
 			int var16 = arg7 * var14 >> 8;
 			int var17 = (arg4 << 16) + var11 * var16 + var12 * var15;
 			int var18 = (arg5 << 16) + (var12 * var16 - var11 * var15);
-			int var19 = Statics.field2749 * arg1 + arg0;
+			int var19 = Pix2D.field2749 * arg1 + arg0;
 			for (int var20 = 0; var20 < arg3; var20++) {
 				int var21 = arg8[var20];
 				int var22 = var19 + var21;
 				int var23 = var16 * var21 + var17;
 				int var24 = var18 - var15 * var21;
 				for (int var25 = -arg9[var20]; var25 < 0; var25++) {
-					Statics.field2747[var22++] = this.data[(var23 >> 16) + (var24 >> 16) * this.wi];
+					Pix2D.pixels[var22++] = this.data[(var23 >> 16) + (var24 >> 16) * this.wi];
 					var23 += var16;
 					var24 -= var15;
 				}
 				var17 += var15;
 				var18 += var16;
-				var19 += Statics.field2749;
+				var19 += Pix2D.field2749;
 			}
 		} catch (Exception var26) {
 		}
@@ -748,18 +747,18 @@ public final class Pix32 extends Pix2D {
 	public void method555(Pix8 arg0, int arg1, int arg2) {
 		int var4 = this.xof + arg1;
 		int var5 = this.yof + arg2;
-		int var6 = Statics.field2749 * var5 + var4;
+		int var6 = Pix2D.field2749 * var5 + var4;
 		int var7 = 0;
 		int var8 = this.hi;
 		int var9 = this.wi;
-		int var10 = Statics.field2749 - var9;
+		int var10 = Pix2D.field2749 - var9;
 		int var11 = 0;
 		if (var5 < Pix2D.field2748) {
 			int var12 = Pix2D.field2748 - var5;
 			var8 -= var12;
 			var5 = Pix2D.field2748;
 			var7 = var9 * var12;
-			var6 += Statics.field2749 * var12;
+			var6 += Pix2D.field2749 * var12;
 		}
 		if (var5 + var8 > Pix2D.field2751) {
 			var8 -= var5 + var8 - Pix2D.field2751;
@@ -780,7 +779,7 @@ public final class Pix32 extends Pix2D {
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			method548(Statics.field2747, this.data, var7, var6, var9, var8, var10, var11, arg0.data);
+			method548(Pix2D.pixels, this.data, var7, var6, var9, var8, var10, var11, arg0.data);
 		}
 	}
 
@@ -806,18 +805,18 @@ public final class Pix32 extends Pix2D {
 	public void method557(int arg0, int arg1) {
 		int var3 = this.xof + arg0;
 		int var4 = this.yof + arg1;
-		int var5 = Statics.field2749 * var4 + var3;
+		int var5 = Pix2D.field2749 * var4 + var3;
 		int var6 = 0;
 		int var7 = this.hi;
 		int var8 = this.wi;
-		int var9 = Statics.field2749 - var8;
+		int var9 = Pix2D.field2749 - var8;
 		int var10 = 0;
 		if (var4 < Pix2D.field2748) {
 			int var11 = Pix2D.field2748 - var4;
 			var7 -= var11;
 			var4 = Pix2D.field2748;
 			var6 = var8 * var11;
-			var5 += Statics.field2749 * var11;
+			var5 += Pix2D.field2749 * var11;
 		}
 		if (var4 + var7 > Pix2D.field2751) {
 			var7 -= var4 + var7 - Pix2D.field2751;
@@ -838,7 +837,7 @@ public final class Pix32 extends Pix2D {
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method561(Statics.field2747, this.data, var6, var5, var8, var7, var9, var10);
+			method561(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
@@ -846,18 +845,18 @@ public final class Pix32 extends Pix2D {
 	public void method558(int arg0, int arg1, int arg2) {
 		int var4 = this.xof + arg0;
 		int var5 = this.yof + arg1;
-		int var6 = Statics.field2749 * var5 + var4;
+		int var6 = Pix2D.field2749 * var5 + var4;
 		int var7 = 0;
 		int var8 = this.hi;
 		int var9 = this.wi;
-		int var10 = Statics.field2749 - var9;
+		int var10 = Pix2D.field2749 - var9;
 		int var11 = 0;
 		if (var5 < Pix2D.field2748) {
 			int var12 = Pix2D.field2748 - var5;
 			var8 -= var12;
 			var5 = Pix2D.field2748;
 			var7 = var9 * var12;
-			var6 += Statics.field2749 * var12;
+			var6 += Pix2D.field2749 * var12;
 		}
 		if (var5 + var8 > Pix2D.field2751) {
 			var8 -= var5 + var8 - Pix2D.field2751;
@@ -878,7 +877,7 @@ public final class Pix32 extends Pix2D {
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			method560(Statics.field2747, this.data, var7, var6, var9, var8, var10, var11, arg2);
+			method560(Pix2D.pixels, this.data, var7, var6, var9, var8, var10, var11, arg2);
 		}
 	}
 
@@ -894,7 +893,7 @@ public final class Pix32 extends Pix2D {
 			int var8 = var6 * 256 >> 8;
 			int var9 = var7 * -10 + var8 * -10 + 983040;
 			int var10 = var8 * -10 + 983040 - var7 * -10;
-			int var11 = Statics.field2749 * arg1 + arg0;
+			int var11 = Pix2D.field2749 * arg1 + arg0;
 			for (int var12 = 0; var12 < 20; var12++) {
 				int var13 = var11;
 				int var14 = var9;
@@ -904,14 +903,14 @@ public final class Pix32 extends Pix2D {
 					if (var17 == 0) {
 						var13++;
 					} else {
-						Statics.field2747[var13++] = var17;
+						Pix2D.pixels[var13++] = var17;
 					}
 					var14 += var8;
 					var15 -= var7;
 				}
 				var9 += var7;
 				var10 += var8;
-				var11 += Statics.field2749;
+				var11 += Pix2D.field2749;
 			}
 		} catch (Exception var18) {
 		}
@@ -983,15 +982,15 @@ public final class Pix32 extends Pix2D {
 		if (var6 < var10) {
 			arg3 = ((var6 << 16) + var12 - var8 - 1) / var12;
 		}
-		int var15 = Statics.field2749 * arg1 + arg0;
-		int var16 = Statics.field2749 - arg2;
+		int var15 = Pix2D.field2749 * arg1 + arg0;
+		int var16 = Pix2D.field2749 - arg2;
 		if (arg1 + arg3 > Pix2D.field2751) {
 			arg3 -= arg1 + arg3 - Pix2D.field2751;
 		}
 		if (arg1 < Pix2D.field2748) {
 			int var17 = Pix2D.field2748 - arg1;
 			arg3 -= var17;
-			var15 += Statics.field2749 * var17;
+			var15 += Pix2D.field2749 * var17;
 			var8 += var12 * var17;
 		}
 		if (arg0 + arg2 > Pix2D.field2753) {
@@ -1006,7 +1005,7 @@ public final class Pix32 extends Pix2D {
 			var7 += var11 * var19;
 			var16 += var19;
 		}
-		method545(Statics.field2747, this.data, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
+		method545(Pix2D.pixels, this.data, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
 	}
 
 	@ObfuscatedName("jd.a([I[IIIIIIIIIIII)V")
