@@ -43,19 +43,19 @@ public final class BufferedRandomAccessFile {
 	public long field3267;
 
 	@ObfuscatedName("wb.a(IJ)V")
-	public void method1041(long arg0) {
+	public void seek(long arg0) {
 		if (arg0 >= 0L) {
 			this.field3245 = arg0;
 		}
 	}
 
 	@ObfuscatedName("wb.a(I)J")
-	public long method1042() {
+	public long length() {
 		return this.field3269;
 	}
 
 	@ObfuscatedName("wb.a(III[B)V")
-	public void method1043(int arg0, int arg1, byte[] arg2) throws IOException {
+	public void write(int arg0, int arg1, byte[] arg2) throws IOException {
 		try {
 			if ((long) arg1 + this.field3245 > this.field3269) {
 				this.field3269 = (long) arg1 + this.field3245;
@@ -74,10 +74,10 @@ public final class BufferedRandomAccessFile {
 			}
 			if (this.field3259.length < arg1) {
 				if (this.field3267 != this.field3245) {
-					this.field3270.method830(this.field3245);
+					this.field3270.seek(this.field3245);
 					this.field3267 = this.field3245;
 				}
-				this.field3270.method832(arg2, arg0, arg1);
+				this.field3270.write(arg2, arg0, arg1);
 				this.field3267 += arg1;
 				if (this.field3267 > this.field3271) {
 					this.field3271 = this.field3267;
@@ -116,7 +116,7 @@ public final class BufferedRandomAccessFile {
 	}
 
 	@ObfuscatedName("wb.a(IBI[B)V")
-	public void method1045(int arg0, int arg1, byte[] arg2) throws IOException {
+	public void read(int arg0, int arg1, byte[] arg2) throws IOException {
 		try {
 			if (arg1 > arg2.length) {
 				throw new ArrayIndexOutOfBoundsException(arg1 - arg2.length);
@@ -139,10 +139,10 @@ public final class BufferedRandomAccessFile {
 				arg1 -= var7;
 			}
 			if (arg1 > this.field3250.length) {
-				this.field3270.method830(this.field3245);
+				this.field3270.seek(this.field3245);
 				this.field3267 = this.field3245;
 				while (arg1 > 0) {
-					int var9 = this.field3270.method834(arg0, arg1, arg2);
+					int var9 = this.field3270.read(arg0, arg1, arg2);
 					if (var9 == -1) {
 						break;
 					}
@@ -207,19 +207,19 @@ public final class BufferedRandomAccessFile {
 	@ObfuscatedName("wb.b(I)V")
 	public void method1046() throws IOException {
 		this.method1049();
-		this.field3270.method831();
+		this.field3270.close();
 	}
 
 	@ObfuscatedName("wb.a(B)V")
 	public void method1048() throws IOException {
 		this.field3256 = 0;
 		if (this.field3267 != this.field3245) {
-			this.field3270.method830(this.field3245);
+			this.field3270.seek(this.field3245);
 			this.field3267 = this.field3245;
 		}
 		this.field3263 = this.field3245;
 		while (this.field3250.length > this.field3256) {
-			int var1 = this.field3270.method834(this.field3256, this.field3250.length - this.field3256, this.field3250);
+			int var1 = this.field3270.read(this.field3256, this.field3250.length - this.field3256, this.field3250);
 			if (var1 == -1) {
 				break;
 			}
@@ -230,7 +230,7 @@ public final class BufferedRandomAccessFile {
 
 	public BufferedRandomAccessFile(FileOnDisk arg0, int arg1, int arg2) throws IOException {
 		this.field3270 = arg0;
-		this.field3269 = this.field3271 = arg0.method833();
+		this.field3269 = this.field3271 = arg0.length();
 		this.field3259 = new byte[0];
 		this.field3250 = new byte[arg1];
 		this.field3245 = 0L;
@@ -242,10 +242,10 @@ public final class BufferedRandomAccessFile {
 			return;
 		}
 		if (this.field3267 != this.field3260) {
-			this.field3270.method830(this.field3260);
+			this.field3270.seek(this.field3260);
 			this.field3267 = this.field3260;
 		}
-		this.field3270.method832(this.field3259, 0, this.field3262);
+		this.field3270.write(this.field3259, 0, this.field3262);
 		this.field3267 += this.field3262;
 		if (this.field3271 < this.field3267) {
 			this.field3271 = this.field3267;

@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class Packet extends Linkable {
 
 	@ObfuscatedName("re.l")
-	public static int[] field2698 = new int[256];
+	public static int[] crctable = new int[256];
 
 	static {
 		for (int var0 = 0; var0 < 256; var0++) {
@@ -23,7 +23,7 @@ public class Packet extends Linkable {
 					var1 >>>= 0x1;
 				}
 			}
-			field2698[var0] = var1;
+			crctable[var0] = var1;
 		}
 	}
 
@@ -34,12 +34,17 @@ public class Packet extends Linkable {
 	public int pos;
 
 	@ObfuscatedName("wb.a(ZII[B)I")
-	public static int method1044(int arg0, int arg1, byte[] arg2) {
+	public static int getcrc(int arg0, int arg1, byte[] arg2) {
 		int var3 = -1;
 		for (int var4 = arg0; var4 < arg1; var4++) {
-			var3 = field2698[(var3 ^ arg2[var4]) & 0xFF] ^ var3 >>> 8;
+			var3 = crctable[(var3 ^ arg2[var4]) & 0xFF] ^ var3 >>> 8;
 		}
 		return ~var3;
+	}
+
+	@ObfuscatedName("be.a([BIB)I")
+	public static int getcrc(byte[] arg0, int arg1) {
+		return getcrc(0, arg1, arg0);
 	}
 
 	@ObfuscatedName("ba.b(I)I")
@@ -93,7 +98,7 @@ public class Packet extends Linkable {
 		int var3 = this.pos;
 		this.pos = 0;
 		byte[] var4 = new byte[var3];
-		this.method173(var4, var3);
+		this.gdata(var4, var3);
 		BigInteger var5 = new BigInteger(var4);
 		BigInteger var6 = var5.modPow(arg1, arg0);
 		byte[] var7 = var6.toByteArray();
@@ -131,7 +136,7 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("ba.a(II)I")
 	public final int method149(int arg0) {
-		int var2 = method1044(arg0, this.pos, this.data);
+		int var2 = getcrc(arg0, this.pos, this.data);
 		this.p4(var2);
 		return var2;
 	}
@@ -196,7 +201,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.a([IZII)V")
-	public final void method159(int[] arg0, int arg1) {
+	public final void tinydec(int[] arg0, int arg1) {
 		int var3 = (arg1 - 5) / 8;
 		int var4 = this.pos;
 		this.pos = 5;
@@ -300,7 +305,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.a([BIIB)V")
-	public final void method173(byte[] arg0, int arg1) {
+	public final void gdata(byte[] arg0, int arg1) {
 		for (int var3 = 0; var3 < arg1; var3++) {
 			arg0[var3] = this.data[this.pos++];
 		}
@@ -351,7 +356,7 @@ public class Packet extends Linkable {
 	}
 
 	public Packet(int arg0) {
-		this.data = ByteArrayPool.method324(arg0);
+		this.data = ByteArrayPool.alloc(arg0);
 		this.pos = 0;
 	}
 

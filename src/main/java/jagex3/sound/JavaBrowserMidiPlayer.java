@@ -54,16 +54,16 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 		if (this.field1009.status == 1) {
 			FileOnDisk var1 = (FileOnDisk) this.field1009.result;
 			try {
-				var1.method832(this.field1039, 0, this.field1039.length);
-				var1.method831();
+				var1.write(this.field1039, 0, this.field1039.length);
+				var1.close();
 				try {
-					Statics.method629(this.field1045.applet, "midibox.loop=" + (this.field1025 ? "\"infinite\"" : "0") + "; midibox.src=\"" + var1.method829().getPath().replace('\\', '/') + "\"; midibox.volume=" + this.field1033 + ";");
+					Statics.method629(this.field1045.applet, "midibox.loop=" + (this.field1025 ? "\"infinite\"" : "0") + "; midibox.src=\"" + var1.getFile().getPath().replace('\\', '/') + "\"; midibox.volume=" + this.field1033 + ";");
 					this.field1008 = true;
 				} catch (Throwable var3) {
 				}
 			} catch (Exception var4) {
 				try {
-					var1.method831();
+					var1.close();
 				} catch (Exception var2) {
 				}
 			}

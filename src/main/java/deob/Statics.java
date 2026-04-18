@@ -526,8 +526,6 @@ public class Statics {
 	public static JagString field3247 = JagString.wrap("p12_full");
 	@ObfuscatedName("wb.K")
 	public static JagString field3277 = JagString.wrap("(U3");
-	@ObfuscatedName("kb.g")
-	public static LinkList field1547 = new LinkList();
 	@ObfuscatedName("ha.a")
 	public static int field1144 = 0;
 	@ObfuscatedName("fc.Gb")
@@ -548,8 +546,6 @@ public class Statics {
 	public static int field1497 = -1;
 	@ObfuscatedName("d.oc")
 	public static int[] field644 = new int[]{768, 1024, 1280, 512, 1536, 256, 0, 1792};
-	@ObfuscatedName("ad.z")
-	public static Object field213 = new Object();
 	@ObfuscatedName("ad.A")
 	public static int field214 = -1;
 	@ObfuscatedName("ad.G")
@@ -570,8 +566,6 @@ public class Statics {
 	public static int field3304 = 0;
 	@ObfuscatedName("wb.B")
 	public static boolean field3268 = false;
-	@ObfuscatedName("ba.lc")
-	public static int field307 = 0;
 	@ObfuscatedName("fe.vc")
 	public static boolean field953 = false;
 	@ObfuscatedName("fe.Ac")
@@ -596,8 +590,6 @@ public class Statics {
 	public static boolean[] field1190 = new boolean[]{true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, false, false};
 	@ObfuscatedName("cd.p")
 	public static int field544 = 0;
-	@ObfuscatedName("cd.w")
-	public static int field551 = 0;
 
 	static {
 		int var0 = 0;
@@ -768,11 +760,11 @@ public class Statics {
 	@ObfuscatedName("g.a([BZII)La;")
 	public static JagString method419(byte[] arg0, int arg1, int arg2) {
 		JagString var3 = new JagString();
-		var3.field26 = 0;
-		var3.field38 = new byte[arg2];
+		var3.length = 0;
+		var3.charCode = new byte[arg2];
 		for (int var4 = arg1; var4 < arg1 + arg2; var4++) {
 			if (arg0[var4] != 0) {
-				var3.field38[var3.field26++] = arg0[var4];
+				var3.charCode[var3.length++] = arg0[var4];
 			}
 		}
 		return var3;
@@ -820,7 +812,7 @@ public class Statics {
 	@ObfuscatedName("w.a(B)V")
 	public static void method1027() {
 		Client.interfaces = null;
-		Js5Loader.field3198 = null;
+		Js5Loader.crc32 = null;
 		TextGerman.field3197 = null;
 		Text.field3205 = null;
 		field3203 = null;
@@ -962,7 +954,7 @@ public class Statics {
 		field2699 = null;
 		field2701 = null;
 		ReflectionChecker.field2694 = null;
-		Packet.field2698 = null;
+		Packet.crctable = null;
 		field2700 = null;
 	}
 
@@ -1034,15 +1026,15 @@ public class Statics {
 	@ObfuscatedName("de.a(B)V")
 	public static void method320() {
 		while (true) {
-			LinkList var0 = field1547;
+			LinkList var0 = Js5NetThread.requestQueue;
 			Js5WorkerRequest var1;
-			synchronized (field1547) {
+			synchronized (Js5NetThread.requestQueue) {
 				var1 = (Js5WorkerRequest) field2371.popFront();
 			}
 			if (var1 == null) {
 				return;
 			}
-			var1.field1456.method978(false, var1.field1454, (int) var1.key, var1.field1469);
+			var1.field1456.loadIndex(false, var1.data, (int) var1.key, var1.fs);
 		}
 	}
 
@@ -1197,21 +1189,16 @@ public class Statics {
 		ClientBuild.field3053 = null;
 	}
 
-	@ObfuscatedName("be.a([BIB)I")
-	public static int method244(byte[] arg0, int arg1) {
-		return Packet.method1044(0, arg1, arg0);
-	}
-
 	@ObfuscatedName("kb.b(B)V")
 	public static void method596() {
 		field1562 = null;
 		Text.field1564 = null;
-		ByteArrayPool.field1541 = null;
+		ByteArrayPool.cacheMax = null;
 		Client.binary = null;
 		Text.field1557 = null;
 		Text.field1549 = null;
 		Client.field1556 = null;
-		field1547 = null;
+		Js5NetThread.requestQueue = null;
 		Text.field1545 = null;
 		Text.field1563 = null;
 		VarBitType.configClient = null;
@@ -1322,7 +1309,7 @@ public class Statics {
 		Client.field925 = null;
 		IfType.interfaces = null;
 		Text.field932 = null;
-		PacketBit.field936 = null;
+		PacketBit.BITMASK = null;
 		field931 = null;
 		TextGerman.field929 = null;
 		Text.field942 = null;
@@ -1433,7 +1420,7 @@ public class Statics {
 		TextGerman.field2174 = null;
 		Client.field2187 = null;
 		Text.field2173 = null;
-		ByteArrayPool.field2179 = null;
+		ByteArrayPool.cacheMid = null;
 		field2181 = null;
 		Text.field2172 = null;
 		Text.field2178 = null;
@@ -1546,18 +1533,18 @@ public class Statics {
 			if (arg2[arg1 + var4] == null) {
 				arg2[arg1 + var4] = field1625;
 			}
-			var3 += arg2[arg1 + var4].field26;
+			var3 += arg2[arg1 + var4].length;
 		}
 		byte[] var5 = new byte[var3];
 		int var6 = 0;
 		for (int var7 = 0; var7 < arg0; var7++) {
 			JagString var8 = arg2[arg1 + var7];
-			ArrayUtil.copy(var8.field38, 0, var5, var6, var8.field26);
-			var6 += var8.field26;
+			ArrayUtil.copy(var8.charCode, 0, var5, var6, var8.length);
+			var6 += var8.length;
 		}
 		JagString var9 = new JagString();
-		var9.field26 = var3;
-		var9.field38 = var5;
+		var9.length = var3;
+		var9.charCode = var5;
 		return var9;
 	}
 
@@ -1756,8 +1743,8 @@ public class Statics {
 	@ObfuscatedName("je.b(II)La;")
 	public static JagString method566() {
 		JagString var0 = new JagString();
-		var0.field38 = new byte[100];
-		var0.field26 = 0;
+		var0.charCode = new byte[100];
+		var0.length = 0;
 		return var0;
 	}
 
@@ -1807,8 +1794,8 @@ public class Statics {
 				var5[var4] = field220[(int) (var6 - arg0 * 37L)];
 			}
 			JagString var8 = new JagString();
-			var8.field38 = var5;
-			var8.field26 = var5.length;
+			var8.charCode = var5;
+			var8.length = var5.length;
 			return var8;
 		}
 	}
@@ -1831,12 +1818,12 @@ public class Statics {
 	public static JagString method474(Packet arg0) {
 		try {
 			JagString var1 = new JagString();
-			var1.field26 = arg0.method178();
-			if (var1.field26 > 32767) {
-				var1.field26 = 32767;
+			var1.length = arg0.method178();
+			if (var1.length > 32767) {
+				var1.length = 32767;
 			}
-			var1.field38 = new byte[var1.field26];
-			arg0.pos += field2357.method1033(arg0.data, var1.field26, 0, var1.field38, arg0.pos);
+			var1.charCode = new byte[var1.length];
+			arg0.pos += field2357.method1033(arg0.data, var1.length, 0, var1.charCode, arg0.pos);
 			return var1;
 		} catch (Exception var2) {
 			return field1756;
@@ -1945,12 +1932,12 @@ public class Statics {
 
 	@ObfuscatedName("rc.a(I)V")
 	public static void method884() {
-		Object var0 = field213;
-		synchronized (field213) {
-			if (field307 != 0) {
-				field307 = 1;
+		Object var0 = Js5NetThread.lock;
+		synchronized (Js5NetThread.lock) {
+			if (Js5NetThread.keepAlive != 0) {
+				Js5NetThread.keepAlive = 1;
 				try {
-					field213.wait();
+					Js5NetThread.lock.wait();
 				} catch (InterruptedException var1) {
 				}
 			}
@@ -1975,7 +1962,7 @@ public class Statics {
 	public static void method44() {
 		try {
 			Graphics var0 = GameShell.canvas.getGraphics();
-			Client.field925.method101(4, var0, 4);
+			Client.field925.draw(4, var0, 4);
 		} catch (Exception var1) {
 			GameShell.canvas.repaint();
 		}
@@ -2031,8 +2018,8 @@ public class Statics {
 	@ObfuscatedName("ac.a(ILa;Lba;)I")
 	public static int method105(JagString arg0, Packet arg1) {
 		int var2 = arg1.pos;
-		arg1.method185(arg0.field26);
-		arg1.pos += field2357.method1036(0, arg1.pos, arg0.field26, arg0.field38, arg1.data);
+		arg1.method185(arg0.length);
+		arg1.pos += field2357.method1036(0, arg1.pos, arg0.length, arg0.charCode, arg1.data);
 		return arg1.pos - var2;
 	}
 
@@ -2268,7 +2255,7 @@ public class Statics {
 	public static void method934() {
 		Text.field2778 = null;
 		VarCache.var = null;
-		ByteArrayPool.field2801 = null;
+		ByteArrayPool.cacheMin = null;
 		Text.field2789 = null;
 		field2798 = null;
 		LocType.recentUse = null;
@@ -2383,7 +2370,7 @@ public class Statics {
 		TextGerman.field1127 = null;
 		Text.field1120 = null;
 		Text.field1093 = null;
-		DataFile.field1126 = null;
+		DataFile.temp = null;
 		Text.field1111 = null;
 		Text.field1102 = null;
 		Text.field1118 = null;
@@ -2459,7 +2446,7 @@ public class Statics {
 	@ObfuscatedName("ad.c(I)V")
 	public static void method116() {
 		field220 = null;
-		field213 = null;
+		Js5NetThread.lock = null;
 		Text.CONTINUE = null;
 		field221 = null;
 		TextGerman.field215 = null;

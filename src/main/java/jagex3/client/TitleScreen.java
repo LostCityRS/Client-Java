@@ -115,7 +115,7 @@ public class TitleScreen {
 
 	@ObfuscatedName("rd.a(ILbc;Lbc;)V")
 	public static void draw(PixFont arg0, PixFont arg1) {
-		Statics.field1935.method1054();
+		Statics.field1935.bind();
 		if (Client.state == 0 || Client.state == 5) {
 			arg0.method209(Text.field2405, 180, 54, 16777215);
 			Pix2D.drawRect(28, 62, 304, 34, 9179409);
@@ -184,17 +184,17 @@ public class TitleScreen {
 		method281();
 		try {
 			Graphics var6 = GameShell.canvas.getGraphics();
-			Statics.field1935.method101(202, var6, 171);
-			Statics.field472.method101(0, var6, 0);
-			Statics.field1435.method101(637, var6, 0);
+			Statics.field1935.draw(202, var6, 171);
+			Statics.field472.draw(0, var6, 0);
+			Statics.field1435.draw(637, var6, 0);
 			if (GameShell.field2402) {
 				GameShell.field2402 = false;
-				Statics.field2044.method101(128, var6, 0);
-				Statics.field2608.method101(202, var6, 371);
-				Statics.field844.method101(0, var6, 265);
-				Statics.field2701.method101(562, var6, 265);
-				Statics.field1307.method101(128, var6, 171);
-				Statics.field3298.method101(562, var6, 171);
+				Statics.field2044.draw(128, var6, 0);
+				Statics.field2608.draw(202, var6, 371);
+				Statics.field844.draw(0, var6, 265);
+				Statics.field2701.draw(562, var6, 265);
+				Statics.field1307.draw(128, var6, 171);
+				Statics.field3298.draw(562, var6, 171);
 			}
 		} catch (Exception var7) {
 			GameShell.canvas.repaint();
@@ -213,43 +213,43 @@ public class TitleScreen {
 		if (Statics.field1062) {
 			return;
 		}
-		Statics.field472 = PixMap.method875(265, 128, arg0);
+		Statics.field472 = PixMap.createSafe(265, 128, arg0);
 		Pix2D.method920();
-		Statics.field1435 = PixMap.method875(265, 128, arg0);
+		Statics.field1435 = PixMap.createSafe(265, 128, arg0);
 		Pix2D.method920();
-		Statics.field2044 = PixMap.method875(171, 509, arg0);
+		Statics.field2044 = PixMap.createSafe(171, 509, arg0);
 		Pix2D.method920();
-		Statics.field2608 = PixMap.method875(132, 360, arg0);
+		Statics.field2608 = PixMap.createSafe(132, 360, arg0);
 		Pix2D.method920();
-		Statics.field1935 = PixMap.method875(200, 360, arg0);
+		Statics.field1935 = PixMap.createSafe(200, 360, arg0);
 		Pix2D.method920();
-		Statics.field844 = PixMap.method875(238, 202, arg0);
+		Statics.field844 = PixMap.createSafe(238, 202, arg0);
 		Pix2D.method920();
-		Statics.field2701 = PixMap.method875(238, 203, arg0);
+		Statics.field2701 = PixMap.createSafe(238, 203, arg0);
 		Pix2D.method920();
-		Statics.field1307 = PixMap.method875(94, 74, arg0);
+		Statics.field1307 = PixMap.createSafe(94, 74, arg0);
 		Pix2D.method920();
-		Statics.field3298 = PixMap.method875(94, 75, arg0);
+		Statics.field3298 = PixMap.createSafe(94, 75, arg0);
 		Pix2D.method920();
 		byte[] var3 = arg1.method215(Statics.field3067, Statics.field1751);
 		Pix32 var4 = new Pix32(var3, arg0);
-		Statics.field472.method1054();
+		Statics.field472.bind();
 		var4.method557(0, 0);
-		Statics.field1435.method1054();
+		Statics.field1435.bind();
 		var4.method557(-637, 0);
-		Statics.field2044.method1054();
+		Statics.field2044.bind();
 		var4.method557(-128, 0);
-		Statics.field2608.method1054();
+		Statics.field2608.bind();
 		var4.method557(-202, -371);
-		Statics.field1935.method1054();
+		Statics.field1935.bind();
 		var4.method557(-202, -171);
-		Statics.field844.method1054();
+		Statics.field844.bind();
 		var4.method557(0, -265);
-		Statics.field2701.method1054();
+		Statics.field2701.bind();
 		var4.method557(-562, -265);
-		Statics.field1307.method1054();
+		Statics.field1307.bind();
 		var4.method557(-128, -171);
-		Statics.field3298.method1054();
+		Statics.field3298.bind();
 		var4.method557(-562, -171);
 		int[] var5 = new int[var4.wi];
 		for (int var6 = 0; var6 < var4.hi; var6++) {
@@ -260,37 +260,37 @@ public class TitleScreen {
 				var4.data[var4.wi * var6 + var8] = var5[var8];
 			}
 		}
-		Statics.field472.method1054();
+		Statics.field472.bind();
 		var4.method557(382, 0);
-		Statics.field1435.method1054();
+		Statics.field1435.bind();
 		var4.method557(-255, 0);
-		Statics.field2044.method1054();
+		Statics.field2044.bind();
 		var4.method557(254, 0);
-		Statics.field2608.method1054();
+		Statics.field2608.bind();
 		var4.method557(180, -371);
-		Statics.field1935.method1054();
+		Statics.field1935.bind();
 		var4.method557(180, -171);
-		Statics.field844.method1054();
+		Statics.field844.bind();
 		var4.method557(382, -265);
-		Statics.field2701.method1054();
+		Statics.field2701.bind();
 		var4.method557(-180, -265);
-		Statics.field1307.method1054();
+		Statics.field1307.bind();
 		var4.method557(254, -171);
-		Statics.field3298.method1054();
+		Statics.field3298.bind();
 		var4.method557(-180, -171);
-		Pix32 var9 = PixLoader.method1038(arg2, Client.field583, Statics.field3067);
-		Statics.field2044.method1054();
+		Pix32 var9 = PixLoader.makePix32(arg2, Client.field583, Statics.field3067);
+		Statics.field2044.bind();
 		var9.plotSprite(382 - var9.wi / 2 - 128, 18);
-		Statics.field2806 = PixLoader.method605(Statics.field1245, Statics.field3067, arg2);
-		Statics.field2919 = PixLoader.method605(Statics.field1056, Statics.field3067, arg2);
-		Statics.field1177 = PixLoader.method372(arg2, Statics.field473, Statics.field3067);
+		Statics.field2806 = PixLoader.makePix8(Statics.field1245, Statics.field3067, arg2);
+		Statics.field2919 = PixLoader.makePix8(Statics.field1056, Statics.field3067, arg2);
+		Statics.field1177 = PixLoader.makePix8Array(arg2, Statics.field473, Statics.field3067);
 		Statics.field2055 = new Pix32(128, 265);
 		Statics.field851 = new Pix32(128, 265);
 		for (int var10 = 0; var10 < 33920; var10++) {
-			Statics.field2055.data[var10] = Statics.field472.field3288[var10];
+			Statics.field2055.data[var10] = Statics.field472.data[var10];
 		}
 		for (int var11 = 0; var11 < 33920; var11++) {
-			Statics.field851.data[var11] = Statics.field1435.field3288[var11];
+			Statics.field851.data[var11] = Statics.field1435.data[var11];
 		}
 		Statics.field2600 = new int[256];
 		for (int var12 = 0; var12 < 64; var12++) {
@@ -469,7 +469,7 @@ public class TitleScreen {
             }
         }
         for (int var3 = 0; var3 < 33920; var3++) {
-            Statics.field472.field3288[var3] = Statics.field2055.data[var3];
+            Statics.field472.data[var3] = Statics.field2055.data[var3];
         }
         int var4 = 0;
         int var5 = 1152;
@@ -487,8 +487,8 @@ public class TitleScreen {
                 } else {
                     int var11 = 256 - var10;
                     int var13 = Statics.field2151[var10];
-                    int var14 = Statics.field472.field3288[var5];
-                    Statics.field472.field3288[var5++] = ((var13 & 0xFF00FF) * var10 + (var14 & 0xFF00FF) * var11 & 0xFF00FF00) + ((var13 & 0xFF00) * var10 + (var14 & 0xFF00) * var11 & 0xFF0000) >> 8;
+                    int var14 = Statics.field472.data[var5];
+                    Statics.field472.data[var5++] = ((var13 & 0xFF00FF) * var10 + (var14 & 0xFF00FF) * var11 & 0xFF00FF00) + ((var13 & 0xFF00) * var10 + (var14 & 0xFF00) * var11 & 0xFF0000) >> 8;
                 }
             }
             var5 += var8;
@@ -496,7 +496,7 @@ public class TitleScreen {
         int var15 = 1176;
         int var16 = 0;
         for (int var17 = 0; var17 < 33920; var17++) {
-            Statics.field1435.field3288[var17] = Statics.field851.data[var17];
+            Statics.field1435.data[var17] = Statics.field851.data[var17];
         }
         for (int var18 = 1; var18 < 255; var18++) {
             int var19 = (256 - var18) * field847[var18] / 256;
@@ -507,10 +507,10 @@ public class TitleScreen {
                 if (var23 == 0) {
                     var21++;
                 } else {
-                    int var25 = Statics.field1435.field3288[var21];
+                    int var25 = Statics.field1435.data[var21];
                     int var26 = 256 - var23;
                     int var27 = Statics.field2151[var23];
-                    Statics.field1435.field3288[var21++] = ((var25 & 0xFF00) * var26 + (var27 & 0xFF00) * var23 & 0xFF0000) + ((var25 & 0xFF00FF) * var26 + (var27 & 0xFF00FF) * var23 & 0xFF00FF00) >> 8;
+                    Statics.field1435.data[var21++] = ((var25 & 0xFF00) * var26 + (var27 & 0xFF00) * var23 & 0xFF0000) + ((var25 & 0xFF00FF) * var26 + (var27 & 0xFF00FF) * var23 & 0xFF00FF00) >> 8;
                 }
             }
             var15 = var21 + 128 - var20 - var19;

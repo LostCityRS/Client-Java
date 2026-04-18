@@ -7,7 +7,7 @@ import deob.Statics;
 public final class BZip2 {
 
 	@ObfuscatedName("ge.a")
-	public static BZip2State field1081 = new BZip2State();
+	public static BZip2State state = new BZip2State();
 
 	@ObfuscatedName("ge.a(Lmb;)V")
 	public static void method439(BZip2State arg0) {
@@ -478,28 +478,28 @@ public final class BZip2 {
 	}
 
 	@ObfuscatedName("ge.a([BI[BII)I")
-	public static int method446(byte[] arg0, int arg1, byte[] arg2, int arg3) {
-		BZip2State var4 = field1081;
-		synchronized (field1081) {
-			field1081.field1820 = arg2;
-			field1081.field1822 = 9;
-			field1081.field1827 = arg0;
-			field1081.field1815 = 0;
-			field1081.field1813 = arg1;
-			field1081.field1837 = 0;
-			field1081.field1824 = 0;
-			field1081.field1821 = 0;
-			field1081.field1836 = 0;
-			method441(field1081);
-			int var5 = arg1 - field1081.field1813;
-			field1081.field1820 = null;
-			field1081.field1827 = null;
+	public static int decompress(byte[] arg0, int arg1, byte[] arg2, int arg3) {
+		BZip2State var4 = state;
+		synchronized (state) {
+			state.field1820 = arg2;
+			state.field1822 = 9;
+			state.field1827 = arg0;
+			state.field1815 = 0;
+			state.field1813 = arg1;
+			state.field1837 = 0;
+			state.field1824 = 0;
+			state.field1821 = 0;
+			state.field1836 = 0;
+			method441(state);
+			int var5 = arg1 - state.field1813;
+			state.field1820 = null;
+			state.field1827 = null;
 			return var5;
 		}
 	}
 
 	@ObfuscatedName("ge.a()V")
 	public static void method438() {
-		field1081 = null;
+		state = null;
 	}
 }

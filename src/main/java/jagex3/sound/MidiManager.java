@@ -275,7 +275,7 @@ public class MidiManager {
 	public static synchronized void method679(Js5 arg0, JagString arg1, JagString arg2, int arg3) {
 		if (method521()) {
 			int var4 = arg0.getGroupId(arg1);
-			int var5 = arg0.method224(var4, arg2);
+			int var5 = arg0.getFileId(var4, arg2);
 			method670(arg3, var4, arg0, var5);
 		}
 	}

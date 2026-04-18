@@ -113,7 +113,7 @@ public class Js5Net {
 						var9 = 1;
 					}
 					if (var9 <= 0) {
-						int var10 = field2613.data.length - field967.field2619;
+						int var10 = field2613.data.length - field967.padding;
 						int var11 = 512 - field2559;
 						if (var10 - field2613.pos < var11) {
 							var11 = var10 - field2613.pos;
@@ -137,14 +137,14 @@ public class Js5Net {
 									if (var15 != null) {
 										field2415.pos = var14 * 4 + 5;
 										int var16 = field2415.g4();
-										var15.method980(var16);
+										var15.requestIndex(var16);
 									}
 								}
 							} else {
 								field1363.reset();
 								field1363.update(field2613.data, 0, var10);
 								int var13 = (int) field1363.getValue();
-								if (field967.field2624 != var13) {
+								if (field967.expectedCrc != var13) {
 									try {
 										field2769.close();
 									} catch (Exception var28) {
@@ -156,7 +156,7 @@ public class Js5Net {
 								}
 								field525 = 0;
 								field1803 = 0;
-								field967.field2615.method976((field967.key & 0xFF0000L) == 16711680L, (int) (field967.key & 0xFFFFL), field3180, field2613.data);
+								field967.provider.write((field967.key & 0xFF0000L) == 16711680L, (int) (field967.key & 0xFFFFL), field3180, field2613.data);
 							}
 							field967.unlink();
 							field967 = null;
@@ -206,7 +206,7 @@ public class Js5Net {
 							}
 							field967 = var25;
 							int var26 = var21 == 0 ? 5 : 9;
-							field2613 = new Packet(field967.field2619 + var26 + var22);
+							field2613 = new Packet(field967.padding + var26 + var22);
 							field2613.p1(var21);
 							field2613.p4(var22);
 							field2559 = 8;
@@ -255,7 +255,7 @@ public class Js5Net {
     }
 
 	@ObfuscatedName("i.a(ZLu;IIBIB)V")
-	public static void method495(boolean arg0, Js5Loader arg1, int arg2, int arg3, byte arg4, int arg5) {
+	public static void queueRequest(boolean arg0, Js5Loader arg1, int arg2, int arg3, byte arg4, int arg5) {
 		long var6 = (long) ((arg2 << 16) + arg3);
 		Js5NetRequest var8 = (Js5NetRequest) field2596.find(var6);
 		if (var8 != null) {
@@ -274,9 +274,9 @@ public class Js5Net {
 				}
 			}
 			Js5NetRequest var12 = new Js5NetRequest();
-			var12.field2624 = arg5;
-			var12.field2619 = arg4;
-			var12.field2615 = arg1;
+			var12.expectedCrc = arg5;
+			var12.padding = arg4;
+			var12.provider = arg1;
 			if (arg0) {
 				field2596.put(var12, var6);
 				field3285++;
@@ -301,12 +301,12 @@ public class Js5Net {
 	@ObfuscatedName("client.a(Lu;BI)V")
 	public static void method280(Js5Loader arg0, int arg1) {
 		if (field2415 == null) {
-			method495(true, null, 255, 255, (byte) 0, 0);
+			queueRequest(true, null, 255, 255, (byte) 0, 0);
 			field1350[arg1] = arg0;
 		} else {
 			field2415.pos = arg1 * 4 + 5;
 			int var2 = field2415.g4();
-			arg0.method980(var2);
+			arg0.requestIndex(var2);
 		}
 	}
 
@@ -371,9 +371,9 @@ public class Js5Net {
 	}
 
     @ObfuscatedName("mb.a(BII)I")
-    public static int method684(int arg0, int arg1) {
+    public static int transferProgress(int arg0, int arg1) {
         long var2 = (long) ((arg0 << 16) + arg1);
-        return field967 != null && field967.key == var2 ? field2613.pos * 99 / (field2613.data.length - field967.field2619) + 1 : 0;
+        return field967 != null && field967.key == var2 ? field2613.pos * 99 / (field2613.data.length - field967.padding) + 1 : 0;
     }
 
     @ObfuscatedName("ld.a(III)V")

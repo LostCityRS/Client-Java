@@ -26,7 +26,7 @@ public class PixLoader {
 	public static int[] bpal;
 
 	@ObfuscatedName("bd.a([BI)V")
-	public static void method229(byte[] arg0) {
+	public static void depack(byte[] arg0) {
 		Packet var1 = new Packet(arg0);
 		var1.pos = arg0.length - 2;
 		count = var1.g2();
@@ -101,26 +101,26 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("id.a(Lbd;ILa;La;)Lbc;")
-	public static PixFont method528(Js5 arg0, JagString arg1, JagString arg2) {
+	public static PixFont makePixFont(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.getGroupId(arg2);
-		int var4 = arg0.method224(var3, arg1);
+		int var4 = arg0.getFileId(var3, arg1);
 		return makePixFont(var4, arg0, var3);
 	}
 
 	@ObfuscatedName("qb.a(ILbd;ZI)Ljd;")
 	public static Pix32 makePix32(int arg0, Js5 arg1, int arg2) {
-		return method885(arg0, arg2, arg1) ? makePix32() : null;
+		return depack(arg0, arg2, arg1) ? makePix32() : null;
 	}
 
 	@ObfuscatedName("kc.a(La;La;Lbd;B)Le;")
-	public static Pix8 method605(JagString arg0, JagString arg1, Js5 arg2) {
+	public static Pix8 makePix8(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.getGroupId(arg0);
-		int var4 = arg2.method224(var3, arg1);
-		return method609(arg2, var4, var3);
+		int var4 = arg2.getFileId(var3, arg1);
+		return makePix8(arg2, var4, var3);
 	}
 
 	@ObfuscatedName("uc.d(B)[Ljd;")
-	public static Pix32[] method998() {
+	public static Pix32[] makePix32Array() {
 		Pix32[] var0 = new Pix32[count];
 		for (int var1 = 0; var1 < count; var1++) {
 			Pix32 var2 = var0[var1] = new Pix32();
@@ -142,22 +142,22 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("be.a(Lbd;ILa;La;)[Ljd;")
-	public static Pix32[] method245(Js5 arg0, JagString arg1, JagString arg2) {
+	public static Pix32[] makePix32Array(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.getGroupId(arg1);
-		int var4 = arg0.method224(var3, arg2);
-		return method881(var3, arg0, var4);
+		int var4 = arg0.getFileId(var3, arg2);
+		return makePix32Array(var3, arg0, var4);
 	}
 
 	@ObfuscatedName("td.a(I)Lbc;")
-	public static PixFont method965() {
+	public static PixFont makePixFont() {
 		PixFont var0 = new PixFont(yof, wi, hi, bpal, bspr);
 		reset();
 		return var0;
 	}
 
 	@ObfuscatedName("kc.a(Lbd;BII)Le;")
-	public static Pix8 method609(Js5 arg0, int arg1, int arg2) {
-		return method885(arg1, arg2, arg0) ? makePix8() : null;
+	public static Pix8 makePix8(Js5 arg0, int arg1, int arg2) {
+		return depack(arg1, arg2, arg0) ? makePix8() : null;
 	}
 
 	@ObfuscatedName("hb.b(I)Le;")
@@ -194,37 +194,37 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("wa.a(Lbd;La;BLa;)Ljd;")
-	public static Pix32 method1038(Js5 arg0, JagString arg1, JagString arg2) {
+	public static Pix32 makePix32(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.getGroupId(arg1);
-		int var4 = arg0.method224(var3, arg2);
+		int var4 = arg0.getFileId(var3, arg2);
 		return makePix32(var4, arg0, var3);
 	}
 
 	@ObfuscatedName("j.a(ILbd;I)Le;")
-	public static Pix8 method533(Js5 arg0, int arg1) {
-		return method148(arg0, arg1) ? makePix8() : null;
+	public static Pix8 makePix8(Js5 arg0, int arg1) {
+		return depack(arg0, arg1) ? makePix8() : null;
 	}
 
     @ObfuscatedName("ec.a(Lbd;BLa;La;)[Le;")
-    public static Pix8[] method372(Js5 arg0, JagString arg1, JagString arg2) {
+    public static Pix8[] makePix8Array(Js5 arg0, JagString arg1, JagString arg2) {
         int var3 = arg0.getGroupId(arg1);
-        int var4 = arg0.method224(var3, arg2);
-        return method518(arg0, var4, var3);
+        int var4 = arg0.getFileId(var3, arg2);
+        return makePix8Array(arg0, var4, var3);
     }
 
 	@ObfuscatedName("ib.a(ILbd;II)[Le;")
-	public static Pix8[] method518(Js5 arg0, int arg1, int arg2) {
-		return method885(arg1, arg2, arg0) ? makePix8Array() : null;
+	public static Pix8[] makePix8Array(Js5 arg0, int arg1, int arg2) {
+		return depack(arg1, arg2, arg0) ? makePix8Array() : null;
 	}
 
 	@ObfuscatedName("rc.a(BILbd;I)[Ljd;")
-	public static Pix32[] method881(int arg0, Js5 arg1, int arg2) {
-		return method885(arg2, arg0, arg1) ? method998() : null;
+	public static Pix32[] makePix32Array(int arg0, Js5 arg1, int arg2) {
+		return depack(arg2, arg0, arg1) ? makePix32Array() : null;
 	}
 
 	@ObfuscatedName("d.a(IBLbd;I)Lbc;")
 	public static PixFont makePixFont(int arg0, Js5 arg1, int arg2) {
-		return method885(arg0, arg2, arg1) ? method965() : null;
+		return depack(arg0, arg2, arg1) ? makePixFont() : null;
 	}
 
 	@ObfuscatedName("h.b(Z)V")
@@ -238,23 +238,23 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("rc.a(IILbd;I)Z")
-	public static boolean method885(int arg0, int arg1, Js5 arg2) {
+	public static boolean depack(int arg0, int arg1, Js5 arg2) {
 		byte[] var3 = arg2.getFile(arg0, arg1);
 		if (var3 == null) {
 			return false;
 		} else {
-			method229(var3);
+			depack(var3);
 			return true;
 		}
 	}
 
 	@ObfuscatedName("ba.a(ILbd;I)Z")
-	public static boolean method148(Js5 arg0, int arg1) {
-		byte[] var2 = arg0.method232(arg1);
+	public static boolean depack(Js5 arg0, int arg1) {
+		byte[] var2 = arg0.getFile(arg1);
 		if (var2 == null) {
 			return false;
 		} else {
-			method229(var2);
+			depack(var2);
 			return true;
 		}
 	}

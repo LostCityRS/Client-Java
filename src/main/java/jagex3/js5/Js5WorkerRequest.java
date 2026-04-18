@@ -8,15 +8,15 @@ import jagex3.io.DataFile;
 public final class Js5WorkerRequest extends Linkable {
 
 	@ObfuscatedName("jc.hb")
-	public byte[] field1454;
+	public byte[] data;
 
 	@ObfuscatedName("jc.jb")
 	public Js5Loader field1456;
 
 	@ObfuscatedName("jc.rb")
-	public int field1464;
+	public int type;
 
 	@ObfuscatedName("jc.wb")
-	public DataFile field1469;
+	public DataFile fs;
 
 }

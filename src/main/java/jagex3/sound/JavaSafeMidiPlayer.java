@@ -190,7 +190,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 		this.method1000((long) field1445);
 		field1442.method310(field1446, field1448);
 		field1448 = 0;
-		arg0.method656(10, this);
+		arg0.threadreq(10, this);
 	}
 
 	@ObfuscatedName("ja.a(B)V")

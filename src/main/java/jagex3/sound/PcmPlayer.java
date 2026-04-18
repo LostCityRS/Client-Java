@@ -221,7 +221,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	public final void method818(SignLink arg0, int arg1) throws Exception {
 		this.field2349 = arg1;
 		this.method815(Statics.currentTime());
-		arg0.method656(10, this);
+		arg0.threadreq(10, this);
 	}
 
 	@ObfuscatedName("pd.a()V")

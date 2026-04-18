@@ -179,7 +179,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				}
 			}
 			this.addCanvas();
-			field187 = PixMap.method875(field2372, field711, canvas);
+			field187 = PixMap.createSafe(field2372, field711, canvas);
 			this.method290();
 			field1747 = Timer.create();
 			field1747.init();
@@ -337,7 +337,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			if (signlink == null) {
 				JagException.signlink = signlink = new SignLink(false, this, InetAddress.getByName(this.getCodeBase().getHost()), arg0, null, 0);
 			}
-			signlink.method656(1, this);
+			signlink.threadreq(1, this);
 		} catch (Exception var3) {
 			JagException.report(null, var3);
 			this.error("crash");
@@ -421,7 +421,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			Insets var8 = frame.getInsets();
 			frame.setSize(arg6 + var8.left + var8.right, var8.top + var8.bottom + arg2);
 			JagException.signlink = signlink = new SignLink(true, null, arg4, arg3, arg0, arg1);
-			signlink.method656(1, this);
+			signlink.threadreq(1, this);
 		} catch (Exception var10) {
 			JagException.report(null, var10);
 		}

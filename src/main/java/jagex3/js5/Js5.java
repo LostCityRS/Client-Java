@@ -1,7 +1,6 @@
 package jagex3.js5;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.datastruct.IntHashTable;
 import jagex3.io.BZip2;
@@ -18,71 +17,71 @@ import java.util.zip.GZIPInputStream;
 public abstract class Js5 {
 
     @ObfuscatedName("ra.i")
-    public static final int field2597 = 0;
+    public static final int maxsize = 0;
     @ObfuscatedName("bd.b")
-	public byte[][] field362;
+	public byte[][] packed;
 
 	@ObfuscatedName("bd.f")
 	public int crc;
 
 	@ObfuscatedName("bd.g")
-	public IntHashTable[] field367;
+	public IntHashTable[] fileNameHashes;
 
 	@ObfuscatedName("bd.j")
-	public final boolean field370;
+	public final boolean discardUnpacked;
 
 	@ObfuscatedName("bd.k")
-	public int field371;
+	public int size;
 
 	@ObfuscatedName("bd.n")
-	public int[] field374;
+	public int[] groupVersions;
 
 	@ObfuscatedName("bd.q")
-	public int[] field377;
+	public int[] groupIds;
 
 	@ObfuscatedName("bd.w")
-	public final boolean field383;
+	public final boolean discardPacked;
 
 	@ObfuscatedName("bd.R")
-	public IntHashTable field404;
+	public IntHashTable groupNameHashTable;
 
 	@ObfuscatedName("bd.C")
-	public int[] field389;
+	public int[] groupNameHash;
 
 	@ObfuscatedName("bd.P")
-	public int[] field402;
+	public int[] groupChecksums;
 
 	@ObfuscatedName("bd.Y")
-	public int[] field411;
+	public int[] groupSizes;
 
 	@ObfuscatedName("bd.z")
-	public int[][] field386;
+	public int[][] fileNameHashTable;
 
 	@ObfuscatedName("bd.G")
-	public int[][] field393;
+	public int[][] fileIds;
 
 	@ObfuscatedName("bd.M")
-	public byte[][][] field399;
+	public byte[][][] unpacked;
 
 	@ObfuscatedName("r.a([BI)[B")
-	public static byte[] method863(byte[] arg0) {
+	public static byte[] getUncompressedPacket(byte[] arg0) {
 		Packet var1 = new Packet(arg0);
 		int var2 = var1.g1();
 		int var3 = var1.g4();
-		if (var3 < 0 || field2597 != 0 && field2597 < var3) {
+		if (var3 < 0 || maxsize != 0 && maxsize < var3) {
 			throw new RuntimeException();
 		} else if (var2 == 0) {
 			byte[] var7 = new byte[var3];
-			var1.method173(var7, var3);
+			var1.gdata(var7, var3);
 			return var7;
 		} else {
 			int var4 = var1.g4();
-			if (var4 < 0 || field2597 != 0 && var4 > field2597) {
+			if (var4 < 0 || maxsize != 0 && var4 > maxsize) {
 				throw new RuntimeException();
 			}
 			byte[] var5 = new byte[var4];
 			if (var2 == 1) {
-				BZip2.method446(var5, var4, arg0, var3);
+				BZip2.decompress(var5, var4, arg0, var3);
 			} else {
 				try {
 					DataInputStream var6 = new DataInputStream(new GZIPInputStream(new ByteArrayInputStream(arg0, 9, var3)));
@@ -99,15 +98,15 @@ public abstract class Js5 {
 	public final byte[] method215(JagString arg0, JagString arg1) {
 		JagString var3 = arg1.method30();
 		JagString var4 = arg0.method30();
-		int var5 = this.field404.find(var3.method27());
-		int var6 = this.field367[var5].find(var4.method27());
+		int var5 = this.groupNameHashTable.find(var3.method27());
+		int var6 = this.fileNameHashes[var5].find(var4.method27());
 		return this.getFile(var6, var5);
 	}
 
 	@ObfuscatedName("bd.a(II)V")
 	public final void discardFiles(int arg0) {
-		for (int var2 = 0; var2 < this.field399[arg0].length; var2++) {
-			this.field399[arg0][var2] = null;
+		for (int var2 = 0; var2 < this.unpacked[arg0].length; var2++) {
+			this.unpacked[arg0][var2] = null;
 		}
 	}
 
@@ -118,13 +117,13 @@ public abstract class Js5 {
 
 	@ObfuscatedName("bd.a(IBI)Z")
 	public final boolean requestDownload(int arg0, int arg1) {
-		if (arg0 < 0 || this.field399.length <= arg0 || this.field399[arg0] == null || arg1 < 0 || arg1 >= this.field399[arg0].length) {
+		if (arg0 < 0 || this.unpacked.length <= arg0 || this.unpacked[arg0] == null || arg1 < 0 || arg1 >= this.unpacked[arg0].length) {
 			return false;
-		} else if (this.field399[arg0][arg1] != null) {
+		} else if (this.unpacked[arg0][arg1] != null) {
 			return true;
-		} else if (this.field362[arg0] == null) {
-			this.method222(arg0);
-			return this.field362[arg0] != null;
+		} else if (this.packed[arg0] == null) {
+			this.requestGroupDownload2(arg0);
+			return this.packed[arg0] != null;
 		} else {
 			return true;
 		}
@@ -136,120 +135,119 @@ public abstract class Js5 {
 
 	@ObfuscatedName("bd.a(I)I")
 	public final int getGroupCount() {
-		return this.field399.length;
+		return this.unpacked.length;
 	}
 
 	@ObfuscatedName("bd.a(II[II)[B")
 	public final byte[] fetchFile(int arg0, int arg1, int[] arg2) {
-		if (arg0 < 0 || this.field399.length <= arg0 || this.field399[arg0] == null || arg1 < 0 || arg1 >= this.field399[arg0].length) {
+		if (arg0 < 0 || this.unpacked.length <= arg0 || this.unpacked[arg0] == null || arg1 < 0 || arg1 >= this.unpacked[arg0].length) {
 			return null;
 		}
-		if (this.field399[arg0][arg1] == null) {
-			boolean var4 = this.method226(arg0, arg2);
+		if (this.unpacked[arg0][arg1] == null) {
+			boolean var4 = this.unpackGroupData(arg0, arg2);
 			if (!var4) {
-				this.method222(arg0);
-				boolean var5 = this.method226(arg0, arg2);
+				this.requestGroupDownload2(arg0);
+				boolean var5 = this.unpackGroupData(arg0, arg2);
 				if (!var5) {
 					return null;
 				}
 			}
 		}
-		byte[] var6 = this.field399[arg0][arg1];
-		if (this.field370) {
-			this.field399[arg0][arg1] = null;
+		byte[] var6 = this.unpacked[arg0][arg1];
+		if (this.discardUnpacked) {
+			this.unpacked[arg0][arg1] = null;
 		}
 		return var6;
 	}
 
 	@ObfuscatedName("bd.b(II)V")
-	public void method222(int arg0) {
+	public void requestGroupDownload2(int arg0) {
 	}
 
 	@ObfuscatedName("bd.a(I[B)V")
-	public final void method223(byte[] arg0) {
-		this.crc = Statics.method244(arg0, arg0.length);
-		Packet var2 = new Packet(method863(arg0));
+	public final void decodeIndex(byte[] arg0) {
+		this.crc = Packet.getcrc(arg0, arg0.length);
+		Packet var2 = new Packet(getUncompressedPacket(arg0));
 		int var3 = var2.g1();
 		if (var3 != 5) {
 			return;
 		}
 		int var4 = 0;
 		int var5 = var2.g1();
-		this.field371 = var2.g2();
-		this.field377 = new int[this.field371];
+		this.size = var2.g2();
+		this.groupIds = new int[this.size];
 		int var6 = -1;
-		for (int var7 = 0; var7 < this.field371; var7++) {
-			this.field377[var7] = var4 += var2.g2();
-			if (this.field377[var7] > var6) {
-				var6 = this.field377[var7];
+		for (int var7 = 0; var7 < this.size; var7++) {
+			this.groupIds[var7] = var4 += var2.g2();
+			if (this.groupIds[var7] > var6) {
+				var6 = this.groupIds[var7];
 			}
 		}
-		this.field393 = new int[var6 + 1][];
-		this.field374 = new int[var6 + 1];
-		this.field402 = new int[var6 + 1];
-		this.field399 = new byte[var6 + 1][][];
-		this.field411 = new int[var6 + 1];
-		this.field362 = new byte[var6 + 1][];
+		this.fileIds = new int[var6 + 1][];
+		this.groupVersions = new int[var6 + 1];
+		this.groupChecksums = new int[var6 + 1];
+		this.unpacked = new byte[var6 + 1][][];
+		this.groupSizes = new int[var6 + 1];
+		this.packed = new byte[var6 + 1][];
 		if (var5 != 0) {
-			this.field389 = new int[var6 + 1];
-			for (int var8 = 0; var8 < this.field371; var8++) {
-				this.field389[this.field377[var8]] = var2.g4();
+			this.groupNameHash = new int[var6 + 1];
+			for (int var8 = 0; var8 < this.size; var8++) {
+				this.groupNameHash[this.groupIds[var8]] = var2.g4();
 			}
-			this.field404 = new IntHashTable(this.field389);
+			this.groupNameHashTable = new IntHashTable(this.groupNameHash);
 		}
-		for (int var9 = 0; var9 < this.field371; var9++) {
-			this.field402[this.field377[var9]] = var2.g4();
+		for (int var9 = 0; var9 < this.size; var9++) {
+			this.groupChecksums[this.groupIds[var9]] = var2.g4();
 		}
-		for (int var10 = 0; var10 < this.field371; var10++) {
-			this.field374[this.field377[var10]] = var2.g4();
+		for (int var10 = 0; var10 < this.size; var10++) {
+			this.groupVersions[this.groupIds[var10]] = var2.g4();
 		}
-		for (int var11 = 0; var11 < this.field371; var11++) {
-			this.field411[this.field377[var11]] = var2.g2();
+		for (int var11 = 0; var11 < this.size; var11++) {
+			this.groupSizes[this.groupIds[var11]] = var2.g2();
 		}
-		for (int var12 = 0; var12 < this.field371; var12++) {
+		for (int var12 = 0; var12 < this.size; var12++) {
 			int var13 = 0;
-			int var14 = this.field377[var12];
+			int var14 = this.groupIds[var12];
 			int var15 = -1;
-			int var16 = this.field411[var14];
-			this.field393[var14] = new int[var16];
+			int var16 = this.groupSizes[var14];
+			this.fileIds[var14] = new int[var16];
 			for (int var17 = 0; var17 < var16; var17++) {
-				int var18 = this.field393[var14][var17] = var13 += var2.g2();
+				int var18 = this.fileIds[var14][var17] = var13 += var2.g2();
 				if (var18 > var15) {
 					var15 = var18;
 				}
 			}
-			this.field399[var14] = new byte[var15 + 1][];
+			this.unpacked[var14] = new byte[var15 + 1][];
 		}
-		if (var5 == 0) {
-			return;
-		}
-		this.field367 = new IntHashTable[var6 + 1];
-		this.field386 = new int[var6 + 1][];
-		for (int var19 = 0; var19 < this.field371; var19++) {
-			int var20 = this.field377[var19];
-			int var21 = this.field411[var20];
-			this.field386[var20] = new int[this.field399[var20].length];
-			for (int var22 = 0; var22 < var21; var22++) {
-				this.field386[var20][this.field393[var20][var22]] = var2.g4();
+		if (var5 != 0) {
+			this.fileNameHashes = new IntHashTable[var6 + 1];
+			this.fileNameHashTable = new int[var6 + 1][];
+			for (int var19 = 0; var19 < this.size; var19++) {
+				int var20 = this.groupIds[var19];
+				int var21 = this.groupSizes[var20];
+				this.fileNameHashTable[var20] = new int[this.unpacked[var20].length];
+				for (int var22 = 0; var22 < var21; var22++) {
+					this.fileNameHashTable[var20][this.fileIds[var20][var22]] = var2.g4();
+				}
+				this.fileNameHashes[var20] = new IntHashTable(this.fileNameHashTable[var20]);
 			}
-			this.field367[var20] = new IntHashTable(this.field386[var20]);
 		}
 	}
 
 	@ObfuscatedName("bd.a(IILa;)I")
-	public final int method224(int arg0, JagString arg1) {
+	public final int getFileId(int arg0, JagString arg1) {
 		JagString var3 = arg1.method30();
-		return this.field367[arg0].find(var3.method27());
+		return this.fileNameHashes[arg0].find(var3.method27());
 	}
 
 	@ObfuscatedName("bd.a(II[I)Z")
-	public boolean method226(int arg0, int[] arg1) {
-		if (this.field362[arg0] == null) {
+	public boolean unpackGroupData(int arg0, int[] arg1) {
+		if (this.packed[arg0] == null) {
 			return false;
 		}
-		int var3 = this.field411[arg0];
-		byte[][] var4 = this.field399[arg0];
-		int[] var5 = this.field393[arg0];
+		int var3 = this.groupSizes[arg0];
+		byte[][] var4 = this.unpacked[arg0];
+		int[] var5 = this.fileIds[arg0];
 		boolean var6 = true;
 		for (int var7 = 0; var7 < var3; var7++) {
 			if (var4[var5[var7]] == null) {
@@ -262,21 +260,21 @@ public abstract class Js5 {
 		}
 		byte[] var8;
 		if (arg1 == null || arg1[0] == 0 && arg1[1] == 0 && arg1[2] == 0 && arg1[3] == 0) {
-			var8 = this.field362[arg0];
+			var8 = this.packed[arg0];
 		} else {
-			var8 = new byte[this.field362[arg0].length];
-			ArrayUtil.copy(this.field362[arg0], 0, var8, 0, var8.length);
+			var8 = new byte[this.packed[arg0].length];
+			ArrayUtil.copy(this.packed[arg0], 0, var8, 0, var8.length);
 			Packet var9 = new Packet(var8);
-			var9.method159(arg1, var9.data.length);
+			var9.tinydec(arg1, var9.data.length);
 		}
 		byte[] var10;
 		try {
-			var10 = method863(var8);
+			var10 = getUncompressedPacket(var8);
 		} catch (RuntimeException var25) {
-			throw JagException.report(var25, "T3 - " + (arg1 != null) + "," + arg0 + "," + var8.length + "," + Statics.method244(var8, var8.length) + "," + Statics.method244(var8, var8.length - 2) + "," + this.field402[arg0] + "," + this.crc);
+			throw JagException.report(var25, "T3 - " + (arg1 != null) + "," + arg0 + "," + var8.length + "," + Packet.getcrc(var8, var8.length) + "," + Packet.getcrc(var8, var8.length - 2) + "," + this.groupChecksums[arg0] + "," + this.crc);
 		}
-		if (this.field383) {
-			this.field362[arg0] = null;
+		if (this.discardPacked) {
+			this.packed[arg0] = null;
 		}
 		if (var3 > 1) {
 			int var12 = var10.length;
@@ -318,36 +316,36 @@ public abstract class Js5 {
 
 	@ObfuscatedName("bd.b(III)[B")
 	public final byte[] peekFile(int arg0, int arg1) {
-		if (arg1 < 0 || this.field399.length <= arg1 || this.field399[arg1] == null || arg0 < 0 || this.field399[arg1].length <= arg0) {
+		if (arg1 < 0 || this.unpacked.length <= arg1 || this.unpacked[arg1] == null || arg0 < 0 || this.unpacked[arg1].length <= arg0) {
 			return null;
 		}
-		if (this.field399[arg1][arg0] == null) {
-			boolean var3 = this.method226(arg1, null);
+		if (this.unpacked[arg1][arg0] == null) {
+			boolean var3 = this.unpackGroupData(arg1, null);
 			if (!var3) {
-				this.method222(arg1);
-				boolean var4 = this.method226(arg1, null);
+				this.requestGroupDownload2(arg1);
+				boolean var4 = this.unpackGroupData(arg1, null);
 				if (!var4) {
 					return null;
 				}
 			}
 		}
-		return this.field399[arg1][arg0];
+		return this.unpacked[arg1][arg0];
 	}
 
 	@ObfuscatedName("bd.a(ILa;)I")
 	public final int getGroupId(JagString arg0) {
 		JagString var2 = arg0.method30();
-		return this.field404.find(var2.method27());
+		return this.groupNameHashTable.find(var2.method27());
 	}
 
 	@ObfuscatedName("bd.a(B)Z")
 	public final boolean method230() {
 		boolean var1 = true;
-		for (int var2 = 0; var2 < this.field377.length; var2++) {
-			int var3 = this.field377[var2];
-			if (this.field362[var3] == null) {
-				this.method222(var3);
-				if (this.field362[var3] == null) {
+		for (int var2 = 0; var2 < this.groupIds.length; var2++) {
+			int var3 = this.groupIds[var2];
+			if (this.packed[var3] == null) {
+				this.requestGroupDownload2(var3);
+				if (this.packed[var3] == null) {
 					var1 = false;
 				}
 			}
@@ -357,19 +355,19 @@ public abstract class Js5 {
 
 	@ObfuscatedName("bd.c(II)Z")
 	public final boolean requestGroupDownload(int arg0) {
-		if (this.field362[arg0] == null) {
-			this.method222(arg0);
-			return this.field362[arg0] != null;
+		if (this.packed[arg0] == null) {
+			this.requestGroupDownload2(arg0);
+			return this.packed[arg0] != null;
 		} else {
 			return true;
 		}
 	}
 
 	@ObfuscatedName("bd.b(IB)[B")
-	public final byte[] method232(int arg0) {
-		if (this.field399.length == 1) {
+	public final byte[] getFile(int arg0) {
+		if (this.unpacked.length == 1) {
 			return this.getFile(arg0, 0);
-		} else if (this.field399[arg0].length == 1) {
+		} else if (this.unpacked[arg0].length == 1) {
 			return this.getFile(0, arg0);
 		} else {
 			throw new RuntimeException();
@@ -378,15 +376,15 @@ public abstract class Js5 {
 
 	@ObfuscatedName("bd.c(IB)I")
 	public final int getFileIdLimit(int arg0) {
-		return this.field399[arg0].length;
+		return this.unpacked[arg0].length;
 	}
 
 	@ObfuscatedName("bd.c(I)V")
 	public final void method236() {
-		for (int var1 = 0; var1 < this.field399.length; var1++) {
-			if (this.field399[var1] != null) {
-				for (int var2 = 0; var2 < this.field399[var1].length; var2++) {
-					this.field399[var1][var2] = null;
+		for (int var1 = 0; var1 < this.unpacked.length; var1++) {
+			if (this.unpacked[var1] != null) {
+				for (int var2 = 0; var2 < this.unpacked[var1].length; var2++) {
+					this.unpacked[var1][var2] = null;
 				}
 			}
 		}
@@ -394,14 +392,14 @@ public abstract class Js5 {
 
 	@ObfuscatedName("bd.a(IZ)[I")
 	public final int[] getFileList(int arg0) {
-		return this.field393[arg0];
+		return this.fileIds[arg0];
 	}
 
 	@ObfuscatedName("bd.a(BI)[B")
 	public final byte[] method238(int arg0) {
-		if (this.field399.length == 1) {
+		if (this.unpacked.length == 1) {
 			return this.peekFile(arg0, 0);
-		} else if (this.field399[arg0].length == 1) {
+		} else if (this.unpacked[arg0].length == 1) {
 			return this.peekFile(0, arg0);
 		} else {
 			throw new RuntimeException();
@@ -412,22 +410,22 @@ public abstract class Js5 {
 	public final boolean method239(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.method30();
 		JagString var4 = arg1.method30();
-		int var5 = this.field404.find(var3.method27());
-		int var6 = this.field367[var5].find(var4.method27());
+		int var5 = this.groupNameHashTable.find(var3.method27());
+		int var6 = this.fileNameHashes[var5].find(var4.method27());
 		return this.requestDownload(var5, var6);
 	}
 
 	@ObfuscatedName("bd.b(ILa;)V")
 	public final void updateCacheHint(JagString arg0) {
 		JagString var2 = arg0.method30();
-		int var3 = this.field404.find(var2.method27());
+		int var3 = this.groupNameHashTable.find(var2.method27());
 		if (var3 >= 0) {
 			this.method219(var3);
 		}
 	}
 
 	public Js5(boolean arg0, boolean arg1) {
-		this.field370 = arg1;
-		this.field383 = arg0;
+		this.discardUnpacked = arg1;
+		this.discardPacked = arg0;
 	}
 }

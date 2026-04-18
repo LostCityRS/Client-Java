@@ -11,32 +11,32 @@ import java.io.RandomAccessFile;
 public final class FileOnDisk {
 
 	@ObfuscatedName("q.a")
-	public long field2385;
+	public long pos;
 
 	@ObfuscatedName("q.b")
-	public final long field2386;
+	public final long maxLength;
 
 	@ObfuscatedName("q.c")
-	public RandomAccessFile field2387;
+	public RandomAccessFile file;
 
 	@ObfuscatedName("q.d")
-	public final File field2388;
+	public final File underlyingFile;
 
 	@ObfuscatedName("q.a(Z)Ljava/io/File;")
-	public File method829() {
-		return this.field2388;
+	public File getFile() {
+		return this.underlyingFile;
 	}
 
 	@ObfuscatedName("q.a(ZJ)V")
-	public void method830(long arg0) throws IOException {
-		this.field2387.seek(arg0);
-		this.field2385 = arg0;
+	public void seek(long arg0) throws IOException {
+		this.file.seek(arg0);
+		this.pos = arg0;
 	}
 
 	@ObfuscatedName("q.a(I)V")
-	public void method831() throws IOException {
-		this.field2387.close();
-		this.field2387 = null;
+	public void close() throws IOException {
+		this.file.close();
+		this.file = null;
 	}
 
 	public FileOnDisk(File arg0, String arg1, long arg2) throws IOException {
@@ -46,34 +46,34 @@ public final class FileOnDisk {
 		if (arg2 <= arg0.length()) {
 			arg0.delete();
 		}
-		this.field2387 = new RandomAccessFile(arg0, arg1);
-		this.field2386 = arg2;
-		this.field2388 = arg0;
-		this.field2385 = 0L;
+		this.file = new RandomAccessFile(arg0, arg1);
+		this.maxLength = arg2;
+		this.underlyingFile = arg0;
+		this.pos = 0L;
 	}
 
 	@ObfuscatedName("q.a([BIIZ)V")
-	public void method832(byte[] arg0, int arg1, int arg2) throws IOException {
-		if ((long) arg2 + this.field2385 > this.field2386) {
-			this.field2387.seek(this.field2386 + 1L);
-			this.field2387.write(1);
+	public void write(byte[] arg0, int arg1, int arg2) throws IOException {
+		if ((long) arg2 + this.pos > this.maxLength) {
+			this.file.seek(this.maxLength + 1L);
+			this.file.write(1);
 			throw new EOFException();
 		} else {
-			this.field2387.write(arg0, arg1, arg2);
-			this.field2385 += arg2;
+			this.file.write(arg0, arg1, arg2);
+			this.pos += arg2;
 		}
 	}
 
 	@ObfuscatedName("q.b(I)J")
-	public long method833() throws IOException {
-		return this.field2387.length();
+	public long length() throws IOException {
+		return this.file.length();
 	}
 
 	@ObfuscatedName("q.a(II[BI)I")
-	public int method834(int arg0, int arg1, byte[] arg2) throws IOException {
-		int var4 = this.field2387.read(arg2, arg0, arg1);
+	public int read(int arg0, int arg1, byte[] arg2) throws IOException {
+		int var4 = this.file.read(arg2, arg0, arg1);
 		if (var4 > 0) {
-			this.field2385 += var4;
+			this.pos += var4;
 		}
 		return var4;
 	}

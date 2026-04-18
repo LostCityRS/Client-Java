@@ -784,7 +784,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.e()V")
-	public void method556() {
+	public void trim() {
 		if (this.owi == this.wi && this.ohi == this.hi) {
 			return;
 		}

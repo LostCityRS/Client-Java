@@ -116,8 +116,8 @@ public final class Texture extends Linkable {
 		int var6 = arg1 * arg1;
 		this.field2194 = new int[var6 * 4];
 		for (int var7 = 0; var7 < this.field2199.length; var7++) {
-			Pix8 var8 = PixLoader.method533(arg2, this.field2199[var7]);
-			var8.method331();
+			Pix8 var8 = PixLoader.makePix8(arg2, this.field2199[var7]);
+			var8.trim();
 			byte[] var9 = var8.data;
 			int[] var10 = var8.bpal;
 			int var11 = this.field2200[var7];

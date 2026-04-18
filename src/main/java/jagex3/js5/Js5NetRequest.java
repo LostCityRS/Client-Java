@@ -7,11 +7,11 @@ import jagex3.datastruct.Linkable2;
 public final class Js5NetRequest extends Linkable2 {
 
 	@ObfuscatedName("rb.ub")
-	public Js5Loader field2615;
+	public Js5Loader provider;
 
 	@ObfuscatedName("rb.yb")
-	public byte field2619;
+	public byte padding;
 
 	@ObfuscatedName("rb.Db")
-	public int field2624;
+	public int expectedCrc;
 }

@@ -91,13 +91,13 @@ public final class SignLink implements Runnable {
 		}
 		if (this.field1715 != null) {
 			try {
-				this.field1715.method831();
+				this.field1715.close();
 			} catch (IOException var5) {
 			}
 		}
 		if (this.field1707 != null) {
 			try {
-				this.field1707.method831();
+				this.field1707.close();
 			} catch (IOException var4) {
 			}
 		}
@@ -107,7 +107,7 @@ public final class SignLink implements Runnable {
 		for (int var2 = 0; var2 < this.field1702.length; var2++) {
 			if (this.field1702[var2] != null) {
 				try {
-					this.field1702[var2].method831();
+					this.field1702[var2].close();
 				} catch (IOException var3) {
 				}
 			}
@@ -270,7 +270,7 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("lc.a(IILjava/lang/Runnable;)Led;")
-	public PrivilegedRequest method656(int arg0, Runnable arg1) {
+	public PrivilegedRequest threadreq(int arg0, Runnable arg1) {
 		return this.method651(arg0, 2, arg1);
 	}
 

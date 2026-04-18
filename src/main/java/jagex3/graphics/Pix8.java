@@ -132,7 +132,7 @@ public final class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("e.e()V")
-	public void method331() {
+	public void trim() {
 		if (this.owi == this.wi && this.hi == this.ohi) {
 			return;
 		}
@@ -151,7 +151,7 @@ public final class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("e.f()V")
-	public void method332() {
+	public void hflip() {
 		byte[] var1 = new byte[this.hi * this.wi];
 		int var2 = 0;
 		for (int var3 = 0; var3 < this.hi; var3++) {
@@ -164,7 +164,7 @@ public final class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("e.g()V")
-	public void method333() {
+	public void vflip() {
 		byte[] var1 = new byte[this.hi * this.wi];
 		int var2 = 0;
 		for (int var3 = this.hi - 1; var3 >= 0; var3--) {
