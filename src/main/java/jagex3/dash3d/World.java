@@ -172,7 +172,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(III)I")
-	public int method47(int arg0, int arg1, int arg2) {
+	public int decorType(int arg0, int arg1, int arg2) {
 		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null || var4.field887 == null ? 0 : var4.field887.field2678;
 	}
@@ -200,7 +200,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.b(III)I")
-	public int method49(int arg0, int arg1, int arg2) {
+	public int gdType(int arg0, int arg1, int arg2) {
 		Square var4 = this.field102[arg0][arg1][arg2];
 		return var4 == null || var4.field883 == null ? 0 : var4.field883.field1361;
 	}
@@ -229,7 +229,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a([IIIII)V")
-	public static void method51(int[] arg0) {
+	public static void resetVisCalc(int[] arg0) {
 		field145 = 0;
 		field151 = 0;
 		field163 = 512;
@@ -1322,7 +1322,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.g(III)I")
-	public int method66(int arg0, int arg1, int arg2) {
+	public int sceneType(int arg0, int arg1, int arg2) {
 		Square var4 = this.field102[arg0][arg1][arg2];
 		if (var4 == null) {
 			return 0;
@@ -1942,7 +1942,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIIILvb;IIZ)Z")
-	public boolean method90(int arg0, int arg1, int arg2, int arg3, int arg4, ModelSource arg5, int arg6, int arg7, boolean arg8) {
+	public boolean addDynamic(int arg0, int arg1, int arg2, int arg3, int arg4, ModelSource arg5, int arg6, int arg7, boolean arg8) {
 		if (arg5 == null) {
 			return true;
 		}
@@ -2158,7 +2158,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.e(IIII)I")
-	public int method97(int arg0, int arg1, int arg2, int arg3) {
+	public int typecode2(int arg0, int arg1, int arg2, int arg3) {
 		Square var5 = this.field102[arg0][arg1][arg2];
 		if (var5 == null) {
 			return -1;

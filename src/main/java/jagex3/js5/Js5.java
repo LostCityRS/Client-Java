@@ -95,7 +95,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(La;La;I)[B")
-	public final byte[] method215(JagString arg0, JagString arg1) {
+	public final byte[] getFile(JagString arg0, JagString arg1) {
 		JagString var3 = arg1.method30();
 		JagString var4 = arg0.method30();
 		int var5 = this.groupNameHashTable.find(var3.method27());
@@ -339,7 +339,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(B)Z")
-	public final boolean method230() {
+	public final boolean requestFullDownload() {
 		boolean var1 = true;
 		for (int var2 = 0; var2 < this.groupIds.length; var2++) {
 			int var3 = this.groupIds[var2];
@@ -407,7 +407,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.b(La;La;I)Z")
-	public final boolean method239(JagString arg0, JagString arg1) {
+	public final boolean requestDownload(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.method30();
 		JagString var4 = arg1.method30();
 		int var5 = this.groupNameHashTable.find(var3.method27());

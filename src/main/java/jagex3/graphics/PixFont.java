@@ -289,7 +289,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.a(La;IIII)V")
-	public void method196(JagString arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void centreStringWave(JagString arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg0 == null) {
 			return;
 		}
@@ -323,7 +323,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.b(La;IIII)V")
-	public void method198(JagString arg0, int arg1, int arg2, int arg3, int arg4) {
+	public void centreStringWave2(JagString arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg0 == null) {
 			return;
 		}
@@ -344,7 +344,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.a(La;IIIII)V")
-	public void method201(JagString arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void centreStringWave3(JagString arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg0 == null) {
 			return;
 		}
@@ -572,7 +572,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.a(La;III)V")
-	public void method209(JagString arg0, int arg1, int arg2, int arg3) {
+	public void centreString(JagString arg0, int arg1, int arg2, int arg3) {
 		this.drawString(arg0, arg1 - this.stringWid(arg0) / 2, arg2, arg3);
 	}
 

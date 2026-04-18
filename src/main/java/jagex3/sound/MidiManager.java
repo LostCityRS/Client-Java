@@ -66,7 +66,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("m.a(Z)V")
-	public static synchronized void method669() {
+	public static synchronized void stop() {
 		if (method521()) {
 			method475();
 			field1391 = false;
@@ -310,7 +310,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("nd.a(IB)V")
-	public static void method738(int arg0) {
+	public static void setVolume(int arg0) {
 		if (!method521()) {
 			return;
 		}

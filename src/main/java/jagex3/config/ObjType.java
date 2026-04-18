@@ -295,7 +295,7 @@ public final class ObjType extends Linkable2 {
 			spriteCache.put((long) arg1, var19);
 		}
 		Pix2D.setPixels(var9, var11, var10);
-		Pix2D.setClipping(var12, var14, var13, var15);
+		Pix2D.setSubClipping(var12, var14, var13, var15);
 		Pix2D.restoreClipping(var16);
 		Pix3D.height = var17;
 		Pix3D.width = var18;
@@ -326,6 +326,11 @@ public final class ObjType extends Linkable2 {
         } else {
             return JagString.join(new JagString[]{JagString.parseInt(arg0 / 1000000), Text.field1184});
         }
+    }
+
+    @ObfuscatedName("j.d(B)V")
+    public static void resetSpriteCache() {
+        spriteCache.clear();
     }
 
     @ObfuscatedName("ta.a(BZ)Z")

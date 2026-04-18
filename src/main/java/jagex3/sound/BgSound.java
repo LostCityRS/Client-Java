@@ -162,7 +162,7 @@ public final class BgSound extends Linkable {
 	}
 
 	@ObfuscatedName("wa.a(B)V")
-	public static void method1040() {
+	public static void recalculateMultilocs() {
 		for (BgSound var0 = (BgSound) field515.head(); var0 != null; var0 = (BgSound) field515.next()) {
 			if (var0.field434 != null) {
 				var0.method247();

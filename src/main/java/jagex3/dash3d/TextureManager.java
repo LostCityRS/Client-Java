@@ -79,7 +79,7 @@ public final class TextureManager implements TextureProvider {
 	}
 
 	@ObfuscatedName("mc.a(ID)V")
-	public void method696(double arg0) {
+	public void setBrightness(double arg0) {
 		this.field1877 = arg0;
 		this.method691();
 	}

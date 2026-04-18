@@ -105,7 +105,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.a(III)V")
-	public void method547(int arg0, int arg1, int arg2) {
+	public void rgbAdjust(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < this.data.length; var4++) {
 			int var5 = this.data[var4];
 			if (var5 != 0) {
@@ -709,7 +709,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.d()V")
-	public void method553() {
+	public void setPixels() {
 		Pix2D.setPixels(this.data, this.wi, this.hi);
 	}
 

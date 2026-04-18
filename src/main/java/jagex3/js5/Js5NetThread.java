@@ -77,7 +77,21 @@ public final class Js5NetThread implements Runnable {
 		method500();
 	}
 
-	@Override
+    @ObfuscatedName("rc.a(I)V")
+    public static void method884() {
+        Object var0 = lock;
+        synchronized (lock) {
+            if (keepAlive != 0) {
+                keepAlive = 1;
+                try {
+                    lock.wait();
+                } catch (InterruptedException var1) {
+                }
+            }
+        }
+    }
+
+    @Override
 	public void run() {
 		try {
 			while (true) {

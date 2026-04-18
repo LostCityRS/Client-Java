@@ -22,6 +22,10 @@ public class TitleScreen {
 	public static int field1209 = 0;
 	@ObfuscatedName("uc.s")
 	public static JagString loginPass = Statics.field3067;
+    @ObfuscatedName("wb.H")
+    public static int loadPos = 10;
+	@ObfuscatedName("uc.Q")
+	public static JagString loadString = Statics.field3067;
 
 	@ObfuscatedName("td.d(I)V")
 	public static void loop() {
@@ -117,16 +121,16 @@ public class TitleScreen {
 	public static void draw(PixFont arg0, PixFont arg1) {
 		Statics.field1935.bind();
 		if (Client.state == 0 || Client.state == 5) {
-			arg0.method209(Text.field2405, 180, 54, 16777215);
+			arg0.centreString(Text.field2405, 180, 54, 16777215);
 			Pix2D.drawRect(28, 62, 304, 34, 9179409);
 			Pix2D.drawRect(29, 63, 302, 32, 0);
-			Pix2D.fillRect(30, 64, Client.field3274 * 3, 30, 9179409);
-			Pix2D.fillRect(Client.field3274 * 3 + 30, 64, 300 - Client.field3274 * 3, 30, 0);
-			arg0.method209(Client.field3079, 180, 85, 16777215);
+			Pix2D.fillRect(30, 64, loadPos * 3, 30, 9179409);
+			Pix2D.fillRect(loadPos * 3 + 30, 64, 300 - loadPos * 3, 30, 0);
+			arg0.centreString(loadString, 180, 85, 16777215);
 		}
 		if (Client.state == 20) {
 			byte var2 = 40;
-			Statics.field2806.method329(0, 0);
+			Statics.field2806.plotSprite(0, 0);
 			arg0.method211(Statics.field3060, 180, 40, 16776960, true);
 			int var8 = var2 + 15;
 			arg0.method211(Statics.field3077, 180, 55, 16776960, true);
@@ -140,14 +144,14 @@ public class TitleScreen {
 			int var15 = var13 + 15;
 		}
 		if (Client.state == 10) {
-			Statics.field2806.method329(0, 0);
+			Statics.field2806.plotSprite(0, 0);
 			if (field1395 == 0) {
 				byte var5 = 80;
 				arg0.method211(Text.field582, 180, 80, 16776960, true);
 				int var23 = var5 + 30;
-				Statics.field2919.method329(27, 100);
+				Statics.field2919.plotSprite(27, 100);
 				arg0.method195(Text.field2639, 27, 100, 144, 40, 16777215, true, 1, 1, 0);
-				Statics.field2919.method329(187, 100);
+				Statics.field2919.plotSprite(187, 100);
 				arg0.method195(Text.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
 			} else if (field1395 == 2) {
 				byte var3 = 40;
@@ -161,10 +165,10 @@ public class TitleScreen {
 				arg0.drawString(JagString.join(new JagString[]{Text.field3002, loginUser, Client.loopCycle % 40 < 20 & Statics.field2084 == 0 ? Statics.field1204 : Statics.field3067}), 90, 95, 16777215, true);
 				int var19 = var17 + 15;
 				arg0.drawString(JagString.join(new JagString[]{Text.field1037, loginPass.method12(), Client.loopCycle % 40 < 20 & Statics.field2084 == 1 ? Statics.field1204 : Statics.field3067}), 92, 110, 16777215, true);
-				Statics.field2919.method329(27, 130);
+				Statics.field2919.plotSprite(27, 130);
 				int var21 = var19 + 15;
 				arg0.method211(Text.field926, 100, 155, 16777215, true);
-				Statics.field2919.method329(187, 130);
+				Statics.field2919.plotSprite(187, 130);
 				arg0.method211(Text.field3302, 260, 155, 16777215, true);
 			} else if (field1395 == 3) {
 				arg0.method211(Text.field3265, 180, 40, 16776960, true);
@@ -176,7 +180,7 @@ public class TitleScreen {
 				arg0.method211(Text.field2667, 180, 95, 16777215, true);
 				int var22 = var20 + 15;
 				arg0.method211(Text.field2400, 180, 110, 16777215, true);
-				Statics.field2919.method329(107, 130);
+				Statics.field2919.plotSprite(107, 130);
 				arg0.method211(Text.field3302, 180, 155, 16777215, true);
 				int var24 = var22 + 15;
 			}
@@ -231,7 +235,7 @@ public class TitleScreen {
 		Pix2D.method920();
 		Statics.field3298 = PixMap.createSafe(94, 75, arg0);
 		Pix2D.method920();
-		byte[] var3 = arg1.method215(Statics.field3067, Statics.field1751);
+		byte[] var3 = arg1.getFile(Statics.field3067, Statics.field1751);
 		Pix32 var4 = new Pix32(var3, arg0);
 		Statics.field472.bind();
 		var4.method557(0, 0);
@@ -552,5 +556,31 @@ public class TitleScreen {
 				}
 			}
 		}
+	}
+
+	@ObfuscatedName("td.a(Lbd;Lbd;I)I")
+	public static int ready(Js5 arg0, Js5 arg1) {
+		int var2 = 0;
+		if (arg0.requestDownload(Statics.field1751, Statics.field3067)) {
+			var2++;
+		}
+		if (arg1.requestDownload(Client.field583, Statics.field3067)) {
+			var2++;
+		}
+		if (arg1.requestDownload(Statics.field1245, Statics.field3067)) {
+			var2++;
+		}
+		if (arg1.requestDownload(Statics.field1056, Statics.field3067)) {
+			var2++;
+		}
+		if (arg1.requestDownload(Statics.field473, Statics.field3067)) {
+			var2++;
+		}
+		return var2;
+	}
+
+	@ObfuscatedName("gb.c(B)I")
+	public static int readyMax() {
+		return 5;
 	}
 }

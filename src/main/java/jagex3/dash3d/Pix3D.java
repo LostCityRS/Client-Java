@@ -1155,7 +1155,7 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a(Lod;)V")
-	public static void method357(TextureProvider arg0) {
+	public static void setTextures(TextureProvider arg0) {
 		field771 = arg0;
 	}
 
@@ -1814,7 +1814,7 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a(D)V")
-	public static void method365(double arg0) {
+	public static void initColourTable(double arg0) {
 		method368(arg0);
 	}
 

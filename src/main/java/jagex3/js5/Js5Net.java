@@ -12,7 +12,7 @@ import java.util.zip.CRC32;
 
 public class Js5Net {
 	@ObfuscatedName("mb.n")
-	public static int field1803 = 0;
+	public static int crcErrorCount = 0;
 	@ObfuscatedName("mb.P")
 	public static HashTable field1831 = new HashTable(4096);
 	@ObfuscatedName("ra.h")
@@ -30,7 +30,7 @@ public class Js5Net {
 	@ObfuscatedName("sd.p")
 	public static ClientStream field2769;
 	@ObfuscatedName("cc.Jb")
-	public static int field525 = 0;
+	public static int ioErrorCount = 0;
 	@ObfuscatedName("pb.a")
 	public static long field2271;
 	@ObfuscatedName("hc.q")
@@ -151,11 +151,11 @@ public class Js5Net {
 									}
 									field476 = (byte) (Math.random() * 255.0D + 1.0D);
 									field2769 = null;
-									field1803++;
+									crcErrorCount++;
 									return false;
 								}
-								field525 = 0;
-								field1803 = 0;
+								ioErrorCount = 0;
+								crcErrorCount = 0;
 								field967.provider.write((field967.key & 0xFF0000L) == 16711680L, (int) (field967.key & 0xFFFFL), field3180, field2613.data);
 							}
 							field967.unlink();
@@ -227,7 +227,7 @@ public class Js5Net {
 					field2769.close();
 				} catch (Exception var27) {
 				}
-				field525++;
+				ioErrorCount++;
 				field2769 = null;
 				return false;
 			}
@@ -250,7 +250,7 @@ public class Js5Net {
             } catch (Exception var2) {
             }
             field2769 = null;
-            field525++;
+            ioErrorCount++;
         }
     }
 
@@ -311,7 +311,7 @@ public class Js5Net {
 	}
 
 	@ObfuscatedName("f.a(Lvc;IZ)V")
-	public static void method381(ClientStream arg0, boolean arg1) {
+	public static void init(ClientStream arg0, boolean arg1) {
 		if (field2769 != null) {
 			try {
 				field2769.close();
@@ -344,7 +344,7 @@ public class Js5Net {
 								} catch (Exception var5) {
 								}
 								field2769 = null;
-								field525++;
+								ioErrorCount++;
 							}
 						}
 						field1189 = 0;

@@ -14,7 +14,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field2015 = -1;
 
 	@ObfuscatedName("nb.bc")
-	public JagString field1964 = null;
+	public JagString chat = null;
 
 	@ObfuscatedName("nb.cc")
 	public int field1965 = -1;
@@ -95,7 +95,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1991 = 200;
 
 	@ObfuscatedName("nb.Pb")
-	public int field1952 = 100;
+	public int chatTimer = 100;
 
 	@ObfuscatedName("nb.Fc")
 	public int field1994 = 0;
@@ -143,7 +143,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1989 = 0;
 
 	@ObfuscatedName("nb.Tc")
-	public int field2008 = 0;
+	public int cycle = 0;
 
 	@ObfuscatedName("nb.Zc")
 	public int field2014 = 0;

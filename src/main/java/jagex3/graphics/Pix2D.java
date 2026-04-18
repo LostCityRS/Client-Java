@@ -36,7 +36,7 @@ public class Pix2D extends Linkable2 {
 	}
 
 	@ObfuscatedName("sc.b(IIII)V")
-	public static void setClipping(int arg0, int arg1, int arg2, int arg3) {
+	public static void setSubClipping(int arg0, int arg1, int arg2, int arg3) {
 		if (arg0 < 0) {
 			arg0 = 0;
 		}
@@ -169,7 +169,7 @@ public class Pix2D extends Linkable2 {
 	}
 
 	@ObfuscatedName("sc.a()V")
-	public static void method919() {
+	public static void setClipping() {
 		field2752 = 0;
 		field2748 = 0;
 		field2753 = field2749;
@@ -328,7 +328,7 @@ public class Pix2D extends Linkable2 {
 		pixels = arg0;
 		field2749 = arg1;
 		field2750 = arg2;
-		setClipping(0, 0, arg1, arg2);
+		setSubClipping(0, 0, arg1, arg2);
 	}
 
 	@ObfuscatedName("eb.c([I)[I")

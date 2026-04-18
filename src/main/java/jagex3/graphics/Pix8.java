@@ -48,7 +48,7 @@ public final class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("e.a(II)V")
-	public void method329(int arg0, int arg1) {
+	public void plotSprite(int arg0, int arg1) {
 		int var3 = this.xof + arg0;
 		int var4 = this.yof + arg1;
 		int var5 = Pix2D.field2749 * var4 + var3;
@@ -177,7 +177,7 @@ public final class Pix8 extends Pix2D {
 	}
 
 	@ObfuscatedName("e.a(III)V")
-	public void method334(int arg0, int arg1, int arg2) {
+	public void rgbAdjust(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < this.bpal.length; var4++) {
 			int var5 = this.bpal[var4] >> 16 & 0xFF;
 			int var6 = arg0 + var5;

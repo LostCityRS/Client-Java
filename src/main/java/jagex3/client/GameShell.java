@@ -234,7 +234,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("kd.c(I)Z")
-	public final boolean method619() {
+	public final boolean checkhost() {
 		String var1 = this.getDocumentBase().getHost().toLowerCase();
 		if (var1.endsWith("jagex.com")) {
 			return true;

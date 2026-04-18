@@ -5,7 +5,6 @@ import jagex3.client.*;
 import jagex3.config.*;
 import jagex3.constants.Text;
 import jagex3.constants.TextGerman;
-import jagex3.dash3d.ClientEntity;
 import jagex3.dash3d.Pix3D;
 import jagex3.dash3d.PlayerModel;
 import jagex3.datastruct.LinkList;
@@ -17,16 +16,13 @@ import jagex3.sound.*;
 import jagex3.util.ArrayUtil;
 import jagex3.util.JagString;
 import jagex3.var.VarCache;
-import jagex3.wordfilter2.Huffman;
+import jagex3.wordfilter2.WordPack;
 
 import java.applet.Applet;
 import java.awt.*;
 // import netscape.javascript.JSObject;
 
 public class Statics {
-
-	@ObfuscatedName("ga.y")
-	public static long field1014;
 
 	@ObfuscatedName("ga.N")
 	public static int field1029;
@@ -100,9 +96,6 @@ public class Statics {
 	@ObfuscatedName("ab.hb")
 	public static boolean[][] field160;
 
-	@ObfuscatedName("la.n")
-	public static BufferedRandomAccessFile field1668;
-
 	@ObfuscatedName("md.Gb")
 	public static int field1895;
 
@@ -141,9 +134,6 @@ public class Statics {
 
 	@ObfuscatedName("ae.f")
 	public static int[] field229;
-
-	@ObfuscatedName("pe.xb")
-	public static Huffman field2357;
 
 	@ObfuscatedName("qc.m")
 	public static int field2437;
@@ -207,9 +197,6 @@ public class Statics {
 
 	@ObfuscatedName("dd.o")
 	public static PrivilegedRequest field715;
-
-	@ObfuscatedName("ec.Ib")
-	public static BufferedRandomAccessFile field797;
 
 	@ObfuscatedName("ee.a")
 	public static float field819;
@@ -538,8 +525,6 @@ public class Statics {
 	public static int field1114 = 0;
 	@ObfuscatedName("he.Ib")
 	public static int field1237 = 0;
-	@ObfuscatedName("j.hc")
-	public static int field1433 = 0;
 	@ObfuscatedName("je.Lb")
 	public static int[] field1483 = new int[25];
 	@ObfuscatedName("je.Zb")
@@ -550,8 +535,6 @@ public class Statics {
 	public static int field214 = -1;
 	@ObfuscatedName("ad.G")
 	public static byte[] field220 = new byte[]{95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57};
-	@ObfuscatedName("ld.C")
-	public static int field1749 = 0;
 	@ObfuscatedName("la.y")
 	public static int field1679 = 0;
 	@ObfuscatedName("mc.l")
@@ -682,11 +665,6 @@ public class Statics {
 		field1190 = null;
 	}
 
-	@ObfuscatedName("id.a(IILnb;)V")
-	public static void method523(int arg0, ClientEntity arg1) {
-		Client.method423(arg0, arg1.field1963, arg1.field1972);
-	}
-
 	@ObfuscatedName("ke.a(Ljava/applet/Applet;Ljava/lang/String;I)Ljava/lang/Object;")
 	public static Object method629(Applet arg0, String arg1) throws Throwable {
 		return null; // JSObject.getWindow(arg0).eval(arg1);
@@ -697,9 +675,9 @@ public class Statics {
 		field1245 = null;
 		SeqType.configClient = null;
 		TextGerman.field1232 = null;
-		Client.field1239 = null;
+		Client.compass = null;
 		field1229 = null;
-		Client.field1231 = null;
+		Client.hitmarks = null;
 		TextGerman.field1238 = null;
 		TextGerman.field1244 = null;
 		ClientBuild.field1247 = null;
@@ -734,7 +712,7 @@ public class Statics {
 		LocType.configClient = null;
 		Client.npcIds = null;
 		field676 = null;
-		Client.field680 = null;
+		Client.mapmarker = null;
 	}
 
 	@ObfuscatedName("dd.a(B)V")
@@ -751,7 +729,7 @@ public class Statics {
 		TextGerman.field716 = null;
 		Text.field705 = null;
 		Text.field720 = null;
-		Client.field708 = null;
+		Client.mouseTracking = null;
 		Text.field714 = null;
 		field713 = null;
 		Text.field718 = null;
@@ -822,7 +800,7 @@ public class Statics {
 	@ObfuscatedName("ac.b(I)V")
 	public static void method99() {
 		GameShell.field187 = null;
-		Client.field178 = null;
+		Client.headiconsPrayer = null;
 		Text.field183 = null;
 		TextGerman.field172 = null;
 		Text.field186 = null;
@@ -835,7 +813,7 @@ public class Statics {
 		field1649 = null;
 		field1645 = null;
 		field1646 = null;
-		Client.field1651 = null;
+		Client.js5Stream = null;
 	}
 
 	@ObfuscatedName("ha.a(I)V")
@@ -888,11 +866,11 @@ public class Statics {
 	@ObfuscatedName("pb.a(I)V")
 	public static void method800() {
 		Text.field2300 = null;
-		Client.field2303 = null;
+		Client.activeMapFunctionZ = null;
 		Client.locChanges = null;
 		Client.idkDesign = null;
 		field2297 = null;
-		Client.field2277 = null;
+		Client.overlayMultiway = null;
 		Client.field2305 = null;
 		Js5Net.field2301 = null;
 		Client.mapBuildGroundFile = null;
@@ -927,27 +905,6 @@ public class Statics {
 		Text.field1782 = null;
 	}
 
-	@ObfuscatedName("td.a(Lbd;Lbd;I)I")
-	public static int method966(Js5 arg0, Js5 arg1) {
-		int var2 = 0;
-		if (arg0.method239(field1751, field3067)) {
-			var2++;
-		}
-		if (arg1.method239(Client.field583, field3067)) {
-			var2++;
-		}
-		if (arg1.method239(field1245, field3067)) {
-			var2++;
-		}
-		if (arg1.method239(field1056, field3067)) {
-			var2++;
-		}
-		if (arg1.method239(field473, field3067)) {
-			var2++;
-		}
-		return var2;
-	}
-
 	@ObfuscatedName("re.a(B)V")
 	public static void method890() {
 		TextGerman.field2687 = null;
@@ -964,7 +921,7 @@ public class Statics {
 		field3306 = null;
 		IfType.open = null;
 		field3298 = null;
-		Client.field3299 = null;
+		Client.js5SocketReq = null;
 		Text.field3303 = null;
 		IdkType.recentUse = null;
 		Text.field3307 = null;
@@ -1066,7 +1023,7 @@ public class Statics {
 	public static void method520() {
 		Client.field1347 = null;
 		Client.field1353 = null;
-		Client.field1348 = null;
+		Client.entityUpdateIds = null;
 		Js5Net.field1350 = null;
 		Client.routeX = null;
 		TextGerman.field1345 = null;
@@ -1092,11 +1049,11 @@ public class Statics {
 	@ObfuscatedName("ec.f(I)V")
 	public static void method370() {
 		TextGerman.field790 = null;
-		field797 = null;
+		Client.field797 = null;
 		Text.field796 = null;
 		Text.field782 = null;
-		Client.field800 = null;
-		Client.field784 = null;
+		Client.mapscene = null;
+		Client.mapedge = null;
 		Text.field798 = null;
 		field805 = null;
 		Text.field793 = null;
@@ -1150,7 +1107,7 @@ public class Statics {
 		TextGerman.field2378 = null;
 		field2355 = null;
 		Client.configs = null;
-		field2357 = null;
+		WordPack.field2357 = null;
 		Text.field2383 = null;
 		TextGerman.field2381 = null;
 		TextGerman.field2359 = null;
@@ -1179,7 +1136,7 @@ public class Statics {
 	@ObfuscatedName("ub.a(Z)V")
 	public static void method991() {
 		TextGerman.field3051 = null;
-		Client.field3046 = null;
+		Client.activeMapFunctions = null;
 		Text.field3045 = null;
 		Text.field3043 = null;
 		ObjType.modelCache = null;
@@ -1260,7 +1217,7 @@ public class Statics {
 		field473 = null;
 		field472 = null;
 		field478 = null;
-		Client.field470 = null;
+		Client.mapfunction = null;
 		TextGerman.field474 = null;
 		TextGerman.field467 = null;
 		Text.field468 = null;
@@ -1612,9 +1569,9 @@ public class Statics {
 		Js5Net.field2613 = null;
 		Client.localPlayer = null;
 		LocType.temp = null;
-		Client.field2626 = null;
+		Client.minimap = null;
 		Client.field2618 = null;
-		Client.field2614 = null;
+		Client.modIcons = null;
 	}
 
 	@ObfuscatedName("ia.b(Z)V")
@@ -1642,7 +1599,7 @@ public class Statics {
 	public static void method999() {
 		field3058 = null;
 		field3066 = null;
-		Client.field3079 = null;
+		TitleScreen.loadString = null;
 		field3067 = null;
 		field3062 = null;
 		ScriptRunner.field3068 = null;
@@ -1823,7 +1780,7 @@ public class Statics {
 				var1.length = 32767;
 			}
 			var1.charCode = new byte[var1.length];
-			arg0.pos += field2357.method1033(arg0.data, var1.length, 0, var1.charCode, arg0.pos);
+			arg0.pos += WordPack.field2357.method1033(arg0.data, var1.length, 0, var1.charCode, arg0.pos);
 			return var1;
 		} catch (Exception var2) {
 			return field1756;
@@ -1833,75 +1790,70 @@ public class Statics {
 	@ObfuscatedName("re.a(Lbd;B)I")
 	public static int method892(Js5 arg0) {
 		int var1 = 0;
-		if (arg0.method239(field1567, field479)) {
+		if (arg0.requestDownload(field1567, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field62, field479)) {
+		if (arg0.requestDownload(field62, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field2333, field479)) {
+		if (arg0.requestDownload(field2333, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field2927, field479)) {
+		if (arg0.requestDownload(field2927, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field406, field479)) {
+		if (arg0.requestDownload(field406, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field533, field479)) {
+		if (arg0.requestDownload(field533, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field3020, field479)) {
+		if (arg0.requestDownload(field3020, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field2162, field479)) {
+		if (arg0.requestDownload(field2162, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field455, field479)) {
+		if (arg0.requestDownload(field455, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field2682, field479)) {
+		if (arg0.requestDownload(field2682, field479)) {
 			var1++;
 		}
-		if (arg0.method239(Client.field609, field479)) {
+		if (arg0.requestDownload(Client.field609, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field2798, field479)) {
+		if (arg0.requestDownload(field2798, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field2355, field479)) {
+		if (arg0.requestDownload(field2355, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field318, field479)) {
+		if (arg0.requestDownload(field318, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field478, field479)) {
+		if (arg0.requestDownload(field478, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field1169, field479)) {
+		if (arg0.requestDownload(field1169, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field2910, field479)) {
+		if (arg0.requestDownload(field2910, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field3163, field479)) {
+		if (arg0.requestDownload(field3163, field479)) {
 			var1++;
 		}
-		if (arg0.method239(field2818, field479)) {
+		if (arg0.requestDownload(field2818, field479)) {
 			var1++;
 		}
 		return var1;
 	}
 
-	@ObfuscatedName("je.a(ZLwa;)V")
-	public static void setHuffman(Huffman arg0) {
-		field2357 = arg0;
-	}
-
 	@ObfuscatedName("kc.b(I)V")
 	public static void method602() {
 		TextGerman.field1576 = null;
-		Client.field1578 = null;
+		Client.mapdots = null;
 		Text.field1591 = null;
 		IdkType.models = null;
 		field1567 = null;
@@ -1928,20 +1880,6 @@ public class Statics {
 		field2904 = null;
 		field2911 = null;
 		Client.p11 = null;
-	}
-
-	@ObfuscatedName("rc.a(I)V")
-	public static void method884() {
-		Object var0 = Js5NetThread.lock;
-		synchronized (Js5NetThread.lock) {
-			if (Js5NetThread.keepAlive != 0) {
-				Js5NetThread.keepAlive = 1;
-				try {
-					Js5NetThread.lock.wait();
-				} catch (InterruptedException var1) {
-				}
-			}
-		}
 	}
 
 	@ObfuscatedName("va.b(I)V")
@@ -1983,7 +1921,7 @@ public class Statics {
 	public static void method707() {
 		Text.field1902 = null;
 		Text.field1885 = null;
-		Client.field1886 = null;
+		Client.headiconsHint = null;
 		TextGerman.field1883 = null;
 		SpotType.models = null;
 		Text.field1896 = null;
@@ -2019,18 +1957,18 @@ public class Statics {
 	public static int method105(JagString arg0, Packet arg1) {
 		int var2 = arg1.pos;
 		arg1.method185(arg0.length);
-		arg1.pos += field2357.method1036(0, arg1.pos, arg0.length, arg0.charCode, arg1.data);
+		arg1.pos += WordPack.field2357.method1036(0, arg1.pos, arg0.length, arg0.charCode, arg1.data);
 		return arg1.pos - var2;
 	}
 
 	@ObfuscatedName("bd.b(I)V")
 	public static void method225() {
 		TextGerman.field409 = null;
-		Client.field365 = null;
+		Client.scrollbar = null;
 		field406 = null;
 		PlayerModel.field379 = null;
 		Text.field407 = null;
-		Client.field375 = null;
+		Client.entityRemovalIds = null;
 		ClientBuild.field412 = null;
 		Text.field408 = null;
 	}
@@ -2051,11 +1989,6 @@ public class Statics {
 		TextGerman.field2977 = null;
 		TextGerman.field2995 = null;
 		TextGerman.field2993 = null;
-	}
-
-	@ObfuscatedName("j.d(B)V")
-	public static void method538() {
-		ObjType.spriteCache.clear();
 	}
 
 	@ObfuscatedName("u.f(II)La;")
@@ -2221,7 +2154,7 @@ public class Statics {
 		Text.field1379 = null;
 		ClientBuild.field1385 = null;
 		Text.field1364 = null;
-		Client.field1376 = null;
+		Client.headiconsPk = null;
 		Client.anims = null;
 		Text.field1362 = null;
 		field1388 = null;
@@ -2246,7 +2179,7 @@ public class Statics {
 		JagException.signlink = null;
 		PixLoader.yof = null;
 		Text.field1998 = null;
-		Client.field2023 = null;
+		Client.activeMapFunctionX = null;
 		Client.field1993 = null;
 		Text.field2033 = null;
 	}
@@ -2375,11 +2308,6 @@ public class Statics {
 		Text.field1102 = null;
 		Text.field1118 = null;
 		Text.field1094 = null;
-	}
-
-	@ObfuscatedName("gb.c(B)I")
-	public static int method432() {
-		return 5;
 	}
 
 	@ObfuscatedName("a.e(B)V")
