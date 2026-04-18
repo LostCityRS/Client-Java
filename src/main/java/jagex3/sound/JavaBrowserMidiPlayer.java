@@ -82,7 +82,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 		if (arg0 == 0) {
 			arg0 = 1;
 		}
-		int var3 = Statics.method632(arg0) - arg1;
+		int var3 = MidiManager.method632(arg0) - arg1;
 		if (this.field1009 != null) {
 			this.field1033 = var3;
 		} else if (this.field1008) {
@@ -103,7 +103,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 		if (arg2 == 0) {
 			arg2 = 1;
 		}
-		this.field1033 = Statics.method632(arg2);
+		this.field1033 = MidiManager.method632(arg2);
 		this.field1039 = arg0;
 		this.field1025 = arg1;
 	}

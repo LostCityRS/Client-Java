@@ -24,7 +24,7 @@ public final class VarpType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field3167.method217(arg0, 16);
+		byte[] var2 = field3167.getFile(arg0, 16);
 		VarpType var3 = new VarpType();
 		if (var2 != null) {
 			var3.method838(new Packet(var2));

@@ -72,7 +72,7 @@ public final class SeqType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field1241.method217(arg0, 12);
+		byte[] var2 = field1241.getFile(arg0, 12);
 		SeqType var3 = new SeqType();
 		if (var2 != null) {
 			var3.method489(new Packet(var2));

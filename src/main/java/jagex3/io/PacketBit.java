@@ -19,7 +19,7 @@ public final class PacketBit extends Packet {
 	}
 
 	@ObfuscatedName("fe.l(B)V")
-	public void method408() {
+	public void gBitEnd() {
 		super.pos = (this.field961 + 7) / 8;
 	}
 
@@ -29,7 +29,7 @@ public final class PacketBit extends Packet {
 	}
 
 	@ObfuscatedName("fe.e(IB)I")
-	public int method412(int arg0) {
+	public int gBit(int arg0) {
 		int var2 = this.field961 >> 3;
 		int var3 = 0;
 		int var4 = 8 - (this.field961 & 0x7);
@@ -53,7 +53,7 @@ public final class PacketBit extends Packet {
 	}
 
 	@ObfuscatedName("fe.n(II)V")
-	public void method415(int arg0) {
+	public void p1Enc(int arg0) {
 		super.data[super.pos++] = (byte) (this.field956.method430() + arg0);
 	}
 
@@ -63,7 +63,7 @@ public final class PacketBit extends Packet {
 	}
 
 	@ObfuscatedName("fe.p(I)V")
-	public void method417() {
+	public void gBitStart() {
 		this.field961 = super.pos * 8;
 	}
 }

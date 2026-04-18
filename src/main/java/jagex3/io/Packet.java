@@ -33,6 +33,15 @@ public class Packet extends Linkable {
 	@ObfuscatedName("ba.xb")
 	public int pos;
 
+	@ObfuscatedName("wb.a(ZII[B)I")
+	public static int method1044(int arg0, int arg1, byte[] arg2) {
+		int var3 = -1;
+		for (int var4 = arg0; var4 < arg1; var4++) {
+			var3 = field2698[(var3 ^ arg2[var4]) & 0xFF] ^ var3 >>> 8;
+		}
+		return ~var3;
+	}
+
 	@ObfuscatedName("ba.b(I)I")
 	public final int method136() {
 		this.pos += 2;
@@ -122,7 +131,7 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("ba.a(II)I")
 	public final int method149(int arg0) {
-		int var2 = Statics.method1044(arg0, this.pos, this.data);
+		int var2 = method1044(arg0, this.pos, this.data);
 		this.p4(var2);
 		return var2;
 	}

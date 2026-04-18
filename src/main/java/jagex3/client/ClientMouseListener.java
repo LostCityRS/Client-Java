@@ -72,7 +72,7 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	}
 
 	@ObfuscatedName("ld.b(I)I")
-	public static int method662() {
+	public static int getIdleTimer() {
 		return field2293++;
 	}
 

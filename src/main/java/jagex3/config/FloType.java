@@ -54,7 +54,7 @@ public final class FloType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field2018.method217(arg0, 4);
+		byte[] var2 = field2018.getFile(arg0, 4);
 		FloType var3 = new FloType();
 		if (var2 != null) {
 			var3.method393(arg0, new Packet(var2));

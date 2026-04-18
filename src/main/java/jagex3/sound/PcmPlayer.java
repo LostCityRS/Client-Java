@@ -90,7 +90,32 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 		field2347 = null;
 	}
 
-	@ObfuscatedName("pd.b(J)V")
+    @ObfuscatedName("ha.a(B)V")
+    public static void method463() {
+        if (Statics.field217 == null) {
+            return;
+        }
+        long var0 = Statics.currentTime();
+        if (var0 <= field462) {
+            return;
+        }
+        Statics.field217.method255(var0);
+        int var2 = (int) (var0 - field462);
+        field462 = var0;
+        Class var3 = PcmPlayerBase.class;
+        synchronized (PcmPlayerBase.class) {
+            Statics.field1157 += frequency * var2;
+            int var4 = (Statics.field1157 - frequency * 2000) / 1000;
+            if (var4 > 0) {
+                if (Statics.field1381 != null) {
+                    Statics.field1381.method127(var4);
+                }
+                Statics.field1157 -= var4 * 1000;
+            }
+        }
+    }
+
+    @ObfuscatedName("pd.b(J)V")
 	public void method815(long arg0) throws Exception {
 		this.method433(this.field2349);
 		while (true) {

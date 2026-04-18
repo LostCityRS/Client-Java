@@ -29,7 +29,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1968 = 0;
 
 	@ObfuscatedName("nb.hc")
-	public int field1970 = 1;
+	public int size = 1;
 
 	@ObfuscatedName("nb.hd")
 	public int field2022 = 0;
@@ -59,7 +59,7 @@ public abstract class ClientEntity extends ModelSource {
 	public boolean field1979 = false;
 
 	@ObfuscatedName("nb.sc")
-	public int field1981;
+	public int exactMoveStart;
 
 	@ObfuscatedName("nb.uc")
 	public int field1983 = 0;
@@ -104,7 +104,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1996 = 0;
 
 	@ObfuscatedName("nb.Ob")
-	public int field1951 = -1;
+	public int secondarySeqId = -1;
 
 	@ObfuscatedName("nb.Yb")
 	public final int[] field1961 = new int[4];
@@ -116,10 +116,10 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1997 = 0;
 
 	@ObfuscatedName("nb.Lc")
-	public int field2000 = -1;
+	public int readyanim = -1;
 
 	@ObfuscatedName("nb.Lb")
-	public int field1948 = 0;
+	public int animDelayMove = 0;
 
 	@ObfuscatedName("nb.Vc")
 	public final int[] field2010 = new int[4];
@@ -155,19 +155,19 @@ public abstract class ClientEntity extends ModelSource {
 	public int field2006 = -1;
 
 	@ObfuscatedName("nb.Kb")
-	public int field1947;
+	public int exactMoveFacing;
 
 	@ObfuscatedName("nb.Rb")
-	public int field1954;
+	public int dstYaw;
 
 	@ObfuscatedName("nb.Sb")
 	public int field1955;
 
 	@ObfuscatedName("nb.xc")
-	public int field1986;
+	public int exactMoveEnd;
 
 	@ObfuscatedName("nb.Dc")
-	public int field1992;
+	public int yaw;
 
 	@ObfuscatedName("nb.Kc")
 	public int field1999;
@@ -267,16 +267,16 @@ public abstract class ClientEntity extends ModelSource {
 			}
 		}
 		this.field1983 = 0;
-		this.field1948 = 0;
+		this.animDelayMove = 0;
 		this.field1968 = 0;
 		this.field1962[0] = arg2;
 		this.field2009[0] = arg0;
-		this.field1972 = this.field1962[0] * 128 + this.field1970 * 64;
-		this.field1963 = this.field2009[0] * 128 + this.field1970 * 64;
+		this.field1972 = this.field1962[0] * 128 + this.size * 64;
+		this.field1963 = this.field2009[0] * 128 + this.size * 64;
 	}
 
 	@ObfuscatedName("nb.j(I)V")
-	public final void method732() {
+	public final void abortRoute() {
 		this.field1968 = 0;
 		this.field1983 = 0;
 	}

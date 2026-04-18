@@ -51,7 +51,7 @@ public final class NpcType extends Linkable2 {
 	public int field1135 = -1;
 
 	@ObfuscatedName("h.ub")
-	public int field1084 = 1;
+	public int size = 1;
 
 	@ObfuscatedName("h.uc")
 	public int[] field1136;
@@ -116,7 +116,7 @@ public final class NpcType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field2799.method217(arg0, 9);
+		byte[] var2 = field2799.getFile(arg0, 9);
 		NpcType var3 = new NpcType();
 		var3.field1137 = arg0;
 		if (var2 != null) {
@@ -209,7 +209,7 @@ public final class NpcType extends Linkable2 {
 		} else if (arg0 == 2) {
 			this.field1112 = arg1.method140();
 		} else if (arg0 == 12) {
-			this.field1084 = arg1.g1();
+			this.size = arg1.g1();
 		} else if (arg0 == 13) {
 			this.field1092 = arg1.g2();
 		} else if (arg0 == 14) {

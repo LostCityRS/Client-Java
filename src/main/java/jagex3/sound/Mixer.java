@@ -26,7 +26,7 @@ public final class Mixer extends PcmStream {
 	public int field245 = 0;
 
 	@ObfuscatedName("b.a(Loc;)V")
-	public synchronized void method126(PcmStream arg0) {
+	public synchronized void playStream(PcmStream arg0) {
 		LinkList var2 = this.field241[method130(arg0)];
 		var2.pushFront(arg0);
 	}

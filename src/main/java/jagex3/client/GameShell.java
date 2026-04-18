@@ -170,7 +170,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				}
 			}
 			if (signlink.applet != null) {
-				Method var3 = SignLink.field1703;
+				Method var3 = SignLink.setFocusCycleRoot;
 				if (var3 != null) {
 					try {
 						var3.invoke(signlink.applet, Boolean.TRUE);

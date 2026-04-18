@@ -10,13 +10,13 @@ public final class LocChange extends Linkable {
 	public int field678;
 
 	@ObfuscatedName("dc.fb")
-	public int field679;
+	public int level;
 
 	@ObfuscatedName("dc.mb")
 	public int field686;
 
 	@ObfuscatedName("dc.ob")
-	public int field688;
+	public int layer;
 
 	@ObfuscatedName("dc.pb")
 	public int field689;
@@ -37,8 +37,8 @@ public final class LocChange extends Linkable {
 	public int field697;
 
 	@ObfuscatedName("dc.zb")
-	public int field699;
+	public int z;
 
 	@ObfuscatedName("dc.Ab")
-	public int field700;
+	public int x;
 }

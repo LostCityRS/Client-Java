@@ -109,10 +109,10 @@ public class ScriptRunner {
 							return;
 						}
 						ClientGosubFrame var17 = field2736[--field1653];
-						field2606 = var17.field3010;
-						field1162 = var17.field3000;
-						var9 = var17.field3013;
-						var5 = var17.field2999;
+						field2606 = var17.stringLocals;
+						field1162 = var17.intLocals;
+						var9 = var17.pc;
+						var5 = var17.script;
 						var6 = var5.field509;
 						var7 = var5.field519;
 					} else if (var14 == 25) {
@@ -169,11 +169,11 @@ public class ScriptRunner {
 							var8 -= var23.field513;
 							var4 -= var23.field510;
 							ClientGosubFrame var28 = new ClientGosubFrame();
-							var28.field3010 = field2606;
-							var28.field2999 = var5;
-							var28.field3000 = field1162;
+							var28.stringLocals = field2606;
+							var28.script = var5;
+							var28.intLocals = field1162;
 							var5 = var23;
-							var28.field3013 = var9;
+							var28.pc = var9;
 							field2736[field1653++] = var28;
 							var6 = var23.field509;
 							field2606 = var25;

@@ -18,7 +18,7 @@ public final class Wave extends PcmStreamable {
 	public int field3311 = 22050;
 
 	@ObfuscatedName("wd.a(Lqb;)Lwd;")
-	public Wave method1055(Decimator arg0) {
+	public Wave decimate(Decimator arg0) {
 		this.field3308 = arg0.method845(this.field3308);
 		this.field3311 = arg0.method842(this.field3311);
 		if (this.field3310 == this.field3309) {

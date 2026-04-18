@@ -29,7 +29,7 @@ public final class VarBitType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field1555.method217(arg0, 14);
+		byte[] var2 = field1555.getFile(arg0, 14);
 		VarBitType var3 = new VarBitType();
 		if (var2 != null) {
 			var3.method402(new Packet(var2));

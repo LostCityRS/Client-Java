@@ -6,9 +6,7 @@ import jagex3.config.*;
 import jagex3.constants.Text;
 import jagex3.constants.TextGerman;
 import jagex3.dash3d.ClientEntity;
-import jagex3.dash3d.Pix3D;
 import jagex3.dash3d.PlayerModel;
-import jagex3.datastruct.ByteArrayNode;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.LruCache;
 import jagex3.graphics.*;
@@ -32,9 +30,6 @@ public class Statics {
 
 	@ObfuscatedName("ga.y")
 	public static long field1014;
-
-	@ObfuscatedName("ga.M")
-	public static Js5 field1028;
 
 	@ObfuscatedName("ga.N")
 	public static int field1029;
@@ -102,17 +97,11 @@ public class Statics {
 	@ObfuscatedName("ja.W")
 	public static boolean field1447;
 
-	@ObfuscatedName("jc.pb")
-	public static int field1462;
-
 	@ObfuscatedName("kb.k")
 	public static int field1551;
 
 	@ObfuscatedName("ab.hb")
 	public static boolean[][] field160;
-
-	@ObfuscatedName("la.h")
-	public static boolean field1662;
 
 	@ObfuscatedName("la.n")
 	public static BufferedRandomAccessFile field1668;
@@ -204,20 +193,11 @@ public class Statics {
 	@ObfuscatedName("tc.h")
 	public static Pix8 field2919;
 
-	@ObfuscatedName("tc.i")
-	public static int field2920;
-
 	@ObfuscatedName("td.n")
 	public static int field2945;
 
 	@ObfuscatedName("td.r")
 	public static int field2949;
-
-	@ObfuscatedName("u.pb")
-	public static int field2985;
-
-	@ObfuscatedName("a.D")
-	public static LruCache field30;
 
 	@ObfuscatedName("ua.A")
 	public static int[] field3025;
@@ -228,9 +208,6 @@ public class Statics {
 	@ObfuscatedName("ub.u")
 	public static long field3047;
 
-	@ObfuscatedName("bb.a")
-	public static MidiStream field311;
-
 	@ObfuscatedName("vb.Cb")
 	public static int[] field3139;
 
@@ -240,23 +217,11 @@ public class Statics {
 	@ObfuscatedName("wc.q")
 	public static PixMap field3298;
 
-	@ObfuscatedName("bd.S")
-	public static int field405;
-
-	@ObfuscatedName("ca.o")
-	public static int field463;
-
 	@ObfuscatedName("ca.u")
 	public static FontMetrics field469;
 
 	@ObfuscatedName("ca.x")
 	public static PixMap field472;
-
-	@ObfuscatedName("client.Eb")
-	public static boolean field611;
-
-	@ObfuscatedName("d.Fc")
-	public static int field661;
 
 	@ObfuscatedName("dd.o")
 	public static PrivilegedRequest field715;
@@ -288,9 +253,6 @@ public class Statics {
 	@ObfuscatedName("eb.Pb")
 	public static int field777;
 
-	@ObfuscatedName("aa.Id")
-	public static byte[] field78;
-
 	@ObfuscatedName("ec.Ib")
 	public static BufferedRandomAccessFile field797;
 
@@ -312,14 +274,8 @@ public class Statics {
 	@ObfuscatedName("fc.Cb")
 	public static int[] field899;
 
-	@ObfuscatedName("fc.Ub")
-	public static int field917;
-
 	@ObfuscatedName("fd.zb")
 	public static DataFile field931;
-
-	@ObfuscatedName("fe.Rc")
-	public static int field975;
 
 	@ObfuscatedName("a.jb")
 	public static JagString field62 = JagString.wrap("chatback");
@@ -335,8 +291,6 @@ public class Statics {
 	public static JagString field2085 = JagString.wrap(":chalreq:");
 	@ObfuscatedName("pb.A")
 	public static JagString field2297 = JagString.wrap("(U2");
-	@ObfuscatedName("pb.I")
-	public static JagString field2305 = JagString.wrap("m");
 	@ObfuscatedName("ld.E")
 	public static JagString field1751 = JagString.wrap("title)3jpg");
 	@ObfuscatedName("wc.y")
@@ -361,8 +315,6 @@ public class Statics {
 	public static JagString field455 = JagString.wrap("backright1");
 	@ObfuscatedName("ca.y")
 	public static JagString field473 = JagString.wrap("runes");
-	@ObfuscatedName("ca.C")
-	public static JagString field477 = JagString.wrap("_");
 	@ObfuscatedName("ca.E")
 	public static JagString field479 = JagString.wrap("");
 	@ObfuscatedName("ca.D")
@@ -433,8 +385,6 @@ public class Statics {
 	public static JagString field1229 = JagString.wrap(":tradereq:");
 	@ObfuscatedName("he.Qb")
 	public static JagString field1245 = JagString.wrap("titlebox");
-	@ObfuscatedName("i.e")
-	public static JagString field1259 = JagString.wrap("l");
 	@ObfuscatedName("i.u")
 	public static JagString field1275 = JagString.wrap(" (X");
 	@ObfuscatedName("ia.Ub")
@@ -625,22 +575,14 @@ public class Statics {
 	public static byte[][] field1541 = new byte[50][];
 	@ObfuscatedName("kb.g")
 	public static LinkList field1547 = new LinkList();
-	@ObfuscatedName("kb.h")
-	public static int field1548 = 0;
 	@ObfuscatedName("ha.a")
 	public static int field1144 = 0;
-	@ObfuscatedName("ub.d")
-	public static int field3030 = -1;
 	@ObfuscatedName("ub.i")
 	public static LruCache field3035 = new LruCache(50);
 	@ObfuscatedName("ub.t")
 	public static Pix32[] field3046 = new Pix32[1000];
-	@ObfuscatedName("nc.l")
-	public static int field2046 = 0;
 	@ObfuscatedName("fc.Gb")
 	public static int field903 = -1;
-	@ObfuscatedName("pe.Jb")
-	public static int[] field2369 = new int[50];
 	@ObfuscatedName("pe.Lb")
 	public static LinkList field2371 = new LinkList();
 	@ObfuscatedName("pe.Ub")
@@ -655,8 +597,6 @@ public class Statics {
 	public static boolean field3116 = false;
 	@ObfuscatedName("t.wb")
 	public static int[] field2808 = new int[]{8, 11, 4, 6, 9, 7, 10};
-	@ObfuscatedName("t.xb")
-	public static int field2809 = 0;
 	@ObfuscatedName("nb.id")
 	public static int[] field2023 = new int[1000];
 	@ObfuscatedName("j.hc")
@@ -711,14 +651,10 @@ public class Statics {
 	public static LruCache field253 = new LruCache(100);
 	@ObfuscatedName("ba.lc")
 	public static int field307 = 0;
-	@ObfuscatedName("ba.gc")
-	public static int field302 = 0;
 	@ObfuscatedName("fe.vc")
 	public static boolean field953 = false;
 	@ObfuscatedName("fe.Ac")
 	public static long field958 = 0L;
-	@ObfuscatedName("fe.xc")
-	public static JagFX[] field955 = new JagFX[50];
 	@ObfuscatedName("bd.X")
 	public static boolean field410 = false;
 	@ObfuscatedName("oe.k")
@@ -729,8 +665,6 @@ public class Statics {
 	public static int[] field1458 = new int[]{16776960, 16711680, 65280, 65535, 16711935, 16777215};
 	@ObfuscatedName("k.C")
 	public static int[] field1514 = new int[99];
-	@ObfuscatedName("k.J")
-	public static int[] field1521 = new int[50];
 	@ObfuscatedName("na.i")
 	public static int[] field1937 = new int[128];
 	@ObfuscatedName("wa.f")
@@ -741,20 +675,14 @@ public class Statics {
 	public static int[] field3236 = new int[100];
 	@ObfuscatedName("dc.ib")
 	public static int field682 = 0;
-	@ObfuscatedName("dc.kb")
-	public static int[] field684 = new int[50];
 	@ObfuscatedName("ta.vc")
 	public static int field2881 = -1;
-	@ObfuscatedName("ta.Lb")
-	public static int[] field2845 = new int[50];
 	@ObfuscatedName("hc.r")
 	public static boolean[] field1190 = new boolean[]{true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, false, false};
 	@ObfuscatedName("ua.q")
 	public static int[][] field3015 = new int[104][104];
 	@ObfuscatedName("se.C")
 	public static byte[][] field2801 = new byte[1000][];
-	@ObfuscatedName("ie.c")
-	public static boolean field1391 = false;
 	@ObfuscatedName("cd.p")
 	public static int field544 = 0;
 	@ObfuscatedName("cd.u")
@@ -783,7 +711,7 @@ public class Statics {
 		Client.groundObj = null;
 		TextGerman.field538 = null;
 		Text.field541 = null;
-		Client.field546 = null;
+		Client.routeZ = null;
 		Client.field548 = null;
 	}
 
@@ -865,15 +793,6 @@ public class Statics {
 		return null; // JSObject.getWindow(arg0).eval(arg1);
 	}
 
-	@ObfuscatedName("m.a(Z)V")
-	public static synchronized void method669() {
-		if (method521()) {
-			method475();
-			field1391 = false;
-			field1028 = null;
-		}
-	}
-
 	@ObfuscatedName("he.f(I)V")
 	public static void method484() {
 		field1245 = null;
@@ -901,7 +820,7 @@ public class Statics {
 		Text.field2319 = null;
 		Text.field2320 = null;
 		Text.field2325 = null;
-		LocType.field2322 = null;
+		LocType.mc1 = null;
 		Text.field2315 = null;
 		field2333 = null;
 		Text.field2317 = null;
@@ -912,9 +831,9 @@ public class Statics {
 
 	@ObfuscatedName("dc.b(I)V")
 	public static void method315() {
-		field684 = null;
+		Client.waveDelay = null;
 		LocType.field698 = null;
-		Client.field677 = null;
+		Client.npcIds = null;
 		field676 = null;
 		Client.field680 = null;
 	}
@@ -964,10 +883,10 @@ public class Statics {
 
 	@ObfuscatedName("sd.a(I)V")
 	public static void method927() {
-		Client.field2756 = null;
+		Client.spotanims = null;
 		field2772 = null;
 		Client.field2770 = null;
-		Client.field2759 = null;
+		Client.dirMap = null;
 		VarBitType.field2755 = null;
 		Text.field2760 = null;
 		Text.field2768 = null;
@@ -976,7 +895,7 @@ public class Statics {
 		TextGerman.field2764 = null;
 		Text.field2767 = null;
 		PixLoader.xof = null;
-		Client.field2758 = null;
+		Client.playerIds = null;
 		Text.field2765 = null;
 		Text.field2757 = null;
 	}
@@ -1045,7 +964,7 @@ public class Statics {
 		Text.field3219 = null;
 		TextGerman.field3216 = null;
 		Text.field3239 = null;
-		ClientKeyboardListener.field3231 = null;
+		ClientKeyboardListener.KEY_CODE_MAP = null;
 		field3234 = null;
 		field3223 = null;
 	}
@@ -1075,9 +994,9 @@ public class Statics {
 		Client.idkDesign = null;
 		field2297 = null;
 		Client.field2277 = null;
-		field2305 = null;
+		Client.field2305 = null;
 		Js5Net.field2301 = null;
-		Client.field2291 = null;
+		Client.mapBuildGroundFile = null;
 		TextGerman.field2304 = null;
 		TextGerman.field2299 = null;
 		Text.field2296 = null;
@@ -1095,53 +1014,6 @@ public class Statics {
 			}
 		}
 		return var1;
-	}
-
-	@ObfuscatedName("ha.a(B)V")
-	public static void method463() {
-		if (field217 == null) {
-			return;
-		}
-		long var0 = currentTime();
-		if (var0 <= PcmPlayer.field462) {
-			return;
-		}
-		field217.method255(var0);
-		int var2 = (int) (var0 - PcmPlayer.field462);
-		PcmPlayer.field462 = var0;
-		Class var3 = PcmPlayerBase.class;
-		synchronized (PcmPlayerBase.class) {
-			field1157 += PcmPlayer.frequency * var2;
-			int var4 = (field1157 - PcmPlayer.frequency * 2000) / 1000;
-			if (var4 > 0) {
-				if (field1381 != null) {
-					field1381.method127(var4);
-				}
-				field1157 -= var4 * 1000;
-			}
-		}
-	}
-
-	@ObfuscatedName("w.b(B)V")
-	public static void method1028() {
-		Client.field925.method1054();
-		Client.field1347 = Pix3D.method362(Client.field1347);
-	}
-
-	@ObfuscatedName("m.a(IZIILbd;IIZ)V")
-	public static synchronized void method670(int arg0, int arg1, Js5 arg2, int arg3) {
-		if (!method521()) {
-			return;
-		}
-		field611 = false;
-		field405 = 10;
-		field661 = arg3;
-		field1391 = true;
-		field1028 = arg2;
-		field2985 = -1;
-		field917 = arg0;
-		field1462 = 0;
-		field463 = arg1;
 	}
 
 	@ObfuscatedName("ma.b(I)V")
@@ -1213,34 +1085,6 @@ public class Statics {
 		Text.field2393 = null;
 	}
 
-	@ObfuscatedName("be.a(La;I)Z")
-	public static boolean method242(JagString arg0) {
-		if (arg0 == null) {
-			return false;
-		}
-		for (int var1 = 0; var1 < Client.field1492; var1++) {
-			if (arg0.method14(Client.field2951[var1])) {
-				return true;
-			}
-		}
-		return arg0.method14(Client.localPlayer.field86);
-	}
-
-	@ObfuscatedName("rb.a(II)V")
-	public static void method877(int arg0) {
-		if (field311 == null) {
-			return;
-		}
-		if (field1548 == 0) {
-			if (field3030 >= 0) {
-				field3030 = arg0;
-				field311.method302(arg0, 0);
-			}
-		} else if (field78 != null) {
-			field975 = arg0;
-		}
-	}
-
 	@ObfuscatedName("t.a(BI)Z")
 	public static boolean method936(int arg0) {
 		if (arg0 >= 97 && arg0 <= 122) {
@@ -1252,70 +1096,13 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("tc.c(I)V")
-	public static void method962() {
-		if (field311 == null) {
-			return;
-		}
-		if (field3030 >= 0) {
-			if (field1548 > 0) {
-				field2046 += field302;
-				field311.method302(field3030, field2046);
-				field1548--;
-				if (field1548 == 0) {
-					field311.method305();
-					field3030 = -1;
-					field1548 = 20;
-				}
-			}
-		} else if (field1548 > 0) {
-			field1548--;
-			if (field1548 == 0) {
-				if (field78 == null) {
-					field311.method304(256);
-				} else {
-					field311.method304(field975);
-					field3030 = field975;
-					field311.method307(field78, field1662, field975);
-					field78 = null;
-				}
-				field2046 = 0;
-			}
-		}
-		field311.method308();
-	}
-
-	@ObfuscatedName("l.a(II)I")
-	public static int method632(int arg0) {
-		return (int) (Math.log((double) arg0 * 0.00390625D) * 868.5889638065036D + 0.5D);
-	}
-
-	@ObfuscatedName("fd.a(IIIIIIB)I")
-	public static int method404(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		int var6 = arg4 & 0x3;
-		if ((arg5 & 0x1) == 1) {
-			int var7 = arg3;
-			arg3 = arg1;
-			arg1 = var7;
-		}
-		if (var6 == 0) {
-			return arg0;
-		} else if (var6 == 1) {
-			return 7 + 1 - arg3 - arg2;
-		} else if (var6 == 2) {
-			return 7 + 1 - arg0 - arg1;
-		} else {
-			return arg2;
-		}
-	}
-
 	@ObfuscatedName("fe.n(I)V")
 	public static void method411() {
 		Js5Net.field967 = null;
 		TextGerman.field977 = null;
 		Text.field971 = null;
 		Client.field964 = null;
-		field955 = null;
+		Client.waveSounds = null;
 		TextGerman.field962 = null;
 		Text.field957 = null;
 		TextGerman.field976 = null;
@@ -1357,7 +1144,7 @@ public class Statics {
 		Text.field1031 = null;
 		field1034 = null;
 		Text.field1021 = null;
-		Client.field1019 = null;
+		Client.camShakeCycle = null;
 		Text.field1041 = null;
 		Text.field1036 = null;
 		VarCache.field1020 = null;
@@ -1373,21 +1160,7 @@ public class Statics {
 		Text.field1018 = null;
 		field1017 = null;
 		TextGerman.field1022 = null;
-		field1028 = null;
-	}
-
-	@ObfuscatedName("w.a(I)V")
-	public static void method1029() {
-		if (field311 == null) {
-			return;
-		}
-		method475();
-		if (field1548 > 0) {
-			field311.method304(256);
-			field1548 = 0;
-		}
-		field311.method303();
-		field311 = null;
+		MidiManager.field1028 = null;
 	}
 
 	@ObfuscatedName("ib.a(B)V")
@@ -1396,7 +1169,7 @@ public class Statics {
 		Client.field1353 = null;
 		Client.field1348 = null;
 		Js5Net.field1350 = null;
-		Client.field1351 = null;
+		Client.routeX = null;
 		TextGerman.field1345 = null;
 	}
 
@@ -1411,7 +1184,7 @@ public class Statics {
 	@ObfuscatedName("i.a(Z)V")
 	public static void method496() {
 		Client.field1255 = null;
-		field1259 = null;
+		Client.field1259 = null;
 		TextGerman.field1264 = null;
 		TextGerman.field1269 = null;
 		field1275 = null;
@@ -1457,7 +1230,7 @@ public class Statics {
 		Text.field324 = null;
 		field328 = null;
 		field313 = null;
-		field311 = null;
+		MidiManager.field311 = null;
 		field325 = null;
 		Text.field315 = null;
 		Text.field332 = null;
@@ -1484,7 +1257,7 @@ public class Statics {
 		TextGerman.field2359 = null;
 		Text.field2354 = null;
 		field2371 = null;
-		field2369 = null;
+		Client.waveSoundIds = null;
 		Text.field2360 = null;
 	}
 
@@ -1504,11 +1277,6 @@ public class Statics {
 		TextGerman.field1436 = null;
 	}
 
-	@ObfuscatedName("ib.a(I)Z")
-	public static boolean method521() {
-		return field311 != null;
-	}
-
 	@ObfuscatedName("ub.a(Z)V")
 	public static void method991() {
 		TextGerman.field3051 = null;
@@ -1524,7 +1292,7 @@ public class Statics {
 
 	@ObfuscatedName("be.a([BIB)I")
 	public static int method244(byte[] arg0, int arg1) {
-		return method1044(0, arg1, arg0);
+		return Packet.method1044(0, arg1, arg0);
 	}
 
 	@ObfuscatedName("kb.b(B)V")
@@ -1593,7 +1361,7 @@ public class Statics {
 		field479 = null;
 		ObjType.field458 = null;
 		Text.field465 = null;
-		field477 = null;
+		Client.field477 = null;
 		ScriptRunner.field453 = null;
 		field473 = null;
 		field472 = null;
@@ -1638,35 +1406,6 @@ public class Statics {
 		JagString.cache = null;
 		TextGerman.field1840 = null;
 		Client.field1845 = null;
-	}
-
-	@ObfuscatedName("oa.a(IIZ[BI)V")
-	public static void method749(int arg0, boolean arg1, byte[] arg2, int arg3) {
-		if (field311 == null) {
-			return;
-		}
-		if (field3030 >= 0) {
-			field302 = arg3;
-			if (field3030 == 0) {
-				field1548 = 1;
-			} else {
-				int var4 = method632(field3030);
-				int var5 = var4 - field2046;
-				field1548 = (var5 + 3600) / arg3;
-				if (field1548 < 1) {
-					field1548 = 1;
-				}
-			}
-			field975 = arg0;
-			field78 = arg2;
-			field1662 = arg1;
-		} else if (field1548 == 0) {
-			method7(arg1, arg2, arg0);
-		} else {
-			field975 = arg0;
-			field78 = arg2;
-			field1662 = arg1;
-		}
 	}
 
 	@ObfuscatedName("fd.f(I)V")
@@ -1724,7 +1463,7 @@ public class Statics {
 		Text.field2931 = null;
 		Client.field2929 = null;
 		field2927 = null;
-		ClientKeyboardListener.field2924 = null;
+		ClientKeyboardListener.instance = null;
 		Text.field2923 = null;
 		Text.field2928 = null;
 		Client.field2925 = null;
@@ -1740,27 +1479,6 @@ public class Statics {
 		TextGerman.field3170 = null;
 		Text.field3146 = null;
 		field3163 = null;
-	}
-
-	@ObfuscatedName("ld.a(III)V")
-	public static void method661(int arg0, int arg1) {
-		long var2 = (long) ((arg0 << 16) + arg1);
-		Js5NetRequest var4 = (Js5NetRequest) Js5Net.field1328.find(var2);
-		if (var4 != null) {
-			Js5Net.field996.pushFront(var4);
-		}
-	}
-
-	@ObfuscatedName("nd.a(IB)V")
-	public static void method738(int arg0) {
-		if (!method521()) {
-			return;
-		}
-		if (field1391) {
-			field917 = arg0;
-		} else {
-			method877(arg0);
-		}
 	}
 
 	@ObfuscatedName("s.a(I)V")
@@ -1789,7 +1507,7 @@ public class Statics {
 		field1453 = null;
 		field1458 = null;
 		Client.field1457 = null;
-		ClientKeyboardListener.field1465 = null;
+		ClientKeyboardListener.keyCodeBuffer = null;
 	}
 
 	@ObfuscatedName("qb.a(B)V")
@@ -1812,7 +1530,7 @@ public class Statics {
 		field2181 = null;
 		Text.field2172 = null;
 		Text.field2178 = null;
-		Client.field2170 = null;
+		Client.mapKeys = null;
 		field2183 = null;
 	}
 
@@ -1861,41 +1579,6 @@ public class Statics {
 		Client.field2045 = null;
 		Text.field2047 = null;
 		Text.field2052 = null;
-	}
-
-	@ObfuscatedName("fc.a(II)V")
-	public static void method397() {
-		method749(0, false, null, 10);
-	}
-
-	@ObfuscatedName("fd.a(IZI[BI)V")
-	public static void method406(int arg0, boolean arg1, int arg2, byte[] arg3) {
-		if (field311 == null) {
-			return;
-		}
-		if (field3030 >= 0) {
-			arg2 -= 20;
-			if (arg2 < 1) {
-				arg2 = 1;
-			}
-			field1548 = arg2;
-			if (field3030 == 0) {
-				field302 = 0;
-			} else {
-				int var4 = method632(field3030);
-				int var5 = var4 - field2046;
-				field302 = (arg2 + var5 + 3600 - 1) / arg2;
-			}
-			field78 = arg3;
-			field975 = arg0;
-			field1662 = arg1;
-		} else if (field1548 == 0) {
-			method7(arg1, arg3, arg0);
-		} else {
-			field975 = arg0;
-			field1662 = arg1;
-			field78 = arg3;
-		}
 	}
 
 	@ObfuscatedName("oa.a(B)V")
@@ -1971,38 +1654,6 @@ public class Statics {
 		return var9;
 	}
 
-	@ObfuscatedName("wb.a(ZII[B)I")
-	public static int method1044(int arg0, int arg1, byte[] arg2) {
-		int var3 = -1;
-		for (int var4 = arg0; var4 < arg1; var4++) {
-			var3 = Packet.field2698[(var3 ^ arg2[var4]) & 0xFF] ^ var3 >>> 8;
-		}
-		return ~var3;
-	}
-
-	@ObfuscatedName("a.a(IZ[BI)V")
-	public static void method7(boolean arg0, byte[] arg1, int arg2) {
-		if (field311 == null) {
-			return;
-		}
-		if (field3030 >= 0) {
-			field311.method305();
-			field2046 = 0;
-			field78 = null;
-			field1548 = 20;
-			field3030 = -1;
-		}
-		if (arg1 == null) {
-			return;
-		}
-		if (field1548 > 0) {
-			field311.method304(arg2);
-			field1548 = 0;
-		}
-		field3030 = arg2;
-		field311.method307(arg1, arg0, arg2);
-	}
-
 	@ObfuscatedName("ca.a(IB)V")
 	public static synchronized void method260() {
 		if (field1381 != null) {
@@ -2057,13 +1708,13 @@ public class Statics {
 		Client.field1788[Client.field1492] = 0;
 		Client.field1492++;
 		Client.field1055 = true;
-		Client.out.method415(114);
+		Client.out.p1Enc(114);
 		Client.out.p8(arg0);
 	}
 
 	@ObfuscatedName("rb.f(I)V")
 	public static void method879() {
-		ClientKeyboardListener.field2625 = null;
+		ClientKeyboardListener.keyChBuffer = null;
 		Js5Net.field2613 = null;
 		Client.localPlayer = null;
 		LocType.field2623 = null;
@@ -2268,7 +1919,7 @@ public class Statics {
 		TextGerman.field2654 = null;
 		Text.field2639 = null;
 		Text.field2650 = null;
-		Client.field2633 = null;
+		Client.mapBuildLocationData = null;
 		Text.field2634 = null;
 		Text.field2632 = null;
 		field2646 = null;
@@ -2358,16 +2009,6 @@ public class Statics {
 		field2357 = arg0;
 	}
 
-	@ObfuscatedName("pb.d(B)V")
-	public static void method808() {
-		try {
-			Graphics var0 = GameShell.canvas.getGraphics();
-			Client.field1558.method101(17, var0, 357);
-		} catch (Exception var1) {
-			GameShell.canvas.repaint();
-		}
-	}
-
 	@ObfuscatedName("kc.b(I)V")
 	public static void method602() {
 		TextGerman.field1576 = null;
@@ -2449,11 +2090,6 @@ public class Statics {
 		return var8;
 	}
 
-	@ObfuscatedName("hc.c(I)V")
-	public static void method475() {
-		method7(false, null, 0);
-	}
-
 	@ObfuscatedName("va.b(I)V")
 	public static void method1008() {
 		Text.field3127 = null;
@@ -2526,14 +2162,14 @@ public class Statics {
 
 	@ObfuscatedName("ta.h(I)V")
 	public static void method946() {
-		field2845 = null;
+		Client.waveLoops = null;
 	}
 
 	@ObfuscatedName("aa.c(Z)V")
 	public static void method46() {
 		TextGerman.field83 = null;
 		TextGerman.field77 = null;
-		field78 = null;
+		MidiManager.field78 = null;
 		TextGerman.field93 = null;
 		Client.field92 = null;
 		Text.field67 = null;
@@ -2574,7 +2210,7 @@ public class Statics {
 	@ObfuscatedName("u.f(I)V")
 	public static void method983() {
 		TextGerman.field2978 = null;
-		Client.field2992 = null;
+		Client.npc = null;
 		TextGerman.field2980 = null;
 		TextGerman.field2977 = null;
 		TextGerman.field2995 = null;
@@ -2593,7 +2229,7 @@ public class Statics {
 
 	@ObfuscatedName("de.b(I)V")
 	public static void method326() {
-		Client.field742 = null;
+		Client.mapBuildLocationFile = null;
 		TextGerman.field743 = null;
 		Text.field725 = null;
 		Client.field739 = null;
@@ -2640,28 +2276,9 @@ public class Statics {
 		return arg1;
 	}
 
-	@ObfuscatedName("m.a(II)V")
-	public static synchronized void method672() {
-		if (method521()) {
-			method397();
-			field1028 = null;
-			field1391 = false;
-		}
-	}
-
 	@ObfuscatedName("wa.b(II)Z")
 	public static boolean method1037(int arg0) {
 		return arg0 >= 48 && arg0 <= 57;
-	}
-
-	@ObfuscatedName("h.h(I)V")
-	public static void method454() {
-		try {
-			Graphics var0 = GameShell.canvas.getGraphics();
-			Client.field11.method101(550, var0, 4);
-		} catch (Exception var1) {
-			GameShell.canvas.repaint();
-		}
 	}
 
 	@ObfuscatedName("qd.g(I)V")
@@ -2701,7 +2318,7 @@ public class Statics {
 
 	@ObfuscatedName("je.g(I)V")
 	public static void method569() {
-		Client.field1488 = null;
+		ClientKeyboardListener.keyHeld = null;
 		Text.field1486 = null;
 		Text.field1482 = null;
 		Text.field1491 = null;
@@ -2724,11 +2341,6 @@ public class Statics {
 		} else {
 			return (arg0 == 2 || arg0 == 3) && Client.field3253 == arg1;
 		}
-	}
-
-	@ObfuscatedName("m.b(Z)V")
-	public static synchronized void method674() {
-		method1029();
 	}
 
 	@ObfuscatedName("m.a(I)V")
@@ -2791,7 +2403,7 @@ public class Statics {
 		Text.field2012 = null;
 		Text.field1988 = null;
 		Client.field2034 = null;
-		Client.field2030 = null;
+		Client.players = null;
 		FluType.field2024 = null;
 		Text.field2029 = null;
 		FloType.field2018 = null;
@@ -2801,15 +2413,6 @@ public class Statics {
 		field2023 = null;
 		Client.field1993 = null;
 		Text.field2033 = null;
-	}
-
-	@ObfuscatedName("m.a(ZLbd;IBLa;ILa;I)V")
-	public static synchronized void method679(Js5 arg0, JagString arg1, JagString arg2, int arg3) {
-		if (method521()) {
-			int var4 = arg0.method228(arg1);
-			int var5 = arg0.method224(var4, arg2);
-			method670(arg3, var4, arg0, var5);
-		}
 	}
 
 	@ObfuscatedName("se.a(B)V")
@@ -2843,28 +2446,6 @@ public class Statics {
 		TextGerman.field3191 = null;
 	}
 
-	@ObfuscatedName("m.b(B)V")
-	public static synchronized void method680() {
-		if (!method521()) {
-			return;
-		}
-		if (field1391) {
-			byte[] var0 = method25(field661, field1028, field463, field1462);
-			if (var0 != null) {
-				if (field405 >= 0) {
-					method749(field917, field611, var0, field405);
-				} else if (field2985 < 0) {
-					method7(field611, var0, field917);
-				} else {
-					method406(field917, field611, field2985, var0);
-				}
-				field1391 = false;
-				field1028 = null;
-			}
-		}
-		method962();
-	}
-
 	@ObfuscatedName("rd.a(I)V")
 	public static void method889() {
 		Client.field2686 = null;
@@ -2887,7 +2468,7 @@ public class Statics {
 	@ObfuscatedName("k.d(I)V")
 	public static void method577() {
 		Text.field1511 = null;
-		field1521 = null;
+		Client.waveAmbient = null;
 		Text.field1525 = null;
 		field1523 = null;
 		Text.field1522 = null;
@@ -2901,7 +2482,7 @@ public class Statics {
 
 	@ObfuscatedName("r.b(I)V")
 	public static void method867() {
-		Client.field2577 = null;
+		Client.distMap = null;
 		Text.field2565 = null;
 		TextGerman.field2562 = null;
 		Text.field2560 = null;
@@ -2936,44 +2517,8 @@ public class Statics {
 		ObjType.field1066 = null;
 		TextGerman.field1073 = null;
 		GameShell.signlink = null;
-		Client.field1078 = null;
+		Client.mapBuildIndex = null;
 		TextGerman.field1067 = null;
-	}
-
-	@ObfuscatedName("m.a(ZIIIILbd;I)V")
-	public static synchronized void method681(int arg0, int arg1, int arg2, Js5 arg3) {
-		if (!method521()) {
-			return;
-		}
-		field1391 = true;
-		field2985 = -1;
-		field405 = -1;
-		field917 = arg2;
-		field661 = 0;
-		field611 = false;
-		field1462 = arg0;
-		field1028 = arg3;
-		field463 = arg1;
-	}
-
-	@ObfuscatedName("a.a(ILbd;III)[B")
-	public static byte[] method25(int arg0, Js5 arg1, int arg2, int arg3) {
-		long var4 = ((long) arg3 << 32) + (long) (arg2 * 37 + arg0 & 0xFFFF) + (long) (arg2 << 16);
-		if (field30 != null) {
-			ByteArrayNode var6 = (ByteArrayNode) field30.find(var4);
-			if (var6 != null) {
-				return var6.field1198;
-			}
-		}
-		byte[] var7 = arg1.method217(arg0, arg2);
-		if (var7 == null) {
-			return null;
-		} else {
-			if (field30 != null) {
-				field30.method262(var4, new ByteArrayNode(var7));
-			}
-			return var7;
-		}
 	}
 
 	@ObfuscatedName("h.k(I)V")
@@ -3003,9 +2548,9 @@ public class Statics {
 
 	@ObfuscatedName("a.e(B)V")
 	public static void method34() {
-		field30 = null;
+		MidiManager.field30 = null;
 		TextGerman.field59 = null;
-		Client.field61 = null;
+		Client.mapBuildGroundData = null;
 		field23 = null;
 		LocType.field51 = null;
 		TextGerman.field48 = null;
@@ -3015,7 +2560,7 @@ public class Statics {
 		field62 = null;
 		Text.field37 = null;
 		Text.field49 = null;
-		ClientKeyboardListener.field52 = null;
+		ClientKeyboardListener.keyHeldBuffer = null;
 	}
 
 	@ObfuscatedName("ob.a(B)V")

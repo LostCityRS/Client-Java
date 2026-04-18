@@ -330,7 +330,7 @@ public final class IfType extends Linkable2 {
 			}
 			for (int var2 = 0; var2 < var1; var2++) {
 				if (field2922[arg0][var2] == null) {
-					byte[] var3 = field924.method217(var2, arg0);
+					byte[] var3 = field924.getFile(var2, arg0);
 					if (var3 != null) {
 						field2922[arg0][var2] = new IfType();
 						field2922[arg0][var2].field2495 = (arg0 << 16) + var2;

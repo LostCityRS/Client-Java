@@ -49,7 +49,7 @@ public final class IdkType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field2433.method217(arg0, 3);
+		byte[] var2 = field2433.getFile(arg0, 3);
 		IdkType var3 = new IdkType();
 		if (var2 != null) {
 			var3.method820(new Packet(var2));

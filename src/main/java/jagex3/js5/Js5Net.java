@@ -375,4 +375,13 @@ public class Js5Net {
         long var2 = (long) ((arg0 << 16) + arg1);
         return field967 != null && field967.key == var2 ? field2613.pos * 99 / (field2613.data.length - field967.field2619) + 1 : 0;
     }
+
+    @ObfuscatedName("ld.a(III)V")
+    public static void method661(int arg0, int arg1) {
+        long var2 = (long) ((arg0 << 16) + arg1);
+        Js5NetRequest var4 = (Js5NetRequest) field1328.find(var2);
+        if (var4 != null) {
+            field996.pushFront(var4);
+        }
+    }
 }

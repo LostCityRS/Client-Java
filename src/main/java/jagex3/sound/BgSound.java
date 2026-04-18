@@ -112,7 +112,7 @@ public final class BgSound extends Linkable {
 				} else if (arg3 < var4.field426) {
 					var5 += var4.field426 - arg3;
 				}
-				if (var4.field423 < var5 - 64 || Client.field1559 == 0 || var4.field416 != arg1) {
+				if (var4.field423 < var5 - 64 || Client.ambientVolume == 0 || var4.field416 != arg1) {
 					if (var4.field424 != null) {
 						Client.soundMixer.method135(var4.field424);
 						var4.field424 = null;
@@ -126,16 +126,16 @@ public final class BgSound extends Linkable {
 					if (var5 < 0) {
 						var5 = 0;
 					}
-					int var6 = (var4.field423 - var5) * Client.field1559 / var4.field423;
+					int var6 = (var4.field423 - var5) * Client.ambientVolume / var4.field423;
 					if (var4.field424 != null) {
 						var4.field424.method582(var6);
 					} else if (var4.field420 >= 0) {
-						JagFX var7 = JagFX.method711(Client.jagFX, var4.field420);
+						JagFX var7 = JagFX.load(Client.jagFX, var4.field420);
 						if (var7 != null) {
-							Wave var8 = var7.method710().method1055(Client.soundDecimator);
-							WaveStream var9 = WaveStream.method590(var8, var6);
-							var9.method585(-1);
-							Client.soundMixer.method126(var9);
+							Wave var8 = var7.toWave().decimate(Client.soundDecimator);
+							WaveStream var9 = WaveStream.newRatePercent(var8, var6);
+							var9.setLoopCount(-1);
+							Client.soundMixer.playStream(var9);
 							var4.field424 = var9;
 						}
 					}
@@ -146,12 +146,12 @@ public final class BgSound extends Linkable {
 						}
 					} else if (var4.field428 != null && (var4.field437 -= arg2) <= 0) {
 						int var10 = (int) ((double) var4.field428.length * Math.random());
-						JagFX var11 = JagFX.method711(Client.jagFX, var4.field428[var10]);
+						JagFX var11 = JagFX.load(Client.jagFX, var4.field428[var10]);
 						if (var11 != null) {
-							Wave var12 = var11.method710().method1055(Client.soundDecimator);
-							WaveStream var13 = WaveStream.method590(var12, var6);
-							var13.method585(0);
-							Client.soundMixer.method126(var13);
+							Wave var12 = var11.toWave().decimate(Client.soundDecimator);
+							WaveStream var13 = WaveStream.newRatePercent(var12, var6);
+							var13.setLoopCount(0);
+							Client.soundMixer.playStream(var13);
 							var4.field437 = var4.field435 + (int) ((double) (var4.field425 - var4.field435) * Math.random());
 							var4.field433 = var13;
 						}

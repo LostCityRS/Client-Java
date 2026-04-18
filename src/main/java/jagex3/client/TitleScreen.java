@@ -6,6 +6,7 @@ import jagex3.constants.Text;
 import jagex3.graphics.*;
 import jagex3.js5.Js5;
 import jagex3.js5.Js5Net;
+import jagex3.sound.MidiManager;
 import jagex3.util.JagString;
 
 import java.awt.*;
@@ -72,10 +73,10 @@ public class TitleScreen {
 				boolean var4;
 				label138:
 				do {
-					while (ClientKeyboardListener.method685()) {
+					while (ClientKeyboardListener.pollKey()) {
 						var4 = false;
 						for (int var5 = 0; var5 < Statics.field3074.method10(); var5++) {
-							if (Statics.field2920 == Statics.field3074.method6(var5)) {
+							if (ClientKeyboardListener.ch == Statics.field3074.method6(var5)) {
 								var4 = true;
 								break;
 							}
@@ -83,26 +84,26 @@ public class TitleScreen {
 						if (Statics.field2084 != 0) {
 							continue label138;
 						}
-						if (Client.field2885 == 85 && loginUser.method10() > 0) {
+						if (ClientKeyboardListener.code == 85 && loginUser.method10() > 0) {
 							loginUser = loginUser.method19(0, loginUser.method10() - 1);
 						}
-						if (Client.field2885 == 84 || Client.field2885 == 80) {
+						if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 							Statics.field2084 = 1;
 						}
 						if (var4 && loginUser.method10() < 12) {
-							loginUser = loginUser.method21(Statics.field2920);
+							loginUser = loginUser.method21(ClientKeyboardListener.ch);
 						}
 					}
 					return;
 				} while (Statics.field2084 != 1);
-				if (Client.field2885 == 85 && loginPass.method10() > 0) {
+				if (ClientKeyboardListener.code == 85 && loginPass.method10() > 0) {
 					loginPass = loginPass.method19(0, loginPass.method10() - 1);
 				}
-				if (Client.field2885 == 84 || Client.field2885 == 80) {
+				if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 					Statics.field2084 = 0;
 				}
 				if (var4 && loginPass.method10() < 20) {
-					loginPass = loginPass.method21(Statics.field2920);
+					loginPass = loginPass.method21(ClientKeyboardListener.ch);
 				}
 			}
 		}
@@ -339,10 +340,10 @@ public class TitleScreen {
 		loginUser = Statics.field3067;
 		Statics.field229 = new int[32768];
 		field1395 = 0;
-		if (Client.field1554 == 0 || Client.lowMem) {
-			Statics.method672();
+		if (Client.midiVolume == 0 || Client.lowMem) {
+			MidiManager.method672();
 		} else {
-			Statics.method679(Client.songs, Statics.field1691, Statics.field3067, Client.field1554);
+			MidiManager.method679(Client.songs, Statics.field1691, Statics.field3067, Client.midiVolume);
 		}
 		Js5Net.method617(false);
 		GameShell.field2402 = true;
@@ -376,7 +377,7 @@ public class TitleScreen {
 		Statics.field2701 = null;
 		Statics.field844 = null;
 		Statics.field2151 = null;
-		Statics.method672();
+		MidiManager.method672();
 		Js5Net.method617(true);
 		Statics.field1062 = false;
 	}

@@ -49,4 +49,23 @@ public class RegionRotate {
 			return arg0;
 		}
 	}
+
+    @ObfuscatedName("fd.a(IIIIIIB)I")
+    public static int method404(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+        int var6 = arg4 & 0x3;
+        if ((arg5 & 0x1) == 1) {
+            int var7 = arg3;
+            arg3 = arg1;
+            arg1 = var7;
+        }
+        if (var6 == 0) {
+            return arg0;
+        } else if (var6 == 1) {
+            return 7 + 1 - arg3 - arg2;
+        } else if (var6 == 2) {
+            return 7 + 1 - arg0 - arg1;
+        } else {
+            return arg2;
+        }
+    }
 }

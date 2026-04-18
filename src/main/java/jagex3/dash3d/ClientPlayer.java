@@ -76,7 +76,7 @@ public final class ClientPlayer extends ClientEntity {
 			return null;
 		}
 		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.method103(super.field2015) : null;
-		SeqType var2 = super.field1951 == -1 || this.field95 || super.field2000 == super.field1951 && var1 != null ? null : SeqType.method103(super.field1951);
+		SeqType var2 = super.secondarySeqId == -1 || this.field95 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.method103(super.secondarySeqId);
 		Model var3 = this.field90.method637(var1, var2, super.field1990, super.field1978);
 		if (var3 == null) {
 			return null;
@@ -98,24 +98,24 @@ public final class ClientPlayer extends ClientEntity {
 			if (this.field91 <= Client.loopCycle && this.field82 > Client.loopCycle) {
 				Model var6 = this.field73;
 				var6.method796(this.field79 - super.field1972, -this.field84 + this.field80, this.field99 - super.field1963);
-				if (super.field1954 == 512) {
+				if (super.dstYaw == 512) {
 					var6.method781();
 					var6.method781();
 					var6.method781();
-				} else if (super.field1954 == 1024) {
+				} else if (super.dstYaw == 1024) {
 					var6.method781();
 					var6.method781();
-				} else if (super.field1954 == 1536) {
+				} else if (super.dstYaw == 1536) {
 					var6.method781();
 				}
 				Model[] var7 = new Model[]{var3, var6};
 				var3 = new Model(var7, 2, true);
-				if (super.field1954 == 512) {
+				if (super.dstYaw == 512) {
 					var6.method781();
-				} else if (super.field1954 == 1024) {
+				} else if (super.dstYaw == 1024) {
 					var6.method781();
 					var6.method781();
-				} else if (super.field1954 == 1536) {
+				} else if (super.dstYaw == 1536) {
 					var6.method781();
 					var6.method781();
 					var6.method781();
@@ -169,9 +169,9 @@ public final class ClientPlayer extends ClientEntity {
 			}
 			var9[var10] = var11;
 		}
-		super.field2000 = arg0.g2();
-		if (super.field2000 == 65535) {
-			super.field2000 = -1;
+		super.readyanim = arg0.g2();
+		if (super.readyanim == 65535) {
+			super.readyanim = -1;
 		}
 		super.field2019 = arg0.g2();
 		if (super.field2019 == 65535) {

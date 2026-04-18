@@ -53,7 +53,7 @@ public final class SpotType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field999.method217(arg0, 13);
+		byte[] var2 = field999.getFile(arg0, 13);
 		SpotType var3 = new SpotType();
 		var3.field809 = arg0;
 		if (var2 != null) {

@@ -47,7 +47,7 @@ public final class JagFX {
 	}
 
 	@ObfuscatedName("me.b()I")
-	public int method709() {
+	public int optimiseStart() {
 		int var1 = 9999999;
 		for (int var2 = 0; var2 < 10; var2++) {
 			if (this.field1904[var2] != null && this.field1904[var2].field3082 / 20 < var1) {
@@ -73,7 +73,7 @@ public final class JagFX {
 	}
 
 	@ObfuscatedName("me.c()Lwd;")
-	public Wave method710() {
+	public Wave toWave() {
 		byte[] var1 = this.method708();
 		return new Wave(22050, var1, this.field1905 * 22050 / 1000, this.field1906 * 22050 / 1000);
 	}
@@ -95,8 +95,8 @@ public final class JagFX {
 	}
 
 	@ObfuscatedName("me.a(Lbd;II)Lme;")
-	public static JagFX method711(Js5 arg0, int arg1) {
-		byte[] var2 = arg0.method217(0, arg1);
+	public static JagFX load(Js5 arg0, int arg1) {
+		byte[] var2 = arg0.getFile(0, arg1);
 		return var2 == null ? null : new JagFX(new Packet(var2));
 	}
 }

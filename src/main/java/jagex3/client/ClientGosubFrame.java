@@ -7,15 +7,15 @@ import jagex3.util.JagString;
 public final class ClientGosubFrame {
 
 	@ObfuscatedName("ua.a")
-	public ClientScript field2999;
+	public ClientScript script;
 
 	@ObfuscatedName("ua.b")
-	public int[] field3000;
+	public int[] intLocals;
 
 	@ObfuscatedName("ua.l")
-	public JagString[] field3010;
+	public JagString[] stringLocals;
 
 	@ObfuscatedName("ua.o")
-	public int field3013 = -1;
+	public int pc = -1;
 
 }

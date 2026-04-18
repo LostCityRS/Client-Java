@@ -20,11 +20,11 @@ public final class SignLink implements Runnable {
 	@ObfuscatedName("lc.p")
 	public static String javaVendor;
 	@ObfuscatedName("lc.g")
-	public static String field1705;
+	public static String userHome;
 	@ObfuscatedName("lc.j")
-	public static Method field1708;
+	public static Method setFocusTraversalKeysEnabled;
 	@ObfuscatedName("lc.e")
-	public static Method field1703;
+	public static Method setFocusCycleRoot;
 	@ObfuscatedName("lc.a")
 	public String field1699 = null;
 
@@ -56,7 +56,7 @@ public final class SignLink implements Runnable {
 	public AudioSource field1711;
 
 	@ObfuscatedName("lc.n")
-	public final Thread field1712;
+	public final Thread thread;
 
 	@ObfuscatedName("lc.o")
 	public String field1713 = null;
@@ -83,7 +83,7 @@ public final class SignLink implements Runnable {
 			this.notifyAll();
 		}
 		try {
-			this.field1712.join();
+			this.thread.join();
 		} catch (InterruptedException var6) {
 		}
 		if (this.field1706 != null) {
@@ -155,33 +155,33 @@ public final class SignLink implements Runnable {
 		try {
 			javaVendor = System.getProperty("java.vendor");
 			javaVersion = System.getProperty("java.version");
-			field1705 = System.getProperty("user.home");
-			if (field1705 != null) {
-				field1705 = field1705 + "/";
+			userHome = System.getProperty("user.home");
+			if (userHome != null) {
+				userHome = userHome + "/";
 			}
 		} catch (Exception var9) {
 		}
 		try {
 			if (arg1 == null) {
-				field1708 = Class.forName("java.awt.Component").getDeclaredMethod("setFocusTraversalKeysEnabled", Boolean.TYPE);
+				setFocusTraversalKeysEnabled = Class.forName("java.awt.Component").getDeclaredMethod("setFocusTraversalKeysEnabled", Boolean.TYPE);
 			} else {
-				field1708 = arg1.getClass().getMethod("setFocusTraversalKeysEnabled", Boolean.TYPE);
+				setFocusTraversalKeysEnabled = arg1.getClass().getMethod("setFocusTraversalKeysEnabled", Boolean.TYPE);
 			}
 		} catch (Exception var8) {
 		}
 		try {
 			if (arg1 == null) {
-				field1703 = Class.forName("java.awt.Container").getDeclaredMethod("setFocusCycleRoot", Boolean.TYPE);
+				setFocusCycleRoot = Class.forName("java.awt.Container").getDeclaredMethod("setFocusCycleRoot", Boolean.TYPE);
 			} else {
-				field1703 = arg1.getClass().getMethod("setFocusCycleRoot", Boolean.TYPE);
+				setFocusCycleRoot = arg1.getClass().getMethod("setFocusCycleRoot", Boolean.TYPE);
 			}
 		} catch (Exception var7) {
 		}
 		this.field1700 = false;
-		this.field1712 = new Thread(this);
-		this.field1712.setPriority(10);
-		this.field1712.setDaemon(true);
-		this.field1712.start();
+		this.thread = new Thread(this);
+		this.thread.setPriority(10);
+		this.thread.setDaemon(true);
+		this.thread.start();
 	}
 
 	@ObfuscatedName("lc.c(I)V")
@@ -289,11 +289,11 @@ public final class SignLink implements Runnable {
 		if (arg1 < 32 || arg1 > 34) {
 			arg1 = 32;
 		}
-		if (field1705 == null) {
-			field1705 = "~/";
+		if (userHome == null) {
+			userHome = "~/";
 		}
 		String var4 = ".file_store_" + arg1;
-		String[] var5 = new String[]{"c:/rscache/", "/rscache/", "c:/windows/", "c:/winnt/", "d:/windows/", "d:/winnt/", "e:/windows/", "e:/winnt/", "f:/windows/", "f:/winnt/", "c:/", field1705, "/tmp/", ""};
+		String[] var5 = new String[]{"c:/rscache/", "/rscache/", "c:/windows/", "c:/winnt/", "d:/windows/", "d:/winnt/", "e:/windows/", "e:/winnt/", "f:/windows/", "f:/winnt/", "c:/", userHome, "/tmp/", ""};
 		if (arg0 != -3849) {
 			this.method654(null, null);
 		}

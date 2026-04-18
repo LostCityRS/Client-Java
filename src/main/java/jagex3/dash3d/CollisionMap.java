@@ -12,7 +12,7 @@ public final class CollisionMap {
 	public final int field196 = 104;
 
 	@ObfuscatedName("ad.n")
-	public final int[][] field201 = new int[this.field204][this.field196];
+	public final int[][] flags = new int[this.field204][this.field196];
 
 	@ObfuscatedName("ad.o")
 	public final int field202 = 0;
@@ -22,14 +22,14 @@ public final class CollisionMap {
 
 	@ObfuscatedName("ad.a(ZIII)V")
 	public void method107(int arg0, int arg1, int arg2) {
-		this.field201[arg0][arg1] |= arg2;
+		this.flags[arg0][arg1] |= arg2;
 	}
 
 	@ObfuscatedName("ad.a(III)V")
 	public void method109(int arg0, int arg1) {
 		int var3 = arg0 - this.field202;
 		int var4 = arg1 - this.field191;
-		this.field201[var4][var3] &= 0xDFFFFF;
+		this.flags[var4][var3] &= 0xDFFFFF;
 	}
 
 	@ObfuscatedName("ad.b(I)V")
@@ -37,9 +37,9 @@ public final class CollisionMap {
 		for (int var1 = 0; var1 < this.field204; var1++) {
 			for (int var2 = 0; var2 < this.field196; var2++) {
 				if (var1 == 0 || var2 == 0 || this.field204 - 1 == var1 || this.field196 - 1 == var2) {
-					this.field201[var1][var2] = 16777215;
+					this.flags[var1][var2] = 16777215;
 				} else {
-					this.field201[var1][var2] = 16777216;
+					this.flags[var1][var2] = 16777216;
 				}
 			}
 		}
@@ -327,23 +327,23 @@ public final class CollisionMap {
 	public void method115(int arg0, int arg1) {
 		int var3 = arg0 - this.field202;
 		int var4 = arg1 - this.field191;
-		this.field201[var4][var3] |= 0x200000;
+		this.flags[var4][var3] |= 0x200000;
 	}
 
 	@ObfuscatedName("ad.a(IIIIIIII)Z")
-	public boolean method117(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public boolean testLoc(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var8 = arg1 + arg2 - 1;
 		int var9 = arg3 + arg0 - 1;
 		if (arg6 >= arg1 && arg6 <= var8 && arg5 >= arg3 && var9 >= arg5) {
 			return true;
-		} else if (arg1 - 1 == arg6 && arg5 >= arg3 && var9 >= arg5 && (this.field201[arg6 - this.field191][arg5 - this.field202] & 0x8) == 0 && (arg4 & 0x8) == 0) {
+		} else if (arg1 - 1 == arg6 && arg5 >= arg3 && var9 >= arg5 && (this.flags[arg6 - this.field191][arg5 - this.field202] & 0x8) == 0 && (arg4 & 0x8) == 0) {
 			return true;
-		} else if (var8 + 1 == arg6 && arg5 >= arg3 && arg5 <= var9 && (this.field201[arg6 - this.field191][arg5 - this.field202] & 0x80) == 0 && (arg4 & 0x2) == 0) {
+		} else if (var8 + 1 == arg6 && arg5 >= arg3 && arg5 <= var9 && (this.flags[arg6 - this.field191][arg5 - this.field202] & 0x80) == 0 && (arg4 & 0x2) == 0) {
 			return true;
-		} else if (arg3 - 1 == arg5 && arg6 >= arg1 && arg6 <= var8 && (this.field201[arg6 - this.field191][arg5 - this.field202] & 0x2) == 0 && (arg4 & 0x4) == 0) {
+		} else if (arg3 - 1 == arg5 && arg6 >= arg1 && arg6 <= var8 && (this.flags[arg6 - this.field191][arg5 - this.field202] & 0x2) == 0 && (arg4 & 0x4) == 0) {
 			return true;
 		} else {
-			return var9 + 1 == arg5 && arg1 <= arg6 && var8 >= arg6 && (this.field201[arg6 - this.field191][arg5 - this.field202] & 0x20) == 0 && (arg4 & 0x1) == 0;
+			return var9 + 1 == arg5 && arg1 <= arg6 && var8 >= arg6 && (this.flags[arg6 - this.field191][arg5 - this.field202] & 0x20) == 0 && (arg4 & 0x1) == 0;
 		}
 	}
 
@@ -372,7 +372,7 @@ public final class CollisionMap {
 	}
 
 	@ObfuscatedName("ad.b(IZIIIII)Z")
-	public boolean method119(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public boolean testWall(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg0 == arg5 && arg2 == arg3) {
 			return true;
 		}
@@ -385,40 +385,40 @@ public final class CollisionMap {
 				if (var8 - 1 == var9 && var7 == var10) {
 					return true;
 				}
-				if (var8 == var9 && var10 + 1 == var7 && (this.field201[var9][var7] & 0x1280120) == 0) {
+				if (var8 == var9 && var10 + 1 == var7 && (this.flags[var9][var7] & 0x1280120) == 0) {
 					return true;
 				}
-				if (var8 == var9 && var10 - 1 == var7 && (this.field201[var9][var7] & 0x1280102) == 0) {
+				if (var8 == var9 && var10 - 1 == var7 && (this.flags[var9][var7] & 0x1280102) == 0) {
 					return true;
 				}
 			} else if (arg4 == 1) {
 				if (var8 == var9 && var10 + 1 == var7) {
 					return true;
 				}
-				if (var8 - 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x1280108) == 0) {
+				if (var8 - 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x1280108) == 0) {
 					return true;
 				}
-				if (var8 + 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x1280180) == 0) {
+				if (var8 + 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x1280180) == 0) {
 					return true;
 				}
 			} else if (arg4 == 2) {
 				if (var8 + 1 == var9 && var7 == var10) {
 					return true;
 				}
-				if (var8 == var9 && var10 + 1 == var7 && (this.field201[var9][var7] & 0x1280120) == 0) {
+				if (var8 == var9 && var10 + 1 == var7 && (this.flags[var9][var7] & 0x1280120) == 0) {
 					return true;
 				}
-				if (var8 == var9 && var10 - 1 == var7 && (this.field201[var9][var7] & 0x1280102) == 0) {
+				if (var8 == var9 && var10 - 1 == var7 && (this.flags[var9][var7] & 0x1280102) == 0) {
 					return true;
 				}
 			} else if (arg4 == 3) {
 				if (var8 == var9 && var10 - 1 == var7) {
 					return true;
 				}
-				if (var8 - 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x1280108) == 0) {
+				if (var8 - 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x1280108) == 0) {
 					return true;
 				}
-				if (var8 + 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x1280180) == 0) {
+				if (var8 + 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x1280180) == 0) {
 					return true;
 				}
 			}
@@ -431,14 +431,14 @@ public final class CollisionMap {
 				if (var8 == var9 && var10 + 1 == var7) {
 					return true;
 				}
-				if (var8 + 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x1280180) == 0) {
+				if (var8 + 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x1280180) == 0) {
 					return true;
 				}
-				if (var8 == var9 && var10 - 1 == var7 && (this.field201[var9][var7] & 0x1280102) == 0) {
+				if (var8 == var9 && var10 - 1 == var7 && (this.flags[var9][var7] & 0x1280102) == 0) {
 					return true;
 				}
 			} else if (arg4 == 1) {
-				if (var8 - 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x1280108) == 0) {
+				if (var8 - 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x1280108) == 0) {
 					return true;
 				}
 				if (var8 == var9 && var10 + 1 == var7) {
@@ -447,14 +447,14 @@ public final class CollisionMap {
 				if (var8 + 1 == var9 && var7 == var10) {
 					return true;
 				}
-				if (var8 == var9 && var10 - 1 == var7 && (this.field201[var9][var7] & 0x1280102) == 0) {
+				if (var8 == var9 && var10 - 1 == var7 && (this.flags[var9][var7] & 0x1280102) == 0) {
 					return true;
 				}
 			} else if (arg4 == 2) {
-				if (var8 - 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x1280108) == 0) {
+				if (var8 - 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x1280108) == 0) {
 					return true;
 				}
-				if (var8 == var9 && var10 + 1 == var7 && (this.field201[var9][var7] & 0x1280120) == 0) {
+				if (var8 == var9 && var10 + 1 == var7 && (this.flags[var9][var7] & 0x1280120) == 0) {
 					return true;
 				}
 				if (var8 + 1 == var9 && var7 == var10) {
@@ -467,10 +467,10 @@ public final class CollisionMap {
 				if (var8 - 1 == var9 && var7 == var10) {
 					return true;
 				}
-				if (var8 == var9 && var10 + 1 == var7 && (this.field201[var9][var7] & 0x1280120) == 0) {
+				if (var8 == var9 && var10 + 1 == var7 && (this.flags[var9][var7] & 0x1280120) == 0) {
 					return true;
 				}
-				if (var8 + 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x1280180) == 0) {
+				if (var8 + 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x1280180) == 0) {
 					return true;
 				}
 				if (var8 == var9 && var10 - 1 == var7) {
@@ -479,16 +479,16 @@ public final class CollisionMap {
 			}
 		}
 		if (arg1 == 9) {
-			if (var8 == var9 && var10 + 1 == var7 && (this.field201[var9][var7] & 0x20) == 0) {
+			if (var8 == var9 && var10 + 1 == var7 && (this.flags[var9][var7] & 0x20) == 0) {
 				return true;
 			}
-			if (var8 == var9 && var10 - 1 == var7 && (this.field201[var9][var7] & 0x2) == 0) {
+			if (var8 == var9 && var10 - 1 == var7 && (this.flags[var9][var7] & 0x2) == 0) {
 				return true;
 			}
-			if (var8 - 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x8) == 0) {
+			if (var8 - 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x8) == 0) {
 				return true;
 			}
-			if (var8 + 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x80) == 0) {
+			if (var8 + 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x80) == 0) {
 				return true;
 			}
 		}
@@ -497,7 +497,7 @@ public final class CollisionMap {
 
 	@ObfuscatedName("ad.a(IIIB)V")
 	public void method120(int arg0, int arg1, int arg2) {
-		this.field201[arg2][arg0] &= 16777215 - arg1;
+		this.flags[arg2][arg0] &= 16777215 - arg1;
 	}
 
 	public CollisionMap(int arg0, int arg1) {
@@ -505,7 +505,7 @@ public final class CollisionMap {
 	}
 
 	@ObfuscatedName("ad.a(IIIIIBI)Z")
-	public boolean method122(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public boolean tesWDecor(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg3 == arg4 && arg0 == arg2) {
 			return true;
 		}
@@ -518,46 +518,46 @@ public final class CollisionMap {
 				arg1 = arg1 + 2 & 0x3;
 			}
 			if (arg1 == 0) {
-				if (var8 + 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x80) == 0) {
+				if (var8 + 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x80) == 0) {
 					return true;
 				}
-				if (var8 == var9 && var10 - 1 == var7 && (this.field201[var9][var7] & 0x2) == 0) {
+				if (var8 == var9 && var10 - 1 == var7 && (this.flags[var9][var7] & 0x2) == 0) {
 					return true;
 				}
 			} else if (arg1 == 1) {
-				if (var8 - 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x8) == 0) {
+				if (var8 - 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x8) == 0) {
 					return true;
 				}
-				if (var8 == var9 && var10 - 1 == var7 && (this.field201[var9][var7] & 0x2) == 0) {
+				if (var8 == var9 && var10 - 1 == var7 && (this.flags[var9][var7] & 0x2) == 0) {
 					return true;
 				}
 			} else if (arg1 == 2) {
-				if (var8 - 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x8) == 0) {
+				if (var8 - 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x8) == 0) {
 					return true;
 				}
-				if (var8 == var9 && var10 + 1 == var7 && (this.field201[var9][var7] & 0x20) == 0) {
+				if (var8 == var9 && var10 + 1 == var7 && (this.flags[var9][var7] & 0x20) == 0) {
 					return true;
 				}
 			} else if (arg1 == 3) {
-				if (var8 + 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x80) == 0) {
+				if (var8 + 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x80) == 0) {
 					return true;
 				}
-				if (var8 == var9 && var10 + 1 == var7 && (this.field201[var9][var7] & 0x20) == 0) {
+				if (var8 == var9 && var10 + 1 == var7 && (this.flags[var9][var7] & 0x20) == 0) {
 					return true;
 				}
 			}
 		}
 		if (arg5 == 8) {
-			if (var8 == var9 && var10 + 1 == var7 && (this.field201[var9][var7] & 0x20) == 0) {
+			if (var8 == var9 && var10 + 1 == var7 && (this.flags[var9][var7] & 0x20) == 0) {
 				return true;
 			}
-			if (var8 == var9 && var10 - 1 == var7 && (this.field201[var9][var7] & 0x2) == 0) {
+			if (var8 == var9 && var10 - 1 == var7 && (this.flags[var9][var7] & 0x2) == 0) {
 				return true;
 			}
-			if (var8 - 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x8) == 0) {
+			if (var8 - 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x8) == 0) {
 				return true;
 			}
-			if (var8 + 1 == var9 && var7 == var10 && (this.field201[var9][var7] & 0x80) == 0) {
+			if (var8 + 1 == var9 && var7 == var10 && (this.flags[var9][var7] & 0x80) == 0) {
 				return true;
 			}
 		}

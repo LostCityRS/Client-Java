@@ -56,8 +56,6 @@ public class ClientBuild {
 	public static int[] field1595 = new int[]{1, 0, -1, 0};
 	@ObfuscatedName("ac.S")
 	public static int[] field181 = new int[]{0, -1, 0, 1};
-	@ObfuscatedName("fc.Lb")
-	public static int[][][] field908 = new int[4][13][13];
 
 	@ObfuscatedName("nd.a(IIB)Z")
 	public static boolean method741(int arg0, int arg1) {
@@ -135,12 +133,12 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("he.a([Lad;I[BIIII)V")
-	public static void method487(CollisionMap[] arg0, int arg1, byte[] arg2, int arg3, int arg4, int arg5) {
+	public static void loadGround(CollisionMap[] arg0, int arg1, byte[] arg2, int arg3, int arg4, int arg5) {
 		for (int var6 = 0; var6 < 4; var6++) {
 			for (int var7 = 0; var7 < 64; var7++) {
 				for (int var8 = 0; var8 < 64; var8++) {
 					if (arg3 + var7 > 0 && arg3 + var7 < 103 && arg4 + var8 > 0 && arg4 + var8 < 103) {
-						arg0[var6].field201[arg3 + var7][arg4 + var8] &= 0xFEFFFFFF;
+						arg0[var6].flags[arg3 + var7][arg4 + var8] &= 0xFEFFFFFF;
 					}
 				}
 			}
@@ -156,7 +154,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("ua.a(IBIII)V")
-	public static void method989(int arg0, int arg1, int arg2, int arg3) {
+	public static void fadeAdjacent(int arg0, int arg1, int arg2, int arg3) {
 		for (int var4 = arg0; var4 <= arg0 + arg1; var4++) {
 			for (int var5 = arg3; var5 <= arg2 + arg3; var5++) {
 				if (var5 >= 0 && var5 < 104 && var4 >= 0 && var4 < 104) {
@@ -179,7 +177,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("j.a(ILab;[Lad;[BIB)V")
-	public static void method535(int arg0, World arg1, CollisionMap[] arg2, byte[] arg3, int arg4) {
+	public static void loadLocations(int arg0, World arg1, CollisionMap[] arg2, byte[] arg3, int arg4) {
 		Packet var5 = new Packet(arg3);
 		int var6 = -1;
 		while (true) {
@@ -219,11 +217,11 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("bb.a(IIIIIIII[B[Lad;)V")
-	public static void method186(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, byte[] arg7, CollisionMap[] arg8) {
+	public static void loadGroundRegion(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, byte[] arg7, CollisionMap[] arg8) {
 		for (int var9 = 0; var9 < 8; var9++) {
 			for (int var10 = 0; var10 < 8; var10++) {
 				if (arg4 + var9 > 0 && arg4 + var9 < 103 && arg0 + var10 > 0 && arg0 + var10 < 103) {
-					arg8[arg3].field201[arg4 + var9][arg0 + var10] &= 0xFEFFFFFF;
+					arg8[arg3].flags[arg4 + var9][arg0 + var10] &= 0xFEFFFFFF;
 				}
 			}
 		}
@@ -242,7 +240,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("nd.a(IIII)V")
-	public static void method737(int arg0, int arg1, int arg2) {
+	public static void autoGroundRegion(int arg0, int arg1, int arg2) {
 		for (int var3 = 0; var3 < 8; var3++) {
 			for (int var4 = 0; var4 < 8; var4++) {
 				groundh[arg1][arg2 + var3][arg0 + var4] = 0;
@@ -268,7 +266,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("ib.a(ILab;IIII[BI[Lad;II)V")
-	public static void method522(int arg0, World arg1, int arg2, int arg3, int arg4, byte[] arg5, int arg6, CollisionMap[] arg7, int arg8, int arg9) {
+	public static void loadLocationsRegion(int arg0, World arg1, int arg2, int arg3, int arg4, byte[] arg5, int arg6, CollisionMap[] arg7, int arg8, int arg9) {
 		Packet var10 = new Packet(arg5);
 		int var11 = -1;
 		while (true) {
@@ -293,7 +291,7 @@ public class ClientBuild {
 				if (arg4 == var15 && arg0 <= var16 && var16 < arg0 + 8 && arg8 <= var19 && arg8 + 8 > var19) {
 					LocType var21 = LocType.list(var11);
 					int var22 = RegionRotate.method287(var20, var21.field1286, var16 & 0x7, var21.field1298, arg3, var19 & 0x7) + arg9;
-					int var23 = Statics.method404(var19 & 0x7, var21.field1298, var16 & 0x7, var21.field1286, arg3, var20) + arg6;
+					int var23 = RegionRotate.method404(var19 & 0x7, var21.field1298, var16 & 0x7, var21.field1286, arg3, var20) + arg6;
 					if (var22 > 0 && var23 > 0 && var22 < 103 && var23 < 103) {
 						CollisionMap var24 = null;
 						int var25 = arg2;
@@ -1112,7 +1110,7 @@ public class ClientBuild {
 	public static void method394() {
 		field910 = null;
 		mapl = null;
-		field908 = null;
+		Client.mapBuildRegionSrc = null;
 		TextGerman.field890 = null;
 		Text.field889 = null;
 		TextGerman.field902 = null;

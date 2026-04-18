@@ -9,17 +9,17 @@ import jagex3.config.SpotType;
 public final class ClientNpc extends ClientEntity {
 
 	@ObfuscatedName("vd.Ad")
-	public NpcType field3182;
+	public NpcType type;
 
 	@ObfuscatedName("vd.f(I)Lpa;")
 	@Override
 	public Model method41() {
-		if (this.field3182 == null) {
+		if (this.type == null) {
 			return null;
 		}
 		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.method103(super.field2015) : null;
-		SeqType var2 = super.field1951 == -1 || super.field2000 == super.field1951 && var1 != null ? null : SeqType.method103(super.field1951);
-		Model var3 = this.field3182.method448(var1, var2, super.field1990, super.field1978);
+		SeqType var2 = super.secondarySeqId == -1 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.method103(super.secondarySeqId);
+		Model var3 = this.type.method448(var1, var2, super.field1990, super.field1978);
 		if (var3 == null) {
 			return null;
 		}
@@ -33,7 +33,7 @@ public final class ClientNpc extends ClientEntity {
 				var3 = new Model(var5, 2, true);
 			}
 		}
-		if (this.field3182.field1084 == 1) {
+		if (this.type.size == 1) {
 			var3.field2205 = true;
 		}
 		return var3;
@@ -42,6 +42,6 @@ public final class ClientNpc extends ClientEntity {
 	@ObfuscatedName("vd.h(I)Z")
 	@Override
 	public boolean method42() {
-		return this.field3182 != null;
+		return this.type != null;
 	}
 }

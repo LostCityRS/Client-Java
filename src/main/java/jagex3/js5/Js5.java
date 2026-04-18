@@ -101,7 +101,7 @@ public abstract class Js5 {
 		JagString var4 = arg0.method30();
 		int var5 = this.field404.find(var3.method27());
 		int var6 = this.field367[var5].find(var4.method27());
-		return this.method217(var6, var5);
+		return this.getFile(var6, var5);
 	}
 
 	@ObfuscatedName("bd.a(II)V")
@@ -112,8 +112,8 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(III)[B")
-	public final byte[] method217(int arg0, int arg1) {
-		return this.method221(arg1, arg0, null);
+	public final byte[] getFile(int arg0, int arg1) {
+		return this.fetchFile(arg1, arg0, null);
 	}
 
 	@ObfuscatedName("bd.a(IBI)Z")
@@ -140,7 +140,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(II[II)[B")
-	public final byte[] method221(int arg0, int arg1, int[] arg2) {
+	public final byte[] fetchFile(int arg0, int arg1, int[] arg2) {
 		if (arg0 < 0 || this.field399.length <= arg0 || this.field399[arg0] == null || arg1 < 0 || arg1 >= this.field399[arg0].length) {
 			return null;
 		}
@@ -335,7 +335,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(ILa;)I")
-	public final int method228(JagString arg0) {
+	public final int getGroupId(JagString arg0) {
 		JagString var2 = arg0.method30();
 		return this.field404.find(var2.method27());
 	}
@@ -368,9 +368,9 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.b(IB)[B")
 	public final byte[] method232(int arg0) {
 		if (this.field399.length == 1) {
-			return this.method217(arg0, 0);
+			return this.getFile(arg0, 0);
 		} else if (this.field399[arg0].length == 1) {
-			return this.method217(0, arg0);
+			return this.getFile(0, arg0);
 		} else {
 			throw new RuntimeException();
 		}

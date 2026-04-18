@@ -23,7 +23,7 @@ public final class LocType extends Linkable2 {
 	@ObfuscatedName("se.p")
 	public static LruCache field2788 = new LruCache(64);
 	@ObfuscatedName("pc.q")
-	public static LruCache field2322 = new LruCache(500);
+	public static LruCache mc1 = new LruCache(500);
 	@ObfuscatedName("qc.d")
 	public static LruCache field2428 = new LruCache(30);
 	@ObfuscatedName("rb.Cb")
@@ -164,7 +164,7 @@ public final class LocType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field698.method217(arg0, 6);
+		byte[] var2 = field698.getFile(arg0, 6);
 		LocType var3 = new LocType();
 		var3.field1321 = arg0;
 		if (var2 != null) {
@@ -182,7 +182,7 @@ public final class LocType extends Linkable2 {
 	@ObfuscatedName("qd.c(B)V")
 	public static void method859() {
 		field2788.clear();
-		field2322.clear();
+		mc1.clear();
 		Statics.field981.clear();
 		field2428.clear();
 	}
@@ -282,7 +282,7 @@ public final class LocType extends Linkable2 {
 				if (var6) {
 					var9 += 65536;
 				}
-				var5 = (Model) field2322.find((long) var9);
+				var5 = (Model) mc1.find((long) var9);
 				if (var5 == null) {
 					var5 = Model.method798(field51, var9 & 0xFFFF);
 					if (var5 == null) {
@@ -291,7 +291,7 @@ public final class LocType extends Linkable2 {
 					if (var6) {
 						var5.method786();
 					}
-					field2322.method262((long) var9, var5);
+					mc1.method262((long) var9, var5);
 				}
 				if (var7 > 1) {
 					field2623[var8] = var5;
@@ -316,7 +316,7 @@ public final class LocType extends Linkable2 {
 			if (var13) {
 				var12 += 65536;
 			}
-			var5 = (Model) field2322.find((long) var12);
+			var5 = (Model) mc1.find((long) var12);
 			if (var5 == null) {
 				var5 = Model.method798(field51, var12 & 0xFFFF);
 				if (var5 == null) {
@@ -325,7 +325,7 @@ public final class LocType extends Linkable2 {
 				if (var13) {
 					var5.method786();
 				}
-				field2322.method262((long) var12, var5);
+				mc1.method262((long) var12, var5);
 			}
 		}
 		boolean var14;

@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 import javax.sound.midi.*;
 import java.io.ByteArrayInputStream;
@@ -47,7 +46,7 @@ public final class JavaMidiPlayer extends MidiPlayer implements Receiver {
 			field673.open();
 			this.method1000(-1L);
 		} catch (Exception var2) {
-			Statics.method1029();
+			MidiManager.method1029();
 		}
 	}
 

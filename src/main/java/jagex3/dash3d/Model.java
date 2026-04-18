@@ -2052,7 +2052,7 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.a(Lbd;II)Lpa;")
 	public static Model method798(Js5 arg0, int arg1) {
-		byte[] var2 = arg0.method217(0, arg1);
+		byte[] var2 = arg0.getFile(0, arg1);
 		return var2 == null ? null : new Model(var2);
 	}
 }

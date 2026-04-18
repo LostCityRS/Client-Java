@@ -335,7 +335,7 @@ public final class WaveStream extends PcmStream {
 	}
 
 	@ObfuscatedName("ka.d(I)V")
-	public synchronized void method585(int arg0) {
+	public synchronized void setLoopCount(int arg0) {
 		this.field1536 = arg0;
 	}
 
@@ -425,7 +425,7 @@ public final class WaveStream extends PcmStream {
 	}
 
 	@ObfuscatedName("ka.a(Lwd;II)Lka;")
-	public static WaveStream method590(Wave arg0, int arg1) {
+	public static WaveStream newRatePercent(Wave arg0, int arg1) {
 		return arg0.field3308 == null || arg0.field3308.length == 0 ? null : new WaveStream(arg0, (int) ((long) arg0.field3311 * 256L * (long) 100 / (long) (PcmPlayer.frequency * 100)), arg1);
 	}
 

@@ -132,7 +132,7 @@ public class ReflectionChecker {
 			if (var2) {
 				return;
 			}
-			arg0.method415(205);
+			arg0.p1Enc(205);
 			arg0.p1(0);
 			int var4 = arg0.pos;
 			arg0.p4(var1.field2970);

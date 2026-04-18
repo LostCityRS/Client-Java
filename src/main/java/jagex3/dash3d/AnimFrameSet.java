@@ -63,7 +63,7 @@ public final class AnimFrameSet extends Linkable2 {
 		this.field2825 = new AnimFrame[var6];
 		int[] var7 = arg0.method237(arg2);
 		for (int var8 = 0; var8 < var7.length; var8++) {
-			byte[] var9 = arg0.method217(var7[var8], arg2);
+			byte[] var9 = arg0.getFile(var7[var8], arg2);
 			AnimBase var10 = null;
 			int var11 = var9[1] & 0xFF | (var9[0] & 0xFF) << 8;
 			for (AnimBase var12 = (AnimBase) var5.head(); var12 != null; var12 = (AnimBase) var5.next()) {

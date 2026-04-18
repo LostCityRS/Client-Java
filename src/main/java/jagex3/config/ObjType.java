@@ -146,7 +146,7 @@ public final class ObjType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field1405.method217(arg0, 10);
+		byte[] var2 = field1405.getFile(arg0, 10);
 		ObjType var3 = new ObjType();
 		var3.field2883 = arg0;
 		if (var2 != null) {
