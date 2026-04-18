@@ -375,7 +375,7 @@ public class Text {
 	@ObfuscatedName("ha.h")
 	public static JagString field1151 = JagString.wrap("Select");
 	@ObfuscatedName("ha.i")
-	public static JagString field1152 = field1151;
+	public static JagString SELECT = field1151;
 	@ObfuscatedName("ra.o")
 	public static JagString field2603 = JagString.wrap("Enter name of player to add to list");
 	@ObfuscatedName("ra.n")
@@ -645,7 +645,7 @@ public class Text {
 	@ObfuscatedName("nc.c")
 	public static JagString field2037 = JagString.wrap("Ok");
 	@ObfuscatedName("nc.v")
-	public static JagString field2056 = field2037;
+	public static JagString OK = field2037;
 	@ObfuscatedName("dd.n")
 	public static JagString field714 = JagString.wrap("Unable to find ");
 	@ObfuscatedName("dd.r")
@@ -729,7 +729,7 @@ public class Text {
 	@ObfuscatedName("ad.I")
 	public static JagString field222 = JagString.wrap("Continue");
 	@ObfuscatedName("ad.E")
-	public static JagString field218 = field222;
+	public static JagString CONTINUE = field222;
 	@ObfuscatedName("pb.D")
 	public static JagString field2300 = JagString.wrap("cyan:");
 	@ObfuscatedName("pb.z")

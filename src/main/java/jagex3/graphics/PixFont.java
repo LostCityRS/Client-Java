@@ -218,7 +218,7 @@ public final class PixFont extends Pix2D {
 			var17 = false;
 		}
 		int var18 = 0;
-		int var19 = arg0.method10();
+		int var19 = arg0.length();
 		for (int var20 = 0; var20 < var19; var20++) {
 			int var21 = arg0.method6(var20);
 			if (var21 == 64 && var20 + 4 < var19 && arg0.method6(var20 + 4) == 64) {
@@ -227,8 +227,8 @@ public final class PixFont extends Pix2D {
 				var20 += 4;
 			} else if (var21 == 92 && var20 + 1 < var19 && arg0.method6(var20 + 1) == 110) {
 				var16 = null;
-				field337[var18++] = var13.method19(var12, var13.method10()).method40();
-				var12 = var13.method10();
+				field337[var18++] = var13.method19(var12, var13.length()).method40();
+				var12 = var13.length();
 				var11 = 0;
 				var14 = -1;
 				var20++;
@@ -236,7 +236,7 @@ public final class PixFont extends Pix2D {
 				var13.method29(var21);
 				var11 += this.method212(var21);
 				if (var21 == 32 || var21 == 45) {
-					var14 = var13.method10();
+					var14 = var13.length();
 					var15 = var11;
 				}
 				if (var17 && var11 > arg3 && var14 >= 0) {
@@ -251,8 +251,8 @@ public final class PixFont extends Pix2D {
 				}
 			}
 		}
-		if (var13.method10() > var12) {
-			field337[var18++] = var13.method19(var12, var13.method10()).method40();
+		if (var13.length() > var12) {
+			field337[var18++] = var13.method19(var12, var13.length()).method40();
 		}
 		if (arg8 == 3 && var18 == 1) {
 			arg8 = 1;
@@ -329,7 +329,7 @@ public final class PixFont extends Pix2D {
 		}
 		int var6 = arg1 - this.method208(arg0) / 2;
 		int var7 = arg2 - this.field350;
-		for (int var8 = 0; var8 < arg0.method10(); var8++) {
+		for (int var8 = 0; var8 < arg0.length(); var8++) {
 			int var9 = arg0.field38[var8] & 0xFF;
 			if (var9 != 32) {
 				this.method205(this.field354[var9], var6 + (int) (Math.sin((double) arg4 / 5.0D + (double) var8 / 5.0D) * 5.0D), this.field351[var9] + var7 + (int) (Math.sin((double) arg4 / 5.0D + (double) var8 / 3.0D) * 5.0D), this.field347[var9], this.field355[var9], arg3);
@@ -354,7 +354,7 @@ public final class PixFont extends Pix2D {
 		}
 		int var9 = arg1 - this.method208(arg0) / 2;
 		int var10 = arg2 - this.field350;
-		for (int var11 = 0; var11 < arg0.method10(); var11++) {
+		for (int var11 = 0; var11 < arg0.length(); var11++) {
 			int var12 = arg0.field38[var11] & 0xFF;
 			if (var12 != 32) {
 				this.method205(this.field354[var12], var9, this.field351[var12] + var10 + (int) (Math.sin((double) var11 / 1.5D + (double) arg4) * var7), this.field347[var12], this.field355[var12], arg3);
@@ -403,7 +403,7 @@ public final class PixFont extends Pix2D {
 	public void method203(JagString arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5) {
 		JagString var7 = arg0.method40();
 		int var8 = 0;
-		for (int var9 = 0; var9 < var7.method10(); var9++) {
+		for (int var9 = 0; var9 < var7.length(); var9++) {
 			if (var7.method6(var9) == 32) {
 				var8++;
 			}

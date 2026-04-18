@@ -185,7 +185,7 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("la.d(I)Lpa;")
-	public Model method639() {
+	public Model getHeadModel() {
 		if (this.field1671 != -1) {
 			return NpcType.list(this.field1671).getHead();
 		}

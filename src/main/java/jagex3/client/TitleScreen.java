@@ -75,7 +75,7 @@ public class TitleScreen {
 				do {
 					while (ClientKeyboardListener.pollKey()) {
 						var4 = false;
-						for (int var5 = 0; var5 < Statics.field3074.method10(); var5++) {
+						for (int var5 = 0; var5 < Statics.field3074.length(); var5++) {
 							if (ClientKeyboardListener.ch == Statics.field3074.method6(var5)) {
 								var4 = true;
 								break;
@@ -84,25 +84,25 @@ public class TitleScreen {
 						if (Statics.field2084 != 0) {
 							continue label138;
 						}
-						if (ClientKeyboardListener.code == 85 && loginUser.method10() > 0) {
-							loginUser = loginUser.method19(0, loginUser.method10() - 1);
+						if (ClientKeyboardListener.code == 85 && loginUser.length() > 0) {
+							loginUser = loginUser.method19(0, loginUser.length() - 1);
 						}
 						if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 							Statics.field2084 = 1;
 						}
-						if (var4 && loginUser.method10() < 12) {
+						if (var4 && loginUser.length() < 12) {
 							loginUser = loginUser.method21(ClientKeyboardListener.ch);
 						}
 					}
 					return;
 				} while (Statics.field2084 != 1);
-				if (ClientKeyboardListener.code == 85 && loginPass.method10() > 0) {
-					loginPass = loginPass.method19(0, loginPass.method10() - 1);
+				if (ClientKeyboardListener.code == 85 && loginPass.length() > 0) {
+					loginPass = loginPass.method19(0, loginPass.length() - 1);
 				}
 				if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 					Statics.field2084 = 0;
 				}
-				if (var4 && loginPass.method10() < 20) {
+				if (var4 && loginPass.length() < 20) {
 					loginPass = loginPass.method21(ClientKeyboardListener.ch);
 				}
 			}

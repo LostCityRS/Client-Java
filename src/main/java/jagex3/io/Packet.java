@@ -346,7 +346,7 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("ba.a(La;B)V")
 	public final void pjstr(JagString arg0) {
-		this.pos += arg0.method2(arg0.method10(), this.data, this.pos);
+		this.pos += arg0.method2(arg0.length(), this.data, this.pos);
 		this.data[this.pos++] = 0;
 	}
 

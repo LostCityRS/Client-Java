@@ -18,35 +18,37 @@ import jagex3.util.JagString;
 public final class IfType extends Linkable2 {
 
 	@ObfuscatedName("rd.w")
-	public static LruCache field2680 = new LruCache(50);
+	public static LruCache modelCache = new LruCache(50);
 	@ObfuscatedName("cb.x")
-	public static Js5 field503;
+	public static Js5 models;
 	@ObfuscatedName("fd.sb")
-	public static Js5 field924;
+	public static Js5 interfaces;
 	@ObfuscatedName("t.yb")
-	public static Js5 field2810;
+	public static Js5 sprites;
 	@ObfuscatedName("tc.k")
-	public static IfType[][] field2922;
+	public static IfType[][] list;
 	@ObfuscatedName("wc.o")
-	public static boolean[] field3296;
+	public static boolean[] open;
 	@ObfuscatedName("cb.u")
-	public static LruCache field500 = new LruCache(200);
+	public static LruCache spriteCache = new LruCache(200);
 	@ObfuscatedName("wb.i")
-	public static LruCache field3249 = new LruCache(20);
+	public static LruCache fontCache = new LruCache(20);
+	@ObfuscatedName("va.lb")
+	public static boolean loadingAsset = false;
 	@ObfuscatedName("qd.ac")
-	public JagString field2474 = Statics.field3058;
+	public JagString text = Statics.field3058;
 
 	@ObfuscatedName("qd.ad")
-	public int field2526 = 0;
+	public int scrollPos = 0;
 
 	@ObfuscatedName("qd.bc")
 	public Object[] field2475;
 
 	@ObfuscatedName("qd.bd")
-	public int field2527 = -1;
+	public int overLayerId = -1;
 
 	@ObfuscatedName("qd.cc")
-	public int field2476 = -1;
+	public int graphic2 = -1;
 
 	@ObfuscatedName("qd.cd")
 	public int field2528 = 0;
@@ -58,22 +60,22 @@ public final class IfType extends Linkable2 {
 	public Object[] field2478;
 
 	@ObfuscatedName("qd.fc")
-	public int field2479 = -1;
+	public int model1Id = -1;
 
 	@ObfuscatedName("qd.fd")
-	public int field2531 = 0;
+	public int modelZAn = 0;
 
 	@ObfuscatedName("qd.gd")
-	public int field2532 = 0;
+	public int colour2 = 0;
 
 	@ObfuscatedName("qd.hd")
 	public boolean field2533 = false;
 
 	@ObfuscatedName("qd.ic")
-	public JagString field2482 = Text.field2056;
+	public JagString buttonText = Text.OK;
 
 	@ObfuscatedName("qd.id")
-	public int field2534 = 100;
+	public int modelZoom = 100;
 
 	@ObfuscatedName("qd.jc")
 	public Object[] field2483;
@@ -82,22 +84,22 @@ public final class IfType extends Linkable2 {
 	public boolean field2536 = false;
 
 	@ObfuscatedName("qd.lc")
-	public int field2485 = 0;
+	public int modelYOf = 0;
 
 	@ObfuscatedName("qd.ld")
-	public int field2537 = 0;
+	public int scrollHeight = 0;
 
 	@ObfuscatedName("qd.mc")
 	public Object[] field2486;
 
 	@ObfuscatedName("qd.md")
-	public int field2538 = 0;
+	public int lineHeight = 0;
 
 	@ObfuscatedName("qd.nc")
 	public Object[] field2487;
 
 	@ObfuscatedName("qd.nd")
-	public int field2539 = 0;
+	public int hAlign = 0;
 
 	@ObfuscatedName("qd.oc")
 	public boolean field2488 = false;
@@ -106,70 +108,70 @@ public final class IfType extends Linkable2 {
 	public int field2540 = 0;
 
 	@ObfuscatedName("qd.pc")
-	public int field2489;
+	public int type;
 
 	@ObfuscatedName("qd.qd")
 	public int field2542 = 0;
 
 	@ObfuscatedName("qd.rc")
-	public int[] field2491;
+	public int[] linkObjType;
 
 	@ObfuscatedName("qd.rd")
-	public int field2543 = 0;
+	public int modelXOf = 0;
 
 	@ObfuscatedName("qd.sd")
 	public int field2544 = -1;
 
 	@ObfuscatedName("qd.tc")
-	public int field2493 = 1;
+	public int model1Type = 1;
 
 	@ObfuscatedName("qd.ub")
-	public boolean field2442 = false;
+	public boolean v3 = false;
 
 	@ObfuscatedName("qd.uc")
-	public boolean field2494 = false;
+	public boolean hashook = false;
 
 	@ObfuscatedName("qd.vc")
-	public int field2495 = -1;
+	public int parentId = -1;
 
 	@ObfuscatedName("qd.wc")
-	public int field2496 = 0;
+	public int modelXAn = 0;
 
 	@ObfuscatedName("qd.wd")
-	public int[] field2548;
+	public int[] scriptOperand;
 
 	@ObfuscatedName("qd.Jb")
-	public int field2457 = 1;
+	public int model2Type = 1;
 
 	@ObfuscatedName("qd.xb")
-	public int field2445 = 0;
+	public int clientCode = 0;
 
 	@ObfuscatedName("qd.Pb")
-	public int field2463 = 0;
+	public int modelYAn = 0;
 
 	@ObfuscatedName("qd.Xb")
-	public boolean field2471 = false;
+	public boolean shadow = false;
 
 	@ObfuscatedName("qd.zb")
-	public boolean field2447 = false;
+	public boolean tiling = false;
 
 	@ObfuscatedName("qd.Wb")
-	public JagString field2470 = Statics.field3058;
+	public JagString targetVerb = Statics.field3058;
 
 	@ObfuscatedName("qd.Mb")
 	public int field2460 = 0;
 
 	@ObfuscatedName("qd.Zb")
-	public int field2473 = 0;
+	public int marginY = 0;
 
 	@ObfuscatedName("qd.Sb")
 	public int field2466 = 0;
 
 	@ObfuscatedName("qd.Lb")
-	public int field2459 = -1;
+	public int modelAnim2 = -1;
 
 	@ObfuscatedName("qd.Fb")
-	public int field2453 = 0;
+	public int colour = 0;
 
 	@ObfuscatedName("qd.Ic")
 	public int field2508 = 0;
@@ -178,109 +180,109 @@ public final class IfType extends Linkable2 {
 	public boolean field2500 = false;
 
 	@ObfuscatedName("qd.Gb")
-	public int field2454 = -1;
+	public int layerId = -1;
 
 	@ObfuscatedName("qd.Vb")
-	public int field2469 = 0;
+	public int colour2Over = 0;
 
 	@ObfuscatedName("qd.Cc")
-	public int field2502 = 0;
+	public int y = 0;
 
 	@ObfuscatedName("qd.Rc")
-	public int field2517 = -1;
+	public int model2Id = -1;
 
 	@ObfuscatedName("qd.Hb")
-	public int field2455 = 0;
+	public int dataX = 0;
 
 	@ObfuscatedName("qd.yb")
-	public JagString field2446 = Statics.field3058;
+	public JagString text2 = Statics.field3058;
 
 	@ObfuscatedName("qd.Jc")
 	public boolean field2509 = false;
 
 	@ObfuscatedName("qd.Zc")
-	public int field2525 = 0;
+	public int colourOver = 0;
 
 	@ObfuscatedName("qd.yc")
-	public int field2498 = 0;
+	public int width = 0;
 
 	@ObfuscatedName("qd.Rb")
-	public int field2465 = -1;
+	public int modelAnim = -1;
 
 	@ObfuscatedName("qd.Pc")
-	public JagString field2515 = Statics.field3058;
+	public JagString targetBase = Statics.field3058;
 
 	@ObfuscatedName("qd.Nb")
 	public boolean field2461 = false;
 
 	@ObfuscatedName("qd.Db")
-	public boolean field2451 = false;
+	public boolean fill = false;
 
 	@ObfuscatedName("qd.Vc")
-	public int field2521 = 0;
+	public int vAlign = 0;
 
 	@ObfuscatedName("qd.Ob")
-	public int field2462 = 0;
+	public int x = 0;
 
 	@ObfuscatedName("qd.Hc")
-	public boolean field2507 = false;
+	public boolean orthog = false;
 
 	@ObfuscatedName("qd.yd")
-	public int field2550 = -1;
+	public int graphic = -1;
 
 	@ObfuscatedName("qd.Bb")
-	public int field2449 = 0;
+	public int height = 0;
 
 	@ObfuscatedName("qd.zd")
-	public int field2551 = 0;
+	public int trans = 0;
 
 	@ObfuscatedName("qd.xd")
-	public int field2549 = 0;
+	public int dataY = 0;
 
 	@ObfuscatedName("qd.Ad")
-	public int field2552 = 0;
+	public int scrollWidth = 0;
 
 	@ObfuscatedName("qd.Ed")
-	public boolean field2556 = false;
+	public boolean hide = false;
 
 	@ObfuscatedName("qd.Yc")
 	public int field2524 = -1;
 
 	@ObfuscatedName("qd.Dd")
-	public int field2555 = 0;
+	public int marginX = 0;
 
 	@ObfuscatedName("qd.Uc")
-	public int field2520 = 0;
+	public int buttonType = 0;
 
 	@ObfuscatedName("qd.Fd")
-	public int field2557 = 0;
+	public int rotate = 0;
 
 	@ObfuscatedName("qd.Ab")
-	public int field2448;
+	public int font;
 
 	@ObfuscatedName("qd.zc")
-	public int[] field2499;
+	public int[] scriptComparator;
 
 	@ObfuscatedName("qd.Fc")
-	public int[] field2505;
+	public int[] invBackgroundX;
 
 	@ObfuscatedName("qd.Kc")
-	public int[] field2510;
+	public int[] invBackground;
 
 	@ObfuscatedName("qd.Oc")
-	public int[] field2514;
+	public int[] invBackgroundY;
 
 	@ObfuscatedName("qd.Qc")
-	public int[] field2516;
+	public int[] linkObjNumber;
 
 	@ObfuscatedName("qd.Tc")
 	public IfType[] field2519;
 
 	@ObfuscatedName("qd.Tb")
-	public JagString[] field2467;
+	public JagString[] opNames;
 
 	@ObfuscatedName("qd.Ec")
-	public JagString[] field2504;
+	public JagString[] iop;
 
 	@ObfuscatedName("qd.Cb")
 	public Object[] field2450;
@@ -304,45 +306,45 @@ public final class IfType extends Linkable2 {
 	public Object[] field2553;
 
 	@ObfuscatedName("qd.Cd")
-	public int[][] field2554;
+	public int[][] scripts;
 
 	@ObfuscatedName("d.a(Lbd;Lbd;Lbd;B)V")
 	public static void init(Js5 arg0, Js5 arg1, Js5 arg2) {
-		field503 = arg2;
-		field924 = arg0;
-		field2810 = arg1;
-		field2922 = new IfType[field924.method220()][];
-		field3296 = new boolean[field924.method220()];
+		models = arg2;
+		interfaces = arg0;
+		sprites = arg1;
+		list = new IfType[interfaces.getGroupCount()][];
+		open = new boolean[interfaces.getGroupCount()];
 	}
 
 	@ObfuscatedName("wc.a(II)Z")
-	public static boolean method1052(int arg0) {
-		if (field3296[arg0]) {
+	public static boolean openInterface(int arg0) {
+		if (open[arg0]) {
 			return true;
-		} else if (field924.method231(arg0)) {
-			int var1 = field924.getFileIdLimit(arg0);
+		} else if (interfaces.requestGroupDownload(arg0)) {
+			int var1 = interfaces.getFileIdLimit(arg0);
 			if (var1 == 0) {
-				field3296[arg0] = true;
+				open[arg0] = true;
 				return true;
 			}
-			if (field2922[arg0] == null) {
-				field2922[arg0] = new IfType[var1];
+			if (list[arg0] == null) {
+				list[arg0] = new IfType[var1];
 			}
 			for (int var2 = 0; var2 < var1; var2++) {
-				if (field2922[arg0][var2] == null) {
-					byte[] var3 = field924.getFile(var2, arg0);
+				if (list[arg0][var2] == null) {
+					byte[] var3 = interfaces.getFile(var2, arg0);
 					if (var3 != null) {
-						field2922[arg0][var2] = new IfType();
-						field2922[arg0][var2].field2495 = (arg0 << 16) + var2;
+						list[arg0][var2] = new IfType();
+						list[arg0][var2].parentId = (arg0 << 16) + var2;
 						if (var3[0] == -1) {
-							field2922[arg0][var2].method858(new Packet(var3));
+							list[arg0][var2].decode3(new Packet(var3));
 						} else {
-							field2922[arg0][var2].method851(new Packet(var3));
+							list[arg0][var2].decode(new Packet(var3));
 						}
 					}
 				}
 			}
-			field3296[arg0] = true;
+			open[arg0] = true;
 			return true;
 		} else {
 			return false;
@@ -350,461 +352,422 @@ public final class IfType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ua.a(BI)V")
-	public static void method985(int arg0) {
-		if (arg0 == -1 || !field3296[arg0]) {
+	public static void closeInterface(int arg0) {
+		if (arg0 == -1 || !open[arg0]) {
 			return;
 		}
-		field924.method216(arg0);
-		if (field2922[arg0] == null) {
+		interfaces.discardFiles(arg0);
+		if (list[arg0] == null) {
 			return;
 		}
 		boolean var1 = true;
-		for (int var2 = 0; var2 < field2922[arg0].length; var2++) {
-			if (field2922[arg0][var2] != null) {
-				if (field2922[arg0][var2].field2489 == 2) {
+		for (int var2 = 0; var2 < list[arg0].length; var2++) {
+			if (list[arg0][var2] != null) {
+				if (list[arg0][var2].type == 2) {
 					var1 = false;
 				} else {
-					field2922[arg0][var2] = null;
+					list[arg0][var2] = null;
 				}
 			}
 		}
 		if (var1) {
-			field2922[arg0] = null;
+			list[arg0] = null;
 		}
-		field3296[arg0] = false;
-	}
-
-	@ObfuscatedName("s.a(II)V")
-	public static void method895(int arg0) {
-		method985(arg0);
+		open[arg0] = false;
 	}
 
 	@ObfuscatedName("nb.g(I)V")
-	public static void method726() {
-		field500.clear();
-		field2680.clear();
-		field3249.clear();
+	public static void resetCache() {
+		spriteCache.clear();
+		modelCache.clear();
+		fontCache.clear();
 	}
 
 	@ObfuscatedName("wc.a(IB)Lqd;")
-	public static IfType method1053(int arg0) {
+	public static IfType get(int arg0) {
 		int var1 = arg0 >> 16;
 		int var2 = arg0 & 0xFFFF;
-		if (field2922[var1] == null || field2922[var1][var2] == null) {
-			boolean var3 = method1052(var1);
+		if (list[var1] == null || list[var1][var2] == null) {
+			boolean var3 = openInterface(var1);
 			if (!var3) {
 				return null;
 			}
 		}
-		return field2922[var1][var2];
+		return list[var1][var2];
 	}
 
-    @ObfuscatedName("va.a(ILqd;)Lqd;")
-    public static IfType method1009(IfType arg0) {
-        int var1;
-        if (arg0.field2495 < 0) {
-            var1 = arg0.field2454 >> 16;
-        } else {
-            var1 = arg0.field2495 >> 16;
-        }
-        if (!method1052(var1)) {
-            return null;
-        } else if (arg0.field2544 >= 0) {
-            return field2922[var1][arg0.field2544 & 0xFFFF];
-        } else {
-            IfType var2 = field2922[var1][arg0.field2544 >> 15 & 0xFFFF];
-            return var2.field2519[arg0.field2544 & 0x7FFF];
-        }
-    }
-
-	@ObfuscatedName("de.a(Lqd;B)[I")
-	public static int[] method325(IfType arg0) {
-		int var1;
-		if (arg0.field2495 < 0) {
-			var1 = arg0.field2454 >> 16;
-		} else {
-			var1 = arg0.field2495 >> 16;
-		}
-		if (!method1052(var1)) {
+	@ObfuscatedName("id.a(BLba;)[Ljava/lang/Object;")
+	public static Object[] decodeHook(Packet arg0) {
+		int var1 = arg0.g1();
+		if (var1 == 0) {
 			return null;
 		}
-		int var2 = arg0.field2462;
-		int var3 = arg0.field2502;
-		int var4 = arg0.field2454;
-		while (var4 != -1) {
-			IfType var5 = field2922[var1][var4 & 0xFFFF];
-			var2 += var5.field2462;
-			if (!arg0.field2500) {
-				var2 -= var5.field2552;
-			}
-			var3 += var5.field2502;
-			var4 = var5.field2454;
-			if (!arg0.field2500) {
-				var3 -= var5.field2537;
+		Object[] var2 = new Object[var1];
+		for (int var3 = 0; var3 < var1; var3++) {
+			int var4 = arg0.g1();
+			if (var4 == 0) {
+				var2[var3] = Integer.valueOf(arg0.g4());
+			} else if (var4 == 1) {
+				var2[var3] = arg0.gjstr();
 			}
 		}
-		return new int[]{var2, var3};
+		return var2;
 	}
 
 	@ObfuscatedName("qd.a(IZI)V")
-	public void method850(int arg0, int arg1) {
-		int var3 = this.field2491[arg1];
-		this.field2491[arg1] = this.field2491[arg0];
-		this.field2491[arg0] = var3;
-		int var4 = this.field2516[arg1];
-		this.field2516[arg1] = this.field2516[arg0];
-		this.field2516[arg0] = var4;
+	public void swapSlots(int arg0, int arg1) {
+		int var3 = this.linkObjType[arg1];
+		this.linkObjType[arg1] = this.linkObjType[arg0];
+		this.linkObjType[arg0] = var3;
+		int var4 = this.linkObjNumber[arg1];
+		this.linkObjNumber[arg1] = this.linkObjNumber[arg0];
+		this.linkObjNumber[arg0] = var4;
 	}
 
 	@ObfuscatedName("qd.a(Lba;I)V")
-	public void method851(Packet arg0) {
-		this.field2442 = false;
-		this.field2489 = arg0.g1();
-		this.field2520 = arg0.g1();
-		this.field2445 = arg0.g2();
-		this.field2455 = this.field2462 = arg0.g2b();
-		this.field2549 = this.field2502 = arg0.g2b();
-		this.field2498 = arg0.g2();
-		this.field2449 = arg0.g2();
-		this.field2551 = arg0.g1();
-		this.field2454 = arg0.g2();
-		if (this.field2454 == 65535) {
-			this.field2454 = -1;
+	public void decode(Packet arg0) {
+		this.v3 = false;
+		this.type = arg0.g1();
+		this.buttonType = arg0.g1();
+		this.clientCode = arg0.g2();
+		this.dataX = this.x = arg0.g2b();
+		this.dataY = this.y = arg0.g2b();
+		this.width = arg0.g2();
+		this.height = arg0.g2();
+		this.trans = arg0.g1();
+		this.layerId = arg0.g2();
+		if (this.layerId == 65535) {
+			this.layerId = -1;
 		}
-		this.field2527 = arg0.g2();
-		if (this.field2527 == 65535) {
-			this.field2527 = -1;
+		this.overLayerId = arg0.g2();
+		if (this.overLayerId == 65535) {
+			this.overLayerId = -1;
 		}
 		int var2 = arg0.g1();
 		if (var2 > 0) {
-			this.field2548 = new int[var2];
-			this.field2499 = new int[var2];
+			this.scriptOperand = new int[var2];
+			this.scriptComparator = new int[var2];
 			for (int var3 = 0; var3 < var2; var3++) {
-				this.field2548[var3] = arg0.g1();
-				this.field2499[var3] = arg0.g2();
+				this.scriptOperand[var3] = arg0.g1();
+				this.scriptComparator[var3] = arg0.g2();
 			}
 		}
 		int var4 = arg0.g1();
 		if (var4 > 0) {
-			this.field2554 = new int[var4][];
+			this.scripts = new int[var4][];
 			for (int var5 = 0; var5 < var4; var5++) {
 				int var6 = arg0.g2();
-				this.field2554[var5] = new int[var6];
+				this.scripts[var5] = new int[var6];
 				for (int var7 = 0; var7 < var6; var7++) {
-					this.field2554[var5][var7] = arg0.g2();
-					if (this.field2554[var5][var7] == 65535) {
-						this.field2554[var5][var7] = -1;
+					this.scripts[var5][var7] = arg0.g2();
+					if (this.scripts[var5][var7] == 65535) {
+						this.scripts[var5][var7] = -1;
 					}
 				}
 			}
 		}
-		if (this.field2489 == 0) {
-			this.field2526 = arg0.g2();
-			this.field2556 = arg0.g1() == 1;
+		if (this.type == 0) {
+			this.scrollPos = arg0.g2();
+			this.hide = arg0.g1() == 1;
 		}
-		if (this.field2489 == 1) {
+		if (this.type == 1) {
 			arg0.g2();
 			arg0.g1();
 		}
-		if (this.field2489 == 2) {
-			this.field2491 = new int[this.field2498 * this.field2449];
-			this.field2516 = new int[this.field2498 * this.field2449];
+		if (this.type == 2) {
+			this.linkObjType = new int[this.width * this.height];
+			this.linkObjNumber = new int[this.width * this.height];
 			this.field2509 = arg0.g1() == 1;
 			this.field2533 = arg0.g1() == 1;
 			this.field2461 = arg0.g1() == 1;
 			this.field2529 = arg0.g1() == 1;
-			this.field2555 = arg0.g1();
-			this.field2473 = arg0.g1();
-			this.field2514 = new int[20];
-			this.field2510 = new int[20];
-			this.field2505 = new int[20];
+			this.marginX = arg0.g1();
+			this.marginY = arg0.g1();
+			this.invBackgroundY = new int[20];
+			this.invBackground = new int[20];
+			this.invBackgroundX = new int[20];
 			for (int var8 = 0; var8 < 20; var8++) {
 				int var9 = arg0.g1();
 				if (var9 == 1) {
-					this.field2505[var8] = arg0.g2b();
-					this.field2514[var8] = arg0.g2b();
-					this.field2510[var8] = arg0.g4();
+					this.invBackgroundX[var8] = arg0.g2b();
+					this.invBackgroundY[var8] = arg0.g2b();
+					this.invBackground[var8] = arg0.g4();
 				} else {
-					this.field2510[var8] = -1;
+					this.invBackground[var8] = -1;
 				}
 			}
-			this.field2504 = new JagString[5];
+			this.iop = new JagString[5];
 			for (int var10 = 0; var10 < 5; var10++) {
-				this.field2504[var10] = arg0.gjstr();
-				if (this.field2504[var10].method10() == 0) {
-					this.field2504[var10] = null;
+				this.iop[var10] = arg0.gjstr();
+				if (this.iop[var10].length() == 0) {
+					this.iop[var10] = null;
 				}
 			}
 		}
-		if (this.field2489 == 3) {
-			this.field2451 = arg0.g1() == 1;
+		if (this.type == 3) {
+			this.fill = arg0.g1() == 1;
 		}
-		if (this.field2489 == 4 || this.field2489 == 1) {
-			this.field2539 = arg0.g1();
-			this.field2521 = arg0.g1();
-			this.field2538 = arg0.g1();
-			this.field2448 = arg0.g2();
-			this.field2471 = arg0.g1() == 1;
+		if (this.type == 4 || this.type == 1) {
+			this.hAlign = arg0.g1();
+			this.vAlign = arg0.g1();
+			this.lineHeight = arg0.g1();
+			this.font = arg0.g2();
+			this.shadow = arg0.g1() == 1;
 		}
-		if (this.field2489 == 4) {
-			this.field2474 = arg0.gjstr();
-			this.field2446 = arg0.gjstr();
+		if (this.type == 4) {
+			this.text = arg0.gjstr();
+			this.text2 = arg0.gjstr();
 		}
-		if (this.field2489 == 1 || this.field2489 == 3 || this.field2489 == 4) {
-			this.field2453 = arg0.g4();
+		if (this.type == 1 || this.type == 3 || this.type == 4) {
+			this.colour = arg0.g4();
 		}
-		if (this.field2489 == 3 || this.field2489 == 4) {
-			this.field2532 = arg0.g4();
-			this.field2525 = arg0.g4();
-			this.field2469 = arg0.g4();
+		if (this.type == 3 || this.type == 4) {
+			this.colour2 = arg0.g4();
+			this.colourOver = arg0.g4();
+			this.colour2Over = arg0.g4();
 		}
-		if (this.field2489 == 5) {
-			this.field2550 = arg0.g4();
-			this.field2476 = arg0.g4();
+		if (this.type == 5) {
+			this.graphic = arg0.g4();
+			this.graphic2 = arg0.g4();
 		}
-		if (this.field2489 == 6) {
-			this.field2493 = 1;
-			this.field2479 = arg0.g2();
-			if (this.field2479 == 65535) {
-				this.field2479 = -1;
+		if (this.type == 6) {
+			this.model1Type = 1;
+			this.model1Id = arg0.g2();
+			if (this.model1Id == 65535) {
+				this.model1Id = -1;
 			}
-			this.field2457 = 1;
-			this.field2517 = arg0.g2();
-			if (this.field2517 == 65535) {
-				this.field2517 = -1;
+			this.model2Type = 1;
+			this.model2Id = arg0.g2();
+			if (this.model2Id == 65535) {
+				this.model2Id = -1;
 			}
-			this.field2465 = arg0.g2();
-			if (this.field2465 == 65535) {
-				this.field2465 = -1;
+			this.modelAnim = arg0.g2();
+			if (this.modelAnim == 65535) {
+				this.modelAnim = -1;
 			}
-			this.field2459 = arg0.g2();
-			if (this.field2459 == 65535) {
-				this.field2459 = -1;
+			this.modelAnim2 = arg0.g2();
+			if (this.modelAnim2 == 65535) {
+				this.modelAnim2 = -1;
 			}
-			this.field2534 = arg0.g2();
-			this.field2496 = arg0.g2();
-			this.field2463 = arg0.g2();
+			this.modelZoom = arg0.g2();
+			this.modelXAn = arg0.g2();
+			this.modelYAn = arg0.g2();
 		}
-		if (this.field2489 == 7) {
-			this.field2491 = new int[this.field2498 * this.field2449];
-			this.field2516 = new int[this.field2498 * this.field2449];
-			this.field2539 = arg0.g1();
-			this.field2448 = arg0.g2();
-			this.field2471 = arg0.g1() == 1;
-			this.field2453 = arg0.g4();
-			this.field2555 = arg0.g2b();
-			this.field2473 = arg0.g2b();
+		if (this.type == 7) {
+			this.linkObjType = new int[this.width * this.height];
+			this.linkObjNumber = new int[this.width * this.height];
+			this.hAlign = arg0.g1();
+			this.font = arg0.g2();
+			this.shadow = arg0.g1() == 1;
+			this.colour = arg0.g4();
+			this.marginX = arg0.g2b();
+			this.marginY = arg0.g2b();
 			this.field2533 = arg0.g1() == 1;
-			this.field2504 = new JagString[5];
+			this.iop = new JagString[5];
 			for (int var11 = 0; var11 < 5; var11++) {
-				this.field2504[var11] = arg0.gjstr();
-				if (this.field2504[var11].method10() == 0) {
-					this.field2504[var11] = null;
+				this.iop[var11] = arg0.gjstr();
+				if (this.iop[var11].length() == 0) {
+					this.iop[var11] = null;
 				}
 			}
 		}
-		if (this.field2489 == 8) {
-			this.field2474 = arg0.gjstr();
+		if (this.type == 8) {
+			this.text = arg0.gjstr();
 		}
-		if (this.field2520 == 2 || this.field2489 == 2) {
-			this.field2470 = arg0.gjstr();
-			this.field2515 = arg0.gjstr();
+		if (this.buttonType == 2 || this.type == 2) {
+			this.targetVerb = arg0.gjstr();
+			this.targetBase = arg0.gjstr();
 			this.field2508 = arg0.g2();
 		}
-		if (this.field2520 != 1 && this.field2520 != 4 && this.field2520 != 5 && this.field2520 != 6) {
-			return;
+		if (this.buttonType == 1 || this.buttonType == 4 || this.buttonType == 5 || this.buttonType == 6) {
+			this.buttonText = arg0.gjstr();
+			if (this.buttonText.length() == 0) {
+				if (this.buttonType == 1) {
+					this.buttonText = Text.OK;
+				}
+				if (this.buttonType == 4) {
+					this.buttonText = Text.SELECT;
+				}
+				if (this.buttonType == 5) {
+					this.buttonText = Text.SELECT;
+				}
+				if (this.buttonType == 6) {
+					this.buttonText = Text.CONTINUE;
+				}
+			}
 		}
-		this.field2482 = arg0.gjstr();
-		if (this.field2482.method10() != 0) {
-			return;
-		}
-		if (this.field2520 == 1) {
-			this.field2482 = Text.field2056;
-		}
-		if (this.field2520 == 4) {
-			this.field2482 = Text.field1152;
-		}
-		if (this.field2520 == 5) {
-			this.field2482 = Text.field1152;
-		}
-		if (this.field2520 != 6) {
-			return;
-		}
-		this.field2482 = Text.field218;
 	}
 
 	@ObfuscatedName("qd.a(BI)Ljd;")
-	public Pix32 method852(int arg0) {
-		Statics.field3116 = false;
-		if (arg0 < 0 || this.field2510.length <= arg0) {
+	public Pix32 getInvBackground(int arg0) {
+		loadingAsset = false;
+		if (arg0 < 0 || this.invBackground.length <= arg0) {
 			return null;
 		}
-		int var2 = this.field2510[arg0];
+		int var2 = this.invBackground[arg0];
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) field500.find((long) var2);
+		Pix32 var3 = (Pix32) spriteCache.find((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = PixLoader.method846(0, field2810, var2);
+		Pix32 var4 = PixLoader.makePix32(0, sprites, var2);
 		if (var4 == null) {
-			Statics.field3116 = true;
+			loadingAsset = true;
 		} else {
-			field500.put((long) var2, var4);
+			spriteCache.put((long) var2, var4);
 		}
 		return var4;
 	}
 
 	@ObfuscatedName("qd.a(IZ)Ljd;")
-	public Pix32 method857(boolean arg0) {
-		Statics.field3116 = false;
+	public Pix32 getGraphic(boolean arg0) {
+		loadingAsset = false;
 		int var2;
 		if (arg0) {
-			var2 = this.field2476;
+			var2 = this.graphic2;
 		} else {
-			var2 = this.field2550;
+			var2 = this.graphic;
 		}
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) field500.find((long) var2);
+		Pix32 var3 = (Pix32) spriteCache.find((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = PixLoader.method846(0, field2810, var2);
+		Pix32 var4 = PixLoader.makePix32(0, sprites, var2);
 		if (var4 == null) {
-			Statics.field3116 = true;
+			loadingAsset = true;
 		} else {
-			field500.put((long) var2, var4);
+			spriteCache.put((long) var2, var4);
 		}
 		return var4;
 	}
 
 	@ObfuscatedName("qd.a(BLba;)V")
-	public void method858(Packet arg0) {
+	public void decode3(Packet arg0) {
 		arg0.g1();
-		this.field2442 = true;
-		this.field2489 = arg0.g1();
-		this.field2445 = arg0.g2();
-		this.field2455 = this.field2462 = arg0.g2b();
-		this.field2549 = this.field2502 = arg0.g2b();
-		this.field2498 = arg0.g2();
-		if (this.field2489 == 9) {
-			this.field2449 = arg0.g2b();
+		this.v3 = true;
+		this.type = arg0.g1();
+		this.clientCode = arg0.g2();
+		this.dataX = this.x = arg0.g2b();
+		this.dataY = this.y = arg0.g2b();
+		this.width = arg0.g2();
+		if (this.type == 9) {
+			this.height = arg0.g2b();
 		} else {
-			this.field2449 = arg0.g2();
+			this.height = arg0.g2();
 		}
-		this.field2454 = arg0.g2();
-		if (this.field2454 == 65535) {
-			this.field2454 = -1;
+		this.layerId = arg0.g2();
+		if (this.layerId == 65535) {
+			this.layerId = -1;
 		}
-		this.field2556 = arg0.g1() == 1;
-		this.field2494 = arg0.g1() == 1;
-		if (this.field2489 == 0) {
-			this.field2552 = arg0.g2();
-			this.field2537 = arg0.g2();
+		this.hide = arg0.g1() == 1;
+		this.hashook = arg0.g1() == 1;
+		if (this.type == 0) {
+			this.scrollWidth = arg0.g2();
+			this.scrollHeight = arg0.g2();
 		}
-		if (this.field2489 == 5) {
-			this.field2550 = arg0.g4();
-			this.field2557 = arg0.g2();
-			this.field2447 = arg0.g1() == 1;
-			this.field2551 = arg0.g1();
+		if (this.type == 5) {
+			this.graphic = arg0.g4();
+			this.rotate = arg0.g2();
+			this.tiling = arg0.g1() == 1;
+			this.trans = arg0.g1();
 		}
-		if (this.field2489 == 6) {
-			this.field2493 = 1;
-			this.field2479 = arg0.g2();
-			if (this.field2479 == 65535) {
-				this.field2479 = -1;
+		if (this.type == 6) {
+			this.model1Type = 1;
+			this.model1Id = arg0.g2();
+			if (this.model1Id == 65535) {
+				this.model1Id = -1;
 			}
-			this.field2543 = arg0.g2b();
-			this.field2485 = arg0.g2b();
-			this.field2496 = arg0.g2();
-			this.field2463 = arg0.g2();
-			this.field2531 = arg0.g2();
-			this.field2534 = arg0.g2();
-			this.field2465 = arg0.g2();
-			if (this.field2465 == 65535) {
-				this.field2465 = -1;
+			this.modelXOf = arg0.g2b();
+			this.modelYOf = arg0.g2b();
+			this.modelXAn = arg0.g2();
+			this.modelYAn = arg0.g2();
+			this.modelZAn = arg0.g2();
+			this.modelZoom = arg0.g2();
+			this.modelAnim = arg0.g2();
+			if (this.modelAnim == 65535) {
+				this.modelAnim = -1;
 			}
-			this.field2507 = arg0.g1() == 1;
+			this.orthog = arg0.g1() == 1;
 		}
-		if (this.field2489 == 4) {
-			this.field2448 = arg0.g2();
-			this.field2474 = arg0.gjstr();
-			this.field2538 = arg0.g1();
-			this.field2539 = arg0.g1();
-			this.field2521 = arg0.g1();
-			this.field2471 = arg0.g1() == 1;
-			this.field2453 = arg0.g4();
+		if (this.type == 4) {
+			this.font = arg0.g2();
+			this.text = arg0.gjstr();
+			this.lineHeight = arg0.g1();
+			this.hAlign = arg0.g1();
+			this.vAlign = arg0.g1();
+			this.shadow = arg0.g1() == 1;
+			this.colour = arg0.g4();
 		}
-		if (this.field2489 == 3) {
-			this.field2453 = arg0.g4();
-			this.field2451 = arg0.g1() == 1;
-			this.field2551 = arg0.g1();
+		if (this.type == 3) {
+			this.colour = arg0.g4();
+			this.fill = arg0.g1() == 1;
+			this.trans = arg0.g1();
 		}
-		if (this.field2489 == 9) {
+		if (this.type == 9) {
 			arg0.g1();
-			this.field2453 = arg0.g4();
+			this.colour = arg0.g4();
 		}
-		if (!this.field2494) {
-			return;
-		}
-		this.field2483 = Statics.method526(arg0);
-		this.field2487 = Statics.method526(arg0);
-		this.field2450 = Statics.method526(arg0);
-		this.field2513 = Statics.method526(arg0);
-		this.field2464 = Statics.method526(arg0);
-		this.field2478 = Statics.method526(arg0);
-		this.field2475 = Statics.method526(arg0);
-		Statics.method526(arg0);
-		this.field2456 = Statics.method526(arg0);
-		this.field2518 = Statics.method526(arg0);
-		Statics.method526(arg0);
-		this.field2501 = Statics.method526(arg0);
-		this.field2553 = Statics.method526(arg0);
-		this.field2486 = Statics.method526(arg0);
-		this.field2533 = arg0.g1() == 1;
-		this.field2542 = arg0.g2();
-		this.field2500 = arg0.g1() == 1;
-		arg0.g1();
-		int var2 = arg0.g1();
-		if (var2 > 0) {
-			this.field2467 = new JagString[var2];
-			for (int var3 = 0; var3 < var2; var3++) {
-				this.field2467[var3] = arg0.gjstr();
+		if (this.hashook) {
+			this.field2483 = decodeHook(arg0);
+			this.field2487 = decodeHook(arg0);
+			this.field2450 = decodeHook(arg0);
+			this.field2513 = decodeHook(arg0);
+			this.field2464 = decodeHook(arg0);
+			this.field2478 = decodeHook(arg0);
+			this.field2475 = decodeHook(arg0);
+			decodeHook(arg0);
+			this.field2456 = decodeHook(arg0);
+			this.field2518 = decodeHook(arg0);
+			decodeHook(arg0);
+			this.field2501 = decodeHook(arg0);
+			this.field2553 = decodeHook(arg0);
+			this.field2486 = decodeHook(arg0);
+			this.field2533 = arg0.g1() == 1;
+			this.field2542 = arg0.g2();
+			this.field2500 = arg0.g1() == 1;
+			arg0.g1();
+			int var2 = arg0.g1();
+			if (var2 > 0) {
+				this.opNames = new JagString[var2];
+				for (int var3 = 0; var3 < var2; var3++) {
+					this.opNames[var3] = arg0.gjstr();
+				}
 			}
-		}
-		this.field2544 = arg0.g2();
-		if (this.field2544 == 65535) {
-			this.field2544 = -1;
-			return;
+			this.field2544 = arg0.g2();
+			if (this.field2544 == 65535) {
+				this.field2544 = -1;
+			}
 		}
 	}
 
 	@ObfuscatedName("qd.a(BLhe;IZLla;)Lpa;")
-	public Model method860(SeqType arg0, int arg1, boolean arg2, PlayerModel arg3) {
-		Statics.field3116 = false;
+	public Model getTempModel(SeqType arg0, int arg1, boolean arg2, PlayerModel arg3) {
+		loadingAsset = false;
 		int var5;
 		int var6;
 		if (arg2) {
-			var5 = this.field2517;
-			var6 = this.field2457;
+			var5 = this.model2Id;
+			var6 = this.model2Type;
 		} else {
-			var6 = this.field2493;
-			var5 = this.field2479;
+			var6 = this.model1Type;
+			var5 = this.model1Id;
 		}
 		if (var6 == 0) {
 			return null;
 		} else if (var6 == 1 && var5 == -1) {
 			return null;
 		} else {
-			Model var7 = (Model) field2680.find((long) ((var6 << 16) + var5));
+			Model var7 = (Model) modelCache.find((long) ((var6 << 16) + var5));
 			if (var7 == null) {
 				if (var6 == 1) {
-					var7 = Model.load(field503, var5);
+					var7 = Model.load(models, var5);
 					if (var7 == null) {
-						Statics.field3116 = true;
+						loadingAsset = true;
 						return null;
 					}
 					var7.prepareAnim();
@@ -813,7 +776,7 @@ public final class IfType extends Linkable2 {
 				if (var6 == 2) {
 					var7 = NpcType.list(var5).getHead();
 					if (var7 == null) {
-						Statics.field3116 = true;
+						loadingAsset = true;
 						return null;
 					}
 					var7.prepareAnim();
@@ -823,9 +786,9 @@ public final class IfType extends Linkable2 {
 					if (arg3 == null) {
 						return null;
 					}
-					var7 = arg3.method639();
+					var7 = arg3.getHeadModel();
 					if (var7 == null) {
-						Statics.field3116 = true;
+						loadingAsset = true;
 						return null;
 					}
 					var7.prepareAnim();
@@ -835,13 +798,13 @@ public final class IfType extends Linkable2 {
 					ObjType var8 = ObjType.list(var5);
 					var7 = var8.getModelLit(false, 10);
 					if (var7 == null) {
-						Statics.field3116 = true;
+						loadingAsset = true;
 						return null;
 					}
 					var7.prepareAnim();
 					var7.light(var8.ambient + 64, var8.contrast + 768, -50, -10, -50, true);
 				}
-				field2680.put((long) ((var6 << 16) + var5), var7);
+				modelCache.put((long) ((var6 << 16) + var5), var7);
 			}
 			if (arg0 != null) {
 				var7 = arg0.animateModelWithExtra(arg1, var7);
@@ -851,20 +814,20 @@ public final class IfType extends Linkable2 {
 	}
 
 	@ObfuscatedName("qd.d(B)Lbc;")
-	public PixFont method861() {
-		Statics.field3116 = false;
-		if (this.field2448 == 65535) {
+	public PixFont getFont() {
+		loadingAsset = false;
+		if (this.font == 65535) {
 			return null;
 		}
-		PixFont var1 = (PixFont) field3249.find((long) this.field2448);
+		PixFont var1 = (PixFont) fontCache.find((long) this.font);
 		if (var1 != null) {
 			return var1;
 		}
-		PixFont var2 = PixLoader.method294(0, field2810, this.field2448);
+		PixFont var2 = PixLoader.makePixFont(0, sprites, this.font);
 		if (var2 == null) {
-			Statics.field3116 = true;
+			loadingAsset = true;
 		} else {
-			field3249.put((long) this.field2448, var2);
+			fontCache.put((long) this.font, var2);
 		}
 		return var2;
 	}

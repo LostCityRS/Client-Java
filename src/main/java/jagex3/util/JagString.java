@@ -56,6 +56,46 @@ public final class JagString implements StringInterface {
 		return Statics.method825(arg0.length, 0, arg0);
 	}
 
+    @ObfuscatedName("i.a(II)La;")
+    public static JagString parseInt(int arg0) {
+        return method418(false, arg0);
+    }
+
+	@ObfuscatedName("fe.a(ZBII)La;")
+	public static JagString method418(boolean arg0, int arg1) {
+		int var2 = 1;
+		int var3 = arg1 / 10;
+		while (var3 != 0) {
+			var3 /= 10;
+			var2++;
+		}
+		int var4 = var2;
+		if (arg1 < 0 || arg0) {
+			var4 = var2 + 1;
+		}
+		byte[] var5 = new byte[var4];
+		if (arg1 < 0) {
+			var5[0] = 45;
+		} else if (arg0) {
+			var5[0] = 43;
+		}
+		for (int var6 = 0; var6 < var2; var6++) {
+			int var7 = arg1 % 10;
+			arg1 /= 10;
+			if (var7 < 0) {
+				var7 = -var7;
+			}
+			if (var7 > 9) {
+				var7 += 39;
+			}
+			var5[var4 - var6 - 1] = (byte) (var7 + 48);
+		}
+		JagString var8 = new JagString();
+		var8.field38 = var5;
+		var8.field26 = var4;
+		return var8;
+	}
+
 	@ObfuscatedName("a.a(BI)La;")
 	public JagString method1(int arg0) {
 		return this.method19(arg0, this.field26);
@@ -163,7 +203,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.b(I)I")
-	public int method10() {
+	public int length() {
 		return this.field26;
 	}
 

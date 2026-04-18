@@ -105,7 +105,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(II)V")
-	public final void method216(int arg0) {
+	public final void discardFiles(int arg0) {
 		for (int var2 = 0; var2 < this.field399[arg0].length; var2++) {
 			this.field399[arg0][var2] = null;
 		}
@@ -135,7 +135,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(I)I")
-	public final int method220() {
+	public final int getGroupCount() {
 		return this.field399.length;
 	}
 
@@ -356,7 +356,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.c(II)Z")
-	public final boolean method231(int arg0) {
+	public final boolean requestGroupDownload(int arg0) {
 		if (this.field362[arg0] == null) {
 			this.method222(arg0);
 			return this.field362[arg0] != null;

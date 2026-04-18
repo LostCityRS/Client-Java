@@ -540,8 +540,6 @@ public class Statics {
 	public static int field1114 = 0;
 	@ObfuscatedName("he.Ib")
 	public static int field1237 = 0;
-	@ObfuscatedName("va.lb")
-	public static boolean field3116 = false;
 	@ObfuscatedName("j.hc")
 	public static int field1433 = 0;
 	@ObfuscatedName("je.Lb")
@@ -853,7 +851,7 @@ public class Statics {
 		Text.field1151 = null;
 		TextGerman.field1147 = null;
 		TextGerman.field1150 = null;
-		Text.field1152 = null;
+		Text.SELECT = null;
 	}
 
 	@ObfuscatedName("wa.a(I)V")
@@ -887,7 +885,7 @@ public class Statics {
 		PlayerModel.field2808 = null;
 		field2818 = null;
 		TextGerman.field2804 = null;
-		IfType.field2810 = null;
+		IfType.sprites = null;
 		ClientBuild.field2819 = null;
 		TextGerman.field2824 = null;
 		Text.field2817 = null;
@@ -917,7 +915,7 @@ public class Statics {
 	public static JagString[] method905(JagString[] arg0) {
 		JagString[] var1 = new JagString[5];
 		for (int var2 = 0; var2 < 5; var2++) {
-			var1[var2] = JagString.join(new JagString[]{method502(var2), field1065});
+			var1[var2] = JagString.join(new JagString[]{JagString.parseInt(var2), field1065});
 			if (arg0 != null && arg0[var2] != null) {
 				var1[var2] = JagString.join(new JagString[]{var1[var2], arg0[var2]});
 			}
@@ -972,7 +970,7 @@ public class Statics {
 	public static void method1051() {
 		Text.field3305 = null;
 		field3306 = null;
-		IfType.field3296 = null;
+		IfType.open = null;
 		field3298 = null;
 		Client.field3299 = null;
 		Text.field3303 = null;
@@ -1249,14 +1247,14 @@ public class Statics {
 
 	@ObfuscatedName("pb.a(IB)La;")
 	public static JagString method803(int arg0) {
-		JagString var1 = method502(arg0);
-		for (int var2 = var1.method10() - 3; var2 > 0; var2 -= 3) {
+		JagString var1 = JagString.parseInt(arg0);
+		for (int var2 = var1.length() - 3; var2 > 0; var2 -= 3) {
 			var1 = JagString.join(new JagString[]{var1.method19(0, var2), field1774, var1.method1(var2)});
 		}
-		if (var1.method10() > 8) {
-			var1 = JagString.join(new JagString[]{field2564, var1.method19(0, var1.method10() - 8), Text.field1896, field2629, var1, field2601});
-		} else if (var1.method10() > 4) {
-			var1 = JagString.join(new JagString[]{field3136, var1.method19(0, var1.method10() - 4), Text.field2360, field2629, var1, field2601});
+		if (var1.length() > 8) {
+			var1 = JagString.join(new JagString[]{field2564, var1.method19(0, var1.length() - 8), Text.field1896, field2629, var1, field2601});
+		} else if (var1.length() > 4) {
+			var1 = JagString.join(new JagString[]{field3136, var1.method19(0, var1.length() - 4), Text.field2360, field2629, var1, field2601});
 		}
 		return JagString.join(new JagString[]{field2406, var1});
 	}
@@ -1322,7 +1320,7 @@ public class Statics {
 		Text.field926 = null;
 		SeqType.anims = null;
 		Client.field925 = null;
-		IfType.field924 = null;
+		IfType.interfaces = null;
 		Text.field932 = null;
 		PacketBit.field936 = null;
 		field931 = null;
@@ -1341,8 +1339,8 @@ public class Statics {
 		TextGerman.field505 = null;
 		Client.in = null;
 		TextGerman.field499 = null;
-		IfType.field500 = null;
-		IfType.field503 = null;
+		IfType.spriteCache = null;
+		IfType.models = null;
 		field501 = null;
 		Text.field497 = null;
 	}
@@ -1365,7 +1363,7 @@ public class Statics {
 	@ObfuscatedName("tc.a(B)V")
 	public static void method963() {
 		Client.field2917 = null;
-		IfType.field2922 = null;
+		IfType.list = null;
 		ClientBuild.field2930 = null;
 		Text.field2926 = null;
 		field2919 = null;
@@ -1482,7 +1480,7 @@ public class Statics {
 		TextGerman.field2048 = null;
 		field2055 = null;
 		Text.field2041 = null;
-		Text.field2056 = null;
+		Text.OK = null;
 		TextGerman.field2051 = null;
 		TextGerman.field2035 = null;
 		Client.field2045 = null;
@@ -1752,7 +1750,7 @@ public class Statics {
 
 	@ObfuscatedName("wa.a(ZBI)La;")
 	public static JagString method1034(int arg0) {
-		return method418(true, arg0);
+		return JagString.method418(true, arg0);
 	}
 
 	@ObfuscatedName("je.b(II)La;")
@@ -1777,11 +1775,6 @@ public class Statics {
 		Text.field832 = null;
 		field842 = null;
 		TitleScreen.field847 = null;
-	}
-
-	@ObfuscatedName("i.a(II)La;")
-	public static JagString method502(int arg0) {
-		return method418(false, arg0);
 	}
 
 	@ObfuscatedName("te.b(B)V")
@@ -1964,41 +1957,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("fe.a(ZBII)La;")
-	public static JagString method418(boolean arg0, int arg1) {
-		int var2 = 1;
-		int var3 = arg1 / 10;
-		while (var3 != 0) {
-			var3 /= 10;
-			var2++;
-		}
-		int var4 = var2;
-		if (arg1 < 0 || arg0) {
-			var4 = var2 + 1;
-		}
-		byte[] var5 = new byte[var4];
-		if (arg1 < 0) {
-			var5[0] = 45;
-		} else if (arg0) {
-			var5[0] = 43;
-		}
-		for (int var6 = 0; var6 < var2; var6++) {
-			int var7 = arg1 % 10;
-			arg1 /= 10;
-			if (var7 < 0) {
-				var7 = -var7;
-			}
-			if (var7 > 9) {
-				var7 += 39;
-			}
-			var5[var4 - var6 - 1] = (byte) (var7 + 48);
-		}
-		JagString var8 = new JagString();
-		var8.field38 = var5;
-		var8.field26 = var4;
-		return var8;
-	}
-
 	@ObfuscatedName("va.b(I)V")
 	public static void method1008() {
 		Text.field3127 = null;
@@ -2032,24 +1990,6 @@ public class Statics {
 		} else {
 			return arg0 < 129 || arg0 > 159;
 		}
-	}
-
-	@ObfuscatedName("id.a(BLba;)[Ljava/lang/Object;")
-	public static Object[] method526(Packet arg0) {
-		int var1 = arg0.g1();
-		if (var1 == 0) {
-			return null;
-		}
-		Object[] var2 = new Object[var1];
-		for (int var3 = 0; var3 < var1; var3++) {
-			int var4 = arg0.g1();
-			if (var4 == 0) {
-				var2[var3] = Integer.valueOf(arg0.g4());
-			} else if (var4 == 1) {
-				var2[var3] = arg0.gjstr();
-			}
-		}
-		return var2;
 	}
 
 	@ObfuscatedName("md.f(I)V")
@@ -2133,7 +2073,7 @@ public class Statics {
 
 	@ObfuscatedName("u.f(II)La;")
 	public static JagString method984(int arg0) {
-		return JagString.join(new JagString[]{method502(arg0 >> 24 & 0xFF), field2112, method502(arg0 >> 16 & 0xFF), field2112, method502(arg0 >> 8 & 0xFF), field2112, method502(arg0 & 0xFF)});
+		return JagString.join(new JagString[]{JagString.parseInt(arg0 >> 24 & 0xFF), field2112, JagString.parseInt(arg0 >> 16 & 0xFF), field2112, JagString.parseInt(arg0 >> 8 & 0xFF), field2112, JagString.parseInt(arg0 & 0xFF)});
 	}
 
 	@ObfuscatedName("de.b(I)V")
@@ -2159,7 +2099,7 @@ public class Statics {
 		TextGerman.field3279 = null;
 		field3247 = null;
 		TextGerman.field3280 = null;
-		IfType.field3249 = null;
+		IfType.fontCache = null;
 		TextGerman.field3258 = null;
 		Text.field3272 = null;
 		field3277 = null;
@@ -2367,7 +2307,7 @@ public class Statics {
 		TextGerman.field2685 = null;
 		field2682 = null;
 		Text.field2671 = null;
-		IfType.field2680 = null;
+		IfType.modelCache = null;
 		Text.field2675 = null;
 		Client.field2683 = null;
 		TextGerman.field2679 = null;
@@ -2491,20 +2431,20 @@ public class Statics {
 		IfType var7 = null;
 		for (int var8 = 0; var8 < arg0.length; var8++) {
 			IfType var9 = arg0[var8];
-			if (var9 != null && var9.field2454 == arg4) {
-				int var10 = var9.field2502 + arg3;
-				int var11 = var9.field2462 + arg5;
-				if (var11 <= arg6 && var10 <= arg1 && var9.field2498 + var11 > arg6 && arg1 < var10 + var9.field2449 && !var9.field2556) {
-					if (var9.field2495 < 0 && arg2 || var9.field2495 >= 0 && !arg2) {
+			if (var9 != null && var9.layerId == arg4) {
+				int var10 = var9.y + arg3;
+				int var11 = var9.x + arg5;
+				if (var11 <= arg6 && var10 <= arg1 && var9.width + var11 > arg6 && arg1 < var10 + var9.height && !var9.hide) {
+					if (var9.parentId < 0 && arg2 || var9.parentId >= 0 && !arg2) {
 						var7 = var9;
 					}
-					if (var9.field2489 == 0) {
-						IfType var12 = method607(arg0, arg1, arg2, var9.field2502 - var9.field2537, var8, var9.field2462 - var9.field2552, arg6);
+					if (var9.type == 0) {
+						IfType var12 = method607(arg0, arg1, arg2, var9.y - var9.scrollHeight, var8, var9.x - var9.scrollWidth, arg6);
 						if (var12 != null) {
 							var7 = var12;
 						}
 						if (arg2 && var9.field2519 != null) {
-							IfType var13 = method607(var9.field2519, arg1, arg2, var9.field2502 - var9.field2537, var9.field2495, var9.field2462 - var9.field2552, arg6);
+							IfType var13 = method607(var9.field2519, arg1, arg2, var9.y - var9.scrollHeight, var9.parentId, var9.x - var9.scrollWidth, arg6);
 							if (var13 != null) {
 								var7 = var13;
 							}
@@ -2520,7 +2460,7 @@ public class Statics {
 	public static void method116() {
 		field220 = null;
 		field213 = null;
-		Text.field218 = null;
+		Text.CONTINUE = null;
 		field221 = null;
 		TextGerman.field215 = null;
 		Text.field222 = null;

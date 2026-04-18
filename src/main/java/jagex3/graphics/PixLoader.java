@@ -104,11 +104,11 @@ public class PixLoader {
 	public static PixFont method528(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.getGroupId(arg2);
 		int var4 = arg0.method224(var3, arg1);
-		return method294(var4, arg0, var3);
+		return makePixFont(var4, arg0, var3);
 	}
 
 	@ObfuscatedName("qb.a(ILbd;ZI)Ljd;")
-	public static Pix32 method846(int arg0, Js5 arg1, int arg2) {
+	public static Pix32 makePix32(int arg0, Js5 arg1, int arg2) {
 		return method885(arg0, arg2, arg1) ? makePix32() : null;
 	}
 
@@ -197,7 +197,7 @@ public class PixLoader {
 	public static Pix32 method1038(Js5 arg0, JagString arg1, JagString arg2) {
 		int var3 = arg0.getGroupId(arg1);
 		int var4 = arg0.method224(var3, arg2);
-		return method846(var4, arg0, var3);
+		return makePix32(var4, arg0, var3);
 	}
 
 	@ObfuscatedName("j.a(ILbd;I)Le;")
@@ -223,7 +223,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("d.a(IBLbd;I)Lbc;")
-	public static PixFont method294(int arg0, Js5 arg1, int arg2) {
+	public static PixFont makePixFont(int arg0, Js5 arg1, int arg2) {
 		return method885(arg0, arg2, arg1) ? method965() : null;
 	}
 

@@ -53,7 +53,7 @@ public class ScriptRunner {
 						var13 = arg1;
 					}
 					if (var13 == -2147483645) {
-						var13 = arg2.field2495;
+						var13 = arg2.parentId;
 					}
 					if (var13 == -2147483644) {
 						var13 = 0;
@@ -204,7 +204,7 @@ public class ScriptRunner {
 						int var30 = field3255[var4];
 						int var31 = field3255[var4 + 1];
 						int var32 = field3255[var4 + 2];
-						IfType var33 = IfType.method1053(var30);
+						IfType var33 = IfType.get(var30);
 						if (var33.field2519 == null) {
 							var33.field2519 = new IfType[var32 + 1];
 						}
@@ -216,9 +216,9 @@ public class ScriptRunner {
 							var33.field2519 = var34;
 						}
 						IfType var36 = new IfType();
-						var36.field2454 = var33.field2495;
-						var36.field2489 = var31;
-						var36.field2495 = ((var33.field2495 & 0xFFFF) << 15) + var32 + Integer.MIN_VALUE;
+						var36.layerId = var33.parentId;
+						var36.type = var31;
+						var36.parentId = ((var33.parentId & 0xFFFF) << 15) + var32 + Integer.MIN_VALUE;
 						var33.field2519[var32] = var36;
 						if (var29) {
 							field1468 = var36;
@@ -227,42 +227,42 @@ public class ScriptRunner {
 						}
 					} else if (var14 == 101) {
 						IfType var37 = var29 ? field1468 : field3068;
-						IfType var38 = IfType.method1053(var37.field2454);
-						var38.field2519[var37.field2495 & 0x7FFF] = null;
+						IfType var38 = IfType.get(var37.layerId);
+						var38.field2519[var37.parentId & 0x7FFF] = null;
 					} else {
 						if (var14 != 102) {
 							break;
 						}
 						var4--;
-						IfType var39 = IfType.method1053(field3255[var4]);
+						IfType var39 = IfType.get(field3255[var4]);
 						var39.field2519 = null;
 					}
 				} else if (var14 >= 1000 && var14 < 1100 || !(var14 < 2000 || var14 >= 2100)) {
 					IfType var40;
 					if (var14 >= 2000) {
 						var4--;
-						var40 = IfType.method1053(field3255[var4]);
+						var40 = IfType.get(field3255[var4]);
 						var14 -= 1000;
 					} else {
 						var40 = var29 ? field1468 : field3068;
 					}
 					if (var14 == 1000) {
 						var4 -= 2;
-						var40.field2462 = field3255[var4];
-						var40.field2502 = field3255[var4 + 1];
+						var40.x = field3255[var4];
+						var40.y = field3255[var4 + 1];
 					} else if (var14 == 1001) {
 						var4 -= 2;
-						var40.field2498 = field3255[var4];
-						var40.field2449 = field3255[var4 + 1];
+						var40.width = field3255[var4];
+						var40.height = field3255[var4 + 1];
 					} else if (var14 == 1003) {
 						var4--;
-						var40.field2556 = field3255[var4] == 1;
+						var40.hide = field3255[var4] == 1;
 					} else {
 						if (var14 != 1004) {
 							break;
 						}
 						var4--;
-						var40.field2494 = field3255[var4] == 1;
+						var40.hashook = field3255[var4] == 1;
 					}
 				} else if (var14 >= 1100 && var14 < 1200 || !(var14 < 2100 || var14 >= 2200)) {
 					IfType var41;
@@ -270,72 +270,72 @@ public class ScriptRunner {
 						var41 = var29 ? field1468 : field3068;
 					} else {
 						var4--;
-						var41 = IfType.method1053(field3255[var4]);
+						var41 = IfType.get(field3255[var4]);
 						var14 -= 1000;
 					}
 					if (var14 == 1100) {
 						var4 -= 2;
-						var41.field2552 = field3255[var4];
-						var41.field2537 = field3255[var4 + 1];
+						var41.scrollWidth = field3255[var4];
+						var41.scrollHeight = field3255[var4 + 1];
 					} else if (var14 == 1101) {
 						var4--;
 						int var42 = field3255[var4];
 						int var43 = var42 >> 10 & 0x1F;
 						int var44 = var42 & 0x1F;
 						int var45 = var42 >> 5 & 0x1F;
-						var41.field2453 = (var43 << 19) + (var45 << 11) + (var44 << 3);
+						var41.colour = (var43 << 19) + (var45 << 11) + (var44 << 3);
 					} else if (var14 == 1102) {
 						var4--;
-						var41.field2451 = field3255[var4] == 1;
+						var41.fill = field3255[var4] == 1;
 					} else if (var14 == 1103) {
 						var4--;
-						var41.field2551 = field3255[var4];
+						var41.trans = field3255[var4];
 					} else if (var14 == 1104) {
 						var4--;
 					} else if (var14 == 1105) {
 						var4--;
-						var41.field2550 = field3255[var4];
+						var41.graphic = field3255[var4];
 					} else if (var14 == 1106) {
 						var4--;
-						var41.field2557 = field3255[var4];
+						var41.rotate = field3255[var4];
 					} else if (var14 == 1107) {
 						var4--;
-						var41.field2447 = field3255[var4] == 1;
+						var41.tiling = field3255[var4] == 1;
 					} else if (var14 == 1108) {
-						var41.field2493 = 1;
+						var41.model1Type = 1;
 						var4--;
-						var41.field2479 = field3255[var4];
+						var41.model1Id = field3255[var4];
 					} else if (var14 == 1109) {
 						var4 -= 6;
-						var41.field2543 = field3255[var4];
-						var41.field2485 = field3255[var4 + 1];
-						var41.field2496 = field3255[var4 + 2];
-						var41.field2463 = field3255[var4 + 3];
-						var41.field2531 = field3255[var4 + 4];
-						var41.field2534 = field3255[var4 + 5];
+						var41.modelXOf = field3255[var4];
+						var41.modelYOf = field3255[var4 + 1];
+						var41.modelXAn = field3255[var4 + 2];
+						var41.modelYAn = field3255[var4 + 3];
+						var41.modelZAn = field3255[var4 + 4];
+						var41.modelZoom = field3255[var4 + 5];
 					} else if (var14 == 1110) {
 						var4--;
-						var41.field2465 = field3255[var4];
+						var41.modelAnim = field3255[var4];
 					} else if (var14 == 1111) {
 						var4--;
-						var41.field2507 = field3255[var4] == 1;
+						var41.orthog = field3255[var4] == 1;
 					} else if (var14 == 1112) {
 						var8--;
-						var41.field2474 = field2957[var8];
+						var41.text = field2957[var8];
 					} else if (var14 == 1113) {
 						var4--;
-						var41.field2448 = field3255[var4];
+						var41.font = field3255[var4];
 					} else if (var14 == 1114) {
 						var4 -= 3;
-						var41.field2539 = field3255[var4];
-						var41.field2521 = field3255[var4 + 1];
-						var41.field2538 = field3255[var4 + 2];
+						var41.hAlign = field3255[var4];
+						var41.vAlign = field3255[var4 + 1];
+						var41.lineHeight = field3255[var4 + 2];
 					} else {
 						if (var14 != 1115) {
 							break;
 						}
 						var4--;
-						var41.field2471 = field3255[var4] == 1;
+						var41.shadow = field3255[var4] == 1;
 					}
 				} else if (var14 >= 1200 && var14 < 1300 || var14 >= 2200 && var14 < 2300) {
 					IfType var128;
@@ -343,7 +343,7 @@ public class ScriptRunner {
 						var128 = var29 ? field1468 : field3068;
 					} else {
 						var4--;
-						var128 = IfType.method1053(field3255[var4]);
+						var128 = IfType.get(field3255[var4]);
 						var14 -= 1000;
 					}
 					if (var14 == 1200) {
@@ -351,37 +351,37 @@ public class ScriptRunner {
 						int var129 = field3255[var4];
 						int var130 = field3255[var4 + 2];
 						if (var129 == -1) {
-							var128.field2493 = 0;
+							var128.model1Type = 0;
 						} else {
 							ObjType var131 = ObjType.list(var129);
-							var128.field2493 = 4;
-							var128.field2496 = var131.xan2d;
-							var128.field2531 = var131.zan2d;
-							var128.field2534 = var131.zoom2d * 100 / var130;
-							var128.field2463 = var131.yan2d;
-							var128.field2485 = var131.yof2d;
-							var128.field2543 = var131.xof2d;
-							var128.field2479 = var129;
+							var128.model1Type = 4;
+							var128.modelXAn = var131.xan2d;
+							var128.modelZAn = var131.zan2d;
+							var128.modelZoom = var131.zoom2d * 100 / var130;
+							var128.modelYAn = var131.yan2d;
+							var128.modelYOf = var131.yof2d;
+							var128.modelXOf = var131.xof2d;
+							var128.model1Id = var129;
 						}
 					} else if (var14 == 1201) {
-						var128.field2493 = 2;
+						var128.model1Type = 2;
 						var4--;
-						var128.field2479 = field3255[var4];
+						var128.model1Id = field3255[var4];
 					} else if (var14 == 1202) {
-						var128.field2493 = 3;
-						var128.field2479 = Client.localPlayer.field90.method634();
+						var128.model1Type = 3;
+						var128.model1Id = Client.localPlayer.field90.method634();
 					} else {
 						if (var14 != 1203) {
 							break;
 						}
 						IfType var132 = var29 ? field3068 : field1468;
-						var128.field2544 = var132.field2495;
+						var128.field2544 = var132.parentId;
 					}
 				} else if (var14 >= 1300 && var14 < 1400 || var14 >= 2300 && var14 < 2400) {
 					IfType var121;
 					if (var14 >= 2000) {
 						var4--;
-						var121 = IfType.method1053(field3255[var4]);
+						var121 = IfType.get(field3255[var4]);
 						var14 -= 1000;
 					} else {
 						var121 = var29 ? field1468 : field3068;
@@ -389,7 +389,7 @@ public class ScriptRunner {
 					if (var14 >= 1300 && var14 <= 1309 || !(var14 < 1314 || var14 > 1317)) {
 						var8--;
 						JagString var122 = field2957[var8];
-						Object[] var123 = new Object[var122.method10() + 1];
+						Object[] var123 = new Object[var122.length() + 1];
 						for (int var124 = var123.length - 1; var124 >= 1; var124--) {
 							if (var122.method6(var124 - 1) == 115) {
 								var8--;
@@ -441,17 +441,17 @@ public class ScriptRunner {
 						var4--;
 						int var125 = field3255[var4] - 1;
 						if (var125 >= 0 && var125 <= 9) {
-							if (var121.field2467 == null || var121.field2467.length <= var125) {
+							if (var121.opNames == null || var121.opNames.length <= var125) {
 								JagString[] var126 = new JagString[var125 + 1];
-								if (var121.field2467 != null) {
-									for (int var127 = 0; var127 < var121.field2467.length; var127++) {
-										var126[var127] = var121.field2467[var127];
+								if (var121.opNames != null) {
+									for (int var127 = 0; var127 < var121.opNames.length; var127++) {
+										var126[var127] = var121.opNames[var127];
 									}
 								}
-								var121.field2467 = var126;
+								var121.opNames = var126;
 							}
 							var8--;
-							var121.field2467[var125] = field2957[var8];
+							var121.opNames[var125] = field2957[var8];
 						} else {
 							var8--;
 						}
@@ -472,7 +472,7 @@ public class ScriptRunner {
 						var4 -= 2;
 						int var46 = field3255[var4 + 1];
 						int var47 = field3255[var4];
-						IfType var48 = IfType.method1053(var47);
+						IfType var48 = IfType.get(var47);
 						if (var48.field2519 == null || var48.field2519.length <= var46 || var48.field2519[var46] == null) {
 							field3255[var4++] = 0;
 						} else {
@@ -488,7 +488,7 @@ public class ScriptRunner {
 						int var49 = field3255[var4];
 						int var50 = field3255[var4 + 2];
 						int var51 = field3255[var4 + 1];
-						IfType var52 = Statics.method607(IfType.field2922[var49], var50, true, 0, -1, 0, var51);
+						IfType var52 = Statics.method607(IfType.list[var49], var50, true, 0, -1, 0, var51);
 						if (var52 == null) {
 							field3255[var4++] = 0;
 						} else {
@@ -504,10 +504,10 @@ public class ScriptRunner {
 							break;
 						}
 						var4 -= 3;
-						IfType var53 = IfType.method1053(field3255[var4]);
+						IfType var53 = IfType.get(field3255[var4]);
 						int var54 = field3255[var4 + 2];
 						int var55 = field3255[var4 + 1];
-						IfType var56 = Statics.method607(var53.field2519, var54, true, var53.field2537, var53.field2495, var53.field2552, var55);
+						IfType var56 = Statics.method607(var53.field2519, var54, true, var53.scrollHeight, var53.parentId, var53.scrollWidth, var55);
 						if (var56 == null) {
 							field3255[var4++] = 0;
 						} else {
@@ -522,30 +522,30 @@ public class ScriptRunner {
 				} else if (var14 < 1600) {
 					IfType var57 = var29 ? field1468 : field3068;
 					if (var14 == 1500) {
-						field3255[var4++] = var57.field2462;
+						field3255[var4++] = var57.x;
 					} else if (var14 == 1501) {
-						field3255[var4++] = var57.field2502;
+						field3255[var4++] = var57.y;
 					} else if (var14 == 1502) {
-						field3255[var4++] = var57.field2498;
+						field3255[var4++] = var57.width;
 					} else if (var14 == 1503) {
-						field3255[var4++] = var57.field2449;
+						field3255[var4++] = var57.height;
 					} else if (var14 == 1504) {
-						field3255[var4++] = var57.field2556 ? 1 : 0;
+						field3255[var4++] = var57.hide ? 1 : 0;
 					} else {
 						if (var14 != 1505) {
 							break;
 						}
-						field3255[var4++] = var57.field2454;
+						field3255[var4++] = var57.layerId;
 					}
 				} else if (var14 < 1700) {
 					IfType var120 = var29 ? field1468 : field3068;
 					if (var14 == 1600) {
-						field3255[var4++] = var120.field2552;
+						field3255[var4++] = var120.scrollWidth;
 					} else {
 						if (var14 != 1601) {
 							break;
 						}
-						field3255[var4++] = var120.field2537;
+						field3255[var4++] = var120.scrollHeight;
 					}
 				} else if (var14 < 2500) {
 					if (var14 == 2401) {
@@ -553,56 +553,56 @@ public class ScriptRunner {
 						int var58 = field3255[var4 + 1];
 						int var59 = field3255[var4];
 						int var60 = field3255[var4 + 2];
-						IfType var61 = Statics.method607(IfType.field2922[var59], var60, false, 0, -1, 0, var58);
+						IfType var61 = Statics.method607(IfType.list[var59], var60, false, 0, -1, 0, var58);
 						if (var61 == null) {
 							field3255[var4++] = -1;
 						} else {
-							field3255[var4++] = var61.field2495;
+							field3255[var4++] = var61.parentId;
 						}
 					} else {
 						if (var14 != 2402) {
 							break;
 						}
 						var4 -= 3;
-						IfType var62 = IfType.method1053(field3255[var4]);
+						IfType var62 = IfType.get(field3255[var4]);
 						int var63 = field3255[var4 + 1];
 						int var64 = field3255[var4 + 2];
-						IfType var65 = Statics.method607(IfType.field2922[var62.field2495 >> 16], var64, false, var62.field2537, var62.field2495 & 0xFFFF, var62.field2552, var63);
+						IfType var65 = Statics.method607(IfType.list[var62.parentId >> 16], var64, false, var62.scrollHeight, var62.parentId & 0xFFFF, var62.scrollWidth, var63);
 						if (var65 == null) {
 							field3255[var4++] = -1;
 						} else {
-							field3255[var4++] = var65.field2495;
+							field3255[var4++] = var65.parentId;
 						}
 					}
 				} else if (var14 < 2600) {
 					var4--;
-					IfType var119 = IfType.method1053(field3255[var4]);
+					IfType var119 = IfType.get(field3255[var4]);
 					if (var14 == 2500) {
-						field3255[var4++] = var119.field2462;
+						field3255[var4++] = var119.x;
 					} else if (var14 == 2501) {
-						field3255[var4++] = var119.field2502;
+						field3255[var4++] = var119.y;
 					} else if (var14 == 2502) {
-						field3255[var4++] = var119.field2498;
+						field3255[var4++] = var119.width;
 					} else if (var14 == 2503) {
-						field3255[var4++] = var119.field2449;
+						field3255[var4++] = var119.height;
 					} else if (var14 == 2504) {
-						field3255[var4++] = var119.field2556 ? 1 : 0;
+						field3255[var4++] = var119.hide ? 1 : 0;
 					} else {
 						if (var14 != 2505) {
 							break;
 						}
-						field3255[var4++] = var119.field2454;
+						field3255[var4++] = var119.layerId;
 					}
 				} else if (var14 < 2700) {
 					var4--;
-					IfType var66 = IfType.method1053(field3255[var4]);
+					IfType var66 = IfType.get(field3255[var4]);
 					if (var14 == 2600) {
-						field3255[var4++] = var66.field2552;
+						field3255[var4++] = var66.scrollWidth;
 					} else {
 						if (var14 != 2601) {
 							break;
 						}
-						field3255[var4++] = var66.field2537;
+						field3255[var4++] = var66.scrollHeight;
 					}
 				} else {
 					if (var14 < 2800) {
@@ -624,8 +624,8 @@ public class ScriptRunner {
 						} else if (var14 == 3002) {
 							IfType var70 = var29 ? field1468 : field3068;
 							if (Client.field2998 == -1) {
-								Client.method414(var70.field2495 & 0x7FFF, var70.field2454);
-								Client.field2998 = var70.field2495;
+								Client.method414(var70.parentId & 0x7FFF, var70.layerId);
+								Client.field2998 = var70.parentId;
 							}
 						} else {
 							if (var14 != 3003) {
@@ -634,7 +634,7 @@ public class ScriptRunner {
 							IfType var71 = var29 ? field1468 : field3068;
 							var4--;
 							int var72 = field3255[var4];
-							Client.method673(var71.field2495 & 0x7FFF, var72, var71.field2454);
+							Client.method673(var71.parentId & 0x7FFF, var72, var71.layerId);
 						}
 					} else if (var14 >= 3200) {
 						if (var14 < 3300) {
@@ -665,7 +665,7 @@ public class ScriptRunner {
 								JagString var102 = field2957[var8];
 								var4--;
 								int var103 = field3255[var4];
-								field2957[var8++] = JagString.join(new JagString[]{var102, Statics.method502(var103)});
+								field2957[var8++] = JagString.join(new JagString[]{var102, JagString.parseInt(var103)});
 							} else if (var14 == 4101) {
 								var8 -= 2;
 								JagString var104 = field2957[var8 + 1];
@@ -689,7 +689,7 @@ public class ScriptRunner {
 								int var112 = field453.get(5);
 								int var113 = field453.get(2);
 								int var114 = field453.get(1);
-								field2957[var8++] = JagString.join(new JagString[]{Statics.method502(var112), Statics.field1572, Statics.field621[var113], Statics.field1572, Statics.method502(var114)});
+								field2957[var8++] = JagString.join(new JagString[]{JagString.parseInt(var112), Statics.field1572, Statics.field621[var113], Statics.field1572, JagString.parseInt(var114)});
 							} else if (var14 == 4105) {
 								var8 -= 2;
 								JagString var115 = field2957[var8];
@@ -702,7 +702,7 @@ public class ScriptRunner {
 							} else if (var14 == 4106) {
 								var4--;
 								int var117 = field3255[var4];
-								field2957[var8++] = Statics.method502(var117);
+								field2957[var8++] = JagString.parseInt(var117);
 							} else {
 								if (var14 != 4107) {
 									break;

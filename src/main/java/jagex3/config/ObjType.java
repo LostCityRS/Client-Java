@@ -320,11 +320,11 @@ public final class ObjType extends Linkable2 {
     @ObfuscatedName("qd.b(IB)La;")
     public static JagString invNumber(int arg0) {
         if (arg0 < 100000) {
-            return Statics.method502(arg0);
+            return JagString.parseInt(arg0);
         } else if (arg0 < 10000000) {
-            return JagString.join(new JagString[]{Statics.method502(arg0 / 1000), Text.field2354});
+            return JagString.join(new JagString[]{JagString.parseInt(arg0 / 1000), Text.field2354});
         } else {
-            return JagString.join(new JagString[]{Statics.method502(arg0 / 1000000), Text.field1184});
+            return JagString.join(new JagString[]{JagString.parseInt(arg0 / 1000000), Text.field1184});
         }
     }
 
