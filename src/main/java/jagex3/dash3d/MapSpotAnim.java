@@ -44,24 +44,24 @@ public final class MapSpotAnim extends ModelSource {
 		this.field2887 = arg4;
 		this.field2905 = arg0;
 		this.field2895 = arg1;
-		int var8 = SpotType.method713(this.field2905).field786;
+		int var8 = SpotType.list(this.field2905).anim;
 		if (var8 == -1) {
 			this.field2893 = true;
 		} else {
 			this.field2893 = false;
-			this.field2898 = SeqType.method103(var8);
+			this.field2898 = SeqType.list(var8);
 		}
 	}
 
 	@ObfuscatedName("tb.f(I)Lpa;")
 	@Override
 	public Model method41() {
-		SpotType var1 = SpotType.method713(this.field2905);
+		SpotType var1 = SpotType.list(this.field2905);
 		Model var2;
 		if (this.field2893) {
-			var2 = var1.method371(-1);
+			var2 = var1.getTempModel2(-1);
 		} else {
-			var2 = var1.method371(this.field2896);
+			var2 = var1.getTempModel2(this.field2896);
 		}
 		return var2 == null ? null : var2;
 	}
@@ -72,10 +72,10 @@ public final class MapSpotAnim extends ModelSource {
 			return;
 		}
 		this.field2889 += arg0;
-		while (this.field2889 > this.field2898.field1223[this.field2896]) {
-			this.field2889 -= this.field2898.field1223[this.field2896];
+		while (this.field2889 > this.field2898.delay[this.field2896]) {
+			this.field2889 -= this.field2898.delay[this.field2896];
 			this.field2896++;
-			if (this.field2898.field1242.length <= this.field2896) {
+			if (this.field2898.frames.length <= this.field2896) {
 				this.field2893 = true;
 				return;
 			}

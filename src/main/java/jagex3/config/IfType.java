@@ -320,7 +320,7 @@ public final class IfType extends Linkable2 {
 		if (field3296[arg0]) {
 			return true;
 		} else if (field924.method231(arg0)) {
-			int var1 = field924.method235(arg0);
+			int var1 = field924.getFileIdLimit(arg0);
 			if (var1 == 0) {
 				field3296[arg0] = true;
 				return true;
@@ -462,8 +462,8 @@ public final class IfType extends Linkable2 {
 		this.field2489 = arg0.g1();
 		this.field2520 = arg0.g1();
 		this.field2445 = arg0.g2();
-		this.field2455 = this.field2462 = arg0.method139();
-		this.field2549 = this.field2502 = arg0.method139();
+		this.field2455 = this.field2462 = arg0.g2b();
+		this.field2549 = this.field2502 = arg0.g2b();
 		this.field2498 = arg0.g2();
 		this.field2449 = arg0.g2();
 		this.field2551 = arg0.g1();
@@ -521,8 +521,8 @@ public final class IfType extends Linkable2 {
 			for (int var8 = 0; var8 < 20; var8++) {
 				int var9 = arg0.g1();
 				if (var9 == 1) {
-					this.field2505[var8] = arg0.method139();
-					this.field2514[var8] = arg0.method139();
+					this.field2505[var8] = arg0.g2b();
+					this.field2514[var8] = arg0.g2b();
 					this.field2510[var8] = arg0.method167();
 				} else {
 					this.field2510[var8] = -1;
@@ -530,7 +530,7 @@ public final class IfType extends Linkable2 {
 			}
 			this.field2504 = new JagString[5];
 			for (int var10 = 0; var10 < 5; var10++) {
-				this.field2504[var10] = arg0.method140();
+				this.field2504[var10] = arg0.gjstr();
 				if (this.field2504[var10].method10() == 0) {
 					this.field2504[var10] = null;
 				}
@@ -547,8 +547,8 @@ public final class IfType extends Linkable2 {
 			this.field2471 = arg0.g1() == 1;
 		}
 		if (this.field2489 == 4) {
-			this.field2474 = arg0.method140();
-			this.field2446 = arg0.method140();
+			this.field2474 = arg0.gjstr();
+			this.field2446 = arg0.gjstr();
 		}
 		if (this.field2489 == 1 || this.field2489 == 3 || this.field2489 == 4) {
 			this.field2453 = arg0.method167();
@@ -592,29 +592,29 @@ public final class IfType extends Linkable2 {
 			this.field2448 = arg0.g2();
 			this.field2471 = arg0.g1() == 1;
 			this.field2453 = arg0.method167();
-			this.field2555 = arg0.method139();
-			this.field2473 = arg0.method139();
+			this.field2555 = arg0.g2b();
+			this.field2473 = arg0.g2b();
 			this.field2533 = arg0.g1() == 1;
 			this.field2504 = new JagString[5];
 			for (int var11 = 0; var11 < 5; var11++) {
-				this.field2504[var11] = arg0.method140();
+				this.field2504[var11] = arg0.gjstr();
 				if (this.field2504[var11].method10() == 0) {
 					this.field2504[var11] = null;
 				}
 			}
 		}
 		if (this.field2489 == 8) {
-			this.field2474 = arg0.method140();
+			this.field2474 = arg0.gjstr();
 		}
 		if (this.field2520 == 2 || this.field2489 == 2) {
-			this.field2470 = arg0.method140();
-			this.field2515 = arg0.method140();
+			this.field2470 = arg0.gjstr();
+			this.field2515 = arg0.gjstr();
 			this.field2508 = arg0.g2();
 		}
 		if (this.field2520 != 1 && this.field2520 != 4 && this.field2520 != 5 && this.field2520 != 6) {
 			return;
 		}
-		this.field2482 = arg0.method140();
+		this.field2482 = arg0.gjstr();
 		if (this.field2482.method10() != 0) {
 			return;
 		}
@@ -651,7 +651,7 @@ public final class IfType extends Linkable2 {
 		if (var4 == null) {
 			Statics.field3116 = true;
 		} else {
-			field500.method262((long) var2, var4);
+			field500.put((long) var2, var4);
 		}
 		return var4;
 	}
@@ -676,7 +676,7 @@ public final class IfType extends Linkable2 {
 		if (var4 == null) {
 			Statics.field3116 = true;
 		} else {
-			field500.method262((long) var2, var4);
+			field500.put((long) var2, var4);
 		}
 		return var4;
 	}
@@ -687,11 +687,11 @@ public final class IfType extends Linkable2 {
 		this.field2442 = true;
 		this.field2489 = arg0.g1();
 		this.field2445 = arg0.g2();
-		this.field2455 = this.field2462 = arg0.method139();
-		this.field2549 = this.field2502 = arg0.method139();
+		this.field2455 = this.field2462 = arg0.g2b();
+		this.field2549 = this.field2502 = arg0.g2b();
 		this.field2498 = arg0.g2();
 		if (this.field2489 == 9) {
-			this.field2449 = arg0.method139();
+			this.field2449 = arg0.g2b();
 		} else {
 			this.field2449 = arg0.g2();
 		}
@@ -717,8 +717,8 @@ public final class IfType extends Linkable2 {
 			if (this.field2479 == 65535) {
 				this.field2479 = -1;
 			}
-			this.field2543 = arg0.method139();
-			this.field2485 = arg0.method139();
+			this.field2543 = arg0.g2b();
+			this.field2485 = arg0.g2b();
 			this.field2496 = arg0.g2();
 			this.field2463 = arg0.g2();
 			this.field2531 = arg0.g2();
@@ -731,7 +731,7 @@ public final class IfType extends Linkable2 {
 		}
 		if (this.field2489 == 4) {
 			this.field2448 = arg0.g2();
-			this.field2474 = arg0.method140();
+			this.field2474 = arg0.gjstr();
 			this.field2538 = arg0.g1();
 			this.field2539 = arg0.g1();
 			this.field2521 = arg0.g1();
@@ -772,7 +772,7 @@ public final class IfType extends Linkable2 {
 		if (var2 > 0) {
 			this.field2467 = new JagString[var2];
 			for (int var3 = 0; var3 < var2; var3++) {
-				this.field2467[var3] = arg0.method140();
+				this.field2467[var3] = arg0.gjstr();
 			}
 		}
 		this.field2544 = arg0.g2();
@@ -802,22 +802,22 @@ public final class IfType extends Linkable2 {
 			Model var7 = (Model) field2680.find((long) ((var6 << 16) + var5));
 			if (var7 == null) {
 				if (var6 == 1) {
-					var7 = Model.method798(field503, var5);
+					var7 = Model.load(field503, var5);
 					if (var7 == null) {
 						Statics.field3116 = true;
 						return null;
 					}
-					var7.method778();
-					var7.method770(64, 768, -50, -10, -50, true);
+					var7.prepareAnim();
+					var7.light(64, 768, -50, -10, -50, true);
 				}
 				if (var6 == 2) {
-					var7 = NpcType.method864(var5).method455();
+					var7 = NpcType.list(var5).getHead();
 					if (var7 == null) {
 						Statics.field3116 = true;
 						return null;
 					}
-					var7.method778();
-					var7.method770(64, 768, -50, -10, -50, true);
+					var7.prepareAnim();
+					var7.light(64, 768, -50, -10, -50, true);
 				}
 				if (var6 == 3) {
 					if (arg3 == null) {
@@ -828,8 +828,8 @@ public final class IfType extends Linkable2 {
 						Statics.field3116 = true;
 						return null;
 					}
-					var7.method778();
-					var7.method770(64, 768, -50, -10, -50, true);
+					var7.prepareAnim();
+					var7.light(64, 768, -50, -10, -50, true);
 				}
 				if (var6 == 4) {
 					ObjType var8 = ObjType.list(var5);
@@ -838,13 +838,13 @@ public final class IfType extends Linkable2 {
 						Statics.field3116 = true;
 						return null;
 					}
-					var7.method778();
-					var7.method770(var8.field2856 + 64, var8.field2871 + 768, -50, -10, -50, true);
+					var7.prepareAnim();
+					var7.light(var8.field2856 + 64, var8.field2871 + 768, -50, -10, -50, true);
 				}
-				field2680.method262((long) ((var6 << 16) + var5), var7);
+				field2680.put((long) ((var6 << 16) + var5), var7);
 			}
 			if (arg0 != null) {
-				var7 = arg0.method493(arg1, var7);
+				var7 = arg0.animateModelWithExtra(arg1, var7);
 			}
 			return var7;
 		}
@@ -864,7 +864,7 @@ public final class IfType extends Linkable2 {
 		if (var2 == null) {
 			Statics.field3116 = true;
 		} else {
-			field3249.method262((long) this.field2448, var2);
+			field3249.put((long) this.field2448, var2);
 		}
 		return var2;
 	}

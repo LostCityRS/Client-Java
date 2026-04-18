@@ -43,30 +43,30 @@ public final class ClientLocAnim extends ModelSource {
 	public Model method41() {
 		if (this.field1427 != null) {
 			int var1 = Client.loopCycle - this.field1417;
-			if (var1 > 100 && this.field1427.field1254 > 0) {
+			if (var1 > 100 && this.field1427.loops > 0) {
 				var1 = 100;
 			}
 			label37:
 			{
 				do {
 					do {
-						if (this.field1427.field1223[this.field1419] >= var1) {
+						if (this.field1427.delay[this.field1419] >= var1) {
 							break label37;
 						}
-						var1 -= this.field1427.field1223[this.field1419];
+						var1 -= this.field1427.delay[this.field1419];
 						this.field1419++;
-					} while (this.field1427.field1242.length > this.field1419);
-					this.field1419 -= this.field1427.field1254;
-				} while (this.field1419 >= 0 && this.field1427.field1242.length > this.field1419);
+					} while (this.field1427.frames.length > this.field1419);
+					this.field1419 -= this.field1427.loops;
+				} while (this.field1419 >= 0 && this.field1427.frames.length > this.field1419);
 				this.field1427 = null;
 			}
 			this.field1417 = Client.loopCycle - var1;
 		}
 		LocType var2 = LocType.list(this.field1428);
 		if (var2.multiloc != null) {
-			var2 = var2.method516();
+			var2 = var2.getMultiLoc();
 		}
-		return var2 == null ? null : var2.method512(this.field1422, this.field1423, this.field1419, this.field1414, this.field1411, this.field1427, this.field1420, this.field1409);
+		return var2 == null ? null : var2.getModel(this.field1422, this.field1423, this.field1419, this.field1414, this.field1411, this.field1427, this.field1420, this.field1409);
 	}
 
 	public ClientLocAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, boolean arg8) {
@@ -78,12 +78,12 @@ public final class ClientLocAnim extends ModelSource {
 		this.field1409 = arg5;
 		this.field1414 = arg1;
 		if (arg7 != -1) {
-			this.field1427 = SeqType.method103(arg7);
+			this.field1427 = SeqType.list(arg7);
 			this.field1419 = 0;
 			this.field1417 = Client.loopCycle - 1;
-			if (arg8 && this.field1427.field1254 != -1) {
-				this.field1419 = (int) ((double) this.field1427.field1242.length * Math.random());
-				this.field1417 -= (int) (Math.random() * (double) this.field1427.field1223[this.field1419]);
+			if (arg8 && this.field1427.loops != -1) {
+				this.field1419 = (int) ((double) this.field1427.frames.length * Math.random());
+				this.field1417 -= (int) (Math.random() * (double) this.field1427.delay[this.field1419]);
 				return;
 			}
 		}

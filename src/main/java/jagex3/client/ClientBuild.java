@@ -66,7 +66,7 @@ public class ClientBuild {
 		if (arg0 >= 5 && arg0 <= 8) {
 			arg0 = 4;
 		}
-		return var2.method515(arg0);
+		return var2.checkModel(arg0);
 	}
 
 	@ObfuscatedName("ma.a(B[BII)Z")
@@ -97,9 +97,9 @@ public class ClientBuild {
 					int var15 = var11 + arg2;
 					if (var14 > 0 && var15 > 0 && var14 < 103 && var15 < 103) {
 						LocType var16 = LocType.list(var5);
-						if (var12 != 22 || !Client.lowMem || var16.field1329 != 0 || var16.field1330) {
+						if (var12 != 22 || !Client.lowMem || var16.active != 0 || var16.forcedecor) {
 							var8 = true;
-							if (!var16.method517()) {
+							if (!var16.checkModelAll()) {
 								var3 = false;
 								Client.locModelLoadCount++;
 							}
@@ -290,8 +290,8 @@ public class ClientBuild {
 				int var20 = var17 & 0x3;
 				if (arg4 == var15 && arg0 <= var16 && var16 < arg0 + 8 && arg8 <= var19 && arg8 + 8 > var19) {
 					LocType var21 = LocType.list(var11);
-					int var22 = RegionRotate.method287(var20, var21.field1286, var16 & 0x7, var21.field1298, arg3, var19 & 0x7) + arg9;
-					int var23 = RegionRotate.method404(var19 & 0x7, var21.field1298, var16 & 0x7, var21.field1286, arg3, var20) + arg6;
+					int var22 = RegionRotate.method287(var20, var21.width, var16 & 0x7, var21.length, arg3, var19 & 0x7) + arg9;
+					int var23 = RegionRotate.method404(var19 & 0x7, var21.length, var16 & 0x7, var21.width, arg3, var20) + arg6;
 					if (var22 > 0 && var23 > 0 && var22 < 103 && var23 < 103) {
 						CollisionMap var24 = null;
 						int var25 = arg2;
@@ -370,11 +370,11 @@ public class ClientBuild {
 					if (var23 >= 0 && var23 < 104) {
 						int var24 = field2131[var6][var23][var22] & 0xFF;
 						if (var24 > 0) {
-							FluType var25 = FluType.method317(var24 - 1);
-							field2906[var22] += var25.field1884;
-							field2930[var22] += var25.field1893;
-							field856[var22] += var25.field1882;
-							field3246[var22] += var25.field1887;
+							FluType var25 = FluType.list(var24 - 1);
+							field2906[var22] += var25.hue;
+							field2930[var22] += var25.saturation;
+							field856[var22] += var25.lightness;
+							field3246[var22] += var25.chroma;
 							var10002 = field1385[var22]++;
 						}
 					}
@@ -382,11 +382,11 @@ public class ClientBuild {
 					if (var26 >= 0 && var26 < 104) {
 						int var27 = field2131[var6][var26][var22] & 0xFF;
 						if (var27 > 0) {
-							FluType var28 = FluType.method317(var27 - 1);
-							field2906[var22] -= var28.field1884;
-							field2930[var22] -= var28.field1893;
-							field856[var22] -= var28.field1882;
-							field3246[var22] -= var28.field1887;
+							FluType var28 = FluType.list(var27 - 1);
+							field2906[var22] -= var28.hue;
+							field2930[var22] -= var28.saturation;
+							field856[var22] -= var28.lightness;
+							field3246[var22] -= var28.chroma;
 							var10002 = field1385[var22]--;
 						}
 					}
@@ -450,7 +450,7 @@ public class ClientBuild {
 									if (var37 == 0 && field910[var6][var21][var34] != 0) {
 										var54 = false;
 									}
-									if (var38 > 0 && !FloType.method1026(var38 - 1).field913) {
+									if (var38 > 0 && !FloType.list(var38 - 1).occlude) {
 										var54 = false;
 									}
 									if (var54 && var39 == var40 && var39 == var41 && var39 == var42) {
@@ -466,41 +466,41 @@ public class ClientBuild {
 								} else {
 									int var56 = field910[var6][var21][var34] + 1;
 									byte var57 = field1872[var6][var21][var34];
-									FloType var58 = FloType.method1026(var38 - 1);
-									int var59 = var58.field897;
+									FloType var58 = FloType.list(var38 - 1);
+									int var59 = var58.texture;
 									int var60;
 									int var61;
 									if (var59 >= 0) {
 										var60 = -1;
 										var61 = Pix3D.field771.method693(var59);
-									} else if (var58.field920 == 16711935) {
+									} else if (var58.colour == 16711935) {
 										var60 = -2;
 										var59 = -1;
 										var61 = -2;
 									} else {
-										var60 = method322(var58.field912, var58.field895, var58.field907);
-										int var62 = field2822 + var58.field907 & 0xFF;
-										int var63 = field2025 + var58.field895;
+										var60 = method322(var58.saturation, var58.hue, var58.lightness);
+										int var62 = field2822 + var58.lightness & 0xFF;
+										int var63 = field2025 + var58.hue;
 										if (var63 < 0) {
 											var63 = 0;
 										} else if (var63 > 255) {
 											var63 = 255;
 										}
-										var61 = method322(var58.field912, var63, var62);
+										var61 = method322(var58.saturation, var63, var62);
 									}
 									int var64 = 0;
 									if (var61 != -2) {
 										var64 = Pix3D.field764[method689(var61, 96)];
 									}
-									if (var58.field911 != -1) {
-										int var65 = field2822 + var58.field909 & 0xFF;
-										int var66 = field2025 + var58.field905;
+									if (var58.mapcolour != -1) {
+										int var65 = field2822 + var58.mapLightness & 0xFF;
+										int var66 = field2025 + var58.mapHue;
 										if (var66 < 0) {
 											var66 = 0;
 										} else if (var66 > 255) {
 											var66 = 255;
 										}
-										int var67 = method322(var58.field921, var66, var65);
+										int var67 = method322(var58.mapSaturation, var66, var65);
 										var64 = Pix3D.field764[method689(var67, 96)];
 									}
 									arg0.method55(var6, var21, var34, var56, var57, var59, var39, var40, var41, var42, method955(var46, var43), method955(var46, var44), method955(var46, var45), method955(var46, var47), method689(var60, var43), method689(var60, var44), method689(var60, var45), method689(var60, var47), var55, var64);
@@ -755,17 +755,17 @@ public class ClientBuild {
 		int var13 = (arg0 << 6) + arg4;
 		int var14 = var9 + var10 + var8 + var11 >> 2;
 		LocType var15 = LocType.list(arg5);
-		if (var15.field1316 == 1) {
+		if (var15.raiseobject == 1) {
 			var13 += 256;
 		}
-		if (var15.field1329 == 0) {
+		if (var15.active == 0) {
 			var12 += Integer.MIN_VALUE;
 		}
 		if (var15.method506()) {
 			BgSound.method719(arg6, arg7, arg0, arg2, var15);
 		}
 		if (arg4 == 22) {
-			if (!Client.lowMem || var15.field1329 != 0 || var15.field1330) {
+			if (!Client.lowMem || var15.active != 0 || var15.forcedecor) {
 				ModelSource var16;
 				if (var15.anim == -1 && var15.multiloc == null) {
 					var16 = var15.getModel(var8, var11, arg0, var9, 22, var10);
@@ -773,7 +773,7 @@ public class ClientBuild {
 					var16 = new ClientLocAnim(arg5, 22, arg0, var9, var10, var8, var11, var15.anim, true);
 				}
 				arg3.setGroundDecor(arg7, arg2, arg6, var14, var16, var12, var13);
-				if (var15.field1284 && var15.field1329 == 1 && arg1 != null) {
+				if (var15.blockwalk && var15.active == 1 && arg1 != null) {
 					arg1.method115(arg6, arg2);
 				}
 			}
@@ -788,17 +788,17 @@ public class ClientBuild {
 				int var18;
 				int var19;
 				if (arg0 == 1 || arg0 == 3) {
-					var19 = var15.field1286;
-					var18 = var15.field1298;
+					var19 = var15.width;
+					var18 = var15.length;
 				} else {
-					var18 = var15.field1286;
-					var19 = var15.field1298;
+					var18 = var15.width;
+					var19 = var15.length;
 				}
 				int var20 = 0;
 				if (arg4 == 11) {
 					var20 += 256;
 				}
-				if (arg3.addScenery(arg7, arg2, arg6, var14, var18, var19, var17, var20, var12, var13) && var15.field1324) {
+				if (arg3.addScenery(arg7, arg2, arg6, var14, var18, var19, var17, var20, var12, var13) && var15.shadow) {
 					Model var21;
 					if (var17 instanceof Model) {
 						var21 = (Model) var17;
@@ -820,8 +820,8 @@ public class ClientBuild {
 					}
 				}
 			}
-			if (var15.field1284 && arg1 != null) {
-				arg1.method118(arg2, var15.field1311, var15.field1298, arg0, arg6, var15.field1286);
+			if (var15.blockwalk && arg1 != null) {
+				arg1.method118(arg2, var15.blockrange, var15.length, arg0, arg6, var15.width);
 			}
 		} else if (arg4 >= 12) {
 			ModelSource var25;
@@ -834,8 +834,8 @@ public class ClientBuild {
 			if (arg4 >= 12 && arg4 <= 17 && arg4 != 13 && arg7 > 0) {
 				field412[arg7][arg2][arg6] |= 0x924;
 			}
-			if (var15.field1284 && arg1 != null) {
-				arg1.method118(arg2, var15.field1311, var15.field1298, arg0, arg6, var15.field1286);
+			if (var15.blockwalk && arg1 != null) {
+				arg1.method118(arg2, var15.blockrange, var15.length, arg0, arg6, var15.width);
 			}
 		} else if (arg4 == 0) {
 			ModelSource var26;
@@ -846,40 +846,40 @@ public class ClientBuild {
 			}
 			arg3.setWall(arg7, arg2, arg6, var14, var26, null, field1740[arg0], 0, var12, var13);
 			if (arg0 == 0) {
-				if (var15.field1324) {
+				if (var15.shadow) {
 					field1003[arg7][arg2][arg6] = 50;
 					field1003[arg7][arg2][arg6 + 1] = 50;
 				}
-				if (var15.field1304) {
+				if (var15.occlude) {
 					field412[arg7][arg2][arg6] |= 0x249;
 				}
 			} else if (arg0 == 1) {
-				if (var15.field1324) {
+				if (var15.shadow) {
 					field1003[arg7][arg2][arg6 + 1] = 50;
 					field1003[arg7][arg2 + 1][arg6 + 1] = 50;
 				}
-				if (var15.field1304) {
+				if (var15.occlude) {
 					field412[arg7][arg2][arg6 + 1] |= 0x492;
 				}
 			} else if (arg0 == 2) {
-				if (var15.field1324) {
+				if (var15.shadow) {
 					field1003[arg7][arg2 + 1][arg6] = 50;
 					field1003[arg7][arg2 + 1][arg6 + 1] = 50;
 				}
-				if (var15.field1304) {
+				if (var15.occlude) {
 					field412[arg7][arg2 + 1][arg6] |= 0x249;
 				}
 			} else if (arg0 == 3) {
-				if (var15.field1324) {
+				if (var15.shadow) {
 					field1003[arg7][arg2][arg6] = 50;
 					field1003[arg7][arg2 + 1][arg6] = 50;
 				}
-				if (var15.field1304) {
+				if (var15.occlude) {
 					field412[arg7][arg2][arg6] |= 0x492;
 				}
 			}
-			if (var15.field1284 && arg1 != null) {
-				arg1.method114(arg6, arg4, arg0, arg2, var15.field1311);
+			if (var15.blockwalk && arg1 != null) {
+				arg1.method114(arg6, arg4, arg0, arg2, var15.blockrange);
 			}
 			if (var15.wallwidth != 16) {
 				arg3.method71(arg7, arg2, arg6, var15.wallwidth);
@@ -892,7 +892,7 @@ public class ClientBuild {
 				var27 = new ClientLocAnim(arg5, 1, arg0, var9, var10, var8, var11, var15.anim, true);
 			}
 			arg3.setWall(arg7, arg2, arg6, var14, var27, null, field2819[arg0], 0, var12, var13);
-			if (var15.field1324) {
+			if (var15.shadow) {
 				if (arg0 == 0) {
 					field1003[arg7][arg2][arg6 + 1] = 50;
 				} else if (arg0 == 1) {
@@ -903,8 +903,8 @@ public class ClientBuild {
 					field1003[arg7][arg2][arg6] = 50;
 				}
 			}
-			if (var15.field1284 && arg1 != null) {
-				arg1.method114(arg6, arg4, arg0, arg2, var15.field1311);
+			if (var15.blockwalk && arg1 != null) {
+				arg1.method114(arg6, arg4, arg0, arg2, var15.blockrange);
 			}
 		} else if (arg4 == 2) {
 			int var28 = arg0 + 1 & 0x3;
@@ -918,7 +918,7 @@ public class ClientBuild {
 				var30 = new ClientLocAnim(arg5, 2, var28, var9, var10, var8, var11, var15.anim, true);
 			}
 			arg3.setWall(arg7, arg2, arg6, var14, var29, var30, field1740[arg0], field1740[var28], var12, var13);
-			if (var15.field1304) {
+			if (var15.occlude) {
 				if (arg0 == 0) {
 					field412[arg7][arg2][arg6] |= 0x249;
 					field412[arg7][arg2][arg6 + 1] |= 0x492;
@@ -933,8 +933,8 @@ public class ClientBuild {
 					field412[arg7][arg2][arg6] |= 0x249;
 				}
 			}
-			if (var15.field1284 && arg1 != null) {
-				arg1.method114(arg6, arg4, arg0, arg2, var15.field1311);
+			if (var15.blockwalk && arg1 != null) {
+				arg1.method114(arg6, arg4, arg0, arg2, var15.blockrange);
 			}
 			if (var15.wallwidth != 16) {
 				arg3.method71(arg7, arg2, arg6, var15.wallwidth);
@@ -947,7 +947,7 @@ public class ClientBuild {
 				var31 = new ClientLocAnim(arg5, 3, arg0, var9, var10, var8, var11, var15.anim, true);
 			}
 			arg3.setWall(arg7, arg2, arg6, var14, var31, null, field2819[arg0], 0, var12, var13);
-			if (var15.field1324) {
+			if (var15.shadow) {
 				if (arg0 == 0) {
 					field1003[arg7][arg2][arg6 + 1] = 50;
 				} else if (arg0 == 1) {
@@ -958,8 +958,8 @@ public class ClientBuild {
 					field1003[arg7][arg2][arg6] = 50;
 				}
 			}
-			if (var15.field1284 && arg1 != null) {
-				arg1.method114(arg6, arg4, arg0, arg2, var15.field1311);
+			if (var15.blockwalk && arg1 != null) {
+				arg1.method114(arg6, arg4, arg0, arg2, var15.blockrange);
 			}
 		} else if (arg4 == 9) {
 			ModelSource var32;
@@ -969,11 +969,11 @@ public class ClientBuild {
 				var32 = new ClientLocAnim(arg5, arg4, arg0, var9, var10, var8, var11, var15.anim, true);
 			}
 			arg3.addScenery(arg7, arg2, arg6, var14, 1, 1, var32, 0, var12, var13);
-			if (var15.field1284 && arg1 != null) {
-				arg1.method118(arg2, var15.field1311, var15.field1298, arg0, arg6, var15.field1286);
+			if (var15.blockwalk && arg1 != null) {
+				arg1.method118(arg2, var15.blockrange, var15.length, arg0, arg6, var15.width);
 			}
 		} else {
-			if (var15.field1313) {
+			if (var15.hillskew) {
 				if (arg0 == 1) {
 					int var33 = var11;
 					var11 = var8;
@@ -1177,10 +1177,10 @@ public class ClientBuild {
 		int var14 = var9 + var11 + var10 + var12 >> 2;
 		int var15 = (arg6 << 6) + arg4;
 		int var16 = arg8 + (arg7 << 7) + (arg1 << 14) + 1073741824;
-		if (var13.field1329 == 0) {
+		if (var13.active == 0) {
 			var16 += Integer.MIN_VALUE;
 		}
-		if (var13.field1316 == 1) {
+		if (var13.raiseobject == 1) {
 			var15 += 256;
 		}
 		if (arg4 == 22) {
@@ -1191,7 +1191,7 @@ public class ClientBuild {
 				var17 = new ClientLocAnim(arg1, 22, arg6, var9, var10, var12, var11, var13.anim, true);
 			}
 			arg5.setGroundDecor(arg3, arg8, arg7, var14, var17, var16, var15);
-			if (var13.field1284 && var13.field1329 == 1) {
+			if (var13.blockwalk && var13.active == 1) {
 				arg0.method115(arg7, arg8);
 			}
 		} else if (arg4 == 10 || arg4 == 11) {
@@ -1205,11 +1205,11 @@ public class ClientBuild {
 				int var19;
 				int var20;
 				if (arg6 == 1 || arg6 == 3) {
-					var20 = var13.field1286;
-					var19 = var13.field1298;
+					var20 = var13.width;
+					var19 = var13.length;
 				} else {
-					var19 = var13.field1286;
-					var20 = var13.field1298;
+					var19 = var13.width;
+					var20 = var13.length;
 				}
 				int var21 = 0;
 				if (arg4 == 11) {
@@ -1217,8 +1217,8 @@ public class ClientBuild {
 				}
 				arg5.addScenery(arg3, arg8, arg7, var14, var19, var20, var18, var21, var16, var15);
 			}
-			if (var13.field1284) {
-				arg0.method118(arg8, var13.field1311, var13.field1298, arg6, arg7, var13.field1286);
+			if (var13.blockwalk) {
+				arg0.method118(arg8, var13.blockrange, var13.length, arg6, arg7, var13.width);
 			}
 		} else if (arg4 >= 12) {
 			ModelSource var22;
@@ -1228,8 +1228,8 @@ public class ClientBuild {
 				var22 = new ClientLocAnim(arg1, arg4, arg6, var9, var10, var12, var11, var13.anim, true);
 			}
 			arg5.addScenery(arg3, arg8, arg7, var14, 1, 1, var22, 0, var16, var15);
-			if (var13.field1284) {
-				arg0.method118(arg8, var13.field1311, var13.field1298, arg6, arg7, var13.field1286);
+			if (var13.blockwalk) {
+				arg0.method118(arg8, var13.blockrange, var13.length, arg6, arg7, var13.width);
 			}
 		} else if (arg4 == 0) {
 			ModelSource var23;
@@ -1239,8 +1239,8 @@ public class ClientBuild {
 				var23 = new ClientLocAnim(arg1, 0, arg6, var9, var10, var12, var11, var13.anim, true);
 			}
 			arg5.setWall(arg3, arg8, arg7, var14, var23, null, field1740[arg6], 0, var16, var15);
-			if (var13.field1284) {
-				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
+			if (var13.blockwalk) {
+				arg0.method114(arg7, arg4, arg6, arg8, var13.blockrange);
 			}
 		} else if (arg4 == 1) {
 			ModelSource var24;
@@ -1250,8 +1250,8 @@ public class ClientBuild {
 				var24 = new ClientLocAnim(arg1, 1, arg6, var9, var10, var12, var11, var13.anim, true);
 			}
 			arg5.setWall(arg3, arg8, arg7, var14, var24, null, field2819[arg6], 0, var16, var15);
-			if (var13.field1284) {
-				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
+			if (var13.blockwalk) {
+				arg0.method114(arg7, arg4, arg6, arg8, var13.blockrange);
 			}
 		} else if (arg4 == 2) {
 			int var25 = arg6 + 1 & 0x3;
@@ -1265,8 +1265,8 @@ public class ClientBuild {
 				var27 = new ClientLocAnim(arg1, 2, var25, var9, var10, var12, var11, var13.anim, true);
 			}
 			arg5.setWall(arg3, arg8, arg7, var14, var26, var27, field1740[arg6], field1740[var25], var16, var15);
-			if (var13.field1284) {
-				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
+			if (var13.blockwalk) {
+				arg0.method114(arg7, arg4, arg6, arg8, var13.blockrange);
 			}
 		} else if (arg4 == 3) {
 			ModelSource var28;
@@ -1276,8 +1276,8 @@ public class ClientBuild {
 				var28 = new ClientLocAnim(arg1, 3, arg6, var9, var10, var12, var11, var13.anim, true);
 			}
 			arg5.setWall(arg3, arg8, arg7, var14, var28, null, field2819[arg6], 0, var16, var15);
-			if (var13.field1284) {
-				arg0.method114(arg7, arg4, arg6, arg8, var13.field1311);
+			if (var13.blockwalk) {
+				arg0.method114(arg7, arg4, arg6, arg8, var13.blockrange);
 			}
 		} else if (arg4 == 9) {
 			ModelSource var29;
@@ -1287,11 +1287,11 @@ public class ClientBuild {
 				var29 = new ClientLocAnim(arg1, arg4, arg6, var9, var10, var12, var11, var13.anim, true);
 			}
 			arg5.addScenery(arg3, arg8, arg7, var14, 1, 1, var29, 0, var16, var15);
-			if (var13.field1284) {
-				arg0.method118(arg8, var13.field1311, var13.field1298, arg6, arg7, var13.field1286);
+			if (var13.blockwalk) {
+				arg0.method118(arg8, var13.blockrange, var13.length, arg6, arg7, var13.width);
 			}
 		} else {
-			if (var13.field1313) {
+			if (var13.hillskew) {
 				if (arg6 == 1) {
 					int var33 = var11;
 					var11 = var12;

@@ -7,7 +7,7 @@ public class VarCache {
 	@ObfuscatedName("ac.J")
 	public static int[] field173 = new int[32];
 	@ObfuscatedName("se.E")
-	public static int[] field2803 = new int[2000];
+	public static int[] var = new int[2000];
 	@ObfuscatedName("ga.E")
 	public static int[] field1020 = new int[2000];
     @ObfuscatedName("ba.ic")
@@ -22,26 +22,26 @@ public class VarCache {
 	}
 
 	@ObfuscatedName("hd.a(II)I")
-	public static int method480(int arg0) {
+	public static int getVarbit(int arg0) {
 		VarBitType var1 = VarBitType.list(arg0);
-		int var2 = var1.field945;
-		int var3 = var1.field933;
-		int var4 = var1.field943;
+		int var2 = var1.endbit;
+		int var3 = var1.basevar;
+		int var4 = var1.startbit;
 		int var5 = field173[var2 - var4];
-		return field2803[var3] >> var4 & var5;
+		return var[var3] >> var4 & var5;
 	}
 
 	@ObfuscatedName("be.b(IIB)V")
 	public static void method241(int arg0, int arg1) {
 		VarBitType var2 = VarBitType.list(arg1);
-		int var3 = var2.field943;
-		int var4 = var2.field933;
-		int var5 = var2.field945;
+		int var3 = var2.startbit;
+		int var4 = var2.basevar;
+		int var5 = var2.endbit;
 		int var6 = field173[var5 - var3];
 		if (arg0 < 0 || var6 < arg0) {
 			arg0 = 0;
 		}
 		int var7 = var6 << var3;
-		field2803[var4] = field2803[var4] & ~var7 | var7 & arg0 << var3;
+		var[var4] = var[var4] & ~var7 | var7 & arg0 << var3;
 	}
 }

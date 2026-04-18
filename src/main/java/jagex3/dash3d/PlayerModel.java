@@ -39,7 +39,7 @@ public final class PlayerModel {
 
 	@ObfuscatedName("la.a(I)I")
 	public int method634() {
-		return this.field1671 == -1 ? (this.field1688[4] << 20) + ((this.field1688[0] << 25) + (this.field1667[0] << 15)) + (this.field1667[8] << 10) + (this.field1667[11] << 5) + this.field1667[1] : NpcType.method864(this.field1671).field1137 + 305419896;
+		return this.field1671 == -1 ? (this.field1688[4] << 20) + ((this.field1688[0] << 25) + (this.field1667[0] << 15)) + (this.field1667[8] << 10) + (this.field1667[11] << 5) + this.field1667[1] : NpcType.list(this.field1671).id + 305419896;
 	}
 
 	@ObfuscatedName("la.a(ILba;)V")
@@ -61,22 +61,22 @@ public final class PlayerModel {
 	@ObfuscatedName("la.a(Lhe;Lhe;IIB)Lpa;")
 	public Model method637(SeqType arg0, SeqType arg1, int arg2, int arg3) {
 		if (this.field1671 != -1) {
-			return NpcType.method864(this.field1671).method448(arg0, arg1, arg2, arg3);
+			return NpcType.list(this.field1671).getTempModel(arg0, arg1, arg2, arg3);
 		}
 		long var5 = this.field1693;
 		int[] var7 = this.field1667;
-		if (arg0 != null && (arg0.field1234 >= 0 || arg0.field1246 >= 0)) {
+		if (arg0 != null && (arg0.replaceheldleft >= 0 || arg0.replaceheldright >= 0)) {
 			var7 = new int[12];
 			for (int var8 = 0; var8 < 12; var8++) {
 				var7[var8] = this.field1667[var8];
 			}
-			if (arg0.field1234 >= 0) {
-				var5 += arg0.field1234 - this.field1667[5] << 8;
-				var7[5] = arg0.field1234;
+			if (arg0.replaceheldleft >= 0) {
+				var5 += arg0.replaceheldleft - this.field1667[5] << 8;
+				var7[5] = arg0.replaceheldleft;
 			}
-			if (arg0.field1246 >= 0) {
-				var5 += arg0.field1246 - this.field1667[3] << 16;
-				var7[3] = arg0.field1246;
+			if (arg0.replaceheldright >= 0) {
+				var5 += arg0.replaceheldright - this.field1667[3] << 16;
+				var7[3] = arg0.replaceheldright;
 			}
 		}
 		Model var9 = (Model) field379.find(var5);
@@ -84,7 +84,7 @@ public final class PlayerModel {
 			boolean var10 = false;
 			for (int var11 = 0; var11 < 12; var11++) {
 				int var12 = var7[var11];
-				if (var12 >= 256 && var12 < 512 && !IdkType.method177(var12 - 256).method821()) {
+				if (var12 >= 256 && var12 < 512 && !IdkType.list(var12 - 256).checkModel()) {
 					var10 = true;
 				}
 				if (var12 >= 512 && !ObjType.list(var12 - 512).method940(this.field1658)) {
@@ -105,7 +105,7 @@ public final class PlayerModel {
 				for (int var15 = 0; var15 < 12; var15++) {
 					int var16 = var7[var15];
 					if (var16 >= 256 && var16 < 512) {
-						Model var17 = IdkType.method177(var16 - 256).method828();
+						Model var17 = IdkType.list(var16 - 256).getModelNoCheck();
 						if (var17 != null) {
 							var13[var14++] = var17;
 						}
@@ -120,15 +120,15 @@ public final class PlayerModel {
 				var9 = new Model(var13, var14);
 				for (int var19 = 0; var19 < 5; var19++) {
 					if (this.field1688[var19] != 0) {
-						var9.method771(Statics.field2894[var19][0], Statics.field2894[var19][this.field1688[var19]]);
+						var9.recolour(Statics.field2894[var19][0], Statics.field2894[var19][this.field1688[var19]]);
 						if (var19 == 1) {
-							var9.method771(Statics.field1865[0], Statics.field1865[this.field1688[var19]]);
+							var9.recolour(Statics.field1865[0], Statics.field1865[this.field1688[var19]]);
 						}
 					}
 				}
-				var9.method778();
-				var9.method770(64, 850, -30, -50, -30, true);
-				field379.method262(var5, var9);
+				var9.prepareAnim();
+				var9.light(64, 850, -30, -50, -30, true);
+				field379.put(var5, var9);
 				this.field1694 = var5;
 			}
 		}
@@ -137,11 +137,11 @@ public final class PlayerModel {
 		}
 		Model var20;
 		if (arg0 != null && arg1 != null) {
-			var20 = arg0.method485(var9, arg1, arg3, arg2);
+			var20 = arg0.splitAnimateModel(var9, arg1, arg3, arg2);
 		} else if (arg0 == null) {
-			var20 = arg1.method494(arg2, var9);
+			var20 = arg1.animateModel(arg2, var9);
 		} else {
-			var20 = arg0.method494(arg3, var9);
+			var20 = arg0.animateModel(arg3, var9);
 		}
 		return var20;
 	}
@@ -182,12 +182,12 @@ public final class PlayerModel {
 	@ObfuscatedName("la.d(I)Lpa;")
 	public Model method639() {
 		if (this.field1671 != -1) {
-			return NpcType.method864(this.field1671).method455();
+			return NpcType.list(this.field1671).getHead();
 		}
 		boolean var1 = false;
 		for (int var2 = 0; var2 < 12; var2++) {
 			int var3 = this.field1667[var2];
-			if (var3 >= 256 && var3 < 512 && !IdkType.method177(var3 - 256).method822()) {
+			if (var3 >= 256 && var3 < 512 && !IdkType.list(var3 - 256).checkHead()) {
 				var1 = true;
 			}
 			if (var3 >= 512 && !ObjType.list(var3 - 512).method939(this.field1658)) {
@@ -202,7 +202,7 @@ public final class PlayerModel {
 		for (int var6 = 0; var6 < 12; var6++) {
 			int var7 = this.field1667[var6];
 			if (var7 >= 256 && var7 < 512) {
-				Model var8 = IdkType.method177(var7 - 256).method827();
+				Model var8 = IdkType.list(var7 - 256).getHeadNoCheck();
 				if (var8 != null) {
 					var4[var5++] = var8;
 				}
@@ -217,9 +217,9 @@ public final class PlayerModel {
 		Model var10 = new Model(var4, var5);
 		for (int var11 = 0; var11 < 5; var11++) {
 			if (this.field1688[var11] != 0) {
-				var10.method771(Statics.field2894[var11][0], Statics.field2894[var11][this.field1688[var11]]);
+				var10.recolour(Statics.field2894[var11][0], Statics.field2894[var11][this.field1688[var11]]);
 				if (var11 == 1) {
-					var10.method771(Statics.field1865[0], Statics.field1865[this.field1688[var11]]);
+					var10.recolour(Statics.field1865[0], Statics.field1865[this.field1688[var11]]);
 				}
 			}
 		}
@@ -231,9 +231,9 @@ public final class PlayerModel {
 		if (arg0 == null) {
 			arg0 = new int[12];
 			for (int var5 = 0; var5 < 7; var5++) {
-				for (int var6 = 0; var6 < IdkType.field974; var6++) {
-					IdkType var7 = IdkType.method177(var6);
-					if (var7 != null && !var7.field2373 && var5 + (arg1 ? 7 : 0) == var7.field2366) {
+				for (int var6 = 0; var6 < IdkType.numDefinitions; var6++) {
+					IdkType var7 = IdkType.list(var6);
+					if (var7 != null && !var7.disable && var5 + (arg1 ? 7 : 0) == var7.type) {
 						arg0[Statics.field2808[var5]] = var6 + 256;
 						break;
 					}
@@ -261,17 +261,17 @@ public final class PlayerModel {
 		do {
 			if (arg1) {
 				var3++;
-				if (IdkType.field974 <= var3) {
+				if (IdkType.numDefinitions <= var3) {
 					var3 = 0;
 				}
 			} else {
 				var3--;
 				if (var3 < 0) {
-					var3 = IdkType.field974 - 1;
+					var3 = IdkType.numDefinitions - 1;
 				}
 			}
-			var4 = IdkType.method177(var3);
-		} while (var4 == null || var4.field2373 || var4.field2366 != arg0 + (this.field1658 ? 7 : 0));
+			var4 = IdkType.list(var3);
+		} while (var4 == null || var4.disable || var4.type != arg0 + (this.field1658 ? 7 : 0));
 		this.field1667[Statics.field2808[arg0]] = var3 + 256;
 		this.method638();
 	}

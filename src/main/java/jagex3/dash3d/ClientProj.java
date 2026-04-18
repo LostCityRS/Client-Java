@@ -95,19 +95,19 @@ public final class ClientProj extends ModelSource {
 		this.field618 = arg9;
 		this.field641 = arg3;
 		this.field654 = arg7;
-		int var12 = SpotType.method713(this.field619).field786;
+		int var12 = SpotType.list(this.field619).anim;
 		if (var12 == -1) {
 			this.field663 = null;
 		} else {
-			this.field663 = SeqType.method103(var12);
+			this.field663 = SeqType.list(var12);
 		}
 	}
 
 	@ObfuscatedName("d.f(I)Lpa;")
 	@Override
 	public Model method41() {
-		SpotType var1 = SpotType.method713(this.field619);
-		Model var2 = var1.method371(this.field639);
+		SpotType var1 = SpotType.list(this.field619);
+		Model var2 = var1.getTempModel2(this.field639);
 		if (var2 == null) {
 			return null;
 		} else {
@@ -129,10 +129,10 @@ public final class ClientProj extends ModelSource {
 			return;
 		}
 		this.field630 += arg0;
-		while (this.field663.field1223[this.field639] < this.field630) {
-			this.field630 -= this.field663.field1223[this.field639];
+		while (this.field663.delay[this.field639] < this.field630) {
+			this.field630 -= this.field663.delay[this.field639];
 			this.field639++;
-			if (this.field663.field1242.length <= this.field639) {
+			if (this.field663.frames.length <= this.field639) {
 				this.field639 = 0;
 			}
 		}

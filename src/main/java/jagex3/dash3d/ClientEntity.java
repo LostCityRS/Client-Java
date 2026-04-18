@@ -186,7 +186,7 @@ public abstract class ClientEntity extends ModelSource {
 			var4++;
 			var3--;
 		}
-		if (this.field2015 != -1 && SeqType.method103(this.field2015).field1233 == 1) {
+		if (this.field2015 != -1 && SeqType.list(this.field2015).preanim_move == 1) {
 			this.field2015 = -1;
 		}
 		if (this.field1983 < 9) {
@@ -245,7 +245,7 @@ public abstract class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("nb.a(IIZI)V")
 	public final void method729(int arg0, boolean arg1, int arg2) {
-		if (this.field2015 != -1 && SeqType.method103(this.field2015).field1233 == 1) {
+		if (this.field2015 != -1 && SeqType.list(this.field2015).preanim_move == 1) {
 			this.field2015 = -1;
 		}
 		if (!arg1) {

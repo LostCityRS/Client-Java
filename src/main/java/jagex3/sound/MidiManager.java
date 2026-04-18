@@ -193,7 +193,7 @@ public class MidiManager {
 			return null;
 		} else {
 			if (field30 != null) {
-				field30.method262(var4, new ByteArrayNode(var7));
+				field30.put(var4, new ByteArrayNode(var7));
 			}
 			return var7;
 		}

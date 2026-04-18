@@ -21,7 +21,7 @@ public final class LruCache {
 	public final LinkList2 order = new LinkList2();
 
 	@ObfuscatedName("cb.a(IJLhb;)V")
-	public void method262(long arg0, Linkable2 arg1) {
+	public void put(long arg0, Linkable2 arg1) {
 		if (this.available == 0) {
 			Linkable2 var4 = this.order.popFront();
 			var4.unlink();

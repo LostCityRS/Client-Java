@@ -109,9 +109,6 @@ public class Statics {
 	@ObfuscatedName("md.Gb")
 	public static int field1895;
 
-	@ObfuscatedName("md.Mb")
-	public static Js5 field1901;
-
 	@ObfuscatedName("na.g")
 	public static PixMap field1935;
 
@@ -625,14 +622,10 @@ public class Statics {
 	public static int[] field1753 = new int[]{12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800};
 	@ObfuscatedName("la.y")
 	public static int field1679 = 0;
-	@ObfuscatedName("g.d")
-	public static LruCache field981 = new LruCache(10);
 	@ObfuscatedName("mc.l")
 	public static int field1857 = 0;
 	@ObfuscatedName("mc.t")
 	public static int[] field1865 = new int[]{9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 58654, 5027, 1457, 16565, 34991, 25486};
-	@ObfuscatedName("oa.k")
-	public static LruCache field2136 = new LruCache(100);
 	@ObfuscatedName("oa.u")
 	public static int field2146 = 0;
 	@ObfuscatedName("nd.y")
@@ -645,8 +638,6 @@ public class Statics {
 	public static int field3304 = 0;
 	@ObfuscatedName("wb.B")
 	public static boolean field3268 = false;
-	@ObfuscatedName("wb.L")
-	public static LruCache field3278 = new LruCache(50);
 	@ObfuscatedName("ba.jb")
 	public static LruCache field253 = new LruCache(100);
 	@ObfuscatedName("ba.lc")
@@ -738,7 +729,7 @@ public class Statics {
 		Text.field1215 = null;
 		Text.field1199 = null;
 		Text.field1219 = null;
-		SeqType.field1196 = null;
+		SeqType.recentUse = null;
 		TextGerman.field1214 = null;
 		Text.field1217 = null;
 		Text.field1197 = null;
@@ -796,7 +787,7 @@ public class Statics {
 	@ObfuscatedName("he.f(I)V")
 	public static void method484() {
 		field1245 = null;
-		SeqType.field1241 = null;
+		SeqType.configClient = null;
 		TextGerman.field1232 = null;
 		Client.field1239 = null;
 		field1229 = null;
@@ -832,7 +823,7 @@ public class Statics {
 	@ObfuscatedName("dc.b(I)V")
 	public static void method315() {
 		Client.waveDelay = null;
-		LocType.field698 = null;
+		LocType.configClient = null;
 		Client.npcIds = null;
 		field676 = null;
 		Client.field680 = null;
@@ -887,7 +878,7 @@ public class Statics {
 		field2772 = null;
 		Client.field2770 = null;
 		Client.dirMap = null;
-		VarBitType.field2755 = null;
+		VarBitType.recentUse = null;
 		Text.field2760 = null;
 		Text.field2768 = null;
 		Js5Net.field2769 = null;
@@ -1067,7 +1058,7 @@ public class Statics {
 		field3298 = null;
 		Client.field3299 = null;
 		Text.field3303 = null;
-		IdkType.field3282 = null;
+		IdkType.recentUse = null;
 		Text.field3307 = null;
 		Text.field3302 = null;
 		Text.field3295 = null;
@@ -1212,7 +1203,7 @@ public class Statics {
 	@ObfuscatedName("qc.a(I)V")
 	public static void method849() {
 		TextGerman.field2436 = null;
-		LocType.field2428 = null;
+		LocType.mc3 = null;
 		Client.soundMixer = null;
 		TextGerman.field2438 = null;
 		TextGerman.field2432 = null;
@@ -1220,7 +1211,7 @@ public class Statics {
 		TextGerman.field2429 = null;
 		TextGerman.field2426 = null;
 		Text.field2439 = null;
-		IdkType.field2433 = null;
+		IdkType.configClient = null;
 	}
 
 	@ObfuscatedName("bb.a(B)V")
@@ -1307,7 +1298,7 @@ public class Statics {
 		field1547 = null;
 		Text.field1545 = null;
 		Text.field1563 = null;
-		VarBitType.field1555 = null;
+		VarBitType.configClient = null;
 		Client.field1558 = null;
 		Client.field1560 = null;
 		Text.field1561 = null;
@@ -1322,10 +1313,10 @@ public class Statics {
 		Text.field1000 = null;
 		Js5Net.field996 = null;
 		ClientBuild.field1003 = null;
-		field981 = null;
+		LocType.mc2 = null;
 		field989 = null;
 		Client.field994 = null;
-		SpotType.field999 = null;
+		SpotType.configClient = null;
 	}
 
 	@ObfuscatedName("hb.e(I)V")
@@ -1399,7 +1390,7 @@ public class Statics {
 		Text.field1807 = null;
 		TextGerman.field1794 = null;
 		Text.field1834 = null;
-		SpotType.field1841 = null;
+		SpotType.modelCache = null;
 		Js5Net.field1831 = null;
 		Text.field1819 = null;
 		Client.field1842 = null;
@@ -1411,7 +1402,7 @@ public class Statics {
 	@ObfuscatedName("fd.f(I)V")
 	public static void method405() {
 		Text.field926 = null;
-		SeqType.field939 = null;
+		SeqType.anims = null;
 		Client.field925 = null;
 		IfType.field924 = null;
 		Text.field932 = null;
@@ -1448,7 +1439,7 @@ public class Statics {
 		Text.field1394 = null;
 		field1393 = null;
 		TextGerman.field1406 = null;
-		ObjType.field1405 = null;
+		ObjType.configClient = null;
 		Text.field1392 = null;
 		Text.field1396 = null;
 	}
@@ -1475,7 +1466,7 @@ public class Statics {
 		Text.field3172 = null;
 		TextGerman.field3169 = null;
 		TextGerman.field3148 = null;
-		VarpType.field3167 = null;
+		VarpType.configClient = null;
 		TextGerman.field3170 = null;
 		Text.field3146 = null;
 		field3163 = null;
@@ -1588,7 +1579,7 @@ public class Statics {
 		Text.field2139 = null;
 		Text.field2127 = null;
 		Text.field2150 = null;
-		field2136 = null;
+		SeqType.framesetCache = null;
 		field2151 = null;
 		ClientBuild.field2131 = null;
 		Text.field2133 = null;
@@ -1717,7 +1708,7 @@ public class Statics {
 		ClientKeyboardListener.keyChBuffer = null;
 		Js5Net.field2613 = null;
 		Client.localPlayer = null;
-		LocType.field2623 = null;
+		LocType.temp = null;
 		Client.field2626 = null;
 		Client.field2618 = null;
 		Client.field2614 = null;
@@ -1878,7 +1869,7 @@ public class Statics {
 	@ObfuscatedName("te.b(B)V")
 	public static void method975() {
 		ScriptRunner.field2957 = null;
-		SeqType.field2966 = null;
+		SeqType.bases = null;
 		field2968 = null;
 		field2965 = null;
 		Client.field2951 = null;
@@ -2014,7 +2005,7 @@ public class Statics {
 		TextGerman.field1576 = null;
 		Client.field1578 = null;
 		Text.field1591 = null;
-		IdkType.field1583 = null;
+		IdkType.models = null;
 		field1567 = null;
 		Text.field1582 = null;
 		TextGerman.field1581 = null;
@@ -2137,7 +2128,7 @@ public class Statics {
 			if (var4 == 0) {
 				var2[var3] = Integer.valueOf(arg0.method167());
 			} else if (var4 == 1) {
-				var2[var3] = arg0.method140();
+				var2[var3] = arg0.gjstr();
 			}
 		}
 		return var2;
@@ -2149,7 +2140,7 @@ public class Statics {
 		Text.field1885 = null;
 		Client.field1886 = null;
 		TextGerman.field1883 = null;
-		field1901 = null;
+		SpotType.models = null;
 		Text.field1896 = null;
 		Text.field1889 = null;
 		Client.models = null;
@@ -2238,7 +2229,7 @@ public class Statics {
 		Text.field738 = null;
 		Client.field724 = null;
 		Client.playerOpPriority = null;
-		VarpType.field727 = null;
+		VarpType.recentUse = null;
 		Text.field733 = null;
 	}
 
@@ -2254,12 +2245,12 @@ public class Statics {
 		TextGerman.field3258 = null;
 		Text.field3272 = null;
 		field3277 = null;
-		field3278 = null;
+		NpcType.modelCache = null;
 		ScriptRunner.field3255 = null;
 		Text.field3257 = null;
 		Text.field3252 = null;
 		TextGerman.field3276 = null;
-		NpcType.field3244 = null;
+		NpcType.models = null;
 	}
 
 	@ObfuscatedName("s.a(IBI)I")
@@ -2353,7 +2344,7 @@ public class Statics {
 		field1774 = null;
 		field1756 = null;
 		TextGerman.field1776 = null;
-		FloType.field1757 = null;
+		FloType.recentUse = null;
 		Text.field1762 = null;
 		Text.field1777 = null;
 	}
@@ -2404,9 +2395,9 @@ public class Statics {
 		Text.field1988 = null;
 		Client.field2034 = null;
 		Client.players = null;
-		FluType.field2024 = null;
+		FluType.configClient = null;
 		Text.field2029 = null;
-		FloType.field2018 = null;
+		FloType.configClient = null;
 		JagException.signlink = null;
 		PixLoader.yof = null;
 		Text.field1998 = null;
@@ -2418,16 +2409,16 @@ public class Statics {
 	@ObfuscatedName("se.a(B)V")
 	public static void method934() {
 		Text.field2778 = null;
-		VarCache.field2803 = null;
+		VarCache.var = null;
 		field2801 = null;
 		Text.field2789 = null;
 		field2798 = null;
-		LocType.field2788 = null;
+		LocType.recentUse = null;
 		Client.field2782 = null;
 		PixLoader.bspr = null;
 		field2802 = null;
 		field2783 = null;
-		NpcType.field2799 = null;
+		NpcType.configClient = null;
 	}
 
 	@ObfuscatedName("vd.k(I)V")
@@ -2450,7 +2441,7 @@ public class Statics {
 	public static void method889() {
 		Client.field2686 = null;
 		Client.p12 = null;
-		FluType.field2663 = null;
+		FluType.recentUse = null;
 		field2659 = null;
 		Text.field2667 = null;
 		TextGerman.field2662 = null;
@@ -2512,9 +2503,9 @@ public class Statics {
 		Text.field1076 = null;
 		Client.field1074 = null;
 		field1056 = null;
-		NpcType.field1060 = null;
+		NpcType.recentUse = null;
 		TextGerman.field1077 = null;
-		ObjType.field1066 = null;
+		ObjType.recentUse = null;
 		TextGerman.field1073 = null;
 		GameShell.signlink = null;
 		Client.mapBuildIndex = null;
@@ -2552,7 +2543,7 @@ public class Statics {
 		TextGerman.field59 = null;
 		Client.mapBuildGroundData = null;
 		field23 = null;
-		LocType.field51 = null;
+		LocType.models = null;
 		TextGerman.field48 = null;
 		Text.field63 = null;
 		Client.field11 = null;
@@ -2565,7 +2556,7 @@ public class Statics {
 
 	@ObfuscatedName("ob.a(B)V")
 	public static void method756() {
-		SpotType.field2152 = null;
+		SpotType.recentUse = null;
 		TextGerman.field2164 = null;
 		Text.field2159 = null;
 		Client.field2160 = null;

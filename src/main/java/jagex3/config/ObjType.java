@@ -21,11 +21,11 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("ca.j")
 	public static Js5 field458;
 	@ObfuscatedName("ie.q")
-	public static Js5 field1405;
+	public static Js5 configClient;
 	@ObfuscatedName("kc.z")
-	public static int field1590;
+	public static int numDefinitions;
 	@ObfuscatedName("gb.t")
-	public static LruCache field1066 = new LruCache(64);
+	public static LruCache recentUse = new LruCache(64);
 	@ObfuscatedName("ta.ac")
 	public int field2860 = 0;
 
@@ -132,7 +132,7 @@ public final class ObjType extends Linkable2 {
 	public int field2836;
 
 	@ObfuscatedName("ta.xc")
-	public int field2883;
+	public int id;
 
 	@ObfuscatedName("ta.Ab")
 	public int[] field2834;
@@ -142,17 +142,17 @@ public final class ObjType extends Linkable2 {
 
 	@ObfuscatedName("oe.a(II)Lta;")
 	public static ObjType list(int arg0) {
-		ObjType var1 = (ObjType) field1066.find((long) arg0);
+		ObjType var1 = (ObjType) recentUse.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field1405.getFile(arg0, 10);
+		byte[] var2 = configClient.getFile(arg0, 10);
 		ObjType var3 = new ObjType();
-		var3.field2883 = arg0;
+		var3.id = arg0;
 		if (var2 != null) {
-			var3.method952(new Packet(var2));
+			var3.decode(new Packet(var2));
 		}
-		var3.method942();
+		var3.postDecode();
 		if (var3.field2838 != -1) {
 			var3.method953(list(var3.field2838), list(var3.field2843));
 		}
@@ -162,7 +162,7 @@ public final class ObjType extends Linkable2 {
 			var3.field2835 = null;
 			var3.field2827 = Text.field1501;
 		}
-		field1066.method262((long) arg0, var3);
+		recentUse.put((long) arg0, var3);
 		return var3;
 	}
 
@@ -170,8 +170,8 @@ public final class ObjType extends Linkable2 {
 	public static void init(Js5 arg0, boolean arg1, Js5 arg2) {
 		field2384 = arg1;
 		field458 = arg2;
-		field1405 = arg0;
-		field1590 = field1405.method235(10);
+		configClient = arg0;
+		numDefinitions = configClient.getFileIdLimit(10);
 	}
 
 	@ObfuscatedName("va.b(IIII)Ljd;")
@@ -288,7 +288,7 @@ public final class ObjType extends Linkable2 {
 			var8.ohi = var29;
 		}
 		if (arg2 == 0) {
-			Statics.field253.method262((long) arg1, var19);
+			Statics.field253.put((long) arg1, var19);
 		}
 		Pix2D.method926(var9, var11, var10);
 		Pix2D.method912(var12, var14, var13, var15);
@@ -307,8 +307,8 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ca.a(B)V")
-	public static void method254() {
-		field1066.clear();
+	public static void resetCache() {
+		recentUse.clear();
 		Statics.field3035.clear();
 		Statics.field253.clear();
 	}
@@ -336,10 +336,10 @@ public final class ObjType extends Linkable2 {
 			return true;
 		}
 		boolean var4 = true;
-		if (!field458.method218(var2, 0)) {
+		if (!field458.requestDownload(var2, 0)) {
 			var4 = false;
 		}
-		if (var3 != -1 && !field458.method218(var3, 0)) {
+		if (var3 != -1 && !field458.requestDownload(var3, 0)) {
 			var4 = false;
 		}
 		return var4;
@@ -359,13 +359,13 @@ public final class ObjType extends Linkable2 {
 			return true;
 		}
 		boolean var5 = true;
-		if (!field458.method218(var2, 0)) {
+		if (!field458.requestDownload(var2, 0)) {
 			var5 = false;
 		}
-		if (var3 != -1 && !field458.method218(var3, 0)) {
+		if (var3 != -1 && !field458.requestDownload(var3, 0)) {
 			var5 = false;
 		}
-		if (var4 != -1 && !field458.method218(var4, 0)) {
+		if (var4 != -1 && !field458.requestDownload(var4, 0)) {
 			var5 = false;
 		}
 		return var5;
@@ -384,34 +384,34 @@ public final class ObjType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Model var5 = Model.method798(field458, var2);
+		Model var5 = Model.load(field458, var2);
 		if (var3 != -1) {
-			Model var6 = Model.method798(field458, var3);
+			Model var6 = Model.load(field458, var3);
 			if (var4 == -1) {
 				Model[] var7 = new Model[]{var5, var6};
 				var5 = new Model(var7, 2);
 			} else {
-				Model var8 = Model.method798(field458, var4);
+				Model var8 = Model.load(field458, var4);
 				Model[] var9 = new Model[]{var5, var6, var8};
 				var5 = new Model(var9, 3);
 			}
 		}
 		if (!arg0 && this.field2849 != 0) {
-			var5.method796(0, this.field2849, 0);
+			var5.translate(0, this.field2849, 0);
 		}
 		if (arg0 && this.field2860 != 0) {
-			var5.method796(0, this.field2860, 0);
+			var5.translate(0, this.field2860, 0);
 		}
 		if (this.field2834 != null) {
 			for (int var10 = 0; var10 < this.field2834.length; var10++) {
-				var5.method771(this.field2834[var10], this.field2847[var10]);
+				var5.recolour(this.field2834[var10], this.field2847[var10]);
 			}
 		}
 		return var5;
 	}
 
 	@ObfuscatedName("ta.f(I)V")
-	public void method942() {
+	public void postDecode() {
 	}
 
 	@ObfuscatedName("ta.a(BI)Lta;")
@@ -441,15 +441,15 @@ public final class ObjType extends Linkable2 {
 		if (var2 == -1) {
 			return null;
 		}
-		Model var4 = Model.method798(field458, var2);
+		Model var4 = Model.load(field458, var2);
 		if (var3 != -1) {
-			Model var5 = Model.method798(field458, var3);
+			Model var5 = Model.load(field458, var3);
 			Model[] var6 = new Model[]{var4, var5};
 			var4 = new Model(var6, 2);
 		}
 		if (this.field2834 != null) {
 			for (int var7 = 0; var7 < this.field2834.length; var7++) {
-				var4.method771(this.field2834[var7], this.field2847[var7]);
+				var4.recolour(this.field2834[var7], this.field2847[var7]);
 			}
 		}
 		return var4;
@@ -460,7 +460,7 @@ public final class ObjType extends Linkable2 {
 		if (arg0 == 1) {
 			this.field2836 = arg1.g2();
 		} else if (arg0 == 2) {
-			this.field2827 = arg1.method140();
+			this.field2827 = arg1.gjstr();
 		} else if (arg0 == 4) {
 			this.field2848 = arg1.g2();
 		} else if (arg0 == 5) {
@@ -494,12 +494,12 @@ public final class ObjType extends Linkable2 {
 		} else if (arg0 == 26) {
 			this.field2850 = arg1.g2();
 		} else if (arg0 >= 30 && arg0 < 35) {
-			this.field2835[arg0 - 30] = arg1.method140();
+			this.field2835[arg0 - 30] = arg1.gjstr();
 			if (this.field2835[arg0 - 30].method14(Text.field2928)) {
 				this.field2835[arg0 - 30] = null;
 			}
 		} else if (arg0 >= 35 && arg0 < 40) {
-			this.field2830[arg0 - 35] = arg1.method140();
+			this.field2830[arg0 - 35] = arg1.gjstr();
 		} else if (arg0 == 40) {
 			int var3 = arg1.g1();
 			this.field2847 = new int[var3];
@@ -549,7 +549,7 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ta.a(Lba;I)V")
-	public void method952(Packet arg0) {
+	public void decode(Packet arg0) {
 		while (true) {
 			int var2 = arg0.g1();
 			if (var2 == 0) {
@@ -590,27 +590,27 @@ public final class ObjType extends Linkable2 {
 			}
 		}
 		if (arg0) {
-			Model var5 = (Model) Statics.field3035.find((long) this.field2883);
+			Model var5 = (Model) Statics.field3035.find((long) this.id);
 			if (var5 != null) {
 				return var5;
 			}
 		}
-		Model var6 = Model.method798(field458, this.field2836);
+		Model var6 = Model.load(field458, this.field2836);
 		if (var6 == null) {
 			return null;
 		}
 		if (this.field2844 != 128 || this.field2884 != 128 || this.field2864 != 128) {
-			var6.method789(this.field2844, this.field2884, this.field2864);
+			var6.resize(this.field2844, this.field2884, this.field2864);
 		}
 		if (this.field2834 != null) {
 			for (int var7 = 0; var7 < this.field2834.length; var7++) {
-				var6.method771(this.field2834[var7], this.field2847[var7]);
+				var6.recolour(this.field2834[var7], this.field2847[var7]);
 			}
 		}
 		if (arg0) {
-			var6.method770(this.field2856 + 64, this.field2871 + 768, -50, -10, -50, true);
+			var6.light(this.field2856 + 64, this.field2871 + 768, -50, -10, -50, true);
 			var6.field2205 = true;
-			Statics.field3035.method262((long) this.field2883, var6);
+			Statics.field3035.put((long) this.id, var6);
 		}
 		return var6;
 	}

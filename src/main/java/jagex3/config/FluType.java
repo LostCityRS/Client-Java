@@ -10,52 +10,52 @@ import jagex3.js5.Js5;
 public final class FluType extends Linkable2 {
 
 	@ObfuscatedName("nb.jd")
-	public static Js5 field2024;
+	public static Js5 configClient;
 	@ObfuscatedName("rd.f")
-	public static LruCache field2663 = new LruCache(64);
+	public static LruCache recentUse = new LruCache(64);
 	@ObfuscatedName("md.tb")
-	public int field1882;
+	public int lightness;
 
 	@ObfuscatedName("md.vb")
-	public int field1884;
+	public int hue;
 
 	@ObfuscatedName("md.Jb")
-	public int field1898 = 0;
+	public int colour = 0;
 
 	@ObfuscatedName("md.yb")
-	public int field1887;
+	public int chroma;
 
 	@ObfuscatedName("md.Eb")
-	public int field1893;
+	public int saturation;
 
 	@ObfuscatedName("md.a(Lbd;B)V")
 	public static void init(Js5 arg0) {
-		field2024 = arg0;
+		configClient = arg0;
 	}
 
 	@ObfuscatedName("dc.a(BI)Lmd;")
-	public static FluType method317(int arg0) {
-		FluType var1 = (FluType) field2663.find((long) arg0);
+	public static FluType list(int arg0) {
+		FluType var1 = (FluType) recentUse.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field2024.getFile(arg0, 1);
+		byte[] var2 = configClient.getFile(arg0, 1);
 		FluType var3 = new FluType();
 		if (var2 != null) {
-			var3.method704(arg0, new Packet(var2));
+			var3.decode(arg0, new Packet(var2));
 		}
-		var3.method701();
-		field2663.method262((long) arg0, var3);
+		var3.postDecode();
+		recentUse.put((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("bd.b(Z)V")
-	public static void method234() {
-		field2663.clear();
+	public static void resetCache() {
+		recentUse.clear();
 	}
 
 	@ObfuscatedName("md.b(IB)V")
-	public void method699(int arg0) {
+	public void getHsl(int arg0) {
 		double var2 = (double) (arg0 >> 16 & 0xFF) / 256.0D;
 		double var4 = (double) (arg0 & 0xFF) / 256.0D;
 		double var6 = (double) (arg0 >> 8 & 0xFF) / 256.0D;
@@ -75,7 +75,7 @@ public final class FluType extends Linkable2 {
 			var10 = var4;
 		}
 		double var14 = (var8 + var10) / 2.0D;
-		this.field1882 = (int) (var14 * 256.0D);
+		this.lightness = (int) (var14 * 256.0D);
 		double var16 = 0.0D;
 		if (var8 != var10) {
 			if (var14 < 0.5D) {
@@ -93,49 +93,49 @@ public final class FluType extends Linkable2 {
 			}
 		}
 		double var18 = var12 / 6.0D;
-		if (this.field1882 < 0) {
-			this.field1882 = 0;
-		} else if (this.field1882 > 255) {
-			this.field1882 = 255;
+		if (this.lightness < 0) {
+			this.lightness = 0;
+		} else if (this.lightness > 255) {
+			this.lightness = 255;
 		}
 		if (var14 > 0.5D) {
-			this.field1887 = (int) ((1.0D - var14) * var16 * 512.0D);
+			this.chroma = (int) ((1.0D - var14) * var16 * 512.0D);
 		} else {
-			this.field1887 = (int) (var14 * var16 * 512.0D);
+			this.chroma = (int) (var14 * var16 * 512.0D);
 		}
-		this.field1893 = (int) (var16 * 256.0D);
-		if (this.field1887 < 1) {
-			this.field1887 = 1;
+		this.saturation = (int) (var16 * 256.0D);
+		if (this.chroma < 1) {
+			this.chroma = 1;
 		}
-		this.field1884 = (int) ((double) this.field1887 * var18);
-		if (this.field1893 < 0) {
-			this.field1893 = 0;
-		} else if (this.field1893 > 255) {
-			this.field1893 = 255;
+		this.hue = (int) ((double) this.chroma * var18);
+		if (this.saturation < 0) {
+			this.saturation = 0;
+		} else if (this.saturation > 255) {
+			this.saturation = 255;
 			return;
 		}
 	}
 
 	@ObfuscatedName("md.b(Z)V")
-	public void method701() {
-		this.method699(this.field1898);
+	public void postDecode() {
+		this.getHsl(this.colour);
 	}
 
 	@ObfuscatedName("md.a(BILba;)V")
-	public void method704(int arg0, Packet arg1) {
+	public void decode(int arg0, Packet arg1) {
 		while (true) {
 			int var3 = arg1.g1();
 			if (var3 == 0) {
 				return;
 			}
-			this.method706(var3, arg1, arg0);
+			this.decode(var3, arg1, arg0);
 		}
 	}
 
 	@ObfuscatedName("md.a(BILba;I)V")
-	public void method706(int arg0, Packet arg1, int arg2) {
+	public void decode(int arg0, Packet arg1, int arg2) {
 		if (arg0 == 1) {
-			this.field1898 = arg1.g3();
+			this.colour = arg1.g3();
 		}
 	}
 }

@@ -106,9 +106,9 @@ public final class TextureManager implements TextureProvider {
 		this.field1877 = arg3;
 		this.field1875 = arg4;
 		this.field1880 = this.field1879;
-		int[] var7 = arg0.method237(0);
+		int[] var7 = arg0.getFileList(0);
 		int var8 = var7.length;
-		this.field1867 = new Texture[arg0.method235(0)];
+		this.field1867 = new Texture[arg0.getFileIdLimit(0)];
 		for (int var9 = 0; var9 < var8; var9++) {
 			Packet var10 = new Packet(arg0.getFile(var7[var9], 0));
 			this.field1867[var7[var9]] = new Texture(var10);

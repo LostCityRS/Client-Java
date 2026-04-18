@@ -10,103 +10,102 @@ import jagex3.js5.Js5;
 public final class FloType extends Linkable2 {
 
 	@ObfuscatedName("nb.dd")
-	public static Js5 field2018;
+	public static Js5 configClient;
 	@ObfuscatedName("m.d")
-	public static LruCache field1757 = new LruCache(64);
+	public static LruCache recentUse = new LruCache(64);
 	@ObfuscatedName("fc.Qb")
-	public boolean field913 = true;
+	public boolean occlude = true;
 
 	@ObfuscatedName("fc.Ab")
-	public int field897 = -1;
+	public int texture = -1;
 
 	@ObfuscatedName("fc.Ob")
-	public int field911 = -1;
+	public int mapcolour = -1;
 
 	@ObfuscatedName("fc.Xb")
-	public int field920 = 0;
+	public int colour = 0;
 
 	@ObfuscatedName("fc.yb")
-	public int field895;
+	public int hue;
 
 	@ObfuscatedName("fc.Ib")
-	public int field905;
+	public int mapHue;
 
 	@ObfuscatedName("fc.Kb")
-	public int field907;
+	public int lightness;
 
 	@ObfuscatedName("fc.Mb")
-	public int field909;
+	public int mapLightness;
 
 	@ObfuscatedName("fc.Pb")
-	public int field912;
+	public int saturation;
 
 	@ObfuscatedName("fc.Yb")
-	public int field921;
+	public int mapSaturation;
 
 	@ObfuscatedName("na.a(Lbd;I)V")
 	public static void init(Js5 arg0) {
-		field2018 = arg0;
+		configClient = arg0;
 	}
 
 	@ObfuscatedName("vd.b(II)Lfc;")
-	public static FloType method1026(int arg0) {
-		FloType var1 = (FloType) field1757.find((long) arg0);
+	public static FloType list(int arg0) {
+		FloType var1 = (FloType) recentUse.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field2018.getFile(arg0, 4);
+		byte[] var2 = configClient.getFile(arg0, 4);
 		FloType var3 = new FloType();
 		if (var2 != null) {
-			var3.method393(arg0, new Packet(var2));
+			var3.decode(arg0, new Packet(var2));
 		}
-		var3.method395();
-		field1757.method262((long) arg0, var3);
+		var3.postDecode();
+		recentUse.put((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("cb.a(Z)V")
-	public static void method265() {
-		field1757.clear();
+	public static void resetCache() {
+		recentUse.clear();
 	}
 
 	@ObfuscatedName("fc.a(BILba;)V")
-	public void method393(int arg0, Packet arg1) {
+	public void decode(int arg0, Packet arg1) {
 		while (true) {
 			int var3 = arg1.g1();
 			if (var3 == 0) {
 				return;
 			}
-			this.method396(arg0, arg1, var3);
+			this.decode(arg0, arg1, var3);
 		}
 	}
 
 	@ObfuscatedName("fc.c(B)V")
-	public void method395() {
-		if (this.field911 != -1) {
-			this.method401(this.field911);
-			this.field905 = this.field895;
-			this.field921 = this.field912;
-			this.field909 = this.field907;
+	public void postDecode() {
+		if (this.mapcolour != -1) {
+			this.getHsl(this.mapcolour);
+			this.mapHue = this.hue;
+			this.mapSaturation = this.saturation;
+			this.mapLightness = this.lightness;
 		}
-		this.method401(this.field920);
+		this.getHsl(this.colour);
 	}
 
 	@ObfuscatedName("fc.a(ILba;IB)V")
-	public void method396(int arg0, Packet arg1, int arg2) {
+	public void decode(int arg0, Packet arg1, int arg2) {
 		if (arg2 == 1) {
-			this.field920 = arg1.g3();
+			this.colour = arg1.g3();
 		} else if (arg2 == 2) {
-			this.field897 = arg1.g1();
+			this.texture = arg1.g1();
 		} else if (arg2 == 5) {
-			this.field913 = false;
+			this.occlude = false;
 		} else if (arg2 == 7) {
-			this.field911 = arg1.g3();
-			return;
+			this.mapcolour = arg1.g3();
 		}
 	}
 
 	@ObfuscatedName("fc.c(II)V")
-	public void method401(int arg0) {
+	public void getHsl(int arg0) {
 		double var2 = (double) (arg0 >> 16 & 0xFF) / 256.0D;
 		double var4 = (double) (arg0 >> 8 & 0xFF) / 256.0D;
 		double var6 = (double) (arg0 & 0xFF) / 256.0D;
@@ -143,18 +142,18 @@ public final class FloType extends Linkable2 {
 			}
 		}
 		double var18 = var12 / 6.0D;
-		this.field907 = (int) (var18 * 256.0D);
-		this.field895 = (int) (var16 * 256.0D);
-		this.field912 = (int) (var14 * 256.0D);
-		if (this.field912 < 0) {
-			this.field912 = 0;
-		} else if (this.field912 > 255) {
-			this.field912 = 255;
+		this.lightness = (int) (var18 * 256.0D);
+		this.hue = (int) (var16 * 256.0D);
+		this.saturation = (int) (var14 * 256.0D);
+		if (this.saturation < 0) {
+			this.saturation = 0;
+		} else if (this.saturation > 255) {
+			this.saturation = 255;
 		}
-		if (this.field895 < 0) {
-			this.field895 = 0;
-		} else if (this.field895 > 255) {
-			this.field895 = 255;
+		if (this.hue < 0) {
+			this.hue = 0;
+		} else if (this.hue > 255) {
+			this.hue = 255;
 		}
 	}
 }

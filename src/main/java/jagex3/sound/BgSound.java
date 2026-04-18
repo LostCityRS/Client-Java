@@ -71,22 +71,22 @@ public final class BgSound extends Linkable {
 	@ObfuscatedName("n.a(IZIIILia;)V")
 	public static void method719(int arg0, int arg1, int arg2, int arg3, LocType arg4) {
 		BgSound var5 = new BgSound();
-		var5.field423 = arg4.field1285 * 128;
-		var5.field425 = arg4.field1325;
-		var5.field428 = arg4.field1306;
-		var5.field435 = arg4.field1282;
-		int var6 = arg4.field1286;
-		int var7 = arg4.field1298;
+		var5.field423 = arg4.bgsound_range * 128;
+		var5.field425 = arg4.bgsound_maxdelay;
+		var5.field428 = arg4.bgsound_random;
+		var5.field435 = arg4.bgsound_mindelay;
+		int var6 = arg4.width;
+		int var7 = arg4.length;
 		var5.field416 = arg1;
 		var5.field417 = arg3 * 128;
 		if (arg2 == 1 || arg2 == 3) {
-			var6 = arg4.field1298;
-			var7 = arg4.field1286;
+			var6 = arg4.length;
+			var7 = arg4.width;
 		}
 		var5.field426 = arg0 * 128;
 		var5.field430 = (arg0 + var7) * 128;
 		var5.field436 = (arg3 + var6) * 128;
-		var5.field420 = arg4.field1296;
+		var5.field420 = arg4.bgsound_sound;
 		if (arg4.multiloc != null) {
 			var5.field434 = arg4;
 			var5.method247();
@@ -173,7 +173,7 @@ public final class BgSound extends Linkable {
 	@ObfuscatedName("be.c(I)V")
 	public void method247() {
 		int var1 = this.field420;
-		LocType var2 = this.field434.method516();
+		LocType var2 = this.field434.getMultiLoc();
 		if (var2 == null) {
 			this.field423 = 0;
 			this.field435 = 0;
@@ -181,11 +181,11 @@ public final class BgSound extends Linkable {
 			this.field428 = null;
 			this.field420 = -1;
 		} else {
-			this.field423 = var2.field1285 * 128;
-			this.field435 = var2.field1282;
-			this.field425 = var2.field1325;
-			this.field420 = var2.field1296;
-			this.field428 = var2.field1306;
+			this.field423 = var2.bgsound_range * 128;
+			this.field435 = var2.bgsound_mindelay;
+			this.field425 = var2.bgsound_maxdelay;
+			this.field420 = var2.bgsound_sound;
+			this.field428 = var2.bgsound_random;
 		}
 		if (this.field420 != var1 && this.field424 != null) {
 			Client.soundMixer.method135(this.field424);

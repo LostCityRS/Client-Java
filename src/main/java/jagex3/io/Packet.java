@@ -66,7 +66,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.c(B)I")
-	public final int method139() {
+	public final int g2b() {
 		this.pos += 2;
 		int var1 = ((this.data[this.pos - 2] & 0xFF) << 8) + (this.data[this.pos - 1] & 0xFF);
 		if (var1 > 32767) {
@@ -76,7 +76,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.c(I)La;")
-	public final JagString method140() {
+	public final JagString gjstr() {
 		int var1 = this.pos;
 		while (this.data[this.pos++] != 0) {
 		}

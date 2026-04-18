@@ -14,13 +14,13 @@ public final class AnimBase extends Linkable {
 	public final int field3110;
 
 	@ObfuscatedName("va.jb")
-	public final int field3114;
+	public final int id;
 
 	@ObfuscatedName("va.mb")
 	public final int[] field3117;
 
 	public AnimBase(int arg0, byte[] arg1) {
-		this.field3114 = arg0;
+		this.id = arg0;
 		Packet var3 = new Packet(arg1);
 		this.field3110 = var3.g1();
 		this.field3107 = new int[this.field3110][];

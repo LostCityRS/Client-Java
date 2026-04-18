@@ -57,7 +57,7 @@ public final class ClientScript extends Linkable2 {
 		while (var6.pos < var6.data.length - 12) {
 			int var10 = var6.g2();
 			if (var10 == 3) {
-				var7.field517[var9] = var6.method140();
+				var7.field517[var9] = var6.gjstr();
 			} else if (var10 >= 100 || var10 == 21 || var10 == 38 || var10 == 39) {
 				var7.field509[var9] = var6.g1();
 			} else {
@@ -65,7 +65,7 @@ public final class ClientScript extends Linkable2 {
 			}
 			var7.field519[var9++] = var10;
 		}
-		field830.method262(var2, var7);
+		field830.put(var2, var7);
 		return var7;
 	}
 }

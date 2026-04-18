@@ -33,10 +33,10 @@ public final class Model extends ModelSource {
 	public int[] field2227;
 
 	@ObfuscatedName("pa.jc")
-	public int[] field2228;
+	public int[] pointY;
 
 	@ObfuscatedName("pa.kc")
-	public int[] field2229;
+	public int[] pointZ;
 
 	@ObfuscatedName("pa.lc")
 	public int field2230;
@@ -156,25 +156,25 @@ public final class Model extends ModelSource {
 	public static int[] field2267 = new int[12];
 
 	@ObfuscatedName("pa.Qb")
-	public int field2209 = 0;
+	public int numFaces = 0;
 
 	@ObfuscatedName("pa.Mb")
 	public boolean field2205 = false;
 
 	@ObfuscatedName("pa.Pb")
-	public int field2208 = 0;
+	public int numPoints = 0;
 
 	@ObfuscatedName("pa.Kb")
-	public int[] field2203;
+	public int[] pointX;
 
 	@ObfuscatedName("pa.Nb")
 	public int[] field2206;
 
 	@ObfuscatedName("pa.Vb")
-	public int[] field2214;
+	public int[] vertexLabel;
 
 	@ObfuscatedName("pa.Ob")
-	public int[] field2207;
+	public int[] faceLabel;
 
 	@ObfuscatedName("pa.gc")
 	public int[] field2225;
@@ -201,10 +201,10 @@ public final class Model extends ModelSource {
 	public int field2218;
 
 	@ObfuscatedName("pa.Jb")
-	public int[][] field2202;
+	public int[][] labelVertices;
 
 	@ObfuscatedName("pa.Yb")
-	public int[][] field2217;
+	public int[][] labelFaces;
 
 	static {
 		int var0 = 0;
@@ -270,10 +270,10 @@ public final class Model extends ModelSource {
 		super.field3135 = 0;
 		this.field2216 = 0;
 		this.field2212 = 0;
-		for (int var1 = 0; var1 < this.field2208; var1++) {
-			int var2 = this.field2229[var1];
-			int var3 = this.field2228[var1];
-			int var4 = this.field2203[var1];
+		for (int var1 = 0; var1 < this.numPoints; var1++) {
+			int var2 = this.pointZ[var1];
+			int var3 = this.pointY[var1];
+			int var4 = this.pointX[var1];
 			if (-var3 > super.field3135) {
 				super.field3135 = -var3;
 			}
@@ -372,10 +372,10 @@ public final class Model extends ModelSource {
 			var36 = field2256[arg0];
 			var37 = field2258[arg0];
 		}
-		for (int var38 = 0; var38 < this.field2208; var38++) {
-			int var39 = this.field2229[var38];
-			int var40 = this.field2228[var38];
-			int var41 = this.field2203[var38];
+		for (int var38 = 0; var38 < this.numPoints; var38++) {
+			int var39 = this.pointZ[var38];
+			int var40 = this.pointY[var38];
+			int var41 = this.pointX[var38];
 			if (arg0 != 0) {
 				int var42 = var36 * var41 + var37 * var39 >> 16;
 				var41 = var37 * var41 - var36 * var39 >> 16;
@@ -424,10 +424,10 @@ public final class Model extends ModelSource {
 		int var16 = field2256[arg2];
 		int var17 = field2258[arg2];
 		int var18 = arg4 * var16 + arg5 * var17 >> 16;
-		for (int var19 = 0; var19 < this.field2208; var19++) {
-			int var20 = this.field2229[var19];
-			int var21 = this.field2228[var19];
-			int var22 = this.field2203[var19];
+		for (int var19 = 0; var19 < this.numPoints; var19++) {
+			int var20 = this.pointZ[var19];
+			int var21 = this.pointY[var19];
+			int var22 = this.pointX[var19];
 			if (arg1 != 0) {
 				int var23 = var14 * var21 + var15 * var20 >> 16;
 				var21 = var15 * var21 - var14 * var20 >> 16;
@@ -459,30 +459,30 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.a(IIIIIZ)V")
-	public void method770(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5) {
+	public void light(int arg0, int arg1, int arg2, int arg3, int arg4, boolean arg5) {
 		int var7 = (int) Math.sqrt((double) (arg4 * arg4 + arg2 * arg2 + arg3 * arg3));
 		int var8 = arg1 * var7 >> 8;
 		if (this.field2225 == null) {
-			this.field2225 = new int[this.field2209];
-			this.field2222 = new int[this.field2209];
-			this.field2227 = new int[this.field2209];
+			this.field2225 = new int[this.numFaces];
+			this.field2222 = new int[this.numFaces];
+			this.field2227 = new int[this.numFaces];
 		}
 		if (this.field2215 == null) {
-			this.field2215 = new PointNormal[this.field2208];
-			for (int var9 = 0; var9 < this.field2208; var9++) {
+			this.field2215 = new PointNormal[this.numPoints];
+			for (int var9 = 0; var9 < this.numPoints; var9++) {
 				this.field2215[var9] = new PointNormal();
 			}
 		}
-		for (int var10 = 0; var10 < this.field2209; var10++) {
+		for (int var10 = 0; var10 < this.numFaces; var10++) {
 			int var11 = this.field2223[var10];
 			int var12 = this.field2237[var10];
 			int var13 = this.field2206[var10];
-			int var14 = this.field2229[var12] - this.field2229[var11];
-			int var15 = this.field2228[var12] - this.field2228[var11];
-			int var16 = this.field2203[var12] - this.field2203[var11];
-			int var17 = this.field2229[var13] - this.field2229[var11];
-			int var18 = this.field2228[var13] - this.field2228[var11];
-			int var19 = this.field2203[var13] - this.field2203[var11];
+			int var14 = this.pointZ[var12] - this.pointZ[var11];
+			int var15 = this.pointY[var12] - this.pointY[var11];
+			int var16 = this.pointX[var12] - this.pointX[var11];
+			int var17 = this.pointZ[var13] - this.pointZ[var11];
+			int var18 = this.pointY[var13] - this.pointY[var11];
+			int var19 = this.pointX[var13] - this.pointX[var11];
 			int var20 = var15 * var19 - var16 * var18;
 			int var21 = var16 * var17 - var14 * var19;
 			int var22;
@@ -522,8 +522,8 @@ public final class Model extends ModelSource {
 			this.method776(arg0, var8, arg2, arg3, arg4);
 			return;
 		}
-		this.field2213 = new PointNormal[this.field2208];
-		for (int var31 = 0; var31 < this.field2208; var31++) {
+		this.field2213 = new PointNormal[this.numPoints];
+		for (int var31 = 0; var31 < this.numPoints; var31++) {
 			PointNormal var32 = this.field2215[var31];
 			PointNormal var33 = this.field2213[var31] = new PointNormal();
 			var33.field2312 = var32.field2312;
@@ -535,8 +535,8 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.b(II)V")
-	public void method771(int arg0, int arg1) {
-		for (int var3 = 0; var3 < this.field2209; var3++) {
+	public void recolour(int arg0, int arg1) {
+		for (int var3 = 0; var3 < this.numFaces; var3++) {
 			if (this.field2232[var3] == arg0) {
 				this.field2232[var3] = arg1;
 			}
@@ -549,10 +549,10 @@ public final class Model extends ModelSource {
 		this.field2210 = 0;
 		int var2 = field2256[arg0];
 		int var3 = field2258[arg0];
-		for (int var4 = 0; var4 < this.field2208; var4++) {
-			int var5 = this.field2228[var4] * var3 - this.field2203[var4] * var2 >> 16;
-			this.field2203[var4] = this.field2228[var4] * var2 + this.field2203[var4] * var3 >> 16;
-			this.field2228[var4] = var5;
+		for (int var4 = 0; var4 < this.numPoints; var4++) {
+			int var5 = this.pointY[var4] * var3 - this.pointX[var4] * var2 >> 16;
+			this.pointX[var4] = this.pointY[var4] * var2 + this.pointX[var4] * var3 >> 16;
+			this.pointY[var4] = var5;
 		}
 	}
 
@@ -563,9 +563,9 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.b(Z)Lpa;")
-	public Model method774(boolean arg0) {
-		if (!arg0 && field2255.length < this.field2209) {
-			field2255 = new int[this.field2209 + 100];
+	public Model copyForAnim2(boolean arg0) {
+		if (!arg0 && field2255.length < this.numFaces) {
+			field2255 = new int[this.numFaces + 100];
 		}
 		return this.method788(arg0, field2236, field2255);
 	}
@@ -585,7 +585,7 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.a(IIIII)V")
 	public void method776(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		for (int var6 = 0; var6 < this.field2209; var6++) {
+		for (int var6 = 0; var6 < this.numFaces; var6++) {
 			int var7 = this.field2223[var6];
 			int var8 = this.field2237[var6];
 			int var9 = this.field2206[var6];
@@ -616,10 +616,10 @@ public final class Model extends ModelSource {
 		}
 		this.field2215 = null;
 		this.field2213 = null;
-		this.field2214 = null;
-		this.field2207 = null;
+		this.vertexLabel = null;
+		this.faceLabel = null;
 		if (this.field2219 != null) {
-			for (int var25 = 0; var25 < this.field2209; var25++) {
+			for (int var25 = 0; var25 < this.numFaces; var25++) {
 				if ((this.field2219[var25] & 0x2) == 2) {
 					return;
 				}
@@ -629,18 +629,18 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.a(Lt;ILt;I[I)V")
-	public void method777(AnimFrameSet arg0, int arg1, AnimFrameSet arg2, int arg3, int[] arg4) {
+	public void maskAnimate(AnimFrameSet arg0, int arg1, AnimFrameSet arg2, int arg3, int[] arg4) {
 		if (arg1 == -1) {
 			return;
 		}
 		if (arg4 == null || arg3 == -1) {
-			this.method793(arg0, arg1);
+			this.animate(arg0, arg1);
 			return;
 		}
 		this.field2215 = null;
 		this.field2210 = 0;
-		AnimFrame var6 = arg0.field2825[arg1];
-		AnimFrame var7 = arg2.field2825[arg3];
+		AnimFrame var6 = arg0.list[arg1];
+		AnimFrame var7 = arg2.list[arg3];
 		AnimBase var8 = var6.field2121;
 		Statics.field2259 = 0;
 		Statics.field2254 = 0;
@@ -730,12 +730,12 @@ public final class Model extends ModelSource {
 		int var32 = var9 * 6 + var30;
 		int var34 = var15 + var32;
 		int var36 = var16 + var34;
-		this.field2208 = var7;
-		this.field2209 = var8;
+		this.numPoints = var7;
+		this.numFaces = var8;
 		this.field2221 = var9;
-		this.field2229 = new int[var7];
-		this.field2228 = new int[var7];
-		this.field2203 = new int[var7];
+		this.pointZ = new int[var7];
+		this.pointY = new int[var7];
+		this.pointX = new int[var7];
 		this.field2223 = new int[var8];
 		this.field2237 = new int[var8];
 		this.field2206 = new int[var8];
@@ -743,7 +743,7 @@ public final class Model extends ModelSource {
 		this.field2231 = new int[var9];
 		this.field2235 = new int[var9];
 		if (var25 >= 0) {
-			this.field2214 = new int[var7];
+			this.vertexLabel = new int[var7];
 		}
 		if (var24 >= 0) {
 			this.field2219 = new int[var8];
@@ -757,7 +757,7 @@ public final class Model extends ModelSource {
 			this.field2224 = new int[var8];
 		}
 		if (var23 >= 0) {
-			this.field2207 = new int[var8];
+			this.faceLabel = new int[var8];
 		}
 		this.field2232 = new int[var8];
 		var2.pos = 0;
@@ -782,14 +782,14 @@ public final class Model extends ModelSource {
 			if ((var42 & 0x4) != 0) {
 				var45 = var5.method158();
 			}
-			this.field2229[var41] = var38 + var43;
-			this.field2228[var41] = var39 + var44;
-			this.field2203[var41] = var40 + var45;
-			var38 = this.field2229[var41];
-			var39 = this.field2228[var41];
-			var40 = this.field2203[var41];
-			if (this.field2214 != null) {
-				this.field2214[var41] = var6.g1();
+			this.pointZ[var41] = var38 + var43;
+			this.pointY[var41] = var39 + var44;
+			this.pointX[var41] = var40 + var45;
+			var38 = this.pointZ[var41];
+			var39 = this.pointY[var41];
+			var40 = this.pointX[var41];
+			if (this.vertexLabel != null) {
+				this.vertexLabel[var41] = var6.g1();
 			}
 		}
 		var2.pos = var28;
@@ -808,8 +808,8 @@ public final class Model extends ModelSource {
 			if (this.field2224 != null) {
 				this.field2224[var46] = var5.g1();
 			}
-			if (this.field2207 != null) {
-				this.field2207[var46] = var6.g1();
+			if (this.faceLabel != null) {
+				this.faceLabel[var46] = var6.g1();
 			}
 		}
 		var2.pos = var21;
@@ -872,15 +872,15 @@ public final class Model extends ModelSource {
 		boolean var4 = false;
 		boolean var5 = false;
 		boolean var6 = false;
-		this.field2208 = 0;
-		this.field2209 = 0;
+		this.numPoints = 0;
+		this.numFaces = 0;
 		this.field2221 = 0;
 		this.field2238 = -1;
 		for (int var7 = 0; var7 < arg1; var7++) {
 			Model var8 = arg0[var7];
 			if (var8 != null) {
-				this.field2208 += var8.field2208;
-				this.field2209 += var8.field2209;
+				this.numPoints += var8.numPoints;
+				this.numFaces += var8.numFaces;
 				this.field2221 += var8.field2221;
 				var3 |= var8.field2219 != null;
 				if (var8.field2226 == null) {
@@ -894,73 +894,73 @@ public final class Model extends ModelSource {
 					var4 = true;
 				}
 				var5 |= var8.field2224 != null;
-				var6 |= var8.field2207 != null;
+				var6 |= var8.faceLabel != null;
 			}
 		}
-		this.field2229 = new int[this.field2208];
-		this.field2228 = new int[this.field2208];
-		this.field2203 = new int[this.field2208];
-		this.field2214 = new int[this.field2208];
-		this.field2223 = new int[this.field2209];
-		this.field2237 = new int[this.field2209];
-		this.field2206 = new int[this.field2209];
+		this.pointZ = new int[this.numPoints];
+		this.pointY = new int[this.numPoints];
+		this.pointX = new int[this.numPoints];
+		this.vertexLabel = new int[this.numPoints];
+		this.field2223 = new int[this.numFaces];
+		this.field2237 = new int[this.numFaces];
+		this.field2206 = new int[this.numFaces];
 		this.field2220 = new int[this.field2221];
 		this.field2231 = new int[this.field2221];
 		this.field2235 = new int[this.field2221];
 		if (var3) {
-			this.field2219 = new int[this.field2209];
+			this.field2219 = new int[this.numFaces];
 		}
 		if (var4) {
-			this.field2226 = new int[this.field2209];
+			this.field2226 = new int[this.numFaces];
 		}
 		if (var5) {
-			this.field2224 = new int[this.field2209];
+			this.field2224 = new int[this.numFaces];
 		}
 		if (var6) {
-			this.field2207 = new int[this.field2209];
+			this.faceLabel = new int[this.numFaces];
 		}
-		this.field2232 = new int[this.field2209];
-		this.field2208 = 0;
-		this.field2209 = 0;
+		this.field2232 = new int[this.numFaces];
+		this.numPoints = 0;
+		this.numFaces = 0;
 		this.field2221 = 0;
 		int var9 = 0;
 		for (int var10 = 0; var10 < arg1; var10++) {
 			Model var11 = arg0[var10];
 			if (var11 != null) {
-				for (int var12 = 0; var12 < var11.field2209; var12++) {
+				for (int var12 = 0; var12 < var11.numFaces; var12++) {
 					if (var3) {
 						if (var11.field2219 == null) {
-							this.field2219[this.field2209] = 0;
+							this.field2219[this.numFaces] = 0;
 						} else {
 							int var13 = var11.field2219[var12];
 							if ((var13 & 0x2) == 2) {
 								var13 += var9 << 2;
 							}
-							this.field2219[this.field2209] = var13;
+							this.field2219[this.numFaces] = var13;
 						}
 					}
 					if (var4) {
 						if (var11.field2226 == null) {
-							this.field2226[this.field2209] = var11.field2238;
+							this.field2226[this.numFaces] = var11.field2238;
 						} else {
-							this.field2226[this.field2209] = var11.field2226[var12];
+							this.field2226[this.numFaces] = var11.field2226[var12];
 						}
 					}
 					if (var5) {
 						if (var11.field2224 == null) {
-							this.field2224[this.field2209] = 0;
+							this.field2224[this.numFaces] = 0;
 						} else {
-							this.field2224[this.field2209] = var11.field2224[var12];
+							this.field2224[this.numFaces] = var11.field2224[var12];
 						}
 					}
-					if (var6 && var11.field2207 != null) {
-						this.field2207[this.field2209] = var11.field2207[var12];
+					if (var6 && var11.faceLabel != null) {
+						this.faceLabel[this.numFaces] = var11.faceLabel[var12];
 					}
-					this.field2232[this.field2209] = var11.field2232[var12];
-					this.field2223[this.field2209] = this.method797(var11, var11.field2223[var12]);
-					this.field2237[this.field2209] = this.method797(var11, var11.field2237[var12]);
-					this.field2206[this.field2209] = this.method797(var11, var11.field2206[var12]);
-					this.field2209++;
+					this.field2232[this.numFaces] = var11.field2232[var12];
+					this.field2223[this.numFaces] = this.method797(var11, var11.field2223[var12]);
+					this.field2237[this.numFaces] = this.method797(var11, var11.field2237[var12]);
+					this.field2206[this.numFaces] = this.method797(var11, var11.field2206[var12]);
+					this.numFaces++;
 				}
 				for (int var14 = 0; var14 < var11.field2221; var14++) {
 					this.field2220[this.field2221] = this.method797(var11, var11.field2220[var14]);
@@ -978,15 +978,15 @@ public final class Model extends ModelSource {
 		boolean var5 = false;
 		boolean var6 = false;
 		boolean var7 = false;
-		this.field2208 = 0;
-		this.field2209 = 0;
+		this.numPoints = 0;
+		this.numFaces = 0;
 		this.field2221 = 0;
 		this.field2238 = -1;
 		for (int var8 = 0; var8 < 2; var8++) {
 			Model var9 = arg0[var8];
 			if (var9 != null) {
-				this.field2208 += var9.field2208;
-				this.field2209 += var9.field2209;
+				this.numPoints += var9.numPoints;
+				this.numFaces += var9.numFaces;
 				this.field2221 += var9.field2221;
 				var4 |= var9.field2219 != null;
 				if (var9.field2226 == null) {
@@ -1003,80 +1003,80 @@ public final class Model extends ModelSource {
 				var7 |= var9.field2232 != null;
 			}
 		}
-		this.field2229 = new int[this.field2208];
-		this.field2228 = new int[this.field2208];
-		this.field2203 = new int[this.field2208];
-		this.field2223 = new int[this.field2209];
-		this.field2237 = new int[this.field2209];
-		this.field2206 = new int[this.field2209];
-		this.field2225 = new int[this.field2209];
-		this.field2222 = new int[this.field2209];
-		this.field2227 = new int[this.field2209];
+		this.pointZ = new int[this.numPoints];
+		this.pointY = new int[this.numPoints];
+		this.pointX = new int[this.numPoints];
+		this.field2223 = new int[this.numFaces];
+		this.field2237 = new int[this.numFaces];
+		this.field2206 = new int[this.numFaces];
+		this.field2225 = new int[this.numFaces];
+		this.field2222 = new int[this.numFaces];
+		this.field2227 = new int[this.numFaces];
 		this.field2220 = new int[this.field2221];
 		this.field2231 = new int[this.field2221];
 		this.field2235 = new int[this.field2221];
 		if (var4) {
-			this.field2219 = new int[this.field2209];
+			this.field2219 = new int[this.numFaces];
 		}
 		if (var5) {
-			this.field2226 = new int[this.field2209];
+			this.field2226 = new int[this.numFaces];
 		}
 		if (var6) {
-			this.field2224 = new int[this.field2209];
+			this.field2224 = new int[this.numFaces];
 		}
 		if (var7) {
-			this.field2232 = new int[this.field2209];
+			this.field2232 = new int[this.numFaces];
 		}
-		this.field2208 = 0;
-		this.field2209 = 0;
+		this.numPoints = 0;
+		this.numFaces = 0;
 		this.field2221 = 0;
 		int var10 = 0;
 		for (int var11 = 0; var11 < 2; var11++) {
 			Model var12 = arg0[var11];
 			if (var12 != null) {
-				int var13 = this.field2208;
-				for (int var14 = 0; var14 < var12.field2208; var14++) {
-					this.field2229[this.field2208] = var12.field2229[var14];
-					this.field2228[this.field2208] = var12.field2228[var14];
-					this.field2203[this.field2208] = var12.field2203[var14];
-					this.field2208++;
+				int var13 = this.numPoints;
+				for (int var14 = 0; var14 < var12.numPoints; var14++) {
+					this.pointZ[this.numPoints] = var12.pointZ[var14];
+					this.pointY[this.numPoints] = var12.pointY[var14];
+					this.pointX[this.numPoints] = var12.pointX[var14];
+					this.numPoints++;
 				}
-				for (int var15 = 0; var15 < var12.field2209; var15++) {
-					this.field2223[this.field2209] = var12.field2223[var15] + var13;
-					this.field2237[this.field2209] = var12.field2237[var15] + var13;
-					this.field2206[this.field2209] = var12.field2206[var15] + var13;
-					this.field2225[this.field2209] = var12.field2225[var15];
-					this.field2222[this.field2209] = var12.field2222[var15];
-					this.field2227[this.field2209] = var12.field2227[var15];
+				for (int var15 = 0; var15 < var12.numFaces; var15++) {
+					this.field2223[this.numFaces] = var12.field2223[var15] + var13;
+					this.field2237[this.numFaces] = var12.field2237[var15] + var13;
+					this.field2206[this.numFaces] = var12.field2206[var15] + var13;
+					this.field2225[this.numFaces] = var12.field2225[var15];
+					this.field2222[this.numFaces] = var12.field2222[var15];
+					this.field2227[this.numFaces] = var12.field2227[var15];
 					if (var4) {
 						if (var12.field2219 == null) {
-							this.field2219[this.field2209] = 0;
+							this.field2219[this.numFaces] = 0;
 						} else {
 							int var16 = var12.field2219[var15];
 							if ((var16 & 0x2) == 2) {
 								var16 += var10 << 2;
 							}
-							this.field2219[this.field2209] = var16;
+							this.field2219[this.numFaces] = var16;
 						}
 					}
 					if (var5) {
 						if (var12.field2226 == null) {
-							this.field2226[this.field2209] = var12.field2238;
+							this.field2226[this.numFaces] = var12.field2238;
 						} else {
-							this.field2226[this.field2209] = var12.field2226[var15];
+							this.field2226[this.numFaces] = var12.field2226[var15];
 						}
 					}
 					if (var6) {
 						if (var12.field2224 == null) {
-							this.field2224[this.field2209] = 0;
+							this.field2224[this.numFaces] = 0;
 						} else {
-							this.field2224[this.field2209] = var12.field2224[var15];
+							this.field2224[this.numFaces] = var12.field2224[var15];
 						}
 					}
 					if (var7 && var12.field2232 != null) {
-						this.field2232[this.field2209] = var12.field2232[var15];
+						this.field2232[this.numFaces] = var12.field2232[var15];
 					}
-					this.field2209++;
+					this.numFaces++;
 				}
 				for (int var17 = 0; var17 < var12.field2221; var17++) {
 					this.field2220[this.field2221] = var12.field2220[var17] + var13;
@@ -1090,34 +1090,34 @@ public final class Model extends ModelSource {
 	}
 
 	public Model(Model arg0, boolean arg1, boolean arg2, boolean arg3) {
-		this.field2208 = arg0.field2208;
-		this.field2209 = arg0.field2209;
+		this.numPoints = arg0.numPoints;
+		this.numFaces = arg0.numFaces;
 		this.field2221 = arg0.field2221;
 		if (arg1) {
-			this.field2229 = arg0.field2229;
-			this.field2228 = arg0.field2228;
-			this.field2203 = arg0.field2203;
+			this.pointZ = arg0.pointZ;
+			this.pointY = arg0.pointY;
+			this.pointX = arg0.pointX;
 		} else {
-			this.field2229 = new int[this.field2208];
-			this.field2228 = new int[this.field2208];
-			this.field2203 = new int[this.field2208];
-			for (int var5 = 0; var5 < this.field2208; var5++) {
-				this.field2229[var5] = arg0.field2229[var5];
-				this.field2228[var5] = arg0.field2228[var5];
-				this.field2203[var5] = arg0.field2203[var5];
+			this.pointZ = new int[this.numPoints];
+			this.pointY = new int[this.numPoints];
+			this.pointX = new int[this.numPoints];
+			for (int var5 = 0; var5 < this.numPoints; var5++) {
+				this.pointZ[var5] = arg0.pointZ[var5];
+				this.pointY[var5] = arg0.pointY[var5];
+				this.pointX[var5] = arg0.pointX[var5];
 			}
 		}
 		if (arg2) {
 			this.field2232 = arg0.field2232;
 		} else {
-			this.field2232 = new int[this.field2209];
-			for (int var6 = 0; var6 < this.field2209; var6++) {
+			this.field2232 = new int[this.numFaces];
+			for (int var6 = 0; var6 < this.numFaces; var6++) {
 				this.field2232[var6] = arg0.field2232[var6];
 			}
 		}
 		this.field2224 = arg0.field2224;
-		this.field2214 = arg0.field2214;
-		this.field2207 = arg0.field2207;
+		this.vertexLabel = arg0.vertexLabel;
+		this.faceLabel = arg0.faceLabel;
 		this.field2219 = arg0.field2219;
 		this.field2223 = arg0.field2223;
 		this.field2237 = arg0.field2237;
@@ -1131,38 +1131,38 @@ public final class Model extends ModelSource {
 	}
 
 	public Model(Model arg0, boolean arg1, boolean arg2) {
-		this.field2208 = arg0.field2208;
-		this.field2209 = arg0.field2209;
+		this.numPoints = arg0.numPoints;
+		this.numFaces = arg0.numFaces;
 		this.field2221 = arg0.field2221;
 		if (arg1) {
-			this.field2228 = new int[this.field2208];
-			for (int var4 = 0; var4 < this.field2208; var4++) {
-				this.field2228[var4] = arg0.field2228[var4];
+			this.pointY = new int[this.numPoints];
+			for (int var4 = 0; var4 < this.numPoints; var4++) {
+				this.pointY[var4] = arg0.pointY[var4];
 			}
 		} else {
-			this.field2228 = arg0.field2228;
+			this.pointY = arg0.pointY;
 		}
 		if (arg2) {
-			this.field2225 = new int[this.field2209];
-			this.field2222 = new int[this.field2209];
-			this.field2227 = new int[this.field2209];
-			for (int var5 = 0; var5 < this.field2209; var5++) {
+			this.field2225 = new int[this.numFaces];
+			this.field2222 = new int[this.numFaces];
+			this.field2227 = new int[this.numFaces];
+			for (int var5 = 0; var5 < this.numFaces; var5++) {
 				this.field2225[var5] = arg0.field2225[var5];
 				this.field2222[var5] = arg0.field2222[var5];
 				this.field2227[var5] = arg0.field2227[var5];
 			}
-			this.field2219 = new int[this.field2209];
+			this.field2219 = new int[this.numFaces];
 			if (arg0.field2219 == null) {
-				for (int var6 = 0; var6 < this.field2209; var6++) {
+				for (int var6 = 0; var6 < this.numFaces; var6++) {
 					this.field2219[var6] = 0;
 				}
 			} else {
-				for (int var7 = 0; var7 < this.field2209; var7++) {
+				for (int var7 = 0; var7 < this.numFaces; var7++) {
 					this.field2219[var7] = arg0.field2219[var7];
 				}
 			}
-			this.field2215 = new PointNormal[this.field2208];
-			for (int var8 = 0; var8 < this.field2208; var8++) {
+			this.field2215 = new PointNormal[this.numPoints];
+			for (int var8 = 0; var8 < this.numPoints; var8++) {
 				PointNormal var9 = this.field2215[var8] = new PointNormal();
 				PointNormal var10 = arg0.field2215[var8];
 				var9.field2312 = var10.field2312;
@@ -1177,8 +1177,8 @@ public final class Model extends ModelSource {
 			this.field2227 = arg0.field2227;
 			this.field2219 = arg0.field2219;
 		}
-		this.field2229 = arg0.field2229;
-		this.field2203 = arg0.field2203;
+		this.pointZ = arg0.pointZ;
+		this.pointX = arg0.pointX;
 		this.field2232 = arg0.field2232;
 		this.field2224 = arg0.field2224;
 		this.field2226 = arg0.field2226;
@@ -1194,53 +1194,52 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.d()V")
-	public void method778() {
+	public void prepareAnim() {
 		int var10002;
-		if (this.field2214 != null) {
+		if (this.vertexLabel != null) {
 			int[] var1 = new int[256];
 			int var2 = 0;
-			for (int var3 = 0; var3 < this.field2208; var3++) {
-				int var4 = this.field2214[var3];
+			for (int var3 = 0; var3 < this.numPoints; var3++) {
+				int var4 = this.vertexLabel[var3];
 				var10002 = var1[var4]++;
 				if (var4 > var2) {
 					var2 = var4;
 				}
 			}
-			this.field2202 = new int[var2 + 1][];
+			this.labelVertices = new int[var2 + 1][];
 			for (int var5 = 0; var5 <= var2; var5++) {
-				this.field2202[var5] = new int[var1[var5]];
+				this.labelVertices[var5] = new int[var1[var5]];
 				var1[var5] = 0;
 			}
 			int var6 = 0;
-			while (var6 < this.field2208) {
-				int var7 = this.field2214[var6];
-				this.field2202[var7][var1[var7]++] = var6++;
+			while (var6 < this.numPoints) {
+				int var7 = this.vertexLabel[var6];
+				this.labelVertices[var7][var1[var7]++] = var6++;
 			}
-			this.field2214 = null;
+			this.vertexLabel = null;
 		}
-		if (this.field2207 == null) {
-			return;
-		}
-		int[] var8 = new int[256];
-		int var9 = 0;
-		for (int var10 = 0; var10 < this.field2209; var10++) {
-			int var11 = this.field2207[var10];
-			var10002 = var8[var11]++;
-			if (var11 > var9) {
-				var9 = var11;
+		if (this.faceLabel != null) {
+			int[] var8 = new int[256];
+			int var9 = 0;
+			for (int var10 = 0; var10 < this.numFaces; var10++) {
+				int var11 = this.faceLabel[var10];
+				var10002 = var8[var11]++;
+				if (var11 > var9) {
+					var9 = var11;
+				}
 			}
+			this.labelFaces = new int[var9 + 1][];
+			for (int var12 = 0; var12 <= var9; var12++) {
+				this.labelFaces[var12] = new int[var8[var12]];
+				var8[var12] = 0;
+			}
+			int var13 = 0;
+			while (var13 < this.numFaces) {
+				int var14 = this.faceLabel[var13];
+				this.labelFaces[var14][var8[var14]++] = var13++;
+			}
+			this.faceLabel = null;
 		}
-		this.field2217 = new int[var9 + 1][];
-		for (int var12 = 0; var12 <= var9; var12++) {
-			this.field2217[var12] = new int[var8[var12]];
-			var8[var12] = 0;
-		}
-		int var13 = 0;
-		while (var13 < this.field2209) {
-			int var14 = this.field2207[var13];
-			this.field2217[var14][var8[var14]++] = var13++;
-		}
-		this.field2207 = null;
 	}
 
 	@ObfuscatedName("pa.a(I[IIII)V")
@@ -1253,13 +1252,13 @@ public final class Model extends ModelSource {
 			Statics.field2247 = 0;
 			for (int var8 = 0; var8 < var6; var8++) {
 				int var9 = arg1[var8];
-				if (var9 < this.field2202.length) {
-					int[] var10 = this.field2202[var9];
+				if (var9 < this.labelVertices.length) {
+					int[] var10 = this.labelVertices[var9];
 					for (int var11 = 0; var11 < var10.length; var11++) {
 						int var12 = var10[var11];
-						Statics.field2259 += this.field2229[var12];
-						Statics.field2254 += this.field2228[var12];
-						Statics.field2247 += this.field2203[var12];
+						Statics.field2259 += this.pointZ[var12];
+						Statics.field2254 += this.pointY[var12];
+						Statics.field2247 += this.pointX[var12];
 						var7++;
 					}
 				}
@@ -1276,80 +1275,80 @@ public final class Model extends ModelSource {
 		} else if (arg0 == 1) {
 			for (int var13 = 0; var13 < var6; var13++) {
 				int var14 = arg1[var13];
-				if (var14 < this.field2202.length) {
-					int[] var15 = this.field2202[var14];
+				if (var14 < this.labelVertices.length) {
+					int[] var15 = this.labelVertices[var14];
 					for (int var16 = 0; var16 < var15.length; var16++) {
 						int var17 = var15[var16];
-						this.field2229[var17] += arg2;
-						this.field2228[var17] += arg3;
-						this.field2203[var17] += arg4;
+						this.pointZ[var17] += arg2;
+						this.pointY[var17] += arg3;
+						this.pointX[var17] += arg4;
 					}
 				}
 			}
 		} else if (arg0 == 2) {
 			for (int var18 = 0; var18 < var6; var18++) {
 				int var19 = arg1[var18];
-				if (var19 < this.field2202.length) {
-					int[] var20 = this.field2202[var19];
+				if (var19 < this.labelVertices.length) {
+					int[] var20 = this.labelVertices[var19];
 					for (int var21 = 0; var21 < var20.length; var21++) {
 						int var22 = var20[var21];
-						this.field2229[var22] -= Statics.field2259;
-						this.field2228[var22] -= Statics.field2254;
-						this.field2203[var22] -= Statics.field2247;
+						this.pointZ[var22] -= Statics.field2259;
+						this.pointY[var22] -= Statics.field2254;
+						this.pointX[var22] -= Statics.field2247;
 						int var23 = (arg2 & 0xFF) * 8;
 						int var24 = (arg3 & 0xFF) * 8;
 						int var25 = (arg4 & 0xFF) * 8;
 						if (var25 != 0) {
 							int var26 = field2256[var25];
 							int var27 = field2258[var25];
-							int var28 = this.field2229[var22] * var27 + this.field2228[var22] * var26 >> 16;
-							this.field2228[var22] = this.field2228[var22] * var27 - this.field2229[var22] * var26 >> 16;
-							this.field2229[var22] = var28;
+							int var28 = this.pointZ[var22] * var27 + this.pointY[var22] * var26 >> 16;
+							this.pointY[var22] = this.pointY[var22] * var27 - this.pointZ[var22] * var26 >> 16;
+							this.pointZ[var22] = var28;
 						}
 						if (var23 != 0) {
 							int var29 = field2256[var23];
 							int var30 = field2258[var23];
-							int var31 = this.field2228[var22] * var30 - this.field2203[var22] * var29 >> 16;
-							this.field2203[var22] = this.field2228[var22] * var29 + this.field2203[var22] * var30 >> 16;
-							this.field2228[var22] = var31;
+							int var31 = this.pointY[var22] * var30 - this.pointX[var22] * var29 >> 16;
+							this.pointX[var22] = this.pointY[var22] * var29 + this.pointX[var22] * var30 >> 16;
+							this.pointY[var22] = var31;
 						}
 						if (var24 != 0) {
 							int var32 = field2256[var24];
 							int var33 = field2258[var24];
-							int var34 = this.field2229[var22] * var33 + this.field2203[var22] * var32 >> 16;
-							this.field2203[var22] = this.field2203[var22] * var33 - this.field2229[var22] * var32 >> 16;
-							this.field2229[var22] = var34;
+							int var34 = this.pointZ[var22] * var33 + this.pointX[var22] * var32 >> 16;
+							this.pointX[var22] = this.pointX[var22] * var33 - this.pointZ[var22] * var32 >> 16;
+							this.pointZ[var22] = var34;
 						}
-						this.field2229[var22] += Statics.field2259;
-						this.field2228[var22] += Statics.field2254;
-						this.field2203[var22] += Statics.field2247;
+						this.pointZ[var22] += Statics.field2259;
+						this.pointY[var22] += Statics.field2254;
+						this.pointX[var22] += Statics.field2247;
 					}
 				}
 			}
 		} else if (arg0 == 3) {
 			for (int var35 = 0; var35 < var6; var35++) {
 				int var36 = arg1[var35];
-				if (var36 < this.field2202.length) {
-					int[] var37 = this.field2202[var36];
+				if (var36 < this.labelVertices.length) {
+					int[] var37 = this.labelVertices[var36];
 					for (int var38 = 0; var38 < var37.length; var38++) {
 						int var39 = var37[var38];
-						this.field2229[var39] -= Statics.field2259;
-						this.field2228[var39] -= Statics.field2254;
-						this.field2203[var39] -= Statics.field2247;
-						this.field2229[var39] = this.field2229[var39] * arg2 / 128;
-						this.field2228[var39] = this.field2228[var39] * arg3 / 128;
-						this.field2203[var39] = this.field2203[var39] * arg4 / 128;
-						this.field2229[var39] += Statics.field2259;
-						this.field2228[var39] += Statics.field2254;
-						this.field2203[var39] += Statics.field2247;
+						this.pointZ[var39] -= Statics.field2259;
+						this.pointY[var39] -= Statics.field2254;
+						this.pointX[var39] -= Statics.field2247;
+						this.pointZ[var39] = this.pointZ[var39] * arg2 / 128;
+						this.pointY[var39] = this.pointY[var39] * arg3 / 128;
+						this.pointX[var39] = this.pointX[var39] * arg4 / 128;
+						this.pointZ[var39] += Statics.field2259;
+						this.pointY[var39] += Statics.field2254;
+						this.pointX[var39] += Statics.field2247;
 					}
 				}
 			}
-		} else if (arg0 == 5 && (this.field2217 != null && this.field2224 != null)) {
+		} else if (arg0 == 5 && (this.labelFaces != null && this.field2224 != null)) {
 			for (int var40 = 0; var40 < var6; var40++) {
 				int var41 = arg1[var40];
-				if (var41 < this.field2217.length) {
-					int[] var42 = this.field2217[var41];
+				if (var41 < this.labelFaces.length) {
+					int[] var42 = this.labelFaces[var41];
 					for (int var43 = 0; var43 < var42.length; var43++) {
 						int var44 = var42[var43];
 						this.field2224[var44] += arg2 * 8;
@@ -1381,10 +1380,10 @@ public final class Model extends ModelSource {
 		int var15 = field2256[arg2];
 		int var16 = field2258[arg2];
 		int var17 = arg4 * var15 + arg5 * var16 >> 16;
-		for (int var18 = 0; var18 < this.field2208; var18++) {
-			int var19 = this.field2229[var18];
-			int var20 = this.field2228[var18];
-			int var21 = this.field2203[var18];
+		for (int var18 = 0; var18 < this.numPoints; var18++) {
+			int var19 = this.pointZ[var18];
+			int var20 = this.pointY[var18];
+			int var21 = this.pointX[var18];
 			if (arg1 != 0) {
 				int var22 = var13 * var20 + var14 * var19 >> 16;
 				var20 = var14 * var20 - var13 * var19 >> 16;
@@ -1416,13 +1415,13 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.e()V")
-	public void method781() {
+	public void rotate90() {
 		this.field2215 = null;
 		this.field2210 = 0;
-		for (int var1 = 0; var1 < this.field2208; var1++) {
-			int var2 = this.field2229[var1];
-			this.field2229[var1] = this.field2203[var1];
-			this.field2203[var1] = -var2;
+		for (int var1 = 0; var1 < this.numPoints; var1++) {
+			int var2 = this.pointZ[var1];
+			this.pointZ[var1] = this.pointX[var1];
+			this.pointX[var1] = -var2;
 		}
 	}
 
@@ -1593,7 +1592,7 @@ public final class Model extends ModelSource {
 		for (int var4 = 0; var4 < this.field2204; var4++) {
 			field2241[var4] = 0;
 		}
-		for (int var5 = 0; var5 < this.field2209; var5++) {
+		for (int var5 = 0; var5 < this.numFaces; var5++) {
 			if (this.field2219 == null || this.field2219[var5] != -1) {
 				int var6 = this.field2223[var5];
 				int var7 = this.field2237[var5];
@@ -1791,21 +1790,21 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.c(Z)Lpa;")
-	public Model method785(boolean arg0) {
-		if (!arg0 && field2233.length < this.field2209) {
-			field2233 = new int[this.field2209 + 100];
+	public Model copyForAnim(boolean arg0) {
+		if (!arg0 && field2233.length < this.numFaces) {
+			field2233 = new int[this.numFaces + 100];
 		}
 		return this.method788(arg0, field2211, field2233);
 	}
 
 	@ObfuscatedName("pa.f()V")
-	public void method786() {
+	public void mirror() {
 		this.field2215 = null;
 		this.field2210 = 0;
-		for (int var1 = 0; var1 < this.field2208; var1++) {
-			this.field2203[var1] = -this.field2203[var1];
+		for (int var1 = 0; var1 < this.numPoints; var1++) {
+			this.pointX[var1] = -this.pointX[var1];
 		}
-		for (int var2 = 0; var2 < this.field2209; var2++) {
+		for (int var2 = 0; var2 < this.numFaces; var2++) {
 			int var3 = this.field2223[var2];
 			this.field2223[var2] = this.field2206[var2];
 			this.field2206[var2] = var3;
@@ -1813,40 +1812,40 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.g()V")
-	public void method787() {
+	public void rotate180() {
 		this.field2215 = null;
 		this.field2210 = 0;
-		for (int var1 = 0; var1 < this.field2208; var1++) {
-			this.field2229[var1] = -this.field2229[var1];
-			this.field2203[var1] = -this.field2203[var1];
+		for (int var1 = 0; var1 < this.numPoints; var1++) {
+			this.pointZ[var1] = -this.pointZ[var1];
+			this.pointX[var1] = -this.pointX[var1];
 		}
 	}
 
 	@ObfuscatedName("pa.a(ZLpa;[I)Lpa;")
 	public Model method788(boolean arg0, Model arg1, int[] arg2) {
-		arg1.field2208 = this.field2208;
-		arg1.field2209 = this.field2209;
+		arg1.numPoints = this.numPoints;
+		arg1.numFaces = this.numFaces;
 		arg1.field2221 = this.field2221;
-		if (arg1.field2229 == null || arg1.field2229.length < this.field2208) {
-			arg1.field2229 = new int[this.field2208 + 100];
-			arg1.field2228 = new int[this.field2208 + 100];
-			arg1.field2203 = new int[this.field2208 + 100];
+		if (arg1.pointZ == null || arg1.pointZ.length < this.numPoints) {
+			arg1.pointZ = new int[this.numPoints + 100];
+			arg1.pointY = new int[this.numPoints + 100];
+			arg1.pointX = new int[this.numPoints + 100];
 		}
-		for (int var4 = 0; var4 < this.field2208; var4++) {
-			arg1.field2229[var4] = this.field2229[var4];
-			arg1.field2228[var4] = this.field2228[var4];
-			arg1.field2203[var4] = this.field2203[var4];
+		for (int var4 = 0; var4 < this.numPoints; var4++) {
+			arg1.pointZ[var4] = this.pointZ[var4];
+			arg1.pointY[var4] = this.pointY[var4];
+			arg1.pointX[var4] = this.pointX[var4];
 		}
 		if (arg0) {
 			arg1.field2224 = this.field2224;
 		} else {
 			arg1.field2224 = arg2;
 			if (this.field2224 == null) {
-				for (int var5 = 0; var5 < this.field2209; var5++) {
+				for (int var5 = 0; var5 < this.numFaces; var5++) {
 					arg1.field2224[var5] = 0;
 				}
 			} else {
-				for (int var6 = 0; var6 < this.field2209; var6++) {
+				for (int var6 = 0; var6 < this.numFaces; var6++) {
 					arg1.field2224[var6] = this.field2224[var6];
 				}
 			}
@@ -1855,8 +1854,8 @@ public final class Model extends ModelSource {
 		arg1.field2232 = this.field2232;
 		arg1.field2226 = this.field2226;
 		arg1.field2238 = this.field2238;
-		arg1.field2217 = this.field2217;
-		arg1.field2202 = this.field2202;
+		arg1.labelFaces = this.labelFaces;
+		arg1.labelVertices = this.labelVertices;
 		arg1.field2223 = this.field2223;
 		arg1.field2237 = this.field2237;
 		arg1.field2206 = this.field2206;
@@ -1872,13 +1871,13 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.b(III)V")
-	public void method789(int arg0, int arg1, int arg2) {
+	public void resize(int arg0, int arg1, int arg2) {
 		this.field2215 = null;
 		this.field2210 = 0;
-		for (int var4 = 0; var4 < this.field2208; var4++) {
-			this.field2229[var4] = this.field2229[var4] * arg0 / 128;
-			this.field2228[var4] = this.field2228[var4] * arg1 / 128;
-			this.field2203[var4] = this.field2203[var4] * arg2 / 128;
+		for (int var4 = 0; var4 < this.numPoints; var4++) {
+			this.pointZ[var4] = this.pointZ[var4] * arg0 / 128;
+			this.pointY[var4] = this.pointY[var4] * arg1 / 128;
+			this.pointX[var4] = this.pointX[var4] * arg2 / 128;
 		}
 	}
 
@@ -1894,10 +1893,10 @@ public final class Model extends ModelSource {
 		this.field2204 = -999999;
 		this.field2230 = -99999;
 		this.field2218 = 99999;
-		for (int var1 = 0; var1 < this.field2208; var1++) {
-			int var2 = this.field2229[var1];
-			int var3 = this.field2228[var1];
-			int var4 = this.field2203[var1];
+		for (int var1 = 0; var1 < this.numPoints; var1++) {
+			int var2 = this.pointZ[var1];
+			int var3 = this.pointY[var1];
+			int var4 = this.pointX[var1];
 			if (var2 < this.field2212) {
 				this.field2212 = var2;
 			}
@@ -1960,24 +1959,24 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.i()V")
-	public void method792() {
+	public void rotate270() {
 		this.field2215 = null;
 		this.field2210 = 0;
-		for (int var1 = 0; var1 < this.field2208; var1++) {
-			int var2 = this.field2203[var1];
-			this.field2203[var1] = this.field2229[var1];
-			this.field2229[var1] = -var2;
+		for (int var1 = 0; var1 < this.numPoints; var1++) {
+			int var2 = this.pointX[var1];
+			this.pointX[var1] = this.pointZ[var1];
+			this.pointZ[var1] = -var2;
 		}
 	}
 
 	@ObfuscatedName("pa.a(Lt;I)V")
-	public void method793(AnimFrameSet arg0, int arg1) {
-		if (this.field2202 == null || arg1 == -1) {
+	public void animate(AnimFrameSet arg0, int arg1) {
+		if (this.labelVertices == null || arg1 == -1) {
 			return;
 		}
 		this.field2215 = null;
 		this.field2210 = 0;
-		AnimFrame var3 = arg0.field2825[arg1];
+		AnimFrame var3 = arg0.list[arg1];
 		AnimBase var4 = var3.field2121;
 		Statics.field2259 = 0;
 		Statics.field2254 = 0;
@@ -2002,10 +2001,10 @@ public final class Model extends ModelSource {
 		}
 		this.field2210 = 2;
 		this.field2212 = 0;
-		for (int var1 = 0; var1 < this.field2208; var1++) {
-			int var2 = this.field2229[var1];
-			int var3 = this.field2228[var1];
-			int var4 = this.field2203[var1];
+		for (int var1 = 0; var1 < this.numPoints; var1++) {
+			int var2 = this.pointZ[var1];
+			int var3 = this.pointY[var1];
+			int var4 = this.pointX[var1];
 			int var5 = var3 * var3 + var2 * var2 + var4 * var4;
 			if (var5 > this.field2212) {
 				this.field2212 = var5;
@@ -2017,41 +2016,41 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.d(III)V")
-	public void method796(int arg0, int arg1, int arg2) {
+	public void translate(int arg0, int arg1, int arg2) {
 		this.field2210 = 0;
-		for (int var4 = 0; var4 < this.field2208; var4++) {
-			this.field2229[var4] += arg0;
-			this.field2228[var4] += arg1;
-			this.field2203[var4] += arg2;
+		for (int var4 = 0; var4 < this.numPoints; var4++) {
+			this.pointZ[var4] += arg0;
+			this.pointY[var4] += arg1;
+			this.pointX[var4] += arg2;
 		}
 	}
 
 	@ObfuscatedName("pa.a(Lpa;I)I")
 	public int method797(Model arg0, int arg1) {
 		int var3 = -1;
-		int var4 = arg0.field2229[arg1];
-		int var5 = arg0.field2228[arg1];
-		int var6 = arg0.field2203[arg1];
-		for (int var7 = 0; var7 < this.field2208; var7++) {
-			if (this.field2229[var7] == var4 && this.field2228[var7] == var5 && this.field2203[var7] == var6) {
+		int var4 = arg0.pointZ[arg1];
+		int var5 = arg0.pointY[arg1];
+		int var6 = arg0.pointX[arg1];
+		for (int var7 = 0; var7 < this.numPoints; var7++) {
+			if (this.pointZ[var7] == var4 && this.pointY[var7] == var5 && this.pointX[var7] == var6) {
 				var3 = var7;
 				break;
 			}
 		}
 		if (var3 == -1) {
-			this.field2229[this.field2208] = var4;
-			this.field2228[this.field2208] = var5;
-			this.field2203[this.field2208] = var6;
-			if (arg0.field2214 != null) {
-				this.field2214[this.field2208] = arg0.field2214[arg1];
+			this.pointZ[this.numPoints] = var4;
+			this.pointY[this.numPoints] = var5;
+			this.pointX[this.numPoints] = var6;
+			if (arg0.vertexLabel != null) {
+				this.vertexLabel[this.numPoints] = arg0.vertexLabel[arg1];
 			}
-			var3 = this.field2208++;
+			var3 = this.numPoints++;
 		}
 		return var3;
 	}
 
 	@ObfuscatedName("pa.a(Lbd;II)Lpa;")
-	public static Model method798(Js5 arg0, int arg1) {
+	public static Model load(Js5 arg0, int arg1) {
 		byte[] var2 = arg0.getFile(0, arg1);
 		return var2 == null ? null : new Model(var2);
 	}

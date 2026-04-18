@@ -75,8 +75,8 @@ public final class ClientPlayer extends ClientEntity {
 		if (this.field90 == null) {
 			return null;
 		}
-		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.method103(super.field2015) : null;
-		SeqType var2 = super.secondarySeqId == -1 || this.field95 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.method103(super.secondarySeqId);
+		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.list(super.field2015) : null;
+		SeqType var2 = super.secondarySeqId == -1 || this.field95 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.list(super.secondarySeqId);
 		Model var3 = this.field90.method637(var1, var2, super.field1990, super.field1978);
 		if (var3 == null) {
 			return null;
@@ -84,9 +84,9 @@ public final class ClientPlayer extends ClientEntity {
 		var3.method766();
 		super.field1991 = var3.field3135;
 		if (!this.field95 && super.field1965 != -1 && super.field2014 != -1) {
-			Model var4 = SpotType.method713(super.field1965).method371(super.field2014);
+			Model var4 = SpotType.list(super.field1965).getTempModel2(super.field2014);
 			if (var4 != null) {
-				var4.method796(0, -super.field1984, 0);
+				var4.translate(0, -super.field1984, 0);
 				Model[] var5 = new Model[]{var3, var4};
 				var3 = new Model(var5, 2, true);
 			}
@@ -97,30 +97,30 @@ public final class ClientPlayer extends ClientEntity {
 			}
 			if (this.field91 <= Client.loopCycle && this.field82 > Client.loopCycle) {
 				Model var6 = this.field73;
-				var6.method796(this.field79 - super.field1972, -this.field84 + this.field80, this.field99 - super.field1963);
+				var6.translate(this.field79 - super.field1972, -this.field84 + this.field80, this.field99 - super.field1963);
 				if (super.dstYaw == 512) {
-					var6.method781();
-					var6.method781();
-					var6.method781();
+					var6.rotate90();
+					var6.rotate90();
+					var6.rotate90();
 				} else if (super.dstYaw == 1024) {
-					var6.method781();
-					var6.method781();
+					var6.rotate90();
+					var6.rotate90();
 				} else if (super.dstYaw == 1536) {
-					var6.method781();
+					var6.rotate90();
 				}
 				Model[] var7 = new Model[]{var3, var6};
 				var3 = new Model(var7, 2, true);
 				if (super.dstYaw == 512) {
-					var6.method781();
+					var6.rotate90();
 				} else if (super.dstYaw == 1024) {
-					var6.method781();
-					var6.method781();
+					var6.rotate90();
+					var6.rotate90();
 				} else if (super.dstYaw == 1536) {
-					var6.method781();
-					var6.method781();
-					var6.method781();
+					var6.rotate90();
+					var6.rotate90();
+					var6.rotate90();
 				}
-				var6.method796(super.field1972 - this.field79, -this.field80 + this.field84, super.field1963 - this.field99);
+				var6.translate(super.field1972 - this.field79, -this.field80 + this.field84, super.field1963 - this.field99);
 			}
 		}
 		var3.field2205 = true;

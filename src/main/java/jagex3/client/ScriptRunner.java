@@ -75,11 +75,11 @@ public class ScriptRunner {
 						field3255[var4++] = var6[var9];
 					} else if (var14 == 1) {
 						int var15 = var6[var9];
-						field3255[var4++] = VarCache.field2803[var15];
+						field3255[var4++] = VarCache.var[var15];
 					} else if (var14 == 2) {
 						int var16 = var6[var9];
 						var4--;
-						VarCache.field2803[var16] = field3255[var4];
+						VarCache.var[var16] = field3255[var4];
 					} else if (var14 == 3) {
 						field2957[var8++] = var5.field517[var9];
 					} else if (var14 == 6) {
@@ -117,7 +117,7 @@ public class ScriptRunner {
 						var7 = var5.field519;
 					} else if (var14 == 25) {
 						int var18 = var6[var9];
-						field3255[var4++] = VarCache.method480(var18);
+						field3255[var4++] = VarCache.getVarbit(var18);
 					} else if (var14 == 27) {
 						int var19 = var6[var9];
 						var4--;

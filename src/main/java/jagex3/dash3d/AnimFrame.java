@@ -31,7 +31,7 @@ public final class AnimFrame {
 	public final int[] field2122;
 
 	@ObfuscatedName("o.i")
-	public boolean field2123 = false;
+	public boolean animateTransparencies = false;
 
 	@ObfuscatedName("o.j")
 	public final int[] field2124;
@@ -86,7 +86,7 @@ public final class AnimFrame {
 				var6 = var8;
 				var7++;
 				if (this.field2121.field3117[var8] == 5) {
-					this.field2123 = true;
+					this.animateTransparencies = true;
 				}
 			}
 		}

@@ -117,7 +117,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(IBI)Z")
-	public final boolean method218(int arg0, int arg1) {
+	public final boolean requestDownload(int arg0, int arg1) {
 		if (arg0 < 0 || this.field399.length <= arg0 || this.field399[arg0] == null || arg1 < 0 || arg1 >= this.field399[arg0].length) {
 			return false;
 		} else if (this.field399[arg0][arg1] != null) {
@@ -317,7 +317,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.b(III)[B")
-	public final byte[] method227(int arg0, int arg1) {
+	public final byte[] peekFile(int arg0, int arg1) {
 		if (arg1 < 0 || this.field399.length <= arg1 || this.field399[arg1] == null || arg0 < 0 || this.field399[arg1].length <= arg0) {
 			return null;
 		}
@@ -377,7 +377,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.c(IB)I")
-	public final int method235(int arg0) {
+	public final int getFileIdLimit(int arg0) {
 		return this.field399[arg0].length;
 	}
 
@@ -393,16 +393,16 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(IZ)[I")
-	public final int[] method237(int arg0) {
+	public final int[] getFileList(int arg0) {
 		return this.field393[arg0];
 	}
 
 	@ObfuscatedName("bd.a(BI)[B")
 	public final byte[] method238(int arg0) {
 		if (this.field399.length == 1) {
-			return this.method227(arg0, 0);
+			return this.peekFile(arg0, 0);
 		} else if (this.field399[arg0].length == 1) {
-			return this.method227(0, arg0);
+			return this.peekFile(0, arg0);
 		} else {
 			throw new RuntimeException();
 		}
@@ -414,7 +414,7 @@ public abstract class Js5 {
 		JagString var4 = arg1.method30();
 		int var5 = this.field404.find(var3.method27());
 		int var6 = this.field367[var5].find(var4.method27());
-		return this.method218(var5, var6);
+		return this.requestDownload(var5, var6);
 	}
 
 	@ObfuscatedName("bd.b(ILa;)V")

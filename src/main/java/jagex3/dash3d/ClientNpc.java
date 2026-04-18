@@ -17,18 +17,18 @@ public final class ClientNpc extends ClientEntity {
 		if (this.type == null) {
 			return null;
 		}
-		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.method103(super.field2015) : null;
-		SeqType var2 = super.secondarySeqId == -1 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.method103(super.secondarySeqId);
-		Model var3 = this.type.method448(var1, var2, super.field1990, super.field1978);
+		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.list(super.field2015) : null;
+		SeqType var2 = super.secondarySeqId == -1 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.list(super.secondarySeqId);
+		Model var3 = this.type.getTempModel(var1, var2, super.field1990, super.field1978);
 		if (var3 == null) {
 			return null;
 		}
 		var3.method766();
 		super.field1991 = var3.field3135;
 		if (super.field1965 != -1 && super.field2014 != -1) {
-			Model var4 = SpotType.method713(super.field1965).method371(super.field2014);
+			Model var4 = SpotType.list(super.field1965).getTempModel2(super.field2014);
 			if (var4 != null) {
-				var4.method796(0, -super.field1984, 0);
+				var4.translate(0, -super.field1984, 0);
 				Model[] var5 = new Model[]{var3, var4};
 				var3 = new Model(var5, 2, true);
 			}
