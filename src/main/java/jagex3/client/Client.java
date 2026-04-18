@@ -256,7 +256,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("uc.B")
 	public static Pix32 minimap;
 	@ObfuscatedName("u.H")
-	public static PacketBit field3202 = new PacketBit(5000);
+	public static PacketBit loginout = new PacketBit(5000);
 	@ObfuscatedName("ed.o")
 	public static long[] field694 = new long[200];
 	@ObfuscatedName("la.t")
@@ -286,7 +286,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("hc.d")
 	public static ClientPlayer[] players = new ClientPlayer[2048];
 	@ObfuscatedName("hc.f")
-	public static int loginFailCount = 0;
+	public static int loginStep = 0;
 	@ObfuscatedName("ue.u")
 	public static JagString field3283 = JagString.wrap("mapdots");
 	@ObfuscatedName("ud.Y")
@@ -302,7 +302,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("bc.d")
 	public static PrivilegedRequest loginSocketReq;
 	@ObfuscatedName("t.n")
-	public static int loginStep = 0;
+	public static int loginFailCount = 0;
 	@ObfuscatedName("qf.s")
 	public static int loginHopTimer = 0;
 	@ObfuscatedName("uf.h")
@@ -1450,7 +1450,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("g.b(I)V")
 	public static void loginPoll() {
 		try {
-			if (loginFailCount == 0) {
+			if (loginStep == 0) {
 				if (stream != null) {
 					stream.close();
 					stream = null;
@@ -1458,9 +1458,9 @@ public final class Client extends GameShell {
 				loginWaitingTime = 0;
 				loginSocketReq = null;
 				networkError = false;
-				loginFailCount = 1;
+				loginStep = 1;
 			}
-			if (loginFailCount == 1) {
+			if (loginStep == 1) {
 				if (loginSocketReq == null) {
 					loginSocketReq = signlink.socketreq(loginHost, loginPort);
 				}
@@ -1470,20 +1470,20 @@ public final class Client extends GameShell {
 				if (loginSocketReq.status == 1) {
 					stream = new ClientStream((Socket) loginSocketReq.result, signlink);
 					loginSocketReq = null;
-					loginFailCount = 2;
+					loginStep = 2;
 				}
 			}
-			if (loginFailCount == 2) {
+			if (loginStep == 2) {
 				long var0 = field2259 = TitleScreen.loginUser.toUserhash();
 				int var2 = (int) (var0 >> 16 & 0x1FL);
 				out.pos = 0;
 				out.p1(14);
 				out.p1(var2);
 				stream.write(out.data, 2);
-				loginFailCount = 3;
+				loginStep = 3;
 				in.pos = 0;
 			}
-			if (loginFailCount == 3) {
+			if (loginStep == 3) {
 				if (midiPcmPlayer != null) {
 					midiPcmPlayer.skipNextAcceptedCheck();
 				}
@@ -1502,9 +1502,9 @@ public final class Client extends GameShell {
 					return;
 				}
 				in.pos = 0;
-				loginFailCount = 4;
+				loginStep = 4;
 			}
-			if (loginFailCount == 4) {
+			if (loginStep == 4) {
 				if (in.pos < 8) {
 					int var4 = stream.available();
 					if (var4 > 8 - in.pos) {
@@ -1518,10 +1518,10 @@ public final class Client extends GameShell {
 				if (in.pos == 8) {
 					in.pos = 0;
 					field2404 = in.g8();
-					loginFailCount = 5;
+					loginStep = 5;
 				}
 			}
-			if (loginFailCount == 5) {
+			if (loginStep == 5) {
 				out.pos = 0;
 				int[] var5 = new int[] { (int) (Math.random() * 9.9999999E7D), (int) (Math.random() * 9.9999999E7D), (int) (field2404 >> 32), (int) field2404 };
 				out.p1(10);
@@ -1532,70 +1532,70 @@ public final class Client extends GameShell {
 				out.p8(TitleScreen.loginUser.toUserhash());
 				out.pjstr(TitleScreen.loginPass);
 				out.rsaenc(field3453, field1486);
-				field3202.pos = 0;
+				loginout.pos = 0;
 				if (state == 40) {
-					field3202.p1(18);
+					loginout.p1(18);
 				} else {
-					field3202.p1(16);
+					loginout.p1(16);
 				}
-				field3202.p1(out.pos + 93);
-				field3202.p4(468);
-				field3202.p1(lowMem ? 1 : 0);
-				GameShell.pushUID192(field3202);
-				field3202.p4(anims.crc);
-				field3202.p4(bases.crc);
-				field3202.p4(configs.crc);
-				field3202.p4(interfaces.crc);
-				field3202.p4(jagFX.crc);
-				field3202.p4(maps.crc);
-				field3202.p4(songs.crc);
-				field3202.p4(models.crc);
-				field3202.p4(sprites.crc);
-				field3202.p4(textures.crc);
-				field3202.p4(binary.crc);
-				field3202.p4(jingles.crc);
-				field3202.p4(scripts.crc);
-				field3202.p4(fontMetrics.crc);
-				field3202.p4(vorbis.crc);
-				field3202.p4(patches.crc);
-				field3202.pdata(out.pos, out.data);
-				stream.write(field3202.data, field3202.pos);
+				loginout.p1(out.pos + 93);
+				loginout.p4(468);
+				loginout.p1(lowMem ? 1 : 0);
+				GameShell.pushUID192(loginout);
+				loginout.p4(anims.crc);
+				loginout.p4(bases.crc);
+				loginout.p4(configs.crc);
+				loginout.p4(interfaces.crc);
+				loginout.p4(jagFX.crc);
+				loginout.p4(maps.crc);
+				loginout.p4(songs.crc);
+				loginout.p4(models.crc);
+				loginout.p4(sprites.crc);
+				loginout.p4(textures.crc);
+				loginout.p4(binary.crc);
+				loginout.p4(jingles.crc);
+				loginout.p4(scripts.crc);
+				loginout.p4(fontMetrics.crc);
+				loginout.p4(vorbis.crc);
+				loginout.p4(patches.crc);
+				loginout.pdata(out.pos, out.data);
+				stream.write(loginout.data, loginout.pos);
 				out.seed(var5);
 				for (int var6 = 0; var6 < 4; var6++) {
 					var5[var6] += 50;
 				}
 				in.seed(var5);
-				loginFailCount = 6;
+				loginStep = 6;
 			}
-			if (loginFailCount == 6 && stream.available() > 0) {
+			if (loginStep == 6 && stream.available() > 0) {
 				int var7 = stream.read();
 				if (var7 == 21 && state == 20) {
-					loginFailCount = 7;
+					loginStep = 7;
 				} else if (var7 == 2) {
-					loginFailCount = 9;
+					loginStep = 9;
 				} else if (var7 == 15 && state == 40) {
 					reconnectDone();
 					return;
-				} else if (var7 == 23 && loginStep < 1) {
-					loginFailCount = 0;
-					loginStep++;
+				} else if (var7 == 23 && loginFailCount < 1) {
+					loginStep = 0;
+					loginFailCount++;
 				} else {
 					loginError(var7);
 					return;
 				}
 			}
-			if (loginFailCount == 7 && stream.available() > 0) {
+			if (loginStep == 7 && stream.available() > 0) {
 				loginHopTimer = stream.read() * 60 + 180;
-				loginFailCount = 8;
+				loginStep = 8;
 			}
-			if (loginFailCount == 8) {
+			if (loginStep == 8) {
 				loginWaitingTime = 0;
 				TitleScreen.loginMes(Text.LOGINHOP_A, Text.LOGINHOP_B, JagString.join(new JagString[] { JagString.parseInt(loginHopTimer / 60), Text.LOGINHOP_C}));
 				if (--loginHopTimer <= 0) {
-					loginFailCount = 0;
+					loginStep = 0;
 				}
 			} else {
-				if (loginFailCount == 9 && stream.available() >= 8) {
+				if (loginStep == 9 && stream.available() >= 8) {
 					staffmodlevel = stream.read();
 					mouseTracked = stream.read() == 1;
 					selfSlot = stream.read();
@@ -1608,19 +1608,19 @@ public final class Client extends GameShell {
 					stream.read(0, in.data, 2);
 					in.pos = 0;
 					psize = in.g2();
-					loginFailCount = 10;
+					loginStep = 10;
 				}
-				if (loginFailCount != 10) {
+				if (loginStep != 10) {
 					loginWaitingTime++;
 					if (loginWaitingTime > 2000) {
-						if (loginStep < 1) {
+						if (loginFailCount < 1) {
 							if (loginPort == loginGamePort) {
 								loginPort = loginJs5Port;
 							} else {
 								loginPort = loginGamePort;
 							}
-							loginFailCount = 0;
-							loginStep++;
+							loginStep = 0;
+							loginFailCount++;
 						} else {
 							loginError(-3);
 						}
@@ -1635,14 +1635,14 @@ public final class Client extends GameShell {
 				}
 			}
 		} catch (IOException var8) {
-			if (loginStep < 1) {
-				loginStep++;
+			if (loginFailCount < 1) {
+				loginFailCount++;
 				if (loginGamePort == loginPort) {
 					loginPort = loginJs5Port;
 				} else {
 					loginPort = loginGamePort;
 				}
-				loginFailCount = 0;
+				loginStep = 0;
 			} else {
 				loginError(-2);
 			}
@@ -3096,9 +3096,9 @@ public final class Client extends GameShell {
 			resetProgress();
 		}
 		if (arg0 == 20 || arg0 == 40) {
-			loginStep = 0;
-			loginWaitingTime = 0;
 			loginFailCount = 0;
+			loginWaitingTime = 0;
+			loginStep = 0;
 		}
 		if (arg0 != 20 && arg0 != 40 && prevStream != null) {
 			prevStream.close();
