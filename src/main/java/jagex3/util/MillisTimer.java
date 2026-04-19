@@ -1,7 +1,6 @@
 package jagex3.util;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 @ObfuscatedName("k")
 public final class MillisTimer extends Timer {
@@ -38,7 +37,7 @@ public final class MillisTimer extends Timer {
 		this.field1520 = 256;
 		this.field1508 = 0;
 		this.field1517 = 1;
-		this.field1519 = Statics.currentTime();
+		this.field1519 = MonotonicTime.currentTime();
 		for (int var1 = 0; var1 < 10; var1++) {
 			this.field1515[var1] = this.field1519;
 		}
@@ -51,7 +50,7 @@ public final class MillisTimer extends Timer {
 		this.field1517 = 1;
 		int var4 = this.field1520;
 		this.field1520 = 300;
-		this.field1519 = Statics.currentTime();
+		this.field1519 = MonotonicTime.currentTime();
 		if (this.field1515[this.field1505] == 0L) {
 			this.field1520 = var4;
 			this.field1517 = var3;

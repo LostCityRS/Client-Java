@@ -1,11 +1,11 @@
 package jagex3.js5;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.datastruct.HashTable;
 import jagex3.datastruct.LinkList2;
 import jagex3.io.ClientStream;
 import jagex3.io.Packet;
+import jagex3.util.MonotonicTime;
 
 import java.io.IOException;
 import java.util.zip.CRC32;
@@ -60,7 +60,7 @@ public class Js5Net {
 
 	@ObfuscatedName("id.a(B)Z")
 	public static boolean loop() {
-		long var0 = Statics.currentTime();
+		long var0 = MonotonicTime.currentTime();
 		int var2 = (int) (var0 - field2271);
 		field2271 = var0;
 		if (var2 > 200) {
@@ -336,7 +336,7 @@ public class Js5Net {
 								Packet var4 = new Packet(4);
 								var4.p1(4);
 								var4.p1(field476);
-								var4.method150(0);
+								var4.p2(0);
 								field2769.write(4, var4.data);
 							} catch (IOException var6) {
 								try {
@@ -348,7 +348,7 @@ public class Js5Net {
 							}
 						}
 						field1189 = 0;
-						field2271 = Statics.currentTime();
+						field2271 = MonotonicTime.currentTime();
 						return;
 					}
 					field996.pushFront(var3);

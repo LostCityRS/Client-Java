@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.constants.Text;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
@@ -63,8 +62,10 @@ public final class LocType extends Linkable2 {
 	@ObfuscatedName("ia.qc")
 	public int multivarbit = -1;
 
+	@ObfuscatedName("oe.o")
+	public static JagString field2183 = JagString.wrap("null");
 	@ObfuscatedName("ia.rc")
-	public JagString name = Statics.field2183;
+	public JagString name = field2183;
 
 	@ObfuscatedName("ia.tb")
 	public int bgsound_mindelay = 0;

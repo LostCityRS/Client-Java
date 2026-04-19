@@ -107,7 +107,7 @@ public final class AnimFrame {
 	}
 
 	@ObfuscatedName("o.a()V")
-	public static void method744() {
+	public static void unload() {
 		field2116 = null;
 		field2117 = null;
 		field2115 = null;

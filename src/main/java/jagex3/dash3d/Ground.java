@@ -276,7 +276,7 @@ public final class Ground {
 	}
 
 	@ObfuscatedName("ce.a()V")
-	public static void method276() {
+	public static void unload() {
 		field558 = null;
 		field553 = null;
 		field565 = null;

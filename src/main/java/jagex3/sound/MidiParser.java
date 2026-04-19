@@ -34,7 +34,7 @@ public final class MidiParser {
 	public int field760;
 
 	@ObfuscatedName("ea.h()V")
-	public static void method351() {
+	public static void unload() {
 		field758 = null;
 	}
 

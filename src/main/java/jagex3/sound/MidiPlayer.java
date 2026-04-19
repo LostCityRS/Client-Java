@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 @ObfuscatedName("uc")
 public abstract class MidiPlayer extends MidiStream {
@@ -10,14 +9,16 @@ public abstract class MidiPlayer extends MidiStream {
 	public static int[] field1753 = new int[]{12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800, 12800};
 	@ObfuscatedName("na.i")
 	public static int[] field1937 = new int[128];
+    @ObfuscatedName("oe.l")
+    public static int field2180 = 256;
 
-	@ObfuscatedName("uc.a(IIJI)V")
+    @ObfuscatedName("uc.a(IIJI)V")
 	public final void method996(int arg0, int arg1, long arg2) {
 		int var5 = (int) ((double) arg0 * Math.pow(0.1D, (double) arg1 * 5.0E-4D) + 0.5D);
-		if (Statics.field2180 == var5) {
+		if (field2180 == var5) {
 			return;
 		}
-		Statics.field2180 = var5;
+		field2180 = var5;
 		for (int var6 = 0; var6 < 16; var6++) {
 			int var7 = method1002(var6);
 			this.method306(var6 + 176, 7, var7 >> 7, arg2);
@@ -27,7 +28,7 @@ public abstract class MidiPlayer extends MidiStream {
 
 	@ObfuscatedName("uc.a(IJI)V")
 	public final void method997(long arg0, int arg1) {
-		Statics.field2180 = arg1;
+		field2180 = arg1;
 		for (int var4 = 0; var4 < 16; var4++) {
 			field1753[var4] = 12800;
 		}
@@ -112,7 +113,7 @@ public abstract class MidiPlayer extends MidiStream {
 	@ObfuscatedName("uc.g(I)I")
 	public static int method1002(int arg0) {
 		int var1 = field1753[arg0];
-		int var2 = (Statics.field2180 * var1 >> 8) * var1;
+		int var2 = (field2180 * var1 >> 8) * var1;
 		return (int) (Math.sqrt((double) var2) + 0.5D);
 	}
 

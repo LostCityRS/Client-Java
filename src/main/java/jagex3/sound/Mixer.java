@@ -1,8 +1,11 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
+import jagex3.client.SignLink;
 import jagex3.datastruct.LinkList;
 import jagex3.datastruct.Linkable;
+
+import java.awt.*;
 
 @ObfuscatedName("b")
 public final class Mixer extends PcmStream {
@@ -25,7 +28,15 @@ public final class Mixer extends PcmStream {
 	@ObfuscatedName("b.jb")
 	public int field245 = 0;
 
-	@ObfuscatedName("b.a(Loc;)V")
+    @ObfuscatedName("ub.a(Llc;Ljava/awt/Component;I)Lb;")
+    public static Mixer method993(SignLink arg0, Component arg1) {
+        PcmPlayer.method1050(arg1, arg0);
+        Mixer var2 = new Mixer();
+        PcmPlayer.method261(var2);
+        return var2;
+    }
+
+    @ObfuscatedName("b.a(Loc;)V")
 	public synchronized void playStream(PcmStream arg0) {
 		LinkList var2 = this.field241[method130(arg0)];
 		var2.pushFront(arg0);

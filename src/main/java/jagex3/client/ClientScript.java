@@ -1,7 +1,6 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
@@ -12,7 +11,11 @@ public final class ClientScript extends Linkable2 {
 
     @ObfuscatedName("f.d")
     public static LruCache field830 = new LruCache(128);
-    @ObfuscatedName("cc.tb")
+	@ObfuscatedName("j.lc")
+	public static JagString field1437 = JagString.wrap("");
+	@ObfuscatedName("hb.fb")
+	public static JagString field1160 = JagString.wrap(")1");
+	@ObfuscatedName("cc.tb")
 	public int[] field509;
 
 	@ObfuscatedName("cc.ub")
@@ -40,7 +43,7 @@ public final class ClientScript extends Linkable2 {
 		if (var4 != null) {
 			return var4;
 		}
-		byte[] var5 = Client.scripts.getFile(Statics.field1437, JagString.join(new JagString[]{JagString.parseInt(arg1), Statics.field1160, JagString.parseInt(arg0)}));
+		byte[] var5 = Client.scripts.getFile(field1437, JagString.join(new JagString[]{JagString.parseInt(arg1), field1160, JagString.parseInt(arg0)}));
 		Packet var6 = new Packet(var5);
 		ClientScript var7 = new ClientScript();
 		var6.pos = var6.data.length - 12;

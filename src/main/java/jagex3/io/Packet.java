@@ -1,7 +1,6 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.datastruct.Linkable;
 import jagex3.util.JagString;
 
@@ -85,7 +84,7 @@ public class Packet extends Linkable {
 		int var1 = this.pos;
 		while (this.data[this.pos++] != 0) {
 		}
-		return Statics.method419(this.data, var1, this.pos - var1 - 1);
+		return JagString.method419(this.data, var1, this.pos - var1 - 1);
 	}
 
 	@ObfuscatedName("ba.b(IB)V")
@@ -142,7 +141,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.b(II)V")
-	public final void method150(int arg0) {
+	public final void p2(int arg0) {
 		this.data[this.pos++] = (byte) (arg0 >> 8);
 		this.data[this.pos++] = (byte) arg0;
 	}
@@ -380,11 +379,11 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.l(II)V")
-	public final void method185(int arg0) {
+	public final void psmart(int arg0) {
 		if (arg0 >= 0 && arg0 < 128) {
 			this.p1(arg0);
 		} else if (arg0 >= 0 && arg0 < 32768) {
-			this.method150(arg0 + 32768);
+			this.p2(arg0 + 32768);
 		} else {
 			throw new IllegalArgumentException();
 		}

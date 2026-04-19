@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.client.SignLink;
 import jagex3.util.ThreadUtil;
@@ -20,6 +19,10 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 	public static int field1448;
 	@ObfuscatedName("ja.U")
 	public static int field1445;
+    @ObfuscatedName("ja.S")
+    public static boolean field1443;
+	@ObfuscatedName("ja.W")
+	public static boolean field1447;
 
 	@ObfuscatedName("ja.a(IBIII)V")
 	public static void method541(int arg0, int arg1, int arg2, int arg3) {
@@ -62,7 +65,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 					if (field1444.method343()) {
 						field1444.method345(var3);
 						if (field1444.method348()) {
-							if (!Statics.field1447) {
+							if (!field1447) {
 								this.method1000((long) (var5 / (long) (field1444.field760 * 1000)));
 								field1444.method340();
 								method540();
@@ -101,8 +104,8 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 		try {
 			while (true) {
 				synchronized (this) {
-					if (Statics.field1443) {
-						Statics.field1443 = false;
+					if (field1443) {
+						field1443 = false;
 						return;
 					}
 					this.method308();
@@ -118,11 +121,11 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 	@Override
 	public void method303() {
 		synchronized (this) {
-			Statics.field1443 = true;
+			field1443 = true;
 		}
 		while (true) {
 			synchronized (this) {
-				if (!Statics.field1443) {
+				if (!field1443) {
 					break;
 				}
 			}
@@ -137,7 +140,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 		boolean var4 = true;
 		field1444.method341(arg0);
 		field1445 = 0;
-		Statics.field1447 = arg1;
+		field1447 = arg1;
 		field1442.method314();
 		this.method996(arg2, 0, (long) field1445);
 		int var5 = field1444.method338();
@@ -154,7 +157,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 			field1444.method345(var6);
 		}
 		if (var4) {
-			if (Statics.field1447) {
+			if (field1447) {
 				throw new RuntimeException();
 			}
 			this.method1000((long) field1445);

@@ -774,4 +774,8 @@ public class Text {
 	public static JagString field1775 = JagString.wrap("Loading config )2 ");
 	@ObfuscatedName("m.i")
 	public static JagString field1762 = field1775;
+	@ObfuscatedName("va.gb")
+	public static JagString field3111 = JagString.wrap("Service unavailable)3");
+	@ObfuscatedName("va.xb")
+	public static JagString field3128 = field3111;
 }

@@ -1,7 +1,6 @@
 package jagex3.graphics;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.util.JagString;
 
 import java.util.Random;
@@ -94,7 +93,7 @@ public final class PixFont extends Pix2D {
 	public final int field359;
 
 	@ObfuscatedName("bc.d()V")
-	public static void method199() {
+	public static void unload() {
 		field343 = null;
 		field344 = null;
 		field335 = null;
@@ -206,7 +205,7 @@ public final class PixFont extends Pix2D {
 		}
 		int var11 = 0;
 		int var12 = 0;
-		JagString var13 = Statics.method566();
+		JagString var13 = JagString.method566();
 		int var14 = -1;
 		int var15 = 0;
 		JagString var16 = null;

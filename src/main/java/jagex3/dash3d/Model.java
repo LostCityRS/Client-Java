@@ -1,13 +1,18 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 
 @ObfuscatedName("pa")
 public final class Model extends ModelSource {
 
+	@ObfuscatedName("pa.Oc")
+	public static int field2259;
+	@ObfuscatedName("pa.Cc")
+	public static int field2247;
+	@ObfuscatedName("pa.Jc")
+	public static int field2254;
 	@ObfuscatedName("pa.ac")
 	public int[] field2219;
 
@@ -230,7 +235,7 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.b()V")
-	public static void method768() {
+	public static void unload() {
 		field2211 = null;
 		field2233 = null;
 		field2236 = null;
@@ -642,9 +647,9 @@ public final class Model extends ModelSource {
 		AnimFrame var6 = arg0.list[arg1];
 		AnimFrame var7 = arg2.list[arg3];
 		AnimBase var8 = var6.field2121;
-		Statics.field2259 = 0;
-		Statics.field2254 = 0;
-		Statics.field2247 = 0;
+		field2259 = 0;
+		field2254 = 0;
+		field2247 = 0;
 		byte var9 = 0;
 		int var17 = var9 + 1;
 		int var10 = arg4[0];
@@ -657,9 +662,9 @@ public final class Model extends ModelSource {
 				this.method779(var8.field3117[var12], var8.field3107[var12], var6.field2120[var11], var6.field2125[var11], var6.field2124[var11]);
 			}
 		}
-		Statics.field2259 = 0;
-		Statics.field2254 = 0;
-		Statics.field2247 = 0;
+		field2259 = 0;
+		field2254 = 0;
+		field2247 = 0;
 		byte var13 = 0;
 		int var18 = var13 + 1;
 		int var14 = arg4[0];
@@ -1247,30 +1252,30 @@ public final class Model extends ModelSource {
 		int var6 = arg1.length;
 		if (arg0 == 0) {
 			int var7 = 0;
-			Statics.field2259 = 0;
-			Statics.field2254 = 0;
-			Statics.field2247 = 0;
+			field2259 = 0;
+			field2254 = 0;
+			field2247 = 0;
 			for (int var8 = 0; var8 < var6; var8++) {
 				int var9 = arg1[var8];
 				if (var9 < this.labelVertices.length) {
 					int[] var10 = this.labelVertices[var9];
 					for (int var11 = 0; var11 < var10.length; var11++) {
 						int var12 = var10[var11];
-						Statics.field2259 += this.pointZ[var12];
-						Statics.field2254 += this.pointY[var12];
-						Statics.field2247 += this.pointX[var12];
+						field2259 += this.pointZ[var12];
+						field2254 += this.pointY[var12];
+						field2247 += this.pointX[var12];
 						var7++;
 					}
 				}
 			}
 			if (var7 > 0) {
-				Statics.field2259 = Statics.field2259 / var7 + arg2;
-				Statics.field2254 = Statics.field2254 / var7 + arg3;
-				Statics.field2247 = Statics.field2247 / var7 + arg4;
+				field2259 = field2259 / var7 + arg2;
+				field2254 = field2254 / var7 + arg3;
+				field2247 = field2247 / var7 + arg4;
 			} else {
-				Statics.field2259 = arg2;
-				Statics.field2254 = arg3;
-				Statics.field2247 = arg4;
+				field2259 = arg2;
+				field2254 = arg3;
+				field2247 = arg4;
 			}
 		} else if (arg0 == 1) {
 			for (int var13 = 0; var13 < var6; var13++) {
@@ -1292,9 +1297,9 @@ public final class Model extends ModelSource {
 					int[] var20 = this.labelVertices[var19];
 					for (int var21 = 0; var21 < var20.length; var21++) {
 						int var22 = var20[var21];
-						this.pointZ[var22] -= Statics.field2259;
-						this.pointY[var22] -= Statics.field2254;
-						this.pointX[var22] -= Statics.field2247;
+						this.pointZ[var22] -= field2259;
+						this.pointY[var22] -= field2254;
+						this.pointX[var22] -= field2247;
 						int var23 = (arg2 & 0xFF) * 8;
 						int var24 = (arg3 & 0xFF) * 8;
 						int var25 = (arg4 & 0xFF) * 8;
@@ -1319,9 +1324,9 @@ public final class Model extends ModelSource {
 							this.pointX[var22] = this.pointX[var22] * var33 - this.pointZ[var22] * var32 >> 16;
 							this.pointZ[var22] = var34;
 						}
-						this.pointZ[var22] += Statics.field2259;
-						this.pointY[var22] += Statics.field2254;
-						this.pointX[var22] += Statics.field2247;
+						this.pointZ[var22] += field2259;
+						this.pointY[var22] += field2254;
+						this.pointX[var22] += field2247;
 					}
 				}
 			}
@@ -1332,15 +1337,15 @@ public final class Model extends ModelSource {
 					int[] var37 = this.labelVertices[var36];
 					for (int var38 = 0; var38 < var37.length; var38++) {
 						int var39 = var37[var38];
-						this.pointZ[var39] -= Statics.field2259;
-						this.pointY[var39] -= Statics.field2254;
-						this.pointX[var39] -= Statics.field2247;
+						this.pointZ[var39] -= field2259;
+						this.pointY[var39] -= field2254;
+						this.pointX[var39] -= field2247;
 						this.pointZ[var39] = this.pointZ[var39] * arg2 / 128;
 						this.pointY[var39] = this.pointY[var39] * arg3 / 128;
 						this.pointX[var39] = this.pointX[var39] * arg4 / 128;
-						this.pointZ[var39] += Statics.field2259;
-						this.pointY[var39] += Statics.field2254;
-						this.pointX[var39] += Statics.field2247;
+						this.pointZ[var39] += field2259;
+						this.pointY[var39] += field2254;
+						this.pointX[var39] += field2247;
 					}
 				}
 			}
@@ -1978,9 +1983,9 @@ public final class Model extends ModelSource {
 		this.field2210 = 0;
 		AnimFrame var3 = arg0.list[arg1];
 		AnimBase var4 = var3.field2121;
-		Statics.field2259 = 0;
-		Statics.field2254 = 0;
-		Statics.field2247 = 0;
+		field2259 = 0;
+		field2254 = 0;
+		field2247 = 0;
 		for (int var5 = 0; var5 < var3.field2119; var5++) {
 			int var6 = var3.field2122[var5];
 			this.method779(var4.field3117[var6], var4.field3107[var6], var3.field2120[var5], var3.field2125[var5], var3.field2124[var5]);

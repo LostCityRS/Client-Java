@@ -12,7 +12,7 @@ public final class JavaSafePcmPlayer extends PcmPlayer {
 	public static AudioSource field1080;
 
 	@ObfuscatedName("gd.f()V")
-	public static void method437() {
+	public static void unload() {
 		field1080 = null;
 	}
 

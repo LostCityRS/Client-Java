@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.constants.Text;
 import jagex3.dash3d.Model;
 import jagex3.dash3d.PlayerModel;
@@ -35,8 +34,10 @@ public final class IfType extends Linkable2 {
 	public static LruCache fontCache = new LruCache(20);
 	@ObfuscatedName("va.lb")
 	public static boolean loadingAsset = false;
-	@ObfuscatedName("qd.ac")
-	public JagString text = Statics.field3058;
+    @ObfuscatedName("uc.v")
+    public static JagString field3058 = JagString.wrap("");
+    @ObfuscatedName("qd.ac")
+	public JagString text = field3058;
 
 	@ObfuscatedName("qd.ad")
 	public int scrollPos = 0;
@@ -156,7 +157,7 @@ public final class IfType extends Linkable2 {
 	public boolean tiling = false;
 
 	@ObfuscatedName("qd.Wb")
-	public JagString targetVerb = Statics.field3058;
+	public JagString targetVerb = field3058;
 
 	@ObfuscatedName("qd.Mb")
 	public int field2460 = 0;
@@ -195,7 +196,7 @@ public final class IfType extends Linkable2 {
 	public int dataX = 0;
 
 	@ObfuscatedName("qd.yb")
-	public JagString text2 = Statics.field3058;
+	public JagString text2 = field3058;
 
 	@ObfuscatedName("qd.Jc")
 	public boolean field2509 = false;
@@ -210,7 +211,7 @@ public final class IfType extends Linkable2 {
 	public int modelAnim = -1;
 
 	@ObfuscatedName("qd.Pc")
-	public JagString targetBase = Statics.field3058;
+	public JagString targetBase = field3058;
 
 	@ObfuscatedName("qd.Nb")
 	public boolean field2461 = false;

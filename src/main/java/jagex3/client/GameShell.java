@@ -1,10 +1,10 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.graphics.PixMap;
 import jagex3.util.JagString;
+import jagex3.util.MonotonicTime;
 import jagex3.util.ThreadUtil;
 import jagex3.util.Timer;
 
@@ -75,6 +75,12 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public static boolean field1277;
 	@ObfuscatedName("ae.b")
 	public static volatile long field225 = 0L;
+	@ObfuscatedName("f.p")
+	public static Font field842;
+	@ObfuscatedName("ca.u")
+	public static FontMetrics field469;
+	@ObfuscatedName("ie.i")
+	public static Image field1397;
 
 	@ObfuscatedName("kd.Q")
 	public boolean field1640 = false;
@@ -83,9 +89,9 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public static void drawProgress(int arg0, Color arg1, JagString arg2) {
 		try {
 			Graphics var3 = canvas.getGraphics();
-			if (Statics.field842 == null) {
-				Statics.field842 = new Font("Helvetica", 1, 13);
-				Statics.field469 = canvas.getFontMetrics(Statics.field842);
+			if (field842 == null) {
+				field842 = new Font("Helvetica", 1, 13);
+				field469 = canvas.getFontMetrics(field842);
 			}
 			if (field2402) {
 				field2402 = false;
@@ -96,20 +102,20 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				arg1 = new Color(140, 17, 17);
 			}
 			try {
-				if (Statics.field1397 == null) {
-					Statics.field1397 = canvas.createImage(304, 34);
+				if (field1397 == null) {
+					field1397 = canvas.createImage(304, 34);
 				}
-				Graphics var4 = Statics.field1397.getGraphics();
+				Graphics var4 = field1397.getGraphics();
 				var4.setColor(arg1);
 				var4.drawRect(0, 0, 303, 33);
 				var4.fillRect(2, 2, arg0 * 3, 30);
 				var4.setColor(Color.black);
 				var4.drawRect(1, 1, 301, 31);
 				var4.fillRect(arg0 * 3 + 2, 2, 300 - arg0 * 3, 30);
-				var4.setFont(Statics.field842);
+				var4.setFont(field842);
 				var4.setColor(Color.white);
-				arg2.method16((304 - arg2.method24(Statics.field469)) / 2, 22, var4);
-				var3.drawImage(Statics.field1397, field711 / 2 - 152, field2372 / 2 + -18, null);
+				arg2.method16((304 - arg2.method24(field469)) / 2, 22, var4);
+				var3.drawImage(field1397, field711 / 2 - 152, field2372 / 2 + -18, null);
 			} catch (Exception var7) {
 				int var5 = field711 / 2 - 152;
 				int var6 = field2372 / 2 - 18;
@@ -119,9 +125,9 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				var3.setColor(Color.black);
 				var3.drawRect(var5 + 1, var6 + 1, 301, 31);
 				var3.fillRect(arg0 * 3 + var5 + 2, var6 + 2, 300 - arg0 * 3, 30);
-				var3.setFont(Statics.field842);
+				var3.setFont(field842);
 				var3.setColor(Color.white);
-				arg2.method16((304 - arg2.method24(Statics.field469)) / 2 + var5, var6 + 22, var3);
+				arg2.method16((304 - arg2.method24(field469)) / 2 + var5, var6 + 22, var3);
 			}
 		} catch (Exception var8) {
 			canvas.repaint();
@@ -183,7 +189,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			this.method290();
 			field1747 = Timer.create();
 			field1747.init();
-			while (field369 == 0L || Statics.currentTime() < field369) {
+			while (field369 == 0L || MonotonicTime.currentTime() < field369) {
 				field681 = field1747.count(field2049, mindel);
 				for (int var4 = 0; var4 < field681; var4++) {
 					this.method625();
@@ -223,13 +229,13 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			} catch (Exception var1) {
 			}
 		}
-		this.method288();
+		this.unload();
 	}
 
 	@Override
 	public final void stop() {
 		if (shell == this && !field972) {
-			field369 = Statics.currentTime() + 4000L;
+			field369 = MonotonicTime.currentTime() + 4000L;
 		}
 	}
 
@@ -290,7 +296,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			return;
 		}
 		field2402 = true;
-		if (SignLink.javaVersion != null && SignLink.javaVersion.startsWith("1.5") && Statics.currentTime() - field225 > 1000L) {
+		if (SignLink.javaVersion != null && SignLink.javaVersion.startsWith("1.5") && MonotonicTime.currentTime() - field225 > 1000L) {
 			Rectangle var2 = arg0.getClipBounds();
 			if (var2 == null || field711 <= var2.width && var2.height >= field2372) {
 				canvasReplaceRecommended = true;
@@ -301,7 +307,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@Override
 	public final void destroy() {
 		if (shell == this && !field972) {
-			field369 = Statics.currentTime();
+			field369 = MonotonicTime.currentTime();
 			ThreadUtil.sleepPrecise(5000L);
 			JagException.signlink = null;
 			this.method615();
@@ -355,7 +361,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@ObfuscatedName("kd.a(B)V")
 	public void method622() {
-		long var1 = Statics.currentTime();
+		long var1 = MonotonicTime.currentTime();
 		long var3 = field1601[field1656];
 		field1601[field1656] = var1;
 		if (var3 != 0L && var3 < var1) {
@@ -389,7 +395,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@ObfuscatedName("kd.b(Z)V")
 	public void method625() {
-		long var1 = Statics.currentTime();
+		long var1 = MonotonicTime.currentTime();
 		long var3 = field3281[field3048];
 		boolean var10000;
 		if (var3 == 0L || var1 <= var3) {
@@ -485,7 +491,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 		canvas.requestFocus();
 		field2402 = true;
 		canvasReplaceRecommended = false;
-		field225 = Statics.currentTime();
+		field225 = MonotonicTime.currentTime();
 	}
 
 	@Override
@@ -501,7 +507,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("kd.a(I)V")
-	public abstract void method288();
+	public abstract void unload();
 
 	public abstract void init();
 

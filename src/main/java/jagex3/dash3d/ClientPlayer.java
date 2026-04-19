@@ -1,12 +1,12 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.Client;
 import jagex3.config.ObjType;
 import jagex3.config.SeqType;
 import jagex3.config.SpotType;
 import jagex3.io.Packet;
+import jagex3.jstring.JString;
 import jagex3.util.JagString;
 
 @ObfuscatedName("aa")
@@ -198,7 +198,7 @@ public final class ClientPlayer extends ClientEntity {
 		if (super.field1956 == 65535) {
 			super.field1956 = -1;
 		}
-		this.field86 = Statics.method969(arg0.method174()).method36();
+		this.field86 = JString.method969(arg0.method174()).method36();
 		this.field68 = arg0.g1();
 		this.field65 = arg0.g2();
 		if (this.field90 == null) {

@@ -1,9 +1,8 @@
 package jagex3.util;
 
 import deob.ObfuscatedName;
-import deob.Statics;
-import jagex3.datastruct.StringNode;
 import jagex3.datastruct.HashTable;
+import jagex3.datastruct.StringNode;
 
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
@@ -13,6 +12,10 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("mb.f")
 	public static HashTable cache;
+	@ObfuscatedName("nd.ab")
+	public static JagString field2112 = wrap(")3");
+	@ObfuscatedName("kd.B")
+	public static JagString field1625 = wrap("null");
 	@ObfuscatedName("a.u")
 	public boolean field21 = true;
 
@@ -53,7 +56,7 @@ public final class JagString implements StringInterface {
 		if (arg0.length < 2) {
 			throw new IllegalArgumentException();
 		}
-		return Statics.method825(arg0.length, 0, arg0);
+		return method825(arg0.length, 0, arg0);
 	}
 
     @ObfuscatedName("i.a(II)La;")
@@ -94,6 +97,59 @@ public final class JagString implements StringInterface {
 		var8.charCode = var5;
 		var8.length = var4;
 		return var8;
+	}
+
+	@ObfuscatedName("pe.a(III[La;)La;")
+	public static JagString method825(int arg0, int arg1, JagString[] arg2) {
+		int var3 = 0;
+		for (int var4 = 0; var4 < arg0; var4++) {
+			if (arg2[arg1 + var4] == null) {
+				arg2[arg1 + var4] = field1625;
+			}
+			var3 += arg2[arg1 + var4].length;
+		}
+		byte[] var5 = new byte[var3];
+		int var6 = 0;
+		for (int var7 = 0; var7 < arg0; var7++) {
+			JagString var8 = arg2[arg1 + var7];
+			ArrayUtil.copy(var8.charCode, 0, var5, var6, var8.length);
+			var6 += var8.length;
+		}
+		JagString var9 = new JagString();
+		var9.length = var3;
+		var9.charCode = var5;
+		return var9;
+	}
+
+	@ObfuscatedName("wa.a(ZBI)La;")
+	public static JagString method1034(int arg0) {
+		return method418(true, arg0);
+	}
+
+	@ObfuscatedName("je.b(II)La;")
+	public static JagString method566() {
+		JagString var0 = new JagString();
+		var0.charCode = new byte[100];
+		var0.length = 0;
+		return var0;
+	}
+
+	@ObfuscatedName("u.f(II)La;")
+	public static JagString method984(int arg0) {
+		return join(new JagString[]{parseInt(arg0 >> 24 & 0xFF), field2112, parseInt(arg0 >> 16 & 0xFF), field2112, parseInt(arg0 >> 8 & 0xFF), field2112, parseInt(arg0 & 0xFF)});
+	}
+
+	@ObfuscatedName("g.a([BZII)La;")
+	public static JagString method419(byte[] arg0, int arg1, int arg2) {
+		JagString var3 = new JagString();
+		var3.length = 0;
+		var3.charCode = new byte[arg2];
+		for (int var4 = arg1; var4 < arg1 + arg2; var4++) {
+			if (arg0[var4] != 0) {
+				var3.charCode[var3.length++] = arg0[var4];
+			}
+		}
+		return var3;
 	}
 
 	@ObfuscatedName("a.a(BI)La;")

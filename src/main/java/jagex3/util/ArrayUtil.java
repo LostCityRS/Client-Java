@@ -1,7 +1,7 @@
 package jagex3.util;
 
 import deob.ObfuscatedName;
-import deob.Statics;
+import jagex3.sound.PcmPlayer;
 
 @ObfuscatedName("fb")
 public final class ArrayUtil {
@@ -71,9 +71,9 @@ public final class ArrayUtil {
 		while (var2 < var3) {
 			arg0[var2++] = 0;
 		}
-		if (Statics.field1381 != null) {
-			Statics.field1381.method134(arg0, 0, var3);
+		if (PcmPlayer.field1381 != null) {
+			PcmPlayer.field1381.method134(arg0, 0, var3);
 		}
-		Statics.method949(var3);
+		PcmPlayer.method949(var3);
 	}
 }

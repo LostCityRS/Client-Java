@@ -1,7 +1,6 @@
 package jagex3.js5;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.client.GameShell;
 import jagex3.datastruct.LinkList;
@@ -17,6 +16,8 @@ public final class Js5NetThread implements Runnable {
 	public static int keepAlive = 0;
 	@ObfuscatedName("kb.g")
 	public static LinkList requestQueue = new LinkList();
+	@ObfuscatedName("pe.Lb")
+	public static LinkList field2371 = new LinkList();
 
 	@ObfuscatedName("i.a(I)V")
 	public static void method500() {
@@ -91,6 +92,21 @@ public final class Js5NetThread implements Runnable {
         }
     }
 
+    @ObfuscatedName("de.a(B)V")
+    public static void method320() {
+        while (true) {
+            LinkList var0 = requestQueue;
+            Js5WorkerRequest var1;
+            synchronized (requestQueue) {
+                var1 = (Js5WorkerRequest) field2371.popFront();
+            }
+            if (var1 == null) {
+                return;
+            }
+            var1.field1456.loadIndex(false, var1.data, (int) var1.key, var1.fs);
+        }
+    }
+
     @Override
 	public void run() {
 		try {
@@ -122,7 +138,7 @@ public final class Js5NetThread implements Runnable {
 						var2.data = var2.fs.readFromFile((int) var2.key);
 						LinkList var4 = requestQueue;
 						synchronized (requestQueue) {
-							Statics.field2371.push(var2);
+							field2371.push(var2);
 						}
 					}
 					Object var6 = lock;

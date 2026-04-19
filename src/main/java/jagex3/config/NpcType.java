@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.constants.Text;
 import jagex3.dash3d.Model;
 import jagex3.datastruct.Linkable2;
@@ -94,8 +93,10 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("h.Jb")
 	public int turnrightanim = -1;
 
+	@ObfuscatedName("mc.g")
+	public static JagString field1852 = JagString.wrap("null");
 	@ObfuscatedName("h.Wb")
-	public JagString name = Statics.field1852;
+	public JagString name = field1852;
 
 	@ObfuscatedName("h.yc")
 	public boolean minimap = true;

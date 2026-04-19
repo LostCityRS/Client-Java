@@ -1,7 +1,6 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.config.IfType;
 import jagex3.config.ObjType;
 import jagex3.util.JagString;
@@ -29,6 +28,36 @@ public class ScriptRunner {
 	public static IfType field1468;
 	@ObfuscatedName("uc.F")
 	public static IfType field3068;
+	@ObfuscatedName("d.mc")
+	public static JagString field642 = JagString.wrap("Jun");
+	@ObfuscatedName("d.pc")
+	public static JagString field645 = JagString.wrap("Nov");
+	@ObfuscatedName("d.rc")
+	public static JagString field647 = JagString.wrap("Mar");
+	@ObfuscatedName("d.sc")
+	public static JagString field648 = JagString.wrap("Jul");
+	@ObfuscatedName("d.Qb")
+	public static JagString field620 = JagString.wrap("Feb");
+	@ObfuscatedName("d.Wb")
+	public static JagString field626 = JagString.wrap("Aug");
+	@ObfuscatedName("d.Ub")
+	public static JagString field624 = JagString.wrap("Dec");
+	@ObfuscatedName("d.zc")
+	public static JagString field655 = JagString.wrap("May");
+	@ObfuscatedName("d.Sb")
+	public static JagString field622 = JagString.wrap("Oct");
+	@ObfuscatedName("d.Nc")
+	public static JagString field669 = JagString.wrap("Jan");
+	@ObfuscatedName("d.Tb")
+	public static JagString field623 = JagString.wrap("Sep");
+	@ObfuscatedName("d.Qc")
+	public static JagString field672 = JagString.wrap("Apr");
+	@ObfuscatedName("d.Rb")
+	public static JagString[] field621 = new JagString[]{field669, field620, field647, field672, field655, field642, field648, field626, field623, field622, field645, field624};
+	@ObfuscatedName("kc.h")
+	public static JagString field1572 = JagString.wrap(")2");
+	@ObfuscatedName("r.A")
+	public static JagString field2585 = JagString.wrap("");
 
 	@ObfuscatedName("ob.a([Ljava/lang/Object;IILqd;IZ)V")
 	public static void method754(Object[] arg0, int arg1, IfType arg2, int arg3) {
@@ -149,7 +178,7 @@ public class ScriptRunner {
 						} else if (var14 == 37) {
 							int var20 = var6[var9];
 							var8 -= var20;
-							JagString var21 = Statics.method825(var20, var8, field2957);
+							JagString var21 = JagString.method825(var20, var8, field2957);
 							field2957[var8++] = var21;
 						} else if (var14 == 38) {
 							var4--;
@@ -488,7 +517,7 @@ public class ScriptRunner {
 						int var49 = field3255[var4];
 						int var50 = field3255[var4 + 2];
 						int var51 = field3255[var4 + 1];
-						IfType var52 = Statics.method607(IfType.list[var49], var50, true, 0, -1, 0, var51);
+						IfType var52 = Client.method607(IfType.list[var49], var50, true, 0, -1, 0, var51);
 						if (var52 == null) {
 							field3255[var4++] = 0;
 						} else {
@@ -507,7 +536,7 @@ public class ScriptRunner {
 						IfType var53 = IfType.get(field3255[var4]);
 						int var54 = field3255[var4 + 2];
 						int var55 = field3255[var4 + 1];
-						IfType var56 = Statics.method607(var53.field2519, var54, true, var53.scrollHeight, var53.parentId, var53.scrollWidth, var55);
+						IfType var56 = Client.method607(var53.field2519, var54, true, var53.scrollHeight, var53.parentId, var53.scrollWidth, var55);
 						if (var56 == null) {
 							field3255[var4++] = 0;
 						} else {
@@ -553,7 +582,7 @@ public class ScriptRunner {
 						int var58 = field3255[var4 + 1];
 						int var59 = field3255[var4];
 						int var60 = field3255[var4 + 2];
-						IfType var61 = Statics.method607(IfType.list[var59], var60, false, 0, -1, 0, var58);
+						IfType var61 = Client.method607(IfType.list[var59], var60, false, 0, -1, 0, var58);
 						if (var61 == null) {
 							field3255[var4++] = -1;
 						} else {
@@ -567,7 +596,7 @@ public class ScriptRunner {
 						IfType var62 = IfType.get(field3255[var4]);
 						int var63 = field3255[var4 + 1];
 						int var64 = field3255[var4 + 2];
-						IfType var65 = Statics.method607(IfType.list[var62.parentId >> 16], var64, false, var62.scrollHeight, var62.parentId & 0xFFFF, var62.scrollWidth, var63);
+						IfType var65 = Client.method607(IfType.list[var62.parentId >> 16], var64, false, var62.scrollHeight, var62.parentId & 0xFFFF, var62.scrollWidth, var63);
 						if (var65 == null) {
 							field3255[var4++] = -1;
 						} else {
@@ -676,7 +705,7 @@ public class ScriptRunner {
 								JagString var106 = field2957[var8];
 								var4--;
 								int var107 = field3255[var4];
-								field2957[var8++] = JagString.join(new JagString[]{var106, Statics.method1034(var107)});
+								field2957[var8++] = JagString.join(new JagString[]{var106, JagString.method1034(var107)});
 							} else if (var14 == 4103) {
 								var8--;
 								JagString var108 = field2957[var8];
@@ -689,7 +718,7 @@ public class ScriptRunner {
 								int var112 = field453.get(5);
 								int var113 = field453.get(2);
 								int var114 = field453.get(1);
-								field2957[var8++] = JagString.join(new JagString[]{JagString.parseInt(var112), Statics.field1572, Statics.field621[var113], Statics.field1572, JagString.parseInt(var114)});
+								field2957[var8++] = JagString.join(new JagString[]{JagString.parseInt(var112), field1572, field621[var113], field1572, JagString.parseInt(var114)});
 							} else if (var14 == 4105) {
 								var8 -= 2;
 								JagString var115 = field2957[var8];
@@ -798,7 +827,7 @@ public class ScriptRunner {
 					} else if (var14 == 3100) {
 						var8--;
 						JagString var118 = field2957[var8];
-						Client.method758(0, var118, Statics.field2585);
+						Client.method758(0, var118, field2585);
 					} else {
 						if (var14 != 3101) {
 							break;

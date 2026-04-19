@@ -1,6 +1,6 @@
 package jagex3.dash3d;
 
-import deob.*;
+import deob.ObfuscatedName;
 import jagex3.datastruct.Linkable;
 
 @ObfuscatedName("fa")

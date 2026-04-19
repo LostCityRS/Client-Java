@@ -1,12 +1,15 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 
 @ObfuscatedName("ee")
 public final class Filter {
 
+	@ObfuscatedName("ee.a")
+	public static float field819;
+	@ObfuscatedName("ee.e")
+	public static int field823;
 	@ObfuscatedName("ee.b")
 	public final int[][][] field820 = new int[2][2][4];
 
@@ -26,7 +29,7 @@ public final class Filter {
 	public final int[][][] field826 = new int[2][2][4];
 
 	@ObfuscatedName("ee.a()V")
-	public static void method376() {
+	public static void unload() {
 		field822 = null;
 		field821 = null;
 	}
@@ -77,8 +80,8 @@ public final class Filter {
 		if (arg0 == 0) {
 			float var3 = (float) (this.field824[1] - this.field824[0]) * arg1 + (float) this.field824[0];
 			float var4 = var3 * 0.0030517578F;
-			Statics.field819 = (float) Math.pow(0.1D, (double) (var4 / 20.0F));
-			Statics.field823 = (int) (Statics.field819 * 65536.0F);
+			field819 = (float) Math.pow(0.1D, (double) (var4 / 20.0F));
+			field823 = (int) (field819 * 65536.0F);
 		}
 		if (this.field825[arg0] == 0) {
 			return 0;
@@ -100,7 +103,7 @@ public final class Filter {
 		}
 		if (arg0 == 0) {
 			for (int var11 = 0; var11 < this.field825[0] * 2; var11++) {
-				field822[0][var11] *= Statics.field819;
+				field822[0][var11] *= field819;
 			}
 		}
 		for (int var12 = 0; var12 < this.field825[arg0] * 2; var12++) {

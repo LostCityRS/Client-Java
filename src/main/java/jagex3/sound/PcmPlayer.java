@@ -1,10 +1,10 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.client.SignLink;
 import jagex3.util.ArrayUtil;
+import jagex3.util.MonotonicTime;
 import jagex3.util.ThreadUtil;
 
 import java.awt.*;
@@ -18,6 +18,14 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	public static int frequency;
 	@ObfuscatedName("ca.n")
 	public static long field462;
+	@ObfuscatedName("ad.D")
+	public static PcmPlayerBase field217;
+	@ObfuscatedName("vb.Db")
+	public static int field3140;
+	@ObfuscatedName("hb.cb")
+	public static int field1157;
+	@ObfuscatedName("id.v")
+	public static PcmStream field1381;
 
 	@ObfuscatedName("pd.K")
 	public int field2343 = 0;
@@ -63,19 +71,19 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 		try {
 			PcmPlayer var2 = (PcmPlayer) Class.forName("jagex3.sound.JavaPcmPlayer").getDeclaredConstructor().newInstance();
 			var2.method818(arg1, 2048);
-			Statics.field217 = var2;
+			field217 = var2;
 		} catch (Throwable var5) {
 			try {
-				Statics.field217 = new JavaSafePcmPlayer(arg1, arg0);
+				field217 = new JavaSafePcmPlayer(arg1, arg0);
 			} catch (Throwable var4) {
 				if (SignLink.javaVendor.toLowerCase().indexOf("microsoft") >= 0) {
 					try {
-						Statics.field217 = new JavaMicrosoftPcmPlayer();
+						field217 = new JavaMicrosoftPcmPlayer();
 						return;
 					} catch (Throwable var3) {
 					}
 				}
-				Statics.field217 = new PcmPlayerBase(8000);
+				field217 = new PcmPlayerBase(8000);
 			}
 		}
 	}
@@ -86,36 +94,68 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	}
 
 	@ObfuscatedName("pd.b()V")
-	public static void method816() {
+	public static void unload() {
 		field2347 = null;
 	}
 
     @ObfuscatedName("ha.a(B)V")
     public static void method463() {
-        if (Statics.field217 == null) {
+        if (field217 == null) {
             return;
         }
-        long var0 = Statics.currentTime();
+        long var0 = MonotonicTime.currentTime();
         if (var0 <= field462) {
             return;
         }
-        Statics.field217.method255(var0);
+        field217.method255(var0);
         int var2 = (int) (var0 - field462);
         field462 = var0;
         Class var3 = PcmPlayerBase.class;
         synchronized (PcmPlayerBase.class) {
-            Statics.field1157 += frequency * var2;
-            int var4 = (Statics.field1157 - frequency * 2000) / 1000;
+            field1157 += frequency * var2;
+            int var4 = (field1157 - frequency * 2000) / 1000;
             if (var4 > 0) {
-                if (Statics.field1381 != null) {
-                    Statics.field1381.method127(var4);
+                if (field1381 != null) {
+                    field1381.method127(var4);
                 }
-                Statics.field1157 -= var4 * 1000;
+                field1157 -= var4 * 1000;
             }
         }
     }
 
-    @ObfuscatedName("pd.b(J)V")
+	@ObfuscatedName("td.a(Z)V")
+	public static void method967() {
+		if (field217 != null) {
+			field217.method256();
+			field217 = null;
+		}
+	}
+
+	@ObfuscatedName("ca.a(IB)V")
+	public static synchronized void method260() {
+		if (field1381 != null) {
+			field1381.method127(256);
+		}
+		method949(256);
+	}
+
+	@ObfuscatedName("ca.a(Loc;I)V")
+	public static synchronized void method261(PcmStream arg0) {
+		field1381 = arg0;
+	}
+
+	@ObfuscatedName("ta.b(ZI)V")
+	public static void method949(int arg0) {
+		for (field3140 += arg0; field3140 >= frequency; field3140 -= frequency) {
+			field1157 -= field1157 >> 2;
+		}
+		field1157 -= arg0 * 1000;
+		if (field1157 < 0) {
+			field1157 = 0;
+		}
+	}
+
+	@ObfuscatedName("pd.b(J)V")
 	public void method815(long arg0) throws Exception {
 		this.method433(this.field2349);
 		while (true) {
@@ -149,7 +189,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 					this.field2339 = 0L;
 					break;
 				}
-				Statics.method260();
+				method260();
 				this.field2350 += 256000 / frequency;
 			}
 		}
@@ -220,7 +260,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	@ObfuscatedName("pd.a(Llc;I)V")
 	public final void method818(SignLink arg0, int arg1) throws Exception {
 		this.field2349 = arg1;
-		this.method815(Statics.currentTime());
+		this.method815(MonotonicTime.currentTime());
 		arg0.threadreq(10, this);
 	}
 
@@ -252,7 +292,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 						this.field2338 = false;
 						return;
 					}
-					this.method255(Statics.currentTime());
+					this.method255(MonotonicTime.currentTime());
 				}
 				ThreadUtil.sleepPrecise(5L);
 			}

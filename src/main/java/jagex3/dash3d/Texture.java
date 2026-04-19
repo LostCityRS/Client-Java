@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.datastruct.Linkable;
 import jagex3.graphics.Pix8;
 import jagex3.graphics.PixLoader;
@@ -11,7 +10,9 @@ import jagex3.js5.Js5;
 @ObfuscatedName("p")
 public final class Texture extends Linkable {
 
-	@ObfuscatedName("p.cb")
+    @ObfuscatedName("p.hb")
+    public static int[] field2196;
+    @ObfuscatedName("p.cb")
 	public final int field2191;
 
 	@ObfuscatedName("p.db")
@@ -47,8 +48,8 @@ public final class Texture extends Linkable {
 			return;
 		}
 		if (this.field2191 == 1 || this.field2191 == 3) {
-			if (Statics.field2196 == null || Statics.field2196.length < this.field2194.length) {
-				Statics.field2196 = new int[this.field2194.length];
+			if (field2196 == null || field2196.length < this.field2194.length) {
+				field2196 = new int[this.field2194.length];
 			}
 			short var2;
 			if (this.field2194.length == 16384) {
@@ -64,20 +65,20 @@ public final class Texture extends Linkable {
 			}
 			for (int var6 = 0; var6 < var3; var6++) {
 				int var7 = var4 + var6 & var5;
-				Statics.field2196[var6] = this.field2194[var7];
-				Statics.field2196[var3 + var6] = this.field2194[var3 + var7];
-				Statics.field2196[var3 + var6 + var3] = this.field2194[var3 + var7 + var3];
-				Statics.field2196[var3 + var6 + var3 + var3] = this.field2194[var3 + var7 + var3 + var3];
+				field2196[var6] = this.field2194[var7];
+				field2196[var3 + var6] = this.field2194[var3 + var7];
+				field2196[var3 + var6 + var3] = this.field2194[var3 + var7 + var3];
+				field2196[var3 + var6 + var3 + var3] = this.field2194[var3 + var7 + var3 + var3];
 			}
 			int[] var8 = this.field2194;
-			this.field2194 = Statics.field2196;
-			Statics.field2196 = var8;
+			this.field2194 = field2196;
+			field2196 = var8;
 		}
 		if (this.field2191 != 2 && this.field2191 != 4) {
 			return;
 		}
-		if (Statics.field2196 == null || Statics.field2196.length < this.field2194.length) {
-			Statics.field2196 = new int[this.field2194.length];
+		if (field2196 == null || field2196.length < this.field2194.length) {
+			field2196 = new int[this.field2194.length];
 		}
 		short var9;
 		if (this.field2194.length == 16384) {
@@ -95,15 +96,15 @@ public final class Texture extends Linkable {
 			for (int var14 = 0; var14 < var9; var14++) {
 				int var15 = var13 + var14;
 				int var16 = (var11 + var14 & var12) + var13;
-				Statics.field2196[var15] = this.field2194[var16];
-				Statics.field2196[var10 + var15] = this.field2194[var10 + var16];
-				Statics.field2196[var10 + var15 + var10] = this.field2194[var10 + var16 + var10];
-				Statics.field2196[var10 + var15 + var10 + var10] = this.field2194[var10 + var16 + var10 + var10];
+				field2196[var15] = this.field2194[var16];
+				field2196[var10 + var15] = this.field2194[var10 + var16];
+				field2196[var10 + var15 + var10] = this.field2194[var10 + var16 + var10];
+				field2196[var10 + var15 + var10 + var10] = this.field2194[var10 + var16 + var10 + var10];
 			}
 		}
 		int[] var17 = this.field2194;
-		this.field2194 = Statics.field2196;
-		Statics.field2196 = var17;
+		this.field2194 = field2196;
+		field2196 = var17;
 	}
 
 	@ObfuscatedName("p.a(DILbd;)Z")

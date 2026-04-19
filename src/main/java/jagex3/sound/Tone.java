@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 
 import java.util.Random;
@@ -95,7 +94,7 @@ public final class Tone {
 	}
 
 	@ObfuscatedName("ue.a()V")
-	public static void method1004() {
+	public static void unload() {
 		field3088 = null;
 		field3097 = null;
 		field3084 = null;
@@ -274,7 +273,7 @@ public final class Tone {
 					var34 = arg0 - var31;
 				}
 				while (var33 < var34) {
-					int var35 = (int) ((long) field3088[var31 + var33] * (long) Statics.field823 >> 16);
+					int var35 = (int) ((long) field3088[var31 + var33] * (long) Filter.field823 >> 16);
 					for (int var36 = 0; var36 < var31; var36++) {
 						var35 += (int) ((long) field3088[var31 + var33 - var36 - 1] * (long) Filter.field821[0][var36] >> 16);
 					}
@@ -291,7 +290,7 @@ public final class Tone {
 						var38 = arg0 - var31;
 					}
 					while (var33 < var38) {
-						int var39 = (int) ((long) field3088[var31 + var33] * (long) Statics.field823 >> 16);
+						int var39 = (int) ((long) field3088[var31 + var33] * (long) Filter.field823 >> 16);
 						for (int var40 = 0; var40 < var31; var40++) {
 							var39 += (int) ((long) field3088[var31 + var33 - var40 - 1] * (long) Filter.field821[0][var40] >> 16);
 						}

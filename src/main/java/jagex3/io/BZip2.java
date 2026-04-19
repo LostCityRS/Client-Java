@@ -1,13 +1,14 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 @ObfuscatedName("ge")
 public final class BZip2 {
 
 	@ObfuscatedName("ge.a")
 	public static BZip2State state = new BZip2State();
+	@ObfuscatedName("fc.Cb")
+	public static int[] field899;
 
 	@ObfuscatedName("ge.a(Lmb;)V")
 	public static void method439(BZip2State arg0) {
@@ -26,7 +27,7 @@ public final class BZip2 {
 		int var2 = arg0.field1802;
 		int var3 = arg0.field1792;
 		int var4 = arg0.field1801;
-		int[] var5 = Statics.field899;
+		int[] var5 = field899;
 		int var6 = arg0.field1810;
 		byte[] var7 = arg0.field1827;
 		int var8 = arg0.field1815;
@@ -127,7 +128,7 @@ public final class BZip2 {
 		arg0.field1802 = var2;
 		arg0.field1792 = var3;
 		arg0.field1801 = var4;
-		Statics.field899 = var5;
+		field899 = var5;
 		arg0.field1810 = var6;
 		arg0.field1827 = var7;
 		arg0.field1815 = var8;
@@ -137,8 +138,8 @@ public final class BZip2 {
 	@ObfuscatedName("ge.c(Lmb;)V")
 	public static void method441(BZip2State arg0) {
 		arg0.field1800 = 1;
-		if (Statics.field899 == null) {
-			Statics.field899 = new int[arg0.field1800 * 100000];
+		if (field899 == null) {
+			field899 = new int[arg0.field1800 * 100000];
 		}
 		boolean var1 = true;
 		while (true) {
@@ -312,7 +313,7 @@ public final class BZip2 {
 							byte var65 = arg0.field1804[arg0.field1830[arg0.field1808[0]] & 0xFF];
 							arg0.field1835[var65 & 0xFF] += var59;
 							while (var59 > 0) {
-								Statics.field899[var48] = var65 & 0xFF;
+								field899[var48] = var65 & 0xFF;
 								var48++;
 								var59--;
 							}
@@ -364,7 +365,7 @@ public final class BZip2 {
 								}
 							}
 							arg0.field1835[arg0.field1804[var68 & 0xFF] & 0xFF]++;
-							Statics.field899[var48] = arg0.field1804[var68 & 0xFF] & 0xFF;
+							field899[var48] = arg0.field1804[var68 & 0xFF] & 0xFF;
 							var48++;
 							if (var85 == 0) {
 								var84++;
@@ -396,13 +397,13 @@ public final class BZip2 {
 						arg0.field1806[var81] += arg0.field1806[var81 - 1];
 					}
 					for (int var82 = 0; var82 < var48; var82++) {
-						byte var83 = (byte) (Statics.field899[var82] & 0xFF);
-						Statics.field899[arg0.field1806[var83 & 0xFF]] |= var82 << 8;
+						byte var83 = (byte) (field899[var82] & 0xFF);
+						field899[arg0.field1806[var83 & 0xFF]] |= var82 << 8;
 						arg0.field1806[var83 & 0xFF]++;
 					}
-					arg0.field1810 = Statics.field899[arg0.field1791] >> 8;
+					arg0.field1810 = field899[arg0.field1791] >> 8;
 					arg0.field1792 = 0;
-					arg0.field1810 = Statics.field899[arg0.field1810];
+					arg0.field1810 = field899[arg0.field1810];
 					arg0.field1801 = (byte) (arg0.field1810 & 0xFF);
 					arg0.field1810 >>= 0x8;
 					arg0.field1792++;
@@ -499,7 +500,7 @@ public final class BZip2 {
 	}
 
 	@ObfuscatedName("ge.a()V")
-	public static void method438() {
+	public static void unload() {
 		state = null;
 	}
 }

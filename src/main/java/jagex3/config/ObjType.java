@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.constants.Text;
 import jagex3.dash3d.Model;
 import jagex3.dash3d.Pix3D;
@@ -63,8 +62,10 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("ta.sb")
 	public int stackable = 0;
 
+	@ObfuscatedName("ua.s")
+	public static JagString field3017 = JagString.wrap("null");
 	@ObfuscatedName("ta.tb")
-	public JagString name = Statics.field3017;
+	public JagString name = field3017;
 
 	@ObfuscatedName("ta.tc")
 	public int womanwear = -1;

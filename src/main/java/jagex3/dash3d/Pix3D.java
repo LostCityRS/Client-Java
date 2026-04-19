@@ -2298,7 +2298,7 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.e()V")
-	public static void method358() {
+	public static void unload() {
 		field770 = null;
 		field764 = null;
 		field771 = null;

@@ -1,9 +1,9 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import jagex3.sound.MidiDevice;
 import jagex3.io.FileOnDisk;
 import jagex3.sound.AudioSource;
+import jagex3.sound.MidiDevice;
 
 import java.applet.Applet;
 import java.io.*;

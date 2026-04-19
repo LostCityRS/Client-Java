@@ -1,7 +1,7 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
+import jagex3.util.MonotonicTime;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -125,7 +125,7 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 			field2293 = 0;
 			field2711 = arg0.getX();
 			field2396 = arg0.getY();
-			field919 = Statics.currentTime();
+			field919 = MonotonicTime.currentTime();
 			if (arg0.isMetaDown()) {
 				field2017 = 2;
 				field494 = 2;
