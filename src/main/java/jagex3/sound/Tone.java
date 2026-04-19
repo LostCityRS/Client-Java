@@ -136,16 +136,16 @@ public final class Tone {
 			this.field3086.method249(arg0);
 		}
 		for (int var5 = 0; var5 < 10; var5++) {
-			int var6 = arg0.method178();
+			int var6 = arg0.gsmart();
 			if (var6 == 0) {
 				break;
 			}
 			this.field3091[var5] = var6;
 			this.field3085[var5] = arg0.method158();
-			this.field3089[var5] = arg0.method178();
+			this.field3089[var5] = arg0.gsmart();
 		}
-		this.field3083 = arg0.method178();
-		this.field3092 = arg0.method178();
+		this.field3083 = arg0.gsmart();
+		this.field3092 = arg0.gsmart();
 		this.field3100 = arg0.g2();
 		this.field3082 = arg0.g2();
 		this.field3081 = new Filter();

@@ -9,7 +9,7 @@ public class VarCache {
 	@ObfuscatedName("se.E")
 	public static int[] var = new int[2000];
 	@ObfuscatedName("ga.E")
-	public static int[] field1020 = new int[2000];
+	public static int[] varcInt = new int[2000];
     @ObfuscatedName("ba.ic")
     public static int[] field304 = new int[2000];
 
@@ -32,7 +32,7 @@ public class VarCache {
 	}
 
 	@ObfuscatedName("be.b(IIB)V")
-	public static void method241(int arg0, int arg1) {
+	public static void setVarbit(int arg0, int arg1) {
 		VarBitType var2 = VarBitType.list(arg1);
 		int var3 = var2.startbit;
 		int var4 = var2.basevar;

@@ -10,7 +10,7 @@ public final class MouseTracking implements Runnable {
 	public final Object lock = new Object();
 
 	@ObfuscatedName("nc.p")
-	public boolean field2050 = true;
+	public boolean active = true;
 
 	@ObfuscatedName("nc.w")
 	public final int[] y = new int[500];
@@ -23,7 +23,7 @@ public final class MouseTracking implements Runnable {
 
 	@Override
 	public void run() {
-		while (this.field2050) {
+		while (this.active) {
 			Object var1 = this.lock;
 			synchronized (this.lock) {
 				if (this.length < 500) {

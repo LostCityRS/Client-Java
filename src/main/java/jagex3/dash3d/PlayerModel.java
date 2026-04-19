@@ -20,7 +20,7 @@ public final class PlayerModel {
 	@ObfuscatedName("t.wb")
 	public static int[] field2808 = new int[]{8, 11, 4, 6, 9, 7, 10};
 	@ObfuscatedName("la.d")
-	public boolean field1658;
+	public boolean gender;
 
 	@ObfuscatedName("la.m")
 	public int[] field1667;
@@ -49,7 +49,7 @@ public final class PlayerModel {
 
 	@ObfuscatedName("la.a(ILba;)V")
 	public void method635(Packet arg0) {
-		arg0.p1(this.field1658 ? 1 : 0);
+		arg0.p1(this.gender ? 1 : 0);
 		for (int var2 = 0; var2 < 7; var2++) {
 			int var3 = this.field1667[field2808[var2]];
 			if (var3 == 0) {
@@ -92,7 +92,7 @@ public final class PlayerModel {
 				if (var12 >= 256 && var12 < 512 && !IdkType.list(var12 - 256).checkModel()) {
 					var10 = true;
 				}
-				if (var12 >= 512 && !ObjType.list(var12 - 512).checkWearModel(this.field1658)) {
+				if (var12 >= 512 && !ObjType.list(var12 - 512).checkWearModel(this.gender)) {
 					var10 = true;
 				}
 			}
@@ -116,7 +116,7 @@ public final class PlayerModel {
 						}
 					}
 					if (var16 >= 512) {
-						Model var18 = ObjType.list(var16 - 512).getWearModelNoCheck(this.field1658);
+						Model var18 = ObjType.list(var16 - 512).getWearModelNoCheck(this.gender);
 						if (var18 != null) {
 							var13[var14++] = var18;
 						}
@@ -176,7 +176,7 @@ public final class PlayerModel {
 			this.field1693 += this.field1688[var6];
 		}
 		this.field1693 <<= 0x1;
-		this.field1693 += this.field1658 ? 1 : 0;
+		this.field1693 += this.gender ? 1 : 0;
 		this.field1667[5] = var2;
 		this.field1667[9] = var1;
 		if (var3 != 0L && this.field1693 != var3) {
@@ -195,7 +195,7 @@ public final class PlayerModel {
 			if (var3 >= 256 && var3 < 512 && !IdkType.list(var3 - 256).checkHead()) {
 				var1 = true;
 			}
-			if (var3 >= 512 && !ObjType.list(var3 - 512).checkHeadModel(this.field1658)) {
+			if (var3 >= 512 && !ObjType.list(var3 - 512).checkHeadModel(this.gender)) {
 				var1 = true;
 			}
 		}
@@ -213,7 +213,7 @@ public final class PlayerModel {
 				}
 			}
 			if (var7 >= 512) {
-				Model var9 = ObjType.list(var7 - 512).getHeadModelNoCheck(this.field1658);
+				Model var9 = ObjType.list(var7 - 512).getHeadModelNoCheck(this.gender);
 				if (var9 != null) {
 					var4[var5++] = var9;
 				}
@@ -246,7 +246,7 @@ public final class PlayerModel {
 			}
 		}
 		this.field1671 = arg3;
-		this.field1658 = arg1;
+		this.gender = arg1;
 		this.field1667 = arg0;
 		this.field1688 = arg2;
 		this.method638();
@@ -254,7 +254,7 @@ public final class PlayerModel {
 
 	@ObfuscatedName("la.a(IZI)V")
 	public void method642(int arg0, boolean arg1) {
-		if (arg0 == 1 && this.field1658) {
+		if (arg0 == 1 && this.gender) {
 			return;
 		}
 		int var3 = this.field1667[field2808[arg0]];
@@ -276,14 +276,14 @@ public final class PlayerModel {
 				}
 			}
 			var4 = IdkType.list(var3);
-		} while (var4 == null || var4.disable || var4.type != arg0 + (this.field1658 ? 7 : 0));
+		} while (var4 == null || var4.disable || var4.type != arg0 + (this.gender ? 7 : 0));
 		this.field1667[field2808[arg0]] = var3 + 256;
 		this.method638();
 	}
 
 	@ObfuscatedName("la.a(ZB)V")
 	public void method643(boolean arg0) {
-		if (this.field1658 != arg0) {
+		if (this.gender != arg0) {
 			this.setAppearance(null, arg0, this.field1688, -1);
 		}
 	}

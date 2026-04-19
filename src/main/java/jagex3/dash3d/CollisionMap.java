@@ -197,7 +197,7 @@ public final class CollisionMap {
 	}
 
 	@ObfuscatedName("ad.a(IIIIZB)V")
-	public void method114(int arg0, int arg1, int arg2, int arg3, boolean arg4) {
+	public void addWall(int arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		int var6 = arg0 - this.field202;
 		int var7 = arg3 - this.field191;
 		if (arg1 == 0) {
@@ -324,7 +324,7 @@ public final class CollisionMap {
 	}
 
 	@ObfuscatedName("ad.a(BII)V")
-	public void method115(int arg0, int arg1) {
+	public void blockGroundDecor(int arg0, int arg1) {
 		int var3 = arg0 - this.field202;
 		int var4 = arg1 - this.field191;
 		this.flags[var4][var3] |= 0x200000;
@@ -348,7 +348,7 @@ public final class CollisionMap {
 	}
 
 	@ObfuscatedName("ad.a(IZIIIII)V")
-	public void method118(int arg0, boolean arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void addLoc(int arg0, boolean arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var7 = arg4 - this.field202;
 		if (arg3 == 1 || arg3 == 3) {
 			int var8 = arg5;

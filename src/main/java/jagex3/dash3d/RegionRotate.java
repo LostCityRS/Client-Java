@@ -18,7 +18,7 @@ public class RegionRotate {
 	}
 
 	@ObfuscatedName("client.a(IIIIIII)I")
-	public static int method287(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public static int DX(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var6 = arg4 & 0x3;
 		if ((arg0 & 0x1) == 1) {
 			int var7 = arg1;
@@ -51,7 +51,7 @@ public class RegionRotate {
 	}
 
     @ObfuscatedName("fd.a(IIIIIIB)I")
-    public static int method404(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+    public static int DZ(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
         int var6 = arg4 & 0x3;
         if ((arg5 & 0x1) == 1) {
             int var7 = arg3;

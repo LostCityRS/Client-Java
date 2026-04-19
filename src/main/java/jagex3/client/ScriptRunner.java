@@ -3,6 +3,7 @@ package jagex3.client;
 import deob.ObfuscatedName;
 import jagex3.config.IfType;
 import jagex3.config.ObjType;
+import jagex3.jstring.StringTools;
 import jagex3.util.JagString;
 import jagex3.var.VarCache;
 
@@ -11,23 +12,23 @@ import java.util.Date;
 
 public class ScriptRunner {
 	@ObfuscatedName("l.j")
-	public static int field1653 = 0;
+	public static int fp = 0;
 	@ObfuscatedName("ca.e")
-	public static Calendar field453 = Calendar.getInstance();
+	public static Calendar calendar = Calendar.getInstance();
 	@ObfuscatedName("hb.hb")
-	public static int[] field1162;
+	public static int[] intLocals;
 	@ObfuscatedName("ra.r")
-	public static JagString[] field2606;
+	public static JagString[] stringLocals;
 	@ObfuscatedName("wb.o")
-	public static int[] field3255 = new int[1000];
+	public static int[] intStack = new int[1000];
 	@ObfuscatedName("te.ib")
-	public static JagString[] field2957 = new JagString[1000];
+	public static JagString[] stringStack = new JagString[1000];
 	@ObfuscatedName("sa.l")
-	public static ClientGosubFrame[] field2736 = new ClientGosubFrame[50];
+	public static ClientGosubFrame[] frames = new ClientGosubFrame[50];
 	@ObfuscatedName("jc.vb")
-	public static IfType field1468;
+	public static IfType activeComponent2;
 	@ObfuscatedName("uc.F")
-	public static IfType field3068;
+	public static IfType activeComponent;
 	@ObfuscatedName("d.mc")
 	public static JagString field642 = JagString.wrap("Jun");
 	@ObfuscatedName("d.pc")
@@ -61,15 +62,15 @@ public class ScriptRunner {
 
 	@ObfuscatedName("ob.a([Ljava/lang/Object;IILqd;IZ)V")
 	public static void method754(Object[] arg0, int arg1, IfType arg2, int arg3) {
-		int var4 = 0;
-		ClientScript var5 = ClientScript.method824((Integer) arg0[0], 76);
-		int[] var6 = var5.field509;
-		int[] var7 = var5.field519;
-		int var8 = 0;
+		int isp = 0;
+		ClientScript var5 = ClientScript.get((Integer) arg0[0], 76);
+		int[] var6 = var5.intOperands;
+		int[] var7 = var5.instructions;
+		int ssp = 0;
 		int var9 = -1;
 		try {
-			field1162 = new int[var5.field518];
-			field2606 = new JagString[var5.field514];
+			intLocals = new int[var5.intLocalCount];
+			stringLocals = new JagString[var5.stringLocalCount];
 			int var10 = 0;
 			int var11 = 0;
 			for (int var12 = 1; var12 < arg0.length; var12++) {
@@ -87,298 +88,345 @@ public class ScriptRunner {
 					if (var13 == -2147483644) {
 						var13 = 0;
 					}
-					field1162[var10++] = var13;
+					intLocals[var10++] = var13;
 				} else if (arg0[var12] instanceof JagString) {
-					field2606[var11++] = (JagString) arg0[var12];
+					stringLocals[var11++] = (JagString) arg0[var12];
 				}
 			}
 			while (true) {
-				int var14;
+				int opcode;
 				while (true) {
 					var9++;
-					var14 = var7[var9];
-					if (var14 >= 100) {
+					opcode = var7[var9];
+					if (opcode >= 100) {
 						break;
 					}
-					if (var14 == 0) {
-						field3255[var4++] = var6[var9];
-					} else if (var14 == 1) {
+					if (opcode == 0) {
+						// push_constant_int
+						intStack[isp++] = var6[var9];
+					} else if (opcode == 1) {
+						// push_varp
 						int var15 = var6[var9];
-						field3255[var4++] = VarCache.var[var15];
-					} else if (var14 == 2) {
+						intStack[isp++] = VarCache.var[var15];
+					} else if (opcode == 2) {
+						// pop_varp
 						int var16 = var6[var9];
-						var4--;
-						VarCache.var[var16] = field3255[var4];
-					} else if (var14 == 3) {
-						field2957[var8++] = var5.field517[var9];
-					} else if (var14 == 6) {
+						isp--;
+						VarCache.var[var16] = intStack[isp];
+					} else if (opcode == 3) {
+						// push_constant_string
+						stringStack[ssp++] = var5.stringOperands[var9];
+					} else if (opcode == 6) {
+						// branch
 						var9 += var6[var9];
-					} else if (var14 == 7) {
-						var4 -= 2;
-						if (field3255[var4 + 1] != field3255[var4]) {
+					} else if (opcode == 7) {
+						// branch_not
+						isp -= 2;
+						if (intStack[isp + 1] != intStack[isp]) {
 							var9 += var6[var9];
 						}
-					} else if (var14 == 8) {
-						var4 -= 2;
-						if (field3255[var4 + 1] == field3255[var4]) {
+					} else if (opcode == 8) {
+						// branch_equals
+						isp -= 2;
+						if (intStack[isp + 1] == intStack[isp]) {
 							var9 += var6[var9];
 						}
-					} else if (var14 == 9) {
-						var4 -= 2;
-						if (field3255[var4 + 1] > field3255[var4]) {
+					} else if (opcode == 9) {
+						// branch_less_than
+						isp -= 2;
+						if (intStack[isp + 1] > intStack[isp]) {
 							var9 += var6[var9];
 						}
-					} else if (var14 == 10) {
-						var4 -= 2;
-						if (field3255[var4 + 1] < field3255[var4]) {
+					} else if (opcode == 10) {
+						// branch_greater_than
+						isp -= 2;
+						if (intStack[isp + 1] < intStack[isp]) {
 							var9 += var6[var9];
 						}
-					} else if (var14 == 21) {
-						if (field1653 == 0) {
+					} else if (opcode == 21) {
+						// return
+						if (fp == 0) {
 							return;
 						}
-						ClientGosubFrame var17 = field2736[--field1653];
-						field2606 = var17.stringLocals;
-						field1162 = var17.intLocals;
+						ClientGosubFrame var17 = frames[--fp];
+						stringLocals = var17.stringLocals;
+						intLocals = var17.intLocals;
 						var9 = var17.pc;
 						var5 = var17.script;
-						var6 = var5.field509;
-						var7 = var5.field519;
-					} else if (var14 == 25) {
+						var6 = var5.intOperands;
+						var7 = var5.instructions;
+					} else if (opcode == 25) {
+						// push_varbit
 						int var18 = var6[var9];
-						field3255[var4++] = VarCache.getVarbit(var18);
-					} else if (var14 == 27) {
+						intStack[isp++] = VarCache.getVarbit(var18);
+					} else if (opcode == 27) {
+						// pop_varbit
 						int var19 = var6[var9];
-						var4--;
-						VarCache.method241(field3255[var4], var19);
-					} else if (var14 == 31) {
-						var4 -= 2;
-						if (field3255[var4] <= field3255[var4 + 1]) {
+						isp--;
+						VarCache.setVarbit(intStack[isp], var19);
+					} else if (opcode == 31) {
+						// branch_less_than_or_equals
+						isp -= 2;
+						if (intStack[isp] <= intStack[isp + 1]) {
 							var9 += var6[var9];
 						}
-					} else if (var14 == 32) {
-						var4 -= 2;
-						if (field3255[var4 + 1] <= field3255[var4]) {
+					} else if (opcode == 32) {
+						// branch_greater_than_or_equals
+						isp -= 2;
+						if (intStack[isp + 1] <= intStack[isp]) {
 							var9 += var6[var9];
 						}
-					} else if (var14 == 33) {
-						field3255[var4++] = field1162[var6[var9]];
+					} else if (opcode == 33) {
+						// push_int_local
+						intStack[isp++] = intLocals[var6[var9]];
 					} else {
 						int var10001;
-						if (var14 == 34) {
+						if (opcode == 34) {
+							// pop_int_local
 							var10001 = var6[var9];
-							var4--;
-							field1162[var10001] = field3255[var4];
-						} else if (var14 == 35) {
-							field2957[var8++] = field2606[var6[var9]];
-						} else if (var14 == 36) {
+							isp--;
+							intLocals[var10001] = intStack[isp];
+						} else if (opcode == 35) {
+							// push_string_local
+							stringStack[ssp++] = stringLocals[var6[var9]];
+						} else if (opcode == 36) {
+							// pop_string_local
 							var10001 = var6[var9];
-							var8--;
-							field2606[var10001] = field2957[var8];
-						} else if (var14 == 37) {
+							ssp--;
+							stringLocals[var10001] = stringStack[ssp];
+						} else if (opcode == 37) {
+							// join_string
 							int var20 = var6[var9];
-							var8 -= var20;
-							JagString var21 = JagString.method825(var20, var8, field2957);
-							field2957[var8++] = var21;
-						} else if (var14 == 38) {
-							var4--;
-						} else if (var14 == 39) {
-							var8--;
-						} else if (var14 == 40) {
+							ssp -= var20;
+							JagString var21 = StringTools.join(var20, ssp, stringStack);
+							stringStack[ssp++] = var21;
+						} else if (opcode == 38) {
+							// pop_int_discard
+							isp--;
+						} else if (opcode == 39) {
+							// pop_string_discard
+							ssp--;
+						} else if (opcode == 40) {
+							// gosub_with_params
 							int var22 = var6[var9];
-							ClientScript var23 = ClientScript.method824(var22, 73);
-							int[] var24 = new int[var23.field518];
-							JagString[] var25 = new JagString[var23.field514];
-							for (int var26 = 0; var26 < var23.field510; var26++) {
-								var24[var26] = field3255[var4 + var26 - var23.field510];
+							ClientScript var23 = ClientScript.get(var22, 73);
+							int[] var24 = new int[var23.intLocalCount];
+							JagString[] var25 = new JagString[var23.stringLocalCount];
+							for (int var26 = 0; var26 < var23.intArgCount; var26++) {
+								var24[var26] = intStack[isp + var26 - var23.intArgCount];
 							}
-							for (int var27 = 0; var27 < var23.field513; var27++) {
-								var25[var27] = field2957[var8 + var27 - var23.field513];
+							for (int var27 = 0; var27 < var23.stringArgCount; var27++) {
+								var25[var27] = stringStack[ssp + var27 - var23.stringArgCount];
 							}
-							var8 -= var23.field513;
-							var4 -= var23.field510;
+							ssp -= var23.stringArgCount;
+							isp -= var23.intArgCount;
 							ClientGosubFrame var28 = new ClientGosubFrame();
-							var28.stringLocals = field2606;
+							var28.stringLocals = stringLocals;
 							var28.script = var5;
-							var28.intLocals = field1162;
+							var28.intLocals = intLocals;
 							var5 = var23;
 							var28.pc = var9;
-							field2736[field1653++] = var28;
-							var6 = var23.field509;
-							field2606 = var25;
+							frames[fp++] = var28;
+							var6 = var23.intOperands;
+							stringLocals = var25;
 							var9 = -1;
-							field1162 = var24;
-							var7 = var23.field519;
-						} else if (var14 == 42) {
-							field3255[var4++] = VarCache.field1020[var6[var9]];
+							intLocals = var24;
+							var7 = var23.instructions;
+						} else if (opcode == 42) {
+							// push_varc_int
+							intStack[isp++] = VarCache.varcInt[var6[var9]];
 						} else {
-							if (var14 != 43) {
+							if (opcode != 43) {
 								break;
 							}
+							// pop_varc_int
 							var10001 = var6[var9];
-							var4--;
-							VarCache.field1020[var10001] = field3255[var4];
+							isp--;
+							VarCache.varcInt[var10001] = intStack[isp];
 						}
 					}
 				}
-				boolean var29;
+				boolean secondary;
 				if (var6[var9] == 1) {
-					var29 = true;
+					secondary = true;
 				} else {
-					var29 = false;
+					secondary = false;
 				}
-				if (var14 < 1000) {
-					if (var14 == 100) {
-						var4 -= 3;
-						int var30 = field3255[var4];
-						int var31 = field3255[var4 + 1];
-						int var32 = field3255[var4 + 2];
+				if (opcode < 1000) {
+					if (opcode == 100) {
+						// cc_create
+						isp -= 3;
+						int var30 = intStack[isp];
+						int var31 = intStack[isp + 1];
+						int var32 = intStack[isp + 2];
 						IfType var33 = IfType.get(var30);
-						if (var33.field2519 == null) {
-							var33.field2519 = new IfType[var32 + 1];
+						if (var33.subcomponents == null) {
+							var33.subcomponents = new IfType[var32 + 1];
 						}
-						if (var32 >= var33.field2519.length) {
+						if (var32 >= var33.subcomponents.length) {
 							IfType[] var34 = new IfType[var32 + 1];
-							for (int var35 = 0; var35 < var33.field2519.length; var35++) {
-								var34[var35] = var33.field2519[var35];
+							for (int var35 = 0; var35 < var33.subcomponents.length; var35++) {
+								var34[var35] = var33.subcomponents[var35];
 							}
-							var33.field2519 = var34;
+							var33.subcomponents = var34;
 						}
 						IfType var36 = new IfType();
 						var36.layerId = var33.parentId;
 						var36.type = var31;
 						var36.parentId = ((var33.parentId & 0xFFFF) << 15) + var32 + Integer.MIN_VALUE;
-						var33.field2519[var32] = var36;
-						if (var29) {
-							field1468 = var36;
+						var33.subcomponents[var32] = var36;
+						if (secondary) {
+							activeComponent2 = var36;
 						} else {
-							field3068 = var36;
+							activeComponent = var36;
 						}
-					} else if (var14 == 101) {
-						IfType var37 = var29 ? field1468 : field3068;
+					} else if (opcode == 101) {
+						// cc_delete
+						IfType var37 = secondary ? activeComponent2 : activeComponent;
 						IfType var38 = IfType.get(var37.layerId);
-						var38.field2519[var37.parentId & 0x7FFF] = null;
+						var38.subcomponents[var37.parentId & 0x7FFF] = null;
 					} else {
-						if (var14 != 102) {
+						if (opcode != 102) {
 							break;
 						}
-						var4--;
-						IfType var39 = IfType.get(field3255[var4]);
-						var39.field2519 = null;
+						// cc_deleteall
+						isp--;
+						IfType var39 = IfType.get(intStack[isp]);
+						var39.subcomponents = null;
 					}
-				} else if (var14 >= 1000 && var14 < 1100 || !(var14 < 2000 || var14 >= 2100)) {
+				} else if (opcode >= 1000 && opcode < 1100 || !(opcode < 2000 || opcode >= 2100)) {
 					IfType var40;
-					if (var14 >= 2000) {
-						var4--;
-						var40 = IfType.get(field3255[var4]);
-						var14 -= 1000;
+					if (opcode >= 2000) {
+						isp--;
+						var40 = IfType.get(intStack[isp]);
+						opcode -= 1000;
 					} else {
-						var40 = var29 ? field1468 : field3068;
+						var40 = secondary ? activeComponent2 : activeComponent;
 					}
-					if (var14 == 1000) {
-						var4 -= 2;
-						var40.x = field3255[var4];
-						var40.y = field3255[var4 + 1];
-					} else if (var14 == 1001) {
-						var4 -= 2;
-						var40.width = field3255[var4];
-						var40.height = field3255[var4 + 1];
-					} else if (var14 == 1003) {
-						var4--;
-						var40.hide = field3255[var4] == 1;
+					if (opcode == 1000) {
+						// if/cc_setposition
+						isp -= 2;
+						var40.x = intStack[isp];
+						var40.y = intStack[isp + 1];
+					} else if (opcode == 1001) {
+						// if/cc_setsize
+						isp -= 2;
+						var40.width = intStack[isp];
+						var40.height = intStack[isp + 1];
+					} else if (opcode == 1003) {
+						// if/cc_sethide
+						isp--;
+						var40.hide = intStack[isp] == 1;
 					} else {
-						if (var14 != 1004) {
+						if (opcode != 1004) {
 							break;
 						}
-						var4--;
-						var40.hashook = field3255[var4] == 1;
+						isp--;
+						var40.hashook = intStack[isp] == 1;
 					}
-				} else if (var14 >= 1100 && var14 < 1200 || !(var14 < 2100 || var14 >= 2200)) {
+				} else if (opcode >= 1100 && opcode < 1200 || !(opcode < 2100 || opcode >= 2200)) {
 					IfType var41;
-					if (var14 < 2000) {
-						var41 = var29 ? field1468 : field3068;
+					if (opcode < 2000) {
+						var41 = secondary ? activeComponent2 : activeComponent;
 					} else {
-						var4--;
-						var41 = IfType.get(field3255[var4]);
-						var14 -= 1000;
+						isp--;
+						var41 = IfType.get(intStack[isp]);
+						opcode -= 1000;
 					}
-					if (var14 == 1100) {
-						var4 -= 2;
-						var41.scrollWidth = field3255[var4];
-						var41.scrollHeight = field3255[var4 + 1];
-					} else if (var14 == 1101) {
-						var4--;
-						int var42 = field3255[var4];
+					if (opcode == 1100) {
+						// if/cc_setscrollpos
+						isp -= 2;
+						var41.scrollPosX = intStack[isp];
+						var41.scrollPosY = intStack[isp + 1];
+					} else if (opcode == 1101) {
+						// if/cc_setcolour
+						isp--;
+						int var42 = intStack[isp];
 						int var43 = var42 >> 10 & 0x1F;
 						int var44 = var42 & 0x1F;
 						int var45 = var42 >> 5 & 0x1F;
 						var41.colour = (var43 << 19) + (var45 << 11) + (var44 << 3);
-					} else if (var14 == 1102) {
-						var4--;
-						var41.fill = field3255[var4] == 1;
-					} else if (var14 == 1103) {
-						var4--;
-						var41.trans = field3255[var4];
-					} else if (var14 == 1104) {
-						var4--;
-					} else if (var14 == 1105) {
-						var4--;
-						var41.graphic = field3255[var4];
-					} else if (var14 == 1106) {
-						var4--;
-						var41.rotate = field3255[var4];
-					} else if (var14 == 1107) {
-						var4--;
-						var41.tiling = field3255[var4] == 1;
-					} else if (var14 == 1108) {
+					} else if (opcode == 1102) {
+						// if/cc_setfill
+						isp--;
+						var41.fill = intStack[isp] == 1;
+					} else if (opcode == 1103) {
+						// if/cc_settrans
+						isp--;
+						var41.trans = intStack[isp];
+					} else if (opcode == 1104) {
+						// if/cc_setlinewid
+						isp--;
+					} else if (opcode == 1105) {
+						// if/cc_setgraphic
+						isp--;
+						var41.graphic = intStack[isp];
+					} else if (opcode == 1106) {
+						// if/cc_set2dangle
+						isp--;
+						var41.rotate = intStack[isp];
+					} else if (opcode == 1107) {
+						// if/cc_settiling
+						isp--;
+						var41.tiling = intStack[isp] == 1;
+					} else if (opcode == 1108) {
+						// if/cc_setmodel
 						var41.model1Type = 1;
-						var4--;
-						var41.model1Id = field3255[var4];
-					} else if (var14 == 1109) {
-						var4 -= 6;
-						var41.modelXOf = field3255[var4];
-						var41.modelYOf = field3255[var4 + 1];
-						var41.modelXAn = field3255[var4 + 2];
-						var41.modelYAn = field3255[var4 + 3];
-						var41.modelZAn = field3255[var4 + 4];
-						var41.modelZoom = field3255[var4 + 5];
-					} else if (var14 == 1110) {
-						var4--;
-						var41.modelAnim = field3255[var4];
-					} else if (var14 == 1111) {
-						var4--;
-						var41.orthog = field3255[var4] == 1;
-					} else if (var14 == 1112) {
-						var8--;
-						var41.text = field2957[var8];
-					} else if (var14 == 1113) {
-						var4--;
-						var41.font = field3255[var4];
-					} else if (var14 == 1114) {
-						var4 -= 3;
-						var41.hAlign = field3255[var4];
-						var41.vAlign = field3255[var4 + 1];
-						var41.lineHeight = field3255[var4 + 2];
+						isp--;
+						var41.model1Id = intStack[isp];
+					} else if (opcode == 1109) {
+						// if/cc_setmodelangle
+						isp -= 6;
+						var41.modelXOf = intStack[isp];
+						var41.modelYOf = intStack[isp + 1];
+						var41.modelXAn = intStack[isp + 2];
+						var41.modelYAn = intStack[isp + 3];
+						var41.modelZAn = intStack[isp + 4];
+						var41.modelZoom = intStack[isp + 5];
+					} else if (opcode == 1110) {
+						// if/cc_setmodelanim
+						isp--;
+						var41.modelAnim = intStack[isp];
+					} else if (opcode == 1111) {
+						// if/cc_setmodelorthog
+						isp--;
+						var41.orthog = intStack[isp] == 1;
+					} else if (opcode == 1112) {
+						// if/cc_settext
+						ssp--;
+						var41.text = stringStack[ssp];
+					} else if (opcode == 1113) {
+						// if/cc_settextfont
+						isp--;
+						var41.font = intStack[isp];
+					} else if (opcode == 1114) {
+						// if/cc_settextalign
+						isp -= 3;
+						var41.hAlign = intStack[isp];
+						var41.vAlign = intStack[isp + 1];
+						var41.lineHeight = intStack[isp + 2];
 					} else {
-						if (var14 != 1115) {
+						if (opcode != 1115) {
 							break;
 						}
-						var4--;
-						var41.shadow = field3255[var4] == 1;
+						// if/cc_settextshadow
+						isp--;
+						var41.shadow = intStack[isp] == 1;
 					}
-				} else if (var14 >= 1200 && var14 < 1300 || var14 >= 2200 && var14 < 2300) {
+				} else if (opcode >= 1200 && opcode < 1300 || opcode >= 2200 && opcode < 2300) {
 					IfType var128;
-					if (var14 < 2000) {
-						var128 = var29 ? field1468 : field3068;
+					if (opcode < 2000) {
+						var128 = secondary ? activeComponent2 : activeComponent;
 					} else {
-						var4--;
-						var128 = IfType.get(field3255[var4]);
-						var14 -= 1000;
+						isp--;
+						var128 = IfType.get(intStack[isp]);
+						opcode -= 1000;
 					}
-					if (var14 == 1200) {
-						var4 -= 3;
-						int var129 = field3255[var4];
-						int var130 = field3255[var4 + 2];
+					if (opcode == 1200) {
+						// if/cc_setobject
+						isp -= 3;
+						int var129 = intStack[isp];
+						int var130 = intStack[isp + 2];
 						if (var129 == -1) {
 							var128.model1Type = 0;
 						} else {
@@ -392,83 +440,85 @@ public class ScriptRunner {
 							var128.modelXOf = var131.xof2d;
 							var128.model1Id = var129;
 						}
-					} else if (var14 == 1201) {
+					} else if (opcode == 1201) {
+						// if/cc_setnpchead
 						var128.model1Type = 2;
-						var4--;
-						var128.model1Id = field3255[var4];
-					} else if (var14 == 1202) {
+						isp--;
+						var128.model1Id = intStack[isp];
+					} else if (opcode == 1202) {
+						// if/cc_setplayerhead_self
 						var128.model1Type = 3;
-						var128.model1Id = Client.localPlayer.field90.method634();
+						var128.model1Id = Client.localPlayer.model.method634();
 					} else {
-						if (var14 != 1203) {
+						if (opcode != 1203) {
 							break;
 						}
-						IfType var132 = var29 ? field3068 : field1468;
+						IfType var132 = secondary ? activeComponent : activeComponent2;
 						var128.field2544 = var132.parentId;
 					}
-				} else if (var14 >= 1300 && var14 < 1400 || var14 >= 2300 && var14 < 2400) {
+				} else if (opcode >= 1300 && opcode < 1400 || opcode >= 2300 && opcode < 2400) {
 					IfType var121;
-					if (var14 >= 2000) {
-						var4--;
-						var121 = IfType.get(field3255[var4]);
-						var14 -= 1000;
+					if (opcode >= 2000) {
+						isp--;
+						var121 = IfType.get(intStack[isp]);
+						opcode -= 1000;
 					} else {
-						var121 = var29 ? field1468 : field3068;
+						var121 = secondary ? activeComponent2 : activeComponent;
 					}
-					if (var14 >= 1300 && var14 <= 1309 || !(var14 < 1314 || var14 > 1317)) {
-						var8--;
-						JagString var122 = field2957[var8];
+					if (opcode >= 1300 && opcode <= 1309 || !(opcode < 1314 || opcode > 1317)) {
+						ssp--;
+						JagString var122 = stringStack[ssp];
 						Object[] var123 = new Object[var122.length() + 1];
 						for (int var124 = var123.length - 1; var124 >= 1; var124--) {
 							if (var122.method6(var124 - 1) == 115) {
-								var8--;
-								var123[var124] = field2957[var8];
+								ssp--;
+								var123[var124] = stringStack[ssp];
 							} else {
-								var4--;
-								var123[var124] = Integer.valueOf(field3255[var4]);
+								isp--;
+								var123[var124] = Integer.valueOf(intStack[isp]);
 							}
 						}
-						var4--;
-						var123[0] = Integer.valueOf(field3255[var4]);
-						if (var14 == 1303) {
+						isp--;
+						var123[0] = Integer.valueOf(intStack[isp]);
+						if (opcode == 1303) {
 							var121.field2513 = var123;
 						}
-						if (var14 == 1317) {
+						if (opcode == 1317) {
 							var121.field2486 = var123;
 						}
-						if (var14 == 1304) {
+						if (opcode == 1304) {
 							var121.field2464 = var123;
 						}
-						if (var14 == 1302) {
+						if (opcode == 1302) {
 							var121.field2450 = var123;
 						}
-						if (var14 == 1316) {
+						if (opcode == 1316) {
 							var121.field2553 = var123;
 						}
-						if (var14 == 1301) {
+						if (opcode == 1301) {
 							var121.field2487 = var123;
 						}
-						if (var14 == 1300) {
+						if (opcode == 1300) {
 							var121.field2483 = var123;
 						}
-						if (var14 == 1315) {
+						if (opcode == 1315) {
 							var121.field2501 = var123;
 						}
-						if (var14 == 1306) {
+						if (opcode == 1306) {
 							var121.field2475 = var123;
 						}
-						if (var14 == 1305) {
+						if (opcode == 1305) {
 							var121.field2478 = var123;
 						}
-						if (var14 == 1309) {
+						if (opcode == 1309) {
 							var121.field2518 = var123;
 						}
-						if (var14 == 1308) {
+						if (opcode == 1308) {
 							var121.field2456 = var123;
 						}
-					} else if (var14 == 1310) {
-						var4--;
-						int var125 = field3255[var4] - 1;
+					} else if (opcode == 1310) {
+						isp--;
+						int var125 = intStack[isp] - 1;
 						if (var125 >= 0 && var125 <= 9) {
 							if (var121.opNames == null || var121.opNames.length <= var125) {
 								JagString[] var126 = new JagString[var125 + 1];
@@ -479,361 +529,404 @@ public class ScriptRunner {
 								}
 								var121.opNames = var126;
 							}
-							var8--;
-							var121.opNames[var125] = field2957[var8];
+							ssp--;
+							var121.opNames[var125] = stringStack[ssp];
 						} else {
-							var8--;
+							ssp--;
 						}
-					} else if (var14 == 1311) {
-						var4--;
-						var121.field2544 = field3255[var4];
-					} else if (var14 == 1312) {
-						var4--;
-						var121.field2500 = field3255[var4] == 1;
+					} else if (opcode == 1311) {
+						isp--;
+						var121.field2544 = intStack[isp];
+					} else if (opcode == 1312) {
+						isp--;
+						var121.field2500 = intStack[isp] == 1;
 					} else {
-						if (var14 != 1313) {
+						if (opcode != 1313) {
 							break;
 						}
-						var4--;
+						isp--;
 					}
-				} else if (var14 < 1500) {
-					if (var14 == 1400) {
-						var4 -= 2;
-						int var46 = field3255[var4 + 1];
-						int var47 = field3255[var4];
+				} else if (opcode < 1500) {
+					if (opcode == 1400) {
+						isp -= 2;
+						int var46 = intStack[isp + 1];
+						int var47 = intStack[isp];
 						IfType var48 = IfType.get(var47);
-						if (var48.field2519 == null || var48.field2519.length <= var46 || var48.field2519[var46] == null) {
-							field3255[var4++] = 0;
+						if (var48.subcomponents == null || var48.subcomponents.length <= var46 || var48.subcomponents[var46] == null) {
+							intStack[isp++] = 0;
 						} else {
-							field3255[var4++] = 1;
-							if (var29) {
-								field1468 = var48.field2519[var46];
+							intStack[isp++] = 1;
+							if (secondary) {
+								activeComponent2 = var48.subcomponents[var46];
 							} else {
-								field3068 = var48.field2519[var46];
+								activeComponent = var48.subcomponents[var46];
 							}
 						}
-					} else if (var14 == 1401) {
-						var4 -= 3;
-						int var49 = field3255[var4];
-						int var50 = field3255[var4 + 2];
-						int var51 = field3255[var4 + 1];
+					} else if (opcode == 1401) {
+						isp -= 3;
+						int var49 = intStack[isp];
+						int var50 = intStack[isp + 2];
+						int var51 = intStack[isp + 1];
 						IfType var52 = Client.method607(IfType.list[var49], var50, true, 0, -1, 0, var51);
 						if (var52 == null) {
-							field3255[var4++] = 0;
+							intStack[isp++] = 0;
 						} else {
-							field3255[var4++] = 1;
-							if (var29) {
-								field1468 = var52;
+							intStack[isp++] = 1;
+							if (secondary) {
+								activeComponent2 = var52;
 							} else {
-								field3068 = var52;
+								activeComponent = var52;
 							}
 						}
 					} else {
-						if (var14 != 1402) {
+						if (opcode != 1402) {
 							break;
 						}
-						var4 -= 3;
-						IfType var53 = IfType.get(field3255[var4]);
-						int var54 = field3255[var4 + 2];
-						int var55 = field3255[var4 + 1];
-						IfType var56 = Client.method607(var53.field2519, var54, true, var53.scrollHeight, var53.parentId, var53.scrollWidth, var55);
+						isp -= 3;
+						IfType var53 = IfType.get(intStack[isp]);
+						int var54 = intStack[isp + 2];
+						int var55 = intStack[isp + 1];
+						IfType var56 = Client.method607(var53.subcomponents, var54, true, var53.scrollPosY, var53.parentId, var53.scrollPosX, var55);
 						if (var56 == null) {
-							field3255[var4++] = 0;
+							intStack[isp++] = 0;
 						} else {
-							field3255[var4++] = 1;
-							if (var29) {
-								field1468 = var56;
+							intStack[isp++] = 1;
+							if (secondary) {
+								activeComponent2 = var56;
 							} else {
-								field3068 = var56;
+								activeComponent = var56;
 							}
 						}
 					}
-				} else if (var14 < 1600) {
-					IfType var57 = var29 ? field1468 : field3068;
-					if (var14 == 1500) {
-						field3255[var4++] = var57.x;
-					} else if (var14 == 1501) {
-						field3255[var4++] = var57.y;
-					} else if (var14 == 1502) {
-						field3255[var4++] = var57.width;
-					} else if (var14 == 1503) {
-						field3255[var4++] = var57.height;
-					} else if (var14 == 1504) {
-						field3255[var4++] = var57.hide ? 1 : 0;
+				} else if (opcode < 1600) {
+					IfType var57 = secondary ? activeComponent2 : activeComponent;
+					if (opcode == 1500) {
+						// cc_getx
+						intStack[isp++] = var57.x;
+					} else if (opcode == 1501) {
+						// cc_gety
+						intStack[isp++] = var57.y;
+					} else if (opcode == 1502) {
+						// cc_getwidth
+						intStack[isp++] = var57.width;
+					} else if (opcode == 1503) {
+						// cc_getheight
+						intStack[isp++] = var57.height;
+					} else if (opcode == 1504) {
+						// cc_gethide
+						intStack[isp++] = var57.hide ? 1 : 0;
 					} else {
-						if (var14 != 1505) {
+						if (opcode != 1505) {
 							break;
 						}
-						field3255[var4++] = var57.layerId;
+						// cc_getlayer
+						intStack[isp++] = var57.layerId;
 					}
-				} else if (var14 < 1700) {
-					IfType var120 = var29 ? field1468 : field3068;
-					if (var14 == 1600) {
-						field3255[var4++] = var120.scrollWidth;
+				} else if (opcode < 1700) {
+					IfType var120 = secondary ? activeComponent2 : activeComponent;
+					if (opcode == 1600) {
+						// cc_getscrollx
+						intStack[isp++] = var120.scrollPosX;
 					} else {
-						if (var14 != 1601) {
+						if (opcode != 1601) {
 							break;
 						}
-						field3255[var4++] = var120.scrollHeight;
+						// cc_getscrolly
+						intStack[isp++] = var120.scrollPosY;
 					}
-				} else if (var14 < 2500) {
-					if (var14 == 2401) {
-						var4 -= 3;
-						int var58 = field3255[var4 + 1];
-						int var59 = field3255[var4];
-						int var60 = field3255[var4 + 2];
+				} else if (opcode < 2500) {
+					if (opcode == 2401) {
+						isp -= 3;
+						int var58 = intStack[isp + 1];
+						int var59 = intStack[isp];
+						int var60 = intStack[isp + 2];
 						IfType var61 = Client.method607(IfType.list[var59], var60, false, 0, -1, 0, var58);
 						if (var61 == null) {
-							field3255[var4++] = -1;
+							intStack[isp++] = -1;
 						} else {
-							field3255[var4++] = var61.parentId;
+							intStack[isp++] = var61.parentId;
 						}
 					} else {
-						if (var14 != 2402) {
+						if (opcode != 2402) {
 							break;
 						}
-						var4 -= 3;
-						IfType var62 = IfType.get(field3255[var4]);
-						int var63 = field3255[var4 + 1];
-						int var64 = field3255[var4 + 2];
-						IfType var65 = Client.method607(IfType.list[var62.parentId >> 16], var64, false, var62.scrollHeight, var62.parentId & 0xFFFF, var62.scrollWidth, var63);
+						isp -= 3;
+						IfType var62 = IfType.get(intStack[isp]);
+						int var63 = intStack[isp + 1];
+						int var64 = intStack[isp + 2];
+						IfType var65 = Client.method607(IfType.list[var62.parentId >> 16], var64, false, var62.scrollPosY, var62.parentId & 0xFFFF, var62.scrollPosX, var63);
 						if (var65 == null) {
-							field3255[var4++] = -1;
+							intStack[isp++] = -1;
 						} else {
-							field3255[var4++] = var65.parentId;
+							intStack[isp++] = var65.parentId;
 						}
 					}
-				} else if (var14 < 2600) {
-					var4--;
-					IfType var119 = IfType.get(field3255[var4]);
-					if (var14 == 2500) {
-						field3255[var4++] = var119.x;
-					} else if (var14 == 2501) {
-						field3255[var4++] = var119.y;
-					} else if (var14 == 2502) {
-						field3255[var4++] = var119.width;
-					} else if (var14 == 2503) {
-						field3255[var4++] = var119.height;
-					} else if (var14 == 2504) {
-						field3255[var4++] = var119.hide ? 1 : 0;
+				} else if (opcode < 2600) {
+					isp--;
+					IfType var119 = IfType.get(intStack[isp]);
+					if (opcode == 2500) {
+						// if_getx
+						intStack[isp++] = var119.x;
+					} else if (opcode == 2501) {
+						// if_gety
+						intStack[isp++] = var119.y;
+					} else if (opcode == 2502) {
+						// if_getwidth
+						intStack[isp++] = var119.width;
+					} else if (opcode == 2503) {
+						// if_getheight
+						intStack[isp++] = var119.height;
+					} else if (opcode == 2504) {
+						// if_gethide
+						intStack[isp++] = var119.hide ? 1 : 0;
 					} else {
-						if (var14 != 2505) {
+						if (opcode != 2505) {
 							break;
 						}
-						field3255[var4++] = var119.layerId;
+						// if_getlayer
+						intStack[isp++] = var119.layerId;
 					}
-				} else if (var14 < 2700) {
-					var4--;
-					IfType var66 = IfType.get(field3255[var4]);
-					if (var14 == 2600) {
-						field3255[var4++] = var66.scrollWidth;
+				} else if (opcode < 2700) {
+					isp--;
+					IfType var66 = IfType.get(intStack[isp]);
+					if (opcode == 2600) {
+						// if_getscrollx
+						intStack[isp++] = var66.scrollPosX;
 					} else {
-						if (var14 != 2601) {
+						if (opcode != 2601) {
 							break;
 						}
-						field3255[var4++] = var66.scrollHeight;
+						// if_getscrolly
+						intStack[isp++] = var66.scrollPosY;
 					}
 				} else {
-					if (var14 < 2800) {
+					if (opcode < 2800) {
 						break;
 					}
-					if (var14 < 3100) {
-						if (var14 == 3000) {
-							var4--;
-							int var67 = field3255[var4];
+					if (opcode < 3100) {
+						if (opcode == 3000) {
+							isp--;
+							int var67 = intStack[isp];
 							if (Client.field2998 == -1) {
 								Client.method414(0, var67);
 								Client.field2998 = var67;
 							}
-						} else if (var14 == 3001 || var14 == 3003) {
-							var4 -= 2;
-							int var68 = field3255[var4];
-							int var69 = field3255[var4 + 1];
+						} else if (opcode == 3001 || opcode == 3003) {
+							isp -= 2;
+							int var68 = intStack[isp];
+							int var69 = intStack[isp + 1];
 							Client.method673(0, var69, var68);
-						} else if (var14 == 3002) {
-							IfType var70 = var29 ? field1468 : field3068;
+						} else if (opcode == 3002) {
+							IfType var70 = secondary ? activeComponent2 : activeComponent;
 							if (Client.field2998 == -1) {
 								Client.method414(var70.parentId & 0x7FFF, var70.layerId);
 								Client.field2998 = var70.parentId;
 							}
 						} else {
-							if (var14 != 3003) {
+							if (opcode != 3003) {
 								break;
 							}
-							IfType var71 = var29 ? field1468 : field3068;
-							var4--;
-							int var72 = field3255[var4];
+							IfType var71 = secondary ? activeComponent2 : activeComponent;
+							isp--;
+							int var72 = intStack[isp];
 							Client.method673(var71.parentId & 0x7FFF, var72, var71.layerId);
 						}
-					} else if (var14 >= 3200) {
-						if (var14 < 3300) {
-							if (var14 == 3200) {
-								var4 -= 3;
-								Client.method887(field3255[var4], field3255[var4 + 1], field3255[var4 + 2]);
-							} else if (var14 == 3201) {
-								var4--;
-								Client.method874(field3255[var4]);
+					} else if (opcode >= 3200) {
+						if (opcode < 3300) {
+							if (opcode == 3200) {
+								// sound_synth
+								isp -= 3;
+								Client.playSynth(intStack[isp], intStack[isp + 1], intStack[isp + 2]);
+							} else if (opcode == 3201) {
+								// sound_song
+								isp--;
+								Client.playSongs(intStack[isp]);
 							} else {
-								if (var14 != 3202) {
+								if (opcode != 3202) {
 									break;
 								}
-								var4 -= 2;
-								Client.method928(field3255[var4 + 1], field3255[var4]);
+								// sound_jingle
+								isp -= 2;
+								Client.playJingle(intStack[isp + 1], intStack[isp]);
 							}
-						} else if (var14 < 3400) {
-							if (var14 != 3300) {
+						} else if (opcode < 3400) {
+							if (opcode != 3300) {
 								break;
 							}
-							field3255[var4++] = Client.loopCycle;
-						} else if (var14 >= 4100) {
-							if (var14 >= 4200) {
+							intStack[isp++] = Client.loopCycle;
+						} else if (opcode >= 4100) {
+							if (opcode >= 4200) {
 								break;
 							}
-							if (var14 == 4100) {
-								var8--;
-								JagString var102 = field2957[var8];
-								var4--;
-								int var103 = field3255[var4];
-								field2957[var8++] = JagString.join(new JagString[]{var102, JagString.parseInt(var103)});
-							} else if (var14 == 4101) {
-								var8 -= 2;
-								JagString var104 = field2957[var8 + 1];
-								JagString var105 = field2957[var8];
-								field2957[var8++] = JagString.join(new JagString[]{var105, var104});
-							} else if (var14 == 4102) {
-								var8--;
-								JagString var106 = field2957[var8];
-								var4--;
-								int var107 = field3255[var4];
-								field2957[var8++] = JagString.join(new JagString[]{var106, JagString.method1034(var107)});
-							} else if (var14 == 4103) {
-								var8--;
-								JagString var108 = field2957[var8];
-								field2957[var8++] = var108.method30();
-							} else if (var14 == 4104) {
-								var4--;
-								int var109 = field3255[var4];
+							if (opcode == 4100) {
+								// append_num
+								ssp--;
+								JagString var102 = stringStack[ssp];
+								isp--;
+								int var103 = intStack[isp];
+								stringStack[ssp++] = JagString.join(new JagString[]{var102, JagString.parseInt(var103)});
+							} else if (opcode == 4101) {
+								// append
+								ssp -= 2;
+								JagString var104 = stringStack[ssp + 1];
+								JagString var105 = stringStack[ssp];
+								stringStack[ssp++] = JagString.join(new JagString[]{var105, var104});
+							} else if (opcode == 4102) {
+								// append_signnum
+								ssp--;
+								JagString var106 = stringStack[ssp];
+								isp--;
+								int var107 = intStack[isp];
+								stringStack[ssp++] = JagString.join(new JagString[]{var106, JagString.fromInt(var107)});
+							} else if (opcode == 4103) {
+								// lowercase
+								ssp--;
+								JagString var108 = stringStack[ssp];
+								stringStack[ssp++] = var108.toLowerCase();
+							} else if (opcode == 4104) {
+								// fromdate
+								isp--;
+								int var109 = intStack[isp];
 								long var110 = ((long) var109 + 11745L) * 86400000L;
-								field453.setTime(new Date(var110));
-								int var112 = field453.get(5);
-								int var113 = field453.get(2);
-								int var114 = field453.get(1);
-								field2957[var8++] = JagString.join(new JagString[]{JagString.parseInt(var112), field1572, field621[var113], field1572, JagString.parseInt(var114)});
-							} else if (var14 == 4105) {
-								var8 -= 2;
-								JagString var115 = field2957[var8];
-								JagString var116 = field2957[var8 + 1];
-								if (Client.localPlayer.field90 != null && Client.localPlayer.field90.field1658) {
-									field2957[var8++] = var116;
+								calendar.setTime(new Date(var110));
+								int var112 = calendar.get(5);
+								int var113 = calendar.get(2);
+								int var114 = calendar.get(1);
+								stringStack[ssp++] = JagString.join(new JagString[]{JagString.parseInt(var112), field1572, field621[var113], field1572, JagString.parseInt(var114)});
+							} else if (opcode == 4105) {
+								// text_gender
+								ssp -= 2;
+								JagString var115 = stringStack[ssp];
+								JagString var116 = stringStack[ssp + 1];
+								if (Client.localPlayer.model != null && Client.localPlayer.model.gender) {
+									stringStack[ssp++] = var116;
 								} else {
-									field2957[var8++] = var115;
+									stringStack[ssp++] = var115;
 								}
-							} else if (var14 == 4106) {
-								var4--;
-								int var117 = field3255[var4];
-								field2957[var8++] = JagString.parseInt(var117);
+							} else if (opcode == 4106) {
+								// tostring
+								isp--;
+								int var117 = intStack[isp];
+								stringStack[ssp++] = JagString.parseInt(var117);
 							} else {
-								if (var14 != 4107) {
+								if (opcode != 4107) {
 									break;
 								}
-								var8 -= 2;
-								field3255[var4++] = field2957[var8].method35(field2957[var8 + 1]);
+								// compare
+								ssp -= 2;
+								intStack[isp++] = stringStack[ssp].compare(stringStack[ssp + 1]);
 							}
-						} else if (var14 == 4000) {
-							var4 -= 2;
-							int var73 = field3255[var4];
-							int var74 = field3255[var4 + 1];
-							field3255[var4++] = var73 + var74;
-						} else if (var14 == 4001) {
-							var4 -= 2;
-							int var75 = field3255[var4 + 1];
-							int var76 = field3255[var4];
-							field3255[var4++] = var76 - var75;
-						} else if (var14 == 4002) {
-							var4 -= 2;
-							int var77 = field3255[var4 + 1];
-							int var78 = field3255[var4];
-							field3255[var4++] = var77 * var78;
-						} else if (var14 == 4003) {
-							var4 -= 2;
-							int var79 = field3255[var4];
-							int var80 = field3255[var4 + 1];
-							field3255[var4++] = var79 / var80;
-						} else if (var14 == 4004) {
-							var4--;
-							int var81 = field3255[var4];
-							field3255[var4++] = (int) (Math.random() * (double) var81);
-						} else if (var14 == 4005) {
-							var4--;
-							int var82 = field3255[var4];
-							field3255[var4++] = (int) ((double) (var82 + 1) * Math.random());
-						} else if (var14 == 4006) {
-							var4 -= 5;
-							int var83 = field3255[var4 + 1];
-							int var84 = field3255[var4];
-							int var85 = field3255[var4 + 3];
-							int var86 = field3255[var4 + 4];
-							int var87 = field3255[var4 + 2];
-							field3255[var4++] = var84 + (var83 - var84) * (-var87 + var86) / (var85 - var87);
-						} else if (var14 == 4007) {
-							var4 -= 2;
-							int var88 = field3255[var4];
-							int var89 = field3255[var4 + 1];
-							field3255[var4++] = var88 * var89 / 100 + var88;
-						} else if (var14 == 4008) {
-							var4 -= 2;
-							int var90 = field3255[var4];
-							int var91 = field3255[var4 + 1];
-							field3255[var4++] = 0x1 << var91 | var90;
-						} else if (var14 == 4009) {
-							var4 -= 2;
-							int var92 = field3255[var4];
-							int var93 = field3255[var4 + 1];
-							field3255[var4++] = var92 & -(0x1 << var93) - 1;
-						} else if (var14 == 4010) {
-							var4 -= 2;
-							int var94 = field3255[var4];
-							int var95 = field3255[var4 + 1];
-							field3255[var4++] = (0x1 << var95 & var94) == 0 ? 0 : 1;
-						} else if (var14 == 4011) {
-							var4 -= 2;
-							int var96 = field3255[var4 + 1];
-							int var97 = field3255[var4];
-							field3255[var4++] = var97 % var96;
-						} else if (var14 == 4012) {
-							var4 -= 2;
-							int var98 = field3255[var4];
-							int var99 = field3255[var4 + 1];
+						} else if (opcode == 4000) {
+							// add
+							isp -= 2;
+							int var73 = intStack[isp];
+							int var74 = intStack[isp + 1];
+							intStack[isp++] = var73 + var74;
+						} else if (opcode == 4001) {
+							// sub
+							isp -= 2;
+							int var75 = intStack[isp + 1];
+							int var76 = intStack[isp];
+							intStack[isp++] = var76 - var75;
+						} else if (opcode == 4002) {
+							// multiply
+							isp -= 2;
+							int var77 = intStack[isp + 1];
+							int var78 = intStack[isp];
+							intStack[isp++] = var77 * var78;
+						} else if (opcode == 4003) {
+							// divide
+							isp -= 2;
+							int var79 = intStack[isp];
+							int var80 = intStack[isp + 1];
+							intStack[isp++] = var79 / var80;
+						} else if (opcode == 4004) {
+							// random
+							isp--;
+							int var81 = intStack[isp];
+							intStack[isp++] = (int) (Math.random() * (double) var81);
+						} else if (opcode == 4005) {
+							// randominc
+							isp--;
+							int var82 = intStack[isp];
+							intStack[isp++] = (int) ((double) (var82 + 1) * Math.random());
+						} else if (opcode == 4006) {
+							// interpolate
+							isp -= 5;
+							int var83 = intStack[isp + 1];
+							int var84 = intStack[isp];
+							int var85 = intStack[isp + 3];
+							int var86 = intStack[isp + 4];
+							int var87 = intStack[isp + 2];
+							intStack[isp++] = var84 + (var83 - var84) * (-var87 + var86) / (var85 - var87);
+						} else if (opcode == 4007) {
+							// addpercent
+							isp -= 2;
+							int var88 = intStack[isp];
+							int var89 = intStack[isp + 1];
+							intStack[isp++] = var88 * var89 / 100 + var88;
+						} else if (opcode == 4008) {
+							// setbit
+							isp -= 2;
+							int var90 = intStack[isp];
+							int var91 = intStack[isp + 1];
+							intStack[isp++] = 0x1 << var91 | var90;
+						} else if (opcode == 4009) {
+							// clearbit
+							isp -= 2;
+							int var92 = intStack[isp];
+							int var93 = intStack[isp + 1];
+							intStack[isp++] = var92 & -(0x1 << var93) - 1;
+						} else if (opcode == 4010) {
+							// testbit
+							isp -= 2;
+							int var94 = intStack[isp];
+							int var95 = intStack[isp + 1];
+							intStack[isp++] = (0x1 << var95 & var94) == 0 ? 0 : 1;
+						} else if (opcode == 4011) {
+							// modulo
+							isp -= 2;
+							int var96 = intStack[isp + 1];
+							int var97 = intStack[isp];
+							intStack[isp++] = var97 % var96;
+						} else if (opcode == 4012) {
+							// pow
+							isp -= 2;
+							int var98 = intStack[isp];
+							int var99 = intStack[isp + 1];
 							if (var98 == 0) {
-								field3255[var4++] = 0;
+								intStack[isp++] = 0;
 							} else {
-								field3255[var4++] = (int) Math.pow((double) var98, (double) var99);
+								intStack[isp++] = (int) Math.pow((double) var98, (double) var99);
 							}
 						} else {
-							if (var14 != 4013) {
+							if (opcode != 4013) {
 								break;
 							}
-							var4 -= 2;
-							int var100 = field3255[var4];
-							int var101 = field3255[var4 + 1];
+							// invpow
+							isp -= 2;
+							int var100 = intStack[isp];
+							int var101 = intStack[isp + 1];
 							if (var100 == 0) {
-								field3255[var4++] = 0;
+								intStack[isp++] = 0;
 							} else if (var101 == 0) {
-								field3255[var4++] = Integer.MAX_VALUE;
+								intStack[isp++] = Integer.MAX_VALUE;
 							} else {
-								field3255[var4++] = (int) Math.pow((double) var100, 1.0D / (double) var101);
+								intStack[isp++] = (int) Math.pow((double) var100, 1.0D / (double) var101);
 							}
 						}
-					} else if (var14 == 3100) {
-						var8--;
-						JagString var118 = field2957[var8];
-						Client.method758(0, var118, field2585);
+					} else if (opcode == 3100) {
+						// mes
+						ssp--;
+						JagString var118 = stringStack[ssp];
+						Client.addChat(0, var118, field2585);
 					} else {
-						if (var14 != 3101) {
+						if (opcode != 3101) {
 							break;
 						}
-						var4 -= 2;
-						Client.method450(field3255[var4], field3255[var4 + 1], Client.localPlayer);
+						// anim
+						isp -= 2;
+						Client.triggerPlayerAnim(intStack[isp], intStack[isp + 1], Client.localPlayer);
 					}
 				}
 			}

@@ -88,7 +88,7 @@ public final class IfType extends Linkable2 {
 	public int modelYOf = 0;
 
 	@ObfuscatedName("qd.ld")
-	public int scrollHeight = 0;
+	public int scrollPosY = 0;
 
 	@ObfuscatedName("qd.mc")
 	public Object[] field2486;
@@ -241,7 +241,7 @@ public final class IfType extends Linkable2 {
 	public int dataY = 0;
 
 	@ObfuscatedName("qd.Ad")
-	public int scrollWidth = 0;
+	public int scrollPosX = 0;
 
 	@ObfuscatedName("qd.Ed")
 	public boolean hide = false;
@@ -277,7 +277,7 @@ public final class IfType extends Linkable2 {
 	public int[] linkObjNumber;
 
 	@ObfuscatedName("qd.Tc")
-	public IfType[] field2519;
+	public IfType[] subcomponents;
 
 	@ObfuscatedName("qd.Tb")
 	public JagString[] opNames;
@@ -668,8 +668,8 @@ public final class IfType extends Linkable2 {
 		this.hide = arg0.g1() == 1;
 		this.hashook = arg0.g1() == 1;
 		if (this.type == 0) {
-			this.scrollWidth = arg0.g2();
-			this.scrollHeight = arg0.g2();
+			this.scrollPosX = arg0.g2();
+			this.scrollPosY = arg0.g2();
 		}
 		if (this.type == 5) {
 			this.graphic = arg0.g4();

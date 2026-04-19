@@ -68,7 +68,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("mc.a(ZI)I")
 	@Override
-	public int method693(int arg0) {
+	public int getAverageRgb(int arg0) {
 		return this.field1867[arg0] == null ? 0 : this.field1867[arg0].field2192;
 	}
 

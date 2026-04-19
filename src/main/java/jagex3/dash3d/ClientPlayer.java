@@ -64,7 +64,7 @@ public final class ClientPlayer extends ClientEntity {
 	public JagString field86;
 
 	@ObfuscatedName("aa.Ud")
-	public PlayerModel field90;
+	public PlayerModel model;
 
 	@ObfuscatedName("aa.Dd")
 	public Model field73;
@@ -72,12 +72,12 @@ public final class ClientPlayer extends ClientEntity {
 	@ObfuscatedName("aa.f(I)Lpa;")
 	@Override
 	public Model method41() {
-		if (this.field90 == null) {
+		if (this.model == null) {
 			return null;
 		}
 		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.list(super.field2015) : null;
 		SeqType var2 = super.secondarySeqId == -1 || this.field95 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.list(super.secondarySeqId);
-		Model var3 = this.field90.method637(var1, var2, super.field1990, super.field1978);
+		Model var3 = this.model.method637(var1, var2, super.field1990, super.field1978);
 		if (var3 == null) {
 			return null;
 		}
@@ -130,7 +130,7 @@ public final class ClientPlayer extends ClientEntity {
 	@ObfuscatedName("aa.h(I)Z")
 	@Override
 	public boolean ready() {
-		return this.field90 != null;
+		return this.model != null;
 	}
 
 	@ObfuscatedName("aa.a(BLba;)V")
@@ -201,9 +201,9 @@ public final class ClientPlayer extends ClientEntity {
 		this.field86 = JString.method969(arg0.method174()).method36();
 		this.combatLevel = arg0.g1();
 		this.field65 = arg0.g2();
-		if (this.field90 == null) {
-			this.field90 = new PlayerModel();
+		if (this.model == null) {
+			this.model = new PlayerModel();
 		}
-		this.field90.setAppearance(var4, var2 == 1, var9, var3);
+		this.model.setAppearance(var4, var2 == 1, var9, var3);
 	}
 }

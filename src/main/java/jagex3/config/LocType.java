@@ -224,7 +224,7 @@ public final class LocType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ia.b(B)Z")
-	public boolean method506() {
+	public boolean hasBgSound() {
 		if (this.multiloc == null) {
 			return this.bgsound_sound != -1 || this.bgsound_random != null;
 		}

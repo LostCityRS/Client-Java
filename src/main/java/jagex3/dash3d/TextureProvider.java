@@ -12,7 +12,7 @@ public interface TextureProvider {
 	boolean method695(int arg0);
 
 	@ObfuscatedName("od.a(ZI)I")
-	int method693(int arg0);
+	int getAverageRgb(int arg0);
 
 	@ObfuscatedName("od.a(IB)Z")
 	boolean method698(int arg0);

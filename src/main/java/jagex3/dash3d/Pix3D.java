@@ -19,7 +19,7 @@ public final class Pix3D {
 	public static int field765 = 0;
 
 	@ObfuscatedName("eb.Cb")
-	public static int[] field764 = new int[65536];
+	public static int[] colourTable = new int[65536];
 
 	@ObfuscatedName("eb.Ob")
 	public static boolean lowDetail = true;
@@ -36,7 +36,7 @@ public final class Pix3D {
 	@ObfuscatedName("eb.Sb")
 	public static boolean field780 = false;
 	@ObfuscatedName("eb.Jb")
-	public static TextureProvider field771;
+	public static TextureProvider textureManager;
     @ObfuscatedName("eb.Ab")
     public static int height;
 	@ObfuscatedName("eb.Pb")
@@ -129,14 +129,14 @@ public final class Pix3D {
 
 	@ObfuscatedName("eb.a(IIIIIIIIIIIIIIIIIII)V")
 	public static void method353(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = field771.method692(arg18);
+		int[] var19 = textureManager.method692(arg18);
 		if (var19 == null) {
-			int var20 = field771.method693(arg18);
+			int var20 = textureManager.getAverageRgb(arg18);
 			method360(arg0, arg1, arg2, arg3, arg4, arg5, method363(var20, arg6), method363(var20, arg7), method363(var20, arg8));
 			return;
 		}
-		field780 = field771.method698(arg18);
-		field768 = field771.method695(arg18);
+		field780 = textureManager.method698(arg18);
+		field768 = textureManager.method695(arg18);
 		int var21 = arg9 - arg10;
 		int var22 = arg12 - arg13;
 		int var23 = arg15 - arg16;
@@ -1156,7 +1156,7 @@ public final class Pix3D {
 
 	@ObfuscatedName("eb.a(Lod;)V")
 	public static void setTextures(TextureProvider arg0) {
-		field771 = arg0;
+		textureManager = arg0;
 	}
 
 	@ObfuscatedName("eb.a([IIIIIIII)V")
@@ -1202,7 +1202,7 @@ public final class Pix3D {
 					if (var8 < 0) {
 						int var11 = arg3 - arg2 & 0x3;
 						if (var11 > 0) {
-							int var12 = field764[arg4 >> 8];
+							int var12 = colourTable[arg4 >> 8];
 							do {
 								arg0[var7++] = var12;
 								var11--;
@@ -1211,7 +1211,7 @@ public final class Pix3D {
 						}
 						break;
 					}
-					int var10 = field764[arg4 >> 8];
+					int var10 = colourTable[arg4 >> 8];
 					arg4 += var9;
 					arg0[var7++] = var10;
 					arg0[var7++] = var10;
@@ -1226,7 +1226,7 @@ public final class Pix3D {
 					if (var8 < 0) {
 						int var17 = arg3 - arg2 & 0x3;
 						if (var17 > 0) {
-							int var18 = field764[arg4 >> 8];
+							int var18 = colourTable[arg4 >> 8];
 							int var19 = ((var18 & 0xFF00FF) * var14 >> 8 & 0xFF00FF) + ((var18 & 0xFF00) * var14 >> 8 & 0xFF00);
 							do {
 								arg0[var7++] = ((arg0[var7] & 0xFF00) * var13 >> 8 & 0xFF00) + ((arg0[var7] & 0xFF00FF) * var13 >> 8 & 0xFF00FF) + var19;
@@ -1235,7 +1235,7 @@ public final class Pix3D {
 						}
 						break;
 					}
-					int var15 = field764[arg4 >> 8];
+					int var15 = colourTable[arg4 >> 8];
 					arg4 += var9;
 					int var16 = ((var15 & 0xFF00FF) * var14 >> 8 & 0xFF00FF) + ((var15 & 0xFF00) * var14 >> 8 & 0xFF00);
 					arg0[var7++] = ((arg0[var7] & 0xFF00) * var13 >> 8 & 0xFF00) + ((arg0[var7] & 0xFF00FF) * var13 >> 8 & 0xFF00FF) + var16;
@@ -1262,7 +1262,7 @@ public final class Pix3D {
 			int var22 = arg3 - arg2;
 			if (field765 == 0) {
 				do {
-					arg0[var21++] = field764[arg4 >> 8];
+					arg0[var21++] = colourTable[arg4 >> 8];
 					arg4 += var20;
 					var22--;
 				} while (var22 > 0);
@@ -1270,7 +1270,7 @@ public final class Pix3D {
 				int var23 = field765;
 				int var24 = 256 - field765;
 				do {
-					int var25 = field764[arg4 >> 8];
+					int var25 = colourTable[arg4 >> 8];
 					arg4 += var20;
 					int var26 = ((var25 & 0xFF00FF) * var24 >> 8 & 0xFF00FF) + ((var25 & 0xFF00) * var24 >> 8 & 0xFF00);
 					arg0[var21++] = ((arg0[var21] & 0xFF00) * var23 >> 8 & 0xFF00) + ((arg0[var21] & 0xFF00FF) * var23 >> 8 & 0xFF00FF) + var26;
@@ -2292,7 +2292,7 @@ public final class Pix3D {
 				if (var31 == 0) {
 					var31 = 1;
 				}
-				field764[var4++] = var31;
+				colourTable[var4++] = var31;
 			}
 		}
 	}
@@ -2300,8 +2300,8 @@ public final class Pix3D {
 	@ObfuscatedName("eb.e()V")
 	public static void unload() {
 		field770 = null;
-		field764 = null;
-		field771 = null;
+		colourTable = null;
+		textureManager = null;
 		divTable = null;
 		divTable2 = null;
 		sinTable = null;

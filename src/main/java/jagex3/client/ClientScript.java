@@ -16,28 +16,28 @@ public final class ClientScript extends Linkable2 {
 	@ObfuscatedName("hb.fb")
 	public static JagString field1160 = JagString.wrap(")1");
 	@ObfuscatedName("cc.tb")
-	public int[] field509;
+	public int[] intOperands;
 
 	@ObfuscatedName("cc.ub")
-	public int field510;
+	public int intArgCount;
 
 	@ObfuscatedName("cc.xb")
-	public int field513;
+	public int stringArgCount;
 
 	@ObfuscatedName("cc.yb")
-	public int field514;
+	public int stringLocalCount;
 
 	@ObfuscatedName("cc.Cb")
-	public int field518;
+	public int intLocalCount;
 
 	@ObfuscatedName("cc.Db")
-	public int[] field519;
+	public int[] instructions;
 
 	@ObfuscatedName("cc.Bb")
-	public JagString[] field517;
+	public JagString[] stringOperands;
 
 	@ObfuscatedName("pe.a(III)Lcc;")
-	public static ClientScript method824(int arg0, int arg1) {
+	public static ClientScript get(int arg0, int arg1) {
 		long var2 = (long) ((arg1 << 16) + arg0);
 		ClientScript var4 = (ClientScript) field830.find(var2);
 		if (var4 != null) {
@@ -49,24 +49,24 @@ public final class ClientScript extends Linkable2 {
 		var6.pos = var6.data.length - 12;
 		int var8 = var6.g4();
 		int var9 = 0;
-		var7.field518 = var6.g2();
-		var7.field514 = var6.g2();
-		var7.field510 = var6.g2();
-		var7.field513 = var6.g2();
-		var7.field517 = new JagString[var8];
-		var7.field509 = new int[var8];
+		var7.intLocalCount = var6.g2();
+		var7.stringLocalCount = var6.g2();
+		var7.intArgCount = var6.g2();
+		var7.stringArgCount = var6.g2();
+		var7.stringOperands = new JagString[var8];
+		var7.intOperands = new int[var8];
 		var6.pos = 0;
-		var7.field519 = new int[var8];
+		var7.instructions = new int[var8];
 		while (var6.pos < var6.data.length - 12) {
 			int var10 = var6.g2();
 			if (var10 == 3) {
-				var7.field517[var9] = var6.gjstr();
+				var7.stringOperands[var9] = var6.gjstr();
 			} else if (var10 >= 100 || var10 == 21 || var10 == 38 || var10 == 39) {
-				var7.field509[var9] = var6.g1();
+				var7.intOperands[var9] = var6.g1();
 			} else {
-				var7.field509[var9] = var6.g4();
+				var7.intOperands[var9] = var6.g4();
 			}
-			var7.field519[var9++] = var10;
+			var7.instructions[var9++] = var10;
 		}
 		field830.put(var2, var7);
 		return var7;

@@ -3,6 +3,7 @@ package jagex3.util;
 import deob.ObfuscatedName;
 import jagex3.datastruct.HashTable;
 import jagex3.datastruct.StringNode;
+import jagex3.jstring.StringTools;
 
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
@@ -56,16 +57,16 @@ public final class JagString implements StringInterface {
 		if (arg0.length < 2) {
 			throw new IllegalArgumentException();
 		}
-		return method825(arg0.length, 0, arg0);
+		return StringTools.join(arg0.length, 0, arg0);
 	}
 
     @ObfuscatedName("i.a(II)La;")
     public static JagString parseInt(int arg0) {
-        return method418(false, arg0);
+        return fromInt(false, arg0);
     }
 
 	@ObfuscatedName("fe.a(ZBII)La;")
-	public static JagString method418(boolean arg0, int arg1) {
+	public static JagString fromInt(boolean arg0, int arg1) {
 		int var2 = 1;
 		int var3 = arg1 / 10;
 		while (var3 != 0) {
@@ -99,31 +100,9 @@ public final class JagString implements StringInterface {
 		return var8;
 	}
 
-	@ObfuscatedName("pe.a(III[La;)La;")
-	public static JagString method825(int arg0, int arg1, JagString[] arg2) {
-		int var3 = 0;
-		for (int var4 = 0; var4 < arg0; var4++) {
-			if (arg2[arg1 + var4] == null) {
-				arg2[arg1 + var4] = field1625;
-			}
-			var3 += arg2[arg1 + var4].length;
-		}
-		byte[] var5 = new byte[var3];
-		int var6 = 0;
-		for (int var7 = 0; var7 < arg0; var7++) {
-			JagString var8 = arg2[arg1 + var7];
-			ArrayUtil.copy(var8.charCode, 0, var5, var6, var8.length);
-			var6 += var8.length;
-		}
-		JagString var9 = new JagString();
-		var9.length = var3;
-		var9.charCode = var5;
-		return var9;
-	}
-
 	@ObfuscatedName("wa.a(ZBI)La;")
-	public static JagString method1034(int arg0) {
-		return method418(true, arg0);
+	public static JagString fromInt(int arg0) {
+		return fromInt(true, arg0);
 	}
 
 	@ObfuscatedName("je.b(II)La;")
@@ -554,7 +533,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.f(I)La;")
-	public JagString method30() {
+	public JagString toLowerCase() {
 		JagString var1 = new JagString();
 		var1.length = this.length;
 		var1.charCode = new byte[this.length];
@@ -642,7 +621,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.b(La;B)I")
-	public int method35(JagString arg0) {
+	public int compare(JagString arg0) {
 		int var2;
 		if (arg0.length >= this.length) {
 			var2 = this.length;

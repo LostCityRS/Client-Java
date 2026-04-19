@@ -329,7 +329,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.k(B)I")
-	public final int method178() {
+	public final int gsmart() {
 		int var1 = this.data[this.pos] & 0xFF;
 		return var1 >= 128 ? this.g2() - 32768 : this.g1();
 	}

@@ -116,7 +116,7 @@ public final class Model extends ModelSource {
 	public static int[] field2257 = new int[2000];
 
 	@ObfuscatedName("pa.yc")
-	public static int[] field2243 = Pix3D.field764;
+	public static int[] field2243 = Pix3D.colourTable;
 
 	@ObfuscatedName("pa.Fc")
 	public static int[] field2250 = new int[4096];

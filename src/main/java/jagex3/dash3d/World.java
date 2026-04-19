@@ -558,7 +558,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.a(IIIIIIIIIIIIIIIIIIII)V")
-	public void method55(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
+	public void setGround(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18, int arg19) {
 		if (arg3 == 0) {
 			QuickGround var21 = new QuickGround(arg10, arg11, arg12, arg13, -1, arg18, false);
 			for (int var22 = arg0; var22 >= 0; var22--) {
@@ -1395,7 +1395,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.c(IIII)V")
-	public void method71(int arg0, int arg1, int arg2, int arg3) {
+	public void moveDecor(int arg0, int arg1, int arg2, int arg3) {
 		Square var5 = this.field102[arg0][arg1][arg2];
 		if (var5 == null) {
 			return;
@@ -1838,7 +1838,7 @@ public final class World {
 					Pix3D.method360(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641);
 				}
 			} else if (field115) {
-				int var52 = Pix3D.field771.method693(arg0.field2636);
+				int var52 = Pix3D.textureManager.getAverageRgb(arg0.field2636);
 				Pix3D.method360(var49, var51, var47, var48, var50, var46, method64(var52, arg0.field2651), method64(var52, arg0.field2648), method64(var52, arg0.field2641));
 			} else if (arg0.field2645) {
 				Pix3D.method353(var49, var51, var47, var48, var50, var46, arg0.field2651, arg0.field2648, arg0.field2641, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field2636);
@@ -1862,7 +1862,7 @@ public final class World {
 				Pix3D.method353(var45, var47, var51, var44, var46, var50, arg0.field2647, arg0.field2641, arg0.field2648, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.field2636);
 				return;
 			}
-			int var53 = Pix3D.field771.method693(arg0.field2636);
+			int var53 = Pix3D.textureManager.getAverageRgb(arg0.field2636);
 			Pix3D.method360(var45, var47, var51, var44, var46, var50, method64(var53, arg0.field2647), method64(var53, arg0.field2641), method64(var53, arg0.field2648));
 		} else if (arg0.field2647 != 12345678) {
 			Pix3D.method360(var45, var47, var51, var44, var46, var50, arg0.field2647, arg0.field2641, arg0.field2648);
@@ -1924,7 +1924,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.d(IIII)V")
-	public void method86(int arg0, int arg1, int arg2, int arg3) {
+	public void setLayer(int arg0, int arg1, int arg2, int arg3) {
 		Square var5 = this.field102[arg0][arg1][arg2];
 		if (var5 != null) {
 			this.field102[arg0][arg1][arg2].field871 = arg3;
@@ -2079,7 +2079,7 @@ public final class World {
 						Pix3D.method360(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19]);
 					}
 				} else if (field115) {
-					int var29 = Pix3D.field771.method693(arg0.field556[var19]);
+					int var29 = Pix3D.textureManager.getAverageRgb(arg0.field556[var19]);
 					Pix3D.method360(var26, var27, var28, var23, var24, var25, method64(var29, arg0.field562[var19]), method64(var29, arg0.field564[var19]), method64(var29, arg0.field567[var19]));
 				} else if (arg0.field560) {
 					Pix3D.method353(var26, var27, var28, var23, var24, var25, arg0.field562[var19], arg0.field564[var19], arg0.field567[var19], Ground.field565[0], Ground.field565[1], Ground.field565[3], Ground.field570[0], Ground.field570[1], Ground.field570[3], Ground.field555[0], Ground.field555[1], Ground.field555[3], arg0.field556[var19]);
