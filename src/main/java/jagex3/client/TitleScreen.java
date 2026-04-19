@@ -108,9 +108,9 @@ public class TitleScreen {
 		if (Client.state != 10) {
 			return;
 		}
-		int var0 = Client.mouseClickX - 202;
-		int var1 = Client.mouseClickButton;
-		int var2 = Client.mouseClickY - 171;
+		int var0 = ClientMouseListener.mouseClickX - 202;
+		int var1 = ClientMouseListener.mouseClickButton;
+		int var2 = ClientMouseListener.mouseClickY - 171;
 		if (field1395 == 0) {
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 100 && var2 <= 140) {
 				field2084 = 0;

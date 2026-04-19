@@ -277,7 +277,7 @@ public class Text {
 	@ObfuscatedName("t.Lb")
 	public static JagString field2823 = JagString.wrap("Examine");
 	@ObfuscatedName("t.tb")
-	public static JagString field2805 = field2823;
+	public static JagString EXAMINE = field2823;
 	@ObfuscatedName("nd.F")
 	public static JagString field2091 = field2060;
 	@ObfuscatedName("vd.xd")
@@ -351,7 +351,7 @@ public class Text {
 	@ObfuscatedName("k.R")
 	public static JagString field1529 = JagString.wrap("Attack");
 	@ObfuscatedName("k.K")
-	public static JagString field1522 = field1529;
+	public static JagString ATTACK = field1529;
 	@ObfuscatedName("la.t")
 	public static JagString field1674 = JagString.wrap("Trade)4compete");
 	@ObfuscatedName("la.v")
@@ -397,7 +397,7 @@ public class Text {
 	@ObfuscatedName("client.hb")
 	public static JagString field588 = JagString.wrap("Use");
 	@ObfuscatedName("client.db")
-	public static JagString field584 = field588;
+	public static JagString USE = field588;
 	@ObfuscatedName("ba.mc")
 	public static JagString field308 = JagString.wrap("Too many incorrect logins from your address)3");
 	@ObfuscatedName("ba.hc")

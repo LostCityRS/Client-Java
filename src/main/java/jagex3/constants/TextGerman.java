@@ -419,7 +419,7 @@ public class TextGerman {
 		Text.field2079 = field3169;
 		Text.field3057 = field3191;
 		Text.field2089 = field3169;
-		Text.field2805 = field1403;
+		Text.EXAMINE = field1403;
 		Text.field2091 = field3169;
 		Text.field3193 = field2429;
 		Text.field3295 = field1214;
@@ -440,7 +440,7 @@ public class TextGerman {
 		Text.field1364 = field1345;
 		Text.field2077 = field1927;
 		Text.field796 = field1494;
-		Text.field1522 = field1180;
+		Text.ATTACK = field1180;
 		Text.field1676 = field1858;
 		Text.field2135 = field791;
 		Text.field2041 = field2730;
@@ -455,7 +455,7 @@ public class TextGerman {
 		Text.field2610 = field3151;
 		Text.field2088 = field3169;
 		Text.field2068 = field976;
-		Text.field584 = field3070;
+		Text.USE = field3070;
 		Text.field303 = field890;
 		Text.field2575 = field3148;
 		Text.field861 = field3145;

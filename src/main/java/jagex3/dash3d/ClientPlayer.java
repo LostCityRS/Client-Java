@@ -25,7 +25,7 @@ public final class ClientPlayer extends ClientEntity {
 	public int field66;
 
 	@ObfuscatedName("aa.yd")
-	public int field68 = 0;
+	public int combatLevel = 0;
 
 	@ObfuscatedName("aa.Ed")
 	public int field74 = 0;
@@ -97,7 +97,7 @@ public final class ClientPlayer extends ClientEntity {
 			}
 			if (this.field91 <= Client.loopCycle && this.field82 > Client.loopCycle) {
 				Model var6 = this.field73;
-				var6.translate(this.field79 - super.field1972, -this.field84 + this.field80, this.field99 - super.field1963);
+				var6.translate(this.field79 - super.x, -this.field84 + this.field80, this.field99 - super.z);
 				if (super.dstYaw == 512) {
 					var6.rotate90();
 					var6.rotate90();
@@ -120,7 +120,7 @@ public final class ClientPlayer extends ClientEntity {
 					var6.rotate90();
 					var6.rotate90();
 				}
-				var6.translate(super.field1972 - this.field79, -this.field80 + this.field84, super.field1963 - this.field99);
+				var6.translate(super.x - this.field79, -this.field80 + this.field84, super.z - this.field99);
 			}
 		}
 		var3.useAABBMouseCheck = true;
@@ -129,7 +129,7 @@ public final class ClientPlayer extends ClientEntity {
 
 	@ObfuscatedName("aa.h(I)Z")
 	@Override
-	public boolean method42() {
+	public boolean ready() {
 		return this.field90 != null;
 	}
 
@@ -173,33 +173,33 @@ public final class ClientPlayer extends ClientEntity {
 		if (super.readyanim == 65535) {
 			super.readyanim = -1;
 		}
-		super.field2019 = arg0.g2();
-		if (super.field2019 == 65535) {
-			super.field2019 = -1;
+		super.turnleftanim = arg0.g2();
+		if (super.turnleftanim == 65535) {
+			super.turnleftanim = -1;
 		}
-		super.field1957 = super.field2019;
-		super.field2005 = arg0.g2();
-		if (super.field2005 == 65535) {
-			super.field2005 = -1;
+		super.turnrightanim = super.turnleftanim;
+		super.walkanim = arg0.g2();
+		if (super.walkanim == 65535) {
+			super.walkanim = -1;
 		}
-		super.field1953 = arg0.g2();
-		if (super.field1953 == 65535) {
-			super.field1953 = -1;
+		super.walkanim_b = arg0.g2();
+		if (super.walkanim_b == 65535) {
+			super.walkanim_b = -1;
 		}
-		super.field1949 = arg0.g2();
-		if (super.field1949 == 65535) {
-			super.field1949 = -1;
+		super.walkanim_r = arg0.g2();
+		if (super.walkanim_r == 65535) {
+			super.walkanim_r = -1;
 		}
-		super.field2006 = arg0.g2();
-		if (super.field2006 == 65535) {
-			super.field2006 = -1;
+		super.walkanim_l = arg0.g2();
+		if (super.walkanim_l == 65535) {
+			super.walkanim_l = -1;
 		}
 		super.field1956 = arg0.g2();
 		if (super.field1956 == 65535) {
 			super.field1956 = -1;
 		}
 		this.field86 = JString.method969(arg0.method174()).method36();
-		this.field68 = arg0.g1();
+		this.combatLevel = arg0.g1();
 		this.field65 = arg0.g2();
 		if (this.field90 == null) {
 			this.field90 = new PlayerModel();

@@ -41,7 +41,7 @@ public final class ClientNpc extends ClientEntity {
 
 	@ObfuscatedName("vd.h(I)Z")
 	@Override
-	public boolean method42() {
+	public boolean ready() {
 		return this.type != null;
 	}
 }

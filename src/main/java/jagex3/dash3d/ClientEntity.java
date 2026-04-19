@@ -8,7 +8,7 @@ import jagex3.util.JagString;
 public abstract class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("nb.ac")
-	public int field1963;
+	public int z;
 
 	@ObfuscatedName("nb.ad")
 	public int field2015 = -1;
@@ -23,7 +23,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1967;
 
 	@ObfuscatedName("nb.ed")
-	public int field2019 = -1;
+	public int turnleftanim = -1;
 
 	@ObfuscatedName("nb.fc")
 	public int field1968 = 0;
@@ -32,19 +32,19 @@ public abstract class ClientEntity extends ModelSource {
 	public int size = 1;
 
 	@ObfuscatedName("nb.hd")
-	public int field2022 = 0;
+	public int targetTileX = 0;
 
 	@ObfuscatedName("nb.ic")
-	public int field1971 = 0;
+	public int turnCycle = 0;
 
 	@ObfuscatedName("nb.jc")
-	public int field1972;
+	public int x;
 
 	@ObfuscatedName("nb.kc")
 	public int field1973;
 
 	@ObfuscatedName("nb.lc")
-	public int field1974 = 0;
+	public int targetTileZ = 0;
 
 	@ObfuscatedName("nb.mc")
 	public int field1975;
@@ -71,16 +71,16 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1969 = 0;
 
 	@ObfuscatedName("nb.Ub")
-	public int field1957 = -1;
+	public int turnrightanim = -1;
 
 	@ObfuscatedName("nb.Tb")
 	public int field1956 = -1;
 
 	@ObfuscatedName("nb.Qb")
-	public int field1953 = -1;
+	public int walkanim_b = -1;
 
 	@ObfuscatedName("nb.Mb")
-	public int field1949 = -1;
+	public int walkanim_r = -1;
 
 	@ObfuscatedName("nb.Xb")
 	public final int[] field1960 = new int[4];
@@ -89,7 +89,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final boolean[] field1946 = new boolean[10];
 
 	@ObfuscatedName("nb.yc")
-	public int field1987 = 32;
+	public int turnspeed = 32;
 
 	@ObfuscatedName("nb.Cc")
 	public int field1991 = 200;
@@ -128,7 +128,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field2003 = 0;
 
 	@ObfuscatedName("nb.Wc")
-	public int field2011 = -1;
+	public int targetId = -1;
 
 	@ObfuscatedName("nb.Uc")
 	public final int[] field2009 = new int[10];
@@ -137,7 +137,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field2013 = -1000;
 
 	@ObfuscatedName("nb.Qc")
-	public int field2005 = -1;
+	public int walkanim = -1;
 
 	@ObfuscatedName("nb.Ac")
 	public int field1989 = 0;
@@ -152,7 +152,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final int[] field1962 = new int[10];
 
 	@ObfuscatedName("nb.Rc")
-	public int field2006 = -1;
+	public int walkanim_l = -1;
 
 	@ObfuscatedName("nb.Kb")
 	public int exactMoveFacing;
@@ -179,7 +179,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field2004;
 
 	@ObfuscatedName("nb.a(IBZ)V")
-	public final void method725(int arg0, boolean arg1) {
+	public final void moveCode(int arg0, boolean arg1) {
 		int var3 = this.field1962[0];
 		int var4 = this.field2009[0];
 		if (arg0 == 0) {
@@ -227,7 +227,7 @@ public abstract class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("nb.h(I)Z")
-	public boolean method42() {
+	public boolean ready() {
 		return false;
 	}
 
@@ -244,7 +244,7 @@ public abstract class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("nb.a(IIZI)V")
-	public final void method729(int arg0, boolean arg1, int arg2) {
+	public final void teleport(int arg0, boolean arg1, int arg2) {
 		if (this.field2015 != -1 && SeqType.list(this.field2015).preanim_move == 1) {
 			this.field2015 = -1;
 		}
@@ -271,8 +271,8 @@ public abstract class ClientEntity extends ModelSource {
 		this.field1968 = 0;
 		this.field1962[0] = arg2;
 		this.field2009[0] = arg0;
-		this.field1972 = this.field1962[0] * 128 + this.size * 64;
-		this.field1963 = this.field2009[0] * 128 + this.size * 64;
+		this.x = this.field1962[0] * 128 + this.size * 64;
+		this.z = this.field2009[0] * 128 + this.size * 64;
 	}
 
 	@ObfuscatedName("nb.j(I)V")

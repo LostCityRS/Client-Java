@@ -234,8 +234,8 @@ public class Pix2D extends Linkable2 {
 	public static void drawRect(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		hline(arg0, arg1, arg2, arg4);
 		hline(arg0, arg1 + arg3 - 1, arg2, arg4);
-		method925(arg0, arg1, arg3, arg4);
-		method925(arg0 + arg2 - 1, arg1, arg3, arg4);
+		vline(arg0, arg1, arg3, arg4);
+		vline(arg0 + arg2 - 1, arg1, arg3, arg4);
 	}
 
 	@ObfuscatedName("sc.e(IIIII)V")
@@ -299,14 +299,14 @@ public class Pix2D extends Linkable2 {
 				}
 			}
 		} else if (var6 >= 0) {
-			method925(arg0, arg1, var6 + 1, arg4);
+			vline(arg0, arg1, var6 + 1, arg4);
 		} else {
-			method925(arg0, arg1 + var6, -var6 + 1, arg4);
+			vline(arg0, arg1 + var6, -var6 + 1, arg4);
 		}
 	}
 
 	@ObfuscatedName("sc.d(IIII)V")
-	public static void method925(int arg0, int arg1, int arg2, int arg3) {
+	public static void vline(int arg0, int arg1, int arg2, int arg3) {
 		if (arg0 < field2752 || arg0 >= field2753) {
 			return;
 		}
