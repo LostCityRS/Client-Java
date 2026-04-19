@@ -108,9 +108,9 @@ public class TitleScreen {
 		if (Client.state != 10) {
 			return;
 		}
-		int var0 = Client.field2762 - 202;
-		int var1 = Client.field3050;
-		int var2 = Client.field14 - 171;
+		int var0 = Client.mouseClickX - 202;
+		int var1 = Client.mouseClickButton;
+		int var2 = Client.mouseClickY - 171;
 		if (field1395 == 0) {
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 100 && var2 <= 140) {
 				field2084 = 0;
@@ -266,8 +266,8 @@ public class TitleScreen {
 			field1935.draw(202, var6, 171);
 			field472.draw(0, var6, 0);
 			field1435.draw(637, var6, 0);
-			if (GameShell.field2402) {
-				GameShell.field2402 = false;
+			if (GameShell.fullredraw) {
+				GameShell.fullredraw = false;
 				field2044.draw(128, var6, 0);
 				field2608.draw(202, var6, 371);
 				field844.draw(0, var6, 265);
@@ -425,7 +425,7 @@ public class TitleScreen {
 			MidiManager.method679(Client.songs, field1691, field3067, Client.midiVolume);
 		}
 		Js5Net.method617(false);
-		GameShell.field2402 = true;
+		GameShell.fullredraw = true;
 		field1062 = true;
 	}
 

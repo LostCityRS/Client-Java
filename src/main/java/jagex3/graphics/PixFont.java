@@ -339,7 +339,7 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.a(La;IIIZ)V")
 	public void method200(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
-		this.drawString(arg0, arg1 - this.method204(arg0), arg2, arg3, arg4);
+		this.drawString(arg0, arg1 - this.stringWidTag(arg0), arg2, arg3, arg4);
 	}
 
 	@ObfuscatedName("bc.a(La;IIIII)V")
@@ -410,7 +410,7 @@ public final class PixFont extends Pix2D {
 		int var10 = 0;
 		int var11 = 0;
 		if (var8 > 0) {
-			var10 = (arg5 - this.method204(var7)) * 256 / var8;
+			var10 = (arg5 - this.stringWidTag(var7)) * 256 / var8;
 		}
 		this.strikeout = false;
 		int var12 = arg1;
@@ -447,7 +447,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.b(La;)I")
-	public int method204(JagString arg0) {
+	public int stringWidTag(JagString arg0) {
 		if (arg0 == null) {
 			return 0;
 		}
@@ -582,7 +582,7 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.c(La;IIIZ)V")
 	public void method211(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
-		this.drawString(arg0, arg1 - this.method204(arg0) / 2, arg2, arg3, arg4);
+		this.drawString(arg0, arg1 - this.stringWidTag(arg0) / 2, arg2, arg3, arg4);
 	}
 
 	public PixFont(int[] arg0, int[] arg1, int[] arg2, int[] arg3, byte[][] arg4) {

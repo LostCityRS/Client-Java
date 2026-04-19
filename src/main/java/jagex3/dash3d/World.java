@@ -61,7 +61,7 @@ public final class World {
 	public static int field104 = 0;
 
 	@ObfuscatedName("ab.d")
-	public static int field105 = -1;
+	public static int groundX = -1;
 
 	@ObfuscatedName("ab.db")
 	public final int[][] field156 = new int[][]{new int[16], {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1}, {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1}, {1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1}};
@@ -76,7 +76,7 @@ public final class World {
 	public static int[] field158 = new int[]{1, 1, 0, 0, 0, 8, 0, 0, 8};
 
 	@ObfuscatedName("ab.g")
-	public static int field108 = -1;
+	public static int groundZ = -1;
 
 	@ObfuscatedName("ab.gb")
 	public static int[] field159 = new int[]{0, 4, 4, 8, 0, 0, 8, 0, 0};
@@ -1556,8 +1556,8 @@ public final class World {
 		field141 = true;
 		field118 = arg0;
 		field104 = arg1;
-		field105 = -1;
-		field108 = -1;
+		groundX = -1;
+		groundZ = -1;
 	}
 
 	@ObfuscatedName("ab.a(Lpa;Lpa;IIIZ)V")
@@ -1830,8 +1830,8 @@ public final class World {
 				Pix3D.field779 = true;
 			}
 			if (field141 && this.method98(field118, field104, var49, var51, var47, var48, var50, var46)) {
-				field105 = arg6;
-				field108 = arg7;
+				groundX = arg6;
+				groundZ = arg7;
 			}
 			if (arg0.field2636 == -1) {
 				if (arg0.field2651 != 12345678) {
@@ -1854,8 +1854,8 @@ public final class World {
 			Pix3D.field779 = true;
 		}
 		if (field141 && this.method98(field118, field104, var45, var47, var51, var44, var46, var50)) {
-			field105 = arg6;
-			field108 = arg7;
+			groundX = arg6;
+			groundZ = arg7;
 		}
 		if (arg0.field2636 != -1) {
 			if (!field115) {
@@ -2071,8 +2071,8 @@ public final class World {
 					Pix3D.field779 = true;
 				}
 				if (field141 && this.method98(field118, field104, var26, var27, var28, var23, var24, var25)) {
-					field105 = arg5;
-					field108 = arg6;
+					groundX = arg5;
+					groundZ = arg6;
 				}
 				if (arg0.field556 == null || arg0.field556[var19] == -1) {
 					if (arg0.field562[var19] != 12345678) {

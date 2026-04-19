@@ -104,7 +104,7 @@ public class ReflectionChecker {
 	}
 
 	@ObfuscatedName("hd.a(IILfe;)V")
-	public static void method479(PacketBit arg0) {
+	public static void performCheck(PacketBit arg0) {
 		while (true) {
 			ReflectionCheck var1 = (ReflectionCheck) field2694.head();
 			if (var1 == null) {
@@ -211,7 +211,7 @@ public class ReflectionChecker {
 				}
 			}
 			arg0.method149(var4);
-			arg0.method155(arg0.pos - var4);
+			arg0.psize1(arg0.pos - var4);
 			var1.unlink();
 		}
 	}

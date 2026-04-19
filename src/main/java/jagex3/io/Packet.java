@@ -172,7 +172,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ba.c(IB)V")
-	public final void method155(int arg0) {
+	public final void psize1(int arg0) {
 		this.data[this.pos - arg0 - 1] = (byte) arg0;
 	}
 

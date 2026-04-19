@@ -337,7 +337,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(BIILjava/awt/Graphics;)V")
-	public void method16(int arg0, int arg1, Graphics arg2) {
+	public void drawString(int arg0, int arg1, Graphics arg2) {
 		String var4;
 		try {
 			var4 = new String(this.charCode, 0, this.length, "ISO-8859-1");
@@ -486,7 +486,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(ILjava/awt/FontMetrics;)I")
-	public int method24(FontMetrics arg0) {
+	public int stringWidth(FontMetrics arg0) {
 		String var2;
 		try {
 			var2 = new String(this.charCode, 0, this.length, "ISO-8859-1");

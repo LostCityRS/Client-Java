@@ -68,7 +68,7 @@ public final class SignLink implements Runnable {
 	public static final int field1716 = 3;
 
 	@ObfuscatedName("lc.s")
-	public String field1717 = null;
+	public String storeId = null;
 
 	@ObfuscatedName("lc.u")
 	public Applet applet = null;
@@ -187,16 +187,16 @@ public final class SignLink implements Runnable {
 	@ObfuscatedName("lc.c(I)V")
 	public void method652() {
 		try {
-			File var2 = new File(this.field1717 + "uid.dat");
+			File var2 = new File(this.storeId + "uid.dat");
 			if (!var2.exists() || var2.length() < 4L) {
-				DataOutputStream var3 = new DataOutputStream(new FileOutputStream(this.field1717 + "uid.dat"));
+				DataOutputStream var3 = new DataOutputStream(new FileOutputStream(this.storeId + "uid.dat"));
 				var3.writeInt((int) (Math.random() * 9.9999999E7D));
 				var3.close();
 			}
 		} catch (Exception var6) {
 		}
 		try {
-			DataInputStream var4 = new DataInputStream(new FileInputStream(this.field1717 + "uid.dat"));
+			DataInputStream var4 = new DataInputStream(new FileInputStream(this.storeId + "uid.dat"));
 			this.uid = var4.readInt() + 1;
 			var4.close();
 		} catch (Exception var5) {
@@ -314,7 +314,7 @@ public final class SignLink implements Runnable {
 							continue;
 						}
 					}
-					this.field1720 = this.field1717 = var9.getParent() + "/";
+					this.field1720 = this.storeId = var9.getParent() + "/";
 					this.field1699 = this.field1713 = var9.getPath() + "/";
 					return;
 				}

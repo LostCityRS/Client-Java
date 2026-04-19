@@ -2,7 +2,6 @@ package jagex3.callstack;
 
 import deob.ObfuscatedName;
 import jagex3.client.Client;
-import jagex3.client.GameShell;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
 import jagex3.util.ThreadUtil;
@@ -15,6 +14,8 @@ public final class JagException extends RuntimeException {
 
 	@ObfuscatedName("nb.ld")
 	public static SignLink signlink;
+	@ObfuscatedName("nc.d")
+	public static int revision;
 	@ObfuscatedName("ha.l")
 	public final Throwable field1155;
 
@@ -44,7 +45,7 @@ public final class JagException extends RuntimeException {
 			String var4 = var3.replace('@', '_');
 			String var5 = var4.replace('&', '_');
 			String var6 = var5.replace('#', '_');
-			PrivilegedRequest var7 = signlink.method650(new URL(signlink.applet.getCodeBase(), "clienterror.ws?c=" + GameShell.field2038 + "&u=" + Client.field1843 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
+			PrivilegedRequest var7 = signlink.method650(new URL(signlink.applet.getCodeBase(), "clienterror.ws?c=" + revision + "&u=" + Client.field1843 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
 			while (var7.status == 0) {
 				ThreadUtil.sleepPrecise(1L);
 			}

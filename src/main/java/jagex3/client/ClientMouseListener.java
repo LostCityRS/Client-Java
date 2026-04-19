@@ -28,9 +28,9 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	@ObfuscatedName("nb.cd")
 	public static volatile int field2017 = 0;
 	@ObfuscatedName("r.j")
-	public static int field2568 = 0;
+	public static int mouseY = 0;
 	@ObfuscatedName("de.u")
-	public static int field741 = 0;
+	public static int mouseX = 0;
 
 	@ObfuscatedName("ha.a(Ljava/awt/Component;B)V")
 	public static void addListeners(Component arg0) {
@@ -60,13 +60,13 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	public static void cycle() {
 		ClientMouseListener var0 = field1412;
 		synchronized (field1412) {
-			Client.field801 = field494;
-			field741 = field710;
-			field2568 = field496;
-			Client.field3050 = field2017;
-			Client.field2762 = field2711;
-			Client.field14 = field2396;
-			Client.field1344 = field919;
+			Client.mouseButton = field494;
+			mouseX = field710;
+			mouseY = field496;
+			Client.mouseClickButton = field2017;
+			Client.mouseClickX = field2711;
+			Client.mouseClickY = field2396;
+			Client.mouseClickTime = field919;
 			field2017 = 0;
 		}
 	}
