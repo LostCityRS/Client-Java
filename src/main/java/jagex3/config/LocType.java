@@ -212,8 +212,8 @@ public final class LocType extends Linkable2 {
 		if (this.hillskew) {
 			int var10 = (arg0 + arg5 + arg1 + arg3) / 4;
 			for (int var11 = 0; var11 < var9.numPoints; var11++) {
-				int var12 = var9.pointZ[var11];
-				int var13 = var9.pointX[var11];
+				int var12 = var9.pointX[var11];
+				int var13 = var9.pointZ[var11];
 				int var14 = arg3 + (arg5 - arg3) * (var12 + 64) / 128;
 				int var15 = arg1 + (arg0 - arg1) * (var12 + 64) / 128;
 				int var16 = (var13 + 64) * (var15 - var14) / 128 + var14;
@@ -398,8 +398,8 @@ public final class LocType extends Linkable2 {
 		if (this.hillskew) {
 			int var13 = (arg0 + arg1 + arg6 + arg7) / 4;
 			for (int var14 = 0; var14 < var12.numPoints; var14++) {
-				int var15 = var12.pointX[var14];
-				int var16 = var12.pointZ[var14];
+				int var15 = var12.pointZ[var14];
+				int var16 = var12.pointX[var14];
 				int var17 = (arg1 - arg0) * (var16 + 64) / 128 + arg0;
 				int var18 = (arg7 - arg6) * (var16 + 64) / 128 + arg6;
 				int var19 = (var15 + 64) * (-var17 + var18) / 128 + var17;

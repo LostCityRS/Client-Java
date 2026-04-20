@@ -24,7 +24,7 @@ public final class ClientNpc extends ClientEntity {
 			return null;
 		}
 		var3.calcBoundingCylinder();
-		super.field1991 = var3.field3135;
+		super.height = var3.field3135;
 		if (super.field1965 != -1 && super.field2014 != -1) {
 			Model var4 = SpotType.list(super.field1965).getTempModel2(super.field2014);
 			if (var4 != null) {

@@ -177,7 +177,7 @@ public class Pix2D extends Linkable2 {
 	}
 
 	@ObfuscatedName("sc.b()V")
-	public static void method920() {
+	public static void cls() {
 		int var0 = 0;
 		int var1 = field2750 * field2749 - 7;
 		while (var0 < var1) {

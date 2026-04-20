@@ -50,7 +50,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1975;
 
 	@ObfuscatedName("nb.nc")
-	public int field1976 = 0;
+	public int chatColour = 0;
 
 	@ObfuscatedName("nb.pc")
 	public int field1978 = 0;
@@ -83,7 +83,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int walkanim_r = -1;
 
 	@ObfuscatedName("nb.Xb")
-	public final int[] field1960 = new int[4];
+	public final int[] damageTypes = new int[4];
 
 	@ObfuscatedName("nb.Jb")
 	public final boolean[] field1946 = new boolean[10];
@@ -92,7 +92,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int turnspeed = 32;
 
 	@ObfuscatedName("nb.Cc")
-	public int field1991 = 200;
+	public int height = 200;
 
 	@ObfuscatedName("nb.Pb")
 	public int chatTimer = 100;
@@ -107,13 +107,13 @@ public abstract class ClientEntity extends ModelSource {
 	public int secondarySeqId = -1;
 
 	@ObfuscatedName("nb.Yb")
-	public final int[] field1961 = new int[4];
+	public final int[] damageValues = new int[4];
 
 	@ObfuscatedName("nb.Bc")
 	public int field1990 = 0;
 
 	@ObfuscatedName("nb.Ic")
-	public int field1997 = 0;
+	public int chatEffect = 0;
 
 	@ObfuscatedName("nb.Lc")
 	public int readyanim = -1;
@@ -122,7 +122,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int animDelayMove = 0;
 
 	@ObfuscatedName("nb.Vc")
-	public final int[] field2010 = new int[4];
+	public final int[] damageCycles = new int[4];
 
 	@ObfuscatedName("nb.Oc")
 	public int field2003 = 0;
@@ -134,7 +134,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final int[] field2009 = new int[10];
 
 	@ObfuscatedName("nb.Yc")
-	public int field2013 = -1000;
+	public int combatCycle = -1000;
 
 	@ObfuscatedName("nb.Qc")
 	public int walkanim = -1;
@@ -234,10 +234,10 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("nb.b(IIII)V")
 	public final void method727(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
-			if (arg1 >= this.field2010[var4]) {
-				this.field1961[var4] = arg2;
-				this.field1960[var4] = arg0;
-				this.field2010[var4] = arg1 + 70;
+			if (arg1 >= this.damageCycles[var4]) {
+				this.damageValues[var4] = arg2;
+				this.damageTypes[var4] = arg0;
+				this.damageCycles[var4] = arg1 + 70;
 				return;
 			}
 		}

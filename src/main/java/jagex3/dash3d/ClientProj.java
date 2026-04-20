@@ -11,7 +11,7 @@ public final class ClientProj extends ModelSource {
 	public int field630 = 0;
 
 	@ObfuscatedName("d.bc")
-	public final int field631;
+	public final int t1;
 
 	@ObfuscatedName("d.dc")
 	public int field633;
@@ -20,7 +20,7 @@ public final class ClientProj extends ModelSource {
 	public double field637;
 
 	@ObfuscatedName("d.ic")
-	public final int field638;
+	public final int level;
 
 	@ObfuscatedName("d.jc")
 	public int field639 = 0;
@@ -56,10 +56,10 @@ public final class ClientProj extends ModelSource {
 	public final int field619;
 
 	@ObfuscatedName("d.Yb")
-	public final int field628;
+	public final int t2;
 
 	@ObfuscatedName("d.Ob")
-	public final int field618;
+	public final int target;
 
 	@ObfuscatedName("d.yc")
 	public final int field654;
@@ -89,10 +89,10 @@ public final class ClientProj extends ModelSource {
 		this.field617 = arg10;
 		this.field646 = arg8;
 		this.field619 = arg0;
-		this.field638 = arg1;
-		this.field628 = arg6;
-		this.field631 = arg5;
-		this.field618 = arg9;
+		this.level = arg1;
+		this.t2 = arg6;
+		this.t1 = arg5;
+		this.target = arg9;
 		this.field641 = arg3;
 		this.field654 = arg7;
 		int var12 = SpotType.list(this.field619).anim;
@@ -117,7 +117,7 @@ public final class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("d.b(II)V")
-	public void method299(int arg0) {
+	public void move(int arg0) {
 		this.field625 = true;
 		this.field650 += (double) arg0 * this.field658;
 		this.field637 += (double) arg0 * this.field668;
@@ -139,7 +139,7 @@ public final class ClientProj extends ModelSource {
 	}
 
 	@ObfuscatedName("d.a(IIIII)V")
-	public void method300(int arg0, int arg1, int arg2, int arg3) {
+	public void setTarget(int arg0, int arg1, int arg2, int arg3) {
 		if (!this.field625) {
 			double var5 = (double) (arg3 - this.field615);
 			double var7 = (double) (arg1 - this.field641);
@@ -148,7 +148,7 @@ public final class ClientProj extends ModelSource {
 			this.field650 = (double) this.field646 * var7 / var9 + (double) this.field641;
 			this.field649 = this.field614;
 		}
-		double var11 = (double) (this.field628 + 1 - arg0);
+		double var11 = (double) (this.t2 + 1 - arg0);
 		this.field658 = ((double) arg1 - this.field650) / var11;
 		this.field668 = ((double) arg3 - this.field637) / var11;
 		this.field652 = Math.sqrt(this.field668 * this.field668 + this.field658 * this.field658);

@@ -294,7 +294,7 @@ public class Js5Net {
 	}
 
 	@ObfuscatedName("kc.a(BZZ)I")
-	public static int method614() {
+	public static int urgentQueueSize() {
 		return field845 + field3285;
 	}
 

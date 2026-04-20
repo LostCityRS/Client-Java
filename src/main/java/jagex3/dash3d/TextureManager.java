@@ -85,7 +85,7 @@ public final class TextureManager implements TextureProvider {
 	}
 
 	@ObfuscatedName("mc.b(BI)V")
-	public void method697(int arg0) {
+	public void runAnims(int arg0) {
 		for (int var2 = 0; var2 < this.field1867.length; var2++) {
 			Texture var3 = this.field1867[var2];
 			if (var3 != null && var3.field2191 != 0 && var3.field2201) {

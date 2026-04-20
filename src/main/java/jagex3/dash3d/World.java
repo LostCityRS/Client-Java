@@ -1565,7 +1565,7 @@ public final class World {
 		arg1.method790();
 		this.field153++;
 		int var7 = 0;
-		int[] var8 = arg1.pointZ;
+		int[] var8 = arg1.pointX;
 		int var9 = arg1.numPoints;
 		for (int var10 = 0; var10 < arg0.numPoints; var10++) {
 			PointNormal var11 = arg0.field2215[var10];
@@ -1573,14 +1573,14 @@ public final class World {
 			if (var12.field2328 != 0) {
 				int var13 = arg0.pointY[var10] - arg3;
 				if (var13 <= arg1.field2216) {
-					int var14 = arg0.pointZ[var10] - arg2;
+					int var14 = arg0.pointX[var10] - arg2;
 					if (var14 >= arg1.field2212 && var14 <= arg1.field2204) {
-						int var15 = arg0.pointX[var10] - arg4;
+						int var15 = arg0.pointZ[var10] - arg4;
 						if (var15 >= arg1.field2218 && var15 <= arg1.field2230) {
 							for (int var16 = 0; var16 < var9; var16++) {
 								PointNormal var17 = arg1.field2215[var16];
 								PointNormal var18 = arg1.field2213[var16];
-								if (var8[var16] == var14 && arg1.pointX[var16] == var15 && arg1.pointY[var16] == var13 && var18.field2328 != 0) {
+								if (var8[var16] == var14 && arg1.pointZ[var16] == var15 && arg1.pointY[var16] == var13 && var18.field2328 != 0) {
 									var11.field2312 += var18.field2312;
 									var11.field2307 += var18.field2307;
 									var11.field2314 += var18.field2314;
@@ -1603,13 +1603,13 @@ public final class World {
 			return;
 		}
 		for (int var19 = 0; var19 < arg0.numFaces; var19++) {
-			if (this.field154[arg0.field2223[var19]] == this.field153 && this.field154[arg0.field2237[var19]] == this.field153 && this.field154[arg0.field2206[var19]] == this.field153) {
-				arg0.field2219[var19] = -1;
+			if (this.field154[arg0.faceVertexA[var19]] == this.field153 && this.field154[arg0.faceVertexB[var19]] == this.field153 && this.field154[arg0.faceVertexC[var19]] == this.field153) {
+				arg0.faceRenderType[var19] = -1;
 			}
 		}
 		for (int var20 = 0; var20 < arg1.numFaces; var20++) {
-			if (this.field150[arg1.field2223[var20]] == this.field153 && this.field150[arg1.field2237[var20]] == this.field153 && this.field150[arg1.field2206[var20]] == this.field153) {
-				arg1.field2219[var20] = -1;
+			if (this.field150[arg1.faceVertexA[var20]] == this.field153 && this.field150[arg1.faceVertexB[var20]] == this.field153 && this.field150[arg1.faceVertexC[var20]] == this.field153) {
+				arg1.faceRenderType[var20] = -1;
 			}
 		}
 	}

@@ -31,10 +31,10 @@ public final class ClientPlayer extends ClientEntity {
 	public int field74 = 0;
 
 	@ObfuscatedName("aa.Ld")
-	public int field81 = -1;
+	public int headiconPrayer = -1;
 
 	@ObfuscatedName("aa.Gd")
-	public int field76 = -1;
+	public int headiconPk = -1;
 
 	@ObfuscatedName("aa.Md")
 	public int field82 = 0;
@@ -61,7 +61,7 @@ public final class ClientPlayer extends ClientEntity {
 	public int field89;
 
 	@ObfuscatedName("aa.Qd")
-	public JagString field86;
+	public JagString name;
 
 	@ObfuscatedName("aa.Ud")
 	public PlayerModel model;
@@ -82,7 +82,7 @@ public final class ClientPlayer extends ClientEntity {
 			return null;
 		}
 		var3.calcBoundingCylinder();
-		super.field1991 = var3.field3135;
+		super.height = var3.field3135;
 		if (!this.field95 && super.field1965 != -1 && super.field2014 != -1) {
 			Model var4 = SpotType.list(super.field1965).getTempModel2(super.field2014);
 			if (var4 != null) {
@@ -137,8 +137,8 @@ public final class ClientPlayer extends ClientEntity {
 	public void method43(Packet arg0) {
 		arg0.pos = 0;
 		int var2 = arg0.g1();
-		this.field76 = arg0.g1b();
-		this.field81 = arg0.g1b();
+		this.headiconPk = arg0.g1b();
+		this.headiconPrayer = arg0.g1b();
 		int var3 = -1;
 		this.field74 = 0;
 		int[] var4 = new int[12];
@@ -198,7 +198,7 @@ public final class ClientPlayer extends ClientEntity {
 		if (super.field1956 == 65535) {
 			super.field1956 = -1;
 		}
-		this.field86 = JString.method969(arg0.method174()).method36();
+		this.name = JString.method969(arg0.method174()).method36();
 		this.combatLevel = arg0.g1();
 		this.field65 = arg0.g2();
 		if (this.model == null) {
