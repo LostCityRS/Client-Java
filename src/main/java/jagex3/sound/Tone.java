@@ -141,7 +141,7 @@ public final class Tone {
 				break;
 			}
 			this.field3091[var5] = var6;
-			this.field3085[var5] = arg0.method158();
+			this.field3085[var5] = arg0.gsmarts();
 			this.field3089[var5] = arg0.gsmart();
 		}
 		this.field3083 = arg0.gsmart();

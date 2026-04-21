@@ -1715,14 +1715,14 @@ public final class Client extends GameShell {
 	@ObfuscatedName("rd.a(B)V")
 	public static void zonePacket() {
 		if (ptype == 49) {
-			int var0 = in.method152();
+			int var0 = in.g1_alt1();
 			int var1 = (var0 & 0x7) + zoneUpdateZ;
 			int var2 = (var0 >> 4 & 0x7) + zoneUpdateX;
-			int var3 = in.method152();
+			int var3 = in.g1_alt1();
 			int var4 = var3 >> 2;
 			int var5 = var3 & 0x3;
 			int var6 = field3186[var4];
-			int var7 = in.method180();
+			int var7 = in.g2_alt3();
 			if (var2 >= 0 && var1 >= 0 && var2 < 103 && var1 < 103) {
 				int var8 = ClientBuild.groundh[minusedlevel][var2][var1];
 				int var9 = ClientBuild.groundh[minusedlevel][var2 + 1][var1];
@@ -1763,12 +1763,12 @@ public final class Client extends GameShell {
 				}
 			}
 		} else if (ptype == 241) {
-			int var17 = in.method147();
+			int var17 = in.g1_alt2();
 			int var18 = var17 & 0x3;
 			int var19 = var17 >> 2;
 			int var20 = field3186[var19];
 			int var21 = in.g2();
-			int var22 = in.method152();
+			int var22 = in.g1_alt1();
 			int var23 = (var22 & 0x7) + zoneUpdateZ;
 			int var24 = (var22 >> 4 & 0x7) + zoneUpdateX;
 			if (var24 >= 0 && var23 >= 0 && var24 < 104 && var23 < 104) {
@@ -1829,10 +1829,10 @@ public final class Client extends GameShell {
 					}
 				}
 			} else if (ptype == 143) {
-				int var51 = in.method152();
+				int var51 = in.g1_alt1();
 				int var52 = zoneUpdateZ + (var51 & 0x7);
 				int var53 = zoneUpdateX + (var51 >> 4 & 0x7);
-				int var54 = in.method147();
+				int var54 = in.g1_alt2();
 				int var55 = var54 & 0x3;
 				int var56 = var54 >> 2;
 				int var57 = field3186[var56];
@@ -1841,21 +1841,21 @@ public final class Client extends GameShell {
 				}
 			} else {
 				if (ptype == 229) {
-					byte var58 = in.method171();
-					int var59 = in.method137();
+					byte var58 = in.g1b_alt1();
+					int var59 = in.g2_alt2();
 					byte var60 = in.g1b();
 					byte var61 = in.g1b();
-					int var62 = in.method152();
+					int var62 = in.g1_alt1();
 					int var63 = var62 & 0x3;
 					int var64 = var62 >> 2;
 					int var65 = field3186[var64];
-					int var66 = in.method156();
+					int var66 = in.g1_alt3();
 					int var67 = (var66 & 0x7) + zoneUpdateZ;
 					int var68 = zoneUpdateX + (var66 >> 4 & 0x7);
 					int var69 = in.g2();
-					byte var70 = in.method143();
-					int var71 = in.method166();
-					int var72 = in.method180();
+					byte var70 = in.g1b_alt2();
+					int var71 = in.g2_alt1();
+					int var72 = in.g2_alt3();
 					ClientPlayer var73;
 					if (selfSlot == var59) {
 						var73 = localPlayer;
@@ -1904,7 +1904,7 @@ public final class Client extends GameShell {
 					int var84 = in.g1();
 					int var85 = (var84 >> 4 & 0x7) + zoneUpdateX;
 					int var86 = (var84 & 0x7) + zoneUpdateZ;
-					int var87 = in.method137();
+					int var87 = in.g2_alt2();
 					if (var85 >= 0 && var86 >= 0 && var85 < 104 && var86 < 104) {
 						LinkList var88 = groundObj[minusedlevel][var85][var86];
 						if (var88 != null) {
@@ -1944,10 +1944,10 @@ public final class Client extends GameShell {
 						projectiles.push(var106);
 					}
 				} else if (ptype == 19) {
-					int var108 = in.method180();
-					int var109 = in.method180();
+					int var108 = in.g2_alt3();
+					int var109 = in.g2_alt3();
 					int var110 = in.g2();
-					int var111 = in.method152();
+					int var111 = in.g1_alt1();
 					int var112 = (var111 >> 4 & 0x7) + zoneUpdateX;
 					int var113 = (var111 & 0x7) + zoneUpdateZ;
 					if (var112 >= 0 && var113 >= 0 && var112 < 104 && var113 < 104 && selfSlot != var109) {
@@ -1961,7 +1961,7 @@ public final class Client extends GameShell {
 						showObject(var113, var112);
 					}
 				} else if (ptype == 175) {
-					int var115 = in.method166();
+					int var115 = in.g2_alt1();
 					int var116 = in.g2();
 					int var117 = in.g1();
 					int var118 = (var117 & 0x7) + zoneUpdateZ;
@@ -2673,53 +2673,53 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ac.a(Laa;BII)V")
 	public static void getPlayerPosExtended(ClientPlayer arg0, int arg1, int arg2) {
 		if ((arg1 & 0x100) != 0) {
-			int var3 = in.method156();
-			int var4 = in.method152();
+			int var3 = in.g1_alt3();
+			int var4 = in.g1_alt1();
 			arg0.method727(var4, loopCycle, var3);
 			arg0.combatCycle = loopCycle + 300;
-			arg0.field2004 = in.method156();
-			arg0.field1975 = in.method152();
+			arg0.field2004 = in.g1_alt3();
+			arg0.field1975 = in.g1_alt1();
 		}
 		if ((arg1 & 0x10) != 0) {
 			arg0.targetTileX = in.g2();
-			arg0.targetTileZ = in.method166();
+			arg0.targetTileZ = in.g2_alt1();
 		}
 		if ((arg1 & 0x1) != 0) {
-			int var5 = in.method166();
+			int var5 = in.g2_alt1();
 			if (var5 == 65535) {
 				var5 = -1;
 			}
-			int var6 = in.method147();
+			int var6 = in.g1_alt2();
 			triggerPlayerAnim(var5, var6, arg0);
 		}
 		if ((arg1 & 0x4) != 0) {
-			arg0.targetId = in.method137();
+			arg0.targetId = in.g2_alt2();
 			if (arg0.targetId == 65535) {
 				arg0.targetId = -1;
 			}
 		}
 		if ((arg1 & 0x40) != 0) {
 			int var7 = in.g1();
-			int var8 = in.method152();
+			int var8 = in.g1_alt1();
 			arg0.method727(var8, loopCycle, var7);
 			arg0.combatCycle = loopCycle + 300;
-			arg0.field2004 = in.method152();
-			arg0.field1975 = in.method152();
+			arg0.field2004 = in.g1_alt1();
+			arg0.field1975 = in.g1_alt1();
 		}
 		if ((arg1 & 0x400) != 0) {
-			arg0.field1999 = in.method156();
-			arg0.field1955 = in.method156();
+			arg0.field1999 = in.g1_alt3();
+			arg0.field1955 = in.g1_alt3();
 			arg0.field1973 = in.g1();
 			arg0.field2001 = in.g1();
-			arg0.exactMoveEnd = in.method137() + loopCycle;
-			arg0.exactMoveStart = in.method180() + loopCycle;
-			arg0.exactMoveFacing = in.method152();
+			arg0.exactMoveEnd = in.g2_alt2() + loopCycle;
+			arg0.exactMoveStart = in.g2_alt3() + loopCycle;
+			arg0.exactMoveFacing = in.g1_alt1();
 			arg0.abortRoute();
 		}
 		if ((arg1 & 0x8) != 0) {
 			int var9 = in.g2();
-			int var10 = in.method152();
-			int var11 = in.method147();
+			int var10 = in.g1_alt1();
+			int var11 = in.g1_alt2();
 			int var12 = in.pos;
 			if (arg0.name != null && arg0.model != null) {
 				long var13 = arg0.name.toUserhash();
@@ -2734,7 +2734,7 @@ public final class Client extends GameShell {
 				}
 				if (!var15 && chatDisabled == 0) {
 					field2917.pos = 0;
-					in.method138(field2917.data, var11);
+					in.gdata_alt2(field2917.data, var11);
 					field2917.pos = 0;
 					JagString var17 = WordPack.method893(field2917).method4();
 					arg0.chat = var17.method40();
@@ -2761,8 +2761,8 @@ public final class Client extends GameShell {
 			arg0.method43(var20);
 		}
 		if ((arg1 & 0x200) != 0) {
-			arg0.spotanimId = in.method166();
-			int var21 = in.method146();
+			arg0.spotanimId = in.g2_alt1();
+			int var21 = in.g4_alt3();
 			arg0.spotanimCycle = 0;
 			arg0.spotanimLastCycle = (var21 & 0xFFFF) + loopCycle;
 			if (arg0.spotanimId == 65535) {
@@ -3429,14 +3429,14 @@ public final class Client extends GameShell {
 			field498 = field36;
 			field36 = ptype;
 			if (ptype == 71) {
-				long var1 = in.method174();
+				long var1 = in.g8();
 				JagString var3 = WordPack.method893(in).method4();
 				addChat(6, var3, JString.method969(var1).method36());
 				ptype = -1;
 				return true;
 			}
 			if (ptype == 156) {
-				long var4 = in.method174();
+				long var4 = in.g8();
 				int var6 = in.g2();
 				JagString var7 = JString.method969(var4).method36();
 				for (int var8 = 0; var8 < field1492; var8++) {
@@ -3503,8 +3503,8 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 222) {
-				byte var16 = in.method168();
-				int var17 = in.method137();
+				byte var16 = in.g1b_alt3();
+				int var17 = in.g2_alt2();
 				VarCache.field304[var17] = var16;
 				if (VarCache.var[var17] != var16) {
 					VarCache.var[var17] = var16;
@@ -3519,7 +3519,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 115) {
 				boolean var18 = in.g1() == 1;
-				int var19 = in.method146();
+				int var19 = in.g4_alt3();
 				IfType var20 = IfType.get(var19);
 				var20.hide = var18;
 				ptype = -1;
@@ -3546,11 +3546,11 @@ public final class Client extends GameShell {
 				}
 				int var27 = in.g2();
 				for (int var28 = 0; var28 < var27; var28++) {
-					int var29 = in.method152();
+					int var29 = in.g1_alt1();
 					if (var29 == 255) {
 						var29 = in.g4();
 					}
-					int var30 = in.method137();
+					int var30 = in.g2_alt2();
 					if (var22.v3) {
 						IfType[] var31 = IfType.list[var21 >> 16];
 						for (int var32 = 0; var32 < var31.length; var32++) {
@@ -3569,8 +3569,8 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 250) {
-				int var34 = in.method166();
-				int var35 = in.method146();
+				int var34 = in.g2_alt1();
+				int var35 = in.g4_alt3();
 				IfType var36 = IfType.get(var35);
 				var36.model1Id = var34;
 				var36.model1Type = 1;
@@ -3650,7 +3650,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 182) {
 				int var58 = in.g2();
-				int var59 = in.method161();
+				int var59 = in.g4_alt1();
 				IfType var60 = IfType.get(var59);
 				ptype = -1;
 				if (var60 != null && var60.type == 0) {
@@ -3665,7 +3665,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 174) {
-				int var61 = in.method146();
+				int var61 = in.g4_alt3();
 				IfType var62 = IfType.get(var61);
 				if (var62.v3) {
 					IfType[] var63 = IfType.list[var61 >> 16];
@@ -3686,14 +3686,14 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 130) {
-				field1844 = in.method166();
+				field1844 = in.g2_alt1();
 				ptype = -1;
 				return true;
 			}
 			if (ptype == 129) {
-				int var67 = in.method147();
-				int var68 = in.method152();
-				int var69 = in.method147();
+				int var67 = in.g1_alt2();
+				int var68 = in.g1_alt1();
+				int var69 = in.g1_alt2();
 				minusedlevel = var67 >> 1;
 				localPlayer.teleport(var69, (var67 & 0x1) == 1, var68);
 				ptype = -1;
@@ -3717,7 +3717,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 56) {
-				int var73 = in.method136();
+				int var73 = in.g2s_alt2();
 				if (var73 >= 0) {
 					method746(var73);
 				}
@@ -3730,8 +3730,8 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 117) {
 				int var74 = in.g2();
-				int var75 = in.method180();
-				int var76 = in.method161();
+				int var75 = in.g2_alt3();
+				int var76 = in.g4_alt1();
 				IfType var77 = IfType.get(var76);
 				ptype = -1;
 				var77.field2528 = (var74 << 16) + var75;
@@ -3739,7 +3739,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 84) {
 				int var78 = in.g2();
-				int var79 = in.method180();
+				int var79 = in.g2_alt3();
 				if (chatModalId != -1) {
 					method895(chatModalId);
 					redrawChat = true;
@@ -3774,7 +3774,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 64) {
 				zoneUpdateZ = in.g1();
-				zoneUpdateX = in.method152();
+				zoneUpdateX = in.g1_alt1();
 				for (int var80 = zoneUpdateX; var80 < zoneUpdateX + 8; var80++) {
 					for (int var81 = zoneUpdateZ; var81 < zoneUpdateZ + 8; var81++) {
 						if (groundObj[minusedlevel][var80][var81] != null) {
@@ -3793,7 +3793,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 223) {
 				JagString var83 = in.gjstr();
-				int var84 = in.method156();
+				int var84 = in.g1_alt3();
 				int var85 = in.g1();
 				if (var85 >= 1 && var85 <= 5) {
 					if (var83.equalsIgnoreCase(NULL)) {
@@ -3866,7 +3866,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 185) {
-				int var87 = in.method136();
+				int var87 = in.g2s_alt2();
 				if (field2421 != var87) {
 					method895(field2421);
 					field2421 = var87;
@@ -3876,7 +3876,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 195) {
-				int var88 = in.method137();
+				int var88 = in.g2_alt2();
 				int var89 = in.g2();
 				method746(var89);
 				if (var88 != -1) {
@@ -3942,7 +3942,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 208) {
-				int var90 = in.method137();
+				int var90 = in.g2_alt2();
 				method746(var90);
 				if (sideModalId != -1) {
 					method895(sideModalId);
@@ -3973,7 +3973,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 217) {
-				int var91 = in.method166();
+				int var91 = in.g2_alt1();
 				if (var91 == 65535) {
 					var91 = -1;
 				}
@@ -3983,7 +3983,7 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 40) {
 				int var92 = in.g3();
-				int var93 = in.method137();
+				int var93 = in.g2_alt2();
 				if (var93 == 65535) {
 					var93 = -1;
 				}
@@ -3992,13 +3992,13 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 254) {
-				zoneUpdateZ = in.method156();
-				zoneUpdateX = in.method147();
+				zoneUpdateZ = in.g1_alt3();
+				zoneUpdateX = in.g1_alt2();
 				ptype = -1;
 				return true;
 			}
 			if (ptype == 88) {
-				tutFlashIcon = in.method152();
+				tutFlashIcon = in.g1_alt1();
 				if (activeIcon == tutFlashIcon) {
 					if (tutFlashIcon == 3) {
 						activeIcon = 1;
@@ -4011,8 +4011,8 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 63) {
-				zoneUpdateX = in.method147();
-				zoneUpdateZ = in.method156();
+				zoneUpdateX = in.g1_alt2();
+				zoneUpdateZ = in.g1_alt3();
 				while (in.pos < psize) {
 					ptype = in.g1();
 					zonePacket();
@@ -4030,7 +4030,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 116) {
-				rebootTimer = in.method166() * 30;
+				rebootTimer = in.g2_alt1() * 30;
 				ptype = -1;
 				return true;
 			}
@@ -4040,7 +4040,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 2) {
-				int var94 = in.method146();
+				int var94 = in.g4_alt3();
 				int var95 = in.g2();
 				VarCache.field304[var95] = var94;
 				if (VarCache.var[var95] != var94) {
@@ -4131,9 +4131,9 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 142) {
 				int var107 = in.g2();
-				int var108 = in.method166();
+				int var108 = in.g2_alt1();
 				int var109 = in.g2();
-				int var110 = in.method161();
+				int var110 = in.g4_alt1();
 				IfType var111 = IfType.get(var110);
 				ptype = -1;
 				var111.modelYAn = var107;
@@ -4179,8 +4179,8 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 160) {
-				int var114 = in.method166();
-				int var115 = in.method161();
+				int var114 = in.g2_alt1();
+				int var115 = in.g4_alt1();
 				IfType var116 = IfType.get(var115);
 				var116.model1Type = 2;
 				ptype = -1;
@@ -4237,7 +4237,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 210) {
-				int var117 = in.method161();
+				int var117 = in.g4_alt1();
 				IfType var118 = IfType.get(var117);
 				var118.model1Type = 3;
 				var118.model1Id = localPlayer.model.method634();
@@ -4245,7 +4245,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 110) {
-				int var119 = in.method161();
+				int var119 = in.g4_alt1();
 				JagString var120 = in.gjstr();
 				IfType var121 = IfType.get(var119);
 				var121.text = var120;
@@ -4263,8 +4263,8 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 120) {
 				int var122 = in.g2();
-				int var123 = in.method166();
-				int var124 = in.method161();
+				int var123 = in.g2_alt1();
+				int var124 = in.g4_alt1();
 				if (var123 == 65535) {
 					var123 = -1;
 				}
@@ -4288,7 +4288,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 51) {
-				long var127 = in.method174();
+				long var127 = in.g8();
 				long var129 = (long) in.g2();
 				long var131 = (long) in.g3();
 				int var133 = in.g1();
@@ -4354,9 +4354,9 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 34) {
 				redrawSide = true;
-				int var144 = in.method152();
+				int var144 = in.g1_alt1();
 				int var145 = in.g1();
-				int var146 = in.method146();
+				int var146 = in.g4_alt3();
 				field1483[var145] = var146;
 				field724[var145] = var144;
 				field549[var145] = 1;
@@ -4370,8 +4370,8 @@ public final class Client extends GameShell {
 			}
 			if (ptype == 3) {
 				int var148 = in.g4();
-				int var149 = in.method160();
-				int var150 = in.method160();
+				int var149 = in.g2s_alt3();
+				int var150 = in.g2s_alt3();
 				IfType var151 = IfType.get(var148);
 				var151.x = var151.dataX + var150;
 				ptype = -1;
@@ -4395,7 +4395,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 58) {
-				int var153 = in.method183();
+				int var153 = in.g4_alt2();
 				field715 = signlink.method655(var153);
 				ptype = -1;
 				return true;
@@ -4439,8 +4439,8 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 231) {
-				int var162 = in.method137();
-				int var163 = in.method161();
+				int var162 = in.g2_alt2();
+				int var163 = in.g4_alt1();
 				int var164 = var162 >> 10 & 0x1F;
 				int var165 = var162 >> 5 & 0x1F;
 				IfType var166 = IfType.get(var163);
@@ -4452,7 +4452,7 @@ public final class Client extends GameShell {
 			if (ptype == 211) {
 				field2146 = psize / 8;
 				for (int var168 = 0; var168 < field2146; var168++) {
-					field2683[var168] = in.method174();
+					field2683[var168] = in.g8();
 				}
 				ptype = -1;
 				return true;
@@ -4633,7 +4633,7 @@ public final class Client extends GameShell {
 							out.p2((mouseTrackDelta << 12) + (var9 << 6) + var10);
 							mouseTrackDelta = 0;
 						} else if (mouseTrackDelta < 8) {
-							out.method153(var8 + (mouseTrackDelta << 19) + 8388608);
+							out.p3(var8 + (mouseTrackDelta << 19) + 8388608);
 							mouseTrackDelta = 0;
 						} else {
 							out.p4((mouseTrackDelta << 19) + var8 - 1073741824);
@@ -4680,7 +4680,7 @@ public final class Client extends GameShell {
 			int var17 = (int) var12;
 			out.p1Enc(234);
 			int var18 = var15 * 765 + var14;
-			out.method170((var16 << 19) + ((var17 << 20) + var18));
+			out.p4_alt1((var16 << 19) + ((var17 << 20) + var18));
 		}
 		if (sendCameraDelay > 0) {
 			sendCameraDelay--;
@@ -4786,10 +4786,10 @@ public final class Client extends GameShell {
 							var19.swapSlots(hoveredSlot, objDragSlot);
 						}
 						out.p1Enc(83);
-						out.method165(var20);
-						out.method169(objDragSlot);
-						out.method154(hoveredSlot);
-						out.method179(objDragComId);
+						out.p1_alt1(var20);
+						out.p2_alt2(objDragSlot);
+						out.p2_alt3(hoveredSlot);
+						out.p4_alt2(objDragComId);
 					}
 				} else if ((oneMouseButton == 1 || isAddFriendOption(menuNumEntries - 1)) && menuNumEntries > 2) {
 					openMenu();
@@ -5340,15 +5340,15 @@ public final class Client extends GameShell {
 			ClientNpc var2 = npc[var1];
 			int var3 = in.g1();
 			if ((var3 & 0x1) != 0) {
-				int var4 = in.method152();
-				int var5 = in.method156();
+				int var4 = in.g1_alt1();
+				int var5 = in.g1_alt3();
 				var2.method727(var5, loopCycle, var4);
 				var2.combatCycle = loopCycle + 300;
-				var2.field2004 = in.method152();
+				var2.field2004 = in.g1_alt1();
 				var2.field1975 = in.g1();
 			}
 			if ((var3 & 0x20) != 0) {
-				var2.spotanimId = in.method180();
+				var2.spotanimId = in.g2_alt3();
 				int var6 = in.g4();
 				var2.spotanimCycle = 0;
 				var2.spotanimLastCycle = (var6 & 0xFFFF) + loopCycle;
@@ -5362,25 +5362,25 @@ public final class Client extends GameShell {
 				}
 			}
 			if ((var3 & 0x4) != 0) {
-				var2.targetId = in.method137();
+				var2.targetId = in.g2_alt2();
 				if (var2.targetId == 65535) {
 					var2.targetId = -1;
 				}
 			}
 			if ((var3 & 0x2) != 0) {
-				int var7 = in.method152();
+				int var7 = in.g1_alt1();
 				int var8 = in.g1();
 				var2.method727(var8, loopCycle, var7);
 				var2.combatCycle = loopCycle + 300;
-				var2.field2004 = in.method156();
-				var2.field1975 = in.method156();
+				var2.field2004 = in.g1_alt3();
+				var2.field1975 = in.g1_alt3();
 			}
 			if ((var3 & 0x40) != 0) {
 				var2.chat = in.gjstr();
 				var2.chatTimer = 100;
 			}
 			if ((var3 & 0x80) != 0) {
-				var2.type = NpcType.list(in.method137());
+				var2.type = NpcType.list(in.g2_alt2());
 				var2.turnrightanim = var2.type.turnrightanim;
 				var2.turnspeed = var2.type.turnspeed;
 				var2.walkanim_r = var2.type.walkanim_r;
@@ -5392,15 +5392,15 @@ public final class Client extends GameShell {
 				var2.walkanim_b = var2.type.walkanim_b;
 			}
 			if ((var3 & 0x8) != 0) {
-				var2.targetTileX = in.method137();
-				var2.targetTileZ = in.method166();
+				var2.targetTileX = in.g2_alt2();
+				var2.targetTileZ = in.g2_alt1();
 			}
 			if ((var3 & 0x10) != 0) {
-				int var9 = in.method137();
+				int var9 = in.g2_alt2();
 				if (var9 == 65535) {
 					var9 = -1;
 				}
-				int var10 = in.method147();
+				int var10 = in.g1_alt2();
 				if (var2.primarySeqId == var9 && var9 != -1) {
 					int var11 = SeqType.list(var9).duplicatebehaviour;
 					if (var11 == 1) {
@@ -6258,15 +6258,15 @@ public final class Client extends GameShell {
 				out.p1Enc(89);
 				out.p1(var31 + var31 + 3);
 			}
-			out.method162(var32 + mapBuildBaseZ);
-			out.method172(ClientKeyboardListener.keyHeld[82] ? 1 : 0);
-			out.method162(mapBuildBaseX + var33);
+			out.p2_alt1(var32 + mapBuildBaseZ);
+			out.p1_alt2(ClientKeyboardListener.keyHeld[82] ? 1 : 0);
+			out.p2_alt1(mapBuildBaseX + var33);
 			minimapFlagX = routeX[0];
 			minimapFlagZ = routeZ[0];
 			for (int var34 = 1; var34 < var31; var34++) {
 				var36--;
-				out.method165(routeX[var36] - var33);
-				out.method172(routeZ[var36] - var32);
+				out.p1_alt1(routeX[var36] - var33);
+				out.p1_alt2(routeZ[var36] - var32);
 			}
 			return true;
 		} else if (arg10 == 1) {
@@ -7200,8 +7200,8 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 37) {
 			out.p1Enc(21);
-			out.method170(field2949);
-			out.method179(var2);
+			out.p4_alt1(field2949);
+			out.p4_alt2(var2);
 			out.p2(var4);
 			out.p2(var1);
 			selectedArea = 2;
@@ -7225,7 +7225,7 @@ public final class Client extends GameShell {
 			crossX = ClientMouseListener.mouseClickX;
 			crossMode = 2;
 			out.p1Enc(190);
-			out.method154(var1 + mapBuildBaseX);
+			out.p2_alt3(var1 + mapBuildBaseX);
 			out.p2(var4);
 			out.p2(mapBuildBaseZ + var2);
 		}
@@ -7235,14 +7235,14 @@ public final class Client extends GameShell {
 			crossMode = 2;
 			crossCycle = 0;
 			out.p1Enc(148);
-			out.method162(var4 >> 14 & 0x7FFF);
+			out.p2_alt1(var4 >> 14 & 0x7FFF);
 		}
 		if (var3 == 27) {
 			method491(var1, var4, var2);
 			out.p1Enc(229);
-			out.method162(mapBuildBaseX + var1);
-			out.method162(var4 >> 14 & 0x7FFF);
-			out.method162(mapBuildBaseZ + var2);
+			out.p2_alt1(mapBuildBaseX + var1);
+			out.p2_alt1(var4 >> 14 & 0x7FFF);
+			out.p2_alt1(mapBuildBaseZ + var2);
 		}
 		if (var3 == 1) {
 			ClientPlayer var7 = players[var4];
@@ -7253,8 +7253,8 @@ public final class Client extends GameShell {
 				crossMode = 2;
 				crossY = ClientMouseListener.mouseClickY;
 				out.p1Enc(221);
-				out.method163(field2949);
-				out.method162(var4);
+				out.p4_alt3(field2949);
+				out.p2_alt1(var4);
 			}
 		}
 		if (var3 == 26 || var3 == 46) {
@@ -7271,11 +7271,11 @@ public final class Client extends GameShell {
 						tryMove(1, 0, localPlayer.field1962[0], var14.field1962[0], 0, false, 0, 1, localPlayer.field2009[0], var14.field2009[0], 2);
 						if (var3 == 26) {
 							out.p1Enc(96);
-							out.method169(playerIds[var13]);
+							out.p2_alt2(playerIds[var13]);
 						}
 						if (var3 == 46) {
 							out.p1Enc(68);
-							out.method162(playerIds[var13]);
+							out.p2_alt1(playerIds[var13]);
 						}
 						break;
 					}
@@ -7287,9 +7287,9 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 55) {
 			out.p1Enc(26);
-			out.method169(var1);
-			out.method170(var2);
-			out.method169(var4);
+			out.p2_alt2(var1);
+			out.p4_alt1(var2);
+			out.p2_alt2(var4);
 			selectedComId = var2;
 			selectedCycle = 0;
 			selectedItem = var1;
@@ -7303,9 +7303,9 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 53) {
 			out.p1Enc(38);
-			out.method169(var4);
-			out.method162(var1);
-			out.method163(var2);
+			out.p2_alt2(var4);
+			out.p2_alt1(var1);
+			out.p4_alt3(var2);
 			selectedItem = var1;
 			selectedArea = 2;
 			selectedCycle = 0;
@@ -7332,9 +7332,9 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 52) {
 			out.p1Enc(240);
-			out.method154(var1);
-			out.method162(var4);
-			out.method179(var2);
+			out.p2_alt3(var1);
+			out.p2_alt1(var4);
+			out.p4_alt2(var2);
 			selectedItem = var1;
 			selectedComId = var2;
 			selectedCycle = 0;
@@ -7355,7 +7355,7 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
 				out.p1Enc(68);
-				out.method162(var4);
+				out.p2_alt1(var4);
 			}
 		}
 		if (var3 == 14) {
@@ -7367,7 +7367,7 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				crossX = ClientMouseListener.mouseClickX;
 				out.p1Enc(96);
-				out.method169(var4);
+				out.p2_alt2(var4);
 			}
 		}
 		if (var3 == 1001) {
@@ -7383,7 +7383,7 @@ public final class Client extends GameShell {
 				}
 				if (var20 != null) {
 					out.p1Enc(247);
-					out.method154(var20.id);
+					out.p2_alt3(var20.id);
 				}
 			}
 		}
@@ -7396,8 +7396,8 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
 				out.p1Enc(110);
-				out.method154(var4);
-				out.method163(useSelectedComId);
+				out.p2_alt3(var4);
+				out.p4_alt3(useSelectedComId);
 				out.p2(field2437);
 				out.p2(objSelectedSlot);
 			}
@@ -7425,9 +7425,9 @@ public final class Client extends GameShell {
 			crossY = ClientMouseListener.mouseClickY;
 			crossX = ClientMouseListener.mouseClickX;
 			out.p1Enc(168);
-			out.method162(var4);
-			out.method169(mapBuildBaseX + var1);
-			out.method163(field2949);
+			out.p2_alt1(var4);
+			out.p2_alt2(mapBuildBaseX + var1);
+			out.p4_alt3(field2949);
 			out.p2(mapBuildBaseZ + var2);
 		}
 		if (var3 == 23) {
@@ -7443,9 +7443,9 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 48) {
 			out.p1Enc(147);
-			out.method169(var4);
-			out.method162(var1);
-			out.method170(var2);
+			out.p2_alt2(var4);
+			out.p2_alt1(var1);
+			out.p4_alt1(var2);
 			selectedArea = 2;
 			selectedItem = var1;
 			selectedComId = var2;
@@ -7486,14 +7486,14 @@ public final class Client extends GameShell {
 			crossY = ClientMouseListener.mouseClickY;
 			crossX = ClientMouseListener.mouseClickX;
 			out.p1Enc(151);
-			out.method154(var4);
+			out.p2_alt3(var4);
 		}
 		if (var3 == 1002) {
 			method491(var1, var4, var2);
 			out.p1Enc(62);
 			out.p2(var4 >> 14 & 0x7FFF);
-			out.method162(var2 + mapBuildBaseZ);
-			out.method154(mapBuildBaseX + var1);
+			out.p2_alt1(var2 + mapBuildBaseZ);
+			out.p2_alt3(mapBuildBaseX + var1);
 		}
 		if (var3 == 30) {
 			ClientNpc var32 = npc[var4];
@@ -7516,27 +7516,27 @@ public final class Client extends GameShell {
 				crossCycle = 0;
 				crossMode = 2;
 				out.p1Enc(208);
-				out.method169(var4);
-				out.method169(field2437);
-				out.method154(objSelectedSlot);
+				out.p2_alt2(var4);
+				out.p2_alt2(field2437);
+				out.p2_alt3(objSelectedSlot);
 				out.p4(useSelectedComId);
 			}
 		}
 		if (var3 == 29) {
 			method491(var1, var4, var2);
 			out.p1Enc(164);
-			out.method154(mapBuildBaseX + var1);
-			out.method154(mapBuildBaseZ + var2);
-			out.method154(var4 >> 14 & 0x7FFF);
+			out.p2_alt3(mapBuildBaseX + var1);
+			out.p2_alt3(mapBuildBaseZ + var2);
+			out.p2_alt3(var4 >> 14 & 0x7FFF);
 		}
 		if (var3 == 5 && method491(var1, var4, var2)) {
 			out.p1Enc(24);
-			out.method154(mapBuildBaseZ + var2);
-			out.method169(field2437);
-			out.method162(var4 >> 14 & 0x7FFF);
-			out.method154(objSelectedSlot);
-			out.method163(useSelectedComId);
-			out.method154(mapBuildBaseX + var1);
+			out.p2_alt3(mapBuildBaseZ + var2);
+			out.p2_alt2(field2437);
+			out.p2_alt1(var4 >> 14 & 0x7FFF);
+			out.p2_alt3(objSelectedSlot);
+			out.p4_alt3(useSelectedComId);
+			out.p2_alt3(mapBuildBaseX + var1);
 		}
 		if (var3 == 34) {
 			ClientNpc var34 = npc[var4];
@@ -7547,17 +7547,17 @@ public final class Client extends GameShell {
 				crossX = ClientMouseListener.mouseClickX;
 				crossY = ClientMouseListener.mouseClickY;
 				out.p1Enc(0);
-				out.method169(var4);
+				out.p2_alt2(var4);
 			}
 		}
 		if (var3 == 56) {
 			out.p1Enc(40);
-			out.method154(var4);
-			out.method154(var1);
-			out.method170(var2);
-			out.method170(useSelectedComId);
-			out.method162(field2437);
-			out.method169(objSelectedSlot);
+			out.p2_alt3(var4);
+			out.p2_alt3(var1);
+			out.p4_alt1(var2);
+			out.p4_alt1(useSelectedComId);
+			out.p2_alt1(field2437);
+			out.p2_alt2(objSelectedSlot);
 			selectedComId = var2;
 			selectedCycle = 0;
 			selectedItem = var1;
@@ -7592,7 +7592,7 @@ public final class Client extends GameShell {
 			}
 			if (var36 == null || var36.invcount < 100000) {
 				out.p1Enc(151);
-				out.method154(var4);
+				out.p2_alt3(var4);
 			} else {
 				addChat(0, JagString.join(new JagString[]{JagString.parseInt(var36.invcount), field3203, ObjType.list(var4).name}), EMPTY);
 			}
@@ -7610,8 +7610,8 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 31) {
 			out.p1Enc(163);
-			out.method154(var1);
-			out.method154(var4);
+			out.p2_alt3(var1);
+			out.p2_alt3(var4);
 			out.p4(var2);
 			selectedItem = var1;
 			selectedArea = 2;
@@ -7633,7 +7633,7 @@ public final class Client extends GameShell {
 				crossCycle = 0;
 				crossMode = 2;
 				out.p1Enc(63);
-				out.method154(var4);
+				out.p2_alt3(var4);
 			}
 		}
 		if (var3 == 2) {
@@ -7646,8 +7646,8 @@ public final class Client extends GameShell {
 			crossX = ClientMouseListener.mouseClickX;
 			crossY = ClientMouseListener.mouseClickY;
 			out.p1Enc(244);
-			out.method162(var1 + mapBuildBaseX);
-			out.method169(mapBuildBaseZ + var2);
+			out.p2_alt1(var1 + mapBuildBaseX);
+			out.p2_alt2(mapBuildBaseZ + var2);
 			out.p2(var4);
 		}
 		if (var3 == 3) {
@@ -7660,9 +7660,9 @@ public final class Client extends GameShell {
 			crossMode = 2;
 			crossY = ClientMouseListener.mouseClickY;
 			out.p1Enc(85);
-			out.method169(mapBuildBaseZ + var2);
-			out.method169(var4);
-			out.method162(mapBuildBaseX + var1);
+			out.p2_alt2(mapBuildBaseZ + var2);
+			out.p2_alt2(var4);
+			out.p2_alt1(mapBuildBaseX + var1);
 		}
 		if (var3 == 21) {
 			ClientNpc var44 = npc[var4];
@@ -7674,7 +7674,7 @@ public final class Client extends GameShell {
 				crossMode = 2;
 				out.p1Enc(253);
 				out.p2(var4);
-				out.method163(field2949);
+				out.p4_alt3(field2949);
 			}
 		}
 		if (var3 == 45 || var3 == 51 || var3 == 13 || var3 == 35) {
@@ -7719,7 +7719,7 @@ public final class Client extends GameShell {
 			IfType var50 = IfType.get(var2);
 			if (var50 == null || var50.linkObjNumber[var1] < 100000) {
 				out.p1Enc(151);
-				out.method154(var4);
+				out.p2_alt3(var4);
 			} else {
 				addChat(0, JagString.join(new JagString[]{JagString.parseInt(var50.linkObjNumber[var1]), field3203, ObjType.list(var4).name}), EMPTY);
 			}
@@ -7737,9 +7737,9 @@ public final class Client extends GameShell {
 		if (var3 == 17) {
 			method491(var1, var4, var2);
 			out.p1Enc(183);
-			out.method169(var2 + mapBuildBaseZ);
+			out.p2_alt2(var2 + mapBuildBaseZ);
 			out.p2(var4 >> 14 & 0x7FFF);
-			out.method169(var1 + mapBuildBaseX);
+			out.p2_alt2(var1 + mapBuildBaseX);
 		}
 		if (var3 == 50) {
 			method673(var1, var4, var2);
@@ -7752,15 +7752,15 @@ public final class Client extends GameShell {
 		if (var3 == 32 && method491(var1, var4, var2)) {
 			out.p1Enc(225);
 			out.p2(var4 >> 14 & 0x7FFF);
-			out.method154(var2 + mapBuildBaseZ);
-			out.method163(field2949);
-			out.method162(mapBuildBaseX + var1);
+			out.p2_alt3(var2 + mapBuildBaseZ);
+			out.p4_alt3(field2949);
+			out.p2_alt1(mapBuildBaseX + var1);
 		}
 		if (var3 == 25) {
 			out.p1Enc(228);
-			out.method162(var4);
-			out.method170(var2);
-			out.method162(var1);
+			out.p2_alt1(var4);
+			out.p4_alt1(var2);
+			out.p2_alt1(var1);
 			selectedCycle = 0;
 			selectedArea = 2;
 			if (var2 >> 16 == field3227) {
@@ -7774,9 +7774,9 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 11) {
 			out.p1Enc(29);
-			out.method163(var2);
-			out.method169(var1);
-			out.method162(var4);
+			out.p4_alt3(var2);
+			out.p2_alt2(var1);
+			out.p2_alt1(var4);
 			selectedItem = var1;
 			selectedComId = var2;
 			selectedArea = 2;
@@ -7797,7 +7797,7 @@ public final class Client extends GameShell {
 				crossX = ClientMouseListener.mouseClickX;
 				crossCycle = 0;
 				out.p1Enc(187);
-				out.method154(var4);
+				out.p2_alt3(var4);
 			}
 		}
 		if (var3 == 28) {
@@ -7826,9 +7826,9 @@ public final class Client extends GameShell {
 			crossMode = 2;
 			crossY = ClientMouseListener.mouseClickY;
 			out.p1Enc(65);
-			out.method169(var4);
-			out.method169(var2 + mapBuildBaseZ);
-			out.method162(mapBuildBaseX + var1);
+			out.p2_alt2(var4);
+			out.p2_alt2(var2 + mapBuildBaseZ);
+			out.p2_alt1(mapBuildBaseX + var1);
 		}
 		if (var3 == 9) {
 			closeModal();
@@ -7840,7 +7840,7 @@ public final class Client extends GameShell {
 		if (var3 == 43) {
 			out.p1Enc(98);
 			out.p2(var1);
-			out.method163(var2);
+			out.p4_alt3(var2);
 			out.p2(var4);
 			selectedCycle = 0;
 			selectedArea = 2;
@@ -7864,8 +7864,8 @@ public final class Client extends GameShell {
 			crossX = ClientMouseListener.mouseClickX;
 			out.p1Enc(27);
 			out.p2(mapBuildBaseX + var1);
-			out.method169(var4);
-			out.method169(mapBuildBaseZ + var2);
+			out.p2_alt2(var4);
+			out.p2_alt2(mapBuildBaseZ + var2);
 		}
 		if (var3 == 39) {
 			ClientPlayer var58 = players[var4];
@@ -7876,13 +7876,13 @@ public final class Client extends GameShell {
 				crossMode = 2;
 				crossY = ClientMouseListener.mouseClickY;
 				out.p1Enc(211);
-				out.method162(var4);
+				out.p2_alt1(var4);
 			}
 		}
 		if (var3 == 24) {
 			out.p1Enc(124);
 			out.p2(var1);
-			out.method170(var2);
+			out.p4_alt1(var2);
 			out.p2(var4);
 			selectedComId = var2;
 			selectedCycle = 0;
@@ -7898,9 +7898,9 @@ public final class Client extends GameShell {
 		if (var3 == 16) {
 			method491(var1, var4, var2);
 			out.p1Enc(30);
-			out.method169(var4 >> 14 & 0x7FFF);
-			out.method169(mapBuildBaseZ + var2);
-			out.method154(mapBuildBaseX + var1);
+			out.p2_alt2(var4 >> 14 & 0x7FFF);
+			out.p2_alt2(mapBuildBaseZ + var2);
+			out.p2_alt3(mapBuildBaseX + var1);
 		}
 		if (var3 == 20) {
 			ClientNpc var59 = npc[var4];
@@ -7911,7 +7911,7 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
 				out.p1Enc(153);
-				out.method162(var4);
+				out.p2_alt1(var4);
 			}
 		}
 		if (var3 == 47) {
@@ -7924,17 +7924,17 @@ public final class Client extends GameShell {
 			crossCycle = 0;
 			crossMode = 2;
 			out.p1Enc(172);
-			out.method169(mapBuildBaseX + var1);
+			out.p2_alt2(mapBuildBaseX + var1);
 			out.p2(objSelectedSlot);
-			out.method169(var4);
-			out.method179(useSelectedComId);
-			out.method162(mapBuildBaseZ + var2);
-			out.method162(field2437);
+			out.p2_alt2(var4);
+			out.p4_alt2(useSelectedComId);
+			out.p2_alt1(mapBuildBaseZ + var2);
+			out.p2_alt1(field2437);
 		}
 		if (var3 == 6) {
 			out.p1Enc(102);
-			out.method170(var2);
-			out.method154(var1);
+			out.p4_alt1(var2);
+			out.p2_alt3(var1);
 			out.p2(var4);
 			selectedItem = var1;
 			selectedCycle = 0;
@@ -7956,7 +7956,7 @@ public final class Client extends GameShell {
 				crossCycle = 0;
 				crossY = ClientMouseListener.mouseClickY;
 				out.p1Enc(116);
-				out.method162(var4);
+				out.p2_alt1(var4);
 			}
 		}
 		if (useMode != 0) {
@@ -8242,7 +8242,7 @@ public final class Client extends GameShell {
 				}
 				if (in.pos == 8) {
 					in.pos = 0;
-					field3132 = in.method174();
+					field3132 = in.g8();
 					loginStep = 5;
 				}
 			}
@@ -8892,15 +8892,15 @@ public final class Client extends GameShell {
 		regionmode = arg0;
 		if (!regionmode) {
 			int var24 = in.g2();
-			int var25 = in.method166();
-			int var26 = in.method137();
-			int var27 = in.method180();
-			int var28 = in.method147();
+			int var25 = in.g2_alt1();
+			int var26 = in.g2_alt2();
+			int var27 = in.g2_alt3();
+			int var28 = in.g1_alt2();
 			int var29 = (psize - in.pos) / 16;
 			mapKeys = new int[var29][4];
 			for (int var30 = 0; var30 < var29; var30++) {
 				for (int var31 = 0; var31 < 4; var31++) {
-					mapKeys[var30][var31] = in.method146();
+					mapKeys[var30][var31] = in.g4_alt3();
 				}
 			}
 			mapBuildIndex = new int[var29];
@@ -8930,9 +8930,9 @@ public final class Client extends GameShell {
 			startRebuild(var26, var27, var25, var24, var28);
 		} else {
 			int var1 = in.g2();
-			int var2 = in.method180();
+			int var2 = in.g2_alt3();
 			int var3 = in.g2();
-			int var4 = in.method156();
+			int var4 = in.g1_alt3();
 			int var5 = in.g2();
 			in.gBitStart();
 			for (int var6 = 0; var6 < 4; var6++) {
@@ -8952,7 +8952,7 @@ public final class Client extends GameShell {
 			mapKeys = new int[var10][4];
 			for (int var11 = 0; var11 < var10; var11++) {
 				for (int var12 = 0; var12 < 4; var12++) {
-					mapKeys[var11][var12] = in.method183();
+					mapKeys[var11][var12] = in.g4_alt2();
 				}
 			}
 			mapBuildGroundFile = new int[var10];
@@ -10011,8 +10011,8 @@ public final class Client extends GameShell {
 	@ObfuscatedName("fe.a(III)V")
 	public static void method414(int arg0, int arg1) {
 		out.p1Enc(132);
-		out.method179(arg1);
-		out.method162(arg0);
+		out.p4_alt2(arg1);
+		out.p2_alt1(arg0);
 	}
 
 	@ObfuscatedName("n.a(Z)V")

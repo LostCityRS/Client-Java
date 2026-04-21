@@ -779,15 +779,15 @@ public final class Model extends ModelSource {
 			int var42 = var2.g1();
 			int var43 = 0;
 			if ((var42 & 0x1) != 0) {
-				var43 = var3.method158();
+				var43 = var3.gsmarts();
 			}
 			int var44 = 0;
 			if ((var42 & 0x2) != 0) {
-				var44 = var4.method158();
+				var44 = var4.gsmarts();
 			}
 			int var45 = 0;
 			if ((var42 & 0x4) != 0) {
-				var45 = var5.method158();
+				var45 = var5.gsmarts();
 			}
 			this.pointX[var41] = var38 + var43;
 			this.pointY[var41] = var39 + var44;
@@ -828,9 +828,9 @@ public final class Model extends ModelSource {
 		for (int var51 = 0; var51 < numFaces; var51++) {
 			int var52 = var3.g1();
 			if (var52 == 1) {
-				var47 = var2.method158() + var50;
-				var48 = var2.method158() + var47;
-				var49 = var2.method158() + var48;
+				var47 = var2.gsmarts() + var50;
+				var48 = var2.gsmarts() + var47;
+				var49 = var2.gsmarts() + var48;
 				var50 = var49;
 				this.faceVertexA[var51] = var47;
 				this.faceVertexB[var51] = var48;
@@ -838,7 +838,7 @@ public final class Model extends ModelSource {
 			}
 			if (var52 == 2) {
 				var48 = var49;
-				var49 = var2.method158() + var50;
+				var49 = var2.gsmarts() + var50;
 				var50 = var49;
 				this.faceVertexA[var51] = var47;
 				this.faceVertexB[var51] = var48;
@@ -846,7 +846,7 @@ public final class Model extends ModelSource {
 			}
 			if (var52 == 3) {
 				var47 = var49;
-				var49 = var2.method158() + var50;
+				var49 = var2.gsmarts() + var50;
 				var50 = var49;
 				this.faceVertexA[var51] = var47;
 				this.faceVertexB[var51] = var48;
@@ -856,7 +856,7 @@ public final class Model extends ModelSource {
 				int var53 = var47;
 				var47 = var48;
 				var48 = var53;
-				var49 = var2.method158() + var50;
+				var49 = var2.gsmarts() + var50;
 				var50 = var49;
 				this.faceVertexA[var51] = var47;
 				this.faceVertexB[var51] = var53;

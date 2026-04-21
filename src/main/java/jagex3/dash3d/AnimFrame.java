@@ -71,17 +71,17 @@ public final class AnimFrame {
 				if ((var9 & 0x1) == 0) {
 					field2117[var7] = var11;
 				} else {
-					field2117[var7] = var4.method158();
+					field2117[var7] = var4.gsmarts();
 				}
 				if ((var9 & 0x2) == 0) {
 					field2115[var7] = var11;
 				} else {
-					field2115[var7] = var4.method158();
+					field2115[var7] = var4.gsmarts();
 				}
 				if ((var9 & 0x4) == 0) {
 					field2118[var7] = var11;
 				} else {
-					field2118[var7] = var4.method158();
+					field2118[var7] = var4.gsmarts();
 				}
 				var6 = var8;
 				var7++;

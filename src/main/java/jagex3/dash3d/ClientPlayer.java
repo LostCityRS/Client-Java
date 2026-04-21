@@ -198,7 +198,7 @@ public final class ClientPlayer extends ClientEntity {
 		if (super.field1956 == 65535) {
 			super.field1956 = -1;
 		}
-		this.name = JString.method969(arg0.method174()).method36();
+		this.name = JString.method969(arg0.g8()).method36();
 		this.combatLevel = arg0.g1();
 		this.field65 = arg0.g2();
 		if (this.model == null) {

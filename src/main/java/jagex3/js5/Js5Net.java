@@ -80,7 +80,7 @@ public class Js5Net {
 					Js5NetRequest var3 = (Js5NetRequest) field2596.search();
 					Packet var4 = new Packet(4);
 					var4.p1(1);
-					var4.method153((int) var3.key);
+					var4.p3((int) var3.key);
 					field2769.write(4, var4.data);
 					field1917.put(var3, var3.key);
 					field3285--;
@@ -90,7 +90,7 @@ public class Js5Net {
 					Js5NetRequest var5 = (Js5NetRequest) field996.next();
 					Packet var6 = new Packet(4);
 					var6.p1(0);
-					var6.method153((int) var5.key);
+					var6.p3((int) var5.key);
 					field2769.write(4, var6.data);
 					var5.unlink2();
 					field1831.put(var5, var5.key);
@@ -242,7 +242,7 @@ public class Js5Net {
         try {
             Packet var1 = new Packet(4);
             var1.p1(arg0 ? 2 : 3);
-            var1.method153(0);
+            var1.p3(0);
             field2769.write(4, var1.data);
         } catch (IOException var3) {
             try {

@@ -69,7 +69,7 @@ public final class MidiParser {
 
 	@ObfuscatedName("ea.c(I)V")
 	public void method339(int arg0) {
-		int var2 = this.field752.method176();
+		int var2 = this.field752.gMidiVarLen();
 		this.field756[arg0] += var2;
 	}
 
@@ -147,7 +147,7 @@ public final class MidiParser {
 		if (var3 != 240 && var3 != 247) {
 			return this.method347(arg0, var3);
 		}
-		int var4 = this.field752.method176();
+		int var4 = this.field752.gMidiVarLen();
 		if (var3 == 247 && var4 > 0) {
 			int var5 = this.field752.data[this.field752.pos] & 0xFF;
 			if (var5 >= 241 && var5 <= 243 || var5 == 246 || var5 == 248 || var5 >= 250 && var5 <= 252 || var5 == 254) {
@@ -174,7 +174,7 @@ public final class MidiParser {
 			return var8;
 		}
 		int var3 = this.field752.g1();
-		int var4 = this.field752.method176();
+		int var4 = this.field752.gMidiVarLen();
 		if (var3 == 47) {
 			this.field752.pos += var4;
 			return 1;
