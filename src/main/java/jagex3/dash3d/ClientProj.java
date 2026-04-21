@@ -105,7 +105,7 @@ public final class ClientProj extends ModelSource {
 
 	@ObfuscatedName("d.f(I)Lpa;")
 	@Override
-	public Model method41() {
+	public Model getTempModel() {
 		SpotType var1 = SpotType.list(this.field619);
 		Model var2 = var1.getTempModel2(this.field639);
 		if (var2 == null) {

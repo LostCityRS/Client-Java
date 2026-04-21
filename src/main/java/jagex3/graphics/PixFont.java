@@ -199,7 +199,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.a(La;IIIIIZIII)V")
-	public void method195(JagString arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6, int arg7, int arg8, int arg9) {
+	public void drawStringMultiline(JagString arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6, int arg7, int arg8, int arg9) {
 		if (arg0 == null) {
 			return;
 		}
@@ -221,12 +221,12 @@ public final class PixFont extends Pix2D {
 		for (int var20 = 0; var20 < var19; var20++) {
 			int var21 = arg0.method6(var20);
 			if (var21 == 64 && var20 + 4 < var19 && arg0.method6(var20 + 4) == 64) {
-				var16 = arg0.method19(var20, var20 + 5);
+				var16 = arg0.substring(var20, var20 + 5);
 				var13.method23(var16);
 				var20 += 4;
 			} else if (var21 == 92 && var20 + 1 < var19 && arg0.method6(var20 + 1) == 110) {
 				var16 = null;
-				field337[var18++] = var13.method19(var12, var13.length()).method40();
+				field337[var18++] = var13.substring(var12, var13.length()).method40();
 				var12 = var13.length();
 				var11 = 0;
 				var14 = -1;
@@ -239,7 +239,7 @@ public final class PixFont extends Pix2D {
 					var15 = var11;
 				}
 				if (var17 && var11 > arg3 && var14 >= 0) {
-					field337[var18++] = var13.method19(var12, var14).method40();
+					field337[var18++] = var13.substring(var12, var14).method40();
 					var12 = var14;
 					var14 = -1;
 					var11 -= var15;
@@ -251,7 +251,7 @@ public final class PixFont extends Pix2D {
 			}
 		}
 		if (var13.length() > var12) {
-			field337[var18++] = var13.method19(var12, var13.length()).method40();
+			field337[var18++] = var13.substring(var12, var13.length()).method40();
 		}
 		if (arg8 == 3 && var18 == 1) {
 			arg8 = 1;
@@ -275,9 +275,9 @@ public final class PixFont extends Pix2D {
 			if (arg7 == 0) {
 				this.drawString(field337[var24], arg1, var22, arg5, arg6);
 			} else if (arg7 == 1) {
-				this.method211(field337[var24], arg3 / 2 + arg1, var22, arg5, arg6);
+				this.centreString(field337[var24], arg3 / 2 + arg1, var22, arg5, arg6);
 			} else if (arg7 == 2) {
-				this.method200(field337[var24], arg1 + arg3, var22, arg5, arg6);
+				this.rightString(field337[var24], arg1 + arg3, var22, arg5, arg6);
 			} else if (var18 - 1 == var24) {
 				this.drawString(field337[var24], arg1, var22, arg5, arg6);
 			} else {
@@ -338,7 +338,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.a(La;IIIZ)V")
-	public void method200(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
+	public void rightString(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		this.drawString(arg0, arg1 - this.stringWidTag(arg0), arg2, arg3, arg4);
 	}
 
@@ -368,15 +368,15 @@ public final class PixFont extends Pix2D {
 		int var9 = Pix2D.field2749 - arg3;
 		int var10 = 0;
 		int var11 = 0;
-		if (arg2 < Pix2D.field2748) {
-			int var12 = Pix2D.field2748 - arg2;
+		if (arg2 < Pix2D.clipMinY) {
+			int var12 = Pix2D.clipMinY - arg2;
 			arg4 -= var12;
-			arg2 = Pix2D.field2748;
+			arg2 = Pix2D.clipMinY;
 			var11 = arg3 * var12;
 			var8 += Pix2D.field2749 * var12;
 		}
-		if (arg2 + arg4 > Pix2D.field2751) {
-			arg4 -= arg2 + arg4 - Pix2D.field2751;
+		if (arg2 + arg4 > Pix2D.clipMaxY) {
+			arg4 -= arg2 + arg4 - Pix2D.clipMaxY;
 		}
 		if (arg1 < Pix2D.field2752) {
 			int var13 = Pix2D.field2752 - arg1;
@@ -420,7 +420,7 @@ public final class PixFont extends Pix2D {
 		int var13 = arg2 - this.height;
 		for (int var14 = 0; var14 < var7.length; var14++) {
 			if (var7.charCode[var14] == 64 && var14 + 4 < var7.length && var7.charCode[var14 + 4] == 64) {
-				int var15 = this.updateState(var7.method19(var14 + 1, var14 + 4));
+				int var15 = this.updateState(var7.substring(var14 + 1, var14 + 4));
 				if (var15 != -1) {
 					arg3 = var15;
 				}
@@ -468,15 +468,15 @@ public final class PixFont extends Pix2D {
 		int var8 = Pix2D.field2749 - arg3;
 		int var9 = 0;
 		int var10 = 0;
-		if (arg2 < Pix2D.field2748) {
-			int var11 = Pix2D.field2748 - arg2;
+		if (arg2 < Pix2D.clipMinY) {
+			int var11 = Pix2D.clipMinY - arg2;
 			arg4 -= var11;
-			arg2 = Pix2D.field2748;
+			arg2 = Pix2D.clipMinY;
 			var10 = arg3 * var11;
 			var7 += Pix2D.field2749 * var11;
 		}
-		if (arg2 + arg4 > Pix2D.field2751) {
-			arg4 -= arg2 + arg4 - Pix2D.field2751;
+		if (arg2 + arg4 > Pix2D.clipMaxY) {
+			arg4 -= arg2 + arg4 - Pix2D.clipMaxY;
 		}
 		if (arg1 < Pix2D.field2752) {
 			int var12 = Pix2D.field2752 - arg1;
@@ -508,7 +508,7 @@ public final class PixFont extends Pix2D {
 		int var7 = arg2 - this.height;
 		for (int var8 = 0; var8 < arg0.length; var8++) {
 			if (arg0.charCode[var8] == 64 && var8 + 4 < arg0.length && arg0.charCode[var8 + 4] == 64) {
-				int var9 = this.updateState(arg0.method19(var8 + 1, var8 + 4));
+				int var9 = this.updateState(arg0.substring(var8 + 1, var8 + 4));
 				if (var9 != -1) {
 					arg3 = var9;
 				}
@@ -539,7 +539,7 @@ public final class PixFont extends Pix2D {
 		int var6 = 15 - this.height;
 		for (int var7 = 0; var7 < arg0.length; var7++) {
 			if (arg0.charCode[var7] == 64 && var7 + 4 < arg0.length && arg0.charCode[var7 + 4] == 64) {
-				int var8 = this.updateState(arg0.method19(var7 + 1, var7 + 4));
+				int var8 = this.updateState(arg0.substring(var7 + 1, var7 + 4));
 				if (var8 != -1) {
 					arg2 = var8;
 				}
@@ -581,7 +581,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.c(La;IIIZ)V")
-	public void method211(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
+	public void centreString(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		this.drawString(arg0, arg1 - this.stringWidTag(arg0) / 2, arg2, arg3, arg4);
 	}
 

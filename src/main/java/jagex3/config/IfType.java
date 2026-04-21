@@ -106,7 +106,7 @@ public final class IfType extends Linkable2 {
 	public boolean field2488 = false;
 
 	@ObfuscatedName("qd.od")
-	public int field2540 = 0;
+	public int invcount = 0;
 
 	@ObfuscatedName("qd.pc")
 	public int type;
@@ -247,7 +247,7 @@ public final class IfType extends Linkable2 {
 	public boolean hide = false;
 
 	@ObfuscatedName("qd.Yc")
-	public int field2524 = -1;
+	public int invobject = -1;
 
 	@ObfuscatedName("qd.Dd")
 	public int marginX = 0;

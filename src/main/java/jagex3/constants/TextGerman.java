@@ -530,7 +530,7 @@ public class TextGerman {
 		Text.field1120 = field1618;
 		Text.field1885 = field1382;
 		Text.field2081 = field3169;
-		Text.field957 = field2436;
+		Text.PLEASEWAIT = field2436;
 		Text.field2325 = field3120;
 		Text.field2149 = field2032;
 		Text.field1043 = field2426;

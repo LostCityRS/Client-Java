@@ -685,7 +685,7 @@ public class Text {
 	@ObfuscatedName("fe.Nc")
 	public static JagString field971 = JagString.wrap("Please wait)3)3)3");
 	@ObfuscatedName("fe.zc")
-	public static JagString field957 = field971;
+	public static JagString PLEASEWAIT = field971;
 	@ObfuscatedName("pc.h")
 	public static JagString field2313 = JagString.wrap("Prepared sound engine");
 	@ObfuscatedName("pc.t")

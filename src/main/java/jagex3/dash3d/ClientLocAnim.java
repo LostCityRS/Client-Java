@@ -40,7 +40,7 @@ public final class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("j.f(I)Lpa;")
 	@Override
-	public Model method41() {
+	public Model getTempModel() {
 		if (this.field1427 != null) {
 			int var1 = Client.loopCycle - this.field1417;
 			if (var1 > 100 && this.field1427.loops > 0) {

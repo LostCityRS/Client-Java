@@ -57,15 +57,15 @@ public final class Pix8 extends Pix2D {
 		int var8 = this.wi;
 		int var9 = Pix2D.field2749 - var8;
 		int var10 = 0;
-		if (var4 < Pix2D.field2748) {
-			int var11 = Pix2D.field2748 - var4;
+		if (var4 < Pix2D.clipMinY) {
+			int var11 = Pix2D.clipMinY - var4;
 			var7 -= var11;
-			var4 = Pix2D.field2748;
+			var4 = Pix2D.clipMinY;
 			var6 = var8 * var11;
 			var5 += Pix2D.field2749 * var11;
 		}
-		if (var4 + var7 > Pix2D.field2751) {
-			var7 -= var4 + var7 - Pix2D.field2751;
+		if (var4 + var7 > Pix2D.clipMaxY) {
+			var7 -= var4 + var7 - Pix2D.clipMaxY;
 		}
 		if (var3 < Pix2D.field2752) {
 			int var12 = Pix2D.field2752 - var3;

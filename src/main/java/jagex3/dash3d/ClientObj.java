@@ -14,7 +14,7 @@ public final class ClientObj extends ModelSource {
 
 	@ObfuscatedName("je.f(I)Lpa;")
 	@Override
-	public Model method41() {
+	public Model getTempModel() {
 		return ObjType.list(this.id).getModelLit(true, this.count);
 	}
 }

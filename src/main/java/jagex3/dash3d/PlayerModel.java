@@ -48,7 +48,7 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("la.a(ILba;)V")
-	public void method635(Packet arg0) {
+	public void idkSaveDesign(Packet arg0) {
 		arg0.p1(this.gender ? 1 : 0);
 		for (int var2 = 0; var2 < 7; var2++) {
 			int var3 = this.field1667[field2808[var2]];
@@ -64,7 +64,7 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("la.a(Lhe;Lhe;IIB)Lpa;")
-	public Model method637(SeqType arg0, SeqType arg1, int arg2, int arg3) {
+	public Model getTempModel(SeqType arg0, SeqType arg1, int arg2, int arg3) {
 		if (this.field1671 != -1) {
 			return NpcType.list(this.field1671).getTempModel(arg0, arg1, arg2, arg3);
 		}
@@ -253,7 +253,7 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("la.a(IZI)V")
-	public void method642(int arg0, boolean arg1) {
+	public void idkChangePart(int arg0, boolean arg1) {
 		if (arg0 == 1 && this.gender) {
 			return;
 		}
@@ -282,14 +282,14 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("la.a(ZB)V")
-	public void method643(boolean arg0) {
+	public void idkChangeGender(boolean arg0) {
 		if (this.gender != arg0) {
 			this.setAppearance(null, arg0, this.field1688, -1);
 		}
 	}
 
 	@ObfuscatedName("la.b(IZI)V")
-	public void method644(boolean arg0, int arg1) {
+	public void idkChangeColour(boolean arg0, int arg1) {
 		int var3 = this.field1688[arg1];
 		if (arg0) {
 			var3++;

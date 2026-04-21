@@ -11,22 +11,22 @@ public abstract class ClientEntity extends ModelSource {
 	public int z;
 
 	@ObfuscatedName("nb.ad")
-	public int field2015 = -1;
+	public int primarySeqId = -1;
 
 	@ObfuscatedName("nb.bc")
 	public JagString chat = null;
 
 	@ObfuscatedName("nb.cc")
-	public int field1965 = -1;
+	public int spotanimId = -1;
 
 	@ObfuscatedName("nb.ec")
-	public int field1967;
+	public int spotanimLastCycle;
 
 	@ObfuscatedName("nb.ed")
 	public int turnleftanim = -1;
 
 	@ObfuscatedName("nb.fc")
-	public int field1968 = 0;
+	public int preanimRouteLength = 0;
 
 	@ObfuscatedName("nb.hc")
 	public int size = 1;
@@ -53,10 +53,10 @@ public abstract class ClientEntity extends ModelSource {
 	public int chatColour = 0;
 
 	@ObfuscatedName("nb.pc")
-	public int field1978 = 0;
+	public int primarySeqFrame = 0;
 
 	@ObfuscatedName("nb.qc")
-	public boolean field1979 = false;
+	public boolean needsForwardDrawPadding = false;
 
 	@ObfuscatedName("nb.sc")
 	public int exactMoveStart;
@@ -68,7 +68,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field1984;
 
 	@ObfuscatedName("nb.gc")
-	public int field1969 = 0;
+	public int primarySeqLoop = 0;
 
 	@ObfuscatedName("nb.Ub")
 	public int turnrightanim = -1;
@@ -98,10 +98,10 @@ public abstract class ClientEntity extends ModelSource {
 	public int chatTimer = 100;
 
 	@ObfuscatedName("nb.Fc")
-	public int field1994 = 0;
+	public int secondarySeqCycle = 0;
 
 	@ObfuscatedName("nb.Hc")
-	public int field1996 = 0;
+	public int primarySeqDelay = 0;
 
 	@ObfuscatedName("nb.Ob")
 	public int secondarySeqId = -1;
@@ -110,7 +110,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final int[] damageValues = new int[4];
 
 	@ObfuscatedName("nb.Bc")
-	public int field1990 = 0;
+	public int secondarySeqFrame = 0;
 
 	@ObfuscatedName("nb.Ic")
 	public int chatEffect = 0;
@@ -125,7 +125,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final int[] damageCycles = new int[4];
 
 	@ObfuscatedName("nb.Oc")
-	public int field2003 = 0;
+	public int spotanimCycle = 0;
 
 	@ObfuscatedName("nb.Wc")
 	public int targetId = -1;
@@ -140,13 +140,13 @@ public abstract class ClientEntity extends ModelSource {
 	public int walkanim = -1;
 
 	@ObfuscatedName("nb.Ac")
-	public int field1989 = 0;
+	public int primarySeqCycle = 0;
 
 	@ObfuscatedName("nb.Tc")
 	public int cycle = 0;
 
 	@ObfuscatedName("nb.Zc")
-	public int field2014 = 0;
+	public int spotanimFrame = 0;
 
 	@ObfuscatedName("nb.Zb")
 	public final int[] field1962 = new int[10];
@@ -186,8 +186,8 @@ public abstract class ClientEntity extends ModelSource {
 			var4++;
 			var3--;
 		}
-		if (this.field2015 != -1 && SeqType.list(this.field2015).preanim_move == 1) {
-			this.field2015 = -1;
+		if (this.primarySeqId != -1 && SeqType.list(this.primarySeqId).preanim_move == 1) {
+			this.primarySeqId = -1;
 		}
 		if (this.field1983 < 9) {
 			this.field1983++;
@@ -245,8 +245,8 @@ public abstract class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("nb.a(IIZI)V")
 	public final void teleport(int arg0, boolean arg1, int arg2) {
-		if (this.field2015 != -1 && SeqType.list(this.field2015).preanim_move == 1) {
-			this.field2015 = -1;
+		if (this.primarySeqId != -1 && SeqType.list(this.primarySeqId).preanim_move == 1) {
+			this.primarySeqId = -1;
 		}
 		if (!arg1) {
 			int var4 = arg2 - this.field1962[0];
@@ -268,7 +268,7 @@ public abstract class ClientEntity extends ModelSource {
 		}
 		this.field1983 = 0;
 		this.animDelayMove = 0;
-		this.field1968 = 0;
+		this.preanimRouteLength = 0;
 		this.field1962[0] = arg2;
 		this.field2009[0] = arg0;
 		this.x = this.field1962[0] * 128 + this.size * 64;
@@ -277,7 +277,7 @@ public abstract class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("nb.j(I)V")
 	public final void abortRoute() {
-		this.field1968 = 0;
+		this.preanimRouteLength = 0;
 		this.field1983 = 0;
 	}
 }

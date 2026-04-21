@@ -132,8 +132,8 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(BI)La;")
-	public JagString method1(int arg0) {
-		return this.method19(arg0, this.length);
+	public JagString substring(int arg0) {
+		return this.substring(arg0, this.length);
 	}
 
 	@ObfuscatedName("a.a(II[BII)I")
@@ -243,7 +243,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.b(La;I)I")
-	public int method11(JagString arg0) {
+	public int indexOf(JagString arg0) {
 		return this.method32(arg0);
 	}
 
@@ -395,7 +395,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(III)La;")
-	public JagString method19(int arg0, int arg1) {
+	public JagString substring(int arg0, int arg1) {
 		JagString var3 = new JagString();
 		var3.charCode = new byte[arg1 - arg0];
 		var3.length = arg1 - arg0;

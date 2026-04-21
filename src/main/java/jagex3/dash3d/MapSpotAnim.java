@@ -55,7 +55,7 @@ public final class MapSpotAnim extends ModelSource {
 
 	@ObfuscatedName("tb.f(I)Lpa;")
 	@Override
-	public Model method41() {
+	public Model getTempModel() {
 		SpotType var1 = SpotType.list(this.field2905);
 		Model var2;
 		if (this.animComplete) {

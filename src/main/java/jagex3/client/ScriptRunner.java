@@ -707,9 +707,9 @@ public class ScriptRunner {
 						if (opcode == 3000) {
 							isp--;
 							int var67 = intStack[isp];
-							if (Client.field2998 == -1) {
+							if (Client.resumePauseComId == -1) {
 								Client.method414(0, var67);
-								Client.field2998 = var67;
+								Client.resumePauseComId = var67;
 							}
 						} else if (opcode == 3001 || opcode == 3003) {
 							isp -= 2;
@@ -718,9 +718,9 @@ public class ScriptRunner {
 							Client.method673(0, var69, var68);
 						} else if (opcode == 3002) {
 							IfType var70 = secondary ? activeComponent2 : activeComponent;
-							if (Client.field2998 == -1) {
+							if (Client.resumePauseComId == -1) {
 								Client.method414(var70.parentId & 0x7FFF, var70.layerId);
-								Client.field2998 = var70.parentId;
+								Client.resumePauseComId = var70.parentId;
 							}
 						} else {
 							if (opcode != 3003) {

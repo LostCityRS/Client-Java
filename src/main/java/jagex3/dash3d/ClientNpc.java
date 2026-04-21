@@ -13,20 +13,20 @@ public final class ClientNpc extends ClientEntity {
 
 	@ObfuscatedName("vd.f(I)Lpa;")
 	@Override
-	public Model method41() {
+	public Model getTempModel() {
 		if (this.type == null) {
 			return null;
 		}
-		SeqType var1 = super.field2015 != -1 && super.field1996 == 0 ? SeqType.list(super.field2015) : null;
+		SeqType var1 = super.primarySeqId != -1 && super.primarySeqDelay == 0 ? SeqType.list(super.primarySeqId) : null;
 		SeqType var2 = super.secondarySeqId == -1 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.list(super.secondarySeqId);
-		Model var3 = this.type.getTempModel(var1, var2, super.field1990, super.field1978);
+		Model var3 = this.type.getTempModel(var1, var2, super.secondarySeqFrame, super.primarySeqFrame);
 		if (var3 == null) {
 			return null;
 		}
 		var3.calcBoundingCylinder();
 		super.height = var3.field3135;
-		if (super.field1965 != -1 && super.field2014 != -1) {
-			Model var4 = SpotType.list(super.field1965).getTempModel2(super.field2014);
+		if (super.spotanimId != -1 && super.spotanimFrame != -1) {
+			Model var4 = SpotType.list(super.spotanimId).getTempModel2(super.spotanimFrame);
 			if (var4 != null) {
 				var4.translate(0, -super.field1984, 0);
 				Model[] var5 = new Model[]{var3, var4};

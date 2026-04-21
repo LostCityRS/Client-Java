@@ -89,7 +89,7 @@ public final class Model extends ModelSource {
 	public static int[] field2244 = new int[4096];
 
 	@ObfuscatedName("pa.Hc")
-	public static int[] field2252 = new int[1000];
+	public static int[] pickedEntityTypecode = new int[1000];
 
 	@ObfuscatedName("pa.Ec")
 	public static int[][] field2249 = new int[12][2000];
@@ -258,7 +258,7 @@ public final class Model extends ModelSource {
 		field2268 = null;
 		field2246 = null;
 		field2263 = null;
-		field2252 = null;
+		pickedEntityTypecode = null;
 		field2256 = null;
 		field2258 = null;
 		field2243 = null;
@@ -363,7 +363,7 @@ public final class Model extends ModelSource {
 			int var33 = mouseX - Pix3D.originY;
 			if (var32 > var28 && var32 < var29 && var33 > var30 && var33 < var31) {
 				if (this.useAABBMouseCheck) {
-					field2252[pickedCount++] = arg8;
+					pickedEntityTypecode[pickedCount++] = arg8;
 				} else {
 					var26 = true;
 				}
@@ -414,7 +414,7 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.a(IIIIIIII)V")
-	public void method769(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public void objRenderOrthog(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (this.field2210 != 2 && this.field2210 != 1) {
 			this.method795();
 		}
@@ -1633,7 +1633,7 @@ public final class Model extends ModelSource {
 					}
 				} else {
 					if (arg1 && this.method775(mouseY, mouseX, field2245[var6], field2245[var7], field2245[var8], var9, var10, var11)) {
-						field2252[pickedCount++] = arg2;
+						pickedEntityTypecode[pickedCount++] = arg2;
 						arg1 = false;
 					}
 					if ((field2245[var8] - field2245[var7]) * (var9 - var10) - (field2245[var6] - field2245[var7]) * (var11 - var10) > 0) {

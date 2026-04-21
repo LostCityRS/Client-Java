@@ -164,7 +164,7 @@ public class TitleScreen {
 							continue label138;
 						}
 						if (ClientKeyboardListener.code == 85 && loginUser.length() > 0) {
-							loginUser = loginUser.method19(0, loginUser.length() - 1);
+							loginUser = loginUser.substring(0, loginUser.length() - 1);
 						}
 						if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 							field2084 = 1;
@@ -176,7 +176,7 @@ public class TitleScreen {
 					return;
 				} while (field2084 != 1);
 				if (ClientKeyboardListener.code == 85 && loginPass.length() > 0) {
-					loginPass = loginPass.method19(0, loginPass.length() - 1);
+					loginPass = loginPass.substring(0, loginPass.length() - 1);
 				}
 				if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 					field2084 = 0;
@@ -206,11 +206,11 @@ public class TitleScreen {
 		if (Client.state == 20) {
 			byte var2 = 40;
 			field2806.plotSprite(0, 0);
-			arg0.method211(field3060, 180, 40, 16776960, true);
+			arg0.centreString(field3060, 180, 40, 16776960, true);
 			int var8 = var2 + 15;
-			arg0.method211(field3077, 180, 55, 16776960, true);
+			arg0.centreString(field3077, 180, 55, 16776960, true);
 			int var9 = var8 + 15;
-			arg0.method211(field3062, 180, 70, 16776960, true);
+			arg0.centreString(field3062, 180, 70, 16776960, true);
 			int var10 = var9 + 15;
 			int var11 = var10 + 10;
 			arg0.drawString(JagString.join(new JagString[]{Text.field3002, loginUser}), 90, 95, 16777215, true);
@@ -222,19 +222,19 @@ public class TitleScreen {
 			field2806.plotSprite(0, 0);
 			if (field1395 == 0) {
 				byte var5 = 80;
-				arg0.method211(Text.field582, 180, 80, 16776960, true);
+				arg0.centreString(Text.field582, 180, 80, 16776960, true);
 				int var23 = var5 + 30;
 				field2919.plotSprite(27, 100);
-				arg0.method195(Text.field2639, 27, 100, 144, 40, 16777215, true, 1, 1, 0);
+				arg0.drawStringMultiline(Text.field2639, 27, 100, 144, 40, 16777215, true, 1, 1, 0);
 				field2919.plotSprite(187, 100);
-				arg0.method195(Text.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
+				arg0.drawStringMultiline(Text.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
 			} else if (field1395 == 2) {
 				byte var3 = 40;
-				arg0.method211(field3060, 180, 40, 16776960, true);
+				arg0.centreString(field3060, 180, 40, 16776960, true);
 				int var12 = var3 + 15;
-				arg0.method211(field3077, 180, 55, 16776960, true);
+				arg0.centreString(field3077, 180, 55, 16776960, true);
 				int var14 = var12 + 15;
-				arg0.method211(field3062, 180, 70, 16776960, true);
+				arg0.centreString(field3062, 180, 70, 16776960, true);
 				int var16 = var14 + 15;
 				int var17 = var16 + 10;
 				arg0.drawString(JagString.join(new JagString[]{Text.field3002, loginUser, Client.loopCycle % 40 < 20 & field2084 == 0 ? field1204 : field3067}), 90, 95, 16777215, true);
@@ -242,21 +242,21 @@ public class TitleScreen {
 				arg0.drawString(JagString.join(new JagString[]{Text.field1037, loginPass.method12(), Client.loopCycle % 40 < 20 & field2084 == 1 ? field1204 : field3067}), 92, 110, 16777215, true);
 				field2919.plotSprite(27, 130);
 				int var21 = var19 + 15;
-				arg0.method211(Text.field926, 100, 155, 16777215, true);
+				arg0.centreString(Text.field926, 100, 155, 16777215, true);
 				field2919.plotSprite(187, 130);
-				arg0.method211(Text.field3302, 260, 155, 16777215, true);
+				arg0.centreString(Text.field3302, 260, 155, 16777215, true);
 			} else if (field1395 == 3) {
-				arg0.method211(Text.field3265, 180, 40, 16776960, true);
+				arg0.centreString(Text.field3265, 180, 40, 16776960, true);
 				byte var4 = 65;
-				arg0.method211(Text.field2757, 180, 65, 16777215, true);
+				arg0.centreString(Text.field2757, 180, 65, 16777215, true);
 				int var18 = var4 + 15;
-				arg0.method211(Text.field2675, 180, 80, 16777215, true);
+				arg0.centreString(Text.field2675, 180, 80, 16777215, true);
 				int var20 = var18 + 15;
-				arg0.method211(Text.field2667, 180, 95, 16777215, true);
+				arg0.centreString(Text.field2667, 180, 95, 16777215, true);
 				int var22 = var20 + 15;
-				arg0.method211(Text.field2400, 180, 110, 16777215, true);
+				arg0.centreString(Text.field2400, 180, 110, 16777215, true);
 				field2919.plotSprite(107, 130);
-				arg0.method211(Text.field3302, 180, 155, 16777215, true);
+				arg0.centreString(Text.field3302, 180, 155, 16777215, true);
 				int var24 = var22 + 15;
 			}
 		}

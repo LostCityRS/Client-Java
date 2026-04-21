@@ -1801,7 +1801,7 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.b(II)V")
-	public static void method364(int arg0, int arg1) {
+	public static void setOrigin(int arg0, int arg1) {
 		int var2 = field770[0];
 		int var3 = var2 / Pix2D.field2749;
 		int var4 = var2 - Pix2D.field2749 * var3;
