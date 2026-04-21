@@ -9,16 +9,16 @@ public final class Wall {
 	public int field529;
 
 	@ObfuscatedName("cd.c")
-	public int field531 = 0;
+	public int typecode = 0;
 
 	@ObfuscatedName("cd.d")
 	public int field532;
 
 	@ObfuscatedName("cd.g")
-	public ModelSource field535;
+	public ModelSource modelB;
 
 	@ObfuscatedName("cd.h")
-	public ModelSource field536;
+	public ModelSource modelA;
 
 	@ObfuscatedName("cd.i")
 	public int field537;

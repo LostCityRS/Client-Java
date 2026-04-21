@@ -138,7 +138,7 @@ public class TitleScreen {
 			}
 			var6 += 15;
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 130 && var2 <= 170) {
-				loginUser = loginUser.method13().method36();
+				loginUser = loginUser.getRepeatedCharacter().method36();
 				loginMes(Text.field2101, Text.field2095, Text.field666);
 				Client.setMainState(20);
 				return;
@@ -170,7 +170,7 @@ public class TitleScreen {
 							field2084 = 1;
 						}
 						if (var4 && loginUser.length() < 12) {
-							loginUser = loginUser.method21(ClientKeyboardListener.ch);
+							loginUser = loginUser.valueOf(ClientKeyboardListener.ch);
 						}
 					}
 					return;
@@ -182,7 +182,7 @@ public class TitleScreen {
 					field2084 = 0;
 				}
 				if (var4 && loginPass.length() < 20) {
-					loginPass = loginPass.method21(ClientKeyboardListener.ch);
+					loginPass = loginPass.valueOf(ClientKeyboardListener.ch);
 				}
 			}
 		}
@@ -215,7 +215,7 @@ public class TitleScreen {
 			int var11 = var10 + 10;
 			arg0.drawString(JagString.join(new JagString[]{Text.field3002, loginUser}), 90, 95, 16777215, true);
 			int var13 = var11 + 15;
-			arg0.drawString(JagString.join(new JagString[]{Text.field1037, loginPass.method12()}), 92, 110, 16777215, true);
+			arg0.drawString(JagString.join(new JagString[]{Text.field1037, loginPass.chars()}), 92, 110, 16777215, true);
 			int var15 = var13 + 15;
 		}
 		if (Client.state == 10) {
@@ -239,7 +239,7 @@ public class TitleScreen {
 				int var17 = var16 + 10;
 				arg0.drawString(JagString.join(new JagString[]{Text.field3002, loginUser, Client.loopCycle % 40 < 20 & field2084 == 0 ? field1204 : field3067}), 90, 95, 16777215, true);
 				int var19 = var17 + 15;
-				arg0.drawString(JagString.join(new JagString[]{Text.field1037, loginPass.method12(), Client.loopCycle % 40 < 20 & field2084 == 1 ? field1204 : field3067}), 92, 110, 16777215, true);
+				arg0.drawString(JagString.join(new JagString[]{Text.field1037, loginPass.chars(), Client.loopCycle % 40 < 20 & field2084 == 1 ? field1204 : field3067}), 92, 110, 16777215, true);
 				field2919.plotSprite(27, 130);
 				int var21 = var19 + 15;
 				arg0.centreString(Text.field926, 100, 155, 16777215, true);

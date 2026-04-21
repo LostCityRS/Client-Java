@@ -98,8 +98,8 @@ public abstract class Js5 {
 	public final byte[] getFile(JagString arg0, JagString arg1) {
 		JagString var3 = arg1.toLowerCase();
 		JagString var4 = arg0.toLowerCase();
-		int var5 = this.groupNameHashTable.find(var3.method27());
-		int var6 = this.fileNameHashes[var5].find(var4.method27());
+		int var5 = this.groupNameHashTable.find(var3.hash());
+		int var6 = this.fileNameHashes[var5].find(var4.hash());
 		return this.getFile(var6, var5);
 	}
 
@@ -237,7 +237,7 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.a(IILa;)I")
 	public final int getFileId(int arg0, JagString arg1) {
 		JagString var3 = arg1.toLowerCase();
-		return this.fileNameHashes[arg0].find(var3.method27());
+		return this.fileNameHashes[arg0].find(var3.hash());
 	}
 
 	@ObfuscatedName("bd.a(II[I)Z")
@@ -335,7 +335,7 @@ public abstract class Js5 {
 	@ObfuscatedName("bd.a(ILa;)I")
 	public final int getGroupId(JagString arg0) {
 		JagString var2 = arg0.toLowerCase();
-		return this.groupNameHashTable.find(var2.method27());
+		return this.groupNameHashTable.find(var2.hash());
 	}
 
 	@ObfuscatedName("bd.a(B)Z")
@@ -410,15 +410,15 @@ public abstract class Js5 {
 	public final boolean requestDownload(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.toLowerCase();
 		JagString var4 = arg1.toLowerCase();
-		int var5 = this.groupNameHashTable.find(var3.method27());
-		int var6 = this.fileNameHashes[var5].find(var4.method27());
+		int var5 = this.groupNameHashTable.find(var3.hash());
+		int var6 = this.fileNameHashes[var5].find(var4.hash());
 		return this.requestDownload(var5, var6);
 	}
 
 	@ObfuscatedName("bd.b(ILa;)V")
 	public final void updateCacheHint(JagString arg0) {
 		JagString var2 = arg0.toLowerCase();
-		int var3 = this.groupNameHashTable.find(var2.method27());
+		int var3 = this.groupNameHashTable.find(var2.hash());
 		if (var3 >= 0) {
 			this.method219(var3);
 		}

@@ -9,13 +9,13 @@ public final class GroundDecor {
 	public int field1360;
 
 	@ObfuscatedName("id.b")
-	public int field1361;
+	public int typecode;
 
 	@ObfuscatedName("id.i")
 	public int field1368;
 
 	@ObfuscatedName("id.n")
-	public ModelSource field1373;
+	public ModelSource model;
 
 	@ObfuscatedName("id.o")
 	public int field1374;

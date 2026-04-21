@@ -17,14 +17,14 @@ public final class JagException extends RuntimeException {
 	@ObfuscatedName("nc.d")
 	public static int revision;
 	@ObfuscatedName("ha.l")
-	public final Throwable field1155;
+	public final Throwable cause;
 
 	@ObfuscatedName("ha.m")
-	public String field1156;
+	public String message;
 
 	public JagException(Throwable arg0, String arg1) {
-		this.field1156 = arg1;
-		this.field1155 = arg0;
+		this.message = arg1;
+		this.cause = arg0;
 	}
 
 	@ObfuscatedName("bd.a(Ljava/lang/String;BLjava/lang/Throwable;)V")
@@ -32,7 +32,7 @@ public final class JagException extends RuntimeException {
 		try {
 			String var2 = "";
 			if (arg1 != null) {
-				var2 = method896(arg1);
+				var2 = getInfo(arg1);
 			}
 			if (arg0 != null) {
 				if (arg1 != null) {
@@ -63,7 +63,7 @@ public final class JagException extends RuntimeException {
 		JagException var2;
 		if (arg0 instanceof JagException) {
 			var2 = (JagException) arg0;
-			var2.field1156 = var2.field1156 + ' ' + arg1;
+			var2.message = var2.message + ' ' + arg1;
 		} else {
 			var2 = new JagException(arg0, arg1);
 		}
@@ -71,12 +71,12 @@ public final class JagException extends RuntimeException {
 	}
 
     @ObfuscatedName("s.a(ILjava/lang/Throwable;)Ljava/lang/String;")
-    public static String method896(Throwable arg0) throws IOException {
+    public static String getInfo(Throwable arg0) throws IOException {
         String var2;
         if (arg0 instanceof JagException) {
             JagException var1 = (JagException) arg0;
-            var2 = var1.field1156 + " | ";
-            arg0 = var1.field1155;
+            var2 = var1.message + " | ";
+            arg0 = var1.cause;
         } else {
             var2 = "";
         }

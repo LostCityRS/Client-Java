@@ -5,6 +5,9 @@ import jagex3.util.ArrayUtil;
 import jagex3.util.JagString;
 
 public class StringTools {
+	@ObfuscatedName("kd.B")
+	public static JagString NULL = JagString.wrap("null");
+
 	@ObfuscatedName("t.a(BI)Z")
 	public static boolean method936(int arg0) {
 		if (arg0 >= 97 && arg0 <= 122) {
@@ -37,7 +40,7 @@ public class StringTools {
 		int var3 = 0;
 		for (int var4 = 0; var4 < arg0; var4++) {
 			if (arg2[arg1 + var4] == null) {
-				arg2[arg1 + var4] = JagString.field1625;
+				arg2[arg1 + var4] = NULL;
 			}
 			var3 += arg2[arg1 + var4].length;
 		}

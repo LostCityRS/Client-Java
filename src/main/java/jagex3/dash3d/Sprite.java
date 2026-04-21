@@ -9,7 +9,7 @@ public final class Sprite {
 	public int field979;
 
 	@ObfuscatedName("g.c")
-	public int field980 = 0;
+	public int typecode = 0;
 
 	@ObfuscatedName("g.e")
 	public int field982 = 0;
@@ -21,7 +21,7 @@ public final class Sprite {
 	public int field984;
 
 	@ObfuscatedName("g.h")
-	public ModelSource field985;
+	public ModelSource model;
 
 	@ObfuscatedName("g.j")
 	public int field987;

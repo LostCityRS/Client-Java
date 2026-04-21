@@ -12,7 +12,7 @@ public final class Decor {
 	public int field2660;
 
 	@ObfuscatedName("rd.h")
-	public ModelSource field2665;
+	public ModelSource model;
 
 	@ObfuscatedName("rd.k")
 	public int field2668;
@@ -27,6 +27,6 @@ public final class Decor {
 	public int field2677;
 
 	@ObfuscatedName("rd.u")
-	public int field2678 = 0;
+	public int typecode = 0;
 
 }

@@ -14,17 +14,16 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("mb.f")
 	public static HashTable cache;
 	@ObfuscatedName("nd.ab")
-	public static JagString field2112 = wrap(")3");
-	@ObfuscatedName("kd.B")
-	public static JagString field1625 = wrap("null");
+	public static JagString ipSeparator = wrap(")3");
+
 	@ObfuscatedName("a.u")
-	public boolean field21 = true;
+	public boolean shared = true;
 
 	@ObfuscatedName("a.z")
 	public int length;
 
 	@ObfuscatedName("a.P")
-	public int field42;
+	public int quickHash;
 
 	@ObfuscatedName("a.L")
 	public byte[] charCode;
@@ -49,7 +48,7 @@ public final class JagString implements StringInterface {
 			}
 		}
 		var4.method28();
-		return var4.method17();
+		return var4.intern();
 	}
 
 	@ObfuscatedName("tb.a(I[La;)La;")
@@ -106,7 +105,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("je.b(II)La;")
-	public static JagString method566() {
+	public static JagString wrap() {
 		JagString var0 = new JagString();
 		var0.charCode = new byte[100];
 		var0.length = 0;
@@ -114,12 +113,12 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("u.f(II)La;")
-	public static JagString method984(int arg0) {
-		return join(new JagString[]{parseInt(arg0 >> 24 & 0xFF), field2112, parseInt(arg0 >> 16 & 0xFF), field2112, parseInt(arg0 >> 8 & 0xFF), field2112, parseInt(arg0 & 0xFF)});
+	public static JagString formatIPv4(int arg0) {
+		return join(new JagString[]{parseInt(arg0 >> 24 & 0xFF), ipSeparator, parseInt(arg0 >> 16 & 0xFF), ipSeparator, parseInt(arg0 >> 8 & 0xFF), ipSeparator, parseInt(arg0 & 0xFF)});
 	}
 
 	@ObfuscatedName("g.a([BZII)La;")
-	public static JagString method419(byte[] arg0, int arg1, int arg2) {
+	public static JagString copy(byte[] arg0, int arg1, int arg2) {
 		JagString var3 = new JagString();
 		var3.length = 0;
 		var3.charCode = new byte[arg2];
@@ -137,14 +136,14 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(II[BII)I")
-	public int method2(int arg0, byte[] arg1, int arg2) {
+	public int copyTo(int arg0, byte[] arg1, int arg2) {
 		ArrayUtil.copy(this.charCode, 0, arg1, arg2, arg0);
 		return arg0;
 	}
 
 	@ObfuscatedName("a.a(B)I")
 	public int method3() {
-		return this.method39();
+		return this.parseInt();
 	}
 
 	@ObfuscatedName("a.a(I)La;")
@@ -179,20 +178,20 @@ public final class JagString implements StringInterface {
 		if (arg0 == null) {
 			return false;
 		} else if (this.length == arg0.length) {
-			if (!this.field21 || !arg0.field21) {
-				if (this.field42 == 0) {
-					this.field42 = this.method27();
-					if (this.field42 == 0) {
-						this.field42 = 1;
+			if (!this.shared || !arg0.shared) {
+				if (this.quickHash == 0) {
+					this.quickHash = this.hash();
+					if (this.quickHash == 0) {
+						this.quickHash = 1;
 					}
 				}
-				if (arg0.field42 == 0) {
-					arg0.field42 = arg0.method27();
-					if (arg0.field42 == 0) {
-						arg0.field42 = 1;
+				if (arg0.quickHash == 0) {
+					arg0.quickHash = arg0.hash();
+					if (arg0.quickHash == 0) {
+						arg0.quickHash = 1;
 					}
 				}
-				if (this.field42 != arg0.field42) {
+				if (this.quickHash != arg0.quickHash) {
 					return false;
 				}
 			}
@@ -214,7 +213,7 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("a.b(BI)I")
 	public int method8() {
-		return this.method15();
+		return this.indexOf();
 	}
 
 	@ObfuscatedName("a.b(B)J")
@@ -248,7 +247,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(Z)La;")
-	public JagString method12() {
+	public JagString chars() {
 		JagString var1 = new JagString();
 		var1.length = this.length;
 		var1.charCode = new byte[this.length];
@@ -259,7 +258,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.c(I)La;")
-	public JagString method13() {
+	public JagString getRepeatedCharacter() {
 		JagString var1 = new JagString();
 		var1.length = 0;
 		int var2 = 0;
@@ -306,7 +305,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(IIZ)I")
-	public int method15() {
+	public int indexOf() {
 		for (int var1 = 0; var1 < this.length; var1++) {
 			if (this.charCode[var1] == 32) {
 				return var1;
@@ -327,8 +326,8 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.d(I)La;")
-	public JagString method17() {
-		long var2 = this.method37();
+	public JagString intern() {
+		long var2 = this.hash2();
 		Class var4 = JagString.class;
 		synchronized (JagString.class) {
 			if (cache == null) {
@@ -341,7 +340,7 @@ public final class JagString implements StringInterface {
 				}
 			}
 			StringNode var7 = new StringNode();
-			this.field21 = false;
+			this.shared = false;
 			var7.value = this;
 			cache.put(var7, var2);
 			return this;
@@ -350,11 +349,11 @@ public final class JagString implements StringInterface {
 
 	@Override
 	public int hashCode() {
-		return this.method27();
+		return this.hash();
 	}
 
 	@ObfuscatedName("a.a(II)Z")
-	public boolean method18() {
+	public boolean isNumeric() {
 		boolean var1 = false;
 		boolean var2 = false;
 		int var3 = 0;
@@ -404,13 +403,13 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(La;II)La;")
-	public JagString method20(JagString arg0, int arg1) {
-		if (!this.field21) {
+	public JagString append(JagString arg0, int arg1) {
+		if (!this.shared) {
 			throw new IllegalArgumentException();
 		} else if (arg1 > this.length) {
 			throw new IllegalArgumentException();
 		} else {
-			this.field42 = 0;
+			this.quickHash = 0;
 			if (arg0.length + arg1 > this.charCode.length) {
 				int var3;
 				for (var3 = 1; var3 < arg0.length + arg1; var3 += var3) {
@@ -428,7 +427,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.b(II)La;")
-	public JagString method21(int arg0) {
+	public JagString valueOf(int arg0) {
 		if (arg0 <= 0 || arg0 > 255) {
 			throw new IllegalArgumentException("invalid char");
 		}
@@ -446,11 +445,11 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(La;B)La;")
-	public JagString method23(JagString arg0) {
-		if (!this.field21) {
+	public JagString append(JagString arg0) {
+		if (!this.shared) {
 			throw new IllegalArgumentException();
 		}
-		this.field42 = 0;
+		this.quickHash = 0;
 		if (this.length + arg0.length > this.charCode.length) {
 			int var2;
 			for (var2 = 1; var2 < this.length + arg0.length; var2 += var2) {
@@ -476,7 +475,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(BLa;)Z")
-	public boolean method26(JagString arg0) {
+	public boolean startsWith(JagString arg0) {
 		if (arg0.length > this.length) {
 			return false;
 		}
@@ -489,7 +488,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.c(B)I")
-	public int method27() {
+	public int hash() {
 		int var1 = 0;
 		for (int var2 = 0; var2 < this.length; var2++) {
 			var1 = (var1 << 5) + (this.charCode[var2] & 0xFF) - var1;
@@ -499,10 +498,10 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("a.d(B)La;")
 	public JagString method28() {
-		if (!this.field21) {
+		if (!this.shared) {
 			throw new IllegalArgumentException();
 		}
-		this.field42 = 0;
+		this.quickHash = 0;
 		if (this.charCode.length != this.length) {
 			byte[] var1 = new byte[this.length];
 			ArrayUtil.copy(this.charCode, 0, var1, 0, this.length);
@@ -515,8 +514,8 @@ public final class JagString implements StringInterface {
 	public JagString method29(int arg0) {
 		if (arg0 <= 0 || arg0 > 255) {
 			throw new IllegalArgumentException("invalid char");
-		} else if (this.field21) {
-			this.field42 = 0;
+		} else if (this.shared) {
+			this.quickHash = 0;
 			if (this.charCode.length == this.length) {
 				int var2;
 				for (var2 = 1; var2 <= this.length; var2 += var2) {
@@ -548,7 +547,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.g(I)[B")
-	public byte[] method31() {
+	public byte[] getBytes() {
 		byte[] var1 = new byte[this.length];
 		ArrayUtil.copy(this.charCode, 0, var1, 0, this.length);
 		return var1;
@@ -612,7 +611,7 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("a.h(I)Z")
 	public boolean method33() {
-		return this.method18();
+		return this.isNumeric();
 	}
 
 	@Override
@@ -668,7 +667,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.j(I)J")
-	public long method37() {
+	public long hash2() {
 		long var2 = 0L;
 		for (int var4 = 0; var4 < this.length; var4++) {
 			var2 = (var2 << 5) + (long) (this.charCode[var4] & 0xFF) - var2;
@@ -691,7 +690,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(ZI)I")
-	public int method39() {
+	public int parseInt() {
 		boolean var1 = false;
 		boolean var2 = false;
 		int var3 = 0;

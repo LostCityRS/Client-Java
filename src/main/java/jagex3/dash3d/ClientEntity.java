@@ -131,7 +131,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int targetId = -1;
 
 	@ObfuscatedName("nb.Uc")
-	public final int[] field2009 = new int[10];
+	public final int[] routeZ = new int[10];
 
 	@ObfuscatedName("nb.Yc")
 	public int combatCycle = -1000;
@@ -149,7 +149,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int spotanimFrame = 0;
 
 	@ObfuscatedName("nb.Zb")
-	public final int[] field1962 = new int[10];
+	public final int[] routeX = new int[10];
 
 	@ObfuscatedName("nb.Rc")
 	public int walkanim_l = -1;
@@ -180,8 +180,8 @@ public abstract class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("nb.a(IBZ)V")
 	public final void moveCode(int arg0, boolean arg1) {
-		int var3 = this.field1962[0];
-		int var4 = this.field2009[0];
+		int var3 = this.routeX[0];
+		int var4 = this.routeZ[0];
 		if (arg0 == 0) {
 			var4++;
 			var3--;
@@ -193,8 +193,8 @@ public abstract class ClientEntity extends ModelSource {
 			this.field1983++;
 		}
 		for (int var5 = this.field1983; var5 > 0; var5--) {
-			this.field1962[var5] = this.field1962[var5 - 1];
-			this.field2009[var5] = this.field2009[var5 - 1];
+			this.routeX[var5] = this.routeX[var5 - 1];
+			this.routeZ[var5] = this.routeZ[var5 - 1];
 			this.field1946[var5] = this.field1946[var5 - 1];
 		}
 		if (arg0 == 1) {
@@ -221,8 +221,8 @@ public abstract class ClientEntity extends ModelSource {
 			var3++;
 			var4--;
 		}
-		this.field1962[0] = var3;
-		this.field2009[0] = var4;
+		this.routeX[0] = var3;
+		this.routeZ[0] = var4;
 		this.field1946[0] = arg1;
 	}
 
@@ -249,19 +249,19 @@ public abstract class ClientEntity extends ModelSource {
 			this.primarySeqId = -1;
 		}
 		if (!arg1) {
-			int var4 = arg2 - this.field1962[0];
-			int var5 = arg0 - this.field2009[0];
+			int var4 = arg2 - this.routeX[0];
+			int var5 = arg0 - this.routeZ[0];
 			if (var4 >= -8 && var4 <= 8 && var5 >= -8 && var5 <= 8) {
 				if (this.field1983 < 9) {
 					this.field1983++;
 				}
 				for (int var6 = this.field1983; var6 > 0; var6--) {
-					this.field1962[var6] = this.field1962[var6 - 1];
-					this.field2009[var6] = this.field2009[var6 - 1];
+					this.routeX[var6] = this.routeX[var6 - 1];
+					this.routeZ[var6] = this.routeZ[var6 - 1];
 					this.field1946[var6] = this.field1946[var6 - 1];
 				}
-				this.field1962[0] = arg2;
-				this.field2009[0] = arg0;
+				this.routeX[0] = arg2;
+				this.routeZ[0] = arg0;
 				this.field1946[0] = false;
 				return;
 			}
@@ -269,10 +269,10 @@ public abstract class ClientEntity extends ModelSource {
 		this.field1983 = 0;
 		this.animDelayMove = 0;
 		this.preanimRouteLength = 0;
-		this.field1962[0] = arg2;
-		this.field2009[0] = arg0;
-		this.x = this.field1962[0] * 128 + this.size * 64;
-		this.z = this.field2009[0] * 128 + this.size * 64;
+		this.routeX[0] = arg2;
+		this.routeZ[0] = arg0;
+		this.x = this.routeX[0] * 128 + this.size * 64;
+		this.z = this.routeZ[0] * 128 + this.size * 64;
 	}
 
 	@ObfuscatedName("nb.j(I)V")

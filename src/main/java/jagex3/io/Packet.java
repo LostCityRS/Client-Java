@@ -84,7 +84,7 @@ public class Packet extends Linkable {
 		int var1 = this.pos;
 		while (this.data[this.pos++] != 0) {
 		}
-		return JagString.method419(this.data, var1, this.pos - var1 - 1);
+		return JagString.copy(this.data, var1, this.pos - var1 - 1);
 	}
 
 	@ObfuscatedName("ba.b(IB)V")
@@ -350,7 +350,7 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("ba.a(La;B)V")
 	public final void pjstr(JagString arg0) {
-		this.pos += arg0.method2(arg0.length(), this.data, this.pos);
+		this.pos += arg0.copyTo(arg0.length(), this.data, this.pos);
 		this.data[this.pos++] = 0;
 	}
 
