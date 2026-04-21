@@ -51,18 +51,18 @@ public final class Pix8 extends Pix2D {
 	public void plotSprite(int arg0, int arg1) {
 		int var3 = this.xof + arg0;
 		int var4 = this.yof + arg1;
-		int var5 = Pix2D.field2749 * var4 + var3;
+		int var5 = Pix2D.width * var4 + var3;
 		int var6 = 0;
 		int var7 = this.hi;
 		int var8 = this.wi;
-		int var9 = Pix2D.field2749 - var8;
+		int var9 = Pix2D.width - var8;
 		int var10 = 0;
 		if (var4 < Pix2D.clipMinY) {
 			int var11 = Pix2D.clipMinY - var4;
 			var7 -= var11;
 			var4 = Pix2D.clipMinY;
 			var6 = var8 * var11;
-			var5 += Pix2D.field2749 * var11;
+			var5 += Pix2D.width * var11;
 		}
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;

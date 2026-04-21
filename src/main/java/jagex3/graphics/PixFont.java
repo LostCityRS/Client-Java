@@ -364,8 +364,8 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.a([BIIIIII)V")
 	public void plotLetterTrans(byte[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		int var8 = Pix2D.field2749 * arg2 + arg1;
-		int var9 = Pix2D.field2749 - arg3;
+		int var8 = Pix2D.width * arg2 + arg1;
+		int var9 = Pix2D.width - arg3;
 		int var10 = 0;
 		int var11 = 0;
 		if (arg2 < Pix2D.clipMinY) {
@@ -373,7 +373,7 @@ public final class PixFont extends Pix2D {
 			arg4 -= var12;
 			arg2 = Pix2D.clipMinY;
 			var11 = arg3 * var12;
-			var8 += Pix2D.field2749 * var12;
+			var8 += Pix2D.width * var12;
 		}
 		if (arg2 + arg4 > Pix2D.clipMaxY) {
 			arg4 -= arg2 + arg4 - Pix2D.clipMaxY;
@@ -464,8 +464,8 @@ public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.a([BIIIII)V")
 	public void plotLetter(byte[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		int var7 = Pix2D.field2749 * arg2 + arg1;
-		int var8 = Pix2D.field2749 - arg3;
+		int var7 = Pix2D.width * arg2 + arg1;
+		int var8 = Pix2D.width - arg3;
 		int var9 = 0;
 		int var10 = 0;
 		if (arg2 < Pix2D.clipMinY) {
@@ -473,7 +473,7 @@ public final class PixFont extends Pix2D {
 			arg4 -= var11;
 			arg2 = Pix2D.clipMinY;
 			var10 = arg3 * var11;
-			var7 += Pix2D.field2749 * var11;
+			var7 += Pix2D.width * var11;
 		}
 		if (arg2 + arg4 > Pix2D.clipMaxY) {
 			arg4 -= arg2 + arg4 - Pix2D.clipMaxY;

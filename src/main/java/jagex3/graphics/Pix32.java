@@ -78,15 +78,15 @@ public final class Pix32 extends Pix2D {
 		if (var7 < var11) {
 			arg3 = ((var7 << 16) + var13 - var9 - 1) / var13;
 		}
-		int var16 = Pix2D.field2749 * arg1 + arg0;
-		int var17 = Pix2D.field2749 - arg2;
+		int var16 = Pix2D.width * arg1 + arg0;
+		int var17 = Pix2D.width - arg2;
 		if (arg1 + arg3 > Pix2D.clipMaxY) {
 			arg3 -= arg1 + arg3 - Pix2D.clipMaxY;
 		}
 		if (arg1 < Pix2D.clipMinY) {
 			int var18 = Pix2D.clipMinY - arg1;
 			arg3 -= var18;
-			var16 += Pix2D.field2749 * var18;
+			var16 += Pix2D.width * var18;
 			var9 += var13 * var18;
 		}
 		if (arg0 + arg2 > Pix2D.field2753) {
@@ -232,18 +232,18 @@ public final class Pix32 extends Pix2D {
 	public void plotSprite(int arg0, int arg1) {
 		int var3 = this.xof + arg0;
 		int var4 = this.yof + arg1;
-		int var5 = Pix2D.field2749 * var4 + var3;
+		int var5 = Pix2D.width * var4 + var3;
 		int var6 = 0;
 		int var7 = this.hi;
 		int var8 = this.wi;
-		int var9 = Pix2D.field2749 - var8;
+		int var9 = Pix2D.width - var8;
 		int var10 = 0;
 		if (var4 < Pix2D.clipMinY) {
 			int var11 = Pix2D.clipMinY - var4;
 			var7 -= var11;
 			var4 = Pix2D.clipMinY;
 			var6 = var8 * var11;
-			var5 += Pix2D.field2749 * var11;
+			var5 += Pix2D.width * var11;
 		}
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;
@@ -360,7 +360,7 @@ public final class Pix32 extends Pix2D {
 		if (var38 >= 0) {
 			return;
 		}
-		int var39 = Pix2D.field2749 * var35 + var33;
+		int var39 = Pix2D.width * var35 + var33;
 		double var40 = 1.6777216E7D / (double) arg5;
 		int var42 = (int) Math.floor(Math.sin(var9) * var40 + 0.5D);
 		int var43 = (int) Math.floor(Math.cos(var9) * var40 + 0.5D);
@@ -386,7 +386,7 @@ public final class Pix32 extends Pix2D {
 						}
 					}
 					var48++;
-					var39 += Pix2D.field2749;
+					var39 += Pix2D.width;
 				}
 			} else if (var42 < 0) {
 				int var52 = var38;
@@ -419,7 +419,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var52++;
 					var46 -= var42;
-					var39 += Pix2D.field2749;
+					var39 += Pix2D.width;
 				}
 			} else {
 				int var60 = var38;
@@ -451,7 +451,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var60++;
 					var46 -= var42;
-					var39 += Pix2D.field2749;
+					var39 += Pix2D.width;
 				}
 			}
 		} else if (var43 < 0) {
@@ -486,7 +486,7 @@ public final class Pix32 extends Pix2D {
 					}
 					var67++;
 					var47 += var43;
-					var39 += Pix2D.field2749;
+					var39 += Pix2D.width;
 				}
 			} else if (var42 < 0) {
 				int var75 = var38;
@@ -533,7 +533,7 @@ public final class Pix32 extends Pix2D {
 					var75++;
 					var46 -= var42;
 					var47 += var43;
-					var39 += Pix2D.field2749;
+					var39 += Pix2D.width;
 				}
 			} else {
 				int var87 = var38;
@@ -579,7 +579,7 @@ public final class Pix32 extends Pix2D {
 					var87++;
 					var46 -= var42;
 					var47 += var43;
-					var39 += Pix2D.field2749;
+					var39 += Pix2D.width;
 				}
 			}
 		} else if (var42 == 0) {
@@ -612,7 +612,7 @@ public final class Pix32 extends Pix2D {
 				}
 				var98++;
 				var47 += var43;
-				var39 += Pix2D.field2749;
+				var39 += Pix2D.width;
 			}
 		} else if (var42 < 0) {
 			int var105 = var38;
@@ -658,7 +658,7 @@ public final class Pix32 extends Pix2D {
 				var105++;
 				var46 -= var42;
 				var47 += var43;
-				var39 += Pix2D.field2749;
+				var39 += Pix2D.width;
 			}
 		} else {
 			int var116 = var38;
@@ -703,7 +703,7 @@ public final class Pix32 extends Pix2D {
 				var116++;
 				var46 -= var42;
 				var47 += var43;
-				var39 += Pix2D.field2749;
+				var39 += Pix2D.width;
 			}
 		}
 	}
@@ -724,7 +724,7 @@ public final class Pix32 extends Pix2D {
 			int var16 = arg7 * var14 >> 8;
 			int var17 = (arg4 << 16) + var11 * var16 + var12 * var15;
 			int var18 = (arg5 << 16) + (var12 * var16 - var11 * var15);
-			int var19 = Pix2D.field2749 * arg1 + arg0;
+			int var19 = Pix2D.width * arg1 + arg0;
 			for (int var20 = 0; var20 < arg3; var20++) {
 				int var21 = arg8[var20];
 				int var22 = var19 + var21;
@@ -737,7 +737,7 @@ public final class Pix32 extends Pix2D {
 				}
 				var17 += var15;
 				var18 += var16;
-				var19 += Pix2D.field2749;
+				var19 += Pix2D.width;
 			}
 		} catch (Exception var26) {
 		}
@@ -747,18 +747,18 @@ public final class Pix32 extends Pix2D {
 	public void method555(Pix8 arg0, int arg1, int arg2) {
 		int var4 = this.xof + arg1;
 		int var5 = this.yof + arg2;
-		int var6 = Pix2D.field2749 * var5 + var4;
+		int var6 = Pix2D.width * var5 + var4;
 		int var7 = 0;
 		int var8 = this.hi;
 		int var9 = this.wi;
-		int var10 = Pix2D.field2749 - var9;
+		int var10 = Pix2D.width - var9;
 		int var11 = 0;
 		if (var5 < Pix2D.clipMinY) {
 			int var12 = Pix2D.clipMinY - var5;
 			var8 -= var12;
 			var5 = Pix2D.clipMinY;
 			var7 = var9 * var12;
-			var6 += Pix2D.field2749 * var12;
+			var6 += Pix2D.width * var12;
 		}
 		if (var5 + var8 > Pix2D.clipMaxY) {
 			var8 -= var5 + var8 - Pix2D.clipMaxY;
@@ -805,18 +805,18 @@ public final class Pix32 extends Pix2D {
 	public void method557(int arg0, int arg1) {
 		int var3 = this.xof + arg0;
 		int var4 = this.yof + arg1;
-		int var5 = Pix2D.field2749 * var4 + var3;
+		int var5 = Pix2D.width * var4 + var3;
 		int var6 = 0;
 		int var7 = this.hi;
 		int var8 = this.wi;
-		int var9 = Pix2D.field2749 - var8;
+		int var9 = Pix2D.width - var8;
 		int var10 = 0;
 		if (var4 < Pix2D.clipMinY) {
 			int var11 = Pix2D.clipMinY - var4;
 			var7 -= var11;
 			var4 = Pix2D.clipMinY;
 			var6 = var8 * var11;
-			var5 += Pix2D.field2749 * var11;
+			var5 += Pix2D.width * var11;
 		}
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;
@@ -845,18 +845,18 @@ public final class Pix32 extends Pix2D {
 	public void transPlotSprite(int arg0, int arg1, int arg2) {
 		int var4 = this.xof + arg0;
 		int var5 = this.yof + arg1;
-		int var6 = Pix2D.field2749 * var5 + var4;
+		int var6 = Pix2D.width * var5 + var4;
 		int var7 = 0;
 		int var8 = this.hi;
 		int var9 = this.wi;
-		int var10 = Pix2D.field2749 - var9;
+		int var10 = Pix2D.width - var9;
 		int var11 = 0;
 		if (var5 < Pix2D.clipMinY) {
 			int var12 = Pix2D.clipMinY - var5;
 			var8 -= var12;
 			var5 = Pix2D.clipMinY;
 			var7 = var9 * var12;
-			var6 += Pix2D.field2749 * var12;
+			var6 += Pix2D.width * var12;
 		}
 		if (var5 + var8 > Pix2D.clipMaxY) {
 			var8 -= var5 + var8 - Pix2D.clipMaxY;
@@ -893,7 +893,7 @@ public final class Pix32 extends Pix2D {
 			int var8 = var6 * 256 >> 8;
 			int var9 = var7 * -10 + var8 * -10 + 983040;
 			int var10 = var8 * -10 + 983040 - var7 * -10;
-			int var11 = Pix2D.field2749 * arg1 + arg0;
+			int var11 = Pix2D.width * arg1 + arg0;
 			for (int var12 = 0; var12 < 20; var12++) {
 				int var13 = var11;
 				int var14 = var9;
@@ -910,7 +910,7 @@ public final class Pix32 extends Pix2D {
 				}
 				var9 += var7;
 				var10 += var8;
-				var11 += Pix2D.field2749;
+				var11 += Pix2D.width;
 			}
 		} catch (Exception var18) {
 		}
@@ -982,15 +982,15 @@ public final class Pix32 extends Pix2D {
 		if (var6 < var10) {
 			arg3 = ((var6 << 16) + var12 - var8 - 1) / var12;
 		}
-		int var15 = Pix2D.field2749 * arg1 + arg0;
-		int var16 = Pix2D.field2749 - arg2;
+		int var15 = Pix2D.width * arg1 + arg0;
+		int var16 = Pix2D.width - arg2;
 		if (arg1 + arg3 > Pix2D.clipMaxY) {
 			arg3 -= arg1 + arg3 - Pix2D.clipMaxY;
 		}
 		if (arg1 < Pix2D.clipMinY) {
 			int var17 = Pix2D.clipMinY - arg1;
 			arg3 -= var17;
-			var15 += Pix2D.field2749 * var17;
+			var15 += Pix2D.width * var17;
 			var8 += var12 * var17;
 		}
 		if (arg0 + arg2 > Pix2D.field2753) {

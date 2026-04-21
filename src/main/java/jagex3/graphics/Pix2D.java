@@ -21,7 +21,7 @@ public class Pix2D extends Linkable2 {
 	@ObfuscatedName("sc.sb")
 	public static int[] pixels;
 	@ObfuscatedName("sc.ub")
-	public static int field2749;
+	public static int width;
 	@ObfuscatedName("sc.vb")
 	public static int field2750;
 
@@ -43,8 +43,8 @@ public class Pix2D extends Linkable2 {
 		if (arg1 < 0) {
 			arg1 = 0;
 		}
-		if (arg2 > field2749) {
-			arg2 = field2749;
+		if (arg2 > width) {
+			arg2 = width;
 		}
 		if (arg3 > field2750) {
 			arg3 = field2750;
@@ -71,8 +71,8 @@ public class Pix2D extends Linkable2 {
 		if (arg1 + arg3 > clipMaxY) {
 			arg3 = clipMaxY - arg1;
 		}
-		int var5 = field2749 - arg2;
-		int var6 = field2749 * arg1 + arg0;
+		int var5 = width - arg2;
+		int var6 = width * arg1 + arg0;
 		for (int var7 = -arg3; var7 < 0; var7++) {
 			for (int var8 = -arg2; var8 < 0; var8++) {
 				pixels[var6++] = arg4;
@@ -105,7 +105,7 @@ public class Pix2D extends Linkable2 {
 		int var6 = (arg3 >> 16 & 0xFF) * arg4;
 		int var7 = (arg3 >> 8 & 0xFF) * arg4;
 		int var8 = (arg3 & 0xFF) * arg4;
-		int var9 = field2749 * arg1 + arg0;
+		int var9 = width * arg1 + arg0;
 		for (int var10 = 0; var10 < arg2; var10++) {
 			int var11 = (pixels[var9] >> 16 & 0xFF) * var5;
 			int var12 = (pixels[var9] >> 8 & 0xFF) * var5;
@@ -127,7 +127,7 @@ public class Pix2D extends Linkable2 {
 		if (arg0 + arg2 > field2753) {
 			arg2 = field2753 - arg0;
 		}
-		int var4 = field2749 * arg1 + arg0;
+		int var4 = width * arg1 + arg0;
 		for (int var5 = 0; var5 < arg2; var5++) {
 			pixels[var4 + var5] = arg3;
 		}
@@ -149,14 +149,14 @@ public class Pix2D extends Linkable2 {
 		int var6 = (arg3 >> 16 & 0xFF) * arg4;
 		int var7 = (arg3 >> 8 & 0xFF) * arg4;
 		int var8 = (arg3 & 0xFF) * arg4;
-		int var9 = field2749 * arg1 + arg0;
+		int var9 = width * arg1 + arg0;
 		for (int var10 = 0; var10 < arg2; var10++) {
 			int var11 = (pixels[var9] >> 16 & 0xFF) * var5;
 			int var12 = (pixels[var9] >> 8 & 0xFF) * var5;
 			int var13 = (pixels[var9] & 0xFF) * var5;
 			int var14 = (var8 + var13 >> 8) + (var6 + var11 >> 8 << 16) + (var7 + var12 >> 8 << 8);
 			pixels[var9] = var14;
-			var9 += field2749;
+			var9 += width;
 		}
 	}
 
@@ -172,14 +172,14 @@ public class Pix2D extends Linkable2 {
 	public static void setClipping() {
 		field2752 = 0;
 		clipMinY = 0;
-		field2753 = field2749;
+		field2753 = width;
 		clipMaxY = field2750;
 	}
 
 	@ObfuscatedName("sc.b()V")
 	public static void cls() {
 		int var0 = 0;
-		int var1 = field2750 * field2749 - 7;
+		int var1 = field2750 * width - 7;
 		while (var0 < var1) {
 			pixels[var0++] = 0;
 			pixels[var0++] = 0;
@@ -216,8 +216,8 @@ public class Pix2D extends Linkable2 {
 		int var7 = (arg4 >> 16 & 0xFF) * arg5;
 		int var8 = (arg4 >> 8 & 0xFF) * arg5;
 		int var9 = (arg4 & 0xFF) * arg5;
-		int var10 = field2749 - arg2;
-		int var11 = field2749 * arg1 + arg0;
+		int var10 = width - arg2;
+		int var11 = width * arg1 + arg0;
 		for (int var12 = 0; var12 < arg3; var12++) {
 			for (int var13 = -arg2; var13 < 0; var13++) {
 				int var14 = (pixels[var11] >> 16 & 0xFF) * var6;
@@ -271,7 +271,7 @@ public class Pix2D extends Linkable2 {
 				while (arg0 <= var11) {
 					int var12 = var8 >> 16;
 					if (var12 >= clipMinY && var12 < clipMaxY) {
-						pixels[field2749 * var12 + arg0] = arg4;
+						pixels[width * var12 + arg0] = arg4;
 					}
 					var8 += var10;
 					arg0++;
@@ -292,7 +292,7 @@ public class Pix2D extends Linkable2 {
 				while (arg1 <= var17) {
 					int var18 = var14 >> 16;
 					if (var18 >= field2752 && var18 < field2753) {
-						pixels[field2749 * arg1 + var18] = arg4;
+						pixels[width * arg1 + var18] = arg4;
 					}
 					var14 += var16;
 					arg1++;
@@ -317,22 +317,22 @@ public class Pix2D extends Linkable2 {
 		if (arg1 + arg2 > clipMaxY) {
 			arg2 = clipMaxY - arg1;
 		}
-		int var4 = field2749 * arg1 + arg0;
+		int var4 = width * arg1 + arg0;
 		for (int var5 = 0; var5 < arg2; var5++) {
-			pixels[field2749 * var5 + var4] = arg3;
+			pixels[width * var5 + var4] = arg3;
 		}
 	}
 
 	@ObfuscatedName("sc.a([III)V")
 	public static void setPixels(int[] arg0, int arg1, int arg2) {
 		pixels = arg0;
-		field2749 = arg1;
+		width = arg1;
 		field2750 = arg2;
 		setSubClipping(0, 0, arg1, arg2);
 	}
 
 	@ObfuscatedName("eb.c([I)[I")
 	public static int[] restoreClipping(int[] arg0) {
-		return Pix3D.method354(field2752, clipMinY, field2753, clipMaxY, arg0);
+		return Pix3D.setClipping(field2752, clipMinY, field2753, clipMaxY, arg0);
 	}
 }

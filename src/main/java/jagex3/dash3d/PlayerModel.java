@@ -12,46 +12,46 @@ import jagex3.io.Packet;
 public final class PlayerModel {
 
 	@ObfuscatedName("bd.s")
-	public static LruCache field379 = new LruCache(260);
+	public static LruCache modelCache = new LruCache(260);
     @ObfuscatedName("mc.t")
-    public static int[] field1865 = new int[]{9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 58654, 5027, 1457, 16565, 34991, 25486};
+    public static int[] recol1s = new int[]{9104, 10275, 7595, 3610, 7975, 8526, 918, 38802, 24466, 10145, 58654, 5027, 1457, 16565, 34991, 25486};
 	@ObfuscatedName("tb.Rb")
-	public static int[][] field2894 = new int[][]{{6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 2983, 54193}, {8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003, 25239}, {25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003}, {4626, 11146, 6439, 12, 4758, 10270}, {4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574}};
+	public static int[][] recol1d = new int[][]{{6798, 107, 10283, 16, 4797, 7744, 5799, 4634, 33697, 22433, 2983, 54193}, {8741, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003, 25239}, {25238, 8742, 12, 64030, 43162, 7735, 8404, 1701, 38430, 24094, 10153, 56621, 4783, 1341, 16578, 35003}, {4626, 11146, 6439, 12, 4758, 10270}, {4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574}};
 	@ObfuscatedName("t.wb")
-	public static int[] field2808 = new int[]{8, 11, 4, 6, 9, 7, 10};
+	public static int[] basePartMap = new int[]{8, 11, 4, 6, 9, 7, 10};
 	@ObfuscatedName("la.d")
 	public boolean gender;
 
 	@ObfuscatedName("la.m")
-	public int[] field1667;
+	public int[] appearance;
 
 	@ObfuscatedName("la.q")
-	public int field1671;
+	public int transmog;
 
 	@ObfuscatedName("la.M")
-	public long field1693;
+	public long baseId;
 
 	@ObfuscatedName("la.N")
-	public long field1694;
+	public long headModelHashToModelCacheID;
 
 	@ObfuscatedName("la.H")
-	public int[] field1688;
+	public int[] colour;
 
 	@ObfuscatedName("ra.a(B)V")
-	public static void method873() {
-		field379.clear();
+	public static void resetCache() {
+		modelCache.clear();
 	}
 
 	@ObfuscatedName("la.a(I)I")
 	public int method634() {
-		return this.field1671 == -1 ? (this.field1688[4] << 20) + ((this.field1688[0] << 25) + (this.field1667[0] << 15)) + (this.field1667[8] << 10) + (this.field1667[11] << 5) + this.field1667[1] : NpcType.list(this.field1671).id + 305419896;
+		return this.transmog == -1 ? (this.colour[4] << 20) + ((this.colour[0] << 25) + (this.appearance[0] << 15)) + (this.appearance[8] << 10) + (this.appearance[11] << 5) + this.appearance[1] : NpcType.list(this.transmog).id + 305419896;
 	}
 
 	@ObfuscatedName("la.a(ILba;)V")
 	public void idkSaveDesign(Packet arg0) {
 		arg0.p1(this.gender ? 1 : 0);
 		for (int var2 = 0; var2 < 7; var2++) {
-			int var3 = this.field1667[field2808[var2]];
+			int var3 = this.appearance[basePartMap[var2]];
 			if (var3 == 0) {
 				arg0.p1(-1);
 			} else {
@@ -59,32 +59,32 @@ public final class PlayerModel {
 			}
 		}
 		for (int var4 = 0; var4 < 5; var4++) {
-			arg0.p1(this.field1688[var4]);
+			arg0.p1(this.colour[var4]);
 		}
 	}
 
 	@ObfuscatedName("la.a(Lhe;Lhe;IIB)Lpa;")
 	public Model getTempModel(SeqType arg0, SeqType arg1, int arg2, int arg3) {
-		if (this.field1671 != -1) {
-			return NpcType.list(this.field1671).getTempModel(arg0, arg1, arg2, arg3);
+		if (this.transmog != -1) {
+			return NpcType.list(this.transmog).getTempModel(arg0, arg1, arg2, arg3);
 		}
-		long var5 = this.field1693;
-		int[] var7 = this.field1667;
+		long var5 = this.baseId;
+		int[] var7 = this.appearance;
 		if (arg0 != null && (arg0.replaceheldleft >= 0 || arg0.replaceheldright >= 0)) {
 			var7 = new int[12];
 			for (int var8 = 0; var8 < 12; var8++) {
-				var7[var8] = this.field1667[var8];
+				var7[var8] = this.appearance[var8];
 			}
 			if (arg0.replaceheldleft >= 0) {
-				var5 += arg0.replaceheldleft - this.field1667[5] << 8;
+				var5 += arg0.replaceheldleft - this.appearance[5] << 8;
 				var7[5] = arg0.replaceheldleft;
 			}
 			if (arg0.replaceheldright >= 0) {
-				var5 += arg0.replaceheldright - this.field1667[3] << 16;
+				var5 += arg0.replaceheldright - this.appearance[3] << 16;
 				var7[3] = arg0.replaceheldright;
 			}
 		}
-		Model var9 = (Model) field379.find(var5);
+		Model var9 = (Model) modelCache.find(var5);
 		if (var9 == null) {
 			boolean var10 = false;
 			for (int var11 = 0; var11 < 12; var11++) {
@@ -97,8 +97,8 @@ public final class PlayerModel {
 				}
 			}
 			if (var10) {
-				if (this.field1694 != -1L) {
-					var9 = (Model) field379.find(this.field1694);
+				if (this.headModelHashToModelCacheID != -1L) {
+					var9 = (Model) modelCache.find(this.headModelHashToModelCacheID);
 				}
 				if (var9 == null) {
 					return null;
@@ -124,17 +124,17 @@ public final class PlayerModel {
 				}
 				var9 = new Model(var13, var14);
 				for (int var19 = 0; var19 < 5; var19++) {
-					if (this.field1688[var19] != 0) {
-						var9.recolour(field2894[var19][0], field2894[var19][this.field1688[var19]]);
+					if (this.colour[var19] != 0) {
+						var9.recolour(recol1d[var19][0], recol1d[var19][this.colour[var19]]);
 						if (var19 == 1) {
-							var9.recolour(field1865[0], field1865[this.field1688[var19]]);
+							var9.recolour(recol1s[0], recol1s[this.colour[var19]]);
 						}
 					}
 				}
 				var9.prepareAnim();
 				var9.light(64, 850, -30, -50, -30, true);
-				field379.put(var5, var9);
-				this.field1694 = var5;
+				modelCache.put(var5, var9);
+				this.headModelHashToModelCacheID = var5;
 			}
 		}
 		if (arg0 == null && arg1 == null) {
@@ -152,46 +152,46 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("la.c(I)V")
-	public void method638() {
-		int var1 = this.field1667[9];
-		int var2 = this.field1667[5];
-		long var3 = this.field1693;
-		this.field1667[5] = var1;
-		this.field1667[9] = var2;
-		this.field1693 = 0L;
+	public void calcBaseId() {
+		int var1 = this.appearance[9];
+		int var2 = this.appearance[5];
+		long var3 = this.baseId;
+		this.appearance[5] = var1;
+		this.appearance[9] = var2;
+		this.baseId = 0L;
 		for (int var5 = 0; var5 < 12; var5++) {
-			this.field1693 <<= 0x4;
-			if (this.field1667[var5] >= 256) {
-				this.field1693 += this.field1667[var5] - 256;
+			this.baseId <<= 0x4;
+			if (this.appearance[var5] >= 256) {
+				this.baseId += this.appearance[var5] - 256;
 			}
 		}
-		if (this.field1667[0] >= 256) {
-			this.field1693 += this.field1667[0] - 256 >> 4;
+		if (this.appearance[0] >= 256) {
+			this.baseId += this.appearance[0] - 256 >> 4;
 		}
-		if (this.field1667[1] >= 256) {
-			this.field1693 += this.field1667[1] - 256 >> 8;
+		if (this.appearance[1] >= 256) {
+			this.baseId += this.appearance[1] - 256 >> 8;
 		}
 		for (int var6 = 0; var6 < 5; var6++) {
-			this.field1693 <<= 0x3;
-			this.field1693 += this.field1688[var6];
+			this.baseId <<= 0x3;
+			this.baseId += this.colour[var6];
 		}
-		this.field1693 <<= 0x1;
-		this.field1693 += this.gender ? 1 : 0;
-		this.field1667[5] = var2;
-		this.field1667[9] = var1;
-		if (var3 != 0L && this.field1693 != var3) {
-			field379.remove(var3);
+		this.baseId <<= 0x1;
+		this.baseId += this.gender ? 1 : 0;
+		this.appearance[5] = var2;
+		this.appearance[9] = var1;
+		if (var3 != 0L && this.baseId != var3) {
+			modelCache.remove(var3);
 		}
 	}
 
 	@ObfuscatedName("la.d(I)Lpa;")
 	public Model getHeadModel() {
-		if (this.field1671 != -1) {
-			return NpcType.list(this.field1671).getHead();
+		if (this.transmog != -1) {
+			return NpcType.list(this.transmog).getHead();
 		}
 		boolean var1 = false;
 		for (int var2 = 0; var2 < 12; var2++) {
-			int var3 = this.field1667[var2];
+			int var3 = this.appearance[var2];
 			if (var3 >= 256 && var3 < 512 && !IdkType.list(var3 - 256).checkHead()) {
 				var1 = true;
 			}
@@ -205,7 +205,7 @@ public final class PlayerModel {
 		Model[] var4 = new Model[12];
 		int var5 = 0;
 		for (int var6 = 0; var6 < 12; var6++) {
-			int var7 = this.field1667[var6];
+			int var7 = this.appearance[var6];
 			if (var7 >= 256 && var7 < 512) {
 				Model var8 = IdkType.list(var7 - 256).getHeadNoCheck();
 				if (var8 != null) {
@@ -221,10 +221,10 @@ public final class PlayerModel {
 		}
 		Model var10 = new Model(var4, var5);
 		for (int var11 = 0; var11 < 5; var11++) {
-			if (this.field1688[var11] != 0) {
-				var10.recolour(field2894[var11][0], field2894[var11][this.field1688[var11]]);
+			if (this.colour[var11] != 0) {
+				var10.recolour(recol1d[var11][0], recol1d[var11][this.colour[var11]]);
 				if (var11 == 1) {
-					var10.recolour(field1865[0], field1865[this.field1688[var11]]);
+					var10.recolour(recol1s[0], recol1s[this.colour[var11]]);
 				}
 			}
 		}
@@ -239,17 +239,17 @@ public final class PlayerModel {
 				for (int var6 = 0; var6 < IdkType.numDefinitions; var6++) {
 					IdkType var7 = IdkType.list(var6);
 					if (var7 != null && !var7.disable && var5 + (arg1 ? 7 : 0) == var7.type) {
-						arg0[field2808[var5]] = var6 + 256;
+						arg0[basePartMap[var5]] = var6 + 256;
 						break;
 					}
 				}
 			}
 		}
-		this.field1671 = arg3;
+		this.transmog = arg3;
 		this.gender = arg1;
-		this.field1667 = arg0;
-		this.field1688 = arg2;
-		this.method638();
+		this.appearance = arg0;
+		this.colour = arg2;
+		this.calcBaseId();
 	}
 
 	@ObfuscatedName("la.a(IZI)V")
@@ -257,7 +257,7 @@ public final class PlayerModel {
 		if (arg0 == 1 && this.gender) {
 			return;
 		}
-		int var3 = this.field1667[field2808[arg0]];
+		int var3 = this.appearance[basePartMap[arg0]];
 		if (var3 == 0) {
 			return;
 		}
@@ -277,32 +277,32 @@ public final class PlayerModel {
 			}
 			var4 = IdkType.list(var3);
 		} while (var4 == null || var4.disable || var4.type != arg0 + (this.gender ? 7 : 0));
-		this.field1667[field2808[arg0]] = var3 + 256;
-		this.method638();
+		this.appearance[basePartMap[arg0]] = var3 + 256;
+		this.calcBaseId();
 	}
 
 	@ObfuscatedName("la.a(ZB)V")
 	public void idkChangeGender(boolean arg0) {
 		if (this.gender != arg0) {
-			this.setAppearance(null, arg0, this.field1688, -1);
+			this.setAppearance(null, arg0, this.colour, -1);
 		}
 	}
 
 	@ObfuscatedName("la.b(IZI)V")
 	public void idkChangeColour(boolean arg0, int arg1) {
-		int var3 = this.field1688[arg1];
+		int var3 = this.colour[arg1];
 		if (arg0) {
 			var3++;
-			if (var3 >= field2894[arg1].length) {
+			if (var3 >= recol1d[arg1].length) {
 				var3 = 0;
 			}
 		} else {
 			var3--;
 			if (var3 < 0) {
-				var3 = field2894[arg1].length - 1;
+				var3 = recol1d[arg1].length - 1;
 			}
 		}
-		this.field1688[arg1] = var3;
-		this.method638();
+		this.colour[arg1] = var3;
+		this.calcBaseId();
 	}
 }

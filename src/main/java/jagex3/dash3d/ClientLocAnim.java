@@ -9,10 +9,10 @@ import jagex3.config.SeqType;
 public final class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("j.bc")
-	public SeqType field1427;
+	public SeqType anim;
 
 	@ObfuscatedName("j.cc")
-	public final int field1428;
+	public final int id;
 
 	@ObfuscatedName("j.Wb")
 	public final int field1422;
@@ -33,57 +33,57 @@ public final class ClientLocAnim extends ModelSource {
 	public final int field1414;
 
 	@ObfuscatedName("j.Tb")
-	public int field1419;
+	public int animFrame;
 
 	@ObfuscatedName("j.Rb")
-	public int field1417;
+	public int animCycle;
 
 	@ObfuscatedName("j.f(I)Lpa;")
 	@Override
 	public Model getTempModel() {
-		if (this.field1427 != null) {
-			int var1 = Client.loopCycle - this.field1417;
-			if (var1 > 100 && this.field1427.loops > 0) {
+		if (this.anim != null) {
+			int var1 = Client.loopCycle - this.animCycle;
+			if (var1 > 100 && this.anim.loops > 0) {
 				var1 = 100;
 			}
 			label37:
 			{
 				do {
 					do {
-						if (this.field1427.delay[this.field1419] >= var1) {
+						if (this.anim.delay[this.animFrame] >= var1) {
 							break label37;
 						}
-						var1 -= this.field1427.delay[this.field1419];
-						this.field1419++;
-					} while (this.field1427.frames.length > this.field1419);
-					this.field1419 -= this.field1427.loops;
-				} while (this.field1419 >= 0 && this.field1427.frames.length > this.field1419);
-				this.field1427 = null;
+						var1 -= this.anim.delay[this.animFrame];
+						this.animFrame++;
+					} while (this.anim.frames.length > this.animFrame);
+					this.animFrame -= this.anim.loops;
+				} while (this.animFrame >= 0 && this.anim.frames.length > this.animFrame);
+				this.anim = null;
 			}
-			this.field1417 = Client.loopCycle - var1;
+			this.animCycle = Client.loopCycle - var1;
 		}
-		LocType var2 = LocType.list(this.field1428);
+		LocType var2 = LocType.list(this.id);
 		if (var2.multiloc != null) {
 			var2 = var2.getMultiLoc();
 		}
-		return var2 == null ? null : var2.getModel(this.field1422, this.field1423, this.field1419, this.field1414, this.field1411, this.field1427, this.field1420, this.field1409);
+		return var2 == null ? null : var2.getModel(this.field1422, this.field1423, this.animFrame, this.field1414, this.field1411, this.anim, this.field1420, this.field1409);
 	}
 
 	public ClientLocAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, boolean arg8) {
 		this.field1422 = arg3;
-		this.field1428 = arg0;
+		this.id = arg0;
 		this.field1420 = arg6;
 		this.field1411 = arg2;
 		this.field1423 = arg4;
 		this.field1409 = arg5;
 		this.field1414 = arg1;
 		if (arg7 != -1) {
-			this.field1427 = SeqType.list(arg7);
-			this.field1419 = 0;
-			this.field1417 = Client.loopCycle - 1;
-			if (arg8 && this.field1427.loops != -1) {
-				this.field1419 = (int) ((double) this.field1427.frames.length * Math.random());
-				this.field1417 -= (int) (Math.random() * (double) this.field1427.delay[this.field1419]);
+			this.anim = SeqType.list(arg7);
+			this.animFrame = 0;
+			this.animCycle = Client.loopCycle - 1;
+			if (arg8 && this.anim.loops != -1) {
+				this.animFrame = (int) ((double) this.anim.frames.length * Math.random());
+				this.animCycle -= (int) (Math.random() * (double) this.anim.delay[this.animFrame]);
 				return;
 			}
 		}

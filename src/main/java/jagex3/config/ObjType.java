@@ -219,7 +219,7 @@ public final class ObjType extends Linkable2 {
 		}
 		int[] var9 = Pix2D.pixels;
 		int var10 = Pix2D.field2750;
-		int var11 = Pix2D.field2749;
+		int var11 = Pix2D.width;
 		int var12 = Pix2D.field2752;
 		int var13 = Pix2D.field2753;
 		int var14 = Pix2D.clipMinY;
@@ -242,7 +242,7 @@ public final class ObjType extends Linkable2 {
 		int var21 = Pix3D.sinTable[var4.xan2d] * var20 >> 16;
 		int var22 = Pix3D.cosTable[var4.xan2d] * var20 >> 16;
 		var7.calcBoundingCylinder();
-		var7.objRender(var4.yan2d, var4.zan2d, var4.xan2d, var4.xof2d, var7.field3135 / 2 + var4.yof2d + var21, var4.yof2d + var22);
+		var7.objRender(var4.yan2d, var4.zan2d, var4.xan2d, var4.xof2d, var7.minY / 2 + var4.yof2d + var21, var4.yof2d + var22);
 		for (int var23 = 31; var23 >= 0; var23--) {
 			for (int var24 = 31; var24 >= 0; var24--) {
 				if (var19.data[var24 * 32 + var23] == 0) {

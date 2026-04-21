@@ -6,14 +6,14 @@ import deob.ObfuscatedName;
 public interface TextureProvider {
 
 	@ObfuscatedName("od.a(II)[I")
-	int[] method692(int arg0);
+	int[] getTexels(int arg0);
 
 	@ObfuscatedName("od.a(BI)Z")
-	boolean method695(int arg0);
+	boolean isOpaque(int arg0);
 
 	@ObfuscatedName("od.a(ZI)I")
 	int getAverageRgb(int arg0);
 
 	@ObfuscatedName("od.a(IB)Z")
-	boolean method698(int arg0);
+	boolean isLowMem(int arg0);
 }

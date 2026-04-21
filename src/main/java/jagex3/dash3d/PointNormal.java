@@ -6,15 +6,15 @@ import deob.ObfuscatedName;
 public final class PointNormal {
 
 	@ObfuscatedName("pc.b")
-	public int field2307;
+	public int y;
 
 	@ObfuscatedName("pc.g")
-	public int field2312;
+	public int x;
 
 	@ObfuscatedName("pc.i")
-	public int field2314;
+	public int z;
 
 	@ObfuscatedName("pc.w")
-	public int field2328;
+	public int w;
 
 }

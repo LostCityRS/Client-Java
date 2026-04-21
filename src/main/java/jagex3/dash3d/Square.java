@@ -7,19 +7,19 @@ import jagex3.datastruct.Linkable;
 public final class Square extends Linkable {
 
 	@ObfuscatedName("fa.ub")
-	public Square field866;
+	public Square linkedSquare;
 
 	@ObfuscatedName("fa.vb")
 	public int field867;
 
 	@ObfuscatedName("fa.wb")
-	public GroundObject field868;
+	public GroundObject groundObject;
 
 	@ObfuscatedName("fa.Bb")
-	public final Sprite[] field873 = new Sprite[5];
+	public final Sprite[] sprites = new Sprite[5];
 
 	@ObfuscatedName("fa.Kb")
-	public final int[] field882 = new int[5];
+	public final int[] spriteSpan = new int[5];
 
 	@ObfuscatedName("fa.Jb")
 	public int field881 = 0;
@@ -52,19 +52,19 @@ public final class Square extends Linkable {
 	public int field888;
 
 	@ObfuscatedName("fa.Gb")
-	public QuickGround field878;
+	public QuickGround quickGround;
 
 	@ObfuscatedName("fa.Pb")
-	public Decor field887;
+	public Decor decor;
 
 	@ObfuscatedName("fa.Ib")
-	public Wall field880;
+	public Wall wall;
 
 	@ObfuscatedName("fa.Eb")
-	public Ground field876;
+	public Ground ground;
 
 	@ObfuscatedName("fa.Lb")
-	public GroundDecor field883;
+	public GroundDecor groundDecor;
 
 	@ObfuscatedName("fa.yb")
 	public boolean field870;

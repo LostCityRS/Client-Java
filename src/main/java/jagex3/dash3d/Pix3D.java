@@ -10,13 +10,13 @@ public final class Pix3D {
 	public static int[] divTable2 = new int[2048];
 
 	@ObfuscatedName("eb.Gb")
-	public static boolean field768 = false;
+	public static boolean opaque = false;
 
 	@ObfuscatedName("eb.Nb")
 	public static int[] sinTable = new int[2048];
 
 	@ObfuscatedName("eb.Db")
-	public static int field765 = 0;
+	public static int trans = 0;
 
 	@ObfuscatedName("eb.Cb")
 	public static int[] colourTable = new int[65536];
@@ -31,10 +31,10 @@ public final class Pix3D {
 	public static int[] cosTable = new int[2048];
 
 	@ObfuscatedName("eb.Rb")
-	public static boolean field779 = false;
+	public static boolean hclip = false;
 
 	@ObfuscatedName("eb.Sb")
-	public static boolean field780 = false;
+	public static boolean lowMem = false;
 	@ObfuscatedName("eb.Jb")
 	public static TextureProvider textureManager;
     @ObfuscatedName("eb.Ab")
@@ -46,15 +46,15 @@ public final class Pix3D {
 	@ObfuscatedName("eb.Bb")
 	public static int originY;
 	@ObfuscatedName("eb.Mb")
-	public static int field774;
+	public static int minX;
 	@ObfuscatedName("eb.Eb")
-	public static int field766;
+	public static int maxX;
 	@ObfuscatedName("eb.Fb")
-	public static int field767;
+	public static int minY;
 	@ObfuscatedName("eb.Lb")
-	public static int field773;
+	public static int maxY;
 	@ObfuscatedName("eb.Ib")
-	public static int[] field770;
+	public static int[] scanline;
 	@ObfuscatedName("tb.gc")
 	public static int[] field2909;
 
@@ -72,8 +72,8 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a([IIIIII)V")
-	public static void method352(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (field779) {
+	public static void flatRaster(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
+		if (hclip) {
 			if (arg4 > width) {
 				arg4 = width;
 			}
@@ -86,7 +86,7 @@ public final class Pix3D {
 		}
 		int var5 = arg1 + arg3;
 		int var6 = arg4 - arg3 >> 2;
-		if (field765 == 0) {
+		if (trans == 0) {
 			while (true) {
 				var6--;
 				if (var6 < 0) {
@@ -105,8 +105,8 @@ public final class Pix3D {
 				arg0[var5++] = arg2;
 			}
 		}
-		int var8 = field765;
-		int var9 = 256 - field765;
+		int var8 = trans;
+		int var9 = 256 - trans;
 		int var10 = ((arg2 & 0xFF00FF) * var9 >> 8 & 0xFF00FF) + ((arg2 & 0xFF00) * var9 >> 8 & 0xFF00);
 		while (true) {
 			var6--;
@@ -128,15 +128,15 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a(IIIIIIIIIIIIIIIIIII)V")
-	public static void method353(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = textureManager.method692(arg18);
+	public static void textureTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
+		int[] var19 = textureManager.getTexels(arg18);
 		if (var19 == null) {
 			int var20 = textureManager.getAverageRgb(arg18);
-			method360(arg0, arg1, arg2, arg3, arg4, arg5, method363(var20, arg6), method363(var20, arg7), method363(var20, arg8));
+			gouraudTriangle(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
-		field780 = textureManager.method698(arg18);
-		field768 = textureManager.method695(arg18);
+		lowMem = textureManager.isLowMem(arg18);
+		opaque = textureManager.isOpaque(arg18);
 		int var21 = arg9 - arg10;
 		int var22 = arg12 - arg13;
 		int var23 = arg15 - arg16;
@@ -204,7 +204,7 @@ public final class Pix3D {
 					if (arg0 != arg1 && var40 < var36 || arg0 == arg1 && var40 > var38) {
 						int var52 = arg2 - arg1;
 						int var53 = arg1 - arg0;
-						int var54 = field770[arg0];
+						int var54 = scanline[arg0];
 						while (true) {
 							var53--;
 							if (var53 < 0) {
@@ -213,23 +213,23 @@ public final class Pix3D {
 									if (var52 < 0) {
 										return;
 									}
-									method355(Pix2D.pixels, var19, 0, 0, var54, var43 >> 16, var46 >> 16, var45 >> 8, var47 >> 8, var49, var50, var51, var28, var31, var34);
+									textureRaster(Pix2D.pixels, var19, 0, 0, var54, var43 >> 16, var46 >> 16, var45 >> 8, var47 >> 8, var49, var50, var51, var28, var31, var34);
 									var43 += var40;
 									var46 += var38;
 									var45 += var41;
 									var47 += var39;
-									var54 += Pix2D.field2749;
+									var54 += Pix2D.width;
 									var49 += var29;
 									var50 += var32;
 									var51 += var35;
 								}
 							}
-							method355(Pix2D.pixels, var19, 0, 0, var54, var43 >> 16, var42 >> 16, var45 >> 8, var44 >> 8, var49, var50, var51, var28, var31, var34);
+							textureRaster(Pix2D.pixels, var19, 0, 0, var54, var43 >> 16, var42 >> 16, var45 >> 8, var44 >> 8, var49, var50, var51, var28, var31, var34);
 							var43 += var40;
 							var42 += var36;
 							var45 += var41;
 							var44 += var37;
-							var54 += Pix2D.field2749;
+							var54 += Pix2D.width;
 							var49 += var29;
 							var50 += var32;
 							var51 += var35;
@@ -237,7 +237,7 @@ public final class Pix3D {
 					} else {
 						int var55 = arg2 - arg1;
 						int var56 = arg1 - arg0;
-						int var57 = field770[arg0];
+						int var57 = scanline[arg0];
 						while (true) {
 							var56--;
 							if (var56 < 0) {
@@ -246,23 +246,23 @@ public final class Pix3D {
 									if (var55 < 0) {
 										return;
 									}
-									method355(Pix2D.pixels, var19, 0, 0, var57, var46 >> 16, var43 >> 16, var47 >> 8, var45 >> 8, var49, var50, var51, var28, var31, var34);
+									textureRaster(Pix2D.pixels, var19, 0, 0, var57, var46 >> 16, var43 >> 16, var47 >> 8, var45 >> 8, var49, var50, var51, var28, var31, var34);
 									var43 += var40;
 									var46 += var38;
 									var45 += var41;
 									var47 += var39;
-									var57 += Pix2D.field2749;
+									var57 += Pix2D.width;
 									var49 += var29;
 									var50 += var32;
 									var51 += var35;
 								}
 							}
-							method355(Pix2D.pixels, var19, 0, 0, var57, var42 >> 16, var43 >> 16, var44 >> 8, var45 >> 8, var49, var50, var51, var28, var31, var34);
+							textureRaster(Pix2D.pixels, var19, 0, 0, var57, var42 >> 16, var43 >> 16, var44 >> 8, var45 >> 8, var49, var50, var51, var28, var31, var34);
 							var43 += var40;
 							var42 += var36;
 							var45 += var41;
 							var44 += var37;
-							var57 += Pix2D.field2749;
+							var57 += Pix2D.width;
 							var49 += var29;
 							var50 += var32;
 							var51 += var35;
@@ -294,7 +294,7 @@ public final class Pix3D {
 					if (arg0 != arg2 && var40 < var36 || arg0 == arg2 && var38 > var36) {
 						int var68 = arg1 - arg2;
 						int var69 = arg2 - arg0;
-						int var70 = field770[arg0];
+						int var70 = scanline[arg0];
 						while (true) {
 							var69--;
 							if (var69 < 0) {
@@ -303,23 +303,23 @@ public final class Pix3D {
 									if (var68 < 0) {
 										return;
 									}
-									method355(Pix2D.pixels, var19, 0, 0, var70, var62 >> 16, var58 >> 16, var63 >> 8, var60 >> 8, var65, var66, var67, var28, var31, var34);
+									textureRaster(Pix2D.pixels, var19, 0, 0, var70, var62 >> 16, var58 >> 16, var63 >> 8, var60 >> 8, var65, var66, var67, var28, var31, var34);
 									var62 += var38;
 									var58 += var36;
 									var63 += var39;
 									var60 += var37;
-									var70 += Pix2D.field2749;
+									var70 += Pix2D.width;
 									var65 += var29;
 									var66 += var32;
 									var67 += var35;
 								}
 							}
-							method355(Pix2D.pixels, var19, 0, 0, var70, var59 >> 16, var58 >> 16, var61 >> 8, var60 >> 8, var65, var66, var67, var28, var31, var34);
+							textureRaster(Pix2D.pixels, var19, 0, 0, var70, var59 >> 16, var58 >> 16, var61 >> 8, var60 >> 8, var65, var66, var67, var28, var31, var34);
 							var59 += var40;
 							var58 += var36;
 							var61 += var41;
 							var60 += var37;
-							var70 += Pix2D.field2749;
+							var70 += Pix2D.width;
 							var65 += var29;
 							var66 += var32;
 							var67 += var35;
@@ -327,7 +327,7 @@ public final class Pix3D {
 					} else {
 						int var71 = arg1 - arg2;
 						int var72 = arg2 - arg0;
-						int var73 = field770[arg0];
+						int var73 = scanline[arg0];
 						while (true) {
 							var72--;
 							if (var72 < 0) {
@@ -336,23 +336,23 @@ public final class Pix3D {
 									if (var71 < 0) {
 										return;
 									}
-									method355(Pix2D.pixels, var19, 0, 0, var73, var58 >> 16, var62 >> 16, var60 >> 8, var63 >> 8, var65, var66, var67, var28, var31, var34);
+									textureRaster(Pix2D.pixels, var19, 0, 0, var73, var58 >> 16, var62 >> 16, var60 >> 8, var63 >> 8, var65, var66, var67, var28, var31, var34);
 									var62 += var38;
 									var58 += var36;
 									var63 += var39;
 									var60 += var37;
-									var73 += Pix2D.field2749;
+									var73 += Pix2D.width;
 									var65 += var29;
 									var66 += var32;
 									var67 += var35;
 								}
 							}
-							method355(Pix2D.pixels, var19, 0, 0, var73, var58 >> 16, var59 >> 16, var60 >> 8, var61 >> 8, var65, var66, var67, var28, var31, var34);
+							textureRaster(Pix2D.pixels, var19, 0, 0, var73, var58 >> 16, var59 >> 16, var60 >> 8, var61 >> 8, var65, var66, var67, var28, var31, var34);
 							var59 += var40;
 							var58 += var36;
 							var61 += var41;
 							var60 += var37;
-							var73 += Pix2D.field2749;
+							var73 += Pix2D.width;
 							var65 += var29;
 							var66 += var32;
 							var67 += var35;
@@ -394,7 +394,7 @@ public final class Pix3D {
 					if (arg1 != arg2 && var36 < var38 || arg1 == arg2 && var36 > var40) {
 						int var84 = arg0 - arg2;
 						int var85 = arg2 - arg1;
-						int var86 = field770[arg1];
+						int var86 = scanline[arg1];
 						while (true) {
 							var85--;
 							if (var85 < 0) {
@@ -403,23 +403,23 @@ public final class Pix3D {
 									if (var84 < 0) {
 										return;
 									}
-									method355(Pix2D.pixels, var19, 0, 0, var86, var75 >> 16, var78 >> 16, var77 >> 8, var79 >> 8, var81, var82, var83, var28, var31, var34);
+									textureRaster(Pix2D.pixels, var19, 0, 0, var86, var75 >> 16, var78 >> 16, var77 >> 8, var79 >> 8, var81, var82, var83, var28, var31, var34);
 									var75 += var36;
 									var78 += var40;
 									var77 += var37;
 									var79 += var41;
-									var86 += Pix2D.field2749;
+									var86 += Pix2D.width;
 									var81 += var29;
 									var82 += var32;
 									var83 += var35;
 								}
 							}
-							method355(Pix2D.pixels, var19, 0, 0, var86, var75 >> 16, var74 >> 16, var77 >> 8, var76 >> 8, var81, var82, var83, var28, var31, var34);
+							textureRaster(Pix2D.pixels, var19, 0, 0, var86, var75 >> 16, var74 >> 16, var77 >> 8, var76 >> 8, var81, var82, var83, var28, var31, var34);
 							var75 += var36;
 							var74 += var38;
 							var77 += var37;
 							var76 += var39;
-							var86 += Pix2D.field2749;
+							var86 += Pix2D.width;
 							var81 += var29;
 							var82 += var32;
 							var83 += var35;
@@ -427,7 +427,7 @@ public final class Pix3D {
 					} else {
 						int var87 = arg0 - arg2;
 						int var88 = arg2 - arg1;
-						int var89 = field770[arg1];
+						int var89 = scanline[arg1];
 						while (true) {
 							var88--;
 							if (var88 < 0) {
@@ -436,23 +436,23 @@ public final class Pix3D {
 									if (var87 < 0) {
 										return;
 									}
-									method355(Pix2D.pixels, var19, 0, 0, var89, var78 >> 16, var75 >> 16, var79 >> 8, var77 >> 8, var81, var82, var83, var28, var31, var34);
+									textureRaster(Pix2D.pixels, var19, 0, 0, var89, var78 >> 16, var75 >> 16, var79 >> 8, var77 >> 8, var81, var82, var83, var28, var31, var34);
 									var75 += var36;
 									var78 += var40;
 									var77 += var37;
 									var79 += var41;
-									var89 += Pix2D.field2749;
+									var89 += Pix2D.width;
 									var81 += var29;
 									var82 += var32;
 									var83 += var35;
 								}
 							}
-							method355(Pix2D.pixels, var19, 0, 0, var89, var74 >> 16, var75 >> 16, var76 >> 8, var77 >> 8, var81, var82, var83, var28, var31, var34);
+							textureRaster(Pix2D.pixels, var19, 0, 0, var89, var74 >> 16, var75 >> 16, var76 >> 8, var77 >> 8, var81, var82, var83, var28, var31, var34);
 							var75 += var36;
 							var74 += var38;
 							var77 += var37;
 							var76 += var39;
-							var89 += Pix2D.field2749;
+							var89 += Pix2D.width;
 							var81 += var29;
 							var82 += var32;
 							var83 += var35;
@@ -484,7 +484,7 @@ public final class Pix3D {
 					if (var36 < var38) {
 						int var100 = arg2 - arg0;
 						int var101 = arg0 - arg1;
-						int var102 = field770[arg1];
+						int var102 = scanline[arg1];
 						while (true) {
 							var101--;
 							if (var101 < 0) {
@@ -493,23 +493,23 @@ public final class Pix3D {
 									if (var100 < 0) {
 										return;
 									}
-									method355(Pix2D.pixels, var19, 0, 0, var102, var94 >> 16, var90 >> 16, var95 >> 8, var92 >> 8, var97, var98, var99, var28, var31, var34);
+									textureRaster(Pix2D.pixels, var19, 0, 0, var102, var94 >> 16, var90 >> 16, var95 >> 8, var92 >> 8, var97, var98, var99, var28, var31, var34);
 									var94 += var40;
 									var90 += var38;
 									var95 += var41;
 									var92 += var39;
-									var102 += Pix2D.field2749;
+									var102 += Pix2D.width;
 									var97 += var29;
 									var98 += var32;
 									var99 += var35;
 								}
 							}
-							method355(Pix2D.pixels, var19, 0, 0, var102, var91 >> 16, var90 >> 16, var93 >> 8, var92 >> 8, var97, var98, var99, var28, var31, var34);
+							textureRaster(Pix2D.pixels, var19, 0, 0, var102, var91 >> 16, var90 >> 16, var93 >> 8, var92 >> 8, var97, var98, var99, var28, var31, var34);
 							var91 += var36;
 							var90 += var38;
 							var93 += var37;
 							var92 += var39;
-							var102 += Pix2D.field2749;
+							var102 += Pix2D.width;
 							var97 += var29;
 							var98 += var32;
 							var99 += var35;
@@ -517,7 +517,7 @@ public final class Pix3D {
 					} else {
 						int var103 = arg2 - arg0;
 						int var104 = arg0 - arg1;
-						int var105 = field770[arg1];
+						int var105 = scanline[arg1];
 						while (true) {
 							var104--;
 							if (var104 < 0) {
@@ -526,23 +526,23 @@ public final class Pix3D {
 									if (var103 < 0) {
 										return;
 									}
-									method355(Pix2D.pixels, var19, 0, 0, var105, var90 >> 16, var94 >> 16, var92 >> 8, var95 >> 8, var97, var98, var99, var28, var31, var34);
+									textureRaster(Pix2D.pixels, var19, 0, 0, var105, var90 >> 16, var94 >> 16, var92 >> 8, var95 >> 8, var97, var98, var99, var28, var31, var34);
 									var94 += var40;
 									var90 += var38;
 									var95 += var41;
 									var92 += var39;
-									var105 += Pix2D.field2749;
+									var105 += Pix2D.width;
 									var97 += var29;
 									var98 += var32;
 									var99 += var35;
 								}
 							}
-							method355(Pix2D.pixels, var19, 0, 0, var105, var90 >> 16, var91 >> 16, var92 >> 8, var93 >> 8, var97, var98, var99, var28, var31, var34);
+							textureRaster(Pix2D.pixels, var19, 0, 0, var105, var90 >> 16, var91 >> 16, var92 >> 8, var93 >> 8, var97, var98, var99, var28, var31, var34);
 							var91 += var36;
 							var90 += var38;
 							var93 += var37;
 							var92 += var39;
-							var105 += Pix2D.field2749;
+							var105 += Pix2D.width;
 							var97 += var29;
 							var98 += var32;
 							var99 += var35;
@@ -583,7 +583,7 @@ public final class Pix3D {
 				if (var38 < var40) {
 					int var116 = arg1 - arg0;
 					int var117 = arg0 - arg2;
-					int var118 = field770[arg2];
+					int var118 = scanline[arg2];
 					while (true) {
 						var117--;
 						if (var117 < 0) {
@@ -592,23 +592,23 @@ public final class Pix3D {
 								if (var116 < 0) {
 									return;
 								}
-								method355(Pix2D.pixels, var19, 0, 0, var118, var107 >> 16, var110 >> 16, var109 >> 8, var111 >> 8, var113, var114, var115, var28, var31, var34);
+								textureRaster(Pix2D.pixels, var19, 0, 0, var118, var107 >> 16, var110 >> 16, var109 >> 8, var111 >> 8, var113, var114, var115, var28, var31, var34);
 								var107 += var38;
 								var110 += var36;
 								var109 += var39;
 								var111 += var37;
-								var118 += Pix2D.field2749;
+								var118 += Pix2D.width;
 								var113 += var29;
 								var114 += var32;
 								var115 += var35;
 							}
 						}
-						method355(Pix2D.pixels, var19, 0, 0, var118, var107 >> 16, var106 >> 16, var109 >> 8, var108 >> 8, var113, var114, var115, var28, var31, var34);
+						textureRaster(Pix2D.pixels, var19, 0, 0, var118, var107 >> 16, var106 >> 16, var109 >> 8, var108 >> 8, var113, var114, var115, var28, var31, var34);
 						var107 += var38;
 						var106 += var40;
 						var109 += var39;
 						var108 += var41;
-						var118 += Pix2D.field2749;
+						var118 += Pix2D.width;
 						var113 += var29;
 						var114 += var32;
 						var115 += var35;
@@ -616,7 +616,7 @@ public final class Pix3D {
 				} else {
 					int var119 = arg1 - arg0;
 					int var120 = arg0 - arg2;
-					int var121 = field770[arg2];
+					int var121 = scanline[arg2];
 					while (true) {
 						var120--;
 						if (var120 < 0) {
@@ -625,23 +625,23 @@ public final class Pix3D {
 								if (var119 < 0) {
 									return;
 								}
-								method355(Pix2D.pixels, var19, 0, 0, var121, var110 >> 16, var107 >> 16, var111 >> 8, var109 >> 8, var113, var114, var115, var28, var31, var34);
+								textureRaster(Pix2D.pixels, var19, 0, 0, var121, var110 >> 16, var107 >> 16, var111 >> 8, var109 >> 8, var113, var114, var115, var28, var31, var34);
 								var107 += var38;
 								var110 += var36;
 								var109 += var39;
 								var111 += var37;
-								var121 += Pix2D.field2749;
+								var121 += Pix2D.width;
 								var113 += var29;
 								var114 += var32;
 								var115 += var35;
 							}
 						}
-						method355(Pix2D.pixels, var19, 0, 0, var121, var106 >> 16, var107 >> 16, var108 >> 8, var109 >> 8, var113, var114, var115, var28, var31, var34);
+						textureRaster(Pix2D.pixels, var19, 0, 0, var121, var106 >> 16, var107 >> 16, var108 >> 8, var109 >> 8, var113, var114, var115, var28, var31, var34);
 						var107 += var38;
 						var106 += var40;
 						var109 += var39;
 						var108 += var41;
-						var121 += Pix2D.field2749;
+						var121 += Pix2D.width;
 						var113 += var29;
 						var114 += var32;
 						var115 += var35;
@@ -673,7 +673,7 @@ public final class Pix3D {
 				if (var38 < var40) {
 					int var132 = arg0 - arg1;
 					int var133 = arg1 - arg2;
-					int var134 = field770[arg2];
+					int var134 = scanline[arg2];
 					while (true) {
 						var133--;
 						if (var133 < 0) {
@@ -682,23 +682,23 @@ public final class Pix3D {
 								if (var132 < 0) {
 									return;
 								}
-								method355(Pix2D.pixels, var19, 0, 0, var134, var126 >> 16, var122 >> 16, var127 >> 8, var124 >> 8, var129, var130, var131, var28, var31, var34);
+								textureRaster(Pix2D.pixels, var19, 0, 0, var134, var126 >> 16, var122 >> 16, var127 >> 8, var124 >> 8, var129, var130, var131, var28, var31, var34);
 								var126 += var36;
 								var122 += var40;
 								var127 += var37;
 								var124 += var41;
-								var134 += Pix2D.field2749;
+								var134 += Pix2D.width;
 								var129 += var29;
 								var130 += var32;
 								var131 += var35;
 							}
 						}
-						method355(Pix2D.pixels, var19, 0, 0, var134, var123 >> 16, var122 >> 16, var125 >> 8, var124 >> 8, var129, var130, var131, var28, var31, var34);
+						textureRaster(Pix2D.pixels, var19, 0, 0, var134, var123 >> 16, var122 >> 16, var125 >> 8, var124 >> 8, var129, var130, var131, var28, var31, var34);
 						var123 += var38;
 						var122 += var40;
 						var125 += var39;
 						var124 += var41;
-						var134 += Pix2D.field2749;
+						var134 += Pix2D.width;
 						var129 += var29;
 						var130 += var32;
 						var131 += var35;
@@ -706,7 +706,7 @@ public final class Pix3D {
 				} else {
 					int var135 = arg0 - arg1;
 					int var136 = arg1 - arg2;
-					int var137 = field770[arg2];
+					int var137 = scanline[arg2];
 					while (true) {
 						var136--;
 						if (var136 < 0) {
@@ -715,23 +715,23 @@ public final class Pix3D {
 								if (var135 < 0) {
 									return;
 								}
-								method355(Pix2D.pixels, var19, 0, 0, var137, var122 >> 16, var126 >> 16, var124 >> 8, var127 >> 8, var129, var130, var131, var28, var31, var34);
+								textureRaster(Pix2D.pixels, var19, 0, 0, var137, var122 >> 16, var126 >> 16, var124 >> 8, var127 >> 8, var129, var130, var131, var28, var31, var34);
 								var126 += var36;
 								var122 += var40;
 								var127 += var37;
 								var124 += var41;
-								var137 += Pix2D.field2749;
+								var137 += Pix2D.width;
 								var129 += var29;
 								var130 += var32;
 								var131 += var35;
 							}
 						}
-						method355(Pix2D.pixels, var19, 0, 0, var137, var122 >> 16, var123 >> 16, var124 >> 8, var125 >> 8, var129, var130, var131, var28, var31, var34);
+						textureRaster(Pix2D.pixels, var19, 0, 0, var137, var122 >> 16, var123 >> 16, var124 >> 8, var125 >> 8, var129, var130, var131, var28, var31, var34);
 						var123 += var38;
 						var122 += var40;
 						var125 += var39;
 						var124 += var41;
-						var137 += Pix2D.field2749;
+						var137 += Pix2D.width;
 						var129 += var29;
 						var130 += var32;
 						var131 += var35;
@@ -742,7 +742,7 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a(IIII[I)[I")
-	public static int[] method354(int arg0, int arg1, int arg2, int arg3, int[] arg4) {
+	public static int[] setClipping(int arg0, int arg1, int arg2, int arg3, int[] arg4) {
 		width = arg2 - arg0;
 		height = arg3 - arg1;
 		if (arg4 == null) {
@@ -750,26 +750,26 @@ public final class Pix3D {
 			if (var5 == 0) {
 				var5++;
 			}
-			field770 = new int[var5];
+			scanline = new int[var5];
 			for (int var6 = 0; var6 < var5; var6++) {
-				field770[var6] = (arg1 + var6) * Pix2D.field2749 + arg0;
+				scanline[var6] = (arg1 + var6) * Pix2D.width + arg0;
 			}
 		} else {
-			field770 = arg4;
+			scanline = arg4;
 		}
 		setRenderClipping();
-		return field770;
+		return scanline;
 	}
 
 	@ObfuscatedName("eb.a([I[IIIIIIIIIIIIII)V")
-	public static void method355(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14) {
+	public static void textureRaster(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14) {
 		if (arg5 >= arg6) {
 			return;
 		}
 		int var16;
 		int var17;
 		int var18;
-		if (field779) {
+		if (hclip) {
 			int var15 = (arg8 - arg7) / (arg6 - arg5);
 			if (arg6 > width) {
 				arg6 = width;
@@ -795,7 +795,7 @@ public final class Pix3D {
 			var18 = arg7 << 9;
 		}
 		int var19 = arg4 + arg5;
-		if (!field780) {
+		if (!lowMem) {
 			int var78 = 0;
 			int var79 = 0;
 			int var80 = arg5 - originX;
@@ -829,7 +829,7 @@ public final class Pix3D {
 			int var90 = var79 - arg3 >> 3;
 			int var91 = (var18 & 0x600000) + arg2;
 			int var92 = var18 >> 23;
-			if (field768) {
+			if (opaque) {
 				while (var16-- > 0) {
 					arg0[var19++] = arg1[(var91 >> 7) + (arg3 & 0x3F80)] >>> var92;
 					int var93 = var89 + var91;
@@ -1003,7 +1003,7 @@ public final class Pix3D {
 		int var32 = var21 - arg3 >> 3;
 		int var33 = (var18 >> 3 & 0xC0000) + arg2;
 		int var34 = var18 >> 23;
-		if (field768) {
+		if (opaque) {
 			while (var16-- > 0) {
 				arg0[var19++] = arg1[(var33 >> 6) + (arg3 & 0xFC0)] >>> var34;
 				int var35 = var31 + var33;
@@ -1148,10 +1148,10 @@ public final class Pix3D {
 	public static void setRenderClipping() {
 		originX = width / 2;
 		originY = height / 2;
-		field774 = -originX;
-		field766 = width - originX;
-		field767 = -originY;
-		field773 = height - originY;
+		minX = -originX;
+		maxX = width - originX;
+		minY = -originY;
+		maxY = height - originY;
 	}
 
 	@ObfuscatedName("eb.a(Lod;)V")
@@ -1160,12 +1160,12 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a([IIIIIIII)V")
-	public static void method359(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public static void gouraudRaster(int[] arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (lowDetail) {
 			int var7;
 			int var8;
 			int var9;
-			if (field779) {
+			if (hclip) {
 				int var6;
 				if (arg3 - arg2 > 3) {
 					var6 = (arg5 - arg4) / (arg3 - arg2);
@@ -1196,7 +1196,7 @@ public final class Pix3D {
 			} else {
 				return;
 			}
-			if (field765 == 0) {
+			if (trans == 0) {
 				while (true) {
 					var8--;
 					if (var8 < 0) {
@@ -1219,8 +1219,8 @@ public final class Pix3D {
 					arg0[var7++] = var10;
 				}
 			} else {
-				int var13 = field765;
-				int var14 = 256 - field765;
+				int var13 = trans;
+				int var14 = 256 - trans;
 				while (true) {
 					var8--;
 					if (var8 < 0) {
@@ -1246,7 +1246,7 @@ public final class Pix3D {
 			}
 		} else if (arg2 < arg3) {
 			int var20 = (arg5 - arg4) / (arg3 - arg2);
-			if (field779) {
+			if (hclip) {
 				if (arg3 > width) {
 					arg3 = width;
 				}
@@ -1260,15 +1260,15 @@ public final class Pix3D {
 			}
 			int var21 = arg1 + arg2;
 			int var22 = arg3 - arg2;
-			if (field765 == 0) {
+			if (trans == 0) {
 				do {
 					arg0[var21++] = colourTable[arg4 >> 8];
 					arg4 += var20;
 					var22--;
 				} while (var22 > 0);
 			} else {
-				int var23 = field765;
-				int var24 = 256 - field765;
+				int var23 = trans;
+				int var24 = 256 - trans;
 				do {
 					int var25 = colourTable[arg4 >> 8];
 					arg4 += var20;
@@ -1281,7 +1281,7 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a(IIIIIIIII)V")
-	public static void method360(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public static void gouraudTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var9 = 0;
 		int var10 = 0;
 		if (arg0 != arg1) {
@@ -1330,7 +1330,7 @@ public final class Pix3D {
 					if (arg0 != arg1 && var13 < var9 || arg0 == arg1 && var13 > var11) {
 						int var21 = arg2 - arg1;
 						int var22 = arg1 - arg0;
-						int var23 = field770[arg0];
+						int var23 = scanline[arg0];
 						while (true) {
 							var22--;
 							if (var22 < 0) {
@@ -1339,25 +1339,25 @@ public final class Pix3D {
 									if (var21 < 0) {
 										return;
 									}
-									method359(Pix2D.pixels, var23, var16 >> 16, var19 >> 16, var18 >> 7, var20 >> 7);
+									gouraudRaster(Pix2D.pixels, var23, var16 >> 16, var19 >> 16, var18 >> 7, var20 >> 7);
 									var16 += var13;
 									var19 += var11;
 									var18 += var14;
 									var20 += var12;
-									var23 += Pix2D.field2749;
+									var23 += Pix2D.width;
 								}
 							}
-							method359(Pix2D.pixels, var23, var16 >> 16, var15 >> 16, var18 >> 7, var17 >> 7);
+							gouraudRaster(Pix2D.pixels, var23, var16 >> 16, var15 >> 16, var18 >> 7, var17 >> 7);
 							var16 += var13;
 							var15 += var9;
 							var18 += var14;
 							var17 += var10;
-							var23 += Pix2D.field2749;
+							var23 += Pix2D.width;
 						}
 					} else {
 						int var24 = arg2 - arg1;
 						int var25 = arg1 - arg0;
-						int var26 = field770[arg0];
+						int var26 = scanline[arg0];
 						while (true) {
 							var25--;
 							if (var25 < 0) {
@@ -1366,20 +1366,20 @@ public final class Pix3D {
 									if (var24 < 0) {
 										return;
 									}
-									method359(Pix2D.pixels, var26, var19 >> 16, var16 >> 16, var20 >> 7, var18 >> 7);
+									gouraudRaster(Pix2D.pixels, var26, var19 >> 16, var16 >> 16, var20 >> 7, var18 >> 7);
 									var16 += var13;
 									var19 += var11;
 									var18 += var14;
 									var20 += var12;
-									var26 += Pix2D.field2749;
+									var26 += Pix2D.width;
 								}
 							}
-							method359(Pix2D.pixels, var26, var15 >> 16, var16 >> 16, var17 >> 7, var18 >> 7);
+							gouraudRaster(Pix2D.pixels, var26, var15 >> 16, var16 >> 16, var17 >> 7, var18 >> 7);
 							var16 += var13;
 							var15 += var9;
 							var18 += var14;
 							var17 += var10;
-							var26 += Pix2D.field2749;
+							var26 += Pix2D.width;
 						}
 					}
 				} else {
@@ -1404,7 +1404,7 @@ public final class Pix3D {
 					if (arg0 != arg2 && var13 < var9 || arg0 == arg2 && var11 > var9) {
 						int var33 = arg1 - arg2;
 						int var34 = arg2 - arg0;
-						int var35 = field770[arg0];
+						int var35 = scanline[arg0];
 						while (true) {
 							var34--;
 							if (var34 < 0) {
@@ -1413,25 +1413,25 @@ public final class Pix3D {
 									if (var33 < 0) {
 										return;
 									}
-									method359(Pix2D.pixels, var35, var31 >> 16, var27 >> 16, var32 >> 7, var29 >> 7);
+									gouraudRaster(Pix2D.pixels, var35, var31 >> 16, var27 >> 16, var32 >> 7, var29 >> 7);
 									var31 += var11;
 									var27 += var9;
 									var32 += var12;
 									var29 += var10;
-									var35 += Pix2D.field2749;
+									var35 += Pix2D.width;
 								}
 							}
-							method359(Pix2D.pixels, var35, var28 >> 16, var27 >> 16, var30 >> 7, var29 >> 7);
+							gouraudRaster(Pix2D.pixels, var35, var28 >> 16, var27 >> 16, var30 >> 7, var29 >> 7);
 							var28 += var13;
 							var27 += var9;
 							var30 += var14;
 							var29 += var10;
-							var35 += Pix2D.field2749;
+							var35 += Pix2D.width;
 						}
 					} else {
 						int var36 = arg1 - arg2;
 						int var37 = arg2 - arg0;
-						int var38 = field770[arg0];
+						int var38 = scanline[arg0];
 						while (true) {
 							var37--;
 							if (var37 < 0) {
@@ -1440,20 +1440,20 @@ public final class Pix3D {
 									if (var36 < 0) {
 										return;
 									}
-									method359(Pix2D.pixels, var38, var27 >> 16, var31 >> 16, var29 >> 7, var32 >> 7);
+									gouraudRaster(Pix2D.pixels, var38, var27 >> 16, var31 >> 16, var29 >> 7, var32 >> 7);
 									var31 += var11;
 									var27 += var9;
 									var32 += var12;
 									var29 += var10;
-									var38 += Pix2D.field2749;
+									var38 += Pix2D.width;
 								}
 							}
-							method359(Pix2D.pixels, var38, var27 >> 16, var28 >> 16, var29 >> 7, var30 >> 7);
+							gouraudRaster(Pix2D.pixels, var38, var27 >> 16, var28 >> 16, var29 >> 7, var30 >> 7);
 							var28 += var13;
 							var27 += var9;
 							var30 += var14;
 							var29 += var10;
-							var38 += Pix2D.field2749;
+							var38 += Pix2D.width;
 						}
 					}
 				}
@@ -1488,7 +1488,7 @@ public final class Pix3D {
 					if (arg1 != arg2 && var9 < var11 || arg1 == arg2 && var9 > var13) {
 						int var45 = arg0 - arg2;
 						int var46 = arg2 - arg1;
-						int var47 = field770[arg1];
+						int var47 = scanline[arg1];
 						while (true) {
 							var46--;
 							if (var46 < 0) {
@@ -1497,25 +1497,25 @@ public final class Pix3D {
 									if (var45 < 0) {
 										return;
 									}
-									method359(Pix2D.pixels, var47, var40 >> 16, var43 >> 16, var42 >> 7, var44 >> 7);
+									gouraudRaster(Pix2D.pixels, var47, var40 >> 16, var43 >> 16, var42 >> 7, var44 >> 7);
 									var40 += var9;
 									var43 += var13;
 									var42 += var10;
 									var44 += var14;
-									var47 += Pix2D.field2749;
+									var47 += Pix2D.width;
 								}
 							}
-							method359(Pix2D.pixels, var47, var40 >> 16, var39 >> 16, var42 >> 7, var41 >> 7);
+							gouraudRaster(Pix2D.pixels, var47, var40 >> 16, var39 >> 16, var42 >> 7, var41 >> 7);
 							var40 += var9;
 							var39 += var11;
 							var42 += var10;
 							var41 += var12;
-							var47 += Pix2D.field2749;
+							var47 += Pix2D.width;
 						}
 					} else {
 						int var48 = arg0 - arg2;
 						int var49 = arg2 - arg1;
-						int var50 = field770[arg1];
+						int var50 = scanline[arg1];
 						while (true) {
 							var49--;
 							if (var49 < 0) {
@@ -1524,20 +1524,20 @@ public final class Pix3D {
 									if (var48 < 0) {
 										return;
 									}
-									method359(Pix2D.pixels, var50, var43 >> 16, var40 >> 16, var44 >> 7, var42 >> 7);
+									gouraudRaster(Pix2D.pixels, var50, var43 >> 16, var40 >> 16, var44 >> 7, var42 >> 7);
 									var40 += var9;
 									var43 += var13;
 									var42 += var10;
 									var44 += var14;
-									var50 += Pix2D.field2749;
+									var50 += Pix2D.width;
 								}
 							}
-							method359(Pix2D.pixels, var50, var39 >> 16, var40 >> 16, var41 >> 7, var42 >> 7);
+							gouraudRaster(Pix2D.pixels, var50, var39 >> 16, var40 >> 16, var41 >> 7, var42 >> 7);
 							var40 += var9;
 							var39 += var11;
 							var42 += var10;
 							var41 += var12;
-							var50 += Pix2D.field2749;
+							var50 += Pix2D.width;
 						}
 					}
 				} else {
@@ -1562,7 +1562,7 @@ public final class Pix3D {
 					if (var9 < var11) {
 						int var57 = arg2 - arg0;
 						int var58 = arg0 - arg1;
-						int var59 = field770[arg1];
+						int var59 = scanline[arg1];
 						while (true) {
 							var58--;
 							if (var58 < 0) {
@@ -1571,25 +1571,25 @@ public final class Pix3D {
 									if (var57 < 0) {
 										return;
 									}
-									method359(Pix2D.pixels, var59, var55 >> 16, var51 >> 16, var56 >> 7, var53 >> 7);
+									gouraudRaster(Pix2D.pixels, var59, var55 >> 16, var51 >> 16, var56 >> 7, var53 >> 7);
 									var55 += var13;
 									var51 += var11;
 									var56 += var14;
 									var53 += var12;
-									var59 += Pix2D.field2749;
+									var59 += Pix2D.width;
 								}
 							}
-							method359(Pix2D.pixels, var59, var52 >> 16, var51 >> 16, var54 >> 7, var53 >> 7);
+							gouraudRaster(Pix2D.pixels, var59, var52 >> 16, var51 >> 16, var54 >> 7, var53 >> 7);
 							var52 += var9;
 							var51 += var11;
 							var54 += var10;
 							var53 += var12;
-							var59 += Pix2D.field2749;
+							var59 += Pix2D.width;
 						}
 					} else {
 						int var60 = arg2 - arg0;
 						int var61 = arg0 - arg1;
-						int var62 = field770[arg1];
+						int var62 = scanline[arg1];
 						while (true) {
 							var61--;
 							if (var61 < 0) {
@@ -1598,20 +1598,20 @@ public final class Pix3D {
 									if (var60 < 0) {
 										return;
 									}
-									method359(Pix2D.pixels, var62, var51 >> 16, var55 >> 16, var53 >> 7, var56 >> 7);
+									gouraudRaster(Pix2D.pixels, var62, var51 >> 16, var55 >> 16, var53 >> 7, var56 >> 7);
 									var55 += var13;
 									var51 += var11;
 									var56 += var14;
 									var53 += var12;
-									var62 += Pix2D.field2749;
+									var62 += Pix2D.width;
 								}
 							}
-							method359(Pix2D.pixels, var62, var51 >> 16, var52 >> 16, var53 >> 7, var54 >> 7);
+							gouraudRaster(Pix2D.pixels, var62, var51 >> 16, var52 >> 16, var53 >> 7, var54 >> 7);
 							var52 += var9;
 							var51 += var11;
 							var54 += var10;
 							var53 += var12;
-							var62 += Pix2D.field2749;
+							var62 += Pix2D.width;
 						}
 					}
 				}
@@ -1645,7 +1645,7 @@ public final class Pix3D {
 				if (var11 < var13) {
 					int var69 = arg1 - arg0;
 					int var70 = arg0 - arg2;
-					int var71 = field770[arg2];
+					int var71 = scanline[arg2];
 					while (true) {
 						var70--;
 						if (var70 < 0) {
@@ -1654,25 +1654,25 @@ public final class Pix3D {
 								if (var69 < 0) {
 									return;
 								}
-								method359(Pix2D.pixels, var71, var64 >> 16, var67 >> 16, var66 >> 7, var68 >> 7);
+								gouraudRaster(Pix2D.pixels, var71, var64 >> 16, var67 >> 16, var66 >> 7, var68 >> 7);
 								var64 += var11;
 								var67 += var9;
 								var66 += var12;
 								var68 += var10;
-								var71 += Pix2D.field2749;
+								var71 += Pix2D.width;
 							}
 						}
-						method359(Pix2D.pixels, var71, var64 >> 16, var63 >> 16, var66 >> 7, var65 >> 7);
+						gouraudRaster(Pix2D.pixels, var71, var64 >> 16, var63 >> 16, var66 >> 7, var65 >> 7);
 						var64 += var11;
 						var63 += var13;
 						var66 += var12;
 						var65 += var14;
-						var71 += Pix2D.field2749;
+						var71 += Pix2D.width;
 					}
 				} else {
 					int var72 = arg1 - arg0;
 					int var73 = arg0 - arg2;
-					int var74 = field770[arg2];
+					int var74 = scanline[arg2];
 					while (true) {
 						var73--;
 						if (var73 < 0) {
@@ -1681,20 +1681,20 @@ public final class Pix3D {
 								if (var72 < 0) {
 									return;
 								}
-								method359(Pix2D.pixels, var74, var67 >> 16, var64 >> 16, var68 >> 7, var66 >> 7);
+								gouraudRaster(Pix2D.pixels, var74, var67 >> 16, var64 >> 16, var68 >> 7, var66 >> 7);
 								var64 += var11;
 								var67 += var9;
 								var66 += var12;
 								var68 += var10;
-								var74 += Pix2D.field2749;
+								var74 += Pix2D.width;
 							}
 						}
-						method359(Pix2D.pixels, var74, var63 >> 16, var64 >> 16, var65 >> 7, var66 >> 7);
+						gouraudRaster(Pix2D.pixels, var74, var63 >> 16, var64 >> 16, var65 >> 7, var66 >> 7);
 						var64 += var11;
 						var63 += var13;
 						var66 += var12;
 						var65 += var14;
-						var74 += Pix2D.field2749;
+						var74 += Pix2D.width;
 					}
 				}
 			} else {
@@ -1719,7 +1719,7 @@ public final class Pix3D {
 				if (var11 < var13) {
 					int var81 = arg0 - arg1;
 					int var82 = arg1 - arg2;
-					int var83 = field770[arg2];
+					int var83 = scanline[arg2];
 					while (true) {
 						var82--;
 						if (var82 < 0) {
@@ -1728,25 +1728,25 @@ public final class Pix3D {
 								if (var81 < 0) {
 									return;
 								}
-								method359(Pix2D.pixels, var83, var79 >> 16, var75 >> 16, var80 >> 7, var77 >> 7);
+								gouraudRaster(Pix2D.pixels, var83, var79 >> 16, var75 >> 16, var80 >> 7, var77 >> 7);
 								var79 += var9;
 								var75 += var13;
 								var80 += var10;
 								var77 += var14;
-								var83 += Pix2D.field2749;
+								var83 += Pix2D.width;
 							}
 						}
-						method359(Pix2D.pixels, var83, var76 >> 16, var75 >> 16, var78 >> 7, var77 >> 7);
+						gouraudRaster(Pix2D.pixels, var83, var76 >> 16, var75 >> 16, var78 >> 7, var77 >> 7);
 						var76 += var11;
 						var75 += var13;
 						var78 += var12;
 						var77 += var14;
-						var83 += Pix2D.field2749;
+						var83 += Pix2D.width;
 					}
 				} else {
 					int var84 = arg0 - arg1;
 					int var85 = arg1 - arg2;
-					int var86 = field770[arg2];
+					int var86 = scanline[arg2];
 					while (true) {
 						var85--;
 						if (var85 < 0) {
@@ -1755,20 +1755,20 @@ public final class Pix3D {
 								if (var84 < 0) {
 									return;
 								}
-								method359(Pix2D.pixels, var86, var75 >> 16, var79 >> 16, var77 >> 7, var80 >> 7);
+								gouraudRaster(Pix2D.pixels, var86, var75 >> 16, var79 >> 16, var77 >> 7, var80 >> 7);
 								var79 += var9;
 								var75 += var13;
 								var80 += var10;
 								var77 += var14;
-								var86 += Pix2D.field2749;
+								var86 += Pix2D.width;
 							}
 						}
-						method359(Pix2D.pixels, var86, var75 >> 16, var76 >> 16, var77 >> 7, var78 >> 7);
+						gouraudRaster(Pix2D.pixels, var86, var75 >> 16, var76 >> 16, var77 >> 7, var78 >> 7);
 						var76 += var11;
 						var75 += var13;
 						var78 += var12;
 						var77 += var14;
-						var86 += Pix2D.field2749;
+						var86 += Pix2D.width;
 					}
 				}
 			}
@@ -1776,7 +1776,7 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a(ID)I")
-	public static int method361(int arg0, double arg1) {
+	public static int gammaCorrect(int arg0, double arg1) {
 		double var3 = (double) (arg0 >> 16) / 256.0D;
 		double var5 = (double) (arg0 >> 8 & 0xFF) / 256.0D;
 		double var7 = (double) (arg0 & 0xFF) / 256.0D;
@@ -1790,7 +1790,7 @@ public final class Pix3D {
 	}
 
 	@ObfuscatedName("eb.a(II)I")
-	public static int method363(int arg0, int arg1) {
+	public static int textureLightColour(int arg0, int arg1) {
 		int var2 = (arg0 & 0x7F) * (127 - arg1) >> 7;
 		if (var2 < 2) {
 			var2 = 2;
@@ -1802,24 +1802,24 @@ public final class Pix3D {
 
 	@ObfuscatedName("eb.b(II)V")
 	public static void setOrigin(int arg0, int arg1) {
-		int var2 = field770[0];
-		int var3 = var2 / Pix2D.field2749;
-		int var4 = var2 - Pix2D.field2749 * var3;
+		int var2 = scanline[0];
+		int var3 = var2 / Pix2D.width;
+		int var4 = var2 - Pix2D.width * var3;
 		originX = arg0 - var4;
 		originY = arg1 - var3;
-		field774 = -originX;
-		field766 = width - originX;
-		field767 = -originY;
-		field773 = height - originY;
+		minX = -originX;
+		maxX = width - originX;
+		minY = -originY;
+		maxY = height - originY;
 	}
 
 	@ObfuscatedName("eb.a(D)V")
 	public static void initColourTable(double arg0) {
-		method368(arg0);
+		initColourTable2(arg0);
 	}
 
 	@ObfuscatedName("eb.a(IIIIIII)V")
-	public static void method366(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public static void flatTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var7 = 0;
 		if (arg0 != arg1) {
 			var7 = (arg4 - arg3 << 16) / (arg1 - arg0);
@@ -1856,7 +1856,7 @@ public final class Pix3D {
 					if (arg0 != arg1 && var9 < var7 || arg0 == arg1 && var9 > var8) {
 						int var13 = arg2 - arg1;
 						int var14 = arg1 - arg0;
-						int var15 = field770[arg0];
+						int var15 = scanline[arg0];
 						while (true) {
 							var14--;
 							if (var14 < 0) {
@@ -1865,21 +1865,21 @@ public final class Pix3D {
 									if (var13 < 0) {
 										return;
 									}
-									method352(Pix2D.pixels, var15, arg6, var11 >> 16, var12 >> 16);
+									flatRaster(Pix2D.pixels, var15, arg6, var11 >> 16, var12 >> 16);
 									var11 += var9;
 									var12 += var8;
-									var15 += Pix2D.field2749;
+									var15 += Pix2D.width;
 								}
 							}
-							method352(Pix2D.pixels, var15, arg6, var11 >> 16, var10 >> 16);
+							flatRaster(Pix2D.pixels, var15, arg6, var11 >> 16, var10 >> 16);
 							var11 += var9;
 							var10 += var7;
-							var15 += Pix2D.field2749;
+							var15 += Pix2D.width;
 						}
 					} else {
 						int var16 = arg2 - arg1;
 						int var17 = arg1 - arg0;
-						int var18 = field770[arg0];
+						int var18 = scanline[arg0];
 						while (true) {
 							var17--;
 							if (var17 < 0) {
@@ -1888,16 +1888,16 @@ public final class Pix3D {
 									if (var16 < 0) {
 										return;
 									}
-									method352(Pix2D.pixels, var18, arg6, var12 >> 16, var11 >> 16);
+									flatRaster(Pix2D.pixels, var18, arg6, var12 >> 16, var11 >> 16);
 									var11 += var9;
 									var12 += var8;
-									var18 += Pix2D.field2749;
+									var18 += Pix2D.width;
 								}
 							}
-							method352(Pix2D.pixels, var18, arg6, var10 >> 16, var11 >> 16);
+							flatRaster(Pix2D.pixels, var18, arg6, var10 >> 16, var11 >> 16);
 							var11 += var9;
 							var10 += var7;
-							var18 += Pix2D.field2749;
+							var18 += Pix2D.width;
 						}
 					}
 				} else {
@@ -1916,7 +1916,7 @@ public final class Pix3D {
 					if (arg0 != arg2 && var9 < var7 || arg0 == arg2 && var8 > var7) {
 						int var22 = arg1 - arg2;
 						int var23 = arg2 - arg0;
-						int var24 = field770[arg0];
+						int var24 = scanline[arg0];
 						while (true) {
 							var23--;
 							if (var23 < 0) {
@@ -1925,21 +1925,21 @@ public final class Pix3D {
 									if (var22 < 0) {
 										return;
 									}
-									method352(Pix2D.pixels, var24, arg6, var21 >> 16, var19 >> 16);
+									flatRaster(Pix2D.pixels, var24, arg6, var21 >> 16, var19 >> 16);
 									var21 += var8;
 									var19 += var7;
-									var24 += Pix2D.field2749;
+									var24 += Pix2D.width;
 								}
 							}
-							method352(Pix2D.pixels, var24, arg6, var20 >> 16, var19 >> 16);
+							flatRaster(Pix2D.pixels, var24, arg6, var20 >> 16, var19 >> 16);
 							var20 += var9;
 							var19 += var7;
-							var24 += Pix2D.field2749;
+							var24 += Pix2D.width;
 						}
 					} else {
 						int var25 = arg1 - arg2;
 						int var26 = arg2 - arg0;
-						int var27 = field770[arg0];
+						int var27 = scanline[arg0];
 						while (true) {
 							var26--;
 							if (var26 < 0) {
@@ -1948,16 +1948,16 @@ public final class Pix3D {
 									if (var25 < 0) {
 										return;
 									}
-									method352(Pix2D.pixels, var27, arg6, var19 >> 16, var21 >> 16);
+									flatRaster(Pix2D.pixels, var27, arg6, var19 >> 16, var21 >> 16);
 									var21 += var8;
 									var19 += var7;
-									var27 += Pix2D.field2749;
+									var27 += Pix2D.width;
 								}
 							}
-							method352(Pix2D.pixels, var27, arg6, var19 >> 16, var20 >> 16);
+							flatRaster(Pix2D.pixels, var27, arg6, var19 >> 16, var20 >> 16);
 							var20 += var9;
 							var19 += var7;
-							var27 += Pix2D.field2749;
+							var27 += Pix2D.width;
 						}
 					}
 				}
@@ -1986,7 +1986,7 @@ public final class Pix3D {
 					if (arg1 != arg2 && var7 < var8 || arg1 == arg2 && var7 > var9) {
 						int var31 = arg0 - arg2;
 						int var32 = arg2 - arg1;
-						int var33 = field770[arg1];
+						int var33 = scanline[arg1];
 						while (true) {
 							var32--;
 							if (var32 < 0) {
@@ -1995,21 +1995,21 @@ public final class Pix3D {
 									if (var31 < 0) {
 										return;
 									}
-									method352(Pix2D.pixels, var33, arg6, var29 >> 16, var30 >> 16);
+									flatRaster(Pix2D.pixels, var33, arg6, var29 >> 16, var30 >> 16);
 									var29 += var7;
 									var30 += var9;
-									var33 += Pix2D.field2749;
+									var33 += Pix2D.width;
 								}
 							}
-							method352(Pix2D.pixels, var33, arg6, var29 >> 16, var28 >> 16);
+							flatRaster(Pix2D.pixels, var33, arg6, var29 >> 16, var28 >> 16);
 							var29 += var7;
 							var28 += var8;
-							var33 += Pix2D.field2749;
+							var33 += Pix2D.width;
 						}
 					} else {
 						int var34 = arg0 - arg2;
 						int var35 = arg2 - arg1;
-						int var36 = field770[arg1];
+						int var36 = scanline[arg1];
 						while (true) {
 							var35--;
 							if (var35 < 0) {
@@ -2018,16 +2018,16 @@ public final class Pix3D {
 									if (var34 < 0) {
 										return;
 									}
-									method352(Pix2D.pixels, var36, arg6, var30 >> 16, var29 >> 16);
+									flatRaster(Pix2D.pixels, var36, arg6, var30 >> 16, var29 >> 16);
 									var29 += var7;
 									var30 += var9;
-									var36 += Pix2D.field2749;
+									var36 += Pix2D.width;
 								}
 							}
-							method352(Pix2D.pixels, var36, arg6, var28 >> 16, var29 >> 16);
+							flatRaster(Pix2D.pixels, var36, arg6, var28 >> 16, var29 >> 16);
 							var29 += var7;
 							var28 += var8;
-							var36 += Pix2D.field2749;
+							var36 += Pix2D.width;
 						}
 					}
 				} else {
@@ -2046,7 +2046,7 @@ public final class Pix3D {
 					if (var7 < var8) {
 						int var40 = arg2 - arg0;
 						int var41 = arg0 - arg1;
-						int var42 = field770[arg1];
+						int var42 = scanline[arg1];
 						while (true) {
 							var41--;
 							if (var41 < 0) {
@@ -2055,21 +2055,21 @@ public final class Pix3D {
 									if (var40 < 0) {
 										return;
 									}
-									method352(Pix2D.pixels, var42, arg6, var39 >> 16, var37 >> 16);
+									flatRaster(Pix2D.pixels, var42, arg6, var39 >> 16, var37 >> 16);
 									var39 += var9;
 									var37 += var8;
-									var42 += Pix2D.field2749;
+									var42 += Pix2D.width;
 								}
 							}
-							method352(Pix2D.pixels, var42, arg6, var38 >> 16, var37 >> 16);
+							flatRaster(Pix2D.pixels, var42, arg6, var38 >> 16, var37 >> 16);
 							var38 += var7;
 							var37 += var8;
-							var42 += Pix2D.field2749;
+							var42 += Pix2D.width;
 						}
 					} else {
 						int var43 = arg2 - arg0;
 						int var44 = arg0 - arg1;
-						int var45 = field770[arg1];
+						int var45 = scanline[arg1];
 						while (true) {
 							var44--;
 							if (var44 < 0) {
@@ -2078,16 +2078,16 @@ public final class Pix3D {
 									if (var43 < 0) {
 										return;
 									}
-									method352(Pix2D.pixels, var45, arg6, var37 >> 16, var39 >> 16);
+									flatRaster(Pix2D.pixels, var45, arg6, var37 >> 16, var39 >> 16);
 									var39 += var9;
 									var37 += var8;
-									var45 += Pix2D.field2749;
+									var45 += Pix2D.width;
 								}
 							}
-							method352(Pix2D.pixels, var45, arg6, var37 >> 16, var38 >> 16);
+							flatRaster(Pix2D.pixels, var45, arg6, var37 >> 16, var38 >> 16);
 							var38 += var7;
 							var37 += var8;
-							var45 += Pix2D.field2749;
+							var45 += Pix2D.width;
 						}
 					}
 				}
@@ -2115,7 +2115,7 @@ public final class Pix3D {
 				if (var8 < var9) {
 					int var49 = arg1 - arg0;
 					int var50 = arg0 - arg2;
-					int var51 = field770[arg2];
+					int var51 = scanline[arg2];
 					while (true) {
 						var50--;
 						if (var50 < 0) {
@@ -2124,21 +2124,21 @@ public final class Pix3D {
 								if (var49 < 0) {
 									return;
 								}
-								method352(Pix2D.pixels, var51, arg6, var47 >> 16, var48 >> 16);
+								flatRaster(Pix2D.pixels, var51, arg6, var47 >> 16, var48 >> 16);
 								var47 += var8;
 								var48 += var7;
-								var51 += Pix2D.field2749;
+								var51 += Pix2D.width;
 							}
 						}
-						method352(Pix2D.pixels, var51, arg6, var47 >> 16, var46 >> 16);
+						flatRaster(Pix2D.pixels, var51, arg6, var47 >> 16, var46 >> 16);
 						var47 += var8;
 						var46 += var9;
-						var51 += Pix2D.field2749;
+						var51 += Pix2D.width;
 					}
 				} else {
 					int var52 = arg1 - arg0;
 					int var53 = arg0 - arg2;
-					int var54 = field770[arg2];
+					int var54 = scanline[arg2];
 					while (true) {
 						var53--;
 						if (var53 < 0) {
@@ -2147,16 +2147,16 @@ public final class Pix3D {
 								if (var52 < 0) {
 									return;
 								}
-								method352(Pix2D.pixels, var54, arg6, var48 >> 16, var47 >> 16);
+								flatRaster(Pix2D.pixels, var54, arg6, var48 >> 16, var47 >> 16);
 								var47 += var8;
 								var48 += var7;
-								var54 += Pix2D.field2749;
+								var54 += Pix2D.width;
 							}
 						}
-						method352(Pix2D.pixels, var54, arg6, var46 >> 16, var47 >> 16);
+						flatRaster(Pix2D.pixels, var54, arg6, var46 >> 16, var47 >> 16);
 						var47 += var8;
 						var46 += var9;
-						var54 += Pix2D.field2749;
+						var54 += Pix2D.width;
 					}
 				}
 			} else {
@@ -2175,7 +2175,7 @@ public final class Pix3D {
 				if (var8 < var9) {
 					int var58 = arg0 - arg1;
 					int var59 = arg1 - arg2;
-					int var60 = field770[arg2];
+					int var60 = scanline[arg2];
 					while (true) {
 						var59--;
 						if (var59 < 0) {
@@ -2184,21 +2184,21 @@ public final class Pix3D {
 								if (var58 < 0) {
 									return;
 								}
-								method352(Pix2D.pixels, var60, arg6, var57 >> 16, var55 >> 16);
+								flatRaster(Pix2D.pixels, var60, arg6, var57 >> 16, var55 >> 16);
 								var57 += var7;
 								var55 += var9;
-								var60 += Pix2D.field2749;
+								var60 += Pix2D.width;
 							}
 						}
-						method352(Pix2D.pixels, var60, arg6, var56 >> 16, var55 >> 16);
+						flatRaster(Pix2D.pixels, var60, arg6, var56 >> 16, var55 >> 16);
 						var56 += var8;
 						var55 += var9;
-						var60 += Pix2D.field2749;
+						var60 += Pix2D.width;
 					}
 				} else {
 					int var61 = arg0 - arg1;
 					int var62 = arg1 - arg2;
-					int var63 = field770[arg2];
+					int var63 = scanline[arg2];
 					while (true) {
 						var62--;
 						if (var62 < 0) {
@@ -2207,16 +2207,16 @@ public final class Pix3D {
 								if (var61 < 0) {
 									return;
 								}
-								method352(Pix2D.pixels, var63, arg6, var55 >> 16, var57 >> 16);
+								flatRaster(Pix2D.pixels, var63, arg6, var55 >> 16, var57 >> 16);
 								var57 += var7;
 								var55 += var9;
-								var63 += Pix2D.field2749;
+								var63 += Pix2D.width;
 							}
 						}
-						method352(Pix2D.pixels, var63, arg6, var55 >> 16, var56 >> 16);
+						flatRaster(Pix2D.pixels, var63, arg6, var55 >> 16, var56 >> 16);
 						var56 += var8;
 						var55 += var9;
-						var63 += Pix2D.field2749;
+						var63 += Pix2D.width;
 					}
 				}
 			}
@@ -2225,11 +2225,11 @@ public final class Pix3D {
 
 	@ObfuscatedName("eb.f()[I")
 	public static int[] saveClipping() {
-		return field770;
+		return scanline;
 	}
 
 	@ObfuscatedName("eb.a(DII)V")
-	public static void method368(double arg0) {
+	public static void initColourTable2(double arg0) {
 		double var2 = arg0 + Math.random() * 0.03D - 0.015D;
 		int var4 = 0;
 		for (int var5 = 0; var5 < 512; var5++) {
@@ -2288,7 +2288,7 @@ public final class Pix3D {
 				int var28 = (int) (var15 * 256.0D);
 				int var29 = (int) (var17 * 256.0D);
 				int var30 = (var27 << 16) + (var28 << 8) + var29;
-				int var31 = method361(var30, var2);
+				int var31 = gammaCorrect(var30, var2);
 				if (var31 == 0) {
 					var31 = 1;
 				}
@@ -2299,7 +2299,7 @@ public final class Pix3D {
 
 	@ObfuscatedName("eb.e()V")
 	public static void unload() {
-		field770 = null;
+		scanline = null;
 		colourTable = null;
 		textureManager = null;
 		divTable = null;

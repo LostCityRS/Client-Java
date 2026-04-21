@@ -185,7 +185,7 @@ public final class Model extends ModelSource {
 	public int[] field2225;
 
 	@ObfuscatedName("pa.Wb")
-	public PointNormal[] field2215;
+	public PointNormal[] pointNormal;
 
 	@ObfuscatedName("pa.Ub")
 	public PointNormal[] field2213;
@@ -272,15 +272,15 @@ public final class Model extends ModelSource {
 			return;
 		}
 		this.field2210 = 1;
-		super.field3135 = 0;
+		super.minY = 0;
 		this.field2216 = 0;
 		this.field2212 = 0;
 		for (int var1 = 0; var1 < this.numPoints; var1++) {
 			int var2 = this.pointX[var1];
 			int var3 = this.pointY[var1];
 			int var4 = this.pointZ[var1];
-			if (-var3 > super.field3135) {
-				super.field3135 = -var3;
+			if (-var3 > super.minY) {
+				super.minY = -var3;
 			}
 			if (var3 > this.field2216) {
 				this.field2216 = var3;
@@ -291,13 +291,13 @@ public final class Model extends ModelSource {
 			}
 		}
 		this.field2212 = (int) (Math.sqrt((double) this.field2212) + 0.99D);
-		this.field2230 = (int) (Math.sqrt((double) (this.field2212 * this.field2212 + super.field3135 * super.field3135)) + 0.99D);
+		this.field2230 = (int) (Math.sqrt((double) (this.field2212 * this.field2212 + super.minY * super.minY)) + 0.99D);
 		this.field2204 = this.field2230 + (int) (Math.sqrt((double) (this.field2216 * this.field2216 + this.field2212 * this.field2212)) + 0.99D);
 	}
 
 	@ObfuscatedName("pa.a(IIIIIIIII)V")
 	@Override
-	public void method767(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void worldRender(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		if (this.field2210 != 1) {
 			this.calcBoundingCylinder();
 		}
@@ -310,25 +310,25 @@ public final class Model extends ModelSource {
 		}
 		int var14 = arg3 * arg7 + arg4 * arg5 >> 16;
 		int var15 = var14 - this.field2212 << 9;
-		if (var15 / var13 >= Pix3D.field766) {
+		if (var15 / var13 >= Pix3D.maxX) {
 			return;
 		}
 		int var16 = this.field2212 + var14 << 9;
-		if (var16 / var13 <= Pix3D.field774) {
+		if (var16 / var13 <= Pix3D.minX) {
 			return;
 		}
 		int var17 = arg2 * arg6 - arg1 * var10 >> 16;
 		int var18 = this.field2212 * arg1 >> 16;
 		int var19 = var17 + var18 << 9;
-		if (var19 / var13 <= Pix3D.field767) {
+		if (var19 / var13 <= Pix3D.minY) {
 			return;
 		}
-		int var20 = (super.field3135 * arg2 >> 16) + var18;
+		int var20 = (super.minY * arg2 >> 16) + var18;
 		int var21 = var17 - var20 << 9;
-		if (var21 / var13 >= Pix3D.field773) {
+		if (var21 / var13 >= Pix3D.maxY) {
 			return;
 		}
-		int var22 = (super.field3135 * arg1 >> 16) + var12;
+		int var22 = (super.minY * arg1 >> 16) + var12;
 		boolean var23 = false;
 		boolean var24 = false;
 		if (var11 - var22 <= 50) {
@@ -472,10 +472,10 @@ public final class Model extends ModelSource {
 			this.field2222 = new int[this.numFaces];
 			this.field2227 = new int[this.numFaces];
 		}
-		if (this.field2215 == null) {
-			this.field2215 = new PointNormal[this.numPoints];
+		if (this.pointNormal == null) {
+			this.pointNormal = new PointNormal[this.numPoints];
 			for (int var9 = 0; var9 < this.numPoints; var9++) {
-				this.field2215[var9] = new PointNormal();
+				this.pointNormal[var9] = new PointNormal();
 			}
 		}
 		for (int var10 = 0; var10 < this.numFaces; var10++) {
@@ -503,21 +503,21 @@ public final class Model extends ModelSource {
 			int var25 = var21 * 256 / var23;
 			int var26 = var22 * 256 / var23;
 			if (this.faceRenderType == null || (this.faceRenderType[var10] & 0x1) == 0) {
-				PointNormal var27 = this.field2215[var11];
-				var27.field2312 += var24;
-				var27.field2307 += var25;
-				var27.field2314 += var26;
-				var27.field2328++;
-				PointNormal var28 = this.field2215[var12];
-				var28.field2312 += var24;
-				var28.field2307 += var25;
-				var28.field2314 += var26;
-				var28.field2328++;
-				PointNormal var29 = this.field2215[var13];
-				var29.field2312 += var24;
-				var29.field2307 += var25;
-				var29.field2314 += var26;
-				var29.field2328++;
+				PointNormal var27 = this.pointNormal[var11];
+				var27.x += var24;
+				var27.y += var25;
+				var27.z += var26;
+				var27.w++;
+				PointNormal var28 = this.pointNormal[var12];
+				var28.x += var24;
+				var28.y += var25;
+				var28.z += var26;
+				var28.w++;
+				PointNormal var29 = this.pointNormal[var13];
+				var29.x += var24;
+				var29.y += var25;
+				var29.z += var26;
+				var29.w++;
 			} else {
 				int var30 = (arg4 * var26 + arg2 * var24 + arg3 * var25) / (var8 / 2 + var8) + arg0;
 				this.field2225[var10] = method784(this.faceColour[var10], var30, this.faceRenderType[var10]);
@@ -529,12 +529,12 @@ public final class Model extends ModelSource {
 		}
 		this.field2213 = new PointNormal[this.numPoints];
 		for (int var31 = 0; var31 < this.numPoints; var31++) {
-			PointNormal var32 = this.field2215[var31];
+			PointNormal var32 = this.pointNormal[var31];
 			PointNormal var33 = this.field2213[var31] = new PointNormal();
-			var33.field2312 = var32.field2312;
-			var33.field2307 = var32.field2307;
-			var33.field2314 = var32.field2314;
-			var33.field2328 = var32.field2328;
+			var33.x = var32.x;
+			var33.y = var32.y;
+			var33.z = var32.z;
+			var33.w = var32.w;
 		}
 		this.field2234 = (arg0 << 16) + (var8 & 0xFFFF);
 	}
@@ -550,7 +550,7 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.g(I)V")
 	public void method772(int arg0) {
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2210 = 0;
 		int var2 = field2256[arg0];
 		int var3 = field2258[arg0];
@@ -596,30 +596,30 @@ public final class Model extends ModelSource {
 			int var9 = this.faceVertexC[var6];
 			if (this.faceRenderType == null) {
 				int var10 = this.faceColour[var6];
-				PointNormal var11 = this.field2215[var7];
-				int var12 = (var11.field2314 * arg4 + var11.field2312 * arg2 + var11.field2307 * arg3) / (var11.field2328 * arg1) + arg0;
+				PointNormal var11 = this.pointNormal[var7];
+				int var12 = (var11.z * arg4 + var11.x * arg2 + var11.y * arg3) / (var11.w * arg1) + arg0;
 				this.field2225[var6] = method784(var10, var12, 0);
-				PointNormal var13 = this.field2215[var8];
-				int var14 = (var13.field2314 * arg4 + var13.field2312 * arg2 + var13.field2307 * arg3) / (var13.field2328 * arg1) + arg0;
+				PointNormal var13 = this.pointNormal[var8];
+				int var14 = (var13.z * arg4 + var13.x * arg2 + var13.y * arg3) / (var13.w * arg1) + arg0;
 				this.field2222[var6] = method784(var10, var14, 0);
-				PointNormal var15 = this.field2215[var9];
-				int var16 = (var15.field2314 * arg4 + var15.field2312 * arg2 + var15.field2307 * arg3) / (var15.field2328 * arg1) + arg0;
+				PointNormal var15 = this.pointNormal[var9];
+				int var16 = (var15.z * arg4 + var15.x * arg2 + var15.y * arg3) / (var15.w * arg1) + arg0;
 				this.field2227[var6] = method784(var10, var16, 0);
 			} else if ((this.faceRenderType[var6] & 0x1) == 0) {
 				int var17 = this.faceColour[var6];
 				int var18 = this.faceRenderType[var6];
-				PointNormal var19 = this.field2215[var7];
-				int var20 = (var19.field2314 * arg4 + var19.field2312 * arg2 + var19.field2307 * arg3) / (var19.field2328 * arg1) + arg0;
+				PointNormal var19 = this.pointNormal[var7];
+				int var20 = (var19.z * arg4 + var19.x * arg2 + var19.y * arg3) / (var19.w * arg1) + arg0;
 				this.field2225[var6] = method784(var17, var20, var18);
-				PointNormal var21 = this.field2215[var8];
-				int var22 = (var21.field2314 * arg4 + var21.field2312 * arg2 + var21.field2307 * arg3) / (var21.field2328 * arg1) + arg0;
+				PointNormal var21 = this.pointNormal[var8];
+				int var22 = (var21.z * arg4 + var21.x * arg2 + var21.y * arg3) / (var21.w * arg1) + arg0;
 				this.field2222[var6] = method784(var17, var22, var18);
-				PointNormal var23 = this.field2215[var9];
-				int var24 = (var23.field2314 * arg4 + var23.field2312 * arg2 + var23.field2307 * arg3) / (var23.field2328 * arg1) + arg0;
+				PointNormal var23 = this.pointNormal[var9];
+				int var24 = (var23.z * arg4 + var23.x * arg2 + var23.y * arg3) / (var23.w * arg1) + arg0;
 				this.field2227[var6] = method784(var17, var24, var18);
 			}
 		}
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2213 = null;
 		this.vertexLabel = null;
 		this.faceLabel = null;
@@ -642,7 +642,7 @@ public final class Model extends ModelSource {
 			this.animate(arg0, arg1);
 			return;
 		}
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2210 = 0;
 		AnimFrame var6 = arg0.list[arg1];
 		AnimFrame var7 = arg2.list[arg3];
@@ -1168,14 +1168,14 @@ public final class Model extends ModelSource {
 					this.faceRenderType[var7] = arg0.faceRenderType[var7];
 				}
 			}
-			this.field2215 = new PointNormal[this.numPoints];
+			this.pointNormal = new PointNormal[this.numPoints];
 			for (int var8 = 0; var8 < this.numPoints; var8++) {
-				PointNormal var9 = this.field2215[var8] = new PointNormal();
-				PointNormal var10 = arg0.field2215[var8];
-				var9.field2312 = var10.field2312;
-				var9.field2307 = var10.field2307;
-				var9.field2314 = var10.field2314;
-				var9.field2328 = var10.field2328;
+				PointNormal var9 = this.pointNormal[var8] = new PointNormal();
+				PointNormal var10 = arg0.pointNormal[var8];
+				var9.x = var10.x;
+				var9.y = var10.y;
+				var9.z = var10.z;
+				var9.w = var10.w;
 			}
 			this.field2213 = arg0.field2213;
 		} else {
@@ -1423,7 +1423,7 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.e()V")
 	public void rotate90() {
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2210 = 0;
 		for (int var1 = 0; var1 < this.numPoints; var1++) {
 			int var2 = this.pointX[var1];
@@ -1444,9 +1444,9 @@ public final class Model extends ModelSource {
 		int var9 = field2264[var6];
 		int var10 = field2264[var7];
 		if (this.faceAlpha == null) {
-			Pix3D.field765 = 0;
+			Pix3D.trans = 0;
 		} else {
-			Pix3D.field765 = this.faceAlpha[arg0];
+			Pix3D.trans = this.faceAlpha[arg0];
 		}
 		if (var8 >= 50) {
 			field2268[0] = field2250[var5];
@@ -1519,10 +1519,10 @@ public final class Model extends ModelSource {
 		int var29 = field2246[0];
 		int var30 = field2246[1];
 		int var31 = field2246[2];
-		Pix3D.field779 = false;
+		Pix3D.hclip = false;
 		if (var4 == 3) {
 			if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.width || var27 > Pix3D.width || var28 > Pix3D.width) {
-				Pix3D.field779 = true;
+				Pix3D.hclip = true;
 			}
 			int var32;
 			if (this.faceRenderType == null) {
@@ -1531,28 +1531,28 @@ public final class Model extends ModelSource {
 				var32 = this.faceRenderType[arg0] & 0x3;
 			}
 			if (var32 == 0) {
-				Pix3D.method360(var29, var30, var31, var26, var27, var28, field2263[0], field2263[1], field2263[2]);
+				Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, field2263[0], field2263[1], field2263[2]);
 			} else if (var32 == 1) {
-				Pix3D.method366(var29, var30, var31, var26, var27, var28, field2243[this.field2225[arg0]]);
+				Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, field2243[this.field2225[arg0]]);
 			} else if (var32 == 2) {
 				int var33 = this.faceRenderType[arg0] >> 2;
 				int var34 = this.faceTextureP[var33];
 				int var35 = this.faceTextureM[var33];
 				int var36 = this.faceTextureN[var33];
-				Pix3D.method353(var29, var30, var31, var26, var27, var28, field2263[0], field2263[1], field2263[2], field2266[var34], field2266[var35], field2266[var36], field2244[var34], field2244[var35], field2244[var36], field2264[var34], field2264[var35], field2264[var36], this.faceColour[arg0]);
+				Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, field2263[0], field2263[1], field2263[2], field2266[var34], field2266[var35], field2266[var36], field2244[var34], field2244[var35], field2244[var36], field2264[var34], field2264[var35], field2264[var36], this.faceColour[arg0]);
 			} else if (var32 == 3) {
 				int var37 = this.faceRenderType[arg0] >> 2;
 				int var38 = this.faceTextureP[var37];
 				int var39 = this.faceTextureM[var37];
 				int var40 = this.faceTextureN[var37];
-				Pix3D.method353(var29, var30, var31, var26, var27, var28, this.field2225[arg0], this.field2225[arg0], this.field2225[arg0], field2266[var38], field2266[var39], field2266[var40], field2244[var38], field2244[var39], field2244[var40], field2264[var38], field2264[var39], field2264[var40], this.faceColour[arg0]);
+				Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, this.field2225[arg0], this.field2225[arg0], this.field2225[arg0], field2266[var38], field2266[var39], field2266[var40], field2244[var38], field2244[var39], field2244[var40], field2264[var38], field2264[var39], field2264[var40], this.faceColour[arg0]);
 			}
 		}
 		if (var4 != 4) {
 			return;
 		}
 		if (var26 < 0 || var27 < 0 || var28 < 0 || var26 > Pix3D.width || var27 > Pix3D.width || var28 > Pix3D.width || field2268[3] < 0 || field2268[3] > Pix3D.width) {
-			Pix3D.field779 = true;
+			Pix3D.hclip = true;
 		}
 		int var41;
 		if (this.faceRenderType == null) {
@@ -1561,14 +1561,14 @@ public final class Model extends ModelSource {
 			var41 = this.faceRenderType[arg0] & 0x3;
 		}
 		if (var41 == 0) {
-			Pix3D.method360(var29, var30, var31, var26, var27, var28, field2263[0], field2263[1], field2263[2]);
-			Pix3D.method360(var29, var31, field2246[3], var26, var28, field2268[3], field2263[0], field2263[2], field2263[3]);
+			Pix3D.gouraudTriangle(var29, var30, var31, var26, var27, var28, field2263[0], field2263[1], field2263[2]);
+			Pix3D.gouraudTriangle(var29, var31, field2246[3], var26, var28, field2268[3], field2263[0], field2263[2], field2263[3]);
 			return;
 		}
 		if (var41 == 1) {
 			int var42 = field2243[this.field2225[arg0]];
-			Pix3D.method366(var29, var30, var31, var26, var27, var28, var42);
-			Pix3D.method366(var29, var31, field2246[3], var26, var28, field2268[3], var42);
+			Pix3D.flatTriangle(var29, var30, var31, var26, var27, var28, var42);
+			Pix3D.flatTriangle(var29, var31, field2246[3], var26, var28, field2268[3], var42);
 			return;
 		}
 		if (var41 == 2) {
@@ -1576,8 +1576,8 @@ public final class Model extends ModelSource {
 			int var44 = this.faceTextureP[var43];
 			int var45 = this.faceTextureM[var43];
 			int var46 = this.faceTextureN[var43];
-			Pix3D.method353(var29, var30, var31, var26, var27, var28, field2263[0], field2263[1], field2263[2], field2266[var44], field2266[var45], field2266[var46], field2244[var44], field2244[var45], field2244[var46], field2264[var44], field2264[var45], field2264[var46], this.faceColour[arg0]);
-			Pix3D.method353(var29, var31, field2246[3], var26, var28, field2268[3], field2263[0], field2263[2], field2263[3], field2266[var44], field2266[var45], field2266[var46], field2244[var44], field2244[var45], field2244[var46], field2264[var44], field2264[var45], field2264[var46], this.faceColour[arg0]);
+			Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, field2263[0], field2263[1], field2263[2], field2266[var44], field2266[var45], field2266[var46], field2244[var44], field2244[var45], field2244[var46], field2264[var44], field2264[var45], field2264[var46], this.faceColour[arg0]);
+			Pix3D.textureTriangle(var29, var31, field2246[3], var26, var28, field2268[3], field2263[0], field2263[2], field2263[3], field2266[var44], field2266[var45], field2266[var46], field2244[var44], field2244[var45], field2244[var46], field2264[var44], field2264[var45], field2264[var46], this.faceColour[arg0]);
 			return;
 		}
 		if (var41 != 3) {
@@ -1587,8 +1587,8 @@ public final class Model extends ModelSource {
 		int var48 = this.faceTextureP[var47];
 		int var49 = this.faceTextureM[var47];
 		int var50 = this.faceTextureN[var47];
-		Pix3D.method353(var29, var30, var31, var26, var27, var28, this.field2225[arg0], this.field2225[arg0], this.field2225[arg0], field2266[var48], field2266[var49], field2266[var50], field2244[var48], field2244[var49], field2244[var50], field2264[var48], field2264[var49], field2264[var50], this.faceColour[arg0]);
-		Pix3D.method353(var29, var31, field2246[3], var26, var28, field2268[3], this.field2225[arg0], this.field2225[arg0], this.field2225[arg0], field2266[var48], field2266[var49], field2266[var50], field2244[var48], field2244[var49], field2244[var50], field2264[var48], field2264[var49], field2264[var50], this.faceColour[arg0]);
+		Pix3D.textureTriangle(var29, var30, var31, var26, var27, var28, this.field2225[arg0], this.field2225[arg0], this.field2225[arg0], field2266[var48], field2266[var49], field2266[var50], field2244[var48], field2244[var49], field2244[var50], field2264[var48], field2264[var49], field2264[var50], this.faceColour[arg0]);
+		Pix3D.textureTriangle(var29, var31, field2246[3], var26, var28, field2268[3], this.field2225[arg0], this.field2225[arg0], this.field2225[arg0], field2266[var48], field2266[var49], field2266[var50], field2244[var48], field2244[var49], field2244[var50], field2264[var48], field2264[var49], field2264[var50], this.faceColour[arg0]);
 	}
 
 	@ObfuscatedName("pa.a(ZZI)V")
@@ -1806,7 +1806,7 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.f()V")
 	public void mirror() {
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2210 = 0;
 		for (int var1 = 0; var1 < this.numPoints; var1++) {
 			this.pointZ[var1] = -this.pointZ[var1];
@@ -1820,7 +1820,7 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.g()V")
 	public void rotate180() {
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2210 = 0;
 		for (int var1 = 0; var1 < this.numPoints; var1++) {
 			this.pointX[var1] = -this.pointX[var1];
@@ -1879,7 +1879,7 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.b(III)V")
 	public void resize(int arg0, int arg1, int arg2) {
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2210 = 0;
 		for (int var4 = 0; var4 < this.numPoints; var4++) {
 			this.pointX[var4] = this.pointX[var4] * arg0 / 128;
@@ -1894,7 +1894,7 @@ public final class Model extends ModelSource {
 			return;
 		}
 		this.field2210 = 3;
-		super.field3135 = 0;
+		super.minY = 0;
 		this.field2216 = 0;
 		this.field2212 = 999999;
 		this.field2204 = -999999;
@@ -1916,8 +1916,8 @@ public final class Model extends ModelSource {
 			if (var4 > this.field2230) {
 				this.field2230 = var4;
 			}
-			if (-var3 > super.field3135) {
-				super.field3135 = -var3;
+			if (-var3 > super.minY) {
+				super.minY = -var3;
 			}
 			if (var3 > this.field2216) {
 				this.field2216 = var3;
@@ -1934,11 +1934,11 @@ public final class Model extends ModelSource {
 		int var2 = this.faceVertexA[arg0];
 		int var3 = this.faceVertexB[arg0];
 		int var4 = this.faceVertexC[arg0];
-		Pix3D.field779 = field2242[arg0];
+		Pix3D.hclip = field2242[arg0];
 		if (this.faceAlpha == null) {
-			Pix3D.field765 = 0;
+			Pix3D.trans = 0;
 		} else {
-			Pix3D.field765 = this.faceAlpha[arg0];
+			Pix3D.trans = this.faceAlpha[arg0];
 		}
 		int var5;
 		if (this.faceRenderType == null) {
@@ -1947,27 +1947,27 @@ public final class Model extends ModelSource {
 			var5 = this.faceRenderType[arg0] & 0x3;
 		}
 		if (var5 == 0) {
-			Pix3D.method360(field2245[var2], field2245[var3], field2245[var4], field2250[var2], field2250[var3], field2250[var4], this.field2225[arg0], this.field2222[arg0], this.field2227[arg0]);
+			Pix3D.gouraudTriangle(field2245[var2], field2245[var3], field2245[var4], field2250[var2], field2250[var3], field2250[var4], this.field2225[arg0], this.field2222[arg0], this.field2227[arg0]);
 		} else if (var5 == 1) {
-			Pix3D.method366(field2245[var2], field2245[var3], field2245[var4], field2250[var2], field2250[var3], field2250[var4], field2243[this.field2225[arg0]]);
+			Pix3D.flatTriangle(field2245[var2], field2245[var3], field2245[var4], field2250[var2], field2250[var3], field2250[var4], field2243[this.field2225[arg0]]);
 		} else if (var5 == 2) {
 			int var6 = this.faceRenderType[arg0] >> 2;
 			int var7 = this.faceTextureP[var6];
 			int var8 = this.faceTextureM[var6];
 			int var9 = this.faceTextureN[var6];
-			Pix3D.method353(field2245[var2], field2245[var3], field2245[var4], field2250[var2], field2250[var3], field2250[var4], this.field2225[arg0], this.field2222[arg0], this.field2227[arg0], field2266[var7], field2266[var8], field2266[var9], field2244[var7], field2244[var8], field2244[var9], field2264[var7], field2264[var8], field2264[var9], this.faceColour[arg0]);
+			Pix3D.textureTriangle(field2245[var2], field2245[var3], field2245[var4], field2250[var2], field2250[var3], field2250[var4], this.field2225[arg0], this.field2222[arg0], this.field2227[arg0], field2266[var7], field2266[var8], field2266[var9], field2244[var7], field2244[var8], field2244[var9], field2264[var7], field2264[var8], field2264[var9], this.faceColour[arg0]);
 		} else if (var5 == 3) {
 			int var10 = this.faceRenderType[arg0] >> 2;
 			int var11 = this.faceTextureP[var10];
 			int var12 = this.faceTextureM[var10];
 			int var13 = this.faceTextureN[var10];
-			Pix3D.method353(field2245[var2], field2245[var3], field2245[var4], field2250[var2], field2250[var3], field2250[var4], this.field2225[arg0], this.field2225[arg0], this.field2225[arg0], field2266[var11], field2266[var12], field2266[var13], field2244[var11], field2244[var12], field2244[var13], field2264[var11], field2264[var12], field2264[var13], this.faceColour[arg0]);
+			Pix3D.textureTriangle(field2245[var2], field2245[var3], field2245[var4], field2250[var2], field2250[var3], field2250[var4], this.field2225[arg0], this.field2225[arg0], this.field2225[arg0], field2266[var11], field2266[var12], field2266[var13], field2244[var11], field2244[var12], field2244[var13], field2264[var11], field2264[var12], field2264[var13], this.faceColour[arg0]);
 		}
 	}
 
 	@ObfuscatedName("pa.i()V")
 	public void rotate270() {
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2210 = 0;
 		for (int var1 = 0; var1 < this.numPoints; var1++) {
 			int var2 = this.pointZ[var1];
@@ -1981,7 +1981,7 @@ public final class Model extends ModelSource {
 		if (this.labelVertices == null || arg1 == -1) {
 			return;
 		}
-		this.field2215 = null;
+		this.pointNormal = null;
 		this.field2210 = 0;
 		AnimFrame var3 = arg0.list[arg1];
 		AnimBase var4 = var3.field2121;

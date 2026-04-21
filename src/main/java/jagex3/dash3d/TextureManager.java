@@ -42,7 +42,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("mc.a(II)[I")
 	@Override
-	public int[] method692(int arg0) {
+	public int[] getTexels(int arg0) {
 		Texture var2 = this.field1867[arg0];
 		if (var2 != null) {
 			if (var2.field2194 != null) {
@@ -74,7 +74,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("mc.a(BI)Z")
 	@Override
-	public boolean method695(int arg0) {
+	public boolean isOpaque(int arg0) {
 		return this.field1867[arg0].field2198;
 	}
 
@@ -97,7 +97,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("mc.a(IB)Z")
 	@Override
-	public boolean method698(int arg0) {
+	public boolean isLowMem(int arg0) {
 		return this.field1875 == 64;
 	}
 

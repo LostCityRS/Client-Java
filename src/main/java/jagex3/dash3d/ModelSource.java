@@ -7,14 +7,14 @@ import jagex3.datastruct.Linkable2;
 public abstract class ModelSource extends Linkable2 {
 
 	@ObfuscatedName("vb.yb")
-	public int field3135 = 1000;
+	public int minY = 1000;
 
 	@ObfuscatedName("vb.a(IIIIIIIII)V")
-	public void method767(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void worldRender(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		Model var10 = this.getTempModel();
 		if (var10 != null) {
-			this.field3135 = var10.field3135;
-			var10.method767(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+			this.minY = var10.minY;
+			var10.worldRender(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 		}
 	}
 

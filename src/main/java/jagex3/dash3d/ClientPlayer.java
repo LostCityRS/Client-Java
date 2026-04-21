@@ -82,7 +82,7 @@ public final class ClientPlayer extends ClientEntity {
 			return null;
 		}
 		var3.calcBoundingCylinder();
-		super.height = var3.field3135;
+		super.height = var3.minY;
 		if (!this.field95 && super.spotanimId != -1 && super.spotanimFrame != -1) {
 			Model var4 = SpotType.list(super.spotanimId).getTempModel2(super.spotanimFrame);
 			if (var4 != null) {
@@ -164,7 +164,7 @@ public final class ClientPlayer extends ClientEntity {
 		int[] var9 = new int[5];
 		for (int var10 = 0; var10 < 5; var10++) {
 			int var11 = arg0.g1();
-			if (var11 < 0 || PlayerModel.field2894[var10].length <= var11) {
+			if (var11 < 0 || PlayerModel.recol1d[var10].length <= var11) {
 				var11 = 0;
 			}
 			var9[var10] = var11;

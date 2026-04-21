@@ -2669,7 +2669,7 @@ public final class Client extends GameShell {
 		if ((arg1 & 0x100) != 0) {
 			int var3 = in.g1_alt3();
 			int var4 = in.g1_alt1();
-			arg0.method727(var4, loopCycle, var3);
+			arg0.addHitmark(var4, loopCycle, var3);
 			arg0.combatCycle = loopCycle + 300;
 			arg0.field2004 = in.g1_alt3();
 			arg0.field1975 = in.g1_alt1();
@@ -2695,7 +2695,7 @@ public final class Client extends GameShell {
 		if ((arg1 & 0x40) != 0) {
 			int var7 = in.g1();
 			int var8 = in.g1_alt1();
-			arg0.method727(var8, loopCycle, var7);
+			arg0.addHitmark(var8, loopCycle, var7);
 			arg0.combatCycle = loopCycle + 300;
 			arg0.field2004 = in.g1_alt1();
 			arg0.field1975 = in.g1_alt1();
@@ -3043,7 +3043,7 @@ public final class Client extends GameShell {
 								var38 = var11.colour;
 								var37 = Text.PLEASEWAIT;
 							}
-							if (Pix2D.field2749 == 479) {
+							if (Pix2D.width == 479) {
 								if (var38 == 16776960) {
 									var38 = 255;
 								}
@@ -3194,9 +3194,9 @@ public final class Client extends GameShell {
 							if (var11.v3) {
 								var59.calcBoundingCylinder();
 								if (var11.orthog) {
-									var59.objRenderOrthog(var64, var62, var61, var65, var59.field3135 / 2 + var63 + var69, var70 - -var63, var66);
+									var59.objRenderOrthog(var64, var62, var61, var65, var59.minY / 2 + var63 + var69, var70 - -var63, var66);
 								} else {
-									var59.objRender(var64, var62, var61, var65, var59.field3135 / 2 + var69 + var63, var63 + var70);
+									var59.objRender(var64, var62, var61, var65, var59.minY / 2 + var69 + var63, var63 + var70);
 								}
 							} else {
 								var59.objRender(var64, 0, var61, 0, var69, var70);
@@ -5334,7 +5334,7 @@ public final class Client extends GameShell {
 			if ((var3 & 0x1) != 0) {
 				int var4 = in.g1_alt1();
 				int var5 = in.g1_alt3();
-				var2.method727(var5, loopCycle, var4);
+				var2.addHitmark(var5, loopCycle, var4);
 				var2.combatCycle = loopCycle + 300;
 				var2.field2004 = in.g1_alt1();
 				var2.field1975 = in.g1();
@@ -5362,7 +5362,7 @@ public final class Client extends GameShell {
 			if ((var3 & 0x2) != 0) {
 				int var7 = in.g1_alt1();
 				int var8 = in.g1();
-				var2.method727(var8, loopCycle, var7);
+				var2.addHitmark(var8, loopCycle, var7);
 				var2.combatCycle = loopCycle + 300;
 				var2.field2004 = in.g1_alt3();
 				var2.field1975 = in.g1_alt3();
@@ -10146,7 +10146,7 @@ public final class Client extends GameShell {
 		SpotType.resetCache();
 		VarBitType.resetCache();
 		VarpType.resetCache();
-		PlayerModel.method873();
+		PlayerModel.resetCache();
 		IfType.resetCache();
 		((TextureManager) Pix3D.textureManager).method691();
 		ClientScript.field830.clear();

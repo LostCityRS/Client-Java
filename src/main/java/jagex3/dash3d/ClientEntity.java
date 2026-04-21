@@ -232,7 +232,7 @@ public abstract class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("nb.b(IIII)V")
-	public final void method727(int arg0, int arg1, int arg2) {
+	public final void addHitmark(int arg0, int arg1, int arg2) {
 		for (int var4 = 0; var4 < 4; var4++) {
 			if (arg1 >= this.damageCycles[var4]) {
 				this.damageValues[var4] = arg2;
