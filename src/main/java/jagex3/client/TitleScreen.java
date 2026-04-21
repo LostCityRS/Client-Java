@@ -138,7 +138,7 @@ public class TitleScreen {
 			}
 			var6 += 15;
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 130 && var2 <= 170) {
-				loginUser = loginUser.getRepeatedCharacter().method36();
+				loginUser = loginUser.getRepeatedCharacter().toRawUsername();
 				loginMes(Text.field2101, Text.field2095, Text.field666);
 				Client.setMainState(20);
 				return;

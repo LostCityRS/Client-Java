@@ -62,7 +62,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int exactMoveStart;
 
 	@ObfuscatedName("nb.uc")
-	public int field1983 = 0;
+	public int routeLength = 0;
 
 	@ObfuscatedName("nb.vc")
 	public int field1984;
@@ -86,7 +86,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final int[] damageTypes = new int[4];
 
 	@ObfuscatedName("nb.Jb")
-	public final boolean[] field1946 = new boolean[10];
+	public final boolean[] routeRun = new boolean[10];
 
 	@ObfuscatedName("nb.yc")
 	public int turnspeed = 32;
@@ -189,13 +189,13 @@ public abstract class ClientEntity extends ModelSource {
 		if (this.primarySeqId != -1 && SeqType.list(this.primarySeqId).preanim_move == 1) {
 			this.primarySeqId = -1;
 		}
-		if (this.field1983 < 9) {
-			this.field1983++;
+		if (this.routeLength < 9) {
+			this.routeLength++;
 		}
-		for (int var5 = this.field1983; var5 > 0; var5--) {
+		for (int var5 = this.routeLength; var5 > 0; var5--) {
 			this.routeX[var5] = this.routeX[var5 - 1];
 			this.routeZ[var5] = this.routeZ[var5 - 1];
-			this.field1946[var5] = this.field1946[var5 - 1];
+			this.routeRun[var5] = this.routeRun[var5 - 1];
 		}
 		if (arg0 == 1) {
 			var4++;
@@ -223,7 +223,7 @@ public abstract class ClientEntity extends ModelSource {
 		}
 		this.routeX[0] = var3;
 		this.routeZ[0] = var4;
-		this.field1946[0] = arg1;
+		this.routeRun[0] = arg1;
 	}
 
 	@ObfuscatedName("nb.h(I)Z")
@@ -252,21 +252,21 @@ public abstract class ClientEntity extends ModelSource {
 			int var4 = arg2 - this.routeX[0];
 			int var5 = arg0 - this.routeZ[0];
 			if (var4 >= -8 && var4 <= 8 && var5 >= -8 && var5 <= 8) {
-				if (this.field1983 < 9) {
-					this.field1983++;
+				if (this.routeLength < 9) {
+					this.routeLength++;
 				}
-				for (int var6 = this.field1983; var6 > 0; var6--) {
+				for (int var6 = this.routeLength; var6 > 0; var6--) {
 					this.routeX[var6] = this.routeX[var6 - 1];
 					this.routeZ[var6] = this.routeZ[var6 - 1];
-					this.field1946[var6] = this.field1946[var6 - 1];
+					this.routeRun[var6] = this.routeRun[var6 - 1];
 				}
 				this.routeX[0] = arg2;
 				this.routeZ[0] = arg0;
-				this.field1946[0] = false;
+				this.routeRun[0] = false;
 				return;
 			}
 		}
-		this.field1983 = 0;
+		this.routeLength = 0;
 		this.animDelayMove = 0;
 		this.preanimRouteLength = 0;
 		this.routeX[0] = arg2;
@@ -278,6 +278,6 @@ public abstract class ClientEntity extends ModelSource {
 	@ObfuscatedName("nb.j(I)V")
 	public final void abortRoute() {
 		this.preanimRouteLength = 0;
-		this.field1983 = 0;
+		this.routeLength = 0;
 	}
 }

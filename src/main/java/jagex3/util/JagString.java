@@ -645,7 +645,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.i(I)La;")
-	public JagString method36() {
+	public JagString toRawUsername() {
 		boolean var1 = true;
 		JagString var2 = new JagString();
 		var2.length = this.length;
