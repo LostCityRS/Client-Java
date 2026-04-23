@@ -12,7 +12,7 @@ public final class Sprite {
 	public int typecode = 0;
 
 	@ObfuscatedName("g.e")
-	public int field982 = 0;
+	public int typecode2 = 0;
 
 	@ObfuscatedName("g.f")
 	public int field983;
@@ -27,7 +27,7 @@ public final class Sprite {
 	public int field987;
 
 	@ObfuscatedName("g.k")
-	public int field988;
+	public int maxTileZ;
 
 	@ObfuscatedName("g.m")
 	public int field990;
@@ -36,10 +36,10 @@ public final class Sprite {
 	public int field991;
 
 	@ObfuscatedName("g.o")
-	public int maxTileX;
+	public int minTileZ;
 
 	@ObfuscatedName("g.r")
-	public int field995;
+	public int maxTileX;
 
 	@ObfuscatedName("g.t")
 	public int cycle;

@@ -27,7 +27,7 @@ public final class Wall {
 	public int angle2;
 
 	@ObfuscatedName("cd.o")
-	public int field543 = 0;
+	public int typecode2 = 0;
 
 	@ObfuscatedName("cd.v")
 	public int z;

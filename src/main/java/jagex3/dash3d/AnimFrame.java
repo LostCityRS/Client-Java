@@ -19,16 +19,16 @@ public final class AnimFrame {
 	public static int[] field2118 = new int[500];
 
 	@ObfuscatedName("o.e")
-	public int field2119 = -1;
+	public int size = -1;
 
 	@ObfuscatedName("o.f")
 	public final int[] field2120;
 
 	@ObfuscatedName("o.g")
-	public AnimBase field2121 = null;
+	public AnimBase base = null;
 
 	@ObfuscatedName("o.h")
-	public final int[] field2122;
+	public final int[] ti;
 
 	@ObfuscatedName("o.i")
 	public boolean animateTransparencies = false;
@@ -40,7 +40,7 @@ public final class AnimFrame {
 	public final int[] field2125;
 
 	public AnimFrame(byte[] arg0, AnimBase arg1) {
-		this.field2121 = arg1;
+		this.base = arg1;
 		Packet var3 = new Packet(arg0);
 		Packet var4 = new Packet(arg0);
 		var3.pos = 2;
@@ -51,9 +51,9 @@ public final class AnimFrame {
 		for (int var8 = 0; var8 < var5; var8++) {
 			int var9 = var3.g1();
 			if (var9 > 0) {
-				if (this.field2121.field3117[var8] != 0) {
+				if (this.base.field3117[var8] != 0) {
 					for (int var10 = var8 - 1; var10 > var6; var10--) {
-						if (this.field2121.field3117[var10] == 0) {
+						if (this.base.field3117[var10] == 0) {
 							field2116[var7] = var10;
 							field2117[var7] = 0;
 							field2115[var7] = 0;
@@ -65,7 +65,7 @@ public final class AnimFrame {
 				}
 				field2116[var7] = var8;
 				short var11 = 0;
-				if (this.field2121.field3117[var8] == 3) {
+				if (this.base.field3117[var8] == 3) {
 					var11 = 128;
 				}
 				if ((var9 & 0x1) == 0) {
@@ -85,7 +85,7 @@ public final class AnimFrame {
 				}
 				var6 = var8;
 				var7++;
-				if (this.field2121.field3117[var8] == 5) {
+				if (this.base.field3117[var8] == 5) {
 					this.animateTransparencies = true;
 				}
 			}
@@ -93,13 +93,13 @@ public final class AnimFrame {
 		if (arg0.length != var4.pos) {
 			throw new RuntimeException();
 		}
-		this.field2119 = var7;
-		this.field2122 = new int[var7];
+		this.size = var7;
+		this.ti = new int[var7];
 		this.field2120 = new int[var7];
 		this.field2125 = new int[var7];
 		this.field2124 = new int[var7];
 		for (int var12 = 0; var12 < var7; var12++) {
-			this.field2122[var12] = field2116[var12];
+			this.ti[var12] = field2116[var12];
 			this.field2120[var12] = field2117[var12];
 			this.field2125[var12] = field2115[var12];
 			this.field2124[var12] = field2118[var12];

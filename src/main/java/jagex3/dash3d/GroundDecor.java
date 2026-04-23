@@ -6,7 +6,7 @@ import deob.ObfuscatedName;
 public final class GroundDecor {
 
 	@ObfuscatedName("id.a")
-	public int field1360;
+	public int typecode2;
 
 	@ObfuscatedName("id.b")
 	public int typecode;

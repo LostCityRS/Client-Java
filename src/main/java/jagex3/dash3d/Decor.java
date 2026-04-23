@@ -18,7 +18,7 @@ public final class Decor {
 	public int angle;
 
 	@ObfuscatedName("rd.l")
-	public int field2669 = 0;
+	public int typecode2 = 0;
 
 	@ObfuscatedName("rd.m")
 	public int z;

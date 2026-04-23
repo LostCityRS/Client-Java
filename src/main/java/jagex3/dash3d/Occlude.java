@@ -51,7 +51,7 @@ public final class Occlude {
 	public int maxDeltaY;
 
 	@ObfuscatedName("ld.u")
-	public int field1741;
+	public int maxTileX;
 
 	@ObfuscatedName("ld.v")
 	public int minY;

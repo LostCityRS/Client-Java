@@ -37,7 +37,7 @@ public final class Square extends Linkable {
 	public final int field886;
 
 	@ObfuscatedName("fa.zb")
-	public int field871;
+	public int drawLevel;
 
 	@ObfuscatedName("fa.Ab")
 	public int backWallTypes;
@@ -67,7 +67,7 @@ public final class Square extends Linkable {
 	public GroundDecor groundDecor;
 
 	@ObfuscatedName("fa.yb")
-	public boolean field870;
+	public boolean drawSprites;
 
 	@ObfuscatedName("fa.Hb")
 	public boolean drawFront;

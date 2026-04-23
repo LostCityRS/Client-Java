@@ -2390,10 +2390,10 @@ public final class Client extends GameShell {
 			int var5 = (52736 - var4 * 512) * 4 + 24628;
 			for (int var6 = 1; var6 < 103; var6++) {
 				if ((ClientBuild.mapl[arg0][var6][var4] & 0x18) == 0) {
-					world.method52(var1, var5, arg0, var6, var4);
+					world.render2DGround(var1, var5, arg0, var6, var4);
 				}
 				if (arg0 < 3 && (ClientBuild.mapl[arg0 + 1][var6][var4] & 0x8) != 0) {
-					world.method52(var1, var5, arg0 + 1, var6, var4);
+					world.render2DGround(var1, var5, arg0 + 1, var6, var4);
 				}
 				var5 += 4;
 			}
@@ -5696,11 +5696,11 @@ public final class Client extends GameShell {
 		int var3 = getAvH(minusedlevel, arg2, arg1) - arg0;
 		int var4 = arg1 - camZ;
 		int var5 = var3 - camY;
-		int var6 = Model.field2258[camPitch];
-		int var7 = Model.field2256[camPitch];
+		int var6 = Model.cosTable[camPitch];
+		int var7 = Model.sinTable[camPitch];
 		int var8 = arg2 - camX;
-		int var9 = Model.field2256[camYaw];
-		int var10 = Model.field2258[camYaw];
+		int var9 = Model.sinTable[camYaw];
+		int var10 = Model.cosTable[camYaw];
 		int var11 = var4 * var9 + var8 * var10 >> 16;
 		int var12 = var4 * var10 - var8 * var9 >> 16;
 		int var14 = var5 * var6 - var7 * var12 >> 16;
@@ -6753,15 +6753,15 @@ public final class Client extends GameShell {
 		int var9 = 2048 - arg0 & 0x7FF;
 		int var10 = arg5;
 		if (var9 != 0) {
-			int var11 = Model.field2258[var9];
-			int var12 = Model.field2256[var9];
+			int var11 = Model.cosTable[var9];
+			int var12 = Model.sinTable[var9];
 			int var13 = var11 * 0 - arg5 * var12 >> 16;
 			var10 = arg5 * var11 + var12 * 0 >> 16;
 			var8 = var13;
 		}
 		if (var7 != 0) {
-			int var14 = Model.field2258[var7];
-			int var15 = Model.field2256[var7];
+			int var14 = Model.cosTable[var7];
+			int var15 = Model.sinTable[var7];
 			int var16 = var10 * var15 + var14 * 0 >> 16;
 			var10 = var10 * var14 - var15 * 0 >> 16;
 			var6 = var16;
@@ -7238,8 +7238,8 @@ public final class Client extends GameShell {
 			return;
 		}
 		int var4 = macroMinimapAngle + orbitCameraYaw & 0x7FF;
-		int var5 = Model.field2256[var4];
-		int var6 = Model.field2258[var4];
+		int var5 = Model.sinTable[var4];
+		int var6 = Model.cosTable[var4];
 		int var7 = var5 * 256 / (macroMinimapZoom + 256);
 		int var8 = var6 * 256 / (macroMinimapZoom + 256);
 		int var9 = arg2 * var8 - arg0 * var7 >> 16;
@@ -10559,14 +10559,14 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("tc.b(I)V")
 	public static void setLowMem() {
-		World.field115 = true;
+		World.lowMem = true;
 		lowMem = true;
 	}
 
 	@ObfuscatedName("ca.b(I)V")
 	public static void setHighMem() {
 		lowMem = false;
-		World.field115 = false;
+		World.lowMem = false;
 	}
 
 	@ObfuscatedName("bb.a(IIIIBLqd;III)V")
@@ -10850,9 +10850,9 @@ public final class Client extends GameShell {
 		if (var4 > 6400) {
 			return;
 		}
-		int var5 = Model.field2256[var3];
+		int var5 = Model.sinTable[var3];
 		int var6 = var5 * 256 / (macroMinimapZoom + 256);
-		int var7 = Model.field2258[var3];
+		int var7 = Model.cosTable[var3];
 		int var8 = var7 * 256 / (macroMinimapZoom + 256);
 		int var9 = arg0 * var6 + arg1 * var8 >> 16;
 		int var10 = arg0 * var8 - arg1 * var6 >> 16;
