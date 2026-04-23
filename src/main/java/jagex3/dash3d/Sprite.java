@@ -6,7 +6,7 @@ import deob.ObfuscatedName;
 public final class Sprite {
 
 	@ObfuscatedName("g.b")
-	public int field979;
+	public int level;
 
 	@ObfuscatedName("g.c")
 	public int typecode = 0;
@@ -18,7 +18,7 @@ public final class Sprite {
 	public int field983;
 
 	@ObfuscatedName("g.g")
-	public int field984;
+	public int minTileX;
 
 	@ObfuscatedName("g.h")
 	public ModelSource model;
@@ -36,13 +36,13 @@ public final class Sprite {
 	public int field991;
 
 	@ObfuscatedName("g.o")
-	public int field992;
+	public int maxTileX;
 
 	@ObfuscatedName("g.r")
 	public int field995;
 
 	@ObfuscatedName("g.t")
-	public int field997;
+	public int cycle;
 
 	@ObfuscatedName("g.y")
 	public int field1002;

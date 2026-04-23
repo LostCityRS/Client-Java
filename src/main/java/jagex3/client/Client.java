@@ -5394,7 +5394,7 @@ public final class Client extends GameShell {
 					} else {
 						var4.field95 = false;
 						var4.field84 = getAvH(minusedlevel, var4.x, var4.z);
-						world.method68(minusedlevel, var4.x, var4.z, var4.field84, var4, var4.yaw, var3, var4.field66, var4.field89, var4.field70, var4.field97);
+						world.addScenery(minusedlevel, var4.x, var4.z, var4.field84, var4, var4.yaw, var3, var4.field66, var4.field89, var4.field70, var4.field97);
 					}
 				}
 			}
@@ -7778,9 +7778,9 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 7) {
 			if (isMenuOpen) {
-				world.method76(var1 - 4, var2 + -4);
+				world.updateMousePicking(var1 - 4, var2 + -4);
 			} else {
-				world.method76(ClientMouseListener.mouseClickX - 4, ClientMouseListener.mouseClickY + -4);
+				world.updateMousePicking(ClientMouseListener.mouseClickX - 4, ClientMouseListener.mouseClickY + -4);
 			}
 		}
 		if (var3 == 1006) {
@@ -10287,7 +10287,7 @@ public final class Client extends GameShell {
 				}
 			}
 			if (arg5 == 3) {
-				world.method87(arg6, arg2, arg0);
+				world.delGroundDecor(arg6, arg2, arg0);
 				LocType var14 = LocType.list(var8);
 				if (var14.blockwalk && var14.active == 1) {
 					collision[arg6].method109(arg0, arg2);

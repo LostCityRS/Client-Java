@@ -518,11 +518,11 @@ public class ClientBuild {
 			floorr[var6] = null;
 			shadow[var6] = null;
 		}
-		arg0.method74();
+		arg0.shareLight();
 		for (int var70 = 0; var70 < 104; var70++) {
 			for (int var71 = 0; var71 < 104; var71++) {
 				if ((mapl[1][var70][var71] & 0x2) == 2) {
-					arg0.method48(var70, var71);
+					arg0.pushDown(var70, var71);
 				}
 			}
 		}
@@ -569,7 +569,7 @@ public class ClientBuild {
 							if (var85 >= 8) {
 								int var86 = groundh[var82][var78][var79] - 240;
 								int var87 = groundh[var81][var78][var79];
-								World.method72(var75, 1, var78 * 128, var78 * 128, var79 * 128, var80 * 128 + 128, var86, var87);
+								World.setOcclude(var75, 1, var78 * 128, var78 * 128, var79 * 128, var80 * 128 + 128, var86, var87);
 								for (int var88 = var81; var88 <= var82; var88++) {
 									for (int var89 = var79; var89 <= var80; var89++) {
 										mapo[var88][var78][var89] &= ~var72;
@@ -609,7 +609,7 @@ public class ClientBuild {
 							if (var96 >= 8) {
 								int var97 = groundh[var93][var90][var77];
 								int var98 = groundh[var91][var90][var77] - 240;
-								World.method72(var75, 2, var90 * 128, var92 * 128 + 128, var77 * 128, var77 * 128, var98, var97);
+								World.setOcclude(var75, 2, var90 * 128, var92 * 128 + 128, var77 * 128, var77 * 128, var98, var97);
 								for (int var99 = var93; var99 <= var91; var99++) {
 									for (int var100 = var90; var100 <= var92; var100++) {
 										mapo[var99][var100][var77] &= ~var73;
@@ -648,7 +648,7 @@ public class ClientBuild {
 							}
 							if ((var104 + 1 - var103) * (var102 + 1 - var101) >= 4) {
 								int var107 = groundh[var76][var101][var103];
-								World.method72(var75, 4, var101 * 128, var102 * 128 + 128, var103 * 128, var104 * 128 + 128, var107, var107);
+								World.setOcclude(var75, 4, var101 * 128, var102 * 128 + 128, var103 * 128, var104 * 128 + 128, var107, var107);
 								for (int var108 = var101; var108 <= var102; var108++) {
 									for (int var109 = var103; var109 <= var104; var109++) {
 										mapo[var76][var108][var109] &= ~var74;

@@ -10,7 +10,7 @@ public final class Square extends Linkable {
 	public Square linkedSquare;
 
 	@ObfuscatedName("fa.vb")
-	public int field867;
+	public int sidesAfterCorner;
 
 	@ObfuscatedName("fa.wb")
 	public GroundObject groundObject;
@@ -22,13 +22,13 @@ public final class Square extends Linkable {
 	public final int[] spriteSpan = new int[5];
 
 	@ObfuscatedName("fa.Jb")
-	public int field881 = 0;
+	public int spriteSpans = 0;
 
 	@ObfuscatedName("fa.xb")
 	public final int field869;
 
 	@ObfuscatedName("fa.Cb")
-	public int field874;
+	public int level;
 
 	@ObfuscatedName("fa.Fb")
 	public final int field877;
@@ -40,16 +40,16 @@ public final class Square extends Linkable {
 	public int field871;
 
 	@ObfuscatedName("fa.Ab")
-	public int field872;
+	public int backWallTypes;
 
 	@ObfuscatedName("fa.Db")
-	public int field875;
+	public int cornerSides;
 
 	@ObfuscatedName("fa.Mb")
-	public int field884;
+	public int sidesBeforeCorner;
 
 	@ObfuscatedName("fa.Qb")
-	public int field888;
+	public int spriteCount;
 
 	@ObfuscatedName("fa.Gb")
 	public QuickGround quickGround;
@@ -70,14 +70,14 @@ public final class Square extends Linkable {
 	public boolean field870;
 
 	@ObfuscatedName("fa.Hb")
-	public boolean field879;
+	public boolean drawFront;
 
 	@ObfuscatedName("fa.Nb")
-	public boolean field885;
+	public boolean drawBack;
 
 	public Square(int arg0, int arg1, int arg2) {
 		this.field869 = arg1;
-		this.field877 = this.field874 = arg0;
+		this.field877 = this.level = arg0;
 		this.field886 = arg2;
 	}
 }

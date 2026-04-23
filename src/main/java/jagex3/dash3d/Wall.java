@@ -6,13 +6,13 @@ import deob.ObfuscatedName;
 public final class Wall {
 
 	@ObfuscatedName("cd.a")
-	public int field529;
+	public int x;
 
 	@ObfuscatedName("cd.c")
 	public int typecode = 0;
 
 	@ObfuscatedName("cd.d")
-	public int field532;
+	public int angle1;
 
 	@ObfuscatedName("cd.g")
 	public ModelSource modelB;
@@ -21,15 +21,15 @@ public final class Wall {
 	public ModelSource modelA;
 
 	@ObfuscatedName("cd.i")
-	public int field537;
+	public int y;
 
 	@ObfuscatedName("cd.n")
-	public int field542;
+	public int angle2;
 
 	@ObfuscatedName("cd.o")
 	public int field543 = 0;
 
 	@ObfuscatedName("cd.v")
-	public int field550;
+	public int z;
 
 }

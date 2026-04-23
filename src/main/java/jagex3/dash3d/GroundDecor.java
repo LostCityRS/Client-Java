@@ -12,15 +12,15 @@ public final class GroundDecor {
 	public int typecode;
 
 	@ObfuscatedName("id.i")
-	public int field1368;
+	public int x;
 
 	@ObfuscatedName("id.n")
 	public ModelSource model;
 
 	@ObfuscatedName("id.o")
-	public int field1374;
+	public int z;
 
 	@ObfuscatedName("id.p")
-	public int field1375;
+	public int y;
 
 }

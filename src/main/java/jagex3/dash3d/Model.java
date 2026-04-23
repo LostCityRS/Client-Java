@@ -44,7 +44,7 @@ public final class Model extends ModelSource {
 	public int[] pointX;
 
 	@ObfuscatedName("pa.lc")
-	public int field2230;
+	public int maxZ;
 
 	@ObfuscatedName("pa.mc")
 	public int[] faceTextureM;
@@ -188,22 +188,22 @@ public final class Model extends ModelSource {
 	public PointNormal[] pointNormal;
 
 	@ObfuscatedName("pa.Ub")
-	public PointNormal[] field2213;
+	public PointNormal[] sharedPointNormal;
 
 	@ObfuscatedName("pa.Lb")
-	public int field2204;
+	public int maxX;
 
 	@ObfuscatedName("pa.Rb")
 	public int field2210;
 
 	@ObfuscatedName("pa.Tb")
-	public int field2212;
+	public int minX;
 
 	@ObfuscatedName("pa.Xb")
-	public int field2216;
+	public int maxY;
 
 	@ObfuscatedName("pa.Zb")
-	public int field2218;
+	public int minZ;
 
 	@ObfuscatedName("pa.Jb")
 	public int[][] labelVertices;
@@ -273,8 +273,8 @@ public final class Model extends ModelSource {
 		}
 		this.field2210 = 1;
 		super.minY = 0;
-		this.field2216 = 0;
-		this.field2212 = 0;
+		this.maxY = 0;
+		this.minX = 0;
 		for (int var1 = 0; var1 < this.numPoints; var1++) {
 			int var2 = this.pointX[var1];
 			int var3 = this.pointY[var1];
@@ -282,17 +282,17 @@ public final class Model extends ModelSource {
 			if (-var3 > super.minY) {
 				super.minY = -var3;
 			}
-			if (var3 > this.field2216) {
-				this.field2216 = var3;
+			if (var3 > this.maxY) {
+				this.maxY = var3;
 			}
 			int var5 = var2 * var2 + var4 * var4;
-			if (var5 > this.field2212) {
-				this.field2212 = var5;
+			if (var5 > this.minX) {
+				this.minX = var5;
 			}
 		}
-		this.field2212 = (int) (Math.sqrt((double) this.field2212) + 0.99D);
-		this.field2230 = (int) (Math.sqrt((double) (this.field2212 * this.field2212 + super.minY * super.minY)) + 0.99D);
-		this.field2204 = this.field2230 + (int) (Math.sqrt((double) (this.field2216 * this.field2216 + this.field2212 * this.field2212)) + 0.99D);
+		this.minX = (int) (Math.sqrt((double) this.minX) + 0.99D);
+		this.maxZ = (int) (Math.sqrt((double) (this.minX * this.minX + super.minY * super.minY)) + 0.99D);
+		this.maxX = this.maxZ + (int) (Math.sqrt((double) (this.maxY * this.maxY + this.minX * this.minX)) + 0.99D);
 	}
 
 	@ObfuscatedName("pa.a(IIIIIIIII)V")
@@ -303,22 +303,22 @@ public final class Model extends ModelSource {
 		}
 		int var10 = arg4 * arg7 - arg3 * arg5 >> 16;
 		int var11 = arg1 * arg6 + arg2 * var10 >> 16;
-		int var12 = this.field2212 * arg2 >> 16;
+		int var12 = this.minX * arg2 >> 16;
 		int var13 = var11 + var12;
 		if (var13 <= 50 || var11 >= 3500) {
 			return;
 		}
 		int var14 = arg3 * arg7 + arg4 * arg5 >> 16;
-		int var15 = var14 - this.field2212 << 9;
+		int var15 = var14 - this.minX << 9;
 		if (var15 / var13 >= Pix3D.maxX) {
 			return;
 		}
-		int var16 = this.field2212 + var14 << 9;
+		int var16 = this.minX + var14 << 9;
 		if (var16 / var13 <= Pix3D.minX) {
 			return;
 		}
 		int var17 = arg2 * arg6 - arg1 * var10 >> 16;
-		int var18 = this.field2212 * arg1 >> 16;
+		int var18 = this.minX * arg1 >> 16;
 		int var19 = var17 + var18 << 9;
 		if (var19 / var13 <= Pix3D.minY) {
 			return;
@@ -527,10 +527,10 @@ public final class Model extends ModelSource {
 			this.method776(arg0, var8, arg2, arg3, arg4);
 			return;
 		}
-		this.field2213 = new PointNormal[this.numPoints];
+		this.sharedPointNormal = new PointNormal[this.numPoints];
 		for (int var31 = 0; var31 < this.numPoints; var31++) {
 			PointNormal var32 = this.pointNormal[var31];
-			PointNormal var33 = this.field2213[var31] = new PointNormal();
+			PointNormal var33 = this.sharedPointNormal[var31] = new PointNormal();
 			var33.x = var32.x;
 			var33.y = var32.y;
 			var33.z = var32.z;
@@ -564,7 +564,7 @@ public final class Model extends ModelSource {
 	@ObfuscatedName("pa.c()I")
 	public int method773() {
 		this.calcBoundingCylinder();
-		return this.field2212;
+		return this.minX;
 	}
 
 	@ObfuscatedName("pa.b(Z)Lpa;")
@@ -620,7 +620,7 @@ public final class Model extends ModelSource {
 			}
 		}
 		this.pointNormal = null;
-		this.field2213 = null;
+		this.sharedPointNormal = null;
 		this.vertexLabel = null;
 		this.faceLabel = null;
 		if (this.faceRenderType != null) {
@@ -1177,7 +1177,7 @@ public final class Model extends ModelSource {
 				var9.z = var10.z;
 				var9.w = var10.w;
 			}
-			this.field2213 = arg0.field2213;
+			this.sharedPointNormal = arg0.sharedPointNormal;
 		} else {
 			this.field2225 = arg0.field2225;
 			this.field2222 = arg0.field2222;
@@ -1593,10 +1593,10 @@ public final class Model extends ModelSource {
 
 	@ObfuscatedName("pa.a(ZZI)V")
 	public void method783(boolean arg0, boolean arg1, int arg2) {
-		if (this.field2204 >= 1600) {
+		if (this.maxX >= 1600) {
 			return;
 		}
-		for (int var4 = 0; var4 < this.field2204; var4++) {
+		for (int var4 = 0; var4 < this.maxX; var4++) {
 			field2241[var4] = 0;
 		}
 		for (int var5 = 0; var5 < this.numFaces; var5++) {
@@ -1628,7 +1628,7 @@ public final class Model extends ModelSource {
 					int var29 = var21 * var24 - var22 * var23;
 					if (var19 * var29 + var13 * var27 + var16 * var28 > 0) {
 						field2265[var5] = true;
-						int var30 = (field2253[var6] + field2253[var7] + field2253[var8]) / 3 + this.field2230;
+						int var30 = (field2253[var6] + field2253[var7] + field2253[var8]) / 3 + this.maxZ;
 						field2251[var30][field2241[var30]++] = var5;
 					}
 				} else {
@@ -1643,14 +1643,14 @@ public final class Model extends ModelSource {
 						} else {
 							field2242[var5] = true;
 						}
-						int var31 = (field2253[var6] + field2253[var7] + field2253[var8]) / 3 + this.field2230;
+						int var31 = (field2253[var6] + field2253[var7] + field2253[var8]) / 3 + this.maxZ;
 						field2251[var31][field2241[var31]++] = var5;
 					}
 				}
 			}
 		}
 		if (this.facePriority == null) {
-			for (int var32 = this.field2204 - 1; var32 >= 0; var32--) {
+			for (int var32 = this.maxX - 1; var32 >= 0; var32--) {
 				int var33 = field2241[var32];
 				if (var33 > 0) {
 					int[] var34 = field2251[var32];
@@ -1665,7 +1665,7 @@ public final class Model extends ModelSource {
 			field2267[var36] = 0;
 			field2262[var36] = 0;
 		}
-		for (int var37 = this.field2204 - 1; var37 >= 0; var37--) {
+		for (int var37 = this.maxX - 1; var37 >= 0; var37--) {
 			int var38 = field2241[var37];
 			if (var38 > 0) {
 				int[] var39 = field2251[var37];
@@ -1895,32 +1895,32 @@ public final class Model extends ModelSource {
 		}
 		this.field2210 = 3;
 		super.minY = 0;
-		this.field2216 = 0;
-		this.field2212 = 999999;
-		this.field2204 = -999999;
-		this.field2230 = -99999;
-		this.field2218 = 99999;
+		this.maxY = 0;
+		this.minX = 999999;
+		this.maxX = -999999;
+		this.maxZ = -99999;
+		this.minZ = 99999;
 		for (int var1 = 0; var1 < this.numPoints; var1++) {
 			int var2 = this.pointX[var1];
 			int var3 = this.pointY[var1];
 			int var4 = this.pointZ[var1];
-			if (var2 < this.field2212) {
-				this.field2212 = var2;
+			if (var2 < this.minX) {
+				this.minX = var2;
 			}
-			if (var2 > this.field2204) {
-				this.field2204 = var2;
+			if (var2 > this.maxX) {
+				this.maxX = var2;
 			}
-			if (var4 < this.field2218) {
-				this.field2218 = var4;
+			if (var4 < this.minZ) {
+				this.minZ = var4;
 			}
-			if (var4 > this.field2230) {
-				this.field2230 = var4;
+			if (var4 > this.maxZ) {
+				this.maxZ = var4;
 			}
 			if (-var3 > super.minY) {
 				super.minY = -var3;
 			}
-			if (var3 > this.field2216) {
-				this.field2216 = var3;
+			if (var3 > this.maxY) {
+				this.maxY = var3;
 			}
 		}
 	}
@@ -1995,7 +1995,7 @@ public final class Model extends ModelSource {
 	}
 
 	@ObfuscatedName("pa.c(III)V")
-	public void method794() {
+	public void light() {
 		int var1 = this.field2234 >> 16;
 		int var2 = this.field2234 << 16 >> 16;
 		this.method776(var1, var2, -50, -10, -50);
@@ -2007,19 +2007,19 @@ public final class Model extends ModelSource {
 			return;
 		}
 		this.field2210 = 2;
-		this.field2212 = 0;
+		this.minX = 0;
 		for (int var1 = 0; var1 < this.numPoints; var1++) {
 			int var2 = this.pointX[var1];
 			int var3 = this.pointY[var1];
 			int var4 = this.pointZ[var1];
 			int var5 = var3 * var3 + var2 * var2 + var4 * var4;
-			if (var5 > this.field2212) {
-				this.field2212 = var5;
+			if (var5 > this.minX) {
+				this.minX = var5;
 			}
 		}
-		this.field2212 = (int) (Math.sqrt((double) this.field2212) + 0.99D);
-		this.field2230 = this.field2212;
-		this.field2204 = this.field2212 + this.field2212;
+		this.minX = (int) (Math.sqrt((double) this.minX) + 0.99D);
+		this.maxZ = this.minX;
+		this.maxX = this.minX + this.minX;
 	}
 
 	@ObfuscatedName("pa.d(III)V")
