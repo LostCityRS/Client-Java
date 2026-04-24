@@ -37,7 +37,7 @@ public class WordPack {
 	}
 
 	@ObfuscatedName("ac.a(ILa;Lba;)I")
-	public static int method105(JagString arg0, Packet arg1) {
+	public static int pack(JagString arg0, Packet arg1) {
 		int var2 = arg1.pos;
 		arg1.psmart(arg0.length);
 		arg1.pos += field2357.method1036(0, arg1.pos, arg0.length, arg0.charCode, arg1.data);

@@ -4,9 +4,9 @@ import deob.ObfuscatedName;
 
 public class Skills {
 	@ObfuscatedName("hc.r")
-	public static boolean[] field1190 = new boolean[]{true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, false, false};
+	public static boolean[] used = new boolean[]{true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, false, false};
 	@ObfuscatedName("k.C")
-	public static int[] field1514 = new int[99];
+	public static int[] skillxp = new int[99];
 
 	static {
 		int var0 = 0;
@@ -14,7 +14,7 @@ public class Skills {
 			int var2 = var1 + 1;
 			int var3 = (int) ((double) var2 + Math.pow(2.0D, (double) var2 / 7.0D) * 300.0D);
 			var0 += var3;
-			field1514[var1] = var0 / 4;
+			skillxp[var1] = var0 / 4;
 		}
 	}
 }

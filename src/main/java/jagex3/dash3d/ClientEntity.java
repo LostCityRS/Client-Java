@@ -161,7 +161,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int dstYaw;
 
 	@ObfuscatedName("nb.Sb")
-	public int field1955;
+	public int exactStartZ;
 
 	@ObfuscatedName("nb.xc")
 	public int exactMoveEnd;
@@ -170,7 +170,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int yaw;
 
 	@ObfuscatedName("nb.Kc")
-	public int field1999;
+	public int exactStartX;
 
 	@ObfuscatedName("nb.Mc")
 	public int field2001;

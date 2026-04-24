@@ -61,7 +61,7 @@ public class ScriptRunner {
 	public static JagString field2585 = JagString.wrap("");
 
 	@ObfuscatedName("ob.a([Ljava/lang/Object;IILqd;IZ)V")
-	public static void method754(Object[] arg0, int arg1, IfType arg2, int arg3) {
+	public static void executeScript(Object[] arg0, int arg1, IfType arg2, int arg3) {
 		int isp = 0;
 		ClientScript var5 = ClientScript.get((Integer) arg0[0], 76);
 		int[] var6 = var5.intOperands;
@@ -708,18 +708,18 @@ public class ScriptRunner {
 							isp--;
 							int var67 = intStack[isp];
 							if (Client.resumePauseComId == -1) {
-								Client.method414(0, var67);
+								Client.resumePauseButton(0, var67);
 								Client.resumePauseComId = var67;
 							}
 						} else if (opcode == 3001 || opcode == 3003) {
 							isp -= 2;
 							int var68 = intStack[isp];
 							int var69 = intStack[isp + 1];
-							Client.method673(0, var69, var68);
+							Client.ifButtonX(0, var69, var68);
 						} else if (opcode == 3002) {
 							IfType var70 = secondary ? activeComponent2 : activeComponent;
 							if (Client.resumePauseComId == -1) {
-								Client.method414(var70.parentId & 0x7FFF, var70.layerId);
+								Client.resumePauseButton(var70.parentId & 0x7FFF, var70.layerId);
 								Client.resumePauseComId = var70.parentId;
 							}
 						} else {
@@ -729,7 +729,7 @@ public class ScriptRunner {
 							IfType var71 = secondary ? activeComponent2 : activeComponent;
 							isp--;
 							int var72 = intStack[isp];
-							Client.method673(var71.parentId & 0x7FFF, var72, var71.layerId);
+							Client.ifButtonX(var71.parentId & 0x7FFF, var72, var71.layerId);
 						}
 					} else if (opcode >= 3200) {
 						if (opcode < 3300) {

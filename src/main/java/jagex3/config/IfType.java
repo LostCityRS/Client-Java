@@ -36,7 +36,9 @@ public final class IfType extends Linkable2 {
 	public static boolean loadingAsset = false;
     @ObfuscatedName("uc.v")
     public static JagString field3058 = JagString.wrap("");
-    @ObfuscatedName("qd.ac")
+	@ObfuscatedName("mb.cb")
+	public static int field1844 = -1;
+	@ObfuscatedName("qd.ac")
 	public JagString text = field3058;
 
 	@ObfuscatedName("qd.ad")
@@ -55,7 +57,7 @@ public final class IfType extends Linkable2 {
 	public int field2528 = 0;
 
 	@ObfuscatedName("qd.dd")
-	public boolean field2529 = false;
+	public boolean objReplace = false;
 
 	@ObfuscatedName("qd.ec")
 	public Object[] field2478;
@@ -199,7 +201,7 @@ public final class IfType extends Linkable2 {
 	public JagString text2 = field3058;
 
 	@ObfuscatedName("qd.Jc")
-	public boolean field2509 = false;
+	public boolean objSwap = false;
 
 	@ObfuscatedName("qd.Zc")
 	public int colourOver = 0;
@@ -478,10 +480,10 @@ public final class IfType extends Linkable2 {
 		if (this.type == 2) {
 			this.linkObjType = new int[this.width * this.height];
 			this.linkObjNumber = new int[this.width * this.height];
-			this.field2509 = arg0.g1() == 1;
+			this.objSwap = arg0.g1() == 1;
 			this.field2533 = arg0.g1() == 1;
 			this.field2461 = arg0.g1() == 1;
-			this.field2529 = arg0.g1() == 1;
+			this.objReplace = arg0.g1() == 1;
 			this.marginX = arg0.g1();
 			this.marginY = arg0.g1();
 			this.invBackgroundY = new int[20];

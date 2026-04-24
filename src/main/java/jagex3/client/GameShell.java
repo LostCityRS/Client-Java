@@ -164,7 +164,14 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 		updateCount = 0;
 	}
 
-	@Override
+    @ObfuscatedName("ad.a(I)V")
+    public static void method108() {
+        GameShell.progressFontMetrics = null;
+        GameShell.progressFont = null;
+        GameShell.progressBar = null;
+    }
+
+    @Override
 	public final void run() {
 		try {
 			if (SignLink.javaVendor != null) {
