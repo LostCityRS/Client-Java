@@ -89,13 +89,13 @@ public final class Pix32 extends Pix2D {
 			var16 += Pix2D.width * var18;
 			var9 += var13 * var18;
 		}
-		if (arg0 + arg2 > Pix2D.field2753) {
-			int var19 = arg0 + arg2 - Pix2D.field2753;
+		if (arg0 + arg2 > Pix2D.clipMaxX) {
+			int var19 = arg0 + arg2 - Pix2D.clipMaxX;
 			arg2 -= var19;
 			var17 += var19;
 		}
-		if (arg0 < Pix2D.field2752) {
-			int var20 = Pix2D.field2752 - arg0;
+		if (arg0 < Pix2D.clipMinX) {
+			int var20 = Pix2D.clipMinX - arg0;
 			arg2 -= var20;
 			var16 += var20;
 			var8 += var12 * var20;
@@ -248,17 +248,17 @@ public final class Pix32 extends Pix2D {
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;
 		}
-		if (var3 < Pix2D.field2752) {
-			int var12 = Pix2D.field2752 - var3;
+		if (var3 < Pix2D.clipMinX) {
+			int var12 = Pix2D.clipMinX - var3;
 			var8 -= var12;
-			var3 = Pix2D.field2752;
+			var3 = Pix2D.clipMinX;
 			var6 += var12;
 			var5 += var12;
 			var10 = var12;
 			var9 += var12;
 		}
-		if (var3 + var8 > Pix2D.field2753) {
-			int var13 = var3 + var8 - Pix2D.field2753;
+		if (var3 + var8 > Pix2D.clipMaxX) {
+			int var13 = var3 + var8 - Pix2D.clipMaxX;
 			var8 -= var13;
 			var10 += var13;
 			var9 += var13;
@@ -340,11 +340,11 @@ public final class Pix32 extends Pix2D {
 		int var34 = var30 + 15 >> 4;
 		int var35 = var31 >> 4;
 		int var36 = var32 + 15 >> 4;
-		if (var33 < Pix2D.field2752) {
-			var33 = Pix2D.field2752;
+		if (var33 < Pix2D.clipMinX) {
+			var33 = Pix2D.clipMinX;
 		}
-		if (var34 > Pix2D.field2753) {
-			var34 = Pix2D.field2753;
+		if (var34 > Pix2D.clipMaxX) {
+			var34 = Pix2D.clipMaxX;
 		}
 		if (var35 < Pix2D.clipMinY) {
 			var35 = Pix2D.clipMinY;
@@ -763,17 +763,17 @@ public final class Pix32 extends Pix2D {
 		if (var5 + var8 > Pix2D.clipMaxY) {
 			var8 -= var5 + var8 - Pix2D.clipMaxY;
 		}
-		if (var4 < Pix2D.field2752) {
-			int var13 = Pix2D.field2752 - var4;
+		if (var4 < Pix2D.clipMinX) {
+			int var13 = Pix2D.clipMinX - var4;
 			var9 -= var13;
-			var4 = Pix2D.field2752;
+			var4 = Pix2D.clipMinX;
 			var7 += var13;
 			var6 += var13;
 			var11 = var13;
 			var10 += var13;
 		}
-		if (var4 + var9 > Pix2D.field2753) {
-			int var14 = var4 + var9 - Pix2D.field2753;
+		if (var4 + var9 > Pix2D.clipMaxX) {
+			int var14 = var4 + var9 - Pix2D.clipMaxX;
 			var9 -= var14;
 			var11 += var14;
 			var10 += var14;
@@ -802,7 +802,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.b(II)V")
-	public void method557(int arg0, int arg1) {
+	public void quickPlotSprite(int arg0, int arg1) {
 		int var3 = this.xof + arg0;
 		int var4 = this.yof + arg1;
 		int var5 = Pix2D.width * var4 + var3;
@@ -821,23 +821,23 @@ public final class Pix32 extends Pix2D {
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;
 		}
-		if (var3 < Pix2D.field2752) {
-			int var12 = Pix2D.field2752 - var3;
+		if (var3 < Pix2D.clipMinX) {
+			int var12 = Pix2D.clipMinX - var3;
 			var8 -= var12;
-			var3 = Pix2D.field2752;
+			var3 = Pix2D.clipMinX;
 			var6 += var12;
 			var5 += var12;
 			var10 = var12;
 			var9 += var12;
 		}
-		if (var3 + var8 > Pix2D.field2753) {
-			int var13 = var3 + var8 - Pix2D.field2753;
+		if (var3 + var8 > Pix2D.clipMaxX) {
+			int var13 = var3 + var8 - Pix2D.clipMaxX;
 			var8 -= var13;
 			var10 += var13;
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method561(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
+			plotQuick(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
@@ -861,17 +861,17 @@ public final class Pix32 extends Pix2D {
 		if (var5 + var8 > Pix2D.clipMaxY) {
 			var8 -= var5 + var8 - Pix2D.clipMaxY;
 		}
-		if (var4 < Pix2D.field2752) {
-			int var13 = Pix2D.field2752 - var4;
+		if (var4 < Pix2D.clipMinX) {
+			int var13 = Pix2D.clipMinX - var4;
 			var9 -= var13;
-			var4 = Pix2D.field2752;
+			var4 = Pix2D.clipMinX;
 			var7 += var13;
 			var6 += var13;
 			var11 = var13;
 			var10 += var13;
 		}
-		if (var4 + var9 > Pix2D.field2753) {
-			int var14 = var4 + var9 - Pix2D.field2753;
+		if (var4 + var9 > Pix2D.clipMaxX) {
+			int var14 = var4 + var9 - Pix2D.clipMaxX;
 			var9 -= var14;
 			var11 += var14;
 			var10 += var14;
@@ -935,7 +935,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.a([I[IIIIIII)V")
-	public static void method561(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public static void plotQuick(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		for (int var8 = -arg5; var8 < 0; var8++) {
 			int var9 = arg3 + arg4 - 3;
 			while (arg3 < var9) {
@@ -993,13 +993,13 @@ public final class Pix32 extends Pix2D {
 			var15 += Pix2D.width * var17;
 			var8 += var12 * var17;
 		}
-		if (arg0 + arg2 > Pix2D.field2753) {
-			int var18 = arg0 + arg2 - Pix2D.field2753;
+		if (arg0 + arg2 > Pix2D.clipMaxX) {
+			int var18 = arg0 + arg2 - Pix2D.clipMaxX;
 			arg2 -= var18;
 			var16 += var18;
 		}
-		if (arg0 < Pix2D.field2752) {
-			int var19 = Pix2D.field2752 - arg0;
+		if (arg0 < Pix2D.clipMinX) {
+			int var19 = Pix2D.clipMinX - arg0;
 			arg2 -= var19;
 			var15 += var19;
 			var7 += var11 * var19;

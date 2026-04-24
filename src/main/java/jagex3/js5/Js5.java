@@ -380,7 +380,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.c(I)V")
-	public final void method236() {
+	public final void discardAllFiles() {
 		for (int var1 = 0; var1 < this.unpacked.length; var1++) {
 			if (this.unpacked[var1] != null) {
 				for (int var2 = 0; var2 < this.unpacked[var1].length; var2++) {

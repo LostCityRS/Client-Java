@@ -316,7 +316,7 @@ public class ClientBuild {
 							var5 = var2 - 1;
 						}
 						if (var5 >= 0) {
-							arg1[var5].blockGroundDecor(var4, var3);
+							arg1[var5].blockGround(var4, var3);
 						}
 					}
 				}
@@ -771,7 +771,7 @@ public class ClientBuild {
 				}
 				arg3.setGroundDecor(arg7, arg2, arg6, var14, var16, var12, var13);
 				if (var15.blockwalk && var15.active == 1 && arg1 != null) {
-					arg1.blockGroundDecor(arg6, arg2);
+					arg1.blockGround(arg6, arg2);
 				}
 			}
 		} else if (arg4 == 10 || arg4 == 11) {
@@ -1177,7 +1177,7 @@ public class ClientBuild {
 			}
 			arg5.setGroundDecor(arg3, arg8, arg7, var14, var17, var16, var15);
 			if (var13.blockwalk && var13.active == 1) {
-				arg0.blockGroundDecor(arg7, arg8);
+				arg0.blockGround(arg7, arg8);
 			}
 		} else if (arg4 == 10 || arg4 == 11) {
 			ModelSource var18;

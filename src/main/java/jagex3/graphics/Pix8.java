@@ -30,7 +30,7 @@ public final class Pix8 extends Pix2D {
 	public int[] bpal;
 
 	@ObfuscatedName("e.d()Le;")
-	public Pix8 method328() {
+	public Pix8 copy() {
 		Pix8 var1 = new Pix8(this.wi, this.hi, this.bpal.length);
 		var1.owi = this.owi;
 		var1.ohi = this.ohi;
@@ -67,28 +67,28 @@ public final class Pix8 extends Pix2D {
 		if (var4 + var7 > Pix2D.clipMaxY) {
 			var7 -= var4 + var7 - Pix2D.clipMaxY;
 		}
-		if (var3 < Pix2D.field2752) {
-			int var12 = Pix2D.field2752 - var3;
+		if (var3 < Pix2D.clipMinX) {
+			int var12 = Pix2D.clipMinX - var3;
 			var8 -= var12;
-			var3 = Pix2D.field2752;
+			var3 = Pix2D.clipMinX;
 			var6 += var12;
 			var5 += var12;
 			var10 = var12;
 			var9 += var12;
 		}
-		if (var3 + var8 > Pix2D.field2753) {
-			int var13 = var3 + var8 - Pix2D.field2753;
+		if (var3 + var8 > Pix2D.clipMaxX) {
+			int var13 = var3 + var8 - Pix2D.clipMaxX;
 			var8 -= var13;
 			var10 += var13;
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method330(Pix2D.pixels, this.data, this.bpal, var6, var5, var8, var7, var9, var10);
+			plot(Pix2D.pixels, this.data, this.bpal, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
 	@ObfuscatedName("e.a([I[B[IIIIIII)V")
-	public static void method330(int[] arg0, byte[] arg1, int[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public static void plot(int[] arg0, byte[] arg1, int[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var9 = -(arg5 >> 2);
 		int var10 = -(arg5 & 0x3);
 		for (int var11 = -arg6; var11 < 0; var11++) {

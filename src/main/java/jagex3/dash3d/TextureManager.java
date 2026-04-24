@@ -30,7 +30,7 @@ public final class TextureManager implements TextureProvider {
 	public final Js5 field1876;
 
 	@ObfuscatedName("mc.a(I)V")
-	public void method691() {
+	public void reset() {
 		for (int var1 = 0; var1 < this.field1867.length; var1++) {
 			if (this.field1867[var1] != null) {
 				this.field1867[var1].method764();
@@ -81,7 +81,7 @@ public final class TextureManager implements TextureProvider {
 	@ObfuscatedName("mc.a(ID)V")
 	public void setBrightness(double arg0) {
 		this.field1877 = arg0;
-		this.method691();
+		this.reset();
 	}
 
 	@ObfuscatedName("mc.b(BI)V")

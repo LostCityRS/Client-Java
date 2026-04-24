@@ -10,7 +10,7 @@ import jagex3.util.JagString;
 public final class ClientScript extends Linkable2 {
 
     @ObfuscatedName("f.d")
-    public static LruCache field830 = new LruCache(128);
+    public static LruCache cache = new LruCache(128);
 	@ObfuscatedName("j.lc")
 	public static JagString field1437 = JagString.wrap("");
 	@ObfuscatedName("hb.fb")
@@ -39,7 +39,7 @@ public final class ClientScript extends Linkable2 {
 	@ObfuscatedName("pe.a(III)Lcc;")
 	public static ClientScript get(int arg0, int arg1) {
 		long var2 = (long) ((arg1 << 16) + arg0);
-		ClientScript var4 = (ClientScript) field830.find(var2);
+		ClientScript var4 = (ClientScript) cache.find(var2);
 		if (var4 != null) {
 			return var4;
 		}
@@ -68,7 +68,7 @@ public final class ClientScript extends Linkable2 {
 			}
 			var7.instructions[var9++] = var10;
 		}
-		field830.put(var2, var7);
+		cache.put(var2, var7);
 		return var7;
 	}
 }

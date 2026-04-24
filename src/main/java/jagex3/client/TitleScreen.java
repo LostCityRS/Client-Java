@@ -313,23 +313,23 @@ public class TitleScreen {
 		byte[] var3 = arg1.getFile(field3067, field1751);
 		Pix32 var4 = new Pix32(var3, arg0);
 		field472.bind();
-		var4.method557(0, 0);
+		var4.quickPlotSprite(0, 0);
 		field1435.bind();
-		var4.method557(-637, 0);
+		var4.quickPlotSprite(-637, 0);
 		field2044.bind();
-		var4.method557(-128, 0);
+		var4.quickPlotSprite(-128, 0);
 		field2608.bind();
-		var4.method557(-202, -371);
+		var4.quickPlotSprite(-202, -371);
 		field1935.bind();
-		var4.method557(-202, -171);
+		var4.quickPlotSprite(-202, -171);
 		field844.bind();
-		var4.method557(0, -265);
+		var4.quickPlotSprite(0, -265);
 		field2701.bind();
-		var4.method557(-562, -265);
+		var4.quickPlotSprite(-562, -265);
 		field1307.bind();
-		var4.method557(-128, -171);
+		var4.quickPlotSprite(-128, -171);
 		field3298.bind();
-		var4.method557(-562, -171);
+		var4.quickPlotSprite(-562, -171);
 		int[] var5 = new int[var4.wi];
 		for (int var6 = 0; var6 < var4.hi; var6++) {
 			for (int var7 = 0; var7 < var4.wi; var7++) {
@@ -340,23 +340,23 @@ public class TitleScreen {
 			}
 		}
 		field472.bind();
-		var4.method557(382, 0);
+		var4.quickPlotSprite(382, 0);
 		field1435.bind();
-		var4.method557(-255, 0);
+		var4.quickPlotSprite(-255, 0);
 		field2044.bind();
-		var4.method557(254, 0);
+		var4.quickPlotSprite(254, 0);
 		field2608.bind();
-		var4.method557(180, -371);
+		var4.quickPlotSprite(180, -371);
 		field1935.bind();
-		var4.method557(180, -171);
+		var4.quickPlotSprite(180, -171);
 		field844.bind();
-		var4.method557(382, -265);
+		var4.quickPlotSprite(382, -265);
 		field2701.bind();
-		var4.method557(-180, -265);
+		var4.quickPlotSprite(-180, -265);
 		field1307.bind();
-		var4.method557(254, -171);
+		var4.quickPlotSprite(254, -171);
 		field3298.bind();
-		var4.method557(-180, -171);
+		var4.quickPlotSprite(-180, -171);
 		Pix32 var9 = PixLoader.makePix32(arg2, Client.field583, field3067);
 		field2044.bind();
 		var9.plotSprite(382 - var9.wi / 2 - 128, 18);

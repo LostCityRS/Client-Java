@@ -218,10 +218,10 @@ public final class ObjType extends Linkable2 {
 			}
 		}
 		int[] var9 = Pix2D.pixels;
-		int var10 = Pix2D.field2750;
+		int var10 = Pix2D.height;
 		int var11 = Pix2D.width;
-		int var12 = Pix2D.field2752;
-		int var13 = Pix2D.field2753;
+		int var12 = Pix2D.clipMinX;
+		int var13 = Pix2D.clipMaxX;
 		int var14 = Pix2D.clipMinY;
 		int var15 = Pix2D.clipMaxY;
 		int[] var16 = Pix3D.saveClipping();

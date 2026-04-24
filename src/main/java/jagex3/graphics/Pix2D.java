@@ -14,24 +14,24 @@ public class Pix2D extends Linkable2 {
 	public static int clipMaxY = 0;
 
 	@ObfuscatedName("sc.yb")
-	public static int field2753 = 0;
+	public static int clipMaxX = 0;
 
 	@ObfuscatedName("sc.xb")
-	public static int field2752 = 0;
+	public static int clipMinX = 0;
 	@ObfuscatedName("sc.sb")
 	public static int[] pixels;
 	@ObfuscatedName("sc.ub")
 	public static int width;
 	@ObfuscatedName("sc.vb")
-	public static int field2750;
+	public static int height;
 
 	@ObfuscatedName("sc.a(IIIIII)V")
 	public static void drawRectTrans(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		method915(arg0, arg1, arg2, arg4, arg5);
-		method915(arg0, arg1 + arg3 - 1, arg2, arg4, arg5);
+		hlineTrans(arg0, arg1, arg2, arg4, arg5);
+		hlineTrans(arg0, arg1 + arg3 - 1, arg2, arg4, arg5);
 		if (arg3 >= 3) {
-			method917(arg0, arg1 + 1, arg3 - 2, arg4, arg5);
-			method917(arg0 + arg2 - 1, arg1 + 1, arg3 - 2, arg4, arg5);
+			vlineTrans(arg0, arg1 + 1, arg3 - 2, arg4, arg5);
+			vlineTrans(arg0 + arg2 - 1, arg1 + 1, arg3 - 2, arg4, arg5);
 		}
 	}
 
@@ -46,27 +46,27 @@ public class Pix2D extends Linkable2 {
 		if (arg2 > width) {
 			arg2 = width;
 		}
-		if (arg3 > field2750) {
-			arg3 = field2750;
+		if (arg3 > height) {
+			arg3 = height;
 		}
-		field2752 = arg0;
+		clipMinX = arg0;
 		clipMinY = arg1;
-		field2753 = arg2;
+		clipMaxX = arg2;
 		clipMaxY = arg3;
 	}
 
 	@ObfuscatedName("sc.a(IIIII)V")
 	public static void fillRect(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (arg0 < field2752) {
-			arg2 -= field2752 - arg0;
-			arg0 = field2752;
+		if (arg0 < clipMinX) {
+			arg2 -= clipMinX - arg0;
+			arg0 = clipMinX;
 		}
 		if (arg1 < clipMinY) {
 			arg3 -= clipMinY - arg1;
 			arg1 = clipMinY;
 		}
-		if (arg0 + arg2 > field2753) {
-			arg2 = field2753 - arg0;
+		if (arg0 + arg2 > clipMaxX) {
+			arg2 = clipMaxX - arg0;
 		}
 		if (arg1 + arg3 > clipMaxY) {
 			arg3 = clipMaxY - arg1;
@@ -83,23 +83,23 @@ public class Pix2D extends Linkable2 {
 
 	@ObfuscatedName("sc.a([I)V")
 	public static void method914(int[] arg0) {
-		field2752 = arg0[0];
+		clipMinX = arg0[0];
 		clipMinY = arg0[1];
-		field2753 = arg0[2];
+		clipMaxX = arg0[2];
 		clipMaxY = arg0[3];
 	}
 
 	@ObfuscatedName("sc.b(IIIII)V")
-	public static void method915(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public static void hlineTrans(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg1 < clipMinY || arg1 >= clipMaxY) {
 			return;
 		}
-		if (arg0 < field2752) {
-			arg2 -= field2752 - arg0;
-			arg0 = field2752;
+		if (arg0 < clipMinX) {
+			arg2 -= clipMinX - arg0;
+			arg0 = clipMinX;
 		}
-		if (arg0 + arg2 > field2753) {
-			arg2 = field2753 - arg0;
+		if (arg0 + arg2 > clipMaxX) {
+			arg2 = clipMaxX - arg0;
 		}
 		int var5 = 256 - arg4;
 		int var6 = (arg3 >> 16 & 0xFF) * arg4;
@@ -120,12 +120,12 @@ public class Pix2D extends Linkable2 {
 		if (arg1 < clipMinY || arg1 >= clipMaxY) {
 			return;
 		}
-		if (arg0 < field2752) {
-			arg2 -= field2752 - arg0;
-			arg0 = field2752;
+		if (arg0 < clipMinX) {
+			arg2 -= clipMinX - arg0;
+			arg0 = clipMinX;
 		}
-		if (arg0 + arg2 > field2753) {
-			arg2 = field2753 - arg0;
+		if (arg0 + arg2 > clipMaxX) {
+			arg2 = clipMaxX - arg0;
 		}
 		int var4 = width * arg1 + arg0;
 		for (int var5 = 0; var5 < arg2; var5++) {
@@ -134,8 +134,8 @@ public class Pix2D extends Linkable2 {
 	}
 
 	@ObfuscatedName("sc.c(IIIII)V")
-	public static void method917(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (arg0 < field2752 || arg0 >= field2753) {
+	public static void vlineTrans(int arg0, int arg1, int arg2, int arg3, int arg4) {
+		if (arg0 < clipMinX || arg0 >= clipMaxX) {
 			return;
 		}
 		if (arg1 < clipMinY) {
@@ -162,24 +162,24 @@ public class Pix2D extends Linkable2 {
 
 	@ObfuscatedName("sc.b([I)V")
 	public static void method918(int[] arg0) {
-		arg0[0] = field2752;
+		arg0[0] = clipMinX;
 		arg0[1] = clipMinY;
-		arg0[2] = field2753;
+		arg0[2] = clipMaxX;
 		arg0[3] = clipMaxY;
 	}
 
 	@ObfuscatedName("sc.a()V")
 	public static void setClipping() {
-		field2752 = 0;
+		clipMinX = 0;
 		clipMinY = 0;
-		field2753 = width;
-		clipMaxY = field2750;
+		clipMaxX = width;
+		clipMaxY = height;
 	}
 
 	@ObfuscatedName("sc.b()V")
 	public static void cls() {
 		int var0 = 0;
-		int var1 = field2750 * width - 7;
+		int var1 = height * width - 7;
 		while (var0 < var1) {
 			pixels[var0++] = 0;
 			pixels[var0++] = 0;
@@ -198,16 +198,16 @@ public class Pix2D extends Linkable2 {
 
 	@ObfuscatedName("sc.b(IIIIII)V")
 	public static void fillRectTrans(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg0 < field2752) {
-			arg2 -= field2752 - arg0;
-			arg0 = field2752;
+		if (arg0 < clipMinX) {
+			arg2 -= clipMinX - arg0;
+			arg0 = clipMinX;
 		}
 		if (arg1 < clipMinY) {
 			arg3 -= clipMinY - arg1;
 			arg1 = clipMinY;
 		}
-		if (arg0 + arg2 > field2753) {
-			arg2 = field2753 - arg0;
+		if (arg0 + arg2 > clipMaxX) {
+			arg2 = clipMaxX - arg0;
 		}
 		if (arg1 + arg3 > clipMaxY) {
 			arg3 = clipMaxY - arg1;
@@ -261,12 +261,12 @@ public class Pix2D extends Linkable2 {
 				int var9 = var6 << 16;
 				int var10 = (int) Math.floor((double) var9 / (double) var5 + 0.5D);
 				int var11 = arg0 + var5;
-				if (arg0 < field2752) {
-					var8 += (field2752 - arg0) * var10;
-					arg0 = field2752;
+				if (arg0 < clipMinX) {
+					var8 += (clipMinX - arg0) * var10;
+					arg0 = clipMinX;
 				}
-				if (var11 >= field2753) {
-					var11 = field2753 - 1;
+				if (var11 >= clipMaxX) {
+					var11 = clipMaxX - 1;
 				}
 				while (arg0 <= var11) {
 					int var12 = var8 >> 16;
@@ -291,7 +291,7 @@ public class Pix2D extends Linkable2 {
 				}
 				while (arg1 <= var17) {
 					int var18 = var14 >> 16;
-					if (var18 >= field2752 && var18 < field2753) {
+					if (var18 >= clipMinX && var18 < clipMaxX) {
 						pixels[width * arg1 + var18] = arg4;
 					}
 					var14 += var16;
@@ -307,7 +307,7 @@ public class Pix2D extends Linkable2 {
 
 	@ObfuscatedName("sc.d(IIII)V")
 	public static void vline(int arg0, int arg1, int arg2, int arg3) {
-		if (arg0 < field2752 || arg0 >= field2753) {
+		if (arg0 < clipMinX || arg0 >= clipMaxX) {
 			return;
 		}
 		if (arg1 < clipMinY) {
@@ -327,12 +327,12 @@ public class Pix2D extends Linkable2 {
 	public static void setPixels(int[] arg0, int arg1, int arg2) {
 		pixels = arg0;
 		width = arg1;
-		field2750 = arg2;
+		height = arg2;
 		setSubClipping(0, 0, arg1, arg2);
 	}
 
 	@ObfuscatedName("eb.c([I)[I")
 	public static int[] restoreClipping(int[] arg0) {
-		return Pix3D.setClipping(field2752, clipMinY, field2753, clipMaxY, arg0);
+		return Pix3D.setClipping(clipMinX, clipMinY, clipMaxX, clipMaxY, arg0);
 	}
 }

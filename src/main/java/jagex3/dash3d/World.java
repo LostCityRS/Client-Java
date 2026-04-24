@@ -1743,7 +1743,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.k(III)V")
-	public void method80(int arg0, int arg1, int arg2) {
+	public void delWall(int arg0, int arg1, int arg2) {
 		Square var4 = this.squares[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.wall = null;
@@ -1765,7 +1765,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.n(III)V")
-	public void method83(int arg0, int arg1, int arg2) {
+	public void delDecor(int arg0, int arg1, int arg2) {
 		Square var4 = this.squares[arg0][arg1][arg2];
 		if (var4 != null) {
 			var4.decor = null;
@@ -1991,7 +1991,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.q(III)V")
-	public void method91(int arg0, int arg1, int arg2) {
+	public void delLoc(int arg0, int arg1, int arg2) {
 		Square var4 = this.squares[arg0][arg1][arg2];
 		if (var4 == null) {
 			return;
