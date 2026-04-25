@@ -483,7 +483,7 @@ public class TextGerman {
 		Text.field1510 = field2662;
 		Text.field2094 = field1581;
 		Text.field1933 = field1745;
-		Text.field1030 = field702;
+		Text.PLEASELOGIN1 = field702;
 		Text.field1561 = field2824;
 		Text.field2109 = field1908;
 		Text.field1392 = field1785;

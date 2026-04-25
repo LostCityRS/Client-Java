@@ -8,26 +8,26 @@ import jagex3.datastruct.Linkable;
 public final class ReflectionCheck extends Linkable {
 
 	@ObfuscatedName("te.jb")
-	public int[] field2958;
+	public int[] type;
 
 	@ObfuscatedName("te.kb")
-	public int[] field2959;
+	public int[] error;
 
 	@ObfuscatedName("te.lb")
-	public PrivilegedRequest[] field2960;
+	public PrivilegedRequest[] method;
 
 	@ObfuscatedName("te.mb")
-	public PrivilegedRequest[] field2961;
+	public PrivilegedRequest[] field;
 
 	@ObfuscatedName("te.ob")
-	public byte[][][] field2963;
+	public byte[][][] methodArgs;
 
 	@ObfuscatedName("te.pb")
-	public int field2964;
+	public int size;
 
 	@ObfuscatedName("te.ub")
-	public int[] field2969;
+	public int[] fieldValue;
 
 	@ObfuscatedName("te.vb")
-	public int field2970;
+	public int id;
 }

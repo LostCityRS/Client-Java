@@ -207,7 +207,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(IZ)I")
-	public int method6(int arg0) {
+	public int charAt(int arg0) {
 		return this.charCode[arg0] & 0xFF;
 	}
 

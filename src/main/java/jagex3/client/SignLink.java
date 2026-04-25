@@ -38,7 +38,7 @@ public final class SignLink implements Runnable {
 	public FileOnDisk[] field1702;
 
 	@ObfuscatedName("lc.f")
-	public PrivilegedRequest field1704 = null;
+	public PrivilegedRequest current = null;
 
 	@ObfuscatedName("lc.h")
 	public MidiDevice field1706;
@@ -50,7 +50,7 @@ public final class SignLink implements Runnable {
 	public final InetAddress field1709;
 
 	@ObfuscatedName("lc.l")
-	public PrivilegedRequest field1710 = null;
+	public PrivilegedRequest task = null;
 
 	@ObfuscatedName("lc.m")
 	public AudioSource field1711;
@@ -115,7 +115,7 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("lc.a([Ljava/lang/Class;Ljava/lang/String;Ljava/lang/Class;B)Led;")
-	public PrivilegedRequest method648(Class[] arg0, String arg1, Class arg2) {
+	public PrivilegedRequest getDeclaredMethod(Class[] arg0, String arg1, Class arg2) {
 		return this.method651(0, 9, new Object[]{arg2, arg1, arg0});
 	}
 
@@ -132,15 +132,15 @@ public final class SignLink implements Runnable {
 	@ObfuscatedName("lc.a(IIIILjava/lang/Object;)Led;")
 	public PrivilegedRequest method651(int arg0, int arg1, Object arg2) {
 		PrivilegedRequest var4 = new PrivilegedRequest();
-		var4.field816 = arg2;
-		var4.field813 = arg0;
-		var4.field814 = arg1;
+		var4.objArg = arg2;
+		var4.intArg = arg0;
+		var4.type = arg1;
 		synchronized (this) {
-			if (this.field1710 == null) {
-				this.field1710 = this.field1704 = var4;
+			if (this.task == null) {
+				this.task = this.current = var4;
 			} else {
-				this.field1710.field817 = var4;
-				this.field1710 = var4;
+				this.task.next = var4;
+				this.task = var4;
 			}
 			this.notify();
 			return var4;
@@ -217,11 +217,11 @@ public final class SignLink implements Runnable {
 					if (this.field1700) {
 						return;
 					}
-					if (this.field1704 != null) {
-						var2 = this.field1704;
-						this.field1704 = this.field1704.field817;
-						if (this.field1704 == null) {
-							this.field1710 = null;
+					if (this.current != null) {
+						var2 = this.current;
+						this.current = this.current.next;
+						if (this.current == null) {
+							this.task = null;
 						}
 						break;
 					}
@@ -232,22 +232,22 @@ public final class SignLink implements Runnable {
 				}
 			}
 			try {
-				int var3 = var2.field814;
+				int var3 = var2.type;
 				if (var3 == 1) {
-					var2.result = new Socket(this.field1709, var2.field813);
+					var2.result = new Socket(this.field1709, var2.intArg);
 				} else if (var3 == 2) {
-					Thread var6 = new Thread((Runnable) var2.field816);
+					Thread var6 = new Thread((Runnable) var2.objArg);
 					var6.setDaemon(true);
 					var6.start();
-					var6.setPriority(var2.field813);
+					var6.setPriority(var2.intArg);
 					var2.result = var6;
 				} else if (var3 == 4) {
-					var2.result = new DataInputStream(((URL) var2.field816).openStream());
+					var2.result = new DataInputStream(((URL) var2.objArg).openStream());
 				} else if (var3 == 9) {
-					Object[] var4 = (Object[]) var2.field816;
+					Object[] var4 = (Object[]) var2.objArg;
 					var2.result = ((Class) var4[0]).getDeclaredMethod((String) var4[1], (Class[]) var4[2]);
 				} else if (var3 == 10) {
-					Object[] var5 = (Object[]) var2.field816;
+					Object[] var5 = (Object[]) var2.objArg;
 					var2.result = ((Class) var5[0]).getDeclaredField((String) var5[1]);
 				} else {
 					throw new Exception();
@@ -260,7 +260,7 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("lc.a(Ljava/lang/Class;Ljava/lang/String;Z)Led;")
-	public PrivilegedRequest method654(Class arg0, String arg1) {
+	public PrivilegedRequest getDeclaredField(Class arg0, String arg1) {
 		return this.method651(0, 10, new Object[]{arg0, arg1});
 	}
 
@@ -295,7 +295,7 @@ public final class SignLink implements Runnable {
 		String var4 = ".file_store_" + arg1;
 		String[] var5 = new String[]{"c:/rscache/", "/rscache/", "c:/windows/", "c:/winnt/", "d:/windows/", "d:/winnt/", "e:/windows/", "e:/winnt/", "f:/windows/", "f:/winnt/", "c:/", userHome, "/tmp/", ""};
 		if (arg0 != -3849) {
-			this.method654(null, null);
+			this.getDeclaredField(null, null);
 		}
 		for (int var6 = 0; var6 < var5.length; var6++) {
 			try {

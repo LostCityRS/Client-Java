@@ -459,7 +459,7 @@ public class Text {
 	@ObfuscatedName("ga.C")
 	public static JagString field1018 = JagString.wrap("Enter your username (V password)3");
 	@ObfuscatedName("ga.O")
-	public static JagString field1030 = field1018;
+	public static JagString PLEASELOGIN1 = field1018;
 	@ObfuscatedName("kb.w")
 	public static JagString field1563 = JagString.wrap("Your profile will be transferred in:");
 	@ObfuscatedName("kb.u")

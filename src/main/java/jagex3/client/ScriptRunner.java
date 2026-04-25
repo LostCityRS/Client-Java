@@ -470,7 +470,7 @@ public class ScriptRunner {
 						JagString var122 = stringStack[ssp];
 						Object[] var123 = new Object[var122.length() + 1];
 						for (int var124 = var123.length - 1; var124 >= 1; var124--) {
-							if (var122.method6(var124 - 1) == 115) {
+							if (var122.charAt(var124 - 1) == 115) {
 								ssp--;
 								var123[var124] = stringStack[ssp];
 							} else {

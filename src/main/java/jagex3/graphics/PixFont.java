@@ -219,12 +219,12 @@ public final class PixFont extends Pix2D {
 		int var18 = 0;
 		int var19 = arg0.length();
 		for (int var20 = 0; var20 < var19; var20++) {
-			int var21 = arg0.method6(var20);
-			if (var21 == 64 && var20 + 4 < var19 && arg0.method6(var20 + 4) == 64) {
+			int var21 = arg0.charAt(var20);
+			if (var21 == 64 && var20 + 4 < var19 && arg0.charAt(var20 + 4) == 64) {
 				var16 = arg0.substring(var20, var20 + 5);
 				var13.append(var16);
 				var20 += 4;
-			} else if (var21 == 92 && var20 + 1 < var19 && arg0.method6(var20 + 1) == 110) {
+			} else if (var21 == 92 && var20 + 1 < var19 && arg0.charAt(var20 + 1) == 110) {
 				var16 = null;
 				field337[var18++] = var13.substring(var12, var13.length()).method40();
 				var12 = var13.length();
@@ -403,7 +403,7 @@ public final class PixFont extends Pix2D {
 		JagString var7 = arg0.method40();
 		int var8 = 0;
 		for (int var9 = 0; var9 < var7.length(); var9++) {
-			if (var7.method6(var9) == 32) {
+			if (var7.charAt(var9) == 32) {
 				var8++;
 			}
 		}

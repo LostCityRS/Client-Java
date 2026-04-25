@@ -2781,7 +2781,7 @@ public final class Client extends GameShell {
 			return;
 		}
 		arg0.chat = in.gjstr();
-		if (arg0.chat.method6(0) == 126) {
+		if (arg0.chat.charAt(0) == 126) {
 			arg0.chat = arg0.chat.substring(1);
 			addChat(2, arg0.chat, arg0.name);
 		} else if (localPlayer == arg0) {
@@ -10998,7 +10998,7 @@ public final class Client extends GameShell {
 													}
 													JagString var8 = EMPTY;
 													if (field715 != null) {
-														var8 = JagString.formatIPv4(field715.field813);
+														var8 = JagString.formatIPv4(field715.intArg);
 														try {
 															if (field715.result != null) {
 																byte[] var9 = ((String) field715.result).getBytes("ISO-8859-1");
