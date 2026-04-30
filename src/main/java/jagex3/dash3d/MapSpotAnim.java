@@ -8,60 +8,60 @@ import jagex3.config.SpotType;
 public final class MapSpotAnim extends ModelSource {
 
 	@ObfuscatedName("tb.cc")
-	public final int field2905;
+	public final int type;
 
 	@ObfuscatedName("tb.Tb")
-	public int field2896 = 0;
+	public int animFrame = 0;
 
 	@ObfuscatedName("tb.Qb")
 	public boolean animComplete = false;
 
 	@ObfuscatedName("tb.Mb")
-	public int field2889 = 0;
+	public int animCycle = 0;
 
 	@ObfuscatedName("tb.Ob")
-	public final int field2891;
+	public final int z;
 
 	@ObfuscatedName("tb.Xb")
-	public final int field2900;
+	public final int x;
 
 	@ObfuscatedName("tb.Jb")
 	public final int startCycle;
 
 	@ObfuscatedName("tb.Kb")
-	public final int field2887;
+	public final int y;
 
 	@ObfuscatedName("tb.Sb")
 	public final int level;
 
 	@ObfuscatedName("tb.Vb")
-	public SeqType field2898;
+	public SeqType anim;
 
 	public MapSpotAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		this.field2891 = arg3;
-		this.field2900 = arg2;
+		this.z = arg3;
+		this.x = arg2;
 		this.startCycle = arg5 + arg6;
-		this.field2887 = arg4;
-		this.field2905 = arg0;
+		this.y = arg4;
+		this.type = arg0;
 		this.level = arg1;
-		int var8 = SpotType.list(this.field2905).anim;
+		int var8 = SpotType.list(this.type).anim;
 		if (var8 == -1) {
 			this.animComplete = true;
 		} else {
 			this.animComplete = false;
-			this.field2898 = SeqType.list(var8);
+			this.anim = SeqType.list(var8);
 		}
 	}
 
 	@ObfuscatedName("tb.f(I)Lpa;")
 	@Override
 	public Model getTempModel() {
-		SpotType var1 = SpotType.list(this.field2905);
+		SpotType var1 = SpotType.list(this.type);
 		Model var2;
 		if (this.animComplete) {
 			var2 = var1.getTempModel2(-1);
 		} else {
-			var2 = var1.getTempModel2(this.field2896);
+			var2 = var1.getTempModel2(this.animFrame);
 		}
 		return var2 == null ? null : var2;
 	}
@@ -71,11 +71,11 @@ public final class MapSpotAnim extends ModelSource {
 		if (this.animComplete) {
 			return;
 		}
-		this.field2889 += arg0;
-		while (this.field2889 > this.field2898.delay[this.field2896]) {
-			this.field2889 -= this.field2898.delay[this.field2896];
-			this.field2896++;
-			if (this.field2898.frames.length <= this.field2896) {
+		this.animCycle += arg0;
+		while (this.animCycle > this.anim.delay[this.animFrame]) {
+			this.animCycle -= this.anim.delay[this.animFrame];
+			this.animFrame++;
+			if (this.anim.frames.length <= this.animFrame) {
 				this.animComplete = true;
 				return;
 			}

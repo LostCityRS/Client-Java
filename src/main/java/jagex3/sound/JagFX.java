@@ -8,20 +8,20 @@ import jagex3.js5.Js5;
 public final class JagFX {
 
 	@ObfuscatedName("me.a")
-	public final Tone[] field1904 = new Tone[10];
+	public final Tone[] tones = new Tone[10];
 
 	@ObfuscatedName("me.b")
-	public int field1905;
+	public int loopBegin;
 
 	@ObfuscatedName("me.c")
-	public int field1906;
+	public int loopEnd;
 
 	@ObfuscatedName("me.a()[B")
 	public byte[] method708() {
 		int var1 = 0;
 		for (int var2 = 0; var2 < 10; var2++) {
-			if (this.field1904[var2] != null && this.field1904[var2].field3100 + this.field1904[var2].field3082 > var1) {
-				var1 = this.field1904[var2].field3100 + this.field1904[var2].field3082;
+			if (this.tones[var2] != null && this.tones[var2].length + this.tones[var2].start > var1) {
+				var1 = this.tones[var2].length + this.tones[var2].start;
 			}
 		}
 		if (var1 == 0) {
@@ -30,10 +30,10 @@ public final class JagFX {
 		int var3 = var1 * 22050 / 1000;
 		byte[] var4 = new byte[var3];
 		for (int var5 = 0; var5 < 10; var5++) {
-			if (this.field1904[var5] != null) {
-				int var6 = this.field1904[var5].field3100 * 22050 / 1000;
-				int var7 = this.field1904[var5].field3082 * 22050 / 1000;
-				int[] var8 = this.field1904[var5].method1006(var6, this.field1904[var5].field3100);
+			if (this.tones[var5] != null) {
+				int var6 = this.tones[var5].length * 22050 / 1000;
+				int var7 = this.tones[var5].start * 22050 / 1000;
+				int[] var8 = this.tones[var5].generate(var6, this.tones[var5].length);
 				for (int var9 = 0; var9 < var6; var9++) {
 					int var10 = (var8[var9] >> 8) + var4[var7 + var9];
 					if ((var10 + 128 & 0xFFFFFF00) != 0) {
@@ -50,24 +50,24 @@ public final class JagFX {
 	public int optimiseStart() {
 		int var1 = 9999999;
 		for (int var2 = 0; var2 < 10; var2++) {
-			if (this.field1904[var2] != null && this.field1904[var2].field3082 / 20 < var1) {
-				var1 = this.field1904[var2].field3082 / 20;
+			if (this.tones[var2] != null && this.tones[var2].start / 20 < var1) {
+				var1 = this.tones[var2].start / 20;
 			}
 		}
-		if (this.field1905 < this.field1906 && this.field1905 / 20 < var1) {
-			var1 = this.field1905 / 20;
+		if (this.loopBegin < this.loopEnd && this.loopBegin / 20 < var1) {
+			var1 = this.loopBegin / 20;
 		}
 		if (var1 == 9999999 || var1 == 0) {
 			return 0;
 		}
 		for (int var3 = 0; var3 < 10; var3++) {
-			if (this.field1904[var3] != null) {
-				this.field1904[var3].field3082 -= var1 * 20;
+			if (this.tones[var3] != null) {
+				this.tones[var3].start -= var1 * 20;
 			}
 		}
-		if (this.field1905 < this.field1906) {
-			this.field1905 -= var1 * 20;
-			this.field1906 -= var1 * 20;
+		if (this.loopBegin < this.loopEnd) {
+			this.loopBegin -= var1 * 20;
+			this.loopEnd -= var1 * 20;
 		}
 		return var1;
 	}
@@ -75,7 +75,7 @@ public final class JagFX {
 	@ObfuscatedName("me.c()Lwd;")
 	public Wave toWave() {
 		byte[] var1 = this.method708();
-		return new Wave(22050, var1, this.field1905 * 22050 / 1000, this.field1906 * 22050 / 1000);
+		return new Wave(22050, var1, this.loopBegin * 22050 / 1000, this.loopEnd * 22050 / 1000);
 	}
 
 	public JagFX(Packet arg0) {
@@ -83,12 +83,12 @@ public final class JagFX {
 			int var3 = arg0.g1();
 			if (var3 != 0) {
 				arg0.pos--;
-				this.field1904[var2] = new Tone();
-				this.field1904[var2].method1003(arg0);
+				this.tones[var2] = new Tone();
+				this.tones[var2].load(arg0);
 			}
 		}
-		this.field1905 = arg0.g2();
-		this.field1906 = arg0.g2();
+		this.loopBegin = arg0.g2();
+		this.loopEnd = arg0.g2();
 	}
 
 	public JagFX() {

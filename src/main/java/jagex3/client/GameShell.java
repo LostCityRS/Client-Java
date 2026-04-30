@@ -165,7 +165,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
     @ObfuscatedName("ad.a(I)V")
-    public static void method108() {
+    public static void resetProgress() {
         GameShell.progressFontMetrics = null;
         GameShell.progressFont = null;
         GameShell.progressBar = null;
@@ -343,7 +343,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("kd.a(BIIII)V")
-	public final void method621(int arg0) {
+	public final void startCommon(int arg0) {
 		try {
 			if (shell != null) {
 				this.error("alreadyloaded");

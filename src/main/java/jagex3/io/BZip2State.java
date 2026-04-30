@@ -27,43 +27,43 @@ public final class BZip2State {
 	public int field1802;
 
 	@ObfuscatedName("mb.o")
-	public final byte[] field1804 = new byte[256];
+	public final byte[] seqToUnseq = new byte[256];
 
 	@ObfuscatedName("mb.q")
-	public final int[] field1806 = new int[257];
+	public final int[] cftab = new int[257];
 
 	@ObfuscatedName("mb.s")
-	public final int[] field1808 = new int[16];
+	public final int[] mtfbase = new int[16];
 
 	@ObfuscatedName("mb.t")
-	public byte field1809;
+	public byte state_out_ch;
 
 	@ObfuscatedName("mb.u")
 	public int field1810;
 
 	@ObfuscatedName("mb.w")
-	public final byte[][] field1812 = new byte[6][258];
+	public final byte[][] len = new byte[6][258];
 
 	@ObfuscatedName("mb.z")
 	public int field1815 = 0;
 
 	@ObfuscatedName("mb.y")
-	public final boolean[] field1814 = new boolean[16];
+	public final boolean[] inUse16 = new boolean[16];
 
 	@ObfuscatedName("mb.G")
 	public int field1822 = 0;
 
 	@ObfuscatedName("mb.B")
-	public final int[] field1817 = new int[6];
+	public final int[] minLens = new int[6];
 
 	@ObfuscatedName("mb.H")
 	public final int[][] field1823 = new int[6][258];
 
 	@ObfuscatedName("mb.T")
-	public final int[] field1835 = new int[256];
+	public final int[] unzftab = new int[256];
 
 	@ObfuscatedName("mb.C")
-	public final boolean[] field1818 = new boolean[256];
+	public final boolean[] inUse = new boolean[256];
 
 	@ObfuscatedName("mb.Q")
 	public final int[][] field1832 = new int[6][258];
@@ -72,7 +72,7 @@ public final class BZip2State {
 	public final int[][] field1825 = new int[6][258];
 
 	@ObfuscatedName("mb.O")
-	public final byte[] field1830 = new byte[4096];
+	public final byte[] mtfa = new byte[4096];
 
 	@ObfuscatedName("mb.N")
 	public final byte[] field1829 = new byte[18002];

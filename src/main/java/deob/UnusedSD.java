@@ -1,6 +1,6 @@
 package deob;
 
 @ObfuscatedName("sd")
-public final class class112 {
+public final class UnusedSD {
 
 }

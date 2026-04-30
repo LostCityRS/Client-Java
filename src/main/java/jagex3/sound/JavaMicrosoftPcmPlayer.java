@@ -12,7 +12,7 @@ public final class JavaMicrosoftPcmPlayer extends PcmPlayerBase {
 
 	@ObfuscatedName("v.a()V")
 	@Override
-	public void method256() {
+	public void play() {
 		// AudioPlayer.player.stop(this.field3106);
 		PcmInputStream var1 = this.field3106;
 		synchronized (this.field3106) {

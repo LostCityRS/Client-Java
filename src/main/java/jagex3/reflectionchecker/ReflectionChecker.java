@@ -41,7 +41,7 @@ public class ReflectionChecker {
 	}
 
 	@ObfuscatedName("h.a(Llc;BLba;I)V")
-	public static void method460(SignLink arg0, Packet arg1, int arg2) {
+	public static void addCheck(SignLink arg0, Packet arg1, int arg2) {
 		ReflectionCheck var3 = new ReflectionCheck();
 		var3.size = arg1.g1();
 		var3.id = arg1.g4();

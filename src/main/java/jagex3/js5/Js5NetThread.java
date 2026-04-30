@@ -17,7 +17,7 @@ public final class Js5NetThread implements Runnable {
 	@ObfuscatedName("kb.g")
 	public static LinkList requestQueue = new LinkList();
 	@ObfuscatedName("pe.Lb")
-	public static LinkList field2371 = new LinkList();
+	public static LinkList completed = new LinkList();
 
 	@ObfuscatedName("i.a(I)V")
 	public static void method500() {
@@ -79,7 +79,7 @@ public final class Js5NetThread implements Runnable {
 	}
 
     @ObfuscatedName("rc.a(I)V")
-    public static void method884() {
+    public static void shutdown() {
         Object var0 = lock;
         synchronized (lock) {
             if (keepAlive != 0) {
@@ -98,7 +98,7 @@ public final class Js5NetThread implements Runnable {
             LinkList var0 = requestQueue;
             Js5WorkerRequest var1;
             synchronized (requestQueue) {
-                var1 = (Js5WorkerRequest) field2371.popFront();
+                var1 = (Js5WorkerRequest) completed.popFront();
             }
             if (var1 == null) {
                 return;
@@ -138,7 +138,7 @@ public final class Js5NetThread implements Runnable {
 						var2.data = var2.fs.readFromFile((int) var2.key);
 						LinkList var4 = requestQueue;
 						synchronized (requestQueue) {
-							field2371.push(var2);
+							completed.push(var2);
 						}
 					}
 					Object var6 = lock;

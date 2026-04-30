@@ -74,7 +74,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int turnrightanim = -1;
 
 	@ObfuscatedName("nb.Tb")
-	public int field1956 = -1;
+	public int runanim = -1;
 
 	@ObfuscatedName("nb.Qb")
 	public int walkanim_b = -1;

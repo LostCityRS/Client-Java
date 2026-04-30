@@ -25,16 +25,16 @@ public final class Square extends Linkable {
 	public int spriteSpans = 0;
 
 	@ObfuscatedName("fa.xb")
-	public final int field869;
+	public final int originalLevel;
 
 	@ObfuscatedName("fa.Cb")
 	public int level;
 
 	@ObfuscatedName("fa.Fb")
-	public final int field877;
+	public final int x;
 
 	@ObfuscatedName("fa.Ob")
-	public final int field886;
+	public final int z;
 
 	@ObfuscatedName("fa.zb")
 	public int drawLevel;
@@ -76,8 +76,8 @@ public final class Square extends Linkable {
 	public boolean drawBack;
 
 	public Square(int arg0, int arg1, int arg2) {
-		this.field869 = arg1;
-		this.field877 = this.level = arg0;
-		this.field886 = arg2;
+		this.originalLevel = arg1;
+		this.x = this.level = arg0;
+		this.z = arg2;
 	}
 }

@@ -130,7 +130,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(IB)V")
-	public void method219(int arg0) {
+	public void updateCacheHint(int arg0) {
 	}
 
 	@ObfuscatedName("bd.a(I)I")
@@ -396,7 +396,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("bd.a(BI)[B")
-	public final byte[] method238(int arg0) {
+	public final byte[] peekFile(int arg0) {
 		if (this.unpacked.length == 1) {
 			return this.peekFile(arg0, 0);
 		} else if (this.unpacked[arg0].length == 1) {
@@ -420,7 +420,7 @@ public abstract class Js5 {
 		JagString var2 = arg0.toLowerCase();
 		int var3 = this.groupNameHashTable.find(var2.hash());
 		if (var3 >= 0) {
-			this.method219(var3);
+			this.updateCacheHint(var3);
 		}
 	}
 

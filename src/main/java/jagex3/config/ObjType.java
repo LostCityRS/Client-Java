@@ -74,7 +74,7 @@ public final class ObjType extends Linkable2 {
 	public boolean members = false;
 
 	@ObfuscatedName("ta.wb")
-	public JagString[] iop = new JagString[]{null, null, null, null, Text.field487};
+	public JagString[] iop = new JagString[]{null, null, null, null, Text.DROP};
 
 	@ObfuscatedName("ta.wc")
 	public int womanhead = -1;
@@ -101,7 +101,7 @@ public final class ObjType extends Linkable2 {
 	public int manwear2 = -1;
 
 	@ObfuscatedName("ta.Bb")
-	public JagString[] op = new JagString[]{null, null, Text.field1594, null, null};
+	public JagString[] op = new JagString[]{null, null, Text.TAKE, null, null};
 
 	@ObfuscatedName("ta.Kb")
 	public int resizex = 128;
@@ -165,7 +165,7 @@ public final class ObjType extends Linkable2 {
 			var3.iop = null;
 			var3.team = 0;
 			var3.op = null;
-			var3.name = Text.field1501;
+			var3.name = Text.MEMBERS_OBJECT;
 		}
 		recentUse.put((long) arg0, var3);
 		return var3;
@@ -505,7 +505,7 @@ public final class ObjType extends Linkable2 {
 			this.womanwear2 = arg1.g2();
 		} else if (arg0 >= 30 && arg0 < 35) {
 			this.op[arg0 - 30] = arg1.gjstr();
-			if (this.op[arg0 - 30].equalsIgnoreCase(Text.field2928)) {
+			if (this.op[arg0 - 30].equalsIgnoreCase(Text.HIDDEN)) {
 				this.op[arg0 - 30] = null;
 			}
 		} else if (arg0 >= 35 && arg0 < 40) {

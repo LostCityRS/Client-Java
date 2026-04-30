@@ -37,7 +37,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 	public void method305() {
 		if (this.field1008) {
 			try {
-				Client.method629(this.field1045.applet, "midibox.src=\"c:/silence.mid\";");
+				Client.evalJavaScript(this.field1045.applet, "midibox.src=\"c:/silence.mid\";");
 			} catch (Throwable var1) {
 			}
 			this.field1008 = false;
@@ -57,7 +57,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 				var1.write(this.field1039, 0, this.field1039.length);
 				var1.close();
 				try {
-					Client.method629(this.field1045.applet, "midibox.loop=" + (this.field1025 ? "\"infinite\"" : "0") + "; midibox.src=\"" + var1.getFile().getPath().replace('\\', '/') + "\"; midibox.volume=" + this.field1033 + ";");
+					Client.evalJavaScript(this.field1045.applet, "midibox.loop=" + (this.field1025 ? "\"infinite\"" : "0") + "; midibox.src=\"" + var1.getFile().getPath().replace('\\', '/') + "\"; midibox.volume=" + this.field1033 + ";");
 					this.field1008 = true;
 				} catch (Throwable var3) {
 				}
@@ -87,7 +87,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 			this.field1033 = var3;
 		} else if (this.field1008) {
 			try {
-				Client.method629(this.field1045.applet, "midibox.volume=" + var3 + ";");
+				Client.evalJavaScript(this.field1045.applet, "midibox.volume=" + var3 + ";");
 			} catch (Throwable var4) {
 			}
 		}

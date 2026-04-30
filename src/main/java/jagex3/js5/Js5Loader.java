@@ -132,8 +132,8 @@ public final class Js5Loader extends Js5 {
 
 	@ObfuscatedName("u.a(IB)V")
 	@Override
-	public void method219(int arg0) {
-		Js5Net.method661(this.archive, arg0);
+	public void updateCacheHint(int arg0) {
+		Js5Net.updateCacheHint(this.archive, arg0);
 	}
 
 	public Js5Loader(DataFile arg0, DataFile arg1, int arg2, boolean arg3, boolean arg4, boolean arg5) {

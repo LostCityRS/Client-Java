@@ -72,7 +72,7 @@ public final class IfType extends Linkable2 {
 	public int colour2 = 0;
 
 	@ObfuscatedName("qd.hd")
-	public boolean field2533 = false;
+	public boolean draggablebehavior = false;
 
 	@ObfuscatedName("qd.ic")
 	public JagString buttonText = Text.OK;
@@ -481,7 +481,7 @@ public final class IfType extends Linkable2 {
 			this.linkObjType = new int[this.width * this.height];
 			this.linkObjNumber = new int[this.width * this.height];
 			this.objSwap = arg0.g1() == 1;
-			this.field2533 = arg0.g1() == 1;
+			this.draggablebehavior = arg0.g1() == 1;
 			this.field2461 = arg0.g1() == 1;
 			this.objReplace = arg0.g1() == 1;
 			this.marginX = arg0.g1();
@@ -565,7 +565,7 @@ public final class IfType extends Linkable2 {
 			this.colour = arg0.g4();
 			this.marginX = arg0.g2b();
 			this.marginY = arg0.g2b();
-			this.field2533 = arg0.g1() == 1;
+			this.draggablebehavior = arg0.g1() == 1;
 			this.iop = new JagString[5];
 			for (int var11 = 0; var11 < 5; var11++) {
 				this.iop[var11] = arg0.gjstr();
@@ -730,7 +730,7 @@ public final class IfType extends Linkable2 {
 			this.field2501 = decodeHook(arg0);
 			this.field2553 = decodeHook(arg0);
 			this.field2486 = decodeHook(arg0);
-			this.field2533 = arg0.g1() == 1;
+			this.draggablebehavior = arg0.g1() == 1;
 			this.field2542 = arg0.g2();
 			this.field2500 = arg0.g1() == 1;
 			arg0.g1();

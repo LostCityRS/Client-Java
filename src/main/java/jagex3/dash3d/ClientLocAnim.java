@@ -24,7 +24,7 @@ public final class ClientLocAnim extends ModelSource {
 	public final int field1411;
 
 	@ObfuscatedName("j.Xb")
-	public final int field1423;
+	public final int z;
 
 	@ObfuscatedName("j.Jb")
 	public final int field1409;
@@ -66,7 +66,7 @@ public final class ClientLocAnim extends ModelSource {
 		if (var2.multiloc != null) {
 			var2 = var2.getMultiLoc();
 		}
-		return var2 == null ? null : var2.getModel(this.field1422, this.field1423, this.animFrame, this.field1414, this.field1411, this.anim, this.field1420, this.field1409);
+		return var2 == null ? null : var2.getModel(this.field1422, this.z, this.animFrame, this.field1414, this.field1411, this.anim, this.field1420, this.field1409);
 	}
 
 	public ClientLocAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, boolean arg8) {
@@ -74,7 +74,7 @@ public final class ClientLocAnim extends ModelSource {
 		this.id = arg0;
 		this.field1420 = arg6;
 		this.field1411 = arg2;
-		this.field1423 = arg4;
+		this.z = arg4;
 		this.field1409 = arg5;
 		this.field1414 = arg1;
 		if (arg7 != -1) {

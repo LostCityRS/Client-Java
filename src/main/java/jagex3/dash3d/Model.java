@@ -658,8 +658,8 @@ public final class Model extends ModelSource {
 			while (var12 > var10) {
 				var10 = arg4[var17++];
 			}
-			if (var10 != var12 || var8.field3117[var12] == 0) {
-				this.animate2(var8.field3117[var12], var8.field3107[var12], var6.field2120[var11], var6.field2125[var11], var6.field2124[var11]);
+			if (var10 != var12 || var8.type[var12] == 0) {
+				this.animate2(var8.type[var12], var8.labels[var12], var6.field2120[var11], var6.field2125[var11], var6.field2124[var11]);
 			}
 		}
 		oX = 0;
@@ -673,8 +673,8 @@ public final class Model extends ModelSource {
 			while (var16 > var14) {
 				var14 = arg4[var18++];
 			}
-			if (var14 == var16 || var8.field3117[var16] == 0) {
-				this.animate2(var8.field3117[var16], var8.field3107[var16], var7.field2120[var15], var7.field2125[var15], var7.field2124[var15]);
+			if (var14 == var16 || var8.type[var16] == 0) {
+				this.animate2(var8.type[var16], var8.labels[var16], var7.field2120[var15], var7.field2125[var15], var7.field2124[var15]);
 			}
 		}
 	}
@@ -1992,7 +1992,7 @@ public final class Model extends ModelSource {
 		oZ = 0;
 		for (int var5 = 0; var5 < var3.size; var5++) {
 			int var6 = var3.ti[var5];
-			this.animate2(var4.field3117[var6], var4.field3107[var6], var3.field2120[var5], var3.field2125[var5], var3.field2124[var5]);
+			this.animate2(var4.type[var6], var4.labels[var6], var3.field2120[var5], var3.field2125[var5], var3.field2124[var5]);
 		}
 	}
 

@@ -16,13 +16,13 @@ public class MidiManager {
 	@ObfuscatedName("fc.Ub")
 	public static int field917;
 	@ObfuscatedName("d.Fc")
-	public static int field661;
+	public static int pendingVolume;
 	@ObfuscatedName("client.Eb")
-	public static boolean field611;
+	public static boolean pendingLoop;
 	@ObfuscatedName("jc.pb")
 	public static int field1462;
 	@ObfuscatedName("ga.M")
-	public static Js5 field1028;
+	public static Js5 midis;
 	@ObfuscatedName("ca.o")
 	public static int field463;
 	@ObfuscatedName("bb.a")
@@ -53,10 +53,10 @@ public class MidiManager {
 		field2985 = -1;
 		field405 = -1;
 		field917 = arg2;
-		field661 = 0;
-		field611 = false;
+		pendingVolume = 0;
+		pendingLoop = false;
 		field1462 = arg0;
-		field1028 = arg3;
+		midis = arg3;
 		field463 = arg1;
 	}
 
@@ -70,7 +70,7 @@ public class MidiManager {
 		if (method521()) {
 			method475();
 			field1391 = false;
-			field1028 = null;
+			midis = null;
 		}
 	}
 
@@ -79,11 +79,11 @@ public class MidiManager {
 		if (!method521()) {
 			return;
 		}
-		field611 = false;
+		pendingLoop = false;
 		field405 = 10;
-		field661 = arg3;
+		pendingVolume = arg3;
 		field1391 = true;
-		field1028 = arg2;
+		midis = arg2;
 		field2985 = -1;
 		field917 = arg0;
 		field1462 = 0;
@@ -94,7 +94,7 @@ public class MidiManager {
 	public static synchronized void method672() {
 		if (method521()) {
 			method397();
-			field1028 = null;
+			midis = null;
 			field1391 = false;
 		}
 	}
@@ -105,17 +105,17 @@ public class MidiManager {
 			return;
 		}
 		if (field1391) {
-			byte[] var0 = method25(field661, field1028, field463, field1462);
+			byte[] var0 = method25(pendingVolume, midis, field463, field1462);
 			if (var0 != null) {
 				if (field405 >= 0) {
-					method749(field917, field611, var0, field405);
+					method749(field917, pendingLoop, var0, field405);
 				} else if (field2985 < 0) {
-					method7(field611, var0, field917);
+					method7(pendingLoop, var0, field917);
 				} else {
-					method406(field917, field611, field2985, var0);
+					method406(field917, pendingLoop, field2985, var0);
 				}
 				field1391 = false;
-				field1028 = null;
+				midis = null;
 			}
 		}
 		method962();
@@ -185,7 +185,7 @@ public class MidiManager {
 		if (field30 != null) {
 			ByteArrayNode var6 = (ByteArrayNode) field30.find(var4);
 			if (var6 != null) {
-				return var6.field1198;
+				return var6.data;
 			}
 		}
 		byte[] var7 = arg1.getFile(arg0, arg2);

@@ -469,7 +469,7 @@ public final class LocType extends Linkable2 {
 			this.contrast = arg0.g1b() * 5;
 		} else if (arg1 >= 30 && arg1 < 35) {
 			this.op[arg1 - 30] = arg0.gjstr();
-			if (this.op[arg1 - 30].equalsIgnoreCase(Text.field2928)) {
+			if (this.op[arg1 - 30].equalsIgnoreCase(Text.HIDDEN)) {
 				this.op[arg1 - 30] = null;
 			}
 		} else if (arg1 == 40) {

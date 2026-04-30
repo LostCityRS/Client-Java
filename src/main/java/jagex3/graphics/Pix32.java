@@ -30,7 +30,7 @@ public final class Pix32 extends Pix2D {
 	public int xof;
 
 	@ObfuscatedName("jd.a([I[IIIIIIIIIII)V")
-	public static void method545(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public static void litSprite(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		int var11 = arg2;
 		for (int var12 = -arg7; var12 < 0; var12++) {
 			int var13 = (arg3 >> 16) * arg10;
@@ -101,7 +101,7 @@ public final class Pix32 extends Pix2D {
 			var8 += var12 * var20;
 			var17 += var20;
 		}
-		method563(Pix2D.pixels, this.data, var8, var9, var16, var17, arg2, arg3, var12, var13, var6, arg4);
+		plotScale(Pix2D.pixels, this.data, var8, var9, var16, var17, arg2, arg3, var12, var13, var6, arg4);
 	}
 
 	@ObfuscatedName("jd.a(III)V")
@@ -180,7 +180,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.a([I[IIIIIIII)V")
-	public static void method549(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public static void plotSprite(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		int var8 = -(arg4 >> 2);
 		int var9 = -(arg4 & 0x3);
 		for (int var10 = -arg5; var10 < 0; var10++) {
@@ -225,7 +225,7 @@ public final class Pix32 extends Pix2D {
 
 	@ObfuscatedName("jd.e(IIII)V")
 	public void pixelPerfectRotateScalePlotSprite(int arg0, int arg1, int arg2, int arg3) {
-		this.method552(this.owi << 3, this.ohi << 3, arg0 << 4, arg1 << 4, arg2, arg3);
+		this.pixelPerfectRotateScalePlotSprite(this.owi << 3, this.ohi << 3, arg0 << 4, arg1 << 4, arg2, arg3);
 	}
 
 	@ObfuscatedName("jd.a(II)V")
@@ -264,12 +264,12 @@ public final class Pix32 extends Pix2D {
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method549(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
+			plotSprite(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
 	@ObfuscatedName("jd.c(IIIIII)V")
-	public void method552(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void pixelPerfectRotateScalePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg5 == 0) {
 			return;
 		}
@@ -744,7 +744,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.a(Le;II)V")
-	public void method555(Pix8 arg0, int arg1, int arg2) {
+	public void scanlinePlotSprite(Pix8 arg0, int arg1, int arg2) {
 		int var4 = this.xof + arg1;
 		int var5 = this.yof + arg2;
 		int var6 = Pix2D.width * var5 + var4;
@@ -877,7 +877,7 @@ public final class Pix32 extends Pix2D {
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			method560(Pix2D.pixels, this.data, var7, var6, var9, var8, var10, var11, arg2);
+			tranSprite(Pix2D.pixels, this.data, var7, var6, var9, var8, var10, var11, arg2);
 		}
 	}
 
@@ -917,7 +917,7 @@ public final class Pix32 extends Pix2D {
 	}
 
 	@ObfuscatedName("jd.a([I[IIIIIIIII)V")
-	public static void method560(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public static void tranSprite(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var9 = 256 - arg8;
 		for (int var10 = -arg5; var10 < 0; var10++) {
 			for (int var11 = -arg4; var11 < 0; var11++) {
@@ -1005,11 +1005,11 @@ public final class Pix32 extends Pix2D {
 			var7 += var11 * var19;
 			var16 += var19;
 		}
-		method545(Pix2D.pixels, this.data, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
+		litSprite(Pix2D.pixels, this.data, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
 	}
 
 	@ObfuscatedName("jd.a([I[IIIIIIIIIIII)V")
-	public static void method563(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
+	public static void plotScale(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 		int var12 = 256 - arg11;
 		int var13 = arg2;
 		for (int var14 = -arg7; var14 < 0; var14++) {

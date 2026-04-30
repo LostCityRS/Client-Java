@@ -46,36 +46,36 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 	@ObfuscatedName("ja.b(I)V")
 	@Override
 	public synchronized void method308() {
-		if (!field1444.method342()) {
+		if (!field1444.gotMidi()) {
 			return;
 		}
-		long var1 = (long) (field1445 + 200 - field1442.method313()) * (long) (field1444.field760 * 1000);
+		long var1 = (long) (field1445 + 200 - field1442.method313()) * (long) (field1444.division * 1000);
 		while (true) {
 			while (true) {
-				int var3 = field1444.method335();
-				int var4 = field1444.field756[var3];
-				long var5 = field1444.method336(var4);
+				int var3 = field1444.nextTrackToPlay();
+				int var4 = field1444.trackCurrentTick[var3];
+				long var5 = field1444.timeFromTick(var4);
 				if (var5 > var1) {
 					method540();
 					return;
 				}
-				while (field1444.field756[var3] == var4) {
+				while (field1444.trackCurrentTick[var3] == var4) {
 					field1444.method350(var3);
 					this.method539(var5, var3);
 					if (field1444.method343()) {
 						field1444.method345(var3);
-						if (field1444.method348()) {
+						if (field1444.allTracksFinished()) {
 							if (!field1447) {
-								this.method1000((long) (var5 / (long) (field1444.field760 * 1000)));
-								field1444.method340();
+								this.method1000((long) (var5 / (long) (field1444.division * 1000)));
+								field1444.dropMidi();
 								method540();
 								return;
 							}
-							field1444.method344(var5);
+							field1444.restart(var5);
 						}
 						break;
 					}
-					field1444.method339(var3);
+					field1444.processDeltaTime(var3);
 					field1444.method345(var3);
 				}
 			}
@@ -84,15 +84,15 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 
 	@ObfuscatedName("ja.a(JBI)V")
 	public void method539(long arg0, int arg1) {
-		int var4 = field1444.method337(arg1);
+		int var4 = field1444.getEvent(arg1);
 		if (var4 == 1) {
-			field1444.method349();
+			field1444.finishTrack();
 		} else if ((var4 & 0x80) != 0) {
-			int var5 = (int) (arg0 / (long) (field1444.field760 * 1000));
+			int var5 = (int) (arg0 / (long) (field1444.division * 1000));
 			int var6 = var4 & 0xFF;
 			int var7 = var4 >> 8 & 0xFF;
 			int var8 = var4 >> 16 & 0xFF;
-			if (!this.method1001(var6, var7, var8, (long) var5)) {
+			if (!this.loadAndQueuePatches(var6, var7, var8, (long) var5)) {
 				method541(var7, var8, var5, var6);
 				return;
 			}
@@ -138,17 +138,17 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 	@Override
 	public synchronized void method307(byte[] arg0, boolean arg1, int arg2) {
 		boolean var4 = true;
-		field1444.method341(arg0);
+		field1444.setMidi(arg0);
 		field1445 = 0;
 		field1447 = arg1;
 		field1442.method314();
 		this.method996(arg2, 0, (long) field1445);
-		int var5 = field1444.method338();
+		int var5 = field1444.getTrackCount();
 		for (int var6 = 0; var6 < var5; var6++) {
 			field1444.method350(var6);
 			while (!field1444.method343()) {
-				field1444.method339(var6);
-				if (field1444.field756[var6] != 0) {
+				field1444.processDeltaTime(var6);
+				if (field1444.trackCurrentTick[var6] != 0) {
 					var4 = false;
 					break;
 				}
@@ -161,7 +161,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 				throw new RuntimeException();
 			}
 			this.method1000((long) field1445);
-			field1444.method340();
+			field1444.dropMidi();
 		}
 		method540();
 	}
@@ -203,6 +203,6 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 		this.method1000((long) field1445);
 		field1442.method310(field1446, field1448);
 		field1448 = 0;
-		field1444.method340();
+		field1444.dropMidi();
 	}
 }

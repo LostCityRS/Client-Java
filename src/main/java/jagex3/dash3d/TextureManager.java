@@ -12,55 +12,55 @@ public final class TextureManager implements TextureProvider {
 	public LinkList field1854 = new LinkList();
 
 	@ObfuscatedName("mc.v")
-	public final Texture[] field1867;
+	public final Texture[] textures;
 
 	@ObfuscatedName("mc.F")
-	public double field1877 = 1.0D;
+	public double brightness = 1.0D;
 
 	@ObfuscatedName("mc.D")
-	public int field1875 = 128;
+	public int resolution = 128;
 
 	@ObfuscatedName("mc.I")
 	public int field1880 = 0;
 
 	@ObfuscatedName("mc.H")
-	public final int field1879 = 20;
+	public final int poolSize = 20;
 
 	@ObfuscatedName("mc.E")
-	public final Js5 field1876;
+	public final Js5 sprites;
 
 	@ObfuscatedName("mc.a(I)V")
 	public void reset() {
-		for (int var1 = 0; var1 < this.field1867.length; var1++) {
-			if (this.field1867[var1] != null) {
-				this.field1867[var1].method764();
+		for (int var1 = 0; var1 < this.textures.length; var1++) {
+			if (this.textures[var1] != null) {
+				this.textures[var1].unload();
 			}
 		}
 		this.field1854 = new LinkList();
-		this.field1880 = this.field1879;
+		this.field1880 = this.poolSize;
 	}
 
 	@ObfuscatedName("mc.a(II)[I")
 	@Override
 	public int[] getTexels(int arg0) {
-		Texture var2 = this.field1867[arg0];
+		Texture var2 = this.textures[arg0];
 		if (var2 != null) {
-			if (var2.field2194 != null) {
+			if (var2.texels != null) {
 				this.field1854.pushFront(var2);
 				var2.field2201 = true;
-				return var2.field2194;
+				return var2.texels;
 			}
-			boolean var3 = var2.method763(this.field1877, this.field1875, this.field1876);
+			boolean var3 = var2.loadTexture(this.brightness, this.resolution, this.sprites);
 			if (var3) {
 				if (this.field1880 == 0) {
 					Texture var4 = (Texture) this.field1854.pop();
-					var4.method764();
+					var4.unload();
 				} else {
 					this.field1880--;
 				}
 				this.field1854.pushFront(var2);
 				var2.field2201 = true;
-				return var2.field2194;
+				return var2.texels;
 			}
 		}
 		return null;
@@ -69,27 +69,27 @@ public final class TextureManager implements TextureProvider {
 	@ObfuscatedName("mc.a(ZI)I")
 	@Override
 	public int getAverageRgb(int arg0) {
-		return this.field1867[arg0] == null ? 0 : this.field1867[arg0].field2192;
+		return this.textures[arg0] == null ? 0 : this.textures[arg0].averageRgb;
 	}
 
 	@ObfuscatedName("mc.a(BI)Z")
 	@Override
 	public boolean isOpaque(int arg0) {
-		return this.field1867[arg0].field2198;
+		return this.textures[arg0].opaque;
 	}
 
 	@ObfuscatedName("mc.a(ID)V")
 	public void setBrightness(double arg0) {
-		this.field1877 = arg0;
+		this.brightness = arg0;
 		this.reset();
 	}
 
 	@ObfuscatedName("mc.b(BI)V")
 	public void runAnims(int arg0) {
-		for (int var2 = 0; var2 < this.field1867.length; var2++) {
-			Texture var3 = this.field1867[var2];
-			if (var3 != null && var3.field2191 != 0 && var3.field2201) {
-				var3.method762(arg0);
+		for (int var2 = 0; var2 < this.textures.length; var2++) {
+			Texture var3 = this.textures[var2];
+			if (var3 != null && var3.animationDirection != 0 && var3.field2201) {
+				var3.animate(arg0);
 				var3.field2201 = false;
 			}
 		}
@@ -98,20 +98,20 @@ public final class TextureManager implements TextureProvider {
 	@ObfuscatedName("mc.a(IB)Z")
 	@Override
 	public boolean isLowMem(int arg0) {
-		return this.field1875 == 64;
+		return this.resolution == 64;
 	}
 
 	public TextureManager(Js5 arg0, Js5 arg1, int arg2, double arg3, int arg4) {
-		this.field1876 = arg1;
-		this.field1877 = arg3;
-		this.field1875 = arg4;
-		this.field1880 = this.field1879;
+		this.sprites = arg1;
+		this.brightness = arg3;
+		this.resolution = arg4;
+		this.field1880 = this.poolSize;
 		int[] var7 = arg0.getFileList(0);
 		int var8 = var7.length;
-		this.field1867 = new Texture[arg0.getFileIdLimit(0)];
+		this.textures = new Texture[arg0.getFileIdLimit(0)];
 		for (int var9 = 0; var9 < var8; var9++) {
 			Packet var10 = new Packet(arg0.getFile(var7[var9], 0));
-			this.field1867[var7[var9]] = new Texture(var10);
+			this.textures[var7[var9]] = new Texture(var10);
 		}
 	}
 }

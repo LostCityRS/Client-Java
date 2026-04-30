@@ -8,52 +8,52 @@ import jagex3.config.SpotType;
 public final class ClientProj extends ModelSource {
 
 	@ObfuscatedName("d.ac")
-	public int field630 = 0;
+	public int animCycle = 0;
 
 	@ObfuscatedName("d.bc")
 	public final int t1;
 
 	@ObfuscatedName("d.dc")
-	public int field633;
+	public int pitch;
 
 	@ObfuscatedName("d.hc")
-	public double field637;
+	public double x;
 
 	@ObfuscatedName("d.ic")
 	public final int level;
 
 	@ObfuscatedName("d.jc")
-	public int field639 = 0;
+	public int animFrame = 0;
 
 	@ObfuscatedName("d.lc")
-	public final int field641;
+	public final int srcZ;
 
 	@ObfuscatedName("d.qc")
-	public final int field646;
+	public final int startpos;
 
 	@ObfuscatedName("d.tc")
-	public double field649;
+	public double y;
 
 	@ObfuscatedName("d.uc")
-	public double field650;
+	public double z;
 
 	@ObfuscatedName("d.wc")
-	public double field652;
+	public double velocity;
 
 	@ObfuscatedName("d.Vb")
-	public boolean field625 = false;
+	public boolean mobile = false;
 
 	@ObfuscatedName("d.Lb")
-	public final int field615;
+	public final int srcX;
 
 	@ObfuscatedName("d.Kb")
-	public final int field614;
+	public final int h1;
 
 	@ObfuscatedName("d.Nb")
 	public final int field617;
 
 	@ObfuscatedName("d.Pb")
-	public final int field619;
+	public final int spotanim;
 
 	@ObfuscatedName("d.Yb")
 	public final int t2;
@@ -62,99 +62,99 @@ public final class ClientProj extends ModelSource {
 	public final int target;
 
 	@ObfuscatedName("d.yc")
-	public final int field654;
+	public final int angle;
 
 	@ObfuscatedName("d.Hc")
-	public final SeqType field663;
+	public final SeqType anim;
 
 	@ObfuscatedName("d.Zb")
-	public double field629;
+	public double velocityY;
 
 	@ObfuscatedName("d.xc")
-	public double field653;
+	public double accelerationY;
 
 	@ObfuscatedName("d.Cc")
-	public double field658;
+	public double velocityZ;
 
 	@ObfuscatedName("d.Mc")
-	public double field668;
+	public double velocityX;
 
 	@ObfuscatedName("d.Oc")
-	public int field670;
+	public int yaw;
 
 	public ClientProj(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
-		this.field615 = arg2;
-		this.field614 = arg4;
-		this.field625 = false;
+		this.srcX = arg2;
+		this.h1 = arg4;
+		this.mobile = false;
 		this.field617 = arg10;
-		this.field646 = arg8;
-		this.field619 = arg0;
+		this.startpos = arg8;
+		this.spotanim = arg0;
 		this.level = arg1;
 		this.t2 = arg6;
 		this.t1 = arg5;
 		this.target = arg9;
-		this.field641 = arg3;
-		this.field654 = arg7;
-		int var12 = SpotType.list(this.field619).anim;
+		this.srcZ = arg3;
+		this.angle = arg7;
+		int var12 = SpotType.list(this.spotanim).anim;
 		if (var12 == -1) {
-			this.field663 = null;
+			this.anim = null;
 		} else {
-			this.field663 = SeqType.list(var12);
+			this.anim = SeqType.list(var12);
 		}
 	}
 
 	@ObfuscatedName("d.f(I)Lpa;")
 	@Override
 	public Model getTempModel() {
-		SpotType var1 = SpotType.list(this.field619);
-		Model var2 = var1.getTempModel2(this.field639);
+		SpotType var1 = SpotType.list(this.spotanim);
+		Model var2 = var1.getTempModel2(this.animFrame);
 		if (var2 == null) {
 			return null;
 		} else {
-			var2.method772(this.field633);
+			var2.method772(this.pitch);
 			return var2;
 		}
 	}
 
 	@ObfuscatedName("d.b(II)V")
 	public void move(int arg0) {
-		this.field625 = true;
-		this.field650 += (double) arg0 * this.field658;
-		this.field637 += (double) arg0 * this.field668;
-		this.field649 += this.field653 * 0.5D * (double) arg0 * (double) arg0 + (double) arg0 * this.field629;
-		this.field629 += (double) arg0 * this.field653;
-		this.field670 = (int) (Math.atan2(this.field668, this.field658) * 325.949D) + 1024 & 0x7FF;
-		this.field633 = (int) (Math.atan2(this.field629, this.field652) * 325.949D) & 0x7FF;
-		if (this.field663 == null) {
+		this.mobile = true;
+		this.z += (double) arg0 * this.velocityZ;
+		this.x += (double) arg0 * this.velocityX;
+		this.y += this.accelerationY * 0.5D * (double) arg0 * (double) arg0 + (double) arg0 * this.velocityY;
+		this.velocityY += (double) arg0 * this.accelerationY;
+		this.yaw = (int) (Math.atan2(this.velocityX, this.velocityZ) * 325.949D) + 1024 & 0x7FF;
+		this.pitch = (int) (Math.atan2(this.velocityY, this.velocity) * 325.949D) & 0x7FF;
+		if (this.anim == null) {
 			return;
 		}
-		this.field630 += arg0;
-		while (this.field663.delay[this.field639] < this.field630) {
-			this.field630 -= this.field663.delay[this.field639];
-			this.field639++;
-			if (this.field663.frames.length <= this.field639) {
-				this.field639 = 0;
+		this.animCycle += arg0;
+		while (this.anim.delay[this.animFrame] < this.animCycle) {
+			this.animCycle -= this.anim.delay[this.animFrame];
+			this.animFrame++;
+			if (this.anim.frames.length <= this.animFrame) {
+				this.animFrame = 0;
 			}
 		}
 	}
 
 	@ObfuscatedName("d.a(IIIII)V")
 	public void setTarget(int arg0, int arg1, int arg2, int arg3) {
-		if (!this.field625) {
-			double var5 = (double) (arg3 - this.field615);
-			double var7 = (double) (arg1 - this.field641);
+		if (!this.mobile) {
+			double var5 = (double) (arg3 - this.srcX);
+			double var7 = (double) (arg1 - this.srcZ);
 			double var9 = Math.sqrt(var5 * var5 + var7 * var7);
-			this.field637 = (double) this.field646 * var5 / var9 + (double) this.field615;
-			this.field650 = (double) this.field646 * var7 / var9 + (double) this.field641;
-			this.field649 = this.field614;
+			this.x = (double) this.startpos * var5 / var9 + (double) this.srcX;
+			this.z = (double) this.startpos * var7 / var9 + (double) this.srcZ;
+			this.y = this.h1;
 		}
 		double var11 = (double) (this.t2 + 1 - arg0);
-		this.field658 = ((double) arg1 - this.field650) / var11;
-		this.field668 = ((double) arg3 - this.field637) / var11;
-		this.field652 = Math.sqrt(this.field668 * this.field668 + this.field658 * this.field658);
-		if (!this.field625) {
-			this.field629 = -this.field652 * Math.tan((double) this.field654 * 0.02454369D);
+		this.velocityZ = ((double) arg1 - this.z) / var11;
+		this.velocityX = ((double) arg3 - this.x) / var11;
+		this.velocity = Math.sqrt(this.velocityX * this.velocityX + this.velocityZ * this.velocityZ);
+		if (!this.mobile) {
+			this.velocityY = -this.velocity * Math.tan((double) this.angle * 0.02454369D);
 		}
-		this.field653 = ((double) arg2 - this.field649 - this.field629 * var11) * 2.0D / (var11 * var11);
+		this.accelerationY = ((double) arg2 - this.y - this.velocityY * var11) * 2.0D / (var11 * var11);
 	}
 }

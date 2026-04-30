@@ -55,7 +55,7 @@ public class ClientBuild {
 	public static int[] DECORZOF = new int[]{0, -1, 0, 1};
 
 	@ObfuscatedName("nd.a(IIB)Z")
-	public static boolean method741(int arg0, int arg1) {
+	public static boolean changeLocAvailable(int arg0, int arg1) {
 		if (arg0 == 11) {
 			arg0 = 10;
 		}
@@ -227,7 +227,7 @@ public class ClientBuild {
 			for (int var13 = 0; var13 < 64; var13++) {
 				for (int var14 = 0; var14 < 64; var14++) {
 					if (arg2 == var12 && var13 >= arg1 && arg1 + 8 > var13 && var14 >= arg5 && arg5 + 8 > var14) {
-						loadGroundSquare(arg4 + RegionRotate.method519(arg6, var13 & 0x7, var14 & 0x7), arg6, var11, arg0 + RegionRotate.method677(var13 & 0x7, var14 & 0x7, arg6), 0, 0, arg3);
+						loadGroundSquare(arg4 + RegionRotate.DX(arg6, var13 & 0x7, var14 & 0x7), arg6, var11, arg0 + RegionRotate.DZ(var13 & 0x7, var14 & 0x7, arg6), 0, 0, arg3);
 					} else {
 						loadGroundSquare(-1, 0, var11, -1, 0, 0, 0);
 					}

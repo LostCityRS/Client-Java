@@ -57,7 +57,7 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	}
 
 	@ObfuscatedName("de.a(Z)V")
-	public static void method327() {
+	public static void shutdown() {
 		if (instance != null) {
 			ClientMouseListener var0 = instance;
 			synchronized (instance) {

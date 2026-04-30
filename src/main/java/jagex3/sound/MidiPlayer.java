@@ -10,17 +10,17 @@ public abstract class MidiPlayer extends MidiStream {
 	@ObfuscatedName("na.i")
 	public static int[] field1937 = new int[128];
     @ObfuscatedName("oe.l")
-    public static int field2180 = 256;
+    public static int globalVolume = 256;
 
     @ObfuscatedName("uc.a(IIJI)V")
 	public final void method996(int arg0, int arg1, long arg2) {
 		int var5 = (int) ((double) arg0 * Math.pow(0.1D, (double) arg1 * 5.0E-4D) + 0.5D);
-		if (field2180 == var5) {
+		if (globalVolume == var5) {
 			return;
 		}
-		field2180 = var5;
+		globalVolume = var5;
 		for (int var6 = 0; var6 < 16; var6++) {
-			int var7 = method1002(var6);
+			int var7 = getPan(var6);
 			this.method306(var6 + 176, 7, var7 >> 7, arg2);
 			this.method306(var6 + 176, 39, var7 & 0x7F, arg2);
 		}
@@ -28,12 +28,12 @@ public abstract class MidiPlayer extends MidiStream {
 
 	@ObfuscatedName("uc.a(IJI)V")
 	public final void method997(long arg0, int arg1) {
-		field2180 = arg1;
+		globalVolume = arg1;
 		for (int var4 = 0; var4 < 16; var4++) {
 			field1753[var4] = 12800;
 		}
 		for (int var5 = 0; var5 < 16; var5++) {
-			int var6 = method1002(var5);
+			int var6 = getPan(var5);
 			this.method306(var5 + 176, 7, var6 >> 7, arg0);
 			this.method306(var5 + 176, 39, var6 & 0x7F, arg0);
 		}
@@ -71,7 +71,7 @@ public abstract class MidiPlayer extends MidiStream {
 	}
 
 	@ObfuscatedName("uc.b(IIIJ)Z")
-	public final boolean method1001(int arg0, int arg1, int arg2, long arg3) {
+	public final boolean loadAndQueuePatches(int arg0, int arg1, int arg2, long arg3) {
 		if ((arg0 & 0xE0) == 128) {
 			int var6 = 0x1 << (arg0 & 0xF);
 			int var7 = field1937[arg1];
@@ -89,7 +89,7 @@ public abstract class MidiPlayer extends MidiStream {
 				this.method306(arg0, arg1, arg2, arg3);
 				int var8 = arg0 & 0xF;
 				field1753[var8] = 12800;
-				int var9 = method1002(var8);
+				int var9 = getPan(var8);
 				this.method306(arg0, 7, var9 >> 7, arg3);
 				this.method306(arg0, 39, var9 & 0x7F, arg3);
 				return true;
@@ -101,7 +101,7 @@ public abstract class MidiPlayer extends MidiStream {
 				} else {
 					field1753[var10] = (field1753[var10] & 0x3F80) + arg2;
 				}
-				int var11 = method1002(var10);
+				int var11 = getPan(var10);
 				this.method306(arg0, 7, var11 >> 7, arg3);
 				this.method306(arg0, 39, var11 & 0x7F, arg3);
 				return true;
@@ -111,9 +111,9 @@ public abstract class MidiPlayer extends MidiStream {
 	}
 
 	@ObfuscatedName("uc.g(I)I")
-	public static int method1002(int arg0) {
+	public static int getPan(int arg0) {
 		int var1 = field1753[arg0];
-		int var2 = (field2180 * var1 >> 8) * var1;
+		int var2 = (globalVolume * var1 >> 8) * var1;
 		return (int) (Math.sqrt((double) var2) + 0.5D);
 	}
 

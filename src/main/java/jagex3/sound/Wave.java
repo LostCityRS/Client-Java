@@ -6,36 +6,36 @@ import deob.ObfuscatedName;
 public final class Wave extends PcmStreamable {
 
 	@ObfuscatedName("wd.db")
-	public byte[] field3308;
+	public byte[] samples;
 
 	@ObfuscatedName("wd.eb")
-	public int field3309;
+	public int loopStartPosition;
 
 	@ObfuscatedName("wd.fb")
-	public int field3310;
+	public int loopEndPosition;
 
 	@ObfuscatedName("wd.gb")
-	public int field3311 = 22050;
+	public int samplingFrequency = 22050;
 
 	@ObfuscatedName("wd.a(Lqb;)Lwd;")
 	public Wave decimate(Decimator arg0) {
-		this.field3308 = arg0.method845(this.field3308);
-		this.field3311 = arg0.method842(this.field3311);
-		if (this.field3310 == this.field3309) {
-			this.field3309 = this.field3310 = arg0.method840(this.field3309);
+		this.samples = arg0.decimate(this.samples);
+		this.samplingFrequency = arg0.transmitFreq(this.samplingFrequency);
+		if (this.loopEndPosition == this.loopStartPosition) {
+			this.loopStartPosition = this.loopEndPosition = arg0.transmitPos(this.loopStartPosition);
 		} else {
-			this.field3309 = arg0.method840(this.field3309);
-			this.field3310 = arg0.method840(this.field3310);
-			if (this.field3310 == this.field3309) {
-				this.field3309--;
+			this.loopStartPosition = arg0.transmitPos(this.loopStartPosition);
+			this.loopEndPosition = arg0.transmitPos(this.loopEndPosition);
+			if (this.loopEndPosition == this.loopStartPosition) {
+				this.loopStartPosition--;
 			}
 		}
 		return this;
 	}
 
 	public Wave(int arg0, byte[] arg1, int arg2, int arg3) {
-		this.field3308 = arg1;
-		this.field3309 = arg2;
-		this.field3310 = arg3;
+		this.samples = arg1;
+		this.loopStartPosition = arg2;
+		this.loopEndPosition = arg3;
 	}
 }

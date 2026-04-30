@@ -5,7 +5,7 @@ import jagex3.config.VarBitType;
 
 public class VarCache {
 	@ObfuscatedName("ac.J")
-	public static int[] field173 = new int[32];
+	public static int[] mask = new int[32];
 	@ObfuscatedName("se.E")
 	public static int[] var = new int[2000];
 	@ObfuscatedName("ga.E")
@@ -16,7 +16,7 @@ public class VarCache {
     static {
 		int var0 = 2;
 		for (int var1 = 0; var1 < 32; var1++) {
-			field173[var1] = var0 - 1;
+			mask[var1] = var0 - 1;
 			var0 += var0;
 		}
 	}
@@ -27,7 +27,7 @@ public class VarCache {
 		int var2 = var1.endbit;
 		int var3 = var1.basevar;
 		int var4 = var1.startbit;
-		int var5 = field173[var2 - var4];
+		int var5 = mask[var2 - var4];
 		return var[var3] >> var4 & var5;
 	}
 
@@ -37,7 +37,7 @@ public class VarCache {
 		int var3 = var2.startbit;
 		int var4 = var2.basevar;
 		int var5 = var2.endbit;
-		int var6 = field173[var5 - var3];
+		int var6 = mask[var5 - var3];
 		if (arg0 < 0 || var6 < arg0) {
 			arg0 = 0;
 		}

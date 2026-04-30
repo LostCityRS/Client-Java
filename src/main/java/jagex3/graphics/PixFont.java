@@ -9,10 +9,10 @@ import java.util.Random;
 public final class PixFont extends Pix2D {
 
 	@ObfuscatedName("bc.ac")
-	public final int field360;
+	public final int maxAscent;
 
 	@ObfuscatedName("bc.Db")
-	public static JagString[] field337 = new JagString[100];
+	public static JagString[] lines = new JagString[100];
 
 	@ObfuscatedName("bc.Fb")
 	public static JagString field339 = JagString.wrap("dbl");
@@ -69,7 +69,7 @@ public final class PixFont extends Pix2D {
 	public static JagString field338 = JagString.wrap("whi");
 
 	@ObfuscatedName("bc.Ub")
-	public byte[][] field354 = new byte[256][];
+	public byte[][] glyphs = new byte[256][];
 
 	@ObfuscatedName("bc.Qb")
 	public int ascent = 0;
@@ -81,16 +81,16 @@ public final class PixFont extends Pix2D {
 	public boolean strikeout = false;
 
 	@ObfuscatedName("bc.Rb")
-	public final int[] field351;
+	public final int[] glyphOffsetY;
 
 	@ObfuscatedName("bc.Nb")
 	public final int[] charAdvance;
 
 	@ObfuscatedName("bc.Vb")
-	public final int[] field355;
+	public final int[] glyphHeight;
 
 	@ObfuscatedName("bc.Zb")
-	public final int field359;
+	public final int maxDescent;
 
 	@ObfuscatedName("bc.d()V")
 	public static void unload() {
@@ -112,7 +112,7 @@ public final class PixFont extends Pix2D {
 		field341 = null;
 		field356 = null;
 		field348 = null;
-		field337 = null;
+		lines = null;
 	}
 
 	@ObfuscatedName("bc.a(La;)I")
@@ -160,7 +160,7 @@ public final class PixFont extends Pix2D {
 	}
 
 	@ObfuscatedName("bc.a([I[BIIIIIII)V")
-	public void method194(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void plot(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = -(arg5 >> 2);
 		int var11 = -(arg5 & 0x3);
 		for (int var12 = -arg6; var12 < 0; var12++) {
@@ -210,10 +210,10 @@ public final class PixFont extends Pix2D {
 		int var15 = 0;
 		JagString var16 = null;
 		if (arg9 == 0) {
-			arg9 = this.field360;
+			arg9 = this.maxAscent;
 		}
 		boolean var17 = true;
-		if (arg4 < this.field360 + this.field359 + arg9 && arg4 < arg9 + arg9) {
+		if (arg4 < this.maxAscent + this.maxDescent + arg9 && arg4 < arg9 + arg9) {
 			var17 = false;
 		}
 		int var18 = 0;
@@ -226,20 +226,20 @@ public final class PixFont extends Pix2D {
 				var20 += 4;
 			} else if (var21 == 92 && var20 + 1 < var19 && arg0.charAt(var20 + 1) == 110) {
 				var16 = null;
-				field337[var18++] = var13.substring(var12, var13.length()).method40();
+				lines[var18++] = var13.substring(var12, var13.length()).trim();
 				var12 = var13.length();
 				var11 = 0;
 				var14 = -1;
 				var20++;
 			} else {
 				var13.method29(var21);
-				var11 += this.method212(var21);
+				var11 += this.charWid(var21);
 				if (var21 == 32 || var21 == 45) {
 					var14 = var13.length();
 					var15 = var11;
 				}
 				if (var17 && var11 > arg3 && var14 >= 0) {
-					field337[var18++] = var13.substring(var12, var14).method40();
+					lines[var18++] = var13.substring(var12, var14).trim();
 					var12 = var14;
 					var14 = -1;
 					var11 -= var15;
@@ -251,37 +251,37 @@ public final class PixFont extends Pix2D {
 			}
 		}
 		if (var13.length() > var12) {
-			field337[var18++] = var13.substring(var12, var13.length()).method40();
+			lines[var18++] = var13.substring(var12, var13.length()).trim();
 		}
 		if (arg8 == 3 && var18 == 1) {
 			arg8 = 1;
 		}
 		int var22;
 		if (arg8 == 0) {
-			var22 = this.field360 + arg2;
+			var22 = this.maxAscent + arg2;
 		} else if (arg8 == 1) {
-			var22 = (arg4 - this.field360 - this.field359 - (var18 - 1) * arg9) / 2 + this.field360 + arg2;
+			var22 = (arg4 - this.maxAscent - this.maxDescent - (var18 - 1) * arg9) / 2 + this.maxAscent + arg2;
 		} else if (arg8 == 2) {
-			var22 = arg2 + arg4 - this.field359 - (var18 - 1) * arg9;
+			var22 = arg2 + arg4 - this.maxDescent - (var18 - 1) * arg9;
 		} else {
-			int var23 = (arg4 - this.field360 - this.field359 - (var18 - 1) * arg9) / (var18 + 1);
+			int var23 = (arg4 - this.maxAscent - this.maxDescent - (var18 - 1) * arg9) / (var18 + 1);
 			if (var23 < 0) {
 				var23 = 0;
 			}
-			var22 = this.field360 + arg2 + var23;
+			var22 = this.maxAscent + arg2 + var23;
 			arg9 += var23;
 		}
 		for (int var24 = 0; var24 < var18; var24++) {
 			if (arg7 == 0) {
-				this.drawString(field337[var24], arg1, var22, arg5, arg6);
+				this.drawString(lines[var24], arg1, var22, arg5, arg6);
 			} else if (arg7 == 1) {
-				this.centreString(field337[var24], arg3 / 2 + arg1, var22, arg5, arg6);
+				this.centreString(lines[var24], arg3 / 2 + arg1, var22, arg5, arg6);
 			} else if (arg7 == 2) {
-				this.rightString(field337[var24], arg1 + arg3, var22, arg5, arg6);
+				this.rightString(lines[var24], arg1 + arg3, var22, arg5, arg6);
 			} else if (var18 - 1 == var24) {
-				this.drawString(field337[var24], arg1, var22, arg5, arg6);
+				this.drawString(lines[var24], arg1, var22, arg5, arg6);
 			} else {
-				this.method203(field337[var24], arg1, var22, arg5, arg6, arg3);
+				this.method203(lines[var24], arg1, var22, arg5, arg6, arg3);
 			}
 			var22 += arg9;
 		}
@@ -297,14 +297,14 @@ public final class PixFont extends Pix2D {
 		for (int var8 = 0; var8 < arg0.length; var8++) {
 			int var9 = arg0.charCode[var8] & 0xFF;
 			if (var9 != 32) {
-				this.plotLetter(this.field354[var9], var6, this.field351[var9] + var7 + (int) (Math.sin((double) arg4 / 5.0D + (double) var8 / 2.0D) * 5.0D), this.charAdvance[var9], this.field355[var9], arg3);
+				this.plotLetter(this.glyphs[var9], var6, this.glyphOffsetY[var9] + var7 + (int) (Math.sin((double) arg4 / 5.0D + (double) var8 / 2.0D) * 5.0D), this.charAdvance[var9], this.glyphHeight[var9], arg3);
 			}
 			var6 += this.charAdvance[var9];
 		}
 	}
 
 	@ObfuscatedName("bc.a([I[BIIIIIIII)V")
-	public void method197(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+	public void plotTrans(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
 		int var11 = ((arg2 & 0xFF00FF) * arg9 & 0xFF00FF00) + ((arg2 & 0xFF00) * arg9 & 0xFF0000) >> 8;
 		int var12 = 256 - arg9;
 		for (int var13 = -arg6; var13 < 0; var13++) {
@@ -331,7 +331,7 @@ public final class PixFont extends Pix2D {
 		for (int var8 = 0; var8 < arg0.length(); var8++) {
 			int var9 = arg0.charCode[var8] & 0xFF;
 			if (var9 != 32) {
-				this.plotLetter(this.field354[var9], var6 + (int) (Math.sin((double) arg4 / 5.0D + (double) var8 / 5.0D) * 5.0D), this.field351[var9] + var7 + (int) (Math.sin((double) arg4 / 5.0D + (double) var8 / 3.0D) * 5.0D), this.charAdvance[var9], this.field355[var9], arg3);
+				this.plotLetter(this.glyphs[var9], var6 + (int) (Math.sin((double) arg4 / 5.0D + (double) var8 / 5.0D) * 5.0D), this.glyphOffsetY[var9] + var7 + (int) (Math.sin((double) arg4 / 5.0D + (double) var8 / 3.0D) * 5.0D), this.charAdvance[var9], this.glyphHeight[var9], arg3);
 			}
 			var6 += this.charAdvance[var9];
 		}
@@ -356,7 +356,7 @@ public final class PixFont extends Pix2D {
 		for (int var11 = 0; var11 < arg0.length(); var11++) {
 			int var12 = arg0.charCode[var11] & 0xFF;
 			if (var12 != 32) {
-				this.plotLetter(this.field354[var12], var9, this.field351[var12] + var10 + (int) (Math.sin((double) var11 / 1.5D + (double) arg4) * var7), this.charAdvance[var12], this.field355[var12], arg3);
+				this.plotLetter(this.glyphs[var12], var9, this.glyphOffsetY[var12] + var10 + (int) (Math.sin((double) var11 / 1.5D + (double) arg4) * var7), this.charAdvance[var12], this.glyphHeight[var12], arg3);
 			}
 			var9 += this.charAdvance[var12];
 		}
@@ -394,13 +394,13 @@ public final class PixFont extends Pix2D {
 			var9 += var14;
 		}
 		if (arg3 > 0 && arg4 > 0) {
-			this.method197(Pix2D.pixels, arg0, arg5, var11, var8, arg3, arg4, var9, var10, arg6);
+			this.plotTrans(Pix2D.pixels, arg0, arg5, var11, var8, arg3, arg4, var9, var10, arg6);
 		}
 	}
 
 	@ObfuscatedName("bc.a(La;IIIZI)V")
 	public void method203(JagString arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5) {
-		JagString var7 = arg0.method40();
+		JagString var7 = arg0.trim();
 		int var8 = 0;
 		for (int var9 = 0; var9 < var7.length(); var9++) {
 			if (var7.charAt(var9) == 32) {
@@ -429,9 +429,9 @@ public final class PixFont extends Pix2D {
 				int var16 = var7.charCode[var14] & 0xFF;
 				if (var16 != 32) {
 					if (arg4) {
-						this.plotLetter(this.field354[var16], arg1 + 1, this.field351[var16] + var13 + 1, this.charAdvance[var16], this.field355[var16], 0);
+						this.plotLetter(this.glyphs[var16], arg1 + 1, this.glyphOffsetY[var16] + var13 + 1, this.charAdvance[var16], this.glyphHeight[var16], 0);
 					}
-					this.plotLetter(this.field354[var16], arg1, this.field351[var16] + var13, this.charAdvance[var16], this.field355[var16], arg3);
+					this.plotLetter(this.glyphs[var16], arg1, this.glyphOffsetY[var16] + var13, this.charAdvance[var16], this.glyphHeight[var16], arg3);
 				}
 				arg1 += this.charAdvance[var16];
 				if (var16 == 32) {
@@ -494,7 +494,7 @@ public final class PixFont extends Pix2D {
 			var8 += var13;
 		}
 		if (arg3 > 0 && arg4 > 0) {
-			this.method194(Pix2D.pixels, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
+			this.plot(Pix2D.pixels, arg0, arg5, var10, var7, arg3, arg4, var8, var9);
 		}
 	}
 
@@ -517,9 +517,9 @@ public final class PixFont extends Pix2D {
 				int var10 = arg0.charCode[var8] & 0xFF;
 				if (var10 != 32) {
 					if (arg4) {
-						this.plotLetter(this.field354[var10], arg1 + 1, this.field351[var10] + var7 + 1, this.charAdvance[var10], this.field355[var10], 0);
+						this.plotLetter(this.glyphs[var10], arg1 + 1, this.glyphOffsetY[var10] + var7 + 1, this.charAdvance[var10], this.glyphHeight[var10], 0);
 					}
-					this.plotLetter(this.field354[var10], arg1, this.field351[var10] + var7, this.charAdvance[var10], this.field355[var10], arg3);
+					this.plotLetter(this.glyphs[var10], arg1, this.glyphOffsetY[var10] + var7, this.charAdvance[var10], this.glyphHeight[var10], arg3);
 				}
 				arg1 += this.charAdvance[var10];
 			}
@@ -547,8 +547,8 @@ public final class PixFont extends Pix2D {
 			} else {
 				int var9 = arg0.charCode[var7] & 0xFF;
 				if (var9 != 32) {
-					this.plotLetterTrans(this.field354[var9], arg1 + 1, this.field351[var9] + var6 + 1, this.charAdvance[var9], this.field355[var9], 0, 192);
-					this.plotLetterTrans(this.field354[var9], arg1, this.field351[var9] + var6, this.charAdvance[var9], this.field355[var9], arg2, var5);
+					this.plotLetterTrans(this.glyphs[var9], arg1 + 1, this.glyphOffsetY[var9] + var6 + 1, this.charAdvance[var9], this.glyphHeight[var9], 0, 192);
+					this.plotLetterTrans(this.glyphs[var9], arg1, this.glyphOffsetY[var9] + var6, this.charAdvance[var9], this.glyphHeight[var9], arg2, var5);
 				}
 				arg1 += this.charAdvance[var9];
 				if ((this.rand.nextInt() & 0x3) == 0) {
@@ -586,38 +586,38 @@ public final class PixFont extends Pix2D {
 	}
 
 	public PixFont(int[] arg0, int[] arg1, int[] arg2, int[] arg3, byte[][] arg4) {
-		this.field351 = arg0;
+		this.glyphOffsetY = arg0;
 		this.charAdvance = arg1;
-		this.field355 = arg2;
+		this.glyphHeight = arg2;
 		byte var6 = 0;
 		for (int var7 = 1; var7 < arg3.length; var7++) {
 			if (arg3[var7] == 1) {
 				var6 = (byte) var7;
 			}
 		}
-		this.field354 = arg4;
+		this.glyphs = arg4;
 		int var8 = Integer.MAX_VALUE;
 		int var9 = Integer.MIN_VALUE;
 		for (int var10 = 0; var10 < 256; var10++) {
-			if (this.field351[var10] < var8) {
-				var8 = this.field351[var10];
+			if (this.glyphOffsetY[var10] < var8) {
+				var8 = this.glyphOffsetY[var10];
 			}
-			if (this.field355[var10] + this.field351[var10] > var9) {
-				var9 = this.field355[var10] + this.field351[var10];
+			if (this.glyphHeight[var10] + this.glyphOffsetY[var10] > var9) {
+				var9 = this.glyphHeight[var10] + this.glyphOffsetY[var10];
 			}
-			byte[] var11 = this.field354[var10];
+			byte[] var11 = this.glyphs[var10];
 			int var12 = var11.length;
 			for (int var13 = 0; var13 < var12; var13++) {
 				var11[var13] = (byte) (var11[var13] == var6 ? 0 : 1);
 			}
 		}
-		this.ascent = this.field355[32] + this.field351[32];
-		this.field360 = this.ascent - var8;
-		this.field359 = var9 - this.ascent;
+		this.ascent = this.glyphHeight[32] + this.glyphOffsetY[32];
+		this.maxAscent = this.ascent - var8;
+		this.maxDescent = var9 - this.ascent;
 	}
 
 	@ObfuscatedName("bc.f(I)I")
-	public int method212(int arg0) {
+	public int charWid(int arg0) {
 		return this.charAdvance[arg0 & 0xFF];
 	}
 
@@ -630,7 +630,7 @@ public final class PixFont extends Pix2D {
 		for (int var6 = 0; var6 < arg0.length; var6++) {
 			int var7 = arg0.charCode[var6] & 0xFF;
 			if (var7 != 32) {
-				this.plotLetter(this.field354[var7], arg1, this.field351[var7] + var5, this.charAdvance[var7], this.field355[var7], arg3);
+				this.plotLetter(this.glyphs[var7], arg1, this.glyphOffsetY[var7] + var5, this.charAdvance[var7], this.glyphHeight[var7], arg3);
 			}
 			arg1 += this.charAdvance[var7];
 		}

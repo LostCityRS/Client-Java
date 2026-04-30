@@ -1,6 +1,6 @@
 package deob;
 
 @ObfuscatedName("ra")
-public final class class103 {
+public final class UnusedRA {
 
 }

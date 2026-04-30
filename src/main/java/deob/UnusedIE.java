@@ -1,6 +1,6 @@
 package deob;
 
 @ObfuscatedName("ie")
-public final class class53 {
+public final class UnusedIE {
 
 }

@@ -1,5 +1,5 @@
 package deob;
 
 @ObfuscatedName("ke")
-public final class class65 {
+public final class UnusedKE {
 }

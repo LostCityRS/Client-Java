@@ -867,10 +867,10 @@ public final class World {
 													return;
 												}
 											} while (!var3.drawBack);
-											var4 = var3.field869;
-											var5 = var3.field886;
+											var4 = var3.originalLevel;
+											var5 = var3.z;
 											var6 = var3.level;
-											var7 = var3.field877;
+											var7 = var3.x;
 											var8 = this.squares[var6];
 											if (!var3.drawFront) {
 												break;
@@ -1310,7 +1310,7 @@ public final class World {
 	}
 
 	@ObfuscatedName("ab.b(II)I")
-	public static int method64(int arg0, int arg1) {
+	public static int mulLightness(int arg0, int arg1) {
 		int var2 = (arg0 & 0x7F) * (127 - arg1) >> 7;
 		if (var2 < 2) {
 			var2 = 2;
@@ -1834,15 +1834,15 @@ public final class World {
 			}
 			if (arg0.texture == -1) {
 				if (arg0.colourNE != 12345678) {
-					Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.field2648, arg0.field2641);
+					Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.colourNW, arg0.colourSE);
 				}
 			} else if (lowMem) {
 				int var52 = Pix3D.textureManager.getAverageRgb(arg0.texture);
-				Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, method64(var52, arg0.colourNE), method64(var52, arg0.field2648), method64(var52, arg0.field2641));
+				Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, mulLightness(var52, arg0.colourNE), mulLightness(var52, arg0.colourNW), mulLightness(var52, arg0.colourSE));
 			} else if (arg0.flat) {
-				Pix3D.textureTriangle(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.field2648, arg0.field2641, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.texture);
+				Pix3D.textureTriangle(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.colourNW, arg0.colourSE, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.texture);
 			} else {
-				Pix3D.textureTriangle(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.field2648, arg0.field2641, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.texture);
+				Pix3D.textureTriangle(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.colourNW, arg0.colourSE, var33, var39, var27, var36, var42, var30, var37, var43, var31, arg0.texture);
 			}
 		}
 		if ((var44 - var46) * (var51 - var47) - (var45 - var47) * (var50 - var46) > 0) {
@@ -1856,13 +1856,13 @@ public final class World {
 			}
 			if (arg0.texture != -1) {
 				if (!lowMem) {
-					Pix3D.textureTriangle(var45, var47, var51, var44, var46, var50, arg0.colourSW, arg0.field2641, arg0.field2648, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.texture);
+					Pix3D.textureTriangle(var45, var47, var51, var44, var46, var50, arg0.colourSW, arg0.colourSE, arg0.colourNW, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.texture);
 					return;
 				}
 				int var53 = Pix3D.textureManager.getAverageRgb(arg0.texture);
-				Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, method64(var53, arg0.colourSW), method64(var53, arg0.field2641), method64(var53, arg0.field2648));
+				Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, mulLightness(var53, arg0.colourSW), mulLightness(var53, arg0.colourSE), mulLightness(var53, arg0.colourNW));
 			} else if (arg0.colourSW != 12345678) {
-				Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, arg0.colourSW, arg0.field2641, arg0.field2648);
+				Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, arg0.colourSW, arg0.colourSE, arg0.colourNW);
 			}
 		}
 	}
@@ -2077,7 +2077,7 @@ public final class World {
 					}
 				} else if (lowMem) {
 					int var29 = Pix3D.textureManager.getAverageRgb(arg0.faceTexture[var19]);
-					Pix3D.gouraudTriangle(var26, var27, var28, var23, var24, var25, method64(var29, arg0.faceColourA[var19]), method64(var29, arg0.faceColourB[var19]), method64(var29, arg0.faceColourC[var19]));
+					Pix3D.gouraudTriangle(var26, var27, var28, var23, var24, var25, mulLightness(var29, arg0.faceColourA[var19]), mulLightness(var29, arg0.faceColourB[var19]), mulLightness(var29, arg0.faceColourC[var19]));
 				} else if (arg0.flat) {
 					Pix3D.textureTriangle(var26, var27, var28, var23, var24, var25, arg0.faceColourA[var19], arg0.faceColourB[var19], arg0.faceColourC[var19], Ground.drawTextureVertexX[0], Ground.drawTextureVertexX[1], Ground.drawTextureVertexX[3], Ground.drawTextureVertexY[0], Ground.drawTextureVertexY[1], Ground.drawTextureVertexY[3], Ground.drawTextureVertexZ[0], Ground.drawTextureVertexZ[1], Ground.drawTextureVertexZ[3], arg0.faceTexture[var19]);
 				} else {

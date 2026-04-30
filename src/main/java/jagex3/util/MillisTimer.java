@@ -6,86 +6,86 @@ import deob.ObfuscatedName;
 public final class MillisTimer extends Timer {
 
 	@ObfuscatedName("k.s")
-	public int field1505;
+	public int opos;
 
 	@ObfuscatedName("k.v")
-	public int field1508;
+	public int count;
 
 	@ObfuscatedName("k.D")
-	public final long[] field1515 = new long[10];
+	public final long[] otim = new long[10];
 
 	@ObfuscatedName("k.F")
-	public int field1517;
+	public int delta;
 
 	@ObfuscatedName("k.I")
-	public int field1520;
+	public int ratio;
 
 	@ObfuscatedName("k.H")
-	public long field1519;
+	public long ntime;
 
 	@ObfuscatedName("k.b(I)V")
 	@Override
 	public void reset() {
 		for (int var1 = 0; var1 < 10; var1++) {
-			this.field1515[var1] = 0L;
+			this.otim[var1] = 0L;
 		}
 	}
 
 	@ObfuscatedName("k.a(I)V")
 	@Override
 	public void init() {
-		this.field1520 = 256;
-		this.field1508 = 0;
-		this.field1517 = 1;
-		this.field1519 = MonotonicTime.currentTime();
+		this.ratio = 256;
+		this.count = 0;
+		this.delta = 1;
+		this.ntime = MonotonicTime.currentTime();
 		for (int var1 = 0; var1 < 10; var1++) {
-			this.field1515[var1] = this.field1519;
+			this.otim[var1] = this.ntime;
 		}
 	}
 
 	@ObfuscatedName("k.a(III)I")
 	@Override
 	public int count(int arg0, int arg1) {
-		int var3 = this.field1517;
-		this.field1517 = 1;
-		int var4 = this.field1520;
-		this.field1520 = 300;
-		this.field1519 = MonotonicTime.currentTime();
-		if (this.field1515[this.field1505] == 0L) {
-			this.field1520 = var4;
-			this.field1517 = var3;
-		} else if (this.field1515[this.field1505] < this.field1519) {
-			this.field1520 = (int) ((long) (arg0 * 2560) / (this.field1519 - this.field1515[this.field1505]));
+		int var3 = this.delta;
+		this.delta = 1;
+		int var4 = this.ratio;
+		this.ratio = 300;
+		this.ntime = MonotonicTime.currentTime();
+		if (this.otim[this.opos] == 0L) {
+			this.ratio = var4;
+			this.delta = var3;
+		} else if (this.otim[this.opos] < this.ntime) {
+			this.ratio = (int) ((long) (arg0 * 2560) / (this.ntime - this.otim[this.opos]));
 		}
-		if (this.field1520 < 25) {
-			this.field1520 = 25;
+		if (this.ratio < 25) {
+			this.ratio = 25;
 		}
-		if (this.field1520 > 256) {
-			this.field1520 = 256;
-			this.field1517 = (int) ((long) arg0 - (this.field1519 - this.field1515[this.field1505]) / 10L);
+		if (this.ratio > 256) {
+			this.ratio = 256;
+			this.delta = (int) ((long) arg0 - (this.ntime - this.otim[this.opos]) / 10L);
 		}
-		if (this.field1517 > arg0) {
-			this.field1517 = arg0;
+		if (this.delta > arg0) {
+			this.delta = arg0;
 		}
-		this.field1515[this.field1505] = this.field1519;
-		this.field1505 = (this.field1505 + 1) % 10;
-		if (this.field1517 > 1) {
+		this.otim[this.opos] = this.ntime;
+		this.opos = (this.opos + 1) % 10;
+		if (this.delta > 1) {
 			for (int var5 = 0; var5 < 10; var5++) {
-				if (this.field1515[var5] != 0L) {
-					this.field1515[var5] += this.field1517;
+				if (this.otim[var5] != 0L) {
+					this.otim[var5] += this.delta;
 				}
 			}
 		}
-		if (this.field1517 < arg1) {
-			this.field1517 = arg1;
+		if (this.delta < arg1) {
+			this.delta = arg1;
 		}
-		ThreadUtil.sleepPrecise((long) this.field1517);
+		ThreadUtil.sleepPrecise((long) this.delta);
 		int var6 = 0;
-		while (this.field1508 < 256) {
+		while (this.count < 256) {
 			var6++;
-			this.field1508 += this.field1520;
+			this.count += this.ratio;
 		}
-		this.field1508 &= 0xFF;
+		this.count &= 0xFF;
 		return var6;
 	}
 

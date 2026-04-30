@@ -13,7 +13,7 @@ import java.awt.*;
 public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 
 	@ObfuscatedName("pd.O")
-	public static int[] field2347 = new int[256];
+	public static int[] samples = new int[256];
 	@ObfuscatedName("ad.e")
 	public static int frequency;
 	@ObfuscatedName("ca.n")
@@ -25,19 +25,19 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	@ObfuscatedName("hb.cb")
 	public static int field1157;
 	@ObfuscatedName("id.v")
-	public static PcmStream field1381;
+	public static PcmStream stream;
 
 	@ObfuscatedName("pd.K")
 	public int field2343 = 0;
 
 	@ObfuscatedName("pd.G")
-	public long field2339 = 0L;
+	public long reopenTime = 0L;
 
 	@ObfuscatedName("pd.M")
 	public int field2345 = 256;
 
 	@ObfuscatedName("pd.F")
-	public boolean field2338 = false;
+	public boolean skipAcceptedCheck = false;
 
 	@ObfuscatedName("pd.N")
 	public int field2346 = 0;
@@ -58,10 +58,10 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	public int field2348;
 
 	@ObfuscatedName("pd.Q")
-	public int field2349;
+	public int capacity;
 
 	@ObfuscatedName("pd.L")
-	public long field2344;
+	public long nextAcceptedCheckTime;
 
 	@ObfuscatedName("pd.R")
 	public long field2350;
@@ -95,11 +95,11 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 
 	@ObfuscatedName("pd.b()V")
 	public static void unload() {
-		field2347 = null;
+		samples = null;
 	}
 
     @ObfuscatedName("ha.a(B)V")
-    public static void method463() {
+    public static void shutdown() {
         if (field217 == null) {
             return;
         }
@@ -115,8 +115,8 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
             field1157 += frequency * var2;
             int var4 = (field1157 - frequency * 2000) / 1000;
             if (var4 > 0) {
-                if (field1381 != null) {
-                    field1381.method127(var4);
+                if (stream != null) {
+                    stream.pretendToMix(var4);
                 }
                 field1157 -= var4 * 1000;
             }
@@ -126,22 +126,22 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	@ObfuscatedName("td.a(Z)V")
 	public static void method967() {
 		if (field217 != null) {
-			field217.method256();
+			field217.play();
 			field217 = null;
 		}
 	}
 
 	@ObfuscatedName("ca.a(IB)V")
 	public static synchronized void method260() {
-		if (field1381 != null) {
-			field1381.method127(256);
+		if (stream != null) {
+			stream.pretendToMix(256);
 		}
 		method949(256);
 	}
 
 	@ObfuscatedName("ca.a(Loc;I)V")
-	public static synchronized void method261(PcmStream arg0) {
-		field1381 = arg0;
+	public static synchronized void playStream(PcmStream arg0) {
+		stream = arg0;
 	}
 
 	@ObfuscatedName("ta.b(ZI)V")
@@ -156,37 +156,37 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	}
 
 	@ObfuscatedName("pd.b(J)V")
-	public void method815(long arg0) throws Exception {
-		this.method433(this.field2349);
+	public void skip(long arg0) throws Exception {
+		this.init(this.capacity);
 		while (true) {
-			int var3 = this.method434();
+			int var3 = this.queued();
 			if (var3 < this.field2345) {
 				this.field2341 = 0;
 				this.field2348 = 0;
 				this.field2350 = arg0;
-				this.field2344 = arg0;
+				this.nextAcceptedCheckTime = arg0;
 				return;
 			}
-			this.method436();
+			this.write();
 		}
 	}
 
 	@ObfuscatedName("pd.c(J)V")
 	public void method817(long arg0) {
-		if (this.field2339 != 0L) {
+		if (this.reopenTime != 0L) {
 			while (true) {
 				if (this.field2350 >= arg0) {
-					if (arg0 < this.field2339) {
+					if (arg0 < this.reopenTime) {
 						return;
 					}
 					try {
-						this.method815(arg0);
+						this.skip(arg0);
 					} catch (Exception var8) {
-						this.method435();
-						this.field2339 += 5000L;
+						this.close();
+						this.reopenTime += 5000L;
 						return;
 					}
-					this.field2339 = 0L;
+					this.reopenTime = 0L;
 					break;
 				}
 				method260();
@@ -197,10 +197,10 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 			this.field2350 += 250880 / frequency;
 			int var3;
 			try {
-				var3 = this.method434();
+				var3 = this.queued();
 			} catch (Exception var6) {
-				this.method435();
-				this.field2339 = arg0;
+				this.close();
+				this.reopenTime = arg0;
 				return;
 			}
 			this.method819(var3);
@@ -210,17 +210,17 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 			} else if (var4 > this.field2342) {
 				var4 = this.field2342;
 			}
-			this.field2345 = this.field2349 - var4 - 256;
+			this.field2345 = this.capacity - var4 - 256;
 			if (this.field2345 < 256) {
 				this.field2345 = 256;
 			}
-			if (this.field2349 < 16384) {
-				if (var3 >= this.field2349) {
+			if (this.capacity < 16384) {
+				if (var3 >= this.capacity) {
 					this.field2341 += 5;
 					if (this.field2341 >= 100) {
-						this.method435();
-						this.field2349 += 2048;
-						this.field2339 = arg0;
+						this.close();
+						this.capacity += 2048;
+						this.reopenTime = arg0;
 						return;
 					}
 				} else if (this.field2348 != var3 && this.field2341 > 0) {
@@ -231,22 +231,22 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 			if (var3 < this.field2345) {
 				break;
 			}
-			ArrayUtil.clear(field2347, 256);
+			ArrayUtil.clear(samples, 256);
 			try {
-				this.method436();
+				this.write();
 			} catch (Exception var7) {
-				this.method435();
-				this.field2339 = arg0;
+				this.close();
+				this.reopenTime = arg0;
 				return;
 			}
-			this.field2344 = arg0;
+			this.nextAcceptedCheckTime = arg0;
 			this.field2348 -= 256;
 		}
-		if (arg0 < this.field2344 + 5000L) {
+		if (arg0 < this.nextAcceptedCheckTime + 5000L) {
 			return;
 		}
-		this.method435();
-		this.field2339 = arg0;
+		this.close();
+		this.reopenTime = arg0;
 		for (int var5 = 0; var5 < 512; var5++) {
 			this.field2351[var5] = 0;
 		}
@@ -259,20 +259,20 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 
 	@ObfuscatedName("pd.a(Llc;I)V")
 	public final void method818(SignLink arg0, int arg1) throws Exception {
-		this.field2349 = arg1;
-		this.method815(MonotonicTime.currentTime());
+		this.capacity = arg1;
+		this.skip(MonotonicTime.currentTime());
 		arg0.threadreq(10, this);
 	}
 
 	@ObfuscatedName("pd.a()V")
 	@Override
-	public final void method256() {
+	public final void play() {
 		synchronized (this) {
-			this.field2338 = true;
+			this.skipAcceptedCheck = true;
 		}
 		while (true) {
 			synchronized (this) {
-				if (!this.field2338) {
+				if (!this.skipAcceptedCheck) {
 					return;
 				}
 			}
@@ -285,11 +285,11 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 		try {
 			while (true) {
 				synchronized (this) {
-					if (this.field2338) {
-						if (this.field2339 == 0L) {
-							this.method435();
+					if (this.skipAcceptedCheck) {
+						if (this.reopenTime == 0L) {
+							this.close();
 						}
-						this.field2338 = false;
+						this.skipAcceptedCheck = false;
 						return;
 					}
 					this.method255(MonotonicTime.currentTime());
@@ -347,14 +347,14 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	}
 
 	@ObfuscatedName("pd.c()V")
-	public abstract void method436() throws Exception;
+	public abstract void write() throws Exception;
 
 	@ObfuscatedName("pd.d()I")
-	public abstract int method434() throws Exception;
+	public abstract int queued() throws Exception;
 
 	@ObfuscatedName("pd.e()V")
-	public abstract void method435();
+	public abstract void close();
 
 	@ObfuscatedName("pd.d(I)V")
-	public abstract void method433(int arg0) throws Exception;
+	public abstract void init(int arg0) throws Exception;
 }

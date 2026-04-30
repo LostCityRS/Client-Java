@@ -104,7 +104,7 @@ public final class JavaMidiPlayer extends MidiPlayer implements Receiver {
 	public synchronized void send(MidiMessage arg0, long arg1) {
 		if (field674) {
 			byte[] var4 = arg0.getMessage();
-			if (!this.method1001(var4[0] & 0xFF, var4[1], var4.length >= 3 ? var4[2] : 0, arg1)) {
+			if (!this.loadAndQueuePatches(var4[0] & 0xFF, var4[1], var4.length >= 3 ? var4[2] : 0, arg1)) {
 				field675.send(arg0, arg1);
 			}
 		}

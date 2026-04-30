@@ -17,7 +17,7 @@ public final class Mixer extends PcmStream {
 	public final LinkList[] field241 = new LinkList[8];
 
 	@ObfuscatedName("b.gb")
-	public final LinkList field242 = new LinkList();
+	public final LinkList controllers = new LinkList();
 
 	@ObfuscatedName("b.hb")
 	public int field243 = 0;
@@ -32,7 +32,7 @@ public final class Mixer extends PcmStream {
     public static Mixer method993(SignLink arg0, Component arg1) {
         PcmPlayer.method1050(arg1, arg0);
         Mixer var2 = new Mixer();
-        PcmPlayer.method261(var2);
+        PcmPlayer.playStream(var2);
         return var2;
     }
 
@@ -44,7 +44,7 @@ public final class Mixer extends PcmStream {
 
 	@ObfuscatedName("b.b(I)V")
 	@Override
-	public synchronized void method127(int arg0) {
+	public synchronized void pretendToMix(int arg0) {
 		do {
 			if (this.field244 < 0) {
 				this.method132(arg0);
@@ -60,27 +60,27 @@ public final class Mixer extends PcmStream {
 			arg0 -= var2;
 			this.field245 += var2;
 			this.method133();
-			PcmMixerListener var3 = (PcmMixerListener) this.field242.head();
+			PcmMixerListener var3 = (PcmMixerListener) this.controllers.head();
 			synchronized (var3) {
 				int var5 = var3.method743(this);
 				if (var5 < 0) {
 					var3.field2114 = 0;
-					this.method131(var3);
+					this.unlinkController(var3);
 				} else {
 					var3.field2114 = var5;
-					this.method128(var3.next, var3);
+					this.sortController(var3.next, var3);
 				}
 			}
 		} while (arg0 != 0);
 	}
 
 	@ObfuscatedName("b.a(Lnd;Lne;)V")
-	public void method128(Linkable arg0, PcmMixerListener arg1) {
-		while (this.field242.sentinel != arg0 && ((PcmMixerListener) arg0).field2114 <= arg1.field2114) {
+	public void sortController(Linkable arg0, PcmMixerListener arg1) {
+		while (this.controllers.sentinel != arg0 && ((PcmMixerListener) arg0).field2114 <= arg1.field2114) {
 			arg0 = arg0.next;
 		}
-		this.field242.insertBefore(arg0, arg1);
-		this.field244 = ((PcmMixerListener) this.field242.sentinel.next).field2114;
+		this.controllers.insertBefore(arg0, arg1);
+		this.field244 = ((PcmMixerListener) this.controllers.sentinel.next).field2114;
 	}
 
 	@ObfuscatedName("b.b([III)I")
@@ -103,7 +103,7 @@ public final class Mixer extends PcmStream {
 			for (PcmStream var10 = (PcmStream) var9.head(); var10 != null; var10 = (PcmStream) var9.next()) {
 				var10.field2167 = false;
 				if (var10.field2168 != null) {
-					var10.field2168.field3080 = 0;
+					var10.field2168.position = 0;
 				}
 			}
 		}
@@ -127,15 +127,15 @@ public final class Mixer extends PcmStream {
 					for (PcmStream var18 = (PcmStream) var17.head(); var18 != null; var18 = (PcmStream) var17.next()) {
 						if (!var18.field2167) {
 							PcmStreamable var19 = var18.field2168;
-							if (var19 == null || var19.field3080 <= var15) {
+							if (var19 == null || var19.position <= var15) {
 								if (var11 < this.field240) {
-									int var20 = var18.method134(arg0, arg1, arg2);
+									int var20 = var18.doMix(arg0, arg1, arg2);
 									var11 += var20;
 									if (var19 != null) {
-										var19.field3080 += var20;
+										var19.position += var20;
 									}
 								} else {
-									var18.method127(arg2);
+									var18.pretendToMix(arg2);
 								}
 								var18.field2167 = true;
 							} else {
@@ -154,15 +154,15 @@ public final class Mixer extends PcmStream {
 
 	@ObfuscatedName("b.b(Loc;)I")
 	public static int method130(PcmStream arg0) {
-		return arg0.method588() >> 5;
+		return arg0.priority() >> 5;
 	}
 
 	@ObfuscatedName("b.a(Lne;)V")
-	public void method131(PcmMixerListener arg0) {
+	public void unlinkController(PcmMixerListener arg0) {
 		arg0.unlink();
 		arg0.method742();
-		Linkable var2 = this.field242.sentinel.next;
-		if (this.field242.sentinel == var2) {
+		Linkable var2 = this.controllers.sentinel.next;
+		if (this.controllers.sentinel == var2) {
 			this.field244 = -1;
 		} else {
 			this.field244 = ((PcmMixerListener) var2).field2114;
@@ -184,7 +184,7 @@ public final class Mixer extends PcmStream {
 		for (int var2 = 0; var2 < 8; var2++) {
 			LinkList var3 = this.field241[var2];
 			for (PcmStream var4 = (PcmStream) var3.head(); var4 != null; var4 = (PcmStream) var3.next()) {
-				var4.method127(arg0);
+				var4.pretendToMix(arg0);
 			}
 		}
 	}
@@ -194,7 +194,7 @@ public final class Mixer extends PcmStream {
 		if (this.field245 <= 0) {
 			return;
 		}
-		for (PcmMixerListener var1 = (PcmMixerListener) this.field242.head(); var1 != null; var1 = (PcmMixerListener) this.field242.next()) {
+		for (PcmMixerListener var1 = (PcmMixerListener) this.controllers.head(); var1 != null; var1 = (PcmMixerListener) this.controllers.next()) {
 			var1.field2114 -= this.field245;
 		}
 		this.field244 -= this.field245;
@@ -203,7 +203,7 @@ public final class Mixer extends PcmStream {
 
 	@ObfuscatedName("b.a([III)I")
 	@Override
-	public synchronized int method134(int[] arg0, int arg1, int arg2) {
+	public synchronized int doMix(int[] arg0, int arg1, int arg2) {
 		int var5;
 		do {
 			if (this.field244 < 0) {
@@ -219,15 +219,15 @@ public final class Mixer extends PcmStream {
 			arg2 -= var4;
 			this.field245 += var4;
 			this.method133();
-			PcmMixerListener var6 = (PcmMixerListener) this.field242.head();
+			PcmMixerListener var6 = (PcmMixerListener) this.controllers.head();
 			synchronized (var6) {
 				int var8 = var6.method743(this);
 				if (var8 < 0) {
 					var6.field2114 = 0;
-					this.method131(var6);
+					this.unlinkController(var6);
 				} else {
 					var6.field2114 = var8;
-					this.method128(var6.next, var6);
+					this.sortController(var6.next, var6);
 				}
 			}
 		} while (arg2 != 0);
@@ -235,7 +235,7 @@ public final class Mixer extends PcmStream {
 	}
 
 	@ObfuscatedName("b.c(Loc;)V")
-	public synchronized void method135(PcmStream arg0) {
+	public synchronized void stopStream(PcmStream arg0) {
 		arg0.unlink();
 	}
 }

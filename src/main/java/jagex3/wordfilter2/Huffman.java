@@ -6,16 +6,16 @@ import deob.ObfuscatedName;
 public final class Huffman {
 
 	@ObfuscatedName("wa.a")
-	public int[] field3207;
+	public int[] keys;
 
 	@ObfuscatedName("wa.l")
-	public final int[] field3218;
+	public final int[] masks;
 
 	@ObfuscatedName("wa.r")
-	public final byte[] field3224;
+	public final byte[] bits;
 
 	@ObfuscatedName("wa.a([BII[BII)I")
-	public int method1033(byte[] arg0, int arg1, int arg2, byte[] arg3, int arg4) {
+	public int decode(byte[] arg0, int arg1, int arg2, byte[] arg3, int arg4) {
 		if (arg1 == 0) {
 			return 0;
 		}
@@ -27,10 +27,10 @@ public final class Huffman {
 			if (var9 >= 0) {
 				var7++;
 			} else {
-				var7 = this.field3207[var7];
+				var7 = this.keys[var7];
 			}
 			int var10;
-			if ((var10 = this.field3207[var7]) < 0) {
+			if ((var10 = this.keys[var7]) < 0) {
 				arg3[arg2++] = (byte) ~var10;
 				if (arg2 >= var6) {
 					break;
@@ -40,10 +40,10 @@ public final class Huffman {
 			if ((var9 & 0x40) == 0) {
 				var7++;
 			} else {
-				var7 = this.field3207[var7];
+				var7 = this.keys[var7];
 			}
 			int var11;
-			if ((var11 = this.field3207[var7]) < 0) {
+			if ((var11 = this.keys[var7]) < 0) {
 				arg3[arg2++] = (byte) ~var11;
 				if (var6 <= arg2) {
 					break;
@@ -53,10 +53,10 @@ public final class Huffman {
 			if ((var9 & 0x20) == 0) {
 				var7++;
 			} else {
-				var7 = this.field3207[var7];
+				var7 = this.keys[var7];
 			}
 			int var12;
-			if ((var12 = this.field3207[var7]) < 0) {
+			if ((var12 = this.keys[var7]) < 0) {
 				arg3[arg2++] = (byte) ~var12;
 				if (arg2 >= var6) {
 					break;
@@ -66,10 +66,10 @@ public final class Huffman {
 			if ((var9 & 0x10) == 0) {
 				var7++;
 			} else {
-				var7 = this.field3207[var7];
+				var7 = this.keys[var7];
 			}
 			int var13;
-			if ((var13 = this.field3207[var7]) < 0) {
+			if ((var13 = this.keys[var7]) < 0) {
 				arg3[arg2++] = (byte) ~var13;
 				if (arg2 >= var6) {
 					break;
@@ -79,10 +79,10 @@ public final class Huffman {
 			if ((var9 & 0x8) == 0) {
 				var7++;
 			} else {
-				var7 = this.field3207[var7];
+				var7 = this.keys[var7];
 			}
 			int var14;
-			if ((var14 = this.field3207[var7]) < 0) {
+			if ((var14 = this.keys[var7]) < 0) {
 				arg3[arg2++] = (byte) ~var14;
 				if (var6 <= arg2) {
 					break;
@@ -92,10 +92,10 @@ public final class Huffman {
 			if ((var9 & 0x4) == 0) {
 				var7++;
 			} else {
-				var7 = this.field3207[var7];
+				var7 = this.keys[var7];
 			}
 			int var15;
-			if ((var15 = this.field3207[var7]) < 0) {
+			if ((var15 = this.keys[var7]) < 0) {
 				arg3[arg2++] = (byte) ~var15;
 				if (var6 <= arg2) {
 					break;
@@ -105,10 +105,10 @@ public final class Huffman {
 			if ((var9 & 0x2) == 0) {
 				var7++;
 			} else {
-				var7 = this.field3207[var7];
+				var7 = this.keys[var7];
 			}
 			int var16;
-			if ((var16 = this.field3207[var7]) < 0) {
+			if ((var16 = this.keys[var7]) < 0) {
 				arg3[arg2++] = (byte) ~var16;
 				if (arg2 >= var6) {
 					break;
@@ -118,10 +118,10 @@ public final class Huffman {
 			if ((var9 & 0x1) == 0) {
 				var7++;
 			} else {
-				var7 = this.field3207[var7];
+				var7 = this.keys[var7];
 			}
 			int var17;
-			if ((var17 = this.field3207[var7]) < 0) {
+			if ((var17 = this.keys[var7]) < 0) {
 				arg3[arg2++] = (byte) ~var17;
 				if (arg2 >= var6) {
 					break;
@@ -134,14 +134,14 @@ public final class Huffman {
 	}
 
 	@ObfuscatedName("wa.a(IIII[B[B)I")
-	public int method1036(int arg0, int arg1, int arg2, byte[] arg3, byte[] arg4) {
+	public int encode(int arg0, int arg1, int arg2, byte[] arg3, byte[] arg4) {
 		int var6 = arg2;
 		int var7 = 0;
 		int var8 = arg1 << 3;
 		while (arg0 < var6) {
 			int var9 = arg3[arg0] & 0xFF;
-			int var10 = this.field3218[var9];
-			byte var11 = this.field3224[var9];
+			int var10 = this.masks[var9];
+			byte var11 = this.bits[var9];
 			if (var11 == 0) {
 				throw new RuntimeException("No codeword for data value " + var9);
 			}
@@ -179,17 +179,17 @@ public final class Huffman {
 
 	public Huffman(byte[] arg0) {
 		int var2 = arg0.length;
-		this.field3224 = arg0;
-		this.field3218 = new int[var2];
+		this.bits = arg0;
+		this.masks = new int[var2];
 		int[] var3 = new int[33];
-		this.field3207 = new int[8];
+		this.keys = new int[8];
 		int var4 = 0;
 		for (int var5 = 0; var5 < var2; var5++) {
 			byte var6 = arg0[var5];
 			if (var6 != 0) {
 				int var7 = 0x1 << 32 - var6;
 				int var8 = var3[var6];
-				this.field3218[var5] = var8;
+				this.masks[var5] = var8;
 				int var12;
 				if ((var7 & var8) == 0) {
 					for (int var9 = var6 - 1; var9 >= 1; var9--) {
@@ -220,23 +220,23 @@ public final class Huffman {
 					if ((var16 & var8) == 0) {
 						var14++;
 					} else {
-						if (this.field3207[var14] == 0) {
-							this.field3207[var14] = var4;
+						if (this.keys[var14] == 0) {
+							this.keys[var14] = var4;
 						}
-						var14 = this.field3207[var14];
+						var14 = this.keys[var14];
 					}
-					if (this.field3207.length <= var14) {
-						int[] var17 = new int[this.field3207.length * 2];
-						for (int var18 = 0; var18 < this.field3207.length; var18++) {
-							var17[var18] = this.field3207[var18];
+					if (this.keys.length <= var14) {
+						int[] var17 = new int[this.keys.length * 2];
+						for (int var18 = 0; var18 < this.keys.length; var18++) {
+							var17[var18] = this.keys[var18];
 						}
-						this.field3207 = var17;
+						this.keys = var17;
 					}
 				}
 				if (var14 >= var4) {
 					var4 = var14 + 1;
 				}
-				this.field3207[var14] = ~var5;
+				this.keys[var14] = ~var5;
 			}
 		}
 	}

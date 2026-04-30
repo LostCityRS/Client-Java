@@ -9,7 +9,7 @@ public final class QuickGround {
 	public final int texture;
 
 	@ObfuscatedName("rc.o")
-	public final int field2641;
+	public final int colourSE;
 
 	@ObfuscatedName("rc.p")
 	public final int minimapRgb;
@@ -21,7 +21,7 @@ public final class QuickGround {
 	public final int colourSW;
 
 	@ObfuscatedName("rc.v")
-	public final int field2648;
+	public final int colourNW;
 
 	@ObfuscatedName("rc.y")
 	public final int colourNE;
@@ -29,10 +29,10 @@ public final class QuickGround {
 	public QuickGround(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6) {
 		this.colourSW = arg0;
 		this.flat = arg6;
-		this.field2641 = arg1;
+		this.colourSE = arg1;
 		this.colourNE = arg2;
 		this.texture = arg4;
-		this.field2648 = arg3;
+		this.colourNW = arg3;
 		this.minimapRgb = arg5;
 	}
 }

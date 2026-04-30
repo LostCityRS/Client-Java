@@ -161,7 +161,7 @@ public class Pix2D extends Linkable2 {
 	}
 
 	@ObfuscatedName("sc.b([I)V")
-	public static void method918(int[] arg0) {
+	public static void saveClipping(int[] arg0) {
 		arg0[0] = clipMinX;
 		arg0[1] = clipMinY;
 		arg0[2] = clipMaxX;

@@ -1,6 +1,6 @@
 package deob;
 
 @ObfuscatedName("td")
-public final class class118 {
+public final class UnusedTD {
 
 }

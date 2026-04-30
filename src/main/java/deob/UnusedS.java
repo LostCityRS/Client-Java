@@ -1,6 +1,6 @@
 package deob;
 
 @ObfuscatedName("s")
-public final class class108 {
+public final class UnusedS {
 
 }

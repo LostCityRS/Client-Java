@@ -4,7 +4,7 @@ import deob.ObfuscatedName;
 
 public class RegionRotate {
 	@ObfuscatedName("ib.a(IZII)I")
-	public static int method519(int arg0, int arg1, int arg2) {
+	public static int DX(int arg0, int arg1, int arg2) {
 		int var3 = arg0 & 0x3;
 		if (var3 == 0) {
 			return arg1;
@@ -37,7 +37,7 @@ public class RegionRotate {
 	}
 
 	@ObfuscatedName("m.a(IIIZ)I")
-	public static int method677(int arg0, int arg1, int arg2) {
+	public static int DZ(int arg0, int arg1, int arg2) {
 		int var3 = arg2 & 0x3;
 		if (var3 == 0) {
 			return arg1;

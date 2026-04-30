@@ -12,193 +12,193 @@ public final class WaveStream extends PcmStream {
 	public int field1531;
 
 	@ObfuscatedName("ka.gb")
-	public final int field1532;
+	public final int loopStartPosition;
 
 	@ObfuscatedName("ka.hb")
-	public int field1533;
+	public int volumeChangeDelta;
 
 	@ObfuscatedName("ka.ib")
-	public int field1534;
+	public int pitch;
 
 	@ObfuscatedName("ka.jb")
-	public int field1535;
+	public int volume;
 
 	@ObfuscatedName("ka.kb")
-	public int field1536;
+	public int loopCount;
 
 	@ObfuscatedName("ka.lb")
-	public int field1537;
+	public int volumeMono;
 
 	@ObfuscatedName("ka.mb")
-	public final int field1538;
+	public final int loopEndPosition;
 
 	@ObfuscatedName("ka.nb")
-	public boolean field1539;
+	public boolean loopReversed;
 
 	@ObfuscatedName("ka.ob")
-	public int field1540;
+	public int position;
 
 	@ObfuscatedName("ka.a([IIIII)I")
 	public int method579(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (this.field1533 > 0) {
-			int var6 = this.field1533 + arg1;
+		if (this.volumeChangeDelta > 0) {
+			int var6 = this.volumeChangeDelta + arg1;
 			if (var6 > arg3) {
 				var6 = arg3;
 			}
-			this.field1533 += arg1;
-			if (this.field1534 == -256 && (this.field1540 & 0xFF) == 0) {
-				arg1 = method584(((Wave) super.field2168).field3308, arg0, this.field1540, arg1, this.field1537, this.field1530, this.field1531, var6, arg2, this);
+			this.volumeChangeDelta += arg1;
+			if (this.pitch == -256 && (this.position & 0xFF) == 0) {
+				arg1 = doMixBackwards1To1RampMono(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, this.field1530, this.field1531, var6, arg2, this);
 			} else {
-				arg1 = method581(((Wave) super.field2168).field3308, arg0, this.field1540, arg1, this.field1537, this.field1530, this.field1531, var6, arg2, this, this.field1534, arg4);
+				arg1 = method581(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, this.field1530, this.field1531, var6, arg2, this, this.pitch, arg4);
 			}
-			this.field1533 -= arg1;
-			if (this.field1533 != 0) {
+			this.volumeChangeDelta -= arg1;
+			if (this.volumeChangeDelta != 0) {
 				return arg1;
 			}
-			if (this.field1535 == Integer.MIN_VALUE) {
+			if (this.volume == Integer.MIN_VALUE) {
 				this.unlink();
 				return arg3;
 			}
-			this.field1537 = this.field1535;
+			this.volumeMono = this.volume;
 		}
-		return this.field1534 == -256 && (this.field1540 & 0xFF) == 0 ? method586(((Wave) super.field2168).field3308, arg0, this.field1540, arg1, this.field1537, arg3, arg2, this) : method583(((Wave) super.field2168).field3308, arg0, this.field1540, arg1, this.field1537, arg3, arg2, this, this.field1534, arg4);
+		return this.pitch == -256 && (this.position & 0xFF) == 0 ? method586(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this) : method583(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this, this.pitch, arg4);
 	}
 
 	@ObfuscatedName("ka.a([III)I")
 	@Override
-	public synchronized int method134(int[] arg0, int arg1, int arg2) {
-		if (this.field1537 == 0 && (this.field1533 == 0 || this.field1535 == 0 || this.field1535 == Integer.MIN_VALUE)) {
-			this.method127(arg2);
+	public synchronized int doMix(int[] arg0, int arg1, int arg2) {
+		if (this.volumeMono == 0 && (this.volumeChangeDelta == 0 || this.volume == 0 || this.volume == Integer.MIN_VALUE)) {
+			this.pretendToMix(arg2);
 			return 0;
 		}
 		Wave var4 = (Wave) super.field2168;
-		int var5 = this.field1532 << 8;
-		int var6 = this.field1538 << 8;
-		int var7 = var4.field3308.length << 8;
+		int var5 = this.loopStartPosition << 8;
+		int var6 = this.loopEndPosition << 8;
+		int var7 = var4.samples.length << 8;
 		int var8 = var6 - var5;
 		if (var8 <= 0) {
-			this.field1536 = 0;
+			this.loopCount = 0;
 		}
 		int var9 = arg1;
 		int var10 = arg1 + arg2;
-		if (this.field1536 >= 0) {
-			if (this.field1536 > 0) {
-				if (this.field1539) {
+		if (this.loopCount >= 0) {
+			if (this.loopCount > 0) {
+				if (this.loopReversed) {
 					label118:
 					{
-						if (this.field1534 < 0) {
-							var9 = this.method579(arg0, arg1, var5, var10, var4.field3308[this.field1532]);
-							if (this.field1540 >= var5) {
+						if (this.pitch < 0) {
+							var9 = this.method579(arg0, arg1, var5, var10, var4.samples[this.loopStartPosition]);
+							if (this.position >= var5) {
 								return 1;
 							}
-							this.field1540 = var5 + var5 - this.field1540 - 1;
-							this.field1534 = -this.field1534;
-							if (--this.field1536 == 0) {
+							this.position = var5 + var5 - this.position - 1;
+							this.pitch = -this.pitch;
+							if (--this.loopCount == 0) {
 								break label118;
 							}
 						}
 						do {
-							var9 = this.method592(arg0, var9, var6, var10, var4.field3308[this.field1538 - 1]);
-							if (this.field1540 < var6) {
+							var9 = this.method592(arg0, var9, var6, var10, var4.samples[this.loopEndPosition - 1]);
+							if (this.position < var6) {
 								return 1;
 							}
-							this.field1540 = var6 + var6 - this.field1540 - 1;
-							this.field1534 = -this.field1534;
-							if (--this.field1536 == 0) {
+							this.position = var6 + var6 - this.position - 1;
+							this.pitch = -this.pitch;
+							if (--this.loopCount == 0) {
 								break;
 							}
-							var9 = this.method579(arg0, var9, var5, var10, var4.field3308[this.field1532]);
-							if (this.field1540 >= var5) {
+							var9 = this.method579(arg0, var9, var5, var10, var4.samples[this.loopStartPosition]);
+							if (this.position >= var5) {
 								return 1;
 							}
-							this.field1540 = var5 + var5 - this.field1540 - 1;
-							this.field1534 = -this.field1534;
-						} while (--this.field1536 != 0);
+							this.position = var5 + var5 - this.position - 1;
+							this.pitch = -this.pitch;
+						} while (--this.loopCount != 0);
 					}
-				} else if (this.field1534 < 0) {
+				} else if (this.pitch < 0) {
 					while (true) {
-						var9 = this.method579(arg0, var9, var5, var10, var4.field3308[this.field1538 - 1]);
-						if (this.field1540 >= var5) {
+						var9 = this.method579(arg0, var9, var5, var10, var4.samples[this.loopEndPosition - 1]);
+						if (this.position >= var5) {
 							return 1;
 						}
-						int var12 = (var6 - this.field1540 - 1) / var8;
-						if (var12 >= this.field1536) {
-							this.field1540 += this.field1536 * var8;
-							this.field1536 = 0;
+						int var12 = (var6 - this.position - 1) / var8;
+						if (var12 >= this.loopCount) {
+							this.position += this.loopCount * var8;
+							this.loopCount = 0;
 							break;
 						}
-						this.field1540 += var8 * var12;
-						this.field1536 -= var12;
+						this.position += var8 * var12;
+						this.loopCount -= var12;
 					}
 				} else {
 					while (true) {
-						var9 = this.method592(arg0, var9, var6, var10, var4.field3308[this.field1532]);
-						if (this.field1540 < var6) {
+						var9 = this.method592(arg0, var9, var6, var10, var4.samples[this.loopStartPosition]);
+						if (this.position < var6) {
 							return 1;
 						}
-						int var13 = (this.field1540 - var5) / var8;
-						if (var13 >= this.field1536) {
-							this.field1540 -= this.field1536 * var8;
-							this.field1536 = 0;
+						int var13 = (this.position - var5) / var8;
+						if (var13 >= this.loopCount) {
+							this.position -= this.loopCount * var8;
+							this.loopCount = 0;
 							break;
 						}
-						this.field1540 -= var8 * var13;
-						this.field1536 -= var13;
+						this.position -= var8 * var13;
+						this.loopCount -= var13;
 					}
 				}
 			}
-			if (this.field1534 < 0) {
+			if (this.pitch < 0) {
 				this.method579(arg0, var9, 0, var10, 0);
-				if (this.field1540 < 0) {
-					this.field1540 = 0;
+				if (this.position < 0) {
+					this.position = 0;
 					this.unlink();
 				}
 			} else {
 				this.method592(arg0, var9, var7, var10, 0);
-				if (this.field1540 >= var7) {
-					this.field1540 = var7 - 1;
+				if (this.position >= var7) {
+					this.position = var7 - 1;
 					this.unlink();
 				}
 			}
 			return 1;
-		} else if (this.field1539) {
-			if (this.field1534 < 0) {
-				var9 = this.method579(arg0, arg1, var5, var10, var4.field3308[this.field1532]);
-				if (this.field1540 >= var5) {
+		} else if (this.loopReversed) {
+			if (this.pitch < 0) {
+				var9 = this.method579(arg0, arg1, var5, var10, var4.samples[this.loopStartPosition]);
+				if (this.position >= var5) {
 					return 1;
 				}
-				this.field1540 = var5 + var5 - this.field1540 - 1;
-				this.field1534 = -this.field1534;
+				this.position = var5 + var5 - this.position - 1;
+				this.pitch = -this.pitch;
 			}
 			while (true) {
-				int var11 = this.method592(arg0, var9, var6, var10, var4.field3308[this.field1538 - 1]);
-				if (this.field1540 < var6) {
+				int var11 = this.method592(arg0, var9, var6, var10, var4.samples[this.loopEndPosition - 1]);
+				if (this.position < var6) {
 					return 1;
 				}
-				this.field1540 = var6 + var6 - this.field1540 - 1;
-				this.field1534 = -this.field1534;
-				var9 = this.method579(arg0, var11, var5, var10, var4.field3308[this.field1532]);
-				if (this.field1540 >= var5) {
+				this.position = var6 + var6 - this.position - 1;
+				this.pitch = -this.pitch;
+				var9 = this.method579(arg0, var11, var5, var10, var4.samples[this.loopStartPosition]);
+				if (this.position >= var5) {
 					return 1;
 				}
-				this.field1540 = var5 + var5 - this.field1540 - 1;
-				this.field1534 = -this.field1534;
+				this.position = var5 + var5 - this.position - 1;
+				this.pitch = -this.pitch;
 			}
-		} else if (this.field1534 < 0) {
+		} else if (this.pitch < 0) {
 			while (true) {
-				var9 = this.method579(arg0, var9, var5, var10, var4.field3308[this.field1538 - 1]);
-				if (this.field1540 >= var5) {
+				var9 = this.method579(arg0, var9, var5, var10, var4.samples[this.loopEndPosition - 1]);
+				if (this.position >= var5) {
 					return 1;
 				}
-				this.field1540 = var6 - (var6 - 1 - this.field1540) % var8 - 1;
+				this.position = var6 - (var6 - 1 - this.position) % var8 - 1;
 			}
 		} else {
 			while (true) {
-				var9 = this.method592(arg0, var9, var6, var10, var4.field3308[this.field1532]);
-				if (this.field1540 < var6) {
+				var9 = this.method592(arg0, var9, var6, var10, var4.samples[this.loopStartPosition]);
+				if (this.position < var6) {
 					return 1;
 				}
-				this.field1540 = (this.field1540 - var5) % var8 + var5;
+				this.position = (this.position - var5) % var8 + var5;
 			}
 		}
 	}
@@ -229,8 +229,8 @@ public final class WaveStream extends PcmStream {
 			arg4 += arg6;
 			arg2 += arg10;
 		}
-		arg9.field1537 = arg4;
-		arg9.field1540 = arg2;
+		arg9.volumeMono = arg4;
+		arg9.position = arg2;
 		return arg3;
 	}
 
@@ -259,15 +259,15 @@ public final class WaveStream extends PcmStream {
 			arg4 += arg6;
 			arg2 += arg10;
 		}
-		arg9.field1537 = arg4;
-		arg9.field1540 = arg2;
+		arg9.volumeMono = arg4;
+		arg9.position = arg2;
 		return arg3;
 	}
 
 	@ObfuscatedName("ka.c(I)V")
 	public synchronized void method582(int arg0) {
-		this.field1537 = arg0;
-		this.field1533 = 0;
+		this.volumeMono = arg0;
+		this.volumeChangeDelta = 0;
 	}
 
 	@ObfuscatedName("ka.a(II[B[IIIIIIILka;II)I")
@@ -293,12 +293,12 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += ((arg9 << 8) + (arg2 & 0xFF) * (arg0[arg2 >> 8] - arg9)) * arg4;
 			arg2 += arg8;
 		}
-		arg7.field1540 = arg2;
+		arg7.position = arg2;
 		return arg3;
 	}
 
 	@ObfuscatedName("ka.a([B[IIIIIIIIILka;)I")
-	public static int method584(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, WaveStream arg9) {
+	public static int doMixBackwards1To1RampMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, WaveStream arg9) {
 		int var10 = arg2 >> 8;
 		int var11 = arg8 >> 8;
 		int var12 = arg4 << 8;
@@ -329,14 +329,14 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += arg0[var10--] * var12 >> arg5;
 			var12 += var13;
 		}
-		arg9.field1537 = var12 >> 8;
-		arg9.field1540 = var10 << 8;
+		arg9.volumeMono = var12 >> 8;
+		arg9.position = var10 << 8;
 		return arg3;
 	}
 
 	@ObfuscatedName("ka.d(I)V")
 	public synchronized void setLoopCount(int arg0) {
-		this.field1536 = arg0;
+		this.loopCount = arg0;
 	}
 
 	@ObfuscatedName("ka.a([B[IIIIIIILka;)I")
@@ -365,12 +365,12 @@ public final class WaveStream extends PcmStream {
 			var10001 = arg3++;
 			arg1[var10001] += arg0[var8--] * var10;
 		}
-		arg7.field1540 = var8 << 8;
+		arg7.position = var8 << 8;
 		return arg3;
 	}
 
 	@ObfuscatedName("ka.b([B[IIIIIIIIILka;)I")
-	public static int method587(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, WaveStream arg9) {
+	public static int doMixForwards1To1RampMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, WaveStream arg9) {
 		int var10 = arg2 >> 8;
 		int var11 = arg8 >> 8;
 		int var12 = arg4 << 8;
@@ -401,32 +401,32 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += arg0[var10++] * var12 >> arg5;
 			var12 += var13;
 		}
-		arg9.field1537 = var12 >> 8;
-		arg9.field1540 = var10 << 8;
+		arg9.volumeMono = var12 >> 8;
+		arg9.position = var10 << 8;
 		return arg3;
 	}
 
 	@ObfuscatedName("ka.a()I")
 	@Override
-	public int method588() {
-		int var1 = this.field1537 * 3;
+	public int priority() {
+		int var1 = this.volumeMono * 3;
 		int var2 = (var1 >>> 31) + (var1 ^ var1 >> 31);
-		if (this.field1536 == 0) {
-			var2 -= this.field1540 * var2 / (((Wave) super.field2168).field3308.length << 8);
-		} else if (this.field1536 >= 0) {
-			var2 -= this.field1532 * var2 / ((Wave) super.field2168).field3308.length;
+		if (this.loopCount == 0) {
+			var2 -= this.position * var2 / (((Wave) super.field2168).samples.length << 8);
+		} else if (this.loopCount >= 0) {
+			var2 -= this.loopStartPosition * var2 / ((Wave) super.field2168).samples.length;
 		}
 		return var2 > 255 ? 255 : var2;
 	}
 
 	@ObfuscatedName("ka.b()Z")
-	public boolean method589() {
+	public boolean isRamping() {
 		return this.isLinked();
 	}
 
 	@ObfuscatedName("ka.a(Lwd;II)Lka;")
 	public static WaveStream newRatePercent(Wave arg0, int arg1) {
-		return arg0.field3308 == null || arg0.field3308.length == 0 ? null : new WaveStream(arg0, (int) ((long) arg0.field3311 * 256L * (long) 100 / (long) (PcmPlayer.frequency * 100)), arg1);
+		return arg0.samples == null || arg0.samples.length == 0 ? null : new WaveStream(arg0, (int) ((long) arg0.samplingFrequency * 256L * (long) 100 / (long) (PcmPlayer.frequency * 100)), arg1);
 	}
 
 	@ObfuscatedName("ka.b(II[B[IIIIIIILka;II)I")
@@ -453,152 +453,152 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += ((var14 << 8) + (arg2 & 0xFF) * (arg9 - var14)) * arg4;
 			arg2 += arg8;
 		}
-		arg7.field1540 = arg2;
+		arg7.position = arg2;
 		return arg3;
 	}
 
 	@ObfuscatedName("ka.b(I)V")
 	@Override
-	public synchronized void method127(int arg0) {
-		if (this.field1533 > 0) {
-			if (arg0 >= this.field1533) {
-				if (this.field1535 == Integer.MIN_VALUE) {
+	public synchronized void pretendToMix(int arg0) {
+		if (this.volumeChangeDelta > 0) {
+			if (arg0 >= this.volumeChangeDelta) {
+				if (this.volume == Integer.MIN_VALUE) {
 					this.unlink();
-					arg0 = this.field1533;
+					arg0 = this.volumeChangeDelta;
 				} else {
-					this.field1537 = this.field1535;
+					this.volumeMono = this.volume;
 				}
-				this.field1533 = 0;
+				this.volumeChangeDelta = 0;
 			} else {
-				this.field1537 += this.field1531 * arg0;
-				this.field1533 -= arg0;
+				this.volumeMono += this.field1531 * arg0;
+				this.volumeChangeDelta -= arg0;
 			}
 		}
-		this.field1540 += this.field1534 * arg0;
+		this.position += this.pitch * arg0;
 		Wave var2 = (Wave) super.field2168;
-		int var3 = this.field1532 << 8;
-		int var4 = this.field1538 << 8;
-		int var5 = var2.field3308.length << 8;
+		int var3 = this.loopStartPosition << 8;
+		int var4 = this.loopEndPosition << 8;
+		int var5 = var2.samples.length << 8;
 		int var6 = var4 - var3;
 		if (var6 <= 0) {
-			this.field1536 = 0;
+			this.loopCount = 0;
 		}
-		if (this.field1536 >= 0) {
-			if (this.field1536 > 0) {
-				if (this.field1539) {
+		if (this.loopCount >= 0) {
+			if (this.loopCount > 0) {
+				if (this.loopReversed) {
 					label113:
 					{
-						if (this.field1534 < 0) {
-							if (this.field1540 >= var3) {
+						if (this.pitch < 0) {
+							if (this.position >= var3) {
 								return;
 							}
-							this.field1540 = var3 + var3 - this.field1540 - 1;
-							this.field1534 = -this.field1534;
-							if (--this.field1536 == 0) {
+							this.position = var3 + var3 - this.position - 1;
+							this.pitch = -this.pitch;
+							if (--this.loopCount == 0) {
 								break label113;
 							}
 						}
 						do {
-							if (this.field1540 < var4) {
+							if (this.position < var4) {
 								return;
 							}
-							this.field1540 = var4 + var4 - this.field1540 - 1;
-							this.field1534 = -this.field1534;
-							if (--this.field1536 == 0) {
+							this.position = var4 + var4 - this.position - 1;
+							this.pitch = -this.pitch;
+							if (--this.loopCount == 0) {
 								break;
 							}
-							if (this.field1540 >= var3) {
+							if (this.position >= var3) {
 								return;
 							}
-							this.field1540 = var3 + var3 - this.field1540 - 1;
-							this.field1534 = -this.field1534;
-						} while (--this.field1536 != 0);
+							this.position = var3 + var3 - this.position - 1;
+							this.pitch = -this.pitch;
+						} while (--this.loopCount != 0);
 					}
-				} else if (this.field1534 < 0) {
-					if (this.field1540 >= var3) {
+				} else if (this.pitch < 0) {
+					if (this.position >= var3) {
 						return;
 					}
-					int var7 = (var4 - this.field1540 - 1) / var6;
-					if (var7 < this.field1536) {
-						this.field1540 += var6 * var7;
-						this.field1536 -= var7;
+					int var7 = (var4 - this.position - 1) / var6;
+					if (var7 < this.loopCount) {
+						this.position += var6 * var7;
+						this.loopCount -= var7;
 						return;
 					}
-					this.field1540 += this.field1536 * var6;
-					this.field1536 = 0;
-				} else if (this.field1540 >= var4) {
-					int var8 = (this.field1540 - var3) / var6;
-					if (var8 < this.field1536) {
-						this.field1540 -= var6 * var8;
-						this.field1536 -= var8;
+					this.position += this.loopCount * var6;
+					this.loopCount = 0;
+				} else if (this.position >= var4) {
+					int var8 = (this.position - var3) / var6;
+					if (var8 < this.loopCount) {
+						this.position -= var6 * var8;
+						this.loopCount -= var8;
 						return;
 					}
-					this.field1540 -= this.field1536 * var6;
-					this.field1536 = 0;
+					this.position -= this.loopCount * var6;
+					this.loopCount = 0;
 				} else {
 					return;
 				}
 			}
-			if (this.field1534 < 0) {
-				if (this.field1540 < 0) {
-					this.field1540 = 0;
+			if (this.pitch < 0) {
+				if (this.position < 0) {
+					this.position = 0;
 					this.unlink();
 					return;
 				}
-			} else if (this.field1540 >= var5) {
-				this.field1540 = var5 - 1;
+			} else if (this.position >= var5) {
+				this.position = var5 - 1;
 				this.unlink();
 			}
-		} else if (this.field1539) {
-			if (this.field1534 < 0) {
-				if (this.field1540 >= var3) {
+		} else if (this.loopReversed) {
+			if (this.pitch < 0) {
+				if (this.position >= var3) {
 					return;
 				}
-				this.field1540 = var3 + var3 - this.field1540 - 1;
-				this.field1534 = -this.field1534;
+				this.position = var3 + var3 - this.position - 1;
+				this.pitch = -this.pitch;
 			}
-			while (this.field1540 >= var4) {
-				this.field1540 = var4 + var4 - this.field1540 - 1;
-				this.field1534 = -this.field1534;
-				if (this.field1540 >= var3) {
+			while (this.position >= var4) {
+				this.position = var4 + var4 - this.position - 1;
+				this.pitch = -this.pitch;
+				if (this.position >= var3) {
 					return;
 				}
-				this.field1540 = var3 + var3 - this.field1540 - 1;
-				this.field1534 = -this.field1534;
+				this.position = var3 + var3 - this.position - 1;
+				this.pitch = -this.pitch;
 			}
-		} else if (this.field1534 < 0) {
-			if (this.field1540 < var3) {
-				this.field1540 = var4 - (var4 - 1 - this.field1540) % var6 - 1;
+		} else if (this.pitch < 0) {
+			if (this.position < var3) {
+				this.position = var4 - (var4 - 1 - this.position) % var6 - 1;
 			}
-		} else if (this.field1540 >= var4) {
-			this.field1540 = (this.field1540 - var3) % var6 + var3;
+		} else if (this.position >= var4) {
+			this.position = (this.position - var3) % var6 + var3;
 		}
 	}
 
 	@ObfuscatedName("ka.b([IIIII)I")
 	public int method592(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (this.field1533 > 0) {
-			int var6 = this.field1533 + arg1;
+		if (this.volumeChangeDelta > 0) {
+			int var6 = this.volumeChangeDelta + arg1;
 			if (var6 > arg3) {
 				var6 = arg3;
 			}
-			this.field1533 += arg1;
-			if (this.field1534 == 256 && (this.field1540 & 0xFF) == 0) {
-				arg1 = method587(((Wave) super.field2168).field3308, arg0, this.field1540, arg1, this.field1537, this.field1530, this.field1531, var6, arg2, this);
+			this.volumeChangeDelta += arg1;
+			if (this.pitch == 256 && (this.position & 0xFF) == 0) {
+				arg1 = doMixForwards1To1RampMono(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, this.field1530, this.field1531, var6, arg2, this);
 			} else {
-				arg1 = method580(((Wave) super.field2168).field3308, arg0, this.field1540, arg1, this.field1537, this.field1530, this.field1531, var6, arg2, this, this.field1534, arg4);
+				arg1 = method580(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, this.field1530, this.field1531, var6, arg2, this, this.pitch, arg4);
 			}
-			this.field1533 -= arg1;
-			if (this.field1533 != 0) {
+			this.volumeChangeDelta -= arg1;
+			if (this.volumeChangeDelta != 0) {
 				return arg1;
 			}
-			if (this.field1535 == Integer.MIN_VALUE) {
+			if (this.volume == Integer.MIN_VALUE) {
 				this.unlink();
 				return arg3;
 			}
-			this.field1537 = this.field1535;
+			this.volumeMono = this.volume;
 		}
-		return this.field1534 == 256 && (this.field1540 & 0xFF) == 0 ? method593(((Wave) super.field2168).field3308, arg0, this.field1540, arg1, this.field1537, arg3, arg2, this) : method591(((Wave) super.field2168).field3308, arg0, this.field1540, arg1, this.field1537, arg3, arg2, this, this.field1534, arg4);
+		return this.pitch == 256 && (this.position & 0xFF) == 0 ? method593(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this) : method591(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this, this.pitch, arg4);
 	}
 
 	@ObfuscatedName("ka.b([B[IIIIIIILka;)I")
@@ -627,16 +627,16 @@ public final class WaveStream extends PcmStream {
 			var10001 = arg3++;
 			arg1[var10001] += arg0[var8++] * var10;
 		}
-		arg7.field1540 = var8 << 8;
+		arg7.position = var8 << 8;
 		return arg3;
 	}
 
 	public WaveStream(Wave arg0, int arg1, int arg2) {
 		super.field2168 = arg0;
-		this.field1532 = arg0.field3309;
-		this.field1538 = arg0.field3310;
-		this.field1534 = arg1;
-		this.field1537 = arg2;
-		this.field1540 = 0;
+		this.loopStartPosition = arg0.loopStartPosition;
+		this.loopEndPosition = arg0.loopEndPosition;
+		this.pitch = arg1;
+		this.volumeMono = arg2;
+		this.position = 0;
 	}
 }

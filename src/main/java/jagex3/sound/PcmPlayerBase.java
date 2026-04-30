@@ -17,7 +17,7 @@ public class PcmPlayerBase {
 	}
 
 	@ObfuscatedName("ca.a()V")
-	public void method256() {
+	public void play() {
 	}
 
 }

@@ -147,7 +147,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(I)La;")
-	public JagString method4() {
+	public JagString forceCapitalisationOfWords() {
 		JagString var1 = new JagString();
 		var1.length = this.length;
 		var1.charCode = new byte[this.length];
@@ -676,7 +676,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.a(ILa;)Z")
-	public boolean method38(JagString arg0) {
+	public boolean endsWith(JagString arg0) {
 		if (arg0.length > this.length) {
 			return false;
 		}
@@ -734,7 +734,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("a.b(Z)La;")
-	public JagString method40() {
+	public JagString trim() {
 		int var1 = 0;
 		int var2 = this.length;
 		while (var1 < this.length && (this.charCode[var1] >= 0 && this.charCode[var1] <= 32 || (this.charCode[var1] & 0xFF) == 160)) {

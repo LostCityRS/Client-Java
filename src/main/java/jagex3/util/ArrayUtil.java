@@ -71,8 +71,8 @@ public final class ArrayUtil {
 		while (var2 < var3) {
 			arg0[var2++] = 0;
 		}
-		if (PcmPlayer.field1381 != null) {
-			PcmPlayer.field1381.method134(arg0, 0, var3);
+		if (PcmPlayer.stream != null) {
+			PcmPlayer.stream.doMix(arg0, 0, var3);
 		}
 		PcmPlayer.method949(var3);
 	}

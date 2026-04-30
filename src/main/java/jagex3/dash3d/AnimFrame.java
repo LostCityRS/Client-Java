@@ -10,7 +10,7 @@ public final class AnimFrame {
 	public static int[] field2115 = new int[500];
 
 	@ObfuscatedName("o.b")
-	public static int[] field2116 = new int[500];
+	public static int[] tempTi = new int[500];
 
 	@ObfuscatedName("o.c")
 	public static int[] field2117 = new int[500];
@@ -51,10 +51,10 @@ public final class AnimFrame {
 		for (int var8 = 0; var8 < var5; var8++) {
 			int var9 = var3.g1();
 			if (var9 > 0) {
-				if (this.base.field3117[var8] != 0) {
+				if (this.base.type[var8] != 0) {
 					for (int var10 = var8 - 1; var10 > var6; var10--) {
-						if (this.base.field3117[var10] == 0) {
-							field2116[var7] = var10;
+						if (this.base.type[var10] == 0) {
+							tempTi[var7] = var10;
 							field2117[var7] = 0;
 							field2115[var7] = 0;
 							field2118[var7] = 0;
@@ -63,9 +63,9 @@ public final class AnimFrame {
 						}
 					}
 				}
-				field2116[var7] = var8;
+				tempTi[var7] = var8;
 				short var11 = 0;
-				if (this.base.field3117[var8] == 3) {
+				if (this.base.type[var8] == 3) {
 					var11 = 128;
 				}
 				if ((var9 & 0x1) == 0) {
@@ -85,7 +85,7 @@ public final class AnimFrame {
 				}
 				var6 = var8;
 				var7++;
-				if (this.base.field3117[var8] == 5) {
+				if (this.base.type[var8] == 5) {
 					this.animateTransparencies = true;
 				}
 			}
@@ -99,7 +99,7 @@ public final class AnimFrame {
 		this.field2125 = new int[var7];
 		this.field2124 = new int[var7];
 		for (int var12 = 0; var12 < var7; var12++) {
-			this.ti[var12] = field2116[var12];
+			this.ti[var12] = tempTi[var12];
 			this.field2120[var12] = field2117[var12];
 			this.field2125[var12] = field2115[var12];
 			this.field2124[var12] = field2118[var12];
@@ -108,7 +108,7 @@ public final class AnimFrame {
 
 	@ObfuscatedName("o.a()V")
 	public static void unload() {
-		field2116 = null;
+		tempTi = null;
 		field2117 = null;
 		field2115 = null;
 		field2118 = null;

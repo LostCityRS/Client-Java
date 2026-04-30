@@ -29,7 +29,7 @@ public final class SignLink implements Runnable {
 	public String field1699 = null;
 
 	@ObfuscatedName("lc.b")
-	public boolean field1700 = false;
+	public boolean isClosed = false;
 
 	@ObfuscatedName("lc.c")
 	public int uid = 0;
@@ -53,7 +53,7 @@ public final class SignLink implements Runnable {
 	public PrivilegedRequest task = null;
 
 	@ObfuscatedName("lc.m")
-	public AudioSource field1711;
+	public AudioSource audio;
 
 	@ObfuscatedName("lc.n")
 	public final Thread thread;
@@ -79,7 +79,7 @@ public final class SignLink implements Runnable {
 	@ObfuscatedName("lc.a(I)V")
 	public void method647() {
 		synchronized (this) {
-			this.field1700 = true;
+			this.isClosed = true;
 			this.notifyAll();
 		}
 		try {
@@ -116,21 +116,21 @@ public final class SignLink implements Runnable {
 
 	@ObfuscatedName("lc.a([Ljava/lang/Class;Ljava/lang/String;Ljava/lang/Class;B)Led;")
 	public PrivilegedRequest getDeclaredMethod(Class[] arg0, String arg1, Class arg2) {
-		return this.method651(0, 9, new Object[]{arg2, arg1, arg0});
+		return this.newRequest(0, 9, new Object[]{arg2, arg1, arg0});
 	}
 
 	@ObfuscatedName("lc.b(I)Lle;")
 	public AudioSource method649() {
-		return this.field1711;
+		return this.audio;
 	}
 
 	@ObfuscatedName("lc.a(ZLjava/net/URL;)Led;")
-	public PrivilegedRequest method650(URL arg0) {
-		return this.method651(0, 4, arg0);
+	public PrivilegedRequest urlreq(URL arg0) {
+		return this.newRequest(0, 4, arg0);
 	}
 
 	@ObfuscatedName("lc.a(IIIILjava/lang/Object;)Led;")
-	public PrivilegedRequest method651(int arg0, int arg1, Object arg2) {
+	public PrivilegedRequest newRequest(int arg0, int arg1, Object arg2) {
 		PrivilegedRequest var4 = new PrivilegedRequest();
 		var4.objArg = arg2;
 		var4.intArg = arg0;
@@ -177,7 +177,7 @@ public final class SignLink implements Runnable {
 			}
 		} catch (Exception var7) {
 		}
-		this.field1700 = false;
+		this.isClosed = false;
 		this.thread = new Thread(this);
 		this.thread.setPriority(10);
 		this.thread.setDaemon(true);
@@ -214,7 +214,7 @@ public final class SignLink implements Runnable {
 			PrivilegedRequest var2;
 			synchronized (this) {
 				while (true) {
-					if (this.field1700) {
+					if (this.isClosed) {
 						return;
 					}
 					if (this.current != null) {
@@ -261,22 +261,22 @@ public final class SignLink implements Runnable {
 
 	@ObfuscatedName("lc.a(Ljava/lang/Class;Ljava/lang/String;Z)Led;")
 	public PrivilegedRequest getDeclaredField(Class arg0, String arg1) {
-		return this.method651(0, 10, new Object[]{arg0, arg1});
+		return this.newRequest(0, 10, new Object[]{arg0, arg1});
 	}
 
 	@ObfuscatedName("lc.a(II)Led;")
-	public PrivilegedRequest method655(int arg0) {
-		return this.method651(arg0, 3, null);
+	public PrivilegedRequest dnsreq(int arg0) {
+		return this.newRequest(arg0, 3, null);
 	}
 
 	@ObfuscatedName("lc.a(IILjava/lang/Runnable;)Led;")
 	public PrivilegedRequest threadreq(int arg0, Runnable arg1) {
-		return this.method651(arg0, 2, arg1);
+		return this.newRequest(arg0, 2, arg1);
 	}
 
 	@ObfuscatedName("lc.b(II)Led;")
 	public PrivilegedRequest socketreq(int arg0) {
-		return this.method651(arg0, 1, null);
+		return this.newRequest(arg0, 1, null);
 	}
 
 	@ObfuscatedName("lc.e(I)Led;")

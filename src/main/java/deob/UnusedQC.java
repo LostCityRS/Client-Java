@@ -1,6 +1,6 @@
 package deob;
 
 @ObfuscatedName("qc")
-public final class class99 {
+public final class UnusedQC {
 
 }

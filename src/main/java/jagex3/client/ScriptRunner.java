@@ -54,7 +54,7 @@ public class ScriptRunner {
 	@ObfuscatedName("d.Qc")
 	public static JagString field672 = JagString.wrap("Apr");
 	@ObfuscatedName("d.Rb")
-	public static JagString[] field621 = new JagString[]{field669, field620, field647, field672, field655, field642, field648, field626, field623, field622, field645, field624};
+	public static JagString[] months = new JagString[]{field669, field620, field647, field672, field655, field642, field648, field626, field623, field622, field645, field624};
 	@ObfuscatedName("kc.h")
 	public static JagString field1572 = JagString.wrap(")2");
 	@ObfuscatedName("r.A")
@@ -567,7 +567,7 @@ public class ScriptRunner {
 						int var49 = intStack[isp];
 						int var50 = intStack[isp + 2];
 						int var51 = intStack[isp + 1];
-						IfType var52 = Client.method607(IfType.list[var49], var50, true, 0, -1, 0, var51);
+						IfType var52 = Client.getTopComponent(IfType.list[var49], var50, true, 0, -1, 0, var51);
 						if (var52 == null) {
 							intStack[isp++] = 0;
 						} else {
@@ -586,7 +586,7 @@ public class ScriptRunner {
 						IfType var53 = IfType.get(intStack[isp]);
 						int var54 = intStack[isp + 2];
 						int var55 = intStack[isp + 1];
-						IfType var56 = Client.method607(var53.subcomponents, var54, true, var53.scrollPosY, var53.parentId, var53.scrollPosX, var55);
+						IfType var56 = Client.getTopComponent(var53.subcomponents, var54, true, var53.scrollPosY, var53.parentId, var53.scrollPosX, var55);
 						if (var56 == null) {
 							intStack[isp++] = 0;
 						} else {
@@ -640,7 +640,7 @@ public class ScriptRunner {
 						int var58 = intStack[isp + 1];
 						int var59 = intStack[isp];
 						int var60 = intStack[isp + 2];
-						IfType var61 = Client.method607(IfType.list[var59], var60, false, 0, -1, 0, var58);
+						IfType var61 = Client.getTopComponent(IfType.list[var59], var60, false, 0, -1, 0, var58);
 						if (var61 == null) {
 							intStack[isp++] = -1;
 						} else {
@@ -654,7 +654,7 @@ public class ScriptRunner {
 						IfType var62 = IfType.get(intStack[isp]);
 						int var63 = intStack[isp + 1];
 						int var64 = intStack[isp + 2];
-						IfType var65 = Client.method607(IfType.list[var62.parentId >> 16], var64, false, var62.scrollPosY, var62.parentId & 0xFFFF, var62.scrollPosX, var63);
+						IfType var65 = Client.getTopComponent(IfType.list[var62.parentId >> 16], var64, false, var62.scrollPosY, var62.parentId & 0xFFFF, var62.scrollPosX, var63);
 						if (var65 == null) {
 							intStack[isp++] = -1;
 						} else {
@@ -792,7 +792,7 @@ public class ScriptRunner {
 								int var112 = calendar.get(5);
 								int var113 = calendar.get(2);
 								int var114 = calendar.get(1);
-								stringStack[ssp++] = JagString.join(new JagString[]{JagString.parseInt(var112), field1572, field621[var113], field1572, JagString.parseInt(var114)});
+								stringStack[ssp++] = JagString.join(new JagString[]{JagString.parseInt(var112), field1572, months[var113], field1572, JagString.parseInt(var114)});
 							} else if (opcode == 4105) {
 								// text_gender
 								ssp -= 2;

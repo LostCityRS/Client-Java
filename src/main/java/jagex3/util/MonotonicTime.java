@@ -4,17 +4,17 @@ import deob.ObfuscatedName;
 
 public class MonotonicTime {
 	@ObfuscatedName("ub.j")
-	public static long field3036;
+	public static long leapMillis;
 	@ObfuscatedName("ub.u")
-	public static long field3047;
+	public static long previous;
 
 	@ObfuscatedName("ra.a(I)J")
 	public static synchronized long currentTime() {
 		long var0 = System.currentTimeMillis();
-		if (field3036 > var0) {
-			field3047 += field3036 - var0;
+		if (leapMillis > var0) {
+			previous += leapMillis - var0;
 		}
-		field3036 = var0;
-		return field3047 + var0;
+		leapMillis = var0;
+		return previous + var0;
 	}
 }

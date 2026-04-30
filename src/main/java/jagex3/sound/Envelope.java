@@ -7,87 +7,87 @@ import jagex3.io.Packet;
 public final class Envelope {
 
 	@ObfuscatedName("c.a")
-	public int field438 = 2;
+	public int length = 2;
 
 	@ObfuscatedName("c.b")
-	public int[] field439 = new int[2];
+	public int[] shapeDelta = new int[2];
 
 	@ObfuscatedName("c.c")
-	public int field440;
+	public int start;
 
 	@ObfuscatedName("c.d")
-	public int field441;
+	public int form;
 
 	@ObfuscatedName("c.e")
-	public int field442;
+	public int end;
 
 	@ObfuscatedName("c.f")
-	public int[] field443 = new int[2];
+	public int[] shapePeak = new int[2];
 
 	@ObfuscatedName("c.g")
-	public int field444;
+	public int ticks;
 
 	@ObfuscatedName("c.h")
-	public int field445;
+	public int delta;
 
 	@ObfuscatedName("c.i")
-	public int field446;
+	public int threshold;
 
 	@ObfuscatedName("c.j")
-	public int field447;
+	public int position;
 
 	@ObfuscatedName("c.k")
-	public int field448;
+	public int amplitude;
 
 	@ObfuscatedName("c.a()V")
-	public void method248() {
-		this.field446 = 0;
-		this.field447 = 0;
-		this.field445 = 0;
-		this.field448 = 0;
-		this.field444 = 0;
+	public void genInit() {
+		this.threshold = 0;
+		this.position = 0;
+		this.delta = 0;
+		this.amplitude = 0;
+		this.ticks = 0;
 	}
 
 	@ObfuscatedName("c.a(Lba;)V")
-	public void method249(Packet arg0) {
-		this.field441 = arg0.g1();
-		this.field440 = arg0.g4();
-		this.field442 = arg0.g4();
-		this.method250(arg0);
+	public void load(Packet arg0) {
+		this.form = arg0.g1();
+		this.start = arg0.g4();
+		this.end = arg0.g4();
+		this.loadPoints(arg0);
 	}
 
 	@ObfuscatedName("c.b(Lba;)V")
-	public void method250(Packet arg0) {
-		this.field438 = arg0.g1();
-		this.field439 = new int[this.field438];
-		this.field443 = new int[this.field438];
-		for (int var2 = 0; var2 < this.field438; var2++) {
-			this.field439[var2] = arg0.g2();
-			this.field443[var2] = arg0.g2();
+	public void loadPoints(Packet arg0) {
+		this.length = arg0.g1();
+		this.shapeDelta = new int[this.length];
+		this.shapePeak = new int[this.length];
+		for (int var2 = 0; var2 < this.length; var2++) {
+			this.shapeDelta[var2] = arg0.g2();
+			this.shapePeak[var2] = arg0.g2();
 		}
 	}
 
 	@ObfuscatedName("c.a(I)I")
-	public int method251(int arg0) {
-		if (this.field444 >= this.field446) {
-			this.field448 = this.field443[this.field447++] << 15;
-			if (this.field447 >= this.field438) {
-				this.field447 = this.field438 - 1;
+	public int genNext(int arg0) {
+		if (this.ticks >= this.threshold) {
+			this.amplitude = this.shapePeak[this.position++] << 15;
+			if (this.position >= this.length) {
+				this.position = this.length - 1;
 			}
-			this.field446 = (int) ((double) this.field439[this.field447] / 65536.0D * (double) arg0);
-			if (this.field446 > this.field444) {
-				this.field445 = ((this.field443[this.field447] << 15) - this.field448) / (this.field446 - this.field444);
+			this.threshold = (int) ((double) this.shapeDelta[this.position] / 65536.0D * (double) arg0);
+			if (this.threshold > this.ticks) {
+				this.delta = ((this.shapePeak[this.position] << 15) - this.amplitude) / (this.threshold - this.ticks);
 			}
 		}
-		this.field448 += this.field445;
-		this.field444++;
-		return this.field448 - this.field445 >> 15;
+		this.amplitude += this.delta;
+		this.ticks++;
+		return this.amplitude - this.delta >> 15;
 	}
 
 	public Envelope() {
-		this.field439[0] = 0;
-		this.field439[1] = 65535;
-		this.field443[0] = 0;
-		this.field443[1] = 65535;
+		this.shapeDelta[0] = 0;
+		this.shapeDelta[1] = 65535;
+		this.shapePeak[0] = 0;
+		this.shapePeak[1] = 65535;
 	}
 }

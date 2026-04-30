@@ -16,10 +16,10 @@ public final class ClientPlayer extends ClientEntity {
 	public int field97;
 
 	@ObfuscatedName("aa.de")
-	public int field99;
+	public int locOffsetZ;
 
 	@ObfuscatedName("aa.vd")
-	public int field65 = 0;
+	public int skillLevel = 0;
 
 	@ObfuscatedName("aa.wd")
 	public int field66;
@@ -28,7 +28,7 @@ public final class ClientPlayer extends ClientEntity {
 	public int combatLevel = 0;
 
 	@ObfuscatedName("aa.Ed")
-	public int field74 = 0;
+	public int team = 0;
 
 	@ObfuscatedName("aa.Ld")
 	public int headiconPrayer = -1;
@@ -37,13 +37,13 @@ public final class ClientPlayer extends ClientEntity {
 	public int headiconPk = -1;
 
 	@ObfuscatedName("aa.Md")
-	public int field82 = 0;
+	public int locEndCycle = 0;
 
 	@ObfuscatedName("aa.Vd")
-	public int field91 = 0;
+	public int locStartCycle = 0;
 
 	@ObfuscatedName("aa.Zd")
-	public boolean field95 = false;
+	public boolean lowMem = false;
 
 	@ObfuscatedName("aa.Ad")
 	public int field70;
@@ -76,14 +76,14 @@ public final class ClientPlayer extends ClientEntity {
 			return null;
 		}
 		SeqType var1 = super.primarySeqId != -1 && super.primarySeqDelay == 0 ? SeqType.list(super.primarySeqId) : null;
-		SeqType var2 = super.secondarySeqId == -1 || this.field95 || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.list(super.secondarySeqId);
+		SeqType var2 = super.secondarySeqId == -1 || this.lowMem || super.readyanim == super.secondarySeqId && var1 != null ? null : SeqType.list(super.secondarySeqId);
 		Model var3 = this.model.getTempModel(var1, var2, super.secondarySeqFrame, super.primarySeqFrame);
 		if (var3 == null) {
 			return null;
 		}
 		var3.calcBoundingCylinder();
 		super.height = var3.minY;
-		if (!this.field95 && super.spotanimId != -1 && super.spotanimFrame != -1) {
+		if (!this.lowMem && super.spotanimId != -1 && super.spotanimFrame != -1) {
 			Model var4 = SpotType.list(super.spotanimId).getTempModel2(super.spotanimFrame);
 			if (var4 != null) {
 				var4.translate(0, -super.field1984, 0);
@@ -91,13 +91,13 @@ public final class ClientPlayer extends ClientEntity {
 				var3 = new Model(var5, 2, true);
 			}
 		}
-		if (!this.field95 && this.field73 != null) {
-			if (Client.loopCycle >= this.field82) {
+		if (!this.lowMem && this.field73 != null) {
+			if (Client.loopCycle >= this.locEndCycle) {
 				this.field73 = null;
 			}
-			if (this.field91 <= Client.loopCycle && this.field82 > Client.loopCycle) {
+			if (this.locStartCycle <= Client.loopCycle && this.locEndCycle > Client.loopCycle) {
 				Model var6 = this.field73;
-				var6.translate(this.field79 - super.x, -this.field84 + this.field80, this.field99 - super.z);
+				var6.translate(this.field79 - super.x, -this.field84 + this.field80, this.locOffsetZ - super.z);
 				if (super.dstYaw == 512) {
 					var6.rotate90();
 					var6.rotate90();
@@ -120,7 +120,7 @@ public final class ClientPlayer extends ClientEntity {
 					var6.rotate90();
 					var6.rotate90();
 				}
-				var6.translate(super.x - this.field79, -this.field80 + this.field84, super.z - this.field99);
+				var6.translate(super.x - this.field79, -this.field80 + this.field84, super.z - this.locOffsetZ);
 			}
 		}
 		var3.useAABBMouseCheck = true;
@@ -134,13 +134,13 @@ public final class ClientPlayer extends ClientEntity {
 	}
 
 	@ObfuscatedName("aa.a(BLba;)V")
-	public void method43(Packet arg0) {
+	public void setAppearance(Packet arg0) {
 		arg0.pos = 0;
 		int var2 = arg0.g1();
 		this.headiconPk = arg0.g1b();
 		this.headiconPrayer = arg0.g1b();
 		int var3 = -1;
-		this.field74 = 0;
+		this.team = 0;
 		int[] var4 = new int[12];
 		for (int var5 = 0; var5 < 12; var5++) {
 			int var6 = arg0.g1();
@@ -156,7 +156,7 @@ public final class ClientPlayer extends ClientEntity {
 				if (var4[var5] >= 512) {
 					int var8 = ObjType.list(var4[var5] - 512).team;
 					if (var8 != 0) {
-						this.field74 = var8;
+						this.team = var8;
 					}
 				}
 			}
@@ -194,13 +194,13 @@ public final class ClientPlayer extends ClientEntity {
 		if (super.walkanim_l == 65535) {
 			super.walkanim_l = -1;
 		}
-		super.field1956 = arg0.g2();
-		if (super.field1956 == 65535) {
-			super.field1956 = -1;
+		super.runanim = arg0.g2();
+		if (super.runanim == 65535) {
+			super.runanim = -1;
 		}
 		this.name = JString.toScreenName(arg0.g8()).toRawUsername();
 		this.combatLevel = arg0.g1();
-		this.field65 = arg0.g2();
+		this.skillLevel = arg0.g2();
 		if (this.model == null) {
 			this.model = new PlayerModel();
 		}
