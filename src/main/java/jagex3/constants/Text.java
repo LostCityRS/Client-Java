@@ -7,11 +7,11 @@ public class Text {
 	@ObfuscatedName("nd.a")
 	public static JagString AUTO_EMPTY = JagString.wrap("");
 	@ObfuscatedName("nd.c")
-	public static JagString field2062 = AUTO_EMPTY;
+	public static JagString LOGIN27_A = AUTO_EMPTY;
 	@ObfuscatedName("nd.w")
-	public static JagString field2082 = AUTO_EMPTY;
+	public static JagString LOGIN27_C = AUTO_EMPTY;
 	@ObfuscatedName("nd.H")
-	public static JagString field2093 = AUTO_EMPTY;
+	public static JagString LOGINM3_C = AUTO_EMPTY;
 	@ObfuscatedName("rc.x")
 	public static JagString AUTO_LOGINM3_A = JagString.wrap("Connection timed out)3");
 	@ObfuscatedName("rc.h")
@@ -19,33 +19,33 @@ public class Text {
 	@ObfuscatedName("fa.rb")
 	public static JagString AUTO_PLEASE_TRY_DIFFERENT = JagString.wrap("Please try using a different world)3");
 	@ObfuscatedName("fa.tb")
-	public static JagString field865 = AUTO_PLEASE_TRY_DIFFERENT;
+	public static JagString LOGINM3_B = AUTO_PLEASE_TRY_DIFFERENT;
 	@ObfuscatedName("nd.l")
-	public static JagString field2071 = AUTO_EMPTY;
+	public static JagString LOGINM2_C = AUTO_EMPTY;
 	@ObfuscatedName("nd.U")
-	public static JagString field2106 = AUTO_EMPTY;
+	public static JagString LOGINM2_A = AUTO_EMPTY;
 	@ObfuscatedName("hd.Tb")
 	public static JagString AUTO_LOGINM2_B = JagString.wrap("Error connecting to server)3");
 	@ObfuscatedName("hd.Ub")
 	public static JagString LOGINM2_B = AUTO_LOGINM2_B;
 	@ObfuscatedName("nd.A")
-	public static JagString field2086 = AUTO_EMPTY;
+	public static JagString LOGINM1_C = AUTO_EMPTY;
 	@ObfuscatedName("m.x")
 	public static JagString AUTO_LOGINM1_A = JagString.wrap("No response from server)3");
 	@ObfuscatedName("m.y")
 	public static JagString LOGINM1_A = AUTO_LOGINM1_A;
 	@ObfuscatedName("fa.pb")
-	public static JagString field861 = AUTO_PLEASE_TRY_DIFFERENT;
+	public static JagString LOGINM1_B = AUTO_PLEASE_TRY_DIFFERENT;
 	@ObfuscatedName("nd.s")
-	public static JagString field2078 = AUTO_EMPTY;
+	public static JagString LOGIN3_C = AUTO_EMPTY;
 	@ObfuscatedName("nd.Z")
-	public static JagString field2111 = AUTO_EMPTY;
+	public static JagString LOGIN3_A = AUTO_EMPTY;
 	@ObfuscatedName("gb.v")
 	public static JagString AUTO_LOGIN3_B = JagString.wrap("Invalid username or password)3");
 	@ObfuscatedName("gb.D")
 	public static JagString LOGIN3_B = AUTO_LOGIN3_B;
 	@ObfuscatedName("nd.bb")
-	public static JagString field2113 = AUTO_EMPTY;
+	public static JagString LOGIN4_C = AUTO_EMPTY;
 	@ObfuscatedName("vc.a")
 	public static JagString AUTO_LOGIN4_A = JagString.wrap("Your account has been disabled)3");
 	@ObfuscatedName("vc.A")
@@ -55,7 +55,7 @@ public class Text {
 	@ObfuscatedName("cb.r")
 	public static JagString LOGIN4_B = AUTO_LOGIN4_B;
 	@ObfuscatedName("nd.R")
-	public static JagString field2103 = AUTO_EMPTY;
+	public static JagString LOGIN5_C = AUTO_EMPTY;
 	@ObfuscatedName("hc.p")
 	public static JagString AUTO_LOGIN5_A = JagString.wrap("Your account is already logged in)3");
 	@ObfuscatedName("hc.b")
@@ -65,7 +65,7 @@ public class Text {
 	@ObfuscatedName("aa.Yd")
 	public static JagString LOGIN5_B = AUTO_LOGIN5_B;
 	@ObfuscatedName("nd.h")
-	public static JagString field2067 = AUTO_EMPTY;
+	public static JagString LOGIN6_C = AUTO_EMPTY;
 	@ObfuscatedName("hd.Vb")
 	public static JagString AUTO_LOGIN6_A = JagString.wrap("RuneScape has been updated(Q");
 	@ObfuscatedName("hd.Sb")
@@ -75,7 +75,7 @@ public class Text {
 	@ObfuscatedName("w.i")
 	public static JagString LOGIN6_B = AUTO_LOGIN6_B;
 	@ObfuscatedName("nd.E")
-	public static JagString field2090 = AUTO_EMPTY;
+	public static JagString LOGIN7_C = AUTO_EMPTY;
 	@ObfuscatedName("sd.l")
 	public static JagString AUTO_LOGIN7_A = JagString.wrap("This world is full)3");
 	@ObfuscatedName("sd.j")
@@ -83,19 +83,19 @@ public class Text {
 	@ObfuscatedName("uc.t")
 	public static JagString AUTO_PLEASE_USE_DIFFERENT = JagString.wrap("Please use a different world)3");
 	@ObfuscatedName("uc.J")
-	public static JagString field3072 = AUTO_PLEASE_USE_DIFFERENT;
+	public static JagString LOGIN7_B = AUTO_PLEASE_USE_DIFFERENT;
 	@ObfuscatedName("nd.o")
-	public static JagString field2074 = AUTO_EMPTY;
+	public static JagString LOGIN8_C = AUTO_EMPTY;
 	@ObfuscatedName("oa.c")
 	public static JagString AUTO_UNABLE_TO_CONNECT = JagString.wrap("Unable to connect)3");
 	@ObfuscatedName("oa.j")
-	public static JagString field2135 = AUTO_UNABLE_TO_CONNECT;
+	public static JagString LOGIN8_A = AUTO_UNABLE_TO_CONNECT;
 	@ObfuscatedName("ac.X")
 	public static JagString AUTO_LOGIN8_B = JagString.wrap("Login server offline)3");
 	@ObfuscatedName("ac.U")
 	public static JagString LOGIN8_B = AUTO_LOGIN8_B;
 	@ObfuscatedName("nd.t")
-	public static JagString field2079 = AUTO_EMPTY;
+	public static JagString LOGIN9_C = AUTO_EMPTY;
 	@ObfuscatedName("nb.zc")
 	public static JagString AUTO_LOGIN9_A = JagString.wrap("Login limit exceeded)3");
 	@ObfuscatedName("nb.Xc")
@@ -105,15 +105,15 @@ public class Text {
 	@ObfuscatedName("je.Kb")
 	public static JagString LOGIN9_B = AUTO_LOGIN9_B;
 	@ObfuscatedName("nd.D")
-	public static JagString field2089 = AUTO_EMPTY;
+	public static JagString LOGIN10_C = AUTO_EMPTY;
 	@ObfuscatedName("oa.o")
-	public static JagString field2140 = AUTO_UNABLE_TO_CONNECT;
+	public static JagString LOGIN10_A = AUTO_UNABLE_TO_CONNECT;
 	@ObfuscatedName("pe.Xb")
 	public static JagString AUTO_LOGIN10_B = JagString.wrap("Bad session id)3");
 	@ObfuscatedName("pe.Wb")
 	public static JagString LOGIN10_B = AUTO_LOGIN10_B;
 	@ObfuscatedName("nd.u")
-	public static JagString field2080 = AUTO_EMPTY;
+	public static JagString LOGIN11_C = AUTO_EMPTY;
 	@ObfuscatedName("oa.b")
 	public static JagString AUTO_LOGIN11_A = JagString.wrap("We suspect someone knows your password)3");
 	@ObfuscatedName("oa.n")
@@ -123,7 +123,7 @@ public class Text {
 	@ObfuscatedName("jc.qb")
 	public static JagString LOGIN11_B = AUTO_LOGIN11_B;
 	@ObfuscatedName("nd.i")
-	public static JagString field2068 = AUTO_EMPTY;
+	public static JagString LOGIN12_C = AUTO_EMPTY;
 	@ObfuscatedName("va.vb")
 	public static JagString AUTO_LOGIN12_A = JagString.wrap("You need a members account to login to this world)3");
 	@ObfuscatedName("va.wb")
@@ -133,15 +133,15 @@ public class Text {
 	@ObfuscatedName("fd.Ab")
 	public static JagString LOGIN12_B = AUTO_LOGIN12_B;
 	@ObfuscatedName("nd.X")
-	public static JagString field2109 = AUTO_EMPTY;
+	public static JagString LOGIN13_C = AUTO_EMPTY;
 	@ObfuscatedName("je.Jb")
 	public static JagString AUTO_LOGIN13_A = JagString.wrap("Could not complete login)3");
 	@ObfuscatedName("je.ac")
 	public static JagString LOGIN13_A = AUTO_LOGIN13_A;
 	@ObfuscatedName("fa.eb")
-	public static JagString field850 = AUTO_PLEASE_TRY_DIFFERENT;
+	public static JagString LOGIN13_B = AUTO_PLEASE_TRY_DIFFERENT;
 	@ObfuscatedName("nd.g")
-	public static JagString field2066 = AUTO_EMPTY;
+	public static JagString LOGIN14_C = AUTO_EMPTY;
 	@ObfuscatedName("cd.m")
 	public static JagString AUTO_LOGIN14_A = JagString.wrap("The server is being updated)3");
 	@ObfuscatedName("cd.k")
@@ -203,7 +203,7 @@ public class Text {
 	@ObfuscatedName("h.Qb")
 	public static JagString MAINLOAD40 = AUTO_MAINLOAD40;
 	@ObfuscatedName("fa.qb")
-	public static JagString field862 = AUTO_PLEASE_TRY_DIFFERENT;
+	public static JagString LOGINMIS_B = AUTO_PLEASE_TRY_DIFFERENT;
 	@ObfuscatedName("nd.J")
 	public static JagString field2095 = AUTO_EMPTY;
 	@ObfuscatedName("kb.i")
@@ -223,7 +223,7 @@ public class Text {
 	@ObfuscatedName("n.o")
 	public static JagString field1921 = field1923;
 	@ObfuscatedName("nd.K")
-	public static JagString field2096 = AUTO_EMPTY;
+	public static JagString LOGIN17_C = AUTO_EMPTY;
 	@ObfuscatedName("ec.tb")
 	public static JagString AUTO_MAINLOAD90 = JagString.wrap("Loading textures )2 ");
 	@ObfuscatedName("ec.Eb")
@@ -241,9 +241,9 @@ public class Text {
 	@ObfuscatedName("rd.j")
 	public static JagString NEWUSER4 = AUTO_NEWUSER4;
 	@ObfuscatedName("nd.L")
-	public static JagString field2097 = AUTO_EMPTY;
+	public static JagString LOGIN26_C = AUTO_EMPTY;
 	@ObfuscatedName("nd.x")
-	public static JagString field2083 = AUTO_EMPTY;
+	public static JagString LOGINMIS_C = AUTO_EMPTY;
 	@ObfuscatedName("rc.f")
 	public static JagString AUTO_NEWUSER = JagString.wrap("New User");
 	@ObfuscatedName("rc.m")
@@ -253,7 +253,7 @@ public class Text {
 	@ObfuscatedName("fc.Db")
 	public static JagString LOGIN22_A = AUTO_LOGIN22_A;
 	@ObfuscatedName("fa.jb")
-	public static JagString field855 = AUTO_PLEASE_TRY_DIFFERENT;
+	public static JagString LOGIN20_B = AUTO_PLEASE_TRY_DIFFERENT;
 	@ObfuscatedName("de.e")
 	public static JagString field725 = JagString.wrap("Enter name of friend to delete from list");
 	@ObfuscatedName("de.r")
@@ -279,7 +279,7 @@ public class Text {
 	@ObfuscatedName("t.tb")
 	public static JagString EXAMINE = AUTO_EXAMINE;
 	@ObfuscatedName("nd.F")
-	public static JagString field2091 = AUTO_EMPTY;
+	public static JagString LOGIN24_C = AUTO_EMPTY;
 	@ObfuscatedName("vd.xd")
 	public static JagString field3179 = JagString.wrap("On");
 	@ObfuscatedName("vd.Ld")
@@ -411,7 +411,7 @@ public class Text {
 	@ObfuscatedName("ec.wb")
 	public static JagString LEVEL = AUTO_LEVEL;
 	@ObfuscatedName("fa.mb")
-	public static JagString field858 = AUTO_PLEASE_TRY_DIFFERENT;
+	public static JagString LOGIN25_B = AUTO_PLEASE_TRY_DIFFERENT;
 	@ObfuscatedName("pc.m")
 	public static JagString AUTO_MAINLOAD50 = JagString.wrap("Loading fonts )2 ");
 	@ObfuscatedName("pc.n")
@@ -419,7 +419,7 @@ public class Text {
 	@ObfuscatedName("pe.Ab")
 	public static JagString field2360 = AUTO_THOUSAND;
 	@ObfuscatedName("nd.Y")
-	public static JagString field2110 = AUTO_EMPTY;
+	public static JagString LOGIN25_C = AUTO_EMPTY;
 	@ObfuscatedName("aa.fe")
 	public static JagString field101 = JagString.wrap("green:");
 	@ObfuscatedName("aa.ud")
@@ -437,7 +437,7 @@ public class Text {
 	@ObfuscatedName("ca.d")
 	public static JagString LOGIN25_A = AUTO_LOGIN25_A;
 	@ObfuscatedName("nd.G")
-	public static JagString field2092 = AUTO_EMPTY;
+	public static JagString LOGIN22_C = AUTO_EMPTY;
 	@ObfuscatedName("tc.l")
 	public static JagString field2923 = JagString.wrap("Your friendlist is full)3 Max of 100 for free users)1 and 200 for members");
 	@ObfuscatedName("tc.t")
@@ -451,7 +451,7 @@ public class Text {
 	@ObfuscatedName("k.x")
 	public static JagString field1510 = field1511;
 	@ObfuscatedName("nd.I")
-	public static JagString field2094 = AUTO_EMPTY;
+	public static JagString LOGIN23_C = AUTO_EMPTY;
 	@ObfuscatedName("na.o")
 	public static JagString field1943 = JagString.wrap("Add ignore");
 	@ObfuscatedName("na.e")
@@ -569,7 +569,7 @@ public class Text {
 	@ObfuscatedName("ga.bb")
 	public static JagString LOGIN16_B = AUTO_LOGIN16_B;
 	@ObfuscatedName("nd.v")
-	public static JagString field2081 = AUTO_EMPTY;
+	public static JagString LOGIN20_C = AUTO_EMPTY;
 	@ObfuscatedName("ga.Z")
 	public static JagString field1041 = JagString.wrap("Report abuse");
 	@ObfuscatedName("ga.W")
@@ -589,7 +589,7 @@ public class Text {
 	@ObfuscatedName("h.Db")
 	public static JagString AUTO_PLEASE_WAIT_1_MIN = JagString.wrap("Please wait 1 minute and try again)3");
 	@ObfuscatedName("h.ec")
-	public static JagString field1120 = AUTO_PLEASE_WAIT_1_MIN;
+	public static JagString LOGIN23_B = AUTO_PLEASE_WAIT_1_MIN;
 	@ObfuscatedName("qd.sc")
 	public static JagString AUTO_MAINLOAD0 = JagString.wrap("Starting game engine)3)3)3");
 	@ObfuscatedName("qd.gc")
@@ -659,7 +659,7 @@ public class Text {
 	@ObfuscatedName("f.j")
 	public static JagString LOGIN26_B = AUTO_LOGIN26_B;
 	@ObfuscatedName("nd.b")
-	public static JagString field2061 = AUTO_EMPTY;
+	public static JagString LOGIN16_C = AUTO_EMPTY;
 	@ObfuscatedName("s.p")
 	public static JagString AUTO_LOGIN20_A = JagString.wrap("Invalid loginserver requested)3");
 	@ObfuscatedName("s.m")
@@ -677,7 +677,7 @@ public class Text {
 	@ObfuscatedName("oa.m")
 	public static JagString MAINLOAD70B = AUTO_MAINLOAD70B;
 	@ObfuscatedName("nd.O")
-	public static JagString field2100 = AUTO_EMPTY;
+	public static JagString LOGIN18_C = AUTO_EMPTY;
 	@ObfuscatedName("qb.h")
 	public static JagString AUTO_LOADING_TITLE = JagString.wrap("RuneScape is loading )2 please wait)3)3)3");
 	@ObfuscatedName("qb.a")
@@ -699,7 +699,7 @@ public class Text {
 	@ObfuscatedName("pc.e")
 	public static JagString CLOSE = AUTO_CLOSE;
 	@ObfuscatedName("h.Vb")
-	public static JagString field1111 = AUTO_PLEASE_WAIT_1_MIN;
+	public static JagString LOGIN14_B = AUTO_PLEASE_WAIT_1_MIN;
 	@ObfuscatedName("nd.S")
 	public static JagString field2104 = AUTO_EMPTY;
 	@ObfuscatedName("h.Tb")

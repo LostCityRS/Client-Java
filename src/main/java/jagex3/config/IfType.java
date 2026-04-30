@@ -54,7 +54,7 @@ public final class IfType extends Linkable2 {
 	public int graphic2 = -1;
 
 	@ObfuscatedName("qd.cd")
-	public int field2528 = 0;
+	public int modelSpin = 0;
 
 	@ObfuscatedName("qd.dd")
 	public boolean objReplace = false;
@@ -162,13 +162,13 @@ public final class IfType extends Linkable2 {
 	public JagString targetVerb = field3058;
 
 	@ObfuscatedName("qd.Mb")
-	public int field2460 = 0;
+	public int animFrame = 0;
 
 	@ObfuscatedName("qd.Zb")
 	public int marginY = 0;
 
 	@ObfuscatedName("qd.Sb")
-	public int field2466 = 0;
+	public int animCycle = 0;
 
 	@ObfuscatedName("qd.Lb")
 	public int modelAnim2 = -1;
