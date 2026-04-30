@@ -3895,7 +3895,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 185) {
-				// TUT_OPEN
+				// TUT_OPEN (unofficial name)
 				int var87 = in.g2s_alt2();
 				if (tutComId != var87) {
 					closeInterface(tutComId);
@@ -4034,7 +4034,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 88) {
-				// TUT_FLASH
+				// TUT_FLASH (unofficial name)
 				tutFlashIcon = in.g1_alt1();
 				if (activeIcon == tutFlashIcon) {
 					if (tutFlashIcon == 3) {
@@ -4667,6 +4667,7 @@ public final class Client extends GameShell {
 				mouseTracking.length = 0;
 			} else if (ClientMouseListener.mouseClickButton != 0 || mouseTracking.length >= 40) {
 				int var3 = 0;
+				// EVENT_MOUSE_MOVE
 				out.p1Enc(210);
 				out.p1(0);
 				int var4 = out.pos;
@@ -4746,6 +4747,7 @@ public final class Client extends GameShell {
 				var12 = 4095L;
 			}
 			int var17 = (int) var12;
+			// EVENT_MOUSE_CLICK
 			out.p1Enc(234);
 			int var18 = var15 * 765 + var14;
 			out.p4_alt1((var16 << 19) + ((var17 << 20) + var18));
@@ -4759,17 +4761,20 @@ public final class Client extends GameShell {
 		if (sendCamera && sendCameraDelay <= 0) {
 			sendCameraDelay = 20;
 			sendCamera = false;
+			// EVENT_CAMERA_POSITION
 			out.p1Enc(58);
 			out.p2(orbitCameraYaw);
 			out.p2(orbitCameraPitch);
 		}
 		if (focus && !focusIn) {
 			focusIn = true;
+			// EVENT_APPLET_FOCUS
 			out.p1Enc(160);
 			out.p1(1);
 		}
 		if (!focus && focusIn) {
 			focusIn = false;
+			// EVENT_APPLET_FOCUS
 			out.p1Enc(160);
 			out.p1(0);
 		}
@@ -4853,6 +4858,7 @@ public final class Client extends GameShell {
 						} else {
 							var19.swapSlots(hoveredSlot, objDragSlot);
 						}
+						// INV_BUTTOND
 						out.p1Enc(83);
 						out.p1_alt1(var20);
 						out.p2_alt2(objDragSlot);
@@ -4948,6 +4954,7 @@ public final class Client extends GameShell {
 		if (var29 > 4500 && var30 > 4500) {
 			logoutTimer = 250;
 			ClientMouseListener.setIdleTimer(4000);
+			// IDLE_TIMER
 			out.p1Enc(216);
 		}
 		macroMinimapCycle++;
@@ -5007,6 +5014,7 @@ public final class Client extends GameShell {
 			macroMinimapZoomModifier = -1;
 		}
 		if (noTimeoutTimer > 50) {
+			// NO_TIMEOUT
 			out.p1Enc(13);
 		}
 		try {
@@ -5189,6 +5197,7 @@ public final class Client extends GameShell {
 		locChangePostBuildCorrect();
 		LocType.mc1.clear();
 		if (frame != null) {
+			// WINDOW_STATUS
 			out.p1Enc(121);
 			out.p4(1057001181);
 		}
@@ -5212,6 +5221,7 @@ public final class Client extends GameShell {
 			setMainState(35);
 		}
 		ClientBuild.quit();
+		// MAP_BUILD_COMPLETE
 		out.p1Enc(178);
 		GameShell.doneslowupdate2();
 	}
@@ -6089,51 +6099,61 @@ public final class Client extends GameShell {
 	@ObfuscatedName("m.a(IIII)V")
 	public static void ifButtonX(int arg0, int arg1, int arg2) {
 		if (arg1 == 1) {
+			// IF_BUTTON1
 			out.p1Enc(111);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 2) {
+			// IF_BUTTON2
 			out.p1Enc(9);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 3) {
+			// IF_BUTTON3
 			out.p1Enc(193);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 4) {
+			// IF_BUTTON4
 			out.p1Enc(53);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 5) {
+			// IF_BUTTON5
 			out.p1Enc(94);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 6) {
+			// IF_BUTTON6
 			out.p1Enc(213);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 7) {
+			// IF_BUTTON7
 			out.p1Enc(46);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 8) {
+			// IF_BUTTON8
 			out.p1Enc(130);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 9) {
+			// IF_BUTTON9
 			out.p1Enc(157);
 			out.p4(arg2);
 			out.p2(arg0);
 		}
 		if (arg1 == 10) {
+			// IF_BUTTON10
 			out.p1Enc(84);
 			out.p4(arg2);
 			out.p2(arg0);
@@ -6313,14 +6333,17 @@ public final class Client extends GameShell {
 			int var32 = routeZ[var36];
 			int var33 = routeX[var36];
 			if (arg10 == 0) {
+				// MOVE_GAMECLICK
 				out.p1Enc(73);
 				out.p1(var31 + var31 + 3);
 			}
 			if (arg10 == 1) {
+				// MOVE_MINIMAPCLICK
 				out.p1Enc(236);
 				out.p1(var31 + var31 + 14 + 3);
 			}
 			if (arg10 == 2) {
+				// MOVE_OPCLICK
 				out.p1Enc(89);
 				out.p1(var31 + var31 + 3);
 			}
@@ -7060,6 +7083,7 @@ public final class Client extends GameShell {
 			idkDesign.idkChangeGender(true);
 		}
 		if (var1 == 326) {
+			// IDK_SAVEDESIGN
 			out.p1Enc(231);
 			idkDesign.idkSaveDesign(out);
 			return true;
@@ -7070,6 +7094,7 @@ public final class Client extends GameShell {
 		if (var1 >= 601 && var1 <= 613) {
 			closeModal();
 			if (reportAbuseInput.length() > 0) {
+				// REPORT_ABUSE
 				out.p1Enc(202);
 				out.p8(reportAbuseInput.toUserhash());
 				out.p1(var1 - 601);
@@ -7265,6 +7290,7 @@ public final class Client extends GameShell {
 			redrawChat = true;
 		}
 		if (var3 == 37) {
+			// OPHELDT
 			out.p1Enc(21);
 			out.p4_alt1(field2949);
 			out.p4_alt2(var2);
@@ -7290,6 +7316,7 @@ public final class Client extends GameShell {
 			crossY = ClientMouseListener.mouseClickY;
 			crossX = ClientMouseListener.mouseClickX;
 			crossMode = 2;
+			// OPOBJ2
 			out.p1Enc(190);
 			out.p2_alt3(var1 + mapBuildBaseX);
 			out.p2(var4);
@@ -7300,11 +7327,13 @@ public final class Client extends GameShell {
 			crossX = ClientMouseListener.mouseClickX;
 			crossMode = 2;
 			crossCycle = 0;
+			// OPLOCE
 			out.p1Enc(148);
 			out.p2_alt1(var4 >> 14 & 0x7FFF);
 		}
 		if (var3 == 27) {
 			interactWithLoc(var1, var4, var2);
+			// OPLOC4
 			out.p1Enc(229);
 			out.p2_alt1(mapBuildBaseX + var1);
 			out.p2_alt1(var4 >> 14 & 0x7FFF);
@@ -7318,6 +7347,7 @@ public final class Client extends GameShell {
 				crossCycle = 0;
 				crossMode = 2;
 				crossY = ClientMouseListener.mouseClickY;
+				// OPPLAYERT
 				out.p1Enc(221);
 				out.p4_alt3(field2949);
 				out.p2_alt1(var4);
@@ -7336,10 +7366,12 @@ public final class Client extends GameShell {
 						var12 = true;
 						tryMove(1, 0, localPlayer.routeX[0], var14.routeX[0], 0, false, 0, 1, localPlayer.routeZ[0], var14.routeZ[0], 2);
 						if (var3 == 26) {
+							// OPPLAYER4
 							out.p1Enc(96);
 							out.p2_alt2(playerIds[var13]);
 						}
 						if (var3 == 46) {
+							// OPPLAYER1
 							out.p1Enc(68);
 							out.p2_alt1(playerIds[var13]);
 						}
@@ -7352,6 +7384,7 @@ public final class Client extends GameShell {
 			}
 		}
 		if (var3 == 55) {
+			// INV_BUTTON3
 			out.p1Enc(26);
 			out.p2_alt2(var1);
 			out.p4_alt1(var2);
@@ -7368,6 +7401,7 @@ public final class Client extends GameShell {
 			}
 		}
 		if (var3 == 53) {
+			// INV_BUTTON1
 			out.p1Enc(38);
 			out.p2_alt2(var4);
 			out.p2_alt1(var1);
@@ -7384,6 +7418,7 @@ public final class Client extends GameShell {
 			}
 		}
 		if (var3 == 57) {
+			// IF_BUTTON
 			out.p1Enc(64);
 			out.p4(var2);
 			IfType var15 = IfType.get(var2);
@@ -7397,6 +7432,7 @@ public final class Client extends GameShell {
 			}
 		}
 		if (var3 == 52) {
+			// OPHELD1
 			out.p1Enc(240);
 			out.p2_alt3(var1);
 			out.p2_alt1(var4);
@@ -7420,6 +7456,7 @@ public final class Client extends GameShell {
 				crossMode = 2;
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
+				// OPPLAYER1
 				out.p1Enc(68);
 				out.p2_alt1(var4);
 			}
@@ -7432,6 +7469,7 @@ public final class Client extends GameShell {
 				crossMode = 2;
 				crossY = ClientMouseListener.mouseClickY;
 				crossX = ClientMouseListener.mouseClickX;
+				// OPPLAYER4
 				out.p1Enc(96);
 				out.p2_alt2(var4);
 			}
@@ -7448,6 +7486,7 @@ public final class Client extends GameShell {
 					var20 = var20.getMultiNpc();
 				}
 				if (var20 != null) {
+					// OPNPCE
 					out.p1Enc(247);
 					out.p2_alt3(var20.id);
 				}
@@ -7461,6 +7500,7 @@ public final class Client extends GameShell {
 				crossMode = 2;
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
+				// OPPLAYERU
 				out.p1Enc(110);
 				out.p2_alt3(var4);
 				out.p4_alt3(useSelectedComId);
@@ -7490,6 +7530,7 @@ public final class Client extends GameShell {
 			crossMode = 2;
 			crossY = ClientMouseListener.mouseClickY;
 			crossX = ClientMouseListener.mouseClickX;
+			// OPOBJU
 			out.p1Enc(168);
 			out.p2_alt1(var4);
 			out.p2_alt2(mapBuildBaseX + var1);
@@ -7497,6 +7538,7 @@ public final class Client extends GameShell {
 			out.p2(mapBuildBaseZ + var2);
 		}
 		if (var3 == 23) {
+			// IF_BUTTON
 			out.p1Enc(64);
 			out.p4(var2);
 			IfType var24 = IfType.get(var2);
@@ -7508,6 +7550,7 @@ public final class Client extends GameShell {
 			}
 		}
 		if (var3 == 48) {
+			// INV_BUTTON4
 			out.p1Enc(147);
 			out.p2_alt2(var4);
 			out.p2_alt1(var1);
@@ -7551,11 +7594,13 @@ public final class Client extends GameShell {
 			crossMode = 2;
 			crossY = ClientMouseListener.mouseClickY;
 			crossX = ClientMouseListener.mouseClickX;
+			// OPOBJE
 			out.p1Enc(151);
 			out.p2_alt3(var4);
 		}
 		if (var3 == 1002) {
 			interactWithLoc(var1, var4, var2);
+			// OPLOC5
 			out.p1Enc(62);
 			out.p2(var4 >> 14 & 0x7FFF);
 			out.p2_alt1(var2 + mapBuildBaseZ);
@@ -7569,6 +7614,7 @@ public final class Client extends GameShell {
 				crossX = ClientMouseListener.mouseClickX;
 				crossY = ClientMouseListener.mouseClickY;
 				crossMode = 2;
+				// OPNPC2
 				out.p1Enc(57);
 				out.p2(var4);
 			}
@@ -7581,6 +7627,7 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
 				crossMode = 2;
+				// OPNPCU
 				out.p1Enc(208);
 				out.p2_alt2(var4);
 				out.p2_alt2(objComId);
@@ -7590,12 +7637,14 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 29) {
 			interactWithLoc(var1, var4, var2);
+			// OPLOC2
 			out.p1Enc(164);
 			out.p2_alt3(mapBuildBaseX + var1);
 			out.p2_alt3(mapBuildBaseZ + var2);
 			out.p2_alt3(var4 >> 14 & 0x7FFF);
 		}
 		if (var3 == 5 && interactWithLoc(var1, var4, var2)) {
+			// OPLOCU
 			out.p1Enc(24);
 			out.p2_alt3(mapBuildBaseZ + var2);
 			out.p2_alt2(objComId);
@@ -7612,11 +7661,13 @@ public final class Client extends GameShell {
 				crossMode = 2;
 				crossX = ClientMouseListener.mouseClickX;
 				crossY = ClientMouseListener.mouseClickY;
+				// OPNPC4
 				out.p1Enc(0);
 				out.p2_alt2(var4);
 			}
 		}
 		if (var3 == 56) {
+			// OPHELDU
 			out.p1Enc(40);
 			out.p2_alt3(var4);
 			out.p2_alt3(var1);
@@ -7657,6 +7708,7 @@ public final class Client extends GameShell {
 				var36 = var36.subcomponents[var1];
 			}
 			if (var36 == null || var36.invcount < 100000) {
+				// OPOBJE
 				out.p1Enc(151);
 				out.p2_alt3(var4);
 			} else {
@@ -7670,11 +7722,13 @@ public final class Client extends GameShell {
 				var38 = clientButton(var37);
 			}
 			if (var38) {
+				// IF_BUTTON
 				out.p1Enc(64);
 				out.p4(var2);
 			}
 		}
 		if (var3 == 31) {
+			// OPHELD3
 			out.p1Enc(163);
 			out.p2_alt3(var1);
 			out.p2_alt3(var4);
@@ -7698,6 +7752,7 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
 				crossMode = 2;
+				// OPNPC1
 				out.p1Enc(63);
 				out.p2_alt3(var4);
 			}
@@ -7711,6 +7766,7 @@ public final class Client extends GameShell {
 			crossCycle = 0;
 			crossX = ClientMouseListener.mouseClickX;
 			crossY = ClientMouseListener.mouseClickY;
+			// OPOBJ1
 			out.p1Enc(244);
 			out.p2_alt1(var1 + mapBuildBaseX);
 			out.p2_alt2(mapBuildBaseZ + var2);
@@ -7725,6 +7781,7 @@ public final class Client extends GameShell {
 			crossX = ClientMouseListener.mouseClickX;
 			crossMode = 2;
 			crossY = ClientMouseListener.mouseClickY;
+			// OPOBJ3
 			out.p1Enc(85);
 			out.p2_alt2(mapBuildBaseZ + var2);
 			out.p2_alt2(var4);
@@ -7738,6 +7795,7 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
 				crossMode = 2;
+				// OPNPCT
 				out.p1Enc(253);
 				out.p2(var4);
 				out.p4_alt3(field2949);
@@ -7770,6 +7828,7 @@ public final class Client extends GameShell {
 				crossCycle = 0;
 				crossX = ClientMouseListener.mouseClickX;
 				crossY = ClientMouseListener.mouseClickY;
+				// OPPLAYER3
 				out.p1Enc(220);
 				out.p2(var4);
 			}
@@ -7784,6 +7843,7 @@ public final class Client extends GameShell {
 		if (var3 == 1006) {
 			IfType var50 = IfType.get(var2);
 			if (var50 == null || var50.linkObjNumber[var1] < 100000) {
+				// OPOBJE
 				out.p1Enc(151);
 				out.p2_alt3(var4);
 			} else {
@@ -7802,6 +7862,7 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 17) {
 			interactWithLoc(var1, var4, var2);
+			// OPLOC3
 			out.p1Enc(183);
 			out.p2_alt2(var2 + mapBuildBaseZ);
 			out.p2(var4 >> 14 & 0x7FFF);
@@ -7816,6 +7877,7 @@ public final class Client extends GameShell {
 			redrawChat = true;
 		}
 		if (var3 == 32 && interactWithLoc(var1, var4, var2)) {
+			// OPLOCT
 			out.p1Enc(225);
 			out.p2(var4 >> 14 & 0x7FFF);
 			out.p2_alt3(var2 + mapBuildBaseZ);
@@ -7823,6 +7885,7 @@ public final class Client extends GameShell {
 			out.p2_alt1(mapBuildBaseX + var1);
 		}
 		if (var3 == 25) {
+			// INV_BUTTON2
 			out.p1Enc(228);
 			out.p2_alt1(var4);
 			out.p4_alt1(var2);
@@ -7839,6 +7902,7 @@ public final class Client extends GameShell {
 			selectedItem = var1;
 		}
 		if (var3 == 11) {
+			// OPHELD5
 			out.p1Enc(29);
 			out.p4_alt3(var2);
 			out.p2_alt2(var1);
@@ -7862,6 +7926,7 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				crossX = ClientMouseListener.mouseClickX;
 				crossCycle = 0;
+				// OPPLAYER5
 				out.p1Enc(187);
 				out.p2_alt3(var4);
 			}
@@ -7891,6 +7956,7 @@ public final class Client extends GameShell {
 			crossCycle = 0;
 			crossMode = 2;
 			crossY = ClientMouseListener.mouseClickY;
+			// OPOBJ4
 			out.p1Enc(65);
 			out.p2_alt2(var4);
 			out.p2_alt2(var2 + mapBuildBaseZ);
@@ -7904,6 +7970,7 @@ public final class Client extends GameShell {
 			resumePauseComId = var2;
 		}
 		if (var3 == 43) {
+			// OPHELD4
 			out.p1Enc(98);
 			out.p2(var1);
 			out.p4_alt3(var2);
@@ -7928,6 +7995,7 @@ public final class Client extends GameShell {
 			crossMode = 2;
 			crossCycle = 0;
 			crossX = ClientMouseListener.mouseClickX;
+			// OPOBJ5
 			out.p1Enc(27);
 			out.p2(mapBuildBaseX + var1);
 			out.p2_alt2(var4);
@@ -7941,11 +8009,13 @@ public final class Client extends GameShell {
 				crossX = ClientMouseListener.mouseClickX;
 				crossMode = 2;
 				crossY = ClientMouseListener.mouseClickY;
+				// OPPLAYER2
 				out.p1Enc(211);
 				out.p2_alt1(var4);
 			}
 		}
 		if (var3 == 24) {
+			// INV_BUTTON5
 			out.p1Enc(124);
 			out.p2(var1);
 			out.p4_alt1(var2);
@@ -7963,6 +8033,7 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 16) {
 			interactWithLoc(var1, var4, var2);
+			// OPLOC1
 			out.p1Enc(30);
 			out.p2_alt2(var4 >> 14 & 0x7FFF);
 			out.p2_alt2(mapBuildBaseZ + var2);
@@ -7976,6 +8047,7 @@ public final class Client extends GameShell {
 				crossX = ClientMouseListener.mouseClickX;
 				crossY = ClientMouseListener.mouseClickY;
 				crossCycle = 0;
+				// OPNPC5
 				out.p1Enc(153);
 				out.p2_alt1(var4);
 			}
@@ -7989,6 +8061,7 @@ public final class Client extends GameShell {
 			crossY = ClientMouseListener.mouseClickY;
 			crossCycle = 0;
 			crossMode = 2;
+			// OPOBJU
 			out.p1Enc(172);
 			out.p2_alt2(mapBuildBaseX + var1);
 			out.p2(objSelectedSlot);
@@ -7998,6 +8071,7 @@ public final class Client extends GameShell {
 			out.p2_alt1(objComId);
 		}
 		if (var3 == 6) {
+			// OPHELD2
 			out.p1Enc(102);
 			out.p4_alt1(var2);
 			out.p2_alt3(var1);
@@ -8021,6 +8095,7 @@ public final class Client extends GameShell {
 				crossX = ClientMouseListener.mouseClickX;
 				crossCycle = 0;
 				crossY = ClientMouseListener.mouseClickY;
+				// OPNPC3
 				out.p1Enc(116);
 				out.p2_alt1(var4);
 			}
@@ -8206,6 +8281,7 @@ public final class Client extends GameShell {
 		if (redrawIcons) {
 			if (tutFlashIcon != -1 && activeIcon == tutFlashIcon) {
 				tutFlashIcon = -1;
+				// TUT_CLICKSIDE (unofficial name)
 				out.p1Enc(44);
 				out.p1(activeIcon);
 			}
@@ -9437,6 +9513,7 @@ public final class Client extends GameShell {
 			redrawChatMode = true;
 			chatPublicMode = (chatPublicMode + 1) % 4;
 			redrawChat = true;
+			// SET_CHATFILTERSETTINGS
 			out.p1Enc(32);
 			out.p1(chatPublicMode);
 			out.p1(chatPrivateMode);
@@ -9446,6 +9523,7 @@ public final class Client extends GameShell {
 			redrawChat = true;
 			chatPrivateMode = (chatPrivateMode + 1) % 3;
 			redrawChatMode = true;
+			// SET_CHATFILTERSETTINGS
 			out.p1Enc(32);
 			out.p1(chatPublicMode);
 			out.p1(chatPrivateMode);
@@ -9455,6 +9533,7 @@ public final class Client extends GameShell {
 			chatTradeMode = (chatTradeMode + 1) % 3;
 			redrawChatMode = true;
 			redrawChat = true;
+			// SET_CHATFILTERSETTINGS
 			out.p1Enc(32);
 			out.p1(chatPublicMode);
 			out.p1(chatPrivateMode);
@@ -9546,6 +9625,7 @@ public final class Client extends GameShell {
 						delFriend(var11);
 					}
 					if (socialInputType == 3 && socialInput.length() > 0) {
+						// MESSAGE_PRIVATE
 						out.p1Enc(207);
 						out.p1(0);
 						int var13 = out.pos;
@@ -9555,6 +9635,7 @@ public final class Client extends GameShell {
 						if (chatPrivateMode == 2) {
 							chatPrivateMode = 1;
 							redrawChatMode = true;
+							// SET_CHATFILTERSETTINGS
 							out.p1Enc(32);
 							out.p1(chatPublicMode);
 							out.p1(chatPrivateMode);
@@ -9585,6 +9666,7 @@ public final class Client extends GameShell {
 						if (dialogInput.method33()) {
 							var0 = dialogInput.method3();
 						}
+						// RESUME_P_COUNTDIALOG
 						out.p1Enc(238);
 						out.p4(var0);
 					}
@@ -9602,6 +9684,7 @@ public final class Client extends GameShell {
 				}
 				if (ClientKeyboardListener.code == 84) {
 					if (dialogInput.length() > 0) {
+						// RESUME_P_NAMEDIALOG
 						out.p1Enc(86);
 						out.p8(dialogInput.toUserhash());
 					}
@@ -9654,6 +9737,7 @@ public final class Client extends GameShell {
 						}
 					}
 					if (chatInput.startsWith(AUTO_CHEATPREFIX)) {
+						// CLIENT_CHEAT
 						out.p1Enc(248);
 						out.p1(chatInput.length() - 1);
 						out.pjstr(chatInput.substring(2));
@@ -9715,6 +9799,7 @@ public final class Client extends GameShell {
 							var4 = 5;
 							chatInput = chatInput.substring(Text.field2707.length());
 						}
+						// MESSAGE_PUBLIC
 						out.p1Enc(75);
 						out.p1(0);
 						int var8 = out.pos;
@@ -9725,6 +9810,7 @@ public final class Client extends GameShell {
 						if (chatPublicMode == 2) {
 							redrawChatMode = true;
 							chatPublicMode = 3;
+							// SET_CHATFILTERSETTINGS
 							out.p1Enc(32);
 							out.p1(chatPublicMode);
 							out.p1(chatPrivateMode);
@@ -10068,6 +10154,7 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("fe.a(III)V")
 	public static void resumePauseButton(int arg0, int arg1) {
+		// RESUME_PAUSEBUTTON
 		out.p1Enc(132);
 		out.p4_alt2(arg1);
 		out.p2_alt1(arg0);
@@ -10191,6 +10278,7 @@ public final class Client extends GameShell {
 		if (networkError || stream == null) {
 			return;
 		}
+		// NO_TIMEOUT
 		out.p1Enc(13);
 		try {
 			stream.write(out.pos, out.data);
@@ -10606,6 +10694,7 @@ public final class Client extends GameShell {
 					friendWorld[var3] = friendWorld[var3 + 1];
 					friendUserhash[var3] = friendUserhash[var3 + 1];
 				}
+				// FRIENDLIST_DEL
 				out.p1Enc(255);
 				out.p8(arg0);
 				return;
@@ -10657,6 +10746,7 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("fe.o(I)V")
 	public static void closeModal() {
+		// CLOSE_MODAL
 		out.p1Enc(176);
 		if (sideModalId != -1) {
 			closeInterface(sideModalId);
@@ -10816,6 +10906,7 @@ public final class Client extends GameShell {
 		if (!var2.strEquals(localPlayer.name)) {
 			ignoreUserhash[ignoreCount++] = arg0;
 			redrawSide = true;
+			// IGNORELIST_ADD
 			out.p1Enc(251);
 			out.p8(arg0);
 		}
@@ -11171,6 +11262,7 @@ public final class Client extends GameShell {
 				for (int var3 = var2; var3 < ignoreCount; var3++) {
 					ignoreUserhash[var3] = ignoreUserhash[var3 + 1];
 				}
+				// IGNORELIST_DEL
 				out.p1Enc(28);
 				out.p8(arg0);
 				return;
@@ -11386,6 +11478,7 @@ public final class Client extends GameShell {
 		friendWorld[friendCount] = 0;
 		friendCount++;
 		redrawSide = true;
+		// FRIENDLIST_ADD
 		out.p1Enc(114);
 		out.p8(arg0);
 	}
