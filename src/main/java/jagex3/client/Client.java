@@ -3432,7 +3432,7 @@ public final class Client extends GameShell {
 			ptype1 = ptype0;
 			ptype0 = ptype;
 			if (ptype == 71) {
-				// todo
+				// MESSAGE_PRIVATE_ECHO
 				long var1 = in.g8();
 				JagString var3 = WordPack.method893(in).forceCapitalisationOfWords();
 				addChat(6, var3, JString.toScreenName(var1).toRawUsername());
@@ -3490,7 +3490,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 233) {
-				// UNSET_MAP_FLAG
+				// UNSET_MAP_FLAG (unofficial name)
 				ptype = -1;
 				minimapFlagX = 0;
 				return true;
@@ -3514,7 +3514,7 @@ public final class Client extends GameShell {
 				// VARP_SMALL
 				byte var16 = in.g1b_alt3();
 				int var17 = in.g2_alt2();
-				VarCache.field304[var17] = var16;
+				VarCache.varServ[var17] = var16;
 				if (VarCache.var[var17] != var16) {
 					VarCache.var[var17] = var16;
 					clientVar(var17);
@@ -3704,13 +3704,13 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 130) {
-				// todo
-				IfType.field1844 = in.g2_alt1();
+				// todo (weird, this was done client-side by reading clientCode in 377)
+				IfType.reportAbuseComId = in.g2_alt1();
 				ptype = -1;
 				return true;
 			}
 			if (ptype == 129) {
-				// todo
+				// TELEPORT (unofficial name)
 				int var67 = in.g1_alt2();
 				int var68 = in.g1_alt1();
 				int var69 = in.g1_alt2();
@@ -3739,7 +3739,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 56) {
-				// IF_OPENOVERLAY
+				// IF_OPENOVERLAY (unofficial name)
 				int var73 = in.g2s_alt2();
 				if (var73 >= 0) {
 					ifAnimReset(var73);
@@ -3762,7 +3762,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 84) {
-				// todo
+				// IF_OPENMAIN_SIDE (unofficial name)
 				int var78 = in.g2();
 				int var79 = in.g2_alt3();
 				if (chatModalId != -1) {
@@ -3833,7 +3833,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 118) {
-				// todo
+				// IF_OPENMAIN (unofficial name)
 				int var86 = in.g2();
 				ifAnimReset(var86);
 				if (sideModalId != -1) {
@@ -3906,7 +3906,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 195) {
-				// IF_OPENFULL
+				// IF_OPENFULL (unofficial name)
 				int var88 = in.g2_alt2();
 				int var89 = in.g2();
 				ifAnimReset(var89);
@@ -3940,7 +3940,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 180) {
-				// todo
+				// IF_CLOSE
 				if (sideModalId != -1) {
 					closeInterface(sideModalId);
 					redrawSide = true;
@@ -3974,7 +3974,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 208) {
-				// todo
+				// IF_OPENCHAT (unofficial name)
 				int var90 = in.g2_alt2();
 				ifAnimReset(var90);
 				if (sideModalId != -1) {
@@ -4084,7 +4084,7 @@ public final class Client extends GameShell {
 				// VARP_LARGE
 				int var94 = in.g4_alt3();
 				int var95 = in.g2();
-				VarCache.field304[var95] = var94;
+				VarCache.varServ[var95] = var94;
 				if (VarCache.var[var95] != var94) {
 					VarCache.var[var95] = var94;
 					clientVar(var95);
@@ -4112,7 +4112,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 237) {
-				// todo
+				// IF_OPENSIDE (unofficial name)
 				int var99 = in.g2();
 				ifAnimReset(var99);
 				if (chatModalId != -1) {
@@ -4176,7 +4176,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 142) {
-				// todo
+				// IF_SETANGLE
 				int var107 = in.g2();
 				int var108 = in.g2_alt1();
 				int var109 = in.g2();
@@ -4189,7 +4189,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 6) {
-				// IF_SHOWICON
+				// IF_SHOWICON (unofficial name)
 				activeIcon = in.g1();
 				redrawIcons = true;
 				redrawSide = true;
@@ -4211,11 +4211,11 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 14) {
-				// todo
+				// VARP_RESET (unofficial name)
 				for (int var112 = 0; var112 < VarpType.numDefinitions; var112++) {
 					VarpType var113 = VarpType.list(var112);
 					if (var113 != null && var113.clientcode == 0) {
-						VarCache.field304[var112] = 0;
+						VarCache.varServ[var112] = 0;
 						VarCache.var[var112] = 0;
 					}
 				}
@@ -4237,7 +4237,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 132) {
-				// todo
+				// P_COUNTDIALOG
 				if (chatModalId != -1) {
 					closeInterface(chatModalId);
 					chatModalId = -1;
@@ -4343,7 +4343,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 51) {
-				// todo
+				// MESSAGE_PRIVATE
 				long var127 = in.g8();
 				long var129 = (long) in.g2();
 				long var131 = (long) in.g3();
@@ -4395,7 +4395,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 140) {
-				// todo
+				// IF_SETICON (unofficial name)
 				int var142 = in.g2();
 				int var143 = in.g1();
 				if (var142 == 65535) {
@@ -4439,10 +4439,10 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 72) {
-				// VARP_SYNC
+				// VARP_SYNC (unofficial name)
 				for (int var152 = 0; var152 < VarCache.var.length; var152++) {
-					if (VarCache.field304[var152] != VarCache.var[var152]) {
-						VarCache.var[var152] = VarCache.field304[var152];
+					if (VarCache.varServ[var152] != VarCache.var[var152]) {
+						VarCache.var[var152] = VarCache.varServ[var152];
 						clientVar(var152);
 						redrawSide = true;
 					}
@@ -4451,13 +4451,13 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 240) {
-				// todo
+				// REFLECTION_CHECKER
 				ReflectionChecker.addCheck(signlink, in, psize);
 				ptype = -1;
 				return true;
 			}
 			if (ptype == 58) {
-				// todo (LAST_LOGIN_INFO?)
+				// LAST_LOGIN_INFO
 				int var153 = in.g4_alt2();
 				lastAddress = signlink.dnsreq(var153);
 				ptype = -1;
@@ -4525,7 +4525,7 @@ public final class Client extends GameShell {
 				return true;
 			}
 			if (ptype == 124) {
-				// todo
+				// P_NAMEDIALOG
 				if (chatModalId != -1) {
 					closeInterface(chatModalId);
 					chatModalId = -1;
@@ -7872,9 +7872,9 @@ public final class Client extends GameShell {
 			if (var53 != -1) {
 				if (mainModalId == -1) {
 					closeModal();
-					if (IfType.field1844 != -1) {
+					if (IfType.reportAbuseComId != -1) {
 						reportAbuseInput = var52.substring(var53 + 5).trim();
-						reportAbuseComId = mainModalId = IfType.field1844;
+						reportAbuseComId = mainModalId = IfType.reportAbuseComId;
 						reportAbuseMuteOption = false;
 					}
 				} else {
@@ -9463,9 +9463,9 @@ public final class Client extends GameShell {
 		if (ClientMouseListener.mouseClickX >= 412 && ClientMouseListener.mouseClickX <= 512 && ClientMouseListener.mouseClickY >= 467 && ClientMouseListener.mouseClickY <= 499) {
 			if (mainModalId == -1) {
 				closeModal();
-				if (IfType.field1844 != -1) {
+				if (IfType.reportAbuseComId != -1) {
 					reportAbuseMuteOption = false;
-					reportAbuseComId = mainModalId = IfType.field1844;
+					reportAbuseComId = mainModalId = IfType.reportAbuseComId;
 					reportAbuseInput = EMPTY;
 				}
 			} else {

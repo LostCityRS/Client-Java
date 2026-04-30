@@ -37,7 +37,7 @@ public final class IfType extends Linkable2 {
     @ObfuscatedName("uc.v")
     public static JagString field3058 = JagString.wrap("");
 	@ObfuscatedName("mb.cb")
-	public static int field1844 = -1;
+	public static int reportAbuseComId = -1;
 	@ObfuscatedName("qd.ac")
 	public JagString text = field3058;
 

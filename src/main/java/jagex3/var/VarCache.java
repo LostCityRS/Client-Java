@@ -11,7 +11,7 @@ public class VarCache {
 	@ObfuscatedName("ga.E")
 	public static int[] varcInt = new int[2000];
     @ObfuscatedName("ba.ic")
-    public static int[] field304 = new int[2000];
+    public static int[] varServ = new int[2000];
 
     static {
 		int var0 = 2;
