@@ -40,9 +40,9 @@ public class ClientBuild {
 	@ObfuscatedName("oa.f")
 	public static byte[][][] floort1;
 	@ObfuscatedName("t.Kb")
-	public static int ligOff = (int) (Math.random() * 17.0D) - 8;
+	public static int hueOff = (int) (Math.random() * 17.0D) - 8;
 	@ObfuscatedName("nb.kd")
-	public static int hueOff = (int) (Math.random() * 33.0D) - 16;
+	public static int ligOff = (int) (Math.random() * 33.0D) - 16;
 	@ObfuscatedName("jc.zb")
 	public static int lastBuiltLevel = 0;
 	@ObfuscatedName("ld.t")
@@ -322,19 +322,19 @@ public class ClientBuild {
 				}
 			}
 		}
-		ligOff += (int) (Math.random() * 5.0D) - 2;
 		hueOff += (int) (Math.random() * 5.0D) - 2;
-		if (ligOff < -8) {
-			ligOff = -8;
+		ligOff += (int) (Math.random() * 5.0D) - 2;
+		if (hueOff < -8) {
+			hueOff = -8;
 		}
-		if (ligOff > 8) {
-			ligOff = 8;
+		if (hueOff > 8) {
+			hueOff = 8;
 		}
-		if (hueOff < -16) {
-			hueOff = -16;
+		if (ligOff < -16) {
+			ligOff = -16;
 		}
-		if (hueOff > 16) {
-			hueOff = 16;
+		if (ligOff > 16) {
+			ligOff = 16;
 		}
 		for (int var6 = 0; var6 < 4; var6++) {
 			byte[][] var7 = shadow[var6];
@@ -433,8 +433,8 @@ public class ClientBuild {
 									int var50 = var30 / var32;
 									int var51 = var31 / var32;
 									var46 = getTable(var50, var51, var49);
-									int var52 = hueOff + var51;
-									int var53 = var49 + ligOff & 0xFF;
+									int var52 = ligOff + var51;
+									int var53 = var49 + hueOff & 0xFF;
 									if (var52 < 0) {
 										var52 = 0;
 									} else if (var52 > 255) {
@@ -475,9 +475,9 @@ public class ClientBuild {
 										var59 = -1;
 										var61 = -2;
 									} else {
-										var60 = getTable(var58.saturation, var58.hue, var58.lightness);
-										int var62 = ligOff + var58.lightness & 0xFF;
-										int var63 = hueOff + var58.hue;
+										var60 = getTable(var58.saturation, var58.lightness, var58.hue);
+										int var62 = hueOff + var58.hue & 0xFF;
+										int var63 = ligOff + var58.lightness;
 										if (var63 < 0) {
 											var63 = 0;
 										} else if (var63 > 255) {
@@ -490,8 +490,8 @@ public class ClientBuild {
 										var64 = Pix3D.colourTable[getOCol(var61, 96)];
 									}
 									if (var58.mapcolour != -1) {
-										int var65 = ligOff + var58.mapLightness & 0xFF;
-										int var66 = hueOff + var58.mapHue;
+										int var65 = hueOff + var58.mapHue & 0xFF;
+										int var66 = ligOff + var58.mapLightness;
 										if (var66 < 0) {
 											var66 = 0;
 										} else if (var66 > 255) {

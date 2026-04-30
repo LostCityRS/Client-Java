@@ -26,16 +26,16 @@ public final class FloType extends Linkable2 {
 	public int colour = 0;
 
 	@ObfuscatedName("fc.yb")
-	public int hue;
-
-	@ObfuscatedName("fc.Ib")
-	public int mapHue;
-
-	@ObfuscatedName("fc.Kb")
 	public int lightness;
 
-	@ObfuscatedName("fc.Mb")
+	@ObfuscatedName("fc.Ib")
 	public int mapLightness;
+
+	@ObfuscatedName("fc.Kb")
+	public int hue;
+
+	@ObfuscatedName("fc.Mb")
+	public int mapHue;
 
 	@ObfuscatedName("fc.Pb")
 	public int saturation;
@@ -84,9 +84,9 @@ public final class FloType extends Linkable2 {
 	public void postDecode() {
 		if (this.mapcolour != -1) {
 			this.getHsl(this.mapcolour);
-			this.mapHue = this.hue;
-			this.mapSaturation = this.saturation;
 			this.mapLightness = this.lightness;
+			this.mapSaturation = this.saturation;
+			this.mapHue = this.hue;
 		}
 		this.getHsl(this.colour);
 	}
@@ -142,18 +142,18 @@ public final class FloType extends Linkable2 {
 			}
 		}
 		double var18 = var12 / 6.0D;
-		this.lightness = (int) (var18 * 256.0D);
-		this.hue = (int) (var16 * 256.0D);
+		this.hue = (int) (var18 * 256.0D);
+		this.lightness = (int) (var16 * 256.0D);
 		this.saturation = (int) (var14 * 256.0D);
 		if (this.saturation < 0) {
 			this.saturation = 0;
 		} else if (this.saturation > 255) {
 			this.saturation = 255;
 		}
-		if (this.hue < 0) {
-			this.hue = 0;
-		} else if (this.hue > 255) {
-			this.hue = 255;
+		if (this.lightness < 0) {
+			this.lightness = 0;
+		} else if (this.lightness > 255) {
+			this.lightness = 255;
 		}
 	}
 }
