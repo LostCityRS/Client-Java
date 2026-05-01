@@ -47,7 +47,7 @@ public final class SignLink implements Runnable {
 	public FileOnDisk field1707 = null;
 
 	@ObfuscatedName("lc.k")
-	public final InetAddress field1709;
+	public final InetAddress host;
 
 	@ObfuscatedName("lc.l")
 	public PrivilegedRequest task = null;
@@ -149,7 +149,7 @@ public final class SignLink implements Runnable {
 
 	public SignLink(boolean arg0, Applet arg1, InetAddress arg2, int arg3, String arg4, int arg5) throws IOException {
 		this.applet = arg1;
-		this.field1709 = arg2;
+		this.host = arg2;
 		javaVersion = "1.1";
 		javaVendor = "Unknown";
 		try {
@@ -234,7 +234,7 @@ public final class SignLink implements Runnable {
 			try {
 				int var3 = var2.type;
 				if (var3 == 1) {
-					var2.result = new Socket(this.field1709, var2.intArg);
+					var2.result = new Socket(this.host, var2.intArg);
 				} else if (var3 == 2) {
 					Thread var6 = new Thread((Runnable) var2.objArg);
 					var6.setDaemon(true);

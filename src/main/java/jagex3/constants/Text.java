@@ -393,7 +393,7 @@ public class Text {
 	@ObfuscatedName("ra.v")
 	public static JagString field2610 = field2609;
 	@ObfuscatedName("nd.C")
-	public static JagString field2088 = AUTO_EMPTY;
+	public static JagString PLEASELOGIN3 = AUTO_EMPTY;
 	@ObfuscatedName("client.hb")
 	public static JagString AUTO_USE = JagString.wrap("Use");
 	@ObfuscatedName("client.db")
@@ -459,7 +459,7 @@ public class Text {
 	@ObfuscatedName("ga.C")
 	public static JagString AUTO_PLEASELOGIN2 = JagString.wrap("Enter your username (V password)3");
 	@ObfuscatedName("ga.O")
-	public static JagString PLEASELOGIN1 = AUTO_PLEASELOGIN2;
+	public static JagString PLEASELOGIN2 = AUTO_PLEASELOGIN2;
 	@ObfuscatedName("kb.w")
 	public static JagString AUTO_LOGINHOP_B = JagString.wrap("Your profile will be transferred in:");
 	@ObfuscatedName("kb.u")
@@ -701,7 +701,7 @@ public class Text {
 	@ObfuscatedName("h.Vb")
 	public static JagString LOGIN14_B = AUTO_PLEASE_WAIT_1_MIN;
 	@ObfuscatedName("nd.S")
-	public static JagString field2104 = AUTO_EMPTY;
+	public static JagString PLEASELOGIN1 = AUTO_EMPTY;
 	@ObfuscatedName("h.Tb")
 	public static JagString AUTO_MAINLOAD50B = JagString.wrap("Loaded fonts");
 	@ObfuscatedName("h.Mb")

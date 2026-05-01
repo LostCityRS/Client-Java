@@ -453,7 +453,7 @@ public class TextGerman {
 		Text.field3239 = field1944;
 		Text.field507 = field712;
 		Text.field2610 = field3151;
-		Text.field2088 = AUTO_EMPTY;
+		Text.PLEASELOGIN3 = AUTO_EMPTY;
 		Text.LOGIN12_C = AUTO_LOGIN12_C;
 		Text.USE = AUTO_USE;
 		Text.LOGIN16_A = AUTO_LOGIN16_A;
@@ -483,7 +483,7 @@ public class TextGerman {
 		Text.field1510 = field2662;
 		Text.LOGIN23_C = AUTO_LOGIN14_C;
 		Text.field1933 = field1745;
-		Text.PLEASELOGIN1 = AUTO_PLEASELOGIN2;
+		Text.PLEASELOGIN2 = AUTO_PLEASELOGIN2;
 		Text.LOGINHOP_B = AUTO_LOGINHOP_B;
 		Text.LOGIN13_C = AUTO_PLEASE_TRY_DIFFERENT;
 		Text.SKILL = AUTO_SKILL;
@@ -538,7 +538,7 @@ public class TextGerman {
 		Text.LOGIN8_C = AUTO_EMPTY;
 		Text.CLOSE = AUTO_CLOSE;
 		Text.LOGIN14_B = AUTO_LOGIN23_B;
-		Text.field2104 = field538;
+		Text.PLEASELOGIN1 = field538;
 		Text.LOGIN6_B = AUTO_LOGIN6_B;
 		Text.MAINLOAD50B = AUTO_MAINLOAD50B;
 		Text.field2317 = field1022;

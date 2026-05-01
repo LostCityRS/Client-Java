@@ -12,13 +12,13 @@ import java.awt.*;
 
 public class TitleScreen {
 	@ObfuscatedName("uc.E")
-	public static JagString field3067 = JagString.wrap("");
+	public static JagString AUTO_EMPTY = JagString.wrap("");
 	@ObfuscatedName("uc.z")
-	public static JagString loginMes3 = field3067;
+	public static JagString loginMes3 = AUTO_EMPTY;
 	@ObfuscatedName("uc.x")
-	public static JagString loginMes1 = field3067;
+	public static JagString loginMes1 = AUTO_EMPTY;
 	@ObfuscatedName("uc.I")
-	public static JagString loginUser = field3067;
+	public static JagString loginUser = AUTO_EMPTY;
 	@ObfuscatedName("ie.g")
 	public static int loginscreen = 0;
 	@ObfuscatedName("f.u")
@@ -26,11 +26,11 @@ public class TitleScreen {
 	@ObfuscatedName("hd.Kb")
 	public static int flameGradientCycle0 = 0;
 	@ObfuscatedName("uc.s")
-	public static JagString loginPass = field3067;
+	public static JagString loginPass = AUTO_EMPTY;
     @ObfuscatedName("wb.H")
     public static int loadPos = 10;
 	@ObfuscatedName("uc.Q")
-	public static JagString loadString = field3067;
+	public static JagString loadString = AUTO_EMPTY;
 	@ObfuscatedName("nd.y")
 	public static int loginSelect = 0;
 	@ObfuscatedName("pe.Ub")
@@ -38,45 +38,45 @@ public class TitleScreen {
 	@ObfuscatedName("ha.a")
 	public static int flameCycle0 = 0;
 	@ObfuscatedName("fa.fb")
-	public static Pix32 field851;
+	public static Pix32 imageFlamesRight;
 	@ObfuscatedName("f.r")
-	public static PixMap field844;
+	public static PixMap imageTitle5;
 	@ObfuscatedName("ca.x")
-	public static PixMap field472;
+	public static PixMap imageTitle0;
 	@ObfuscatedName("wc.q")
-	public static PixMap field3298;
+	public static PixMap imageTitle8;
 	@ObfuscatedName("gb.p")
 	public static boolean open;
 	@ObfuscatedName("hc.e")
-	public static Pix8[] field1177;
+	public static Pix8[] runes;
 	@ObfuscatedName("ia.Sb")
-	public static PixMap field1307;
+	public static PixMap imageTitle7;
 	@ObfuscatedName("j.jc")
-	public static PixMap field1435;
+	public static PixMap imageTitle1;
 	@ObfuscatedName("na.g")
-	public static PixMap field1935;
+	public static PixMap imageTitle4;
 	@ObfuscatedName("nc.j")
-	public static PixMap field2044;
+	public static PixMap imageTitle2;
 	@ObfuscatedName("nc.u")
-	public static Pix32 slBack;
+	public static Pix32 imageFlamesLeft;
 	@ObfuscatedName("oa.z")
 	public static int[] flameGradient;
 	@ObfuscatedName("ae.f")
-	public static int[] field229;
+	public static int[] flameBuffer3;
 	@ObfuscatedName("r.l")
 	public static int[] flameBuffer0;
 	@ObfuscatedName("ra.l")
 	public static int[] flameGradient0;
 	@ObfuscatedName("ra.t")
-	public static PixMap field2608;
+	public static PixMap imageTitle3;
 	@ObfuscatedName("re.o")
-	public static PixMap field2701;
+	public static PixMap imageTitle6;
 	@ObfuscatedName("t.ub")
-	public static Pix8 slButton;
+	public static Pix8 titleBox;
 	@ObfuscatedName("tb.bc")
 	public static int[] flameGradient2;
 	@ObfuscatedName("tb.ic")
-	public static int[] field2911;
+	public static int[] flameBuffer2;
 	@ObfuscatedName("tc.h")
 	public static Pix8 titleBut;
 	@ObfuscatedName("ua.A")
@@ -94,17 +94,19 @@ public class TitleScreen {
 	@ObfuscatedName("la.K")
 	public static JagString AUTO_SCAPE_MAIN = JagString.wrap("scape main");
 	@ObfuscatedName("uc.O")
-	public static JagString loginMes2 = field3067;
+	public static JagString loginMes2 = AUTO_EMPTY;
 	@ObfuscatedName("gb.j")
 	public static JagString AUTO_TITLEBUTTON = JagString.wrap("titlebutton");
 	@ObfuscatedName("ca.y")
 	public static JagString AUTO_RUNES = JagString.wrap("runes");
 	@ObfuscatedName("ld.E")
 	public static JagString AUTO_TITLEJPG = JagString.wrap("title)3jpg");
+	@ObfuscatedName("client.cb")
+	public static JagString AUTO_LOGO = JagString.wrap("logo");
 
 	@ObfuscatedName("td.d(I)V")
 	public static void loop() {
-		method542();
+		updateFlames();
 		if (Client.state != 10) {
 			return;
 		}
@@ -119,9 +121,9 @@ public class TitleScreen {
 			if (var1 == 1 && var0 >= 185 && var0 <= 335 && var2 >= 100 && var2 <= 140) {
 				loginscreen = 2;
 				loginSelect = 0;
-				loginMes1 = Text.field2104;
-				loginMes2 = Text.PLEASELOGIN1;
-				loginMes3 = Text.field2088;
+				loginMes1 = Text.PLEASELOGIN1;
+				loginMes2 = Text.PLEASELOGIN2;
+				loginMes3 = Text.PLEASELOGIN3;
 				return;
 			}
 			return;
@@ -144,8 +146,8 @@ public class TitleScreen {
 				return;
 			}
 			if (var1 == 1 && var0 >= 185 && var0 <= 335 && var2 >= 130 && var2 <= 170) {
-				loginUser = field3067;
-				loginPass = field3067;
+				loginUser = AUTO_EMPTY;
+				loginPass = AUTO_EMPTY;
 				loginscreen = 0;
 			}
 			while (true) {
@@ -193,7 +195,7 @@ public class TitleScreen {
 
 	@ObfuscatedName("rd.a(ILbc;Lbc;)V")
 	public static void draw(PixFont arg0, PixFont arg1) {
-		field1935.bind();
+		imageTitle4.bind();
 		if (Client.state == 0 || Client.state == 5) {
 			arg0.centreString(Text.LOADING_TITLE, 180, 54, 16777215);
 			Pix2D.drawRect(28, 62, 304, 34, 9179409);
@@ -204,7 +206,7 @@ public class TitleScreen {
 		}
 		if (Client.state == 20) {
 			byte var2 = 40;
-			slButton.plotSprite(0, 0);
+			titleBox.plotSprite(0, 0);
 			arg0.centreString(loginMes1, 180, 40, 16776960, true);
 			int var8 = var2 + 15;
 			arg0.centreString(loginMes2, 180, 55, 16776960, true);
@@ -218,7 +220,7 @@ public class TitleScreen {
 			int var15 = var13 + 15;
 		}
 		if (Client.state == 10) {
-			slButton.plotSprite(0, 0);
+			titleBox.plotSprite(0, 0);
 			if (loginscreen == 0) {
 				byte var5 = 80;
 				arg0.centreString(Text.WELCOMETORUNESCAPE, 180, 80, 16776960, true);
@@ -236,9 +238,9 @@ public class TitleScreen {
 				arg0.centreString(loginMes3, 180, 70, 16776960, true);
 				int var16 = var14 + 15;
 				int var17 = var16 + 10;
-				arg0.drawString(JagString.join(new JagString[]{Text.USERNAMEPROMPT, loginUser, Client.loopCycle % 40 < 20 & loginSelect == 0 ? field1204 : field3067}), 90, 95, 16777215, true);
+				arg0.drawString(JagString.join(new JagString[]{Text.USERNAMEPROMPT, loginUser, Client.loopCycle % 40 < 20 & loginSelect == 0 ? field1204 : AUTO_EMPTY}), 90, 95, 16777215, true);
 				int var19 = var17 + 15;
-				arg0.drawString(JagString.join(new JagString[]{Text.PASSWORDPROMPT, loginPass.chars(), Client.loopCycle % 40 < 20 & loginSelect == 1 ? field1204 : field3067}), 92, 110, 16777215, true);
+				arg0.drawString(JagString.join(new JagString[]{Text.PASSWORDPROMPT, loginPass.chars(), Client.loopCycle % 40 < 20 & loginSelect == 1 ? field1204 : AUTO_EMPTY}), 92, 110, 16777215, true);
 				titleBut.plotSprite(27, 130);
 				int var21 = var19 + 15;
 				arg0.centreString(Text.LOGIN, 100, 155, 16777215, true);
@@ -259,20 +261,20 @@ public class TitleScreen {
 				int var24 = var22 + 15;
 			}
 		}
-		method281();
+		drawFlames();
 		try {
 			Graphics var6 = GameShell.canvas.getGraphics();
-			field1935.draw(202, var6, 171);
-			field472.draw(0, var6, 0);
-			field1435.draw(637, var6, 0);
+			imageTitle4.draw(202, var6, 171);
+			imageTitle0.draw(0, var6, 0);
+			imageTitle1.draw(637, var6, 0);
 			if (GameShell.fullredraw) {
 				GameShell.fullredraw = false;
-				field2044.draw(128, var6, 0);
-				field2608.draw(202, var6, 371);
-				field844.draw(0, var6, 265);
-				field2701.draw(562, var6, 265);
-				field1307.draw(128, var6, 171);
-				field3298.draw(562, var6, 171);
+				imageTitle2.draw(128, var6, 0);
+				imageTitle3.draw(202, var6, 371);
+				imageTitle5.draw(0, var6, 265);
+				imageTitle6.draw(562, var6, 265);
+				imageTitle7.draw(128, var6, 171);
+				imageTitle8.draw(562, var6, 171);
 			}
 		} catch (Exception var7) {
 			GameShell.canvas.repaint();
@@ -291,43 +293,43 @@ public class TitleScreen {
 		if (open) {
 			return;
 		}
-		field472 = PixMap.createSafe(265, 128, arg0);
+		imageTitle0 = PixMap.createSafe(265, 128, arg0);
 		Pix2D.cls();
-		field1435 = PixMap.createSafe(265, 128, arg0);
+		imageTitle1 = PixMap.createSafe(265, 128, arg0);
 		Pix2D.cls();
-		field2044 = PixMap.createSafe(171, 509, arg0);
+		imageTitle2 = PixMap.createSafe(171, 509, arg0);
 		Pix2D.cls();
-		field2608 = PixMap.createSafe(132, 360, arg0);
+		imageTitle3 = PixMap.createSafe(132, 360, arg0);
 		Pix2D.cls();
-		field1935 = PixMap.createSafe(200, 360, arg0);
+		imageTitle4 = PixMap.createSafe(200, 360, arg0);
 		Pix2D.cls();
-		field844 = PixMap.createSafe(238, 202, arg0);
+		imageTitle5 = PixMap.createSafe(238, 202, arg0);
 		Pix2D.cls();
-		field2701 = PixMap.createSafe(238, 203, arg0);
+		imageTitle6 = PixMap.createSafe(238, 203, arg0);
 		Pix2D.cls();
-		field1307 = PixMap.createSafe(94, 74, arg0);
+		imageTitle7 = PixMap.createSafe(94, 74, arg0);
 		Pix2D.cls();
-		field3298 = PixMap.createSafe(94, 75, arg0);
+		imageTitle8 = PixMap.createSafe(94, 75, arg0);
 		Pix2D.cls();
-		byte[] var3 = arg1.getFile(field3067, AUTO_TITLEJPG);
+		byte[] var3 = arg1.getFile(AUTO_EMPTY, AUTO_TITLEJPG);
 		Pix32 var4 = new Pix32(var3, arg0);
-		field472.bind();
+		imageTitle0.bind();
 		var4.quickPlotSprite(0, 0);
-		field1435.bind();
+		imageTitle1.bind();
 		var4.quickPlotSprite(-637, 0);
-		field2044.bind();
+		imageTitle2.bind();
 		var4.quickPlotSprite(-128, 0);
-		field2608.bind();
+		imageTitle3.bind();
 		var4.quickPlotSprite(-202, -371);
-		field1935.bind();
+		imageTitle4.bind();
 		var4.quickPlotSprite(-202, -171);
-		field844.bind();
+		imageTitle5.bind();
 		var4.quickPlotSprite(0, -265);
-		field2701.bind();
+		imageTitle6.bind();
 		var4.quickPlotSprite(-562, -265);
-		field1307.bind();
+		imageTitle7.bind();
 		var4.quickPlotSprite(-128, -171);
-		field3298.bind();
+		imageTitle8.bind();
 		var4.quickPlotSprite(-562, -171);
 		int[] var5 = new int[var4.wi];
 		for (int var6 = 0; var6 < var4.hi; var6++) {
@@ -338,37 +340,37 @@ public class TitleScreen {
 				var4.data[var4.wi * var6 + var8] = var5[var8];
 			}
 		}
-		field472.bind();
+		imageTitle0.bind();
 		var4.quickPlotSprite(382, 0);
-		field1435.bind();
+		imageTitle1.bind();
 		var4.quickPlotSprite(-255, 0);
-		field2044.bind();
+		imageTitle2.bind();
 		var4.quickPlotSprite(254, 0);
-		field2608.bind();
+		imageTitle3.bind();
 		var4.quickPlotSprite(180, -371);
-		field1935.bind();
+		imageTitle4.bind();
 		var4.quickPlotSprite(180, -171);
-		field844.bind();
+		imageTitle5.bind();
 		var4.quickPlotSprite(382, -265);
-		field2701.bind();
+		imageTitle6.bind();
 		var4.quickPlotSprite(-180, -265);
-		field1307.bind();
+		imageTitle7.bind();
 		var4.quickPlotSprite(254, -171);
-		field3298.bind();
+		imageTitle8.bind();
 		var4.quickPlotSprite(-180, -171);
-		Pix32 var9 = PixLoader.makePix32(arg2, Client.AUTO_LOGO, field3067);
-		field2044.bind();
+		Pix32 var9 = PixLoader.makePix32(arg2, AUTO_LOGO, AUTO_EMPTY);
+		imageTitle2.bind();
 		var9.plotSprite(382 - var9.wi / 2 - 128, 18);
-		slButton = PixLoader.makePix8(AUTO_TITLEBOX, field3067, arg2);
-		titleBut = PixLoader.makePix8(AUTO_TITLEBUTTON, field3067, arg2);
-		field1177 = PixLoader.makePix8Array(arg2, AUTO_RUNES, field3067);
-		slBack = new Pix32(128, 265);
-		field851 = new Pix32(128, 265);
+		titleBox = PixLoader.makePix8(AUTO_TITLEBOX, AUTO_EMPTY, arg2);
+		titleBut = PixLoader.makePix8(AUTO_TITLEBUTTON, AUTO_EMPTY, arg2);
+		runes = PixLoader.makePix8Array(arg2, AUTO_RUNES, AUTO_EMPTY);
+		imageFlamesLeft = new Pix32(128, 265);
+		imageFlamesRight = new Pix32(128, 265);
 		for (int var10 = 0; var10 < 33920; var10++) {
-			slBack.data[var10] = field472.data[var10];
+			imageFlamesLeft.data[var10] = imageTitle0.data[var10];
 		}
 		for (int var11 = 0; var11 < 33920; var11++) {
-			field851.data[var11] = field1435.data[var11];
+			imageFlamesRight.data[var11] = imageTitle1.data[var11];
 		}
 		flameGradient0 = new int[256];
 		for (int var12 = 0; var12 < 64; var12++) {
@@ -413,15 +415,15 @@ public class TitleScreen {
 		flameBuffer1 = new int[32768];
 		flameBuffer0 = new int[32768];
 		generateFlameCoolingMap(null);
-		field2911 = new int[32768];
-		loginPass = field3067;
-		loginUser = field3067;
-		field229 = new int[32768];
+		flameBuffer2 = new int[32768];
+		loginPass = AUTO_EMPTY;
+		loginUser = AUTO_EMPTY;
+		flameBuffer3 = new int[32768];
 		loginscreen = 0;
 		if (Client.midiVolume == 0 || Client.lowMem) {
 			MidiManager.method672();
 		} else {
-			MidiManager.method679(Client.songs, AUTO_SCAPE_MAIN, field3067, Client.midiVolume);
+			MidiManager.method679(Client.songs, AUTO_SCAPE_MAIN, AUTO_EMPTY, Client.midiVolume);
 		}
 		Js5Net.sendLoginLogoutPacket(false);
 		GameShell.fullredraw = true;
@@ -434,26 +436,26 @@ public class TitleScreen {
 			return;
 		}
 		flameGradient0 = null;
-		field1435 = null;
-		field3298 = null;
-		field2608 = null;
+		imageTitle1 = null;
+		imageTitle8 = null;
+		imageTitle3 = null;
 		flameBuffer0 = null;
-		field2911 = null;
+		flameBuffer2 = null;
 		titleBut = null;
 		flameBuffer1 = null;
-		slButton = null;
+		titleBox = null;
 		flameGradient1 = null;
-		field472 = null;
-		field2044 = null;
-		field1307 = null;
-		slBack = null;
-		field1177 = null;
+		imageTitle0 = null;
+		imageTitle2 = null;
+		imageTitle7 = null;
+		imageFlamesLeft = null;
+		runes = null;
 		flameGradient2 = null;
-		field1935 = null;
-		field851 = null;
-		field229 = null;
-		field2701 = null;
-		field844 = null;
+		imageTitle4 = null;
+		imageFlamesRight = null;
+		flameBuffer3 = null;
+		imageTitle6 = null;
+		imageTitle5 = null;
 		flameGradient = null;
 		MidiManager.method672();
 		Js5Net.sendLoginLogoutPacket(true);
@@ -461,39 +463,39 @@ public class TitleScreen {
 	}
 
 	@ObfuscatedName("jc.b(I)V")
-	public static void method542() {
+	public static void updateFlames() {
 		for (int var0 = 10; var0 < 117; var0++) {
 			int var1 = (int) (Math.random() * 100.0D);
 			if (var1 < 50) {
-				field229[var0 + 32512] = 255;
+				flameBuffer3[var0 + 32512] = 255;
 			}
 		}
 		for (int var2 = 0; var2 < 100; var2++) {
 			int var3 = (int) (Math.random() * 124.0D) + 2;
 			int var4 = (int) (Math.random() * 128.0D) + 128;
 			int var5 = (var4 << 7) + var3;
-			field229[var5] = 192;
+			flameBuffer3[var5] = 192;
 		}
 		for (int var6 = 1; var6 < 255; var6++) {
 			for (int var7 = 1; var7 < 127; var7++) {
 				int var8 = var7 + (var6 << 7);
-				field2911[var8] = (field229[var8 - 1] + field229[var8 + 1] + field229[var8 + -128] + field229[var8 + 128]) / 4;
+				flameBuffer2[var8] = (flameBuffer3[var8 - 1] + flameBuffer3[var8 + 1] + flameBuffer3[var8 + -128] + flameBuffer3[var8 + 128]) / 4;
 			}
 		}
 		flameCycle0 += 128;
 		if (flameCycle0 > flameBuffer0.length) {
 			flameCycle0 -= flameBuffer0.length;
 			int var9 = (int) (Math.random() * 12.0D);
-			generateFlameCoolingMap(field1177[var9]);
+			generateFlameCoolingMap(runes[var9]);
 		}
 		for (int var10 = 1; var10 < 255; var10++) {
 			for (int var11 = 1; var11 < 127; var11++) {
 				int var12 = (var10 << 7) + var11;
-				int var13 = field2911[var12 + 128] - flameBuffer0[var12 + flameCycle0 & flameBuffer0.length + -1] / 5;
+				int var13 = flameBuffer2[var12 + 128] - flameBuffer0[var12 + flameCycle0 & flameBuffer0.length + -1] / 5;
 				if (var13 < 0) {
 					var13 = 0;
 				}
-				field229[var12] = var13;
+				flameBuffer3[var12] = var13;
 			}
 		}
 		for (int var14 = 0; var14 < 255; var14++) {
@@ -506,21 +508,19 @@ public class TitleScreen {
 		if (flameGradientCycle1 > 0) {
 			flameGradientCycle1 -= 4;
 		}
-		if (flameGradientCycle0 != 0 || flameGradientCycle1 != 0) {
-			return;
-		}
-		int var15 = (int) (Math.random() * 2000.0D);
-		if (var15 == 0) {
-			flameGradientCycle0 = 1024;
-		}
-		if (var15 == 1) {
-			flameGradientCycle1 = 1024;
-			return;
+		if (flameGradientCycle0 == 0 && flameGradientCycle1 == 0) {
+			int var15 = (int) (Math.random() * 2000.0D);
+			if (var15 == 0) {
+				flameGradientCycle0 = 1024;
+			}
+			if (var15 == 1) {
+				flameGradientCycle1 = 1024;
+			}
 		}
 	}
 
     @ObfuscatedName("client.g(I)V")
-    public static void method281() {
+    public static void drawFlames() {
         if (flameGradientCycle0 > 0) {
             for (int var2 = 0; var2 < 256; var2++) {
                 if (flameGradientCycle0 > 768) {
@@ -547,7 +547,7 @@ public class TitleScreen {
             }
         }
         for (int var3 = 0; var3 < 33920; var3++) {
-            field472.data[var3] = slBack.data[var3];
+            imageTitle0.data[var3] = imageFlamesLeft.data[var3];
         }
         int var4 = 0;
         int var5 = 1152;
@@ -559,14 +559,14 @@ public class TitleScreen {
             }
             var4 += var8;
             for (int var9 = var8; var9 < 128; var9++) {
-                int var10 = field229[var4++];
+                int var10 = flameBuffer3[var4++];
                 if (var10 == 0) {
                     var5++;
                 } else {
                     int var11 = 256 - var10;
                     int var13 = flameGradient[var10];
-                    int var14 = field472.data[var5];
-                    field472.data[var5++] = ((var13 & 0xFF00FF) * var10 + (var14 & 0xFF00FF) * var11 & 0xFF00FF00) + ((var13 & 0xFF00) * var10 + (var14 & 0xFF00) * var11 & 0xFF0000) >> 8;
+                    int var14 = imageTitle0.data[var5];
+                    imageTitle0.data[var5++] = ((var13 & 0xFF00FF) * var10 + (var14 & 0xFF00FF) * var11 & 0xFF00FF00) + ((var13 & 0xFF00) * var10 + (var14 & 0xFF00) * var11 & 0xFF0000) >> 8;
                 }
             }
             var5 += var8;
@@ -574,21 +574,21 @@ public class TitleScreen {
         int var15 = 1176;
         int var16 = 0;
         for (int var17 = 0; var17 < 33920; var17++) {
-            field1435.data[var17] = field851.data[var17];
+            imageTitle1.data[var17] = imageFlamesRight.data[var17];
         }
         for (int var18 = 1; var18 < 255; var18++) {
             int var19 = (256 - var18) * flameLineOffset[var18] / 256;
             int var20 = 103 - var19;
             int var21 = var15 + var19;
             for (int var22 = 0; var22 < var20; var22++) {
-                int var23 = field229[var16++];
+                int var23 = flameBuffer3[var16++];
                 if (var23 == 0) {
                     var21++;
                 } else {
-                    int var25 = field1435.data[var21];
+                    int var25 = imageTitle1.data[var21];
                     int var26 = 256 - var23;
                     int var27 = flameGradient[var23];
-                    field1435.data[var21++] = ((var25 & 0xFF00) * var26 + (var27 & 0xFF00) * var23 & 0xFF0000) + ((var25 & 0xFF00FF) * var26 + (var27 & 0xFF00FF) * var23 & 0xFF00FF00) >> 8;
+                    imageTitle1.data[var21++] = ((var25 & 0xFF00) * var26 + (var27 & 0xFF00) * var23 & 0xFF0000) + ((var25 & 0xFF00FF) * var26 + (var27 & 0xFF00FF) * var23 & 0xFF00FF00) >> 8;
                 }
             }
             var15 = var21 + 128 - var20 - var19;
@@ -616,17 +616,16 @@ public class TitleScreen {
 			flameBuffer0 = flameBuffer1;
 			flameBuffer1 = var8;
 		}
-		if (arg0 == null) {
-			return;
-		}
-		int var9 = 0;
-		for (int var10 = 0; var10 < arg0.hi; var10++) {
-			for (int var11 = 0; var11 < arg0.wi; var11++) {
-				if (arg0.data[var9++] != 0) {
-					int var12 = arg0.yof + var10 + 16;
-					int var13 = var11 + arg0.xof + 16;
-					int var14 = (var12 << 7) + var13;
-					flameBuffer0[var14] = 0;
+		if (arg0 != null) {
+			int var9 = 0;
+			for (int var10 = 0; var10 < arg0.hi; var10++) {
+				for (int var11 = 0; var11 < arg0.wi; var11++) {
+					if (arg0.data[var9++] != 0) {
+						int var12 = arg0.yof + var10 + 16;
+						int var13 = var11 + arg0.xof + 16;
+						int var14 = (var12 << 7) + var13;
+						flameBuffer0[var14] = 0;
+					}
 				}
 			}
 		}
@@ -635,19 +634,19 @@ public class TitleScreen {
 	@ObfuscatedName("td.a(Lbd;Lbd;I)I")
 	public static int ready(Js5 arg0, Js5 arg1) {
 		int var2 = 0;
-		if (arg0.requestDownload(AUTO_TITLEJPG, field3067)) {
+		if (arg0.requestDownload(AUTO_TITLEJPG, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg1.requestDownload(Client.AUTO_LOGO, field3067)) {
+		if (arg1.requestDownload(AUTO_LOGO, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg1.requestDownload(AUTO_TITLEBOX, field3067)) {
+		if (arg1.requestDownload(AUTO_TITLEBOX, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg1.requestDownload(AUTO_TITLEBUTTON, field3067)) {
+		if (arg1.requestDownload(AUTO_TITLEBUTTON, AUTO_EMPTY)) {
 			var2++;
 		}
-		if (arg1.requestDownload(AUTO_RUNES, field3067)) {
+		if (arg1.requestDownload(AUTO_RUNES, AUTO_EMPTY)) {
 			var2++;
 		}
 		return var2;

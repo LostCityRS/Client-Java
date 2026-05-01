@@ -66,8 +66,6 @@ public final class Client extends GameShell {
 	public static int[] chatColour = new int[MAX_CHATS];
 	@ObfuscatedName("la.J")
 	public static int[] chatX = new int[MAX_CHATS];
-	@ObfuscatedName("client.cb")
-	public static JagString AUTO_LOGO = JagString.wrap("logo");
 
 	@ObfuscatedName("client.gb")
 	public static int macroMinimapZoomModifier = 1;
@@ -281,7 +279,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("qd.vd")
 	public static int psize = 0;
 	@ObfuscatedName("ra.p")
-	public static int mapBuildCenterZoneX;
+	public static int mapBuildCentreZoneX;
 	@ObfuscatedName("id.u")
 	public static PrivilegedRequest loginSocketReq;
 	@ObfuscatedName("n.m")
@@ -453,7 +451,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("pb.n")
 	public static LinkList locChanges = new LinkList();
 	@ObfuscatedName("f.c")
-	public static int mapBuildCenterZoneZ;
+	public static int mapBuildCentreZoneZ;
 	@ObfuscatedName("td.h")
 	public static int playerCount = 0;
 	@ObfuscatedName("sd.e")
@@ -2676,6 +2674,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ac.a(Laa;BII)V")
 	public static void getPlayerPosExtended(ClientPlayer arg0, int arg1, int arg2) {
 		if ((arg1 & 0x100) != 0) {
+			// DAMAGE
 			int var3 = in.g1_alt3();
 			int var4 = in.g1_alt1();
 			arg0.addHitmark(var4, loopCycle, var3);
@@ -2684,10 +2683,12 @@ public final class Client extends GameShell {
 			arg0.field1975 = in.g1_alt1();
 		}
 		if ((arg1 & 0x10) != 0) {
+			// FACESQUARE
 			arg0.targetTileX = in.g2();
 			arg0.targetTileZ = in.g2_alt1();
 		}
 		if ((arg1 & 0x1) != 0) {
+			// ANIM
 			int var5 = in.g2_alt1();
 			if (var5 == 65535) {
 				var5 = -1;
@@ -2696,12 +2697,14 @@ public final class Client extends GameShell {
 			triggerPlayerAnim(var5, var6, arg0);
 		}
 		if ((arg1 & 0x4) != 0) {
+			// FACEENTITY
 			arg0.targetId = in.g2_alt2();
 			if (arg0.targetId == 65535) {
 				arg0.targetId = -1;
 			}
 		}
 		if ((arg1 & 0x40) != 0) {
+			// HITMARK2
 			int var7 = in.g1();
 			int var8 = in.g1_alt1();
 			arg0.addHitmark(var8, loopCycle, var7);
@@ -2710,6 +2713,7 @@ public final class Client extends GameShell {
 			arg0.field1975 = in.g1_alt1();
 		}
 		if ((arg1 & 0x400) != 0) {
+			// EXACTMOVE
 			arg0.exactStartX = in.g1_alt3();
 			arg0.exactStartZ = in.g1_alt3();
 			arg0.field1973 = in.g1();
@@ -2720,6 +2724,7 @@ public final class Client extends GameShell {
 			arg0.abortRoute();
 		}
 		if ((arg1 & 0x8) != 0) {
+			// CHAT
 			int var9 = in.g2();
 			int var10 = in.g1_alt1();
 			int var11 = in.g1_alt2();
@@ -2756,6 +2761,7 @@ public final class Client extends GameShell {
 			in.pos = var11 + var12;
 		}
 		if ((arg1 & 0x20) != 0) {
+			// APPEARANCE
 			int var18 = in.g1();
 			byte[] var19 = new byte[var18];
 			Packet var20 = new Packet(var19);
@@ -2764,6 +2770,7 @@ public final class Client extends GameShell {
 			arg0.setAppearance(var20);
 		}
 		if ((arg1 & 0x200) != 0) {
+			// SPOTANIM
 			arg0.spotanimId = in.g2_alt1();
 			int var21 = in.g4_alt3();
 			arg0.spotanimCycle = 0;
@@ -2777,19 +2784,19 @@ public final class Client extends GameShell {
 				arg0.spotanimFrame = -1;
 			}
 		}
-		if ((arg1 & 0x80) == 0) {
-			return;
+		if ((arg1 & 0x80) != 0) {
+			// SAY
+			arg0.chat = in.gjstr();
+			if (arg0.chat.charAt(0) == 126) {
+				arg0.chat = arg0.chat.substring(1);
+				addChat(2, arg0.chat, arg0.name);
+			} else if (localPlayer == arg0) {
+				addChat(2, arg0.chat, arg0.name);
+			}
+			arg0.chatTimer = 150;
+			arg0.chatColour = 0;
+			arg0.chatEffect = 0;
 		}
-		arg0.chat = in.gjstr();
-		if (arg0.chat.charAt(0) == 126) {
-			arg0.chat = arg0.chat.substring(1);
-			addChat(2, arg0.chat, arg0.name);
-		} else if (localPlayer == arg0) {
-			addChat(2, arg0.chat, arg0.name);
-		}
-		arg0.chatTimer = 150;
-		arg0.chatColour = 0;
-		arg0.chatEffect = 0;
 	}
 
 	@ObfuscatedName("l.a(B)V")
@@ -5097,14 +5104,14 @@ public final class Client extends GameShell {
 				int var14 = (mapBuildIndex[var12] >> 8) * 64 - mapBuildBaseX;
 				byte[] var15 = mapBuildGroundData[var12];
 				if (var15 != null) {
-					ClientBuild.loadGround(collision, (mapBuildCenterZoneX - 6) * 8, var15, var14, var13, (mapBuildCenterZoneZ - 6) * 8);
+					ClientBuild.loadGround(collision, (mapBuildCentreZoneX - 6) * 8, var15, var14, var13, (mapBuildCentreZoneZ - 6) * 8);
 				}
 			}
 			for (int var16 = 0; var16 < var11; var16++) {
 				int var17 = (mapBuildIndex[var16] >> 8) * 64 - mapBuildBaseX;
 				byte[] var18 = mapBuildGroundData[var16];
 				int var19 = (mapBuildIndex[var16] & 0xFF) * 64 - mapBuildBaseZ;
-				if (var18 == null && mapBuildCenterZoneZ < 800) {
+				if (var18 == null && mapBuildCentreZoneZ < 800) {
 					ClientBuild.fadeAdjacent(var19, 64, 64, var17);
 				}
 			}
@@ -5202,10 +5209,10 @@ public final class Client extends GameShell {
 			out.p4(1057001181);
 		}
 		if (!regionmode) {
-			int var51 = (mapBuildCenterZoneX - 6) / 8;
-			int var52 = (mapBuildCenterZoneZ - 6) / 8;
-			int var53 = (mapBuildCenterZoneZ + 6) / 8;
-			int var54 = (mapBuildCenterZoneX + 6) / 8;
+			int var51 = (mapBuildCentreZoneX - 6) / 8;
+			int var52 = (mapBuildCentreZoneZ - 6) / 8;
+			int var53 = (mapBuildCentreZoneZ + 6) / 8;
+			int var54 = (mapBuildCentreZoneX + 6) / 8;
 			for (int var55 = var51 - 1; var55 <= var54 + 1; var55++) {
 				for (int var56 = var52 - 1; var56 <= var53 + 1; var56++) {
 					if (var51 > var55 || var55 > var54 || var56 < var52 || var56 > var53) {
@@ -5416,6 +5423,7 @@ public final class Client extends GameShell {
 			ClientNpc var2 = npc[var1];
 			int var3 = in.g1();
 			if ((var3 & 0x1) != 0) {
+				// HITMARK
 				int var4 = in.g1_alt1();
 				int var5 = in.g1_alt3();
 				var2.addHitmark(var5, loopCycle, var4);
@@ -5424,6 +5432,7 @@ public final class Client extends GameShell {
 				var2.field1975 = in.g1();
 			}
 			if ((var3 & 0x20) != 0) {
+				// SPOTANIM
 				var2.spotanimId = in.g2_alt3();
 				int var6 = in.g4();
 				var2.spotanimCycle = 0;
@@ -5438,12 +5447,14 @@ public final class Client extends GameShell {
 				}
 			}
 			if ((var3 & 0x4) != 0) {
+				// FACEENTITY
 				var2.targetId = in.g2_alt2();
 				if (var2.targetId == 65535) {
 					var2.targetId = -1;
 				}
 			}
 			if ((var3 & 0x2) != 0) {
+				// HITMARK2
 				int var7 = in.g1_alt1();
 				int var8 = in.g1();
 				var2.addHitmark(var8, loopCycle, var7);
@@ -5452,10 +5463,12 @@ public final class Client extends GameShell {
 				var2.field1975 = in.g1_alt3();
 			}
 			if ((var3 & 0x40) != 0) {
+				// SAY
 				var2.chat = in.gjstr();
 				var2.chatTimer = 100;
 			}
 			if ((var3 & 0x80) != 0) {
+				// CHANGETYPE
 				var2.type = NpcType.list(in.g2_alt2());
 				var2.turnrightanim = var2.type.turnrightanim;
 				var2.turnspeed = var2.type.turnspeed;
@@ -5468,10 +5481,12 @@ public final class Client extends GameShell {
 				var2.walkanim_b = var2.type.walkanim_b;
 			}
 			if ((var3 & 0x8) != 0) {
+				// FACESQUARE
 				var2.targetTileX = in.g2_alt2();
 				var2.targetTileZ = in.g2_alt1();
 			}
 			if ((var3 & 0x10) != 0) {
+				// ANIM
 				int var9 = in.g2_alt2();
 				if (var9 == 65535) {
 					var9 = -1;
@@ -6591,15 +6606,15 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("nb.b(IIIIII)V")
 	public static void startRebuild(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (mapBuildCenterZoneX == arg2 && mapBuildCenterZoneZ == arg1 && (ClientBuild.lastBuiltLevel == arg4 || !lowMem)) {
+		if (mapBuildCentreZoneX == arg2 && mapBuildCentreZoneZ == arg1 && (ClientBuild.lastBuiltLevel == arg4 || !lowMem)) {
 			return;
 		}
 		ClientBuild.lastBuiltLevel = arg4;
-		mapBuildCenterZoneX = arg2;
+		mapBuildCentreZoneX = arg2;
 		if (!lowMem) {
 			ClientBuild.lastBuiltLevel = 0;
 		}
-		mapBuildCenterZoneZ = arg1;
+		mapBuildCentreZoneZ = arg1;
 		setMainState(25);
 		messageBox(Text.LOADING, false, null);
 		int var5 = mapBuildBaseZ;
@@ -7246,7 +7261,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("pb.e(I)V")
 	public static void checkMinimap() {
 		if (lowMem && ClientBuild.lastBuiltLevel != minusedlevel) {
-			startRebuild(localPlayer.routeX[0], mapBuildCenterZoneZ, mapBuildCenterZoneX, localPlayer.routeZ[0], minusedlevel);
+			startRebuild(localPlayer.routeX[0], mapBuildCentreZoneZ, mapBuildCentreZoneX, localPlayer.routeZ[0], minusedlevel);
 		} else if (minimapLevel != minusedlevel) {
 			minimapLevel = minusedlevel;
 			minimapBuildBuffer(minusedlevel);
@@ -8493,7 +8508,7 @@ public final class Client extends GameShell {
 					in.pos = 0;
 					stream.read(0, psize, in.data);
 					loginDone();
-					mapBuildCenterZoneX = -1;
+					mapBuildCentreZoneX = -1;
 					rebuildPacket(false);
 					ptype = -1;
 				}
