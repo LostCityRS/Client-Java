@@ -7439,8 +7439,8 @@ public final class Client extends GameShell {
 			IfType var15 = IfType.get(var2);
 			if (var15.scripts != null && var15.scripts[0][0] == 5) {
 				int var16 = var15.scripts[0][1];
-				if (VarCache.var[var16] != var15.scriptComparator[0]) {
-					VarCache.var[var16] = var15.scriptComparator[0];
+				if (VarCache.var[var16] != var15.scriptOperand[0]) {
+					VarCache.var[var16] = var15.scriptOperand[0];
 					clientVar(var16);
 					redrawSide = true;
 				}
@@ -7706,7 +7706,7 @@ public final class Client extends GameShell {
 			redrawSide = true;
 			targetMode = 1;
 			targetVerb = var35.targetVerb;
-			targetMask = var35.field2508;
+			targetMask = var35.targetMask;
 			useMode = 0;
 			field2949 = var2;
 			field1384 = JagString.join(new JagString[]{field2564, var35.targetBase, field1393});
@@ -9841,21 +9841,21 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("ta.a(ZLqd;)Z")
 	public static boolean getIfActive(IfType arg0) {
-		if (arg0.scriptOperand == null) {
+		if (arg0.scriptComparator == null) {
 			return false;
 		}
-		for (int var1 = 0; var1 < arg0.scriptOperand.length; var1++) {
+		for (int var1 = 0; var1 < arg0.scriptComparator.length; var1++) {
 			int var2 = getIfVar(var1, arg0);
-			int var3 = arg0.scriptComparator[var1];
-			if (arg0.scriptOperand[var1] == 2) {
+			int var3 = arg0.scriptOperand[var1];
+			if (arg0.scriptComparator[var1] == 2) {
 				if (var3 <= var2) {
 					return false;
 				}
-			} else if (arg0.scriptOperand[var1] == 3) {
+			} else if (arg0.scriptComparator[var1] == 3) {
 				if (var3 >= var2) {
 					return false;
 				}
-			} else if (arg0.scriptOperand[var1] == 4) {
+			} else if (arg0.scriptComparator[var1] == 4) {
 				if (var2 == var3) {
 					return false;
 				}
@@ -10026,16 +10026,16 @@ public final class Client extends GameShell {
 									hoveredSlot = var17;
 									if (var12.linkObjType[var17] > 0) {
 										ObjType var22 = ObjType.list(var12.linkObjType[var17] - 1);
-										if (useMode == 1 && var12.draggablebehavior) {
+										if (useMode == 1 && var12.objOps) {
 											if (useSelectedComId != var12.parentId || objSelectedSlot != var17) {
 												addMenuOption(var22.id, Text.USE, var12.parentId, var17, 56, JagString.join(new JagString[]{field3177, field328, var22.name}));
 											}
-										} else if (targetMode != 1 || !var12.draggablebehavior) {
+										} else if (targetMode != 1 || !var12.objOps) {
 											JagString[] var23 = var22.iop;
 											if (showOpIndex) {
 												var23 = prependOpIndex(var23);
 											}
-											if (var12.draggablebehavior) {
+											if (var12.objOps) {
 												for (int var24 = 4; var24 >= 3; var24--) {
 													if (var23 != null && var23[var24] != null) {
 														byte var25;
@@ -10050,10 +10050,10 @@ public final class Client extends GameShell {
 													}
 												}
 											}
-											if (var12.field2461) {
+											if (var12.objUse) {
 												addMenuOption(var22.id, Text.USE, var12.parentId, var17, 19, JagString.join(new JagString[]{field2334, var22.name}));
 											}
-											if (var12.draggablebehavior && var23 != null) {
+											if (var12.objOps && var23 != null) {
 												for (int var26 = 2; var26 >= 0; var26--) {
 													if (var23[var26] != null) {
 														byte var27 = 0;
@@ -10109,7 +10109,7 @@ public final class Client extends GameShell {
 					}
 					if (var12.v3 && var12.invobject != -1 && arg7 >= var14 && arg4 >= var13 && arg7 < var12.width + var14 && arg4 < var12.height + var13) {
 						ObjType var31 = ObjType.list(var12.invobject);
-						if (var12.draggablebehavior) {
+						if (var12.objOps) {
 							JagString[] var32 = var31.iop;
 							if (showOpIndex) {
 								var32 = prependOpIndex(var32);

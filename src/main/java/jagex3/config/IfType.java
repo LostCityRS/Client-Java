@@ -72,7 +72,7 @@ public final class IfType extends Linkable2 {
 	public int colour2 = 0;
 
 	@ObfuscatedName("qd.hd")
-	public boolean draggablebehavior = false;
+	public boolean objOps = false;
 
 	@ObfuscatedName("qd.ic")
 	public JagString buttonText = Text.OK;
@@ -141,7 +141,7 @@ public final class IfType extends Linkable2 {
 	public int modelXAn = 0;
 
 	@ObfuscatedName("qd.wd")
-	public int[] scriptOperand;
+	public int[] scriptComparator;
 
 	@ObfuscatedName("qd.Jb")
 	public int model2Type = 1;
@@ -177,7 +177,7 @@ public final class IfType extends Linkable2 {
 	public int colour = 0;
 
 	@ObfuscatedName("qd.Ic")
-	public int field2508 = 0;
+	public int targetMask = 0;
 
 	@ObfuscatedName("qd.Ac")
 	public boolean field2500 = false;
@@ -216,7 +216,7 @@ public final class IfType extends Linkable2 {
 	public JagString targetBase = field3058;
 
 	@ObfuscatedName("qd.Nb")
-	public boolean field2461 = false;
+	public boolean objUse = false;
 
 	@ObfuscatedName("qd.Db")
 	public boolean fill = false;
@@ -264,7 +264,7 @@ public final class IfType extends Linkable2 {
 	public int font;
 
 	@ObfuscatedName("qd.zc")
-	public int[] scriptComparator;
+	public int[] scriptOperand;
 
 	@ObfuscatedName("qd.Fc")
 	public int[] invBackgroundX;
@@ -448,11 +448,11 @@ public final class IfType extends Linkable2 {
 		}
 		int var2 = arg0.g1();
 		if (var2 > 0) {
-			this.scriptOperand = new int[var2];
 			this.scriptComparator = new int[var2];
+			this.scriptOperand = new int[var2];
 			for (int var3 = 0; var3 < var2; var3++) {
-				this.scriptOperand[var3] = arg0.g1();
-				this.scriptComparator[var3] = arg0.g2();
+				this.scriptComparator[var3] = arg0.g1();
+				this.scriptOperand[var3] = arg0.g2();
 			}
 		}
 		int var4 = arg0.g1();
@@ -481,8 +481,8 @@ public final class IfType extends Linkable2 {
 			this.linkObjType = new int[this.width * this.height];
 			this.linkObjNumber = new int[this.width * this.height];
 			this.objSwap = arg0.g1() == 1;
-			this.draggablebehavior = arg0.g1() == 1;
-			this.field2461 = arg0.g1() == 1;
+			this.objOps = arg0.g1() == 1;
+			this.objUse = arg0.g1() == 1;
 			this.objReplace = arg0.g1() == 1;
 			this.marginX = arg0.g1();
 			this.marginY = arg0.g1();
@@ -565,7 +565,7 @@ public final class IfType extends Linkable2 {
 			this.colour = arg0.g4();
 			this.marginX = arg0.g2b();
 			this.marginY = arg0.g2b();
-			this.draggablebehavior = arg0.g1() == 1;
+			this.objOps = arg0.g1() == 1;
 			this.iop = new JagString[5];
 			for (int var11 = 0; var11 < 5; var11++) {
 				this.iop[var11] = arg0.gjstr();
@@ -580,7 +580,7 @@ public final class IfType extends Linkable2 {
 		if (this.buttonType == 2 || this.type == 2) {
 			this.targetVerb = arg0.gjstr();
 			this.targetBase = arg0.gjstr();
-			this.field2508 = arg0.g2();
+			this.targetMask = arg0.g2();
 		}
 		if (this.buttonType == 1 || this.buttonType == 4 || this.buttonType == 5 || this.buttonType == 6) {
 			this.buttonText = arg0.gjstr();
@@ -730,7 +730,7 @@ public final class IfType extends Linkable2 {
 			this.field2501 = decodeHook(arg0);
 			this.field2553 = decodeHook(arg0);
 			this.field2486 = decodeHook(arg0);
-			this.draggablebehavior = arg0.g1() == 1;
+			this.objOps = arg0.g1() == 1;
 			this.field2542 = arg0.g2();
 			this.field2500 = arg0.g1() == 1;
 			arg0.g1();
