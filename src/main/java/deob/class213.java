@@ -1,0 +1,51 @@
+package deob;
+
+@ObfuscatedName("tf")
+public final class class213 extends class69 {
+
+	@ObfuscatedName("tf.u")
+	public int field4028;
+
+	@ObfuscatedName("tf.v")
+	public int field4029;
+
+	@ObfuscatedName("tf.w")
+	public boolean field4030;
+
+	@ObfuscatedName("tf.x")
+	public byte[] field4031;
+
+	@ObfuscatedName("tf.y")
+	public int field4032;
+
+	public class213(int arg0, byte[] arg1, int arg2, int arg3) {
+		this.field4028 = 22050;
+		this.field4031 = arg1;
+		this.field4032 = arg2;
+		this.field4029 = arg3;
+	}
+
+	public class213(int arg0, byte[] arg1, int arg2, int arg3, boolean arg4) {
+		this.field4028 = arg0;
+		this.field4031 = arg1;
+		this.field4032 = arg2;
+		this.field4029 = arg3;
+		this.field4030 = arg4;
+	}
+
+	@ObfuscatedName("tf.a(Lqe;)Ltf;")
+	public class213 method1453(class179 arg0) {
+		this.field4031 = arg0.method1278(this.field4031);
+		this.field4028 = arg0.method1280(this.field4028);
+		if (this.field4032 == this.field4029) {
+			this.field4032 = this.field4029 = arg0.method1279(this.field4032);
+		} else {
+			this.field4032 = arg0.method1279(this.field4032);
+			this.field4029 = arg0.method1279(this.field4029);
+			if (this.field4032 == this.field4029) {
+				this.field4032--;
+			}
+		}
+		return this;
+	}
+}
