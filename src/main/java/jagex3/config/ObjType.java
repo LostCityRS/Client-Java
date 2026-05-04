@@ -2,13 +2,9 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.dash3d.ModelSourceCache;
 import jagex3.client.Client;
 import jagex3.constants.Text;
-import jagex3.dash3d.ModelLit;
-import jagex3.dash3d.ModelUnlit;
-import jagex3.dash3d.Pix3D;
-import jagex3.dash3d.SoftwareModelLit;
+import jagex3.dash3d.*;
 import jagex3.datastruct.*;
 import jagex3.graphics.Pix2D;
 import jagex3.graphics.Pix32;

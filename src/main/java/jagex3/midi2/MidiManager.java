@@ -1,8 +1,8 @@
 package jagex3.midi2;
 
 import deob.ObfuscatedName;
-import jagex3.sound.WaveCache;
 import jagex3.js5.Js5;
+import jagex3.sound.WaveCache;
 
 public class MidiManager {
 	@ObfuscatedName("ch.i")
@@ -150,5 +150,16 @@ public class MidiManager {
 	@ObfuscatedName("jd.b(I)Z")
 	public static boolean method707() {
 		return field2230 == 0 ? field503.method1199() : true;
+	}
+
+	@ObfuscatedName("eh.a(ILnb;BZII)V")
+	public static void method388(Js5 arg0, int arg1, int arg2) {
+		field159 = arg2;
+		field3039 = arg0;
+		field4268 = arg1;
+		field3343 = 10000;
+		field2230 = 1;
+		field4480 = 0;
+		field277 = false;
 	}
 }

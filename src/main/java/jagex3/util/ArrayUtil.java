@@ -112,4 +112,12 @@ public final class ArrayUtil {
 			arg2[arg3++] = arg0[arg1++];
 		}
 	}
+
+	@ObfuscatedName("qe.a([BZ)[B")
+	public static byte[] method1276(byte[] arg0) {
+		int var1 = arg0.length;
+		byte[] var2 = new byte[var1];
+		method836(arg0, 0, var2, 0, var1);
+		return var2;
+	}
 }

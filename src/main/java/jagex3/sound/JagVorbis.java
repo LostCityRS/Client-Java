@@ -5,6 +5,7 @@ import deob.Statics;
 import jagex3.datastruct.Linkable;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
+import jagex3.util.MathUtil;
 
 @ObfuscatedName("rj")
 public final class JagVorbis extends Linkable {
@@ -147,7 +148,7 @@ public final class JagVorbis extends Linkable {
 				var10[var11 * 2 + 1] = -((float) Math.sin((double) (var11 * 4 + 2) * 3.141592653589793D / (double) var2));
 			}
 			int[] var12 = new int[var5];
-			int var13 = Statics.bitsRequired(var5 - 1);
+			int var13 = MathUtil.bitsRequired(var5 - 1);
 			for (int var14 = 0; var14 < var5; var14++) {
 				var12[var14] = Statics.method1524(var14, var13);
 			}
@@ -338,7 +339,7 @@ public final class JagVorbis extends Linkable {
 	public float[] method1356(int arg0) {
 		method1350(this.field3733[arg0]);
 		readBit();
-		int var2 = readBits(Statics.bitsRequired(field3734.length - 1));
+		int var2 = readBits(MathUtil.bitsRequired(field3734.length - 1));
 		boolean var3 = field3732[var2];
 		int var4 = var3 ? field3727 : field3745;
 		boolean var5 = false;
@@ -425,7 +426,7 @@ public final class JagVorbis extends Linkable {
 				var27[var39 * 4 + 3] = (var40 - var42) * var44 - (var41 - var43) * var45;
 				var27[var39 * 4 + 1] = (var41 - var43) * var44 + (var40 - var42) * var45;
 			}
-			int var46 = Statics.bitsRequired(var4 - 1);
+			int var46 = MathUtil.bitsRequired(var4 - 1);
 			for (int var47 = 0; var47 < var46 - 3; var47++) {
 				int var48 = var4 >> var47 + 2;
 				int var49 = 0x8 << var47;

@@ -72,6 +72,11 @@ public class Packet extends Linkable {
 		return arg0.method604() + 1;
 	}
 
+	@ObfuscatedName("hd.a([BBI)I")
+	public static int method541(byte[] arg0, int arg1) {
+		return getcrc(0, arg0, arg1);
+	}
+
 	@ObfuscatedName("ea.b(B)I")
 	public final int method295() {
 		return -this.data[this.pos++] & 0xFF;

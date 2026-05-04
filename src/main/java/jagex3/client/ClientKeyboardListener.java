@@ -20,6 +20,8 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	public static final int[] field3438 = new int[128];
 	@ObfuscatedName("jg.H")
 	public static final int[] field1908 = new int[128];
+	@ObfuscatedName("wh.D")
+	public static final boolean[] field4511 = new boolean[112];
 
 	@ObfuscatedName("pc.b")
 	public static ClientKeyboardListener field3188 = new ClientKeyboardListener();
@@ -81,7 +83,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 			field3858 = Statics.field898;
 			if (field524 < 0) {
 				for (int var1 = 0; var1 < 112; var1++) {
-					Statics.field4511[var1] = false;
+					field4511[var1] = false;
 				}
 				field524 = field2801;
 			} else {
@@ -89,9 +91,9 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 					int var2 = field2059[field2801];
 					field2801 = field2801 + 1 & 0x7F;
 					if (var2 >= 0) {
-						Statics.field4511[var2] = true;
+						field4511[var2] = true;
 					} else {
-						Statics.field4511[~var2] = false;
+						field4511[~var2] = false;
 					}
 				}
 			}

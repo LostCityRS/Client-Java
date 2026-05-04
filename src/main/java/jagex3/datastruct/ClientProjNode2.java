@@ -1,7 +1,7 @@
 package jagex3.datastruct;
 
-import jagex3.dash3d.ClientProj;
 import deob.ObfuscatedName;
+import jagex3.dash3d.ClientProj;
 
 @ObfuscatedName("bh")
 public final class ClientProjNode2 extends Linkable2 {

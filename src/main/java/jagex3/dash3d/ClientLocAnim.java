@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.Client;
 import jagex3.client.ClientBuild;
 import jagex3.config.LocType;
@@ -76,7 +75,7 @@ public final class ClientLocAnim extends ModelSource {
 	@ObfuscatedName("hd.b(I)Lnc;")
 	public ModelSource method536() {
 		boolean var1 = World.field2721 != ClientBuild.field1137;
-		LocType var2 = LocType.method1321(this.field1472);
+		LocType var2 = LocType.list(this.field1472);
 		if (var2.field2770 != null) {
 			var2 = var2.method998();
 		}
@@ -153,7 +152,7 @@ public final class ClientLocAnim extends ModelSource {
 					if (var3 <= this.field1459.field1990[this.field1474]) {
 						break label56;
 					}
-					Statics.method433(false, arg1, this.field1474, arg0, this.field1459);
+					Client.method433(false, arg1, this.field1474, arg0, this.field1459);
 					var3 -= this.field1459.field1990[this.field1474];
 					this.field1474++;
 				} while (this.field1459.field1965.length > this.field1474);

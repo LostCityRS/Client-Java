@@ -1,31 +1,23 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
-import jagex3.sound.Patch;
 import jagex3.datastruct.*;
-import jagex3.graphics.Pix32;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
+import jagex3.sound.Patch;
 import jagex3.util.IntUtil;
 
 @ObfuscatedName("qb")
 public final class StructType extends Linkable2 {
 
-	@ObfuscatedName("qb.R")
-	public static int field3545 = 0;
-
-	@ObfuscatedName("qb.S")
-	public static boolean field3546 = true;
+	@ObfuscatedName("pe.t")
+	public static final LruCache field3228 = new LruCache(64);
 	@ObfuscatedName("d.X")
 	public static Js5 field584;
 
 	@ObfuscatedName("qb.L")
 	public HashTable field3539;
-
-	@ObfuscatedName("qb.P")
-	public static Pix32[] field3543;
 
 	@ObfuscatedName("qb.a(ZLnb;I)Lsh;")
 	public static Patch method1266(Js5 arg0, int arg1) {
@@ -35,7 +27,7 @@ public final class StructType extends Linkable2 {
 
 	@ObfuscatedName("bj.b(BI)Lqb;")
 	public static StructType method106(int arg0) {
-		StructType var1 = (StructType) Statics.field3228.method665((long) arg0);
+		StructType var1 = (StructType) field3228.method665((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -44,7 +36,7 @@ public final class StructType extends Linkable2 {
 		if (var2 != null) {
 			var3.method1264(new Packet(var2));
 		}
-		Statics.field3228.method663((long) arg0, var3);
+		field3228.method663((long) arg0, var3);
 		return var3;
 	}
 

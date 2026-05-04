@@ -2,9 +2,8 @@ package jagex3.io;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.client.ClientBuild;
 import jagex3.client.GameShell;
-import jagex3.config.NpcType;
-import jagex3.config.SeqType;
 import jagex3.jstring.JagString;
 import jagex3.util.MonotonicTime;
 
@@ -12,9 +11,6 @@ import java.util.Date;
 
 @ObfuscatedName("pb")
 public final class BZip2State {
-
-	@ObfuscatedName("pb.a")
-	public static int field3145 = 20;
 
 	@ObfuscatedName("pb.c")
 	public final int[][] field3147 = new int[6][258];
@@ -134,8 +130,8 @@ public final class BZip2State {
 
 	@ObfuscatedName("pb.a(IIIII)V")
 	public static void method1137(int arg0, int arg1, int arg2, int arg3) {
-		NpcType.field2330 = SeqType.field1988 * arg2 / arg0;
-		Statics.field3033 = Statics.field760 * arg1 / arg3;
+		Statics.field2330 = ClientBuild.field1988 * arg2 / arg0;
+		Statics.field3033 = ClientBuild.field760 * arg1 / arg3;
 		Statics.field594 = -1;
 		Statics.field3659 = -1;
 		Statics.method1604();

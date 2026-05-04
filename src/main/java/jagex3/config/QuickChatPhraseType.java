@@ -63,6 +63,17 @@ public final class QuickChatPhraseType extends Linkable2 {
 		field633 = arg0;
 	}
 
+	@ObfuscatedName("nb.a(JII[I)Li;")
+	public static JagString method952(long arg0, int arg1, int[] arg2) {
+		if (field4527 != null) {
+			JagString var4 = field4527.method1126(arg2, arg1, arg0);
+			if (var4 != null) {
+				return var4;
+			}
+		}
+		return arg1 == 5 ? JagString.method1375(arg0).method614() : Statics.method1556(arg0);
+	}
+
 	@ObfuscatedName("si.a(BI)I")
 	public int method1405(int arg0) {
 		return this.field3905 == null || arg0 < 0 || arg0 > this.field3905.length ? -1 : this.field3905[arg0];
@@ -104,7 +115,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 		if (this.field3905 != null) {
 			for (int var3 = 0; var3 < this.field3905.length; var3++) {
 				var2.method616(this.field3901[var3]);
-				var2.method616(Statics.method952(arg0.method300(Statics.field1420[this.field3905[var3]]), this.field3905[var3], this.field3909[var3]));
+				var2.method616(method952(arg0.method300(Statics.field1420[this.field3905[var3]]), this.field3905[var3], this.field3909[var3]));
 			}
 		}
 		var2.method616(this.field3901[this.field3901.length - 1]);

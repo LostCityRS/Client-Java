@@ -1,8 +1,8 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
+import jagex3.client.GameShell;
 import jagex3.client.SignLink;
 import jagex3.util.ThreadSleep;
 
@@ -33,7 +33,7 @@ public final class AudioThread implements Runnable {
 					}
 				}
 				ThreadSleep.sleepPrecise(10L);
-				Statics.method1006(null, this.field3109);
+				GameShell.method1006(null, this.field3109);
 			}
 		} catch (Exception var9) {
 			JagException.report(null, var9);

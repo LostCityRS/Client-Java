@@ -2,8 +2,8 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.dash3d.ModelSourceCache;
 import jagex3.dash3d.ModelLit;
+import jagex3.dash3d.ModelSourceCache;
 import jagex3.dash3d.ModelUnlit;
 import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
@@ -26,9 +26,6 @@ public final class SpotType extends Linkable2 {
 
 	@ObfuscatedName("cj.bb")
 	public int field550 = 0;
-
-	@ObfuscatedName("cj.N")
-	public static int field536 = 0;
 
 	@ObfuscatedName("cj.L")
 	public int field534 = 128;

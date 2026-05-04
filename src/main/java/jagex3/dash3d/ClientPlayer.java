@@ -1,6 +1,7 @@
 package jagex3.dash3d;
 
-import deob.*;
+import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.client.Client;
 import jagex3.config.ObjType;
 import jagex3.config.SeqType;

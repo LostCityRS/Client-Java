@@ -1,7 +1,7 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
+import jagex3.util.MathUtil;
 
 @ObfuscatedName("jb")
 public final class Floor {
@@ -248,7 +248,7 @@ public final class Floor {
 			field1823[var3] = this.field1827[var3];
 		}
 		int var4 = field1824[this.field1821 - 1];
-		int var5 = Statics.bitsRequired(var4 - 1);
+		int var5 = MathUtil.bitsRequired(var4 - 1);
 		field1826[0] = JagVorbis.readBits(var5);
 		field1826[1] = JagVorbis.readBits(var5);
 		int var6 = 2;

@@ -2,18 +2,14 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.dash3d.ModelCacheLit;
-import jagex3.dash3d.ModelSourceCache;
-import jagex3.client.Client;
 import jagex3.constants.Text;
-import jagex3.dash3d.ModelSource;
-import jagex3.dash3d.ModelUnlit;
-import jagex3.dash3d.SoftwareModelLit;
+import jagex3.dash3d.*;
 import jagex3.datastruct.*;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
 import jagex3.util.IntUtil;
+import jagex3.var.VarCache;
 
 @ObfuscatedName("nf")
 public final class LocType extends Linkable2 {
@@ -184,7 +180,7 @@ public final class LocType extends Linkable2 {
 	public short[] field2814;
 
 	@ObfuscatedName("re.a(II)Lnf;")
-	public static LocType method1321(int arg0) {
+	public static LocType list(int arg0) {
 		LocType var1 = (LocType) field3558.method665((long) arg0);
 		if (var1 != null) {
 			return var1;
@@ -265,7 +261,7 @@ public final class LocType extends Linkable2 {
 		}
 		for (int var1 = 0; var1 < this.field2770.length; var1++) {
 			if (this.field2770[var1] != -1) {
-				LocType var2 = method1321(this.field2770[var1]);
+				LocType var2 = list(this.field2770[var1]);
 				if (var2.field2806 != -1 || var2.field2815 != null) {
 					return true;
 				}
@@ -335,15 +331,15 @@ public final class LocType extends Linkable2 {
 	public LocType method998() {
 		int var1 = -1;
 		if (this.field2767 != -1) {
-			var1 = Statics.method930(this.field2767);
+			var1 = VarCache.method930(this.field2767);
 		} else if (this.field2818 != -1) {
-			var1 = Client.field2050[this.field2818];
+			var1 = VarCache.field2050[this.field2818];
 		}
 		if (var1 < 0 || var1 >= this.field2770.length - 1 || this.field2770[var1] == -1) {
 			int var2 = this.field2770[this.field2770.length - 1];
-			return var2 == -1 ? null : method1321(var2);
+			return var2 == -1 ? null : list(var2);
 		} else {
-			return method1321(this.field2770[var1]);
+			return list(this.field2770[var1]);
 		}
 	}
 

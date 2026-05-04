@@ -1,17 +1,11 @@
 package jagex3.midi2;
 
 import deob.ObfuscatedName;
-import jagex3.sound.EnvelopeSet;
-import jagex3.sound.WaveCache;
-import jagex3.sound.Patch;
 import jagex3.config.StructType;
-import jagex3.datastruct.HashTable;
 import jagex3.datastruct.ByteArrayNode;
+import jagex3.datastruct.HashTable;
 import jagex3.js5.Js5;
-import jagex3.sound.PcmPlayer;
-import jagex3.sound.PcmStream;
-import jagex3.sound.Wave;
-import jagex3.sound.WaveStream;
+import jagex3.sound.*;
 
 @ObfuscatedName("pg")
 public final class MidiPlayer extends PcmStream {

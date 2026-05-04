@@ -2,8 +2,8 @@ package jagex3.js5;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.datastruct.IntHashTable;
 import jagex3.callstack.JagException;
+import jagex3.datastruct.IntHashTable;
 import jagex3.io.BZip2;
 import jagex3.io.ByteArrayWrapper;
 import jagex3.io.Packet;
@@ -163,7 +163,7 @@ public abstract class Js5 {
 				}
 			}
 		}
-		return Statics.method457(false, this.field2700[arg1][arg0]);
+		return ByteArrayWrapper.method457(false, this.field2700[arg1][arg0]);
 	}
 
 	@ObfuscatedName("nb.c(II)[I")
@@ -197,7 +197,7 @@ public abstract class Js5 {
 				}
 			}
 		}
-		byte[] var6 = Statics.method457(false, this.field2700[arg1][arg2]);
+		byte[] var6 = ByteArrayWrapper.method457(false, this.field2700[arg1][arg2]);
 		if (this.field2704) {
 			this.field2700[arg1][arg2] = null;
 			if (this.field2674[arg1] == 1) {
@@ -255,9 +255,9 @@ public abstract class Js5 {
 			}
 			byte[] var9;
 			if (arg1 == null || arg1[0] == 0 && arg1[1] == 0 && arg1[2] == 0 && arg1[3] == 0) {
-				var9 = Statics.method457(false, this.field2706[arg0]);
+				var9 = ByteArrayWrapper.method457(false, this.field2706[arg0]);
 			} else {
-				var9 = Statics.method457(true, this.field2706[arg0]);
+				var9 = ByteArrayWrapper.method457(true, this.field2706[arg0]);
 				Packet var10 = new Packet(var9);
 				var10.method322(var10.data.length, arg1);
 			}
@@ -265,7 +265,7 @@ public abstract class Js5 {
 			try {
 				var11 = method119(var9);
 			} catch (RuntimeException var30) {
-				throw JagException.method1076(var30, "T3 - " + (arg1 != null) + "," + arg0 + "," + var9.length + "," + Statics.method541(var9, var9.length) + "," + Statics.method541(var9, var9.length - 2) + "," + this.field2690[arg0] + "," + this.crc);
+				throw JagException.method1076(var30, "T3 - " + (arg1 != null) + "," + arg0 + "," + var9.length + "," + Packet.method541(var9, var9.length) + "," + Packet.method541(var9, var9.length - 2) + "," + this.field2690[arg0] + "," + this.crc);
 			}
 			if (this.field2677) {
 				this.field2706[arg0] = null;
@@ -463,7 +463,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a([BZ)V")
 	public final void method967(byte[] arg0) {
-		this.crc = Statics.method541(arg0, arg0.length);
+		this.crc = Packet.method541(arg0, arg0.length);
 		Packet var2 = new Packet(method119(arg0));
 		int var3 = var2.g1();
 		if (var3 != 5 && var3 != 6) {

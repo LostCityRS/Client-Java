@@ -6,7 +6,6 @@ import jagex3.callstack.JagException;
 import jagex3.config.IfType;
 import jagex3.config.ServerActive;
 import jagex3.graphics.PixMap;
-import jagex3.io.BZip2State;
 import jagex3.io.BufferedRandomAccessFile;
 import jagex3.io.Packet;
 import jagex3.jstring.JagString;
@@ -17,10 +16,7 @@ import jagex3.util.Timer;
 import java.applet.Applet;
 import java.applet.AppletContext;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -73,6 +69,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public static volatile boolean field971 = true;
 	@ObfuscatedName("jf.hb")
 	public static BufferedRandomAccessFile field1892;
+	@ObfuscatedName("pb.a")
+	public static int field3145 = 20;
 
 	@ObfuscatedName("hj.y")
 	public boolean field1582 = false;
@@ -209,6 +207,24 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			}
 		}
 		arg0.pos += 24;
+	}
+
+	@ObfuscatedName("ng.a(ILjava/lang/Object;Lqg;)V")
+	public static void method1006(Object arg0, SignLink arg1) {
+		if (arg1.field3592 == null) {
+			return;
+		}
+		for (int var2 = 0; var2 < 50 && arg1.field3592.peekEvent() != null; var2++) {
+			ThreadSleep.sleepPrecise(1L);
+		}
+		if (arg0 != null) {
+			arg1.field3592.postEvent(new ActionEvent(arg0, 1001, "dummy"));
+		}
+	}
+
+	@ObfuscatedName("og.c(II)V")
+	public static void method1073(int arg0) {
+		field3145 = 1000 / arg0;
 	}
 
 	@Override
@@ -522,12 +538,12 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			this.method214();
 			field2654 = Timer.method1358();
 			while (Statics.field602 == 0L || Statics.field602 > MonotonicTime.currentTime()) {
-				field2960 = field2654.method204(Statics.field2442, BZip2State.field3145);
+				field2960 = field2654.method204(Statics.field2442, field3145);
 				for (int var4 = 0; var4 < field2960; var4++) {
 					this.method584();
 				}
 				this.method589();
-				Statics.method1006(canvas, signlink);
+				method1006(canvas, signlink);
 			}
 		} catch (Exception var7) {
 			JagException.report(null, var7);

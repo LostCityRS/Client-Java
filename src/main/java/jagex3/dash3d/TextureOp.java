@@ -1,9 +1,9 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import jagex3.graphics.MonochromeImageCache;
-import jagex3.graphics.ColorImageCache;
 import jagex3.datastruct.Linkable;
+import jagex3.graphics.ColorImageCache;
+import jagex3.graphics.MonochromeImageCache;
 import jagex3.io.Packet;
 
 @ObfuscatedName("c")

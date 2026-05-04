@@ -1,6 +1,7 @@
 package jagex3.client;
 
-import deob.*;
+import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.config.*;
 import jagex3.constants.Text;
@@ -10,6 +11,8 @@ import jagex3.graphics.PixfontGeneric;
 import jagex3.graphics.SoftwarePixFont;
 import jagex3.io.Packet;
 import jagex3.jstring.JagString;
+import jagex3.var.VarCache;
+import jagex3.wordfilter2.WordPack;
 
 import java.util.Date;
 
@@ -19,7 +22,7 @@ public class ScriptRunner {
 		if (arg0 == null) {
 			return false;
 		}
-		for (int var1 = 0; var1 < Statics.field2729; var1++) {
+		for (int var1 = 0; var1 < Client.field2729; var1++) {
 			if (arg0.method624(Statics.field370[var1])) {
 				return true;
 			}
@@ -102,13 +105,13 @@ public class ScriptRunner {
 					}
 					if (var382 == 1) {
 						int var17 = var8[var7];
-						Statics.field1944[var5++] = Client.field2050[var17];
+						Statics.field1944[var5++] = VarCache.field2050[var17];
 						continue;
 					}
 					if (var382 == 2) {
 						int var18 = var8[var7];
 						var5--;
-						Client.field2050[var18] = Statics.field1944[var5];
+						VarCache.field2050[var18] = Statics.field1944[var5];
 						continue;
 					}
 					if (var382 == 3) {
@@ -162,13 +165,13 @@ public class ScriptRunner {
 					}
 					if (var382 == 25) {
 						int var20 = var8[var7];
-						Statics.field1944[var5++] = Statics.method930(var20);
+						Statics.field1944[var5++] = VarCache.method930(var20);
 						continue;
 					}
 					if (var382 == 27) {
 						int var21 = var8[var7];
 						var5--;
-						Statics.method755(var21, Statics.field1944[var5]);
+						VarCache.method755(var21, Statics.field1944[var5]);
 						continue;
 					}
 					if (var382 == 31) {
@@ -394,7 +397,7 @@ public class ScriptRunner {
 						var5 -= 2;
 						int var54 = Statics.field1944[var5 + 1];
 						int var55 = Statics.field1944[var5];
-						IfType var56 = Statics.method238(var54, var55);
+						IfType var56 = Client.method238(var54, var55);
 						if (var56 != null && var54 != -1) {
 							Statics.field1944[var5++] = 1;
 							if (var43) {
@@ -1094,7 +1097,7 @@ public class ScriptRunner {
 						if (var382 == 2702) {
 							var5--;
 							int var353 = Statics.field1944[var5];
-							SubInterface var354 = (SubInterface) Statics.field2395.method1049((long) var353);
+							SubInterface var354 = (SubInterface) Client.field2395.method1049((long) var353);
 							if (var354 == null) {
 								Statics.field1944[var5++] = 0;
 							} else {
@@ -1123,7 +1126,7 @@ public class ScriptRunner {
 							var5 -= 2;
 							int var358 = Statics.field1944[var5];
 							int var359 = Statics.field1944[var5 + 1];
-							SubInterface var360 = (SubInterface) Statics.field2395.method1049((long) var358);
+							SubInterface var360 = (SubInterface) Client.field2395.method1049((long) var358);
 							if (var360 != null && var360.field3229 == var359) {
 								Statics.field1944[var5++] = 1;
 								continue;
@@ -1170,7 +1173,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var382 == 3103) {
-							Statics.method174();
+							Client.method174();
 							continue;
 						}
 						if (var382 == 3104) {
@@ -1234,7 +1237,7 @@ public class ScriptRunner {
 					} else if (var382 < 3300) {
 						if (var382 == 3200) {
 							var5 -= 3;
-							Statics.method668(Statics.field1944[var5 + 1], Statics.field1944[var5 + 2], Statics.field1944[var5]);
+							Client.method668(Statics.field1944[var5 + 1], Statics.field1944[var5 + 2], Statics.field1944[var5]);
 							continue;
 						}
 						if (var382 == 3201) {
@@ -1244,7 +1247,7 @@ public class ScriptRunner {
 						}
 						if (var382 == 3202) {
 							var5 -= 2;
-							Statics.method23(Statics.field1944[var5], Statics.field1944[var5 + 1]);
+							TitleScreen.method23(Statics.field1944[var5], Statics.field1944[var5 + 1]);
 							continue;
 						}
 					} else if (var382 < 3400) {
@@ -1449,14 +1452,14 @@ public class ScriptRunner {
 							} else if (Statics.field2078 == 1) {
 								Statics.field1944[var5++] = -1;
 							} else {
-								Statics.field1944[var5++] = Statics.field2729;
+								Statics.field1944[var5++] = Client.field2729;
 							}
 							continue;
 						}
 						if (var382 == 3601) {
 							var5--;
 							int var79 = Statics.field1944[var5];
-							if (Statics.field2078 == 2 && var79 < Statics.field2729) {
+							if (Statics.field2078 == 2 && var79 < Client.field2729) {
 								Statics.field3330[var6++] = Statics.field370[var79];
 								continue;
 							}
@@ -1466,7 +1469,7 @@ public class ScriptRunner {
 						if (var382 == 3602) {
 							var5--;
 							int var80 = Statics.field1944[var5];
-							if (Statics.field2078 == 2 && var80 < Statics.field2729) {
+							if (Statics.field2078 == 2 && var80 < Client.field2729) {
 								Statics.field1944[var5++] = Statics.field3092[var80];
 								continue;
 							}
@@ -1476,7 +1479,7 @@ public class ScriptRunner {
 						if (var382 == 3603) {
 							var5--;
 							int var81 = Statics.field1944[var5];
-							if (Statics.field2078 == 2 && var81 < Statics.field2729) {
+							if (Statics.field2078 == 2 && var81 < Client.field2729) {
 								Statics.field1944[var5++] = Statics.field845[var81];
 								continue;
 							}
@@ -1527,7 +1530,7 @@ public class ScriptRunner {
 						if (var382 == 3610) {
 							var5--;
 							int var89 = Statics.field1944[var5];
-							if (Statics.field2078 == 2 && Statics.field2729 > var89) {
+							if (Statics.field2078 == 2 && Client.field2729 > var89) {
 								Statics.field3330[var6++] = Statics.field3238[var89];
 								continue;
 							}
@@ -1628,7 +1631,7 @@ public class ScriptRunner {
 							if (var96.method619(Statics.field3554) || var96.method619(Statics.field3141)) {
 								var96 = var96.method635(7);
 							}
-							Statics.field1944[var5++] = Statics.method1130(var96) ? 1 : 0;
+							Statics.field1944[var5++] = Client.method1130(var96) ? 1 : 0;
 							continue;
 						}
 						if (var382 == 3624) {
@@ -1662,7 +1665,7 @@ public class ScriptRunner {
 						if (var382 == 3627) {
 							var5--;
 							int var99 = Statics.field1944[var5];
-							if (Statics.field2078 == 2 && var99 >= 0 && var99 < Statics.field2729) {
+							if (Statics.field2078 == 2 && var99 >= 0 && var99 < Client.field2729) {
 								Statics.field1944[var5++] = Statics.field1120[var99] ? 1 : 0;
 								continue;
 							}
@@ -1675,7 +1678,7 @@ public class ScriptRunner {
 							if (var100.method619(Statics.field3554) || var100.method619(Statics.field3141)) {
 								var100 = var100.method635(7);
 							}
-							Statics.field1944[var5++] = Statics.method823(var100);
+							Statics.field1944[var5++] = Client.method823(var100);
 							continue;
 						}
 					} else if (var382 < 4000) {
@@ -1910,7 +1913,7 @@ public class ScriptRunner {
 							JagString var258 = Statics.field3330[var6];
 							var5--;
 							int var259 = Statics.field1944[var5];
-							Statics.field3330[var6++] = JagString.join(new JagString[]{var258, Statics.method375(var259)});
+							Statics.field3330[var6++] = JagString.join(new JagString[]{var258, JagString.method375(var259)});
 							continue;
 						}
 						if (var382 == 4103) {
@@ -1960,7 +1963,7 @@ public class ScriptRunner {
 							int var272 = Statics.field1944[var5 + 1];
 							byte[] var273 = Client.fontmetrics.getFile(0, var272);
 							SoftwarePixFont var274 = new SoftwarePixFont(var273);
-							var274.method149(Statics.field587, null);
+							var274.method149(Client.field587, null);
 							Statics.field1944[var5++] = var274.method163(var271, var270);
 							continue;
 						}
@@ -1972,7 +1975,7 @@ public class ScriptRunner {
 							int var277 = Statics.field1944[var5];
 							byte[] var278 = Client.fontmetrics.getFile(0, var276);
 							SoftwarePixFont var279 = new SoftwarePixFont(var278);
-							var279.method149(Statics.field587, null);
+							var279.method149(Client.field587, null);
 							Statics.field1944[var5++] = var279.method156(var275, var277);
 							continue;
 						}
@@ -2020,7 +2023,7 @@ public class ScriptRunner {
 						if (var382 == 4115) {
 							var5--;
 							int var287 = Statics.field1944[var5];
-							Statics.field1944[var5++] = SeqType.method746(var287) ? 1 : 0;
+							Statics.field1944[var5++] = Statics.method746(var287) ? 1 : 0;
 							continue;
 						}
 						if (var382 == 4116) {
@@ -2398,7 +2401,7 @@ public class ScriptRunner {
 									int var194 = Client.out.pos;
 									Client.out.p1(var191);
 									Client.out.p1(var193);
-									Statics.method1220(Client.out, var189);
+									WordPack.method1220(Client.out, var189);
 									Client.out.method341(Client.out.pos - var194);
 									continue;
 								}
@@ -2411,7 +2414,7 @@ public class ScriptRunner {
 										Client.out.p1(0);
 										int var197 = Client.out.pos;
 										Client.out.p8(var195.toUserhash());
-										Statics.method1220(Client.out, var196);
+										WordPack.method1220(Client.out, var196);
 										Client.out.method341(Client.out.pos - var197);
 									}
 									continue;
@@ -2656,7 +2659,7 @@ public class ScriptRunner {
 								}
 							} else if (var382 < 5200) {
 								if (var382 == 5100) {
-									if (Statics.field4511[86]) {
+									if (ClientKeyboardListener.field4511[86]) {
 										Statics.field1944[var5++] = 1;
 									} else {
 										Statics.field1944[var5++] = 0;
@@ -2664,7 +2667,7 @@ public class ScriptRunner {
 									continue;
 								}
 								if (var382 == 5101) {
-									if (Statics.field4511[82]) {
+									if (ClientKeyboardListener.field4511[82]) {
 										Statics.field1944[var5++] = 1;
 									} else {
 										Statics.field1944[var5++] = 0;
@@ -2672,7 +2675,7 @@ public class ScriptRunner {
 									continue;
 								}
 								if (var382 == 5102) {
-									if (Statics.field4511[81]) {
+									if (ClientKeyboardListener.field4511[81]) {
 										Statics.field1944[var5++] = 1;
 									} else {
 										Statics.field1944[var5++] = 0;
@@ -2756,9 +2759,9 @@ public class ScriptRunner {
 						int var252 = Statics.field1944[var5 + 1];
 						ParamType var253 = ParamType.method1467(var252);
 						if (var253.method17()) {
-							Statics.field3330[var6++] = LocType.method1321(var251).method999(var253.field57, var252);
+							Statics.field3330[var6++] = LocType.list(var251).method999(var253.field57, var252);
 						} else {
-							Statics.field1944[var5++] = LocType.method1321(var251).method995(var253.field53, var252);
+							Statics.field1944[var5++] = LocType.list(var251).method995(var253.field53, var252);
 						}
 						continue;
 					}
@@ -2786,7 +2789,7 @@ public class ScriptRunner {
 						var5 -= 2;
 						int var363 = Statics.field1944[var5];
 						int var364 = Statics.field1944[var5 + 1];
-						var361.field3502 = Statics.method238(var364, var363);
+						var361.field3502 = Client.method238(var364, var363);
 						continue;
 					}
 					if (var382 == 1302) {

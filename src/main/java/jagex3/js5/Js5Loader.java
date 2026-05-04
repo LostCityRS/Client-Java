@@ -42,7 +42,7 @@ public final class Js5Loader extends Js5 {
 		this.field342 = arg5;
 		this.field334 = arg2;
 		this.field333 = arg0;
-		Statics.method814(this.field334, this);
+		Js5Net.method814(this.field334, this);
 	}
 
 	@ObfuscatedName("bj.a(I[BZIZ)V")
@@ -75,9 +75,9 @@ public final class Js5Loader extends Js5 {
 		this.field349 = arg0;
 		this.field347 = arg1;
 		if (this.field340 == null) {
-			Statics.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
+			Js5Net.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
 		} else {
-			Statics.method540(this, this.field334, this.field340);
+			Js5NetThread.method540(this, this.field334, this.field340);
 		}
 	}
 
@@ -85,7 +85,7 @@ public final class Js5Loader extends Js5 {
 	@Override
 	public void method110(int arg0) {
 		if (this.method968(arg0)) {
-			Statics.method426(this.field334, arg0);
+			Js5Net.method426(this.field334, arg0);
 		}
 	}
 
@@ -98,7 +98,7 @@ public final class Js5Loader extends Js5 {
 			if (arg0 == null || arg0.length <= 2) {
 				this.field330[arg1] = false;
 				if (this.field342 || arg3) {
-					Statics.method1312(this, arg1, this.field334, (byte) 2, super.field2690[arg1], arg3);
+					Js5Net.method1312(this, arg1, this.field334, (byte) 2, super.field2690[arg1], arg3);
 				}
 				return;
 			}
@@ -109,7 +109,7 @@ public final class Js5Loader extends Js5 {
 			if (var5 != super.field2690[arg1] || super.field2668[arg1] != var6) {
 				this.field330[arg1] = false;
 				if (this.field342 || arg3) {
-					Statics.method1312(this, arg1, this.field334, (byte) 2, super.field2690[arg1], arg3);
+					Js5Net.method1312(this, arg1, this.field334, (byte) 2, super.field2690[arg1], arg3);
 				}
 				return;
 			}
@@ -124,26 +124,26 @@ public final class Js5Loader extends Js5 {
 			throw new RuntimeException();
 		}
 		if (arg0 == null) {
-			Statics.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
+			Js5Net.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
 			return;
 		}
 		Statics.field4241.reset();
 		Statics.field4241.update(arg0, 0, arg0.length);
 		int var7 = (int) Statics.field4241.getValue();
 		if (var7 != this.field349) {
-			Statics.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
+			Js5Net.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
 			return;
 		}
 		Packet var8;
 		try {
 			var8 = new Packet(Js5.method119(arg0));
 		} catch (RuntimeException var11) {
-			Statics.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
+			Js5Net.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
 			return;
 		}
 		int var9 = var8.g1();
 		if (var9 != 5 && var9 != 6) {
-			Statics.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
+			Js5Net.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
 			return;
 		}
 		int var10 = 0;
@@ -151,7 +151,7 @@ public final class Js5Loader extends Js5 {
 			var10 = var8.g4();
 		}
 		if (this.field347 != var10) {
-			Statics.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
+			Js5Net.method1312(this, this.field334, 255, (byte) 0, this.field349, true);
 			return;
 		}
 		this.method967(arg0);
@@ -165,9 +165,9 @@ public final class Js5Loader extends Js5 {
 			return;
 		}
 		if (this.field333 == null || this.field330 == null || !this.field330[arg0]) {
-			Statics.method1312(this, arg0, this.field334, (byte) 2, super.field2690[arg0], true);
+			Js5Net.method1312(this, arg0, this.field334, (byte) 2, super.field2690[arg0], true);
 		} else {
-			Statics.method540(this, arg0, this.field333);
+			Js5NetThread.method540(this, arg0, this.field333);
 		}
 	}
 

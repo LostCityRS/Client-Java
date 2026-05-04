@@ -87,6 +87,26 @@ public final class Js5NetThread implements Runnable {
 		method977();
 	}
 
+	@ObfuscatedName("hd.a(Lbj;IILud;)V")
+	public static void method540(Js5Loader arg0, int arg1, DataFile arg2) {
+		byte[] var3 = null;
+		LinkList var4 = requestQueue;
+		synchronized (requestQueue) {
+			for (Js5WorkerRequest var5 = (Js5WorkerRequest) requestQueue.head(); var5 != null; var5 = (Js5WorkerRequest) requestQueue.method1619()) {
+				if (var5.key == (long) arg1 && arg2 == var5.fs && var5.type == 0) {
+					var3 = var5.data;
+					break;
+				}
+			}
+		}
+		if (var3 == null) {
+			byte[] var6 = arg2.readFromFile(arg1);
+			arg0.method111(var6, arg1, arg2, true);
+		} else {
+			arg0.method111(var3, arg1, arg2, true);
+		}
+	}
+
 	@Override
 	public void run() {
 		try {

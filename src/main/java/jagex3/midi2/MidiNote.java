@@ -1,9 +1,9 @@
 package jagex3.midi2;
 
 import deob.ObfuscatedName;
+import jagex3.datastruct.Linkable;
 import jagex3.sound.EnvelopeSet;
 import jagex3.sound.Patch;
-import jagex3.datastruct.Linkable;
 import jagex3.sound.Wave;
 import jagex3.sound.WaveStream;
 

@@ -1,6 +1,7 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
+import jagex3.util.ArrayUtil;
 
 @ObfuscatedName("a")
 public abstract class ByteArrayWrapper {
@@ -23,6 +24,21 @@ public abstract class ByteArrayWrapper {
 			}
 		}
 		return arg0;
+	}
+
+	@ObfuscatedName("g.a(ZLjava/lang/Object;I)[B")
+	public static byte[] method457(boolean arg0, Object arg1) {
+		if (arg1 == null) {
+			return null;
+		} else if (arg1 instanceof byte[]) {
+			byte[] var2 = (byte[]) arg1;
+			return arg0 ? ArrayUtil.method1276(var2) : var2;
+		} else if (arg1 instanceof ByteArrayWrapper) {
+			ByteArrayWrapper var3 = (ByteArrayWrapper) arg1;
+			return var3.method1();
+		} else {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	@ObfuscatedName("a.a(B)[B")

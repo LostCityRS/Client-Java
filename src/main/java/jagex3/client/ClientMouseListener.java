@@ -53,8 +53,6 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	public static volatile long field2091 = 0L;
 	@ObfuscatedName("ph.X")
 	public static int field3327;
-	@ObfuscatedName("ub.ib")
-	public static byte[][][] field4166;
 
 	@ObfuscatedName("k.a(Ljava/awt/Component;I)V")
 	public static void method748(java.awt.Component arg0) {

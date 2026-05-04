@@ -2,16 +2,16 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.dash3d.ModelSourceCache;
-import jagex3.client.Client;
 import jagex3.constants.Text;
 import jagex3.dash3d.ModelLit;
+import jagex3.dash3d.ModelSourceCache;
 import jagex3.dash3d.ModelUnlit;
 import jagex3.datastruct.*;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
 import jagex3.util.IntUtil;
+import jagex3.var.VarCache;
 
 @ObfuscatedName("lf")
 public final class NpcType extends Linkable2 {
@@ -77,9 +77,6 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("lf.wb")
 	public boolean field2357 = true;
 
-	@ObfuscatedName("lf.X")
-	public static int field2332 = 0;
-
 	@ObfuscatedName("lf.Q")
 	public int field2326 = -1;
 
@@ -118,9 +115,6 @@ public final class NpcType extends Linkable2 {
 
 	@ObfuscatedName("lf.E")
 	public int field2314;
-
-	@ObfuscatedName("lf.V")
-	public static int field2330;
 
 	@ObfuscatedName("lf.R")
 	public int[] field2327;
@@ -179,9 +173,9 @@ public final class NpcType extends Linkable2 {
 		}
 		int var1 = -1;
 		if (this.field2353 != -1) {
-			var1 = Statics.method930(this.field2353);
+			var1 = VarCache.method930(this.field2353);
 		} else if (this.field2365 != -1) {
-			var1 = Client.field2050[this.field2365];
+			var1 = VarCache.field2050[this.field2365];
 		}
 		if (var1 < 0 || var1 >= this.field2327.length - 1 || this.field2327[var1] == -1) {
 			int var2 = this.field2327[this.field2327.length - 1];
@@ -368,9 +362,9 @@ public final class NpcType extends Linkable2 {
 	public NpcType method862() {
 		int var1 = -1;
 		if (this.field2353 != -1) {
-			var1 = Statics.method930(this.field2353);
+			var1 = VarCache.method930(this.field2353);
 		} else if (this.field2365 != -1) {
-			var1 = Client.field2050[this.field2365];
+			var1 = VarCache.field2050[this.field2365];
 		}
 		if (var1 < 0 || this.field2327.length - 1 <= var1 || this.field2327[var1] == -1) {
 			int var2 = this.field2327[this.field2327.length - 1];

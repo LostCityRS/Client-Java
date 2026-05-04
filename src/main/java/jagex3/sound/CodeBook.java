@@ -2,6 +2,7 @@ package jagex3.sound;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.util.MathUtil;
 
 @ObfuscatedName("bg")
 public final class CodeBook {
@@ -34,7 +35,7 @@ public final class CodeBook {
 			int var2 = 0;
 			int var3 = JagVorbis.readBits(5) + 1;
 			while (var2 < this.field309) {
-				int var4 = JagVorbis.readBits(Statics.bitsRequired(this.field309 - var2));
+				int var4 = JagVorbis.readBits(MathUtil.bitsRequired(this.field309 - var2));
 				for (int var5 = 0; var5 < var4; var5++) {
 					this.field307[var2++] = var3;
 				}

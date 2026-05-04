@@ -5,25 +5,22 @@ import jagex3.config.*;
 import jagex3.constants.Text;
 import jagex3.dash3d.*;
 import jagex3.datastruct.*;
-import jagex3.graphics.*;
-import jagex3.io.*;
-import jagex3.js5.*;
+import jagex3.graphics.Pix2D;
+import jagex3.graphics.Pix32;
+import jagex3.graphics.SoftwarePix32;
+import jagex3.io.GZip;
+import jagex3.io.Packet;
+import jagex3.js5.Js5;
+import jagex3.js5.Js5Net;
 import jagex3.jstring.JagString;
-import jagex3.midi2.MidiManager;
-import jagex3.reflectionchecker.ReflectionCheck;
-import jagex3.sound.*;
+import jagex3.sound.AudioThread;
+import jagex3.sound.PcmStream;
 import jagex3.util.ArrayUtil;
-import jagex3.util.ThreadSleep;
-import jagex3.wordfilter2.Huffman;
+import jagex3.wordfilter2.WordPack;
 import jagex3.worldmap.WorldMapFont;
 import jagex3.worldmap.WorldMapLabel;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.TimeZone;
@@ -50,8 +47,6 @@ public class Statics {
 	public static final JagString field472 = JagString.wrap("<img=1>");
 	@ObfuscatedName("ag.f")
 	public static final JagString field120 = JagString.wrap("<col=ffff00>");
-	@ObfuscatedName("ag.b")
-	public static final int[] field116 = new int[50];
 	@ObfuscatedName("tb.A")
 	public static final JagString field3982 = JagString.wrap("(Y<)4col>");
 	@ObfuscatedName("vd.c")
@@ -72,8 +67,6 @@ public class Statics {
 	public static final short[][] field4062 = new short[][] { { 6798, 107, 10283, 16, 4797, 7744, 5799, 4634, -31839, 22433, 2983, -11343, 8, 5281, 10438, 3650, -27322, -21845, 200, 571, 908, 21830, 28946, -15701, -14010 }, { 8741, 12, -1506, -22374, 7735, 8404, 1701, -27106, 24094, 10153, -8915, 4783, 1341, 16578, -30533, 25239, 8, 5281, 10438, 3650, -27322, -21845, 200, 571, 908, 21830, 28946, -15701, -14010 }, { 25238, 8742, 12, -1506, -22374, 7735, 8404, 1701, -27106, 24094, 10153, -8915, 4783, 1341, 16578, -30533, 8, 5281, 10438, 3650, -27322, -21845, 200, 571, 908, 21830, 28946, -15701, -14010 }, { 4626, 11146, 6439, 12, 4758, 10270 }, { 4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574 } };
 	@ObfuscatedName("tj.l")
 	public static final int[] field4066 = new int[25];
-	@ObfuscatedName("fb.mb")
-	public static final JagString field1103 = JagString.wrap("::rect_debug");
 	@ObfuscatedName("ij.N")
 	public static final int[] field1789 = new int[] { 160, 192, 80, 96, 0, 144, 80, 48, 160 };
 	@ObfuscatedName("mc.e")
@@ -112,8 +105,6 @@ public class Statics {
 	public static final JagString field710 = JagString.wrap("Null");
 	@ObfuscatedName("b.o")
 	public static final JagString field182 = JagString.wrap("<col=00ff00>");
-	@ObfuscatedName("ba.n")
-	public static final int[] field198 = new int[] { 1, 0, -1, 0 };
 	@ObfuscatedName("bc.c")
 	public static final int[] field224 = new int[] { 0, 0, 0, 0, 8, 0, -1, 0, 0, 0, 2, 3, -2, 0, 0, 0, -1, -2, 0, -2, 0, -2, 24, 0, 0, 7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5, -2, 2, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 8, -1, 0, 1, 0, 0, 0, 6, 0, -1, 2, 0, 10, 0, -2, 0, 0, 0, 0, 1, 0, 3, 0, 2, 5, 0, 0, 0, 0, 0, 0, 6, 0, 0, 5, 4, -1, 0, 0, 0, 0, 0, 0, 20, 0, -2, 0, 0, 5, 3, 0, -2, -1, 0, 0, 10, 0, 0, 15, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, -2, 7, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 12, 1, 0, 5, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 0, 0, 0, 0, 0, 0, 0, 4, -1, 6, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 2, 0, -2, -1, -2, 4, 0, 5, 6, 0, 0, 0, 0, 4, 3, 0, 4, 0, 0, -1, 6, -1, 0, 0, 0, 0, 0, 0, 0, 9, -2, 0, 0, 0, 0, 0, 6, 6, 6, 6, 0, 0, 0, 0, 0, -2, 7, 0, 7, -1, 0, -1, 0, 3, 0, 8, 0, 2, 4, 4, 8, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0 };
 	@ObfuscatedName("bd.l")
@@ -148,8 +139,6 @@ public class Statics {
 	public static final JagString field1214 = JagString.wrap("<)4col>");
 	@ObfuscatedName("cf.l")
 	public static final JagString field488 = Text.field491;
-	@ObfuscatedName("vi.c")
-	public static final int[] field4427 = new int[] { 16, 32, 64, 128 };
 	@ObfuscatedName("vi.h")
 	public static final int field4432 = 2301979;
 	@ObfuscatedName("fc.h")
@@ -166,8 +155,6 @@ public class Statics {
 	public static final JagString field3563 = JagString.wrap("Clientscript error )2 check log for details");
 	@ObfuscatedName("qe.h")
 	public static final int[] field3562 = new int[25];
-	@ObfuscatedName("nc.m")
-	public static final int[] field2726 = new int[50];
 	@ObfuscatedName("e.Z")
 	public static final LinkList field783 = new LinkList();
 	@ObfuscatedName("ff.X")
@@ -230,18 +217,12 @@ public class Statics {
 	public static final JagString[] field658 = new JagString[] {field645, field642, field643, field652, field656, field661, field624, field632, field653, field640, field659, field628};
 	@ObfuscatedName("uh.M")
 	public static final CRC32 field4241 = new CRC32();
-	@ObfuscatedName("uh.U")
-	public static final JagString field4249 = JagString.wrap("::fps ");
-	@ObfuscatedName("bj.qb")
-	public static final JagString field344 = JagString.wrap("::errortest");
 	@ObfuscatedName("bj.Cb")
 	public static final JagString field356 = JagString.wrap("(U0a )2 via: ");
 	@ObfuscatedName("bj.zb")
 	public static final Calendar field353 = Calendar.getInstance();
 	@ObfuscatedName("c.E")
 	public static final JagString[] field370 = new JagString[200];
-	@ObfuscatedName("pi.V")
-	public static final JagString field3337 = JagString.wrap("::noclip");
 	@ObfuscatedName("pi.S")
 	public static final JagString field3334 = JagString.wrap(":clan:");
 	@ObfuscatedName("md.U")
@@ -252,8 +233,6 @@ public class Statics {
 	public static final int[] field4150 = new int[] { 2, 0, 0, 2, 0, 0, 0, 4, 4 };
 	@ObfuscatedName("hc.Y")
 	public static final ClientGosubFrame[] field1446 = new ClientGosubFrame[50];
-	@ObfuscatedName("dj.Rb")
-	public static final JagString field751 = JagString.wrap("::autoshadow on");
 	@ObfuscatedName("hb.S")
 	public static final JagString field1426 = JagString.wrap("null");
 	@ObfuscatedName("jf.U")
@@ -278,18 +257,12 @@ public class Statics {
 	public static final JagString field591 = JagString.wrap("(R");
 	@ObfuscatedName("d.U")
 	public static final JagString field581 = JagString.wrap(" )2> <col=ff9040>");
-	@ObfuscatedName("d.W")
-	public static final JagString field583 = JagString.wrap("::fpsoff");
-	@ObfuscatedName("aj.V")
-	public static final JagString field156 = JagString.wrap("::clientdrop");
 	@ObfuscatedName("fd.W")
 	public static final ModelUnlit[] field1127 = new ModelUnlit[4];
 	@ObfuscatedName("pd.Q")
 	public static final long[] field3203 = new long[100];
 	@ObfuscatedName("mh.V")
 	public static final int[] field2577 = new int[1000];
-	@ObfuscatedName("a.f")
-	public static final JagString field6 = JagString.wrap("::autoshadow off");
 	@ObfuscatedName("a.g")
 	public static final JagString field7 = JagString.wrap("mapfunction");
 	@ObfuscatedName("ab.a")
@@ -308,8 +281,6 @@ public class Statics {
 	public static final LruCache field388 = new LruCache(16);
 	@ObfuscatedName("ca.i")
 	public static final short[] field390 = new short[] { 30, 58, 29, 45, 37, 16, 1, 50 };
-	@ObfuscatedName("cb.b")
-	public static final int[] field397 = new int[50];
 	@ObfuscatedName("cb.d")
 	public static final JagString field399 = JagString.wrap("<col=ffff00>");
 	@ObfuscatedName("cb.g")
@@ -348,8 +319,6 @@ public class Statics {
 	public static final JagString field1355 = Text.field1356;
 	@ObfuscatedName("cj.eb")
 	public static final JagString field553 = JagString.wrap("<col=40ff00>");
-	@ObfuscatedName("cj.cb")
-	public static final int[] field551 = new int[] { -1, -1, 1, 1 };
 	@ObfuscatedName("ui.E")
 	public static final JagString field4251 = JagString.wrap("cross");
 	@ObfuscatedName("ui.P")
@@ -358,8 +327,6 @@ public class Statics {
 	public static final JagString field4265 = JagString.wrap("cookieprefix");
 	@ObfuscatedName("kf.e")
 	public static final JagString field2075 = JagString.wrap("mapdots");
-	@ObfuscatedName("kf.p")
-	public static final long[] field2086 = new long[200];
 	@ObfuscatedName("qa.h")
 	public static final JagString field3526 = JagString.wrap(" )2> <col=00ffff>");
 	@ObfuscatedName("ue.p")
@@ -392,8 +359,6 @@ public class Statics {
 	public static final GZip gzip = new GZip();
 	@ObfuscatedName("ma.R")
 	public static final JagString field2462 = JagString.wrap("<col=00ff80>");
-	@ObfuscatedName("ta.X")
-	public static final int[] field3949 = new int[] { 1, 2, 4, 8 };
 	@ObfuscatedName("lh.V")
 	public static final JagString field2400 = JagString.wrap(":assist:");
 	@ObfuscatedName("vc.eb")
@@ -418,8 +383,6 @@ public class Statics {
 	public static final JagString field1083 = Text.field1078;
 	@ObfuscatedName("ob.j")
 	public static final JagString field2973 = JagString.wrap("huffman");
-	@ObfuscatedName("jc.H")
-	public static final int[] field1832 = new int[32];
 	@ObfuscatedName("jc.M")
 	public static final JagString field1837 = Text.field1839;
 	@ObfuscatedName("eh.d")
@@ -474,16 +437,10 @@ public class Statics {
 	public static final JagString field82 = JagString.wrap(" GMT");
 	@ObfuscatedName("vh.H")
 	public static final JagString field4411 = JagString.wrap("mapflag");
-	@ObfuscatedName("vh.N")
-	public static final JagFX[] field4417 = new JagFX[50];
-	@ObfuscatedName("pe.t")
-	public static final LruCache field3228 = new LruCache(64);
 	@ObfuscatedName("pe.C")
 	public static final JagString field3237 = JagString.wrap("document)3cookie=(R");
 	@ObfuscatedName("pe.D")
 	public static final JagString[] field3238 = new JagString[200];
-	@ObfuscatedName("pe.F")
-	public static final int[] field3240 = new int[] { 1, -1, -1, 1 };
 	@ObfuscatedName("pe.J")
 	public static final JagString field3244 = JagString.wrap("<col=ff0000>");
 	@ObfuscatedName("pe.K")
@@ -528,8 +485,6 @@ public class Statics {
 	public static final int[] field3685 = new int[128];
 	@ObfuscatedName("wi.o")
 	public static final Calendar field4545 = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-	@ObfuscatedName("wi.q")
-	public static final JagString field4547 = JagString.wrap("::fpson");
 	@ObfuscatedName("wi.r")
 	public static final JagString field4548 = JagString.wrap(" )2> ");
 	@ObfuscatedName("oe.i")
@@ -544,8 +499,6 @@ public class Statics {
 	public static final int[] field1710 = new int[99];
 	@ObfuscatedName("wh.J")
 	public static final JagString field4516 = JagString.wrap("cookiehost");
-	@ObfuscatedName("wh.D")
-	public static final boolean[] field4511 = new boolean[112];
 	@ObfuscatedName("tc.D")
 	public static final JagString field3983 = JagString.wrap("http:)4)4www)3runescape)3com)4l=");
 	@ObfuscatedName("va.z")
@@ -606,8 +559,6 @@ public class Statics {
 	public static final JagString field1921 = JagString.wrap("headicons_prayer");
 	@ObfuscatedName("jh.h")
 	public static final JagString field1928 = JagString.wrap("l");
-	@ObfuscatedName("jh.j")
-	public static final JagString field1930 = JagString.wrap("::qa_op_test");
 	@ObfuscatedName("lj.d")
 	public static final byte[] field2431;
 	@ObfuscatedName("lj.i")
@@ -648,14 +599,10 @@ public class Statics {
 	public static final int[] field2005 = new int[] { 19, 55, 38, 155, 255, 110, 137, 205, 76 };
 	@ObfuscatedName("ka.c")
 	public static final JagString field2007 = JagString.wrap("k");
-	@ObfuscatedName("ka.l")
-	public static final int[] field2016 = new int[50];
 	@ObfuscatedName("ha.w")
 	public static final JagString field1411 = JagString.wrap("");
 	@ObfuscatedName("ha.F")
 	public static final int[] field1420 = new int[] { 2, 2, 4, 2, 1, 8, 4, 1, 4, 4, 2 };
-	@ObfuscatedName("ha.G")
-	public static final JagString field1421 = JagString.wrap("::gc");
 	@ObfuscatedName("nh.j")
 	public static final JagString field2918 = JagString.wrap("Cabbage");
 	@ObfuscatedName("hd.B")
@@ -682,36 +629,26 @@ public class Statics {
 	public static final int[] field1792 = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 };
 	@ObfuscatedName("j.e")
 	public static final JagString field1796 = JagString.wrap("headicons_pk");
-	@ObfuscatedName("kb.r")
-	public static final int[][][] field2024 = new int[4][13][13];
 	@ObfuscatedName("jg.z")
 	public static final LinkList field1900 = new LinkList();
 	@ObfuscatedName("jg.G")
 	public static final int[] field1907 = new int[25];
-	@ObfuscatedName("hi.i")
-	public static final int[] field1557 = new int[] { 0, -1, 0, 1 };
 	@ObfuscatedName("eb.O")
 	public static final JagString field881 = JagString.wrap("sl_arrows");
 	@ObfuscatedName("eb.Y")
 	public static final JagString field891 = JagString.wrap("<col=ffffff> )4 ");
-	@ObfuscatedName("wa.b")
-	public static final int[] field4454 = new int[256];
 	@ObfuscatedName("vd.d")
 	public static final boolean[] field4368 = new boolean[5];
 	@ObfuscatedName("vd.i")
 	public static final int[] field4373 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 73, 74, 76, 78, 83, 84, 85, 86, 91, 92, 93, 94, 95, 97, 103, 104, 105, 106, 107, 108, 113, 114, 115, 116, 118, 119, 120, 121, 122, 123, 124, 125, 133, 134, 136, 138, 143, 144, 145, 146, 151, 152, 153, 154, 155, 157, 163, 164, 165, 166, 168, 169, 174, 175, 176, 177, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 66, 67, 68, 69, 70, 71, 72, 75, 79, 80, 81, 82, 87, 88, 89, 90, 77, 96, 98, 99, 100, 101, 102, 250, 251, 109, 110, 111, 112, 117, 252, 167, 126, 127, 128, 129, 130, 131, 132, 135, 139, 140, 141, 142, 147, 148, 149, 150, 137, 156, 158, 159, 160, 161, 162, 253, 254, 170, 171, 172, 173, 178, 255, 179 };
 	@ObfuscatedName("bb.c")
 	public static int field209 = -1;
-	@ObfuscatedName("ej.i")
-	public static int field1022 = 0;
 	@ObfuscatedName("ej.t")
 	public static int field1033 = -1;
 	@ObfuscatedName("ej.B")
 	public static int field1041 = 0;
 	@ObfuscatedName("ch.a")
 	public static HashTable field495 = new HashTable(512);
-	@ObfuscatedName("ch.k")
-	public static SoftwarePix32[] field505;
 	@ObfuscatedName("pa.b")
 	public static int field3136;
 	@ObfuscatedName("ce.S")
@@ -720,8 +657,6 @@ public class Statics {
 	public static int field119 = -1;
 	@ObfuscatedName("ag.g")
 	public static int field121 = 0;
-	@ObfuscatedName("ve.Z")
-	public static int field4383;
 	@ObfuscatedName("s.cb")
 	public static WorldMapFont field3762;
 	@ObfuscatedName("vg.m")
@@ -730,8 +665,6 @@ public class Statics {
 	public static int[] field453;
 	@ObfuscatedName("cd.d")
 	public static int field454;
-	@ObfuscatedName("cd.k")
-	public static int[] field461 = new int[] { 0, 1, 2, 3 };
 	@ObfuscatedName("uj.j")
 	public static int field4276 = 0;
 	@ObfuscatedName("pc.f")
@@ -780,8 +713,6 @@ public class Statics {
 	public static QuickChatPhrase field226;
 	@ObfuscatedName("bc.g")
 	public static Font field228;
-	@ObfuscatedName("bd.d")
-	public static int field239;
 	@ObfuscatedName("bd.n")
 	public static int field249;
 	@ObfuscatedName("n.h")
@@ -806,14 +737,10 @@ public class Statics {
 	public static int field481 = 1;
 	@ObfuscatedName("cf.f")
 	public static int[] field482;
-	@ObfuscatedName("vi.a")
-	public static Pix32[] field4425;
 	@ObfuscatedName("fc.e")
 	public static double field1110;
 	@ObfuscatedName("qe.j")
 	public static IfType[] field3564;
-	@ObfuscatedName("nc.e")
-	public static Pix32[] field2718;
 	@ObfuscatedName("e.Q")
 	public static byte[][] field774;
 	@ObfuscatedName("ff.eb")
@@ -822,8 +749,6 @@ public class Statics {
 	public static short[] field108 = new short[256];
 	@ObfuscatedName("af.U")
 	public static int field110 = 0;
-	@ObfuscatedName("af.P")
-	public static Pix8[] field106;
 	@ObfuscatedName("af.N")
 	public static byte[][][] field105;
 	@ObfuscatedName("ja.b")
@@ -850,50 +775,34 @@ public class Statics {
 	public static IfType field2514;
 	@ObfuscatedName("md.Y")
 	public static int field2512;
-	@ObfuscatedName("dj.ac")
-	public static int field760;
 	@ObfuscatedName("dj.mc")
 	public static int field772;
 	@ObfuscatedName("dj.Gb")
 	public static int[] field740;
 	@ObfuscatedName("hb.bb")
 	public static int field1435;
-	@ObfuscatedName("jf.kb")
-	public static int field1895 = 0;
 	@ObfuscatedName("jf.lb")
 	public static int field1896 = -1;
 	@ObfuscatedName("da.X")
 	public static long field602 = 0L;
-	@ObfuscatedName("da.S")
-	public static Pix32[] field597;
 	@ObfuscatedName("aa.db")
 	public static int field25 = -1;
-	@ObfuscatedName("hh.R")
-	public static int field1531 = 0;
 	@ObfuscatedName("qj.U")
 	public static int field3604 = 0;
 	@ObfuscatedName("qj.V")
 	public static int[] field3605;
-	@ObfuscatedName("kd.V")
-	public static Pix32[] field2041;
 	@ObfuscatedName("ra.gb")
 	public static int field3638 = 0;
 	@ObfuscatedName("vc.cb")
 	public static int field4357 = 2;
 	@ObfuscatedName("lh.db")
 	public static int field2408 = 0;
-	@ObfuscatedName("lh.Q")
-	public static HashTable field2395 = new HashTable(8);
 	@ObfuscatedName("lh.X")
 	public static int[] field2402;
-	@ObfuscatedName("d.ab")
-	public static Pix8[] field587;
 	@ObfuscatedName("d.hb")
 	public static int field594 = -1;
 	@ObfuscatedName("d.T")
 	public static short field580 = 256;
-	@ObfuscatedName("pd.jb")
-	public static byte[][] field3221;
 	@ObfuscatedName("pd.S")
 	public static WorldMapFont field3205;
 	@ObfuscatedName("td.bb")
@@ -904,12 +813,8 @@ public class Statics {
 	public static byte[][][] field3951;
 	@ObfuscatedName("ma.bb")
 	public static int field2472;
-	@ObfuscatedName("a.i")
-	public static boolean field9 = false;
 	@ObfuscatedName("a.j")
 	public static long field10 = 0L;
-	@ObfuscatedName("ab.e")
-	public static PixfontGeneric field30;
 	@ObfuscatedName("ab.q")
 	public static int[][] field42;
 	@ObfuscatedName("ah.z")
@@ -926,8 +831,6 @@ public class Statics {
 	public static JagString field319 = null;
 	@ObfuscatedName("od.w")
 	public static int field3007;
-	@ObfuscatedName("dc.e")
-	public static int field666;
 	@ObfuscatedName("ec.J")
 	public static int field898 = 0;
 	@ObfuscatedName("ec.F")
@@ -948,8 +851,6 @@ public class Statics {
 	public static int field930 = 0;
 	@ObfuscatedName("eg.w")
 	public static int field941;
-	@ObfuscatedName("fh.q")
-	public static int field1173 = 128;
 	@ObfuscatedName("fi.v")
 	public static Js5 field1176;
 	@ObfuscatedName("fi.w")
@@ -964,26 +865,18 @@ public class Statics {
 	public static int field1316 = 0;
 	@ObfuscatedName("ge.O")
 	public static int field1328 = 0;
-	@ObfuscatedName("kc.b")
-	public static Huffman field2033;
 	@ObfuscatedName("rd.E")
 	public static int field3659 = -1;
 	@ObfuscatedName("ui.D")
 	public static WorldMapFont field4250;
-	@ObfuscatedName("ui.K")
-	public static Pix32[] field4257;
 	@ObfuscatedName("kf.h")
 	public static int field2078 = 0;
 	@ObfuscatedName("kf.n")
 	public static int field2084;
 	@ObfuscatedName("li.R")
 	public static IfType field2426;
-	@ObfuscatedName("li.E")
-	public static HTTPRequest field2414;
 	@ObfuscatedName("qa.a")
 	public static long field3519 = 0L;
-	@ObfuscatedName("qa.j")
-	public static int field3528 = 3;
 	@ObfuscatedName("qa.n")
 	public static boolean field3532 = false;
 	@ObfuscatedName("uc.i")
@@ -998,28 +891,18 @@ public class Statics {
 	public static Image field2643;
 	@ObfuscatedName("oa.F")
 	public static JagString[] field2963;
-	@ObfuscatedName("ob.f")
-	public static int field2969 = 0;
 	@ObfuscatedName("ob.p")
 	public static int[][][] field2979;
 	@ObfuscatedName("ob.q")
 	public static boolean field2980 = true;
-	@ObfuscatedName("ob.s")
-	public static Pix32[] field2982;
 	@ObfuscatedName("jc.Q")
 	public static int field1841 = 0;
 	@ObfuscatedName("jc.G")
 	public static int[] field1831;
-	@ObfuscatedName("eh.a")
-	public static IfType field967 = null;
 	@ObfuscatedName("eh.E")
 	public static boolean field997 = false;
-	@ObfuscatedName("oc.t")
-	public static int field2991 = 0;
 	@ObfuscatedName("oc.v")
 	public static int field2993 = 0;
-	@ObfuscatedName("vh.R")
-	public static int field4421;
 	@ObfuscatedName("pe.H")
 	public static int field3242;
 	@ObfuscatedName("h.F")
@@ -1028,8 +911,6 @@ public class Statics {
 	public static int field1394 = 0;
 	@ObfuscatedName("nb.bb")
 	public static int[] field2713;
-	@ObfuscatedName("nb.V")
-	public static int field2707 = 0;
 	@ObfuscatedName("ud.a")
 	public static short field4179 = 32767;
 	@ObfuscatedName("ud.d")
@@ -1042,14 +923,10 @@ public class Statics {
 	public static JagString field4134 = null;
 	@ObfuscatedName("pg.yb")
 	public static byte field3301;
-	@ObfuscatedName("oi.a")
-	public static int field3099 = 0;
 	@ObfuscatedName("oi.g")
 	public static int field3105 = 0;
 	@ObfuscatedName("oi.m")
 	public static int field3111 = 1;
-	@ObfuscatedName("sd.o")
-	public static Pix32 field3826;
 	@ObfuscatedName("ne.a")
 	public static JagString field2752 = null;
 	@ObfuscatedName("ne.n")
@@ -1066,12 +943,8 @@ public class Statics {
 	public static int field3809;
 	@ObfuscatedName("sc.F")
 	public static int field3788 = 0;
-	@ObfuscatedName("ib.C")
-	public static int field1708 = 0;
 	@ObfuscatedName("ib.A")
 	public static IfType field1706;
-	@ObfuscatedName("wh.T")
-	public static Pix32[] field4525;
 	@ObfuscatedName("nj.j")
 	public static int field2931;
 	@ObfuscatedName("nj.k")
@@ -1088,10 +961,6 @@ public class Statics {
 	public static int field3700 = 0;
 	@ObfuscatedName("vb.H")
 	public static WorldMapFont field4325;
-	@ObfuscatedName("nd.c")
-	public static int field2729 = 0;
-	@ObfuscatedName("nd.e")
-	public static int[] field2731;
 	@ObfuscatedName("nd.l")
 	public static AudioThread field2738;
 	@ObfuscatedName("nd.p")
@@ -1100,8 +969,6 @@ public class Statics {
 	public static short field3083 = 320;
 	@ObfuscatedName("oh.q")
 	public static int field3093;
-	@ObfuscatedName("ia.z")
-	public static int[] field1686 = new int[] { 1, 1, 1, 1 };
 	@ObfuscatedName("ia.H")
 	public static LinkList field1694 = new LinkList();
 	@ObfuscatedName("ia.L")
@@ -1114,8 +981,6 @@ public class Statics {
 	public static byte[][][] field4052;
 	@ObfuscatedName("sg.x")
 	public static IfType field3871;
-	@ObfuscatedName("eb.U")
-	public static Pix32 field887;
 	@ObfuscatedName("se.d")
 	public static JagString field3835 = null;
 	@ObfuscatedName("se.g")
@@ -1124,32 +989,18 @@ public class Statics {
 	public static FontMetrics field3840;
 	@ObfuscatedName("jh.f")
 	public static Js5 field1926;
-	@ObfuscatedName("lj.a")
-	public static Pix32[] field2428;
 	@ObfuscatedName("lj.o")
 	public static int field2442 = 1;
 	@ObfuscatedName("ki.a")
 	public static int field2131 = 0;
 	@ObfuscatedName("ki.q")
 	public static WorldMapFont field2147;
-	@ObfuscatedName("kj.u")
-	public static int field2172 = 127;
-	@ObfuscatedName("kj.D")
-	public static int field2181;
-	@ObfuscatedName("sf.e")
-	public static WorldEntry[] field3845;
 	@ObfuscatedName("ea.ob")
 	public static int field848;
 	@ObfuscatedName("ea.zb")
 	public static int field859 = 0;
-	@ObfuscatedName("eb.W")
-	public static int field889;
-	@ObfuscatedName("hi.a")
-	public static int field1549;
 	@ObfuscatedName("ue.f")
 	public static int field4198 = 0;
-	@ObfuscatedName("ue.g")
-	public static int field4199 = 0;
 	@ObfuscatedName("ka.e")
 	public static int field2009 = -1;
 	@ObfuscatedName("ka.f")
@@ -1186,10 +1037,6 @@ public class Statics {
 	public static int field2027 = 0;
 	@ObfuscatedName("jg.R")
 	public static int field1918 = 0;
-	@ObfuscatedName("jg.J")
-	public static int field1910 = 0;
-	@ObfuscatedName("jg.L")
-	public static int[][][] field1912;
 	@ObfuscatedName("hi.b")
 	public static int field1550 = 0;
 	@ObfuscatedName("hi.d")
@@ -1198,26 +1045,22 @@ public class Statics {
 	public static Pix32 field4500;
 	@ObfuscatedName("wf.g")
 	public static int field4502 = -1;
-	@ObfuscatedName("mf.p")
-	public static int field2548 = 0;
 	@ObfuscatedName("mf.w")
 	public static boolean field2555 = false;
 	@ObfuscatedName("la.i")
 	public static int field2213;
 	@ObfuscatedName("wa.f")
 	public static int field4458 = 0;
-	@ObfuscatedName("wa.h")
-	public static SoftwarePix8[] field4460;
-	@ObfuscatedName("vd.b")
-	public static int field4366;
-
-	static {
-		int var0 = 2;
-		for (int var1 = 0; var1 < 32; var1++) {
-			field1832[var1] = var0 - 1;
-			var0 += var0;
-		}
-	}
+	@ObfuscatedName("qb.S")
+	public static boolean field3546 = true;
+	@ObfuscatedName("qb.R")
+	public static int field3545 = 0;
+	@ObfuscatedName("lf.V")
+	public static int field2330;
+	@ObfuscatedName("ub.ib")
+	public static byte[][][] field4166;
+	@ObfuscatedName("jg.L")
+	public static int[][][] field1912;
 
 	static {
 		int var0 = 0;
@@ -1243,89 +1086,6 @@ public class Statics {
 		for (int var0 = 0; var0 < 4096; var0++) {
 			field1720[var0] = method394(var0);
 		}
-	}
-
-	@ObfuscatedName("bb.a(BLtg;)V")
-	public static void method69(Huffman arg0) {
-		field2033 = arg0;
-	}
-
-	@ObfuscatedName("ej.b(II)I")
-	public static int bitsRequired(int arg0) {
-		int var1 = 0;
-		if (arg0 < 0 || arg0 >= 65536) {
-			arg0 >>>= 0x10;
-			var1 += 16;
-		}
-		if (arg0 >= 256) {
-			arg0 >>>= 0x8;
-			var1 += 8;
-		}
-		if (arg0 >= 16) {
-			var1 += 4;
-			arg0 >>>= 0x4;
-		}
-		if (arg0 >= 4) {
-			arg0 >>>= 0x2;
-			var1 += 2;
-		}
-		if (arg0 >= 1) {
-			var1++;
-			arg0 >>>= 0x1;
-		}
-		return var1 + arg0;
-	}
-
-	@ObfuscatedName("rc.a(Lbj;IIBIIZ)V")
-	public static void method1312(Js5Loader arg0, int arg1, int arg2, byte arg3, int arg4, boolean arg5) {
-		long var6 = (long) (arg1 + (arg2 << 16));
-		Js5NetRequest var8 = (Js5NetRequest) Js5Net.field4465.method1049(var6);
-		if (var8 != null) {
-			return;
-		}
-		Js5NetRequest var9 = (Js5NetRequest) Js5Net.field2922.method1049(var6);
-		if (var9 != null) {
-			return;
-		}
-		Js5NetRequest var10 = (Js5NetRequest) Js5Net.field3907.method1049(var6);
-		if (var10 == null) {
-			if (!arg5) {
-				Js5NetRequest var11 = (Js5NetRequest) Js5Net.field1951.method1049(var6);
-				if (var11 != null) {
-					return;
-				}
-			}
-			Js5NetRequest var12 = new Js5NetRequest();
-			var12.field1782 = arg3;
-			var12.field1780 = arg4;
-			var12.field1787 = arg0;
-			if (arg5) {
-				Js5Net.field4465.put(var6, var12);
-				Js5Net.field3943++;
-			} else {
-				Js5Net.field2559.method1387(var12);
-				Js5Net.field3907.put(var6, var12);
-				Js5Net.field4157++;
-			}
-		} else if (arg5) {
-			var10.method907();
-			Js5Net.field4465.put(var6, var10);
-			Js5Net.field4157--;
-			Js5Net.field3943++;
-		}
-	}
-
-	@ObfuscatedName("pa.a(BLi;)Z")
-	public static boolean method1130(JagString arg0) {
-		if (arg0 == null) {
-			return false;
-		}
-		for (int var1 = 0; var1 < Client.field1221; var1++) {
-			if (arg0.method624(Client.field2741[var1])) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@ObfuscatedName("ve.a(IZ)I")
@@ -1393,7 +1153,7 @@ public class Statics {
 
 	@ObfuscatedName("ve.a(IJ)Li;")
 	public static JagString method1556(long arg0) {
-		return method1586(arg0);
+		return JagString.method1586(arg0);
 	}
 
 	@ObfuscatedName("m.a(IB)I")
@@ -1550,18 +1310,6 @@ public class Statics {
 		field594 = -1;
 	}
 
-	@ObfuscatedName("tj.a(III)I")
-	public static int method1470(int arg0, int arg1) {
-		int var2 = method292(arg1 + 91923, 4, arg0 + 45365) + (method292(arg1 + 37821, 2, arg0 + 10294) - 128 >> 1) + (method292(arg1, 1, arg0) + -128 >> 2) - 128;
-		int var3 = (int) ((double) var2 * 0.3D) + 35;
-		if (var3 < 10) {
-			var3 = 10;
-		} else if (var3 > 60) {
-			var3 = 60;
-		}
-		return var3;
-	}
-
 	@ObfuscatedName("sj.a(I)V")
 	public static void method1416() {
 		int[] var0 = new int[ObjType.field3855];
@@ -1576,300 +1324,6 @@ public class Statics {
 		for (int var4 = 0; var4 < var1; var4++) {
 			field1698[var4] = var0[var4];
 		}
-	}
-
-	@ObfuscatedName("eh.a(IIIIIII)V")
-	public static void method391(int arg0, int arg1, int arg2, int arg3) {
-		field1918 = 0;
-		for (int var4 = -1; var4 < field1041 + Client.field1027; var4++) {
-			ClientEntity var5;
-			if (var4 == -1) {
-				var5 = Client.localPlayer;
-			} else if (var4 >= Client.field1027) {
-				var5 = Client.field4223[field402[var4 - Client.field1027]];
-			} else {
-				var5 = Client.field4491[Client.field3428[var4]];
-			}
-			if (var5 != null && var5.method287()) {
-				if (var5 instanceof ClientNpc) {
-					NpcType var6 = ((ClientNpc) var5).field3682;
-					if (var6.field2327 != null) {
-						var6 = var6.method862();
-					}
-					if (var6 == null) {
-						continue;
-					}
-				}
-				if (var4 >= Client.field1027) {
-					NpcType var12 = ((ClientNpc) var5).field3682;
-					if (var12.field2327 != null) {
-						var12 = var12.method862();
-					}
-					if (var12.field2326 >= 0 && field2428.length > var12.field2326) {
-						method1027(arg3 >> 1, arg2 >> 1, var5.method1475() + 15, var5);
-						if (Client.field401 > -1) {
-							field2428[var12.field2326].method1155(Client.field401 + arg0 - 12, Client.field541 + -30 + arg1);
-						}
-					}
-					HintArrow[] var13 = field1171;
-					for (int var14 = 0; var14 < var13.length; var14++) {
-						HintArrow var15 = var13[var14];
-						if (var15 != null && var15.field2139 == 1 && var15.field2146 == field402[var4 - Client.field1027] && Client.field2113 % 20 < 10) {
-							method1027(arg3 >> 1, arg2 >> 1, var5.method1475() + 15, var5);
-							if (Client.field401 > -1) {
-								StructType.field3543[var15.field2137].method1155(Client.field401 + arg0 - 12, Client.field541 + arg1 - 28);
-							}
-						}
-					}
-				} else {
-					int var7 = 30;
-					ClientPlayer var8 = (ClientPlayer) var5;
-					if (var8.field756 != -1 || var8.field750 != -1) {
-						method1027(arg3 >> 1, arg2 >> 1, var5.method1475() + 15, var5);
-						if (Client.field401 > -1) {
-							if (var8.field756 != -1) {
-								field4425[var8.field756].method1155(Client.field401 + arg0 - 12, Client.field541 + -30 + arg1);
-								var7 += 25;
-							}
-							if (var8.field750 != -1) {
-								field2428[var8.field750].method1155(arg0 + Client.field401 - 12, arg1 - -Client.field541 + -var7);
-								var7 += 25;
-							}
-						}
-					}
-					if (var4 >= 0) {
-						HintArrow[] var9 = field1171;
-						for (int var10 = 0; var10 < var9.length; var10++) {
-							HintArrow var11 = var9[var10];
-							if (var11 != null && var11.field2139 == 10 && Client.field3428[var4] == var11.field2146) {
-								method1027(arg3 >> 1, arg2 >> 1, var5.method1475() + 15, var5);
-								if (Client.field401 > -1) {
-									StructType.field3543[var11.field2137].method1155(arg0 + Client.field401 - 12, arg1 - (-Client.field541 + var7));
-								}
-							}
-						}
-					}
-				}
-				if (var5.field4071 != null && (Client.field1027 <= var4 || field1206 == 0 || field1206 == 3 || field1206 == 1 && ScriptRunner.method901(((ClientPlayer) var5).field766))) {
-					method1027(arg3 >> 1, arg2 >> 1, var5.method1475(), var5);
-					if (Client.field401 > -1 && field3925 > field1918) {
-						field3931[field1918] = Client.field1011.method158(var5.field4071) / 2;
-						field3929[field1918] = Client.field1011.ascent;
-						field3938[field1918] = Client.field401;
-						field3940[field1918] = Client.field541;
-						field3937[field1918] = var5.field4083;
-						field3932[field1918] = var5.field4138;
-						field3926[field1918] = var5.field4112;
-						field3933[field1918] = var5.field4071;
-						field1918++;
-					}
-				}
-				if (var5.field4118 > Client.field2113) {
-					method1027(arg3 >> 1, arg2 >> 1, var5.method1475() + 15, var5);
-					if (Client.field401 > -1) {
-						Pix2D.method478(arg0 + Client.field401 - 15, Client.field541 + -3 + arg1, var5.field4109, 5, 65280);
-						Pix2D.method478(var5.field4109 + arg0 + Client.field401 - 15, arg1 + -3 + Client.field541, 30 - var5.field4109, 5, 16711680);
-					}
-				}
-				for (int var16 = 0; var16 < 4; var16++) {
-					if (Client.field2113 < var5.field4073[var16]) {
-						method1027(arg3 >> 1, arg2 >> 1, var5.method1475() / 2, var5);
-						if (Client.field401 > -1) {
-							if (var16 == 1) {
-								Client.field541 -= 20;
-							}
-							if (var16 == 2) {
-								Client.field541 -= 10;
-								Client.field401 -= 15;
-							}
-							if (var16 == 3) {
-								Client.field541 -= 10;
-								Client.field401 += 15;
-							}
-							field2718[var5.field4078[var16]].method1155(arg0 + Client.field401 - 12, arg1 + -12 + Client.field541);
-							Client.field917.method141(JagString.method1212(var5.field4131[var16]), arg0 + Client.field401 - 1, Client.field541 + 3 + arg1, 16777215, 0);
-						}
-					}
-				}
-			}
-		}
-		for (int var17 = 0; var17 < field1918; var17++) {
-			int var18 = field3938[var17];
-			int var19 = field3940[var17];
-			int var20 = field3931[var17];
-			boolean var21 = true;
-			int var22 = field3929[var17];
-			while (var21) {
-				var21 = false;
-				for (int var23 = 0; var23 < var17; var23++) {
-					if (field3940[var23] - field3929[var23] < var19 + 2 && var19 - var22 < field3940[var23] + 2 && var18 - var20 < field3938[var23] - -field3931[var23] && field3938[var23] - field3931[var23] < var20 + var18 && var19 > field3940[var23] - field3929[var23]) {
-						var19 = field3940[var23] - field3929[var23];
-						var21 = true;
-					}
-				}
-			}
-			Client.field401 = field3938[var17];
-			Client.field541 = field3940[var17] = var19;
-			JagString var24 = field3933[var17];
-			if (field2548 == 0) {
-				int var25 = 16776960;
-				if (field3937[var17] < 6) {
-					var25 = field3812[field3937[var17]];
-				}
-				if (field3937[var17] == 6) {
-					var25 = field3990 % 20 >= 10 ? 16776960 : 16711680;
-				}
-				if (field3937[var17] == 7) {
-					var25 = field3990 % 20 >= 10 ? 65535 : 255;
-				}
-				if (field3937[var17] == 8) {
-					var25 = field3990 % 20 < 10 ? 45056 : 8454016;
-				}
-				if (field3937[var17] == 9) {
-					int var26 = 150 - field3926[var17];
-					if (var26 < 50) {
-						var25 = var26 * 1280 + 16711680;
-					} else if (var26 < 100) {
-						var25 = 16384000 + 16776960 - var26 * 327680;
-					} else if (var26 < 150) {
-						var25 = (var26 - 100) * 5 + 65280;
-					}
-				}
-				if (field3937[var17] == 10) {
-					int var27 = 150 - field3926[var17];
-					if (var27 < 50) {
-						var25 = var27 * 5 + 16711680;
-					} else if (var27 < 100) {
-						var25 = 16711935 - (var27 - 50) * 327680;
-					} else if (var27 < 150) {
-						var25 = var27 * 327680 + 500 + 255 - var27 * 5 - 32768000;
-					}
-				}
-				if (field3937[var17] == 11) {
-					int var28 = 150 - field3926[var17];
-					if (var28 < 50) {
-						var25 = 16777215 - var28 * 327685;
-					} else if (var28 < 100) {
-						var25 = (var28 - 50) * 327685 + 65280;
-					} else if (var28 < 150) {
-						var25 = 16777215 - (var28 - 100) * 327680;
-					}
-				}
-				if (field3932[var17] == 0) {
-					Client.field1011.method141(var24, arg0 + Client.field401, Client.field541 + arg1, var25, 0);
-				}
-				if (field3932[var17] == 1) {
-					Client.field1011.method144(var24, Client.field401 + arg0, Client.field541 + arg1, var25, field3990);
-				}
-				if (field3932[var17] == 2) {
-					Client.field1011.method145(var24, arg0 + Client.field401, arg1 - -Client.field541, var25, field3990);
-				}
-				if (field3932[var17] == 3) {
-					Client.field1011.method164(var24, Client.field401 + arg0, arg1 + Client.field541, var25, field3990, 150 - field3926[var17]);
-				}
-				if (field3932[var17] == 4) {
-					int var29 = (150 - field3926[var17]) * (Client.field1011.method158(var24) + 100) / 150;
-					Pix2D.method493(arg0 + Client.field401 - 50, arg1, arg0 + Client.field401 + 50, arg1 + arg2);
-					Client.field1011.method154(var24, arg0 + Client.field401 + 50 - var29, arg1 - -Client.field541, var25, 0);
-					Pix2D.setClipping(arg0, arg1, arg0 + arg3, arg2 + arg1);
-				}
-				if (field3932[var17] == 5) {
-					int var30 = 0;
-					int var31 = 150 - field3926[var17];
-					if (var31 < 25) {
-						var30 = var31 - 25;
-					} else if (var31 > 125) {
-						var30 = var31 - 125;
-					}
-					Pix2D.method493(arg0, Client.field541 + arg1 - Client.field1011.ascent - 1, arg3 + arg0, Client.field541 + arg1 + 5);
-					Client.field1011.method141(var24, arg0 + Client.field401, arg1 + (Client.field541 - -var30), var25, 0);
-					Pix2D.setClipping(arg0, arg1, arg0 + arg3, arg1 + arg2);
-				}
-			} else {
-				Client.field1011.method141(var24, arg0 + Client.field401, arg1 + Client.field541, 16776960, 0);
-			}
-		}
-	}
-
-	@ObfuscatedName("eh.a(ILnb;BZII)V")
-	public static void method388(Js5 arg0, int arg1, int arg2) {
-		MidiManager.field159 = arg2;
-		MidiManager.field3039 = arg0;
-		MidiManager.field4268 = arg1;
-		MidiManager.field3343 = 10000;
-		MidiManager.field2230 = 1;
-		MidiManager.field4480 = 0;
-		MidiManager.field277 = false;
-	}
-
-	@ObfuscatedName("eh.a(ILq;)Z")
-	public static boolean method389(IfType arg0) {
-		if (arg0.field3439 == 205) {
-			field1910 = 250;
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@ObfuscatedName("eh.a(IIIIIILnc;IJ)Z")
-	public static boolean method390(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, ModelSource arg6, int arg7, long arg8) {
-		if (arg6 == null) {
-			return true;
-		} else {
-			int var10 = arg1 * 128 + arg4 * 64;
-			int var11 = arg2 * 128 + arg5 * 64;
-			return World.method768(arg0, arg1, arg2, arg4, arg5, var10, var11, arg3, arg6, arg7, false, arg8);
-		}
-	}
-
-	@ObfuscatedName("k.a(III)V")
-	public static void method755(int arg0, int arg1) {
-		VarBitType var2 = VarBitType.method1043(arg0);
-		int var3 = var2.field4233;
-		int var4 = var2.field4234;
-		int var5 = var2.field4237;
-		int var6 = field1832[var5 - var4];
-		if (arg1 < 0 || arg1 > var6) {
-			arg1 = 0;
-		}
-		int var7 = var6 << var4;
-		Client.field2050[var3] = ~var7 & Client.field2050[var3] | var7 & arg1 << var4;
-	}
-
-	@ObfuscatedName("ua.a(ZIII)Li;")
-	public static JagString method1481(boolean arg0, int arg1) {
-		int var2 = 1;
-		int var3 = arg1 / 10;
-		while (var3 != 0) {
-			var3 /= 10;
-			var2++;
-		}
-		int var4 = var2;
-		if (arg1 < 0 || arg0) {
-			var4 = var2 + 1;
-		}
-		byte[] var5 = new byte[var4];
-		if (arg1 < 0) {
-			var5[0] = 45;
-		} else if (arg0) {
-			var5[0] = 43;
-		}
-		for (int var6 = 0; var6 < var2; var6++) {
-			int var7 = arg1 % 10;
-			arg1 /= 10;
-			if (var7 < 0) {
-				var7 = -var7;
-			}
-			if (var7 > 9) {
-				var7 += 39;
-			}
-			var5[var4 - var6 - 1] = (byte) (var7 + 48);
-		}
-		JagString var8 = new JagString();
-		var8.length = var4;
-		var8.chars = var5;
-		return var8;
 	}
 
 	@ObfuscatedName("ua.a(ZIIIIIIIBI[I)V")
@@ -2328,294 +1782,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("b.a(IILq;B)V")
-	public static void method65(int arg0, int arg1, IfType arg2) {
-		if (arg2.field3368 == 1) {
-			Client.method685(0, arg2.field3460, (short) 11, 0L, Client.field3453, arg2.parentId);
-		}
-		if (arg2.field3368 == 2 && !field145) {
-			JagString var3 = method1345(arg2);
-			if (var3 != null) {
-				Client.method685(-1, var3, (short) 15, 0L, JagString.join(new JagString[] { field182, arg2.field3459 }), arg2.parentId);
-			}
-		}
-		if (arg2.field3368 == 3) {
-			Client.method685(0, Text.field530, (short) 14, 0L, Client.field3453, arg2.parentId);
-		}
-		if (arg2.field3368 == 4) {
-			Client.method685(0, arg2.field3460, (short) 36, 0L, Client.field3453, arg2.parentId);
-		}
-		if (arg2.field3368 == 5) {
-			Client.method685(0, arg2.field3460, (short) 20, 0L, Client.field3453, arg2.parentId);
-		}
-		if (arg2.field3368 == 6 && field967 == null) {
-			Client.method685(-1, arg2.field3460, (short) 47, 0L, Client.field3453, arg2.parentId);
-		}
-		if (arg2.field3390 == 2) {
-			int var4 = 0;
-			for (int var5 = 0; var5 < arg2.field3418; var5++) {
-				for (int var6 = 0; var6 < arg2.field3501; var6++) {
-					int var7 = (arg2.field3508 + 32) * var5;
-					int var8 = (arg2.field3466 + 32) * var6;
-					if (var4 < 20) {
-						var7 += arg2.field3397[var4];
-						var8 += arg2.field3472[var4];
-					}
-					if (arg1 >= var8 && arg0 >= var7 && var8 + 32 > arg1 && var7 + 32 > arg0) {
-						Client.field4229 = arg2;
-						field3333 = var4;
-						if (arg2.field3388[var4] > 0) {
-							ObjType var9 = ObjType.list(arg2.field3388[var4] - 1);
-							if (Client.field475 == 1 && method431(method530(arg2))) {
-								if (Client.field3965 != arg2.parentId || var4 != Client.field1105) {
-									Client.method685(var4, Text.field608, (short) 42, (long) var9.field2844, JagString.join(new JagString[] { Client.field1414, field581, var9.name}), arg2.parentId);
-								}
-							} else if (!field145 || !method431(method530(arg2))) {
-								JagString[] var10 = var9.field2904;
-								if (field1807) {
-									var10 = method921(var10);
-								}
-								if (method431(method530(arg2))) {
-									for (int var11 = 4; var11 >= 3; var11--) {
-										if (var10 != null && var10[var11] != null) {
-											byte var12;
-											if (var11 == 3) {
-												var12 = 21;
-											} else {
-												var12 = 18;
-											}
-											Client.method685(var4, var10[var11], var12, (long) var9.field2844, JagString.join(new JagString[] { field2529, var9.name}), arg2.parentId);
-										} else if (var11 == 4) {
-											Client.method685(var4, Text.field4171, (short) 18, (long) var9.field2844, JagString.join(new JagString[] { field2529, var9.name}), arg2.parentId);
-										}
-									}
-								}
-								if (PacketBit.method27(method530(arg2))) {
-									Client.method685(var4, Text.field608, (short) 12, (long) var9.field2844, JagString.join(new JagString[] { field2529, var9.name}), arg2.parentId);
-								}
-								if (method431(method530(arg2)) && var10 != null) {
-									for (int var13 = 2; var13 >= 0; var13--) {
-										if (var10[var13] != null) {
-											byte var14 = 0;
-											if (var13 == 0) {
-												var14 = 28;
-											}
-											if (var13 == 1) {
-												var14 = 9;
-											}
-											if (var13 == 2) {
-												var14 = 2;
-											}
-											Client.method685(var4, var10[var13], var14, (long) var9.field2844, JagString.join(new JagString[] { field2529, var9.name}), arg2.parentId);
-										}
-									}
-								}
-								JagString[] var15 = arg2.field3511;
-								if (field1807) {
-									var15 = method921(var15);
-								}
-								if (var15 != null) {
-									for (int var16 = 4; var16 >= 0; var16--) {
-										if (var15[var16] != null) {
-											byte var17 = 0;
-											if (var16 == 0) {
-												var17 = 6;
-											}
-											if (var16 == 1) {
-												var17 = 8;
-											}
-											if (var16 == 2) {
-												var17 = 49;
-											}
-											if (var16 == 3) {
-												var17 = 44;
-											}
-											if (var16 == 4) {
-												var17 = 13;
-											}
-											Client.method685(var4, var15[var16], var17, (long) var9.field2844, JagString.join(new JagString[] { field2529, var9.name}), arg2.parentId);
-										}
-									}
-								}
-								Client.method685(var4, Text.field1174, (short) 1001, (long) var9.field2844, JagString.join(new JagString[] { field2529, var9.name}), arg2.parentId);
-							} else if ((field2084 & 0x10) == 16) {
-								Client.method685(var4, field3835, (short) 39, (long) var9.field2844, JagString.join(new JagString[] {field464, field581, var9.name}), arg2.parentId);
-							}
-						}
-					}
-					var4++;
-				}
-			}
-		}
-		if (!arg2.field3410) {
-			return;
-		}
-		if (!field145) {
-			for (int var18 = 9; var18 >= 5; var18--) {
-				JagString var19 = method1494(arg2, var18);
-				if (var19 != null) {
-					Client.method685(arg2.field3406, var19, (short) 1003, (long) (var18 + 1), arg2.field3457, arg2.parentId);
-				}
-			}
-			JagString var20 = method1345(arg2);
-			if (var20 != null) {
-				Client.method685(arg2.field3406, var20, (short) 15, 0L, arg2.field3457, arg2.parentId);
-			}
-			for (int var21 = 4; var21 >= 0; var21--) {
-				JagString var22 = method1494(arg2, var21);
-				if (var22 != null) {
-					Client.method685(arg2.field3406, var22, (short) 43, (long) (var21 + 1), arg2.field3457, arg2.parentId);
-				}
-			}
-			if (method1526(method530(arg2))) {
-				Client.method685(arg2.field3406, Text.field3665, (short) 47, 0L, Client.field3453, arg2.parentId);
-				return;
-			}
-			return;
-		}
-		if (ServerActive.method201(method530(arg2)) && (field2084 & 0x20) == 32) {
-			Client.method685(arg2.field3406, field3835, (short) 40, 0L, JagString.join(new JagString[] {field464, field4548, arg2.field3457 }), arg2.parentId);
-			return;
-		}
-	}
-
-	@ObfuscatedName("ba.a(III)I")
-	public static int method67(int arg0, int arg1) {
-		if (arg1 == -1) {
-			return 12345678;
-		}
-		int var2 = arg0 * (arg1 & 0x7F) >> 7;
-		if (var2 < 2) {
-			var2 = 2;
-		} else if (var2 > 126) {
-			var2 = 126;
-		}
-		return var2 + (arg1 & 0xFF80);
-	}
-
-	@ObfuscatedName("bc.a(ZLae;I)V")
-	public static void method71(PacketBit arg0) {
-		while (true) {
-			ReflectionCheck var1 = (ReflectionCheck) field1694.head();
-			if (var1 == null) {
-				return;
-			}
-			boolean var2 = false;
-			for (int var3 = 0; var3 < var1.field124; var3++) {
-				if (var1.field139[var3] != null) {
-					if (var1.field139[var3].status == 2) {
-						var1.field132[var3] = -5;
-					}
-					if (var1.field139[var3].status == 0) {
-						var2 = true;
-					}
-				}
-				if (var1.field138[var3] != null) {
-					if (var1.field138[var3].status == 2) {
-						var1.field132[var3] = -6;
-					}
-					if (var1.field138[var3].status == 0) {
-						var2 = true;
-					}
-				}
-			}
-			if (var2) {
-				return;
-			}
-			arg0.method30(56);
-			arg0.p1(0);
-			int var4 = arg0.pos;
-			arg0.p4(var1.field136);
-			for (int var5 = 0; var5 < var1.field124; var5++) {
-				if (var1.field132[var5] == 0) {
-					try {
-						int var6 = var1.field128[var5];
-						if (var6 == 0) {
-							Field var7 = (Field) var1.field139[var5].field3129;
-							int var8 = var7.getInt(null);
-							arg0.p1(0);
-							arg0.p4(var8);
-						} else if (var6 == 1) {
-							Field var11 = (Field) var1.field139[var5].field3129;
-							var11.setInt(null, var1.field129[var5]);
-							arg0.p1(0);
-						} else if (var6 == 2) {
-							Field var9 = (Field) var1.field139[var5].field3129;
-							int var10 = var9.getModifiers();
-							arg0.p1(0);
-							arg0.p4(var10);
-						}
-						if (var6 == 3) {
-							Method var14 = (Method) var1.field138[var5].field3129;
-							byte[][] var15 = var1.field131[var5];
-							Object[] var16 = new Object[var15.length];
-							for (int var17 = 0; var17 < var15.length; var17++) {
-								ObjectInputStream var18 = new ObjectInputStream(new ByteArrayInputStream(var15[var17]));
-								var16[var17] = var18.readObject();
-							}
-							Object var19 = var14.invoke(null, var16);
-							if (var19 == null) {
-								arg0.p1(0);
-							} else if (var19 instanceof Number) {
-								arg0.p1(1);
-								arg0.p8(((Number) var19).longValue());
-							} else if (var19 instanceof JagString) {
-								arg0.p1(2);
-								arg0.pjstr((JagString) var19);
-							} else {
-								arg0.p1(4);
-							}
-						} else if (var6 == 4) {
-							Method var12 = (Method) var1.field138[var5].field3129;
-							int var13 = var12.getModifiers();
-							arg0.p1(0);
-							arg0.p4(var13);
-						}
-					} catch (ClassNotFoundException var20) {
-						arg0.p1(-10);
-					} catch (InvalidClassException var21) {
-						arg0.p1(-11);
-					} catch (StreamCorruptedException var22) {
-						arg0.p1(-12);
-					} catch (OptionalDataException var23) {
-						arg0.p1(-13);
-					} catch (IllegalAccessException var24) {
-						arg0.p1(-14);
-					} catch (IllegalArgumentException var25) {
-						arg0.p1(-15);
-					} catch (InvocationTargetException var26) {
-						arg0.p1(-16);
-					} catch (SecurityException var27) {
-						arg0.p1(-17);
-					} catch (IOException var28) {
-						arg0.p1(-18);
-					} catch (NullPointerException var29) {
-						arg0.p1(-19);
-					} catch (Exception var30) {
-						arg0.p1(-20);
-					} catch (Throwable var31) {
-						arg0.p1(-21);
-					}
-				} else {
-					arg0.p1(var1.field132[var5]);
-				}
-			}
-			arg0.method345(var4);
-			arg0.method341(arg0.pos - var4);
-			var1.unlink();
-		}
-	}
-
-	@ObfuscatedName("n.b(II)I")
-	public static int method930(int arg0) {
-		VarBitType var1 = VarBitType.method1043(arg0);
-		int var2 = var1.field4234;
-		int var3 = var1.field4237;
-		int var4 = var1.field4233;
-		int var5 = field1832[var3 - var2];
-		return Client.field2050[var4] >> var2 & var5;
-	}
-
 	@ObfuscatedName("ei.a(II)I")
 	public static int method394(int arg0) {
 		int var1 = arg0 * 6 - 61440;
@@ -2624,52 +1790,9 @@ public class Statics {
 		return var2 * var3 >> 12;
 	}
 
-	@ObfuscatedName("ei.a(III)Lpc;")
-	public static GroundDecor method397(int arg0, int arg1, int arg2) {
-		Square var3 = World.field489[arg0][arg1][arg2];
-		return var3 == null || var3.field949 == null ? null : var3.field949;
-	}
-
-	@ObfuscatedName("ac.a(ZII)V")
-	public static void method23(int arg0, int arg1) {
-		if (TitleScreen.field1183 != 0 && arg0 != -1) {
-			method388(Client.jingles, arg0, TitleScreen.field1183);
-			Client.field2012 = true;
-		}
-	}
-
 	@ObfuscatedName("ac.c(II)Z")
 	public static boolean method24(int arg0) {
 		return arg0 >= 48 && arg0 <= 57;
-	}
-
-	@ObfuscatedName("g.a(ZLjava/lang/Object;I)[B")
-	public static byte[] method457(boolean arg0, Object arg1) {
-		if (arg1 == null) {
-			return null;
-		} else if (arg1 instanceof byte[]) {
-			byte[] var2 = (byte[]) arg1;
-			return arg0 ? method1276(var2) : var2;
-		} else if (arg1 instanceof ByteArrayWrapper) {
-			ByteArrayWrapper var3 = (ByteArrayWrapper) arg1;
-			return var3.method1();
-		} else {
-			throw new IllegalArgumentException();
-		}
-	}
-
-	@ObfuscatedName("cf.a(I)V")
-	public static void method174() {
-		Client.out.method30(24);
-		for (SubInterface var0 = (SubInterface) field2395.method1047(); var0 != null; var0 = (SubInterface) field2395.method1048()) {
-			if (var0.field3233 == 0) {
-				Client.method672(var0, true);
-			}
-		}
-		if (field967 != null) {
-			Client.method1371(field967);
-			field967 = null;
-		}
 	}
 
 	@ObfuscatedName("vi.a(IBIII)V")
@@ -2680,105 +1803,10 @@ public class Statics {
 		field279 = arg0;
 	}
 
-	@ObfuscatedName("fc.a(III)V")
-	public static void method426(int arg0, int arg1) {
-		long var2 = (long) ((arg0 << 16) + arg1);
-		Js5NetRequest var4 = (Js5NetRequest) Js5Net.field3907.method1049(var2);
-		if (var4 != null) {
-			Js5Net.field2559.method1388(var4);
-		}
-	}
-
 	@ObfuscatedName("qf.a(ZII)I")
 	public static int method1284(int arg0, int arg1) {
 		int var2 = arg1 >>> 31;
 		return (var2 + arg1) / arg0 - var2;
-	}
-
-	@ObfuscatedName("qe.a([BZ)[B")
-	public static byte[] method1276(byte[] arg0) {
-		int var1 = arg0.length;
-		byte[] var2 = new byte[var1];
-		ArrayUtil.method836(arg0, 0, var2, 0, var1);
-		return var2;
-	}
-
-	@ObfuscatedName("e.f(I)V")
-	public static void method290() {
-		if (Js5Net.field4033 != null) {
-			Js5Net.field4033.close();
-		}
-	}
-
-	@ObfuscatedName("e.a(IIII)I")
-	public static int method292(int arg0, int arg1, int arg2) {
-		int var3 = arg2 / arg1;
-		int var4 = arg1 - 1 & arg2;
-		int var5 = arg1 - 1 & arg0;
-		int var6 = arg0 / arg1;
-		int var7 = method48(var6, var3);
-		int var8 = method48(var6, var3 + 1);
-		int var9 = method48(var6 + 1, var3);
-		int var10 = method48(var6 + 1, var3 + 1);
-		int var11 = method419(arg1, var7, var4, var8);
-		int var12 = method419(arg1, var9, var4, var10);
-		return method419(arg1, var11, var5, var12);
-	}
-
-	@ObfuscatedName("l.a(Li;I)I")
-	public static int method823(JagString arg0) {
-		if (arg0 == null) {
-			return -1;
-		}
-		for (int var1 = 0; var1 < field2729; var1++) {
-			if (arg0.method624(field370[var1])) {
-				return var1;
-			}
-		}
-		return -1;
-	}
-
-	@ObfuscatedName("db.a(IIZ)Lq;")
-	public static IfType method238(int arg0, int arg1) {
-		IfType var2 = Client.method1579(arg1);
-		if (arg0 == -1) {
-			return var2;
-		} else if (var2 == null || var2.field3465 == null || var2.field3465.length <= arg0) {
-			return null;
-		} else {
-			return var2.field3465[arg0];
-		}
-	}
-
-	@ObfuscatedName("db.a(IZ)V")
-	public static void method239() {
-		byte[][] var0 = field3221;
-		for (int var1 = 0; var1 < 4; var1++) {
-			Client.method1479();
-			for (int var2 = 0; var2 < 13; var2++) {
-				for (int var3 = 0; var3 < 13; var3++) {
-					boolean var4 = false;
-					int var5 = field2024[var1][var2][var3];
-					if (var5 != -1) {
-						int var6 = var5 >> 24 & 0x3;
-						int var7 = var5 >> 14 & 0x3FF;
-						int var8 = var5 >> 1 & 0x3;
-						int var9 = var5 >> 3 & 0x7FF;
-						int var10 = var9 / 8 + (var7 / 8 << 8);
-						for (int var11 = 0; var11 < field2731.length; var11++) {
-							if (var10 == field2731[var11] && var0[var11] != null) {
-								method449(var2 * 8, var8, (var7 & 0x7) * 8, (var9 & 0x7) * 8, Client.collision, var6, var0[var11], var3 * 8, var1);
-								var4 = true;
-								break;
-							}
-						}
-					}
-					if (!var4) {
-						ClientBuild.method83(var1, 8, 8, var3 * 8, var2 * 8);
-					}
-				}
-			}
-		}
 	}
 
 	@ObfuscatedName("bj.a([[IB)V")
@@ -2888,42 +1916,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("pi.a(ILog;)V")
-	public static void method1219(LocChange arg0) {
-		long var1 = 0L;
-		if (arg0.field3063 == 0) {
-			var1 = World.method1062(arg0.field3055, arg0.field3059, arg0.field3052);
-		}
-		int var3 = 0;
-		int var4 = 0;
-		int var5 = -1;
-		if (arg0.field3063 == 1) {
-			var1 = World.method1082(arg0.field3055, arg0.field3059, arg0.field3052);
-		}
-		if (arg0.field3063 == 2) {
-			var1 = World.method770(arg0.field3055, arg0.field3059, arg0.field3052);
-		}
-		if (arg0.field3063 == 3) {
-			var1 = World.method501(arg0.field3055, arg0.field3059, arg0.field3052);
-		}
-		if (var1 != 0L) {
-			var4 = (int) var1 >> 20 & 0x3;
-			var5 = (int) (var1 >>> 32) & Integer.MAX_VALUE;
-			var3 = (int) var1 >> 14 & 0x1F;
-		}
-		arg0.field3064 = var4;
-		arg0.field3053 = var5;
-		arg0.field3060 = var3;
-	}
-
-	@ObfuscatedName("pi.a(Lea;Li;B)I")
-	public static int method1220(Packet arg0, JagString arg1) {
-		int var2 = arg0.pos;
-		arg0.method308(arg1.length);
-		arg0.pos += field2033.method1456(arg1.chars, arg0.pos, arg1.length, 0, arg0.data);
-		return arg0.pos - var2;
-	}
-
 	@ObfuscatedName("pi.b(II)V")
 	public static void method1221(int arg0) {
 		field3033 = arg0;
@@ -2992,277 +1984,9 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("jf.a(IIIB)Lpe;")
-	public static SubInterface method720(int arg0, int arg1, int arg2) {
-		SubInterface var3 = new SubInterface();
-		var3.field3233 = arg0;
-		var3.field3229 = arg2;
-		field2395.put((long) arg1, var3);
-		Client.method1005(arg2);
-		IfType var4 = Client.method1579(arg1);
-		if (var4 != null) {
-			Client.method1371(var4);
-		}
-		if (field967 != null) {
-			Client.method1371(field967);
-			field967 = null;
-		}
-		Client.field1958 = false;
-		Client.field3862 = 0;
-		Client.method861(field889, field4421, field4383, field1549);
-		if (var4 != null) {
-			Client.method759(false, var4);
-		}
-		Client.method972(arg2);
-		if (Client.field723 != -1) {
-			Client.method912(Client.field723, 1);
-		}
-		return var3;
-	}
-
-	@ObfuscatedName("jf.a(Lu;I)V")
-	public static void method721(ClientEntity arg0) {
-		arg0.field4093 = false;
-		if (arg0.field4106 != -1) {
-			SeqType var1 = SeqType.list(arg0.field4106);
-			if (var1 == null || var1.field1965 == null) {
-				arg0.field4106 = -1;
-			} else {
-				arg0.field4111++;
-				if (arg0.field4127 < var1.field1965.length && var1.field1990[arg0.field4127] < arg0.field4111) {
-					arg0.field4111 = 1;
-					arg0.field4127++;
-					method433(arg0 == Client.localPlayer, arg0.field4121, arg0.field4127, arg0.field4136, var1);
-				}
-				if (arg0.field4127 >= var1.field1965.length) {
-					arg0.field4127 = 0;
-					arg0.field4111 = 0;
-					method433(arg0 == Client.localPlayer, arg0.field4121, arg0.field4127, arg0.field4136, var1);
-				}
-			}
-		}
-		if (arg0.field4080 != -1 && Client.field2113 >= arg0.field4082) {
-			if (arg0.field4075 < 0) {
-				arg0.field4075 = 0;
-			}
-			int var2 = SpotType.list(arg0.field4080).field542;
-			if (var2 == -1) {
-				arg0.field4080 = -1;
-			} else {
-				SeqType var3 = SeqType.list(var2);
-				if (var3 == null || var3.field1965 == null) {
-					arg0.field4080 = -1;
-				} else {
-					arg0.field4120++;
-					if (var3.field1965.length > arg0.field4075 && var3.field1990[arg0.field4075] < arg0.field4120) {
-						arg0.field4075++;
-						arg0.field4120 = 1;
-						method433(Client.localPlayer == arg0, arg0.field4121, arg0.field4075, arg0.field4136, var3);
-					}
-					if (arg0.field4075 >= var3.field1965.length) {
-						arg0.field4080 = -1;
-					}
-				}
-			}
-		}
-		if (arg0.field4077 != -1 && arg0.field4140 <= 1) {
-			SeqType var4 = SeqType.list(arg0.field4077);
-			if (var4.field1983 == 1 && arg0.field4137 > 0 && arg0.field4133 <= Client.field2113 && Client.field2113 > arg0.field4130) {
-				arg0.field4140 = 1;
-				return;
-			}
-		}
-		if (arg0.field4077 != -1 && arg0.field4140 == 0) {
-			SeqType var5 = SeqType.list(arg0.field4077);
-			if (var5 == null || var5.field1965 == null) {
-				arg0.field4077 = -1;
-			} else {
-				arg0.field4098++;
-				if (arg0.field4101 < var5.field1965.length && var5.field1990[arg0.field4101] < arg0.field4098) {
-					arg0.field4098 = 1;
-					arg0.field4101++;
-					method433(arg0 == Client.localPlayer, arg0.field4121, arg0.field4101, arg0.field4136, var5);
-				}
-				if (arg0.field4101 >= var5.field1965.length) {
-					arg0.field4132++;
-					arg0.field4101 -= var5.field1972;
-					if (arg0.field4132 >= var5.field1970) {
-						arg0.field4077 = -1;
-					} else if (arg0.field4101 >= 0 && arg0.field4101 < var5.field1965.length) {
-						method433(arg0 == Client.localPlayer, arg0.field4121, arg0.field4101, arg0.field4136, var5);
-					} else {
-						arg0.field4077 = -1;
-					}
-				}
-				arg0.field4093 = var5.field1960;
-			}
-		}
-		if (arg0.field4140 > 0) {
-			arg0.field4140--;
-		}
-	}
-
-	@ObfuscatedName("hh.a(ZI)V")
-	public static void method576() {
-		byte[][] var0 = field774;
-		for (int var1 = 0; var1 < 4; var1++) {
-			Client.method1479();
-			for (int var2 = 0; var2 < 13; var2++) {
-				for (int var3 = 0; var3 < 13; var3++) {
-					int var4 = field2024[var1][var2][var3];
-					if (var4 != -1) {
-						int var5 = var4 >> 24 & 0x3;
-						int var6 = var4 >> 1 & 0x3;
-						int var7 = var4 >> 14 & 0x3FF;
-						int var8 = var4 >> 3 & 0x7FF;
-						int var9 = (var7 / 8 << 8) + (var8 / 8);
-						for (int var10 = 0; var10 < field2731.length; var10++) {
-							if (var9 == field2731[var10] && var0[var10] != null) {
-								ClientBuild.method1447(var6, (var7 & 0x7) * 8, Client.collision, (var8 & 0x7) * 8, var1, var0[var10], var5, var3 * 8, var2 * 8);
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
 	@ObfuscatedName("lh.c(B)V")
 	public static void method869() {
 		field1694 = new LinkList();
-	}
-
-	@ObfuscatedName("lh.a(IIZIII)V")
-	public static void method871(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		long var5 = World.method1062(arg2, arg4, arg0);
-		if (var5 != 0L) {
-			int var7 = (int) var5 >> 20 & 0x3;
-			int var8 = (int) var5 >> 14 & 0x1F;
-			int var9 = arg3;
-			int[] var10 = Pix2D.field1331;
-			int var11 = arg4 * 4 + (52736 - arg0 * 512) * 4 + 24624;
-			int var12 = (int) (var5 >>> 32) & Integer.MAX_VALUE;
-			if (var5 > 0L) {
-				var9 = arg1;
-			}
-			LocType var13 = LocType.method1321(var12);
-			if (var13.field2832 == -1) {
-				if (var8 == 0 || var8 == 2) {
-					if (var7 == 0) {
-						var10[var11] = var9;
-						var10[var11 + 512] = var9;
-						var10[var11 + 1024] = var9;
-						var10[var11 + 1536] = var9;
-					} else if (var7 == 1) {
-						var10[var11] = var9;
-						var10[var11 + 1] = var9;
-						var10[var11 + 2] = var9;
-						var10[var11 + 3] = var9;
-					} else if (var7 == 2) {
-						var10[var11 + 3] = var9;
-						var10[var11 + 515] = var9;
-						var10[var11 + 1024 + 3] = var9;
-						var10[var11 + 3 + 1536] = var9;
-					} else if (var7 == 3) {
-						var10[var11 + 1536] = var9;
-						var10[var11 + 1 + 1536] = var9;
-						var10[var11 + 2 + 1536] = var9;
-						var10[var11 + 1536 + 3] = var9;
-					}
-				}
-				if (var8 == 3) {
-					if (var7 == 0) {
-						var10[var11] = var9;
-					} else if (var7 == 1) {
-						var10[var11 + 3] = var9;
-					} else if (var7 == 2) {
-						var10[var11 + 1536 + 3] = var9;
-					} else if (var7 == 3) {
-						var10[var11 + 1536] = var9;
-					}
-				}
-				if (var8 == 2) {
-					if (var7 == 3) {
-						var10[var11] = var9;
-						var10[var11 + 512] = var9;
-						var10[var11 + 1024] = var9;
-						var10[var11 + 1536] = var9;
-					} else if (var7 == 0) {
-						var10[var11] = var9;
-						var10[var11 + 1] = var9;
-						var10[var11 + 2] = var9;
-						var10[var11 + 3] = var9;
-					} else if (var7 == 1) {
-						var10[var11 + 3] = var9;
-						var10[var11 + 512 + 3] = var9;
-						var10[var11 + 3 + 1024] = var9;
-						var10[var11 + 1536 + 3] = var9;
-					} else if (var7 == 2) {
-						var10[var11 + 1536] = var9;
-						var10[var11 + 1536 + 1] = var9;
-						var10[var11 + 1538] = var9;
-						var10[var11 + 3 + 1536] = var9;
-					}
-				}
-			} else {
-				SoftwarePix8 var14 = field4460[var13.field2832];
-				if (var14 != null) {
-					int var15 = (var13.field2774 * 4 - var14.field2434) / 2;
-					int var16 = (var13.field2794 * 4 - var14.field2437) / 2;
-					var14.method876(arg4 * 4 + var15 + 48, 48 - -((104 - (arg0 - -var13.field2794)) * 4) + var16);
-				}
-			}
-		}
-		long var17 = World.method770(arg2, arg4, arg0);
-		if (var17 != 0L) {
-			int var19 = (int) var17 >> 20 & 0x3;
-			int var20 = (int) var17 >> 14 & 0x1F;
-			int var21 = Integer.MAX_VALUE & (int) (var17 >>> 32);
-			LocType var22 = LocType.method1321(var21);
-			if (var22.field2832 != -1) {
-				SoftwarePix8 var23 = field4460[var22.field2832];
-				if (var23 != null) {
-					int var24 = (var22.field2774 * 4 - var23.field2434) / 2;
-					int var25 = (var22.field2794 * 4 - var23.field2437) / 2;
-					var23.method876(arg4 * 4 + var24 + 48, var25 + (-var22.field2794 + -arg0 + 104) * 4 + 48);
-				}
-			} else if (var20 == 9) {
-				int var26 = 15658734;
-				int[] var27 = Pix2D.field1331;
-				if (var17 > 0L) {
-					var26 = 15597568;
-				}
-				int var28 = arg4 * 4 + (103 - arg0) * 512 * 4 + 24624;
-				if (var19 == 0 || var19 == 2) {
-					var27[var28 + 1536] = var26;
-					var27[var28 + 1025] = var26;
-					var27[var28 + 514] = var26;
-					var27[var28 + 3] = var26;
-				} else {
-					var27[var28] = var26;
-					var27[var28 + 1 + 512] = var26;
-					var27[var28 + 1024 + 2] = var26;
-					var27[var28 + 1539] = var26;
-				}
-			}
-		}
-		long var29 = World.method501(arg2, arg4, arg0);
-		if (var29 == 0L) {
-			return;
-		}
-		int var31 = Integer.MAX_VALUE & (int) (var29 >>> 32);
-		LocType var32 = LocType.method1321(var31);
-		if (var32.field2832 == -1) {
-			return;
-		}
-		SoftwarePix8 var33 = field4460[var32.field2832];
-		if (var33 != null) {
-			int var34 = (var32.field2774 * 4 - var33.field2434) / 2;
-			int var35 = (var32.field2794 * 4 - var33.field2437) / 2;
-			var33.method876(var34 + arg4 * 4 + 48, (-arg0 + 104 + -var32.field2794) * 4 + 48 - -var35);
-			return;
-		}
 	}
 
 	@ObfuscatedName("o.a(II[Li;I[S)V")
@@ -3312,12 +2036,6 @@ public class Statics {
 		field1552 = arg0.method964(field2156);
 	}
 
-	@ObfuscatedName("o.f(I)I")
-	public static int method1040() {
-		int var0 = Client.method1584(Client.field1428, Client.field3608, Client.field2907);
-		return var0 - Client.field1954 >= 800 || (ClientBuild.field2098[Client.field2907][Client.field1428 >> 7][Client.field3608 >> 7] & 0x4) == 0 ? 3 : Client.field2907;
-	}
-
 	@ObfuscatedName("ri.b(II)I")
 	public static int method1344(int arg0) {
 		return arg0 & 0xFF;
@@ -3331,152 +2049,6 @@ public class Statics {
 			return Client.field2103 ? field2321 : null;
 		} else {
 			return arg0.field3512;
-		}
-	}
-
-	@ObfuscatedName("fd.a(Li;IBLi;Li;)V")
-	public static void method428(JagString arg0, JagString arg1, JagString arg2) {
-		Client.method801(arg1, -1, arg0, 9, arg2);
-	}
-
-	@ObfuscatedName("fd.a(BI)Z")
-	public static boolean method431(int arg0) {
-		return (arg0 >> 30 & 0x1) != 0;
-	}
-
-	@ObfuscatedName("fd.a(IZIIILk;)V")
-	public static void method433(boolean arg0, int arg1, int arg2, int arg3, SeqType arg4) {
-		if (Client.field3445 >= 50 || (arg4.field2001 == null || arg4.field2001.length < 1 || arg2 >= arg4.field2001.length || arg4.field2001[arg2] == null)) {
-			return;
-		}
-		int var5 = arg4.field2001[arg2][0];
-		int var6 = var5 >> 8;
-		int var7 = var5 >> 4 & 0x7;
-		int var8 = var5 & 0xF;
-		if (arg4.field2001[arg2].length > 1) {
-			int var9 = (int) (Math.random() * (double) arg4.field2001[arg2].length);
-			if (var9 > 0) {
-				var6 = arg4.field2001[arg2][var9];
-			}
-		}
-		if (var8 == 0) {
-			if (arg0) {
-				method668(var7, 0, var6);
-			}
-		} else if (Client.field4211 != 0) {
-			field397[Client.field3445] = var6;
-			field2016[Client.field3445] = var7;
-			field116[Client.field3445] = 0;
-			int var10 = (arg3 - 64) / 128;
-			field4417[Client.field3445] = null;
-			int var11 = (arg1 - 64) / 128;
-			field2726[Client.field3445] = (var10 << 16) + (var11 << 8) + var8;
-			Client.field3445++;
-		}
-	}
-
-	@ObfuscatedName("pd.a(I[Lgd;II)V")
-	public static void method1143(int arg0, WorldEntry[] arg1, int arg2) {
-		if (arg2 <= arg0) {
-			return;
-		}
-		int var3 = arg0 - 1;
-		int var4 = (arg0 + arg2) / 2;
-		int var5 = arg2 + 1;
-		WorldEntry var6 = arg1[var4];
-		arg1[var4] = arg1[arg0];
-		arg1[arg0] = var6;
-		while (var3 < var5) {
-			boolean var7 = true;
-			do {
-				var5--;
-				for (int var8 = 0; var8 < 4; var8++) {
-					int var9;
-					int var10;
-					if (field461[var8] == 2) {
-						var10 = arg1[var5].field1258;
-						var9 = var6.field1258;
-					} else if (field461[var8] == 1) {
-						var9 = var6.field1255;
-						if (var9 == -1 && field1686[var8] == 1) {
-							var9 = 2001;
-						}
-						var10 = arg1[var5].field1255;
-						if (var10 == -1 && field1686[var8] == 1) {
-							var10 = 2001;
-						}
-					} else if (field461[var8] == 3) {
-						var10 = arg1[var5].field1257 ? 1 : 0;
-						var9 = var6.field1257 ? 1 : 0;
-					} else {
-						var10 = arg1[var5].field1261;
-						var9 = var6.field1261;
-					}
-					if (var10 != var9) {
-						if ((field1686[var8] != 1 || var10 <= var9) && (field1686[var8] != 0 || var10 >= var9)) {
-							var7 = false;
-						}
-						break;
-					}
-					if (var8 == 3) {
-						var7 = false;
-					}
-				}
-			} while (var7);
-			boolean var11 = true;
-			do {
-				var3++;
-				for (int var12 = 0; var12 < 4; var12++) {
-					int var13;
-					int var14;
-					if (field461[var12] == 2) {
-						var13 = arg1[var3].field1258;
-						var14 = var6.field1258;
-					} else if (field461[var12] == 1) {
-						var13 = arg1[var3].field1255;
-						if (var13 == -1 && field1686[var12] == 1) {
-							var13 = 2001;
-						}
-						var14 = var6.field1255;
-						if (var14 == -1 && field1686[var12] == 1) {
-							var14 = 2001;
-						}
-					} else if (field461[var12] == 3) {
-						var13 = arg1[var3].field1257 ? 1 : 0;
-						var14 = var6.field1257 ? 1 : 0;
-					} else {
-						var13 = arg1[var3].field1261;
-						var14 = var6.field1261;
-					}
-					if (var13 != var14) {
-						if ((field1686[var12] != 1 || var13 >= var14) && (field1686[var12] != 0 || var13 <= var14)) {
-							var11 = false;
-						}
-						break;
-					}
-					if (var12 == 3) {
-						var11 = false;
-					}
-				}
-			} while (var11);
-			if (var5 > var3) {
-				WorldEntry var15 = arg1[var3];
-				arg1[var3] = arg1[var5];
-				arg1[var5] = var15;
-			}
-		}
-		method1143(arg0, arg1, var5);
-		method1143(var5 + 1, arg1, arg2);
-	}
-
-	@ObfuscatedName("pd.c(B)V")
-	public static void method1144() {
-		for (int var0 = 0; var0 < field1041; var0++) {
-			int var1 = field402[var0];
-			ClientNpc var2 = Client.field4223[var1];
-			if (var2 != null) {
-				Client.method514(var2.field3682.field2349, var2);
-			}
 		}
 	}
 
@@ -3499,34 +2071,6 @@ public class Statics {
 		return arg0 >>> 7;
 	}
 
-	@ObfuscatedName("td.a(Lu;I)V")
-	public static void method1444(ClientEntity arg0) {
-		if (arg0.field4130 == Client.field2113 || arg0.field4077 == -1 || arg0.field4140 != 0 || arg0.field4098 + 1 > SeqType.list(arg0.field4077).field1990[arg0.field4101]) {
-			int var1 = Client.field2113 - arg0.field4133;
-			int var2 = arg0.field4113 * 128 + arg0.field4103 * 64;
-			int var3 = arg0.field4130 - arg0.field4133;
-			int var4 = arg0.field4094 * 128 + arg0.field4103 * 64;
-			int var5 = arg0.field4100 * 128 + arg0.field4103 * 64;
-			int var6 = arg0.field4072 * 128 + arg0.field4103 * 64;
-			arg0.field4121 = ((var3 - var1) * var4 + var6 * var1) / var3;
-			arg0.field4136 = ((var3 - var1) * var2 + var5 * var1) / var3;
-		}
-		arg0.field4108 = 0;
-		if (arg0.field4139 == 0) {
-			arg0.field4119 = 1024;
-		}
-		if (arg0.field4139 == 1) {
-			arg0.field4119 = 1536;
-		}
-		if (arg0.field4139 == 2) {
-			arg0.field4119 = 0;
-		}
-		if (arg0.field4139 == 3) {
-			arg0.field4119 = 512;
-		}
-		arg0.field4085 = arg0.field4119;
-	}
-
 	@ObfuscatedName("ma.a(IIIIIII)V")
 	public static void method887(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (field1207 <= arg5 && arg2 <= field183 && arg1 >= field919 && field279 >= arg3) {
@@ -3539,53 +2083,6 @@ public class Statics {
 			method1028(arg3, arg4, arg5, arg1, arg2);
 		} else {
 			method101(arg3, arg0, arg5, arg1, arg2, arg4);
-		}
-	}
-
-	@ObfuscatedName("mh.a(IIIILdj;)V")
-	public static void method922(int arg0, int arg1, int arg2, ClientPlayer arg3) {
-		if (arg3 == Client.localPlayer || Client.field3862 >= 400) {
-			return;
-		}
-		JagString var4;
-		if (arg3.field749 == 0) {
-			var4 = JagString.join(new JagString[] { arg3.field766, Client.method1152(arg3.field747, Client.localPlayer.field747), field1238, Text.field2717, JagString.method1212(arg3.field747), field1879});
-		} else {
-			var4 = JagString.join(new JagString[] { arg3.field766, field1238, Text.field2637, JagString.method1212(arg3.field749), field1879});
-		}
-		if (Client.field475 == 1) {
-			Client.method685(arg1, Text.field608, (short) 31, (long) arg0, JagString.join(new JagString[] { Client.field1414, field914, var4 }), arg2);
-		} else if (!field145) {
-			for (int var5 = 7; var5 >= 0; var5--) {
-				if (field2436[var5] != null) {
-					short var6 = 0;
-					if (Client.game == 0 && field2436[var5].method624(Text.field3041)) {
-						if (arg3.field747 > Client.localPlayer.field747) {
-							var6 = 2000;
-						}
-						if (Client.localPlayer.field752 != 0 && arg3.field752 != 0) {
-							if (arg3.field752 == Client.localPlayer.field752) {
-								var6 = 2000;
-							} else {
-								var6 = 0;
-							}
-						}
-					} else if (field3875[var5]) {
-						var6 = 2000;
-					}
-					short var7 = field390[var5];
-					short var8 = (short) (var7 + var6);
-					Client.method685(arg1, field2436[var5], var8, (long) arg0, JagString.join(new JagString[] {field1637, var4 }), arg2);
-				}
-			}
-		} else if ((field2084 & 0x8) == 8) {
-			Client.method685(arg1, field3835, (short) 23, (long) arg0, JagString.join(new JagString[] {field464, field914, var4 }), arg2);
-		}
-		for (int var9 = 0; var9 < Client.field3862; var9++) {
-			if (Client.field994[var9] == 10) {
-				Client.field3836[var9] = JagString.join(new JagString[] {field1637, var4 });
-				return;
-			}
 		}
 	}
 
@@ -3667,14 +2164,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("ah.a(III)I")
-	public static int method48(int arg0, int arg1) {
-		int var2 = method1330(arg0 - 1, arg1 + -1) + method1330(arg0 - 1, arg1 + 1) + method1330(arg0 + 1, arg1 + -1) + method1330(arg0 - -1, arg1 - -1);
-		int var3 = method1330(arg0, arg1 - 1) + method1330(arg0, arg1 + 1) + method1330(arg0 + -1, arg1) + method1330(arg0 - -1, arg1);
-		int var4 = method1330(arg0, arg1);
-		return var2 / 16 + var3 / 8 + var4 / 4;
-	}
-
 	@ObfuscatedName("ah.a(IB)I")
 	public static int method50(int arg0) {
 		return arg0 & 0x7F;
@@ -3691,82 +2180,6 @@ public class Statics {
 		} else {
 			return arg0;
 		}
-	}
-
-	@ObfuscatedName("bf.a(Lu;Z)V")
-	public static void method86(ClientEntity arg0) {
-		if (arg0.field4102 == 0) {
-			return;
-		}
-		if (arg0.field4114 != -1 && arg0.field4114 < 32768) {
-			ClientNpc var1 = Client.field4223[arg0.field4114];
-			if (var1 != null) {
-				int var2 = arg0.field4121 - var1.field4121;
-				int var3 = arg0.field4136 - var1.field4136;
-				if (var3 != 0 || var2 != 0) {
-					arg0.field4119 = (int) (Math.atan2((double) var3, (double) var2) * 325.949D) & 0x7FF;
-				}
-			}
-		}
-		if (arg0.field4114 >= 32768) {
-			int var4 = arg0.field4114 - 32768;
-			if (var4 == Client.selfSlot) {
-				var4 = 2047;
-			}
-			ClientPlayer var5 = Client.field4491[var4];
-			if (var5 != null) {
-				int var6 = arg0.field4136 - var5.field4136;
-				int var7 = arg0.field4121 - var5.field4121;
-				if (var6 != 0 || var7 != 0) {
-					arg0.field4119 = (int) (Math.atan2((double) var6, (double) var7) * 325.949D) & 0x7FF;
-				}
-			}
-		}
-		if ((arg0.field4096 != 0 || arg0.field4099 != 0) && (arg0.field4135 == 0 || arg0.field4108 > 0)) {
-			int var8 = arg0.field4103 * 64 + arg0.field4121 - (-Client.field3679 + arg0.field4099 + -Client.field3679) * 64 - 64;
-			int var9 = arg0.field4136 + (arg0.field4103 - 1) * 64 - (arg0.field4096 - Client.field4212 - Client.field4212) * 64;
-			if (var9 != 0 || var8 != 0) {
-				arg0.field4119 = (int) (Math.atan2((double) var9, (double) var8) * 325.949D) & 0x7FF;
-			}
-			arg0.field4099 = 0;
-			arg0.field4096 = 0;
-		}
-		int var10 = arg0.field4119 - arg0.field4085 & 0x7FF;
-		if (var10 == 0) {
-			arg0.field4089 = 0;
-			return;
-		}
-		arg0.field4089++;
-		if (var10 > 1024) {
-			arg0.field4085 -= arg0.field4102;
-			boolean var11 = true;
-			if (var10 < arg0.field4102 || 2048 - arg0.field4102 < var10) {
-				arg0.field4085 = arg0.field4119;
-				var11 = false;
-			}
-			if (arg0.field4105 == arg0.field4106 && (arg0.field4089 > 25 || var11)) {
-				if (arg0.field4091 == -1) {
-					arg0.field4106 = arg0.field4092;
-				} else {
-					arg0.field4106 = arg0.field4091;
-				}
-			}
-		} else {
-			arg0.field4085 += arg0.field4102;
-			boolean var12 = true;
-			if (arg0.field4102 > var10 || 2048 - arg0.field4102 < var10) {
-				arg0.field4085 = arg0.field4119;
-				var12 = false;
-			}
-			if (arg0.field4106 == arg0.field4105 && (arg0.field4089 > 25 || var12)) {
-				if (arg0.field4128 == -1) {
-					arg0.field4106 = arg0.field4092;
-				} else {
-					arg0.field4106 = arg0.field4128;
-				}
-			}
-		}
-		arg0.field4085 &= 0x7FF;
 	}
 
 	@ObfuscatedName("bg.a(II)I")
@@ -3826,7 +2239,7 @@ public class Statics {
 
 	@ObfuscatedName("bi.a(Lea;I)Li;")
 	public static JagString method103(Packet arg0) {
-		return method524(arg0);
+		return WordPack.method524(arg0);
 	}
 
 	@ObfuscatedName("od.a(IIII)I")
@@ -3901,78 +2314,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("ec.c(I)V")
-	public static void method367() {
-		for (int var0 = 0; var0 < Client.field3445; var0++) {
-			int var10002 = field116[var0]--;
-			if (field116[var0] >= -10) {
-				JagFX var2 = field4417[var0];
-				if (var2 == null) {
-					var2 = JagFX.method252(Client.jagFX, field397[var0], 0);
-					if (var2 == null) {
-						continue;
-					}
-					field116[var0] += var2.method251();
-					field4417[var0] = var2;
-				}
-				if (field116[var0] < 0) {
-					int var3;
-					if (field2726[var0] == 0) {
-						var3 = field2172;
-					} else {
-						int var4 = (field2726[var0] & 0xFF) * 128;
-						int var5 = field2726[var0] >> 16 & 0xFF;
-						int var6 = var5 * 128 + 64 - Client.localPlayer.field4136;
-						if (var6 < 0) {
-							var6 = -var6;
-						}
-						int var7 = field2726[var0] >> 8 & 0xFF;
-						int var8 = var7 * 128 + 64 - Client.localPlayer.field4121;
-						if (var8 < 0) {
-							var8 = -var8;
-						}
-						int var9 = var8 + var6 - 128;
-						if (var4 < var9) {
-							field116[var0] = -100;
-							continue;
-						}
-						if (var9 < 0) {
-							var9 = 0;
-						}
-						var3 = (var4 - var9) * Client.field4211 / var4;
-					}
-					if (var3 > 0) {
-						Wave var10 = var2.method253().method1453(Client.decimator);
-						WaveStream var11 = WaveStream.method1124(var10, var3);
-						var11.method1119(field2016[var0] - 1);
-						Client.mixer.method1506(var11);
-					}
-					field116[var0] = -100;
-				}
-			} else {
-				Client.field3445--;
-				for (int var1 = var0; var1 < Client.field3445; var1++) {
-					field397[var1] = field397[var1 + 1];
-					field4417[var1] = field4417[var1 + 1];
-					field2016[var1] = field2016[var1 + 1];
-					field116[var1] = field116[var1 + 1];
-					field2726[var1] = field2726[var1 + 1];
-				}
-				var0--;
-			}
-		}
-		if (Client.field2012 && !MidiManager.method707()) {
-			if (TitleScreen.field1183 != 0 && field25 != -1) {
-				method388(Client.songs, field25, TitleScreen.field1183);
-			}
-			Client.field2012 = false;
-		} else if (TitleScreen.field1183 != 0 && field25 != -1 && !MidiManager.method707()) {
-			Client.out.method30(133);
-			Client.out.p4(field25);
-			field25 = -1;
-		}
-	}
-
 	@ObfuscatedName("ed.a(IIIIIIII)V")
 	public static void method368(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (field1207 <= arg5 && field183 >= arg0 && arg2 >= field919 && arg6 <= field279) {
@@ -3982,117 +2323,9 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("ee.a(B)V")
-	public static void method372() {
-		if (field2514 != null || Client.field3568 != null) {
-			return;
-		}
-		int var0 = ClientMouseListener.field625;
-		if (Client.field1958) {
-			if (var0 != 1) {
-				int var5 = ClientMouseListener.field471;
-				int var6 = ClientMouseListener.field4449;
-				if (field1549 - 10 > var5 || field1549 + field4421 + 10 < var5 || var6 < field4383 - 10 || field889 + field4383 + 10 < var6) {
-					Client.field1958 = false;
-					Client.method861(field889, field4421, field4383, field1549);
-				}
-			}
-			if (var0 != 1) {
-				return;
-			}
-			int var7 = field1549;
-			int var8 = field4383;
-			int var9 = field4421;
-			int var10 = ClientMouseListener.field4239;
-			int var11 = ClientMouseListener.field3339;
-			int var12 = -1;
-			for (int var13 = 0; var13 < Client.field3862; var13++) {
-				int var14 = var8 + (-var13 + Client.field3862 + -1) * 15 + 31;
-				if (var10 > var7 && var10 < var7 + var9 && var11 > var14 - 13 && var11 < var14 + 3) {
-					var12 = var13;
-				}
-			}
-			if (var12 != -1) {
-				Client.method1257(var12);
-			}
-			Client.field1958 = false;
-			Client.method861(field889, field4421, field4383, field1549);
-			return;
-		}
-		if (var0 == 1 && Client.field3862 > 0) {
-			short var1 = Client.field994[Client.field3862 - 1];
-			if (var1 == 6 || var1 == 8 || var1 == 49 || var1 == 44 || var1 == 13 || var1 == 28 || var1 == 9 || var1 == 2 || var1 == 21 || var1 == 18 || var1 == 12 || var1 == 1001) {
-				int var2 = Client.field3176[Client.field3862 - 1];
-				int var3 = Client.field4060[Client.field3862 - 1];
-				IfType var4 = Client.method1579(var3);
-				if (method465(method530(var4)) || method1070(method530(var4))) {
-					field4535 = 0;
-					field739 = false;
-					if (field2514 != null) {
-						Client.method1371(field2514);
-					}
-					field2514 = Client.method1579(var3);
-					field305 = var2;
-					field4146 = ClientMouseListener.field4239;
-					field894 = ClientMouseListener.field3339;
-					Client.method1371(field2514);
-					return;
-				}
-			}
-		}
-		if (var0 == 1 && (Client.field3859 == 1 && Client.field3862 > 2 || Client.method1554(Client.field3862 - 1))) {
-			var0 = 2;
-		}
-		if (var0 == 1 && Client.field3862 > 0) {
-			Client.method1257(Client.field3862 - 1);
-		}
-		if (var0 == 2 && Client.field3862 > 0) {
-			Client.method904();
-			return;
-		}
-	}
-
-	@ObfuscatedName("ee.b(III)V")
-	public static void method374(int arg0, int arg1, int arg2) {
-		World.field2145 = true;
-		field2484 = arg0;
-		World.field698 = arg1;
-		World.field621 = arg2;
-		World.field2057 = -1;
-		World.field1714 = -1;
-	}
-
-	@ObfuscatedName("ee.a(BZI)Li;")
-	public static JagString method375(int arg0) {
-		return method1481(true, arg0);
-	}
-
 	@ObfuscatedName("eg.a(IB)I")
 	public static int method387(int arg0) {
 		return arg0 & 0x7F;
-	}
-
-	@ObfuscatedName("fh.a(IIZIII[Lia;I[BII)V")
-	public static void method449(int arg0, int arg1, int arg2, int arg3, CollisionMap[] arg4, int arg5, byte[] arg6, int arg7, int arg8) {
-		for (int var9 = 0; var9 < 8; var9++) {
-			for (int var10 = 0; var10 < 8; var10++) {
-				if (var9 + arg0 > 0 && var9 + arg0 < 103 && arg7 + var10 > 0 && var10 + arg7 < 103) {
-					arg4[arg8].field1667[arg0 + var9][arg7 + var10] &= 0xFEFFFFFF;
-				}
-			}
-		}
-		Packet var11 = new Packet(arg6);
-		for (int var12 = 0; var12 < 4; var12++) {
-			for (int var13 = 0; var13 < 64; var13++) {
-				for (int var14 = 0; var14 < 64; var14++) {
-					if (var12 == arg5 && var13 >= arg2 && var13 < arg2 + 8 && var14 >= arg3 && var14 < arg3 + 8) {
-						ClientBuild.method914(RegionRotate.method1606(arg1, var13 & 0x7, var14 & 0x7) + arg0, var11, 0, 0, arg7 + RegionRotate.method1069(var14 & 0x7, var13 & 0x7, arg1), arg1, arg8);
-					} else {
-						ClientBuild.method914(-1, var11, 0, 0, -1, 0, 0);
-					}
-				}
-			}
-		}
 	}
 
 	@ObfuscatedName("fi.a(Lhj;B)V")
@@ -4140,7 +2373,7 @@ public class Statics {
 		if (TitleScreen.field1581 == -1) {
 			return;
 		}
-		WorldEntry var1 = field3845[TitleScreen.field1581];
+		WorldEntry var1 = TitleScreen.field3845[TitleScreen.field1581];
 		if (Client.memServer == var1.field1257) {
 			byte[] var2 = JagString.join(new JagString[] { var1.field1262, field3922}).method613();
 			Client.field1760 = new String(var2, 0, var2.length);
@@ -4254,7 +2487,7 @@ public class Statics {
 		if (field3659 == -1 || field594 == -1) {
 			return;
 		}
-		int var0 = field3659 - NpcType.field2330;
+		int var0 = field3659 - field2330;
 		if (var0 < 2 || var0 > 2) {
 			var0 >>= 0x4;
 		}
@@ -4263,7 +2496,7 @@ public class Statics {
 			var1 >>= 0x4;
 		}
 		field3033 += var1;
-		NpcType.field2330 += var0;
+		field2330 += var0;
 		if (var0 == 0 && var1 == 0) {
 			field3659 = -1;
 			field594 = -1;
@@ -4291,32 +2524,32 @@ public class Statics {
 			int var4 = var0.g2();
 			int var5 = var0.g2();
 			int var6 = var0.g2();
-			field2181 = var2 * 64;
-			field239 = var1 * 64;
+			ClientBuild.field2181 = var2 * 64;
+			ClientBuild.field239 = var1 * 64;
 			field1110 = 8.0D;
 			field2915 = 8.0D;
 			field1009 = new int[FloType.field2923 + 1];
-			field760 = (var4 - var2) * 64 + 64;
-			SeqType.field1988 = (var3 + 1 - var1) * 64;
-			int var7 = Client.field3679 + (Client.localPlayer.field4121 >> 7) - field2181;
-			int var8 = Client.field4212 + (Client.localPlayer.field4136 >> 7) - field239;
+			ClientBuild.field760 = (var4 - var2) * 64 + 64;
+			ClientBuild.field1988 = (var3 + 1 - var1) * 64;
+			int var7 = Client.field3679 + (Client.localPlayer.field4121 >> 7) - ClientBuild.field2181;
+			int var8 = Client.field4212 + (Client.localPlayer.field4136 >> 7) - ClientBuild.field239;
 			int var9 = var8 + (int) (Math.random() * 10.0D) - 5;
 			int var10 = var7 + (int) (Math.random() * 10.0D) - 5;
-			int var11 = field760 >> 6;
-			int var12 = SeqType.field1988 >> 6;
+			int var11 = ClientBuild.field760 >> 6;
+			int var12 = ClientBuild.field1988 >> 6;
 			field4052 = new byte[var12][var11][];
 			field105 = new byte[var12][var11][];
 			field1912 = new int[var12][var11][];
 			field1786 = new byte[var12][var11][];
-			ClientMouseListener.field4166 = new byte[var12][var11][];
+			field4166 = new byte[var12][var11][];
 			int var13 = ClientBuild.field1270 >> 1;
 			field2126 = new byte[var12][var11][];
-			if (var9 >= 0 && var9 < SeqType.field1988 && var10 >= 0 && field760 > var10) {
-				field3033 = field760 - var10;
-				NpcType.field2330 = var9;
+			if (var9 >= 0 && var9 < ClientBuild.field1988 && var10 >= 0 && ClientBuild.field760 > var10) {
+				field3033 = ClientBuild.field760 - var10;
+				field2330 = var9;
 			} else {
-				field3033 = field2181 + field760 - var6 * 64;
-				NpcType.field2330 = var5 * 64 - field239;
+				field3033 = ClientBuild.field2181 + ClientBuild.field760 - var6 * 64;
+				field2330 = var5 * 64 - ClientBuild.field239;
 			}
 			int var14 = ClientBuild.field4086 >> 2 << 10;
 			field895 = new int[var12][var11][];
@@ -4412,7 +2645,7 @@ public class Statics {
 			return Client.method1579(arg0.field3504);
 		}
 		int var1 = arg0.parentId >>> 16;
-		for (SubInterface var2 = (SubInterface) field2395.method1047(); var2 != null; var2 = (SubInterface) field2395.method1048()) {
+		for (SubInterface var2 = (SubInterface) Client.field2395.method1047(); var2 != null; var2 = (SubInterface) Client.field2395.method1048()) {
 			if (var1 == var2.field3229) {
 				return Client.method1579((int) var2.key);
 			}
@@ -4488,43 +2721,6 @@ public class Statics {
 		return var1.field3658;
 	}
 
-	@ObfuscatedName("og.c(II)V")
-	public static void method1073(int arg0) {
-		BZip2State.field3145 = 1000 / arg0;
-	}
-
-	@ObfuscatedName("ke.d(I)V")
-	public static void method779() {
-		try {
-			if (field2414 == null) {
-				field2414 = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { field3983, JagString.method1212(Client.lang), field915}).method606());
-			} else {
-				byte[] var0 = field2414.method12();
-				if (var0 != null) {
-					Packet var1 = new Packet(var0);
-					field1895 = var1.g2();
-					field3845 = new WorldEntry[field1895];
-					for (int var2 = 0; var2 < field1895; var2++) {
-						WorldEntry var3 = field3845[var2] = new WorldEntry();
-						int var4 = var1.g2();
-						var3.field1261 = var4 & 0x7FFF;
-						var3.field1257 = (var4 & 0x8000) != 0;
-						var3.field1262 = var1.gjstr();
-						var3.field1255 = var1.method334();
-						var3.field1258 = var2;
-						var3.field1260 = method528(var1.g2());
-					}
-					method1143(0, field3845, field3845.length - 1);
-					TitleScreen.field3959 = true;
-					field2414 = null;
-				}
-			}
-		} catch (Exception var6) {
-			var6.printStackTrace();
-			field2414 = null;
-		}
-	}
-
 	@ObfuscatedName("ke.a(ZI)Z")
 	public static boolean method782(int arg0) {
 		if (arg0 >= 97 && arg0 <= 122) {
@@ -4536,42 +2732,16 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("na.a(ZI)V")
-	public static void method934() {
-		byte[][] var0 = field3221;
-		int var1 = var0.length;
-		for (int var2 = 0; var2 < var1; var2++) {
-			int var3 = (field2731[var2] >> 8) * 64 - Client.field4212;
-			byte[] var4 = var0[var2];
-			int var5 = (field2731[var2] & 0xFF) * 64 - Client.field3679;
-			if (var4 != null) {
-				Client.method1479();
-				ClientBuild.method963(Client.field2014 * 8 - 48, var3, (Client.mapBuildCentreZoneX - 6) * 8, Client.collision, var5, var4);
-			}
-		}
-		for (int var6 = 0; var6 < var1; var6++) {
-			int var7 = (field2731[var6] >> 8) * 64 - Client.field4212;
-			int var8 = (field2731[var6] & 0xFF) * 64 - Client.field3679;
-			byte[] var9 = var0[var6];
-			if (var9 == null && Client.field2014 < 800) {
-				Client.method1479();
-				for (int var10 = 0; var10 < 4; var10++) {
-					ClientBuild.method83(var10, 64, 64, var8, var7);
-				}
-			}
-		}
-	}
-
 	@ObfuscatedName("na.a([BB)V")
 	public static void method937(byte[] arg0) {
 		int var1 = 0;
 		while (true) {
 			while (var1 < arg0.length) {
-				int var2 = arg0[var1++] * 64 - field239;
-				int var3 = arg0[var1++] * 64 - field2181;
-				if (var2 > 0 && var3 > 0 && var2 + 64 < SeqType.field1988 && var3 + 64 < field760) {
+				int var2 = arg0[var1++] * 64 - ClientBuild.field239;
+				int var3 = arg0[var1++] * 64 - ClientBuild.field2181;
+				if (var2 > 0 && var3 > 0 && var2 + 64 < ClientBuild.field1988 && var3 + 64 < ClientBuild.field760) {
 					int var7 = var2 >> 6;
-					int var8 = field760 - var3 - 1 >> 6;
+					int var8 = ClientBuild.field760 - var3 - 1 >> 6;
 					for (int var9 = 0; var9 < 64; var9++) {
 						for (int var10 = -64; var10 < 0; var10++) {
 							byte var11 = arg0[var1++];
@@ -4597,7 +2767,7 @@ public class Statics {
 										field895[var7][var8] = new int[4096];
 									}
 									var14--;
-									LocType var15 = LocType.method1321(var14);
+									LocType var15 = LocType.list(var14);
 									if (var15.field2770 != null) {
 										var15 = var15.method998();
 										if (var15 == null || var15.field2817 == -1) {
@@ -4606,7 +2776,7 @@ public class Statics {
 									}
 									field895[var7][var8][(-(var10 + 1) << 6) + var9] = var15.field2831 + 1;
 									class65 var16 = new class65();
-									var16.field1175 = field760 - var3;
+									var16.field1175 = ClientBuild.field760 - var3;
 									var16.field1180 = var15.field2817;
 									var16.field1179 = var2;
 									field4359.push(var16);
@@ -4804,41 +2974,6 @@ public class Statics {
 		return arg0 >>> 7;
 	}
 
-	@ObfuscatedName("of.a(ZIII)V")
-	public static void method1064(int arg0, int arg1, int arg2) {
-		IfType var3 = method238(arg2, arg0);
-		if (var3 != null && var3.field3447 != null) {
-			HookReq var4 = new HookReq();
-			var4.field678 = var3;
-			var4.field681 = var3.field3447;
-			ScriptRunner.method1373(var4);
-		}
-		field145 = true;
-		Client.field569 = arg2;
-		field2084 = arg1;
-		field249 = arg0;
-		Client.method1371(var3);
-	}
-
-	@ObfuscatedName("of.a(IIII)I")
-	public static int method1066(int arg0, int arg1, int arg2) {
-		if (arg1 > 243) {
-			arg2 >>= 0x4;
-		} else if (arg1 > 217) {
-			arg2 >>= 0x3;
-		} else if (arg1 > 192) {
-			arg2 >>= 0x2;
-		} else if (arg1 > 179) {
-			arg2 >>= 0x1;
-		}
-		return (arg1 >> 1) + (arg0 >> 2 << 10) + (arg2 >> 5 << 7);
-	}
-
-	@ObfuscatedName("of.a(ZIZ)I")
-	public static int method1067() {
-		return Js5Net.field3943 + Js5Net.field3876;
-	}
-
 	@ObfuscatedName("oc.a(BI)I")
 	public static int method1057(int arg0) {
 		int var1 = (arg0 & 0x55555555) + ((arg0 & 0xAAAAAAAB) >>> 1);
@@ -4847,29 +2982,6 @@ public class Statics {
 		int var4 = var3 + (var3 >>> 8);
 		int var5 = var4 + (var4 >>> 16);
 		return var5 & 0xFF;
-	}
-
-	@ObfuscatedName("vh.a(Ljava/lang/String;I)Ljava/lang/Class;")
-	public static Class method1574(String arg0) throws ClassNotFoundException {
-		if (arg0.equals("B")) {
-			return Byte.TYPE;
-		} else if (arg0.equals("I")) {
-			return Integer.TYPE;
-		} else if (arg0.equals("S")) {
-			return Short.TYPE;
-		} else if (arg0.equals("J")) {
-			return Long.TYPE;
-		} else if (arg0.equals("Z")) {
-			return Boolean.TYPE;
-		} else if (arg0.equals("F")) {
-			return Float.TYPE;
-		} else if (arg0.equals("D")) {
-			return Double.TYPE;
-		} else if (arg0.equals("C")) {
-			return Character.TYPE;
-		} else {
-			return Class.forName(arg0);
-		}
 	}
 
 	@ObfuscatedName("ih.a([IIBIII[BIIII)V")
@@ -4887,32 +2999,6 @@ public class Statics {
 			}
 			arg7 += arg4;
 			arg3 += arg9;
-		}
-	}
-
-	@ObfuscatedName("nb.a(JII[I)Li;")
-	public static JagString method952(long arg0, int arg1, int[] arg2) {
-		if (QuickChatPhraseType.field4527 != null) {
-			JagString var4 = QuickChatPhraseType.field4527.method1126(arg2, arg1, arg0);
-			if (var4 != null) {
-				return var4;
-			}
-		}
-		return arg1 == 5 ? JagString.method1375(arg0).method614() : method1556(arg0);
-	}
-
-	@ObfuscatedName("nb.f(II)Li;")
-	public static JagString method958(int arg0) {
-		JagString var1 = JagString.method1212(arg0);
-		for (int var2 = var1.method604() - 3; var2 > 0; var2 -= 3) {
-			var1 = JagString.join(new JagString[] { var1.method623(0, var2), field979, var1.method635(var2) });
-		}
-		if (var1.method604() > 9) {
-			return JagString.join(new JagString[] { field2828, var1.method623(0, var1.method604() - 8), Text.field2469, field1238, var1, field3982});
-		} else if (var1.method604() > 6) {
-			return JagString.join(new JagString[] {field644, var1.method623(0, var1.method604() - 4), Text.field3071, field1238, var1, field3982});
-		} else {
-			return JagString.join(new JagString[] {field1370, var1, field2199});
 		}
 	}
 
@@ -4950,162 +3036,16 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("sh.a(IIIIIII)V")
-	public static void method1398(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (Client.field475 == 0 && !field145) {
-			int var6 = field2766;
-			int var7 = field2931;
-			int var8 = field1102;
-			int var9 = field4055;
-			int var10 = var8 + (var9 - var8) * (arg0 - arg4) / arg2;
-			int var11 = var6 + (var7 - var6) * (arg5 - arg1) / arg3;
-			Client.method685(var11, ParamType.field54, (short) 10, 0L, Client.field3453, var10);
-		}
-		long var12 = -1L;
-		for (int var14 = 0; var14 < SoftwareModelLit.field3101; var14++) {
-			long var15 = SoftwareModelLit.field476[var14];
-			int var17 = (int) var15 & 0x7F;
-			int var18 = (int) var15 >> 7 & 0x7F;
-			int var19 = (int) var15 >> 29 & 0x3;
-			int var20 = Integer.MAX_VALUE & (int) (var15 >>> 32);
-			if (var15 != var12) {
-				var12 = var15;
-				if (var19 == 2 && World.method1386(Client.field2907, var17, var18, var15)) {
-					LocType var21 = LocType.method1321(var20);
-					if (var21.field2770 != null) {
-						var21 = var21.method998();
-					}
-					if (var21 == null) {
-						continue;
-					}
-					if (Client.field475 == 1) {
-						Client.method685(var17, Text.field608, (short) 26, var15, JagString.join(new JagString[] { Client.field1414, field3526, var21.field2773 }), var18);
-					} else if (!field145) {
-						JagString[] var22 = var21.field2816;
-						if (field1807) {
-							var22 = method921(var22);
-						}
-						if (var22 != null) {
-							for (int var23 = 4; var23 >= 0; var23--) {
-								if (var22[var23] != null) {
-									short var24 = 0;
-									if (var23 == 0) {
-										var24 = 7;
-									}
-									if (var23 == 1) {
-										var24 = 35;
-									}
-									if (var23 == 2) {
-										var24 = 51;
-									}
-									if (var23 == 3) {
-										var24 = 33;
-									}
-									if (var23 == 4) {
-										var24 = 1004;
-									}
-									Client.method685(var17, var22[var23], var24, var15, JagString.join(new JagString[] {field259, var21.field2773 }), var18);
-								}
-							}
-						}
-						Client.method685(var17, Text.field1174, (short) 1005, (long) var21.field2831, JagString.join(new JagString[] {field259, var21.field2773 }), var18);
-					} else if ((field2084 & 0x4) == 4) {
-						Client.method685(var17, field3835, (short) 24, var15, JagString.join(new JagString[] {field464, field3526, var21.field2773 }), var18);
-					}
-				}
-				if (var19 == 1) {
-					ClientNpc var25 = Client.field4223[var20];
-					if (var25.field3682.field2349 == 1 && (var25.field4136 & 0x7F) == 64 && (var25.field4121 & 0x7F) == 64) {
-						for (int var26 = 0; var26 < field1041; var26++) {
-							ClientNpc var27 = Client.field4223[field402[var26]];
-							if (var27 != null && var25 != var27 && var27.field3682.field2349 == 1 && var25.field4136 == var27.field4136 && var25.field4121 == var27.field4121) {
-								Client.method1513(var27.field3682, field402[var26], var18, var17);
-							}
-						}
-						for (int var28 = 0; var28 < Client.field1027; var28++) {
-							ClientPlayer var29 = Client.field4491[Client.field3428[var28]];
-							if (var29 != null && var25.field4136 == var29.field4136 && var29.field4121 == var25.field4121) {
-								method922(Client.field3428[var28], var17, var18, var29);
-							}
-						}
-					}
-					Client.method1513(var25.field3682, var20, var18, var17);
-				}
-				if (var19 == 0) {
-					ClientPlayer var30 = Client.field4491[var20];
-					if ((var30.field4136 & 0x7F) == 64 && (var30.field4121 & 0x7F) == 64) {
-						for (int var31 = 0; var31 < field1041; var31++) {
-							ClientNpc var32 = Client.field4223[field402[var31]];
-							if (var32 != null && var32.field3682.field2349 == 1 && var32.field4136 == var30.field4136 && var32.field4121 == var30.field4121) {
-								Client.method1513(var32.field3682, field402[var31], var18, var17);
-							}
-						}
-						for (int var33 = 0; var33 < Client.field1027; var33++) {
-							ClientPlayer var34 = Client.field4491[Client.field3428[var33]];
-							if (var34 != null && var34 != var30 && var34.field4136 == var30.field4136 && var34.field4121 == var30.field4121) {
-								method922(Client.field3428[var33], var17, var18, var34);
-							}
-						}
-					}
-					method922(var20, var17, var18, var30);
-				}
-				if (var19 == 3) {
-					LinkList var35 = Client.field2497[Client.field2907][var17][var18];
-					if (var35 != null) {
-						for (ClientObjNode var36 = (ClientObjNode) var35.method1612(); var36 != null; var36 = (ClientObjNode) var35.method1617()) {
-							int var37 = var36.field4258.field2030;
-							ObjType var38 = ObjType.list(var37);
-							if (Client.field475 == 1) {
-								Client.method685(var17, Text.field608, (short) 46, (long) var37, JagString.join(new JagString[] { Client.field1414, field581, var38.name}), var18);
-							} else if (!field145) {
-								JagString[] var39 = var38.field2898;
-								if (field1807) {
-									var39 = method921(var39);
-								}
-								for (int var40 = 4; var40 >= 0; var40--) {
-									if (var39 != null && var39[var40] != null) {
-										byte var41 = 0;
-										if (var40 == 0) {
-											var41 = 5;
-										}
-										if (var40 == 1) {
-											var41 = 22;
-										}
-										if (var40 == 2) {
-											var41 = 41;
-										}
-										if (var40 == 3) {
-											var41 = 57;
-										}
-										if (var40 == 4) {
-											var41 = 3;
-										}
-										Client.method685(var17, var39[var40], var41, (long) var37, JagString.join(new JagString[] { field2529, var38.name}), var18);
-									} else if (var40 == 2) {
-										Client.method685(var17, Text.field4343, (short) 41, (long) var37, JagString.join(new JagString[] { field2529, var38.name}), var18);
-									}
-								}
-								Client.method685(var17, Text.field1174, (short) 1006, (long) var37, JagString.join(new JagString[] { field2529, var38.name}), var18);
-							} else if ((field2084 & 0x1) == 1) {
-								Client.method685(var17, field3835, (short) 25, (long) var37, JagString.join(new JagString[] {field464, field581, var38.name}), var18);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
 	@ObfuscatedName("u.a([BI)V")
 	public static void method1473(byte[] arg0) {
 		int var1 = 0;
 		while (true) {
 			while (var1 < arg0.length) {
-				int var2 = (arg0[var1++] & 0xFF) * 64 - field239;
-				int var3 = (arg0[var1++] & 0xFF) * 64 - field2181;
-				if (var2 > 0 && var3 > 0 && var2 + 64 < SeqType.field1988 && field760 > var3 + 64) {
+				int var2 = (arg0[var1++] & 0xFF) * 64 - ClientBuild.field239;
+				int var3 = (arg0[var1++] & 0xFF) * 64 - ClientBuild.field2181;
+				if (var2 > 0 && var3 > 0 && var2 + 64 < ClientBuild.field1988 && ClientBuild.field760 > var3 + 64) {
 					int var4 = var2 >> 6;
-					int var5 = field760 - var3 - 1 >> 6;
+					int var5 = ClientBuild.field760 - var3 - 1 >> 6;
 					for (int var6 = 0; var6 < 64; var6++) {
 						for (int var7 = -64; var7 < 0; var7++) {
 							byte var8 = arg0[var1++];
@@ -5115,10 +3055,10 @@ public class Statics {
 								}
 								field3951[var4][var5][(-(var7 + 1) << 6) + var6] = var8;
 								byte var9 = arg0[var1++];
-								if (ClientMouseListener.field4166[var4][var5] == null) {
-									ClientMouseListener.field4166[var4][var5] = new byte[4096];
+								if (field4166[var4][var5] == null) {
+									field4166[var4][var5] = new byte[4096];
 								}
-								ClientMouseListener.field4166[var4][var5][(-(var7 + 1) << 6) + var6] = var9;
+								field4166[var4][var5][(-(var7 + 1) << 6) + var6] = var9;
 							}
 						}
 					}
@@ -5282,15 +3222,15 @@ public class Statics {
 		var4[0] = arg0;
 		var2[0] = arg1;
 		for (int var5 = 0; var5 < 4; var5++) {
-			if (arg0 != field461[var5]) {
-				var4[var3] = field461[var5];
-				var2[var3] = field1686[var5];
+			if (arg0 != TitleScreen.field461[var5]) {
+				var4[var3] = TitleScreen.field461[var5];
+				var2[var3] = TitleScreen.field1686[var5];
 				var3++;
 			}
 		}
-		field1686 = var2;
-		field461 = var4;
-		method1143(0, field3845, field3845.length - 1);
+		TitleScreen.field1686 = var2;
+		TitleScreen.field461 = var4;
+		TitleScreen.method1143(0, TitleScreen.field3845, TitleScreen.field3845.length - 1);
 	}
 
 	@ObfuscatedName("ib.a([BB)V")
@@ -5323,7 +3263,7 @@ public class Statics {
 		for (LocChange var0 = (LocChange) Client.field1140.head(); var0 != null; var0 = (LocChange) Client.field1140.method1619()) {
 			if (var0.field3061 == -1) {
 				var0.field3054 = 0;
-				method1219(var0);
+				Client.method1219(var0);
 			} else {
 				var0.unlink();
 			}
@@ -5392,7 +3332,7 @@ public class Statics {
 	@ObfuscatedName("va.a(IIIIB)V")
 	public static void method1532(int arg0, int arg1, int arg2, int arg3) {
 		if (field1207 <= arg0 - arg1 && field183 >= arg1 + arg0 && arg2 - arg1 >= field919 && field279 >= arg1 + arg2) {
-			SeqType.method745(arg2, arg3, arg1, arg0);
+			method745(arg2, arg3, arg1, arg0);
 		} else {
 			method318(arg3, arg0, arg1, arg2);
 		}
@@ -5432,161 +3372,6 @@ public class Statics {
 		return arg0 >>> 8;
 	}
 
-	@ObfuscatedName("mg.a([Li;B)[Li;")
-	public static JagString[] method921(JagString[] arg0) {
-		JagString[] var1 = new JagString[5];
-		for (int var2 = 0; var2 < 5; var2++) {
-			var1[var2] = JagString.join(new JagString[] { JagString.method1212(var2), field3306});
-			if (arg0 != null && arg0[var2] != null) {
-				var1[var2] = JagString.join(new JagString[] { var1[var2], arg0[var2] });
-			}
-		}
-		return var1;
-	}
-
-	@ObfuscatedName("rg.a(III)I")
-	public static int method1330(int arg0, int arg1) {
-		int var2 = arg0 * 57 + arg1;
-		int var3 = var2 << 13 ^ var2;
-		int var4 = Integer.MAX_VALUE & var3 * (var3 * var3 * 15731 + 789221) + 1376312589;
-		return var4 >> 19 & 0xFF;
-	}
-
-	@ObfuscatedName("rg.a()V")
-	public static void method1331() {
-		int var0 = World.field1148[field2993];
-		Occlude[] var1 = World.field1149[field2993];
-		field1316 = 0;
-		label187: for (int var2 = 0; var2 < var0; var2++) {
-			Occlude var3 = var1[var2];
-			if (field4510 != null) {
-				for (int var4 = 0; var4 < field4510.length; var4++) {
-					if (field4510[var4] != -1000000 && (var3.field189 <= field4510[var4] || var3.field196 <= field4510[var4]) && (var3.field185 <= field3605[var4] || var3.field193 <= field3605[var4]) && (var3.field185 >= field740[var4] || var3.field193 >= field740[var4]) && (var3.field191 <= field2713[var4] || var3.field205 <= field2713[var4]) && (var3.field191 >= field3882[var4] || var3.field205 >= field3882[var4])) {
-						continue label187;
-					}
-				}
-			}
-			if (var3.field190 == 1) {
-				int var5 = var3.field204 + World.field2911 - field1435;
-				if (var5 >= 0 && var5 <= World.field2911 + World.field2911) {
-					int var6 = var3.field187 + World.field2911 - field1636;
-					if (var6 < 0) {
-						var6 = 0;
-					}
-					int var7 = var3.field200 + World.field2911 - field1636;
-					if (var7 > World.field2911 + World.field2911) {
-						var7 = World.field2911 + World.field2911;
-					}
-					boolean var8 = false;
-					while (var6 <= var7) {
-						if (World.field304[var5][var6++]) {
-							var8 = true;
-							break;
-						}
-					}
-					if (var8) {
-						int var9 = World.field1353 - var3.field185;
-						if (var9 > 32) {
-							var3.field206 = 1;
-						} else {
-							if (var9 >= -32) {
-								continue;
-							}
-							var3.field206 = 2;
-							var9 = -var9;
-						}
-						var3.field199 = (var3.field191 - World.field4048 << 8) / var9;
-						var3.field186 = (var3.field205 - World.field4048 << 8) / var9;
-						var3.field188 = (var3.field189 - World.field4461 << 8) / var9;
-						var3.field201 = (var3.field196 - World.field4461 << 8) / var9;
-						field3075[field1316++] = var3;
-					}
-				}
-			} else if (var3.field190 == 2) {
-				int var10 = var3.field187 + World.field2911 - field1636;
-				if (var10 >= 0 && var10 <= World.field2911 + World.field2911) {
-					int var11 = var3.field204 + World.field2911 - field1435;
-					if (var11 < 0) {
-						var11 = 0;
-					}
-					int var12 = var3.field194 + World.field2911 - field1435;
-					if (var12 > World.field2911 + World.field2911) {
-						var12 = World.field2911 + World.field2911;
-					}
-					boolean var13 = false;
-					while (var11 <= var12) {
-						if (World.field304[var11++][var10]) {
-							var13 = true;
-							break;
-						}
-					}
-					if (var13) {
-						int var14 = World.field4048 - var3.field191;
-						if (var14 > 32) {
-							var3.field206 = 3;
-						} else {
-							if (var14 >= -32) {
-								continue;
-							}
-							var3.field206 = 4;
-							var14 = -var14;
-						}
-						var3.field197 = (var3.field185 - World.field1353 << 8) / var14;
-						var3.field195 = (var3.field193 - World.field1353 << 8) / var14;
-						var3.field188 = (var3.field189 - World.field4461 << 8) / var14;
-						var3.field201 = (var3.field196 - World.field4461 << 8) / var14;
-						field3075[field1316++] = var3;
-					}
-				}
-			} else if (var3.field190 == 4) {
-				int var15 = var3.field189 - World.field4461;
-				if (var15 > 128) {
-					int var16 = var3.field187 + World.field2911 - field1636;
-					if (var16 < 0) {
-						var16 = 0;
-					}
-					int var17 = var3.field200 + World.field2911 - field1636;
-					if (var17 > World.field2911 + World.field2911) {
-						var17 = World.field2911 + World.field2911;
-					}
-					if (var16 <= var17) {
-						int var18 = var3.field204 + World.field2911 - field1435;
-						if (var18 < 0) {
-							var18 = 0;
-						}
-						int var19 = var3.field194 + World.field2911 - field1435;
-						if (var19 > World.field2911 + World.field2911) {
-							var19 = World.field2911 + World.field2911;
-						}
-						boolean var20 = false;
-						label159: for (int var21 = var18; var21 <= var19; var21++) {
-							for (int var22 = var16; var22 <= var17; var22++) {
-								if (World.field304[var21][var22]) {
-									var20 = true;
-									break label159;
-								}
-							}
-						}
-						if (var20) {
-							var3.field206 = 5;
-							var3.field197 = (var3.field185 - World.field1353 << 8) / var15;
-							var3.field195 = (var3.field193 - World.field1353 << 8) / var15;
-							var3.field199 = (var3.field191 - World.field4048 << 8) / var15;
-							var3.field186 = (var3.field205 - World.field4048 << 8) / var15;
-							field3075[field1316++] = var3;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("rg.b(III)Loe;")
-	public static Wall method1332(int arg0, int arg1, int arg2) {
-		Square var3 = World.field489[arg0][arg1][arg2];
-		return var3 == null ? null : var3.field959;
-	}
-
 	@ObfuscatedName("rg.a(IIZIIIII)V")
 	public static void method1333(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var7 = arg1 + arg3;
@@ -5617,22 +3402,22 @@ public class Statics {
 		if (field4500 == null) {
 			SoftwarePix32 var4 = new SoftwarePix32(arg2, arg3);
 			Pix2D.method496(var4.field3247, arg2, arg3);
-			method348(arg3, arg2, 0, 0, field760, 0, SeqType.field1988, 0);
+			method348(arg3, arg2, 0, 0, ClientBuild.field760, 0, ClientBuild.field1988, 0);
 			field4500 = var4;
 			GameShell.field3852.method1521();
 		}
 		field4500.method1161(arg1, arg0);
-		int var5 = arg1 + field693 * arg2 / SeqType.field1988;
-		int var6 = field1309 * arg2 / SeqType.field1988;
-		int var7 = arg0 + field727 * arg3 / field760;
-		int var8 = field3136 * arg3 / field760;
+		int var5 = arg1 + field693 * arg2 / ClientBuild.field1988;
+		int var6 = field1309 * arg2 / ClientBuild.field1988;
+		int var7 = arg0 + field727 * arg3 / ClientBuild.field760;
+		int var8 = field3136 * arg3 / ClientBuild.field760;
 		Pix2D.fillRectTrans(var5, var7, var6, var8, 16711680, 128);
 		Pix2D.method476(var5, var7, var6, var8, 16711680);
 		if (field1012 > 0 && field1012 % 10 < 5) {
 			for (class65 var9 = (class65) field4359.head(); var9 != null; var9 = (class65) field4359.method1619()) {
 				if (var9.field1180 == field772) {
-					int var10 = arg1 + arg2 * var9.field1179 / SeqType.field1988;
-					int var11 = var9.field1175 * arg3 / field760 + arg0;
+					int var10 = arg1 + arg2 * var9.field1179 / ClientBuild.field1988;
+					int var11 = var9.field1175 * arg3 / ClientBuild.field760 + arg0;
 					Pix2D.method478(var10 - 2, var11 + -2, 4, 4, 16776960);
 				}
 			}
@@ -5660,36 +3445,6 @@ public class Statics {
 			return 75;
 		} else {
 			return 100;
-		}
-	}
-
-	@ObfuscatedName("lf.a(IIIILnc;IJIIII)Z")
-	public static boolean method855(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, int arg5, long arg6, int arg7, int arg8, int arg9, int arg10) {
-		return arg4 == null ? true : World.method768(arg0, arg7, arg8, arg9 + 1 - arg7, arg10 - arg8 + 1, arg1, arg2, arg3, arg4, arg5, true, arg6);
-	}
-
-	@ObfuscatedName("re.a(ZZ)V")
-	public static void method1327() {
-		byte[][] var0 = field774;
-		int var1 = field3221.length;
-		for (int var2 = 0; var2 < var1; var2++) {
-			byte[] var3 = var0[var2];
-			if (var3 != null) {
-				int var4 = (field2731[var2] >> 8) * 64 - Client.field4212;
-				int var5 = (field2731[var2] & 0xFF) * 64 - Client.field3679;
-				Client.method1479();
-				ClientBuild.method85(Client.collision, var3, var4, var5);
-			}
-		}
-	}
-
-	@ObfuscatedName("re.b(I)V")
-	public static void method1328() {
-		if (Client.lowMem && Client.field2907 != Client.field3026) {
-			Client.method820(Client.field2907, Client.localPlayer.field4141[0], Client.mapBuildCentreZoneX, Client.field2014, Client.localPlayer.field4087[0]);
-		} else if (Client.field2907 != Client.field3336) {
-			Client.field3336 = Client.field2907;
-			ClientBuild.method1595(Client.field2907);
 		}
 	}
 
@@ -5726,52 +3481,10 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("eb.a(IIIIIIII)V")
-	public static void method359(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		int var7 = 2048 - arg2 & 0x7FF;
-		int var8 = 0;
-		int var9 = 0;
-		int var10 = arg4;
-		int var11 = 2048 - arg3 & 0x7FF;
-		if (var11 != 0) {
-			int var12 = Pix3D.field3359[var11];
-			int var13 = Pix3D.field3354[var11];
-			var9 = var12 * -arg4 >> 16;
-			var10 = var13 * arg4 >> 16;
-		}
-		if (var7 != 0) {
-			int var14 = Pix3D.field3359[var7];
-			int var15 = Pix3D.field3354[var7];
-			var8 = var10 * var14 >> 16;
-			var10 = var15 * var10 >> 16;
-		}
-		Client.field1954 = arg1 - var9;
-		Client.field1428 = arg0 - var8;
-		Client.field3608 = arg6 - var10;
-		Client.field3257 = arg2;
-		Client.field3934 = arg3;
-	}
-
-	@ObfuscatedName("eb.e(I)V")
-	public static void method363() {
-		if (!field145) {
-			return;
-		}
-		IfType var0 = method238(Client.field569, field249);
-		if (var0 != null && var0.field3440 != null) {
-			HookReq var1 = new HookReq();
-			var1.field678 = var0;
-			var1.field681 = var0.field3440;
-			ScriptRunner.method1373(var1);
-		}
-		field145 = false;
-		Client.method1371(var0);
-	}
-
 	@ObfuscatedName("se.a(I)V")
 	public static void method1378() {
 		field4052 = null;
-		ClientMouseListener.field4166 = null;
+		field4166 = null;
 		field1912 = null;
 		field105 = null;
 		field2126 = null;
@@ -5792,37 +3505,6 @@ public class Statics {
 		field175 = null;
 		field4500 = null;
 		field3762 = null;
-	}
-
-	@ObfuscatedName("fa.a(IIIII)I")
-	public static int method419(int arg0, int arg1, int arg2, int arg3) {
-		int var4 = 65536 - Pix3D.field3354[arg2 * 1024 / arg0] >> 1;
-		return (arg1 * (65536 - var4) >> 16) + (arg3 * var4 >> 16);
-	}
-
-	@ObfuscatedName("ub.a(IIIIIIIIII)V")
-	public static void method1486(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
-		LocChange var9 = null;
-		for (LocChange var10 = (LocChange) Client.field1140.head(); var10 != null; var10 = (LocChange) Client.field1140.method1619()) {
-			if (arg6 == var10.field3055 && arg7 == var10.field3059 && var10.field3052 == arg1 && var10.field3063 == arg2) {
-				var9 = var10;
-				break;
-			}
-		}
-		if (var9 == null) {
-			var9 = new LocChange();
-			var9.field3052 = arg1;
-			var9.field3063 = arg2;
-			var9.field3059 = arg7;
-			var9.field3055 = arg6;
-			method1219(var9);
-			Client.field1140.push(var9);
-		}
-		var9.field3062 = arg5;
-		var9.field3068 = arg3;
-		var9.field3061 = arg4;
-		var9.field3051 = arg8;
-		var9.field3054 = arg0;
 	}
 
 	@ObfuscatedName("hc.b(IBI)I")
@@ -5848,27 +3530,14 @@ public class Statics {
 		return var1 == null ? arg0.field3494 : var1.field3698;
 	}
 
-	@ObfuscatedName("lj.b(II)Lli;")
-	public static AnimFrameSet method878(int arg0) {
-		AnimFrameSet var1 = (AnimFrameSet) SeqType.field3989.method665((long) arg0);
-		if (var1 != null) {
-			return var1;
-		}
-		AnimFrameSet var2 = method309(SeqType.field2778, arg0, SeqType.field2624);
-		if (var2 != null) {
-			SeqType.field3989.method663((long) arg0, var2);
-		}
-		return var2;
-	}
-
 	@ObfuscatedName("lj.a(BLi;)V")
 	public static void method879(JagString arg0) {
 		WorldMapLabel var1 = method207(arg0);
 		if (var1 == null) {
 			return;
 		}
-		field594 = field760 + field2181 - var1.field4485;
-		field3659 = var1.field4483 - field239;
+		field594 = ClientBuild.field760 + ClientBuild.field2181 - var1.field4485;
+		field3659 = var1.field4483 - ClientBuild.field239;
 		int var2 = field594 - (int) ((double) field1706.field3422 / field1110);
 		int var3 = field3659 - (int) ((double) field1706.field3380 / field1110);
 		int var4 = field3659 + (int) ((double) field1706.field3380 / field1110);
@@ -5876,14 +3545,14 @@ public class Statics {
 			field3659 = (int) ((double) field1706.field3380 / field1110);
 		}
 		int var5 = (int) ((double) field1706.field3422 / field1110) + field594;
-		if (var4 > SeqType.field1988) {
-			field3659 = SeqType.field1988 - (int) ((double) field1706.field3380 / field1110);
+		if (var4 > ClientBuild.field1988) {
+			field3659 = ClientBuild.field1988 - (int) ((double) field1706.field3380 / field1110);
 		}
 		if (var2 < 0) {
 			field594 = (int) ((double) field1706.field3422 / field1110);
 		}
-		if (var5 > field760) {
-			field594 = field760 - (int) ((double) field1706.field3422 / field1110);
+		if (var5 > ClientBuild.field760) {
+			field594 = ClientBuild.field760 - (int) ((double) field1706.field3422 / field1110);
 		}
 	}
 
@@ -5908,183 +3577,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("kj.a(IBLbj;)V")
-	public static void method814(int arg0, Js5Loader arg1) {
-		if (Js5Net.field1427 == null) {
-			method1312(null, 255, 255, (byte) 0, 0, true);
-			Js5Net.field141[arg0] = arg1;
-		} else {
-			Js5Net.field1427.pos = arg0 * 8 + 5;
-			int var2 = Js5Net.field1427.g4();
-			int var3 = Js5Net.field1427.g4();
-			arg1.method109(var2, var3);
-		}
-	}
-
-	@ObfuscatedName("kj.a([IIIIII)V")
-	public static void method815(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
-		Square var5 = World.field489[arg2][arg3][arg4];
-		if (var5 == null) {
-			return;
-		}
-		QuickGround var6 = var5.field947;
-		if (var6 != null) {
-			int var7 = var6.field1772;
-			if (var7 != 0) {
-				for (int var8 = 0; var8 < 4; var8++) {
-					arg0[arg1] = var7;
-					arg0[arg1 + 1] = var7;
-					arg0[arg1 + 2] = var7;
-					arg0[arg1 + 3] = var7;
-					arg1 += 512;
-				}
-			}
-			return;
-		}
-		Ground var9 = var5.field964;
-		if (var9 == null) {
-			return;
-		}
-		int var10 = var9.field1065;
-		int var11 = var9.field1066;
-		int var12 = var9.field1061;
-		int var13 = var9.field1067;
-		int[] var14 = field4232[var10];
-		int[] var15 = field248[var11];
-		int var16 = 0;
-		if (var12 != 0) {
-			for (int var17 = 0; var17 < 4; var17++) {
-				arg0[arg1] = var14[var15[var16++]] == 0 ? var12 : var13;
-				arg0[arg1 + 1] = var14[var15[var16++]] == 0 ? var12 : var13;
-				arg0[arg1 + 2] = var14[var15[var16++]] == 0 ? var12 : var13;
-				arg0[arg1 + 3] = var14[var15[var16++]] == 0 ? var12 : var13;
-				arg1 += 512;
-			}
-			return;
-		}
-		for (int var18 = 0; var18 < 4; var18++) {
-			if (var14[var15[var16++]] != 0) {
-				arg0[arg1] = var13;
-			}
-			if (var14[var15[var16++]] != 0) {
-				arg0[arg1 + 1] = var13;
-			}
-			if (var14[var15[var16++]] != 0) {
-				arg0[arg1 + 2] = var13;
-			}
-			if (var14[var15[var16++]] != 0) {
-				arg0[arg1 + 3] = var13;
-			}
-			arg1 += 512;
-		}
-	}
-
-	@ObfuscatedName("client.a(IIIIII)Z")
-	public static boolean method224(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		if (arg1 != arg2 || arg3 != arg4) {
-			for (int var8 = arg1; var8 <= arg2; var8++) {
-				for (int var9 = arg3; var9 <= arg4; var9++) {
-					if (World.field4429[arg0][var8][var9] == -World.field2627) {
-						return false;
-					}
-				}
-			}
-			int var10 = (arg1 << 7) + 1;
-			int var11 = (arg3 << 7) + 2;
-			int var12 = ClientBuild.field1137[arg0][arg1][arg3] + arg5;
-			if (!World.method718(var10, var12, var11)) {
-				return false;
-			}
-			int var13 = (arg2 << 7) - 1;
-			if (!World.method718(var13, var12, var11)) {
-				return false;
-			}
-			int var14 = (arg4 << 7) - 1;
-			if (!World.method718(var10, var12, var14)) {
-				return false;
-			} else if (World.method718(var13, var12, var14)) {
-				return true;
-			} else {
-				return false;
-			}
-		} else if (World.method1581(arg0, arg1, arg3)) {
-			int var6 = arg1 << 7;
-			int var7 = arg3 << 7;
-			return World.method718(var6 + 1, ClientBuild.field1137[arg0][arg1][arg3] + arg5, var7 + 1) && World.method718(var6 + 128 - 1, ClientBuild.field1137[arg0][arg1 + 1][arg3] + arg5, var7 + 1) && World.method718(var6 + 128 - 1, ClientBuild.field1137[arg0][arg1 + 1][arg3 + 1] + arg5, var7 + 128 - 1) && World.method718(var6 + 1, ClientBuild.field1137[arg0][arg1][arg3 + 1] + arg5, var7 + 128 - 1);
-		} else {
-			return false;
-		}
-	}
-
-	@ObfuscatedName("nf.a(Lia;IIIIII)V")
-	public static void method989(CollisionMap arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		long var6 = 0L;
-		if (arg3 == 0) {
-			var6 = World.method1062(arg4, arg1, arg5);
-		}
-		if (arg3 == 1) {
-			var6 = World.method1082(arg4, arg1, arg5);
-		}
-		if (arg3 == 2) {
-			var6 = World.method770(arg4, arg1, arg5);
-		}
-		if (arg3 == 3) {
-			var6 = World.method501(arg4, arg1, arg5);
-		}
-		if ((long) 0 == var6) {
-			return;
-		}
-		int var8 = (int) var6 >> 14 & 0x1F;
-		int var9 = (int) var6 >> 20 & 0x3;
-		int var10 = (int) (var6 >>> 32) & Integer.MAX_VALUE;
-		LocType var11 = LocType.method1321(var10);
-		if (arg3 == 0) {
-			World.method56(arg4, arg1, arg5);
-			if (var11.field2819 != 0) {
-				arg0.method655(var11.field2789, var8, var9, arg5, arg1);
-			}
-		}
-		if (arg3 == 1) {
-			World.method42(arg4, arg1, arg5);
-		}
-		if (arg3 == 2) {
-			World.method974(arg4, arg1, arg5);
-			if (var11.field2819 != 0 && var11.field2774 + arg1 < 104 && var11.field2774 + arg5 < 104 && var11.field2794 + arg1 < 104 && arg5 + var11.field2794 < 104) {
-				arg0.method642(arg1, var11.field2789, var9, arg5, var11.field2794, var11.field2774);
-			}
-		}
-		if (arg3 != 3) {
-			return;
-		}
-		method1419(arg4, arg1, arg5);
-		if (var11.field2819 == 1) {
-			arg0.method654(arg1, arg5);
-			return;
-		}
-	}
-
-	@ObfuscatedName("nf.a(IIIIIII)V")
-	public static void method993(int arg0, int arg1, int arg2, int arg3) {
-		HintArrow[] var4 = field1171;
-		for (int var5 = 0; var5 < var4.length; var5++) {
-			HintArrow var6 = var4[var5];
-			if (var6 != null && var6.field2139 == 2) {
-				Client.method681(arg2 >> 1, var6.field2151 * 2, (var6.field2138 - Client.field4212 << 7) + var6.field2134, arg3 >> 1, var6.field2150 + (var6.field2135 - Client.field3679 << 7));
-				if (Client.field401 > -1 && Client.field2113 % 20 < 10) {
-					StructType.field3543[var6.field2137].method1155(arg0 + Client.field401 - 12, Client.field541 + (arg1 - 28));
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("t.b(III)V")
-	public static void method1419(int arg0, int arg1, int arg2) {
-		Square var3 = World.field489[arg0][arg1][arg2];
-		if (var3 != null) {
-			var3.field949 = null;
-		}
-	}
-
 	@ObfuscatedName("t.a(IIBIII)V")
 	public static void method1420(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		int var8 = arg3 + 1;
@@ -6097,73 +3589,9 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("ng.a(ILjava/lang/Object;Lqg;)V")
-	public static void method1006(Object arg0, SignLink arg1) {
-		if (arg1.field3592 == null) {
-			return;
-		}
-		for (int var2 = 0; var2 < 50 && arg1.field3592.peekEvent() != null; var2++) {
-			ThreadSleep.sleepPrecise(1L);
-		}
-		if (arg0 != null) {
-			arg1.field3592.postEvent(new ActionEvent(arg0, 1001, "dummy"));
-		}
-	}
-
 	@ObfuscatedName("ng.c(II)Z")
 	public static boolean method1017(int arg0) {
 		return (-arg0 & arg0) == arg0;
-	}
-
-	@ObfuscatedName("ng.c(ZI)V")
-	public static void method1023(boolean arg0) {
-		for (int var1 = 0; var1 < field1041; var1++) {
-			ClientNpc var2 = Client.field4223[field402[var1]];
-			long var3 = (long) field402[var1] << 32 | 0x20000000L;
-			if (var2 != null && var2.method287() && arg0 == var2.field3682.field2363 && var2.field3682.method852()) {
-				int var5 = var2.field4136 >> 7;
-				int var6 = var2.field4121 >> 7;
-				if (var5 >= 0 && var5 < 104 && var6 >= 0 && var6 < 104) {
-					if (var2.field4103 == 1 && (var2.field4136 & 0x7F) == 64 && (var2.field4121 & 0x7F) == 64) {
-						if (field3990 == field2948[var5][var6]) {
-							continue;
-						}
-						field2948[var5][var6] = field3990;
-					}
-					if (!var2.field3682.field2359) {
-						var3 |= Long.MIN_VALUE;
-					}
-					var2.field4097 = Client.method1584(var2.field4136 + (var2.field4103 - 1) * 64, var2.field4121 - (-(var2.field4103 * 64) + 64), Client.field2907);
-					World.method859(Client.field2907, var2.field4136, var2.field4121, var2.field4097, (var2.field4103 - 1) * 64 + 60, var2, var2.field4085, var3, var2.field4093);
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("ea.a(Lnb;ILnb;ZB)Lli;")
-	public static AnimFrameSet method309(Js5 arg0, int arg1, Js5 arg2) {
-		boolean var3 = true;
-		int[] var4 = arg2.method948(arg1);
-		for (int var5 = 0; var5 < var4.length; var5++) {
-			byte[] var6 = arg2.method947(var4[var5], arg1);
-			if (var6 == null) {
-				var3 = false;
-			} else {
-				int var7 = var6[1] & 0xFF | (var6[0] & 0xFF) << 8;
-				byte[] var8 = arg0.method947(0, var7);
-				if (var8 == null) {
-					var3 = false;
-				}
-			}
-		}
-		if (!var3) {
-			return null;
-		}
-		try {
-			return new AnimFrameSet(arg2, arg0, arg1, false);
-		} catch (Exception var9) {
-			return null;
-		}
 	}
 
 	@ObfuscatedName("ea.a(IIIBI)V")
@@ -6253,11 +3681,11 @@ public class Statics {
 		int var8 = arg6 - arg5;
 		int var9 = arg4 - arg7;
 		int var10 = (arg1 - arg2 << 16) / var8;
-		if (SeqType.field1988 > arg6) {
+		if (ClientBuild.field1988 > arg6) {
 			var8++;
 		}
 		int var11 = (arg0 - arg3 << 16) / var9;
-		if (field760 > arg4) {
+		if (ClientBuild.field760 > arg4) {
 			var9++;
 		}
 		for (int var12 = 0; var12 < var8; var12++) {
@@ -6271,7 +3699,7 @@ public class Statics {
 				int[][] var19 = field1912[var18];
 				byte[][] var20 = field1786[var18];
 				byte[][] var21 = field105[var18];
-				byte[][] var22 = ClientMouseListener.field4166[var18];
+				byte[][] var22 = field4166[var18];
 				byte[][] var23 = field3951[var18];
 				byte[][] var24 = field4052[var18];
 				for (int var25 = 0; var25 < var9; var25++) {
@@ -6411,9 +3839,9 @@ public class Statics {
 							int var63 = var55[var61][var60] & 0xFF;
 							if (var63 != 0) {
 								if (var63 == 47 || var63 == 53) {
-									field4460[var63 - 1].method1338(var54, var62, var53 * 2 + 1, var59 * 2 + 1);
+									Client.field4460[var63 - 1].method1338(var54, var62, var53 * 2 + 1, var59 * 2 + 1);
 								} else {
-									field4460[var63 - 1].method1338(var54 - var53 / 2, var62 + -(var59 / 2), var53 * 2, var59 * 2);
+									Client.field4460[var63 - 1].method1338(var54 - var53 / 2, var62 + -(var59 / 2), var53 * 2, var59 * 2);
 								}
 							}
 						}
@@ -6453,7 +3881,7 @@ public class Statics {
 							int var25 = (var13 + arg6 & 0x3F) + ((var19 + arg4 & 0x3F) << 6);
 							int var26 = var17[var24][var25];
 							if (var26 != 0) {
-								LocType var27 = LocType.method1321(var26 - 1);
+								LocType var27 = LocType.list(var26 - 1);
 								if (var12 && field772 == var27.field2817) {
 									class65 var28 = new class65();
 									var28.field1179 = var18;
@@ -6461,7 +3889,7 @@ public class Statics {
 									var28.field1175 = var23;
 									field783.push(var28);
 								}
-								field505[var27.field2817].method1155(var18 - 7, var23 + -7);
+								Client.field505[var27.field2817].method1155(var18 - 7, var23 + -7);
 							}
 						}
 					}
@@ -6471,9 +3899,9 @@ public class Statics {
 		if (field1110 == field2915) {
 			for (WorldMapLabel var29 = (WorldMapLabel) field3049.head(); var29 != null; var29 = (WorldMapLabel) field3049.method1619()) {
 				int var30 = var29.field4483;
-				int var31 = var30 - field239;
+				int var31 = var30 - ClientBuild.field239;
 				int var32 = var29.field4485;
-				int var33 = field2181 + field760 - var32;
+				int var33 = ClientBuild.field2181 + ClientBuild.field760 - var32;
 				int var34 = arg1 + (arg2 - arg1) * (var31 - arg6) / (arg5 - arg6);
 				int var35 = (var33 - arg4) * (arg3 - arg0) / (arg7 - arg4) + arg0;
 				int var36 = var29.field4492;
@@ -6535,7 +3963,7 @@ public class Statics {
 			}
 		}
 		for (class65 var44 = (class65) field783.head(); var44 != null; var44 = (class65) field783.method1619()) {
-			field505[var44.field1180].method1155(var44.field1179 - 7, var44.field1175 + -7);
+			Client.field505[var44.field1180].method1155(var44.field1179 - 7, var44.field1175 + -7);
 			Pix2D.method483(var44.field1179, var44.field1175, 15, 16776960, 128);
 			Pix2D.method483(var44.field1179, var44.field1175, 7, 16777215, 256);
 		}
@@ -6547,33 +3975,6 @@ public class Statics {
 		for (int var5 = arg3; var5 <= arg4; var5++) {
 			method1534(arg0, arg1, arg2, field42[var5]);
 		}
-	}
-
-	@ObfuscatedName("ha.a(III)Lfh;")
-	public static Decor method522(int arg0, int arg1, int arg2) {
-		Square var3 = World.field489[arg0][arg1][arg2];
-		return var3 == null ? null : var3.field956;
-	}
-
-	@ObfuscatedName("ha.a(ZLea;I)Li;")
-	public static JagString method524(Packet arg0) {
-		try {
-			JagString var1 = new JagString();
-			var1.length = arg0.method350();
-			if (var1.length > 32767) {
-				var1.length = 32767;
-			}
-			var1.chars = new byte[var1.length];
-			arg0.pos += field2033.method1457(0, var1.chars, arg0.data, var1.length, arg0.pos);
-			return var1;
-		} catch (Exception var2) {
-			return field2918;
-		}
-	}
-
-	@ObfuscatedName("ha.a(IZ)Li;")
-	public static JagString method525(int arg0) {
-		return Client.field3836[arg0].method604() <= 0 ? Client.field1191[arg0] : JagString.join(new JagString[] { Client.field1191[arg0], Text.field4398, Client.field3836[arg0] });
 	}
 
 	@ObfuscatedName("nh.a(IIIZII)V")
@@ -6637,11 +4038,11 @@ public class Statics {
 		int var1 = 0;
 		while (true) {
 			while (var1 < arg0.length) {
-				int var2 = (arg0[var1++] & 0xFF) * 64 - field239;
-				int var3 = (arg0[var1++] & 0xFF) * 64 - field2181;
-				if (var2 > 0 && var3 > 0 && SeqType.field1988 > var2 + 64 && field760 > var3 + 64) {
+				int var2 = (arg0[var1++] & 0xFF) * 64 - ClientBuild.field239;
+				int var3 = (arg0[var1++] & 0xFF) * 64 - ClientBuild.field2181;
+				if (var2 > 0 && var3 > 0 && ClientBuild.field1988 > var2 + 64 && ClientBuild.field760 > var3 + 64) {
 					int var4 = var2 >> 6;
-					int var5 = field760 - var3 - 1 >> 6;
+					int var5 = ClientBuild.field760 - var3 - 1 >> 6;
 					for (int var6 = 0; var6 < 64; var6++) {
 						for (int var7 = -64; var7 < 0; var7++) {
 							byte var8 = arg0[var1++];
@@ -6669,515 +4070,6 @@ public class Statics {
 			}
 			return;
 		}
-	}
-
-	@ObfuscatedName("nh.a(IIIIILu;I)V")
-	public static void method1027(int arg0, int arg1, int arg2, ClientEntity arg3) {
-		Client.method681(arg1, arg2, arg3.field4136, arg0, arg3.field4121);
-	}
-
-	@ObfuscatedName("hd.a(Lbj;IILud;)V")
-	public static void method540(Js5Loader arg0, int arg1, DataFile arg2) {
-		byte[] var3 = null;
-		LinkList var4 = Js5NetThread.requestQueue;
-		synchronized (Js5NetThread.requestQueue) {
-			for (Js5WorkerRequest var5 = (Js5WorkerRequest) Js5NetThread.requestQueue.head(); var5 != null; var5 = (Js5WorkerRequest) Js5NetThread.requestQueue.method1619()) {
-				if (var5.key == (long) arg1 && arg2 == var5.fs && var5.type == 0) {
-					var3 = var5.data;
-					break;
-				}
-			}
-		}
-		if (var3 == null) {
-			byte[] var6 = arg2.readFromFile(arg1);
-			arg0.method111(var6, arg1, arg2, true);
-		} else {
-			arg0.method111(var3, arg1, arg2, true);
-		}
-	}
-
-	@ObfuscatedName("hd.a([BBI)I")
-	public static int method541(byte[] arg0, int arg1) {
-		return Packet.getcrc(0, arg0, arg1);
-	}
-
-	@ObfuscatedName("hd.a(Leg;Z)V")
-	public static void method542(Square arg0, boolean arg1) {
-		field1900.push(arg0);
-		while (true) {
-			Square var2;
-			int var3;
-			int var4;
-			int var5;
-			int var6;
-			Square[][] var7;
-			Square var65;
-			do {
-				Square var64;
-				do {
-					Square var63;
-					do {
-						Square var62;
-						do {
-							do {
-								do {
-									while (true) {
-										while (true) {
-											do {
-												var2 = (Square) field1900.method1613();
-												if (var2 == null) {
-													return;
-												}
-											} while (!var2.field965);
-											var3 = var2.field961;
-											var4 = var2.field945;
-											var5 = var2.field966;
-											var6 = var2.field960;
-											var7 = World.field489[var5];
-											if (!var2.field944) {
-												break;
-											}
-											if (arg1) {
-												if (var5 > 0) {
-													Square var8 = World.field489[var5 - 1][var3][var4];
-													if (var8 != null && var8.field965) {
-														continue;
-													}
-												}
-												if (var3 <= field1435 && var3 > field3007) {
-													Square var9 = var7[var3 - 1][var4];
-													if (var9 != null && var9.field965 && (var9.field944 || (var2.field954 & 0x1) == 0)) {
-														continue;
-													}
-												}
-												if (var3 >= field1435 && var3 < PacketBit.field84 - 1) {
-													Square var10 = var7[var3 + 1][var4];
-													if (var10 != null && var10.field965 && (var10.field944 || (var2.field954 & 0x4) == 0)) {
-														continue;
-													}
-												}
-												if (var4 <= field1636 && var4 > field1849) {
-													Square var11 = var7[var3][var4 - 1];
-													if (var11 != null && var11.field965 && (var11.field944 || (var2.field954 & 0x8) == 0)) {
-														continue;
-													}
-												}
-												if (var4 >= field1636 && var4 < field4314 - 1) {
-													Square var12 = var7[var3][var4 + 1];
-													if (var12 != null && var12.field965 && (var12.field944 || (var2.field954 & 0x2) == 0)) {
-														continue;
-													}
-												}
-											} else {
-												arg1 = true;
-											}
-											var2.field944 = false;
-											if (var2.field951 != null) {
-												Square var13 = var2.field951;
-												if (var13.field947 == null) {
-													if (var13.field964 != null) {
-														if (World.method1581(0, var3, var4)) {
-															method1060(var13.field964, field1803, field3838, field3242, field3066, var3, var4, true);
-														} else {
-															method1060(var13.field964, field1803, field3838, field3242, field3066, var3, var4, false);
-														}
-													}
-												} else if (World.method1581(0, var3, var4)) {
-													World.renderQuickGround(var13.field947, 0, field1803, field3838, field3242, field3066, var3, var4, true);
-												} else {
-													World.renderQuickGround(var13.field947, 0, field1803, field3838, field3242, field3066, var3, var4, false);
-												}
-												Wall var14 = var13.field959;
-												if (var14 != null) {
-													var14.field3021.method87(0, field1803, field3838, field3242, field3066, var14.field3029 - World.field1353, var14.field3031 - World.field4461, var14.field3023 - World.field4048, var14.field3028);
-												}
-												for (int var15 = 0; var15 < var13.field962; var15++) {
-													Sprite var16 = var13.field963[var15];
-													if (var16 != null) {
-														var16.field1943.method87(var16.field1939, field1803, field3838, field3242, field3066, var16.field1945 - World.field1353, var16.field1938 - World.field4461, var16.field1949 - World.field4048, var16.field1948);
-													}
-												}
-											}
-											boolean var17 = false;
-											if (var2.field947 == null) {
-												if (var2.field964 != null) {
-													if (World.method1581(var6, var3, var4)) {
-														method1060(var2.field964, field1803, field3838, field3242, field3066, var3, var4, true);
-													} else {
-														var17 = true;
-														method1060(var2.field964, field1803, field3838, field3242, field3066, var3, var4, false);
-													}
-												}
-											} else if (World.method1581(var6, var3, var4)) {
-												World.renderQuickGround(var2.field947, var6, field1803, field3838, field3242, field3066, var3, var4, true);
-											} else {
-												var17 = true;
-												if (var2.field947.field1766 != 12345678 || World.field2145 && var5 <= field2484) {
-													World.renderQuickGround(var2.field947, var6, field1803, field3838, field3242, field3066, var3, var4, false);
-												}
-											}
-											int var18 = 0;
-											int var19 = 0;
-											Wall var20 = var2.field959;
-											Decor var21 = var2.field956;
-											if (var20 != null || var21 != null) {
-												if (field1435 == var3) {
-													var18++;
-												} else if (field1435 < var3) {
-													var18 += 2;
-												}
-												if (field1636 == var4) {
-													var18 += 3;
-												} else if (field1636 > var4) {
-													var18 += 6;
-												}
-												var19 = field2005[var18];
-												var2.field952 = field4285[var18];
-											}
-											if (var20 != null) {
-												if ((var20.field3027 & field1789[var18]) == 0) {
-													var2.field953 = 0;
-												} else if (var20.field3027 == 16) {
-													var2.field953 = 3;
-													var2.field946 = field1001[var18];
-													var2.field955 = 3 - var2.field946;
-												} else if (var20.field3027 == 32) {
-													var2.field953 = 6;
-													var2.field946 = field4150[var18];
-													var2.field955 = 6 - var2.field946;
-												} else if (var20.field3027 == 64) {
-													var2.field953 = 12;
-													var2.field946 = field1869[var18];
-													var2.field955 = 12 - var2.field946;
-												} else {
-													var2.field953 = 9;
-													var2.field946 = field904[var18];
-													var2.field955 = 9 - var2.field946;
-												}
-												if ((var20.field3027 & var19) != 0 && !World.method945(var6, var3, var4, var20.field3027)) {
-													var20.field3021.method87(0, field1803, field3838, field3242, field3066, var20.field3029 - World.field1353, var20.field3031 - World.field4461, var20.field3023 - World.field4048, var20.field3028);
-												}
-												if ((var20.field3024 & var19) != 0 && !World.method945(var6, var3, var4, var20.field3024)) {
-													var20.field3032.method87(0, field1803, field3838, field3242, field3066, var20.field3029 - World.field1353, var20.field3031 - World.field4461, var20.field3023 - World.field4048, var20.field3028);
-												}
-											}
-											if (var21 != null && !method1320(var6, var3, var4, var21.field1159.method88())) {
-												if ((var21.field1164 & var19) != 0) {
-													var21.field1159.method87(0, field1803, field3838, field3242, field3066, var21.field1157 + var21.field1169 - World.field1353, var21.field1168 - World.field4461, var21.field1161 + var21.field1167 - World.field4048, var21.field1158);
-												} else if (var21.field1164 == 256) {
-													int var22 = var21.field1157 - World.field1353;
-													int var23 = var21.field1168 - World.field4461;
-													int var24 = var21.field1161 - World.field4048;
-													int var25 = var21.field1172;
-													int var26;
-													if (var25 == 1 || var25 == 2) {
-														var26 = -var22;
-													} else {
-														var26 = var22;
-													}
-													int var27;
-													if (var25 == 2 || var25 == 3) {
-														var27 = -var24;
-													} else {
-														var27 = var24;
-													}
-													if (var27 < var26) {
-														var21.field1159.method87(0, field1803, field3838, field3242, field3066, var22 + var21.field1169, var23, var24 + var21.field1167, var21.field1158);
-													} else if (var21.field1160 != null) {
-														var21.field1160.method87(0, field1803, field3838, field3242, field3066, var22, var23, var24, var21.field1158);
-													}
-												}
-											}
-											if (var17) {
-												GroundDecor var28 = var2.field949;
-												if (var28 != null) {
-													var28.field3194.method87(0, field1803, field3838, field3242, field3066, var28.field3197 - World.field1353, var28.field3193 - World.field4461, var28.field3190 - World.field4048, var28.field3202);
-												}
-												GroundObject var29 = var2.field948;
-												if (var29 != null && var29.field4435 == 0) {
-													if (var29.field4446 != null) {
-														var29.field4446.method87(0, field1803, field3838, field3242, field3066, var29.field4451 - World.field1353, var29.field4444 - World.field4461, var29.field4439 - World.field4048, var29.field4440);
-													}
-													if (var29.field4448 != null) {
-														var29.field4448.method87(0, field1803, field3838, field3242, field3066, var29.field4451 - World.field1353, var29.field4444 - World.field4461, var29.field4439 - World.field4048, var29.field4440);
-													}
-													if (var29.field4443 != null) {
-														var29.field4443.method87(0, field1803, field3838, field3242, field3066, var29.field4451 - World.field1353, var29.field4444 - World.field4461, var29.field4439 - World.field4048, var29.field4440);
-													}
-												}
-											}
-											int var30 = var2.field954;
-											if (var30 != 0) {
-												if (var3 < field1435 && (var30 & 0x4) != 0) {
-													Square var31 = var7[var3 + 1][var4];
-													if (var31 != null && var31.field965) {
-														field1900.push(var31);
-													}
-												}
-												if (var4 < field1636 && (var30 & 0x2) != 0) {
-													Square var32 = var7[var3][var4 + 1];
-													if (var32 != null && var32.field965) {
-														field1900.push(var32);
-													}
-												}
-												if (var3 > field1435 && (var30 & 0x1) != 0) {
-													Square var33 = var7[var3 - 1][var4];
-													if (var33 != null && var33.field965) {
-														field1900.push(var33);
-													}
-												}
-												if (var4 > field1636 && (var30 & 0x8) != 0) {
-													Square var34 = var7[var3][var4 - 1];
-													if (var34 != null && var34.field965) {
-														field1900.push(var34);
-													}
-												}
-											}
-											break;
-										}
-										if (var2.field953 != 0) {
-											boolean var35 = true;
-											for (int var36 = 0; var36 < var2.field962; var36++) {
-												if (var2.field963[var36].field1934 != World.field2627 && (var2.field957[var36] & var2.field953) == var2.field946) {
-													var35 = false;
-													break;
-												}
-											}
-											if (var35) {
-												Wall var37 = var2.field959;
-												if (!World.method945(var6, var3, var4, var37.field3027)) {
-													var37.field3021.method87(0, field1803, field3838, field3242, field3066, var37.field3029 - World.field1353, var37.field3031 - World.field4461, var37.field3023 - World.field4048, var37.field3028);
-												}
-												var2.field953 = 0;
-											}
-										}
-										if (!var2.field958) {
-											break;
-										}
-										try {
-											int var38 = var2.field962;
-											var2.field958 = false;
-											int var39 = 0;
-											label562: for (int var40 = 0; var40 < var38; var40++) {
-												Sprite var41 = var2.field963[var40];
-												if (var41.field1934 != World.field2627) {
-													for (int var42 = var41.field1933; var42 <= var41.field1940; var42++) {
-														for (int var43 = var41.field1936; var43 <= var41.field1935; var43++) {
-															Square var44 = var7[var42][var43];
-															if (var44.field944) {
-																var2.field958 = true;
-																continue label562;
-															}
-															if (var44.field953 != 0) {
-																int var45 = 0;
-																if (var42 > var41.field1933) {
-																	var45++;
-																}
-																if (var42 < var41.field1940) {
-																	var45 += 4;
-																}
-																if (var43 > var41.field1936) {
-																	var45 += 8;
-																}
-																if (var43 < var41.field1935) {
-																	var45 += 2;
-																}
-																if ((var45 & var44.field953) == var2.field955) {
-																	var2.field958 = true;
-																	continue label562;
-																}
-															}
-														}
-													}
-													World.field4447[var39++] = var41;
-													int var46 = field1435 - var41.field1933;
-													int var47 = var41.field1940 - field1435;
-													if (var47 > var46) {
-														var46 = var47;
-													}
-													int var48 = field1636 - var41.field1936;
-													int var49 = var41.field1935 - field1636;
-													if (var49 > var48) {
-														var41.field1950 = var46 + var49;
-													} else {
-														var41.field1950 = var46 + var48;
-													}
-												}
-											}
-											while (var39 > 0) {
-												int var50 = -50;
-												int var51 = -1;
-												for (int var52 = 0; var52 < var39; var52++) {
-													Sprite var53 = World.field4447[var52];
-													if (var53.field1934 != World.field2627) {
-														if (var53.field1950 > var50) {
-															var50 = var53.field1950;
-															var51 = var52;
-														} else if (var53.field1950 == var50) {
-															int var54 = var53.field1945 - World.field1353;
-															int var55 = var53.field1949 - World.field4048;
-															int var56 = World.field4447[var51].field1945 - World.field1353;
-															int var57 = World.field4447[var51].field1949 - World.field4048;
-															if (var54 * var54 + var55 * var55 > var56 * var56 + var57 * var57) {
-																var51 = var52;
-															}
-														}
-													}
-												}
-												if (var51 == -1) {
-													break;
-												}
-												Sprite var58 = World.field4447[var51];
-												var58.field1934 = World.field2627;
-												if (!method224(var6, var58.field1933, var58.field1940, var58.field1936, var58.field1935, var58.field1943.method88())) {
-													var58.field1943.method87(var58.field1939, field1803, field3838, field3242, field3066, var58.field1945 - World.field1353, var58.field1938 - World.field4461, var58.field1949 - World.field4048, var58.field1948);
-												}
-												for (int var59 = var58.field1933; var59 <= var58.field1940; var59++) {
-													for (int var60 = var58.field1936; var60 <= var58.field1935; var60++) {
-														Square var61 = var7[var59][var60];
-														if (var61.field953 != 0) {
-															field1900.push(var61);
-														} else if ((var59 != var3 || var60 != var4) && var61.field965) {
-															field1900.push(var61);
-														}
-													}
-												}
-											}
-											if (!var2.field958) {
-												break;
-											}
-										} catch (Exception var80) {
-											var2.field958 = false;
-											break;
-										}
-									}
-								} while (!var2.field965);
-							} while (var2.field953 != 0);
-							if (var3 > field1435 || var3 <= field3007) {
-								break;
-							}
-							var62 = var7[var3 - 1][var4];
-						} while (var62 != null && var62.field965);
-						if (var3 < field1435 || var3 >= PacketBit.field84 - 1) {
-							break;
-						}
-						var63 = var7[var3 + 1][var4];
-					} while (var63 != null && var63.field965);
-					if (var4 > field1636 || var4 <= field1849) {
-						break;
-					}
-					var64 = var7[var3][var4 - 1];
-				} while (var64 != null && var64.field965);
-				if (var4 < field1636 || var4 >= field4314 - 1) {
-					break;
-				}
-				var65 = var7[var3][var4 + 1];
-			} while (var65 != null && var65.field965);
-			var2.field965 = false;
-			StructType.field3545--;
-			GroundObject var66 = var2.field948;
-			if (var66 != null && var66.field4435 != 0) {
-				if (var66.field4446 != null) {
-					var66.field4446.method87(0, field1803, field3838, field3242, field3066, var66.field4451 - World.field1353, var66.field4444 - World.field4461 - var66.field4435, var66.field4439 - World.field4048, var66.field4440);
-				}
-				if (var66.field4448 != null) {
-					var66.field4448.method87(0, field1803, field3838, field3242, field3066, var66.field4451 - World.field1353, var66.field4444 - World.field4461 - var66.field4435, var66.field4439 - World.field4048, var66.field4440);
-				}
-				if (var66.field4443 != null) {
-					var66.field4443.method87(0, field1803, field3838, field3242, field3066, var66.field4451 - World.field1353, var66.field4444 - World.field4461 - var66.field4435, var66.field4439 - World.field4048, var66.field4440);
-				}
-			}
-			if (var2.field952 != 0) {
-				Decor var67 = var2.field956;
-				if (var67 != null && !method1320(var6, var3, var4, var67.field1159.method88())) {
-					if ((var67.field1164 & var2.field952) != 0) {
-						var67.field1159.method87(0, field1803, field3838, field3242, field3066, var67.field1157 + var67.field1169 - World.field1353, var67.field1168 - World.field4461, var67.field1161 + var67.field1167 - World.field4048, var67.field1158);
-					} else if (var67.field1164 == 256) {
-						int var68 = var67.field1157 - World.field1353;
-						int var69 = var67.field1168 - World.field4461;
-						int var70 = var67.field1161 - World.field4048;
-						int var71 = var67.field1172;
-						int var72;
-						if (var71 == 1 || var71 == 2) {
-							var72 = -var68;
-						} else {
-							var72 = var68;
-						}
-						int var73;
-						if (var71 == 2 || var71 == 3) {
-							var73 = -var70;
-						} else {
-							var73 = var70;
-						}
-						if (var73 >= var72) {
-							var67.field1159.method87(0, field1803, field3838, field3242, field3066, var68 + var67.field1169, var69, var70 + var67.field1167, var67.field1158);
-						} else if (var67.field1160 != null) {
-							var67.field1160.method87(0, field1803, field3838, field3242, field3066, var68, var69, var70, var67.field1158);
-						}
-					}
-				}
-				Wall var74 = var2.field959;
-				if (var74 != null) {
-					if ((var74.field3024 & var2.field952) != 0 && !World.method945(var6, var3, var4, var74.field3024)) {
-						var74.field3032.method87(0, field1803, field3838, field3242, field3066, var74.field3029 - World.field1353, var74.field3031 - World.field4461, var74.field3023 - World.field4048, var74.field3028);
-					}
-					if ((var74.field3027 & var2.field952) != 0 && !World.method945(var6, var3, var4, var74.field3027)) {
-						var74.field3021.method87(0, field1803, field3838, field3242, field3066, var74.field3029 - World.field1353, var74.field3031 - World.field4461, var74.field3023 - World.field4048, var74.field3028);
-					}
-				}
-			}
-			if (var5 < World.field152 - 1) {
-				Square var75 = World.field489[var5 + 1][var3][var4];
-				if (var75 != null && var75.field965) {
-					field1900.push(var75);
-				}
-			}
-			if (var3 < field1435) {
-				Square var76 = var7[var3 + 1][var4];
-				if (var76 != null && var76.field965) {
-					field1900.push(var76);
-				}
-			}
-			if (var4 < field1636) {
-				Square var77 = var7[var3][var4 + 1];
-				if (var77 != null && var77.field965) {
-					field1900.push(var77);
-				}
-			}
-			if (var3 > field1435) {
-				Square var78 = var7[var3 - 1][var4];
-				if (var78 != null && var78.field965) {
-					field1900.push(var78);
-				}
-			}
-			if (var4 > field1636) {
-				Square var79 = var7[var3][var4 - 1];
-				if (var79 != null && var79.field965) {
-					field1900.push(var79);
-				}
-			}
-		}
-	}
-
-	@ObfuscatedName("id.a(BLea;)Ltj;")
-	public static QuickChatPhrase method667(Packet arg0) {
-		QuickChatPhrase var1 = new QuickChatPhrase();
-		var1.field4058 = arg0.g2();
-		var1.field4065 = QuickChatPhraseType.method1150(var1.field4058);
-		return var1;
-	}
-
-	@ObfuscatedName("id.a(IIII)V")
-	public static void method668(int arg0, int arg1, int arg2) {
-		if (field2172 == 0 || arg0 == 0 || Client.field3445 >= 50 || arg2 == -1) {
-			return;
-		}
-		field397[Client.field3445] = arg2;
-		field2016[Client.field3445] = arg0;
-		field116[Client.field3445] = arg1;
-		field4417[Client.field3445] = null;
-		field2726[Client.field3445] = 0;
-		Client.field3445++;
 	}
 
 	@ObfuscatedName("lb.a(IIIIIIB)V")
@@ -7308,47 +4200,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("me.c(B)V")
-	public static void method905() {
-		int var0 = field666 >> 7;
-		Client.field3930 &= 0x7FF;
-		int var1 = field4366 >> 7;
-		int var2 = 0;
-		if (field1173 < 128) {
-			field1173 = 128;
-		}
-		if (field1173 > 383) {
-			field1173 = 383;
-		}
-		int var3 = Client.method1584(field666, field4366, Client.field2907);
-		if (var0 > 3 && var1 > 3 && var0 < 100 && var1 < 100) {
-			for (int var4 = var0 - 4; var4 <= var0 + 4; var4++) {
-				for (int var5 = var1 - 4; var5 <= var1 + 4; var5++) {
-					int var6 = Client.field2907;
-					if (var6 < 3 && (ClientBuild.field2098[1][var4][var5] & 0x2) == 2) {
-						var6++;
-					}
-					int var7 = var3 - ClientBuild.field1137[var6][var4][var5];
-					if (var2 < var7) {
-						var2 = var7;
-					}
-				}
-			}
-		}
-		int var8 = var2 * 192;
-		if (var8 > 98048) {
-			var8 = 98048;
-		}
-		if (var8 < 32768) {
-			var8 = 32768;
-		}
-		if (field1328 < var8) {
-			field1328 += (var8 - field1328) / 24;
-		} else if (var8 < field1328) {
-			field1328 += (var8 - field1328) / 80;
-		}
-	}
-
 	@ObfuscatedName("me.a(IZ)V")
 	public static void method906(int arg0) {
 		if (field482 == null || field482.length < arg0) {
@@ -7405,34 +4256,10 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("mj.a(II)Li;")
-	public static JagString method926(int arg0) {
-		return JagString.join(new JagString[] { JagString.method1212(arg0 >> 24 & 0xFF), field2612, JagString.method1212(arg0 >> 16 & 0xFF), field2612, JagString.method1212(arg0 >> 8 & 0xFF), field2612, JagString.method1212(arg0 & 0xFF) });
-	}
-
 	@ObfuscatedName("kb.a(Li;Z)V")
 	public static void method764(JagString arg0) {
 		field319 = arg0;
 		method1378();
-	}
-
-	@ObfuscatedName("kb.a(ILjava/lang/String;)Li;")
-	public static JagString method765(String arg0) {
-		byte[] var1;
-		try {
-			var1 = arg0.getBytes("ISO-8859-1");
-		} catch (UnsupportedEncodingException var4) {
-			var1 = arg0.getBytes();
-		}
-		JagString var2 = new JagString();
-		var2.length = 0;
-		var2.chars = var1;
-		for (int var3 = 0; var3 < var1.length; var3++) {
-			if (var1[var3] != 0) {
-				var1[var2.length++] = var1[var3];
-			}
-		}
-		return var2;
 	}
 
 	@ObfuscatedName("jg.a(III)Z")
@@ -7446,7 +4273,7 @@ public class Statics {
 		int var6 = arg4 - arg0;
 		if (var6 == 0) {
 			if (var5 != 0) {
-				SeqType.method753(arg2, arg3, arg0, arg1);
+				method753(arg2, arg3, arg0, arg1);
 			}
 		} else if (var5 == 0) {
 			method310(arg3, arg4, arg0, arg2);
@@ -7509,7 +4336,7 @@ public class Statics {
 		if (field1207 <= arg3 && arg3 <= field183) {
 			int var4 = method1058(field919, field279, arg2);
 			int var5 = method1058(field919, field279, arg1);
-			SeqType.method753(arg0, var4, arg3, var5);
+			method753(arg0, var4, arg3, var5);
 		}
 	}
 
@@ -7521,16 +4348,16 @@ public class Statics {
 
 	@ObfuscatedName("wf.a(I)V")
 	public static void method1604() {
-		int var0 = NpcType.field2330 - (int) ((double) field1706.field3380 / field1110);
+		int var0 = field2330 - (int) ((double) field1706.field3380 / field1110);
 		int var1 = field3033 - (int) ((double) field1706.field3422 / field1110);
-		int var2 = NpcType.field2330 + (int) ((double) field1706.field3380 / field1110);
+		int var2 = field2330 + (int) ((double) field1706.field3380 / field1110);
 		if (var0 < 0) {
-			NpcType.field2330 = (int) ((double) field1706.field3380 / field1110);
+			field2330 = (int) ((double) field1706.field3380 / field1110);
 			field3659 = -1;
 			field594 = -1;
 		}
-		if (SeqType.field1988 < var2) {
-			NpcType.field2330 = SeqType.field1988 - (int) ((double) field1706.field3380 / field1110);
+		if (ClientBuild.field1988 < var2) {
+			field2330 = ClientBuild.field1988 - (int) ((double) field1706.field3380 / field1110);
 			field594 = -1;
 			field3659 = -1;
 		}
@@ -7540,36 +4367,10 @@ public class Statics {
 			field3659 = -1;
 			field594 = -1;
 		}
-		if (var3 > field760) {
-			field3033 = field760 - (int) ((double) field1706.field3422 / field1110);
+		if (var3 > ClientBuild.field760) {
+			field3033 = ClientBuild.field760 - (int) ((double) field1706.field3422 / field1110);
 			field3659 = -1;
 			field594 = -1;
-		}
-	}
-
-	@ObfuscatedName("mf.a(Ljj;)V")
-	public static void method915(Sprite arg0) {
-		for (int var1 = arg0.field1933; var1 <= arg0.field1940; var1++) {
-			for (int var2 = arg0.field1936; var2 <= arg0.field1935; var2++) {
-				Square var3 = World.field489[arg0.field1952][var1][var2];
-				if (var3 != null) {
-					for (int var4 = 0; var4 < var3.field962; var4++) {
-						if (var3.field963[var4] == arg0) {
-							var3.field962--;
-							for (int var5 = var4; var5 < var3.field962; var5++) {
-								var3.field963[var5] = var3.field963[var5 + 1];
-								var3.field957[var5] = var3.field957[var5 + 1];
-							}
-							var3.field963[var3.field962] = null;
-							break;
-						}
-					}
-					var3.field954 = 0;
-					for (int var6 = 0; var6 < var3.field962; var6++) {
-						var3.field954 |= var3.field957[var6];
-					}
-				}
-			}
 		}
 	}
 
@@ -7578,42 +4379,59 @@ public class Statics {
 		return arg0 >>> 10;
 	}
 
-	@ObfuscatedName("wa.a(ZIJZ)Li;")
-	public static JagString method1586(long arg0) {
-		int var2 = 1;
-		for (long var3 = arg0 / (long) 10; var3 != 0L; var3 /= 10) {
-			var2++;
-		}
-		int var5 = var2;
-		if (arg0 < 0L) {
-			var5 = var2 + 1;
-		}
-		byte[] var6 = new byte[var5];
-		if (arg0 < 0L) {
-			var6[0] = 45;
-		}
-		for (int var7 = 0; var7 < var2; var7++) {
-			int var8 = (int) (arg0 % (long) 10);
-			arg0 /= 10;
-			if (var8 < 0) {
-				var8 = -var8;
-			}
-			if (var8 > 9) {
-				var8 += 39;
-			}
-			var6[var5 - var7 - 1] = (byte) (var8 + 48);
-		}
-		JagString var9 = new JagString();
-		var9.chars = var6;
-		var9.length = var5;
-		return var9;
-	}
-
 	@ObfuscatedName("vd.a(ZI)V")
 	public static void method1551(int arg0) {
-		NpcType.field2330 = arg0;
+		field2330 = arg0;
 		field3659 = -1;
 		field594 = -1;
 		method1604();
+	}
+
+	@ObfuscatedName("k.b(IIIII)V")
+	public static void method753(int arg0, int arg1, int arg2, int arg3) {
+		if (arg1 > arg3) {
+			for (int var4 = arg3; var4 < arg1; var4++) {
+				field42[var4][arg2] = arg0;
+			}
+		} else {
+			for (int var5 = arg1; var5 < arg3; var5++) {
+				field42[var5][arg2] = arg0;
+			}
+		}
+	}
+
+	@ObfuscatedName("k.a(IIIII)V")
+	public static void method745(int arg0, int arg1, int arg2, int arg3) {
+		method1534(arg3 - arg2, arg1, arg2 + arg3, field42[arg0]);
+		int var4 = 0;
+		int var5 = arg2;
+		int var6 = -1;
+		int var7 = -arg2;
+		while (var4 < var5) {
+			var6 += 2;
+			var7 += var6;
+			var4++;
+			if (var7 >= 0) {
+				var5--;
+				var7 -= var5 << 1;
+				int[] var8 = field42[var5 + arg0];
+				int[] var9 = field42[arg0 - var5];
+				int var10 = var4 + arg3;
+				int var11 = arg3 - var4;
+				method1534(var11, arg1, var10, var8);
+				method1534(var11, arg1, var10, var9);
+			}
+			int var12 = arg3 + var5;
+			int var13 = arg3 - var5;
+			int[] var14 = field42[arg0 + var4];
+			int[] var15 = field42[arg0 - var4];
+			method1534(var13, arg1, var12, var14);
+			method1534(var13, arg1, var12, var15);
+		}
+	}
+
+	@ObfuscatedName("k.b(II)Z")
+	public static boolean method746(int arg0) {
+		return arg0 >= 97 && arg0 <= 122 || arg0 >= 65 && arg0 <= 90;
 	}
 }

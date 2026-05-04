@@ -307,4 +307,77 @@ public class Js5Net {
 			field1389++;
 		}
 	}
+
+	@ObfuscatedName("rc.a(Lbj;IIBIIZ)V")
+	public static void method1312(Js5Loader arg0, int arg1, int arg2, byte arg3, int arg4, boolean arg5) {
+		long var6 = (long) (arg1 + (arg2 << 16));
+		Js5NetRequest var8 = (Js5NetRequest) field4465.method1049(var6);
+		if (var8 != null) {
+			return;
+		}
+		Js5NetRequest var9 = (Js5NetRequest) field2922.method1049(var6);
+		if (var9 != null) {
+			return;
+		}
+		Js5NetRequest var10 = (Js5NetRequest) field3907.method1049(var6);
+		if (var10 == null) {
+			if (!arg5) {
+				Js5NetRequest var11 = (Js5NetRequest) field1951.method1049(var6);
+				if (var11 != null) {
+					return;
+				}
+			}
+			Js5NetRequest var12 = new Js5NetRequest();
+			var12.field1782 = arg3;
+			var12.field1780 = arg4;
+			var12.field1787 = arg0;
+			if (arg5) {
+				field4465.put(var6, var12);
+				field3943++;
+			} else {
+				field2559.method1387(var12);
+				field3907.put(var6, var12);
+				field4157++;
+			}
+		} else if (arg5) {
+			var10.method907();
+			field4465.put(var6, var10);
+			field4157--;
+			field3943++;
+		}
+	}
+
+	@ObfuscatedName("fc.a(III)V")
+	public static void method426(int arg0, int arg1) {
+		long var2 = (long) ((arg0 << 16) + arg1);
+		Js5NetRequest var4 = (Js5NetRequest) field3907.method1049(var2);
+		if (var4 != null) {
+			field2559.method1388(var4);
+		}
+	}
+
+	@ObfuscatedName("e.f(I)V")
+	public static void method290() {
+		if (field4033 != null) {
+			field4033.close();
+		}
+	}
+
+	@ObfuscatedName("kj.a(IBLbj;)V")
+	public static void method814(int arg0, Js5Loader arg1) {
+		if (field1427 == null) {
+			method1312(null, 255, 255, (byte) 0, 0, true);
+			field141[arg0] = arg1;
+		} else {
+			field1427.pos = arg0 * 8 + 5;
+			int var2 = field1427.g4();
+			int var3 = field1427.g4();
+			arg1.method109(var2, var3);
+		}
+	}
+
+	@ObfuscatedName("of.a(ZIZ)I")
+	public static int method1067() {
+		return field3943 + field3876;
+	}
 }

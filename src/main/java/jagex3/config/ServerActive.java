@@ -17,4 +17,9 @@ public class ServerActive {
 	public static boolean method423(int arg0) {
 		return (arg0 >> 20 & 0x1) != 0;
 	}
+
+	@ObfuscatedName("fd.a(BI)Z")
+	public static boolean method431(int arg0) {
+		return (arg0 >> 30 & 0x1) != 0;
+	}
 }

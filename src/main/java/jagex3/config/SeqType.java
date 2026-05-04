@@ -29,9 +29,6 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("k.eb")
 	public int[] field1985;
 
-	@ObfuscatedName("k.hb")
-	public static int field1988;
-
 	@ObfuscatedName("k.jb")
 	public int[] field1990;
 
@@ -71,54 +68,6 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("k.J")
 	public int[] field1965;
 
-	@ObfuscatedName("k.a(IIIII)V")
-	public static void method745(int arg0, int arg1, int arg2, int arg3) {
-		Statics.method1534(arg3 - arg2, arg1, arg2 + arg3, Statics.field42[arg0]);
-		int var4 = 0;
-		int var5 = arg2;
-		int var6 = -1;
-		int var7 = -arg2;
-		while (var4 < var5) {
-			var6 += 2;
-			var7 += var6;
-			var4++;
-			if (var7 >= 0) {
-				var5--;
-				var7 -= var5 << 1;
-				int[] var8 = Statics.field42[var5 + arg0];
-				int[] var9 = Statics.field42[arg0 - var5];
-				int var10 = var4 + arg3;
-				int var11 = arg3 - var4;
-				Statics.method1534(var11, arg1, var10, var8);
-				Statics.method1534(var11, arg1, var10, var9);
-			}
-			int var12 = arg3 + var5;
-			int var13 = arg3 - var5;
-			int[] var14 = Statics.field42[arg0 + var4];
-			int[] var15 = Statics.field42[arg0 - var4];
-			Statics.method1534(var13, arg1, var12, var14);
-			Statics.method1534(var13, arg1, var12, var15);
-		}
-	}
-
-	@ObfuscatedName("k.b(II)Z")
-	public static boolean method746(int arg0) {
-		return arg0 >= 97 && arg0 <= 122 || arg0 >= 65 && arg0 <= 90;
-	}
-
-	@ObfuscatedName("k.b(IIIII)V")
-	public static void method753(int arg0, int arg1, int arg2, int arg3) {
-		if (arg1 > arg3) {
-			for (int var4 = arg3; var4 < arg1; var4++) {
-				Statics.field42[var4][arg2] = arg0;
-			}
-		} else {
-			for (int var5 = arg1; var5 < arg3; var5++) {
-				Statics.field42[var5][arg2] = arg0;
-			}
-		}
-	}
-
 	@ObfuscatedName("bc.a(IB)Lk;")
 	public static SeqType list(int arg0) {
 		SeqType var1 = (SeqType) field4471.method665((long) arg0);
@@ -148,10 +97,49 @@ public final class SeqType extends Linkable2 {
 		field2778 = arg2;
 	}
 
+	@ObfuscatedName("ea.a(Lnb;ILnb;ZB)Lli;")
+	public static AnimFrameSet method309(Js5 arg0, int arg1, Js5 arg2) {
+		boolean var3 = true;
+		int[] var4 = arg2.method948(arg1);
+		for (int var5 = 0; var5 < var4.length; var5++) {
+			byte[] var6 = arg2.method947(var4[var5], arg1);
+			if (var6 == null) {
+				var3 = false;
+			} else {
+				int var7 = var6[1] & 0xFF | (var6[0] & 0xFF) << 8;
+				byte[] var8 = arg0.method947(0, var7);
+				if (var8 == null) {
+					var3 = false;
+				}
+			}
+		}
+		if (!var3) {
+			return null;
+		}
+		try {
+			return new AnimFrameSet(arg2, arg0, arg1, false);
+		} catch (Exception var9) {
+			return null;
+		}
+	}
+
+	@ObfuscatedName("lj.b(II)Lli;")
+	public static AnimFrameSet method878(int arg0) {
+		AnimFrameSet var1 = (AnimFrameSet) field3989.method665((long) arg0);
+		if (var1 != null) {
+			return var1;
+		}
+		AnimFrameSet var2 = method309(field2778, arg0, field2624);
+		if (var2 != null) {
+			field3989.method663((long) arg0, var2);
+		}
+		return var2;
+	}
+
 	@ObfuscatedName("k.a(ILcg;I)Lcg;")
 	public ModelLit method741(ModelLit arg0, int arg1) {
 		int var3 = this.field1965[arg1];
-		AnimFrameSet var4 = Statics.method878(var3 >> 16);
+		AnimFrameSet var4 = method878(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
 			return arg0.method185(true, true);
@@ -234,7 +222,7 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("k.a(IZLcg;I)Lcg;")
 	public ModelLit method749(int arg0, ModelLit arg1, int arg2) {
 		int var4 = this.field1965[arg2];
-		AnimFrameSet var5 = Statics.method878(var4 >> 16);
+		AnimFrameSet var5 = method878(var4 >> 16);
 		int var6 = var4 & 0xFFFF;
 		if (var5 == null) {
 			return arg1.method184(true, true);
@@ -262,7 +250,7 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("k.a(IILcg;)Lcg;")
 	public ModelLit method750(int arg0, ModelLit arg1) {
 		int var3 = this.field1965[arg0];
-		AnimFrameSet var4 = Statics.method878(var3 >> 16);
+		AnimFrameSet var4 = method878(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
 			return arg1.method184(true, true);
@@ -287,13 +275,13 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("k.a(ILk;IBLcg;)Lcg;")
 	public ModelLit method754(int arg0, SeqType arg1, int arg2, ModelLit arg3) {
 		int var5 = this.field1965[arg0];
-		AnimFrameSet var6 = Statics.method878(var5 >> 16);
+		AnimFrameSet var6 = method878(var5 >> 16);
 		int var7 = var5 & 0xFFFF;
 		if (var6 == null) {
 			return arg1.method750(arg2, arg3);
 		}
 		int var8 = arg1.field1965[arg2];
-		AnimFrameSet var9 = Statics.method878(var8 >> 16);
+		AnimFrameSet var9 = method878(var8 >> 16);
 		int var10 = var8 & 0xFFFF;
 		if (var9 == null) {
 			ModelLit var11 = arg3.method184(!var6.method875(var7), !this.field1993);
@@ -328,7 +316,7 @@ public final class SeqType extends Linkable2 {
 	@ObfuscatedName("k.a(ILcg;B)Lcg;")
 	public ModelLit method758(int arg0, ModelLit arg1) {
 		int var3 = this.field1965[arg0];
-		AnimFrameSet var4 = Statics.method878(var3 >> 16);
+		AnimFrameSet var4 = method878(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
 			return arg1.method184(true, true);
@@ -337,7 +325,7 @@ public final class SeqType extends Linkable2 {
 		int var7 = 0;
 		if (this.field2003 != null && this.field2003.length > arg0) {
 			int var8 = this.field2003[arg0];
-			var6 = Statics.method878(var8 >> 16);
+			var6 = method878(var8 >> 16);
 			var7 = var8 & 0xFFFF;
 		}
 		if (var6 == null || var7 == 65535) {

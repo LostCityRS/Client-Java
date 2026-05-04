@@ -3,6 +3,7 @@ package jagex3.jstring;
 import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.client.BrowserControl;
+import jagex3.constants.Text;
 import jagex3.datastruct.HashTable;
 import jagex3.datastruct.StringNode;
 import jagex3.util.ArrayUtil;
@@ -104,7 +105,7 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("pg.f(II)Li;")
 	public static JagString method1212(int arg0) {
-		return Statics.method1481(false, arg0);
+		return method1481(false, arg0);
 	}
 
 	@ObfuscatedName("sd.a(JB)Li;")
@@ -132,6 +133,116 @@ public final class JagString implements StringInterface {
 			var8.length = var5.length;
 			return var8;
 		}
+	}
+
+	@ObfuscatedName("ua.a(ZIII)Li;")
+	public static JagString method1481(boolean arg0, int arg1) {
+		int var2 = 1;
+		int var3 = arg1 / 10;
+		while (var3 != 0) {
+			var3 /= 10;
+			var2++;
+		}
+		int var4 = var2;
+		if (arg1 < 0 || arg0) {
+			var4 = var2 + 1;
+		}
+		byte[] var5 = new byte[var4];
+		if (arg1 < 0) {
+			var5[0] = 45;
+		} else if (arg0) {
+			var5[0] = 43;
+		}
+		for (int var6 = 0; var6 < var2; var6++) {
+			int var7 = arg1 % 10;
+			arg1 /= 10;
+			if (var7 < 0) {
+				var7 = -var7;
+			}
+			if (var7 > 9) {
+				var7 += 39;
+			}
+			var5[var4 - var6 - 1] = (byte) (var7 + 48);
+		}
+		JagString var8 = new JagString();
+		var8.length = var4;
+		var8.chars = var5;
+		return var8;
+	}
+
+	@ObfuscatedName("kb.a(ILjava/lang/String;)Li;")
+	public static JagString method765(String arg0) {
+		byte[] var1;
+		try {
+			var1 = arg0.getBytes("ISO-8859-1");
+		} catch (UnsupportedEncodingException var4) {
+			var1 = arg0.getBytes();
+		}
+		JagString var2 = new JagString();
+		var2.length = 0;
+		var2.chars = var1;
+		for (int var3 = 0; var3 < var1.length; var3++) {
+			if (var1[var3] != 0) {
+				var1[var2.length++] = var1[var3];
+			}
+		}
+		return var2;
+	}
+
+	@ObfuscatedName("mj.a(II)Li;")
+	public static JagString method926(int arg0) {
+		return join(new JagString[] { method1212(arg0 >> 24 & 0xFF), Statics.field2612, method1212(arg0 >> 16 & 0xFF), Statics.field2612, method1212(arg0 >> 8 & 0xFF), Statics.field2612, method1212(arg0 & 0xFF) });
+	}
+
+	@ObfuscatedName("wa.a(ZIJZ)Li;")
+	public static JagString method1586(long arg0) {
+		int var2 = 1;
+		for (long var3 = arg0 / (long) 10; var3 != 0L; var3 /= 10) {
+			var2++;
+		}
+		int var5 = var2;
+		if (arg0 < 0L) {
+			var5 = var2 + 1;
+		}
+		byte[] var6 = new byte[var5];
+		if (arg0 < 0L) {
+			var6[0] = 45;
+		}
+		for (int var7 = 0; var7 < var2; var7++) {
+			int var8 = (int) (arg0 % (long) 10);
+			arg0 /= 10;
+			if (var8 < 0) {
+				var8 = -var8;
+			}
+			if (var8 > 9) {
+				var8 += 39;
+			}
+			var6[var5 - var7 - 1] = (byte) (var8 + 48);
+		}
+		JagString var9 = new JagString();
+		var9.chars = var6;
+		var9.length = var5;
+		return var9;
+	}
+
+	@ObfuscatedName("nb.f(II)Li;")
+	public static JagString method958(int arg0) {
+		JagString var1 = method1212(arg0);
+		for (int var2 = var1.method604() - 3; var2 > 0; var2 -= 3) {
+			var1 = join(new JagString[] { var1.method623(0, var2), Statics.field979, var1.method635(var2) });
+		}
+		if (var1.method604() > 9) {
+			return join(new JagString[] { Statics.field2828, var1.method623(0, var1.method604() - 8), Text.field2469, Statics.field1238, var1, Statics.field3982});
+		} else if (var1.method604() > 6) {
+			return join(new JagString[] {Statics.field644, var1.method623(0, var1.method604() - 4), Text.field3071, Statics.field1238, var1, Statics.field3982});
+		} else {
+			return join(new JagString[] {Statics.field1370, var1, Statics.field2199});
+		}
+	}
+
+	@ObfuscatedName("ee.a(BZI)Li;")
+	public static JagString method375(int arg0) {
+		return method1481(true, arg0);
 	}
 
 	@ObfuscatedName("i.a(BII)I")
@@ -363,7 +474,7 @@ public final class JagString implements StringInterface {
 	public JagString method608(Applet arg0) {
 		String var2 = new String(this.chars, 0, this.length);
 		String var3 = arg0.getParameter(var2);
-		return var3 == null ? null : Statics.method765(var3);
+		return var3 == null ? null : method765(var3);
 	}
 
 	@ObfuscatedName("i.a(ZLjava/awt/FontMetrics;)I")
