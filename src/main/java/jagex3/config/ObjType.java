@@ -35,7 +35,7 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("qf.S")
 	public static SoftwarePixFont field3571;
 	@ObfuscatedName("k.N")
-	public static short[] field1968 = new short[256];
+	public static short[] clientpalette = new short[256];
 	@ObfuscatedName("ng.ab")
 	public int field2857 = 0;
 
@@ -338,7 +338,7 @@ public final class ObjType extends Linkable2 {
 				if (this.field2887 == null || var2 >= this.field2887.length) {
 					var1.method564(this.field2855[var2], this.field2849[var2]);
 				} else {
-					var1.method564(this.field2855[var2], field1968[this.field2887[var2] & 0xFF]);
+					var1.method564(this.field2855[var2], clientpalette[this.field2887[var2] & 0xFF]);
 				}
 			}
 		}
@@ -752,7 +752,7 @@ public final class ObjType extends Linkable2 {
 					if (this.field2887 == null || this.field2887.length <= var8) {
 						var7.method564(this.field2855[var8], this.field2849[var8]);
 					} else {
-						var7.method564(this.field2855[var8], field1968[this.field2887[var8] & 0xFF]);
+						var7.method564(this.field2855[var8], clientpalette[this.field2887[var8] & 0xFF]);
 					}
 				}
 			}

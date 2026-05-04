@@ -17,6 +17,10 @@ import java.net.URL;
 @ObfuscatedName("i")
 public final class JagString implements StringInterface {
 
+	@ObfuscatedName("vd.i")
+	public static final int[] field4373 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 73, 74, 76, 78, 83, 84, 85, 86, 91, 92, 93, 94, 95, 97, 103, 104, 105, 106, 107, 108, 113, 114, 115, 116, 118, 119, 120, 121, 122, 123, 124, 125, 133, 134, 136, 138, 143, 144, 145, 146, 151, 152, 153, 154, 155, 157, 163, 164, 165, 166, 168, 169, 174, 175, 176, 177, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 66, 67, 68, 69, 70, 71, 72, 75, 79, 80, 81, 82, 87, 88, 89, 90, 77, 96, 98, 99, 100, 101, 102, 250, 251, 109, 110, 111, 112, 117, 252, 167, 126, 127, 128, 129, 130, 131, 132, 135, 139, 140, 141, 142, 147, 148, 149, 150, 137, 156, 158, 159, 160, 161, 162, 253, 254, 170, 171, 172, 173, 178, 255, 179 };
+	@ObfuscatedName("ei.g")
+	public static final byte[] field1008 = new byte[] { 95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 };
 	@ObfuscatedName("i.h")
 	public boolean field1606 = true;
 
@@ -126,7 +130,7 @@ public final class JagString implements StringInterface {
 				long var6 = arg0;
 				arg0 /= 37L;
 				var2--;
-				var5[var2] = Statics.field1008[(int) (var6 - arg0 * 37L)];
+				var5[var2] = field1008[(int) (var6 - arg0 * 37L)];
 			}
 			JagString var8 = new JagString();
 			var8.chars = var5;
@@ -243,6 +247,11 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("ee.a(BZI)Li;")
 	public static JagString method375(int arg0) {
 		return method1481(true, arg0);
+	}
+
+	@ObfuscatedName("ve.a(IJ)Li;")
+	public static JagString method1556(long arg0) {
+		return method1586(arg0);
 	}
 
 	@ObfuscatedName("i.a(BII)I")
@@ -773,10 +782,10 @@ public final class JagString implements StringInterface {
 			var2 = arg0.length;
 		}
 		for (int var3 = 0; var3 < var2; var3++) {
-			if (Statics.field4373[this.chars[var3] & 0xFF] < Statics.field4373[arg0.chars[var3] & 0xFF]) {
+			if (field4373[this.chars[var3] & 0xFF] < field4373[arg0.chars[var3] & 0xFF]) {
 				return -1;
 			}
-			if (Statics.field4373[this.chars[var3] & 0xFF] > Statics.field4373[arg0.chars[var3] & 0xFF]) {
+			if (field4373[this.chars[var3] & 0xFF] > field4373[arg0.chars[var3] & 0xFF]) {
 				return 1;
 			}
 		}

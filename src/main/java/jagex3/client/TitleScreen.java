@@ -102,6 +102,14 @@ public class TitleScreen {
 	public static int[] field461 = new int[] { 0, 1, 2, 3 };
 	@ObfuscatedName("ia.z")
 	public static int[] field1686 = new int[] { 1, 1, 1, 1 };
+	@ObfuscatedName("ag.e")
+	public static int field119 = -1;
+	@ObfuscatedName("ij.H")
+	public static int field1783 = -1;
+	@ObfuscatedName("l.cb")
+	public static int field2195 = -1;
+	@ObfuscatedName("bb.c")
+	public static int field209 = -1;
 
 	@ObfuscatedName("rc.a(Lcc;BLcc;)V")
     public static void draw(PixfontGeneric arg0, PixfontGeneric arg1) {
@@ -213,7 +221,7 @@ public class TitleScreen {
 	@ObfuscatedName("ee.a(BLhj;)V")
 	public static void loop(GameShell arg0) {
 		if (field3959) {
-			Statics.method453(arg0);
+			method453(arg0);
 			return;
 		}
 		if (ClientMouseListener.field625 == 1 && ClientMouseListener.field4239 >= 715 && ClientMouseListener.field3339 >= 453) {
@@ -606,16 +614,16 @@ public class TitleScreen {
 	@ObfuscatedName("ki.a(Lcc;Lcc;B)V")
 	public static void method804(PixfontGeneric arg0, PixfontGeneric arg1) {
 		if (field1448 == null) {
-			field1448 = PixLoader.method230(0, Client.sprites, Statics.field209);
+			field1448 = PixLoader.method230(0, Client.sprites, field209);
 		}
 		if (field372 == null) {
-			field372 = PixLoader.method1325(Statics.field119, Client.sprites, 0);
+			field372 = PixLoader.method1325(field119, Client.sprites, 0);
 		}
 		if (field3217 == null) {
-			field3217 = PixLoader.method1325(Statics.field1783, Client.sprites, 0);
+			field3217 = PixLoader.method1325(field1783, Client.sprites, 0);
 		}
 		if (field736 == null) {
-			field736 = PixLoader.method1325(Statics.field2195, Client.sprites, 0);
+			field736 = PixLoader.method1325(field2195, Client.sprites, 0);
 		}
 		Pix2D.method478(0, 23, 765, 480, 0);
 		Pix2D.method482(0, 0, 138, 23, 12425273, 9135624);
@@ -957,5 +965,91 @@ public class TitleScreen {
 		}
 		method1143(arg0, arg1, var5);
 		method1143(var5 + 1, arg1, arg2);
+	}
+
+	@ObfuscatedName("ib.a(III)V")
+	public static void method656(int arg0, int arg1) {
+		int[] var2 = new int[4];
+		int var3 = 1;
+		int[] var4 = new int[4];
+		var4[0] = arg0;
+		var2[0] = arg1;
+		for (int var5 = 0; var5 < 4; var5++) {
+			if (arg0 != field461[var5]) {
+				var4[var3] = field461[var5];
+				var2[var3] = field1686[var5];
+				var3++;
+			}
+		}
+		field1686 = var2;
+		field461 = var4;
+		method1143(0, field3845, field3845.length - 1);
+	}
+
+	@ObfuscatedName("fi.a(Lhj;B)V")
+	public static void method453(GameShell arg0) {
+		if (ClientMouseListener.field625 != 1) {
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 280 && ClientMouseListener.field4239 <= 294 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
+			method656(0, 0);
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 295 && ClientMouseListener.field4239 <= 360 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
+			method656(0, 1);
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 390 && ClientMouseListener.field4239 <= 404 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
+			method656(1, 0);
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 405 && ClientMouseListener.field4239 <= 470 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
+			method656(1, 1);
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 500 && ClientMouseListener.field4239 <= 514 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
+			method656(2, 0);
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 515 && ClientMouseListener.field4239 <= 580 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
+			method656(2, 1);
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 610 && ClientMouseListener.field4239 <= 624 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
+			method656(3, 0);
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 625 && ClientMouseListener.field4239 <= 690 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
+			method656(3, 1);
+			return;
+		}
+		if (ClientMouseListener.field4239 >= 700 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field4239 <= 758 && ClientMouseListener.field3339 <= 20) {
+			field3959 = false;
+			method1493();
+			return;
+		}
+		if (field1581 == -1) {
+			return;
+		}
+		WorldEntry var1 = field3845[field1581];
+		if (Client.memServer == var1.field1257) {
+			byte[] var2 = JagString.join(new JagString[] { var1.field1262, Statics.field3922}).method613();
+			Client.field1760 = new String(var2, 0, var2.length);
+			Client.worldid = var1.field1261;
+			if (Client.modewhere != 0) {
+				Client.loginJs5Port = 443;
+				Client.modewhere = 0;
+				Client.loginPort = 43594;
+				Client.loginGamePort = 43594;
+			}
+			field3959 = false;
+			method1493();
+			return;
+		}
+		JagString var3 = JagString.join(new JagString[] { Statics.field1771, var1.field1262, Statics.field3076, JagString.method1212(Client.lang), Statics.field63, JagString.method1212(Client.lowMem ? 1 : 0), Statics.field21, JagString.method1212(Client.plug), Statics.field1351, JagString.method1212(Client.js) });
+		try {
+			arg0.getAppletContext().showDocument(var3.method606(), "_self");
+		} catch (Exception var4) {
+		}
 	}
 }

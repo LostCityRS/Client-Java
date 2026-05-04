@@ -26,6 +26,8 @@ public final class NpcType extends Linkable2 {
 	public static Js5 field3968;
 	@ObfuscatedName("pg.L")
 	public static Js5 field3262;
+	@ObfuscatedName("af.S")
+	public static short[] clientpalette = new short[256];
 	@ObfuscatedName("lf.ab")
 	public byte[] field2335;
 
@@ -408,7 +410,7 @@ public final class NpcType extends Linkable2 {
 						if (this.field2335 == null || this.field2335.length <= var10) {
 							var9.method564(this.field2333[var10], this.field2316[var10]);
 						} else {
-							var9.method564(this.field2333[var10], Statics.field108[this.field2335[var10] & 0xFF]);
+							var9.method564(this.field2333[var10], clientpalette[this.field2335[var10] & 0xFF]);
 						}
 					}
 				}
@@ -459,7 +461,7 @@ public final class NpcType extends Linkable2 {
 					if (this.field2335 == null || var12 >= this.field2335.length) {
 						var11.method564(this.field2333[var12], this.field2316[var12]);
 					} else {
-						var11.method564(this.field2333[var12], Statics.field108[this.field2335[var12] & 0xFF]);
+						var11.method564(this.field2333[var12], clientpalette[this.field2335[var12] & 0xFF]);
 					}
 				}
 			}

@@ -1,11 +1,23 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 
 @ObfuscatedName("hh")
 public final class TextureOp32 extends TextureOp {
+
+	@ObfuscatedName("lj.d")
+	public static final byte[] field2431;
+
+	static {
+		int var0 = 0;
+		field2431 = new byte[32896];
+		for (int var1 = 0; var1 < 256; var1++) {
+			for (int var2 = 0; var2 <= var1; var2++) {
+				field2431[var0++] = (byte) (255.0D / Math.sqrt((double) ((float) (var2 * var2 + var1 * var1 + 65535) / 65535.0F)));
+			}
+		}
+	}
 
 	@ObfuscatedName("hh.cb")
 	public final int[] field1542 = new int[3];
@@ -55,7 +67,7 @@ public final class TextureOp32 extends TextureOp {
 				if (var11 > 255) {
 					var11 = 255;
 				}
-				int var12 = Statics.field2431[((var11 + 1) * var11 >> 1) + var10] & 0xFF;
+				int var12 = field2431[((var11 + 1) * var11 >> 1) + var10] & 0xFF;
 				int var13 = var12 * 4096 >> 8;
 				int var14 = this.field1542[2] * var13 >> 12;
 				int var15 = var9 * var12 >> 8;

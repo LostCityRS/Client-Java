@@ -22,9 +22,6 @@ public final class ParamType extends Linkable2 {
 	@ObfuscatedName("ac.K")
 	public int field53;
 
-	@ObfuscatedName("ac.L")
-	public static JagString field54;
-
 	@ObfuscatedName("ac.O")
 	public JagString field57;
 

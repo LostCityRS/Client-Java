@@ -18,9 +18,6 @@ public abstract class TextureOp extends Linkable {
 	@ObfuscatedName("c.x")
 	public int field363;
 
-	@ObfuscatedName("c.C")
-	public static int field368;
-
 	@ObfuscatedName("c.N")
 	public MonochromeImageCache field379;
 

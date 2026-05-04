@@ -6,6 +6,7 @@ import jagex3.callstack.JagException;
 import jagex3.datastruct.IntHashTable;
 import jagex3.io.BZip2;
 import jagex3.io.ByteArrayWrapper;
+import jagex3.io.GZip;
 import jagex3.io.Packet;
 import jagex3.jstring.JagString;
 import jagex3.util.ArrayUtil;
@@ -13,6 +14,10 @@ import jagex3.util.ArrayUtil;
 @ObfuscatedName("nb")
 public abstract class Js5 {
 
+	@ObfuscatedName("oa.A")
+	public static final GZip gzip = new GZip();
+	@ObfuscatedName("da.kb")
+	public static final boolean field615 = false;
 	@ObfuscatedName("nb.ab")
 	public int crc;
 
@@ -86,7 +91,7 @@ public abstract class Js5 {
 			if (var2 == 1) {
 				BZip2.method1458(var6, var5, arg0, var3);
 			} else {
-				Statics.gzip.method424(var1, var6);
+				gzip.method424(var1, var6);
 			}
 			return var6;
 		}
@@ -122,7 +127,7 @@ public abstract class Js5 {
 	public boolean method943(int arg0, int arg1) {
 		if (arg1 >= 0 && arg0 >= 0 && this.field2674.length > arg1 && arg0 < this.field2674[arg1]) {
 			return true;
-		} else if (Statics.field615) {
+		} else if (field615) {
 			throw new IllegalArgumentException(arg1 + "," + arg0);
 		} else {
 			return false;
@@ -555,7 +560,7 @@ public abstract class Js5 {
 	public final boolean method968(int arg0) {
 		if (arg0 >= 0 && arg0 < this.field2674.length && this.field2674[arg0] != 0) {
 			return true;
-		} else if (Statics.field615) {
+		} else if (field615) {
 			throw new IllegalArgumentException(Integer.toString(arg0));
 		} else {
 			return false;

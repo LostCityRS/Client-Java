@@ -22,6 +22,8 @@ public final class LocType extends Linkable2 {
 	public static final ModelSourceCache field879 = new ModelSourceCache(30);
 	@ObfuscatedName("ra.R")
 	public static final ModelCacheLit field3623 = new ModelCacheLit();
+	@ObfuscatedName("fd.W")
+	public static final ModelUnlit[] field1127 = new ModelUnlit[4];
 	@ObfuscatedName("sd.p")
 	public static Js5 field3827;
 	@ObfuscatedName("hc.U")
@@ -32,6 +34,8 @@ public final class LocType extends Linkable2 {
 	public static boolean field317;
 	@ObfuscatedName("qa.f")
 	public static Js5 field3524;
+	@ObfuscatedName("l.Z")
+	public static short[] clientpalette = new short[256];
 	@ObfuscatedName("nf.ab")
 	public short[] field2790;
 
@@ -385,11 +389,11 @@ public final class LocType extends Linkable2 {
 					field1123.put((long) var7, var3);
 				}
 				if (var5 > 1) {
-					Statics.field1127[var6] = var3;
+					field1127[var6] = var3;
 				}
 			}
 			if (var5 > 1) {
-				var3 = new ModelUnlit(Statics.field1127, var5);
+				var3 = new ModelUnlit(field1127, var5);
 			}
 		} else {
 			int var8 = -1;
@@ -448,7 +452,7 @@ public final class LocType extends Linkable2 {
 				if (this.field2824 == null || var15 >= this.field2824.length) {
 					var13.method564(this.field2804[var15], this.field2790[var15]);
 				} else {
-					var13.method564(this.field2804[var15], Statics.field2192[this.field2824[var15] & 0xFF]);
+					var13.method564(this.field2804[var15], clientpalette[this.field2824[var15] & 0xFF]);
 				}
 			}
 		}

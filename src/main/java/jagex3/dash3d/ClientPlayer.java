@@ -93,9 +93,9 @@ public final class ClientPlayer extends ClientEntity {
 			var14.method188(arg4);
 		}
 		SoftwareModelLit var15 = (SoftwareModelLit) var14;
-		if (arg5 != Client.method1584(var10 + arg2, arg1 + var12, Client.field2907) || Client.method1584(var11 + arg2, var13 + arg1, Client.field2907) != arg5) {
+		if (arg5 != Client.getAvH(var10 + arg2, arg1 + var12, Client.field2907) || Client.getAvH(var11 + arg2, var13 + arg1, Client.field2907) != arg5) {
 			for (int var16 = 0; var16 < var15.field2271; var16++) {
-				var15.field2286[var16] += Client.method1584(arg2 + var15.field2264[var16], var15.field2287[var16] - -arg1, Client.field2907) - arg5;
+				var15.field2286[var16] += Client.getAvH(arg2 + var15.field2264[var16], var15.field2287[var16] - -arg1, Client.field2907) - arg5;
 			}
 			var15.field2258 = false;
 		}
@@ -116,8 +116,8 @@ public final class ClientPlayer extends ClientEntity {
 		}
 		super.field4107 = var13.method88();
 		if (Client.localPlayer == this) {
-			for (int var14 = Statics.field1171.length - 1; var14 >= 0; var14--) {
-				HintArrow var15 = Statics.field1171[var14];
+			for (int var14 = Client.field1171.length - 1; var14 >= 0; var14--) {
+				HintArrow var15 = Client.field1171[var14];
 				if (var15 != null && var15.field2136 != -1) {
 					if (var15.field2139 == 1 && var15.field2146 >= 0 && Client.field4223.length > var15.field2146) {
 						ClientNpc var16 = Client.field4223[var15.field2146];
@@ -156,21 +156,21 @@ public final class ClientPlayer extends ClientEntity {
 			int var33 = var28 / 2;
 			int var34 = var27 * var32 + var31 * var29 >> 16;
 			int var35 = var32 * var29 - var27 * var31 >> 16;
-			int var36 = Client.method1584(var34 + super.field4136, super.field4121 + var35, Client.field2907);
+			int var36 = Client.getAvH(var34 + super.field4136, super.field4121 + var35, Client.field2907);
 			int var37 = -var30 / 2;
 			int var38 = var33 * var29 + var27 * var37 >> 16;
 			int var39 = var37 * var29 - var33 * var27 >> 16;
-			int var40 = Client.method1584(super.field4136 + var38, var39 + super.field4121, Client.field2907);
+			int var40 = Client.getAvH(super.field4136 + var38, var39 + super.field4121, Client.field2907);
 			int var41 = var30 / 2;
 			int var42 = -var28 / 2;
 			int var43 = var29 * var41 - var27 * var42 >> 16;
 			int var44 = var29 * var42 + var27 * var41 >> 16;
-			int var45 = Client.method1584(super.field4136 + var44, super.field4121 + var43, Client.field2907);
+			int var45 = Client.getAvH(super.field4136 + var44, super.field4121 + var43, Client.field2907);
 			int var46 = var28 / 2;
 			int var47 = var30 / 2;
 			int var48 = var29 * var47 - var27 * var46 >> 16;
 			int var49 = var29 * var46 + var27 * var47 >> 16;
-			int var50 = Client.method1584(var49 + super.field4136, super.field4121 + var48, Client.field2907);
+			int var50 = Client.getAvH(var49 + super.field4136, super.field4121 + var48, Client.field2907);
 			int var51 = var36 + var50;
 			if (var40 + var45 < var51) {
 				var51 = var45 + var40;

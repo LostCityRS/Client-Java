@@ -51,8 +51,6 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	public static int field2107;
 	@ObfuscatedName("kg.T")
 	public static volatile long field2091 = 0L;
-	@ObfuscatedName("ph.X")
-	public static int field3327;
 
 	@ObfuscatedName("k.a(Ljava/awt/Component;I)V")
 	public static void method748(java.awt.Component arg0) {
@@ -101,6 +99,11 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 				field732 = null;
 			}
 		}
+	}
+
+	@ObfuscatedName("ne.a(I)I")
+	public static int method984() {
+		return field3668;
 	}
 
 	@Override

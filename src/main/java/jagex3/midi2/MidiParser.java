@@ -1,12 +1,13 @@
 package jagex3.midi2;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 
 @ObfuscatedName("df")
 public final class MidiParser {
 
+	@ObfuscatedName("df.a")
+	public static final byte[] field700 = new byte[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	@ObfuscatedName("df.b")
 	public final Packet field701 = new Packet(null);
 
@@ -99,7 +100,7 @@ public final class MidiParser {
 	@ObfuscatedName("df.a(II)I")
 	public int method267(int arg0, int arg1) {
 		if (arg1 != 255) {
-			byte var7 = Statics.field700[arg1 - 128];
+			byte var7 = field700[arg1 - 128];
 			int var8 = arg1;
 			if (var7 >= 1) {
 				var8 = arg1 | this.field701.g1() << 8;

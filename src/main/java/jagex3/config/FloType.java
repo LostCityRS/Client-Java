@@ -17,6 +17,8 @@ public final class FloType extends Linkable2 {
 	public static Js5 field2578;
 	@ObfuscatedName("nj.b")
 	public static int field2923;
+	@ObfuscatedName("mb.Z")
+	public static int field2489 = 0;
 
 	@ObfuscatedName("af.L")
 	public int field103 = 1190717;
@@ -89,7 +91,7 @@ public final class FloType extends Linkable2 {
 		} else if (arg1 == 7) {
 			this.field104 = Statics.method883(arg2.g3());
 		} else if (arg1 == 8) {
-			Statics.field2489 = arg0;
+			field2489 = arg0;
 		} else if (arg1 == 9) {
 			arg2.g2();
 		} else if (arg1 != 10) {

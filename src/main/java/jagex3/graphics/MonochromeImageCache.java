@@ -8,6 +8,7 @@ public final class MonochromeImageCache {
 
 	@ObfuscatedName("hj.o")
 	public static final MonochromeImageCacheEntry field1572 = new MonochromeImageCacheEntry(0, 0);
+
 	@ObfuscatedName("oh.b")
 	public LinkList field3078 = new LinkList();
 

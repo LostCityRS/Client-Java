@@ -8,20 +8,20 @@ import jagex3.datastruct.*;
 import jagex3.graphics.Pix2D;
 import jagex3.graphics.Pix32;
 import jagex3.graphics.SoftwarePix32;
-import jagex3.io.GZip;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
-import jagex3.js5.Js5Net;
 import jagex3.jstring.JagString;
 import jagex3.sound.AudioThread;
 import jagex3.sound.PcmStream;
 import jagex3.util.ArrayUtil;
+import jagex3.util.MonotonicTime;
 import jagex3.wordfilter2.WordPack;
 import jagex3.worldmap.WorldMapFont;
 import jagex3.worldmap.WorldMapLabel;
 
 import java.awt.*;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.TimeZone;
 import java.util.zip.CRC32;
@@ -65,12 +65,6 @@ public class Statics {
 	public static final JagString field731 = JagString.wrap(":trade:");
 	@ObfuscatedName("tj.h")
 	public static final short[][] field4062 = new short[][] { { 6798, 107, 10283, 16, 4797, 7744, 5799, 4634, -31839, 22433, 2983, -11343, 8, 5281, 10438, 3650, -27322, -21845, 200, 571, 908, 21830, 28946, -15701, -14010 }, { 8741, 12, -1506, -22374, 7735, 8404, 1701, -27106, 24094, 10153, -8915, 4783, 1341, 16578, -30533, 25239, 8, 5281, 10438, 3650, -27322, -21845, 200, 571, 908, 21830, 28946, -15701, -14010 }, { 25238, 8742, 12, -1506, -22374, 7735, 8404, 1701, -27106, 24094, 10153, -8915, 4783, 1341, 16578, -30533, 8, 5281, 10438, 3650, -27322, -21845, 200, 571, 908, 21830, 28946, -15701, -14010 }, { 4626, 11146, 6439, 12, 4758, 10270 }, { 4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574 } };
-	@ObfuscatedName("tj.l")
-	public static final int[] field4066 = new int[25];
-	@ObfuscatedName("ij.N")
-	public static final int[] field1789 = new int[] { 160, 192, 80, 96, 0, 144, 80, 48, 160 };
-	@ObfuscatedName("mc.e")
-	public static final JagString field2496 = JagString.wrap("(U0a )2 non)2existant gosub script)2num: ");
 	@ObfuscatedName("bc.l")
 	public static final JagString field233 = JagString.wrap("null");
 	@ObfuscatedName("wa.g")
@@ -83,8 +77,6 @@ public class Statics {
 	public static final JagString field259 = JagString.wrap("<col=00ffff>");
 	@ObfuscatedName("be.k")
 	public static final JagString field260 = JagString.wrap("mapscene");
-	@ObfuscatedName("be.f")
-	public static final boolean[] field255 = new boolean[] { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false };
 	@ObfuscatedName("sj.d")
 	public static final JagString field3921 = JagString.wrap("Mem:");
 	@ObfuscatedName("sj.e")
@@ -107,10 +99,6 @@ public class Statics {
 	public static final JagString field182 = JagString.wrap("<col=00ff00>");
 	@ObfuscatedName("bc.c")
 	public static final int[] field224 = new int[] { 0, 0, 0, 0, 8, 0, -1, 0, 0, 0, 2, 3, -2, 0, 0, 0, -1, -2, 0, -2, 0, -2, 24, 0, 0, 7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5, -2, 2, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 8, -1, 0, 1, 0, 0, 0, 6, 0, -1, 2, 0, 10, 0, -2, 0, 0, 0, 0, 1, 0, 3, 0, 2, 5, 0, 0, 0, 0, 0, 0, 6, 0, 0, 5, 4, -1, 0, 0, 0, 0, 0, 0, 20, 0, -2, 0, 0, 5, 3, 0, -2, -1, 0, 0, 10, 0, 0, 15, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, -2, 7, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 12, 1, 0, 5, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 0, 0, 0, 0, 0, 0, 0, 4, -1, 6, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 2, 0, -2, -1, -2, 4, 0, 5, 6, 0, 0, 0, 0, 4, 3, 0, 4, 0, 0, -1, 6, -1, 0, 0, 0, 0, 0, 0, 0, 9, -2, 0, 0, 0, 0, 0, 6, 6, 6, 6, 0, 0, 0, 0, 0, -2, 7, 0, 7, -1, 0, -1, 0, 3, 0, 8, 0, 2, 4, 4, 8, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0 };
-	@ObfuscatedName("bd.l")
-	public static final int[][] field247 = new int[5][5000];
-	@ObfuscatedName("bd.m")
-	public static final int[][] field248 = new int[][] { { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, { 12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3 }, { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 }, { 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12 } };
 	@ObfuscatedName("n.i")
 	public static final JagString field2621 = JagString.wrap("scrollbar");
 	@ObfuscatedName("n.j")
@@ -125,8 +113,6 @@ public class Statics {
 	public static final JagString field914 = JagString.wrap(" )2> <col=ffffff>");
 	@ObfuscatedName("ei.d")
 	public static final JagString field1005 = JagString.wrap("; version=1; path=)4; domain=");
-	@ObfuscatedName("ei.g")
-	public static final byte[] field1008 = new byte[] { 95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 };
 	@ObfuscatedName("i.M")
 	public static final JagString field1637 = JagString.wrap("<col=ffffff>");
 	@ObfuscatedName("i.c")
@@ -139,34 +125,22 @@ public class Statics {
 	public static final JagString field1214 = JagString.wrap("<)4col>");
 	@ObfuscatedName("cf.l")
 	public static final JagString field488 = Text.field491;
-	@ObfuscatedName("vi.h")
-	public static final int field4432 = 2301979;
 	@ObfuscatedName("fc.h")
 	public static final JagString field1113 = JagString.wrap("");
 	@ObfuscatedName("fc.a")
 	public static final JagString field1106 = JagString.wrap("compass");
-	@ObfuscatedName("fc.o")
-	public static final boolean[] field1120 = new boolean[200];
 	@ObfuscatedName("qf.Q")
 	public static final JagString field3569 = JagString.wrap("Fps:");
 	@ObfuscatedName("qf.T")
 	public static final JagString field3572 = JagString.wrap("null");
-	@ObfuscatedName("qe.i")
-	public static final JagString field3563 = JagString.wrap("Clientscript error )2 check log for details");
-	@ObfuscatedName("qe.h")
-	public static final int[] field3562 = new int[25];
 	@ObfuscatedName("e.Z")
 	public static final LinkList field783 = new LinkList();
 	@ObfuscatedName("ff.X")
 	public static final JagString field1143 = JagString.wrap("logo");
 	@ObfuscatedName("kj.e")
 	public static final JagString field2156 = JagString.wrap("scape main");
-	@ObfuscatedName("kj.t")
-	public static final JagString field2171 = JagString.wrap(")2");
 	@ObfuscatedName("af.K")
 	public static final JagString field102 = JagString.wrap("sl_stars");
-	@ObfuscatedName("af.Y")
-	public static final JagString[] field114 = new JagString[1000];
 	@ObfuscatedName("ja.i")
 	public static final short[][] field1810 = new short[][] { { 18322, 17304, 16289, 15929, 6569, 7613, 7630, 6364, 7054, 7079, 5056, 6988, 8481, 7475, 7364, 8412, -21990, -21969, -21952, -22182, -27211, -27198, -27186, -27302, 542, 555, 941, 951, 8076, 6936, 5675, 5440, 10014, 11179, 11197, 11096, 10258, 10776, 10661, 10419, -10984, -11095, -11072, -6630, -5467, -6473, -6838, -32318, -26069, -25925, -25669, 11202, 22193, 123, 111, 99, 4, 12, 24, 37, 49, 61, 74, 86, 4, 12, 24, 37, 49, 61, 74, 86, -25437, -26445, -27450, 9694, 21824, 123, 111, 99, 17814, 16801, 17837, 16697, 7341, 7496, 5330, 7384, 5268, 3230, 2223, 72, 10277, 8377, 8394, 7384, -22370, -22221, -22196, -22314, -29637, -27434, -29604, -25491, 662, 796, 933, 819, 10258, 6430, 5425, 5314, 10917, 10925, 10935, 10471, 10258, 10524, 10415, 10301, -11108, -11093, -11203, -8034, -5839, -6836, -5934, -32674, -14444, -15455, -15697, -15557, -15424, -11622, -11601, -11450, 7054, 7079, 5056, 6988, 8481, -30054, -30159, -30019, -21734, -21845, -21707, -21690, -21564, -24921, -24775, -24640, 662, 794, 811, 945, 827, 957, 5425, 5314, 11032, 10921, 11183, 11069, 11200, 4775, 3891, 3904, -18792, -19799, -20807, -20677, -20534, 123, 111, 99, 4, 12, 24, 37, 49, 61, 74, 86, 20366, 21274, 21415, 20401, 6569, 7613, 7630, 6364, 119, 92, 66, 39, 20, 4, 955, 1845, 4032, 7101, 10178, 14272, 17341, 21433, 27581, 30651, -31811, -27717, -24640, -21581, -17603, -13383, 794, 5020, 7062, 1160, 15128, 17940, 30614, -30952, -26728, -23662, -18536, -14440, -9324, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 18322, 17304, 16289, 15929, 6569, 7613, 7630, 6364, 7054, 7079, 5056, 6988, 8481, 7475, 7364, 8412, -21990, -21969, -21952, -22182, -27211, -27198, -27186, -27302, 542, 555, 941, 951, 8076, 6936, 5675, 5440, 10014, 11179, 11197, 11096, 10258, 10776, 10661, 10419, -10984, -11095, -11072, -6630, -5467, -6473, -6838, -32318, -26069, -25925, -25669, 11202, 22193, 123, 111, 99, 4, 12, 24, 37, 49, 61, 74, 86, 4, 12, 24, 37, 49, 61, 74, 86, -25437, -26445, -27450, 9694, 21824, 123, 111, 99, 17814, 16801, 17837, 16697, 7341, 7496, 5330, 7384, 5268, 3230, 2223, 72, 10277, 8377, 8394, 7384, -22370, -22221, -22196, -22314, -29637, -27434, -29604, -25491, 662, 796, 933, 819, 10258, 6430, 5425, 5314, 10917, 10925, 10935, 10471, 10258, 10524, 10415, 10301, -11108, -11093, -11203, -8034, -5839, -6836, -5934, -32674, -14444, -15455, -15697, -15557, -15424, -11622, -11601, -11450, 7054, 7079, 5056, 6988, 8481, -30054, -30159, -30019, -21734, -21845, -21707, -21690, -21564, -24921, -24775, -24640, 662, 794, 811, 945, 827, 957, 5425, 5314, 11032, 10921, 11183, 11069, 11200, 4775, 3891, 3904, -18792, -19799, -20807, -20677, -20534, 123, 111, 99, 4, 12, 24, 37, 49, 61, 74, 86, 20366, 21274, 21415, 20401, 6569, 7613, 7630, 6364, 10347, 10582, 10429, 10407, 10359, 8414, 9540, 10456, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 18322, 17304, 16289, 15929, 6569, 7613, 7630, 6364, 7054, 7079, 5056, 6988, 8481, 7475, 7364, 8412, -21990, -21969, -21952, -22182, -27211, -27198, -27186, -27302, 542, 555, 941, 951, 8076, 6936, 5675, 5440, 10014, 11179, 11197, 11096, 10258, 10776, 10661, 10419, -10984, -11095, -11072, -6630, -5467, -6473, -6838, -32318, -26069, -25925, -25669, 11202, 22193, 123, 111, 99, 4, 12, 24, 37, 49, 61, 74, 86, 4, 12, 24, 37, 49, 61, 74, 86, -25437, -26445, -27450, 9694, 21824, 123, 111, 99, 17814, 16801, 17837, 16697, 7341, 7496, 5330, 7384, 5268, 3230, 2223, 72, 10277, 8377, 8394, 7384, -22370, -22221, -22196, -22314, -29637, -27434, -29604, -25491, 662, 796, 933, 819, 10258, 6430, 5425, 5314, 10917, 10925, 10935, 10471, 10258, 10524, 10415, 10301, -11108, -11093, -11203, -8034, -5839, -6836, -5934, -32674, -14444, -15455, -15697, -15557, -15424, -11622, -11601, -11450, 7054, 7079, 5056, 6988, 8481, -30054, -30159, -30019, -21734, -21845, -21707, -21690, -21564, -24921, -24775, -24640, 662, 794, 811, 945, 827, 957, 5425, 5314, 11032, 10921, 11183, 11069, 11200, 4775, 3891, 3904, -18792, -19799, -20807, -20677, -20534, 123, 111, 99, 4, 12, 24, 37, 49, 61, 74, 86, 20366, 21274, 21415, 20401, 6569, 7613, 7630, 6364, 119, 92, 66, 39, 20, 4, 823, 809, 796, 2749, 2733, 2712, 4934, 4911, 4888, 8004, 8099, 11078, 11053, 10008, 18231, 18339, 18196, 30402, 30379, 29458, -31168, -32217, -32238, -25916, -25933, -25956, -21824, -22869, -21864, -17980, -18005, -18026, -11838, -11861, -10858, 23318, 21910, 21776, 1502, 4570, 8670, 13788, 25827, 31969, -28196, -21028, -15908, -7466, 7977, 8732, 8596, 4894, 5908, 794, 1686, -22623, -23014, 14866 }, { 4300, 3294, 3303, 3264, 4506, 4382, 4387, 5293, 7622, 7384, 8412, 7496, 86, 123, 111, 99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 12, 24, 37, 49, 61, 74, 86, -25437, -26445, -27450, 9694, 21824, 123, 111, 99, 17814, 16801, 17837, 16697, 7341, 7496, 5330, 7384, 5268, 3230, 2223, 72, 10277, 8377, 8394, 7384, -22370, -22221, -22196, -22314, -29637, -27434, -29604, -25491, 662, 796, 933, 819, 10258, 6430, 5425, 5314, 10917, 10925, 10935, 10471, 10258, 10524, 10415, 10301, -11108, -11093, -11203, -8034, -5839, -6836, -5934, -32674, -14444, -15455, -15697, -15557, -15424, -11622, -11601, -11450, 7054, 7079, 5056, 6988, 8481, -30054, -30159, -30019, -21734, -21845, -21707, -21690, -21564, -24921, -24775, -24640, 662, 794, 811, 945, 827, 957, 5425, 5314, 11032, 10921, 11183, 11069, 11200, 4775, 3891, 3904, -18792, -19799, -20807, -20677, -20534, 123, 111, 99, 4, 12, 24, 37, 49, 61, 74, 86, 20366, 21274, 21415, 20401, 6569, 7613, 7630, 6364, 13766, 13745, 13726, 13890, 13743, 13852, 17602, 18605, 21660, 24000, 24997, 24088, 27972, 25903, 26904, 27193, 27175, 27156, 30020, 28975, 29976, 12482, 13485, 10392, 10692, 10669, 10776, 6717, 6695, 7830, 6971, 6951, 5910, 3389, 3369, 3356, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 18322, 17304, 16289, 15929, 6569, 7613, 7630, 6364, 7054, 7079, 5056, 6988, 8481, 7475, 7364, 8412, -21990, -21969, -21952, -22182, -27211, -27198, -27186, -27302, 542, 555, 941, 951, 8076, 6936, 5675, 5440, 10014, 11179, 11197, 11096, 10258, 10776, 10661, 10419, -10984, -11095, -11072, -6630, -5467, -6473, -6838, -32318, -26069, -25925, -25669, 11202, 22193, 123, 111, 99, 4, 12, 24, 37, 49, 61, 74, 86, 22461, -21571, 11200, 957, -10317, 5056, -31808, 123, 22453, -21579, 11191, 949, -10325, 4023, -31817, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20366, 20401, 662, 827, 7054, 5056, -21734, -21564, -14444, -15424, 11032, 11200, 4, 123, 61, -18792, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 119, 92, 66, 39, 20, 4, 823, 809, 796, 2749, 2733, 2712, 4934, 4911, 4888, 8004, 8099, 11078, 11053, 10008, 18231, 18339, 18196, 30402, 30379, 29458, -31168, -32217, -32238, -25916, -25933, -25956, -21824, -22869, -21864, -17980, -18005, -18026, -11838, -11861, -10858, 23318, 21910, 21776, 1502, 4570, 8670, 13788, 25827, 31969, -28196, -21028, -15908, -7466, 7977, 8732, 8596, 4894, 5908, 794, 1686, -22623, -23014, 14866 } };
 	@ObfuscatedName("ja.a")
@@ -217,28 +191,16 @@ public class Statics {
 	public static final JagString[] field658 = new JagString[] {field645, field642, field643, field652, field656, field661, field624, field632, field653, field640, field659, field628};
 	@ObfuscatedName("uh.M")
 	public static final CRC32 field4241 = new CRC32();
-	@ObfuscatedName("bj.Cb")
-	public static final JagString field356 = JagString.wrap("(U0a )2 via: ");
 	@ObfuscatedName("bj.zb")
 	public static final Calendar field353 = Calendar.getInstance();
-	@ObfuscatedName("c.E")
-	public static final JagString[] field370 = new JagString[200];
 	@ObfuscatedName("pi.S")
 	public static final JagString field3334 = JagString.wrap(":clan:");
-	@ObfuscatedName("md.U")
-	public static final int[] field2508 = new int[] { 2, 2, 4, 0, 1, 8, 0, 0, 0, 0, 2 };
 	@ObfuscatedName("hc.W")
 	public static final JagString field1444 = JagString.wrap("details)3dat");
-	@ObfuscatedName("ub.S")
-	public static final int[] field4150 = new int[] { 2, 0, 0, 2, 0, 0, 0, 4, 4 };
-	@ObfuscatedName("hc.Y")
-	public static final ClientGosubFrame[] field1446 = new ClientGosubFrame[50];
 	@ObfuscatedName("hb.S")
 	public static final JagString field1426 = JagString.wrap("null");
 	@ObfuscatedName("jf.U")
 	public static final JagString field1879 = JagString.wrap("(Y");
-	@ObfuscatedName("da.ob")
-	public static final LinkList field619 = new LinkList();
 	@ObfuscatedName("aa.W")
 	public static final JagString field18 = JagString.wrap("<col=ff7000>");
 	@ObfuscatedName("aa.Z")
@@ -257,62 +219,38 @@ public class Statics {
 	public static final JagString field591 = JagString.wrap("(R");
 	@ObfuscatedName("d.U")
 	public static final JagString field581 = JagString.wrap(" )2> <col=ff9040>");
-	@ObfuscatedName("fd.W")
-	public static final ModelUnlit[] field1127 = new ModelUnlit[4];
-	@ObfuscatedName("pd.Q")
-	public static final long[] field3203 = new long[100];
-	@ObfuscatedName("mh.V")
-	public static final int[] field2577 = new int[1000];
 	@ObfuscatedName("a.g")
 	public static final JagString field7 = JagString.wrap("mapfunction");
-	@ObfuscatedName("ab.a")
-	public static final int field26 = 5063219;
 	@ObfuscatedName("ab.i")
 	public static final JagString field34 = JagString.wrap("null");
 	@ObfuscatedName("ab.o")
 	public static final JagString field40 = JagString.wrap("(Z");
-	@ObfuscatedName("bf.x")
-	public static final JagString field288 = JagString.wrap("Clientscript error in: ");
 	@ObfuscatedName("bh.J")
 	public static final JagString field316 = JagString.wrap("runes");
 	@ObfuscatedName("bi.d")
 	public static final JagString field325 = JagString.wrap("overlay)3dat");
 	@ObfuscatedName("ca.g")
 	public static final LruCache field388 = new LruCache(16);
-	@ObfuscatedName("ca.i")
-	public static final short[] field390 = new short[] { 30, 58, 29, 45, 37, 16, 1, 50 };
 	@ObfuscatedName("cb.d")
 	public static final JagString field399 = JagString.wrap("<col=ffff00>");
 	@ObfuscatedName("cb.g")
 	public static final int[] field402 = new int[32768];
 	@ObfuscatedName("cb.i")
 	public static final JagString field404 = JagString.wrap("labels)3dat");
-	@ObfuscatedName("od.z")
-	public static final JagString field3010 = JagString.wrap("(U0a )2 in: ");
 	@ObfuscatedName("od.y")
 	public static final JagString field3009 = JagString.wrap(":tradereq:");
 	@ObfuscatedName("dc.d")
 	public static final JagString field665 = JagString.wrap(":clanreq:");
 	@ObfuscatedName("dc.h")
 	public static final JagString field669 = Text.field668;
-	@ObfuscatedName("df.a")
-	public static final byte[] field700 = new byte[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	@ObfuscatedName("ee.i")
 	public static final JagString field933 = JagString.wrap("_");
-	@ObfuscatedName("eg.u")
-	public static final int field939 = 3353893;
-	@ObfuscatedName("fh.o")
-	public static final HintArrow[] field1171 = new HintArrow[4];
-	@ObfuscatedName("gd.e")
-	public static final Random field1259 = new Random();
 	@ObfuscatedName("ge.L")
 	public static final JagString field1325 = JagString.wrap("Mem:");
 	@ObfuscatedName("gh.o")
 	public static final JagString field1344 = JagString.wrap("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(Q(R+R(T(U^(V(Z(X(Y)2_=)0[*U]*W;:(W@(S*X)1<)3>)4?*6*V ");
 	@ObfuscatedName("gh.j")
 	public static final JagString field1339 = field1344;
-	@ObfuscatedName("gh.t")
-	public static final LinkList field1349 = new LinkList();
 	@ObfuscatedName("gh.v")
 	public static final JagString field1351 = JagString.wrap(")1j");
 	@ObfuscatedName("gh.z")
@@ -331,32 +269,18 @@ public class Statics {
 	public static final JagString field3526 = JagString.wrap(" )2> <col=00ffff>");
 	@ObfuscatedName("ue.p")
 	public static final JagString field4208 = JagString.wrap("overlay2)3dat");
-	@ObfuscatedName("je.y")
-	public static final int[] field1869 = new int[] { 0, 4, 4, 8, 0, 0, 8, 0, 0 };
 	@ObfuscatedName("og.t")
 	public static final LinkList field3049 = new LinkList();
-	@ObfuscatedName("og.T")
-	public static final Occlude[] field3075 = new Occlude[500];
 	@ObfuscatedName("og.U")
 	public static final JagString field3076 = JagString.wrap(")3runescape)3com)4l=");
 	@ObfuscatedName("og.R")
 	public static final int field3073 = 0;
-	@ObfuscatedName("wc.L")
-	public static final int[] field4479 = new int[128];
 	@ObfuscatedName("ie.p")
 	public static final JagString field1750 = JagString.wrap("rect_debug=");
 	@ObfuscatedName("ge.u")
 	public static final JagString field1308 = Text.field1320;
 	@ObfuscatedName("ga.q")
 	public static final JagString field1238 = JagString.wrap(" (X");
-	@ObfuscatedName("ec.P")
-	public static final int[] field904 = new int[] { 1, 1, 0, 0, 0, 8, 0, 0, 8 };
-	@ObfuscatedName("fj.j")
-	public static final LinkList field1196 = new LinkList();
-	@ObfuscatedName("na.K")
-	public static final int[] field2642 = new int[32];
-	@ObfuscatedName("oa.A")
-	public static final GZip gzip = new GZip();
 	@ObfuscatedName("ma.R")
 	public static final JagString field2462 = JagString.wrap("<col=00ff80>");
 	@ObfuscatedName("lh.V")
@@ -367,12 +291,8 @@ public class Statics {
 	public static final JagString field4363 = Text.field4361;
 	@ObfuscatedName("da.hb")
 	public static final JagString field612 = Text.field611;
-	@ObfuscatedName("da.kb")
-	public static final boolean field615 = false;
 	@ObfuscatedName("kg.R")
 	public static final JagString field2089 = JagString.wrap("titlebutton");
-	@ObfuscatedName("ph.ab")
-	public static final JagString[] field3330 = new JagString[1000];
 	@ObfuscatedName("te.S")
 	public static final JagString field4011 = JagString.wrap("sl_flags");
 	@ObfuscatedName("te.Q")
@@ -385,38 +305,6 @@ public class Statics {
 	public static final JagString field2973 = JagString.wrap("huffman");
 	@ObfuscatedName("jc.M")
 	public static final JagString field1837 = Text.field1839;
-	@ObfuscatedName("eh.d")
-	public static final JagString field970 = JagString.wrap("Apr");
-	@ObfuscatedName("eh.k")
-	public static final JagString field977 = JagString.wrap("Jun");
-	@ObfuscatedName("eh.l")
-	public static final JagString field978 = JagString.wrap("Aug");
-	@ObfuscatedName("eh.m")
-	public static final JagString field979 = JagString.wrap(")1");
-	@ObfuscatedName("eh.n")
-	public static final JagString field980 = JagString.wrap("Sep");
-	@ObfuscatedName("eh.o")
-	public static final JagString field981 = JagString.wrap("Mar");
-	@ObfuscatedName("eh.s")
-	public static final JagString field985 = JagString.wrap("Dec");
-	@ObfuscatedName("eh.u")
-	public static final JagString field987 = JagString.wrap("May");
-	@ObfuscatedName("eh.v")
-	public static final JagString field988 = JagString.wrap("Jan");
-	@ObfuscatedName("eh.w")
-	public static final JagString field989 = JagString.wrap("Oct");
-	@ObfuscatedName("eh.A")
-	public static final JagString field993 = JagString.wrap("Fps:");
-	@ObfuscatedName("eh.y")
-	public static final JagString field991 = JagString.wrap("Nov");
-	@ObfuscatedName("eh.C")
-	public static final JagString field995 = JagString.wrap("Feb");
-	@ObfuscatedName("eh.D")
-	public static final JagString field996 = JagString.wrap("Jul");
-	@ObfuscatedName("eh.z")
-	public static final JagString[] field992 = new JagString[] { field988, field995, field981, field970, field987, field977, field996, field978, field980, field989, field991, field985 };
-	@ObfuscatedName("eh.I")
-	public static final int[] field1001 = new int[] { 0, 0, 2, 0, 0, 2, 1, 1, 0 };
 	@ObfuscatedName("of.j")
 	public static final JagString field3045 = JagString.wrap("p12_full");
 	@ObfuscatedName("bd.f")
@@ -439,14 +327,8 @@ public class Statics {
 	public static final JagString field4411 = JagString.wrap("mapflag");
 	@ObfuscatedName("pe.C")
 	public static final JagString field3237 = JagString.wrap("document)3cookie=(R");
-	@ObfuscatedName("pe.D")
-	public static final JagString[] field3238 = new JagString[200];
 	@ObfuscatedName("pe.J")
 	public static final JagString field3244 = JagString.wrap("<col=ff0000>");
-	@ObfuscatedName("pe.K")
-	public static final int[] field3245 = new int[2000];
-	@ObfuscatedName("ih.d")
-	public static final int[] field1762 = new int[5];
 	@ObfuscatedName("ih.i")
 	public static final JagString field1767 = JagString.wrap("; Max)2Age=");
 	@ObfuscatedName("ih.m")
@@ -457,16 +339,12 @@ public class Statics {
 	public static final JagString field1385 = JagString.wrap("k");
 	@ObfuscatedName("nb.e")
 	public static final JagString field2664 = JagString.wrap("hitmarks");
-	@ObfuscatedName("jj.l")
-	public static final int[] field1944 = new int[1000];
 	@ObfuscatedName("jj.x")
 	public static final ModelSourceCache field1956 = new ModelSourceCache(4);
 	@ObfuscatedName("jj.y")
 	public static final JagString field1957 = JagString.wrap("b12_full");
 	@ObfuscatedName("ud.l")
 	public static final JagString field4190 = JagString.wrap("<br>(X100(U(Y");
-	@ObfuscatedName("v.F")
-	public static final int[] field4285 = new int[] { 76, 8, 137, 4, 0, 1, 38, 2, 19 };
 	@ObfuscatedName("pg.Db")
 	public static final JagString field3306 = JagString.wrap(": ");
 	@ObfuscatedName("pg.D")
@@ -475,36 +353,24 @@ public class Statics {
 	public static final JagString field3110 = JagString.wrap("Service unavailable)3");
 	@ObfuscatedName("oi.n")
 	public static final JagString field3112 = field3110;
-	@ObfuscatedName("sd.a")
-	public static final int[] field3812 = new int[] { 16776960, 16711680, 65280, 65535, 16711935, 16777215 };
 	@ObfuscatedName("sd.c")
 	public static final JagString field3814 = JagString.wrap("0(U");
 	@ObfuscatedName("sd.f")
 	public static final JagString field3817 = Text.field3828;
-	@ObfuscatedName("rf.Kb")
-	public static final int[] field3685 = new int[128];
 	@ObfuscatedName("wi.o")
 	public static final Calendar field4545 = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
 	@ObfuscatedName("wi.r")
 	public static final JagString field4548 = JagString.wrap(" )2> ");
 	@ObfuscatedName("oe.i")
 	public static final JagString field3025 = JagString.wrap(":duelstake:");
-	@ObfuscatedName("sc.bb")
-	public static final LinkList field3810 = new LinkList();
 	@ObfuscatedName("sc.D")
 	public static final JagString field3787 = JagString.wrap(" ");
 	@ObfuscatedName("sc.M")
 	public static final JagString field3795 = JagString.wrap("p11_full");
-	@ObfuscatedName("ib.E")
-	public static final int[] field1710 = new int[99];
 	@ObfuscatedName("wh.J")
 	public static final JagString field4516 = JagString.wrap("cookiehost");
 	@ObfuscatedName("tc.D")
 	public static final JagString field3983 = JagString.wrap("http:)4)4www)3runescape)3com)4l=");
-	@ObfuscatedName("va.z")
-	public static final int field4316 = 7759444;
-	@ObfuscatedName("mg.Cb")
-	public static final int field2563 = 50;
 	@ObfuscatedName("mg.Db")
 	public static final JagString field2564 = Text.field2562;
 	@ObfuscatedName("rg.v")
@@ -521,8 +387,6 @@ public class Statics {
 	public static final int[] field2745 = new int[1000];
 	@ObfuscatedName("oh.m")
 	public static final JagString field3089 = JagString.wrap(" )2>");
-	@ObfuscatedName("oh.p")
-	public static final int[] field3092 = new int[200];
 	@ObfuscatedName("oh.h")
 	public static final JagString field3084 = Text.field3094;
 	@ObfuscatedName("ia.l")
@@ -551,52 +415,22 @@ public class Statics {
 	public static final JagString field4050 = Text.field4053;
 	@ObfuscatedName("re.h")
 	public static final int[] field3674 = new int[5];
-	@ObfuscatedName("sg.B")
-	public static final boolean[] field3875 = new boolean[8];
 	@ObfuscatedName("se.c")
 	public static final int[] field3834 = new int[5];
 	@ObfuscatedName("jh.a")
 	public static final JagString field1921 = JagString.wrap("headicons_prayer");
 	@ObfuscatedName("jh.h")
 	public static final JagString field1928 = JagString.wrap("l");
-	@ObfuscatedName("lj.d")
-	public static final byte[] field2431;
-	@ObfuscatedName("lj.i")
-	public static final JagString[] field2436 = new JagString[8];
 	@ObfuscatedName("lj.n")
 	public static final PlayerModel field2441 = new PlayerModel();
-	@ObfuscatedName("kj.p")
-	public static final int[] field2167 = new int[2000];
 	@ObfuscatedName("nf.Mb")
 	public static final JagString field2828 = JagString.wrap(" <col=00ff80>");
-	@ObfuscatedName("t.m")
-	public static final int field3925 = 50;
-	@ObfuscatedName("t.y")
-	public static final int[] field3937 = new int[field3925];
-	@ObfuscatedName("t.B")
-	public static final int[] field3940 = new int[field3925];
-	@ObfuscatedName("t.z")
-	public static final int[] field3938 = new int[field3925];
-	@ObfuscatedName("t.u")
-	public static final JagString[] field3933 = new JagString[field3925];
-	@ObfuscatedName("t.t")
-	public static final int[] field3932 = new int[field3925];
-	@ObfuscatedName("t.s")
-	public static final int[] field3931 = new int[field3925];
-	@ObfuscatedName("t.q")
-	public static final int[] field3929 = new int[field3925];
-	@ObfuscatedName("t.n")
-	public static final int[] field3926 = new int[field3925];
 	@ObfuscatedName("t.o")
 	public static final JagString field3927 = JagString.wrap(":chalreq:");
 	@ObfuscatedName("sf.c")
 	public static final JagString field3843 = JagString.wrap("<col=ffff00>*V");
-	@ObfuscatedName("ea.lb")
-	public static final int[] field845 = new int[200];
 	@ObfuscatedName("hi.h")
 	public static final JagString field1556 = JagString.wrap(":assistreq:");
-	@ObfuscatedName("ka.a")
-	public static final int[] field2005 = new int[] { 19, 55, 38, 155, 255, 110, 137, 205, 76 };
 	@ObfuscatedName("ka.c")
 	public static final JagString field2007 = JagString.wrap("k");
 	@ObfuscatedName("ha.w")
@@ -605,44 +439,32 @@ public class Statics {
 	public static final int[] field1420 = new int[] { 2, 2, 4, 2, 1, 8, 4, 1, 4, 4, 2 };
 	@ObfuscatedName("nh.j")
 	public static final JagString field2918 = JagString.wrap("Cabbage");
-	@ObfuscatedName("hd.B")
-	public static final JagString field1468 = JagString.wrap("");
 	@ObfuscatedName("id.d")
 	public static final int[] field1720 = new int[4096];
 	@ObfuscatedName("id.o")
 	public static final int[] field1731 = new int[] { 1, 0, 0, 0, 1, 0, 2, 1, 1, 1, 0 };
 	@ObfuscatedName("id.q")
 	public static final JagString field1733 = JagString.wrap("title_mute");
-	@ObfuscatedName("ug.o")
-	public static final int[][] field4232 = new int[][] { new int[16], { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 }, { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1 }, { 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1 } };
 	@ObfuscatedName("me.w")
 	public static final JagString field2526 = JagString.wrap("<col=c0ff00>");
 	@ObfuscatedName("me.z")
 	public static final JagString field2529 = JagString.wrap("<col=ff9040>");
 	@ObfuscatedName("mc.b")
 	public static final JagString field2493 = JagString.wrap(" )2> <col=ffff00>");
-	@ObfuscatedName("mc.j")
-	public static final int[] field2501 = new int[1000];
 	@ObfuscatedName("mj.n")
 	public static final JagString field2612 = JagString.wrap(")3");
-	@ObfuscatedName("j.a")
-	public static final int[] field1792 = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 };
 	@ObfuscatedName("j.e")
 	public static final JagString field1796 = JagString.wrap("headicons_pk");
 	@ObfuscatedName("jg.z")
 	public static final LinkList field1900 = new LinkList();
-	@ObfuscatedName("jg.G")
-	public static final int[] field1907 = new int[25];
 	@ObfuscatedName("eb.O")
 	public static final JagString field881 = JagString.wrap("sl_arrows");
 	@ObfuscatedName("eb.Y")
 	public static final JagString field891 = JagString.wrap("<col=ffffff> )4 ");
 	@ObfuscatedName("vd.d")
 	public static final boolean[] field4368 = new boolean[5];
-	@ObfuscatedName("vd.i")
-	public static final int[] field4373 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 73, 74, 76, 78, 83, 84, 85, 86, 91, 92, 93, 94, 95, 97, 103, 104, 105, 106, 107, 108, 113, 114, 115, 116, 118, 119, 120, 121, 122, 123, 124, 125, 133, 134, 136, 138, 143, 144, 145, 146, 151, 152, 153, 154, 155, 157, 163, 164, 165, 166, 168, 169, 174, 175, 176, 177, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 66, 67, 68, 69, 70, 71, 72, 75, 79, 80, 81, 82, 87, 88, 89, 90, 77, 96, 98, 99, 100, 101, 102, 250, 251, 109, 110, 111, 112, 117, 252, 167, 126, 127, 128, 129, 130, 131, 132, 135, 139, 140, 141, 142, 147, 148, 149, 150, 137, 156, 158, 159, 160, 161, 162, 253, 254, 170, 171, 172, 173, 178, 255, 179 };
-	@ObfuscatedName("bb.c")
-	public static int field209 = -1;
+	@ObfuscatedName("eh.m")
+	public static final JagString field979 = JagString.wrap(")1");
 	@ObfuscatedName("ej.t")
 	public static int field1033 = -1;
 	@ObfuscatedName("ej.B")
@@ -653,8 +475,6 @@ public class Statics {
 	public static int field3136;
 	@ObfuscatedName("ce.S")
 	public static JagString field464 = null;
-	@ObfuscatedName("ag.e")
-	public static int field119 = -1;
 	@ObfuscatedName("ag.g")
 	public static int field121 = 0;
 	@ObfuscatedName("s.cb")
@@ -671,20 +491,12 @@ public class Statics {
 	public static int field3192 = -1;
 	@ObfuscatedName("pc.m")
 	public static WorldMapFont field3199;
-	@ObfuscatedName("di.hb")
-	public static boolean field739 = false;
 	@ObfuscatedName("di.V")
 	public static int field727;
 	@ObfuscatedName("tj.a")
 	public static int field4055;
 	@ObfuscatedName("fb.lb")
 	public static int field1102;
-	@ObfuscatedName("mb.U")
-	public static int field2484 = 0;
-	@ObfuscatedName("mb.Z")
-	public static int field2489 = 0;
-	@ObfuscatedName("ij.H")
-	public static int field1783 = -1;
 	@ObfuscatedName("ij.K")
 	public static byte[][][] field1786;
 	@ObfuscatedName("fj.f")
@@ -693,12 +505,8 @@ public class Statics {
 	public static int field1200;
 	@ObfuscatedName("be.s")
 	public static int[][] field268;
-	@ObfuscatedName("wg.u")
-	public static int field4506;
 	@ObfuscatedName("wg.y")
 	public static int[] field4510;
-	@ObfuscatedName("ua.p")
-	public static int field4146 = 0;
 	@ObfuscatedName("de.K")
 	public static int field693;
 	@ObfuscatedName("b.h")
@@ -721,20 +529,12 @@ public class Statics {
 	public static int[] field1009;
 	@ObfuscatedName("ei.k")
 	public static int field1012 = 0;
-	@ObfuscatedName("i.N")
-	public static int field1638 = 0;
-	@ObfuscatedName("i.U")
-	public static int field1644 = 2;
-	@ObfuscatedName("i.L")
-	public static int field1636;
 	@ObfuscatedName("g.d")
 	public static int field1206 = 0;
 	@ObfuscatedName("g.e")
 	public static int field1207 = 0;
 	@ObfuscatedName("g.h")
 	public static short[] field1210;
-	@ObfuscatedName("cf.e")
-	public static int field481 = 1;
 	@ObfuscatedName("cf.f")
 	public static int[] field482;
 	@ObfuscatedName("fc.e")
@@ -745,42 +545,16 @@ public class Statics {
 	public static byte[][] field774;
 	@ObfuscatedName("ff.eb")
 	public static int field1150 = 0;
-	@ObfuscatedName("af.S")
-	public static short[] field108 = new short[256];
-	@ObfuscatedName("af.U")
-	public static int field110 = 0;
 	@ObfuscatedName("af.N")
 	public static byte[][][] field105;
-	@ObfuscatedName("ja.b")
-	public static int field1803;
-	@ObfuscatedName("ja.c")
-	public static long field1804 = 0L;
-	@ObfuscatedName("kh.D")
-	public static short[] field2108;
-	@ObfuscatedName("l.Z")
-	public static short[] field2192 = new short[256];
-	@ObfuscatedName("l.cb")
-	public static int field2195 = -1;
-	@ObfuscatedName("db.D")
-	public static IfType field635;
 	@ObfuscatedName("uh.S")
 	public static int field4247 = -1;
 	@ObfuscatedName("uh.P")
 	public static int field4244 = 0;
-	@ObfuscatedName("bj.Bb")
-	public static boolean field355 = true;
-	@ObfuscatedName("pi.R")
-	public static int field3333 = 0;
-	@ObfuscatedName("md.ab")
-	public static IfType field2514;
-	@ObfuscatedName("md.Y")
-	public static int field2512;
 	@ObfuscatedName("dj.mc")
 	public static int field772;
 	@ObfuscatedName("dj.Gb")
 	public static int[] field740;
-	@ObfuscatedName("hb.bb")
-	public static int field1435;
 	@ObfuscatedName("jf.lb")
 	public static int field1896 = -1;
 	@ObfuscatedName("da.X")
@@ -793,8 +567,6 @@ public class Statics {
 	public static int[] field3605;
 	@ObfuscatedName("ra.gb")
 	public static int field3638 = 0;
-	@ObfuscatedName("vc.cb")
-	public static int field4357 = 2;
 	@ObfuscatedName("lh.db")
 	public static int field2408 = 0;
 	@ObfuscatedName("lh.X")
@@ -805,10 +577,6 @@ public class Statics {
 	public static short field580 = 256;
 	@ObfuscatedName("pd.S")
 	public static WorldMapFont field3205;
-	@ObfuscatedName("td.bb")
-	public static int field4004 = 0;
-	@ObfuscatedName("ta.ab")
-	public static int field3952 = 0;
 	@ObfuscatedName("ta.Z")
 	public static byte[][][] field3951;
 	@ObfuscatedName("ma.bb")
@@ -825,16 +593,12 @@ public class Statics {
 	public static boolean field145 = false;
 	@ObfuscatedName("bf.o")
 	public static int field279 = 100;
-	@ObfuscatedName("bf.P")
-	public static int field305 = 0;
 	@ObfuscatedName("bh.M")
 	public static JagString field319 = null;
 	@ObfuscatedName("od.w")
 	public static int field3007;
 	@ObfuscatedName("ec.J")
 	public static int field898 = 0;
-	@ObfuscatedName("ec.F")
-	public static int field894 = 0;
 	@ObfuscatedName("ec.U")
 	public static boolean field909 = false;
 	@ObfuscatedName("ec.G")
@@ -853,12 +617,6 @@ public class Statics {
 	public static int field941;
 	@ObfuscatedName("fi.v")
 	public static Js5 field1176;
-	@ObfuscatedName("fi.w")
-	public static IfType field1177;
-	@ObfuscatedName("fi.F")
-	public static int field1185 = 0;
-	@ObfuscatedName("gd.j")
-	public static int field1264;
 	@ObfuscatedName("ge.v")
 	public static int field1309;
 	@ObfuscatedName("ge.C")
@@ -871,26 +629,14 @@ public class Statics {
 	public static WorldMapFont field4250;
 	@ObfuscatedName("kf.h")
 	public static int field2078 = 0;
-	@ObfuscatedName("kf.n")
-	public static int field2084;
 	@ObfuscatedName("li.R")
 	public static IfType field2426;
 	@ObfuscatedName("qa.a")
 	public static long field3519 = 0L;
-	@ObfuscatedName("qa.n")
-	public static boolean field3532 = false;
 	@ObfuscatedName("uc.i")
 	public static short field4175 = 256;
-	@ObfuscatedName("og.K")
-	public static int field3066;
-	@ObfuscatedName("ke.K")
-	public static int field2061 = 0;
-	@ObfuscatedName("wc.J")
-	public static int[] field4477;
 	@ObfuscatedName("na.L")
 	public static Image field2643;
-	@ObfuscatedName("oa.F")
-	public static JagString[] field2963;
 	@ObfuscatedName("ob.p")
 	public static int[][][] field2979;
 	@ObfuscatedName("ob.q")
@@ -903,10 +649,6 @@ public class Statics {
 	public static boolean field997 = false;
 	@ObfuscatedName("oc.v")
 	public static int field2993 = 0;
-	@ObfuscatedName("pe.H")
-	public static int field3242;
-	@ObfuscatedName("h.F")
-	public static int field1384 = 0;
 	@ObfuscatedName("h.P")
 	public static int field1394 = 0;
 	@ObfuscatedName("nb.bb")
@@ -925,16 +667,10 @@ public class Statics {
 	public static byte field3301;
 	@ObfuscatedName("oi.g")
 	public static int field3105 = 0;
-	@ObfuscatedName("oi.m")
-	public static int field3111 = 1;
 	@ObfuscatedName("ne.a")
 	public static JagString field2752 = null;
-	@ObfuscatedName("ne.n")
-	public static int field2765 = 0;
 	@ObfuscatedName("ne.o")
 	public static int field2766;
-	@ObfuscatedName("wi.e")
-	public static int field4535 = 0;
 	@ObfuscatedName("oe.c")
 	public static int field3019;
 	@ObfuscatedName("oe.q")
@@ -943,22 +679,14 @@ public class Statics {
 	public static int field3809;
 	@ObfuscatedName("sc.F")
 	public static int field3788 = 0;
-	@ObfuscatedName("ib.A")
-	public static IfType field1706;
 	@ObfuscatedName("nj.j")
 	public static int field2931;
 	@ObfuscatedName("nj.k")
 	public static int field2932 = -1;
-	@ObfuscatedName("tc.K")
-	public static int field3990 = 0;
 	@ObfuscatedName("va.w")
 	public static HashTable field4313;
-	@ObfuscatedName("va.C")
-	public static int field4318 = 0;
 	@ObfuscatedName("va.x")
 	public static int field4314;
-	@ObfuscatedName("rg.F")
-	public static int field3700 = 0;
 	@ObfuscatedName("vb.H")
 	public static WorldMapFont field4325;
 	@ObfuscatedName("nd.l")
@@ -967,8 +695,6 @@ public class Statics {
 	public static int field2742;
 	@ObfuscatedName("oh.g")
 	public static short field3083 = 320;
-	@ObfuscatedName("oh.q")
-	public static int field3093;
 	@ObfuscatedName("ia.H")
 	public static LinkList field1694 = new LinkList();
 	@ObfuscatedName("ia.L")
@@ -983,22 +709,14 @@ public class Statics {
 	public static IfType field3871;
 	@ObfuscatedName("se.d")
 	public static JagString field3835 = null;
-	@ObfuscatedName("se.g")
-	public static int field3838;
 	@ObfuscatedName("se.i")
 	public static FontMetrics field3840;
 	@ObfuscatedName("jh.f")
 	public static Js5 field1926;
 	@ObfuscatedName("lj.o")
 	public static int field2442 = 1;
-	@ObfuscatedName("ki.a")
-	public static int field2131 = 0;
 	@ObfuscatedName("ki.q")
 	public static WorldMapFont field2147;
-	@ObfuscatedName("ea.ob")
-	public static int field848;
-	@ObfuscatedName("ea.zb")
-	public static int field859 = 0;
 	@ObfuscatedName("ue.f")
 	public static int field4198 = 0;
 	@ObfuscatedName("ka.e")
@@ -1015,28 +733,18 @@ public class Statics {
 	public static double field2915;
 	@ObfuscatedName("nh.l")
 	public static int[] field2920;
-	@ObfuscatedName("hd.A")
-	public static int field1467 = 0;
 	@ObfuscatedName("id.r")
 	public static int[] field1734;
 	@ObfuscatedName("ug.b")
 	public static JagString field4219 = null;
-	@ObfuscatedName("me.B")
-	public static int field2531 = 2;
 	@ObfuscatedName("me.x")
 	public static short field2527 = 1;
 	@ObfuscatedName("kh.W")
 	public static byte[][][] field2126;
 	@ObfuscatedName("mj.l")
 	public static int field2610 = 0;
-	@ObfuscatedName("j.d")
-	public static int field1795 = 0;
 	@ObfuscatedName("j.j")
 	public static int field1801;
-	@ObfuscatedName("kb.u")
-	public static int field2027 = 0;
-	@ObfuscatedName("jg.R")
-	public static int field1918 = 0;
 	@ObfuscatedName("hi.b")
 	public static int field1550 = 0;
 	@ObfuscatedName("hi.d")
@@ -1051,8 +759,6 @@ public class Statics {
 	public static int field2213;
 	@ObfuscatedName("wa.f")
 	public static int field4458 = 0;
-	@ObfuscatedName("qb.S")
-	public static boolean field3546 = true;
 	@ObfuscatedName("qb.R")
 	public static int field3545 = 0;
 	@ObfuscatedName("lf.V")
@@ -1061,26 +767,8 @@ public class Statics {
 	public static byte[][][] field4166;
 	@ObfuscatedName("jg.L")
 	public static int[][][] field1912;
-
-	static {
-		int var0 = 0;
-		for (int var1 = 0; var1 < 99; var1++) {
-			int var2 = var1 + 1;
-			int var3 = (int) ((double) var2 + Math.pow(2.0D, (double) var2 / 7.0D) * 300.0D);
-			var0 += var3;
-			field1710[var1] = var0 / 4;
-		}
-	}
-
-	static {
-		int var0 = 0;
-		field2431 = new byte[32896];
-		for (int var1 = 0; var1 < 256; var1++) {
-			for (int var2 = 0; var2 <= var1; var2++) {
-				field2431[var0++] = (byte) (255.0D / Math.sqrt((double) ((float) (var2 * var2 + var1 * var1 + 65535) / 65535.0F)));
-			}
-		}
-	}
+	@ObfuscatedName("ac.L")
+	public static JagString field54;
 
 	static {
 		for (int var0 = 0; var0 < 4096; var0++) {
@@ -1151,95 +839,9 @@ public class Statics {
 		return (var19 >> 5 << 7) + (var20 >> 2 << 10) + (var21 >> 1);
 	}
 
-	@ObfuscatedName("ve.a(IJ)Li;")
-	public static JagString method1556(long arg0) {
-		return JagString.method1586(arg0);
-	}
-
 	@ObfuscatedName("m.a(IB)I")
 	public static int method883(int arg0) {
 		return arg0 == 16711935 ? -1 : method1559(arg0);
-	}
-
-	@ObfuscatedName("m.a(B)I")
-	public static int method885() {
-		int var0 = 3;
-		if (Client.field3934 < 310) {
-			int var1 = Client.field1428 >> 7;
-			int var2 = Client.field3608 >> 7;
-			int var3 = Client.localPlayer.field4136 >> 7;
-			if ((ClientBuild.field2098[Client.field2907][var1][var2] & 0x4) != 0) {
-				var0 = Client.field2907;
-			}
-			int var4;
-			if (var1 < var3) {
-				var4 = var3 - var1;
-			} else {
-				var4 = var1 - var3;
-			}
-			int var5 = Client.localPlayer.field4121 >> 7;
-			int var6;
-			if (var5 > var2) {
-				var6 = var5 - var2;
-			} else {
-				var6 = var2 - var5;
-			}
-			if (var6 >= var4) {
-				int var7 = var4 * 65536 / var6;
-				int var8 = 32768;
-				while (var5 != var2) {
-					if (var5 > var2) {
-						var2++;
-					} else if (var2 > var5) {
-						var2--;
-					}
-					var8 += var7;
-					if ((ClientBuild.field2098[Client.field2907][var1][var2] & 0x4) != 0) {
-						var0 = Client.field2907;
-					}
-					if (var8 >= 65536) {
-						var8 -= 65536;
-						if (var3 > var1) {
-							var1++;
-						} else if (var3 < var1) {
-							var1--;
-						}
-						if ((ClientBuild.field2098[Client.field2907][var1][var2] & 0x4) != 0) {
-							var0 = Client.field2907;
-						}
-					}
-				}
-			} else {
-				int var9 = var6 * 65536 / var4;
-				int var10 = 32768;
-				while (var1 != var3) {
-					if (var1 < var3) {
-						var1++;
-					} else if (var1 > var3) {
-						var1--;
-					}
-					var10 += var9;
-					if ((ClientBuild.field2098[Client.field2907][var1][var2] & 0x4) != 0) {
-						var0 = Client.field2907;
-					}
-					if (var10 >= 65536) {
-						if (var2 < var5) {
-							var2++;
-						} else if (var2 > var5) {
-							var2--;
-						}
-						if ((ClientBuild.field2098[Client.field2907][var1][var2] & 0x4) != 0) {
-							var0 = Client.field2907;
-						}
-						var10 -= 65536;
-					}
-				}
-			}
-		}
-		if ((ClientBuild.field2098[Client.field2907][Client.localPlayer.field4136 >> 7][Client.localPlayer.field4121 >> 7] & 0x4) != 0) {
-			var0 = Client.field2907;
-		}
-		return var0;
 	}
 
 	@ObfuscatedName("vg.a(IIIIIB)V")
@@ -1253,14 +855,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("cd.a(III)V")
-	public static void method168(int arg0, int arg1, int arg2) {
-		Square var3 = World.field489[arg0][arg1][arg2];
-		if (var3 != null) {
-			var3.field948 = null;
-		}
-	}
-
 	@ObfuscatedName("cd.a([IB)[I")
 	public static int[] method169(int[] arg0) {
 		if (arg0 == null) {
@@ -1270,12 +864,6 @@ public class Statics {
 			ArrayUtil.method838(arg0, 0, var1, 0, arg0.length);
 			return var1;
 		}
-	}
-
-	@ObfuscatedName("uj.a(III)I")
-	public static int method1523(int arg0, int arg1) {
-		long var2 = (long) (arg1 + (arg0 << 16));
-		return Js5Net.field990 != null && Js5Net.field990.key == var2 ? Js5Net.field2908.pos * 99 / (Js5Net.field2908.data.length - Js5Net.field990.field1782) + 1 : 0;
 	}
 
 	@ObfuscatedName("uj.a(IBI)I")
@@ -2028,10 +1616,10 @@ public class Statics {
 		field3019 = arg2.method964(field2089);
 		field4502 = arg2.method964(field316);
 		field2912 = arg2.method964(field1733);
-		field209 = arg2.method964(field4278);
-		field119 = arg2.method964(field4011);
-		field1783 = arg2.method964(field881);
-		field2195 = arg2.method964(field102);
+		TitleScreen.field209 = arg2.method964(field4278);
+		TitleScreen.field119 = arg2.method964(field4011);
+		TitleScreen.field1783 = arg2.method964(field881);
+		TitleScreen.field2195 = arg2.method964(field102);
 		field4247 = arg2.method964(field1682);
 		field1552 = arg0.method964(field2156);
 	}
@@ -2253,67 +1841,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("od.a(Lf;IIIIIIZ)V")
-	public static void method1060(Ground arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, boolean arg7) {
-		int var8 = arg0.field1069.length;
-		for (int var9 = 0; var9 < var8; var9++) {
-			int var10 = arg0.field1069[var9] - World.field1353;
-			int var11 = arg0.field1064[var9] - World.field4461;
-			int var12 = arg0.field1053[var9] - World.field4048;
-			int var13 = var12 * arg3 + var10 * arg4 >> 16;
-			int var14 = var12 * arg4 - var10 * arg3 >> 16;
-			int var16 = var11 * arg2 - var14 * arg1 >> 16;
-			int var17 = var11 * arg1 + var14 * arg2 >> 16;
-			if (var17 < 50) {
-				return;
-			}
-			if (arg0.field1063 != null) {
-				Ground.field1058[var9] = var13;
-				Ground.field1072[var9] = var16;
-				Ground.field1057[var9] = var17;
-			}
-			Ground.field1055[var9] = Pix3D.field3363 + (var13 << 9) / var17;
-			Ground.field1062[var9] = Pix3D.field3361 + (var16 << 9) / var17;
-		}
-		Pix3D.field3348 = 0;
-		int var18 = arg0.field1074.length;
-		for (int var19 = 0; var19 < var18; var19++) {
-			int var20 = arg0.field1074[var19];
-			int var21 = arg0.field1056[var19];
-			int var22 = arg0.field1054[var19];
-			int var23 = Ground.field1055[var20];
-			int var24 = Ground.field1055[var21];
-			int var25 = Ground.field1055[var22];
-			int var26 = Ground.field1062[var20];
-			int var27 = Ground.field1062[var21];
-			int var28 = Ground.field1062[var22];
-			if ((var23 - var24) * (var28 - var27) - (var26 - var27) * (var25 - var24) > 0) {
-				if (World.field2145 && World.method122(World.field698 + Pix3D.field3363, World.field621 + Pix3D.field3361, var26, var27, var28, var23, var24, var25)) {
-					World.field2057 = arg5;
-					World.field1714 = arg6;
-				}
-				if (!arg7) {
-					Pix3D.field3358 = false;
-					if (var23 < 0 || var24 < 0 || var25 < 0 || var23 > Pix3D.field3350 || var24 > Pix3D.field3350 || var25 > Pix3D.field3350) {
-						Pix3D.field3358 = true;
-					}
-					if (arg0.field1063 == null || arg0.field1063[var19] == -1) {
-						if (arg0.field1073[var19] != 12345678) {
-							Pix3D.method1227(var26, var27, var28, var23, var24, var25, arg0.field1073[var19], arg0.field1070[var19], arg0.field1060[var19]);
-						}
-					} else if (World.field1882) {
-						int var29 = Pix3D.field3356.method438(arg0.field1063[var19]);
-						Pix3D.method1227(var26, var27, var28, var23, var24, var25, QuickChatCatTypeList.method791(var29, arg0.field1073[var19]), QuickChatCatTypeList.method791(var29, arg0.field1070[var19]), QuickChatCatTypeList.method791(var29, arg0.field1060[var19]));
-					} else if (arg0.field1068) {
-						Pix3D.method1225(var26, var27, var28, var23, var24, var25, arg0.field1073[var19], arg0.field1070[var19], arg0.field1060[var19], Ground.field1058[0], Ground.field1058[1], Ground.field1058[3], Ground.field1072[0], Ground.field1072[1], Ground.field1072[3], Ground.field1057[0], Ground.field1057[1], Ground.field1057[3], arg0.field1063[var19]);
-					} else {
-						Pix3D.method1225(var26, var27, var28, var23, var24, var25, arg0.field1073[var19], arg0.field1070[var19], arg0.field1060[var19], Ground.field1058[var20], Ground.field1058[var21], Ground.field1058[var22], Ground.field1072[var20], Ground.field1072[var21], Ground.field1072[var22], Ground.field1057[var20], Ground.field1057[var21], Ground.field1057[var22], arg0.field1063[var19]);
-					}
-				}
-			}
-		}
-	}
-
 	@ObfuscatedName("ed.a(IIIIIIII)V")
 	public static void method368(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (field1207 <= arg5 && field183 >= arg0 && arg2 >= field919 && arg6 <= field279) {
@@ -2326,73 +1853,6 @@ public class Statics {
 	@ObfuscatedName("eg.a(IB)I")
 	public static int method387(int arg0) {
 		return arg0 & 0x7F;
-	}
-
-	@ObfuscatedName("fi.a(Lhj;B)V")
-	public static void method453(GameShell arg0) {
-		if (ClientMouseListener.field625 != 1) {
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 280 && ClientMouseListener.field4239 <= 294 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
-			method656(0, 0);
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 295 && ClientMouseListener.field4239 <= 360 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
-			method656(0, 1);
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 390 && ClientMouseListener.field4239 <= 404 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
-			method656(1, 0);
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 405 && ClientMouseListener.field4239 <= 470 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
-			method656(1, 1);
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 500 && ClientMouseListener.field4239 <= 514 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
-			method656(2, 0);
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 515 && ClientMouseListener.field4239 <= 580 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
-			method656(2, 1);
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 610 && ClientMouseListener.field4239 <= 624 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
-			method656(3, 0);
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 625 && ClientMouseListener.field4239 <= 690 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field3339 <= 18) {
-			method656(3, 1);
-			return;
-		}
-		if (ClientMouseListener.field4239 >= 700 && ClientMouseListener.field3339 >= 4 && ClientMouseListener.field4239 <= 758 && ClientMouseListener.field3339 <= 20) {
-			TitleScreen.field3959 = false;
-			TitleScreen.method1493();
-			return;
-		}
-		if (TitleScreen.field1581 == -1) {
-			return;
-		}
-		WorldEntry var1 = TitleScreen.field3845[TitleScreen.field1581];
-		if (Client.memServer == var1.field1257) {
-			byte[] var2 = JagString.join(new JagString[] { var1.field1262, field3922}).method613();
-			Client.field1760 = new String(var2, 0, var2.length);
-			Client.worldid = var1.field1261;
-			if (Client.modewhere != 0) {
-				Client.loginJs5Port = 443;
-				Client.modewhere = 0;
-				Client.loginPort = 43594;
-				Client.loginGamePort = 43594;
-			}
-			TitleScreen.field3959 = false;
-			TitleScreen.method1493();
-			return;
-		}
-		JagString var3 = JagString.join(new JagString[] { field1771, var1.field1262, field3076, JagString.method1212(Client.lang), field63, JagString.method1212(Client.lowMem ? 1 : 0), field21, JagString.method1212(Client.plug), field1351, JagString.method1212(Client.js) });
-		try {
-			arg0.getAppletContext().showDocument(var3.method606(), "_self");
-		} catch (Exception var4) {
-		}
 	}
 
 	@ObfuscatedName("ga.a(IZ)Z")
@@ -2628,31 +2088,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("rd.a(IIII)Z")
-	public static boolean method1320(int arg0, int arg1, int arg2, int arg3) {
-		if (World.method1581(arg0, arg1, arg2)) {
-			int var4 = arg1 << 7;
-			int var5 = arg2 << 7;
-			return World.method718(var4 + 1, ClientBuild.field1137[arg0][arg1][arg2] + arg3, var5 + 1) && World.method718(var4 + 128 - 1, ClientBuild.field1137[arg0][arg1 + 1][arg2] + arg3, var5 + 1) && World.method718(var4 + 128 - 1, ClientBuild.field1137[arg0][arg1 + 1][arg2 + 1] + arg3, var5 + 128 - 1) && World.method718(var4 + 1, ClientBuild.field1137[arg0][arg1][arg2 + 1] + arg3, var5 + 128 - 1);
-		} else {
-			return false;
-		}
-	}
-
-	@ObfuscatedName("si.a(BLq;)Lq;")
-	public static IfType method1413(IfType arg0) {
-		if (arg0.field3504 != -1) {
-			return Client.method1579(arg0.field3504);
-		}
-		int var1 = arg0.parentId >>> 16;
-		for (SubInterface var2 = (SubInterface) Client.field2395.method1047(); var2 != null; var2 = (SubInterface) Client.field2395.method1048()) {
-			if (var1 == var2.field3229) {
-				return Client.method1579((int) var2.key);
-			}
-		}
-		return null;
-	}
-
 	@ObfuscatedName("kf.a(IIIIIZI)V")
 	public static void method786(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var6 = arg2 + arg4;
@@ -2692,11 +2127,6 @@ public class Statics {
 	public static JagString method1492(JagString arg0) {
 		WorldMapLabel var1 = method207(arg0);
 		return var1 == null ? field1113 : var1.field4486;
-	}
-
-	@ObfuscatedName("og.a(IB)Z")
-	public static boolean method1070(int arg0) {
-		return (arg0 >> 29 & 0x1) != 0;
 	}
 
 	@ObfuscatedName("og.b(II)[B")
@@ -3177,11 +2607,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("ne.a(I)I")
-	public static int method984() {
-		return ClientMouseListener.field3668;
-	}
-
 	@ObfuscatedName("ne.a(IIIIIIII)V")
 	public static void method986(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var7 = method1058(field919, field279, arg2);
@@ -3212,25 +2637,6 @@ public class Statics {
 			Thread.sleep(arg0);
 		} catch (InterruptedException var2) {
 		}
-	}
-
-	@ObfuscatedName("ib.a(III)V")
-	public static void method656(int arg0, int arg1) {
-		int[] var2 = new int[4];
-		int var3 = 1;
-		int[] var4 = new int[4];
-		var4[0] = arg0;
-		var2[0] = arg1;
-		for (int var5 = 0; var5 < 4; var5++) {
-			if (arg0 != TitleScreen.field461[var5]) {
-				var4[var3] = TitleScreen.field461[var5];
-				var2[var3] = TitleScreen.field1686[var5];
-				var3++;
-			}
-		}
-		TitleScreen.field1686 = var2;
-		TitleScreen.field461 = var4;
-		TitleScreen.method1143(0, TitleScreen.field3845, TitleScreen.field3845.length - 1);
 	}
 
 	@ObfuscatedName("ib.a([BB)V")
@@ -3450,17 +2856,17 @@ public class Statics {
 
 	@ObfuscatedName("sg.a(IIIII)Z")
 	public static boolean method1389(int arg0, int arg1, int arg2, int arg3) {
-		int var4 = arg3 * field3242 + arg0 * field3066 >> 16;
-		int var5 = arg3 * field3066 - arg0 * field3242 >> 16;
-		int var6 = arg1 * field1803 + var5 * field3838 >> 16;
-		int var7 = arg1 * field3838 - var5 * field1803 >> 16;
+		int var4 = arg3 * World.field3242 + arg0 * World.field3066 >> 16;
+		int var5 = arg3 * World.field3066 - arg0 * World.field3242 >> 16;
+		int var6 = arg1 * World.field1803 + var5 * World.field3838 >> 16;
+		int var7 = arg1 * World.field3838 - var5 * World.field1803 >> 16;
 		if (var6 < 1) {
 			var6 = 1;
 		}
 		int var8 = (var4 << 9) / var6;
 		int var9 = (var7 << 9) / var6;
-		int var10 = arg2 * field1803 + var5 * field3838 >> 16;
-		int var11 = arg2 * field3838 - var5 * field1803 >> 16;
+		int var10 = arg2 * World.field1803 + var5 * World.field3838 >> 16;
+		int var11 = arg2 * World.field3838 - var5 * World.field1803 >> 16;
 		if (var10 < 1) {
 			var10 = 1;
 		}
@@ -3490,7 +2896,7 @@ public class Statics {
 		field2126 = null;
 		field1786 = null;
 		field3951 = null;
-		field1706 = null;
+		Client.field1706 = null;
 		field895 = null;
 		field1009 = null;
 		field4276 = 0;
@@ -3538,21 +2944,21 @@ public class Statics {
 		}
 		field594 = ClientBuild.field760 + ClientBuild.field2181 - var1.field4485;
 		field3659 = var1.field4483 - ClientBuild.field239;
-		int var2 = field594 - (int) ((double) field1706.field3422 / field1110);
-		int var3 = field3659 - (int) ((double) field1706.field3380 / field1110);
-		int var4 = field3659 + (int) ((double) field1706.field3380 / field1110);
+		int var2 = field594 - (int) ((double) Client.field1706.field3422 / field1110);
+		int var3 = field3659 - (int) ((double) Client.field1706.field3380 / field1110);
+		int var4 = field3659 + (int) ((double) Client.field1706.field3380 / field1110);
 		if (var3 < 0) {
-			field3659 = (int) ((double) field1706.field3380 / field1110);
+			field3659 = (int) ((double) Client.field1706.field3380 / field1110);
 		}
-		int var5 = (int) ((double) field1706.field3422 / field1110) + field594;
+		int var5 = (int) ((double) Client.field1706.field3422 / field1110) + field594;
 		if (var4 > ClientBuild.field1988) {
-			field3659 = ClientBuild.field1988 - (int) ((double) field1706.field3380 / field1110);
+			field3659 = ClientBuild.field1988 - (int) ((double) Client.field1706.field3380 / field1110);
 		}
 		if (var2 < 0) {
-			field594 = (int) ((double) field1706.field3422 / field1110);
+			field594 = (int) ((double) Client.field1706.field3422 / field1110);
 		}
 		if (var5 > ClientBuild.field760) {
-			field594 = ClientBuild.field760 - (int) ((double) field1706.field3422 / field1110);
+			field594 = ClientBuild.field760 - (int) ((double) Client.field1706.field3422 / field1110);
 		}
 	}
 
@@ -3668,10 +3074,10 @@ public class Statics {
 		if (arg1.method953(field2912)) {
 			var2++;
 		}
-		arg1.method953(field209);
-		arg1.method953(field119);
-		arg1.method953(field1783);
-		arg1.method953(field2195);
+		arg1.method953(TitleScreen.field209);
+		arg1.method953(TitleScreen.field119);
+		arg1.method953(TitleScreen.field1783);
+		arg1.method953(TitleScreen.field2195);
 		arg1.method953(field4247);
 		return var2;
 	}
@@ -3720,7 +3126,7 @@ public class Statics {
 							if (var36 < 2 && var37 > 2 || var36 > 2 && var37 < 2) {
 								var35 = 4936552;
 							} else {
-								var35 = field1009[field2489 + 1];
+								var35 = field1009[FloType.field2489 + 1];
 							}
 						} else {
 							var35 = var19[var30][var34];
@@ -4348,27 +3754,27 @@ public class Statics {
 
 	@ObfuscatedName("wf.a(I)V")
 	public static void method1604() {
-		int var0 = field2330 - (int) ((double) field1706.field3380 / field1110);
-		int var1 = field3033 - (int) ((double) field1706.field3422 / field1110);
-		int var2 = field2330 + (int) ((double) field1706.field3380 / field1110);
+		int var0 = field2330 - (int) ((double) Client.field1706.field3380 / field1110);
+		int var1 = field3033 - (int) ((double) Client.field1706.field3422 / field1110);
+		int var2 = field2330 + (int) ((double) Client.field1706.field3380 / field1110);
 		if (var0 < 0) {
-			field2330 = (int) ((double) field1706.field3380 / field1110);
+			field2330 = (int) ((double) Client.field1706.field3380 / field1110);
 			field3659 = -1;
 			field594 = -1;
 		}
 		if (ClientBuild.field1988 < var2) {
-			field2330 = ClientBuild.field1988 - (int) ((double) field1706.field3380 / field1110);
+			field2330 = ClientBuild.field1988 - (int) ((double) Client.field1706.field3380 / field1110);
 			field594 = -1;
 			field3659 = -1;
 		}
-		int var3 = (int) ((double) field1706.field3422 / field1110) + field3033;
+		int var3 = (int) ((double) Client.field1706.field3422 / field1110) + field3033;
 		if (var1 < 0) {
-			field3033 = (int) ((double) field1706.field3422 / field1110);
+			field3033 = (int) ((double) Client.field1706.field3422 / field1110);
 			field3659 = -1;
 			field594 = -1;
 		}
 		if (var3 > ClientBuild.field760) {
-			field3033 = ClientBuild.field760 - (int) ((double) field1706.field3422 / field1110);
+			field3033 = ClientBuild.field760 - (int) ((double) Client.field1706.field3422 / field1110);
 			field3659 = -1;
 			field594 = -1;
 		}
@@ -4433,5 +3839,55 @@ public class Statics {
 	@ObfuscatedName("k.b(II)Z")
 	public static boolean method746(int arg0) {
 		return arg0 >= 97 && arg0 <= 122 || arg0 >= 65 && arg0 <= 90;
+	}
+
+	@ObfuscatedName("pb.a(JI)Li;")
+	public static JagString method1139(long arg0) {
+		field4545.setTime(new Date(arg0));
+		int var2 = field4545.get(7);
+		int var3 = field4545.get(5);
+		int var4 = field4545.get(2);
+		int var5 = field4545.get(1);
+		int var6 = field4545.get(11);
+		int var7 = field4545.get(12);
+		int var8 = field4545.get(13);
+		return JagString.join(new JagString[] { field1673[var2 - 1], field3772, JagString.method1212(var3 / 10), JagString.method1212(var3 % 10), field3135, field658[var4], field3135, JagString.method1212(var5), field4262, JagString.method1212(var6 / 10), JagString.method1212(var6 % 10), field1959, JagString.method1212(var7 / 10), JagString.method1212(var7 % 10), field1959, JagString.method1212(var8 / 10), JagString.method1212(var8 % 10), field82});
+	}
+
+	@ObfuscatedName("pb.a(IIIII)V")
+	public static void method1137(int arg0, int arg1, int arg2, int arg3) {
+		field2330 = ClientBuild.field1988 * arg2 / arg0;
+		field3033 = ClientBuild.field760 * arg1 / arg3;
+		field594 = -1;
+		field3659 = -1;
+		method1604();
+	}
+
+	@ObfuscatedName("pb.a(ILi;)V")
+	public static void method1132(JagString arg0) {
+		if (GameShell.signlink.field3597 == null) {
+			return;
+		}
+		try {
+			JagString var1 = field4265.method608(GameShell.signlink.field3597);
+			JagString var2 = field4516.method608(GameShell.signlink.field3597);
+			JagString var3 = JagString.join(new JagString[] { var1, field651, arg0, field1005, var2 });
+			JagString var4;
+			if (arg0.method604() == 0) {
+				var4 = JagString.join(new JagString[] { var3, field920});
+			} else {
+				var4 = JagString.join(new JagString[] { var3, field1982, method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.method1556(94608000L) });
+			}
+			JagString.join(new JagString[] {field3237, var4, field591}).method636(GameShell.signlink.field3597);
+		} catch (Throwable var5) {
+		}
+	}
+
+	@ObfuscatedName("pb.b(ILi;)V")
+	public static void method1138(JagString arg0) {
+		try {
+			GameShell.shell.getAppletContext().showDocument(arg0.method632(GameShell.shell.getCodeBase()), "_blank");
+		} catch (Exception var1) {
+		}
 	}
 }

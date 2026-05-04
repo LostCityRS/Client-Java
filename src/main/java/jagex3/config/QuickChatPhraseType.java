@@ -13,6 +13,8 @@ public final class QuickChatPhraseType extends Linkable2 {
 
 	@ObfuscatedName("m.e")
 	public static final LruCache field2447 = new LruCache(64);
+	@ObfuscatedName("md.U")
+	public static final int[] field2508 = new int[] { 2, 2, 4, 0, 1, 8, 0, 0, 0, 0, 2 };
 
 	@ObfuscatedName("ha.C")
 	public static Js5 field1417;
@@ -71,7 +73,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 				return var4;
 			}
 		}
-		return arg1 == 5 ? JagString.method1375(arg0).method614() : Statics.method1556(arg0);
+		return arg1 == 5 ? JagString.method1375(arg0).method614() : JagString.method1556(arg0);
 	}
 
 	@ObfuscatedName("si.a(BI)I")
@@ -167,7 +169,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 			if (var3 >= arg1.length) {
 				return;
 			}
-			int var4 = Statics.field2508[this.method1405(var3)];
+			int var4 = field2508[this.method1405(var3)];
 			if (var4 > 0) {
 				arg0.method306(var4, (long) arg1[var3]);
 			}

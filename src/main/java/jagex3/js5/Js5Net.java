@@ -380,4 +380,10 @@ public class Js5Net {
 	public static int method1067() {
 		return field3943 + field3876;
 	}
+
+	@ObfuscatedName("uj.a(III)I")
+	public static int method1523(int arg0, int arg1) {
+		long var2 = (long) (arg1 + (arg0 << 16));
+		return field990 != null && field990.key == var2 ? field2908.pos * 99 / (field2908.data.length - field990.field1782) + 1 : 0;
+	}
 }

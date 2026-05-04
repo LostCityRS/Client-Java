@@ -198,7 +198,7 @@ public final class Js5Loader extends Js5 {
 		if (this.field348) {
 			return 100;
 		} else if (super.field2706 == null) {
-			int var1 = Statics.method1523(255, this.field334);
+			int var1 = Js5Net.method1523(255, this.field334);
 			if (var1 >= 100) {
 				var1 = 99;
 			}
@@ -214,7 +214,7 @@ public final class Js5Loader extends Js5 {
 		if (!this.method968(arg0)) {
 			return 0;
 		} else if (super.field2706[arg0] == null) {
-			return this.field330[arg0] ? 100 : Statics.method1523(this.field334, arg0);
+			return this.field330[arg0] ? 100 : Js5Net.method1523(this.field334, arg0);
 		} else {
 			return 100;
 		}

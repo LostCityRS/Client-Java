@@ -8,6 +8,10 @@ public class VarCache {
 	public static final int[] field2050 = new int[2000];
 	@ObfuscatedName("jc.H")
 	public static final int[] field1832 = new int[32];
+	@ObfuscatedName("kj.p")
+	public static final int[] field2167 = new int[2000];
+	@ObfuscatedName("pe.K")
+	public static final int[] field3245 = new int[2000];
 
 	static {
 		int var0 = 2;

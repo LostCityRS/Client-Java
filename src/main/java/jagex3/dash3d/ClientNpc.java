@@ -49,12 +49,12 @@ public final class ClientNpc extends ClientEntity {
 			int var22 = -var20 / 2;
 			int var23 = var18 * var22 - var17 * var21 >> 16;
 			int var24 = var21 * var18 + var17 * var22 >> 16;
-			int var25 = Client.method1584(super.field4136 + var24, var23 + super.field4121, Client.field2907);
+			int var25 = Client.getAvH(super.field4136 + var24, var23 + super.field4121, Client.field2907);
 			int var26 = var19 / 2;
 			int var27 = -var20 / 2;
 			int var28 = var18 * var26 + var17 * var27 >> 16;
 			int var29 = var27 * var18 - var26 * var17 >> 16;
-			int var30 = Client.method1584(var28 + super.field4136, var29 + super.field4121, Client.field2907);
+			int var30 = Client.getAvH(var28 + super.field4136, var29 + super.field4121, Client.field2907);
 			int var31 = -var19 / 2;
 			int var32 = var20 / 2;
 			int var33 = var18 * var31 + var32 * var17 >> 16;
@@ -62,9 +62,9 @@ public final class ClientNpc extends ClientEntity {
 			int var35 = var19 / 2;
 			int var36 = var20 / 2;
 			int var37 = var17 * var36 + var18 * var35 >> 16;
-			int var38 = Client.method1584(super.field4136 + var33, super.field4121 - -var34, Client.field2907);
+			int var38 = Client.getAvH(super.field4136 + var33, super.field4121 - -var34, Client.field2907);
 			int var39 = var18 * var36 - var17 * var35 >> 16;
-			int var40 = Client.method1584(super.field4136 + var37, super.field4121 - -var39, Client.field2907);
+			int var40 = Client.getAvH(super.field4136 + var37, super.field4121 - -var39, Client.field2907);
 			int var41 = var40 + var25;
 			if (var41 > var30 + var38) {
 				var41 = var30 + var38;

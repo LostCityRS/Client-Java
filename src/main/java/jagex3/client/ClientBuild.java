@@ -11,7 +11,7 @@ import jagex3.sound.BgSound;
 
 public class ClientBuild {
 	@ObfuscatedName("kg.ab")
-	public static final byte[][][] field2098 = new byte[4][104][104];
+	public static final byte[][][] mapl = new byte[4][104][104];
 	@ObfuscatedName("kb.r")
 	public static final int[][][] field2024 = new int[4][13][13];
 	@ObfuscatedName("ta.X")
@@ -33,7 +33,7 @@ public class ClientBuild {
 	@ObfuscatedName("kb.n")
 	public static byte[][][] field2020;
 	@ObfuscatedName("ff.R")
-	public static int[][][] field1137;
+	public static int[][][] groundh;
 	@ObfuscatedName("hh.bb")
 	public static int[] field1541;
 	@ObfuscatedName("uc.g")
@@ -153,9 +153,9 @@ public class ClientBuild {
 		for (int var1 = 0; var1 < 4; var1++) {
 			for (int var2 = 0; var2 < 104; var2++) {
 				for (int var3 = 0; var3 < 104; var3++) {
-					if ((field2098[var1][var2][var3] & 0x1) == 1) {
+					if ((mapl[var1][var2][var3] & 0x1) == 1) {
 						int var4 = var1;
-						if ((field2098[1][var2][var3] & 0x2) == 2) {
+						if ((mapl[1][var2][var3] & 0x2) == 2) {
 							var4 = var1 - 1;
 						}
 						if (var4 >= 0) {
@@ -189,8 +189,8 @@ public class ClientBuild {
 			int var12 = var11 * 768 >> 8;
 			for (int var13 = 1; var13 < 103; var13++) {
 				for (int var14 = 1; var14 < 103; var14++) {
-					int var15 = field1137[var9][var14 + 1][var13] - field1137[var9][var14 - 1][var13];
-					int var16 = field1137[var9][var14][var13 + 1] - field1137[var9][var14][var13 - 1];
+					int var15 = groundh[var9][var14 + 1][var13] - groundh[var9][var14 - 1][var13];
+					int var16 = groundh[var9][var14][var13 + 1] - groundh[var9][var14][var13 - 1];
 					int var17 = (int) Math.sqrt((double) (var15 * var15 + var16 * var16 + 65536));
 					int var18 = (var15 << 8) / var17;
 					int var19 = -65536 / var17;
@@ -266,17 +266,17 @@ public class ClientBuild {
 			}
 			for (int var40 = 1; var40 < 103; var40++) {
 				for (int var41 = 1; var41 < 103; var41++) {
-					if (!Client.lowMem || (field2098[0][var40][var41] & 0x2) != 0 || (field2098[var9][var40][var41] & 0x10) == 0 && method1555(var41, var40, var9) == Client.field3026) {
+					if (!Client.lowMem || (mapl[0][var40][var41] & 0x2) != 0 || (mapl[var9][var40][var41] & 0x10) == 0 && method1555(var41, var40, var9) == Client.field3026) {
 						if (var9 < field468) {
 							field468 = var9;
 						}
 						int var42 = field3142[var9][var40][var41] & 0xFF;
 						int var43 = field1962[var9][var40][var41] & 0xFF;
 						if (var42 > 0 || var43 > 0) {
-							int var44 = field1137[var9][var40 + 1][var41];
-							int var45 = field1137[var9][var40][var41];
-							int var46 = field1137[var9][var40 + 1][var41 + 1];
-							int var47 = field1137[var9][var40][var41 + 1];
+							int var44 = groundh[var9][var40 + 1][var41];
+							int var45 = groundh[var9][var40][var41];
+							int var46 = groundh[var9][var40 + 1][var41 + 1];
+							int var47 = groundh[var9][var40][var41 + 1];
 							if (var9 > 0) {
 								boolean var48 = true;
 								if (var42 == 0 && field115[var9][var40][var41] != 0) {
@@ -372,7 +372,7 @@ public class ClientBuild {
 		World.method1215();
 		for (int var70 = 0; var70 < 104; var70++) {
 			for (int var71 = 0; var71 < 104; var71++) {
-				if ((field2098[1][var70][var71] & 0x2) == 2) {
+				if ((mapl[1][var70][var71] & 0x2) == 2) {
 					World.method1063(var70, var71);
 				}
 			}
@@ -418,8 +418,8 @@ public class ClientBuild {
 							}
 							int var85 = (var82 + 1 - var79) * (var81 + 1 - var80);
 							if (var85 >= 8) {
-								int var86 = field1137[var80][var78][var79];
-								int var87 = field1137[var81][var78][var79] - 240;
+								int var86 = groundh[var80][var78][var79];
+								int var87 = groundh[var81][var78][var79] - 240;
 								World.method1036(var75, 1, var78 * 128, var78 * 128, var79 * 128, var82 * 128 + 128, var87, var86);
 								for (int var88 = var80; var88 <= var81; var88++) {
 									for (int var89 = var79; var89 <= var82; var89++) {
@@ -455,8 +455,8 @@ public class ClientBuild {
 							}
 							int var96 = (var90 + 1 - var91) * (var94 + 1 - var92);
 							if (var96 >= 8) {
-								int var97 = field1137[var92][var91][var77];
-								int var98 = field1137[var94][var91][var77] - 240;
+								int var97 = groundh[var92][var91][var77];
+								int var98 = groundh[var94][var91][var77] - 240;
 								World.method1036(var75, 2, var91 * 128, var90 * 128 + 128, var77 * 128, var77 * 128, var98, var97);
 								for (int var99 = var92; var99 <= var94; var99++) {
 									for (int var100 = var91; var100 <= var90; var100++) {
@@ -491,7 +491,7 @@ public class ClientBuild {
 								var101++;
 							}
 							if ((var101 + 1 - var102) * (-var103 + 1 + var104) >= 4) {
-								int var107 = field1137[var76][var102][var103];
+								int var107 = groundh[var76][var102][var103];
 								World.method1036(var75, 4, var102 * 128, var101 * 128 + 128, var103 * 128, var104 * 128 + 128, var107, var107);
 								for (int var108 = var102; var108 <= var101; var108++) {
 									for (int var109 = var103; var109 <= var104; var109++) {
@@ -520,8 +520,8 @@ public class ClientBuild {
 
 	@ObfuscatedName("ve.a(IIII)I")
 	public static int method1555(int arg0, int arg1, int arg2) {
-		if ((field2098[arg2][arg1][arg0] & 0x8) == 0) {
-			return arg2 <= 0 || (field2098[1][arg1][arg0] & 0x2) == 0 ? arg2 : arg2 - 1;
+		if ((mapl[arg2][arg1][arg0] & 0x8) == 0) {
+			return arg2 <= 0 || (mapl[1][arg1][arg0] & 0x2) == 0 ? arg2 : arg2 - 1;
 		} else {
 			return 0;
 		}
@@ -539,40 +539,40 @@ public class ClientBuild {
 		for (int var7 = arg3; var7 < arg1 + arg3; var7++) {
 			for (int var8 = arg4; var8 < arg2 + arg4; var8++) {
 				if (var8 >= 0 && var8 < 104 && var7 >= 0 && var7 < 104) {
-					field1137[arg0][var8][var7] = arg0 <= 0 ? 0 : field1137[arg0 - 1][var8][var7];
+					groundh[arg0][var8][var7] = arg0 <= 0 ? 0 : groundh[arg0 - 1][var8][var7];
 				}
 			}
 		}
 		if (arg4 > 0 && arg4 < 104) {
 			for (int var9 = arg3 + 1; var9 < arg1 + arg3; var9++) {
 				if (var9 >= 0 && var9 < 104) {
-					field1137[arg0][arg4][var9] = field1137[arg0][arg4 - 1][var9];
+					groundh[arg0][arg4][var9] = groundh[arg0][arg4 - 1][var9];
 				}
 			}
 		}
 		if (arg3 > 0 && arg3 < 104) {
 			for (int var10 = arg4 + 1; var10 < arg2 + arg4; var10++) {
 				if (var10 >= 0 && var10 < 104) {
-					field1137[arg0][var10][arg3] = field1137[arg0][var10][arg3 - 1];
+					groundh[arg0][var10][arg3] = groundh[arg0][var10][arg3 - 1];
 				}
 			}
 		}
 		if (arg4 >= 0 && arg3 >= 0 && arg4 < 104 && arg3 < 104) {
 			if (arg0 == 0) {
-				if (arg4 > 0 && field1137[arg0][arg4 - 1][arg3] != 0) {
-					field1137[arg0][arg4][arg3] = field1137[arg0][arg4 - 1][arg3];
-				} else if (arg3 > 0 && field1137[arg0][arg4][arg3 - 1] != 0) {
-					field1137[arg0][arg4][arg3] = field1137[arg0][arg4][arg3 - 1];
-				} else if (arg4 > 0 && arg3 > 0 && field1137[arg0][arg4 - 1][arg3 - 1] != 0) {
-					field1137[arg0][arg4][arg3] = field1137[arg0][arg4 - 1][arg3 - 1];
+				if (arg4 > 0 && groundh[arg0][arg4 - 1][arg3] != 0) {
+					groundh[arg0][arg4][arg3] = groundh[arg0][arg4 - 1][arg3];
+				} else if (arg3 > 0 && groundh[arg0][arg4][arg3 - 1] != 0) {
+					groundh[arg0][arg4][arg3] = groundh[arg0][arg4][arg3 - 1];
+				} else if (arg4 > 0 && arg3 > 0 && groundh[arg0][arg4 - 1][arg3 - 1] != 0) {
+					groundh[arg0][arg4][arg3] = groundh[arg0][arg4 - 1][arg3 - 1];
 				}
 			} else {
-				if (arg4 > 0 && field1137[arg0 - 1][arg4 - 1][arg3] != field1137[arg0][arg4 - 1][arg3]) {
-					field1137[arg0][arg4][arg3] = field1137[arg0][arg4 - 1][arg3];
-				} else if (arg3 > 0 && field1137[arg0][arg4][arg3 - 1] != field1137[arg0 - 1][arg4][arg3 - 1]) {
-					field1137[arg0][arg4][arg3] = field1137[arg0][arg4][arg3 - 1];
-				} else if (arg4 > 0 && arg3 > 0 && field1137[arg0 - 1][arg4 - 1][arg3 - 1] != field1137[arg0][arg4 - 1][arg3 - 1]) {
-					field1137[arg0][arg4][arg3] = field1137[arg0][arg4 - 1][arg3 - 1];
+				if (arg4 > 0 && groundh[arg0 - 1][arg4 - 1][arg3] != groundh[arg0][arg4 - 1][arg3]) {
+					groundh[arg0][arg4][arg3] = groundh[arg0][arg4 - 1][arg3];
+				} else if (arg3 > 0 && groundh[arg0][arg4][arg3 - 1] != groundh[arg0 - 1][arg4][arg3 - 1]) {
+					groundh[arg0][arg4][arg3] = groundh[arg0][arg4][arg3 - 1];
+				} else if (arg4 > 0 && arg3 > 0 && groundh[arg0 - 1][arg4 - 1][arg3 - 1] != groundh[arg0][arg4 - 1][arg3 - 1]) {
+					groundh[arg0][arg4][arg3] = groundh[arg0][arg4 - 1][arg3 - 1];
 				}
 			}
 		}
@@ -622,7 +622,7 @@ public class ClientBuild {
 				if (var15 > 0 && var13 > 0 && var15 < 103 && var13 < 103) {
 					CollisionMap var17 = null;
 					int var18 = var12;
-					if ((field2098[1][var15][var13] & 0x2) == 2) {
+					if ((mapl[1][var15][var13] & 0x2) == 2) {
 						var18 = var12 - 1;
 					}
 					if (var18 >= 0) {
@@ -654,9 +654,9 @@ public class ClientBuild {
 		if (arg6 < 1 || arg2 < 1 || arg6 > 102 || arg2 > 102) {
 			return;
 		}
-		if (Client.lowMem && (field2098[0][arg6][arg2] & 0x2) == 0) {
+		if (Client.lowMem && (mapl[0][arg6][arg2] & 0x2) == 0) {
 			int var7 = arg0;
-			if ((field2098[arg0][arg6][arg2] & 0x8) != 0) {
+			if ((mapl[arg0][arg6][arg2] & 0x8) != 0) {
 				var7 = 0;
 			}
 			if (Client.field3026 != var7) {
@@ -664,7 +664,7 @@ public class ClientBuild {
 			}
 		}
 		int var8 = arg0;
-		if (arg0 < 3 && (field2098[1][arg6][arg2] & 0x2) == 2) {
+		if (arg0 < 3 && (mapl[1][arg6][arg2] & 0x2) == 2) {
 			var8 = arg0 + 1;
 		}
 		Client.method989(Client.collision[arg0], arg6, var8, arg1, arg0, arg2);
@@ -704,7 +704,7 @@ public class ClientBuild {
 					if (var21 > 0 && var22 > 0 && var21 < 103 && var22 < 103) {
 						CollisionMap var23 = null;
 						int var24 = arg4;
-						if ((field2098[1][var21][var22] & 0x2) == 2) {
+						if ((mapl[1][var21][var22] & 0x2) == 2) {
 							var24 = arg4 - 1;
 						}
 						if (var24 >= 0) {
@@ -847,8 +847,8 @@ public class ClientBuild {
 
 	@ObfuscatedName("ue.a(BZIZIIZIILia;II)V")
 	public static void method1503(boolean arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6, CollisionMap arg7, int arg8, int arg9) {
-		if (arg4 && (field2098[0][arg9][arg8] & 0x2) == 0) {
-			if ((field2098[arg1][arg9][arg8] & 0x10) != 0) {
+		if (arg4 && (mapl[0][arg9][arg8] & 0x2) == 0) {
+			if ((mapl[arg1][arg9][arg8] & 0x10) != 0) {
 				return;
 			}
 			if (method1555(arg8, arg9, arg1) != Client.field3026) {
@@ -886,7 +886,7 @@ public class ClientBuild {
 			var15 = (var12 >> 1) + arg8;
 			var16 = arg8 + (var12 + 1 >> 1);
 		}
-		int[][] var17 = field1137[arg6];
+		int[][] var17 = groundh[arg6];
 		int var18 = (var11 << 6) + (arg9 << 7);
 		int var19 = var17[var14][var16] + var17[var13][var16] + var17[var14][var15] + var17[var13][var15] >> 2;
 		int var20 = (var12 << 6) + (arg8 << 7);
@@ -896,7 +896,7 @@ public class ClientBuild {
 			var22 |= Long.MIN_VALUE;
 		}
 		if (arg6 < 3) {
-			var21 = field1137[arg6 + 1];
+			var21 = groundh[arg6 + 1];
 		}
 		if (var10.field2780 == 1) {
 			var22 |= 0x400000L;
@@ -1196,15 +1196,15 @@ public class ClientBuild {
 				}
 			}
 		}
-		field2098[arg6][arg0][arg4] = 0;
+		mapl[arg6][arg0][arg4] = 0;
 		while (true) {
 			int var8 = arg1.g1();
 			if (var8 == 0) {
 				if (arg6 == 0) {
-					field1137[0][arg0][arg4] = -method1470(arg3 + arg0 + 932731, 556238 - -arg4 - -arg2) * 8;
+					groundh[0][arg0][arg4] = -method1470(arg3 + arg0 + 932731, 556238 - -arg4 - -arg2) * 8;
 					return;
 				} else {
-					field1137[arg6][arg0][arg4] = field1137[arg6 - 1][arg0][arg4] - 240;
+					groundh[arg6][arg0][arg4] = groundh[arg6 - 1][arg0][arg4] - 240;
 					return;
 				}
 			}
@@ -1214,10 +1214,10 @@ public class ClientBuild {
 					var9 = 0;
 				}
 				if (arg6 == 0) {
-					field1137[0][arg0][arg4] = -var9 * 8;
+					groundh[0][arg0][arg4] = -var9 * 8;
 					return;
 				}
-				field1137[arg6][arg0][arg4] = field1137[arg6 - 1][arg0][arg4] - var9 * 8;
+				groundh[arg6][arg0][arg4] = groundh[arg6 - 1][arg0][arg4] - var9 * 8;
 				return;
 			}
 			if (var8 <= 49) {
@@ -1225,7 +1225,7 @@ public class ClientBuild {
 				field115[arg6][arg0][arg4] = (byte) ((var8 - 2) / 4);
 				field4377[arg6][arg0][arg4] = (byte) (arg5 + var8 - 2 & 0x3);
 			} else if (var8 <= 81) {
-				field2098[arg6][arg0][arg4] = (byte) (var8 - 49);
+				mapl[arg6][arg0][arg4] = (byte) (var8 - 49);
 			} else {
 				field3142[arg6][arg0][arg4] = (byte) (var8 - 81);
 			}

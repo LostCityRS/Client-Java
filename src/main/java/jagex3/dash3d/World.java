@@ -17,6 +17,26 @@ public class World {
 	public static final Sprite[] field2906 = new Sprite[5000];
 	@ObfuscatedName("w.n")
 	public static final Sprite[] field4447 = new Sprite[100];
+	@ObfuscatedName("v.F")
+	public static final int[] field4285 = new int[] { 76, 8, 137, 4, 0, 1, 38, 2, 19 };
+	@ObfuscatedName("ka.a")
+	public static final int[] field2005 = new int[] { 19, 55, 38, 155, 255, 110, 137, 205, 76 };
+	@ObfuscatedName("ij.N")
+	public static final int[] field1789 = new int[] { 160, 192, 80, 96, 0, 144, 80, 48, 160 };
+	@ObfuscatedName("eh.I")
+	public static final int[] field1001 = new int[] { 0, 0, 2, 0, 0, 2, 1, 1, 0 };
+	@ObfuscatedName("ub.S")
+	public static final int[] field4150 = new int[] { 2, 0, 0, 2, 0, 0, 0, 4, 4 };
+	@ObfuscatedName("je.y")
+	public static final int[] field1869 = new int[] { 0, 4, 4, 8, 0, 0, 8, 0, 0 };
+	@ObfuscatedName("ec.P")
+	public static final int[] field904 = new int[] { 1, 1, 0, 0, 0, 8, 0, 0, 8 };
+	@ObfuscatedName("ug.o")
+	public static final int[][] field4232 = new int[][] { new int[16], { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 }, { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1 }, { 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1 } };
+	@ObfuscatedName("bd.m")
+	public static final int[][] field248 = new int[][] { { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, { 12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3 }, { 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 }, { 3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12 } };
+	@ObfuscatedName("og.T")
+	public static final Occlude[] field3075 = new Occlude[500];
 	@ObfuscatedName("bb.e")
 	public static Square[][][] field211;
 	@ObfuscatedName("nc.h")
@@ -59,6 +79,20 @@ public class World {
 	public static boolean field1882 = true;
 	@ObfuscatedName("na.u")
 	public static int field2627;
+	@ObfuscatedName("ja.b")
+	public static int field1803;
+	@ObfuscatedName("se.g")
+	public static int field3838;
+	@ObfuscatedName("pe.H")
+	public static int field3242;
+	@ObfuscatedName("og.K")
+	public static int field3066;
+	@ObfuscatedName("i.L")
+	public static int field1636;
+	@ObfuscatedName("hb.bb")
+	public static int field1435;
+	@ObfuscatedName("mb.U")
+	public static int field2484 = 0;
 
 	@ObfuscatedName("ej.a(Lih;IIIIIIIZ)V")
 	public static void renderQuickGround(QuickGround arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, boolean arg8) {
@@ -70,10 +104,10 @@ public class World {
 		int var14 = var13 = var10 + 128;
 		int var15;
 		int var16 = var15 = var12 + 128;
-		int var17 = ClientBuild.field1137[arg1][arg6][arg7] - field4461;
-		int var18 = ClientBuild.field1137[arg1][arg6 + 1][arg7] - field4461;
-		int var19 = ClientBuild.field1137[arg1][arg6 + 1][arg7 + 1] - field4461;
-		int var20 = ClientBuild.field1137[arg1][arg6][arg7 + 1] - field4461;
+		int var17 = ClientBuild.groundh[arg1][arg6][arg7] - field4461;
+		int var18 = ClientBuild.groundh[arg1][arg6 + 1][arg7] - field4461;
+		int var19 = ClientBuild.groundh[arg1][arg6 + 1][arg7 + 1] - field4461;
+		int var20 = ClientBuild.groundh[arg1][arg6][arg7 + 1] - field4461;
 		int var21 = var12 * arg4 + var10 * arg5 >> 16;
 		int var22 = var12 * arg5 - var10 * arg4 >> 16;
 		int var24 = var17 * arg3 - var22 * arg2 >> 16;
@@ -245,7 +279,7 @@ public class World {
 
 	@ObfuscatedName("ca.a(Z)V")
 	public static void method131() {
-		ClientBuild.field1137 = field2721;
+		ClientBuild.groundh = field2721;
 		field489 = field211;
 		field152 = field489.length;
 	}
@@ -394,7 +428,7 @@ public class World {
 							if (var13 >= 0 && var13 < field1202 && (!var6 || var12 >= var8 || var13 >= var10 || var13 < arg3 && var12 != arg2)) {
 								Square var14 = field489[var11][var12][var13];
 								if (var14 != null) {
-									int var15 = (ClientBuild.field1137[var11][var12][var13] + ClientBuild.field1137[var11][var12 + 1][var13] + ClientBuild.field1137[var11][var12][var13 + 1] + ClientBuild.field1137[var11][var12 + 1][var13 + 1]) / 4 - (ClientBuild.field1137[arg1][arg2][arg3] + ClientBuild.field1137[arg1][arg2 + 1][arg3] + ClientBuild.field1137[arg1][arg2][arg3 + 1] + ClientBuild.field1137[arg1][arg2 + 1][arg3 + 1]) / 4;
+									int var15 = (ClientBuild.groundh[var11][var12][var13] + ClientBuild.groundh[var11][var12 + 1][var13] + ClientBuild.groundh[var11][var12][var13 + 1] + ClientBuild.groundh[var11][var12 + 1][var13 + 1]) / 4 - (ClientBuild.groundh[arg1][arg2][arg3] + ClientBuild.groundh[arg1][arg2 + 1][arg3] + ClientBuild.groundh[arg1][arg2][arg3 + 1] + ClientBuild.groundh[arg1][arg2 + 1][arg3 + 1]) / 4;
 									Wall var16 = var14.field959;
 									if (var16 != null) {
 										if (var16.field3021.method544()) {
@@ -479,7 +513,7 @@ public class World {
 		} else {
 			int var4 = arg1 << 7;
 			int var5 = arg2 << 7;
-			if (method718(var4 + 1, ClientBuild.field1137[arg0][arg1][arg2], var5 + 1) && method718(var4 + 128 - 1, ClientBuild.field1137[arg0][arg1 + 1][arg2], var5 + 1) && method718(var4 + 128 - 1, ClientBuild.field1137[arg0][arg1 + 1][arg2 + 1], var5 + 128 - 1) && method718(var4 + 1, ClientBuild.field1137[arg0][arg1][arg2 + 1], var5 + 128 - 1)) {
+			if (method718(var4 + 1, ClientBuild.groundh[arg0][arg1][arg2], var5 + 1) && method718(var4 + 128 - 1, ClientBuild.groundh[arg0][arg1 + 1][arg2], var5 + 1) && method718(var4 + 128 - 1, ClientBuild.groundh[arg0][arg1 + 1][arg2 + 1], var5 + 128 - 1) && method718(var4 + 1, ClientBuild.groundh[arg0][arg1][arg2 + 1], var5 + 128 - 1)) {
 				field4429[arg0][arg1][arg2] = field2627;
 				return true;
 			} else {
@@ -617,7 +651,7 @@ public class World {
 				for (int var13 = Statics.field1849; var13 < Statics.field4314; var13++) {
 					Square var14 = var11[var12][var13];
 					if (var14 != null) {
-						if (var14.field950 <= Statics.field2993 && field304[var12 + field2911 - Statics.field1435][var13 + field2911 - Statics.field1636] && (arg3 == null || var10 < 0 || arg3[var10][var12][var13] != 0)) {
+						if (var14.field950 <= Statics.field2993 && field304[var12 + field2911 - field1435][var13 + field2911 - field1636] && (arg3 == null || var10 < 0 || arg3[var10][var12][var13] != 0)) {
 							var14.field944 = true;
 							var14.field965 = true;
 							if (var14.field962 > 0) {
@@ -641,16 +675,16 @@ public class World {
 				}
 			}
 		}
-		boolean var17 = ClientBuild.field1137 == Statics.field2979;
+		boolean var17 = ClientBuild.groundh == Statics.field2979;
 		for (int var18 = Statics.field3105; var18 < field152; var18++) {
 			Square[][] var19 = field489[var18];
 			for (int var20 = -field2911; var20 <= 0; var20++) {
-				int var21 = Statics.field1435 + var20;
-				int var22 = Statics.field1435 - var20;
+				int var21 = field1435 + var20;
+				int var22 = field1435 - var20;
 				if (var21 >= Statics.field3007 || var22 < PacketBit.field84) {
 					for (int var23 = -field2911; var23 <= 0; var23++) {
-						int var24 = Statics.field1636 + var23;
-						int var25 = Statics.field1636 - var23;
+						int var24 = field1636 + var23;
+						int var25 = field1636 - var23;
 						if (var21 >= Statics.field3007) {
 							if (var24 >= Statics.field1849) {
 								Square var26 = var19[var21][var24];
@@ -692,12 +726,12 @@ public class World {
 		for (int var30 = Statics.field3105; var30 < field152; var30++) {
 			Square[][] var31 = field489[var30];
 			for (int var32 = -field2911; var32 <= 0; var32++) {
-				int var33 = Statics.field1435 + var32;
-				int var34 = Statics.field1435 - var32;
+				int var33 = field1435 + var32;
+				int var34 = field1435 - var32;
 				if (var33 >= Statics.field3007 || var34 < PacketBit.field84) {
 					for (int var35 = -field2911; var35 <= 0; var35++) {
-						int var36 = Statics.field1636 + var35;
-						int var37 = Statics.field1636 - var35;
+						int var36 = field1636 + var35;
+						int var37 = field1636 - var35;
 						if (var33 >= Statics.field3007) {
 							if (var36 >= Statics.field1849) {
 								Square var38 = var31[var33][var36];
@@ -746,7 +780,7 @@ public class World {
 		}
 		int var4 = arg1 << 7;
 		int var5 = arg2 << 7;
-		int var6 = ClientBuild.field1137[arg0][arg1][arg2] - 1;
+		int var6 = ClientBuild.groundh[arg0][arg1][arg2] - 1;
 		int var7 = var6 - 120;
 		int var8 = var6 - 230;
 		int var9 = var6 - 238;
@@ -888,7 +922,7 @@ public class World {
 	@ObfuscatedName("jf.a(III)Z")
 	public static boolean method718(int arg0, int arg1, int arg2) {
 		for (int var3 = 0; var3 < Statics.field1316; var3++) {
-			Occlude var4 = Statics.field3075[var3];
+			Occlude var4 = field3075[var3];
 			if (var4.field206 == 1) {
 				int var5 = var4.field185 - arg0;
 				if (var5 > 0) {
@@ -1010,29 +1044,29 @@ public class World {
 		} else if (arg2 >= field1202 * 128) {
 			arg2 = field1202 * 128 - 1;
 		}
-		Statics.field1803 = Pix3D.field3359[arg3];
-		Statics.field3838 = Pix3D.field3354[arg3];
-		Statics.field3242 = Pix3D.field3359[arg4];
-		Statics.field3066 = Pix3D.field3354[arg4];
+		field1803 = Pix3D.field3359[arg3];
+		field3838 = Pix3D.field3354[arg3];
+		field3242 = Pix3D.field3359[arg4];
+		field3066 = Pix3D.field3354[arg4];
 		field1353 = arg0;
 		field4461 = arg1;
 		field4048 = arg2;
-		Statics.field1435 = arg0 / 128;
-		Statics.field1636 = arg2 / 128;
+		field1435 = arg0 / 128;
+		field1636 = arg2 / 128;
 		Statics.field2993 = arg5;
-		Statics.field3007 = Statics.field1435 - field2911;
+		Statics.field3007 = field1435 - field2911;
 		if (Statics.field3007 < 0) {
 			Statics.field3007 = 0;
 		}
-		Statics.field1849 = Statics.field1636 - field2911;
+		Statics.field1849 = field1636 - field2911;
 		if (Statics.field1849 < 0) {
 			Statics.field1849 = 0;
 		}
-		PacketBit.field84 = Statics.field1435 + field2911;
+		PacketBit.field84 = field1435 + field2911;
 		if (PacketBit.field84 > field899) {
 			PacketBit.field84 = field899;
 		}
-		Statics.field4314 = Statics.field1636 + field2911;
+		Statics.field4314 = field1636 + field2911;
 		if (Statics.field4314 > field1202) {
 			Statics.field4314 = field1202;
 		}
@@ -1040,8 +1074,8 @@ public class World {
 			for (int var15 = 0; var15 < field2911 + field2911 + 2; var15++) {
 				int var16 = (var14 - field2911 << 7) - (field1353 & 0x7F);
 				int var17 = (var15 - field2911 << 7) - (field4048 & 0x7F);
-				int var18 = Statics.field1435 + var14 - field2911;
-				int var19 = Statics.field1636 + var15 - field2911;
+				int var18 = field1435 + var14 - field2911;
+				int var19 = field1636 + var15 - field2911;
 				if (var18 >= 0 && var19 >= 0 && var18 < field899 && var19 < field1202) {
 					int var20;
 					if (Statics.field2979 == null) {
@@ -1192,25 +1226,25 @@ public class World {
 														continue;
 													}
 												}
-												if (var3 <= Statics.field1435 && var3 > Statics.field3007) {
+												if (var3 <= field1435 && var3 > Statics.field3007) {
 													Square var9 = var7[var3 - 1][var4];
 													if (var9 != null && var9.field965 && (var9.field944 || (var2.field954 & 0x1) == 0)) {
 														continue;
 													}
 												}
-												if (var3 >= Statics.field1435 && var3 < PacketBit.field84 - 1) {
+												if (var3 >= field1435 && var3 < PacketBit.field84 - 1) {
 													Square var10 = var7[var3 + 1][var4];
 													if (var10 != null && var10.field965 && (var10.field944 || (var2.field954 & 0x4) == 0)) {
 														continue;
 													}
 												}
-												if (var4 <= Statics.field1636 && var4 > Statics.field1849) {
+												if (var4 <= field1636 && var4 > Statics.field1849) {
 													Square var11 = var7[var3][var4 - 1];
 													if (var11 != null && var11.field965 && (var11.field944 || (var2.field954 & 0x8) == 0)) {
 														continue;
 													}
 												}
-												if (var4 >= Statics.field1636 && var4 < Statics.field4314 - 1) {
+												if (var4 >= field1636 && var4 < Statics.field4314 - 1) {
 													Square var12 = var7[var3][var4 + 1];
 													if (var12 != null && var12.field965 && (var12.field944 || (var2.field954 & 0x2) == 0)) {
 														continue;
@@ -1225,24 +1259,24 @@ public class World {
 												if (var13.field947 == null) {
 													if (var13.field964 != null) {
 														if (method1581(0, var3, var4)) {
-															Statics.method1060(var13.field964, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var3, var4, true);
+															method1060(var13.field964, field1803, field3838, field3242, field3066, var3, var4, true);
 														} else {
-															Statics.method1060(var13.field964, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var3, var4, false);
+															method1060(var13.field964, field1803, field3838, field3242, field3066, var3, var4, false);
 														}
 													}
 												} else if (method1581(0, var3, var4)) {
-													renderQuickGround(var13.field947, 0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var3, var4, true);
+													renderQuickGround(var13.field947, 0, field1803, field3838, field3242, field3066, var3, var4, true);
 												} else {
-													renderQuickGround(var13.field947, 0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var3, var4, false);
+													renderQuickGround(var13.field947, 0, field1803, field3838, field3242, field3066, var3, var4, false);
 												}
 												Wall var14 = var13.field959;
 												if (var14 != null) {
-													var14.field3021.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var14.field3029 - field1353, var14.field3031 - field4461, var14.field3023 - field4048, var14.field3028);
+													var14.field3021.method87(0, field1803, field3838, field3242, field3066, var14.field3029 - field1353, var14.field3031 - field4461, var14.field3023 - field4048, var14.field3028);
 												}
 												for (int var15 = 0; var15 < var13.field962; var15++) {
 													Sprite var16 = var13.field963[var15];
 													if (var16 != null) {
-														var16.field1943.method87(var16.field1939, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var16.field1945 - field1353, var16.field1938 - field4461, var16.field1949 - field4048, var16.field1948);
+														var16.field1943.method87(var16.field1939, field1803, field3838, field3242, field3066, var16.field1945 - field1353, var16.field1938 - field4461, var16.field1949 - field4048, var16.field1948);
 													}
 												}
 											}
@@ -1250,18 +1284,18 @@ public class World {
 											if (var2.field947 == null) {
 												if (var2.field964 != null) {
 													if (method1581(var6, var3, var4)) {
-														Statics.method1060(var2.field964, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var3, var4, true);
+														method1060(var2.field964, field1803, field3838, field3242, field3066, var3, var4, true);
 													} else {
 														var17 = true;
-														Statics.method1060(var2.field964, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var3, var4, false);
+														method1060(var2.field964, field1803, field3838, field3242, field3066, var3, var4, false);
 													}
 												}
 											} else if (method1581(var6, var3, var4)) {
-												renderQuickGround(var2.field947, var6, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var3, var4, true);
+												renderQuickGround(var2.field947, var6, field1803, field3838, field3242, field3066, var3, var4, true);
 											} else {
 												var17 = true;
-												if (var2.field947.field1766 != 12345678 || field2145 && var5 <= Statics.field2484) {
-													renderQuickGround(var2.field947, var6, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var3, var4, false);
+												if (var2.field947.field1766 != 12345678 || field2145 && var5 <= field2484) {
+													renderQuickGround(var2.field947, var6, field1803, field3838, field3242, field3066, var3, var4, false);
 												}
 											}
 											int var18 = 0;
@@ -1269,49 +1303,49 @@ public class World {
 											Wall var20 = var2.field959;
 											Decor var21 = var2.field956;
 											if (var20 != null || var21 != null) {
-												if (Statics.field1435 == var3) {
+												if (field1435 == var3) {
 													var18++;
-												} else if (Statics.field1435 < var3) {
+												} else if (field1435 < var3) {
 													var18 += 2;
 												}
-												if (Statics.field1636 == var4) {
+												if (field1636 == var4) {
 													var18 += 3;
-												} else if (Statics.field1636 > var4) {
+												} else if (field1636 > var4) {
 													var18 += 6;
 												}
-												var19 = Statics.field2005[var18];
-												var2.field952 = Statics.field4285[var18];
+												var19 = field2005[var18];
+												var2.field952 = field4285[var18];
 											}
 											if (var20 != null) {
-												if ((var20.field3027 & Statics.field1789[var18]) == 0) {
+												if ((var20.field3027 & field1789[var18]) == 0) {
 													var2.field953 = 0;
 												} else if (var20.field3027 == 16) {
 													var2.field953 = 3;
-													var2.field946 = Statics.field1001[var18];
+													var2.field946 = field1001[var18];
 													var2.field955 = 3 - var2.field946;
 												} else if (var20.field3027 == 32) {
 													var2.field953 = 6;
-													var2.field946 = Statics.field4150[var18];
+													var2.field946 = field4150[var18];
 													var2.field955 = 6 - var2.field946;
 												} else if (var20.field3027 == 64) {
 													var2.field953 = 12;
-													var2.field946 = Statics.field1869[var18];
+													var2.field946 = field1869[var18];
 													var2.field955 = 12 - var2.field946;
 												} else {
 													var2.field953 = 9;
-													var2.field946 = Statics.field904[var18];
+													var2.field946 = field904[var18];
 													var2.field955 = 9 - var2.field946;
 												}
 												if ((var20.field3027 & var19) != 0 && !method945(var6, var3, var4, var20.field3027)) {
-													var20.field3021.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var20.field3029 - field1353, var20.field3031 - field4461, var20.field3023 - field4048, var20.field3028);
+													var20.field3021.method87(0, field1803, field3838, field3242, field3066, var20.field3029 - field1353, var20.field3031 - field4461, var20.field3023 - field4048, var20.field3028);
 												}
 												if ((var20.field3024 & var19) != 0 && !method945(var6, var3, var4, var20.field3024)) {
-													var20.field3032.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var20.field3029 - field1353, var20.field3031 - field4461, var20.field3023 - field4048, var20.field3028);
+													var20.field3032.method87(0, field1803, field3838, field3242, field3066, var20.field3029 - field1353, var20.field3031 - field4461, var20.field3023 - field4048, var20.field3028);
 												}
 											}
-											if (var21 != null && !Statics.method1320(var6, var3, var4, var21.field1159.method88())) {
+											if (var21 != null && !method1320(var6, var3, var4, var21.field1159.method88())) {
 												if ((var21.field1164 & var19) != 0) {
-													var21.field1159.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var21.field1157 + var21.field1169 - field1353, var21.field1168 - field4461, var21.field1161 + var21.field1167 - field4048, var21.field1158);
+													var21.field1159.method87(0, field1803, field3838, field3242, field3066, var21.field1157 + var21.field1169 - field1353, var21.field1168 - field4461, var21.field1161 + var21.field1167 - field4048, var21.field1158);
 												} else if (var21.field1164 == 256) {
 													int var22 = var21.field1157 - field1353;
 													int var23 = var21.field1168 - field4461;
@@ -1330,51 +1364,51 @@ public class World {
 														var27 = var24;
 													}
 													if (var27 < var26) {
-														var21.field1159.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var22 + var21.field1169, var23, var24 + var21.field1167, var21.field1158);
+														var21.field1159.method87(0, field1803, field3838, field3242, field3066, var22 + var21.field1169, var23, var24 + var21.field1167, var21.field1158);
 													} else if (var21.field1160 != null) {
-														var21.field1160.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var22, var23, var24, var21.field1158);
+														var21.field1160.method87(0, field1803, field3838, field3242, field3066, var22, var23, var24, var21.field1158);
 													}
 												}
 											}
 											if (var17) {
 												GroundDecor var28 = var2.field949;
 												if (var28 != null) {
-													var28.field3194.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var28.field3197 - field1353, var28.field3193 - field4461, var28.field3190 - field4048, var28.field3202);
+													var28.field3194.method87(0, field1803, field3838, field3242, field3066, var28.field3197 - field1353, var28.field3193 - field4461, var28.field3190 - field4048, var28.field3202);
 												}
 												GroundObject var29 = var2.field948;
 												if (var29 != null && var29.field4435 == 0) {
 													if (var29.field4446 != null) {
-														var29.field4446.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var29.field4451 - field1353, var29.field4444 - field4461, var29.field4439 - field4048, var29.field4440);
+														var29.field4446.method87(0, field1803, field3838, field3242, field3066, var29.field4451 - field1353, var29.field4444 - field4461, var29.field4439 - field4048, var29.field4440);
 													}
 													if (var29.field4448 != null) {
-														var29.field4448.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var29.field4451 - field1353, var29.field4444 - field4461, var29.field4439 - field4048, var29.field4440);
+														var29.field4448.method87(0, field1803, field3838, field3242, field3066, var29.field4451 - field1353, var29.field4444 - field4461, var29.field4439 - field4048, var29.field4440);
 													}
 													if (var29.field4443 != null) {
-														var29.field4443.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var29.field4451 - field1353, var29.field4444 - field4461, var29.field4439 - field4048, var29.field4440);
+														var29.field4443.method87(0, field1803, field3838, field3242, field3066, var29.field4451 - field1353, var29.field4444 - field4461, var29.field4439 - field4048, var29.field4440);
 													}
 												}
 											}
 											int var30 = var2.field954;
 											if (var30 != 0) {
-												if (var3 < Statics.field1435 && (var30 & 0x4) != 0) {
+												if (var3 < field1435 && (var30 & 0x4) != 0) {
 													Square var31 = var7[var3 + 1][var4];
 													if (var31 != null && var31.field965) {
 														Statics.field1900.push(var31);
 													}
 												}
-												if (var4 < Statics.field1636 && (var30 & 0x2) != 0) {
+												if (var4 < field1636 && (var30 & 0x2) != 0) {
 													Square var32 = var7[var3][var4 + 1];
 													if (var32 != null && var32.field965) {
 														Statics.field1900.push(var32);
 													}
 												}
-												if (var3 > Statics.field1435 && (var30 & 0x1) != 0) {
+												if (var3 > field1435 && (var30 & 0x1) != 0) {
 													Square var33 = var7[var3 - 1][var4];
 													if (var33 != null && var33.field965) {
 														Statics.field1900.push(var33);
 													}
 												}
-												if (var4 > Statics.field1636 && (var30 & 0x8) != 0) {
+												if (var4 > field1636 && (var30 & 0x8) != 0) {
 													Square var34 = var7[var3][var4 - 1];
 													if (var34 != null && var34.field965) {
 														Statics.field1900.push(var34);
@@ -1394,7 +1428,7 @@ public class World {
 											if (var35) {
 												Wall var37 = var2.field959;
 												if (!method945(var6, var3, var4, var37.field3027)) {
-													var37.field3021.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var37.field3029 - field1353, var37.field3031 - field4461, var37.field3023 - field4048, var37.field3028);
+													var37.field3021.method87(0, field1803, field3838, field3242, field3066, var37.field3029 - field1353, var37.field3031 - field4461, var37.field3023 - field4048, var37.field3028);
 												}
 												var2.field953 = 0;
 											}
@@ -1438,13 +1472,13 @@ public class World {
 														}
 													}
 													field4447[var39++] = var41;
-													int var46 = Statics.field1435 - var41.field1933;
-													int var47 = var41.field1940 - Statics.field1435;
+													int var46 = field1435 - var41.field1933;
+													int var47 = var41.field1940 - field1435;
 													if (var47 > var46) {
 														var46 = var47;
 													}
-													int var48 = Statics.field1636 - var41.field1936;
-													int var49 = var41.field1935 - Statics.field1636;
+													int var48 = field1636 - var41.field1936;
+													int var49 = var41.field1935 - field1636;
 													if (var49 > var48) {
 														var41.field1950 = var46 + var49;
 													} else {
@@ -1478,7 +1512,7 @@ public class World {
 												Sprite var58 = field4447[var51];
 												var58.field1934 = field2627;
 												if (!method224(var6, var58.field1933, var58.field1940, var58.field1936, var58.field1935, var58.field1943.method88())) {
-													var58.field1943.method87(var58.field1939, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var58.field1945 - field1353, var58.field1938 - field4461, var58.field1949 - field4048, var58.field1948);
+													var58.field1943.method87(var58.field1939, field1803, field3838, field3242, field3066, var58.field1945 - field1353, var58.field1938 - field4461, var58.field1949 - field4048, var58.field1948);
 												}
 												for (int var59 = var58.field1933; var59 <= var58.field1940; var59++) {
 													for (int var60 = var58.field1936; var60 <= var58.field1935; var60++) {
@@ -1501,22 +1535,22 @@ public class World {
 									}
 								} while (!var2.field965);
 							} while (var2.field953 != 0);
-							if (var3 > Statics.field1435 || var3 <= Statics.field3007) {
+							if (var3 > field1435 || var3 <= Statics.field3007) {
 								break;
 							}
 							var62 = var7[var3 - 1][var4];
 						} while (var62 != null && var62.field965);
-						if (var3 < Statics.field1435 || var3 >= PacketBit.field84 - 1) {
+						if (var3 < field1435 || var3 >= PacketBit.field84 - 1) {
 							break;
 						}
 						var63 = var7[var3 + 1][var4];
 					} while (var63 != null && var63.field965);
-					if (var4 > Statics.field1636 || var4 <= Statics.field1849) {
+					if (var4 > field1636 || var4 <= Statics.field1849) {
 						break;
 					}
 					var64 = var7[var3][var4 - 1];
 				} while (var64 != null && var64.field965);
-				if (var4 < Statics.field1636 || var4 >= Statics.field4314 - 1) {
+				if (var4 < field1636 || var4 >= Statics.field4314 - 1) {
 					break;
 				}
 				var65 = var7[var3][var4 + 1];
@@ -1526,20 +1560,20 @@ public class World {
 			GroundObject var66 = var2.field948;
 			if (var66 != null && var66.field4435 != 0) {
 				if (var66.field4446 != null) {
-					var66.field4446.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var66.field4451 - field1353, var66.field4444 - field4461 - var66.field4435, var66.field4439 - field4048, var66.field4440);
+					var66.field4446.method87(0, field1803, field3838, field3242, field3066, var66.field4451 - field1353, var66.field4444 - field4461 - var66.field4435, var66.field4439 - field4048, var66.field4440);
 				}
 				if (var66.field4448 != null) {
-					var66.field4448.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var66.field4451 - field1353, var66.field4444 - field4461 - var66.field4435, var66.field4439 - field4048, var66.field4440);
+					var66.field4448.method87(0, field1803, field3838, field3242, field3066, var66.field4451 - field1353, var66.field4444 - field4461 - var66.field4435, var66.field4439 - field4048, var66.field4440);
 				}
 				if (var66.field4443 != null) {
-					var66.field4443.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var66.field4451 - field1353, var66.field4444 - field4461 - var66.field4435, var66.field4439 - field4048, var66.field4440);
+					var66.field4443.method87(0, field1803, field3838, field3242, field3066, var66.field4451 - field1353, var66.field4444 - field4461 - var66.field4435, var66.field4439 - field4048, var66.field4440);
 				}
 			}
 			if (var2.field952 != 0) {
 				Decor var67 = var2.field956;
-				if (var67 != null && !Statics.method1320(var6, var3, var4, var67.field1159.method88())) {
+				if (var67 != null && !method1320(var6, var3, var4, var67.field1159.method88())) {
 					if ((var67.field1164 & var2.field952) != 0) {
-						var67.field1159.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var67.field1157 + var67.field1169 - field1353, var67.field1168 - field4461, var67.field1161 + var67.field1167 - field4048, var67.field1158);
+						var67.field1159.method87(0, field1803, field3838, field3242, field3066, var67.field1157 + var67.field1169 - field1353, var67.field1168 - field4461, var67.field1161 + var67.field1167 - field4048, var67.field1158);
 					} else if (var67.field1164 == 256) {
 						int var68 = var67.field1157 - field1353;
 						int var69 = var67.field1168 - field4461;
@@ -1558,19 +1592,19 @@ public class World {
 							var73 = var70;
 						}
 						if (var73 >= var72) {
-							var67.field1159.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var68 + var67.field1169, var69, var70 + var67.field1167, var67.field1158);
+							var67.field1159.method87(0, field1803, field3838, field3242, field3066, var68 + var67.field1169, var69, var70 + var67.field1167, var67.field1158);
 						} else if (var67.field1160 != null) {
-							var67.field1160.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var68, var69, var70, var67.field1158);
+							var67.field1160.method87(0, field1803, field3838, field3242, field3066, var68, var69, var70, var67.field1158);
 						}
 					}
 				}
 				Wall var74 = var2.field959;
 				if (var74 != null) {
 					if ((var74.field3024 & var2.field952) != 0 && !method945(var6, var3, var4, var74.field3024)) {
-						var74.field3032.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var74.field3029 - field1353, var74.field3031 - field4461, var74.field3023 - field4048, var74.field3028);
+						var74.field3032.method87(0, field1803, field3838, field3242, field3066, var74.field3029 - field1353, var74.field3031 - field4461, var74.field3023 - field4048, var74.field3028);
 					}
 					if ((var74.field3027 & var2.field952) != 0 && !method945(var6, var3, var4, var74.field3027)) {
-						var74.field3021.method87(0, Statics.field1803, Statics.field3838, Statics.field3242, Statics.field3066, var74.field3029 - field1353, var74.field3031 - field4461, var74.field3023 - field4048, var74.field3028);
+						var74.field3021.method87(0, field1803, field3838, field3242, field3066, var74.field3029 - field1353, var74.field3031 - field4461, var74.field3023 - field4048, var74.field3028);
 					}
 				}
 			}
@@ -1580,25 +1614,25 @@ public class World {
 					Statics.field1900.push(var75);
 				}
 			}
-			if (var3 < Statics.field1435) {
+			if (var3 < field1435) {
 				Square var76 = var7[var3 + 1][var4];
 				if (var76 != null && var76.field965) {
 					Statics.field1900.push(var76);
 				}
 			}
-			if (var4 < Statics.field1636) {
+			if (var4 < field1636) {
 				Square var77 = var7[var3][var4 + 1];
 				if (var77 != null && var77.field965) {
 					Statics.field1900.push(var77);
 				}
 			}
-			if (var3 > Statics.field1435) {
+			if (var3 > field1435) {
 				Square var78 = var7[var3 - 1][var4];
 				if (var78 != null && var78.field965) {
 					Statics.field1900.push(var78);
 				}
 			}
-			if (var4 > Statics.field1636) {
+			if (var4 > field1636) {
 				Square var79 = var7[var3][var4 - 1];
 				if (var79 != null && var79.field965) {
 					Statics.field1900.push(var79);
@@ -1641,8 +1675,8 @@ public class World {
 		int var11 = var9.field1066;
 		int var12 = var9.field1061;
 		int var13 = var9.field1067;
-		int[] var14 = Statics.field4232[var10];
-		int[] var15 = Statics.field248[var11];
+		int[] var14 = field4232[var10];
+		int[] var15 = field248[var11];
 		int var16 = 0;
 		if (var12 != 0) {
 			for (int var17 = 0; var17 < 4; var17++) {
@@ -1683,7 +1717,7 @@ public class World {
 			}
 			int var10 = (arg1 << 7) + 1;
 			int var11 = (arg3 << 7) + 2;
-			int var12 = ClientBuild.field1137[arg0][arg1][arg3] + arg5;
+			int var12 = ClientBuild.groundh[arg0][arg1][arg3] + arg5;
 			if (!method718(var10, var12, var11)) {
 				return false;
 			}
@@ -1702,7 +1736,7 @@ public class World {
 		} else if (method1581(arg0, arg1, arg3)) {
 			int var6 = arg1 << 7;
 			int var7 = arg3 << 7;
-			return method718(var6 + 1, ClientBuild.field1137[arg0][arg1][arg3] + arg5, var7 + 1) && method718(var6 + 128 - 1, ClientBuild.field1137[arg0][arg1 + 1][arg3] + arg5, var7 + 1) && method718(var6 + 128 - 1, ClientBuild.field1137[arg0][arg1 + 1][arg3 + 1] + arg5, var7 + 128 - 1) && method718(var6 + 1, ClientBuild.field1137[arg0][arg1][arg3 + 1] + arg5, var7 + 128 - 1);
+			return method718(var6 + 1, ClientBuild.groundh[arg0][arg1][arg3] + arg5, var7 + 1) && method718(var6 + 128 - 1, ClientBuild.groundh[arg0][arg1 + 1][arg3] + arg5, var7 + 1) && method718(var6 + 128 - 1, ClientBuild.groundh[arg0][arg1 + 1][arg3 + 1] + arg5, var7 + 128 - 1) && method718(var6 + 1, ClientBuild.groundh[arg0][arg1][arg3 + 1] + arg5, var7 + 128 - 1);
 		} else {
 			return false;
 		}
@@ -1719,7 +1753,7 @@ public class World {
 	@ObfuscatedName("ee.b(III)V")
 	public static void method374(int arg0, int arg1, int arg2) {
 		field2145 = true;
-		Statics.field2484 = arg0;
+		field2484 = arg0;
 		field698 = arg1;
 		field621 = arg2;
 		field2057 = -1;
@@ -1752,13 +1786,13 @@ public class World {
 				}
 			}
 			if (var3.field190 == 1) {
-				int var5 = var3.field204 + field2911 - Statics.field1435;
+				int var5 = var3.field204 + field2911 - field1435;
 				if (var5 >= 0 && var5 <= field2911 + field2911) {
-					int var6 = var3.field187 + field2911 - Statics.field1636;
+					int var6 = var3.field187 + field2911 - field1636;
 					if (var6 < 0) {
 						var6 = 0;
 					}
-					int var7 = var3.field200 + field2911 - Statics.field1636;
+					int var7 = var3.field200 + field2911 - field1636;
 					if (var7 > field2911 + field2911) {
 						var7 = field2911 + field2911;
 					}
@@ -1784,17 +1818,17 @@ public class World {
 						var3.field186 = (var3.field205 - field4048 << 8) / var9;
 						var3.field188 = (var3.field189 - field4461 << 8) / var9;
 						var3.field201 = (var3.field196 - field4461 << 8) / var9;
-						Statics.field3075[Statics.field1316++] = var3;
+						field3075[Statics.field1316++] = var3;
 					}
 				}
 			} else if (var3.field190 == 2) {
-				int var10 = var3.field187 + field2911 - Statics.field1636;
+				int var10 = var3.field187 + field2911 - field1636;
 				if (var10 >= 0 && var10 <= field2911 + field2911) {
-					int var11 = var3.field204 + field2911 - Statics.field1435;
+					int var11 = var3.field204 + field2911 - field1435;
 					if (var11 < 0) {
 						var11 = 0;
 					}
-					int var12 = var3.field194 + field2911 - Statics.field1435;
+					int var12 = var3.field194 + field2911 - field1435;
 					if (var12 > field2911 + field2911) {
 						var12 = field2911 + field2911;
 					}
@@ -1820,26 +1854,26 @@ public class World {
 						var3.field195 = (var3.field193 - field1353 << 8) / var14;
 						var3.field188 = (var3.field189 - field4461 << 8) / var14;
 						var3.field201 = (var3.field196 - field4461 << 8) / var14;
-						Statics.field3075[Statics.field1316++] = var3;
+						field3075[Statics.field1316++] = var3;
 					}
 				}
 			} else if (var3.field190 == 4) {
 				int var15 = var3.field189 - field4461;
 				if (var15 > 128) {
-					int var16 = var3.field187 + field2911 - Statics.field1636;
+					int var16 = var3.field187 + field2911 - field1636;
 					if (var16 < 0) {
 						var16 = 0;
 					}
-					int var17 = var3.field200 + field2911 - Statics.field1636;
+					int var17 = var3.field200 + field2911 - field1636;
 					if (var17 > field2911 + field2911) {
 						var17 = field2911 + field2911;
 					}
 					if (var16 <= var17) {
-						int var18 = var3.field204 + field2911 - Statics.field1435;
+						int var18 = var3.field204 + field2911 - field1435;
 						if (var18 < 0) {
 							var18 = 0;
 						}
-						int var19 = var3.field194 + field2911 - Statics.field1435;
+						int var19 = var3.field194 + field2911 - field1435;
 						if (var19 > field2911 + field2911) {
 							var19 = field2911 + field2911;
 						}
@@ -1858,7 +1892,7 @@ public class World {
 							var3.field195 = (var3.field193 - field1353 << 8) / var15;
 							var3.field199 = (var3.field191 - field4048 << 8) / var15;
 							var3.field186 = (var3.field205 - field4048 << 8) / var15;
-							Statics.field3075[Statics.field1316++] = var3;
+							field3075[Statics.field1316++] = var3;
 						}
 					}
 				}
@@ -1897,6 +1931,86 @@ public class World {
 					var3.field954 = 0;
 					for (int var6 = 0; var6 < var3.field962; var6++) {
 						var3.field954 |= var3.field957[var6];
+					}
+				}
+			}
+		}
+	}
+
+	@ObfuscatedName("cd.a(III)V")
+	public static void method168(int arg0, int arg1, int arg2) {
+		Square var3 = field489[arg0][arg1][arg2];
+		if (var3 != null) {
+			var3.field948 = null;
+		}
+	}
+
+	@ObfuscatedName("rd.a(IIII)Z")
+	public static boolean method1320(int arg0, int arg1, int arg2, int arg3) {
+		if (method1581(arg0, arg1, arg2)) {
+			int var4 = arg1 << 7;
+			int var5 = arg2 << 7;
+			return method718(var4 + 1, ClientBuild.groundh[arg0][arg1][arg2] + arg3, var5 + 1) && method718(var4 + 128 - 1, ClientBuild.groundh[arg0][arg1 + 1][arg2] + arg3, var5 + 1) && method718(var4 + 128 - 1, ClientBuild.groundh[arg0][arg1 + 1][arg2 + 1] + arg3, var5 + 128 - 1) && method718(var4 + 1, ClientBuild.groundh[arg0][arg1][arg2 + 1] + arg3, var5 + 128 - 1);
+		} else {
+			return false;
+		}
+	}
+
+	@ObfuscatedName("od.a(Lf;IIIIIIZ)V")
+	public static void method1060(Ground arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, boolean arg7) {
+		int var8 = arg0.field1069.length;
+		for (int var9 = 0; var9 < var8; var9++) {
+			int var10 = arg0.field1069[var9] - field1353;
+			int var11 = arg0.field1064[var9] - field4461;
+			int var12 = arg0.field1053[var9] - field4048;
+			int var13 = var12 * arg3 + var10 * arg4 >> 16;
+			int var14 = var12 * arg4 - var10 * arg3 >> 16;
+			int var16 = var11 * arg2 - var14 * arg1 >> 16;
+			int var17 = var11 * arg1 + var14 * arg2 >> 16;
+			if (var17 < 50) {
+				return;
+			}
+			if (arg0.field1063 != null) {
+				Ground.field1058[var9] = var13;
+				Ground.field1072[var9] = var16;
+				Ground.field1057[var9] = var17;
+			}
+			Ground.field1055[var9] = Pix3D.field3363 + (var13 << 9) / var17;
+			Ground.field1062[var9] = Pix3D.field3361 + (var16 << 9) / var17;
+		}
+		Pix3D.field3348 = 0;
+		int var18 = arg0.field1074.length;
+		for (int var19 = 0; var19 < var18; var19++) {
+			int var20 = arg0.field1074[var19];
+			int var21 = arg0.field1056[var19];
+			int var22 = arg0.field1054[var19];
+			int var23 = Ground.field1055[var20];
+			int var24 = Ground.field1055[var21];
+			int var25 = Ground.field1055[var22];
+			int var26 = Ground.field1062[var20];
+			int var27 = Ground.field1062[var21];
+			int var28 = Ground.field1062[var22];
+			if ((var23 - var24) * (var28 - var27) - (var26 - var27) * (var25 - var24) > 0) {
+				if (field2145 && method122(field698 + Pix3D.field3363, field621 + Pix3D.field3361, var26, var27, var28, var23, var24, var25)) {
+					field2057 = arg5;
+					field1714 = arg6;
+				}
+				if (!arg7) {
+					Pix3D.field3358 = false;
+					if (var23 < 0 || var24 < 0 || var25 < 0 || var23 > Pix3D.field3350 || var24 > Pix3D.field3350 || var25 > Pix3D.field3350) {
+						Pix3D.field3358 = true;
+					}
+					if (arg0.field1063 == null || arg0.field1063[var19] == -1) {
+						if (arg0.field1073[var19] != 12345678) {
+							Pix3D.method1227(var26, var27, var28, var23, var24, var25, arg0.field1073[var19], arg0.field1070[var19], arg0.field1060[var19]);
+						}
+					} else if (field1882) {
+						int var29 = Pix3D.field3356.method438(arg0.field1063[var19]);
+						Pix3D.method1227(var26, var27, var28, var23, var24, var25, QuickChatCatTypeList.method791(var29, arg0.field1073[var19]), QuickChatCatTypeList.method791(var29, arg0.field1070[var19]), QuickChatCatTypeList.method791(var29, arg0.field1060[var19]));
+					} else if (arg0.field1068) {
+						Pix3D.method1225(var26, var27, var28, var23, var24, var25, arg0.field1073[var19], arg0.field1070[var19], arg0.field1060[var19], Ground.field1058[0], Ground.field1058[1], Ground.field1058[3], Ground.field1072[0], Ground.field1072[1], Ground.field1072[3], Ground.field1057[0], Ground.field1057[1], Ground.field1057[3], arg0.field1063[var19]);
+					} else {
+						Pix3D.method1225(var26, var27, var28, var23, var24, var25, arg0.field1073[var19], arg0.field1070[var19], arg0.field1060[var19], Ground.field1058[var20], Ground.field1058[var21], Ground.field1058[var22], Ground.field1072[var20], Ground.field1072[var21], Ground.field1072[var22], Ground.field1057[var20], Ground.field1057[var21], Ground.field1057[var22], arg0.field1063[var19]);
 					}
 				}
 			}

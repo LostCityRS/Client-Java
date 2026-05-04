@@ -74,7 +74,7 @@ public final class ClientLocAnim extends ModelSource {
 
 	@ObfuscatedName("hd.b(I)Lnc;")
 	public ModelSource method536() {
-		boolean var1 = World.field2721 != ClientBuild.field1137;
+		boolean var1 = World.field2721 != ClientBuild.groundh;
 		LocType var2 = LocType.list(this.field1472);
 		if (var2.field2770 != null) {
 			var2 = var2.method998();
@@ -96,7 +96,7 @@ public final class ClientLocAnim extends ModelSource {
 		int var7 = this.field1454 + (var4 >> 1);
 		int var8 = this.field1454 + (var4 + 1 >> 1);
 		this.method537(var6 * 128, var7 * 128);
-		int[][] var9 = ClientBuild.field1137[this.field1466];
+		int[][] var9 = ClientBuild.groundh[this.field1466];
 		int var10 = var9[var5][var8] + var9[var6][var8] + var9[var6][var7] + var9[var5][var7] >> 2;
 		int var11 = (this.field1457 << 7) + (var3 << 6);
 		int[][] var12 = null;
@@ -104,7 +104,7 @@ public final class ClientLocAnim extends ModelSource {
 		if (var1) {
 			var12 = World.field2721[0];
 		} else if (this.field1466 < 3) {
-			var12 = ClientBuild.field1137[this.field1466 + 1];
+			var12 = ClientBuild.groundh[this.field1466 + 1];
 		}
 		ModelCacheLit var14;
 		if (this.field1459 == null) {

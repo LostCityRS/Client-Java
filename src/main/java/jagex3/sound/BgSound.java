@@ -1,14 +1,16 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.Client;
 import jagex3.config.LocType;
+import jagex3.datastruct.LinkList;
 import jagex3.datastruct.Linkable;
 
 @ObfuscatedName("na")
 public final class BgSound extends Linkable {
 
+	@ObfuscatedName("fj.j")
+	public static final LinkList field1196 = new LinkList();
 	@ObfuscatedName("na.t")
 	public WaveStream field2626;
 
@@ -53,7 +55,7 @@ public final class BgSound extends Linkable {
 
 	@ObfuscatedName("bc.a(IIIIB)V")
 	public static void doMix(int arg0, int arg1, int arg2, int arg3) {
-		for (BgSound var4 = (BgSound) Statics.field1196.head(); var4 != null; var4 = (BgSound) Statics.field1196.method1619()) {
+		for (BgSound var4 = (BgSound) field1196.head(); var4 != null; var4 = (BgSound) field1196.method1619()) {
 			if (var4.field2629 != -1 || var4.field2635 != null) {
 				int var5 = 0;
 				if (var4.field2639 < arg2) {
@@ -138,7 +140,7 @@ public final class BgSound extends Linkable {
 			var5.field2634 = arg4;
 			var5.method938();
 		}
-		Statics.field1196.push(var5);
+		field1196.push(var5);
 		if (var5.field2635 != null) {
 			var5.field2628 = var5.field2645 + (int) ((double) (var5.field2640 - var5.field2645) * Math.random());
 		}
@@ -146,7 +148,7 @@ public final class BgSound extends Linkable {
 
 	@ObfuscatedName("dj.f(I)V")
 	public static void method288() {
-		for (BgSound var0 = (BgSound) Statics.field1196.head(); var0 != null; var0 = (BgSound) Statics.field1196.method1619()) {
+		for (BgSound var0 = (BgSound) field1196.head(); var0 != null; var0 = (BgSound) field1196.method1619()) {
 			if (var0.field2644 != null) {
 				Client.mixer.stopStream(var0.field2644);
 				var0.field2644 = null;
@@ -156,12 +158,12 @@ public final class BgSound extends Linkable {
 				var0.field2626 = null;
 			}
 		}
-		Statics.field1196.method1616();
+		field1196.method1616();
 	}
 
 	@ObfuscatedName("ag.a(B)V")
 	public static void method44() {
-		for (BgSound var0 = (BgSound) Statics.field1196.head(); var0 != null; var0 = (BgSound) Statics.field1196.method1619()) {
+		for (BgSound var0 = (BgSound) field1196.head(); var0 != null; var0 = (BgSound) field1196.method1619()) {
 			if (var0.field2634 != null) {
 				var0.method938();
 			}
