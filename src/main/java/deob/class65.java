@@ -1,5 +1,8 @@
 package deob;
 
+import jagex3.datastruct.Linkable;
+
+// todo: worldmap related
 @ObfuscatedName("fi")
 public final class class65 extends Linkable {
 
