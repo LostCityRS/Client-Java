@@ -4,22 +4,22 @@ package deob;
 public final class class5 {
 
 	@ObfuscatedName("ad.a")
-	public final int field64 = class195.method1353(8);
+	public final int field64 = JagVorbis.readBits(8);
 
 	@ObfuscatedName("ad.b")
-	public final int field65 = class195.method1353(24);
+	public final int field65 = JagVorbis.readBits(24);
 
 	@ObfuscatedName("ad.c")
-	public final int field66 = class195.method1353(24);
+	public final int field66 = JagVorbis.readBits(24);
 
 	@ObfuscatedName("ad.d")
-	public final int field67 = class195.method1353(16);
+	public final int field67 = JagVorbis.readBits(16);
 
 	@ObfuscatedName("ad.e")
-	public final int field68 = class195.method1353(6) + 1;
+	public final int field68 = JagVorbis.readBits(6) + 1;
 
 	@ObfuscatedName("ad.f")
-	public final int field69 = class195.method1353(24) + 1;
+	public final int field69 = JagVorbis.readBits(24) + 1;
 
 	@ObfuscatedName("ad.g")
 	public final int[] field70;
@@ -28,16 +28,16 @@ public final class class5 {
 		int[] var1 = new int[this.field68];
 		for (int var2 = 0; var2 < this.field68; var2++) {
 			int var3 = 0;
-			int var4 = class195.method1353(3);
-			boolean var5 = class195.method1348() != 0;
+			int var4 = JagVorbis.readBits(3);
+			boolean var5 = JagVorbis.readBit() != 0;
 			if (var5) {
-				var3 = class195.method1353(5);
+				var3 = JagVorbis.readBits(5);
 			}
 			var1[var2] = var3 << 3 | var4;
 		}
 		this.field70 = new int[this.field68 * 8];
 		for (int var6 = 0; var6 < this.field68 * 8; var6++) {
-			this.field70[var6] = (var1[var6 >> 3] & 0x1 << (var6 & 0x7)) == 0 ? -1 : class195.method1353(8);
+			this.field70[var6] = (var1[var6 >> 3] & 0x1 << (var6 & 0x7)) == 0 ? -1 : JagVorbis.readBits(8);
 		}
 	}
 
@@ -49,7 +49,7 @@ public final class class5 {
 		if (arg2) {
 			return;
 		}
-		int var5 = class195.field3724[this.field64].field308;
+		int var5 = JagVorbis.field3724[this.field64].field308;
 		int var6 = this.field66 - this.field65;
 		int var7 = var6 / this.field69;
 		int[] var8 = new int[var7];
@@ -57,7 +57,7 @@ public final class class5 {
 			int var10 = 0;
 			while (var10 < var7) {
 				if (var9 == 0) {
-					int var11 = class195.field3724[this.field64].method95();
+					int var11 = JagVorbis.field3724[this.field64].method95();
 					for (int var12 = var5 - 1; var12 >= 0; var12--) {
 						if (var10 + var12 < var7) {
 							var8[var10 + var12] = var11 % this.field68;
@@ -70,7 +70,7 @@ public final class class5 {
 					int var15 = this.field70[var14 * 8 + var9];
 					if (var15 >= 0) {
 						int var16 = this.field65 + var10 * this.field69;
-						class19 var17 = class195.field3724[var15];
+						CodeBook var17 = JagVorbis.field3724[var15];
 						if (this.field67 == 0) {
 							int var18 = this.field69 / var17.field308;
 							for (int var19 = 0; var19 < var18; var19++) {

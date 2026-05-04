@@ -13,46 +13,31 @@ public final class class68 implements class61 {
 	public final byte[] field1224;
 
 	@ObfuscatedName("ga.e")
-	public final class144 field1226;
+	public final Js5 field1226;
 
 	@ObfuscatedName("ga.f")
 	public int field1227 = 50;
-
-	@ObfuscatedName("ga.g")
-	public static final class88 field1228 = class208.method1423(105, "Connecting to update server");
 
 	@ObfuscatedName("ga.h")
 	public final short[] field1229;
 
 	@ObfuscatedName("ga.k")
-	public final class92 field1232;
+	public final LruCache field1232;
 
 	@ObfuscatedName("ga.l")
 	public final byte[] field1233;
 
-	@ObfuscatedName("ga.m")
-	public static final class88 field1234 = class208.method1423(105, "Unerwartete Antwort vom Anmelde)2Server)3");
-
 	@ObfuscatedName("ga.n")
-	public final class144 field1235;
-
-	@ObfuscatedName("ga.o")
-	public static final class156 field1236 = new class156(0, 0);
+	public final Js5 field1235;
 
 	@ObfuscatedName("ga.p")
 	public final boolean[] field1237;
-
-	@ObfuscatedName("ga.q")
-	public static final class88 field1238 = class208.method1423(105, " (X");
 
 	@ObfuscatedName("ga.t")
 	public final boolean[] field1241;
 
 	@ObfuscatedName("ga.v")
 	public final boolean[] field1243;
-
-	@ObfuscatedName("ga.D")
-	public static class88 field1251 = field1228;
 
 	@ObfuscatedName("ga.A")
 	public boolean field1248 = false;
@@ -63,19 +48,14 @@ public final class class68 implements class61 {
 	@ObfuscatedName("ga.C")
 	public final byte[] field1250;
 
-	@ObfuscatedName("ga.a(IZ)Z")
-	public static boolean method465(int arg0) {
-		return (arg0 >> 28 & 0x1) != 0;
-	}
-
-	public class68(class144 arg0, class144 arg1, class144 arg2, int arg3, boolean arg4) {
+	public class68(Js5 arg0, Js5 arg1, Js5 arg2, int arg3, boolean arg4) {
 		this.field1248 = arg4;
 		this.field1226 = arg0;
 		this.field1235 = arg2;
 		this.field1227 = 20;
-		this.field1232 = new class92(this.field1227);
-		class46 var6 = new class46(arg1.method939(0, 0));
-		int var7 = var6.method301();
+		this.field1232 = new LruCache(this.field1227);
+		Packet var6 = new Packet(arg1.getFile(0, 0));
+		int var7 = var6.g2();
 		this.field1222 = new byte[var7];
 		this.field1223 = new boolean[var7];
 		this.field1252 = new boolean[var7];
@@ -87,26 +67,26 @@ public final class class68 implements class61 {
 		this.field1233 = new byte[var7];
 		this.field1229 = new short[var7];
 		for (int var8 = 0; var8 < var7; var8++) {
-			this.field1243[var8] = var6.method347() == 1;
+			this.field1243[var8] = var6.g1() == 1;
 		}
 		for (int var9 = 0; var9 < var7; var9++) {
 			if (this.field1243[var9]) {
-				this.field1223[var9] = var6.method347() == 1;
+				this.field1223[var9] = var6.g1() == 1;
 			}
 		}
 		for (int var10 = 0; var10 < var7; var10++) {
 			if (this.field1243[var10]) {
-				this.field1252[var10] = var6.method347() == 1;
+				this.field1252[var10] = var6.g1() == 1;
 			}
 		}
 		for (int var11 = 0; var11 < var7; var11++) {
 			if (this.field1243[var11]) {
-				this.field1237[var11] = var6.method347() == 1;
+				this.field1237[var11] = var6.g1() == 1;
 			}
 		}
 		for (int var12 = 0; var12 < var7; var12++) {
 			if (this.field1243[var12]) {
-				this.field1241[var12] = var6.method347() == 1;
+				this.field1241[var12] = var6.g1() == 1;
 			}
 		}
 		for (int var13 = 0; var13 < var7; var13++) {
@@ -131,7 +111,7 @@ public final class class68 implements class61 {
 		}
 		for (int var17 = 0; var17 < var7; var17++) {
 			if (this.field1243[var17]) {
-				this.field1229[var17] = (short) var6.method301();
+				this.field1229[var17] = (short) var6.g2();
 			}
 		}
 	}
@@ -167,11 +147,11 @@ public final class class68 implements class61 {
 		if (var2 != null) {
 			return var2;
 		}
-		byte[] var3 = this.field1226.method939(0, arg0);
+		byte[] var3 = this.field1226.getFile(0, arg0);
 		if (var3 == null) {
 			return null;
 		} else {
-			class46 var4 = new class46(var3);
+			Packet var4 = new Packet(var3);
 			class199 var5 = new class199(var4);
 			this.field1232.method663((long) arg0, var5);
 			return var5;
@@ -185,8 +165,8 @@ public final class class68 implements class61 {
 	}
 
 	@ObfuscatedName("ga.b(I)V")
-	public void method464() {
-		this.field1232.method670();
+	public void reset() {
+		this.field1232.clear();
 	}
 
 	@ObfuscatedName("ga.c(II)[I")

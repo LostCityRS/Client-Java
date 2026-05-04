@@ -1,28 +1,7 @@
 package deob;
 
 @ObfuscatedName("sc")
-public final class class199 extends class136 {
-
-	@ObfuscatedName("sc.ab")
-	public static int field3809;
-
-	@ObfuscatedName("sc.bb")
-	public static final class248 field3810 = new class248();
-
-	@ObfuscatedName("sc.cb")
-	public static final class88 field3811 = class208.method1423(105, "Der Anmelde)2Server ist offline)3");
-
-	@ObfuscatedName("sc.F")
-	public static int field3788 = 0;
-
-	@ObfuscatedName("sc.D")
-	public static final class88 field3787 = class208.method1423(105, " ");
-
-	@ObfuscatedName("sc.M")
-	public static final class88 field3795 = class208.method1423(105, "p11_full");
-
-	@ObfuscatedName("sc.W")
-	public static final class88 field3805 = class208.method1423(105, "Art");
+public final class class199 extends Linkable2 {
 
 	@ObfuscatedName("sc.R")
 	public boolean field3800 = false;
@@ -48,53 +27,21 @@ public final class class199 extends class136 {
 	@ObfuscatedName("sc.Z")
 	public int[] field3808;
 
-	@ObfuscatedName("sc.a(BLnb;Lnb;)V")
-	public static void method1364(class144 arg0, class144 arg1) {
-		class43.field733 = arg0;
-		class129.field2422 = arg1;
-		class23.field374 = class129.field2422.method942(3);
-	}
-
-	@ObfuscatedName("sc.a(IJ)V")
-	public static void method1365(long arg0) {
-		try {
-			Thread.sleep(arg0);
-		} catch (InterruptedException var2) {
-		}
-	}
-
-	@ObfuscatedName("sc.d(I)V")
-	public static void method1370() {
-		for (class242 var0 = (class242) class42.field714.method1610(); var0 != null; var0 = (class242) class42.field714.method1619()) {
-			class18 var1 = var0.field4474;
-			if (var1.field292 != class149.field2907 || var1.field302) {
-				var0.method460();
-			} else if (var1.field287 <= class117.field2113) {
-				var1.method90(class17.field261);
-				if (var1.field302) {
-					var0.method460();
-				} else {
-					class126.method859(var1.field292, var1.field296, var1.field290, var1.field295, 60, var1, 0, -1L, false);
-				}
-			}
-		}
-	}
-
-	public class199(class46 arg0) {
+	public class199(Packet arg0) {
 		this.field3791 = new class12(arg0);
-		this.field3794 = arg0.method347() == 1;
-		this.field3801 = arg0.method347() == 1;
-		arg0.method347();
-		arg0.method347();
-		int var2 = arg0.method347() & 0x3;
+		this.field3794 = arg0.g1() == 1;
+		this.field3801 = arg0.g1() == 1;
+		arg0.g1();
+		arg0.g1();
+		int var2 = arg0.g1() & 0x3;
 		this.field3790 = arg0.method324();
 		this.field3807 = arg0.method324();
-		arg0.method347();
-		arg0.method347();
+		arg0.g1();
+		arg0.g1();
 	}
 
 	@ObfuscatedName("sc.a(Lnb;ZZLfe;)[I")
-	public int[] method1366(class144 arg0, boolean arg1, class61 arg2) {
+	public int[] method1366(Js5 arg0, boolean arg1, class61 arg2) {
 		if (this.field3791.method63(arg2, arg0)) {
 			int var4 = arg1 ? 64 : 128;
 			return this.field3791.method60(1.0D, var4, this.field3801, arg0, arg2, var4, false);
@@ -108,8 +55,8 @@ public final class class199 extends class136 {
 		if (this.field3808 == null || this.field3807 == 0 && this.field3790 == 0) {
 			return;
 		}
-		if (class225.field4218 == null || class225.field4218.length < this.field3808.length) {
-			class225.field4218 = new int[this.field3808.length];
+		if (Statics.field4218 == null || Statics.field4218.length < this.field3808.length) {
+			Statics.field4218 = new int[this.field3808.length];
 		}
 		int var2 = this.field3808.length;
 		int var3 = this.field3790 * arg0;
@@ -122,16 +69,16 @@ public final class class199 extends class136 {
 			for (int var10 = 0; var10 < var5; var10++) {
 				int var11 = var8 + var10;
 				int var12 = var9 + (var7 & var3 + var10);
-				class225.field4218[var11] = this.field3808[var12];
+				Statics.field4218[var11] = this.field3808[var12];
 			}
 		}
 		int[] var13 = this.field3808;
-		this.field3808 = class225.field4218;
-		class225.field4218 = var13;
+		this.field3808 = Statics.field4218;
+		Statics.field4218 = var13;
 	}
 
 	@ObfuscatedName("sc.a(Lfe;ILnb;)Z")
-	public boolean method1368(class61 arg0, class144 arg1) {
+	public boolean method1368(class61 arg0, Js5 arg1) {
 		return this.field3791.method63(arg0, arg1);
 	}
 
@@ -141,7 +88,7 @@ public final class class199 extends class136 {
 	}
 
 	@ObfuscatedName("sc.a(Lfe;FLnb;ZZ)[I")
-	public int[] method1369(class61 arg0, float arg1, class144 arg2, boolean arg3) {
+	public int[] method1369(class61 arg0, float arg1, Js5 arg2, boolean arg3) {
 		if (this.field3808 == null || arg1 != this.field3798) {
 			if (!this.field3791.method63(arg0, arg2)) {
 				return null;

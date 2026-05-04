@@ -82,30 +82,30 @@ public final class class75 {
 		int var8 = arg4[arg0 + 3];
 		int var9 = arg4[arg0 + 4];
 		int var10 = arg4[arg0] * 16384 + arg4[arg0 + 1] * 128 + arg4[arg0 + 2];
-		int var11 = var6 + var7 * class72.field1333;
-		int var12 = class72.field1333 - var8;
+		int var11 = var6 + var7 * Pix2D.field1333;
+		int var12 = Pix2D.field1333 - var8;
 		int var13 = 0;
-		if (var7 < class72.field1334) {
-			int var14 = class72.field1334 - var7;
+		if (var7 < Pix2D.field1334) {
+			int var14 = Pix2D.field1334 - var7;
 			var9 -= var14;
-			var7 = class72.field1334;
+			var7 = Pix2D.field1334;
 			var10 += var14 * var8;
-			var11 += var14 * class72.field1333;
+			var11 += var14 * Pix2D.field1333;
 		}
-		if (var7 + var9 >= class72.field1335) {
-			var9 -= var7 + var9 + 1 - class72.field1335;
+		if (var7 + var9 >= Pix2D.field1335) {
+			var9 -= var7 + var9 + 1 - Pix2D.field1335;
 		}
-		if (var6 < class72.field1332) {
-			int var15 = class72.field1332 - var6;
+		if (var6 < Pix2D.field1332) {
+			int var15 = Pix2D.field1332 - var6;
 			var8 -= var15;
-			var6 = class72.field1332;
+			var6 = Pix2D.field1332;
 			var10 += var15;
 			var11 += var15;
 			var13 = var15;
 			var12 += var15;
 		}
-		if (var6 + var8 >= class72.field1336) {
-			int var16 = var6 + var8 + 1 - class72.field1336;
+		if (var6 + var8 >= Pix2D.field1336) {
+			int var16 = var6 + var8 + 1 - Pix2D.field1336;
 			var8 -= var16;
 			var13 += var16;
 			var12 += var16;
@@ -114,14 +114,14 @@ public final class class75 {
 			return;
 		}
 		if (this.field1360) {
-			this.method513(class72.field1331, arg4, arg3, var10, var11, var8, var9, var12, var13);
+			this.method513(Pix2D.field1331, arg4, arg3, var10, var11, var8, var9, var12, var13);
 			return;
 		}
-		this.method512(class72.field1331, arg4, arg3, var10, var11, var8, var9, var12, var13);
+		this.method512(Pix2D.field1331, arg4, arg3, var10, var11, var8, var9, var12, var13);
 	}
 
 	@ObfuscatedName("gi.a(Li;IIIZ)V")
-	public void method507(class88 arg0, int arg1, int arg2, int arg3, boolean arg4) {
+	public void method507(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
 		if (this.field1360 || arg3 == 0) {
 			arg4 = false;
 		}
@@ -159,7 +159,7 @@ public final class class75 {
 		int var8 = arg1.getMaxAscent();
 		int var9 = arg1.getMaxAscent() + arg1.getMaxDescent();
 		int var10 = arg1.getHeight();
-		Image var11 = class154.field2975.createImage(var6, var9);
+		Image var11 = GameShell.canvas.createImage(var6, var9);
 		Graphics var12 = var11.getGraphics();
 		var12.setColor(Color.black);
 		var12.fillRect(0, 0, var6, var9);
@@ -237,7 +237,7 @@ public final class class75 {
 	}
 
 	@ObfuscatedName("gi.a(Li;)I")
-	public int method510(class88 arg0) {
+	public int method510(JagString arg0) {
 		int var2 = 0;
 		for (int var3 = 0; var3 < arg0.method604(); var3++) {
 			if (arg0.method599(var3) == 64 && var3 + 4 < arg0.method604() && arg0.method599(var3 + 4) == 64) {
@@ -252,10 +252,10 @@ public final class class75 {
 	}
 
 	@ObfuscatedName("gi.b(Li;IIIZ)V")
-	public void method511(class88 arg0, int arg1, int arg2, int arg3) {
+	public void method511(JagString arg0, int arg1, int arg2, int arg3) {
 		int var5 = this.method510(arg0) / 2;
 		int var6 = this.method505();
-		if (arg1 - var5 <= class72.field1336 && (arg1 + var5 >= class72.field1332 && (arg2 - var6 <= class72.field1335 && arg2 >= 0))) {
+		if (arg1 - var5 <= Pix2D.field1336 && (arg1 + var5 >= Pix2D.field1332 && (arg2 - var6 <= Pix2D.field1335 && arg2 >= 0))) {
 			this.method507(arg0, arg1 - var5, arg2, arg3, true);
 		}
 	}

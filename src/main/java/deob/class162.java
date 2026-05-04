@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("oj")
-public final class class162 extends class51 {
+public final class class162 extends PcmStream {
 
 	@ObfuscatedName("oj.C")
 	public final int field3119;
@@ -672,7 +672,7 @@ public final class class162 extends class51 {
 
 	@ObfuscatedName("oj.a(Ltf;II)Loj;")
 	public static class162 method1124(class213 arg0, int arg1) {
-		return arg0.field4031 == null || arg0.field4031.length == 0 ? null : new class162(arg0, (int) ((long) arg0.field4028 * 256L * (long) 100 / (long) (class11.field161 * 100)), arg1 << 6);
+		return arg0.field4031 == null || arg0.field4031.length == 0 ? null : new class162(arg0, (int) ((long) arg0.field4028 * 256L * (long) 100 / (long) (PcmPlayer.frequency * 100)), arg1 << 6);
 	}
 
 	@ObfuscatedName("oj.d(II[B[IIIIIIIILoj;II)I")
@@ -740,12 +740,12 @@ public final class class162 extends class51 {
 	public synchronized void method1086(int arg0) {
 		if (arg0 == 0) {
 			this.method1091();
-			this.method460();
+			this.unlink();
 		} else if (this.field3128 == 0 && this.field3114 == 0) {
 			this.field3126 = 0;
 			this.field3124 = 0;
 			this.field3121 = 0;
-			this.method460();
+			this.unlink();
 		} else {
 			int var2 = -this.field3121;
 			if (this.field3121 > var2) {
@@ -833,7 +833,7 @@ public final class class162 extends class51 {
 		} else if (this.field3124 == Integer.MIN_VALUE) {
 			this.field3124 = 0;
 			this.field3121 = this.field3128 = this.field3114 = 0;
-			this.method460();
+			this.unlink();
 			return true;
 		} else {
 			this.method1114();
@@ -908,12 +908,12 @@ public final class class162 extends class51 {
 		do {
 			if (this.field3126 <= 0) {
 				if (this.field3115 == 256 && (this.field3117 & 0xFF) == 0) {
-					if (class7.field99) {
+					if (PcmPlayer.field99) {
 						return method1096(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, arg3, arg2, this);
 					}
 					return method1101(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, arg3, arg2, this);
 				}
-				if (class7.field99) {
+				if (PcmPlayer.field99) {
 					return method1125(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, arg3, arg2, this, this.field3115, arg4);
 				}
 				return method1123(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, arg3, arg2, this, this.field3115, arg4);
@@ -924,12 +924,12 @@ public final class class162 extends class51 {
 			}
 			this.field3126 += arg1;
 			if (this.field3115 == 256 && (this.field3117 & 0xFF) == 0) {
-				if (class7.field99) {
+				if (PcmPlayer.field99) {
 					arg1 = method1099(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, this.field3118, this.field3125, var6, arg2, this);
 				} else {
 					arg1 = method1122(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, this.field3120, var6, arg2, this);
 				}
-			} else if (class7.field99) {
+			} else if (PcmPlayer.field99) {
 				arg1 = method1090(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, this.field3118, this.field3125, var6, arg2, this, this.field3115, arg4);
 			} else {
 				arg1 = method1087(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, this.field3120, var6, arg2, this, this.field3115, arg4);
@@ -975,13 +975,13 @@ public final class class162 extends class51 {
 
 	@ObfuscatedName("oj.a()Lef;")
 	@Override
-	public class51 method380() {
+	public PcmStream method380() {
 		return null;
 	}
 
 	@ObfuscatedName("oj.d()Lef;")
 	@Override
-	public class51 method385() {
+	public PcmStream method385() {
 		return null;
 	}
 
@@ -1043,7 +1043,7 @@ public final class class162 extends class51 {
 		if (this.field3117 < 0) {
 			if (this.field3115 <= 0) {
 				this.method1113();
-				this.method460();
+				this.unlink();
 				return;
 			}
 			this.field3117 = 0;
@@ -1051,7 +1051,7 @@ public final class class162 extends class51 {
 		if (this.field3117 >= var7) {
 			if (this.field3115 >= 0) {
 				this.method1113();
-				this.method460();
+				this.unlink();
 				return;
 			}
 			this.field3117 = var7 - 1;
@@ -1126,7 +1126,7 @@ public final class class162 extends class51 {
 				if (this.field3117 < 0) {
 					this.field3117 = -1;
 					this.method1113();
-					this.method460();
+					this.unlink();
 					return;
 				}
 			} else {
@@ -1134,7 +1134,7 @@ public final class class162 extends class51 {
 				if (this.field3117 >= var7) {
 					this.field3117 = var7;
 					this.method1113();
-					this.method460();
+					this.unlink();
 				}
 			}
 		} else if (this.field3122) {
@@ -1189,12 +1189,12 @@ public final class class162 extends class51 {
 		do {
 			if (this.field3126 <= 0) {
 				if (this.field3115 == -256 && (this.field3117 & 0xFF) == 0) {
-					if (class7.field99) {
+					if (PcmPlayer.field99) {
 						return method1094(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, arg3, arg2, this);
 					}
 					return method1089(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, arg3, arg2, this);
 				}
-				if (class7.field99) {
+				if (PcmPlayer.field99) {
 					return method1112(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, arg3, arg2, this, this.field3115, arg4);
 				}
 				return method1107(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, arg3, arg2, this, this.field3115, arg4);
@@ -1205,12 +1205,12 @@ public final class class162 extends class51 {
 			}
 			this.field3126 += arg1;
 			if (this.field3115 == -256 && (this.field3117 & 0xFF) == 0) {
-				if (class7.field99) {
+				if (PcmPlayer.field99) {
 					arg1 = method1097(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, this.field3118, this.field3125, var6, arg2, this);
 				} else {
 					arg1 = method1095(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, this.field3120, var6, arg2, this);
 				}
-			} else if (class7.field99) {
+			} else if (PcmPlayer.field99) {
 				arg1 = method1109(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, this.field3118, this.field3125, var6, arg2, this, this.field3115, arg4);
 			} else {
 				arg1 = method1110(((class213) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, this.field3120, var6, arg2, this, this.field3115, arg4);
@@ -1241,7 +1241,7 @@ public final class class162 extends class51 {
 				if (this.field3124 == Integer.MIN_VALUE) {
 					this.field3124 = 0;
 					this.field3121 = this.field3128 = this.field3114 = 0;
-					this.method460();
+					this.unlink();
 					arg0 = this.field3126;
 				}
 				this.field3126 = 0;
@@ -1264,7 +1264,7 @@ public final class class162 extends class51 {
 		if (this.field3117 < 0) {
 			if (this.field3115 <= 0) {
 				this.method1113();
-				this.method460();
+				this.unlink();
 				return;
 			}
 			this.field3117 = 0;
@@ -1272,7 +1272,7 @@ public final class class162 extends class51 {
 		if (this.field3117 >= var5) {
 			if (this.field3115 >= 0) {
 				this.method1113();
-				this.method460();
+				this.unlink();
 				return;
 			}
 			this.field3117 = var5 - 1;
@@ -1337,13 +1337,13 @@ public final class class162 extends class51 {
 				if (this.field3117 < 0) {
 					this.field3117 = -1;
 					this.method1113();
-					this.method460();
+					this.unlink();
 					return;
 				}
 			} else if (this.field3117 >= var5) {
 				this.field3117 = var5;
 				this.method1113();
-				this.method460();
+				this.unlink();
 			}
 		} else if (this.field3122) {
 			if (this.field3115 < 0) {

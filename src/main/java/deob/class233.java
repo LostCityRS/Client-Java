@@ -3,14 +3,8 @@ package deob;
 @ObfuscatedName("vd")
 public final class class233 {
 
-	@ObfuscatedName("vd.a")
-	public static class22 field4365;
-
 	@ObfuscatedName("vd.b")
 	public static int field4366;
-
-	@ObfuscatedName("vd.c")
-	public static final class88 field4367 = class208.method1423(105, "hint_headicons");
 
 	@ObfuscatedName("vd.d")
 	public static final boolean[] field4368 = new boolean[5];
@@ -20,101 +14,14 @@ public final class class233 {
 
 	@ObfuscatedName("vd.a(ZI)V")
 	public static void method1551(int arg0) {
-		class126.field2330 = arg0;
-		class189.field3659 = -1;
-		class34.field594 = -1;
+		NpcType.field2330 = arg0;
+		Statics.field3659 = -1;
+		Statics.field594 = -1;
 		class245.method1604();
 	}
 
-	@ObfuscatedName("vd.a(IB)Lc;")
-	public static class23 method1552(int arg0) {
-		if (arg0 == 0) {
-			return new class172();
-		} else if (arg0 == 1) {
-			return new class135();
-		} else if (arg0 == 2) {
-			return new class80();
-		} else if (arg0 == 3) {
-			return new class28();
-		} else if (arg0 == 4) {
-			return new class45();
-		} else if (arg0 == 5) {
-			return new class94();
-		} else if (arg0 == 6) {
-			return new class116();
-		} else if (arg0 == 7) {
-			return new class171();
-		} else if (arg0 == 8) {
-			return new class212();
-		} else if (arg0 == 9) {
-			return new class57();
-		} else if (arg0 == 10) {
-			return new class220();
-		} else if (arg0 == 11) {
-			return new class139();
-		} else if (arg0 == 12) {
-			return new class132();
-		} else if (arg0 == 13) {
-			return new class208();
-		} else if (arg0 == 14) {
-			return new class180();
-		} else if (arg0 == 15) {
-			return new class120();
-		} else if (arg0 == 16) {
-			return new class211();
-		} else if (arg0 == 17) {
-			return new class167();
-		} else if (arg0 == 18) {
-			return new class58();
-		} else if (arg0 == 19) {
-			return new class60();
-		} else if (arg0 == 20) {
-			return new class11();
-		} else if (arg0 == 21) {
-			return new class34();
-		} else if (arg0 == 22) {
-			return new class234();
-		} else if (arg0 == 23) {
-			return new class194();
-		} else if (arg0 == 24) {
-			return new class152();
-		} else if (arg0 == 25) {
-			return new class128();
-		} else if (arg0 == 26) {
-			return new class62();
-		} else if (arg0 == 27) {
-			return new class232();
-		} else if (arg0 == 28) {
-			return new class186();
-		} else if (arg0 == 29) {
-			return new class133();
-		} else if (arg0 == 30) {
-			return new class113();
-		} else if (arg0 == 31) {
-			return new class184();
-		} else if (arg0 == 32) {
-			return new class85();
-		} else if (arg0 == 33) {
-			return new class2();
-		} else if (arg0 == 34) {
-			return new class35();
-		} else if (arg0 == 35) {
-			return new class43();
-		} else if (arg0 == 36) {
-			return new class196();
-		} else if (arg0 == 37) {
-			return new class104();
-		} else if (arg0 == 38) {
-			return new class79();
-		} else if (arg0 == 39) {
-			return new class140();
-		} else {
-			return null;
-		}
-	}
-
 	@ObfuscatedName("vd.a(IILnb;I)Lrh;")
-	public static class193 method1553(class144 arg0, int arg1) {
-		return class47.method358(arg0, arg1, 0) ? class164.method1129() : null;
+	public static SoftwarePix8 method1553(Js5 arg0, int arg1) {
+		return PixLoader.method358(arg0, arg1, 0) ? PixLoader.method1129() : null;
 	}
 }

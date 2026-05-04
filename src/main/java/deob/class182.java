@@ -15,7 +15,7 @@ public final class class182 extends class86 {
 		if (var5 < var3) {
 			var5 = var3;
 		}
-		class21.method98(var5 / 1000000L);
+		ThreadUtil.sleepPrecise(var5 / 1000000L);
 		long var8 = System.nanoTime();
 		while (var7 < 10 && (var7 < 1 || this.field3598 < var8)) {
 			var7++;

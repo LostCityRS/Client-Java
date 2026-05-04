@@ -2,7 +2,6 @@ package deob;
 
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.Shape;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -12,7 +11,7 @@ import java.awt.image.WritableRaster;
 import java.util.Hashtable;
 
 @ObfuscatedName("gj")
-public final class class76 extends class228 {
+public final class class76 extends PixMap {
 
 	@ObfuscatedName("gj.q")
 	public Component field1365;
@@ -33,7 +32,7 @@ public final class class76 extends class228 {
 
 	@ObfuscatedName("gj.a(BIIIILjava/awt/Graphics;)V")
 	@Override
-	public void method242(int arg0, int arg1, int arg2, int arg3, Graphics arg4) {
+	public void draw(int arg0, int arg1, int arg2, int arg3, Graphics arg4) {
 		Shape var6 = arg4.getClip();
 		arg4.clipRect(arg3, arg2, arg1, arg0);
 		arg4.drawImage(this.field4272, 0, 0, this.field1365);

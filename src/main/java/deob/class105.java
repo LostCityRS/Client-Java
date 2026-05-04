@@ -1,16 +1,10 @@
 package deob;
 
 @ObfuscatedName("jg")
-public final class class105 extends class51 {
+public final class class105 extends PcmStream {
 
 	@ObfuscatedName("jg.z")
-	public static final class248 field1900 = new class248();
-
-	@ObfuscatedName("jg.I")
-	public static final class88 field1909 = class208.method1423(105, "welle2:");
-
-	@ObfuscatedName("jg.H")
-	public static final int[] field1908 = new int[128];
+	public static final LinkList field1900 = new LinkList();
 
 	@ObfuscatedName("jg.R")
 	public static int field1918 = 0;
@@ -18,23 +12,17 @@ public final class class105 extends class51 {
 	@ObfuscatedName("jg.J")
 	public static int field1910 = 0;
 
-	@ObfuscatedName("jg.P")
-	public static final class88 field1916 = class208.method1423(105, "Anmelde)2Zeitlimit -Uberschritten)3");
-
 	@ObfuscatedName("jg.G")
 	public static final int[] field1907 = new int[25];
 
 	@ObfuscatedName("jg.M")
-	public final class248 field1913 = new class248();
+	public final LinkList field1913 = new LinkList();
 
 	@ObfuscatedName("jg.S")
-	public final class224 field1919 = new class224();
+	public final Mixer field1919 = new Mixer();
 
 	@ObfuscatedName("jg.E")
-	public final class170 field1905;
-
-	@ObfuscatedName("jg.A")
-	public static class169 field1901;
+	public final MidiPlayer field1905;
 
 	@ObfuscatedName("jg.L")
 	public static int[][][] field1912;
@@ -45,10 +33,10 @@ public final class class105 extends class51 {
 		int var6 = arg4 - arg0;
 		if (var6 == 0) {
 			if (var5 != 0) {
-				class109.method753(arg2, arg3, arg0, arg1);
+				SeqType.method753(arg2, arg3, arg0, arg1);
 			}
 		} else if (var5 == 0) {
-			class46.method310(arg3, arg4, arg0, arg2);
+			Statics.method310(arg3, arg4, arg0, arg2);
 		} else {
 			if (var6 < 0) {
 				var6 = -var6;
@@ -83,7 +71,7 @@ public final class class105 extends class51 {
 			int var16 = arg3 < arg1 ? 1 : -1;
 			if (var7) {
 				for (int var17 = arg0; var17 <= arg4; var17++) {
-					class3.field42[var17][var14] = arg2;
+					Statics.field42[var17][var14] = arg2;
 					var15 += var12;
 					if (var15 > 0) {
 						var14 += var16;
@@ -92,7 +80,7 @@ public final class class105 extends class51 {
 				}
 			} else {
 				for (int var18 = arg0; var18 <= arg4; var18++) {
-					class3.field42[var14][var18] = arg2;
+					Statics.field42[var14][var18] = arg2;
 					var15 += var12;
 					if (var15 > 0) {
 						var15 -= var13;
@@ -104,15 +92,15 @@ public final class class105 extends class51 {
 	}
 
 	@ObfuscatedName("jg.a(Lea;Z)V")
-	public static void method725(class46 arg0) {
-		if (class175.field3529 != null) {
+	public static void method725(Packet arg0) {
+		if (GameShell.field3529 != null) {
 			try {
-				class175.field3529.method818(0L);
-				class175.field3529.method806(arg0.field842, 24, arg0.field831);
+				GameShell.field3529.method818(0L);
+				GameShell.field3529.method806(arg0.data, 24, arg0.pos);
 			} catch (Exception var1) {
 			}
 		}
-		arg0.field831 += 24;
+		arg0.pos += 24;
 	}
 
 	@ObfuscatedName("jg.a(III)Z")
@@ -122,10 +110,10 @@ public final class class105 extends class51 {
 
 	@ObfuscatedName("jg.d(I)I")
 	public static int method729() {
-		return class114.field2068;
+		return ClientKeyboardListener.field2068;
 	}
 
-	public class105(class170 arg0) {
+	public class105(MidiPlayer arg0) {
 		this.field1905 = arg0;
 	}
 
@@ -139,7 +127,7 @@ public final class class105 extends class51 {
 	@Override
 	public void method384(int arg0) {
 		this.field1919.method384(arg0);
-		for (class127 var2 = (class127) this.field1913.method1610(); var2 != null; var2 = (class127) this.field1913.method1619()) {
+		for (class127 var2 = (class127) this.field1913.head(); var2 != null; var2 = (class127) this.field1913.method1619()) {
 			if (!this.field1905.method1200(var2)) {
 				int var3 = arg0;
 				do {
@@ -157,8 +145,8 @@ public final class class105 extends class51 {
 
 	@ObfuscatedName("jg.d()Lef;")
 	@Override
-	public class51 method385() {
-		class127 var1 = (class127) this.field1913.method1610();
+	public PcmStream method385() {
+		class127 var1 = (class127) this.field1913.head();
 		if (var1 == null) {
 			return null;
 		} else if (var1.field2391 == null) {
@@ -171,7 +159,7 @@ public final class class105 extends class51 {
 	@ObfuscatedName("jg.a(IILlg;)V")
 	public void method724(int arg0, class127 arg1) {
 		if ((this.field1905.field3248[arg1.field2385] & 0x4) != 0 && arg1.field2386 < 0) {
-			int var3 = this.field1905.field3282[arg1.field2385] / class11.field161;
+			int var3 = this.field1905.field3282[arg1.field2385] / PcmPlayer.frequency;
 			int var4 = (var3 + 1048575 - arg1.field2390) / var3;
 			arg1.field2390 = arg1.field2390 + arg0 * var3 & 0xFFFFF;
 			if (arg0 >= var4) {
@@ -192,7 +180,7 @@ public final class class105 extends class51 {
 
 	@ObfuscatedName("jg.a()Lef;")
 	@Override
-	public class51 method380() {
+	public PcmStream method380() {
 		class127 var1;
 		do {
 			var1 = (class127) this.field1913.method1619();
@@ -207,7 +195,7 @@ public final class class105 extends class51 {
 	@Override
 	public void method379(int[] arg0, int arg1, int arg2) {
 		this.field1919.method379(arg0, arg1, arg2);
-		for (class127 var4 = (class127) this.field1913.method1610(); var4 != null; var4 = (class127) this.field1913.method1619()) {
+		for (class127 var4 = (class127) this.field1913.head(); var4 != null; var4 = (class127) this.field1913.method1619()) {
 			if (!this.field1905.method1200(var4)) {
 				int var5 = arg2;
 				int var6 = arg1;
@@ -228,7 +216,7 @@ public final class class105 extends class51 {
 	@ObfuscatedName("jg.a(II[IILlg;I)V")
 	public void method728(int arg0, int[] arg1, int arg2, class127 arg3, int arg4) {
 		if ((this.field1905.field3248[arg3.field2385] & 0x4) != 0 && arg3.field2386 < 0) {
-			int var6 = this.field1905.field3282[arg3.field2385] / class11.field161;
+			int var6 = this.field1905.field3282[arg3.field2385] / PcmPlayer.frequency;
 			while (true) {
 				int var7 = (var6 + 1048575 - arg3.field2390) / var6;
 				if (var7 > arg0) {
@@ -237,7 +225,7 @@ public final class class105 extends class51 {
 				}
 				arg0 -= var7;
 				arg3.field2391.method379(arg1, arg4, var7);
-				int var8 = class11.field161 / 100;
+				int var8 = PcmPlayer.frequency / 100;
 				arg3.field2390 += var6 * var7 - 1048576;
 				int var9 = 262144 / var6;
 				class162 var10 = arg3.field2391;

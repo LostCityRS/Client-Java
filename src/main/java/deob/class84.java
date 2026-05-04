@@ -3,7 +3,7 @@ package deob;
 import java.awt.Component;
 
 @ObfuscatedName("hg")
-public final class class84 extends class55 {
+public final class class84 extends PcmPlayer {
 
 	@ObfuscatedName("hg.N")
 	public final int field1528;
@@ -11,7 +11,7 @@ public final class class84 extends class55 {
 	@ObfuscatedName("hg.O")
 	public static class178 field1529;
 
-	public class84(class181 arg0, int arg1) {
+	public class84(SignLink arg0, int arg1) {
 		field1529 = arg0.method1286();
 		this.field1528 = arg1;
 	}
@@ -19,7 +19,7 @@ public final class class84 extends class55 {
 	@ObfuscatedName("hg.a(Ljava/awt/Component;)V")
 	@Override
 	public void method412(Component arg0) throws Exception {
-		field1529.method1273(class7.field99, arg0, class11.field161);
+		field1529.method1273(PcmPlayer.field99, arg0, PcmPlayer.frequency);
 	}
 
 	@ObfuscatedName("hg.c()V")

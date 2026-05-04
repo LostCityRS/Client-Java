@@ -1,19 +1,7 @@
 package deob;
 
 @ObfuscatedName("eg")
-public final class class52 extends class67 {
-
-	@ObfuscatedName("eg.t")
-	public static final class88 field938 = class208.method1423(105, "und Ihr Passwort ein)3");
-
-	@ObfuscatedName("eg.u")
-	public static final int field939 = 3353893;
-
-	@ObfuscatedName("eg.w")
-	public static int field941;
-
-	@ObfuscatedName("eg.y")
-	public static int field943 = 0;
+public final class class52 extends Linkable {
 
 	@ObfuscatedName("eg.L")
 	public int field954 = 0;
@@ -67,13 +55,13 @@ public final class class52 extends class67 {
 	public class52 field951;
 
 	@ObfuscatedName("eg.V")
-	public class56 field964;
+	public Ground field964;
 
 	@ObfuscatedName("eg.N")
 	public class64 field956;
 
 	@ObfuscatedName("eg.C")
-	public class95 field947;
+	public QuickGround field947;
 
 	@ObfuscatedName("eg.z")
 	public boolean field944;
@@ -83,11 +71,6 @@ public final class class52 extends class67 {
 
 	@ObfuscatedName("eg.W")
 	public boolean field965;
-
-	@ObfuscatedName("eg.a(IB)I")
-	public static int method387(int arg0) {
-		return arg0 & 0x7F;
-	}
 
 	public class52(int arg0, int arg1, int arg2) {
 		this.field945 = arg2;

@@ -3,9 +3,6 @@ package deob;
 @ObfuscatedName("tg")
 public final class class214 {
 
-	@ObfuscatedName("tg.a")
-	public static class137 field4033;
-
 	@ObfuscatedName("tg.c")
 	public int[] field4035;
 
@@ -14,20 +11,6 @@ public final class class214 {
 
 	@ObfuscatedName("tg.e")
 	public final int[] field4037;
-
-	@ObfuscatedName("tg.i")
-	public static double field4041 = -1.0D;
-
-	@ObfuscatedName("tg.j")
-	public static final class88 field4042 = class208.method1423(105, "Loaded config");
-
-	@ObfuscatedName("tg.h")
-	public static class88 field4040 = field4042;
-
-	@ObfuscatedName("tg.a(IILnb;I)Llj;")
-	public static class130 method1454(int arg0, class144 arg1) {
-		return class47.method358(arg1, arg0, 0) ? class27.method170() : null;
-	}
 
 	public class214(byte[] arg0) {
 		int var2 = arg0.length;

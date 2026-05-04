@@ -44,19 +44,19 @@ public final class class197 {
 
 	public class197(byte[] arg0, class78 arg1) {
 		this.field3786 = arg1;
-		class46 var3 = new class46(arg0);
-		class46 var4 = new class46(arg0);
-		var3.field831 = 2;
-		int var5 = var3.method347();
+		Packet var3 = new Packet(arg0);
+		Packet var4 = new Packet(arg0);
+		var3.pos = 2;
+		int var5 = var3.g1();
 		int var6 = 0;
 		int var7 = -1;
 		int var8 = -1;
-		var4.field831 = var3.field831 + var5;
+		var4.pos = var3.pos + var5;
 		for (int var9 = 0; var9 < var5; var9++) {
 			if (this.field3786.field1409[var9] == 0) {
 				var7 = var9;
 			}
-			int var10 = var3.method347();
+			int var10 = var3.g1();
 			if (var10 > 0) {
 				if (this.field3786.field1409[var9] == 0) {
 					var8 = var9;
@@ -97,7 +97,7 @@ public final class class197 {
 				}
 			}
 		}
-		if (var4.field831 != arg0.length) {
+		if (var4.pos != arg0.length) {
 			throw new RuntimeException();
 		}
 		this.field3779 = var6;

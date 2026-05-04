@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("tf")
-public final class class213 extends class69 {
+public final class class213 extends PcmStreamable {
 
 	@ObfuscatedName("tf.u")
 	public int field4028;
@@ -34,7 +34,7 @@ public final class class213 extends class69 {
 	}
 
 	@ObfuscatedName("tf.a(Lqe;)Ltf;")
-	public class213 method1453(class179 arg0) {
+	public class213 method1453(Decimator arg0) {
 		this.field4031 = arg0.method1278(this.field4031);
 		this.field4028 = arg0.method1280(this.field4028);
 		if (this.field4032 == this.field4029) {

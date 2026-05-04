@@ -3,17 +3,8 @@ package deob;
 @ObfuscatedName("rf")
 public final class class191 extends class218 {
 
-	@ObfuscatedName("rf.Jb")
-	public static final class88 field3684 = class208.method1423(105, "Regeln versto-8en hat)3");
-
-	@ObfuscatedName("rf.Gb")
-	public static int field3681 = 0;
-
-	@ObfuscatedName("rf.Kb")
-	public static final int[] field3685 = new int[128];
-
 	@ObfuscatedName("rf.Hb")
-	public class126 field3682;
+	public NpcType field3682;
 
 	@ObfuscatedName("rf.d(I)Z")
 	@Override
@@ -33,9 +24,9 @@ public final class class191 extends class218 {
 		if (this.field3682 == null) {
 			return;
 		}
-		class109 var11 = super.field4077 != -1 && super.field4140 == 0 ? class15.method75(super.field4077) : null;
-		class109 var12 = super.field4106 == -1 || super.field4105 == super.field4106 && var11 != null ? null : class15.method75(super.field4106);
-		class30 var13 = this.field3682.method865(var12, super.field4127, super.field4101, var11);
+		SeqType var11 = super.field4077 != -1 && super.field4140 == 0 ? SeqType.method75(super.field4077) : null;
+		SeqType var12 = super.field4106 == -1 || super.field4105 == super.field4106 && var11 != null ? null : SeqType.method75(super.field4106);
+		ModelLit var13 = this.field3682.method865(var12, super.field4127, super.field4101, var11);
 		if (var13 == null) {
 			return;
 		}
@@ -44,20 +35,20 @@ public final class class191 extends class218 {
 		int var15 = 0;
 		int var16 = 0;
 		if (this.field3682.field2350 != 0 && this.field3682.field2329 != 0) {
-			int var17 = class173.field3359[arg0];
-			int var18 = class173.field3354[arg0];
+			int var17 = Pix3D.field3359[arg0];
+			int var18 = Pix3D.field3354[arg0];
 			short var19 = this.field3682.field2350;
 			short var20 = this.field3682.field2329;
 			int var21 = -var19 / 2;
 			int var22 = -var20 / 2;
 			int var23 = var18 * var22 - var17 * var21 >> 16;
 			int var24 = var21 * var18 + var17 * var22 >> 16;
-			int var25 = class239.method1584(super.field4136 + var24, var23 + super.field4121, class149.field2907);
+			int var25 = client.method1584(super.field4136 + var24, var23 + super.field4121, client.field2907);
 			int var26 = var19 / 2;
 			int var27 = -var20 / 2;
 			int var28 = var18 * var26 + var17 * var27 >> 16;
 			int var29 = var27 * var18 - var26 * var17 >> 16;
-			int var30 = class239.method1584(var28 + super.field4136, var29 + super.field4121, class149.field2907);
+			int var30 = client.method1584(var28 + super.field4136, var29 + super.field4121, client.field2907);
 			int var31 = -var19 / 2;
 			int var32 = var20 / 2;
 			int var33 = var18 * var31 + var32 * var17 >> 16;
@@ -65,9 +56,9 @@ public final class class191 extends class218 {
 			int var35 = var19 / 2;
 			int var36 = var20 / 2;
 			int var37 = var17 * var36 + var18 * var35 >> 16;
-			int var38 = class239.method1584(super.field4136 + var33, super.field4121 - -var34, class149.field2907);
+			int var38 = client.method1584(super.field4136 + var33, super.field4121 - -var34, client.field2907);
 			int var39 = var18 * var36 - var17 * var35 >> 16;
-			int var40 = class239.method1584(super.field4136 + var37, super.field4121 - -var39, class149.field2907);
+			int var40 = client.method1584(super.field4136 + var37, super.field4121 - -var39, client.field2907);
 			int var41 = var40 + var25;
 			if (var41 > var30 + var38) {
 				var41 = var30 + var38;
@@ -89,9 +80,9 @@ public final class class191 extends class218 {
 				var13.method180(0, var16, 0);
 			}
 		}
-		class30 var46 = null;
+		ModelLit var46 = null;
 		if (super.field4080 != -1 && super.field4075 != -1) {
-			class33 var47 = class62.method441(super.field4080);
+			SpotType var47 = SpotType.list(super.field4080);
 			var46 = var47.method209(super.field4075);
 			if (var46 != null) {
 				var46.method180(0, -super.field4125, 0);
@@ -109,7 +100,7 @@ public final class class191 extends class218 {
 			}
 		}
 		if (var46 != null) {
-			var13 = ((class125) var13).method850(var46);
+			var13 = ((SoftwareModelLit) var13).method850(var46);
 		}
 		if (this.field3682.field2349 == 1) {
 			var13.field494 = true;

@@ -1,7 +1,7 @@
 package deob;
 
 @ObfuscatedName("u")
-public abstract class class218 extends class145 {
+public abstract class class218 extends ModelSource {
 
 	@ObfuscatedName("u.bb")
 	public int field4111 = 0;
@@ -31,7 +31,7 @@ public abstract class class218 extends class145 {
 	public int field4122 = -1;
 
 	@ObfuscatedName("u.n")
-	public class88 field4071 = null;
+	public JagString field4071 = null;
 
 	@ObfuscatedName("u.nb")
 	public int field4123 = -1;
@@ -60,20 +60,11 @@ public abstract class class218 extends class145 {
 	@ObfuscatedName("u.t")
 	public int field4077 = -1;
 
-	@ObfuscatedName("u.tb")
-	public static final class88 field4129 = class208.method1423(105, "Login");
-
-	@ObfuscatedName("u.hb")
-	public static class88 field4117 = field4129;
-
 	@ObfuscatedName("u.u")
 	public final int[] field4078 = new int[4];
 
 	@ObfuscatedName("u.ub")
 	public int field4130;
-
-	@ObfuscatedName("u.v")
-	public static final class88 field4079 = class208.method1423(105, "gr-Un:");
 
 	@ObfuscatedName("u.vb")
 	public final int[] field4131 = new int[4];
@@ -83,12 +74,6 @@ public abstract class class218 extends class145 {
 
 	@ObfuscatedName("u.wb")
 	public int field4132 = 0;
-
-	@ObfuscatedName("u.C")
-	public static int field4086 = (int) (Math.random() * 17.0D) - 8;
-
-	@ObfuscatedName("u.yb")
-	public static class88 field4134 = null;
 
 	@ObfuscatedName("u.A")
 	public int field4084 = -1;
@@ -189,48 +174,9 @@ public abstract class class218 extends class145 {
 	@ObfuscatedName("u.Db")
 	public int field4139;
 
-	@ObfuscatedName("u.a([BI)V")
-	public static void method1473(byte[] arg0) {
-		int var1 = 0;
-		while (true) {
-			while (var1 < arg0.length) {
-				int var2 = (arg0[var1++] & 0xFF) * 64 - class16.field239;
-				int var3 = (arg0[var1++] & 0xFF) * 64 - class119.field2181;
-				if (var2 > 0 && var3 > 0 && var2 + 64 < class109.field1988 && class44.field760 > var3 + 64) {
-					int var4 = var2 >> 6;
-					int var5 = class44.field760 - var3 - 1 >> 6;
-					for (int var6 = 0; var6 < 64; var6++) {
-						for (int var7 = -64; var7 < 0; var7++) {
-							byte var8 = arg0[var1++];
-							if (var8 != 0) {
-								if (class208.field3951[var4][var5] == null) {
-									class208.field3951[var4][var5] = new byte[4096];
-								}
-								class208.field3951[var4][var5][(-(var7 + 1) << 6) + var6] = var8;
-								byte var9 = arg0[var1++];
-								if (class220.field4166[var4][var5] == null) {
-									class220.field4166[var4][var5] = new byte[4096];
-								}
-								class220.field4166[var4][var5][(-(var7 + 1) << 6) + var6] = var9;
-							}
-						}
-					}
-				} else {
-					for (int var10 = -4096; var10 < 0; var10++) {
-						byte var11 = arg0[var1++];
-						if (var11 != 0) {
-							var1++;
-						}
-					}
-				}
-			}
-			return;
-		}
-	}
-
 	@ObfuscatedName("u.a(ZIII)V")
 	public final void method1474(boolean arg0, int arg1, int arg2) {
-		if (this.field4077 != -1 && class15.method75(this.field4077).field1980 == 1) {
+		if (this.field4077 != -1 && SeqType.method75(this.field4077).field1980 == 1) {
 			this.field4077 = -1;
 		}
 		if (!arg0) {
@@ -269,7 +215,7 @@ public abstract class class218 extends class145 {
 	public final void method1476(boolean arg0, int arg1) {
 		int var3 = this.field4087[0];
 		int var4 = this.field4141[0];
-		if (this.field4077 != -1 && class15.method75(this.field4077).field1980 == 1) {
+		if (this.field4077 != -1 && SeqType.method75(this.field4077).field1980 == 1) {
 			this.field4077 = -1;
 		}
 		if (this.field4135 < 9) {

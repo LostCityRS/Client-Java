@@ -3,11 +3,8 @@ package deob;
 @ObfuscatedName("df")
 public final class class40 {
 
-	@ObfuscatedName("df.a")
-	public static final byte[] field700 = new byte[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
 	@ObfuscatedName("df.b")
-	public final class46 field701 = new class46(null);
+	public final Packet field701 = new Packet(null);
 
 	@ObfuscatedName("df.c")
 	public int[] field702;
@@ -39,7 +36,7 @@ public final class class40 {
 
 	@ObfuscatedName("df.a(I)V")
 	public void method259(int arg0) {
-		this.field708[arg0] = this.field701.field831;
+		this.field708[arg0] = this.field701.pos;
 	}
 
 	@ObfuscatedName("df.a()Z")
@@ -55,7 +52,7 @@ public final class class40 {
 
 	@ObfuscatedName("df.b(I)V")
 	public void method261(int arg0) {
-		this.field701.field831 = this.field708[arg0];
+		this.field701.pos = this.field708[arg0];
 	}
 
 	@ObfuscatedName("df.c(I)J")
@@ -65,7 +62,7 @@ public final class class40 {
 
 	@ObfuscatedName("df.b()Z")
 	public boolean method263() {
-		return this.field701.field842 != null;
+		return this.field701.data != null;
 	}
 
 	@ObfuscatedName("df.a(J)V")
@@ -75,15 +72,15 @@ public final class class40 {
 		for (int var4 = 0; var4 < var3; var4++) {
 			this.field704[var4] = 0;
 			this.field702[var4] = 0;
-			this.field701.field831 = this.field703[var4];
+			this.field701.pos = this.field703[var4];
 			this.method274(var4);
-			this.field708[var4] = this.field701.field831;
+			this.field708[var4] = this.field701.pos;
 		}
 	}
 
 	@ObfuscatedName("df.c()V")
 	public void method265() {
-		this.field701.field842 = null;
+		this.field701.data = null;
 		this.field703 = null;
 		this.field708 = null;
 		this.field704 = null;
@@ -98,43 +95,43 @@ public final class class40 {
 	@ObfuscatedName("df.a(II)I")
 	public int method267(int arg0, int arg1) {
 		if (arg1 != 255) {
-			byte var7 = field700[arg1 - 128];
+			byte var7 = Statics.field700[arg1 - 128];
 			int var8 = arg1;
 			if (var7 >= 1) {
-				var8 = arg1 | this.field701.method347() << 8;
+				var8 = arg1 | this.field701.g1() << 8;
 			}
 			if (var7 >= 2) {
-				var8 |= this.field701.method347() << 16;
+				var8 |= this.field701.g1() << 16;
 			}
 			return var8;
 		}
-		int var3 = this.field701.method347();
+		int var3 = this.field701.g1();
 		int var4 = this.field701.method317();
 		if (var3 == 47) {
-			this.field701.field831 += var4;
+			this.field701.pos += var4;
 			return 1;
 		} else if (var3 == 81) {
-			int var5 = this.field701.method304();
+			int var5 = this.field701.g3();
 			var4 -= 3;
 			int var6 = this.field704[arg0];
 			this.field707 += (long) var6 * (long) (this.field705 - var5);
 			this.field705 = var5;
-			this.field701.field831 += var4;
+			this.field701.pos += var4;
 			return 2;
 		} else {
-			this.field701.field831 += var4;
+			this.field701.pos += var4;
 			return 3;
 		}
 	}
 
 	@ObfuscatedName("df.d(I)I")
 	public int method269(int arg0) {
-		byte var2 = this.field701.field842[this.field701.field831];
+		byte var2 = this.field701.data[this.field701.pos];
 		int var3;
 		if (var2 < 0) {
 			var3 = var2 & 0xFF;
 			this.field702[arg0] = var3;
-			this.field701.field831++;
+			this.field701.pos++;
 		} else {
 			var3 = this.field702[arg0];
 		}
@@ -143,34 +140,34 @@ public final class class40 {
 		}
 		int var4 = this.field701.method317();
 		if (var3 == 247 && var4 > 0) {
-			int var5 = this.field701.field842[this.field701.field831] & 0xFF;
+			int var5 = this.field701.data[this.field701.pos] & 0xFF;
 			if (var5 >= 241 && var5 <= 243 || var5 == 246 || var5 == 248 || var5 >= 250 && var5 <= 252 || var5 == 254) {
-				this.field701.field831++;
+				this.field701.pos++;
 				this.field702[arg0] = var5;
 				return this.method267(arg0, var5);
 			}
 		}
-		this.field701.field831 += var4;
+		this.field701.pos += var4;
 		return 0;
 	}
 
 	@ObfuscatedName("df.a([B)V")
 	public void method270(byte[] arg0) {
-		this.field701.field842 = arg0;
-		this.field701.field831 = 10;
-		int var2 = this.field701.method301();
-		this.field706 = this.field701.method301();
+		this.field701.data = arg0;
+		this.field701.pos = 10;
+		int var2 = this.field701.g2();
+		this.field706 = this.field701.g2();
 		this.field705 = 500000;
 		this.field703 = new int[var2];
 		int var3 = 0;
 		while (var3 < var2) {
-			int var4 = this.field701.method323();
-			int var5 = this.field701.method323();
+			int var4 = this.field701.g4();
+			int var5 = this.field701.g4();
 			if (var4 == 1297379947) {
-				this.field703[var3] = this.field701.field831;
+				this.field703[var3] = this.field701.pos;
 				var3++;
 			}
-			this.field701.field831 += var5;
+			this.field701.pos += var5;
 		}
 		this.field707 = 0L;
 		this.field708 = new int[var2];
@@ -202,7 +199,7 @@ public final class class40 {
 
 	@ObfuscatedName("df.g()V")
 	public void method273() {
-		this.field701.field831 = -1;
+		this.field701.pos = -1;
 	}
 
 	@ObfuscatedName("df.f(I)V")
