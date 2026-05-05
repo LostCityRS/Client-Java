@@ -64,6 +64,11 @@ public final class FloType extends Linkable2 {
 		field2923 = field2578.getFileIdLimit(4);
 	}
 
+	@ObfuscatedName("m.a(IB)I")
+	public static int method883(int arg0) {
+		return arg0 == 16711935 ? -1 : Statics.method1559(arg0);
+	}
+
 	@ObfuscatedName("af.a(ILea;I)V")
 	public void method38(Packet arg0, int arg1) {
 		while (true) {
@@ -78,7 +83,7 @@ public final class FloType extends Linkable2 {
 	@ObfuscatedName("af.a(IIILea;)V")
 	public void method41(int arg0, int arg1, Packet arg2) {
 		if (arg1 == 1) {
-			this.field111 = Statics.method883(arg2.g3());
+			this.field111 = method883(arg2.g3());
 		} else if (arg1 == 2) {
 			this.field98 = arg2.g1();
 		} else if (arg1 == 3) {
@@ -89,7 +94,7 @@ public final class FloType extends Linkable2 {
 		} else if (arg1 == 5) {
 			this.field113 = false;
 		} else if (arg1 == 7) {
-			this.field104 = Statics.method883(arg2.g3());
+			this.field104 = method883(arg2.g3());
 		} else if (arg1 == 8) {
 			field2489 = arg0;
 		} else if (arg1 == 9) {

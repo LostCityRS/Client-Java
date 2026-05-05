@@ -43,8 +43,6 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	public static long field623 = 0L;
 	@ObfuscatedName("hc.eb")
 	public static int field1452;
-	@ObfuscatedName("ig.U")
-	public static int field1756;
 	@ObfuscatedName("kg.db")
 	public static int field2101;
 	@ObfuscatedName("kg.jb")

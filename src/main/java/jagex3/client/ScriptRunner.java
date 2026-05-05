@@ -13,6 +13,7 @@ import jagex3.io.Packet;
 import jagex3.jstring.JagString;
 import jagex3.var.VarCache;
 import jagex3.wordfilter2.WordPack;
+import jagex3.worldmap.WorldMap;
 
 import java.util.Date;
 
@@ -77,6 +78,8 @@ public class ScriptRunner {
 	public static JagString[] field2963;
 	@ObfuscatedName("wc.J")
 	public static int[] field4477;
+	@ObfuscatedName("bc.e")
+	public static QuickChatPhrase field226;
 
 	@ObfuscatedName("md.a(BLde;I)V")
 	public static void executeScript(HookReq arg0, int arg1) {
@@ -1033,7 +1036,7 @@ public class ScriptRunner {
 					} else if (var382 < 1900) {
 						IfType var73 = var43 ? Statics.field3871 : Statics.field2426;
 						if (var382 == 1800) {
-							field1944[var5++] = GameShell.method592(Statics.method530(var73));
+							field1944[var5++] = GameShell.method592(Client.method530(var73));
 							continue;
 						}
 						if (var382 == 1801) {
@@ -1186,7 +1189,7 @@ public class ScriptRunner {
 						var5--;
 						IfType var77 = Client.method1579(field1944[var5]);
 						if (var382 == 2800) {
-							field1944[var5++] = GameShell.method592(Statics.method530(var77));
+							field1944[var5++] = GameShell.method592(Client.method530(var77));
 							continue;
 						}
 						if (var382 == 2801) {
@@ -2011,7 +2014,7 @@ public class ScriptRunner {
 							int var272 = field1944[var5 + 1];
 							byte[] var273 = Client.fontmetrics.getFile(0, var272);
 							SoftwarePixFont var274 = new SoftwarePixFont(var273);
-							var274.method149(Client.field587, null);
+							var274.method149(Client.modIcons, null);
 							field1944[var5++] = var274.method163(var271, var270);
 							continue;
 						}
@@ -2023,7 +2026,7 @@ public class ScriptRunner {
 							int var277 = field1944[var5];
 							byte[] var278 = Client.fontmetrics.getFile(0, var276);
 							SoftwarePixFont var279 = new SoftwarePixFont(var278);
-							var279.method149(Client.field587, null);
+							var279.method149(Client.modIcons, null);
 							field1944[var5++] = var279.method156(var275, var277);
 							continue;
 						}
@@ -2590,11 +2593,11 @@ public class ScriptRunner {
 									continue;
 								}
 								if (var382 == 5058) {
-									Statics.field226 = new QuickChatPhrase();
+									field226 = new QuickChatPhrase();
 									var5--;
-									Statics.field226.field4058 = field1944[var5];
-									Statics.field226.field4065 = QuickChatPhraseType.method1150(Statics.field226.field4058);
-									Statics.field226.field4068 = new int[Statics.field226.field4065.method1407()];
+									field226.field4058 = field1944[var5];
+									field226.field4065 = QuickChatPhraseType.method1150(field226.field4058);
+									field226.field4068 = new int[field226.field4065.method1407()];
 									continue;
 								}
 								if (var382 == 5059) {
@@ -2602,8 +2605,8 @@ public class ScriptRunner {
 									Client.out.p1(0);
 									int var221 = Client.out.pos;
 									Client.out.p1(0);
-									Client.out.method305(Statics.field226.field4058);
-									Statics.field226.field4065.method1414(Client.out, Statics.field226.field4068);
+									Client.out.method305(field226.field4058);
+									field226.field4065.method1414(Client.out, field226.field4068);
 									Client.out.method341(Client.out.pos - var221);
 									continue;
 								}
@@ -2614,8 +2617,8 @@ public class ScriptRunner {
 									Client.out.p1(0);
 									int var223 = Client.out.pos;
 									Client.out.p8(var222.toUserhash());
-									Client.out.method305(Statics.field226.field4058);
-									Statics.field226.field4065.method1414(Client.out, Statics.field226.field4068);
+									Client.out.method305(field226.field4058);
+									field226.field4065.method1414(Client.out, field226.field4068);
 									Client.out.method341(Client.out.pos - var223);
 									continue;
 								}
@@ -2624,8 +2627,8 @@ public class ScriptRunner {
 									Client.out.p1(0);
 									int var224 = Client.out.pos;
 									Client.out.p1(1);
-									Client.out.method305(Statics.field226.field4058);
-									Statics.field226.field4065.method1414(Client.out, Statics.field226.field4068);
+									Client.out.method305(field226.field4058);
+									field226.field4065.method1414(Client.out, field226.field4068);
 									Client.out.method341(Client.out.pos - var224);
 									continue;
 								}
@@ -2683,14 +2686,14 @@ public class ScriptRunner {
 									var5 -= 2;
 									int var237 = field1944[var5 + 1];
 									int var238 = field1944[var5];
-									Statics.field226.field4068[var238] = var237;
+									field226.field4068[var238] = var237;
 									continue;
 								}
 								if (var382 == 5069) {
 									var5 -= 2;
 									int var239 = field1944[var5];
 									int var240 = field1944[var5 + 1];
-									Statics.field226.field4068[var239] = var240;
+									field226.field4068[var239] = var240;
 									continue;
 								}
 								if (var382 == 5070) {
@@ -2733,30 +2736,30 @@ public class ScriptRunner {
 							} else if (var382 < 5300) {
 								if (var382 == 5200) {
 									var5--;
-									Statics.method277(field1944[var5]);
+									WorldMap.method277(field1944[var5]);
 									continue;
 								}
 								if (var382 == 5201) {
-									field1944[var5++] = Statics.method708();
+									field1944[var5++] = WorldMap.method708();
 									continue;
 								}
 								if (var382 == 5202) {
 									var5--;
-									Statics.method581(field1944[var5]);
+									WorldMap.method581(field1944[var5]);
 									continue;
 								}
 								if (var382 == 5203) {
 									var6--;
-									Statics.method879(field3330[var6]);
+									WorldMap.method879(field3330[var6]);
 									continue;
 								}
 								if (var382 == 5204) {
-									field3330[var6 - 1] = Statics.method1492(field3330[var6 - 1]);
+									field3330[var6 - 1] = WorldMap.method1492(field3330[var6 - 1]);
 									continue;
 								}
 								if (var382 == 5205) {
 									var6--;
-									Statics.method764(field3330[var6]);
+									WorldMap.method764(field3330[var6]);
 									continue;
 								}
 							} else if (var382 >= 5400) {
@@ -2780,7 +2783,7 @@ public class ScriptRunner {
 										ObjType.method37();
 										ObjType.method1399();
 										NpcType.method711();
-										Statics.method1050();
+										NpcType.method1050();
 										Client.method733();
 										continue;
 									}

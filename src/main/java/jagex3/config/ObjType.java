@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.Client;
 import jagex3.constants.Text;
 import jagex3.dash3d.*;
@@ -185,7 +184,7 @@ public final class ObjType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field4400.getFile(Statics.method872(arg0), Statics.method920(arg0));
+		byte[] var2 = field4400.getFile(method872(arg0), method920(arg0));
 		ObjType var3 = new ObjType();
 		var3.field2844 = arg0;
 		if (var2 != null) {
@@ -325,6 +324,16 @@ public final class ObjType extends Linkable2 {
 		Pix3D.setRenderClipping();
 		Pix3D.field3355 = true;
 		return var15;
+	}
+
+	@ObfuscatedName("li.b(II)I")
+	public static int method872(int arg0) {
+		return arg0 & 0xFF;
+	}
+
+	@ObfuscatedName("mg.c(II)I")
+	public static int method920(int arg0) {
+		return arg0 >>> 8;
 	}
 
 	@ObfuscatedName("ng.b(Z)Lle;")

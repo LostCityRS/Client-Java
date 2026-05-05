@@ -1,11 +1,20 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
+import jagex3.datastruct.ByteArrayNode2;
 import jagex3.io.Packet;
 
 @ObfuscatedName("da")
 public final class TextureOp34 extends TextureOp {
+
+    @ObfuscatedName("id.d")
+    public static final int[] field1720 = new int[4096];
+
+	static {
+		for (int var0 = 0; var0 < 4096; var0++) {
+			field1720[var0] = method394(var0);
+		}
+	}
 
 	@ObfuscatedName("da.cb")
 	public int field607 = 1638;
@@ -36,6 +45,14 @@ public final class TextureOp34 extends TextureOp {
 
 	public TextureOp34() {
 		super(0, true);
+	}
+
+	@ObfuscatedName("ei.a(II)I")
+	public static int method394(int arg0) {
+		int var1 = arg0 * 6 - 61440;
+		int var2 = (var1 * arg0 >> 12) + 40960;
+		int var3 = (arg0 * arg0 >> 12) * arg0 >> 12;
+		return var2 * var3 >> 12;
 	}
 
 	@ObfuscatedName("da.a(Lea;II)V")
@@ -70,7 +87,7 @@ public final class TextureOp34 extends TextureOp {
 		int var8 = arg1 >> 12;
 		int var9 = arg1 & 0xFFF;
 		int var10 = var9 - 4096;
-		int var11 = Statics.field1720[var9];
+		int var11 = field1720[var9];
 		int var12 = var8 + 1;
 		int var13 = var8 & 0xFF;
 		if (var12 >= arg4) {
@@ -121,7 +138,7 @@ public final class TextureOp34 extends TextureOp {
 			int var8 = var4 * this.field596 >> 12;
 			int var9 = var5 >> 12;
 			int var10 = var5 & 0xFFF;
-			int var11 = Statics.field1720[var10];
+			int var11 = field1720[var10];
 			int var12 = var9 + 1;
 			if (var8 <= var12) {
 				var12 = 0;
@@ -158,7 +175,7 @@ public final class TextureOp34 extends TextureOp {
 			}
 			int var30 = var25 & 0xFFF;
 			int var31 = this.field613[var29 & 0xFF] & 0xFF;
-			int var32 = Statics.field1720[var30];
+			int var32 = field1720[var30];
 			for (int var33 = 0; var33 < Texture.field1276; var33++) {
 				int var34 = Texture.field351[var33] * this.field601;
 				int var35 = this.method231(var30, var34 * var23 >> 12, var27, var31, var28, var32);
@@ -180,7 +197,7 @@ public final class TextureOp34 extends TextureOp {
 					var43 = 0;
 				}
 				int var46 = this.field613[var43 & 0xFF] & 0xFF;
-				int var47 = Statics.field1720[var45];
+				int var47 = field1720[var45];
 				if (this.field610 && var36 == this.field595 - 1) {
 					for (int var51 = 0; var51 < Texture.field1276; var51++) {
 						int var52 = this.field601 * Texture.field351[var51];
@@ -202,7 +219,7 @@ public final class TextureOp34 extends TextureOp {
 	@ObfuscatedName("da.b(B)V")
 	@Override
 	public void method123() {
-		this.field613 = Statics.method1072(this.field600);
+		this.field613 = ByteArrayNode2.method1072(this.field600);
 		this.method237();
 		for (int var1 = this.field595 - 1; var1 >= 1; var1--) {
 			short var2 = this.field609[var1];

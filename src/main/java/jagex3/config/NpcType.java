@@ -139,7 +139,7 @@ public final class NpcType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field3968.getFile(Statics.method387(arg0), Statics.method702(arg0));
+		byte[] var2 = field3968.getFile(method387(arg0), method702(arg0));
 		NpcType var3 = new NpcType();
 		var3.field2314 = arg0;
 		if (var2 != null) {
@@ -166,6 +166,21 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("je.b(I)V")
 	public static void method711() {
 		field1923.clear();
+	}
+
+    @ObfuscatedName("ob.b(B)V")
+    public static void method1050() {
+        field2606.clear();
+    }
+
+	@ObfuscatedName("jc.b(II)I")
+	public static int method702(int arg0) {
+		return arg0 >>> 7;
+	}
+
+	@ObfuscatedName("eg.a(IB)I")
+	public static int method387(int arg0) {
+		return arg0 & 0x7F;
 	}
 
 	@ObfuscatedName("lf.b(Z)Z")

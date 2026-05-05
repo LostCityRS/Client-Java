@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.datastruct.Linkable;
 import jagex3.io.Packet;
 
@@ -279,7 +278,7 @@ public final class Patch extends Linkable {
 				var74 += 2;
 				int var77 = (var76 - var71) / 2 + (var76 - var71) * var72;
 				for (int var78 = var71; var78 < var76; var78++) {
-					int var79 = Statics.method1284(var76 - var71, var77);
+					int var79 = method1284(var76 - var71, var77);
 					var77 += var75 - var72;
 					this.field3894[var78] = (byte) (this.field3894[var78] * var79 + 32 >> 6);
 				}
@@ -316,7 +315,7 @@ public final class Patch extends Linkable {
 				var87 += 2;
 				int var90 = (var88 - var83) / 2 + (var88 - var83) * var84;
 				for (int var91 = var83; var91 < var88; var91++) {
-					int var92 = Statics.method1284(var88 - var83, var90);
+					int var92 = method1284(var88 - var83, var90);
 					int var93 = (this.field3897[var91] & 0xFF) + var92;
 					if (var93 < 0) {
 						var93 = 0;
@@ -373,7 +372,13 @@ public final class Patch extends Linkable {
 		}
 	}
 
-	@ObfuscatedName("sh.a([IILnj;[B)Z")
+    @ObfuscatedName("qf.a(ZII)I")
+    public static int method1284(int arg0, int arg1) {
+        int var2 = arg1 >>> 31;
+        return (var2 + arg1) / arg0 - var2;
+    }
+
+    @ObfuscatedName("sh.a([IILnj;[B)Z")
 	public boolean method1400(int[] arg0, WaveCache arg1, byte[] arg2) {
 		boolean var4 = true;
 		int var5 = 0;

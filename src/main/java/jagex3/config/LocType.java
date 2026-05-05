@@ -189,7 +189,7 @@ public final class LocType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field3827.getFile(Statics.method1344(arg0), Statics.method1077(arg0));
+		byte[] var2 = field3827.getFile(method1344(arg0), method1077(arg0));
 		LocType var3 = new LocType();
 		var3.field2831 = arg0;
 		if (var2 != null) {
@@ -222,6 +222,16 @@ public final class LocType extends Linkable2 {
 		field3827 = arg0;
 		field3524 = arg1;
 		field1442 = new ModelSourceCache(30);
+	}
+
+	@ObfuscatedName("ri.b(II)I")
+	public static int method1344(int arg0) {
+		return arg0 & 0xFF;
+	}
+
+	@ObfuscatedName("oh.a(ZI)I")
+	public static int method1077(int arg0) {
+		return arg0 >>> 8;
 	}
 
 	@ObfuscatedName("nf.d(I)Z")

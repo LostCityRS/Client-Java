@@ -1,37 +1,17 @@
 package jagex3.io;
 
 import deob.ObfuscatedName;
-import deob.Statics;
-import jagex3.client.Client;
 
 @ObfuscatedName("ae")
 public final class PacketBit extends Packet {
 
+	@ObfuscatedName("ua.l")
+	public static final int[] field4142 = new int[] { 0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, Integer.MAX_VALUE, -1 };
 	@ObfuscatedName("ae.ec")
 	public Isaac field91;
 
-	@ObfuscatedName("ae.Qb")
-	public static int field77;
-
 	@ObfuscatedName("ae.Rb")
 	public int field78;
-
-	@ObfuscatedName("ae.Xb")
-	public static int field84;
-
-	@ObfuscatedName("ae.a(ZIIIII)V")
-	public static void method26(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (Statics.field1207 <= arg3 && Statics.field183 >= arg4 && arg1 >= Statics.field919 && Statics.field279 >= arg0) {
-			Statics.method1502(arg3, arg2, arg4, arg1, arg0);
-		} else {
-			Client.method226(arg2, arg1, arg0, arg3, arg4);
-		}
-	}
-
-	@ObfuscatedName("ae.e(IB)Z")
-	public static boolean method27(int arg0) {
-		return (arg0 >> 31 & 0x1) != 0;
-	}
 
 	public PacketBit(int arg0) {
 		super(arg0);
@@ -44,15 +24,15 @@ public final class PacketBit extends Packet {
 		this.field78 += arg0;
 		int var4 = 0;
 		while (var3 < arg0) {
-			var4 += (Statics.field4142[var3] & super.data[var2++]) << arg0 - var3;
+			var4 += (field4142[var3] & super.data[var2++]) << arg0 - var3;
 			arg0 -= var3;
 			var3 = 8;
 		}
 		int var5;
 		if (arg0 == var3) {
-			var5 = var4 + (super.data[var2] & Statics.field4142[var3]);
+			var5 = var4 + (super.data[var2] & field4142[var3]);
 		} else {
-			var5 = var4 + (super.data[var2] >> var3 - arg0 & Statics.field4142[arg0]);
+			var5 = var4 + (super.data[var2] >> var3 - arg0 & field4142[arg0]);
 		}
 		return var5;
 	}

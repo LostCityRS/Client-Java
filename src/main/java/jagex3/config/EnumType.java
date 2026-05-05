@@ -29,9 +29,6 @@ public final class EnumType extends Linkable2 {
 	@ObfuscatedName("eb.P")
 	public int field882;
 
-	@ObfuscatedName("eb.X")
-	public static int field890;
-
 	@ObfuscatedName("eb.E")
 	public HashTable field871;
 

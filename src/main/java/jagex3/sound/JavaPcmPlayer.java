@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.util.IntUtil;
 
 import javax.sound.sampled.AudioFormat;
@@ -28,6 +27,16 @@ public final class JavaPcmPlayer extends PcmPlayer {
 
 	@ObfuscatedName("ii.Q")
 	public byte[] field1778;
+
+	@ObfuscatedName("oc.a(BI)I")
+	public static int method1057(int arg0) {
+		int var1 = (arg0 & 0x55555555) + ((arg0 & 0xAAAAAAAB) >>> 1);
+		int var2 = (var1 >>> 2 & 0x33333333) + (var1 & 0x33333333);
+		int var3 = (var2 >>> 4) + var2 & 0xF0F0F0F;
+		int var4 = var3 + (var3 >>> 8);
+		int var5 = var4 + (var4 >>> 16);
+		return var5 & 0xFF;
+	}
 
 	@ObfuscatedName("ii.a()I")
 	@Override
@@ -78,7 +87,7 @@ public final class JavaPcmPlayer extends PcmPlayer {
 			this.field1775.start();
 			this.field1779 = arg0;
 		} catch (LineUnavailableException var4) {
-			if (Statics.method1057(arg0) == 1) {
+			if (method1057(arg0) == 1) {
 				this.field1775 = null;
 				throw var4;
 			} else {

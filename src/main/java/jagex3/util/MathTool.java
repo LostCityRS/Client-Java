@@ -2,7 +2,7 @@ package jagex3.util;
 
 import deob.ObfuscatedName;
 
-public class MathUtil {
+public class MathTool {
 	@ObfuscatedName("ej.b(II)I")
 	public static int bitsRequired(int arg0) {
 		int var1 = 0;

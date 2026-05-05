@@ -1,9 +1,9 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
+import jagex3.util.ArrayUtil;
 
 @ObfuscatedName("he")
 public final class ModelUnlit extends ModelSource {
@@ -469,9 +469,9 @@ public final class ModelUnlit extends ModelSource {
 		var16.field1512 = this.field1512;
 		var16.field1490 = this.field1490;
 		if (arg0 == 3) {
-			var16.field1522 = Statics.method169(this.field1522);
-			var16.field1476 = Statics.method169(this.field1476);
-			var16.field1506 = Statics.method169(this.field1506);
+			var16.field1522 = ArrayUtil.method169(this.field1522);
+			var16.field1476 = ArrayUtil.method169(this.field1476);
+			var16.field1506 = ArrayUtil.method169(this.field1506);
 		} else {
 			var16.field1522 = this.field1522;
 			var16.field1476 = new int[var16.field1489];

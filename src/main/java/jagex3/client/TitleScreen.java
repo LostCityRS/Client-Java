@@ -110,6 +110,24 @@ public class TitleScreen {
 	public static int field2195 = -1;
 	@ObfuscatedName("bb.c")
 	public static int field209 = -1;
+	@ObfuscatedName("fj.f")
+	public static int field1192 = 0;
+	@ObfuscatedName("ed.n")
+	public static int field924 = 0;
+	@ObfuscatedName("ka.e")
+	public static int field2009 = -1;
+	@ObfuscatedName("nj.k")
+	public static int field2932 = -1;
+	@ObfuscatedName("jf.lb")
+	public static int field1896 = -1;
+	@ObfuscatedName("oe.c")
+	public static int field3019;
+	@ObfuscatedName("wf.g")
+	public static int field4502 = -1;
+	@ObfuscatedName("nh.d")
+	public static int field2912 = -1;
+	@ObfuscatedName("hi.d")
+	public static int field1552 = -1;
 
 	@ObfuscatedName("rc.a(Lcc;BLcc;)V")
     public static void draw(PixfontGeneric arg0, PixfontGeneric arg1) {
@@ -229,7 +247,7 @@ public class TitleScreen {
 			if (field2460) {
 				MidiManager.method5();
 			} else {
-				MidiManager.method388(Client.songs, Statics.field1552, 255);
+				MidiManager.method388(Client.songs, field1552, 255);
 			}
 		}
 		if (Client.state == 5) {
@@ -361,14 +379,14 @@ public class TitleScreen {
 			return;
 		}
 		Pix2D.method481();
-		byte[] var3 = arg0.getFile(0, Statics.field2009);
+		byte[] var3 = arg0.getFile(0, field2009);
 		field1640 = new SoftwarePix32(var3, arg1);
 		field1901 = field1640.method1156();
-		field3946 = PixLoader.method826(Statics.field2932, arg2);
-		field4473 = PixLoader.method826(Statics.field1896, arg2);
-		field2416 = PixLoader.method826(Statics.field3019, arg2);
-		field4320 = PixLoader.method830(arg2, Statics.field4502);
-		field2095 = PixLoader.method700(arg2, Statics.field2912);
+		field3946 = PixLoader.method826(field2932, arg2);
+		field4473 = PixLoader.method826(field1896, arg2);
+		field2416 = PixLoader.method826(field3019, arg2);
+		field4320 = PixLoader.method830(arg2, field4502);
+		field2095 = PixLoader.method700(arg2, field2912);
 		field32 = new int[256];
 		for (int var4 = 0; var4 < 64; var4++) {
 			field32[var4] = var4 * 262144;
@@ -426,7 +444,7 @@ public class TitleScreen {
 		if (field2460) {
 			MidiManager.method795();
 		} else {
-			MidiManager.method730(255, Statics.field1552, Client.songs);
+			MidiManager.method730(255, field1552, Client.songs);
 		}
 		Js5Net.method988(false);
 		field1707 = true;
@@ -565,20 +583,20 @@ public class TitleScreen {
 			field4454[var12] = field4454[arg0 + var12];
 		}
 		for (int var13 = 256 - arg0; var13 < 256; var13++) {
-			field4454[var13] = (int) (Math.sin((double) Statics.field924 / 14.0D) * 16.0D + Math.sin((double) Statics.field924 / 15.0D) * 14.0D + Math.sin((double) Statics.field924 / 16.0D) * 12.0D);
-			Statics.field924++;
+			field4454[var13] = (int) (Math.sin((double) field924 / 14.0D) * 16.0D + Math.sin((double) field924 / 15.0D) * 14.0D + Math.sin((double) field924 / 16.0D) * 12.0D);
+			field924++;
 		}
-		Statics.field1192 += arg0;
+		field1192 += arg0;
 		int var14 = ((Client.field2113 & 0x1) + arg0) / 2;
 		if (var14 <= 0) {
 			return;
 		}
-		for (int var15 = 0; var15 < Statics.field1192 * 100; var15++) {
+		for (int var15 = 0; var15 < field1192 * 100; var15++) {
 			int var16 = (int) (Math.random() * 124.0D) + 2;
 			int var17 = (int) (Math.random() * 128.0D) + 128;
 			field3667[var16 + (var17 << 7)] = 192;
 		}
-		Statics.field1192 = 0;
+		field1192 = 0;
 		for (int var18 = 0; var18 < 256; var18++) {
 			int var19 = 0;
 			int var20 = var18 * 128;
@@ -754,9 +772,9 @@ public class TitleScreen {
 		if (field2969 > 0) {
 			for (int var0 = 0; var0 < 256; var0++) {
 				if (field2969 > 768) {
-					field3034[var0] = Statics.method1525(field234[var0], 1024 - field2969, field32[var0]);
+					field3034[var0] = method1525(field234[var0], 1024 - field2969, field32[var0]);
 				} else if (field2969 <= 256) {
-					field3034[var0] = Statics.method1525(field32[var0], 256 - field2969, field234[var0]);
+					field3034[var0] = method1525(field32[var0], 256 - field2969, field234[var0]);
 				} else {
 					field3034[var0] = field234[var0];
 				}
@@ -764,9 +782,9 @@ public class TitleScreen {
 		} else if (field3099 > 0) {
 			for (int var1 = 0; var1 < 256; var1++) {
 				if (field3099 > 768) {
-					field3034[var1] = Statics.method1525(field3014[var1], 1024 - field3099, field32[var1]);
+					field3034[var1] = method1525(field3014[var1], 1024 - field3099, field32[var1]);
 				} else if (field3099 <= 256) {
-					field3034[var1] = Statics.method1525(field32[var1], 256 - field3099, field3014[var1]);
+					field3034[var1] = method1525(field32[var1], 256 - field3099, field3014[var1]);
 				} else {
 					field3034[var1] = field3014[var1];
 				}
@@ -860,7 +878,7 @@ public class TitleScreen {
 						var3.field1262 = var1.gjstr();
 						var3.field1255 = var1.method334();
 						var3.field1258 = var2;
-						var3.field1260 = Statics.method528(var1.g2());
+						var3.field1260 = method528(var1.g2());
 					}
 					method1143(0, field3845, field3845.length - 1);
 					field3959 = true;
@@ -1050,6 +1068,78 @@ public class TitleScreen {
 		try {
 			arg0.getAppletContext().showDocument(var3.method606(), "_self");
 		} catch (Exception var4) {
+		}
+	}
+
+    @ObfuscatedName("o.a(Lnb;Lnb;ILnb;)V")
+    public static void method1038(Js5 arg0, Js5 arg1, Js5 arg2) {
+        field2009 = arg1.method964(Statics.field689);
+        field2932 = arg2.method964(Statics.field1143);
+        field1896 = arg2.method964(Client.field561);
+        field3019 = arg2.method964(Statics.field2089);
+        field4502 = arg2.method964(Statics.field316);
+        field2912 = arg2.method964(Statics.field1733);
+        field209 = arg2.method964(Statics.field4278);
+        field119 = arg2.method964(Statics.field4011);
+        field1783 = arg2.method964(Statics.field881);
+        field2195 = arg2.method964(Statics.field102);
+        Statics.field4247 = arg2.method964(Statics.field1682);
+        field1552 = arg0.method964(Statics.field2156);
+    }
+
+	@ObfuscatedName("uj.a(IIBI)I")
+	public static int method1525(int arg0, int arg1, int arg2) {
+		int var3 = 256 - arg1;
+		return ((arg2 & 0xFF00FF) * var3 + arg1 * (arg0 & 0xFF00FF) & 0xFF00FF00) + ((arg0 & 0xFF00) * arg1 + var3 * (arg2 & 0xFF00) & 0xFF0000) >> 8;
+	}
+
+	@ObfuscatedName("ea.a(Lnb;BLnb;)I")
+	public static int method330(Js5 arg0, Js5 arg1) {
+		int var2 = 0;
+		if (arg0.method953(field2009)) {
+			var2++;
+		}
+		if (arg1.method953(field2932)) {
+			var2++;
+		}
+		if (arg1.method953(field1896)) {
+			var2++;
+		}
+		if (arg1.method953(field3019)) {
+			var2++;
+		}
+		if (arg1.method953(field4502)) {
+			var2++;
+		}
+		if (arg1.method953(field2912)) {
+			var2++;
+		}
+		arg1.method953(field209);
+		arg1.method953(field119);
+		arg1.method953(field1783);
+		arg1.method953(field2195);
+		arg1.method953(Statics.field4247);
+		return var2;
+	}
+
+	@ObfuscatedName("hb.b(II)I")
+	public static int method528(int arg0) {
+		if (Client.lang == 1) {
+			return 7;
+		} else if (arg0 == 77) {
+			return 1;
+		} else if (arg0 == 38) {
+			return 2;
+		} else if (arg0 == 16) {
+			return 3;
+		} else if (arg0 == 161) {
+			return 4;
+		} else if (arg0 == 191) {
+			return 5;
+		} else if (arg0 == 69) {
+			return 6;
+		} else {
+			return 0;
 		}
 	}
 }

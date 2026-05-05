@@ -2,6 +2,7 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.util.ArrayUtil;
 
 @ObfuscatedName("le")
 public final class SoftwareModelLit extends ModelLit {
@@ -1274,9 +1275,9 @@ public final class SoftwareModelLit extends ModelLit {
 			var17.field2285 = this.field2285;
 			var17.field494 = super.field494;
 			if (arg0 == 3) {
-				var17.field2264 = Statics.method169(this.field2264);
-				var17.field2286 = Statics.method169(this.field2286);
-				var17.field2287 = Statics.method169(this.field2287);
+				var17.field2264 = ArrayUtil.method169(this.field2264);
+				var17.field2286 = ArrayUtil.method169(this.field2286);
+				var17.field2287 = ArrayUtil.method169(this.field2287);
 			} else {
 				var17.field2264 = this.field2264;
 				var17.field2286 = new int[var17.field2271];

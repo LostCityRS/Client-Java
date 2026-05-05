@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 
 @ObfuscatedName("je")
@@ -59,7 +58,7 @@ public final class TextureOp29SubOp1 extends TextureOp29SubOp {
 		int var8 = this.field1867 * arg0 >> 12;
 		int var9 = this.field1865 * arg0 >> 12;
 		int var10 = arg1 * this.field1855 >> 12;
-		Statics.method739(var4, var7, var6, var3, var5, var8, var10, super.field927, var9);
+		TextureOp29.method739(var4, var7, var6, var3, var5, var8, var10, super.field927, var9);
 	}
 
 	@ObfuscatedName("je.a(IIZ)V")

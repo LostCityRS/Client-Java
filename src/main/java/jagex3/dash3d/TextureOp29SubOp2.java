@@ -1,9 +1,7 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
-import jagex3.io.PacketBit;
 
 @ObfuscatedName("gh")
 public final class TextureOp29SubOp2 extends TextureOp29SubOp {
@@ -40,7 +38,7 @@ public final class TextureOp29SubOp2 extends TextureOp29SubOp {
 		int var4 = this.field1345 * arg0 >> 12;
 		int var5 = arg1 * this.field1346 >> 12;
 		int var6 = arg1 * this.field1343 >> 12;
-		Statics.method887(super.field931, var5, var4, var6, super.field927, var3);
+		TextureOp29.method887(super.field931, var5, var4, var6, super.field927, var3);
 	}
 
 	@ObfuscatedName("gh.a(IIZ)V")
@@ -50,7 +48,7 @@ public final class TextureOp29SubOp2 extends TextureOp29SubOp {
 		int var4 = arg1 * this.field1340 >> 12;
 		int var5 = this.field1346 * arg0 >> 12;
 		int var6 = arg0 * this.field1343 >> 12;
-		PacketBit.method26(var6, var5, super.field925, var4, var3);
+		TextureOp29.method26(var6, var5, super.field925, var4, var3);
 	}
 
 	@ObfuscatedName("gh.a(III)V")
@@ -60,6 +58,6 @@ public final class TextureOp29SubOp2 extends TextureOp29SubOp {
 		int var4 = arg0 * this.field1345 >> 12;
 		int var5 = this.field1346 * arg1 >> 12;
 		int var6 = arg1 * this.field1343 >> 12;
-		Statics.method368(var4, super.field927, var5, super.field931, super.field925, var3, var6);
+		TextureOp29.method368(var4, super.field927, var5, super.field931, super.field925, var3, var6);
 	}
 }

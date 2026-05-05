@@ -2,6 +2,7 @@ package jagex3.config;
 
 import deob.ObfuscatedName;
 import deob.Statics;
+import jagex3.dash3d.TextureOp29;
 import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
@@ -15,6 +16,10 @@ public final class QuickChatPhraseType extends Linkable2 {
 	public static final LruCache field2447 = new LruCache(64);
 	@ObfuscatedName("md.U")
 	public static final int[] field2508 = new int[] { 2, 2, 4, 0, 1, 8, 0, 0, 0, 0, 2 };
+	@ObfuscatedName("ha.F")
+	public static final int[] field1420 = new int[] { 2, 2, 4, 2, 1, 8, 4, 1, 4, 4, 2 };
+	@ObfuscatedName("id.o")
+	public static final int[] field1731 = new int[] { 1, 0, 0, 0, 1, 0, 2, 1, 1, 1, 0 };
 
 	@ObfuscatedName("ha.C")
 	public static Js5 field1417;
@@ -103,8 +108,8 @@ public final class QuickChatPhraseType extends Linkable2 {
 			for (int var6 = 0; var6 < var5; var6++) {
 				int var7 = arg0.g2();
 				this.field3905[var6] = var7;
-				this.field3909[var6] = new int[Statics.field1731[var7]];
-				for (int var8 = 0; var8 < Statics.field1731[var7]; var8++) {
+				this.field3909[var6] = new int[field1731[var7]];
+				for (int var8 = 0; var8 < field1731[var7]; var8++) {
 					this.field3909[var6][var8] = arg0.g2();
 				}
 			}
@@ -117,7 +122,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 		if (this.field3905 != null) {
 			for (int var3 = 0; var3 < this.field3905.length; var3++) {
 				var2.method616(this.field3901[var3]);
-				var2.method616(method952(arg0.method300(Statics.field1420[this.field3905[var3]]), this.field3905[var3], this.field3909[var3]));
+				var2.method616(method952(arg0.method300(field1420[this.field3905[var3]]), this.field3905[var3], this.field3909[var3]));
 			}
 		}
 		var2.method616(this.field3901[this.field3901.length - 1]);
@@ -132,7 +137,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 		}
 		var1.method616(this.field3901[0]);
 		for (int var2 = 1; var2 < this.field3901.length; var2++) {
-			var1.method616(Statics.field3644);
+			var1.method616(TextureOp29.field3644);
 			var1.method616(this.field3901[var2]);
 		}
 		return var1.method629();

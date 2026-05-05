@@ -1,10 +1,10 @@
-package deob;
+package jagex3.worldmap;
 
+import deob.ObfuscatedName;
 import jagex3.datastruct.Linkable;
 
-// todo: worldmap related
 @ObfuscatedName("fi")
-public final class class65 extends Linkable {
+public final class MapElement extends Linkable {
 
 	@ObfuscatedName("fi.u")
 	public int field1175;

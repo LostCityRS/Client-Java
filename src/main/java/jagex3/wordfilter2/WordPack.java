@@ -37,4 +37,9 @@ public class WordPack {
 			return Statics.field2918;
 		}
 	}
+
+    @ObfuscatedName("bi.a(Lea;I)Li;")
+    public static JagString method103(Packet arg0) {
+        return method524(arg0);
+    }
 }

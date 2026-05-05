@@ -13,4 +13,15 @@ public class IntUtil {
 		int var5 = var4 | var4 >>> 16;
 		return var5 + 1;
 	}
+
+    @ObfuscatedName("od.a(IIII)I")
+    public static int method1058(int arg0, int arg1, int arg2) {
+        if (arg0 > arg2) {
+            return arg0;
+        } else if (arg2 > arg1) {
+            return arg1;
+        } else {
+            return arg2;
+        }
+    }
 }

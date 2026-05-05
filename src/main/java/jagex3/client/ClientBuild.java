@@ -62,14 +62,6 @@ public class ClientBuild {
 	public static byte[][] field3221;
 	@ObfuscatedName("nd.e")
 	public static int[] field2731;
-	@ObfuscatedName("k.hb")
-	public static int field1988;
-	@ObfuscatedName("dj.ac")
-	public static int field760;
-	@ObfuscatedName("bd.d")
-	public static int field239;
-	@ObfuscatedName("kj.D")
-	public static int field2181;
 
 	@ObfuscatedName("ch.a(III)I")
 	public static int method202(int arg0, int arg1) {
@@ -714,113 +706,6 @@ public class ClientBuild {
 					}
 				}
 			}
-		}
-	}
-
-	@ObfuscatedName("oi.a(I[B)V")
-	public static void method1085(byte[] arg0) {
-		int var1 = field4086 >> 2 << 10;
-		byte[][] var2 = new byte[field1988][field760];
-		int var3 = field1270 >> 1;
-		int var4 = 0;
-		while (true) {
-			while (arg0.length > var4) {
-				int var5 = (arg0[var4++] & 0xFF) * 64 - field239;
-				int var6 = (arg0[var4++] & 0xFF) * 64 - field2181;
-				if (var5 > 0 && var6 > 0 && var5 + 64 < field1988 && var6 + 64 < field760) {
-					for (int var7 = 0; var7 < 64; var7++) {
-						byte[] var8 = var2[var5 + var7];
-						int var9 = field760 - var6 - 1;
-						for (int var10 = -64; var10 < 0; var10++) {
-							var8[var9--] = arg0[var4++];
-						}
-					}
-				} else {
-					var4 += 4096;
-				}
-			}
-			int var11 = field760;
-			int var12 = field1988;
-			int[] var13 = new int[var11];
-			int[] var14 = new int[var11];
-			int[] var15 = new int[var11];
-			int[] var16 = new int[var11];
-			int[] var17 = new int[var11];
-			for (int var18 = -5; var18 < var12; var18++) {
-				for (int var19 = 0; var19 < var11; var19++) {
-					int var20 = var18 + 5;
-					int var10002;
-					if (var12 > var20) {
-						int var21 = var2[var20][var19] & 0xFF;
-						if (var21 > 0) {
-							FluType var22 = FluType.method179(var21 - 1);
-							var13[var19] += var22.field4420;
-							var14[var19] += var22.field4410;
-							var17[var19] += var22.field4413;
-							var15[var19] += var22.field4407;
-							var10002 = var16[var19]++;
-						}
-					}
-					int var23 = var18 - 5;
-					if (var23 >= 0) {
-						int var24 = var2[var23][var19] & 0xFF;
-						if (var24 > 0) {
-							FluType var25 = FluType.method179(var24 - 1);
-							var13[var19] -= var25.field4420;
-							var14[var19] -= var25.field4410;
-							var17[var19] -= var25.field4413;
-							var15[var19] -= var25.field4407;
-							var10002 = var16[var19]--;
-						}
-					}
-				}
-				if (var18 >= 0) {
-					int[][] var26 = Statics.field1912[var18 >> 6];
-					int var27 = 0;
-					int var28 = 0;
-					int var29 = 0;
-					int var30 = 0;
-					int var31 = 0;
-					for (int var32 = -5; var32 < var11; var32++) {
-						int var33 = var32 - 5;
-						int var34 = var32 + 5;
-						if (var34 < var11) {
-							var30 += var15[var34];
-							var31 += var16[var34];
-							var28 += var17[var34];
-							var27 += var14[var34];
-							var29 += var13[var34];
-						}
-						if (var33 >= 0) {
-							var30 -= var15[var33];
-							var27 -= var14[var33];
-							var28 -= var17[var33];
-							var29 -= var13[var33];
-							var31 -= var16[var33];
-						}
-						if (var32 >= 0 && var31 > 0) {
-							int var35 = var32 >> 6;
-							int var36 = var30 == 0 ? 0 : method1066(var29 * 256 / var30, var28 / var31, var27 / var31);
-							if (var2[var18][var32] != 0) {
-								if (var26[var35] == null) {
-									var26[var35] = Statics.field1912[var18 >> 6][var35] = new int[4096];
-								}
-								int var37 = var3 + (var36 & 0x7F);
-								if (var37 < 0) {
-									var37 = 0;
-								} else if (var37 > 127) {
-									var37 = 127;
-								}
-								int var38 = (var36 + var1 & 0xFC00) + ((var36 & 0x380) + var37);
-								var26[var35][((var32 & 0x3F) << 6) + (var18 & 0x3F)] = Pix3D.field3349[method67(96, var38)];
-							} else if (var26[var35] != null) {
-								var26[var35][((var32 & 0x3F) << 6) + (var18 & 0x3F)] = 0;
-							}
-						}
-					}
-				}
-			}
-			return;
 		}
 	}
 

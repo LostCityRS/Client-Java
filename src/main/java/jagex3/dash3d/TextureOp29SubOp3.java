@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 
 @ObfuscatedName("lb")
@@ -32,6 +31,17 @@ public final class TextureOp29SubOp3 extends TextureOp29SubOp {
 		return new TextureOp29SubOp3(arg0.method334(), arg0.method334(), arg0.method334(), arg0.method334(), arg0.g3(), arg0.g3(), arg0.g1());
 	}
 
+	@ObfuscatedName("vg.a(IIIIIB)V")
+	public static void method1565(int arg0, int arg1, int arg2, int arg3, int arg4) {
+		if (arg4 == arg0) {
+			TextureOp29.method1532(arg3, arg0, arg2, arg1);
+		} else if (arg3 - arg0 >= TextureOp29.field1207 && TextureOp29.field183 >= arg0 + arg3 && arg2 - arg4 >= TextureOp29.field919 && TextureOp29.field279 >= arg4 + arg2) {
+			TextureOp29.method892(arg3, arg0, arg4, arg2, arg1);
+		} else {
+			TextureOp29.method1438(arg3, arg4, arg2, arg1, arg0);
+		}
+	}
+
 	@ObfuscatedName("lb.a(III)V")
 	@Override
 	public void method371(int arg0, int arg1) {
@@ -39,7 +49,7 @@ public final class TextureOp29SubOp3 extends TextureOp29SubOp {
 		int var4 = arg1 * this.field2220 >> 12;
 		int var5 = this.field2231 * arg0 >> 12;
 		int var6 = this.field2223 * arg0 >> 12;
-		Statics.method1514(super.field931, var4, var6, var5, super.field927, super.field925, var3);
+		TextureOp29.method1514(super.field931, var4, var6, var5, super.field927, super.field925, var3);
 	}
 
 	@ObfuscatedName("lb.a(IIZ)V")
@@ -49,7 +59,7 @@ public final class TextureOp29SubOp3 extends TextureOp29SubOp {
 		int var4 = arg1 * this.field2223 >> 12;
 		int var5 = arg0 * this.field2220 >> 12;
 		int var6 = arg0 * this.field2224 >> 12;
-		Statics.method1565(var4, super.field925, var6, var3, var5);
+		method1565(var4, super.field925, var6, var3, var5);
 	}
 
 	@ObfuscatedName("lb.a(IIB)V")

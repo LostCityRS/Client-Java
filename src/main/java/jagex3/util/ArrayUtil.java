@@ -120,4 +120,44 @@ public final class ArrayUtil {
 		method836(arg0, 0, var2, 0, var1);
 		return var2;
 	}
+
+    @ObfuscatedName("cd.a([IB)[I")
+    public static int[] method169(int[] arg0) {
+        if (arg0 == null) {
+            return null;
+        } else {
+            int[] var1 = new int[arg0.length];
+            method838(arg0, 0, var1, 0, arg0.length);
+            return var1;
+        }
+    }
+
+	@ObfuscatedName("va.a(IIII[I)V")
+	public static void method1534(int arg0, int arg1, int arg2, int[] arg3) {
+		arg0--;
+		int var10 = arg2 - 1;
+		int var4 = var10 - 7;
+		while (arg0 < var4) {
+			int var5 = arg0 + 1;
+			arg3[var5] = arg1;
+			int var6 = var5 + 1;
+			arg3[var6] = arg1;
+			int var7 = var6 + 1;
+			arg3[var7] = arg1;
+			int var8 = var7 + 1;
+			arg3[var8] = arg1;
+			int var9 = var8 + 1;
+			arg3[var9] = arg1;
+			int var11 = var9 + 1;
+			arg3[var11] = arg1;
+			int var12 = var11 + 1;
+			arg3[var12] = arg1;
+			arg0 = var12 + 1;
+			arg3[arg0] = arg1;
+		}
+		while (arg0 < var10) {
+			arg0++;
+			arg3[arg0] = arg1;
+		}
+	}
 }

@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.dash3d.ModelLit;
 import jagex3.dash3d.ModelSourceCache;
 import jagex3.dash3d.ModelUnlit;
@@ -66,7 +65,7 @@ public final class SpotType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field1114.getFile(Statics.method799(arg0), Statics.method928(arg0));
+		byte[] var2 = field1114.getFile(method799(arg0), method928(arg0));
 		SpotType var3 = new SpotType();
 		var3.field539 = arg0;
 		if (var2 != null) {
@@ -86,6 +85,16 @@ public final class SpotType extends Linkable2 {
 	public static void init(Js5 arg0, Js5 arg1) {
 		field2607 = arg0;
 		field1114 = arg1;
+	}
+
+	@ObfuscatedName("n.a(II)I")
+	public static int method928(int arg0) {
+		return arg0 >>> 8;
+	}
+
+	@ObfuscatedName("ki.a(IZ)I")
+	public static int method799(int arg0) {
+		return arg0 & 0xFF;
 	}
 
 	@ObfuscatedName("cj.a(ILea;B)V")

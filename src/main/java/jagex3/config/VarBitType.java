@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
@@ -30,7 +29,7 @@ public final class VarBitType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field3883.getFile(Statics.method473(arg0), Statics.method1585(arg0));
+		byte[] var2 = field3883.getFile(method473(arg0), method1585(arg0));
 		VarBitType var3 = new VarBitType();
 		if (var2 != null) {
 			var3.method1516(new Packet(var2));
@@ -47,6 +46,16 @@ public final class VarBitType extends Linkable2 {
 	@ObfuscatedName("qf.a(Lnb;B)V")
 	public static void init(Js5 arg0) {
 		field3883 = arg0;
+	}
+
+	@ObfuscatedName("ge.a(BI)I")
+	public static int method473(int arg0) {
+		return arg0 & 0x3FF;
+	}
+
+	@ObfuscatedName("wa.a(II)I")
+	public static int method1585(int arg0) {
+		return arg0 >>> 10;
 	}
 
 	@ObfuscatedName("uh.a(Lea;I)V")

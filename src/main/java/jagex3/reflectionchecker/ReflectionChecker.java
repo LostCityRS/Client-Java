@@ -1,9 +1,9 @@
 package jagex3.reflectionchecker;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
+import jagex3.datastruct.LinkList;
 import jagex3.io.Packet;
 import jagex3.io.PacketBit;
 import jagex3.jstring.JagString;
@@ -14,7 +14,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class ReflectionChecker {
-	@ObfuscatedName("va.a(Lqg;IILea;)V")
+    @ObfuscatedName("ia.H")
+    public static LinkList field1694 = new LinkList();
+
+    @ObfuscatedName("va.a(Lqg;IILea;)V")
 	public static void method1535(SignLink arg0, int arg1, Packet arg2) {
 		ReflectionCheck var3 = new ReflectionCheck();
 		var3.field124 = arg2.g1();
@@ -74,13 +77,13 @@ public class ReflectionChecker {
 				var3.field132[var4] = -5;
 			}
 		}
-		Statics.field1694.push(var3);
+		field1694.push(var3);
 	}
 
 	@ObfuscatedName("bc.a(ZLae;I)V")
 	public static void method71(PacketBit arg0) {
 		while (true) {
-			ReflectionCheck var1 = (ReflectionCheck) Statics.field1694.head();
+			ReflectionCheck var1 = (ReflectionCheck) field1694.head();
 			if (var1 == null) {
 				return;
 			}
@@ -188,5 +191,10 @@ public class ReflectionChecker {
 			arg0.method341(arg0.pos - var4);
 			var1.unlink();
 		}
+	}
+
+	@ObfuscatedName("lh.c(B)V")
+	public static void method869() {
+		field1694 = new LinkList();
 	}
 }

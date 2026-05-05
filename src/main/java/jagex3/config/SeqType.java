@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.dash3d.AnimFrameSet;
 import jagex3.dash3d.ModelLit;
 import jagex3.datastruct.Linkable2;
@@ -74,7 +73,7 @@ public final class SeqType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field672.getFile(Statics.method50(arg0), Statics.method1441(arg0));
+		byte[] var2 = field672.getFile(method50(arg0), method1441(arg0));
 		SeqType var3 = new SeqType();
 		if (var2 != null) {
 			var3.method751(new Packet(var2));
@@ -134,6 +133,16 @@ public final class SeqType extends Linkable2 {
 			field3989.method663((long) arg0, var2);
 		}
 		return var2;
+	}
+
+	@ObfuscatedName("ah.a(IB)I")
+	public static int method50(int arg0) {
+		return arg0 & 0x7F;
+	}
+
+	@ObfuscatedName("td.a(IZ)I")
+	public static int method1441(int arg0) {
+		return arg0 >>> 7;
 	}
 
 	@ObfuscatedName("k.a(ILcg;I)Lcg;")
