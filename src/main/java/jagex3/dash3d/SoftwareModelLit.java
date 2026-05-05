@@ -1559,20 +1559,20 @@ public final class SoftwareModelLit extends ModelLit {
 		}
 		int var15 = arg7 * arg3 + arg5 * arg4 >> 16;
 		int var16 = var15 + this.radius << 9;
-		if (var16 / var13 <= Statics.field2766) {
+		if (var16 / var13 <= Pix3D.minX) {
 			return;
 		}
 		int var17 = var15 - this.radius << 9;
-		if (var17 / var13 >= Statics.field2931) {
+		if (var17 / var13 >= Pix3D.maxX) {
 			return;
 		}
 		int var18 = arg6 * arg2 - var11 * arg1 >> 16;
 		int var19 = var18 + (this.radius * arg1 + this.maxY * arg2 >> 16) << 9;
-		if (var19 / var13 <= Statics.field1102) {
+		if (var19 / var13 <= Pix3D.minY) {
 			return;
 		}
 		int var20 = var18 + (-this.radius * arg1 + this.field2277 * arg2 >> 16) << 9;
-		if (var20 / var13 >= Statics.field4055) {
+		if (var20 / var13 >= Pix3D.maxY) {
 			return;
 		}
 		boolean var21 = false;

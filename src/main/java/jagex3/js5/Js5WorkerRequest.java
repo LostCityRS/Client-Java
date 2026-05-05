@@ -11,7 +11,7 @@ public final class Js5WorkerRequest extends Linkable {
 	public int type;
 
 	@ObfuscatedName("ib.w")
-	public Js5Loader field1702;
+	public Js5Loader loader;
 
 	@ObfuscatedName("ib.H")
 	public DataFile fs;

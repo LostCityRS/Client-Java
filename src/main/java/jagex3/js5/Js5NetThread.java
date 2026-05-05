@@ -34,7 +34,7 @@ public final class Js5NetThread implements Runnable {
 	}
 
 	@ObfuscatedName("e.g(I)V")
-	public static void method293() {
+	public static void processCompleted() {
 		while (true) {
 			LinkList var0 = requestQueue;
 			Js5WorkerRequest var1;
@@ -44,12 +44,12 @@ public final class Js5NetThread implements Runnable {
 			if (var1 == null) {
 				return;
 			}
-			var1.field1702.loadIndex(var1.data, (int) var1.key, var1.fs, false);
+			var1.loader.loadIndex(var1.data, (int) var1.key, var1.fs, false);
 		}
 	}
 
 	@ObfuscatedName("db.a([BZILud;)V")
-	public static void method244(byte[] arg0, int arg1, DataFile arg2) {
+	public static void queueWrite(byte[] arg0, int arg1, DataFile arg2) {
 		Js5WorkerRequest var3 = new Js5WorkerRequest();
 		var3.fs = arg2;
 		var3.data = arg0;
@@ -59,11 +59,11 @@ public final class Js5NetThread implements Runnable {
 		synchronized (requestQueue) {
 			requestQueue.push(var3);
 		}
-		method977();
+		startThread();
 	}
 
 	@ObfuscatedName("nd.a(B)V")
-	public static void method977() {
+	public static void startThread() {
 		Object var0 = lock;
 		synchronized (lock) {
 			if (keepAlive == 0) {
@@ -74,9 +74,9 @@ public final class Js5NetThread implements Runnable {
 	}
 
 	@ObfuscatedName("lb.a(IILbj;Lud;)V")
-	public static void method828(int arg0, Js5Loader arg1, DataFile arg2) {
+	public static void queueRead(int arg0, Js5Loader arg1, DataFile arg2) {
 		Js5WorkerRequest var3 = new Js5WorkerRequest();
-		var3.field1702 = arg1;
+		var3.loader = arg1;
 		var3.key = arg0;
 		var3.type = 1;
 		var3.fs = arg2;
@@ -84,7 +84,7 @@ public final class Js5NetThread implements Runnable {
 		synchronized (requestQueue) {
 			requestQueue.push(var3);
 		}
-		method977();
+		startThread();
 	}
 
 	@ObfuscatedName("hd.a(Lbj;IILud;)V")

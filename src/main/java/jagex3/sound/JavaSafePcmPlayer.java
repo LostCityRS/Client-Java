@@ -15,7 +15,7 @@ public final class JavaSafePcmPlayer extends PcmPlayer {
 	public static AudioSource source;
 
 	public JavaSafePcmPlayer(SignLink arg0, int arg1) {
-		source = arg0.method1286();
+		source = arg0.getAudio();
 		this.field1528 = arg1;
 	}
 

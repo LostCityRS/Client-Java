@@ -17,7 +17,9 @@ public abstract class Js5 {
 	@ObfuscatedName("oa.A")
 	public static final GZip gzip = new GZip();
 	@ObfuscatedName("da.kb")
-	public static final boolean field615 = false;
+	public static final boolean strictBounds = false;
+	@ObfuscatedName("og.R")
+	public static final int js5MaxSize = 0;
 	@ObfuscatedName("nb.ab")
 	public int crc;
 
@@ -76,7 +78,7 @@ public abstract class Js5 {
 		Packet var1 = new Packet(arg0);
 		int var2 = var1.g1();
 		int var3 = var1.g4();
-		if (var3 < 0 || Statics.field3073 != 0 && var3 > Statics.field3073) {
+		if (var3 < 0 || js5MaxSize != 0 && var3 > js5MaxSize) {
 			throw new RuntimeException();
 		} else if (var2 == 0) {
 			byte[] var4 = new byte[var3];
@@ -84,7 +86,7 @@ public abstract class Js5 {
 			return var4;
 		} else {
 			int var5 = var1.g4();
-			if (var5 < 0 || Statics.field3073 != 0 && Statics.field3073 < var5) {
+			if (var5 < 0 || js5MaxSize != 0 && js5MaxSize < var5) {
 				throw new RuntimeException();
 			}
 			byte[] var6 = new byte[var5];
@@ -120,14 +122,14 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.b(II)I")
 	public final int getFileIdLimit(int arg0) {
-		return this.method968(arg0) ? this.fileIdLimit[arg0] : 0;
+		return this.isGroupValid(arg0) ? this.fileIdLimit[arg0] : 0;
 	}
 
 	@ObfuscatedName("nb.a(III)Z")
-	public boolean method943(int arg0, int arg1) {
+	public boolean isFileValid(int arg0, int arg1) {
 		if (arg1 >= 0 && arg0 >= 0 && this.fileIdLimit.length > arg1 && arg0 < this.fileIdLimit[arg1]) {
 			return true;
-		} else if (field615) {
+		} else if (strictBounds) {
 			throw new IllegalArgumentException(arg1 + "," + arg0);
 		} else {
 			return false;
@@ -135,17 +137,17 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.a(Li;I)Z")
-	public final boolean method944(JagString arg0) {
+	public final boolean requestDownload(JagString arg0) {
 		int var2 = this.getGroupId(Statics.field4281);
-		return var2 == -1 ? this.method946(arg0, Statics.field4281) : this.method946(Statics.field4281, arg0);
+		return var2 == -1 ? this.requestDownload(arg0, Statics.field4281) : this.requestDownload(Statics.field4281, arg0);
 	}
 
 	@ObfuscatedName("nb.a(ILi;Li;)Z")
-	public final boolean method946(JagString arg0, JagString arg1) {
+	public final boolean requestDownload(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.method639();
 		JagString var4 = arg1.method639();
 		int var5 = this.groupNameHashTable.find(var3.method605());
-		if (this.method968(var5)) {
+		if (this.isGroupValid(var5)) {
 			int var6 = this.fileNameHashTables[var5].find(var4.method605());
 			return this.requestDownload(var5, var6);
 		} else {
@@ -155,7 +157,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.b(III)[B")
 	public final byte[] peekFile(int arg0, int arg1) {
-		if (!this.method943(arg0, arg1)) {
+		if (!this.isFileValid(arg0, arg1)) {
 			return null;
 		}
 		if (this.unpacked[arg1] == null || this.unpacked[arg1][arg0] == null) {
@@ -173,7 +175,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.c(II)[I")
 	public final int[] getFileList(int arg0) {
-		if (!this.method968(arg0)) {
+		if (!this.isGroupValid(arg0)) {
 			return null;
 		}
 		int[] var2 = this.fileIds[arg0];
@@ -189,7 +191,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(I[III)[B")
 	public final byte[] fetchFile(int[] arg0, int arg1, int arg2) {
-		if (!this.method943(arg2, arg1)) {
+		if (!this.isFileValid(arg2, arg1)) {
 			return null;
 		}
 		if (this.unpacked[arg1] == null || this.unpacked[arg1][arg2] == null) {
@@ -213,7 +215,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.a(Z)I")
-	public final int method950() {
+	public final int getTotalLoadProgress() {
 		int var1 = 0;
 		int var2 = 0;
 		for (int var3 = 0; var3 < this.packed.length; var3++) {
@@ -231,7 +233,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(I[IB)Z")
 	public boolean unpackGroupData(int arg0, int[] arg1) {
-		if (!this.method968(arg0)) {
+		if (!this.isGroupValid(arg0)) {
 			return false;
 		} else if (this.packed[arg0] == null) {
 			return false;
@@ -337,10 +339,10 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.d(II)Z")
-	public final boolean method953(int arg0) {
+	public final boolean requestDownload(int arg0) {
 		if (this.fileIdLimit.length == 1) {
 			return this.requestDownload(0, arg0);
-		} else if (!this.method968(arg0)) {
+		} else if (!this.isGroupValid(arg0)) {
 			return false;
 		} else if (this.fileIdLimit[arg0] == 1) {
 			return this.requestDownload(arg0, 0);
@@ -358,7 +360,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(BI)I")
 	public int getGroupLoadProgress(int arg0) {
-		if (this.method968(arg0)) {
+		if (this.isGroupValid(arg0)) {
 			return this.packed[arg0] == null ? 0 : 100;
 		} else {
 			return 0;
@@ -367,7 +369,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(IB)V")
 	public final void discardFiles(int arg0) {
-		if (this.method968(arg0)) {
+		if (this.isGroupValid(arg0)) {
 			this.unpacked[arg0] = null;
 		}
 	}
@@ -380,7 +382,7 @@ public abstract class Js5 {
 	public final byte[] getFile(int arg0) {
 		if (this.fileIdLimit.length == 1) {
 			return this.getFile(arg0, 0);
-		} else if (!this.method968(arg0)) {
+		} else if (!this.isGroupValid(arg0)) {
 			return null;
 		} else if (this.fileIdLimit[arg0] == 1) {
 			return this.getFile(0, arg0);
@@ -390,7 +392,7 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.a(Li;B)I")
-	public final int method957(JagString arg0) {
+	public final int getGroupLoadProgress(JagString arg0) {
 		JagString var2 = arg0.method639();
 		int var3 = this.groupNameHashTable.find(var2.method605());
 		return this.getGroupLoadProgress(var3);
@@ -398,7 +400,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(IIB)Z")
 	public final boolean requestDownload(int arg0, int arg1) {
-		if (!this.method943(arg1, arg0)) {
+		if (!this.isFileValid(arg1, arg0)) {
 			return false;
 		} else if (this.unpacked[arg0] != null && this.unpacked[arg0][arg1] != null) {
 			return true;
@@ -415,7 +417,7 @@ public abstract class Js5 {
 		JagString var3 = arg0.method639();
 		JagString var4 = arg1.method639();
 		int var5 = this.groupNameHashTable.find(var3.method605());
-		if (this.method968(var5)) {
+		if (this.isGroupValid(var5)) {
 			int var6 = this.fileNameHashTables[var5].find(var4.method605());
 			return this.getFile(var6, var5);
 		} else {
@@ -442,11 +444,11 @@ public abstract class Js5 {
 	public final int getGroupId(JagString arg0) {
 		JagString var2 = arg0.method639();
 		int var3 = this.groupNameHashTable.find(var2.method605());
-		return this.method968(var3) ? var3 : -1;
+		return this.isGroupValid(var3) ? var3 : -1;
 	}
 
 	@ObfuscatedName("nb.a(ZZI)V")
-	public final void method965(boolean arg0) {
+	public final void discardNames(boolean arg0) {
 		this.fileNameHashTables = null;
 		this.fileNameHashes = null;
 		if (arg0) {
@@ -457,10 +459,10 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(Li;II)I")
 	public final int getFileId(JagString arg0, int arg1) {
-		if (this.method968(arg1)) {
+		if (this.isGroupValid(arg1)) {
 			JagString var3 = arg0.method639();
 			int var4 = this.fileNameHashTables[arg1].find(var3.method605());
-			return this.method943(var4, arg1) ? var4 : -1;
+			return this.isFileValid(var4, arg1) ? var4 : -1;
 		} else {
 			return -1;
 		}
@@ -557,10 +559,10 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.g(II)Z")
-	public final boolean method968(int arg0) {
+	public final boolean isGroupValid(int arg0) {
 		if (arg0 >= 0 && arg0 < this.fileIdLimit.length && this.fileIdLimit[arg0] != 0) {
 			return true;
-		} else if (field615) {
+		} else if (strictBounds) {
 			throw new IllegalArgumentException(Integer.toString(arg0));
 		} else {
 			return false;
@@ -576,7 +578,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.b(IB)Z")
 	public final boolean requestGroupDownload(int arg0) {
-		if (!this.method968(arg0)) {
+		if (!this.isGroupValid(arg0)) {
 			return false;
 		} else if (this.packed[arg0] == null) {
 			this.requestGroupDownload2(arg0);

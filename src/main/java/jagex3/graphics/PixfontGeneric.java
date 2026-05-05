@@ -269,7 +269,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 									if (field450 == 256) {
 										var11.plotSprite(arg1, var4 + this.ascent - var12);
 									} else {
-										var11.method877(arg1, var4 + this.ascent - var12, field450);
+										var11.transPlotSprite(arg1, var4 + this.ascent - var12, field450);
 									}
 									arg1 += var11.owi;
 									var6 = -1;
@@ -297,14 +297,14 @@ public abstract class PixfontGeneric extends Linkable2 {
 						}
 					} else if (field450 == 256) {
 						if (field428 != -1) {
-							this.method142(var8, arg1 + this.field426[var8] + 1, var4 + this.field448[var8] + 1, var13, var14, field428);
+							this.plotLetter(var8, arg1 + this.field426[var8] + 1, var4 + this.field448[var8] + 1, var13, var14, field428);
 						}
-						this.method143(var8, arg1 + this.field426[var8], var4 + this.field448[var8], var13, var14, field444);
+						this.plotLetterScanline(var8, arg1 + this.field426[var8], var4 + this.field448[var8], var13, var14, field444);
 					} else {
 						if (field428 != -1) {
-							this.method160(var8, arg1 + this.field426[var8] + 1, var4 + this.field448[var8] + 1, var13, var14, field428, field450);
+							this.plotLetterTrans(var8, arg1 + this.field426[var8] + 1, var4 + this.field448[var8] + 1, var13, var14, field428, field450);
 						}
-						this.method147(var8, arg1 + this.field426[var8], var4 + this.field448[var8], var13, var14, field444, field450);
+						this.plotLetterTransScanline(var8, arg1 + this.field426[var8], var4 + this.field448[var8], var13, var14, field444, field450);
 					}
 					int var15 = this.field432[var8];
 					if (field433 != -1) {
@@ -478,10 +478,10 @@ public abstract class PixfontGeneric extends Linkable2 {
 	}
 
 	@ObfuscatedName("cc.a(IIIIII)V")
-	public abstract void method142(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
+	public abstract void plotLetter(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
 
 	@ObfuscatedName("cc.b(IIIIII)V")
-	public abstract void method143(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
+	public abstract void plotLetterScanline(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
 
 	@ObfuscatedName("cc.a(Li;IIIII)V")
 	public final void method144(JagString arg0, int arg1, int arg2, int arg3, int arg4) {
@@ -526,7 +526,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 	}
 
 	@ObfuscatedName("cc.a(IIIIIII)V")
-	public abstract void method147(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6);
+	public abstract void plotLetterTransScanline(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6);
 
 	@ObfuscatedName("cc.a([B)V")
 	public void method148(byte[] arg0) {
@@ -649,7 +649,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 									if (field450 == 256) {
 										var16.plotSprite(arg1 + var13, var6 + this.ascent - var17 + var14);
 									} else {
-										var16.method877(arg1 + var13, var6 + this.ascent - var17 + var14, field450);
+										var16.transPlotSprite(arg1 + var13, var6 + this.ascent - var17 + var14, field450);
 									}
 									arg1 += var16.owi;
 									var8 = -1;
@@ -690,14 +690,14 @@ public abstract class PixfontGeneric extends Linkable2 {
 						}
 					} else if (field450 == 256) {
 						if (field428 != -1) {
-							this.method142(var11, arg1 + this.field426[var11] + var20 + 1, var6 + this.field448[var11] + 1 + var21, var18, var19, field428);
+							this.plotLetter(var11, arg1 + this.field426[var11] + var20 + 1, var6 + this.field448[var11] + 1 + var21, var18, var19, field428);
 						}
-						this.method143(var11, arg1 + this.field426[var11] + var20, var6 + this.field448[var11] + var21, var18, var19, field444);
+						this.plotLetterScanline(var11, arg1 + this.field426[var11] + var20, var6 + this.field448[var11] + var21, var18, var19, field444);
 					} else {
 						if (field428 != -1) {
-							this.method160(var11, arg1 + this.field426[var11] + var20 + 1, var6 + this.field448[var11] + 1 + var21, var18, var19, field428, field450);
+							this.plotLetterTrans(var11, arg1 + this.field426[var11] + var20 + 1, var6 + this.field448[var11] + 1 + var21, var18, var19, field428, field450);
 						}
-						this.method147(var11, arg1 + this.field426[var11] + var20, var6 + this.field448[var11] + var21, var18, var19, field444, field450);
+						this.plotLetterTransScanline(var11, arg1 + this.field426[var11] + var20, var6 + this.field448[var11] + var21, var18, var19, field444, field450);
 					}
 					int var22 = this.field432[var11];
 					if (field433 != -1) {
@@ -911,7 +911,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 	}
 
 	@ObfuscatedName("cc.b(IIIIIII)V")
-	public abstract void method160(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6);
+	public abstract void plotLetterTrans(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6);
 
 	@ObfuscatedName("cc.b(II)V")
 	public void method161(int arg0, int arg1) {

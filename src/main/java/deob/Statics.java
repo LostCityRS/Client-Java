@@ -13,12 +13,10 @@ import jagex3.jstring.JagString;
 import jagex3.sound.AudioThread;
 import jagex3.sound.PcmStream;
 
-import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.TimeZone;
-import java.util.zip.CRC32;
 
 public class Statics {
 	@ObfuscatedName("bb.a")
@@ -149,8 +147,6 @@ public class Statics {
 	public static final JagString field656 = JagString.wrap("May");
 	@ObfuscatedName("db.ab")
 	public static final JagString[] field658 = new JagString[] {field645, field642, field643, field652, field656, field661, field624, field632, field653, field640, field659, field628};
-	@ObfuscatedName("uh.M")
-	public static final CRC32 field4241 = new CRC32();
 	@ObfuscatedName("bj.zb")
 	public static final Calendar calendar = Calendar.getInstance();
 	@ObfuscatedName("pi.S")
@@ -207,8 +203,6 @@ public class Statics {
 	public static final JagString field3526 = JagString.wrap(" )2> <col=00ffff>");
 	@ObfuscatedName("og.U")
 	public static final JagString field3076 = JagString.wrap(")3runescape)3com)4l=");
-	@ObfuscatedName("og.R")
-	public static final int field3073 = 0;
 	@ObfuscatedName("ie.p")
 	public static final JagString field1750 = JagString.wrap("rect_debug=");
 	@ObfuscatedName("ge.u")
@@ -361,16 +355,8 @@ public class Statics {
 	public static final JagString field891 = JagString.wrap("<col=ffffff> )4 ");
 	@ObfuscatedName("eh.m")
 	public static final JagString field979 = JagString.wrap(")1");
-	@ObfuscatedName("tj.a")
-	public static int field4055;
-	@ObfuscatedName("fb.lb")
-	public static int field1102;
-	@ObfuscatedName("ba.h")
-	public static int field192 = 0;
 	@ObfuscatedName("ba.s")
 	public static int field203 = 0;
-	@ObfuscatedName("bd.n")
-	public static int field249;
 	@ObfuscatedName("n.h")
 	public static int field2620 = 0;
 	@ObfuscatedName("g.h")
@@ -397,24 +383,16 @@ public class Statics {
 	public static int field941;
 	@ObfuscatedName("fi.v")
 	public static Js5 field1176;
-	@ObfuscatedName("ge.C")
-	public static int field1316 = 0;
 	@ObfuscatedName("qa.a")
 	public static long field3519 = 0L;
 	@ObfuscatedName("uc.i")
 	public static short field4175 = 256;
-	@ObfuscatedName("na.L")
-	public static Image field2643;
 	@ObfuscatedName("ob.p")
 	public static int[][][] field2979;
-	@ObfuscatedName("ob.q")
-	public static boolean field2980 = true;
 	@ObfuscatedName("jc.G")
 	public static int[] field1831;
 	@ObfuscatedName("eh.E")
 	public static boolean field997 = false;
-	@ObfuscatedName("oc.v")
-	public static int field2993 = 0;
 	@ObfuscatedName("nb.bb")
 	public static int[] field2713;
 	@ObfuscatedName("ud.a")
@@ -425,36 +403,22 @@ public class Statics {
 	public static int field3893;
 	@ObfuscatedName("u.yb")
 	public static JagString field4134 = null;
-	@ObfuscatedName("oi.g")
-	public static int field3105 = 0;
 	@ObfuscatedName("ne.a")
 	public static JagString field2752 = null;
-	@ObfuscatedName("ne.o")
-	public static int field2766;
 	@ObfuscatedName("sc.ab")
 	public static int field3809;
-	@ObfuscatedName("nj.j")
-	public static int field2931;
 	@ObfuscatedName("va.w")
 	public static HashTable field4313;
-	@ObfuscatedName("va.x")
-	public static int field4314;
 	@ObfuscatedName("nd.l")
 	public static AudioThread field2738;
 	@ObfuscatedName("oh.g")
 	public static short field3083 = 320;
 	@ObfuscatedName("ia.L")
 	public static int[] field1698;
-	@ObfuscatedName("jd.f")
-	public static int field1849;
 	@ObfuscatedName("jd.g")
 	public static int field1850;
-	@ObfuscatedName("se.i")
-	public static FontMetrics field3840;
 	@ObfuscatedName("jh.f")
 	public static Js5 field1926;
-	@ObfuscatedName("lj.o")
-	public static int field2442 = 1;
 	@ObfuscatedName("ka.f")
 	public static Pix32 field2010;
 	@ObfuscatedName("nh.l")
@@ -469,8 +433,6 @@ public class Statics {
 	public static int field1550 = 0;
 	@ObfuscatedName("mf.w")
 	public static boolean field2555 = false;
-	@ObfuscatedName("qb.R")
-	public static int field3545 = 0;
 	@ObfuscatedName("ac.L")
 	public static JagString field54;
 	@ObfuscatedName("eb.X")
@@ -558,45 +520,6 @@ public class Statics {
 	@ObfuscatedName("ac.c(II)Z")
 	public static boolean method24(int arg0) {
 		return arg0 >= 48 && arg0 <= 57;
-	}
-
-	@ObfuscatedName("hb.a(III[BIII[III)V")
-	public static void method527(int arg0, int arg1, int arg2, byte[] arg3, int arg4, int arg5, int arg6, int[] arg7, int arg8) {
-		int var9 = -(arg4 >> 2);
-		int var10 = -(arg4 & 0x3);
-		for (int var11 = -arg5; var11 < 0; var11++) {
-			for (int var12 = var9; var12 < 0; var12++) {
-				if (arg3[arg8++] == 0) {
-					arg2++;
-				} else {
-					arg7[arg2++] = arg0;
-				}
-				if (arg3[arg8++] == 0) {
-					arg2++;
-				} else {
-					arg7[arg2++] = arg0;
-				}
-				if (arg3[arg8++] == 0) {
-					arg2++;
-				} else {
-					arg7[arg2++] = arg0;
-				}
-				if (arg3[arg8++] == 0) {
-					arg2++;
-				} else {
-					arg7[arg2++] = arg0;
-				}
-			}
-			for (int var13 = var10; var13 < 0; var13++) {
-				if (arg3[arg8++] == 0) {
-					arg2++;
-				} else {
-					arg7[arg2++] = arg0;
-				}
-			}
-			arg2 += arg6;
-			arg8 += arg1;
-		}
 	}
 
 	@ObfuscatedName("o.a(II[Li;I[S)V")
@@ -744,24 +667,6 @@ public class Statics {
 		}
 	}
 
-	@ObfuscatedName("ih.a([IIBIII[BIIII)V")
-	public static void method677(int[] arg0, int arg1, int arg2, int arg3, int arg4, byte[] arg5, int arg6, int arg7, int arg8, int arg9) {
-		int var10 = (arg2 * (arg6 & 0xFF00FF) & 0xFF00FF00) + ((arg6 & 0xFF00) * arg2 & 0xFF0000) >> 8;
-		int var11 = 256 - arg2;
-		for (int var12 = -arg8; var12 < 0; var12++) {
-			for (int var13 = -arg1; var13 < 0; var13++) {
-				if (arg5[arg3++] == 0) {
-					arg7++;
-				} else {
-					int var14 = arg0[arg7];
-					arg0[arg7++] = ((var11 * (var14 & 0xFF00FF) & 0xFF00FF00) + (var11 * (var14 & 0xFF00) & 0xFF0000) >> 8) + var10;
-				}
-			}
-			arg7 += arg4;
-			arg3 += arg9;
-		}
-	}
-
 	@ObfuscatedName("jj.a(I)V")
 	public static void method740() {
 		if (field1734 != null && field2920 != null) {
@@ -779,14 +684,6 @@ public class Statics {
 	@ObfuscatedName("sd.a([SI[Li;)V")
 	public static void method1376(short[] arg0, JagString[] arg1) {
 		method1037(0, arg1, arg1.length - 1, arg0);
-	}
-
-	@ObfuscatedName("sc.a(IJ)V")
-	public static void method1365(long arg0) {
-		try {
-			Thread.sleep(arg0);
-		} catch (InterruptedException var2) {
-		}
 	}
 
 	@ObfuscatedName("oh.a(III)I")

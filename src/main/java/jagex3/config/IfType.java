@@ -590,7 +590,7 @@ public final class IfType {
 			if (arg1 == null) {
 				return null;
 			}
-			ModelLit var10 = arg1.method1428(arg0, arg2);
+			ModelLit var10 = arg1.getHeadModel(arg0, arg2);
 			if (var10 == null) {
 				loadingAsset = true;
 				return null;

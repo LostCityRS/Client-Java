@@ -30,7 +30,7 @@ public final class SoftwarePix32 extends Pix32 {
 	}
 
 	@ObfuscatedName("pf.a([I[IIIIIIIIIII)V")
-	public static void method1169(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
+	public static void plotScale(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10) {
 		int var11 = arg2;
 		for (int var12 = -arg7; var12 < 0; var12++) {
 			int var13 = (arg3 >> 16) * arg10;
@@ -50,7 +50,7 @@ public final class SoftwarePix32 extends Pix32 {
 	}
 
 	@ObfuscatedName("pf.a([I[IIIIIIIIII)V")
-	public static void method1172(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
+	public static void litSprite(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {
 		for (int var8 = -arg5; var8 < 0; var8++) {
 			for (int var9 = -arg4; var9 < 0; var9++) {
 				int var10 = arg1[arg2++];
@@ -68,7 +68,7 @@ public final class SoftwarePix32 extends Pix32 {
 	}
 
 	@ObfuscatedName("pf.a([I[IIIIIIIIIIII)V")
-	public static void method1175(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
+	public static void tranScale(int[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 		int var12 = 256 - arg11;
 		int var13 = arg2;
 		for (int var14 = -arg7; var14 < 0; var14++) {
@@ -302,7 +302,7 @@ public final class SoftwarePix32 extends Pix32 {
 
 	@ObfuscatedName("pf.b(IIII)V")
 	@Override
-	public void method1160(int arg0, int arg1) {
+	public void litPlotSprite(int arg0, int arg1) {
 		int var3 = arg0 + super.xof;
 		int var4 = arg1 + super.yof;
 		int var5 = var3 + var4 * Pix2D.width;
@@ -337,7 +337,7 @@ public final class SoftwarePix32 extends Pix32 {
 			var9 += var13;
 		}
 		if (var8 > 0 && var7 > 0) {
-			method1172(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
+			litSprite(Pix2D.pixels, this.data, var6, var5, var8, var7, var9, var10);
 		}
 	}
 
@@ -435,11 +435,11 @@ public final class SoftwarePix32 extends Pix32 {
 			var7 += var11 * var19;
 			var16 += var19;
 		}
-		method1169(Pix2D.pixels, this.data, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
+		plotScale(Pix2D.pixels, this.data, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
 	}
 
 	@ObfuscatedName("pf.a(IIIIIIII[I[I)V")
-	public void method1163(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int[] arg7, int[] arg8) {
+	public void scanlineRotatePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int[] arg7, int[] arg8) {
 		try {
 			int var10 = -arg2 / 2;
 			int var11 = -arg3 / 2;
@@ -601,7 +601,7 @@ public final class SoftwarePix32 extends Pix32 {
 
 	@ObfuscatedName("pf.a(IIIIII)V")
 	@Override
-	public void method1166(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void pixelPerfectRotateScalePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		if (arg5 == 0) {
 			return;
 		}
@@ -1070,7 +1070,7 @@ public final class SoftwarePix32 extends Pix32 {
 	}
 
 	@ObfuscatedName("pf.a(IIIIIIDI)V")
-	public void method1170(int arg0, int arg1, double arg2) {
+	public void rotateTransPlotSprite(int arg0, int arg1, double arg2) {
 		try {
 			int var5 = (int) (Math.sin(arg2) * 65536.0D);
 			int var6 = (int) (Math.cos(arg2) * 65536.0D);
@@ -1203,11 +1203,11 @@ public final class SoftwarePix32 extends Pix32 {
 			var8 += var12 * var20;
 			var17 += var20;
 		}
-		method1175(Pix2D.pixels, this.data, var8, var9, var16, var17, arg2, arg3, var12, var13, var6, arg4);
+		tranScale(Pix2D.pixels, this.data, var8, var9, var16, var17, arg2, arg3, var12, var13, var6, arg4);
 	}
 
 	@ObfuscatedName("pf.b(IIIIIIII[I[I)V")
-	public void method1176(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int[] arg8, int[] arg9) {
+	public void scanlineRotatePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int[] arg8, int[] arg9) {
 		try {
 			int var11 = -arg2 / 2;
 			int var12 = -arg3 / 2;

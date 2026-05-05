@@ -176,7 +176,7 @@ public class TitleScreen {
                 int var14 = var12 + 15;
                 arg1.method141(loginMes3, 382, 241, 16776960, 0);
                 boolean var4;
-                if (Statics.field2620 == 0 && Client.loopCycle % 40 < 20 && GameShell.field3520) {
+                if (Statics.field2620 == 0 && Client.loopCycle % 40 < 20 && GameShell.focus) {
                     var4 = true;
                 } else {
                     var4 = false;
@@ -185,7 +185,7 @@ public class TitleScreen {
                 var12 += 10;
                 arg1.method154(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.method162(loginUser), var4 ? Statics.field3843 : field3972}), 272, 266, 16777215, 0);
                 boolean var5;
-                if (Statics.field2620 == 1 && Client.loopCycle % 40 < 20 && GameShell.field3520) {
+                if (Statics.field2620 == 1 && Client.loopCycle % 40 < 20 && GameShell.focus) {
                     var5 = true;
                 } else {
                     var5 = false;
@@ -748,7 +748,7 @@ public class TitleScreen {
 			}
 			if (ClientMouseListener.mouseX >= var9 && ClientMouseListener.mouseY >= var11 && ClientMouseListener.mouseX < var9 + 88 && ClientMouseListener.mouseY < var11 + 19 && var15) {
 				slLastWorld = var13;
-				slBack[var14.field1257 ? 1 : 0].method1160(var9, var11);
+				slBack[var14.field1257 ? 1 : 0].litPlotSprite(var9, var11);
 			} else {
 				slBack[var14.field1257 ? 1 : 0].quickPlotSprite(var9, var11);
 			}
@@ -865,7 +865,7 @@ public class TitleScreen {
 			if (gameworldListDownloadRequest == null) {
 				gameworldListDownloadRequest = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { Statics.field3983, JagString.method1212(Client.lang), Statics.field915}).method606());
 			} else {
-				byte[] var0 = gameworldListDownloadRequest.method12();
+				byte[] var0 = gameworldListDownloadRequest.getData();
 				if (var0 != null) {
 					Packet var1 = new Packet(var0);
 					num = var1.g2();
@@ -1096,29 +1096,29 @@ public class TitleScreen {
 	@ObfuscatedName("ea.a(Lnb;BLnb;)I")
 	public static int ready(Js5 arg0, Js5 arg1) {
 		int var2 = 0;
-		if (arg0.method953(field2009)) {
+		if (arg0.requestDownload(field2009)) {
 			var2++;
 		}
-		if (arg1.method953(field2932)) {
+		if (arg1.requestDownload(field2932)) {
 			var2++;
 		}
-		if (arg1.method953(field1896)) {
+		if (arg1.requestDownload(field1896)) {
 			var2++;
 		}
-		if (arg1.method953(field3019)) {
+		if (arg1.requestDownload(field3019)) {
 			var2++;
 		}
-		if (arg1.method953(field4502)) {
+		if (arg1.requestDownload(field4502)) {
 			var2++;
 		}
-		if (arg1.method953(field2912)) {
+		if (arg1.requestDownload(field2912)) {
 			var2++;
 		}
-		arg1.method953(field209);
-		arg1.method953(field119);
-		arg1.method953(field1783);
-		arg1.method953(field2195);
-		arg1.method953(Statics.field4247);
+		arg1.requestDownload(field209);
+		arg1.requestDownload(field119);
+		arg1.requestDownload(field1783);
+		arg1.requestDownload(field2195);
+		arg1.requestDownload(Statics.field4247);
 		return var2;
 	}
 

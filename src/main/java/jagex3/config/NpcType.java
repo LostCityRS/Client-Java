@@ -190,9 +190,9 @@ public final class NpcType extends Linkable2 {
 		}
 		int var1 = -1;
 		if (this.multivarbit != -1) {
-			var1 = VarCache.method930(this.multivarbit);
+			var1 = VarCache.getVarbit(this.multivarbit);
 		} else if (this.multivarp != -1) {
-			var1 = VarCache.field2050[this.multivarp];
+			var1 = VarCache.var[this.multivarp];
 		}
 		if (var1 < 0 || var1 >= this.multinpc.length - 1 || this.multinpc[var1] == -1) {
 			int var2 = this.multinpc[this.multinpc.length - 1];
@@ -379,9 +379,9 @@ public final class NpcType extends Linkable2 {
 	public NpcType getMultiNpc() {
 		int var1 = -1;
 		if (this.multivarbit != -1) {
-			var1 = VarCache.method930(this.multivarbit);
+			var1 = VarCache.getVarbit(this.multivarbit);
 		} else if (this.multivarp != -1) {
-			var1 = VarCache.field2050[this.multivarp];
+			var1 = VarCache.var[this.multivarp];
 		}
 		if (var1 < 0 || this.multinpc.length - 1 <= var1 || this.multinpc[var1] == -1) {
 			int var2 = this.multinpc[this.multinpc.length - 1];

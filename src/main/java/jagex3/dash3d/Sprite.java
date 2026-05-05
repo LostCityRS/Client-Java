@@ -6,42 +6,42 @@ import deob.ObfuscatedName;
 public final class Sprite {
 
 	@ObfuscatedName("jj.a")
-	public int field1933;
+	public int minTileX;
 
 	@ObfuscatedName("jj.b")
-	public int field1934;
+	public int cycle;
 
 	@ObfuscatedName("jj.c")
-	public int field1935;
+	public int maxTileZ;
 
 	@ObfuscatedName("jj.d")
-	public int field1936;
+	public int minTileZ;
 
 	@ObfuscatedName("jj.f")
-	public int field1938;
+	public int y;
 
 	@ObfuscatedName("jj.g")
-	public int field1939;
+	public int yaw;
 
 	@ObfuscatedName("jj.h")
-	public int field1940;
+	public int maxTileX;
 
 	@ObfuscatedName("jj.k")
-	public ModelSource field1943;
+	public ModelSource model;
 
 	@ObfuscatedName("jj.m")
-	public int field1945;
+	public int x;
 
 	@ObfuscatedName("jj.p")
-	public long field1948 = 0L;
+	public long typecode = 0L;
 
 	@ObfuscatedName("jj.q")
-	public int field1949;
+	public int z;
 
 	@ObfuscatedName("jj.r")
-	public int field1950;
+	public int distance;
 
 	@ObfuscatedName("jj.t")
-	public int field1952;
+	public int level;
 
 }

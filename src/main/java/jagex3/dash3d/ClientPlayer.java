@@ -110,7 +110,7 @@ public final class ClientPlayer extends ClientEntity {
 		}
 		SeqType var11 = super.primarySeqId != -1 && super.primarySeqDelay == 0 ? SeqType.list(super.primarySeqId) : null;
 		SeqType var12 = super.secondarySeqId == -1 || this.lowMem || super.secondarySeqId == super.readyanim && var11 != null ? null : SeqType.list(super.secondarySeqId);
-		ModelLit var13 = this.model.method1430(var12, super.primarySeqFrame, super.secondarySeqFrame, var11);
+		ModelLit var13 = this.model.getTempModel(var12, super.primarySeqFrame, super.secondarySeqFrame, var11);
 		if (var13 == null) {
 			return;
 		}
@@ -344,7 +344,7 @@ public final class ClientPlayer extends ClientEntity {
 		if (this.model == null) {
 			this.model = new PlayerModel();
 		}
-		this.model.method1431(var5, var6, var13, var3 == 1);
+		this.model.setAppearance(var5, var6, var13, var3 == 1);
 	}
 
 	@ObfuscatedName("dj.a(IIIIIIIIIILcg;II)V")

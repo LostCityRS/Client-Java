@@ -7,29 +7,29 @@ import jagex3.util.ThreadSleep;
 public final class MouseTracking implements Runnable {
 
 	@ObfuscatedName("dh.g")
-	public final Object field715 = new Object();
+	public final Object lock = new Object();
 
 	@ObfuscatedName("dh.i")
-	public boolean field717 = true;
+	public boolean active = true;
 
 	@ObfuscatedName("dh.j")
-	public int field718 = 0;
+	public int length = 0;
 
 	@ObfuscatedName("dh.k")
-	public final int[] field719 = new int[500];
+	public final int[] y = new int[500];
 
 	@ObfuscatedName("dh.l")
-	public final int[] field720 = new int[500];
+	public final int[] x = new int[500];
 
 	@Override
 	public void run() {
-		while (this.field717) {
-			Object var1 = this.field715;
-			synchronized (this.field715) {
-				if (this.field718 < 500) {
-					this.field720[this.field718] = ClientMouseListener.mouseX;
-					this.field719[this.field718] = ClientMouseListener.mouseY;
-					this.field718++;
+		while (this.active) {
+			Object var1 = this.lock;
+			synchronized (this.lock) {
+				if (this.length < 500) {
+					this.x[this.length] = ClientMouseListener.mouseX;
+					this.y[this.length] = ClientMouseListener.mouseY;
+					this.length++;
 				}
 			}
 			ThreadSleep.sleepPrecise(50L);

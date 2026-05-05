@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.graphics.Pix2D;
 import jagex3.util.IntUtil;
 
@@ -61,6 +60,14 @@ public final class Pix3D {
 
 	@ObfuscatedName("pj.r")
 	public static boolean textureFallback = false;
+	@ObfuscatedName("ne.o")
+	public static int minX;
+	@ObfuscatedName("nj.j")
+	public static int maxX;
+	@ObfuscatedName("fb.lb")
+	public static int minY;
+	@ObfuscatedName("tj.a")
+	public static int maxY;
 
 	static {
 		for (int var0 = 1; var0 < 512; var0++) {
@@ -1123,10 +1130,10 @@ public final class Pix3D {
 		int var4 = var2 - var3 * Pix2D.width;
 		originX = arg0 - var4;
 		originY = arg1 - var3;
-		Statics.field2766 = -originX;
-		Statics.field2931 = sizeX - originX;
-		Statics.field1102 = -originY;
-		Statics.field4055 = sizeY - originY;
+		minX = -originX;
+		maxX = sizeX - originX;
+		minY = -originY;
+		maxY = sizeY - originY;
 	}
 
 	@ObfuscatedName("pj.a([IIIIIIII)V")
@@ -2678,10 +2685,10 @@ public final class Pix3D {
 	public static void resetOrigin() {
 		originX = sizeX / 2;
 		originY = sizeY / 2;
-		Statics.field2766 = -originX;
-		Statics.field2931 = sizeX - originX;
-		Statics.field1102 = -originY;
-		Statics.field4055 = sizeY - originY;
+		minX = -originX;
+		maxX = sizeX - originX;
+		minY = -originY;
+		maxY = sizeY - originY;
 	}
 
 	@ObfuscatedName("pj.c(II)V")

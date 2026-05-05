@@ -30,7 +30,7 @@ public final class SignLink implements Runnable {
 	public FileOnDisk field3582 = null;
 
 	@ObfuscatedName("qg.e")
-	public PrivilegedRequest field3583 = null;
+	public PrivilegedRequest task = null;
 
 	@ObfuscatedName("qg.f")
 	public FileOnDisk[] field3584;
@@ -42,13 +42,13 @@ public final class SignLink implements Runnable {
 	public static Method setFocusTraversalKeysEnabled;
 
 	@ObfuscatedName("qg.i")
-	public PrivilegedRequest field3587 = null;
+	public PrivilegedRequest current = null;
 
 	@ObfuscatedName("qg.j")
 	public FileOnDisk field3588 = null;
 
 	@ObfuscatedName("qg.k")
-	public AudioSource field3589;
+	public AudioSource audio;
 
 	@ObfuscatedName("qg.l")
 	public FileOnDisk field3590 = null;
@@ -57,7 +57,7 @@ public final class SignLink implements Runnable {
 	public static String javaVersion;
 
 	@ObfuscatedName("qg.n")
-	public EventQueue field3592;
+	public EventQueue eventQueue;
 
 	@ObfuscatedName("qg.o")
 	public File field3593 = null;
@@ -69,7 +69,7 @@ public final class SignLink implements Runnable {
 	public final Thread thread;
 
 	@ObfuscatedName("qg.r")
-	public boolean field3596 = false;
+	public boolean isClosed = false;
 
 	@ObfuscatedName("qg.s")
 	public Applet field3597 = null;
@@ -94,7 +94,7 @@ public final class SignLink implements Runnable {
 			userHome = "~/";
 		}
 		try {
-			this.field3592 = Toolkit.getDefaultToolkit().getSystemEventQueue();
+			this.eventQueue = Toolkit.getDefaultToolkit().getSystemEventQueue();
 		} catch (Throwable var8) {
 		}
 		try {
@@ -113,7 +113,7 @@ public final class SignLink implements Runnable {
 			}
 		} catch (Exception var6) {
 		}
-		this.field3596 = false;
+		this.isClosed = false;
 		this.thread = new Thread(this);
 		this.thread.setPriority(10);
 		this.thread.setDaemon(true);
@@ -121,24 +121,24 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("qg.a(B)Lqd;")
-	public AudioSource method1286() {
-		return this.field3589;
+	public AudioSource getAudio() {
+		return this.audio;
 	}
 
 	@ObfuscatedName("qg.a(ILjava/lang/Runnable;I)Lp;")
 	public PrivilegedRequest threadreq(Runnable arg1, int arg2) {
-		return this.method1290(2, arg1, arg2);
+		return this.newRequest(2, arg1, arg2);
 	}
 
 	@ObfuscatedName("qg.a(Ljava/lang/String;II)Lp;")
 	public PrivilegedRequest socketreq(String arg0, int arg1) {
-		return this.method1290(1, arg0, arg1);
+		return this.newRequest(1, arg0, arg1);
 	}
 
 	@ObfuscatedName("qg.a(I)V")
-	public void method1289() {
+	public void close() {
 		synchronized (this) {
-			this.field3596 = true;
+			this.isClosed = true;
 			this.notifyAll();
 		}
 		try {
@@ -176,17 +176,17 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("qg.a(ILjava/lang/Object;III)Lp;")
-	public PrivilegedRequest method1290(int arg0, Object arg1, int arg2) {
+	public PrivilegedRequest newRequest(int arg0, Object arg1, int arg2) {
 		PrivilegedRequest var4 = new PrivilegedRequest();
-		var4.field3133 = arg1;
-		var4.field3132 = arg2;
-		var4.field3131 = arg0;
+		var4.objArg = arg1;
+		var4.intArg = arg2;
+		var4.type = arg0;
 		synchronized (this) {
-			if (this.field3583 == null) {
-				this.field3583 = this.field3587 = var4;
+			if (this.task == null) {
+				this.task = this.current = var4;
 			} else {
-				this.field3583.field3130 = var4;
-				this.field3583 = var4;
+				this.task.next = var4;
+				this.task = var4;
 			}
 			this.notify();
 			return var4;
@@ -199,14 +199,14 @@ public final class SignLink implements Runnable {
 			PrivilegedRequest var2;
 			synchronized (this) {
 				while (true) {
-					if (this.field3596) {
+					if (this.isClosed) {
 						return;
 					}
-					if (this.field3587 != null) {
-						var2 = this.field3587;
-						this.field3587 = this.field3587.field3130;
-						if (this.field3587 == null) {
-							this.field3583 = null;
+					if (this.current != null) {
+						var2 = this.current;
+						this.current = this.current.next;
+						if (this.current == null) {
+							this.task = null;
 						}
 						break;
 					}
@@ -217,23 +217,23 @@ public final class SignLink implements Runnable {
 				}
 			}
 			try {
-				int var3 = var2.field3131;
+				int var3 = var2.type;
 				if (var3 == 1) {
-					var2.field3129 = new Socket(InetAddress.getByName((String) var2.field3133), var2.field3132);
+					var2.result = new Socket(InetAddress.getByName((String) var2.objArg), var2.intArg);
 				} else if (var3 == 2) {
-					Thread var6 = new Thread((Runnable) var2.field3133);
+					Thread var6 = new Thread((Runnable) var2.objArg);
 					var6.setDaemon(true);
 					var6.start();
-					var6.setPriority(var2.field3132);
-					var2.field3129 = var6;
+					var6.setPriority(var2.intArg);
+					var2.result = var6;
 				} else if (var3 == 4) {
-					var2.field3129 = new DataInputStream(((URL) var2.field3133).openStream());
+					var2.result = new DataInputStream(((URL) var2.objArg).openStream());
 				} else if (var3 == 8) {
-					Object[] var4 = (Object[]) var2.field3133;
-					var2.field3129 = ((Class) var4[0]).getDeclaredMethod((String) var4[1], (Class[]) var4[2]);
+					Object[] var4 = (Object[]) var2.objArg;
+					var2.result = ((Class) var4[0]).getDeclaredMethod((String) var4[1], (Class[]) var4[2]);
 				} else if (var3 == 9) {
-					Object[] var5 = (Object[]) var2.field3133;
-					var2.field3129 = ((Class) var5[0]).getDeclaredField((String) var5[1]);
+					Object[] var5 = (Object[]) var2.objArg;
+					var2.result = ((Class) var5[0]).getDeclaredField((String) var5[1]);
 				} else {
 					throw new Exception();
 				}
@@ -247,23 +247,23 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("qg.a(Ljava/lang/String;ILjava/lang/Class;)Lp;")
-	public PrivilegedRequest method1291(String arg0, Class arg1) {
-		return this.method1290(9, new Object[] { arg1, arg0 }, 0);
+	public PrivilegedRequest fieldreq(String arg0, Class arg1) {
+		return this.newRequest(9, new Object[] { arg1, arg0 }, 0);
 	}
 
 	@ObfuscatedName("qg.a(II)Lp;")
-	public PrivilegedRequest method1292(int arg0) {
-		return this.method1290(3, null, arg0);
+	public PrivilegedRequest dnsreq(int arg0) {
+		return this.newRequest(3, null, arg0);
 	}
 
 	@ObfuscatedName("qg.a(ZLjava/net/URL;)Lp;")
-	public PrivilegedRequest method1293(URL arg0) {
-		return this.method1290(4, arg0, 0);
+	public PrivilegedRequest urlreq(URL arg0) {
+		return this.newRequest(4, arg0, 0);
 	}
 
 	@ObfuscatedName("qg.a(Ljava/lang/String;Ljava/lang/Class;[Ljava/lang/Class;B)Lp;")
-	public PrivilegedRequest method1294(String arg0, Class arg1, Class[] arg2) {
-		return this.method1290(8, new Object[] { arg1, arg0, arg2 }, 0);
+	public PrivilegedRequest methodreq(String arg0, Class arg1, Class[] arg2) {
+		return this.newRequest(8, new Object[] { arg1, arg0, arg2 }, 0);
 	}
 
 	@ObfuscatedName("qg.a(Ljava/lang/String;III)V")

@@ -188,7 +188,7 @@ public final class ClientStream implements Runnable {
 			}
 			if (this.writer.status == 1) {
 				try {
-					((Thread) this.writer.field3129).join();
+					((Thread) this.writer.result).join();
 				} catch (InterruptedException var2) {
 				}
 			}

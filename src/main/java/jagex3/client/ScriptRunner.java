@@ -160,13 +160,13 @@ public class ScriptRunner {
 					}
 					if (var382 == 1) {
 						int var17 = var8[var7];
-						intStack[var5++] = VarCache.field2050[var17];
+						intStack[var5++] = VarCache.var[var17];
 						continue;
 					}
 					if (var382 == 2) {
 						int var18 = var8[var7];
 						var5--;
-						VarCache.field2050[var18] = intStack[var5];
+						VarCache.var[var18] = intStack[var5];
 						continue;
 					}
 					if (var382 == 3) {
@@ -220,13 +220,13 @@ public class ScriptRunner {
 					}
 					if (var382 == 25) {
 						int var20 = var8[var7];
-						intStack[var5++] = VarCache.method930(var20);
+						intStack[var5++] = VarCache.getVarbit(var20);
 						continue;
 					}
 					if (var382 == 27) {
 						int var21 = var8[var7];
 						var5--;
-						VarCache.method755(var21, intStack[var5]);
+						VarCache.setVarbit(var21, intStack[var5]);
 						continue;
 					}
 					if (var382 == 31) {
@@ -310,13 +310,13 @@ public class ScriptRunner {
 						continue;
 					}
 					if (var382 == 42) {
-						intStack[var5++] = VarCache.field2167[var8[var7]];
+						intStack[var5++] = VarCache.varcInt[var8[var7]];
 						continue;
 					}
 					if (var382 == 43) {
 						var10001 = var8[var7];
 						var5--;
-						VarCache.field2167[var10001] = intStack[var5];
+						VarCache.varcInt[var10001] = intStack[var5];
 						continue;
 					}
 					if (var382 == 44) {
@@ -502,7 +502,7 @@ public class ScriptRunner {
 					if (var382 == 410) {
 						var5--;
 						boolean var376 = intStack[var5] != 0;
-						Client.localPlayer.model.method1434(var376);
+						Client.localPlayer.model.idkChangeGender(var376);
 						continue;
 					}
 				} else if (var382 >= 1000 && var382 < 1100 || !(var382 < 2000 || var382 >= 2100)) {
@@ -1040,7 +1040,7 @@ public class ScriptRunner {
 					} else if (var382 < 1900) {
 						IfType var73 = var43 ? activeComponent2 : activeComponent;
 						if (var382 == 1800) {
-							intStack[var5++] = GameShell.method592(Client.method530(var73));
+							intStack[var5++] = GameShell.method592(Client.getActive(var73));
 							continue;
 						}
 						if (var382 == 1801) {
@@ -1193,7 +1193,7 @@ public class ScriptRunner {
 						var5--;
 						IfType var77 = IfType.get(intStack[var5]);
 						if (var382 == 2800) {
-							intStack[var5++] = GameShell.method592(Client.method530(var77));
+							intStack[var5++] = GameShell.method592(Client.getActive(var77));
 							continue;
 						}
 						if (var382 == 2801) {
@@ -1228,7 +1228,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var382 == 3103) {
-							Client.method174();
+							Client.closeModal();
 							continue;
 						}
 						if (var382 == 3104) {
@@ -1271,7 +1271,7 @@ public class ScriptRunner {
 							int var344 = intStack[var5 + 1];
 							int var345 = intStack[var5 + 2];
 							IfType var346 = IfType.get(var345);
-							Client.method532(var343, var344, var346);
+							Client.dragTryPickup(var343, var344, var346);
 							continue;
 						}
 						if (var382 == 3109) {
@@ -1279,7 +1279,7 @@ public class ScriptRunner {
 							int var347 = intStack[var5];
 							int var348 = intStack[var5 + 1];
 							IfType var349 = var43 ? activeComponent2 : activeComponent;
-							Client.method532(var347, var348, var349);
+							Client.dragTryPickup(var347, var348, var349);
 							continue;
 						}
 						if (var382 == 3110) {
@@ -1430,7 +1430,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var382 == 3323) {
-							if (Client.mouseTracked >= 5 && Client.mouseTracked <= 9) {
+							if (Client.blackmarks >= 5 && Client.blackmarks <= 9) {
 								intStack[var5++] = 1;
 								continue;
 							}
@@ -1438,8 +1438,8 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var382 == 3324) {
-							if (Client.mouseTracked >= 5 && Client.mouseTracked <= 9) {
-								intStack[var5++] = Client.mouseTracked;
+							if (Client.blackmarks >= 5 && Client.blackmarks <= 9) {
+								intStack[var5++] = Client.blackmarks;
 								continue;
 							}
 							intStack[var5++] = 0;
@@ -1458,7 +1458,7 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var382 == 3327) {
-							intStack[var5++] = Client.localPlayer.model.field3957 ? 1 : 0;
+							intStack[var5++] = Client.localPlayer.model.gender ? 1 : 0;
 							continue;
 						}
 						if (var382 == 3328) {
@@ -1992,7 +1992,7 @@ public class ScriptRunner {
 							var6 -= 2;
 							JagString var267 = stringStack[var6];
 							JagString var268 = stringStack[var6 + 1];
-							if (Client.localPlayer.model != null && Client.localPlayer.model.field3957) {
+							if (Client.localPlayer.model != null && Client.localPlayer.model.gender) {
 								stringStack[var6++] = var268;
 								continue;
 							}
@@ -2456,7 +2456,7 @@ public class ScriptRunner {
 									int var194 = Client.out.pos;
 									Client.out.p1(var191);
 									Client.out.p1(var193);
-									WordPack.method1220(Client.out, var189);
+									WordPack.pack(Client.out, var189);
 									Client.out.method341(Client.out.pos - var194);
 									continue;
 								}
@@ -2469,7 +2469,7 @@ public class ScriptRunner {
 										Client.out.p1(0);
 										int var197 = Client.out.pos;
 										Client.out.p8(var195.toUserhash());
-										WordPack.method1220(Client.out, var196);
+										WordPack.pack(Client.out, var196);
 										Client.out.method341(Client.out.pos - var197);
 									}
 									continue;

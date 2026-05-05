@@ -68,7 +68,7 @@ public final class BgSound extends Linkable {
 				} else if (arg0 < var4.minX) {
 					var5 += var4.minX - arg0;
 				}
-				if (var4.range < var5 - 64 || Client.field4211 == 0 || var4.level != arg3) {
+				if (var4.range < var5 - 64 || Client.ambientVolume == 0 || var4.level != arg3) {
 					if (var4.continuousStream != null) {
 						Client.mixer.stopStream(var4.continuousStream);
 						var4.continuousStream = null;
@@ -82,7 +82,7 @@ public final class BgSound extends Linkable {
 					if (var5 < 0) {
 						var5 = 0;
 					}
-					int var6 = Client.field4211 * (var4.range - var5) / var4.range;
+					int var6 = Client.ambientVolume * (var4.range - var5) / var4.range;
 					if (var4.continuousStream != null) {
 						var4.continuousStream.applyVolume(var6);
 					} else if (var4.sound >= 0) {

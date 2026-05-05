@@ -320,7 +320,7 @@ public final class Texture {
 	@ObfuscatedName("b.a(Lfe;Lnb;I)Z")
 	public boolean method63(TextureProvider arg0, Js5 arg1) {
 		for (int var3 = 0; var3 < this.field173.length; var3++) {
-			if (!arg1.method953(this.field173[var3])) {
+			if (!arg1.requestDownload(this.field173[var3])) {
 				return false;
 			}
 		}

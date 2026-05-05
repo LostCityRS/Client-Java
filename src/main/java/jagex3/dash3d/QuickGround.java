@@ -6,33 +6,33 @@ import deob.ObfuscatedName;
 public final class QuickGround {
 
 	@ObfuscatedName("ih.a")
-	public final int field1759;
+	public final int colourNW;
 
 	@ObfuscatedName("ih.c")
-	public final int field1761;
+	public final int colourSW;
 
 	@ObfuscatedName("ih.e")
-	public final int field1763;
+	public final int texture;
 
 	@ObfuscatedName("ih.h")
-	public final int field1766;
+	public final int colourNE;
 
 	@ObfuscatedName("ih.k")
-	public boolean field1769 = true;
+	public boolean flat = true;
 
 	@ObfuscatedName("ih.n")
-	public final int field1772;
+	public final int minimapRgb;
 
 	@ObfuscatedName("ih.o")
-	public final int field1773;
+	public final int colourSE;
 
 	public QuickGround(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, boolean arg6) {
-		this.field1759 = arg3;
-		this.field1769 = arg6;
-		this.field1761 = arg0;
-		this.field1773 = arg1;
-		this.field1763 = arg4;
-		this.field1772 = arg5;
-		this.field1766 = arg2;
+		this.colourNW = arg3;
+		this.flat = arg6;
+		this.colourSW = arg0;
+		this.colourSE = arg1;
+		this.texture = arg4;
+		this.minimapRgb = arg5;
+		this.colourNE = arg2;
 	}
 }

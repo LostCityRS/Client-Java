@@ -6,19 +6,19 @@ import deob.ObfuscatedName;
 public final class PrivilegedRequest {
 
 	@ObfuscatedName("p.a")
-	public volatile Object field3129;
+	public volatile Object result;
 
 	@ObfuscatedName("p.b")
-	public PrivilegedRequest field3130;
+	public PrivilegedRequest next;
 
 	@ObfuscatedName("p.c")
-	public int field3131;
+	public int type;
 
 	@ObfuscatedName("p.d")
-	public int field3132;
+	public int intArg;
 
 	@ObfuscatedName("p.e")
-	public Object field3133;
+	public Object objArg;
 
 	@ObfuscatedName("p.f")
 	public volatile int status = 0;

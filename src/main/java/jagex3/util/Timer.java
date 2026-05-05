@@ -15,8 +15,8 @@ public abstract class Timer {
 	}
 
 	@ObfuscatedName("hi.a(B)V")
-	public abstract void method205();
+	public abstract void reset();
 
 	@ObfuscatedName("hi.a(III)I")
-	public abstract int method204(int arg0, int arg1);
+	public abstract int count(int arg0, int arg1);
 }

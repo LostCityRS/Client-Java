@@ -119,7 +119,7 @@ public class WorldMap {
 		}
 		if (field4276 < 10) {
 			if (!Client.worldmap.requestGroupDownload(field319)) {
-				field4276 = Client.worldmap.method957(field319) / 10;
+				field4276 = Client.worldmap.getGroupLoadProgress(field319) / 10;
 				return;
 			}
 			field4276 = 10;
@@ -672,7 +672,7 @@ public class WorldMap {
 			Pix2D.setPixels(var4.data, arg2, arg3);
 			method348(arg3, arg2, 0, 0, field760, 0, field1988, 0);
 			field4500 = var4;
-			GameShell.field3852.bind();
+			GameShell.drawArea.bind();
 		}
 		field4500.quickPlotSprite(arg1, arg0);
 		int var5 = arg1 + field693 * arg2 / field1988;
@@ -1013,9 +1013,9 @@ public class WorldMap {
 							int var63 = var55[var61][var60] & 0xFF;
 							if (var63 != 0) {
 								if (var63 == 47 || var63 == 53) {
-									Client.mapscene[var63 - 1].method1338(var54, var62, var53 * 2 + 1, var59 * 2 + 1);
+									Client.mapscene[var63 - 1].scalePlotSprite(var54, var62, var53 * 2 + 1, var59 * 2 + 1);
 								} else {
-									Client.mapscene[var63 - 1].method1338(var54 - var53 / 2, var62 + -(var59 / 2), var53 * 2, var59 * 2);
+									Client.mapscene[var63 - 1].scalePlotSprite(var54 - var53 / 2, var62 + -(var59 / 2), var53 * 2, var59 * 2);
 								}
 							}
 						}

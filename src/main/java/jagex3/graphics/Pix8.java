@@ -27,5 +27,5 @@ public abstract class Pix8 {
 	public abstract void plotSprite(int arg0, int arg1);
 
 	@ObfuscatedName("lj.a(III)V")
-	public abstract void method877(int arg0, int arg1, int arg2);
+	public abstract void transPlotSprite(int arg0, int arg1, int arg2);
 }

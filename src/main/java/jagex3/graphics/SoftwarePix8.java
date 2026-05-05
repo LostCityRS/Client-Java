@@ -12,7 +12,7 @@ public final class SoftwarePix8 extends Pix8 {
 	public final int[] bpal;
 
 	@ObfuscatedName("rh.a([I[B[IIIIIIIIII)V")
-	public static void method1339(int[] arg0, byte[] arg1, int[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
+	public static void plotScale(int[] arg0, byte[] arg1, int[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 		int var12 = arg3;
 		for (int var13 = -arg8; var13 < 0; var13++) {
 			int var14 = (arg4 >> 16) * arg11;
@@ -32,7 +32,7 @@ public final class SoftwarePix8 extends Pix8 {
 	}
 
 	@ObfuscatedName("rh.a([I[B[IIIIIIII)V")
-	public static void method1340(int[] arg0, byte[] arg1, int[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
+	public static void tranSprite(int[] arg0, byte[] arg1, int[] arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) {
 		int var10 = 256 - arg9;
 		for (int var11 = -arg6; var11 < 0; var11++) {
 			for (int var12 = -arg5; var12 < 0; var12++) {
@@ -154,7 +154,7 @@ public final class SoftwarePix8 extends Pix8 {
 
 	@ObfuscatedName("rh.a(III)V")
 	@Override
-	public void method877(int arg0, int arg1, int arg2) {
+	public void transPlotSprite(int arg0, int arg1, int arg2) {
 		int var4 = arg0 + super.xof;
 		int var5 = arg1 + super.yof;
 		int var6 = var4 + var5 * Pix2D.width;
@@ -189,12 +189,12 @@ public final class SoftwarePix8 extends Pix8 {
 			var10 += var14;
 		}
 		if (var9 > 0 && var8 > 0) {
-			method1340(Pix2D.pixels, this.data, this.bpal, var7, var6, var9, var8, var10, var11, arg2);
+			tranSprite(Pix2D.pixels, this.data, this.bpal, var7, var6, var9, var8, var10, var11, arg2);
 		}
 	}
 
 	@ObfuscatedName("rh.a(IIII)V")
-	public void method1338(int arg0, int arg1, int arg2, int arg3) {
+	public void scalePlotSprite(int arg0, int arg1, int arg2, int arg3) {
 		int var5 = super.wi;
 		int var6 = super.hi;
 		int var7 = 0;
@@ -242,7 +242,7 @@ public final class SoftwarePix8 extends Pix8 {
 			var7 += var11 * var19;
 			var16 += var19;
 		}
-		method1339(Pix2D.pixels, this.data, this.bpal, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
+		plotScale(Pix2D.pixels, this.data, this.bpal, var7, var8, var15, var16, arg2, arg3, var11, var12, var5);
 	}
 
 	@ObfuscatedName("rh.a(II)V")

@@ -31,15 +31,15 @@ public abstract class Pix32 extends Linkable2 {
 	public abstract void quickPlotSprite(int arg0, int arg1);
 
 	@ObfuscatedName("rc.a(IIIIII)V")
-	public abstract void method1166(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
+	public abstract void pixelPerfectRotateScalePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
 
 	@ObfuscatedName("rc.a(ZIIII)V")
-	public final void method1309(int arg0, int arg1, int arg2, int arg3) {
+	public final void pixelPerfectRotateScalePlotSprite(int arg0, int arg1, int arg2, int arg3) {
 		int var5 = this.ohi << 3;
 		int var6 = (var5 & 0xF) + (arg0 << 4);
 		int var7 = this.owi << 3;
 		int var8 = (var7 & 0xF) + (arg1 << 4);
-		this.method1166(var7, var5, var8, var6, arg3, arg2);
+		this.pixelPerfectRotateScalePlotSprite(var7, var5, var8, var6, arg3, arg2);
 	}
 
 	@ObfuscatedName("rc.a(IIIII)V")
@@ -49,7 +49,7 @@ public abstract class Pix32 extends Linkable2 {
 	public abstract void transPlotSprite(int arg0, int arg1, int arg2);
 
 	@ObfuscatedName("rc.b(IIII)V")
-	public abstract void method1160(int arg0, int arg1);
+	public abstract void litPlotSprite(int arg0, int arg1);
 
 	@ObfuscatedName("rc.c(II)V")
 	public abstract void plotSprite(int arg0, int arg1);

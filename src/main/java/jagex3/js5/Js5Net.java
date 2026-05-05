@@ -26,7 +26,7 @@ public class Js5Net {
 	@ObfuscatedName("id.p")
 	public static final CRC32 crc32 = new CRC32();
 	@ObfuscatedName("ai.a")
-	public static final Js5Loader[] field141 = new Js5Loader[256];
+	public static final Js5Loader[] providers = new Js5Loader[256];
 	@ObfuscatedName("ng.Zb")
 	public static Packet incomingGroupBuffer;
 	@ObfuscatedName("tg.a")
@@ -179,7 +179,7 @@ public class Js5Net {
 							if (incomingRequest.key == 16711935L) {
 								masterIndexBuffer = incomingGroupBuffer;
 								for (int var23 = 0; var23 < 256; var23++) {
-									Js5Loader var24 = field141[var23];
+									Js5Loader var24 = providers[var23];
 									if (var24 != null) {
 										masterIndexBuffer.pos = var23 * 8 + 5;
 										int var25 = masterIndexBuffer.g4();
@@ -357,17 +357,17 @@ public class Js5Net {
 	}
 
 	@ObfuscatedName("e.f(I)V")
-	public static void method290() {
+	public static void close() {
 		if (stream != null) {
 			stream.close();
 		}
 	}
 
 	@ObfuscatedName("kj.a(IBLbj;)V")
-	public static void method814(int arg0, Js5Loader arg1) {
+	public static void registerProvider(int arg0, Js5Loader arg1) {
 		if (masterIndexBuffer == null) {
 			queueRequest(null, 255, 255, (byte) 0, 0, true);
-			field141[arg0] = arg1;
+			providers[arg0] = arg1;
 		} else {
 			masterIndexBuffer.pos = arg0 * 8 + 5;
 			int var2 = masterIndexBuffer.g4();

@@ -33,7 +33,7 @@ public final class AudioThread implements Runnable {
 					}
 				}
 				ThreadSleep.sleepPrecise(10L);
-				GameShell.method1006(null, this.signLink);
+				GameShell.flushEvents(null, this.signLink);
 			}
 		} catch (Exception var9) {
 			JagException.report(null, var9);

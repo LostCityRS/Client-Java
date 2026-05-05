@@ -1,14 +1,17 @@
 package jagex3.js5;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.ByteArrayWrapper;
 import jagex3.io.DataFile;
 import jagex3.io.Packet;
 
+import java.util.zip.CRC32;
+
 @ObfuscatedName("bj")
 public final class Js5Loader extends Js5 {
 
+	@ObfuscatedName("uh.M")
+	public static final CRC32 js5Crc32 = new CRC32();
 	@ObfuscatedName("bj.cb")
 	public volatile boolean[] loadedGroups;
 
@@ -34,7 +37,7 @@ public final class Js5Loader extends Js5 {
 	public int indexCrc;
 
 	@ObfuscatedName("bj.yb")
-	public int field352 = -1;
+	public int lastLocalGroup = -1;
 
 	public Js5Loader(DataFile arg0, DataFile arg1, int arg2, boolean arg3, boolean arg4, boolean arg5) {
 		super(arg3, arg4);
@@ -42,7 +45,7 @@ public final class Js5Loader extends Js5 {
 		this.remoteEnabled = arg5;
 		this.archive = arg2;
 		this.dataFile = arg0;
-		Js5Net.method814(this.archive, this);
+		Js5Net.registerProvider(this.archive, this);
 	}
 
 	@ObfuscatedName("bj.a(I[BZIZ)V")
@@ -52,7 +55,7 @@ public final class Js5Loader extends Js5 {
 				throw new RuntimeException();
 			}
 			if (this.indexDataFile != null) {
-				Js5NetThread.method244(arg1, this.archive, this.indexDataFile);
+				Js5NetThread.queueWrite(arg1, this.archive, this.indexDataFile);
 			}
 			this.decodeIndex(arg1);
 			this.loadAllLocal();
@@ -61,7 +64,7 @@ public final class Js5Loader extends Js5 {
 		arg1[arg1.length - 2] = (byte) (super.groupVersions[arg0] >> 8);
 		arg1[arg1.length - 1] = (byte) super.groupVersions[arg0];
 		if (this.dataFile != null) {
-			Js5NetThread.method244(arg1, arg0, this.dataFile);
+			Js5NetThread.queueWrite(arg1, arg0, this.dataFile);
 			this.loadedGroups[arg0] = true;
 		}
 		if (arg2) {
@@ -84,7 +87,7 @@ public final class Js5Loader extends Js5 {
 	@ObfuscatedName("bj.a(II)V")
 	@Override
 	public void updateCacheHint(int arg0) {
-		if (this.method968(arg0)) {
+		if (this.isGroupValid(arg0)) {
 			Js5Net.updateCacheHint(this.archive, arg0);
 		}
 	}
@@ -92,7 +95,7 @@ public final class Js5Loader extends Js5 {
 	@ObfuscatedName("bj.a([BILud;BZ)V")
 	public void loadIndex(byte[] arg0, int arg1, DataFile arg2, boolean arg3) {
 		if (arg2 != this.indexDataFile) {
-			if (!arg3 && arg1 == this.field352) {
+			if (!arg3 && arg1 == this.lastLocalGroup) {
 				this.loadStatus = true;
 			}
 			if (arg0 == null || arg0.length <= 2) {
@@ -102,9 +105,9 @@ public final class Js5Loader extends Js5 {
 				}
 				return;
 			}
-			Statics.field4241.reset();
-			Statics.field4241.update(arg0, 0, arg0.length - 2);
-			int var5 = (int) Statics.field4241.getValue();
+			js5Crc32.reset();
+			js5Crc32.update(arg0, 0, arg0.length - 2);
+			int var5 = (int) js5Crc32.getValue();
 			int var6 = ((arg0[arg0.length - 2] & 0xFF) << 8) + (arg0[arg0.length - 1] & 0xFF);
 			if (var5 != super.groupChecksums[arg1] || super.groupVersions[arg1] != var6) {
 				this.loadedGroups[arg1] = false;
@@ -127,9 +130,9 @@ public final class Js5Loader extends Js5 {
 			Js5Net.queueRequest(this, this.archive, 255, (byte) 0, this.indexCrc, true);
 			return;
 		}
-		Statics.field4241.reset();
-		Statics.field4241.update(arg0, 0, arg0.length);
-		int var7 = (int) Statics.field4241.getValue();
+		js5Crc32.reset();
+		js5Crc32.update(arg0, 0, arg0.length);
+		int var7 = (int) js5Crc32.getValue();
 		if (var7 != this.indexCrc) {
 			Js5Net.queueRequest(this, this.archive, 255, (byte) 0, this.indexCrc, true);
 			return;
@@ -161,7 +164,7 @@ public final class Js5Loader extends Js5 {
 	@ObfuscatedName("bj.a(IZ)V")
 	@Override
 	public void requestGroupDownload2(int arg0) {
-		if (!this.method968(arg0)) {
+		if (!this.isGroupValid(arg0)) {
 			return;
 		}
 		if (this.dataFile == null || this.loadedGroups == null || !this.loadedGroups[arg0]) {
@@ -181,14 +184,14 @@ public final class Js5Loader extends Js5 {
 			this.loadStatus = true;
 			return;
 		}
-		this.field352 = -1;
+		this.lastLocalGroup = -1;
 		for (int var2 = 0; var2 < this.loadedGroups.length; var2++) {
 			if (super.groupSizes[var2] > 0) {
-				Js5NetThread.method828(var2, this, this.dataFile);
-				this.field352 = var2;
+				Js5NetThread.queueRead(var2, this, this.dataFile);
+				this.lastLocalGroup = var2;
 			}
 		}
-		if (this.field352 == -1) {
+		if (this.lastLocalGroup == -1) {
 			this.loadStatus = true;
 		}
 	}
@@ -211,7 +214,7 @@ public final class Js5Loader extends Js5 {
 	@ObfuscatedName("bj.a(BI)I")
 	@Override
 	public int getGroupLoadProgress(int arg0) {
-		if (!this.method968(arg0)) {
+		if (!this.isGroupValid(arg0)) {
 			return 0;
 		} else if (super.packed[arg0] == null) {
 			return this.loadedGroups[arg0] ? 100 : Js5Net.transferProgress(this.archive, arg0);

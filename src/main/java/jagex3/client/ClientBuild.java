@@ -361,11 +361,11 @@ public class ClientBuild {
 			floorr[var9] = null;
 			shadow[var9] = null;
 		}
-		World.method1215();
+		World.shareLight();
 		for (int var70 = 0; var70 < 104; var70++) {
 			for (int var71 = 0; var71 < 104; var71++) {
 				if ((mapl[1][var70][var71] & 0x2) == 2) {
-					World.method1063(var70, var71);
+					World.pushDown(var70, var71);
 				}
 			}
 		}

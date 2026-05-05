@@ -1,7 +1,6 @@
 package jagex3.graphics;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 @ObfuscatedName("dg")
 public final class SoftwarePixFont extends PixFont {
@@ -16,7 +15,7 @@ public final class SoftwarePixFont extends PixFont {
 
 	@ObfuscatedName("dg.a(IIIIIII)V")
 	@Override
-	public void method147(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public void plotLetterTransScanline(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		int var8 = arg1 + arg2 * Pix2D.width;
 		int var9 = Pix2D.width - arg3;
 		int var10 = 0;
@@ -47,13 +46,13 @@ public final class SoftwarePixFont extends PixFont {
 			var9 += var14;
 		}
 		if (arg3 > 0 && arg4 > 0) {
-			Statics.method677(Pix2D.pixels, arg3, arg6, var11, var9, super.field2557[arg0], arg5, var8, arg4, var10);
+			PixFont.plotTrans(Pix2D.pixels, arg3, arg6, var11, var9, super.glyphs[arg0], arg5, var8, arg4, var10);
 		}
 	}
 
 	@ObfuscatedName("dg.b(IIIIII)V")
 	@Override
-	public void method143(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+	public void plotLetterScanline(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		int var7 = arg1 + arg2 * Pix2D.width;
 		int var8 = Pix2D.width - arg3;
 		int var9 = 0;
@@ -84,7 +83,7 @@ public final class SoftwarePixFont extends PixFont {
 			var8 += var13;
 		}
 		if (arg3 > 0 && arg4 > 0) {
-			Statics.method527(arg5, var9, var7, super.field2557[arg0], arg3, arg4, var8, Pix2D.pixels, var10);
+			PixFont.plot(arg5, var9, var7, super.glyphs[arg0], arg3, arg4, var8, Pix2D.pixels, var10);
 		}
 	}
 }
