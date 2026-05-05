@@ -5,8 +5,8 @@ import deob.ObfuscatedName;
 @ObfuscatedName("ad")
 public final class Residue {
 
-	@ObfuscatedName("ad.a")
-	public final int classbook = JagVorbis.readBits(8);
+	@ObfuscatedName("ad.d")
+	public final int type = JagVorbis.readBits(16);
 
 	@ObfuscatedName("ad.b")
 	public final int begin = JagVorbis.readBits(24);
@@ -14,14 +14,14 @@ public final class Residue {
 	@ObfuscatedName("ad.c")
 	public final int end = JagVorbis.readBits(24);
 
-	@ObfuscatedName("ad.d")
-	public final int type = JagVorbis.readBits(16);
+	@ObfuscatedName("ad.f")
+	public final int partition_size = JagVorbis.readBits(24) + 1;
 
 	@ObfuscatedName("ad.e")
 	public final int classifications = JagVorbis.readBits(6) + 1;
 
-	@ObfuscatedName("ad.f")
-	public final int partition_size = JagVorbis.readBits(24) + 1;
+	@ObfuscatedName("ad.a")
+	public final int classbook = JagVorbis.readBits(8);
 
 	@ObfuscatedName("ad.g")
 	public final int[] residue_books;
