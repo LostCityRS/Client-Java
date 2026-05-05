@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.datastruct.Linkable;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
@@ -150,7 +149,7 @@ public final class JagVorbis extends Linkable {
 			int[] var12 = new int[var5];
 			int var13 = MathTool.bitsRequired(var5 - 1);
 			for (int var14 = 0; var14 < var5; var14++) {
-				var12[var14] = Statics.method1524(var14, var13);
+				var12[var14] = MathTool.method1524(var14, var13);
 			}
 			if (var1 == 0) {
 				imdctPrevShort = var6;

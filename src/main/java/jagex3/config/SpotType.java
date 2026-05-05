@@ -144,12 +144,12 @@ public final class SpotType extends Linkable2 {
 			}
 			if (this.recol_s != null) {
 				for (int var4 = 0; var4 < this.recol_s.length; var4++) {
-					var3.method564(this.recol_s[var4], this.recol_d[var4]);
+					var3.recolour(this.recol_s[var4], this.recol_d[var4]);
 				}
 			}
 			if (this.retex_s != null) {
 				for (int var5 = 0; var5 < this.retex_s.length; var5++) {
-					var3.method553(this.retex_s[var5], this.retex_d[var5]);
+					var3.retexture(this.retex_s[var5], this.retex_d[var5]);
 				}
 			}
 			var2 = var3.light(this.ambient + 64, this.contrast + 850, -30, -50, -30);
@@ -157,22 +157,22 @@ public final class SpotType extends Linkable2 {
 		}
 		ModelLit var6;
 		if (this.anim == -1 || arg0 == -1) {
-			var6 = var2.method185(true, true);
+			var6 = var2.copyForAnim2(true, true);
 		} else {
 			var6 = SeqType.list(this.anim).animateModel(var2, arg0);
 		}
 		if (this.resizeh != 128 || this.resizev != 128) {
-			var6.method183(this.resizeh, this.resizev, this.resizeh);
+			var6.resize(this.resizeh, this.resizev, this.resizeh);
 		}
 		if (this.angle != 0) {
 			if (this.angle == 90) {
-				var6.method182();
+				var6.rotate90();
 			}
 			if (this.angle == 180) {
-				var6.method190();
+				var6.rotate180();
 			}
 			if (this.angle == 270) {
-				var6.method181();
+				var6.rotate270();
 			}
 		}
 		return var6;

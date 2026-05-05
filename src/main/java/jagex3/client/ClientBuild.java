@@ -13,58 +13,58 @@ public class ClientBuild {
 	@ObfuscatedName("kg.ab")
 	public static final byte[][][] mapl = new byte[4][104][104];
 	@ObfuscatedName("kb.r")
-	public static final int[][][] field2024 = new int[4][13][13];
+	public static final int[][][] zoneMapArchiveIds = new int[4][13][13];
 	@ObfuscatedName("ta.X")
-	public static final int[] field3949 = new int[] { 1, 2, 4, 8 };
+	public static final int[] WSHAPE0 = new int[] { 1, 2, 4, 8 };
 	@ObfuscatedName("vi.c")
-	public static final int[] field4427 = new int[] { 16, 32, 64, 128 };
+	public static final int[] WSHAPE1 = new int[] { 16, 32, 64, 128 };
 	@ObfuscatedName("ba.n")
-	public static final int[] field198 = new int[] { 1, 0, -1, 0 };
+	public static final int[] DECORXOF = new int[] { 1, 0, -1, 0 };
 	@ObfuscatedName("hi.i")
-	public static final int[] field1557 = new int[] { 0, -1, 0, 1 };
+	public static final int[] DECORZOF = new int[] { 0, -1, 0, 1 };
 	@ObfuscatedName("pe.F")
-	public static final int[] field3240 = new int[] { 1, -1, -1, 1 };
+	public static final int[] DECORXOF2 = new int[] { 1, -1, -1, 1 };
 	@ObfuscatedName("cj.cb")
-	public static final int[] field551 = new int[] { -1, -1, 1, 1 };
+	public static final int[] DECORZOF2 = new int[] { -1, -1, 1, 1 };
 	@ObfuscatedName("gd.p")
-	public static int field1270 = (int) (Math.random() * 33.0D) - 16;
+	public static int ligOff = (int) (Math.random() * 33.0D) - 16;
 	@ObfuscatedName("u.C")
-	public static int field4086 = (int) (Math.random() * 17.0D) - 8;
+	public static int hueOff = (int) (Math.random() * 17.0D) - 8;
 	@ObfuscatedName("kb.n")
-	public static byte[][][] field2020;
+	public static byte[][][] shadow;
 	@ObfuscatedName("ff.R")
 	public static int[][][] groundh;
 	@ObfuscatedName("hh.bb")
-	public static int[] field1541;
+	public static int[] huetot;
 	@ObfuscatedName("uc.g")
-	public static int[] field4173;
+	public static int[] sattot;
 	@ObfuscatedName("od.C")
-	public static int[] field3012;
+	public static int[] ligtot;
 	@ObfuscatedName("nj.s")
-	public static int[] field2940;
+	public static int[] tot;
 	@ObfuscatedName("uc.h")
-	public static int[] field4174;
+	public static int[] comtot;
 	@ObfuscatedName("pa.h")
-	public static byte[][][] field3142;
+	public static byte[][][] floort1;
 	@ObfuscatedName("ce.W")
-	public static int field468 = 99;
+	public static int minusedlevel = 99;
 	@ObfuscatedName("k.G")
-	public static byte[][][] field1962;
+	public static byte[][][] floort2;
 	@ObfuscatedName("md.X")
-	public static int[][][] field2511;
+	public static int[][][] mapo;
 	@ObfuscatedName("ag.a")
-	public static byte[][][] field115;
+	public static byte[][][] floors;
 	@ObfuscatedName("ve.T")
-	public static byte[][][] field4377;
+	public static byte[][][] floorr;
 	@ObfuscatedName("wf.a")
-	public static int[][] field4496;
+	public static int[][] lightmap;
 	@ObfuscatedName("pd.jb")
 	public static byte[][] field3221;
 	@ObfuscatedName("nd.e")
 	public static int[] field2731;
 
 	@ObfuscatedName("ch.a(III)I")
-	public static int method202(int arg0, int arg1) {
+	public static int getOCol(int arg0, int arg1) {
 		if (arg1 == -2) {
 			return 12345678;
 		} else if (arg1 == -1) {
@@ -86,7 +86,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("rc.a([BIII)Z")
-	public static boolean method1311(byte[] arg0, int arg1, int arg2) {
+	public static boolean checkLocations(byte[] arg0, int arg1, int arg2) {
 		Packet var3 = new Packet(arg0);
 		boolean var4 = true;
 		int var5 = -1;
@@ -141,7 +141,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("ha.a(ZZ[Lia;)V")
-	public static void method523(CollisionMap[] arg0) {
+	public static void finishBuild(CollisionMap[] arg0) {
 		for (int var1 = 0; var1 < 4; var1++) {
 			for (int var2 = 0; var2 < 104; var2++) {
 				for (int var3 = 0; var3 < 104; var3++) {
@@ -157,26 +157,26 @@ public class ClientBuild {
 				}
 			}
 		}
-		field1270 += (int) (Math.random() * 5.0D) - 2;
-		field4086 += (int) (Math.random() * 5.0D) - 2;
-		if (field4086 < -8) {
-			field4086 = -8;
+		ligOff += (int) (Math.random() * 5.0D) - 2;
+		hueOff += (int) (Math.random() * 5.0D) - 2;
+		if (hueOff < -8) {
+			hueOff = -8;
 		}
-		if (field4086 > 8) {
-			field4086 = 8;
+		if (hueOff > 8) {
+			hueOff = 8;
 		}
-		if (field1270 < -16) {
-			field1270 = -16;
+		if (ligOff < -16) {
+			ligOff = -16;
 		}
-		if (field1270 > 16) {
-			field1270 = 16;
+		if (ligOff > 16) {
+			ligOff = 16;
 		}
-		int var5 = field1270 >> 1;
-		int var6 = field4086 >> 2 << 10;
+		int var5 = ligOff >> 1;
+		int var6 = hueOff >> 2 << 10;
 		int[][] var7 = new int[104][104];
 		int[][] var8 = new int[104][104];
 		for (int var9 = 0; var9 < 4; var9++) {
-			byte[][] var10 = field2020[var9];
+			byte[][] var10 = shadow[var9];
 			int var11 = (int) Math.sqrt(5100.0D);
 			int var12 = var11 * 768 >> 8;
 			for (int var13 = 1; var13 < 103; var13++) {
@@ -193,37 +193,37 @@ public class ClientBuild {
 				}
 			}
 			for (int var23 = 0; var23 < 104; var23++) {
-				field1541[var23] = 0;
-				field4173[var23] = 0;
-				field3012[var23] = 0;
-				field4174[var23] = 0;
-				field2940[var23] = 0;
+				huetot[var23] = 0;
+				sattot[var23] = 0;
+				ligtot[var23] = 0;
+				comtot[var23] = 0;
+				tot[var23] = 0;
 			}
 			for (int var24 = -5; var24 < 104; var24++) {
 				for (int var25 = 0; var25 < 104; var25++) {
 					int var26 = var24 + 5;
 					int var10002;
 					if (var26 < 104) {
-						int var27 = field3142[var9][var26][var25] & 0xFF;
+						int var27 = floort1[var9][var26][var25] & 0xFF;
 						if (var27 > 0) {
 							FluType var28 = FluType.list(var27 - 1);
-							field1541[var25] += var28.hue;
-							field4173[var25] += var28.saturation;
-							field3012[var25] += var28.lightness;
-							field4174[var25] += var28.chroma;
-							var10002 = field2940[var25]++;
+							huetot[var25] += var28.hue;
+							sattot[var25] += var28.saturation;
+							ligtot[var25] += var28.lightness;
+							comtot[var25] += var28.chroma;
+							var10002 = tot[var25]++;
 						}
 					}
 					int var29 = var24 - 5;
 					if (var29 >= 0) {
-						int var30 = field3142[var9][var29][var25] & 0xFF;
+						int var30 = floort1[var9][var29][var25] & 0xFF;
 						if (var30 > 0) {
 							FluType var31 = FluType.list(var30 - 1);
-							field1541[var25] -= var31.hue;
-							field4173[var25] -= var31.saturation;
-							field3012[var25] -= var31.lightness;
-							field4174[var25] -= var31.chroma;
-							var10002 = field2940[var25]--;
+							huetot[var25] -= var31.hue;
+							sattot[var25] -= var31.saturation;
+							ligtot[var25] -= var31.lightness;
+							comtot[var25] -= var31.chroma;
+							var10002 = tot[var25]--;
 						}
 					}
 				}
@@ -237,33 +237,33 @@ public class ClientBuild {
 						int var38 = var37 + 5;
 						int var39 = var37 - 5;
 						if (var38 < 104) {
-							var36 += field2940[var38];
-							var33 += field4173[var38];
-							var35 += field3012[var38];
-							var34 += field4174[var38];
-							var32 += field1541[var38];
+							var36 += tot[var38];
+							var33 += sattot[var38];
+							var35 += ligtot[var38];
+							var34 += comtot[var38];
+							var32 += huetot[var38];
 						}
 						if (var39 >= 0) {
-							var34 -= field4174[var39];
-							var33 -= field4173[var39];
-							var36 -= field2940[var39];
-							var32 -= field1541[var39];
-							var35 -= field3012[var39];
+							var34 -= comtot[var39];
+							var33 -= sattot[var39];
+							var36 -= tot[var39];
+							var32 -= huetot[var39];
+							var35 -= ligtot[var39];
 						}
 						if (var37 >= 0 && var36 > 0) {
-							var7[var24][var37] = method1066(var32 * 256 / var34, var35 / var36, var33 / var36);
+							var7[var24][var37] = getTable(var32 * 256 / var34, var35 / var36, var33 / var36);
 						}
 					}
 				}
 			}
 			for (int var40 = 1; var40 < 103; var40++) {
 				for (int var41 = 1; var41 < 103; var41++) {
-					if (!Client.lowMem || (mapl[0][var40][var41] & 0x2) != 0 || (mapl[var9][var40][var41] & 0x10) == 0 && method1555(var41, var40, var9) == Client.field3026) {
-						if (var9 < field468) {
-							field468 = var9;
+					if (!Client.lowMem || (mapl[0][var40][var41] & 0x2) != 0 || (mapl[var9][var40][var41] & 0x10) == 0 && getDrawLevel(var41, var40, var9) == Client.lastBuiltLevel) {
+						if (var9 < minusedlevel) {
+							minusedlevel = var9;
 						}
-						int var42 = field3142[var9][var40][var41] & 0xFF;
-						int var43 = field1962[var9][var40][var41] & 0xFF;
+						int var42 = floort1[var9][var40][var41] & 0xFF;
+						int var43 = floort2[var9][var40][var41] & 0xFF;
 						if (var42 > 0 || var43 > 0) {
 							int var44 = groundh[var9][var40 + 1][var41];
 							int var45 = groundh[var9][var40][var41];
@@ -271,14 +271,14 @@ public class ClientBuild {
 							int var47 = groundh[var9][var40][var41 + 1];
 							if (var9 > 0) {
 								boolean var48 = true;
-								if (var42 == 0 && field115[var9][var40][var41] != 0) {
+								if (var42 == 0 && floors[var9][var40][var41] != 0) {
 									var48 = false;
 								}
 								if (var43 > 0 && !FloType.list(var43 - 1).occlude) {
 									var48 = false;
 								}
 								if (var48 && var44 == var45 && var46 == var45 && var47 == var45) {
-									field2511[var9][var40][var41] |= 0x924;
+									mapo[var9][var40][var41] |= 0x924;
 								}
 							}
 							int var49;
@@ -292,7 +292,7 @@ public class ClientBuild {
 									var50 = 127;
 								}
 								int var51 = var50 + (var49 + var6 & 0xFC00) + (var49 & 0x380);
-								var52 = Pix3D.field3349[method67(96, var51)];
+								var52 = Pix3D.colourTable[getUCol(96, var51)];
 							} else {
 								var49 = -1;
 								var52 = 0;
@@ -302,23 +302,23 @@ public class ClientBuild {
 							int var55 = var8[var40][var41 + 1];
 							int var56 = var8[var40 + 1][var41 + 1];
 							if (var43 == 0) {
-								World.method58(var9, var40, var41, 0, 0, -1, var45, var44, var46, var47, method67(var53, var49), method67(var54, var49), method67(var56, var49), method67(var55, var49), 0, 0, 0, 0, var52, 0);
+								World.setGround(var9, var40, var41, 0, 0, -1, var45, var44, var46, var47, getUCol(var53, var49), getUCol(var54, var49), getUCol(var56, var49), getUCol(var55, var49), 0, 0, 0, 0, var52, 0);
 							} else {
-								int var57 = field115[var9][var40][var41] + 1;
-								byte var58 = field4377[var9][var40][var41];
+								int var57 = floors[var9][var40][var41] + 1;
+								byte var58 = floorr[var9][var40][var41];
 								FloType var59 = FloType.list(var43 - 1);
-								if (field4496 != null && var9 == 0) {
-									field4496[var40][var41] = var59.field103 + (var59.field112 << 24);
+								if (lightmap != null && var9 == 0) {
+									lightmap[var40][var41] = var59.field103 + (var59.field112 << 24);
 								}
 								int var60 = var59.texture;
-								if (var60 >= 0 && !Pix3D.field3356.method436(var60)) {
+								if (var60 >= 0 && !Pix3D.textureManager.method436(var60)) {
 									var60 = -1;
 								}
 								int var61;
 								int var62;
 								if (var60 >= 0) {
 									var61 = -1;
-									var62 = Pix3D.field3349[method202(96, Pix3D.field3356.method438(var60))];
+									var62 = Pix3D.colourTable[getOCol(96, Pix3D.textureManager.method438(var60))];
 								} else if (var59.field111 == -1) {
 									var62 = 0;
 									var61 = -2;
@@ -331,7 +331,7 @@ public class ClientBuild {
 										var63 = 127;
 									}
 									int var64 = var63 + (var61 + var6 & 0xFC00) + (var61 & 0x380);
-									var62 = Pix3D.field3349[method202(96, var64)];
+									var62 = Pix3D.colourTable[getOCol(96, var64)];
 								}
 								if (var59.field104 >= 0) {
 									int var65 = var59.field104;
@@ -342,9 +342,9 @@ public class ClientBuild {
 										var66 = 127;
 									}
 									int var67 = var66 + (var6 + var65 & 0xFC00) + (var65 & 0x380);
-									var62 = Pix3D.field3349[method202(96, var67)];
+									var62 = Pix3D.colourTable[getOCol(96, var67)];
 								}
-								World.method58(var9, var40, var41, var57, var58, var60, var45, var44, var46, var47, method67(var53, var49), method67(var54, var49), method67(var56, var49), method67(var55, var49), method202(var53, var61), method202(var54, var61), method202(var56, var61), method202(var55, var61), var52, var62);
+								World.setGround(var9, var40, var41, var57, var58, var60, var45, var44, var46, var47, getUCol(var53, var49), getUCol(var54, var49), getUCol(var56, var49), getUCol(var55, var49), getOCol(var53, var61), getOCol(var54, var61), getOCol(var56, var61), getOCol(var55, var61), var52, var62);
 							}
 						}
 					}
@@ -352,14 +352,14 @@ public class ClientBuild {
 			}
 			for (int var68 = 1; var68 < 103; var68++) {
 				for (int var69 = 1; var69 < 103; var69++) {
-					World.method1570(var9, var69, var68, method1555(var68, var69, var9));
+					World.setLayer(var9, var69, var68, getDrawLevel(var68, var69, var9));
 				}
 			}
-			field3142[var9] = null;
-			field1962[var9] = null;
-			field115[var9] = null;
-			field4377[var9] = null;
-			field2020[var9] = null;
+			floort1[var9] = null;
+			floort2[var9] = null;
+			floors[var9] = null;
+			floorr[var9] = null;
+			shadow[var9] = null;
 		}
 		World.method1215();
 		for (int var70 = 0; var70 < 104; var70++) {
@@ -381,20 +381,20 @@ public class ClientBuild {
 			for (int var76 = 0; var76 <= var75; var76++) {
 				for (int var77 = 0; var77 <= 104; var77++) {
 					for (int var78 = 0; var78 <= 104; var78++) {
-						if ((var73 & field2511[var76][var78][var77]) != 0) {
+						if ((var73 & mapo[var76][var78][var77]) != 0) {
 							int var79 = var77;
 							int var80 = var76;
 							int var81 = var76;
 							int var82 = var77;
-							while (var79 > 0 && (field2511[var76][var78][var79 - 1] & var73) != 0) {
+							while (var79 > 0 && (mapo[var76][var78][var79 - 1] & var73) != 0) {
 								var79--;
 							}
-							while (var82 < 104 && (field2511[var76][var78][var82 + 1] & var73) != 0) {
+							while (var82 < 104 && (mapo[var76][var78][var82 + 1] & var73) != 0) {
 								var82++;
 							}
 							label356: while (var80 > 0) {
 								for (int var83 = var79; var83 <= var82; var83++) {
-									if ((field2511[var80 - 1][var78][var83] & var73) == 0) {
+									if ((mapo[var80 - 1][var78][var83] & var73) == 0) {
 										break label356;
 									}
 								}
@@ -402,7 +402,7 @@ public class ClientBuild {
 							}
 							label345: while (var81 < var75) {
 								for (int var84 = var79; var84 <= var82; var84++) {
-									if ((field2511[var81 + 1][var78][var84] & var73) == 0) {
+									if ((mapo[var81 + 1][var78][var84] & var73) == 0) {
 										break label345;
 									}
 								}
@@ -412,26 +412,26 @@ public class ClientBuild {
 							if (var85 >= 8) {
 								int var86 = groundh[var80][var78][var79];
 								int var87 = groundh[var81][var78][var79] - 240;
-								World.method1036(var75, 1, var78 * 128, var78 * 128, var79 * 128, var82 * 128 + 128, var87, var86);
+								World.setOcclude(var75, 1, var78 * 128, var78 * 128, var79 * 128, var82 * 128 + 128, var87, var86);
 								for (int var88 = var80; var88 <= var81; var88++) {
 									for (int var89 = var79; var89 <= var82; var89++) {
-										field2511[var88][var78][var89] &= ~var73;
+										mapo[var88][var78][var89] &= ~var73;
 									}
 								}
 							}
 						}
-						if ((var72 & field2511[var76][var78][var77]) != 0) {
+						if ((var72 & mapo[var76][var78][var77]) != 0) {
 							int var90 = var78;
 							int var91;
-							for (var91 = var78; var91 > 0 && (var72 & field2511[var76][var91 - 1][var77]) != 0; var91--) {
+							for (var91 = var78; var91 > 0 && (var72 & mapo[var76][var91 - 1][var77]) != 0; var91--) {
 							}
 							int var92 = var76;
-							while (var90 < 104 && (var72 & field2511[var76][var90 + 1][var77]) != 0) {
+							while (var90 < 104 && (var72 & mapo[var76][var90 + 1][var77]) != 0) {
 								var90++;
 							}
 							label410: while (var92 > 0) {
 								for (int var93 = var91; var93 <= var90; var93++) {
-									if ((field2511[var92 - 1][var93][var77] & var72) == 0) {
+									if ((mapo[var92 - 1][var93][var77] & var72) == 0) {
 										break label410;
 									}
 								}
@@ -440,7 +440,7 @@ public class ClientBuild {
 							int var94;
 							label398: for (var94 = var76; var94 < var75; var94++) {
 								for (int var95 = var91; var95 <= var90; var95++) {
-									if ((var72 & field2511[var94 + 1][var95][var77]) == 0) {
+									if ((var72 & mapo[var94 + 1][var95][var77]) == 0) {
 										break label398;
 									}
 								}
@@ -449,26 +449,26 @@ public class ClientBuild {
 							if (var96 >= 8) {
 								int var97 = groundh[var92][var91][var77];
 								int var98 = groundh[var94][var91][var77] - 240;
-								World.method1036(var75, 2, var91 * 128, var90 * 128 + 128, var77 * 128, var77 * 128, var98, var97);
+								World.setOcclude(var75, 2, var91 * 128, var90 * 128 + 128, var77 * 128, var77 * 128, var98, var97);
 								for (int var99 = var92; var99 <= var94; var99++) {
 									for (int var100 = var91; var100 <= var90; var100++) {
-										field2511[var99][var100][var77] &= ~var72;
+										mapo[var99][var100][var77] &= ~var72;
 									}
 								}
 							}
 						}
-						if ((var74 & field2511[var76][var78][var77]) != 0) {
+						if ((var74 & mapo[var76][var78][var77]) != 0) {
 							int var101 = var78;
 							int var102 = var78;
 							int var103;
-							for (var103 = var77; var103 > 0 && (var74 & field2511[var76][var78][var103 - 1]) != 0; var103--) {
+							for (var103 = var77; var103 > 0 && (var74 & mapo[var76][var78][var103 - 1]) != 0; var103--) {
 							}
 							int var104;
-							for (var104 = var77; var104 < 104 && (var74 & field2511[var76][var78][var104 + 1]) != 0; var104++) {
+							for (var104 = var77; var104 < 104 && (var74 & mapo[var76][var78][var104 + 1]) != 0; var104++) {
 							}
 							label464: while (var102 > 0) {
 								for (int var105 = var103; var105 <= var104; var105++) {
-									if ((field2511[var76][var102 - 1][var105] & var74) == 0) {
+									if ((mapo[var76][var102 - 1][var105] & var74) == 0) {
 										break label464;
 									}
 								}
@@ -476,7 +476,7 @@ public class ClientBuild {
 							}
 							label453: while (var101 < 104) {
 								for (int var106 = var103; var106 <= var104; var106++) {
-									if ((var74 & field2511[var76][var101 + 1][var106]) == 0) {
+									if ((var74 & mapo[var76][var101 + 1][var106]) == 0) {
 										break label453;
 									}
 								}
@@ -484,10 +484,10 @@ public class ClientBuild {
 							}
 							if ((var101 + 1 - var102) * (-var103 + 1 + var104) >= 4) {
 								int var107 = groundh[var76][var102][var103];
-								World.method1036(var75, 4, var102 * 128, var101 * 128 + 128, var103 * 128, var104 * 128 + 128, var107, var107);
+								World.setOcclude(var75, 4, var102 * 128, var101 * 128 + 128, var103 * 128, var104 * 128 + 128, var107, var107);
 								for (int var108 = var102; var108 <= var101; var108++) {
 									for (int var109 = var103; var109 <= var104; var109++) {
-										field2511[var76][var108][var109] &= ~var74;
+										mapo[var76][var108][var109] &= ~var74;
 									}
 								}
 							}
@@ -499,7 +499,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("ag.a(III)Z")
-	public static boolean method43(int arg0, int arg1) {
+	public static boolean changeLocAvailable(int arg0, int arg1) {
 		LocType var2 = LocType.list(arg1);
 		if (arg0 == 11) {
 			arg0 = 10;
@@ -511,7 +511,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("ve.a(IIII)I")
-	public static int method1555(int arg0, int arg1, int arg2) {
+	public static int getDrawLevel(int arg0, int arg1, int arg2) {
 		if ((mapl[arg2][arg1][arg0] & 0x8) == 0) {
 			return arg2 <= 0 || (mapl[1][arg1][arg0] & 0x2) == 0 ? arg2 : arg2 - 1;
 		} else {
@@ -520,11 +520,11 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("be.a(IIZIII)V")
-	public static void method83(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public static void fadeAdjacent(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		for (int var5 = arg3; var5 <= arg1 + arg3; var5++) {
 			for (int var6 = arg4; var6 <= arg4 + arg2; var6++) {
 				if (var6 >= 0 && var6 < 104 && var5 >= 0 && var5 < 104) {
-					field2020[arg0][var6][var5] = 127;
+					shadow[arg0][var6][var5] = 127;
 				}
 			}
 		}
@@ -571,23 +571,23 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("ta.a(IZ)V")
-	public static void method1425() {
-		field2940 = new int[104];
-		field468 = 99;
-		field1541 = new int[104];
-		field4173 = new int[104];
-		field3012 = new int[104];
-		field4174 = new int[104];
-		field2020 = new byte[4][105][105];
-		field1962 = new byte[4][104][104];
-		field3142 = new byte[4][104][104];
-		field4377 = new byte[4][104][104];
-		field2511 = new int[4][105][105];
-		field115 = new byte[4][104][104];
+	public static void init() {
+		tot = new int[104];
+		minusedlevel = 99;
+		huetot = new int[104];
+		sattot = new int[104];
+		ligtot = new int[104];
+		comtot = new int[104];
+		shadow = new byte[4][105][105];
+		floort2 = new byte[4][104][104];
+		floort1 = new byte[4][104][104];
+		floorr = new byte[4][104][104];
+		mapo = new int[4][105][105];
+		floors = new byte[4][104][104];
 	}
 
 	@ObfuscatedName("bf.a([Lia;[BIIZI)V")
-	public static void method85(CollisionMap[] arg0, byte[] arg1, int arg2, int arg3) {
+	public static void loadLocations(CollisionMap[] arg0, byte[] arg1, int arg2, int arg3) {
 		Packet var4 = new Packet(arg1);
 		int var5 = -1;
 		while (true) {
@@ -620,29 +620,29 @@ public class ClientBuild {
 					if (var18 >= 0) {
 						var17 = arg0[var18];
 					}
-					method1503(true, var12, var14, var16, Client.lowMem, var5, var12, var17, var13, var15);
+					addLoc(true, var12, var14, var16, Client.lowMem, var5, var12, var17, var13, var15);
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("af.d(I)V")
-	public static void method39() {
-		field3012 = null;
-		field4174 = null;
-		field4377 = null;
-		field4173 = null;
-		field2511 = null;
-		field2940 = null;
-		field2020 = null;
-		field115 = null;
-		field3142 = null;
-		field1962 = null;
-		field1541 = null;
+	public static void quit() {
+		ligtot = null;
+		comtot = null;
+		floorr = null;
+		sattot = null;
+		mapo = null;
+		tot = null;
+		shadow = null;
+		floors = null;
+		floort1 = null;
+		floort2 = null;
+		huetot = null;
 	}
 
 	@ObfuscatedName("ke.a(IIIIZIII)V")
-	public static void method781(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public static void changeLocUnchecked(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (arg6 < 1 || arg2 < 1 || arg6 > 102 || arg2 > 102) {
 			return;
 		}
@@ -651,7 +651,7 @@ public class ClientBuild {
 			if ((mapl[arg0][arg6][arg2] & 0x8) != 0) {
 				var7 = 0;
 			}
-			if (Client.field3026 != var7) {
+			if (Client.lastBuiltLevel != var7) {
 				return;
 			}
 		}
@@ -661,13 +661,13 @@ public class ClientBuild {
 		}
 		Client.method989(Client.collision[arg0], arg6, var8, arg1, arg0, arg2);
 		if (arg4 >= 0) {
-			method1503(false, arg0, arg5, arg3, false, arg4, var8, Client.collision[arg0], arg2, arg6);
+			addLoc(false, arg0, arg5, arg3, false, arg4, var8, Client.collision[arg0], arg2, arg6);
 			return;
 		}
 	}
 
 	@ObfuscatedName("te.a(II[Lia;III[BZIII)V")
-	public static void method1447(int arg0, int arg1, CollisionMap[] arg2, int arg3, int arg4, byte[] arg5, int arg6, int arg7, int arg8) {
+	public static void loadLocationsRegion(int arg0, int arg1, CollisionMap[] arg2, int arg3, int arg4, byte[] arg5, int arg6, int arg7, int arg8) {
 		int var9 = -1;
 		Packet var10 = new Packet(arg5);
 		while (true) {
@@ -702,7 +702,7 @@ public class ClientBuild {
 						if (var24 >= 0) {
 							var23 = arg2[var24];
 						}
-						method1503(true, arg4, arg0 + var19 & 0x3, var18, Client.lowMem, var9, arg4, var23, var22, var21);
+						addLoc(true, arg4, arg0 + var19 & 0x3, var18, Client.lowMem, var9, arg4, var23, var22, var21);
 					}
 				}
 			}
@@ -710,7 +710,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("nb.a(III[Lia;IB[BZ)V")
-	public static void method963(int arg0, int arg1, int arg2, CollisionMap[] arg3, int arg4, byte[] arg5) {
+	public static void loadGround(int arg0, int arg1, int arg2, CollisionMap[] arg3, int arg4, byte[] arg5) {
 		for (int var6 = 0; var6 < 4; var6++) {
 			for (int var7 = 0; var7 < 64; var7++) {
 				for (int var8 = 0; var8 < 64; var8++) {
@@ -724,24 +724,24 @@ public class ClientBuild {
 		for (int var10 = 0; var10 < 4; var10++) {
 			for (int var11 = 0; var11 < 64; var11++) {
 				for (int var12 = 0; var12 < 64; var12++) {
-					method914(var11 + arg1, var9, arg0, arg2, var12 + arg4, 0, var10);
+					loadGroundSquare(var11 + arg1, var9, arg0, arg2, var12 + arg4, 0, var10);
 				}
 			}
 		}
 	}
 
 	@ObfuscatedName("ue.a(BZIZIIZIILia;II)V")
-	public static void method1503(boolean arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6, CollisionMap arg7, int arg8, int arg9) {
+	public static void addLoc(boolean arg0, int arg1, int arg2, int arg3, boolean arg4, int arg5, int arg6, CollisionMap arg7, int arg8, int arg9) {
 		if (arg4 && (mapl[0][arg9][arg8] & 0x2) == 0) {
 			if ((mapl[arg1][arg9][arg8] & 0x10) != 0) {
 				return;
 			}
-			if (method1555(arg8, arg9, arg1) != Client.field3026) {
+			if (getDrawLevel(arg8, arg9, arg1) != Client.lastBuiltLevel) {
 				return;
 			}
 		}
-		if (arg1 < field468) {
-			field468 = arg1;
+		if (arg1 < minusedlevel) {
+			minusedlevel = arg1;
 		}
 		LocType var10 = LocType.list(arg5);
 		int var11;
@@ -799,7 +799,7 @@ public class ClientBuild {
 				} else {
 					var27 = new ClientLocAnim(arg5, 22, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 				}
-				World.method232(arg1, arg9, arg8, var19, var27, var24, var10.field2799);
+				World.setGroundDecor(arg1, arg9, arg8, var19, var27, var24, var10.field2799);
 				if (var10.blockwalk == 1 && arg7 != null) {
 					arg7.method646(arg8, arg9);
 				}
@@ -813,19 +813,19 @@ public class ClientBuild {
 				var29 = new ClientLocAnim(arg5, 10, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			if (var29 != null) {
-				boolean var30 = World.method390(arg1, arg9, arg8, var19, var11, var12, var29, arg3 == 11 ? 256 : 0, var24);
+				boolean var30 = World.addScenery(arg1, arg9, arg8, var19, var11, var12, var29, arg3 == 11 ? 256 : 0, var24);
 				if (var10.shadow && var30 && arg0) {
 					int var31 = 15;
 					if (var29 instanceof ModelLit) {
-						var31 = ((ModelLit) var29).method192() / 4;
+						var31 = ((ModelLit) var29).getRadiusCylinder() / 4;
 						if (var31 > 30) {
 							var31 = 30;
 						}
 					}
 					for (int var32 = 0; var32 <= var11; var32++) {
 						for (int var33 = 0; var33 <= var12; var33++) {
-							if (var31 > field2020[arg1][arg9 + var32][var33 + arg8]) {
-								field2020[arg1][arg9 + var32][var33 + arg8] = (byte) var31;
+							if (var31 > shadow[arg1][arg9 + var32][var33 + arg8]) {
+								shadow[arg1][arg9 + var32][var33 + arg8] = (byte) var31;
 							}
 						}
 					}
@@ -842,9 +842,9 @@ public class ClientBuild {
 			} else {
 				var35 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method390(arg1, arg9, arg8, var19, 1, 1, var35, 0, var24);
+			World.addScenery(arg1, arg9, arg8, var19, 1, 1, var35, 0, var24);
 			if (arg0 && arg3 >= 12 && arg3 <= 17 && arg3 != 13 && arg1 > 0) {
-				field2511[arg1][arg9][arg8] |= 0x924;
+				mapo[arg1][arg9][arg8] |= 0x924;
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
 				arg7.method644(var11, var12, var10.blockrange, arg9, arg8);
@@ -857,39 +857,39 @@ public class ClientBuild {
 			} else {
 				var36 = new ClientLocAnim(arg5, 0, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method762(arg1, arg9, arg8, var19, var36, null, field3949[arg2], 0, var24);
+			World.setWall(arg1, arg9, arg8, var19, var36, null, WSHAPE0[arg2], 0, var24);
 			if (arg0) {
 				if (arg2 == 0) {
 					if (var10.shadow) {
-						field2020[arg1][arg9][arg8] = 50;
-						field2020[arg1][arg9][arg8 + 1] = 50;
+						shadow[arg1][arg9][arg8] = 50;
+						shadow[arg1][arg9][arg8 + 1] = 50;
 					}
 					if (var10.occlude) {
-						field2511[arg1][arg9][arg8] |= 0x249;
+						mapo[arg1][arg9][arg8] |= 0x249;
 					}
 				} else if (arg2 == 1) {
 					if (var10.shadow) {
-						field2020[arg1][arg9][arg8 + 1] = 50;
-						field2020[arg1][arg9 + 1][arg8 + 1] = 50;
+						shadow[arg1][arg9][arg8 + 1] = 50;
+						shadow[arg1][arg9 + 1][arg8 + 1] = 50;
 					}
 					if (var10.occlude) {
-						field2511[arg1][arg9][arg8 + 1] |= 0x492;
+						mapo[arg1][arg9][arg8 + 1] |= 0x492;
 					}
 				} else if (arg2 == 2) {
 					if (var10.shadow) {
-						field2020[arg1][arg9 + 1][arg8] = 50;
-						field2020[arg1][arg9 + 1][arg8 + 1] = 50;
+						shadow[arg1][arg9 + 1][arg8] = 50;
+						shadow[arg1][arg9 + 1][arg8 + 1] = 50;
 					}
 					if (var10.occlude) {
-						field2511[arg1][arg9 + 1][arg8] |= 0x249;
+						mapo[arg1][arg9 + 1][arg8] |= 0x249;
 					}
 				} else if (arg2 == 3) {
 					if (var10.shadow) {
-						field2020[arg1][arg9][arg8] = 50;
-						field2020[arg1][arg9 + 1][arg8] = 50;
+						shadow[arg1][arg9][arg8] = 50;
+						shadow[arg1][arg9 + 1][arg8] = 50;
 					}
 					if (var10.occlude) {
-						field2511[arg1][arg9][arg8] |= 0x492;
+						mapo[arg1][arg9][arg8] |= 0x492;
 					}
 				}
 			}
@@ -897,7 +897,7 @@ public class ClientBuild {
 				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
 			if (var10.wallwidth != 16) {
-				World.method1602(arg1, arg9, arg8, var10.wallwidth);
+				World.moveDecor(arg1, arg9, arg8, var10.wallwidth);
 			}
 		} else if (arg3 == 1) {
 			ModelSource var38;
@@ -907,16 +907,16 @@ public class ClientBuild {
 			} else {
 				var38 = new ClientLocAnim(arg5, 1, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method762(arg1, arg9, arg8, var19, var38, null, field4427[arg2], 0, var24);
+			World.setWall(arg1, arg9, arg8, var19, var38, null, WSHAPE1[arg2], 0, var24);
 			if (var10.shadow && arg0) {
 				if (arg2 == 0) {
-					field2020[arg1][arg9][arg8 + 1] = 50;
+					shadow[arg1][arg9][arg8 + 1] = 50;
 				} else if (arg2 == 1) {
-					field2020[arg1][arg9 + 1][arg8 + 1] = 50;
+					shadow[arg1][arg9 + 1][arg8 + 1] = 50;
 				} else if (arg2 == 2) {
-					field2020[arg1][arg9 + 1][arg8] = 50;
+					shadow[arg1][arg9 + 1][arg8] = 50;
 				} else if (arg2 == 3) {
-					field2020[arg1][arg9][arg8] = 50;
+					shadow[arg1][arg9][arg8] = 50;
 				}
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
@@ -935,27 +935,27 @@ public class ClientBuild {
 				var41 = new ClientLocAnim(arg5, 2, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 				var42 = new ClientLocAnim(arg5, 2, var40, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method762(arg1, arg9, arg8, var19, var41, var42, field3949[arg2], field3949[var40], var24);
+			World.setWall(arg1, arg9, arg8, var19, var41, var42, WSHAPE0[arg2], WSHAPE0[var40], var24);
 			if (var10.occlude && arg0) {
 				if (arg2 == 0) {
-					field2511[arg1][arg9][arg8] |= 0x249;
-					field2511[arg1][arg9][arg8 + 1] |= 0x492;
+					mapo[arg1][arg9][arg8] |= 0x249;
+					mapo[arg1][arg9][arg8 + 1] |= 0x492;
 				} else if (arg2 == 1) {
-					field2511[arg1][arg9][arg8 + 1] |= 0x492;
-					field2511[arg1][arg9 + 1][arg8] |= 0x249;
+					mapo[arg1][arg9][arg8 + 1] |= 0x492;
+					mapo[arg1][arg9 + 1][arg8] |= 0x249;
 				} else if (arg2 == 2) {
-					field2511[arg1][arg9 + 1][arg8] |= 0x249;
-					field2511[arg1][arg9][arg8] |= 0x492;
+					mapo[arg1][arg9 + 1][arg8] |= 0x249;
+					mapo[arg1][arg9][arg8] |= 0x492;
 				} else if (arg2 == 3) {
-					field2511[arg1][arg9][arg8] |= 0x492;
-					field2511[arg1][arg9][arg8] |= 0x249;
+					mapo[arg1][arg9][arg8] |= 0x492;
+					mapo[arg1][arg9][arg8] |= 0x249;
 				}
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
 				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
 			if (var10.wallwidth != 16) {
-				World.method1602(arg1, arg9, arg8, var10.wallwidth);
+				World.moveDecor(arg1, arg9, arg8, var10.wallwidth);
 			}
 		} else if (arg3 == 3) {
 			ModelSource var46;
@@ -965,16 +965,16 @@ public class ClientBuild {
 			} else {
 				var46 = new ClientLocAnim(arg5, 3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method762(arg1, arg9, arg8, var19, var46, null, field4427[arg2], 0, var24);
+			World.setWall(arg1, arg9, arg8, var19, var46, null, WSHAPE1[arg2], 0, var24);
 			if (var10.shadow && arg0) {
 				if (arg2 == 0) {
-					field2020[arg1][arg9][arg8 + 1] = 50;
+					shadow[arg1][arg9][arg8 + 1] = 50;
 				} else if (arg2 == 1) {
-					field2020[arg1][arg9 + 1][arg8 + 1] = 50;
+					shadow[arg1][arg9 + 1][arg8 + 1] = 50;
 				} else if (arg2 == 2) {
-					field2020[arg1][arg9 + 1][arg8] = 50;
+					shadow[arg1][arg9 + 1][arg8] = 50;
 				} else if (arg2 == 3) {
-					field2020[arg1][arg9][arg8] = 50;
+					shadow[arg1][arg9][arg8] = 50;
 				}
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
@@ -988,12 +988,12 @@ public class ClientBuild {
 			} else {
 				var47 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method390(arg1, arg9, arg8, var19, 1, 1, var47, 0, var24);
+			World.addScenery(arg1, arg9, arg8, var19, 1, 1, var47, 0, var24);
 			if (var10.blockwalk != 0 && arg7 != null) {
 				arg7.method644(var11, var12, var10.blockrange, arg9, arg8);
 			}
 			if (var10.wallwidth != 16) {
-				World.method1602(arg1, arg9, arg8, var10.wallwidth);
+				World.moveDecor(arg1, arg9, arg8, var10.wallwidth);
 			}
 		} else if (arg3 == 4) {
 			ModelSource var49;
@@ -1003,10 +1003,10 @@ public class ClientBuild {
 			} else {
 				var49 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method1520(arg1, arg9, arg8, var19, var49, null, field3949[arg2], 0, 0, 0, var24);
+			World.setDecor(arg1, arg9, arg8, var19, var49, null, WSHAPE0[arg2], 0, 0, 0, var24);
 		} else if (arg3 == 5) {
 			int var51 = 16;
-			long var52 = World.method1062(arg1, arg9, arg8);
+			long var52 = World.wallType(arg1, arg9, arg8);
 			if (var52 != 0L) {
 				var51 = LocType.list((int) (var52 >>> 32) & Integer.MAX_VALUE).wallwidth;
 			}
@@ -1017,10 +1017,10 @@ public class ClientBuild {
 			} else {
 				var54 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method1520(arg1, arg9, arg8, var19, var54, null, field3949[arg2], 0, var51 * field198[arg2], var51 * field1557[arg2], var24);
+			World.setDecor(arg1, arg9, arg8, var19, var54, null, WSHAPE0[arg2], 0, var51 * DECORXOF[arg2], var51 * DECORZOF[arg2], var24);
 		} else if (arg3 == 6) {
 			int var56 = 8;
-			long var57 = World.method1062(arg1, arg9, arg8);
+			long var57 = World.wallType(arg1, arg9, arg8);
 			if (var57 != 0L) {
 				var56 = LocType.list(Integer.MAX_VALUE & (int) (var57 >>> 32)).wallwidth / 2;
 			}
@@ -1031,7 +1031,7 @@ public class ClientBuild {
 			} else {
 				var59 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method1520(arg1, arg9, arg8, var19, var59, null, 256, arg2, field3240[arg2] * var56, field551[arg2] * var56, var24);
+			World.setDecor(arg1, arg9, arg8, var19, var59, null, 256, arg2, DECORXOF2[arg2] * var56, DECORZOF2[arg2] * var56, var24);
 		} else if (arg3 == 7) {
 			int var61 = arg2 + 2 & 0x3;
 			ModelSource var63;
@@ -1041,10 +1041,10 @@ public class ClientBuild {
 			} else {
 				var63 = new ClientLocAnim(arg5, 4, var61 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method1520(arg1, arg9, arg8, var19, var63, null, 256, var61, 0, 0, var24);
+			World.setDecor(arg1, arg9, arg8, var19, var63, null, 256, var61, 0, 0, var24);
 		} else if (arg3 == 8) {
 			int var64 = 8;
-			long var65 = World.method1062(arg1, arg9, arg8);
+			long var65 = World.wallType(arg1, arg9, arg8);
 			if (var65 != 0L) {
 				var64 = LocType.list((int) (var65 >>> 32) & Integer.MAX_VALUE).wallwidth / 2;
 			}
@@ -1060,12 +1060,12 @@ public class ClientBuild {
 				var68 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 				var69 = new ClientLocAnim(arg5, 4, var67 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
-			World.method1520(arg1, arg9, arg8, var19, var68, var69, 256, arg2, field3240[arg2] * var64, var64 * field551[arg2], var24);
+			World.setDecor(arg1, arg9, arg8, var19, var68, var69, 256, arg2, DECORXOF2[arg2] * var64, var64 * DECORZOF2[arg2], var24);
 		}
 	}
 
 	@ObfuscatedName("mf.a(ILea;IZIIIII)V")
-	public static void method914(int arg0, Packet arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+	public static void loadGroundSquare(int arg0, Packet arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (arg0 < 0 || arg0 >= 104 || arg4 < 0 || arg4 >= 104) {
 			while (true) {
 				int var7 = arg1.g1();
@@ -1086,7 +1086,7 @@ public class ClientBuild {
 			int var8 = arg1.g1();
 			if (var8 == 0) {
 				if (arg6 == 0) {
-					groundh[0][arg0][arg4] = -method1470(arg3 + arg0 + 932731, 556238 - -arg4 - -arg2) * 8;
+					groundh[0][arg0][arg4] = -perlinNoise(arg3 + arg0 + 932731, 556238 - -arg4 - -arg2) * 8;
 					return;
 				} else {
 					groundh[arg6][arg0][arg4] = groundh[arg6 - 1][arg0][arg4] - 240;
@@ -1106,48 +1106,48 @@ public class ClientBuild {
 				return;
 			}
 			if (var8 <= 49) {
-				field1962[arg6][arg0][arg4] = arg1.g1b();
-				field115[arg6][arg0][arg4] = (byte) ((var8 - 2) / 4);
-				field4377[arg6][arg0][arg4] = (byte) (arg5 + var8 - 2 & 0x3);
+				floort2[arg6][arg0][arg4] = arg1.g1b();
+				floors[arg6][arg0][arg4] = (byte) ((var8 - 2) / 4);
+				floorr[arg6][arg0][arg4] = (byte) (arg5 + var8 - 2 & 0x3);
 			} else if (var8 <= 81) {
 				mapl[arg6][arg0][arg4] = (byte) (var8 - 49);
 			} else {
-				field3142[arg6][arg0][arg4] = (byte) (var8 - 81);
+				floort1[arg6][arg0][arg4] = (byte) (var8 - 81);
 			}
 		}
 	}
 
 	@ObfuscatedName("e.a(IIII)I")
-	public static int method292(int arg0, int arg1, int arg2) {
+	public static int interpolatedNoise(int arg0, int arg1, int arg2) {
 		int var3 = arg2 / arg1;
 		int var4 = arg1 - 1 & arg2;
 		int var5 = arg1 - 1 & arg0;
 		int var6 = arg0 / arg1;
-		int var7 = method48(var6, var3);
-		int var8 = method48(var6, var3 + 1);
-		int var9 = method48(var6 + 1, var3);
-		int var10 = method48(var6 + 1, var3 + 1);
+		int var7 = smoothNoise(var6, var3);
+		int var8 = smoothNoise(var6, var3 + 1);
+		int var9 = smoothNoise(var6 + 1, var3);
+		int var10 = smoothNoise(var6 + 1, var3 + 1);
 		int var11 = method419(arg1, var7, var4, var8);
 		int var12 = method419(arg1, var9, var4, var10);
 		return method419(arg1, var11, var5, var12);
 	}
 
 	@ObfuscatedName("ah.a(III)I")
-	public static int method48(int arg0, int arg1) {
-		int var2 = method1330(arg0 - 1, arg1 + -1) + method1330(arg0 - 1, arg1 + 1) + method1330(arg0 + 1, arg1 + -1) + method1330(arg0 - -1, arg1 - -1);
-		int var3 = method1330(arg0, arg1 - 1) + method1330(arg0, arg1 + 1) + method1330(arg0 + -1, arg1) + method1330(arg0 - -1, arg1);
-		int var4 = method1330(arg0, arg1);
+	public static int smoothNoise(int arg0, int arg1) {
+		int var2 = noise(arg0 - 1, arg1 + -1) + noise(arg0 - 1, arg1 + 1) + noise(arg0 + 1, arg1 + -1) + noise(arg0 - -1, arg1 - -1);
+		int var3 = noise(arg0, arg1 - 1) + noise(arg0, arg1 + 1) + noise(arg0 + -1, arg1) + noise(arg0 - -1, arg1);
+		int var4 = noise(arg0, arg1);
 		return var2 / 16 + var3 / 8 + var4 / 4;
 	}
 
 	@ObfuscatedName("fa.a(IIIII)I")
 	public static int method419(int arg0, int arg1, int arg2, int arg3) {
-		int var4 = 65536 - Pix3D.field3354[arg2 * 1024 / arg0] >> 1;
+		int var4 = 65536 - Pix3D.cosTable[arg2 * 1024 / arg0] >> 1;
 		return (arg1 * (65536 - var4) >> 16) + (arg3 * var4 >> 16);
 	}
 
 	@ObfuscatedName("fh.a(IIZIII[Lia;I[BII)V")
-	public static void method449(int arg0, int arg1, int arg2, int arg3, CollisionMap[] arg4, int arg5, byte[] arg6, int arg7, int arg8) {
+	public static void loadGroundRegion(int arg0, int arg1, int arg2, int arg3, CollisionMap[] arg4, int arg5, byte[] arg6, int arg7, int arg8) {
 		for (int var9 = 0; var9 < 8; var9++) {
 			for (int var10 = 0; var10 < 8; var10++) {
 				if (var9 + arg0 > 0 && var9 + arg0 < 103 && arg7 + var10 > 0 && var10 + arg7 < 103) {
@@ -1160,9 +1160,9 @@ public class ClientBuild {
 			for (int var13 = 0; var13 < 64; var13++) {
 				for (int var14 = 0; var14 < 64; var14++) {
 					if (var12 == arg5 && var13 >= arg2 && var13 < arg2 + 8 && var14 >= arg3 && var14 < arg3 + 8) {
-						method914(RegionRotate.method1606(arg1, var13 & 0x7, var14 & 0x7) + arg0, var11, 0, 0, arg7 + RegionRotate.method1069(var14 & 0x7, var13 & 0x7, arg1), arg1, arg8);
+						loadGroundSquare(RegionRotate.method1606(arg1, var13 & 0x7, var14 & 0x7) + arg0, var11, 0, 0, arg7 + RegionRotate.method1069(var14 & 0x7, var13 & 0x7, arg1), arg1, arg8);
 					} else {
-						method914(-1, var11, 0, 0, -1, 0, 0);
+						loadGroundSquare(-1, var11, 0, 0, -1, 0, 0);
 					}
 				}
 			}
@@ -1170,14 +1170,14 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("db.a(IZ)V")
-	public static void method239() {
+	public static void loadGroundRegion() {
 		byte[][] var0 = field3221;
 		for (int var1 = 0; var1 < 4; var1++) {
 			Client.doAudio();
 			for (int var2 = 0; var2 < 13; var2++) {
 				for (int var3 = 0; var3 < 13; var3++) {
 					boolean var4 = false;
-					int var5 = field2024[var1][var2][var3];
+					int var5 = zoneMapArchiveIds[var1][var2][var3];
 					if (var5 != -1) {
 						int var6 = var5 >> 24 & 0x3;
 						int var7 = var5 >> 14 & 0x3FF;
@@ -1186,14 +1186,14 @@ public class ClientBuild {
 						int var10 = var9 / 8 + (var7 / 8 << 8);
 						for (int var11 = 0; var11 < field2731.length; var11++) {
 							if (var10 == field2731[var11] && var0[var11] != null) {
-								method449(var2 * 8, var8, (var7 & 0x7) * 8, (var9 & 0x7) * 8, Client.collision, var6, var0[var11], var3 * 8, var1);
+								loadGroundRegion(var2 * 8, var8, (var7 & 0x7) * 8, (var9 & 0x7) * 8, Client.collision, var6, var0[var11], var3 * 8, var1);
 								var4 = true;
 								break;
 							}
 						}
 					}
 					if (!var4) {
-						method83(var1, 8, 8, var3 * 8, var2 * 8);
+						fadeAdjacent(var1, 8, 8, var3 * 8, var2 * 8);
 					}
 				}
 			}
@@ -1201,7 +1201,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("rg.a(III)I")
-	public static int method1330(int arg0, int arg1) {
+	public static int noise(int arg0, int arg1) {
 		int var2 = arg0 * 57 + arg1;
 		int var3 = var2 << 13 ^ var2;
 		int var4 = Integer.MAX_VALUE & var3 * (var3 * var3 * 15731 + 789221) + 1376312589;
@@ -1209,7 +1209,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("of.a(IIII)I")
-	public static int method1066(int arg0, int arg1, int arg2) {
+	public static int getTable(int arg0, int arg1, int arg2) {
 		if (arg1 > 243) {
 			arg2 >>= 0x4;
 		} else if (arg1 > 217) {
@@ -1223,7 +1223,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("ba.a(III)I")
-	public static int method67(int arg0, int arg1) {
+	public static int getUCol(int arg0, int arg1) {
 		if (arg1 == -1) {
 			return 12345678;
 		}
@@ -1237,8 +1237,8 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("tj.a(III)I")
-	public static int method1470(int arg0, int arg1) {
-		int var2 = method292(arg1 + 91923, 4, arg0 + 45365) + (method292(arg1 + 37821, 2, arg0 + 10294) - 128 >> 1) + (method292(arg1, 1, arg0) + -128 >> 2) - 128;
+	public static int perlinNoise(int arg0, int arg1) {
+		int var2 = interpolatedNoise(arg1 + 91923, 4, arg0 + 45365) + (interpolatedNoise(arg1 + 37821, 2, arg0 + 10294) - 128 >> 1) + (interpolatedNoise(arg1, 1, arg0) + -128 >> 2) - 128;
 		int var3 = (int) ((double) var2 * 0.3D) + 35;
 		if (var3 < 10) {
 			var3 = 10;
@@ -1249,13 +1249,13 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("hh.a(ZI)V")
-	public static void method576() {
+	public static void loadLocationsRegion() {
 		byte[][] var0 = Statics.field774;
 		for (int var1 = 0; var1 < 4; var1++) {
 			Client.doAudio();
 			for (int var2 = 0; var2 < 13; var2++) {
 				for (int var3 = 0; var3 < 13; var3++) {
-					int var4 = field2024[var1][var2][var3];
+					int var4 = zoneMapArchiveIds[var1][var2][var3];
 					if (var4 != -1) {
 						int var5 = var4 >> 24 & 0x3;
 						int var6 = var4 >> 1 & 0x3;
@@ -1264,7 +1264,7 @@ public class ClientBuild {
 						int var9 = (var7 / 8 << 8) + (var8 / 8);
 						for (int var10 = 0; var10 < field2731.length; var10++) {
 							if (var9 == field2731[var10] && var0[var10] != null) {
-								method1447(var6, (var7 & 0x7) * 8, Client.collision, (var8 & 0x7) * 8, var1, var0[var10], var5, var3 * 8, var2 * 8);
+								loadLocationsRegion(var6, (var7 & 0x7) * 8, Client.collision, (var8 & 0x7) * 8, var1, var0[var10], var5, var3 * 8, var2 * 8);
 								break;
 							}
 						}

@@ -93,7 +93,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			return null;
 		}
 		for (int var2 = 0; var2 < var1; var2++) {
-			arg0 = Client.method1579(arg0.field3504);
+			arg0 = IfType.get(arg0.layerId);
 			if (arg0 == null) {
 				return null;
 			}
@@ -233,6 +233,34 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("og.c(II)V")
 	public static void method1073(int arg0) {
 		field3145 = 1000 / arg0;
+	}
+
+	@ObfuscatedName("pb.b(ILi;)V")
+	public static void method1138(JagString arg0) {
+		try {
+			shell.getAppletContext().showDocument(arg0.method632(shell.getCodeBase()), "_blank");
+		} catch (Exception var1) {
+		}
+	}
+
+	@ObfuscatedName("pb.a(ILi;)V")
+	public static void method1132(JagString arg0) {
+		if (signlink.field3597 == null) {
+			return;
+		}
+		try {
+			JagString var1 = Statics.field4265.method608(signlink.field3597);
+			JagString var2 = Statics.field4516.method608(signlink.field3597);
+			JagString var3 = JagString.join(new JagString[] { var1, Statics.field651, arg0, Statics.field1005, var2 });
+			JagString var4;
+			if (arg0.method604() == 0) {
+				var4 = JagString.join(new JagString[] { var3, Statics.field920});
+			} else {
+				var4 = JagString.join(new JagString[] { var3, Statics.field1982, Statics.method1139(MonotonicTime.currentTime() + 94608000000L), Statics.field1767, JagString.method1556(94608000L) });
+			}
+			JagString.join(new JagString[] {Statics.field3237, var4, Statics.field591}).method636(signlink.field3597);
+		} catch (Throwable var5) {
+		}
 	}
 
 	@Override

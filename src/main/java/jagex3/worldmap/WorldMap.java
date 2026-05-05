@@ -139,8 +139,8 @@ public class WorldMap {
 			field1009 = new int[FloType.field2923 + 1];
 			field760 = (var4 - var2) * 64 + 64;
 			field1988 = (var3 + 1 - var1) * 64;
-			int var7 = Client.field3679 + (Client.localPlayer.field4121 >> 7) - field2181;
-			int var8 = Client.field4212 + (Client.localPlayer.field4136 >> 7) - field239;
+			int var7 = Client.mapBuildBaseZ + (Client.localPlayer.z >> 7) - field2181;
+			int var8 = Client.mapBuildBaseX + (Client.localPlayer.x >> 7) - field239;
 			int var9 = var8 + (int) (Math.random() * 10.0D) - 5;
 			int var10 = var7 + (int) (Math.random() * 10.0D) - 5;
 			int var11 = field760 >> 6;
@@ -150,7 +150,7 @@ public class WorldMap {
 			field1912 = new int[var12][var11][];
 			field1786 = new byte[var12][var11][];
 			field4166 = new byte[var12][var11][];
-			int var13 = ClientBuild.field1270 >> 1;
+			int var13 = ClientBuild.ligOff >> 1;
 			field2126 = new byte[var12][var11][];
 			if (var9 >= 0 && var9 < field1988 && var10 >= 0 && field760 > var10) {
 				field3033 = field760 - var10;
@@ -159,14 +159,14 @@ public class WorldMap {
 				field3033 = field2181 + field760 - var6 * 64;
 				field2330 = var5 * 64 - field239;
 			}
-			int var14 = ClientBuild.field4086 >> 2 << 10;
+			int var14 = ClientBuild.hueOff >> 2 << 10;
 			field895 = new int[var12][var11][];
 			field3951 = new byte[var12][var11][];
 			for (int var15 = 0; var15 < FloType.field2923; var15++) {
 				FloType var16 = FloType.list(var15);
 				if (var16 != null) {
 					int var17 = var16.texture;
-					if (var17 >= 0 && !Pix3D.field3356.method436(var17)) {
+					if (var17 >= 0 && !Pix3D.textureManager.method436(var17)) {
 						var17 = -1;
 					}
 					int var21;
@@ -179,9 +179,9 @@ public class WorldMap {
 							var19 = 127;
 						}
 						int var20 = (var18 & 0x380) + ((var18 + var14 & 0xFC00) + var19);
-						var21 = Pix3D.field3349[ClientBuild.method202(96, var20)];
+						var21 = Pix3D.colourTable[ClientBuild.getOCol(96, var20)];
 					} else if (var17 >= 0) {
-						var21 = Pix3D.field3349[ClientBuild.method202(96, Pix3D.field3356.method438(var17))];
+						var21 = Pix3D.colourTable[ClientBuild.getOCol(96, Pix3D.textureManager.method438(var17))];
 					} else if (var16.field111 == -1) {
 						var21 = -1;
 					} else {
@@ -193,7 +193,7 @@ public class WorldMap {
 							var23 = 127;
 						}
 						int var24 = (var22 & 0x380) + (var22 + var14 & 0xFC00) + var23;
-						var21 = Pix3D.field3349[ClientBuild.method202(96, var24)];
+						var21 = Pix3D.colourTable[ClientBuild.getOCol(96, var24)];
 					}
 					field1009[var15 + 1] = var21;
 				}
@@ -391,9 +391,9 @@ public class WorldMap {
 
 	@ObfuscatedName("oi.a(I[B)V")
 	public static void method1085(byte[] arg0) {
-		int var1 = ClientBuild.field4086 >> 2 << 10;
+		int var1 = ClientBuild.hueOff >> 2 << 10;
 		byte[][] var2 = new byte[field1988][field760];
-		int var3 = ClientBuild.field1270 >> 1;
+		int var3 = ClientBuild.ligOff >> 1;
 		int var4 = 0;
 		while (true) {
 			while (arg0.length > var4) {
@@ -472,7 +472,7 @@ public class WorldMap {
 						}
 						if (var32 >= 0 && var31 > 0) {
 							int var35 = var32 >> 6;
-							int var36 = var30 == 0 ? 0 : ClientBuild.method1066(var29 * 256 / var30, var28 / var31, var27 / var31);
+							int var36 = var30 == 0 ? 0 : ClientBuild.getTable(var29 * 256 / var30, var28 / var31, var27 / var31);
 							if (var2[var18][var32] != 0) {
 								if (var26[var35] == null) {
 									var26[var35] = field1912[var18 >> 6][var35] = new int[4096];
@@ -484,7 +484,7 @@ public class WorldMap {
 									var37 = 127;
 								}
 								int var38 = (var36 + var1 & 0xFC00) + ((var36 & 0x380) + var37);
-								var26[var35][((var32 & 0x3F) << 6) + (var18 & 0x3F)] = Pix3D.field3349[ClientBuild.method67(96, var38)];
+								var26[var35][((var32 & 0x3F) << 6) + (var18 & 0x3F)] = Pix3D.colourTable[ClientBuild.getUCol(96, var38)];
 							} else if (var26[var35] != null) {
 								var26[var35][((var32 & 0x3F) << 6) + (var18 & 0x3F)] = 0;
 							}

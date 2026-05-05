@@ -6,10 +6,10 @@ import deob.ObfuscatedName;
 public final class HintArrow {
 
 	@ObfuscatedName("ki.d")
-	public int field2134;
+	public int hintOffsetX;
 
 	@ObfuscatedName("ki.e")
-	public int field2135;
+	public int hintTileZ;
 
 	@ObfuscatedName("ki.f")
 	public int field2136 = -1;
@@ -18,18 +18,18 @@ public final class HintArrow {
 	public int field2137;
 
 	@ObfuscatedName("ki.h")
-	public int field2138;
+	public int hintTileX;
 
 	@ObfuscatedName("ki.i")
-	public int field2139;
+	public int hintType;
 
 	@ObfuscatedName("ki.p")
-	public int field2146;
+	public int hintTarget;
 
 	@ObfuscatedName("ki.t")
-	public int field2150;
+	public int hintOffsetZ;
 
 	@ObfuscatedName("ki.u")
-	public int field2151;
+	public int hintHeight;
 
 }

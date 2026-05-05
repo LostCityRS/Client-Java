@@ -17,11 +17,11 @@ import jagex3.jstring.JagString;
 public final class IfType {
 
 	@ObfuscatedName("kd.T")
-	public static final LruCache field2039 = new LruCache(200);
+	public static final LruCache spriteCache = new LruCache(200);
 	@ObfuscatedName("pe.B")
 	public static final ModelSourceCache modelCache = new ModelSourceCache(50);
 	@ObfuscatedName("oe.d")
-	public static final LruCache field3020 = new LruCache(20);
+	public static final LruCache fontCache = new LruCache(20);
 	@ObfuscatedName("pd.Z")
 	public static boolean[] open;
 	@ObfuscatedName("hh.fb")
@@ -31,7 +31,7 @@ public final class IfType {
 	@ObfuscatedName("wi.s")
 	public static boolean loadingAsset = false;
 	@ObfuscatedName("ib.y")
-	public static Js5 field1704;
+	public static Js5 models;
 	@ObfuscatedName("q.a")
 	public int field3365 = 0;
 
@@ -39,13 +39,13 @@ public final class IfType {
 	public int field3417 = 0;
 
 	@ObfuscatedName("q.ac")
-	public int field3469 = 0;
+	public int vAlign = 0;
 
 	@ObfuscatedName("q.b")
 	public int field3366 = 0;
 
 	@ObfuscatedName("q.bb")
-	public int field3418 = 0;
+	public int height = 0;
 
 	@ObfuscatedName("q.bc")
 	public boolean field3470 = false;
@@ -54,34 +54,34 @@ public final class IfType {
 	public byte field3367 = 0;
 
 	@ObfuscatedName("q.cc")
-	public Object[] field3471;
+	public Object[] onscrollwheel;
 
 	@ObfuscatedName("q.d")
-	public int field3368 = 0;
+	public int buttonType = 0;
 
 	@ObfuscatedName("q.db")
-	public boolean field3420 = false;
+	public boolean tiling = false;
 
 	@ObfuscatedName("q.dc")
-	public int[] field3472;
+	public int[] invBackgroundX;
 
 	@ObfuscatedName("q.e")
-	public int[] field3369;
+	public int[] oninvtransmitlist;
 
 	@ObfuscatedName("q.eb")
 	public int[] field3421;
 
 	@ObfuscatedName("q.ec")
-	public int field3473 = -1;
+	public int graphic = -1;
 
 	@ObfuscatedName("q.f")
-	public Object[] field3370;
+	public Object[] onmouseover;
 
 	@ObfuscatedName("q.fb")
 	public int field3422 = 0;
 
 	@ObfuscatedName("q.fc")
-	public int[] field3474;
+	public int[] linkObjNumber;
 
 	@ObfuscatedName("q.g")
 	public int field3371 = -1;
@@ -93,19 +93,19 @@ public final class IfType {
 	public int field3372 = 0;
 
 	@ObfuscatedName("q.hb")
-	public int field3424 = -1;
+	public int overLayerId = -1;
 
 	@ObfuscatedName("q.i")
-	public JagString[] field3373;
+	public JagString[] opNames;
 
 	@ObfuscatedName("q.ib")
-	public int field3425 = 0;
+	public int shadowColour = 0;
 
 	@ObfuscatedName("q.ic")
 	public boolean field3477 = false;
 
 	@ObfuscatedName("q.j")
-	public int field3374 = 0;
+	public int colour2Over = 0;
 
 	@ObfuscatedName("q.jb")
 	public Object[] field3426;
@@ -114,34 +114,34 @@ public final class IfType {
 	public boolean field3478 = false;
 
 	@ObfuscatedName("q.k")
-	public int field3375 = 0;
+	public int scrollHeight = 0;
 
 	@ObfuscatedName("q.kb")
-	public boolean field3427 = false;
+	public boolean draggablebehavior = false;
 
 	@ObfuscatedName("q.kc")
-	public int field3479 = 0;
+	public int hAlign = 0;
 
 	@ObfuscatedName("q.l")
-	public int field3376 = 1;
+	public int model2Type = 1;
 
 	@ObfuscatedName("q.lc")
-	public int field3480 = 0;
+	public int trans = 0;
 
 	@ObfuscatedName("q.m")
 	public Object[] field3377;
 
 	@ObfuscatedName("q.mb")
-	public int field3429 = 0;
+	public int outline = 0;
 
 	@ObfuscatedName("q.mc")
-	public Object[] field3481;
+	public Object[] onvartransmit;
 
 	@ObfuscatedName("q.n")
-	public boolean field3378 = false;
+	public boolean hide = false;
 
 	@ObfuscatedName("q.nb")
-	public int field3430 = 1;
+	public int model1Type = 1;
 
 	@ObfuscatedName("q.nc")
 	public int field3482 = 0;
@@ -150,16 +150,16 @@ public final class IfType {
 	public int field3379 = 0;
 
 	@ObfuscatedName("q.ob")
-	public int field3431 = 0;
+	public int colourOver = 0;
 
 	@ObfuscatedName("q.oc")
-	public boolean field3483;
+	public boolean hFlip;
 
 	@ObfuscatedName("q.p")
 	public int field3380 = 0;
 
 	@ObfuscatedName("q.pb")
-	public int field3432 = 0;
+	public int modelXOf = 0;
 
 	@ObfuscatedName("q.pc")
 	public Object[] field3484;
@@ -168,10 +168,10 @@ public final class IfType {
 	public Object[] field3381;
 
 	@ObfuscatedName("q.qb")
-	public int field3433 = -1;
+	public int graphic2 = -1;
 
 	@ObfuscatedName("q.qc")
-	public int field3485 = 100;
+	public int modelZoom = 100;
 
 	@ObfuscatedName("q.r")
 	public int field3382 = -1;
@@ -180,40 +180,40 @@ public final class IfType {
 	public Object[] field3434;
 
 	@ObfuscatedName("q.rc")
-	public int[] field3486;
+	public int[] scriptOperand;
 
 	@ObfuscatedName("q.s")
-	public JagString field3383 = Statics.field1188;
+	public JagString text = Statics.field1188;
 
 	@ObfuscatedName("q.sb")
-	public boolean field3435 = false;
+	public boolean shadow = false;
 
 	@ObfuscatedName("q.sc")
 	public int field3487 = 0;
 
 	@ObfuscatedName("q.t")
-	public int field3384 = 0;
+	public int scrollWidth = 0;
 
 	@ObfuscatedName("q.tb")
-	public Object[] field3436;
+	public Object[] onload;
 
 	@ObfuscatedName("q.u")
 	public int field3385 = 0;
 
 	@ObfuscatedName("q.ub")
-	public int field3437 = 0;
+	public int rotate = 0;
 
 	@ObfuscatedName("q.v")
-	public int field3386 = -1;
+	public int modelAnim2 = -1;
 
 	@ObfuscatedName("q.vc")
-	public Object[] field3490;
+	public Object[] onclick;
 
 	@ObfuscatedName("q.w")
-	public boolean field3387;
+	public boolean vFlip;
 
 	@ObfuscatedName("q.wb")
-	public int field3439 = 0;
+	public int clientCode = 0;
 
 	@ObfuscatedName("q.D")
 	public byte field3394 = 0;
@@ -222,49 +222,49 @@ public final class IfType {
 	public int field3393 = 0;
 
 	@ObfuscatedName("q.F")
-	public int field3396 = 0;
+	public int lineHeight = 0;
 
 	@ObfuscatedName("q.M")
-	public boolean field3403 = false;
+	public boolean orthog = false;
 
 	@ObfuscatedName("q.I")
 	public int field3399 = -1;
 
 	@ObfuscatedName("q.A")
-	public int field3391 = 0;
+	public int x = 0;
 
 	@ObfuscatedName("q.X")
-	public int field3414 = 0;
+	public int colour = 0;
 
 	@ObfuscatedName("q.Db")
-	public JagString field3446 = Statics.field1188;
+	public JagString text2 = Statics.field1188;
 
 	@ObfuscatedName("q.yb")
 	public int field3441 = 0;
 
 	@ObfuscatedName("q.O")
-	public int field3405 = 0;
+	public int modelYOf = 0;
 
 	@ObfuscatedName("q.Y")
 	public int field3415 = 0;
 
 	@ObfuscatedName("q.Qb")
-	public JagString field3459 = Statics.field1188;
+	public JagString targetBase = Statics.field1188;
 
 	@ObfuscatedName("q.Gb")
-	public boolean field3449 = false;
+	public boolean hashook = false;
 
 	@ObfuscatedName("q.W")
-	public int field3413 = 0;
+	public int dragdeadzone = 0;
 
 	@ObfuscatedName("q.S")
-	public int field3409 = -1;
+	public int model1Id = -1;
 
 	@ObfuscatedName("q.Xb")
-	public int field3466 = 0;
+	public int marginX = 0;
 
 	@ObfuscatedName("q.Mb")
-	public int field3455 = 0;
+	public int modelXAn = 0;
 
 	@ObfuscatedName("q.Ib")
 	public byte field3451 = 0;
@@ -273,19 +273,19 @@ public final class IfType {
 	public int field3468 = 0;
 
 	@ObfuscatedName("q.N")
-	public int field3404 = -1;
+	public int modelAnim = -1;
 
 	@ObfuscatedName("q.Rb")
-	public JagString field3460 = Text.OK;
+	public JagString buttonText = Text.OK;
 
 	@ObfuscatedName("q.P")
 	public int field3406 = -1;
 
 	@ObfuscatedName("q.gc")
-	public int field3475 = 0;
+	public int dragdeadtime = 0;
 
 	@ObfuscatedName("q.Sb")
-	public int field3461 = -1;
+	public int font = -1;
 
 	@ObfuscatedName("q.xc")
 	public boolean field3492 = false;
@@ -294,43 +294,43 @@ public final class IfType {
 	public boolean field3467 = false;
 
 	@ObfuscatedName("q.zb")
-	public int field3442 = -1;
+	public int model2Id = -1;
 
 	@ObfuscatedName("q.Ob")
-	public JagString field3457 = Statics.field1188;
+	public JagString baseOpName = Statics.field1188;
 
 	@ObfuscatedName("q.Cc")
-	public int field3497 = 1;
+	public int lineWidth = 1;
 
 	@ObfuscatedName("q.Q")
 	public int field3407 = 0;
 
 	@ObfuscatedName("q.Bc")
-	public boolean field3496 = false;
+	public boolean fill = false;
 
 	@ObfuscatedName("q.Ub")
 	public byte field3463 = 0;
 
 	@ObfuscatedName("q.Tb")
-	public int field3462 = -1;
+	public int transmitNum = -1;
 
 	@ObfuscatedName("q.T")
-	public boolean field3410 = false;
+	public boolean v3 = false;
 
 	@ObfuscatedName("q.Vb")
 	public boolean field3464 = true;
 
 	@ObfuscatedName("q.Hc")
-	public IfType field3502 = null;
+	public IfType draggable = null;
 
 	@ObfuscatedName("q.Rc")
-	public JagString field3512 = Statics.field1188;
+	public JagString targetVerb = Statics.field1188;
 
 	@ObfuscatedName("q.Oc")
-	public int field3509 = 0;
+	public int modelYAn = 0;
 
 	@ObfuscatedName("q.Jc")
-	public int field3504 = -1;
+	public int layerId = -1;
 
 	@ObfuscatedName("q.Dc")
 	public int field3498 = 0;
@@ -339,109 +339,109 @@ public final class IfType {
 	public int field3499 = 0;
 
 	@ObfuscatedName("q.Nc")
-	public int field3508 = 0;
+	public int marginY = 0;
 
 	@ObfuscatedName("q.Tc")
-	public int field3514 = 0;
+	public int y = 0;
 
 	@ObfuscatedName("q.Gc")
-	public int field3501 = 0;
+	public int width = 0;
 
 	@ObfuscatedName("q.Sc")
-	public int field3513 = 0;
+	public int colour2 = 0;
 
 	@ObfuscatedName("q.Wc")
-	public int field3517 = 0;
+	public int modelZAn = 0;
 
 	@ObfuscatedName("q.zc")
-	public int field3494 = 0;
+	public int eventCode = 0;
 
 	@ObfuscatedName("q.z")
-	public int field3390;
+	public int type;
 
 	@ObfuscatedName("q.yc")
 	public byte[] field3493;
 
 	@ObfuscatedName("q.x")
-	public int[] field3388;
+	public int[] linkObjType;
 
 	@ObfuscatedName("q.y")
-	public int[] field3389;
+	public int[] invBackground;
 
 	@ObfuscatedName("q.G")
-	public int[] field3397;
+	public int[] invBackgroundY;
 
 	@ObfuscatedName("q.H")
-	public int[] field3398;
+	public int[] onstattransmitlist;
 
 	@ObfuscatedName("q.L")
 	public int[] field3402;
 
 	@ObfuscatedName("q.Hb")
-	public int[] field3450;
+	public int[] onvartransmitlist;
 
 	@ObfuscatedName("q.Vc")
-	public int[] field3516;
+	public int[] scriptComparator;
 
 	@ObfuscatedName("q.Wb")
-	public IfType[] field3465;
+	public IfType[] subcomponents;
 
 	@ObfuscatedName("q.Qc")
-	public JagString[] field3511;
+	public JagString[] iop;
 
 	@ObfuscatedName("q.K")
-	public Object[] field3401;
+	public Object[] onop;
 
 	@ObfuscatedName("q.R")
-	public Object[] field3408;
+	public Object[] onrelease;
 
 	@ObfuscatedName("q.V")
-	public Object[] field3412;
+	public Object[] ondragcomplete;
 
 	@ObfuscatedName("q.xb")
-	public Object[] field3440;
+	public Object[] ontargetleave;
 
 	@ObfuscatedName("q.Ab")
-	public Object[] field3443;
+	public Object[] oninvtransmit;
 
 	@ObfuscatedName("q.Bb")
 	public Object[] field3444;
 
 	@ObfuscatedName("q.Eb")
-	public Object[] field3447;
+	public Object[] ontargetenter;
 
 	@ObfuscatedName("q.Fb")
-	public Object[] field3448;
+	public Object[] onmouseleave;
 
 	@ObfuscatedName("q.Jb")
-	public Object[] field3452;
+	public Object[] onclickrepeat;
 
 	@ObfuscatedName("q.Lb")
-	public Object[] field3454;
+	public Object[] onstattransmit;
 
 	@ObfuscatedName("q.Nb")
-	public Object[] field3456;
+	public Object[] ondrag;
 
 	@ObfuscatedName("q.Pb")
-	public Object[] field3458;
+	public Object[] ontimer;
 
 	@ObfuscatedName("q.Ac")
 	public Object[] field3495;
 
 	@ObfuscatedName("q.Ic")
-	public Object[] field3503;
+	public Object[] onhold;
 
 	@ObfuscatedName("q.Kc")
 	public Object[] field3505;
 
 	@ObfuscatedName("q.Pc")
-	public Object[] field3510;
+	public Object[] onmouserepeat;
 
 	@ObfuscatedName("q.Xc")
 	public Object[] field3518;
 
 	@ObfuscatedName("q.B")
-	public int[][] field3392;
+	public int[][] scripts;
 
 	@ObfuscatedName("td.c(II)Z")
 	public static boolean openInterface(int arg0) {
@@ -484,14 +484,14 @@ public final class IfType {
 
 	@ObfuscatedName("ne.a(Z)V")
 	public static void resetCache() {
-		field2039.clear();
+		spriteCache.clear();
 		modelCache.clear();
-		field3020.clear();
+		fontCache.clear();
 	}
 
 	@ObfuscatedName("lf.a(Lnb;ILnb;Lnb;Lnb;)V")
 	public static void init(Js5 arg0, Js5 arg1, Js5 arg2, Js5 arg3) {
-		field1704 = arg3;
+		models = arg3;
 		Statics.field1176 = arg0;
 		interfaces = arg1;
 		Statics.field1926 = arg2;
@@ -511,7 +511,7 @@ public final class IfType {
 		boolean var1 = true;
 		for (int var2 = 0; var2 < list[arg0].length; var2++) {
 			if (list[arg0][var2] != null) {
-				if (list[arg0][var2].field3390 == 2) {
+				if (list[arg0][var2].type == 2) {
 					var1 = false;
 				} else {
 					list[arg0][var2] = null;
@@ -524,14 +524,27 @@ public final class IfType {
 		open[arg0] = false;
 	}
 
+	@ObfuscatedName("w.a(II)Lq;")
+	public static IfType get(int arg0) {
+		int var1 = arg0 >> 16;
+		int var2 = arg0 & 0xFFFF;
+		if (list[var1] == null || list[var1][var2] == null) {
+			boolean var3 = openInterface(var1);
+			if (!var3) {
+				return null;
+			}
+		}
+		return list[var1][var2];
+	}
+
 	@ObfuscatedName("q.a(III)V")
 	public void swapSlots(int arg0, int arg1) {
-		int var3 = this.field3388[arg1];
-		this.field3388[arg1] = this.field3388[arg0];
-		this.field3388[arg0] = var3;
-		int var4 = this.field3474[arg1];
-		this.field3474[arg1] = this.field3474[arg0];
-		this.field3474[arg0] = var4;
+		int var3 = this.linkObjType[arg1];
+		this.linkObjType[arg1] = this.linkObjType[arg0];
+		this.linkObjType[arg0] = var3;
+		int var4 = this.linkObjNumber[arg1];
+		this.linkObjNumber[arg1] = this.linkObjNumber[arg0];
+		this.linkObjNumber[arg0] = var4;
 	}
 
 	@ObfuscatedName("q.a(Lk;Ltb;IZI)Lcg;")
@@ -540,11 +553,11 @@ public final class IfType {
 		int var5;
 		int var6;
 		if (arg3) {
-			var5 = this.field3376;
-			var6 = this.field3442;
+			var5 = this.model2Type;
+			var6 = this.model2Id;
 		} else {
-			var5 = this.field3430;
-			var6 = this.field3409;
+			var5 = this.model1Type;
+			var6 = this.model1Id;
 		}
 		if (var5 == 0) {
 			return null;
@@ -553,7 +566,7 @@ public final class IfType {
 		} else if (var5 == 1) {
 			ModelLit var7 = (ModelLit) modelCache.find((long) (var6 + (var5 << 16)));
 			if (var7 == null) {
-				ModelUnlit var8 = ModelUnlit.load(field1704, var6);
+				ModelUnlit var8 = ModelUnlit.load(models, var6);
 				if (var8 == null) {
 					loadingAsset = true;
 					return null;
@@ -611,7 +624,7 @@ public final class IfType {
 		if (this.field3402 != null) {
 			return true;
 		}
-		SoftwarePix8 var1 = PixLoader.method1553(Statics.field1176, this.field3473);
+		SoftwarePix8 var1 = PixLoader.method1553(Statics.field1176, this.graphic);
 		if (var1 == null) {
 			return false;
 		}
@@ -640,16 +653,16 @@ public final class IfType {
 	}
 
 	@ObfuscatedName("q.a(IB)Lrc;")
-	public Pix32 method1248(int arg0) {
+	public Pix32 getInvBackground(int arg0) {
 		loadingAsset = false;
-		if (arg0 < 0 || this.field3389.length <= arg0) {
+		if (arg0 < 0 || this.invBackground.length <= arg0) {
 			return null;
 		}
-		int var2 = this.field3389[arg0];
+		int var2 = this.invBackground[arg0];
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) field2039.find((long) var2);
+		Pix32 var3 = (Pix32) spriteCache.find((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
@@ -657,25 +670,25 @@ public final class IfType {
 		if (var4 == null) {
 			loadingAsset = true;
 		} else {
-			field2039.put((long) var2, var4);
+			spriteCache.put((long) var2, var4);
 		}
 		return var4;
 	}
 
 	@ObfuscatedName("q.a(ZI)Lrc;")
-	public Pix32 method1249(boolean arg0) {
+	public Pix32 getGraphic(boolean arg0) {
 		int var2;
 		if (arg0) {
-			var2 = this.field3433;
+			var2 = this.graphic2;
 		} else {
-			var2 = this.field3473;
+			var2 = this.graphic;
 		}
 		loadingAsset = false;
 		if (var2 == -1) {
 			return null;
 		}
-		long var3 = ((long) this.field3425 << 40) + ((this.field3483 ? 1L : 0L) << 39) + ((this.field3387 ? 1L : 0L) << 38) + (long) var2 + ((this.field3477 ? 1L : 0L) << 35) + ((long) this.field3429 << 36);
-		Pix32 var5 = (Pix32) field2039.find(var3);
+		long var3 = ((long) this.shadowColour << 40) + ((this.hFlip ? 1L : 0L) << 39) + ((this.vFlip ? 1L : 0L) << 38) + (long) var2 + ((this.field3477 ? 1L : 0L) << 35) + ((long) this.outline << 36);
+		Pix32 var5 = (Pix32) spriteCache.find(var3);
 		if (var5 != null) {
 			return var5;
 		}
@@ -684,83 +697,83 @@ public final class IfType {
 			loadingAsset = true;
 			return null;
 		}
-		if (this.field3387) {
+		if (this.vFlip) {
 			var6.vflip();
 		}
-		if (this.field3483) {
+		if (this.hFlip) {
 			var6.hflip();
 		}
-		if (this.field3429 > 0) {
-			var6.untrim(this.field3429);
+		if (this.outline > 0) {
+			var6.untrim(this.outline);
 		}
-		if (this.field3429 >= 1) {
+		if (this.outline >= 1) {
 			var6.addOutline(1);
 		}
-		if (this.field3429 >= 2) {
+		if (this.outline >= 2) {
 			var6.addOutline(16777215);
 		}
-		if (this.field3425 != 0) {
-			var6.addShadow(this.field3425);
+		if (this.shadowColour != 0) {
+			var6.addShadow(this.shadowColour);
 		}
-		field2039.put(var3, var6);
+		spriteCache.put(var3, var6);
 		return var6;
 	}
 
 	@ObfuscatedName("q.a(BLea;)V")
 	public void decode3(Packet arg0) {
 		arg0.pos++;
-		this.field3410 = true;
-		this.field3390 = arg0.g1();
-		this.field3439 = arg0.g2();
-		this.field3391 = arg0.g2b();
-		this.field3514 = arg0.g2b();
-		this.field3501 = arg0.g2();
-		this.field3418 = arg0.g2();
+		this.v3 = true;
+		this.type = arg0.g1();
+		this.clientCode = arg0.g2();
+		this.x = arg0.g2b();
+		this.y = arg0.g2b();
+		this.width = arg0.g2();
+		this.height = arg0.g2();
 		this.field3463 = arg0.g1b();
 		this.field3394 = arg0.g1b();
 		this.field3367 = arg0.g1b();
 		this.field3451 = arg0.g1b();
-		this.field3504 = arg0.g2();
-		if (this.field3504 == 65535) {
-			this.field3504 = -1;
+		this.layerId = arg0.g2();
+		if (this.layerId == 65535) {
+			this.layerId = -1;
 		} else {
-			this.field3504 += this.parentId & 0xFFFF0000;
+			this.layerId += this.parentId & 0xFFFF0000;
 		}
-		this.field3378 = arg0.g1() == 1;
-		if (this.field3390 == 0) {
-			this.field3384 = arg0.g2();
-			this.field3375 = arg0.g2();
+		this.hide = arg0.g1() == 1;
+		if (this.type == 0) {
+			this.scrollWidth = arg0.g2();
+			this.scrollHeight = arg0.g2();
 			this.field3470 = arg0.g1() == 1;
 		}
-		if (this.field3390 == 5) {
-			this.field3473 = arg0.g4();
-			this.field3437 = arg0.g2();
+		if (this.type == 5) {
+			this.graphic = arg0.g4();
+			this.rotate = arg0.g2();
 			int var2 = arg0.g1();
-			this.field3420 = (var2 & 0x1) != 0;
+			this.tiling = (var2 & 0x1) != 0;
 			this.field3477 = (var2 & 0x2) != 0;
-			this.field3480 = arg0.g1();
-			this.field3429 = arg0.g1();
-			this.field3425 = arg0.g4();
-			this.field3387 = arg0.g1() == 1;
-			this.field3483 = arg0.g1() == 1;
+			this.trans = arg0.g1();
+			this.outline = arg0.g1();
+			this.shadowColour = arg0.g4();
+			this.vFlip = arg0.g1() == 1;
+			this.hFlip = arg0.g1() == 1;
 		}
-		if (this.field3390 == 6) {
-			this.field3430 = 1;
-			this.field3409 = arg0.g2();
-			if (this.field3409 == 65535) {
-				this.field3409 = -1;
+		if (this.type == 6) {
+			this.model1Type = 1;
+			this.model1Id = arg0.g2();
+			if (this.model1Id == 65535) {
+				this.model1Id = -1;
 			}
-			this.field3432 = arg0.g2b();
-			this.field3405 = arg0.g2b();
-			this.field3455 = arg0.g2();
-			this.field3509 = arg0.g2();
-			this.field3517 = arg0.g2();
-			this.field3485 = arg0.g2();
-			this.field3404 = arg0.g2();
-			if (this.field3404 == 65535) {
-				this.field3404 = -1;
+			this.modelXOf = arg0.g2b();
+			this.modelYOf = arg0.g2b();
+			this.modelXAn = arg0.g2();
+			this.modelYAn = arg0.g2();
+			this.modelZAn = arg0.g2();
+			this.modelZoom = arg0.g2();
+			this.modelAnim = arg0.g2();
+			if (this.modelAnim == 65535) {
+				this.modelAnim = -1;
 			}
-			this.field3403 = arg0.g1() == 1;
+			this.orthog = arg0.g1() == 1;
 			arg0.g2();
 			if (this.field3463 != 0) {
 				this.field3468 = arg0.g2();
@@ -769,29 +782,29 @@ public final class IfType {
 				this.field3417 = arg0.g2();
 			}
 		}
-		if (this.field3390 == 4) {
-			this.field3461 = arg0.g2();
-			if (this.field3461 == 65535) {
-				this.field3461 = -1;
+		if (this.type == 4) {
+			this.font = arg0.g2();
+			if (this.font == 65535) {
+				this.font = -1;
 			}
-			this.field3383 = arg0.gjstr();
-			this.field3396 = arg0.g1();
-			this.field3479 = arg0.g1();
-			this.field3469 = arg0.g1();
-			this.field3435 = arg0.g1() == 1;
-			this.field3414 = arg0.g4();
+			this.text = arg0.gjstr();
+			this.lineHeight = arg0.g1();
+			this.hAlign = arg0.g1();
+			this.vAlign = arg0.g1();
+			this.shadow = arg0.g1() == 1;
+			this.colour = arg0.g4();
 		}
-		if (this.field3390 == 3) {
-			this.field3414 = arg0.g4();
-			this.field3496 = arg0.g1() == 1;
-			this.field3480 = arg0.g1();
+		if (this.type == 3) {
+			this.colour = arg0.g4();
+			this.fill = arg0.g1() == 1;
+			this.trans = arg0.g1();
 		}
-		if (this.field3390 == 9) {
-			this.field3497 = arg0.g1();
-			this.field3414 = arg0.g4();
+		if (this.type == 9) {
+			this.lineWidth = arg0.g1();
+			this.colour = arg0.g4();
 			this.field3492 = arg0.g1() == 1;
 		}
-		this.field3494 = arg0.g3();
+		this.eventCode = arg0.g3();
 		int var3 = arg0.g1();
 		if (var3 > 0) {
 			this.field3493 = new byte[var3];
@@ -799,43 +812,43 @@ public final class IfType {
 				this.field3493[var4] = arg0.g1b();
 			}
 		}
-		this.field3457 = arg0.gjstr();
+		this.baseOpName = arg0.gjstr();
 		int var5 = arg0.g1();
 		if (var5 > 0) {
-			this.field3373 = new JagString[var5];
+			this.opNames = new JagString[var5];
 			for (int var6 = 0; var6 < var5; var6++) {
-				this.field3373[var6] = arg0.gjstr();
+				this.opNames[var6] = arg0.gjstr();
 			}
 		}
-		this.field3413 = arg0.g1();
-		this.field3475 = arg0.g1();
-		this.field3427 = arg0.g1() == 1;
-		this.field3512 = arg0.gjstr();
-		this.field3436 = this.method1254(arg0);
-		this.field3370 = this.method1254(arg0);
-		this.field3448 = this.method1254(arg0);
-		this.field3440 = this.method1254(arg0);
-		this.field3447 = this.method1254(arg0);
-		this.field3481 = this.method1254(arg0);
-		this.field3443 = this.method1254(arg0);
-		this.field3454 = this.method1254(arg0);
-		this.field3458 = this.method1254(arg0);
-		this.field3401 = this.method1254(arg0);
-		this.field3510 = this.method1254(arg0);
-		this.field3490 = this.method1254(arg0);
-		this.field3452 = this.method1254(arg0);
-		this.field3408 = this.method1254(arg0);
-		this.field3503 = this.method1254(arg0);
-		this.field3456 = this.method1254(arg0);
-		this.field3412 = this.method1254(arg0);
-		this.field3471 = this.method1254(arg0);
-		this.field3450 = this.method1251(arg0);
-		this.field3369 = this.method1251(arg0);
-		this.field3398 = this.method1251(arg0);
+		this.dragdeadzone = arg0.g1();
+		this.dragdeadtime = arg0.g1();
+		this.draggablebehavior = arg0.g1() == 1;
+		this.targetVerb = arg0.gjstr();
+		this.onload = this.decodeHook(arg0);
+		this.onmouseover = this.decodeHook(arg0);
+		this.onmouseleave = this.decodeHook(arg0);
+		this.ontargetleave = this.decodeHook(arg0);
+		this.ontargetenter = this.decodeHook(arg0);
+		this.onvartransmit = this.decodeHook(arg0);
+		this.oninvtransmit = this.decodeHook(arg0);
+		this.onstattransmit = this.decodeHook(arg0);
+		this.ontimer = this.decodeHook(arg0);
+		this.onop = this.decodeHook(arg0);
+		this.onmouserepeat = this.decodeHook(arg0);
+		this.onclick = this.decodeHook(arg0);
+		this.onclickrepeat = this.decodeHook(arg0);
+		this.onrelease = this.decodeHook(arg0);
+		this.onhold = this.decodeHook(arg0);
+		this.ondrag = this.decodeHook(arg0);
+		this.ondragcomplete = this.decodeHook(arg0);
+		this.onscrollwheel = this.decodeHook(arg0);
+		this.onvartransmitlist = this.decodeTransmitList(arg0);
+		this.oninvtransmitlist = this.decodeTransmitList(arg0);
+		this.onstattransmitlist = this.decodeTransmitList(arg0);
 	}
 
 	@ObfuscatedName("q.a(Lea;B)[I")
-	public int[] method1251(Packet arg0) {
+	public int[] decodeTransmitList(Packet arg0) {
 		int var2 = arg0.g1();
 		if (var2 == 0) {
 			return null;
@@ -848,41 +861,41 @@ public final class IfType {
 	}
 
 	@ObfuscatedName("q.a(I[Llj;)Lcc;")
-	public PixfontGeneric method1252(Pix8[] arg0) {
+	public PixfontGeneric getFont(Pix8[] arg0) {
 		loadingAsset = false;
-		if (this.field3461 == -1) {
+		if (this.font == -1) {
 			return null;
 		}
-		PixfontGeneric var2 = (PixfontGeneric) field3020.find((long) this.field3461);
+		PixfontGeneric var2 = (PixfontGeneric) fontCache.find((long) this.font);
 		if (var2 != null) {
 			return var2;
 		}
-		PixfontGeneric var3 = PixLoader.method735(0, Statics.field1926, this.field3461, Statics.field1176);
+		PixfontGeneric var3 = PixLoader.method735(0, Statics.field1926, this.font, Statics.field1176);
 		if (var3 == null) {
 			loadingAsset = true;
 		} else {
 			var3.method149(arg0, null);
-			field3020.put((long) this.field3461, var3);
+			fontCache.put((long) this.font, var3);
 		}
 		return var3;
 	}
 
 	@ObfuscatedName("q.a(BLi;I)V")
-	public void method1253(JagString arg0, int arg1) {
-		if (this.field3373 == null || arg1 >= this.field3373.length) {
+	public void setOpName(JagString arg0, int arg1) {
+		if (this.opNames == null || arg1 >= this.opNames.length) {
 			JagString[] var3 = new JagString[arg1 + 1];
-			if (this.field3373 != null) {
-				for (int var4 = 0; var4 < this.field3373.length; var4++) {
-					var3[var4] = this.field3373[var4];
+			if (this.opNames != null) {
+				for (int var4 = 0; var4 < this.opNames.length; var4++) {
+					var3[var4] = this.opNames[var4];
 				}
 			}
-			this.field3373 = var3;
+			this.opNames = var3;
 		}
-		this.field3373[arg1] = arg0;
+		this.opNames[arg1] = arg0;
 	}
 
 	@ObfuscatedName("q.a(Lea;I)[Ljava/lang/Object;")
-	public Object[] method1254(Packet arg0) {
+	public Object[] decodeHook(Packet arg0) {
 		int var2 = arg0.g1();
 		if (var2 == 0) {
 			return null;
@@ -896,221 +909,221 @@ public final class IfType {
 				var3[var4] = arg0.gjstr();
 			}
 		}
-		this.field3449 = true;
+		this.hashook = true;
 		return var3;
 	}
 
 	@ObfuscatedName("q.a(ILea;)V")
 	public void decode(Packet arg0) {
-		this.field3410 = false;
-		this.field3390 = arg0.g1();
-		this.field3368 = arg0.g1();
-		this.field3439 = arg0.g2();
-		this.field3391 = arg0.g2b();
-		this.field3514 = arg0.g2b();
-		this.field3501 = arg0.g2();
-		this.field3418 = arg0.g2();
+		this.v3 = false;
+		this.type = arg0.g1();
+		this.buttonType = arg0.g1();
+		this.clientCode = arg0.g2();
+		this.x = arg0.g2b();
+		this.y = arg0.g2b();
+		this.width = arg0.g2();
+		this.height = arg0.g2();
 		this.field3394 = 0;
 		this.field3463 = 0;
 		this.field3367 = 0;
 		this.field3451 = 0;
-		this.field3480 = arg0.g1();
-		this.field3504 = arg0.g2();
-		if (this.field3504 == 65535) {
-			this.field3504 = -1;
+		this.trans = arg0.g1();
+		this.layerId = arg0.g2();
+		if (this.layerId == 65535) {
+			this.layerId = -1;
 		} else {
-			this.field3504 = (this.parentId & 0xFFFF0000) + this.field3504;
+			this.layerId = (this.parentId & 0xFFFF0000) + this.layerId;
 		}
-		this.field3424 = arg0.g2();
-		if (this.field3424 == 65535) {
-			this.field3424 = -1;
+		this.overLayerId = arg0.g2();
+		if (this.overLayerId == 65535) {
+			this.overLayerId = -1;
 		}
 		int var2 = arg0.g1();
 		if (var2 > 0) {
-			this.field3486 = new int[var2];
-			this.field3516 = new int[var2];
+			this.scriptOperand = new int[var2];
+			this.scriptComparator = new int[var2];
 			for (int var3 = 0; var3 < var2; var3++) {
-				this.field3516[var3] = arg0.g1();
-				this.field3486[var3] = arg0.g2();
+				this.scriptComparator[var3] = arg0.g1();
+				this.scriptOperand[var3] = arg0.g2();
 			}
 		}
 		int var4 = arg0.g1();
 		if (var4 > 0) {
-			this.field3392 = new int[var4][];
+			this.scripts = new int[var4][];
 			for (int var5 = 0; var5 < var4; var5++) {
 				int var6 = arg0.g2();
-				this.field3392[var5] = new int[var6];
+				this.scripts[var5] = new int[var6];
 				for (int var7 = 0; var7 < var6; var7++) {
-					this.field3392[var5][var7] = arg0.g2();
-					if (this.field3392[var5][var7] == 65535) {
-						this.field3392[var5][var7] = -1;
+					this.scripts[var5][var7] = arg0.g2();
+					if (this.scripts[var5][var7] == 65535) {
+						this.scripts[var5][var7] = -1;
 					}
 				}
 			}
 		}
-		if (this.field3390 == 0) {
-			this.field3375 = arg0.g2();
-			this.field3378 = arg0.g1() == 1;
+		if (this.type == 0) {
+			this.scrollHeight = arg0.g2();
+			this.hide = arg0.g1() == 1;
 		}
-		if (this.field3390 == 1) {
+		if (this.type == 1) {
 			arg0.g2();
 			arg0.g1();
 		}
-		if (this.field3390 == 2) {
-			this.field3388 = new int[this.field3501 * this.field3418];
-			this.field3474 = new int[this.field3418 * this.field3501];
+		if (this.type == 2) {
+			this.linkObjType = new int[this.width * this.height];
+			this.linkObjNumber = new int[this.height * this.width];
 			this.field3394 = 3;
 			this.field3463 = 3;
 			int var8 = arg0.g1();
 			if (var8 == 1) {
-				this.field3494 |= 0x10000000;
+				this.eventCode |= 0x10000000;
 			}
 			int var9 = arg0.g1();
 			if (var9 == 1) {
-				this.field3494 |= 0x40000000;
+				this.eventCode |= 0x40000000;
 			}
 			int var10 = arg0.g1();
 			if (var10 == 1) {
-				this.field3494 |= Integer.MIN_VALUE;
+				this.eventCode |= Integer.MIN_VALUE;
 			}
 			int var11 = arg0.g1();
 			if (var11 == 1) {
-				this.field3494 |= 0x20000000;
+				this.eventCode |= 0x20000000;
 			}
-			this.field3466 = arg0.g1();
-			this.field3508 = arg0.g1();
-			this.field3389 = new int[20];
-			this.field3397 = new int[20];
-			this.field3472 = new int[20];
+			this.marginX = arg0.g1();
+			this.marginY = arg0.g1();
+			this.invBackground = new int[20];
+			this.invBackgroundY = new int[20];
+			this.invBackgroundX = new int[20];
 			for (int var12 = 0; var12 < 20; var12++) {
 				int var13 = arg0.g1();
 				if (var13 == 1) {
-					this.field3472[var12] = arg0.g2b();
-					this.field3397[var12] = arg0.g2b();
-					this.field3389[var12] = arg0.g4();
+					this.invBackgroundX[var12] = arg0.g2b();
+					this.invBackgroundY[var12] = arg0.g2b();
+					this.invBackground[var12] = arg0.g4();
 				} else {
-					this.field3389[var12] = -1;
+					this.invBackground[var12] = -1;
 				}
 			}
-			this.field3511 = new JagString[5];
+			this.iop = new JagString[5];
 			for (int var14 = 0; var14 < 5; var14++) {
 				JagString var15 = arg0.gjstr();
 				if (var15.method604() > 0) {
-					this.field3511[var14] = var15;
-					this.field3494 |= 0x1 << var14 + 23;
+					this.iop[var14] = var15;
+					this.eventCode |= 0x1 << var14 + 23;
 				}
 			}
 		}
-		if (this.field3390 == 3) {
-			this.field3496 = arg0.g1() == 1;
+		if (this.type == 3) {
+			this.fill = arg0.g1() == 1;
 		}
-		if (this.field3390 == 4 || this.field3390 == 1) {
-			this.field3479 = arg0.g1();
-			this.field3469 = arg0.g1();
-			this.field3396 = arg0.g1();
-			this.field3461 = arg0.g2();
-			if (this.field3461 == 65535) {
-				this.field3461 = -1;
+		if (this.type == 4 || this.type == 1) {
+			this.hAlign = arg0.g1();
+			this.vAlign = arg0.g1();
+			this.lineHeight = arg0.g1();
+			this.font = arg0.g2();
+			if (this.font == 65535) {
+				this.font = -1;
 			}
-			this.field3435 = arg0.g1() == 1;
+			this.shadow = arg0.g1() == 1;
 		}
-		if (this.field3390 == 4) {
-			this.field3383 = arg0.gjstr();
-			this.field3446 = arg0.gjstr();
+		if (this.type == 4) {
+			this.text = arg0.gjstr();
+			this.text2 = arg0.gjstr();
 		}
-		if (this.field3390 == 1 || this.field3390 == 3 || this.field3390 == 4) {
-			this.field3414 = arg0.g4();
+		if (this.type == 1 || this.type == 3 || this.type == 4) {
+			this.colour = arg0.g4();
 		}
-		if (this.field3390 == 3 || this.field3390 == 4) {
-			this.field3513 = arg0.g4();
-			this.field3431 = arg0.g4();
-			this.field3374 = arg0.g4();
+		if (this.type == 3 || this.type == 4) {
+			this.colour2 = arg0.g4();
+			this.colourOver = arg0.g4();
+			this.colour2Over = arg0.g4();
 		}
-		if (this.field3390 == 5) {
-			this.field3473 = arg0.g4();
-			this.field3433 = arg0.g4();
+		if (this.type == 5) {
+			this.graphic = arg0.g4();
+			this.graphic2 = arg0.g4();
 		}
-		if (this.field3390 == 6) {
-			this.field3430 = 1;
-			this.field3409 = arg0.g2();
-			this.field3376 = 1;
-			if (this.field3409 == 65535) {
-				this.field3409 = -1;
+		if (this.type == 6) {
+			this.model1Type = 1;
+			this.model1Id = arg0.g2();
+			this.model2Type = 1;
+			if (this.model1Id == 65535) {
+				this.model1Id = -1;
 			}
-			this.field3442 = arg0.g2();
-			if (this.field3442 == 65535) {
-				this.field3442 = -1;
+			this.model2Id = arg0.g2();
+			if (this.model2Id == 65535) {
+				this.model2Id = -1;
 			}
-			this.field3404 = arg0.g2();
-			if (this.field3404 == 65535) {
-				this.field3404 = -1;
+			this.modelAnim = arg0.g2();
+			if (this.modelAnim == 65535) {
+				this.modelAnim = -1;
 			}
-			this.field3386 = arg0.g2();
-			if (this.field3386 == 65535) {
-				this.field3386 = -1;
+			this.modelAnim2 = arg0.g2();
+			if (this.modelAnim2 == 65535) {
+				this.modelAnim2 = -1;
 			}
-			this.field3485 = arg0.g2();
-			this.field3455 = arg0.g2();
-			this.field3509 = arg0.g2();
+			this.modelZoom = arg0.g2();
+			this.modelXAn = arg0.g2();
+			this.modelYAn = arg0.g2();
 		}
-		if (this.field3390 == 7) {
+		if (this.type == 7) {
 			this.field3394 = 3;
-			this.field3388 = new int[this.field3501 * this.field3418];
+			this.linkObjType = new int[this.width * this.height];
 			this.field3463 = 3;
-			this.field3474 = new int[this.field3501 * this.field3418];
-			this.field3479 = arg0.g1();
-			this.field3461 = arg0.g2();
-			if (this.field3461 == 65535) {
-				this.field3461 = -1;
+			this.linkObjNumber = new int[this.width * this.height];
+			this.hAlign = arg0.g1();
+			this.font = arg0.g2();
+			if (this.font == 65535) {
+				this.font = -1;
 			}
-			this.field3435 = arg0.g1() == 1;
-			this.field3414 = arg0.g4();
-			this.field3466 = arg0.g2b();
-			this.field3508 = arg0.g2b();
+			this.shadow = arg0.g1() == 1;
+			this.colour = arg0.g4();
+			this.marginX = arg0.g2b();
+			this.marginY = arg0.g2b();
 			int var16 = arg0.g1();
-			this.field3511 = new JagString[5];
+			this.iop = new JagString[5];
 			if (var16 == 1) {
-				this.field3494 |= 0x40000000;
+				this.eventCode |= 0x40000000;
 			}
 			for (int var17 = 0; var17 < 5; var17++) {
 				JagString var18 = arg0.gjstr();
 				if (var18.method604() > 0) {
-					this.field3511[var17] = var18;
-					this.field3494 |= 0x1 << var17 + 23;
+					this.iop[var17] = var18;
+					this.eventCode |= 0x1 << var17 + 23;
 				}
 			}
 		}
-		if (this.field3390 == 8) {
-			this.field3383 = arg0.gjstr();
+		if (this.type == 8) {
+			this.text = arg0.gjstr();
 		}
-		if (this.field3368 == 2 || this.field3390 == 2) {
-			this.field3512 = arg0.gjstr();
-			this.field3459 = arg0.gjstr();
+		if (this.buttonType == 2 || this.type == 2) {
+			this.targetVerb = arg0.gjstr();
+			this.targetBase = arg0.gjstr();
 			int var19 = arg0.g2() & 0x3F;
-			this.field3494 |= var19 << 11;
+			this.eventCode |= var19 << 11;
 		}
-		if (this.field3368 == 1 || this.field3368 == 4 || this.field3368 == 5 || this.field3368 == 6) {
-			this.field3460 = arg0.gjstr();
-			if (this.field3460.method604() == 0) {
-				if (this.field3368 == 1) {
-					this.field3460 = Text.OK;
+		if (this.buttonType == 1 || this.buttonType == 4 || this.buttonType == 5 || this.buttonType == 6) {
+			this.buttonText = arg0.gjstr();
+			if (this.buttonText.method604() == 0) {
+				if (this.buttonType == 1) {
+					this.buttonText = Text.OK;
 				}
-				if (this.field3368 == 4) {
-					this.field3460 = Text.SELECT;
+				if (this.buttonType == 4) {
+					this.buttonText = Text.SELECT;
 				}
-				if (this.field3368 == 5) {
-					this.field3460 = Text.SELECT;
+				if (this.buttonType == 5) {
+					this.buttonText = Text.SELECT;
 				}
-				if (this.field3368 == 6) {
-					this.field3460 = Text.CONTINUE;
+				if (this.buttonType == 6) {
+					this.buttonText = Text.CONTINUE;
 				}
 			}
 		}
-		if (this.field3368 == 1 || this.field3368 == 4 || this.field3368 == 5) {
-			this.field3494 |= 0x400000;
+		if (this.buttonType == 1 || this.buttonType == 4 || this.buttonType == 5) {
+			this.eventCode |= 0x400000;
 		}
-		if (this.field3368 == 6) {
-			this.field3494 |= 0x1;
+		if (this.buttonType == 6) {
+			this.eventCode |= 0x1;
 		}
 	}
 }

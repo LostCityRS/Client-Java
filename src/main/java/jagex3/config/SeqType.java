@@ -151,10 +151,10 @@ public final class SeqType extends Linkable2 {
 		AnimFrameSet var4 = get(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
-			return arg0.method185(true, true);
+			return arg0.copyForAnim2(true, true);
 		} else {
-			ModelLit var6 = arg0.method185(!var4.method875(var5), !this.field1993);
-			var6.method187(var4, var5, this.field1993);
+			ModelLit var6 = arg0.copyForAnim2(!var4.getAnimateTransparencies(var5), !this.field1993);
+			var6.animate(var4, var5, this.field1993);
 			return var6;
 		}
 	}
@@ -234,24 +234,24 @@ public final class SeqType extends Linkable2 {
 		AnimFrameSet var5 = get(var4 >> 16);
 		int var6 = var4 & 0xFFFF;
 		if (var5 == null) {
-			return arg1.method184(true, true);
+			return arg1.copyForAnim(true, true);
 		}
 		int var7 = arg0 & 0x3;
-		ModelLit var8 = arg1.method184(!var5.method875(var6), !this.field1993);
+		ModelLit var8 = arg1.copyForAnim(!var5.getAnimateTransparencies(var6), !this.field1993);
 		if (var7 == 1) {
-			var8.method181();
+			var8.rotate270();
 		} else if (var7 == 2) {
-			var8.method190();
+			var8.rotate180();
 		} else if (var7 == 3) {
-			var8.method182();
+			var8.rotate90();
 		}
-		var8.method187(var5, var6, this.field1993);
+		var8.animate(var5, var6, this.field1993);
 		if (var7 == 1) {
-			var8.method182();
+			var8.rotate90();
 		} else if (var7 == 2) {
-			var8.method190();
+			var8.rotate180();
 		} else if (var7 == 3) {
-			var8.method181();
+			var8.rotate270();
 		}
 		return var8;
 	}
@@ -262,10 +262,10 @@ public final class SeqType extends Linkable2 {
 		AnimFrameSet var4 = get(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
-			return arg1.method184(true, true);
+			return arg1.copyForAnim(true, true);
 		} else {
-			ModelLit var6 = arg1.method184(!var4.method875(var5), !this.field1993);
-			var6.method187(var4, var5, this.field1993);
+			ModelLit var6 = arg1.copyForAnim(!var4.getAnimateTransparencies(var5), !this.field1993);
+			var6.animate(var4, var5, this.field1993);
 			return var6;
 		}
 	}
@@ -293,12 +293,12 @@ public final class SeqType extends Linkable2 {
 		AnimFrameSet var9 = get(var8 >> 16);
 		int var10 = var8 & 0xFFFF;
 		if (var9 == null) {
-			ModelLit var11 = arg3.method184(!var6.method875(var7), !this.field1993);
-			var11.method187(var6, var7, this.field1993);
+			ModelLit var11 = arg3.copyForAnim(!var6.getAnimateTransparencies(var7), !this.field1993);
+			var11.animate(var6, var7, this.field1993);
 			return var11;
 		} else {
-			ModelLit var12 = arg3.method184(!var6.method875(var7) & !var9.method875(var10), !arg1.field1993 & !this.field1993);
-			var12.method189(var6, var7, var9, var10, this.walkmerge, arg1.field1993 | this.field1993);
+			ModelLit var12 = arg3.copyForAnim(!var6.getAnimateTransparencies(var7) & !var9.getAnimateTransparencies(var10), !arg1.field1993 & !this.field1993);
+			var12.maskAnimate(var6, var7, var9, var10, this.walkmerge, arg1.field1993 | this.field1993);
 			return var12;
 		}
 	}
@@ -328,7 +328,7 @@ public final class SeqType extends Linkable2 {
 		AnimFrameSet var4 = get(var3 >> 16);
 		int var5 = var3 & 0xFFFF;
 		if (var4 == null) {
-			return arg1.method184(true, true);
+			return arg1.copyForAnim(true, true);
 		}
 		AnimFrameSet var6 = null;
 		int var7 = 0;
@@ -338,13 +338,13 @@ public final class SeqType extends Linkable2 {
 			var7 = var8 & 0xFFFF;
 		}
 		if (var6 == null || var7 == 65535) {
-			ModelLit var9 = arg1.method184(!var4.method875(var5), !this.field1993);
-			var9.method187(var4, var5, this.field1993);
+			ModelLit var9 = arg1.copyForAnim(!var4.getAnimateTransparencies(var5), !this.field1993);
+			var9.animate(var4, var5, this.field1993);
 			return var9;
 		} else {
-			ModelLit var10 = arg1.method184(!var4.method875(var5) & !var6.method875(var7), !this.field1993);
-			var10.method187(var4, var5, this.field1993);
-			var10.method187(var6, var7, this.field1993);
+			ModelLit var10 = arg1.copyForAnim(!var4.getAnimateTransparencies(var5) & !var6.getAnimateTransparencies(var7), !this.field1993);
+			var10.animate(var4, var5, this.field1993);
+			var10.animate(var6, var7, this.field1993);
 			return var10;
 		}
 	}

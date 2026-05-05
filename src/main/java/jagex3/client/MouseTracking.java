@@ -27,8 +27,8 @@ public final class MouseTracking implements Runnable {
 			Object var1 = this.field715;
 			synchronized (this.field715) {
 				if (this.field718 < 500) {
-					this.field720[this.field718] = ClientMouseListener.field471;
-					this.field719[this.field718] = ClientMouseListener.field4449;
+					this.field720[this.field718] = ClientMouseListener.mouseX;
+					this.field719[this.field718] = ClientMouseListener.mouseY;
 					this.field718++;
 				}
 			}

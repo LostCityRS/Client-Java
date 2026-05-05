@@ -326,8 +326,8 @@ public final class Pix2D {
 		int var14 = arg5 * var12 + 1 >> 17;
 		int var15 = arg5 * var11 >> 17;
 		int var16 = arg5 * var11 + 1 >> 17;
-		int var17 = arg0 - Pix3D.method1223();
-		int var18 = arg1 - Pix3D.method1234();
+		int var17 = arg0 - Pix3D.getClipX();
+		int var18 = arg1 - Pix3D.getClipY();
 		int var19 = var17 + var13;
 		int var20 = var17 - var14;
 		int var21 = var17 + var6 - var14;
@@ -336,10 +336,10 @@ public final class Pix2D {
 		int var24 = var18 - var16;
 		int var25 = var18 + var7 - var16;
 		int var26 = var18 + var7 + var15;
-		Pix3D.method1222(var19, var20, var21);
-		Pix3D.method1233(var23, var24, var25, var19, var20, var21, arg4);
-		Pix3D.method1222(var19, var21, var22);
-		Pix3D.method1233(var23, var25, var26, var19, var21, var22, arg4);
+		Pix3D.setHClip(var19, var20, var21);
+		Pix3D.flatTriangle(var23, var24, var25, var19, var20, var21, arg4);
+		Pix3D.setHClip(var19, var21, var22);
+		Pix3D.flatTriangle(var23, var25, var26, var19, var21, var22, arg4);
 	}
 
 	@ObfuscatedName("gf.a([I)V")

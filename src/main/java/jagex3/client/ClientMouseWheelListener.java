@@ -25,7 +25,7 @@ public final class ClientMouseWheelListener extends MouseWheelInterface implemen
 
 	@ObfuscatedName("ji.a(B)I")
 	@Override
-	public synchronized int method176() {
+	public synchronized int getRotation() {
 		int var1 = this.rotation;
 		this.rotation = 0;
 		return var1;
@@ -33,7 +33,7 @@ public final class ClientMouseWheelListener extends MouseWheelInterface implemen
 
 	@ObfuscatedName("ji.a(ILjava/awt/Component;)V")
 	@Override
-	public void method173(Component arg0) {
+	public void addListeners(Component arg0) {
 		arg0.addMouseWheelListener(this);
 	}
 }

@@ -10,37 +10,37 @@ import java.awt.event.*;
 public final class ClientMouseListener implements MouseListener, MouseMotionListener, FocusListener {
 
 	@ObfuscatedName("di.ab")
-	public static ClientMouseListener field732 = new ClientMouseListener();
+	public static ClientMouseListener instance = new ClientMouseListener();
 	@ObfuscatedName("re.b")
-	public static volatile int field3668 = 0;
+	public static volatile int idleTimer = 0;
 	@ObfuscatedName("ea.Z")
-	public static volatile int field833 = 0;
+	public static volatile int nextMouseClickX = 0;
 	@ObfuscatedName("mh.T")
-	public static volatile int field2575 = 0;
+	public static volatile int nextMouseClickY = 0;
 	@ObfuscatedName("ra.Z")
-	public static volatile long field3631 = 0L;
+	public static volatile long nextMouseClickTime = 0L;
 	@ObfuscatedName("of.i")
-	public static volatile int field3044 = 0;
+	public static volatile int nextMouseClickButton = 0;
 	@ObfuscatedName("ea.z")
-	public static volatile int field807 = 0;
+	public static volatile int nextMouseButton = 0;
 	@ObfuscatedName("vc.Y")
-	public static volatile int field4353 = -1;
+	public static volatile int nextMouseX = -1;
 	@ObfuscatedName("pg.ub")
-	public static volatile int field3297 = -1;
+	public static volatile int nextMouseY = -1;
 	@ObfuscatedName("od.G")
-	public static int field3016 = 0;
+	public static int mouseButton = 0;
 	@ObfuscatedName("ce.Z")
-	public static int field471 = 0;
+	public static int mouseX = 0;
 	@ObfuscatedName("w.p")
-	public static int field4449 = 0;
+	public static int mouseY = 0;
 	@ObfuscatedName("db.t")
-	public static int field625 = 0;
+	public static int mouseClickButton = 0;
 	@ObfuscatedName("uh.K")
-	public static int field4239 = 0;
+	public static int mouseClickX = 0;
 	@ObfuscatedName("pi.X")
-	public static int field3339 = 0;
+	public static int mouseClickY = 0;
 	@ObfuscatedName("db.r")
-	public static long field623 = 0L;
+	public static long mouseClickTime = 0L;
 	@ObfuscatedName("hc.eb")
 	public static int field1452;
 	@ObfuscatedName("kg.db")
@@ -51,72 +51,72 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	public static volatile long field2091 = 0L;
 
 	@ObfuscatedName("k.a(Ljava/awt/Component;I)V")
-	public static void method748(java.awt.Component arg0) {
-		arg0.addMouseListener(field732);
-		arg0.addMouseMotionListener(field732);
-		arg0.addFocusListener(field732);
+	public static void addListeners(java.awt.Component arg0) {
+		arg0.addMouseListener(instance);
+		arg0.addMouseMotionListener(instance);
+		arg0.addFocusListener(instance);
 	}
 
 	@ObfuscatedName("kg.a(BLjava/awt/Component;)V")
 	public static void removeListeners(Component arg0) {
-		arg0.removeMouseListener(field732);
-		arg0.removeMouseMotionListener(field732);
-		arg0.removeFocusListener(field732);
-		field807 = 0;
+		arg0.removeMouseListener(instance);
+		arg0.removeMouseMotionListener(instance);
+		arg0.removeFocusListener(instance);
+		nextMouseButton = 0;
 	}
 
 	@ObfuscatedName("sh.b(B)V")
-	public static void method1397() {
-		ClientMouseListener var0 = field732;
-		synchronized (field732) {
-			field3668++;
-			field3016 = field807;
-			field471 = field4353;
-			field4449 = field3297;
-			field625 = field3044;
-			field4239 = field833;
-			field3339 = field2575;
-			field623 = field3631;
-			field3044 = 0;
+	public static void cycle() {
+		ClientMouseListener var0 = instance;
+		synchronized (instance) {
+			idleTimer++;
+			mouseButton = nextMouseButton;
+			mouseX = nextMouseX;
+			mouseY = nextMouseY;
+			mouseClickButton = nextMouseClickButton;
+			mouseClickX = nextMouseClickX;
+			mouseClickY = nextMouseClickY;
+			mouseClickTime = nextMouseClickTime;
+			nextMouseClickButton = 0;
 		}
 	}
 
 	@ObfuscatedName("nj.a(BI)V")
-	public static void method1031(int arg0) {
-		ClientMouseListener var1 = field732;
-		synchronized (field732) {
-			field3668 = arg0;
+	public static void setIdleTimer(int arg0) {
+		ClientMouseListener var1 = instance;
+		synchronized (instance) {
+			idleTimer = arg0;
 		}
 	}
 
 	@ObfuscatedName("eb.d(I)V")
-	public static void method362() {
-		if (field732 != null) {
-			ClientMouseListener var0 = field732;
-			synchronized (field732) {
-				field732 = null;
+	public static void shutdown() {
+		if (instance != null) {
+			ClientMouseListener var0 = instance;
+			synchronized (instance) {
+				instance = null;
 			}
 		}
 	}
 
 	@ObfuscatedName("ne.a(I)I")
-	public static int method984() {
-		return field3668;
+	public static int getIdleTimer() {
+		return idleTimer;
 	}
 
 	@Override
 	public synchronized void mousePressed(MouseEvent arg0) {
-		if (field732 != null) {
-			field3668 = 0;
-			field833 = arg0.getX();
-			field2575 = arg0.getY();
-			field3631 = MonotonicTime.currentTime();
+		if (instance != null) {
+			idleTimer = 0;
+			nextMouseClickX = arg0.getX();
+			nextMouseClickY = arg0.getY();
+			nextMouseClickTime = MonotonicTime.currentTime();
 			if (arg0.isMetaDown()) {
-				field3044 = 2;
-				field807 = 2;
+				nextMouseClickButton = 2;
+				nextMouseButton = 2;
 			} else {
-				field3044 = 1;
-				field807 = 1;
+				nextMouseClickButton = 1;
+				nextMouseButton = 1;
 			}
 			int var2 = arg0.getModifiers();
 		}
@@ -127,35 +127,35 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 
 	@Override
 	public synchronized void focusLost(FocusEvent arg0) {
-		if (field732 != null) {
-			field807 = 0;
+		if (instance != null) {
+			nextMouseButton = 0;
 		}
 	}
 
 	@Override
 	public synchronized void mouseMoved(MouseEvent arg0) {
-		if (field732 != null) {
-			field3668 = 0;
-			field4353 = arg0.getX();
-			field3297 = arg0.getY();
+		if (instance != null) {
+			idleTimer = 0;
+			nextMouseX = arg0.getX();
+			nextMouseY = arg0.getY();
 		}
 	}
 
 	@Override
 	public synchronized void mouseDragged(MouseEvent arg0) {
-		if (field732 != null) {
-			field3668 = 0;
-			field4353 = arg0.getX();
-			field3297 = arg0.getY();
+		if (instance != null) {
+			idleTimer = 0;
+			nextMouseX = arg0.getX();
+			nextMouseY = arg0.getY();
 		}
 	}
 
 	@Override
 	public synchronized void mouseEntered(MouseEvent arg0) {
-		if (field732 != null) {
-			field3668 = 0;
-			field4353 = arg0.getX();
-			field3297 = arg0.getY();
+		if (instance != null) {
+			idleTimer = 0;
+			nextMouseX = arg0.getX();
+			nextMouseY = arg0.getY();
 		}
 	}
 
@@ -165,10 +165,10 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 
 	@Override
 	public synchronized void mouseExited(MouseEvent arg0) {
-		if (field732 != null) {
-			field3668 = 0;
-			field4353 = -1;
-			field3297 = -1;
+		if (instance != null) {
+			idleTimer = 0;
+			nextMouseX = -1;
+			nextMouseY = -1;
 		}
 	}
 
@@ -181,9 +181,9 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 
 	@Override
 	public synchronized void mouseReleased(MouseEvent arg0) {
-		if (field732 != null) {
-			field3668 = 0;
-			field807 = 0;
+		if (instance != null) {
+			idleTimer = 0;
+			nextMouseButton = 0;
 			int var2 = arg0.getModifiers();
 		}
 		if (arg0.isPopupTrigger()) {

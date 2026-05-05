@@ -13,38 +13,38 @@ import java.lang.reflect.Method;
 public final class ClientKeyboardListener implements KeyListener, FocusListener {
 
 	@ObfuscatedName("ke.I")
-	public static final int[] field2059 = new int[128];
+	public static final int[] keyHeldBuffer = new int[128];
 	@ObfuscatedName("vh.T")
-	public static final int[] field4423 = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, 85, 80, 84, -1, 91, -1, -1, -1, 81, 82, 86, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 83, 104, 105, 103, 102, 96, 98, 97, 99, -1, -1, -1, -1, -1, -1, -1, 25, 16, 17, 18, 19, 20, 21, 22, 23, 24, -1, -1, -1, -1, -1, -1, -1, 48, 68, 66, 50, 34, 51, 52, 53, 39, 54, 55, 56, 70, 69, 40, 41, 32, 35, 49, 36, 38, 67, 33, 65, 37, 64, -1, -1, -1, -1, -1, 228, 231, 227, 233, 224, 219, 225, 230, 226, 232, 89, 87, -1, 88, 229, 90, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, -1, -1, -1, 101, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 100, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+	public static final int[] KEY_CODE_MAP = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, 85, 80, 84, -1, 91, -1, -1, -1, 81, 82, 86, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 83, 104, 105, 103, 102, 96, 98, 97, 99, -1, -1, -1, -1, -1, -1, -1, 25, 16, 17, 18, 19, 20, 21, 22, 23, 24, -1, -1, -1, -1, -1, -1, -1, 48, 68, 66, 50, 34, 51, 52, 53, 39, 54, 55, 56, 70, 69, 40, 41, 32, 35, 49, 36, 38, 67, 33, 65, 37, 64, -1, -1, -1, -1, -1, 228, 231, 227, 233, 224, 219, 225, 230, 226, 232, 89, 87, -1, 88, 229, 90, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, -1, -1, -1, 101, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 100, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 	@ObfuscatedName("q.vb")
-	public static final int[] field3438 = new int[128];
+	public static final int[] keyCodeBuffer = new int[128];
 	@ObfuscatedName("jg.H")
-	public static final int[] field1908 = new int[128];
+	public static final int[] keyChBuffer = new int[128];
 	@ObfuscatedName("wh.D")
-	public static final boolean[] field4511 = new boolean[112];
+	public static final boolean[] keyHeld = new boolean[112];
 
 	@ObfuscatedName("pc.b")
-	public static ClientKeyboardListener field3188 = new ClientKeyboardListener();
+	public static ClientKeyboardListener instance = new ClientKeyboardListener();
 	@ObfuscatedName("ke.S")
-	public static volatile int field2068 = 0;
+	public static volatile int idleTimer = 0;
 	@ObfuscatedName("ci.x")
-	public static int field524 = 0;
+	public static int keyHeldWritePos = 0;
 	@ObfuscatedName("nf.lb")
-	public static int field2801 = 0;
+	public static int keyHeldReadPos = 0;
 	@ObfuscatedName("rf.Gb")
-	public static int field3681 = 0;
+	public static int keyWritePos = 0;
 	@ObfuscatedName("sg.k")
-	public static int field3858 = 0;
+	public static int keyReadPos = 0;
 	@ObfuscatedName("mf.x")
-	public static int field2556;
+	public static int code;
 	@ObfuscatedName("ua.r")
-	public static int field4148;
+	public static int ch;
 
 	@ObfuscatedName("l.a(Ljava/awt/Component;I)V")
 	public static void removeListeners(java.awt.Component arg0) {
-		arg0.removeKeyListener(field3188);
-		arg0.removeFocusListener(field3188);
-		field524 = -1;
+		arg0.removeKeyListener(instance);
+		arg0.removeFocusListener(instance);
+		keyHeldWritePos = -1;
 	}
 
 	@ObfuscatedName("fj.a(Ljava/awt/event/KeyEvent;I)I")
@@ -61,84 +61,84 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	}
 
 	@ObfuscatedName("di.c(B)Z")
-	public static boolean method279() {
-		ClientKeyboardListener var0 = field3188;
-		synchronized (field3188) {
-			if (field3858 == Statics.field898) {
+	public static boolean pollKey() {
+		ClientKeyboardListener var0 = instance;
+		synchronized (instance) {
+			if (keyReadPos == Statics.field898) {
 				return false;
 			} else {
-				field2556 = field3438[field3858];
-				field4148 = field1908[field3858];
-				field3858 = field3858 + 1 & 0x7F;
+				code = keyCodeBuffer[keyReadPos];
+				ch = keyChBuffer[keyReadPos];
+				keyReadPos = keyReadPos + 1 & 0x7F;
 				return true;
 			}
 		}
 	}
 
 	@ObfuscatedName("ec.b(I)V")
-	public static void method366() {
-		ClientKeyboardListener var0 = field3188;
-		synchronized (field3188) {
-			field2068++;
-			field3858 = Statics.field898;
-			if (field524 < 0) {
+	public static void cycle() {
+		ClientKeyboardListener var0 = instance;
+		synchronized (instance) {
+			idleTimer++;
+			keyReadPos = Statics.field898;
+			if (keyHeldWritePos < 0) {
 				for (int var1 = 0; var1 < 112; var1++) {
-					field4511[var1] = false;
+					keyHeld[var1] = false;
 				}
-				field524 = field2801;
+				keyHeldWritePos = keyHeldReadPos;
 			} else {
-				while (field2801 != field524) {
-					int var2 = field2059[field2801];
-					field2801 = field2801 + 1 & 0x7F;
+				while (keyHeldReadPos != keyHeldWritePos) {
+					int var2 = keyHeldBuffer[keyHeldReadPos];
+					keyHeldReadPos = keyHeldReadPos + 1 & 0x7F;
 					if (var2 >= 0) {
-						field4511[var2] = true;
+						keyHeld[var2] = true;
 					} else {
-						field4511[~var2] = false;
+						keyHeld[~var2] = false;
 					}
 				}
 			}
-			Statics.field898 = field3681;
+			Statics.field898 = keyWritePos;
 		}
 	}
 
 	@ObfuscatedName("sh.c(I)V")
-	public static void method1401() {
+	public static void setupKeyCodeMap() {
 		if (SignLink.javaVendor.toLowerCase().indexOf("microsoft") != -1) {
-			field4423[223] = 28;
-			field4423[222] = 59;
-			field4423[189] = 26;
-			field4423[191] = 73;
-			field4423[190] = 72;
-			field4423[192] = 58;
-			field4423[219] = 42;
-			field4423[221] = 43;
-			field4423[220] = 74;
-			field4423[187] = 27;
-			field4423[188] = 71;
-			field4423[186] = 57;
+			KEY_CODE_MAP[223] = 28;
+			KEY_CODE_MAP[222] = 59;
+			KEY_CODE_MAP[189] = 26;
+			KEY_CODE_MAP[191] = 73;
+			KEY_CODE_MAP[190] = 72;
+			KEY_CODE_MAP[192] = 58;
+			KEY_CODE_MAP[219] = 42;
+			KEY_CODE_MAP[221] = 43;
+			KEY_CODE_MAP[220] = 74;
+			KEY_CODE_MAP[187] = 27;
+			KEY_CODE_MAP[188] = 71;
+			KEY_CODE_MAP[186] = 57;
 			return;
 		}
-		field4423[46] = 72;
-		field4423[44] = 71;
-		field4423[92] = 74;
-		field4423[59] = 57;
-		field4423[61] = 27;
+		KEY_CODE_MAP[46] = 72;
+		KEY_CODE_MAP[44] = 71;
+		KEY_CODE_MAP[92] = 74;
+		KEY_CODE_MAP[59] = 57;
+		KEY_CODE_MAP[61] = 27;
 		if (SignLink.setFocusTraversalKeysEnabled == null) {
-			field4423[192] = 58;
-			field4423[222] = 59;
+			KEY_CODE_MAP[192] = 58;
+			KEY_CODE_MAP[222] = 59;
 		} else {
-			field4423[520] = 59;
-			field4423[192] = 28;
-			field4423[222] = 58;
+			KEY_CODE_MAP[520] = 59;
+			KEY_CODE_MAP[192] = 28;
+			KEY_CODE_MAP[222] = 58;
 		}
-		field4423[47] = 73;
-		field4423[91] = 42;
-		field4423[93] = 43;
-		field4423[45] = 26;
+		KEY_CODE_MAP[47] = 73;
+		KEY_CODE_MAP[91] = 42;
+		KEY_CODE_MAP[93] = 43;
+		KEY_CODE_MAP[45] = 26;
 	}
 
 	@ObfuscatedName("na.a(BLjava/awt/Component;)V")
-	public static void method935(java.awt.Component arg0) {
+	public static void addListeners(java.awt.Component arg0) {
 		Method var1 = SignLink.setFocusTraversalKeysEnabled;
 		if (var1 != null) {
 			try {
@@ -146,41 +146,41 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 			} catch (Throwable var2) {
 			}
 		}
-		arg0.addKeyListener(field3188);
-		arg0.addFocusListener(field3188);
+		arg0.addKeyListener(instance);
+		arg0.addFocusListener(instance);
 	}
 
 	@ObfuscatedName("nd.a(I)V")
-	public static void method975() {
-		if (field3188 != null) {
-			ClientKeyboardListener var0 = field3188;
-			synchronized (field3188) {
-				field3188 = null;
+	public static void shutdown() {
+		if (instance != null) {
+			ClientKeyboardListener var0 = instance;
+			synchronized (instance) {
+				instance = null;
 			}
 		}
 	}
 
 	@ObfuscatedName("jg.d(I)I")
-	public static int method729() {
-		return field2068;
+	public static int getIdleTimer() {
+		return idleTimer;
 	}
 
 	@Override
 	public synchronized void keyReleased(KeyEvent arg0) {
-		if (field3188 != null) {
-			field2068 = 0;
+		if (instance != null) {
+			idleTimer = 0;
 			int var2 = arg0.getKeyCode();
 			int var3;
-			if (var2 >= 0 && field4423.length > var2) {
-				var3 = field4423[var2] & 0xFFFFFF7F;
+			if (var2 >= 0 && KEY_CODE_MAP.length > var2) {
+				var3 = KEY_CODE_MAP[var2] & 0xFFFFFF7F;
 			} else {
 				var3 = -1;
 			}
-			if (field524 >= 0 && var3 >= 0) {
-				field2059[field524] = ~var3;
-				field524 = field524 + 1 & 0x7F;
-				if (field2801 == field524) {
-					field524 = -1;
+			if (keyHeldWritePos >= 0 && var3 >= 0) {
+				keyHeldBuffer[keyHeldWritePos] = ~var3;
+				keyHeldWritePos = keyHeldWritePos + 1 & 0x7F;
+				if (keyHeldReadPos == keyHeldWritePos) {
+					keyHeldWritePos = -1;
 				}
 			}
 		}
@@ -189,33 +189,33 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 
 	@Override
 	public synchronized void keyPressed(KeyEvent arg0) {
-		if (field3188 == null) {
+		if (instance == null) {
 			return;
 		}
-		field2068 = 0;
+		idleTimer = 0;
 		int var2 = arg0.getKeyCode();
 		int var3;
-		if (var2 >= 0 && field4423.length > var2) {
-			var3 = field4423[var2];
+		if (var2 >= 0 && KEY_CODE_MAP.length > var2) {
+			var3 = KEY_CODE_MAP[var2];
 			if ((var3 & 0x80) != 0) {
 				var3 = -1;
 			}
 		} else {
 			var3 = -1;
 		}
-		if (field524 >= 0 && var3 >= 0) {
-			field2059[field524] = var3;
-			field524 = field524 + 1 & 0x7F;
-			if (field524 == field2801) {
-				field524 = -1;
+		if (keyHeldWritePos >= 0 && var3 >= 0) {
+			keyHeldBuffer[keyHeldWritePos] = var3;
+			keyHeldWritePos = keyHeldWritePos + 1 & 0x7F;
+			if (keyHeldWritePos == keyHeldReadPos) {
+				keyHeldWritePos = -1;
 			}
 		}
 		if (var3 >= 0) {
-			int var4 = field3681 + 1 & 0x7F;
-			if (var4 != field3858) {
-				field3438[field3681] = var3;
-				field1908[field3681] = -1;
-				field3681 = var4;
+			int var4 = keyWritePos + 1 & 0x7F;
+			if (var4 != keyReadPos) {
+				keyCodeBuffer[keyWritePos] = var3;
+				keyChBuffer[keyWritePos] = -1;
+				keyWritePos = var4;
 			}
 		}
 		int var5 = arg0.getModifiers();
@@ -226,8 +226,8 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 
 	@Override
 	public synchronized void focusLost(FocusEvent arg0) {
-		if (field3188 != null) {
-			field524 = -1;
+		if (instance != null) {
+			keyHeldWritePos = -1;
 		}
 	}
 
@@ -237,14 +237,14 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		if (field3188 != null) {
+		if (instance != null) {
 			int var2 = method455(arg0);
 			if (var2 >= 0) {
-				int var3 = field3681 + 1 & 0x7F;
-				if (field3858 != var3) {
-					field3438[field3681] = -1;
-					field1908[field3681] = var2;
-					field3681 = var3;
+				int var3 = keyWritePos + 1 & 0x7F;
+				if (keyReadPos != var3) {
+					keyCodeBuffer[keyWritePos] = -1;
+					keyChBuffer[keyWritePos] = var2;
+					keyWritePos = var3;
 				}
 			}
 		}

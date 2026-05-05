@@ -10,51 +10,51 @@ import jagex3.config.SpotType;
 public final class ClientNpc extends ClientEntity {
 
 	@ObfuscatedName("rf.Hb")
-	public NpcType field3682;
+	public NpcType type;
 
 	@ObfuscatedName("rf.d(I)Z")
 	@Override
-	public boolean method287() {
-		return this.field3682 != null;
+	public boolean ready() {
+		return this.type != null;
 	}
 
 	@ObfuscatedName("rf.b()I")
 	@Override
 	public int method88() {
-		return super.field4107;
+		return super.height;
 	}
 
 	@ObfuscatedName("rf.a(IIIIIIIIJ)V")
 	@Override
 	public void method87(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, long arg8) {
-		if (this.field3682 == null) {
+		if (this.type == null) {
 			return;
 		}
-		SeqType var11 = super.field4077 != -1 && super.field4140 == 0 ? SeqType.list(super.field4077) : null;
-		SeqType var12 = super.field4106 == -1 || super.field4105 == super.field4106 && var11 != null ? null : SeqType.list(super.field4106);
-		ModelLit var13 = this.field3682.method865(var12, super.field4127, super.field4101, var11);
+		SeqType var11 = super.primarySeqId != -1 && super.primarySeqDelay == 0 ? SeqType.list(super.primarySeqId) : null;
+		SeqType var12 = super.secondarySeqId == -1 || super.readyanim == super.secondarySeqId && var11 != null ? null : SeqType.list(super.secondarySeqId);
+		ModelLit var13 = this.type.method865(var12, super.secondarySeqFrame, super.primarySeqFrame, var11);
 		if (var13 == null) {
 			return;
 		}
-		super.field4107 = var13.method88();
+		super.height = var13.method88();
 		int var14 = 0;
 		int var15 = 0;
 		int var16 = 0;
-		if (this.field3682.field2350 != 0 && this.field3682.field2329 != 0) {
-			int var17 = Pix3D.field3359[arg0];
-			int var18 = Pix3D.field3354[arg0];
-			short var19 = this.field3682.field2350;
-			short var20 = this.field3682.field2329;
+		if (this.type.field2350 != 0 && this.type.field2329 != 0) {
+			int var17 = Pix3D.sinTable[arg0];
+			int var18 = Pix3D.cosTable[arg0];
+			short var19 = this.type.field2350;
+			short var20 = this.type.field2329;
 			int var21 = -var19 / 2;
 			int var22 = -var20 / 2;
 			int var23 = var18 * var22 - var17 * var21 >> 16;
 			int var24 = var21 * var18 + var17 * var22 >> 16;
-			int var25 = Client.getAvH(super.field4136 + var24, var23 + super.field4121, Client.field2907);
+			int var25 = Client.getAvH(super.x + var24, var23 + super.z, Client.minusedlevel);
 			int var26 = var19 / 2;
 			int var27 = -var20 / 2;
 			int var28 = var18 * var26 + var17 * var27 >> 16;
 			int var29 = var27 * var18 - var26 * var17 >> 16;
-			int var30 = Client.getAvH(var28 + super.field4136, var29 + super.field4121, Client.field2907);
+			int var30 = Client.getAvH(var28 + super.x, var29 + super.z, Client.minusedlevel);
 			int var31 = -var19 / 2;
 			int var32 = var20 / 2;
 			int var33 = var18 * var31 + var32 * var17 >> 16;
@@ -62,9 +62,9 @@ public final class ClientNpc extends ClientEntity {
 			int var35 = var19 / 2;
 			int var36 = var20 / 2;
 			int var37 = var17 * var36 + var18 * var35 >> 16;
-			int var38 = Client.getAvH(super.field4136 + var33, super.field4121 - -var34, Client.field2907);
+			int var38 = Client.getAvH(super.x + var33, super.z - -var34, Client.minusedlevel);
 			int var39 = var18 * var36 - var17 * var35 >> 16;
-			int var40 = Client.getAvH(super.field4136 + var37, super.field4121 - -var39, Client.field2907);
+			int var40 = Client.getAvH(super.x + var37, super.z - -var39, Client.minusedlevel);
 			int var41 = var40 + var25;
 			if (var41 > var30 + var38) {
 				var41 = var30 + var38;
@@ -75,32 +75,32 @@ public final class ClientNpc extends ClientEntity {
 			int var45 = var40 <= var38 ? var40 : var38;
 			var14 = (int) (Math.atan2((double) (var43 - var45), (double) var20) * 325.95D) & 0x7FF;
 			if (var14 != 0) {
-				var13.method197(var14);
+				var13.rotateXAxis(var14);
 			}
 			var15 = (int) (Math.atan2((double) (var44 - var42), (double) var19) * 325.95D) & 0x7FF;
 			if (var15 != 0) {
 				var13.method191(var15);
 			}
-			var16 = (var41 >> 1) - super.field4097;
+			var16 = (var41 >> 1) - super.y;
 			if (var16 != 0) {
-				var13.method180(0, var16, 0);
+				var13.translate(0, var16, 0);
 			}
 		}
 		ModelLit var46 = null;
-		if (super.field4080 != -1 && super.field4075 != -1) {
-			SpotType var47 = SpotType.list(super.field4080);
-			var46 = var47.getTempModel2(super.field4075);
+		if (super.spotanimId != -1 && super.spotanimFrame != -1) {
+			SpotType var47 = SpotType.list(super.spotanimId);
+			var46 = var47.getTempModel2(super.spotanimFrame);
 			if (var46 != null) {
-				var46.method180(0, -super.field4125, 0);
+				var46.translate(0, -super.spotanimHeight, 0);
 				if (var47.field527) {
 					if (var14 != 0) {
-						var46.method197(var14);
+						var46.rotateXAxis(var14);
 					}
 					if (var15 != 0) {
 						var46.method191(var15);
 					}
 					if (var16 != 0) {
-						var46.method180(0, var16, 0);
+						var46.translate(0, var16, 0);
 					}
 				}
 			}
@@ -108,8 +108,8 @@ public final class ClientNpc extends ClientEntity {
 		if (var46 != null) {
 			var13 = ((SoftwareModelLit) var13).method850(var46);
 		}
-		if (this.field3682.size == 1) {
-			var13.field494 = true;
+		if (this.type.size == 1) {
+			var13.useAABBMouseCheck = true;
 		}
 		var13.method87(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 	}

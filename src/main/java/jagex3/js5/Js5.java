@@ -91,7 +91,7 @@ public abstract class Js5 {
 			if (var2 == 1) {
 				BZip2.method1458(var6, var5, arg0, var3);
 			} else {
-				gzip.method424(var1, var6);
+				gzip.decompress(var1, var6);
 			}
 			return var6;
 		}

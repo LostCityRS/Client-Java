@@ -17,10 +17,10 @@ public abstract class MouseWheelInterface {
     }
 
     @ObfuscatedName("cf.a(ILjava/awt/Component;)V")
-	public abstract void method173(Component arg0);
+	public abstract void addListeners(Component arg0);
 
 	@ObfuscatedName("cf.a(B)I")
-	public abstract int method176();
+	public abstract int getRotation();
 
 	@ObfuscatedName("cf.b(ILjava/awt/Component;)V")
 	public abstract void removeListeners(Component arg0);

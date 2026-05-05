@@ -423,15 +423,15 @@ public final class NpcType extends Linkable2 {
 				if (this.recol_s != null) {
 					for (int var10 = 0; var10 < this.recol_s.length; var10++) {
 						if (this.field2335 == null || this.field2335.length <= var10) {
-							var9.method564(this.recol_s[var10], this.recol_d[var10]);
+							var9.recolour(this.recol_s[var10], this.recol_d[var10]);
 						} else {
-							var9.method564(this.recol_s[var10], clientpalette[this.field2335[var10] & 0xFF]);
+							var9.recolour(this.recol_s[var10], clientpalette[this.field2335[var10] & 0xFF]);
 						}
 					}
 				}
 				if (this.retex_s != null) {
 					for (int var11 = 0; var11 < this.retex_s.length; var11++) {
-						var9.method553(this.retex_s[var11], this.retex_d[var11]);
+						var9.retexture(this.retex_s[var11], this.retex_d[var11]);
 					}
 				}
 				var4 = var9.light(64, 768, -50, -10, -50);
@@ -474,15 +474,15 @@ public final class NpcType extends Linkable2 {
 			if (this.recol_s != null) {
 				for (int var12 = 0; var12 < this.recol_s.length; var12++) {
 					if (this.field2335 == null || var12 >= this.field2335.length) {
-						var11.method564(this.recol_s[var12], this.recol_d[var12]);
+						var11.recolour(this.recol_s[var12], this.recol_d[var12]);
 					} else {
-						var11.method564(this.recol_s[var12], clientpalette[this.field2335[var12] & 0xFF]);
+						var11.recolour(this.recol_s[var12], clientpalette[this.field2335[var12] & 0xFF]);
 					}
 				}
 			}
 			if (this.retex_s != null) {
 				for (int var13 = 0; var13 < this.retex_s.length; var13++) {
-					var11.method553(this.retex_s[var13], this.retex_d[var13]);
+					var11.retexture(this.retex_s[var13], this.retex_d[var13]);
 				}
 			}
 			var6 = var11.light(this.ambient + 64, 850 - -this.contrast, -30, -50, -30);
@@ -494,12 +494,12 @@ public final class NpcType extends Linkable2 {
 		} else if (arg3 != null) {
 			var14 = arg3.animateModel2(arg2, var6);
 		} else if (arg0 == null) {
-			var14 = var6.method184(true, true);
+			var14 = var6.copyForAnim(true, true);
 		} else {
 			var14 = arg0.animateModel2(arg1, var6);
 		}
 		if (this.resizeh != 128 || this.resizev != 128) {
-			var14.method183(this.resizeh, this.resizev, this.resizeh);
+			var14.resize(this.resizeh, this.resizev, this.resizeh);
 		}
 		return var14;
 	}

@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.Client;
 import jagex3.config.IdkType;
 import jagex3.config.NpcType;
@@ -16,6 +15,8 @@ public final class PlayerModel {
 	public static final ModelSourceCache field1740 = new ModelSourceCache(260);
 	@ObfuscatedName("n.d")
 	public static final ModelSourceCache field2616 = new ModelSourceCache(5);
+	@ObfuscatedName("ej.j")
+	public static final int[] field1023 = new int[] { 8, 11, 4, 6, 9, 7, 10 };
 	@ObfuscatedName("tb.b")
 	public boolean field3957;
 
@@ -84,10 +85,10 @@ public final class PlayerModel {
 			ModelUnlit var13 = new ModelUnlit(var8, var7);
 			for (int var14 = 0; var14 < 5; var14++) {
 				if (this.field3962[var14] < Client.field96[var14].length) {
-					var13.method564(Client.field219[var14], Client.field96[var14][this.field3962[var14]]);
+					var13.recolour(Client.field219[var14], Client.field96[var14][this.field3962[var14]]);
 				}
 				if (this.field3962[var14] < Client.field1596[var14].length) {
-					var13.method564(Client.field2750[var14], Client.field1596[var14][this.field3962[var14]]);
+					var13.recolour(Client.field2750[var14], Client.field1596[var14][this.field3962[var14]]);
 				}
 			}
 			var3 = var13.light(64, 768, -50, -10, -50);
@@ -199,7 +200,7 @@ public final class PlayerModel {
 							int var25 = var20.field2839[var21][2];
 							int var26 = var20.field2839[var21][4];
 							int var27 = var20.field2839[var21][5];
-							var13[var21 + 1].method549(var24, var22, var25);
+							var13[var21 + 1].translate(var24, var22, var25);
 							var13[var21 + 1].method565(var23, var26, var27);
 						}
 					}
@@ -207,10 +208,10 @@ public final class PlayerModel {
 				ModelUnlit var28 = new ModelUnlit(var13, var14);
 				for (int var29 = 0; var29 < 5; var29++) {
 					if (this.field3962[var29] < Client.field96[var29].length) {
-						var28.method564(Client.field219[var29], Client.field96[var29][this.field3962[var29]]);
+						var28.recolour(Client.field219[var29], Client.field96[var29][this.field3962[var29]]);
 					}
 					if (Client.field1596[var29].length > this.field3962[var29]) {
-						var28.method564(Client.field2750[var29], Client.field1596[var29][this.field3962[var29]]);
+						var28.recolour(Client.field2750[var29], Client.field1596[var29][this.field3962[var29]]);
 					}
 				}
 				var9 = var28.light(64, 850, -30, -50, -30);
@@ -240,7 +241,7 @@ public final class PlayerModel {
 				for (int var6 = 0; var6 < IdkType.numDefinitions; var6++) {
 					IdkType var7 = IdkType.list(var6);
 					if (var7 != null && !var7.disable && var5 + (arg3 ? 7 : 0) == var7.type) {
-						arg1[Statics.field1023[var5]] = var6 | Integer.MIN_VALUE;
+						arg1[field1023[var5]] = var6 | Integer.MIN_VALUE;
 						break;
 					}
 				}
@@ -267,7 +268,7 @@ public final class PlayerModel {
 
 	@ObfuscatedName("tb.a(IBI)V")
 	public void method1435(int arg0, int arg1) {
-		int var3 = Statics.field1023[arg0];
+		int var3 = field1023[arg0];
 		if (this.field3966[var3] != 0 && IdkType.list(arg1) != null) {
 			this.field3966[var3] = Integer.MIN_VALUE | arg1;
 			this.method1429();

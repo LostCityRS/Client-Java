@@ -8,7 +8,7 @@ import java.util.zip.Inflater;
 public final class GZip {
 
 	@ObfuscatedName("fc.g")
-	public Inflater field1112;
+	public Inflater inflater;
 
 	public GZip() {
 		this(-1, 1000000, 1000000);
@@ -18,20 +18,20 @@ public final class GZip {
 	}
 
 	@ObfuscatedName("fc.a(Lea;Z[B)V")
-	public void method424(Packet arg0, byte[] arg1) {
+	public void decompress(Packet arg0, byte[] arg1) {
 		if (arg0.data[arg0.pos] != 31 || arg0.data[arg0.pos + 1] != -117) {
 			throw new RuntimeException("Invalid GZIP header!");
 		}
-		if (this.field1112 == null) {
-			this.field1112 = new Inflater(true);
+		if (this.inflater == null) {
+			this.inflater = new Inflater(true);
 		}
 		try {
-			this.field1112.setInput(arg0.data, arg0.pos + 10, arg0.data.length - arg0.pos - 18);
-			this.field1112.inflate(arg1);
+			this.inflater.setInput(arg0.data, arg0.pos + 10, arg0.data.length - arg0.pos - 18);
+			this.inflater.inflate(arg1);
 		} catch (Exception var3) {
-			this.field1112.reset();
+			this.inflater.reset();
 			throw new RuntimeException("Invalid GZIP compressed data!");
 		}
-		this.field1112.reset();
+		this.inflater.reset();
 	}
 }

@@ -319,9 +319,9 @@ public final class LocType extends Linkable2 {
 			var13.method563();
 			if (var11) {
 				var12 = var13;
-				var13.field1523 = (short) (this.contrast * 5 + 768);
-				var13.field1498 = (short) (this.ambient + 64);
-				var13.method548();
+				var13.contrast = (short) (this.contrast * 5 + 768);
+				var13.ambient = (short) (this.ambient + 64);
+				var13.calculateNormals();
 			} else {
 				var12 = new SoftwareModelLit(var13, this.ambient + 64, 768 - -(this.contrast * 5), -50, -10, -50);
 			}
@@ -394,7 +394,7 @@ public final class LocType extends Linkable2 {
 						return null;
 					}
 					if (var4) {
-						var3.method551();
+						var3.mirror();
 					}
 					mc1.put((long) var7, var3);
 				}
@@ -427,7 +427,7 @@ public final class LocType extends Linkable2 {
 					return null;
 				}
 				if (var4) {
-					var3.method551();
+					var3.mirror();
 				}
 				mc1.put((long) var10, var3);
 			}
@@ -447,35 +447,35 @@ public final class LocType extends Linkable2 {
 		ModelUnlit var13 = new ModelUnlit(var3, arg0 == 0 && !var11 && !var12, this.recol_s == null, this.retex_s == null, true);
 		if (arg1 == 4 && arg0 > 3) {
 			var13.method573();
-			var13.method549(45, 0, -45);
+			var13.translate(45, 0, -45);
 		}
 		int var14 = arg0 & 0x3;
 		if (var14 == 1) {
-			var13.method555();
+			var13.rotate90();
 		} else if (var14 == 2) {
-			var13.method572();
+			var13.rotate180();
 		} else if (var14 == 3) {
-			var13.method566();
+			var13.rotate270();
 		}
 		if (this.recol_s != null) {
 			for (int var15 = 0; var15 < this.recol_s.length; var15++) {
 				if (this.field2824 == null || var15 >= this.field2824.length) {
-					var13.method564(this.recol_s[var15], this.recol_d[var15]);
+					var13.recolour(this.recol_s[var15], this.recol_d[var15]);
 				} else {
-					var13.method564(this.recol_s[var15], clientpalette[this.field2824[var15] & 0xFF]);
+					var13.recolour(this.recol_s[var15], clientpalette[this.field2824[var15] & 0xFF]);
 				}
 			}
 		}
 		if (this.retex_s != null) {
 			for (int var16 = 0; var16 < this.retex_s.length; var16++) {
-				var13.method553(this.retex_s[var16], this.retex_d[var16]);
+				var13.retexture(this.retex_s[var16], this.retex_d[var16]);
 			}
 		}
 		if (var11) {
-			var13.method552(this.resizex, this.resizey, this.resizez);
+			var13.resize(this.resizex, this.resizey, this.resizez);
 		}
 		if (var12) {
-			var13.method549(this.offsetx, this.offsety, this.offsetz);
+			var13.translate(this.offsetx, this.offsety, this.offsetz);
 		}
 		return var13;
 	}
@@ -773,7 +773,7 @@ public final class LocType extends Linkable2 {
 		}
 		if (this.skewType != 0) {
 			if (arg5 == null) {
-				var12 = (SoftwareModelLit) var12.method184(true, true);
+				var12 = (SoftwareModelLit) var12.copyForAnim(true, true);
 			}
 			var12 = var12.hillSkew(this.skewType, this.field2787, arg6, arg7, arg1, arg0, arg3, false);
 		}

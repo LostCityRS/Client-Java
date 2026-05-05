@@ -16,34 +16,34 @@ public final class ClientScript extends Linkable2 {
 	public static final LruCache cache = new LruCache(128);
 
 	@ObfuscatedName("wh.K")
-	public int field4517;
+	public int stringLocalCount;
 
 	@ObfuscatedName("wh.L")
-	public int field4518;
+	public int stringArgCount;
 
 	@ObfuscatedName("wh.O")
-	public int field4520;
+	public int intArgCount;
 
 	@ObfuscatedName("wh.U")
-	public int field4526;
+	public int intLocalCount;
 
 	@ObfuscatedName("wh.Y")
-	public JagString field4530;
+	public JagString name;
 
 	@ObfuscatedName("wh.N")
-	public int[] field4519;
+	public int[] instructions;
 
 	@ObfuscatedName("wh.P")
-	public int[] field4521;
+	public int[] intOperands;
 
 	@ObfuscatedName("wh.G")
-	public HashTable[] field4514;
+	public HashTable[] switchTables;
 
 	@ObfuscatedName("wh.Q")
-	public JagString[] field4522;
+	public JagString[] stringOperands;
 
 	@ObfuscatedName("fc.b(II)Lwh;")
-	public static ClientScript method427(int arg0) {
+	public static ClientScript get(int arg0) {
 		ClientScript var1 = (ClientScript) cache.find((long) arg0);
 		if (var1 != null) {
 			return var1;
@@ -59,17 +59,17 @@ public final class ClientScript extends Linkable2 {
 		int var6 = var4.data.length - var5 - 2 - 12;
 		var4.pos = var6;
 		int var7 = var4.g4();
-		var3.field4526 = var4.g2();
-		var3.field4517 = var4.g2();
-		var3.field4520 = var4.g2();
-		var3.field4518 = var4.g2();
+		var3.intLocalCount = var4.g2();
+		var3.stringLocalCount = var4.g2();
+		var3.intArgCount = var4.g2();
+		var3.stringArgCount = var4.g2();
 		int var8 = var4.g1();
 		if (var8 > 0) {
-			var3.field4514 = new HashTable[var8];
+			var3.switchTables = new HashTable[var8];
 			for (int var9 = 0; var9 < var8; var9++) {
 				int var10 = var4.g2();
 				HashTable var11 = new HashTable(IntUtil.bitceil(var10));
-				var3.field4514[var9] = var11;
+				var3.switchTables[var9] = var11;
 				while (var10-- > 0) {
 					int var12 = var4.g4();
 					int var13 = var4.g4();
@@ -79,20 +79,20 @@ public final class ClientScript extends Linkable2 {
 		}
 		int var14 = 0;
 		var4.pos = 0;
-		var3.field4530 = var4.method353();
-		var3.field4522 = new JagString[var7];
-		var3.field4519 = new int[var7];
-		var3.field4521 = new int[var7];
+		var3.name = var4.method353();
+		var3.stringOperands = new JagString[var7];
+		var3.instructions = new int[var7];
+		var3.intOperands = new int[var7];
 		while (var6 > var4.pos) {
 			int var15 = var4.g2();
 			if (var15 == 3) {
-				var3.field4522[var14] = var4.gjstr();
+				var3.stringOperands[var14] = var4.gjstr();
 			} else if (var15 >= 100 || var15 == 21 || var15 == 38 || var15 == 39) {
-				var3.field4521[var14] = var4.g1();
+				var3.intOperands[var14] = var4.g1();
 			} else {
-				var3.field4521[var14] = var4.g4();
+				var3.intOperands[var14] = var4.g4();
 			}
-			var3.field4519[var14++] = var15;
+			var3.instructions[var14++] = var15;
 		}
 		cache.put((long) arg0, var3);
 		return var3;

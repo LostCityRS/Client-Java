@@ -6,7 +6,7 @@ import deob.ObfuscatedName;
 public abstract class ModelLit extends ModelSource {
 
 	@ObfuscatedName("cg.n")
-	public boolean field494 = false;
+	public boolean useAABBMouseCheck = false;
 
 	@ObfuscatedName("cg.a([[III)I")
 	public static int method195(int[][] arg0, int arg1, int arg2) {
@@ -23,28 +23,28 @@ public abstract class ModelLit extends ModelSource {
 	}
 
 	@ObfuscatedName("cg.c(III)V")
-	public abstract void method180(int arg0, int arg1, int arg2);
+	public abstract void translate(int arg0, int arg1, int arg2);
 
 	@ObfuscatedName("cg.c()V")
-	public abstract void method181();
+	public abstract void rotate270();
 
 	@ObfuscatedName("cg.d()V")
-	public abstract void method182();
+	public abstract void rotate90();
 
 	@ObfuscatedName("cg.d(III)V")
-	public abstract void method183(int arg0, int arg1, int arg2);
+	public abstract void resize(int arg0, int arg1, int arg2);
 
 	@ObfuscatedName("cg.a(ZZ)Lcg;")
-	public abstract ModelLit method184(boolean arg0, boolean arg1);
+	public abstract ModelLit copyForAnim(boolean arg0, boolean arg1);
 
 	@ObfuscatedName("cg.b(ZZ)Lcg;")
-	public abstract ModelLit method185(boolean arg0, boolean arg1);
+	public abstract ModelLit copyForAnim2(boolean arg0, boolean arg1);
 
 	@ObfuscatedName("cg.e()I")
 	public abstract int method186();
 
 	@ObfuscatedName("cg.a(Lli;IZ)V")
-	public abstract void method187(AnimFrameSet arg0, int arg1, boolean arg2);
+	public abstract void animate(AnimFrameSet arg0, int arg1, boolean arg2);
 
 	@ObfuscatedName("cg.a(IIIIIIIIJ)V")
 	public abstract void method87(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, long arg8);
@@ -53,16 +53,16 @@ public abstract class ModelLit extends ModelSource {
 	public abstract void method188(int arg0);
 
 	@ObfuscatedName("cg.a(Lli;ILli;I[IZ)V")
-	public abstract void method189(AnimFrameSet arg0, int arg1, AnimFrameSet arg2, int arg3, int[] arg4, boolean arg5);
+	public abstract void maskAnimate(AnimFrameSet arg0, int arg1, AnimFrameSet arg2, int arg3, int[] arg4, boolean arg5);
 
 	@ObfuscatedName("cg.f()V")
-	public abstract void method190();
+	public abstract void rotate180();
 
 	@ObfuscatedName("cg.c(I)V")
 	public abstract void method191(int arg0);
 
 	@ObfuscatedName("cg.g()I")
-	public abstract int method192();
+	public abstract int getRadiusCylinder();
 
 	@ObfuscatedName("cg.a(IIIIIII)V")
 	public abstract void method193(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
@@ -74,7 +74,7 @@ public abstract class ModelLit extends ModelSource {
 	public abstract int method196();
 
 	@ObfuscatedName("cg.d(I)V")
-	public abstract void method197(int arg0);
+	public abstract void rotateXAxis(int arg0);
 
 	@ObfuscatedName("cg.j()I")
 	public abstract int method198();
@@ -99,7 +99,7 @@ public abstract class ModelLit extends ModelSource {
 		int var22 = var9 < var15 ? var9 : var15;
 		int var23 = (int) (Math.atan2((double) (var19 - var20), (double) arg5) * 325.95D) & 0x7FF;
 		if (var23 != 0) {
-			this.method197(var23);
+			this.rotateXAxis(var23);
 		}
 		int var24 = (int) (Math.atan2((double) (var22 - var21), (double) arg4) * 325.95D) & 0x7FF;
 		if (var24 != 0) {
@@ -111,7 +111,7 @@ public abstract class ModelLit extends ModelSource {
 		}
 		int var26 = (var25 >> 1) - arg2;
 		if (var26 != 0) {
-			this.method180(0, var26, 0);
+			this.translate(0, var26, 0);
 		}
 	}
 

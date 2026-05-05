@@ -28,4 +28,15 @@ public class MathTool {
 		}
 		return var1 + arg0;
 	}
+
+	@ObfuscatedName("uj.a(IBI)I")
+	public static int method1524(int arg0, int arg1) {
+		int var2 = 0;
+		while (arg1 > 0) {
+			var2 = arg0 & 0x1 | var2 << 1;
+			arg0 >>>= 0x1;
+			arg1--;
+		}
+		return var2;
+	}
 }

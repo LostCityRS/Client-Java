@@ -242,9 +242,9 @@ public final class ObjType extends Linkable2 {
 		if (var7 != null) {
 			return var7;
 		}
-		Pix3D.field3364 = false;
+		Pix3D.textureFallback = false;
 		Pix32 var8 = method516(arg1, arg2, arg4, arg0, false, arg3);
-		if (var8 != null && !Pix3D.field3364) {
+		if (var8 != null && !Pix3D.textureFallback) {
 			spriteCache.put(var5, var8);
 		}
 		return var8;
@@ -288,16 +288,16 @@ public final class ObjType extends Linkable2 {
 		SoftwarePix32 var15 = new SoftwarePix32(36, 32);
 		Pix2D.setPixels(var15.data, 36, 32);
 		Pix3D.setRenderClipping();
-		Pix3D.method1228(16, 16);
+		Pix3D.setOrigin(16, 16);
 		int var16 = var6.zoom2d;
 		if (arg4) {
 			var16 = (int) ((double) var16 * 1.5D);
 		} else if (arg3 == 2) {
 			var16 = (int) ((double) var16 * 1.04D);
 		}
-		Pix3D.field3355 = false;
-		int var17 = Pix3D.field3354[var6.xan2d] * var16 >> 16;
-		int var18 = var16 * Pix3D.field3359[var6.xan2d] >> 16;
+		Pix3D.lowDetail = false;
+		int var17 = Pix3D.cosTable[var6.xan2d] * var16 >> 16;
+		int var18 = var16 * Pix3D.sinTable[var6.xan2d] >> 16;
 		var9.method193(var6.yan2d, var6.zan2d, var6.xan2d, var6.xof2d, var18 + var6.yof2d - var9.method88() / 2, var6.yof2d + var17);
 		if (arg3 >= 1) {
 			var15.addOutline(1);
@@ -322,7 +322,7 @@ public final class ObjType extends Linkable2 {
 		Pix2D.setPixels(var11, var12, var13);
 		Pix2D.restoreClipping(var14);
 		Pix3D.setRenderClipping();
-		Pix3D.field3355 = true;
+		Pix3D.lowDetail = true;
 		return var15;
 	}
 
@@ -345,20 +345,20 @@ public final class ObjType extends Linkable2 {
 		if (this.recol_s != null) {
 			for (int var2 = 0; var2 < this.recol_s.length; var2++) {
 				if (this.field2887 == null || var2 >= this.field2887.length) {
-					var1.method564(this.recol_s[var2], this.recol_d[var2]);
+					var1.recolour(this.recol_s[var2], this.recol_d[var2]);
 				} else {
-					var1.method564(this.recol_s[var2], clientpalette[this.field2887[var2] & 0xFF]);
+					var1.recolour(this.recol_s[var2], clientpalette[this.field2887[var2] & 0xFF]);
 				}
 			}
 		}
 		if (this.retex_s != null) {
 			for (int var3 = 0; var3 < this.retex_s.length; var3++) {
-				var1.method553(this.retex_s[var3], this.retex_d[var3]);
+				var1.retexture(this.retex_s[var3], this.retex_d[var3]);
 			}
 		}
 		SoftwareModelLit var4 = var1.method547(this.ambient + 64, this.contrast + 768);
 		if (this.resizex != 128 || this.resizey != 128 || this.resizez != 128) {
-			var4.method183(this.resizex, this.resizey, this.resizez);
+			var4.resize(this.resizex, this.resizey, this.resizez);
 		}
 		return var4;
 	}
@@ -409,19 +409,19 @@ public final class ObjType extends Linkable2 {
 			}
 		}
 		if (!arg0 && this.manwearOffsetY != 0) {
-			var5.method549(0, this.manwearOffsetY, 0);
+			var5.translate(0, this.manwearOffsetY, 0);
 		}
 		if (arg0 && this.womanwearOffsetY != 0) {
-			var5.method549(0, this.womanwearOffsetY, 0);
+			var5.translate(0, this.womanwearOffsetY, 0);
 		}
 		if (this.recol_s != null) {
 			for (int var10 = 0; var10 < this.recol_s.length; var10++) {
-				var5.method564(this.recol_s[var10], this.recol_d[var10]);
+				var5.recolour(this.recol_s[var10], this.recol_d[var10]);
 			}
 		}
 		if (this.retex_s != null) {
 			for (int var11 = 0; var11 < this.retex_s.length; var11++) {
-				var5.method553(this.retex_s[var11], this.retex_d[var11]);
+				var5.retexture(this.retex_s[var11], this.retex_d[var11]);
 			}
 		}
 		return var5;
@@ -482,12 +482,12 @@ public final class ObjType extends Linkable2 {
 		}
 		if (this.recol_s != null) {
 			for (int var7 = 0; var7 < this.recol_s.length; var7++) {
-				var4.method564(this.recol_s[var7], this.recol_d[var7]);
+				var4.recolour(this.recol_s[var7], this.recol_d[var7]);
 			}
 		}
 		if (this.retex_s != null) {
 			for (int var8 = 0; var8 < this.retex_s.length; var8++) {
-				var4.method553(this.retex_s[var8], this.retex_d[var8]);
+				var4.retexture(this.retex_s[var8], this.retex_d[var8]);
 			}
 		}
 		return var4;
@@ -759,22 +759,22 @@ public final class ObjType extends Linkable2 {
 			if (this.recol_s != null) {
 				for (int var8 = 0; var8 < this.recol_s.length; var8++) {
 					if (this.field2887 == null || this.field2887.length <= var8) {
-						var7.method564(this.recol_s[var8], this.recol_d[var8]);
+						var7.recolour(this.recol_s[var8], this.recol_d[var8]);
 					} else {
-						var7.method564(this.recol_s[var8], clientpalette[this.field2887[var8] & 0xFF]);
+						var7.recolour(this.recol_s[var8], clientpalette[this.field2887[var8] & 0xFF]);
 					}
 				}
 			}
 			if (this.retex_s != null) {
 				for (int var9 = 0; var9 < this.retex_s.length; var9++) {
-					var7.method553(this.retex_s[var9], this.retex_d[var9]);
+					var7.retexture(this.retex_s[var9], this.retex_d[var9]);
 				}
 			}
 			var6 = var7.light(this.ambient + 64, this.contrast + 768, -50, -10, -50);
 			if (this.resizex != 128 || this.resizey != 128 || this.resizez != 128) {
-				var6.method183(this.resizex, this.resizey, this.resizez);
+				var6.resize(this.resizex, this.resizey, this.resizez);
 			}
-			var6.field494 = true;
+			var6.useAABBMouseCheck = true;
 			modelCache.put((long) this.field2844, var6);
 		}
 		if (arg2 != null) {

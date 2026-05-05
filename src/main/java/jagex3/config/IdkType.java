@@ -88,12 +88,12 @@ public final class IdkType extends Linkable2 {
 		}
 		if (this.retex_d != null) {
 			for (int var4 = 0; var4 < this.retex_d.length; var4++) {
-				var3.method564(this.retex_d[var4], this.recol_d[var4]);
+				var3.recolour(this.retex_d[var4], this.recol_d[var4]);
 			}
 		}
 		if (this.retex_s != null) {
 			for (int var5 = 0; var5 < this.retex_s.length; var5++) {
-				var3.method553(this.retex_s[var5], this.recol_s[var5]);
+				var3.retexture(this.retex_s[var5], this.recol_s[var5]);
 			}
 		}
 		return var3;
@@ -146,12 +146,12 @@ public final class IdkType extends Linkable2 {
 		ModelUnlit var4 = new ModelUnlit(var2, var1);
 		if (this.retex_d != null) {
 			for (int var5 = 0; var5 < this.retex_d.length; var5++) {
-				var4.method564(this.retex_d[var5], this.recol_d[var5]);
+				var4.recolour(this.retex_d[var5], this.recol_d[var5]);
 			}
 		}
 		if (this.retex_s != null) {
 			for (int var6 = 0; var6 < this.retex_s.length; var6++) {
-				var4.method553(this.retex_s[var6], this.recol_s[var6]);
+				var4.retexture(this.retex_s[var6], this.recol_s[var6]);
 			}
 		}
 		return var4;
