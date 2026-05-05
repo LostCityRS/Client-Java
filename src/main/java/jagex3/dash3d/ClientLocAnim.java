@@ -50,7 +50,7 @@ public final class ClientLocAnim extends ModelSource {
 			this.field1459 = SeqType.list(arg6);
 			this.field1474 = 0;
 			this.field1463 = Client.field2113 - 1;
-			if (this.field1459.field1966 == 0 && arg8 != null && arg8 instanceof ClientLocAnim) {
+			if (this.field1459.duplicatebehaviour == 0 && arg8 != null && arg8 instanceof ClientLocAnim) {
 				ClientLocAnim var10 = (ClientLocAnim) arg8;
 				if (this.field1459 == var10.field1459) {
 					this.field1474 = var10.field1474;
@@ -59,8 +59,8 @@ public final class ClientLocAnim extends ModelSource {
 				}
 			}
 			if (arg7 && this.field1459.field1972 != -1) {
-				this.field1474 = (int) ((double) this.field1459.field1965.length * Math.random());
-				this.field1463 -= (int) (Math.random() * (double) this.field1459.field1990[this.field1474]);
+				this.field1474 = (int) ((double) this.field1459.frames.length * Math.random());
+				this.field1463 -= (int) (Math.random() * (double) this.field1459.delay[this.field1474]);
 				return;
 			}
 		}
@@ -76,8 +76,8 @@ public final class ClientLocAnim extends ModelSource {
 	public ModelSource method536() {
 		boolean var1 = World.field2721 != ClientBuild.groundh;
 		LocType var2 = LocType.list(this.field1472);
-		if (var2.field2770 != null) {
-			var2 = var2.method998();
+		if (var2.multiloc != null) {
+			var2 = var2.getMultiLoc();
 		}
 		if (var2 == null) {
 			return null;
@@ -85,11 +85,11 @@ public final class ClientLocAnim extends ModelSource {
 		int var3;
 		int var4;
 		if (this.field1458 == 1 || this.field1458 == 3) {
-			var4 = var2.field2774;
-			var3 = var2.field2794;
+			var4 = var2.width;
+			var3 = var2.length;
 		} else {
-			var3 = var2.field2774;
-			var4 = var2.field2794;
+			var3 = var2.width;
+			var4 = var2.length;
 		}
 		int var5 = (var3 + 1 >> 1) + this.field1457;
 		int var6 = (var3 >> 1) + this.field1457;
@@ -133,15 +133,15 @@ public final class ClientLocAnim extends ModelSource {
 		}
 		int var3 = Client.field2113 - this.field1463;
 		if (var3 > 100 && this.field1459.field1972 > 0) {
-			int var4 = this.field1459.field1965.length - this.field1459.field1972;
-			while (this.field1474 < var4 && var3 > this.field1459.field1990[this.field1474]) {
-				var3 -= this.field1459.field1990[this.field1474];
+			int var4 = this.field1459.frames.length - this.field1459.field1972;
+			while (this.field1474 < var4 && var3 > this.field1459.delay[this.field1474]) {
+				var3 -= this.field1459.delay[this.field1474];
 				this.field1474++;
 			}
 			if (var4 <= this.field1474) {
 				int var5 = 0;
-				for (int var6 = var4; var6 < this.field1459.field1965.length; var6++) {
-					var5 += this.field1459.field1990[var6];
+				for (int var6 = var4; var6 < this.field1459.frames.length; var6++) {
+					var5 += this.field1459.delay[var6];
 				}
 				var3 %= var5;
 			}
@@ -149,15 +149,15 @@ public final class ClientLocAnim extends ModelSource {
 		label56: {
 			do {
 				do {
-					if (var3 <= this.field1459.field1990[this.field1474]) {
+					if (var3 <= this.field1459.delay[this.field1474]) {
 						break label56;
 					}
 					Client.method433(false, arg1, this.field1474, arg0, this.field1459);
-					var3 -= this.field1459.field1990[this.field1474];
+					var3 -= this.field1459.delay[this.field1474];
 					this.field1474++;
-				} while (this.field1459.field1965.length > this.field1474);
+				} while (this.field1459.frames.length > this.field1474);
 				this.field1474 -= this.field1459.field1972;
-			} while (this.field1474 >= 0 && this.field1459.field1965.length > this.field1474);
+			} while (this.field1474 >= 0 && this.field1459.frames.length > this.field1474);
 			this.field1459 = null;
 		}
 		this.field1463 = Client.field2113 - var3;

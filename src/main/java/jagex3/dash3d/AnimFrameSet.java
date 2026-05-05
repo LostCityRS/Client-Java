@@ -15,19 +15,19 @@ public final class AnimFrameSet extends Linkable2 {
 		LinkList var5 = new LinkList();
 		int var6 = arg0.getFileIdLimit(arg2);
 		this.field2421 = new AnimFrame[var6];
-		int[] var7 = arg0.method948(arg2);
+		int[] var7 = arg0.getFileList(arg2);
 		for (int var8 = 0; var8 < var7.length; var8++) {
 			byte[] var9 = arg0.getFile(var7[var8], arg2);
 			int var10 = (var9[0] & 0xFF) << 8 | var9[1] & 0xFF;
 			AnimBase var11 = null;
-			for (AnimBase var12 = (AnimBase) var5.head(); var12 != null; var12 = (AnimBase) var5.method1619()) {
+			for (AnimBase var12 = (AnimBase) var5.head(); var12 != null; var12 = (AnimBase) var5.next()) {
 				if (var10 == var12.field1412) {
 					var11 = var12;
 					break;
 				}
 			}
 			if (var11 == null) {
-				byte[] var13 = arg1.method947(0, var10);
+				byte[] var13 = arg1.peekFile(0, var10);
 				var11 = new AnimBase(var10, var13);
 				var5.push(var11);
 			}

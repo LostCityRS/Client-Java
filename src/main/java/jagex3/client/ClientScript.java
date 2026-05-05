@@ -44,7 +44,7 @@ public final class ClientScript extends Linkable2 {
 
 	@ObfuscatedName("fc.b(II)Lwh;")
 	public static ClientScript method427(int arg0) {
-		ClientScript var1 = (ClientScript) cache.method665((long) arg0);
+		ClientScript var1 = (ClientScript) cache.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -94,7 +94,7 @@ public final class ClientScript extends Linkable2 {
 			}
 			var3.field4519[var14++] = var15;
 		}
-		cache.method663((long) arg0, var3);
+		cache.put((long) arg0, var3);
 		return var3;
 	}
 }

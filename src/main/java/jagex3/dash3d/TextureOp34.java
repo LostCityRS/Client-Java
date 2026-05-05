@@ -63,11 +63,11 @@ public final class TextureOp34 extends TextureOp {
 		} else if (arg1 == 1) {
 			this.field595 = arg0.g1();
 		} else if (arg1 == 2) {
-			this.field607 = arg0.method334();
+			this.field607 = arg0.g2b();
 			if (this.field607 < 0) {
 				this.field609 = new short[this.field595];
 				for (int var3 = 0; var3 < this.field595; var3++) {
-					this.field609[var3] = (short) arg0.method334();
+					this.field609[var3] = (short) arg0.g2b();
 				}
 			}
 		} else if (arg1 == 3) {

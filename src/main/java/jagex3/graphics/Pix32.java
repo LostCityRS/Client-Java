@@ -7,50 +7,50 @@ import jagex3.datastruct.Linkable2;
 public abstract class Pix32 extends Linkable2 {
 
 	@ObfuscatedName("rc.D")
-	public int field3643;
+	public int xof;
 
 	@ObfuscatedName("rc.F")
-	public int field3645;
+	public int ohi;
 
 	@ObfuscatedName("rc.J")
-	public int field3649;
+	public int owi;
 
 	@ObfuscatedName("rc.M")
-	public int field3652;
+	public int hi;
 
 	@ObfuscatedName("rc.N")
-	public int field3653;
+	public int yof;
 
 	@ObfuscatedName("rc.O")
-	public int field3654;
+	public int wi;
 
 	@ObfuscatedName("rc.a(IIII)V")
-	public abstract void method1162(int arg0, int arg1, int arg2, int arg3);
+	public abstract void scalePlotSprite(int arg0, int arg1, int arg2, int arg3);
 
 	@ObfuscatedName("rc.b(II)V")
-	public abstract void method1161(int arg0, int arg1);
+	public abstract void quickPlotSprite(int arg0, int arg1);
 
 	@ObfuscatedName("rc.a(IIIIII)V")
 	public abstract void method1166(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
 
 	@ObfuscatedName("rc.a(ZIIII)V")
 	public final void method1309(int arg0, int arg1, int arg2, int arg3) {
-		int var5 = this.field3645 << 3;
+		int var5 = this.ohi << 3;
 		int var6 = (var5 & 0xF) + (arg0 << 4);
-		int var7 = this.field3649 << 3;
+		int var7 = this.owi << 3;
 		int var8 = (var7 & 0xF) + (arg1 << 4);
 		this.method1166(var7, var5, var8, var6, arg3, arg2);
 	}
 
 	@ObfuscatedName("rc.a(IIIII)V")
-	public abstract void method1174(int arg0, int arg1, int arg2, int arg3, int arg4);
+	public abstract void transScalePlotSprite(int arg0, int arg1, int arg2, int arg3, int arg4);
 
 	@ObfuscatedName("rc.a(III)V")
-	public abstract void method1164(int arg0, int arg1, int arg2);
+	public abstract void transPlotSprite(int arg0, int arg1, int arg2);
 
 	@ObfuscatedName("rc.b(IIII)V")
 	public abstract void method1160(int arg0, int arg1);
 
 	@ObfuscatedName("rc.c(II)V")
-	public abstract void method1155(int arg0, int arg1);
+	public abstract void plotSprite(int arg0, int arg1);
 }

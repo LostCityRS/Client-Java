@@ -28,7 +28,7 @@ public final class TextureOp29SubOp0 extends TextureOp29SubOp {
 
 	@ObfuscatedName("hd.a(Lea;I)Lsg;")
 	public static TextureOp29SubOp0 method538(Packet arg0) {
-		return new TextureOp29SubOp0(arg0.method334(), arg0.method334(), arg0.method334(), arg0.method334(), arg0.g3(), arg0.g1());
+		return new TextureOp29SubOp0(arg0.g2b(), arg0.g2b(), arg0.g2b(), arg0.g2b(), arg0.g3(), arg0.g1());
 	}
 
 	@ObfuscatedName("sg.a(IIZ)V")

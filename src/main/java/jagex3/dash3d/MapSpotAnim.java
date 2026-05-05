@@ -47,7 +47,7 @@ public final class MapSpotAnim extends ModelSource {
 		this.field287 = arg6 + arg5;
 		this.field301 = arg0;
 		this.field292 = arg1;
-		int var8 = SpotType.list(this.field301).field542;
+		int var8 = SpotType.list(this.field301).anim;
 		if (var8 == -1) {
 			this.field302 = true;
 		} else {
@@ -77,9 +77,9 @@ public final class MapSpotAnim extends ModelSource {
 		SpotType var1 = SpotType.list(this.field301);
 		ModelLit var2;
 		if (this.field302) {
-			var2 = var1.method209(-1);
+			var2 = var1.getTempModel2(-1);
 		} else {
-			var2 = var1.method209(this.field298);
+			var2 = var1.getTempModel2(this.field298);
 		}
 		return var2 == null ? null : var2;
 	}
@@ -90,10 +90,10 @@ public final class MapSpotAnim extends ModelSource {
 			return;
 		}
 		this.field303 += arg0;
-		while (this.field303 > this.field282.field1990[this.field298]) {
-			this.field303 -= this.field282.field1990[this.field298];
+		while (this.field303 > this.field282.delay[this.field298]) {
+			this.field303 -= this.field282.delay[this.field298];
 			this.field298++;
-			if (this.field282.field1965.length <= this.field298) {
+			if (this.field282.frames.length <= this.field298) {
 				this.field302 = true;
 				return;
 			}

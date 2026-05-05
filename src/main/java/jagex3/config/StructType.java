@@ -5,7 +5,7 @@ import jagex3.datastruct.*;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
-import jagex3.sound.Patch;
+import jagex3.midi2.Patch;
 import jagex3.util.IntUtil;
 
 @ObfuscatedName("qb")
@@ -21,13 +21,13 @@ public final class StructType extends Linkable2 {
 
 	@ObfuscatedName("qb.a(ZLnb;I)Lsh;")
 	public static Patch method1266(Js5 arg0, int arg1) {
-		byte[] var2 = arg0.method956(arg1);
+		byte[] var2 = arg0.getFile(arg1);
 		return var2 == null ? null : new Patch(var2);
 	}
 
 	@ObfuscatedName("bj.b(BI)Lqb;")
 	public static StructType method106(int arg0) {
-		StructType var1 = (StructType) field3228.method665((long) arg0);
+		StructType var1 = (StructType) field3228.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -36,7 +36,7 @@ public final class StructType extends Linkable2 {
 		if (var2 != null) {
 			var3.method1264(new Packet(var2));
 		}
-		field3228.method663((long) arg0, var3);
+		field3228.put((long) arg0, var3);
 		return var3;
 	}
 
@@ -72,7 +72,7 @@ public final class StructType extends Linkable2 {
 		if (this.field3539 == null) {
 			return arg0;
 		} else {
-			StringNode var3 = (StringNode) this.field3539.method1049((long) arg1);
+			StringNode var3 = (StringNode) this.field3539.find((long) arg1);
 			return var3 == null ? arg0 : var3.field4046;
 		}
 	}
@@ -93,7 +93,7 @@ public final class StructType extends Linkable2 {
 		if (this.field3539 == null) {
 			return arg0;
 		} else {
-			IntNode var3 = (IntNode) this.field3539.method1049((long) arg1);
+			IntNode var3 = (IntNode) this.field3539.find((long) arg1);
 			return var3 == null ? arg0 : var3.field3698;
 		}
 	}

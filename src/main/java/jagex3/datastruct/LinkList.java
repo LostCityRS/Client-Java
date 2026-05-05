@@ -6,44 +6,44 @@ import deob.ObfuscatedName;
 public final class LinkList {
 
 	@ObfuscatedName("wi.d")
-	public final Linkable field4534 = new Linkable();
+	public final Linkable sentinel = new Linkable();
 
 	@ObfuscatedName("wi.h")
-	public Linkable field4538;
+	public Linkable cursor;
 
 	public LinkList() {
-		this.field4534.field1220 = this.field4534;
-		this.field4534.field1212 = this.field4534;
+		this.sentinel.next = this.sentinel;
+		this.sentinel.prev = this.sentinel;
 	}
 
 	@ObfuscatedName("wi.a(Z)Lg;")
 	public Linkable head() {
-		Linkable var1 = this.field4534.field1220;
-		if (this.field4534 == var1) {
-			this.field4538 = null;
+		Linkable var1 = this.sentinel.next;
+		if (this.sentinel == var1) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field4538 = var1.field1220;
+			this.cursor = var1.next;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("wi.a(B)Lg;")
-	public Linkable method1612() {
-		Linkable var1 = this.field4534.field1212;
-		if (var1 == this.field4534) {
-			this.field4538 = null;
+	public Linkable tail() {
+		Linkable var1 = this.sentinel.prev;
+		if (var1 == this.sentinel) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field4538 = var1.field1212;
+			this.cursor = var1.prev;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("wi.a(I)Lg;")
-	public Linkable method1613() {
-		Linkable var1 = this.field4534.field1220;
-		if (var1 == this.field4534) {
+	public Linkable popFront() {
+		Linkable var1 = this.sentinel.next;
+		if (var1 == this.sentinel) {
 			return null;
 		} else {
 			var1.unlink();
@@ -52,21 +52,21 @@ public final class LinkList {
 	}
 
 	@ObfuscatedName("wi.a(ILg;)V")
-	public void method1615(Linkable arg0) {
-		if (arg0.field1212 != null) {
+	public void pushFront(Linkable arg0) {
+		if (arg0.prev != null) {
 			arg0.unlink();
 		}
-		arg0.field1220 = this.field4534.field1220;
-		arg0.field1212 = this.field4534;
-		arg0.field1212.field1220 = arg0;
-		arg0.field1220.field1212 = arg0;
+		arg0.next = this.sentinel.next;
+		arg0.prev = this.sentinel;
+		arg0.prev.next = arg0;
+		arg0.next.prev = arg0;
 	}
 
 	@ObfuscatedName("wi.b(I)V")
-	public void method1616() {
+	public void clear() {
 		while (true) {
-			Linkable var1 = this.field4534.field1220;
-			if (this.field4534 == var1) {
+			Linkable var1 = this.sentinel.next;
+			if (this.sentinel == var1) {
 				return;
 			}
 			var1.unlink();
@@ -74,48 +74,48 @@ public final class LinkList {
 	}
 
 	@ObfuscatedName("wi.c(B)Lg;")
-	public Linkable method1617() {
-		Linkable var1 = this.field4538;
-		if (this.field4534 == var1) {
-			this.field4538 = null;
+	public Linkable prev() {
+		Linkable var1 = this.cursor;
+		if (this.sentinel == var1) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field4538 = var1.field1212;
+			this.cursor = var1.prev;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("wi.c(I)Lg;")
-	public Linkable method1619() {
-		Linkable var1 = this.field4538;
-		if (this.field4534 == var1) {
-			this.field4538 = null;
+	public Linkable next() {
+		Linkable var1 = this.cursor;
+		if (this.sentinel == var1) {
+			this.cursor = null;
 			return null;
 		} else {
-			this.field4538 = var1.field1220;
+			this.cursor = var1.next;
 			return var1;
 		}
 	}
 
 	@ObfuscatedName("wi.a(Lg;BLg;)V")
 	public void method1620(Linkable arg0, Linkable arg1) {
-		if (arg0.field1212 != null) {
+		if (arg0.prev != null) {
 			arg0.unlink();
 		}
-		arg0.field1212 = arg1.field1212;
-		arg0.field1220 = arg1;
-		arg0.field1212.field1220 = arg0;
-		arg0.field1220.field1212 = arg0;
+		arg0.prev = arg1.prev;
+		arg0.next = arg1;
+		arg0.prev.next = arg0;
+		arg0.next.prev = arg0;
 	}
 
 	@ObfuscatedName("wi.a(Lg;I)V")
 	public void push(Linkable arg0) {
-		if (arg0.field1212 != null) {
+		if (arg0.prev != null) {
 			arg0.unlink();
 		}
-		arg0.field1212 = this.field4534.field1212;
-		arg0.field1220 = this.field4534;
-		arg0.field1212.field1220 = arg0;
-		arg0.field1220.field1212 = arg0;
+		arg0.prev = this.sentinel.prev;
+		arg0.next = this.sentinel;
+		arg0.prev.next = arg0;
+		arg0.next.prev = arg0;
 	}
 }

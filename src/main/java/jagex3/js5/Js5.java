@@ -22,57 +22,57 @@ public abstract class Js5 {
 	public int crc;
 
 	@ObfuscatedName("nb.i")
-	public int[] field2668;
+	public int[] groupVersions;
 
 	@ObfuscatedName("nb.n")
-	public IntHashTable[] field2673;
+	public IntHashTable[] fileNameHashTables;
 
 	@ObfuscatedName("nb.o")
-	public int[] field2674;
+	public int[] fileIdLimit;
 
 	@ObfuscatedName("nb.r")
-	public final boolean field2677;
+	public final boolean discardPacked;
 
 	@ObfuscatedName("nb.s")
-	public int[][] field2678;
+	public int[][] fileIds;
 
 	@ObfuscatedName("nb.w")
-	public int[] field2682;
+	public int[] groupNameHash;
 
 	@ObfuscatedName("nb.S")
-	public final boolean field2704;
+	public final boolean discardUnpacked;
 
 	@ObfuscatedName("nb.N")
-	public int field2699;
+	public int size;
 
 	@ObfuscatedName("nb.C")
-	public IntHashTable field2688;
+	public IntHashTable groupNameHashTable;
 
 	@ObfuscatedName("nb.x")
-	public int[] field2683;
+	public int[] groupSizes;
 
 	@ObfuscatedName("nb.E")
-	public int[] field2690;
+	public int[] groupChecksums;
 
 	@ObfuscatedName("nb.W")
-	public int[] field2708;
+	public int[] groupIds;
 
 	@ObfuscatedName("nb.U")
-	public Object[] field2706;
+	public Object[] packed;
 
 	@ObfuscatedName("nb.K")
-	public int[][] field2696;
+	public int[][] fileNameHashes;
 
 	@ObfuscatedName("nb.O")
-	public Object[][] field2700;
+	public Object[][] unpacked;
 
 	public Js5(boolean arg0, boolean arg1) {
-		this.field2677 = arg0;
-		this.field2704 = arg1;
+		this.discardPacked = arg0;
+		this.discardUnpacked = arg1;
 	}
 
 	@ObfuscatedName("c.a([BI)[B")
-	public static byte[] method119(byte[] arg0) {
+	public static byte[] getUncompressedPacket(byte[] arg0) {
 		Packet var1 = new Packet(arg0);
 		int var2 = var1.g1();
 		int var3 = var1.g4();
@@ -80,7 +80,7 @@ public abstract class Js5 {
 			throw new RuntimeException();
 		} else if (var2 == 0) {
 			byte[] var4 = new byte[var3];
-			var1.method307(var3, var4);
+			var1.gdata(var3, var4);
 			return var4;
 		} else {
 			int var5 = var1.g4();
@@ -98,34 +98,34 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.a(II)V")
-	public void method110(int arg0) {
+	public void updateCacheHint(int arg0) {
 	}
 
 	@ObfuscatedName("nb.a(BII)[B")
 	public final byte[] getFile(int arg0, int arg1) {
-		return this.method949(null, arg1, arg0);
+		return this.fetchFile(null, arg1, arg0);
 	}
 
 	@ObfuscatedName("nb.a(B)I")
-	public final int method940() {
-		return this.field2674.length;
+	public final int getGroupCount() {
+		return this.fileIdLimit.length;
 	}
 
 	@ObfuscatedName("nb.a(I)V")
 	public final void discardAllFiles() {
-		for (int var1 = 0; var1 < this.field2700.length; var1++) {
-			this.field2700[var1] = null;
+		for (int var1 = 0; var1 < this.unpacked.length; var1++) {
+			this.unpacked[var1] = null;
 		}
 	}
 
 	@ObfuscatedName("nb.b(II)I")
 	public final int getFileIdLimit(int arg0) {
-		return this.method968(arg0) ? this.field2674[arg0] : 0;
+		return this.method968(arg0) ? this.fileIdLimit[arg0] : 0;
 	}
 
 	@ObfuscatedName("nb.a(III)Z")
 	public boolean method943(int arg0, int arg1) {
-		if (arg1 >= 0 && arg0 >= 0 && this.field2674.length > arg1 && arg0 < this.field2674[arg1]) {
+		if (arg1 >= 0 && arg0 >= 0 && this.fileIdLimit.length > arg1 && arg0 < this.fileIdLimit[arg1]) {
 			return true;
 		} else if (field615) {
 			throw new IllegalArgumentException(arg1 + "," + arg0);
@@ -136,7 +136,7 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(Li;I)Z")
 	public final boolean method944(JagString arg0) {
-		int var2 = this.method964(Statics.field4281);
+		int var2 = this.getGroupId(Statics.field4281);
 		return var2 == -1 ? this.method946(arg0, Statics.field4281) : this.method946(Statics.field4281, arg0);
 	}
 
@@ -144,41 +144,41 @@ public abstract class Js5 {
 	public final boolean method946(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.method639();
 		JagString var4 = arg1.method639();
-		int var5 = this.field2688.method691(var3.method605());
+		int var5 = this.groupNameHashTable.find(var3.method605());
 		if (this.method968(var5)) {
-			int var6 = this.field2673[var5].method691(var4.method605());
-			return this.method959(var5, var6);
+			int var6 = this.fileNameHashTables[var5].find(var4.method605());
+			return this.requestDownload(var5, var6);
 		} else {
 			return false;
 		}
 	}
 
 	@ObfuscatedName("nb.b(III)[B")
-	public final byte[] method947(int arg0, int arg1) {
+	public final byte[] peekFile(int arg0, int arg1) {
 		if (!this.method943(arg0, arg1)) {
 			return null;
 		}
-		if (this.field2700[arg1] == null || this.field2700[arg1][arg0] == null) {
-			boolean var3 = this.method951(arg1, null);
+		if (this.unpacked[arg1] == null || this.unpacked[arg1][arg0] == null) {
+			boolean var3 = this.unpackGroupData(arg1, null);
 			if (!var3) {
-				this.method112(arg1);
-				boolean var4 = this.method951(arg1, null);
+				this.requestGroupDownload2(arg1);
+				boolean var4 = this.unpackGroupData(arg1, null);
 				if (!var4) {
 					return null;
 				}
 			}
 		}
-		return ByteArrayWrapper.method457(false, this.field2700[arg1][arg0]);
+		return ByteArrayWrapper.unwrap(false, this.unpacked[arg1][arg0]);
 	}
 
 	@ObfuscatedName("nb.c(II)[I")
-	public final int[] method948(int arg0) {
+	public final int[] getFileList(int arg0) {
 		if (!this.method968(arg0)) {
 			return null;
 		}
-		int[] var2 = this.field2678[arg0];
+		int[] var2 = this.fileIds[arg0];
 		if (var2 == null) {
-			var2 = new int[this.field2683[arg0]];
+			var2 = new int[this.groupSizes[arg0]];
 			int var3 = 0;
 			while (var2.length > var3) {
 				var2[var3] = var3++;
@@ -188,25 +188,25 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.a(I[III)[B")
-	public final byte[] method949(int[] arg0, int arg1, int arg2) {
+	public final byte[] fetchFile(int[] arg0, int arg1, int arg2) {
 		if (!this.method943(arg2, arg1)) {
 			return null;
 		}
-		if (this.field2700[arg1] == null || this.field2700[arg1][arg2] == null) {
-			boolean var4 = this.method951(arg1, arg0);
+		if (this.unpacked[arg1] == null || this.unpacked[arg1][arg2] == null) {
+			boolean var4 = this.unpackGroupData(arg1, arg0);
 			if (!var4) {
-				this.method112(arg1);
-				boolean var5 = this.method951(arg1, arg0);
+				this.requestGroupDownload2(arg1);
+				boolean var5 = this.unpackGroupData(arg1, arg0);
 				if (!var5) {
 					return null;
 				}
 			}
 		}
-		byte[] var6 = ByteArrayWrapper.method457(false, this.field2700[arg1][arg2]);
-		if (this.field2704) {
-			this.field2700[arg1][arg2] = null;
-			if (this.field2674[arg1] == 1) {
-				this.field2700[arg1] = null;
+		byte[] var6 = ByteArrayWrapper.unwrap(false, this.unpacked[arg1][arg2]);
+		if (this.discardUnpacked) {
+			this.unpacked[arg1][arg2] = null;
+			if (this.fileIdLimit[arg1] == 1) {
+				this.unpacked[arg1] = null;
 			}
 		}
 		return var6;
@@ -216,9 +216,9 @@ public abstract class Js5 {
 	public final int method950() {
 		int var1 = 0;
 		int var2 = 0;
-		for (int var3 = 0; var3 < this.field2706.length; var3++) {
-			if (this.field2683[var3] > 0) {
-				var2 += this.method116(var3);
+		for (int var3 = 0; var3 < this.packed.length; var3++) {
+			if (this.groupSizes[var3] > 0) {
+				var2 += this.getGroupLoadProgress(var3);
 				var1 += 100;
 			}
 		}
@@ -230,19 +230,19 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.a(I[IB)Z")
-	public boolean method951(int arg0, int[] arg1) {
+	public boolean unpackGroupData(int arg0, int[] arg1) {
 		if (!this.method968(arg0)) {
 			return false;
-		} else if (this.field2706[arg0] == null) {
+		} else if (this.packed[arg0] == null) {
 			return false;
 		} else {
-			int var3 = this.field2683[arg0];
-			int[] var4 = this.field2678[arg0];
-			if (this.field2700[arg0] == null) {
-				this.field2700[arg0] = new Object[this.field2674[arg0]];
+			int var3 = this.groupSizes[arg0];
+			int[] var4 = this.fileIds[arg0];
+			if (this.unpacked[arg0] == null) {
+				this.unpacked[arg0] = new Object[this.fileIdLimit[arg0]];
 			}
 			boolean var5 = true;
-			Object[] var6 = this.field2700[arg0];
+			Object[] var6 = this.unpacked[arg0];
 			for (int var7 = 0; var7 < var3; var7++) {
 				int var8;
 				if (var4 == null) {
@@ -260,20 +260,20 @@ public abstract class Js5 {
 			}
 			byte[] var9;
 			if (arg1 == null || arg1[0] == 0 && arg1[1] == 0 && arg1[2] == 0 && arg1[3] == 0) {
-				var9 = ByteArrayWrapper.method457(false, this.field2706[arg0]);
+				var9 = ByteArrayWrapper.unwrap(false, this.packed[arg0]);
 			} else {
-				var9 = ByteArrayWrapper.method457(true, this.field2706[arg0]);
+				var9 = ByteArrayWrapper.unwrap(true, this.packed[arg0]);
 				Packet var10 = new Packet(var9);
-				var10.method322(var10.data.length, arg1);
+				var10.tinydec(var10.data.length, arg1);
 			}
 			byte[] var11;
 			try {
-				var11 = method119(var9);
+				var11 = getUncompressedPacket(var9);
 			} catch (RuntimeException var30) {
-				throw JagException.method1076(var30, "T3 - " + (arg1 != null) + "," + arg0 + "," + var9.length + "," + Packet.method541(var9, var9.length) + "," + Packet.method541(var9, var9.length - 2) + "," + this.field2690[arg0] + "," + this.crc);
+				throw JagException.method1076(var30, "T3 - " + (arg1 != null) + "," + arg0 + "," + var9.length + "," + Packet.method541(var9, var9.length) + "," + Packet.method541(var9, var9.length - 2) + "," + this.groupChecksums[arg0] + "," + this.crc);
 			}
-			if (this.field2677) {
-				this.field2706[arg0] = null;
+			if (this.discardPacked) {
+				this.packed[arg0] = null;
 			}
 			if (var3 > 1) {
 				int var13 = var11.length;
@@ -313,10 +313,10 @@ public abstract class Js5 {
 					} else {
 						var28 = var4[var27];
 					}
-					if (this.field2704) {
+					if (this.discardUnpacked) {
 						var6[var28] = var21[var27];
 					} else {
-						var6[var28] = ByteArrayWrapper.method1153(var21[var27]);
+						var6[var28] = ByteArrayWrapper.wrap(var21[var27]);
 					}
 				}
 			} else {
@@ -326,10 +326,10 @@ public abstract class Js5 {
 				} else {
 					var29 = var4[0];
 				}
-				if (this.field2704) {
+				if (this.discardUnpacked) {
 					var6[var29] = var11;
 				} else {
-					var6[var29] = ByteArrayWrapper.method1153(var11);
+					var6[var29] = ByteArrayWrapper.wrap(var11);
 				}
 			}
 			return true;
@@ -338,51 +338,51 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.d(II)Z")
 	public final boolean method953(int arg0) {
-		if (this.field2674.length == 1) {
-			return this.method959(0, arg0);
+		if (this.fileIdLimit.length == 1) {
+			return this.requestDownload(0, arg0);
 		} else if (!this.method968(arg0)) {
 			return false;
-		} else if (this.field2674[arg0] == 1) {
-			return this.method959(arg0, 0);
+		} else if (this.fileIdLimit[arg0] == 1) {
+			return this.requestDownload(arg0, 0);
 		} else {
 			throw new RuntimeException();
 		}
 	}
 
 	@ObfuscatedName("nb.a(ILi;)Z")
-	public final boolean method954(JagString arg0) {
+	public final boolean requestGroupDownload(JagString arg0) {
 		JagString var2 = arg0.method639();
-		int var3 = this.field2688.method691(var2.method605());
+		int var3 = this.groupNameHashTable.find(var2.method605());
 		return this.requestGroupDownload(var3);
 	}
 
 	@ObfuscatedName("nb.a(BI)I")
-	public int method116(int arg0) {
+	public int getGroupLoadProgress(int arg0) {
 		if (this.method968(arg0)) {
-			return this.field2706[arg0] == null ? 0 : 100;
+			return this.packed[arg0] == null ? 0 : 100;
 		} else {
 			return 0;
 		}
 	}
 
 	@ObfuscatedName("nb.a(IB)V")
-	public final void method955(int arg0) {
+	public final void discardFiles(int arg0) {
 		if (this.method968(arg0)) {
-			this.field2700[arg0] = null;
+			this.unpacked[arg0] = null;
 		}
 	}
 
 	@ObfuscatedName("nb.a(IZ)V")
-	public void method112(int arg0) {
+	public void requestGroupDownload2(int arg0) {
 	}
 
 	@ObfuscatedName("nb.e(II)[B")
-	public final byte[] method956(int arg0) {
-		if (this.field2674.length == 1) {
+	public final byte[] getFile(int arg0) {
+		if (this.fileIdLimit.length == 1) {
 			return this.getFile(arg0, 0);
 		} else if (!this.method968(arg0)) {
 			return null;
-		} else if (this.field2674[arg0] == 1) {
+		} else if (this.fileIdLimit[arg0] == 1) {
 			return this.getFile(0, arg0);
 		} else {
 			throw new RuntimeException();
@@ -392,31 +392,31 @@ public abstract class Js5 {
 	@ObfuscatedName("nb.a(Li;B)I")
 	public final int method957(JagString arg0) {
 		JagString var2 = arg0.method639();
-		int var3 = this.field2688.method691(var2.method605());
-		return this.method116(var3);
+		int var3 = this.groupNameHashTable.find(var2.method605());
+		return this.getGroupLoadProgress(var3);
 	}
 
 	@ObfuscatedName("nb.a(IIB)Z")
-	public final boolean method959(int arg0, int arg1) {
+	public final boolean requestDownload(int arg0, int arg1) {
 		if (!this.method943(arg1, arg0)) {
 			return false;
-		} else if (this.field2700[arg0] != null && this.field2700[arg0][arg1] != null) {
+		} else if (this.unpacked[arg0] != null && this.unpacked[arg0][arg1] != null) {
 			return true;
-		} else if (this.field2706[arg0] == null) {
-			this.method112(arg0);
-			return this.field2706[arg0] != null;
+		} else if (this.packed[arg0] == null) {
+			this.requestGroupDownload2(arg0);
+			return this.packed[arg0] != null;
 		} else {
 			return true;
 		}
 	}
 
 	@ObfuscatedName("nb.b(ILi;Li;)[B")
-	public final byte[] method960(JagString arg0, JagString arg1) {
+	public final byte[] getFile(JagString arg0, JagString arg1) {
 		JagString var3 = arg0.method639();
 		JagString var4 = arg1.method639();
-		int var5 = this.field2688.method691(var3.method605());
+		int var5 = this.groupNameHashTable.find(var3.method605());
 		if (this.method968(var5)) {
-			int var6 = this.field2673[var5].method691(var4.method605());
+			int var6 = this.fileNameHashTables[var5].find(var4.method605());
 			return this.getFile(var6, var5);
 		} else {
 			return null;
@@ -424,13 +424,13 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.b(B)Z")
-	public final boolean method962() {
+	public final boolean requestFullDownload() {
 		boolean var1 = true;
-		for (int var2 = 0; var2 < this.field2708.length; var2++) {
-			int var3 = this.field2708[var2];
-			if (this.field2706[var3] == null) {
-				this.method112(var3);
-				if (this.field2706[var3] == null) {
+		for (int var2 = 0; var2 < this.groupIds.length; var2++) {
+			int var3 = this.groupIds[var2];
+			if (this.packed[var3] == null) {
+				this.requestGroupDownload2(var3);
+				if (this.packed[var3] == null) {
 					var1 = false;
 				}
 			}
@@ -439,27 +439,27 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.b(Li;B)I")
-	public final int method964(JagString arg0) {
+	public final int getGroupId(JagString arg0) {
 		JagString var2 = arg0.method639();
-		int var3 = this.field2688.method691(var2.method605());
+		int var3 = this.groupNameHashTable.find(var2.method605());
 		return this.method968(var3) ? var3 : -1;
 	}
 
 	@ObfuscatedName("nb.a(ZZI)V")
 	public final void method965(boolean arg0) {
-		this.field2673 = null;
-		this.field2696 = null;
+		this.fileNameHashTables = null;
+		this.fileNameHashes = null;
 		if (arg0) {
-			this.field2682 = null;
-			this.field2688 = null;
+			this.groupNameHash = null;
+			this.groupNameHashTable = null;
 		}
 	}
 
 	@ObfuscatedName("nb.a(Li;II)I")
-	public final int method966(JagString arg0, int arg1) {
+	public final int getFileId(JagString arg0, int arg1) {
 		if (this.method968(arg1)) {
 			JagString var3 = arg0.method639();
-			int var4 = this.field2673[arg1].method691(var3.method605());
+			int var4 = this.fileNameHashTables[arg1].find(var3.method605());
 			return this.method943(var4, arg1) ? var4 : -1;
 		} else {
 			return -1;
@@ -467,9 +467,9 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.a([BZ)V")
-	public final void method967(byte[] arg0) {
+	public final void decodeIndex(byte[] arg0) {
 		this.crc = Packet.method541(arg0, arg0.length);
-		Packet var2 = new Packet(method119(arg0));
+		Packet var2 = new Packet(getUncompressedPacket(arg0));
 		int var3 = var2.g1();
 		if (var3 != 5 && var3 != 6) {
 			throw new RuntimeException("Incorrect JS5 protocol number: " + var3);
@@ -479,86 +479,86 @@ public abstract class Js5 {
 		}
 		int var4 = 0;
 		int var5 = var2.g1();
-		this.field2699 = var2.g2();
-		this.field2708 = new int[this.field2699];
+		this.size = var2.g2();
+		this.groupIds = new int[this.size];
 		int var6 = -1;
-		for (int var7 = 0; var7 < this.field2699; var7++) {
-			this.field2708[var7] = var4 += var2.g2();
-			if (var6 < this.field2708[var7]) {
-				var6 = this.field2708[var7];
+		for (int var7 = 0; var7 < this.size; var7++) {
+			this.groupIds[var7] = var4 += var2.g2();
+			if (var6 < this.groupIds[var7]) {
+				var6 = this.groupIds[var7];
 			}
 		}
-		this.field2674 = new int[var6 + 1];
-		this.field2678 = new int[var6 + 1][];
-		this.field2700 = new Object[var6 + 1][];
-		this.field2690 = new int[var6 + 1];
-		this.field2706 = new Object[var6 + 1];
-		this.field2683 = new int[var6 + 1];
-		this.field2668 = new int[var6 + 1];
+		this.fileIdLimit = new int[var6 + 1];
+		this.fileIds = new int[var6 + 1][];
+		this.unpacked = new Object[var6 + 1][];
+		this.groupChecksums = new int[var6 + 1];
+		this.packed = new Object[var6 + 1];
+		this.groupSizes = new int[var6 + 1];
+		this.groupVersions = new int[var6 + 1];
 		if (var5 != 0) {
-			this.field2682 = new int[var6 + 1];
+			this.groupNameHash = new int[var6 + 1];
 			for (int var8 = 0; var8 < var6 + 1; var8++) {
-				this.field2682[var8] = -1;
+				this.groupNameHash[var8] = -1;
 			}
-			for (int var9 = 0; var9 < this.field2699; var9++) {
-				this.field2682[this.field2708[var9]] = var2.g4();
+			for (int var9 = 0; var9 < this.size; var9++) {
+				this.groupNameHash[this.groupIds[var9]] = var2.g4();
 			}
-			this.field2688 = new IntHashTable(this.field2682);
+			this.groupNameHashTable = new IntHashTable(this.groupNameHash);
 		}
-		for (int var10 = 0; var10 < this.field2699; var10++) {
-			this.field2690[this.field2708[var10]] = var2.g4();
+		for (int var10 = 0; var10 < this.size; var10++) {
+			this.groupChecksums[this.groupIds[var10]] = var2.g4();
 		}
-		for (int var11 = 0; var11 < this.field2699; var11++) {
-			this.field2668[this.field2708[var11]] = var2.g4();
+		for (int var11 = 0; var11 < this.size; var11++) {
+			this.groupVersions[this.groupIds[var11]] = var2.g4();
 		}
-		for (int var12 = 0; var12 < this.field2699; var12++) {
-			this.field2683[this.field2708[var12]] = var2.g2();
+		for (int var12 = 0; var12 < this.size; var12++) {
+			this.groupSizes[this.groupIds[var12]] = var2.g2();
 		}
-		for (int var13 = 0; var13 < this.field2699; var13++) {
-			int var14 = this.field2708[var13];
-			int var15 = this.field2683[var14];
+		for (int var13 = 0; var13 < this.size; var13++) {
+			int var14 = this.groupIds[var13];
+			int var15 = this.groupSizes[var14];
 			int var16 = 0;
-			this.field2678[var14] = new int[var15];
+			this.fileIds[var14] = new int[var15];
 			int var17 = -1;
 			for (int var18 = 0; var18 < var15; var18++) {
-				int var19 = this.field2678[var14][var18] = var16 += var2.g2();
+				int var19 = this.fileIds[var14][var18] = var16 += var2.g2();
 				if (var17 < var19) {
 					var17 = var19;
 				}
 			}
-			this.field2674[var14] = var17 + 1;
+			this.fileIdLimit[var14] = var17 + 1;
 			if (var15 == var17 + 1) {
-				this.field2678[var14] = null;
+				this.fileIds[var14] = null;
 			}
 		}
 		if (var5 == 0) {
 			return;
 		}
-		this.field2696 = new int[var6 + 1][];
-		this.field2673 = new IntHashTable[var6 + 1];
-		for (int var20 = 0; var20 < this.field2699; var20++) {
-			int var21 = this.field2708[var20];
-			int var22 = this.field2683[var21];
-			this.field2696[var21] = new int[this.field2674[var21]];
-			for (int var23 = 0; var23 < this.field2674[var21]; var23++) {
-				this.field2696[var21][var23] = -1;
+		this.fileNameHashes = new int[var6 + 1][];
+		this.fileNameHashTables = new IntHashTable[var6 + 1];
+		for (int var20 = 0; var20 < this.size; var20++) {
+			int var21 = this.groupIds[var20];
+			int var22 = this.groupSizes[var21];
+			this.fileNameHashes[var21] = new int[this.fileIdLimit[var21]];
+			for (int var23 = 0; var23 < this.fileIdLimit[var21]; var23++) {
+				this.fileNameHashes[var21][var23] = -1;
 			}
 			for (int var24 = 0; var24 < var22; var24++) {
 				int var25;
-				if (this.field2678[var21] == null) {
+				if (this.fileIds[var21] == null) {
 					var25 = var24;
 				} else {
-					var25 = this.field2678[var21][var24];
+					var25 = this.fileIds[var21][var24];
 				}
-				this.field2696[var21][var25] = var2.g4();
+				this.fileNameHashes[var21][var25] = var2.g4();
 			}
-			this.field2673[var21] = new IntHashTable(this.field2696[var21]);
+			this.fileNameHashTables[var21] = new IntHashTable(this.fileNameHashes[var21]);
 		}
 	}
 
 	@ObfuscatedName("nb.g(II)Z")
 	public final boolean method968(int arg0) {
-		if (arg0 >= 0 && arg0 < this.field2674.length && this.field2674[arg0] != 0) {
+		if (arg0 >= 0 && arg0 < this.fileIdLimit.length && this.fileIdLimit[arg0] != 0) {
 			return true;
 		} else if (field615) {
 			throw new IllegalArgumentException(Integer.toString(arg0));
@@ -568,19 +568,19 @@ public abstract class Js5 {
 	}
 
 	@ObfuscatedName("nb.b(Li;I)V")
-	public final void method969(JagString arg0) {
+	public final void updateCacheHint(JagString arg0) {
 		JagString var2 = arg0.method639();
-		int var3 = this.field2688.method691(var2.method605());
-		this.method110(var3);
+		int var3 = this.groupNameHashTable.find(var2.method605());
+		this.updateCacheHint(var3);
 	}
 
 	@ObfuscatedName("nb.b(IB)Z")
 	public final boolean requestGroupDownload(int arg0) {
 		if (!this.method968(arg0)) {
 			return false;
-		} else if (this.field2706[arg0] == null) {
-			this.method112(arg0);
-			return this.field2706[arg0] != null;
+		} else if (this.packed[arg0] == null) {
+			this.requestGroupDownload2(arg0);
+			return this.packed[arg0] != null;
 		} else {
 			return true;
 		}

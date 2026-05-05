@@ -98,7 +98,7 @@ public final class ClientProj extends ModelSource {
 		this.field1401 = arg3;
 		this.field1398 = arg2;
 		this.field1387 = arg9;
-		int var12 = SpotType.list(this.field1400).field542;
+		int var12 = SpotType.list(this.field1400).anim;
 		if (var12 == -1) {
 			this.field1367 = null;
 		} else {
@@ -122,14 +122,14 @@ public final class ClientProj extends ModelSource {
 		while (true) {
 			do {
 				do {
-					if (this.field1380 <= this.field1367.field1990[this.field1383]) {
+					if (this.field1380 <= this.field1367.delay[this.field1383]) {
 						return;
 					}
-					this.field1380 -= this.field1367.field1990[this.field1383];
+					this.field1380 -= this.field1367.delay[this.field1383];
 					this.field1383++;
-				} while (this.field1383 < this.field1367.field1965.length);
+				} while (this.field1383 < this.field1367.frames.length);
 				this.field1383 -= this.field1367.field1972;
-			} while (this.field1383 >= 0 && this.field1367.field1965.length > this.field1383);
+			} while (this.field1383 >= 0 && this.field1367.frames.length > this.field1383);
 			this.field1383 = 0;
 		}
 	}
@@ -137,7 +137,7 @@ public final class ClientProj extends ModelSource {
 	@ObfuscatedName("h.b(I)Lcg;")
 	public ModelLit method518() {
 		SpotType var1 = SpotType.list(this.field1400);
-		ModelLit var2 = var1.method209(this.field1383);
+		ModelLit var2 = var1.getTempModel2(this.field1383);
 		if (var2 == null) {
 			return null;
 		} else {

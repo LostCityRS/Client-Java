@@ -41,7 +41,7 @@ public final class TextureOp17 extends TextureOp {
 	@Override
 	public void method11(Packet arg0, int arg1) {
 		if (arg1 == 0) {
-			this.field3226 = arg0.method334();
+			this.field3226 = arg0.g2b();
 		} else if (arg1 == 1) {
 			this.field3218 = (arg0.g1b() << 12) / 100;
 		} else if (arg1 == 2) {

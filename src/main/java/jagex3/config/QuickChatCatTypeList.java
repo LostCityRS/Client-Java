@@ -44,7 +44,7 @@ public final class QuickChatCatTypeList extends Linkable2 {
 
 	@ObfuscatedName("kf.a(II)Lkh;")
 	public static QuickChatCatTypeList method783(int arg0) {
-		QuickChatCatTypeList var1 = (QuickChatCatTypeList) field2856.method665((long) arg0);
+		QuickChatCatTypeList var1 = (QuickChatCatTypeList) field2856.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -61,7 +61,7 @@ public final class QuickChatCatTypeList extends Linkable2 {
 		if (arg0 >= 32768) {
 			var3.method797();
 		}
-		field2856.method663((long) arg0, var3);
+		field2856.put((long) arg0, var3);
 		return var3;
 	}
 

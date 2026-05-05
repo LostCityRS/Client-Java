@@ -236,9 +236,9 @@ public final class JagString implements StringInterface {
 			var1 = join(new JagString[] { var1.method623(0, var2), Statics.field979, var1.method635(var2) });
 		}
 		if (var1.method604() > 9) {
-			return join(new JagString[] { Statics.field2828, var1.method623(0, var1.method604() - 8), Text.field2469, Statics.field1238, var1, Statics.field3982});
+			return join(new JagString[] { Statics.field2828, var1.method623(0, var1.method604() - 8), Text.MILLION, Statics.field1238, var1, Statics.field3982});
 		} else if (var1.method604() > 6) {
-			return join(new JagString[] {Statics.field644, var1.method623(0, var1.method604() - 4), Text.field3071, Statics.field1238, var1, Statics.field3982});
+			return join(new JagString[] {Statics.field644, var1.method623(0, var1.method604() - 4), Text.THOUSAND, Statics.field1238, var1, Statics.field3982});
 		} else {
 			return join(new JagString[] {Statics.field1370, var1, Statics.field2199});
 		}
@@ -369,7 +369,7 @@ public final class JagString implements StringInterface {
 			if (Statics.field4313 == null) {
 				Statics.field4313 = new HashTable(4096);
 			} else {
-				for (StringNode var5 = (StringNode) Statics.field4313.method1049(var2); var5 != null; var5 = (StringNode) Statics.field4313.method1054(3)) {
+				for (StringNode var5 = (StringNode) Statics.field4313.find(var2); var5 != null; var5 = (StringNode) Statics.field4313.method1054(3)) {
 					if (this.method597(var5.field4046)) {
 						return var5.field4046;
 					}

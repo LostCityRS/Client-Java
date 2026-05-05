@@ -11,13 +11,13 @@ import jagex3.js5.Js5;
 public final class MidiFile extends Linkable {
 
 	@ObfuscatedName("ic.t")
-	public HashTable field1715;
+	public HashTable patches;
 
 	@ObfuscatedName("ic.u")
-	public final byte[] field1716;
+	public final byte[] midi;
 
 	@ObfuscatedName("ic.a(Lnb;II)Lic;")
-	public static MidiFile method662(Js5 arg0, int arg1, int arg2) {
+	public static MidiFile load(Js5 arg0, int arg1, int arg2) {
 		byte[] var3 = arg0.getFile(arg2, arg1);
 		return var3 == null ? null : new MidiFile(new Packet(var3));
 	}
@@ -74,7 +74,7 @@ public final class MidiFile extends Linkable {
 		int var19 = arg0.pos;
 		int var20 = var2 + var5 + var6 + var7 + var8 + var9 + var10 + var11 + var12;
 		for (int var21 = 0; var21 < var20; var21++) {
-			arg0.method317();
+			arg0.gMidiVarLen();
 		}
 		int var22 = var18 + arg0.pos - var19;
 		int var23 = arg0.pos;
@@ -164,13 +164,13 @@ public final class MidiFile extends Linkable {
 		arg0.pos += var33;
 		int var59 = arg0.pos;
 		arg0.pos += var5 * 3;
-		this.field1716 = new byte[var22];
-		Packet var60 = new Packet(this.field1716);
+		this.midi = new byte[var22];
+		Packet var60 = new Packet(this.midi);
 		var60.p4(1297377380);
 		var60.p4(6);
-		var60.method305(var2 > 1 ? 1 : 0);
-		var60.method305(var2);
-		var60.method305(var3);
+		var60.p2(var2 > 1 ? 1 : 0);
+		var60.p2(var2);
+		var60.p2(var3);
 		arg0.pos = var19;
 		int var61 = 0;
 		int var62 = 0;
@@ -188,8 +188,8 @@ public final class MidiFile extends Linkable {
 			int var72 = -1;
 			while (true) {
 				while (true) {
-					int var73 = arg0.method317();
-					var60.method329(var73);
+					int var73 = arg0.gMidiVarLen();
+					var60.pMidiVarLen(var73);
 					int var74 = arg0.data[var38++] & 0xFF;
 					boolean var75 = var74 != var72;
 					var72 = var74 & 0xF;
@@ -304,30 +304,30 @@ public final class MidiFile extends Linkable {
 
 	@ObfuscatedName("ic.a()V")
 	public void method660() {
-		if (this.field1715 != null) {
+		if (this.patches != null) {
 			return;
 		}
-		this.field1715 = new HashTable(16);
+		this.patches = new HashTable(16);
 		int[] var1 = new int[16];
 		int[] var2 = new int[16];
 		var1[9] = var2[9] = 128;
-		MidiParser var3 = new MidiParser(this.field1716);
-		int var4 = var3.method266();
+		MidiParser var3 = new MidiParser(this.midi);
+		int var4 = var3.getTrackCount();
 		for (int var5 = 0; var5 < var4; var5++) {
-			var3.method261(var5);
-			var3.method274(var5);
-			var3.method259(var5);
+			var3.setTrack(var5);
+			var3.processDeltaTime(var5);
+			var3.unsetTrack(var5);
 		}
 		label53: do {
 			while (true) {
-				int var6 = var3.method272();
-				int var7 = var3.field704[var6];
-				while (var3.field704[var6] == var7) {
-					var3.method261(var6);
-					int var8 = var3.method271(var6);
+				int var6 = var3.nextTrackToPlay();
+				int var7 = var3.trackCurrentTick[var6];
+				while (var3.trackCurrentTick[var6] == var7) {
+					var3.setTrack(var6);
+					int var8 = var3.getEvent(var6);
 					if (var8 == 1) {
-						var3.method273();
-						var3.method259(var6);
+						var3.finishTrack();
+						var3.unsetTrack(var6);
 						continue label53;
 					}
 					int var9 = var8 & 0xF0;
@@ -353,23 +353,23 @@ public final class MidiFile extends Linkable {
 						int var17 = var8 >> 16 & 0x7F;
 						if (var17 > 0) {
 							int var18 = var2[var15];
-							ByteArrayNode var19 = (ByteArrayNode) this.field1715.method1049((long) var18);
+							ByteArrayNode var19 = (ByteArrayNode) this.patches.find((long) var18);
 							if (var19 == null) {
 								var19 = new ByteArrayNode(new byte[128]);
-								this.field1715.put((long) var18, var19);
+								this.patches.put((long) var18, var19);
 							}
 							var19.field2956[var16] = 1;
 						}
 					}
-					var3.method274(var6);
-					var3.method259(var6);
+					var3.processDeltaTime(var6);
+					var3.unsetTrack(var6);
 				}
 			}
-		} while (!var3.method260());
+		} while (!var3.allTracksFinished());
 	}
 
 	@ObfuscatedName("ic.b()V")
 	public void method661() {
-		this.field1715 = null;
+		this.patches = null;
 	}
 }

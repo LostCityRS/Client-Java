@@ -88,7 +88,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@ObfuscatedName("hj.a(ILq;)Lq;")
 	public static IfType method583(IfType arg0) {
-		int var1 = ServerActive.method81(Client.method530(arg0));
+		int var1 = ServerActive.serverDraggable(Client.method530(arg0));
 		if (var1 == 0) {
 			return null;
 		}
@@ -188,8 +188,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 		byte[] var1 = new byte[24];
 		if (field3529 != null) {
 			try {
-				field3529.method818(0L);
-				field3529.method810(var1);
+				field3529.seek(0L);
+				field3529.read(var1);
 				int var2;
 				for (var2 = 0; var2 < 24 && var1[var2] == 0; var2++) {
 				}
@@ -209,8 +209,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public static void method725(Packet arg0) {
 		if (field3529 != null) {
 			try {
-				field3529.method818(0L);
-				field3529.method806(arg0.data, 24, arg0.pos);
+				field3529.seek(0L);
+				field3529.write(arg0.data, 24, arg0.pos);
 			} catch (Exception var1) {
 			}
 		}

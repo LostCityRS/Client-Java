@@ -276,7 +276,7 @@ public final class IfType {
 	public int field3404 = -1;
 
 	@ObfuscatedName("q.Rb")
-	public JagString field3460 = Text.field3043;
+	public JagString field3460 = Text.OK;
 
 	@ObfuscatedName("q.P")
 	public int field3406 = -1;
@@ -495,8 +495,8 @@ public final class IfType {
 		Statics.field1176 = arg0;
 		interfaces = arg1;
 		Statics.field1926 = arg2;
-		list = new IfType[interfaces.method940()][];
-		open = new boolean[interfaces.method940()];
+		list = new IfType[interfaces.getGroupCount()][];
+		open = new boolean[interfaces.getGroupCount()];
 	}
 
 	@ObfuscatedName("da.c(IB)V")
@@ -504,7 +504,7 @@ public final class IfType {
 		if (arg0 == -1 || !open[arg0]) {
 			return;
 		}
-		interfaces.method955(arg0);
+		interfaces.discardFiles(arg0);
 		if (list[arg0] == null) {
 			return;
 		}
@@ -562,7 +562,7 @@ public final class IfType {
 				modelCache.put((long) ((var5 << 16) + var6), var7);
 			}
 			if (arg0 != null) {
-				var7 = arg0.method758(arg2, var7);
+				var7 = arg0.animateModelWithExtra(arg2, var7);
 			}
 			return var7;
 		} else if (var5 == 2) {
@@ -586,7 +586,7 @@ public final class IfType {
 			}
 		} else if (var5 == 4) {
 			ObjType var11 = ObjType.list(var6);
-			ModelLit var12 = var11.method1025(10, arg2, arg0);
+			ModelLit var12 = var11.getModelLit(10, arg2, arg0);
 			if (var12 == null) {
 				loadingAsset = true;
 				return null;
@@ -615,20 +615,20 @@ public final class IfType {
 		if (var1 == null) {
 			return false;
 		}
-		var1.method1337();
-		this.field3402 = new int[var1.field2437];
-		this.field3421 = new int[var1.field2437];
-		for (int var2 = 0; var2 < var1.field2437; var2++) {
+		var1.trim();
+		this.field3402 = new int[var1.hi];
+		this.field3421 = new int[var1.hi];
+		for (int var2 = 0; var2 < var1.hi; var2++) {
 			int var3 = 0;
-			int var4 = var1.field2434;
-			for (int var5 = 0; var5 < var1.field2434; var5++) {
-				if (var1.field3704[var5 + var2 * var1.field2434] != 0) {
+			int var4 = var1.wi;
+			for (int var5 = 0; var5 < var1.wi; var5++) {
+				if (var1.data[var5 + var2 * var1.wi] != 0) {
 					var3 = var5;
 					break;
 				}
 			}
-			for (int var6 = var3; var6 < var1.field2434; var6++) {
-				if (var1.field3704[var6 + var1.field2434 * var2] == 0) {
+			for (int var6 = var3; var6 < var1.wi; var6++) {
+				if (var1.data[var6 + var1.wi * var2] == 0) {
 					var4 = var6;
 					break;
 				}
@@ -649,7 +649,7 @@ public final class IfType {
 		if (var2 == -1) {
 			return null;
 		}
-		Pix32 var3 = (Pix32) field2039.method665((long) var2);
+		Pix32 var3 = (Pix32) field2039.find((long) var2);
 		if (var3 != null) {
 			return var3;
 		}
@@ -657,7 +657,7 @@ public final class IfType {
 		if (var4 == null) {
 			loadingAsset = true;
 		} else {
-			field2039.method663((long) var2, var4);
+			field2039.put((long) var2, var4);
 		}
 		return var4;
 	}
@@ -675,7 +675,7 @@ public final class IfType {
 			return null;
 		}
 		long var3 = ((long) this.field3425 << 40) + ((this.field3483 ? 1L : 0L) << 39) + ((this.field3387 ? 1L : 0L) << 38) + (long) var2 + ((this.field3477 ? 1L : 0L) << 35) + ((long) this.field3429 << 36);
-		Pix32 var5 = (Pix32) field2039.method665(var3);
+		Pix32 var5 = (Pix32) field2039.find(var3);
 		if (var5 != null) {
 			return var5;
 		}
@@ -685,24 +685,24 @@ public final class IfType {
 			return null;
 		}
 		if (this.field3387) {
-			var6.method1171();
+			var6.vflip();
 		}
 		if (this.field3483) {
-			var6.method1159();
+			var6.hflip();
 		}
 		if (this.field3429 > 0) {
-			var6.method1173(this.field3429);
+			var6.untrim(this.field3429);
 		}
 		if (this.field3429 >= 1) {
-			var6.method1168(1);
+			var6.addOutline(1);
 		}
 		if (this.field3429 >= 2) {
-			var6.method1168(16777215);
+			var6.addOutline(16777215);
 		}
 		if (this.field3425 != 0) {
-			var6.method1154(this.field3425);
+			var6.addShadow(this.field3425);
 		}
-		field2039.method663(var3, var6);
+		field2039.put(var3, var6);
 		return var6;
 	}
 
@@ -712,8 +712,8 @@ public final class IfType {
 		this.field3410 = true;
 		this.field3390 = arg0.g1();
 		this.field3439 = arg0.g2();
-		this.field3391 = arg0.method334();
-		this.field3514 = arg0.method334();
+		this.field3391 = arg0.g2b();
+		this.field3514 = arg0.g2b();
 		this.field3501 = arg0.g2();
 		this.field3418 = arg0.g2();
 		this.field3463 = arg0.g1b();
@@ -750,8 +750,8 @@ public final class IfType {
 			if (this.field3409 == 65535) {
 				this.field3409 = -1;
 			}
-			this.field3432 = arg0.method334();
-			this.field3405 = arg0.method334();
+			this.field3432 = arg0.g2b();
+			this.field3405 = arg0.g2b();
 			this.field3455 = arg0.g2();
 			this.field3509 = arg0.g2();
 			this.field3517 = arg0.g2();
@@ -853,7 +853,7 @@ public final class IfType {
 		if (this.field3461 == -1) {
 			return null;
 		}
-		PixfontGeneric var2 = (PixfontGeneric) field3020.method665((long) this.field3461);
+		PixfontGeneric var2 = (PixfontGeneric) field3020.find((long) this.field3461);
 		if (var2 != null) {
 			return var2;
 		}
@@ -862,7 +862,7 @@ public final class IfType {
 			loadingAsset = true;
 		} else {
 			var3.method149(arg0, null);
-			field3020.method663((long) this.field3461, var3);
+			field3020.put((long) this.field3461, var3);
 		}
 		return var3;
 	}
@@ -906,8 +906,8 @@ public final class IfType {
 		this.field3390 = arg0.g1();
 		this.field3368 = arg0.g1();
 		this.field3439 = arg0.g2();
-		this.field3391 = arg0.method334();
-		this.field3514 = arg0.method334();
+		this.field3391 = arg0.g2b();
+		this.field3514 = arg0.g2b();
 		this.field3501 = arg0.g2();
 		this.field3418 = arg0.g2();
 		this.field3394 = 0;
@@ -985,8 +985,8 @@ public final class IfType {
 			for (int var12 = 0; var12 < 20; var12++) {
 				int var13 = arg0.g1();
 				if (var13 == 1) {
-					this.field3472[var12] = arg0.method334();
-					this.field3397[var12] = arg0.method334();
+					this.field3472[var12] = arg0.g2b();
+					this.field3397[var12] = arg0.g2b();
 					this.field3389[var12] = arg0.g4();
 				} else {
 					this.field3389[var12] = -1;
@@ -1065,8 +1065,8 @@ public final class IfType {
 			}
 			this.field3435 = arg0.g1() == 1;
 			this.field3414 = arg0.g4();
-			this.field3466 = arg0.method334();
-			this.field3508 = arg0.method334();
+			this.field3466 = arg0.g2b();
+			this.field3508 = arg0.g2b();
 			int var16 = arg0.g1();
 			this.field3511 = new JagString[5];
 			if (var16 == 1) {
@@ -1093,16 +1093,16 @@ public final class IfType {
 			this.field3460 = arg0.gjstr();
 			if (this.field3460.method604() == 0) {
 				if (this.field3368 == 1) {
-					this.field3460 = Text.field3043;
+					this.field3460 = Text.OK;
 				}
 				if (this.field3368 == 4) {
-					this.field3460 = Text.field4051;
+					this.field3460 = Text.SELECT;
 				}
 				if (this.field3368 == 5) {
-					this.field3460 = Text.field4051;
+					this.field3460 = Text.SELECT;
 				}
 				if (this.field3368 == 6) {
-					this.field3460 = Text.field3665;
+					this.field3460 = Text.CONTINUE;
 				}
 			}
 		}

@@ -49,7 +49,7 @@ public final class ColorImageCache {
 		}
 		this.field4306 = null;
 		this.field4291 = null;
-		this.field4300.method1616();
+		this.field4300.clear();
 		this.field4300 = null;
 	}
 
@@ -82,7 +82,7 @@ public final class ColorImageCache {
 					var2 = new ColorImageCacheEntry(arg0, this.field4296);
 					this.field4296++;
 				} else {
-					ColorImageCacheEntry var3 = (ColorImageCacheEntry) this.field4300.method1612();
+					ColorImageCacheEntry var3 = (ColorImageCacheEntry) this.field4300.tail();
 					var2 = new ColorImageCacheEntry(arg0, var3.field3006);
 					this.field4291[var3.field3015] = null;
 					var3.unlink();
@@ -91,7 +91,7 @@ public final class ColorImageCache {
 			} else {
 				this.field4310 = false;
 			}
-			this.field4300.method1615(var2);
+			this.field4300.pushFront(var2);
 			return this.field4306[var2.field3006];
 		}
 	}

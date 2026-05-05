@@ -195,7 +195,7 @@ public final class ClientPlayer extends ClientEntity {
 		ModelLit var56 = null;
 		if (!this.field743 && super.field4080 != -1 && super.field4075 != -1) {
 			SpotType var57 = SpotType.list(super.field4080);
-			var56 = var57.method209(super.field4075);
+			var56 = var57.getTempModel2(super.field4075);
 			if (var56 != null) {
 				var56.method180(0, -super.field4125, 0);
 				if (var57.field527) {
@@ -288,7 +288,7 @@ public final class ClientPlayer extends ClientEntity {
 				if (var10 >= 32768) {
 					int var11 = Statics.field1698[var10 - 32768];
 					var6[var7] = var11 | 0x40000000;
-					int var12 = ObjType.list(var11).field2836;
+					int var12 = ObjType.list(var11).team;
 					if (var12 != 0) {
 						this.field752 = var12;
 					}

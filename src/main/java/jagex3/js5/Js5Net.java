@@ -12,93 +12,93 @@ import java.util.zip.CRC32;
 
 public class Js5Net {
 	@ObfuscatedName("ha.t")
-	public static final Packet field1408 = new Packet(8);
+	public static final Packet incomingTransferHeader = new Packet(8);
 	@ObfuscatedName("nj.a")
-	public static final HashTable field2922 = new HashTable(32);
+	public static final HashTable urgentQueue = new HashTable(32);
 	@ObfuscatedName("jj.s")
-	public static final HashTable field1951 = new HashTable(4096);
+	public static final HashTable prefetchQueue = new HashTable(4096);
 	@ObfuscatedName("mg.yb")
-	public static final LinkList2 field2559 = new LinkList2();
+	public static final LinkList2 requestQueue = new LinkList2();
 	@ObfuscatedName("si.K")
-	public static final HashTable field3907 = new HashTable(4096);
+	public static final HashTable pendingPrefetchQueue = new HashTable(4096);
 	@ObfuscatedName("wb.e")
-	public static final HashTable field4465 = new HashTable(4096);
+	public static final HashTable pendingUrgentQueue = new HashTable(4096);
 	@ObfuscatedName("id.p")
-	public static final CRC32 field1732 = new CRC32();
+	public static final CRC32 crc32 = new CRC32();
 	@ObfuscatedName("ai.a")
 	public static final Js5Loader[] field141 = new Js5Loader[256];
 	@ObfuscatedName("ng.Zb")
-	public static Packet field2908;
+	public static Packet incomingGroupBuffer;
 	@ObfuscatedName("tg.a")
-	public static ClientStream field4033;
+	public static ClientStream stream;
 	@ObfuscatedName("ce.bb")
-	public static int field473 = 0;
+	public static int incomingChunkPos = 0;
 	@ObfuscatedName("eh.x")
-	public static Js5NetRequest field990;
+	public static Js5NetRequest incomingRequest;
 	@ObfuscatedName("bf.D")
-	public static byte field294 = 0;
+	public static byte xorKey = 0;
 	@ObfuscatedName("nh.h")
-	public static int field2916 = 0;
+	public static int timeoutMs = 0;
 	@ObfuscatedName("hd.p")
-	public static long field1456;
+	public static long lastTickMs;
 	@ObfuscatedName("ub.Z")
-	public static int field4157 = 0;
+	public static int pendingPrefetchQueueSize = 0;
 	@ObfuscatedName("vb.P")
-	public static int field4333 = 0;
+	public static int prefetchQueueSize = 0;
 	@ObfuscatedName("sg.C")
-	public static int field3876 = 0;
+	public static int urgentQueueSize = 0;
 	@ObfuscatedName("ta.R")
-	public static int field3943 = 0;
+	public static int pendingUrgentQueueSize = 0;
 	@ObfuscatedName("h.K")
-	public static int field1389 = 0;
+	public static int ioErrorCount = 0;
 	@ObfuscatedName("mg.Gb")
-	public static boolean field2567;
+	public static boolean incomingUrgentRequest;
 	@ObfuscatedName("nj.q")
-	public static int field2938 = 0;
+	public static int crcErrorCount = 0;
 	@ObfuscatedName("hb.T")
-	public static Packet field1427;
+	public static Packet masterIndexBuffer;
 
 	@ObfuscatedName("ja.a(I)Z")
-	public static boolean method687() {
+	public static boolean loop() {
 		long var0 = MonotonicTime.currentTime();
-		int var2 = (int) (var0 - field1456);
+		int var2 = (int) (var0 - lastTickMs);
 		if (var2 > 200) {
 			var2 = 200;
 		}
-		field2916 += var2;
-		field1456 = var0;
-		if (field4333 == 0 && field3876 == 0 && field4157 == 0 && field3943 == 0) {
+		timeoutMs += var2;
+		lastTickMs = var0;
+		if (prefetchQueueSize == 0 && urgentQueueSize == 0 && pendingPrefetchQueueSize == 0 && pendingUrgentQueueSize == 0) {
 			return true;
-		} else if (field4033 == null) {
+		} else if (stream == null) {
 			return false;
 		} else {
 			try {
-				if (field2916 > 30000) {
+				if (timeoutMs > 30000) {
 					throw new IOException();
 				}
-				while (field3876 < 20 && field3943 > 0) {
-					Js5NetRequest var3 = (Js5NetRequest) field4465.method1047();
+				while (urgentQueueSize < 20 && pendingUrgentQueueSize > 0) {
+					Js5NetRequest var3 = (Js5NetRequest) pendingUrgentQueue.search();
 					Packet var4 = new Packet(4);
 					var4.p1(1);
-					var4.method337((int) var3.key);
-					field4033.write(4, var4.data);
-					field2922.put(var3.key, var3);
-					field3943--;
-					field3876++;
+					var4.p3((int) var3.key);
+					stream.write(4, var4.data);
+					urgentQueue.put(var3.key, var3);
+					pendingUrgentQueueSize--;
+					urgentQueueSize++;
 				}
-				while (field4333 < 20 && field4157 > 0) {
-					Js5NetRequest var5 = (Js5NetRequest) field2559.method1381();
+				while (prefetchQueueSize < 20 && pendingPrefetchQueueSize > 0) {
+					Js5NetRequest var5 = (Js5NetRequest) requestQueue.next();
 					Packet var6 = new Packet(4);
 					var6.p1(0);
-					var6.method337((int) var5.key);
-					field4033.write(4, var6.data);
-					var5.method907();
-					field1951.put(var5.key, var5);
-					field4333++;
-					field4157--;
+					var6.p3((int) var5.key);
+					stream.write(4, var6.data);
+					var5.unlink2();
+					prefetchQueue.put(var5.key, var5);
+					prefetchQueueSize++;
+					pendingPrefetchQueueSize--;
 				}
 				for (int var7 = 0; var7 < 100; var7++) {
-					int var8 = field4033.available();
+					int var8 = stream.available();
 					if (var8 < 0) {
 						throw new IOException();
 					}
@@ -106,284 +106,284 @@ public class Js5Net {
 						break;
 					}
 					byte var9 = 0;
-					field2916 = 0;
-					if (field990 == null) {
+					timeoutMs = 0;
+					if (incomingRequest == null) {
 						var9 = 8;
-					} else if (field473 == 0) {
+					} else if (incomingChunkPos == 0) {
 						var9 = 1;
 					}
 					if (var9 > 0) {
-						int var10 = var9 - field1408.pos;
+						int var10 = var9 - incomingTransferHeader.pos;
 						if (var8 < var10) {
 							var10 = var8;
 						}
-						field4033.read(field1408.pos, field1408.data, var10);
-						if (field294 != 0) {
+						stream.read(incomingTransferHeader.pos, incomingTransferHeader.data, var10);
+						if (xorKey != 0) {
 							for (int var11 = 0; var11 < var10; var11++) {
-								field1408.data[field1408.pos + var11] ^= field294;
+								incomingTransferHeader.data[incomingTransferHeader.pos + var11] ^= xorKey;
 							}
 						}
-						field1408.pos += var10;
-						if (var9 > field1408.pos) {
+						incomingTransferHeader.pos += var10;
+						if (var9 > incomingTransferHeader.pos) {
 							break;
 						}
-						if (field990 == null) {
-							field1408.pos = 0;
-							int var12 = field1408.g1();
-							int var13 = field1408.g2();
+						if (incomingRequest == null) {
+							incomingTransferHeader.pos = 0;
+							int var12 = incomingTransferHeader.g1();
+							int var13 = incomingTransferHeader.g2();
 							long var14 = (long) (var13 + (var12 << 16));
-							int var16 = field1408.g1();
-							int var17 = field1408.g4();
-							Js5NetRequest var18 = (Js5NetRequest) field2922.method1049(var14);
-							field2567 = true;
+							int var16 = incomingTransferHeader.g1();
+							int var17 = incomingTransferHeader.g4();
+							Js5NetRequest var18 = (Js5NetRequest) urgentQueue.find(var14);
+							incomingUrgentRequest = true;
 							if (var18 == null) {
-								var18 = (Js5NetRequest) field1951.method1049(var14);
-								field2567 = false;
+								var18 = (Js5NetRequest) prefetchQueue.find(var14);
+								incomingUrgentRequest = false;
 							}
 							if (var18 == null) {
 								throw new IOException();
 							}
-							field990 = var18;
+							incomingRequest = var18;
 							int var19 = var16 == 0 ? 5 : 9;
-							field2908 = new Packet(var17 + var19 + field990.field1782);
-							field2908.p1(var16);
-							field2908.p4(var17);
-							field1408.pos = 0;
-							field473 = 8;
-						} else if (field473 == 0) {
-							if (field1408.data[0] == -1) {
-								field1408.pos = 0;
-								field473 = 1;
+							incomingGroupBuffer = new Packet(var17 + var19 + incomingRequest.padding);
+							incomingGroupBuffer.p1(var16);
+							incomingGroupBuffer.p4(var17);
+							incomingTransferHeader.pos = 0;
+							incomingChunkPos = 8;
+						} else if (incomingChunkPos == 0) {
+							if (incomingTransferHeader.data[0] == -1) {
+								incomingTransferHeader.pos = 0;
+								incomingChunkPos = 1;
 							} else {
-								field990 = null;
+								incomingRequest = null;
 							}
 						}
 					} else {
-						int var20 = field2908.data.length - field990.field1782;
-						int var21 = 512 - field473;
-						if (var21 > var20 - field2908.pos) {
-							var21 = var20 - field2908.pos;
+						int var20 = incomingGroupBuffer.data.length - incomingRequest.padding;
+						int var21 = 512 - incomingChunkPos;
+						if (var21 > var20 - incomingGroupBuffer.pos) {
+							var21 = var20 - incomingGroupBuffer.pos;
 						}
 						if (var8 < var21) {
 							var21 = var8;
 						}
-						field4033.read(field2908.pos, field2908.data, var21);
-						if (field294 != 0) {
+						stream.read(incomingGroupBuffer.pos, incomingGroupBuffer.data, var21);
+						if (xorKey != 0) {
 							for (int var22 = 0; var22 < var21; var22++) {
-								field2908.data[var22 + field2908.pos] ^= field294;
+								incomingGroupBuffer.data[var22 + incomingGroupBuffer.pos] ^= xorKey;
 							}
 						}
-						field2908.pos += var21;
-						field473 += var21;
-						if (field2908.pos == var20) {
-							if (field990.key == 16711935L) {
-								field1427 = field2908;
+						incomingGroupBuffer.pos += var21;
+						incomingChunkPos += var21;
+						if (incomingGroupBuffer.pos == var20) {
+							if (incomingRequest.key == 16711935L) {
+								masterIndexBuffer = incomingGroupBuffer;
 								for (int var23 = 0; var23 < 256; var23++) {
 									Js5Loader var24 = field141[var23];
 									if (var24 != null) {
-										field1427.pos = var23 * 8 + 5;
-										int var25 = field1427.g4();
-										int var26 = field1427.g4();
-										var24.method109(var25, var26);
+										masterIndexBuffer.pos = var23 * 8 + 5;
+										int var25 = masterIndexBuffer.g4();
+										int var26 = masterIndexBuffer.g4();
+										var24.requestIndex(var25, var26);
 									}
 								}
 							} else {
-								field1732.reset();
-								field1732.update(field2908.data, 0, var20);
-								int var27 = (int) field1732.getValue();
-								if (field990.field1780 != var27) {
+								crc32.reset();
+								crc32.update(incomingGroupBuffer.data, 0, var20);
+								int var27 = (int) crc32.getValue();
+								if (incomingRequest.expectedCrc != var27) {
 									try {
-										field4033.close();
+										stream.close();
 									} catch (Exception var29) {
 									}
-									field294 = (byte) (Math.random() * 255.0D + 1.0D);
-									field2938++;
-									field4033 = null;
+									xorKey = (byte) (Math.random() * 255.0D + 1.0D);
+									crcErrorCount++;
+									stream = null;
 									return false;
 								}
-								field2938 = 0;
-								field1389 = 0;
-								field990.field1787.method105((int) (field990.key & 0xFFFFL), field2908.data, field2567, (field990.key & 0xFF0000L) == 16711680L);
+								crcErrorCount = 0;
+								ioErrorCount = 0;
+								incomingRequest.provider.write((int) (incomingRequest.key & 0xFFFFL), incomingGroupBuffer.data, incomingUrgentRequest, (incomingRequest.key & 0xFF0000L) == 16711680L);
 							}
-							field990.unlink();
-							field473 = 0;
-							if (field2567) {
-								field3876--;
+							incomingRequest.unlink();
+							incomingChunkPos = 0;
+							if (incomingUrgentRequest) {
+								urgentQueueSize--;
 							} else {
-								field4333--;
+								prefetchQueueSize--;
 							}
-							field990 = null;
-							field2908 = null;
+							incomingRequest = null;
+							incomingGroupBuffer = null;
 						} else {
-							if (field473 != 512) {
+							if (incomingChunkPos != 512) {
 								break;
 							}
-							field473 = 0;
+							incomingChunkPos = 0;
 						}
 					}
 				}
 				return true;
 			} catch (IOException var30) {
 				try {
-					field4033.close();
+					stream.close();
 				} catch (Exception var28) {
 				}
-				field1389++;
-				field4033 = null;
+				ioErrorCount++;
+				stream = null;
 				return false;
 			}
 		}
 	}
 
 	@ObfuscatedName("hc.a(ZILmf;)V")
-	public static void method529(boolean arg0, ClientStream arg1) {
-		if (field4033 != null) {
+	public static void init(boolean arg0, ClientStream arg1) {
+		if (stream != null) {
 			try {
-				field4033.close();
+				stream.close();
 			} catch (Exception var7) {
 			}
-			field4033 = null;
+			stream = null;
 		}
-		field4033 = arg1;
-		method988(arg0);
-		field2908 = null;
-		field473 = 0;
-		field990 = null;
-		field1408.pos = 0;
+		stream = arg1;
+		sendLoginLogoutPacket(arg0);
+		incomingGroupBuffer = null;
+		incomingChunkPos = 0;
+		incomingRequest = null;
+		incomingTransferHeader.pos = 0;
 		while (true) {
-			Js5NetRequest var2 = (Js5NetRequest) field2922.method1047();
+			Js5NetRequest var2 = (Js5NetRequest) urgentQueue.search();
 			if (var2 == null) {
 				while (true) {
-					Js5NetRequest var3 = (Js5NetRequest) field1951.method1047();
+					Js5NetRequest var3 = (Js5NetRequest) prefetchQueue.search();
 					if (var3 == null) {
-						if (field294 != 0) {
+						if (xorKey != 0) {
 							try {
 								Packet var4 = new Packet(4);
 								var4.p1(4);
-								var4.p1(field294);
-								var4.method305(0);
-								field4033.write(4, var4.data);
+								var4.p1(xorKey);
+								var4.p2(0);
+								stream.write(4, var4.data);
 							} catch (IOException var6) {
 								try {
-									field4033.close();
+									stream.close();
 								} catch (Exception var5) {
 								}
-								field4033 = null;
-								field1389++;
+								stream = null;
+								ioErrorCount++;
 							}
 						}
-						field2916 = 0;
-						field1456 = MonotonicTime.currentTime();
+						timeoutMs = 0;
+						lastTickMs = MonotonicTime.currentTime();
 						return;
 					}
-					field2559.method1388(var3);
-					field3907.put(var3.key, var3);
-					field4157++;
-					field4333--;
+					requestQueue.pushFront(var3);
+					pendingPrefetchQueue.put(var3.key, var3);
+					pendingPrefetchQueueSize++;
+					prefetchQueueSize--;
 				}
 			}
-			field4465.put(var2.key, var2);
-			field3876--;
-			field3943++;
+			pendingUrgentQueue.put(var2.key, var2);
+			urgentQueueSize--;
+			pendingUrgentQueueSize++;
 		}
 	}
 
 	@ObfuscatedName("ne.a(BZ)V")
-	public static void method988(boolean arg0) {
-		if (field4033 == null) {
+	public static void sendLoginLogoutPacket(boolean arg0) {
+		if (stream == null) {
 			return;
 		}
 		try {
 			Packet var1 = new Packet(4);
 			var1.p1(arg0 ? 2 : 3);
-			var1.method337(0);
-			field4033.write(4, var1.data);
+			var1.p3(0);
+			stream.write(4, var1.data);
 		} catch (IOException var3) {
 			try {
-				field4033.close();
+				stream.close();
 			} catch (Exception var2) {
 			}
-			field4033 = null;
-			field1389++;
+			stream = null;
+			ioErrorCount++;
 		}
 	}
 
 	@ObfuscatedName("rc.a(Lbj;IIBIIZ)V")
-	public static void method1312(Js5Loader arg0, int arg1, int arg2, byte arg3, int arg4, boolean arg5) {
+	public static void queueRequest(Js5Loader arg0, int arg1, int arg2, byte arg3, int arg4, boolean arg5) {
 		long var6 = (long) (arg1 + (arg2 << 16));
-		Js5NetRequest var8 = (Js5NetRequest) field4465.method1049(var6);
+		Js5NetRequest var8 = (Js5NetRequest) pendingUrgentQueue.find(var6);
 		if (var8 != null) {
 			return;
 		}
-		Js5NetRequest var9 = (Js5NetRequest) field2922.method1049(var6);
+		Js5NetRequest var9 = (Js5NetRequest) urgentQueue.find(var6);
 		if (var9 != null) {
 			return;
 		}
-		Js5NetRequest var10 = (Js5NetRequest) field3907.method1049(var6);
+		Js5NetRequest var10 = (Js5NetRequest) pendingPrefetchQueue.find(var6);
 		if (var10 == null) {
 			if (!arg5) {
-				Js5NetRequest var11 = (Js5NetRequest) field1951.method1049(var6);
+				Js5NetRequest var11 = (Js5NetRequest) prefetchQueue.find(var6);
 				if (var11 != null) {
 					return;
 				}
 			}
 			Js5NetRequest var12 = new Js5NetRequest();
-			var12.field1782 = arg3;
-			var12.field1780 = arg4;
-			var12.field1787 = arg0;
+			var12.padding = arg3;
+			var12.expectedCrc = arg4;
+			var12.provider = arg0;
 			if (arg5) {
-				field4465.put(var6, var12);
-				field3943++;
+				pendingUrgentQueue.put(var6, var12);
+				pendingUrgentQueueSize++;
 			} else {
-				field2559.method1387(var12);
-				field3907.put(var6, var12);
-				field4157++;
+				requestQueue.push(var12);
+				pendingPrefetchQueue.put(var6, var12);
+				pendingPrefetchQueueSize++;
 			}
 		} else if (arg5) {
-			var10.method907();
-			field4465.put(var6, var10);
-			field4157--;
-			field3943++;
+			var10.unlink2();
+			pendingUrgentQueue.put(var6, var10);
+			pendingPrefetchQueueSize--;
+			pendingUrgentQueueSize++;
 		}
 	}
 
 	@ObfuscatedName("fc.a(III)V")
-	public static void method426(int arg0, int arg1) {
+	public static void updateCacheHint(int arg0, int arg1) {
 		long var2 = (long) ((arg0 << 16) + arg1);
-		Js5NetRequest var4 = (Js5NetRequest) field3907.method1049(var2);
+		Js5NetRequest var4 = (Js5NetRequest) pendingPrefetchQueue.find(var2);
 		if (var4 != null) {
-			field2559.method1388(var4);
+			requestQueue.pushFront(var4);
 		}
 	}
 
 	@ObfuscatedName("e.f(I)V")
 	public static void method290() {
-		if (field4033 != null) {
-			field4033.close();
+		if (stream != null) {
+			stream.close();
 		}
 	}
 
 	@ObfuscatedName("kj.a(IBLbj;)V")
 	public static void method814(int arg0, Js5Loader arg1) {
-		if (field1427 == null) {
-			method1312(null, 255, 255, (byte) 0, 0, true);
+		if (masterIndexBuffer == null) {
+			queueRequest(null, 255, 255, (byte) 0, 0, true);
 			field141[arg0] = arg1;
 		} else {
-			field1427.pos = arg0 * 8 + 5;
-			int var2 = field1427.g4();
-			int var3 = field1427.g4();
-			arg1.method109(var2, var3);
+			masterIndexBuffer.pos = arg0 * 8 + 5;
+			int var2 = masterIndexBuffer.g4();
+			int var3 = masterIndexBuffer.g4();
+			arg1.requestIndex(var2, var3);
 		}
 	}
 
 	@ObfuscatedName("of.a(ZIZ)I")
-	public static int method1067() {
-		return field3943 + field3876;
+	public static int urgentQueueSize() {
+		return pendingUrgentQueueSize + urgentQueueSize;
 	}
 
 	@ObfuscatedName("uj.a(III)I")
-	public static int method1523(int arg0, int arg1) {
+	public static int transferProgress(int arg0, int arg1) {
 		long var2 = (long) (arg1 + (arg0 << 16));
-		return field990 != null && field990.key == var2 ? field2908.pos * 99 / (field2908.data.length - field990.field1782) + 1 : 0;
+		return incomingRequest != null && incomingRequest.key == var2 ? incomingGroupBuffer.pos * 99 / (incomingGroupBuffer.data.length - incomingRequest.padding) + 1 : 0;
 	}
 }

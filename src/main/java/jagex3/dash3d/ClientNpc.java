@@ -89,7 +89,7 @@ public final class ClientNpc extends ClientEntity {
 		ModelLit var46 = null;
 		if (super.field4080 != -1 && super.field4075 != -1) {
 			SpotType var47 = SpotType.list(super.field4080);
-			var46 = var47.method209(super.field4075);
+			var46 = var47.getTempModel2(super.field4075);
 			if (var46 != null) {
 				var46.method180(0, -super.field4125, 0);
 				if (var47.field527) {
@@ -108,7 +108,7 @@ public final class ClientNpc extends ClientEntity {
 		if (var46 != null) {
 			var13 = ((SoftwareModelLit) var13).method850(var46);
 		}
-		if (this.field3682.field2349 == 1) {
+		if (this.field3682.size == 1) {
 			var13.field494 = true;
 		}
 		var13.method87(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);

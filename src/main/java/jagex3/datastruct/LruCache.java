@@ -6,86 +6,86 @@ import deob.ObfuscatedName;
 public final class LruCache {
 
 	@ObfuscatedName("id.f")
-	public final Linkable2 field1722 = new Linkable2();
+	public final Linkable2 sentinel = new Linkable2();
 
 	@ObfuscatedName("id.k")
-	public final LinkList2 field1727 = new LinkList2();
+	public final LinkList2 order = new LinkList2();
 
 	@ObfuscatedName("id.l")
-	public final HashTable field1728;
+	public final HashTable cache;
 
 	@ObfuscatedName("id.m")
-	public final int field1729;
+	public final int capacity;
 
 	@ObfuscatedName("id.n")
-	public int field1730;
+	public int available;
 
 	public LruCache(int arg0) {
-		this.field1729 = arg0;
-		this.field1730 = arg0;
+		this.capacity = arg0;
+		this.available = arg0;
 		int var2;
 		for (var2 = 1; var2 + var2 < arg0; var2 += var2) {
 		}
-		this.field1728 = new HashTable(var2);
+		this.cache = new HashTable(var2);
 	}
 
 	@ObfuscatedName("id.a(JLme;Z)V")
-	public void method663(long arg0, Linkable2 arg1) {
-		if (this.field1730 == 0) {
-			Linkable2 var4 = this.field1727.method1382();
+	public void put(long arg0, Linkable2 arg1) {
+		if (this.available == 0) {
+			Linkable2 var4 = this.order.popFront();
 			var4.unlink();
-			var4.method907();
-			if (var4 == this.field1722) {
-				Linkable2 var5 = this.field1727.method1382();
+			var4.unlink2();
+			if (var4 == this.sentinel) {
+				Linkable2 var5 = this.order.popFront();
 				var5.unlink();
-				var5.method907();
+				var5.unlink2();
 			}
 		} else {
-			this.field1730--;
+			this.available--;
 		}
-		this.field1728.put(arg0, arg1);
-		this.field1727.method1387(arg1);
+		this.cache.put(arg0, arg1);
+		this.order.push(arg1);
 	}
 
 	@ObfuscatedName("id.a(I)Lg;")
-	public Linkable method664() {
-		return this.field1728.method1048();
+	public Linkable findnext() {
+		return this.cache.findnext();
 	}
 
 	@ObfuscatedName("id.a(JI)Lme;")
-	public Linkable2 method665(long arg0) {
-		Linkable2 var3 = (Linkable2) this.field1728.method1049(arg0);
+	public Linkable2 find(long arg0) {
+		Linkable2 var3 = (Linkable2) this.cache.find(arg0);
 		if (var3 != null) {
-			this.field1727.method1387(var3);
+			this.order.push(var3);
 		}
 		return var3;
 	}
 
 	@ObfuscatedName("id.a(ZJ)V")
-	public void method666(long arg0) {
-		Linkable2 var3 = (Linkable2) this.field1728.method1049(arg0);
+	public void remove(long arg0) {
+		Linkable2 var3 = (Linkable2) this.cache.find(arg0);
 		if (var3 != null) {
 			var3.unlink();
-			var3.method907();
-			this.field1730++;
+			var3.unlink2();
+			this.available++;
 		}
 	}
 
 	@ObfuscatedName("id.b(I)V")
 	public void clear() {
 		while (true) {
-			Linkable2 var1 = this.field1727.method1382();
+			Linkable2 var1 = this.order.popFront();
 			if (var1 == null) {
-				this.field1730 = this.field1729;
+				this.available = this.capacity;
 				return;
 			}
 			var1.unlink();
-			var1.method907();
+			var1.unlink2();
 		}
 	}
 
 	@ObfuscatedName("id.a(Z)Lg;")
-	public Linkable method671() {
-		return this.field1728.method1047();
+	public Linkable search() {
+		return this.cache.search();
 	}
 }

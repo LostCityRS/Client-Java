@@ -17,7 +17,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("nf.a(IB)V")
 	public static void method996(int arg0) {
-		ClientInvCache var1 = (ClientInvCache) field1163.method1049((long) arg0);
+		ClientInvCache var1 = (ClientInvCache) field1163.find((long) arg0);
 		if (var1 != null) {
 			var1.unlink();
 		}
@@ -25,7 +25,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("ac.b(II)V")
 	public static void method20(int arg0) {
-		ClientInvCache var1 = (ClientInvCache) field1163.method1049((long) arg0);
+		ClientInvCache var1 = (ClientInvCache) field1163.find((long) arg0);
 		if (var1 != null) {
 			for (int var2 = 0; var2 < var1.field3553.length; var2++) {
 				var1.field3553[var2] = -1;
@@ -36,7 +36,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("k.a(BII)I")
 	public static int method747(int arg0, int arg1) {
-		ClientInvCache var2 = (ClientInvCache) field1163.method1049((long) arg0);
+		ClientInvCache var2 = (ClientInvCache) field1163.find((long) arg0);
 		if (var2 == null) {
 			return 0;
 		} else if (arg1 >= 0 && var2.field3551.length > arg1) {
@@ -48,7 +48,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("qc.a(IIIII)V")
 	public static void method1268(int arg0, int arg1, int arg2, int arg3) {
-		ClientInvCache var4 = (ClientInvCache) field1163.method1049((long) arg0);
+		ClientInvCache var4 = (ClientInvCache) field1163.find((long) arg0);
 		if (var4 == null) {
 			var4 = new ClientInvCache();
 			field1163.put((long) arg0, var4);
@@ -73,7 +73,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("wg.b(III)I")
 	public static int method1608(int arg0, int arg1) {
-		ClientInvCache var2 = (ClientInvCache) field1163.method1049((long) arg0);
+		ClientInvCache var2 = (ClientInvCache) field1163.find((long) arg0);
 		if (var2 == null) {
 			return 0;
 		} else if (arg1 == -1) {
@@ -91,7 +91,7 @@ public final class ClientInvCache extends Linkable {
 
 	@ObfuscatedName("de.a(IZI)I")
 	public static int method255(int arg0, int arg1) {
-		ClientInvCache var2 = (ClientInvCache) field1163.method1049((long) arg1);
+		ClientInvCache var2 = (ClientInvCache) field1163.find((long) arg1);
 		if (var2 == null) {
 			return -1;
 		} else if (arg0 >= 0 && arg0 < var2.field3553.length) {

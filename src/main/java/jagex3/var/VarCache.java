@@ -23,10 +23,10 @@ public class VarCache {
 
 	@ObfuscatedName("k.a(III)V")
 	public static void method755(int arg0, int arg1) {
-		VarBitType var2 = VarBitType.method1043(arg0);
-		int var3 = var2.field4233;
-		int var4 = var2.field4234;
-		int var5 = var2.field4237;
+		VarBitType var2 = VarBitType.list(arg0);
+		int var3 = var2.basevar;
+		int var4 = var2.startbit;
+		int var5 = var2.endbit;
 		int var6 = field1832[var5 - var4];
 		if (arg1 < 0 || arg1 > var6) {
 			arg1 = 0;
@@ -37,10 +37,10 @@ public class VarCache {
 
 	@ObfuscatedName("n.b(II)I")
 	public static int method930(int arg0) {
-		VarBitType var1 = VarBitType.method1043(arg0);
-		int var2 = var1.field4234;
-		int var3 = var1.field4237;
-		int var4 = var1.field4233;
+		VarBitType var1 = VarBitType.list(arg0);
+		int var2 = var1.startbit;
+		int var3 = var1.endbit;
+		int var4 = var1.basevar;
 		int var5 = field1832[var3 - var2];
 		return field2050[var4] >> var2 & var5;
 	}

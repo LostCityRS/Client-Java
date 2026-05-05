@@ -15,7 +15,7 @@ public final class Js5NetThread implements Runnable {
 	@ObfuscatedName("cj.K")
 	public static final Object lock = new Object();
 	@ObfuscatedName("m.s")
-	public static final LinkList field2461 = new LinkList();
+	public static final LinkList completed = new LinkList();
 	@ObfuscatedName("ug.n")
 	public static int keepAlive = 0;
 
@@ -39,12 +39,12 @@ public final class Js5NetThread implements Runnable {
 			LinkList var0 = requestQueue;
 			Js5WorkerRequest var1;
 			synchronized (requestQueue) {
-				var1 = (Js5WorkerRequest) field2461.method1613();
+				var1 = (Js5WorkerRequest) completed.popFront();
 			}
 			if (var1 == null) {
 				return;
 			}
-			var1.field1702.method111(var1.data, (int) var1.key, var1.fs, false);
+			var1.field1702.loadIndex(var1.data, (int) var1.key, var1.fs, false);
 		}
 	}
 
@@ -88,11 +88,11 @@ public final class Js5NetThread implements Runnable {
 	}
 
 	@ObfuscatedName("hd.a(Lbj;IILud;)V")
-	public static void method540(Js5Loader arg0, int arg1, DataFile arg2) {
+	public static void queueRequest(Js5Loader arg0, int arg1, DataFile arg2) {
 		byte[] var3 = null;
 		LinkList var4 = requestQueue;
 		synchronized (requestQueue) {
-			for (Js5WorkerRequest var5 = (Js5WorkerRequest) requestQueue.head(); var5 != null; var5 = (Js5WorkerRequest) requestQueue.method1619()) {
+			for (Js5WorkerRequest var5 = (Js5WorkerRequest) requestQueue.head(); var5 != null; var5 = (Js5WorkerRequest) requestQueue.next()) {
 				if (var5.key == (long) arg1 && arg2 == var5.fs && var5.type == 0) {
 					var3 = var5.data;
 					break;
@@ -101,9 +101,9 @@ public final class Js5NetThread implements Runnable {
 		}
 		if (var3 == null) {
 			byte[] var6 = arg2.readFromFile(arg1);
-			arg0.method111(var6, arg1, arg2, true);
+			arg0.loadIndex(var6, arg1, arg2, true);
 		} else {
-			arg0.method111(var3, arg1, arg2, true);
+			arg0.loadIndex(var3, arg1, arg2, true);
 		}
 	}
 
@@ -138,7 +138,7 @@ public final class Js5NetThread implements Runnable {
 						var2.data = var2.fs.readFromFile((int) var2.key);
 						LinkList var4 = requestQueue;
 						synchronized (requestQueue) {
-							field2461.push(var2);
+							completed.push(var2);
 						}
 					}
 					Object var5 = lock;

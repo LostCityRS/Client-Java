@@ -10,49 +10,49 @@ import jagex3.js5.Js5;
 public final class InvType extends Linkable2 {
 
 	@ObfuscatedName("be.b")
-	public static final LruCache field251 = new LruCache(64);
+	public static final LruCache recentUse = new LruCache(64);
 
 	@ObfuscatedName("client.Z")
-	public static Js5 field567;
+	public static Js5 configClient;
 
 	@ObfuscatedName("ke.R")
-	public int field2067 = 0;
+	public int size = 0;
 
 	@ObfuscatedName("g.a(II)Lke;")
-	public static InvType method458(int arg0) {
-		InvType var1 = (InvType) field251.method665((long) arg0);
+	public static InvType list(int arg0) {
+		InvType var1 = (InvType) recentUse.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field567.getFile(arg0, 5);
+		byte[] var2 = configClient.getFile(arg0, 5);
 		InvType var3 = new InvType();
 		if (var2 != null) {
-			var3.method775(new Packet(var2));
+			var3.decode(new Packet(var2));
 		}
-		field251.method663((long) arg0, var3);
+		recentUse.put((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("re.a(Lnb;I)V")
 	public static void init(Js5 arg0) {
-		field567 = arg0;
+		configClient = arg0;
 	}
 
 	@ObfuscatedName("ke.a(Lea;B)V")
-	public void method775(Packet arg0) {
+	public void decode(Packet arg0) {
 		while (true) {
 			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}
-			this.method778(var2, arg0);
+			this.decode(var2, arg0);
 		}
 	}
 
 	@ObfuscatedName("ke.a(ILea;I)V")
-	public void method778(int arg0, Packet arg1) {
+	public void decode(int arg0, Packet arg1) {
 		if (arg0 == 2) {
-			this.field2067 = arg1.g2();
+			this.size = arg1.g2();
 		}
 	}
 }

@@ -11,10 +11,10 @@ import jagex3.js5.Js5;
 public final class FloType extends Linkable2 {
 
 	@ObfuscatedName("b.g")
-	public static final LruCache field174 = new LruCache(64);
+	public static final LruCache recentUse = new LruCache(64);
 
 	@ObfuscatedName("mh.W")
-	public static Js5 field2578;
+	public static Js5 configClient;
 	@ObfuscatedName("nj.b")
 	public static int field2923;
 	@ObfuscatedName("mb.Z")
@@ -30,38 +30,38 @@ public final class FloType extends Linkable2 {
 	public int field112 = 16;
 
 	@ObfuscatedName("af.F")
-	public int field98 = -1;
+	public int texture = -1;
 
 	@ObfuscatedName("af.X")
-	public boolean field113 = true;
+	public boolean occlude = true;
 
 	@ObfuscatedName("af.V")
 	public int field111 = 0;
 
 	@ObfuscatedName("jc.b(IZ)Laf;")
-	public static FloType method704(int arg0) {
-		FloType var1 = (FloType) field174.method665((long) arg0);
+	public static FloType list(int arg0) {
+		FloType var1 = (FloType) recentUse.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field2578.getFile(arg0, 4);
+		byte[] var2 = configClient.getFile(arg0, 4);
 		FloType var3 = new FloType();
 		if (var2 != null) {
-			var3.method38(new Packet(var2), arg0);
+			var3.decode(new Packet(var2), arg0);
 		}
-		field174.method663((long) arg0, var3);
+		recentUse.put((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("oh.c(I)V")
 	public static void resetCache() {
-		field174.clear();
+		recentUse.clear();
 	}
 
 	@ObfuscatedName("mf.a(BLnb;)V")
 	public static void init(Js5 arg0) {
-		field2578 = arg0;
-		field2923 = field2578.getFileIdLimit(4);
+		configClient = arg0;
+		field2923 = configClient.getFileIdLimit(4);
 	}
 
 	@ObfuscatedName("m.a(IB)I")
@@ -70,29 +70,29 @@ public final class FloType extends Linkable2 {
 	}
 
 	@ObfuscatedName("af.a(ILea;I)V")
-	public void method38(Packet arg0, int arg1) {
+	public void decode(Packet arg0, int arg1) {
 		while (true) {
 			int var3 = arg0.g1();
 			if (var3 == 0) {
 				return;
 			}
-			this.method41(arg1, var3, arg0);
+			this.decode(arg1, var3, arg0);
 		}
 	}
 
 	@ObfuscatedName("af.a(IIILea;)V")
-	public void method41(int arg0, int arg1, Packet arg2) {
+	public void decode(int arg0, int arg1, Packet arg2) {
 		if (arg1 == 1) {
 			this.field111 = method883(arg2.g3());
 		} else if (arg1 == 2) {
-			this.field98 = arg2.g1();
+			this.texture = arg2.g1();
 		} else if (arg1 == 3) {
-			this.field98 = arg2.g2();
-			if (this.field98 == 65535) {
-				this.field98 = -1;
+			this.texture = arg2.g2();
+			if (this.texture == 65535) {
+				this.texture = -1;
 			}
 		} else if (arg1 == 5) {
-			this.field113 = false;
+			this.occlude = false;
 		} else if (arg1 == 7) {
 			this.field104 = method883(arg2.g3());
 		} else if (arg1 == 8) {

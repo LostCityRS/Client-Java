@@ -10,106 +10,106 @@ import jagex3.datastruct.Linkable;
 public final class BgSound extends Linkable {
 
 	@ObfuscatedName("fj.j")
-	public static final LinkList field1196 = new LinkList();
+	public static final LinkList soundlist = new LinkList();
 	@ObfuscatedName("na.t")
-	public WaveStream field2626;
+	public WaveStream randomStream;
 
 	@ObfuscatedName("na.v")
-	public int field2628;
+	public int randomSoundTimer;
 
 	@ObfuscatedName("na.w")
-	public int field2629;
+	public int sound;
 
 	@ObfuscatedName("na.x")
-	public int field2630;
+	public int maxX;
 
 	@ObfuscatedName("na.z")
-	public int field2632;
+	public int minX;
 
 	@ObfuscatedName("na.F")
-	public int field2638;
+	public int range;
 
 	@ObfuscatedName("na.G")
-	public int field2639;
+	public int maxZ;
 
 	@ObfuscatedName("na.H")
-	public int field2640;
+	public int maxdelay;
 
 	@ObfuscatedName("na.N")
-	public int field2645;
+	public int mindelay;
 
 	@ObfuscatedName("na.P")
-	public int field2647;
+	public int level;
 
 	@ObfuscatedName("na.X")
-	public int field2655;
+	public int minZ;
 
 	@ObfuscatedName("na.B")
-	public LocType field2634;
+	public LocType multiloc;
 
 	@ObfuscatedName("na.M")
-	public WaveStream field2644;
+	public WaveStream continuousStream;
 
 	@ObfuscatedName("na.C")
-	public int[] field2635;
+	public int[] random;
 
 	@ObfuscatedName("bc.a(IIIIB)V")
 	public static void doMix(int arg0, int arg1, int arg2, int arg3) {
-		for (BgSound var4 = (BgSound) field1196.head(); var4 != null; var4 = (BgSound) field1196.method1619()) {
-			if (var4.field2629 != -1 || var4.field2635 != null) {
+		for (BgSound var4 = (BgSound) soundlist.head(); var4 != null; var4 = (BgSound) soundlist.next()) {
+			if (var4.sound != -1 || var4.random != null) {
 				int var5 = 0;
-				if (var4.field2639 < arg2) {
-					var5 = arg2 - var4.field2639;
-				} else if (arg2 < var4.field2655) {
-					var5 = var4.field2655 - arg2;
+				if (var4.maxZ < arg2) {
+					var5 = arg2 - var4.maxZ;
+				} else if (arg2 < var4.minZ) {
+					var5 = var4.minZ - arg2;
 				}
-				if (arg0 > var4.field2630) {
-					var5 += arg0 - var4.field2630;
-				} else if (arg0 < var4.field2632) {
-					var5 += var4.field2632 - arg0;
+				if (arg0 > var4.maxX) {
+					var5 += arg0 - var4.maxX;
+				} else if (arg0 < var4.minX) {
+					var5 += var4.minX - arg0;
 				}
-				if (var4.field2638 < var5 - 64 || Client.field4211 == 0 || var4.field2647 != arg3) {
-					if (var4.field2644 != null) {
-						Client.mixer.stopStream(var4.field2644);
-						var4.field2644 = null;
+				if (var4.range < var5 - 64 || Client.field4211 == 0 || var4.level != arg3) {
+					if (var4.continuousStream != null) {
+						Client.mixer.stopStream(var4.continuousStream);
+						var4.continuousStream = null;
 					}
-					if (var4.field2626 != null) {
-						Client.mixer.stopStream(var4.field2626);
-						var4.field2626 = null;
+					if (var4.randomStream != null) {
+						Client.mixer.stopStream(var4.randomStream);
+						var4.randomStream = null;
 					}
 				} else {
 					var5 -= 64;
 					if (var5 < 0) {
 						var5 = 0;
 					}
-					int var6 = Client.field4211 * (var4.field2638 - var5) / var4.field2638;
-					if (var4.field2644 != null) {
-						var4.field2644.method1117(var6);
-					} else if (var4.field2629 >= 0) {
-						JagFX var7 = JagFX.method252(Client.jagFX, var4.field2629, 0);
+					int var6 = Client.field4211 * (var4.range - var5) / var4.range;
+					if (var4.continuousStream != null) {
+						var4.continuousStream.applyVolume(var6);
+					} else if (var4.sound >= 0) {
+						JagFX var7 = JagFX.load(Client.jagFX, var4.sound, 0);
 						if (var7 != null) {
-							Wave var8 = var7.method253().method1453(Client.decimator);
-							WaveStream var9 = WaveStream.method1124(var8, var6);
-							var9.method1119(-1);
-							Client.mixer.method1506(var9);
-							var4.field2644 = var9;
+							Wave var8 = var7.toWave().decimate(Client.decimator);
+							WaveStream var9 = WaveStream.newRatePercent(var8, var6);
+							var9.setLoopCount(-1);
+							Client.mixer.playStream(var9);
+							var4.continuousStream = var9;
 						}
 					}
-					if (var4.field2626 != null) {
-						var4.field2626.method1117(var6);
-						if (!var4.field2626.method459()) {
-							var4.field2626 = null;
+					if (var4.randomStream != null) {
+						var4.randomStream.applyVolume(var6);
+						if (!var4.randomStream.isLinked()) {
+							var4.randomStream = null;
 						}
-					} else if (var4.field2635 != null && (var4.field2628 -= arg1) <= 0) {
-						int var10 = (int) ((double) var4.field2635.length * Math.random());
-						JagFX var11 = JagFX.method252(Client.jagFX, var4.field2635[var10], 0);
+					} else if (var4.random != null && (var4.randomSoundTimer -= arg1) <= 0) {
+						int var10 = (int) ((double) var4.random.length * Math.random());
+						JagFX var11 = JagFX.load(Client.jagFX, var4.random[var10], 0);
 						if (var11 != null) {
-							Wave var12 = var11.method253().method1453(Client.decimator);
-							WaveStream var13 = WaveStream.method1124(var12, var6);
-							var13.method1119(0);
-							Client.mixer.method1506(var13);
-							var4.field2628 = (int) ((double) (var4.field2640 - var4.field2645) * Math.random()) + var4.field2645;
-							var4.field2626 = var13;
+							Wave var12 = var11.toWave().decimate(Client.decimator);
+							WaveStream var13 = WaveStream.newRatePercent(var12, var6);
+							var13.setLoopCount(0);
+							Client.mixer.playStream(var13);
+							var4.randomSoundTimer = (int) ((double) (var4.maxdelay - var4.mindelay) * Math.random()) + var4.mindelay;
+							var4.randomStream = var13;
 						}
 					}
 				}
@@ -118,78 +118,78 @@ public final class BgSound extends Linkable {
 	}
 
 	@ObfuscatedName("be.a(IIIZILnf;)V")
-	public static void method84(int arg0, int arg1, int arg2, int arg3, LocType arg4) {
+	public static void addSound(int arg0, int arg1, int arg2, int arg3, LocType arg4) {
 		BgSound var5 = new BgSound();
-		var5.field2638 = arg4.field2771 * 128;
-		var5.field2635 = arg4.field2815;
-		var5.field2647 = arg1;
-		var5.field2629 = arg4.field2806;
-		int var6 = arg4.field2774;
-		var5.field2632 = arg3 * 128;
-		var5.field2655 = arg0 * 128;
-		var5.field2640 = arg4.field2795;
-		var5.field2645 = arg4.field2807;
-		int var7 = arg4.field2794;
+		var5.range = arg4.bgsound_range * 128;
+		var5.random = arg4.bgsound_random;
+		var5.level = arg1;
+		var5.sound = arg4.bgsound_sound;
+		int var6 = arg4.width;
+		var5.minX = arg3 * 128;
+		var5.minZ = arg0 * 128;
+		var5.maxdelay = arg4.bgsound_maxdelay;
+		var5.mindelay = arg4.bgsound_mindelay;
+		int var7 = arg4.length;
 		if (arg2 == 1 || arg2 == 3) {
-			var7 = arg4.field2774;
-			var6 = arg4.field2794;
+			var7 = arg4.width;
+			var6 = arg4.length;
 		}
-		var5.field2639 = (var6 + arg0) * 128;
-		var5.field2630 = (arg3 + var7) * 128;
-		if (arg4.field2770 != null) {
-			var5.field2634 = arg4;
-			var5.method938();
+		var5.maxZ = (var6 + arg0) * 128;
+		var5.maxX = (arg3 + var7) * 128;
+		if (arg4.multiloc != null) {
+			var5.multiloc = arg4;
+			var5.recalcSound();
 		}
-		field1196.push(var5);
-		if (var5.field2635 != null) {
-			var5.field2628 = var5.field2645 + (int) ((double) (var5.field2640 - var5.field2645) * Math.random());
+		soundlist.push(var5);
+		if (var5.random != null) {
+			var5.randomSoundTimer = var5.mindelay + (int) ((double) (var5.maxdelay - var5.mindelay) * Math.random());
 		}
 	}
 
 	@ObfuscatedName("dj.f(I)V")
-	public static void method288() {
-		for (BgSound var0 = (BgSound) field1196.head(); var0 != null; var0 = (BgSound) field1196.method1619()) {
-			if (var0.field2644 != null) {
-				Client.mixer.stopStream(var0.field2644);
-				var0.field2644 = null;
+	public static void reset() {
+		for (BgSound var0 = (BgSound) soundlist.head(); var0 != null; var0 = (BgSound) soundlist.next()) {
+			if (var0.continuousStream != null) {
+				Client.mixer.stopStream(var0.continuousStream);
+				var0.continuousStream = null;
 			}
-			if (var0.field2626 != null) {
-				Client.mixer.stopStream(var0.field2626);
-				var0.field2626 = null;
+			if (var0.randomStream != null) {
+				Client.mixer.stopStream(var0.randomStream);
+				var0.randomStream = null;
 			}
 		}
-		field1196.method1616();
+		soundlist.clear();
 	}
 
 	@ObfuscatedName("ag.a(B)V")
-	public static void method44() {
-		for (BgSound var0 = (BgSound) field1196.head(); var0 != null; var0 = (BgSound) field1196.method1619()) {
-			if (var0.field2634 != null) {
-				var0.method938();
+	public static void recalculateMultilocs() {
+		for (BgSound var0 = (BgSound) soundlist.head(); var0 != null; var0 = (BgSound) soundlist.next()) {
+			if (var0.multiloc != null) {
+				var0.recalcSound();
 			}
 		}
 	}
 
 	@ObfuscatedName("na.b(I)V")
-	public void method938() {
-		int var1 = this.field2629;
-		LocType var2 = this.field2634.method998();
+	public void recalcSound() {
+		int var1 = this.sound;
+		LocType var2 = this.multiloc.getMultiLoc();
 		if (var2 == null) {
-			this.field2635 = null;
-			this.field2645 = 0;
-			this.field2629 = -1;
-			this.field2638 = 0;
-			this.field2640 = 0;
+			this.random = null;
+			this.mindelay = 0;
+			this.sound = -1;
+			this.range = 0;
+			this.maxdelay = 0;
 		} else {
-			this.field2638 = var2.field2771 * 128;
-			this.field2635 = var2.field2815;
-			this.field2645 = var2.field2807;
-			this.field2629 = var2.field2806;
-			this.field2640 = var2.field2795;
+			this.range = var2.bgsound_range * 128;
+			this.random = var2.bgsound_random;
+			this.mindelay = var2.bgsound_mindelay;
+			this.sound = var2.bgsound_sound;
+			this.maxdelay = var2.bgsound_maxdelay;
 		}
-		if (var1 != this.field2629 && this.field2644 != null) {
-			Client.mixer.stopStream(this.field2644);
-			this.field2644 = null;
+		if (var1 != this.sound && this.continuousStream != null) {
+			Client.mixer.stopStream(this.continuousStream);
+			this.continuousStream = null;
 		}
 	}
 }

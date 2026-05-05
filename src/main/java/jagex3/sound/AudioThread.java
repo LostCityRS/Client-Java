@@ -10,36 +10,36 @@ import jagex3.util.ThreadSleep;
 public final class AudioThread implements Runnable {
 
 	@ObfuscatedName("oi.d")
-	public final PcmPlayer[] field3102 = new PcmPlayer[2];
+	public final PcmPlayer[] players = new PcmPlayer[2];
 
 	@ObfuscatedName("oi.h")
-	public volatile boolean field3106 = false;
+	public volatile boolean shutdown = false;
 
 	@ObfuscatedName("oi.i")
-	public volatile boolean field3107 = false;
+	public volatile boolean running = false;
 
 	@ObfuscatedName("oi.k")
-	public SignLink field3109;
+	public SignLink signLink;
 
 	@Override
 	public void run() {
-		this.field3107 = true;
+		this.running = true;
 		try {
-			while (!this.field3106) {
+			while (!this.shutdown) {
 				for (int var1 = 0; var1 < 2; var1++) {
-					PcmPlayer var2 = this.field3102[var1];
+					PcmPlayer var2 = this.players[var1];
 					if (var2 != null) {
-						var2.method406();
+						var2.cycle();
 					}
 				}
 				ThreadSleep.sleepPrecise(10L);
-				GameShell.method1006(null, this.field3109);
+				GameShell.method1006(null, this.signLink);
 			}
 		} catch (Exception var9) {
 			JagException.report(null, var9);
 		} finally {
 			Object var6 = null;
-			this.field3107 = false;
+			this.running = false;
 		}
 	}
 }

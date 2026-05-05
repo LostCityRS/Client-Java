@@ -17,7 +17,7 @@ public class WordPack {
 	@ObfuscatedName("pi.a(Lea;Li;B)I")
 	public static int method1220(Packet arg0, JagString arg1) {
 		int var2 = arg0.pos;
-		arg0.method308(arg1.length);
+		arg0.psmart(arg1.length);
 		arg0.pos += field2033.method1456(arg1.chars, arg0.pos, arg1.length, 0, arg0.data);
 		return arg0.pos - var2;
 	}

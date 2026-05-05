@@ -10,40 +10,40 @@ public abstract class PcmStream extends Linkable {
 	public int field934;
 
 	@ObfuscatedName("ef.u")
-	public PcmStreamable field935;
+	public PcmStreamable sound;
 
 	@ObfuscatedName("ef.v")
-	public PcmStream field936;
+	public PcmStream stream;
 
 	@ObfuscatedName("ef.w")
-	public volatile boolean field937 = true;
+	public volatile boolean active = true;
 
 	@ObfuscatedName("ef.a([III)V")
-	public abstract void method379(int[] arg0, int arg1, int arg2);
+	public abstract void doMix(int[] arg0, int arg1, int arg2);
 
 	@ObfuscatedName("ef.a()Lef;")
-	public abstract PcmStream method380();
+	public abstract PcmStream substreamNext();
 
 	@ObfuscatedName("ef.b([III)V")
-	public final void method381(int[] arg0, int arg1, int arg2) {
-		if (this.field937) {
-			this.method379(arg0, arg1, arg2);
+	public final void maybeMix(int[] arg0, int arg1, int arg2) {
+		if (this.active) {
+			this.doMix(arg0, arg1, arg2);
 		} else {
-			this.method384(arg2);
+			this.pretendToMix(arg2);
 		}
 	}
 
 	@ObfuscatedName("ef.b()I")
-	public int method382() {
+	public int priority() {
 		return 255;
 	}
 
 	@ObfuscatedName("ef.c()I")
-	public abstract int method383();
+	public abstract int selfMixCost();
 
 	@ObfuscatedName("ef.b(I)V")
-	public abstract void method384(int arg0);
+	public abstract void pretendToMix(int arg0);
 
 	@ObfuscatedName("ef.d()Lef;")
-	public abstract PcmStream method385();
+	public abstract PcmStream substreamStart();
 }

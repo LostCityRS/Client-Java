@@ -6,54 +6,54 @@ import deob.ObfuscatedName;
 public final class WaveStream extends PcmStream {
 
 	@ObfuscatedName("oj.C")
-	public final int field3119;
+	public final int loopStartPosition;
 
 	@ObfuscatedName("oj.H")
-	public final int field3123;
+	public final int loopEndPosition;
 
 	@ObfuscatedName("oj.G")
-	public final boolean field3122;
+	public final boolean loopReversed;
 
 	@ObfuscatedName("oj.y")
-	public int field3115;
+	public int pitch;
 
 	@ObfuscatedName("oj.I")
-	public int field3124;
+	public int volume;
 
 	@ObfuscatedName("oj.M")
-	public int field3127;
+	public int pan;
 
 	@ObfuscatedName("oj.A")
-	public int field3117;
+	public int position;
 
 	@ObfuscatedName("oj.x")
-	public int field3114;
+	public int volumeStereoRight;
 
 	@ObfuscatedName("oj.z")
-	public int field3116;
+	public int loopCount;
 
 	@ObfuscatedName("oj.B")
-	public int field3118;
+	public int volumeChangeSpeedStereoLeft;
 
 	@ObfuscatedName("oj.E")
-	public int field3120;
+	public int volumeChangeSpeedMono;
 
 	@ObfuscatedName("oj.F")
-	public int field3121;
+	public int volumeMono;
 
 	@ObfuscatedName("oj.K")
-	public int field3125;
+	public int volumeChangeSpeedStereoRight;
 
 	@ObfuscatedName("oj.L")
-	public int field3126;
+	public int volumeChangeDelta;
 
 	@ObfuscatedName("oj.N")
-	public int field3128;
+	public int volumeStereoLeft;
 
 	@ObfuscatedName("oj.a(II[B[IIIIIIIILoj;II)I")
-	public static int method1087(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8, int arg9, int arg10) {
-		arg8.field3128 -= arg8.field3118 * arg3;
-		arg8.field3114 -= arg8.field3125 * arg3;
+	public static int doMixForwardsRampMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8, int arg9, int arg10) {
+		arg8.volumeStereoLeft -= arg8.volumeChangeSpeedStereoLeft * arg3;
+		arg8.volumeStereoRight -= arg8.volumeChangeSpeedStereoRight * arg3;
 		int var11;
 		if (arg9 == 0 || (var11 = arg3 + (arg7 + arg9 - arg2 - 257) / arg9) > arg6) {
 			var11 = arg6;
@@ -78,15 +78,15 @@ public final class WaveStream extends PcmStream {
 			arg4 += arg5;
 			arg2 += arg9;
 		}
-		arg8.field3128 += arg8.field3118 * arg3;
-		arg8.field3114 += arg8.field3125 * arg3;
-		arg8.field3121 = arg4;
-		arg8.field3117 = arg2;
+		arg8.volumeStereoLeft += arg8.volumeChangeSpeedStereoLeft * arg3;
+		arg8.volumeStereoRight += arg8.volumeChangeSpeedStereoRight * arg3;
+		arg8.volumeMono = arg4;
+		arg8.position = arg2;
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.a([B[IIIIIIILoj;)I")
-	public static int method1089(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7) {
+	public static int doMixBackwards1To1Mono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7) {
 		int var8 = arg2 >> 8;
 		int var9 = arg6 >> 8;
 		int var10 = arg4 << 2;
@@ -111,13 +111,13 @@ public final class WaveStream extends PcmStream {
 			var10001 = arg3++;
 			arg1[var10001] += arg0[var8--] * var10;
 		}
-		arg7.field3117 = var8 << 8;
+		arg7.position = var8 << 8;
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.a(II[B[IIIIIIIIIILoj;II)I")
-	public static int method1090(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, WaveStream arg10, int arg11, int arg12) {
-		arg10.field3121 -= arg10.field3120 * arg3;
+	public static int doMixForwardsRampStereo(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, WaveStream arg10, int arg11, int arg12) {
+		arg10.volumeMono -= arg10.volumeChangeSpeedMono * arg3;
 		int var13;
 		if (arg11 == 0 || (var13 = arg3 + (arg9 + arg11 - arg2 - 257) / arg11) > arg8) {
 			var13 = arg8;
@@ -154,15 +154,15 @@ public final class WaveStream extends PcmStream {
 			arg2 += arg11;
 		}
 		int var23 = var14 >> 1;
-		arg10.field3121 += arg10.field3120 * var23;
-		arg10.field3128 = arg4;
-		arg10.field3114 = arg5;
-		arg10.field3117 = arg2;
+		arg10.volumeMono += arg10.volumeChangeSpeedMono * var23;
+		arg10.volumeStereoLeft = arg4;
+		arg10.volumeStereoRight = arg5;
+		arg10.position = arg2;
 		return var23;
 	}
 
 	@ObfuscatedName("oj.a(I[B[IIIIIIIILoj;)I")
-	public static int method1094(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8) {
+	public static int doMixBackwards1To1Stereo(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8) {
 		int var9 = arg2 >> 8;
 		int var10 = arg7 >> 8;
 		int var11 = arg4 << 2;
@@ -204,12 +204,12 @@ public final class WaveStream extends PcmStream {
 			int var33 = var14++;
 			arg1[var33] += var20 * var12;
 		}
-		arg8.field3117 = var9 << 8;
+		arg8.position = var9 << 8;
 		return var14 >> 1;
 	}
 
 	@ObfuscatedName("oj.a([B[IIIIIIIILoj;)I")
-	public static int method1095(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8) {
+	public static int doMixBackwards1To1RampMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8) {
 		int var9 = arg2 >> 8;
 		int var10 = arg7 >> 8;
 		int var11 = arg4 << 2;
@@ -218,8 +218,8 @@ public final class WaveStream extends PcmStream {
 		if ((var13 = arg3 + var9 + 1 - var10) > arg6) {
 			var13 = arg6;
 		}
-		arg8.field3128 += arg8.field3118 * (var13 - arg3);
-		arg8.field3114 += arg8.field3125 * (var13 - arg3);
+		arg8.volumeStereoLeft += arg8.volumeChangeSpeedStereoLeft * (var13 - arg3);
+		arg8.volumeStereoRight += arg8.volumeChangeSpeedStereoRight * (var13 - arg3);
 		var13 -= 3;
 		int var10001;
 		while (arg3 < var13) {
@@ -242,13 +242,13 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += arg0[var9--] * var11;
 			var11 += var12;
 		}
-		arg8.field3121 = var11 >> 2;
-		arg8.field3117 = var9 << 8;
+		arg8.volumeMono = var11 >> 2;
+		arg8.position = var9 << 8;
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.b(I[B[IIIIIIIILoj;)I")
-	public static int method1096(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8) {
+	public static int doMixForwards1To1Stereo(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8) {
 		int var9 = arg2 >> 8;
 		int var10 = arg7 >> 8;
 		int var11 = arg4 << 2;
@@ -290,12 +290,12 @@ public final class WaveStream extends PcmStream {
 			int var33 = var14++;
 			arg1[var33] += var20 * var12;
 		}
-		arg8.field3117 = var9 << 8;
+		arg8.position = var9 << 8;
 		return var14 >> 1;
 	}
 
 	@ObfuscatedName("oj.a(I[B[IIIIIIIIIILoj;)I")
-	public static int method1097(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, WaveStream arg10) {
+	public static int doMixBackwards1To1RampStereo(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, WaveStream arg10) {
 		int var11 = arg2 >> 8;
 		int var12 = arg9 >> 8;
 		int var13 = arg4 << 2;
@@ -306,7 +306,7 @@ public final class WaveStream extends PcmStream {
 		if ((var17 = arg3 + var11 + 1 - var12) > arg8) {
 			var17 = arg8;
 		}
-		arg10.field3121 += arg10.field3120 * (var17 - arg3);
+		arg10.volumeMono += arg10.volumeChangeSpeedMono * (var17 - arg3);
 		int var18 = arg3 << 1;
 		int var19 = var17 << 1;
 		int var37 = var19 - 6;
@@ -350,19 +350,19 @@ public final class WaveStream extends PcmStream {
 			arg1[var43] += var30 * var14;
 			var14 += var16;
 		}
-		arg10.field3128 = var13 >> 2;
-		arg10.field3114 = var14 >> 2;
-		arg10.field3117 = var11 << 8;
+		arg10.volumeStereoLeft = var13 >> 2;
+		arg10.volumeStereoRight = var14 >> 2;
+		arg10.position = var11 << 8;
 		return var18 >> 1;
 	}
 
 	@ObfuscatedName("oj.a(Ltf;III)Loj;")
-	public static WaveStream method1098(Wave arg0, int arg1, int arg2, int arg3) {
-		return arg0.field4031 == null || arg0.field4031.length == 0 ? null : new WaveStream(arg0, arg1, arg2, arg3);
+	public static WaveStream newRateFineVolPan(Wave arg0, int arg1, int arg2, int arg3) {
+		return arg0.samples == null || arg0.samples.length == 0 ? null : new WaveStream(arg0, arg1, arg2, arg3);
 	}
 
 	@ObfuscatedName("oj.b(I[B[IIIIIIIIIILoj;)I")
-	public static int method1099(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, WaveStream arg10) {
+	public static int doMixForwards1To1RampStereo(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, WaveStream arg10) {
 		int var11 = arg2 >> 8;
 		int var12 = arg9 >> 8;
 		int var13 = arg4 << 2;
@@ -373,7 +373,7 @@ public final class WaveStream extends PcmStream {
 		if ((var17 = arg3 + var12 - var11) > arg8) {
 			var17 = arg8;
 		}
-		arg10.field3121 += arg10.field3120 * (var17 - arg3);
+		arg10.volumeMono += arg10.volumeChangeSpeedMono * (var17 - arg3);
 		int var18 = arg3 << 1;
 		int var19 = var17 << 1;
 		int var37 = var19 - 6;
@@ -417,14 +417,14 @@ public final class WaveStream extends PcmStream {
 			arg1[var43] += var30 * var14;
 			var14 += var16;
 		}
-		arg10.field3128 = var13 >> 2;
-		arg10.field3114 = var14 >> 2;
-		arg10.field3117 = var11 << 8;
+		arg10.volumeStereoLeft = var13 >> 2;
+		arg10.volumeStereoRight = var14 >> 2;
+		arg10.position = var11 << 8;
 		return var18 >> 1;
 	}
 
 	@ObfuscatedName("oj.b([B[IIIIIIILoj;)I")
-	public static int method1101(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7) {
+	public static int doMixForwards1To1Mono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7) {
 		int var8 = arg2 >> 8;
 		int var9 = arg6 >> 8;
 		int var10 = arg4 << 2;
@@ -449,22 +449,22 @@ public final class WaveStream extends PcmStream {
 			var10001 = arg3++;
 			arg1[var10001] += arg0[var8++] * var10;
 		}
-		arg7.field3117 = var8 << 8;
+		arg7.position = var8 << 8;
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.b(II)I")
-	public static int method1102(int arg0, int arg1) {
+	public static int getRVol(int arg0, int arg1) {
 		return arg1 < 0 ? -arg0 : (int) ((double) arg0 * Math.sqrt((double) arg1 * 1.220703125E-4D) + 0.5D);
 	}
 
 	@ObfuscatedName("oj.c(II)I")
-	public static int method1106(int arg0, int arg1) {
+	public static int getLVol(int arg0, int arg1) {
 		return arg1 < 0 ? arg0 : (int) ((double) arg0 * Math.sqrt((double) (16384 - arg1) * 1.220703125E-4D) + 0.5D);
 	}
 
 	@ObfuscatedName("oj.a(II[B[IIIIIIILoj;II)I")
-	public static int method1107(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7, int arg8, int arg9) {
+	public static int doMixBackwardsMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7, int arg8, int arg9) {
 		int var10;
 		if (arg8 == 0 || (var10 = arg3 + (arg6 + arg8 + 256 - arg2) / arg8) > arg5) {
 			var10 = arg5;
@@ -486,13 +486,13 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += ((arg9 << 8) + (arg0[arg2 >> 8] - arg9) * (arg2 & 0xFF)) * arg4 >> 6;
 			arg2 += arg8;
 		}
-		arg7.field3117 = arg2;
+		arg7.position = arg2;
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.b(II[B[IIIIIIIIIILoj;II)I")
-	public static int method1109(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, WaveStream arg10, int arg11, int arg12) {
-		arg10.field3121 -= arg10.field3120 * arg3;
+	public static int doMixBackwardsRampStereo(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, WaveStream arg10, int arg11, int arg12) {
+		arg10.volumeMono -= arg10.volumeChangeSpeedMono * arg3;
 		int var13;
 		if (arg11 == 0 || (var13 = arg3 + (arg9 + arg11 + 256 - arg2) / arg11) > arg8) {
 			var13 = arg8;
@@ -528,17 +528,17 @@ public final class WaveStream extends PcmStream {
 			arg2 += arg11;
 		}
 		int var22 = var14 >> 1;
-		arg10.field3121 += arg10.field3120 * var22;
-		arg10.field3128 = arg4;
-		arg10.field3114 = arg5;
-		arg10.field3117 = arg2;
+		arg10.volumeMono += arg10.volumeChangeSpeedMono * var22;
+		arg10.volumeStereoLeft = arg4;
+		arg10.volumeStereoRight = arg5;
+		arg10.position = arg2;
 		return var22;
 	}
 
 	@ObfuscatedName("oj.b(II[B[IIIIIIIILoj;II)I")
-	public static int method1110(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8, int arg9, int arg10) {
-		arg8.field3128 -= arg8.field3118 * arg3;
-		arg8.field3114 -= arg8.field3125 * arg3;
+	public static int doMixBackwardsRampMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8, int arg9, int arg10) {
+		arg8.volumeStereoLeft -= arg8.volumeChangeSpeedStereoLeft * arg3;
+		arg8.volumeStereoRight -= arg8.volumeChangeSpeedStereoRight * arg3;
 		int var11;
 		if (arg9 == 0 || (var11 = arg3 + (arg7 + arg9 + 256 - arg2) / arg9) > arg6) {
 			var11 = arg6;
@@ -562,15 +562,15 @@ public final class WaveStream extends PcmStream {
 			arg4 += arg5;
 			arg2 += arg9;
 		}
-		arg8.field3128 += arg8.field3118 * arg3;
-		arg8.field3114 += arg8.field3125 * arg3;
-		arg8.field3121 = arg4;
-		arg8.field3117 = arg2;
+		arg8.volumeStereoLeft += arg8.volumeChangeSpeedStereoLeft * arg3;
+		arg8.volumeStereoRight += arg8.volumeChangeSpeedStereoRight * arg3;
+		arg8.volumeMono = arg4;
+		arg8.position = arg2;
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.c(II[B[IIIIIIIILoj;II)I")
-	public static int method1112(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8, int arg9, int arg10) {
+	public static int doMixBackwardsStereo(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8, int arg9, int arg10) {
 		int var11;
 		if (arg9 == 0 || (var11 = arg3 + (arg7 + arg9 + 256 - arg2) / arg9) > arg6) {
 			var11 = arg6;
@@ -601,12 +601,12 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += var19 * arg5 >> 6;
 			arg2 += arg9;
 		}
-		arg8.field3117 = arg2;
+		arg8.position = arg2;
 		return var12 >> 1;
 	}
 
 	@ObfuscatedName("oj.b([B[IIIIIIIILoj;)I")
-	public static int method1122(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8) {
+	public static int doMixForwards1To1RampMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8) {
 		int var9 = arg2 >> 8;
 		int var10 = arg7 >> 8;
 		int var11 = arg4 << 2;
@@ -615,8 +615,8 @@ public final class WaveStream extends PcmStream {
 		if ((var13 = arg3 + var10 - var9) > arg6) {
 			var13 = arg6;
 		}
-		arg8.field3128 += arg8.field3118 * (var13 - arg3);
-		arg8.field3114 += arg8.field3125 * (var13 - arg3);
+		arg8.volumeStereoLeft += arg8.volumeChangeSpeedStereoLeft * (var13 - arg3);
+		arg8.volumeStereoRight += arg8.volumeChangeSpeedStereoRight * (var13 - arg3);
 		var13 -= 3;
 		int var10001;
 		while (arg3 < var13) {
@@ -639,13 +639,13 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += arg0[var9++] * var11;
 			var11 += var12;
 		}
-		arg8.field3121 = var11 >> 2;
-		arg8.field3117 = var9 << 8;
+		arg8.volumeMono = var11 >> 2;
+		arg8.position = var9 << 8;
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.b(II[B[IIIIIIILoj;II)I")
-	public static int method1123(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7, int arg8, int arg9) {
+	public static int doMixForwardsMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7, int arg8, int arg9) {
 		int var10;
 		if (arg8 == 0 || (var10 = arg3 + (arg6 + arg8 - arg2 - 257) / arg8) > arg5) {
 			var10 = arg5;
@@ -668,17 +668,17 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += ((var14 << 8) + (arg9 - var14) * (arg2 & 0xFF)) * arg4 >> 6;
 			arg2 += arg8;
 		}
-		arg7.field3117 = arg2;
+		arg7.position = arg2;
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.a(Ltf;II)Loj;")
-	public static WaveStream method1124(Wave arg0, int arg1) {
-		return arg0.field4031 == null || arg0.field4031.length == 0 ? null : new WaveStream(arg0, (int) ((long) arg0.field4028 * 256L * (long) 100 / (long) (PcmPlayer.frequency * 100)), arg1 << 6);
+	public static WaveStream newRatePercent(Wave arg0, int arg1) {
+		return arg0.samples == null || arg0.samples.length == 0 ? null : new WaveStream(arg0, (int) ((long) arg0.samplingFrequency * 256L * (long) 100 / (long) (PcmPlayer.frequency * 100)), arg1 << 6);
 	}
 
 	@ObfuscatedName("oj.d(II[B[IIIIIIIILoj;II)I")
-	public static int method1125(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8, int arg9, int arg10) {
+	public static int doMixForwardsStereo(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, WaveStream arg8, int arg9, int arg10) {
 		int var11;
 		if (arg9 == 0 || (var11 = arg3 + (arg7 + arg9 - arg2 - 257) / arg9) > arg6) {
 			var11 = arg6;
@@ -710,81 +710,81 @@ public final class WaveStream extends PcmStream {
 			arg1[var10001] += var20 * arg5 >> 6;
 			arg2 += arg9;
 		}
-		arg8.field3117 = arg2;
+		arg8.position = arg2;
 		return var12 >> 1;
 	}
 
 	public WaveStream(Wave arg0, int arg1, int arg2) {
-		super.field935 = arg0;
-		this.field3119 = arg0.field4032;
-		this.field3123 = arg0.field4029;
-		this.field3122 = arg0.field4030;
-		this.field3115 = arg1;
-		this.field3124 = arg2;
-		this.field3127 = 8192;
-		this.field3117 = 0;
-		this.method1114();
+		super.sound = arg0;
+		this.loopStartPosition = arg0.loopStartPosition;
+		this.loopEndPosition = arg0.loopEndPosition;
+		this.loopReversed = arg0.loopReversed;
+		this.pitch = arg1;
+		this.volume = arg2;
+		this.pan = 8192;
+		this.position = 0;
+		this.setMLRVol();
 	}
 
 	public WaveStream(Wave arg0, int arg1, int arg2, int arg3) {
-		super.field935 = arg0;
-		this.field3119 = arg0.field4032;
-		this.field3123 = arg0.field4029;
-		this.field3122 = arg0.field4030;
-		this.field3115 = arg1;
-		this.field3124 = arg2;
-		this.field3127 = arg3;
-		this.field3117 = 0;
-		this.method1114();
+		super.sound = arg0;
+		this.loopStartPosition = arg0.loopStartPosition;
+		this.loopEndPosition = arg0.loopEndPosition;
+		this.loopReversed = arg0.loopReversed;
+		this.pitch = arg1;
+		this.volume = arg2;
+		this.pan = arg3;
+		this.position = 0;
+		this.setMLRVol();
 	}
 
 	@ObfuscatedName("oj.c(I)V")
-	public synchronized void method1086(int arg0) {
+	public synchronized void rampOut(int arg0) {
 		if (arg0 == 0) {
 			this.method1091();
 			this.unlink();
-		} else if (this.field3128 == 0 && this.field3114 == 0) {
-			this.field3126 = 0;
-			this.field3124 = 0;
-			this.field3121 = 0;
+		} else if (this.volumeStereoLeft == 0 && this.volumeStereoRight == 0) {
+			this.volumeChangeDelta = 0;
+			this.volume = 0;
+			this.volumeMono = 0;
 			this.unlink();
 		} else {
-			int var2 = -this.field3121;
-			if (this.field3121 > var2) {
-				var2 = this.field3121;
+			int var2 = -this.volumeMono;
+			if (this.volumeMono > var2) {
+				var2 = this.volumeMono;
 			}
-			if (-this.field3128 > var2) {
-				var2 = -this.field3128;
+			if (-this.volumeStereoLeft > var2) {
+				var2 = -this.volumeStereoLeft;
 			}
-			if (this.field3128 > var2) {
-				var2 = this.field3128;
+			if (this.volumeStereoLeft > var2) {
+				var2 = this.volumeStereoLeft;
 			}
-			if (-this.field3114 > var2) {
-				var2 = -this.field3114;
+			if (-this.volumeStereoRight > var2) {
+				var2 = -this.volumeStereoRight;
 			}
-			if (this.field3114 > var2) {
-				var2 = this.field3114;
+			if (this.volumeStereoRight > var2) {
+				var2 = this.volumeStereoRight;
 			}
 			if (arg0 > var2) {
 				arg0 = var2;
 			}
-			this.field3126 = arg0;
-			this.field3124 = Integer.MIN_VALUE;
-			this.field3120 = -this.field3121 / arg0;
-			this.field3118 = -this.field3128 / arg0;
-			this.field3125 = -this.field3114 / arg0;
+			this.volumeChangeDelta = arg0;
+			this.volume = Integer.MIN_VALUE;
+			this.volumeChangeSpeedMono = -this.volumeMono / arg0;
+			this.volumeChangeSpeedStereoLeft = -this.volumeStereoLeft / arg0;
+			this.volumeChangeSpeedStereoRight = -this.volumeStereoRight / arg0;
 		}
 	}
 
 	@ObfuscatedName("oj.c()I")
 	@Override
-	public int method383() {
-		return this.field3124 == 0 && this.field3126 == 0 ? 0 : 1;
+	public int selfMixCost() {
+		return this.volume == 0 && this.volumeChangeDelta == 0 ? 0 : 1;
 	}
 
 	@ObfuscatedName("oj.e()Z")
-	public boolean method1088() {
-		int var1 = this.field3124;
+	public boolean finaliseRamp() {
+		int var1 = this.volume;
 		int var2;
 		int var3;
 		if (var1 == Integer.MIN_VALUE) {
@@ -792,589 +792,589 @@ public final class WaveStream extends PcmStream {
 			var3 = 0;
 			var1 = 0;
 		} else {
-			var3 = method1106(var1, this.field3127);
-			var2 = method1102(var1, this.field3127);
+			var3 = getLVol(var1, this.pan);
+			var2 = getRVol(var1, this.pan);
 		}
-		if (this.field3121 != var1 || this.field3128 != var3 || this.field3114 != var2) {
-			if (this.field3121 < var1) {
-				this.field3120 = 1;
-				this.field3126 = var1 - this.field3121;
-			} else if (this.field3121 > var1) {
-				this.field3120 = -1;
-				this.field3126 = this.field3121 - var1;
+		if (this.volumeMono != var1 || this.volumeStereoLeft != var3 || this.volumeStereoRight != var2) {
+			if (this.volumeMono < var1) {
+				this.volumeChangeSpeedMono = 1;
+				this.volumeChangeDelta = var1 - this.volumeMono;
+			} else if (this.volumeMono > var1) {
+				this.volumeChangeSpeedMono = -1;
+				this.volumeChangeDelta = this.volumeMono - var1;
 			} else {
-				this.field3120 = 0;
+				this.volumeChangeSpeedMono = 0;
 			}
-			if (this.field3128 < var3) {
-				this.field3118 = 1;
-				if (this.field3126 == 0 || this.field3126 > var3 - this.field3128) {
-					this.field3126 = var3 - this.field3128;
+			if (this.volumeStereoLeft < var3) {
+				this.volumeChangeSpeedStereoLeft = 1;
+				if (this.volumeChangeDelta == 0 || this.volumeChangeDelta > var3 - this.volumeStereoLeft) {
+					this.volumeChangeDelta = var3 - this.volumeStereoLeft;
 				}
-			} else if (this.field3128 > var3) {
-				this.field3118 = -1;
-				if (this.field3126 == 0 || this.field3126 > this.field3128 - var3) {
-					this.field3126 = this.field3128 - var3;
+			} else if (this.volumeStereoLeft > var3) {
+				this.volumeChangeSpeedStereoLeft = -1;
+				if (this.volumeChangeDelta == 0 || this.volumeChangeDelta > this.volumeStereoLeft - var3) {
+					this.volumeChangeDelta = this.volumeStereoLeft - var3;
 				}
 			} else {
-				this.field3118 = 0;
+				this.volumeChangeSpeedStereoLeft = 0;
 			}
-			if (this.field3114 < var2) {
-				this.field3125 = 1;
-				if (this.field3126 == 0 || this.field3126 > var2 - this.field3114) {
-					this.field3126 = var2 - this.field3114;
+			if (this.volumeStereoRight < var2) {
+				this.volumeChangeSpeedStereoRight = 1;
+				if (this.volumeChangeDelta == 0 || this.volumeChangeDelta > var2 - this.volumeStereoRight) {
+					this.volumeChangeDelta = var2 - this.volumeStereoRight;
 				}
-			} else if (this.field3114 > var2) {
-				this.field3125 = -1;
-				if (this.field3126 == 0 || this.field3126 > this.field3114 - var2) {
-					this.field3126 = this.field3114 - var2;
+			} else if (this.volumeStereoRight > var2) {
+				this.volumeChangeSpeedStereoRight = -1;
+				if (this.volumeChangeDelta == 0 || this.volumeChangeDelta > this.volumeStereoRight - var2) {
+					this.volumeChangeDelta = this.volumeStereoRight - var2;
 				}
 			} else {
-				this.field3125 = 0;
+				this.volumeChangeSpeedStereoRight = 0;
 			}
 			return false;
-		} else if (this.field3124 == Integer.MIN_VALUE) {
-			this.field3124 = 0;
-			this.field3121 = this.field3128 = this.field3114 = 0;
+		} else if (this.volume == Integer.MIN_VALUE) {
+			this.volume = 0;
+			this.volumeMono = this.volumeStereoLeft = this.volumeStereoRight = 0;
 			this.unlink();
 			return true;
 		} else {
-			this.method1114();
+			this.setMLRVol();
 			return false;
 		}
 	}
 
 	@ObfuscatedName("oj.d(I)V")
 	public synchronized void method1091() {
-		this.method1115(0, this.method1103());
+		this.setVolPanFine(0, this.getPanFine());
 	}
 
 	@ObfuscatedName("oj.b()I")
 	@Override
-	public int method382() {
-		int var1 = this.field3121 * 3 >> 6;
+	public int priority() {
+		int var1 = this.volumeMono * 3 >> 6;
 		int var2 = (var1 ^ var1 >> 31) + (var1 >>> 31);
-		if (this.field3116 == 0) {
-			var2 -= var2 * this.field3117 / (((Wave) super.field935).field4031.length << 8);
-		} else if (this.field3116 >= 0) {
-			var2 -= var2 * this.field3119 / ((Wave) super.field935).field4031.length;
+		if (this.loopCount == 0) {
+			var2 -= var2 * this.position / (((Wave) super.sound).samples.length << 8);
+		} else if (this.loopCount >= 0) {
+			var2 -= var2 * this.loopStartPosition / ((Wave) super.sound).samples.length;
 		}
 		return var2 > 255 ? 255 : var2;
 	}
 
 	@ObfuscatedName("oj.a(III)V")
-	public synchronized void method1092(int arg0, int arg1, int arg2) {
+	public synchronized void rampVolPanFine(int arg0, int arg1, int arg2) {
 		if (arg0 == 0) {
-			this.method1115(arg1, arg2);
+			this.setVolPanFine(arg1, arg2);
 			return;
 		}
-		int var4 = method1106(arg1, arg2);
-		int var5 = method1102(arg1, arg2);
-		if (this.field3128 == var4 && this.field3114 == var5) {
-			this.field3126 = 0;
+		int var4 = getLVol(arg1, arg2);
+		int var5 = getRVol(arg1, arg2);
+		if (this.volumeStereoLeft == var4 && this.volumeStereoRight == var5) {
+			this.volumeChangeDelta = 0;
 			return;
 		}
-		int var6 = arg1 - this.field3121;
-		if (this.field3121 - arg1 > var6) {
-			var6 = this.field3121 - arg1;
+		int var6 = arg1 - this.volumeMono;
+		if (this.volumeMono - arg1 > var6) {
+			var6 = this.volumeMono - arg1;
 		}
-		if (var4 - this.field3128 > var6) {
-			var6 = var4 - this.field3128;
+		if (var4 - this.volumeStereoLeft > var6) {
+			var6 = var4 - this.volumeStereoLeft;
 		}
-		if (this.field3128 - var4 > var6) {
-			var6 = this.field3128 - var4;
+		if (this.volumeStereoLeft - var4 > var6) {
+			var6 = this.volumeStereoLeft - var4;
 		}
-		if (var5 - this.field3114 > var6) {
-			var6 = var5 - this.field3114;
+		if (var5 - this.volumeStereoRight > var6) {
+			var6 = var5 - this.volumeStereoRight;
 		}
-		if (this.field3114 - var5 > var6) {
-			var6 = this.field3114 - var5;
+		if (this.volumeStereoRight - var5 > var6) {
+			var6 = this.volumeStereoRight - var5;
 		}
 		if (arg0 > var6) {
 			arg0 = var6;
 		}
-		this.field3126 = arg0;
-		this.field3124 = arg1;
-		this.field3127 = arg2;
-		this.field3120 = (arg1 - this.field3121) / arg0;
-		this.field3118 = (var4 - this.field3128) / arg0;
-		this.field3125 = (var5 - this.field3114) / arg0;
+		this.volumeChangeDelta = arg0;
+		this.volume = arg1;
+		this.pan = arg2;
+		this.volumeChangeSpeedMono = (arg1 - this.volumeMono) / arg0;
+		this.volumeChangeSpeedStereoLeft = (var4 - this.volumeStereoLeft) / arg0;
+		this.volumeChangeSpeedStereoRight = (var5 - this.volumeStereoRight) / arg0;
 	}
 
 	@ObfuscatedName("oj.f()I")
-	public synchronized int method1093() {
-		return this.field3124 == Integer.MIN_VALUE ? 0 : this.field3124;
+	public synchronized int getVolumeFine() {
+		return this.volume == Integer.MIN_VALUE ? 0 : this.volume;
 	}
 
 	@ObfuscatedName("oj.a([IIIII)I")
-	public int method1100(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
+	public int mixForwardSto(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
 		do {
-			if (this.field3126 <= 0) {
-				if (this.field3115 == 256 && (this.field3117 & 0xFF) == 0) {
-					if (PcmPlayer.field99) {
-						return method1096(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, arg3, arg2, this);
+			if (this.volumeChangeDelta <= 0) {
+				if (this.pitch == 256 && (this.position & 0xFF) == 0) {
+					if (PcmPlayer.stereo) {
+						return doMixForwards1To1Stereo(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeStereoLeft, this.volumeStereoRight, arg3, arg2, this);
 					}
-					return method1101(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, arg3, arg2, this);
+					return doMixForwards1To1Mono(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this);
 				}
-				if (PcmPlayer.field99) {
-					return method1125(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, arg3, arg2, this, this.field3115, arg4);
+				if (PcmPlayer.stereo) {
+					return doMixForwardsStereo(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeStereoLeft, this.volumeStereoRight, arg3, arg2, this, this.pitch, arg4);
 				}
-				return method1123(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, arg3, arg2, this, this.field3115, arg4);
+				return doMixForwardsMono(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this, this.pitch, arg4);
 			}
-			int var6 = arg1 + this.field3126;
+			int var6 = arg1 + this.volumeChangeDelta;
 			if (var6 > arg3) {
 				var6 = arg3;
 			}
-			this.field3126 += arg1;
-			if (this.field3115 == 256 && (this.field3117 & 0xFF) == 0) {
-				if (PcmPlayer.field99) {
-					arg1 = method1099(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, this.field3118, this.field3125, var6, arg2, this);
+			this.volumeChangeDelta += arg1;
+			if (this.pitch == 256 && (this.position & 0xFF) == 0) {
+				if (PcmPlayer.stereo) {
+					arg1 = doMixForwards1To1RampStereo(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeStereoLeft, this.volumeStereoRight, this.volumeChangeSpeedStereoLeft, this.volumeChangeSpeedStereoRight, var6, arg2, this);
 				} else {
-					arg1 = method1122(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, this.field3120, var6, arg2, this);
+					arg1 = doMixForwards1To1RampMono(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeMono, this.volumeChangeSpeedMono, var6, arg2, this);
 				}
-			} else if (PcmPlayer.field99) {
-				arg1 = method1090(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, this.field3118, this.field3125, var6, arg2, this, this.field3115, arg4);
+			} else if (PcmPlayer.stereo) {
+				arg1 = doMixForwardsRampStereo(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeStereoLeft, this.volumeStereoRight, this.volumeChangeSpeedStereoLeft, this.volumeChangeSpeedStereoRight, var6, arg2, this, this.pitch, arg4);
 			} else {
-				arg1 = method1087(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, this.field3120, var6, arg2, this, this.field3115, arg4);
+				arg1 = doMixForwardsRampMono(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeMono, this.volumeChangeSpeedMono, var6, arg2, this, this.pitch, arg4);
 			}
-			this.field3126 -= arg1;
-			if (this.field3126 != 0) {
+			this.volumeChangeDelta -= arg1;
+			if (this.volumeChangeDelta != 0) {
 				return arg1;
 			}
-		} while (!this.method1088());
+		} while (!this.finaliseRamp());
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.g()I")
-	public synchronized int method1103() {
-		return this.field3127 < 0 ? -1 : this.field3127;
+	public synchronized int getPanFine() {
+		return this.pan < 0 ? -1 : this.pan;
 	}
 
 	@ObfuscatedName("oj.h()I")
-	public synchronized int method1104() {
-		return this.field3115 < 0 ? -this.field3115 : this.field3115;
+	public synchronized int getRateRaw() {
+		return this.pitch < 0 ? -this.pitch : this.pitch;
 	}
 
 	@ObfuscatedName("oj.e(I)V")
-	public synchronized void method1105(int arg0) {
-		if (this.field3115 < 0) {
-			this.field3115 = -arg0;
+	public synchronized void setRateRaw(int arg0) {
+		if (this.pitch < 0) {
+			this.pitch = -arg0;
 		} else {
-			this.field3115 = arg0;
+			this.pitch = arg0;
 		}
 	}
 
 	@ObfuscatedName("oj.f(I)V")
-	public synchronized void method1108(int arg0) {
-		int var2 = ((Wave) super.field935).field4031.length << 8;
+	public synchronized void setPosition(int arg0) {
+		int var2 = ((Wave) super.sound).samples.length << 8;
 		if (arg0 < -1) {
 			arg0 = -1;
 		}
 		if (arg0 > var2) {
 			arg0 = var2;
 		}
-		this.field3117 = arg0;
+		this.position = arg0;
 	}
 
 	@ObfuscatedName("oj.a()Lef;")
 	@Override
-	public PcmStream method380() {
+	public PcmStream substreamNext() {
 		return null;
 	}
 
 	@ObfuscatedName("oj.d()Lef;")
 	@Override
-	public PcmStream method385() {
+	public PcmStream substreamStart() {
 		return null;
 	}
 
 	@ObfuscatedName("oj.b(Z)V")
 	public synchronized void method1111() {
-		this.field3115 = (this.field3115 ^ this.field3115 >> 31) + (this.field3115 >>> 31);
-		this.field3115 = -this.field3115;
+		this.pitch = (this.pitch ^ this.pitch >> 31) + (this.pitch >>> 31);
+		this.pitch = -this.pitch;
 	}
 
 	@ObfuscatedName("oj.i()V")
-	public void method1113() {
-		if (this.field3126 == 0) {
+	public void skipRampNounLink() {
+		if (this.volumeChangeDelta == 0) {
 			return;
 		}
-		if (this.field3124 == Integer.MIN_VALUE) {
-			this.field3124 = 0;
+		if (this.volume == Integer.MIN_VALUE) {
+			this.volume = 0;
 		}
-		this.field3126 = 0;
-		this.method1114();
+		this.volumeChangeDelta = 0;
+		this.setMLRVol();
 	}
 
 	@ObfuscatedName("oj.j()V")
-	public void method1114() {
-		this.field3121 = this.field3124;
-		this.field3128 = method1106(this.field3124, this.field3127);
-		this.field3114 = method1102(this.field3124, this.field3127);
+	public void setMLRVol() {
+		this.volumeMono = this.volume;
+		this.volumeStereoLeft = getLVol(this.volume, this.pan);
+		this.volumeStereoRight = getRVol(this.volume, this.pan);
 	}
 
 	@ObfuscatedName("oj.d(II)V")
-	public synchronized void method1115(int arg0, int arg1) {
-		this.field3124 = arg0;
-		this.field3127 = arg1;
-		this.field3126 = 0;
-		this.method1114();
+	public synchronized void setVolPanFine(int arg0, int arg1) {
+		this.volume = arg0;
+		this.pan = arg1;
+		this.volumeChangeDelta = 0;
+		this.setMLRVol();
 	}
 
 	@ObfuscatedName("oj.e(II)V")
-	public synchronized void method1116(int arg0, int arg1) {
-		this.method1092(arg0, arg1, this.method1103());
+	public synchronized void rampVolumeFine(int arg0, int arg1) {
+		this.rampVolPanFine(arg0, arg1, this.getPanFine());
 	}
 
 	@ObfuscatedName("oj.a([III)V")
 	@Override
-	public synchronized void method379(int[] arg0, int arg1, int arg2) {
-		if (this.field3124 == 0 && this.field3126 == 0) {
-			this.method384(arg2);
+	public synchronized void doMix(int[] arg0, int arg1, int arg2) {
+		if (this.volume == 0 && this.volumeChangeDelta == 0) {
+			this.pretendToMix(arg2);
 			return;
 		}
-		Wave var4 = (Wave) super.field935;
-		int var5 = this.field3119 << 8;
-		int var6 = this.field3123 << 8;
-		int var7 = var4.field4031.length << 8;
+		Wave var4 = (Wave) super.sound;
+		int var5 = this.loopStartPosition << 8;
+		int var6 = this.loopEndPosition << 8;
+		int var7 = var4.samples.length << 8;
 		int var8 = var6 - var5;
 		if (var8 <= 0) {
-			this.field3116 = 0;
+			this.loopCount = 0;
 		}
 		int var9 = arg1;
 		int var10 = arg2 + arg1;
-		if (this.field3117 < 0) {
-			if (this.field3115 <= 0) {
-				this.method1113();
+		if (this.position < 0) {
+			if (this.pitch <= 0) {
+				this.skipRampNounLink();
 				this.unlink();
 				return;
 			}
-			this.field3117 = 0;
+			this.position = 0;
 		}
-		if (this.field3117 >= var7) {
-			if (this.field3115 >= 0) {
-				this.method1113();
+		if (this.position >= var7) {
+			if (this.pitch >= 0) {
+				this.skipRampNounLink();
 				this.unlink();
 				return;
 			}
-			this.field3117 = var7 - 1;
+			this.position = var7 - 1;
 		}
-		if (this.field3116 >= 0) {
-			if (this.field3116 > 0) {
-				if (this.field3122) {
+		if (this.loopCount >= 0) {
+			if (this.loopCount > 0) {
+				if (this.loopReversed) {
 					label130: {
-						if (this.field3115 < 0) {
-							var9 = this.method1118(arg0, arg1, var5, var10, var4.field4031[this.field3119]);
-							if (this.field3117 >= var5) {
+						if (this.pitch < 0) {
+							var9 = this.mixBackwardSto(arg0, arg1, var5, var10, var4.samples[this.loopStartPosition]);
+							if (this.position >= var5) {
 								return;
 							}
-							this.field3117 = var5 + var5 - this.field3117 - 1;
-							this.field3115 = -this.field3115;
-							if (--this.field3116 == 0) {
+							this.position = var5 + var5 - this.position - 1;
+							this.pitch = -this.pitch;
+							if (--this.loopCount == 0) {
 								break label130;
 							}
 						}
 						do {
-							var9 = this.method1100(arg0, var9, var6, var10, var4.field4031[this.field3123 - 1]);
-							if (this.field3117 < var6) {
+							var9 = this.mixForwardSto(arg0, var9, var6, var10, var4.samples[this.loopEndPosition - 1]);
+							if (this.position < var6) {
 								return;
 							}
-							this.field3117 = var6 + var6 - this.field3117 - 1;
-							this.field3115 = -this.field3115;
-							if (--this.field3116 == 0) {
+							this.position = var6 + var6 - this.position - 1;
+							this.pitch = -this.pitch;
+							if (--this.loopCount == 0) {
 								break;
 							}
-							var9 = this.method1118(arg0, var9, var5, var10, var4.field4031[this.field3119]);
-							if (this.field3117 >= var5) {
+							var9 = this.mixBackwardSto(arg0, var9, var5, var10, var4.samples[this.loopStartPosition]);
+							if (this.position >= var5) {
 								return;
 							}
-							this.field3117 = var5 + var5 - this.field3117 - 1;
-							this.field3115 = -this.field3115;
-						} while (--this.field3116 != 0);
+							this.position = var5 + var5 - this.position - 1;
+							this.pitch = -this.pitch;
+						} while (--this.loopCount != 0);
 					}
-				} else if (this.field3115 < 0) {
+				} else if (this.pitch < 0) {
 					while (true) {
-						var9 = this.method1118(arg0, var9, var5, var10, var4.field4031[this.field3123 - 1]);
-						if (this.field3117 >= var5) {
+						var9 = this.mixBackwardSto(arg0, var9, var5, var10, var4.samples[this.loopEndPosition - 1]);
+						if (this.position >= var5) {
 							return;
 						}
-						int var12 = (var6 - this.field3117 - 1) / var8;
-						if (var12 >= this.field3116) {
-							this.field3117 += var8 * this.field3116;
-							this.field3116 = 0;
+						int var12 = (var6 - this.position - 1) / var8;
+						if (var12 >= this.loopCount) {
+							this.position += var8 * this.loopCount;
+							this.loopCount = 0;
 							break;
 						}
-						this.field3117 += var8 * var12;
-						this.field3116 -= var12;
+						this.position += var8 * var12;
+						this.loopCount -= var12;
 					}
 				} else {
 					while (true) {
-						var9 = this.method1100(arg0, var9, var6, var10, var4.field4031[this.field3119]);
-						if (this.field3117 < var6) {
+						var9 = this.mixForwardSto(arg0, var9, var6, var10, var4.samples[this.loopStartPosition]);
+						if (this.position < var6) {
 							return;
 						}
-						int var13 = (this.field3117 - var5) / var8;
-						if (var13 >= this.field3116) {
-							this.field3117 -= var8 * this.field3116;
-							this.field3116 = 0;
+						int var13 = (this.position - var5) / var8;
+						if (var13 >= this.loopCount) {
+							this.position -= var8 * this.loopCount;
+							this.loopCount = 0;
 							break;
 						}
-						this.field3117 -= var8 * var13;
-						this.field3116 -= var13;
+						this.position -= var8 * var13;
+						this.loopCount -= var13;
 					}
 				}
 			}
-			if (this.field3115 < 0) {
-				this.method1118(arg0, var9, 0, var10, 0);
-				if (this.field3117 < 0) {
-					this.field3117 = -1;
-					this.method1113();
+			if (this.pitch < 0) {
+				this.mixBackwardSto(arg0, var9, 0, var10, 0);
+				if (this.position < 0) {
+					this.position = -1;
+					this.skipRampNounLink();
 					this.unlink();
 					return;
 				}
 			} else {
-				this.method1100(arg0, var9, var7, var10, 0);
-				if (this.field3117 >= var7) {
-					this.field3117 = var7;
-					this.method1113();
+				this.mixForwardSto(arg0, var9, var7, var10, 0);
+				if (this.position >= var7) {
+					this.position = var7;
+					this.skipRampNounLink();
 					this.unlink();
 				}
 			}
-		} else if (this.field3122) {
-			if (this.field3115 < 0) {
-				var9 = this.method1118(arg0, arg1, var5, var10, var4.field4031[this.field3119]);
-				if (this.field3117 >= var5) {
+		} else if (this.loopReversed) {
+			if (this.pitch < 0) {
+				var9 = this.mixBackwardSto(arg0, arg1, var5, var10, var4.samples[this.loopStartPosition]);
+				if (this.position >= var5) {
 					return;
 				}
-				this.field3117 = var5 + var5 - this.field3117 - 1;
-				this.field3115 = -this.field3115;
+				this.position = var5 + var5 - this.position - 1;
+				this.pitch = -this.pitch;
 			}
 			while (true) {
-				int var11 = this.method1100(arg0, var9, var6, var10, var4.field4031[this.field3123 - 1]);
-				if (this.field3117 < var6) {
+				int var11 = this.mixForwardSto(arg0, var9, var6, var10, var4.samples[this.loopEndPosition - 1]);
+				if (this.position < var6) {
 					return;
 				}
-				this.field3117 = var6 + var6 - this.field3117 - 1;
-				this.field3115 = -this.field3115;
-				var9 = this.method1118(arg0, var11, var5, var10, var4.field4031[this.field3119]);
-				if (this.field3117 >= var5) {
+				this.position = var6 + var6 - this.position - 1;
+				this.pitch = -this.pitch;
+				var9 = this.mixBackwardSto(arg0, var11, var5, var10, var4.samples[this.loopStartPosition]);
+				if (this.position >= var5) {
 					return;
 				}
-				this.field3117 = var5 + var5 - this.field3117 - 1;
-				this.field3115 = -this.field3115;
+				this.position = var5 + var5 - this.position - 1;
+				this.pitch = -this.pitch;
 			}
-		} else if (this.field3115 < 0) {
+		} else if (this.pitch < 0) {
 			while (true) {
-				var9 = this.method1118(arg0, var9, var5, var10, var4.field4031[this.field3123 - 1]);
-				if (this.field3117 >= var5) {
+				var9 = this.mixBackwardSto(arg0, var9, var5, var10, var4.samples[this.loopEndPosition - 1]);
+				if (this.position >= var5) {
 					return;
 				}
-				this.field3117 = var6 - (var6 - 1 - this.field3117) % var8 - 1;
+				this.position = var6 - (var6 - 1 - this.position) % var8 - 1;
 			}
 		} else {
 			while (true) {
-				var9 = this.method1100(arg0, var9, var6, var10, var4.field4031[this.field3119]);
-				if (this.field3117 < var6) {
+				var9 = this.mixForwardSto(arg0, var9, var6, var10, var4.samples[this.loopStartPosition]);
+				if (this.position < var6) {
 					return;
 				}
-				this.field3117 = var5 + (this.field3117 - var5) % var8;
+				this.position = var5 + (this.position - var5) % var8;
 			}
 		}
 	}
 
 	@ObfuscatedName("oj.g(I)V")
-	public synchronized void method1117(int arg0) {
-		this.method1115(arg0 << 6, this.method1103());
+	public synchronized void applyVolume(int arg0) {
+		this.setVolPanFine(arg0 << 6, this.getPanFine());
 	}
 
 	@ObfuscatedName("oj.b([IIIII)I")
-	public int method1118(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
+	public int mixBackwardSto(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
 		do {
-			if (this.field3126 <= 0) {
-				if (this.field3115 == -256 && (this.field3117 & 0xFF) == 0) {
-					if (PcmPlayer.field99) {
-						return method1094(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, arg3, arg2, this);
+			if (this.volumeChangeDelta <= 0) {
+				if (this.pitch == -256 && (this.position & 0xFF) == 0) {
+					if (PcmPlayer.stereo) {
+						return doMixBackwards1To1Stereo(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeStereoLeft, this.volumeStereoRight, arg3, arg2, this);
 					}
-					return method1089(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, arg3, arg2, this);
+					return doMixBackwards1To1Mono(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this);
 				}
-				if (PcmPlayer.field99) {
-					return method1112(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, arg3, arg2, this, this.field3115, arg4);
+				if (PcmPlayer.stereo) {
+					return doMixBackwardsStereo(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeStereoLeft, this.volumeStereoRight, arg3, arg2, this, this.pitch, arg4);
 				}
-				return method1107(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, arg3, arg2, this, this.field3115, arg4);
+				return doMixBackwardsMono(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this, this.pitch, arg4);
 			}
-			int var6 = arg1 + this.field3126;
+			int var6 = arg1 + this.volumeChangeDelta;
 			if (var6 > arg3) {
 				var6 = arg3;
 			}
-			this.field3126 += arg1;
-			if (this.field3115 == -256 && (this.field3117 & 0xFF) == 0) {
-				if (PcmPlayer.field99) {
-					arg1 = method1097(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, this.field3118, this.field3125, var6, arg2, this);
+			this.volumeChangeDelta += arg1;
+			if (this.pitch == -256 && (this.position & 0xFF) == 0) {
+				if (PcmPlayer.stereo) {
+					arg1 = doMixBackwards1To1RampStereo(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeStereoLeft, this.volumeStereoRight, this.volumeChangeSpeedStereoLeft, this.volumeChangeSpeedStereoRight, var6, arg2, this);
 				} else {
-					arg1 = method1095(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, this.field3120, var6, arg2, this);
+					arg1 = doMixBackwards1To1RampMono(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeMono, this.volumeChangeSpeedMono, var6, arg2, this);
 				}
-			} else if (PcmPlayer.field99) {
-				arg1 = method1109(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3128, this.field3114, this.field3118, this.field3125, var6, arg2, this, this.field3115, arg4);
+			} else if (PcmPlayer.stereo) {
+				arg1 = doMixBackwardsRampStereo(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeStereoLeft, this.volumeStereoRight, this.volumeChangeSpeedStereoLeft, this.volumeChangeSpeedStereoRight, var6, arg2, this, this.pitch, arg4);
 			} else {
-				arg1 = method1110(((Wave) super.field935).field4031, arg0, this.field3117, arg1, this.field3121, this.field3120, var6, arg2, this, this.field3115, arg4);
+				arg1 = doMixBackwardsRampMono(((Wave) super.sound).samples, arg0, this.position, arg1, this.volumeMono, this.volumeChangeSpeedMono, var6, arg2, this, this.pitch, arg4);
 			}
-			this.field3126 -= arg1;
-			if (this.field3126 != 0) {
+			this.volumeChangeDelta -= arg1;
+			if (this.volumeChangeDelta != 0) {
 				return arg1;
 			}
-		} while (!this.method1088());
+		} while (!this.finaliseRamp());
 		return arg3;
 	}
 
 	@ObfuscatedName("oj.h(I)V")
-	public synchronized void method1119(int arg0) {
-		this.field3116 = arg0;
+	public synchronized void setLoopCount(int arg0) {
+		this.loopCount = arg0;
 	}
 
 	@ObfuscatedName("oj.k()Z")
-	public boolean method1120() {
-		return this.field3117 < 0 || this.field3117 >= ((Wave) super.field935).field4031.length << 8;
+	public boolean isFinished() {
+		return this.position < 0 || this.position >= ((Wave) super.sound).samples.length << 8;
 	}
 
 	@ObfuscatedName("oj.b(I)V")
 	@Override
-	public synchronized void method384(int arg0) {
-		if (this.field3126 > 0) {
-			if (arg0 >= this.field3126) {
-				if (this.field3124 == Integer.MIN_VALUE) {
-					this.field3124 = 0;
-					this.field3121 = this.field3128 = this.field3114 = 0;
+	public synchronized void pretendToMix(int arg0) {
+		if (this.volumeChangeDelta > 0) {
+			if (arg0 >= this.volumeChangeDelta) {
+				if (this.volume == Integer.MIN_VALUE) {
+					this.volume = 0;
+					this.volumeMono = this.volumeStereoLeft = this.volumeStereoRight = 0;
 					this.unlink();
-					arg0 = this.field3126;
+					arg0 = this.volumeChangeDelta;
 				}
-				this.field3126 = 0;
-				this.method1114();
+				this.volumeChangeDelta = 0;
+				this.setMLRVol();
 			} else {
-				this.field3121 += this.field3120 * arg0;
-				this.field3128 += this.field3118 * arg0;
-				this.field3114 += this.field3125 * arg0;
-				this.field3126 -= arg0;
+				this.volumeMono += this.volumeChangeSpeedMono * arg0;
+				this.volumeStereoLeft += this.volumeChangeSpeedStereoLeft * arg0;
+				this.volumeStereoRight += this.volumeChangeSpeedStereoRight * arg0;
+				this.volumeChangeDelta -= arg0;
 			}
 		}
-		Wave var2 = (Wave) super.field935;
-		int var3 = this.field3119 << 8;
-		int var4 = this.field3123 << 8;
-		int var5 = var2.field4031.length << 8;
+		Wave var2 = (Wave) super.sound;
+		int var3 = this.loopStartPosition << 8;
+		int var4 = this.loopEndPosition << 8;
+		int var5 = var2.samples.length << 8;
 		int var6 = var4 - var3;
 		if (var6 <= 0) {
-			this.field3116 = 0;
+			this.loopCount = 0;
 		}
-		if (this.field3117 < 0) {
-			if (this.field3115 <= 0) {
-				this.method1113();
+		if (this.position < 0) {
+			if (this.pitch <= 0) {
+				this.skipRampNounLink();
 				this.unlink();
 				return;
 			}
-			this.field3117 = 0;
+			this.position = 0;
 		}
-		if (this.field3117 >= var5) {
-			if (this.field3115 >= 0) {
-				this.method1113();
+		if (this.position >= var5) {
+			if (this.pitch >= 0) {
+				this.skipRampNounLink();
 				this.unlink();
 				return;
 			}
-			this.field3117 = var5 - 1;
+			this.position = var5 - 1;
 		}
-		this.field3117 += this.field3115 * arg0;
-		if (this.field3116 >= 0) {
-			if (this.field3116 > 0) {
-				if (this.field3122) {
+		this.position += this.pitch * arg0;
+		if (this.loopCount >= 0) {
+			if (this.loopCount > 0) {
+				if (this.loopReversed) {
 					label125: {
-						if (this.field3115 < 0) {
-							if (this.field3117 >= var3) {
+						if (this.pitch < 0) {
+							if (this.position >= var3) {
 								return;
 							}
-							this.field3117 = var3 + var3 - this.field3117 - 1;
-							this.field3115 = -this.field3115;
-							if (--this.field3116 == 0) {
+							this.position = var3 + var3 - this.position - 1;
+							this.pitch = -this.pitch;
+							if (--this.loopCount == 0) {
 								break label125;
 							}
 						}
 						do {
-							if (this.field3117 < var4) {
+							if (this.position < var4) {
 								return;
 							}
-							this.field3117 = var4 + var4 - this.field3117 - 1;
-							this.field3115 = -this.field3115;
-							if (--this.field3116 == 0) {
+							this.position = var4 + var4 - this.position - 1;
+							this.pitch = -this.pitch;
+							if (--this.loopCount == 0) {
 								break;
 							}
-							if (this.field3117 >= var3) {
+							if (this.position >= var3) {
 								return;
 							}
-							this.field3117 = var3 + var3 - this.field3117 - 1;
-							this.field3115 = -this.field3115;
-						} while (--this.field3116 != 0);
+							this.position = var3 + var3 - this.position - 1;
+							this.pitch = -this.pitch;
+						} while (--this.loopCount != 0);
 					}
-				} else if (this.field3115 < 0) {
-					if (this.field3117 >= var3) {
+				} else if (this.pitch < 0) {
+					if (this.position >= var3) {
 						return;
 					}
-					int var7 = (var4 - this.field3117 - 1) / var6;
-					if (var7 < this.field3116) {
-						this.field3117 += var6 * var7;
-						this.field3116 -= var7;
+					int var7 = (var4 - this.position - 1) / var6;
+					if (var7 < this.loopCount) {
+						this.position += var6 * var7;
+						this.loopCount -= var7;
 						return;
 					}
-					this.field3117 += var6 * this.field3116;
-					this.field3116 = 0;
-				} else if (this.field3117 >= var4) {
-					int var8 = (this.field3117 - var3) / var6;
-					if (var8 < this.field3116) {
-						this.field3117 -= var6 * var8;
-						this.field3116 -= var8;
+					this.position += var6 * this.loopCount;
+					this.loopCount = 0;
+				} else if (this.position >= var4) {
+					int var8 = (this.position - var3) / var6;
+					if (var8 < this.loopCount) {
+						this.position -= var6 * var8;
+						this.loopCount -= var8;
 						return;
 					}
-					this.field3117 -= var6 * this.field3116;
-					this.field3116 = 0;
+					this.position -= var6 * this.loopCount;
+					this.loopCount = 0;
 				} else {
 					return;
 				}
 			}
-			if (this.field3115 < 0) {
-				if (this.field3117 < 0) {
-					this.field3117 = -1;
-					this.method1113();
+			if (this.pitch < 0) {
+				if (this.position < 0) {
+					this.position = -1;
+					this.skipRampNounLink();
 					this.unlink();
 					return;
 				}
-			} else if (this.field3117 >= var5) {
-				this.field3117 = var5;
-				this.method1113();
+			} else if (this.position >= var5) {
+				this.position = var5;
+				this.skipRampNounLink();
 				this.unlink();
 			}
-		} else if (this.field3122) {
-			if (this.field3115 < 0) {
-				if (this.field3117 >= var3) {
+		} else if (this.loopReversed) {
+			if (this.pitch < 0) {
+				if (this.position >= var3) {
 					return;
 				}
-				this.field3117 = var3 + var3 - this.field3117 - 1;
-				this.field3115 = -this.field3115;
+				this.position = var3 + var3 - this.position - 1;
+				this.pitch = -this.pitch;
 			}
-			while (this.field3117 >= var4) {
-				this.field3117 = var4 + var4 - this.field3117 - 1;
-				this.field3115 = -this.field3115;
-				if (this.field3117 >= var3) {
+			while (this.position >= var4) {
+				this.position = var4 + var4 - this.position - 1;
+				this.pitch = -this.pitch;
+				if (this.position >= var3) {
 					return;
 				}
-				this.field3117 = var3 + var3 - this.field3117 - 1;
-				this.field3115 = -this.field3115;
+				this.position = var3 + var3 - this.position - 1;
+				this.pitch = -this.pitch;
 			}
-		} else if (this.field3115 < 0) {
-			if (this.field3117 < var3) {
-				this.field3117 = var4 - (var4 - 1 - this.field3117) % var6 - 1;
+		} else if (this.pitch < 0) {
+			if (this.position < var3) {
+				this.position = var4 - (var4 - 1 - this.position) % var6 - 1;
 			}
-		} else if (this.field3117 >= var4) {
-			this.field3117 = var3 + (this.field3117 - var3) % var6;
+		} else if (this.position >= var4) {
+			this.position = var3 + (this.position - var3) % var6;
 		}
 	}
 
 	@ObfuscatedName("oj.l()Z")
-	public boolean method1121() {
-		return this.field3126 != 0;
+	public boolean isRamping() {
+		return this.volumeChangeDelta != 0;
 	}
 }

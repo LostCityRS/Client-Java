@@ -69,7 +69,7 @@ public final class MonochromeImageCache {
 					var2 = new MonochromeImageCacheEntry(arg0, this.field3097);
 					this.field3097++;
 				} else {
-					MonochromeImageCacheEntry var3 = (MonochromeImageCacheEntry) this.field3078.method1612();
+					MonochromeImageCacheEntry var3 = (MonochromeImageCacheEntry) this.field3078.tail();
 					var2 = new MonochromeImageCacheEntry(arg0, var3.field3001);
 					this.field3095[var3.field2992] = null;
 					var3.unlink();
@@ -78,7 +78,7 @@ public final class MonochromeImageCache {
 			} else {
 				this.field3098 = false;
 			}
-			this.field3078.method1615(var2);
+			this.field3078.pushFront(var2);
 			return this.field3091[var2.field3001];
 		}
 	}
@@ -90,7 +90,7 @@ public final class MonochromeImageCache {
 		}
 		this.field3091 = null;
 		this.field3095 = null;
-		this.field3078.method1616();
+		this.field3078.clear();
 		this.field3078 = null;
 	}
 }

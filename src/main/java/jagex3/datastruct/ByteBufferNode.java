@@ -9,22 +9,22 @@ import java.nio.ByteBuffer;
 public final class ByteBufferNode extends ByteArrayWrapper {
 
 	@ObfuscatedName("qi.l")
-	public ByteBuffer field3599;
+	public ByteBuffer buffer;
 
 	@ObfuscatedName("qi.a(I[B)V")
 	@Override
-	public void method4(byte[] arg0) {
-		this.field3599 = ByteBuffer.allocateDirect(arg0.length);
-		this.field3599.position(0);
-		this.field3599.put(arg0);
+	public void set(byte[] arg0) {
+		this.buffer = ByteBuffer.allocateDirect(arg0.length);
+		this.buffer.position(0);
+		this.buffer.put(arg0);
 	}
 
 	@ObfuscatedName("qi.a(B)[B")
 	@Override
-	public byte[] method1() {
-		byte[] var1 = new byte[this.field3599.capacity()];
-		this.field3599.position(0);
-		this.field3599.get(var1);
+	public byte[] toByteArray() {
+		byte[] var1 = new byte[this.buffer.capacity()];
+		this.buffer.position(0);
+		this.buffer.get(var1);
 		return var1;
 	}
 }

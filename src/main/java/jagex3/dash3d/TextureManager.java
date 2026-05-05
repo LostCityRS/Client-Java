@@ -148,7 +148,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.d(IB)Lsc;")
 	public GlTexture method462(int arg0) {
-		GlTexture var2 = (GlTexture) this.field1232.method665((long) arg0);
+		GlTexture var2 = (GlTexture) this.field1232.find((long) arg0);
 		if (var2 != null) {
 			return var2;
 		}
@@ -158,7 +158,7 @@ public final class TextureManager implements TextureProvider {
 		} else {
 			Packet var4 = new Packet(var3);
 			GlTexture var5 = new GlTexture(var4);
-			this.field1232.method663((long) arg0, var5);
+			this.field1232.put((long) arg0, var5);
 			return var5;
 		}
 	}
@@ -183,7 +183,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.d(II)V")
 	public void method466(int arg0) {
-		for (GlTexture var2 = (GlTexture) this.field1232.method671(); var2 != null; var2 = (GlTexture) this.field1232.method664()) {
+		for (GlTexture var2 = (GlTexture) this.field1232.search(); var2 != null; var2 = (GlTexture) this.field1232.findnext()) {
 			if (var2.field3800) {
 				var2.method1367(arg0);
 				var2.field3800 = false;

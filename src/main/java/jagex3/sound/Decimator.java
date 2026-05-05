@@ -7,24 +7,24 @@ import deob.Statics;
 public final class Decimator {
 
 	@ObfuscatedName("qe.a")
-	public int field3555;
+	public int outputRate;
 
 	@ObfuscatedName("qe.b")
-	public int[][] field3556;
+	public int[][] resampleTable;
 
 	@ObfuscatedName("qe.l")
-	public int field3566;
+	public int inputRate;
 
 	public Decimator(int arg0, int arg1) {
 		if (arg1 != 22050) {
 			int var3 = Statics.method1439(arg1, 22050);
 			int var4 = 22050 / var3;
-			this.field3566 = var4;
+			this.inputRate = var4;
 			int var5 = arg1 / var3;
-			this.field3556 = new int[var4][14];
-			this.field3555 = var5;
+			this.resampleTable = new int[var4][14];
+			this.outputRate = var5;
 			for (int var6 = 0; var6 < var4; var6++) {
-				int[] var7 = this.field3556[var6];
+				int[] var7 = this.resampleTable[var6];
 				double var8 = (double) var6 / (double) var4 + 6.0D;
 				int var10 = (int) Math.floor(var8 + 1.0D - 7.0D);
 				int var11 = (int) Math.ceil(var8 + 7.0D);
@@ -50,21 +50,21 @@ public final class Decimator {
 	}
 
 	@ObfuscatedName("qe.a(B[B)[B")
-	public byte[] method1278(byte[] arg0) {
-		if (this.field3556 != null) {
-			int var2 = (int) ((long) this.field3555 * (long) arg0.length / (long) this.field3566) + 14;
+	public byte[] decimate(byte[] arg0) {
+		if (this.resampleTable != null) {
+			int var2 = (int) ((long) this.outputRate * (long) arg0.length / (long) this.inputRate) + 14;
 			int[] var3 = new int[var2];
 			int var4 = 0;
 			int var5 = 0;
 			for (int var6 = 0; var6 < arg0.length; var6++) {
 				byte var7 = arg0[var6];
-				int[] var8 = this.field3556[var5];
+				int[] var8 = this.resampleTable[var5];
 				for (int var9 = 0; var9 < 14; var9++) {
 					var3[var4 + var9] += var8[var9] * var7;
 				}
-				int var10 = var5 + this.field3555;
-				int var11 = var10 / this.field3566;
-				var5 = var10 - var11 * this.field3566;
+				int var10 = var5 + this.outputRate;
+				int var11 = var10 / this.inputRate;
+				var5 = var10 - var11 * this.inputRate;
 				var4 += var11;
 			}
 			arg0 = new byte[var2];
@@ -83,17 +83,17 @@ public final class Decimator {
 	}
 
 	@ObfuscatedName("qe.a(II)I")
-	public int method1279(int arg0) {
-		if (this.field3556 != null) {
-			arg0 = (int) ((long) this.field3555 * (long) arg0 / (long) this.field3566) + 6;
+	public int transmitPos(int arg0) {
+		if (this.resampleTable != null) {
+			arg0 = (int) ((long) this.outputRate * (long) arg0 / (long) this.inputRate) + 6;
 		}
 		return arg0;
 	}
 
 	@ObfuscatedName("qe.b(II)I")
-	public int method1280(int arg0) {
-		if (this.field3556 != null) {
-			arg0 = (int) ((long) this.field3555 * (long) arg0 / (long) this.field3566);
+	public int transmitFreq(int arg0) {
+		if (this.resampleTable != null) {
+			arg0 = (int) ((long) this.outputRate * (long) arg0 / (long) this.inputRate);
 		}
 		return arg0;
 	}

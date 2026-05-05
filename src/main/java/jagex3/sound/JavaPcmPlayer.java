@@ -17,16 +17,16 @@ public final class JavaPcmPlayer extends PcmPlayer {
 	public boolean field1777 = false;
 
 	@ObfuscatedName("ii.R")
-	public int field1779;
+	public int lineCapacity;
 
 	@ObfuscatedName("ii.O")
-	public AudioFormat field1776;
+	public AudioFormat format;
 
 	@ObfuscatedName("ii.N")
-	public SourceDataLine field1775;
+	public SourceDataLine line;
 
 	@ObfuscatedName("ii.Q")
-	public byte[] field1778;
+	public byte[] buffer;
 
 	@ObfuscatedName("oc.a(BI)I")
 	public static int method1057(int arg0) {
@@ -40,65 +40,65 @@ public final class JavaPcmPlayer extends PcmPlayer {
 
 	@ObfuscatedName("ii.a()I")
 	@Override
-	public int method398() {
-		return this.field1779 - (this.field1775.available() >> (PcmPlayer.field99 ? 2 : 1));
+	public int queued() {
+		return this.lineCapacity - (this.line.available() >> (PcmPlayer.stereo ? 2 : 1));
 	}
 
 	@ObfuscatedName("ii.b()V")
 	@Override
-	public void method400() {
+	public void write() {
 		short var1 = 256;
-		if (PcmPlayer.field99) {
+		if (PcmPlayer.stereo) {
 			var1 = 512;
 		}
 		for (int var2 = 0; var2 < var1; var2++) {
-			int var3 = this.field1025[var2];
+			int var3 = this.samples[var2];
 			if ((var3 + 8388608 & 0xFF000000) != 0) {
 				var3 = var3 >> 31 ^ 0x7FFFFF;
 			}
-			this.field1778[var2 * 2] = (byte) (var3 >> 8);
-			this.field1778[var2 * 2 + 1] = (byte) (var3 >> 16);
+			this.buffer[var2 * 2] = (byte) (var3 >> 8);
+			this.buffer[var2 * 2 + 1] = (byte) (var3 >> 16);
 		}
-		this.field1775.write(this.field1778, 0, var1 << 1);
+		this.line.write(this.buffer, 0, var1 << 1);
 	}
 
 	@ObfuscatedName("ii.d()V")
 	@Override
-	public void method413() throws LineUnavailableException {
-		this.field1775.flush();
+	public void flush() throws LineUnavailableException {
+		this.line.flush();
 		if (!this.field1777) {
 			return;
 		}
-		this.field1775.close();
-		this.field1775 = null;
-		Info var1 = new Info(SourceDataLine.class, this.field1776, this.field1779 << (PcmPlayer.field99 ? 2 : 1));
-		this.field1775 = (SourceDataLine) AudioSystem.getLine(var1);
-		this.field1775.open();
-		this.field1775.start();
+		this.line.close();
+		this.line = null;
+		Info var1 = new Info(SourceDataLine.class, this.format, this.lineCapacity << (PcmPlayer.stereo ? 2 : 1));
+		this.line = (SourceDataLine) AudioSystem.getLine(var1);
+		this.line.open();
+		this.line.start();
 	}
 
 	@ObfuscatedName("ii.c(I)V")
 	@Override
-	public void method409(int arg0) throws LineUnavailableException {
+	public void open(int arg0) throws LineUnavailableException {
 		try {
-			Info var2 = new Info(SourceDataLine.class, this.field1776, arg0 << (PcmPlayer.field99 ? 2 : 1));
-			this.field1775 = (SourceDataLine) AudioSystem.getLine(var2);
-			this.field1775.open();
-			this.field1775.start();
-			this.field1779 = arg0;
+			Info var2 = new Info(SourceDataLine.class, this.format, arg0 << (PcmPlayer.stereo ? 2 : 1));
+			this.line = (SourceDataLine) AudioSystem.getLine(var2);
+			this.line.open();
+			this.line.start();
+			this.lineCapacity = arg0;
 		} catch (LineUnavailableException var4) {
 			if (method1057(arg0) == 1) {
-				this.field1775 = null;
+				this.line = null;
 				throw var4;
 			} else {
-				this.method409(IntUtil.bitceil(arg0));
+				this.open(IntUtil.bitceil(arg0));
 			}
 		}
 	}
 
 	@ObfuscatedName("ii.a(Ljava/awt/Component;)V")
 	@Override
-	public void method412(Component arg0) {
+	public void init(Component arg0) {
 		javax.sound.sampled.Mixer.Info[] var2 = AudioSystem.getMixerInfo();
 		if (var2 != null) {
 			for (int var3 = 0; var3 < var2.length; var3++) {
@@ -111,16 +111,16 @@ public final class JavaPcmPlayer extends PcmPlayer {
 				}
 			}
 		}
-		this.field1776 = new AudioFormat((float) PcmPlayer.frequency, 16, PcmPlayer.field99 ? 2 : 1, true, false);
-		this.field1778 = new byte[0x100 << (PcmPlayer.field99 ? 2 : 1)];
+		this.format = new AudioFormat((float) PcmPlayer.frequency, 16, PcmPlayer.stereo ? 2 : 1, true, false);
+		this.buffer = new byte[0x100 << (PcmPlayer.stereo ? 2 : 1)];
 	}
 
 	@ObfuscatedName("ii.c()V")
 	@Override
-	public void method408() {
-		if (this.field1775 != null) {
-			this.field1775.close();
-			this.field1775 = null;
+	public void close() {
+		if (this.line != null) {
+			this.line.close();
+			this.line = null;
 		}
 	}
 }

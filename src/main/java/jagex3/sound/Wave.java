@@ -6,46 +6,46 @@ import deob.ObfuscatedName;
 public final class Wave extends PcmStreamable {
 
 	@ObfuscatedName("tf.u")
-	public int field4028;
+	public int samplingFrequency;
 
 	@ObfuscatedName("tf.v")
-	public int field4029;
+	public int loopEndPosition;
 
 	@ObfuscatedName("tf.w")
-	public boolean field4030;
+	public boolean loopReversed;
 
 	@ObfuscatedName("tf.x")
-	public byte[] field4031;
+	public byte[] samples;
 
 	@ObfuscatedName("tf.y")
-	public int field4032;
+	public int loopStartPosition;
 
 	public Wave(int arg0, byte[] arg1, int arg2, int arg3) {
-		this.field4028 = 22050;
-		this.field4031 = arg1;
-		this.field4032 = arg2;
-		this.field4029 = arg3;
+		this.samplingFrequency = 22050;
+		this.samples = arg1;
+		this.loopStartPosition = arg2;
+		this.loopEndPosition = arg3;
 	}
 
 	public Wave(int arg0, byte[] arg1, int arg2, int arg3, boolean arg4) {
-		this.field4028 = arg0;
-		this.field4031 = arg1;
-		this.field4032 = arg2;
-		this.field4029 = arg3;
-		this.field4030 = arg4;
+		this.samplingFrequency = arg0;
+		this.samples = arg1;
+		this.loopStartPosition = arg2;
+		this.loopEndPosition = arg3;
+		this.loopReversed = arg4;
 	}
 
 	@ObfuscatedName("tf.a(Lqe;)Ltf;")
-	public Wave method1453(Decimator arg0) {
-		this.field4031 = arg0.method1278(this.field4031);
-		this.field4028 = arg0.method1280(this.field4028);
-		if (this.field4032 == this.field4029) {
-			this.field4032 = this.field4029 = arg0.method1279(this.field4032);
+	public Wave decimate(Decimator arg0) {
+		this.samples = arg0.decimate(this.samples);
+		this.samplingFrequency = arg0.transmitFreq(this.samplingFrequency);
+		if (this.loopStartPosition == this.loopEndPosition) {
+			this.loopStartPosition = this.loopEndPosition = arg0.transmitPos(this.loopStartPosition);
 		} else {
-			this.field4032 = arg0.method1279(this.field4032);
-			this.field4029 = arg0.method1279(this.field4029);
-			if (this.field4032 == this.field4029) {
-				this.field4032--;
+			this.loopStartPosition = arg0.transmitPos(this.loopStartPosition);
+			this.loopEndPosition = arg0.transmitPos(this.loopEndPosition);
+			if (this.loopStartPosition == this.loopEndPosition) {
+				this.loopStartPosition--;
 			}
 		}
 		return this;

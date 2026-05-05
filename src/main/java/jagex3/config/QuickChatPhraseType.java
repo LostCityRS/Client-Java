@@ -42,7 +42,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 
 	@ObfuscatedName("pe.a(BI)Lsi;")
 	public static QuickChatPhraseType method1150(int arg0) {
-		QuickChatPhraseType var1 = (QuickChatPhraseType) field2447.method665((long) arg0);
+		QuickChatPhraseType var1 = (QuickChatPhraseType) field2447.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -59,7 +59,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 		if (arg0 >= 32768) {
 			var3.method1415();
 		}
-		field2447.method663((long) arg0, var3);
+		field2447.put((long) arg0, var3);
 		return var3;
 	}
 

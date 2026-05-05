@@ -1214,7 +1214,7 @@ public class World {
 									while (true) {
 										while (true) {
 											do {
-												var2 = (Square) field1900.method1613();
+												var2 = (Square) field1900.popFront();
 												if (var2 == null) {
 													return;
 												}

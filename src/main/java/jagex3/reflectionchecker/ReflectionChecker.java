@@ -54,7 +54,7 @@ public class ReflectionChecker {
 						for (int var12 = 0; var12 < var8; var12++) {
 							int var13 = arg2.g4();
 							var11[var12] = new byte[var13];
-							arg2.method307(var13, var11[var12]);
+							arg2.gdata(var13, var11[var12]);
 						}
 					}
 					var3.field128[var4] = var5;
@@ -109,7 +109,7 @@ public class ReflectionChecker {
 			if (var2) {
 				return;
 			}
-			arg0.method30(56);
+			arg0.p1Enc(56);
 			arg0.p1(0);
 			int var4 = arg0.pos;
 			arg0.p4(var1.field136);
@@ -187,7 +187,7 @@ public class ReflectionChecker {
 					arg0.p1(var1.field132[var5]);
 				}
 			}
-			arg0.method345(var4);
+			arg0.addcrc(var4);
 			arg0.method341(arg0.pos - var4);
 			var1.unlink();
 		}

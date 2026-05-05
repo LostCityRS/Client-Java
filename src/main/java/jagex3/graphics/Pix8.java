@@ -6,25 +6,25 @@ import deob.ObfuscatedName;
 public abstract class Pix8 {
 
 	@ObfuscatedName("lj.e")
-	public int field2432;
+	public int yof;
 
 	@ObfuscatedName("lj.f")
-	public int field2433;
+	public int owi;
 
 	@ObfuscatedName("lj.g")
-	public int field2434;
+	public int wi;
 
 	@ObfuscatedName("lj.j")
-	public int field2437;
+	public int hi;
 
 	@ObfuscatedName("lj.k")
-	public int field2438;
+	public int xof;
 
 	@ObfuscatedName("lj.l")
-	public int field2439;
+	public int ohi;
 
 	@ObfuscatedName("lj.a(II)V")
-	public abstract void method876(int arg0, int arg1);
+	public abstract void plotSprite(int arg0, int arg1);
 
 	@ObfuscatedName("lj.a(III)V")
 	public abstract void method877(int arg0, int arg1, int arg2);

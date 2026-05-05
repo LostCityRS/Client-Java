@@ -1,10 +1,15 @@
 package deob;
 
-import jagex3.client.*;
-import jagex3.config.*;
+import jagex3.client.ClientMouseListener;
+import jagex3.client.GameShell;
+import jagex3.config.IfType;
+import jagex3.config.ObjType;
 import jagex3.constants.Text;
-import jagex3.dash3d.*;
-import jagex3.datastruct.*;
+import jagex3.dash3d.ModelSourceCache;
+import jagex3.dash3d.PlayerModel;
+import jagex3.dash3d.Square;
+import jagex3.datastruct.HashTable;
+import jagex3.datastruct.LruCache;
 import jagex3.graphics.Pix32;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
@@ -615,7 +620,7 @@ public class Statics {
 		int var1 = 0;
 		for (int var2 = 0; var2 < ObjType.field3855; var2++) {
 			ObjType var3 = ObjType.list(var2);
-			if (var3.field2888 >= 0 || var3.field2853 >= 0) {
+			if (var3.manwear >= 0 || var3.womanwear >= 0) {
 				var0[var1++] = var2;
 			}
 		}
@@ -737,11 +742,11 @@ public class Statics {
 
 	@ObfuscatedName("bi.a(ILef;)V")
 	public static void method99(PcmStream arg0) {
-		if (arg0.field935 != null) {
-			arg0.field935.field1254 = 0;
+		if (arg0.sound != null) {
+			arg0.sound.position = 0;
 		}
-		arg0.field937 = false;
-		for (PcmStream var1 = arg0.method385(); var1 != null; var1 = arg0.method380()) {
+		arg0.active = false;
+		for (PcmStream var1 = arg0.substreamStart(); var1 != null; var1 = arg0.substreamNext()) {
 			method99(var1);
 		}
 	}
@@ -766,7 +771,7 @@ public class Statics {
 		short[] var4 = new short[16];
 		for (int var5 = 0; var5 < ObjType.field3855; var5++) {
 			ObjType var6 = ObjType.list(var5);
-			if ((!arg0 || var6.field2861) && var6.field2867 == -1 && var6.field2884 == -1 && var6.field2850 == 0 && var6.name.method639().method617(var2) != -1) {
+			if ((!arg0 || var6.field2861) && var6.certtemplate == -1 && var6.field2884 == -1 && var6.field2850 == 0 && var6.name.method639().method617(var2) != -1) {
 				if (var3 >= 250) {
 					field3893 = -1;
 					field1210 = null;

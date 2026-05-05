@@ -13,78 +13,78 @@ import jagex3.js5.Js5;
 public final class SpotType extends Linkable2 {
 
 	@ObfuscatedName("mf.a")
-	public static final LruCache field2533 = new LruCache(64);
+	public static final LruCache recentUse = new LruCache(64);
 	@ObfuscatedName("va.l")
-	public static final ModelSourceCache field4302 = new ModelSourceCache(30);
+	public static final ModelSourceCache modelCache = new ModelSourceCache(30);
 	@ObfuscatedName("mj.i")
-	public static Js5 field2607;
+	public static Js5 models;
 	@ObfuscatedName("fc.i")
-	public static Js5 field1114;
+	public static Js5 configClient;
 	@ObfuscatedName("cj.ab")
-	public short[] field549;
+	public short[] recol_d;
 
 	@ObfuscatedName("cj.bb")
-	public int field550 = 0;
+	public int ambient = 0;
 
 	@ObfuscatedName("cj.L")
-	public int field534 = 128;
+	public int resizev = 128;
 
 	@ObfuscatedName("cj.I")
-	public int field531 = 0;
+	public int contrast = 0;
 
 	@ObfuscatedName("cj.R")
-	public int field540 = 128;
+	public int resizeh = 128;
 
 	@ObfuscatedName("cj.D")
 	public boolean field527 = false;
 
 	@ObfuscatedName("cj.W")
-	public int field545 = 0;
+	public int angle = 0;
 
 	@ObfuscatedName("cj.T")
-	public int field542 = -1;
+	public int anim = -1;
 
 	@ObfuscatedName("cj.Q")
-	public int field539;
+	public int id;
 
 	@ObfuscatedName("cj.Y")
-	public int field547;
+	public int model;
 
 	@ObfuscatedName("cj.G")
-	public short[] field529;
+	public short[] retex_s;
 
 	@ObfuscatedName("cj.O")
-	public short[] field537;
+	public short[] recol_s;
 
 	@ObfuscatedName("cj.Z")
-	public short[] field548;
+	public short[] retex_d;
 
 	@ObfuscatedName("ff.c(IB)Lcj;")
 	public static SpotType list(int arg0) {
-		SpotType var1 = (SpotType) field2533.method665((long) arg0);
+		SpotType var1 = (SpotType) recentUse.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field1114.getFile(method799(arg0), method928(arg0));
+		byte[] var2 = configClient.getFile(method799(arg0), method928(arg0));
 		SpotType var3 = new SpotType();
-		var3.field539 = arg0;
+		var3.id = arg0;
 		if (var2 != null) {
-			var3.method211(new Packet(var2));
+			var3.decode(new Packet(var2));
 		}
-		field2533.method663((long) arg0, var3);
+		recentUse.put((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("oa.c(I)V")
 	public static void resetCache() {
-		field2533.clear();
-		field4302.clear();
+		recentUse.clear();
+		modelCache.clear();
 	}
 
 	@ObfuscatedName("td.a(ILnb;Lnb;)V")
 	public static void init(Js5 arg0, Js5 arg1) {
-		field2607 = arg0;
-		field1114 = arg1;
+		models = arg0;
+		configClient = arg1;
 	}
 
 	@ObfuscatedName("n.a(II)I")
@@ -98,80 +98,80 @@ public final class SpotType extends Linkable2 {
 	}
 
 	@ObfuscatedName("cj.a(ILea;B)V")
-	public void method208(int arg0, Packet arg1) {
+	public void decode(int arg0, Packet arg1) {
 		if (arg0 == 1) {
-			this.field547 = arg1.g2();
+			this.model = arg1.g2();
 		} else if (arg0 == 2) {
-			this.field542 = arg1.g2();
+			this.anim = arg1.g2();
 		} else if (arg0 == 4) {
-			this.field540 = arg1.g2();
+			this.resizeh = arg1.g2();
 		} else if (arg0 == 5) {
-			this.field534 = arg1.g2();
+			this.resizev = arg1.g2();
 		} else if (arg0 == 6) {
-			this.field545 = arg1.g2();
+			this.angle = arg1.g2();
 		} else if (arg0 == 7) {
-			this.field550 = arg1.g1();
+			this.ambient = arg1.g1();
 		} else if (arg0 == 8) {
-			this.field531 = arg1.g1();
+			this.contrast = arg1.g1();
 		} else if (arg0 == 9) {
 			this.field527 = true;
 		} else if (arg0 == 40) {
 			int var5 = arg1.g1();
-			this.field537 = new short[var5];
-			this.field549 = new short[var5];
+			this.recol_s = new short[var5];
+			this.recol_d = new short[var5];
 			for (int var6 = 0; var6 < var5; var6++) {
-				this.field537[var6] = (short) arg1.g2();
-				this.field549[var6] = (short) arg1.g2();
+				this.recol_s[var6] = (short) arg1.g2();
+				this.recol_d[var6] = (short) arg1.g2();
 			}
 		} else if (arg0 == 41) {
 			int var3 = arg1.g1();
-			this.field548 = new short[var3];
-			this.field529 = new short[var3];
+			this.retex_d = new short[var3];
+			this.retex_s = new short[var3];
 			for (int var4 = 0; var4 < var3; var4++) {
-				this.field529[var4] = (short) arg1.g2();
-				this.field548[var4] = (short) arg1.g2();
+				this.retex_s[var4] = (short) arg1.g2();
+				this.retex_d[var4] = (short) arg1.g2();
 			}
 		}
 	}
 
 	@ObfuscatedName("cj.a(IB)Lcg;")
-	public ModelLit method209(int arg0) {
-		ModelLit var2 = (ModelLit) field4302.find((long) this.field539);
+	public ModelLit getTempModel2(int arg0) {
+		ModelLit var2 = (ModelLit) modelCache.find((long) this.id);
 		if (var2 == null) {
-			ModelUnlit var3 = ModelUnlit.load(field2607, this.field547);
+			ModelUnlit var3 = ModelUnlit.load(models, this.model);
 			if (var3 == null) {
 				return null;
 			}
-			if (this.field537 != null) {
-				for (int var4 = 0; var4 < this.field537.length; var4++) {
-					var3.method564(this.field537[var4], this.field549[var4]);
+			if (this.recol_s != null) {
+				for (int var4 = 0; var4 < this.recol_s.length; var4++) {
+					var3.method564(this.recol_s[var4], this.recol_d[var4]);
 				}
 			}
-			if (this.field529 != null) {
-				for (int var5 = 0; var5 < this.field529.length; var5++) {
-					var3.method553(this.field529[var5], this.field548[var5]);
+			if (this.retex_s != null) {
+				for (int var5 = 0; var5 < this.retex_s.length; var5++) {
+					var3.method553(this.retex_s[var5], this.retex_d[var5]);
 				}
 			}
-			var2 = var3.light(this.field550 + 64, this.field531 + 850, -30, -50, -30);
-			field4302.put((long) this.field539, var2);
+			var2 = var3.light(this.ambient + 64, this.contrast + 850, -30, -50, -30);
+			modelCache.put((long) this.id, var2);
 		}
 		ModelLit var6;
-		if (this.field542 == -1 || arg0 == -1) {
+		if (this.anim == -1 || arg0 == -1) {
 			var6 = var2.method185(true, true);
 		} else {
-			var6 = SeqType.list(this.field542).method741(var2, arg0);
+			var6 = SeqType.list(this.anim).animateModel(var2, arg0);
 		}
-		if (this.field540 != 128 || this.field534 != 128) {
-			var6.method183(this.field540, this.field534, this.field540);
+		if (this.resizeh != 128 || this.resizev != 128) {
+			var6.method183(this.resizeh, this.resizev, this.resizeh);
 		}
-		if (this.field545 != 0) {
-			if (this.field545 == 90) {
+		if (this.angle != 0) {
+			if (this.angle == 90) {
 				var6.method182();
 			}
-			if (this.field545 == 180) {
+			if (this.angle == 180) {
 				var6.method190();
 			}
-			if (this.field545 == 270) {
+			if (this.angle == 270) {
 				var6.method181();
 			}
 		}
@@ -179,13 +179,13 @@ public final class SpotType extends Linkable2 {
 	}
 
 	@ObfuscatedName("cj.a(Lea;B)V")
-	public void method211(Packet arg0) {
+	public void decode(Packet arg0) {
 		while (true) {
 			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}
-			this.method208(var2, arg0);
+			this.decode(var2, arg0);
 		}
 	}
 }

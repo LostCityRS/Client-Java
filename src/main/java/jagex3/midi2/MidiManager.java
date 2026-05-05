@@ -6,160 +6,160 @@ import jagex3.sound.WaveCache;
 
 public class MidiManager {
 	@ObfuscatedName("ch.i")
-	public static MidiPlayer field503;
+	public static MidiPlayer midiPlayer;
 	@ObfuscatedName("hi.e")
-	public static Js5 field1553;
+	public static Js5 vorbis;
 	@ObfuscatedName("oa.x")
-	public static Js5 field2955;
+	public static Js5 jagFX;
 	@ObfuscatedName("b.j")
-	public static Js5 field177;
+	public static Js5 patches;
 	@ObfuscatedName("lb.w")
-	public static int field2230 = 0;
+	public static int state = 0;
 	@ObfuscatedName("s.eb")
-	public static MidiFile field3764;
+	public static MidiFile loadingMidiFile;
 	@ObfuscatedName("wi.v")
-	public static WaveCache field4552;
+	public static WaveCache loadingWaveCache;
 	@ObfuscatedName("of.d")
-	public static Js5 field3039;
+	public static Js5 midis;
 	@ObfuscatedName("wc.M")
-	public static int field4480;
+	public static int pendingFileId;
 	@ObfuscatedName("aj.Y")
-	public static int field159;
+	public static int pendingVolume;
 	@ObfuscatedName("pi.bb")
-	public static int field3343;
+	public static int fadeOutRate;
 	@ObfuscatedName("be.B")
-	public static boolean field277;
+	public static boolean pendingLoop;
 	@ObfuscatedName("uj.b")
-	public static int field4268;
+	public static int pendingGroupId;
 
 	@ObfuscatedName("pb.a(BLnb;Lpg;Lnb;Lnb;)Z")
 	public static boolean init(Js5 arg0, MidiPlayer arg1, Js5 arg2, Js5 arg3) {
-		field503 = arg1;
-		field1553 = arg0;
-		field2955 = arg2;
-		field177 = arg3;
+		midiPlayer = arg1;
+		vorbis = arg0;
+		jagFX = arg2;
+		patches = arg3;
 		return true;
 	}
 
 	@ObfuscatedName("n.a(Z)Z")
 	public static boolean updateLoading() {
 		try {
-			if (field2230 == 2) {
-				if (field3764 == null) {
-					field3764 = MidiFile.method662(field3039, field4268, field4480);
-					if (field3764 == null) {
+			if (state == 2) {
+				if (loadingMidiFile == null) {
+					loadingMidiFile = MidiFile.load(midis, pendingGroupId, pendingFileId);
+					if (loadingMidiFile == null) {
 						return false;
 					}
 				}
-				if (field4552 == null) {
-					field4552 = new WaveCache(field2955, field1553);
+				if (loadingWaveCache == null) {
+					loadingWaveCache = new WaveCache(jagFX, vorbis);
 				}
-				if (field503.method1182(field4552, field3764, field177)) {
-					field503.method1187();
-					field503.method1186(field159);
-					field503.method1185(field3764, field277);
-					field3039 = null;
-					field3764 = null;
-					field2230 = 0;
-					field4552 = null;
+				if (midiPlayer.loadAndQueuePatches(loadingWaveCache, loadingMidiFile, patches)) {
+					midiPlayer.freeWaveIds();
+					midiPlayer.setGlobalVolume(pendingVolume);
+					midiPlayer.start(loadingMidiFile, pendingLoop);
+					midis = null;
+					loadingMidiFile = null;
+					state = 0;
+					loadingWaveCache = null;
 					return true;
 				}
 			}
 		} catch (Exception var1) {
 			var1.printStackTrace();
-			field503.method1208();
-			field4552 = null;
-			field3039 = null;
-			field2230 = 0;
-			field3764 = null;
+			midiPlayer.stop();
+			loadingWaveCache = null;
+			midis = null;
+			state = 0;
+			loadingMidiFile = null;
 		}
 		return false;
 	}
 
 	@ObfuscatedName("kh.d(II)V")
-	public static void method795() {
-		field4480 = -1;
-		field159 = 0;
-		field3343 = 2;
-		field3039 = null;
-		field277 = false;
-		field2230 = 1;
-		field4268 = -1;
+	public static void stop2() {
+		pendingFileId = -1;
+		pendingVolume = 0;
+		fadeOutRate = 2;
+		midis = null;
+		pendingLoop = false;
+		state = 1;
+		pendingGroupId = -1;
 	}
 
 	@ObfuscatedName("jh.a(IIZIILnb;I)V")
 	public static void method730(int arg0, int arg1, Js5 arg2) {
-		field3343 = 2;
-		field4480 = 0;
-		field159 = arg0;
-		field277 = false;
-		field3039 = arg2;
-		field2230 = 1;
-		field4268 = arg1;
+		fadeOutRate = 2;
+		pendingFileId = 0;
+		pendingVolume = arg0;
+		pendingLoop = false;
+		midis = arg2;
+		state = 1;
+		pendingGroupId = arg1;
 	}
 
 	@ObfuscatedName("bj.c(Z)V")
-	public static void method107() {
+	public static void updateFadeOut() {
 		try {
-			if (field2230 == 1) {
-				int var0 = field503.method1197();
-				if (var0 > 0 && field503.method1199()) {
-					int var1 = var0 - field3343;
+			if (state == 1) {
+				int var0 = midiPlayer.getGlobalVolume();
+				if (var0 > 0 && midiPlayer.loaded()) {
+					int var1 = var0 - fadeOutRate;
 					if (var1 < 0) {
 						var1 = 0;
 					}
-					field503.method1186(var1);
+					midiPlayer.setGlobalVolume(var1);
 				} else {
-					field503.method1208();
-					field503.method1180();
-					field4552 = null;
-					field3764 = null;
-					if (field3039 == null) {
-						field2230 = 0;
+					midiPlayer.stop();
+					midiPlayer.clearPatches();
+					loadingWaveCache = null;
+					loadingMidiFile = null;
+					if (midis == null) {
+						state = 0;
 					} else {
-						field2230 = 2;
+						state = 2;
 					}
 				}
 			}
 		} catch (Exception var3) {
 			var3.printStackTrace();
-			field503.method1208();
-			field4552 = null;
-			field3039 = null;
-			field3764 = null;
-			field2230 = 0;
+			midiPlayer.stop();
+			loadingWaveCache = null;
+			midis = null;
+			loadingMidiFile = null;
+			state = 0;
 		}
 	}
 
 	@ObfuscatedName("a.b(I)V")
-	public static void method5() {
-		field503.method1208();
-		field3039 = null;
-		field2230 = 1;
+	public static void stop() {
+		midiPlayer.stop();
+		midis = null;
+		state = 1;
 	}
 
 	@ObfuscatedName("je.b(II)V")
-	public static void method712(int arg0) {
-		if (field2230 == 0) {
-			field503.method1186(arg0);
+	public static void setVolume(int arg0) {
+		if (state == 0) {
+			midiPlayer.setGlobalVolume(arg0);
 		} else {
-			field159 = arg0;
+			pendingVolume = arg0;
 		}
 	}
 
 	@ObfuscatedName("jd.b(I)Z")
-	public static boolean method707() {
-		return field2230 == 0 ? field503.method1199() : true;
+	public static boolean isInitialised() {
+		return state == 0 ? midiPlayer.loaded() : true;
 	}
 
 	@ObfuscatedName("eh.a(ILnb;BZII)V")
-	public static void method388(Js5 arg0, int arg1, int arg2) {
-		field159 = arg2;
-		field3039 = arg0;
-		field4268 = arg1;
-		field3343 = 10000;
-		field2230 = 1;
-		field4480 = 0;
-		field277 = false;
+	public static void play(Js5 arg0, int arg1, int arg2) {
+		pendingVolume = arg2;
+		midis = arg0;
+		pendingGroupId = arg1;
+		fadeOutRate = 10000;
+		state = 1;
+		pendingFileId = 0;
+		pendingLoop = false;
 	}
 }

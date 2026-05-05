@@ -265,13 +265,13 @@ public abstract class PixfontGeneric extends Linkable2 {
 								try {
 									int var10 = var9.method635(4).method603();
 									Pix8 var11 = this.field423[var10];
-									int var12 = this.field430 == null ? var11.field2439 : this.field430[var10];
+									int var12 = this.field430 == null ? var11.ohi : this.field430[var10];
 									if (field450 == 256) {
-										var11.method876(arg1, var4 + this.ascent - var12);
+										var11.plotSprite(arg1, var4 + this.ascent - var12);
 									} else {
 										var11.method877(arg1, var4 + this.ascent - var12, field450);
 									}
-									arg1 += var11.field2433;
+									arg1 += var11.owi;
 									var6 = -1;
 								} catch (Exception var16) {
 								}
@@ -308,10 +308,10 @@ public abstract class PixfontGeneric extends Linkable2 {
 					}
 					int var15 = this.field432[var8];
 					if (field433 != -1) {
-						Pix2D.method489(arg1, var4 + (int) ((double) this.ascent * 0.7D), var15, field433);
+						Pix2D.hline(arg1, var4 + (int) ((double) this.ascent * 0.7D), var15, field433);
 					}
 					if (field409 != -1) {
-						Pix2D.method489(arg1, var4 + this.ascent + 1, var15, field409);
+						Pix2D.hline(arg1, var4 + this.ascent + 1, var15, field409);
 					}
 					arg1 += var15;
 					var6 = var8;
@@ -427,7 +427,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 					} else if (var16.method619(field447)) {
 						try {
 							int var17 = var16.method635(4).method603();
-							var4 += this.field423[var17].field2433;
+							var4 += this.field423[var17].owi;
 							var11 = -1;
 						} catch (Exception var18) {
 						}
@@ -645,13 +645,13 @@ public abstract class PixfontGeneric extends Linkable2 {
 									var9++;
 									int var15 = var12.method635(4).method603();
 									Pix8 var16 = this.field423[var15];
-									int var17 = this.field430 == null ? var16.field2439 : this.field430[var15];
+									int var17 = this.field430 == null ? var16.ohi : this.field430[var15];
 									if (field450 == 256) {
-										var16.method876(arg1 + var13, var6 + this.ascent - var17 + var14);
+										var16.plotSprite(arg1 + var13, var6 + this.ascent - var17 + var14);
 									} else {
 										var16.method877(arg1 + var13, var6 + this.ascent - var17 + var14, field450);
 									}
-									arg1 += var16.field2433;
+									arg1 += var16.owi;
 									var8 = -1;
 								} catch (Exception var23) {
 								}
@@ -701,10 +701,10 @@ public abstract class PixfontGeneric extends Linkable2 {
 					}
 					int var22 = this.field432[var11];
 					if (field433 != -1) {
-						Pix2D.method489(arg1, var6 + (int) ((double) this.ascent * 0.7D), var22, field433);
+						Pix2D.hline(arg1, var6 + (int) ((double) this.ascent * 0.7D), var22, field433);
 					}
 					if (field409 != -1) {
-						Pix2D.method489(arg1, var6 + this.ascent, var22, field409);
+						Pix2D.hline(arg1, var6 + this.ascent, var22, field409);
 					}
 					arg1 += var22;
 					var8 = var11;
@@ -888,7 +888,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 							if (var7.method619(field447)) {
 								try {
 									int var8 = var7.method635(4).method603();
-									var4 += this.field423[var8].field2433;
+									var4 += this.field423[var8].owi;
 									var3 = -1;
 								} catch (Exception var9) {
 								}

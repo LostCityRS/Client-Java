@@ -65,10 +65,10 @@ public class TextureOp39 extends TextureOp {
 			return true;
 		} else if (this.field2592 >= 0) {
 			SoftwarePix32 var1 = PixLoader.method250(Texture.field684, this.field2592);
-			var1.method1178();
-			this.field2593 = var1.field3654;
-			this.field2588 = var1.field3652;
-			this.field2589 = var1.field3247;
+			var1.trim();
+			this.field2593 = var1.wi;
+			this.field2588 = var1.hi;
+			this.field2589 = var1.data;
 			return true;
 		} else {
 			return false;

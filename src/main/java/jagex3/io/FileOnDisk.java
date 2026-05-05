@@ -16,13 +16,13 @@ public final class FileOnDisk {
 	public final File field1153;
 
 	@ObfuscatedName("fg.b")
-	public RandomAccessFile field1154;
+	public RandomAccessFile file;
 
 	@ObfuscatedName("fg.c")
-	public long field1155;
+	public long pos;
 
 	@ObfuscatedName("fg.d")
-	public final long field1156;
+	public final long maxLength;
 
 	public FileOnDisk(File arg0, String arg1, long arg2) throws IOException {
 		if (arg2 == -1L) {
@@ -31,34 +31,34 @@ public final class FileOnDisk {
 		if (arg0.length() >= arg2) {
 			arg0.delete();
 		}
-		this.field1154 = new RandomAccessFile(arg0, arg1);
-		this.field1155 = 0L;
-		this.field1156 = arg2;
+		this.file = new RandomAccessFile(arg0, arg1);
+		this.pos = 0L;
+		this.maxLength = arg2;
 		this.field1153 = arg0;
-		int var5 = this.field1154.read();
+		int var5 = this.file.read();
 		if (var5 != -1 && !arg1.equals("r")) {
-			this.field1154.seek(0L);
-			this.field1154.write(var5);
+			this.file.seek(0L);
+			this.file.write(var5);
 		}
-		this.field1154.seek(0L);
+		this.file.seek(0L);
 	}
 
 	@ObfuscatedName("fg.a(IBI[B)V")
-	public void method443(int arg0, int arg1, byte[] arg2) throws IOException {
-		if (this.field1156 < (long) arg1 + this.field1155) {
-			this.field1154.seek(this.field1156 + 1L);
-			this.field1154.write(1);
+	public void write(int arg0, int arg1, byte[] arg2) throws IOException {
+		if (this.maxLength < (long) arg1 + this.pos) {
+			this.file.seek(this.maxLength + 1L);
+			this.file.write(1);
 			throw new EOFException();
 		} else {
-			this.field1154.write(arg2, arg0, arg1);
-			this.field1155 += arg1;
+			this.file.write(arg2, arg0, arg1);
+			this.pos += arg1;
 		}
 	}
 
 	@ObfuscatedName("fg.a(IJ)V")
-	public void method444(long arg0) throws IOException {
-		this.field1154.seek(arg0);
-		this.field1155 = arg0;
+	public void seek(long arg0) throws IOException {
+		this.file.seek(arg0);
+		this.pos = arg0;
 	}
 
 	@ObfuscatedName("fg.a(B)Ljava/io/File;")
@@ -68,30 +68,30 @@ public final class FileOnDisk {
 
 	@Override
 	public void finalize() throws Throwable {
-		if (this.field1154 != null) {
+		if (this.file != null) {
 			System.out.println("Warning! fileondisk " + this.field1153 + " not closed correctly using close(). Auto-closing instead. ");
-			this.method446(0);
+			this.close(0);
 		}
 	}
 
 	@ObfuscatedName("fg.a(I)V")
-	public void method446(int arg0) throws IOException {
-		if (this.field1154 != null) {
-			this.field1154.close();
-			this.field1154 = null;
+	public void close(int arg0) throws IOException {
+		if (this.file != null) {
+			this.file.close();
+			this.file = null;
 		}
 	}
 
 	@ObfuscatedName("fg.b(B)J")
-	public long method447() throws IOException {
-		return this.field1154.length();
+	public long length() throws IOException {
+		return this.file.length();
 	}
 
 	@ObfuscatedName("fg.a(BII[B)I")
-	public int method448(int arg0, int arg1, byte[] arg2) throws IOException {
-		int var4 = this.field1154.read(arg2, arg0, arg1);
+	public int read(int arg0, int arg1, byte[] arg2) throws IOException {
+		int var4 = this.file.read(arg2, arg0, arg1);
 		if (var4 > 0) {
-			this.field1155 += var4;
+			this.pos += var4;
 		}
 		return var4;
 	}

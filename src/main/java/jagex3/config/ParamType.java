@@ -27,7 +27,7 @@ public final class ParamType extends Linkable2 {
 
 	@ObfuscatedName("ti.a(IB)Lac;")
 	public static ParamType method1467(int arg0) {
-		ParamType var1 = (ParamType) field3038.method665((long) arg0);
+		ParamType var1 = (ParamType) field3038.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
@@ -36,7 +36,7 @@ public final class ParamType extends Linkable2 {
 		if (var2 != null) {
 			var3.method21(new Packet(var2));
 		}
-		field3038.method663((long) arg0, var3);
+		field3038.put((long) arg0, var3);
 		return var3;
 	}
 

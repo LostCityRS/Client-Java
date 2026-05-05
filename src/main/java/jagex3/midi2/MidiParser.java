@@ -7,48 +7,48 @@ import jagex3.io.Packet;
 public final class MidiParser {
 
 	@ObfuscatedName("df.a")
-	public static final byte[] field700 = new byte[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	public static final byte[] msgLen = new byte[] { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	@ObfuscatedName("df.b")
-	public final Packet field701 = new Packet(null);
+	public final Packet packet = new Packet(null);
 
 	@ObfuscatedName("df.c")
-	public int[] field702;
+	public int[] trackCurrentStatus;
 
 	@ObfuscatedName("df.d")
-	public int[] field703;
+	public int[] trackStartPos;
 
 	@ObfuscatedName("df.e")
-	public int[] field704;
+	public int[] trackCurrentTick;
 
 	@ObfuscatedName("df.f")
-	public int field705;
+	public int tempo;
 
 	@ObfuscatedName("df.g")
-	public int field706;
+	public int division;
 
 	@ObfuscatedName("df.h")
-	public long field707;
+	public long baseTime;
 
 	@ObfuscatedName("df.i")
-	public int[] field708;
+	public int[] trackCurrentPos;
 
 	public MidiParser() {
 	}
 
 	public MidiParser(byte[] arg0) {
-		this.method270(arg0);
+		this.setMidi(arg0);
 	}
 
 	@ObfuscatedName("df.a(I)V")
-	public void method259(int arg0) {
-		this.field708[arg0] = this.field701.pos;
+	public void unsetTrack(int arg0) {
+		this.trackCurrentPos[arg0] = this.packet.pos;
 	}
 
 	@ObfuscatedName("df.a()Z")
-	public boolean method260() {
-		int var1 = this.field708.length;
+	public boolean allTracksFinished() {
+		int var1 = this.trackCurrentPos.length;
 		for (int var2 = 0; var2 < var1; var2++) {
-			if (this.field708[var2] >= 0) {
+			if (this.trackCurrentPos[var2] >= 0) {
 				return false;
 			}
 		}
@@ -56,160 +56,160 @@ public final class MidiParser {
 	}
 
 	@ObfuscatedName("df.b(I)V")
-	public void method261(int arg0) {
-		this.field701.pos = this.field708[arg0];
+	public void setTrack(int arg0) {
+		this.packet.pos = this.trackCurrentPos[arg0];
 	}
 
 	@ObfuscatedName("df.c(I)J")
-	public long method262(int arg0) {
-		return this.field707 + (long) arg0 * (long) this.field705;
+	public long timeFromTick(int arg0) {
+		return this.baseTime + (long) arg0 * (long) this.tempo;
 	}
 
 	@ObfuscatedName("df.b()Z")
-	public boolean method263() {
-		return this.field701.data != null;
+	public boolean gotMidi() {
+		return this.packet.data != null;
 	}
 
 	@ObfuscatedName("df.a(J)V")
-	public void method264(long arg0) {
-		this.field707 = arg0;
-		int var3 = this.field708.length;
+	public void restart(long arg0) {
+		this.baseTime = arg0;
+		int var3 = this.trackCurrentPos.length;
 		for (int var4 = 0; var4 < var3; var4++) {
-			this.field704[var4] = 0;
-			this.field702[var4] = 0;
-			this.field701.pos = this.field703[var4];
-			this.method274(var4);
-			this.field708[var4] = this.field701.pos;
+			this.trackCurrentTick[var4] = 0;
+			this.trackCurrentStatus[var4] = 0;
+			this.packet.pos = this.trackStartPos[var4];
+			this.processDeltaTime(var4);
+			this.trackCurrentPos[var4] = this.packet.pos;
 		}
 	}
 
 	@ObfuscatedName("df.c()V")
-	public void method265() {
-		this.field701.data = null;
-		this.field703 = null;
-		this.field708 = null;
-		this.field704 = null;
-		this.field702 = null;
+	public void dropMidi() {
+		this.packet.data = null;
+		this.trackStartPos = null;
+		this.trackCurrentPos = null;
+		this.trackCurrentTick = null;
+		this.trackCurrentStatus = null;
 	}
 
 	@ObfuscatedName("df.d()I")
-	public int method266() {
-		return this.field708.length;
+	public int getTrackCount() {
+		return this.trackCurrentPos.length;
 	}
 
 	@ObfuscatedName("df.a(II)I")
-	public int method267(int arg0, int arg1) {
+	public int getEvent3(int arg0, int arg1) {
 		if (arg1 != 255) {
-			byte var7 = field700[arg1 - 128];
+			byte var7 = msgLen[arg1 - 128];
 			int var8 = arg1;
 			if (var7 >= 1) {
-				var8 = arg1 | this.field701.g1() << 8;
+				var8 = arg1 | this.packet.g1() << 8;
 			}
 			if (var7 >= 2) {
-				var8 |= this.field701.g1() << 16;
+				var8 |= this.packet.g1() << 16;
 			}
 			return var8;
 		}
-		int var3 = this.field701.g1();
-		int var4 = this.field701.method317();
+		int var3 = this.packet.g1();
+		int var4 = this.packet.gMidiVarLen();
 		if (var3 == 47) {
-			this.field701.pos += var4;
+			this.packet.pos += var4;
 			return 1;
 		} else if (var3 == 81) {
-			int var5 = this.field701.g3();
+			int var5 = this.packet.g3();
 			var4 -= 3;
-			int var6 = this.field704[arg0];
-			this.field707 += (long) var6 * (long) (this.field705 - var5);
-			this.field705 = var5;
-			this.field701.pos += var4;
+			int var6 = this.trackCurrentTick[arg0];
+			this.baseTime += (long) var6 * (long) (this.tempo - var5);
+			this.tempo = var5;
+			this.packet.pos += var4;
 			return 2;
 		} else {
-			this.field701.pos += var4;
+			this.packet.pos += var4;
 			return 3;
 		}
 	}
 
 	@ObfuscatedName("df.d(I)I")
-	public int method269(int arg0) {
-		byte var2 = this.field701.data[this.field701.pos];
+	public int getEvent2(int arg0) {
+		byte var2 = this.packet.data[this.packet.pos];
 		int var3;
 		if (var2 < 0) {
 			var3 = var2 & 0xFF;
-			this.field702[arg0] = var3;
-			this.field701.pos++;
+			this.trackCurrentStatus[arg0] = var3;
+			this.packet.pos++;
 		} else {
-			var3 = this.field702[arg0];
+			var3 = this.trackCurrentStatus[arg0];
 		}
 		if (var3 != 240 && var3 != 247) {
-			return this.method267(arg0, var3);
+			return this.getEvent3(arg0, var3);
 		}
-		int var4 = this.field701.method317();
+		int var4 = this.packet.gMidiVarLen();
 		if (var3 == 247 && var4 > 0) {
-			int var5 = this.field701.data[this.field701.pos] & 0xFF;
+			int var5 = this.packet.data[this.packet.pos] & 0xFF;
 			if (var5 >= 241 && var5 <= 243 || var5 == 246 || var5 == 248 || var5 >= 250 && var5 <= 252 || var5 == 254) {
-				this.field701.pos++;
-				this.field702[arg0] = var5;
-				return this.method267(arg0, var5);
+				this.packet.pos++;
+				this.trackCurrentStatus[arg0] = var5;
+				return this.getEvent3(arg0, var5);
 			}
 		}
-		this.field701.pos += var4;
+		this.packet.pos += var4;
 		return 0;
 	}
 
 	@ObfuscatedName("df.a([B)V")
-	public void method270(byte[] arg0) {
-		this.field701.data = arg0;
-		this.field701.pos = 10;
-		int var2 = this.field701.g2();
-		this.field706 = this.field701.g2();
-		this.field705 = 500000;
-		this.field703 = new int[var2];
+	public void setMidi(byte[] arg0) {
+		this.packet.data = arg0;
+		this.packet.pos = 10;
+		int var2 = this.packet.g2();
+		this.division = this.packet.g2();
+		this.tempo = 500000;
+		this.trackStartPos = new int[var2];
 		int var3 = 0;
 		while (var3 < var2) {
-			int var4 = this.field701.g4();
-			int var5 = this.field701.g4();
+			int var4 = this.packet.g4();
+			int var5 = this.packet.g4();
 			if (var4 == 1297379947) {
-				this.field703[var3] = this.field701.pos;
+				this.trackStartPos[var3] = this.packet.pos;
 				var3++;
 			}
-			this.field701.pos += var5;
+			this.packet.pos += var5;
 		}
-		this.field707 = 0L;
-		this.field708 = new int[var2];
+		this.baseTime = 0L;
+		this.trackCurrentPos = new int[var2];
 		for (int var6 = 0; var6 < var2; var6++) {
-			this.field708[var6] = this.field703[var6];
+			this.trackCurrentPos[var6] = this.trackStartPos[var6];
 		}
-		this.field704 = new int[var2];
-		this.field702 = new int[var2];
+		this.trackCurrentTick = new int[var2];
+		this.trackCurrentStatus = new int[var2];
 	}
 
 	@ObfuscatedName("df.e(I)I")
-	public int method271(int arg0) {
-		return this.method269(arg0);
+	public int getEvent(int arg0) {
+		return this.getEvent2(arg0);
 	}
 
 	@ObfuscatedName("df.f()I")
-	public int method272() {
-		int var1 = this.field708.length;
+	public int nextTrackToPlay() {
+		int var1 = this.trackCurrentPos.length;
 		int var2 = -1;
 		int var3 = Integer.MAX_VALUE;
 		for (int var4 = 0; var4 < var1; var4++) {
-			if (this.field708[var4] >= 0 && this.field704[var4] < var3) {
+			if (this.trackCurrentPos[var4] >= 0 && this.trackCurrentTick[var4] < var3) {
 				var2 = var4;
-				var3 = this.field704[var4];
+				var3 = this.trackCurrentTick[var4];
 			}
 		}
 		return var2;
 	}
 
 	@ObfuscatedName("df.g()V")
-	public void method273() {
-		this.field701.pos = -1;
+	public void finishTrack() {
+		this.packet.pos = -1;
 	}
 
 	@ObfuscatedName("df.f(I)V")
-	public void method274(int arg0) {
-		int var2 = this.field701.method317();
-		this.field704[arg0] += var2;
+	public void processDeltaTime(int arg0) {
+		int var2 = this.packet.gMidiVarLen();
+		this.trackCurrentTick[arg0] += var2;
 	}
 }

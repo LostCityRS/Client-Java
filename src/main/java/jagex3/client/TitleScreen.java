@@ -136,15 +136,15 @@ public class TitleScreen {
             return;
         }
         if (Client.state == 0 || Client.state == 5) {
-            arg1.method141(Text.field2466, 382, 225, 16777215, -1);
-            Pix2D.method476(230, 233, 304, 34, 9179409);
-            Pix2D.method476(231, 234, 302, 32, 0);
-            Pix2D.method478(232, 235, loadPos * 3, 30, 9179409);
-            Pix2D.method478(loadPos * 3 + 232, 235, 300 - loadPos * 3, 30, 0);
+            arg1.method141(Text.LOADING_TITLE, 382, 225, 16777215, -1);
+            Pix2D.drawRect(230, 233, 304, 34, 9179409);
+            Pix2D.drawRect(231, 234, 302, 32, 0);
+            Pix2D.fillRect(232, 235, loadPos * 3, 30, 9179409);
+            Pix2D.fillRect(loadPos * 3 + 232, 235, 300 - loadPos * 3, 30, 0);
             arg1.method141(loadString, 382, 256, 16777215, -1);
         }
         if (Client.state == 20) {
-            field4473.method876(382 - field4473.field2434 / 2, 271 - field4473.field2437 / 2);
+            field4473.plotSprite(382 - field4473.wi / 2, 271 - field4473.hi / 2);
             short var2 = 211;
             arg1.method141(field3981, 382, 211, 16776960, 0);
             int var8 = var2 + 15;
@@ -153,21 +153,21 @@ public class TitleScreen {
             arg1.method141(field3980, 382, 241, 16776960, 0);
             int var10 = var9 + 15;
             int var11 = var10 + 10;
-            arg1.method154(JagString.join(new JagString[] { Text.field713, PixfontGeneric.method162(loginUser) }), 272, 266, 16777215, 0);
+            arg1.method154(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.method162(loginUser) }), 272, 266, 16777215, 0);
             int var13 = var11 + 15;
-            arg1.method154(JagString.join(new JagString[] { Text.field1697, loginPass.method596() }), 274, 281, 16777215, 0);
+            arg1.method154(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method596() }), 274, 281, 16777215, 0);
             int var15 = var13 + 15;
         }
         if (Client.state == 10) {
-            field4473.method876(202, 171);
+            field4473.plotSprite(202, 171);
             if (field1182 == 0) {
                 short var7 = 251;
-                arg1.method141(Text.field3522, 382, 251, 16776960, 0);
-                field2416.method876(229, 271);
-                arg1.method153(Text.field3601, 229, 271, 144, 40, 16777215, 0, 1, 1, 0);
+                arg1.method141(Text.WELCOMETORUNESCAPE, 382, 251, 16776960, 0);
+                field2416.plotSprite(229, 271);
+                arg1.method153(Text.NEWUSER, 229, 271, 144, 40, 16777215, 0, 1, 1, 0);
                 int var19 = var7 + 30;
-                field2416.method876(389, 271);
-                arg1.method153(Text.field3903, 389, 271, 144, 40, 16777215, 0, 1, 1, 0);
+                field2416.plotSprite(389, 271);
+                arg1.method153(Text.EXISTINGUSER, 389, 271, 144, 40, 16777215, 0, 1, 1, 0);
             } else if (field1182 == 2) {
                 short var3 = 211;
                 arg1.method141(field3981, 382, 211, 16776960, 0);
@@ -183,7 +183,7 @@ public class TitleScreen {
                 }
                 var12 = var14 + 15;
                 var12 += 10;
-                arg1.method154(JagString.join(new JagString[] { Text.field713, PixfontGeneric.method162(loginUser), var4 ? Statics.field3843 : field3972}), 272, 266, 16777215, 0);
+                arg1.method154(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.method162(loginUser), var4 ? Statics.field3843 : field3972}), 272, 266, 16777215, 0);
                 boolean var5;
                 if (Statics.field2620 == 1 && Client.field2113 % 40 < 20 && GameShell.field3520) {
                     var5 = true;
@@ -191,12 +191,12 @@ public class TitleScreen {
                     var5 = false;
                 }
                 var12 += 15;
-                arg1.method154(JagString.join(new JagString[] { Text.field1697, loginPass.method596(), var5 ? Statics.field3843 : field3972}), 274, 281, 16777215, 0);
-                field2416.method876(229, 301);
+                arg1.method154(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method596(), var5 ? Statics.field3843 : field3972}), 274, 281, 16777215, 0);
+                field2416.plotSprite(229, 301);
                 var12 += 15;
-                arg1.method141(Text.field4117, 302, 326, 16777215, 0);
-                field2416.method876(389, 301);
-                arg1.method141(Text.field76, 462, 326, 16777215, 0);
+                arg1.method141(Text.LOGIN, 302, 326, 16777215, 0);
+                field2416.plotSprite(389, 301);
+                arg1.method141(Text.CANCEL, 462, 326, 16777215, 0);
             } else if (field1182 == 3) {
                 arg1.method141(Text.field2921, 382, 211, 16776960, 0);
                 short var6 = 236;
@@ -208,8 +208,8 @@ public class TitleScreen {
                 int var18 = var17 + 15;
                 arg1.method141(Text.field2943, 382, 281, 16777215, 0);
                 int var20 = var18 + 15;
-                field2416.method876(309, 301);
-                arg1.method141(Text.field76, 382, 326, 16777215, 0);
+                field2416.plotSprite(309, 301);
+                arg1.method141(Text.CANCEL, 382, 326, 16777215, 0);
             }
         }
         if (Client.game != 1) {
@@ -219,19 +219,19 @@ public class TitleScreen {
             }
             method1307();
         }
-        field2095[field2460 ? 1 : 0].method876(725, 463);
+        field2095[field2460 ? 1 : 0].plotSprite(725, 463);
 		if (Client.state > 5 && Client.plug != 2) {
 			if (field518 == null) {
 				field518 = PixLoader.method1454(Statics.field4247, Client.sprites);
 			}
 			if (field518 != null) {
-				field518.method876(5, 463);
-				arg1.method141(JagString.join(new JagString[]{Text.field1326, Statics.field3787, JagString.method1212(Client.worldid)}), 55, 478, 16777215, 0);
+				field518.plotSprite(5, 463);
+				arg1.method141(JagString.join(new JagString[]{Text.WORLD, Statics.field3787, JagString.method1212(Client.worldid)}), 55, 478, 16777215, 0);
 				if (field2414 != null) {
-					arg0.method141(Text.field3763, 55, 492, 16777215, 0);
+					arg0.method141(Text.LOADINGDOTDOTDOT, 55, 492, 16777215, 0);
 					return;
 				}
-				arg0.method141(Text.field1751, 55, 492, 16777215, 0);
+				arg0.method141(Text.CLICKTOSWITCH, 55, 492, 16777215, 0);
 			}
 		}
 	}
@@ -245,9 +245,9 @@ public class TitleScreen {
 		if (ClientMouseListener.field625 == 1 && ClientMouseListener.field4239 >= 715 && ClientMouseListener.field3339 >= 453) {
 			field2460 = !field2460;
 			if (field2460) {
-				MidiManager.method5();
+				MidiManager.stop();
 			} else {
-				MidiManager.method388(Client.songs, field1552, 255);
+				MidiManager.play(Client.songs, field1552, 255);
 			}
 		}
 		if (Client.state == 5) {
@@ -288,7 +288,7 @@ public class TitleScreen {
 				field3980 = Text.field1277;
 				field3981 = Text.field1298;
 				Statics.field2620 = 0;
-				field3979 = Text.field242;
+				field3979 = Text.PLEASELOGIN2;
 			}
 		} else if (field1182 == 2) {
 			short var5 = 231;
@@ -304,11 +304,11 @@ public class TitleScreen {
 			if (var1 == 1 && var2 >= 227 && var2 <= 377 && var3 >= 301 && var3 <= 341) {
 				loginUser = loginUser.method611().method614();
 				if (loginUser.method604() == 0) {
-					loginMes(Text.field1285, Text.field1295, Text.field38);
+					loginMes(Text.field1285, Text.field1295, Text.LOGIN_USER_LENGTH_B);
 				} else if (loginPass.method604() == 0) {
-					loginMes(Text.field1288, Text.field1290, Text.field662);
+					loginMes(Text.field1288, Text.field1290, Text.LOGIN_PASS_LENGTH_B);
 				} else {
-					loginMes(Text.field1306, Text.field1275, Text.field1117);
+					loginMes(Text.field1306, Text.field1275, Text.CONNECTING2);
 					Client.setMainState(20);
 				}
 			} else {
@@ -352,14 +352,14 @@ public class TitleScreen {
 					if (Client.modewhere != 0 && ClientKeyboardListener.field2556 == 84) {
 						loginUser = loginUser.method611().method614();
 						if (loginUser.method604() == 0) {
-							loginMes(Text.field1285, Text.field1295, Text.field38);
+							loginMes(Text.field1285, Text.field1295, Text.LOGIN_USER_LENGTH_B);
 							return;
 						}
 						if (loginPass.method604() == 0) {
-							loginMes(Text.field1288, Text.field1290, Text.field662);
+							loginMes(Text.field1288, Text.field1290, Text.LOGIN_PASS_LENGTH_B);
 							return;
 						}
-						loginMes(Text.field1306, Text.field1275, Text.field1117);
+						loginMes(Text.field1306, Text.field1275, Text.CONNECTING2);
 						Client.setMainState(20);
 						return;
 					}
@@ -378,10 +378,10 @@ public class TitleScreen {
 		if (field1707) {
 			return;
 		}
-		Pix2D.method481();
+		Pix2D.cls();
 		byte[] var3 = arg0.getFile(0, field2009);
 		field1640 = new SoftwarePix32(var3, arg1);
-		field1901 = field1640.method1156();
+		field1901 = field1640.copyHFlip();
 		field3946 = PixLoader.method826(field2932, arg2);
 		field4473 = PixLoader.method826(field1896, arg2);
 		field2416 = PixLoader.method826(field3019, arg2);
@@ -442,11 +442,11 @@ public class TitleScreen {
 		loginUser = field3972;
 		field3667 = new int[32768];
 		if (field2460) {
-			MidiManager.method795();
+			MidiManager.stop2();
 		} else {
 			MidiManager.method730(255, field1552, Client.songs);
 		}
-		Js5Net.method988(false);
+		Js5Net.sendLoginLogoutPacket(false);
 		field1707 = true;
 		method1493();
 		field589 = new SoftwarePix32(128, 254);
@@ -480,16 +480,16 @@ public class TitleScreen {
 		field234 = null;
 		field518 = null;
 		field1675 = null;
-		MidiManager.method795();
-		Js5Net.method988(true);
+		MidiManager.stop2();
+		Js5Net.sendLoginLogoutPacket(true);
 		field1707 = false;
 	}
 
 	@ObfuscatedName("uc.b(I)V")
 	public static void method1493() {
-		field1640.method1161(0, 0);
-		field1901.method1161(382, 0);
-		field3946.method876(382 - field3946.field2434 / 2, 18);
+		field1640.quickPlotSprite(0, 0);
+		field1901.quickPlotSprite(382, 0);
+		field3946.plotSprite(382 - field3946.wi / 2, 18);
 	}
 
 	@ObfuscatedName("ed.a(Lrh;I)V")
@@ -516,11 +516,11 @@ public class TitleScreen {
 			return;
 		}
 		int var9 = 0;
-		for (int var10 = 0; var10 < arg0.field2437; var10++) {
-			for (int var11 = 0; var11 < arg0.field2434; var11++) {
-				if (arg0.field3704[var9++] != 0) {
-					int var12 = arg0.field2438 + var11 + 16;
-					int var13 = arg0.field2432 + var10 + 16;
+		for (int var10 = 0; var10 < arg0.hi; var10++) {
+			for (int var11 = 0; var11 < arg0.wi; var11++) {
+				if (arg0.data[var9++] != 0) {
+					int var12 = arg0.xof + var11 + 16;
+					int var13 = arg0.yof + var10 + 16;
 					int var14 = var12 + (var13 << 7);
 					field4169[var14] = 0;
 				}
@@ -643,64 +643,64 @@ public class TitleScreen {
 		if (field736 == null) {
 			field736 = PixLoader.method1325(field2195, Client.sprites, 0);
 		}
-		Pix2D.method478(0, 23, 765, 480, 0);
+		Pix2D.fillRect(0, 23, 765, 480, 0);
 		Pix2D.method482(0, 0, 138, 23, 12425273, 9135624);
 		Pix2D.method482(138, 0, 640, 23, 5197647, 2697513);
-		arg1.method141(Text.field2425, 69, 15, 0, -1);
+		arg1.method141(Text.SELECTAWORLD, 69, 15, 0, -1);
 		if (field736 != null) {
-			field736[1].method876(140, 1);
-			arg0.method154(Text.field2404, 152, 10, 16777215, -1);
-			field736[0].method876(140, 12);
-			arg0.method154(Text.field2074, 152, 21, 16777215, -1);
+			field736[1].plotSprite(140, 1);
+			arg0.method154(Text.MEMBERSONLYWORLD, 152, 10, 16777215, -1);
+			field736[0].plotSprite(140, 12);
+			arg0.method154(Text.FREEWORLD, 152, 21, 16777215, -1);
 		}
 		if (field3217 != null) {
 			if (field461[0] == 0 && field1686[0] == 0) {
-				field3217[2].method876(280, 4);
+				field3217[2].plotSprite(280, 4);
 			} else {
-				field3217[0].method876(280, 4);
+				field3217[0].plotSprite(280, 4);
 			}
 			if (field461[0] == 0 && field1686[0] == 1) {
-				field3217[3].method876(295, 4);
+				field3217[3].plotSprite(295, 4);
 			} else {
-				field3217[1].method876(295, 4);
+				field3217[1].plotSprite(295, 4);
 			}
-			arg1.method154(Text.field1312, 312, 17, 16777215, -1);
+			arg1.method154(Text.SL_WORLD, 312, 17, 16777215, -1);
 			if (field461[0] == 1 && field1686[0] == 0) {
-				field3217[2].method876(390, 4);
+				field3217[2].plotSprite(390, 4);
 			} else {
-				field3217[0].method876(390, 4);
+				field3217[0].plotSprite(390, 4);
 			}
 			if (field461[0] == 1 && field1686[0] == 1) {
-				field3217[3].method876(405, 4);
+				field3217[3].plotSprite(405, 4);
 			} else {
-				field3217[1].method876(405, 4);
+				field3217[1].plotSprite(405, 4);
 			}
-			arg1.method154(Text.field4362, 422, 17, 16777215, -1);
+			arg1.method154(Text.SL_PLAYERS, 422, 17, 16777215, -1);
 			if (field461[0] == 2 && field1686[0] == 0) {
-				field3217[2].method876(500, 4);
+				field3217[2].plotSprite(500, 4);
 			} else {
-				field3217[0].method876(500, 4);
+				field3217[0].plotSprite(500, 4);
 			}
 			if (field461[0] == 2 && field1686[0] == 1) {
-				field3217[3].method876(515, 4);
+				field3217[3].plotSprite(515, 4);
 			} else {
-				field3217[1].method876(515, 4);
+				field3217[1].plotSprite(515, 4);
 			}
-			arg1.method154(Text.field2734, 532, 17, 16777215, -1);
+			arg1.method154(Text.SL_LOCATION, 532, 17, 16777215, -1);
 			if (field461[0] == 3 && field1686[0] == 0) {
-				field3217[2].method876(610, 4);
+				field3217[2].plotSprite(610, 4);
 			} else {
-				field3217[0].method876(610, 4);
+				field3217[0].plotSprite(610, 4);
 			}
 			if (field461[0] == 3 && field1686[0] == 1) {
-				field3217[3].method876(625, 4);
+				field3217[3].plotSprite(625, 4);
 			} else {
-				field3217[1].method876(625, 4);
+				field3217[1].plotSprite(625, 4);
 			}
-			arg1.method154(Text.field3950, 642, 17, 16777215, -1);
+			arg1.method154(Text.SL_TYPE, 642, 17, 16777215, -1);
 		}
-		Pix2D.method478(700, 4, 58, 16, 0);
-		arg0.method141(Text.field76, 729, 16, 16777215, -1);
+		Pix2D.fillRect(700, 4, 58, 16, 0);
+		arg0.method141(Text.CANCEL, 729, 16, 16777215, -1);
 		field1581 = -1;
 		if (field1448 == null) {
 			return;
@@ -740,20 +740,20 @@ public class TitleScreen {
 			boolean var15 = true;
 			JagString var16 = JagString.method1212(var14.field1255);
 			if (var14.field1255 == -1) {
-				var16 = Text.field901;
+				var16 = Text.OFFLINEWORLD;
 				var15 = false;
 			} else if (var14.field1255 > 1980) {
-				var16 = Text.field1745;
+				var16 = Text.FULLWORLD;
 				var15 = false;
 			}
 			if (ClientMouseListener.field471 >= var9 && ClientMouseListener.field4449 >= var11 && ClientMouseListener.field471 < var9 + 88 && ClientMouseListener.field4449 < var11 + 19 && var15) {
 				field1581 = var13;
 				field1448[var14.field1257 ? 1 : 0].method1160(var9, var11);
 			} else {
-				field1448[var14.field1257 ? 1 : 0].method1161(var9, var11);
+				field1448[var14.field1257 ? 1 : 0].quickPlotSprite(var9, var11);
 			}
 			if (field372 != null) {
-				field372[var14.field1260 + (var14.field1257 ? 8 : 0)].method876(var9 + 29, var11);
+				field372[var14.field1260 + (var14.field1257 ? 8 : 0)].plotSprite(var9 + 29, var11);
 			}
 			arg1.method141(JagString.method1212(var14.field1261), var9 + 15, 5 + 9 + var11, 0, -1);
 			arg0.method141(var16, var9 + 60, var11 - -5 + 9, 268435455, -1);
@@ -794,7 +794,7 @@ public class TitleScreen {
 				field3034[var2] = field32[var2];
 			}
 		}
-		int var3 = field1640.field3654 * 9;
+		int var3 = field1640.wi * 9;
 		int var4 = 0;
 		int var5 = 0;
 		for (int var6 = 1; var6 < 255; var6++) {
@@ -805,24 +805,24 @@ public class TitleScreen {
 			var4 += var7;
 			for (int var8 = var7; var8 < 128; var8++) {
 				int var9 = field3667[var4++];
-				int var10 = field1640.field3247[var3++];
+				int var10 = field1640.data[var3++];
 				if (var9 == 0) {
-					field589.field3247[var5++] = var10;
+					field589.data[var5++] = var10;
 				} else {
 					int var12 = 256 - var9;
 					int var13 = field3034[var9];
-					field589.field3247[var5++] = ((var13 & 0xFF00FF) * var9 + var12 * (var10 & 0xFF00FF) & 0xFF00FF00) + (var12 * (var10 & 0xFF00) + (var13 & 0xFF00) * var9 & 0xFF0000) >> 8;
+					field589.data[var5++] = ((var13 & 0xFF00FF) * var9 + var12 * (var10 & 0xFF00FF) & 0xFF00FF00) + (var12 * (var10 & 0xFF00) + (var13 & 0xFF00) * var9 & 0xFF0000) >> 8;
 				}
 			}
 			for (int var14 = 0; var14 < var7; var14++) {
-				field589.field3247[var5++] = field1640.field3247[var3++];
+				field589.data[var5++] = field1640.data[var3++];
 			}
-			var3 += field1640.field3654 - 128;
+			var3 += field1640.wi - 128;
 		}
 		int var15 = 0;
 		int var16 = 0;
-		field589.method1161(0, 9);
-		int var17 = field1640.field3654 * 9 + 128;
+		field589.quickPlotSprite(0, 9);
+		int var17 = field1640.wi * 9 + 128;
 		for (int var18 = 1; var18 < 255; var18++) {
 			int var19 = field4454[var18] * (256 - var18) / 256 + 22;
 			if (var19 < 0) {
@@ -831,30 +831,30 @@ public class TitleScreen {
 			for (int var20 = 0; var20 < var19; var20++) {
 				int var10001 = var15++;
 				var17--;
-				field1675.field3247[var10001] = field1640.field3247[var17];
+				field1675.data[var10001] = field1640.data[var17];
 			}
 			for (int var21 = var19; var21 < 128; var21++) {
 				int var22 = field3667[var16++];
 				var17--;
-				int var23 = field1640.field3247[var17];
+				int var23 = field1640.data[var17];
 				if (var22 == 0) {
-					field1675.field3247[var15++] = var23;
+					field1675.data[var15++] = var23;
 				} else {
 					int var25 = 256 - var22;
 					int var26 = field3034[var22];
-					field1675.field3247[var15++] = ((var23 & 0xFF00) * var25 + var22 * (var26 & 0xFF00) & 0xFF0000) + ((var23 & 0xFF00FF) * var25 + (var26 & 0xFF00FF) * var22 & 0xFF00FF00) >> 8;
+					field1675.data[var15++] = ((var23 & 0xFF00) * var25 + var22 * (var26 & 0xFF00) & 0xFF0000) + ((var23 & 0xFF00FF) * var25 + (var26 & 0xFF00FF) * var22 & 0xFF00FF00) >> 8;
 				}
 			}
-			var17 += field1640.field3654 + 128;
+			var17 += field1640.wi + 128;
 			var16 += var19;
 		}
-		field1675.method1161(637, 9);
+		field1675.quickPlotSprite(637, 9);
 	}
 
 	@ObfuscatedName("ac.a(ZII)V")
 	public static void method23(int arg0, int arg1) {
 		if (field1183 != 0 && arg0 != -1) {
-			MidiManager.method388(Client.jingles, arg0, field1183);
+			MidiManager.play(Client.jingles, arg0, field1183);
 			Client.field2012 = true;
 		}
 	}
@@ -876,7 +876,7 @@ public class TitleScreen {
 						var3.field1261 = var4 & 0x7FFF;
 						var3.field1257 = (var4 & 0x8000) != 0;
 						var3.field1262 = var1.gjstr();
-						var3.field1255 = var1.method334();
+						var3.field1255 = var1.g2b();
 						var3.field1258 = var2;
 						var3.field1260 = method528(var1.g2());
 					}
@@ -1073,18 +1073,18 @@ public class TitleScreen {
 
     @ObfuscatedName("o.a(Lnb;Lnb;ILnb;)V")
     public static void method1038(Js5 arg0, Js5 arg1, Js5 arg2) {
-        field2009 = arg1.method964(Statics.field689);
-        field2932 = arg2.method964(Statics.field1143);
-        field1896 = arg2.method964(Client.field561);
-        field3019 = arg2.method964(Statics.field2089);
-        field4502 = arg2.method964(Statics.field316);
-        field2912 = arg2.method964(Statics.field1733);
-        field209 = arg2.method964(Statics.field4278);
-        field119 = arg2.method964(Statics.field4011);
-        field1783 = arg2.method964(Statics.field881);
-        field2195 = arg2.method964(Statics.field102);
-        Statics.field4247 = arg2.method964(Statics.field1682);
-        field1552 = arg0.method964(Statics.field2156);
+        field2009 = arg1.getGroupId(Statics.field689);
+        field2932 = arg2.getGroupId(Statics.field1143);
+        field1896 = arg2.getGroupId(Client.field561);
+        field3019 = arg2.getGroupId(Statics.field2089);
+        field4502 = arg2.getGroupId(Statics.field316);
+        field2912 = arg2.getGroupId(Statics.field1733);
+        field209 = arg2.getGroupId(Statics.field4278);
+        field119 = arg2.getGroupId(Statics.field4011);
+        field1783 = arg2.getGroupId(Statics.field881);
+        field2195 = arg2.getGroupId(Statics.field102);
+        Statics.field4247 = arg2.getGroupId(Statics.field1682);
+        field1552 = arg0.getGroupId(Statics.field2156);
     }
 
 	@ObfuscatedName("uj.a(IIBI)I")

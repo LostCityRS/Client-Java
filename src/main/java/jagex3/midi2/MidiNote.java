@@ -2,8 +2,6 @@ package jagex3.midi2;
 
 import deob.ObfuscatedName;
 import jagex3.datastruct.Linkable;
-import jagex3.sound.EnvelopeSet;
-import jagex3.sound.Patch;
 import jagex3.sound.Wave;
 import jagex3.sound.WaveStream;
 
@@ -11,73 +9,73 @@ import jagex3.sound.WaveStream;
 public final class MidiNote extends Linkable {
 
 	@ObfuscatedName("lg.t")
-	public int field2367;
+	public int volumeChangeDuration;
 
 	@ObfuscatedName("lg.u")
-	public EnvelopeSet field2368;
+	public EnvelopeSet envelope;
 
 	@ObfuscatedName("lg.z")
-	public int field2373;
+	public int decayProgress;
 
 	@ObfuscatedName("lg.C")
-	public int field2376;
+	public int attackProgress;
 
 	@ObfuscatedName("lg.E")
-	public int field2378;
+	public int releaseEnvelopeProgress;
 
 	@ObfuscatedName("lg.F")
-	public int field2379;
+	public int vibratoProgress;
 
 	@ObfuscatedName("lg.H")
-	public int field2381;
+	public int noteKey;
 
 	@ObfuscatedName("lg.I")
-	public int field2382;
+	public int attackEnvelopeProgress;
 
 	@ObfuscatedName("lg.J")
-	public int field2383;
+	public int volume;
 
 	@ObfuscatedName("lg.L")
-	public int field2384;
+	public int secondaryNote;
 
 	@ObfuscatedName("lg.M")
-	public int field2385;
+	public int channel;
 
 	@ObfuscatedName("lg.N")
-	public int field2386;
+	public int releaseProgress;
 
 	@ObfuscatedName("lg.O")
-	public int field2387;
+	public int portamentoAmount;
 
 	@ObfuscatedName("lg.Q")
-	public int field2389;
+	public int vibratoRampProgress;
 
 	@ObfuscatedName("lg.R")
-	public int field2390;
+	public int field1766;
 
 	@ObfuscatedName("lg.T")
-	public int field2392;
+	public int portamentoDelta;
 
 	@ObfuscatedName("lg.U")
-	public int field2393;
+	public int pan;
 
 	@ObfuscatedName("lg.V")
-	public int field2394;
+	public int pitch;
 
 	@ObfuscatedName("lg.S")
-	public WaveStream field2391;
+	public WaveStream stream;
 
 	@ObfuscatedName("lg.B")
-	public Patch field2375;
+	public Patch patch;
 
 	@ObfuscatedName("lg.G")
-	public Wave field2380;
+	public Wave sound;
 
 	@ObfuscatedName("lg.b(I)V")
-	public void method866() {
-		this.field2391 = null;
-		this.field2375 = null;
-		this.field2368 = null;
-		this.field2380 = null;
+	public void dropData() {
+		this.stream = null;
+		this.patch = null;
+		this.envelope = null;
+		this.sound = null;
 	}
 }

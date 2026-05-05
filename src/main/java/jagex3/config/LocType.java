@@ -15,212 +15,212 @@ import jagex3.var.VarCache;
 public final class LocType extends Linkable2 {
 
 	@ObfuscatedName("qe.d")
-	public static final LruCache field3558 = new LruCache(64);
+	public static final LruCache recentUse = new LruCache(64);
 	@ObfuscatedName("fd.S")
-	public static final ModelSourceCache field1123 = new ModelSourceCache(500);
+	public static final ModelSourceCache mc1 = new ModelSourceCache(500);
 	@ObfuscatedName("eb.M")
-	public static final ModelSourceCache field879 = new ModelSourceCache(30);
+	public static final ModelSourceCache mc2 = new ModelSourceCache(30);
 	@ObfuscatedName("ra.R")
-	public static final ModelCacheLit field3623 = new ModelCacheLit();
+	public static final ModelCacheLit mc3 = new ModelCacheLit();
 	@ObfuscatedName("fd.W")
-	public static final ModelUnlit[] field1127 = new ModelUnlit[4];
+	public static final ModelUnlit[] temp = new ModelUnlit[4];
 	@ObfuscatedName("sd.p")
-	public static Js5 field3827;
+	public static Js5 clientConfig;
 	@ObfuscatedName("hc.U")
 	public static ModelSourceCache field1442;
 	@ObfuscatedName("ma.U")
-	public static boolean field2465 = false;
+	public static boolean lowMem = false;
 	@ObfuscatedName("bh.K")
 	public static boolean field317;
 	@ObfuscatedName("qa.f")
-	public static Js5 field3524;
+	public static Js5 models;
 	@ObfuscatedName("l.Z")
 	public static short[] clientpalette = new short[256];
 	@ObfuscatedName("nf.ab")
-	public short[] field2790;
+	public short[] recol_d;
 
 	@ObfuscatedName("nf.cb")
-	public int field2792 = 128;
+	public int resizex = 128;
 
 	@ObfuscatedName("nf.eb")
-	public int field2794 = 1;
+	public int length = 1;
 
 	@ObfuscatedName("nf.fb")
-	public int field2795 = 0;
+	public int bgsound_maxdelay = 0;
 
 	@ObfuscatedName("nf.gb")
-	public int field2796 = 0;
+	public int contrast = 0;
 
 	@ObfuscatedName("nf.jb")
 	public boolean field2799 = false;
 
 	@ObfuscatedName("nf.mb")
-	public int field2802 = 128;
+	public int resizez = 128;
 
 	@ObfuscatedName("nf.nb")
-	public boolean field2803 = false;
+	public boolean breakroutefinding = false;
 
 	@ObfuscatedName("nf.ob")
-	public short[] field2804;
+	public short[] recol_s;
 
 	@ObfuscatedName("nf.pb")
-	public int field2805 = 16;
+	public int wallwidth = 16;
 
 	@ObfuscatedName("nf.qb")
-	public int field2806 = -1;
+	public int bgsound_sound = -1;
 
 	@ObfuscatedName("nf.rb")
-	public int field2807 = 0;
+	public int bgsound_mindelay = 0;
 
 	@ObfuscatedName("nf.tb")
-	public int field2809 = 0;
+	public int ambient = 0;
 
 	@ObfuscatedName("nf.ub")
-	public int field2810 = -1;
+	public int anim = -1;
 
 	@ObfuscatedName("nf.vb")
-	public int[] field2811;
+	public int[] shape;
 
 	@ObfuscatedName("nf.I")
-	public boolean field2772 = false;
+	public boolean occlude = false;
 
 	@ObfuscatedName("nf.Q")
-	public int field2780 = -1;
+	public int raiseobject = -1;
 
 	@ObfuscatedName("nf.X")
 	public short field2787 = -1;
 
 	@ObfuscatedName("nf.Y")
-	public int field2788 = 0;
+	public int offsety = 0;
 
 	@ObfuscatedName("nf.K")
-	public int field2774 = 1;
+	public int width = 1;
 
 	@ObfuscatedName("nf.D")
-	public int field2767 = -1;
+	public int multivarbit = -1;
 
 	@ObfuscatedName("nf.R")
-	public int field2781 = 0;
+	public int forceapproach = 0;
 
 	@ObfuscatedName("nf.Db")
-	public int field2819 = 2;
+	public int blockwalk = 2;
 
 	@ObfuscatedName("nf.H")
-	public int field2771 = 0;
+	public int bgsound_range = 0;
 
 	@ObfuscatedName("nf.Fb")
-	public int field2821 = 128;
+	public int resizey = 128;
 
 	@ObfuscatedName("nf.Z")
-	public boolean field2789 = true;
+	public boolean blockrange = true;
 
 	@ObfuscatedName("nf.T")
-	public boolean field2783 = false;
+	public boolean sharelight = false;
 
 	@ObfuscatedName("nf.Ab")
-	public JagString[] field2816 = new JagString[5];
+	public JagString[] op = new JagString[5];
 
 	@ObfuscatedName("nf.S")
-	public boolean field2782 = true;
+	public boolean shadow = true;
 
 	@ObfuscatedName("nf.xb")
-	public byte field2813 = 0;
+	public byte skewType = 0;
 
 	@ObfuscatedName("nf.Bb")
-	public int field2817 = -1;
+	public int mapfunction = -1;
 
 	@ObfuscatedName("nf.J")
-	public JagString field2773 = Statics.field1426;
+	public JagString name = Statics.field1426;
 
 	@ObfuscatedName("nf.Cb")
-	public int field2818 = -1;
+	public int multivarp = -1;
 
 	@ObfuscatedName("nf.Nb")
 	public boolean field2829 = true;
 
 	@ObfuscatedName("nf.Ob")
-	public int field2830 = 0;
+	public int offsetx = 0;
 
 	@ObfuscatedName("nf.Kb")
-	public boolean field2826 = false;
+	public boolean forcedecor = false;
 
 	@ObfuscatedName("nf.Rb")
-	public int field2833 = -1;
+	public int active = -1;
 
 	@ObfuscatedName("nf.Qb")
-	public int field2832 = -1;
+	public int mapscene = -1;
 
 	@ObfuscatedName("nf.Sb")
 	public boolean field2834 = false;
 
 	@ObfuscatedName("nf.Tb")
-	public int field2835 = 0;
+	public int offsetz = 0;
 
 	@ObfuscatedName("nf.W")
-	public boolean field2786 = false;
+	public boolean mirror = false;
 
 	@ObfuscatedName("nf.Pb")
 	public int field2831;
 
 	@ObfuscatedName("nf.N")
-	public HashTable field2777;
+	public HashTable params;
 
 	@ObfuscatedName("nf.Ib")
 	public byte[] field2824;
 
 	@ObfuscatedName("nf.G")
-	public int[] field2770;
+	public int[] multiloc;
 
 	@ObfuscatedName("nf.P")
-	public int[] field2779;
+	public int[] model;
 
 	@ObfuscatedName("nf.zb")
-	public int[] field2815;
+	public int[] bgsound_random;
 
 	@ObfuscatedName("nf.M")
-	public short[] field2776;
+	public short[] retex_s;
 
 	@ObfuscatedName("nf.yb")
-	public short[] field2814;
+	public short[] retex_d;
 
 	@ObfuscatedName("re.a(II)Lnf;")
 	public static LocType list(int arg0) {
-		LocType var1 = (LocType) field3558.method665((long) arg0);
+		LocType var1 = (LocType) recentUse.find((long) arg0);
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = field3827.getFile(method1344(arg0), method1077(arg0));
+		byte[] var2 = clientConfig.getFile(method1344(arg0), method1077(arg0));
 		LocType var3 = new LocType();
 		var3.field2831 = arg0;
 		if (var2 != null) {
-			var3.method1002(new Packet(var2));
+			var3.decode(new Packet(var2));
 		}
-		var3.method1003();
+		var3.postDecode();
 		if (!field317 && var3.field2834) {
-			var3.field2816 = null;
+			var3.op = null;
 		}
-		if (var3.field2803) {
-			var3.field2819 = 0;
-			var3.field2789 = false;
+		if (var3.breakroutefinding) {
+			var3.blockwalk = 0;
+			var3.blockrange = false;
 		}
-		field3558.method663((long) arg0, var3);
+		recentUse.put((long) arg0, var3);
 		return var3;
 	}
 
 	@ObfuscatedName("h.c(I)V")
 	public static void resetCache() {
-		field3558.clear();
-		field1123.clear();
+		recentUse.clear();
+		mc1.clear();
 		field1442.clear();
-		field879.clear();
+		mc2.clear();
 	}
 
 	@ObfuscatedName("cd.a(Lnb;ILnb;ZZ)V")
 	public static void init(Js5 arg0, Js5 arg1, boolean arg2, boolean arg3) {
-		field2465 = arg3;
+		lowMem = arg3;
 		field317 = arg2;
-		field3827 = arg0;
-		field3524 = arg1;
+		clientConfig = arg0;
+		models = arg1;
 		field1442 = new ModelSourceCache(30);
 	}
 
@@ -235,32 +235,32 @@ public final class LocType extends Linkable2 {
 	}
 
 	@ObfuscatedName("nf.d(I)Z")
-	public boolean method990() {
-		if (this.field2779 == null) {
+	public boolean checkModelAll() {
+		if (this.model == null) {
 			return true;
 		}
 		boolean var1 = true;
-		for (int var2 = 0; var2 < this.field2779.length; var2++) {
-			var1 &= field3524.method959(this.field2779[var2] & 0xFFFF, 0);
+		for (int var2 = 0; var2 < this.model.length; var2++) {
+			var1 &= models.requestDownload(this.model[var2] & 0xFFFF, 0);
 		}
 		return var1;
 	}
 
 	@ObfuscatedName("nf.a(BI)Z")
-	public boolean method991(int arg0) {
-		if (this.field2811 != null) {
-			for (int var4 = 0; var4 < this.field2811.length; var4++) {
-				if (arg0 == this.field2811[var4]) {
-					return field3524.method959(this.field2779[var4] & 0xFFFF, 0);
+	public boolean checkModel(int arg0) {
+		if (this.shape != null) {
+			for (int var4 = 0; var4 < this.shape.length; var4++) {
+				if (arg0 == this.shape[var4]) {
+					return models.requestDownload(this.model[var4] & 0xFFFF, 0);
 				}
 			}
 			return true;
-		} else if (this.field2779 == null) {
+		} else if (this.model == null) {
 			return true;
 		} else if (arg0 == 10) {
 			boolean var2 = true;
-			for (int var3 = 0; var3 < this.field2779.length; var3++) {
-				var2 &= field3524.method959(this.field2779[var3] & 0xFFFF, 0);
+			for (int var3 = 0; var3 < this.model.length; var3++) {
+				var2 &= models.requestDownload(this.model[var3] & 0xFFFF, 0);
 			}
 			return var2;
 		} else {
@@ -269,14 +269,14 @@ public final class LocType extends Linkable2 {
 	}
 
 	@ObfuscatedName("nf.f(I)Z")
-	public boolean method994() {
-		if (this.field2770 == null) {
-			return this.field2806 != -1 || this.field2815 != null;
+	public boolean hasBgSound() {
+		if (this.multiloc == null) {
+			return this.bgsound_sound != -1 || this.bgsound_random != null;
 		}
-		for (int var1 = 0; var1 < this.field2770.length; var1++) {
-			if (this.field2770[var1] != -1) {
-				LocType var2 = list(this.field2770[var1]);
-				if (var2.field2806 != -1 || var2.field2815 != null) {
+		for (int var1 = 0; var1 < this.multiloc.length; var1++) {
+			if (this.multiloc[var1] != -1) {
+				LocType var2 = list(this.multiloc[var1]);
+				if (var2.bgsound_sound != -1 || var2.bgsound_random != null) {
 					return true;
 				}
 			}
@@ -286,10 +286,10 @@ public final class LocType extends Linkable2 {
 
 	@ObfuscatedName("nf.a(BII)I")
 	public int method995(int arg0, int arg1) {
-		if (this.field2777 == null) {
+		if (this.params == null) {
 			return arg0;
 		} else {
-			IntNode var3 = (IntNode) this.field2777.method1049((long) arg1);
+			IntNode var3 = (IntNode) this.params.find((long) arg1);
 			return var3 == null ? arg0 : var3.field3698;
 		}
 	}
@@ -297,13 +297,13 @@ public final class LocType extends Linkable2 {
 	@ObfuscatedName("nf.a(I[[I[[IIZIIII)Ltc;")
 	public ModelCacheLit method997(int arg0, int[][] arg1, int[][] arg2, int arg3, boolean arg4, int arg5, int arg6, int arg7) {
 		long var9;
-		if (this.field2811 == null) {
+		if (this.shape == null) {
 			var9 = arg6 + (this.field2831 << 10);
 		} else {
 			var9 = arg6 + (this.field2831 << 10) + (arg0 << 3);
 		}
 		boolean var11;
-		if (arg4 && this.field2783) {
+		if (arg4 && this.sharelight) {
 			var11 = true;
 			var9 |= Long.MIN_VALUE;
 		} else {
@@ -313,56 +313,56 @@ public final class LocType extends Linkable2 {
 		if (var12 == null) {
 			ModelUnlit var13 = this.method1000(arg6, arg0);
 			if (var13 == null) {
-				field3623.field3984 = null;
-				return field3623;
+				mc3.field3984 = null;
+				return mc3;
 			}
 			var13.method563();
 			if (var11) {
 				var12 = var13;
-				var13.field1523 = (short) (this.field2796 * 5 + 768);
-				var13.field1498 = (short) (this.field2809 + 64);
+				var13.field1523 = (short) (this.contrast * 5 + 768);
+				var13.field1498 = (short) (this.ambient + 64);
 				var13.method548();
 			} else {
-				var12 = new SoftwareModelLit(var13, this.field2809 + 64, 768 - -(this.field2796 * 5), -50, -10, -50);
+				var12 = new SoftwareModelLit(var13, this.ambient + 64, 768 - -(this.contrast * 5), -50, -10, -50);
 			}
 			field1442.put(var9, var12);
 		}
 		if (var11) {
 			var12 = ((ModelUnlit) var12).copyForShareLight();
 		}
-		if (this.field2813 != 0) {
+		if (this.skewType != 0) {
 			if (var12 instanceof SoftwareModelLit) {
-				var12 = ((SoftwareModelLit) var12).hillSkew(this.field2813, this.field2787, arg2, arg1, arg3, arg7, arg5, true);
+				var12 = ((SoftwareModelLit) var12).hillSkew(this.skewType, this.field2787, arg2, arg1, arg3, arg7, arg5, true);
 			} else if (var12 instanceof ModelUnlit) {
-				var12 = ((ModelUnlit) var12).hillSkew(this.field2813, this.field2787, arg2, arg1, arg3, arg7, arg5);
+				var12 = ((ModelUnlit) var12).hillSkew(this.skewType, this.field2787, arg2, arg1, arg3, arg7, arg5);
 			}
 		}
-		field3623.field3984 = var12;
-		return field3623;
+		mc3.field3984 = var12;
+		return mc3;
 	}
 
 	@ObfuscatedName("nf.d(B)Lnf;")
-	public LocType method998() {
+	public LocType getMultiLoc() {
 		int var1 = -1;
-		if (this.field2767 != -1) {
-			var1 = VarCache.method930(this.field2767);
-		} else if (this.field2818 != -1) {
-			var1 = VarCache.field2050[this.field2818];
+		if (this.multivarbit != -1) {
+			var1 = VarCache.method930(this.multivarbit);
+		} else if (this.multivarp != -1) {
+			var1 = VarCache.field2050[this.multivarp];
 		}
-		if (var1 < 0 || var1 >= this.field2770.length - 1 || this.field2770[var1] == -1) {
-			int var2 = this.field2770[this.field2770.length - 1];
+		if (var1 < 0 || var1 >= this.multiloc.length - 1 || this.multiloc[var1] == -1) {
+			int var2 = this.multiloc[this.multiloc.length - 1];
 			return var2 == -1 ? null : list(var2);
 		} else {
-			return list(this.field2770[var1]);
+			return list(this.multiloc[var1]);
 		}
 	}
 
 	@ObfuscatedName("nf.a(ILi;I)Li;")
 	public JagString method999(JagString arg0, int arg1) {
-		if (this.field2777 == null) {
+		if (this.params == null) {
 			return arg0;
 		} else {
-			StringNode var3 = (StringNode) this.field2777.method1049((long) arg1);
+			StringNode var3 = (StringNode) this.params.find((long) arg1);
 			return var3 == null ? arg0 : var3.field4046;
 		}
 	}
@@ -370,45 +370,45 @@ public final class LocType extends Linkable2 {
 	@ObfuscatedName("nf.a(IIB)Lhe;")
 	public ModelUnlit method1000(int arg0, int arg1) {
 		ModelUnlit var3 = null;
-		boolean var4 = this.field2786;
+		boolean var4 = this.mirror;
 		if (arg1 == 2 && arg0 > 3) {
 			var4 = !var4;
 		}
-		if (this.field2811 == null) {
+		if (this.shape == null) {
 			if (arg1 != 10) {
 				return null;
 			}
-			if (this.field2779 == null) {
+			if (this.model == null) {
 				return null;
 			}
-			int var5 = this.field2779.length;
+			int var5 = this.model.length;
 			for (int var6 = 0; var6 < var5; var6++) {
-				int var7 = this.field2779[var6];
+				int var7 = this.model[var6];
 				if (var4) {
 					var7 += 65536;
 				}
-				var3 = (ModelUnlit) field1123.find((long) var7);
+				var3 = (ModelUnlit) mc1.find((long) var7);
 				if (var3 == null) {
-					var3 = ModelUnlit.load(field3524, var7 & 0xFFFF);
+					var3 = ModelUnlit.load(models, var7 & 0xFFFF);
 					if (var3 == null) {
 						return null;
 					}
 					if (var4) {
 						var3.method551();
 					}
-					field1123.put((long) var7, var3);
+					mc1.put((long) var7, var3);
 				}
 				if (var5 > 1) {
-					field1127[var6] = var3;
+					temp[var6] = var3;
 				}
 			}
 			if (var5 > 1) {
-				var3 = new ModelUnlit(field1127, var5);
+				var3 = new ModelUnlit(temp, var5);
 			}
 		} else {
 			int var8 = -1;
-			for (int var9 = 0; var9 < this.field2811.length; var9++) {
-				if (arg1 == this.field2811[var9]) {
+			for (int var9 = 0; var9 < this.shape.length; var9++) {
+				if (arg1 == this.shape[var9]) {
 					var8 = var9;
 					break;
 				}
@@ -416,35 +416,35 @@ public final class LocType extends Linkable2 {
 			if (var8 == -1) {
 				return null;
 			}
-			int var10 = this.field2779[var8];
+			int var10 = this.model[var8];
 			if (var4) {
 				var10 += 65536;
 			}
-			var3 = (ModelUnlit) field1123.find((long) var10);
+			var3 = (ModelUnlit) mc1.find((long) var10);
 			if (var3 == null) {
-				var3 = ModelUnlit.load(field3524, var10 & 0xFFFF);
+				var3 = ModelUnlit.load(models, var10 & 0xFFFF);
 				if (var3 == null) {
 					return null;
 				}
 				if (var4) {
 					var3.method551();
 				}
-				field1123.put((long) var10, var3);
+				mc1.put((long) var10, var3);
 			}
 		}
 		boolean var11;
-		if (this.field2792 == 128 && this.field2821 == 128 && this.field2802 == 128) {
+		if (this.resizex == 128 && this.resizey == 128 && this.resizez == 128) {
 			var11 = false;
 		} else {
 			var11 = true;
 		}
 		boolean var12;
-		if (this.field2830 == 0 && this.field2788 == 0 && this.field2835 == 0) {
+		if (this.offsetx == 0 && this.offsety == 0 && this.offsetz == 0) {
 			var12 = false;
 		} else {
 			var12 = true;
 		}
-		ModelUnlit var13 = new ModelUnlit(var3, arg0 == 0 && !var11 && !var12, this.field2804 == null, this.field2776 == null, true);
+		ModelUnlit var13 = new ModelUnlit(var3, arg0 == 0 && !var11 && !var12, this.recol_s == null, this.retex_s == null, true);
 		if (arg1 == 4 && arg0 > 3) {
 			var13.method573();
 			var13.method549(45, 0, -45);
@@ -457,128 +457,128 @@ public final class LocType extends Linkable2 {
 		} else if (var14 == 3) {
 			var13.method566();
 		}
-		if (this.field2804 != null) {
-			for (int var15 = 0; var15 < this.field2804.length; var15++) {
+		if (this.recol_s != null) {
+			for (int var15 = 0; var15 < this.recol_s.length; var15++) {
 				if (this.field2824 == null || var15 >= this.field2824.length) {
-					var13.method564(this.field2804[var15], this.field2790[var15]);
+					var13.method564(this.recol_s[var15], this.recol_d[var15]);
 				} else {
-					var13.method564(this.field2804[var15], clientpalette[this.field2824[var15] & 0xFF]);
+					var13.method564(this.recol_s[var15], clientpalette[this.field2824[var15] & 0xFF]);
 				}
 			}
 		}
-		if (this.field2776 != null) {
-			for (int var16 = 0; var16 < this.field2776.length; var16++) {
-				var13.method553(this.field2776[var16], this.field2814[var16]);
+		if (this.retex_s != null) {
+			for (int var16 = 0; var16 < this.retex_s.length; var16++) {
+				var13.method553(this.retex_s[var16], this.retex_d[var16]);
 			}
 		}
 		if (var11) {
-			var13.method552(this.field2792, this.field2821, this.field2802);
+			var13.method552(this.resizex, this.resizey, this.resizez);
 		}
 		if (var12) {
-			var13.method549(this.field2830, this.field2788, this.field2835);
+			var13.method549(this.offsetx, this.offsety, this.offsetz);
 		}
 		return var13;
 	}
 
 	@ObfuscatedName("nf.a(BILea;)V")
-	public void method1001(int arg0, Packet arg1) {
+	public void decode(int arg0, Packet arg1) {
 		if (arg0 == 1) {
 			int var3 = arg1.g1();
 			if (var3 > 0) {
-				if (this.field2779 != null && !field2465) {
+				if (this.model != null && !lowMem) {
 					arg1.pos += var3 * 3;
 					return;
 				}
-				this.field2811 = new int[var3];
-				this.field2779 = new int[var3];
+				this.shape = new int[var3];
+				this.model = new int[var3];
 				for (int var4 = 0; var4 < var3; var4++) {
-					this.field2779[var4] = arg1.g2();
-					this.field2811[var4] = arg1.g1();
+					this.model[var4] = arg1.g2();
+					this.shape[var4] = arg1.g1();
 				}
 				return;
 			}
 		} else if (arg0 == 2) {
-			this.field2773 = arg1.gjstr();
+			this.name = arg1.gjstr();
 		} else if (arg0 == 5) {
 			int var22 = arg1.g1();
 			if (var22 > 0) {
-				if (this.field2779 != null && !field2465) {
+				if (this.model != null && !lowMem) {
 					arg1.pos += var22 * 2;
 					return;
 				}
-				this.field2779 = new int[var22];
-				this.field2811 = null;
+				this.model = new int[var22];
+				this.shape = null;
 				for (int var23 = 0; var23 < var22; var23++) {
-					this.field2779[var23] = arg1.g2();
+					this.model[var23] = arg1.g2();
 				}
 				return;
 			}
 		} else if (arg0 == 14) {
-			this.field2774 = arg1.g1();
+			this.width = arg1.g1();
 			return;
 		} else if (arg0 == 15) {
-			this.field2794 = arg1.g1();
+			this.length = arg1.g1();
 			return;
 		} else if (arg0 == 17) {
-			this.field2789 = false;
-			this.field2819 = 0;
+			this.blockrange = false;
+			this.blockwalk = 0;
 			return;
 		} else if (arg0 == 18) {
-			this.field2789 = false;
+			this.blockrange = false;
 			return;
 		} else if (arg0 == 19) {
-			this.field2833 = arg1.g1();
+			this.active = arg1.g1();
 			return;
 		} else if (arg0 == 21) {
-			this.field2813 = 1;
+			this.skewType = 1;
 			return;
 		} else {
 			if (arg0 == 22) {
-				this.field2783 = true;
+				this.sharelight = true;
 			} else if (arg0 == 23) {
-				this.field2772 = true;
+				this.occlude = true;
 				return;
 			} else if (arg0 == 24) {
-				this.field2810 = arg1.g2();
-				if (this.field2810 == 65535) {
-					this.field2810 = -1;
+				this.anim = arg1.g2();
+				if (this.anim == 65535) {
+					this.anim = -1;
 					return;
 				}
 			} else if (arg0 == 27) {
-				this.field2819 = 1;
+				this.blockwalk = 1;
 				return;
 			} else if (arg0 == 28) {
-				this.field2805 = arg1.g1();
+				this.wallwidth = arg1.g1();
 				return;
 			} else if (arg0 == 29) {
-				this.field2809 = arg1.g1b();
+				this.ambient = arg1.g1b();
 				return;
 			} else if (arg0 == 39) {
-				this.field2796 = arg1.g1b() * 5;
+				this.contrast = arg1.g1b() * 5;
 				return;
 			} else {
 				if (arg0 >= 30 && arg0 < 35) {
-					this.field2816[arg0 - 30] = arg1.gjstr();
-					if (this.field2816[arg0 - 30].method624(Text.field3693)) {
-						this.field2816[arg0 - 30] = null;
+					this.op[arg0 - 30] = arg1.gjstr();
+					if (this.op[arg0 - 30].method624(Text.HIDDEN)) {
+						this.op[arg0 - 30] = null;
 						return;
 					}
 				} else if (arg0 == 40) {
 					int var5 = arg1.g1();
-					this.field2804 = new short[var5];
-					this.field2790 = new short[var5];
+					this.recol_s = new short[var5];
+					this.recol_d = new short[var5];
 					for (int var6 = 0; var6 < var5; var6++) {
-						this.field2804[var6] = (short) arg1.g2();
-						this.field2790[var6] = (short) arg1.g2();
+						this.recol_s[var6] = (short) arg1.g2();
+						this.recol_d[var6] = (short) arg1.g2();
 					}
 					return;
 				} else if (arg0 == 41) {
 					int var20 = arg1.g1();
-					this.field2814 = new short[var20];
-					this.field2776 = new short[var20];
+					this.retex_d = new short[var20];
+					this.retex_s = new short[var20];
 					for (int var21 = 0; var21 < var20; var21++) {
-						this.field2776[var21] = (short) arg1.g2();
-						this.field2814[var21] = (short) arg1.g2();
+						this.retex_s[var21] = (short) arg1.g2();
+						this.retex_d[var21] = (short) arg1.g2();
 					}
 				} else if (arg0 == 42) {
 					int var7 = arg1.g1();
@@ -588,56 +588,56 @@ public final class LocType extends Linkable2 {
 					}
 					return;
 				} else if (arg0 == 60) {
-					this.field2817 = arg1.g2();
+					this.mapfunction = arg1.g2();
 					return;
 				} else if (arg0 == 62) {
-					this.field2786 = true;
+					this.mirror = true;
 					return;
 				} else if (arg0 == 64) {
-					this.field2782 = false;
+					this.shadow = false;
 					return;
 				} else if (arg0 == 65) {
-					this.field2792 = arg1.g2();
+					this.resizex = arg1.g2();
 					return;
 				} else if (arg0 == 66) {
-					this.field2821 = arg1.g2();
+					this.resizey = arg1.g2();
 					return;
 				} else if (arg0 == 67) {
-					this.field2802 = arg1.g2();
+					this.resizez = arg1.g2();
 					return;
 				} else if (arg0 == 68) {
-					this.field2832 = arg1.g2();
+					this.mapscene = arg1.g2();
 					return;
 				} else if (arg0 == 69) {
-					this.field2781 = arg1.g1();
+					this.forceapproach = arg1.g1();
 					return;
 				} else if (arg0 == 70) {
-					this.field2830 = arg1.method334();
+					this.offsetx = arg1.g2b();
 					return;
 				} else if (arg0 == 71) {
-					this.field2788 = arg1.method334();
+					this.offsety = arg1.g2b();
 					return;
 				} else if (arg0 == 72) {
-					this.field2835 = arg1.method334();
+					this.offsetz = arg1.g2b();
 					return;
 				} else if (arg0 == 73) {
-					this.field2826 = true;
+					this.forcedecor = true;
 					return;
 				} else if (arg0 == 74) {
-					this.field2803 = true;
+					this.breakroutefinding = true;
 					return;
 				} else if (arg0 == 75) {
-					this.field2780 = arg1.g1();
+					this.raiseobject = arg1.g1();
 					return;
 				} else if (arg0 == 77 || arg0 == 92) {
-					this.field2767 = arg1.g2();
-					if (this.field2767 == 65535) {
-						this.field2767 = -1;
+					this.multivarbit = arg1.g2();
+					if (this.multivarbit == 65535) {
+						this.multivarbit = -1;
 					}
 					int var17 = -1;
-					this.field2818 = arg1.g2();
-					if (this.field2818 == 65535) {
-						this.field2818 = -1;
+					this.multivarp = arg1.g2();
+					if (this.multivarp == 65535) {
+						this.multivarp = -1;
 					}
 					if (arg0 == 92) {
 						var17 = arg1.g2();
@@ -646,31 +646,31 @@ public final class LocType extends Linkable2 {
 						}
 					}
 					int var18 = arg1.g1();
-					this.field2770 = new int[var18 + 2];
+					this.multiloc = new int[var18 + 2];
 					for (int var19 = 0; var19 <= var18; var19++) {
-						this.field2770[var19] = arg1.g2();
-						if (this.field2770[var19] == 65535) {
-							this.field2770[var19] = -1;
+						this.multiloc[var19] = arg1.g2();
+						if (this.multiloc[var19] == 65535) {
+							this.multiloc[var19] = -1;
 						}
 					}
-					this.field2770[var18 + 1] = var17;
+					this.multiloc[var18 + 1] = var17;
 					return;
 				} else if (arg0 == 78) {
-					this.field2806 = arg1.g2();
-					this.field2771 = arg1.g1();
+					this.bgsound_sound = arg1.g2();
+					this.bgsound_range = arg1.g1();
 					return;
 				} else {
 					if (arg0 == 79) {
-						this.field2807 = arg1.g2();
-						this.field2795 = arg1.g2();
-						this.field2771 = arg1.g1();
+						this.bgsound_mindelay = arg1.g2();
+						this.bgsound_maxdelay = arg1.g2();
+						this.bgsound_range = arg1.g1();
 						int var15 = arg1.g1();
-						this.field2815 = new int[var15];
+						this.bgsound_random = new int[var15];
 						for (int var16 = 0; var16 < var15; var16++) {
-							this.field2815[var16] = arg1.g2();
+							this.bgsound_random[var16] = arg1.g2();
 						}
 					} else if (arg0 == 81) {
-						this.field2813 = 2;
+						this.skewType = 2;
 						this.field2787 = (short) (arg1.g1() * 256);
 						return;
 					} else if (arg0 != 82 && arg0 != 88) {
@@ -683,20 +683,20 @@ public final class LocType extends Linkable2 {
 							this.field2834 = true;
 							return;
 						} else if (arg0 == 93) {
-							this.field2813 = 3;
+							this.skewType = 3;
 							this.field2787 = (short) arg1.g2();
 							return;
 						} else if (arg0 == 94) {
-							this.field2813 = 4;
+							this.skewType = 4;
 							return;
 						} else if (arg0 == 95) {
-							this.field2813 = 5;
+							this.skewType = 5;
 							return;
 						} else if (arg0 == 249) {
 							int var9 = arg1.g1();
-							if (this.field2777 == null) {
+							if (this.params == null) {
 								int var10 = IntUtil.bitceil(var9);
-								this.field2777 = new HashTable(var10);
+								this.params = new HashTable(var10);
 							}
 							for (int var11 = 0; var11 < var9; var11++) {
 								boolean var12 = arg1.g1() == 1;
@@ -707,7 +707,7 @@ public final class LocType extends Linkable2 {
 								} else {
 									var14 = new IntNode(arg1.g4());
 								}
-								this.field2777.put((long) var13, var14);
+								this.params.put((long) var13, var14);
 							}
 							return;
 						}
@@ -722,62 +722,62 @@ public final class LocType extends Linkable2 {
 	}
 
 	@ObfuscatedName("nf.a(Lea;I)V")
-	public void method1002(Packet arg0) {
+	public void decode(Packet arg0) {
 		while (true) {
 			int var2 = arg0.g1();
 			if (var2 == 0) {
 				return;
 			}
-			this.method1001(var2, arg0);
+			this.decode(var2, arg0);
 		}
 	}
 
 	@ObfuscatedName("nf.g(I)V")
-	public void method1003() {
-		if (this.field2833 == -1) {
-			this.field2833 = 0;
-			if (this.field2779 != null && (this.field2811 == null || this.field2811[0] == 10)) {
-				this.field2833 = 1;
+	public void postDecode() {
+		if (this.active == -1) {
+			this.active = 0;
+			if (this.model != null && (this.shape == null || this.shape[0] == 10)) {
+				this.active = 1;
 			}
 			for (int var1 = 0; var1 < 5; var1++) {
-				if (this.field2816[var1] != null) {
-					this.field2833 = 1;
+				if (this.op[var1] != null) {
+					this.active = 1;
 					break;
 				}
 			}
 		}
-		if (this.field2780 == -1) {
-			this.field2780 = this.field2819 == 0 ? 0 : 1;
+		if (this.raiseobject == -1) {
+			this.raiseobject = this.blockwalk == 0 ? 0 : 1;
 		}
 	}
 
 	@ObfuscatedName("nf.a(BIIIIILk;[[I[[II)Ltc;")
 	public ModelCacheLit method1004(int arg0, int arg1, int arg2, int arg3, int arg4, SeqType arg5, int[][] arg6, int[][] arg7, int arg8) {
 		long var10;
-		if (this.field2811 == null) {
+		if (this.shape == null) {
 			var10 = arg8 + (this.field2831 << 10);
 		} else {
 			var10 = arg8 + (this.field2831 << 10) + (arg2 << 3);
 		}
-		SoftwareModelLit var12 = (SoftwareModelLit) field879.find(var10);
+		SoftwareModelLit var12 = (SoftwareModelLit) mc2.find(var10);
 		if (var12 == null) {
 			ModelUnlit var13 = this.method1000(arg8, arg2);
 			if (var13 == null) {
 				return null;
 			}
-			var12 = new SoftwareModelLit(var13, this.field2809 + 64, this.field2796 * 5 + 768, -50, -10, -50);
-			field879.put(var10, var12);
+			var12 = new SoftwareModelLit(var13, this.ambient + 64, this.contrast * 5 + 768, -50, -10, -50);
+			mc2.put(var10, var12);
 		}
 		if (arg5 != null) {
-			var12 = (SoftwareModelLit) arg5.method749(arg8, var12, arg4);
+			var12 = (SoftwareModelLit) arg5.animateModel90(arg8, var12, arg4);
 		}
-		if (this.field2813 != 0) {
+		if (this.skewType != 0) {
 			if (arg5 == null) {
 				var12 = (SoftwareModelLit) var12.method184(true, true);
 			}
-			var12 = var12.hillSkew(this.field2813, this.field2787, arg6, arg7, arg1, arg0, arg3, false);
+			var12 = var12.hillSkew(this.skewType, this.field2787, arg6, arg7, arg1, arg0, arg3, false);
 		}
-		field3623.field3984 = var12;
-		return field3623;
+		mc3.field3984 = var12;
+		return mc3;
 	}
 }

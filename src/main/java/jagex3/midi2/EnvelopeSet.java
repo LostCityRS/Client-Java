@@ -1,4 +1,4 @@
-package jagex3.sound;
+package jagex3.midi2;
 
 import deob.ObfuscatedName;
 
@@ -6,30 +6,30 @@ import deob.ObfuscatedName;
 public final class EnvelopeSet {
 
 	@ObfuscatedName("la.a")
-	public byte[] field2205;
+	public byte[] releaseVolume;
 
 	@ObfuscatedName("la.c")
-	public int field2207;
+	public int decaySpeed;
 
 	@ObfuscatedName("la.d")
-	public int field2208;
+	public int decayVolume;
 
 	@ObfuscatedName("la.e")
-	public int field2209;
+	public int vibratoFrequency;
 
 	@ObfuscatedName("la.f")
-	public int field2210;
+	public int vibratoRampTime;
 
 	@ObfuscatedName("la.g")
-	public int field2211;
+	public int vibratoAmplitude;
 
 	@ObfuscatedName("la.h")
-	public int field2212;
+	public int releaseSpeed;
 
 	@ObfuscatedName("la.k")
-	public int field2215;
+	public int attackSpeed;
 
 	@ObfuscatedName("la.l")
-	public byte[] field2216;
+	public byte[] attackVolume;
 
 }

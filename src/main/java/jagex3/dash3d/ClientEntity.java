@@ -180,7 +180,7 @@ public abstract class ClientEntity extends ModelSource {
 
 	@ObfuscatedName("u.a(ZIII)V")
 	public final void method1474(boolean arg0, int arg1, int arg2) {
-		if (this.field4077 != -1 && SeqType.list(this.field4077).field1980 == 1) {
+		if (this.field4077 != -1 && SeqType.list(this.field4077).postanim_move == 1) {
 			this.field4077 = -1;
 		}
 		if (!arg0) {
@@ -219,7 +219,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final void method1476(boolean arg0, int arg1) {
 		int var3 = this.field4087[0];
 		int var4 = this.field4141[0];
-		if (this.field4077 != -1 && SeqType.list(this.field4077).field1980 == 1) {
+		if (this.field4077 != -1 && SeqType.list(this.field4077).postanim_move == 1) {
 			this.field4077 = -1;
 		}
 		if (this.field4135 < 9) {

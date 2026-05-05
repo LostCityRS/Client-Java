@@ -7,5 +7,5 @@ import jagex3.datastruct.Linkable;
 public abstract class PcmStreamable extends Linkable {
 
 	@ObfuscatedName("gb.t")
-	public int field1254;
+	public int position;
 }

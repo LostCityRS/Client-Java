@@ -44,7 +44,7 @@ public final class TextureOp29SubOp1 extends TextureOp29SubOp {
 
 	@ObfuscatedName("na.a(BLea;)Lje;")
 	public static TextureOp29SubOp1 method936(Packet arg0) {
-		return new TextureOp29SubOp1(arg0.method334(), arg0.method334(), arg0.method334(), arg0.method334(), arg0.method334(), arg0.method334(), arg0.method334(), arg0.method334(), arg0.g3(), arg0.g1());
+		return new TextureOp29SubOp1(arg0.g2b(), arg0.g2b(), arg0.g2b(), arg0.g2b(), arg0.g2b(), arg0.g2b(), arg0.g2b(), arg0.g2b(), arg0.g3(), arg0.g1());
 	}
 
 	@ObfuscatedName("je.a(IIB)V")

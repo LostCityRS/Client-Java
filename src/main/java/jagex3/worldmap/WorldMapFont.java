@@ -82,30 +82,30 @@ public final class WorldMapFont {
 		int var8 = arg4[arg0 + 3];
 		int var9 = arg4[arg0 + 4];
 		int var10 = arg4[arg0] * 16384 + arg4[arg0 + 1] * 128 + arg4[arg0 + 2];
-		int var11 = var6 + var7 * Pix2D.field1333;
-		int var12 = Pix2D.field1333 - var8;
+		int var11 = var6 + var7 * Pix2D.width;
+		int var12 = Pix2D.width - var8;
 		int var13 = 0;
-		if (var7 < Pix2D.field1334) {
-			int var14 = Pix2D.field1334 - var7;
+		if (var7 < Pix2D.clipMinY) {
+			int var14 = Pix2D.clipMinY - var7;
 			var9 -= var14;
-			var7 = Pix2D.field1334;
+			var7 = Pix2D.clipMinY;
 			var10 += var14 * var8;
-			var11 += var14 * Pix2D.field1333;
+			var11 += var14 * Pix2D.width;
 		}
-		if (var7 + var9 >= Pix2D.field1335) {
-			var9 -= var7 + var9 + 1 - Pix2D.field1335;
+		if (var7 + var9 >= Pix2D.clipMaxY) {
+			var9 -= var7 + var9 + 1 - Pix2D.clipMaxY;
 		}
-		if (var6 < Pix2D.field1332) {
-			int var15 = Pix2D.field1332 - var6;
+		if (var6 < Pix2D.clipMinX) {
+			int var15 = Pix2D.clipMinX - var6;
 			var8 -= var15;
-			var6 = Pix2D.field1332;
+			var6 = Pix2D.clipMinX;
 			var10 += var15;
 			var11 += var15;
 			var13 = var15;
 			var12 += var15;
 		}
-		if (var6 + var8 >= Pix2D.field1336) {
-			int var16 = var6 + var8 + 1 - Pix2D.field1336;
+		if (var6 + var8 >= Pix2D.clipMaxX) {
+			int var16 = var6 + var8 + 1 - Pix2D.clipMaxX;
 			var8 -= var16;
 			var13 += var16;
 			var12 += var16;
@@ -114,10 +114,10 @@ public final class WorldMapFont {
 			return;
 		}
 		if (this.field1360) {
-			this.method513(Pix2D.field1331, arg4, arg3, var10, var11, var8, var9, var12, var13);
+			this.method513(Pix2D.pixels, arg4, arg3, var10, var11, var8, var9, var12, var13);
 			return;
 		}
-		this.method512(Pix2D.field1331, arg4, arg3, var10, var11, var8, var9, var12, var13);
+		this.method512(Pix2D.pixels, arg4, arg3, var10, var11, var8, var9, var12, var13);
 	}
 
 	@ObfuscatedName("gi.a(Li;IIIZ)V")
@@ -255,7 +255,7 @@ public final class WorldMapFont {
 	public void method511(JagString arg0, int arg1, int arg2, int arg3) {
 		int var5 = this.method510(arg0) / 2;
 		int var6 = this.method505();
-		if (arg1 - var5 <= Pix2D.field1336 && (arg1 + var5 >= Pix2D.field1332 && (arg2 - var6 <= Pix2D.field1335 && arg2 >= 0))) {
+		if (arg1 - var5 <= Pix2D.clipMaxX && (arg1 + var5 >= Pix2D.clipMinX && (arg2 - var6 <= Pix2D.clipMaxY && arg2 >= 0))) {
 			this.method507(arg0, arg1 - var5, arg2, arg3, true);
 		}
 	}

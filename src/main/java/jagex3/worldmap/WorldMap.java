@@ -118,14 +118,14 @@ public class WorldMap {
 			return;
 		}
 		if (field4276 < 10) {
-			if (!Client.worldmap.method954(field319)) {
+			if (!Client.worldmap.requestGroupDownload(field319)) {
 				field4276 = Client.worldmap.method957(field319) / 10;
 				return;
 			}
 			field4276 = 10;
 		}
 		if (field4276 == 10) {
-			Packet var0 = new Packet(Client.worldmap.method960(field319, field1444));
+			Packet var0 = new Packet(Client.worldmap.getFile(field319, field1444));
 			int var1 = var0.g2();
 			int var2 = var0.g2();
 			int var3 = var0.g2();
@@ -163,9 +163,9 @@ public class WorldMap {
 			field895 = new int[var12][var11][];
 			field3951 = new byte[var12][var11][];
 			for (int var15 = 0; var15 < FloType.field2923; var15++) {
-				FloType var16 = FloType.method704(var15);
+				FloType var16 = FloType.list(var15);
 				if (var16 != null) {
-					int var17 = var16.field98;
+					int var17 = var16.texture;
 					if (var17 >= 0 && !Pix3D.field3356.method436(var17)) {
 						var17 = -1;
 					}
@@ -200,23 +200,23 @@ public class WorldMap {
 			}
 			field4276 = 20;
 		} else if (field4276 == 20) {
-			method1085(Client.worldmap.method960(field319, field570));
+			method1085(Client.worldmap.getFile(field319, field570));
 			field4276 = 30;
 			GameShell.doneslowupdate();
 		} else if (field4276 == 30) {
-			method1029(Client.worldmap.method960(field319, field325));
+			method1029(Client.worldmap.getFile(field319, field325));
 			field4276 = 50;
 			GameShell.doneslowupdate();
 		} else if (field4276 == 50) {
-			method1473(Client.worldmap.method960(field319, field4208));
+			method1473(Client.worldmap.getFile(field319, field4208));
 			field4276 = 70;
 			GameShell.doneslowupdate();
 		} else if (field4276 == 70) {
-			method937(Client.worldmap.method960(field319, field3254));
+			method937(Client.worldmap.getFile(field319, field3254));
 			field4276 = 90;
 			GameShell.doneslowupdate();
 		} else {
-			method658(Client.worldmap.method960(field319, field404));
+			method658(Client.worldmap.getFile(field319, field404));
 			if (field4276 == 90) {
 				field175 = new WorldMapFont(11, true, GameShell.canvas);
 				field2147 = new WorldMapFont(12, true, GameShell.canvas);
@@ -350,16 +350,16 @@ public class WorldMap {
 									}
 									var14--;
 									LocType var15 = LocType.list(var14);
-									if (var15.field2770 != null) {
-										var15 = var15.method998();
-										if (var15 == null || var15.field2817 == -1) {
+									if (var15.multiloc != null) {
+										var15 = var15.getMultiLoc();
+										if (var15 == null || var15.mapfunction == -1) {
 											continue;
 										}
 									}
 									field895[var7][var8][(-(var10 + 1) << 6) + var9] = var15.field2831 + 1;
 									MapElement var16 = new MapElement();
 									var16.field1175 = field760 - var3;
-									var16.field1180 = var15.field2817;
+									var16.field1180 = var15.mapfunction;
 									var16.field1179 = var2;
 									field4359.push(var16);
 								}
@@ -425,11 +425,11 @@ public class WorldMap {
 					if (var12 > var20) {
 						int var21 = var2[var20][var19] & 0xFF;
 						if (var21 > 0) {
-							FluType var22 = FluType.method179(var21 - 1);
-							var13[var19] += var22.field4420;
-							var14[var19] += var22.field4410;
-							var17[var19] += var22.field4413;
-							var15[var19] += var22.field4407;
+							FluType var22 = FluType.list(var21 - 1);
+							var13[var19] += var22.hue;
+							var14[var19] += var22.saturation;
+							var17[var19] += var22.lightness;
+							var15[var19] += var22.chroma;
 							var10002 = var16[var19]++;
 						}
 					}
@@ -437,11 +437,11 @@ public class WorldMap {
 					if (var23 >= 0) {
 						int var24 = var2[var23][var19] & 0xFF;
 						if (var24 > 0) {
-							FluType var25 = FluType.method179(var24 - 1);
-							var13[var19] -= var25.field4420;
-							var14[var19] -= var25.field4410;
-							var17[var19] -= var25.field4413;
-							var15[var19] -= var25.field4407;
+							FluType var25 = FluType.list(var24 - 1);
+							var13[var19] -= var25.hue;
+							var14[var19] -= var25.saturation;
+							var17[var19] -= var25.lightness;
+							var15[var19] -= var25.chroma;
 							var10002 = var16[var19]--;
 						}
 					}
@@ -540,7 +540,7 @@ public class WorldMap {
 		if (arg0.method604() == 0) {
 			return null;
 		}
-		for (WorldMapLabel var1 = (WorldMapLabel) field3049.head(); var1 != null; var1 = (WorldMapLabel) field3049.method1619()) {
+		for (WorldMapLabel var1 = (WorldMapLabel) field3049.head(); var1 != null; var1 = (WorldMapLabel) field3049.next()) {
 			if (var1.field4486.method595(arg0)) {
 				return var1;
 			}
@@ -663,30 +663,30 @@ public class WorldMap {
 	@ObfuscatedName("wb.a(IIIII)V")
 	public static void method1590(int arg0, int arg1, int arg2, int arg3) {
 		Pix2D.setClipping(arg1, arg0, arg2 + arg1, arg3 + arg0);
-		Pix2D.method478(arg1, arg0, arg2, arg3, 0);
+		Pix2D.fillRect(arg1, arg0, arg2, arg3, 0);
 		if (field4276 < 100) {
 			return;
 		}
 		if (field4500 == null) {
 			SoftwarePix32 var4 = new SoftwarePix32(arg2, arg3);
-			Pix2D.method496(var4.field3247, arg2, arg3);
+			Pix2D.setPixels(var4.data, arg2, arg3);
 			method348(arg3, arg2, 0, 0, field760, 0, field1988, 0);
 			field4500 = var4;
-			GameShell.field3852.method1521();
+			GameShell.field3852.bind();
 		}
-		field4500.method1161(arg1, arg0);
+		field4500.quickPlotSprite(arg1, arg0);
 		int var5 = arg1 + field693 * arg2 / field1988;
 		int var6 = field1309 * arg2 / field1988;
 		int var7 = arg0 + field727 * arg3 / field760;
 		int var8 = field3136 * arg3 / field760;
 		Pix2D.fillRectTrans(var5, var7, var6, var8, 16711680, 128);
-		Pix2D.method476(var5, var7, var6, var8, 16711680);
+		Pix2D.drawRect(var5, var7, var6, var8, 16711680);
 		if (field1012 > 0 && field1012 % 10 < 5) {
-			for (MapElement var9 = (MapElement) field4359.head(); var9 != null; var9 = (MapElement) field4359.method1619()) {
+			for (MapElement var9 = (MapElement) field4359.head(); var9 != null; var9 = (MapElement) field4359.next()) {
 				if (var9.field1180 == field772) {
 					int var10 = arg1 + arg2 * var9.field1179 / field1988;
 					int var11 = var9.field1175 * arg3 / field760 + arg0;
-					Pix2D.method478(var10 - 2, var11 + -2, 4, 4, 16776960);
+					Pix2D.fillRect(var10 - 2, var11 + -2, 4, 4, 16776960);
 				}
 			}
 		}
@@ -718,8 +718,8 @@ public class WorldMap {
 		field895 = null;
 		field1009 = null;
 		field4276 = 0;
-		field4359.method1616();
-		field3049.method1616();
+		field4359.clear();
+		field3049.clear();
 		field4397 = null;
 		field2147 = null;
 		field4325 = null;
@@ -762,14 +762,14 @@ public class WorldMap {
 							int var26 = var17[var24][var25];
 							if (var26 != 0) {
 								LocType var27 = LocType.list(var26 - 1);
-								if (var12 && field772 == var27.field2817) {
+								if (var12 && field772 == var27.mapfunction) {
 									MapElement var28 = new MapElement();
 									var28.field1179 = var18;
-									var28.field1180 = var27.field2817;
+									var28.field1180 = var27.mapfunction;
 									var28.field1175 = var23;
 									field783.push(var28);
 								}
-								Client.mapfunction[var27.field2817].method1155(var18 - 7, var23 + -7);
+								Client.mapfunction[var27.mapfunction].plotSprite(var18 - 7, var23 + -7);
 							}
 						}
 					}
@@ -777,7 +777,7 @@ public class WorldMap {
 			}
 		}
 		if (field1110 == field2915) {
-			for (WorldMapLabel var29 = (WorldMapLabel) field3049.head(); var29 != null; var29 = (WorldMapLabel) field3049.method1619()) {
+			for (WorldMapLabel var29 = (WorldMapLabel) field3049.head(); var29 != null; var29 = (WorldMapLabel) field3049.next()) {
 				int var30 = var29.field4483;
 				int var31 = var30 - field239;
 				int var32 = var29.field4485;
@@ -842,12 +842,12 @@ public class WorldMap {
 				}
 			}
 		}
-		for (MapElement var44 = (MapElement) field783.head(); var44 != null; var44 = (MapElement) field783.method1619()) {
-			Client.mapfunction[var44.field1180].method1155(var44.field1179 - 7, var44.field1175 + -7);
+		for (MapElement var44 = (MapElement) field783.head(); var44 != null; var44 = (MapElement) field783.next()) {
+			Client.mapfunction[var44.field1180].plotSprite(var44.field1179 - 7, var44.field1175 + -7);
 			Pix2D.method483(var44.field1179, var44.field1175, 15, 16776960, 128);
 			Pix2D.method483(var44.field1179, var44.field1175, 7, 16777215, 256);
 		}
-		field783.method1616();
+		field783.clear();
 	}
 
 	@ObfuscatedName("ea.a(IIIBIIIII)V")
@@ -905,7 +905,7 @@ public class WorldMap {
 						int var38 = var21[var30] == null ? 0 : field1009[var21[var30][var34] & 0xFF];
 						int var39 = var23[var30] == null ? 0 : field1009[var23[var30][var34] & 0xFF];
 						if (var38 == 0 && var39 == 0) {
-							Pix2D.method478(var17, var29, var15, var28, var35);
+							Pix2D.fillRect(var17, var29, var15, var28, var35);
 						} else {
 							if (var38 != 0) {
 								byte var40 = var20[var30] == null ? 0 : var20[var30][var34];
@@ -914,9 +914,9 @@ public class WorldMap {
 									var38 = 1;
 								}
 								if (var41 == 0 || var15 <= 1 || var28 <= 1) {
-									Pix2D.method478(var17, var29, var15, var28, var38);
+									Pix2D.fillRect(var17, var29, var15, var28, var38);
 								} else {
-									method1482(true, var28, var35, var40 & 0x3, var29, var38, var41 >> 2, var17, var15, Pix2D.field1331);
+									method1482(true, var28, var35, var40 & 0x3, var29, var38, var41 >> 2, var17, var15, Pix2D.pixels);
 								}
 							}
 							if (var39 != 0) {
@@ -926,9 +926,9 @@ public class WorldMap {
 								byte var42 = var22[var30][var34];
 								int var43 = var42 & 0xFC;
 								if (var43 == 0 || var15 <= 1 || var28 <= 1) {
-									Pix2D.method478(var17, var29, var15, var28, var39);
+									Pix2D.fillRect(var17, var29, var15, var28, var39);
 								}
-								method1482(var38 == 0, var28, 0, var42 & 0x3, var29, var39, var43 >> 2, var17, var15, Pix2D.field1331);
+								method1482(var38 == 0, var28, 0, var42 & 0x3, var29, var39, var43 >> 2, var17, var15, Pix2D.pixels);
 							}
 						}
 						if (var24[var30] != null) {
@@ -952,40 +952,40 @@ public class WorldMap {
 									var47 = 13369344;
 								}
 								if (var44 == 1) {
-									Pix2D.method487(var17, var29, var28, var47);
+									Pix2D.vline(var17, var29, var28, var47);
 								} else if (var44 == 2) {
-									Pix2D.method489(var17, var29, var15, var47);
+									Pix2D.hline(var17, var29, var15, var47);
 								} else if (var44 == 3) {
-									Pix2D.method487(var45, var29, var28, var47);
+									Pix2D.vline(var45, var29, var28, var47);
 								} else if (var44 == 4) {
-									Pix2D.method489(var17, var46, var15, var47);
+									Pix2D.hline(var17, var46, var15, var47);
 								} else if (var44 == 9) {
-									Pix2D.method487(var17, var29, var28, 16777215);
-									Pix2D.method489(var17, var29, var15, var47);
+									Pix2D.vline(var17, var29, var28, 16777215);
+									Pix2D.hline(var17, var29, var15, var47);
 								} else if (var44 == 10) {
-									Pix2D.method487(var45, var29, var28, 16777215);
-									Pix2D.method489(var17, var29, var15, var47);
+									Pix2D.vline(var45, var29, var28, 16777215);
+									Pix2D.hline(var17, var29, var15, var47);
 								} else if (var44 == 11) {
-									Pix2D.method487(var45, var29, var28, 16777215);
-									Pix2D.method489(var17, var46, var15, var47);
+									Pix2D.vline(var45, var29, var28, 16777215);
+									Pix2D.hline(var17, var46, var15, var47);
 								} else if (var44 == 12) {
-									Pix2D.method487(var17, var29, var28, 16777215);
-									Pix2D.method489(var17, var46, var15, var47);
+									Pix2D.vline(var17, var29, var28, 16777215);
+									Pix2D.hline(var17, var46, var15, var47);
 								} else if (var44 == 17) {
-									Pix2D.method489(var17, var29, 1, var47);
+									Pix2D.hline(var17, var29, 1, var47);
 								} else if (var44 == 18) {
-									Pix2D.method489(var45, var29, 1, var47);
+									Pix2D.hline(var45, var29, 1, var47);
 								} else if (var44 == 19) {
-									Pix2D.method489(var45, var46, 1, var47);
+									Pix2D.hline(var45, var46, 1, var47);
 								} else if (var44 == 20) {
-									Pix2D.method489(var17, var46, 1, var47);
+									Pix2D.hline(var17, var46, 1, var47);
 								} else if (var44 == 25) {
 									for (int var48 = 0; var48 < var28; var48++) {
-										Pix2D.method489(var48 + var17, -var48 + var46, 1, var47);
+										Pix2D.hline(var48 + var17, -var48 + var46, 1, var47);
 									}
 								} else if (var44 == 26) {
 									for (int var49 = 0; var49 < var28; var49++) {
-										Pix2D.method489(var17 + var49, var49 + var29, 1, var47);
+										Pix2D.hline(var17 + var49, var49 + var29, 1, var47);
 									}
 								}
 							}
@@ -1027,18 +1027,18 @@ public class WorldMap {
 
 	@ObfuscatedName("ua.a(ZIIIIIIIBI[I)V")
 	public static void method1482(boolean arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int[] arg9) {
-		if (Pix2D.field1334 > arg4) {
-			arg1 -= Pix2D.field1334 - arg4;
-			arg4 = Pix2D.field1334;
+		if (Pix2D.clipMinY > arg4) {
+			arg1 -= Pix2D.clipMinY - arg4;
+			arg4 = Pix2D.clipMinY;
 		}
-		if (Pix2D.field1335 < arg1 + arg4) {
-			arg1 = Pix2D.field1335 - arg4;
+		if (Pix2D.clipMaxY < arg1 + arg4) {
+			arg1 = Pix2D.clipMaxY - arg4;
 		}
-		if (Pix2D.field1332 > arg7) {
-			arg8 -= Pix2D.field1332 - arg7;
-			arg7 = Pix2D.field1332;
+		if (Pix2D.clipMinX > arg7) {
+			arg8 -= Pix2D.clipMinX - arg7;
+			arg7 = Pix2D.clipMinX;
 		}
-		int var10 = arg4 * Pix2D.field1333 + arg7;
+		int var10 = arg4 * Pix2D.width + arg7;
 		if (arg6 == 9) {
 			arg3 = arg3 + 1 & 0x3;
 			arg6 = 1;
@@ -1051,10 +1051,10 @@ public class WorldMap {
 			arg3 = arg3 + 3 & 0x3;
 			arg6 = 8;
 		}
-		if (Pix2D.field1336 < arg8 + arg7) {
-			arg8 = Pix2D.field1336 - arg7;
+		if (Pix2D.clipMaxX < arg8 + arg7) {
+			arg8 = Pix2D.clipMaxX - arg7;
 		}
-		int var11 = Pix2D.field1333 - arg8;
+		int var11 = Pix2D.width - arg8;
 		if (arg6 == 1) {
 			if (arg3 == 0) {
 				for (int var12 = 0; var12 < arg1; var12++) {

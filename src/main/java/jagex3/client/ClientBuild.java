@@ -130,9 +130,9 @@ public class ClientBuild {
 						} while (var13 >= 103);
 					} while (var14 >= 103);
 					var15 = LocType.list(var5);
-				} while (var12 == 22 && Client.lowMem && var15.field2833 == 0 && var15.field2819 != 1 && !var15.field2826);
+				} while (var12 == 22 && Client.lowMem && var15.active == 0 && var15.blockwalk != 1 && !var15.forcedecor);
 				var8 = true;
-				if (!var15.method990()) {
+				if (!var15.checkModelAll()) {
 					var4 = false;
 					Client.field2045++;
 				}
@@ -206,11 +206,11 @@ public class ClientBuild {
 					if (var26 < 104) {
 						int var27 = field3142[var9][var26][var25] & 0xFF;
 						if (var27 > 0) {
-							FluType var28 = FluType.method179(var27 - 1);
-							field1541[var25] += var28.field4420;
-							field4173[var25] += var28.field4410;
-							field3012[var25] += var28.field4413;
-							field4174[var25] += var28.field4407;
+							FluType var28 = FluType.list(var27 - 1);
+							field1541[var25] += var28.hue;
+							field4173[var25] += var28.saturation;
+							field3012[var25] += var28.lightness;
+							field4174[var25] += var28.chroma;
 							var10002 = field2940[var25]++;
 						}
 					}
@@ -218,11 +218,11 @@ public class ClientBuild {
 					if (var29 >= 0) {
 						int var30 = field3142[var9][var29][var25] & 0xFF;
 						if (var30 > 0) {
-							FluType var31 = FluType.method179(var30 - 1);
-							field1541[var25] -= var31.field4420;
-							field4173[var25] -= var31.field4410;
-							field3012[var25] -= var31.field4413;
-							field4174[var25] -= var31.field4407;
+							FluType var31 = FluType.list(var30 - 1);
+							field1541[var25] -= var31.hue;
+							field4173[var25] -= var31.saturation;
+							field3012[var25] -= var31.lightness;
+							field4174[var25] -= var31.chroma;
 							var10002 = field2940[var25]--;
 						}
 					}
@@ -274,7 +274,7 @@ public class ClientBuild {
 								if (var42 == 0 && field115[var9][var40][var41] != 0) {
 									var48 = false;
 								}
-								if (var43 > 0 && !FloType.method704(var43 - 1).field113) {
+								if (var43 > 0 && !FloType.list(var43 - 1).occlude) {
 									var48 = false;
 								}
 								if (var48 && var44 == var45 && var46 == var45 && var47 == var45) {
@@ -306,11 +306,11 @@ public class ClientBuild {
 							} else {
 								int var57 = field115[var9][var40][var41] + 1;
 								byte var58 = field4377[var9][var40][var41];
-								FloType var59 = FloType.method704(var43 - 1);
+								FloType var59 = FloType.list(var43 - 1);
 								if (field4496 != null && var9 == 0) {
 									field4496[var40][var41] = var59.field103 + (var59.field112 << 24);
 								}
-								int var60 = var59.field98;
+								int var60 = var59.texture;
 								if (var60 >= 0 && !Pix3D.field3356.method436(var60)) {
 									var60 = -1;
 								}
@@ -507,7 +507,7 @@ public class ClientBuild {
 		if (arg0 >= 5 && arg0 <= 8) {
 			arg0 = 4;
 		}
-		return var2.method991(arg0);
+		return var2.checkModel(arg0);
 	}
 
 	@ObfuscatedName("ve.a(IIII)I")
@@ -691,8 +691,8 @@ public class ClientBuild {
 				int var19 = var17 & 0x3;
 				if (arg6 == var16 && arg1 <= var14 && var14 < arg1 + 8 && arg3 <= var15 && var15 < arg3 + 8) {
 					LocType var20 = LocType.list(var9);
-					int var21 = RegionRotate.method469(var20.field2774, arg0, var15 & 0x7, var14 & 0x7, var20.field2794, var19) + arg8;
-					int var22 = RegionRotate.method742(var15 & 0x7, var14 & 0x7, var19, var20.field2794, var20.field2774, arg0) + arg7;
+					int var21 = RegionRotate.method469(var20.width, arg0, var15 & 0x7, var14 & 0x7, var20.length, var19) + arg8;
+					int var22 = RegionRotate.method742(var15 & 0x7, var14 & 0x7, var19, var20.length, var20.width, arg0) + arg7;
 					if (var21 > 0 && var22 > 0 && var21 < 103 && var22 < 103) {
 						CollisionMap var23 = null;
 						int var24 = arg4;
@@ -747,11 +747,11 @@ public class ClientBuild {
 		int var11;
 		int var12;
 		if (arg2 == 1 || arg2 == 3) {
-			var11 = var10.field2794;
-			var12 = var10.field2774;
+			var11 = var10.length;
+			var12 = var10.width;
 		} else {
-			var12 = var10.field2794;
-			var11 = var10.field2774;
+			var12 = var10.length;
+			var11 = var10.width;
 		}
 		int var13;
 		int var14;
@@ -777,44 +777,44 @@ public class ClientBuild {
 		int var20 = (var12 << 6) + (arg8 << 7);
 		int[][] var21 = null;
 		long var22 = (long) ((arg2 | 0x400) << 20 | arg3 << 14 | arg8 << 7 | arg9);
-		if (var10.field2833 == 0) {
+		if (var10.active == 0) {
 			var22 |= Long.MIN_VALUE;
 		}
 		if (arg6 < 3) {
 			var21 = groundh[arg6 + 1];
 		}
-		if (var10.field2780 == 1) {
+		if (var10.raiseobject == 1) {
 			var22 |= 0x400000L;
 		}
 		long var24 = var22 | (long) arg5 << 32;
-		if (arg0 && var10.method994()) {
-			BgSound.method84(arg9, arg1, arg2, arg8, var10);
+		if (arg0 && var10.hasBgSound()) {
+			BgSound.addSound(arg9, arg1, arg2, arg8, var10);
 		}
 		if (arg3 == 22) {
-			if (!arg4 || var10.field2833 != 0 || var10.field2819 == 1 || var10.field2826) {
+			if (!arg4 || var10.active != 0 || var10.blockwalk == 1 || var10.forcedecor) {
 				ModelSource var27;
-				if (var10.field2810 == -1 && var10.field2770 == null) {
+				if (var10.anim == -1 && var10.multiloc == null) {
 					ModelCacheLit var26 = var10.method997(22, var21, var17, var18, arg0, var20, arg2, var19);
 					var27 = var26.field3984;
 				} else {
-					var27 = new ClientLocAnim(arg5, 22, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+					var27 = new ClientLocAnim(arg5, 22, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 				}
 				World.method232(arg1, arg9, arg8, var19, var27, var24, var10.field2799);
-				if (var10.field2819 == 1 && arg7 != null) {
+				if (var10.blockwalk == 1 && arg7 != null) {
 					arg7.method646(arg8, arg9);
 				}
 			}
 		} else if (arg3 == 10 || arg3 == 11) {
 			ModelSource var29;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var28 = var10.method997(10, var21, var17, var18, arg0, var20, arg2, var19);
 				var29 = var28.field3984;
 			} else {
-				var29 = new ClientLocAnim(arg5, 10, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var29 = new ClientLocAnim(arg5, 10, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			if (var29 != null) {
 				boolean var30 = World.method390(arg1, arg9, arg8, var19, var11, var12, var29, arg3 == 11 ? 256 : 0, var24);
-				if (var10.field2782 && var30 && arg0) {
+				if (var10.shadow && var30 && arg0) {
 					int var31 = 15;
 					if (var29 instanceof ModelLit) {
 						var31 = ((ModelLit) var29).method192() / 4;
@@ -831,84 +831,84 @@ public class ClientBuild {
 					}
 				}
 			}
-			if (var10.field2819 != 0 && arg7 != null) {
-				arg7.method644(var11, var12, var10.field2789, arg9, arg8);
+			if (var10.blockwalk != 0 && arg7 != null) {
+				arg7.method644(var11, var12, var10.blockrange, arg9, arg8);
 			}
 		} else if (arg3 >= 12) {
 			ModelSource var35;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var34 = var10.method997(arg3, var21, var17, var18, arg0, var20, arg2, var19);
 				var35 = var34.field3984;
 			} else {
-				var35 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var35 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method390(arg1, arg9, arg8, var19, 1, 1, var35, 0, var24);
 			if (arg0 && arg3 >= 12 && arg3 <= 17 && arg3 != 13 && arg1 > 0) {
 				field2511[arg1][arg9][arg8] |= 0x924;
 			}
-			if (var10.field2819 != 0 && arg7 != null) {
-				arg7.method644(var11, var12, var10.field2789, arg9, arg8);
+			if (var10.blockwalk != 0 && arg7 != null) {
+				arg7.method644(var11, var12, var10.blockrange, arg9, arg8);
 			}
 		} else if (arg3 == 0) {
 			ModelSource var36;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var37 = var10.method997(0, var21, var17, var18, arg0, var20, arg2, var19);
 				var36 = var37.field3984;
 			} else {
-				var36 = new ClientLocAnim(arg5, 0, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var36 = new ClientLocAnim(arg5, 0, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method762(arg1, arg9, arg8, var19, var36, null, field3949[arg2], 0, var24);
 			if (arg0) {
 				if (arg2 == 0) {
-					if (var10.field2782) {
+					if (var10.shadow) {
 						field2020[arg1][arg9][arg8] = 50;
 						field2020[arg1][arg9][arg8 + 1] = 50;
 					}
-					if (var10.field2772) {
+					if (var10.occlude) {
 						field2511[arg1][arg9][arg8] |= 0x249;
 					}
 				} else if (arg2 == 1) {
-					if (var10.field2782) {
+					if (var10.shadow) {
 						field2020[arg1][arg9][arg8 + 1] = 50;
 						field2020[arg1][arg9 + 1][arg8 + 1] = 50;
 					}
-					if (var10.field2772) {
+					if (var10.occlude) {
 						field2511[arg1][arg9][arg8 + 1] |= 0x492;
 					}
 				} else if (arg2 == 2) {
-					if (var10.field2782) {
+					if (var10.shadow) {
 						field2020[arg1][arg9 + 1][arg8] = 50;
 						field2020[arg1][arg9 + 1][arg8 + 1] = 50;
 					}
-					if (var10.field2772) {
+					if (var10.occlude) {
 						field2511[arg1][arg9 + 1][arg8] |= 0x249;
 					}
 				} else if (arg2 == 3) {
-					if (var10.field2782) {
+					if (var10.shadow) {
 						field2020[arg1][arg9][arg8] = 50;
 						field2020[arg1][arg9 + 1][arg8] = 50;
 					}
-					if (var10.field2772) {
+					if (var10.occlude) {
 						field2511[arg1][arg9][arg8] |= 0x492;
 					}
 				}
 			}
-			if (var10.field2819 != 0 && arg7 != null) {
-				arg7.method645(arg3, arg8, var10.field2789, arg2, arg9);
+			if (var10.blockwalk != 0 && arg7 != null) {
+				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
-			if (var10.field2805 != 16) {
-				World.method1602(arg1, arg9, arg8, var10.field2805);
+			if (var10.wallwidth != 16) {
+				World.method1602(arg1, arg9, arg8, var10.wallwidth);
 			}
 		} else if (arg3 == 1) {
 			ModelSource var38;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var39 = var10.method997(1, var21, var17, var18, arg0, var20, arg2, var19);
 				var38 = var39.field3984;
 			} else {
-				var38 = new ClientLocAnim(arg5, 1, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var38 = new ClientLocAnim(arg5, 1, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method762(arg1, arg9, arg8, var19, var38, null, field4427[arg2], 0, var24);
-			if (var10.field2782 && arg0) {
+			if (var10.shadow && arg0) {
 				if (arg2 == 0) {
 					field2020[arg1][arg9][arg8 + 1] = 50;
 				} else if (arg2 == 1) {
@@ -919,24 +919,24 @@ public class ClientBuild {
 					field2020[arg1][arg9][arg8] = 50;
 				}
 			}
-			if (var10.field2819 != 0 && arg7 != null) {
-				arg7.method645(arg3, arg8, var10.field2789, arg2, arg9);
+			if (var10.blockwalk != 0 && arg7 != null) {
+				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
 		} else if (arg3 == 2) {
 			int var40 = arg2 + 1 & 0x3;
 			ModelSource var41;
 			ModelSource var42;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var43 = var10.method997(2, var21, var17, var18, arg0, var20, arg2 + 4, var19);
 				var41 = var43.field3984;
 				ModelCacheLit var44 = var10.method997(2, var21, var17, var18, arg0, var20, var40, var19);
 				var42 = var44.field3984;
 			} else {
-				var41 = new ClientLocAnim(arg5, 2, arg2 + 4, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
-				var42 = new ClientLocAnim(arg5, 2, var40, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var41 = new ClientLocAnim(arg5, 2, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var42 = new ClientLocAnim(arg5, 2, var40, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method762(arg1, arg9, arg8, var19, var41, var42, field3949[arg2], field3949[var40], var24);
-			if (var10.field2772 && arg0) {
+			if (var10.occlude && arg0) {
 				if (arg2 == 0) {
 					field2511[arg1][arg9][arg8] |= 0x249;
 					field2511[arg1][arg9][arg8 + 1] |= 0x492;
@@ -951,22 +951,22 @@ public class ClientBuild {
 					field2511[arg1][arg9][arg8] |= 0x249;
 				}
 			}
-			if (var10.field2819 != 0 && arg7 != null) {
-				arg7.method645(arg3, arg8, var10.field2789, arg2, arg9);
+			if (var10.blockwalk != 0 && arg7 != null) {
+				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
-			if (var10.field2805 != 16) {
-				World.method1602(arg1, arg9, arg8, var10.field2805);
+			if (var10.wallwidth != 16) {
+				World.method1602(arg1, arg9, arg8, var10.wallwidth);
 			}
 		} else if (arg3 == 3) {
 			ModelSource var46;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var45 = var10.method997(3, var21, var17, var18, arg0, var20, arg2, var19);
 				var46 = var45.field3984;
 			} else {
-				var46 = new ClientLocAnim(arg5, 3, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var46 = new ClientLocAnim(arg5, 3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method762(arg1, arg9, arg8, var19, var46, null, field4427[arg2], 0, var24);
-			if (var10.field2782 && arg0) {
+			if (var10.shadow && arg0) {
 				if (arg2 == 0) {
 					field2020[arg1][arg9][arg8 + 1] = 50;
 				} else if (arg2 == 1) {
@@ -977,88 +977,88 @@ public class ClientBuild {
 					field2020[arg1][arg9][arg8] = 50;
 				}
 			}
-			if (var10.field2819 != 0 && arg7 != null) {
-				arg7.method645(arg3, arg8, var10.field2789, arg2, arg9);
+			if (var10.blockwalk != 0 && arg7 != null) {
+				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
 		} else if (arg3 == 9) {
 			ModelSource var47;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var48 = var10.method997(arg3, var21, var17, var18, arg0, var20, arg2, var19);
 				var47 = var48.field3984;
 			} else {
-				var47 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var47 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method390(arg1, arg9, arg8, var19, 1, 1, var47, 0, var24);
-			if (var10.field2819 != 0 && arg7 != null) {
-				arg7.method644(var11, var12, var10.field2789, arg9, arg8);
+			if (var10.blockwalk != 0 && arg7 != null) {
+				arg7.method644(var11, var12, var10.blockrange, arg9, arg8);
 			}
-			if (var10.field2805 != 16) {
-				World.method1602(arg1, arg9, arg8, var10.field2805);
+			if (var10.wallwidth != 16) {
+				World.method1602(arg1, arg9, arg8, var10.wallwidth);
 			}
 		} else if (arg3 == 4) {
 			ModelSource var49;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var50 = var10.method997(4, var21, var17, var18, arg0, var20, arg2, var19);
 				var49 = var50.field3984;
 			} else {
-				var49 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var49 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method1520(arg1, arg9, arg8, var19, var49, null, field3949[arg2], 0, 0, 0, var24);
 		} else if (arg3 == 5) {
 			int var51 = 16;
 			long var52 = World.method1062(arg1, arg9, arg8);
 			if (var52 != 0L) {
-				var51 = LocType.list((int) (var52 >>> 32) & Integer.MAX_VALUE).field2805;
+				var51 = LocType.list((int) (var52 >>> 32) & Integer.MAX_VALUE).wallwidth;
 			}
 			ModelSource var54;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var55 = var10.method997(4, var21, var17, var18, arg0, var20, arg2, var19);
 				var54 = var55.field3984;
 			} else {
-				var54 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var54 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method1520(arg1, arg9, arg8, var19, var54, null, field3949[arg2], 0, var51 * field198[arg2], var51 * field1557[arg2], var24);
 		} else if (arg3 == 6) {
 			int var56 = 8;
 			long var57 = World.method1062(arg1, arg9, arg8);
 			if (var57 != 0L) {
-				var56 = LocType.list(Integer.MAX_VALUE & (int) (var57 >>> 32)).field2805 / 2;
+				var56 = LocType.list(Integer.MAX_VALUE & (int) (var57 >>> 32)).wallwidth / 2;
 			}
 			ModelSource var59;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var60 = var10.method997(4, var21, var17, var18, arg0, var20, arg2 + 4, var19);
 				var59 = var60.field3984;
 			} else {
-				var59 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var59 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method1520(arg1, arg9, arg8, var19, var59, null, 256, arg2, field3240[arg2] * var56, field551[arg2] * var56, var24);
 		} else if (arg3 == 7) {
 			int var61 = arg2 + 2 & 0x3;
 			ModelSource var63;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var62 = var10.method997(4, var21, var17, var18, arg0, var20, var61 + 4, var19);
 				var63 = var62.field3984;
 			} else {
-				var63 = new ClientLocAnim(arg5, 4, var61 + 4, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var63 = new ClientLocAnim(arg5, 4, var61 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method1520(arg1, arg9, arg8, var19, var63, null, 256, var61, 0, 0, var24);
 		} else if (arg3 == 8) {
 			int var64 = 8;
 			long var65 = World.method1062(arg1, arg9, arg8);
 			if (var65 != 0L) {
-				var64 = LocType.list((int) (var65 >>> 32) & Integer.MAX_VALUE).field2805 / 2;
+				var64 = LocType.list((int) (var65 >>> 32) & Integer.MAX_VALUE).wallwidth / 2;
 			}
 			int var67 = arg2 + 2 & 0x3;
 			ModelSource var68;
 			ModelSource var69;
-			if (var10.field2810 == -1 && var10.field2770 == null) {
+			if (var10.anim == -1 && var10.multiloc == null) {
 				ModelCacheLit var70 = var10.method997(4, var21, var17, var18, arg0, var20, arg2 + 4, var19);
 				var68 = var70.field3984;
 				ModelCacheLit var71 = var10.method997(4, var21, var17, var18, arg0, var20, var67 + 4, var19);
 				var69 = var71.field3984;
 			} else {
-				var68 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
-				var69 = new ClientLocAnim(arg5, 4, var67 + 4, arg6, arg9, arg8, var10.field2810, var10.field2829, null);
+				var68 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var69 = new ClientLocAnim(arg5, 4, var67 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
 			}
 			World.method1520(arg1, arg9, arg8, var19, var68, var69, 256, arg2, field3240[arg2] * var64, var64 * field551[arg2], var24);
 		}
