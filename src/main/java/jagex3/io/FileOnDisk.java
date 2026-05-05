@@ -70,12 +70,12 @@ public final class FileOnDisk {
 	public void finalize() throws Throwable {
 		if (this.file != null) {
 			System.out.println("Warning! fileondisk " + this.field1153 + " not closed correctly using close(). Auto-closing instead. ");
-			this.close(0);
+			this.close();
 		}
 	}
 
 	@ObfuscatedName("fg.a(I)V")
-	public void close(int arg0) throws IOException {
+	public void close() throws IOException {
 		if (this.file != null) {
 			this.file.close();
 			this.file = null;

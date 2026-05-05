@@ -275,7 +275,7 @@ public final class BufferedRandomAccessFile {
 	@ObfuscatedName("kj.d(I)V")
 	public void close() throws IOException {
 		this.flush();
-		this.file.close(0);
+		this.file.close();
 	}
 
 	@ObfuscatedName("kj.a(BJ)V")

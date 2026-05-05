@@ -113,6 +113,11 @@ public final class SignLink implements Runnable {
 			}
 		} catch (Exception var6) {
 		}
+		// custom: Why does the client not call this? Is this supposed to be called by a loader?
+		// This function is what enables the cache...
+		if (arg0) {
+			this.method1295(arg3, arg2, arg4);
+		}
 		this.isClosed = false;
 		this.thread = new Thread(this);
 		this.thread.setPriority(10);
@@ -147,13 +152,13 @@ public final class SignLink implements Runnable {
 		}
 		if (this.field3590 != null) {
 			try {
-				this.field3590.close(0);
+				this.field3590.close();
 			} catch (IOException var6) {
 			}
 		}
 		if (this.field3582 != null) {
 			try {
-				this.field3582.close(0);
+				this.field3582.close();
 			} catch (IOException var5) {
 			}
 		}
@@ -161,7 +166,7 @@ public final class SignLink implements Runnable {
 			for (int var2 = 0; var2 < this.field3584.length; var2++) {
 				if (this.field3584[var2] != null) {
 					try {
-						this.field3584[var2].close(0);
+						this.field3584[var2].close();
 					} catch (IOException var4) {
 					}
 				}
@@ -169,7 +174,7 @@ public final class SignLink implements Runnable {
 		}
 		if (this.field3588 != null) {
 			try {
-				this.field3588.close(0);
+				this.field3588.close();
 			} catch (IOException var3) {
 			}
 		}
@@ -267,15 +272,12 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("qg.a(Ljava/lang/String;III)V")
-	public void method1295(String arg0, int arg1, int arg2, int arg3) {
+	public void method1295(String arg0, int arg2, int arg3) {
 		if (arg2 < 32 || arg2 > 34) {
 			arg2 = 32;
 		}
 		String[] var5 = new String[] { ".jagex_cache_" + arg2, ".file_store_" + arg2 };
 		String[] var6 = new String[] { "c:/rscache/", "/rscache/", "c:/windows/", "c:/winnt/", "c:/", userHome, "/tmp/", "" };
-		if (arg1 != 22086) {
-			return;
-		}
 		for (int var7 = 0; var7 < 2; var7++) {
 			for (int var8 = 0; var8 < var5.length; var8++) {
 				for (int var9 = 0; var9 < var6.length; var9++) {
@@ -323,11 +325,11 @@ public final class SignLink implements Runnable {
 								this.field3593 = this.field3580 = var14;
 							} catch (Exception var20) {
 								try {
-									this.field3590.close(arg1 - 22086);
+									this.field3590.close();
 									for (int var18 = 0; var18 < arg3; var18++) {
-										this.field3584[var18].close(0);
+										this.field3584[var18].close();
 									}
-									this.field3582.close(arg1 ^ 0x5646);
+									this.field3582.close();
 								} catch (Exception var19) {
 								}
 								this.field3584 = null;
