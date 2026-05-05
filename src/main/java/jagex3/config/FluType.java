@@ -19,7 +19,7 @@ public final class FluType extends Linkable2 {
 	public int colour = 0;
 
 	@ObfuscatedName("vh.M")
-	public int field4416 = -1;
+	public int texture = -1;
 
 	@ObfuscatedName("vh.D")
 	public int chroma;
@@ -136,11 +136,12 @@ public final class FluType extends Linkable2 {
 			this.colour = arg1.g3();
 			this.getHsl(this.colour);
 		} else if (arg0 == 2) {
-			this.field4416 = arg1.g2();
-			if (this.field4416 == 65535) {
-				this.field4416 = -1;
+			this.texture = arg1.g2();
+			if (this.texture == 65535) {
+				this.texture = -1;
 			}
 		} else if (arg0 == 3) {
+			// materialscale
 			arg1.g2();
 		}
 	}

@@ -30,7 +30,7 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("od.x")
 	public static Js5 models;
 	@ObfuscatedName("sf.o")
-	public static int field3855;
+	public static int numDefinitions;
 	@ObfuscatedName("qf.S")
 	public static SoftwarePixFont countFont;
 	@ObfuscatedName("k.N")
@@ -42,7 +42,7 @@ public final class ObjType extends Linkable2 {
 	public int womanwear3 = -1;
 
 	@ObfuscatedName("ng.eb")
-	public boolean field2861 = false;
+	public boolean stockmarket = false;
 
 	@ObfuscatedName("ng.fb")
 	public int model;
@@ -75,7 +75,7 @@ public final class ObjType extends Linkable2 {
 	public int xan2d = 0;
 
 	@ObfuscatedName("ng.rb")
-	public int field2874 = -1;
+	public int lentlink = -1;
 
 	@ObfuscatedName("ng.sb")
 	public int manwear2 = -1;
@@ -117,7 +117,7 @@ public final class ObjType extends Linkable2 {
 	public int cost = 1;
 
 	@ObfuscatedName("ng.T")
-	public int field2850 = 0;
+	public int dummyitem = 0;
 
 	@ObfuscatedName("ng.Ib")
 	public int womanhead = -1;
@@ -126,7 +126,7 @@ public final class ObjType extends Linkable2 {
 	public int zoom2d = 2000;
 
 	@ObfuscatedName("ng.Bb")
-	public int field2884 = -1;
+	public int lenttemplate = -1;
 
 	@ObfuscatedName("ng.Hb")
 	public int resizex = 128;
@@ -138,9 +138,9 @@ public final class ObjType extends Linkable2 {
 	public int certlink = -1;
 
 	@ObfuscatedName("aa.Q")
-	public static final JagString field12 = JagString.wrap("null");
+	public static final JagString NULL = JagString.wrap("null");
 	@ObfuscatedName("ng.Jb")
-	public JagString name = field12;
+	public JagString name = NULL;
 
 	@ObfuscatedName("ng.Pb")
 	public JagString[] op = new JagString[] { null, null, Text.TAKE, null, null };
@@ -155,10 +155,10 @@ public final class ObjType extends Linkable2 {
 	public JagString[] iop = new JagString[] { null, null, null, null, Text.DROP };
 
 	@ObfuscatedName("ng.N")
-	public int field2844;
+	public int id;
 
 	@ObfuscatedName("ng.Eb")
-	public byte[] field2887;
+	public byte[] recol_d_palette;
 
 	@ObfuscatedName("ng.O")
 	public int[] countco;
@@ -184,9 +184,9 @@ public final class ObjType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = configClient.getFile(method872(arg0), method920(arg0));
+		byte[] var2 = configClient.getFile(getGroupId(arg0), getFileId(arg0));
 		ObjType var3 = new ObjType();
-		var3.field2844 = arg0;
+		var3.id = arg0;
 		if (var2 != null) {
 			var3.decode(new Packet(var2));
 		}
@@ -194,13 +194,13 @@ public final class ObjType extends Linkable2 {
 		if (var3.certtemplate != -1) {
 			var3.genCert(list(var3.certlink), list(var3.certtemplate));
 		}
-		if (var3.field2884 != -1) {
-			var3.method1020(list(var3.field2874), list(var3.field2884));
+		if (var3.lenttemplate != -1) {
+			var3.genLent(list(var3.lentlink), list(var3.lenttemplate));
 		}
 		if (!memServer && var3.members) {
 			var3.team = 0;
 			var3.op = null;
-			var3.field2861 = false;
+			var3.stockmarket = false;
 			var3.name = Text.MEMBERS_OBJECT;
 			var3.iop = null;
 		}
@@ -221,29 +221,29 @@ public final class ObjType extends Linkable2 {
 		memServer = arg0;
 		configClient = arg1;
 		int var4 = configClient.getGroupCount() - 1;
-		field3855 = var4 * 256 + configClient.getFileIdLimit(var4);
+		numDefinitions = var4 * 256 + configClient.getFileIdLimit(var4);
 		countFont = arg2;
 	}
 
 	@ObfuscatedName("af.d(B)V")
-	public static void method37() {
+	public static void resetModelCache() {
 		modelCache.clear();
 	}
 
 	@ObfuscatedName("sh.c(B)V")
-	public static void method1399() {
+	public static void resetSpriteCache() {
 		spriteCache.clear();
 	}
 
 	@ObfuscatedName("bj.a(IBIIZI)Lrc;")
-	public static Pix32 method117(int arg0, int arg1, int arg2, boolean arg3, int arg4) {
+	public static Pix32 getSprite(int arg0, int arg1, int arg2, boolean arg3, int arg4) {
 		long var5 = ((long) arg4 << 40) + ((long) arg2 << 16) + (long) arg1 + (arg3 ? 137438953472L : 0L) + ((long) arg0 << 38);
 		Pix32 var7 = (Pix32) spriteCache.find(var5);
 		if (var7 != null) {
 			return var7;
 		}
 		Pix3D.textureFallback = false;
-		Pix32 var8 = method516(arg1, arg2, arg4, arg0, false, arg3);
+		Pix32 var8 = getSpriteInner(arg1, arg2, arg4, arg0, false, arg3);
 		if (var8 != null && !Pix3D.textureFallback) {
 			spriteCache.put(var5, var8);
 		}
@@ -251,7 +251,7 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("h.a(IIIIZZZZ)Lrc;")
-	public static Pix32 method516(int arg0, int arg1, int arg2, int arg3, boolean arg4, boolean arg5) {
+	public static Pix32 getSpriteInner(int arg0, int arg1, int arg2, int arg3, boolean arg4, boolean arg5) {
 		ObjType var6 = list(arg0);
 		if (arg1 > 1 && var6.countobj != null) {
 			int var7 = -1;
@@ -264,18 +264,18 @@ public final class ObjType extends Linkable2 {
 				var6 = list(var7);
 			}
 		}
-		SoftwareModelLit var9 = var6.method1008();
+		SoftwareModelLit var9 = var6.getModelLit();
 		if (var9 == null) {
 			return null;
 		}
 		SoftwarePix32 var10 = null;
 		if (var6.certtemplate != -1) {
-			var10 = (SoftwarePix32) method516(var6.certlink, 10, 0, 1, true, false);
+			var10 = (SoftwarePix32) getSpriteInner(var6.certlink, 10, 0, 1, true, false);
 			if (var10 == null) {
 				return null;
 			}
-		} else if (var6.field2884 != -1) {
-			var10 = (SoftwarePix32) method516(var6.field2874, arg1, arg2, arg3, false, false);
+		} else if (var6.lenttemplate != -1) {
+			var10 = (SoftwarePix32) getSpriteInner(var6.lentlink, arg1, arg2, arg3, false, false);
 			if (var10 == null) {
 				return null;
 			}
@@ -311,13 +311,13 @@ public final class ObjType extends Linkable2 {
 		}
 		if (var6.certtemplate != -1) {
 			var10.plotSprite(0, 0);
-		} else if (var6.field2884 != -1) {
+		} else if (var6.lenttemplate != -1) {
 			Pix2D.setPixels(var10.data, 36, 32);
 			var15.plotSprite(0, 0);
 			var15 = var10;
 		}
 		if (arg5 && (var6.stackable == 1 || arg1 != 1) && arg1 != -1) {
-			countFont.method154(Client.method889(arg1), 0, 9, 16776960, 1);
+			countFont.drawString(Client.method889(arg1), 0, 9, 16776960, 1);
 		}
 		Pix2D.setPixels(var11, var12, var13);
 		Pix2D.restoreClipping(var14);
@@ -327,27 +327,27 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("li.b(II)I")
-	public static int method872(int arg0) {
+	public static int getGroupId(int arg0) {
 		return arg0 & 0xFF;
 	}
 
 	@ObfuscatedName("mg.c(II)I")
-	public static int method920(int arg0) {
+	public static int getFileId(int arg0) {
 		return arg0 >>> 8;
 	}
 
 	@ObfuscatedName("ng.b(Z)Lle;")
-	public SoftwareModelLit method1008() {
+	public SoftwareModelLit getModelLit() {
 		ModelUnlit var1 = ModelUnlit.load(models, this.model);
 		if (var1 == null) {
 			return null;
 		}
 		if (this.recol_s != null) {
 			for (int var2 = 0; var2 < this.recol_s.length; var2++) {
-				if (this.field2887 == null || var2 >= this.field2887.length) {
+				if (this.recol_d_palette == null || var2 >= this.recol_d_palette.length) {
 					var1.recolour(this.recol_s[var2], this.recol_d[var2]);
 				} else {
-					var1.recolour(this.recol_s[var2], clientpalette[this.field2887[var2] & 0xFF]);
+					var1.recolour(this.recol_s[var2], clientpalette[this.recol_d_palette[var2] & 0xFF]);
 				}
 			}
 		}
@@ -364,7 +364,7 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ng.a(Li;BI)Li;")
-	public JagString method1009(JagString arg0, int arg1) {
+	public JagString getParamString(JagString arg0, int arg1) {
 		if (this.params == null) {
 			return arg0;
 		} else {
@@ -374,7 +374,7 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ng.a(ZII)I")
-	public int method1010(int arg0, int arg1) {
+	public int getParamInt(int arg0, int arg1) {
 		if (this.params == null) {
 			return arg1;
 		} else {
@@ -496,7 +496,7 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("ng.a(ILng;Lng;)V")
 	public void genCert(ObjType arg0, ObjType arg1) {
 		this.yof2d = arg1.yof2d;
-		this.field2887 = arg1.field2887;
+		this.recol_d_palette = arg1.recol_d_palette;
 		this.cost = arg0.cost;
 		this.stackable = 1;
 		this.recol_s = arg1.recol_s;
@@ -514,7 +514,7 @@ public final class ObjType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ng.a(Lng;ILng;)V")
-	public void method1020(ObjType arg0, ObjType arg1) {
+	public void genLent(ObjType arg0, ObjType arg1) {
 		this.xan2d = arg1.xan2d;
 		this.zoom2d = arg1.zoom2d;
 		this.name = arg0.name;
@@ -537,7 +537,7 @@ public final class ObjType extends Linkable2 {
 		this.womanwear3 = arg0.womanwear3;
 		this.cost = 0;
 		this.womanhead = arg0.womanhead;
-		this.field2887 = arg0.field2887;
+		this.recol_d_palette = arg0.recol_d_palette;
 		this.womanhead2 = arg0.womanhead2;
 		this.manwear = arg0.manwear;
 		this.retex_s = arg0.retex_s;
@@ -659,12 +659,12 @@ public final class ObjType extends Linkable2 {
 			}
 		} else if (arg0 == 42) {
 			int var13 = arg1.g1();
-			this.field2887 = new byte[var13];
+			this.recol_d_palette = new byte[var13];
 			for (int var14 = 0; var14 < var13; var14++) {
-				this.field2887[var14] = arg1.g1b();
+				this.recol_d_palette[var14] = arg1.g1b();
 			}
 		} else if (arg0 == 65) {
-			this.field2861 = true;
+			this.stockmarket = true;
 		} else if (arg0 == 78) {
 			this.manwear3 = arg1.g2();
 		} else if (arg0 == 79) {
@@ -680,7 +680,7 @@ public final class ObjType extends Linkable2 {
 		} else if (arg0 == 95) {
 			this.zan2d = arg1.g2();
 		} else if (arg0 == 96) {
-			this.field2850 = arg1.g1();
+			this.dummyitem = arg1.g1();
 		} else if (arg0 == 97) {
 			this.certlink = arg1.g2();
 		} else if (arg0 == 98) {
@@ -705,9 +705,9 @@ public final class ObjType extends Linkable2 {
 		} else if (arg0 == 115) {
 			this.team = arg1.g1();
 		} else if (arg0 == 121) {
-			this.field2874 = arg1.g2();
+			this.lentlink = arg1.g2();
 		} else if (arg0 == 122) {
-			this.field2884 = arg1.g2();
+			this.lenttemplate = arg1.g2();
 		} else if (arg0 == 124) {
 			if (this.field2839 == null) {
 				this.field2839 = new int[11][];
@@ -750,7 +750,7 @@ public final class ObjType extends Linkable2 {
 				return list(var4).getModelLit(1, arg1, arg2);
 			}
 		}
-		ModelLit var6 = (ModelLit) modelCache.find((long) this.field2844);
+		ModelLit var6 = (ModelLit) modelCache.find((long) this.id);
 		if (var6 == null) {
 			ModelUnlit var7 = ModelUnlit.load(models, this.model);
 			if (var7 == null) {
@@ -758,10 +758,10 @@ public final class ObjType extends Linkable2 {
 			}
 			if (this.recol_s != null) {
 				for (int var8 = 0; var8 < this.recol_s.length; var8++) {
-					if (this.field2887 == null || this.field2887.length <= var8) {
+					if (this.recol_d_palette == null || this.recol_d_palette.length <= var8) {
 						var7.recolour(this.recol_s[var8], this.recol_d[var8]);
 					} else {
-						var7.recolour(this.recol_s[var8], clientpalette[this.field2887[var8] & 0xFF]);
+						var7.recolour(this.recol_s[var8], clientpalette[this.recol_d_palette[var8] & 0xFF]);
 					}
 				}
 			}
@@ -775,7 +775,7 @@ public final class ObjType extends Linkable2 {
 				var6.resize(this.resizex, this.resizey, this.resizez);
 			}
 			var6.useAABBMouseCheck = true;
-			modelCache.put((long) this.field2844, var6);
+			modelCache.put((long) this.id, var6);
 		}
 		if (arg2 != null) {
 			var6 = arg2.animateModelWithExtra(arg1, var6);

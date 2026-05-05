@@ -18,6 +18,54 @@ public class TitleScreen {
 	public static final JagString field3972 = JagString.wrap("");
 	@ObfuscatedName("wa.b")
 	public static final int[] flameLineOffset = new int[256];
+	@ObfuscatedName("ed.e")
+	public static final JagString field915 = JagString.wrap(")4slr2)3ws?order=LPWM");
+	@ObfuscatedName("de.G")
+	public static final JagString field689 = JagString.wrap("title)3jpg");
+	@ObfuscatedName("ff.X")
+	public static final JagString field1143 = JagString.wrap("logo");
+	@ObfuscatedName("client.T")
+	public static final JagString field561 = JagString.wrap("titlebox");
+	@ObfuscatedName("kg.R")
+	public static final JagString field2089 = JagString.wrap("titlebutton");
+	@ObfuscatedName("bh.J")
+	public static final JagString field316 = JagString.wrap("runes");
+	@ObfuscatedName("id.q")
+	public static final JagString field1733 = JagString.wrap("title_mute");
+	@ObfuscatedName("uj.l")
+	public static final JagString field4278 = JagString.wrap("sl_back");
+	@ObfuscatedName("te.S")
+	public static final JagString field4011 = JagString.wrap("sl_flags");
+	@ObfuscatedName("eb.O")
+	public static final JagString field881 = JagString.wrap("sl_arrows");
+	@ObfuscatedName("af.K")
+	public static final JagString field102 = JagString.wrap("sl_stars");
+	@ObfuscatedName("ia.v")
+	public static final JagString field1682 = JagString.wrap("sl_button");
+	@ObfuscatedName("kj.e")
+	public static final JagString field2156 = JagString.wrap("scape main");
+	@ObfuscatedName("sj.e")
+	public static final JagString field3922 = JagString.wrap(")3runescape)3com");
+	@ObfuscatedName("ac.U")
+	public static final JagString field63 = JagString.wrap(")4l");
+	@ObfuscatedName("aa.Z")
+	public static final JagString field21 = JagString.wrap(")1p");
+	@ObfuscatedName("gh.o")
+	public static final JagString field1344 = JagString.wrap("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(Q(R+R(T(U^(V(Z(X(Y)2_=)0[*U]*W;:(W@(S*X)1<)3>)4?*6*V ");
+	@ObfuscatedName("gh.j")
+	public static final JagString field1339 = field1344;
+	@ObfuscatedName("gh.v")
+	public static final JagString field1351 = JagString.wrap(")1j");
+	@ObfuscatedName("og.U")
+	public static final JagString field3076 = JagString.wrap(")3runescape)3com)4l=");
+	@ObfuscatedName("ih.m")
+	public static final JagString field1771 = JagString.wrap("http:)4)4");
+	@ObfuscatedName("sc.D")
+	public static final JagString field3787 = JagString.wrap(" ");
+	@ObfuscatedName("tc.D")
+	public static final JagString field3983 = JagString.wrap("http:)4)4www)3runescape)3com)4l=");
+	@ObfuscatedName("sf.c")
+	public static final JagString field3843 = JagString.wrap("<col=ffff00>*V");
 	@ObfuscatedName("tb.z")
 	public static JagString loginMes1 = field3972;
 	@ObfuscatedName("tb.y")
@@ -128,6 +176,8 @@ public class TitleScreen {
 	public static int field2912 = -1;
 	@ObfuscatedName("hi.d")
 	public static int field1552 = -1;
+	@ObfuscatedName("uh.S")
+	public static int field4247 = -1;
 
 	@ObfuscatedName("rc.a(Lcc;BLcc;)V")
     public static void draw(PixfontGeneric arg0, PixfontGeneric arg1) {
@@ -136,45 +186,45 @@ public class TitleScreen {
             return;
         }
         if (Client.state == 0 || Client.state == 5) {
-            arg1.method141(Text.LOADING_TITLE, 382, 225, 16777215, -1);
+            arg1.centreString(Text.LOADING_TITLE, 382, 225, 16777215, -1);
             Pix2D.drawRect(230, 233, 304, 34, 9179409);
             Pix2D.drawRect(231, 234, 302, 32, 0);
             Pix2D.fillRect(232, 235, loadPos * 3, 30, 9179409);
             Pix2D.fillRect(loadPos * 3 + 232, 235, 300 - loadPos * 3, 30, 0);
-            arg1.method141(loadString, 382, 256, 16777215, -1);
+            arg1.centreString(loadString, 382, 256, 16777215, -1);
         }
         if (Client.state == 20) {
             titleBox.plotSprite(382 - titleBox.wi / 2, 271 - titleBox.hi / 2);
             short var2 = 211;
-            arg1.method141(loginMes1, 382, 211, 16776960, 0);
+            arg1.centreString(loginMes1, 382, 211, 16776960, 0);
             int var8 = var2 + 15;
-            arg1.method141(loginMes2, 382, 226, 16776960, 0);
+            arg1.centreString(loginMes2, 382, 226, 16776960, 0);
             int var9 = var8 + 15;
-            arg1.method141(loginMes3, 382, 241, 16776960, 0);
+            arg1.centreString(loginMes3, 382, 241, 16776960, 0);
             int var10 = var9 + 15;
             int var11 = var10 + 10;
-            arg1.method154(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.method162(loginUser) }), 272, 266, 16777215, 0);
+            arg1.drawString(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.escape(loginUser) }), 272, 266, 16777215, 0);
             int var13 = var11 + 15;
-            arg1.method154(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method596() }), 274, 281, 16777215, 0);
+            arg1.drawString(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method596() }), 274, 281, 16777215, 0);
             int var15 = var13 + 15;
         }
         if (Client.state == 10) {
             titleBox.plotSprite(202, 171);
             if (loginscreen == 0) {
                 short var7 = 251;
-                arg1.method141(Text.WELCOMETORUNESCAPE, 382, 251, 16776960, 0);
+                arg1.centreString(Text.WELCOMETORUNESCAPE, 382, 251, 16776960, 0);
                 titleBut.plotSprite(229, 271);
-                arg1.method153(Text.NEWUSER, 229, 271, 144, 40, 16777215, 0, 1, 1, 0);
+                arg1.drawStringMultiline(Text.NEWUSER, 229, 271, 144, 40, 16777215, 0, 1, 1, 0);
                 int var19 = var7 + 30;
                 titleBut.plotSprite(389, 271);
-                arg1.method153(Text.EXISTINGUSER, 389, 271, 144, 40, 16777215, 0, 1, 1, 0);
+                arg1.drawStringMultiline(Text.EXISTINGUSER, 389, 271, 144, 40, 16777215, 0, 1, 1, 0);
             } else if (loginscreen == 2) {
                 short var3 = 211;
-                arg1.method141(loginMes1, 382, 211, 16776960, 0);
+                arg1.centreString(loginMes1, 382, 211, 16776960, 0);
                 int var12 = var3 + 15;
-                arg1.method141(loginMes2, 382, 226, 16776960, 0);
+                arg1.centreString(loginMes2, 382, 226, 16776960, 0);
                 int var14 = var12 + 15;
-                arg1.method141(loginMes3, 382, 241, 16776960, 0);
+                arg1.centreString(loginMes3, 382, 241, 16776960, 0);
                 boolean var4;
                 if (Statics.field2620 == 0 && Client.loopCycle % 40 < 20 && GameShell.focus) {
                     var4 = true;
@@ -183,7 +233,7 @@ public class TitleScreen {
                 }
                 var12 = var14 + 15;
                 var12 += 10;
-                arg1.method154(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.method162(loginUser), var4 ? Statics.field3843 : field3972}), 272, 266, 16777215, 0);
+                arg1.drawString(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.escape(loginUser), var4 ? field3843 : field3972}), 272, 266, 16777215, 0);
                 boolean var5;
                 if (Statics.field2620 == 1 && Client.loopCycle % 40 < 20 && GameShell.focus) {
                     var5 = true;
@@ -191,25 +241,25 @@ public class TitleScreen {
                     var5 = false;
                 }
                 var12 += 15;
-                arg1.method154(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method596(), var5 ? Statics.field3843 : field3972}), 274, 281, 16777215, 0);
+                arg1.drawString(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method596(), var5 ? field3843 : field3972}), 274, 281, 16777215, 0);
                 titleBut.plotSprite(229, 301);
                 var12 += 15;
-                arg1.method141(Text.LOGIN, 302, 326, 16777215, 0);
+                arg1.centreString(Text.LOGIN, 302, 326, 16777215, 0);
                 titleBut.plotSprite(389, 301);
-                arg1.method141(Text.CANCEL, 462, 326, 16777215, 0);
+                arg1.centreString(Text.CANCEL, 462, 326, 16777215, 0);
             } else if (loginscreen == 3) {
-                arg1.method141(Text.field2921, 382, 211, 16776960, 0);
+                arg1.centreString(Text.field2921, 382, 211, 16776960, 0);
                 short var6 = 236;
-                arg1.method141(Text.field3753, 382, 236, 16777215, 0);
+                arg1.centreString(Text.field3753, 382, 236, 16777215, 0);
                 int var16 = var6 + 15;
-                arg1.method141(Text.field1591, 382, 251, 16777215, 0);
+                arg1.centreString(Text.field1591, 382, 251, 16777215, 0);
                 int var17 = var16 + 15;
-                arg1.method141(Text.field1152, 382, 266, 16777215, 0);
+                arg1.centreString(Text.field1152, 382, 266, 16777215, 0);
                 int var18 = var17 + 15;
-                arg1.method141(Text.field2943, 382, 281, 16777215, 0);
+                arg1.centreString(Text.field2943, 382, 281, 16777215, 0);
                 int var20 = var18 + 15;
                 titleBut.plotSprite(309, 301);
-                arg1.method141(Text.CANCEL, 382, 326, 16777215, 0);
+                arg1.centreString(Text.CANCEL, 382, 326, 16777215, 0);
             }
         }
         if (Client.game != 1) {
@@ -222,16 +272,16 @@ public class TitleScreen {
         titleMute[mute ? 1 : 0].plotSprite(725, 463);
 		if (Client.state > 5 && Client.plug != 2) {
 			if (slButton == null) {
-				slButton = PixLoader.method1454(Statics.field4247, Client.sprites);
+				slButton = PixLoader.method1454(field4247, Client.sprites);
 			}
 			if (slButton != null) {
 				slButton.plotSprite(5, 463);
-				arg1.method141(JagString.join(new JagString[]{Text.WORLD, Statics.field3787, JagString.method1212(Client.worldid)}), 55, 478, 16777215, 0);
+				arg1.centreString(JagString.join(new JagString[]{Text.WORLD, field3787, JagString.method1212(Client.worldid)}), 55, 478, 16777215, 0);
 				if (gameworldListDownloadRequest != null) {
-					arg0.method141(Text.LOADINGDOTDOTDOT, 55, 492, 16777215, 0);
+					arg0.centreString(Text.LOADINGDOTDOTDOT, 55, 492, 16777215, 0);
 					return;
 				}
-				arg0.method141(Text.CLICKTOSWITCH, 55, 492, 16777215, 0);
+				arg0.centreString(Text.CLICKTOSWITCH, 55, 492, 16777215, 0);
 			}
 		}
 	}
@@ -322,8 +372,8 @@ public class TitleScreen {
 					label226: do {
 						while (ClientKeyboardListener.pollKey()) {
 							var6 = false;
-							for (int var7 = 0; var7 < Statics.field1339.method604(); var7++) {
-								if (ClientKeyboardListener.ch == Statics.field1339.method599(var7)) {
+							for (int var7 = 0; var7 < field1339.method604(); var7++) {
+								if (ClientKeyboardListener.ch == field1339.method599(var7)) {
 									var6 = true;
 									break;
 								}
@@ -646,12 +696,12 @@ public class TitleScreen {
 		Pix2D.fillRect(0, 23, 765, 480, 0);
 		Pix2D.method482(0, 0, 138, 23, 12425273, 9135624);
 		Pix2D.method482(138, 0, 640, 23, 5197647, 2697513);
-		arg1.method141(Text.SELECTAWORLD, 69, 15, 0, -1);
+		arg1.centreString(Text.SELECTAWORLD, 69, 15, 0, -1);
 		if (slStars != null) {
 			slStars[1].plotSprite(140, 1);
-			arg0.method154(Text.MEMBERSONLYWORLD, 152, 10, 16777215, -1);
+			arg0.drawString(Text.MEMBERSONLYWORLD, 152, 10, 16777215, -1);
 			slStars[0].plotSprite(140, 12);
-			arg0.method154(Text.FREEWORLD, 152, 21, 16777215, -1);
+			arg0.drawString(Text.FREEWORLD, 152, 21, 16777215, -1);
 		}
 		if (slArrows != null) {
 			if (ordering[0] == 0 && dirs[0] == 0) {
@@ -664,7 +714,7 @@ public class TitleScreen {
 			} else {
 				slArrows[1].plotSprite(295, 4);
 			}
-			arg1.method154(Text.SL_WORLD, 312, 17, 16777215, -1);
+			arg1.drawString(Text.SL_WORLD, 312, 17, 16777215, -1);
 			if (ordering[0] == 1 && dirs[0] == 0) {
 				slArrows[2].plotSprite(390, 4);
 			} else {
@@ -675,7 +725,7 @@ public class TitleScreen {
 			} else {
 				slArrows[1].plotSprite(405, 4);
 			}
-			arg1.method154(Text.SL_PLAYERS, 422, 17, 16777215, -1);
+			arg1.drawString(Text.SL_PLAYERS, 422, 17, 16777215, -1);
 			if (ordering[0] == 2 && dirs[0] == 0) {
 				slArrows[2].plotSprite(500, 4);
 			} else {
@@ -686,7 +736,7 @@ public class TitleScreen {
 			} else {
 				slArrows[1].plotSprite(515, 4);
 			}
-			arg1.method154(Text.SL_LOCATION, 532, 17, 16777215, -1);
+			arg1.drawString(Text.SL_LOCATION, 532, 17, 16777215, -1);
 			if (ordering[0] == 3 && dirs[0] == 0) {
 				slArrows[2].plotSprite(610, 4);
 			} else {
@@ -697,10 +747,10 @@ public class TitleScreen {
 			} else {
 				slArrows[1].plotSprite(625, 4);
 			}
-			arg1.method154(Text.SL_TYPE, 642, 17, 16777215, -1);
+			arg1.drawString(Text.SL_TYPE, 642, 17, 16777215, -1);
 		}
 		Pix2D.fillRect(700, 4, 58, 16, 0);
-		arg0.method141(Text.CANCEL, 729, 16, 16777215, -1);
+		arg0.centreString(Text.CANCEL, 729, 16, 16777215, -1);
 		slLastWorld = -1;
 		if (slBack == null) {
 			return;
@@ -755,8 +805,8 @@ public class TitleScreen {
 			if (slFlags != null) {
 				slFlags[var14.field1260 + (var14.field1257 ? 8 : 0)].plotSprite(var9 + 29, var11);
 			}
-			arg1.method141(JagString.method1212(var14.field1261), var9 + 15, 5 + 9 + var11, 0, -1);
-			arg0.method141(var16, var9 + 60, var11 - -5 + 9, 268435455, -1);
+			arg1.centreString(JagString.method1212(var14.field1261), var9 + 15, 5 + 9 + var11, 0, -1);
+			arg0.centreString(var16, var9 + 60, var11 - -5 + 9, 268435455, -1);
 			var11 += var7 + 19;
 			var12++;
 			if (var2 <= var12) {
@@ -851,19 +901,11 @@ public class TitleScreen {
 		field1675.quickPlotSprite(637, 9);
 	}
 
-	@ObfuscatedName("ac.a(ZII)V")
-	public static void method23(int arg0, int arg1) {
-		if (field1183 != 0 && arg0 != -1) {
-			MidiManager.play(Client.jingles, arg0, field1183);
-			Client.field2012 = true;
-		}
-	}
-
 	@ObfuscatedName("ke.d(I)V")
 	public static void listFetch() {
 		try {
 			if (gameworldListDownloadRequest == null) {
-				gameworldListDownloadRequest = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { Statics.field3983, JagString.method1212(Client.lang), Statics.field915}).method606());
+				gameworldListDownloadRequest = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { field3983, JagString.method1212(Client.lang), field915}).method606());
 			} else {
 				byte[] var0 = gameworldListDownloadRequest.getData();
 				if (var0 != null) {
@@ -1051,7 +1093,7 @@ public class TitleScreen {
 		}
 		WorldEntry var1 = list[slLastWorld];
 		if (Client.memServer == var1.field1257) {
-			byte[] var2 = JagString.join(new JagString[] { var1.field1262, Statics.field3922}).method613();
+			byte[] var2 = JagString.join(new JagString[] { var1.field1262, field3922}).method613();
 			Client.field1760 = new String(var2, 0, var2.length);
 			Client.worldid = var1.field1261;
 			if (Client.modewhere != 0) {
@@ -1064,7 +1106,7 @@ public class TitleScreen {
 			method1493();
 			return;
 		}
-		JagString var3 = JagString.join(new JagString[] { Statics.field1771, var1.field1262, Statics.field3076, JagString.method1212(Client.lang), Statics.field63, JagString.method1212(Client.lowMem ? 1 : 0), Statics.field21, JagString.method1212(Client.plug), Statics.field1351, JagString.method1212(Client.js) });
+		JagString var3 = JagString.join(new JagString[] { field1771, var1.field1262, field3076, JagString.method1212(Client.lang), field63, JagString.method1212(Client.lowMem ? 1 : 0), field21, JagString.method1212(Client.plug), field1351, JagString.method1212(Client.js) });
 		try {
 			arg0.getAppletContext().showDocument(var3.method606(), "_self");
 		} catch (Exception var4) {
@@ -1073,18 +1115,18 @@ public class TitleScreen {
 
     @ObfuscatedName("o.a(Lnb;Lnb;ILnb;)V")
     public static void method1038(Js5 arg0, Js5 arg1, Js5 arg2) {
-        field2009 = arg1.getGroupId(Statics.field689);
-        field2932 = arg2.getGroupId(Statics.field1143);
-        field1896 = arg2.getGroupId(Client.field561);
-        field3019 = arg2.getGroupId(Statics.field2089);
-        field4502 = arg2.getGroupId(Statics.field316);
-        field2912 = arg2.getGroupId(Statics.field1733);
-        field209 = arg2.getGroupId(Statics.field4278);
-        field119 = arg2.getGroupId(Statics.field4011);
-        field1783 = arg2.getGroupId(Statics.field881);
-        field2195 = arg2.getGroupId(Statics.field102);
-        Statics.field4247 = arg2.getGroupId(Statics.field1682);
-        field1552 = arg0.getGroupId(Statics.field2156);
+        field2009 = arg1.getGroupId(field689);
+        field2932 = arg2.getGroupId(field1143);
+        field1896 = arg2.getGroupId(field561);
+        field3019 = arg2.getGroupId(field2089);
+        field4502 = arg2.getGroupId(field316);
+        field2912 = arg2.getGroupId(field1733);
+        field209 = arg2.getGroupId(field4278);
+        field119 = arg2.getGroupId(field4011);
+        field1783 = arg2.getGroupId(field881);
+        field2195 = arg2.getGroupId(field102);
+        field4247 = arg2.getGroupId(field1682);
+        field1552 = arg0.getGroupId(field2156);
     }
 
 	@ObfuscatedName("uj.a(IIBI)I")
@@ -1118,7 +1160,7 @@ public class TitleScreen {
 		arg1.requestDownload(field119);
 		arg1.requestDownload(field1783);
 		arg1.requestDownload(field2195);
-		arg1.requestDownload(Statics.field4247);
+		arg1.requestDownload(field4247);
 		return var2;
 	}
 

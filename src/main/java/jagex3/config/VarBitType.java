@@ -29,7 +29,7 @@ public final class VarBitType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = configClient.getFile(method473(arg0), method1585(arg0));
+		byte[] var2 = configClient.getFile(getGroupId(arg0), getFileId(arg0));
 		VarBitType var3 = new VarBitType();
 		if (var2 != null) {
 			var3.decode(new Packet(var2));
@@ -49,12 +49,12 @@ public final class VarBitType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ge.a(BI)I")
-	public static int method473(int arg0) {
+	public static int getGroupId(int arg0) {
 		return arg0 & 0x3FF;
 	}
 
 	@ObfuscatedName("wa.a(II)I")
-	public static int method1585(int arg0) {
+	public static int getFileId(int arg0) {
 		return arg0 >>> 10;
 	}
 

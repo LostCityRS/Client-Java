@@ -128,7 +128,7 @@ public final class ClientProj extends ModelSource {
 					this.animCycle -= this.anim.delay[this.animFrame];
 					this.animFrame++;
 				} while (this.animFrame < this.anim.frames.length);
-				this.animFrame -= this.anim.field1972;
+				this.animFrame -= this.anim.loops;
 			} while (this.animFrame >= 0 && this.anim.frames.length > this.animFrame);
 			this.animFrame = 0;
 		}

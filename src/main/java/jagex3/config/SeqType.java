@@ -41,7 +41,7 @@ public final class SeqType extends Linkable2 {
 	public int replaceheldleft = -1;
 
 	@ObfuscatedName("k.ub")
-	public int[][] field2001;
+	public int[][] sound;
 
 	@ObfuscatedName("k.wb")
 	public int[] iframes;
@@ -50,7 +50,7 @@ public final class SeqType extends Linkable2 {
 	public boolean reachforward = false;
 
 	@ObfuscatedName("k.R")
-	public int field1972 = -1;
+	public int loops = -1;
 
 	@ObfuscatedName("k.U")
 	public int replaceheldright = -1;
@@ -73,7 +73,7 @@ public final class SeqType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = configClient.getFile(method50(arg0), method1441(arg0));
+		byte[] var2 = configClient.getFile(getGroupId(arg0), getFileId(arg0));
 		SeqType var3 = new SeqType();
 		if (var2 != null) {
 			var3.decode(new Packet(var2));
@@ -97,7 +97,7 @@ public final class SeqType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ea.a(Lnb;ILnb;ZB)Lli;")
-	public static AnimFrameSet method309(Js5 arg0, int arg1, Js5 arg2) {
+	public static AnimFrameSet loadFrameset(Js5 arg0, int arg1, Js5 arg2) {
 		boolean var3 = true;
 		int[] var4 = arg2.getFileList(arg1);
 		for (int var5 = 0; var5 < var4.length; var5++) {
@@ -128,7 +128,7 @@ public final class SeqType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		AnimFrameSet var2 = method309(bases, arg0, anims);
+		AnimFrameSet var2 = loadFrameset(bases, arg0, anims);
 		if (var2 != null) {
 			framesetCache.put((long) arg0, var2);
 		}
@@ -136,12 +136,12 @@ public final class SeqType extends Linkable2 {
 	}
 
 	@ObfuscatedName("ah.a(IB)I")
-	public static int method50(int arg0) {
+	public static int getGroupId(int arg0) {
 		return arg0 & 0x7F;
 	}
 
 	@ObfuscatedName("td.a(IZ)I")
-	public static int method1441(int arg0) {
+	public static int getFileId(int arg0) {
 		return arg0 >>> 7;
 	}
 
@@ -175,7 +175,7 @@ public final class SeqType extends Linkable2 {
 				this.frames[var6] = (arg0.g2() << 16) + this.frames[var6];
 			}
 		} else if (arg1 == 2) {
-			this.field1972 = arg0.g2();
+			this.loops = arg0.g2();
 		} else if (arg1 == 3) {
 			int var7 = arg0.g1();
 			this.walkmerge = new int[var7 + 1];
@@ -210,21 +210,19 @@ public final class SeqType extends Linkable2 {
 			}
 		} else if (arg1 == 13) {
 			int var9 = arg0.g2();
-			this.field2001 = new int[var9][];
+			this.sound = new int[var9][];
 			for (int var10 = 0; var10 < var9; var10++) {
 				int var11 = arg0.g1();
 				if (var11 > 0) {
-					this.field2001[var10] = new int[var11];
-					this.field2001[var10][0] = arg0.g3();
+					this.sound[var10] = new int[var11];
+					this.sound[var10][0] = arg0.g3();
 					for (int var12 = 1; var12 < var11; var12++) {
-						this.field2001[var10][var12] = arg0.g2();
+						this.sound[var10][var12] = arg0.g2();
 					}
 				}
 			}
-			return;
 		} else if (arg1 == 14) {
 			this.field1993 = true;
-			return;
 		}
 	}
 

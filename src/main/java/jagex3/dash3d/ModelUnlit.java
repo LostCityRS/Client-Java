@@ -1180,15 +1180,14 @@ public final class ModelUnlit extends ModelSource {
 				this.pointY[var10] = var11;
 			}
 		}
-		if (arg1 == 0) {
-			return;
-		}
-		int var12 = sinTable[arg1];
-		int var13 = cosTable[arg1];
-		for (int var14 = 0; var14 < this.numPoints; var14++) {
-			int var15 = this.pointZ[var14] * var12 + this.pointX[var14] * var13 >> 16;
-			this.pointZ[var14] = this.pointZ[var14] * var13 - this.pointX[var14] * var12 >> 16;
-			this.pointX[var14] = var15;
+		if (arg1 != 0) {
+			int var12 = sinTable[arg1];
+			int var13 = cosTable[arg1];
+			for (int var14 = 0; var14 < this.numPoints; var14++) {
+				int var15 = this.pointZ[var14] * var12 + this.pointX[var14] * var13 >> 16;
+				this.pointZ[var14] = this.pointZ[var14] * var13 - this.pointX[var14] * var12 >> 16;
+				this.pointX[var14] = var15;
+			}
 		}
 	}
 

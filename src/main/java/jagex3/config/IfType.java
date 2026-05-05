@@ -36,22 +36,22 @@ public final class IfType {
 	public int field3365 = 0;
 
 	@ObfuscatedName("q.ab")
-	public int field3417 = 0;
+	public int modelBaseHeight = 0;
 
 	@ObfuscatedName("q.ac")
 	public int vAlign = 0;
 
 	@ObfuscatedName("q.b")
-	public int field3366 = 0;
+	public int renderX = 0;
 
 	@ObfuscatedName("q.bb")
 	public int height = 0;
 
 	@ObfuscatedName("q.bc")
-	public boolean field3470 = false;
+	public boolean noClickThrough = false;
 
 	@ObfuscatedName("q.c")
-	public byte field3367 = 0;
+	public byte xAlignment = 0;
 
 	@ObfuscatedName("q.cc")
 	public Object[] onscrollwheel;
@@ -69,7 +69,7 @@ public final class IfType {
 	public int[] oninvtransmitlist;
 
 	@ObfuscatedName("q.eb")
-	public int[] field3421;
+	public int[] graphicMaskLineLengths;
 
 	@ObfuscatedName("q.ec")
 	public int graphic = -1;
@@ -78,19 +78,19 @@ public final class IfType {
 	public Object[] onmouseover;
 
 	@ObfuscatedName("q.fb")
-	public int field3422 = 0;
+	public int renderHeight = 0;
 
 	@ObfuscatedName("q.fc")
 	public int[] linkObjNumber;
 
 	@ObfuscatedName("q.g")
-	public int field3371 = -1;
+	public int drawTime = -1;
 
 	@ObfuscatedName("q.gb")
 	public int parentId = -1;
 
 	@ObfuscatedName("q.h")
-	public int field3372 = 0;
+	public int varTransmitNum = 0;
 
 	@ObfuscatedName("q.hb")
 	public int overLayerId = -1;
@@ -108,10 +108,10 @@ public final class IfType {
 	public int colour2Over = 0;
 
 	@ObfuscatedName("q.jb")
-	public Object[] field3426;
+	public Object[] onresize;
 
 	@ObfuscatedName("q.jc")
-	public boolean field3478 = false;
+	public boolean clickTrigger = false;
 
 	@ObfuscatedName("q.k")
 	public int scrollHeight = 0;
@@ -129,7 +129,7 @@ public final class IfType {
 	public int trans = 0;
 
 	@ObfuscatedName("q.m")
-	public Object[] field3377;
+	public Object[] onkey;
 
 	@ObfuscatedName("q.mb")
 	public int outline = 0;
@@ -144,10 +144,10 @@ public final class IfType {
 	public int model1Type = 1;
 
 	@ObfuscatedName("q.nc")
-	public int field3482 = 0;
+	public int invcount = 0;
 
 	@ObfuscatedName("q.o")
-	public int field3379 = 0;
+	public int animFrame = 0;
 
 	@ObfuscatedName("q.ob")
 	public int colourOver = 0;
@@ -156,16 +156,16 @@ public final class IfType {
 	public boolean hFlip;
 
 	@ObfuscatedName("q.p")
-	public int field3380 = 0;
+	public int renderWidth = 0;
 
 	@ObfuscatedName("q.pb")
 	public int modelXOf = 0;
 
 	@ObfuscatedName("q.pc")
-	public Object[] field3484;
+	public Object[] onfriendtransmit;
 
 	@ObfuscatedName("q.q")
-	public Object[] field3381;
+	public Object[] onclantransmit;
 
 	@ObfuscatedName("q.qb")
 	public int graphic2 = -1;
@@ -174,22 +174,24 @@ public final class IfType {
 	public int modelZoom = 100;
 
 	@ObfuscatedName("q.r")
-	public int field3382 = -1;
+	public int drawCount = -1;
 
 	@ObfuscatedName("q.rb")
-	public Object[] field3434;
+	public Object[] ondialogabort;
 
 	@ObfuscatedName("q.rc")
 	public int[] scriptOperand;
 
+	@ObfuscatedName("fj.b")
+	public static final JagString EMPTY = JagString.wrap("");
 	@ObfuscatedName("q.s")
-	public JagString text = Statics.field1188;
+	public JagString text = EMPTY;
 
 	@ObfuscatedName("q.sb")
 	public boolean shadow = false;
 
 	@ObfuscatedName("q.sc")
-	public int field3487 = 0;
+	public int animCycle = 0;
 
 	@ObfuscatedName("q.t")
 	public int scrollWidth = 0;
@@ -198,7 +200,7 @@ public final class IfType {
 	public Object[] onload;
 
 	@ObfuscatedName("q.u")
-	public int field3385 = 0;
+	public int modelSpin = 0;
 
 	@ObfuscatedName("q.ub")
 	public int rotate = 0;
@@ -216,10 +218,10 @@ public final class IfType {
 	public int clientCode = 0;
 
 	@ObfuscatedName("q.D")
-	public byte field3394 = 0;
+	public byte heightAlignment = 0;
 
 	@ObfuscatedName("q.C")
-	public int field3393 = 0;
+	public int scrollPosX = 0;
 
 	@ObfuscatedName("q.F")
 	public int lineHeight = 0;
@@ -228,7 +230,7 @@ public final class IfType {
 	public boolean orthog = false;
 
 	@ObfuscatedName("q.I")
-	public int field3399 = -1;
+	public int invobject = -1;
 
 	@ObfuscatedName("q.A")
 	public int x = 0;
@@ -237,19 +239,19 @@ public final class IfType {
 	public int colour = 0;
 
 	@ObfuscatedName("q.Db")
-	public JagString text2 = Statics.field1188;
+	public JagString text2 = EMPTY;
 
 	@ObfuscatedName("q.yb")
-	public int field3441 = 0;
+	public int renderY = 0;
 
 	@ObfuscatedName("q.O")
 	public int modelYOf = 0;
 
 	@ObfuscatedName("q.Y")
-	public int field3415 = 0;
+	public int scrollPosY = 0;
 
 	@ObfuscatedName("q.Qb")
-	public JagString targetBase = Statics.field1188;
+	public JagString targetBase = EMPTY;
 
 	@ObfuscatedName("q.Gb")
 	public boolean hashook = false;
@@ -267,10 +269,10 @@ public final class IfType {
 	public int modelXAn = 0;
 
 	@ObfuscatedName("q.Ib")
-	public byte field3451 = 0;
+	public byte yAlignment = 0;
 
 	@ObfuscatedName("q.Zb")
-	public int field3468 = 0;
+	public int modelBaseWidth = 0;
 
 	@ObfuscatedName("q.N")
 	public int modelAnim = -1;
@@ -279,7 +281,7 @@ public final class IfType {
 	public JagString buttonText = Text.OK;
 
 	@ObfuscatedName("q.P")
-	public int field3406 = -1;
+	public int subId = -1;
 
 	@ObfuscatedName("q.gc")
 	public int dragdeadtime = 0;
@@ -288,28 +290,28 @@ public final class IfType {
 	public int font = -1;
 
 	@ObfuscatedName("q.xc")
-	public boolean field3492 = false;
+	public boolean lineDirection = false;
 
 	@ObfuscatedName("q.Yb")
-	public boolean field3467 = false;
+	public boolean mouseTrigger = false;
 
 	@ObfuscatedName("q.zb")
 	public int model2Id = -1;
 
 	@ObfuscatedName("q.Ob")
-	public JagString baseOpName = Statics.field1188;
+	public JagString baseOpName = EMPTY;
 
 	@ObfuscatedName("q.Cc")
 	public int lineWidth = 1;
 
 	@ObfuscatedName("q.Q")
-	public int field3407 = 0;
+	public int invTransmitNum = 0;
 
 	@ObfuscatedName("q.Bc")
 	public boolean fill = false;
 
 	@ObfuscatedName("q.Ub")
-	public byte field3463 = 0;
+	public byte widthAlignment = 0;
 
 	@ObfuscatedName("q.Tb")
 	public int transmitNum = -1;
@@ -318,13 +320,13 @@ public final class IfType {
 	public boolean v3 = false;
 
 	@ObfuscatedName("q.Vb")
-	public boolean field3464 = true;
+	public boolean showCount = true;
 
 	@ObfuscatedName("q.Hc")
 	public IfType draggable = null;
 
 	@ObfuscatedName("q.Rc")
-	public JagString targetVerb = Statics.field1188;
+	public JagString targetVerb = EMPTY;
 
 	@ObfuscatedName("q.Oc")
 	public int modelYAn = 0;
@@ -336,7 +338,7 @@ public final class IfType {
 	public int field3498 = 0;
 
 	@ObfuscatedName("q.Ec")
-	public int field3499 = 0;
+	public int statTransmitNum = 0;
 
 	@ObfuscatedName("q.Nc")
 	public int marginY = 0;
@@ -360,7 +362,7 @@ public final class IfType {
 	public int type;
 
 	@ObfuscatedName("q.yc")
-	public byte[] field3493;
+	public byte[] hotkeys;
 
 	@ObfuscatedName("q.x")
 	public int[] linkObjType;
@@ -375,7 +377,7 @@ public final class IfType {
 	public int[] onstattransmitlist;
 
 	@ObfuscatedName("q.L")
-	public int[] field3402;
+	public int[] graphicMaskLineOffsets;
 
 	@ObfuscatedName("q.Hb")
 	public int[] onvartransmitlist;
@@ -405,7 +407,7 @@ public final class IfType {
 	public Object[] oninvtransmit;
 
 	@ObfuscatedName("q.Bb")
-	public Object[] field3444;
+	public Object[] onmisctransmit;
 
 	@ObfuscatedName("q.Eb")
 	public Object[] ontargetenter;
@@ -426,7 +428,7 @@ public final class IfType {
 	public Object[] ontimer;
 
 	@ObfuscatedName("q.Ac")
-	public Object[] field3495;
+	public Object[] onsubchange;
 
 	@ObfuscatedName("q.Ic")
 	public Object[] onhold;
@@ -438,7 +440,7 @@ public final class IfType {
 	public Object[] onmouserepeat;
 
 	@ObfuscatedName("q.Xc")
-	public Object[] field3518;
+	public Object[] onchattransmit;
 
 	@ObfuscatedName("q.B")
 	public int[][] scripts;
@@ -500,7 +502,7 @@ public final class IfType {
 	}
 
 	@ObfuscatedName("da.c(IB)V")
-	public static void method233(int arg0) {
+	public static void unloadInterface(int arg0) {
 		if (arg0 == -1 || !open[arg0]) {
 			return;
 		}
@@ -579,7 +581,7 @@ public final class IfType {
 			}
 			return var7;
 		} else if (var5 == 2) {
-			ModelLit var9 = NpcType.list(var6).method864(arg2, arg0);
+			ModelLit var9 = NpcType.list(var6).getHeadModelLit(arg2, arg0);
 			if (var9 == null) {
 				loadingAsset = true;
 				return null;
@@ -607,7 +609,7 @@ public final class IfType {
 				return var12;
 			}
 		} else if (var5 == 6) {
-			ModelLit var13 = NpcType.list(var6).method865(null, 0, arg2, arg0);
+			ModelLit var13 = NpcType.list(var6).getTempModel(null, 0, arg2, arg0);
 			if (var13 == null) {
 				loadingAsset = true;
 				return null;
@@ -620,8 +622,8 @@ public final class IfType {
 	}
 
 	@ObfuscatedName("q.a(I)Z")
-	public boolean method1246() {
-		if (this.field3402 != null) {
+	public boolean calculateGraphicMask() {
+		if (this.graphicMaskLineOffsets != null) {
 			return true;
 		}
 		SoftwarePix8 var1 = PixLoader.method1553(Statics.field1176, this.graphic);
@@ -629,8 +631,8 @@ public final class IfType {
 			return false;
 		}
 		var1.trim();
-		this.field3402 = new int[var1.hi];
-		this.field3421 = new int[var1.hi];
+		this.graphicMaskLineOffsets = new int[var1.hi];
+		this.graphicMaskLineLengths = new int[var1.hi];
 		for (int var2 = 0; var2 < var1.hi; var2++) {
 			int var3 = 0;
 			int var4 = var1.wi;
@@ -646,8 +648,8 @@ public final class IfType {
 					break;
 				}
 			}
-			this.field3402[var2] = var3;
-			this.field3421[var2] = var4 - var3;
+			this.graphicMaskLineOffsets[var2] = var3;
+			this.graphicMaskLineLengths[var2] = var4 - var3;
 		}
 		return true;
 	}
@@ -729,10 +731,10 @@ public final class IfType {
 		this.y = arg0.g2b();
 		this.width = arg0.g2();
 		this.height = arg0.g2();
-		this.field3463 = arg0.g1b();
-		this.field3394 = arg0.g1b();
-		this.field3367 = arg0.g1b();
-		this.field3451 = arg0.g1b();
+		this.widthAlignment = arg0.g1b();
+		this.heightAlignment = arg0.g1b();
+		this.xAlignment = arg0.g1b();
+		this.yAlignment = arg0.g1b();
 		this.layerId = arg0.g2();
 		if (this.layerId == 65535) {
 			this.layerId = -1;
@@ -743,7 +745,7 @@ public final class IfType {
 		if (this.type == 0) {
 			this.scrollWidth = arg0.g2();
 			this.scrollHeight = arg0.g2();
-			this.field3470 = arg0.g1() == 1;
+			this.noClickThrough = arg0.g1() == 1;
 		}
 		if (this.type == 5) {
 			this.graphic = arg0.g4();
@@ -775,11 +777,11 @@ public final class IfType {
 			}
 			this.orthog = arg0.g1() == 1;
 			arg0.g2();
-			if (this.field3463 != 0) {
-				this.field3468 = arg0.g2();
+			if (this.widthAlignment != 0) {
+				this.modelBaseWidth = arg0.g2();
 			}
-			if (this.field3394 != 0) {
-				this.field3417 = arg0.g2();
+			if (this.heightAlignment != 0) {
+				this.modelBaseHeight = arg0.g2();
 			}
 		}
 		if (this.type == 4) {
@@ -802,14 +804,14 @@ public final class IfType {
 		if (this.type == 9) {
 			this.lineWidth = arg0.g1();
 			this.colour = arg0.g4();
-			this.field3492 = arg0.g1() == 1;
+			this.lineDirection = arg0.g1() == 1;
 		}
 		this.eventCode = arg0.g3();
 		int var3 = arg0.g1();
 		if (var3 > 0) {
-			this.field3493 = new byte[var3];
+			this.hotkeys = new byte[var3];
 			for (int var4 = 0; var4 < var3; var4++) {
-				this.field3493[var4] = arg0.g1b();
+				this.hotkeys[var4] = arg0.g1b();
 			}
 		}
 		this.baseOpName = arg0.gjstr();
@@ -874,7 +876,7 @@ public final class IfType {
 		if (var3 == null) {
 			loadingAsset = true;
 		} else {
-			var3.method149(arg0, null);
+			var3.setIcons(arg0, null);
 			fontCache.put((long) this.font, var3);
 		}
 		return var3;
@@ -923,10 +925,10 @@ public final class IfType {
 		this.y = arg0.g2b();
 		this.width = arg0.g2();
 		this.height = arg0.g2();
-		this.field3394 = 0;
-		this.field3463 = 0;
-		this.field3367 = 0;
-		this.field3451 = 0;
+		this.heightAlignment = 0;
+		this.widthAlignment = 0;
+		this.xAlignment = 0;
+		this.yAlignment = 0;
 		this.trans = arg0.g1();
 		this.layerId = arg0.g2();
 		if (this.layerId == 65535) {
@@ -972,8 +974,8 @@ public final class IfType {
 		if (this.type == 2) {
 			this.linkObjType = new int[this.width * this.height];
 			this.linkObjNumber = new int[this.height * this.width];
-			this.field3394 = 3;
-			this.field3463 = 3;
+			this.heightAlignment = 3;
+			this.widthAlignment = 3;
 			int var8 = arg0.g1();
 			if (var8 == 1) {
 				this.eventCode |= 0x10000000;
@@ -1067,9 +1069,9 @@ public final class IfType {
 			this.modelYAn = arg0.g2();
 		}
 		if (this.type == 7) {
-			this.field3394 = 3;
+			this.heightAlignment = 3;
 			this.linkObjType = new int[this.width * this.height];
-			this.field3463 = 3;
+			this.widthAlignment = 3;
 			this.linkObjNumber = new int[this.width * this.height];
 			this.hAlign = arg0.g1();
 			this.font = arg0.g2();

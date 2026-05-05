@@ -47,4 +47,9 @@ public class ServerActive {
 	public static boolean isObjSwapEnabled(int arg0) {
 		return (arg0 >> 28 & 0x1) != 0;
 	}
+
+	@ObfuscatedName("hj.a(II)I")
+	public static int targetMask(int arg0) {
+		return arg0 >> 11 & 0x3F;
+	}
 }

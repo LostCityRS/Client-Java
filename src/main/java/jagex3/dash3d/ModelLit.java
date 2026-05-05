@@ -5,6 +5,12 @@ import deob.ObfuscatedName;
 @ObfuscatedName("cg")
 public abstract class ModelLit extends ModelSource {
 
+	@ObfuscatedName("eh.E")
+	public static boolean mouseCheck = false;
+	@ObfuscatedName("qj.U")
+	public static int mouseY = 0;
+	@ObfuscatedName("mj.l")
+	public static int mouseX = 0;
 	@ObfuscatedName("cg.n")
 	public boolean useAABBMouseCheck = false;
 

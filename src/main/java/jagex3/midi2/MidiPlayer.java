@@ -129,7 +129,7 @@ public final class MidiPlayer extends PcmStream {
 			int var7 = (int) var6.key;
 			Patch var8 = (Patch) this.patches.find((long) var7);
 			if (var8 == null) {
-				var8 = StructType.method1266(arg2, var7);
+				var8 = StructType.loadPatch(arg2, var7);
 				if (var8 == null) {
 					var4 = false;
 					continue;

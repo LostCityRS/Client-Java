@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.constants.Text;
 import jagex3.dash3d.ModelLit;
 import jagex3.dash3d.ModelSourceCache;
@@ -21,7 +20,7 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("jh.c")
 	public static final ModelSourceCache modelCache = new ModelSourceCache(50);
 	@ObfuscatedName("mj.h")
-	public static final ModelSourceCache field2606 = new ModelSourceCache(5);
+	public static final ModelSourceCache headModelCache = new ModelSourceCache(5);
 	@ObfuscatedName("tb.m")
 	public static Js5 configClient;
 	@ObfuscatedName("pg.L")
@@ -29,7 +28,7 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("af.S")
 	public static short[] clientpalette = new short[256];
 	@ObfuscatedName("lf.ab")
-	public byte[] field2335;
+	public byte[] recol_d_palette;
 
 	@ObfuscatedName("lf.cb")
 	public int walkanim_l = -1;
@@ -40,8 +39,10 @@ public final class NpcType extends Linkable2 {
 	@ObfuscatedName("lf.fb")
 	public int resizeh = 128;
 
+	@ObfuscatedName("ab.i")
+	public static final JagString NULL = JagString.wrap("null");
 	@ObfuscatedName("lf.gb")
-	public JagString name = Statics.field34;
+	public JagString name = NULL;
 
 	@ObfuscatedName("lf.hb")
 	public final JagString[] op = new JagString[5];
@@ -116,7 +117,7 @@ public final class NpcType extends Linkable2 {
 	public int multivarp = -1;
 
 	@ObfuscatedName("lf.E")
-	public int field2314;
+	public int id;
 
 	@ObfuscatedName("lf.R")
 	public int[] multinpc;
@@ -139,9 +140,9 @@ public final class NpcType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = configClient.getFile(method387(arg0), method702(arg0));
+		byte[] var2 = configClient.getFile(getGroupId(arg0), getFileId(arg0));
 		NpcType var3 = new NpcType();
-		var3.field2314 = arg0;
+		var3.id = arg0;
 		if (var2 != null) {
 			var3.decode(new Packet(var2));
 		}
@@ -154,7 +155,7 @@ public final class NpcType extends Linkable2 {
 	public static void resetCache() {
 		recentUse.clear();
 		modelCache.clear();
-		field2606.clear();
+		headModelCache.clear();
 	}
 
 	@ObfuscatedName("eb.a(ILnb;Lnb;)V")
@@ -164,22 +165,22 @@ public final class NpcType extends Linkable2 {
 	}
 
 	@ObfuscatedName("je.b(I)V")
-	public static void method711() {
+	public static void resetModelCache() {
 		modelCache.clear();
 	}
 
     @ObfuscatedName("ob.b(B)V")
-    public static void method1050() {
-        field2606.clear();
+    public static void resetHeadModelCache() {
+        headModelCache.clear();
     }
 
 	@ObfuscatedName("jc.b(II)I")
-	public static int method702(int arg0) {
+	public static int getFileId(int arg0) {
 		return arg0 >>> 7;
 	}
 
 	@ObfuscatedName("eg.a(IB)I")
-	public static int method387(int arg0) {
+	public static int getGroupId(int arg0) {
 		return arg0 & 0x7F;
 	}
 
@@ -214,7 +215,7 @@ public final class NpcType extends Linkable2 {
 	}
 
 	@ObfuscatedName("lf.a(III)I")
-	public int method854(int arg0, int arg1) {
+	public int getParamInt(int arg0, int arg1) {
 		if (this.params == null) {
 			return arg0;
 		} else {
@@ -271,9 +272,9 @@ public final class NpcType extends Linkable2 {
 			}
 		} else if (arg0 == 42) {
 			int var5 = arg1.g1();
-			this.field2335 = new byte[var5];
+			this.recol_d_palette = new byte[var5];
 			for (int var6 = 0; var6 < var5; var6++) {
-				this.field2335[var6] = arg1.g1b();
+				this.recol_d_palette[var6] = arg1.g1b();
 			}
 		} else if (arg0 == 60) {
 			int var16 = arg1.g1();
@@ -328,35 +329,38 @@ public final class NpcType extends Linkable2 {
 			this.active = false;
 		} else if (arg0 == 109) {
 			this.walksmoothing = false;
-		} else if (arg0 != 111) {
-			if (arg0 == 113) {
-				arg1.g2();
-				arg1.g2();
-			} else if (arg0 == 114) {
-				arg1.g1b();
-				arg1.g1b();
-			} else if (arg0 == 115) {
-				this.field2350 = (short) (arg1.g1() * 4);
-				this.field2329 = (short) (arg1.g1() * 4);
-			} else if (arg0 == 119) {
-				arg1.g1b();
-			} else if (arg0 == 249) {
-				int var7 = arg1.g1();
-				if (this.params == null) {
-					int var8 = IntUtil.bitceil(var7);
-					this.params = new HashTable(var8);
+		} else if (arg0 == 111) {
+			// spotshadow
+		} else if (arg0 == 113) {
+			// spotshadowcolour
+			arg1.g2();
+			arg1.g2();
+		} else if (arg0 == 114) {
+			// spotshadowtrans
+			arg1.g1b();
+			arg1.g1b();
+		} else if (arg0 == 115) {
+			this.field2350 = (short) (arg1.g1() * 4);
+			this.field2329 = (short) (arg1.g1() * 4);
+		} else if (arg0 == 119) {
+			// walkflags
+			arg1.g1b();
+		} else if (arg0 == 249) {
+			int var7 = arg1.g1();
+			if (this.params == null) {
+				int var8 = IntUtil.bitceil(var7);
+				this.params = new HashTable(var8);
+			}
+			for (int var9 = 0; var9 < var7; var9++) {
+				boolean var10 = arg1.g1() == 1;
+				int var11 = arg1.g3();
+				Linkable var12;
+				if (var10) {
+					var12 = new StringNode(arg1.gjstr());
+				} else {
+					var12 = new IntNode(arg1.g4());
 				}
-				for (int var9 = 0; var9 < var7; var9++) {
-					boolean var10 = arg1.g1() == 1;
-					int var11 = arg1.g3();
-					Linkable var12;
-					if (var10) {
-						var12 = new StringNode(arg1.gjstr());
-					} else {
-						var12 = new IntNode(arg1.g4());
-					}
-					this.params.put((long) var11, var12);
-				}
+				this.params.put((long) var11, var12);
 			}
 		}
 	}
@@ -366,7 +370,7 @@ public final class NpcType extends Linkable2 {
 	}
 
 	@ObfuscatedName("lf.a(IILi;)Li;")
-	public JagString method860(int arg0, JagString arg1) {
+	public JagString getParamString(int arg0, JagString arg1) {
 		if (this.params == null) {
 			return arg1;
 		} else {
@@ -392,14 +396,14 @@ public final class NpcType extends Linkable2 {
 	}
 
 	@ObfuscatedName("lf.a(IILk;)Lcg;")
-	public ModelLit method864(int arg0, SeqType arg1) {
+	public ModelLit getHeadModelLit(int arg0, SeqType arg1) {
 		if (this.multinpc != null) {
 			NpcType var3 = this.getMultiNpc();
-			return var3 == null ? null : var3.method864(arg0, arg1);
+			return var3 == null ? null : var3.getHeadModelLit(arg0, arg1);
 		} else if (this.head == null) {
 			return null;
 		} else {
-			ModelLit var4 = (ModelLit) field2606.find((long) this.field2314);
+			ModelLit var4 = (ModelLit) headModelCache.find((long) this.id);
 			if (var4 == null) {
 				boolean var5 = false;
 				for (int var6 = 0; var6 < this.head.length; var6++) {
@@ -422,10 +426,10 @@ public final class NpcType extends Linkable2 {
 				}
 				if (this.recol_s != null) {
 					for (int var10 = 0; var10 < this.recol_s.length; var10++) {
-						if (this.field2335 == null || this.field2335.length <= var10) {
+						if (this.recol_d_palette == null || this.recol_d_palette.length <= var10) {
 							var9.recolour(this.recol_s[var10], this.recol_d[var10]);
 						} else {
-							var9.recolour(this.recol_s[var10], clientpalette[this.field2335[var10] & 0xFF]);
+							var9.recolour(this.recol_s[var10], clientpalette[this.recol_d_palette[var10] & 0xFF]);
 						}
 					}
 				}
@@ -435,7 +439,7 @@ public final class NpcType extends Linkable2 {
 					}
 				}
 				var4 = var9.light(64, 768, -50, -10, -50);
-				field2606.put((long) this.field2314, var4);
+				headModelCache.put((long) this.id, var4);
 			}
 			if (arg1 != null) {
 				var4 = arg1.animateModelWithExtra(arg0, var4);
@@ -445,12 +449,12 @@ public final class NpcType extends Linkable2 {
 	}
 
 	@ObfuscatedName("lf.a(ILk;IILk;)Lcg;")
-	public ModelLit method865(SeqType arg0, int arg1, int arg2, SeqType arg3) {
+	public ModelLit getTempModel(SeqType arg0, int arg1, int arg2, SeqType arg3) {
 		if (this.multinpc != null) {
 			NpcType var5 = this.getMultiNpc();
-			return var5 == null ? null : var5.method865(arg0, arg1, arg2, arg3);
+			return var5 == null ? null : var5.getTempModel(arg0, arg1, arg2, arg3);
 		}
-		ModelLit var6 = (ModelLit) modelCache.find((long) this.field2314);
+		ModelLit var6 = (ModelLit) modelCache.find((long) this.id);
 		if (var6 == null) {
 			boolean var7 = false;
 			for (int var8 = 0; var8 < this.model.length; var8++) {
@@ -473,10 +477,10 @@ public final class NpcType extends Linkable2 {
 			}
 			if (this.recol_s != null) {
 				for (int var12 = 0; var12 < this.recol_s.length; var12++) {
-					if (this.field2335 == null || var12 >= this.field2335.length) {
+					if (this.recol_d_palette == null || var12 >= this.recol_d_palette.length) {
 						var11.recolour(this.recol_s[var12], this.recol_d[var12]);
 					} else {
-						var11.recolour(this.recol_s[var12], clientpalette[this.field2335[var12] & 0xFF]);
+						var11.recolour(this.recol_s[var12], clientpalette[this.recol_d_palette[var12] & 0xFF]);
 					}
 				}
 			}
@@ -486,7 +490,7 @@ public final class NpcType extends Linkable2 {
 				}
 			}
 			var6 = var11.light(this.ambient + 64, 850 - -this.contrast, -30, -50, -30);
-			modelCache.put((long) this.field2314, var6);
+			modelCache.put((long) this.id, var6);
 		}
 		ModelLit var14;
 		if (arg3 != null && arg0 != null) {

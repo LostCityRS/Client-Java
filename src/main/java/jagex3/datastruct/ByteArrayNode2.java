@@ -8,6 +8,8 @@ import java.util.Random;
 @ObfuscatedName("rd")
 public final class ByteArrayNode2 extends Linkable2 {
 
+	@ObfuscatedName("ca.g")
+	public static final LruCache field388 = new LruCache(16);
 	@ObfuscatedName("rd.D")
 	public final byte[] field3658;
 
@@ -17,7 +19,7 @@ public final class ByteArrayNode2 extends Linkable2 {
 
     @ObfuscatedName("og.b(II)[B")
     public static byte[] method1072(int arg0) {
-        ByteArrayNode2 var1 = (ByteArrayNode2) Statics.field388.find((long) arg0);
+        ByteArrayNode2 var1 = (ByteArrayNode2) field388.find((long) arg0);
         if (var1 == null) {
             byte[] var2 = new byte[512];
             Random var3 = new Random((long) arg0);
@@ -32,7 +34,7 @@ public final class ByteArrayNode2 extends Linkable2 {
                 var2[var6] = var2[511 - var5] = var8;
             }
             var1 = new ByteArrayNode2(var2);
-            Statics.field388.put((long) arg0, var1);
+            field388.put((long) arg0, var1);
         }
         return var1.field3658;
     }

@@ -3,8 +3,6 @@ package jagex3.client;
 import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.callstack.JagException;
-import jagex3.config.IfType;
-import jagex3.config.ServerActive;
 import jagex3.graphics.PixMap;
 import jagex3.io.BufferedRandomAccessFile;
 import jagex3.io.Packet;
@@ -30,6 +28,24 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public static final long[] drawTime = new long[32];
 	@ObfuscatedName("ec.O")
 	public static final long[] updateTime = new long[32];
+	@ObfuscatedName("ed.j")
+	public static final JagString field920 = JagString.wrap("; Expires=Thu)1 01)2Jan)21970 00:00:00 GMT; Max)2Age=0");
+	@ObfuscatedName("k.bb")
+	public static final JagString field1982 = JagString.wrap("; Expires=");
+	@ObfuscatedName("ui.S")
+	public static final JagString field4265 = JagString.wrap("cookieprefix");
+	@ObfuscatedName("wh.J")
+	public static final JagString field4516 = JagString.wrap("cookiehost");
+	@ObfuscatedName("db.T")
+	public static final JagString field651 = JagString.wrap("settings=");
+	@ObfuscatedName("ei.d")
+	public static final JagString field1005 = JagString.wrap("; version=1; path=)4; domain=");
+	@ObfuscatedName("d.eb")
+	public static final JagString field591 = JagString.wrap("(R");
+	@ObfuscatedName("ih.i")
+	public static final JagString field1767 = JagString.wrap("; Max)2Age=");
+	@ObfuscatedName("pe.C")
+	public static final JagString field3237 = JagString.wrap("document)3cookie=(R");
 
 	@ObfuscatedName("hj.r")
 	public static int redrawNum = 500;
@@ -94,29 +110,9 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("hj.O")
 	public static int field1598;
 
-	@ObfuscatedName("hj.a(ILq;)Lq;")
-	public static IfType method583(IfType arg0) {
-		int var1 = ServerActive.serverDraggable(Client.getActive(arg0));
-		if (var1 == 0) {
-			return null;
-		}
-		for (int var2 = 0; var2 < var1; var2++) {
-			arg0 = IfType.get(arg0.layerId);
-			if (arg0 == null) {
-				return null;
-			}
-		}
-		return arg0;
-	}
-
 	public static void providesignlink(SignLink arg0) {
 		signlink = arg0;
 		JagException.signlink = arg0;
-	}
-
-	@ObfuscatedName("hj.a(II)I")
-	public static int method592(int arg0) {
-		return arg0 >> 11 & 0x3F;
 	}
 
 	@ObfuscatedName("mc.a(I)V")
@@ -257,16 +253,16 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			return;
 		}
 		try {
-			JagString var1 = Statics.field4265.method608(signlink.field3597);
-			JagString var2 = Statics.field4516.method608(signlink.field3597);
-			JagString var3 = JagString.join(new JagString[] { var1, Statics.field651, arg0, Statics.field1005, var2 });
+			JagString var1 = field4265.method608(signlink.field3597);
+			JagString var2 = field4516.method608(signlink.field3597);
+			JagString var3 = JagString.join(new JagString[] { var1, field651, arg0, field1005, var2 });
 			JagString var4;
 			if (arg0.method604() == 0) {
-				var4 = JagString.join(new JagString[] { var3, Statics.field920});
+				var4 = JagString.join(new JagString[] { var3, field920});
 			} else {
-				var4 = JagString.join(new JagString[] { var3, Statics.field1982, Statics.method1139(MonotonicTime.currentTime() + 94608000000L), Statics.field1767, JagString.method1556(94608000L) });
+				var4 = JagString.join(new JagString[] { var3, field1982, Statics.method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.method1556(94608000L) });
 			}
-			JagString.join(new JagString[] {Statics.field3237, var4, Statics.field591}).method636(signlink.field3597);
+			JagString.join(new JagString[] {field3237, var4, field591}).method636(signlink.field3597);
 		} catch (Throwable var5) {
 		}
 	}

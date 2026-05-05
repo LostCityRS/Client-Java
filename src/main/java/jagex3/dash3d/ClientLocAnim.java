@@ -58,7 +58,7 @@ public final class ClientLocAnim extends ModelSource {
 					return;
 				}
 			}
-			if (arg7 && this.anim.field1972 != -1) {
+			if (arg7 && this.anim.loops != -1) {
 				this.animFrame = (int) ((double) this.anim.frames.length * Math.random());
 				this.animCycle -= (int) (Math.random() * (double) this.anim.delay[this.animFrame]);
 				return;
@@ -108,9 +108,9 @@ public final class ClientLocAnim extends ModelSource {
 		}
 		ModelCacheLit var14;
 		if (this.anim == null) {
-			var14 = var2.method997(this.shape, var12, var9, var11, false, var13, this.angle, var10);
+			var14 = var2.getModel(this.shape, var12, var9, var11, false, var13, this.angle, var10);
 		} else {
-			var14 = var2.method1004(var10, var11, this.shape, var13, this.animFrame, this.anim, var9, var12, this.angle);
+			var14 = var2.getTempModel(var10, var11, this.shape, var13, this.animFrame, this.anim, var9, var12, this.angle);
 		}
 		return var14 == null ? null : var14.field3984;
 	}
@@ -132,8 +132,8 @@ public final class ClientLocAnim extends ModelSource {
 			return;
 		}
 		int var3 = Client.loopCycle - this.animCycle;
-		if (var3 > 100 && this.anim.field1972 > 0) {
-			int var4 = this.anim.frames.length - this.anim.field1972;
+		if (var3 > 100 && this.anim.loops > 0) {
+			int var4 = this.anim.frames.length - this.anim.loops;
 			while (this.animFrame < var4 && var3 > this.anim.delay[this.animFrame]) {
 				var3 -= this.anim.delay[this.animFrame];
 				this.animFrame++;
@@ -152,11 +152,11 @@ public final class ClientLocAnim extends ModelSource {
 					if (var3 <= this.anim.delay[this.animFrame]) {
 						break label56;
 					}
-					Client.method433(false, arg1, this.animFrame, arg0, this.anim);
+					Client.triggerSeqSound(false, arg1, this.animFrame, arg0, this.anim);
 					var3 -= this.anim.delay[this.animFrame];
 					this.animFrame++;
 				} while (this.anim.frames.length > this.animFrame);
-				this.animFrame -= this.anim.field1972;
+				this.animFrame -= this.anim.loops;
 			} while (this.animFrame >= 0 && this.anim.frames.length > this.animFrame);
 			this.anim = null;
 		}

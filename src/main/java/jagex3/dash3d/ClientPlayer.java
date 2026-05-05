@@ -12,6 +12,8 @@ import jagex3.jstring.JagString;
 @ObfuscatedName("dj")
 public final class ClientPlayer extends ClientEntity {
 
+	@ObfuscatedName("jj.x")
+	public static final ModelSourceCache field1956 = new ModelSourceCache(4);
 	@ObfuscatedName("dj.bc")
 	public short field761 = 0;
 
@@ -75,14 +77,14 @@ public final class ClientPlayer extends ClientEntity {
 	@ObfuscatedName("md.a(Lcg;IIIIII)Lcg;")
 	public static ModelLit method897(ModelLit arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
 		long var6 = (long) arg3;
-		ModelLit var8 = (ModelLit) Statics.field1956.find(var6);
+		ModelLit var8 = (ModelLit) field1956.find(var6);
 		if (var8 == null) {
 			ModelUnlit var9 = ModelUnlit.load(Client.models, arg3);
 			if (var9 == null) {
 				return null;
 			}
 			var8 = var9.light(64, 768, -50, -10, -50);
-			Statics.field1956.put(var6, var8);
+			field1956.put(var6, var8);
 		}
 		int var10 = arg0.method194();
 		int var11 = arg0.method196();
@@ -198,7 +200,7 @@ public final class ClientPlayer extends ClientEntity {
 			var56 = var57.getTempModel2(super.spotanimFrame);
 			if (var56 != null) {
 				var56.translate(0, -super.spotanimHeight, 0);
-				if (var57.field527) {
+				if (var57.hillskew) {
 					if (var24 != 0) {
 						var56.rotateXAxis(var24);
 					}
@@ -219,11 +221,11 @@ public final class ClientPlayer extends ClientEntity {
 			if (this.locStartCycle <= Client.loopCycle && this.locEndCycle > Client.loopCycle) {
 				var58 = this.locModel;
 				var58.translate(this.locOffsetX - super.x, this.locOffsetY + -super.y, this.locOffsetZ - super.z);
-				if (super.yaw == 512) {
+				if (super.dstYaw == 512) {
 					var58.rotate270();
-				} else if (super.yaw == 1024) {
+				} else if (super.dstYaw == 1024) {
 					var58.rotate180();
-				} else if (super.yaw == 1536) {
+				} else if (super.dstYaw == 1536) {
 					var58.rotate90();
 				}
 			}
@@ -239,11 +241,11 @@ public final class ClientPlayer extends ClientEntity {
 		if (var58 == null) {
 			return;
 		}
-		if (super.yaw == 512) {
+		if (super.dstYaw == 512) {
 			var58.rotate90();
-		} else if (super.yaw == 1024) {
+		} else if (super.dstYaw == 1024) {
 			var58.rotate180();
-		} else if (super.yaw == 1536) {
+		} else if (super.dstYaw == 1536) {
 			var58.rotate270();
 		}
 		var58.translate(super.x - this.locOffsetX, -this.locOffsetY + super.y, super.z - this.locOffsetZ);

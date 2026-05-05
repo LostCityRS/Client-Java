@@ -100,14 +100,14 @@ public final class Pix3D {
 
 	@ObfuscatedName("pj.a(IIIIIIIIIIIIIIIIIII)V")
 	public static void textureTriangleAffine(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = textureManager.method435(brightness, arg18);
+		int[] var19 = textureManager.getTexels(brightness, arg18);
 		if (var19 == null) {
-			int var20 = textureManager.method438(arg18);
+			int var20 = textureManager.getAverageRgb(arg18);
 			gouraudTriangle(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
 		opaque = textureManager.method437(arg18);
-		lowMem = textureManager.method434(arg18);
+		lowMem = textureManager.isLowMem(arg18);
 		int var21 = arg4 - arg3;
 		int var22 = arg1 - arg0;
 		int var23 = arg5 - arg3;
@@ -2102,15 +2102,15 @@ public final class Pix3D {
 
 	@ObfuscatedName("pj.b(IIIIIIIIIIIIIIIIIII)V")
 	public static void textureTriangle(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11, int arg12, int arg13, int arg14, int arg15, int arg16, int arg17, int arg18) {
-		int[] var19 = textureManager.method435(brightness, arg18);
+		int[] var19 = textureManager.getTexels(brightness, arg18);
 		if (var19 == null || trans > 10) {
-			int var20 = textureManager.method438(arg18);
+			int var20 = textureManager.getAverageRgb(arg18);
 			textureFallback = true;
 			gouraudTriangle(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
 		opaque = textureManager.method437(arg18);
-		lowMem = textureManager.method434(arg18);
+		lowMem = textureManager.isLowMem(arg18);
 		int var21 = arg4 - arg3;
 		int var22 = arg1 - arg0;
 		int var23 = arg5 - arg3;

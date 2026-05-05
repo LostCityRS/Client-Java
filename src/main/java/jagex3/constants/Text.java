@@ -14,6 +14,10 @@ public class Text {
 	public static final JagString field3663 = JagString.wrap("Continue");
 	@ObfuscatedName("si.R")
 	public static final JagString field3914 = JagString.wrap("Existing User");
+	@ObfuscatedName("oi.l")
+	public static final JagString field3110 = JagString.wrap("Service unavailable)3");
+	@ObfuscatedName("oi.n")
+	public static final JagString field3112 = field3110;
 	@ObfuscatedName("si.G")
 	public static JagString EXISTINGUSER = field3914;
 	@ObfuscatedName("rd.K")

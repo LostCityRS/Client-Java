@@ -1,7 +1,6 @@
 package jagex3.js5;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.datastruct.IntHashTable;
 import jagex3.io.BZip2;
@@ -20,6 +19,8 @@ public abstract class Js5 {
 	public static final boolean strictBounds = false;
 	@ObfuscatedName("og.R")
 	public static final int js5MaxSize = 0;
+	@ObfuscatedName("uj.o")
+	public static final JagString field4281 = JagString.wrap("");
 	@ObfuscatedName("nb.ab")
 	public int crc;
 
@@ -138,8 +139,8 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(Li;I)Z")
 	public final boolean requestDownload(JagString arg0) {
-		int var2 = this.getGroupId(Statics.field4281);
-		return var2 == -1 ? this.requestDownload(arg0, Statics.field4281) : this.requestDownload(Statics.field4281, arg0);
+		int var2 = this.getGroupId(field4281);
+		return var2 == -1 ? this.requestDownload(arg0, field4281) : this.requestDownload(field4281, arg0);
 	}
 
 	@ObfuscatedName("nb.a(ILi;Li;)Z")

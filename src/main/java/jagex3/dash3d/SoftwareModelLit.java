@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.util.ArrayUtil;
 
 @ObfuscatedName("le")
@@ -536,7 +535,7 @@ public final class SoftwareModelLit extends ModelLit {
 						tmpDepthFaces[var33][tmpDepthFaceCount[var33]++] = var8;
 					}
 				} else {
-					if (arg1 && this.isMouseRoughlyInsideTriangle(Statics.field2610 + Pix3D.originX, Statics.field3604 + Pix3D.originY, vertexScreenY[var9], vertexScreenY[var10], vertexScreenY[var11], var12, var13, var14)) {
+					if (arg1 && this.isMouseRoughlyInsideTriangle(ModelLit.mouseX + Pix3D.originX, ModelLit.mouseY + Pix3D.originY, vertexScreenY[var9], vertexScreenY[var10], vertexScreenY[var11], var12, var13, var14)) {
 						pickedEntityTypecode[pickedCount++] = arg2;
 						arg1 = false;
 					}
@@ -1587,7 +1586,7 @@ public final class SoftwareModelLit extends ModelLit {
 			var27 = Pix3D.cosTable[arg0];
 		}
 		boolean var28 = false;
-		if (arg8 > 0L && Statics.field997 && var14 > 0) {
+		if (arg8 > 0L && ModelLit.mouseCheck && var14 > 0) {
 			int var29;
 			int var30;
 			if (var15 > 0) {
@@ -1606,7 +1605,7 @@ public final class SoftwareModelLit extends ModelLit {
 				var31 = var20 / var14;
 				var32 = var19 / var13;
 			}
-			if (Statics.field2610 >= var29 && Statics.field2610 <= var30 && Statics.field3604 >= var31 && Statics.field3604 <= var32) {
+			if (ModelLit.mouseX >= var29 && ModelLit.mouseX <= var30 && ModelLit.mouseY >= var31 && ModelLit.mouseY <= var32) {
 				int var33 = 999999;
 				int var34 = -999999;
 				int var35 = 999999;
@@ -1647,7 +1646,7 @@ public final class SoftwareModelLit extends ModelLit {
 						}
 					}
 				}
-				if (Statics.field2610 >= var33 && Statics.field2610 <= var34 && Statics.field3604 >= var35 && Statics.field3604 <= var36) {
+				if (ModelLit.mouseX >= var33 && ModelLit.mouseX <= var34 && ModelLit.mouseY >= var35 && ModelLit.mouseY <= var36) {
 					if (super.useAABBMouseCheck) {
 						pickedEntityTypecode[pickedCount++] = arg8;
 					} else {

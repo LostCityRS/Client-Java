@@ -3,7 +3,6 @@ package jagex3.dash3d;
 import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.client.ClientBuild;
-import jagex3.config.QuickChatCatTypeList;
 import jagex3.datastruct.LinkList;
 
 public class World {
@@ -182,8 +181,8 @@ public class World {
 						Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.colourNW, arg0.colourSE);
 					}
 				} else if (lowMem) {
-					int var52 = Pix3D.textureManager.method438(arg0.texture);
-					Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, QuickChatCatTypeList.method791(var52, arg0.colourNE), QuickChatCatTypeList.method791(var52, arg0.colourNW), QuickChatCatTypeList.method791(var52, arg0.colourSE));
+					int var52 = Pix3D.textureManager.getAverageRgb(arg0.texture);
+					Pix3D.gouraudTriangle(var49, var51, var47, var48, var50, var46, adjustHslLightness(var52, arg0.colourNE), adjustHslLightness(var52, arg0.colourNW), adjustHslLightness(var52, arg0.colourSE));
 				} else if (arg0.flat) {
 					Pix3D.textureTriangleAffine(var49, var51, var47, var48, var50, var46, arg0.colourNE, arg0.colourNW, arg0.colourSE, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.texture);
 				} else {
@@ -210,8 +209,8 @@ public class World {
 				Pix3D.textureTriangleAffine(var45, var47, var51, var44, var46, var50, arg0.colourSW, arg0.colourSE, arg0.colourNW, var21, var27, var39, var24, var30, var42, var25, var31, var43, arg0.texture);
 				return;
 			}
-			int var53 = Pix3D.textureManager.method438(arg0.texture);
-			Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, QuickChatCatTypeList.method791(var53, arg0.colourSW), QuickChatCatTypeList.method791(var53, arg0.colourSE), QuickChatCatTypeList.method791(var53, arg0.colourNW));
+			int var53 = Pix3D.textureManager.getAverageRgb(arg0.texture);
+			Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, adjustHslLightness(var53, arg0.colourSW), adjustHslLightness(var53, arg0.colourSE), adjustHslLightness(var53, arg0.colourNW));
 		} else if (arg0.colourSW != 12345678) {
 			Pix3D.gouraudTriangle(var45, var47, var51, var44, var46, var50, arg0.colourSW, arg0.colourSE, arg0.colourNW);
 		}
@@ -2027,8 +2026,8 @@ public class World {
 							Pix3D.gouraudTriangle(var26, var27, var28, var23, var24, var25, arg0.faceColourA[var19], arg0.faceColourB[var19], arg0.faceColourC[var19]);
 						}
 					} else if (lowMem) {
-						int var29 = Pix3D.textureManager.method438(arg0.faceTexture[var19]);
-						Pix3D.gouraudTriangle(var26, var27, var28, var23, var24, var25, QuickChatCatTypeList.method791(var29, arg0.faceColourA[var19]), QuickChatCatTypeList.method791(var29, arg0.faceColourB[var19]), QuickChatCatTypeList.method791(var29, arg0.faceColourC[var19]));
+						int var29 = Pix3D.textureManager.getAverageRgb(arg0.faceTexture[var19]);
+						Pix3D.gouraudTriangle(var26, var27, var28, var23, var24, var25, adjustHslLightness(var29, arg0.faceColourA[var19]), adjustHslLightness(var29, arg0.faceColourB[var19]), adjustHslLightness(var29, arg0.faceColourC[var19]));
 					} else if (arg0.flat) {
 						Pix3D.textureTriangleAffine(var26, var27, var28, var23, var24, var25, arg0.faceColourA[var19], arg0.faceColourB[var19], arg0.faceColourC[var19], Ground.drawTextureVertexX[0], Ground.drawTextureVertexX[1], Ground.drawTextureVertexX[3], Ground.drawTextureVertexY[0], Ground.drawTextureVertexY[1], Ground.drawTextureVertexY[3], Ground.drawTextureVertexZ[0], Ground.drawTextureVertexZ[1], Ground.drawTextureVertexZ[3], arg0.faceTexture[var19]);
 					} else {
@@ -2071,4 +2070,15 @@ public class World {
             return var9 <= Pix3D.maxY || var13 <= Pix3D.maxY;
         }
     }
+
+	@ObfuscatedName("kh.b(II)I")
+	public static int adjustHslLightness(int arg0, int arg1) {
+		int var2 = arg1 * (arg0 & 0x7F) >> 7;
+		if (var2 < 2) {
+			var2 = 2;
+		} else if (var2 > 126) {
+			var2 = 126;
+		}
+		return (arg0 & 0xFF80) + var2;
+	}
 }

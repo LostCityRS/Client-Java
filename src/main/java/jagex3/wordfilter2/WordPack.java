@@ -1,11 +1,12 @@
 package jagex3.wordfilter2;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.io.Packet;
 import jagex3.jstring.JagString;
 
 public class WordPack {
+	@ObfuscatedName("nh.j")
+	public static final JagString field2918 = JagString.wrap("Cabbage");
 	@ObfuscatedName("kc.b")
 	public static Huffman huffman;
 
@@ -34,7 +35,7 @@ public class WordPack {
 			arg0.pos += huffman.decode(0, var1.chars, arg0.data, var1.length, arg0.pos);
 			return var1;
 		} catch (Exception var2) {
-			return Statics.field2918;
+			return field2918;
 		}
 	}
 
@@ -42,4 +43,5 @@ public class WordPack {
     public static JagString unpack2(Packet arg0) {
         return unpack(arg0);
     }
+
 }

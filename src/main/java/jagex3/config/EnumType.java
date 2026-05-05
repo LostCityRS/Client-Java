@@ -16,9 +16,9 @@ public final class EnumType extends Linkable2 {
 	public static Js5 configClient;
 
 	@ObfuscatedName("ie.o")
-	public static final JagString field1749 = JagString.wrap("null");
+	public static final JagString NULL = JagString.wrap("null");
 	@ObfuscatedName("eb.J")
-	public JagString defaultString = field1749;
+	public JagString defaultString = NULL;
 
 	@ObfuscatedName("eb.G")
 	public int inputtype;
@@ -30,7 +30,7 @@ public final class EnumType extends Linkable2 {
 	public int outputtype;
 
 	@ObfuscatedName("eb.E")
-	public HashTable field871;
+	public HashTable table;
 
 	@ObfuscatedName("pd.b(II)Leb;")
 	public static EnumType list(int arg0) {
@@ -38,7 +38,7 @@ public final class EnumType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = configClient.getFile(method1379(arg0), method1314(arg0));
+		byte[] var2 = configClient.getFile(getGroupId(arg0), getFileId(arg0));
 		EnumType var3 = new EnumType();
 		if (var2 != null) {
 			var3.decode(new Packet(var2));
@@ -53,12 +53,12 @@ public final class EnumType extends Linkable2 {
 	}
 
 	@ObfuscatedName("se.a(II)I")
-	public static int method1379(int arg0) {
+	public static int getGroupId(int arg0) {
 		return arg0 & 0xFF;
 	}
 
 	@ObfuscatedName("rc.a(BI)I")
-	public static int method1314(int arg0) {
+	public static int getFileId(int arg0) {
 		return arg0 >>> 8;
 	}
 
@@ -74,21 +74,21 @@ public final class EnumType extends Linkable2 {
 	}
 
 	@ObfuscatedName("eb.b(II)I")
-	public int method356(int arg0) {
-		if (this.field871 == null) {
+	public int getValueInt(int arg0) {
+		if (this.table == null) {
 			return this.defaultInt;
 		} else {
-			IntNode var2 = (IntNode) this.field871.find((long) arg0);
+			IntNode var2 = (IntNode) this.table.find((long) arg0);
 			return var2 == null ? this.defaultInt : var2.field3698;
 		}
 	}
 
 	@ObfuscatedName("eb.a(IB)Li;")
 	public JagString getValueString(int arg0) {
-		if (this.field871 == null) {
+		if (this.table == null) {
 			return this.defaultString;
 		} else {
-			StringNode var2 = (StringNode) this.field871.find((long) arg0);
+			StringNode var2 = (StringNode) this.table.find((long) arg0);
 			return var2 == null ? this.defaultString : var2.field4046;
 		}
 	}
@@ -105,7 +105,7 @@ public final class EnumType extends Linkable2 {
 			this.defaultInt = arg1.g4();
 		} else if (arg0 == 5 || arg0 == 6) {
 			int var3 = arg1.g2();
-			this.field871 = new HashTable(IntUtil.bitceil(var3));
+			this.table = new HashTable(IntUtil.bitceil(var3));
 			for (int var4 = 0; var4 < var3; var4++) {
 				int var5 = arg1.g4();
 				Linkable var6;
@@ -114,7 +114,7 @@ public final class EnumType extends Linkable2 {
 				} else {
 					var6 = new IntNode(arg1.g4());
 				}
-				this.field871.put((long) var5, var6);
+				this.table.put((long) var5, var6);
 			}
 		}
 	}

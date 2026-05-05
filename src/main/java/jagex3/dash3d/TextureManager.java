@@ -21,7 +21,7 @@ public final class TextureManager implements TextureProvider {
 	public final Js5 field1226;
 
 	@ObfuscatedName("ga.f")
-	public int field1227 = 50;
+	public int poolSize = 50;
 
 	@ObfuscatedName("ga.h")
 	public final short[] field1229;
@@ -33,7 +33,7 @@ public final class TextureManager implements TextureProvider {
 	public final byte[] field1233;
 
 	@ObfuscatedName("ga.n")
-	public final Js5 field1235;
+	public final Js5 sprites;
 
 	@ObfuscatedName("ga.p")
 	public final boolean[] field1237;
@@ -56,9 +56,9 @@ public final class TextureManager implements TextureProvider {
 	public TextureManager(Js5 arg0, Js5 arg1, Js5 arg2, int arg3, boolean arg4) {
 		this.field1248 = arg4;
 		this.field1226 = arg0;
-		this.field1235 = arg2;
-		this.field1227 = 20;
-		this.field1232 = new LruCache(this.field1227);
+		this.sprites = arg2;
+		this.poolSize = 20;
+		this.field1232 = new LruCache(this.poolSize);
 		Packet var6 = new Packet(arg1.getFile(0, 0));
 		int var7 = var6.g2();
 		this.field1222 = new byte[var7];
@@ -123,7 +123,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.a(II)Z")
 	@Override
-	public boolean method434(int arg0) {
+	public boolean isLowMem(int arg0) {
 		return this.field1252[arg0];
 	}
 
@@ -137,12 +137,12 @@ public final class TextureManager implements TextureProvider {
 	@Override
 	public boolean method439(int arg0) {
 		GlTexture var2 = this.method462(arg0);
-		return var2 == null ? false : var2.method1368(this, this.field1235);
+		return var2 == null ? false : var2.method1368(this, this.sprites);
 	}
 
 	@ObfuscatedName("ga.b(II)I")
 	@Override
-	public int method438(int arg0) {
+	public int getAverageRgb(int arg0) {
 		return this.field1229[arg0] & 0xFFFF;
 	}
 
@@ -176,13 +176,13 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.c(II)[I")
 	@Override
-	public int[] method440(int arg0) {
+	public int[] getTexels(int arg0) {
 		GlTexture var2 = this.method462(arg0);
-		return var2 == null ? null : var2.method1366(this.field1235, this.field1248 || this.field1237[arg0], this);
+		return var2 == null ? null : var2.method1366(this.sprites, this.field1248 || this.field1237[arg0], this);
 	}
 
 	@ObfuscatedName("ga.d(II)V")
-	public void method466(int arg0) {
+	public void runAnims(int arg0) {
 		for (GlTexture var2 = (GlTexture) this.field1232.search(); var2 != null; var2 = (GlTexture) this.field1232.findnext()) {
 			if (var2.field3800) {
 				var2.method1367(arg0);
@@ -193,13 +193,13 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.a(FIZ)[I")
 	@Override
-	public int[] method435(float arg0, int arg1) {
+	public int[] getTexels(float arg0, int arg1) {
 		GlTexture var3 = this.method462(arg1);
 		if (var3 == null) {
 			return null;
 		} else {
 			var3.field3800 = true;
-			return var3.method1369(this, arg0, this.field1235, this.field1248 || this.field1237[arg1]);
+			return var3.method1369(this, arg0, this.sprites, this.field1248 || this.field1237[arg1]);
 		}
 	}
 }

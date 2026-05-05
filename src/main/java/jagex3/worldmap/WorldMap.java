@@ -136,7 +136,7 @@ public class WorldMap {
 			field239 = var1 * 64;
 			field1110 = 8.0D;
 			field2915 = 8.0D;
-			field1009 = new int[FloType.field2923 + 1];
+			field1009 = new int[FloType.numDefinitions + 1];
 			field760 = (var4 - var2) * 64 + 64;
 			field1988 = (var3 + 1 - var1) * 64;
 			int var7 = Client.mapBuildBaseZ + (Client.localPlayer.z >> 7) - field2181;
@@ -162,7 +162,7 @@ public class WorldMap {
 			int var14 = ClientBuild.hueOff >> 2 << 10;
 			field895 = new int[var12][var11][];
 			field3951 = new byte[var12][var11][];
-			for (int var15 = 0; var15 < FloType.field2923; var15++) {
+			for (int var15 = 0; var15 < FloType.numDefinitions; var15++) {
 				FloType var16 = FloType.list(var15);
 				if (var16 != null) {
 					int var17 = var16.texture;
@@ -170,8 +170,8 @@ public class WorldMap {
 						var17 = -1;
 					}
 					int var21;
-					if (var16.field104 >= 0) {
-						int var18 = var16.field104;
+					if (var16.mapcolour >= 0) {
+						int var18 = var16.mapcolour;
 						int var19 = var13 + (var18 & 0x7F);
 						if (var19 < 0) {
 							var19 = 0;
@@ -181,11 +181,11 @@ public class WorldMap {
 						int var20 = (var18 & 0x380) + ((var18 + var14 & 0xFC00) + var19);
 						var21 = Pix3D.colourTable[ClientBuild.getOCol(96, var20)];
 					} else if (var17 >= 0) {
-						var21 = Pix3D.colourTable[ClientBuild.getOCol(96, Pix3D.textureManager.method438(var17))];
-					} else if (var16.field111 == -1) {
+						var21 = Pix3D.colourTable[ClientBuild.getOCol(96, Pix3D.textureManager.getAverageRgb(var17))];
+					} else if (var16.colour == -1) {
 						var21 = -1;
 					} else {
-						int var22 = var16.field111;
+						int var22 = var16.colour;
 						int var23 = var13 + (var22 & 0x7F);
 						if (var23 < 0) {
 							var23 = 0;
@@ -356,7 +356,7 @@ public class WorldMap {
 											continue;
 										}
 									}
-									field895[var7][var8][(-(var10 + 1) << 6) + var9] = var15.field2831 + 1;
+									field895[var7][var8][(-(var10 + 1) << 6) + var9] = var15.id + 1;
 									MapElement var16 = new MapElement();
 									var16.field1175 = field760 - var3;
 									var16.field1180 = var15.mapfunction;
@@ -591,27 +591,27 @@ public class WorldMap {
 
 	@ObfuscatedName("wf.a(I)V")
 	public static void method1604() {
-		int var0 = field2330 - (int) ((double) field1706.field3380 / field1110);
-		int var1 = field3033 - (int) ((double) field1706.field3422 / field1110);
-		int var2 = field2330 + (int) ((double) field1706.field3380 / field1110);
+		int var0 = field2330 - (int) ((double) field1706.renderWidth / field1110);
+		int var1 = field3033 - (int) ((double) field1706.renderHeight / field1110);
+		int var2 = field2330 + (int) ((double) field1706.renderWidth / field1110);
 		if (var0 < 0) {
-			field2330 = (int) ((double) field1706.field3380 / field1110);
+			field2330 = (int) ((double) field1706.renderWidth / field1110);
 			field3659 = -1;
 			field594 = -1;
 		}
 		if (field1988 < var2) {
-			field2330 = field1988 - (int) ((double) field1706.field3380 / field1110);
+			field2330 = field1988 - (int) ((double) field1706.renderWidth / field1110);
 			field594 = -1;
 			field3659 = -1;
 		}
-		int var3 = (int) ((double) field1706.field3422 / field1110) + field3033;
+		int var3 = (int) ((double) field1706.renderHeight / field1110) + field3033;
 		if (var1 < 0) {
-			field3033 = (int) ((double) field1706.field3422 / field1110);
+			field3033 = (int) ((double) field1706.renderHeight / field1110);
 			field3659 = -1;
 			field594 = -1;
 		}
 		if (var3 > field760) {
-			field3033 = field760 - (int) ((double) field1706.field3422 / field1110);
+			field3033 = field760 - (int) ((double) field1706.renderHeight / field1110);
 			field3659 = -1;
 			field594 = -1;
 		}
@@ -633,21 +633,21 @@ public class WorldMap {
 		}
 		field594 = field760 + field2181 - var1.field4485;
 		field3659 = var1.field4483 - field239;
-		int var2 = field594 - (int) ((double) field1706.field3422 / field1110);
-		int var3 = field3659 - (int) ((double) field1706.field3380 / field1110);
-		int var4 = field3659 + (int) ((double) field1706.field3380 / field1110);
+		int var2 = field594 - (int) ((double) field1706.renderHeight / field1110);
+		int var3 = field3659 - (int) ((double) field1706.renderWidth / field1110);
+		int var4 = field3659 + (int) ((double) field1706.renderWidth / field1110);
 		if (var3 < 0) {
-			field3659 = (int) ((double) field1706.field3380 / field1110);
+			field3659 = (int) ((double) field1706.renderWidth / field1110);
 		}
-		int var5 = (int) ((double) field1706.field3422 / field1110) + field594;
+		int var5 = (int) ((double) field1706.renderHeight / field1110) + field594;
 		if (var4 > field1988) {
-			field3659 = field1988 - (int) ((double) field1706.field3380 / field1110);
+			field3659 = field1988 - (int) ((double) field1706.renderWidth / field1110);
 		}
 		if (var2 < 0) {
-			field594 = (int) ((double) field1706.field3422 / field1110);
+			field594 = (int) ((double) field1706.renderHeight / field1110);
 		}
 		if (var5 > field760) {
-			field594 = field760 - (int) ((double) field1706.field3422 / field1110);
+			field594 = field760 - (int) ((double) field1706.renderHeight / field1110);
 		}
 	}
 
@@ -894,7 +894,7 @@ public class WorldMap {
 							if (var36 < 2 && var37 > 2 || var36 > 2 && var37 < 2) {
 								var35 = 4936552;
 							} else {
-								var35 = field1009[FloType.field2489 + 1];
+								var35 = field1009[FloType.defaultWater + 1];
 							}
 						} else {
 							var35 = var19[var30][var34];

@@ -32,7 +32,7 @@ public final class ClientNpc extends ClientEntity {
 		}
 		SeqType var11 = super.primarySeqId != -1 && super.primarySeqDelay == 0 ? SeqType.list(super.primarySeqId) : null;
 		SeqType var12 = super.secondarySeqId == -1 || super.readyanim == super.secondarySeqId && var11 != null ? null : SeqType.list(super.secondarySeqId);
-		ModelLit var13 = this.type.method865(var12, super.secondarySeqFrame, super.primarySeqFrame, var11);
+		ModelLit var13 = this.type.getTempModel(var12, super.secondarySeqFrame, super.primarySeqFrame, var11);
 		if (var13 == null) {
 			return;
 		}
@@ -92,7 +92,7 @@ public final class ClientNpc extends ClientEntity {
 			var46 = var47.getTempModel2(super.spotanimFrame);
 			if (var46 != null) {
 				var46.translate(0, -super.spotanimHeight, 0);
-				if (var47.field527) {
+				if (var47.hillskew) {
 					if (var14 != 0) {
 						var46.rotateXAxis(var14);
 					}

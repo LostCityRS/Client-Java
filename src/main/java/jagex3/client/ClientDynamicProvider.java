@@ -11,7 +11,7 @@ public final class ClientDynamicProvider implements QuickChatDynamicProvider {
 
 	@ObfuscatedName("pa.a([IIJI)Li;")
 	@Override
-	public JagString method1126(int[] arg0, int arg1, long arg2) {
+	public JagString formatDynamicValue(int[] arg0, int arg1, long arg2) {
 		if (arg1 == 0) {
 			EnumType var5 = EnumType.list(arg0[0]);
 			return var5.getValueString((int) arg2);

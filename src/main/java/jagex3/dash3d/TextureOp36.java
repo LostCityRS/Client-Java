@@ -80,7 +80,7 @@ public final class TextureOp36 extends TextureOp {
 			int var1 = Texture.field1276;
 			int var2 = Texture.field460;
 			int var3 = Texture.field4488.method437(this.field3760) ? 64 : 128;
-			this.field3769 = Texture.field4488.method440(this.field3760);
+			this.field3769 = Texture.field4488.getTexels(this.field3760);
 			this.field3751 = var3;
 			this.field3752 = var3;
 			Texture.method802(var1, var2);

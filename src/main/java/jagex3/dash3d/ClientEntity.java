@@ -23,7 +23,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int combatCycle = -1000;
 
 	@ObfuscatedName("u.jb")
-	public int yaw;
+	public int dstYaw;
 
 	@ObfuscatedName("u.kb")
 	public int spotanimCycle = 0;
@@ -68,7 +68,7 @@ public abstract class ClientEntity extends ModelSource {
 	public final int[] damageTypes = new int[4];
 
 	@ObfuscatedName("u.ub")
-	public int exactMoveEnd;
+	public int exactMoveStart;
 
 	@ObfuscatedName("u.vb")
 	public final int[] damageValues = new int[4];
@@ -155,7 +155,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int spotanimLastCycle;
 
 	@ObfuscatedName("u.B")
-	public int dstYaw;
+	public int yaw;
 
 	@ObfuscatedName("u.K")
 	public int exactStartZ;
@@ -170,7 +170,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int field4109;
 
 	@ObfuscatedName("u.xb")
-	public int exactMoveStart;
+	public int exactMoveEnd;
 
 	@ObfuscatedName("u.Ab")
 	public int x;
@@ -211,7 +211,7 @@ public abstract class ClientEntity extends ModelSource {
 	}
 
 	@ObfuscatedName("u.b(I)I")
-	public final int method1475() {
+	public final int getHeight() {
 		return this.height == -32768 ? 200 : -this.height;
 	}
 

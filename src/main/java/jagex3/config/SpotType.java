@@ -36,7 +36,7 @@ public final class SpotType extends Linkable2 {
 	public int resizeh = 128;
 
 	@ObfuscatedName("cj.D")
-	public boolean field527 = false;
+	public boolean hillskew = false;
 
 	@ObfuscatedName("cj.W")
 	public int angle = 0;
@@ -65,7 +65,7 @@ public final class SpotType extends Linkable2 {
 		if (var1 != null) {
 			return var1;
 		}
-		byte[] var2 = configClient.getFile(method799(arg0), method928(arg0));
+		byte[] var2 = configClient.getFile(getGroupId(arg0), getFileId(arg0));
 		SpotType var3 = new SpotType();
 		var3.id = arg0;
 		if (var2 != null) {
@@ -88,12 +88,12 @@ public final class SpotType extends Linkable2 {
 	}
 
 	@ObfuscatedName("n.a(II)I")
-	public static int method928(int arg0) {
+	public static int getFileId(int arg0) {
 		return arg0 >>> 8;
 	}
 
 	@ObfuscatedName("ki.a(IZ)I")
-	public static int method799(int arg0) {
+	public static int getGroupId(int arg0) {
 		return arg0 & 0xFF;
 	}
 
@@ -114,7 +114,7 @@ public final class SpotType extends Linkable2 {
 		} else if (arg0 == 8) {
 			this.contrast = arg1.g1();
 		} else if (arg0 == 9) {
-			this.field527 = true;
+			this.hillskew = true;
 		} else if (arg0 == 40) {
 			int var5 = arg1.g1();
 			this.recol_s = new short[var5];

@@ -151,7 +151,7 @@ public class ClientBuild {
 							var4 = var1 - 1;
 						}
 						if (var4 >= 0) {
-							arg0[var4].method652(var3, var2);
+							arg0[var4].blockGround(var3, var2);
 						}
 					}
 				}
@@ -308,7 +308,7 @@ public class ClientBuild {
 								byte var58 = floorr[var9][var40][var41];
 								FloType var59 = FloType.list(var43 - 1);
 								if (lightmap != null && var9 == 0) {
-									lightmap[var40][var41] = var59.field103 + (var59.field112 << 24);
+									lightmap[var40][var41] = var59.waterfogcolour + (var59.waterfogscale << 24);
 								}
 								int var60 = var59.texture;
 								if (var60 >= 0 && !Pix3D.textureManager.method436(var60)) {
@@ -318,12 +318,12 @@ public class ClientBuild {
 								int var62;
 								if (var60 >= 0) {
 									var61 = -1;
-									var62 = Pix3D.colourTable[getOCol(96, Pix3D.textureManager.method438(var60))];
-								} else if (var59.field111 == -1) {
+									var62 = Pix3D.colourTable[getOCol(96, Pix3D.textureManager.getAverageRgb(var60))];
+								} else if (var59.colour == -1) {
 									var62 = 0;
 									var61 = -2;
 								} else {
-									var61 = var59.field111;
+									var61 = var59.colour;
 									int var63 = (var61 & 0x7F) + var5;
 									if (var63 < 0) {
 										var63 = 0;
@@ -333,8 +333,8 @@ public class ClientBuild {
 									int var64 = var63 + (var61 + var6 & 0xFC00) + (var61 & 0x380);
 									var62 = Pix3D.colourTable[getOCol(96, var64)];
 								}
-								if (var59.field104 >= 0) {
-									int var65 = var59.field104;
+								if (var59.mapcolour >= 0) {
+									int var65 = var59.mapcolour;
 									int var66 = (var65 & 0x7F) + var5;
 									if (var66 < 0) {
 										var66 = 0;
@@ -715,7 +715,7 @@ public class ClientBuild {
 			for (int var7 = 0; var7 < 64; var7++) {
 				for (int var8 = 0; var8 < 64; var8++) {
 					if (var7 + arg1 > 0 && var7 + arg1 < 103 && var8 + arg4 > 0 && arg4 + var8 < 103) {
-						arg3[var6].field1667[var7 + arg1][var8 + arg4] &= 0xFEFFFFFF;
+						arg3[var6].flags[var7 + arg1][var8 + arg4] &= 0xFEFFFFFF;
 					}
 				}
 			}
@@ -794,23 +794,23 @@ public class ClientBuild {
 			if (!arg4 || var10.active != 0 || var10.blockwalk == 1 || var10.forcedecor) {
 				ModelSource var27;
 				if (var10.anim == -1 && var10.multiloc == null) {
-					ModelCacheLit var26 = var10.method997(22, var21, var17, var18, arg0, var20, arg2, var19);
+					ModelCacheLit var26 = var10.getModel(22, var21, var17, var18, arg0, var20, arg2, var19);
 					var27 = var26.field3984;
 				} else {
-					var27 = new ClientLocAnim(arg5, 22, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+					var27 = new ClientLocAnim(arg5, 22, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 				}
 				World.setGroundDecor(arg1, arg9, arg8, var19, var27, var24, var10.field2799);
 				if (var10.blockwalk == 1 && arg7 != null) {
-					arg7.method646(arg8, arg9);
+					arg7.blockGroundDecor(arg8, arg9);
 				}
 			}
 		} else if (arg3 == 10 || arg3 == 11) {
 			ModelSource var29;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var28 = var10.method997(10, var21, var17, var18, arg0, var20, arg2, var19);
+				ModelCacheLit var28 = var10.getModel(10, var21, var17, var18, arg0, var20, arg2, var19);
 				var29 = var28.field3984;
 			} else {
-				var29 = new ClientLocAnim(arg5, 10, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var29 = new ClientLocAnim(arg5, 10, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			if (var29 != null) {
 				boolean var30 = World.addScenery(arg1, arg9, arg8, var19, var11, var12, var29, arg3 == 11 ? 256 : 0, var24);
@@ -832,30 +832,30 @@ public class ClientBuild {
 				}
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
-				arg7.method644(var11, var12, var10.blockrange, arg9, arg8);
+				arg7.addLoc(var11, var12, var10.blockrange, arg9, arg8);
 			}
 		} else if (arg3 >= 12) {
 			ModelSource var35;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var34 = var10.method997(arg3, var21, var17, var18, arg0, var20, arg2, var19);
+				ModelCacheLit var34 = var10.getModel(arg3, var21, var17, var18, arg0, var20, arg2, var19);
 				var35 = var34.field3984;
 			} else {
-				var35 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var35 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.addScenery(arg1, arg9, arg8, var19, 1, 1, var35, 0, var24);
 			if (arg0 && arg3 >= 12 && arg3 <= 17 && arg3 != 13 && arg1 > 0) {
 				mapo[arg1][arg9][arg8] |= 0x924;
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
-				arg7.method644(var11, var12, var10.blockrange, arg9, arg8);
+				arg7.addLoc(var11, var12, var10.blockrange, arg9, arg8);
 			}
 		} else if (arg3 == 0) {
 			ModelSource var36;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var37 = var10.method997(0, var21, var17, var18, arg0, var20, arg2, var19);
+				ModelCacheLit var37 = var10.getModel(0, var21, var17, var18, arg0, var20, arg2, var19);
 				var36 = var37.field3984;
 			} else {
-				var36 = new ClientLocAnim(arg5, 0, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var36 = new ClientLocAnim(arg5, 0, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setWall(arg1, arg9, arg8, var19, var36, null, WSHAPE0[arg2], 0, var24);
 			if (arg0) {
@@ -894,7 +894,7 @@ public class ClientBuild {
 				}
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
-				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
+				arg7.addWall(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
 			if (var10.wallwidth != 16) {
 				World.moveDecor(arg1, arg9, arg8, var10.wallwidth);
@@ -902,10 +902,10 @@ public class ClientBuild {
 		} else if (arg3 == 1) {
 			ModelSource var38;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var39 = var10.method997(1, var21, var17, var18, arg0, var20, arg2, var19);
+				ModelCacheLit var39 = var10.getModel(1, var21, var17, var18, arg0, var20, arg2, var19);
 				var38 = var39.field3984;
 			} else {
-				var38 = new ClientLocAnim(arg5, 1, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var38 = new ClientLocAnim(arg5, 1, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setWall(arg1, arg9, arg8, var19, var38, null, WSHAPE1[arg2], 0, var24);
 			if (var10.shadow && arg0) {
@@ -920,20 +920,20 @@ public class ClientBuild {
 				}
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
-				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
+				arg7.addWall(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
 		} else if (arg3 == 2) {
 			int var40 = arg2 + 1 & 0x3;
 			ModelSource var41;
 			ModelSource var42;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var43 = var10.method997(2, var21, var17, var18, arg0, var20, arg2 + 4, var19);
+				ModelCacheLit var43 = var10.getModel(2, var21, var17, var18, arg0, var20, arg2 + 4, var19);
 				var41 = var43.field3984;
-				ModelCacheLit var44 = var10.method997(2, var21, var17, var18, arg0, var20, var40, var19);
+				ModelCacheLit var44 = var10.getModel(2, var21, var17, var18, arg0, var20, var40, var19);
 				var42 = var44.field3984;
 			} else {
-				var41 = new ClientLocAnim(arg5, 2, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
-				var42 = new ClientLocAnim(arg5, 2, var40, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var41 = new ClientLocAnim(arg5, 2, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
+				var42 = new ClientLocAnim(arg5, 2, var40, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setWall(arg1, arg9, arg8, var19, var41, var42, WSHAPE0[arg2], WSHAPE0[var40], var24);
 			if (var10.occlude && arg0) {
@@ -952,7 +952,7 @@ public class ClientBuild {
 				}
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
-				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
+				arg7.addWall(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
 			if (var10.wallwidth != 16) {
 				World.moveDecor(arg1, arg9, arg8, var10.wallwidth);
@@ -960,10 +960,10 @@ public class ClientBuild {
 		} else if (arg3 == 3) {
 			ModelSource var46;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var45 = var10.method997(3, var21, var17, var18, arg0, var20, arg2, var19);
+				ModelCacheLit var45 = var10.getModel(3, var21, var17, var18, arg0, var20, arg2, var19);
 				var46 = var45.field3984;
 			} else {
-				var46 = new ClientLocAnim(arg5, 3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var46 = new ClientLocAnim(arg5, 3, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setWall(arg1, arg9, arg8, var19, var46, null, WSHAPE1[arg2], 0, var24);
 			if (var10.shadow && arg0) {
@@ -978,19 +978,19 @@ public class ClientBuild {
 				}
 			}
 			if (var10.blockwalk != 0 && arg7 != null) {
-				arg7.method645(arg3, arg8, var10.blockrange, arg2, arg9);
+				arg7.addWall(arg3, arg8, var10.blockrange, arg2, arg9);
 			}
 		} else if (arg3 == 9) {
 			ModelSource var47;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var48 = var10.method997(arg3, var21, var17, var18, arg0, var20, arg2, var19);
+				ModelCacheLit var48 = var10.getModel(arg3, var21, var17, var18, arg0, var20, arg2, var19);
 				var47 = var48.field3984;
 			} else {
-				var47 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var47 = new ClientLocAnim(arg5, arg3, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.addScenery(arg1, arg9, arg8, var19, 1, 1, var47, 0, var24);
 			if (var10.blockwalk != 0 && arg7 != null) {
-				arg7.method644(var11, var12, var10.blockrange, arg9, arg8);
+				arg7.addLoc(var11, var12, var10.blockrange, arg9, arg8);
 			}
 			if (var10.wallwidth != 16) {
 				World.moveDecor(arg1, arg9, arg8, var10.wallwidth);
@@ -998,10 +998,10 @@ public class ClientBuild {
 		} else if (arg3 == 4) {
 			ModelSource var49;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var50 = var10.method997(4, var21, var17, var18, arg0, var20, arg2, var19);
+				ModelCacheLit var50 = var10.getModel(4, var21, var17, var18, arg0, var20, arg2, var19);
 				var49 = var50.field3984;
 			} else {
-				var49 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var49 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setDecor(arg1, arg9, arg8, var19, var49, null, WSHAPE0[arg2], 0, 0, 0, var24);
 		} else if (arg3 == 5) {
@@ -1012,10 +1012,10 @@ public class ClientBuild {
 			}
 			ModelSource var54;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var55 = var10.method997(4, var21, var17, var18, arg0, var20, arg2, var19);
+				ModelCacheLit var55 = var10.getModel(4, var21, var17, var18, arg0, var20, arg2, var19);
 				var54 = var55.field3984;
 			} else {
-				var54 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var54 = new ClientLocAnim(arg5, 4, arg2, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setDecor(arg1, arg9, arg8, var19, var54, null, WSHAPE0[arg2], 0, var51 * DECORXOF[arg2], var51 * DECORZOF[arg2], var24);
 		} else if (arg3 == 6) {
@@ -1026,20 +1026,20 @@ public class ClientBuild {
 			}
 			ModelSource var59;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var60 = var10.method997(4, var21, var17, var18, arg0, var20, arg2 + 4, var19);
+				ModelCacheLit var60 = var10.getModel(4, var21, var17, var18, arg0, var20, arg2 + 4, var19);
 				var59 = var60.field3984;
 			} else {
-				var59 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var59 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setDecor(arg1, arg9, arg8, var19, var59, null, 256, arg2, DECORXOF2[arg2] * var56, DECORZOF2[arg2] * var56, var24);
 		} else if (arg3 == 7) {
 			int var61 = arg2 + 2 & 0x3;
 			ModelSource var63;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var62 = var10.method997(4, var21, var17, var18, arg0, var20, var61 + 4, var19);
+				ModelCacheLit var62 = var10.getModel(4, var21, var17, var18, arg0, var20, var61 + 4, var19);
 				var63 = var62.field3984;
 			} else {
-				var63 = new ClientLocAnim(arg5, 4, var61 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var63 = new ClientLocAnim(arg5, 4, var61 + 4, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setDecor(arg1, arg9, arg8, var19, var63, null, 256, var61, 0, 0, var24);
 		} else if (arg3 == 8) {
@@ -1052,13 +1052,13 @@ public class ClientBuild {
 			ModelSource var68;
 			ModelSource var69;
 			if (var10.anim == -1 && var10.multiloc == null) {
-				ModelCacheLit var70 = var10.method997(4, var21, var17, var18, arg0, var20, arg2 + 4, var19);
+				ModelCacheLit var70 = var10.getModel(4, var21, var17, var18, arg0, var20, arg2 + 4, var19);
 				var68 = var70.field3984;
-				ModelCacheLit var71 = var10.method997(4, var21, var17, var18, arg0, var20, var67 + 4, var19);
+				ModelCacheLit var71 = var10.getModel(4, var21, var17, var18, arg0, var20, var67 + 4, var19);
 				var69 = var71.field3984;
 			} else {
-				var68 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
-				var69 = new ClientLocAnim(arg5, 4, var67 + 4, arg6, arg9, arg8, var10.anim, var10.field2829, null);
+				var68 = new ClientLocAnim(arg5, 4, arg2 + 4, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
+				var69 = new ClientLocAnim(arg5, 4, var67 + 4, arg6, arg9, arg8, var10.anim, var10.randomanimframe, null);
 			}
 			World.setDecor(arg1, arg9, arg8, var19, var68, var69, 256, arg2, DECORXOF2[arg2] * var64, var64 * DECORZOF2[arg2], var24);
 		}
@@ -1151,7 +1151,7 @@ public class ClientBuild {
 		for (int var9 = 0; var9 < 8; var9++) {
 			for (int var10 = 0; var10 < 8; var10++) {
 				if (var9 + arg0 > 0 && var9 + arg0 < 103 && arg7 + var10 > 0 && var10 + arg7 < 103) {
-					arg4[arg8].field1667[arg0 + var9][arg7 + var10] &= 0xFEFFFFFF;
+					arg4[arg8].flags[arg0 + var9][arg7 + var10] &= 0xFEFFFFFF;
 				}
 			}
 		}

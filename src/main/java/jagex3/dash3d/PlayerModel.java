@@ -42,13 +42,13 @@ public final class PlayerModel {
 
 	@ObfuscatedName("tb.a(I)I")
 	public int method1427() {
-		return this.transmog == -1 ? (this.appearance[11] << 5) + (this.colour[0] << 25) + (this.colour[4] << 20) + (this.appearance[0] << 15) + (this.appearance[8] << 10) + this.appearance[1] : 305419896 - -NpcType.list(this.transmog).field2314;
+		return this.transmog == -1 ? (this.appearance[11] << 5) + (this.colour[0] << 25) + (this.colour[4] << 20) + (this.appearance[0] << 15) + (this.appearance[8] << 10) + this.appearance[1] : 305419896 - -NpcType.list(this.transmog).id;
 	}
 
 	@ObfuscatedName("tb.a(BLk;I)Lcg;")
 	public ModelLit getHeadModel(SeqType arg0, int arg1) {
 		if (this.transmog != -1) {
-			return NpcType.list(this.transmog).method864(arg1, arg0);
+			return NpcType.list(this.transmog).getHeadModelLit(arg1, arg0);
 		}
 		ModelLit var3 = (ModelLit) field2616.find(this.baseId);
 		if (var3 == null) {
@@ -123,7 +123,7 @@ public final class PlayerModel {
 	@ObfuscatedName("tb.a(Lk;IIILk;)Lcg;")
 	public ModelLit getTempModel(SeqType arg0, int arg1, int arg2, SeqType arg3) {
 		if (this.transmog != -1) {
-			return NpcType.list(this.transmog).method865(arg0, arg2, arg1, arg3);
+			return NpcType.list(this.transmog).getTempModel(arg0, arg2, arg1, arg3);
 		}
 		long var5 = this.baseId;
 		int[] var7 = this.appearance;
@@ -255,7 +255,7 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("tb.a(BII)V")
-	public void method1432(int arg0, int arg1) {
+	public void idkChangeColour(int arg0, int arg1) {
 		this.colour[arg1] = arg0;
 		this.calcBaseId();
 	}
@@ -267,7 +267,7 @@ public final class PlayerModel {
 	}
 
 	@ObfuscatedName("tb.a(IBI)V")
-	public void method1435(int arg0, int arg1) {
+	public void idkChangePart(int arg0, int arg1) {
 		int var3 = basePartMap[arg0];
 		if (this.appearance[var3] != 0 && IdkType.list(arg1) != null) {
 			this.appearance[var3] = Integer.MIN_VALUE | arg1;

@@ -127,10 +127,8 @@ public final class IdkType extends Linkable2 {
 				this.retex_s[var6] = (short) arg0.g2();
 				this.recol_s[var6] = (short) arg0.g2();
 			}
-			return;
 		} else if (arg1 >= 60 && arg1 < 70) {
 			this.head[arg1 - 60] = arg0.g2();
-			return;
 		}
 	}
 

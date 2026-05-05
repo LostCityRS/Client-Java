@@ -6,10 +6,10 @@ import deob.ObfuscatedName;
 public interface TextureProvider {
 
 	@ObfuscatedName("fe.a(II)Z")
-	boolean method434(int arg0);
+	boolean isLowMem(int arg0);
 
 	@ObfuscatedName("fe.a(FIZ)[I")
-	int[] method435(float arg0, int arg1);
+	int[] getTexels(float arg0, int arg1);
 
 	@ObfuscatedName("fe.a(IB)Z")
 	boolean method436(int arg0);
@@ -18,11 +18,11 @@ public interface TextureProvider {
 	boolean method437(int arg0);
 
 	@ObfuscatedName("fe.b(II)I")
-	int method438(int arg0);
+	int getAverageRgb(int arg0);
 
 	@ObfuscatedName("fe.c(IB)Z")
 	boolean method439(int arg0);
 
 	@ObfuscatedName("fe.c(II)[I")
-	int[] method440(int arg0);
+	int[] getTexels(int arg0);
 }

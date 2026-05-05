@@ -20,7 +20,7 @@ public final class QuickChatPhrase {
 	public static QuickChatPhrase method667(Packet arg0) {
 		QuickChatPhrase var1 = new QuickChatPhrase();
 		var1.field4058 = arg0.g2();
-		var1.field4065 = QuickChatPhraseType.method1150(var1.field4058);
+		var1.field4065 = QuickChatPhraseType.list(var1.field4058);
 		return var1;
 	}
 }

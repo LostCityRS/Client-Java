@@ -3,7 +3,6 @@ package jagex3.jstring;
 import deob.ObfuscatedName;
 import deob.Statics;
 import jagex3.client.BrowserControl;
-import jagex3.constants.Text;
 import jagex3.datastruct.HashTable;
 import jagex3.datastruct.StringNode;
 import jagex3.util.ArrayUtil;
@@ -227,21 +226,6 @@ public final class JagString implements StringInterface {
 		var9.chars = var6;
 		var9.length = var5;
 		return var9;
-	}
-
-	@ObfuscatedName("nb.f(II)Li;")
-	public static JagString method958(int arg0) {
-		JagString var1 = method1212(arg0);
-		for (int var2 = var1.method604() - 3; var2 > 0; var2 -= 3) {
-			var1 = join(new JagString[] { var1.method623(0, var2), Statics.field979, var1.method635(var2) });
-		}
-		if (var1.method604() > 9) {
-			return join(new JagString[] { Statics.field2828, var1.method623(0, var1.method604() - 8), Text.MILLION, Statics.field1238, var1, Statics.field3982});
-		} else if (var1.method604() > 6) {
-			return join(new JagString[] {Statics.field644, var1.method623(0, var1.method604() - 4), Text.THOUSAND, Statics.field1238, var1, Statics.field3982});
-		} else {
-			return join(new JagString[] {Statics.field1370, var1, Statics.field2199});
-		}
 	}
 
 	@ObfuscatedName("ee.a(BZI)Li;")
