@@ -65,7 +65,7 @@ public abstract class ClientEntity extends ModelSource {
 	public int routeLength = 0;
 
 	@ObfuscatedName("nb.vc")
-	public int field1984;
+	public int spotanimHeight;
 
 	@ObfuscatedName("nb.gc")
 	public int primarySeqLoop = 0;

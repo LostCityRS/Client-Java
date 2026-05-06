@@ -287,7 +287,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("mb.bb")
 	public static long field1843;
 	@ObfuscatedName("vb.vb")
-	public static long field3132 = 0L;
+	public static long loginSeed = 0L;
 	@ObfuscatedName("g.i")
 	public static int menuX;
 	@ObfuscatedName("pc.a")
@@ -817,7 +817,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("td.n")
 	public static int camLookAtRate;
 	@ObfuscatedName("td.r")
-	public static int field2949;
+	public static int targetComId;
 	@ObfuscatedName("ga.B")
 	public static JagString[] chatScreenName = new JagString[100];
 	@ObfuscatedName("a.jb")
@@ -2779,7 +2779,7 @@ public final class Client extends GameShell {
 				arg0.spotanimId = -1;
 			}
 			arg0.spotanimFrame = 0;
-			arg0.field1984 = var21 >> 16;
+			arg0.spotanimHeight = var21 >> 16;
 			if (arg0.spotanimLastCycle > loopCycle) {
 				arg0.spotanimFrame = -1;
 			}
@@ -5437,7 +5437,7 @@ public final class Client extends GameShell {
 				int var6 = in.g4();
 				var2.spotanimCycle = 0;
 				var2.spotanimLastCycle = (var6 & 0xFFFF) + loopCycle;
-				var2.field1984 = var6 >> 16;
+				var2.spotanimHeight = var6 >> 16;
 				var2.spotanimFrame = 0;
 				if (var2.spotanimLastCycle > loopCycle) {
 					var2.spotanimFrame = -1;
@@ -7307,7 +7307,7 @@ public final class Client extends GameShell {
 		if (var3 == 37) {
 			// OPHELDT
 			out.p1Enc(21);
-			out.p4_alt1(field2949);
+			out.p4_alt1(targetComId);
 			out.p4_alt2(var2);
 			out.p2(var4);
 			out.p2(var1);
@@ -7364,7 +7364,7 @@ public final class Client extends GameShell {
 				crossY = ClientMouseListener.mouseClickY;
 				// OPPLAYERT
 				out.p1Enc(221);
-				out.p4_alt3(field2949);
+				out.p4_alt3(targetComId);
 				out.p2_alt1(var4);
 			}
 		}
@@ -7549,7 +7549,7 @@ public final class Client extends GameShell {
 			out.p1Enc(168);
 			out.p2_alt1(var4);
 			out.p2_alt2(mapBuildBaseX + var1);
-			out.p4_alt3(field2949);
+			out.p4_alt3(targetComId);
 			out.p2(mapBuildBaseZ + var2);
 		}
 		if (var3 == 23) {
@@ -7708,7 +7708,7 @@ public final class Client extends GameShell {
 			targetVerb = var35.targetVerb;
 			targetMask = var35.targetMask;
 			useMode = 0;
-			field2949 = var2;
+			targetComId = var2;
 			field1384 = JagString.join(new JagString[]{field2564, var35.targetBase, field1393});
 			if (targetMask == 16) {
 				redrawIcons = true;
@@ -7813,7 +7813,7 @@ public final class Client extends GameShell {
 				// OPNPCT
 				out.p1Enc(253);
 				out.p2(var4);
-				out.p4_alt3(field2949);
+				out.p4_alt3(targetComId);
 			}
 		}
 		if (var3 == 45 || var3 == 51 || var3 == 13 || var3 == 35) {
@@ -7896,7 +7896,7 @@ public final class Client extends GameShell {
 			out.p1Enc(225);
 			out.p2(var4 >> 14 & 0x7FFF);
 			out.p2_alt3(var2 + mapBuildBaseZ);
-			out.p4_alt3(field2949);
+			out.p4_alt3(targetComId);
 			out.p2_alt1(mapBuildBaseX + var1);
 		}
 		if (var3 == 25) {
@@ -8399,12 +8399,12 @@ public final class Client extends GameShell {
 				}
 				if (in.pos == 8) {
 					in.pos = 0;
-					field3132 = in.g8();
+					loginSeed = in.g8();
 					loginStep = 5;
 				}
 			}
 			if (loginStep == 5) {
-				int[] var5 = new int[]{(int) (Math.random() * 9.9999999E7D), (int) (Math.random() * 9.9999999E7D), (int) (field3132 >> 32), (int) field3132};
+				int[] var5 = new int[]{(int) (Math.random() * 9.9999999E7D), (int) (Math.random() * 9.9999999E7D), (int) (loginSeed >> 32), (int) loginSeed};
 				out.pos = 0;
 				out.p1(10);
 				out.p4(var5[0]);

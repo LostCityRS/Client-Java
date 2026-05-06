@@ -28,7 +28,7 @@ public final class ClientNpc extends ClientEntity {
 		if (super.spotanimId != -1 && super.spotanimFrame != -1) {
 			Model var4 = SpotType.list(super.spotanimId).getTempModel2(super.spotanimFrame);
 			if (var4 != null) {
-				var4.translate(0, -super.field1984, 0);
+				var4.translate(0, -super.spotanimHeight, 0);
 				Model[] var5 = new Model[]{var3, var4};
 				var3 = new Model(var5, 2, true);
 			}
