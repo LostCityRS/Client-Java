@@ -120,7 +120,7 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("lc.b(I)Lle;")
-	public AudioSource method649() {
+	public AudioSource getAudioSource() {
 		return this.audio;
 	}
 

@@ -86,7 +86,7 @@ public final class Client extends GameShell {
 	public static int loginWaitingTime = 0;
 
 	@ObfuscatedName("client.Cb")
-	public static JagString field609 = JagString.wrap("backtop1");
+	public static JagString AUTO_BACKTOP1 = JagString.wrap("backtop1");
 	@ObfuscatedName("hd.Jb")
 	public static int loadingStep = 0;
 	@ObfuscatedName("vd.Bd")
@@ -304,7 +304,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("r.B")
 	public static JagString[] menuOption = new JagString[500];
 	@ObfuscatedName("pc.C")
-	public static JagString field2334 = JagString.wrap("@lre@");
+	public static JagString AUTO_LRE = JagString.wrap("@lre@");
 	@ObfuscatedName("f.o")
 	public static int entityRemovalCount = 0;
 	@ObfuscatedName("kb.s")
@@ -486,7 +486,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("qc.j")
 	public static int ptype2 = 0;
 	@ObfuscatedName("r.n")
-	public static int field2572 = 0;
+	public static int hintOffsetX = 0;
 	@ObfuscatedName("r.o")
 	public static int scrollInputPadding = 0;
 	@ObfuscatedName("ra.s")
@@ -708,11 +708,11 @@ public final class Client extends GameShell {
 	@ObfuscatedName("aa.Wd")
 	public static int[] field92;
 	@ObfuscatedName("pb.I")
-	public static JagString field2305 = JagString.wrap("m");
+	public static JagString AUTO_M = JagString.wrap("m");
 	@ObfuscatedName("i.e")
-	public static JagString field1259 = JagString.wrap("l");
+	public static JagString AUTO_L = JagString.wrap("l");
 	@ObfuscatedName("ca.C")
-	public static JagString field477 = JagString.wrap("_");
+	public static JagString AUTO_UNDERSCORE = JagString.wrap("_");
 	@ObfuscatedName("fc.Lb")
 	public static int[][][] mapBuildRegionSrc = new int[4][13][13];
 	@ObfuscatedName("dc.kb")
@@ -788,7 +788,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("oa.u")
 	public static int ignoreCount = 0;
 	@ObfuscatedName("mc.l")
-	public static int field1857 = 0;
+	public static int hintOffsetZ = 0;
 	@ObfuscatedName("la.y")
 	public static int selectedComId = 0;
 	@ObfuscatedName("ad.A")
@@ -824,9 +824,9 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ga.B")
 	public static JagString[] chatScreenName = new JagString[100];
 	@ObfuscatedName("a.jb")
-	public static JagString field62 = JagString.wrap("chatback");
+	public static JagString AUTO_CHATBACK = JagString.wrap("chatback");
 	@ObfuscatedName("re.n")
-	public static JagString field2700 = JagString.wrap("compass");
+	public static JagString AUTO_COMPASS = JagString.wrap("compass");
 	@ObfuscatedName("wa.B")
 	public static JagString EMPTY = JagString.wrap("");
 	@ObfuscatedName("wa.c")
@@ -842,63 +842,63 @@ public final class Client extends GameShell {
 	@ObfuscatedName("wa.z")
 	public static JagString socialInput = EMPTY;
 	@ObfuscatedName("ua.i")
-	public static JagString field3007 = JagString.wrap("mapedge");
+	public static JagString AUTO_MAPEDGE = JagString.wrap("mapedge");
 	@ObfuscatedName("l.c")
-	public static JagString field1646 = JagString.wrap("mapscene");
+	public static JagString AUTO_MAPSCENE = JagString.wrap("mapscene");
 	@ObfuscatedName("j.oc")
-	public static JagString field1440 = JagString.wrap("mapfunction");
+	public static JagString AUTO_MAPFUNCTION = JagString.wrap("mapfunction");
 	@ObfuscatedName("jc.tb")
-	public static JagString field1466 = JagString.wrap("hitmarks");
+	public static JagString AUTO_HITMARKS = JagString.wrap("hitmarks");
 	@ObfuscatedName("te.qb")
-	public static JagString field2965 = JagString.wrap("headicons_pk");
+	public static JagString AUTO_HEADICONS_PK = JagString.wrap("headicons_pk");
 	@ObfuscatedName("ga.S")
-	public static JagString field1034 = JagString.wrap("headicons_prayer");
+	public static JagString AUTO_HEADICONS_PRAYER = JagString.wrap("headicons_prayer");
 	@ObfuscatedName("rc.t")
-	public static JagString field2646 = JagString.wrap("headicons_hint");
+	public static JagString AUTO_HEADICONS_HINT = JagString.wrap("headicons_hint");
 	@ObfuscatedName("jc.ob")
-	public static JagString field1461 = JagString.wrap("overlay_multiway");
+	public static JagString AUTO_OVERLAY_MULTIWAY = JagString.wrap("overlay_multiway");
 	@ObfuscatedName("bb.o")
-	public static JagString field325 = JagString.wrap("mapmarker");
+	public static JagString AUTO_MAPMARKER = JagString.wrap("mapmarker");
 	@ObfuscatedName("va.nb")
-	public static JagString field3118 = JagString.wrap("cross");
+	public static JagString AUTO_CROSS = JagString.wrap("cross");
 	@ObfuscatedName("ae.k")
-	public static JagString field234 = JagString.wrap("mapdots");
+	public static JagString AUTO_MAPDOTS = JagString.wrap("mapdots");
 	@ObfuscatedName("a.w")
-	public static JagString field23 = JagString.wrap("scrollbar");
+	public static JagString AUTO_SCROLLBAR = JagString.wrap("scrollbar");
 	@ObfuscatedName("na.a")
-	public static JagString field1929 = JagString.wrap("mod_icons");
+	public static JagString AUTO_MOD_ICONS = JagString.wrap("mod_icons");
 	@ObfuscatedName("m.l")
 	public static JagString AUTO_CHEATPREFIX = JagString.wrap("::");
 	@ObfuscatedName("m.u")
-	public static JagString field1774 = JagString.wrap(")1");
+	public static JagString AUTO_COMMA = JagString.wrap(")1");
 	@ObfuscatedName("ma.jb")
 	public static JagString AUTO_MEM = JagString.wrap("Mem:");
 	@ObfuscatedName("kb.v")
 	public static JagString AUTO_MEM_KB = JagString.wrap("k");
 	@ObfuscatedName("kc.c")
-	public static JagString field1567 = JagString.wrap("invback");
+	public static JagString AUTO_INVBACK = JagString.wrap("invback");
 	@ObfuscatedName("kd.H")
 	public static JagString NULL = JagString.wrap("null");
 	@ObfuscatedName("id.x")
-	public static JagString field1383 = JagString.wrap("@red@");
+	public static JagString AUTO_RED = JagString.wrap("@red@");
 	@ObfuscatedName("l.b")
-	public static JagString field1645 = JagString.wrap("@or3@");
+	public static JagString AUTO_OR3 = JagString.wrap("@or3@");
 	@ObfuscatedName("wc.y")
-	public static JagString field3306 = JagString.wrap("@or2@");
+	public static JagString AUTO_OR2 = JagString.wrap("@or2@");
 	@ObfuscatedName("cb.v")
-	public static JagString field501 = JagString.wrap("@or1@");
+	public static JagString AUTO_OR1 = JagString.wrap("@or1@");
 	@ObfuscatedName("r.f")
-	public static JagString field2564 = JagString.wrap("@gre@");
+	public static JagString AUTO_GRE = JagString.wrap("@gre@");
 	@ObfuscatedName("g.B")
-	public static JagString field1005 = JagString.wrap("@gr3@");
+	public static JagString AUTO_GR3 = JagString.wrap("@gr3@");
 	@ObfuscatedName("nd.j")
-	public static JagString field2069 = JagString.wrap("@gr2@");
+	public static JagString AUTO_GR2 = JagString.wrap("@gr2@");
 	@ObfuscatedName("n.s")
-	public static JagString field1925 = JagString.wrap("@gr1@");
+	public static JagString AUTO_GR1 = JagString.wrap("@gr1@");
 	@ObfuscatedName("re.m")
-	public static JagString field2699 = JagString.wrap("@yel@");
+	public static JagString AUTO_YEL = JagString.wrap("@yel@");
 	@ObfuscatedName("rd.y")
-	public static JagString field2682 = JagString.wrap("backright2");
+	public static JagString AUTO_BACKRIGHT2 = JagString.wrap("backright2");
 	@ObfuscatedName("qd.xc")
 	public static JagString AUTO_ERRORTEST = JagString.wrap("::errortest");
 	@ObfuscatedName("ec.Ab")
@@ -910,7 +910,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("se.k")
 	public static JagString AUTO_CLIENTDROP = JagString.wrap("::clientdrop");
 	@ObfuscatedName("bd.T")
-	public static JagString field406 = JagString.wrap("backbase2");
+	public static JagString AUTO_BACKBASE2 = JagString.wrap("backbase2");
 	@ObfuscatedName("nd.z")
 	public static JagString AUTO_CHALREQ = JagString.wrap(":chalreq:");
 	@ObfuscatedName("hd.sb")
@@ -920,95 +920,95 @@ public final class Client extends GameShell {
 	@ObfuscatedName("he.Ab")
 	public static JagString AUTO_TRADEREQ = JagString.wrap(":tradereq:");
 	@ObfuscatedName("i.u")
-	public static JagString field1275 = JagString.wrap(" (X");
+	public static JagString AUTO_OPEN_BRACKET = JagString.wrap(" (X");
 	@ObfuscatedName("ia.Ub")
-	public static JagString field1309 = JagString.wrap("(Udns");
+	public static JagString AUTO_REPLACEDNS = JagString.wrap("(Udns");
 	@ObfuscatedName("hb.lb")
-	public static JagString field1166 = JagString.wrap("(U5");
+	public static JagString AUTO_REPLACE5 = JagString.wrap("(U5");
 	@ObfuscatedName("s.o")
-	public static JagString field2716 = JagString.wrap("(U4");
+	public static JagString AUTO_REPLACE4 = JagString.wrap("(U4");
 	@ObfuscatedName("wb.K")
-	public static JagString field3277 = JagString.wrap("(U3");
+	public static JagString AUTO_REPLACE3 = JagString.wrap("(U3");
 	@ObfuscatedName("pb.A")
-	public static JagString field2297 = JagString.wrap("(U2");
+	public static JagString AUTO_REPLACE2 = JagString.wrap("(U2");
 	@ObfuscatedName("na.j")
-	public static JagString field1938 = JagString.wrap("(U1");
+	public static JagString AUTO_REPLACE1 = JagString.wrap("(U1");
 	@ObfuscatedName("oe.m")
-	public static JagString AUTO_PCT = JagString.wrap("(U");
+	public static JagString AUTO_REPLACE = JagString.wrap("(U");
 	@ObfuscatedName("ob.k")
-	public static JagString field2162 = JagString.wrap("backleft2");
+	public static JagString AUTO_BACKLEFT2 = JagString.wrap("backleft2");
 	@ObfuscatedName("pc.B")
-	public static JagString field2333 = JagString.wrap("mapback");
+	public static JagString AUTO_MAPBACK = JagString.wrap("mapback");
 	@ObfuscatedName("pe.vb")
-	public static JagString field2355 = JagString.wrap("backvmid2");
+	public static JagString AUTO_BACKVMID2 = JagString.wrap("backvmid2");
 	@ObfuscatedName("qd.jd")
-	public static JagString field2535 = JagString.wrap("@cr2@");
+	public static JagString AUTO_CR2 = JagString.wrap("@cr2@");
 	@ObfuscatedName("ra.x")
-	public static JagString field2612 = JagString.wrap("@cr1@");
+	public static JagString AUTO_CR1 = JagString.wrap("@cr1@");
 	@ObfuscatedName("rc.c")
-	public static JagString field2629 = JagString.wrap(" @whi@(X");
+	public static JagString AUTO_WHITE = JagString.wrap(" @whi@(X");
 	@ObfuscatedName("rd.b")
-	public static JagString field2659 = JagString.wrap("@whi@ )4 ");
+	public static JagString AUTO_WHITE_SLASH = JagString.wrap("@whi@ )4 ");
 	@ObfuscatedName("sd.s")
-	public static JagString field2772 = JagString.wrap("0(U");
+	public static JagString AUTO_0PCT = JagString.wrap("0(U");
 	@ObfuscatedName("se.z")
-	public static JagString field2798 = JagString.wrap("backvmid1");
+	public static JagString AUTO_BACKVMID1 = JagString.wrap("backvmid1");
 	@ObfuscatedName("se.D")
-	public static JagString field2802 = JagString.wrap("Chat panel redrawn");
+	public static JagString AUTO_CHAT_REDRAWN = JagString.wrap("Chat panel redrawn");
 	@ObfuscatedName("wa.e")
-	public static JagString field3211 = JagString.wrap("Side panel redrawn");
+	public static JagString AUTO_SIDE_REDRAWN = JagString.wrap("Side panel redrawn");
 	@ObfuscatedName("wa.g")
-	public static JagString field3213 = JagString.wrap("Icons redrawn");
+	public static JagString AUTO_ICONS_REDRAWN = JagString.wrap("Icons redrawn");
 	@ObfuscatedName("vb.zb")
-	public static JagString field3136 = JagString.wrap("@cya@");
+	public static JagString AUTO_CYA = JagString.wrap("@cya@");
 	@ObfuscatedName("vc.r")
-	public static JagString field3163 = JagString.wrap("redstone3");
+	public static JagString AUTO_REDSTONE3 = JagString.wrap("redstone3");
 	@ObfuscatedName("w.g")
-	public static JagString field3203 = JagString.wrap(" x ");
+	public static JagString AUTO_QUANTITY = JagString.wrap(" x ");
 	@ObfuscatedName("jc.gb")
-	public static JagString field1453 = JagString.wrap("p11_full");
+	public static JagString AUTO_P11_FULL = JagString.wrap("p11_full");
 	@ObfuscatedName("wb.g")
-	public static JagString field3247 = JagString.wrap("p12_full");
+	public static JagString AUTO_P12_FULL = JagString.wrap("p12_full");
 	@ObfuscatedName("k.O")
-	public static JagString field1526 = JagString.wrap("b12_full");
+	public static JagString AUTO_B12_FULL = JagString.wrap("b12_full");
 	@ObfuscatedName("t.Gb")
-	public static JagString field2818 = JagString.wrap("sideicons");
+	public static JagString AUTO_SIDEICONS = JagString.wrap("sideicons");
 	@ObfuscatedName("tb.hc")
-	public static JagString field2910 = JagString.wrap("redstone2");
+	public static JagString AUTO_REDSTONE2 = JagString.wrap("redstone2");
 	@ObfuscatedName("tc.p")
-	public static JagString field2927 = JagString.wrap("backbase1");
+	public static JagString AUTO_BACKBASE1 = JagString.wrap("backbase1");
 	@ObfuscatedName("ua.v")
-	public static JagString field3020 = JagString.wrap("backleft1");
+	public static JagString AUTO_BACKLEFT1 = JagString.wrap("backleft1");
 	@ObfuscatedName("ua.B")
 	public static JagString AUTO_FPS = JagString.wrap("Fps:");
 	@ObfuscatedName("uc.w")
-	public static JagString field3059 = JagString.wrap("@yel@*V");
+	public static JagString AUTO_YEL_V = JagString.wrap("@yel@*V");
 	@ObfuscatedName("vd.vd")
-	public static JagString field3177 = null;
+	public static JagString objSelectedName = null;
 	@ObfuscatedName("k.L")
 	public static JagString targetVerb = null;
 	@ObfuscatedName("id.y")
-	public static JagString field1384 = null;
+	public static JagString targetOp = null;
 	@ObfuscatedName("ra.m")
-	public static JagString field2601 = JagString.wrap("(Y");
+	public static JagString AUTO_CLOSE_BRACKET = JagString.wrap("(Y");
 	@ObfuscatedName("qb.b")
-	public static JagString field2406 = JagString.wrap(" ");
+	public static JagString AUTO_SPACE = JagString.wrap(" ");
 	@ObfuscatedName("na.n")
 	public static JagString field1942 = JagString.wrap(" )2>");
 	@ObfuscatedName("la.s")
 	public static JagString AUTO_PCTCLOSE = JagString.wrap("(U(Y");
 	@ObfuscatedName("l.f")
-	public static JagString field1649 = JagString.wrap(" x");
+	public static JagString AUTO_QUANTITY2 = JagString.wrap(" x");
 	@ObfuscatedName("je.cc")
 	public static JagString field1500 = JagString.wrap(" )2> @whi@");
 	@ObfuscatedName("ie.e")
-	public static JagString field1393 = JagString.wrap("@whi@");
+	public static JagString AUTO_WHI = JagString.wrap("@whi@");
 	@ObfuscatedName("id.C")
-	public static JagString field1388 = JagString.wrap("huffman");
+	public static JagString AUTO_HUFFMAN = JagString.wrap("huffman");
 	@ObfuscatedName("hb.ob")
-	public static JagString field1169 = JagString.wrap("redstone1");
+	public static JagString AUTO_REDSTONE1 = JagString.wrap("redstone1");
 	@ObfuscatedName("h.rc")
-	public static JagString field1133 = JagString.wrap("(X100(U(Y");
+	public static JagString AUTO_100PCT = JagString.wrap("(X100(U(Y");
 	@ObfuscatedName("gb.s")
 	public static JagString AUTO_MINISEPARATOR = JagString.wrap(": ");
 	@ObfuscatedName("f.t")
@@ -1018,19 +1018,19 @@ public final class Client extends GameShell {
 	@ObfuscatedName("dd.m")
 	public static JagString field713 = JagString.wrap(":  ");
 	@ObfuscatedName("cd.e")
-	public static JagString field533 = JagString.wrap("backhmid1");
+	public static JagString AUTO_BACKHMID1 = JagString.wrap("backhmid1");
 	@ObfuscatedName("cc.Ib")
-	public static JagString field524 = JagString.wrap(" )2> @cya@");
+	public static JagString AUTO_TAG_CYAN = JagString.wrap(" )2> @cya@");
 	@ObfuscatedName("ca.D")
-	public static JagString field478 = JagString.wrap("backhmid2");
+	public static JagString AUTO_BACKHMID2 = JagString.wrap("backhmid2");
 	@ObfuscatedName("ca.E")
-	public static JagString field479 = JagString.wrap("");
+	public static JagString AUTO_EMPTY = JagString.wrap("");
 	@ObfuscatedName("ca.g")
-	public static JagString field455 = JagString.wrap("backright1");
+	public static JagString AUTO_BACKRIGHT1 = JagString.wrap("backright1");
 	@ObfuscatedName("bb.r")
 	public static JagString field328 = JagString.wrap(" )2> @lre@");
 	@ObfuscatedName("bb.h")
-	public static JagString field318 = JagString.wrap("backvmid3");
+	public static JagString AUTO_BACKVMID3 = JagString.wrap("backvmid3");
 	@ObfuscatedName("ae.e")
 	public static JagString AUTO_HIDDENBUTTONTEST = JagString.wrap("::hiddenbuttontest");
 	@ObfuscatedName("ad.H")
@@ -1100,7 +1100,7 @@ public final class Client extends GameShell {
 				TitleScreen.loadPos = 30;
 			} else {
 				if (var18 != 0) {
-					TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD40, JagString.parseInt(var18), AUTO_PCT});
+					TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD40, JagString.parseInt(var18), AUTO_REPLACE});
 				}
 				TitleScreen.loadPos = 30;
 			}
@@ -1114,22 +1114,22 @@ public final class Client extends GameShell {
 		} else if (loadingStep == 50) {
 			int var19 = 0;
 			if (p11 == null) {
-				p11 = PixLoader.makePixFont(sprites, EMPTY, field1453);
+				p11 = PixLoader.makePixFont(sprites, EMPTY, AUTO_P11_FULL);
 			} else {
 				var19++;
 			}
 			if (p12 == null) {
-				p12 = PixLoader.makePixFont(sprites, EMPTY, field3247);
+				p12 = PixLoader.makePixFont(sprites, EMPTY, AUTO_P12_FULL);
 			} else {
 				var19++;
 			}
 			if (b12 == null) {
-				b12 = PixLoader.makePixFont(sprites, EMPTY, field1526);
+				b12 = PixLoader.makePixFont(sprites, EMPTY, AUTO_B12_FULL);
 			} else {
 				var19++;
 			}
 			if (var19 < 3) {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD50, JagString.parseInt(var19 * 100 / 3), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD50, JagString.parseInt(var19 * 100 / 3), AUTO_REPLACE});
 				TitleScreen.loadPos = 40;
 			} else {
 				loadingStep = 60;
@@ -1140,7 +1140,7 @@ public final class Client extends GameShell {
 			int var20 = TitleScreen.ready(binary, sprites);
 			int var21 = TitleScreen.readyMax();
 			if (var20 < var21) {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD60, JagString.parseInt(var20 * 100 / var21), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD60, JagString.parseInt(var20 * 100 / var21), AUTO_REPLACE});
 				TitleScreen.loadPos = 50;
 			} else {
 				TitleScreen.loadString = Text.MAINLOAD60B;
@@ -1165,83 +1165,83 @@ public final class Client extends GameShell {
 				TitleScreen.loadPos = 60;
 				TitleScreen.loadString = Text.MAINLOAD70B;
 			} else {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD70, JagString.parseInt(configs.getIndexLoadProgress()), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD70, JagString.parseInt(configs.getIndexLoadProgress()), AUTO_REPLACE});
 				TitleScreen.loadPos = 60;
 			}
 		} else if (loadingStep == 80) {
 			int var22 = 0;
 			if (compass == null) {
-				compass = PixLoader.makePix32(sprites, field2700, EMPTY);
+				compass = PixLoader.makePix32(sprites, AUTO_COMPASS, EMPTY);
 			} else {
 				var22++;
 			}
 			if (mapedge == null) {
-				mapedge = PixLoader.makePix32(sprites, field3007, EMPTY);
+				mapedge = PixLoader.makePix32(sprites, AUTO_MAPEDGE, EMPTY);
 			} else {
 				var22++;
 			}
 			if (mapscene == null) {
-				mapscene = PixLoader.makePix8Array(sprites, field1646, EMPTY);
+				mapscene = PixLoader.makePix8Array(sprites, AUTO_MAPSCENE, EMPTY);
 			} else {
 				var22++;
 			}
 			if (mapfunction == null) {
-				mapfunction = PixLoader.makePix32Array(sprites, field1440, EMPTY);
+				mapfunction = PixLoader.makePix32Array(sprites, AUTO_MAPFUNCTION, EMPTY);
 			} else {
 				var22++;
 			}
 			if (hitmarks == null) {
-				hitmarks = PixLoader.makePix32Array(sprites, field1466, EMPTY);
+				hitmarks = PixLoader.makePix32Array(sprites, AUTO_HITMARKS, EMPTY);
 			} else {
 				var22++;
 			}
 			if (headiconsPk == null) {
-				headiconsPk = PixLoader.makePix32Array(sprites, field2965, EMPTY);
+				headiconsPk = PixLoader.makePix32Array(sprites, AUTO_HEADICONS_PK, EMPTY);
 			} else {
 				var22++;
 			}
 			if (headiconsPrayer == null) {
-				headiconsPrayer = PixLoader.makePix32Array(sprites, field1034, EMPTY);
+				headiconsPrayer = PixLoader.makePix32Array(sprites, AUTO_HEADICONS_PRAYER, EMPTY);
 			} else {
 				var22++;
 			}
 			if (headiconsHint == null) {
-				headiconsHint = PixLoader.makePix32Array(sprites, field2646, EMPTY);
+				headiconsHint = PixLoader.makePix32Array(sprites, AUTO_HEADICONS_HINT, EMPTY);
 			} else {
 				var22++;
 			}
 			if (overlayMultiway == null) {
-				overlayMultiway = PixLoader.makePix32(sprites, field1461, EMPTY);
+				overlayMultiway = PixLoader.makePix32(sprites, AUTO_OVERLAY_MULTIWAY, EMPTY);
 			} else {
 				var22++;
 			}
 			if (mapmarker == null) {
-				mapmarker = PixLoader.makePix32Array(sprites, field325, EMPTY);
+				mapmarker = PixLoader.makePix32Array(sprites, AUTO_MAPMARKER, EMPTY);
 			} else {
 				var22++;
 			}
 			if (cross == null) {
-				cross = PixLoader.makePix32Array(sprites, field3118, EMPTY);
+				cross = PixLoader.makePix32Array(sprites, AUTO_CROSS, EMPTY);
 			} else {
 				var22++;
 			}
 			if (mapdots == null) {
-				mapdots = PixLoader.makePix32Array(sprites, field234, EMPTY);
+				mapdots = PixLoader.makePix32Array(sprites, AUTO_MAPDOTS, EMPTY);
 			} else {
 				var22++;
 			}
 			if (scrollbar == null) {
-				scrollbar = PixLoader.makePix8Array(sprites, field23, EMPTY);
+				scrollbar = PixLoader.makePix8Array(sprites, AUTO_SCROLLBAR, EMPTY);
 			} else {
 				var22++;
 			}
 			if (modIcons == null) {
-				modIcons = PixLoader.makePix8Array(sprites, field1929, EMPTY);
+				modIcons = PixLoader.makePix8Array(sprites, AUTO_MOD_ICONS, EMPTY);
 			} else {
 				var22++;
 			}
 			if (var22 < 14) {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD80, JagString.parseInt(var22 * 100 / 14), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD80, JagString.parseInt(var22 * 100 / 14), AUTO_REPLACE});
 				TitleScreen.loadPos = 70;
 			} else {
 				mapedge.trim();
@@ -1261,7 +1261,7 @@ public final class Client extends GameShell {
 			int var28 = prefetchFrame(sprites);
 			int var29 = frameCount();
 			if (var28 < var29) {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD85, JagString.parseInt(var28 * 100 / var29), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD85, JagString.parseInt(var28 * 100 / var29), AUTO_REPLACE});
 				TitleScreen.loadPos = 80;
 			} else {
 				TitleScreen.loadString = Text.MAINLOAD85B;
@@ -1277,7 +1277,7 @@ public final class Client extends GameShell {
 				TitleScreen.loadPos = 90;
 				TitleScreen.loadString = Text.MAINLOAD90B;
 			} else {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD90, JagString.parseInt(textures.getIndexLoadProgress()), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD90, JagString.parseInt(textures.getIndexLoadProgress()), AUTO_REPLACE});
 				TitleScreen.loadPos = 90;
 			}
 		} else if (loadingStep == 110) {
@@ -1287,26 +1287,26 @@ public final class Client extends GameShell {
 			loadingStep = 120;
 			TitleScreen.loadPos = 94;
 		} else if (loadingStep == 120) {
-			if (binary.requestDownload(field1388, EMPTY)) {
-				Huffman var31 = new Huffman(binary.getFile(EMPTY, field1388));
+			if (binary.requestDownload(AUTO_HUFFMAN, EMPTY)) {
+				Huffman var31 = new Huffman(binary.getFile(EMPTY, AUTO_HUFFMAN));
 				WordPack.setHuffman(var31);
 				loadingStep = 130;
 				TitleScreen.loadString = Text.MAINLOAD120B;
 				TitleScreen.loadPos = 96;
 			} else {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD120, field2772});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD120, AUTO_0PCT});
 				TitleScreen.loadPos = 96;
 			}
 		} else if (loadingStep == 130) {
 			if (!interfaces.requestFullDownload()) {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD130, JagString.parseInt(interfaces.getIndexLoadProgress() * 4 / 5), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD130, JagString.parseInt(interfaces.getIndexLoadProgress() * 4 / 5), AUTO_REPLACE});
 				TitleScreen.loadPos = 100;
 			} else if (scripts.requestFullDownload()) {
 				TitleScreen.loadString = Text.MAINLOAD130B;
 				loadingStep = 140;
 				TitleScreen.loadPos = 100;
 			} else {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD130, JagString.parseInt(scripts.getIndexLoadProgress() / 5 + 80), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD130, JagString.parseInt(scripts.getIndexLoadProgress() / 5 + 80), AUTO_REPLACE});
 				TitleScreen.loadPos = 100;
 			}
 		} else if (loadingStep == 140) {
@@ -1495,23 +1495,23 @@ public final class Client extends GameShell {
 	public static JagString combatColourCode(int arg0, int arg1) {
 		int var2 = arg0 - arg1;
 		if (var2 < -9) {
-			return field1383;
+			return AUTO_RED;
 		} else if (var2 < -6) {
-			return field1645;
+			return AUTO_OR3;
 		} else if (var2 < -3) {
-			return field3306;
+			return AUTO_OR2;
 		} else if (var2 < 0) {
-			return field501;
+			return AUTO_OR1;
 		} else if (var2 > 9) {
-			return field2564;
+			return AUTO_GRE;
 		} else if (var2 > 6) {
-			return field1005;
+			return AUTO_GR3;
 		} else if (var2 > 3) {
-			return field2069;
+			return AUTO_GR2;
 		} else if (var2 > 0) {
-			return field1925;
+			return AUTO_GR1;
 		} else {
-			return field2699;
+			return AUTO_YEL;
 		}
 	}
 
@@ -1591,14 +1591,14 @@ public final class Client extends GameShell {
 		}
 		JagString var0;
 		if (useMode == 1 && menuNumEntries < 2) {
-			var0 = JagString.join(new JagString[]{Text.USE, Text.MINISEPARATOR, field3177, field1942});
+			var0 = JagString.join(new JagString[]{Text.USE, Text.MINISEPARATOR, objSelectedName, field1942});
 		} else if (targetMode == 1 && menuNumEntries < 2) {
-			var0 = JagString.join(new JagString[]{targetVerb, Text.MINISEPARATOR, field1384, field1942});
+			var0 = JagString.join(new JagString[]{targetVerb, Text.MINISEPARATOR, targetOp, field1942});
 		} else {
 			var0 = menuOption[menuNumEntries - 1];
 		}
 		if (menuNumEntries > 2) {
-			var0 = JagString.join(new JagString[]{var0, field2659, JagString.parseInt(menuNumEntries - 2), Text.MOREOPTIONS});
+			var0 = JagString.join(new JagString[]{var0, AUTO_WHITE_SLASH, JagString.parseInt(menuNumEntries - 2), Text.MOREOPTIONS});
 		}
 		b12.drawStringAntiMacro(var0, 4, 16777215, loopCycle / 1000);
 	}
@@ -2053,8 +2053,8 @@ public final class Client extends GameShell {
 	public static void drawMinimenuGerman() {
 		JagString var0 = null;
 		for (int var1 = 0; var1 < menuNumEntries; var1++) {
-			if (menuOption[var1].indexOf(field2334) != -1) {
-				var0 = menuOption[var1].substring(menuOption[var1].indexOf(field2334));
+			if (menuOption[var1].indexOf(AUTO_LRE) != -1) {
+				var0 = menuOption[var1].substring(menuOption[var1].indexOf(AUTO_LRE));
 				break;
 			}
 		}
@@ -2284,17 +2284,17 @@ public final class Client extends GameShell {
 				arg0.buttonType = 0;
 			} else {
 				if (friendWorld[var1] == 0) {
-					arg0.text = JagString.join(new JagString[]{field1383, Text.OFFLINE});
+					arg0.text = JagString.join(new JagString[]{AUTO_RED, Text.OFFLINE});
 				} else if (friendWorld[var1] < 5000) {
 					if (friendWorld[var1] == worldid) {
-						arg0.text = JagString.join(new JagString[]{field2564, Text.WORLD, JagString.parseInt(friendWorld[var1])});
+						arg0.text = JagString.join(new JagString[]{AUTO_GRE, Text.WORLD, JagString.parseInt(friendWorld[var1])});
 					} else {
-						arg0.text = JagString.join(new JagString[]{field2699, Text.WORLD, JagString.parseInt(friendWorld[var1])});
+						arg0.text = JagString.join(new JagString[]{AUTO_YEL, Text.WORLD, JagString.parseInt(friendWorld[var1])});
 					}
 				} else if (friendWorld[var1] == worldid) {
-					arg0.text = JagString.join(new JagString[]{field2564, Text.CLASSIC, JagString.parseInt(friendWorld[var1] - 5000)});
+					arg0.text = JagString.join(new JagString[]{AUTO_GRE, Text.CLASSIC, JagString.parseInt(friendWorld[var1] - 5000)});
 				} else {
-					arg0.text = JagString.join(new JagString[]{field2699, Text.CLASSIC, JagString.parseInt(friendWorld[var1] - 5000)});
+					arg0.text = JagString.join(new JagString[]{AUTO_YEL, Text.CLASSIC, JagString.parseInt(friendWorld[var1] - 5000)});
 				}
 				arg0.buttonType = 1;
 			}
@@ -2364,7 +2364,7 @@ public final class Client extends GameShell {
 			arg0.model1Id = 1;
 			arg0.model1Type = 5;
 		} else if (var1 == 600) {
-			arg0.text = JagString.join(new JagString[]{reportAbuseInput, field3059});
+			arg0.text = JagString.join(new JagString[]{reportAbuseInput, AUTO_YEL_V});
 		} else if (var1 == 620) {
 			if (staffmodlevel < 1) {
 				arg0.text = EMPTY;
@@ -2753,9 +2753,9 @@ public final class Client extends GameShell {
 					arg0.chatEffect = var9 & 0xFF;
 					arg0.chatColour = var9 >> 8;
 					if (var10 == 2 || var10 == 3) {
-						addChat(1, var17, JagString.join(new JagString[]{field2535, arg0.name}));
+						addChat(1, var17, JagString.join(new JagString[]{AUTO_CR2, arg0.name}));
 					} else if (var10 == 1) {
-						addChat(1, var17, JagString.join(new JagString[]{field2612, arg0.name}));
+						addChat(1, var17, JagString.join(new JagString[]{AUTO_CR1, arg0.name}));
 					} else {
 						addChat(2, var17, arg0.name);
 					}
@@ -3055,7 +3055,7 @@ public final class Client extends GameShell {
 									var37 = NULL;
 								}
 								if (var39.stackable == 1 || var11.invcount != 1) {
-									var37 = JagString.join(new JagString[]{var37, field1649, niceNumber(var11.invcount)});
+									var37 = JagString.join(new JagString[]{var37, AUTO_QUANTITY2, niceNumber(var11.invcount)});
 								}
 							}
 							if (var11.buttonType == 6 && resumePauseComId == var11.parentId) {
@@ -3241,7 +3241,7 @@ public final class Client extends GameShell {
 											var76 = NULL;
 										}
 										if (var75.stackable == 1 || var11.linkObjNumber[var72] != 1) {
-											var76 = JagString.join(new JagString[]{var76, field1649, niceNumber(var11.linkObjNumber[var72])});
+											var76 = JagString.join(new JagString[]{var76, AUTO_QUANTITY2, niceNumber(var11.linkObjNumber[var72])});
 										}
 										int var77 = (var11.marginX + 115) * var74 + var12;
 										int var78 = (var11.marginY + 12) * var73 + var13;
@@ -4267,24 +4267,24 @@ public final class Client extends GameShell {
 				}
 				if (hintType >= 2 && hintType <= 6) {
 					if (hintType == 2) {
-						field1857 = 64;
-						field2572 = 64;
+						hintOffsetZ = 64;
+						hintOffsetX = 64;
 					}
 					if (hintType == 3) {
-						field1857 = 64;
-						field2572 = 0;
+						hintOffsetZ = 64;
+						hintOffsetX = 0;
 					}
 					if (hintType == 4) {
-						field1857 = 64;
-						field2572 = 128;
+						hintOffsetZ = 64;
+						hintOffsetX = 128;
 					}
 					if (hintType == 5) {
-						field2572 = 64;
-						field1857 = 0;
+						hintOffsetX = 64;
+						hintOffsetZ = 0;
 					}
 					if (hintType == 6) {
-						field2572 = 64;
-						field1857 = 128;
+						hintOffsetX = 64;
+						hintOffsetZ = 128;
 					}
 					hintType = 2;
 					hintTileX = in.g2();
@@ -4379,9 +4379,9 @@ public final class Client extends GameShell {
 					privateMessageCount = (privateMessageCount + 1) % 100;
 					JagString var139 = WordPack.method893(in).forceCapitalisationOfWords();
 					if (var133 == 2 || var133 == 3) {
-						addChat(7, var139, JagString.join(new JagString[]{field2535, JString.toScreenName(var127).toRawUsername()}));
+						addChat(7, var139, JagString.join(new JagString[]{AUTO_CR2, JString.toScreenName(var127).toRawUsername()}));
 					} else if (var133 == 1) {
-						addChat(7, var139, JagString.join(new JagString[]{field2612, JString.toScreenName(var127).toRawUsername()}));
+						addChat(7, var139, JagString.join(new JagString[]{AUTO_CR1, JString.toScreenName(var127).toRawUsername()}));
 					} else {
 						addChat(3, var139, JString.toScreenName(var127).toRawUsername());
 					}
@@ -5082,7 +5082,7 @@ public final class Client extends GameShell {
 			return;
 		}
 		if (mapLoadState != 0) {
-			messageBox(Text.LOADING, true, field1133);
+			messageBox(Text.LOADING, true, AUTO_100PCT);
 		}
 		clearCaches();
 		world.resetMap();
@@ -5219,8 +5219,8 @@ public final class Client extends GameShell {
 			for (int var55 = var51 - 1; var55 <= var54 + 1; var55++) {
 				for (int var56 = var52 - 1; var56 <= var53 + 1; var56++) {
 					if (var51 > var55 || var55 > var54 || var56 < var52 || var56 > var53) {
-						maps.updateCacheHint(JagString.join(new JagString[]{field2305, JagString.parseInt(var55), field477, JagString.parseInt(var56)}));
-						maps.updateCacheHint(JagString.join(new JagString[]{field1259, JagString.parseInt(var55), field477, JagString.parseInt(var56)}));
+						maps.updateCacheHint(JagString.join(new JagString[]{AUTO_M, JagString.parseInt(var55), AUTO_UNDERSCORE, JagString.parseInt(var56)}));
+						maps.updateCacheHint(JagString.join(new JagString[]{AUTO_L, JagString.parseInt(var55), AUTO_UNDERSCORE, JagString.parseInt(var56)}));
 					}
 				}
 			}
@@ -5774,13 +5774,13 @@ public final class Client extends GameShell {
 		}
 		JagString var4 = arg3.name;
 		if (arg3.vislevel != 0) {
-			var4 = JagString.join(new JagString[]{var4, combatColourCode(localPlayer.combatLevel, arg3.vislevel), field1275, Text.LEVEL, JagString.parseInt(arg3.vislevel), field2601});
+			var4 = JagString.join(new JagString[]{var4, combatColourCode(localPlayer.combatLevel, arg3.vislevel), AUTO_OPEN_BRACKET, Text.LEVEL, JagString.parseInt(arg3.vislevel), AUTO_CLOSE_BRACKET});
 		}
 		if (useMode == 1) {
-			addMenuOption(arg2, Text.USE, arg1, arg0, 49, JagString.join(new JagString[]{field3177, field805, var4}));
+			addMenuOption(arg2, Text.USE, arg1, arg0, 49, JagString.join(new JagString[]{objSelectedName, field805, var4}));
 		} else if (targetMode == 1) {
 			if ((targetMask & 0x2) == 2) {
-				addMenuOption(arg2, targetVerb, arg1, arg0, 21, JagString.join(new JagString[]{field1384, field805, var4}));
+				addMenuOption(arg2, targetVerb, arg1, arg0, 21, JagString.join(new JagString[]{targetOp, field805, var4}));
 			}
 		} else {
 			JagString[] var5 = arg3.op;
@@ -5806,7 +5806,7 @@ public final class Client extends GameShell {
 						if (var6 == 4) {
 							var7 = 20;
 						}
-						addMenuOption(arg2, var5[var6], arg1, arg0, var7, JagString.join(new JagString[]{field2699, var4}));
+						addMenuOption(arg2, var5[var6], arg1, arg0, var7, JagString.join(new JagString[]{AUTO_YEL, var4}));
 					}
 				}
 			}
@@ -5833,11 +5833,11 @@ public final class Client extends GameShell {
 						if (var8 == 4) {
 							var10 = var9 + 20;
 						}
-						addMenuOption(arg2, var5[var8], arg1, arg0, var10, JagString.join(new JagString[]{field2699, var4}));
+						addMenuOption(arg2, var5[var8], arg1, arg0, var10, JagString.join(new JagString[]{AUTO_YEL, var4}));
 					}
 				}
 			}
-			addMenuOption(arg2, Text.EXAMINE, arg1, arg0, 1001, JagString.join(new JagString[]{field2699, var4}));
+			addMenuOption(arg2, Text.EXAMINE, arg1, arg0, 1001, JagString.join(new JagString[]{AUTO_YEL, var4}));
 		}
 	}
 
@@ -6425,12 +6425,12 @@ public final class Client extends GameShell {
 		}
 		JagString var4;
 		if (arg2.skillLevel == 0) {
-			var4 = JagString.join(new JagString[]{arg2.name, combatColourCode(localPlayer.combatLevel, arg2.combatLevel), field1275, Text.LEVEL, JagString.parseInt(arg2.combatLevel), field2601});
+			var4 = JagString.join(new JagString[]{arg2.name, combatColourCode(localPlayer.combatLevel, arg2.combatLevel), AUTO_OPEN_BRACKET, Text.LEVEL, JagString.parseInt(arg2.combatLevel), AUTO_CLOSE_BRACKET});
 		} else {
-			var4 = JagString.join(new JagString[]{arg2.name, field1275, Text.SKILL, JagString.parseInt(arg2.skillLevel), field2601});
+			var4 = JagString.join(new JagString[]{arg2.name, AUTO_OPEN_BRACKET, Text.SKILL, JagString.parseInt(arg2.skillLevel), AUTO_CLOSE_BRACKET});
 		}
 		if (useMode == 1) {
-			addMenuOption(arg3, Text.USE, arg0, arg1, 22, JagString.join(new JagString[]{field3177, field1500, var4}));
+			addMenuOption(arg3, Text.USE, arg0, arg1, 22, JagString.join(new JagString[]{objSelectedName, field1500, var4}));
 		} else if (targetMode != 1) {
 			for (int var5 = 4; var5 >= 0; var5--) {
 				if (playerOp[var5] != null) {
@@ -6465,15 +6465,15 @@ public final class Client extends GameShell {
 					if (var5 == 4) {
 						var6 = var7 + 41;
 					}
-					addMenuOption(arg3, playerOp[var5], arg0, arg1, var6, JagString.join(new JagString[]{field1393, var4}));
+					addMenuOption(arg3, playerOp[var5], arg0, arg1, var6, JagString.join(new JagString[]{AUTO_WHI, var4}));
 				}
 			}
 		} else if ((targetMask & 0x8) == 8) {
-			addMenuOption(arg3, targetVerb, arg0, arg1, 1, JagString.join(new JagString[]{field1384, field1500, var4}));
+			addMenuOption(arg3, targetVerb, arg0, arg1, 1, JagString.join(new JagString[]{targetOp, field1500, var4}));
 		}
 		for (int var8 = 0; var8 < menuNumEntries; var8++) {
 			if (menuAction[var8] == 7) {
-				menuOption[var8] = JagString.join(new JagString[]{Text.WALKHERE, Text.MINISEPARATOR, field1393, var4});
+				menuOption[var8] = JagString.join(new JagString[]{Text.WALKHERE, Text.MINISEPARATOR, AUTO_WHI, var4});
 				return;
 			}
 		}
@@ -6833,7 +6833,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("k.d(B)V")
 	public static void coordArrow() {
 		if (hintType == 2) {
-			getOverlayPos(hintHeight * 2, (hintTileZ - mapBuildBaseZ << 7) + field1857, (-mapBuildBaseX + hintTileX << 7) - -field2572);
+			getOverlayPos(hintHeight * 2, (hintTileZ - mapBuildBaseZ << 7) + hintOffsetZ, (-mapBuildBaseX + hintTileX << 7) - -hintOffsetX);
 			if (projectX > -1 && loopCycle % 20 < 10) {
 				headiconsHint[0].plotSprite(projectX - 12, projectY + -28);
 			}
@@ -6944,11 +6944,11 @@ public final class Client extends GameShell {
 					JagString var5 = chatUsername[var3];
 					int var6 = chatScrollPos + 70 - var1 * 14;
 					byte var7 = 0;
-					if (var5 != null && var5.startsWith(field2612)) {
+					if (var5 != null && var5.startsWith(AUTO_CR1)) {
 						var5 = var5.substring(5);
 						var7 = 1;
 					}
-					if (var5 != null && var5.startsWith(field2535)) {
+					if (var5 != null && var5.startsWith(AUTO_CR2)) {
 						var5 = var5.substring(5);
 						var7 = 2;
 					}
@@ -6997,7 +6997,7 @@ public final class Client extends GameShell {
 					if (var4 == 4 && (chatTradeMode == 0 || chatTradeMode == 1 && isFriend(var5))) {
 						var1++;
 						if (var6 > 0 && var6 < 110) {
-							var2.drawString(JagString.join(new JagString[]{var5, field2406, chatText[var3]}), 4, var6, 8388736);
+							var2.drawString(JagString.join(new JagString[]{var5, AUTO_SPACE, chatText[var3]}), 4, var6, 8388736);
 						}
 					}
 					if (var4 == 5 && splitPrivateChat == 0 && chatPrivateMode < 2) {
@@ -7008,15 +7008,15 @@ public final class Client extends GameShell {
 					}
 					if (var4 == 6 && splitPrivateChat == 0 && chatPrivateMode < 2) {
 						if (var6 > 0 && var6 < 110) {
-							var2.drawString(JagString.join(new JagString[]{Text.TO, field2406, var5, AUTO_COLON}), 4, var6, 0);
-							var2.drawString(chatText[var3], var2.stringWid(JagString.join(new JagString[]{Text.TO, field2406, var5})) + 12, var6, 8388608);
+							var2.drawString(JagString.join(new JagString[]{Text.TO, AUTO_SPACE, var5, AUTO_COLON}), 4, var6, 0);
+							var2.drawString(chatText[var3], var2.stringWid(JagString.join(new JagString[]{Text.TO, AUTO_SPACE, var5})) + 12, var6, 8388608);
 						}
 						var1++;
 					}
 					if (var4 == 8 && (chatTradeMode == 0 || chatTradeMode == 1 && isFriend(var5))) {
 						var1++;
 						if (var6 > 0 && var6 < 110) {
-							var2.drawString(JagString.join(new JagString[]{var5, field2406, chatText[var3]}), 4, var6, 8270336);
+							var2.drawString(JagString.join(new JagString[]{var5, AUTO_SPACE, chatText[var3]}), 4, var6, 8270336);
 						}
 					}
 				}
@@ -7123,7 +7123,7 @@ public final class Client extends GameShell {
 	}
 
 	@ObfuscatedName("vc.b(Z)V")
-	public static void addWorldOptions() {
+	public static void minimenuBuildSceneActions() {
 		int var0 = -1;
 		if (useMode == 0 && targetMode == 0) {
 			addMenuOption(0, Text.WALKHERE, ClientMouseListener.mouseY, ClientMouseListener.mouseX, 7, EMPTY);
@@ -7145,7 +7145,7 @@ public final class Client extends GameShell {
 						continue;
 					}
 					if (useMode == 1) {
-						addMenuOption(var2, Text.USE, var4, var3, 5, JagString.join(new JagString[]{field3177, field524, var7.name}));
+						addMenuOption(var2, Text.USE, var4, var3, 5, JagString.join(new JagString[]{objSelectedName, AUTO_TAG_CYAN, var7.name}));
 					} else if (targetMode != 1) {
 						JagString[] var8 = var7.op;
 						if (showOpIndex) {
@@ -7170,13 +7170,13 @@ public final class Client extends GameShell {
 									if (var9 == 4) {
 										var10 = 1002;
 									}
-									addMenuOption(var2, var8[var9], var4, var3, var10, JagString.join(new JagString[]{field3136, var7.name}));
+									addMenuOption(var2, var8[var9], var4, var3, var10, JagString.join(new JagString[]{AUTO_CYA, var7.name}));
 								}
 							}
 						}
-						addMenuOption(var7.id << 14, Text.EXAMINE, var4, var3, 1004, JagString.join(new JagString[]{field3136, var7.name}));
+						addMenuOption(var7.id << 14, Text.EXAMINE, var4, var3, 1004, JagString.join(new JagString[]{AUTO_CYA, var7.name}));
 					} else if ((targetMask & 0x4) == 4) {
-						addMenuOption(var2, targetVerb, var4, var3, 32, JagString.join(new JagString[]{field1384, field524, var7.name}));
+						addMenuOption(var2, targetVerb, var4, var3, 32, JagString.join(new JagString[]{targetOp, AUTO_TAG_CYAN, var7.name}));
 					}
 				}
 				if (var5 == 1) {
@@ -7221,7 +7221,7 @@ public final class Client extends GameShell {
 						for (ClientObj var22 = (ClientObj) var21.tail(); var22 != null; var22 = (ClientObj) var21.prev()) {
 							ObjType var23 = ObjType.list(var22.id);
 							if (useMode == 1) {
-								addMenuOption(var22.id, Text.USE, var4, var3, 47, JagString.join(new JagString[]{field3177, field328, var23.name}));
+								addMenuOption(var22.id, Text.USE, var4, var3, 47, JagString.join(new JagString[]{objSelectedName, field328, var23.name}));
 							} else if (targetMode != 1) {
 								JagString[] var24 = var23.op;
 								if (showOpIndex) {
@@ -7245,14 +7245,14 @@ public final class Client extends GameShell {
 										if (var25 == 4) {
 											var26 = 36;
 										}
-										addMenuOption(var22.id, var24[var25], var4, var3, var26, JagString.join(new JagString[]{field2334, var23.name}));
+										addMenuOption(var22.id, var24[var25], var4, var3, var26, JagString.join(new JagString[]{AUTO_LRE, var23.name}));
 									} else if (var25 == 2) {
-										addMenuOption(var22.id, Text.TAKE, var4, var3, 3, JagString.join(new JagString[]{field2334, var23.name}));
+										addMenuOption(var22.id, Text.TAKE, var4, var3, 3, JagString.join(new JagString[]{AUTO_LRE, var23.name}));
 									}
 								}
-								addMenuOption(var22.id, Text.EXAMINE, var4, var3, 1003, JagString.join(new JagString[]{field2334, var23.name}));
+								addMenuOption(var22.id, Text.EXAMINE, var4, var3, 1003, JagString.join(new JagString[]{AUTO_LRE, var23.name}));
 							} else if ((targetMask & 0x1) == 1) {
-								addMenuOption(var22.id, targetVerb, var4, var3, 15, JagString.join(new JagString[]{field1384, field328, var23.name}));
+								addMenuOption(var22.id, targetVerb, var4, var3, 15, JagString.join(new JagString[]{targetOp, field328, var23.name}));
 							}
 						}
 					}
@@ -7373,7 +7373,7 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 26 || var3 == 46) {
 			JagString var8 = menuOption[arg0];
-			int var9 = var8.indexOf(field1393);
+			int var9 = var8.indexOf(AUTO_WHI);
 			if (var9 != -1) {
 				JagString var10 = var8.substring(var9 + 5).trim();
 				JagString var11 = var10.getRepeatedCharacter().toRawUsername();
@@ -7531,10 +7531,10 @@ public final class Client extends GameShell {
 			objSelectedSlot = var1;
 			useSelectedComId = var2;
 			useMode = 1;
-			field3177 = JagString.join(new JagString[]{field2334, ObjType.list(var4).name, field1393});
+			objSelectedName = JagString.join(new JagString[]{AUTO_LRE, ObjType.list(var4).name, AUTO_WHI});
 			targetMode = 0;
-			if (field3177 == null) {
-				field3177 = NULL;
+			if (objSelectedName == null) {
+				objSelectedName = NULL;
 			}
 			redrawSide = true;
 			return;
@@ -7586,7 +7586,7 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 18) {
 			JagString var26 = menuOption[arg0];
-			int var27 = var26.indexOf(field1393);
+			int var27 = var26.indexOf(AUTO_WHI);
 			if (var27 != -1) {
 				long var28 = var26.substring(var27 + 5).trim().toUserhash();
 				int var30 = -1;
@@ -7712,7 +7712,7 @@ public final class Client extends GameShell {
 			targetMask = var35.targetMask;
 			useMode = 0;
 			targetComId = var2;
-			field1384 = JagString.join(new JagString[]{field2564, var35.targetBase, field1393});
+			targetOp = JagString.join(new JagString[]{AUTO_GRE, var35.targetBase, AUTO_WHI});
 			if (targetMask == 16) {
 				redrawIcons = true;
 				activeIcon = 3;
@@ -7730,7 +7730,7 @@ public final class Client extends GameShell {
 				out.p1Enc(151);
 				out.p2_alt3(var4);
 			} else {
-				addChat(0, JagString.join(new JagString[]{JagString.parseInt(var36.invcount), field3203, ObjType.list(var4).name}), EMPTY);
+				addChat(0, JagString.join(new JagString[]{JagString.parseInt(var36.invcount), AUTO_QUANTITY, ObjType.list(var4).name}), EMPTY);
 			}
 		}
 		if (var3 == 42) {
@@ -7821,7 +7821,7 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 45 || var3 == 51 || var3 == 13 || var3 == 35) {
 			JagString var45 = menuOption[arg0];
-			int var46 = var45.indexOf(field1393);
+			int var46 = var45.indexOf(AUTO_WHI);
 			if (var46 != -1) {
 				long var47 = var45.substring(var46 + 5).trim().toUserhash();
 				if (var3 == 45) {
@@ -7865,7 +7865,7 @@ public final class Client extends GameShell {
 				out.p1Enc(151);
 				out.p2_alt3(var4);
 			} else {
-				addChat(0, JagString.join(new JagString[]{JagString.parseInt(var50.linkObjNumber[var1]), field3203, ObjType.list(var4).name}), EMPTY);
+				addChat(0, JagString.join(new JagString[]{JagString.parseInt(var50.linkObjNumber[var1]), AUTO_QUANTITY, ObjType.list(var4).name}), EMPTY);
 			}
 			selectedItem = var1;
 			selectedCycle = 0;
@@ -7951,7 +7951,7 @@ public final class Client extends GameShell {
 		}
 		if (var3 == 28) {
 			JagString var52 = menuOption[arg0];
-			int var53 = var52.indexOf(field1393);
+			int var53 = var52.indexOf(AUTO_WHI);
 			if (var53 != -1) {
 				if (mainModalId == -1) {
 					closeModal();
@@ -8178,17 +8178,17 @@ public final class Client extends GameShell {
 			p12.method210(JagString.join(new JagString[]{AUTO_MEM, JagString.parseInt(var4), AUTO_MEM_KB}), 35, var2);
 			var8 += 15;
 			if (debugRedrawSide) {
-				p12.method210(field3211, 50, 16711680);
+				p12.method210(AUTO_SIDE_REDRAWN, 50, 16711680);
 				var8 += 15;
 				debugRedrawSide = false;
 			}
 			if (debugRedrawChat) {
-				p12.method210(field2802, var8, 16711680);
+				p12.method210(AUTO_CHAT_REDRAWN, var8, 16711680);
 				var8 += 15;
 				debugRedrawChat = false;
 			}
 			if (debugRedrawIcons) {
-				p12.method210(field3213, var8, 16711680);
+				p12.method210(AUTO_ICONS_REDRAWN, var8, 16711680);
 				debugRedrawIcons = false;
 				var8 += 15;
 			}
@@ -8878,11 +8878,11 @@ public final class Client extends GameShell {
 				JagString var3 = chatUsername[var2];
 				byte var4 = 0;
 				int var5 = chatType[var2];
-				if (var3 != null && var3.startsWith(field2612)) {
+				if (var3 != null && var3.startsWith(AUTO_CR1)) {
 					var3 = var3.substring(5);
 					var4 = 1;
 				}
-				if (var3 != null && var3.startsWith(field2535)) {
+				if (var3 != null && var3.startsWith(AUTO_CR2)) {
 					var3 = var3.substring(5);
 					var4 = 2;
 				}
@@ -8919,8 +8919,8 @@ public final class Client extends GameShell {
 				if (var5 == 6 && chatPrivateMode < 2) {
 					int var10 = 329 - var1 * 13;
 					var1++;
-					var0.drawString(JagString.join(new JagString[]{Text.TO, field2406, var3, AUTO_MINISEPARATOR, chatText[var2]}), 4, var10, 0);
-					var0.drawString(JagString.join(new JagString[]{Text.TO, field2406, var3, AUTO_MINISEPARATOR, chatText[var2]}), 4, var10 - 1, 65535);
+					var0.drawString(JagString.join(new JagString[]{Text.TO, AUTO_SPACE, var3, AUTO_MINISEPARATOR, chatText[var2]}), 4, var10, 0);
+					var0.drawString(JagString.join(new JagString[]{Text.TO, AUTO_SPACE, var3, AUTO_MINISEPARATOR, chatText[var2]}), 4, var10 - 1, 65535);
 					if (var1 >= 5) {
 						return;
 					}
@@ -8942,10 +8942,10 @@ public final class Client extends GameShell {
 			if (chatText[var1] != null) {
 				int var2 = chatType[var1];
 				JagString var3 = chatUsername[var1];
-				if (var3 != null && var3.startsWith(field2612)) {
+				if (var3 != null && var3.startsWith(AUTO_CR1)) {
 					var3 = var3.substring(5);
 				}
-				if (var3 != null && var3.startsWith(field2535)) {
+				if (var3 != null && var3.startsWith(AUTO_CR2)) {
 					var3 = var3.substring(5);
 				}
 				if ((var2 == 3 || var2 == 7) && (var2 == 7 || chatPrivateMode == 0 || chatPrivateMode == 1 && isFriend(var3))) {
@@ -8958,10 +8958,10 @@ public final class Client extends GameShell {
 						}
 						if (ClientMouseListener.mouseX < var5 + 4) {
 							if (staffmodlevel >= 1) {
-								addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 2028, JagString.join(new JagString[]{field1393, var3}));
+								addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 2028, JagString.join(new JagString[]{AUTO_WHI, var3}));
 							}
-							addMenuOption(0, Text.ADD_IGNORE, 0, 0, 2051, JagString.join(new JagString[]{field1393, var3}));
-							addMenuOption(0, Text.ADDFRIEND, 0, 0, 2045, JagString.join(new JagString[]{field1393, var3}));
+							addMenuOption(0, Text.ADD_IGNORE, 0, 0, 2051, JagString.join(new JagString[]{AUTO_WHI, var3}));
+							addMenuOption(0, Text.ADDFRIEND, 0, 0, 2045, JagString.join(new JagString[]{AUTO_WHI, var3}));
 						}
 					}
 					if (var0 >= 5) {
@@ -9081,8 +9081,8 @@ public final class Client extends GameShell {
 					int var36 = (var34 << 8) + var35;
 					if (!var32 || var35 != 49 && var35 != 149 && var35 != 147 && var34 != 50 && (var34 != 49 || var35 != 47)) {
 						mapBuildIndex[var33] = var36;
-						mapBuildGroundFile[var33] = maps.getGroupId(JagString.join(new JagString[]{field2305, JagString.parseInt(var34), field477, JagString.parseInt(var35)}));
-						mapBuildLocationFile[var33] = maps.getGroupId(JagString.join(new JagString[]{field1259, JagString.parseInt(var34), field477, JagString.parseInt(var35)}));
+						mapBuildGroundFile[var33] = maps.getGroupId(JagString.join(new JagString[]{AUTO_M, JagString.parseInt(var34), AUTO_UNDERSCORE, JagString.parseInt(var35)}));
+						mapBuildLocationFile[var33] = maps.getGroupId(JagString.join(new JagString[]{AUTO_L, JagString.parseInt(var34), AUTO_UNDERSCORE, JagString.parseInt(var35)}));
 						var33++;
 					}
 				}
@@ -9139,8 +9139,8 @@ public final class Client extends GameShell {
 								mapBuildIndex[var13] = var20;
 								int var22 = var20 & 0xFF;
 								int var23 = var20 >> 8 & 0xFF;
-								mapBuildGroundFile[var13] = maps.getGroupId(JagString.join(new JagString[]{field2305, JagString.parseInt(var23), field477, JagString.parseInt(var22)}));
-								mapBuildLocationFile[var13] = maps.getGroupId(JagString.join(new JagString[]{field1259, JagString.parseInt(var23), field477, JagString.parseInt(var22)}));
+								mapBuildGroundFile[var13] = maps.getGroupId(JagString.join(new JagString[]{AUTO_M, JagString.parseInt(var23), AUTO_UNDERSCORE, JagString.parseInt(var22)}));
+								mapBuildLocationFile[var13] = maps.getGroupId(JagString.join(new JagString[]{AUTO_L, JagString.parseInt(var23), AUTO_UNDERSCORE, JagString.parseInt(var22)}));
 								var13++;
 							}
 						}
@@ -9269,7 +9269,7 @@ public final class Client extends GameShell {
 		boolean var0 = false;
 		if (ClientMouseListener.mouseX > 4 && ClientMouseListener.mouseY > 4 && ClientMouseListener.mouseX < 516 && ClientMouseListener.mouseY < 338) {
 			if (mainModalId == -1) {
-				addWorldOptions();
+				minimenuBuildSceneActions();
 			} else {
 				addComponentOptions(4, 516, 338, mainModalId, 4, ClientMouseListener.mouseX, ClientMouseListener.mouseY, 0);
 			}
@@ -9994,7 +9994,7 @@ public final class Client extends GameShell {
 						}
 					}
 					if (var12.buttonType == 2 && targetMode == 0 && arg7 >= var14 && arg4 >= var13 && arg7 < var12.width + var14 && arg4 < var13 + var12.height) {
-						addMenuOption(0, var12.targetVerb, var12.parentId, 0, 33, JagString.join(new JagString[]{field2564, var12.targetBase}));
+						addMenuOption(0, var12.targetVerb, var12.parentId, 0, 33, JagString.join(new JagString[]{AUTO_GRE, var12.targetBase}));
 					}
 					if (var12.buttonType == 3 && arg7 >= var14 && arg4 >= var13 && var12.width + var14 > arg7 && arg4 < var12.height + var13) {
 						byte var16;
@@ -10031,7 +10031,7 @@ public final class Client extends GameShell {
 										ObjType var22 = ObjType.list(var12.linkObjType[var17] - 1);
 										if (useMode == 1 && var12.objOps) {
 											if (useSelectedComId != var12.parentId || objSelectedSlot != var17) {
-												addMenuOption(var22.id, Text.USE, var12.parentId, var17, 56, JagString.join(new JagString[]{field3177, field328, var22.name}));
+												addMenuOption(var22.id, Text.USE, var12.parentId, var17, 56, JagString.join(new JagString[]{objSelectedName, field328, var22.name}));
 											}
 										} else if (targetMode != 1 || !var12.objOps) {
 											JagString[] var23 = var22.iop;
@@ -10047,14 +10047,14 @@ public final class Client extends GameShell {
 														} else {
 															var25 = 11;
 														}
-														addMenuOption(var22.id, var23[var24], var12.parentId, var17, var25, JagString.join(new JagString[]{field2334, var22.name}));
+														addMenuOption(var22.id, var23[var24], var12.parentId, var17, var25, JagString.join(new JagString[]{AUTO_LRE, var22.name}));
 													} else if (var24 == 4) {
-														addMenuOption(var22.id, Text.DROP, var12.parentId, var17, 11, JagString.join(new JagString[]{field2334, var22.name}));
+														addMenuOption(var22.id, Text.DROP, var12.parentId, var17, 11, JagString.join(new JagString[]{AUTO_LRE, var22.name}));
 													}
 												}
 											}
 											if (var12.objUse) {
-												addMenuOption(var22.id, Text.USE, var12.parentId, var17, 19, JagString.join(new JagString[]{field2334, var22.name}));
+												addMenuOption(var22.id, Text.USE, var12.parentId, var17, 19, JagString.join(new JagString[]{AUTO_LRE, var22.name}));
 											}
 											if (var12.objOps && var23 != null) {
 												for (int var26 = 2; var26 >= 0; var26--) {
@@ -10069,7 +10069,7 @@ public final class Client extends GameShell {
 														if (var26 == 2) {
 															var27 = 31;
 														}
-														addMenuOption(var22.id, var23[var26], var12.parentId, var17, var27, JagString.join(new JagString[]{field2334, var22.name}));
+														addMenuOption(var22.id, var23[var26], var12.parentId, var17, var27, JagString.join(new JagString[]{AUTO_LRE, var22.name}));
 													}
 												}
 											}
@@ -10096,13 +10096,13 @@ public final class Client extends GameShell {
 														if (var29 == 4) {
 															var30 = 24;
 														}
-														addMenuOption(var22.id, var28[var29], var12.parentId, var17, var30, JagString.join(new JagString[]{field2334, var22.name}));
+														addMenuOption(var22.id, var28[var29], var12.parentId, var17, var30, JagString.join(new JagString[]{AUTO_LRE, var22.name}));
 													}
 												}
 											}
-											addMenuOption(var22.id, Text.EXAMINE, var12.parentId, var17, 1006, JagString.join(new JagString[]{field2334, var22.name}));
+											addMenuOption(var22.id, Text.EXAMINE, var12.parentId, var17, 1006, JagString.join(new JagString[]{AUTO_LRE, var22.name}));
 										} else if ((targetMask & 0x10) == 16) {
-											addMenuOption(var22.id, targetVerb, var12.parentId, var17, 37, JagString.join(new JagString[]{field1384, field328, var22.name}));
+											addMenuOption(var22.id, targetVerb, var12.parentId, var17, 37, JagString.join(new JagString[]{targetOp, field328, var22.name}));
 										}
 									}
 								}
@@ -10118,34 +10118,34 @@ public final class Client extends GameShell {
 								var32 = prependOpIndex(var32);
 							}
 							if (var32 == null || var32[4] == null) {
-								addMenuOption(var31.id, Text.DROP, var12.parentId, var12.field2542 - 1, 11, JagString.join(new JagString[]{field2334, var31.name}));
+								addMenuOption(var31.id, Text.DROP, var12.parentId, var12.field2542 - 1, 11, JagString.join(new JagString[]{AUTO_LRE, var31.name}));
 							} else {
-								addMenuOption(var31.id, var32[4], var12.parentId, var12.field2542 - 1, 11, JagString.join(new JagString[]{field2334, var31.name}));
+								addMenuOption(var31.id, var32[4], var12.parentId, var12.field2542 - 1, 11, JagString.join(new JagString[]{AUTO_LRE, var31.name}));
 							}
 							if (var32 != null && var32[3] != null) {
-								addMenuOption(var31.id, var32[3], var12.parentId, var12.field2542 - 1, 43, JagString.join(new JagString[]{field2334, var31.name}));
+								addMenuOption(var31.id, var32[3], var12.parentId, var12.field2542 - 1, 43, JagString.join(new JagString[]{AUTO_LRE, var31.name}));
 							}
 							if (var32 != null && var32[2] != null) {
-								addMenuOption(var31.id, var32[2], var12.parentId, var12.field2542 - 1, 31, JagString.join(new JagString[]{field2334, var31.name}));
+								addMenuOption(var31.id, var32[2], var12.parentId, var12.field2542 - 1, 31, JagString.join(new JagString[]{AUTO_LRE, var31.name}));
 							}
 							if (var32 != null && var32[1] != null) {
-								addMenuOption(var31.id, var32[1], var12.parentId, var12.field2542 - 1, 6, JagString.join(new JagString[]{field2334, var31.name}));
+								addMenuOption(var31.id, var32[1], var12.parentId, var12.field2542 - 1, 6, JagString.join(new JagString[]{AUTO_LRE, var31.name}));
 							}
 							if (var32 != null && var32[0] != null) {
-								addMenuOption(var31.id, var32[0], var12.parentId, var12.field2542 - 1, 52, JagString.join(new JagString[]{field2334, var31.name}));
+								addMenuOption(var31.id, var32[0], var12.parentId, var12.field2542 - 1, 52, JagString.join(new JagString[]{AUTO_LRE, var31.name}));
 							}
 						}
 						if (var12.parentId >= 0) {
-							addMenuOption(var31.id, Text.EXAMINE, var12.parentId, -1, 1007, JagString.join(new JagString[]{field2334, var31.name}));
+							addMenuOption(var31.id, Text.EXAMINE, var12.parentId, -1, 1007, JagString.join(new JagString[]{AUTO_LRE, var31.name}));
 						} else {
-							addMenuOption(var31.id, Text.EXAMINE, var12.layerId, var12.parentId & 0x7FFF, 1007, JagString.join(new JagString[]{field2334, var31.name}));
+							addMenuOption(var31.id, Text.EXAMINE, var12.layerId, var12.parentId & 0x7FFF, 1007, JagString.join(new JagString[]{AUTO_LRE, var31.name}));
 						}
 					}
 					if (var12.hashook && var12.opNames != null && var14 <= arg7 && var13 <= arg4 && var12.width + var14 > arg7 && arg4 < var12.height + var13) {
 						JagString var33 = EMPTY;
 						if (var12.invobject != -1) {
 							ObjType var34 = ObjType.list(var12.invobject);
-							var33 = JagString.join(new JagString[]{field2334, var34.name});
+							var33 = JagString.join(new JagString[]{AUTO_LRE, var34.name});
 						}
 						for (int var35 = var12.opNames.length - 1; var35 >= 0; var35--) {
 							if (var12.opNames[var35] != null) {
@@ -10452,12 +10452,12 @@ public final class Client extends GameShell {
 		if (field1159) {
 			return;
 		}
-		invback = PixLoader.makePix8(field1567, field479, arg1);
-		chatback = PixLoader.makePix8(field62, field479, arg1);
-		mapback = PixLoader.makePix8(field2333, field479, arg1);
-		backbase1 = PixLoader.makePix8(field2927, field479, arg1);
-		backbase2 = PixLoader.makePix8(field406, field479, arg1);
-		backhmid1 = PixLoader.makePix8(field533, field479, arg1);
+		invback = PixLoader.makePix8(AUTO_INVBACK, AUTO_EMPTY, arg1);
+		chatback = PixLoader.makePix8(AUTO_CHATBACK, AUTO_EMPTY, arg1);
+		mapback = PixLoader.makePix8(AUTO_MAPBACK, AUTO_EMPTY, arg1);
+		backbase1 = PixLoader.makePix8(AUTO_BACKBASE1, AUTO_EMPTY, arg1);
+		backbase2 = PixLoader.makePix8(AUTO_BACKBASE2, AUTO_EMPTY, arg1);
+		backhmid1 = PixLoader.makePix8(AUTO_BACKHMID1, AUTO_EMPTY, arg1);
 		areaChat = PixMap.createSafe(96, 479, arg0);
 		chatback.plotSprite(0, 0);
 		areaMap = PixMap.createSafe(156, 172, arg0);
@@ -10470,36 +10470,36 @@ public final class Client extends GameShell {
 		areaBackbase1 = PixMap.createSafe(50, 496, arg0);
 		areaBackbase2 = PixMap.createSafe(37, 269, arg0);
 		areaBackhmid1 = PixMap.createSafe(45, 249, arg0);
-		Pix32 var2 = PixLoader.makePix32(arg1, field3020, field479);
+		Pix32 var2 = PixLoader.makePix32(arg1, AUTO_BACKLEFT1, AUTO_EMPTY);
 		areaBackleft1 = PixMap.createSafe(var2.hi, var2.wi, arg0);
 		var2.quickPlotSprite(0, 0);
-		Pix32 var3 = PixLoader.makePix32(arg1, field2162, field479);
+		Pix32 var3 = PixLoader.makePix32(arg1, AUTO_BACKLEFT2, AUTO_EMPTY);
 		areaBackleft2 = PixMap.createSafe(var3.hi, var3.wi, arg0);
 		var3.quickPlotSprite(0, 0);
-		Pix32 var4 = PixLoader.makePix32(arg1, field455, field479);
+		Pix32 var4 = PixLoader.makePix32(arg1, AUTO_BACKRIGHT1, AUTO_EMPTY);
 		areaBackright1 = PixMap.createSafe(var4.hi, var4.wi, arg0);
 		var4.quickPlotSprite(0, 0);
-		Pix32 var5 = PixLoader.makePix32(arg1, field2682, field479);
+		Pix32 var5 = PixLoader.makePix32(arg1, AUTO_BACKRIGHT2, AUTO_EMPTY);
 		areaBackright2 = PixMap.createSafe(var5.hi, var5.wi, arg0);
 		var5.quickPlotSprite(0, 0);
-		Pix32 var6 = PixLoader.makePix32(arg1, field609, field479);
+		Pix32 var6 = PixLoader.makePix32(arg1, AUTO_BACKTOP1, AUTO_EMPTY);
 		areaBacktop1 = PixMap.createSafe(var6.hi, var6.wi, arg0);
 		var6.quickPlotSprite(0, 0);
-		Pix32 var7 = PixLoader.makePix32(arg1, field2798, field479);
+		Pix32 var7 = PixLoader.makePix32(arg1, AUTO_BACKVMID1, AUTO_EMPTY);
 		areaBackvmid1 = PixMap.createSafe(var7.hi, var7.wi, arg0);
 		var7.quickPlotSprite(0, 0);
-		Pix32 var8 = PixLoader.makePix32(arg1, field2355, field479);
+		Pix32 var8 = PixLoader.makePix32(arg1, AUTO_BACKVMID2, AUTO_EMPTY);
 		areaBackvmid2 = PixMap.createSafe(var8.hi, var8.wi, arg0);
 		var8.quickPlotSprite(0, 0);
-		Pix32 var9 = PixLoader.makePix32(arg1, field318, field479);
+		Pix32 var9 = PixLoader.makePix32(arg1, AUTO_BACKVMID3, AUTO_EMPTY);
 		areaBackvmid3 = PixMap.createSafe(var9.hi, var9.wi, arg0);
 		var9.quickPlotSprite(0, 0);
-		Pix32 var10 = PixLoader.makePix32(arg1, field478, field479);
+		Pix32 var10 = PixLoader.makePix32(arg1, AUTO_BACKHMID2, AUTO_EMPTY);
 		areaBackhmid2 = PixMap.createSafe(var10.hi, var10.wi, arg0);
 		var10.quickPlotSprite(0, 0);
-		redstone1 = PixLoader.makePix8(field1169, field479, arg1);
-		redstone2 = PixLoader.makePix8(field2910, field479, arg1);
-		redstone3 = PixLoader.makePix8(field3163, field479, arg1);
+		redstone1 = PixLoader.makePix8(AUTO_REDSTONE1, AUTO_EMPTY, arg1);
+		redstone2 = PixLoader.makePix8(AUTO_REDSTONE2, AUTO_EMPTY, arg1);
+		redstone3 = PixLoader.makePix8(AUTO_REDSTONE3, AUTO_EMPTY, arg1);
 		redstone1h = redstone1.copy();
 		redstone1h.hflip();
 		redstone2h = redstone2.copy();
@@ -10516,7 +10516,7 @@ public final class Client extends GameShell {
 		redstone2hv = redstone2.copy();
 		redstone2hv.hflip();
 		redstone2hv.vflip();
-		sideicons = PixLoader.makePix8Array(arg1, field2818, field479);
+		sideicons = PixLoader.makePix8Array(arg1, AUTO_SIDEICONS, AUTO_EMPTY);
 		minimapMaskLineOffsets = new int[151];
 		compassMaskLineLengths = new int[33];
 		compassMaskLineOffsets = new int[33];
@@ -10599,19 +10599,19 @@ public final class Client extends GameShell {
 					var2++;
 				}
 				JagString var6 = chatUsername[var3];
-				if (var6 != null && var6.startsWith(field2612)) {
+				if (var6 != null && var6.startsWith(AUTO_CR1)) {
 					var6 = var6.substring(5);
 				}
-				if (var6 != null && var6.startsWith(field2535)) {
+				if (var6 != null && var6.startsWith(AUTO_CR2)) {
 					var6 = var6.substring(5);
 				}
 				if ((var4 == 1 || var4 == 2) && (var4 == 1 || chatPublicMode == 0 || chatPublicMode == 1 && isFriend(var6))) {
 					if (arg1 > var5 - 14 && arg1 <= var5 && !var6.strEquals(localPlayer.name)) {
 						if (staffmodlevel >= 1) {
-							addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 28, JagString.join(new JagString[]{field1393, var6}));
+							addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 28, JagString.join(new JagString[]{AUTO_WHI, var6}));
 						}
-						addMenuOption(0, Text.ADD_IGNORE, 0, 0, 51, JagString.join(new JagString[]{field1393, var6}));
-						addMenuOption(0, Text.ADDFRIEND, 0, 0, 45, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.ADD_IGNORE, 0, 0, 51, JagString.join(new JagString[]{AUTO_WHI, var6}));
+						addMenuOption(0, Text.ADDFRIEND, 0, 0, 45, JagString.join(new JagString[]{AUTO_WHI, var6}));
 					}
 					var2++;
 				}
@@ -10619,15 +10619,15 @@ public final class Client extends GameShell {
 					var2++;
 					if (arg1 > var5 - 14 && arg1 <= var5) {
 						if (staffmodlevel >= 1) {
-							addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 28, JagString.join(new JagString[]{field1393, var6}));
+							addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 28, JagString.join(new JagString[]{AUTO_WHI, var6}));
 						}
-						addMenuOption(0, Text.ADD_IGNORE, 0, 0, 51, JagString.join(new JagString[]{field1393, var6}));
-						addMenuOption(0, Text.ADDFRIEND, 0, 0, 45, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.ADD_IGNORE, 0, 0, 51, JagString.join(new JagString[]{AUTO_WHI, var6}));
+						addMenuOption(0, Text.ADDFRIEND, 0, 0, 45, JagString.join(new JagString[]{AUTO_WHI, var6}));
 					}
 				}
 				if (var4 == 4 && (chatTradeMode == 0 || chatTradeMode == 1 && isFriend(var6))) {
 					if (arg1 > var5 - 14 && arg1 <= var5) {
-						addMenuOption(0, Text.TRADEREQ_ACCEPT, 0, 0, 26, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.TRADEREQ_ACCEPT, 0, 0, 26, JagString.join(new JagString[]{AUTO_WHI, var6}));
 					}
 					var2++;
 				}
@@ -10636,7 +10636,7 @@ public final class Client extends GameShell {
 				}
 				if (var4 == 8 && (chatTradeMode == 0 || chatTradeMode == 1 && isFriend(var6))) {
 					if (var5 - 14 < arg1 && arg1 <= var5) {
-						addMenuOption(0, Text.CHALREQ_ACCEPT, 0, 0, 46, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.CHALREQ_ACCEPT, 0, 0, 46, JagString.join(new JagString[]{AUTO_WHI, var6}));
 					}
 					var2++;
 				}
@@ -10981,11 +10981,11 @@ public final class Client extends GameShell {
 			} else {
 				var1 -= 101;
 			}
-			addMenuOption(0, Text.REMOVE, 0, 0, 13, JagString.join(new JagString[]{field1393, friendUsername[var1]}));
-			addMenuOption(0, Text.MESSAGE, 0, 0, 18, JagString.join(new JagString[]{field1393, friendUsername[var1]}));
+			addMenuOption(0, Text.REMOVE, 0, 0, 13, JagString.join(new JagString[]{AUTO_WHI, friendUsername[var1]}));
+			addMenuOption(0, Text.MESSAGE, 0, 0, 18, JagString.join(new JagString[]{AUTO_WHI, friendUsername[var1]}));
 			return true;
 		} else if (var1 >= 401 && var1 <= 500) {
-			addMenuOption(0, Text.REMOVE, 0, 0, 35, JagString.join(new JagString[]{field1393, arg0.text}));
+			addMenuOption(0, Text.REMOVE, 0, 0, 35, JagString.join(new JagString[]{AUTO_WHI, arg0.text}));
 			return true;
 		} else {
 			return false;
@@ -11082,26 +11082,26 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("fa.a(BLqd;La;)La;")
 	public static JagString substituteVars(IfType arg0, JagString arg1) {
-		if (arg1.indexOf(AUTO_PCT) == -1) {
+		if (arg1.indexOf(AUTO_REPLACE) == -1) {
 			return arg1;
 		}
 		while (true) {
-			int var2 = arg1.indexOf(field1938);
+			int var2 = arg1.indexOf(AUTO_REPLACE1);
 			if (var2 == -1) {
 				while (true) {
-					int var3 = arg1.indexOf(field2297);
+					int var3 = arg1.indexOf(AUTO_REPLACE2);
 					if (var3 == -1) {
 						while (true) {
-							int var4 = arg1.indexOf(field3277);
+							int var4 = arg1.indexOf(AUTO_REPLACE3);
 							if (var4 == -1) {
 								while (true) {
-									int var5 = arg1.indexOf(field2716);
+									int var5 = arg1.indexOf(AUTO_REPLACE4);
 									if (var5 == -1) {
 										while (true) {
-											int var6 = arg1.indexOf(field1166);
+											int var6 = arg1.indexOf(AUTO_REPLACE5);
 											if (var6 == -1) {
 												while (true) {
-													int var7 = arg1.indexOf(field1309);
+													int var7 = arg1.indexOf(AUTO_REPLACEDNS);
 													if (var7 == -1) {
 														return arg1;
 													}
@@ -11504,61 +11504,61 @@ public final class Client extends GameShell {
 	@ObfuscatedName("re.a(Lbd;B)I")
 	public static int prefetchFrame(Js5 arg0) {
 		int var1 = 0;
-		if (arg0.requestDownload(field1567, field479)) {
+		if (arg0.requestDownload(AUTO_INVBACK, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field62, field479)) {
+		if (arg0.requestDownload(AUTO_CHATBACK, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field2333, field479)) {
+		if (arg0.requestDownload(AUTO_MAPBACK, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field2927, field479)) {
+		if (arg0.requestDownload(AUTO_BACKBASE1, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field406, field479)) {
+		if (arg0.requestDownload(AUTO_BACKBASE2, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field533, field479)) {
+		if (arg0.requestDownload(AUTO_BACKHMID1, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field3020, field479)) {
+		if (arg0.requestDownload(AUTO_BACKLEFT1, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field2162, field479)) {
+		if (arg0.requestDownload(AUTO_BACKLEFT2, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field455, field479)) {
+		if (arg0.requestDownload(AUTO_BACKRIGHT1, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field2682, field479)) {
+		if (arg0.requestDownload(AUTO_BACKRIGHT2, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field609, field479)) {
+		if (arg0.requestDownload(AUTO_BACKTOP1, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field2798, field479)) {
+		if (arg0.requestDownload(AUTO_BACKVMID1, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field2355, field479)) {
+		if (arg0.requestDownload(AUTO_BACKVMID2, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field318, field479)) {
+		if (arg0.requestDownload(AUTO_BACKVMID3, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field478, field479)) {
+		if (arg0.requestDownload(AUTO_BACKHMID2, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field1169, field479)) {
+		if (arg0.requestDownload(AUTO_REDSTONE1, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field2910, field479)) {
+		if (arg0.requestDownload(AUTO_REDSTONE2, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field3163, field479)) {
+		if (arg0.requestDownload(AUTO_REDSTONE3, AUTO_EMPTY)) {
 			var1++;
 		}
-		if (arg0.requestDownload(field2818, field479)) {
+		if (arg0.requestDownload(AUTO_SIDEICONS, AUTO_EMPTY)) {
 			var1++;
 		}
 		return var1;
@@ -11632,14 +11632,14 @@ public final class Client extends GameShell {
 	public static JagString niceNumber(int arg0) {
 		JagString var1 = JagString.parseInt(arg0);
 		for (int var2 = var1.length() - 3; var2 > 0; var2 -= 3) {
-			var1 = JagString.join(new JagString[]{var1.substring(0, var2), field1774, var1.substring(var2)});
+			var1 = JagString.join(new JagString[]{var1.substring(0, var2), AUTO_COMMA, var1.substring(var2)});
 		}
 		if (var1.length() > 8) {
-			var1 = JagString.join(new JagString[]{field2564, var1.substring(0, var1.length() - 8), Text.MILLION, field2629, var1, field2601});
+			var1 = JagString.join(new JagString[]{AUTO_GRE, var1.substring(0, var1.length() - 8), Text.MILLION, AUTO_WHITE, var1, AUTO_CLOSE_BRACKET});
 		} else if (var1.length() > 4) {
-			var1 = JagString.join(new JagString[]{field3136, var1.substring(0, var1.length() - 4), Text.THOUSAND, field2629, var1, field2601});
+			var1 = JagString.join(new JagString[]{AUTO_CYA, var1.substring(0, var1.length() - 4), Text.THOUSAND, AUTO_WHITE, var1, AUTO_CLOSE_BRACKET});
 		}
-		return JagString.join(new JagString[]{field2406, var1});
+		return JagString.join(new JagString[]{AUTO_SPACE, var1});
 	}
 
 	@ObfuscatedName("sa.a([La;Z)[La;")
@@ -11968,7 +11968,7 @@ public final class Client extends GameShell {
 		AnimFrame.unload();
 		BZip2.unload();
 		PcmPlayer.unload();
-		JavaSafePcmPlayer.unload();
+		DevicePcmPlayer.unload();
 		MidiParser.unload();
 	}
 

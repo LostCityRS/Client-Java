@@ -74,11 +74,11 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 			activePlayer = var2;
 		} catch (Throwable var5) {
 			try {
-				activePlayer = new JavaSafePcmPlayer(arg1, arg0);
+				activePlayer = new DevicePcmPlayer(arg1, arg0);
 			} catch (Throwable var4) {
 				if (SignLink.javaVendor.toLowerCase().indexOf("microsoft") >= 0) {
 					try {
-						activePlayer = new JavaMicrosoftPcmPlayer();
+						activePlayer = new SunPcmPlayer();
 						return;
 					} catch (Throwable var3) {
 					}

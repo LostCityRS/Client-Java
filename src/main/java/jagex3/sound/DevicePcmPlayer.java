@@ -6,7 +6,7 @@ import jagex3.client.SignLink;
 import java.awt.*;
 
 @ObfuscatedName("gd")
-public final class JavaSafePcmPlayer extends PcmPlayer {
+public final class DevicePcmPlayer extends PcmPlayer {
 
 	@ObfuscatedName("gd.T")
 	public static AudioSource source;
@@ -28,9 +28,9 @@ public final class JavaSafePcmPlayer extends PcmPlayer {
 		return source.queued();
 	}
 
-	public JavaSafePcmPlayer(SignLink arg0, Component arg1) throws Exception {
+	public DevicePcmPlayer(SignLink arg0, Component arg1) throws Exception {
 		super(22050);
-		source = arg0.method649();
+		source = arg0.getAudioSource();
 		source.open(arg1);
 		this.start(arg0, 16384);
 	}

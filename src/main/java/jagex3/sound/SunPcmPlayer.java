@@ -5,7 +5,7 @@ package jagex3.sound;
 import deob.ObfuscatedName;
 
 @ObfuscatedName("v")
-public final class JavaMicrosoftPcmPlayer extends PcmPlayerBase {
+public final class SunPcmPlayer extends PcmPlayerBase {
 
 	@ObfuscatedName("v.F")
 	public final PcmInputStream pcmInputStream = new PcmInputStream();
@@ -20,7 +20,7 @@ public final class JavaMicrosoftPcmPlayer extends PcmPlayerBase {
 		}
 	}
 
-	public JavaMicrosoftPcmPlayer() {
+	public SunPcmPlayer() {
 		super(8000);
 		// AudioPlayer.player.start(this.pcmInputStream);
 	}

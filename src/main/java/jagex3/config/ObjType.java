@@ -63,9 +63,9 @@ public final class ObjType extends Linkable2 {
 	public int stackable = 0;
 
 	@ObfuscatedName("ua.s")
-	public static JagString field3017 = JagString.wrap("null");
+	public static JagString AUTO_NAME = JagString.wrap("null");
 	@ObfuscatedName("ta.tb")
-	public JagString name = field3017;
+	public JagString name = AUTO_NAME;
 
 	@ObfuscatedName("ta.tc")
 	public int womanwear = -1;
