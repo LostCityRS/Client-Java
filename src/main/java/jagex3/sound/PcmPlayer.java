@@ -17,45 +17,45 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	@ObfuscatedName("ad.e")
 	public static int frequency;
 	@ObfuscatedName("ca.n")
-	public static long field462;
+	public static long lastLoopTime;
 	@ObfuscatedName("ad.D")
-	public static PcmPlayerBase field217;
+	public static PcmPlayerBase activePlayer;
 	@ObfuscatedName("vb.Db")
-	public static int field3140;
+	public static int streamTimeSampleCounter;
 	@ObfuscatedName("hb.cb")
-	public static int field1157;
+	public static int streamTimeMillis;
 	@ObfuscatedName("id.v")
 	public static PcmStream stream;
 
 	@ObfuscatedName("pd.K")
-	public int field2343 = 0;
+	public int availableHistoryIndex = 0;
 
 	@ObfuscatedName("pd.G")
 	public long reopenTime = 0L;
 
 	@ObfuscatedName("pd.M")
-	public int field2345 = 256;
+	public int availableThreshold = 256;
 
 	@ObfuscatedName("pd.F")
 	public boolean skipAcceptedCheck = false;
 
 	@ObfuscatedName("pd.N")
-	public int field2346 = 0;
+	public int availableSum = 0;
 
 	@ObfuscatedName("pd.H")
-	public int field2340 = 0;
+	public int availableMin = 0;
 
 	@ObfuscatedName("pd.J")
-	public int field2342 = 0;
+	public int availableMax = 0;
 
 	@ObfuscatedName("pd.S")
-	public final int[] field2351 = new int[512];
+	public final int[] availableHistory = new int[512];
 
 	@ObfuscatedName("pd.I")
-	public int field2341;
+	public int emptyBufferCount;
 
 	@ObfuscatedName("pd.P")
-	public int field2348;
+	public int lastAvailable;
 
 	@ObfuscatedName("pd.Q")
 	public int capacity;
@@ -64,26 +64,26 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	public long nextAcceptedCheckTime;
 
 	@ObfuscatedName("pd.R")
-	public long field2350;
+	public long nextWriteTime;
 
 	@ObfuscatedName("wc.a(Ljava/awt/Component;ILlc;)V")
-	public static void method1050(Component arg0, SignLink arg1) {
+	public static void initGlobal(Component arg0, SignLink arg1) {
 		try {
 			PcmPlayer var2 = (PcmPlayer) Class.forName("jagex3.sound.JavaPcmPlayer").getDeclaredConstructor().newInstance();
-			var2.method818(arg1, 2048);
-			field217 = var2;
+			var2.start(arg1, 2048);
+			activePlayer = var2;
 		} catch (Throwable var5) {
 			try {
-				field217 = new JavaSafePcmPlayer(arg1, arg0);
+				activePlayer = new JavaSafePcmPlayer(arg1, arg0);
 			} catch (Throwable var4) {
 				if (SignLink.javaVendor.toLowerCase().indexOf("microsoft") >= 0) {
 					try {
-						field217 = new JavaMicrosoftPcmPlayer();
+						activePlayer = new JavaMicrosoftPcmPlayer();
 						return;
 					} catch (Throwable var3) {
 					}
 				}
-				field217 = new PcmPlayerBase(8000);
+				activePlayer = new PcmPlayerBase(8000);
 			}
 		}
 	}
@@ -95,43 +95,43 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 
     @ObfuscatedName("ha.a(B)V")
     public static void loop() {
-        if (field217 == null) {
+        if (activePlayer == null) {
             return;
         }
         long var0 = MonotonicTime.currentTime();
-        if (var0 <= field462) {
+        if (var0 <= lastLoopTime) {
             return;
         }
-        field217.method255(var0);
-        int var2 = (int) (var0 - field462);
-        field462 = var0;
+        activePlayer.process(var0);
+        int var2 = (int) (var0 - lastLoopTime);
+        lastLoopTime = var0;
         Class var3 = PcmPlayerBase.class;
         synchronized (PcmPlayerBase.class) {
-            field1157 += frequency * var2;
-            int var4 = (field1157 - frequency * 2000) / 1000;
+            streamTimeMillis += frequency * var2;
+            int var4 = (streamTimeMillis - frequency * 2000) / 1000;
             if (var4 > 0) {
                 if (stream != null) {
                     stream.pretendToMix(var4);
                 }
-                field1157 -= var4 * 1000;
+                streamTimeMillis -= var4 * 1000;
             }
         }
     }
 
 	@ObfuscatedName("td.a(Z)V")
-	public static void method967() {
-		if (field217 != null) {
-			field217.play();
-			field217 = null;
+	public static void shutdown() {
+		if (activePlayer != null) {
+			activePlayer.play();
+			activePlayer = null;
 		}
 	}
 
 	@ObfuscatedName("ca.a(IB)V")
-	public static synchronized void method260() {
+	public static synchronized void skipSamples() {
 		if (stream != null) {
 			stream.pretendToMix(256);
 		}
-		method949(256);
+		updateStreamTime(256);
 	}
 
 	@ObfuscatedName("ca.a(Loc;I)V")
@@ -140,13 +140,13 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	}
 
 	@ObfuscatedName("ta.b(ZI)V")
-	public static void method949(int arg0) {
-		for (field3140 += arg0; field3140 >= frequency; field3140 -= frequency) {
-			field1157 -= field1157 >> 2;
+	public static void updateStreamTime(int arg0) {
+		for (streamTimeSampleCounter += arg0; streamTimeSampleCounter >= frequency; streamTimeSampleCounter -= frequency) {
+			streamTimeMillis -= streamTimeMillis >> 2;
 		}
-		field1157 -= arg0 * 1000;
-		if (field1157 < 0) {
-			field1157 = 0;
+		streamTimeMillis -= arg0 * 1000;
+		if (streamTimeMillis < 0) {
+			streamTimeMillis = 0;
 		}
 	}
 
@@ -155,10 +155,10 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 		this.init(this.capacity);
 		while (true) {
 			int var3 = this.queued();
-			if (var3 < this.field2345) {
-				this.field2341 = 0;
-				this.field2348 = 0;
-				this.field2350 = arg0;
+			if (var3 < this.availableThreshold) {
+				this.emptyBufferCount = 0;
+				this.lastAvailable = 0;
+				this.nextWriteTime = arg0;
 				this.nextAcceptedCheckTime = arg0;
 				return;
 			}
@@ -167,10 +167,10 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	}
 
 	@ObfuscatedName("pd.c(J)V")
-	public void method817(long arg0) {
+	public void process0(long arg0) {
 		if (this.reopenTime != 0L) {
 			while (true) {
-				if (this.field2350 >= arg0) {
+				if (this.nextWriteTime >= arg0) {
 					if (arg0 < this.reopenTime) {
 						return;
 					}
@@ -184,12 +184,12 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 					this.reopenTime = 0L;
 					break;
 				}
-				method260();
-				this.field2350 += 256000 / frequency;
+				skipSamples();
+				this.nextWriteTime += 256000 / frequency;
 			}
 		}
-		while (this.field2350 < arg0) {
-			this.field2350 += 250880 / frequency;
+		while (this.nextWriteTime < arg0) {
+			this.nextWriteTime += 250880 / frequency;
 			int var3;
 			try {
 				var3 = this.queued();
@@ -198,32 +198,32 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 				this.reopenTime = arg0;
 				return;
 			}
-			this.method819(var3);
-			int var4 = this.field2346 * 3 / 512 - this.field2340 * 2;
+			this.recordAvailable(var3);
+			int var4 = this.availableSum * 3 / 512 - this.availableMin * 2;
 			if (var4 < 0) {
 				var4 = 0;
-			} else if (var4 > this.field2342) {
-				var4 = this.field2342;
+			} else if (var4 > this.availableMax) {
+				var4 = this.availableMax;
 			}
-			this.field2345 = this.capacity - var4 - 256;
-			if (this.field2345 < 256) {
-				this.field2345 = 256;
+			this.availableThreshold = this.capacity - var4 - 256;
+			if (this.availableThreshold < 256) {
+				this.availableThreshold = 256;
 			}
 			if (this.capacity < 16384) {
 				if (var3 >= this.capacity) {
-					this.field2341 += 5;
-					if (this.field2341 >= 100) {
+					this.emptyBufferCount += 5;
+					if (this.emptyBufferCount >= 100) {
 						this.close();
 						this.capacity += 2048;
 						this.reopenTime = arg0;
 						return;
 					}
-				} else if (this.field2348 != var3 && this.field2341 > 0) {
-					this.field2341--;
+				} else if (this.lastAvailable != var3 && this.emptyBufferCount > 0) {
+					this.emptyBufferCount--;
 				}
 			}
-			this.field2348 = var3;
-			if (var3 < this.field2345) {
+			this.lastAvailable = var3;
+			if (var3 < this.availableThreshold) {
 				break;
 			}
 			ArrayUtil.clear(samples, 256);
@@ -235,7 +235,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 				return;
 			}
 			this.nextAcceptedCheckTime = arg0;
-			this.field2348 -= 256;
+			this.lastAvailable -= 256;
 		}
 		if (arg0 < this.nextAcceptedCheckTime + 5000L) {
 			return;
@@ -243,9 +243,9 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 		this.close();
 		this.reopenTime = arg0;
 		for (int var5 = 0; var5 < 512; var5++) {
-			this.field2351[var5] = 0;
+			this.availableHistory[var5] = 0;
 		}
-		this.field2340 = this.field2342 = this.field2346 = 0;
+		this.availableMin = this.availableMax = this.availableSum = 0;
 	}
 
 	public PcmPlayer(int arg0) throws Exception {
@@ -253,7 +253,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	}
 
 	@ObfuscatedName("pd.a(Llc;I)V")
-	public final void method818(SignLink arg0, int arg1) throws Exception {
+	public final void start(SignLink arg0, int arg1) throws Exception {
 		this.capacity = arg1;
 		this.skip(MonotonicTime.currentTime());
 		arg0.threadreq(10, this);
@@ -287,7 +287,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 						this.skipAcceptedCheck = false;
 						return;
 					}
-					this.method255(MonotonicTime.currentTime());
+					this.process(MonotonicTime.currentTime());
 				}
 				ThreadSleep.sleepPrecise(5L);
 			}
@@ -298,47 +298,47 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 
 	@ObfuscatedName("pd.a(J)V")
 	@Override
-	public final synchronized void method255(long arg0) {
-		this.method817(arg0);
-		if (this.field2350 < arg0) {
-			this.field2350 = arg0;
+	public final synchronized void process(long arg0) {
+		this.process0(arg0);
+		if (this.nextWriteTime < arg0) {
+			this.nextWriteTime = arg0;
 		}
 	}
 
 	@ObfuscatedName("pd.e(I)V")
-	public void method819(int arg0) {
-		int var2 = arg0 - this.field2345;
-		int var3 = this.field2351[this.field2343];
-		this.field2351[this.field2343] = var2;
-		this.field2346 += var2 - var3;
-		int var4 = this.field2343 + 1 & 0x1FF;
-		if (var2 > this.field2342) {
-			this.field2342 = var2;
+	public void recordAvailable(int arg0) {
+		int var2 = arg0 - this.availableThreshold;
+		int var3 = this.availableHistory[this.availableHistoryIndex];
+		this.availableHistory[this.availableHistoryIndex] = var2;
+		this.availableSum += var2 - var3;
+		int var4 = this.availableHistoryIndex + 1 & 0x1FF;
+		if (var2 > this.availableMax) {
+			this.availableMax = var2;
 		}
-		if (var2 < this.field2340) {
-			this.field2340 = var2;
+		if (var2 < this.availableMin) {
+			this.availableMin = var2;
 		}
-		if (this.field2342 == var3) {
+		if (this.availableMax == var3) {
 			int var5 = var2;
-			for (int var6 = var4; this.field2343 != var6 && var5 < this.field2342; var6 = var6 + 1 & 0x1FF) {
-				int var7 = this.field2351[var6];
+			for (int var6 = var4; this.availableHistoryIndex != var6 && var5 < this.availableMax; var6 = var6 + 1 & 0x1FF) {
+				int var7 = this.availableHistory[var6];
 				if (var7 > var5) {
 					var5 = var7;
 				}
 			}
-			this.field2342 = var5;
+			this.availableMax = var5;
 		}
-		if (this.field2340 == var3) {
+		if (this.availableMin == var3) {
 			int var8 = var2;
-			for (int var9 = var4; this.field2343 != var9 && var8 > this.field2340; var9 = var9 + 1 & 0x1FF) {
-				int var10 = this.field2351[var9];
+			for (int var9 = var4; this.availableHistoryIndex != var9 && var8 > this.availableMin; var9 = var9 + 1 & 0x1FF) {
+				int var10 = this.availableHistory[var9];
 				if (var10 < var8) {
 					var8 = var10;
 				}
 			}
-			this.field2340 = var8;
+			this.availableMin = var8;
 		}
-		this.field2343 = var4;
+		this.availableHistoryIndex = var4;
 	}
 
 	@ObfuscatedName("pd.c()V")

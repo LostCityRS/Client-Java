@@ -17,7 +17,7 @@ public final class JagFX {
 	public int loopEnd;
 
 	@ObfuscatedName("me.a()[B")
-	public byte[] method708() {
+	public byte[] generateSamples() {
 		int var1 = 0;
 		for (int var2 = 0; var2 < 10; var2++) {
 			if (this.tones[var2] != null && this.tones[var2].length + this.tones[var2].start > var1) {
@@ -74,7 +74,7 @@ public final class JagFX {
 
 	@ObfuscatedName("me.c()Lwd;")
 	public Wave toWave() {
-		byte[] var1 = this.method708();
+		byte[] var1 = this.generateSamples();
 		return new Wave(22050, var1, this.loopBegin * 22050 / 1000, this.loopEnd * 22050 / 1000);
 	}
 

@@ -9,11 +9,11 @@ public class PcmPlayerBase {
 
 	public PcmPlayerBase(int arg0) {
 		PcmPlayer.frequency = arg0;
-		PcmPlayer.field462 = MonotonicTime.currentTime();
+		PcmPlayer.lastLoopTime = MonotonicTime.currentTime();
 	}
 
 	@ObfuscatedName("ca.a(J)V")
-	public void method255(long arg0) {
+	public void process(long arg0) {
 	}
 
 	@ObfuscatedName("ca.a()V")

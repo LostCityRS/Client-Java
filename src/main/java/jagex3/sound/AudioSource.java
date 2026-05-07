@@ -8,17 +8,17 @@ import java.awt.*;
 public interface AudioSource {
 
 	@ObfuscatedName("le.a(IB)V")
-	void method664(int arg0) throws Exception;
+	void init(int arg0) throws Exception;
 
 	@ObfuscatedName("le.a([I)V")
-	void method665(int[] arg0);
+	void write(int[] arg0);
 
 	@ObfuscatedName("le.a(Z)V")
-	void method666();
+	void close();
 
 	@ObfuscatedName("le.a(B)I")
-	int method667();
+	int queued();
 
 	@ObfuscatedName("le.a(Ljava/awt/Component;I)V")
-	void method668(Component arg0) throws Exception;
+	void open(Component arg0) throws Exception;
 }

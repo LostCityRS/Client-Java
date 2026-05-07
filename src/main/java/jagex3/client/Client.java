@@ -1106,7 +1106,7 @@ public final class Client extends GameShell {
 			}
 		} else if (loadingStep == 45) {
 			MidiStream.init(GameShell.signlink, !lowMem);
-			soundMixer = Mixer.method993(GameShell.signlink, GameShell.canvas);
+			soundMixer = Mixer.create(GameShell.signlink, GameShell.canvas);
 			soundDecimator = new Decimator(22050, PcmPlayer.frequency);
 			loadingStep = 50;
 			TitleScreen.loadString = Text.MAINLOAD45;
@@ -11906,7 +11906,7 @@ public final class Client extends GameShell {
 		ClientKeyboardListener.shutdown();
 		ClientMouseListener.shutdown();
 		MidiManager.unload();
-		PcmPlayer.method967();
+		PcmPlayer.shutdown();
 		Js5Net.closeStream();
 		Js5NetThread.shutdown();
 		try {

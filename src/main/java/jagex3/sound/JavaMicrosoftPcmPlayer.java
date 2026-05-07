@@ -8,20 +8,20 @@ import deob.ObfuscatedName;
 public final class JavaMicrosoftPcmPlayer extends PcmPlayerBase {
 
 	@ObfuscatedName("v.F")
-	public final PcmInputStream field3106 = new PcmInputStream();
+	public final PcmInputStream pcmInputStream = new PcmInputStream();
 
 	@ObfuscatedName("v.a()V")
 	@Override
 	public void play() {
-		// AudioPlayer.player.stop(this.field3106);
-		PcmInputStream var1 = this.field3106;
-		synchronized (this.field3106) {
-			this.field3106.field1696 = true;
+		// AudioPlayer.player.stop(this.pcmInputStream);
+		PcmInputStream var1 = this.pcmInputStream;
+		synchronized (this.pcmInputStream) {
+			this.pcmInputStream.closed = true;
 		}
 	}
 
 	public JavaMicrosoftPcmPlayer() {
 		super(8000);
-		// AudioPlayer.player.start(this.field3106);
+		// AudioPlayer.player.start(this.pcmInputStream);
 	}
 }

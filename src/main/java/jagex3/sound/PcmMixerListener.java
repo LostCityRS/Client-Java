@@ -7,11 +7,11 @@ import jagex3.datastruct.Linkable;
 public abstract class PcmMixerListener extends Linkable {
 
 	@ObfuscatedName("ne.cb")
-	public int field2114;
+	public int remainingSamples;
 
 	@ObfuscatedName("ne.a()V")
-	public abstract void method742();
+	public abstract void remove();
 
 	@ObfuscatedName("ne.a(Lb;)I")
-	public abstract int method743(Mixer arg0);
+	public abstract int update(Mixer arg0);
 }

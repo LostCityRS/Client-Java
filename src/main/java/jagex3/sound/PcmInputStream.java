@@ -10,16 +10,16 @@ import java.io.InputStream;
 public final class PcmInputStream extends InputStream {
 
 	@ObfuscatedName("lb.a")
-	public final int[] field1695 = new int[]{0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
+	public final int[] muLawSegmentTable = new int[]{0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
 
 	@ObfuscatedName("lb.b")
-	public boolean field1696;
+	public boolean closed;
 
 	@ObfuscatedName("lb.c")
-	public final byte[] field1697 = new byte[65536];
+	public final byte[] muLawTable = new byte[65536];
 
 	@ObfuscatedName("lb.d")
-	public final int[] field1698 = new int[256];
+	public final int[] sampleBuffer = new int[256];
 
 	@Override
 	public int read() {
@@ -29,14 +29,14 @@ public final class PcmInputStream extends InputStream {
 	}
 
 	@ObfuscatedName("lb.a([B[I[BIII)V")
-	public static void method645(byte[] arg0, int[] arg1, byte[] arg2, int arg3, int arg4) {
+	public static void copyMuLawSamples(byte[] arg0, int[] arg1, byte[] arg2, int arg3, int arg4) {
 		for (int var5 = 0; var5 < arg4; var5++) {
 			arg2[arg3++] = arg0[(arg1[var5] >> 8) + 32768];
 		}
 	}
 
 	@ObfuscatedName("lb.a(I)B")
-	public byte method646(int arg0) {
+	public byte encodeMuLawSample(int arg0) {
 		int var2 = arg0 >> 8 & 0x80;
 		if (var2 != 0) {
 			arg0 = -arg0;
@@ -45,7 +45,7 @@ public final class PcmInputStream extends InputStream {
 			arg0 = 32635;
 		}
 		arg0 += 132;
-		int var3 = this.field1695[arg0 >> 7 & 0xFF];
+		int var3 = this.muLawSegmentTable[arg0 >> 7 & 0xFF];
 		int var4 = arg0 >> var3 + 3 & 0xF;
 		return (byte) ~(var2 | var3 << 4 | var4);
 	}
@@ -53,25 +53,25 @@ public final class PcmInputStream extends InputStream {
 	@Override
 	public synchronized int read(byte[] arg0, int arg1, int arg2) {
 		try {
-			if (this.field1696) {
+			if (this.closed) {
 				return -1;
 			} else if (arg2 > 256) {
 				this.read(arg0, arg1, 256);
 				this.read(arg0, arg1 + 256, arg2 - 256);
 				return arg2;
 			} else {
-				ArrayUtil.clear(this.field1698, arg2);
+				ArrayUtil.clear(this.sampleBuffer, arg2);
 				for (int var4 = 0; var4 < arg2; var4++) {
-					int var5 = this.field1698[var4];
+					int var5 = this.sampleBuffer[var4];
 					if ((var5 + 8388608 & 0xFF000000) != 0) {
-						this.field1698[var4] = var5 >> 31 ^ 0x7FFFFF;
+						this.sampleBuffer[var4] = var5 >> 31 ^ 0x7FFFFF;
 					}
 				}
-				method645(this.field1697, this.field1698, arg0, arg1, arg2);
+				copyMuLawSamples(this.muLawTable, this.sampleBuffer, arg0, arg1, arg2);
 				return arg2;
 			}
 		} catch (Exception var7) {
-			this.field1696 = true;
+			this.closed = true;
 			JagException.report(null, var7);
 			return -1;
 		}
@@ -79,7 +79,7 @@ public final class PcmInputStream extends InputStream {
 
 	public PcmInputStream() {
 		for (int var1 = -32768; var1 < 32768; var1++) {
-			this.field1697[var1 + 32768] = this.method646(var1);
+			this.muLawTable[var1 + 32768] = this.encodeMuLawSample(var1);
 		}
 	}
 }

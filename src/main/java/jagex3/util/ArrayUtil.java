@@ -74,6 +74,6 @@ public final class ArrayUtil {
 		if (PcmPlayer.stream != null) {
 			PcmPlayer.stream.doMix(arg0, 0, var3);
 		}
-		PcmPlayer.method949(var3);
+		PcmPlayer.updateStreamTime(var3);
 	}
 }

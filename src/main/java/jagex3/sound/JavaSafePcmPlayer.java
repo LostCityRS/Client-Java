@@ -19,32 +19,32 @@ public final class JavaSafePcmPlayer extends PcmPlayer {
 	@ObfuscatedName("gd.d(I)V")
 	@Override
 	public void init(int arg0) throws Exception {
-		source.method664(arg0);
+		source.init(arg0);
 	}
 
 	@ObfuscatedName("gd.d()I")
 	@Override
 	public int queued() {
-		return source.method667();
+		return source.queued();
 	}
 
 	public JavaSafePcmPlayer(SignLink arg0, Component arg1) throws Exception {
 		super(22050);
 		source = arg0.method649();
-		source.method668(arg1);
-		this.method818(arg0, 16384);
+		source.open(arg1);
+		this.start(arg0, 16384);
 	}
 
 	@ObfuscatedName("gd.e()V")
 	@Override
 	public void close() {
-		source.method666();
+		source.close();
 	}
 
 	@ObfuscatedName("gd.c()V")
 	@Override
 	public void write() {
-		source.method665(PcmPlayer.samples);
+		source.write(PcmPlayer.samples);
 	}
 
 }

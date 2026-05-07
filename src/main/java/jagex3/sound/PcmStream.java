@@ -7,10 +7,10 @@ import jagex3.datastruct.Linkable;
 public abstract class PcmStream extends Linkable {
 
 	@ObfuscatedName("oc.cb")
-	public boolean field2167;
+	public boolean mixed;
 
 	@ObfuscatedName("oc.db")
-	public PcmStreamable field2168;
+	public PcmStreamable streamable;
 
 	@ObfuscatedName("oc.a()I")
 	public int priority() {

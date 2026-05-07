@@ -6,10 +6,10 @@ import deob.ObfuscatedName;
 public final class WaveStream extends PcmStream {
 
 	@ObfuscatedName("ka.eb")
-	public int field1530;
+	public int volumeShift;
 
 	@ObfuscatedName("ka.fb")
-	public int field1531;
+	public int volumeStep;
 
 	@ObfuscatedName("ka.gb")
 	public final int loopStartPosition;
@@ -39,7 +39,7 @@ public final class WaveStream extends PcmStream {
 	public int position;
 
 	@ObfuscatedName("ka.a([IIIII)I")
-	public int method579(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
+	public int mixBackwards(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (this.volumeChangeDelta > 0) {
 			int var6 = this.volumeChangeDelta + arg1;
 			if (var6 > arg3) {
@@ -47,9 +47,9 @@ public final class WaveStream extends PcmStream {
 			}
 			this.volumeChangeDelta += arg1;
 			if (this.pitch == -256 && (this.position & 0xFF) == 0) {
-				arg1 = doMixBackwards1To1RampMono(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, this.field1530, this.field1531, var6, arg2, this);
+				arg1 = doMixBackwards1To1RampMono(((Wave) super.streamable).samples, arg0, this.position, arg1, this.volumeMono, this.volumeShift, this.volumeStep, var6, arg2, this);
 			} else {
-				arg1 = method581(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, this.field1530, this.field1531, var6, arg2, this, this.pitch, arg4);
+				arg1 = mixBackwardsInterpolatedRampMono(((Wave) super.streamable).samples, arg0, this.position, arg1, this.volumeMono, this.volumeShift, this.volumeStep, var6, arg2, this, this.pitch, arg4);
 			}
 			this.volumeChangeDelta -= arg1;
 			if (this.volumeChangeDelta != 0) {
@@ -61,7 +61,7 @@ public final class WaveStream extends PcmStream {
 			}
 			this.volumeMono = this.volume;
 		}
-		return this.pitch == -256 && (this.position & 0xFF) == 0 ? method586(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this) : method583(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this, this.pitch, arg4);
+		return this.pitch == -256 && (this.position & 0xFF) == 0 ? mixBackwards1To1Mono(((Wave) super.streamable).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this) : mixBackwardsInterpolatedMono(((Wave) super.streamable).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this, this.pitch, arg4);
 	}
 
 	@ObfuscatedName("ka.a([III)I")
@@ -71,7 +71,7 @@ public final class WaveStream extends PcmStream {
 			this.pretendToMix(arg2);
 			return 0;
 		}
-		Wave var4 = (Wave) super.field2168;
+		Wave var4 = (Wave) super.streamable;
 		int var5 = this.loopStartPosition << 8;
 		int var6 = this.loopEndPosition << 8;
 		int var7 = var4.samples.length << 8;
@@ -87,7 +87,7 @@ public final class WaveStream extends PcmStream {
 					label118:
 					{
 						if (this.pitch < 0) {
-							var9 = this.method579(arg0, arg1, var5, var10, var4.samples[this.loopStartPosition]);
+							var9 = this.mixBackwards(arg0, arg1, var5, var10, var4.samples[this.loopStartPosition]);
 							if (this.position >= var5) {
 								return 1;
 							}
@@ -98,7 +98,7 @@ public final class WaveStream extends PcmStream {
 							}
 						}
 						do {
-							var9 = this.method592(arg0, var9, var6, var10, var4.samples[this.loopEndPosition - 1]);
+							var9 = this.mixForwards(arg0, var9, var6, var10, var4.samples[this.loopEndPosition - 1]);
 							if (this.position < var6) {
 								return 1;
 							}
@@ -107,7 +107,7 @@ public final class WaveStream extends PcmStream {
 							if (--this.loopCount == 0) {
 								break;
 							}
-							var9 = this.method579(arg0, var9, var5, var10, var4.samples[this.loopStartPosition]);
+							var9 = this.mixBackwards(arg0, var9, var5, var10, var4.samples[this.loopStartPosition]);
 							if (this.position >= var5) {
 								return 1;
 							}
@@ -117,7 +117,7 @@ public final class WaveStream extends PcmStream {
 					}
 				} else if (this.pitch < 0) {
 					while (true) {
-						var9 = this.method579(arg0, var9, var5, var10, var4.samples[this.loopEndPosition - 1]);
+						var9 = this.mixBackwards(arg0, var9, var5, var10, var4.samples[this.loopEndPosition - 1]);
 						if (this.position >= var5) {
 							return 1;
 						}
@@ -132,7 +132,7 @@ public final class WaveStream extends PcmStream {
 					}
 				} else {
 					while (true) {
-						var9 = this.method592(arg0, var9, var6, var10, var4.samples[this.loopStartPosition]);
+						var9 = this.mixForwards(arg0, var9, var6, var10, var4.samples[this.loopStartPosition]);
 						if (this.position < var6) {
 							return 1;
 						}
@@ -148,13 +148,13 @@ public final class WaveStream extends PcmStream {
 				}
 			}
 			if (this.pitch < 0) {
-				this.method579(arg0, var9, 0, var10, 0);
+				this.mixBackwards(arg0, var9, 0, var10, 0);
 				if (this.position < 0) {
 					this.position = 0;
 					this.unlink();
 				}
 			} else {
-				this.method592(arg0, var9, var7, var10, 0);
+				this.mixForwards(arg0, var9, var7, var10, 0);
 				if (this.position >= var7) {
 					this.position = var7 - 1;
 					this.unlink();
@@ -163,7 +163,7 @@ public final class WaveStream extends PcmStream {
 			return 1;
 		} else if (this.loopReversed) {
 			if (this.pitch < 0) {
-				var9 = this.method579(arg0, arg1, var5, var10, var4.samples[this.loopStartPosition]);
+				var9 = this.mixBackwards(arg0, arg1, var5, var10, var4.samples[this.loopStartPosition]);
 				if (this.position >= var5) {
 					return 1;
 				}
@@ -171,13 +171,13 @@ public final class WaveStream extends PcmStream {
 				this.pitch = -this.pitch;
 			}
 			while (true) {
-				int var11 = this.method592(arg0, var9, var6, var10, var4.samples[this.loopEndPosition - 1]);
+				int var11 = this.mixForwards(arg0, var9, var6, var10, var4.samples[this.loopEndPosition - 1]);
 				if (this.position < var6) {
 					return 1;
 				}
 				this.position = var6 + var6 - this.position - 1;
 				this.pitch = -this.pitch;
-				var9 = this.method579(arg0, var11, var5, var10, var4.samples[this.loopStartPosition]);
+				var9 = this.mixBackwards(arg0, var11, var5, var10, var4.samples[this.loopStartPosition]);
 				if (this.position >= var5) {
 					return 1;
 				}
@@ -186,7 +186,7 @@ public final class WaveStream extends PcmStream {
 			}
 		} else if (this.pitch < 0) {
 			while (true) {
-				var9 = this.method579(arg0, var9, var5, var10, var4.samples[this.loopEndPosition - 1]);
+				var9 = this.mixBackwards(arg0, var9, var5, var10, var4.samples[this.loopEndPosition - 1]);
 				if (this.position >= var5) {
 					return 1;
 				}
@@ -194,7 +194,7 @@ public final class WaveStream extends PcmStream {
 			}
 		} else {
 			while (true) {
-				var9 = this.method592(arg0, var9, var6, var10, var4.samples[this.loopStartPosition]);
+				var9 = this.mixForwards(arg0, var9, var6, var10, var4.samples[this.loopStartPosition]);
 				if (this.position < var6) {
 					return 1;
 				}
@@ -204,7 +204,7 @@ public final class WaveStream extends PcmStream {
 	}
 
 	@ObfuscatedName("ka.a(II[B[IIIIIIIIILka;II)I")
-	public static int method580(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, WaveStream arg9, int arg10, int arg11) {
+	public static int mixForwardsInterpolatedRampMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, WaveStream arg9, int arg10, int arg11) {
 		int var12;
 		if (arg10 == 0 || (var12 = (arg8 + arg10 - arg2 - 257) / arg10 + arg3) > arg7) {
 			var12 = arg7;
@@ -235,7 +235,7 @@ public final class WaveStream extends PcmStream {
 	}
 
 	@ObfuscatedName("ka.b(II[B[IIIIIIIIILka;II)I")
-	public static int method581(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, WaveStream arg9, int arg10, int arg11) {
+	public static int mixBackwardsInterpolatedRampMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, WaveStream arg9, int arg10, int arg11) {
 		int var12;
 		if (arg10 == 0 || (var12 = (arg8 + arg10 + 256 - arg2) / arg10 + arg3) > arg7) {
 			var12 = arg7;
@@ -265,13 +265,13 @@ public final class WaveStream extends PcmStream {
 	}
 
 	@ObfuscatedName("ka.c(I)V")
-	public synchronized void method582(int arg0) {
+	public synchronized void setVolume(int arg0) {
 		this.volumeMono = arg0;
 		this.volumeChangeDelta = 0;
 	}
 
 	@ObfuscatedName("ka.a(II[B[IIIIIIILka;II)I")
-	public static int method583(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7, int arg8, int arg9) {
+	public static int mixBackwardsInterpolatedMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7, int arg8, int arg9) {
 		int var10;
 		if (arg8 == 0 || (var10 = (arg6 + arg8 + 256 - arg2) / arg8 + arg3) > arg5) {
 			var10 = arg5;
@@ -340,7 +340,7 @@ public final class WaveStream extends PcmStream {
 	}
 
 	@ObfuscatedName("ka.a([B[IIIIIIILka;)I")
-	public static int method586(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7) {
+	public static int mixBackwards1To1Mono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7) {
 		int var8 = arg2 >> 8;
 		int var9 = arg6 >> 8;
 		int var10 = arg4 << 8;
@@ -412,9 +412,9 @@ public final class WaveStream extends PcmStream {
 		int var1 = this.volumeMono * 3;
 		int var2 = (var1 >>> 31) + (var1 ^ var1 >> 31);
 		if (this.loopCount == 0) {
-			var2 -= this.position * var2 / (((Wave) super.field2168).samples.length << 8);
+			var2 -= this.position * var2 / (((Wave) super.streamable).samples.length << 8);
 		} else if (this.loopCount >= 0) {
-			var2 -= this.loopStartPosition * var2 / ((Wave) super.field2168).samples.length;
+			var2 -= this.loopStartPosition * var2 / ((Wave) super.streamable).samples.length;
 		}
 		return var2 > 255 ? 255 : var2;
 	}
@@ -430,7 +430,7 @@ public final class WaveStream extends PcmStream {
 	}
 
 	@ObfuscatedName("ka.b(II[B[IIIIIIILka;II)I")
-	public static int method591(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7, int arg8, int arg9) {
+	public static int mixForwardsInterpolatedMono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7, int arg8, int arg9) {
 		int var10;
 		if (arg8 == 0 || (var10 = (arg6 + arg8 - arg2 - 257) / arg8 + arg3) > arg5) {
 			var10 = arg5;
@@ -470,12 +470,12 @@ public final class WaveStream extends PcmStream {
 				}
 				this.volumeChangeDelta = 0;
 			} else {
-				this.volumeMono += this.field1531 * arg0;
+				this.volumeMono += this.volumeStep * arg0;
 				this.volumeChangeDelta -= arg0;
 			}
 		}
 		this.position += this.pitch * arg0;
-		Wave var2 = (Wave) super.field2168;
+		Wave var2 = (Wave) super.streamable;
 		int var3 = this.loopStartPosition << 8;
 		int var4 = this.loopEndPosition << 8;
 		int var5 = var2.samples.length << 8;
@@ -576,7 +576,7 @@ public final class WaveStream extends PcmStream {
 	}
 
 	@ObfuscatedName("ka.b([IIIII)I")
-	public int method592(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
+	public int mixForwards(int[] arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (this.volumeChangeDelta > 0) {
 			int var6 = this.volumeChangeDelta + arg1;
 			if (var6 > arg3) {
@@ -584,9 +584,9 @@ public final class WaveStream extends PcmStream {
 			}
 			this.volumeChangeDelta += arg1;
 			if (this.pitch == 256 && (this.position & 0xFF) == 0) {
-				arg1 = doMixForwards1To1RampMono(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, this.field1530, this.field1531, var6, arg2, this);
+				arg1 = doMixForwards1To1RampMono(((Wave) super.streamable).samples, arg0, this.position, arg1, this.volumeMono, this.volumeShift, this.volumeStep, var6, arg2, this);
 			} else {
-				arg1 = method580(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, this.field1530, this.field1531, var6, arg2, this, this.pitch, arg4);
+				arg1 = mixForwardsInterpolatedRampMono(((Wave) super.streamable).samples, arg0, this.position, arg1, this.volumeMono, this.volumeShift, this.volumeStep, var6, arg2, this, this.pitch, arg4);
 			}
 			this.volumeChangeDelta -= arg1;
 			if (this.volumeChangeDelta != 0) {
@@ -598,11 +598,11 @@ public final class WaveStream extends PcmStream {
 			}
 			this.volumeMono = this.volume;
 		}
-		return this.pitch == 256 && (this.position & 0xFF) == 0 ? method593(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this) : method591(((Wave) super.field2168).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this, this.pitch, arg4);
+		return this.pitch == 256 && (this.position & 0xFF) == 0 ? mixForwards1To1Mono(((Wave) super.streamable).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this) : mixForwardsInterpolatedMono(((Wave) super.streamable).samples, arg0, this.position, arg1, this.volumeMono, arg3, arg2, this, this.pitch, arg4);
 	}
 
 	@ObfuscatedName("ka.b([B[IIIIIIILka;)I")
-	public static int method593(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7) {
+	public static int mixForwards1To1Mono(byte[] arg0, int[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, WaveStream arg7) {
 		int var8 = arg2 >> 8;
 		int var9 = arg6 >> 8;
 		int var10 = arg4 << 8;
@@ -632,7 +632,7 @@ public final class WaveStream extends PcmStream {
 	}
 
 	public WaveStream(Wave arg0, int arg1, int arg2) {
-		super.field2168 = arg0;
+		super.streamable = arg0;
 		this.loopStartPosition = arg0.loopStartPosition;
 		this.loopEndPosition = arg0.loopEndPosition;
 		this.pitch = arg1;
