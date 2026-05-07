@@ -67,7 +67,7 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	}
 
 	@ObfuscatedName("vc.c(I)V")
-	public static void cycle() {
+	public static void loop() {
 		ClientMouseListener var0 = instance;
 		synchronized (instance) {
 			mouseButton = nextMouseButton;

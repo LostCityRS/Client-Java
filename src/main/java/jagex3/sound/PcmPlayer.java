@@ -94,7 +94,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 	}
 
     @ObfuscatedName("ha.a(B)V")
-    public static void shutdown() {
+    public static void loop() {
         if (field217 == null) {
             return;
         }

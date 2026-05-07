@@ -11690,11 +11690,11 @@ public final class Client extends GameShell {
 	public void mainloop() {
 		loopCycle++;
 		this.serviceNetClient();
-		Js5NetThread.method320();
-		MidiManager.tick();
-		PcmPlayer.shutdown();
-		ClientKeyboardListener.cycle();
-		ClientMouseListener.cycle();
+		Js5NetThread.loop();
+		MidiManager.loop();
+		PcmPlayer.loop();
+		ClientKeyboardListener.loop();
+		ClientMouseListener.loop();
 		if (state == 0) {
 			mainLoad();
 			GameShell.doneslowupdate();

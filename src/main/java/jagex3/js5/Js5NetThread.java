@@ -93,7 +93,7 @@ public final class Js5NetThread implements Runnable {
     }
 
     @ObfuscatedName("de.a(B)V")
-    public static void method320() {
+    public static void loop() {
         while (true) {
             LinkList var0 = requestQueue;
             Js5WorkerRequest var1;

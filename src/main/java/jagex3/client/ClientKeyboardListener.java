@@ -107,7 +107,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	}
 
 	@ObfuscatedName("qd.f(I)V")
-	public static void cycle() {
+	public static void loop() {
 		ClientKeyboardListener var0 = instance;
 		synchronized (instance) {
 			keyReadPos = lastKeyWritePos;

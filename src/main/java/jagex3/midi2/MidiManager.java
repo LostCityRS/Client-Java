@@ -101,7 +101,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("m.b(B)V")
-	public static synchronized void tick() {
+	public static synchronized void loop() {
 		if (!isReady()) {
 			return;
 		}
