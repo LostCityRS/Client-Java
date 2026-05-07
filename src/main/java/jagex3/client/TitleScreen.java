@@ -141,7 +141,7 @@ public class TitleScreen {
 			var6 += 15;
 			if (var1 == 1 && var0 >= 25 && var0 <= 175 && var2 >= 130 && var2 <= 170) {
 				loginUser = loginUser.getRepeatedCharacter().toRawUsername();
-				loginMes(Text.field2101, Text.field2095, Text.CONNECTING2);
+				loginMes(Text.CONNECTING3, Text.CONNECTING1, Text.CONNECTING2);
 				Client.setMainState(20);
 				return;
 			}
@@ -228,7 +228,7 @@ public class TitleScreen {
 				titleBut.plotSprite(27, 100);
 				arg0.drawStringMultiline(Text.NEWUSER, 27, 100, 144, 40, 16777215, true, 1, 1, 0);
 				titleBut.plotSprite(187, 100);
-				arg0.drawStringMultiline(Text.field2149, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
+				arg0.drawStringMultiline(Text.EXISTINGUSER, 187, 100, 144, 40, 16777215, true, 1, 1, 0);
 			} else if (loginscreen == 2) {
 				byte var3 = 40;
 				arg0.centreString(loginMes1, 180, 40, 16776960, true);

@@ -1261,10 +1261,10 @@ public final class Client extends GameShell {
 			int var28 = prefetchFrame(sprites);
 			int var29 = frameCount();
 			if (var28 < var29) {
-				TitleScreen.loadString = JagString.join(new JagString[]{Text.field1597, JagString.parseInt(var28 * 100 / var29), AUTO_PCT});
+				TitleScreen.loadString = JagString.join(new JagString[]{Text.MAINLOAD85, JagString.parseInt(var28 * 100 / var29), AUTO_PCT});
 				TitleScreen.loadPos = 80;
 			} else {
-				TitleScreen.loadString = Text.field1431;
+				TitleScreen.loadString = Text.MAINLOAD85B;
 				loadingStep = 90;
 				TitleScreen.loadPos = 80;
 			}
@@ -2243,10 +2243,10 @@ public final class Client extends GameShell {
 		int var1 = arg0.clientCode;
 		if (var1 >= 1 && var1 <= 100 || var1 >= 701 && var1 <= 800) {
 			if (var1 == 1 && friendServerStatus == 0) {
-				arg0.text = Text.field726;
+				arg0.text = Text.FRIENDLIST_LOADING;
 				arg0.buttonType = 0;
 			} else if (var1 == 1 && friendServerStatus == 1) {
-				arg0.text = Text.field3219;
+				arg0.text = Text.FRIENDLIST_LOADING2;
 				arg0.buttonType = 0;
 			} else if (var1 == 2 && friendServerStatus != 2) {
 				arg0.buttonType = 0;
@@ -2284,17 +2284,17 @@ public final class Client extends GameShell {
 				arg0.buttonType = 0;
 			} else {
 				if (friendWorld[var1] == 0) {
-					arg0.text = JagString.join(new JagString[]{field1383, Text.field1593});
+					arg0.text = JagString.join(new JagString[]{field1383, Text.OFFLINE});
 				} else if (friendWorld[var1] < 5000) {
 					if (friendWorld[var1] == worldid) {
-						arg0.text = JagString.join(new JagString[]{field2564, Text.field1407, JagString.parseInt(friendWorld[var1])});
+						arg0.text = JagString.join(new JagString[]{field2564, Text.WORLD, JagString.parseInt(friendWorld[var1])});
 					} else {
-						arg0.text = JagString.join(new JagString[]{field2699, Text.field1407, JagString.parseInt(friendWorld[var1])});
+						arg0.text = JagString.join(new JagString[]{field2699, Text.WORLD, JagString.parseInt(friendWorld[var1])});
 					}
 				} else if (friendWorld[var1] == worldid) {
-					arg0.text = JagString.join(new JagString[]{field2564, Text.field507, JagString.parseInt(friendWorld[var1] - 5000)});
+					arg0.text = JagString.join(new JagString[]{field2564, Text.CLASSIC, JagString.parseInt(friendWorld[var1] - 5000)});
 				} else {
-					arg0.text = JagString.join(new JagString[]{field2699, Text.field507, JagString.parseInt(friendWorld[var1] - 5000)});
+					arg0.text = JagString.join(new JagString[]{field2699, Text.CLASSIC, JagString.parseInt(friendWorld[var1] - 5000)});
 				}
 				arg0.buttonType = 1;
 			}
@@ -2310,7 +2310,7 @@ public final class Client extends GameShell {
 		} else if (var1 >= 401 && var1 <= 500) {
 			var1 -= 401;
 			if (var1 == 0 && friendServerStatus == 0) {
-				arg0.text = Text.field2431;
+				arg0.text = Text.IGNORELIST_LOADING;
 				arg0.buttonType = 0;
 			} else if (var1 == 1 && friendServerStatus == 0) {
 				arg0.text = Text.PLEASEWAIT;
@@ -2370,10 +2370,10 @@ public final class Client extends GameShell {
 				arg0.text = EMPTY;
 			} else if (reportAbuseMuteOption) {
 				arg0.colour = 16711680;
-				arg0.text = Text.field1094;
+				arg0.text = Text.MODMUTE_ON;
 			} else {
 				arg0.colour = 16777215;
-				arg0.text = Text.field2308;
+				arg0.text = Text.MODMUTE_OFF;
 			}
 		}
 	}
@@ -3460,10 +3460,10 @@ public final class Client extends GameShell {
 							friendWorld[var8] = var6;
 							redrawSide = true;
 							if (var6 > 0) {
-								addChat(5, JagString.join(new JagString[]{var7, Text.field2126}), EMPTY);
+								addChat(5, JagString.join(new JagString[]{var7, Text.LOGGEDIN}), EMPTY);
 							}
 							if (var6 == 0) {
-								addChat(5, JagString.join(new JagString[]{var7, Text.field1510}), EMPTY);
+								addChat(5, JagString.join(new JagString[]{var7, Text.LOGGED_OUT}), EMPTY);
 							}
 						}
 						var7 = null;
@@ -6892,10 +6892,10 @@ public final class Client extends GameShell {
 			b12.centreString(socialInputHeader, 239, 40, 0);
 			b12.centreString(JagString.join(new JagString[]{socialInput, AUTO_ASTERISK}), 239, 60, 128);
 		} else if (dialogInputType == 1) {
-			b12.centreString(Text.field2576, 239, 40, 0);
+			b12.centreString(Text.ENTER_AMOUNT, 239, 40, 0);
 			b12.centreString(JagString.join(new JagString[]{dialogInput, AUTO_ASTERISK}), 239, 60, 128);
 		} else if (dialogInputType == 2) {
-			b12.centreString(Text.field1203, 239, 40, 0);
+			b12.centreString(Text.ENTER_NAME, 239, 40, 0);
 			b12.centreString(JagString.join(new JagString[]{dialogInput, AUTO_ASTERISK}), 239, 60, 128);
 		} else if (dialogInputType == 3) {
 			if (dialogInput != field3209) {
@@ -6915,15 +6915,15 @@ public final class Client extends GameShell {
 				drawScrollbar(field1390, field2330 * 14 + 7, 463, 77, 0);
 			}
 			if (dialogInput.length() == 0) {
-				b12.centreString(Text.field1874, 239, 40, 255);
+				b12.centreString(Text.OBJECT_NAME, 239, 40, 255);
 			} else if (field2330 == 0) {
-				b12.centreString(Text.field1449, 239, 40, 0);
+				b12.centreString(Text.NO_OBJECTS, 239, 40, 0);
 			}
 			var15.centreString(JagString.join(new JagString[]{dialogInput, AUTO_ASTERISK}), 239, 90, 0);
 			Pix2D.hline(0, 77, 479, 0);
 		} else if (tutComMessage != null) {
 			b12.centreString(tutComMessage, 239, 40, 0);
-			b12.centreString(Text.field1819, 239, 60, 128);
+			b12.centreString(Text.RESUME_PAUSEBUTTON, 239, 60, 128);
 		} else if (chatModalId != -1) {
 			boolean var14 = drawInterface(chatModalId, 96, 2, 479);
 			if (!var14) {
@@ -6978,8 +6978,8 @@ public final class Client extends GameShell {
 					if ((var4 == 3 || var4 == 7) && splitPrivateChat == 0 && (var4 == 7 || chatPrivateMode == 0 || chatPrivateMode == 1 && isFriend(var5))) {
 						var1++;
 						if (var6 > 0 && var6 < 110) {
-							var2.drawString(Text.field1215, 4, var6, 0);
-							int var10 = var2.stringWid(Text.field1215) + 4;
+							var2.drawString(Text.FROM, 4, var6, 0);
+							int var10 = var2.stringWid(Text.FROM) + 4;
 							int var11 = var10 + var2.charWid(32);
 							if (var7 == 1) {
 								modIcons[0].plotSprite(var11, var6 - 12);
@@ -7008,8 +7008,8 @@ public final class Client extends GameShell {
 					}
 					if (var4 == 6 && splitPrivateChat == 0 && chatPrivateMode < 2) {
 						if (var6 > 0 && var6 < 110) {
-							var2.drawString(JagString.join(new JagString[]{Text.field521, field2406, var5, AUTO_COLON}), 4, var6, 0);
-							var2.drawString(chatText[var3], var2.stringWid(JagString.join(new JagString[]{Text.field521, field2406, var5})) + 12, var6, 8388608);
+							var2.drawString(JagString.join(new JagString[]{Text.TO, field2406, var5, AUTO_COLON}), 4, var6, 0);
+							var2.drawString(chatText[var3], var2.stringWid(JagString.join(new JagString[]{Text.TO, field2406, var5})) + 12, var6, 8388608);
 						}
 						var1++;
 					}
@@ -7049,7 +7049,7 @@ public final class Client extends GameShell {
 		if (friendServerStatus == 2) {
 			if (var1 == 201) {
 				socialInputType = 1;
-				socialInputHeader = Text.field2546;
+				socialInputHeader = Text.FRIENDLIST_ADD;
 				socialInputOpen = true;
 				dialogInputType = 0;
 				socialInput = EMPTY;
@@ -7057,7 +7057,7 @@ public final class Client extends GameShell {
 			}
 			if (var1 == 202) {
 				socialInputType = 2;
-				socialInputHeader = Text.field738;
+				socialInputHeader = Text.DELFRIEND;
 				redrawChat = true;
 				dialogInputType = 0;
 				socialInputOpen = true;
@@ -7072,7 +7072,7 @@ public final class Client extends GameShell {
 			dialogInputType = 0;
 			socialInputType = 4;
 			redrawChat = true;
-			socialInputHeader = Text.field2602;
+			socialInputHeader = Text.IGNORELIST_ADD;
 			socialInput = EMPTY;
 			socialInputOpen = true;
 		}
@@ -7082,7 +7082,7 @@ public final class Client extends GameShell {
 			socialInputType = 5;
 			socialInputOpen = true;
 			socialInput = EMPTY;
-			socialInputHeader = Text.field720;
+			socialInputHeader = Text.DELIGNORE;
 		}
 		if (var1 >= 300 && var1 <= 313) {
 			int var2 = (var1 - 300) / 2;
@@ -7603,7 +7603,7 @@ public final class Client extends GameShell {
 					socialInput = EMPTY;
 					socialInputOpen = true;
 					socialUserhash = friendUserhash[var30];
-					socialInputHeader = JagString.join(new JagString[]{Text.field1873, friendUsername[var30]});
+					socialInputHeader = JagString.join(new JagString[]{Text.SENDTO, friendUsername[var30]});
 				}
 			}
 		}
@@ -7961,7 +7961,7 @@ public final class Client extends GameShell {
 						reportAbuseMuteOption = false;
 					}
 				} else {
-					addChat(0, Text.field1921, EMPTY);
+					addChat(0, Text.REPORT_PLEASECLOSE, EMPTY);
 				}
 			}
 		}
@@ -8198,9 +8198,9 @@ public final class Client extends GameShell {
 			int var6 = var5 / 60;
 			int var7 = var5 % 60;
 			if (var7 < 10) {
-				p12.drawString(JagString.join(new JagString[]{Text.field3012, JagString.parseInt(var6), field846, JagString.parseInt(var7)}), 4, 329, 16776960);
+				p12.drawString(JagString.join(new JagString[]{Text.SYSTEM_UPDATE, JagString.parseInt(var6), field846, JagString.parseInt(var7)}), 4, 329, 16776960);
 			} else {
-				p12.drawString(JagString.join(new JagString[]{Text.field3012, JagString.parseInt(var6), AUTO_COLON, JagString.parseInt(var7)}), 4, 329, 16776960);
+				p12.drawString(JagString.join(new JagString[]{Text.SYSTEM_UPDATE, JagString.parseInt(var6), AUTO_COLON, JagString.parseInt(var7)}), 4, 329, 16776960);
 			}
 		}
 	}
@@ -8889,9 +8889,9 @@ public final class Client extends GameShell {
 				if ((var5 == 3 || var5 == 7) && (var5 == 7 || chatPrivateMode == 0 || chatPrivateMode == 1 && isFriend(var3))) {
 					int var6 = 329 - var1 * 13;
 					var1++;
-					var0.drawString(Text.field1215, 4, var6, 0);
-					var0.drawString(Text.field1215, 4, var6 - 1, 65535);
-					int var7 = var0.stringWid(Text.field1215) + 4;
+					var0.drawString(Text.FROM, 4, var6, 0);
+					var0.drawString(Text.FROM, 4, var6 - 1, 65535);
+					int var7 = var0.stringWid(Text.FROM) + 4;
 					int var8 = var7 + var0.charWid(32);
 					if (var4 == 1) {
 						modIcons[0].plotSprite(var8, var6 - 12);
@@ -8919,8 +8919,8 @@ public final class Client extends GameShell {
 				if (var5 == 6 && chatPrivateMode < 2) {
 					int var10 = 329 - var1 * 13;
 					var1++;
-					var0.drawString(JagString.join(new JagString[]{Text.field521, field2406, var3, AUTO_MINISEPARATOR, chatText[var2]}), 4, var10, 0);
-					var0.drawString(JagString.join(new JagString[]{Text.field521, field2406, var3, AUTO_MINISEPARATOR, chatText[var2]}), 4, var10 - 1, 65535);
+					var0.drawString(JagString.join(new JagString[]{Text.TO, field2406, var3, AUTO_MINISEPARATOR, chatText[var2]}), 4, var10, 0);
+					var0.drawString(JagString.join(new JagString[]{Text.TO, field2406, var3, AUTO_MINISEPARATOR, chatText[var2]}), 4, var10 - 1, 65535);
 					if (var1 >= 5) {
 						return;
 					}
@@ -8952,16 +8952,16 @@ public final class Client extends GameShell {
 					int var4 = 329 - var0 * 13;
 					var0++;
 					if (ClientMouseListener.mouseX > 4 && var4 - 10 < ClientMouseListener.mouseY + -4 && ClientMouseListener.mouseY - 4 <= var4 + 3) {
-						int var5 = p12.stringWid(JagString.join(new JagString[]{Text.field1215, field713, var3, chatText[var1]})) + 25;
+						int var5 = p12.stringWid(JagString.join(new JagString[]{Text.FROM, field713, var3, chatText[var1]})) + 25;
 						if (var5 > 450) {
 							var5 = 450;
 						}
 						if (ClientMouseListener.mouseX < var5 + 4) {
 							if (staffmodlevel >= 1) {
-								addMenuOption(0, Text.field1038, 0, 0, 2028, JagString.join(new JagString[]{field1393, var3}));
+								addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 2028, JagString.join(new JagString[]{field1393, var3}));
 							}
-							addMenuOption(0, Text.field1933, 0, 0, 2051, JagString.join(new JagString[]{field1393, var3}));
-							addMenuOption(0, Text.field1364, 0, 0, 2045, JagString.join(new JagString[]{field1393, var3}));
+							addMenuOption(0, Text.ADD_IGNORE, 0, 0, 2051, JagString.join(new JagString[]{field1393, var3}));
+							addMenuOption(0, Text.ADDFRIEND, 0, 0, 2045, JagString.join(new JagString[]{field1393, var3}));
 						}
 					}
 					if (var0 >= 5) {
@@ -9566,7 +9566,7 @@ public final class Client extends GameShell {
 					reportAbuseInput = EMPTY;
 				}
 			} else {
-				addChat(0, Text.field1921, EMPTY);
+				addChat(0, Text.REPORT_PLEASECLOSE, EMPTY);
 			}
 		}
 	}
@@ -9763,59 +9763,59 @@ public final class Client extends GameShell {
 						byte var4 = 0;
 						JagString var5 = chatInput.toLowerCase();
 						byte var6 = 0;
-						if (var5.startsWith(Text.field2391)) {
+						if (var5.startsWith(Text.CHATCOL_YELLOW)) {
 							var6 = 0;
-							chatInput = chatInput.substring(Text.field2391.length());
-						} else if (var5.startsWith(Text.field326)) {
-							chatInput = chatInput.substring(Text.field326.length());
+							chatInput = chatInput.substring(Text.CHATCOL_YELLOW.length());
+						} else if (var5.startsWith(Text.CHATCOL_RED)) {
+							chatInput = chatInput.substring(Text.CHATCOL_RED.length());
 							var6 = 1;
-						} else if (var5.startsWith(Text.field64)) {
+						} else if (var5.startsWith(Text.CHATCOL_GREEN)) {
 							var6 = 2;
-							chatInput = chatInput.substring(Text.field64.length());
-						} else if (var5.startsWith(Text.field2296)) {
+							chatInput = chatInput.substring(Text.CHATCOL_GREEN.length());
+						} else if (var5.startsWith(Text.CHATCOL_CYAN)) {
 							var6 = 3;
-							chatInput = chatInput.substring(Text.field2296.length());
-						} else if (var5.startsWith(Text.field63)) {
+							chatInput = chatInput.substring(Text.CHATCOL_CYAN.length());
+						} else if (var5.startsWith(Text.CHATCOL_PURPLE)) {
 							var6 = 4;
-							chatInput = chatInput.substring(Text.field63.length());
-						} else if (var5.startsWith(Text.field2077)) {
-							chatInput = chatInput.substring(Text.field2077.length());
+							chatInput = chatInput.substring(Text.CHATCOL_PURPLE.length());
+						} else if (var5.startsWith(Text.CHATCOL_WHITE)) {
+							chatInput = chatInput.substring(Text.CHATCOL_WHITE.length());
 							var6 = 5;
-						} else if (var5.startsWith(Text.field2157)) {
+						} else if (var5.startsWith(Text.CHATEFFECT_FLASH1)) {
 							var6 = 6;
-							chatInput = chatInput.substring(Text.field2157.length());
-						} else if (var5.startsWith(Text.field1885)) {
+							chatInput = chatInput.substring(Text.CHATEFFECT_FLASH1.length());
+						} else if (var5.startsWith(Text.CHATEFFECT_FLASH2)) {
 							var6 = 7;
-							chatInput = chatInput.substring(Text.field1885.length());
-						} else if (var5.startsWith(Text.field2767)) {
+							chatInput = chatInput.substring(Text.CHATEFFECT_FLASH2.length());
+						} else if (var5.startsWith(Text.CHATEFFECT_FLASH3)) {
 							var6 = 8;
-							chatInput = chatInput.substring(Text.field2767.length());
-						} else if (var5.startsWith(Text.field2583)) {
+							chatInput = chatInput.substring(Text.CHATEFFECT_FLASH3.length());
+						} else if (var5.startsWith(Text.CHATEFFECT_GLOW1)) {
 							var6 = 9;
-							chatInput = chatInput.substring(Text.field2583.length());
-						} else if (var5.startsWith(Text.field2477)) {
-							chatInput = chatInput.substring(Text.field2477.length());
+							chatInput = chatInput.substring(Text.CHATEFFECT_GLOW1.length());
+						} else if (var5.startsWith(Text.CHATEFFECT_GLOW2)) {
+							chatInput = chatInput.substring(Text.CHATEFFECT_GLOW2.length());
 							var6 = 10;
-						} else if (var5.startsWith(Text.field2598)) {
-							chatInput = chatInput.substring(Text.field2598.length());
+						} else if (var5.startsWith(Text.CHATEFFECT_GLOW3)) {
+							chatInput = chatInput.substring(Text.CHATEFFECT_GLOW3.length());
 							var6 = 11;
 						}
 						JagString var7 = chatInput.toLowerCase();
-						if (var7.startsWith(Text.field2317)) {
+						if (var7.startsWith(Text.AUTO_CHATEFFECT_WAVE)) {
 							var4 = 1;
-							chatInput = chatInput.substring(Text.field2317.length());
-						} else if (var7.startsWith(Text.field3054)) {
+							chatInput = chatInput.substring(Text.AUTO_CHATEFFECT_WAVE.length());
+						} else if (var7.startsWith(Text.CHATEFFECT_WAVE2)) {
 							var4 = 2;
-							chatInput = chatInput.substring(Text.field3054.length());
-						} else if (var7.startsWith(Text.field1545)) {
-							chatInput = chatInput.substring(Text.field1545.length());
+							chatInput = chatInput.substring(Text.CHATEFFECT_WAVE2.length());
+						} else if (var7.startsWith(Text.CHATEFFECT_SHAKE)) {
+							chatInput = chatInput.substring(Text.CHATEFFECT_SHAKE.length());
 							var4 = 3;
-						} else if (var7.startsWith(Text.field1195)) {
+						} else if (var7.startsWith(Text.CHATEFFECT_SCROLL)) {
 							var4 = 4;
-							chatInput = chatInput.substring(Text.field1195.length());
-						} else if (var7.startsWith(Text.field2707)) {
+							chatInput = chatInput.substring(Text.CHATEFFECT_SCROLL.length());
+						} else if (var7.startsWith(Text.CHATEFFECT_SLIDE)) {
 							var4 = 5;
-							chatInput = chatInput.substring(Text.field2707.length());
+							chatInput = chatInput.substring(Text.CHATEFFECT_SLIDE.length());
 						}
 						// MESSAGE_PUBLIC
 						out.p1Enc(75);
@@ -10608,10 +10608,10 @@ public final class Client extends GameShell {
 				if ((var4 == 1 || var4 == 2) && (var4 == 1 || chatPublicMode == 0 || chatPublicMode == 1 && isFriend(var6))) {
 					if (arg1 > var5 - 14 && arg1 <= var5 && !var6.strEquals(localPlayer.name)) {
 						if (staffmodlevel >= 1) {
-							addMenuOption(0, Text.field1038, 0, 0, 28, JagString.join(new JagString[]{field1393, var6}));
+							addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 28, JagString.join(new JagString[]{field1393, var6}));
 						}
-						addMenuOption(0, Text.field1933, 0, 0, 51, JagString.join(new JagString[]{field1393, var6}));
-						addMenuOption(0, Text.field1364, 0, 0, 45, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.ADD_IGNORE, 0, 0, 51, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.ADDFRIEND, 0, 0, 45, JagString.join(new JagString[]{field1393, var6}));
 					}
 					var2++;
 				}
@@ -10619,15 +10619,15 @@ public final class Client extends GameShell {
 					var2++;
 					if (arg1 > var5 - 14 && arg1 <= var5) {
 						if (staffmodlevel >= 1) {
-							addMenuOption(0, Text.field1038, 0, 0, 28, JagString.join(new JagString[]{field1393, var6}));
+							addMenuOption(0, Text.REPORT_ABUSE, 0, 0, 28, JagString.join(new JagString[]{field1393, var6}));
 						}
-						addMenuOption(0, Text.field1933, 0, 0, 51, JagString.join(new JagString[]{field1393, var6}));
-						addMenuOption(0, Text.field1364, 0, 0, 45, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.ADD_IGNORE, 0, 0, 51, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.ADDFRIEND, 0, 0, 45, JagString.join(new JagString[]{field1393, var6}));
 					}
 				}
 				if (var4 == 4 && (chatTradeMode == 0 || chatTradeMode == 1 && isFriend(var6))) {
 					if (arg1 > var5 - 14 && arg1 <= var5) {
-						addMenuOption(0, Text.field2610, 0, 0, 26, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.TRADEREQ_ACCEPT, 0, 0, 26, JagString.join(new JagString[]{field1393, var6}));
 					}
 					var2++;
 				}
@@ -10636,7 +10636,7 @@ public final class Client extends GameShell {
 				}
 				if (var4 == 8 && (chatTradeMode == 0 || chatTradeMode == 1 && isFriend(var6))) {
 					if (var5 - 14 < arg1 && arg1 <= var5) {
-						addMenuOption(0, Text.field1432, 0, 0, 46, JagString.join(new JagString[]{field1393, var6}));
+						addMenuOption(0, Text.CHALREQ_ACCEPT, 0, 0, 46, JagString.join(new JagString[]{field1393, var6}));
 					}
 					var2++;
 				}
@@ -10905,7 +10905,7 @@ public final class Client extends GameShell {
 			return;
 		}
 		if (ignoreCount >= 100) {
-			addChat(0, Text.field2582, EMPTY);
+			addChat(0, Text.IGNORELISTFULL, EMPTY);
 			return;
 		}
 		JagString var2 = JString.toScreenName(arg0).toRawUsername();
@@ -10917,7 +10917,7 @@ public final class Client extends GameShell {
 		}
 		for (int var4 = 0; var4 < friendCount; var4++) {
 			if (friendUserhash[var4] == arg0) {
-				addChat(0, JagString.join(new JagString[]{Text.field2172, var2, Text.REMOVEFRIEND2}), EMPTY);
+				addChat(0, JagString.join(new JagString[]{Text.REMOVEFRIEND, var2, Text.REMOVEFRIEND2}), EMPTY);
 				return;
 			}
 		}
@@ -10981,11 +10981,11 @@ public final class Client extends GameShell {
 			} else {
 				var1 -= 101;
 			}
-			addMenuOption(0, Text.field3239, 0, 0, 13, JagString.join(new JagString[]{field1393, friendUsername[var1]}));
-			addMenuOption(0, Text.field2778, 0, 0, 18, JagString.join(new JagString[]{field1393, friendUsername[var1]}));
+			addMenuOption(0, Text.REMOVE, 0, 0, 13, JagString.join(new JagString[]{field1393, friendUsername[var1]}));
+			addMenuOption(0, Text.MESSAGE, 0, 0, 18, JagString.join(new JagString[]{field1393, friendUsername[var1]}));
 			return true;
 		} else if (var1 >= 401 && var1 <= 500) {
-			addMenuOption(0, Text.field3239, 0, 0, 35, JagString.join(new JagString[]{field1393, arg0.text}));
+			addMenuOption(0, Text.REMOVE, 0, 0, 35, JagString.join(new JagString[]{field1393, arg0.text}));
 			return true;
 		} else {
 			return false;
@@ -11038,40 +11038,40 @@ public final class Client extends GameShell {
 	public static void canvasDrawChatMode(int arg0, PixFont arg1, int arg2, int arg3) {
 		areaBackbase1.bind();
 		backbase1.plotSprite(0, 0);
-		arg1.centreString(Text.field1006, 55, 28, 16777215, true);
+		arg1.centreString(Text.PUBLIC_FILTER, 55, 28, 16777215, true);
 		if (arg3 == 0) {
-			arg1.centreString(Text.field3193, 55, 41, 65280, true);
+			arg1.centreString(Text.ON, 55, 41, 65280, true);
 		}
 		if (arg3 == 1) {
-			arg1.centreString(Text.field2817, 55, 41, 16776960, true);
+			arg1.centreString(Text.FRIENDS, 55, 41, 16776960, true);
 		}
 		if (arg3 == 2) {
-			arg1.centreString(Text.field1657, 55, 41, 16711680, true);
+			arg1.centreString(Text.OFF, 55, 41, 16711680, true);
 		}
 		if (arg3 == 3) {
-			arg1.centreString(Text.field2393, 55, 41, 65535, true);
+			arg1.centreString(Text.HIDE, 55, 41, 65535, true);
 		}
-		arg1.centreString(Text.field49, 184, 28, 16777215, true);
+		arg1.centreString(Text.PRIVATE_FILTER, 184, 28, 16777215, true);
 		if (arg2 == 0) {
-			arg1.centreString(Text.field3193, 184, 41, 65280, true);
+			arg1.centreString(Text.ON, 184, 41, 65280, true);
 		}
 		if (arg2 == 1) {
-			arg1.centreString(Text.field2817, 184, 41, 16776960, true);
+			arg1.centreString(Text.FRIENDS, 184, 41, 16776960, true);
 		}
 		if (arg2 == 2) {
-			arg1.centreString(Text.field1657, 184, 41, 16711680, true);
+			arg1.centreString(Text.OFF, 184, 41, 16711680, true);
 		}
-		arg1.centreString(Text.field1676, 324, 28, 16777215, true);
+		arg1.centreString(Text.TRADE_FILTER, 324, 28, 16777215, true);
 		if (arg0 == 0) {
-			arg1.centreString(Text.field3193, 324, 41, 65280, true);
+			arg1.centreString(Text.ON, 324, 41, 65280, true);
 		}
 		if (arg0 == 1) {
-			arg1.centreString(Text.field2817, 324, 41, 16776960, true);
+			arg1.centreString(Text.FRIENDS, 324, 41, 16776960, true);
 		}
 		if (arg0 == 2) {
-			arg1.centreString(Text.field1657, 324, 41, 16711680, true);
+			arg1.centreString(Text.OFF, 324, 41, 16711680, true);
 		}
-		arg1.drawStringMultiline(Text.field1038, 417, 17, 85, 25, 16777215, true, 1, 1, 0);
+		arg1.drawStringMultiline(Text.REPORT_ABUSE, 417, 17, 85, 25, 16777215, true, 1, 1, 0);
 		try {
 			Graphics var4 = canvas.getGraphics();
 			areaBackbase1.draw(0, var4, 453);
@@ -11472,7 +11472,7 @@ public final class Client extends GameShell {
 			return;
 		}
 		if (friendCount >= 100 && membersAccount != 1 || friendCount >= 200) {
-			addChat(0, Text.field2931, EMPTY);
+			addChat(0, Text.FRIENDLIST_FULL, EMPTY);
 			return;
 		}
 		JagString var2 = JString.toScreenName(arg0).toRawUsername();
@@ -11484,7 +11484,7 @@ public final class Client extends GameShell {
 		}
 		for (int var4 = 0; var4 < ignoreCount; var4++) {
 			if (ignoreUserhash[var4] == arg0) {
-				addChat(0, JagString.join(new JagString[]{Text.field2178, var2, Text.REMOVEIGNORE2}), EMPTY);
+				addChat(0, JagString.join(new JagString[]{Text.REMOVEIGNORE, var2, Text.REMOVEIGNORE2}), EMPTY);
 				return;
 			}
 		}
@@ -11635,9 +11635,9 @@ public final class Client extends GameShell {
 			var1 = JagString.join(new JagString[]{var1.substring(0, var2), field1774, var1.substring(var2)});
 		}
 		if (var1.length() > 8) {
-			var1 = JagString.join(new JagString[]{field2564, var1.substring(0, var1.length() - 8), Text.field1896, field2629, var1, field2601});
+			var1 = JagString.join(new JagString[]{field2564, var1.substring(0, var1.length() - 8), Text.MILLION, field2629, var1, field2601});
 		} else if (var1.length() > 4) {
-			var1 = JagString.join(new JagString[]{field3136, var1.substring(0, var1.length() - 4), Text.field2360, field2629, var1, field2601});
+			var1 = JagString.join(new JagString[]{field3136, var1.substring(0, var1.length() - 4), Text.THOUSAND, field2629, var1, field2601});
 		}
 		return JagString.join(new JagString[]{field2406, var1});
 	}

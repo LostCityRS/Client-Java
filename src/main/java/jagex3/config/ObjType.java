@@ -323,9 +323,9 @@ public final class ObjType extends Linkable2 {
         if (arg0 < 100000) {
             return JagString.parseInt(arg0);
         } else if (arg0 < 10000000) {
-            return JagString.join(new JagString[]{JagString.parseInt(arg0 / 1000), Text.field2354});
+            return JagString.join(new JagString[]{JagString.parseInt(arg0 / 1000), Text.THOUSAND_SHORT});
         } else {
-            return JagString.join(new JagString[]{JagString.parseInt(arg0 / 1000000), Text.field1184});
+            return JagString.join(new JagString[]{JagString.parseInt(arg0 / 1000000), Text.MILLION_SHORT});
         }
     }
 

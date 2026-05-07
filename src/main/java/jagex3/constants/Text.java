@@ -155,9 +155,9 @@ public class Text {
 	@ObfuscatedName("client.vb")
 	public static JagString LOGIN18_A = AUTO_LOGIN18_A;
 	@ObfuscatedName("a.S")
-	public static JagString field45 = JagString.wrap("purple:");
+	public static JagString AUTO_CHATCOL_PURPLE = JagString.wrap("purple:");
 	@ObfuscatedName("a.kb")
-	public static JagString field63 = field45;
+	public static JagString CHATCOL_PURPLE = AUTO_CHATCOL_PURPLE;
 	@ObfuscatedName("mb.S")
 	public static JagString AUTO_LOGIN18_B = JagString.wrap("Press (Wrecover a locked account(W on front page)3");
 	@ObfuscatedName("mb.r")
@@ -167,25 +167,25 @@ public class Text {
 	@ObfuscatedName("nb.sd")
 	public static JagString ATTEMPT_TO_REESTABLISH = AUTO_ATTEMPT_TO_REESTABLISH;
 	@ObfuscatedName("bb.n")
-	public static JagString field324 = JagString.wrap("red:");
+	public static JagString AUTO_CHATCOL_RED = JagString.wrap("red:");
 	@ObfuscatedName("bb.p")
-	public static JagString field326 = field324;
+	public static JagString CHATCOL_RED = AUTO_CHATCOL_RED;
 	@ObfuscatedName("sd.g")
 	public static JagString AUTO_NEWUSER2 = JagString.wrap("To create a new account you need to");
 	@ObfuscatedName("sd.d")
 	public static JagString NEWUSER2 = AUTO_NEWUSER2;
 	@ObfuscatedName("mc.r")
-	public static JagString field1863 = JagString.wrap("Enter message to send to ");
+	public static JagString AUTO_SENDTO = JagString.wrap("Enter message to send to ");
 	@ObfuscatedName("mc.B")
-	public static JagString field1873 = field1863;
+	public static JagString SENDTO = AUTO_SENDTO;
 	@ObfuscatedName("ra.w")
-	public static JagString field2611 = JagString.wrap("glow3:");
+	public static JagString AUTO_CHATEFFECT_GLOW3 = JagString.wrap("glow3:");
 	@ObfuscatedName("ra.j")
-	public static JagString field2598 = field2611;
+	public static JagString CHATEFFECT_GLOW3 = AUTO_CHATEFFECT_GLOW3;
 	@ObfuscatedName("qa.Eb")
-	public static JagString field2401 = JagString.wrap("Hide");
+	public static JagString AUTO_HIDE = JagString.wrap("Hide");
 	@ObfuscatedName("qa.wb")
-	public static JagString field2393 = field2401;
+	public static JagString HIDE = AUTO_HIDE;
 	@ObfuscatedName("tc.o")
 	public static JagString AUTO_HIDDEN = JagString.wrap("Hidden");
 	@ObfuscatedName("tc.q")
@@ -195,9 +195,9 @@ public class Text {
 	@ObfuscatedName("wc.u")
 	public static JagString CANCEL = AUTO_CANCEL;
 	@ObfuscatedName("g.w")
-	public static JagString field1000 = JagString.wrap("Public chat");
+	public static JagString AUTO_PUBLIC_FILTER = JagString.wrap("Public chat");
 	@ObfuscatedName("g.C")
-	public static JagString field1006 = field1000;
+	public static JagString PUBLIC_FILTER = AUTO_PUBLIC_FILTER;
 	@ObfuscatedName("h.Ib")
 	public static JagString AUTO_MAINLOAD40 = JagString.wrap("Checking for updates )2 ");
 	@ObfuscatedName("h.Qb")
@@ -205,23 +205,23 @@ public class Text {
 	@ObfuscatedName("fa.qb")
 	public static JagString LOGINMIS_B = AUTO_PLEASE_TRY_DIFFERENT;
 	@ObfuscatedName("nd.J")
-	public static JagString field2095 = AUTO_EMPTY;
+	public static JagString CONNECTING1 = AUTO_EMPTY;
 	@ObfuscatedName("kb.i")
-	public static JagString field1549 = JagString.wrap("shake:");
+	public static JagString AUTO_CHATEFFECT_SHAKE = JagString.wrap("shake:");
 	@ObfuscatedName("kb.e")
-	public static JagString field1545 = field1549;
+	public static JagString CHATEFFECT_SHAKE = AUTO_CHATEFFECT_SHAKE;
 	@ObfuscatedName("s.i")
-	public static JagString field2710 = JagString.wrap("slide:");
+	public static JagString AUTO_CHATEFFECT_SLIDE = JagString.wrap("slide:");
 	@ObfuscatedName("s.f")
-	public static JagString field2707 = field2710;
+	public static JagString CHATEFFECT_SLIDE = AUTO_CHATEFFECT_SLIDE;
 	@ObfuscatedName("wc.v")
 	public static JagString AUTO_MAINLOAD60B = JagString.wrap("Loaded title screen");
 	@ObfuscatedName("wc.x")
 	public static JagString MAINLOAD60B = AUTO_MAINLOAD60B;
 	@ObfuscatedName("n.q")
-	public static JagString field1923 = JagString.wrap("Please close the interface you have open before using (Wreport abuse(W");
+	public static JagString AUTO_REPORT_PLEASECLOSE = JagString.wrap("Please close the interface you have open before using (Wreport abuse(W");
 	@ObfuscatedName("n.o")
-	public static JagString field1921 = field1923;
+	public static JagString REPORT_PLEASECLOSE = AUTO_REPORT_PLEASECLOSE;
 	@ObfuscatedName("nd.K")
 	public static JagString LOGIN17_C = AUTO_EMPTY;
 	@ObfuscatedName("ec.tb")
@@ -255,21 +255,21 @@ public class Text {
 	@ObfuscatedName("fa.jb")
 	public static JagString LOGIN20_B = AUTO_PLEASE_TRY_DIFFERENT;
 	@ObfuscatedName("de.e")
-	public static JagString field725 = JagString.wrap("Enter name of friend to delete from list");
+	public static JagString AUTO_DELFRIEND = JagString.wrap("Enter name of friend to delete from list");
 	@ObfuscatedName("de.r")
-	public static JagString field738 = field725;
+	public static JagString DELFRIEND = AUTO_DELFRIEND;
 	@ObfuscatedName("dd.e")
-	public static JagString field705 = JagString.wrap("Enter name of player to delete from list");
+	public static JagString AUTO_DELIGNORE = JagString.wrap("Enter name of player to delete from list");
 	@ObfuscatedName("dd.t")
-	public static JagString field720 = field705;
+	public static JagString DELIGNORE = AUTO_DELIGNORE;
 	@ObfuscatedName("hd.Rb")
-	public static JagString field1216 = JagString.wrap("From");
+	public static JagString AUTO_FROM = JagString.wrap("From");
 	@ObfuscatedName("hd.Qb")
-	public static JagString field1215 = field1216;
+	public static JagString FROM = AUTO_FROM;
 	@ObfuscatedName("sd.o")
-	public static JagString field2768 = JagString.wrap("flash3:");
+	public static JagString AUTO_CHATEFFECT_FLASH3 = JagString.wrap("flash3:");
 	@ObfuscatedName("sd.n")
-	public static JagString field2767 = field2768;
+	public static JagString CHATEFFECT_FLASH3 = AUTO_CHATEFFECT_FLASH3;
 	@ObfuscatedName("uc.N")
 	public static JagString AUTO_WALKHERE = JagString.wrap("Walk here");
 	@ObfuscatedName("uc.u")
@@ -281,53 +281,53 @@ public class Text {
 	@ObfuscatedName("nd.F")
 	public static JagString LOGIN24_C = AUTO_EMPTY;
 	@ObfuscatedName("vd.xd")
-	public static JagString field3179 = JagString.wrap("On");
+	public static JagString AUTO_ON = JagString.wrap("On");
 	@ObfuscatedName("vd.Ld")
-	public static JagString field3193 = field3179;
+	public static JagString ON = AUTO_ON;
 	@ObfuscatedName("wc.s")
 	public static JagString AUTO_IGNORELISTDUPE = JagString.wrap(" is already on your ignore list");
 	@ObfuscatedName("wc.n")
 	public static JagString IGNORELISTDUPE = AUTO_IGNORELISTDUPE;
 	@ObfuscatedName("de.m")
-	public static JagString field733 = JagString.wrap("Loading friend list");
+	public static JagString AUTO_FRIENDLIST_LOADING = JagString.wrap("Loading friend list");
 	@ObfuscatedName("de.f")
-	public static JagString field726 = field733;
+	public static JagString FRIENDLIST_LOADING = AUTO_FRIENDLIST_LOADING;
 	@ObfuscatedName("pe.Cb")
 	public static JagString AUTO_THOUSAND = JagString.wrap("K");
 	@ObfuscatedName("pe.ub")
-	public static JagString field2354 = AUTO_THOUSAND;
+	public static JagString THOUSAND_SHORT = AUTO_THOUSAND;
 	@ObfuscatedName("qa.Bb")
-	public static JagString field2398 = JagString.wrap("yellow:");
+	public static JagString AUTO_CHATCOL_YELLOW = JagString.wrap("yellow:");
 	@ObfuscatedName("qa.ub")
-	public static JagString field2391 = field2398;
+	public static JagString CHATCOL_YELLOW = AUTO_CHATCOL_YELLOW;
 	@ObfuscatedName("kc.r")
-	public static JagString field1582 = JagString.wrap("Offline");
+	public static JagString AUTO_OFFLINE = JagString.wrap("Offline");
 	@ObfuscatedName("kc.C")
-	public static JagString field1593 = field1582;
+	public static JagString OFFLINE = AUTO_OFFLINE;
 	@ObfuscatedName("ua.g")
 	public static JagString AUTO_USERNAMEPROMPT = JagString.wrap("Username: ");
 	@ObfuscatedName("ua.d")
 	public static JagString USERNAMEPROMPT = AUTO_USERNAMEPROMPT;
 	@ObfuscatedName("r.g")
-	public static JagString field2565 = JagString.wrap("glow1:");
+	public static JagString AUTO_CHATEFFECT_GLOW1 = JagString.wrap("glow1:");
 	@ObfuscatedName("r.y")
-	public static JagString field2583 = field2565;
+	public static JagString CHATEFFECT_GLOW1 = AUTO_CHATEFFECT_GLOW1;
 	@ObfuscatedName("ma.kb")
 	public static JagString AUTO_MAINLOAD40B = JagString.wrap("Loaded update list");
 	@ObfuscatedName("ma.fb")
 	public static JagString MAINLOAD40B = AUTO_MAINLOAD40B;
 	@ObfuscatedName("md.Nb")
-	public static JagString field1902 = JagString.wrap(" million");
+	public static JagString AUTO_MILLION = JagString.wrap(" million");
 	@ObfuscatedName("md.Hb")
-	public static JagString field1896 = field1902;
+	public static JagString MILLION = AUTO_MILLION;
 	@ObfuscatedName("vb.Hb")
 	public static JagString AUTO_REMOVEFRIEND2 = JagString.wrap(" from your friend list first");
 	@ObfuscatedName("vb.Bb")
 	public static JagString REMOVEFRIEND2 = AUTO_REMOVEFRIEND2;
 	@ObfuscatedName("h.Ab")
-	public static JagString field1090 = JagString.wrap("Moderator option: Mute player for 48 hours: <ON>");
+	public static JagString AUTO_MODMUTE_ON = JagString.wrap("Moderator option: Mute player for 48 hours: <ON>");
 	@ObfuscatedName("h.Eb")
-	public static JagString field1094 = field1090;
+	public static JagString MODMUTE_ON = AUTO_MODMUTE_ON;
 	@ObfuscatedName("wb.q")
 	public static JagString AUTO_NEWUSER1 = JagString.wrap("Create a free account");
 	@ObfuscatedName("wb.y")
@@ -337,13 +337,13 @@ public class Text {
 	@ObfuscatedName("vd.Fd")
 	public static JagString CONLOST = AUTO_CONLOST;
 	@ObfuscatedName("id.t")
-	public static JagString field1379 = JagString.wrap("Add friend");
+	public static JagString AUTO_ADDFRIEND = JagString.wrap("Add friend");
 	@ObfuscatedName("id.e")
-	public static JagString field1364 = field1379;
+	public static JagString ADDFRIEND = AUTO_ADDFRIEND;
 	@ObfuscatedName("nd.q")
-	public static JagString field2076 = JagString.wrap("white:");
+	public static JagString AUTO_CHATCOL_WHITE = JagString.wrap("white:");
 	@ObfuscatedName("nd.r")
-	public static JagString field2077 = field2076;
+	public static JagString CHATCOL_WHITE = AUTO_CHATCOL_WHITE;
 	@ObfuscatedName("ec.Jb")
 	public static JagString AUTO_MAINLOAD110 = JagString.wrap("Loaded input handler");
 	@ObfuscatedName("ec.Hb")
@@ -353,9 +353,9 @@ public class Text {
 	@ObfuscatedName("k.K")
 	public static JagString ATTACK = AUTO_ATTACK;
 	@ObfuscatedName("la.t")
-	public static JagString field1674 = JagString.wrap("Trade)4compete");
+	public static JagString AUTO_TRADE_FILTER = JagString.wrap("Trade)4compete");
 	@ObfuscatedName("la.v")
-	public static JagString field1676 = field1674;
+	public static JagString TRADE_FILTER = AUTO_TRADE_FILTER;
 	@ObfuscatedName("ua.u")
 	public static JagString AUTO_LOGIN17_B = JagString.wrap("To play on this world move to a free area first");
 	@ObfuscatedName("ua.c")
@@ -369,29 +369,29 @@ public class Text {
 	@ObfuscatedName("cb.h")
 	public static JagString DROP = AUTO_DROP;
 	@ObfuscatedName("qd.kc")
-	public static JagString field2484 = JagString.wrap("Enter name of friend to add to list");
+	public static JagString AUTO_FRIENDLIST_ADD = JagString.wrap("Enter name of friend to add to list");
 	@ObfuscatedName("qd.ud")
-	public static JagString field2546 = field2484;
+	public static JagString FRIENDLIST_ADD = AUTO_FRIENDLIST_ADD;
 	@ObfuscatedName("ha.h")
 	public static JagString AUTO_SELECT = JagString.wrap("Select");
 	@ObfuscatedName("ha.i")
 	public static JagString SELECT = AUTO_SELECT;
 	@ObfuscatedName("ra.o")
-	public static JagString field2603 = JagString.wrap("Enter name of player to add to list");
+	public static JagString AUTO_IGNORELIST_ADD = JagString.wrap("Enter name of player to add to list");
 	@ObfuscatedName("ra.n")
-	public static JagString field2602 = field2603;
+	public static JagString IGNORELIST_ADD = AUTO_IGNORELIST_ADD;
 	@ObfuscatedName("wa.p")
-	public static JagString field3222 = JagString.wrap("Remove");
+	public static JagString AUTO_REMOVE = JagString.wrap("Remove");
 	@ObfuscatedName("wa.G")
-	public static JagString field3239 = field3222;
+	public static JagString REMOVE = AUTO_REMOVE;
 	@ObfuscatedName("cb.A")
-	public static JagString field506 = JagString.wrap("Classic");
+	public static JagString AUTO_CLASSIC = JagString.wrap("Classic");
 	@ObfuscatedName("cb.B")
-	public static JagString field507 = field506;
+	public static JagString CLASSIC = AUTO_CLASSIC;
 	@ObfuscatedName("ra.u")
-	public static JagString field2609 = JagString.wrap("Accept trade");
+	public static JagString AUTO_TRADEREQ_ACCEPT = JagString.wrap("Accept trade");
 	@ObfuscatedName("ra.v")
-	public static JagString field2610 = field2609;
+	public static JagString TRADEREQ_ACCEPT = AUTO_TRADEREQ_ACCEPT;
 	@ObfuscatedName("nd.C")
 	public static JagString PLEASELOGIN3 = AUTO_EMPTY;
 	@ObfuscatedName("client.hb")
@@ -417,21 +417,21 @@ public class Text {
 	@ObfuscatedName("pc.n")
 	public static JagString MAINLOAD50 = AUTO_MAINLOAD50;
 	@ObfuscatedName("pe.Ab")
-	public static JagString field2360 = AUTO_THOUSAND;
+	public static JagString THOUSAND = AUTO_THOUSAND;
 	@ObfuscatedName("nd.Y")
 	public static JagString LOGIN25_C = AUTO_EMPTY;
 	@ObfuscatedName("aa.fe")
-	public static JagString field101 = JagString.wrap("green:");
+	public static JagString AUTO_CHATCOL_GREEN = JagString.wrap("green:");
 	@ObfuscatedName("aa.ud")
-	public static JagString field64 = field101;
+	public static JagString CHATCOL_GREEN = AUTO_CHATCOL_GREEN;
 	@ObfuscatedName("id.h")
 	public static JagString AUTO_MAINLOAD30 = JagString.wrap("Connecting to update server");
 	@ObfuscatedName("id.c")
 	public static JagString MAINLOAD30 = AUTO_MAINLOAD30;
 	@ObfuscatedName("cc.Eb")
-	public static JagString field520 = JagString.wrap("To");
+	public static JagString AUTO_TO = JagString.wrap("To");
 	@ObfuscatedName("cc.Fb")
-	public static JagString field521 = field520;
+	public static JagString TO = AUTO_TO;
 	@ObfuscatedName("ca.l")
 	public static JagString AUTO_LOGIN25_A = JagString.wrap("Unexpected loginserver response)3");
 	@ObfuscatedName("ca.d")
@@ -439,23 +439,23 @@ public class Text {
 	@ObfuscatedName("nd.G")
 	public static JagString LOGIN22_C = AUTO_EMPTY;
 	@ObfuscatedName("tc.l")
-	public static JagString field2923 = JagString.wrap("Your friendlist is full)3 Max of 100 for free users)1 and 200 for members");
+	public static JagString AUTO_FRIENDLIST_FULL = JagString.wrap("Your friendlist is full)3 Max of 100 for free users)1 and 200 for members");
 	@ObfuscatedName("tc.t")
-	public static JagString field2931 = field2923;
+	public static JagString FRIENDLIST_FULL = AUTO_FRIENDLIST_FULL;
 	@ObfuscatedName("ga.F")
 	public static JagString AUTO_LOGIN26_A = JagString.wrap("This computers address has been blocked");
 	@ObfuscatedName("ga.I")
 	public static JagString LOGIN26_A = AUTO_LOGIN26_A;
 	@ObfuscatedName("k.y")
-	public static JagString field1511 = JagString.wrap(" has logged out)3");
+	public static JagString AUTO_LOGGED_OUT = JagString.wrap(" has logged out)3");
 	@ObfuscatedName("k.x")
-	public static JagString field1510 = field1511;
+	public static JagString LOGGED_OUT = AUTO_LOGGED_OUT;
 	@ObfuscatedName("nd.I")
 	public static JagString LOGIN23_C = AUTO_EMPTY;
 	@ObfuscatedName("na.o")
-	public static JagString field1943 = JagString.wrap("Add ignore");
+	public static JagString AUTO_ADD_IGNORE = JagString.wrap("Add ignore");
 	@ObfuscatedName("na.e")
-	public static JagString field1933 = field1943;
+	public static JagString ADD_IGNORE = AUTO_ADD_IGNORE;
 	@ObfuscatedName("ga.C")
 	public static JagString AUTO_PLEASELOGIN2 = JagString.wrap("Enter your username (V password)3");
 	@ObfuscatedName("ga.O")
@@ -469,9 +469,9 @@ public class Text {
 	@ObfuscatedName("ie.d")
 	public static JagString SKILL = AUTO_SKILL;
 	@ObfuscatedName("kc.b")
-	public static JagString field1566 = JagString.wrap("Loading game screen )2 ");
+	public static JagString AUTO_MAINLOAD85 = JagString.wrap("Loading game screen )2 ");
 	@ObfuscatedName("kc.G")
-	public static JagString field1597 = field1566;
+	public static JagString MAINLOAD85 = AUTO_MAINLOAD85;
 	@ObfuscatedName("qa.xb")
 	public static JagString AUTO_NEWUSER5 = JagString.wrap("button near the top of that page)3");
 	@ObfuscatedName("qa.Db")
@@ -481,13 +481,13 @@ public class Text {
 	@ObfuscatedName("h.Ac")
 	public static JagString LOGINMIS_A = AUTO_LOGINMIS_A;
 	@ObfuscatedName("wa.o")
-	public static JagString field3221 = JagString.wrap("Connecting to friendserver");
+	public static JagString AUTO_FRIENDLIST_LOADING2 = JagString.wrap("Connecting to friendserver");
 	@ObfuscatedName("wa.m")
-	public static JagString field3219 = field3221;
+	public static JagString FRIENDLIST_LOADING2 = AUTO_FRIENDLIST_LOADING2;
 	@ObfuscatedName("hd.Ab")
-	public static JagString field1199 = JagString.wrap("scroll:");
+	public static JagString AUTO_CHATEFFECT_SCROLL = JagString.wrap("scroll:");
 	@ObfuscatedName("hd.wb")
-	public static JagString field1195 = field1199;
+	public static JagString CHATEFFECT_SCROLL = AUTO_CHATEFFECT_SCROLL;
 	@ObfuscatedName("kb.x")
 	public static JagString AUTO_MAINLOAD20 = JagString.wrap("Prepared visibility map");
 	@ObfuscatedName("kb.q")
@@ -501,9 +501,9 @@ public class Text {
 	@ObfuscatedName("na.b")
 	public static JagString LOGIN23_A = AUTO_LOGIN23_A;
 	@ObfuscatedName("r.b")
-	public static JagString field2560 = JagString.wrap("Enter amount:");
+	public static JagString AUTO_ENTER_AMOUNT = JagString.wrap("Enter amount:");
 	@ObfuscatedName("r.r")
-	public static JagString field2576 = field2560;
+	public static JagString ENTER_AMOUNT = AUTO_ENTER_AMOUNT;
 	@ObfuscatedName("na.f")
 	public static JagString AUTO_LOGINHOP_C = JagString.wrap(" seconds)3");
 	@ObfuscatedName("na.c")
@@ -513,21 +513,21 @@ public class Text {
 	@ObfuscatedName("ga.V")
 	public static JagString PASSWORDPROMPT = AUTO_PASSWORDPROMPT;
 	@ObfuscatedName("qd.vb")
-	public static JagString field2443 = JagString.wrap("glow2:");
+	public static JagString AUTO_CHATEFFECT_GLOW2 = JagString.wrap("glow2:");
 	@ObfuscatedName("qd.dc")
-	public static JagString field2477 = field2443;
+	public static JagString CHATEFFECT_GLOW2 = AUTO_CHATEFFECT_GLOW2;
 	@ObfuscatedName("qd.Mc")
 	public static JagString AUTO_CHOOSEOPTION = JagString.wrap("Choose Option");
 	@ObfuscatedName("qd.qc")
 	public static JagString CHOOSEOPTION = AUTO_CHOOSEOPTION;
 	@ObfuscatedName("ob.h")
-	public static JagString field2159 = JagString.wrap("flash1:");
+	public static JagString AUTO_CHATEFFECT_FLASH1 = JagString.wrap("flash1:");
 	@ObfuscatedName("ob.f")
-	public static JagString field2157 = field2159;
+	public static JagString CHATEFFECT_FLASH1 = AUTO_CHATEFFECT_FLASH1;
 	@ObfuscatedName("hd.yb")
-	public static JagString field1197 = JagString.wrap("Enter name:");
+	public static JagString AUTO_ENTER_NAME = JagString.wrap("Enter name:");
 	@ObfuscatedName("hd.Eb")
-	public static JagString field1203 = field1197;
+	public static JagString ENTER_NAME = AUTO_ENTER_NAME;
 	@ObfuscatedName("bb.v")
 	public static JagString AUTO_LOGIN24_B = JagString.wrap("Please contact customer support)3");
 	@ObfuscatedName("bb.e")
@@ -541,13 +541,13 @@ public class Text {
 	@ObfuscatedName("kc.D")
 	public static JagString TAKE = AUTO_TAKE;
 	@ObfuscatedName("qc.o")
-	public static JagString field2439 = JagString.wrap("Loading ignore list");
+	public static JagString AUTO_IGNORELIST_LOADING = JagString.wrap("Loading ignore list");
 	@ObfuscatedName("qc.g")
-	public static JagString field2431 = field2439;
+	public static JagString IGNORELIST_LOADING = AUTO_IGNORELIST_LOADING;
 	@ObfuscatedName("t.Jb")
-	public static JagString field2821 = JagString.wrap("Friends");
+	public static JagString AUTO_FRIENDS = JagString.wrap("Friends");
 	@ObfuscatedName("t.Fb")
-	public static JagString field2817 = field2821;
+	public static JagString FRIENDS = AUTO_FRIENDS;
 	@ObfuscatedName("ae.d")
 	public static JagString AUTO_TRADEREQ = JagString.wrap("wishes to trade with you)3");
 	@ObfuscatedName("ae.h")
@@ -557,13 +557,13 @@ public class Text {
 	@ObfuscatedName("d.Kc")
 	public static JagString CONNECTING2 = AUTO_CONNECTING2;
 	@ObfuscatedName("j.dc")
-	public static JagString field1429 = JagString.wrap("Accept challenge");
+	public static JagString AUTO_CHALREQ_ACCEPT = JagString.wrap("Accept challenge");
 	@ObfuscatedName("j.gc")
-	public static JagString field1432 = field1429;
+	public static JagString CHALREQ_ACCEPT = AUTO_CHALREQ_ACCEPT;
 	@ObfuscatedName("ub.q")
-	public static JagString field3043 = JagString.wrap("wave2:");
+	public static JagString AUTO_CHATEFFECT_WAVE2 = JagString.wrap("wave2:");
 	@ObfuscatedName("ub.B")
-	public static JagString field3054 = field3043;
+	public static JagString CHATEFFECT_WAVE2 = AUTO_CHATEFFECT_WAVE2;
 	@ObfuscatedName("ga.U")
 	public static JagString AUTO_LOGIN16_B = JagString.wrap("Please wait 5 minutes before trying again)3");
 	@ObfuscatedName("ga.bb")
@@ -571,21 +571,21 @@ public class Text {
 	@ObfuscatedName("nd.v")
 	public static JagString LOGIN20_C = AUTO_EMPTY;
 	@ObfuscatedName("ga.Z")
-	public static JagString field1041 = JagString.wrap("Report abuse");
+	public static JagString AUTO_REPORT_ABUSE = JagString.wrap("Report abuse");
 	@ObfuscatedName("ga.W")
-	public static JagString field1038 = field1041;
+	public static JagString REPORT_ABUSE = AUTO_REPORT_ABUSE;
 	@ObfuscatedName("ua.k")
 	public static JagString AUTO_DUELREQ = JagString.wrap("wishes to duel with you)3");
 	@ObfuscatedName("ua.j")
 	public static JagString DUELREQ = AUTO_DUELREQ;
 	@ObfuscatedName("la.E")
-	public static JagString field1685 = JagString.wrap("Off");
+	public static JagString AUTO_OFF = JagString.wrap("Off");
 	@ObfuscatedName("la.c")
-	public static JagString field1657 = field1685;
+	public static JagString OFF = AUTO_OFF;
 	@ObfuscatedName("md.Ab")
-	public static JagString field1889 = JagString.wrap("flash2:");
+	public static JagString AUTO_CHATEFFECT_FLASH2 = JagString.wrap("flash2:");
 	@ObfuscatedName("md.wb")
-	public static JagString field1885 = field1889;
+	public static JagString CHATEFFECT_FLASH2 = AUTO_CHATEFFECT_FLASH2;
 	@ObfuscatedName("h.Db")
 	public static JagString AUTO_PLEASE_WAIT_1_MIN = JagString.wrap("Please wait 1 minute and try again)3");
 	@ObfuscatedName("h.ec")
@@ -595,31 +595,31 @@ public class Text {
 	@ObfuscatedName("qd.gc")
 	public static JagString MAINLOAD0 = AUTO_MAINLOAD0;
 	@ObfuscatedName("se.q")
-	public static JagString field2789 = JagString.wrap("Message");
+	public static JagString AUTO_MESSAGE = JagString.wrap("Message");
 	@ObfuscatedName("se.f")
-	public static JagString field2778 = field2789;
+	public static JagString MESSAGE = AUTO_MESSAGE;
 	@ObfuscatedName("oa.h")
-	public static JagString field2133 = JagString.wrap(" has logged in)3");
+	public static JagString AUTO_LOGGEDIN = JagString.wrap(" has logged in)3");
 	@ObfuscatedName("oa.a")
-	public static JagString field2126 = field2133;
+	public static JagString LOGGEDIN = AUTO_LOGGEDIN;
 	@ObfuscatedName("j.ic")
-	public static JagString field1434 = JagString.wrap("Loaded gamescreen");
+	public static JagString AUTO_MAINLOAD85B = JagString.wrap("Loaded gamescreen");
 	@ObfuscatedName("j.fc")
-	public static JagString field1431 = field1434;
+	public static JagString MAINLOAD85B = AUTO_MAINLOAD85B;
 	@ObfuscatedName("f.e")
 	public static JagString AUTO_MAINLOAD80 = JagString.wrap("Loading sprites )2 ");
 	@ObfuscatedName("f.g")
 	public static JagString MAINLOAD80 = AUTO_MAINLOAD80;
 	@ObfuscatedName("nd.P")
-	public static JagString field2101 = AUTO_EMPTY;
+	public static JagString CONNECTING3 = AUTO_EMPTY;
 	@ObfuscatedName("ca.q")
 	public static JagString AUTO_LOGINHOP_A = JagString.wrap("You have only just left another world)3");
 	@ObfuscatedName("ca.t")
 	public static JagString LOGINHOP_A = AUTO_LOGINHOP_A;
 	@ObfuscatedName("oe.e")
-	public static JagString field2173 = JagString.wrap("Please remove ");
+	public static JagString AUTO_PLEASEREMOVE = JagString.wrap("Please remove ");
 	@ObfuscatedName("oe.d")
-	public static JagString field2172 = field2173;
+	public static JagString REMOVEFRIEND = AUTO_PLEASEREMOVE;
 	@ObfuscatedName("d.Dc")
 	public static JagString AUTO_MAINLOAD120 = JagString.wrap("Loading wordpack )2 ");
 	@ObfuscatedName("d.Pc")
@@ -629,9 +629,9 @@ public class Text {
 	@ObfuscatedName("je.dc")
 	public static JagString MEMBERS_OBJECT = AUTO_MEMBERS_OBJECT;
 	@ObfuscatedName("r.m")
-	public static JagString field2571 = JagString.wrap("Your ignore list is full)3 Max of 100 hit");
+	public static JagString AUTO_IGNORELISTFULL = JagString.wrap("Your ignore list is full)3 Max of 100 hit");
 	@ObfuscatedName("r.x")
-	public static JagString field2582 = field2571;
+	public static JagString IGNORELISTFULL = AUTO_IGNORELISTFULL;
 	@ObfuscatedName("k.N")
 	public static JagString AUTO_MAINLOAD80B = JagString.wrap("Loaded sprites");
 	@ObfuscatedName("k.P")
@@ -641,7 +641,7 @@ public class Text {
 	@ObfuscatedName("client.bb")
 	public static JagString WELCOMETORUNESCAPE = AUTO_WELCOMETORUNESCAPE;
 	@ObfuscatedName("oe.j")
-	public static JagString field2178 = field2173;
+	public static JagString REMOVEIGNORE = AUTO_PLEASEREMOVE;
 	@ObfuscatedName("nc.c")
 	public static JagString AUTO_OK = JagString.wrap("Ok");
 	@ObfuscatedName("nc.v")
@@ -651,9 +651,9 @@ public class Text {
 	@ObfuscatedName("dd.r")
 	public static JagString UNABLETOFIND = AUTO_UNABLETOFIND;
 	@ObfuscatedName("hc.c")
-	public static JagString AUTO_MILLION = JagString.wrap("M");
+	public static JagString AUTO_MILLION_SHORT = JagString.wrap("M");
 	@ObfuscatedName("hc.l")
-	public static JagString field1184 = AUTO_MILLION;
+	public static JagString MILLION_SHORT = AUTO_MILLION_SHORT;
 	@ObfuscatedName("f.f")
 	public static JagString AUTO_LOGIN26_B = JagString.wrap("as it was used to break our rules)3");
 	@ObfuscatedName("f.j")
@@ -691,9 +691,9 @@ public class Text {
 	@ObfuscatedName("pc.t")
 	public static JagString MAINLOAD45 = AUTO_MAINLOAD45;
 	@ObfuscatedName("oa.y")
-	public static JagString field2150 = JagString.wrap("Existing user");
+	public static JagString AUTO_EXISTINGUSER = JagString.wrap("Existing user");
 	@ObfuscatedName("oa.x")
-	public static JagString field2149 = field2150;
+	public static JagString EXISTINGUSER = AUTO_EXISTINGUSER;
 	@ObfuscatedName("pc.o")
 	public static JagString AUTO_CLOSE = JagString.wrap("Close");
 	@ObfuscatedName("pc.e")
@@ -713,7 +713,7 @@ public class Text {
 	@ObfuscatedName("ie.f")
 	public static JagString AUTO_WORLD = JagString.wrap("World");
 	@ObfuscatedName("ie.s")
-	public static JagString field1407 = AUTO_WORLD;
+	public static JagString WORLD = AUTO_WORLD;
 	@ObfuscatedName("ga.Y")
 	public static JagString AUTO_MAINLOAD130B = JagString.wrap("Loaded interfaces");
 	@ObfuscatedName("ga.P")
@@ -731,45 +731,45 @@ public class Text {
 	@ObfuscatedName("ad.E")
 	public static JagString CONTINUE = AUTO_CONTINUE;
 	@ObfuscatedName("pb.D")
-	public static JagString field2300 = JagString.wrap("cyan:");
+	public static JagString AUTO_CHATCOL_CYAN = JagString.wrap("cyan:");
 	@ObfuscatedName("pb.z")
-	public static JagString field2296 = field2300;
+	public static JagString CHATCOL_CYAN = AUTO_CHATCOL_CYAN;
 	@ObfuscatedName("a.K")
-	public static JagString field37 = JagString.wrap("Private chat");
+	public static JagString AUTO_PRIVATE_FILTER = JagString.wrap("Private chat");
 	@ObfuscatedName("a.W")
-	public static JagString field49 = field37;
+	public static JagString PRIVATE_FILTER = AUTO_PRIVATE_FILTER;
 	@ObfuscatedName("wb.F")
 	public static JagString AUTO_LOADING = JagString.wrap("Loading )2 please wait)3");
 	@ObfuscatedName("wb.l")
 	public static JagString LOADING = AUTO_LOADING;
 	@ObfuscatedName("jc.ib")
-	public static JagString field1455 = JagString.wrap("No matching objects found)1 please shorten search");
+	public static JagString AUTO_NO_OBJECTS = JagString.wrap("No matching objects found)1 please shorten search");
 	@ObfuscatedName("jc.cb")
-	public static JagString field1449 = field1455;
+	public static JagString NO_OBJECTS = AUTO_NO_OBJECTS;
 	@ObfuscatedName("pc.d")
-	public static JagString field2309 = JagString.wrap("wave:");
+	public static JagString CHATEFFECT_WAVE = JagString.wrap("wave:");
 	@ObfuscatedName("pc.l")
-	public static JagString field2317 = field2309;
+	public static JagString AUTO_CHATEFFECT_WAVE = CHATEFFECT_WAVE;
 	@ObfuscatedName("pc.j")
-	public static JagString field2315 = JagString.wrap("Moderator option: Mute player for 48 hours: <OFF>");
+	public static JagString AUTO_MODMUTE_OFF = JagString.wrap("Moderator option: Mute player for 48 hours: <OFF>");
 	@ObfuscatedName("pc.c")
-	public static JagString field2308 = field2315;
+	public static JagString MODMUTE_OFF = AUTO_MODMUTE_OFF;
 	@ObfuscatedName("mb.A")
-	public static JagString field1816 = JagString.wrap("Click to continue");
+	public static JagString AUTO_RESUME_PAUSEBUTTON = JagString.wrap("Click to continue");
 	@ObfuscatedName("mb.D")
-	public static JagString field1819 = field1816;
+	public static JagString RESUME_PAUSEBUTTON = AUTO_RESUME_PAUSEBUTTON;
 	@ObfuscatedName("r.p")
 	public static JagString AUTO_LOGIN17_A = JagString.wrap("You are standing in a members)2only area)3");
 	@ObfuscatedName("r.v")
 	public static JagString LOGIN17_A = AUTO_LOGIN17_A;
 	@ObfuscatedName("ua.t")
-	public static JagString field3018 = JagString.wrap("System update in: ");
+	public static JagString AUTO_SYSTEM_UPDATE = JagString.wrap("System update in: ");
 	@ObfuscatedName("ua.n")
-	public static JagString field3012 = field3018;
+	public static JagString SYSTEM_UPDATE = AUTO_SYSTEM_UPDATE;
 	@ObfuscatedName("mc.b")
-	public static JagString field1847 = JagString.wrap("Enter object name");
+	public static JagString AUTO_OBJECT_NAME = JagString.wrap("Enter object name");
 	@ObfuscatedName("mc.C")
-	public static JagString field1874 = field1847;
+	public static JagString OBJECT_NAME = AUTO_OBJECT_NAME;
 	@ObfuscatedName("m.v")
 	public static JagString AUTO_MAINLOAD70 = JagString.wrap("Loading config )2 ");
 	@ObfuscatedName("m.i")
