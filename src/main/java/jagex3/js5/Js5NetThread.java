@@ -5,7 +5,7 @@ import jagex3.callstack.JagException;
 import jagex3.client.GameShell;
 import jagex3.datastruct.LinkList;
 import jagex3.io.DataFile;
-import jagex3.util.ThreadUtil;
+import jagex3.util.ThreadSleep;
 
 @ObfuscatedName("oe")
 public final class Js5NetThread implements Runnable {
@@ -117,7 +117,7 @@ public final class Js5NetThread implements Runnable {
 					var2 = (Js5WorkerRequest) requestQueue.head();
 				}
 				if (var2 == null) {
-					ThreadUtil.sleepPrecise(100L);
+					ThreadSleep.sleepPrecise(100L);
 					Object var3 = lock;
 					synchronized (lock) {
 						if (keepAlive <= 1) {

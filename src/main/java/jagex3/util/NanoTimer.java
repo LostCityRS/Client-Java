@@ -28,7 +28,7 @@ public final class NanoTimer extends Timer {
 		if (var5 < var3) {
 			var5 = var3;
 		}
-		ThreadUtil.sleepPrecise(var5 / 1000000L);
+		ThreadSleep.sleepPrecise(var5 / 1000000L);
 		long var7 = System.nanoTime();
 		int var9;
 		for (var9 = 0; var9 < 10 && (var9 < 1 || this.ntime < var7); var9++) {

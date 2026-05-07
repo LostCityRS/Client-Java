@@ -3,7 +3,7 @@ package jagex3.sound;
 import deob.ObfuscatedName;
 import jagex3.callstack.JagException;
 import jagex3.client.SignLink;
-import jagex3.util.ThreadUtil;
+import jagex3.util.ThreadSleep;
 
 @ObfuscatedName("ja")
 public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
@@ -110,7 +110,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 					}
 					this.method308();
 				}
-				ThreadUtil.sleepPrecise(100L);
+				ThreadSleep.sleepPrecise(100L);
 			}
 		} catch (Exception var4) {
 			JagException.report(null, var4);
@@ -129,7 +129,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 					break;
 				}
 			}
-			ThreadUtil.sleepPrecise(20L);
+			ThreadSleep.sleepPrecise(20L);
 		}
 		field1442.method312();
 	}

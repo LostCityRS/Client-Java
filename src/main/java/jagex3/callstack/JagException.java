@@ -4,7 +4,7 @@ import deob.ObfuscatedName;
 import jagex3.client.Client;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
-import jagex3.util.ThreadUtil;
+import jagex3.util.ThreadSleep;
 
 import java.io.*;
 import java.net.URL;
@@ -47,7 +47,7 @@ public final class JagException extends RuntimeException {
 			String var6 = var5.replace('#', '_');
 			PrivilegedRequest var7 = signlink.urlreq(new URL(signlink.applet.getCodeBase(), "clienterror.ws?c=" + revision + "&u=" + Client.field1843 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
 			while (var7.status == 0) {
-				ThreadUtil.sleepPrecise(1L);
+				ThreadSleep.sleepPrecise(1L);
 			}
 			if (var7.status == 1) {
 				DataInputStream var8 = (DataInputStream) var7.result;

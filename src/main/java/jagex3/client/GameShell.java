@@ -7,7 +7,7 @@ import jagex3.io.BufferedRandomAccessFile;
 import jagex3.io.DataFile;
 import jagex3.util.JagString;
 import jagex3.util.MonotonicTime;
-import jagex3.util.ThreadUtil;
+import jagex3.util.ThreadSleep;
 import jagex3.util.Timer;
 
 import java.applet.Applet;
@@ -321,7 +321,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public final void destroy() {
 		if (shell == this && !alreadyshutdown) {
 			killtime = MonotonicTime.currentTime();
-			ThreadUtil.sleepPrecise(5000L);
+			ThreadSleep.sleepPrecise(5000L);
 			JagException.signlink = null;
 			this.shutdown();
 		}

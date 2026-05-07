@@ -4,7 +4,7 @@ import deob.ObfuscatedName;
 import jagex3.callstack.JagException;
 import jagex3.client.PrivilegedRequest;
 import jagex3.client.SignLink;
-import jagex3.util.ThreadUtil;
+import jagex3.util.ThreadSleep;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -71,7 +71,7 @@ public final class ClientStream implements Runnable {
 		}
 		if (this.writer != null) {
 			while (this.writer.status == 0) {
-				ThreadUtil.sleepPrecise(1L);
+				ThreadSleep.sleepPrecise(1L);
 			}
 			if (this.writer.status == 1) {
 				try {

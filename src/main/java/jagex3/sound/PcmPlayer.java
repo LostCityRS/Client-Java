@@ -5,7 +5,7 @@ import jagex3.callstack.JagException;
 import jagex3.client.SignLink;
 import jagex3.util.ArrayUtil;
 import jagex3.util.MonotonicTime;
-import jagex3.util.ThreadUtil;
+import jagex3.util.ThreadSleep;
 
 import java.awt.*;
 
@@ -276,7 +276,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 					return;
 				}
 			}
-			ThreadUtil.sleepPrecise(50L);
+			ThreadSleep.sleepPrecise(50L);
 		}
 	}
 
@@ -294,7 +294,7 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 					}
 					this.method255(MonotonicTime.currentTime());
 				}
-				ThreadUtil.sleepPrecise(5L);
+				ThreadSleep.sleepPrecise(5L);
 			}
 		} catch (Exception var4) {
 			JagException.report(null, var4);
