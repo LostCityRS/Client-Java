@@ -1,4 +1,4 @@
-package jagex3.sound;
+package jagex3.midi2;
 
 import deob.ObfuscatedName;
 import jagex3.client.Client;
@@ -7,7 +7,7 @@ import jagex3.client.SignLink;
 import jagex3.io.FileOnDisk;
 
 @ObfuscatedName("ga")
-public final class JavaBrowserMidiPlayer extends MidiStream {
+public final class BgsoundMidiPlayer extends MidiStream {
 
 	@ObfuscatedName("ga.db")
 	public final SignLink field1045;
@@ -108,7 +108,7 @@ public final class JavaBrowserMidiPlayer extends MidiStream {
 		this.field1025 = arg1;
 	}
 
-	public JavaBrowserMidiPlayer(SignLink arg0) {
+	public BgsoundMidiPlayer(SignLink arg0) {
 		this.field1045 = arg0;
 	}
 }

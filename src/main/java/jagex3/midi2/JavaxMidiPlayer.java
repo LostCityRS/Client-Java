@@ -1,4 +1,4 @@
-package jagex3.sound;
+package jagex3.midi2;
 
 import deob.ObfuscatedName;
 
@@ -6,7 +6,7 @@ import javax.sound.midi.*;
 import java.io.ByteArrayInputStream;
 
 @ObfuscatedName("da")
-public final class JavaMidiPlayer extends MidiPlayer implements Receiver {
+public final class JavaxMidiPlayer extends MidiPlayer implements Receiver {
 
 	@ObfuscatedName("da.R")
 	public static Sequencer field673 = null;
@@ -38,7 +38,7 @@ public final class JavaMidiPlayer extends MidiPlayer implements Receiver {
 		}
 	}
 
-	public JavaMidiPlayer() {
+	public JavaxMidiPlayer() {
 		try {
 			field675 = MidiSystem.getReceiver();
 			field673 = MidiSystem.getSequencer(false);

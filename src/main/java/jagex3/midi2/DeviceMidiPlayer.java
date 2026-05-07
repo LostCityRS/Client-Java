@@ -1,4 +1,4 @@
-package jagex3.sound;
+package jagex3.midi2;
 
 import deob.ObfuscatedName;
 import jagex3.callstack.JagException;
@@ -6,7 +6,7 @@ import jagex3.client.SignLink;
 import jagex3.util.ThreadSleep;
 
 @ObfuscatedName("ja")
-public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
+public final class DeviceMidiPlayer extends MidiPlayer implements Runnable {
 
 	@ObfuscatedName("ja.T")
 	public static final MidiParser field1444 = new MidiParser();
@@ -186,7 +186,7 @@ public final class JavaSafeMidiPlayer extends MidiPlayer implements Runnable {
 		this.method996(arg0, arg1, (long) field1445);
 	}
 
-	public JavaSafeMidiPlayer(SignLink arg0, MidiDevice arg1) {
+	public DeviceMidiPlayer(SignLink arg0, MidiDevice arg1) {
 		field1442 = arg1;
 		field1442.method311();
 		field1442.method314();

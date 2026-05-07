@@ -16,6 +16,9 @@ import jagex3.js5.Js5Net;
 import jagex3.js5.Js5NetThread;
 import jagex3.jstring.JString;
 import jagex3.jstring.StringTools;
+import jagex3.midi2.MidiManager;
+import jagex3.midi2.MidiParser;
+import jagex3.midi2.MidiStream;
 import jagex3.reflectionchecker.ReflectionChecker;
 import jagex3.sound.*;
 import jagex3.util.JagString;
@@ -1102,7 +1105,7 @@ public final class Client extends GameShell {
 				TitleScreen.loadPos = 30;
 			}
 		} else if (loadingStep == 45) {
-			PcmPlayer.init(GameShell.signlink, !lowMem);
+			MidiStream.init(GameShell.signlink, !lowMem);
 			soundMixer = Mixer.method993(GameShell.signlink, GameShell.canvas);
 			soundDecimator = new Decimator(22050, PcmPlayer.frequency);
 			loadingStep = 50;

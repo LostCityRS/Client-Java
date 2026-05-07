@@ -88,11 +88,6 @@ public abstract class PcmPlayer extends PcmPlayerBase implements Runnable {
 		}
 	}
 
-	@ObfuscatedName("k.a(Llc;IZB)Z")
-	public static boolean init(SignLink arg0, boolean arg1) {
-		return MidiStream.method734(arg0, arg1);
-	}
-
 	@ObfuscatedName("pd.b()V")
 	public static void unload() {
 		samples = null;

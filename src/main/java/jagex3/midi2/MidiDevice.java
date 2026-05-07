@@ -1,4 +1,4 @@
-package jagex3.sound;
+package jagex3.midi2;
 
 import deob.ObfuscatedName;
 

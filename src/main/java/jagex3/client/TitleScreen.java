@@ -5,7 +5,7 @@ import jagex3.constants.Text;
 import jagex3.graphics.*;
 import jagex3.js5.Js5;
 import jagex3.js5.Js5Net;
-import jagex3.sound.MidiManager;
+import jagex3.midi2.MidiManager;
 import jagex3.util.JagString;
 
 import java.awt.*;

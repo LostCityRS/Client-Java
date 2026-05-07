@@ -1,6 +1,7 @@
-package jagex3.sound;
+package jagex3.midi2;
 
 import deob.ObfuscatedName;
+import jagex3.client.SignLink;
 import jagex3.datastruct.ByteArrayNode;
 import jagex3.datastruct.LruCache;
 import jagex3.js5.Js5;
@@ -324,5 +325,25 @@ public class MidiManager {
 	@ObfuscatedName("m.b(Z)V")
 	public static synchronized void method674() {
 		method1029();
+	}
+
+	@ObfuscatedName("nc.a(Llc;BZ)Z")
+	public static boolean method734(SignLink arg0, boolean arg1) {
+		field1548 = 20;
+		try {
+			field311 = (MidiStream) Class.forName("jagex3.midi2.JavaxMidiPlayer").getDeclaredConstructor().newInstance();
+			return true;
+		} catch (Throwable var3) {
+			MidiDevice var2 = arg0.method653();
+			if (var2 != null) {
+				field311 = new DeviceMidiPlayer(arg0, var2);
+				return true;
+			} else if (arg1) {
+				field311 = new BgsoundMidiPlayer(arg0);
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 }
