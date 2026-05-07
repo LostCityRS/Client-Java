@@ -111,7 +111,7 @@ public final class MidiParser {
 	}
 
 	@ObfuscatedName("ea.e()Z")
-	public boolean method343() {
+	public boolean isTrackFinished() {
 		return this.packet.pos < 0;
 	}
 
@@ -129,7 +129,7 @@ public final class MidiParser {
 	}
 
 	@ObfuscatedName("ea.d(I)V")
-	public void method345(int arg0) {
+	public void saveTrackPosition(int arg0) {
 		this.trackCurrentPos[arg0] = this.packet.pos;
 	}
 
@@ -209,7 +209,7 @@ public final class MidiParser {
 	}
 
 	@ObfuscatedName("ea.f(I)V")
-	public void method350(int arg0) {
+	public void loadTrackPosition(int arg0) {
 		this.packet.pos = this.trackCurrentPos[arg0];
 	}
 

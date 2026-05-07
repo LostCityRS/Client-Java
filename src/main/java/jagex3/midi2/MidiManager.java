@@ -9,182 +9,182 @@ import jagex3.util.JagString;
 
 public class MidiManager {
 	@ObfuscatedName("ie.c")
-	public static boolean field1391 = false;
+	public static boolean songRequestPending = false;
 	@ObfuscatedName("u.pb")
-	public static int field2985;
+	public static int pendingFadeTicks;
 	@ObfuscatedName("bd.S")
-	public static int field405;
+	public static int pendingFadeStep;
 	@ObfuscatedName("fc.Ub")
-	public static int field917;
+	public static int pendingSongVolume;
 	@ObfuscatedName("d.Fc")
 	public static int pendingVolume;
 	@ObfuscatedName("client.Eb")
 	public static boolean pendingLoop;
 	@ObfuscatedName("jc.pb")
-	public static int field1462;
+	public static int pendingCacheId;
 	@ObfuscatedName("ga.M")
 	public static Js5 midis;
 	@ObfuscatedName("ca.o")
-	public static int field463;
+	public static int pendingGroupId;
 	@ObfuscatedName("bb.a")
-	public static MidiStream field311;
+	public static MidiStream midiStream;
 	@ObfuscatedName("ub.d")
-	public static int field3030 = -1;
+	public static int currentVolume = -1;
 	@ObfuscatedName("nc.l")
-	public static int field2046 = 0;
+	public static int currentFadeOffset = 0;
 	@ObfuscatedName("aa.Id")
-	public static byte[] field78;
+	public static byte[] queuedMidiData;
 	@ObfuscatedName("kb.h")
-	public static int field1548 = 0;
+	public static int fadeTicks = 0;
 	@ObfuscatedName("ba.gc")
-	public static int field302 = 0;
+	public static int fadeStep = 0;
 	@ObfuscatedName("fe.Rc")
-	public static int field975;
+	public static int queuedVolume;
 	@ObfuscatedName("la.h")
-	public static boolean field1662;
+	public static boolean queuedLoop;
 	@ObfuscatedName("a.D")
-	public static LruCache field30;
+	public static LruCache midiCache;
 
 	@ObfuscatedName("m.a(ZIIIILbd;I)V")
 	public static synchronized void play(int arg0, int arg1, int arg2, Js5 arg3) {
-		if (!method521()) {
+		if (!isReady()) {
 			return;
 		}
-		field1391 = true;
-		field2985 = -1;
-		field405 = -1;
-		field917 = arg2;
+		songRequestPending = true;
+		pendingFadeTicks = -1;
+		pendingFadeStep = -1;
+		pendingSongVolume = arg2;
 		pendingVolume = 0;
 		pendingLoop = false;
-		field1462 = arg0;
+		pendingCacheId = arg0;
 		midis = arg3;
-		field463 = arg1;
+		pendingGroupId = arg1;
 	}
 
 	@ObfuscatedName("ib.a(I)Z")
-	public static boolean method521() {
-		return field311 != null;
+	public static boolean isReady() {
+		return midiStream != null;
 	}
 
 	@ObfuscatedName("m.a(Z)V")
 	public static synchronized void stop() {
-		if (method521()) {
-			method475();
-			field1391 = false;
+		if (isReady()) {
+			stopNow();
+			songRequestPending = false;
 			midis = null;
 		}
 	}
 
 	@ObfuscatedName("m.a(IZIILbd;IIZ)V")
-	public static synchronized void method670(int arg0, int arg1, Js5 arg2, int arg3) {
-		if (!method521()) {
+	public static synchronized void playGroup(int arg0, int arg1, Js5 arg2, int arg3) {
+		if (!isReady()) {
 			return;
 		}
 		pendingLoop = false;
-		field405 = 10;
+		pendingFadeStep = 10;
 		pendingVolume = arg3;
-		field1391 = true;
+		songRequestPending = true;
 		midis = arg2;
-		field2985 = -1;
-		field917 = arg0;
-		field1462 = 0;
-		field463 = arg1;
+		pendingFadeTicks = -1;
+		pendingSongVolume = arg0;
+		pendingCacheId = 0;
+		pendingGroupId = arg1;
 	}
 
 	@ObfuscatedName("m.a(II)V")
-	public static synchronized void method672() {
-		if (method521()) {
-			method397();
+	public static synchronized void stopWithFade() {
+		if (isReady()) {
+			fadeOut();
 			midis = null;
-			field1391 = false;
+			songRequestPending = false;
 		}
 	}
 
 	@ObfuscatedName("m.b(B)V")
-	public static synchronized void method680() {
-		if (!method521()) {
+	public static synchronized void tick() {
+		if (!isReady()) {
 			return;
 		}
-		if (field1391) {
-			byte[] var0 = method25(pendingVolume, midis, field463, field1462);
+		if (songRequestPending) {
+			byte[] var0 = getMidiFile(pendingVolume, midis, pendingGroupId, pendingCacheId);
 			if (var0 != null) {
-				if (field405 >= 0) {
-					method749(field917, pendingLoop, var0, field405);
-				} else if (field2985 < 0) {
-					method7(pendingLoop, var0, field917);
+				if (pendingFadeStep >= 0) {
+					fadeOutThenPlayWithStep(pendingSongVolume, pendingLoop, var0, pendingFadeStep);
+				} else if (pendingFadeTicks < 0) {
+					playImmediate(pendingLoop, var0, pendingSongVolume);
 				} else {
-					method406(field917, pendingLoop, field2985, var0);
+					fadeOutThenPlay(pendingSongVolume, pendingLoop, pendingFadeTicks, var0);
 				}
-				field1391 = false;
+				songRequestPending = false;
 				midis = null;
 			}
 		}
-		method962();
+		update();
 	}
 
 	@ObfuscatedName("hc.c(I)V")
-	public static void method475() {
-		method7(false, null, 0);
+	public static void stopNow() {
+		playImmediate(false, null, 0);
 	}
 
 	@ObfuscatedName("a.a(IZ[BI)V")
-	public static void method7(boolean arg0, byte[] arg1, int arg2) {
-		if (field311 == null) {
+	public static void playImmediate(boolean arg0, byte[] arg1, int arg2) {
+		if (midiStream == null) {
 			return;
 		}
-		if (field3030 >= 0) {
-			field311.method305();
-			field2046 = 0;
-			field78 = null;
-			field1548 = 20;
-			field3030 = -1;
+		if (currentVolume >= 0) {
+			midiStream.stop();
+			currentFadeOffset = 0;
+			queuedMidiData = null;
+			fadeTicks = 20;
+			currentVolume = -1;
 		}
 		if (arg1 == null) {
 			return;
 		}
-		if (field1548 > 0) {
-			field311.method304(arg2);
-			field1548 = 0;
+		if (fadeTicks > 0) {
+			midiStream.resetVolume(arg2);
+			fadeTicks = 0;
 		}
-		field3030 = arg2;
-		field311.method307(arg1, arg0, arg2);
+		currentVolume = arg2;
+		midiStream.play(arg1, arg0, arg2);
 	}
 
 	@ObfuscatedName("fd.a(IZI[BI)V")
-	public static void method406(int arg0, boolean arg1, int arg2, byte[] arg3) {
-		if (field311 == null) {
+	public static void fadeOutThenPlay(int arg0, boolean arg1, int arg2, byte[] arg3) {
+		if (midiStream == null) {
 			return;
 		}
-		if (field3030 >= 0) {
+		if (currentVolume >= 0) {
 			arg2 -= 20;
 			if (arg2 < 1) {
 				arg2 = 1;
 			}
-			field1548 = arg2;
-			if (field3030 == 0) {
-				field302 = 0;
+			fadeTicks = arg2;
+			if (currentVolume == 0) {
+				fadeStep = 0;
 			} else {
-				int var4 = method632(field3030);
-				int var5 = var4 - field2046;
-				field302 = (arg2 + var5 + 3600 - 1) / arg2;
+				int var4 = volumeToDecibels(currentVolume);
+				int var5 = var4 - currentFadeOffset;
+				fadeStep = (arg2 + var5 + 3600 - 1) / arg2;
 			}
-			field78 = arg3;
-			field975 = arg0;
-			field1662 = arg1;
-		} else if (field1548 == 0) {
-			method7(arg1, arg3, arg0);
+			queuedMidiData = arg3;
+			queuedVolume = arg0;
+			queuedLoop = arg1;
+		} else if (fadeTicks == 0) {
+			playImmediate(arg1, arg3, arg0);
 		} else {
-			field975 = arg0;
-			field1662 = arg1;
-			field78 = arg3;
+			queuedVolume = arg0;
+			queuedLoop = arg1;
+			queuedMidiData = arg3;
 		}
 	}
 
 	@ObfuscatedName("a.a(ILbd;III)[B")
-	public static byte[] method25(int arg0, Js5 arg1, int arg2, int arg3) {
+	public static byte[] getMidiFile(int arg0, Js5 arg1, int arg2, int arg3) {
 		long var4 = ((long) arg3 << 32) + (long) (arg2 * 37 + arg0 & 0xFFFF) + (long) (arg2 << 16);
-		if (field30 != null) {
-			ByteArrayNode var6 = (ByteArrayNode) field30.find(var4);
+		if (midiCache != null) {
+			ByteArrayNode var6 = (ByteArrayNode) midiCache.find(var4);
 			if (var6 != null) {
 				return var6.data;
 			}
@@ -193,153 +193,153 @@ public class MidiManager {
 		if (var7 == null) {
 			return null;
 		} else {
-			if (field30 != null) {
-				field30.put(var4, new ByteArrayNode(var7));
+			if (midiCache != null) {
+				midiCache.put(var4, new ByteArrayNode(var7));
 			}
 			return var7;
 		}
 	}
 
 	@ObfuscatedName("oa.a(IIZ[BI)V")
-	public static void method749(int arg0, boolean arg1, byte[] arg2, int arg3) {
-		if (field311 == null) {
+	public static void fadeOutThenPlayWithStep(int arg0, boolean arg1, byte[] arg2, int arg3) {
+		if (midiStream == null) {
 			return;
 		}
-		if (field3030 >= 0) {
-			field302 = arg3;
-			if (field3030 == 0) {
-				field1548 = 1;
+		if (currentVolume >= 0) {
+			fadeStep = arg3;
+			if (currentVolume == 0) {
+				fadeTicks = 1;
 			} else {
-				int var4 = method632(field3030);
-				int var5 = var4 - field2046;
-				field1548 = (var5 + 3600) / arg3;
-				if (field1548 < 1) {
-					field1548 = 1;
+				int var4 = volumeToDecibels(currentVolume);
+				int var5 = var4 - currentFadeOffset;
+				fadeTicks = (var5 + 3600) / arg3;
+				if (fadeTicks < 1) {
+					fadeTicks = 1;
 				}
 			}
-			field975 = arg0;
-			field78 = arg2;
-			field1662 = arg1;
-		} else if (field1548 == 0) {
-			method7(arg1, arg2, arg0);
+			queuedVolume = arg0;
+			queuedMidiData = arg2;
+			queuedLoop = arg1;
+		} else if (fadeTicks == 0) {
+			playImmediate(arg1, arg2, arg0);
 		} else {
-			field975 = arg0;
-			field78 = arg2;
-			field1662 = arg1;
+			queuedVolume = arg0;
+			queuedMidiData = arg2;
+			queuedLoop = arg1;
 		}
 	}
 
 	@ObfuscatedName("tc.c(I)V")
-	public static void method962() {
-		if (field311 == null) {
+	public static void update() {
+		if (midiStream == null) {
 			return;
 		}
-		if (field3030 >= 0) {
-			if (field1548 > 0) {
-				field2046 += field302;
-				field311.method302(field3030, field2046);
-				field1548--;
-				if (field1548 == 0) {
-					field311.method305();
-					field3030 = -1;
-					field1548 = 20;
+		if (currentVolume >= 0) {
+			if (fadeTicks > 0) {
+				currentFadeOffset += fadeStep;
+				midiStream.setVolume(currentVolume, currentFadeOffset);
+				fadeTicks--;
+				if (fadeTicks == 0) {
+					midiStream.stop();
+					currentVolume = -1;
+					fadeTicks = 20;
 				}
 			}
-		} else if (field1548 > 0) {
-			field1548--;
-			if (field1548 == 0) {
-				if (field78 == null) {
-					field311.method304(256);
+		} else if (fadeTicks > 0) {
+			fadeTicks--;
+			if (fadeTicks == 0) {
+				if (queuedMidiData == null) {
+					midiStream.resetVolume(256);
 				} else {
-					field311.method304(field975);
-					field3030 = field975;
-					field311.method307(field78, field1662, field975);
-					field78 = null;
+					midiStream.resetVolume(queuedVolume);
+					currentVolume = queuedVolume;
+					midiStream.play(queuedMidiData, queuedLoop, queuedVolume);
+					queuedMidiData = null;
 				}
-				field2046 = 0;
+				currentFadeOffset = 0;
 			}
 		}
-		field311.method308();
+		midiStream.poll();
 	}
 
 	@ObfuscatedName("l.a(II)I")
-	public static int method632(int arg0) {
+	public static int volumeToDecibels(int arg0) {
 		return (int) (Math.log((double) arg0 * 0.00390625D) * 868.5889638065036D + 0.5D);
 	}
 
 	@ObfuscatedName("fc.a(II)V")
-	public static void method397() {
-		method749(0, false, null, 10);
+	public static void fadeOut() {
+		fadeOutThenPlayWithStep(0, false, null, 10);
 	}
 
 	@ObfuscatedName("m.a(ZLbd;IBLa;ILa;I)V")
-	public static synchronized void method679(Js5 arg0, JagString arg1, JagString arg2, int arg3) {
-		if (method521()) {
+	public static synchronized void playNamed(Js5 arg0, JagString arg1, JagString arg2, int arg3) {
+		if (isReady()) {
 			int var4 = arg0.getGroupId(arg1);
 			int var5 = arg0.getFileId(var4, arg2);
-			method670(arg3, var4, arg0, var5);
+			playGroup(arg3, var4, arg0, var5);
 		}
 	}
 
 	@ObfuscatedName("rb.a(II)V")
-	public static void method877(int arg0) {
-		if (field311 == null) {
+	public static void setActiveVolume(int arg0) {
+		if (midiStream == null) {
 			return;
 		}
-		if (field1548 == 0) {
-			if (field3030 >= 0) {
-				field3030 = arg0;
-				field311.method302(arg0, 0);
+		if (fadeTicks == 0) {
+			if (currentVolume >= 0) {
+				currentVolume = arg0;
+				midiStream.setVolume(arg0, 0);
 			}
-		} else if (field78 != null) {
-			field975 = arg0;
+		} else if (queuedMidiData != null) {
+			queuedVolume = arg0;
 		}
 	}
 
 	@ObfuscatedName("w.a(I)V")
-	public static void method1029() {
-		if (field311 == null) {
+	public static void shutdown() {
+		if (midiStream == null) {
 			return;
 		}
-		method475();
-		if (field1548 > 0) {
-			field311.method304(256);
-			field1548 = 0;
+		stopNow();
+		if (fadeTicks > 0) {
+			midiStream.resetVolume(256);
+			fadeTicks = 0;
 		}
-		field311.method303();
-		field311 = null;
+		midiStream.closeStream();
+		midiStream = null;
 	}
 
 	@ObfuscatedName("nd.a(IB)V")
 	public static void setVolume(int arg0) {
-		if (!method521()) {
+		if (!isReady()) {
 			return;
 		}
-		if (field1391) {
-			field917 = arg0;
+		if (songRequestPending) {
+			pendingSongVolume = arg0;
 		} else {
-			method877(arg0);
+			setActiveVolume(arg0);
 		}
 	}
 
 	@ObfuscatedName("m.b(Z)V")
-	public static synchronized void method674() {
-		method1029();
+	public static synchronized void unload() {
+		shutdown();
 	}
 
 	@ObfuscatedName("nc.a(Llc;BZ)Z")
-	public static boolean method734(SignLink arg0, boolean arg1) {
-		field1548 = 20;
+	public static boolean init(SignLink arg0, boolean arg1) {
+		fadeTicks = 20;
 		try {
-			field311 = (MidiStream) Class.forName("jagex3.midi2.JavaxMidiPlayer").getDeclaredConstructor().newInstance();
+			midiStream = (MidiStream) Class.forName("jagex3.midi2.JavaxMidiPlayer").getDeclaredConstructor().newInstance();
 			return true;
 		} catch (Throwable var3) {
 			MidiDevice var2 = arg0.method653();
 			if (var2 != null) {
-				field311 = new DeviceMidiPlayer(arg0, var2);
+				midiStream = new DeviceMidiPlayer(arg0, var2);
 				return true;
 			} else if (arg1) {
-				field311 = new BgsoundMidiPlayer(arg0);
+				midiStream = new BgsoundMidiPlayer(arg0);
 				return true;
 			} else {
 				return false;

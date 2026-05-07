@@ -87,7 +87,7 @@ public final class SignLink implements Runnable {
 		} catch (InterruptedException var6) {
 		}
 		if (this.field1706 != null) {
-			this.field1706.method309();
+			this.field1706.shutdown();
 		}
 		if (this.field1715 != null) {
 			try {

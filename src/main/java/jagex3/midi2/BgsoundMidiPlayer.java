@@ -10,55 +10,55 @@ import jagex3.io.FileOnDisk;
 public final class BgsoundMidiPlayer extends MidiStream {
 
 	@ObfuscatedName("ga.db")
-	public final SignLink field1045;
+	public final SignLink signLink;
 
 	@ObfuscatedName("ga.s")
-	public boolean field1008;
+	public boolean playing;
 
 	@ObfuscatedName("ga.t")
-	public PrivilegedRequest field1009;
+	public PrivilegedRequest fileRequest;
 
 	@ObfuscatedName("ga.R")
-	public int field1033;
+	public int volume;
 
 	@ObfuscatedName("ga.J")
-	public boolean field1025;
+	public boolean loop;
 
 	@ObfuscatedName("ga.X")
-	public byte[] field1039;
+	public byte[] midiData;
 
 	@ObfuscatedName("ga.a(II)V")
 	@Override
-	public void method304(int arg0) {
+	public void resetVolume(int arg0) {
 	}
 
 	@ObfuscatedName("ga.a(B)V")
 	@Override
-	public void method305() {
-		if (this.field1008) {
+	public void stop() {
+		if (this.playing) {
 			try {
-				Client.evalJavaScript(this.field1045.applet, "midibox.src=\"c:/silence.mid\";");
+				Client.evalJavaScript(this.signLink.applet, "midibox.src=\"c:/silence.mid\";");
 			} catch (Throwable var1) {
 			}
-			this.field1008 = false;
+			this.playing = false;
 		}
-		this.field1009 = null;
+		this.fileRequest = null;
 	}
 
 	@ObfuscatedName("ga.b(I)V")
 	@Override
-	public void method308() {
-		if (this.field1009 == null || this.field1009.status == 0) {
+	public void poll() {
+		if (this.fileRequest == null || this.fileRequest.status == 0) {
 			return;
 		}
-		if (this.field1009.status == 1) {
-			FileOnDisk var1 = (FileOnDisk) this.field1009.result;
+		if (this.fileRequest.status == 1) {
+			FileOnDisk var1 = (FileOnDisk) this.fileRequest.result;
 			try {
-				var1.write(this.field1039, 0, this.field1039.length);
+				var1.write(this.midiData, 0, this.midiData.length);
 				var1.close();
 				try {
-					Client.evalJavaScript(this.field1045.applet, "midibox.loop=" + (this.field1025 ? "\"infinite\"" : "0") + "; midibox.src=\"" + var1.getFile().getPath().replace('\\', '/') + "\"; midibox.volume=" + this.field1033 + ";");
-					this.field1008 = true;
+					Client.evalJavaScript(this.signLink.applet, "midibox.loop=" + (this.loop ? "\"infinite\"" : "0") + "; midibox.src=\"" + var1.getFile().getPath().replace('\\', '/') + "\"; midibox.volume=" + this.volume + ";");
+					this.playing = true;
 				} catch (Throwable var3) {
 				}
 			} catch (Exception var4) {
@@ -68,26 +68,26 @@ public final class BgsoundMidiPlayer extends MidiStream {
 				}
 			}
 		}
-		this.field1009 = null;
+		this.fileRequest = null;
 	}
 
 	@ObfuscatedName("ga.c(B)V")
 	@Override
-	public void method303() {
+	public void closeStream() {
 	}
 
 	@ObfuscatedName("ga.a(BII)V")
 	@Override
-	public void method302(int arg0, int arg1) {
+	public void setVolume(int arg0, int arg1) {
 		if (arg0 == 0) {
 			arg0 = 1;
 		}
-		int var3 = MidiManager.method632(arg0) - arg1;
-		if (this.field1009 != null) {
-			this.field1033 = var3;
-		} else if (this.field1008) {
+		int var3 = MidiManager.volumeToDecibels(arg0) - arg1;
+		if (this.fileRequest != null) {
+			this.volume = var3;
+		} else if (this.playing) {
 			try {
-				Client.evalJavaScript(this.field1045.applet, "midibox.volume=" + var3 + ";");
+				Client.evalJavaScript(this.signLink.applet, "midibox.volume=" + var3 + ";");
 			} catch (Throwable var4) {
 			}
 		}
@@ -95,20 +95,20 @@ public final class BgsoundMidiPlayer extends MidiStream {
 
 	@ObfuscatedName("ga.a([BZII)V")
 	@Override
-	public void method307(byte[] arg0, boolean arg1, int arg2) {
-		this.field1009 = this.field1045.method658();
-		if (this.field1009 == null) {
+	public void play(byte[] arg0, boolean arg1, int arg2) {
+		this.fileRequest = this.signLink.method658();
+		if (this.fileRequest == null) {
 			return;
 		}
 		if (arg2 == 0) {
 			arg2 = 1;
 		}
-		this.field1033 = MidiManager.method632(arg2);
-		this.field1039 = arg0;
-		this.field1025 = arg1;
+		this.volume = MidiManager.volumeToDecibels(arg2);
+		this.midiData = arg0;
+		this.loop = arg1;
 	}
 
 	public BgsoundMidiPlayer(SignLink arg0) {
-		this.field1045 = arg0;
+		this.signLink = arg0;
 	}
 }

@@ -9,52 +9,52 @@ import java.io.ByteArrayInputStream;
 public final class JavaxMidiPlayer extends MidiPlayer implements Receiver {
 
 	@ObfuscatedName("da.R")
-	public static Sequencer field673 = null;
+	public static Sequencer sequencer = null;
 
 	@ObfuscatedName("da.T")
-	public static Receiver field675 = null;
+	public static Receiver receiver = null;
 
 	@ObfuscatedName("da.S")
-	public static volatile boolean field674 = false;
+	public static volatile boolean playing = false;
 
 	@ObfuscatedName("da.a(BII)V")
 	@Override
-	public synchronized void method302(int arg0, int arg1) {
-		if (field673 != null) {
-			this.method996(arg0, arg1, -1L);
+	public synchronized void setVolume(int arg0, int arg1) {
+		if (sequencer != null) {
+			this.setVolume(arg0, arg1, -1L);
 		}
 	}
 
 	@ObfuscatedName("da.c(B)V")
 	@Override
-	public void method303() {
-		if (field673 != null) {
-			field673.close();
-			field673 = null;
+	public void closeStream() {
+		if (sequencer != null) {
+			sequencer.close();
+			sequencer = null;
 		}
-		if (field675 != null) {
-			field675.close();
-			field675 = null;
+		if (receiver != null) {
+			receiver.close();
+			receiver = null;
 		}
 	}
 
 	public JavaxMidiPlayer() {
 		try {
-			field675 = MidiSystem.getReceiver();
-			field673 = MidiSystem.getSequencer(false);
-			field673.getTransmitter().setReceiver(this);
-			field673.open();
-			this.method1000(-1L);
+			receiver = MidiSystem.getReceiver();
+			sequencer = MidiSystem.getSequencer(false);
+			sequencer.getTransmitter().setReceiver(this);
+			sequencer.open();
+			this.resetAllChannels(-1L);
 		} catch (Exception var2) {
-			MidiManager.method1029();
+			MidiManager.shutdown();
 		}
 	}
 
 	@ObfuscatedName("da.a(II)V")
 	@Override
-	public void method304(int arg0) {
-		if (field673 != null) {
-			this.method997(-1L, arg0);
+	public void resetVolume(int arg0) {
+		if (sequencer != null) {
+			this.resetVolume(-1L, arg0);
 		}
 	}
 
@@ -64,54 +64,54 @@ public final class JavaxMidiPlayer extends MidiPlayer implements Receiver {
 
 	@ObfuscatedName("da.a(B)V")
 	@Override
-	public void method305() {
-		if (field673 != null) {
-			field674 = false;
-			field673.stop();
-			this.method1000(-1L);
+	public void stop() {
+		if (sequencer != null) {
+			playing = false;
+			sequencer.stop();
+			this.resetAllChannels(-1L);
 		}
 	}
 
 	@ObfuscatedName("da.a(IIIJ)V")
 	@Override
-	public void method306(int arg0, int arg1, int arg2, long arg3) {
+	public void sendMidiCommand(int arg0, int arg1, int arg2, long arg3) {
 		try {
 			ShortMessage var6 = new ShortMessage();
 			var6.setMessage(arg0, arg1, arg2);
-			field675.send(var6, arg3);
+			receiver.send(var6, arg3);
 		} catch (InvalidMidiDataException var8) {
 		}
 	}
 
 	@ObfuscatedName("da.a([BZII)V")
 	@Override
-	public void method307(byte[] arg0, boolean arg1, int arg2) {
-		if (field673 == null) {
+	public void play(byte[] arg0, boolean arg1, int arg2) {
+		if (sequencer == null) {
 			return;
 		}
 		try {
 			Sequence var4 = MidiSystem.getSequence(new ByteArrayInputStream(arg0));
-			field673.setSequence(var4);
-			field673.setLoopCount(arg1 ? -1 : 0);
-			this.method996(arg2, 0, -1L);
-			field674 = true;
-			field673.start();
+			sequencer.setSequence(var4);
+			sequencer.setLoopCount(arg1 ? -1 : 0);
+			this.setVolume(arg2, 0, -1L);
+			playing = true;
+			sequencer.start();
 		} catch (Exception var6) {
 		}
 	}
 
 	@Override
 	public synchronized void send(MidiMessage arg0, long arg1) {
-		if (field674) {
+		if (playing) {
 			byte[] var4 = arg0.getMessage();
 			if (!this.loadAndQueuePatches(var4[0] & 0xFF, var4[1], var4.length >= 3 ? var4[2] : 0, arg1)) {
-				field675.send(arg0, arg1);
+				receiver.send(arg0, arg1);
 			}
 		}
 	}
 
 	@ObfuscatedName("da.b(I)V")
 	@Override
-	public void method308() {
+	public void poll() {
 	}
 }

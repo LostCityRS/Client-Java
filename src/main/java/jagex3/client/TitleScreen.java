@@ -421,9 +421,9 @@ public class TitleScreen {
 		flameBuffer3 = new int[32768];
 		loginscreen = 0;
 		if (Client.midiVolume == 0 || Client.lowMem) {
-			MidiManager.method672();
+			MidiManager.stopWithFade();
 		} else {
-			MidiManager.method679(Client.songs, AUTO_SCAPE_MAIN, AUTO_EMPTY, Client.midiVolume);
+			MidiManager.playNamed(Client.songs, AUTO_SCAPE_MAIN, AUTO_EMPTY, Client.midiVolume);
 		}
 		Js5Net.sendLoginLogoutPacket(false);
 		GameShell.fullredraw = true;
@@ -457,7 +457,7 @@ public class TitleScreen {
 		imageTitle6 = null;
 		imageTitle5 = null;
 		flameGradient = null;
-		MidiManager.method672();
+		MidiManager.stopWithFade();
 		Js5Net.sendLoginLogoutPacket(true);
 		open = false;
 	}

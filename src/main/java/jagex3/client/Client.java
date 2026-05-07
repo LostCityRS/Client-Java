@@ -6852,7 +6852,7 @@ public final class Client extends GameShell {
 			collision[var0].reset();
 		}
 		System.gc();
-		MidiManager.method672();
+		MidiManager.stopWithFade();
 		nextMusicDelay = 0;
 		nextMidiSong = -1;
 		BgSound.reset();
@@ -11234,7 +11234,7 @@ public final class Client extends GameShell {
 		if (arg0 == -1 && nextMusicDelay == 0) {
 			MidiManager.stop();
 		} else if (arg0 != -1 && nextMidiSong != arg0 && midiVolume != 0 && nextMusicDelay == 0) {
-			MidiManager.method670(midiVolume, arg0, songs, 0);
+			MidiManager.playGroup(midiVolume, arg0, songs, 0);
 		}
 		nextMidiSong = arg0;
 	}
@@ -11691,7 +11691,7 @@ public final class Client extends GameShell {
 		loopCycle++;
 		this.serviceNetClient();
 		Js5NetThread.method320();
-		MidiManager.method680();
+		MidiManager.tick();
 		PcmPlayer.shutdown();
 		ClientKeyboardListener.cycle();
 		ClientMouseListener.cycle();
@@ -11905,7 +11905,7 @@ public final class Client extends GameShell {
 		}
 		ClientKeyboardListener.shutdown();
 		ClientMouseListener.shutdown();
-		MidiManager.method674();
+		MidiManager.unload();
 		PcmPlayer.method967();
 		Js5Net.closeStream();
 		Js5NetThread.shutdown();

@@ -6,20 +6,20 @@ import deob.ObfuscatedName;
 public interface MidiDevice extends Runnable {
 
 	@ObfuscatedName("db.a(B)V")
-	void method309();
+	void shutdown();
 
 	@ObfuscatedName("db.a([II)V")
-	void method310(int[] arg0, int arg1);
+	void writeEvents(int[] arg0, int arg1);
 
 	@ObfuscatedName("db.a(I)V")
-	void method311();
+	void open();
 
 	@ObfuscatedName("db.b(I)V")
-	void method312();
+	void close();
 
 	@ObfuscatedName("db.c(I)I")
-	int method313();
+	int getTimeMillis();
 
 	@ObfuscatedName("db.d(I)V")
-	void method314();
+	void reset();
 }
