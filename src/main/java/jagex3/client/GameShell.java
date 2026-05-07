@@ -207,7 +207,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				for (int var4 = 0; var4 < updateCount; var4++) {
 					this.mainloopwrapper();
 				}
-				this.maindrawwrapper();
+				this.mainredrawwrapper();
 			}
 		} catch (Exception var7) {
 			JagException.report(null, var7);
@@ -373,7 +373,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("kd.a(B)V")
-	public void maindrawwrapper() {
+	public void mainredrawwrapper() {
 		long var1 = MonotonicTime.currentTime();
 		long var3 = drawTime[drawPos];
 		drawTime[drawPos] = var1;
