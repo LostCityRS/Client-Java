@@ -315,7 +315,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("i.a(II)I")
-	public int method599(int arg0) {
+	public int charAt(int arg0) {
 		return this.chars[arg0] & 0xFF;
 	}
 
@@ -401,7 +401,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("i.a(B)I")
-	public int method604() {
+	public int length() {
 		return this.length;
 	}
 

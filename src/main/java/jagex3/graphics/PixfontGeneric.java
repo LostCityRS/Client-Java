@@ -177,7 +177,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 
 	@ObfuscatedName("cc.c(Li;)Li;")
 	public static JagString escape(JagString arg0) {
-		int var1 = arg0.method604();
+		int var1 = arg0.length();
 		int var2 = 0;
 		for (int var3 = 0; var3 < var1; var3++) {
 			byte var4 = arg0.chars[var3];
@@ -324,8 +324,8 @@ public abstract class PixfontGeneric extends Linkable2 {
 	public void calculateSpaceWidth(JagString arg0, int arg1) {
 		int var3 = 0;
 		boolean var4 = false;
-		for (int var5 = 0; var5 < arg0.method604(); var5++) {
-			int var6 = arg0.method599(var5);
+		for (int var5 = 0; var5 < arg0.length(); var5++) {
+			int var6 = arg0.charAt(var5);
 			if (var6 == 60) {
 				var4 = true;
 			} else if (var6 == 62) {
@@ -358,9 +358,9 @@ public abstract class PixfontGeneric extends Linkable2 {
 		int var10 = -1;
 		int var11 = -1;
 		int var12 = 0;
-		int var13 = arg0.method604();
+		int var13 = arg0.length();
 		for (int var14 = 0; var14 < var13; var14++) {
-			int var15 = arg0.method599(var14);
+			int var15 = arg0.charAt(var14);
 			if (var15 == 60) {
 				var10 = var14;
 			} else {
@@ -371,8 +371,8 @@ public abstract class PixfontGeneric extends Linkable2 {
 					var6.method616(var16);
 					var6.method638(62);
 					if (var16.method597(tagBr)) {
-						arg2[var12++] = var6.method623(var5, var6.method604());
-						var5 = var6.method604();
+						arg2[var12++] = var6.method623(var5, var6.length());
+						var5 = var6.length();
 						var4 = 0;
 						var7 = -1;
 						var11 = -1;
@@ -444,7 +444,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 						var11 = var15;
 					}
 					if (var15 == 32) {
-						var7 = var6.method604();
+						var7 = var6.length();
 						var8 = var4;
 						var9 = 1;
 					}
@@ -456,15 +456,15 @@ public abstract class PixfontGeneric extends Linkable2 {
 						var11 = -1;
 					}
 					if (var15 == 45) {
-						var7 = var6.method604();
+						var7 = var6.length();
 						var8 = var4;
 						var9 = 0;
 					}
 				}
 			}
 		}
-		if (var6.method604() > var5) {
-			arg2[var12++] = var6.method623(var5, var6.method604());
+		if (var6.length() > var5) {
+			arg2[var12++] = var6.method623(var5, var6.length());
 		}
 		return var12;
 	}

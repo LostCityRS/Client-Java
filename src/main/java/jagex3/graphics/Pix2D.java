@@ -209,7 +209,7 @@ public final class Pix2D {
 	}
 
 	@ObfuscatedName("gf.d(IIIII)V")
-	public static void method483(int arg0, int arg1, int arg2, int arg3, int arg4) {
+	public static void fillCircleTrans(int arg0, int arg1, int arg2, int arg3, int arg4) {
 		if (arg4 == 256) {
 			method498(arg0, arg1, arg2, arg3);
 			return;

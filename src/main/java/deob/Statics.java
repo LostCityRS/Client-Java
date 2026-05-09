@@ -465,13 +465,13 @@ public class Statics {
 	@ObfuscatedName("nb.f(II)Li;")
 	public static JagString method958(int arg0) {
 		JagString var1 = JagString.method1212(arg0);
-		for (int var2 = var1.method604() - 3; var2 > 0; var2 -= 3) {
+		for (int var2 = var1.length() - 3; var2 > 0; var2 -= 3) {
 			var1 = JagString.join(new JagString[] { var1.method623(0, var2), Client.field979, var1.method635(var2) });
 		}
-		if (var1.method604() > 9) {
-			return JagString.join(new JagString[] {field2828, var1.method623(0, var1.method604() - 8), Text.MILLION, Client.field1238, var1, field3982});
-		} else if (var1.method604() > 6) {
-			return JagString.join(new JagString[] {field644, var1.method623(0, var1.method604() - 4), Text.THOUSAND, Client.field1238, var1, field3982});
+		if (var1.length() > 9) {
+			return JagString.join(new JagString[] {field2828, var1.method623(0, var1.length() - 8), Text.MILLION, Client.field1238, var1, field3982});
+		} else if (var1.length() > 6) {
+			return JagString.join(new JagString[] {field644, var1.method623(0, var1.length() - 4), Text.THOUSAND, Client.field1238, var1, field3982});
 		} else {
 			return JagString.join(new JagString[] {field1370, var1, field2199});
 		}

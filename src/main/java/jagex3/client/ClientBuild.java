@@ -311,7 +311,7 @@ public class ClientBuild {
 									lightmap[var40][var41] = var59.waterfogcolour + (var59.waterfogscale << 24);
 								}
 								int var60 = var59.texture;
-								if (var60 >= 0 && !Pix3D.textureManager.method436(var60)) {
+								if (var60 >= 0 && !Pix3D.textureManager.isTextureEnabled(var60)) {
 									var60 = -1;
 								}
 								int var61;

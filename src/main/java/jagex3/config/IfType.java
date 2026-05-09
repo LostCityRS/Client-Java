@@ -1010,7 +1010,7 @@ public final class IfType {
 			this.iop = new JagString[5];
 			for (int var14 = 0; var14 < 5; var14++) {
 				JagString var15 = arg0.gjstr();
-				if (var15.method604() > 0) {
+				if (var15.length() > 0) {
 					this.iop[var14] = var15;
 					this.eventCode |= 0x1 << var14 + 23;
 				}
@@ -1089,7 +1089,7 @@ public final class IfType {
 			}
 			for (int var17 = 0; var17 < 5; var17++) {
 				JagString var18 = arg0.gjstr();
-				if (var18.method604() > 0) {
+				if (var18.length() > 0) {
 					this.iop[var17] = var18;
 					this.eventCode |= 0x1 << var17 + 23;
 				}
@@ -1106,7 +1106,7 @@ public final class IfType {
 		}
 		if (this.buttonType == 1 || this.buttonType == 4 || this.buttonType == 5 || this.buttonType == 6) {
 			this.buttonText = arg0.gjstr();
-			if (this.buttonText.method604() == 0) {
+			if (this.buttonText.length() == 0) {
 				if (this.buttonType == 1) {
 					this.buttonText = Text.OK;
 				}

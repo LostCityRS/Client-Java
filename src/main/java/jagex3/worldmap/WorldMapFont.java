@@ -12,71 +12,71 @@ import java.awt.image.PixelGrabber;
 public final class WorldMapFont {
 
 	@ObfuscatedName("gi.a")
-	public byte[] field1359 = new byte[100000];
+	public byte[] fontCharInfo = new byte[100000];
 
 	@ObfuscatedName("gi.b")
-	public boolean field1360 = false;
+	public boolean fontCharTrans = false;
 
 	@ObfuscatedName("gi.c")
-	public int field1361 = 0;
+	public int fontCharPos = 0;
 
 	@ObfuscatedName("gi.d")
-	public static final String field1362 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"£$%^&*()-_=+[{]};:'@#~,<.>/?\\| " + String.valueOf('Ä') + 'Ë' + 'Ï' + 'Ö' + 'Ü' + 'ä' + 'ë' + 'ï' + 'ö' + 'ü' + 'ÿ' + 'ß';
+	public static final String CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!\"£$%^&*()-_=+[{]};:'@#~,<.>/?\\| " + 'Ä' + 'Ë' + 'Ï' + 'Ö' + 'Ü' + 'ä' + 'ë' + 'ï' + 'ö' + 'ü' + 'ÿ' + 'ß';
 
 	@ObfuscatedName("gi.e")
-	public static final int field1363 = field1362.length();
+	public static final int CHARSET_LENGTH = CHARSET.length();
 
 	@ObfuscatedName("gi.f")
-	public static final int[] field1364 = new int[256];
+	public static final int[] fontChar = new int[256];
 
 	static {
 		for (int var0 = 0; var0 < 256; var0++) {
-			int var1 = field1362.indexOf(var0);
+			int var1 = CHARSET.indexOf(var0);
 			if (var1 == -1) {
 				var1 = 74;
 			}
-			field1364[var0] = var1 * 9;
+			fontChar[var0] = var1 * 9;
 		}
 	}
 
 	public WorldMapFont(int arg0, boolean arg1, Component arg2) {
-		this.field1361 = field1363 * 9;
-		this.field1360 = false;
+		this.fontCharPos = CHARSET_LENGTH * 9;
+		this.fontCharTrans = false;
 		Font var4 = new Font("Helvetica", 1, arg0);
 		FontMetrics var5 = arg2.getFontMetrics(var4);
-		for (int var6 = 0; var6 < field1363; var6++) {
-			this.method509(var4, var5, field1362.charAt(var6), var6, false);
+		for (int var6 = 0; var6 < CHARSET_LENGTH; var6++) {
+			this.loadGlyph(var4, var5, CHARSET.charAt(var6), var6, false);
 		}
-		if (this.field1360) {
-			this.field1361 = field1363 * 9;
-			this.field1360 = false;
+		if (this.fontCharTrans) {
+			this.fontCharPos = CHARSET_LENGTH * 9;
+			this.fontCharTrans = false;
 			Font var7 = new Font("Helvetica", 0, arg0);
 			FontMetrics var8 = arg2.getFontMetrics(var7);
-			for (int var9 = 0; var9 < field1363; var9++) {
-				this.method509(var7, var8, field1362.charAt(var9), var9, false);
+			for (int var9 = 0; var9 < CHARSET_LENGTH; var9++) {
+				this.loadGlyph(var7, var8, CHARSET.charAt(var9), var9, false);
 			}
-			if (!this.field1360) {
-				this.field1361 = field1363 * 9;
-				this.field1360 = false;
-				for (int var10 = 0; var10 < field1363; var10++) {
-					this.method509(var7, var8, field1362.charAt(var10), var10, true);
+			if (!this.fontCharTrans) {
+				this.fontCharPos = CHARSET_LENGTH * 9;
+				this.fontCharTrans = false;
+				for (int var10 = 0; var10 < CHARSET_LENGTH; var10++) {
+					this.loadGlyph(var7, var8, CHARSET.charAt(var10), var10, true);
 				}
 			}
 		}
-		byte[] var11 = new byte[this.field1361];
-		for (int var12 = 0; var12 < this.field1361; var12++) {
-			var11[var12] = this.field1359[var12];
+		byte[] var11 = new byte[this.fontCharPos];
+		for (int var12 = 0; var12 < this.fontCharPos; var12++) {
+			var11[var12] = this.fontCharInfo[var12];
 		}
-		this.field1359 = var11;
+		this.fontCharInfo = var11;
 	}
 
 	@ObfuscatedName("gi.b()I")
-	public int method505() {
-		return this.field1359[6];
+	public int getYOffset() {
+		return this.fontCharInfo[6];
 	}
 
 	@ObfuscatedName("gi.a(IIII[B)V")
-	public void method506(int arg0, int arg1, int arg2, int arg3, byte[] arg4) {
+	public void drawChar(int arg0, int arg1, int arg2, int arg3, byte[] arg4) {
 		int var6 = arg1 + arg4[arg0 + 5];
 		int var7 = arg2 - arg4[arg0 + 6];
 		int var8 = arg4[arg0 + 3];
@@ -113,36 +113,36 @@ public final class WorldMapFont {
 		if (var8 <= 0 || var9 <= 0) {
 			return;
 		}
-		if (this.field1360) {
-			this.method513(Pix2D.pixels, arg4, arg3, var10, var11, var8, var9, var12, var13);
+		if (this.fontCharTrans) {
+			this.plotLetterTrans(Pix2D.pixels, arg4, arg3, var10, var11, var8, var9, var12, var13);
 			return;
 		}
-		this.method512(Pix2D.pixels, arg4, arg3, var10, var11, var8, var9, var12, var13);
+		this.plotLetter(Pix2D.pixels, arg4, arg3, var10, var11, var8, var9, var12, var13);
 	}
 
 	@ObfuscatedName("gi.a(Li;IIIZ)V")
-	public void method507(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
-		if (this.field1360 || arg3 == 0) {
+	public void drawString(JagString arg0, int arg1, int arg2, int arg3, boolean arg4) {
+		if (this.fontCharTrans || arg3 == 0) {
 			arg4 = false;
 		}
-		for (int var6 = 0; var6 < arg0.method604(); var6++) {
-			int var7 = field1364[arg0.method599(var6)];
+		for (int var6 = 0; var6 < arg0.length(); var6++) {
+			int var7 = fontChar[arg0.charAt(var6)];
 			if (arg4) {
-				this.method506(var7, arg1 + 1, arg2, 1, this.field1359);
-				this.method506(var7, arg1, arg2 + 1, 1, this.field1359);
+				this.drawChar(var7, arg1 + 1, arg2, 1, this.fontCharInfo);
+				this.drawChar(var7, arg1, arg2 + 1, 1, this.fontCharInfo);
 			}
-			this.method506(var7, arg1, arg2, arg3, this.field1359);
-			arg1 += this.field1359[var7 + 7];
+			this.drawChar(var7, arg1, arg2, arg3, this.fontCharInfo);
+			arg1 += this.fontCharInfo[var7 + 7];
 		}
 	}
 
 	@ObfuscatedName("gi.c()I")
-	public int method508() {
-		return this.field1359[8] - 1;
+	public int getHeight() {
+		return this.fontCharInfo[8] - 1;
 	}
 
 	@ObfuscatedName("gi.a(Ljava/awt/Font;Ljava/awt/FontMetrics;CIZ)V")
-	public void method509(Font arg0, FontMetrics arg1, char arg2, int arg3, boolean arg4) {
+	public void loadGlyph(Font arg0, FontMetrics arg1, char arg2, int arg3, boolean arg4) {
 		int var6 = arg1.charWidth(arg2);
 		int var7 = var6;
 		if (arg4) {
@@ -216,52 +216,52 @@ public final class WorldMapFont {
 				}
 			}
 		}
-		this.field1359[arg3 * 9] = (byte) (this.field1361 / 16384);
-		this.field1359[arg3 * 9 + 1] = (byte) (this.field1361 / 128 & 0x7F);
-		this.field1359[arg3 * 9 + 2] = (byte) (this.field1361 & 0x7F);
-		this.field1359[arg3 * 9 + 3] = (byte) (var17 - var15);
-		this.field1359[arg3 * 9 + 4] = (byte) (var18 - var16);
-		this.field1359[arg3 * 9 + 5] = (byte) var15;
-		this.field1359[arg3 * 9 + 6] = (byte) (var8 - var16);
-		this.field1359[arg3 * 9 + 7] = (byte) var7;
-		this.field1359[arg3 * 9 + 8] = (byte) var10;
+		this.fontCharInfo[arg3 * 9] = (byte) (this.fontCharPos / 16384);
+		this.fontCharInfo[arg3 * 9 + 1] = (byte) (this.fontCharPos / 128 & 0x7F);
+		this.fontCharInfo[arg3 * 9 + 2] = (byte) (this.fontCharPos & 0x7F);
+		this.fontCharInfo[arg3 * 9 + 3] = (byte) (var17 - var15);
+		this.fontCharInfo[arg3 * 9 + 4] = (byte) (var18 - var16);
+		this.fontCharInfo[arg3 * 9 + 5] = (byte) var15;
+		this.fontCharInfo[arg3 * 9 + 6] = (byte) (var8 - var16);
+		this.fontCharInfo[arg3 * 9 + 7] = (byte) var7;
+		this.fontCharInfo[arg3 * 9 + 8] = (byte) var10;
 		for (int var31 = var16; var31 < var18; var31++) {
 			for (int var32 = var15; var32 < var17; var32++) {
 				int var33 = var13[var32 + var31 * var6] & 0xFF;
 				if (var33 > 30 && var33 < 230) {
-					this.field1360 = true;
+					this.fontCharTrans = true;
 				}
-				this.field1359[this.field1361++] = (byte) var33;
+				this.fontCharInfo[this.fontCharPos++] = (byte) var33;
 			}
 		}
 	}
 
 	@ObfuscatedName("gi.a(Li;)I")
-	public int method510(JagString arg0) {
+	public int stringWid(JagString arg0) {
 		int var2 = 0;
-		for (int var3 = 0; var3 < arg0.method604(); var3++) {
-			if (arg0.method599(var3) == 64 && var3 + 4 < arg0.method604() && arg0.method599(var3 + 4) == 64) {
+		for (int var3 = 0; var3 < arg0.length(); var3++) {
+			if (arg0.charAt(var3) == 64 && var3 + 4 < arg0.length() && arg0.charAt(var3 + 4) == 64) {
 				var3 += 4;
-			} else if (arg0.method599(var3) == 126 && var3 + 4 < arg0.method604() && arg0.method599(var3 + 4) == 126) {
+			} else if (arg0.charAt(var3) == 126 && var3 + 4 < arg0.length() && arg0.charAt(var3 + 4) == 126) {
 				var3 += 4;
 			} else {
-				var2 += this.field1359[field1364[arg0.method599(var3)] + 7];
+				var2 += this.fontCharInfo[fontChar[arg0.charAt(var3)] + 7];
 			}
 		}
 		return var2;
 	}
 
 	@ObfuscatedName("gi.b(Li;IIIZ)V")
-	public void method511(JagString arg0, int arg1, int arg2, int arg3) {
-		int var5 = this.method510(arg0) / 2;
-		int var6 = this.method505();
+	public void centreString(JagString arg0, int arg1, int arg2, int arg3) {
+		int var5 = this.stringWid(arg0) / 2;
+		int var6 = this.getYOffset();
 		if (arg1 - var5 <= Pix2D.clipMaxX && (arg1 + var5 >= Pix2D.clipMinX && (arg2 - var6 <= Pix2D.clipMaxY && arg2 >= 0))) {
-			this.method507(arg0, arg1 - var5, arg2, arg3, true);
+			this.drawString(arg0, arg1 - var5, arg2, arg3, true);
 		}
 	}
 
 	@ObfuscatedName("gi.a([I[BIIIIIII)V")
-	public void method512(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void plotLetter(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		int var10 = -(arg5 >> 2);
 		int var11 = -(arg5 & 0x3);
 		for (int var12 = -arg6; var12 < 0; var12++) {
@@ -300,7 +300,7 @@ public final class WorldMapFont {
 	}
 
 	@ObfuscatedName("gi.b([I[BIIIIIII)V")
-	public void method513(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
+	public void plotLetterTrans(int[] arg0, byte[] arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) {
 		for (int var10 = -arg6; var10 < 0; var10++) {
 			for (int var11 = -arg5; var11 < 0; var11++) {
 				int var12 = arg1[arg3++] & 0xFF;

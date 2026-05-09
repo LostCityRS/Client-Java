@@ -69,7 +69,7 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("bc.a(Li;I)I")
 	public static int pjstrlen(JagString arg0) {
-		return arg0.method604() + 1;
+		return arg0.length() + 1;
 	}
 
 	@ObfuscatedName("hd.a([BBI)I")
@@ -383,7 +383,7 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("ea.a(Li;B)V")
 	public final void pjstr(JagString arg0) {
-		this.pos += arg0.method612(arg0.method604(), this.pos, this.data);
+		this.pos += arg0.method612(arg0.length(), this.pos, this.data);
 		this.data[this.pos++] = 0;
 	}
 

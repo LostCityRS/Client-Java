@@ -229,7 +229,7 @@ public final class SoftwareModelLit extends ModelLit {
 			this.faceTextureId = new short[this.numFaces];
 			for (int var9 = 0; var9 < this.numFaces; var9++) {
 				short var10 = arg0.faceTextureId[var9];
-				if (var10 != -1 && Pix3D.textureManager.method436(var10)) {
+				if (var10 != -1 && Pix3D.textureManager.isTextureEnabled(var10)) {
 					this.faceTextureId[var9] = var10;
 				} else {
 					this.faceTextureId[var9] = -1;

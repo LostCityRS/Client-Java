@@ -257,7 +257,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			JagString var2 = field4516.method608(signlink.field3597);
 			JagString var3 = JagString.join(new JagString[] { var1, field651, arg0, field1005, var2 });
 			JagString var4;
-			if (arg0.method604() == 0) {
+			if (arg0.length() == 0) {
 				var4 = JagString.join(new JagString[] { var3, field920});
 			} else {
 				var4 = JagString.join(new JagString[] { var3, field1982, Statics.method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.method1556(94608000L) });

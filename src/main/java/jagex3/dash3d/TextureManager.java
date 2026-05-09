@@ -129,7 +129,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.a(IB)Z")
 	@Override
-	public boolean method436(int arg0) {
+	public boolean isTextureEnabled(int arg0) {
 		return this.field1223[arg0];
 	}
 

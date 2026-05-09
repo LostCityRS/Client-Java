@@ -12,7 +12,7 @@ public interface TextureProvider {
 	int[] getTexels(float arg0, int arg1);
 
 	@ObfuscatedName("fe.a(IB)Z")
-	boolean method436(int arg0);
+	boolean isTextureEnabled(int arg0);
 
 	@ObfuscatedName("fe.b(IB)Z")
 	boolean method437(int arg0);

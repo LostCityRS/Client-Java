@@ -354,9 +354,9 @@ public class TitleScreen {
 			var8 += 15;
 			if (var1 == 1 && var2 >= 227 && var2 <= 377 && var3 >= 301 && var3 <= 341) {
 				loginUser = loginUser.method611().method614();
-				if (loginUser.method604() == 0) {
+				if (loginUser.length() == 0) {
 					loginMes(Text.field1285, Text.field1295, Text.LOGIN_USER_LENGTH_B);
-				} else if (loginPass.method604() == 0) {
+				} else if (loginPass.length() == 0) {
 					loginMes(Text.field1288, Text.field1290, Text.LOGIN_PASS_LENGTH_B);
 				} else {
 					loginMes(Text.field1306, Text.field1275, Text.CONNECTING2);
@@ -373,8 +373,8 @@ public class TitleScreen {
 					label226: do {
 						while (ClientKeyboardListener.pollKey()) {
 							var6 = false;
-							for (int var7 = 0; var7 < field1339.method604(); var7++) {
-								if (ClientKeyboardListener.ch == field1339.method599(var7)) {
+							for (int var7 = 0; var7 < field1339.length(); var7++) {
+								if (ClientKeyboardListener.ch == field1339.charAt(var7)) {
 									var6 = true;
 									break;
 								}
@@ -382,31 +382,31 @@ public class TitleScreen {
 							if (Statics.field2620 != 0) {
 								continue label226;
 							}
-							if (ClientKeyboardListener.code == 85 && loginUser.method604() > 0) {
-								loginUser = loginUser.method623(0, loginUser.method604() - 1);
+							if (ClientKeyboardListener.code == 85 && loginUser.length() > 0) {
+								loginUser = loginUser.method623(0, loginUser.length() - 1);
 							}
 							if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 								Statics.field2620 = 1;
 							}
-							if (var6 && loginUser.method604() < 12) {
+							if (var6 && loginUser.length() < 12) {
 								loginUser = loginUser.method618(ClientKeyboardListener.ch);
 							}
 						}
 						return;
 					} while (Statics.field2620 != 1);
-					if (ClientKeyboardListener.code == 85 && loginPass.method604() > 0) {
-						loginPass = loginPass.method623(0, loginPass.method604() - 1);
+					if (ClientKeyboardListener.code == 85 && loginPass.length() > 0) {
+						loginPass = loginPass.method623(0, loginPass.length() - 1);
 					}
 					if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 						Statics.field2620 = 0;
 					}
 					if (Client.modewhere != 0 && ClientKeyboardListener.code == 84) {
 						loginUser = loginUser.method611().method614();
-						if (loginUser.method604() == 0) {
+						if (loginUser.length() == 0) {
 							loginMes(Text.field1285, Text.field1295, Text.LOGIN_USER_LENGTH_B);
 							return;
 						}
-						if (loginPass.method604() == 0) {
+						if (loginPass.length() == 0) {
 							loginMes(Text.field1288, Text.field1290, Text.LOGIN_PASS_LENGTH_B);
 							return;
 						}
@@ -414,7 +414,7 @@ public class TitleScreen {
 						Client.setMainState(20);
 						return;
 					}
-					if (var6 && loginPass.method604() < 20) {
+					if (var6 && loginPass.length() < 20) {
 						loginPass = loginPass.method618(ClientKeyboardListener.ch);
 					}
 				}

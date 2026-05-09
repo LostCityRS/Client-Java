@@ -7,12 +7,12 @@ import jagex3.datastruct.Linkable;
 public final class MapElement extends Linkable {
 
 	@ObfuscatedName("fi.u")
-	public int field1175;
+	public int y;
 
 	@ObfuscatedName("fi.y")
-	public int field1179;
+	public int x;
 
 	@ObfuscatedName("fi.z")
-	public int field1180;
+	public int mapfunction;
 
 }

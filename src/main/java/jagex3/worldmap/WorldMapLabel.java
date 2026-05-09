@@ -8,18 +8,18 @@ import jagex3.jstring.JagString;
 public final class WorldMapLabel extends Linkable {
 
 	@ObfuscatedName("we.t")
-	public int field4483;
+	public int x;
 
 	@ObfuscatedName("we.v")
-	public int field4485;
+	public int y;
 
 	@ObfuscatedName("we.w")
-	public JagString field4486;
+	public JagString displayName;
 
 	@ObfuscatedName("we.C")
-	public int field4492;
+	public int size;
 
 	@ObfuscatedName("we.A")
-	public JagString[] field4490;
+	public JagString[] textLines;
 
 }
