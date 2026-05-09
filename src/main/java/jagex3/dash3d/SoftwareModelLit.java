@@ -309,7 +309,7 @@ public final class SoftwareModelLit extends ModelLit {
 					} else {
 						var22 = arg0.sharedPointNormal[this.faceVertexA[var17]];
 					}
-					int var23 = arg1 + (arg3 * var22.field1739 + arg4 * var22.field1736 + arg5 * var22.field1737) / (var8 * var22.field1738);
+					int var23 = arg1 + (arg3 * var22.x + arg4 * var22.y + arg5 * var22.z) / (var8 * var22.w);
 					this.faceColourA[var17] = getColour(var21, var23);
 					PointNormal var24;
 					if (arg0.sharedPointNormal == null || arg0.sharedPointNormal[this.faceVertexB[var17]] == null) {
@@ -317,7 +317,7 @@ public final class SoftwareModelLit extends ModelLit {
 					} else {
 						var24 = arg0.sharedPointNormal[this.faceVertexB[var17]];
 					}
-					int var25 = arg1 + (arg3 * var24.field1739 + arg4 * var24.field1736 + arg5 * var24.field1737) / (var8 * var24.field1738);
+					int var25 = arg1 + (arg3 * var24.x + arg4 * var24.y + arg5 * var24.z) / (var8 * var24.w);
 					this.faceColourB[var17] = getColour(var21, var25);
 					PointNormal var26;
 					if (arg0.sharedPointNormal == null || arg0.sharedPointNormal[this.faceVertexC[var17]] == null) {
@@ -325,11 +325,11 @@ public final class SoftwareModelLit extends ModelLit {
 					} else {
 						var26 = arg0.sharedPointNormal[this.faceVertexC[var17]];
 					}
-					int var27 = arg1 + (arg3 * var26.field1739 + arg4 * var26.field1736 + arg5 * var26.field1737) / (var8 * var26.field1738);
+					int var27 = arg1 + (arg3 * var26.x + arg4 * var26.y + arg5 * var26.z) / (var8 * var26.w);
 					this.faceColourC[var17] = getColour(var21, var27);
 				} else if (var18 == 1) {
 					FaceNormal var28 = arg0.faceNormal[var17];
-					int var29 = arg1 + (arg3 * var28.field3822 + arg4 * var28.field3830 + arg5 * var28.field3825) / (var8 + var8 / 2);
+					int var29 = arg1 + (arg3 * var28.x + arg4 * var28.y + arg5 * var28.z) / (var8 + var8 / 2);
 					this.faceColourA[var17] = getColour(arg0.faceColour[var17] & 0xFFFF, var29);
 					this.faceColourC[var17] = -1;
 				} else if (var18 == 3) {
@@ -345,7 +345,7 @@ public final class SoftwareModelLit extends ModelLit {
 				} else {
 					var30 = arg0.sharedPointNormal[this.faceVertexA[var17]];
 				}
-				int var31 = arg1 + (arg3 * var30.field1739 + arg4 * var30.field1736 + arg5 * var30.field1737) / (var8 * var30.field1738);
+				int var31 = arg1 + (arg3 * var30.x + arg4 * var30.y + arg5 * var30.z) / (var8 * var30.w);
 				this.faceColourA[var17] = getTexLight(var31);
 				PointNormal var32;
 				if (arg0.sharedPointNormal == null || arg0.sharedPointNormal[this.faceVertexB[var17]] == null) {
@@ -353,7 +353,7 @@ public final class SoftwareModelLit extends ModelLit {
 				} else {
 					var32 = arg0.sharedPointNormal[this.faceVertexB[var17]];
 				}
-				int var33 = arg1 + (arg3 * var32.field1739 + arg4 * var32.field1736 + arg5 * var32.field1737) / (var8 * var32.field1738);
+				int var33 = arg1 + (arg3 * var32.x + arg4 * var32.y + arg5 * var32.z) / (var8 * var32.w);
 				this.faceColourB[var17] = getTexLight(var33);
 				PointNormal var34;
 				if (arg0.sharedPointNormal == null || arg0.sharedPointNormal[this.faceVertexC[var17]] == null) {
@@ -361,11 +361,11 @@ public final class SoftwareModelLit extends ModelLit {
 				} else {
 					var34 = arg0.sharedPointNormal[this.faceVertexC[var17]];
 				}
-				int var35 = arg1 + (arg3 * var34.field1739 + arg4 * var34.field1736 + arg5 * var34.field1737) / (var8 * var34.field1738);
+				int var35 = arg1 + (arg3 * var34.x + arg4 * var34.y + arg5 * var34.z) / (var8 * var34.w);
 				this.faceColourC[var17] = getTexLight(var35);
 			} else if (var18 == 1) {
 				FaceNormal var36 = arg0.faceNormal[var17];
-				int var37 = arg1 + (arg3 * var36.field3822 + arg4 * var36.field3830 + arg5 * var36.field3825) / (var8 + var8 / 2);
+				int var37 = arg1 + (arg3 * var36.x + arg4 * var36.y + arg5 * var36.z) / (var8 + var8 / 2);
 				this.faceColourA[var17] = getTexLight(var37);
 				this.faceColourC[var17] = -1;
 			} else {

@@ -358,7 +358,7 @@ public final class MidiFile extends Linkable {
 								var19 = new ByteArrayNode(new byte[128]);
 								this.patches.put((long) var18, var19);
 							}
-							var19.field2956[var16] = 1;
+							var19.data[var16] = 1;
 						}
 					}
 					var3.processDeltaTime(var6);

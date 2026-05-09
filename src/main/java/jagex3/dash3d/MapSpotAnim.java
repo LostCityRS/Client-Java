@@ -8,58 +8,58 @@ import jagex3.config.SpotType;
 public final class MapSpotAnim extends ModelSource {
 
 	@ObfuscatedName("bf.r")
-	public SeqType field282;
+	public SeqType anim;
 
 	@ObfuscatedName("bf.v")
 	public int field286 = -32768;
 
 	@ObfuscatedName("bf.w")
-	public final int field287;
+	public final int startCycle;
 
 	@ObfuscatedName("bf.I")
-	public int field298 = 0;
+	public int animFrame = 0;
 
 	@ObfuscatedName("bf.N")
-	public int field303 = 0;
+	public int animCycle = 0;
 
 	@ObfuscatedName("bf.M")
-	public boolean field302 = false;
+	public boolean animComplete = false;
 
 	@ObfuscatedName("bf.z")
-	public final int field290;
+	public final int z;
 
 	@ObfuscatedName("bf.G")
-	public final int field296;
+	public final int x;
 
 	@ObfuscatedName("bf.E")
-	public final int field295;
+	public final int y;
 
 	@ObfuscatedName("bf.L")
-	public final int field301;
+	public final int type;
 
 	@ObfuscatedName("bf.B")
-	public final int field292;
+	public final int level;
 
 	public MapSpotAnim(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		this.field290 = arg3;
-		this.field296 = arg2;
-		this.field295 = arg4;
-		this.field287 = arg6 + arg5;
-		this.field301 = arg0;
-		this.field292 = arg1;
-		int var8 = SpotType.list(this.field301).anim;
+		this.z = arg3;
+		this.x = arg2;
+		this.y = arg4;
+		this.startCycle = arg6 + arg5;
+		this.type = arg0;
+		this.level = arg1;
+		int var8 = SpotType.list(this.type).anim;
 		if (var8 == -1) {
-			this.field302 = true;
+			this.animComplete = true;
 		} else {
-			this.field302 = false;
-			this.field282 = SeqType.list(var8);
+			this.animComplete = false;
+			this.anim = SeqType.list(var8);
 		}
 	}
 
 	@ObfuscatedName("bf.a(IIIIIIIIJ)V")
 	@Override
 	public void method87(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, long arg8) {
-		ModelLit var11 = this.method89();
+		ModelLit var11 = this.getTempModel();
 		if (var11 != null) {
 			var11.method87(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 			this.field286 = var11.method88();
@@ -73,28 +73,28 @@ public final class MapSpotAnim extends ModelSource {
 	}
 
 	@ObfuscatedName("bf.a(Z)Lcg;")
-	public ModelLit method89() {
-		SpotType var1 = SpotType.list(this.field301);
+	public ModelLit getTempModel() {
+		SpotType var1 = SpotType.list(this.type);
 		ModelLit var2;
-		if (this.field302) {
+		if (this.animComplete) {
 			var2 = var1.getTempModel2(-1);
 		} else {
-			var2 = var1.getTempModel2(this.field298);
+			var2 = var1.getTempModel2(this.animFrame);
 		}
 		return var2 == null ? null : var2;
 	}
 
 	@ObfuscatedName("bf.a(IZ)V")
-	public void method90(int arg0) {
-		if (this.field302) {
+	public void doAnim(int arg0) {
+		if (this.animComplete) {
 			return;
 		}
-		this.field303 += arg0;
-		while (this.field303 > this.field282.delay[this.field298]) {
-			this.field303 -= this.field282.delay[this.field298];
-			this.field298++;
-			if (this.field282.frames.length <= this.field298) {
-				this.field302 = true;
+		this.animCycle += arg0;
+		while (this.animCycle > this.anim.delay[this.animFrame]) {
+			this.animCycle -= this.anim.delay[this.animFrame];
+			this.animFrame++;
+			if (this.anim.frames.length <= this.animFrame) {
+				this.animComplete = true;
 				return;
 			}
 		}

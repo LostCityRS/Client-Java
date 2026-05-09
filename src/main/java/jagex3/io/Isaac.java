@@ -6,46 +6,46 @@ import deob.ObfuscatedName;
 public final class Isaac {
 
 	@ObfuscatedName("nd.a")
-	public int[] field2727;
+	public int[] mem;
 
 	@ObfuscatedName("nd.b")
-	public int field2728;
+	public int a;
 
 	@ObfuscatedName("nd.k")
-	public int field2737;
+	public int c;
 
 	@ObfuscatedName("nd.q")
-	public int[] field2743;
+	public int[] rsl;
 
 	@ObfuscatedName("nd.r")
-	public int field2744;
+	public int b;
 
 	@ObfuscatedName("nd.w")
-	public int field2749;
+	public int count;
 
 	public Isaac() {
 	}
 
 	public Isaac(int[] arg0) {
-		this.field2727 = new int[256];
-		this.field2743 = new int[256];
+		this.mem = new int[256];
+		this.rsl = new int[256];
 		for (int var2 = 0; var2 < arg0.length; var2++) {
-			this.field2743[var2] = arg0[var2];
+			this.rsl[var2] = arg0[var2];
 		}
-		this.method979();
+		this.init();
 	}
 
 	@ObfuscatedName("nd.b(I)I")
-	public int method978() {
-		if (this.field2749-- == 0) {
-			this.method980();
-			this.field2749 = 255;
+	public int takeNextValue() {
+		if (this.count-- == 0) {
+			this.generate();
+			this.count = 255;
 		}
-		return this.field2743[this.field2749];
+		return this.rsl[this.count];
 	}
 
 	@ObfuscatedName("nd.b(Z)V")
-	public void method979() {
+	public void init() {
 		int var1 = -1640531527;
 		int var2 = -1640531527;
 		int var3 = -1640531527;
@@ -81,14 +81,14 @@ public final class Isaac {
 			var6 = var16 + var1;
 		}
 		for (int var26 = 0; var26 < 256; var26 += 8) {
-			int var27 = var2 + this.field2743[var26 + 6];
-			int var28 = var5 + this.field2743[var26 + 3];
-			int var29 = var8 + this.field2743[var26];
-			int var30 = var4 + this.field2743[var26 + 4];
-			int var31 = var1 + this.field2743[var26 + 7];
-			int var32 = var7 + this.field2743[var26 + 1];
-			int var33 = var6 + this.field2743[var26 + 2];
-			int var34 = var3 + this.field2743[var26 + 5];
+			int var27 = var2 + this.rsl[var26 + 6];
+			int var28 = var5 + this.rsl[var26 + 3];
+			int var29 = var8 + this.rsl[var26];
+			int var30 = var4 + this.rsl[var26 + 4];
+			int var31 = var1 + this.rsl[var26 + 7];
+			int var32 = var7 + this.rsl[var26 + 1];
+			int var33 = var6 + this.rsl[var26 + 2];
+			int var34 = var3 + this.rsl[var26 + 5];
 			int var35 = var29 ^ var32 << 11;
 			int var36 = var28 + var35;
 			int var37 = var32 + var33;
@@ -113,24 +113,24 @@ public final class Isaac {
 			var1 = var50 ^ var49 >>> 9;
 			var6 = var41 + var1;
 			var8 = var49 + var7;
-			this.field2727[var26] = var8;
-			this.field2727[var26 + 1] = var7;
-			this.field2727[var26 + 2] = var6;
-			this.field2727[var26 + 3] = var5;
-			this.field2727[var26 + 4] = var4;
-			this.field2727[var26 + 5] = var3;
-			this.field2727[var26 + 6] = var2;
-			this.field2727[var26 + 7] = var1;
+			this.mem[var26] = var8;
+			this.mem[var26 + 1] = var7;
+			this.mem[var26 + 2] = var6;
+			this.mem[var26 + 3] = var5;
+			this.mem[var26 + 4] = var4;
+			this.mem[var26 + 5] = var3;
+			this.mem[var26 + 6] = var2;
+			this.mem[var26 + 7] = var1;
 		}
 		for (int var51 = 0; var51 < 256; var51 += 8) {
-			int var52 = var7 + this.field2727[var51 + 1];
-			int var53 = var4 + this.field2727[var51 + 4];
-			int var54 = var5 + this.field2727[var51 + 3];
-			int var55 = var6 + this.field2727[var51 + 2];
-			int var56 = var3 + this.field2727[var51 + 5];
-			int var57 = var2 + this.field2727[var51 + 6];
-			int var58 = var8 + this.field2727[var51];
-			int var59 = var1 + this.field2727[var51 + 7];
+			int var52 = var7 + this.mem[var51 + 1];
+			int var53 = var4 + this.mem[var51 + 4];
+			int var54 = var5 + this.mem[var51 + 3];
+			int var55 = var6 + this.mem[var51 + 2];
+			int var56 = var3 + this.mem[var51 + 5];
+			int var57 = var2 + this.mem[var51 + 6];
+			int var58 = var8 + this.mem[var51];
+			int var59 = var1 + this.mem[var51 + 7];
 			int var60 = var58 ^ var52 << 11;
 			int var61 = var52 + var55;
 			int var62 = var54 + var60;
@@ -154,40 +154,40 @@ public final class Isaac {
 			var1 = var75 ^ var73 >>> 9;
 			var7 = var63 + var2;
 			var8 = var73 + var7;
-			this.field2727[var51] = var8;
+			this.mem[var51] = var8;
 			var6 = var65 + var1;
-			this.field2727[var51 + 1] = var7;
-			this.field2727[var51 + 2] = var6;
-			this.field2727[var51 + 3] = var5;
-			this.field2727[var51 + 4] = var4;
-			this.field2727[var51 + 5] = var3;
-			this.field2727[var51 + 6] = var2;
-			this.field2727[var51 + 7] = var1;
+			this.mem[var51 + 1] = var7;
+			this.mem[var51 + 2] = var6;
+			this.mem[var51 + 3] = var5;
+			this.mem[var51 + 4] = var4;
+			this.mem[var51 + 5] = var3;
+			this.mem[var51 + 6] = var2;
+			this.mem[var51 + 7] = var1;
 		}
-		this.method980();
-		this.field2749 = 256;
+		this.generate();
+		this.count = 256;
 	}
 
 	@ObfuscatedName("nd.c(I)V")
-	public void method980() {
-		this.field2744 += ++this.field2737;
+	public void generate() {
+		this.b += ++this.c;
 		for (int var1 = 0; var1 < 256; var1++) {
-			int var2 = this.field2727[var1];
+			int var2 = this.mem[var1];
 			if ((var1 & 0x2) == 0) {
 				if ((var1 & 0x1) == 0) {
-					this.field2728 ^= this.field2728 << 13;
+					this.a ^= this.a << 13;
 				} else {
-					this.field2728 ^= this.field2728 >>> 6;
+					this.a ^= this.a >>> 6;
 				}
 			} else if ((var1 & 0x1) == 0) {
-				this.field2728 ^= this.field2728 << 2;
+				this.a ^= this.a << 2;
 			} else {
-				this.field2728 ^= this.field2728 >>> 16;
+				this.a ^= this.a >>> 16;
 			}
-			this.field2728 += this.field2727[var1 + 128 & 0xFF];
+			this.a += this.mem[var1 + 128 & 0xFF];
 			int var3;
-			this.field2727[var1] = var3 = this.field2728 + this.field2727[var2 >> 2 & 0xFF] + this.field2744;
-			this.field2743[var1] = this.field2744 = var2 + this.field2727[var3 >> 8 >> 2 & 0xFF];
+			this.mem[var1] = var3 = this.a + this.mem[var2 >> 2 & 0xFF] + this.b;
+			this.rsl[var1] = this.b = var2 + this.mem[var3 >> 8 >> 2 & 0xFF];
 		}
 	}
 }

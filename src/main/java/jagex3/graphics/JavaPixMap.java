@@ -37,7 +37,7 @@ public final class JavaPixMap extends PixMap {
 
 	@ObfuscatedName("gj.a(IIILjava/awt/Graphics;)V")
 	@Override
-	public void method246(Graphics arg0) {
+	public void draw(Graphics arg0) {
 		arg0.drawImage(this.image, 0, 0, this.component);
 	}
 }

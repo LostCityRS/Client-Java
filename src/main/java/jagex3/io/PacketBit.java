@@ -40,13 +40,13 @@ public final class PacketBit extends Packet {
 	@ObfuscatedName("ae.a(I[BZI)V")
 	public void method29(int arg0, byte[] arg1) {
 		for (int var3 = 0; var3 < arg0; var3++) {
-			arg1[var3] = (byte) (super.data[super.pos++] - this.random.method978());
+			arg1[var3] = (byte) (super.data[super.pos++] - this.random.takeNextValue());
 		}
 	}
 
 	@ObfuscatedName("ae.b(BI)V")
 	public void p1Enc(int arg0) {
-		super.data[super.pos++] = (byte) (arg0 + this.random.method978());
+		super.data[super.pos++] = (byte) (arg0 + this.random.takeNextValue());
 	}
 
 	@ObfuscatedName("ae.c(ZI)I")
@@ -56,7 +56,7 @@ public final class PacketBit extends Packet {
 
 	@ObfuscatedName("ae.i(B)I")
 	public int g1Enc() {
-		return super.data[super.pos++] - this.random.method978() & 0xFF;
+		return super.data[super.pos++] - this.random.takeNextValue() & 0xFF;
 	}
 
 	@ObfuscatedName("ae.u(I)V")

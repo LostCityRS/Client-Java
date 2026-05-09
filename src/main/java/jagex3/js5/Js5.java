@@ -92,7 +92,7 @@ public abstract class Js5 {
 			}
 			byte[] var6 = new byte[var5];
 			if (var2 == 1) {
-				BZip2.method1458(var6, var5, arg0, var3);
+				BZip2.decompress(var6, var5, arg0, var3);
 			} else {
 				gzip.decompress(var1, var6);
 			}
@@ -273,7 +273,7 @@ public abstract class Js5 {
 			try {
 				var11 = getUncompressedPacket(var9);
 			} catch (RuntimeException var30) {
-				throw JagException.method1076(var30, "T3 - " + (arg1 != null) + "," + arg0 + "," + var9.length + "," + Packet.method541(var9, var9.length) + "," + Packet.method541(var9, var9.length - 2) + "," + this.groupChecksums[arg0] + "," + this.crc);
+				throw JagException.report(var30, "T3 - " + (arg1 != null) + "," + arg0 + "," + var9.length + "," + Packet.method541(var9, var9.length) + "," + Packet.method541(var9, var9.length - 2) + "," + this.groupChecksums[arg0] + "," + this.crc);
 			}
 			if (this.discardPacked) {
 				this.packed[arg0] = null;

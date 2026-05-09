@@ -45,5 +45,5 @@ public abstract class PixMap {
 	public abstract void draw(int arg0, int arg1, int arg2, int arg3, Graphics arg4);
 
 	@ObfuscatedName("uj.a(IIILjava/awt/Graphics;)V")
-	public abstract void method246(Graphics arg0);
+	public abstract void draw(Graphics arg0);
 }

@@ -6,18 +6,18 @@ import deob.ObfuscatedName;
 public final class GroundDecor {
 
 	@ObfuscatedName("pc.d")
-	public int field3190;
+	public int z;
 
 	@ObfuscatedName("pc.g")
-	public int field3193;
+	public int y;
 
 	@ObfuscatedName("pc.h")
-	public ModelSource field3194;
+	public ModelSource model;
 
 	@ObfuscatedName("pc.k")
-	public int field3197;
+	public int x;
 
 	@ObfuscatedName("pc.p")
-	public long field3202;
+	public long typecode;
 
 }

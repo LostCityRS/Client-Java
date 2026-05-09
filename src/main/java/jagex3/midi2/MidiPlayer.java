@@ -136,7 +136,7 @@ public final class MidiPlayer extends PcmStream {
 				}
 				this.patches.put((long) var7, var8);
 			}
-			if (!var8.loadWaves(var5, arg0, var6.field2956)) {
+			if (!var8.loadWaves(var5, arg0, var6.data)) {
 				var4 = false;
 			}
 		}

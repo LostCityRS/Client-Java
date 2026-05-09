@@ -157,8 +157,6 @@ public class Statics {
 	public static short field4175 = 256;
 	@ObfuscatedName("ob.p")
 	public static int[][][] field2979;
-	@ObfuscatedName("jc.G")
-	public static int[] field1831;
 	@ObfuscatedName("nb.bb")
 	public static int[] field2713;
 	@ObfuscatedName("ud.a")

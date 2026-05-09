@@ -6,24 +6,24 @@ import deob.ObfuscatedName;
 public final class PointNormal {
 
 	@ObfuscatedName("ie.b")
-	public int field1736;
+	public int y;
 
 	@ObfuscatedName("ie.c")
-	public int field1737;
+	public int z;
 
 	@ObfuscatedName("ie.d")
-	public int field1738;
+	public int w;
 
 	@ObfuscatedName("ie.e")
-	public int field1739;
+	public int x;
 
 	public PointNormal() {
 	}
 
 	public PointNormal(PointNormal arg0) {
-		this.field1737 = arg0.field1737;
-		this.field1736 = arg0.field1736;
-		this.field1739 = arg0.field1739;
-		this.field1738 = arg0.field1738;
+		this.z = arg0.z;
+		this.y = arg0.y;
+		this.x = arg0.x;
+		this.w = arg0.w;
 	}
 }

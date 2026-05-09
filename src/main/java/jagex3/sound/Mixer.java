@@ -155,7 +155,7 @@ public final class Mixer extends PcmStream {
 		while (arg0 != this.controllers.sentinel && ((MixerController) arg0).field1338 <= arg1.field1338) {
 			arg0 = arg0.next;
 		}
-		this.controllers.method1620(arg1, arg0);
+		this.controllers.insertBefore(arg1, arg0);
 		this.field4216 = ((MixerController) this.controllers.sentinel.next).field1338;
 	}
 }

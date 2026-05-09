@@ -6,33 +6,33 @@ import deob.ObfuscatedName;
 public final class Decor {
 
 	@ObfuscatedName("fh.a")
-	public int field1157;
+	public int x;
 
 	@ObfuscatedName("fh.b")
-	public long field1158 = 0L;
+	public long typecode = 0L;
 
 	@ObfuscatedName("fh.c")
-	public ModelSource field1159;
+	public ModelSource model;
 
 	@ObfuscatedName("fh.d")
-	public ModelSource field1160;
+	public ModelSource model2;
 
 	@ObfuscatedName("fh.e")
-	public int field1161;
+	public int z;
 
 	@ObfuscatedName("fh.h")
-	public int field1164;
+	public int wshape;
 
 	@ObfuscatedName("fh.k")
-	public int field1167;
+	public int zof;
 
 	@ObfuscatedName("fh.l")
-	public int field1168;
+	public int y;
 
 	@ObfuscatedName("fh.m")
-	public int field1169;
+	public int xof;
 
 	@ObfuscatedName("fh.p")
-	public int field1172;
+	public int yof;
 
 }

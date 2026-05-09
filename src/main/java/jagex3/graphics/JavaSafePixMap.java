@@ -68,7 +68,7 @@ public final class JavaSafePixMap extends PixMap implements ImageProducer, Image
 
 	@ObfuscatedName("db.a(IIILjava/awt/Graphics;)V")
 	@Override
-	public void method246(Graphics arg0) {
+	public void draw(Graphics arg0) {
 		this.setPixels();
 		arg0.drawImage(super.image, 0, 0, this);
 	}

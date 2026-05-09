@@ -9,7 +9,6 @@ import jagex3.js5.Js5;
 import jagex3.js5.Js5Net;
 import jagex3.jstring.JagString;
 import jagex3.midi2.MidiManager;
-import jagex3.util.MillisTimer;
 
 import java.awt.*;
 
@@ -178,6 +177,8 @@ public class TitleScreen {
 	public static int field1552 = -1;
 	@ObfuscatedName("uh.S")
 	public static int field4247 = -1;
+	@ObfuscatedName("ci.z")
+	public static int field526 = 0;
 
 	@ObfuscatedName("rc.a(Lcc;BLcc;)V")
     public static void draw(PixfontGeneric arg0, PixfontGeneric arg1) {
@@ -587,9 +588,9 @@ public class TitleScreen {
 
 	@ObfuscatedName("hc.a(BI)V")
 	public static void method535(int arg0) {
-		MillisTimer.field526 += arg0 * 128;
-		if (MillisTimer.field526 > flameBuffer0.length) {
-			MillisTimer.field526 -= flameBuffer0.length;
+		field526 += arg0 * 128;
+		if (field526 > flameBuffer0.length) {
+			field526 -= flameBuffer0.length;
 			int var1 = (int) (Math.random() * 12.0D);
 			generateFlameCoolingMap(runes[var1]);
 		}
@@ -597,7 +598,7 @@ public class TitleScreen {
 		int var3 = arg0 * 128;
 		int var4 = (256 - arg0) * 128;
 		for (int var5 = 0; var5 < var4; var5++) {
-			int var6 = flameBuffer2[var3 + var2] - arg0 * flameBuffer0[flameBuffer0.length - 1 & MillisTimer.field526 + var2] / 6;
+			int var6 = flameBuffer2[var3 + var2] - arg0 * flameBuffer0[flameBuffer0.length - 1 & field526 + var2] / 6;
 			if (var6 < 0) {
 				var6 = 0;
 			}

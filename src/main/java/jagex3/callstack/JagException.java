@@ -17,14 +17,14 @@ public final class JagException extends RuntimeException {
 	@ObfuscatedName("ae.gc")
 	public static SignLink signlink;
 	@ObfuscatedName("bb.d")
-	public String field210;
+	public String message;
 
 	@ObfuscatedName("bb.i")
-	public final Throwable field215;
+	public final Throwable cause;
 
 	public JagException(Throwable arg0, String arg1) {
-		this.field215 = arg0;
-		this.field210 = arg1;
+		this.cause = arg0;
+		this.message = arg1;
 	}
 
 	@ObfuscatedName("uc.a(BLjava/lang/String;Ljava/lang/Throwable;)V")
@@ -65,8 +65,8 @@ public final class JagException extends RuntimeException {
 		String var2;
 		if (arg0 instanceof JagException) {
 			JagException var1 = (JagException) arg0;
-			arg0 = var1.field215;
-			var2 = var1.field210 + " | ";
+			arg0 = var1.cause;
+			var2 = var1.message + " | ";
 		} else {
 			var2 = "";
 		}
@@ -104,11 +104,11 @@ public final class JagException extends RuntimeException {
 	}
 
 	@ObfuscatedName("oh.a(Ljava/lang/Throwable;Ljava/lang/String;)Lbb;")
-	public static JagException method1076(Throwable arg0, String arg1) {
+	public static JagException report(Throwable arg0, String arg1) {
 		JagException var2;
 		if (arg0 instanceof JagException) {
 			var2 = (JagException) arg0;
-			var2.field210 = var2.field210 + ' ' + arg1;
+			var2.message = var2.message + ' ' + arg1;
 		} else {
 			var2 = new JagException(arg0, arg1);
 		}

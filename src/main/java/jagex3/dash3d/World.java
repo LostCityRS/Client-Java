@@ -268,14 +268,14 @@ public class World {
 			return;
 		}
 		Wall var10 = new Wall();
-		var10.field3028 = arg8;
-		var10.field3029 = arg1 * 128 + 64;
-		var10.field3023 = arg2 * 128 + 64;
-		var10.field3031 = arg3;
-		var10.field3021 = arg4;
-		var10.field3032 = arg5;
-		var10.field3027 = arg6;
-		var10.field3024 = arg7;
+		var10.typecode = arg8;
+		var10.x = arg1 * 128 + 64;
+		var10.z = arg2 * 128 + 64;
+		var10.y = arg3;
+		var10.modelA = arg4;
+		var10.modelB = arg5;
+		var10.typeA = arg6;
+		var10.typeB = arg7;
 		for (int var11 = arg0; var11 >= 0; var11--) {
 			if (squares[var11][arg1][arg2] == null) {
 				squares[var11][arg1][arg2] = new Square(var11, arg1, arg2);
@@ -416,16 +416,16 @@ public class World {
 			return;
 		}
 		Decor var12 = new Decor();
-		var12.field1158 = arg10;
-		var12.field1157 = arg1 * 128 + 64;
-		var12.field1161 = arg2 * 128 + 64;
-		var12.field1168 = arg3;
-		var12.field1159 = arg4;
-		var12.field1160 = arg5;
-		var12.field1164 = arg6;
-		var12.field1172 = arg7;
-		var12.field1169 = arg8;
-		var12.field1167 = arg9;
+		var12.typecode = arg10;
+		var12.x = arg1 * 128 + 64;
+		var12.z = arg2 * 128 + 64;
+		var12.y = arg3;
+		var12.model = arg4;
+		var12.model2 = arg5;
+		var12.wshape = arg6;
+		var12.yof = arg7;
+		var12.xof = arg8;
+		var12.zof = arg9;
 		for (int var13 = arg0; var13 >= 0; var13--) {
 			if (squares[var13][arg1][arg2] == null) {
 				squares[var13][arg1][arg2] = new Square(var13, arg1, arg2);
@@ -452,11 +452,11 @@ public class World {
 									int var15 = (ClientBuild.groundh[var11][var12][var13] + ClientBuild.groundh[var11][var12 + 1][var13] + ClientBuild.groundh[var11][var12][var13 + 1] + ClientBuild.groundh[var11][var12 + 1][var13 + 1]) / 4 - (ClientBuild.groundh[arg1][arg2][arg3] + ClientBuild.groundh[arg1][arg2 + 1][arg3] + ClientBuild.groundh[arg1][arg2][arg3 + 1] + ClientBuild.groundh[arg1][arg2 + 1][arg3 + 1]) / 4;
 									Wall var16 = var14.wall;
 									if (var16 != null) {
-										if (var16.field3021.method544()) {
-											arg0.method570(var16.field3021, (var12 - arg2) * 128 + (1 - arg4) * 64, var15, (var13 - arg3) * 128 + (1 - arg5) * 64, var6);
+										if (var16.modelA.method544()) {
+											arg0.method570(var16.modelA, (var12 - arg2) * 128 + (1 - arg4) * 64, var15, (var13 - arg3) * 128 + (1 - arg5) * 64, var6);
 										}
-										if (var16.field3032 != null && var16.field3032.method544()) {
-											arg0.method570(var16.field3032, (var12 - arg2) * 128 + (1 - arg4) * 64, var15, (var13 - arg3) * 128 + (1 - arg5) * 64, var6);
+										if (var16.modelB != null && var16.modelB.method544()) {
+											arg0.method570(var16.modelB, (var12 - arg2) * 128 + (1 - arg4) * 64, var15, (var13 - arg3) * 128 + (1 - arg5) * 64, var6);
 										}
 									}
 									for (int var17 = 0; var17 < var14.spriteCount; var17++) {
@@ -552,14 +552,14 @@ public class World {
 					Square var3 = squares[var0][var1][var2];
 					if (var3 != null) {
 						Wall var4 = var3.wall;
-						if (var4 != null && var4.field3021.method544()) {
-							shareLightLoc(var4.field3021, var0, var1, var2, 1, 1);
-							if (var4.field3032 != null && var4.field3032.method544()) {
-								shareLightLoc(var4.field3032, var0, var1, var2, 1, 1);
-								var4.field3021.method570(var4.field3032, 0, 0, 0, false);
-								var4.field3032 = var4.field3032.method559();
+						if (var4 != null && var4.modelA.method544()) {
+							shareLightLoc(var4.modelA, var0, var1, var2, 1, 1);
+							if (var4.modelB != null && var4.modelB.method544()) {
+								shareLightLoc(var4.modelB, var0, var1, var2, 1, 1);
+								var4.modelA.method570(var4.modelB, 0, 0, 0, false);
+								var4.modelB = var4.modelB.method559();
 							}
-							var4.field3021 = var4.field3021.method559();
+							var4.modelA = var4.modelA.method559();
 						}
 						for (int var5 = 0; var5 < var3.spriteCount; var5++) {
 							Sprite var6 = var3.sprites[var5];
@@ -569,9 +569,9 @@ public class World {
 							}
 						}
 						GroundDecor var7 = var3.groundDecor;
-						if (var7 != null && var7.field3194.method544()) {
-							shareLightGd(var7.field3194, var0, var1, var2);
-							var7.field3194 = var7.field3194.method559();
+						if (var7 != null && var7.model.method544()) {
+							shareLightGd(var7.model, var0, var1, var2);
+							var7.model = var7.model.method559();
 						}
 					}
 				}
@@ -582,13 +582,13 @@ public class World {
 	@ObfuscatedName("ig.a(IIIILnc;JLnc;Lnc;)V")
 	public static void setObj(int arg0, int arg1, int arg2, int arg3, ModelSource arg4, long arg5, ModelSource arg6, ModelSource arg7) {
 		GroundObject var9 = new GroundObject();
-		var9.field4443 = arg4;
-		var9.field4451 = arg1 * 128 + 64;
-		var9.field4439 = arg2 * 128 + 64;
-		var9.field4444 = arg3;
-		var9.field4440 = arg5;
-		var9.field4446 = arg6;
-		var9.field4448 = arg7;
+		var9.topObj = arg4;
+		var9.x = arg1 * 128 + 64;
+		var9.z = arg2 * 128 + 64;
+		var9.y = arg3;
+		var9.typecode = arg5;
+		var9.bottomObj = arg6;
+		var9.middleObj = arg7;
 		int var10 = 0;
 		Square var11 = squares[arg0][arg1][arg2];
 		if (var11 != null) {
@@ -602,7 +602,7 @@ public class World {
 				}
 			}
 		}
-		var9.field4435 = -var10;
+		var9.height = -var10;
 		if (squares[arg0][arg1][arg2] == null) {
 			squares[arg0][arg1][arg2] = new Square(arg0, arg1, arg2);
 		}
@@ -613,26 +613,26 @@ public class World {
 	public static void shareLightGd(ModelSource arg0, int arg1, int arg2, int arg3) {
 		if (arg2 < maxTileX) {
 			Square var4 = squares[arg1][arg2 + 1][arg3];
-			if (var4 != null && var4.groundDecor != null && var4.groundDecor.field3194.method544()) {
-				arg0.method570(var4.groundDecor.field3194, 128, 0, 0, true);
+			if (var4 != null && var4.groundDecor != null && var4.groundDecor.model.method544()) {
+				arg0.method570(var4.groundDecor.model, 128, 0, 0, true);
 			}
 		}
 		if (arg3 < maxTileX) {
 			Square var5 = squares[arg1][arg2][arg3 + 1];
-			if (var5 != null && var5.groundDecor != null && var5.groundDecor.field3194.method544()) {
-				arg0.method570(var5.groundDecor.field3194, 0, 0, 128, true);
+			if (var5 != null && var5.groundDecor != null && var5.groundDecor.model.method544()) {
+				arg0.method570(var5.groundDecor.model, 0, 0, 128, true);
 			}
 		}
 		if (arg2 < maxTileX && arg3 < maxTileZ) {
 			Square var6 = squares[arg1][arg2 + 1][arg3 + 1];
-			if (var6 != null && var6.groundDecor != null && var6.groundDecor.field3194.method544()) {
-				arg0.method570(var6.groundDecor.field3194, 128, 0, 128, true);
+			if (var6 != null && var6.groundDecor != null && var6.groundDecor.model.method544()) {
+				arg0.method570(var6.groundDecor.model, 128, 0, 128, true);
 			}
 		}
 		if (arg2 < maxTileX && arg3 > 0) {
 			Square var7 = squares[arg1][arg2 + 1][arg3 - 1];
-			if (var7 != null && var7.groundDecor != null && var7.groundDecor.field3194.method544()) {
-				arg0.method570(var7.groundDecor.field3194, 128, 0, -128, true);
+			if (var7 != null && var7.groundDecor != null && var7.groundDecor.model.method544()) {
+				arg0.method570(var7.groundDecor.model, 128, 0, -128, true);
 			}
 		}
 	}
@@ -642,11 +642,11 @@ public class World {
 		Square var5 = squares[arg0][arg1][arg2];
 		if (var5 == null) {
 			return false;
-		} else if (var5.wall != null && var5.wall.field3028 == arg3) {
+		} else if (var5.wall != null && var5.wall.typecode == arg3) {
 			return true;
-		} else if (var5.decor != null && var5.decor.field1158 == arg3) {
+		} else if (var5.decor != null && var5.decor.typecode == arg3) {
 			return true;
-		} else if (var5.groundDecor != null && var5.groundDecor.field3202 == arg3) {
+		} else if (var5.groundDecor != null && var5.groundDecor.typecode == arg3) {
 			return true;
 		} else {
 			for (int var6 = 0; var6 < var5.spriteCount; var6++) {
@@ -1042,11 +1042,11 @@ public class World {
 			return;
 		}
 		GroundDecor var8 = new GroundDecor();
-		var8.field3194 = arg4;
-		var8.field3197 = arg1 * 128 + 64;
-		var8.field3190 = arg2 * 128 + 64;
-		var8.field3193 = arg3;
-		var8.field3202 = arg5;
+		var8.model = arg4;
+		var8.x = arg1 * 128 + 64;
+		var8.z = arg2 * 128 + 64;
+		var8.y = arg3;
+		var8.typecode = arg5;
 		if (squares[arg0][arg1][arg2] == null) {
 			squares[arg0][arg1][arg2] = new Square(arg0, arg1, arg2);
 		}
@@ -1145,15 +1145,15 @@ public class World {
 		}
 		Decor var5 = var4.decor;
 		if (var5 != null) {
-			var5.field1169 = var5.field1169 * arg3 / 16;
-			var5.field1167 = var5.field1167 * arg3 / 16;
+			var5.xof = var5.xof * arg3 / 16;
+			var5.zof = var5.zof * arg3 / 16;
 		}
 	}
 
 	@ObfuscatedName("gh.c(III)J")
 	public static long gdType(int arg0, int arg1, int arg2) {
 		Square var3 = squares[arg0][arg1][arg2];
-		return var3 == null || var3.groundDecor == null ? 0L : var3.groundDecor.field3202;
+		return var3 == null || var3.groundDecor == null ? 0L : var3.groundDecor.typecode;
 	}
 
 	@ObfuscatedName("kc.a(III)J")
@@ -1189,13 +1189,13 @@ public class World {
 	@ObfuscatedName("oi.a(III)J")
 	public static long decorType(int arg0, int arg1, int arg2) {
 		Square var3 = squares[arg0][arg1][arg2];
-		return var3 == null || var3.decor == null ? 0L : var3.decor.field1158;
+		return var3 == null || var3.decor == null ? 0L : var3.decor.typecode;
 	}
 
 	@ObfuscatedName("oe.a(III)J")
 	public static long wallType(int arg0, int arg1, int arg2) {
 		Square var3 = squares[arg0][arg1][arg2];
-		return var3 == null || var3.wall == null ? 0L : var3.wall.field3028;
+		return var3 == null || var3.wall == null ? 0L : var3.wall.typecode;
 	}
 
 	@ObfuscatedName("ha.a(III)Lfh;")
@@ -1292,7 +1292,7 @@ public class World {
 												}
 												Wall var14 = var13.wall;
 												if (var14 != null) {
-													var14.field3021.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var14.field3029 - cx, var14.field3031 - cy, var14.field3023 - cz, var14.field3028);
+													var14.modelA.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var14.x - cx, var14.y - cy, var14.z - cz, var14.typecode);
 												}
 												for (int var15 = 0; var15 < var13.spriteCount; var15++) {
 													Sprite var16 = var13.sprites[var15];
@@ -1338,17 +1338,17 @@ public class World {
 												var2.blockLocSpans = POSTTAB[var18];
 											}
 											if (var20 != null) {
-												if ((var20.field3027 & MIDTAB[var18]) == 0) {
+												if ((var20.typeA & MIDTAB[var18]) == 0) {
 													var2.checkLocSpans = 0;
-												} else if (var20.field3027 == 16) {
+												} else if (var20.typeA == 16) {
 													var2.checkLocSpans = 3;
 													var2.backWallTypes = MIDDEP_16[var18];
 													var2.inverseBlockLocSpans = 3 - var2.backWallTypes;
-												} else if (var20.field3027 == 32) {
+												} else if (var20.typeA == 32) {
 													var2.checkLocSpans = 6;
 													var2.backWallTypes = MIDDEP_32[var18];
 													var2.inverseBlockLocSpans = 6 - var2.backWallTypes;
-												} else if (var20.field3027 == 64) {
+												} else if (var20.typeA == 64) {
 													var2.checkLocSpans = 12;
 													var2.backWallTypes = MIDDEP_64[var18];
 													var2.inverseBlockLocSpans = 12 - var2.backWallTypes;
@@ -1357,21 +1357,21 @@ public class World {
 													var2.backWallTypes = MIDDEP_128[var18];
 													var2.inverseBlockLocSpans = 9 - var2.backWallTypes;
 												}
-												if ((var20.field3027 & var19) != 0 && !wallOccluded(var6, var3, var4, var20.field3027)) {
-													var20.field3021.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var20.field3029 - cx, var20.field3031 - cy, var20.field3023 - cz, var20.field3028);
+												if ((var20.typeA & var19) != 0 && !wallOccluded(var6, var3, var4, var20.typeA)) {
+													var20.modelA.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var20.x - cx, var20.y - cy, var20.z - cz, var20.typecode);
 												}
-												if ((var20.field3024 & var19) != 0 && !wallOccluded(var6, var3, var4, var20.field3024)) {
-													var20.field3032.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var20.field3029 - cx, var20.field3031 - cy, var20.field3023 - cz, var20.field3028);
+												if ((var20.typeB & var19) != 0 && !wallOccluded(var6, var3, var4, var20.typeB)) {
+													var20.modelB.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var20.x - cx, var20.y - cy, var20.z - cz, var20.typecode);
 												}
 											}
-											if (var21 != null && !spriteOccluded(var6, var3, var4, var21.field1159.method88())) {
-												if ((var21.field1164 & var19) != 0) {
-													var21.field1159.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var21.field1157 + var21.field1169 - cx, var21.field1168 - cy, var21.field1161 + var21.field1167 - cz, var21.field1158);
-												} else if (var21.field1164 == 256) {
-													int var22 = var21.field1157 - cx;
-													int var23 = var21.field1168 - cy;
-													int var24 = var21.field1161 - cz;
-													int var25 = var21.field1172;
+											if (var21 != null && !spriteOccluded(var6, var3, var4, var21.model.method88())) {
+												if ((var21.wshape & var19) != 0) {
+													var21.model.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var21.x + var21.xof - cx, var21.y - cy, var21.z + var21.zof - cz, var21.typecode);
+												} else if (var21.wshape == 256) {
+													int var22 = var21.x - cx;
+													int var23 = var21.y - cy;
+													int var24 = var21.z - cz;
+													int var25 = var21.yof;
 													int var26;
 													if (var25 == 1 || var25 == 2) {
 														var26 = -var22;
@@ -1385,27 +1385,27 @@ public class World {
 														var27 = var24;
 													}
 													if (var27 < var26) {
-														var21.field1159.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var22 + var21.field1169, var23, var24 + var21.field1167, var21.field1158);
-													} else if (var21.field1160 != null) {
-														var21.field1160.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var22, var23, var24, var21.field1158);
+														var21.model.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var22 + var21.xof, var23, var24 + var21.zof, var21.typecode);
+													} else if (var21.model2 != null) {
+														var21.model2.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var22, var23, var24, var21.typecode);
 													}
 												}
 											}
 											if (var17) {
 												GroundDecor var28 = var2.groundDecor;
 												if (var28 != null) {
-													var28.field3194.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var28.field3197 - cx, var28.field3193 - cy, var28.field3190 - cz, var28.field3202);
+													var28.model.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var28.x - cx, var28.y - cy, var28.z - cz, var28.typecode);
 												}
 												GroundObject var29 = var2.groundObject;
-												if (var29 != null && var29.field4435 == 0) {
-													if (var29.field4446 != null) {
-														var29.field4446.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var29.field4451 - cx, var29.field4444 - cy, var29.field4439 - cz, var29.field4440);
+												if (var29 != null && var29.height == 0) {
+													if (var29.bottomObj != null) {
+														var29.bottomObj.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var29.x - cx, var29.y - cy, var29.z - cz, var29.typecode);
 													}
-													if (var29.field4448 != null) {
-														var29.field4448.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var29.field4451 - cx, var29.field4444 - cy, var29.field4439 - cz, var29.field4440);
+													if (var29.middleObj != null) {
+														var29.middleObj.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var29.x - cx, var29.y - cy, var29.z - cz, var29.typecode);
 													}
-													if (var29.field4443 != null) {
-														var29.field4443.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var29.field4451 - cx, var29.field4444 - cy, var29.field4439 - cz, var29.field4440);
+													if (var29.topObj != null) {
+														var29.topObj.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var29.x - cx, var29.y - cy, var29.z - cz, var29.typecode);
 													}
 												}
 											}
@@ -1448,8 +1448,8 @@ public class World {
 											}
 											if (var35) {
 												Wall var37 = var2.wall;
-												if (!wallOccluded(var6, var3, var4, var37.field3027)) {
-													var37.field3021.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var37.field3029 - cx, var37.field3031 - cy, var37.field3023 - cz, var37.field3028);
+												if (!wallOccluded(var6, var3, var4, var37.typeA)) {
+													var37.modelA.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var37.x - cx, var37.y - cy, var37.z - cz, var37.typecode);
 												}
 												var2.checkLocSpans = 0;
 											}
@@ -1579,27 +1579,27 @@ public class World {
 			var2.drawBack = false;
 			fillLeft--;
 			GroundObject var66 = var2.groundObject;
-			if (var66 != null && var66.field4435 != 0) {
-				if (var66.field4446 != null) {
-					var66.field4446.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var66.field4451 - cx, var66.field4444 - cy - var66.field4435, var66.field4439 - cz, var66.field4440);
+			if (var66 != null && var66.height != 0) {
+				if (var66.bottomObj != null) {
+					var66.bottomObj.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var66.x - cx, var66.y - cy - var66.height, var66.z - cz, var66.typecode);
 				}
-				if (var66.field4448 != null) {
-					var66.field4448.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var66.field4451 - cx, var66.field4444 - cy - var66.field4435, var66.field4439 - cz, var66.field4440);
+				if (var66.middleObj != null) {
+					var66.middleObj.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var66.x - cx, var66.y - cy - var66.height, var66.z - cz, var66.typecode);
 				}
-				if (var66.field4443 != null) {
-					var66.field4443.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var66.field4451 - cx, var66.field4444 - cy - var66.field4435, var66.field4439 - cz, var66.field4440);
+				if (var66.topObj != null) {
+					var66.topObj.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var66.x - cx, var66.y - cy - var66.height, var66.z - cz, var66.typecode);
 				}
 			}
 			if (var2.blockLocSpans != 0) {
 				Decor var67 = var2.decor;
-				if (var67 != null && !spriteOccluded(var6, var3, var4, var67.field1159.method88())) {
-					if ((var67.field1164 & var2.blockLocSpans) != 0) {
-						var67.field1159.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var67.field1157 + var67.field1169 - cx, var67.field1168 - cy, var67.field1161 + var67.field1167 - cz, var67.field1158);
-					} else if (var67.field1164 == 256) {
-						int var68 = var67.field1157 - cx;
-						int var69 = var67.field1168 - cy;
-						int var70 = var67.field1161 - cz;
-						int var71 = var67.field1172;
+				if (var67 != null && !spriteOccluded(var6, var3, var4, var67.model.method88())) {
+					if ((var67.wshape & var2.blockLocSpans) != 0) {
+						var67.model.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var67.x + var67.xof - cx, var67.y - cy, var67.z + var67.zof - cz, var67.typecode);
+					} else if (var67.wshape == 256) {
+						int var68 = var67.x - cx;
+						int var69 = var67.y - cy;
+						int var70 = var67.z - cz;
+						int var71 = var67.yof;
 						int var72;
 						if (var71 == 1 || var71 == 2) {
 							var72 = -var68;
@@ -1613,19 +1613,19 @@ public class World {
 							var73 = var70;
 						}
 						if (var73 >= var72) {
-							var67.field1159.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var68 + var67.field1169, var69, var70 + var67.field1167, var67.field1158);
-						} else if (var67.field1160 != null) {
-							var67.field1160.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var68, var69, var70, var67.field1158);
+							var67.model.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var68 + var67.xof, var69, var70 + var67.zof, var67.typecode);
+						} else if (var67.model2 != null) {
+							var67.model2.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var68, var69, var70, var67.typecode);
 						}
 					}
 				}
 				Wall var74 = var2.wall;
 				if (var74 != null) {
-					if ((var74.field3024 & var2.blockLocSpans) != 0 && !wallOccluded(var6, var3, var4, var74.field3024)) {
-						var74.field3032.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var74.field3029 - cx, var74.field3031 - cy, var74.field3023 - cz, var74.field3028);
+					if ((var74.typeB & var2.blockLocSpans) != 0 && !wallOccluded(var6, var3, var4, var74.typeB)) {
+						var74.modelB.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var74.x - cx, var74.y - cy, var74.z - cz, var74.typecode);
 					}
-					if ((var74.field3027 & var2.blockLocSpans) != 0 && !wallOccluded(var6, var3, var4, var74.field3027)) {
-						var74.field3021.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var74.field3029 - cx, var74.field3031 - cy, var74.field3023 - cz, var74.field3028);
+					if ((var74.typeA & var2.blockLocSpans) != 0 && !wallOccluded(var6, var3, var4, var74.typeA)) {
+						var74.modelA.method87(0, cameraSinX, cameraCosX, cameraSinY, cameraCosY, var74.x - cx, var74.y - cy, var74.z - cz, var74.typecode);
 					}
 				}
 			}

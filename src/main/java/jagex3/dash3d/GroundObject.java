@@ -6,27 +6,27 @@ import deob.ObfuscatedName;
 public final class GroundObject {
 
 	@ObfuscatedName("w.b")
-	public int field4435;
+	public int height;
 
 	@ObfuscatedName("w.f")
-	public int field4439;
+	public int z;
 
 	@ObfuscatedName("w.g")
-	public long field4440;
+	public long typecode;
 
 	@ObfuscatedName("w.j")
-	public ModelSource field4443;
+	public ModelSource topObj;
 
 	@ObfuscatedName("w.k")
-	public int field4444;
+	public int y;
 
 	@ObfuscatedName("w.m")
-	public ModelSource field4446;
+	public ModelSource bottomObj;
 
 	@ObfuscatedName("w.o")
-	public ModelSource field4448;
+	public ModelSource middleObj;
 
 	@ObfuscatedName("w.r")
-	public int field4451;
+	public int x;
 
 }

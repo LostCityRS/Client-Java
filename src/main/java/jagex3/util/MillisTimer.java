@@ -23,9 +23,6 @@ public final class MillisTimer extends Timer {
 	@ObfuscatedName("ci.u")
 	public int ratio = 256;
 
-	@ObfuscatedName("ci.z")
-	public static int field526 = 0;
-
 	public MillisTimer() {
 		for (int var1 = 0; var1 < 10; var1++) {
 			this.otim[var1] = this.ntime;

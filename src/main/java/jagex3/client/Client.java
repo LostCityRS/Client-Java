@@ -1107,7 +1107,7 @@ public final class Client extends GameShell {
 		Canvas var4 = GameShell.canvas;
 		try {
 			Graphics var5 = var4.getGraphics();
-			GameShell.drawArea.method246(var5);
+			GameShell.drawArea.draw(var5);
 		} catch (Exception var6) {
 			var4.repaint();
 		}
@@ -9586,28 +9586,28 @@ public final class Client extends GameShell {
 		if (arg2 == 0) {
 			Wall var7 = World.getWall(arg4, arg1, arg5);
 			if (var7 != null) {
-				int var8 = Integer.MAX_VALUE & (int) (var7.field3028 >>> 32);
+				int var8 = Integer.MAX_VALUE & (int) (var7.typecode >>> 32);
 				if (arg0 == 2) {
-					var7.field3021 = new ClientLocAnim(var8, 2, arg3 + 4, arg4, arg1, arg5, arg6, false, var7.field3021);
-					var7.field3032 = new ClientLocAnim(var8, 2, arg3 + 1 & 0x3, arg4, arg1, arg5, arg6, false, var7.field3032);
+					var7.modelA = new ClientLocAnim(var8, 2, arg3 + 4, arg4, arg1, arg5, arg6, false, var7.modelA);
+					var7.modelB = new ClientLocAnim(var8, 2, arg3 + 1 & 0x3, arg4, arg1, arg5, arg6, false, var7.modelB);
 				} else {
-					var7.field3021 = new ClientLocAnim(var8, arg0, arg3, arg4, arg1, arg5, arg6, false, var7.field3021);
+					var7.modelA = new ClientLocAnim(var8, arg0, arg3, arg4, arg1, arg5, arg6, false, var7.modelA);
 				}
 			}
 		}
 		if (arg2 == 1) {
 			Decor var9 = World.getDecor(arg4, arg1, arg5);
 			if (var9 != null) {
-				int var10 = (int) (var9.field1158 >>> 32) & Integer.MAX_VALUE;
+				int var10 = (int) (var9.typecode >>> 32) & Integer.MAX_VALUE;
 				if (arg0 == 4 || arg0 == 5) {
-					var9.field1159 = new ClientLocAnim(var10, 4, arg3, arg4, arg1, arg5, arg6, false, var9.field1159);
+					var9.model = new ClientLocAnim(var10, 4, arg3, arg4, arg1, arg5, arg6, false, var9.model);
 				} else if (arg0 == 6) {
-					var9.field1159 = new ClientLocAnim(var10, 4, arg3 + 4, arg4, arg1, arg5, arg6, false, var9.field1159);
+					var9.model = new ClientLocAnim(var10, 4, arg3 + 4, arg4, arg1, arg5, arg6, false, var9.model);
 				} else if (arg0 == 7) {
-					var9.field1159 = new ClientLocAnim(var10, 4, (arg3 + 2 & 0x3) + 4, arg4, arg1, arg5, arg6, false, var9.field1159);
+					var9.model = new ClientLocAnim(var10, 4, (arg3 + 2 & 0x3) + 4, arg4, arg1, arg5, arg6, false, var9.model);
 				} else if (arg0 == 8) {
-					var9.field1159 = new ClientLocAnim(var10, 4, arg3 + 4, arg4, arg1, arg5, arg6, false, var9.field1159);
-					var9.field1160 = new ClientLocAnim(var10, 4, (arg3 + 2 & 0x3) + 4, arg4, arg1, arg5, arg6, false, var9.field1160);
+					var9.model = new ClientLocAnim(var10, 4, arg3 + 4, arg4, arg1, arg5, arg6, false, var9.model);
+					var9.model2 = new ClientLocAnim(var10, 4, (arg3 + 2 & 0x3) + 4, arg4, arg1, arg5, arg6, false, var9.model2);
 				}
 			}
 		}
@@ -9623,7 +9623,7 @@ public final class Client extends GameShell {
 		if (arg2 == 3) {
 			GroundDecor var12 = World.getGd(arg4, arg1, arg5);
 			if (var12 != null) {
-				var12.field3194 = new ClientLocAnim((int) (var12.field3202 >>> 32) & Integer.MAX_VALUE, 22, arg3, arg4, arg1, arg5, arg6, false, var12.field3194);
+				var12.model = new ClientLocAnim((int) (var12.typecode >>> 32) & Integer.MAX_VALUE, 22, arg3, arg4, arg1, arg5, arg6, false, var12.model);
 			}
 		}
 	}
@@ -9639,14 +9639,14 @@ public final class Client extends GameShell {
 	public static void addMapAnim() {
 		for (MapSpotAnimNode var0 = (MapSpotAnimNode) spotanims.head(); var0 != null; var0 = (MapSpotAnimNode) spotanims.next()) {
 			MapSpotAnim var1 = var0.field4474;
-			if (var1.field292 != minusedlevel || var1.field302) {
+			if (var1.level != minusedlevel || var1.animComplete) {
 				var0.unlink();
-			} else if (var1.field287 <= loopCycle) {
-				var1.method90(worldUpdateNum);
-				if (var1.field302) {
+			} else if (var1.startCycle <= loopCycle) {
+				var1.doAnim(worldUpdateNum);
+				if (var1.animComplete) {
 					var0.unlink();
 				} else {
-					World.addDynamic(var1.field292, var1.field296, var1.field290, var1.field295, 60, var1, 0, -1L, false);
+					World.addDynamic(var1.level, var1.x, var1.z, var1.y, 60, var1, 0, -1L, false);
 				}
 			}
 		}
@@ -12044,7 +12044,7 @@ public final class Client extends GameShell {
 		} else if (state > 0) {
 			try {
 				Graphics var6 = var5.getGraphics();
-				GameShell.drawArea.method246(var6);
+				GameShell.drawArea.draw(var6);
 				for (int var7 = 0; var7 < componentDrawCount; var7++) {
 					componentBlitArea[var7] = false;
 				}

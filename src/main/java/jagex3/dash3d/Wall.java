@@ -6,27 +6,27 @@ import deob.ObfuscatedName;
 public final class Wall {
 
 	@ObfuscatedName("oe.e")
-	public ModelSource field3021;
+	public ModelSource modelA;
 
 	@ObfuscatedName("oe.g")
-	public int field3023;
+	public int z;
 
 	@ObfuscatedName("oe.h")
-	public int field3024;
+	public int typeB;
 
 	@ObfuscatedName("oe.k")
-	public int field3027;
+	public int typeA;
 
 	@ObfuscatedName("oe.l")
-	public long field3028 = 0L;
+	public long typecode = 0L;
 
 	@ObfuscatedName("oe.m")
-	public int field3029;
+	public int x;
 
 	@ObfuscatedName("oe.o")
-	public int field3031;
+	public int y;
 
 	@ObfuscatedName("oe.p")
-	public ModelSource field3032;
+	public ModelSource modelB;
 
 }

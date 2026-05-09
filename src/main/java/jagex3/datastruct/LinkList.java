@@ -98,7 +98,7 @@ public final class LinkList {
 	}
 
 	@ObfuscatedName("wi.a(Lg;BLg;)V")
-	public void method1620(Linkable arg0, Linkable arg1) {
+	public void insertBefore(Linkable arg0, Linkable arg1) {
 		if (arg0.prev != null) {
 			arg0.unlink();
 		}

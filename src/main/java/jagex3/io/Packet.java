@@ -49,7 +49,7 @@ public class Packet extends Linkable {
 	public int pos;
 
 	public Packet(int arg0) {
-		this.data = ByteArrayPool.method709(arg0);
+		this.data = ByteArrayPool.alloc(arg0);
 		this.pos = 0;
 	}
 

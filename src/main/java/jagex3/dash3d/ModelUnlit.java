@@ -600,28 +600,28 @@ public final class ModelUnlit extends ModelSource {
 			}
 			if (var19 == 0) {
 				PointNormal var20 = this.pointNormal[var3];
-				var20.field1739 += var16;
-				var20.field1736 += var17;
-				var20.field1737 += var18;
-				var20.field1738++;
+				var20.x += var16;
+				var20.y += var17;
+				var20.z += var18;
+				var20.w++;
 				PointNormal var21 = this.pointNormal[var4];
-				var21.field1739 += var16;
-				var21.field1736 += var17;
-				var21.field1737 += var18;
-				var21.field1738++;
+				var21.x += var16;
+				var21.y += var17;
+				var21.z += var18;
+				var21.w++;
 				PointNormal var22 = this.pointNormal[var5];
-				var22.field1739 += var16;
-				var22.field1736 += var17;
-				var22.field1737 += var18;
-				var22.field1738++;
+				var22.x += var16;
+				var22.y += var17;
+				var22.z += var18;
+				var22.w++;
 			} else if (var19 == 1) {
 				if (this.faceNormal == null) {
 					this.faceNormal = new FaceNormal[this.numFaces];
 				}
 				FaceNormal var23 = this.faceNormal[var2] = new FaceNormal();
-				var23.field3822 = var16;
-				var23.field3830 = var17;
-				var23.field3825 = var18;
+				var23.x = var16;
+				var23.y = var17;
+				var23.z = var18;
 			}
 		}
 	}
@@ -1287,7 +1287,7 @@ public final class ModelUnlit extends ModelSource {
 		int var9 = var6.numPoints;
 		for (int var10 = 0; var10 < this.numPoints; var10++) {
 			PointNormal var11 = this.pointNormal[var10];
-			if (var11.field1738 != 0) {
+			if (var11.w != 0) {
 				int var12 = this.pointY[var10] - arg2;
 				if (var12 >= var6.field1519 && var12 <= var6.maxY) {
 					int var13 = this.pointX[var10] - arg1;
@@ -1296,7 +1296,7 @@ public final class ModelUnlit extends ModelSource {
 						if (var14 >= var6.minZ && var14 <= var6.maxZ) {
 							for (int var15 = 0; var15 < var9; var15++) {
 								PointNormal var16 = var6.pointNormal[var15];
-								if (var13 == var8[var15] && var14 == var6.pointZ[var15] && var12 == var6.pointY[var15] && var16.field1738 != 0) {
+								if (var13 == var8[var15] && var14 == var6.pointZ[var15] && var12 == var6.pointY[var15] && var16.w != 0) {
 									if (this.sharedPointNormal == null) {
 										this.sharedPointNormal = new PointNormal[this.numPoints];
 									}
@@ -1311,14 +1311,14 @@ public final class ModelUnlit extends ModelSource {
 									if (var18 == null) {
 										var18 = var6.sharedPointNormal[var15] = new PointNormal(var16);
 									}
-									var17.field1739 += var16.field1739;
-									var17.field1736 += var16.field1736;
-									var17.field1737 += var16.field1737;
-									var17.field1738 += var16.field1738;
-									var18.field1739 += var11.field1739;
-									var18.field1736 += var11.field1736;
-									var18.field1737 += var11.field1737;
-									var18.field1738 += var11.field1738;
+									var17.x += var16.x;
+									var17.y += var16.y;
+									var17.z += var16.z;
+									var17.w += var16.w;
+									var18.x += var11.x;
+									var18.y += var11.y;
+									var18.z += var11.z;
+									var18.w += var11.w;
 									var7++;
 									shareMap[var10] = shareTic;
 									shareMap2[var15] = shareTic;
