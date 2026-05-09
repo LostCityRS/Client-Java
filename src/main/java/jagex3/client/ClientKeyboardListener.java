@@ -1,7 +1,6 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -39,8 +38,10 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	public static int code;
 	@ObfuscatedName("ua.r")
 	public static int ch;
+    @ObfuscatedName("ec.J")
+    public static int field898 = 0;
 
-	@ObfuscatedName("l.a(Ljava/awt/Component;I)V")
+    @ObfuscatedName("l.a(Ljava/awt/Component;I)V")
 	public static void removeListeners(java.awt.Component arg0) {
 		arg0.removeKeyListener(instance);
 		arg0.removeFocusListener(instance);
@@ -64,7 +65,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	public static boolean pollKey() {
 		ClientKeyboardListener var0 = instance;
 		synchronized (instance) {
-			if (keyReadPos == Statics.field898) {
+			if (keyReadPos == field898) {
 				return false;
 			} else {
 				code = keyCodeBuffer[keyReadPos];
@@ -80,7 +81,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 		ClientKeyboardListener var0 = instance;
 		synchronized (instance) {
 			idleTimer++;
-			keyReadPos = Statics.field898;
+			keyReadPos = field898;
 			if (keyHeldWritePos < 0) {
 				for (int var1 = 0; var1 < 112; var1++) {
 					keyHeld[var1] = false;
@@ -97,7 +98,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 					}
 				}
 			}
-			Statics.field898 = keyWritePos;
+			field898 = keyWritePos;
 		}
 	}
 

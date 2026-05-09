@@ -1,6 +1,7 @@
 package jagex3.constants;
 
 import deob.ObfuscatedName;
+import jagex3.client.ScriptRunner;
 import jagex3.jstring.JagString;
 
 public class TextGerman {
@@ -388,7 +389,7 @@ public class TextGerman {
 		Text.CHATCOL_GREEN = field4079;
 		Text.field1282 = field3947;
 		Text.MAINLOAD90 = field4286;
-		Text.field1286 = field1834;
+		ScriptRunner.field1286 = field1834;
 		Text.MAINLOAD90B = field767;
 		Text.CHATEFFECT_GLOW3 = field3661;
 		Text.field1295 = field5;

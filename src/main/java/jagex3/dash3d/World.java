@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.ClientBuild;
 import jagex3.datastruct.LinkList;
 
@@ -114,6 +113,16 @@ public class World {
 	public static int maxLevel = 0;
 	@ObfuscatedName("ge.C")
 	public static int numActiveOccluders = 0;
+    @ObfuscatedName("sh.w")
+    public static int[] field3882;
+	@ObfuscatedName("nb.bb")
+	public static int[] field2713;
+	@ObfuscatedName("ob.p")
+	public static int[][][] field2979;
+	@ObfuscatedName("qj.V")
+	public static int[] field3605;
+	@ObfuscatedName("dj.Gb")
+	public static int[] field740;
 
 	@ObfuscatedName("ej.a(Lih;IIIIIIIZ)V")
 	public static void renderQuickGround(QuickGround arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, boolean arg8) {
@@ -696,7 +705,7 @@ public class World {
 				}
 			}
 		}
-		boolean var17 = ClientBuild.groundh == Statics.field2979;
+		boolean var17 = ClientBuild.groundh == field2979;
 		for (int var18 = minLevel; var18 < maxTileLevel; var18++) {
 			Square[][] var19 = squares[var18];
 			for (int var20 = -visibilityRadius; var20 <= 0; var20++) {
@@ -1099,10 +1108,10 @@ public class World {
 				int var19 = gz + var15 - visibilityRadius;
 				if (var18 >= 0 && var19 >= 0 && var18 < maxTileX && var19 < maxTileZ) {
 					int var20;
-					if (Statics.field2979 == null) {
+					if (field2979 == null) {
 						var20 = groundh[0][var18][var19] + 128 - cy;
 					} else {
-						var20 = Statics.field2979[0][var18][var19] + 128 - cy;
+						var20 = field2979[0][var18][var19] + 128 - cy;
 					}
 					int var21 = groundh[3][var18][var19] - cy - 1000;
 					visibilityMapBuffer[var14][var15] = testPoint(var16, var21, var20, var17);
@@ -1117,10 +1126,10 @@ public class World {
 			}
 		}
 		field4510 = arg7;
-		Statics.field740 = arg8;
-		Statics.field3605 = arg9;
-		Statics.field2713 = arg10;
-		Statics.field3882 = arg11;
+		field740 = arg8;
+		field3605 = arg9;
+		field2713 = arg10;
+		field3882 = arg11;
 		calcOcclude();
 		method803(arg0, arg1, arg2, arg6, arg12, arg13);
 	}
@@ -1801,7 +1810,7 @@ public class World {
 			Occlude var3 = var1[var2];
 			if (field4510 != null) {
 				for (int var4 = 0; var4 < field4510.length; var4++) {
-					if (field4510[var4] != -1000000 && (var3.minY <= field4510[var4] || var3.maxY <= field4510[var4]) && (var3.minX <= Statics.field3605[var4] || var3.maxX <= Statics.field3605[var4]) && (var3.minX >= Statics.field740[var4] || var3.maxX >= Statics.field740[var4]) && (var3.minZ <= Statics.field2713[var4] || var3.maxZ <= Statics.field2713[var4]) && (var3.minZ >= Statics.field3882[var4] || var3.maxZ >= Statics.field3882[var4])) {
+					if (field4510[var4] != -1000000 && (var3.minY <= field4510[var4] || var3.maxY <= field4510[var4]) && (var3.minX <= field3605[var4] || var3.maxX <= field3605[var4]) && (var3.minX >= field740[var4] || var3.maxX >= field740[var4]) && (var3.minZ <= field2713[var4] || var3.maxZ <= field2713[var4]) && (var3.minZ >= field3882[var4] || var3.maxZ >= field3882[var4])) {
 						continue label187;
 					}
 				}

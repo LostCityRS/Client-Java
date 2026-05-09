@@ -1,7 +1,6 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.constants.Text;
 import jagex3.graphics.*;
 import jagex3.io.Packet;
@@ -179,6 +178,10 @@ public class TitleScreen {
 	public static int field4247 = -1;
 	@ObfuscatedName("ci.z")
 	public static int field526 = 0;
+	@ObfuscatedName("hi.b")
+	public static int field1550 = 0;
+	@ObfuscatedName("n.h")
+	public static int field2620 = 0;
 
 	@ObfuscatedName("rc.a(Lcc;BLcc;)V")
     public static void draw(PixfontGeneric arg0, PixfontGeneric arg1) {
@@ -227,7 +230,7 @@ public class TitleScreen {
                 int var14 = var12 + 15;
                 arg1.centreString(loginMes3, 382, 241, 16776960, 0);
                 boolean var4;
-                if (Statics.field2620 == 0 && Client.loopCycle % 40 < 20 && GameShell.focus) {
+                if (field2620 == 0 && Client.loopCycle % 40 < 20 && GameShell.focus) {
                     var4 = true;
                 } else {
                     var4 = false;
@@ -236,7 +239,7 @@ public class TitleScreen {
                 var12 += 10;
                 arg1.drawString(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.escape(loginUser), var4 ? field3843 : field3972}), 272, 266, 16777215, 0);
                 boolean var5;
-                if (Statics.field2620 == 1 && Client.loopCycle % 40 < 20 && GameShell.focus) {
+                if (field2620 == 1 && Client.loopCycle % 40 < 20 && GameShell.focus) {
                     var5 = true;
                 } else {
                     var5 = false;
@@ -264,9 +267,9 @@ public class TitleScreen {
             }
         }
         if (Client.game != 1) {
-            if (Statics.field1550 > 0) {
-                method535(Statics.field1550);
-                Statics.field1550 = 0;
+            if (field1550 > 0) {
+                method535(field1550);
+                field1550 = 0;
             }
             method1307();
         }
@@ -304,7 +307,7 @@ public class TitleScreen {
 		if (Client.state == 5) {
 			return;
 		}
-		Statics.field1550++;
+		field1550++;
 		if (Client.state != 10) {
 			return;
 		}
@@ -322,7 +325,7 @@ public class TitleScreen {
 		int var3 = ClientMouseListener.mouseClickY;
 		if (loginscreen == 0) {
 			if (var1 == 1 && var2 >= 227 && var2 <= 377 && var3 >= 271 && var3 <= 311) {
-				Statics.field2620 = 0;
+				field2620 = 0;
 				loginscreen = 3;
 			}
 			boolean var4 = false;
@@ -338,18 +341,18 @@ public class TitleScreen {
 				loginscreen = 2;
 				loginMes3 = Text.field1277;
 				loginMes1 = Text.field1298;
-				Statics.field2620 = 0;
+				field2620 = 0;
 				loginMes2 = Text.PLEASELOGIN2;
 			}
 		} else if (loginscreen == 2) {
 			short var5 = 231;
 			int var8 = var5 + 30;
 			if (var1 == 1 && var3 >= 246 && var3 < 261) {
-				Statics.field2620 = 0;
+				field2620 = 0;
 			}
 			var8 += 15;
 			if (var1 == 1 && var3 >= 261 && var3 < 276) {
-				Statics.field2620 = 1;
+				field2620 = 1;
 			}
 			var8 += 15;
 			if (var1 == 1 && var2 >= 227 && var2 <= 377 && var3 >= 301 && var3 <= 341) {
@@ -379,26 +382,26 @@ public class TitleScreen {
 									break;
 								}
 							}
-							if (Statics.field2620 != 0) {
+							if (field2620 != 0) {
 								continue label226;
 							}
 							if (ClientKeyboardListener.code == 85 && loginUser.length() > 0) {
 								loginUser = loginUser.method623(0, loginUser.length() - 1);
 							}
 							if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
-								Statics.field2620 = 1;
+								field2620 = 1;
 							}
 							if (var6 && loginUser.length() < 12) {
 								loginUser = loginUser.method618(ClientKeyboardListener.ch);
 							}
 						}
 						return;
-					} while (Statics.field2620 != 1);
+					} while (field2620 != 1);
 					if (ClientKeyboardListener.code == 85 && loginPass.length() > 0) {
 						loginPass = loginPass.method623(0, loginPass.length() - 1);
 					}
 					if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
-						Statics.field2620 = 0;
+						field2620 = 0;
 					}
 					if (Client.modewhere != 0 && ClientKeyboardListener.code == 84) {
 						loginUser = loginUser.method611().method614();

@@ -18,7 +18,9 @@ public class PcmPlayer {
 	public static boolean stereo;
 	@ObfuscatedName("uc.a")
 	public static int threadPriority;
-	@ObfuscatedName("ej.h")
+    @ObfuscatedName("nd.l")
+    public static AudioThread field2738;
+    @ObfuscatedName("ej.h")
 	public final int maxMixCost = 32;
 
 	@ObfuscatedName("ej.l")
@@ -88,16 +90,16 @@ public class PcmPlayer {
 				var4.capacity = 16384;
 			}
 			var4.open(var4.capacity);
-			if (threadPriority > 0 && Statics.field2738 == null) {
-				Statics.field2738 = new AudioThread();
-				Statics.field2738.signLink = arg2;
-				arg2.threadreq(Statics.field2738, threadPriority);
+			if (threadPriority > 0 && field2738 == null) {
+				field2738 = new AudioThread();
+				field2738.signLink = arg2;
+				arg2.threadreq(field2738, threadPriority);
 			}
-			if (Statics.field2738 != null) {
-				if (Statics.field2738.players[arg0] != null) {
+			if (field2738 != null) {
+				if (field2738.players[arg0] != null) {
 					throw new IllegalArgumentException();
 				}
-				Statics.field2738.players[arg0] = var4;
+				field2738.players[arg0] = var4;
 			}
 			return var4;
 		} catch (Throwable var7) {
@@ -108,16 +110,16 @@ public class PcmPlayer {
 				var5.init(arg1);
 				var5.capacity = 16384;
 				var5.open(var5.capacity);
-				if (threadPriority > 0 && Statics.field2738 == null) {
-					Statics.field2738 = new AudioThread();
-					Statics.field2738.signLink = arg2;
-					arg2.threadreq(Statics.field2738, threadPriority);
+				if (threadPriority > 0 && field2738 == null) {
+					field2738 = new AudioThread();
+					field2738.signLink = arg2;
+					arg2.threadreq(field2738, threadPriority);
 				}
-				if (Statics.field2738 != null) {
-					if (Statics.field2738.players[arg0] != null) {
+				if (field2738 != null) {
+					if (field2738.players[arg0] != null) {
 						throw new IllegalArgumentException();
 					}
-					Statics.field2738.players[arg0] = var5;
+					field2738.players[arg0] = var5;
 				}
 				return var5;
 			} catch (Throwable var6) {
@@ -159,22 +161,22 @@ public class PcmPlayer {
 
 	@ObfuscatedName("ej.b(I)V")
 	public final synchronized void shutdown() {
-		if (Statics.field2738 != null) {
+		if (field2738 != null) {
 			boolean var1 = true;
 			for (int var2 = 0; var2 < 2; var2++) {
-				if (Statics.field2738.players[var2] == this) {
-					Statics.field2738.players[var2] = null;
+				if (field2738.players[var2] == this) {
+					field2738.players[var2] = null;
 				}
-				if (Statics.field2738.players[var2] != null) {
+				if (field2738.players[var2] != null) {
 					var1 = false;
 				}
 			}
 			if (var1) {
-				Statics.field2738.shutdown = true;
-				while (Statics.field2738.running) {
+				field2738.shutdown = true;
+				while (field2738.running) {
 					ThreadSleep.sleepPrecise(50L);
 				}
-				Statics.field2738 = null;
+				field2738 = null;
 			}
 		}
 		this.close();

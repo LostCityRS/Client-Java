@@ -70,8 +70,6 @@ public class Text {
 	public static JagString field1293 = field1292;
 	@ObfuscatedName("gd.I")
 	public static JagString field1289 = field1292;
-	@ObfuscatedName("gd.F")
-	public static JagString field1286 = field1292;
 	@ObfuscatedName("gd.W")
 	public static JagString field1303 = field1292;
 	@ObfuscatedName("gd.O")

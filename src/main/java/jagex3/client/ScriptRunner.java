@@ -15,6 +15,7 @@ import jagex3.var.VarCache;
 import jagex3.wordfilter2.WordPack;
 import jagex3.worldmap.WorldMap;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class ScriptRunner {
@@ -98,6 +99,22 @@ public class ScriptRunner {
 	public static final JagString field3084 = Text.field3094;
 	@ObfuscatedName("ti.z")
 	public static final JagString field4050 = Text.field4053;
+	@ObfuscatedName("cf.l")
+	public static final JagString field488 = Text.field491;
+	@ObfuscatedName("jc.M")
+	public static final JagString field1837 = Text.field1839;
+	@ObfuscatedName("vc.ib")
+	public static final JagString field4363 = Text.field4361;
+	@ObfuscatedName("de.N")
+	public static final JagString field696 = Text.field688;
+	@ObfuscatedName("fa.Y")
+	public static final JagString field1083 = Text.field1078;
+	@ObfuscatedName("da.hb")
+	public static final JagString field612 = Text.field611;
+	@ObfuscatedName("be.n")
+	public static final JagString field263 = Text.field272;
+	@ObfuscatedName("bj.zb")
+	public static final Calendar calendar = Calendar.getInstance();
 	@ObfuscatedName("va.C")
 	public static int fp = 0;
 	@ObfuscatedName("oa.F")
@@ -110,6 +127,8 @@ public class ScriptRunner {
 	public static IfType activeComponent2;
 	@ObfuscatedName("li.R")
 	public static IfType activeComponent;
+	@ObfuscatedName("gd.F")
+	public static JagString field1286 = Text.field1292;
 
 	@ObfuscatedName("md.a(BLde;I)V")
 	public static void executeScript(HookReq arg0, int arg1) {
@@ -2007,10 +2026,10 @@ public class ScriptRunner {
 							var5--;
 							int var261 = intStack[var5];
 							long var262 = ((long) var261 + 11745L) * 86400000L;
-							Statics.calendar.setTime(new Date(var262));
-							int var264 = Statics.calendar.get(5);
-							int var265 = Statics.calendar.get(2);
-							int var266 = Statics.calendar.get(1);
+							calendar.setTime(new Date(var262));
+							int var264 = calendar.get(5);
+							int var265 = calendar.get(2);
+							int var266 = calendar.get(1);
 							stringStack[var6++] = JagString.join(new JagString[]{JagString.method1212(var264), field2171, months[var265], field2171, JagString.method1212(var266)});
 							continue;
 						}
@@ -2359,7 +2378,7 @@ public class ScriptRunner {
 									var6--;
 									JagString var189 = stringStack[var6];
 									if (var189.method619(Client.field2194)) {
-										Client.method682(var189);
+										Client.doCheat(var189);
 										continue;
 									}
 									if (Client.staffmodlevel == 0 && (Client.field4428 == 1 || Client.field3535 == 1)) {
@@ -2367,20 +2386,20 @@ public class ScriptRunner {
 									}
 									JagString var190 = var189.method639();
 									byte var191 = 0;
-									if (var190.method619(Statics.field488)) {
-										var189 = var189.method635(Statics.field488.length());
+									if (var190.method619(field488)) {
+										var189 = var189.method635(field488.length());
 										var191 = 0;
-									} else if (var190.method619(Statics.field1837)) {
+									} else if (var190.method619(field1837)) {
 										var191 = 1;
-										var189 = var189.method635(Statics.field1837.length());
+										var189 = var189.method635(field1837.length());
 									} else if (var190.method619(field2564)) {
 										var189 = var189.method635(field2564.length());
 										var191 = 2;
 									} else if (var190.method619(field4467)) {
 										var191 = 3;
 										var189 = var189.method635(field4467.length());
-									} else if (var190.method619(Statics.field4363)) {
-										var189 = var189.method635(Statics.field4363.length());
+									} else if (var190.method619(field4363)) {
+										var189 = var189.method635(field4363.length());
 										var191 = 4;
 									} else if (var190.method619(field1355)) {
 										var189 = var189.method635(field1355.length());
@@ -2391,8 +2410,8 @@ public class ScriptRunner {
 									} else if (var190.method619(field3690)) {
 										var191 = 7;
 										var189 = var189.method635(field3690.length());
-									} else if (var190.method619(Statics.field696)) {
-										var189 = var189.method635(Statics.field696.length());
+									} else if (var190.method619(field696)) {
+										var189 = var189.method635(field696.length());
 										var191 = 8;
 									} else if (var190.method619(field3817)) {
 										var189 = var189.method635(field3817.length());
@@ -2444,18 +2463,18 @@ public class ScriptRunner {
 									}
 									JagString var192 = var189.method639();
 									byte var193 = 0;
-									if (var192.method619(Statics.field1083)) {
+									if (var192.method619(field1083)) {
 										var193 = 1;
-										var189 = var189.method635(Statics.field1083.length());
-									} else if (var192.method619(Statics.field612)) {
-										var189 = var189.method635(Statics.field612.length());
+										var189 = var189.method635(field1083.length());
+									} else if (var192.method619(field612)) {
+										var189 = var189.method635(field612.length());
 										var193 = 2;
 									} else if (var192.method619(field1308)) {
 										var193 = 3;
 										var189 = var189.method635(field1308.length());
-									} else if (var192.method619(Statics.field263)) {
+									} else if (var192.method619(field263)) {
 										var193 = 4;
-										var189 = var189.method635(Statics.field263.length());
+										var189 = var189.method635(field263.length());
 									} else if (var192.method619(field4050)) {
 										var189 = var189.method635(field4050.length());
 										var193 = 5;

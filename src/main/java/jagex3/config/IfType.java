@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.constants.Text;
 import jagex3.dash3d.ModelLit;
 import jagex3.dash3d.ModelSourceCache;
@@ -32,6 +31,10 @@ public final class IfType {
 	public static boolean loadingAsset = false;
 	@ObfuscatedName("ib.y")
 	public static Js5 models;
+	@ObfuscatedName("jh.f")
+	public static Js5 field1926;
+	@ObfuscatedName("fi.v")
+	public static Js5 field1176;
 	@ObfuscatedName("q.a")
 	public int field3365 = 0;
 
@@ -494,9 +497,9 @@ public final class IfType {
 	@ObfuscatedName("lf.a(Lnb;ILnb;Lnb;Lnb;)V")
 	public static void init(Js5 arg0, Js5 arg1, Js5 arg2, Js5 arg3) {
 		models = arg3;
-		Statics.field1176 = arg0;
+		field1176 = arg0;
 		interfaces = arg1;
-		Statics.field1926 = arg2;
+		field1926 = arg2;
 		list = new IfType[interfaces.getGroupCount()][];
 		open = new boolean[interfaces.getGroupCount()];
 	}
@@ -626,7 +629,7 @@ public final class IfType {
 		if (this.graphicMaskLineOffsets != null) {
 			return true;
 		}
-		SoftwarePix8 var1 = PixLoader.method1553(Statics.field1176, this.graphic);
+		SoftwarePix8 var1 = PixLoader.method1553(field1176, this.graphic);
 		if (var1 == null) {
 			return false;
 		}
@@ -668,7 +671,7 @@ public final class IfType {
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = PixLoader.method1558(Statics.field1176, var2, 0);
+		Pix32 var4 = PixLoader.method1558(field1176, var2, 0);
 		if (var4 == null) {
 			loadingAsset = true;
 		} else {
@@ -694,7 +697,7 @@ public final class IfType {
 		if (var5 != null) {
 			return var5;
 		}
-		SoftwarePix32 var6 = PixLoader.method203(Statics.field1176, 0, var2);
+		SoftwarePix32 var6 = PixLoader.method203(field1176, 0, var2);
 		if (var6 == null) {
 			loadingAsset = true;
 			return null;
@@ -872,7 +875,7 @@ public final class IfType {
 		if (var2 != null) {
 			return var2;
 		}
-		PixfontGeneric var3 = PixLoader.method735(0, Statics.field1926, this.font, Statics.field1176);
+		PixfontGeneric var3 = PixLoader.method735(0, field1926, this.font, field1176);
 		if (var3 == null) {
 			loadingAsset = true;
 		} else {
