@@ -317,7 +317,7 @@ public final class ObjType extends Linkable2 {
 			var15 = var10;
 		}
 		if (arg5 && (var6.stackable == 1 || arg1 != 1) && arg1 != -1) {
-			countFont.drawString(Client.method889(arg1), 0, 9, 16776960, 1);
+			countFont.drawString(invNumber(arg1), 0, 9, 16776960, 1);
 		}
 		Pix2D.setPixels(var11, var12, var13);
 		Pix2D.restoreClipping(var14);
@@ -334,6 +334,17 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("mg.c(II)I")
 	public static int getFileId(int arg0) {
 		return arg0 >>> 8;
+	}
+
+	@ObfuscatedName("mb.b(II)Li;")
+	public static JagString invNumber(int arg0) {
+		if (arg0 < 100000) {
+			return JagString.join(new JagString[] { Client.field399, JagString.method1212(arg0), Client.field1214 });
+		} else if (arg0 < 10000000) {
+			return JagString.join(new JagString[] { Client.field241, JagString.method1212(arg0 / 1000), Text.THOUSAND_SHORT, Client.field1214 });
+		} else {
+			return JagString.join(new JagString[] { Client.field2462, JagString.method1212(arg0 / 1000000), Text.MILLION_SHORT, Client.field1214 });
+		}
 	}
 
 	@ObfuscatedName("ng.b(Z)Lle;")
@@ -379,7 +390,7 @@ public final class ObjType extends Linkable2 {
 			return arg1;
 		} else {
 			IntNode var3 = (IntNode) this.params.find((long) arg0);
-			return var3 == null ? arg1 : var3.field3698;
+			return var3 == null ? arg1 : var3.value;
 		}
 	}
 

@@ -1,11 +1,7 @@
 package deob;
 
-import jagex3.client.Client;
 import jagex3.client.ClientMouseListener;
-import jagex3.config.IfType;
 import jagex3.config.ObjType;
-import jagex3.config.ServerActive;
-import jagex3.constants.Text;
 import jagex3.datastruct.HashTable;
 import jagex3.jstring.JagString;
 import jagex3.sound.PcmStream;
@@ -320,33 +316,4 @@ public class Statics {
 		return arg0 >= 97 && arg0 <= 122 || arg0 >= 65 && arg0 <= 90;
 	}
 
-	@ObfuscatedName("hj.a(ILq;)Lq;")
-	public static IfType method583(IfType arg0) {
-		int var1 = ServerActive.serverDraggable(Client.getActive(arg0));
-		if (var1 == 0) {
-			return null;
-		}
-		for (int var2 = 0; var2 < var1; var2++) {
-			arg0 = IfType.get(arg0.layerId);
-			if (arg0 == null) {
-				return null;
-			}
-		}
-		return arg0;
-	}
-
-	@ObfuscatedName("nb.f(II)Li;")
-	public static JagString method958(int arg0) {
-		JagString var1 = JagString.method1212(arg0);
-		for (int var2 = var1.length() - 3; var2 > 0; var2 -= 3) {
-			var1 = JagString.join(new JagString[] { var1.method623(0, var2), Client.field979, var1.method635(var2) });
-		}
-		if (var1.length() > 9) {
-			return JagString.join(new JagString[] {field2828, var1.method623(0, var1.length() - 8), Text.MILLION, Client.field1238, var1, field3982});
-		} else if (var1.length() > 6) {
-			return JagString.join(new JagString[] {field644, var1.method623(0, var1.length() - 4), Text.THOUSAND, Client.field1238, var1, field3982});
-		} else {
-			return JagString.join(new JagString[] {field1370, var1, field2199});
-		}
-	}
 }

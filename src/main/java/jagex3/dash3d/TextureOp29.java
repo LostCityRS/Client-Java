@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import jagex3.client.Client;
 import jagex3.io.Packet;
 import jagex3.jstring.JagString;
 import jagex3.util.ArrayUtil;
@@ -162,7 +161,7 @@ public final class TextureOp29 extends TextureOp {
 	@ObfuscatedName("ug.a(IIIIIBII)V")
 	public static void method1514(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
 		if (arg1 == arg2) {
-			Client.method216(arg2, arg5, arg4, arg6, arg0, arg3);
+			method216(arg2, arg5, arg4, arg6, arg0, arg3);
 		} else if (arg3 - arg2 >= field1207 && arg2 + arg3 <= field183 && field919 <= arg6 - arg1 && field279 >= arg1 + arg6) {
 			method126(arg3, arg0, arg1, arg5, arg4, arg6, arg2);
 		} else {
@@ -1108,7 +1107,16 @@ public final class TextureOp29 extends TextureOp {
 		}
 	}
 
-	@ObfuscatedName("mb.a(Lea;II)V")
+    @ObfuscatedName("client.a(IIIIIII)V")
+    public static void method216(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+        if (field1207 <= arg5 - arg0 && field183 >= arg5 + arg0 && field919 <= arg3 - arg0 && field279 >= arg0 + arg3) {
+            method46(arg1, arg5, arg2, arg0, arg3, arg4);
+        } else {
+            method827(arg1, arg3, arg2, arg0, arg5, arg4);
+        }
+    }
+
+    @ObfuscatedName("mb.a(Lea;II)V")
 	@Override
 	public void method11(Packet arg0, int arg1) {
 		if (arg1 == 0) {

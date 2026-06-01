@@ -112,8 +112,6 @@ public class TitleScreen {
 	public static int loginscreen = 0;
 	@ObfuscatedName("tb.d")
 	public static boolean switchScreen = false;
-	@ObfuscatedName("fi.D")
-	public static int field1183 = 255;
 	@ObfuscatedName("m.r")
 	public static boolean mute = false;
 	@ObfuscatedName("re.a")
@@ -488,7 +486,7 @@ public class TitleScreen {
 		loginPass = field3972;
 		loginscreen = 0;
 		switchScreen = false;
-		if (field1183 == 0) {
+		if (Client.field1183 == 0) {
 			mute = true;
 		} else {
 			mute = false;

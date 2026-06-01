@@ -659,7 +659,7 @@ public class ClientBuild {
 		if (arg0 < 3 && (mapl[1][arg6][arg2] & 0x2) == 2) {
 			var8 = arg0 + 1;
 		}
-		Client.method989(Client.collision[arg0], arg6, var8, arg1, arg0, arg2);
+		Client.locChangeUnchecked(Client.collision[arg0], arg6, var8, arg1, arg0, arg2);
 		if (arg4 >= 0) {
 			addLoc(false, arg0, arg5, arg3, false, arg4, var8, Client.collision[arg0], arg2, arg6);
 			return;

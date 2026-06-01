@@ -220,7 +220,7 @@ public final class NpcType extends Linkable2 {
 			return arg0;
 		} else {
 			IntNode var3 = (IntNode) this.params.find((long) arg1);
-			return var3 == null ? arg0 : var3.field3698;
+			return var3 == null ? arg0 : var3.value;
 		}
 	}
 

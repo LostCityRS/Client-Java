@@ -6,12 +6,12 @@ import deob.ObfuscatedName;
 public final class IntNode extends Linkable {
 
 	@ObfuscatedName("rg.D")
-	public int field3698;
+	public int value;
 
 	public IntNode() {
 	}
 
 	public IntNode(int arg0) {
-		this.field3698 = arg0;
+		this.value = arg0;
 	}
 }

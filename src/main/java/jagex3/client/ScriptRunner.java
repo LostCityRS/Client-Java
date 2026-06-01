@@ -425,7 +425,7 @@ public class ScriptRunner {
 						var5--;
 						IntNode var42 = (IntNode) var41.find((long) intStack[var5]);
 						if (var42 != null) {
-							var7 += var42.field3698;
+							var7 += var42.value;
 						}
 						continue;
 					}
@@ -2833,7 +2833,7 @@ public class ScriptRunner {
 										ObjType.resetSpriteCache();
 										NpcType.resetModelCache();
 										NpcType.resetHeadModelCache();
-										Client.method733();
+										Client.redrawAllComponents();
 										continue;
 									}
 								}
@@ -2951,5 +2951,22 @@ public class ScriptRunner {
 	@ObfuscatedName("sd.a(Lde;I)V")
 	public static void executeScript(HookReq arg0) {
 		executeScript(arg0, 200000);
+	}
+
+	@ObfuscatedName("nd.a(BI)V")
+	public static void executeOnLoad(int arg0) {
+		if (arg0 == -1 || !IfType.openInterface(arg0)) {
+			return;
+		}
+		IfType[] var1 = IfType.list[arg0];
+		for (int var2 = 0; var2 < var1.length; var2++) {
+			IfType var3 = var1[var2];
+			if (var3.onload != null) {
+				HookReq var4 = new HookReq();
+				var4.component = var3;
+				var4.onop = var3.onload;
+				executeScript(var4, 2000000);
+			}
+		}
 	}
 }

@@ -8,10 +8,10 @@ public class ServerActive {
 		return (arg0 >> 21 & 0x1) != 0;
 	}
 
-    @ObfuscatedName("be.a(BI)I")
-    public static int serverDraggable(int arg0) {
-        return arg0 >> 17 & 0x7;
-    }
+	@ObfuscatedName("be.a(BI)I")
+	public static int serverDraggable(int arg0) {
+		return arg0 >> 17 & 0x7;
+	}
 
 	@ObfuscatedName("fc.a(II)Z")
 	public static boolean isDragTarget(int arg0) {
@@ -28,10 +28,10 @@ public class ServerActive {
 		return (arg0 >> 29 & 0x1) != 0;
 	}
 
-    @ObfuscatedName("ae.e(IB)Z")
-    public static boolean isObjUseEnabled(int arg0) {
-        return (arg0 >> 31 & 0x1) != 0;
-    }
+	@ObfuscatedName("ae.e(IB)Z")
+	public static boolean isObjUseEnabled(int arg0) {
+		return (arg0 >> 31 & 0x1) != 0;
+	}
 
 	@ObfuscatedName("v.b(II)Z")
 	public static boolean pauseButton(int arg0) {

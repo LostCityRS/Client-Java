@@ -79,7 +79,7 @@ public final class EnumType extends Linkable2 {
 			return this.defaultInt;
 		} else {
 			IntNode var2 = (IntNode) this.table.find((long) arg0);
-			return var2 == null ? this.defaultInt : var2.field3698;
+			return var2 == null ? this.defaultInt : var2.value;
 		}
 	}
 
