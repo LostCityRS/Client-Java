@@ -28,11 +28,6 @@ public final class TextureOp37 extends TextureOp {
 	@ObfuscatedName("jf.W")
 	public int field1881 = 0;
 
-	@ObfuscatedName("jf.c(B)I")
-	public static int method717() {
-		return 6;
-	}
-
 	public TextureOp37() {
 		super(0, true);
 	}

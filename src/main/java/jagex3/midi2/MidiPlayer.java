@@ -528,7 +528,7 @@ public final class MidiPlayer extends PcmStream {
 	}
 
 	@ObfuscatedName("pg.b(III)V")
-	public void method1194() {
+	public void setChannelDefaultPatch() {
 		this.channelDefaultPatch[9] = 128;
 		this.channelBank[9] = 128;
 		this.setInst(9, 128);
@@ -771,7 +771,7 @@ public final class MidiPlayer extends PcmStream {
 
 	@ObfuscatedName("pg.e(III)V")
 	public synchronized void method1209() {
-		this.method1194();
+		this.setChannelDefaultPatch();
 	}
 
 	@ObfuscatedName("pg.a(IIZ)V")

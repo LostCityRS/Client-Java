@@ -23,7 +23,7 @@ import java.net.URL;
 public abstract class GameShell extends Applet implements Runnable, FocusListener, WindowListener {
 
 	@ObfuscatedName("wg.s")
-	public static final BufferedRandomAccessFile[] field4504 = new BufferedRandomAccessFile[27];
+	public static final BufferedRandomAccessFile[] cacheIndex = new BufferedRandomAccessFile[27];
 	@ObfuscatedName("ia.J")
 	public static final long[] drawTime = new long[32];
 	@ObfuscatedName("ec.O")
@@ -68,7 +68,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("sf.l")
 	public static PixMap drawArea;
 	@ObfuscatedName("bf.J")
-	public static BufferedRandomAccessFile field299;
+	public static BufferedRandomAccessFile cacheDat;
 	@ObfuscatedName("qa.k")
 	public static BufferedRandomAccessFile field3529;
 	@ObfuscatedName("na.W")
@@ -249,12 +249,12 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
 	@ObfuscatedName("pb.a(ILi;)V")
 	public static void method1132(JagString arg0) {
-		if (signlink.field3597 == null) {
+		if (signlink.applet == null) {
 			return;
 		}
 		try {
-			JagString var1 = field4265.method608(signlink.field3597);
-			JagString var2 = field4516.method608(signlink.field3597);
+			JagString var1 = field4265.method608(signlink.applet);
+			JagString var2 = field4516.method608(signlink.applet);
 			JagString var3 = JagString.join(new JagString[] { var1, field651, arg0, field1005, var2 });
 			JagString var4;
 			if (arg0.length() == 0) {
@@ -262,7 +262,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			} else {
 				var4 = JagString.join(new JagString[] { var3, field1982, Client.method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.method1556(94608000L) });
 			}
-			JagString.join(new JagString[] {field3237, var4, field591}).method636(signlink.field3597);
+			JagString.join(new JagString[] {field3237, var4, field591}).method636(signlink.applet);
 		} catch (Throwable var5) {
 		}
 	}
@@ -319,7 +319,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@Override
 	public final URL getCodeBase() {
 		if (frame == null) {
-			return signlink == null || signlink.field3597 == this ? super.getCodeBase() : signlink.field3597.getCodeBase();
+			return signlink == null || signlink.applet == this ? super.getCodeBase() : signlink.applet.getCodeBase();
 		} else {
 			return null;
 		}
@@ -329,7 +329,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public synchronized void addcanvas() {
 		Container var1;
 		if (frame == null) {
-			var1 = signlink.field3597;
+			var1 = signlink.applet;
 		} else {
 			var1 = frame;
 		}
@@ -405,7 +405,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@Override
 	public final AppletContext getAppletContext() {
 		if (frame == null) {
-			return signlink == null || signlink.field3597 == this ? super.getAppletContext() : signlink.field3597.getAppletContext();
+			return signlink == null || signlink.applet == this ? super.getAppletContext() : signlink.applet.getAppletContext();
 		} else {
 			return null;
 		}
@@ -422,15 +422,15 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			}
 			alreadyshutdown = true;
 		}
-		if (signlink.field3597 != null) {
-			signlink.field3597.destroy();
+		if (signlink.applet != null) {
+			signlink.applet.destroy();
 		}
 		if (canvas != null) {
 			try {
 				canvas.removeFocusListener(this);
 				Container var3;
 				if (frame == null) {
-					var3 = signlink.field3597;
+					var3 = signlink.applet;
 				} else {
 					var3 = frame;
 				}
@@ -537,7 +537,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@Override
 	public final String getParameter(String arg0) {
 		if (frame == null) {
-			return signlink == null || signlink.field3597 == this ? super.getParameter(arg0) : signlink.field3597.getParameter(arg0);
+			return signlink == null || signlink.applet == this ? super.getParameter(arg0) : signlink.applet.getParameter(arg0);
 		} else {
 			return null;
 		}
@@ -564,11 +564,11 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 					return;
 				}
 			}
-			if (signlink.field3597 != null) {
+			if (signlink.applet != null) {
 				Method var3 = SignLink.setFocusCycleRoot;
 				if (var3 != null) {
 					try {
-						var3.invoke(signlink.field3597, Boolean.TRUE);
+						var3.invoke(signlink.applet, Boolean.TRUE);
 					} catch (Throwable var6) {
 					}
 				}
@@ -640,7 +640,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@Override
 	public final URL getDocumentBase() {
 		if (frame == null) {
-			return signlink == null || signlink.field3597 == this ? super.getDocumentBase() : signlink.field3597.getDocumentBase();
+			return signlink == null || signlink.applet == this ? super.getDocumentBase() : signlink.applet.getDocumentBase();
 		} else {
 			return null;
 		}

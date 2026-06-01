@@ -36,26 +36,977 @@ import java.util.*;
 @ObfuscatedName("client")
 public final class Client extends GameShell {
 
-	@ObfuscatedName("pc.n")
-	public static final CollisionMap[] collision = new CollisionMap[4];
+	@ObfuscatedName("fa.S")
+	public static boolean mouseTracked = false;
+
+	@ObfuscatedName("ce.Y")
+	public static int worldid = 1;
+
+	@ObfuscatedName("mh.cb")
+	public static int modewhat = 0;
+
+	@ObfuscatedName("kf.a")
+	public static int modewhere = 0;
+
+	@ObfuscatedName("eb.R")
+	public static int modegame = 0;
+
+	@ObfuscatedName("g.m")
+	public static boolean memServer = false;
+
+	@ObfuscatedName("wf.b")
+	public static boolean lowMem = false;
+
+	@ObfuscatedName("lf.nb")
+	public static int lang = 0;
+
+	@ObfuscatedName("gd.A")
+	public static int js = 1;
+
+	@ObfuscatedName("na.Z")
+	public static int plug = 0;
+
+	@ObfuscatedName("ac.D")
+	public static int affid = 0;
+
+	@ObfuscatedName("v.E")
+	public static int state = 0;
+
+	@ObfuscatedName("ob.q")
+	public static boolean js5Loading = true;
+
+	@ObfuscatedName("kh.I")
+	public static int loopCycle = 0;
+
+	@ObfuscatedName("ja.c")
+	public static long prevMouseClickTime = 0L;
+
+	@ObfuscatedName("ua.m")
+	public static MouseTracking mouseTracking;
+
+	@ObfuscatedName("af.U")
+	public static int mouseTrackedX = 0;
+
+	@ObfuscatedName("td.bb")
+	public static int mouseTrackedY = 0;
+
+	@ObfuscatedName("ne.n")
+	public static int mouseTrackedDelta = 0;
+
+	@ObfuscatedName("bj.Bb")
+	public static boolean focusIn = true;
+
+	@ObfuscatedName("nf.E")
+	public static boolean showFps = false;
+
+	@ObfuscatedName("ke.K")
+	public static int rebootTimer = 0;
+
+	@ObfuscatedName("fh.o")
+	public static final HintArrow[] field1171 = new HintArrow[4];
+
+	@ObfuscatedName("ei.e")
+	public static final Packet tempP = new Packet(new byte[5000]);
+
+	@ObfuscatedName("ed.b")
+	public static PrivilegedRequest lastAddress;
+
+	@ObfuscatedName("ci.s")
+	public static int loadingStep = 0;
+
+	@ObfuscatedName("ff.fb")
+	public static PrivilegedRequest js5SocketReq;
+
+	@ObfuscatedName("re.n")
+	public static ClientStream js5Stream;
+
+	@ObfuscatedName("we.D")
+	public static int js5ConnectState = 0;
+
+	@ObfuscatedName("pa.d")
+	public static int js5ConnectCooldown = 0;
+
+	@ObfuscatedName("jc.P")
+	public static long js5ConnectTime;
+
+	@ObfuscatedName("g.b")
+	public static Js5Loader anims;
+
+	@ObfuscatedName("ue.i")
+	public static Js5Loader bases;
+
+	@ObfuscatedName("hh.gb")
+	public static Js5Loader configs;
+
+	@ObfuscatedName("ia.j")
+	public static Js5Loader interfaces;
+
+	@ObfuscatedName("b.e")
+	public static Js5Loader jagFX;
+
+	@ObfuscatedName("cd.a")
+	public static Js5Loader maps;
+
+	@ObfuscatedName("ja.m")
+	public static Js5Loader songs;
+
+	@ObfuscatedName("vd.a")
+	public static Js5Loader models;
+
+	@ObfuscatedName("uh.O")
+	public static Js5Loader sprites;
+
+	@ObfuscatedName("fj.g")
+	public static Js5Loader textures;
+
+	@ObfuscatedName("ah.H")
+	public static Js5Loader binary;
+
+	@ObfuscatedName("mb.W")
+	public static Js5Loader jingles;
+
+	@ObfuscatedName("bf.K")
+	public static Js5Loader scripts;
+
+	@ObfuscatedName("j.b")
+	public static Js5Loader fontmetrics;
+
+	@ObfuscatedName("bf.p")
+	public static Js5Loader vorbis;
+
+	@ObfuscatedName("ne.i")
+	public static Js5Loader patches;
+
+	@ObfuscatedName("k.xb")
+	public static Js5Loader configLoc;
+
+	@ObfuscatedName("re.f")
+	public static Js5Loader configEnum;
+
+	@ObfuscatedName("oi.o")
+	public static Js5Loader configNpc;
+
+	@ObfuscatedName("wi.t")
+	public static Js5Loader configObj;
+
+	@ObfuscatedName("s.lb")
+	public static Js5Loader configSeq;
+
+	@ObfuscatedName("be.y")
+	public static Js5Loader configSpot;
+
+	@ObfuscatedName("vi.g")
+	public static Js5Loader configVarbit;
+
+	@ObfuscatedName("lj.m")
+	public static Js5Loader worldmap;
+
+	@ObfuscatedName("bh.O")
+	public static Js5Loader quickchat;
+
+	@ObfuscatedName("sg.w")
+	public static Js5Loader quickchatGlobal;
+
+	@ObfuscatedName("oc.w")
+	public static Js5Loader materials;
+
+	@ObfuscatedName("kj.h")
+	public static int js5Errors = 0;
+
+	@ObfuscatedName("pd.lb")
+	public static DataFile masterIndex;
+
+	@ObfuscatedName("kh.M")
+	public static int loginStep = 0;
+
+	@ObfuscatedName("ae.Kb")
+	public static int loginWaitingTime = 0;
+
+	@ObfuscatedName("s.Y")
+	public static int loginFailCount = 0;
+
+	@ObfuscatedName("vh.U")
+	public static int loginHopTimer = 0;
+
+	@ObfuscatedName("ih.b")
+	public static String loginHost;
+
+	@ObfuscatedName("ub.Y")
+	public static int loginGamePort;
+
+	@ObfuscatedName("ed.a")
+	public static int loginJs5Port;
+
+	@ObfuscatedName("pe.L")
+	public static int loginPort;
+
+	@ObfuscatedName("ug.f")
+	public static final ClientNpc[] npc = new ClientNpc[32768];
+
+	@ObfuscatedName("ej.B")
+	public static int npcCount = 0;
+
+	@ObfuscatedName("cb.g")
+	public static final int[] npcIds = new int[32768];
+
+	@ObfuscatedName("j.h")
+	public static PrivilegedRequest loginSocketReq;
+
+	@ObfuscatedName("cj.hb")
+	public static ClientStream stream;
+
+	@ObfuscatedName("ia.e")
+	public static ClientStream prevStream;
+
 	@ObfuscatedName("nd.u")
 	public static final PacketBit out = new PacketBit(5000);
-	@ObfuscatedName("va.v")
-	public static final PacketBit in = new PacketBit(5000);
+
 	@ObfuscatedName("ch.g")
 	public static final PacketBit loginout = new PacketBit(5000);
+
+	@ObfuscatedName("va.v")
+	public static final PacketBit in = new PacketBit(5000);
+
+	@ObfuscatedName("uj.d")
+	public static int psize = 0;
+
+	@ObfuscatedName("vi.f")
+	public static int ptype = 0;
+
+	@ObfuscatedName("rg.F")
+	public static int timeoutTimer = 0;
+
+	@ObfuscatedName("nb.V")
+	public static int noTimeoutTimer = 0;
+
+	@ObfuscatedName("jg.J")
+	public static int logoutTimer = 0;
+
+	@ObfuscatedName("jc.Q")
+	public static int ptype0 = 0;
+
+	@ObfuscatedName("ea.N")
+	public static int ptype1 = 0;
+
+	@ObfuscatedName("i.J")
+	public static int ptype2 = 0;
+
+	@ObfuscatedName("fb.gb")
+	public static boolean networkError = false;
+
+	@ObfuscatedName("ed.g")
+	public static PixfontGeneric p11;
+
+	@ObfuscatedName("ab.e")
+	public static PixfontGeneric p12;
+
+	@ObfuscatedName("ei.j")
+	public static PixfontGeneric b12;
+
+	@ObfuscatedName("ue.t")
+	public static int mapBuildBaseX;
+
+	@ObfuscatedName("re.m")
+	public static int mapBuildBaseZ;
+
+	@ObfuscatedName("oe.j")
+	public static int lastBuiltLevel = 0;
+
+	@ObfuscatedName("mi.X")
+	public static int mapBuildCentreZoneX;
+
+	@ObfuscatedName("ka.j")
+	public static int mapBuildCentreZoneZ;
+
+	@ObfuscatedName("pc.n")
+	public static final CollisionMap[] collision = new CollisionMap[4];
+
+	@ObfuscatedName("j.a")
+	public static final int[] LOC_SHAPE_TO_LAYER = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 };
+
+	@ObfuscatedName("la.i")
+	public static int zoneUpdateX;
+
+	@ObfuscatedName("nh.b")
+	public static int zoneUpdateZ;
+
+	@ObfuscatedName("re.g")
+	public static final int[][] dirMap = new int[104][104];
+
+	@ObfuscatedName("uj.a")
+	public static final int[][] distMap = new int[104][104];
+
+	@ObfuscatedName("l.kb")
+	public static final int[] routeX = new int[4096];
+
+	@ObfuscatedName("ij.E")
+	public static final int[] routeZ = new int[4096];
+
+	@ObfuscatedName("ue.g")
+	public static int macroCameraX = 0;
+
+	@ObfuscatedName("me.B")
+	public static int macroCameraXModifier = 2;
+
+	@ObfuscatedName("cj.N")
+	public static int macroCameraZ = 0;
+
+	@ObfuscatedName("vc.cb")
+	public static int macroCameraZModifier = 2;
+
+	@ObfuscatedName("j.d")
+	public static int macroCameraAngle = 0;
+
+	@ObfuscatedName("cf.e")
+	public static int macroCameraAngleModifier = 1;
+
+	@ObfuscatedName("kb.u")
+	public static int macroCameraCycle = 0;
+
+	@ObfuscatedName("eg.y")
+	public static int macroMinimapAngle = 0;
+
+	@ObfuscatedName("i.U")
+	public static int macroMinimapAngleModifier = 2;
+
+	@ObfuscatedName("fi.F")
+	public static int macroMinimapZoom = 0;
+
+	@ObfuscatedName("oi.m")
+	public static int macroMinimapZoomModifier = 1;
+
+	@ObfuscatedName("h.F")
+	public static int macroMinimapCycle = 0;
+
+	@ObfuscatedName("be.l")
+	public static int worldUpdateNum = 0;
+
+	@ObfuscatedName("eb.U")
+	public static Pix32 compass;
+
+	@ObfuscatedName("kd.V")
+	public static Pix32[] hintMapedge;
+
+	@ObfuscatedName("wa.h")
+	public static SoftwarePix8[] mapscene;
+
+	@ObfuscatedName("ch.k")
+	public static SoftwarePix32[] mapfunction;
+
+	@ObfuscatedName("nc.e")
+	public static Pix32[] hitmarks;
+
+	@ObfuscatedName("vi.a")
+	public static Pix32[] headiconsPk;
+
+	@ObfuscatedName("lj.a")
+	public static Pix32[] headiconsPrayer;
+
+	@ObfuscatedName("qb.P")
+	public static Pix32[] headiconsHint;
+
+	@ObfuscatedName("ui.K")
+	public static Pix32[] hintMapmarkers;
+
+	@ObfuscatedName("ob.s")
+	public static Pix32[] cross;
+
+	@ObfuscatedName("da.S")
+	public static Pix32[] mapdots;
+
+	@ObfuscatedName("af.P")
+	public static Pix8[] scrollbar;
+
+	@ObfuscatedName("d.ab")
+	public static Pix8[] modIcons;
+
+	@ObfuscatedName("vi.h")
+	public static final int SCROLLBAR_TRACK = 2301979;
+
+	@ObfuscatedName("ab.a")
+	public static final int SCROLLBAR_GRIP_FOREGROUND = 5063219;
+
+	@ObfuscatedName("eg.u")
+	public static final int SCROLLBAR_GRIP_LOWLIGHT = 3353893;
+
+	@ObfuscatedName("va.z")
+	public static final int SCROLLBAR_GRIP_HIGHLIGHT = 7759444;
+
+	@ObfuscatedName("a.i")
+	public static boolean scrollGrabbed = false;
+
+	@ObfuscatedName("lf.X")
+	public static int scrollInputPadding = 0;
+
+	@ObfuscatedName("hb.U")
+	public static int camX;
+
+	@ObfuscatedName("jj.v")
+	public static int camY;
+
+	@ObfuscatedName("qj.Y")
+	public static int camZ;
+
+	@ObfuscatedName("t.v")
+	public static int camPitch;
+
+	@ObfuscatedName("pg.G")
+	public static int camYaw;
+
+	@ObfuscatedName("fh.q")
+	public static int orbitCameraPitch = 128;
+
+	@ObfuscatedName("t.r")
+	public static int orbitCameraYaw = 0;
+
+	@ObfuscatedName("ej.i")
+	public static int orbitCameraPitchVelocity = 0;
+
+	@ObfuscatedName("hh.R")
+	public static int orbitCameraYawVelocity = 0;
+
+	@ObfuscatedName("dc.e")
+	public static int orbitCameraX;
+
+	@ObfuscatedName("vd.b")
+	public static int orbitCameraZ;
+
+	@ObfuscatedName("i.N")
+	public static int sendCameraDelay = 0;
+
+	@ObfuscatedName("qb.S")
+	public static boolean sendCamera = true;
+
+	@ObfuscatedName("ge.O")
+	public static int cameraPitchClamp = 0;
+
+	@ObfuscatedName("jg.R")
+	public static int chatCount = 0;
+
+	@ObfuscatedName("t.m")
+	public static final int MAX_CHATS = 50;
+
+	@ObfuscatedName("t.z")
+	public static final int[] chatX = new int[MAX_CHATS];
+
+	@ObfuscatedName("t.B")
+	public static final int[] chatY = new int[MAX_CHATS];
+
+	@ObfuscatedName("t.q")
+	public static final int[] chatHeight = new int[MAX_CHATS];
+
+	@ObfuscatedName("t.s")
+	public static final int[] chatWidth = new int[MAX_CHATS];
+
+	@ObfuscatedName("t.y")
+	public static final int[] chatColour = new int[MAX_CHATS];
+
+	@ObfuscatedName("t.t")
+	public static final int[] chatEffect = new int[MAX_CHATS];
+
+	@ObfuscatedName("t.n")
+	public static final int[] chatTimer = new int[MAX_CHATS];
+
+	@ObfuscatedName("t.u")
+	public static final JagString[] chats = new JagString[MAX_CHATS];
+
+	@ObfuscatedName("o.W")
+	public static final int[][] tileLastOccupiedCycle = new int[104][104];
+
+	@ObfuscatedName("tc.K")
+	public static int sceneCycle = 0;
+
+	@ObfuscatedName("cb.f")
+	public static int projectX = -1;
+
+	@ObfuscatedName("cj.S")
+	public static int projectY = -1;
+
+	@ObfuscatedName("ne.f")
+	public static int crossX = 0;
+
+	@ObfuscatedName("oc.z")
+	public static int crossY = 0;
+
+	@ObfuscatedName("e.mb")
+	public static int crossCycle = 0;
+
+	@ObfuscatedName("oe.a")
+	public static int crossMode = 0;
+
+	@ObfuscatedName("fa.gb")
+	public static IfType selectedCom;
+
+	@ObfuscatedName("mh.R")
+	public static int selectedCycle = 0;
+
+	@ObfuscatedName("ie.h")
+	public static int selectedItem = 0;
+
+	@ObfuscatedName("md.ab")
+	public static IfType objDragCom;
+
+	@ObfuscatedName("ug.l")
+	public static IfType hoveredSlotCom;
+
+	@ObfuscatedName("bf.P")
+	public static int objDragSlot = 0;
+
+	@ObfuscatedName("ua.p")
+	public static int objGrabX = 0;
+
+	@ObfuscatedName("ec.F")
+	public static int objGrabY = 0;
+
+	@ObfuscatedName("di.hb")
+	public static boolean objGrabThreshold = false;
+
+	@ObfuscatedName("wi.e")
+	public static int objDragCycles = 0;
+
+	@ObfuscatedName("pi.R")
+	public static int hoveredSlot = 0;
+
+	@ObfuscatedName("client.V")
+	public static int chatDisabled = 0;
+
+	@ObfuscatedName("we.B")
+	public static final ClientPlayer[] players = new ClientPlayer[2048];
+
+	@ObfuscatedName("ej.n")
+	public static int playerCount = 0;
+
+	@ObfuscatedName("q.lb")
+	public static final int[] playerIds = new int[2048];
+
+	@ObfuscatedName("rg.H")
+	public static int entityUpdateCount = 0;
+
+	@ObfuscatedName("mh.X")
+	public static final int[] entityUpdateIds = new int[2048];
+
+	@ObfuscatedName("h.S")
+	public static final Packet[] playerAppearanceBuffer = new Packet[2048];
+
+	@ObfuscatedName("ng.Yb")
+	public static int minusedlevel;
+
+	@ObfuscatedName("ub.gb")
+	public static int selfSlot = -1;
+
+	@ObfuscatedName("wa.d")
+	public static ClientPlayer localPlayer;
+
+	@ObfuscatedName("ae.Lb")
+	public static int membersAccount = 0;
+
+	@ObfuscatedName("ue.d")
+	public static int entityRemovalCount = 0;
+
+	@ObfuscatedName("eh.G")
+	public static final int[] entityRemovalIds = new int[1000];
+
+	@ObfuscatedName("lj.i")
+	public static final JagString[] playerOp = new JagString[8];
+
+	@ObfuscatedName("sg.B")
+	public static final boolean[] playerOpPriority = new boolean[8];
+
 	@ObfuscatedName("ae.Ob")
 	public static final int[] ANGLE_TO_DIR = new int[] { 768, 1024, 1280, 512, 1536, 256, 0, 1792 };
-	@ObfuscatedName("hd.o")
-	public static final int[] componentDrawX = new int[100];
-	@ObfuscatedName("ma.ab")
-	public static final int[] componentDrawY = new int[100];
-	@ObfuscatedName("mb.V")
-	public static final int[] componentDrawWidth = new int[100];
-	@ObfuscatedName("hc.Z")
-	public static final int[] componentDrawHeight = new int[100];
+
+	@ObfuscatedName("mc.f")
+	public static final LinkList[][][] groundObj = new LinkList[4][104][104];
+
+	@ObfuscatedName("ff.U")
+	public static LinkList locChanges = new LinkList();
+
+	@ObfuscatedName("pd.ib")
+	public static final LinkList projectiles = new LinkList();
+
+	@ObfuscatedName("dh.f")
+	public static final LinkList spotanims = new LinkList();
+
+	@ObfuscatedName("jg.G")
+	public static final int[] statEffectiveLevel = new int[25];
+
+	@ObfuscatedName("tj.l")
+	public static final int[] statBaseLevel = new int[25];
+
+	@ObfuscatedName("qe.h")
+	public static final int[] statXP = new int[25];
+
+	@ObfuscatedName("sg.l")
+	public static int oneMouseButton = 0;
+
+	@ObfuscatedName("jj.z")
+	public static boolean isMenuOpen = false;
+
+	@ObfuscatedName("sg.o")
+	public static int menuNumEntries = 0;
+
+	@ObfuscatedName("mb.X")
+	public static int menuMouseX = -1;
+
+	@ObfuscatedName("fb.kb")
+	public static int menuMouseY = -1;
+
+	@ObfuscatedName("db.D")
+	public static IfType tooltipCom;
+
+	@ObfuscatedName("ea.zb")
+	public static int tooltipNum = 0;
+
+	@ObfuscatedName("mg.Cb")
+	public static final int tooltipRedraw = 50;
+
+	@ObfuscatedName("ce.db")
+	public static int useMode = 0;
+
+	@ObfuscatedName("ec.Q")
+	public static int objComId;
+
+	@ObfuscatedName("tb.j")
+	public static int objSelectedComId;
+
+	@ObfuscatedName("fb.ob")
+	public static int objSelectedSlot;
+
+	@ObfuscatedName("ai.e")
+	public static boolean targetMode = false;
+
+	@ObfuscatedName("client.bb")
+	public static int targetCom = -1;
+
+	@ObfuscatedName("kf.n")
+	public static int targetMask;
+
+	@ObfuscatedName("bd.n")
+	public static int targetSub;
+
+	@ObfuscatedName("se.d")
+	public static JagString targetVerb = null;
+
+	@ObfuscatedName("ce.S")
+	public static JagString targetOp = null;
+
+	@ObfuscatedName("di.R")
+	public static int toplevelinterface = -1;
+
+	@ObfuscatedName("lh.Q")
+	public static HashTable subinterfaces = new HashTable(8);
+
+	@ObfuscatedName("fi.w")
+	public static IfType overCom;
+
+	@ObfuscatedName("mf.p")
+	public static int chatEffects = 0;
+
+	@ObfuscatedName("oc.t")
+	public static int bankArrangeMode = 0;
+
+	@ObfuscatedName("eh.a")
+	public static IfType resumePauseCom = null;
+
+	@ObfuscatedName("wa.f")
+	public static int runenergy = 0;
+
+	@ObfuscatedName("sc.F")
+	public static int runweight = 0;
+
+	@ObfuscatedName("g.f")
+	public static int staffmodlevel = 0;
+
+	@ObfuscatedName("ja.f")
+	public static final boolean showOpIndex = false;
+
+	@ObfuscatedName("qe.n")
+	public static IfType dragCom = null;
+
+	@ObfuscatedName("ed.m")
+	public static IfType dragLayer = null;
+
+	@ObfuscatedName("qe.j")
+	public static IfType[] dragChildren;
+
+	@ObfuscatedName("ig.U")
+	public static int dragChildX;
+
+	@ObfuscatedName("ae.Qb")
+	public static int dragChildY;
+
+	@ObfuscatedName("nf.bb")
+	public static int dragPickupX = 0;
+
+	@ObfuscatedName("t.C")
+	public static int dragPickupY = 0;
+
+	@ObfuscatedName("lb.j")
+	public static IfType dropCom = null;
+
+	@ObfuscatedName("ng.Wb")
+	public static boolean dragParentFound = false;
+
+	@ObfuscatedName("lg.x")
+	public static int dragParentX = -1;
+
+	@ObfuscatedName("ce.U")
+	public static int dragParentY = -1;
+
+	@ObfuscatedName("cf.k")
+	public static boolean dragging = false;
+
+	@ObfuscatedName("bb.b")
+	public static int dragCurrentX = -1;
+
+	@ObfuscatedName("md.S")
+	public static int dragCurrentY = -1;
+
+	@ObfuscatedName("sg.t")
+	public static boolean dragAlive = false;
+
+	@ObfuscatedName("ui.J")
+	public static int dragTime;
+
+	@ObfuscatedName("g.i")
+	public static int transmitNum = 1;
+
+	@ObfuscatedName("we.F")
+	public static final int[] varTransmit = new int[32];
+
+	@ObfuscatedName("uh.P")
+	public static int varTransmitNum = 0;
+
+	@ObfuscatedName("vb.K")
+	public static final int[] invTransmit = new int[32];
+
+	@ObfuscatedName("ue.f")
+	public static int invTransmitNum = 0;
+
+	@ObfuscatedName("na.K")
+	public static final int[] statTransmit = new int[32];
+
+	@ObfuscatedName("ki.a")
+	public static int statTransmitNum = 0;
+
+	@ObfuscatedName("af.I")
+	public static int chatTransmitNum = 0;
+
+	@ObfuscatedName("bh.F")
+	public static int friendTransmitNum = 0;
+
+	@ObfuscatedName("h.P")
+	public static int clanTransmitNum = 0;
+
+	@ObfuscatedName("ta.ab")
+	public static int miscTransmitNum = 0;
+
+	@ObfuscatedName("pd.kb")
+	public static MouseWheelInterface mouseWheel;
+
+	@ObfuscatedName("ib.C")
+	public static int mouseWheelRotation = 0;
+
+	@ObfuscatedName("gh.t")
+	public static final LinkList hookRequests = new LinkList();
+
+	@ObfuscatedName("da.ob")
+	public static final LinkList hookRequestsTimer = new LinkList();
+
+	@ObfuscatedName("sc.bb")
+	public static final LinkList hookRequestsMouseStop = new LinkList();
+
+	@ObfuscatedName("ch.a")
+	public static HashTable serverActive = new HashTable(512);
+
+	@ObfuscatedName("sj.f")
+	public static int componentDrawCount = 0;
+
+	@ObfuscatedName("ka.n")
+	public static int componentDrawTime = -2;
+
+	@ObfuscatedName("ug.k")
+	public static final boolean[] componentDirtyArea = new boolean[100];
+
 	@ObfuscatedName("td.cb")
 	public static final boolean[] componentBlitArea = new boolean[100];
+
+	@ObfuscatedName("kd.X")
+	public static final boolean[] componentRedraw = new boolean[100];
+
+	@ObfuscatedName("hd.o")
+	public static final int[] componentDrawX = new int[100];
+
+	@ObfuscatedName("ma.ab")
+	public static final int[] componentDrawY = new int[100];
+
+	@ObfuscatedName("mb.V")
+	public static final int[] componentDrawWidth = new int[100];
+
+	@ObfuscatedName("hc.Z")
+	public static final int[] componentDrawHeight = new int[100];
+
+	@ObfuscatedName("mc.l")
+	public static int componentRectDebug = 0;
+
+	@ObfuscatedName("ri.S")
+	public static final int[] chatType = new int[100];
+
+	@ObfuscatedName("la.b")
+	public static final JagString[] chatUsername = new JagString[100];
+
+	@ObfuscatedName("uj.n")
+	public static final JagString[] chatScreenName = new JagString[100];
+
+	@ObfuscatedName("te.ab")
+	public static final JagString[] chatText = new JagString[100];
+
+	@ObfuscatedName("d.V")
+	public static int chatHistoryLength = 0;
+
+	@ObfuscatedName("sd.a")
+	public static final int[] CHAT_COLOURS = new int[] { 16776960, 16711680, 65280, 65535, 16711935, 16777215 };
+
+	@ObfuscatedName("g.d")
+	public static int chatPublicMode = 0;
+
+	@ObfuscatedName("ai.b")
+	public static int chatPrivateMode = 0;
+
+	@ObfuscatedName("lh.db")
+	public static int chatTradeMode = 0;
+
+	@ObfuscatedName("ih.f")
+	public static final long[] messageIds = new long[100];
+
+	@ObfuscatedName("g.s")
+	public static int privateMessageCount = 0;
+
+	@ObfuscatedName("pg.yb")
+	public static byte chatMinKick;
+
+	@ObfuscatedName("na.y")
+	public static byte chatRank;
+
+	@ObfuscatedName("i.X")
+	public static ClanChannelUser[] friendChatList;
+
+	@ObfuscatedName("eb.S")
+	public static int friendChatCount;
+
+	@ObfuscatedName("hd.A")
+	public static int keypresses = 0;
+
+	@ObfuscatedName("rf.Kb")
+	public static final int[] keypressKeychars = new int[128];
+
+	@ObfuscatedName("wc.L")
+	public static final int[] keypressKeycodes = new int[128];
+
+	@ObfuscatedName("ud.d")
+	public static JagString chatDisplayName = null;
+
+	@ObfuscatedName("ug.b")
+	public static JagString chatOwnerName = null;
+
+	@ObfuscatedName("pi.U")
+	public static int minimapLevel = -1;
+
+	@ObfuscatedName("kg.eb")
+	public static int minimapFlagX = 0;
+
+	@ObfuscatedName("mi.W")
+	public static int minimapFlagZ = 0;
+
+	@ObfuscatedName("wh.E")
+	public static int minimapState = 0;
+
+	@ObfuscatedName("q.Cb")
+	public static int waveCount = 0;
+
+	@ObfuscatedName("cb.b")
+	public static final int[] waveSoundIds = new int[50];
+
+	@ObfuscatedName("ka.l")
+	public static final int[] waveLoops = new int[50];
+
+	@ObfuscatedName("ag.b")
+	public static final int[] waveDelay = new int[50];
+
+	@ObfuscatedName("nc.m")
+	public static final int[] waveAmbient = new int[50];
+
+	@ObfuscatedName("vh.N")
+	public static final JagFX[] waveSounds = new JagFX[50];
+
+	@ObfuscatedName("qe.m")
+	public static boolean cinemaCam = false;
+
+	@ObfuscatedName("vd.d")
+	public static final boolean[] camShake = new boolean[5];
+
+	@ObfuscatedName("se.c")
+	public static final int[] camShakeAxis = new int[5];
+
+	@ObfuscatedName("fj.h")
+	public static final int[] camShakeRan = new int[5];
+
+	@ObfuscatedName("ri.Y")
+	public static final int[] camShakeAmp = new int[5];
+
+	@ObfuscatedName("re.h")
+	public static final int[] camShakeCycle = new int[5];
+
+	@ObfuscatedName("md.Y")
+	public static int camMoveToLx;
+
+	@ObfuscatedName("ph.X")
+	public static int camMoveToLz;
+
+	@ObfuscatedName("gd.j")
+	public static int camMoveToHei;
+
+	@ObfuscatedName("wg.u")
+	public static int camMoveToRate;
+
+	@ObfuscatedName("oh.q")
+	public static int camMoveToRate2;
+
+	@ObfuscatedName("ea.ob")
+	public static int camLookAtLx;
+
+	@ObfuscatedName("c.C")
+	public static int camLookAtLz;
+
+	@ObfuscatedName("fj.n")
+	public static int camLookAtHei;
+
+	@ObfuscatedName("ah.z")
+	public static int camLookAtRate;
+
+	@ObfuscatedName("nd.p")
+	public static int camLookAtRate2;
+
+	@ObfuscatedName("uh.T")
+	public static Mixer mixer;
+
+	@ObfuscatedName("kh.U")
+	public static Decimator decimator;
+
+	@ObfuscatedName("ke.F")
+	public static PcmPlayer synthPlayer;
+
+	@ObfuscatedName("cd.h")
+	public static PcmPlayer midiPlayer;
+
+	@ObfuscatedName("nd.c")
+	public static int friendCount = 0;
+
+	@ObfuscatedName("kf.h")
+	public static int friendServerStatus = 0;
+
+	// ---- todo: sort fields
+
 	@ObfuscatedName("eh.B")
 	public static final short[] menuAction = new short[500];
 	@ObfuscatedName("fj.e")
@@ -63,33 +1014,11 @@ public final class Client extends GameShell {
 	@ObfuscatedName("se.e")
 	public static final JagString[] menuSubject = new JagString[500];
 	@ObfuscatedName("q.Kb")
-	public static final JagString field3453 = JagString.wrap("");
-	@ObfuscatedName("ug.k")
-	public static final boolean[] componentDirtyArea = new boolean[100];
-	@ObfuscatedName("kd.X")
-	public static final boolean[] componentRedraw = new boolean[100];
+	public static final JagString AUTO_EMPTY = JagString.wrap("");
 	@ObfuscatedName("fb.hb")
 	public static final BigInteger field1098 = new BigInteger("7162900525229798032761816791230527296329313291232324290237849263501208207972894053929065636522363163621000728841182238772712427862772219676577293600221789");
-	@ObfuscatedName("re.g")
-	public static final int[][] dirMap = new int[104][104];
-	@ObfuscatedName("uj.a")
-	public static final int[][] distMap = new int[104][104];
-	@ObfuscatedName("l.kb")
-	public static final int[] routeX = new int[4096];
-	@ObfuscatedName("ij.E")
-	public static final int[] routeZ = new int[4096];
-	@ObfuscatedName("ei.e")
-	public static final Packet field1006 = new Packet(new byte[5000]);
 	@ObfuscatedName("ci.o")
 	public static final BigInteger field515 = new BigInteger("58778699976184461502525193738213253649000149147835990136706041084440742975821");
-	@ObfuscatedName("ri.S")
-	public static final int[] chatType = new int[100];
-	@ObfuscatedName("la.b")
-	public static final JagString[] chatUsername = new JagString[100];
-	@ObfuscatedName("te.ab")
-	public static final JagString[] chatText = new JagString[100];
-	@ObfuscatedName("uj.n")
-	public static final JagString[] chatScreenName = new JagString[100];
 	@ObfuscatedName("mb.T")
 	public static final int[] field2483 = new int[100];
 	@ObfuscatedName("ng.Mb")
@@ -106,32 +1035,12 @@ public final class Client extends GameShell {
 	public static final JagString field2499 = JagString.wrap("(U5");
 	@ObfuscatedName("rc.G")
 	public static final JagString field3646 = JagString.wrap("(Udns");
-	@ObfuscatedName("ih.f")
-	public static final long[] messageIds = new long[100];
 	@ObfuscatedName("nd.o")
 	public static final JagString[] field2741 = new JagString[100];
 	@ObfuscatedName("fc.m")
-	public static final JagString field1118 = JagString.wrap("zap");
+	public static final JagString zap = JagString.wrap("zap");
 	@ObfuscatedName("qf.Y")
-	public static final JagString field3577 = JagString.wrap("unzap");
-	@ObfuscatedName("mh.X")
-	public static final int[] entityUpdateIds = new int[2048];
-	@ObfuscatedName("eh.G")
-	public static final int[] entityRemovalIds = new int[1000];
-	@ObfuscatedName("we.B")
-	public static final ClientPlayer[] players = new ClientPlayer[2048];
-	@ObfuscatedName("q.lb")
-	public static final int[] playerIds = new int[2048];
-	@ObfuscatedName("h.S")
-	public static final Packet[] playerAppearanceBuffer = new Packet[2048];
-	@ObfuscatedName("ug.f")
-	public static final ClientNpc[] npc = new ClientNpc[32768];
-	@ObfuscatedName("mc.f")
-	public static final LinkList[][][] groundObj = new LinkList[4][104][104];
-	@ObfuscatedName("dh.f")
-	public static final LinkList spotanims = new LinkList();
-	@ObfuscatedName("pd.ib")
-	public static final LinkList projectiles = new LinkList();
+	public static final JagString unzap = JagString.wrap("unzap");
 	@ObfuscatedName("pb.F")
 	public static final int[] menuParamB = new int[500];
 	@ObfuscatedName("tj.f")
@@ -140,16 +1049,6 @@ public final class Client extends GameShell {
 	public static final long[] menuParamA = new long[500];
 	@ObfuscatedName("ah.L")
 	public static final StockMarketSlot[] field140 = new StockMarketSlot[6];
-	@ObfuscatedName("cb.b")
-	public static final int[] waveSoundIds = new int[50];
-	@ObfuscatedName("ka.l")
-	public static final int[] waveLoops = new int[50];
-	@ObfuscatedName("ag.b")
-	public static final int[] waveDelay = new int[50];
-	@ObfuscatedName("vh.N")
-	public static final JagFX[] waveSounds = new JagFX[50];
-	@ObfuscatedName("nc.m")
-	public static final int[] waveAmbient = new int[50];
 	@ObfuscatedName("kf.p")
 	public static final long[] field2086 = new long[200];
 	@ObfuscatedName("ha.G")
@@ -174,52 +1073,8 @@ public final class Client extends GameShell {
 	public static final JagString AUTO_RECT_DEBUG = JagString.wrap("::rect_debug");
 	@ObfuscatedName("jh.j")
 	public static final JagString AUTO_QA_OP_TEST = JagString.wrap("::qa_op_test");
-	@ObfuscatedName("mg.Cb")
-	public static final int tooltipRedraw = 50;
-	@ObfuscatedName("gh.t")
-	public static final LinkList hookRequests = new LinkList();
-	@ObfuscatedName("sc.bb")
-	public static final LinkList hookRequestsMouseStop = new LinkList();
-	@ObfuscatedName("da.ob")
-	public static final LinkList hookRequestsTimer = new LinkList();
-	@ObfuscatedName("rf.Kb")
-	public static final int[] keypressKeychars = new int[128];
-	@ObfuscatedName("wc.L")
-	public static final int[] keypressKeycodes = new int[128];
-	@ObfuscatedName("qe.h")
-	public static final int[] statXP = new int[25];
-	@ObfuscatedName("jg.G")
-	public static final int[] statEffectiveLevel = new int[25];
-	@ObfuscatedName("tj.l")
-	public static final int[] statBaseLevel = new int[25];
-	@ObfuscatedName("na.K")
-	public static final int[] statTransmit = new int[32];
 	@ObfuscatedName("ca.i")
 	public static final short[] field390 = new short[] { 30, 58, 29, 45, 37, 16, 1, 50 };
-	@ObfuscatedName("sg.B")
-	public static final boolean[] playerOpPriority = new boolean[8];
-	@ObfuscatedName("lj.i")
-	public static final JagString[] playerOp = new JagString[8];
-	@ObfuscatedName("t.m")
-	public static final int MAX_CHATS = 50;
-	@ObfuscatedName("t.n")
-	public static final int[] chatTimer = new int[MAX_CHATS];
-	@ObfuscatedName("t.q")
-	public static final int[] chatHeight = new int[MAX_CHATS];
-	@ObfuscatedName("t.s")
-	public static final int[] chatWidth = new int[MAX_CHATS];
-	@ObfuscatedName("t.t")
-	public static final int[] chatEffect = new int[MAX_CHATS];
-	@ObfuscatedName("t.u")
-	public static final JagString[] chats = new JagString[MAX_CHATS];
-	@ObfuscatedName("t.z")
-	public static final int[] chatX = new int[MAX_CHATS];
-	@ObfuscatedName("t.B")
-	public static final int[] chatY = new int[MAX_CHATS];
-	@ObfuscatedName("t.y")
-	public static final int[] chatColour = new int[MAX_CHATS];
-	@ObfuscatedName("sd.a")
-	public static final int[] CHAT_COLOURS = new int[] { 16776960, 16711680, 65280, 65535, 16711935, 16777215 };
 	@ObfuscatedName("c.E")
 	public static final JagString[] field370 = new JagString[200];
 	@ObfuscatedName("oh.p")
@@ -230,76 +1085,46 @@ public final class Client extends GameShell {
 	public static final int[] field845 = new int[200];
 	@ObfuscatedName("fc.o")
 	public static final boolean[] field1120 = new boolean[200];
-	@ObfuscatedName("j.a")
-	public static final int[] LOC_SHAPE_TO_LAYER = new int[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 };
 	@ObfuscatedName("mc.j")
 	public static final int[] field2501 = new int[1000];
 	@ObfuscatedName("pd.Q")
 	public static final long[] field3203 = new long[100];
 	@ObfuscatedName("mh.V")
 	public static final int[] field2577 = new int[1000];
-	@ObfuscatedName("vi.h")
-	public static final int SCROLLBAR_TRACK = 2301979;
-	@ObfuscatedName("ab.a")
-	public static final int SCROLLBAR_GRIP_FOREGROUND = 5063219;
-	@ObfuscatedName("va.z")
-	public static final int SCROLLBAR_GRIP_HIGHLIGHT = 7759444;
-	@ObfuscatedName("eg.u")
-	public static final int SCROLLBAR_GRIP_LOWLIGHT = 3353893;
-	@ObfuscatedName("fh.o")
-	public static final HintArrow[] field1171 = new HintArrow[4];
 	@ObfuscatedName("gd.e")
 	public static final Random field1259 = new Random();
 	@ObfuscatedName("a.g")
-	public static final JagString field7 = JagString.wrap("mapfunction");
+	public static final JagString AUTO_MAPFUNCTION = JagString.wrap("mapfunction");
 	@ObfuscatedName("be.k")
-	public static final JagString field260 = JagString.wrap("mapscene");
+	public static final JagString AUTO_MAPSCENE = JagString.wrap("mapscene");
 	@ObfuscatedName("fc.a")
-	public static final JagString field1106 = JagString.wrap("compass");
+	public static final JagString AUTO_COMPASS = JagString.wrap("compass");
 	@ObfuscatedName("nb.e")
-	public static final JagString field2664 = JagString.wrap("hitmarks");
+	public static final JagString AUTO_HITMARKS = JagString.wrap("hitmarks");
 	@ObfuscatedName("j.e")
-	public static final JagString field1796 = JagString.wrap("headicons_pk");
+	public static final JagString AUTO_HEADICONSPK = JagString.wrap("headicons_pk");
 	@ObfuscatedName("jh.a")
-	public static final JagString field1921 = JagString.wrap("headicons_prayer");
+	public static final JagString AUTO_HEADICONSPRAYER = JagString.wrap("headicons_prayer");
 	@ObfuscatedName("vd.c")
-	public static final JagString field4367 = JagString.wrap("hint_headicons");
+	public static final JagString AUTO_HEADICONSHINT = JagString.wrap("hint_headicons");
 	@ObfuscatedName("n.j")
-	public static final JagString field2622 = JagString.wrap("hint_mapmarkers");
+	public static final JagString AUTO_HINTMAPMARKERS = JagString.wrap("hint_mapmarkers");
 	@ObfuscatedName("de.H")
-	public static final JagString field690 = JagString.wrap("hint_mapedge");
+	public static final JagString AUTO_HINTMAPEDGE = JagString.wrap("hint_mapedge");
 	@ObfuscatedName("vh.H")
-	public static final JagString field4411 = JagString.wrap("mapflag");
+	public static final JagString AUTO_MAPFLAG = JagString.wrap("mapflag");
 	@ObfuscatedName("ui.E")
-	public static final JagString field4251 = JagString.wrap("cross");
+	public static final JagString AUTO_CROSS = JagString.wrap("cross");
 	@ObfuscatedName("kf.e")
-	public static final JagString field2075 = JagString.wrap("mapdots");
+	public static final JagString AUTO_MAPDOTS = JagString.wrap("mapdots");
 	@ObfuscatedName("n.i")
-	public static final JagString field2621 = JagString.wrap("scrollbar");
+	public static final JagString AUTO_SCROLLBAR = JagString.wrap("scrollbar");
 	@ObfuscatedName("wa.g")
-	public static final JagString field4459 = JagString.wrap("mod_icons");
+	public static final JagString AUTO_MODICONS = JagString.wrap("mod_icons");
 	@ObfuscatedName("wi.r")
 	public static final JagString field4548 = JagString.wrap(" )2> ");
-	@ObfuscatedName("ja.f")
-	public static final boolean showOpIndex = false;
 	@ObfuscatedName("b.o")
 	public static final JagString field182 = JagString.wrap("<col=00ff00>");
-	@ObfuscatedName("we.F")
-	public static final int[] varTransmit = new int[32];
-	@ObfuscatedName("vd.d")
-	public static final boolean[] camShake = new boolean[5];
-	@ObfuscatedName("fj.h")
-	public static final int[] camShakeRan = new int[5];
-	@ObfuscatedName("se.c")
-	public static final int[] camShakeAxis = new int[5];
-	@ObfuscatedName("re.h")
-	public static final int[] camShakeCycle = new int[5];
-	@ObfuscatedName("cb.g")
-	public static final int[] npcIds = new int[32768];
-	@ObfuscatedName("ri.Y")
-	public static final int[] camShakeAmp = new int[5];
-	@ObfuscatedName("vb.K")
-	public static final int[] invTransmit = new int[32];
 	@ObfuscatedName("pe.J")
 	public static final JagString field3244 = JagString.wrap("<col=ff0000>");
 	@ObfuscatedName("ra.eb")
@@ -326,8 +1151,6 @@ public final class Client extends GameShell {
 	public static final JagString field3921 = JagString.wrap("Mem:");
 	@ObfuscatedName("ka.c")
 	public static final JagString field2007 = JagString.wrap("k");
-	@ObfuscatedName("o.W")
-	public static final int[][] tileLastOccupiedCycle = new int[104][104];
 	@ObfuscatedName("n.f")
 	public static final JagString field2618 = JagString.wrap("<br>");
 	@ObfuscatedName("bb.j")
@@ -389,15 +1212,15 @@ public final class Client extends GameShell {
 	@ObfuscatedName("bd.f")
 	public static final JagString field241 = JagString.wrap("<col=ffffff>");
 	@ObfuscatedName("ob.j")
-	public static final JagString field2973 = JagString.wrap("huffman");
+	public static final JagString AUTO_HUFFMAN = JagString.wrap("huffman");
 	@ObfuscatedName("te.Q")
 	public static final JagString field4009 = JagString.wrap("::tele 0)1");
 	@ObfuscatedName("lh.V")
 	public static final JagString field2400 = JagString.wrap(":assist:");
 	@ObfuscatedName("of.j")
-	public static final JagString field3045 = JagString.wrap("p12_full");
+	public static final JagString AUTO_P12_FULL = JagString.wrap("p12_full");
 	@ObfuscatedName("jj.y")
-	public static final JagString field1957 = JagString.wrap("b12_full");
+	public static final JagString AUTO_B12_FULL = JagString.wrap("b12_full");
 	@ObfuscatedName("ud.l")
 	public static final JagString field4190 = JagString.wrap("<br>(X100(U(Y");
 	@ObfuscatedName("pg.Db")
@@ -407,7 +1230,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("oe.i")
 	public static final JagString field3025 = JagString.wrap(":duelstake:");
 	@ObfuscatedName("sc.M")
-	public static final JagString field3795 = JagString.wrap("p11_full");
+	public static final JagString AUTO_P11_FULL = JagString.wrap("p11_full");
 	@ObfuscatedName("oh.m")
 	public static final JagString field3089 = JagString.wrap(" )2>");
 	@ObfuscatedName("nd.s")
@@ -476,96 +1299,6 @@ public final class Client extends GameShell {
 	public static final JagString field82 = JagString.wrap(" GMT");
 	@ObfuscatedName("mc.b")
 	public static final JagString field2493 = JagString.wrap(" )2> <col=ffff00>");
-	@ObfuscatedName("client.bb")
-	public static int targetCom = -1;
-
-	@ObfuscatedName("client.V")
-	public static int chatDisabled = 0;
-
-	@ObfuscatedName("ce.Y")
-	public static int worldid = 1;
-	@ObfuscatedName("kf.a")
-	public static int modewhere = 0;
-	@ObfuscatedName("mh.cb")
-	public static int modewhat = 0;
-	@ObfuscatedName("g.m")
-	public static boolean memServer = false;
-	@ObfuscatedName("lf.nb")
-	public static int lang = 0;
-	@ObfuscatedName("eb.R")
-	public static int game = 0;
-	@ObfuscatedName("gd.A")
-	public static int js = 1;
-	@ObfuscatedName("na.Z")
-	public static int plug = 0;
-	@ObfuscatedName("ac.D")
-	public static int affid = 0;
-	@ObfuscatedName("ci.s")
-	public static int loadingStep = 0;
-	@ObfuscatedName("g.b")
-	public static Js5Loader anims;
-	@ObfuscatedName("ue.i")
-	public static Js5Loader bases;
-	@ObfuscatedName("hh.gb")
-	public static Js5Loader configs;
-	@ObfuscatedName("ia.j")
-	public static Js5Loader interfaces;
-	@ObfuscatedName("b.e")
-	public static Js5Loader jagFX;
-	@ObfuscatedName("cd.a")
-	public static Js5Loader maps;
-	@ObfuscatedName("ja.m")
-	public static Js5Loader songs;
-	@ObfuscatedName("vd.a")
-	public static Js5Loader models;
-	@ObfuscatedName("uh.O")
-	public static Js5Loader sprites;
-	@ObfuscatedName("fj.g")
-	public static Js5Loader textures;
-	@ObfuscatedName("ah.H")
-	public static Js5Loader binary;
-	@ObfuscatedName("mb.W")
-	public static Js5Loader jingles;
-	@ObfuscatedName("bf.K")
-	public static Js5Loader scripts;
-	@ObfuscatedName("j.b")
-	public static Js5Loader fontmetrics;
-	@ObfuscatedName("bf.p")
-	public static Js5Loader vorbis;
-	@ObfuscatedName("ne.i")
-	public static Js5Loader patches;
-	@ObfuscatedName("k.xb")
-	public static Js5Loader configLoc;
-	@ObfuscatedName("re.f")
-	public static Js5Loader configEnum;
-	@ObfuscatedName("oi.o")
-	public static Js5Loader configNpc;
-	@ObfuscatedName("wi.t")
-	public static Js5Loader configObj;
-	@ObfuscatedName("s.lb")
-	public static Js5Loader configSeq;
-	@ObfuscatedName("be.y")
-	public static Js5Loader configSpot;
-	@ObfuscatedName("vi.g")
-	public static Js5Loader configVarbit;
-	@ObfuscatedName("lj.m")
-	public static Js5Loader worldmap;
-	@ObfuscatedName("bh.O")
-	public static Js5Loader quickchat;
-	@ObfuscatedName("sg.w")
-	public static Js5Loader quickchatGlobal;
-	@ObfuscatedName("oc.w")
-	public static Js5Loader materials;
-	@ObfuscatedName("v.E")
-	public static int state = 0;
-	@ObfuscatedName("kh.M")
-	public static int loginStep = 0;
-	@ObfuscatedName("ae.Kb")
-	public static int loginWaitingTime = 0;
-	@ObfuscatedName("s.Y")
-	public static int loginFailCount = 0;
-	@ObfuscatedName("ia.e")
-	public static ClientStream prevStream;
 	@ObfuscatedName("kd.Z")
 	public static int field2045 = 0;
 	@ObfuscatedName("sg.n")
@@ -576,88 +1309,14 @@ public final class Client extends GameShell {
 	public static int field2652 = 1;
 	@ObfuscatedName("s.U")
 	public static int field3754 = 0;
-	@ObfuscatedName("cj.hb")
-	public static ClientStream stream;
 	@ObfuscatedName("cj.F")
 	public static long loginSeed = 0L;
-	@ObfuscatedName("fb.gb")
-	public static boolean networkError = false;
-	@ObfuscatedName("j.h")
-	public static PrivilegedRequest loginSocketReq;
-	@ObfuscatedName("ub.Y")
-	public static int loginGamePort;
-	@ObfuscatedName("pe.L")
-	public static int loginPort;
-	@ObfuscatedName("ed.a")
-	public static int loginJs5Port;
-	@ObfuscatedName("cd.h")
-	public static PcmPlayer midiPlayer;
-	@ObfuscatedName("ke.F")
-	public static PcmPlayer synthPlayer;
-	@ObfuscatedName("uh.T")
-	public static Mixer mixer;
-	@ObfuscatedName("kh.U")
-	public static Decimator decimator;
-	@ObfuscatedName("wf.b")
-	public static boolean lowMem = false;
-	@ObfuscatedName("ae.Lb")
-	public static int membersAccount = 0;
-	@ObfuscatedName("sj.f")
-	public static int componentDrawCount = 0;
-	@ObfuscatedName("kh.I")
-	public static int loopCycle = 0;
-	@ObfuscatedName("qe.n")
-	public static IfType dragCom = null;
-	@ObfuscatedName("pa.d")
-	public static int js5ConnectCooldown = 0;
-	@ObfuscatedName("we.D")
-	public static int js5ConnectState = 0;
-	@ObfuscatedName("uj.d")
-	public static int psize = 0;
-	@ObfuscatedName("jj.z")
-	public static boolean isMenuOpen = false;
-	@ObfuscatedName("sg.o")
-	public static int menuNumEntries = 0;
-	@ObfuscatedName("di.R")
-	public static int toplevelinterface = -1;
-	@ObfuscatedName("ug.l")
-	public static IfType hoveredSlotCom;
-	@ObfuscatedName("fb.kb")
-	public static int menuMouseY = -1;
-	@ObfuscatedName("ka.n")
-	public static int componentDrawTime = -2;
-	@ObfuscatedName("mb.X")
-	public static int menuMouseX = -1;
-	@ObfuscatedName("mc.l")
-	public static int componentRectDebug = 0;
-	@ObfuscatedName("wa.d")
-	public static ClientPlayer localPlayer;
 	@ObfuscatedName("ue.s")
 	public static int ambientVolume = 127;
-	@ObfuscatedName("be.l")
-	public static int worldUpdateNum = 0;
 	@ObfuscatedName("l.T")
 	public static int field2186 = 0;
 	@ObfuscatedName("ka.h")
 	public static boolean field2012 = false;
-	@ObfuscatedName("ed.g")
-	public static PixfontGeneric p11;
-	@ObfuscatedName("ei.j")
-	public static PixfontGeneric b12;
-	@ObfuscatedName("g.f")
-	public static int staffmodlevel = 0;
-	@ObfuscatedName("vi.f")
-	public static int ptype = 0;
-	@ObfuscatedName("ua.m")
-	public static MouseTracking mouseTracking;
-	@ObfuscatedName("pd.kb")
-	public static MouseWheelInterface mouseWheel;
-	@ObfuscatedName("ff.fb")
-	public static PrivilegedRequest js5SocketReq;
-	@ObfuscatedName("kj.h")
-	public static int js5Errors = 0;
-	@ObfuscatedName("re.n")
-	public static ClientStream js5Stream;
 	@ObfuscatedName("af.D")
 	public static short[][] field96;
 	@ObfuscatedName("hj.M")
@@ -666,226 +1325,30 @@ public final class Client extends GameShell {
 	public static short[] field2750;
 	@ObfuscatedName("bb.m")
 	public static short[] field219;
-	@ObfuscatedName("ub.gb")
-	public static int selfSlot = -1;
-	@ObfuscatedName("mi.X")
-	public static int mapBuildCentreZoneX;
-	@ObfuscatedName("vh.U")
-	public static int loginHopTimer = 0;
-	@ObfuscatedName("af.I")
-	public static int chatTransmitNum = 0;
-	@ObfuscatedName("g.i")
-	public static int transmitNum = 1;
-	@ObfuscatedName("d.V")
-	public static int chatHistoryLength = 0;
-	@ObfuscatedName("wh.E")
-	public static int minimapState = 0;
-	@ObfuscatedName("eg.y")
-	public static int macroMinimapAngle = 0;
-	@ObfuscatedName("t.r")
-	public static int orbitCameraYaw = 0;
-	@ObfuscatedName("ed.b")
-	public static PrivilegedRequest field912;
-	@ObfuscatedName("kg.eb")
-	public static int minimapFlagX = 0;
-	@ObfuscatedName("mi.W")
-	public static int minimapFlagZ = 0;
 	@ObfuscatedName("db.z")
 	public static long field631;
-	@ObfuscatedName("pd.lb")
-	public static DataFile masterIndex;
-	@ObfuscatedName("nf.E")
-	public static boolean showFps = false;
-	@ObfuscatedName("cb.f")
-	public static int projectX = -1;
-	@ObfuscatedName("cj.S")
-	public static int projectY = -1;
-	@ObfuscatedName("qj.Y")
-	public static int camZ;
-	@ObfuscatedName("hb.U")
-	public static int camX;
-	@ObfuscatedName("jj.v")
-	public static int camY;
-	@ObfuscatedName("t.v")
-	public static int camPitch;
-	@ObfuscatedName("pg.G")
-	public static int camYaw;
-	@ObfuscatedName("ng.Yb")
-	public static int minusedlevel;
 	@ObfuscatedName("ob.c")
 	public static SoftwarePixFont field2966;
-	@ObfuscatedName("ea.N")
-	public static int ptype1 = 0;
-	@ObfuscatedName("i.J")
-	public static int ptype2 = 0;
-	@ObfuscatedName("g.s")
-	public static int privateMessageCount = 0;
-	@ObfuscatedName("bh.F")
-	public static int friendTransmitNum = 0;
 	@ObfuscatedName("kg.fb")
 	public static boolean qaOpTest = false;
-	@ObfuscatedName("ih.b")
-	public static String field1760;
-	@ObfuscatedName("jc.P")
-	public static long field1840;
 	@ObfuscatedName("cf.c")
 	public static int blackmarks = 0;
 	@ObfuscatedName("vi.d")
-	public static int field4428 = 0;
+	public static int underage = 0;
 	@ObfuscatedName("qb.F")
-	public static int field3535 = 0;
-	@ObfuscatedName("fa.S")
-	public static boolean mouseTracked = false;
-	@ObfuscatedName("ue.d")
-	public static int entityRemovalCount = 0;
-	@ObfuscatedName("rg.H")
-	public static int entityUpdateCount = 0;
-	@ObfuscatedName("ej.n")
-	public static int playerCount = 0;
-	@ObfuscatedName("oe.j")
-	public static int lastBuiltLevel = 0;
-	@ObfuscatedName("ka.j")
-	public static int field2014;
-	@ObfuscatedName("ue.t")
-	public static int mapBuildBaseX;
-	@ObfuscatedName("re.m")
-	public static int mapBuildBaseZ;
-	@ObfuscatedName("ff.U")
-	public static LinkList locChanges = new LinkList();
-	@ObfuscatedName("pi.U")
-	public static int minimapLevel = -1;
-	@ObfuscatedName("qe.m")
-	public static boolean cinemaCam = false;
-	@ObfuscatedName("q.Cb")
-	public static int waveCount = 0;
-	@ObfuscatedName("ui.J")
-	public static int dragTime;
-	@ObfuscatedName("cf.k")
-	public static boolean dragging = false;
-	@ObfuscatedName("ng.Wb")
-	public static boolean dragParentFound = false;
-	@ObfuscatedName("lg.x")
-	public static int dragParentX = -1;
-	@ObfuscatedName("nf.bb")
-	public static int dragPickupX = 0;
-	@ObfuscatedName("t.C")
-	public static int dragPickupY = 0;
-	@ObfuscatedName("ce.U")
-	public static int dragParentY = -1;
-	@ObfuscatedName("ed.m")
-	public static IfType dragLayer = null;
-	@ObfuscatedName("md.S")
-	public static int dragCurrentY = -1;
-	@ObfuscatedName("bb.b")
-	public static int dragCurrentX = -1;
-	@ObfuscatedName("sg.t")
-	public static boolean dragAlive = false;
-	@ObfuscatedName("lb.j")
-	public static IfType dropCom = null;
-	@ObfuscatedName("sg.l")
-	public static int oneMouseButton = 0;
-	@ObfuscatedName("ne.f")
-	public static int crossX = 0;
-	@ObfuscatedName("oe.a")
-	public static int crossMode = 0;
-	@ObfuscatedName("e.mb")
-	public static int crossCycle = 0;
-	@ObfuscatedName("oc.z")
-	public static int crossY = 0;
-	@ObfuscatedName("fa.gb")
-	public static IfType selectedCom;
-	@ObfuscatedName("mh.R")
-	public static int selectedCycle = 0;
-	@ObfuscatedName("ie.h")
-	public static int selectedItem = 0;
-	@ObfuscatedName("ce.db")
-	public static int useMode = 0;
-	@ObfuscatedName("tb.j")
-	public static int objSelectedComId;
-	@ObfuscatedName("ec.Q")
-	public static int objComId;
-	@ObfuscatedName("fb.ob")
-	public static int objSelectedSlot;
+	public static int mapQuickchat = 0;
 	@ObfuscatedName("ha.z")
 	public static JagString objSelectedName = null;
-	@ObfuscatedName("eb.S")
-	public static int friendChatCount;
-	@ObfuscatedName("i.X")
-	public static ClanChannelUser[] friendChatList;
-	@ObfuscatedName("na.y")
-	public static byte chatRank;
 	@ObfuscatedName("kh.X")
 	public static int field2127 = 0;
 	@ObfuscatedName("kj.u")
 	public static int waveVolume = 127;
-	@ObfuscatedName("a.i")
-	public static boolean scrollGrabbed = false;
-	@ObfuscatedName("lf.X")
-	public static int scrollInputPadding = 0;
-	@ObfuscatedName("ib.C")
-	public static int mouseWheelRotation = 0;
-	@ObfuscatedName("hh.R")
-	public static int orbitCameraYawVelocity = 0;
-	@ObfuscatedName("ej.i")
-	public static int orbitCameraPitchVelocity = 0;
-	@ObfuscatedName("dc.e")
-	public static int orbitCameraX;
-	@ObfuscatedName("ue.g")
-	public static int macroCameraX = 0;
-	@ObfuscatedName("fh.q")
-	public static int orbitCameraPitch = 128;
-	@ObfuscatedName("vd.b")
-	public static int orbitCameraZ;
-	@ObfuscatedName("cj.N")
-	public static int macroCameraZ = 0;
 	@ObfuscatedName("qa.j")
 	public static int field3528 = 3;
-	@ObfuscatedName("mf.p")
-	public static int chatEffects = 0;
-	@ObfuscatedName("oc.t")
-	public static int bankArrangeMode = 0;
-	@ObfuscatedName("nd.c")
-	public static int friendCount = 0;
-	@ObfuscatedName("jg.J")
-	public static int logoutTimer = 0;
-	@ObfuscatedName("lh.Q")
-	public static HashTable subinterfaces = new HashTable(8);
-	@ObfuscatedName("eh.a")
-	public static IfType resumePauseCom = null;
-	@ObfuscatedName("eb.U")
-	public static Pix32 compass;
-	@ObfuscatedName("wa.h")
-	public static SoftwarePix8[] mapscene;
-	@ObfuscatedName("ch.k")
-	public static SoftwarePix32[] mapfunction;
-	@ObfuscatedName("nc.e")
-	public static Pix32[] hitmarks;
-	@ObfuscatedName("vi.a")
-	public static Pix32[] headiconsPk;
-	@ObfuscatedName("lj.a")
-	public static Pix32[] headiconsPrayer;
-	@ObfuscatedName("qb.P")
-	public static Pix32[] headiconsHint;
-	@ObfuscatedName("ui.K")
-	public static Pix32[] hintMapmarkers;
-	@ObfuscatedName("kd.V")
-	public static Pix32[] hintMapedge;
 	@ObfuscatedName("sd.o")
 	public static Pix32 mapflag;
-	@ObfuscatedName("ob.s")
-	public static Pix32[] cross;
-	@ObfuscatedName("da.S")
-	public static Pix32[] mapdots;
-	@ObfuscatedName("af.P")
-	public static Pix8[] scrollbar;
-	@ObfuscatedName("d.ab")
-	public static Pix8[] modIcons;
-	@ObfuscatedName("ab.e")
-	public static PixfontGeneric p12;
 	@ObfuscatedName("wh.T")
 	public static Pix32[] field4525;
-	@ObfuscatedName("nb.V")
-	public static int noTimeoutTimer = 0;
 	@ObfuscatedName("hi.a")
 	public static int field1549;
 	@ObfuscatedName("eb.W")
@@ -894,120 +1357,18 @@ public final class Client extends GameShell {
 	public static int field4421;
 	@ObfuscatedName("ve.Z")
 	public static int field4383;
-	@ObfuscatedName("fi.F")
-	public static int macroMinimapZoom = 0;
-	@ObfuscatedName("oi.m")
-	public static int macroMinimapZoomModifier = 1;
-	@ObfuscatedName("vc.cb")
-	public static int macroCameraZModifier = 2;
-	@ObfuscatedName("i.U")
-	public static int macroMinimapAngleModifier = 2;
-	@ObfuscatedName("j.d")
-	public static int macroCameraAngle = 0;
-	@ObfuscatedName("cf.e")
-	public static int macroCameraAngleModifier = 1;
-	@ObfuscatedName("me.B")
-	public static int macroCameraXModifier = 2;
-	@ObfuscatedName("h.F")
-	public static int macroMinimapCycle = 0;
-	@ObfuscatedName("kb.u")
-	public static int macroCameraCycle = 0;
-	@ObfuscatedName("ea.zb")
-	public static int tooltipNum = 0;
-	@ObfuscatedName("db.D")
-	public static IfType tooltipCom;
-	@ObfuscatedName("fi.w")
-	public static IfType overCom;
 	@ObfuscatedName("qa.n")
 	public static boolean field3532 = false;
-	@ObfuscatedName("hd.A")
-	public static int keypresses = 0;
-	@ObfuscatedName("md.ab")
-	public static IfType objDragCom;
-	@ObfuscatedName("bf.P")
-	public static int objDragSlot = 0;
-	@ObfuscatedName("pi.R")
-	public static int hoveredSlot = 0;
-	@ObfuscatedName("di.hb")
-	public static boolean objGrabThreshold = false;
-	@ObfuscatedName("wi.e")
-	public static int objDragCycles = 0;
-	@ObfuscatedName("ua.p")
-	public static int objGrabX = 0;
-	@ObfuscatedName("ec.F")
-	public static int objGrabY = 0;
-	@ObfuscatedName("rg.F")
-	public static int timeoutTimer = 0;
-	@ObfuscatedName("bj.Bb")
-	public static boolean focusIn = true;
-	@ObfuscatedName("i.N")
-	public static int sendCameraDelay = 0;
-	@ObfuscatedName("qb.S")
-	public static boolean sendCamera = true;
-	@ObfuscatedName("ja.c")
-	public static long prevMouseClickTime = 0L;
-	@ObfuscatedName("ne.n")
-	public static int mouseTrackedDelta = 0;
-	@ObfuscatedName("td.bb")
-	public static int mouseTrackedY = 0;
-	@ObfuscatedName("af.U")
-	public static int mouseTrackedX = 0;
-	@ObfuscatedName("ke.K")
-	public static int rebootTimer = 0;
-	@ObfuscatedName("ta.ab")
-	public static int miscTransmitNum = 0;
-	@ObfuscatedName("ph.X")
-	public static int camMoveToLz;
-	@ObfuscatedName("md.Y")
-	public static int camMoveToLx;
-	@ObfuscatedName("oh.q")
-	public static int camMoveToRate2;
-	@ObfuscatedName("wg.u")
-	public static int camMoveToRate;
-	@ObfuscatedName("ea.ob")
-	public static int camLookAtLx;
-	@ObfuscatedName("c.C")
-	public static int camLookAtLz;
-	@ObfuscatedName("gd.j")
-	public static int camMoveToHei;
-	@ObfuscatedName("ki.a")
-	public static int statTransmitNum = 0;
-	@ObfuscatedName("kf.n")
-	public static int targetMask;
-	@ObfuscatedName("jg.R")
-	public static int chatCount = 0;
-	@ObfuscatedName("tc.K")
-	public static int sceneCycle = 0;
 	@ObfuscatedName("kh.D")
 	public static short[] clientpalette;
-	@ObfuscatedName("ae.Qb")
-	public static int dragChildY;
-	@ObfuscatedName("qe.j")
-	public static IfType[] dragChildren;
-	@ObfuscatedName("ig.U")
-	public static int dragChildX;
-	@ObfuscatedName("ai.e")
-	public static boolean targetMode = false;
-	@ObfuscatedName("se.d")
-	public static JagString targetVerb = null;
-	@ObfuscatedName("ce.S")
-	public static JagString targetOp = null;
-	@ObfuscatedName("ge.O")
-	public static int cameraPitchClamp = 0;
 	@ObfuscatedName("ej.t")
 	public static int field1033 = -1;
-	@ObfuscatedName("ch.a")
-	public static HashTable serverActive = new HashTable(512);
-	@ObfuscatedName("ej.B")
-	public static int npcCount = 0;
 	@ObfuscatedName("cd.c")
 	public static int[] field453;
 	@ObfuscatedName("cd.d")
 	public static int field454;
 	@ObfuscatedName("pc.f")
 	public static int field3192 = -1;
-	@ObfuscatedName("fj.n")
-	public static int camLookAtHei;
 	@ObfuscatedName("be.s")
 	public static int[][] field268;
 	@ObfuscatedName("d.T")
@@ -1016,52 +1377,14 @@ public final class Client extends GameShell {
 	public static long field10 = 0L;
 	@ObfuscatedName("lh.X")
 	public static int[] field2402;
-	@ObfuscatedName("ah.z")
-	public static int camLookAtRate;
 	@ObfuscatedName("ed.k")
 	public static short field921 = 205;
 	@ObfuscatedName("ee.b")
 	public static short field926 = 32767;
 	@ObfuscatedName("ee.f")
 	public static int field930 = 0;
-	@ObfuscatedName("nh.b")
-	public static int zoneUpdateZ;
 	@ObfuscatedName("me.x")
 	public static short field2527 = 1;
-	@ObfuscatedName("la.i")
-	public static int zoneUpdateX;
-	@ObfuscatedName("nd.p")
-	public static int camLookAtRate2;
-	@ObfuscatedName("ue.f")
-	public static int invTransmitNum = 0;
-	@ObfuscatedName("jc.Q")
-	public static int ptype0 = 0;
-	@ObfuscatedName("uh.P")
-	public static int varTransmitNum = 0;
-	@ObfuscatedName("kf.h")
-	public static int friendServerStatus = 0;
-	@ObfuscatedName("wa.f")
-	public static int runenergy = 0;
-	@ObfuscatedName("g.d")
-	public static int chatPublicMode = 0;
-	@ObfuscatedName("lh.db")
-	public static int chatTradeMode = 0;
-	@ObfuscatedName("ai.b")
-	public static int chatPrivateMode = 0;
-	@ObfuscatedName("ud.d")
-	public static JagString chatDisplayName = null;
-	@ObfuscatedName("pg.yb")
-	public static byte chatMinKick;
-	@ObfuscatedName("h.P")
-	public static int clanTransmitNum = 0;
-	@ObfuscatedName("sc.F")
-	public static int runweight = 0;
-	@ObfuscatedName("ug.b")
-	public static JagString chatOwnerName = null;
-	@ObfuscatedName("bd.n")
-	public static int targetSub;
-	@ObfuscatedName("ob.q")
-	public static boolean js5Loading = true;
 	@ObfuscatedName("j.j")
 	public static int field1801;
 	@ObfuscatedName("eb.X")
@@ -1155,15 +1478,15 @@ public final class Client extends GameShell {
 				errorUsage(false);
 			}
 			if (arg0[6].equals("game0")) {
-				game = 0;
+				modegame = 0;
 			} else if (arg0[6].equals("game1")) {
-				game = 1;
+				modegame = 1;
 			} else {
 				errorUsage(false);
 			}
 			affid = 0;
-			field4134 = field3453;
-			field1760 = "127.0.0.1";
+			field4134 = AUTO_EMPTY;
+			loginHost = "127.0.0.1";
 			Client var1 = new Client();
 			var1.startApplication(27, 503, 765, 500, modewhat + 32, "runescape");
 			GameShell.frame.setLocation(40, 40);
@@ -1204,9 +1527,9 @@ public final class Client extends GameShell {
 		}
 		String var4 = this.getParameter("game");
 		if (var4 != null && var4.equals("1")) {
-			game = 1;
+			modegame = 1;
 		} else {
-			game = 0;
+			modegame = 0;
 		}
 		try {
 			js = Integer.parseInt(this.getParameter("js"));
@@ -1216,9 +1539,9 @@ public final class Client extends GameShell {
 		}
 		field4134 = field1994.method608(this);
 		if (field4134 == null) {
-			field4134 = field3453;
+			field4134 = AUTO_EMPTY;
 		}
-		field1760 = this.getCodeBase().getHost();
+		loginHost = this.getCodeBase().getHost();
 		this.startCommon(modewhat + 32);
 	}
 
@@ -1226,7 +1549,7 @@ public final class Client extends GameShell {
 	@Override
 	public void maininit() {
 		clientpalette = LocType.clientpalette = NpcType.clientpalette = ObjType.clientpalette = new short[256];
-		if (game == 1) {
+		if (modegame == 1) {
 			field96 = Statics.field1810;
 			field1596 = Statics.field3850;
 			field2750 = Statics.field1265;
@@ -1250,12 +1573,12 @@ public final class Client extends GameShell {
 		Statics.field941 = SignLink.field3579;
 		try {
 			if (GameShell.signlink.field3590 != null) {
-				GameShell.field299 = new BufferedRandomAccessFile(GameShell.signlink.field3590, 5200, 0);
+				GameShell.cacheDat = new BufferedRandomAccessFile(GameShell.signlink.field3590, 5200, 0);
 				for (int var1 = 0; var1 < 27; var1++) {
-					GameShell.field4504[var1] = new BufferedRandomAccessFile(GameShell.signlink.field3584[var1], 6000, 0);
+					GameShell.cacheIndex[var1] = new BufferedRandomAccessFile(GameShell.signlink.field3584[var1], 6000, 0);
 				}
 				GameShell.field1892 = new BufferedRandomAccessFile(GameShell.signlink.field3582, 6000, 0);
-				masterIndex = new DataFile(255, GameShell.field299, GameShell.field1892, 500000);
+				masterIndex = new DataFile(255, GameShell.cacheDat, GameShell.field1892, 500000);
 				GameShell.field3529 = new BufferedRandomAccessFile(GameShell.signlink.field3588, 24, 0);
 				GameShell.signlink.field3584 = null;
 				GameShell.signlink.field3582 = null;
@@ -1264,7 +1587,7 @@ public final class Client extends GameShell {
 			}
 		} catch (IOException var2) {
 			GameShell.field1892 = null;
-			GameShell.field299 = null;
+			GameShell.cacheDat = null;
 			GameShell.field3529 = null;
 			masterIndex = null;
 		}
@@ -1407,13 +1730,13 @@ public final class Client extends GameShell {
 		Js5Net.close();
 		Js5NetThread.shutdown();
 		try {
-			if (GameShell.field299 != null) {
-				GameShell.field299.close();
+			if (GameShell.cacheDat != null) {
+				GameShell.cacheDat.close();
 			}
-			if (GameShell.field4504 != null) {
-				for (int var1 = 0; var1 < GameShell.field4504.length; var1++) {
-					if (GameShell.field4504[var1] != null) {
-						GameShell.field4504[var1].close();
+			if (GameShell.cacheIndex != null) {
+				for (int var1 = 0; var1 < GameShell.cacheIndex.length; var1++) {
+					if (GameShell.cacheIndex[var1] != null) {
+						GameShell.cacheIndex[var1].close();
 					}
 				}
 			}
@@ -1490,7 +1813,7 @@ public final class Client extends GameShell {
 		}
 		try {
 			if (js5ConnectState == 0) {
-				js5SocketReq = GameShell.signlink.socketreq(field1760, loginPort);
+				js5SocketReq = GameShell.signlink.socketreq(loginHost, loginPort);
 				js5ConnectState++;
 			}
 			if (js5ConnectState == 1) {
@@ -1509,7 +1832,7 @@ public final class Client extends GameShell {
 				var1.p4(500);
 				js5Stream.write(5, var1.data);
 				js5ConnectState++;
-				field1840 = MonotonicTime.currentTime();
+				js5ConnectTime = MonotonicTime.currentTime();
 			}
 			if (js5ConnectState == 3) {
 				if (state <= 5 || js5Stream.available() > 0) {
@@ -1519,7 +1842,7 @@ public final class Client extends GameShell {
 						return;
 					}
 					js5ConnectState++;
-				} else if (MonotonicTime.currentTime() - field1840 > 30000L) {
+				} else if (MonotonicTime.currentTime() - js5ConnectTime > 30000L) {
 					this.js5error(-2);
 					return;
 				}
@@ -1589,7 +1912,7 @@ public final class Client extends GameShell {
 				TitleScreen.loadString = Text.field3549;
 			}
 		} else if (loadingStep == 10) {
-			World.method1277();
+			World.init();
 			for (int var5 = 0; var5 < 4; var5++) {
 				collision[var5] = new CollisionMap(104, 104);
 			}
@@ -1669,7 +1992,7 @@ public final class Client extends GameShell {
 		} else if (loadingStep == 45) {
 			PcmPlayer.init(!lowMem);
 			MidiPlayer var33 = new MidiPlayer();
-			var33.method1194();
+			var33.setChannelDefaultPatch();
 			midiPlayer = PcmPlayer.getPlayer(0, GameShell.canvas, GameShell.signlink, 22050);
 			midiPlayer.playStream(var33);
 			MidiManager.init(vorbis, var33, jagFX, patches);
@@ -1682,22 +2005,22 @@ public final class Client extends GameShell {
 			TitleScreen.loadPos = 30;
 		} else if (loadingStep == 50) {
 			int var34 = 0;
-			if (sprites.requestDownload(field3795)) {
+			if (sprites.requestDownload(AUTO_P11_FULL)) {
 				var34++;
 			}
-			if (sprites.requestDownload(field3045)) {
+			if (sprites.requestDownload(AUTO_P12_FULL)) {
 				var34++;
 			}
-			if (sprites.requestDownload(field1957)) {
+			if (sprites.requestDownload(AUTO_B12_FULL)) {
 				var34++;
 			}
-			if (fontmetrics.requestDownload(field3795)) {
+			if (fontmetrics.requestDownload(AUTO_P11_FULL)) {
 				var34++;
 			}
-			if (fontmetrics.requestDownload(field3045)) {
+			if (fontmetrics.requestDownload(AUTO_P12_FULL)) {
 				var34++;
 			}
-			if (fontmetrics.requestDownload(field1957)) {
+			if (fontmetrics.requestDownload(AUTO_B12_FULL)) {
 				var34++;
 			}
 			if (var34 < 6) {
@@ -1710,20 +2033,20 @@ public final class Client extends GameShell {
 			}
 		} else if (loadingStep == 60) {
 			int var35 = TitleScreen.ready(binary, sprites);
-			int var36 = TextureOp37.method717();
+			int var36 = TitleScreen.readyMax();
 			if (var35 < var36) {
 				TitleScreen.loadString = JagString.join(new JagString[] { Text.MAINLOAD60, JagString.method1212(var35 * 100 / var36), field2895 });
 				TitleScreen.loadPos = 40;
 			} else {
 				TitleScreen.loadPos = 40;
-				TitleScreen.loadString = Text.field1812;
+				TitleScreen.loadString = Text.MAINLOAD60B;
 				loadingStep = 65;
 			}
 		} else if (loadingStep == 65) {
-			p11 = PixLoader.method429(fontmetrics, sprites, field3453, field3795);
+			p11 = PixLoader.makePixFont(fontmetrics, sprites, AUTO_EMPTY, AUTO_P11_FULL);
 			field2966 = (SoftwarePixFont) p11;
-			p12 = PixLoader.method429(fontmetrics, sprites, field3453, field3045);
-			b12 = PixLoader.method429(fontmetrics, sprites, field3453, field1957);
+			p12 = PixLoader.makePixFont(fontmetrics, sprites, AUTO_EMPTY, AUTO_P12_FULL);
+			b12 = PixLoader.makePixFont(fontmetrics, sprites, AUTO_EMPTY, AUTO_B12_FULL);
 			TitleScreen.loadPos = 45;
 			TitleScreen.loadString = Text.field24;
 			setMainState(5);
@@ -1772,13 +2095,13 @@ public final class Client extends GameShell {
 				QuickChatCatTypeList.init(quickchat, quickchatGlobal);
 				TitleScreen.loadString = Text.MAINLOAD70B;
 				TitleScreen.loadPos = 50;
-				Statics.method1416();
+				ObjType.method1416();
 				loadingStep = 80;
 			}
 		} else if (loadingStep == 80) {
 			int var47 = 0;
 			if (compass == null) {
-				SoftwarePix32 var48 = PixLoader.method49(field1106, sprites, field3453);
+				SoftwarePix32 var48 = PixLoader.makePix32(AUTO_COMPASS, sprites, AUTO_EMPTY);
 				if (var48 != null) {
 					var48.trim();
 					compass = var48;
@@ -1787,42 +2110,42 @@ public final class Client extends GameShell {
 				var47++;
 			}
 			if (mapscene == null) {
-				mapscene = PixLoader.method981(field260, field3453, sprites);
+				mapscene = PixLoader.makePix8Array(AUTO_MAPSCENE, AUTO_EMPTY, sprites);
 			} else {
 				var47++;
 			}
 			if (mapfunction == null) {
-				mapfunction = PixLoader.method15(field7, field3453, sprites);
+				mapfunction = PixLoader.makePix32Array(AUTO_MAPFUNCTION, AUTO_EMPTY, sprites);
 			} else {
 				var47++;
 			}
 			if (hitmarks == null) {
-				hitmarks = PixLoader.method1582(field2664, sprites, field3453);
+				hitmarks = PixLoader.makePix32Array(AUTO_HITMARKS, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
 			if (headiconsPk == null) {
-				headiconsPk = PixLoader.method1582(field1796, sprites, field3453);
+				headiconsPk = PixLoader.makePix32Array(AUTO_HEADICONSPK, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
 			if (headiconsPrayer == null) {
-				headiconsPrayer = PixLoader.method1582(field1921, sprites, field3453);
+				headiconsPrayer = PixLoader.makePix32Array(AUTO_HEADICONSPRAYER, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
 			if (headiconsHint == null) {
-				headiconsHint = PixLoader.method1582(field4367, sprites, field3453);
+				headiconsHint = PixLoader.makePix32Array(AUTO_HEADICONSHINT, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
 			if (hintMapmarkers == null) {
-				hintMapmarkers = PixLoader.method1582(field2622, sprites, field3453);
+				hintMapmarkers = PixLoader.makePix32Array(AUTO_HINTMAPMARKERS, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
 			if (hintMapedge == null) {
-				SoftwarePix32[] var49 = PixLoader.method15(field690, field3453, sprites);
+				SoftwarePix32[] var49 = PixLoader.makePix32Array(AUTO_HINTMAPEDGE, AUTO_EMPTY, sprites);
 				if (var49 != null) {
 					for (int var50 = 0; var50 < var49.length; var50++) {
 						var49[var50].trim();
@@ -1833,27 +2156,27 @@ public final class Client extends GameShell {
 				var47++;
 			}
 			if (mapflag == null) {
-				mapflag = PixLoader.method1490(field4411, field3453, sprites);
+				mapflag = PixLoader.makePix32(AUTO_MAPFLAG, AUTO_EMPTY, sprites);
 			} else {
 				var47++;
 			}
 			if (cross == null) {
-				cross = PixLoader.method1582(field4251, sprites, field3453);
+				cross = PixLoader.makePix32Array(AUTO_CROSS, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
 			if (mapdots == null) {
-				mapdots = PixLoader.method1582(field2075, sprites, field3453);
+				mapdots = PixLoader.makePix32Array(AUTO_MAPDOTS, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
 			if (scrollbar == null) {
-				scrollbar = PixLoader.method2(field2621, sprites, field3453);
+				scrollbar = PixLoader.makePix8Array(AUTO_SCROLLBAR, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
 			if (modIcons == null) {
-				modIcons = PixLoader.method2(field4459, sprites, field3453);
+				modIcons = PixLoader.makePix8Array(AUTO_MODICONS, sprites, AUTO_EMPTY);
 			} else {
 				var47++;
 			}
@@ -1897,8 +2220,8 @@ public final class Client extends GameShell {
 			TitleScreen.loadPos = 75;
 			loadingStep = 120;
 		} else if (loadingStep == 120) {
-			if (binary.requestDownload(field2973, field3453)) {
-				Huffman var57 = new Huffman(binary.getFile(field2973, field3453));
+			if (binary.requestDownload(AUTO_HUFFMAN, AUTO_EMPTY)) {
+				Huffman var57 = new Huffman(binary.getFile(AUTO_HUFFMAN, AUTO_EMPTY));
 				WordPack.setHuffman(var57);
 				loadingStep = 130;
 				TitleScreen.loadString = Text.MAINLOAD120B;
@@ -1936,8 +2259,8 @@ public final class Client extends GameShell {
 	@ObfuscatedName("j.a(BIZZZ)Lbj;")
 	public static Js5Loader openJs5(int arg0, boolean arg1, boolean arg2, boolean arg3) {
 		DataFile var4 = null;
-		if (GameShell.field299 != null) {
-			var4 = new DataFile(arg0, GameShell.field299, GameShell.field4504[arg0], 1000000);
+		if (GameShell.cacheDat != null) {
+			var4 = new DataFile(arg0, GameShell.cacheDat, GameShell.cacheIndex[arg0], 1000000);
 		}
 		return new Js5Loader(var4, masterIndex, arg0, arg3, arg2, arg1);
 	}
@@ -1957,7 +2280,7 @@ public final class Client extends GameShell {
 			}
 			if (loginStep == 1) {
 				if (loginSocketReq == null) {
-					loginSocketReq = signlink.socketreq(field1760, loginPort);
+					loginSocketReq = signlink.socketreq(loginHost, loginPort);
 				}
 				if (loginSocketReq.status == 2) {
 					throw new IOException();
@@ -2106,19 +2429,19 @@ public final class Client extends GameShell {
 				if (loginStep == 9 && stream.available() >= 9) {
 					staffmodlevel = stream.read();
 					blackmarks = stream.read();
-					field4428 = stream.read();
-					if (field4428 == 1) {
+					underage = stream.read();
+					if (underage == 1) {
 						try {
-							field1118.method628(signlink.field3597);
+							zap.browserCall(signlink.applet);
 						} catch (Throwable var9) {
 						}
 					} else {
 						try {
-							field3577.method628(signlink.field3597);
+							unzap.browserCall(signlink.applet);
 						} catch (Throwable var8) {
 						}
 					}
-					field3535 = stream.read();
+					mapQuickchat = stream.read();
 					mouseTracked = stream.read() == 1;
 					selfSlot = stream.read();
 					selfSlot <<= 0x8;
@@ -2604,7 +2927,7 @@ public final class Client extends GameShell {
 			menuAction[0] = 1007;
 			menuVerb[0] = Text.CANCEL;
 			menuNumEntries = 1;
-			menuSubject[0] = field3453;
+			menuSubject[0] = AUTO_EMPTY;
 		}
 		if (toplevelinterface != -1) {
 			animateInterface(toplevelinterface);
@@ -4486,14 +4809,14 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("l.a(IIIIBI)V")
 	public static void startRebuild(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		if (arg2 == mapBuildCentreZoneX && field2014 == arg3 && (arg0 == lastBuiltLevel || !lowMem)) {
+		if (arg2 == mapBuildCentreZoneX && mapBuildCentreZoneZ == arg3 && (arg0 == lastBuiltLevel || !lowMem)) {
 			return;
 		}
 		lastBuiltLevel = arg0;
 		if (!lowMem) {
 			lastBuiltLevel = 0;
 		}
-		field2014 = arg3;
+		mapBuildCentreZoneZ = arg3;
 		mapBuildCentreZoneX = arg2;
 		setMainState(25);
 		messageBox(Text.LOADING, true);
@@ -4676,7 +4999,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("re.b(I)V")
 	public static void checkMinimap() {
 		if (lowMem && minusedlevel != lastBuiltLevel) {
-			startRebuild(minusedlevel, localPlayer.routeZ[0], mapBuildCentreZoneX, field2014, localPlayer.routeX[0]);
+			startRebuild(minusedlevel, localPlayer.routeZ[0], mapBuildCentreZoneX, mapBuildCentreZoneZ, localPlayer.routeX[0]);
 		} else if (minusedlevel != minimapLevel) {
 			minimapLevel = minusedlevel;
 			minimapBuildBuffer(minusedlevel);
@@ -4791,9 +5114,9 @@ public final class Client extends GameShell {
 		}
 		if (!field2555) {
 			int var14 = (mapBuildCentreZoneX - 6) / 8;
-			int var15 = (field2014 - 6) / 8;
+			int var15 = (mapBuildCentreZoneZ - 6) / 8;
 			int var16 = (mapBuildCentreZoneX + 6) / 8;
-			int var17 = (field2014 + 6) / 8;
+			int var17 = (mapBuildCentreZoneZ + 6) / 8;
 			for (int var18 = var14 - 1; var18 <= var16 + 1; var18++) {
 				for (int var19 = var15 - 1; var19 <= var17 + 1; var19++) {
 					if (var14 > var18 || var16 < var18 || var19 < var15 || var19 > var17) {
@@ -5825,20 +6148,20 @@ public final class Client extends GameShell {
 					}
 				}
 				if (!var41 && chatDisabled == 0) {
-					addChat(field3453, 10, var42);
+					addChat(AUTO_EMPTY, 10, var42);
 				}
 			} else if (var35.method631(field3334)) {
 				JagString var63 = var35.method623(0, var35.method617(field3334));
-				addChat(var63, 11, field3453);
+				addChat(var63, 11, AUTO_EMPTY);
 			} else if (var35.method631(field731)) {
 				JagString var62 = var35.method623(0, var35.method617(field731));
 				if (chatDisabled == 0) {
-					addChat(var62, 12, field3453);
+					addChat(var62, 12, AUTO_EMPTY);
 				}
 			} else if (var35.method631(field2400)) {
 				JagString var46 = var35.method623(0, var35.method617(field2400));
 				if (chatDisabled == 0) {
-					addChat(var46, 13, field3453);
+					addChat(var46, 13, AUTO_EMPTY);
 				}
 			} else if (var35.method631(field3025)) {
 				JagString var47 = var35.method623(0, var35.method617(field1959));
@@ -5851,7 +6174,7 @@ public final class Client extends GameShell {
 					}
 				}
 				if (!var50 && chatDisabled == 0) {
-					addChat(field3453, 14, var47);
+					addChat(AUTO_EMPTY, 14, var47);
 				}
 			} else if (var35.method631(field4275)) {
 				JagString var52 = var35.method623(0, var35.method617(field1959));
@@ -5864,7 +6187,7 @@ public final class Client extends GameShell {
 					}
 				}
 				if (!var55 && chatDisabled == 0) {
-					addChat(field3453, 15, var52);
+					addChat(AUTO_EMPTY, 15, var52);
 				}
 			} else if (var35.method631(field665)) {
 				JagString var57 = var35.method623(0, var35.method617(field1959));
@@ -5877,10 +6200,10 @@ public final class Client extends GameShell {
 					}
 				}
 				if (!var60 && chatDisabled == 0) {
-					addChat(field3453, 16, var57);
+					addChat(AUTO_EMPTY, 16, var57);
 				}
 			} else {
-				addChat(var35, 0, field3453);
+				addChat(var35, 0, AUTO_EMPTY);
 			}
 			ptype = -1;
 			return true;
@@ -6287,7 +6610,7 @@ public final class Client extends GameShell {
 				var151 = false;
 				var149 &= Long.MAX_VALUE;
 			}
-			JagString var154 = field3453;
+			JagString var154 = AUTO_EMPTY;
 			if (var152 > 0) {
 				var154 = in.gjstr();
 			}
@@ -6297,10 +6620,10 @@ public final class Client extends GameShell {
 					if (var152 != field3092[var156]) {
 						field3092[var156] = var152;
 						if (var152 > 0) {
-							addChat(JagString.join(new JagString[] { var155, Text.field3321 }), 5, field3453);
+							addChat(JagString.join(new JagString[] { var155, Text.field3321 }), 5, AUTO_EMPTY);
 						}
 						if (var152 == 0) {
-							addChat(JagString.join(new JagString[] { var155, Text.field2123 }), 5, field3453);
+							addChat(JagString.join(new JagString[] { var155, Text.field2123 }), 5, AUTO_EMPTY);
 						}
 					}
 					var155 = null;
@@ -6400,7 +6723,7 @@ public final class Client extends GameShell {
 			label1332: while (true) {
 				if (var187 >= 100) {
 					if (var183 <= 1) {
-						if (field4428 == 1 || field3535 == 1) {
+						if (underage == 1 || mapQuickchat == 1) {
 							var186 = true;
 						} else {
 							for (int var188 = 0; var188 < privateMessageCount; var188++) {
@@ -6461,7 +6784,7 @@ public final class Client extends GameShell {
 			label1367: while (true) {
 				if (var200 >= 100) {
 					if (var196 <= 1) {
-						if (field4428 == 1 || field3535 == 1) {
+						if (underage == 1 || mapQuickchat == 1) {
 							var199 = true;
 						} else {
 							for (int var201 = 0; var201 < privateMessageCount; var201++) {
@@ -6552,7 +6875,7 @@ public final class Client extends GameShell {
 		} else if (ptype == 177) {
 			// LAST_LOGIN_INFO
 			int var216 = in.g4_alt2();
-			field912 = signlink.dnsreq(var216);
+			lastAddress = signlink.dnsreq(var216);
 			ptype = -1;
 			return true;
 		} else if (ptype == 88) {
@@ -7842,7 +8165,7 @@ public final class Client extends GameShell {
 				long var18 = arg1.name.toUserhash();
 				boolean var20 = false;
 				if (var15 <= 1) {
-					if (!var14 && (field4428 == 1 || field3535 == 1)) {
+					if (!var14 && (underage == 1 || mapQuickchat == 1)) {
 						var20 = true;
 					} else {
 						for (int var21 = 0; var21 < privateMessageCount; var21++) {
@@ -7854,18 +8177,18 @@ public final class Client extends GameShell {
 					}
 				}
 				if (!var20 && chatDisabled == 0) {
-					field1006.pos = 0;
+					tempP.pos = 0;
 					int var22 = -1;
-					in.gdata_alt1(field1006.data, var16);
-					field1006.pos = 0;
+					in.gdata_alt1(tempP.data, var16);
+					tempP.pos = 0;
 					JagString var23;
 					if (var14) {
-						QuickChatPhrase var24 = QuickChatPhrase.method667(field1006);
+						QuickChatPhrase var24 = QuickChatPhrase.method667(tempP);
 						var22 = var24.field4058;
 						var13 &= 0x7FFF;
-						var23 = var24.field4065.decodeMessage(field1006);
+						var23 = var24.field4065.decodeMessage(tempP);
 					} else {
-						var23 = PixfontGeneric.escape(WordPack.unpack2(field1006).method622());
+						var23 = PixfontGeneric.escape(WordPack.unpack2(tempP).method622());
 					}
 					arg1.chat = var23.method602();
 					arg1.chatTimer = 150;
@@ -8431,7 +8754,7 @@ public final class Client extends GameShell {
 				out.p1Enc(191);
 				out.p2(var6);
 			} else {
-				addChat(JagString.join(new JagString[] { JagString.method1212(var15.linkObjNumber[var1]), Statics.field1973, ObjType.list(var6).name}), 0, field3453);
+				addChat(JagString.join(new JagString[] { JagString.method1212(var15.linkObjNumber[var1]), Statics.field1973, ObjType.list(var6).name}), 0, AUTO_EMPTY);
 			}
 			selectedCycle = 0;
 			selectedCom = IfType.get(var2);
@@ -8956,7 +9279,7 @@ public final class Client extends GameShell {
 			}
 		}
 		if (!var3) {
-			addChat(JagString.join(new JagString[] { Text.UNABLETOFIND, var2 }), 0, field3453);
+			addChat(JagString.join(new JagString[] { Text.UNABLETOFIND, var2 }), 0, AUTO_EMPTY);
 		}
 	}
 
@@ -9087,7 +9410,7 @@ public final class Client extends GameShell {
 			int var9 = Pix3D.maxY;
 			int var10 = var8 + (var9 - var8) * (arg0 - arg4) / arg2;
 			int var11 = var6 + (var7 - var6) * (arg5 - arg1) / arg3;
-			addMenuOption(var11, field54, (short) 10, 0L, field3453, var10);
+			addMenuOption(var11, field54, (short) 10, 0L, AUTO_EMPTY, var10);
 		}
 		long var12 = -1L;
 		for (int var14 = 0; var14 < SoftwareModelLit.pickedCount; var14++) {
@@ -9248,7 +9571,7 @@ public final class Client extends GameShell {
 			}
 			if (var5 != null) {
 				for (int var6 = 4; var6 >= 0; var6--) {
-					if (var5[var6] != null && (game != 0 || !var5[var6].method624(Text.ATTACK))) {
+					if (var5[var6] != null && (modegame != 0 || !var5[var6].method624(Text.ATTACK))) {
 						byte var7 = 0;
 						if (var6 == 0) {
 							var7 = 17;
@@ -9269,7 +9592,7 @@ public final class Client extends GameShell {
 					}
 				}
 			}
-			if (game == 0 && var5 != null) {
+			if (modegame == 0 && var5 != null) {
 				for (int var8 = 4; var8 >= 0; var8--) {
 					if (var5[var8] != null && var5[var8].method624(Text.ATTACK)) {
 						short var9 = 0;
@@ -9322,7 +9645,7 @@ public final class Client extends GameShell {
 			for (int var5 = 7; var5 >= 0; var5--) {
 				if (playerOp[var5] != null) {
 					short var6 = 0;
-					if (game == 0 && playerOp[var5].method624(Text.ATTACK)) {
+					if (modegame == 0 && playerOp[var5].method624(Text.ATTACK)) {
 						if (arg3.combatLevel > localPlayer.combatLevel) {
 							var6 = 2000;
 						}
@@ -9355,7 +9678,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("b.a(IILq;B)V")
 	public static void addComponentOptions(int arg0, int arg1, IfType arg2) {
 		if (arg2.buttonType == 1) {
-			addMenuOption(0, arg2.buttonText, (short) 11, 0L, field3453, arg2.parentId);
+			addMenuOption(0, arg2.buttonText, (short) 11, 0L, AUTO_EMPTY, arg2.parentId);
 		}
 		if (arg2.buttonType == 2 && !targetMode) {
 			JagString var3 = targetVerb(arg2);
@@ -9364,16 +9687,16 @@ public final class Client extends GameShell {
 			}
 		}
 		if (arg2.buttonType == 3) {
-			addMenuOption(0, Text.CLOSE, (short) 14, 0L, field3453, arg2.parentId);
+			addMenuOption(0, Text.CLOSE, (short) 14, 0L, AUTO_EMPTY, arg2.parentId);
 		}
 		if (arg2.buttonType == 4) {
-			addMenuOption(0, arg2.buttonText, (short) 36, 0L, field3453, arg2.parentId);
+			addMenuOption(0, arg2.buttonText, (short) 36, 0L, AUTO_EMPTY, arg2.parentId);
 		}
 		if (arg2.buttonType == 5) {
-			addMenuOption(0, arg2.buttonText, (short) 20, 0L, field3453, arg2.parentId);
+			addMenuOption(0, arg2.buttonText, (short) 20, 0L, AUTO_EMPTY, arg2.parentId);
 		}
 		if (arg2.buttonType == 6 && resumePauseCom == null) {
-			addMenuOption(-1, arg2.buttonText, (short) 47, 0L, field3453, arg2.parentId);
+			addMenuOption(-1, arg2.buttonText, (short) 47, 0L, AUTO_EMPTY, arg2.parentId);
 		}
 		if (arg2.type == 2) {
 			int var4 = 0;
@@ -9490,7 +9813,7 @@ public final class Client extends GameShell {
 					}
 				}
 				if (ServerActive.pauseButton(getActive(arg2))) {
-					addMenuOption(arg2.subId, Text.CONTINUE, (short) 47, 0L, field3453, arg2.parentId);
+					addMenuOption(arg2.subId, Text.CONTINUE, (short) 47, 0L, AUTO_EMPTY, arg2.parentId);
 				}
 			} else if (ServerActive.isUseTarget(getActive(arg2)) && (targetMask & 0x20) == 32) {
 				addMenuOption(arg2.subId, targetVerb, (short) 40, 0L, JagString.join(new JagString[]{targetOp, field4548, arg2.baseOpName}), arg2.parentId);
@@ -9639,7 +9962,7 @@ public final class Client extends GameShell {
 						if (var10.type == 0 && var10.noClickThrough && var22 <= ClientMouseListener.mouseX && ClientMouseListener.mouseY >= var19 && var20 > ClientMouseListener.mouseX && ClientMouseListener.mouseY < var21 && !isMenuOpen && !qaOpTest) {
 							menuNumEntries = 1;
 							menuVerb[0] = Text.CANCEL;
-							menuSubject[0] = field3453;
+							menuSubject[0] = AUTO_EMPTY;
 							menuAction[0] = 1007;
 						}
 						int var26 = ClientMouseListener.mouseY;
@@ -9668,7 +9991,7 @@ public final class Client extends GameShell {
 									menuAction[0] = 1007;
 									menuNumEntries = 1;
 									menuVerb[0] = Text.CANCEL;
-									menuSubject[0] = field3453;
+									menuSubject[0] = AUTO_EMPTY;
 								}
 								drawInterface(var21, var27.field3229, var19, var11, var13, var22, var12, var20);
 							}
@@ -9997,7 +10320,7 @@ public final class Client extends GameShell {
 											JagString var87;
 											if (var86 == -1) {
 												var87 = var84;
-												var84 = field3453;
+												var84 = AUTO_EMPTY;
 											} else {
 												var87 = var84.method623(0, var86);
 												var84 = var84.method635(var86 + 4);
@@ -10031,7 +10354,7 @@ public final class Client extends GameShell {
 											JagString var95;
 											if (var94 == -1) {
 												var95 = var93;
-												var93 = field3453;
+												var93 = AUTO_EMPTY;
 											} else {
 												var95 = var93.method623(0, var94);
 												var93 = var93.method635(var94 + 4);
@@ -10093,12 +10416,12 @@ public final class Client extends GameShell {
 													if (var7 == -1) {
 														return arg0;
 													}
-													JagString var8 = field3453;
-													if (field912 != null) {
-														var8 = JagString.method926(field912.intArg);
+													JagString var8 = AUTO_EMPTY;
+													if (lastAddress != null) {
+														var8 = JagString.method926(lastAddress.intArg);
 														try {
-															if (field912.result != null) {
-																byte[] var9 = ((String) field912.result).getBytes("ISO-8859-1");
+															if (lastAddress.result != null) {
+																byte[] var9 = ((String) lastAddress.result).getBytes("ISO-8859-1");
 																var8 = JagString.method395(0, var9, var9.length);
 															}
 														} catch (UnsupportedEncodingException var10) {
@@ -10438,7 +10761,7 @@ public final class Client extends GameShell {
 								for (int var24 = 0; var24 < keypresses; var24++) {
 									int var25 = var9.hotkeys[var23] & 0xFF;
 									if (keypressKeycodes[var24] == var25) {
-										ifButtonX(var23 + 1, field3453, -1, var9.parentId);
+										ifButtonX(var23 + 1, AUTO_EMPTY, -1, var9.parentId);
 									}
 								}
 							}
@@ -11420,30 +11743,30 @@ public final class Client extends GameShell {
 			return;
 		}
 		if (friendCount >= 100 && membersAccount != 1 || friendCount >= 200) {
-			addChat(Text.FRIENDLISTFULL, 0, field3453);
+			addChat(Text.FRIENDLISTFULL, 0, AUTO_EMPTY);
 			return;
 		}
 		JagString var2 = JagString.method1375(arg0).method614();
 		for (int var3 = 0; var3 < friendCount; var3++) {
 			if (field2086[var3] == arg0) {
-				addChat(JagString.join(new JagString[] { var2, Text.FRIENDLISTDUPE }), 0, field3453);
+				addChat(JagString.join(new JagString[] { var2, Text.FRIENDLISTDUPE }), 0, AUTO_EMPTY);
 				return;
 			}
 		}
 		for (int var4 = 0; var4 < privateMessageCount; var4++) {
 			if (messageIds[var4] == arg0) {
-				addChat(JagString.join(new JagString[] { Text.REMOVEIGNORE1, var2, Text.REMOVEIGNORE2 }), 0, field3453);
+				addChat(JagString.join(new JagString[] { Text.REMOVEIGNORE1, var2, Text.REMOVEIGNORE2 }), 0, AUTO_EMPTY);
 				return;
 			}
 		}
 		if (var2.method597(localPlayer.name)) {
-			addChat(Text.FRIENDCANTADDSELF, 0, field3453);
+			addChat(Text.FRIENDCANTADDSELF, 0, AUTO_EMPTY);
 			return;
 		}
 		field370[friendCount] = var2;
 		field2086[friendCount] = arg0;
 		field3092[friendCount] = 0;
-		field3238[friendCount] = field3453;
+		field3238[friendCount] = AUTO_EMPTY;
 		field845[friendCount] = 0;
 		field1120[friendCount] = false;
 		friendTransmitNum = transmitNum;
@@ -11459,24 +11782,24 @@ public final class Client extends GameShell {
 			return;
 		}
 		if (privateMessageCount >= 100) {
-			addChat(Text.IGNORELISTFULL, 0, field3453);
+			addChat(Text.IGNORELISTFULL, 0, AUTO_EMPTY);
 			return;
 		}
 		JagString var2 = JagString.method1375(arg0).method614();
 		for (int var3 = 0; var3 < privateMessageCount; var3++) {
 			if (messageIds[var3] == arg0) {
-				addChat(JagString.join(new JagString[] { var2, Text.IGNORELISTDUPE }), 0, field3453);
+				addChat(JagString.join(new JagString[] { var2, Text.IGNORELISTDUPE }), 0, AUTO_EMPTY);
 				return;
 			}
 		}
 		for (int var4 = 0; var4 < friendCount; var4++) {
 			if (arg0 == field2086[var4]) {
-				addChat(JagString.join(new JagString[] {Text.REMOVEFRIEND1, var2, Text.REMOVEFRIEND2 }), 0, field3453);
+				addChat(JagString.join(new JagString[] {Text.REMOVEFRIEND1, var2, Text.REMOVEFRIEND2 }), 0, AUTO_EMPTY);
 				return;
 			}
 		}
 		if (var2.method597(localPlayer.name)) {
-			addChat(Text.IGNORECANTADDSELF, 0, field3453);
+			addChat(Text.IGNORECANTADDSELF, 0, AUTO_EMPTY);
 			return;
 		}
 		messageIds[privateMessageCount] = arg0;
@@ -12035,14 +12358,14 @@ public final class Client extends GameShell {
 			int var5 = (ClientBuild.field2731[var2] & 0xFF) * 64 - mapBuildBaseZ;
 			if (var4 != null) {
 				doAudio();
-				ClientBuild.loadGround(field2014 * 8 - 48, var3, (mapBuildCentreZoneX - 6) * 8, collision, var5, var4);
+				ClientBuild.loadGround(mapBuildCentreZoneZ * 8 - 48, var3, (mapBuildCentreZoneX - 6) * 8, collision, var5, var4);
 			}
 		}
 		for (int var6 = 0; var6 < var1; var6++) {
 			int var7 = (ClientBuild.field2731[var6] >> 8) * 64 - mapBuildBaseX;
 			int var8 = (ClientBuild.field2731[var6] & 0xFF) * 64 - mapBuildBaseZ;
 			byte[] var9 = var0[var6];
-			if (var9 == null && field2014 < 800) {
+			if (var9 == null && mapBuildCentreZoneZ < 800) {
 				doAudio();
 				for (int var10 = 0; var10 < 4; var10++) {
 					ClientBuild.fadeAdjacent(var10, 64, 64, var8, var7);

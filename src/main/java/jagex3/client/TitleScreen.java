@@ -19,29 +19,29 @@ public class TitleScreen {
 	@ObfuscatedName("ed.e")
 	public static final JagString field915 = JagString.wrap(")4slr2)3ws?order=LPWM");
 	@ObfuscatedName("de.G")
-	public static final JagString field689 = JagString.wrap("title)3jpg");
+	public static final JagString AUTO_TITLEJPG = JagString.wrap("title)3jpg");
 	@ObfuscatedName("ff.X")
-	public static final JagString field1143 = JagString.wrap("logo");
+	public static final JagString AUTO_LOGO = JagString.wrap("logo");
 	@ObfuscatedName("client.T")
-	public static final JagString field561 = JagString.wrap("titlebox");
+	public static final JagString AUTO_TITLEBOX = JagString.wrap("titlebox");
 	@ObfuscatedName("kg.R")
-	public static final JagString field2089 = JagString.wrap("titlebutton");
+	public static final JagString AUTO_TITLEBUTTON = JagString.wrap("titlebutton");
 	@ObfuscatedName("bh.J")
-	public static final JagString field316 = JagString.wrap("runes");
+	public static final JagString AUTO_RUNES = JagString.wrap("runes");
 	@ObfuscatedName("id.q")
-	public static final JagString field1733 = JagString.wrap("title_mute");
+	public static final JagString AUTO_TITLE_MUTE = JagString.wrap("title_mute");
 	@ObfuscatedName("uj.l")
-	public static final JagString field4278 = JagString.wrap("sl_back");
+	public static final JagString AUTO_SL_BACK = JagString.wrap("sl_back");
 	@ObfuscatedName("te.S")
-	public static final JagString field4011 = JagString.wrap("sl_flags");
+	public static final JagString AUTO_SL_FLAGS = JagString.wrap("sl_flags");
 	@ObfuscatedName("eb.O")
-	public static final JagString field881 = JagString.wrap("sl_arrows");
+	public static final JagString AUTO_SL_ARROWS = JagString.wrap("sl_arrows");
 	@ObfuscatedName("af.K")
-	public static final JagString field102 = JagString.wrap("sl_stars");
+	public static final JagString AUTO_SL_STARS = JagString.wrap("sl_stars");
 	@ObfuscatedName("ia.v")
-	public static final JagString field1682 = JagString.wrap("sl_button");
+	public static final JagString AUTO_SL_BUTTON = JagString.wrap("sl_button");
 	@ObfuscatedName("kj.e")
-	public static final JagString field2156 = JagString.wrap("scape main");
+	public static final JagString AUTO_SCAPE_MAIN = JagString.wrap("scape main");
 	@ObfuscatedName("sj.e")
 	public static final JagString field3922 = JagString.wrap(")3runescape)3com");
 	@ObfuscatedName("ac.U")
@@ -264,7 +264,7 @@ public class TitleScreen {
                 arg1.centreString(Text.CANCEL, 382, 326, 16777215, 0);
             }
         }
-        if (Client.game != 1) {
+        if (Client.modegame != 1) {
             if (field1550 > 0) {
                 method535(field1550);
                 field1550 = 0;
@@ -687,13 +687,13 @@ public class TitleScreen {
 			slBack = PixLoader.method230(0, Client.sprites, field209);
 		}
 		if (slFlags == null) {
-			slFlags = PixLoader.method1325(field119, Client.sprites, 0);
+			slFlags = PixLoader.makePix8Array(field119, Client.sprites, 0);
 		}
 		if (slArrows == null) {
-			slArrows = PixLoader.method1325(field1783, Client.sprites, 0);
+			slArrows = PixLoader.makePix8Array(field1783, Client.sprites, 0);
 		}
 		if (slStars == null) {
-			slStars = PixLoader.method1325(field2195, Client.sprites, 0);
+			slStars = PixLoader.makePix8Array(field2195, Client.sprites, 0);
 		}
 		Pix2D.fillRect(0, 23, 765, 480, 0);
 		Pix2D.method482(0, 0, 138, 23, 12425273, 9135624);
@@ -1096,7 +1096,7 @@ public class TitleScreen {
 		WorldEntry var1 = list[slLastWorld];
 		if (Client.memServer == var1.field1257) {
 			byte[] var2 = JagString.join(new JagString[] { var1.field1262, field3922}).method613();
-			Client.field1760 = new String(var2, 0, var2.length);
+			Client.loginHost = new String(var2, 0, var2.length);
 			Client.worldid = var1.field1261;
 			if (Client.modewhere != 0) {
 				Client.loginJs5Port = 443;
@@ -1117,18 +1117,18 @@ public class TitleScreen {
 
     @ObfuscatedName("o.a(Lnb;Lnb;ILnb;)V")
     public static void method1038(Js5 arg0, Js5 arg1, Js5 arg2) {
-        field2009 = arg1.getGroupId(field689);
-        field2932 = arg2.getGroupId(field1143);
-        field1896 = arg2.getGroupId(field561);
-        field3019 = arg2.getGroupId(field2089);
-        field4502 = arg2.getGroupId(field316);
-        field2912 = arg2.getGroupId(field1733);
-        field209 = arg2.getGroupId(field4278);
-        field119 = arg2.getGroupId(field4011);
-        field1783 = arg2.getGroupId(field881);
-        field2195 = arg2.getGroupId(field102);
-        field4247 = arg2.getGroupId(field1682);
-        field1552 = arg0.getGroupId(field2156);
+        field2009 = arg1.getGroupId(AUTO_TITLEJPG);
+        field2932 = arg2.getGroupId(AUTO_LOGO);
+        field1896 = arg2.getGroupId(AUTO_TITLEBOX);
+        field3019 = arg2.getGroupId(AUTO_TITLEBUTTON);
+        field4502 = arg2.getGroupId(AUTO_RUNES);
+        field2912 = arg2.getGroupId(AUTO_TITLE_MUTE);
+        field209 = arg2.getGroupId(AUTO_SL_BACK);
+        field119 = arg2.getGroupId(AUTO_SL_FLAGS);
+        field1783 = arg2.getGroupId(AUTO_SL_ARROWS);
+        field2195 = arg2.getGroupId(AUTO_SL_STARS);
+        field4247 = arg2.getGroupId(AUTO_SL_BUTTON);
+        field1552 = arg0.getGroupId(AUTO_SCAPE_MAIN);
     }
 
 	@ObfuscatedName("uj.a(IIBI)I")
@@ -1185,5 +1185,10 @@ public class TitleScreen {
 		} else {
 			return 0;
 		}
+	}
+
+	@ObfuscatedName("jf.c(B)I")
+	public static int readyMax() {
+		return 6;
 	}
 }

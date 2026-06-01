@@ -433,7 +433,7 @@ public class Text {
 	@ObfuscatedName("ja.l")
 	public static final JagString field1813 = JagString.wrap("Starting 3d library");
 	@ObfuscatedName("ja.k")
-	public static JagString field1812 = field1813;
+	public static JagString MAINLOAD60B = field1813;
 	@ObfuscatedName("ui.I")
 	public static final JagString field4255 = JagString.wrap("Too many incorrect logins from your address)3");
 	@ObfuscatedName("ui.M")

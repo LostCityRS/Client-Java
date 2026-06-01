@@ -1,7 +1,9 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
+import deob.Statics;
 import jagex3.client.Client;
+import jagex3.client.ClientMouseListener;
 import jagex3.constants.Text;
 import jagex3.dash3d.*;
 import jagex3.datastruct.*;
@@ -345,6 +347,55 @@ public final class ObjType extends Linkable2 {
 		} else {
 			return JagString.join(new JagString[] { Client.field2462, JagString.method1212(arg0 / 1000000), Text.MILLION_SHORT, Client.field1214 });
 		}
+	}
+
+	@ObfuscatedName("sj.a(I)V")
+	public static void method1416() {
+		int[] var0 = new int[numDefinitions];
+		int var1 = 0;
+		for (int var2 = 0; var2 < numDefinitions; var2++) {
+			ObjType var3 = list(var2);
+			if (var3.manwear >= 0 || var3.womanwear >= 0) {
+				var0[var1++] = var2;
+			}
+		}
+		Statics.field1698 = new int[var1];
+		for (int var4 = 0; var4 < var1; var4++) {
+			Statics.field1698[var4] = var0[var4];
+		}
+	}
+
+	@ObfuscatedName("gd.a(IZLi;)V")
+	public static void method467(boolean arg0, JagString arg1) {
+		JagString var2 = arg1.method639();
+		int var3 = 0;
+		short[] var4 = new short[16];
+		for (int var5 = 0; var5 < numDefinitions; var5++) {
+			ObjType var6 = list(var5);
+			if ((!arg0 || var6.stockmarket) && var6.certtemplate == -1 && var6.lenttemplate == -1 && var6.dummyitem == 0 && var6.name.method639().method617(var2) != -1) {
+				if (var3 >= 250) {
+					Statics.field3893 = -1;
+					Statics.field1210 = null;
+					return;
+				}
+				if (var3 >= var4.length) {
+					short[] var7 = new short[var4.length * 2];
+					for (int var8 = 0; var8 < var3; var8++) {
+						var7[var8] = var4[var8];
+					}
+					var4 = var7;
+				}
+				var4[var3++] = (short) var5;
+			}
+		}
+		ClientMouseListener.field2107 = 0;
+		Statics.field3893 = var3;
+		Statics.field1210 = var4;
+		JagString[] var9 = new JagString[Statics.field3893];
+		for (int var10 = 0; var10 < Statics.field3893; var10++) {
+			var9[var10] = list(var4[var10]).name;
+		}
+		Statics.method1376(Statics.field1210, var9);
 	}
 
 	@ObfuscatedName("ng.b(Z)Lle;")

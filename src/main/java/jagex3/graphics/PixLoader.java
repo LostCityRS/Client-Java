@@ -117,7 +117,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("d.d(B)[Lpf;")
-	public static SoftwarePix32[] method229() {
+	public static SoftwarePix32[] makePix32Array() {
 		SoftwarePix32[] var0 = new SoftwarePix32[count];
 		for (int var1 = 0; var1 < count; var1++) {
 			int var2 = wi[var1] * hi[var1];
@@ -172,12 +172,12 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("re.a(IBLnb;I)[Llj;")
-	public static Pix8[] method1325(int arg0, Js5 arg1, int arg2) {
+	public static Pix8[] makePix8Array(int arg0, Js5 arg1, int arg2) {
 		return depack(arg1, arg0, arg2) ? method1323() : null;
 	}
 
 	@ObfuscatedName("re.a(IILnb;B)[Lrh;")
-	public static SoftwarePix8[] method1322(int arg0, int arg1, Js5 arg2) {
+	public static SoftwarePix8[] makePix8Array(int arg0, int arg1, Js5 arg2) {
 		return depack(arg2, arg0, arg1) ? method1243() : null;
 	}
 
@@ -226,41 +226,41 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("jh.a(ILnb;IILnb;)Lcc;")
-	public static PixfontGeneric method735(int arg0, Js5 arg1, int arg2, Js5 arg3) {
+	public static PixfontGeneric makePixFont(int arg0, Js5 arg1, int arg2, Js5 arg3) {
 		return depack(arg3, arg2, arg0) ? makePixFont(arg1.getFile(arg0, arg2)) : null;
 	}
 
 	@ObfuscatedName("fd.a(Lnb;Lnb;Li;ILi;)Lcc;")
-	public static PixfontGeneric method429(Js5 arg0, Js5 arg1, JagString arg2, JagString arg3) {
+	public static PixfontGeneric makePixFont(Js5 arg0, Js5 arg1, JagString arg2, JagString arg3) {
 		int var4 = arg1.getGroupId(arg3);
 		int var5 = arg1.getFileId(arg2, var4);
-		return method735(var5, arg0, var4, arg1);
+		return makePixFont(var5, arg0, var4, arg1);
 	}
 
 	@ObfuscatedName("a.a(Li;BLnb;Li;)[Llj;")
-	public static Pix8[] method2(JagString arg0, Js5 arg1, JagString arg2) {
+	public static Pix8[] makePix8Array(JagString arg0, Js5 arg1, JagString arg2) {
 		int var3 = arg1.getGroupId(arg0);
 		int var4 = arg1.getFileId(arg2, var3);
-		return method1325(var3, arg1, var4);
+		return makePix8Array(var3, arg1, var4);
 	}
 
 	@ObfuscatedName("w.a(ILnb;II)[Lpf;")
-	public static SoftwarePix32[] method1583(int arg0, Js5 arg1, int arg2) {
-		return depack(arg1, arg2, arg0) ? method229() : null;
+	public static SoftwarePix32[] makePix32Array(int arg0, Js5 arg1, int arg2) {
+		return depack(arg1, arg2, arg0) ? makePix32Array() : null;
 	}
 
 	@ObfuscatedName("w.a(Li;ZLnb;Li;)[Lrc;")
-	public static Pix32[] method1582(JagString arg0, Js5 arg1, JagString arg2) {
+	public static Pix32[] makePix32Array(JagString arg0, Js5 arg1, JagString arg2) {
 		int var3 = arg1.getGroupId(arg0);
 		int var4 = arg1.getFileId(arg2, var3);
 		return method230(var4, arg1, var3);
 	}
 
 	@ObfuscatedName("ab.a(Li;ZLi;Lnb;)[Lpf;")
-	public static SoftwarePix32[] method15(JagString arg0, JagString arg1, Js5 arg2) {
+	public static SoftwarePix32[] makePix32Array(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.getGroupId(arg0);
 		int var4 = arg2.getFileId(arg1, var3);
-		return method1583(var4, arg2, var3);
+		return makePix32Array(var4, arg2, var3);
 	}
 
 	@ObfuscatedName("ci.a(ZLnb;II)Lpf;")
@@ -284,21 +284,21 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("ne.a(ILi;Li;Lnb;)[Lrh;")
-	public static SoftwarePix8[] method981(JagString arg0, JagString arg1, Js5 arg2) {
+	public static SoftwarePix8[] makePix8Array(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.getGroupId(arg0);
 		int var4 = arg2.getFileId(arg1, var3);
-		return method1322(var3, var4, arg2);
+		return makePix8Array(var3, var4, arg2);
 	}
 
 	@ObfuscatedName("uc.a(Li;Li;BLnb;)Lrc;")
-	public static Pix32 method1490(JagString arg0, JagString arg1, Js5 arg2) {
+	public static Pix32 makePix32(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.getGroupId(arg0);
 		int var4 = arg2.getFileId(arg1, var3);
 		return method1558(arg2, var3, var4);
 	}
 
 	@ObfuscatedName("ah.a(Li;BLnb;Li;)Lpf;")
-	public static SoftwarePix32 method49(JagString arg0, Js5 arg1, JagString arg2) {
+	public static SoftwarePix32 makePix32(JagString arg0, Js5 arg1, JagString arg2) {
 		int var3 = arg1.getGroupId(arg0);
 		int var4 = arg1.getFileId(arg2, var3);
 		return method203(arg1, var4, var3);

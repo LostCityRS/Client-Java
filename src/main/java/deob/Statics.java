@@ -1,10 +1,7 @@
 package deob;
 
-import jagex3.client.ClientMouseListener;
-import jagex3.config.ObjType;
 import jagex3.datastruct.HashTable;
 import jagex3.jstring.JagString;
-import jagex3.sound.PcmStream;
 
 import java.util.Random;
 
@@ -82,22 +79,6 @@ public class Statics {
 	@ObfuscatedName("id.r")
 	public static int[] field1734;
 
-	@ObfuscatedName("sj.a(I)V")
-	public static void method1416() {
-		int[] var0 = new int[ObjType.numDefinitions];
-		int var1 = 0;
-		for (int var2 = 0; var2 < ObjType.numDefinitions; var2++) {
-			ObjType var3 = ObjType.list(var2);
-			if (var3.manwear >= 0 || var3.womanwear >= 0) {
-				var0[var1++] = var2;
-			}
-		}
-		field1698 = new int[var1];
-		for (int var4 = 0; var4 < var1; var4++) {
-			field1698[var4] = var0[var4];
-		}
-	}
-
 	@ObfuscatedName("ac.c(II)Z")
 	public static boolean method24(int arg0) {
 		return arg0 >= 48 && arg0 <= 57;
@@ -169,17 +150,6 @@ public class Statics {
 		return var2;
 	}
 
-	@ObfuscatedName("bi.a(ILef;)V")
-	public static void method99(PcmStream arg0) {
-		if (arg0.sound != null) {
-			arg0.sound.position = 0;
-		}
-		arg0.active = false;
-		for (PcmStream var1 = arg0.substreamStart(); var1 != null; var1 = arg0.substreamNext()) {
-			method99(var1);
-		}
-	}
-
 	@ObfuscatedName("bi.a(II)I")
 	public static int method102(int arg0) {
 		if (arg0 >= 65 && arg0 <= 90 || arg0 >= 192 && arg0 <= 222 && arg0 != 215) {
@@ -191,39 +161,6 @@ public class Statics {
 		} else {
 			return arg0;
 		}
-	}
-
-	@ObfuscatedName("gd.a(IZLi;)V")
-	public static void method467(boolean arg0, JagString arg1) {
-		JagString var2 = arg1.method639();
-		int var3 = 0;
-		short[] var4 = new short[16];
-		for (int var5 = 0; var5 < ObjType.numDefinitions; var5++) {
-			ObjType var6 = ObjType.list(var5);
-			if ((!arg0 || var6.stockmarket) && var6.certtemplate == -1 && var6.lenttemplate == -1 && var6.dummyitem == 0 && var6.name.method639().method617(var2) != -1) {
-				if (var3 >= 250) {
-					field3893 = -1;
-					field1210 = null;
-					return;
-				}
-				if (var3 >= var4.length) {
-					short[] var7 = new short[var4.length * 2];
-					for (int var8 = 0; var8 < var3; var8++) {
-						var7[var8] = var4[var8];
-					}
-					var4 = var7;
-				}
-				var4[var3++] = (short) var5;
-			}
-		}
-		ClientMouseListener.field2107 = 0;
-		field3893 = var3;
-		field1210 = var4;
-		JagString[] var9 = new JagString[field3893];
-		for (int var10 = 0; var10 < field3893; var10++) {
-			var9[var10] = ObjType.list(var4[var10]).name;
-		}
-		method1376(field1210, var9);
 	}
 
 	@ObfuscatedName("uc.a(II)Z")

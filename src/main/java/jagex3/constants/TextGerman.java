@@ -448,7 +448,7 @@ public class TextGerman {
 		Text.field1291 = field5;
 		Text.MAINLOAD30 = field62;
 		Text.field3321 = field1124;
-		Text.field1812 = field2165;
+		Text.MAINLOAD60B = field2165;
 		Text.LOGIN16_A = field367;
 		Text.FRIENDLISTDUPE = field3216;
 		Text.CANCEL = field2498;

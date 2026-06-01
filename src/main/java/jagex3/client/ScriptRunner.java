@@ -1507,11 +1507,11 @@ public class ScriptRunner {
 							continue;
 						}
 						if (var382 == 3328) {
-							intStack[var5++] = Client.field4428;
+							intStack[var5++] = Client.underage;
 							continue;
 						}
 						if (var382 == 3329) {
-							intStack[var5++] = Client.field3535;
+							intStack[var5++] = Client.mapQuickchat;
 							continue;
 						}
 					} else if (var382 < 3500) {
@@ -2288,7 +2288,7 @@ public class ScriptRunner {
 							int var177 = intStack[var5];
 							var6--;
 							JagString var178 = stringStack[var6];
-							Statics.method467(var177 == 1, var178);
+							ObjType.method467(var177 == 1, var178);
 							intStack[var5++] = Statics.field3893;
 							continue;
 						}
@@ -2381,7 +2381,7 @@ public class ScriptRunner {
 										Client.doCheat(var189);
 										continue;
 									}
-									if (Client.staffmodlevel == 0 && (Client.field4428 == 1 || Client.field3535 == 1)) {
+									if (Client.staffmodlevel == 0 && (Client.underage == 1 || Client.mapQuickchat == 1)) {
 										continue;
 									}
 									JagString var190 = var189.method639();
@@ -2509,7 +2509,7 @@ public class ScriptRunner {
 									var6 -= 2;
 									JagString var195 = stringStack[var6];
 									JagString var196 = stringStack[var6 + 1];
-									if (Client.staffmodlevel != 0 || Client.field4428 != 1 && Client.field3535 != 1) {
+									if (Client.staffmodlevel != 0 || Client.underage != 1 && Client.mapQuickchat != 1) {
 										Client.out.p1Enc(80);
 										Client.out.p1(0);
 										int var197 = Client.out.pos;

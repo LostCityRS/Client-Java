@@ -45,8 +45,8 @@ public final class JagException extends RuntimeException {
 			String var4 = var3.replace('@', '_');
 			String var5 = var4.replace('&', '_');
 			String var6 = var5.replace('#', '_');
-			if (signlink.field3597 != null) {
-				PrivilegedRequest var7 = signlink.urlreq(new URL(signlink.field3597.getCodeBase(), "clienterror.ws?c=" + revision + "&u=" + Client.field631 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
+			if (signlink.applet != null) {
+				PrivilegedRequest var7 = signlink.urlreq(new URL(signlink.applet.getCodeBase(), "clienterror.ws?c=" + revision + "&u=" + Client.field631 + "&v1=" + SignLink.javaVendor + "&v2=" + SignLink.javaVersion + "&e=" + var6));
 				while (var7.status == 0) {
 					ThreadSleep.sleepPrecise(1L);
 				}

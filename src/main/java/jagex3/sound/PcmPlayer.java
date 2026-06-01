@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.SignLink;
 import jagex3.util.ArrayUtil;
 import jagex3.util.MonotonicTime;
@@ -128,6 +127,17 @@ public class PcmPlayer {
 		}
 	}
 
+	@ObfuscatedName("bi.a(ILef;)V")
+	public static void resetStreamState(PcmStream arg0) {
+		if (arg0.sound != null) {
+			arg0.sound.position = 0;
+		}
+		arg0.active = false;
+		for (PcmStream var1 = arg0.substreamStart(); var1 != null; var1 = arg0.substreamNext()) {
+			resetStreamState(var1);
+		}
+	}
+
 	@ObfuscatedName("ej.a()I")
 	public int queued() throws Exception {
 		return this.capacity;
@@ -211,7 +221,7 @@ public class PcmPlayer {
 		this.samplesUntilMix -= 256;
 		if (this.stream != null && this.samplesUntilMix <= 0) {
 			this.samplesUntilMix += frequency >> 4;
-			Statics.method99(this.stream);
+			resetStreamState(this.stream);
 			this.enqueueStream(this.stream.priority(), this.stream);
 			int var3 = 0;
 			int var4 = 255;

@@ -72,10 +72,10 @@ public final class SignLink implements Runnable {
 	public boolean isClosed = false;
 
 	@ObfuscatedName("qg.s")
-	public Applet field3597 = null;
+	public Applet applet = null;
 
 	public SignLink(boolean arg0, Applet arg1, int arg2, String arg3, int arg4) {
-		this.field3597 = arg1;
+		this.applet = arg1;
 		javaVersion = "1.1";
 		javaVendor = "Unknown";
 		try {

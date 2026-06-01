@@ -783,9 +783,9 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("i.a(Ljava/applet/Applet;Z)Ljava/lang/Object;")
-	public Object method628(Applet arg0) throws Throwable {
+	public Object browserCall(Applet arg0) throws Throwable {
 		String var2 = new String(this.chars, 0, this.length);
-		Object var3 = BrowserControl.method1597(null, arg0, var2);
+		Object var3 = BrowserControl.call(null, arg0, var2);
 		if (var3 instanceof String) {
 			byte[] var4 = ((String) var3).getBytes();
 			var3 = method395(0, var4, var4.length);
@@ -914,7 +914,7 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("i.a(ILjava/applet/Applet;)V")
 	public void method636(Applet arg0) throws Throwable {
 		String var2 = new String(this.chars, 0, this.length);
-		BrowserControl.method1596(arg0, var2);
+		BrowserControl.eval(arg0, var2);
 	}
 
 	@ObfuscatedName("i.e(B)J")

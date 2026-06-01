@@ -294,7 +294,7 @@ public class World {
 	}
 
 	@ObfuscatedName("qe.a(IIII)V")
-	public static void method1277() {
+	public static void init() {
 		field211 = new Square[4][104][104];
 		groundh = new int[4][105][105];
 		method131();

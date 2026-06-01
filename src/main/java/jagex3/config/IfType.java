@@ -875,7 +875,7 @@ public final class IfType {
 		if (var2 != null) {
 			return var2;
 		}
-		PixfontGeneric var3 = PixLoader.method735(0, field1926, this.font, field1176);
+		PixfontGeneric var3 = PixLoader.makePixFont(0, field1926, this.font, field1176);
 		if (var3 == null) {
 			loadingAsset = true;
 		} else {
