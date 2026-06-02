@@ -207,7 +207,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				var5.fillRect(arg3 * 3 + 2, 2, 300 - arg3 * 3, 30);
 				var5.setFont(progressFont);
 				var5.setColor(Color.white);
-				arg1.method620((304 - arg1.method609(progressFontMetrics)) / 2, 22, var5);
+				arg1.drawString((304 - arg1.method609(progressFontMetrics)) / 2, 22, var5);
 				var4.drawImage(progressBar, sWid / 2 - 152, sHei / 2 + -18, null);
 			} catch (Exception var8) {
 				int var6 = sWid / 2 - 152;
@@ -220,12 +220,12 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				var4.fillRect(arg3 * 3 + var6 + 2, var7 + 2, 300 - arg3 * 3, 30);
 				var4.setFont(progressFont);
 				var4.setColor(Color.white);
-				arg1.method620(var6 + (304 - arg1.method609(progressFontMetrics)) / 2, var7 + 22, var4);
+				arg1.drawString(var6 + (304 - arg1.method609(progressFontMetrics)) / 2, var7 + 22, var4);
 			}
 			if (Statics.field2752 != null) {
 				var4.setFont(progressFont);
 				var4.setColor(Color.white);
-				Statics.field2752.method620(sWid / 2 - Statics.field2752.method609(progressFontMetrics) / 2, sHei / 2 + -26, var4);
+				Statics.field2752.drawString(sWid / 2 - Statics.field2752.method609(progressFontMetrics) / 2, sHei / 2 + -26, var4);
 			}
 		} catch (Exception var9) {
 			canvas.repaint();
@@ -319,7 +319,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			} else {
 				var4 = JagString.join(new JagString[] { var3, field1982, method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.method1556(94608000L) });
 			}
-			JagString.join(new JagString[] {field3237, var4, field591}).method636(signlink.applet);
+			JagString.join(new JagString[] {field3237, var4, field591}).eval(signlink.applet);
 		} catch (Throwable var5) {
 		}
 	}
@@ -334,7 +334,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 		int var6 = field4545.get(11);
 		int var7 = field4545.get(12);
 		int var8 = field4545.get(13);
-		return JagString.join(new JagString[] { field1673[var2 - 1], field3772, JagString.method1212(var3 / 10), JagString.method1212(var3 % 10), field3135, field658[var4], field3135, JagString.method1212(var5), field4262, JagString.method1212(var6 / 10), JagString.method1212(var6 % 10), field1959, JagString.method1212(var7 / 10), JagString.method1212(var7 % 10), field1959, JagString.method1212(var8 / 10), JagString.method1212(var8 % 10), field82});
+		return JagString.join(new JagString[] { field1673[var2 - 1], field3772, JagString.parseInt(var3 / 10), JagString.parseInt(var3 % 10), field3135, field658[var4], field3135, JagString.parseInt(var5), field4262, JagString.parseInt(var6 / 10), JagString.parseInt(var6 % 10), field1959, JagString.parseInt(var7 / 10), JagString.parseInt(var7 % 10), field1959, JagString.parseInt(var8 / 10), JagString.parseInt(var8 % 10), field82});
 	}
 
 	@Override

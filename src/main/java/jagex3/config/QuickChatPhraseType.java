@@ -1,7 +1,6 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import jagex3.dash3d.TextureOp29;
 import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
@@ -21,6 +20,8 @@ public final class QuickChatPhraseType extends Linkable2 {
 	public static final int[] DYNAMIC_PARAM_COUNTS = new int[] { 1, 0, 0, 0, 1, 0, 2, 1, 1, 1, 0 };
 	@ObfuscatedName("jd.a")
 	public static final JagString EMPTY = JagString.wrap("");
+	@ObfuscatedName("rc.E")
+	public static final JagString field3644 = JagString.wrap(")3)3)3");
 
 	@ObfuscatedName("ha.C")
 	public static Js5 configClient;
@@ -79,7 +80,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 				return var4;
 			}
 		}
-		return arg1 == 5 ? JagString.method1375(arg0).method614() : JagString.method1556(arg0);
+		return arg1 == 5 ? JagString.toRawUsername(arg0).method614() : JagString.method1556(arg0);
 	}
 
 	@ObfuscatedName("si.a(BI)I")
@@ -119,27 +120,27 @@ public final class QuickChatPhraseType extends Linkable2 {
 
 	@ObfuscatedName("si.a(Lea;I)Li;")
 	public JagString decodeMessage(Packet arg0) {
-		JagString var2 = JagString.method1135(80);
+		JagString var2 = JagString.newStringBuilder(80);
 		if (this.dynamicCommands != null) {
 			for (int var3 = 0; var3 < this.dynamicCommands.length; var3++) {
-				var2.method616(this.textSegments[var3]);
-				var2.method616(formatDynamicValue(arg0.method300(DECODE_BIT_LENGTHS[this.dynamicCommands[var3]]), this.dynamicCommands[var3], this.dynamicCommandParams[var3]));
+				var2.append(this.textSegments[var3]);
+				var2.append(formatDynamicValue(arg0.method300(DECODE_BIT_LENGTHS[this.dynamicCommands[var3]]), this.dynamicCommands[var3], this.dynamicCommandParams[var3]));
 			}
 		}
-		var2.method616(this.textSegments[this.textSegments.length - 1]);
+		var2.append(this.textSegments[this.textSegments.length - 1]);
 		return var2.method629();
 	}
 
 	@ObfuscatedName("si.e(I)Li;")
 	public JagString getText() {
-		JagString var1 = JagString.method1135(80);
+		JagString var1 = JagString.newStringBuilder(80);
 		if (this.textSegments == null) {
 			return EMPTY;
 		}
-		var1.method616(this.textSegments[0]);
+		var1.append(this.textSegments[0]);
 		for (int var2 = 1; var2 < this.textSegments.length; var2++) {
-			var1.method616(TextureOp29.field3644);
-			var1.method616(this.textSegments[var2]);
+			var1.append(field3644);
+			var1.append(this.textSegments[var2]);
 		}
 		return var1.method629();
 	}

@@ -2,15 +2,12 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import jagex3.io.Packet;
-import jagex3.jstring.JagString;
 import jagex3.util.ArrayUtil;
 import jagex3.util.IntUtil;
 
 @ObfuscatedName("mb")
 public final class TextureOp29 extends TextureOp {
 
-	@ObfuscatedName("rc.E")
-	public static final JagString field3644 = JagString.wrap(")3)3)3");
 	@ObfuscatedName("b.p")
 	public static int field183 = 100;
 	@ObfuscatedName("g.e")

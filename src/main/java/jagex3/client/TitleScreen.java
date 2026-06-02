@@ -278,7 +278,7 @@ public class TitleScreen {
 			}
 			if (slButton != null) {
 				slButton.plotSprite(5, 463);
-				arg1.centreString(JagString.join(new JagString[]{Text.WORLD, field3787, JagString.method1212(Client.worldid)}), 55, 478, 16777215, 0);
+				arg1.centreString(JagString.join(new JagString[]{Text.WORLD, field3787, JagString.parseInt(Client.worldid)}), 55, 478, 16777215, 0);
 				if (gameworldListDownloadRequest != null) {
 					arg0.centreString(Text.LOADINGDOTDOTDOT, 55, 492, 16777215, 0);
 					return;
@@ -384,7 +384,7 @@ public class TitleScreen {
 								continue label226;
 							}
 							if (ClientKeyboardListener.code == 85 && loginUser.length() > 0) {
-								loginUser = loginUser.method623(0, loginUser.length() - 1);
+								loginUser = loginUser.substring(0, loginUser.length() - 1);
 							}
 							if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 								field2620 = 1;
@@ -396,7 +396,7 @@ public class TitleScreen {
 						return;
 					} while (field2620 != 1);
 					if (ClientKeyboardListener.code == 85 && loginPass.length() > 0) {
-						loginPass = loginPass.method623(0, loginPass.length() - 1);
+						loginPass = loginPass.substring(0, loginPass.length() - 1);
 					}
 					if (ClientKeyboardListener.code == 84 || ClientKeyboardListener.code == 80) {
 						field2620 = 0;
@@ -790,7 +790,7 @@ public class TitleScreen {
 		for (int var13 = 0; var13 < num; var13++) {
 			WorldEntry var14 = list[var13];
 			boolean var15 = true;
-			JagString var16 = JagString.method1212(var14.field1255);
+			JagString var16 = JagString.parseInt(var14.field1255);
 			if (var14.field1255 == -1) {
 				var16 = Text.OFFLINEWORLD;
 				var15 = false;
@@ -807,7 +807,7 @@ public class TitleScreen {
 			if (slFlags != null) {
 				slFlags[var14.field1260 + (var14.field1257 ? 8 : 0)].plotSprite(var9 + 29, var11);
 			}
-			arg1.centreString(JagString.method1212(var14.field1261), var9 + 15, 5 + 9 + var11, 0, -1);
+			arg1.centreString(JagString.parseInt(var14.field1261), var9 + 15, 5 + 9 + var11, 0, -1);
 			arg0.centreString(var16, var9 + 60, var11 - -5 + 9, 268435455, -1);
 			var11 += var7 + 19;
 			var12++;
@@ -907,7 +907,7 @@ public class TitleScreen {
 	public static void listFetch() {
 		try {
 			if (gameworldListDownloadRequest == null) {
-				gameworldListDownloadRequest = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { field3983, JagString.method1212(Client.lang), field915}).method606());
+				gameworldListDownloadRequest = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { field3983, JagString.parseInt(Client.lang), field915}).method606());
 			} else {
 				byte[] var0 = gameworldListDownloadRequest.getData();
 				if (var0 != null) {
@@ -1108,7 +1108,7 @@ public class TitleScreen {
 			method1493();
 			return;
 		}
-		JagString var3 = JagString.join(new JagString[] { field1771, var1.field1262, field3076, JagString.method1212(Client.lang), field63, JagString.method1212(Client.lowMem ? 1 : 0), field21, JagString.method1212(Client.plug), field1351, JagString.method1212(Client.js) });
+		JagString var3 = JagString.join(new JagString[] { field1771, var1.field1262, field3076, JagString.parseInt(Client.lang), field63, JagString.parseInt(Client.lowMem ? 1 : 0), field21, JagString.parseInt(Client.plug), field1351, JagString.parseInt(Client.js) });
 		try {
 			arg0.getAppletContext().showDocument(var3.method606(), "_self");
 		} catch (Exception var4) {

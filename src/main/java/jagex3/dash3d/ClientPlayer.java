@@ -336,7 +336,7 @@ public final class ClientPlayer extends ClientEntity {
 		if (super.runanim == 65535) {
 			super.runanim = -1;
 		}
-		this.name = JagString.method1375(arg0.g8()).method614();
+		this.name = JagString.toRawUsername(arg0.g8()).method614();
 		this.combatLevel = arg0.g1();
 		if (var4) {
 			this.skillLevel = arg0.g2();

@@ -63,7 +63,7 @@ public final class BufferedRandomAccessFile {
 			if (this.writeBufferPos != -1L && (long) this.writeBuffer.length + this.writeBufferPos < this.targetPos - -((long) arg1)) {
 				int var4 = (int) (this.writeBufferPos + (long) this.writeBuffer.length - this.targetPos);
 				arg1 -= var4;
-				ArrayUtil.method836(arg0, arg2, this.writeBuffer, (int) (this.targetPos - this.writeBufferPos), var4);
+				ArrayUtil.copy(arg0, arg2, this.writeBuffer, (int) (this.targetPos - this.writeBufferPos), var4);
 				this.targetPos += var4;
 				this.writeBufferSize = this.writeBuffer.length;
 				arg2 += var4;
@@ -93,14 +93,14 @@ public final class BufferedRandomAccessFile {
 				}
 				if (var5 > -1L && var5 < var7) {
 					int var9 = (int) (var7 - var5);
-					ArrayUtil.method836(arg0, (int) (var5 + (long) arg2 - this.targetPos), this.buffer, (int) (var5 - this.bufferStartPos), var9);
+					ArrayUtil.copy(arg0, (int) (var5 + (long) arg2 - this.targetPos), this.buffer, (int) (var5 - this.bufferStartPos), var9);
 				}
 				this.targetPos += arg1;
 			} else if (arg1 > 0) {
 				if (this.writeBufferPos == -1L) {
 					this.writeBufferPos = this.targetPos;
 				}
-				ArrayUtil.method836(arg0, arg2, this.writeBuffer, (int) (this.targetPos - this.writeBufferPos), arg1);
+				ArrayUtil.copy(arg0, arg2, this.writeBuffer, (int) (this.targetPos - this.writeBufferPos), arg1);
 				this.targetPos += arg1;
 				if ((long) this.writeBufferSize < this.targetPos - this.writeBufferPos) {
 					this.writeBufferSize = (int) (this.targetPos - this.writeBufferPos);
@@ -140,7 +140,7 @@ public final class BufferedRandomAccessFile {
 		}
 		if (var1 > -1L && var3 > var1) {
 			int var5 = (int) (var3 - var1);
-			ArrayUtil.method836(this.writeBuffer, (int) (var1 - this.writeBufferPos), this.buffer, (int) (var1 - this.bufferStartPos), var5);
+			ArrayUtil.copy(this.writeBuffer, (int) (var1 - this.writeBufferPos), this.buffer, (int) (var1 - this.bufferStartPos), var5);
 		}
 		this.writeBufferSize = 0;
 		this.writeBufferPos = -1L;
@@ -190,7 +190,7 @@ public final class BufferedRandomAccessFile {
 				throw new ArrayIndexOutOfBoundsException(arg2 - arg0.length);
 			}
 			if (this.writeBufferPos != -1L && this.targetPos >= this.writeBufferPos && (long) arg2 + this.targetPos <= this.writeBufferPos - -((long) this.writeBufferSize)) {
-				ArrayUtil.method836(this.writeBuffer, (int) (this.targetPos - this.writeBufferPos), arg0, 0, arg2);
+				ArrayUtil.copy(this.writeBuffer, (int) (this.targetPos - this.writeBufferPos), arg0, 0, arg2);
 				this.targetPos += arg2;
 				return;
 			}
@@ -202,7 +202,7 @@ public final class BufferedRandomAccessFile {
 					var7 = arg2;
 				}
 				arg2 -= var7;
-				ArrayUtil.method836(this.buffer, (int) (this.targetPos - this.bufferStartPos), arg0, 0, var7);
+				ArrayUtil.copy(this.buffer, (int) (this.targetPos - this.bufferStartPos), arg0, 0, var7);
 				this.targetPos += var7;
 				arg1 = var7;
 			}
@@ -226,7 +226,7 @@ public final class BufferedRandomAccessFile {
 					var8 = this.bufferPos;
 				}
 				arg2 -= var8;
-				ArrayUtil.method836(this.buffer, 0, arg0, arg1, var8);
+				ArrayUtil.copy(this.buffer, 0, arg0, arg1, var8);
 				arg1 += var8;
 				this.targetPos += var8;
 			}
@@ -256,7 +256,7 @@ public final class BufferedRandomAccessFile {
 				}
 				if (var11 > -1L && var11 < var13) {
 					int var15 = (int) (var13 - var11);
-					ArrayUtil.method836(this.writeBuffer, (int) (var11 - this.writeBufferPos), arg0, (int) (var11 - var4), var15);
+					ArrayUtil.copy(this.writeBuffer, (int) (var11 - this.writeBufferPos), arg0, (int) (var11 - var4), var15);
 					if (this.targetPos < var13) {
 						arg2 = (int) ((long) arg2 + this.targetPos - var13);
 						this.targetPos = var13;

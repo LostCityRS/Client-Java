@@ -1532,7 +1532,7 @@ public class WorldMap {
 		if (Client.showFps) {
 			int var10 = arg2 + arg0 - 5;
 			int var11 = arg1 + arg3 - 8;
-			Client.p12.rightString(JagString.join(new JagString[]{AUTO_FPS, JagString.method1212(GameShell.fps)}), var10, var11, 16776960, -1);
+			Client.p12.rightString(JagString.join(new JagString[]{AUTO_FPS, JagString.parseInt(GameShell.fps)}), var10, var11, 16776960, -1);
 			int var15 = var11 - 15;
 			Runtime var12 = Runtime.getRuntime();
 			int var13 = (int) ((var12.totalMemory() - var12.freeMemory()) / 1024L);
@@ -1540,7 +1540,7 @@ public class WorldMap {
 			if (var13 > 65536) {
 				var14 = 16711680;
 			}
-			Client.p12.rightString(JagString.join(new JagString[]{AUTO_MEM, JagString.method1212(var13), AUTO_MEM_UNIT}), var10, var15, var14, -1);
+			Client.p12.rightString(JagString.join(new JagString[]{AUTO_MEM, JagString.parseInt(var13), AUTO_MEM_UNIT}), var10, var15, var14, -1);
 			var11 = var15 - 15;
 		}
 	}

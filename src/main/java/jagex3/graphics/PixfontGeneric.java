@@ -243,27 +243,27 @@ public abstract class PixfontGeneric extends Linkable2 {
 				var5 = var7;
 			} else {
 				if (var8 == 62 && var5 != -1) {
-					JagString var9 = arg0.method623(var5 + 1, var7);
+					JagString var9 = arg0.substring(var5 + 1, var7);
 					var5 = -1;
-					if (var9.method597(tagLt)) {
+					if (var9.strEquals(tagLt)) {
 						var8 = 60;
-					} else if (var9.method597(tagGt)) {
+					} else if (var9.strEquals(tagGt)) {
 						var8 = 62;
-					} else if (var9.method597(tagNbsp)) {
+					} else if (var9.strEquals(tagNbsp)) {
 						var8 = 160;
-					} else if (var9.method597(tagShy)) {
+					} else if (var9.strEquals(tagShy)) {
 						var8 = 173;
-					} else if (var9.method597(tagTimes)) {
+					} else if (var9.strEquals(tagTimes)) {
 						var8 = 215;
-					} else if (var9.method597(tagEuro)) {
+					} else if (var9.strEquals(tagEuro)) {
 						var8 = 128;
-					} else if (var9.method597(tagCopy)) {
+					} else if (var9.strEquals(tagCopy)) {
 						var8 = 169;
 					} else {
-						if (!var9.method597(tagReg)) {
-							if (var9.method619(tagImg)) {
+						if (!var9.strEquals(tagReg)) {
+							if (var9.startsWith(tagImg)) {
 								try {
-									int var10 = var9.method635(4).method603();
+									int var10 = var9.substring(4).method603();
 									Pix8 var11 = this.modicons[var10];
 									int var12 = this.modiconHeight == null ? var11.ohi : this.modiconHeight[var10];
 									if (alpha == 256) {
@@ -351,7 +351,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 		}
 		int var4 = 0;
 		int var5 = 0;
-		JagString var6 = JagString.method1135(100);
+		JagString var6 = JagString.newStringBuilder(100);
 		int var7 = -1;
 		int var8 = 0;
 		byte var9 = 0;
@@ -365,68 +365,68 @@ public abstract class PixfontGeneric extends Linkable2 {
 				var10 = var14;
 			} else {
 				if (var15 == 62 && var10 != -1) {
-					JagString var16 = arg0.method623(var10 + 1, var14);
+					JagString var16 = arg0.substring(var10 + 1, var14);
 					var10 = -1;
-					var6.method638(60);
-					var6.method616(var16);
-					var6.method638(62);
-					if (var16.method597(tagBr)) {
-						arg2[var12++] = var6.method623(var5, var6.length());
+					var6.append(60);
+					var6.append(var16);
+					var6.append(62);
+					if (var16.strEquals(tagBr)) {
+						arg2[var12++] = var6.substring(var5, var6.length());
 						var5 = var6.length();
 						var4 = 0;
 						var7 = -1;
 						var11 = -1;
-					} else if (var16.method597(tagLt)) {
+					} else if (var16.strEquals(tagLt)) {
 						var4 += this.charWid(60);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + 60];
 						}
 						var11 = 60;
-					} else if (var16.method597(tagGt)) {
+					} else if (var16.strEquals(tagGt)) {
 						var4 += this.charWid(62);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + 62];
 						}
 						var11 = 62;
-					} else if (var16.method597(tagNbsp)) {
+					} else if (var16.strEquals(tagNbsp)) {
 						var4 += this.charWid(160);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + 160];
 						}
 						var11 = 160;
-					} else if (var16.method597(tagShy)) {
+					} else if (var16.strEquals(tagShy)) {
 						var4 += this.charWid(173);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + 173];
 						}
 						var11 = 173;
-					} else if (var16.method597(tagTimes)) {
+					} else if (var16.strEquals(tagTimes)) {
 						var4 += this.charWid(215);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + 215];
 						}
 						var11 = 215;
-					} else if (var16.method597(tagEuro)) {
+					} else if (var16.strEquals(tagEuro)) {
 						var4 += this.charWid(128);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + 128];
 						}
 						var11 = 128;
-					} else if (var16.method597(tagCopy)) {
+					} else if (var16.strEquals(tagCopy)) {
 						var4 += this.charWid(169);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + 169];
 						}
 						var11 = 169;
-					} else if (var16.method597(tagReg)) {
+					} else if (var16.strEquals(tagReg)) {
 						var4 += this.charWid(174);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + 174];
 						}
 						var11 = 174;
-					} else if (var16.method619(tagImg)) {
+					} else if (var16.startsWith(tagImg)) {
 						try {
-							int var17 = var16.method635(4).method603();
+							int var17 = var16.substring(4).method603();
 							var4 += this.modicons[var17].owi;
 							var11 = -1;
 						} catch (Exception var18) {
@@ -436,7 +436,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 				}
 				if (var10 == -1) {
 					if (var15 != -1) {
-						var6.method638(var15);
+						var6.append(var15);
 						var4 += this.charWid(var15);
 						if (this.kerningPairs != null && var11 != -1) {
 							var4 += this.kerningPairs[(var11 << 8) + var15];
@@ -449,7 +449,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 						var9 = 1;
 					}
 					if (arg1 != null && var4 > arg1[var12 < arg1.length ? var12 : arg1.length - 1] && var7 >= 0) {
-						arg2[var12++] = var6.method623(var5, var7 - var9);
+						arg2[var12++] = var6.substring(var5, var7 - var9);
 						var5 = var7;
 						var7 = -1;
 						var4 -= var8;
@@ -464,7 +464,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 			}
 		}
 		if (var6.length() > var5) {
-			arg2[var12++] = var6.method623(var5, var6.length());
+			arg2[var12++] = var6.substring(var5, var6.length());
 		}
 		return var12;
 	}
@@ -610,25 +610,25 @@ public abstract class PixfontGeneric extends Linkable2 {
 				var7 = var10;
 			} else {
 				if (var11 == 62 && var7 != -1) {
-					JagString var12 = arg0.method623(var7 + 1, var10);
+					JagString var12 = arg0.substring(var7 + 1, var10);
 					var7 = -1;
-					if (var12.method597(tagLt)) {
+					if (var12.strEquals(tagLt)) {
 						var11 = 60;
-					} else if (var12.method597(tagGt)) {
+					} else if (var12.strEquals(tagGt)) {
 						var11 = 62;
-					} else if (var12.method597(tagNbsp)) {
+					} else if (var12.strEquals(tagNbsp)) {
 						var11 = 160;
-					} else if (var12.method597(tagShy)) {
+					} else if (var12.strEquals(tagShy)) {
 						var11 = 173;
-					} else if (var12.method597(tagTimes)) {
+					} else if (var12.strEquals(tagTimes)) {
 						var11 = 215;
-					} else if (var12.method597(tagEuro)) {
+					} else if (var12.strEquals(tagEuro)) {
 						var11 = 128;
-					} else if (var12.method597(tagCopy)) {
+					} else if (var12.strEquals(tagCopy)) {
 						var11 = 169;
 					} else {
-						if (!var12.method597(tagReg)) {
-							if (var12.method619(tagImg)) {
+						if (!var12.strEquals(tagReg)) {
+							if (var12.startsWith(tagImg)) {
 								try {
 									int var13;
 									if (arg3 == null) {
@@ -643,7 +643,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 										var14 = arg4[var9];
 									}
 									var9++;
-									int var15 = var12.method635(4).method603();
+									int var15 = var12.substring(4).method603();
 									Pix8 var16 = this.modicons[var15];
 									int var17 = this.modiconHeight == null ? var16.ohi : this.modiconHeight[var15];
 									if (alpha == 256) {
@@ -780,59 +780,59 @@ public abstract class PixfontGeneric extends Linkable2 {
 	@ObfuscatedName("cc.a(Li;)V")
 	public void updateState(JagString arg0) {
 		try {
-			if (arg0.method619(tagCol)) {
-				currentCol = arg0.method635(4).method607(16);
+			if (arg0.startsWith(tagCol)) {
+				currentCol = arg0.substring(4).method607(16);
 				return;
 			}
-			if (arg0.method597(tagEndCol)) {
+			if (arg0.strEquals(tagEndCol)) {
 				currentCol = defaultCol;
 				return;
 			}
-			if (arg0.method619(tagTrans)) {
-				alpha = arg0.method635(6).method603();
+			if (arg0.startsWith(tagTrans)) {
+				alpha = arg0.substring(6).method603();
 				return;
 			}
-			if (arg0.method597(tagEndTrans)) {
+			if (arg0.strEquals(tagEndTrans)) {
 				alpha = defaultAlpha;
 				return;
 			}
-			if (arg0.method619(tagStrEquals)) {
-				strikeout = arg0.method635(4).method607(16);
+			if (arg0.startsWith(tagStrEquals)) {
+				strikeout = arg0.substring(4).method607(16);
 				return;
 			}
-			if (arg0.method597(tagStr)) {
+			if (arg0.strEquals(tagStr)) {
 				strikeout = 8388608;
 				return;
 			}
-			if (arg0.method597(tagEndStr)) {
+			if (arg0.strEquals(tagEndStr)) {
 				strikeout = -1;
 				return;
 			}
-			if (arg0.method619(tagUEquals)) {
-				underline = arg0.method635(2).method607(16);
+			if (arg0.startsWith(tagUEquals)) {
+				underline = arg0.substring(2).method607(16);
 				return;
 			}
-			if (arg0.method597(tagU)) {
+			if (arg0.strEquals(tagU)) {
 				underline = 0;
 				return;
 			}
-			if (arg0.method597(tagEndU)) {
+			if (arg0.strEquals(tagEndU)) {
 				underline = -1;
 				return;
 			}
-			if (arg0.method619(tagShadEquals)) {
-				currentShadow = arg0.method635(5).method607(16);
+			if (arg0.startsWith(tagShadEquals)) {
+				currentShadow = arg0.substring(5).method607(16);
 				return;
 			}
-			if (arg0.method597(tagShad)) {
+			if (arg0.strEquals(tagShad)) {
 				currentShadow = 0;
 				return;
 			}
-			if (arg0.method597(tagEndShad)) {
+			if (arg0.strEquals(tagEndShad)) {
 				currentShadow = defaultShadow;
 				return;
 			}
-			if (arg0.method597(tagBr)) {
+			if (arg0.strEquals(tagBr)) {
 				this.resetStateAlpha(defaultCol, defaultShadow, defaultAlpha);
 				return;
 			}
@@ -867,27 +867,27 @@ public abstract class PixfontGeneric extends Linkable2 {
 				var2 = var5;
 			} else {
 				if (var6 == 62 && var2 != -1) {
-					JagString var7 = arg0.method623(var2 + 1, var5);
+					JagString var7 = arg0.substring(var2 + 1, var5);
 					var2 = -1;
-					if (var7.method597(tagLt)) {
+					if (var7.strEquals(tagLt)) {
 						var6 = 60;
-					} else if (var7.method597(tagGt)) {
+					} else if (var7.strEquals(tagGt)) {
 						var6 = 62;
-					} else if (var7.method597(tagNbsp)) {
+					} else if (var7.strEquals(tagNbsp)) {
 						var6 = 160;
-					} else if (var7.method597(tagShy)) {
+					} else if (var7.strEquals(tagShy)) {
 						var6 = 173;
-					} else if (var7.method597(tagTimes)) {
+					} else if (var7.strEquals(tagTimes)) {
 						var6 = 215;
-					} else if (var7.method597(tagEuro)) {
+					} else if (var7.strEquals(tagEuro)) {
 						var6 = 128;
-					} else if (var7.method597(tagCopy)) {
+					} else if (var7.strEquals(tagCopy)) {
 						var6 = 169;
 					} else {
-						if (!var7.method597(tagReg)) {
-							if (var7.method619(tagImg)) {
+						if (!var7.strEquals(tagReg)) {
+							if (var7.startsWith(tagImg)) {
 								try {
-									int var8 = var7.method635(4).method603();
+									int var8 = var7.substring(4).method603();
 									var4 += this.modicons[var8].owi;
 									var3 = -1;
 								} catch (Exception var9) {

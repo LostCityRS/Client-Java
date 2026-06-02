@@ -25,7 +25,7 @@ public final class ArrayUtil {
 	}
 
 	@ObfuscatedName("ld.a([BI[BII)V")
-	public static void method836(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
+	public static void copy(byte[] arg0, int arg1, byte[] arg2, int arg3, int arg4) {
 		if (arg0 == arg2) {
 			if (arg1 == arg3) {
 				return;
@@ -117,7 +117,7 @@ public final class ArrayUtil {
 	public static byte[] method1276(byte[] arg0) {
 		int var1 = arg0.length;
 		byte[] var2 = new byte[var1];
-		method836(arg0, 0, var2, 0, var1);
+		copy(arg0, 0, var2, 0, var1);
 		return var2;
 	}
 

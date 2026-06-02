@@ -8,8 +8,6 @@ import java.util.Random;
 public class Statics {
 	@ObfuscatedName("tb.A")
 	public static final JagString field3982 = JagString.wrap("(Y<)4col>");
-	@ObfuscatedName("bc.l")
-	public static final JagString field233 = JagString.wrap("null");
 	@ObfuscatedName("l.gb")
 	public static final JagString field2199 = JagString.wrap("<)4col>");
 	@ObfuscatedName("bc.c")
@@ -55,11 +53,6 @@ public class Statics {
 	@ObfuscatedName("id.r")
 	public static int[] field1734;
 
-	@ObfuscatedName("ac.c(II)Z")
-	public static boolean method24(int arg0) {
-		return arg0 >= 48 && arg0 <= 57;
-	}
-
 	@ObfuscatedName("o.a(II[Li;I[S)V")
 	public static void method1037(int arg0, JagString[] arg1, int arg2, short[] arg3) {
 		if (arg0 >= arg2) {
@@ -74,7 +67,7 @@ public class Statics {
 		arg3[var4] = arg3[arg2];
 		arg3[arg2] = var7;
 		for (int var8 = arg0; var8 < arg2; var8++) {
-			if (var5 == null || arg1[var8] != null && arg1[var8].method625(var5) < (var8 & 0x1)) {
+			if (var5 == null || arg1[var8] != null && arg1[var8].compare(var5) < (var8 & 0x1)) {
 				JagString var9 = arg1[var8];
 				arg1[var8] = arg1[var6];
 				arg1[var6] = var9;
@@ -105,60 +98,12 @@ public class Statics {
 		return arg1;
 	}
 
-	@ObfuscatedName("ah.b(II)I")
-	public static int method51(int arg0) {
-		if (arg0 >= 97 && arg0 <= 122 || arg0 >= 224 && arg0 <= 254 && arg0 != 247) {
-			return arg0 - 32;
-		} else if (arg0 == 255) {
-			return 159;
-		} else if (arg0 == 156) {
-			return 140;
-		} else {
-			return arg0;
-		}
-	}
-
 	@ObfuscatedName("bg.a(II)I")
 	public static int method96(int arg0, int arg1) {
 		int var2;
 		for (var2 = (int) Math.pow((double) arg0, 1.0D / (double) arg1) + 1; method534(var2, arg1) > arg0; var2--) {
 		}
 		return var2;
-	}
-
-	@ObfuscatedName("bi.a(II)I")
-	public static int method102(int arg0) {
-		if (arg0 >= 65 && arg0 <= 90 || arg0 >= 192 && arg0 <= 222 && arg0 != 215) {
-			return arg0 + 32;
-		} else if (arg0 == 159) {
-			return 255;
-		} else if (arg0 == 140) {
-			return 156;
-		} else {
-			return arg0;
-		}
-	}
-
-	@ObfuscatedName("uc.a(II)Z")
-	public static boolean method1489(int arg0) {
-		if (arg0 < 32) {
-			return false;
-		} else if (arg0 == 127) {
-			return false;
-		} else {
-			return arg0 < 129 || arg0 > 159;
-		}
-	}
-
-	@ObfuscatedName("ke.a(ZI)Z")
-	public static boolean method782(int arg0) {
-		if (arg0 >= 97 && arg0 <= 122) {
-			return true;
-		} else if (arg0 >= 65 && arg0 <= 90) {
-			return true;
-		} else {
-			return arg0 >= 48 && arg0 <= 57;
-		}
 	}
 
 	@ObfuscatedName("jj.a(I)V")
@@ -222,11 +167,6 @@ public class Statics {
 	@ObfuscatedName("ng.c(II)Z")
 	public static boolean method1017(int arg0) {
 		return (-arg0 & arg0) == arg0;
-	}
-
-	@ObfuscatedName("k.b(II)Z")
-	public static boolean method746(int arg0) {
-		return arg0 >= 97 && arg0 <= 122 || arg0 >= 65 && arg0 <= 90;
 	}
 
 }

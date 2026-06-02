@@ -341,11 +341,11 @@ public final class ObjType extends Linkable2 {
 	@ObfuscatedName("mb.b(II)Li;")
 	public static JagString invNumber(int arg0) {
 		if (arg0 < 100000) {
-			return JagString.join(new JagString[] { Client.field399, JagString.method1212(arg0), Client.field1214 });
+			return JagString.join(new JagString[] { Client.field399, JagString.parseInt(arg0), Client.field1214 });
 		} else if (arg0 < 10000000) {
-			return JagString.join(new JagString[] { Client.field241, JagString.method1212(arg0 / 1000), Text.THOUSAND_SHORT, Client.field1214 });
+			return JagString.join(new JagString[] { Client.field241, JagString.parseInt(arg0 / 1000), Text.THOUSAND_SHORT, Client.field1214 });
 		} else {
-			return JagString.join(new JagString[] { Client.field2462, JagString.method1212(arg0 / 1000000), Text.MILLION_SHORT, Client.field1214 });
+			return JagString.join(new JagString[] { Client.field2462, JagString.parseInt(arg0 / 1000000), Text.MILLION_SHORT, Client.field1214 });
 		}
 	}
 
@@ -367,12 +367,12 @@ public final class ObjType extends Linkable2 {
 
 	@ObfuscatedName("gd.a(IZLi;)V")
 	public static void method467(boolean arg0, JagString arg1) {
-		JagString var2 = arg1.method639();
+		JagString var2 = arg1.toLowerCase();
 		int var3 = 0;
 		short[] var4 = new short[16];
 		for (int var5 = 0; var5 < numDefinitions; var5++) {
 			ObjType var6 = list(var5);
-			if ((!arg0 || var6.stockmarket) && var6.certtemplate == -1 && var6.lenttemplate == -1 && var6.dummyitem == 0 && var6.name.method639().method617(var2) != -1) {
+			if ((!arg0 || var6.stockmarket) && var6.certtemplate == -1 && var6.lenttemplate == -1 && var6.dummyitem == 0 && var6.name.toLowerCase().indexOf(var2) != -1) {
 				if (var3 >= 250) {
 					Statics.field3893 = -1;
 					Statics.field1210 = null;
@@ -698,7 +698,7 @@ public final class ObjType extends Linkable2 {
 			this.womanwear2 = arg1.g2();
 		} else if (arg0 >= 30 && arg0 < 35) {
 			this.op[arg0 - 30] = arg1.gjstr();
-			if (this.op[arg0 - 30].method624(Text.HIDDEN)) {
+			if (this.op[arg0 - 30].equalsIgnoreCase(Text.HIDDEN)) {
 				this.op[arg0 - 30] = null;
 			}
 		} else if (arg0 >= 35 && arg0 < 40) {

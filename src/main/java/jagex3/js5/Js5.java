@@ -145,11 +145,11 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(ILi;Li;)Z")
 	public final boolean requestDownload(JagString arg0, JagString arg1) {
-		JagString var3 = arg0.method639();
-		JagString var4 = arg1.method639();
-		int var5 = this.groupNameHashTable.find(var3.method605());
+		JagString var3 = arg0.toLowerCase();
+		JagString var4 = arg1.toLowerCase();
+		int var5 = this.groupNameHashTable.find(var3.computeCp1252HashFromUtf8());
 		if (this.isGroupValid(var5)) {
-			int var6 = this.fileNameHashTables[var5].find(var4.method605());
+			int var6 = this.fileNameHashTables[var5].find(var4.computeCp1252HashFromUtf8());
 			return this.requestDownload(var5, var6);
 		} else {
 			return false;
@@ -304,7 +304,7 @@ public abstract class Js5 {
 					int var25 = 0;
 					for (int var26 = 0; var26 < var3; var26++) {
 						var25 += var16.g4();
-						ArrayUtil.method836(var11, var23, var21[var26], var17[var26], var25);
+						ArrayUtil.copy(var11, var23, var21[var26], var17[var26], var25);
 						var23 += var25;
 						var17[var26] += var25;
 					}
@@ -354,8 +354,8 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(ILi;)Z")
 	public final boolean requestGroupDownload(JagString arg0) {
-		JagString var2 = arg0.method639();
-		int var3 = this.groupNameHashTable.find(var2.method605());
+		JagString var2 = arg0.toLowerCase();
+		int var3 = this.groupNameHashTable.find(var2.computeCp1252HashFromUtf8());
 		return this.requestGroupDownload(var3);
 	}
 
@@ -394,8 +394,8 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.a(Li;B)I")
 	public final int getGroupLoadProgress(JagString arg0) {
-		JagString var2 = arg0.method639();
-		int var3 = this.groupNameHashTable.find(var2.method605());
+		JagString var2 = arg0.toLowerCase();
+		int var3 = this.groupNameHashTable.find(var2.computeCp1252HashFromUtf8());
 		return this.getGroupLoadProgress(var3);
 	}
 
@@ -415,11 +415,11 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.b(ILi;Li;)[B")
 	public final byte[] getFile(JagString arg0, JagString arg1) {
-		JagString var3 = arg0.method639();
-		JagString var4 = arg1.method639();
-		int var5 = this.groupNameHashTable.find(var3.method605());
+		JagString var3 = arg0.toLowerCase();
+		JagString var4 = arg1.toLowerCase();
+		int var5 = this.groupNameHashTable.find(var3.computeCp1252HashFromUtf8());
 		if (this.isGroupValid(var5)) {
-			int var6 = this.fileNameHashTables[var5].find(var4.method605());
+			int var6 = this.fileNameHashTables[var5].find(var4.computeCp1252HashFromUtf8());
 			return this.getFile(var6, var5);
 		} else {
 			return null;
@@ -443,8 +443,8 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.b(Li;B)I")
 	public final int getGroupId(JagString arg0) {
-		JagString var2 = arg0.method639();
-		int var3 = this.groupNameHashTable.find(var2.method605());
+		JagString var2 = arg0.toLowerCase();
+		int var3 = this.groupNameHashTable.find(var2.computeCp1252HashFromUtf8());
 		return this.isGroupValid(var3) ? var3 : -1;
 	}
 
@@ -461,8 +461,8 @@ public abstract class Js5 {
 	@ObfuscatedName("nb.a(Li;II)I")
 	public final int getFileId(JagString arg0, int arg1) {
 		if (this.isGroupValid(arg1)) {
-			JagString var3 = arg0.method639();
-			int var4 = this.fileNameHashTables[arg1].find(var3.method605());
+			JagString var3 = arg0.toLowerCase();
+			int var4 = this.fileNameHashTables[arg1].find(var3.computeCp1252HashFromUtf8());
 			return this.isFileValid(var4, arg1) ? var4 : -1;
 		} else {
 			return -1;
@@ -572,8 +572,8 @@ public abstract class Js5 {
 
 	@ObfuscatedName("nb.b(Li;I)V")
 	public final void updateCacheHint(JagString arg0) {
-		JagString var2 = arg0.method639();
-		int var3 = this.groupNameHashTable.find(var2.method605());
+		JagString var2 = arg0.toLowerCase();
+		int var3 = this.groupNameHashTable.find(var2.computeCp1252HashFromUtf8());
 		this.updateCacheHint(var3);
 	}
 

@@ -98,7 +98,7 @@ public class Packet extends Linkable {
 		int var1 = this.pos;
 		while (this.data[this.pos++] != 0) {
 		}
-		return JagString.method395(var1, this.data, this.pos - var1 - 1);
+		return JagString.fromBytes(var1, this.data, this.pos - var1 - 1);
 	}
 
 	@ObfuscatedName("ea.c(I)I")
