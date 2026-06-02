@@ -5,7 +5,7 @@ import jagex3.datastruct.*;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 
 @ObfuscatedName("eb")
 public final class EnumType extends Linkable2 {
@@ -105,7 +105,7 @@ public final class EnumType extends Linkable2 {
 			this.defaultInt = arg1.g4();
 		} else if (arg0 == 5 || arg0 == 6) {
 			int var3 = arg1.g2();
-			this.table = new HashTable(IntUtil.bitceil(var3));
+			this.table = new HashTable(IntMath.bitceil(var3));
 			for (int var4 = 0; var4 < var3; var4++) {
 				int var5 = arg1.g4();
 				Linkable var6;

@@ -64,7 +64,7 @@ public class TextureOp39 extends TextureOp {
 		if (this.field2589 != null) {
 			return true;
 		} else if (this.field2592 >= 0) {
-			SoftwarePix32 var1 = PixLoader.method250(Texture.field684, this.field2592);
+			SoftwarePix32 var1 = PixLoader.makeSoftwarePix32(Texture.field684, this.field2592);
 			var1.trim();
 			this.field2593 = var1.wi;
 			this.field2588 = var1.hi;

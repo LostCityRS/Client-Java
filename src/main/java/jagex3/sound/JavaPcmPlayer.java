@@ -1,7 +1,7 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
@@ -91,7 +91,7 @@ public final class JavaPcmPlayer extends PcmPlayer {
 				this.line = null;
 				throw var4;
 			} else {
-				this.open(IntUtil.bitceil(arg0));
+				this.open(IntMath.bitceil(arg0));
 			}
 		}
 	}

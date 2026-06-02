@@ -2,7 +2,8 @@ package jagex3.util;
 
 import deob.ObfuscatedName;
 
-public class IntUtil {
+public class IntMath {
+
 	@ObfuscatedName("qj.a(ZI)I")
 	public static int bitceil(int arg0) {
 		int var6 = arg0 - 1;

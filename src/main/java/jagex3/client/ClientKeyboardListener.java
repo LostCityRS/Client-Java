@@ -39,7 +39,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	@ObfuscatedName("ua.r")
 	public static int ch;
     @ObfuscatedName("ec.J")
-    public static int field898 = 0;
+    public static int lastKeyWritePos = 0;
 
     @ObfuscatedName("l.a(Ljava/awt/Component;I)V")
 	public static void removeListeners(java.awt.Component arg0) {
@@ -49,7 +49,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	}
 
 	@ObfuscatedName("fj.a(Ljava/awt/event/KeyEvent;I)I")
-	public static int method455(KeyEvent arg0) {
+	public static int getKeyChar(KeyEvent arg0) {
 		int var1 = arg0.getKeyChar();
 		if (var1 == 8364) {
 			return 128;
@@ -65,7 +65,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	public static boolean pollKey() {
 		ClientKeyboardListener var0 = instance;
 		synchronized (instance) {
-			if (keyReadPos == field898) {
+			if (keyReadPos == lastKeyWritePos) {
 				return false;
 			} else {
 				code = keyCodeBuffer[keyReadPos];
@@ -81,7 +81,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 		ClientKeyboardListener var0 = instance;
 		synchronized (instance) {
 			idleTimer++;
-			keyReadPos = field898;
+			keyReadPos = lastKeyWritePos;
 			if (keyHeldWritePos < 0) {
 				for (int var1 = 0; var1 < 112; var1++) {
 					keyHeld[var1] = false;
@@ -98,7 +98,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 					}
 				}
 			}
-			field898 = keyWritePos;
+			lastKeyWritePos = keyWritePos;
 		}
 	}
 
@@ -239,7 +239,7 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		if (instance != null) {
-			int var2 = method455(arg0);
+			int var2 = getKeyChar(arg0);
 			if (var2 >= 0) {
 				int var3 = keyWritePos + 1 & 0x7F;
 				if (keyReadPos != var3) {

@@ -9,7 +9,7 @@ import jagex3.datastruct.*;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 import jagex3.var.VarCache;
 
 @ObfuscatedName("lf")
@@ -348,7 +348,7 @@ public final class NpcType extends Linkable2 {
 		} else if (arg0 == 249) {
 			int var7 = arg1.g1();
 			if (this.params == null) {
-				int var8 = IntUtil.bitceil(var7);
+				int var8 = IntMath.bitceil(var7);
 				this.params = new HashTable(var8);
 			}
 			for (int var9 = 0; var9 < var7; var9++) {

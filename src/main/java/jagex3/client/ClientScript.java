@@ -7,7 +7,7 @@ import jagex3.datastruct.Linkable2;
 import jagex3.datastruct.LruCache;
 import jagex3.io.Packet;
 import jagex3.jstring.JagString;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 
 @ObfuscatedName("wh")
 public final class ClientScript extends Linkable2 {
@@ -68,7 +68,7 @@ public final class ClientScript extends Linkable2 {
 			var3.switchTables = new HashTable[var8];
 			for (int var9 = 0; var9 < var8; var9++) {
 				int var10 = var4.g2();
-				HashTable var11 = new HashTable(IntUtil.bitceil(var10));
+				HashTable var11 = new HashTable(IntMath.bitceil(var10));
 				var3.switchTables[var9] = var11;
 				while (var10-- > 0) {
 					int var12 = var4.g4();

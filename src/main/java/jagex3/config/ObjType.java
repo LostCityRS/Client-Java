@@ -14,7 +14,7 @@ import jagex3.graphics.SoftwarePixFont;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 
 @ObfuscatedName("ng")
 public final class ObjType extends Linkable2 {
@@ -782,7 +782,7 @@ public final class ObjType extends Linkable2 {
 		} else if (arg0 == 249) {
 			int var5 = arg1.g1();
 			if (this.params == null) {
-				int var6 = IntUtil.bitceil(var5);
+				int var6 = IntMath.bitceil(var5);
 				this.params = new HashTable(var6);
 			}
 			for (int var7 = 0; var7 < var5; var7++) {

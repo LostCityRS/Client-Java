@@ -6,7 +6,7 @@ import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
 import jagex3.midi2.Patch;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 
 @ObfuscatedName("qb")
 public final class StructType extends Linkable2 {
@@ -50,7 +50,7 @@ public final class StructType extends Linkable2 {
 		if (arg0 == 249) {
 			int var3 = arg1.g1();
 			if (this.params == null) {
-				int var4 = IntUtil.bitceil(var3);
+				int var4 = IntMath.bitceil(var3);
 				this.params = new HashTable(var4);
 			}
 			for (int var5 = 0; var5 < var3; var5++) {

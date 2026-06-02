@@ -565,14 +565,14 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("i.e(I)[B")
-	public byte[] method613() {
+	public byte[] copy() {
 		byte[] var1 = new byte[this.length];
 		ArrayUtil.copy(this.chars, 0, var1, 0, this.length);
 		return var1;
 	}
 
 	@ObfuscatedName("i.c(B)Li;")
-	public JagString method614() {
+	public JagString toScreenName() {
 		boolean var1 = true;
 		JagString var2 = new JagString();
 		var2.length = this.length;

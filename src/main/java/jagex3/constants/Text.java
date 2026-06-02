@@ -7,7 +7,7 @@ public class Text {
 	@ObfuscatedName("ch.j")
 	public static final JagString field504 = JagString.wrap("Prepared sound engine");
 	@ObfuscatedName("gd.L")
-	public static final JagString field1292 = JagString.wrap("");
+	public static final JagString AUTO_EMPTY = JagString.wrap("");
 	@ObfuscatedName("ge.A")
 	public static final JagString field1314 = JagString.wrap("World");
 	@ObfuscatedName("rd.I")
@@ -27,77 +27,77 @@ public class Text {
 	@ObfuscatedName("ge.M")
 	public static JagString WORLD = field1314;
 	@ObfuscatedName("gd.l")
-	public static JagString field1266 = field1292;
+	public static JagString field1266 = AUTO_EMPTY;
 	@ObfuscatedName("gd.m")
-	public static JagString field1267 = field1292;
+	public static JagString field1267 = AUTO_EMPTY;
 	@ObfuscatedName("gd.n")
-	public static JagString field1268 = field1292;
+	public static JagString field1268 = AUTO_EMPTY;
 	@ObfuscatedName("gd.o")
-	public static JagString field1269 = field1292;
+	public static JagString field1269 = AUTO_EMPTY;
 	@ObfuscatedName("gd.q")
-	public static JagString field1271 = field1292;
+	public static JagString field1271 = AUTO_EMPTY;
 	@ObfuscatedName("gd.r")
-	public static JagString field1272 = field1292;
+	public static JagString field1272 = AUTO_EMPTY;
 	@ObfuscatedName("gd.s")
-	public static JagString field1273 = field1292;
+	public static JagString field1273 = AUTO_EMPTY;
 	@ObfuscatedName("gd.t")
-	public static JagString field1274 = field1292;
+	public static JagString field1274 = AUTO_EMPTY;
 	@ObfuscatedName("gd.u")
-	public static JagString field1275 = field1292;
+	public static JagString CONNECTING1 = AUTO_EMPTY;
 	@ObfuscatedName("gd.w")
-	public static JagString field1277 = field1292;
+	public static JagString PLEASELOGIN3 = AUTO_EMPTY;
 	@ObfuscatedName("gd.N")
-	public static JagString field1294 = field1292;
+	public static JagString field1294 = AUTO_EMPTY;
 	@ObfuscatedName("gd.x")
-	public static JagString field1278 = field1292;
+	public static JagString field1278 = AUTO_EMPTY;
 	@ObfuscatedName("gd.B")
-	public static JagString field1282 = field1292;
+	public static JagString field1282 = AUTO_EMPTY;
 	@ObfuscatedName("gd.z")
-	public static JagString field1280 = field1292;
+	public static JagString field1280 = AUTO_EMPTY;
 	@ObfuscatedName("gd.Q")
-	public static JagString field1297 = field1292;
+	public static JagString field1297 = AUTO_EMPTY;
 	@ObfuscatedName("gd.E")
-	public static JagString field1285 = field1292;
+	public static JagString LOGIN_USER_LENGTH_C = AUTO_EMPTY;
 	@ObfuscatedName("gd.S")
-	public static JagString field1299 = field1292;
+	public static JagString field1299 = AUTO_EMPTY;
 	@ObfuscatedName("gd.J")
-	public static JagString field1290 = field1292;
+	public static JagString LOGIN_PASS_LENGTH_A = AUTO_EMPTY;
 	@ObfuscatedName("gd.V")
-	public static JagString field1302 = field1292;
+	public static JagString field1302 = AUTO_EMPTY;
 	@ObfuscatedName("gd.C")
-	public static JagString field1283 = field1292;
+	public static JagString field1283 = AUTO_EMPTY;
 	@ObfuscatedName("gd.M")
-	public static JagString field1293 = field1292;
+	public static JagString field1293 = AUTO_EMPTY;
 	@ObfuscatedName("gd.I")
-	public static JagString field1289 = field1292;
+	public static JagString field1289 = AUTO_EMPTY;
 	@ObfuscatedName("gd.W")
-	public static JagString field1303 = field1292;
+	public static JagString field1303 = AUTO_EMPTY;
 	@ObfuscatedName("gd.O")
-	public static JagString field1295 = field1292;
+	public static JagString LOGIN_USER_LENGTH_A = AUTO_EMPTY;
 	@ObfuscatedName("gd.y")
-	public static final JagString field1279 = field1292;
+	public static final JagString field1279 = AUTO_EMPTY;
 	@ObfuscatedName("gd.D")
-	public static JagString field1284 = field1292;
+	public static JagString field1284 = AUTO_EMPTY;
 	@ObfuscatedName("gd.X")
-	public static JagString field1304 = field1292;
+	public static JagString field1304 = AUTO_EMPTY;
 	@ObfuscatedName("gd.K")
-	public static JagString field1291 = field1292;
+	public static JagString field1291 = AUTO_EMPTY;
 	@ObfuscatedName("gd.P")
-	public static final JagString field1296 = field1292;
+	public static final JagString field1296 = AUTO_EMPTY;
 	@ObfuscatedName("gd.R")
-	public static JagString field1298 = field1292;
+	public static JagString PLEASELOGIN1 = AUTO_EMPTY;
 	@ObfuscatedName("gd.Y")
-	public static JagString field1305 = field1292;
+	public static JagString field1305 = AUTO_EMPTY;
 	@ObfuscatedName("gd.U")
-	public static JagString field1301 = field1292;
+	public static JagString field1301 = AUTO_EMPTY;
 	@ObfuscatedName("gd.T")
-	public static JagString field1300 = field1292;
+	public static JagString field1300 = AUTO_EMPTY;
 	@ObfuscatedName("gd.H")
-	public static JagString field1288 = field1292;
+	public static JagString LOGIN_PASS_LENGTH_C = AUTO_EMPTY;
 	@ObfuscatedName("gd.G")
-	public static JagString field1287 = field1292;
+	public static JagString field1287 = AUTO_EMPTY;
 	@ObfuscatedName("gd.Z")
-	public static JagString field1306 = field1292;
+	public static JagString CONNECTING3 = AUTO_EMPTY;
 	@ObfuscatedName("ch.m")
 	public static JagString MAINLOAD45 = field504;
 	@ObfuscatedName("vg.t")

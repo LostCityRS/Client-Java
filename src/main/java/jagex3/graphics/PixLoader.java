@@ -82,7 +82,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("q.a(B)[Lrh;")
-	public static SoftwarePix8[] method1243() {
+	public static SoftwarePix8[] makeSoftwarePix8Array() {
 		SoftwarePix8[] var0 = new SoftwarePix8[count];
 		for (int var1 = 0; var1 < count; var1++) {
 			var0[var1] = new SoftwarePix8(owi, ohi, xof[var1], yof[var1], wi[var1], hi[var1], bspr[var1], bpal);
@@ -92,7 +92,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("pa.a(I)Lrh;")
-	public static SoftwarePix8 method1129() {
+	public static SoftwarePix8 makeSoftwarePix8() {
 		SoftwarePix8 var0 = new SoftwarePix8(owi, ohi, xof[0], yof[0], wi[0], hi[0], bspr[0], bpal);
 		method1578();
 		return var0;
@@ -117,7 +117,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("d.d(B)[Lpf;")
-	public static SoftwarePix32[] makePix32Array() {
+	public static SoftwarePix32[] makeSoftwarePix32Array() {
 		SoftwarePix32[] var0 = new SoftwarePix32[count];
 		for (int var1 = 0; var1 < count; var1++) {
 			int var2 = wi[var1] * hi[var1];
@@ -149,7 +149,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("vh.d(I)Lpf;")
-	public static SoftwarePix32 method1571() {
+	public static SoftwarePix32 makeSoftwarePix32() {
 		byte[] var0 = bspr[0];
 		int var1 = wi[0] * hi[0];
 		int[] var2 = new int[var1];
@@ -162,7 +162,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("re.a(B)[Llj;")
-	public static Pix8[] method1323() {
+	public static Pix8[] makePix8Array() {
 		Pix8[] var0 = new Pix8[count];
 		for (int var1 = 0; var1 < count; var1++) {
 			var0[var1] = new SoftwarePix8(owi, ohi, xof[var1], yof[var1], wi[var1], hi[var1], bspr[var1], bpal);
@@ -173,12 +173,12 @@ public class PixLoader {
 
 	@ObfuscatedName("re.a(IBLnb;I)[Llj;")
 	public static Pix8[] makePix8Array(int arg0, Js5 arg1, int arg2) {
-		return depack(arg1, arg0, arg2) ? method1323() : null;
+		return depack(arg1, arg0, arg2) ? makePix8Array() : null;
 	}
 
 	@ObfuscatedName("re.a(IILnb;B)[Lrh;")
 	public static SoftwarePix8[] makePix8Array(int arg0, int arg1, Js5 arg2) {
-		return depack(arg2, arg0, arg1) ? method1243() : null;
+		return depack(arg2, arg0, arg1) ? makeSoftwarePix8Array() : null;
 	}
 
 	@ObfuscatedName("sg.b(B)Lrc;")
@@ -216,12 +216,12 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("ve.a(Lnb;ZII)Lrc;")
-	public static Pix32 method1558(Js5 arg0, int arg1, int arg2) {
+	public static Pix32 makePix32(Js5 arg0, int arg1, int arg2) {
 		return depack(arg0, arg1, arg2) ? makePix32() : null;
 	}
 
 	@ObfuscatedName("d.a(ILnb;II)[Lrc;")
-	public static Pix32[] method230(int arg0, Js5 arg1, int arg2) {
+	public static Pix32[] makePix32Array(int arg0, Js5 arg1, int arg2) {
 		return depack(arg1, arg2, arg0) ? method100() : null;
 	}
 
@@ -245,46 +245,46 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("w.a(ILnb;II)[Lpf;")
-	public static SoftwarePix32[] makePix32Array(int arg0, Js5 arg1, int arg2) {
-		return depack(arg1, arg2, arg0) ? makePix32Array() : null;
+	public static SoftwarePix32[] makeSoftwarePix32Array(int arg0, Js5 arg1, int arg2) {
+		return depack(arg1, arg2, arg0) ? makeSoftwarePix32Array() : null;
 	}
 
 	@ObfuscatedName("w.a(Li;ZLnb;Li;)[Lrc;")
 	public static Pix32[] makePix32Array(JagString arg0, Js5 arg1, JagString arg2) {
 		int var3 = arg1.getGroupId(arg0);
 		int var4 = arg1.getFileId(arg2, var3);
-		return method230(var4, arg1, var3);
+		return makePix32Array(var4, arg1, var3);
 	}
 
 	@ObfuscatedName("ab.a(Li;ZLi;Lnb;)[Lpf;")
-	public static SoftwarePix32[] makePix32Array(JagString arg0, JagString arg1, Js5 arg2) {
+	public static SoftwarePix32[] makeSoftwarePix32Array(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.getGroupId(arg0);
 		int var4 = arg2.getFileId(arg1, var3);
-		return makePix32Array(var4, arg2, var3);
+		return makeSoftwarePix32Array(var4, arg2, var3);
 	}
 
 	@ObfuscatedName("ci.a(ZLnb;II)Lpf;")
-	public static SoftwarePix32 method203(Js5 arg0, int arg1, int arg2) {
-		return depack(arg0, arg2, arg1) ? method1571() : null;
+	public static SoftwarePix32 makeSoftwarePix32(Js5 arg0, int arg1, int arg2) {
+		return depack(arg0, arg2, arg1) ? makeSoftwarePix32() : null;
 	}
 
 	@ObfuscatedName("dc.a(Lnb;BI)Lpf;")
-	public static SoftwarePix32 method250(Js5 arg0, int arg1) {
-		return depack(arg1, arg0) ? method1571() : null;
+	public static SoftwarePix32 makeSoftwarePix32(Js5 arg0, int arg1) {
+		return depack(arg1, arg0) ? makeSoftwarePix32() : null;
 	}
 
 	@ObfuscatedName("tg.a(IILnb;I)Llj;")
-	public static Pix8 method1454(int arg0, Js5 arg1) {
+	public static Pix8 makePix8(int arg0, Js5 arg1) {
 		return depack(arg1, arg0, 0) ? makePix8() : null;
 	}
 
 	@ObfuscatedName("jc.a(Lnb;BI)[Llj;")
-	public static Pix8[] method700(Js5 arg0, int arg1) {
-		return depack(arg1, arg0) ? method1323() : null;
+	public static Pix8[] makePix8Array(Js5 arg0, int arg1) {
+		return depack(arg1, arg0) ? makePix8Array() : null;
 	}
 
 	@ObfuscatedName("ne.a(ILi;Li;Lnb;)[Lrh;")
-	public static SoftwarePix8[] makePix8Array(JagString arg0, JagString arg1, Js5 arg2) {
+	public static SoftwarePix8[] makeSoftwarePix8Array(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.getGroupId(arg0);
 		int var4 = arg2.getFileId(arg1, var3);
 		return makePix8Array(var3, var4, arg2);
@@ -294,14 +294,14 @@ public class PixLoader {
 	public static Pix32 makePix32(JagString arg0, JagString arg1, Js5 arg2) {
 		int var3 = arg2.getGroupId(arg0);
 		int var4 = arg2.getFileId(arg1, var3);
-		return method1558(arg2, var3, var4);
+		return makePix32(arg2, var3, var4);
 	}
 
 	@ObfuscatedName("ah.a(Li;BLnb;Li;)Lpf;")
-	public static SoftwarePix32 makePix32(JagString arg0, Js5 arg1, JagString arg2) {
+	public static SoftwarePix32 makeSoftwarePix32(JagString arg0, Js5 arg1, JagString arg2) {
 		int var3 = arg1.getGroupId(arg0);
 		int var4 = arg1.getFileId(arg2, var3);
-		return method203(arg1, var4, var3);
+		return makeSoftwarePix32(arg1, var4, var3);
 	}
 
 	@ObfuscatedName("te.a(BILnb;)Z")
@@ -316,8 +316,8 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("lb.a(Lnb;II)[Lrh;")
-	public static SoftwarePix8[] method830(Js5 arg0, int arg1) {
-		return depack(arg1, arg0) ? method1243() : null;
+	public static SoftwarePix8[] makeSoftwarePix8Array(Js5 arg0, int arg1) {
+		return depack(arg1, arg0) ? makeSoftwarePix8Array() : null;
 	}
 
 	@ObfuscatedName("lb.a(BILnb;)Llj;")
@@ -326,7 +326,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("vd.a(IILnb;I)Lrh;")
-	public static SoftwarePix8 method1553(Js5 arg0, int arg1) {
-		return depack(arg0, arg1, 0) ? method1129() : null;
+	public static SoftwarePix8 makeSoftwarePix8(Js5 arg0, int arg1) {
+		return depack(arg0, arg1, 0) ? makeSoftwarePix8() : null;
 	}
 }

@@ -363,7 +363,7 @@ public class TextGerman {
 		Text.MAINLOAD80 = field1893;
 		Text.LOGIN25_A = field1234;
 		Text.LOGIN = field3048;
-		Text.field1277 = field5;
+		Text.PLEASELOGIN3 = field5;
 		Text.field1274 = field5;
 		Text.field1268 = field2909;
 		Text.CHATEFFECT_FLASH1 = field1942;
@@ -379,7 +379,7 @@ public class TextGerman {
 		Text.LOGIN16_B = field150;
 		Text.CONNECTING2 = field2017;
 		Text.LOGIN13_B = field393;
-		Text.field1288 = field5;
+		Text.LOGIN_PASS_LENGTH_C = field5;
 		Text.THOUSAND = field2081;
 		Text.LOGIN12_B = field3884;
 		Text.MEMBERSONLYWORLD = field3340;
@@ -392,15 +392,15 @@ public class TextGerman {
 		ScriptRunner.field1286 = field1834;
 		Text.MAINLOAD90B = field767;
 		Text.CHATEFFECT_GLOW3 = field3661;
-		Text.field1295 = field5;
-		Text.field1298 = field1145;
+		Text.LOGIN_USER_LENGTH_A = field5;
+		Text.PLEASELOGIN1 = field1145;
 		Text.CHATCOL_CYAN = field3755;
 		Text.LOGINHOP_B = field220;
 		Text.MAINLOAD130 = field3143;
 		Text.CHATCOL_PURPLE = field155;
 		Text.MAINLOAD60 = field3976;
 		Text.LOGIN20_B = field4069;
-		Text.field1306 = field5;
+		Text.CONNECTING3 = field5;
 		Text.TAKE = field3280;
 		Text.MAINLOAD120B = field721;
 		Text.CHATCOL_YELLOW = field3108;
@@ -422,7 +422,7 @@ public class TextGerman {
 		Text.MAINLOAD40 = field1133;
 		Text.OK = field3831;
 		Text.MAINLOAD80B = field2417;
-		Text.field1290 = field5;
+		Text.LOGIN_PASS_LENGTH_A = field5;
 		Text.LOGIN8_A = field1015;
 		Text.LOGIN7_A = field4311;
 		Text.SELECT = field2754;
@@ -457,7 +457,7 @@ public class TextGerman {
 		Text.OFFLINEWORLD = field1080;
 		Text.field2123 = field3715;
 		Text.LOGIN6_B = field3936;
-		Text.field1275 = field5;
+		Text.CONNECTING1 = field5;
 		Text.LOGIN19_B = field1536;
 		Text.CHOOSEOPTION = field493;
 		Text.LOGIN10_A = field1015;
@@ -520,7 +520,7 @@ public class TextGerman {
 		Text.SL_PLAYERS = field2419;
 		Text.field2943 = field2412;
 		Text.MOREOPTIONS = field3013;
-		Text.field1285 = field5;
+		Text.LOGIN_USER_LENGTH_C = field5;
 		Text.LOGIN5_A = field2518;
 		Text.LOGIN5_B = field1104;
 		Text.CHATEFFECT_WAVE2 = field1909;

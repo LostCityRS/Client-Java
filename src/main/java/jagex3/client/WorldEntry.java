@@ -7,21 +7,21 @@ import jagex3.jstring.JagString;
 public final class WorldEntry {
 
 	@ObfuscatedName("gd.a")
-	public int field1255;
+	public int players;
 
 	@ObfuscatedName("gd.c")
-	public boolean field1257;
+	public boolean members;
 
 	@ObfuscatedName("gd.d")
-	public int field1258;
+	public int index;
 
 	@ObfuscatedName("gd.f")
-	public int field1260;
+	public int country;
 
 	@ObfuscatedName("gd.g")
-	public int field1261;
+	public int id;
 
 	@ObfuscatedName("gd.h")
-	public JagString field1262;
+	public JagString host;
 
 }

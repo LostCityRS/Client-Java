@@ -8,7 +8,7 @@ import java.awt.*;
 public abstract class MouseWheelInterface {
 
     @ObfuscatedName("da.c(B)Lcf;")
-    public static MouseWheelInterface method235() {
+    public static MouseWheelInterface create() {
         try {
             return (MouseWheelInterface) Class.forName("jagex3.client.ClientMouseWheelListener").getDeclaredConstructor().newInstance();
         } catch (Throwable var0) {

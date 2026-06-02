@@ -8,19 +8,19 @@ import jagex3.io.Packet;
 public final class QuickChatPhrase {
 
 	@ObfuscatedName("tj.d")
-	public int field4058;
+	public int id;
 
 	@ObfuscatedName("tj.k")
-	public QuickChatPhraseType field4065;
+	public QuickChatPhraseType type;
 
 	@ObfuscatedName("tj.n")
-	public int[] field4068;
+	public int[] dynamics;
 
 	@ObfuscatedName("id.a(BLea;)Ltj;")
-	public static QuickChatPhrase method667(Packet arg0) {
+	public static QuickChatPhrase create(Packet arg0) {
 		QuickChatPhrase var1 = new QuickChatPhrase();
-		var1.field4058 = arg0.g2();
-		var1.field4065 = QuickChatPhraseType.list(var1.field4058);
+		var1.id = arg0.g2();
+		var1.type = QuickChatPhraseType.list(var1.id);
 		return var1;
 	}
 }

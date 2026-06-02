@@ -1128,9 +1128,9 @@ public class ClientBuild {
 		int var8 = smoothNoise(var6, var3 + 1);
 		int var9 = smoothNoise(var6 + 1, var3);
 		int var10 = smoothNoise(var6 + 1, var3 + 1);
-		int var11 = method419(arg1, var7, var4, var8);
-		int var12 = method419(arg1, var9, var4, var10);
-		return method419(arg1, var11, var5, var12);
+		int var11 = interpolate(arg1, var7, var4, var8);
+		int var12 = interpolate(arg1, var9, var4, var10);
+		return interpolate(arg1, var11, var5, var12);
 	}
 
 	@ObfuscatedName("ah.a(III)I")
@@ -1142,7 +1142,7 @@ public class ClientBuild {
 	}
 
 	@ObfuscatedName("fa.a(IIIII)I")
-	public static int method419(int arg0, int arg1, int arg2, int arg3) {
+	public static int interpolate(int arg0, int arg1, int arg2, int arg3) {
 		int var4 = 65536 - Pix3D.cosTable[arg2 * 1024 / arg0] >> 1;
 		return (arg1 * (65536 - var4) >> 16) + (arg3 * var4 >> 16);
 	}

@@ -8,15 +8,15 @@ import jagex3.jstring.JagString;
 public final class ClanChannelUser extends Linkable {
 
 	@ObfuscatedName("ge.B")
-	public byte field1315;
+	public byte rank;
 
 	@ObfuscatedName("ge.D")
-	public int field1317;
+	public int world;
 
 	@ObfuscatedName("ge.H")
-	public JagString field1321;
+	public JagString displayName;
 
 	@ObfuscatedName("ge.J")
-	public JagString field1323;
+	public JagString name;
 
 }

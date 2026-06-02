@@ -2,7 +2,7 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import jagex3.graphics.Pix2D;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 
 @ObfuscatedName("pj")
 public final class Pix3D {
@@ -2767,7 +2767,7 @@ public final class Pix3D {
 		sizeY = arg3 - arg1;
 		resetOrigin();
 		if (scanline.length < sizeY) {
-			scanline = new int[IntUtil.bitceil(sizeY)];
+			scanline = new int[IntMath.bitceil(sizeY)];
 		}
 		int var4 = arg1 * Pix2D.width + arg0;
 		for (int var5 = 0; var5 < sizeY; var5++) {

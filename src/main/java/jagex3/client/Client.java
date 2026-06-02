@@ -1278,7 +1278,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("bb.m")
 	public static short[] field219;
 	@ObfuscatedName("db.z")
-	public static long field631;
+	public static long userhash;
 	@ObfuscatedName("ob.c")
 	public static SoftwarePixFont field2966;
 	@ObfuscatedName("kg.fb")
@@ -1360,7 +1360,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ff.eb")
 	public static int field1150 = 0;
 	@ObfuscatedName("fi.D")
-	public static int field1183 = 255;
+	public static int midiVolume = 255;
 
 	@ObfuscatedName("ke.b(Z)V")
 	public static void errorUsage(boolean arg0) {
@@ -1518,7 +1518,7 @@ public final class Client extends GameShell {
 		ClientKeyboardListener.setupKeyCodeMap();
 		ClientKeyboardListener.addListeners(GameShell.canvas);
 		ClientMouseListener.addListeners(GameShell.canvas);
-		mouseWheel = MouseWheelInterface.method235();
+		mouseWheel = MouseWheelInterface.create();
 		if (mouseWheel != null) {
 			mouseWheel.addListeners(GameShell.canvas);
 		}
@@ -1531,7 +1531,7 @@ public final class Client extends GameShell {
 				}
 				GameShell.field1892 = new BufferedRandomAccessFile(GameShell.signlink.field3582, 6000, 0);
 				masterIndex = new DataFile(255, GameShell.cacheDat, GameShell.field1892, 500000);
-				GameShell.field3529 = new BufferedRandomAccessFile(GameShell.signlink.field3588, 24, 0);
+				GameShell.randomDat = new BufferedRandomAccessFile(GameShell.signlink.field3588, 24, 0);
 				GameShell.signlink.field3584 = null;
 				GameShell.signlink.field3582 = null;
 				GameShell.signlink.field3588 = null;
@@ -1540,7 +1540,7 @@ public final class Client extends GameShell {
 		} catch (IOException var2) {
 			GameShell.field1892 = null;
 			GameShell.cacheDat = null;
-			GameShell.field3529 = null;
+			GameShell.randomDat = null;
 			masterIndex = null;
 		}
 		Statics.field2752 = Text.LOADING_TITLE;
@@ -1695,8 +1695,8 @@ public final class Client extends GameShell {
 			if (GameShell.field1892 != null) {
 				GameShell.field1892.close();
 			}
-			if (GameShell.field3529 != null) {
-				GameShell.field3529.close();
+			if (GameShell.randomDat != null) {
+				GameShell.randomDat.close();
 			}
 		} catch (IOException var2) {
 		}
@@ -1933,7 +1933,7 @@ public final class Client extends GameShell {
 			if (var32 == 100) {
 				TitleScreen.loadPos = 20;
 				TitleScreen.loadString = Text.MAINLOAD40B;
-				TitleScreen.method1038(songs, binary, sprites);
+				TitleScreen.getGroupIds(songs, binary, sprites);
 				loadingStep = 45;
 			} else {
 				if (var32 != 0) {
@@ -2053,7 +2053,7 @@ public final class Client extends GameShell {
 		} else if (loadingStep == 80) {
 			int var47 = 0;
 			if (compass == null) {
-				SoftwarePix32 var48 = PixLoader.makePix32(AUTO_COMPASS, sprites, AUTO_EMPTY);
+				SoftwarePix32 var48 = PixLoader.makeSoftwarePix32(AUTO_COMPASS, sprites, AUTO_EMPTY);
 				if (var48 != null) {
 					var48.trim();
 					compass = var48;
@@ -2062,12 +2062,12 @@ public final class Client extends GameShell {
 				var47++;
 			}
 			if (mapscene == null) {
-				mapscene = PixLoader.makePix8Array(AUTO_MAPSCENE, AUTO_EMPTY, sprites);
+				mapscene = PixLoader.makeSoftwarePix8Array(AUTO_MAPSCENE, AUTO_EMPTY, sprites);
 			} else {
 				var47++;
 			}
 			if (mapfunction == null) {
-				mapfunction = PixLoader.makePix32Array(AUTO_MAPFUNCTION, AUTO_EMPTY, sprites);
+				mapfunction = PixLoader.makeSoftwarePix32Array(AUTO_MAPFUNCTION, AUTO_EMPTY, sprites);
 			} else {
 				var47++;
 			}
@@ -2097,7 +2097,7 @@ public final class Client extends GameShell {
 				var47++;
 			}
 			if (hintMapedge == null) {
-				SoftwarePix32[] var49 = PixLoader.makePix32Array(AUTO_HINTMAPEDGE, AUTO_EMPTY, sprites);
+				SoftwarePix32[] var49 = PixLoader.makeSoftwarePix32Array(AUTO_HINTMAPEDGE, AUTO_EMPTY, sprites);
 				if (var49 != null) {
 					for (int var50 = 0; var50 < var49.length; var50++) {
 						var49[var50].trim();
@@ -2244,7 +2244,7 @@ public final class Client extends GameShell {
 				}
 			}
 			if (loginStep == 2) {
-				long var0 = field631 = TitleScreen.loginUser.toUserhash();
+				long var0 = userhash = TitleScreen.loginUser.toUserhash();
 				out.pos = 0;
 				out.p1(14);
 				int var2 = (int) (var0 >> 16 & 0x1FL);
@@ -3225,16 +3225,16 @@ public final class Client extends GameShell {
 	public static void playSongs(int arg0) {
 		if (arg0 == -1 && !field2012) {
 			MidiManager.stop();
-		} else if (arg0 != -1 && (arg0 != field25 || !MidiManager.isInitialised()) && field1183 != 0 && !field2012) {
-			MidiManager.method730(field1183, arg0, songs);
+		} else if (arg0 != -1 && (arg0 != field25 || !MidiManager.isInitialised()) && midiVolume != 0 && !field2012) {
+			MidiManager.method730(midiVolume, arg0, songs);
 		}
 		field25 = arg0;
 	}
 
 	@ObfuscatedName("ac.a(ZII)V")
 	public static void playJingle(int arg0, int arg1) {
-		if (field1183 != 0 && arg0 != -1) {
-			MidiManager.play(jingles, arg0, field1183);
+		if (midiVolume != 0 && arg0 != -1) {
+			MidiManager.play(jingles, arg0, midiVolume);
 			field2012 = true;
 		}
 	}
@@ -3346,7 +3346,7 @@ public final class Client extends GameShell {
 				}
 			}
 			if (arg0.startsWith(AUTO_FPS) && modewhere != 0) {
-				GameShell.method1073(arg0.substring(6).method603());
+				GameShell.setFramerate(arg0.substring(6).method603());
 			}
 			if (arg0.equalsIgnoreCase(AUTO_ERRORTEST) && modewhere == 2) {
 				throw new RuntimeException();
@@ -3395,12 +3395,12 @@ public final class Client extends GameShell {
 		if (orbitCameraZ != var0) {
 			orbitCameraZ += (var0 - orbitCameraZ) / 16;
 		}
-		method905();
+		clampCameraAngle();
 	}
 
-	// guessing placement
+	// guessing placement and name
 	@ObfuscatedName("me.c(B)V")
-	public static void method905() {
+	public static void clampCameraAngle() {
 		int var0 = orbitCameraX >> 7;
 		orbitCameraYaw &= 0x7FF;
 		int var1 = orbitCameraZ >> 7;
@@ -3596,11 +3596,11 @@ public final class Client extends GameShell {
 			}
 		}
 		if (field2012 && !MidiManager.isInitialised()) {
-			if (field1183 != 0 && field25 != -1) {
-				MidiManager.play(songs, field25, field1183);
+			if (midiVolume != 0 && field25 != -1) {
+				MidiManager.play(songs, field25, midiVolume);
 			}
 			field2012 = false;
-		} else if (field1183 != 0 && field25 != -1 && !MidiManager.isInitialised()) {
+		} else if (midiVolume != 0 && field25 != -1 && !MidiManager.isInitialised()) {
 			out.p1Enc(133);
 			out.p4(field25);
 			field25 = -1;
@@ -6437,7 +6437,7 @@ public final class Client extends GameShell {
 				}
 				long var91 = var86 & Long.MAX_VALUE;
 				int var93;
-				for (var93 = 0; friendChatCount > var93 && (var91 != friendChatList[var93].key || var88 != friendChatList[var93].field1317); var93++) {
+				for (var93 = 0; friendChatCount > var93 && (var91 != friendChatList[var93].key || var88 != friendChatList[var93].world); var93++) {
 				}
 				if (var93 < friendChatCount) {
 					while (var93 < friendChatCount - 1) {
@@ -6451,18 +6451,18 @@ public final class Client extends GameShell {
 				JagString var94 = in.gjstr();
 				ClanChannelUser var95 = new ClanChannelUser();
 				var95.key = var86;
-				var95.field1323 = JagString.toRawUsername(var95.key);
-				var95.field1321 = var94;
-				var95.field1317 = var88;
-				var95.field1315 = var90;
+				var95.name = JagString.toRawUsername(var95.key);
+				var95.displayName = var94;
+				var95.world = var88;
+				var95.rank = var90;
 				int var96;
 				for (var96 = friendChatCount - 1; var96 >= 0; var96--) {
-					int var97 = friendChatList[var96].field1323.compare(var95.field1323);
+					int var97 = friendChatList[var96].name.compare(var95.name);
 					if (var97 == 0) {
-						friendChatList[var96].field1317 = var88;
-						friendChatList[var96].field1315 = var90;
-						friendChatList[var96].field1321 = var94;
-						if (field631 == var86) {
+						friendChatList[var96].world = var88;
+						friendChatList[var96].rank = var90;
+						friendChatList[var96].displayName = var94;
+						if (userhash == var86) {
 							chatRank = var90;
 						}
 						ptype = -1;
@@ -6485,7 +6485,7 @@ public final class Client extends GameShell {
 				}
 				friendChatList[var96 + 1] = var95;
 				friendChatCount++;
-				if (var86 == field631) {
+				if (var86 == userhash) {
 					chatRank = var90;
 				}
 			}
@@ -6671,7 +6671,7 @@ public final class Client extends GameShell {
 			return true;
 		} else if (ptype == 22) {
 			// UPDATE_UID192
-			GameShell.method725(in);
+			GameShell.updateUID192(in);
 			ptype = -1;
 			return true;
 		} else if (ptype == 221) {
@@ -6726,7 +6726,7 @@ public final class Client extends GameShell {
 			if (var152 > 0) {
 				var154 = in.gjstr();
 			}
-			JagString var155 = JagString.toRawUsername(var149).method614();
+			JagString var155 = JagString.toRawUsername(var149).toScreenName();
 			for (int var156 = 0; var156 < friendCount; var156++) {
 				if (field2086[var156] == var149) {
 					if (var152 != field3092[var156]) {
@@ -6859,11 +6859,11 @@ public final class Client extends GameShell {
 				field1150 = (field1150 + 1) % 100;
 				JagString var189 = PixfontGeneric.escape(WordPack.unpack2(in).method622());
 				if (var183 == 2 || var183 == 3) {
-					friendAddChat(JagString.join(new JagString[] { field472, JagString.toRawUsername(var175).method614() }), var189, JagString.toRawUsername(var177).method614());
+					friendAddChat(JagString.join(new JagString[] { field472, JagString.toRawUsername(var175).toScreenName() }), var189, JagString.toRawUsername(var177).toScreenName());
 				} else if (var183 == 1) {
-					friendAddChat(JagString.join(new JagString[] { field3201, JagString.toRawUsername(var175).method614() }), var189, JagString.toRawUsername(var177).method614());
+					friendAddChat(JagString.join(new JagString[] { field3201, JagString.toRawUsername(var175).toScreenName() }), var189, JagString.toRawUsername(var177).toScreenName());
 				} else {
-					friendAddChat(JagString.toRawUsername(var175).method614(), var189, JagString.toRawUsername(var177).method614());
+					friendAddChat(JagString.toRawUsername(var175).toScreenName(), var189, JagString.toRawUsername(var177).toScreenName());
 				}
 			}
 			ptype = -1;
@@ -6920,11 +6920,11 @@ public final class Client extends GameShell {
 				field1150 = (field1150 + 1) % 100;
 				JagString var202 = PixfontGeneric.escape(WordPack.unpack2(in).method622());
 				if (var196 == 2 || var196 == 3) {
-					addChat(var202, 7, JagString.join(new JagString[] { field472, JagString.toRawUsername(var190).method614() }));
+					addChat(var202, 7, JagString.join(new JagString[] { field472, JagString.toRawUsername(var190).toScreenName() }));
 				} else if (var196 == 1) {
-					addChat(var202, 7, JagString.join(new JagString[] { field3201, JagString.toRawUsername(var190).method614() }));
+					addChat(var202, 7, JagString.join(new JagString[] { field3201, JagString.toRawUsername(var190).toScreenName() }));
 				} else {
-					addChat(var202, 3, JagString.toRawUsername(var190).method614());
+					addChat(var202, 3, JagString.toRawUsername(var190).toScreenName());
 				}
 			}
 			ptype = -1;
@@ -6981,7 +6981,7 @@ public final class Client extends GameShell {
 			long var212 = in.g8();
 			int var214 = in.g2();
 			JagString var215 = QuickChatPhraseType.list(var214).decodeMessage(in);
-			addChat(var215, var214, JagString.toRawUsername(var212).method614(), 19, null);
+			addChat(var215, var214, JagString.toRawUsername(var212).toScreenName(), 19, null);
 			ptype = -1;
 			return true;
 		} else if (ptype == 177) {
@@ -7042,11 +7042,11 @@ public final class Client extends GameShell {
 				field1150 = (field1150 + 1) % 100;
 				JagString var233 = QuickChatPhraseType.list(var227).decodeMessage(in);
 				if (var226 == 2) {
-					addChat(var233, var227, JagString.join(new JagString[] { field472, JagString.toRawUsername(var220).method614() }), 18, null);
+					addChat(var233, var227, JagString.join(new JagString[] { field472, JagString.toRawUsername(var220).toScreenName() }), 18, null);
 				} else if (var226 == 1) {
-					addChat(var233, var227, JagString.join(new JagString[] { field3201, JagString.toRawUsername(var220).method614() }), 18, null);
+					addChat(var233, var227, JagString.join(new JagString[] { field3201, JagString.toRawUsername(var220).toScreenName() }), 18, null);
 				} else {
-					addChat(var233, var227, JagString.toRawUsername(var220).method614(), 18, null);
+					addChat(var233, var227, JagString.toRawUsername(var220).toScreenName(), 18, null);
 				}
 			}
 			ptype = -1;
@@ -7089,7 +7089,7 @@ public final class Client extends GameShell {
 			return true;
 		} else if (ptype == 11) {
 			// VARP_SMALL
-			byte var240 = in.method335();
+			byte var240 = in.g1b_alt2();
 			int var241 = in.g2_alt3();
 			VarCache.varServ[var241] = var240;
 			if (var240 != VarCache.var[var241]) {
@@ -7142,7 +7142,7 @@ public final class Client extends GameShell {
 		} else if (ptype == 66) {
 			// OPEN_URL
 			byte[] var251 = new byte[psize];
-			in.method29(psize, var251);
+			in.gIsaacArrayBuffer(psize, var251);
 			GameShell.method1138(JagString.fromBytes(0, var251, psize));
 			ptype = -1;
 			return true;
@@ -7189,12 +7189,12 @@ public final class Client extends GameShell {
 			for (int var262 = 0; var262 < friendChatCount; var262++) {
 				var261[var262] = new ClanChannelUser();
 				var261[var262].key = in.g8();
-				var261[var262].field1323 = JagString.toRawUsername(var261[var262].key);
-				var261[var262].field1317 = in.g2();
-				var261[var262].field1315 = in.g1b();
-				var261[var262].field1321 = in.gjstr();
-				if (field631 == var261[var262].key) {
-					chatRank = var261[var262].field1315;
+				var261[var262].name = JagString.toRawUsername(var261[var262].key);
+				var261[var262].world = in.g2();
+				var261[var262].rank = in.g1b();
+				var261[var262].displayName = in.gjstr();
+				if (userhash == var261[var262].key) {
+					chatRank = var261[var262].rank;
 				}
 			}
 			int var263 = friendChatCount;
@@ -7202,7 +7202,7 @@ public final class Client extends GameShell {
 				var263--;
 				boolean var264 = true;
 				for (int var265 = 0; var265 < var263; var265++) {
-					if (var261[var265].field1323.compare(var261[var265 + 1].field1323) > 0) {
+					if (var261[var265].name.compare(var261[var265 + 1].name) > 0) {
 						ClanChannelUser var266 = var261[var265];
 						var264 = false;
 						var261[var265] = var261[var265 + 1];
@@ -7251,11 +7251,11 @@ public final class Client extends GameShell {
 				field1150 = (field1150 + 1) % 100;
 				JagString var282 = QuickChatPhraseType.list(var278).decodeMessage(in);
 				if (var277 == 2 || var277 == 3) {
-					addChat(var282, var278, JagString.join(new JagString[] { field472, JagString.toRawUsername(var267).method614() }), 20, JagString.toRawUsername(var269).method614());
+					addChat(var282, var278, JagString.join(new JagString[] { field472, JagString.toRawUsername(var267).toScreenName() }), 20, JagString.toRawUsername(var269).toScreenName());
 				} else if (var277 == 1) {
-					addChat(var282, var278, JagString.join(new JagString[] { field3201, JagString.toRawUsername(var267).method614() }), 20, JagString.toRawUsername(var269).method614());
+					addChat(var282, var278, JagString.join(new JagString[] { field3201, JagString.toRawUsername(var267).toScreenName() }), 20, JagString.toRawUsername(var269).toScreenName());
 				} else {
-					addChat(var282, var278, JagString.toRawUsername(var267).method614(), 20, JagString.toRawUsername(var269).method614());
+					addChat(var282, var278, JagString.toRawUsername(var267).toScreenName(), 20, JagString.toRawUsername(var269).toScreenName());
 				}
 			}
 			ptype = -1;
@@ -7403,7 +7403,7 @@ public final class Client extends GameShell {
 			int var308 = in.g2_alt2();
 			orbitCameraPitch = var307;
 			orbitCameraYaw = var308;
-			method905();
+			clampCameraAngle();
 			ptype = -1;
 			return true;
 		} else if (ptype == 189) {
@@ -7546,7 +7546,7 @@ public final class Client extends GameShell {
 			// MESSAGE_PRIVATE_ECHO
 			long var327 = in.g8();
 			JagString var329 = PixfontGeneric.escape(WordPack.unpack2(in).method622());
-			addChat(var329, 6, JagString.toRawUsername(var327).method614());
+			addChat(var329, 6, JagString.toRawUsername(var327).toScreenName());
 			ptype = -1;
 			return true;
 		} else if (ptype == 110) {
@@ -7683,9 +7683,9 @@ public final class Client extends GameShell {
 				int var63 = LOC_SHAPE_TO_LAYER[var61];
 				int var64 = in.g2();
 				byte var65 = in.g1b_alt1();
-				byte var66 = in.method335();
+				byte var66 = in.g1b_alt2();
 				byte var67 = in.g1b();
-				byte var68 = in.method335();
+				byte var68 = in.g1b_alt2();
 				int var69 = in.g2();
 				int var70 = in.g1();
 				int var71 = zoneUpdateZ + (var70 & 0x7);
@@ -8295,10 +8295,10 @@ public final class Client extends GameShell {
 					tempP.pos = 0;
 					JagString var23;
 					if (var14) {
-						QuickChatPhrase var24 = QuickChatPhrase.method667(tempP);
-						var22 = var24.field4058;
+						QuickChatPhrase var24 = QuickChatPhrase.create(tempP);
+						var22 = var24.id;
 						var13 &= 0x7FFF;
-						var23 = var24.field4065.decodeMessage(tempP);
+						var23 = var24.type.decodeMessage(tempP);
 					} else {
 						var23 = PixfontGeneric.escape(WordPack.unpack2(tempP).method622());
 					}
@@ -9373,7 +9373,7 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("be.a(ILi;I)V")
 	public static void opPlayer(JagString arg0, int arg1) {
-		JagString var2 = arg0.method611().method614();
+		JagString var2 = arg0.method611().toScreenName();
 		boolean var3 = false;
 		for (int var4 = 0; var4 < playerCount; var4++) {
 			ClientPlayer var5 = players[playerIds[var4]];
@@ -11683,8 +11683,8 @@ public final class Client extends GameShell {
 			if (var2 == 4) {
 				var3 = 0;
 			}
-			if (field1183 != var3) {
-				if (field1183 == 0 && field25 != -1) {
+			if (midiVolume != var3) {
+				if (midiVolume == 0 && field25 != -1) {
 					MidiManager.play(songs, field25, var3);
 					field2012 = false;
 				} else if (var3 == 0) {
@@ -11693,7 +11693,7 @@ public final class Client extends GameShell {
 				} else {
 					MidiManager.setVolume(var3);
 				}
-				field1183 = var3;
+				midiVolume = var3;
 			}
 		}
 		if (var1 == 6) {
@@ -12069,7 +12069,7 @@ public final class Client extends GameShell {
 			addChat(Text.FRIENDLISTFULL, 0, AUTO_EMPTY);
 			return;
 		}
-		JagString var2 = JagString.toRawUsername(arg0).method614();
+		JagString var2 = JagString.toRawUsername(arg0).toScreenName();
 		for (int var3 = 0; var3 < friendCount; var3++) {
 			if (field2086[var3] == arg0) {
 				addChat(JagString.join(new JagString[] { var2, Text.FRIENDLISTDUPE }), 0, AUTO_EMPTY);
@@ -12108,7 +12108,7 @@ public final class Client extends GameShell {
 			addChat(Text.IGNORELISTFULL, 0, AUTO_EMPTY);
 			return;
 		}
-		JagString var2 = JagString.toRawUsername(arg0).method614();
+		JagString var2 = JagString.toRawUsername(arg0).toScreenName();
 		for (int var3 = 0; var3 < privateMessageCount; var3++) {
 			if (messageIds[var3] == arg0) {
 				addChat(JagString.join(new JagString[] { var2, Text.IGNORELISTDUPE }), 0, AUTO_EMPTY);

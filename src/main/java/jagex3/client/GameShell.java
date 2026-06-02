@@ -127,7 +127,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("bf.J")
 	public static BufferedRandomAccessFile cacheDat;
 	@ObfuscatedName("qa.k")
-	public static BufferedRandomAccessFile field3529;
+	public static BufferedRandomAccessFile randomDat;
 	@ObfuscatedName("na.W")
 	public static Timer timer;
 	@ObfuscatedName("oa.C")
@@ -247,10 +247,10 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("ac.a(Lea;B)V")
 	public static void pushUID192(Packet arg0) {
 		byte[] var1 = new byte[24];
-		if (field3529 != null) {
+		if (randomDat != null) {
 			try {
-				field3529.seek(0L);
-				field3529.read(var1);
+				randomDat.seek(0L);
+				randomDat.read(var1);
 				int var2;
 				for (var2 = 0; var2 < 24 && var1[var2] == 0; var2++) {
 				}
@@ -267,11 +267,11 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("jg.a(Lea;Z)V")
-	public static void method725(Packet arg0) {
-		if (field3529 != null) {
+	public static void updateUID192(Packet arg0) {
+		if (randomDat != null) {
 			try {
-				field3529.seek(0L);
-				field3529.write(arg0.data, 24, arg0.pos);
+				randomDat.seek(0L);
+				randomDat.write(arg0.data, 24, arg0.pos);
 			} catch (Exception var1) {
 			}
 		}
@@ -292,7 +292,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("og.c(II)V")
-	public static void method1073(int arg0) {
+	public static void setFramerate(int arg0) {
 		deltime = 1000 / arg0;
 	}
 
@@ -646,7 +646,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			this.addcanvas();
 			drawArea = PixMap.method1259(sWid, canvas, sHei);
 			this.maininit();
-			timer = Timer.method1358();
+			timer = Timer.create();
 			while (killtime == 0L || killtime > MonotonicTime.currentTime()) {
 				updateCount = timer.count(mindel, deltime);
 				for (int var4 = 0; var4 < updateCount; var4++) {

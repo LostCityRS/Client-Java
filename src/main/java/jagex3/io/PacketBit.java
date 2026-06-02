@@ -38,7 +38,7 @@ public final class PacketBit extends Packet {
 	}
 
 	@ObfuscatedName("ae.a(I[BZI)V")
-	public void method29(int arg0, byte[] arg1) {
+	public void gIsaacArrayBuffer(int arg0, byte[] arg1) {
 		for (int var3 = 0; var3 < arg0; var3++) {
 			arg1[var3] = (byte) (super.data[super.pos++] - this.random.takeNextValue());
 		}

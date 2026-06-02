@@ -199,7 +199,7 @@ public final class MidiFile extends Linkable {
 						}
 						var60.p1(47);
 						var60.p1(0);
-						var60.method333(var60.pos - var71);
+						var60.psize4(var60.pos - var71);
 						continue label220;
 					}
 					if (var74 == 23) {

@@ -80,7 +80,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 				return var4;
 			}
 		}
-		return arg1 == 5 ? JagString.toRawUsername(arg0).method614() : JagString.method1556(arg0);
+		return arg1 == 5 ? JagString.toRawUsername(arg0).toScreenName() : JagString.method1556(arg0);
 	}
 
 	@ObfuscatedName("si.a(BI)I")

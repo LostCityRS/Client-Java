@@ -642,7 +642,7 @@ public final class IfType {
 		if (this.graphicMaskLineOffsets != null) {
 			return true;
 		}
-		SoftwarePix8 var1 = PixLoader.method1553(field1176, this.graphic);
+		SoftwarePix8 var1 = PixLoader.makeSoftwarePix8(field1176, this.graphic);
 		if (var1 == null) {
 			return false;
 		}
@@ -684,7 +684,7 @@ public final class IfType {
 		if (var3 != null) {
 			return var3;
 		}
-		Pix32 var4 = PixLoader.method1558(field1176, var2, 0);
+		Pix32 var4 = PixLoader.makePix32(field1176, var2, 0);
 		if (var4 == null) {
 			loadingAsset = true;
 		} else {
@@ -710,7 +710,7 @@ public final class IfType {
 		if (var5 != null) {
 			return var5;
 		}
-		SoftwarePix32 var6 = PixLoader.method203(field1176, 0, var2);
+		SoftwarePix32 var6 = PixLoader.makeSoftwarePix32(field1176, 0, var2);
 		if (var6 == null) {
 			loadingAsset = true;
 			return null;

@@ -116,7 +116,7 @@ public final class SignLink implements Runnable {
 		// custom: Why does the client not call this? Is this supposed to be called by a loader?
 		// This function is what enables the cache...
 		if (arg0) {
-			this.method1295(arg3, arg2, arg4);
+			this.getCacheDirectory(arg3, arg2, arg4);
 		}
 		this.isClosed = false;
 		this.thread = new Thread(this);
@@ -272,7 +272,7 @@ public final class SignLink implements Runnable {
 	}
 
 	@ObfuscatedName("qg.a(Ljava/lang/String;III)V")
-	public void method1295(String arg0, int arg2, int arg3) {
+	public void getCacheDirectory(String arg0, int arg2, int arg3) {
 		if (arg2 < 32 || arg2 > 34) {
 			arg2 = 32;
 		}

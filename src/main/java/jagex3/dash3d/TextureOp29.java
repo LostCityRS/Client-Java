@@ -3,7 +3,7 @@ package jagex3.dash3d;
 import deob.ObfuscatedName;
 import jagex3.io.Packet;
 import jagex3.util.ArrayUtil;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 
 @ObfuscatedName("mb")
 public final class TextureOp29 extends TextureOp {
@@ -53,10 +53,10 @@ public final class TextureOp29 extends TextureOp {
 		int var10 = var7;
 		if (field919 <= arg1 && arg1 <= field279) {
 			int[] var11 = field42[arg1];
-			int var12 = IntUtil.method1058(field1207, field183, arg4 - arg3);
-			int var13 = IntUtil.method1058(field1207, field183, arg4 + arg3);
-			int var14 = IntUtil.method1058(field1207, field183, arg4 - var7);
-			int var15 = IntUtil.method1058(field1207, field183, arg4 + var7);
+			int var12 = IntMath.method1058(field1207, field183, arg4 - arg3);
+			int var13 = IntMath.method1058(field1207, field183, arg4 + arg3);
+			int var14 = IntMath.method1058(field1207, field183, arg4 - var7);
+			int var15 = IntMath.method1058(field1207, field183, arg4 + var7);
 			ArrayUtil.method1534(var12, arg2, var14, var11);
 			ArrayUtil.method1534(var14, arg0, var15, var11);
 			ArrayUtil.method1534(var15, arg2, var13, var11);
@@ -83,10 +83,10 @@ public final class TextureOp29 extends TextureOp {
 				if (field919 <= var20 && field279 >= var19) {
 					if (var8 < var7) {
 						int var21 = field482[var8];
-						int var22 = IntUtil.method1058(field1207, field183, arg4 + var6);
-						int var23 = IntUtil.method1058(field1207, field183, arg4 - var6);
-						int var24 = IntUtil.method1058(field1207, field183, var21 + arg4);
-						int var25 = IntUtil.method1058(field1207, field183, arg4 - var21);
+						int var22 = IntMath.method1058(field1207, field183, arg4 + var6);
+						int var23 = IntMath.method1058(field1207, field183, arg4 - var6);
+						int var24 = IntMath.method1058(field1207, field183, var21 + arg4);
+						int var25 = IntMath.method1058(field1207, field183, arg4 - var21);
 						if (var20 <= field279) {
 							int[] var26 = field42[var20];
 							ArrayUtil.method1534(var23, arg2, var25, var26);
@@ -100,8 +100,8 @@ public final class TextureOp29 extends TextureOp {
 							ArrayUtil.method1534(var24, arg2, var22, var27);
 						}
 					} else {
-						int var28 = IntUtil.method1058(field1207, field183, var6 + arg4);
-						int var29 = IntUtil.method1058(field1207, field183, arg4 - var6);
+						int var28 = IntMath.method1058(field1207, field183, var6 + arg4);
+						int var29 = IntMath.method1058(field1207, field183, arg4 - var6);
 						if (var20 <= field279) {
 							ArrayUtil.method1534(var29, arg2, var28, field42[var20]);
 						}
@@ -117,12 +117,12 @@ public final class TextureOp29 extends TextureOp {
 				int var32 = arg4 + var8;
 				int var33 = arg4 - var8;
 				if (field1207 <= var32 && var33 <= field183) {
-					int var34 = IntUtil.method1058(field1207, field183, var32);
-					int var35 = IntUtil.method1058(field1207, field183, var33);
+					int var34 = IntMath.method1058(field1207, field183, var32);
+					int var35 = IntMath.method1058(field1207, field183, var33);
 					if (var7 > var6) {
 						int var36 = var10 >= var6 ? var10 : field482[var6];
-						int var37 = IntUtil.method1058(field1207, field183, var36 + arg4);
-						int var38 = IntUtil.method1058(field1207, field183, arg4 - var36);
+						int var37 = IntMath.method1058(field1207, field183, var36 + arg4);
+						int var38 = IntMath.method1058(field1207, field183, arg4 - var36);
 						if (var30 <= field279) {
 							int[] var39 = field42[var30];
 							ArrayUtil.method1534(var35, arg2, var38, var39);
@@ -357,20 +357,20 @@ public final class TextureOp29 extends TextureOp {
 
 	@ObfuscatedName("ne.a(IIIIIIII)V")
 	public static void method986(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-		int var7 = IntUtil.method1058(field919, field279, arg2);
-		int var8 = IntUtil.method1058(field919, field279, arg4);
-		int var9 = IntUtil.method1058(field1207, field183, arg3);
-		int var10 = IntUtil.method1058(field1207, field183, arg1);
-		int var11 = IntUtil.method1058(field919, field279, arg2 + arg5);
-		int var12 = IntUtil.method1058(field919, field279, arg4 - arg5);
+		int var7 = IntMath.method1058(field919, field279, arg2);
+		int var8 = IntMath.method1058(field919, field279, arg4);
+		int var9 = IntMath.method1058(field1207, field183, arg3);
+		int var10 = IntMath.method1058(field1207, field183, arg1);
+		int var11 = IntMath.method1058(field919, field279, arg2 + arg5);
+		int var12 = IntMath.method1058(field919, field279, arg4 - arg5);
 		for (int var13 = var7; var13 < var11; var13++) {
 			ArrayUtil.method1534(var9, arg6, var10, field42[var13]);
 		}
 		for (int var14 = var8; var14 > var12; var14--) {
 			ArrayUtil.method1534(var9, arg6, var10, field42[var14]);
 		}
-		int var15 = IntUtil.method1058(field1207, field183, arg3 + arg5);
-		int var16 = IntUtil.method1058(field1207, field183, arg1 - arg5);
+		int var15 = IntMath.method1058(field1207, field183, arg3 + arg5);
+		int var16 = IntMath.method1058(field1207, field183, arg1 - arg5);
 		for (int var17 = var11; var17 <= var12; var17++) {
 			int[] var18 = field42[var17];
 			ArrayUtil.method1534(var9, arg6, var15, var18);
@@ -382,8 +382,8 @@ public final class TextureOp29 extends TextureOp {
 	@ObfuscatedName("ib.a(IIIII)V")
 	public static void method659(int arg0, int arg1, int arg2, int arg3) {
 		if (field919 <= arg1 && arg1 <= field279) {
-			int var4 = IntUtil.method1058(field1207, field183, arg3);
-			int var5 = IntUtil.method1058(field1207, field183, arg0);
+			int var4 = IntMath.method1058(field1207, field183, arg3);
+			int var5 = IntMath.method1058(field1207, field183, arg0);
 			method310(arg1, var5, var4, arg2);
 		}
 	}
@@ -414,9 +414,9 @@ public final class TextureOp29 extends TextureOp {
 		int var4 = 0;
 		int var5 = arg2;
 		int var6 = -arg2;
-		int var7 = IntUtil.method1058(field1207, field183, arg1 + arg2);
+		int var7 = IntMath.method1058(field1207, field183, arg1 + arg2);
 		int var8 = -1;
-		int var9 = IntUtil.method1058(field1207, field183, arg1 - arg2);
+		int var9 = IntMath.method1058(field1207, field183, arg1 - arg2);
 		ArrayUtil.method1534(var9, arg0, var7, field42[arg3]);
 		while (var5 > var4) {
 			var8 += 2;
@@ -427,8 +427,8 @@ public final class TextureOp29 extends TextureOp {
 				int var10 = arg3 - var5;
 				int var11 = arg3 + var5;
 				if (field919 <= var11 && var10 <= field279) {
-					int var12 = IntUtil.method1058(field1207, field183, arg1 + var4);
-					int var13 = IntUtil.method1058(field1207, field183, arg1 - var4);
+					int var12 = IntMath.method1058(field1207, field183, arg1 + var4);
+					int var13 = IntMath.method1058(field1207, field183, arg1 - var4);
 					if (var11 <= field279) {
 						ArrayUtil.method1534(var13, arg0, var12, field42[var11]);
 					}
@@ -441,8 +441,8 @@ public final class TextureOp29 extends TextureOp {
 			int var14 = var4 + arg3;
 			int var15 = arg3 - var4;
 			if (field919 <= var14 && field279 >= var15) {
-				int var16 = IntUtil.method1058(field1207, field183, arg1 + var5);
-				int var17 = IntUtil.method1058(field1207, field183, arg1 - var5);
+				int var16 = IntMath.method1058(field1207, field183, arg1 + var5);
+				int var17 = IntMath.method1058(field1207, field183, arg1 - var5);
 				if (var14 <= field279) {
 					ArrayUtil.method1534(var17, arg0, var16, field42[var14]);
 				}
@@ -583,8 +583,8 @@ public final class TextureOp29 extends TextureOp {
 	@ObfuscatedName("hi.a(IBIII)V")
 	public static void method580(int arg0, int arg1, int arg2, int arg3) {
 		if (field1207 <= arg3 && arg3 <= field183) {
-			int var4 = IntUtil.method1058(field919, field279, arg2);
-			int var5 = IntUtil.method1058(field919, field279, arg1);
+			int var4 = IntMath.method1058(field919, field279, arg2);
+			int var5 = IntMath.method1058(field919, field279, arg1);
 			method753(arg0, var4, arg3, var5);
 		}
 	}
@@ -650,8 +650,8 @@ public final class TextureOp29 extends TextureOp {
 		int var18 = var15;
 		int var19 = (arg1 - 1) * var14;
 		if (field919 <= arg2 && arg2 <= field279) {
-			int var20 = IntUtil.method1058(field1207, field183, arg4 + arg0);
-			int var21 = IntUtil.method1058(field1207, field183, arg0 - arg4);
+			int var20 = IntMath.method1058(field1207, field183, arg4 + arg0);
+			int var21 = IntMath.method1058(field1207, field183, arg0 - arg4);
 			ArrayUtil.method1534(var21, arg3, var20, field42[arg2]);
 		}
 		while (var6 > 0) {
@@ -676,8 +676,8 @@ public final class TextureOp29 extends TextureOp {
 			}
 			var13 += -var17;
 			if (var23 >= field919 && field279 >= var22) {
-				int var24 = IntUtil.method1058(field1207, field183, arg0 + var5);
-				int var25 = IntUtil.method1058(field1207, field183, arg0 - var5);
+				int var24 = IntMath.method1058(field1207, field183, arg0 + var5);
+				int var25 = IntMath.method1058(field1207, field183, arg0 - var5);
 				if (var22 >= field919) {
 					ArrayUtil.method1534(var25, arg3, var24, field42[var22]);
 				}
@@ -702,10 +702,10 @@ public final class TextureOp29 extends TextureOp {
 
 	@ObfuscatedName("client.b(IIIIII)V")
 	public static void method226(int arg0, int arg1, int arg2, int arg3, int arg4) {
-		int var5 = IntUtil.method1058(field919, field279, arg1);
-		int var6 = IntUtil.method1058(field919, field279, arg2);
-		int var7 = IntUtil.method1058(field1207, field183, arg3);
-		int var8 = IntUtil.method1058(field1207, field183, arg4);
+		int var5 = IntMath.method1058(field919, field279, arg1);
+		int var6 = IntMath.method1058(field919, field279, arg2);
+		int var7 = IntMath.method1058(field1207, field183, arg3);
+		int var8 = IntMath.method1058(field1207, field183, arg4);
 		for (int var9 = var5; var9 <= var6; var9++) {
 			ArrayUtil.method1534(var7, arg0, var8, field42[var9]);
 		}
@@ -732,20 +732,20 @@ public final class TextureOp29 extends TextureOp {
 
 	@ObfuscatedName("bi.a(IIIIIIB)V")
 	public static void method101(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-		int var6 = IntUtil.method1058(field919, field279, arg3);
-		int var7 = IntUtil.method1058(field919, field279, arg0);
-		int var8 = IntUtil.method1058(field1207, field183, arg2);
-		int var9 = IntUtil.method1058(field1207, field183, arg4);
-		int var10 = IntUtil.method1058(field919, field279, arg3 + arg1);
-		int var11 = IntUtil.method1058(field919, field279, arg0 - arg1);
+		int var6 = IntMath.method1058(field919, field279, arg3);
+		int var7 = IntMath.method1058(field919, field279, arg0);
+		int var8 = IntMath.method1058(field1207, field183, arg2);
+		int var9 = IntMath.method1058(field1207, field183, arg4);
+		int var10 = IntMath.method1058(field919, field279, arg3 + arg1);
+		int var11 = IntMath.method1058(field919, field279, arg0 - arg1);
 		for (int var12 = var6; var12 < var10; var12++) {
 			ArrayUtil.method1534(var8, arg5, var9, field42[var12]);
 		}
 		for (int var13 = var7; var13 > var11; var13--) {
 			ArrayUtil.method1534(var8, arg5, var9, field42[var13]);
 		}
-		int var14 = IntUtil.method1058(field1207, field183, arg1 + arg2);
-		int var15 = IntUtil.method1058(field1207, field183, arg4 - arg1);
+		int var14 = IntMath.method1058(field1207, field183, arg1 + arg2);
+		int var15 = IntMath.method1058(field1207, field183, arg4 - arg1);
 		for (int var16 = var10; var16 <= var11; var16++) {
 			int[] var17 = field42[var16];
 			ArrayUtil.method1534(var8, arg5, var14, var17);
@@ -888,10 +888,10 @@ public final class TextureOp29 extends TextureOp {
 		int var35 = var29;
 		if (field919 <= arg0 && field279 >= arg0) {
 			int[] var36 = field42[arg0];
-			int var37 = IntUtil.method1058(field1207, field183, arg6 - arg2);
-			int var38 = IntUtil.method1058(field1207, field183, arg6 + arg2);
-			int var39 = IntUtil.method1058(field1207, field183, arg6 - var10);
-			int var40 = IntUtil.method1058(field1207, field183, arg6 + var10);
+			int var37 = IntMath.method1058(field1207, field183, arg6 - arg2);
+			int var38 = IntMath.method1058(field1207, field183, arg6 + arg2);
+			int var39 = IntMath.method1058(field1207, field183, arg6 - var10);
+			int var40 = IntMath.method1058(field1207, field183, arg6 + var10);
 			ArrayUtil.method1534(var37, arg1, var39, var36);
 			ArrayUtil.method1534(var39, arg3, var40, var36);
 			ArrayUtil.method1534(var40, arg1, var38, var36);
@@ -946,11 +946,11 @@ public final class TextureOp29 extends TextureOp {
 			var42 -= var27;
 			var34 -= var27;
 			if (var44 >= field919 && field279 >= var45) {
-				int var46 = IntUtil.method1058(field1207, field183, arg6 + var7);
-				int var47 = IntUtil.method1058(field1207, field183, arg6 - var7);
+				int var46 = IntMath.method1058(field1207, field183, arg6 + var7);
+				int var47 = IntMath.method1058(field1207, field183, arg6 - var7);
 				if (var43) {
-					int var48 = IntUtil.method1058(field1207, field183, arg6 + var9);
-					int var49 = IntUtil.method1058(field1207, field183, arg6 - var9);
+					int var48 = IntMath.method1058(field1207, field183, arg6 + var9);
+					int var49 = IntMath.method1058(field1207, field183, arg6 - var9);
 					if (var45 >= field919) {
 						int[] var50 = field42[var45];
 						ArrayUtil.method1534(var47, arg1, var49, var50);

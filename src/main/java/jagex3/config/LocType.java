@@ -7,7 +7,7 @@ import jagex3.datastruct.*;
 import jagex3.io.Packet;
 import jagex3.js5.Js5;
 import jagex3.jstring.JagString;
-import jagex3.util.IntUtil;
+import jagex3.util.IntMath;
 import jagex3.var.VarCache;
 
 @ObfuscatedName("nf")
@@ -655,7 +655,7 @@ public final class LocType extends Linkable2 {
 		} else if (arg0 == 249) {
 			int var9 = arg1.g1();
 			if (this.params == null) {
-				int var10 = IntUtil.bitceil(var9);
+				int var10 = IntMath.bitceil(var9);
 				this.params = new HashTable(var10);
 			}
 			for (int var11 = 0; var11 < var9; var11++) {
