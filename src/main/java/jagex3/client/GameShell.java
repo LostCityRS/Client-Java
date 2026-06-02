@@ -18,6 +18,9 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 @ObfuscatedName("hj")
 public abstract class GameShell extends Applet implements Runnable, FocusListener, WindowListener {
@@ -46,6 +49,60 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public static final JagString field1767 = JagString.wrap("; Max)2Age=");
 	@ObfuscatedName("pe.C")
 	public static final JagString field3237 = JagString.wrap("document)3cookie=(R");
+	@ObfuscatedName("wi.o")
+	public static final Calendar field4545 = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+	@ObfuscatedName("ia.l")
+	public static final JagString field1672 = JagString.wrap("Thu");
+	@ObfuscatedName("ia.s")
+	public static final JagString field1679 = JagString.wrap("Fri");
+	@ObfuscatedName("ia.u")
+	public static final JagString field1681 = JagString.wrap("Wed");
+	@ObfuscatedName("ia.D")
+	public static final JagString field1690 = JagString.wrap("Tue");
+	@ObfuscatedName("ia.F")
+	public static final JagString field1692 = JagString.wrap("Sun");
+	@ObfuscatedName("ia.y")
+	public static final JagString field1685 = JagString.wrap("Sat");
+	@ObfuscatedName("ia.E")
+	public static final JagString field1691 = JagString.wrap("Mon");
+	@ObfuscatedName("ia.m")
+	public static final JagString[] field1673 = new JagString[] { field1692, field1691, field1690, field1681, field1672, field1679, field1685 };
+	@ObfuscatedName("db.bb")
+	public static final JagString field659 = JagString.wrap("Nov");
+	@ObfuscatedName("db.db")
+	public static final JagString field661 = JagString.wrap("Jun");
+	@ObfuscatedName("db.s")
+	public static final JagString field624 = JagString.wrap("Jul");
+	@ObfuscatedName("db.w")
+	public static final JagString field628 = JagString.wrap("Dec");
+	@ObfuscatedName("db.A")
+	public static final JagString field632 = JagString.wrap("Aug");
+	@ObfuscatedName("db.V")
+	public static final JagString field653 = JagString.wrap("Sep");
+	@ObfuscatedName("db.L")
+	public static final JagString field643 = JagString.wrap("Mar");
+	@ObfuscatedName("db.N")
+	public static final JagString field645 = JagString.wrap("Jan");
+	@ObfuscatedName("db.I")
+	public static final JagString field640 = JagString.wrap("Oct");
+	@ObfuscatedName("db.K")
+	public static final JagString field642 = JagString.wrap("Feb");
+	@ObfuscatedName("db.U")
+	public static final JagString field652 = JagString.wrap("Apr");
+	@ObfuscatedName("db.Y")
+	public static final JagString field656 = JagString.wrap("May");
+	@ObfuscatedName("db.ab")
+	public static final JagString[] field658 = new JagString[] {field645, field642, field643, field652, field656, field661, field624, field632, field653, field640, field659, field628};
+	@ObfuscatedName("pa.a")
+	public static final JagString field3135 = JagString.wrap(")2");
+	@ObfuscatedName("ui.P")
+	public static final JagString field4262 = JagString.wrap(" ");
+	@ObfuscatedName("k.D")
+	public static final JagString field1959 = JagString.wrap(":");
+	@ObfuscatedName("ae.Vb")
+	public static final JagString field82 = JagString.wrap(" GMT");
+	@ObfuscatedName("s.mb")
+	public static final JagString field3772 = JagString.wrap(")1 ");
 
 	@ObfuscatedName("hj.r")
 	public static int redrawNum = 500;
@@ -260,11 +317,24 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			if (arg0.length() == 0) {
 				var4 = JagString.join(new JagString[] { var3, field920});
 			} else {
-				var4 = JagString.join(new JagString[] { var3, field1982, Client.method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.method1556(94608000L) });
+				var4 = JagString.join(new JagString[] { var3, field1982, method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.method1556(94608000L) });
 			}
 			JagString.join(new JagString[] {field3237, var4, field591}).method636(signlink.applet);
 		} catch (Throwable var5) {
 		}
+	}
+
+	@ObfuscatedName("pb.a(JI)Li;")
+	public static JagString method1139(long arg0) {
+		field4545.setTime(new Date(arg0));
+		int var2 = field4545.get(7);
+		int var3 = field4545.get(5);
+		int var4 = field4545.get(2);
+		int var5 = field4545.get(1);
+		int var6 = field4545.get(11);
+		int var7 = field4545.get(12);
+		int var8 = field4545.get(13);
+		return JagString.join(new JagString[] { field1673[var2 - 1], field3772, JagString.method1212(var3 / 10), JagString.method1212(var3 % 10), field3135, field658[var4], field3135, JagString.method1212(var5), field4262, JagString.method1212(var6 / 10), JagString.method1212(var6 % 10), field1959, JagString.method1212(var7 / 10), JagString.method1212(var7 % 10), field1959, JagString.method1212(var8 / 10), JagString.method1212(var8 % 10), field82});
 	}
 
 	@Override

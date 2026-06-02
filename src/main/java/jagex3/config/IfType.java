@@ -542,6 +542,19 @@ public final class IfType {
 		return list[var1][var2];
 	}
 
+	// might belong in IfType
+	@ObfuscatedName("db.a(IIZ)Lq;")
+	public static IfType get(int arg0, int arg1) {
+		IfType var2 = get(arg1);
+		if (arg0 == -1) {
+			return var2;
+		} else if (var2 == null || var2.subcomponents == null || var2.subcomponents.length <= arg0) {
+			return null;
+		} else {
+			return var2.subcomponents[arg0];
+		}
+	}
+
 	@ObfuscatedName("q.a(III)V")
 	public void swapSlots(int arg0, int arg1) {
 		int var3 = this.linkObjType[arg1];

@@ -1,7 +1,6 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.config.FloType;
 import jagex3.config.FluType;
 import jagex3.config.LocType;
@@ -62,6 +61,8 @@ public class ClientBuild {
 	public static byte[][] field3221;
 	@ObfuscatedName("nd.e")
 	public static int[] field2731;
+	@ObfuscatedName("e.Q")
+	public static byte[][] field774;
 
 	@ObfuscatedName("ch.a(III)I")
 	public static int getOCol(int arg0, int arg1) {
@@ -1250,7 +1251,7 @@ public class ClientBuild {
 
 	@ObfuscatedName("hh.a(ZI)V")
 	public static void loadLocationsRegion() {
-		byte[][] var0 = Statics.field774;
+		byte[][] var0 = field774;
 		for (int var1 = 0; var1 < 4; var1++) {
 			Client.doAudio();
 			for (int var2 = 0; var2 < 13; var2++) {
@@ -1270,6 +1271,47 @@ public class ClientBuild {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	@ObfuscatedName("na.a(ZI)V")
+	public static void loadGround() {
+		byte[][] var0 = field3221;
+		int var1 = var0.length;
+		for (int var2 = 0; var2 < var1; var2++) {
+			int var3 = (field2731[var2] >> 8) * 64 - Client.mapBuildBaseX;
+			byte[] var4 = var0[var2];
+			int var5 = (field2731[var2] & 0xFF) * 64 - Client.mapBuildBaseZ;
+			if (var4 != null) {
+				Client.doAudio();
+				loadGround(Client.mapBuildCentreZoneZ * 8 - 48, var3, (Client.mapBuildCentreZoneX - 6) * 8, Client.collision, var5, var4);
+			}
+		}
+		for (int var6 = 0; var6 < var1; var6++) {
+			int var7 = (field2731[var6] >> 8) * 64 - Client.mapBuildBaseX;
+			int var8 = (field2731[var6] & 0xFF) * 64 - Client.mapBuildBaseZ;
+			byte[] var9 = var0[var6];
+			if (var9 == null && Client.mapBuildCentreZoneZ < 800) {
+				Client.doAudio();
+				for (int var10 = 0; var10 < 4; var10++) {
+					fadeAdjacent(var10, 64, 64, var8, var7);
+				}
+			}
+		}
+	}
+
+	@ObfuscatedName("re.a(ZZ)V")
+	public static void loadLocations() {
+		byte[][] var0 = field774;
+		int var1 = field3221.length;
+		for (int var2 = 0; var2 < var1; var2++) {
+			byte[] var3 = var0[var2];
+			if (var3 != null) {
+				int var4 = (field2731[var2] >> 8) * 64 - Client.mapBuildBaseX;
+				int var5 = (field2731[var2] & 0xFF) * 64 - Client.mapBuildBaseZ;
+				Client.doAudio();
+				loadLocations(Client.collision, var3, var4, var5);
 			}
 		}
 	}

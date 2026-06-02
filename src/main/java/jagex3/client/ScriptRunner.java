@@ -497,7 +497,7 @@ public class ScriptRunner {
 						var5 -= 2;
 						int var54 = intStack[var5 + 1];
 						int var55 = intStack[var5];
-						IfType var56 = Client.method238(var54, var55);
+						IfType var56 = IfType.get(var54, var55);
 						if (var56 != null && var54 != -1) {
 							intStack[var5++] = 1;
 							if (var43) {
@@ -578,9 +578,9 @@ public class ScriptRunner {
 						var368.modelBaseHeight = 0;
 						Client.componentUpdated(var368);
 						if (var368.type == 0) {
-							Client.method759(false, var368);
+							Client.computeLayerLayout(false, var368);
 						}
-						Client.method10(var368);
+						Client.computeComponentLayout(var368);
 						continue;
 					}
 					if (var382 == 1003) {
@@ -611,7 +611,7 @@ public class ScriptRunner {
 						}
 						var368.xAlignment = (byte) (var370 + 3);
 						Client.componentUpdated(var368);
-						Client.method10(var368);
+						Client.computeComponentLayout(var368);
 						continue;
 					}
 					if (var382 == 1005) {
@@ -622,9 +622,9 @@ public class ScriptRunner {
 						var368.y = intStack[var5 + 1];
 						Client.componentUpdated(var368);
 						if (var368.type == 0) {
-							Client.method759(false, var368);
+							Client.computeLayerLayout(false, var368);
 						}
-						Client.method10(var368);
+						Client.computeComponentLayout(var368);
 						continue;
 					}
 				} else if (var382 >= 1100 && var382 < 1200 || !(var382 < 2100 || var382 >= 2200)) {
@@ -791,7 +791,7 @@ public class ScriptRunner {
 						var365.scrollHeight = intStack[var5 + 1];
 						Client.componentUpdated(var365);
 						if (var365.type == 0) {
-							Client.method759(false, var365);
+							Client.computeLayerLayout(false, var365);
 						}
 						continue;
 					}
@@ -1778,7 +1778,7 @@ public class ScriptRunner {
 							if (var100.method619(field3554) || var100.method619(field3141)) {
 								var100 = var100.method635(7);
 							}
-							intStack[var5++] = Client.method823(var100);
+							intStack[var5++] = Client.getFriendIndex(var100);
 							continue;
 						}
 					} else if (var382 < 4000) {
@@ -2889,7 +2889,7 @@ public class ScriptRunner {
 						var5 -= 2;
 						int var363 = intStack[var5];
 						int var364 = intStack[var5 + 1];
-						var361.draggable = Client.method238(var364, var363);
+						var361.draggable = IfType.get(var364, var363);
 						continue;
 					}
 					if (var382 == 1302) {
