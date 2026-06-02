@@ -7,9 +7,9 @@ import jagex3.dash3d.ClientObj;
 public final class ClientObjNode extends Linkable2 {
 
 	@ObfuscatedName("ui.L")
-	public final ClientObj field4258;
+	public final ClientObj obj;
 
 	public ClientObjNode(ClientObj arg0) {
-		this.field4258 = arg0;
+		this.obj = arg0;
 	}
 }

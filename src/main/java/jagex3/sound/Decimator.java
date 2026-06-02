@@ -1,7 +1,7 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
+import jagex3.util.MathTool;
 
 @ObfuscatedName("qe")
 public final class Decimator {
@@ -17,7 +17,7 @@ public final class Decimator {
 
 	public Decimator(int arg0, int arg1) {
 		if (arg1 != 22050) {
-			int var3 = Statics.method1439(arg1, 22050);
+			int var3 = MathTool.hcf(arg1, 22050);
 			int var4 = 22050 / var3;
 			this.inputRate = var4;
 			int var5 = arg1 / var3;

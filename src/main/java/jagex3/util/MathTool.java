@@ -39,4 +39,18 @@ public class MathTool {
 		}
 		return var2;
 	}
+
+    @ObfuscatedName("td.a(IIB)I")
+    public static int hcf(int arg0, int arg1) {
+        if (arg0 > 22050) {
+            arg1 = arg0;
+            arg0 = 22050;
+        }
+        while (arg0 != 0) {
+            int var2 = arg1 % arg0;
+            arg1 = arg0;
+            arg0 = var2;
+        }
+        return arg1;
+    }
 }

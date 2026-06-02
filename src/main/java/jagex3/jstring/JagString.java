@@ -1,7 +1,6 @@
 package jagex3.jstring;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.BrowserControl;
 import jagex3.datastruct.HashTable;
 import jagex3.datastruct.StringNode;
@@ -22,6 +21,12 @@ public final class JagString implements StringInterface {
 	public static final byte[] field1008 = new byte[] { 95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 };
 	@ObfuscatedName("bc.l")
 	public static final JagString field233 = wrap("null");
+	@ObfuscatedName("ha.w")
+	public static final JagString field1411 = wrap("");
+	@ObfuscatedName("mj.n")
+	public static final JagString field2612 = wrap(")3");
+	@ObfuscatedName("va.w")
+	public static HashTable field4313;
 	@ObfuscatedName("i.h")
 	public boolean field1606 = true;
 
@@ -196,7 +201,7 @@ public final class JagString implements StringInterface {
 
 	@ObfuscatedName("mj.a(II)Li;")
 	public static JagString formatIPv4(int arg0) {
-		return join(new JagString[] { parseInt(arg0 >> 24 & 0xFF), Statics.field2612, parseInt(arg0 >> 16 & 0xFF), Statics.field2612, parseInt(arg0 >> 8 & 0xFF), Statics.field2612, parseInt(arg0 & 0xFF) });
+		return join(new JagString[] { parseInt(arg0 >> 24 & 0xFF), field2612, parseInt(arg0 >> 16 & 0xFF), field2612, parseInt(arg0 >> 8 & 0xFF), field2612, parseInt(arg0 & 0xFF) });
 	}
 
 	@ObfuscatedName("wa.a(ZIJZ)Li;")
@@ -410,10 +415,10 @@ public final class JagString implements StringInterface {
 		long var2 = this.method637((byte) 84);
 		Class var4 = JagString.class;
 		synchronized (JagString.class) {
-			if (Statics.field4313 == null) {
-				Statics.field4313 = new HashTable(4096);
+			if (field4313 == null) {
+				field4313 = new HashTable(4096);
 			} else {
-				for (StringNode var5 = (StringNode) Statics.field4313.find(var2); var5 != null; var5 = (StringNode) Statics.field4313.method1054(3)) {
+				for (StringNode var5 = (StringNode) field4313.find(var2); var5 != null; var5 = (StringNode) field4313.method1054(3)) {
 					if (this.strEquals(var5.field4046)) {
 						return var5.field4046;
 					}
@@ -425,7 +430,7 @@ public final class JagString implements StringInterface {
 			StringNode var8 = new StringNode();
 			var8.field4046 = this;
 			this.field1606 = false;
-			Statics.field4313.put(var2, var8);
+			field4313.put(var2, var8);
 			return this;
 		}
 	}
@@ -555,7 +560,7 @@ public final class JagString implements StringInterface {
 	@ObfuscatedName("i.d(Z)Li;")
 	public JagString method611() {
 		JagString var1 = toRawUsername(this.toUserhash());
-		return var1 == null ? Statics.field1411 : var1;
+		return var1 == null ? field1411 : var1;
 	}
 
 	@ObfuscatedName("i.a(IIII[B)I")

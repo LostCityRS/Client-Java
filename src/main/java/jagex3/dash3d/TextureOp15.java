@@ -2,7 +2,6 @@ package jagex3.dash3d;
 
 import deob.ObfuscatedName;
 import deob.Statics;
-import jagex3.client.ClientMouseListener;
 import jagex3.datastruct.ByteArrayNode2;
 import jagex3.io.Packet;
 
@@ -13,7 +12,13 @@ public final class TextureOp15 extends TextureOp {
 
     @ObfuscatedName("ma.bb")
     public static int field2472;
-    @ObfuscatedName("l.eb")
+    @ObfuscatedName("sc.ab")
+    public static int field3809;
+	@ObfuscatedName("jd.g")
+	public static int field1850;
+	@ObfuscatedName("hc.eb")
+	public static int field1452;
+	@ObfuscatedName("l.eb")
 	public int field2197 = 2048;
 
 	@ObfuscatedName("l.hb")
@@ -70,9 +75,9 @@ public final class TextureOp15 extends TextureOp {
 			int var4 = var3 >> 12;
 			int var5 = var4 + 1;
 			for (int var6 = 0; var6 < Texture.field1276; var6++) {
-				ClientMouseListener.field1452 = Integer.MAX_VALUE;
-				Statics.field1850 = Integer.MAX_VALUE;
-				Statics.field3809 = Integer.MAX_VALUE;
+				field1452 = Integer.MAX_VALUE;
+				field1850 = Integer.MAX_VALUE;
+				field3809 = Integer.MAX_VALUE;
 				field2472 = Integer.MAX_VALUE;
 				int var7 = Texture.field351[var6] * this.field2202 + 2048;
 				int var8 = var7 >> 12;
@@ -107,19 +112,19 @@ public final class TextureOp15 extends TextureOp {
 							var17 = (int) (Math.sqrt((double) ((float) (var15 * var15 + var14 * var14) / 1.6777216E7F)) * 4096.0D);
 						}
 						if (field2472 > var17) {
-							ClientMouseListener.field1452 = Statics.field1850;
-							Statics.field1850 = Statics.field3809;
-							Statics.field3809 = field2472;
+							field1452 = field1850;
+							field1850 = field3809;
+							field3809 = field2472;
 							field2472 = var17;
-						} else if (var17 < Statics.field3809) {
-							ClientMouseListener.field1452 = Statics.field1850;
-							Statics.field1850 = Statics.field3809;
-							Statics.field3809 = var17;
-						} else if (var17 < Statics.field1850) {
-							ClientMouseListener.field1452 = Statics.field1850;
-							Statics.field1850 = var17;
-						} else if (var17 < ClientMouseListener.field1452) {
-							ClientMouseListener.field1452 = var17;
+						} else if (var17 < field3809) {
+							field1452 = field1850;
+							field1850 = field3809;
+							field3809 = var17;
+						} else if (var17 < field1850) {
+							field1452 = field1850;
+							field1850 = var17;
+						} else if (var17 < field1452) {
+							field1452 = var17;
 						}
 					}
 				}
@@ -127,13 +132,13 @@ public final class TextureOp15 extends TextureOp {
 				if (var25 == 0) {
 					var2[var6] = field2472;
 				} else if (var25 == 1) {
-					var2[var6] = Statics.field3809;
+					var2[var6] = field3809;
 				} else if (var25 == 3) {
-					var2[var6] = Statics.field1850;
+					var2[var6] = field1850;
 				} else if (var25 == 4) {
-					var2[var6] = ClientMouseListener.field1452;
+					var2[var6] = field1452;
 				} else if (var25 == 2) {
-					var2[var6] = Statics.field3809 - field2472;
+					var2[var6] = field3809 - field2472;
 				}
 			}
 		}

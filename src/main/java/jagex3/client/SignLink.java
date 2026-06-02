@@ -21,19 +21,19 @@ public final class SignLink implements Runnable {
 	public static final int field3579 = 3;
 
 	@ObfuscatedName("qg.b")
-	public File field3580 = null;
+	public File lastCacheDir = null;
 
 	@ObfuscatedName("qg.c")
 	public static Method setFocusCycleRoot;
 
 	@ObfuscatedName("qg.d")
-	public FileOnDisk field3582 = null;
+	public FileOnDisk masterIndex = null;
 
 	@ObfuscatedName("qg.e")
 	public PrivilegedRequest task = null;
 
 	@ObfuscatedName("qg.f")
-	public FileOnDisk[] field3584;
+	public FileOnDisk[] cacheIndex;
 
 	@ObfuscatedName("qg.g")
 	public static String userHome;
@@ -45,13 +45,13 @@ public final class SignLink implements Runnable {
 	public PrivilegedRequest current = null;
 
 	@ObfuscatedName("qg.j")
-	public FileOnDisk field3588 = null;
+	public FileOnDisk randomDat = null;
 
 	@ObfuscatedName("qg.k")
 	public AudioSource audio;
 
 	@ObfuscatedName("qg.l")
-	public FileOnDisk field3590 = null;
+	public FileOnDisk cacheDat = null;
 
 	@ObfuscatedName("qg.m")
 	public static String javaVersion;
@@ -60,7 +60,7 @@ public final class SignLink implements Runnable {
 	public EventQueue eventQueue;
 
 	@ObfuscatedName("qg.o")
-	public File field3593 = null;
+	public File cacheDir = null;
 
 	@ObfuscatedName("qg.p")
 	public static String javaVendor;
@@ -150,31 +150,31 @@ public final class SignLink implements Runnable {
 			this.thread.join();
 		} catch (InterruptedException var7) {
 		}
-		if (this.field3590 != null) {
+		if (this.cacheDat != null) {
 			try {
-				this.field3590.close();
+				this.cacheDat.close();
 			} catch (IOException var6) {
 			}
 		}
-		if (this.field3582 != null) {
+		if (this.masterIndex != null) {
 			try {
-				this.field3582.close();
+				this.masterIndex.close();
 			} catch (IOException var5) {
 			}
 		}
-		if (this.field3584 != null) {
-			for (int var2 = 0; var2 < this.field3584.length; var2++) {
-				if (this.field3584[var2] != null) {
+		if (this.cacheIndex != null) {
+			for (int var2 = 0; var2 < this.cacheIndex.length; var2++) {
+				if (this.cacheIndex[var2] != null) {
 					try {
-						this.field3584[var2].close();
+						this.cacheIndex[var2].close();
 					} catch (IOException var4) {
 					}
 				}
 			}
 		}
-		if (this.field3588 != null) {
+		if (this.randomDat != null) {
 			try {
-				this.field3588.close();
+				this.randomDat.close();
 			} catch (IOException var3) {
 			}
 		}
@@ -293,17 +293,17 @@ public final class SignLink implements Runnable {
 								continue;
 							}
 						}
-						if (this.field3588 == null) {
+						if (this.randomDat == null) {
 							try {
 								File var13 = new File(var11, "random.dat");
 								if (var7 == 1 || var13.exists()) {
-									this.field3588 = new FileOnDisk(var13, "rw", 25L);
+									this.randomDat = new FileOnDisk(var13, "rw", 25L);
 								}
 							} catch (Exception var21) {
-								this.field3588 = null;
+								this.randomDat = null;
 							}
 						}
-						if (this.field3580 == null) {
+						if (this.lastCacheDir == null) {
 							try {
 								File var14 = new File(var11, arg0);
 								if (var7 == 1 && !var14.exists()) {
@@ -316,36 +316,36 @@ public final class SignLink implements Runnable {
 								if (var7 == 0 && !var16.exists()) {
 									continue;
 								}
-								this.field3590 = new FileOnDisk(var16, "rw", 104857600L);
-								this.field3584 = new FileOnDisk[arg3];
+								this.cacheDat = new FileOnDisk(var16, "rw", 104857600L);
+								this.cacheIndex = new FileOnDisk[arg3];
 								for (int var17 = 0; var17 < arg3; var17++) {
-									this.field3584[var17] = new FileOnDisk(new File(var14, "main_file_cache.idx" + var17), "rw", 1048576L);
+									this.cacheIndex[var17] = new FileOnDisk(new File(var14, "main_file_cache.idx" + var17), "rw", 1048576L);
 								}
-								this.field3582 = new FileOnDisk(new File(var14, "main_file_cache.idx255"), "rw", 1048576L);
-								this.field3593 = this.field3580 = var14;
+								this.masterIndex = new FileOnDisk(new File(var14, "main_file_cache.idx255"), "rw", 1048576L);
+								this.cacheDir = this.lastCacheDir = var14;
 							} catch (Exception var20) {
 								try {
-									this.field3590.close();
+									this.cacheDat.close();
 									for (int var18 = 0; var18 < arg3; var18++) {
-										this.field3584[var18].close();
+										this.cacheIndex[var18].close();
 									}
-									this.field3582.close();
+									this.masterIndex.close();
 								} catch (Exception var19) {
 								}
-								this.field3584 = null;
-								this.field3593 = this.field3580 = null;
-								this.field3590 = this.field3582 = null;
+								this.cacheIndex = null;
+								this.cacheDir = this.lastCacheDir = null;
+								this.cacheDat = this.masterIndex = null;
 							}
 						}
 					} catch (Exception var22) {
 					}
-					if (this.field3588 != null && this.field3580 != null) {
+					if (this.randomDat != null && this.lastCacheDir != null) {
 						return;
 					}
 				}
 			}
 		}
-		if (this.field3580 == null) {
+		if (this.lastCacheDir == null) {
 			throw new RuntimeException();
 		}
 	}

@@ -32,7 +32,7 @@ public final class JagException extends RuntimeException {
 		try {
 			String var2 = "";
 			if (arg1 != null) {
-				var2 = method1256(arg1);
+				var2 = report(arg1);
 			}
 			if (arg0 != null) {
 				if (arg1 != null) {
@@ -61,7 +61,7 @@ public final class JagException extends RuntimeException {
 	}
 
 	@ObfuscatedName("qa.a(ILjava/lang/Throwable;)Ljava/lang/String;")
-	public static String method1256(Throwable arg0) throws IOException {
+	public static String report(Throwable arg0) throws IOException {
 		String var2;
 		if (arg0 instanceof JagException) {
 			JagException var1 = (JagException) arg0;

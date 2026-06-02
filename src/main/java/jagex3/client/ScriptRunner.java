@@ -1,7 +1,6 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.config.*;
 import jagex3.constants.Text;
@@ -127,8 +126,6 @@ public class ScriptRunner {
 	public static IfType activeComponent2;
 	@ObfuscatedName("li.R")
 	public static IfType activeComponent;
-	@ObfuscatedName("gd.F")
-	public static JagString field1286 = Text.AUTO_EMPTY;
 
 	@ObfuscatedName("md.a(BLde;I)V")
 	public static void executeScript(HookReq arg0, int arg1) {
@@ -1227,7 +1224,7 @@ public class ScriptRunner {
 							int var358 = intStack[var5];
 							int var359 = intStack[var5 + 1];
 							SubInterface var360 = (SubInterface) Client.subinterfaces.find((long) var358);
-							if (var360 != null && var360.field3229 == var359) {
+							if (var360 != null && var360.id == var359) {
 								intStack[var5++] = 1;
 								continue;
 							}
@@ -2289,19 +2286,19 @@ public class ScriptRunner {
 							var6--;
 							JagString var178 = stringStack[var6];
 							ObjType.method467(var177 == 1, var178);
-							intStack[var5++] = Statics.field3893;
+							intStack[var5++] = ObjType.field3893;
 							continue;
 						}
 						if (var382 == 4211) {
-							if (Statics.field1210 != null && Statics.field3893 > ClientMouseListener.field2107) {
-								intStack[var5++] = Statics.field1210[ClientMouseListener.field2107++] & 0xFFFF;
+							if (ObjType.field1210 != null && ObjType.field3893 > ObjType.field2107) {
+								intStack[var5++] = ObjType.field1210[ObjType.field2107++] & 0xFFFF;
 								continue;
 							}
 							intStack[var5++] = -1;
 							continue;
 						}
 						if (var382 == 4212) {
-							ClientMouseListener.field2107 = 0;
+							ObjType.field2107 = 0;
 							continue;
 						}
 					} else if (var382 < 4400) {

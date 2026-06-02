@@ -41,12 +41,8 @@ public final class ClientMouseListener implements MouseListener, MouseMotionList
 	public static int mouseClickY = 0;
 	@ObfuscatedName("db.r")
 	public static long mouseClickTime = 0L;
-	@ObfuscatedName("hc.eb")
-	public static int field1452;
 	@ObfuscatedName("kg.db")
 	public static int drawPos;
-	@ObfuscatedName("kg.jb")
-	public static int field2107;
 	@ObfuscatedName("kg.T")
 	public static volatile long lastCanvasReplace = 0L;
 

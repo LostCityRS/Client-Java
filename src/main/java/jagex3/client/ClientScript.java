@@ -79,7 +79,7 @@ public final class ClientScript extends Linkable2 {
 		}
 		int var14 = 0;
 		var4.pos = 0;
-		var3.name = var4.method353();
+		var3.name = var4.fastgstr();
 		var3.stringOperands = new JagString[var7];
 		var3.instructions = new int[var7];
 		var3.intOperands = new int[var7];

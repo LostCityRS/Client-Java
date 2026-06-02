@@ -1,7 +1,6 @@
 package jagex3.client;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.callstack.JagException;
 import jagex3.graphics.PixMap;
 import jagex3.io.BufferedRandomAccessFile;
@@ -141,7 +140,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("eh.e")
 	public static volatile boolean fullredraw = true;
 	@ObfuscatedName("jf.hb")
-	public static BufferedRandomAccessFile field1892;
+	public static BufferedRandomAccessFile masterIndexFile;
 	@ObfuscatedName("pb.a")
 	public static int deltime = 20;
 	@ObfuscatedName("ag.g")
@@ -160,6 +159,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	public static FontMetrics progressFontMetrics;
 	@ObfuscatedName("lj.o")
 	public static int mindel = 1;
+	@ObfuscatedName("ne.a")
+	public static JagString field2752 = null;
 
 	@ObfuscatedName("hj.y")
 	public boolean alreadyerrored = false;
@@ -222,10 +223,10 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 				var4.setColor(Color.white);
 				arg1.drawString(var6 + (304 - arg1.method609(progressFontMetrics)) / 2, var7 + 22, var4);
 			}
-			if (Statics.field2752 != null) {
+			if (field2752 != null) {
 				var4.setFont(progressFont);
 				var4.setColor(Color.white);
-				Statics.field2752.drawString(sWid / 2 - Statics.field2752.method609(progressFontMetrics) / 2, sHei / 2 + -26, var4);
+				field2752.drawString(sWid / 2 - field2752.method609(progressFontMetrics) / 2, sHei / 2 + -26, var4);
 			}
 		} catch (Exception var9) {
 			canvas.repaint();

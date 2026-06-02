@@ -1,7 +1,6 @@
 package jagex3.dash3d;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.Client;
 import jagex3.config.ObjType;
 import jagex3.config.SeqType;
@@ -288,7 +287,7 @@ public final class ClientPlayer extends ClientEntity {
 					break;
 				}
 				if (var10 >= 32768) {
-					int var11 = Statics.field1698[var10 - 32768];
+					int var11 = ObjType.field1698[var10 - 32768];
 					var6[var7] = var11 | 0x40000000;
 					int var12 = ObjType.list(var11).team;
 					if (var12 != 0) {

@@ -1,7 +1,6 @@
 package jagex3.sound;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.util.MathTool;
 
 @ObfuscatedName("bg")
@@ -60,7 +59,7 @@ public final class CodeBook {
 			boolean var12 = JagVorbis.readBit() != 0;
 			int var13;
 			if (var8 == 1) {
-				var13 = Statics.method96(this.entries, this.dimensions);
+				var13 = lookup1Values(this.entries, this.dimensions);
 			} else {
 				var13 = this.entries * this.dimensions;
 			}
@@ -97,6 +96,31 @@ public final class CodeBook {
 					var23++;
 				}
 			}
+		}
+	}
+
+	@ObfuscatedName("bg.a(II)I")
+	public static int lookup1Values(int arg0, int arg1) {
+		int var2;
+		for (var2 = (int) Math.pow((double) arg0, 1.0D / (double) arg1) + 1; method534(var2, arg1) > arg0; var2--) {
+		}
+		return var2;
+	}
+
+	@ObfuscatedName("hc.b(IBI)I")
+	public static int method534(int arg0, int arg1) {
+		int var2 = 1;
+		while (arg1 > 1) {
+			if ((arg1 & 0x1) != 0) {
+				var2 *= arg0;
+			}
+			arg0 *= arg0;
+			arg1 >>= 0x1;
+		}
+		if (arg1 == 1) {
+			return arg0 * var2;
+		} else {
+			return var2;
 		}
 	}
 

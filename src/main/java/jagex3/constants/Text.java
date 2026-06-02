@@ -8,6 +8,8 @@ public class Text {
 	public static final JagString field504 = JagString.wrap("Prepared sound engine");
 	@ObfuscatedName("gd.L")
 	public static final JagString AUTO_EMPTY = JagString.wrap("");
+	@ObfuscatedName("gd.F")
+	public static JagString field1286 = AUTO_EMPTY;
 	@ObfuscatedName("ge.A")
 	public static final JagString field1314 = JagString.wrap("World");
 	@ObfuscatedName("rd.I")

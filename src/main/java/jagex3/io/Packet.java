@@ -484,7 +484,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ea.s(I)Li;")
-	public final JagString method353() {
+	public final JagString fastgstr() {
 		if (this.data[this.pos] == 0) {
 			this.pos++;
 			return null;

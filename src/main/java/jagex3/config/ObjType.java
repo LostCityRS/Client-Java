@@ -1,9 +1,7 @@
 package jagex3.config;
 
 import deob.ObfuscatedName;
-import deob.Statics;
 import jagex3.client.Client;
-import jagex3.client.ClientMouseListener;
 import jagex3.constants.Text;
 import jagex3.dash3d.*;
 import jagex3.datastruct.*;
@@ -37,6 +35,14 @@ public final class ObjType extends Linkable2 {
 	public static SoftwarePixFont countFont;
 	@ObfuscatedName("k.N")
 	public static short[] clientpalette = new short[256];
+	@ObfuscatedName("g.h")
+	public static short[] field1210;
+	@ObfuscatedName("kg.jb")
+	public static int field2107;
+	@ObfuscatedName("sh.H")
+	public static int field3893;
+	@ObfuscatedName("ia.L")
+	public static int[] field1698;
 	@ObfuscatedName("ng.ab")
 	public int manwearOffsetY = 0;
 
@@ -359,9 +365,9 @@ public final class ObjType extends Linkable2 {
 				var0[var1++] = var2;
 			}
 		}
-		Statics.field1698 = new int[var1];
+		field1698 = new int[var1];
 		for (int var4 = 0; var4 < var1; var4++) {
-			Statics.field1698[var4] = var0[var4];
+			field1698[var4] = var0[var4];
 		}
 	}
 
@@ -374,8 +380,8 @@ public final class ObjType extends Linkable2 {
 			ObjType var6 = list(var5);
 			if ((!arg0 || var6.stockmarket) && var6.certtemplate == -1 && var6.lenttemplate == -1 && var6.dummyitem == 0 && var6.name.toLowerCase().indexOf(var2) != -1) {
 				if (var3 >= 250) {
-					Statics.field3893 = -1;
-					Statics.field1210 = null;
+					field3893 = -1;
+					field1210 = null;
 					return;
 				}
 				if (var3 >= var4.length) {
@@ -388,14 +394,50 @@ public final class ObjType extends Linkable2 {
 				var4[var3++] = (short) var5;
 			}
 		}
-		ClientMouseListener.field2107 = 0;
-		Statics.field3893 = var3;
-		Statics.field1210 = var4;
-		JagString[] var9 = new JagString[Statics.field3893];
-		for (int var10 = 0; var10 < Statics.field3893; var10++) {
+		field2107 = 0;
+		field3893 = var3;
+		field1210 = var4;
+		JagString[] var9 = new JagString[field3893];
+		for (int var10 = 0; var10 < field3893; var10++) {
 			var9[var10] = list(var4[var10]).name;
 		}
-		Statics.method1376(Statics.field1210, var9);
+		method1376(field1210, var9);
+	}
+
+	@ObfuscatedName("sd.a([SI[Li;)V")
+	public static void method1376(short[] arg0, JagString[] arg1) {
+		method1037(0, arg1, arg1.length - 1, arg0);
+	}
+
+	@ObfuscatedName("o.a(II[Li;I[S)V")
+	public static void method1037(int arg0, JagString[] arg1, int arg2, short[] arg3) {
+		if (arg0 >= arg2) {
+			return;
+		}
+		int var4 = (arg0 + arg2) / 2;
+		JagString var5 = arg1[var4];
+		arg1[var4] = arg1[arg2];
+		int var6 = arg0;
+		arg1[arg2] = var5;
+		short var7 = arg3[var4];
+		arg3[var4] = arg3[arg2];
+		arg3[arg2] = var7;
+		for (int var8 = arg0; var8 < arg2; var8++) {
+			if (var5 == null || arg1[var8] != null && arg1[var8].compare(var5) < (var8 & 0x1)) {
+				JagString var9 = arg1[var8];
+				arg1[var8] = arg1[var6];
+				arg1[var6] = var9;
+				short var10 = arg3[var8];
+				arg3[var8] = arg3[var6];
+				arg3[var6++] = var10;
+			}
+		}
+		arg1[arg2] = arg1[var6];
+		arg1[var6] = var5;
+		arg3[arg2] = arg3[var6];
+		arg3[var6] = var7;
+		method1037(arg0, arg1, var6 - 1, arg3);
+		method1037(var6 + 1, arg1, arg2, arg3);
 	}
 
 	@ObfuscatedName("ng.b(Z)Lle;")
