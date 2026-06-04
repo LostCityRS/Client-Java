@@ -297,9 +297,9 @@ public class TitleScreen {
 		if (ClientMouseListener.mouseClickButton == 1 && ClientMouseListener.mouseClickX >= 715 && ClientMouseListener.mouseClickY >= 453) {
 			mute = !mute;
 			if (mute) {
-				MidiManager.stop();
+				MidiManager.stopNow();
 			} else {
-				MidiManager.play(Client.songs, scapeMainId, 255);
+				MidiManager.playImmediate(Client.songs, scapeMainId, 255);
 			}
 		}
 		if (Client.state == 5) {
@@ -494,9 +494,9 @@ public class TitleScreen {
 		loginUser = AUTO_EMPTY;
 		flameBuffer2 = new int[32768];
 		if (mute) {
-			MidiManager.stop2();
+			MidiManager.fadeStop();
 		} else {
-			MidiManager.method730(255, scapeMainId, Client.songs);
+			MidiManager.fadeToSong(255, scapeMainId, Client.songs);
 		}
 		Js5Net.sendLoginLogoutPacket(false);
 		open = true;
@@ -532,7 +532,7 @@ public class TitleScreen {
 		flameGradient1 = null;
 		slButton = null;
 		titleRight = null;
-		MidiManager.stop2();
+		MidiManager.fadeStop();
 		Js5Net.sendLoginLogoutPacket(true);
 		open = false;
 	}

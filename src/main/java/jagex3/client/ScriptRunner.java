@@ -2499,7 +2499,7 @@ public class ScriptRunner {
 									Client.out.p1(var191);
 									Client.out.p1(var193);
 									WordPack.pack(Client.out, var189);
-									Client.out.method341(Client.out.pos - var194);
+									Client.out.psize1(Client.out.pos - var194);
 									continue;
 								}
 								if (var382 == 5009) {
@@ -2512,7 +2512,7 @@ public class ScriptRunner {
 										int var197 = Client.out.pos;
 										Client.out.p8(var195.toUserhash());
 										WordPack.pack(Client.out, var196);
-										Client.out.method341(Client.out.pos - var197);
+										Client.out.psize1(Client.out.pos - var197);
 									}
 									continue;
 								}
@@ -2653,7 +2653,7 @@ public class ScriptRunner {
 									Client.out.p1(0);
 									Client.out.p2(field226.id);
 									field226.type.encodeMessage(Client.out, field226.dynamics);
-									Client.out.method341(Client.out.pos - var221);
+									Client.out.psize1(Client.out.pos - var221);
 									continue;
 								}
 								if (var382 == 5060) {
@@ -2665,7 +2665,7 @@ public class ScriptRunner {
 									Client.out.p8(var222.toUserhash());
 									Client.out.p2(field226.id);
 									field226.type.encodeMessage(Client.out, field226.dynamics);
-									Client.out.method341(Client.out.pos - var223);
+									Client.out.psize1(Client.out.pos - var223);
 									continue;
 								}
 								if (var382 == 5061) {
@@ -2675,7 +2675,7 @@ public class ScriptRunner {
 									Client.out.p1(1);
 									Client.out.p2(field226.id);
 									field226.type.encodeMessage(Client.out, field226.dynamics);
-									Client.out.method341(Client.out.pos - var224);
+									Client.out.psize1(Client.out.pos - var224);
 									continue;
 								}
 								if (var382 == 5062) {

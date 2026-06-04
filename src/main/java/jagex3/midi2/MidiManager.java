@@ -77,7 +77,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("kh.d(II)V")
-	public static void stop2() {
+	public static void fadeStop() {
 		pendingFileId = -1;
 		pendingVolume = 0;
 		fadeOutRate = 2;
@@ -88,7 +88,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("jh.a(IIZIILnb;I)V")
-	public static void method730(int arg0, int arg1, Js5 arg2) {
+	public static void fadeToSong(int arg0, int arg1, Js5 arg2) {
 		fadeOutRate = 2;
 		pendingFileId = 0;
 		pendingVolume = arg0;
@@ -132,7 +132,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("a.b(I)V")
-	public static void stop() {
+	public static void stopNow() {
 		midiPlayer.stop();
 		midis = null;
 		state = 1;
@@ -153,7 +153,7 @@ public class MidiManager {
 	}
 
 	@ObfuscatedName("eh.a(ILnb;BZII)V")
-	public static void play(Js5 arg0, int arg1, int arg2) {
+	public static void playImmediate(Js5 arg0, int arg1, int arg2) {
 		pendingVolume = arg2;
 		midis = arg0;
 		pendingGroupId = arg1;

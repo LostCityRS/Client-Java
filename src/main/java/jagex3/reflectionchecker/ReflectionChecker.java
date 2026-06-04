@@ -188,7 +188,7 @@ public class ReflectionChecker {
 				}
 			}
 			arg0.addcrc(var4);
-			arg0.method341(arg0.pos - var4);
+			arg0.psize1(arg0.pos - var4);
 			var1.unlink();
 		}
 	}

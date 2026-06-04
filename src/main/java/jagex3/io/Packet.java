@@ -83,7 +83,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ea.a(BJ)V")
-	public final void method296(long arg0) {
+	public final void p8_alt3(long arg0) {
 		this.p4_alt3((int) (arg0 >> 32));
 		this.p4_alt3((int) arg0);
 	}
@@ -419,7 +419,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ea.k(II)V")
-	public final void method341(int arg0) {
+	public final void psize1(int arg0) {
 		this.data[this.pos - arg0 - 1] = (byte) arg0;
 	}
 

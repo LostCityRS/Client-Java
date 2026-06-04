@@ -2540,7 +2540,7 @@ public final class Client extends GameShell {
 						mouseTrackedDelta++;
 					}
 				}
-				out.method341(out.pos - var2);
+				out.psize1(out.pos - var2);
 				if (var3 < mouseTracking.length) {
 					mouseTracking.length -= var3;
 					for (int var10 = 0; var10 < mouseTracking.length; var10++) {
@@ -3153,7 +3153,7 @@ public final class Client extends GameShell {
 		}
 		WorldMap.reset();
 		System.gc();
-		MidiManager.stop2();
+		MidiManager.fadeStop();
 		playingJingle = false;
 		nextMidiSong = -1;
 		BgSound.reset();
@@ -3244,9 +3244,9 @@ public final class Client extends GameShell {
 	@ObfuscatedName("kg.a(BI)V")
 	public static void playSongs(int arg0) {
 		if (arg0 == -1 && !playingJingle) {
-			MidiManager.stop();
+			MidiManager.stopNow();
 		} else if (arg0 != -1 && (arg0 != nextMidiSong || !MidiManager.isInitialised()) && midiVolume != 0 && !playingJingle) {
-			MidiManager.method730(midiVolume, arg0, songs);
+			MidiManager.fadeToSong(midiVolume, arg0, songs);
 		}
 		nextMidiSong = arg0;
 	}
@@ -3254,7 +3254,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ac.a(ZII)V")
 	public static void playJingle(int arg0, int arg1) {
 		if (midiVolume != 0 && arg0 != -1) {
-			MidiManager.play(jingles, arg0, midiVolume);
+			MidiManager.playImmediate(jingles, arg0, midiVolume);
 			playingJingle = true;
 		}
 	}
@@ -3617,7 +3617,7 @@ public final class Client extends GameShell {
 		}
 		if (playingJingle && !MidiManager.isInitialised()) {
 			if (midiVolume != 0 && nextMidiSong != -1) {
-				MidiManager.play(songs, nextMidiSong, midiVolume);
+				MidiManager.playImmediate(songs, nextMidiSong, midiVolume);
 			}
 			playingJingle = false;
 		} else if (midiVolume != 0 && nextMidiSong != -1 && !MidiManager.isInitialised()) {
@@ -7163,7 +7163,7 @@ public final class Client extends GameShell {
 			// OPEN_URL
 			byte[] var251 = new byte[psize];
 			in.gIsaacArrayBuffer(psize, var251);
-			GameShell.method1138(JagString.fromBytes(0, var251, psize));
+			GameShell.openUrl(JagString.fromBytes(0, var251, psize));
 			ptype = -1;
 			return true;
 		} else if (ptype == 53) {
@@ -11727,10 +11727,10 @@ public final class Client extends GameShell {
 			}
 			if (midiVolume != var3) {
 				if (midiVolume == 0 && nextMidiSong != -1) {
-					MidiManager.play(songs, nextMidiSong, var3);
+					MidiManager.playImmediate(songs, nextMidiSong, var3);
 					playingJingle = false;
 				} else if (var3 == 0) {
-					MidiManager.stop();
+					MidiManager.stopNow();
 					playingJingle = false;
 				} else {
 					MidiManager.setVolume(var3);
@@ -12222,7 +12222,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ph.a(Li;II)V")
 	public static void setFriendRank(JagString arg0, int arg1) {
 		out.p1Enc(40);
-		out.method296(arg0.toUserhash());
+		out.p8_alt3(arg0.toUserhash());
 		out.p1(arg1);
 	}
 

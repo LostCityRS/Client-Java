@@ -678,7 +678,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	}
 
 	@ObfuscatedName("pb.b(ILi;)V")
-	public static void method1138(JagString arg0) {
+	public static void openUrl(JagString arg0) {
 		try {
 			shell.getAppletContext().showDocument(arg0.resolveURL(shell.getCodeBase()), "_blank");
 		} catch (Exception var1) {
