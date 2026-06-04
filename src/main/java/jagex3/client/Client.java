@@ -1387,7 +1387,7 @@ public final class Client extends GameShell {
 		System.out.println("Usage: worldid, [live/office/local], [live/rc/wip], [lowmem/highmem], [free/members], [english/german], [game0/game1]");
 		System.exit(1);
 		if (arg0) {
-			JagString.method782(-33);
+			JagString.isAlphanumericChar(-33);
 		}
 	}
 
@@ -3366,13 +3366,13 @@ public final class Client extends GameShell {
 				}
 			}
 			if (arg0.startsWith(AUTO_FPS) && modewhere != 0) {
-				GameShell.setFramerate(arg0.substring(6).method603());
+				GameShell.setFramerate(arg0.substring(6).toInt());
 			}
 			if (arg0.equalsIgnoreCase(AUTO_ERRORTEST) && modewhere == 2) {
 				throw new RuntimeException();
 			}
 			if (arg0.startsWith(AUTO_RECT_DEBUG)) {
-				componentRectDebug = arg0.substring(12).method602().method603();
+				componentRectDebug = arg0.substring(12).trim().toInt();
 				addChat(JagString.join(new JagString[] { field1750, JagString.parseInt(componentRectDebug) }), 0, null);
 			}
 			if (arg0.equalsIgnoreCase(AUTO_QA_OP_TEST)) {
@@ -6877,7 +6877,7 @@ public final class Client extends GameShell {
 			if (!var186 && chatDisabled == 0) {
 				field3203[field1150] = var184;
 				field1150 = (field1150 + 1) % 100;
-				JagString var189 = PixfontGeneric.escape(WordPack.unpack2(in).method622());
+				JagString var189 = PixfontGeneric.escape(WordPack.unpack2(in).toSentenceCase());
 				if (var183 == 2 || var183 == 3) {
 					friendAddChat(JagString.join(new JagString[] { field472, JagString.toRawUsername(var175).toScreenName() }), var189, JagString.toRawUsername(var177).toScreenName());
 				} else if (var183 == 1) {
@@ -6938,7 +6938,7 @@ public final class Client extends GameShell {
 			if (!var199 && chatDisabled == 0) {
 				field3203[field1150] = var197;
 				field1150 = (field1150 + 1) % 100;
-				JagString var202 = PixfontGeneric.escape(WordPack.unpack2(in).method622());
+				JagString var202 = PixfontGeneric.escape(WordPack.unpack2(in).toSentenceCase());
 				if (var196 == 2 || var196 == 3) {
 					addChat(var202, 7, JagString.join(new JagString[] { field472, JagString.toRawUsername(var190).toScreenName() }));
 				} else if (var196 == 1) {
@@ -7567,7 +7567,7 @@ public final class Client extends GameShell {
 		} else if (ptype == 172) {
 			// MESSAGE_PRIVATE_ECHO
 			long var327 = in.g8();
-			JagString var329 = PixfontGeneric.escape(WordPack.unpack2(in).method622());
+			JagString var329 = PixfontGeneric.escape(WordPack.unpack2(in).toSentenceCase());
 			addChat(var329, 6, JagString.toRawUsername(var327).toScreenName());
 			ptype = -1;
 			return true;
@@ -8322,9 +8322,9 @@ public final class Client extends GameShell {
 						var13 &= 0x7FFF;
 						var23 = var24.type.decodeMessage(tempP);
 					} else {
-						var23 = PixfontGeneric.escape(WordPack.unpack2(tempP).method622());
+						var23 = PixfontGeneric.escape(WordPack.unpack2(tempP).toSentenceCase());
 					}
-					arg1.chat = var23.method602();
+					arg1.chat = var23.trim();
 					arg1.chatTimer = 150;
 					arg1.chatColour = var13 >> 8;
 					arg1.chatEffect = var13 & 0xFF;
@@ -9395,7 +9395,7 @@ public final class Client extends GameShell {
 
 	@ObfuscatedName("be.a(ILi;I)V")
 	public static void opPlayer(JagString arg0, int arg1) {
-		JagString var2 = arg0.method611().toScreenName();
+		JagString var2 = arg0.toCleanUsername().toScreenName();
 		boolean var3 = false;
 		for (int var4 = 0; var4 < playerCount; var4++) {
 			ClientPlayer var5 = players[playerIds[var4]];
@@ -12308,7 +12308,7 @@ public final class Client extends GameShell {
 	public static JagString getIfTypeOpName(IfType arg0, int arg1) {
 		if (!ServerActive.hasOp(arg1, getActive(arg0)) && arg0.onop == null) {
 			return null;
-		} else if (arg0.opNames == null || arg1 >= arg0.opNames.length || arg0.opNames[arg1] == null || arg0.opNames[arg1].method602().length() == 0) {
+		} else if (arg0.opNames == null || arg1 >= arg0.opNames.length || arg0.opNames[arg1] == null || arg0.opNames[arg1].trim().length() == 0) {
 			return qaOpTest ? JagString.join(new JagString[] {field1802, JagString.parseInt(arg1) }) : null;
 		} else {
 			return arg0.opNames[arg1];
@@ -12319,7 +12319,7 @@ public final class Client extends GameShell {
 	public static JagString targetVerb(IfType arg0) {
 		if (ServerActive.targetMask(getActive(arg0)) == 0) {
 			return null;
-		} else if (arg0.targetVerb == null || arg0.targetVerb.method602().length() == 0) {
+		} else if (arg0.targetVerb == null || arg0.targetVerb.trim().length() == 0) {
 			return qaOpTest ? field2321 : null;
 		} else {
 			return arg0.targetVerb;

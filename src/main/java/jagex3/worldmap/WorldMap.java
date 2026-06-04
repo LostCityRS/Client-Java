@@ -513,8 +513,8 @@ public class WorldMap {
 			var4.x = var1.g2();
 			var4.y = var1.g2();
 			var4.size = var1.g1();
-			var4.displayName = var5.method626();
-			var4.textLines = var5.method600(47);
+			var4.displayName = var5.slashToSpace();
+			var4.textLines = var5.splitOn(47);
 			labels.push(var4);
 		}
 	}
@@ -548,7 +548,7 @@ public class WorldMap {
 			return null;
 		}
 		for (WorldMapLabel var1 = (WorldMapLabel) labels.head(); var1 != null; var1 = (WorldMapLabel) labels.next()) {
-			if (var1.displayName.method595(arg0)) {
+			if (var1.displayName.startsWithIgnoreCase(arg0)) {
 				return var1;
 			}
 		}

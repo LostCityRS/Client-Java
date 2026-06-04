@@ -207,7 +207,7 @@ public class TitleScreen {
             int var11 = var10 + 10;
             arg1.drawString(JagString.join(new JagString[] { Text.USERNAMEPROMPT, PixfontGeneric.escape(loginUser) }), 272, 266, 16777215, 0);
             int var13 = var11 + 15;
-            arg1.drawString(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method596() }), 274, 281, 16777215, 0);
+            arg1.drawString(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.toMaskedString() }), 274, 281, 16777215, 0);
             int var15 = var13 + 15;
         }
         if (Client.state == 10) {
@@ -243,7 +243,7 @@ public class TitleScreen {
                     var5 = false;
                 }
                 var12 += 15;
-                arg1.drawString(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.method596(), var5 ? field3843 : AUTO_EMPTY}), 274, 281, 16777215, 0);
+                arg1.drawString(JagString.join(new JagString[] { Text.PASSWORDPROMPT, loginPass.toMaskedString(), var5 ? field3843 : AUTO_EMPTY}), 274, 281, 16777215, 0);
                 titleBut.plotSprite(229, 301);
                 var12 += 15;
                 arg1.centreString(Text.LOGIN, 302, 326, 16777215, 0);
@@ -354,7 +354,7 @@ public class TitleScreen {
 			}
 			var8 += 15;
 			if (var1 == 1 && var2 >= 227 && var2 <= 377 && var3 >= 301 && var3 <= 341) {
-				loginUser = loginUser.method611().toScreenName();
+				loginUser = loginUser.toCleanUsername().toScreenName();
 				if (loginUser.length() == 0) {
 					loginMes(Text.LOGIN_USER_LENGTH_C, Text.LOGIN_USER_LENGTH_A, Text.LOGIN_USER_LENGTH_B);
 				} else if (loginPass.length() == 0) {
@@ -390,7 +390,7 @@ public class TitleScreen {
 								loginSelect = 1;
 							}
 							if (var6 && loginUser.length() < 12) {
-								loginUser = loginUser.method618(ClientKeyboardListener.ch);
+								loginUser = loginUser.appendChar(ClientKeyboardListener.ch);
 							}
 						}
 						return;
@@ -402,7 +402,7 @@ public class TitleScreen {
 						loginSelect = 0;
 					}
 					if (Client.modewhere != 0 && ClientKeyboardListener.code == 84) {
-						loginUser = loginUser.method611().toScreenName();
+						loginUser = loginUser.toCleanUsername().toScreenName();
 						if (loginUser.length() == 0) {
 							loginMes(Text.LOGIN_USER_LENGTH_C, Text.LOGIN_USER_LENGTH_A, Text.LOGIN_USER_LENGTH_B);
 							return;
@@ -416,7 +416,7 @@ public class TitleScreen {
 						return;
 					}
 					if (var6 && loginPass.length() < 20) {
-						loginPass = loginPass.method618(ClientKeyboardListener.ch);
+						loginPass = loginPass.appendChar(ClientKeyboardListener.ch);
 					}
 				}
 			}
@@ -907,7 +907,7 @@ public class TitleScreen {
 	public static void listFetch() {
 		try {
 			if (gameworldListDownloadRequest == null) {
-				gameworldListDownloadRequest = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { field3983, JagString.parseInt(Client.lang), field915}).method606());
+				gameworldListDownloadRequest = new HTTPRequest(GameShell.signlink, JagString.join(new JagString[] { field3983, JagString.parseInt(Client.lang), field915}).toURL());
 			} else {
 				byte[] var0 = gameworldListDownloadRequest.getData();
 				if (var0 != null) {
@@ -1108,7 +1108,7 @@ public class TitleScreen {
 			}
 			JagString var3 = JagString.join(new JagString[]{AUTO_PROTOCOL, var1.host, AUTO_DOMAIN, JagString.parseInt(Client.lang), AUTO_ANDL, JagString.parseInt(Client.lowMem ? 1 : 0), AUTO_ANDP, JagString.parseInt(Client.plug), AUTO_ANDJS, JagString.parseInt(Client.js)});
 			try {
-				arg0.getAppletContext().showDocument(var3.method606(), "_self");
+				arg0.getAppletContext().showDocument(var3.toURL(), "_self");
 			} catch (Exception var4) {
 			}
 		}

@@ -309,7 +309,7 @@ public class ScriptRunner {
 					if (var382 == 37) {
 						int var22 = var8[var7];
 						var6 -= var22;
-						JagString var23 = JagString.method1133(var22, stringStack, var6);
+						JagString var23 = JagString.joinRange(var22, stringStack, var6);
 						stringStack[var6++] = var23;
 						continue;
 					}
@@ -1277,8 +1277,8 @@ public class ScriptRunner {
 							var6--;
 							JagString var337 = stringStack[var6];
 							int var338 = 0;
-							if (var337.method621()) {
-								var338 = var337.method603();
+							if (var337.isDecimal()) {
+								var338 = var337.toInt();
 							}
 							Client.out.p1Enc(152);
 							Client.out.p4(var338);
@@ -2010,7 +2010,7 @@ public class ScriptRunner {
 							JagString var258 = stringStack[var6];
 							var5--;
 							int var259 = intStack[var5];
-							stringStack[var6++] = JagString.join(new JagString[]{var258, JagString.method375(var259)});
+							stringStack[var6++] = JagString.join(new JagString[]{var258, JagString.formatIntSigned(var259)});
 							continue;
 						}
 						if (var382 == 4103) {
@@ -2049,7 +2049,7 @@ public class ScriptRunner {
 						}
 						if (var382 == 4107) {
 							var6 -= 2;
-							intStack[var5++] = stringStack[var6].method627(stringStack[var6 + 1]);
+							intStack[var5++] = stringStack[var6].compareSorted(stringStack[var6 + 1]);
 							continue;
 						}
 						if (var382 == 4108) {
@@ -2102,31 +2102,31 @@ public class ScriptRunner {
 							if (var283 == -1) {
 								throw new RuntimeException("null char");
 							}
-							stringStack[var6++] = var284.method618(var283);
+							stringStack[var6++] = var284.appendChar(var283);
 							continue;
 						}
 						if (var382 == 4113) {
 							var5--;
 							int var285 = intStack[var5];
-							intStack[var5++] = JagString.method1489(var285) ? 1 : 0;
+							intStack[var5++] = JagString.isPrintableChar(var285) ? 1 : 0;
 							continue;
 						}
 						if (var382 == 4114) {
 							var5--;
 							int var286 = intStack[var5];
-							intStack[var5++] = JagString.method782(var286) ? 1 : 0;
+							intStack[var5++] = JagString.isAlphanumericChar(var286) ? 1 : 0;
 							continue;
 						}
 						if (var382 == 4115) {
 							var5--;
 							int var287 = intStack[var5];
-							intStack[var5++] = JagString.method746(var287) ? 1 : 0;
+							intStack[var5++] = JagString.isLetterChar(var287) ? 1 : 0;
 							continue;
 						}
 						if (var382 == 4116) {
 							var5--;
 							int var288 = intStack[var5];
-							intStack[var5++] = JagString.method24(var288) ? 1 : 0;
+							intStack[var5++] = JagString.isDigitChar(var288) ? 1 : 0;
 							continue;
 						}
 						if (var382 == 4117) {
@@ -2163,7 +2163,7 @@ public class ScriptRunner {
 									var294.append(var297);
 								}
 							}
-							var294.method629();
+							var294.compact();
 							stringStack[var6++] = var294;
 							continue;
 						}
@@ -2173,7 +2173,7 @@ public class ScriptRunner {
 							JagString var298 = stringStack[var6];
 							int var299 = intStack[var5];
 							int var300 = intStack[var5 + 1];
-							intStack[var5++] = var298.method594(var299, var300);
+							intStack[var5++] = var298.indexOfChar(var299, var300);
 							continue;
 						}
 						if (var382 == 4121) {
@@ -2182,19 +2182,19 @@ public class ScriptRunner {
 							var5--;
 							int var302 = intStack[var5];
 							JagString var303 = stringStack[var6];
-							intStack[var5++] = var303.method634(var302, var301);
+							intStack[var5++] = var303.indexOfFrom(var302, var301);
 							continue;
 						}
 						if (var382 == 4122) {
 							var5--;
 							int var304 = intStack[var5];
-							intStack[var5++] = JagString.method102(var304);
+							intStack[var5++] = JagString.toLowerCaseChar(var304);
 							continue;
 						}
 						if (var382 == 4123) {
 							var5--;
 							int var305 = intStack[var5];
-							intStack[var5++] = JagString.method51(var305);
+							intStack[var5++] = JagString.toUpperCaseChar(var305);
 							continue;
 						}
 					} else if (var382 < 4300) {

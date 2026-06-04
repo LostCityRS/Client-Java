@@ -383,7 +383,7 @@ public class Packet extends Linkable {
 
 	@ObfuscatedName("ea.a(Li;B)V")
 	public final void pjstr(JagString arg0) {
-		this.pos += arg0.method612(arg0.length(), this.pos, this.data);
+		this.pos += arg0.copyToArray(arg0.length(), this.pos, this.data);
 		this.data[this.pos++] = 0;
 	}
 

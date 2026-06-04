@@ -263,7 +263,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 						if (!var9.strEquals(tagReg)) {
 							if (var9.startsWith(tagImg)) {
 								try {
-									int var10 = var9.substring(4).method603();
+									int var10 = var9.substring(4).toInt();
 									Pix8 var11 = this.modicons[var10];
 									int var12 = this.modiconHeight == null ? var11.ohi : this.modiconHeight[var10];
 									if (alpha == 256) {
@@ -426,7 +426,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 						var11 = 174;
 					} else if (var16.startsWith(tagImg)) {
 						try {
-							int var17 = var16.substring(4).method603();
+							int var17 = var16.substring(4).toInt();
 							var4 += this.modicons[var17].owi;
 							var11 = -1;
 						} catch (Exception var18) {
@@ -643,7 +643,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 										var14 = arg4[var9];
 									}
 									var9++;
-									int var15 = var12.substring(4).method603();
+									int var15 = var12.substring(4).toInt();
 									Pix8 var16 = this.modicons[var15];
 									int var17 = this.modiconHeight == null ? var16.ohi : this.modiconHeight[var15];
 									if (alpha == 256) {
@@ -781,7 +781,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 	public void updateState(JagString arg0) {
 		try {
 			if (arg0.startsWith(tagCol)) {
-				currentCol = arg0.substring(4).method607(16);
+				currentCol = arg0.substring(4).parseRadix(16);
 				return;
 			}
 			if (arg0.strEquals(tagEndCol)) {
@@ -789,7 +789,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 				return;
 			}
 			if (arg0.startsWith(tagTrans)) {
-				alpha = arg0.substring(6).method603();
+				alpha = arg0.substring(6).toInt();
 				return;
 			}
 			if (arg0.strEquals(tagEndTrans)) {
@@ -797,7 +797,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 				return;
 			}
 			if (arg0.startsWith(tagStrEquals)) {
-				strikeout = arg0.substring(4).method607(16);
+				strikeout = arg0.substring(4).parseRadix(16);
 				return;
 			}
 			if (arg0.strEquals(tagStr)) {
@@ -809,7 +809,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 				return;
 			}
 			if (arg0.startsWith(tagUEquals)) {
-				underline = arg0.substring(2).method607(16);
+				underline = arg0.substring(2).parseRadix(16);
 				return;
 			}
 			if (arg0.strEquals(tagU)) {
@@ -821,7 +821,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 				return;
 			}
 			if (arg0.startsWith(tagShadEquals)) {
-				currentShadow = arg0.substring(5).method607(16);
+				currentShadow = arg0.substring(5).parseRadix(16);
 				return;
 			}
 			if (arg0.strEquals(tagShad)) {
@@ -887,7 +887,7 @@ public abstract class PixfontGeneric extends Linkable2 {
 						if (!var7.strEquals(tagReg)) {
 							if (var7.startsWith(tagImg)) {
 								try {
-									int var8 = var7.substring(4).method603();
+									int var8 = var7.substring(4).toInt();
 									var4 += this.modicons[var8].owi;
 									var3 = -1;
 								} catch (Exception var9) {

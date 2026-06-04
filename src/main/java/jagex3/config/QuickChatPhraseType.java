@@ -80,7 +80,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 				return var4;
 			}
 		}
-		return arg1 == 5 ? JagString.toRawUsername(arg0).toScreenName() : JagString.method1556(arg0);
+		return arg1 == 5 ? JagString.toRawUsername(arg0).toScreenName() : JagString.valueOf(arg0);
 	}
 
 	@ObfuscatedName("si.a(BI)I")
@@ -96,7 +96,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 	@ObfuscatedName("si.a(BLea;I)V")
 	public void decodeInner(Packet arg0, int arg1) {
 		if (arg1 == 1) {
-			this.textSegments = arg0.gjstr().method600(60);
+			this.textSegments = arg0.gjstr().splitOn(60);
 		} else if (arg1 == 2) {
 			int var3 = arg0.g1();
 			this.autoResponses = new int[var3];
@@ -128,7 +128,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 			}
 		}
 		var2.append(this.textSegments[this.textSegments.length - 1]);
-		return var2.method629();
+		return var2.compact();
 	}
 
 	@ObfuscatedName("si.e(I)Li;")
@@ -142,7 +142,7 @@ public final class QuickChatPhraseType extends Linkable2 {
 			var1.append(field3644);
 			var1.append(this.textSegments[var2]);
 		}
-		return var1.method629();
+		return var1.compact();
 	}
 
 	@ObfuscatedName("si.a(Lea;B)V")

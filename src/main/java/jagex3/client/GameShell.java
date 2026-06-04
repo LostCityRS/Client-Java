@@ -680,7 +680,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	@ObfuscatedName("pb.b(ILi;)V")
 	public static void method1138(JagString arg0) {
 		try {
-			shell.getAppletContext().showDocument(arg0.method632(shell.getCodeBase()), "_blank");
+			shell.getAppletContext().showDocument(arg0.resolveURL(shell.getCodeBase()), "_blank");
 		} catch (Exception var1) {
 		}
 	}
@@ -698,7 +698,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 			if (arg0.length() == 0) {
 				var4 = JagString.join(new JagString[] { var3, field920});
 			} else {
-				var4 = JagString.join(new JagString[] { var3, field1982, method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.method1556(94608000L) });
+				var4 = JagString.join(new JagString[] { var3, field1982, method1139(MonotonicTime.currentTime() + 94608000000L), field1767, JagString.valueOf(94608000L) });
 			}
 			JagString.join(new JagString[] {field3237, var4, field591}).eval(signlink.applet);
 		} catch (Throwable var5) {
