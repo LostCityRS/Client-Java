@@ -944,7 +944,7 @@ public class ScriptRunner {
 							var64.onclick = var67;
 						}
 						if (var382 == 1425) {
-							var64.field3505 = var67;
+							var64.onstocktransmit = var67;
 						}
 						if (var382 == 1404) {
 							var64.onmouseleave = var67;

@@ -437,7 +437,7 @@ public final class IfType {
 	public Object[] onhold;
 
 	@ObfuscatedName("q.Kc")
-	public Object[] field3505;
+	public Object[] onstocktransmit;
 
 	@ObfuscatedName("q.Pc")
 	public Object[] onmouserepeat;

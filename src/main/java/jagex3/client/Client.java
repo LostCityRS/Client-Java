@@ -1292,7 +1292,7 @@ public final class Client extends GameShell {
 	@ObfuscatedName("ha.z")
 	public static JagString objSelectedName = null;
 	@ObfuscatedName("kh.X")
-	public static int field2127 = 0;
+	public static int stockTransmitNum = 0;
 	@ObfuscatedName("kj.u")
 	public static int waveVolume = 127;
 	@ObfuscatedName("qa.j")
@@ -6348,7 +6348,7 @@ public final class Client extends GameShell {
 				field140[var70] = new StockMarketSlot(in);
 			}
 			ptype = -1;
-			field2127 = transmitNum;
+			stockTransmitNum = transmitNum;
 			return true;
 		} else if (ptype == 213) {
 			// HINT_ARROW
@@ -6605,7 +6605,7 @@ public final class Client extends GameShell {
 			ptype = -1;
 			return true;
 		} else if (ptype == 230) {
-			// LOC_ANIM_SPECIFIC (guessing)
+			// LOC_ANIM_SPECIFIC (probably)
 			int var114 = in.g1_alt2();
 			int var115 = var114 >> 2;
 			int var116 = var114 & 0x3;
@@ -7427,6 +7427,7 @@ public final class Client extends GameShell {
 			ptype = -1;
 			return true;
 		} else if (ptype == 189) {
+			// some HD packet?
 			field580 = (short) in.g2();
 			if (field580 <= 0) {
 				field580 = 256;
@@ -7513,6 +7514,7 @@ public final class Client extends GameShell {
 			ptype = -1;
 			return true;
 		} else if (ptype == 65) {
+			// some HD packet?
 			field926 = (short) in.g2();
 			if (field926 <= 0) {
 				field926 = 32767;
@@ -11362,10 +11364,10 @@ public final class Client extends GameShell {
 								var55.onop = var9.onclantransmit;
 								hookRequests.push(var55);
 							}
-							if (field2127 > var9.transmitNum && var9.field3505 != null) {
+							if (stockTransmitNum > var9.transmitNum && var9.onstocktransmit != null) {
 								HookReq var56 = new HookReq();
 								var56.component = var9;
-								var56.onop = var9.field3505;
+								var56.onop = var9.onstocktransmit;
 								hookRequests.push(var56);
 							}
 							if (var9.transmitNum < miscTransmitNum && var9.onmisctransmit != null) {
