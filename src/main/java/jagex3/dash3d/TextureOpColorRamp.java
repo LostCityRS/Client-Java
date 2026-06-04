@@ -299,13 +299,13 @@ public final class TextureOpColorRamp extends TextureOp {
 	@ObfuscatedName("ub.b(IB)[[I")
 	@Override
 	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.method1539(arg0);
+		int[][] var2 = super.colorCache.getFrame(arg0);
 		if (super.colorCache.field4310) {
 			int[] var3 = this.getInputMono(arg0, 0);
 			int[] var4 = var2[0];
 			int[] var5 = var2[1];
 			int[] var6 = var2[2];
-			for (int var7 = 0; var7 < Texture.field1276; var7++) {
+			for (int var7 = 0; var7 < Texture.width; var7++) {
 				int var8 = var3[var7] >> 4;
 				if (var8 < 0) {
 					var8 = 0;

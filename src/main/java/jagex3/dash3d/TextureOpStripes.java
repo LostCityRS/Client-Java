@@ -51,9 +51,9 @@ public final class TextureOpStripes extends TextureOp {
 	@ObfuscatedName("vc.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int var3 = Texture.field2021[arg0];
+			int var3 = Texture.rowLut[arg0];
 			if (this.orientation == 0) {
 				short var4 = 0;
 				for (int var5 = 0; var5 < this.stripeCount; var5++) {
@@ -64,12 +64,12 @@ public final class TextureOpStripes extends TextureOp {
 						break;
 					}
 				}
-				ArrayUtil.method837(var2, 0, Texture.field1276, var4);
+				ArrayUtil.method837(var2, 0, Texture.width, var4);
 			} else {
-				for (int var6 = 0; var6 < Texture.field1276; var6++) {
+				for (int var6 = 0; var6 < Texture.width; var6++) {
 					int var7 = 0;
 					short var8 = 0;
-					int var9 = Texture.field351[var6];
+					int var9 = Texture.columnLut[var6];
 					int var10 = this.orientation;
 					if (var10 == 1) {
 						var7 = var9;

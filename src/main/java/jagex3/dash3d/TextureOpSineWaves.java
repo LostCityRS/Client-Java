@@ -129,7 +129,7 @@ public final class TextureOpSineWaves extends TextureOp {
 
 	@ObfuscatedName("da.a(IZ[I)V")
 	public void generateWaves(int arg0, int[] arg1) {
-		int var3 = Texture.field2021[arg0] * this.freqY;
+		int var3 = Texture.rowLut[arg0] * this.freqY;
 		if (this.octaves == 1) {
 			int var4 = this.freqMultipliers[0] << 12;
 			int var5 = var3 * var4 >> 12;
@@ -146,15 +146,15 @@ public final class TextureOpSineWaves extends TextureOp {
 			int var13 = this.permTable[var9 & 0xFF] & 0xFF;
 			int var14 = this.permTable[var12 & 0xFF] & 0xFF;
 			if (this.flagCenter) {
-				for (int var18 = 0; var18 < Texture.field1276; var18++) {
-					int var19 = this.freqX * Texture.field351[var18];
+				for (int var18 = 0; var18 < Texture.width; var18++) {
+					int var19 = this.freqX * Texture.columnLut[var18];
 					int var20 = this.cosInterpolate(var10, var19 * var4 >> 12, var13, var14, var6, var11);
 					int var21 = var7 * var20 >> 12;
 					arg1[var18] = (var21 >> 1) + 2048;
 				}
 			} else {
-				for (int var15 = 0; var15 < Texture.field1276; var15++) {
-					int var16 = this.freqX * Texture.field351[var15];
+				for (int var15 = 0; var15 < Texture.width; var15++) {
+					int var16 = this.freqX * Texture.columnLut[var15];
 					int var17 = this.cosInterpolate(var10, var4 * var16 >> 12, var13, var14, var6, var11);
 					arg1[var15] = var17 * var7 >> 12;
 				}
@@ -176,8 +176,8 @@ public final class TextureOpSineWaves extends TextureOp {
 			int var30 = var25 & 0xFFF;
 			int var31 = this.permTable[var29 & 0xFF] & 0xFF;
 			int var32 = field1720[var30];
-			for (int var33 = 0; var33 < Texture.field1276; var33++) {
-				int var34 = Texture.field351[var33] * this.freqX;
+			for (int var33 = 0; var33 < Texture.width; var33++) {
+				int var34 = Texture.columnLut[var33] * this.freqX;
 				int var35 = this.cosInterpolate(var30, var34 * var23 >> 12, var27, var31, var28, var32);
 				arg1[var33] = var35 * var22 >> 12;
 			}
@@ -199,15 +199,15 @@ public final class TextureOpSineWaves extends TextureOp {
 				int var46 = this.permTable[var43 & 0xFF] & 0xFF;
 				int var47 = field1720[var45];
 				if (this.flagCenter && var36 == this.octaves - 1) {
-					for (int var51 = 0; var51 < Texture.field1276; var51++) {
-						int var52 = this.freqX * Texture.field351[var51];
+					for (int var51 = 0; var51 < Texture.width; var51++) {
+						int var52 = this.freqX * Texture.columnLut[var51];
 						int var53 = this.cosInterpolate(var45, var38 * var52 >> 12, var44, var46, var39, var47);
 						int var54 = arg1[var51] + (var37 * var53 >> 12);
 						arg1[var51] = (var54 >> 1) + 2048;
 					}
 				} else {
-					for (int var48 = 0; var48 < Texture.field1276; var48++) {
-						int var49 = Texture.field351[var48] * this.freqX;
+					for (int var48 = 0; var48 < Texture.width; var48++) {
+						int var49 = Texture.columnLut[var48] * this.freqX;
 						int var50 = this.cosInterpolate(var45, var49 * var38 >> 12, var44, var46, var39, var47);
 						arg1[var48] += var50 * var37 >> 12;
 					}
@@ -233,7 +233,7 @@ public final class TextureOpSineWaves extends TextureOp {
 	@ObfuscatedName("da.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
 			this.generateWaves(arg0, var2);
 		}

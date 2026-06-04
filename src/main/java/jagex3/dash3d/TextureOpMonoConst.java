@@ -12,6 +12,6 @@ public final class TextureOpMonoConst extends TextureOp {
 	@ObfuscatedName("hc.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		return Texture.field351;
+		return Texture.columnLut;
 	}
 }

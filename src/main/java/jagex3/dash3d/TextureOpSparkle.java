@@ -53,16 +53,16 @@ public final class TextureOpSparkle extends TextureOp {
 	@ObfuscatedName("hb.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
 			int var3 = this.variance >> 1;
-			int[][] var4 = super.monoCache.method1075();
+			int[][] var4 = super.monoCache.getAllFrames();
 			Random var5 = new Random((long) this.seed);
 			for (int var6 = 0; var6 < this.count; var6++) {
 				int var7 = this.variance > 0 ? this.brightness + Statics.method812(this.variance, var5) - var3 : this.brightness;
 				int var8 = var7 >> 4 & 0xFF;
-				int var9 = Statics.method812(Texture.field1276, var5);
-				int var10 = Statics.method812(Texture.field460, var5);
+				int var9 = Statics.method812(Texture.width, var5);
+				int var10 = Statics.method812(Texture.height, var5);
 				int var11 = var10 + (this.length * Statics.field1734[var8] >> 12);
 				int var12 = (Statics.field2920[var8] * this.length >> 12) + var9;
 				int var13 = var12 - var9;
@@ -102,10 +102,10 @@ public final class TextureOpSparkle extends TextureOp {
 					}
 					int var26 = 1024 - (Statics.method812(4096, var5) >> 2);
 					for (int var27 = var9; var27 < var12; var27++) {
-						int var28 = Texture.field789 & var27;
+						int var28 = Texture.widthMask & var27;
 						var24 += var22;
 						int var29 = var26 + var23 * (var27 - var9) + 1024;
-						int var30 = var20 & Texture.field4158;
+						int var30 = var20 & Texture.heightMask;
 						if (var24 > 0) {
 							var24 += -var21;
 							var20 += var25;

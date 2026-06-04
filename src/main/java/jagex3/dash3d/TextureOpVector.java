@@ -1138,9 +1138,9 @@ public final class TextureOpVector extends TextureOp {
 	@ObfuscatedName("mb.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			this.rasterize(super.monoCache.method1075());
+			this.rasterize(super.monoCache.getAllFrames());
 		}
 		return var2;
 	}
@@ -1148,20 +1148,20 @@ public final class TextureOpVector extends TextureOp {
 	@ObfuscatedName("mb.b(IB)[[I")
 	@Override
 	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.method1539(arg0);
+		int[][] var2 = super.colorCache.getFrame(arg0);
 		if (super.colorCache.field4310) {
-			int var3 = Texture.field1276;
-			int var4 = Texture.field460;
-			int[][][] var5 = super.colorCache.method1537();
+			int var3 = Texture.width;
+			int var4 = Texture.height;
+			int[][][] var5 = super.colorCache.getAllFrames();
 			int[][] var6 = new int[var4][var3];
 			this.rasterize(var6);
-			for (int var7 = 0; var7 < Texture.field460; var7++) {
+			for (int var7 = 0; var7 < Texture.height; var7++) {
 				int[] var8 = var6[var7];
 				int[][] var9 = var5[var7];
 				int[] var10 = var9[1];
 				int[] var11 = var9[2];
 				int[] var12 = var9[0];
-				for (int var13 = 0; var13 < Texture.field1276; var13++) {
+				for (int var13 = 0; var13 < Texture.width; var13++) {
 					int var14 = var8[var13];
 					var11[var13] = (var14 & 0xFF) << 4;
 					var10[var13] = var14 >> 4 & 0xFF0;
@@ -1174,10 +1174,10 @@ public final class TextureOpVector extends TextureOp {
 
 	@ObfuscatedName("mb.a([[IB)V")
 	public void rasterize(int[][] arg0) {
-		int var2 = Texture.field1276;
-		int var3 = Texture.field460;
+		int var2 = Texture.width;
+		int var3 = Texture.height;
 		method114(arg0);
-		method1575(Texture.field4158, Texture.field789);
+		method1575(Texture.heightMask, Texture.widthMask);
 		if (this.drawCommands == null) {
 			return;
 		}

@@ -23,9 +23,9 @@ public final class TextureOpMonoFill extends TextureOp {
 	@ObfuscatedName("pi.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			ArrayUtil.method837(var2, 0, Texture.field1276, this.brightness);
+			ArrayUtil.method837(var2, 0, Texture.width, this.brightness);
 		}
 		return var2;
 	}

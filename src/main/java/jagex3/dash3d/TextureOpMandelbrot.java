@@ -25,11 +25,11 @@ public final class TextureOpMandelbrot extends TextureOp {
 	@ObfuscatedName("qj.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			for (int var3 = 0; var3 < Texture.field1276; var3++) {
-				int var4 = this.centerX + (Texture.field351[var3] << 12) / this.zoom;
-				int var5 = this.centerY + (Texture.field2021[arg0] << 12) / this.zoom;
+			for (int var3 = 0; var3 < Texture.width; var3++) {
+				int var4 = this.centerX + (Texture.columnLut[var3] << 12) / this.zoom;
+				int var5 = this.centerY + (Texture.rowLut[arg0] << 12) / this.zoom;
 				int var6 = var4;
 				int var7 = var4 * var4 >> 12;
 				int var8 = var5;

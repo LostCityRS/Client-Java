@@ -33,22 +33,22 @@ public class TextureOpImage extends TextureOp {
 	@ObfuscatedName("mi.b(IB)[[I")
 	@Override
 	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.method1539(arg0);
+		int[][] var2 = super.colorCache.getFrame(arg0);
 		if (super.colorCache.field4310 && this.loadImage()) {
 			int[] var3 = var2[1];
 			int[] var4 = var2[2];
-			int var5 = this.width * (this.height == Texture.field460 ? arg0 : this.height * arg0 / Texture.field460);
+			int var5 = this.width * (this.height == Texture.height ? arg0 : this.height * arg0 / Texture.height);
 			int[] var6 = var2[0];
-			if (this.width == Texture.field1276) {
-				for (int var10 = 0; var10 < Texture.field1276; var10++) {
+			if (this.width == Texture.width) {
+				for (int var10 = 0; var10 < Texture.width; var10++) {
 					int var11 = this.pixels[var5++];
 					var4[var10] = (var11 & 0xFF) << 4;
 					var3[var10] = var11 >> 4 & 0xFF0;
 					var6[var10] = var11 >> 12 & 0xFF0;
 				}
 			} else {
-				for (int var7 = 0; var7 < Texture.field1276; var7++) {
-					int var8 = var7 * this.width / Texture.field1276;
+				for (int var7 = 0; var7 < Texture.width; var7++) {
+					int var8 = var7 * this.width / Texture.width;
 					int var9 = this.pixels[var8 + var5];
 					var4[var7] = (var9 & 0xFF) << 4;
 					var3[var7] = var9 >> 4 & 0xFF0;
@@ -64,7 +64,7 @@ public class TextureOpImage extends TextureOp {
 		if (this.pixels != null) {
 			return true;
 		} else if (this.imageId >= 0) {
-			SoftwarePix32 var1 = PixLoader.makeSoftwarePix32(Texture.field684, this.imageId);
+			SoftwarePix32 var1 = PixLoader.makeSoftwarePix32(Texture.sprites, this.imageId);
 			var1.trim();
 			this.width = var1.wi;
 			this.height = var1.hi;

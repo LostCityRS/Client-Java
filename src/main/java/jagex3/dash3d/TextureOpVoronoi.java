@@ -69,17 +69,17 @@ public final class TextureOpVoronoi extends TextureOp {
 	@ObfuscatedName("l.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int var3 = Texture.field2021[arg0] * this.cellsY + 2048;
+			int var3 = Texture.rowLut[arg0] * this.cellsY + 2048;
 			int var4 = var3 >> 12;
 			int var5 = var4 + 1;
-			for (int var6 = 0; var6 < Texture.field1276; var6++) {
+			for (int var6 = 0; var6 < Texture.width; var6++) {
 				field1452 = Integer.MAX_VALUE;
 				field1850 = Integer.MAX_VALUE;
 				field3809 = Integer.MAX_VALUE;
 				field2472 = Integer.MAX_VALUE;
-				int var7 = Texture.field351[var6] * this.cellsX + 2048;
+				int var7 = Texture.columnLut[var6] * this.cellsX + 2048;
 				int var8 = var7 >> 12;
 				int var9 = var8 + 1;
 				for (int var10 = var4 - 1; var10 <= var5; var10++) {

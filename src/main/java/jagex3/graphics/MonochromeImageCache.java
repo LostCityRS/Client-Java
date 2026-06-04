@@ -41,7 +41,7 @@ public final class MonochromeImageCache {
 	}
 
 	@ObfuscatedName("oh.b(I)[[I")
-	public int[][] method1075() {
+	public int[][] getAllFrames() {
 		if (this.field3088 != this.field3087) {
 			throw new RuntimeException("Can only retrieve a full image cache");
 		}
@@ -52,7 +52,7 @@ public final class MonochromeImageCache {
 	}
 
 	@ObfuscatedName("oh.b(ZI)[I")
-	public int[] method1078(int arg0) {
+	public int[] getFrame(int arg0) {
 		if (this.field3087 == this.field3088) {
 			this.field3098 = this.field3095[arg0] == null;
 			this.field3095[arg0] = field1572;
@@ -84,7 +84,7 @@ public final class MonochromeImageCache {
 	}
 
 	@ObfuscatedName("oh.a(B)V")
-	public void method1081() {
+	public void destroy() {
 		for (int var1 = 0; var1 < this.field3087; var1++) {
 			this.field3091[var1] = null;
 		}

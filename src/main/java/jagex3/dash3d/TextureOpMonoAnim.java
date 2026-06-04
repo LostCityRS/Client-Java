@@ -13,9 +13,9 @@ public final class TextureOpMonoAnim extends TextureOp {
 	@ObfuscatedName("ce.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			ArrayUtil.method837(var2, 0, Texture.field1276, Texture.field2021[arg0]);
+			ArrayUtil.method837(var2, 0, Texture.width, Texture.rowLut[arg0]);
 		}
 		return var2;
 	}

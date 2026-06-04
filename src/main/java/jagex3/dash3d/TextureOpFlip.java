@@ -32,9 +32,9 @@ public final class TextureOpFlip extends TextureOp {
 	@ObfuscatedName("fa.b(IB)[[I")
 	@Override
 	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.method1539(arg0);
+		int[][] var2 = super.colorCache.getFrame(arg0);
 		if (super.colorCache.field4310) {
-			int[][] var3 = this.getInputColor(0, this.flipY ? Texture.field4158 - arg0 : arg0);
+			int[][] var3 = this.getInputColor(0, this.flipY ? Texture.heightMask - arg0 : arg0);
 			int[] var4 = var3[0];
 			int[] var5 = var3[2];
 			int[] var6 = var3[1];
@@ -42,13 +42,13 @@ public final class TextureOpFlip extends TextureOp {
 			int[] var8 = var2[1];
 			int[] var9 = var2[2];
 			if (this.flipX) {
-				for (int var11 = 0; var11 < Texture.field1276; var11++) {
-					var7[var11] = var4[Texture.field789 - var11];
-					var8[var11] = var6[Texture.field789 - var11];
-					var9[var11] = var5[Texture.field789 - var11];
+				for (int var11 = 0; var11 < Texture.width; var11++) {
+					var7[var11] = var4[Texture.widthMask - var11];
+					var8[var11] = var6[Texture.widthMask - var11];
+					var9[var11] = var5[Texture.widthMask - var11];
 				}
 			} else {
-				for (int var10 = 0; var10 < Texture.field1276; var10++) {
+				for (int var10 = 0; var10 < Texture.width; var10++) {
 					var7[var10] = var4[var10];
 					var8[var10] = var6[var10];
 					var9[var10] = var5[var10];
@@ -61,15 +61,15 @@ public final class TextureOpFlip extends TextureOp {
 	@ObfuscatedName("fa.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int[] var3 = this.getInputMono(this.flipY ? Texture.field4158 - arg0 : arg0, 0);
+			int[] var3 = this.getInputMono(this.flipY ? Texture.heightMask - arg0 : arg0, 0);
 			if (this.flipX) {
-				for (int var4 = 0; var4 < Texture.field1276; var4++) {
-					var2[var4] = var3[Texture.field789 - var4];
+				for (int var4 = 0; var4 < Texture.width; var4++) {
+					var2[var4] = var3[Texture.widthMask - var4];
 				}
 			} else {
-				ArrayUtil.method838(var3, 0, var2, 0, Texture.field1276);
+				ArrayUtil.method838(var3, 0, var2, 0, Texture.width);
 			}
 		}
 		return var2;

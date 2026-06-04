@@ -47,11 +47,11 @@ public final class TextureOpWood extends TextureOp {
 	@ObfuscatedName("ra.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (!super.monoCache.field3098) {
 			return var2;
 		}
-		int[][] var3 = super.monoCache.method1075();
+		int[][] var3 = super.monoCache.getAllFrames();
 		int var4 = 0;
 		int var5 = 0;
 		int var6 = 0;
@@ -60,16 +60,16 @@ public final class TextureOpWood extends TextureOp {
 		boolean var9 = true;
 		boolean var10 = true;
 		int var11 = 0;
-		int var12 = this.minBandWidth * Texture.field1276 >> 12;
+		int var12 = this.minBandWidth * Texture.width >> 12;
 		int var13 = 0;
-		int var14 = this.maxBandWidth * Texture.field1276 >> 12;
-		int var15 = Texture.field460 * this.minBandHeight >> 12;
-		int var16 = Texture.field460 * this.maxBandHeight >> 12;
+		int var14 = this.maxBandWidth * Texture.width >> 12;
+		int var15 = Texture.height * this.minBandHeight >> 12;
+		int var16 = Texture.height * this.maxBandHeight >> 12;
 		if (var16 <= 1) {
 			return var3[arg0];
 		}
-		this.opacity2 = this.feather * (Texture.field1276 / 8) >> 12;
-		int var17 = Texture.field1276 / var12 + 1;
+		this.opacity2 = this.feather * (Texture.width / 8) >> 12;
+		int var17 = Texture.width / var12 + 1;
 		int[][] var18 = new int[var17][3];
 		Random var19 = new Random((long) this.seed);
 		int[][] var20 = new int[var17][3];
@@ -78,9 +78,9 @@ public final class TextureOpWood extends TextureOp {
 				int var21 = var12 + Statics.method812(var14 - var12, var19);
 				int var22 = var21 + var7;
 				int var23 = var15 + Statics.method812(var16 - var15, var19);
-				if (var22 > Texture.field1276) {
-					var22 = Texture.field1276;
-					var21 = Texture.field1276 - var7;
+				if (var22 > Texture.width) {
+					var22 = Texture.width;
+					var21 = Texture.width - var7;
 				}
 				int var27;
 				if (var10) {
@@ -92,10 +92,10 @@ public final class TextureOpWood extends TextureOp {
 					var27 = var25[2];
 					int var28 = var22 + var4;
 					if (var28 < 0) {
-						var28 += Texture.field1276;
+						var28 += Texture.width;
 					}
-					if (Texture.field1276 < var28) {
-						var28 -= Texture.field1276;
+					if (Texture.width < var28) {
+						var28 -= Texture.width;
 					}
 					while (true) {
 						int[] var29 = var20[var24];
@@ -103,10 +103,10 @@ public final class TextureOpWood extends TextureOp {
 							if (var8 != var24) {
 								int var30 = var4 + var7;
 								if (var30 < 0) {
-									var30 += Texture.field1276;
+									var30 += Texture.width;
 								}
-								if (var30 > Texture.field1276) {
-									var30 -= Texture.field1276;
+								if (var30 > Texture.width) {
+									var30 -= Texture.width;
 								}
 								for (int var31 = 1; var31 <= var26; var31++) {
 									int[] var32 = var20[(var31 + var8) % var13];
@@ -128,7 +128,7 @@ public final class TextureOpWood extends TextureOp {
 											var39 = 0;
 										} else {
 											var39 = Math.max(var30, var37);
-											var38 = Texture.field1276;
+											var38 = Texture.width;
 										}
 										this.drawBand(var19, var3, var6 + var39, var35, var38 - var39, var27 - var35);
 									}
@@ -144,12 +144,12 @@ public final class TextureOpWood extends TextureOp {
 						var26++;
 					}
 				}
-				if (var23 + var27 <= Texture.field460) {
+				if (var23 + var27 <= Texture.height) {
 					var9 = false;
 				} else {
-					var23 = Texture.field460 - var27;
+					var23 = Texture.height - var27;
 				}
-				if (Texture.field1276 == var22) {
+				if (Texture.width == var22) {
 					this.drawBand(var19, var3, var7 + var5, var27, var21, var23);
 					if (var9) {
 						return var2;
@@ -168,14 +168,14 @@ public final class TextureOpWood extends TextureOp {
 					var11 = 0;
 					var40[1] = var22;
 					var18 = var41;
-					var5 = Statics.method812(Texture.field1276, var19);
+					var5 = Statics.method812(Texture.width, var19);
 					var4 = var5 - var6;
 					int var42 = var4;
 					if (var4 < 0) {
-						var42 = var4 + Texture.field1276;
+						var42 = var4 + Texture.width;
 					}
-					if (var42 > Texture.field1276) {
-						var42 -= Texture.field1276;
+					if (var42 > Texture.width) {
+						var42 -= Texture.width;
 					}
 					while (true) {
 						int[] var43 = var20[var8];
@@ -204,8 +204,8 @@ public final class TextureOpWood extends TextureOp {
 		int var7 = this.variance <= 0 ? 4096 : 4096 - Statics.method812(this.variance, arg0);
 		int var8 = this.brightness * this.opacity2 >> 12;
 		int var9 = this.opacity2 - (var8 <= 0 ? 0 : Statics.method812(var8, arg0));
-		if (Texture.field1276 <= arg2) {
-			arg2 -= Texture.field1276;
+		if (Texture.width <= arg2) {
+			arg2 -= Texture.width;
 		}
 		if (var9 > 0) {
 			if (arg5 <= 0 || arg4 <= 0) {
@@ -224,16 +224,16 @@ public final class TextureOpWood extends TextureOp {
 					if (this.featherMode == 0) {
 						for (int var25 = 0; var25 < var17; var25++) {
 							int var26 = var7 * var25 / var17;
-							var21[arg2 + var25 & Texture.field789] = var21[arg4 + arg2 - var25 - 1 & Texture.field789] = var22 * var26 >> 12;
+							var21[arg2 + var25 & Texture.widthMask] = var21[arg4 + arg2 - var25 - 1 & Texture.widthMask] = var22 * var26 >> 12;
 						}
 					} else {
 						for (int var23 = 0; var23 < var17; var23++) {
 							int var24 = var23 * var7 / var17;
-							var21[var23 + arg2 & Texture.field789] = var21[arg2 + arg4 - var23 - 1 & Texture.field789] = var22 <= var24 ? var22 : var24;
+							var21[var23 + arg2 & Texture.widthMask] = var21[arg2 + arg4 - var23 - 1 & Texture.widthMask] = var22 <= var24 ? var22 : var24;
 						}
 					}
-					if (Texture.field1276 < var19 + var18) {
-						int var27 = Texture.field1276 - var18;
+					if (Texture.width < var19 + var18) {
+						int var27 = Texture.width - var18;
 						ArrayUtil.method837(var21, var18, var27, var22);
 						ArrayUtil.method837(var21, 0, var19 - var27, var22);
 					} else {
@@ -246,37 +246,37 @@ public final class TextureOpWood extends TextureOp {
 						if (this.featherMode == 0) {
 							for (int var32 = 0; var32 < var17; var32++) {
 								int var33 = var7 * var32 / var17;
-								var21[Texture.field789 & var32 + arg2] = var21[Texture.field789 & arg2 + arg4 - var32 - 1] = var33 * var29 >> 12;
+								var21[Texture.widthMask & var32 + arg2] = var21[Texture.widthMask & arg2 + arg4 - var32 - 1] = var33 * var29 >> 12;
 							}
 						} else {
 							for (int var30 = 0; var30 < var17; var30++) {
 								int var31 = var30 * var7 / var17;
-								var21[Texture.field789 & var30 + arg2] = var21[Texture.field789 & arg2 + arg4 - var30 - 1] = var29 <= var31 ? var29 : var31;
+								var21[Texture.widthMask & var30 + arg2] = var21[Texture.widthMask & arg2 + arg4 - var30 - 1] = var29 <= var31 ? var29 : var31;
 							}
 						}
-						if (Texture.field1276 >= var18 + var19) {
+						if (Texture.width >= var18 + var19) {
 							ArrayUtil.method837(var21, var18, var19, var29);
 						} else {
-							int var34 = Texture.field1276 - var18;
+							int var34 = Texture.width - var18;
 							ArrayUtil.method837(var21, var18, var34, var29);
 							ArrayUtil.method837(var21, 0, var19 - var34, var29);
 						}
 					} else {
 						for (int var35 = 0; var35 < var17; var35++) {
-							var21[var35 + arg2 & Texture.field789] = var21[Texture.field789 & arg4 + arg2 - var35 - 1] = var7 * var35 / var17;
+							var21[var35 + arg2 & Texture.widthMask] = var21[Texture.widthMask & arg4 + arg2 - var35 - 1] = var7 * var35 / var17;
 						}
-						if (var19 + var18 <= Texture.field1276) {
+						if (var19 + var18 <= Texture.width) {
 							ArrayUtil.method837(var21, var18, var19, var7);
 						} else {
-							int var36 = Texture.field1276 - var18;
+							int var36 = Texture.width - var18;
 							ArrayUtil.method837(var21, var18, var36, var7);
 							ArrayUtil.method837(var21, 0, var19 - var36, var7);
 						}
 					}
 				}
 			}
-		} else if (arg4 + arg2 > Texture.field1276) {
-			int var10 = Texture.field1276 - arg2;
+		} else if (arg4 + arg2 > Texture.width) {
+			int var10 = Texture.width - arg2;
 			for (int var11 = 0; var11 < arg5; var11++) {
 				int[] var12 = arg1[arg3 + var11];
 				ArrayUtil.method837(var12, arg2, var10, var7);

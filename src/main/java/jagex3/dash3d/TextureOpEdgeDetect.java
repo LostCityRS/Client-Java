@@ -16,14 +16,14 @@ public final class TextureOpEdgeDetect extends TextureOp {
 	@ObfuscatedName("di.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int[] var3 = this.getInputMono(Texture.field4158 & arg0 - 1, 0);
+			int[] var3 = this.getInputMono(Texture.heightMask & arg0 - 1, 0);
 			int[] var4 = this.getInputMono(arg0, 0);
-			int[] var5 = this.getInputMono(arg0 + 1 & Texture.field4158, 0);
-			for (int var6 = 0; var6 < Texture.field1276; var6++) {
+			int[] var5 = this.getInputMono(arg0 + 1 & Texture.heightMask, 0);
+			for (int var6 = 0; var6 < Texture.width; var6++) {
 				int var7 = this.strength * (var5[var6] - var3[var6]);
-				int var8 = (var4[var6 + 1 & Texture.field789] - var4[Texture.field789 & var6 - 1]) * this.strength;
+				int var8 = (var4[var6 + 1 & Texture.widthMask] - var4[Texture.widthMask & var6 - 1]) * this.strength;
 				int var9 = var8 >> 12;
 				int var10 = var7 >> 12;
 				int var11 = var9 * var9 >> 12;

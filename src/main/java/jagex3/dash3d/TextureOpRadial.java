@@ -41,12 +41,12 @@ public final class TextureOpRadial extends TextureOp {
 	@ObfuscatedName("ma.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int var3 = Texture.field2021[arg0];
+			int var3 = Texture.rowLut[arg0];
 			int var4 = var3 - 2048 >> 1;
-			for (int var5 = 0; var5 < Texture.field1276; var5++) {
-				int var6 = Texture.field351[var5];
+			for (int var5 = 0; var5 < Texture.width; var5++) {
+				int var6 = Texture.columnLut[var5];
 				int var7 = var6 - 2048 >> 1;
 				int var8;
 				if (this.distanceMode == 0) {

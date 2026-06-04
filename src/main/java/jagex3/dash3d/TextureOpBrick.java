@@ -22,11 +22,11 @@ public final class TextureOpBrick extends TextureOp {
 	@ObfuscatedName("td.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			for (int var3 = 0; var3 < Texture.field1276; var3++) {
-				int var4 = Texture.field351[var3];
-				int var5 = Texture.field2021[arg0];
+			for (int var3 = 0; var3 < Texture.width; var3++) {
+				int var4 = Texture.columnLut[var3];
+				int var5 = Texture.rowLut[arg0];
 				int var6 = var4 * this.brickWidth >> 12;
 				int var7 = this.brickHeight * var5 >> 12;
 				int var8 = this.brickWidth * (var4 % (4096 / this.brickWidth));

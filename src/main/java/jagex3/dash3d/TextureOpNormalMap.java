@@ -19,17 +19,17 @@ public final class TextureOpNormalMap extends TextureOp {
 	@ObfuscatedName("aa.b(IB)[[I")
 	@Override
 	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.method1539(arg0);
+		int[][] var2 = super.colorCache.getFrame(arg0);
 		if (super.colorCache.field4310) {
-			int[] var3 = this.getInputMono(Texture.field4158 & arg0 - 1, 0);
+			int[] var3 = this.getInputMono(Texture.heightMask & arg0 - 1, 0);
 			int[] var4 = this.getInputMono(arg0, 0);
-			int[] var5 = this.getInputMono(arg0 + 1 & Texture.field4158, 0);
+			int[] var5 = this.getInputMono(arg0 + 1 & Texture.heightMask, 0);
 			int[] var6 = var2[0];
 			int[] var7 = var2[2];
 			int[] var8 = var2[1];
-			for (int var9 = 0; var9 < Texture.field1276; var9++) {
+			for (int var9 = 0; var9 < Texture.width; var9++) {
 				int var10 = (var5[var9] - var3[var9]) * this.strength;
-				int var11 = (var4[var9 + 1 & Texture.field789] - var4[var9 - 1 & Texture.field789]) * this.strength;
+				int var11 = (var4[var9 + 1 & Texture.widthMask] - var4[var9 - 1 & Texture.widthMask]) * this.strength;
 				int var12 = var11 >> 12;
 				int var13 = var10 >> 12;
 				int var14 = var12 * var12 >> 12;

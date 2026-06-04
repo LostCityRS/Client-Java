@@ -115,11 +115,11 @@ public final class TextureOpClouds extends TextureOp {
 	@ObfuscatedName("e.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
 			int var3 = 0;
 			int var4;
-			for (var4 = this.timeOffset + Texture.field2021[arg0]; var4 < 0; var4 += 4096) {
+			for (var4 = this.timeOffset + Texture.rowLut[arg0]; var4 < 0; var4 += 4096) {
 			}
 			while (var4 > 4096) {
 				var4 -= 4096;
@@ -132,11 +132,11 @@ public final class TextureOpClouds extends TextureOp {
 			int var7 = var3 - 1;
 			int var8 = this.rowBounds[var3 - 1];
 			if (var4 > this.halfEdge + var8 && var5 - this.halfEdge > var4) {
-				for (int var9 = 0; var9 < Texture.field1276; var9++) {
+				for (int var9 = 0; var9 < Texture.width; var9++) {
 					int var10 = var6 ? this.contrast : -this.contrast;
 					int var11 = 0;
 					int var12;
-					for (var12 = (var10 * this.cellHeight >> 12) + Texture.field351[var9]; var12 < 0; var12 += 4096) {
+					for (var12 = (var10 * this.cellHeight >> 12) + Texture.columnLut[var9]; var12 < 0; var12 += 4096) {
 					}
 					while (var12 > 4096) {
 						var12 -= 4096;
@@ -154,7 +154,7 @@ public final class TextureOpClouds extends TextureOp {
 					}
 				}
 			} else {
-				ArrayUtil.method837(var2, 0, Texture.field1276, 0);
+				ArrayUtil.method837(var2, 0, Texture.width, 0);
 			}
 		}
 		return var2;

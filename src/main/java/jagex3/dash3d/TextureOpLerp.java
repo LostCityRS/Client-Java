@@ -13,12 +13,12 @@ public final class TextureOpLerp extends TextureOp {
 	@ObfuscatedName("d.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
 			int[] var3 = this.getInputMono(arg0, 0);
 			int[] var4 = this.getInputMono(arg0, 1);
 			int[] var5 = this.getInputMono(arg0, 2);
-			for (int var6 = 0; var6 < Texture.field1276; var6++) {
+			for (int var6 = 0; var6 < Texture.width; var6++) {
 				int var7 = var5[var6];
 				if (var7 == 4096) {
 					var2[var6] = var3[var6];
@@ -43,7 +43,7 @@ public final class TextureOpLerp extends TextureOp {
 	@ObfuscatedName("d.b(IB)[[I")
 	@Override
 	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.method1539(arg0);
+		int[][] var2 = super.colorCache.getFrame(arg0);
 		if (super.colorCache.field4310) {
 			int[] var3 = this.getInputMono(arg0, 2);
 			int[][] var4 = this.getInputColor(0, arg0);
@@ -57,7 +57,7 @@ public final class TextureOpLerp extends TextureOp {
 			int[] var12 = var4[0];
 			int[] var13 = var2[1];
 			int[] var14 = var5[2];
-			for (int var15 = 0; var15 < Texture.field1276; var15++) {
+			for (int var15 = 0; var15 < Texture.width; var15++) {
 				int var16 = var3[var15];
 				if (var16 == 4096) {
 					var8[var15] = var12[var15];

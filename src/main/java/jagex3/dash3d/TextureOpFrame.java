@@ -24,11 +24,11 @@ public final class TextureOpFrame extends TextureOp {
 	@ObfuscatedName("qf.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int var3 = Texture.field2021[arg0];
-			for (int var4 = 0; var4 < Texture.field1276; var4++) {
-				int var5 = Texture.field351[var4];
+			int var3 = Texture.rowLut[arg0];
+			for (int var4 = 0; var4 < Texture.width; var4++) {
+				int var5 = Texture.columnLut[var4];
 				if (var5 > this.borderWidth && 4096 - this.borderWidth > var5 && var3 > 2048 - this.borderWidth && var3 < this.borderWidth + 2048) {
 					int var6 = 2048 - var5;
 					int var7 = var6 >= 0 ? var6 : -var6;

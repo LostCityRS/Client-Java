@@ -26,7 +26,7 @@ public final class Pix3D {
 	public static final int[] divTable2 = new int[2048];
 
 	@ObfuscatedName("pj.g")
-	public static boolean lowMem = false;
+	public static boolean opaque = false;
 
 	@ObfuscatedName("pj.h")
 	public static final int[] cosTable = new int[2048];
@@ -53,7 +53,7 @@ public final class Pix3D {
 	public static int originY;
 
 	@ObfuscatedName("pj.p")
-	public static boolean opaque = false;
+	public static boolean lowMem = false;
 
 	@ObfuscatedName("pj.q")
 	public static int originX;
@@ -106,8 +106,8 @@ public final class Pix3D {
 			gouraudTriangle(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
-		opaque = textureManager.method437(arg18);
 		lowMem = textureManager.isLowMem(arg18);
+		opaque = textureManager.isOpaque(arg18);
 		int var21 = arg4 - arg3;
 		int var22 = arg1 - arg0;
 		int var23 = arg5 - arg3;
@@ -1331,7 +1331,7 @@ public final class Pix3D {
 		int var13 = arg2 + arg3;
 		int var14 = arg5 + arg6 * arg3;
 		int var15 = arg4 - arg3;
-		if (!opaque) {
+		if (!lowMem) {
 			int var74 = arg3 - originX;
 			int var75 = arg7 + (arg10 >> 3) * var74;
 			int var76 = arg8 + (arg11 >> 3) * var74;
@@ -1364,7 +1364,7 @@ public final class Pix3D {
 			int var89 = var15 >> 3;
 			int var90 = arg6 << 3;
 			int var91 = var14 >> 8;
-			if (lowMem) {
+			if (opaque) {
 				if (var89 > 0) {
 					do {
 						int var92 = arg1[(var87 & 0x3F80) + (var87 >>> 25)];
@@ -1537,7 +1537,7 @@ public final class Pix3D {
 		int var31 = var15 >> 3;
 		int var32 = arg6 << 3;
 		int var33 = var14 >> 8;
-		if (lowMem) {
+		if (opaque) {
 			if (var31 > 0) {
 				do {
 					int var34 = arg1[(var29 & 0xFC0) + (var29 >>> 26)];
@@ -2109,8 +2109,8 @@ public final class Pix3D {
 			gouraudTriangle(arg0, arg1, arg2, arg3, arg4, arg5, textureLightColour(var20, arg6), textureLightColour(var20, arg7), textureLightColour(var20, arg8));
 			return;
 		}
-		opaque = textureManager.method437(arg18);
 		lowMem = textureManager.isLowMem(arg18);
+		opaque = textureManager.isOpaque(arg18);
 		int var21 = arg4 - arg3;
 		int var22 = arg1 - arg0;
 		int var23 = arg5 - arg3;
@@ -2792,7 +2792,7 @@ public final class Pix3D {
 		int var13 = arg2 + arg3;
 		int var14 = arg5 + arg6 * arg3;
 		int var15 = arg4 - arg3;
-		if (!opaque) {
+		if (!lowMem) {
 			int var68 = arg3 - originX;
 			int var69 = arg7 + arg10 * var68;
 			int var70 = arg8 + arg11 * var68;
@@ -2825,7 +2825,7 @@ public final class Pix3D {
 			int var83 = var15 >> 3;
 			int var84 = arg6 << 3;
 			int var85 = var14 >> 8;
-			if (lowMem) {
+			if (opaque) {
 				if (var83 > 0) {
 					do {
 						int var86 = arg1[(var81 & 0x3F80) + (var81 >>> 25)];
@@ -2970,7 +2970,7 @@ public final class Pix3D {
 		int var31 = var15 >> 3;
 		int var32 = arg6 << 3;
 		int var33 = var14 >> 8;
-		if (lowMem) {
+		if (opaque) {
 			if (var31 > 0) {
 				do {
 					int var34 = arg1[(var29 & 0xFC0) + (var29 >>> 26)];

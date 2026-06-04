@@ -40,7 +40,7 @@ public final class ColorImageCache {
 	}
 
 	@ObfuscatedName("va.a(I)V")
-	public void method1531() {
+	public void destroy() {
 		for (int var1 = 0; var1 < this.field4297; var1++) {
 			this.field4306[var1][0] = null;
 			this.field4306[var1][1] = null;
@@ -54,7 +54,7 @@ public final class ColorImageCache {
 	}
 
 	@ObfuscatedName("va.a(Z)[[[I")
-	public int[][][] method1537() {
+	public int[][][] getAllFrames() {
 		if (this.field4297 != this.field4305) {
 			throw new RuntimeException("Can only retrieve a full image cache");
 		}
@@ -65,7 +65,7 @@ public final class ColorImageCache {
 	}
 
 	@ObfuscatedName("va.a(ZI)[[I")
-	public int[][] method1539(int arg0) {
+	public int[][] getFrame(int arg0) {
 		if (this.field4297 == this.field4305) {
 			this.field4310 = this.field4291[arg0] == null;
 			this.field4291[arg0] = field1236;

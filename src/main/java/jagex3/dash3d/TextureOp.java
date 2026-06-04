@@ -70,10 +70,10 @@ public abstract class TextureOp extends Linkable {
 	@ObfuscatedName("c.c(I)V")
 	public void clearCache() {
 		if (this.monochrome) {
-			this.monoCache.method1081();
+			this.monoCache.destroy();
 			this.monoCache = null;
 		} else {
-			this.colorCache.method1531();
+			this.colorCache.destroy();
 			this.colorCache = null;
 		}
 	}

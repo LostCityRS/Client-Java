@@ -71,11 +71,11 @@ public final class TextureOpStar extends TextureOp {
 	@ObfuscatedName("jf.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int var3 = Texture.field2021[arg0] - 2048;
-			for (int var4 = 0; var4 < Texture.field1276; var4++) {
-				int var5 = Texture.field351[var4] - 2048;
+			int var3 = Texture.rowLut[arg0] - 2048;
+			for (int var4 = 0; var4 < Texture.width; var4++) {
+				int var5 = Texture.columnLut[var4] - 2048;
 				int var6 = var5 + this.centerX;
 				int var7 = this.centerY + var3;
 				int var8 = var7 >= -2048 ? var7 : var7 + 4096;

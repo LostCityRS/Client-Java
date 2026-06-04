@@ -28,7 +28,7 @@ public final class TextureOpChromaReplace extends TextureOp {
 	@ObfuscatedName("lh.b(IB)[[I")
 	@Override
 	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.method1539(arg0);
+		int[][] var2 = super.colorCache.getFrame(arg0);
 		if (super.colorCache.field4310) {
 			int[][] var3 = this.getInputColor(0, arg0);
 			int[] var4 = var3[0];
@@ -37,7 +37,7 @@ public final class TextureOpChromaReplace extends TextureOp {
 			int[] var7 = var2[0];
 			int[] var8 = var2[1];
 			int[] var9 = var2[2];
-			for (int var10 = 0; var10 < Texture.field1276; var10++) {
+			for (int var10 = 0; var10 < Texture.width; var10++) {
 				int var11 = var4[var10];
 				int var12 = var11 - this.keyColor[0];
 				if (var12 < 0) {

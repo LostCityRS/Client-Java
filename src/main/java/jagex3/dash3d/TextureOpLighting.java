@@ -44,15 +44,15 @@ public final class TextureOpLighting extends TextureOp {
 	@ObfuscatedName("hh.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int var3 = this.intensity * Texture.field738 >> 12;
-			int[] var4 = this.getInputMono(Texture.field4158 & arg0 - 1, 0);
+			int var3 = this.intensity * Texture.aspectScale >> 12;
+			int[] var4 = this.getInputMono(Texture.heightMask & arg0 - 1, 0);
 			int[] var5 = this.getInputMono(arg0, 0);
-			int[] var6 = this.getInputMono(Texture.field4158 & arg0 + 1, 0);
-			for (int var7 = 0; var7 < Texture.field1276; var7++) {
+			int[] var6 = this.getInputMono(Texture.heightMask & arg0 + 1, 0);
+			for (int var7 = 0; var7 < Texture.width; var7++) {
 				int var8 = (var6[var7] - var4[var7]) * var3 >> 12;
-				int var9 = var3 * (var5[Texture.field789 & var7 - 1] - var5[var7 + 1 & Texture.field789]) >> 12;
+				int var9 = var3 * (var5[Texture.widthMask & var7 - 1] - var5[var7 + 1 & Texture.widthMask]) >> 12;
 				int var10 = var9 >> 4;
 				if (var10 < 0) {
 					var10 = -var10;

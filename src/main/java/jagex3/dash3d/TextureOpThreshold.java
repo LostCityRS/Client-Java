@@ -19,10 +19,10 @@ public final class TextureOpThreshold extends TextureOp {
 	@ObfuscatedName("ff.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
 			int[] var3 = this.getInputMono(arg0, 0);
-			for (int var4 = 0; var4 < Texture.field1276; var4++) {
+			for (int var4 = 0; var4 < Texture.width; var4++) {
 				int var5 = var3[var4];
 				var2[var4] = var5 >= this.minThreshold && var5 <= this.maxThreshold ? 4096 : 0;
 			}

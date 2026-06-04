@@ -49,9 +49,9 @@ public final class GlTexture extends Linkable2 {
 
 	@ObfuscatedName("sc.a(Lnb;ZZLfe;)[I")
 	public int[] method1366(Js5 arg0, boolean arg1, TextureProvider arg2) {
-		if (this.field3791.method63(arg2, arg0)) {
+		if (this.field3791.checkLoaded(arg2, arg0)) {
 			int var4 = arg1 ? 64 : 128;
-			return this.field3791.method60(1.0D, var4, this.field3801, arg0, arg2, var4, false);
+			return this.field3791.render(1.0D, var4, this.field3801, arg0, arg2, var4, false);
 		} else {
 			return null;
 		}
@@ -86,7 +86,7 @@ public final class GlTexture extends Linkable2 {
 
 	@ObfuscatedName("sc.a(Lfe;ILnb;)Z")
 	public boolean method1368(TextureProvider arg0, Js5 arg1) {
-		return this.field3791.method63(arg0, arg1);
+		return this.field3791.checkLoaded(arg0, arg1);
 	}
 
 	@Override
@@ -97,11 +97,11 @@ public final class GlTexture extends Linkable2 {
 	@ObfuscatedName("sc.a(Lfe;FLnb;ZZ)[I")
 	public int[] method1369(TextureProvider arg0, float arg1, Js5 arg2, boolean arg3) {
 		if (this.field3808 == null || arg1 != this.field3798) {
-			if (!this.field3791.method63(arg0, arg2)) {
+			if (!this.field3791.checkLoaded(arg0, arg2)) {
 				return null;
 			}
 			int var5 = arg3 ? 64 : 128;
-			this.field3808 = this.field3791.method60((double) arg1, var5, this.field3801, arg2, arg0, var5, true);
+			this.field3808 = this.field3791.render((double) arg1, var5, this.field3801, arg2, arg0, var5, true);
 			this.field3798 = arg1;
 			if (this.field3794) {
 				int[] var6 = new int[var5];

@@ -52,7 +52,7 @@ public final class TextureOpHSL extends TextureOp {
 	@ObfuscatedName("pd.b(IB)[[I")
 	@Override
 	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.method1539(arg0);
+		int[][] var2 = super.colorCache.getFrame(arg0);
 		if (super.colorCache.field4310) {
 			int[][] var3 = this.getInputColor(0, arg0);
 			int[] var4 = var3[1];
@@ -61,7 +61,7 @@ public final class TextureOpHSL extends TextureOp {
 			int[] var7 = var2[0];
 			int[] var8 = var2[1];
 			int[] var9 = var2[2];
-			for (int var10 = 0; var10 < Texture.field1276; var10++) {
+			for (int var10 = 0; var10 < Texture.width; var10++) {
 				this.rgbToHsl(var4[var10], var5[var10], var6[var10]);
 				this.field3213 += this.brightness;
 				if (this.field3213 < 0) {

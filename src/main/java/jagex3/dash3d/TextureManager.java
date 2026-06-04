@@ -48,7 +48,7 @@ public final class TextureManager implements TextureProvider {
 	public boolean field1248 = false;
 
 	@ObfuscatedName("ga.E")
-	public final boolean[] field1252;
+	public final boolean[] opaque;
 
 	@ObfuscatedName("ga.C")
 	public final byte[] field1250;
@@ -63,7 +63,7 @@ public final class TextureManager implements TextureProvider {
 		int var7 = var6.g2();
 		this.field1222 = new byte[var7];
 		this.field1223 = new boolean[var7];
-		this.field1252 = new boolean[var7];
+		this.opaque = new boolean[var7];
 		this.field1224 = new byte[var7];
 		this.field1250 = new byte[var7];
 		this.field1237 = new boolean[var7];
@@ -81,7 +81,7 @@ public final class TextureManager implements TextureProvider {
 		}
 		for (int var10 = 0; var10 < var7; var10++) {
 			if (this.field1243[var10]) {
-				this.field1252[var10] = var6.g1() == 1;
+				this.opaque[var10] = var6.g1() == 1;
 			}
 		}
 		for (int var11 = 0; var11 < var7; var11++) {
@@ -123,8 +123,8 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.a(II)Z")
 	@Override
-	public boolean isLowMem(int arg0) {
-		return this.field1252[arg0];
+	public boolean isOpaque(int arg0) {
+		return this.opaque[arg0];
 	}
 
 	@ObfuscatedName("ga.a(IB)Z")
@@ -135,8 +135,8 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.c(IB)Z")
 	@Override
-	public boolean method439(int arg0) {
-		GlTexture var2 = this.method462(arg0);
+	public boolean isLoaded(int arg0) {
+		GlTexture var2 = this.loadTexture(arg0);
 		return var2 == null ? false : var2.method1368(this, this.sprites);
 	}
 
@@ -147,7 +147,7 @@ public final class TextureManager implements TextureProvider {
 	}
 
 	@ObfuscatedName("ga.d(IB)Lsc;")
-	public GlTexture method462(int arg0) {
+	public GlTexture loadTexture(int arg0) {
 		GlTexture var2 = (GlTexture) this.field1232.find((long) arg0);
 		if (var2 != null) {
 			return var2;
@@ -165,7 +165,7 @@ public final class TextureManager implements TextureProvider {
 
 	@ObfuscatedName("ga.b(IB)Z")
 	@Override
-	public boolean method437(int arg0) {
+	public boolean isLowMem(int arg0) {
 		return this.field1248 || this.field1237[arg0];
 	}
 
@@ -177,7 +177,7 @@ public final class TextureManager implements TextureProvider {
 	@ObfuscatedName("ga.c(II)[I")
 	@Override
 	public int[] getTexels(int arg0) {
-		GlTexture var2 = this.method462(arg0);
+		GlTexture var2 = this.loadTexture(arg0);
 		return var2 == null ? null : var2.method1366(this.sprites, this.field1248 || this.field1237[arg0], this);
 	}
 
@@ -194,7 +194,7 @@ public final class TextureManager implements TextureProvider {
 	@ObfuscatedName("ga.a(FIZ)[I")
 	@Override
 	public int[] getTexels(float arg0, int arg1) {
-		GlTexture var3 = this.method462(arg1);
+		GlTexture var3 = this.loadTexture(arg1);
 		if (var3 == null) {
 			return null;
 		} else {

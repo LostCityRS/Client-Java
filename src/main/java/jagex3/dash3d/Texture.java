@@ -8,27 +8,27 @@ import jagex3.js5.Js5;
 public final class Texture {
 
 	@ObfuscatedName("q.Mc")
-	public static final int[] field3507 = new int[256];
+	public static final int[] gammaLut = new int[256];
 	@ObfuscatedName("we.y")
-	public static TextureProvider field4488;
+	public static TextureProvider textureProvider;
 	@ObfuscatedName("de.B")
-	public static Js5 field684;
+	public static Js5 sprites;
 	@ObfuscatedName("gd.v")
-	public static int field1276;
+	public static int width;
 	@ObfuscatedName("bj.xb")
-	public static int[] field351;
+	public static int[] columnLut;
 	@ObfuscatedName("di.gb")
-	public static int field738;
+	public static int aspectScale;
 	@ObfuscatedName("cd.j")
-	public static int field460;
+	public static int height;
 	@ObfuscatedName("e.fb")
-	public static int field789;
+	public static int widthMask;
 	@ObfuscatedName("kb.o")
-	public static int[] field2021;
+	public static int[] rowLut;
 	@ObfuscatedName("ub.ab")
-	public static int field4158;
+	public static int heightMask;
 	@ObfuscatedName("tg.i")
-	public static double field4041 = -1.0D;
+	public static double lastGamma = -1.0D;
 	@ObfuscatedName("b.a")
 	public final TextureOp[] field168;
 
@@ -61,7 +61,7 @@ public final class Texture {
 		int var4 = 0;
 		int[][] var5 = new int[var2][];
 		for (int var6 = 0; var6 < var2; var6++) {
-			TextureOp var7 = method674(arg0);
+			TextureOp var7 = decodeOp(arg0);
 			if (var7.getImageId() >= 0) {
 				var4++;
 			}
@@ -100,7 +100,7 @@ public final class Texture {
 	}
 
 	@ObfuscatedName("vd.a(IB)Lc;")
-	public static TextureOp method1552(int arg0) {
+	public static TextureOp createOp(int arg0) {
 		if (arg0 == 0) {
 			return new TextureOpMonoFill();
 		} else if (arg0 == 1) {
@@ -187,10 +187,10 @@ public final class Texture {
 	}
 
 	@ObfuscatedName("ig.a(ILea;)Lc;")
-	public static TextureOp method674(Packet arg0) {
+	public static TextureOp decodeOp(Packet arg0) {
 		arg0.g1();
 		int var1 = arg0.g1();
-		TextureOp var2 = method1552(var1);
+		TextureOp var2 = createOp(var1);
 		var2.opacity = arg0.g1();
 		int var3 = arg0.g1();
 		for (int var4 = 0; var4 < var3; var4++) {
@@ -202,49 +202,49 @@ public final class Texture {
 	}
 
 	@ObfuscatedName("dj.a(DB)V")
-	public static void method282(double arg0) {
-		if (field4041 == arg0) {
+	public static void buildGammaLut(double arg0) {
+		if (lastGamma == arg0) {
 			return;
 		}
 		for (int var2 = 0; var2 < 256; var2++) {
 			int var3 = (int) (Math.pow((double) var2 / 255.0D, arg0) * 255.0D);
-			field3507[var2] = var3 <= 255 ? var3 : 255;
+			gammaLut[var2] = var3 <= 255 ? var3 : 255;
 		}
-		field4041 = arg0;
+		lastGamma = arg0;
 	}
 
 	@ObfuscatedName("ki.a(III)V")
-	public static void method802(int arg0, int arg1) {
-		if (field1276 != arg0) {
-			field351 = new int[arg0];
+	public static void setDimensions(int arg0, int arg1) {
+		if (width != arg0) {
+			columnLut = new int[arg0];
 			for (int var2 = 0; var2 < arg0; var2++) {
-				field351[var2] = (var2 << 12) / arg0;
+				columnLut[var2] = (var2 << 12) / arg0;
 			}
-			field738 = arg0 == 64 ? 2048 : 4096;
-			field1276 = arg0;
-			field789 = arg0 - 1;
+			aspectScale = arg0 == 64 ? 2048 : 4096;
+			width = arg0;
+			widthMask = arg0 - 1;
 		}
-		if (arg1 == field460) {
+		if (arg1 == height) {
 			return;
 		}
-		if (field1276 == arg1) {
-			field2021 = field351;
+		if (width == arg1) {
+			rowLut = columnLut;
 		} else {
-			field2021 = new int[arg1];
+			rowLut = new int[arg1];
 			for (int var3 = 0; var3 < arg1; var3++) {
-				field2021[var3] = (var3 << 12) / arg1;
+				rowLut[var3] = (var3 << 12) / arg1;
 			}
 		}
-		field460 = arg1;
-		field4158 = arg1 - 1;
+		height = arg1;
+		heightMask = arg1 - 1;
 	}
 
 	@ObfuscatedName("b.a(DIZLnb;Lfe;IIZ)[I")
-	public int[] method60(double arg0, int arg1, boolean arg2, Js5 arg3, TextureProvider arg4, int arg5, boolean arg6) {
-		method282(arg0);
-		field4488 = arg4;
-		field684 = arg3;
-		method802(arg1, arg5);
+	public int[] render(double arg0, int arg1, boolean arg2, Js5 arg3, TextureProvider arg4, int arg5, boolean arg6) {
+		buildGammaLut(arg0);
+		textureProvider = arg4;
+		sprites = arg3;
+		setDimensions(arg1, arg5);
 		for (int var9 = 0; var9 < this.field168.length; var9++) {
 			this.field168[var9].createCache(arg1, arg5);
 		}
@@ -288,7 +288,7 @@ public final class Texture {
 				if (var22 < 0) {
 					var22 = 0;
 				}
-				int var23 = field3507[var22];
+				int var23 = gammaLut[var22];
 				int var24 = var17[var21] >> 4;
 				if (var24 > 255) {
 					var24 = 255;
@@ -300,11 +300,11 @@ public final class Texture {
 				if (var25 > 255) {
 					var25 = 255;
 				}
-				int var26 = field3507[var24];
+				int var26 = gammaLut[var24];
 				if (var25 < 0) {
 					var25 = 0;
 				}
-				int var27 = field3507[var25];
+				int var27 = gammaLut[var25];
 				var10[var14++] = var27 + (var26 << 8) + (var23 << 16);
 				if (arg2) {
 					var14 += arg1 - 1;
@@ -318,14 +318,14 @@ public final class Texture {
 	}
 
 	@ObfuscatedName("b.a(Lfe;Lnb;I)Z")
-	public boolean method63(TextureProvider arg0, Js5 arg1) {
+	public boolean checkLoaded(TextureProvider arg0, Js5 arg1) {
 		for (int var3 = 0; var3 < this.field173.length; var3++) {
 			if (!arg1.requestDownload(this.field173[var3])) {
 				return false;
 			}
 		}
 		for (int var4 = 0; var4 < this.field184.length; var4++) {
-			if (!arg0.method439(this.field184[var4])) {
+			if (!arg0.isLoaded(this.field184[var4])) {
 				return false;
 			}
 		}

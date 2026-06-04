@@ -12,11 +12,11 @@ public final class TextureOpHashNoise extends TextureOp {
 	@ObfuscatedName("ta.a(IB)[I")
 	@Override
 	public int[] renderMono(int arg0) {
-		int[] var2 = super.monoCache.method1078(arg0);
+		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int var3 = Texture.field2021[arg0];
-			for (int var4 = 0; var4 < Texture.field1276; var4++) {
-				var2[var4] = this.hashXY(var3, Texture.field351[var4]) % 4096;
+			int var3 = Texture.rowLut[arg0];
+			for (int var4 = 0; var4 < Texture.width; var4++) {
+				var2[var4] = this.hashXY(var3, Texture.columnLut[var4]) % 4096;
 			}
 		}
 		return var2;
