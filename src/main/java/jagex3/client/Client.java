@@ -1379,6 +1379,8 @@ public final class Client extends GameShell {
 	public static final JagString field4018 = JagString.wrap("m");
 	@ObfuscatedName("k.S")
 	public static final JagString AUTO_X = JagString.wrap(" x ");
+	@ObfuscatedName("hj.u")
+	public static short field1578 = 1;
 
 	@ObfuscatedName("ke.b(Z)V")
 	public static void errorUsage(boolean arg0) {
@@ -1507,7 +1509,7 @@ public final class Client extends GameShell {
 			affid = Integer.parseInt(this.getParameter("affid"));
 		} catch (Exception var5) {
 		}
-		settings = AUTO_SETTINGS.method608(this);
+		settings = AUTO_SETTINGS.getParameter(this);
 		if (settings == null) {
 			settings = AUTO_EMPTY;
 		}
@@ -1561,7 +1563,7 @@ public final class Client extends GameShell {
 			GameShell.randomDat = null;
 			masterIndex = null;
 		}
-		GameShell.field2752 = Text.LOADING_TITLE;
+		GameShell.loadingText = Text.LOADING_TITLE;
 		if (modewhere != 0) {
 			showFps = true;
 		}
@@ -11169,7 +11171,7 @@ public final class Client extends GameShell {
 										int var27 = WorldMap.mapHeight + WorldMap.baseY - WorldMap.centreY - (int) ((double) (-(var9.renderHeight / 2) + -var11 + ClientMouseListener.mouseClickY) * 2.0D / WorldMap.zoom);
 										int var28 = WorldMap.centreX + (int) ((double) (ClientMouseListener.mouseClickX - var9.renderWidth / 2 - var10) * 2.0D / WorldMap.zoom) + WorldMap.baseX;
 										JagString var29 = JagString.join(new JagString[] {field4009, JagString.parseInt(var28 >> 6), AUTO_TAG_UNK1, JagString.parseInt(var27 >> 6), AUTO_TAG_UNK1, JagString.parseInt(var28 & 0x3F), AUTO_TAG_UNK1, JagString.parseInt(var27 & 0x3F) });
-										var29.method610();
+										var29.println();
 										doCheat(var29);
 										closeModal();
 										continue;

@@ -11,35 +11,80 @@ import java.lang.reflect.Method;
 @ObfuscatedName("eh")
 public final class ClientKeyboardListener implements KeyListener, FocusListener {
 
-	@ObfuscatedName("ke.I")
-	public static final int[] keyHeldBuffer = new int[128];
-	@ObfuscatedName("vh.T")
-	public static final int[] KEY_CODE_MAP = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, 85, 80, 84, -1, 91, -1, -1, -1, 81, 82, 86, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, 83, 104, 105, 103, 102, 96, 98, 97, 99, -1, -1, -1, -1, -1, -1, -1, 25, 16, 17, 18, 19, 20, 21, 22, 23, 24, -1, -1, -1, -1, -1, -1, -1, 48, 68, 66, 50, 34, 51, 52, 53, 39, 54, 55, 56, 70, 69, 40, 41, 32, 35, 49, 36, 38, 67, 33, 65, 37, 64, -1, -1, -1, -1, -1, 228, 231, 227, 233, 224, 219, 225, 230, 226, 232, 89, 87, -1, 88, 229, 90, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, -1, -1, -1, 101, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 100, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-	@ObfuscatedName("q.vb")
-	public static final int[] keyCodeBuffer = new int[128];
-	@ObfuscatedName("jg.H")
-	public static final int[] keyChBuffer = new int[128];
+	@ObfuscatedName("pc.b")
+	public static ClientKeyboardListener instance = new ClientKeyboardListener();
+
 	@ObfuscatedName("wh.D")
 	public static final boolean[] keyHeld = new boolean[112];
 
-	@ObfuscatedName("pc.b")
-	public static ClientKeyboardListener instance = new ClientKeyboardListener();
-	@ObfuscatedName("ke.S")
-	public static volatile int idleTimer = 0;
-	@ObfuscatedName("ci.x")
-	public static int keyHeldWritePos = 0;
-	@ObfuscatedName("nf.lb")
-	public static int keyHeldReadPos = 0;
-	@ObfuscatedName("rf.Gb")
-	public static int keyWritePos = 0;
-	@ObfuscatedName("sg.k")
-	public static int keyReadPos = 0;
-	@ObfuscatedName("mf.x")
-	public static int code;
 	@ObfuscatedName("ua.r")
 	public static int ch;
-    @ObfuscatedName("ec.J")
-    public static int lastKeyWritePos = 0;
+
+	@ObfuscatedName("mf.x")
+	public static int code;
+
+	@ObfuscatedName("ke.I")
+	public static final int[] keyHeldBuffer = new int[128];
+
+	@ObfuscatedName("ci.x")
+	public static int keyHeldWritePos = 0;
+
+	@ObfuscatedName("nf.lb")
+	public static int keyHeldReadPos = 0;
+
+	@ObfuscatedName("jg.H")
+	public static final int[] keyChBuffer = new int[128];
+
+	@ObfuscatedName("q.vb")
+	public static final int[] keyCodeBuffer = new int[128];
+
+	@ObfuscatedName("sg.k")
+	public static int keyReadPos = 0;
+
+	@ObfuscatedName("rf.Gb")
+	public static int keyWritePos = 0;
+
+	@ObfuscatedName("ec.J")
+	public static int lastKeyWritePos = 0;
+
+	@ObfuscatedName("ke.S")
+	public static volatile int idleTimer = 0;
+
+	@ObfuscatedName("vh.T")
+	public static final int[] KEY_CODE_MAP = new int[] {
+		-1, -1, -1, -1, -1, -1, -1, -1, 85, 80, 84, -1, 91, -1, -1, -1, 81, 82, 86, -1, -1, -1, -1, -1, -1, -1, -1, 0,
+		-1, -1, -1, -1, 83, 104, 105, 103, 102, 96, 98, 97, 99, -1, -1, -1, -1, -1, -1, -1, 25, 16, 17, 18, 19, 20, 21,
+		22, 23, 24, -1, -1, -1, -1, -1, -1, -1, 48, 68, 66, 50, 34, 51, 52, 53, 39, 54, 55, 56, 70, 69, 40, 41, 32, 35,
+		49, 36, 38, 67, 33, 65, 37, 64, -1, -1, -1, -1, -1, 228, 231, 227, 233, 224, 219, 225, 230, 226, 232, 89, 87,
+		-1, 88, 229, 90, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, -1, -1, -1, 101, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 100, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+		-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+	};
+
+	@ObfuscatedName("na.a(BLjava/awt/Component;)V")
+	public static void addListeners(java.awt.Component arg0) {
+		Method var1 = SignLink.setFocusTraversalKeysEnabled;
+		if (var1 != null) {
+			try {
+				var1.invoke(arg0, Boolean.FALSE);
+			} catch (Throwable var2) {
+			}
+		}
+		arg0.addKeyListener(instance);
+		arg0.addFocusListener(instance);
+	}
 
     @ObfuscatedName("l.a(Ljava/awt/Component;I)V")
 	public static void removeListeners(java.awt.Component arg0) {
@@ -48,30 +93,12 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 		keyHeldWritePos = -1;
 	}
 
-	@ObfuscatedName("fj.a(Ljava/awt/event/KeyEvent;I)I")
-	public static int getKeyChar(KeyEvent arg0) {
-		int var1 = arg0.getKeyChar();
-		if (var1 == 8364) {
-			return 128;
-		} else {
-			if (var1 <= 0 || var1 >= 256) {
-				var1 = -1;
-			}
-			return var1;
-		}
-	}
-
-	@ObfuscatedName("di.c(B)Z")
-	public static boolean pollKey() {
-		ClientKeyboardListener var0 = instance;
-		synchronized (instance) {
-			if (keyReadPos == lastKeyWritePos) {
-				return false;
-			} else {
-				code = keyCodeBuffer[keyReadPos];
-				ch = keyChBuffer[keyReadPos];
-				keyReadPos = keyReadPos + 1 & 0x7F;
-				return true;
+	@ObfuscatedName("nd.a(I)V")
+	public static void shutdown() {
+		if (instance != null) {
+			ClientKeyboardListener var0 = instance;
+			synchronized (instance) {
+				instance = null;
 			}
 		}
 	}
@@ -100,92 +127,6 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 			}
 			lastKeyWritePos = keyWritePos;
 		}
-	}
-
-	@ObfuscatedName("sh.c(I)V")
-	public static void setupKeyCodeMap() {
-		if (SignLink.javaVendor.toLowerCase().indexOf("microsoft") != -1) {
-			KEY_CODE_MAP[223] = 28;
-			KEY_CODE_MAP[222] = 59;
-			KEY_CODE_MAP[189] = 26;
-			KEY_CODE_MAP[191] = 73;
-			KEY_CODE_MAP[190] = 72;
-			KEY_CODE_MAP[192] = 58;
-			KEY_CODE_MAP[219] = 42;
-			KEY_CODE_MAP[221] = 43;
-			KEY_CODE_MAP[220] = 74;
-			KEY_CODE_MAP[187] = 27;
-			KEY_CODE_MAP[188] = 71;
-			KEY_CODE_MAP[186] = 57;
-			return;
-		}
-		KEY_CODE_MAP[46] = 72;
-		KEY_CODE_MAP[44] = 71;
-		KEY_CODE_MAP[92] = 74;
-		KEY_CODE_MAP[59] = 57;
-		KEY_CODE_MAP[61] = 27;
-		if (SignLink.setFocusTraversalKeysEnabled == null) {
-			KEY_CODE_MAP[192] = 58;
-			KEY_CODE_MAP[222] = 59;
-		} else {
-			KEY_CODE_MAP[520] = 59;
-			KEY_CODE_MAP[192] = 28;
-			KEY_CODE_MAP[222] = 58;
-		}
-		KEY_CODE_MAP[47] = 73;
-		KEY_CODE_MAP[91] = 42;
-		KEY_CODE_MAP[93] = 43;
-		KEY_CODE_MAP[45] = 26;
-	}
-
-	@ObfuscatedName("na.a(BLjava/awt/Component;)V")
-	public static void addListeners(java.awt.Component arg0) {
-		Method var1 = SignLink.setFocusTraversalKeysEnabled;
-		if (var1 != null) {
-			try {
-				var1.invoke(arg0, Boolean.FALSE);
-			} catch (Throwable var2) {
-			}
-		}
-		arg0.addKeyListener(instance);
-		arg0.addFocusListener(instance);
-	}
-
-	@ObfuscatedName("nd.a(I)V")
-	public static void shutdown() {
-		if (instance != null) {
-			ClientKeyboardListener var0 = instance;
-			synchronized (instance) {
-				instance = null;
-			}
-		}
-	}
-
-	@ObfuscatedName("jg.d(I)I")
-	public static int getIdleTimer() {
-		return idleTimer;
-	}
-
-	@Override
-	public synchronized void keyReleased(KeyEvent arg0) {
-		if (instance != null) {
-			idleTimer = 0;
-			int var2 = arg0.getKeyCode();
-			int var3;
-			if (var2 >= 0 && KEY_CODE_MAP.length > var2) {
-				var3 = KEY_CODE_MAP[var2] & 0xFFFFFF7F;
-			} else {
-				var3 = -1;
-			}
-			if (keyHeldWritePos >= 0 && var3 >= 0) {
-				keyHeldBuffer[keyHeldWritePos] = ~var3;
-				keyHeldWritePos = keyHeldWritePos + 1 & 0x7F;
-				if (keyHeldReadPos == keyHeldWritePos) {
-					keyHeldWritePos = -1;
-				}
-			}
-		}
-		arg0.consume();
 	}
 
 	@Override
@@ -226,14 +167,36 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 	}
 
 	@Override
-	public synchronized void focusLost(FocusEvent arg0) {
+	public synchronized void keyReleased(KeyEvent arg0) {
 		if (instance != null) {
-			keyHeldWritePos = -1;
+			idleTimer = 0;
+			int var2 = arg0.getKeyCode();
+			int var3;
+			if (var2 >= 0 && KEY_CODE_MAP.length > var2) {
+				var3 = KEY_CODE_MAP[var2] & 0xFFFFFF7F;
+			} else {
+				var3 = -1;
+			}
+			if (keyHeldWritePos >= 0 && var3 >= 0) {
+				keyHeldBuffer[keyHeldWritePos] = ~var3;
+				keyHeldWritePos = keyHeldWritePos + 1 & 0x7F;
+				if (keyHeldReadPos == keyHeldWritePos) {
+					keyHeldWritePos = -1;
+				}
+			}
 		}
+		arg0.consume();
 	}
 
 	@Override
 	public void focusGained(FocusEvent arg0) {
+	}
+
+	@Override
+	public synchronized void focusLost(FocusEvent arg0) {
+		if (instance != null) {
+			keyHeldWritePos = -1;
+		}
 	}
 
 	@Override
@@ -250,5 +213,74 @@ public final class ClientKeyboardListener implements KeyListener, FocusListener 
 			}
 		}
 		arg0.consume();
+	}
+
+	@ObfuscatedName("fj.a(Ljava/awt/event/KeyEvent;I)I")
+	public static int getKeyChar(KeyEvent arg0) {
+		int var1 = arg0.getKeyChar();
+		if (var1 == 8364) {
+			return 128;
+		} else {
+			if (var1 <= 0 || var1 >= 256) {
+				var1 = -1;
+			}
+			return var1;
+		}
+	}
+
+	@ObfuscatedName("sh.c(I)V")
+	public static void setupKeyCodeMap() {
+		if (SignLink.javaVendor.toLowerCase().indexOf("microsoft") != -1) {
+			KEY_CODE_MAP[223] = 28;
+			KEY_CODE_MAP[222] = 59;
+			KEY_CODE_MAP[189] = 26;
+			KEY_CODE_MAP[191] = 73;
+			KEY_CODE_MAP[190] = 72;
+			KEY_CODE_MAP[192] = 58;
+			KEY_CODE_MAP[219] = 42;
+			KEY_CODE_MAP[221] = 43;
+			KEY_CODE_MAP[220] = 74;
+			KEY_CODE_MAP[187] = 27;
+			KEY_CODE_MAP[188] = 71;
+			KEY_CODE_MAP[186] = 57;
+		} else {
+			KEY_CODE_MAP[46] = 72;
+			KEY_CODE_MAP[44] = 71;
+			KEY_CODE_MAP[92] = 74;
+			KEY_CODE_MAP[59] = 57;
+			KEY_CODE_MAP[61] = 27;
+			if (SignLink.setFocusTraversalKeysEnabled == null) {
+				KEY_CODE_MAP[192] = 58;
+				KEY_CODE_MAP[222] = 59;
+			} else {
+				KEY_CODE_MAP[520] = 59;
+				KEY_CODE_MAP[192] = 28;
+				KEY_CODE_MAP[222] = 58;
+			}
+			KEY_CODE_MAP[47] = 73;
+			KEY_CODE_MAP[91] = 42;
+			KEY_CODE_MAP[93] = 43;
+			KEY_CODE_MAP[45] = 26;
+		}
+	}
+
+	@ObfuscatedName("di.c(B)Z")
+	public static boolean pollKey() {
+		ClientKeyboardListener var0 = instance;
+		synchronized (instance) {
+			if (keyReadPos == lastKeyWritePos) {
+				return false;
+			} else {
+				code = keyCodeBuffer[keyReadPos];
+				ch = keyChBuffer[keyReadPos];
+				keyReadPos = keyReadPos + 1 & 0x7F;
+				return true;
+			}
+		}
+	}
+
+	@ObfuscatedName("jg.d(I)I")
+	public static int getIdleTimer() {
+		return idleTimer;
 	}
 }

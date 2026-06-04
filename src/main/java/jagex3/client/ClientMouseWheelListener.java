@@ -12,9 +12,10 @@ public final class ClientMouseWheelListener extends MouseWheelInterface implemen
 	@ObfuscatedName("ji.r")
 	public int rotation = 0;
 
+	@ObfuscatedName("ji.a(ILjava/awt/Component;)V")
 	@Override
-	public synchronized void mouseWheelMoved(MouseWheelEvent arg0) {
-		this.rotation += arg0.getWheelRotation();
+	public void addListeners(Component arg0) {
+		arg0.addMouseWheelListener(this);
 	}
 
 	@ObfuscatedName("ji.b(ILjava/awt/Component;)V")
@@ -23,17 +24,16 @@ public final class ClientMouseWheelListener extends MouseWheelInterface implemen
 		arg0.removeMouseWheelListener(this);
 	}
 
+	@Override
+	public synchronized void mouseWheelMoved(MouseWheelEvent arg0) {
+		this.rotation += arg0.getWheelRotation();
+	}
+
 	@ObfuscatedName("ji.a(B)I")
 	@Override
 	public synchronized int getRotation() {
 		int var1 = this.rotation;
 		this.rotation = 0;
 		return var1;
-	}
-
-	@ObfuscatedName("ji.a(ILjava/awt/Component;)V")
-	@Override
-	public void addListeners(Component arg0) {
-		arg0.addMouseWheelListener(this);
 	}
 }

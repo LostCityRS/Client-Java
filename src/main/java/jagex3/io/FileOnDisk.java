@@ -10,10 +10,8 @@ import java.io.RandomAccessFile;
 @ObfuscatedName("fg")
 public final class FileOnDisk {
 
-	@ObfuscatedName("va.m")
-	public static final byte[] field4303 = new byte[520];
 	@ObfuscatedName("fg.a")
-	public final File field1153;
+	public final File backingFile;
 
 	@ObfuscatedName("fg.b")
 	public RandomAccessFile file;
@@ -34,7 +32,7 @@ public final class FileOnDisk {
 		this.file = new RandomAccessFile(arg0, arg1);
 		this.pos = 0L;
 		this.maxLength = arg2;
-		this.field1153 = arg0;
+		this.backingFile = arg0;
 		int var5 = this.file.read();
 		if (var5 != -1 && !arg1.equals("r")) {
 			this.file.seek(0L);
@@ -62,14 +60,14 @@ public final class FileOnDisk {
 	}
 
 	@ObfuscatedName("fg.a(B)Ljava/io/File;")
-	public File method445() {
-		return this.field1153;
+	public File getBackingFile() {
+		return this.backingFile;
 	}
 
 	@Override
 	public void finalize() throws Throwable {
 		if (this.file != null) {
-			System.out.println("Warning! fileondisk " + this.field1153 + " not closed correctly using close(). Auto-closing instead. ");
+			System.out.println("Warning! fileondisk " + this.backingFile + " not closed correctly using close(). Auto-closing instead. ");
 			this.close();
 		}
 	}

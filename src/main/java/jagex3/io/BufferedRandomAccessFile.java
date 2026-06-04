@@ -180,7 +180,7 @@ public final class BufferedRandomAccessFile {
 
 	@ObfuscatedName("kj.b(B)Ljava/io/File;")
 	public File method813() {
-		return this.file.method445();
+		return this.file.getBackingFile();
 	}
 
 	@ObfuscatedName("kj.a([BBII)V")

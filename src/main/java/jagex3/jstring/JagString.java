@@ -529,14 +529,14 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("i.a(Ljava/applet/Applet;I)Li;")
-	public JagString method608(Applet arg0) {
+	public JagString getParameter(Applet arg0) {
 		String var2 = new String(this.chars, 0, this.length);
 		String var3 = arg0.getParameter(var2);
 		return var3 == null ? null : method765(var3);
 	}
 
 	@ObfuscatedName("i.a(ZLjava/awt/FontMetrics;)I")
-	public int method609(FontMetrics arg0) {
+	public int stringWidth(FontMetrics arg0) {
 		String var2;
 		try {
 			var2 = new String(this.chars, 0, this.length, "ISO-8859-1");
@@ -547,7 +547,7 @@ public final class JagString implements StringInterface {
 	}
 
 	@ObfuscatedName("i.d(I)V")
-	public void method610() {
+	public void println() {
 		String var1;
 		try {
 			var1 = new String(this.chars, 0, this.length, "ISO-8859-1");
