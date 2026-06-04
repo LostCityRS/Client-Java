@@ -1383,12 +1383,9 @@ public final class Client extends GameShell {
 	public static short field1578 = 1;
 
 	@ObfuscatedName("ke.b(Z)V")
-	public static void errorUsage(boolean arg0) {
+	public static void errorUsage() {
 		System.out.println("Usage: worldid, [live/office/local], [live/rc/wip], [lowmem/highmem], [free/members], [english/german], [game0/game1]");
 		System.exit(1);
-		if (arg0) {
-			JagString.isAlphanumericChar(-33);
-		}
 	}
 
 	@ObfuscatedName("fh.a(B)V")
@@ -1406,7 +1403,7 @@ public final class Client extends GameShell {
 	public static void main(String[] arg0) {
 		try {
 			if (arg0.length != 7) {
-				errorUsage(false);
+				errorUsage();
 			}
 			worldid = Integer.parseInt(arg0[0]);
 			if (arg0[1].equals("live")) {
@@ -1416,7 +1413,7 @@ public final class Client extends GameShell {
 			} else if (arg0[1].equals("local")) {
 				modewhere = 2;
 			} else {
-				errorUsage(false);
+				errorUsage();
 			}
 			if (arg0[2].equals("live")) {
 				modewhat = 0;
@@ -1425,21 +1422,21 @@ public final class Client extends GameShell {
 			} else if (arg0[2].equals("wip")) {
 				modewhat = 2;
 			} else {
-				errorUsage(false);
+				errorUsage();
 			}
 			if (arg0[3].equals("lowmem")) {
 				setLowMem();
 			} else if (arg0[3].equals("highmem")) {
 				setHighMem();
 			} else {
-				errorUsage(false);
+				errorUsage();
 			}
 			if (arg0[4].equals("free")) {
 				memServer = false;
 			} else if (arg0[4].equals("members")) {
 				memServer = true;
 			} else {
-				errorUsage(false);
+				errorUsage();
 			}
 			if (arg0[5].equals("english")) {
 				lang = 0;
@@ -1447,14 +1444,14 @@ public final class Client extends GameShell {
 				TextGerman.swapGerman();
 				lang = 1;
 			} else {
-				errorUsage(false);
+				errorUsage();
 			}
 			if (arg0[6].equals("game0")) {
 				modegame = 0;
 			} else if (arg0[6].equals("game1")) {
 				modegame = 1;
 			} else {
-				errorUsage(false);
+				errorUsage();
 			}
 			affid = 0;
 			settings = AUTO_EMPTY;
@@ -2711,6 +2708,7 @@ public final class Client extends GameShell {
 			loopInterface(0, sHei, 0, 0, sWid, toplevelinterface, 0);
 		}
 		transmitNum++;
+
 		while (true) {
 			HookReq var26;
 			IfType var27;
@@ -2718,170 +2716,7 @@ public final class Client extends GameShell {
 			do {
 				var26 = (HookReq) hookRequestsTimer.popFront();
 				if (var26 == null) {
-					while (true) {
-						HookReq var29;
-						IfType var30;
-						IfType var31;
-						do {
-							var29 = (HookReq) hookRequestsMouseStop.popFront();
-							if (var29 == null) {
-								while (true) {
-									HookReq var32;
-									IfType var33;
-									IfType var34;
-									do {
-										var32 = (HookReq) hookRequests.popFront();
-										if (var32 == null) {
-											if (field3532 && WorldMap.mapCom == null) {
-												field3532 = false;
-											}
-											if (dragCom != null) {
-												loopIf3Drag();
-											}
-											if (World.groundX != -1) {
-												int var35 = World.groundX;
-												int var36 = World.groundZ;
-												boolean var37 = tryMove(0, 0, var36, var35, localPlayer.routeX[0], 0, 0, 0, true, 0, localPlayer.routeZ[0]);
-												World.groundX = -1;
-												if (var37) {
-													crossX = ClientMouseListener.mouseClickX;
-													crossCycle = 0;
-													crossY = ClientMouseListener.mouseClickY;
-													crossMode = 1;
-												}
-											}
-											mouseLoop();
-											if (var25 != overCom) {
-												if (var25 != null) {
-													componentUpdated(var25);
-												}
-												if (overCom != null) {
-													componentUpdated(overCom);
-												}
-											}
-											if (var24 != tooltipCom && tooltipRedraw == tooltipNum) {
-												if (var24 != null) {
-													componentUpdated(var24);
-												}
-												if (tooltipCom != null) {
-													componentUpdated(tooltipCom);
-												}
-											}
-											if (tooltipCom == null) {
-												if (tooltipNum > 0) {
-													tooltipNum--;
-												}
-											} else if (tooltipRedraw > tooltipNum) {
-												tooltipNum++;
-												if (tooltipRedraw == tooltipNum) {
-													componentUpdated(tooltipCom);
-												}
-											}
-											followCamera();
-											if (cinemaCam) {
-												cinemaCamera();
-											}
-											for (int var38 = 0; var38 < 5; var38++) {
-												int var10002 = camShakeCycle[var38]++;
-											}
-											int var39 = ClientMouseListener.getIdleTimer();
-											int var40 = ClientKeyboardListener.getIdleTimer();
-											if (var39 > 4500 && var40 > 4500) {
-												logoutTimer = 250;
-												ClientMouseListener.setIdleTimer(4000);
-												// IDLE_TIMER
-												out.p1Enc(226);
-											}
-											macroCameraCycle++;
-											macroMinimapCycle++;
-											noTimeoutTimer++;
-											if (macroCameraCycle > 500) {
-												macroCameraCycle = 0;
-												int var41 = (int) (Math.random() * 8.0D);
-												if ((var41 & 0x4) == 4) {
-													macroCameraAngle += macroCameraAngleModifier;
-												}
-												if ((var41 & 0x2) == 2) {
-													macroCameraZ += macroCameraZModifier;
-												}
-												if ((var41 & 0x1) == 1) {
-													macroCameraX += macroCameraXModifier;
-												}
-											}
-											if (macroMinimapCycle > 500) {
-												macroMinimapCycle = 0;
-												int var42 = (int) (Math.random() * 8.0D);
-												if ((var42 & 0x2) == 2) {
-													macroMinimapZoom += macroMinimapZoomModifier;
-												}
-												if ((var42 & 0x1) == 1) {
-													macroMinimapAngle += macroMinimapAngleModifier;
-												}
-											}
-											if (macroMinimapZoom < -20) {
-												macroMinimapZoomModifier = 1;
-											}
-											if (macroMinimapZoom > 10) {
-												macroMinimapZoomModifier = -1;
-											}
-											if (macroCameraZ < -55) {
-												macroCameraZModifier = 2;
-											}
-											if (macroMinimapAngle < -60) {
-												macroMinimapAngleModifier = 2;
-											}
-											if (macroCameraAngle < -40) {
-												macroCameraAngleModifier = 1;
-											}
-											if (macroCameraZ > 55) {
-												macroCameraZModifier = -2;
-											}
-											if (macroCameraAngle > 40) {
-												macroCameraAngleModifier = -1;
-											}
-											if (macroMinimapAngle > 60) {
-												macroMinimapAngleModifier = -2;
-											}
-											if (macroCameraX < -50) {
-												macroCameraXModifier = 2;
-											}
-											if (macroCameraX > 50) {
-												macroCameraXModifier = -2;
-											}
-											if (noTimeoutTimer > 50) {
-												// NO_TIMEOUT
-												out.p1Enc(19);
-											}
-											try {
-												if (stream != null && out.pos > 0) {
-													stream.write(out.pos, out.data);
-													out.pos = 0;
-													noTimeoutTimer = 0;
-													return;
-												}
-												return;
-											} catch (IOException var43) {
-												lostCon();
-												return;
-											}
-										}
-										var33 = var32.component;
-										if (var33.subId < 0) {
-											break;
-										}
-										var34 = IfType.get(var33.layerId);
-									} while (var34 == null || var34.subcomponents == null || var33.subId >= var34.subcomponents.length || var34.subcomponents[var33.subId] != var33);
-									ScriptRunner.executeScript(var32);
-								}
-							}
-							var30 = var29.component;
-							if (var30.subId < 0) {
-								break;
-							}
-							var31 = IfType.get(var30.layerId);
-						} while (var31 == null || var31.subcomponents == null || var31.subcomponents.length <= var30.subId || var31.subcomponents[var30.subId] != var30);
-						ScriptRunner.executeScript(var29);
-					}
+					break;
 				}
 				var27 = var26.component;
 				if (var27.subId < 0) {
@@ -2889,7 +2724,185 @@ public final class Client extends GameShell {
 				}
 				var28 = IfType.get(var27.layerId);
 			} while (var28 == null || var28.subcomponents == null || var28.subcomponents.length <= var27.subId || var27 != var28.subcomponents[var27.subId]);
+			if (var26 == null) {
+				break;
+			}
 			ScriptRunner.executeScript(var26);
+		}
+
+		while (true) {
+			HookReq var29;
+			IfType var30;
+			IfType var31;
+			do {
+				var29 = (HookReq) hookRequestsMouseStop.popFront();
+				if (var29 == null) {
+					break;
+				}
+				var30 = var29.component;
+				if (var30.subId < 0) {
+					break;
+				}
+				var31 = IfType.get(var30.layerId);
+			} while (var31 == null || var31.subcomponents == null || var31.subcomponents.length <= var30.subId || var31.subcomponents[var30.subId] != var30);
+			if (var29 == null) {
+				break;
+			}
+			ScriptRunner.executeScript(var29);
+		}
+
+		while (true) {
+			HookReq var32;
+			IfType var33;
+			IfType var34;
+			do {
+				var32 = (HookReq) hookRequests.popFront();
+				if (var32 == null) {
+					break;
+				}
+				var33 = var32.component;
+				if (var33.subId < 0) {
+					break;
+				}
+				var34 = IfType.get(var33.layerId);
+			} while (var34 == null || var34.subcomponents == null || var33.subId >= var34.subcomponents.length || var34.subcomponents[var33.subId] != var33);
+			if (var32 == null) {
+				break;
+			}
+			ScriptRunner.executeScript(var32);
+		}
+
+		if (field3532 && WorldMap.mapCom == null) {
+			field3532 = false;
+		}
+		if (dragCom != null) {
+			loopIf3Drag();
+		}
+		if (World.groundX != -1) {
+			int var35 = World.groundX;
+			int var36 = World.groundZ;
+			boolean var37 = tryMove(0, 0, var36, var35, localPlayer.routeX[0], 0, 0, 0, true, 0, localPlayer.routeZ[0]);
+			World.groundX = -1;
+			if (var37) {
+				crossX = ClientMouseListener.mouseClickX;
+				crossCycle = 0;
+				crossY = ClientMouseListener.mouseClickY;
+				crossMode = 1;
+			}
+		}
+		mouseLoop();
+		if (var25 != overCom) {
+			if (var25 != null) {
+				componentUpdated(var25);
+			}
+			if (overCom != null) {
+				componentUpdated(overCom);
+			}
+		}
+		if (var24 != tooltipCom && tooltipRedraw == tooltipNum) {
+			if (var24 != null) {
+				componentUpdated(var24);
+			}
+			if (tooltipCom != null) {
+				componentUpdated(tooltipCom);
+			}
+		}
+		if (tooltipCom == null) {
+			if (tooltipNum > 0) {
+				tooltipNum--;
+			}
+		} else if (tooltipRedraw > tooltipNum) {
+			tooltipNum++;
+			if (tooltipRedraw == tooltipNum) {
+				componentUpdated(tooltipCom);
+			}
+		}
+		followCamera();
+		if (cinemaCam) {
+			cinemaCamera();
+		}
+		for (int var38 = 0; var38 < 5; var38++) {
+			int var10002 = camShakeCycle[var38]++;
+		}
+		int var39 = ClientMouseListener.getIdleTimer();
+		int var40 = ClientKeyboardListener.getIdleTimer();
+		if (var39 > 4500 && var40 > 4500) {
+			logoutTimer = 250;
+			ClientMouseListener.setIdleTimer(4000);
+			// IDLE_TIMER
+			out.p1Enc(226);
+		}
+		macroCameraCycle++;
+		macroMinimapCycle++;
+		noTimeoutTimer++;
+		if (macroCameraCycle > 500) {
+			macroCameraCycle = 0;
+			int var41 = (int) (Math.random() * 8.0D);
+			if ((var41 & 0x4) == 4) {
+				macroCameraAngle += macroCameraAngleModifier;
+			}
+			if ((var41 & 0x2) == 2) {
+				macroCameraZ += macroCameraZModifier;
+			}
+			if ((var41 & 0x1) == 1) {
+				macroCameraX += macroCameraXModifier;
+			}
+		}
+		if (macroMinimapCycle > 500) {
+			macroMinimapCycle = 0;
+			int var42 = (int) (Math.random() * 8.0D);
+			if ((var42 & 0x2) == 2) {
+				macroMinimapZoom += macroMinimapZoomModifier;
+			}
+			if ((var42 & 0x1) == 1) {
+				macroMinimapAngle += macroMinimapAngleModifier;
+			}
+		}
+		if (macroMinimapZoom < -20) {
+			macroMinimapZoomModifier = 1;
+		}
+		if (macroMinimapZoom > 10) {
+			macroMinimapZoomModifier = -1;
+		}
+		if (macroCameraZ < -55) {
+			macroCameraZModifier = 2;
+		}
+		if (macroMinimapAngle < -60) {
+			macroMinimapAngleModifier = 2;
+		}
+		if (macroCameraAngle < -40) {
+			macroCameraAngleModifier = 1;
+		}
+		if (macroCameraZ > 55) {
+			macroCameraZModifier = -2;
+		}
+		if (macroCameraAngle > 40) {
+			macroCameraAngleModifier = -1;
+		}
+		if (macroMinimapAngle > 60) {
+			macroMinimapAngleModifier = -2;
+		}
+		if (macroCameraX < -50) {
+			macroCameraXModifier = 2;
+		}
+		if (macroCameraX > 50) {
+			macroCameraXModifier = -2;
+		}
+		if (noTimeoutTimer > 50) {
+			// NO_TIMEOUT
+			out.p1Enc(19);
+		}
+		try {
+			if (stream != null && out.pos > 0) {
+				stream.write(out.pos, out.data);
+				out.pos = 0;
+				noTimeoutTimer = 0;
+				return;
+			}
+			return;
+		} catch (IOException var43) {
+			lostCon();
+			return;
 		}
 	}
 
