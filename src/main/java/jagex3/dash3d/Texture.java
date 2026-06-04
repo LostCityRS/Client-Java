@@ -47,11 +47,11 @@ public final class Texture {
 	public Texture() {
 		this.field173 = new int[0];
 		this.field184 = new int[0];
-		this.field179 = new TextureOp0();
-		this.field179.field363 = 1;
-		this.field170 = new TextureOp0();
+		this.field179 = new TextureOpMonoFill();
+		this.field179.opacity = 1;
+		this.field170 = new TextureOpMonoFill();
 		this.field168 = new TextureOp[] { this.field179, this.field170 };
-		this.field170.field363 = 1;
+		this.field170.opacity = 1;
 	}
 
 	public Texture(Packet arg0) {
@@ -62,13 +62,13 @@ public final class Texture {
 		int[][] var5 = new int[var2][];
 		for (int var6 = 0; var6 < var2; var6++) {
 			TextureOp var7 = method674(arg0);
-			if (var7.method124() >= 0) {
+			if (var7.getImageId() >= 0) {
 				var4++;
 			}
-			if (var7.method129() >= 0) {
+			if (var7.getSpriteId() >= 0) {
 				var3++;
 			}
-			int var8 = var7.field376.length;
+			int var8 = var7.inputs.length;
 			var5[var6] = new int[var8];
 			for (int var9 = 0; var9 < var8; var9++) {
 				var5[var6][var9] = arg0.g1();
@@ -81,12 +81,12 @@ public final class Texture {
 		int var11 = 0;
 		for (int var12 = 0; var12 < var2; var12++) {
 			TextureOp var13 = this.field168[var12];
-			int var14 = var13.field376.length;
+			int var14 = var13.inputs.length;
 			for (int var15 = 0; var15 < var14; var15++) {
-				var13.field376[var15] = this.field168[var5[var12][var15]];
+				var13.inputs[var15] = this.field168[var5[var12][var15]];
 			}
-			int var16 = var13.method124();
-			int var17 = var13.method129();
+			int var16 = var13.getImageId();
+			int var17 = var13.getSpriteId();
 			if (var16 > 0) {
 				this.field173[var10++] = var16;
 			}
@@ -102,85 +102,85 @@ public final class Texture {
 	@ObfuscatedName("vd.a(IB)Lc;")
 	public static TextureOp method1552(int arg0) {
 		if (arg0 == 0) {
-			return new TextureOp0();
+			return new TextureOpMonoFill();
 		} else if (arg0 == 1) {
-			return new TextureOp1();
+			return new TextureOpColorFill();
 		} else if (arg0 == 2) {
-			return new TextureOp2();
+			return new TextureOpMonoConst();
 		} else if (arg0 == 3) {
-			return new TextureOp3();
+			return new TextureOpMonoAnim();
 		} else if (arg0 == 4) {
-			return new TextureOp4();
+			return new TextureOpClouds();
 		} else if (arg0 == 5) {
-			return new TextureOp5();
+			return new TextureOpBoxBlur();
 		} else if (arg0 == 6) {
-			return new TextureOp6();
+			return new TextureOpClamp();
 		} else if (arg0 == 7) {
-			return new TextureOp7();
+			return new TextureOpCombine();
 		} else if (arg0 == 8) {
-			return new TextureOp8();
+			return new TextureOpCurve();
 		} else if (arg0 == 9) {
-			return new TextureOp9();
+			return new TextureOpFlip();
 		} else if (arg0 == 10) {
-			return new TextureOp10();
+			return new TextureOpColorRamp();
 		} else if (arg0 == 11) {
-			return new TextureOp11();
+			return new TextureOpColorize();
 		} else if (arg0 == 12) {
-			return new TextureOp12();
+			return new TextureOpRadial();
 		} else if (arg0 == 13) {
-			return new TextureOp13();
+			return new TextureOpHashNoise();
 		} else if (arg0 == 14) {
-			return new TextureOp14();
+			return new TextureOpFrame();
 		} else if (arg0 == 15) {
-			return new TextureOp15();
+			return new TextureOpVoronoi();
 		} else if (arg0 == 16) {
-			return new TextureOp16();
+			return new TextureOpBrick();
 		} else if (arg0 == 17) {
-			return new TextureOp17();
+			return new TextureOpHSL();
 		} else if (arg0 == 18) {
-			return new TextureOp18();
+			return new TextureOpImageTile();
 		} else if (arg0 == 19) {
-			return new TextureOp19();
+			return new TextureOpDisplace();
 		} else if (arg0 == 20) {
-			return new TextureOp20();
+			return new TextureOpPixelate();
 		} else if (arg0 == 21) {
-			return new TextureOp21();
+			return new TextureOpLerp();
 		} else if (arg0 == 22) {
-			return new TextureOp22();
+			return new TextureOpInvert();
 		} else if (arg0 == 23) {
-			return new TextureOp23();
+			return new TextureOpPolar();
 		} else if (arg0 == 24) {
-			return new TextureOp24();
+			return new TextureOpGrayscale();
 		} else if (arg0 == 25) {
-			return new TextureOp25();
+			return new TextureOpChromaReplace();
 		} else if (arg0 == 26) {
-			return new TextureOp26();
+			return new TextureOpThreshold();
 		} else if (arg0 == 27) {
-			return new TextureOp27();
+			return new TextureOpStripes();
 		} else if (arg0 == 28) {
-			return new TextureOp28();
+			return new TextureOpWood();
 		} else if (arg0 == 29) {
-			return new TextureOp29();
+			return new TextureOpVector();
 		} else if (arg0 == 30) {
-			return new TextureOp30();
+			return new TextureOpRemap();
 		} else if (arg0 == 31) {
-			return new TextureOp31();
+			return new TextureOpMandelbrot();
 		} else if (arg0 == 32) {
-			return new TextureOp32();
+			return new TextureOpLighting();
 		} else if (arg0 == 33) {
-			return new TextureOp33();
+			return new TextureOpNormalMap();
 		} else if (arg0 == 34) {
-			return new TextureOp34();
+			return new TextureOpSineWaves();
 		} else if (arg0 == 35) {
-			return new TextureOp35();
+			return new TextureOpEdgeDetect();
 		} else if (arg0 == 36) {
-			return new TextureOp36();
+			return new TextureOpSprite();
 		} else if (arg0 == 37) {
-			return new TextureOp37();
+			return new TextureOpStar();
 		} else if (arg0 == 38) {
-			return new TextureOp38();
+			return new TextureOpSparkle();
 		} else if (arg0 == 39) {
-			return new TextureOp39();
+			return new TextureOpImage();
 		} else {
 			return null;
 		}
@@ -191,13 +191,13 @@ public final class Texture {
 		arg0.g1();
 		int var1 = arg0.g1();
 		TextureOp var2 = method1552(var1);
-		var2.field363 = arg0.g1();
+		var2.opacity = arg0.g1();
 		int var3 = arg0.g1();
 		for (int var4 = 0; var4 < var3; var4++) {
 			int var5 = arg0.g1();
-			var2.method11(arg0, var5);
+			var2.decode(arg0, var5);
 		}
-		var2.method123();
+		var2.postDecode();
 		return var2;
 	}
 
@@ -246,7 +246,7 @@ public final class Texture {
 		field684 = arg3;
 		method802(arg1, arg5);
 		for (int var9 = 0; var9 < this.field168.length; var9++) {
-			this.field168[var9].method128(arg1, arg5);
+			this.field168[var9].createCache(arg1, arg5);
 		}
 		int[] var10 = new int[arg5 * arg1];
 		int var11;
@@ -269,13 +269,13 @@ public final class Texture {
 			int[] var17;
 			int[] var18;
 			int[] var19;
-			if (this.field179.field369) {
-				int[] var20 = this.field179.method54(var15);
+			if (this.field179.monochrome) {
+				int[] var20 = this.field179.renderMono(var15);
 				var18 = var20;
 				var17 = var20;
 				var19 = var20;
 			} else {
-				int[][] var16 = this.field179.method7(var15);
+				int[][] var16 = this.field179.renderColor(var15);
 				var17 = var16[1];
 				var18 = var16[0];
 				var19 = var16[2];
@@ -312,7 +312,7 @@ public final class Texture {
 			}
 		}
 		for (int var28 = 0; var28 < this.field168.length; var28++) {
-			this.field168[var28].method127();
+			this.field168[var28].clearCache();
 		}
 		return var10;
 	}

@@ -92,7 +92,7 @@ public class ClientBuild {
 		boolean var4 = true;
 		int var5 = -1;
 		label68: while (true) {
-			int var6 = var3.method332();
+			int var6 = var3.gVarSmart();
 			if (var6 == 0) {
 				return var4;
 			}
@@ -110,13 +110,13 @@ public class ClientBuild {
 							do {
 								do {
 									while (var8) {
-										int var16 = var3.method350();
+										int var16 = var3.gsmart();
 										if (var16 == 0) {
 											continue label68;
 										}
 										var3.g1();
 									}
-									int var9 = var3.method350();
+									int var9 = var3.gsmart();
 									if (var9 == 0) {
 										continue label68;
 									}
@@ -592,14 +592,14 @@ public class ClientBuild {
 		Packet var4 = new Packet(arg1);
 		int var5 = -1;
 		while (true) {
-			int var6 = var4.method332();
+			int var6 = var4.gVarSmart();
 			if (var6 == 0) {
 				return;
 			}
 			var5 += var6;
 			int var7 = 0;
 			while (true) {
-				int var8 = var4.method350();
+				int var8 = var4.gsmart();
 				if (var8 == 0) {
 					break;
 				}
@@ -672,14 +672,14 @@ public class ClientBuild {
 		int var9 = -1;
 		Packet var10 = new Packet(arg5);
 		while (true) {
-			int var11 = var10.method332();
+			int var11 = var10.gVarSmart();
 			if (var11 == 0) {
 				return;
 			}
 			int var12 = 0;
 			var9 += var11;
 			while (true) {
-				int var13 = var10.method350();
+				int var13 = var10.gsmart();
 				if (var13 == 0) {
 					break;
 				}
@@ -692,8 +692,8 @@ public class ClientBuild {
 				int var19 = var17 & 0x3;
 				if (arg6 == var16 && arg1 <= var14 && var14 < arg1 + 8 && arg3 <= var15 && var15 < arg3 + 8) {
 					LocType var20 = LocType.list(var9);
-					int var21 = RegionRotate.method469(var20.width, arg0, var15 & 0x7, var14 & 0x7, var20.length, var19) + arg8;
-					int var22 = RegionRotate.method742(var15 & 0x7, var14 & 0x7, var19, var20.length, var20.width, arg0) + arg7;
+					int var21 = RegionRotate.DX(var20.width, arg0, var15 & 0x7, var14 & 0x7, var20.length, var19) + arg8;
+					int var22 = RegionRotate.DZ(var15 & 0x7, var14 & 0x7, var19, var20.length, var20.width, arg0) + arg7;
 					if (var21 > 0 && var22 > 0 && var21 < 103 && var22 < 103) {
 						CollisionMap var23 = null;
 						int var24 = arg4;
@@ -1161,7 +1161,7 @@ public class ClientBuild {
 			for (int var13 = 0; var13 < 64; var13++) {
 				for (int var14 = 0; var14 < 64; var14++) {
 					if (var12 == arg5 && var13 >= arg2 && var13 < arg2 + 8 && var14 >= arg3 && var14 < arg3 + 8) {
-						loadGroundSquare(RegionRotate.method1606(arg1, var13 & 0x7, var14 & 0x7) + arg0, var11, 0, 0, arg7 + RegionRotate.method1069(var14 & 0x7, var13 & 0x7, arg1), arg1, arg8);
+						loadGroundSquare(RegionRotate.DX(arg1, var13 & 0x7, var14 & 0x7) + arg0, var11, 0, 0, arg7 + RegionRotate.DZ(var14 & 0x7, var13 & 0x7, arg1), arg1, arg8);
 					} else {
 						loadGroundSquare(-1, var11, 0, 0, -1, 0, 0);
 					}

@@ -349,10 +349,10 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ea.f(B)I")
-	public final int method332() {
+	public final int gVarSmart() {
 		int var1 = 0;
 		int var2;
-		for (var2 = this.method350(); var2 == 32767; var2 = this.method350()) {
+		for (var2 = this.gsmart(); var2 == 32767; var2 = this.gsmart()) {
 			var1 += 32767;
 		}
 		return var1 + var2;
@@ -465,7 +465,7 @@ public class Packet extends Linkable {
 	}
 
 	@ObfuscatedName("ea.q(I)I")
-	public final int method350() {
+	public final int gsmart() {
 		int var1 = this.data[this.pos] & 0xFF;
 		return var1 < 128 ? this.g1() : this.g2() - 32768;
 	}

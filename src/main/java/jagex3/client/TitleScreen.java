@@ -434,9 +434,9 @@ public class TitleScreen {
 		byte[] var3 = arg0.getFile(0, titleJpgId);
 		titleBack = new SoftwarePix32(var3, arg1);
 		titleBack2 = titleBack.copyHFlip();
-		logo = PixLoader.method826(logoId, arg2);
-		titleBox = PixLoader.method826(titleboxId, arg2);
-		titleBut = PixLoader.method826(titlebuttonId, arg2);
+		logo = PixLoader.makePix8_(logoId, arg2);
+		titleBox = PixLoader.makePix8_(titleboxId, arg2);
+		titleBut = PixLoader.makePix8_(titlebuttonId, arg2);
 		runes = PixLoader.makeSoftwarePix8Array(arg2, runesId);
 		titleMute = PixLoader.makePix8Array(arg2, titleMuteId);
 		flameGradient0 = new int[256];

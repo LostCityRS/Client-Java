@@ -27,7 +27,7 @@ public class WordPack {
 	public static JagString unpack(Packet arg0) {
 		try {
 			JagString var1 = new JagString();
-			var1.length = arg0.method350();
+			var1.length = arg0.gsmart();
 			if (var1.length > 32767) {
 				var1.length = 32767;
 			}

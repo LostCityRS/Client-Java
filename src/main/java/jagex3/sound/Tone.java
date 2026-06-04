@@ -310,16 +310,16 @@ public final class Tone {
 			this.attack.load(arg0);
 		}
 		for (int var5 = 0; var5 < 10; var5++) {
-			int var6 = arg0.method350();
+			int var6 = arg0.gsmart();
 			if (var6 == 0) {
 				break;
 			}
 			this.harmonicVolume[var5] = var6;
 			this.harmonicSemitone[var5] = arg0.method342();
-			this.harmonicDelay[var5] = arg0.method350();
+			this.harmonicDelay[var5] = arg0.gsmart();
 		}
-		this.reverbDelay = arg0.method350();
-		this.reverbVolume = arg0.method350();
+		this.reverbDelay = arg0.gsmart();
+		this.reverbVolume = arg0.gsmart();
 		this.length = arg0.g2();
 		this.start = arg0.g2();
 		this.filter = new Filter();

@@ -87,21 +87,21 @@ public class PixLoader {
 		for (int var1 = 0; var1 < count; var1++) {
 			var0[var1] = new SoftwarePix8(owi, ohi, xof[var1], yof[var1], wi[var1], hi[var1], bspr[var1], bpal);
 		}
-		method1578();
+		unload();
 		return var0;
 	}
 
 	@ObfuscatedName("pa.a(I)Lrh;")
 	public static SoftwarePix8 makeSoftwarePix8() {
 		SoftwarePix8 var0 = new SoftwarePix8(owi, ohi, xof[0], yof[0], wi[0], hi[0], bspr[0], bpal);
-		method1578();
+		unload();
 		return var0;
 	}
 
 	@ObfuscatedName("cd.b(B)Llj;")
 	public static Pix8 makePix8() {
 		SoftwarePix8 var0 = new SoftwarePix8(owi, ohi, xof[0], yof[0], wi[0], hi[0], bspr[0], bpal);
-		method1578();
+		unload();
 		return var0;
 	}
 
@@ -111,7 +111,7 @@ public class PixLoader {
 			return null;
 		} else {
 			SoftwarePixFont var1 = new SoftwarePixFont(arg0, xof, yof, wi, hi, bspr);
-			method1578();
+			unload();
 			return var1;
 		}
 	}
@@ -128,12 +128,12 @@ public class PixLoader {
 			}
 			var0[var1] = new SoftwarePix32(owi, ohi, xof[var1], yof[var1], wi[var1], hi[var1], var4);
 		}
-		method1578();
+		unload();
 		return var0;
 	}
 
 	@ObfuscatedName("bi.a(B)[Lrc;")
-	public static Pix32[] method100() {
+	public static Pix32[] makePix32Array() {
 		Pix32[] var0 = new Pix32[count];
 		for (int var1 = 0; var1 < count; var1++) {
 			int var2 = hi[var1] * wi[var1];
@@ -144,7 +144,7 @@ public class PixLoader {
 			}
 			var0[var1] = new SoftwarePix32(owi, ohi, xof[var1], yof[var1], wi[var1], hi[var1], var3);
 		}
-		method1578();
+		unload();
 		return var0;
 	}
 
@@ -157,7 +157,7 @@ public class PixLoader {
 			var2[var3] = bpal[var0[var3] & 0xFF];
 		}
 		SoftwarePix32 var4 = new SoftwarePix32(owi, ohi, xof[0], yof[0], wi[0], hi[0], var2);
-		method1578();
+		unload();
 		return var4;
 	}
 
@@ -167,7 +167,7 @@ public class PixLoader {
 		for (int var1 = 0; var1 < count; var1++) {
 			var0[var1] = new SoftwarePix8(owi, ohi, xof[var1], yof[var1], wi[var1], hi[var1], bspr[var1], bpal);
 		}
-		method1578();
+		unload();
 		return var0;
 	}
 
@@ -190,12 +190,12 @@ public class PixLoader {
 			var2[var3] = bpal[var0[var3] & 0xFF];
 		}
 		SoftwarePix32 var4 = new SoftwarePix32(owi, ohi, xof[0], yof[0], wi[0], hi[0], var2);
-		method1578();
+		unload();
 		return var4;
 	}
 
 	@ObfuscatedName("w.a(I)V")
-	public static void method1578() {
+	public static void unload() {
 		xof = null;
 		hi = null;
 		yof = null;
@@ -222,7 +222,7 @@ public class PixLoader {
 
 	@ObfuscatedName("d.a(ILnb;II)[Lrc;")
 	public static Pix32[] makePix32Array(int arg0, Js5 arg1, int arg2) {
-		return depack(arg1, arg2, arg0) ? method100() : null;
+		return depack(arg1, arg2, arg0) ? makePix32Array() : null;
 	}
 
 	@ObfuscatedName("jh.a(ILnb;IILnb;)Lcc;")
@@ -321,7 +321,7 @@ public class PixLoader {
 	}
 
 	@ObfuscatedName("lb.a(BILnb;)Llj;")
-	public static Pix8 method826(int arg0, Js5 arg1) {
+	public static Pix8 makePix8_(int arg0, Js5 arg1) {
 		return depack(arg0, arg1) ? makePix8() : null;
 	}
 

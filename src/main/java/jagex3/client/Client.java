@@ -7085,7 +7085,7 @@ public final class Client extends GameShell {
 				var236 = IfType.get(var234);
 			}
 			while (in.pos < psize) {
-				int var237 = in.method350();
+				int var237 = in.gsmart();
 				int var238 = in.g2();
 				int var239 = 0;
 				if (var238 != 0) {
