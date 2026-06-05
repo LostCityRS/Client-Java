@@ -9,84 +9,84 @@ import jagex3.js5.Js5;
 public final class GlTexture extends Linkable2 {
 
 	@ObfuscatedName("ug.a")
-	public static int[] field4218;
+	public static int[] animationBuffer;
 	@ObfuscatedName("sc.R")
-	public boolean field3800 = false;
+	public boolean needsAnimation = false;
 
 	@ObfuscatedName("sc.I")
-	public final Texture field3791;
+	public final Texture texture;
 
 	@ObfuscatedName("sc.L")
-	public final boolean field3794;
+	public final boolean smooth;
 
 	@ObfuscatedName("sc.S")
-	public final boolean field3801;
+	public final boolean columnMajor;
 
 	@ObfuscatedName("sc.H")
-	public final int field3790;
+	public final int scrollXSpeed;
 
 	@ObfuscatedName("sc.Y")
-	public final int field3807;
+	public final int scrollYSpeed;
 
 	@ObfuscatedName("sc.P")
-	public float field3798;
+	public float brightness;
 
 	@ObfuscatedName("sc.Z")
-	public int[] field3808;
+	public int[] texels;
 
 	public GlTexture(Packet arg0) {
-		this.field3791 = new Texture(arg0);
-		this.field3794 = arg0.g1() == 1;
-		this.field3801 = arg0.g1() == 1;
+		this.texture = new Texture(arg0);
+		this.smooth = arg0.g1() == 1;
+		this.columnMajor = arg0.g1() == 1;
 		arg0.g1();
 		arg0.g1();
 		int var2 = arg0.g1() & 0x3;
-		this.field3790 = arg0.g1b();
-		this.field3807 = arg0.g1b();
+		this.scrollXSpeed = arg0.g1b();
+		this.scrollYSpeed = arg0.g1b();
 		arg0.g1();
 		arg0.g1();
 	}
 
 	@ObfuscatedName("sc.a(Lnb;ZZLfe;)[I")
-	public int[] method1366(Js5 arg0, boolean arg1, TextureProvider arg2) {
-		if (this.field3791.checkLoaded(arg2, arg0)) {
+	public int[] getTextures(Js5 arg0, boolean arg1, TextureProvider arg2) {
+		if (this.texture.isReady(arg2, arg0)) {
 			int var4 = arg1 ? 64 : 128;
-			return this.field3791.render(1.0D, var4, this.field3801, arg0, arg2, var4, false);
+			return this.texture.render(1.0D, var4, this.columnMajor, arg0, arg2, var4, false);
 		} else {
 			return null;
 		}
 	}
 
 	@ObfuscatedName("sc.b(IZ)V")
-	public void method1367(int arg0) {
-		if (this.field3808 == null || this.field3807 == 0 && this.field3790 == 0) {
+	public void animate(int arg0) {
+		if (this.texels == null || this.scrollYSpeed == 0 && this.scrollXSpeed == 0) {
 			return;
 		}
-		if (field4218 == null || field4218.length < this.field3808.length) {
-			field4218 = new int[this.field3808.length];
+		if (animationBuffer == null || animationBuffer.length < this.texels.length) {
+			animationBuffer = new int[this.texels.length];
 		}
-		int var2 = this.field3808.length;
-		int var3 = this.field3790 * arg0;
+		int var2 = this.texels.length;
+		int var3 = this.scrollXSpeed * arg0;
 		int var4 = var2 - 1;
-		int var5 = this.field3808.length == 4096 ? 64 : 128;
-		int var6 = var5 * arg0 * this.field3807;
+		int var5 = this.texels.length == 4096 ? 64 : 128;
+		int var6 = var5 * arg0 * this.scrollYSpeed;
 		int var7 = var5 - 1;
 		for (int var8 = 0; var8 < var2; var8 += var5) {
 			int var9 = var8 + var6 & var4;
 			for (int var10 = 0; var10 < var5; var10++) {
 				int var11 = var8 + var10;
 				int var12 = var9 + (var7 & var3 + var10);
-				field4218[var11] = this.field3808[var12];
+				animationBuffer[var11] = this.texels[var12];
 			}
 		}
-		int[] var13 = this.field3808;
-		this.field3808 = field4218;
-		field4218 = var13;
+		int[] var13 = this.texels;
+		this.texels = animationBuffer;
+		animationBuffer = var13;
 	}
 
 	@ObfuscatedName("sc.a(Lfe;ILnb;)Z")
-	public boolean method1368(TextureProvider arg0, Js5 arg1) {
-		return this.field3791.checkLoaded(arg0, arg1);
+	public boolean isReady(TextureProvider arg0, Js5 arg1) {
+		return this.texture.isReady(arg0, arg1);
 	}
 
 	@Override
@@ -95,15 +95,15 @@ public final class GlTexture extends Linkable2 {
 	}
 
 	@ObfuscatedName("sc.a(Lfe;FLnb;ZZ)[I")
-	public int[] method1369(TextureProvider arg0, float arg1, Js5 arg2, boolean arg3) {
-		if (this.field3808 == null || arg1 != this.field3798) {
-			if (!this.field3791.checkLoaded(arg0, arg2)) {
+	public int[] getTexels(TextureProvider arg0, float arg1, Js5 arg2, boolean arg3) {
+		if (this.texels == null || arg1 != this.brightness) {
+			if (!this.texture.isReady(arg0, arg2)) {
 				return null;
 			}
 			int var5 = arg3 ? 64 : 128;
-			this.field3808 = this.field3791.render((double) arg1, var5, this.field3801, arg2, arg0, var5, true);
-			this.field3798 = arg1;
-			if (this.field3794) {
+			this.texels = this.texture.render((double) arg1, var5, this.columnMajor, arg2, arg0, var5, true);
+			this.brightness = arg1;
+			if (this.smooth) {
 				int[] var6 = new int[var5];
 				int[] var7 = new int[var5 * var5];
 				int[] var8 = new int[var5];
@@ -116,7 +116,7 @@ public final class GlTexture extends Linkable2 {
 				for (int var15 = 2; var15 >= 0; var15--) {
 					for (int var16 = var13; var16 >= 0; var16--) {
 						var10--;
-						int var17 = this.field3808[var10];
+						int var17 = this.texels[var10];
 						var6[var16] += var17 >> 16 & 0xFF;
 						var9[var16] += var17 >> 8 & 0xFF;
 						var8[var16] += var17 & 0xFF;
@@ -161,9 +161,9 @@ public final class GlTexture extends Linkable2 {
 					}
 					for (int var30 = var13; var30 >= 0; var30--) {
 						var11--;
-						int var31 = this.field3808[var11];
+						int var31 = this.texels[var11];
 						var10--;
-						int var32 = this.field3808[var10];
+						int var32 = this.texels[var10];
 						var6[var30] += (var32 >> 16 & 0xFF) - ((var31 & 0xFF6387) >> 16);
 						var9[var30] += (var32 >> 8 & 0xFF) - (var31 >> 8 & 0xFF);
 						var8[var30] += (var32 & 0xFF) - (var31 & 0xFF);
@@ -175,9 +175,9 @@ public final class GlTexture extends Linkable2 {
 						var10 = var14;
 					}
 				}
-				this.field3808 = var7;
+				this.texels = var7;
 			}
 		}
-		return this.field3808;
+		return this.texels;
 	}
 }

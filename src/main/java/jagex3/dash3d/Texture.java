@@ -30,33 +30,33 @@ public final class Texture {
 	@ObfuscatedName("tg.i")
 	public static double lastGamma = -1.0D;
 	@ObfuscatedName("b.a")
-	public final TextureOp[] field168;
+	public final TextureOp[] ops;
 
 	@ObfuscatedName("b.c")
-	public final TextureOp field170;
+	public final TextureOp alphaOp;
 
 	@ObfuscatedName("b.f")
-	public final int[] field173;
+	public final int[] spriteIds;
 
 	@ObfuscatedName("b.l")
-	public final TextureOp field179;
+	public final TextureOp colourOp;
 
 	@ObfuscatedName("b.q")
-	public final int[] field184;
+	public final int[] textureIds;
 
 	public Texture() {
-		this.field173 = new int[0];
-		this.field184 = new int[0];
-		this.field179 = new TextureOpMonoFill();
-		this.field179.opacity = 1;
-		this.field170 = new TextureOpMonoFill();
-		this.field168 = new TextureOp[] { this.field179, this.field170 };
-		this.field170.opacity = 1;
+		this.spriteIds = new int[0];
+		this.textureIds = new int[0];
+		this.colourOp = new TextureOpMonoFill();
+		this.colourOp.opacity = 1;
+		this.alphaOp = new TextureOpMonoFill();
+		this.ops = new TextureOp[] { this.colourOp, this.alphaOp};
+		this.alphaOp.opacity = 1;
 	}
 
 	public Texture(Packet arg0) {
 		int var2 = arg0.g1();
-		this.field168 = new TextureOp[var2];
+		this.ops = new TextureOp[var2];
 		int var3 = 0;
 		int var4 = 0;
 		int[][] var5 = new int[var2][];
@@ -73,30 +73,30 @@ public final class Texture {
 			for (int var9 = 0; var9 < var8; var9++) {
 				var5[var6][var9] = arg0.g1();
 			}
-			this.field168[var6] = var7;
+			this.ops[var6] = var7;
 		}
-		this.field173 = new int[var4];
-		this.field184 = new int[var3];
+		this.spriteIds = new int[var4];
+		this.textureIds = new int[var3];
 		int var10 = 0;
 		int var11 = 0;
 		for (int var12 = 0; var12 < var2; var12++) {
-			TextureOp var13 = this.field168[var12];
+			TextureOp var13 = this.ops[var12];
 			int var14 = var13.inputs.length;
 			for (int var15 = 0; var15 < var14; var15++) {
-				var13.inputs[var15] = this.field168[var5[var12][var15]];
+				var13.inputs[var15] = this.ops[var5[var12][var15]];
 			}
 			int var16 = var13.getImageId();
 			int var17 = var13.getSpriteId();
 			if (var16 > 0) {
-				this.field173[var10++] = var16;
+				this.spriteIds[var10++] = var16;
 			}
 			if (var17 > 0) {
-				this.field184[var11++] = var17;
+				this.textureIds[var11++] = var17;
 			}
 			var5[var12] = null;
 		}
-		this.field179 = this.field168[arg0.g1()];
-		this.field170 = this.field168[arg0.g1()];
+		this.colourOp = this.ops[arg0.g1()];
+		this.alphaOp = this.ops[arg0.g1()];
 	}
 
 	@ObfuscatedName("vd.a(IB)Lc;")
@@ -104,7 +104,7 @@ public final class Texture {
 		if (arg0 == 0) {
 			return new TextureOpMonoFill();
 		} else if (arg0 == 1) {
-			return new TextureOpColorFill();
+			return new TextureOpColourFill();
 		} else if (arg0 == 2) {
 			return new TextureOpMonoConst();
 		} else if (arg0 == 3) {
@@ -122,9 +122,9 @@ public final class Texture {
 		} else if (arg0 == 9) {
 			return new TextureOpFlip();
 		} else if (arg0 == 10) {
-			return new TextureOpColorRamp();
+			return new TextureOpColourRamp();
 		} else if (arg0 == 11) {
-			return new TextureOpColorize();
+			return new TextureOpColourize();
 		} else if (arg0 == 12) {
 			return new TextureOpRadial();
 		} else if (arg0 == 13) {
@@ -245,8 +245,8 @@ public final class Texture {
 		textureProvider = arg4;
 		sprites = arg3;
 		setDimensions(arg1, arg5);
-		for (int var9 = 0; var9 < this.field168.length; var9++) {
-			this.field168[var9].createCache(arg1, arg5);
+		for (int var9 = 0; var9 < this.ops.length; var9++) {
+			this.ops[var9].createCache(arg1, arg5);
 		}
 		int[] var10 = new int[arg5 * arg1];
 		int var11;
@@ -269,13 +269,13 @@ public final class Texture {
 			int[] var17;
 			int[] var18;
 			int[] var19;
-			if (this.field179.monochrome) {
-				int[] var20 = this.field179.renderMono(var15);
+			if (this.colourOp.monochrome) {
+				int[] var20 = this.colourOp.renderMono(var15);
 				var18 = var20;
 				var17 = var20;
 				var19 = var20;
 			} else {
-				int[][] var16 = this.field179.renderColor(var15);
+				int[][] var16 = this.colourOp.renderColour(var15);
 				var17 = var16[1];
 				var18 = var16[0];
 				var19 = var16[2];
@@ -311,21 +311,21 @@ public final class Texture {
 				}
 			}
 		}
-		for (int var28 = 0; var28 < this.field168.length; var28++) {
-			this.field168[var28].clearCache();
+		for (int var28 = 0; var28 < this.ops.length; var28++) {
+			this.ops[var28].clearCache();
 		}
 		return var10;
 	}
 
 	@ObfuscatedName("b.a(Lfe;Lnb;I)Z")
-	public boolean checkLoaded(TextureProvider arg0, Js5 arg1) {
-		for (int var3 = 0; var3 < this.field173.length; var3++) {
-			if (!arg1.requestDownload(this.field173[var3])) {
+	public boolean isReady(TextureProvider arg0, Js5 arg1) {
+		for (int var3 = 0; var3 < this.spriteIds.length; var3++) {
+			if (!arg1.requestDownload(this.spriteIds[var3])) {
 				return false;
 			}
 		}
-		for (int var4 = 0; var4 < this.field184.length; var4++) {
-			if (!arg0.isLoaded(this.field184[var4])) {
+		for (int var4 = 0; var4 < this.textureIds.length; var4++) {
+			if (!arg0.isLoaded(this.textureIds[var4])) {
 				return false;
 			}
 		}

@@ -42,12 +42,12 @@ public final class TextureOpLerp extends TextureOp {
 
 	@ObfuscatedName("d.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
 			int[] var3 = this.getInputMono(arg0, 2);
-			int[][] var4 = this.getInputColor(0, arg0);
-			int[][] var5 = this.getInputColor(1, arg0);
+			int[][] var4 = this.getInputColour(0, arg0);
+			int[][] var5 = this.getInputColour(1, arg0);
 			int[] var6 = var4[2];
 			int[] var7 = var5[0];
 			int[] var8 = var2[0];

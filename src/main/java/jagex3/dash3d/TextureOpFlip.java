@@ -31,10 +31,10 @@ public final class TextureOpFlip extends TextureOp {
 
 	@ObfuscatedName("fa.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
-			int[][] var3 = this.getInputColor(0, this.flipY ? Texture.heightMask - arg0 : arg0);
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
+			int[][] var3 = this.getInputColour(0, this.flipY ? Texture.heightMask - arg0 : arg0);
 			int[] var4 = var3[0];
 			int[] var5 = var3[2];
 			int[] var6 = var3[1];

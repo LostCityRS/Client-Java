@@ -14,7 +14,7 @@ public final class TextureOpGrayscale extends TextureOp {
 	public int[] renderMono(int arg0) {
 		int[] var2 = super.monoCache.getFrame(arg0);
 		if (super.monoCache.field3098) {
-			int[][] var3 = this.getInputColor(0, arg0);
+			int[][] var3 = this.getInputColour(0, arg0);
 			int[] var4 = var3[1];
 			int[] var5 = var3[2];
 			int[] var6 = var3[0];

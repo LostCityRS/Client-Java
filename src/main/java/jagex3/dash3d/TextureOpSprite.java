@@ -24,9 +24,9 @@ public final class TextureOpSprite extends TextureOp {
 
 	@ObfuscatedName("s.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310 && this.loadSprite()) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310 && this.loadSprite()) {
 			int var3 = this.height * (Texture.height == this.width ? arg0 : arg0 * this.width / Texture.height);
 			int[] var4 = var2[0];
 			int[] var5 = var2[1];

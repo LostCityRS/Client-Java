@@ -1274,9 +1274,9 @@ public final class SoftwareModelLit extends ModelLit {
 			var17.labelFaces = this.labelFaces;
 			var17.useAABBMouseCheck = super.useAABBMouseCheck;
 			if (arg0 == 3) {
-				var17.pointX = ArrayUtil.method169(this.pointX);
-				var17.pointY = ArrayUtil.method169(this.pointY);
-				var17.pointZ = ArrayUtil.method169(this.pointZ);
+				var17.pointX = ArrayUtil.copy(this.pointX);
+				var17.pointY = ArrayUtil.copy(this.pointY);
+				var17.pointZ = ArrayUtil.copy(this.pointZ);
 			} else {
 				var17.pointX = this.pointX;
 				var17.pointY = new int[var17.numPoints];

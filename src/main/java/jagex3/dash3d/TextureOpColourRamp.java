@@ -4,7 +4,7 @@ import deob.ObfuscatedName;
 import jagex3.io.Packet;
 
 @ObfuscatedName("ub")
-public final class TextureOpColorRamp extends TextureOp {
+public final class TextureOpColourRamp extends TextureOp {
 
 	@ObfuscatedName("ub.eb")
 	public final int[] colorLut = new int[257];
@@ -12,7 +12,7 @@ public final class TextureOpColorRamp extends TextureOp {
 	@ObfuscatedName("ub.V")
 	public int[][] gradientStops;
 
-	public TextureOpColorRamp() {
+	public TextureOpColourRamp() {
 		super(1, false);
 	}
 
@@ -298,9 +298,9 @@ public final class TextureOpColorRamp extends TextureOp {
 
 	@ObfuscatedName("ub.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
 			int[] var3 = this.getInputMono(arg0, 0);
 			int[] var4 = var2[0];
 			int[] var5 = var2[1];

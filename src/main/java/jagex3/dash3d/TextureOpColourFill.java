@@ -4,7 +4,7 @@ import deob.ObfuscatedName;
 import jagex3.io.Packet;
 
 @ObfuscatedName("md")
-public final class TextureOpColorFill extends TextureOp {
+public final class TextureOpColourFill extends TextureOp {
 
 	@ObfuscatedName("md.gb")
 	public int red;
@@ -15,11 +15,11 @@ public final class TextureOpColorFill extends TextureOp {
 	@ObfuscatedName("md.R")
 	public int blue;
 
-	public TextureOpColorFill() {
+	public TextureOpColourFill() {
 		this(0);
 	}
 
-	public TextureOpColorFill(int arg0) {
+	public TextureOpColourFill(int arg0) {
 		super(0, false);
 		this.setColor(0);
 	}
@@ -41,9 +41,9 @@ public final class TextureOpColorFill extends TextureOp {
 
 	@ObfuscatedName("md.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
 			int[] var3 = var2[0];
 			int[] var4 = var2[2];
 			int[] var5 = var2[1];

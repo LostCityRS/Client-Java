@@ -32,9 +32,9 @@ public class TextureOpImage extends TextureOp {
 
 	@ObfuscatedName("mi.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310 && this.loadImage()) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310 && this.loadImage()) {
 			int[] var3 = var2[1];
 			int[] var4 = var2[2];
 			int var5 = this.width * (this.height == Texture.height ? arg0 : this.height * arg0 / Texture.height);

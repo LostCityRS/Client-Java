@@ -122,7 +122,7 @@ public final class ArrayUtil {
 	}
 
     @ObfuscatedName("cd.a([IB)[I")
-    public static int[] method169(int[] arg0) {
+    public static int[] copy(int[] arg0) {
         if (arg0 == null) {
             return null;
         } else {

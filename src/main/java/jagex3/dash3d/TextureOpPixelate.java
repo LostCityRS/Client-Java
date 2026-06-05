@@ -54,17 +54,17 @@ public final class TextureOpPixelate extends TextureOp {
 
 	@ObfuscatedName("aj.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
 			int var3 = Texture.height / this.pixelSizeY;
 			int var4 = Texture.width / this.pixelSizeX;
 			int[][] var6;
 			if (var3 > 0) {
 				int var5 = arg0 % var3;
-				var6 = this.getInputColor(0, Texture.height * var5 / var3);
+				var6 = this.getInputColour(0, Texture.height * var5 / var3);
 			} else {
-				var6 = this.getInputColor(0, 0);
+				var6 = this.getInputColour(0, 0);
 			}
 			int[] var7 = var6[0];
 			int[] var8 = var6[1];

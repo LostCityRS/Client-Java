@@ -1147,12 +1147,12 @@ public final class TextureOpVector extends TextureOp {
 
 	@ObfuscatedName("mb.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
 			int var3 = Texture.width;
 			int var4 = Texture.height;
-			int[][][] var5 = super.colorCache.getAllFrames();
+			int[][][] var5 = super.colourCache.getAllFrames();
 			int[][] var6 = new int[var4][var3];
 			this.rasterize(var6);
 			for (int var7 = 0; var7 < Texture.height; var7++) {

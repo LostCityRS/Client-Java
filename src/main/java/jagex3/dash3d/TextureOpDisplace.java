@@ -53,9 +53,9 @@ public final class TextureOpDisplace extends TextureOp {
 
 	@ObfuscatedName("fd.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
 			int[] var3 = this.getInputMono(arg0, 1);
 			int[] var4 = this.getInputMono(arg0, 2);
 			int[] var5 = var2[0];
@@ -68,7 +68,7 @@ public final class TextureOpDisplace extends TextureOp {
 				int var12 = var10 * Statics.field1734[var9] >> 12;
 				int var13 = var8 + (var11 >> 12) & Texture.widthMask;
 				int var14 = arg0 + (var12 >> 12) & Texture.heightMask;
-				int[][] var15 = this.getInputColor(0, var14);
+				int[][] var15 = this.getInputColour(0, var14);
 				var5[var8] = var15[0][var13];
 				var6[var8] = var15[1][var13];
 				var7[var8] = var15[2][var13];

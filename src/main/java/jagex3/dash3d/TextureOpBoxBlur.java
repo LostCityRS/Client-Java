@@ -67,9 +67,9 @@ public final class TextureOpBoxBlur extends TextureOp {
 
 	@ObfuscatedName("ig.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
 			int var3 = this.radiusY + this.radiusY + 1;
 			int var4 = 65536 / var3;
 			int var5 = this.radiusX + this.radiusX + 1;
@@ -78,7 +78,7 @@ public final class TextureOpBoxBlur extends TextureOp {
 			for (int var8 = arg0 - this.radiusY; var8 <= arg0 + this.radiusY; var8++) {
 				int var9 = 0;
 				int var10 = 0;
-				int[][] var11 = this.getInputColor(0, Texture.heightMask & var8);
+				int[][] var11 = this.getInputColour(0, Texture.heightMask & var8);
 				int var12 = 0;
 				int[][] var13 = new int[3][Texture.width];
 				int[] var14 = var11[0];

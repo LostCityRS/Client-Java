@@ -73,15 +73,15 @@ public final class TextureOpPolar extends TextureOp {
 
 	@ObfuscatedName("ri.b(IB)[[I")
 	@Override
-	public int[][] renderColor(int arg0) {
-		int[][] var2 = super.colorCache.getFrame(arg0);
-		if (super.colorCache.field4310) {
+	public int[][] renderColour(int arg0) {
+		int[][] var2 = super.colourCache.getFrame(arg0);
+		if (super.colourCache.field4310) {
 			int[] var3 = var2[0];
 			int[] var4 = var2[1];
 			int[] var5 = var2[2];
 			for (int var6 = 0; var6 < Texture.width; var6++) {
 				this.computePolarLookup(var6, arg0);
-				int[][] var7 = this.getInputColor(0, field203);
+				int[][] var7 = this.getInputColour(0, field203);
 				var3[var6] = var7[0][opacity8];
 				var4[var6] = var7[1][opacity8];
 				var5[var6] = var7[2][opacity8];

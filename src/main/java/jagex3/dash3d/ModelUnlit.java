@@ -469,9 +469,9 @@ public final class ModelUnlit extends ModelSource {
 		var16.faceNormal = this.faceNormal;
 		var16.sharedPointNormal = this.sharedPointNormal;
 		if (arg0 == 3) {
-			var16.pointX = ArrayUtil.method169(this.pointX);
-			var16.pointY = ArrayUtil.method169(this.pointY);
-			var16.pointZ = ArrayUtil.method169(this.pointZ);
+			var16.pointX = ArrayUtil.copy(this.pointX);
+			var16.pointY = ArrayUtil.copy(this.pointY);
+			var16.pointZ = ArrayUtil.copy(this.pointZ);
 		} else {
 			var16.pointX = this.pointX;
 			var16.pointY = new int[var16.numPoints];
